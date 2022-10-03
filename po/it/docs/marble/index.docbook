@@ -1,0 +1,2757 @@
+<?xml version="1.0" ?>
+<!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
+ <!ENTITY % addindex "IGNORE">
+ <!ENTITY % Italian "INCLUDE"
+><!-- change language only here -->
+ ]>
+
+<book id="marble" lang="&language;">
+
+  <bookinfo>
+    <title
+>Manuale di &marble;</title>
+
+    <authorgroup>
+      <author
+><firstname
+>Torsten</firstname
+> <surname
+>Rahn</surname
+> <affiliation
+> <address
+>&Torsten.Rahn.mail;</address>
+        </affiliation>
+      </author>
+      <author
+><firstname
+>Dennis</firstname
+> <surname
+>Nienhüser</surname
+> <affiliation
+> <address
+>&Dennis.Nienhueser.mail;</address>
+        </affiliation>
+      </author>
+
+      <othercredit role="translator"
+><firstname
+>Pino</firstname
+><surname
+>Toscano</surname
+><affiliation
+><address
+><email
+>toscano.pino@tiscali.it</email
+></address
+></affiliation
+><contrib
+>Traduzione italiana</contrib
+></othercredit
+> 
+    </authorgroup>
+
+    <copyright>
+      <year
+>2005</year>
+      <year
+>2006</year>
+      <year
+>2007</year>
+      <holder
+>&Torsten.Rahn;</holder>
+    </copyright>
+    <copyright>
+      <year
+>2010</year>
+      <year
+>2013</year>
+      <holder
+>&Dennis.Nienhueser;</holder>
+    </copyright>
+
+    <legalnotice
+>&FDLNotice;</legalnotice>
+
+    <date
+>17/10/2021</date>
+    <releaseinfo
+>2.2 (KDE Gear 21.08)</releaseinfo>
+
+    <abstract>
+      <para
+>&marble; è un atlante geografico e un globo virtuale che ti permette di esplorare velocemente posti sul nostro pianeta madre. Puoi usare &marble; per cercare indirizzi, per creare facilmente mappe, misurare distanze e recuperare informazioni dettagliate sulle località che hai appena sentito nei notiziari o su Internet. L'interfaccia utente è pulita, semplice e facile da usare. </para>
+    </abstract>
+
+    <keywordset>
+      <keyword
+>KDE</keyword>
+      <keyword
+>educazione</keyword>
+      <keyword
+>terra</keyword>
+      <keyword
+>globo</keyword>
+      <keyword
+>geografia</keyword>
+      <keyword
+>Marble</keyword>
+    </keywordset>
+
+  </bookinfo>
+
+  <chapter id="introduction">
+  <title
+>Introduzione</title>
+    <screenshot>
+      <screeninfo
+>Logo di &marble;</screeninfo>
+      <mediaobject>
+        <imageobject
+><imagedata fileref="logo-1.png" format="PNG"/></imageobject>
+        <textobject
+><phrase
+>Logo di &marble;</phrase
+></textobject>
+      </mediaobject>
+    </screenshot>
+
+    <para
+>Benvenuto in &marble;, un piccolo globo interattivo e atlante geografico che mette il mondo sulla punta delle tue dita. Come in un atlante reale o in un globo classico, &marble; ti permette di muovere liberamente le mappe e di cercare località. Inoltre, &marble; ti permette di ingrandire e di avere diverse viste sulla superficie della <guilabel
+>Terra</guilabel
+> o della <guilabel
+>Luna</guilabel
+> (con la sua vista. Nella sua configurazione predefinita, &marble; mette a disposizione 15 viste diverse: <guilabel
+>Atlante</guilabel
+>, <guilabel
+>OpenStreetMap</guilabel
+>, <guilabel
+>Vista satellitare</guilabel
+>, <guilabel
+>Terra di notte</guilabel
+>, <guilabel
+>Globo di Behaim del 1492</guilabel
+>, <guilabel
+>Mappa satellitare di Sentinel2</guilabel
+>, <guilabel
+>Mappa storica del 1689</guilabel
+>, <guilabel
+>Mappa politica</guilabel
+>, <guilabel
+>Mappa semplice</guilabel
+>, <guilabel
+>Precipitazioni (dicembre)</guilabel
+>, <guilabel
+>Precipitazioni (luglio)</guilabel
+>, <guilabel
+>Temperatura (dicembre)</guilabel
+>, <guilabel
+>Temperatura (luglio)</guilabel
+>, <guilabel
+>OSM vettoriale</guilabel
+> e <guilabel
+>Luna</guilabel
+>. </para>
+
+    <para
+>&marble; è distribuito con una piccola banca dati di più di 12.000 località (città, montagne, vulcani) in cui puoi cercare, e sono integrate con Wikipedia. In aggiunta, con &marble; puoi misurare distanze tra più punti di misura che possono essere impostati liberamente. </para>
+
+    <para
+>&marble; è software libero ed è rilasciato secondo i termini della licenza &GNU; Lesser General Public License. </para>
+
+  </chapter>
+
+  <chapter id="quick-start">
+  <title
+>Guida veloce a &marble;: navigazione</title>
+
+  <para
+>Ecco &marble; la prima volta che lo avvii, o da <menuchoice
+><guimenu
+>Applicazioni</guimenu
+><guisubmenu
+>Educazione</guisubmenu
+><guimenuitem
+>&kde; &marble; (Globo virtuale)</guimenuitem
+></menuchoice
+> dal menu globale, oppure premendo <keycombo action="simul"
+>&Alt;<keycap
+>F2</keycap
+></keycombo
+> e inserendo <command
+>marble</command
+> nel campo di testo.</para>
+
+    <screenshot>
+      <screeninfo
+>La finestra principale di &marble;</screeninfo>
+      <mediaobject>
+        <imageobject
+><imagedata fileref="quick-1.png" format="PNG"/></imageobject>
+        <textobject
+><phrase
+>La finestra principale di &marble;</phrase
+></textobject>
+      </mediaobject>
+    </screenshot>
+
+    <para
+>Sulla destra puoi vedere una mappa topografica del nostro bel pianeta. Per potersi orientare meglio, la mappa offre una barra con la scala nell'angolo in basso a sinistra e una rosa dei venti in alto a destra. Per navigare e controllare la vista buoi usare gli strumenti nella scheda <guilabel
+>Navigazione</guilabel
+> a destra: premi i tasti freccia per ruotare il globo. I pulsanti freccia <guibutton
+>Su</guibutton
+> e <guibutton
+>Giù</guibutton
+> inclineranno avanti e indietro l'asse terrestre. I pulsanti freccia <guibutton
+>Sinistra</guibutton
+> e <guibutton
+>Destra</guibutton
+> faranno ruotare la Terra attorno al suo asse fisico. </para>
+
+    <para
+>Puoi ottenere lo stesso effetto premendo il &LMB; sul globo e muovendo il mouse tenendo premuto il &LMB;. Usando questa navigazione "con trascinamento" è possibile regolare l'angolo di visuale in modo più semplice e più preciso. I tasti cursore sulla tastiera offrono una modalità alternativa per cambiare velocemente le direzioni. </para>
+
+    <para
+>Puoi cambiare il livello di ingrandimento muovendo su e giù il regolatore verticale. Se il mouse ha una rotellina, puoi usare anche quella, oppure puoi tenere premuto il &LMB; e il &RMB; contemporaneamente muovendo il mouse su e giù. Puoi cambiare il livello di ingrandimento passo passo usando i pulsanti <guibutton
+>Ingrandisci</guibutton
+> e <guibutton
+>Riduci</guibutton
+> che si trovano sopra e sotto il regolatore di ingrandimento (oppure usando i pulsanti <keycap
+>+</keycap
+> e <keycap
+>-</keycap
+> della tastiera). </para>
+
+    <para
+>A secondo della risoluzione della mappa, l'ingrandimento fornirà maggiori dettagli. Saranno mostrate città più piccole e usando la mappa topografica potrai notare che le linee delle coste sono disegnate in modo vettoriale. </para>
+
+    <para
+>Nel caso che ti perdi, puoi sempre ripristinare l'angolo di vista e il livello di ingrandimento al punto da cui sei partito: premi il pulsante <guibutton
+>Località di riferimento</guibutton
+>(o il tasto <keycap
+>Home</keycap
+> della tastiera). Per impostare la località di riferimento alla posizione corrente (al centro della mappa), scegli la voce di menu <menuchoice
+><guimenu
+>Segnalibri</guimenu
+> <guimenuitem
+>Imposta località di riferimento</guimenuitem
+></menuchoice
+>. </para>
+
+    <para
+>Un clic col &RMB; sulla barra di stato apre un menu che permette di personalizzare l'aspetto della barra di stato. Puoi mostrare la posizione, l'altitudine, il livello di ingrandimento dei riquadri e un indicatore del progresso dello stato di scaricamento dei dati delle mappe. </para>
+  </chapter>
+
+  <chapter id="map-views">
+  <title
+>Scegliere diverse viste per &marble;</title>
+
+    <para
+>&marble; è distribuito con 15 viste diverse: <guilabel
+>Atlante</guilabel
+>, <guilabel
+>OpenStreetMap</guilabel
+>, <guilabel
+>Vista satellitare</guilabel
+>, <guilabel
+>Terra di notte</guilabel
+>, <guilabel
+>Globo di Behaim del 1492</guilabel
+>, <guilabel
+>Mappa satellitare di Sentinel2</guilabel
+>, <guilabel
+>Mappa storica del 1689</guilabel
+>, <guilabel
+>Mappa politica</guilabel
+>, <guilabel
+>Mappa semplice</guilabel
+>, <guilabel
+>Precipitazioni (dicembre)</guilabel
+>, <guilabel
+>Precipitazioni (luglio)</guilabel
+>, <guilabel
+>Temperatura (dicembre)</guilabel
+>, <guilabel
+>Temperatura (luglio)</guilabel
+>, <guilabel
+>OSM vettoriale</guilabel
+> e <guilabel
+>Luna</guilabel
+>. Puoi sceglierne una facendo clic sulla scheda <guilabel
+>Vista mappa</guilabel
+>, nella parte bassa degli strumenti di &marble;: </para>
+
+    <screenshot>
+      <screeninfo
+>Viste delle mappe di &marble;</screeninfo>
+      <mediaobject>
+        <imageobject
+><imagedata fileref="mapview-1.png" format="PNG"/></imageobject>
+        <textobject
+><phrase
+>Viste delle mappe di &marble;</phrase
+></textobject>
+      </mediaobject>
+    </screenshot>
+
+    <itemizedlist>
+      <listitem
+><para
+><guilabel
+>Altante</guilabel
+>: una classica mappa topografica. Usa linee vettoriali ("MicroWorldDataBase II") per delimitare le coste, i confini delle nazioni, &etc;, e grafica con immagini bitmap ("SRTM30") per creare le altezze dei rilievi.</para
+></listitem>
+
+      <listitem
+><para
+><guilabel
+>OpenStreetMap</guilabel
+>: una carta stradale creata dal progetto OpenStreetMap (OSM). OSM è una comunità aperta che crea libere mappe modificabili. I dati di OSM sono stati disegnati usando Mapnik.</para
+></listitem>
+
+      <listitem
+><para
+><guilabel
+>Vista satellitare</guilabel
+>: la Terra vista dallo spazio. La mappa è basata sulle belle immagini della NASA <ulink url="https://earthobservatory.nasa.gov/features/BlueMarble/"
+>Blue &marble; Next Generation</ulink
+>. Ringraziamenti: osservatorio NASA della Terra</para
+></listitem>
+
+      <listitem
+><para
+><guilabel
+>La Terra di notte</guilabel
+>: questa immagine delle luci delle città della Terra è stata creata con i dati di Defense Meteorological Satellite Program (DMSP) Operational Linescan System (OLS). </para
+></listitem>
+
+      <listitem
+><para
+><guilabel
+>Globo di Behaim del 1492</guilabel
+>: prodotto da Martin Behaim tra il 1490 e il 1492, è il più antico globo terrestre sopravvissuto.</para
+></listitem>
+
+      <listitem
+><para
+><guilabel
+>Mappa satellitare di Sentinel2</guilabel
+>:basata sui dati di Sentinel, per maggiori informazioni vedi <ulink url="https://community.kde.org/Marble/Sentinel2MapTheme"
+>qui</ulink
+>.</para
+></listitem>
+
+      <listitem
+><para
+><guilabel
+>Mappa storica del 1689</guilabel
+>: una mappa storica del mondo dell'anno 1689, creata da G. van Schagen ad Amsterdam.</para
+></listitem>
+
+      <listitem
+><para
+><guilabel
+>Mappa politica</guilabel
+>: una mappa semplice con gli attuali confini delle nazioni.</para
+></listitem>
+
+      <listitem
+><para
+><guilabel
+>Mappa semplice</guilabel
+>: una mappa semplice. Usa linee vettoriali per delimitare le coste, i confini delle nazioni, &etc;.</para
+></listitem>
+
+      <listitem
+><para
+><guilabel
+>Precipitazioni (dicembre)</guilabel
+>: una mappa che mostra il livello medio delle precipitazioni a dicembre.</para
+></listitem>
+
+      <listitem
+><para
+><guilabel
+>Precipitazioni (luglio)</guilabel
+>: una mappa che mostra il livello medio delle precipitazioni (pioggia, neve, grandine, &etc;) in luglio.</para
+></listitem>
+
+      <listitem
+><para
+><guilabel
+>Temperatura (dicembre)</guilabel
+>: una mappa che mostra la temperatura media nel mese di dicembre.</para
+></listitem>
+
+      <listitem
+><para
+><guilabel
+>Temperatura (luglio)</guilabel
+>: una mappa che mostra la temperatura media nel mese di luglio.</para
+></listitem>
+
+      <listitem
+><para
+><guilabel
+>OSM vettoriale</guilabel
+>: mappa vettoriale del <ulink url="https://www.openstreetmap.org/"
+>Progetto OpenStreetMap</ulink
+>.</para
+></listitem>
+
+      <listitem
+><para
+><guilabel
+>Luna</guilabel
+>: una mappa della Luna. La mappa è basata sui dati della missione lunare Clementine (UVVIS Basemap Mosaic). Riconoscimenti: NASA/SDIO, cortesia del programma di ricerca astrogeologico USGS.</para
+></listitem>
+    </itemizedlist>
+  </chapter>
+
+  <chapter id="search-places">
+  <title
+>Cercare località usando &marble;</title>
+
+    <para
+>&marble; è distribuito con una piccola banca dati di più di 12.000 città (da <ulink url="https://www.populationdata.net/monde/"
+></ulink
+>) e alcuni vulcani e montagne. Puoi cercare una località inserendo il suo nome nella casella di ricerca in alto negli strumenti (&marble; usa sempre il nome nativo in caratteri latini). Appena inizi a scrivere, appariranno così suggerimenti sotto la casella di ricerca: </para>
+
+    <screenshot>
+      <screeninfo
+>La ricerca di località con &marble;</screeninfo>
+      <mediaobject>
+        <imageobject
+><imagedata fileref="search-1.png" format="PNG"/></imageobject>
+        <textobject
+><phrase
+>La ricerca di località con &marble;</phrase
+></textobject>
+      </mediaobject>
+    </screenshot>
+
+    <para
+>Appena premi &Enter;, gli esecutori di &marble; cercheranno sia usando i servizi in linea sia quelli locali, per fornirti dati ancora più utili. </para>
+
+    <para
+>Sono disponibili i seguenti esecutori per la ricerca in linea:</para>
+
+    <itemizedlist>
+      <listitem
+><para
+>Nominatim: un servizio di ricerca e geocodifica inversa, usando i dati da <ulink url="https://www.openstreetmap.org"
+></ulink
+></para
+></listitem>
+
+      <listitem
+><para
+>HostIP: un servizio di geocodifica inversa basato sugli indirizzi IP, usando i dati da <ulink url="https://www.hostip.info"
+></ulink
+></para
+></listitem>
+    </itemizedlist>
+
+    <para
+>A seconda dei software e dei dati installati, sono disponibili anche gli esecutori seguenti per la ricerca locale:</para>
+
+    <itemizedlist>
+      <listitem
+><para
+>Banca dati locale: la ricerca sarà effettuata in tutti i segnaposti di tutti i documenti aperti, inclusi i segnalibri.</para
+></listitem>
+
+      <listitem
+><para
+>Monav: un servizio di ricerca locale che usa i dati degli itinerari di Monav, basati sui dati di OSM</para
+></listitem>
+
+      <listitem
+><para
+>Gosmore: un servizio di geocodifica inversa locale che usa i dati di un'installazione Gosmore</para
+></listitem>
+
+    </itemizedlist>
+
+    <para
+>Una volta che hai trovato la tua città sulla mappa, puoi fare clic sulla sua etichetta o sul suo simbolo usando il &LMB;. Dopo aver fatto clic sul nome della località apparirà una finestra con una scheda di dati, come questa: </para>
+
+    <screenshot>
+      <screeninfo
+>Scheda di dati di &marble;</screeninfo>
+      <mediaobject>
+        <imageobject
+><imagedata fileref="search-2.png" format="PNG"/></imageobject>
+        <textobject
+><phrase
+>Scheda di dati di &marble;</phrase
+></textobject>
+      </mediaobject>
+    </screenshot>
+
+    <para
+>Nella prima scheda della finestra sono mostrati dati di base, come il nome, le coordinate e la bandiera della nazione a cui la località appartiene. Inoltre, sono mostrati anche numeri sulla popolazione per le città e l'altitudine per le montagne. Se il computer è connesso ad Internet &marble; proverà a collegarsi alla popolare enciclopedia su Internet <quote
+>Wikipedia</quote
+>. Se è disponibile un articolo di Wikipedia corrispondente, &marble; lo mostrerà nella scheda di dati. </para>
+
+    <note
+><para
+>Le fonti di dati aggiuntive possono essere abilitate usando il sotto-menu <menuchoice
+><guimenu
+>Visualizza</guimenu
+><guisubmenu
+>Servizi online</guisubmenu
+></menuchoice
+>. Per esempio, seleziona la voce di menu <guimenuitem
+>Wikipedia</guimenuitem
+> per vedere gli articoli di Wikipedia.</para
+></note>
+  </chapter>
+
+  <chapter id="routing">
+  <title
+>Trova i percorsi con &marble;</title>
+
+    <para
+>Oltre a cercare le località, &marble; può anche mostrare gli itinerari possibili tra due o più località. Stai pensando ad un giro in bici nel bosco vicino a casa? Hai bisogno di istruzioni per guidare fino ad un certo indirizzo in un'altra città? Seleziona la scheda <guilabel
+>Itinerario</guilabel
+> nella parte in alto della casella degli strumenti di &marble;. </para>
+
+    <sect1 id="routing-route-new">
+    <title
+>Creazione di un nuovo itinerario</title>
+
+      <para
+>Nella scheda <guilabel
+>Itinerario</guilabel
+> vedrai due icone verdi <guibutton
+>A</guibutton
+> e <guibutton
+>B</guibutton
+>. Inserisci l'indirizzo di partenza nella casella di testo accanto al pulsante <guibutton
+>A</guibutton
+> , la casella di testo di partenza. Premi &Enter; o il pulsante <guibutton
+>Cerca</guibutton
+> per cercare segnaposti corrispondenti. Mentre la ricerca è in corso, apparirà una piccola animazione che ne indica il progresso. Usando le parole <quote
+>Weavers Lane, London</quote
+>, il risultato sarà simile a quello mostrato nell'immagine sotto: </para>
+
+      <screenshot>
+        <screeninfo
+>La ricerca di indirizzi con &marble;</screeninfo>
+        <mediaobject>
+          <imageobject
+><imagedata fileref="routing-1.png" format="PNG"/></imageobject>
+          <textobject
+><phrase
+>&marble; durante la ricerca di indirizzi</phrase
+></textobject>
+        </mediaobject>
+      </screenshot>
+
+      <para
+>I segnaposti corrispondenti sono mostrati allineati sotto le caselle di inserimento, e sulla mappa. Il primo risultato è selezionato automaticamente come punto di partenza dell'itinerario. Sulla mappa, questa posizione è indicata usando la stessa icona <guiicon
+>A</guiicon
+> del pulsante accanto alla casella di testo dell'indirizzo di partenza. Se il primo risultato non è il punto di partenza desiderato, fai clic su un qualsiasi altro risultato per impostarlo come nuovo punto di partenza. Per farlo puoi fare clic su un segnaposto sia nella lista dei risultati sia sulla mappa. Il punto di partenza selezionato è sempre indicato con l'icona <guiicon
+>A</guiicon
+>. </para>
+
+      <para
+>Dopo aver cercato l'inizio dell'itinerario, passiamo a inserire la destinazione del nostro viaggio. La procedura è la stessa: inserisci l'indirizzo di destinazione nella casella di testo accanto al pulsante <guibutton
+>B</guibutton
+>, premi &Enter; e scegli l'indirizzo desiderato tra i risultati proposti. </para>
+
+      <para
+>Hai notato che il pulsante <guilabel
+>Cerca</guilabel
+> è stato sostituito da un pulsante <guilabel
+>Calcola itinerario</guilabel
+>? &marble; sta segnalando che tutte le informazioni necessarie per calcolare un itinerario sono state inserire correttamente. Premi il pulsante <guilabel
+>Calcola itinerario</guilabel
+> per calcolare un itinerario adatto. Se le parole cercate sono <quote
+>Sun Walk, London</quote
+>, il risultato sarà simile a quello in questa immagine: </para>
+
+      <screenshot>
+        <screeninfo
+>I risultati di un itinerario in &marble;</screeninfo>
+        <mediaobject>
+          <imageobject
+><imagedata fileref="routing-2.png" format="PNG"/></imageobject>
+          <textobject
+><phrase
+>&marble; mentre mostra un itinerario</phrase
+></textobject>
+        </mediaobject>
+      </screenshot>
+
+      <para
+>Se la posizione di partenza (o di destinazione) è già visibile sullo schermo, può essere più conveniente selezionarla direttamente sulla mappa. Per farlo, premi il pulsante <guibutton
+>A</guibutton
+> (oppure <guibutton
+>B</guibutton
+>) accanto al campo di inserimento di testo. Scegli <guilabel
+>Dalla mappa</guilabel
+> nel menu che si apre. Una volta premuto, viene attivata la modalità di inserimento della mappa: il prossimo clic su una posizione della mappa sceglierà quella posizione come partenza (o destinazione) del percorso. Il puntatore del mouse diventa una crocetta per semplificare la selezione. La posizione selezionata sarà inclusa nell'itinerario e indicata nella mappa. Per annullare la selezione, premi ancora una volta il pulsante oppure premi &Esc;. </para>
+
+      <para
+>Il menu contestuale della mappa è una modalità alternativa di scelta della partenza e della destinazione finale di un itinerario: fai clic con il &RMB; sulla località desiderata e scegli rispettivamente <guilabel
+>Direzioni da qui</guilabel
+> o <guilabel
+>Direzioni fino a qui</guilabel
+>. </para>
+    </sect1>
+
+    <sect1 id="routing-profiles">
+    <title
+>Profili degli itinerari</title>
+
+      <para
+>L'itinerario da scegliere dipende al tipo di veicolo che eventualmente pensi di usare. Puoi impostare questo ed altre preferenze in &marble; usando i profili degli itinerari. Ciascun profilo contiene le impostazioni di un certo scenario di itinerari. Al primo avvio, &marble; crea automaticamente quattro profili: <guilabel
+>Automobile (più veloce)</guilabel
+>, <guilabel
+>Automobile (più corto)</guilabel
+>, <guilabel
+>Bicicletta</guilabel
+> e <guilabel
+>A piedi</guilabel
+>. </para>
+
+      <para
+>Gli esempi nella sezione precedente usavano il profilo <guilabel
+>Automobile (più veloce)</guilabel
+>. Riproviamo l'ultimo itinerario usando un profilo diverso: scegli l'opzione <guilabel
+>A piedi</guilabel
+> della casella di scelta <guilabel
+>Profilo</guilabel
+>. Adesso l'itinerario è più simile a questo: </para>
+
+      <screenshot>
+        <screeninfo
+>Itinerario pedonale di &marble;</screeninfo>
+        <mediaobject>
+          <imageobject
+><imagedata fileref="routing-5.png" format="PNG"/></imageobject>
+          <textobject
+><phrase
+>Itinerario pedonale di &marble;</phrase
+></textobject>
+        </mediaobject>
+      </screenshot>
+
+      <para
+>L'itinerario proposto è stato ridotto, dato che i percorsi a piedi adesso sono inclusi nel calcolo dell'itinerario migliore. </para>
+
+      <para
+>Se vuoi modificare ulteriormente uno dei profili predefiniti, sceglilo dalla casella di scelta <guilabel
+>Profilo</guilabel
+> e fai clic sul collegamento <guilabel
+>Configura</guilabel
+>. Si apre quindi una nuova finestra. </para>
+
+      <screenshot>
+        <screeninfo
+>Configurazione dei profili degli itinerari in &marble;</screeninfo>
+        <mediaobject>
+          <imageobject
+><imagedata fileref="routing-6.png" format="PNG"/></imageobject>
+          <textobject
+><phrase
+>Configurazione dei profili degli itinerari in &marble;</phrase
+></textobject>
+        </mediaobject>
+      </screenshot>
+
+      <para
+>Sul lato sinistro puoi configurare i servizi di itinerari a cui vengono richiesti gli itinerari. &marble; supporta otto o più servizi, alcuni in linea e gli altri non in linea. I servizi in linea richiedono una connessione ad Internet, per poter chiedere gli itinerari. I servizi non in linea non hanno bisogno di una connessione ad Internet, ma richiedono che prima scarichi e installi le mappe del servizio di itinerari. I servizi di itinerari supportati sono: </para>
+
+      <itemizedlist>
+        <listitem
+><para
+>CycleStreets: itinerari in bicicletta nel Regno Unito usando cyclestreets.net</para
+></listitem>
+
+        <listitem
+><para
+>Gosmore: un servizio non in linea che funziona anche da backend per il servizio in linea Yours</para
+></listitem>
+
+        <listitem
+><para
+>MapQuest: un servizio in linea che fornisce istruzioni avanzate curva per curva</para>
+
+          <note
+><para
+>Per usare MapQuest, è richiesto un AppKey. Puoi registrare un AppKey <ulink url="https://developer.mapquest.com/plan_purchase/steps/business_edition/business_edition_free/register"
+>qui</ulink
+>.</para
+></note
+></listitem>
+
+        <listitem
+><para
+>Monav: un servizio non in linea molto veloce anche nel calcolo di itinerari molto lunghi o complessi</para
+></listitem>
+
+        <listitem
+><para
+>OSRM: un servizio in linea molto veloce anche nel calcolo di itinerari molto lunghi o complessi</para
+></listitem>
+
+        <listitem
+><para
+>OpenRouteService: un servizio in linea che fornisce anche istruzioni di guida (ma solo per l'Europa)</para
+></listitem>
+
+        <listitem
+><para
+>Routino: un servizio non in linea che può essere configurato in modo molto flessibile</para
+></listitem>
+
+        <listitem
+><para
+>Yours: un servizio in linea che funziona per tutto il mondo, ma non fornisce le istruzioni di guida</para
+></listitem>
+      </itemizedlist>
+
+      <para
+>Una volta che selezioni e abiliti un servizio di itinerari sulla sinistra per includerlo nelle richieste di itinerari, sul lato sinistro puoi modificare le sue impostazioni. Le impostazioni sono specifiche per ciascun servizio. </para>
+
+      <para
+>Oltre a configurare i quattro profili predefiniti, puoi aggiungere nuovi profili e rimuovere quelli esistenti nelle impostazioni di &marble;, nel menu <guilabel
+>Itinerario</guilabel
+>. </para>
+    </sect1>
+
+    <sect1 id="routing-route-adjustments">
+    <title
+>Modificare gli itinerari</title>
+
+      <para
+>&marble; ti permette di modificare nei dettagli vari aspetti degli itinerari: puoi modificare le opzioni degli itinerari, inserire punti di passaggio, spostare o rimuovere punti esistenti. Abbiamo discusso nella sezione precedente riguardo la modifica delle opzioni degli itinerari; ora parleremo della gestione dei punti. </para>
+
+      <para
+>I punti di passaggio possono essere inseriti con il trascinamento sulla mappa. Ogni volta che sposti il puntatore del mouse su una parte qualsiasi dell'itinerario (tranne che su punti esistenti), appare una bandiera verde per indicare che è possibile inserire un punto. Per iniziare l'inserimento, premi il &LMB;. Tenendo premuto il &LMB;, sposta il puntatore del mouse nella nuova posizione desiderata. Appariranno linee blu dai punti di passaggio vicini alla nuova posizione: </para>
+
+      <screenshot>
+        <screeninfo
+>L'aggiunta di punti in un itinerario in &marble;</screeninfo>
+        <mediaobject>
+          <imageobject
+><imagedata fileref="routing-3.png" format="PNG"/></imageobject>
+          <textobject
+><phrase
+>&marble; durante l'inserimento di un punto di passaggio</phrase
+></textobject>
+        </mediaobject>
+      </screenshot>
+
+      <para
+>Il nuovo punto di passaggio sarà inserito tra i due punti di passaggio vicini appena rilasci il &LMB;. Allo stesso l'itinerario attuale è disegnato in modo tratteggiato per indicare che contiene informazioni non aggiornate. In parallelo viene preparato un nuovo itinerario che sostituirà automaticamente quello precedente. </para>
+
+      <para
+>È possibile aggiungere punti di passaggio anche prima della partenza o dell'arrivo di un itinerario. Per farlo, segui le istruzioni dette sopra per inserire un nuovo punto di passaggio, ma premi &Ctrl; mentre muovi il mouse. Apparirà una linea blu dall'inizio o dall'arrivo dell'itinerario. La sua origine indica dove sarà agganciato il nuovo punto di passaggio. </para>
+
+      <para
+>I punti di passaggio esistenti possono essere spostati liberamente su tutta la mappa. Sposta il puntatore del mouse su un punto di passaggio e trascinalo fino alla sua nuova posizione. Una volta rilasciato il &LMB;, l'itinerario sarà aggiornato automaticamente. </para>
+
+      <para
+>Per escludere punti di passaggio dall'itinerario, rimuovili. È possibile rimuoverli sia usando il pulsante <guibutton
+>Rimuovi</guibutton
+> accanto al campo di inserimento del punto di passaggio, sia facendo clic con il &RMB; sul punto di passaggio sulla mappa e scegliendo <guimenuitem
+>Rimuovi questa destinazione</guimenuitem
+> dal menu contestuale. Per avviare un nuovo itinerario, rimuovi tutti i punti. </para>
+    </sect1>
+
+    <sect1 id="routing-route-export">
+    <title
+>Caricare, salvare ed esportare itinerari</title>
+
+      <para
+>Puoi salvare gli itinerari in formato <acronym
+>kml</acronym
+> (Keyhole Markup Language) e caricarli nuovamente in seguito - sullo stesso computer o su un altro dispositivo su cui gira &marble;, oppure condividerli con i tuoi amici o in altre applicazioni in grado di leggere file <acronym
+>kml</acronym
+> (come <application
+>Google Earth</application
+>). Per salvare un itinerario in file <literal role="extension"
+>.kml</literal
+> premi l'icona <guilabel
+>Salva</guilabel
+> nella parte bassa della scheda degli itinerari. La finestra di salvataggio che appare ti permette di scegliere un nome di file in cui salvare l'itinerario. Similmente, per caricare un itinerario premi l'icona <guibutton
+>Apri</guibutton
+> nella parte bassa della scheda degli itinerari; quindi, nella finestra di apertura file che appare seleziona il file <literal role="extension"
+>.kml</literal
+> dell'itinerario da aprire, e &marble; ne caricherà l'itinerario. </para>
+
+      <para
+>Gli itinerari pianificati in &marble; possono essere usati in altre applicazioni o dispositivi di navigazione che supportano il formato <acronym
+>gpx</acronym
+> (GPS eXchange Format) oppure formati equivalenti. Se il tuo dispositivo di navigazione non supporta <acronym
+>gpx</acronym
+> direttamente, puoi usare un programma di conversione come <command
+>gpsbabel</command
+> per convertire un file <acronym
+>gpx</acronym
+> esportato da &marble; in un formato adatto. L'esportazione di un itinerario in &marble; è possibile usando il menu contestuale dell'itinerario sulla mappa: fai clic con il &RMB; su un suo punto qualunque e scegli <guimenuitem
+>Esporta itinerario...</guimenuitem
+>: </para>
+
+      <screenshot>
+        <screeninfo
+>L'esportazione di itinerari in &marble;</screeninfo>
+        <mediaobject>
+          <imageobject
+><imagedata fileref="routing-4.png" format="PNG"/></imageobject>
+          <textobject
+><phrase
+>&marble; mentre esporta un itinerario</phrase
+></textobject>
+        </mediaobject>
+      </screenshot>
+
+      <para
+>Nella finestra di salvataggio, inserisci il nome di file desiderato. L'estensione del nome di file dovrebbe essere <literal role="extension"
+>gpx</literal
+> per salvare in formato <acronym
+>gpx</acronym
+> oppure <literal role="extension"
+>kml</literal
+> per salvare in formato <acronym
+>kml</acronym
+> (Keyhole Markup Language). Nota che il formato interno di &marble; è <acronym
+>kml</acronym
+>; nel dubbio, salva gli itinerari come <acronym
+>kml</acronym
+> e usa <acronym
+>gpx</acronym
+> solo per condividerli con altre applicazioni non in grado di leggere i file <acronym
+>kml</acronym
+>. </para>
+    </sect1>
+  </chapter>
+
+  <chapter id="measure-distances">
+  <title
+>Misurare le distanze con &marble;</title>
+
+    <para
+>Come già detto, &marble; mostra sempre in basso a sinistra una barra dinamica con la scala per stimare le distanze sulla mappa. Assieme alla rosa dei venti in alto a destra, queste sovrapposizioni permettono di orientarsi meglio. Ma c'è di più: &marble; di permette di misurare le distanza tra due o più punti sulla Terra. Per far ciò, fai clic nell'ordine corretto sui punti corrispondenti sul globo usando il &RMB;. Ad ogni clic apparirà un menu a comparsa, che ti permette di aggiungere un punto di misura (<guimenuitem
+>Aggiungi punto di misura</guimenuitem
+>) o di rimuovere tutti i punti di misura (<guimenuitem
+>Rimuovi punti di misura</guimenuitem
+>): </para>
+
+    <screenshot>
+      <screeninfo
+>misurare con &marble;</screeninfo>
+      <mediaobject>
+        <imageobject
+><imagedata fileref="measure-1.png" format="PNG"/></imageobject>
+        <textobject
+><phrase
+>misurare le distanze con &marble;</phrase
+></textobject>
+      </mediaobject>
+    </screenshot>
+
+    <para
+>Appena hai aggiunto almeno due punti di misura, la distanza totale sarà mostrata nell'angolo in alto a sinistra della mappa. &marble; assumerà per tutte le misure che la Terra è sferica, e ciò dovrebbe essere abbastanza accurato per la maggior parte dei casi. </para>
+
+    <tip
+><para
+>La visualizzazione delle distanze e delle rotte dei segmenti misurati può essere configurata usando la <link linkend="measure-tool-config"
+>finestra  di configurazione dello strumento di misura</link
+>.</para
+></tip>
+  </chapter>
+
+  <chapter id="download-region">
+  <title
+>Scaricare regioni di mappe</title>
+
+    <para
+>&marble; è pronto per essere usato, dato che è fornito con un insieme di mappe. Quando ingrandisci su una località, vengono scaricate in parallelo parti più dettagliate della mappa corrente. Ciò funziona bene quando è disponibile una connessione ad Internet. Cosa fare, invece, quando si viaggia ad una città in cui non c'è una connessione Internet costante per scaricare le mappe? Pensaci in anticipo, e scarica le regioni della mappa che userai. </para>
+
+    <para
+>Per capire meglio quello che è necessario scaricare per visualizzare alcune parti delle mappe senza essere connessi ad Internet, diamo un'occhiata brevemente al concetto di tessere che &marble; usa internamente. Una tessera è un'immagine che corrisponde ad una parte precisa di una mappa. Le tessere sono disposte da &marble; una accanto all'altra per formare l'immagine della mappa che viene poi visualizzata. A secondo della proiezione scelta, le tessere sono disposte per formare un rettangolo (nel caso della proiezione di mappa piana, a sinistra) o una sfera (nel caso della proiezione di globo, a destra): </para>
+
+    <screenshot>
+      <screeninfo
+>Proiezioni in &marble;</screeninfo>
+      <mediaobject>
+        <imageobject
+><imagedata fileref="download-region-1.png" format="PNG"/></imageobject>
+        <textobject
+><phrase
+>Tessere al livello 1 nella mappa piana (a sinistra) e nella proiezione sul globo (a destra)</phrase
+></textobject>
+      </mediaobject>
+    </screenshot>
+
+    <para
+>Ingrandendo questa vista vengono visualizzati più dettagli. Tuttavia, le tessere mostrate nelle due immagini sopra sono troppo grossolane; &marble; quindi riconosce questa situazione e passa al successivo livello di tessere, in cui le immagini forniscono più dettagli. Si va avanti in questo modo: più viene aumentato il livello di ingrandimento, e più alto è il livello delle tessere usate. L'illustrazione seguente mostra il diverso numero di tessere (colorate) che corrispondono alla stessa regione della mappa a diversi livelli di ingrandimento: </para>
+
+    <screenshot>
+      <screeninfo
+>Livelli delle tessere di &marble;</screeninfo>
+      <mediaobject>
+        <imageobject
+><imagedata fileref="download-region-2.png" format="PNG"/></imageobject>
+        <textobject
+><phrase
+>Diversi livelli delle tessere di &marble;</phrase
+></textobject>
+      </mediaobject>
+    </screenshot>
+
+    <para
+>Quando una regione di mappa viene scaricata per l'uso non in linea, devi scaricare tutte le tessere nella regione desiderata, per tutti i livelli di tessere che pensi di voler usare. Data la connessione tra i livelli delle tessere e i livelli di ingrandimento, puoi pensare anche come se dovessi scaricare i livelli di ingrandimento che pensi di usare. </para>
+
+    <para
+>Per scaricare una regione, rendi quella regione visibile sullo schermo modificando l'ingrandimento e spostando il globo. Ora seleziona la voce di menu <menuchoice
+><guilabel
+>File</guilabel
+> <guilabel
+>Scarica regione...</guilabel
+></menuchoice
+> per aprire la finestra <guilabel
+>Scarica regione...</guilabel
+>. Attiva l'opzione <guilabel
+>Regione visibile</guilabel
+> per scaricare le tessere che corrispondono alla regione della mappa visibile sullo schermo. Quindi scegli l'<guilabel
+>Intervallo del livello delle tessere:</guilabel
+> (intervallo di ingrandimento) che vuoi scaricare. Il primo campo rappresenta il valore più piccolo, il secondo il più grande livello di tessere che saranno scaricate. Saranno scaricati anche i livelli di tessere nell'intervallo. &marble; mostra quanti livelli (immagini) devono essere scaricati e aggiorna questo valore ogni volta che cambi la regione o modifichi l'intervallo del livello delle tessere. </para>
+
+    <screenshot>
+      <screeninfo
+>Finestra di scaricamento regioni in &marble;</screeninfo>
+      <mediaobject>
+        <imageobject
+><imagedata fileref="download-region-3.png" format="PNG"/></imageobject>
+        <textobject
+><phrase
+>Finestra di scaricamento regioni di &marble;</phrase
+></textobject>
+      </mediaobject>
+    </screenshot>
+
+    <para
+>Il livello delle tessere corrispondente al livello corrente di ingrandimento è mostrato nella barra di stato in basso. Nota che devi configurare &marble; per mostrare questa informazione: fai clic con il &RMB; sulla barra di stato e scegli <guilabel
+>Mostra livello di ingrandimento delle tessere</guilabel
+>. </para>
+
+    <para
+>Premi <guibutton
+>OK</guibutton
+> per iniziare lo scaricamento della regione della mappa. La barra di avanzamento di &marble; mostrerà il progresso dello scaricamento (se attivato). </para>
+
+    <para
+>Se sai già le coordinate della regione della mappa da scaricare, puoi inserirle direttamente facendo clic su <guilabel
+>Specifica regione</guilabel
+>. In questo caso, la regione della mappa visibile sullo schermo sarà ignorata. </para>
+
+    <para
+>Puoi continuare ad usare &marble; mentre la finestra <guilabel
+>Scarica regione</guilabel
+> è aperta. Ciò è utile per effettuare più scaricamenti, uno dopo l'altro, di diverse regioni o livelli di tessere della mappa. Basta premere <guibutton
+>Applica</guibutton
+> invece di <guibutton
+>OK</guibutton
+> per far partire lo scaricamento della regione della mappa. </para>
+  </chapter>
+
+  <chapter id="recording-movie">
+  <title
+>Registrare un filmato con &marble;</title>
+
+    <sect1 id="recording-movie-recording">
+    <title
+>Registrare un filmato con &marble;</title>
+
+      <para
+>Per registrare un filmato con &marble;, usa questa funzione per la registrazione. </para>
+
+      <para
+>Inizia a registrare con la voce di menu <menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>R</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Modifica</guimenu
+> <guimenuitem
+>Registra filmato</guimenuitem
+></menuchoice
+>, così da aprire la finestra <guilabel
+>Registra filmato</guilabel
+>. Vedrai una finestra come questa: </para>
+
+      <screenshot>
+        <screeninfo
+>Finestra di registrazione filmati in &marble;</screeninfo>
+        <mediaobject>
+          <imageobject
+><imagedata fileref="movie-1.png" format="PNG"/></imageobject>
+          <textobject
+><phrase
+>Finestra di registrazione filmati di &marble;</phrase
+></textobject>
+        </mediaobject>
+      </screenshot>
+
+      <para
+>Premi il pulsante <guibutton
+>Apri...</guibutton
+> per scegliere il nome e la cartella di destinazione del filmato. Puoi anche cambiare il numero di fotogrammi per secondo (FPS) del filmato, tra 1 e 60. </para>
+
+      <para
+>Una volta che tutto è stato impostato, puoi incominciare a registrare. Per iniziare, premi il pulsante <guibutton
+>Avvia</guibutton
+>. Fatto questo, puoi ingrandire e scorrere e &marble; catturerà un filmato del tuo viaggio attorno al globo. </para>
+
+      <para
+>Per fermare la registrazione di un filmato e salvarla, seleziona la voce di menu <menuchoice
+><guimenu
+>Modifica</guimenu
+> <guimenuitem
+>Ferma registrazione</guimenuitem
+></menuchoice
+>. </para>
+
+      <sect2 id="recording-movie-troubleshooting">
+      <title
+>Risoluzione dei problemi</title>
+
+        <para
+>Ci potrebbe essere un messaggio d'errore che segnala che «avconv» o «ffmpeg« non sono installati. Possono essere scaricati dalla <ulink url="https://ffmpeg.org/download.html"
+>pagina di scaricamento di ffmpeg</ulink
+> e dalla <ulink url="https://libav.org/download.html"
+>pagina di scaricamento di avconv</ulink
+>, oppure usare i pacchetti disponibili nella tua distribuzione. </para>
+      </sect2>
+    </sect1>
+  </chapter>
+
+  <chapter id="commands">
+  <title
+>Guida ai comandi</title>
+
+    <sect1 id="marble-mainwindow">
+    <title
+>Menu e tasti scorciatoia</title>
+
+      <sect2>
+      <title
+>Il menu File</title>
+
+        <variablelist>
+          <varlistentry>
+            <term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>O</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>File</guimenu
+> <guimenuitem
+>Apri...</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>Apre</action
+> una mappa.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><guimenu
+>File</guimenu
+> <guimenuitem
+>Apri recente</guimenuitem
+> </menuchoice
+></term>
+            <listitem
+><para
+>Questa è una scorciatoia per aprire mappe aperte di recente. Far clic su questa voce apre a lato del menu una lista con vari file aperti di recente. Selezionare un file specifico aprirà quel file in &marble;, se il file esiste ancora.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>N</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>File</guimenu
+> <guimenuitem
+>Scarica mappe...</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>Mostra</action
+> la finestra <guilabel
+>Scarica le Novità</guilabel
+> per scaricare mappe aggiuntive per &marble;, tra cui le mappe di Marte e di Venere.</para
+></listitem>
+          </varlistentry>
+
+         <varlistentry>
+            <term
+><menuchoice
+><guimenu
+>File</guimenu
+> <guimenuitem
+>Crea una nuova mappa...</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>Mostra</action
+> la finestra <guilabel
+>Procedura di creazione mappe di &marble;</guilabel
+> per creare una nuova mappa usando dati «Web Map Service», una tua immagine oppure tessere indicizzate di Open Street Map.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><guimenu
+>File</guimenu
+> <guimenuitem
+>Scarica regione...</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>Mostra</action
+> la finestra <guilabel
+>Scarica regione</guilabel
+> per scaricare dati della mappa a differenti livelli di ingrandimento per l'utilizzo in modalità non in linea. Per ulteriori dettagli, vedi <link linkend="download-region"
+>Scaricare regioni della mappa</link
+>.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>S</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>File</guimenu
+> <guimenuitem
+>Esporta mappa...</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>Esporta</action
+> su file un'immagine della mappa di &marble;.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>P</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>File</guimenu
+> <guimenuitem
+>Stampa...</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>Stampa</action
+> un'immagine della mappa di &marble;.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><guimenu
+>File</guimenu
+> <guimenuitem
+>Anteprima di stampa</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+>Si apre una finestra che mostra un'anteprima della mappa stampata.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><guimenu
+>File</guimenu
+> <guimenuitem
+>Lavora non in linea</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+>Se questa opzione è selezionata, &marble; non scaricherà più dati di mappe da Internet. La ricerca è limitata alla banca dati locale. Non possono essere scaricati ulteriori itinerari.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>Q</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>File</guimenu
+> <guimenuitem
+>Esci</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>Esce</action
+> da &marble;.</para
+></listitem>
+          </varlistentry>
+        </variablelist>
+      </sect2>
+
+      <sect2>
+      <title
+>Il menu Modifica</title>
+
+        <variablelist>
+          <varlistentry>
+            <term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>C</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Modifica</guimenu
+> <guimenuitem
+>Copia mappa</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>Copia</action
+> negli appunti un'immagine della mappa di &marble;.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><guimenu
+>Modifica</guimenu
+> <guimenuitem
+>Copia coordinate</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>Copia</action
+> negli appunti le coordinate correnti.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>E</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Modifica</guimenu
+> <guimenuitem
+>Modifica mappa...</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+>Ti <action
+>permette</action
+> di aprire la mappa corrente nell'editor esterno di mappe. La versione corrente supporta i seguenti editor di mappe: <application
+>Potlatch</application
+> (in un browser web), <application
+>Merkaartor</application
+> e <application
+>JOSM</application
+>.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>R</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Modifica</guimenu
+> <guimenuitem
+>Registra filmato</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>Registra</action
+> un filmato con &marble;.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><guimenu
+>Modifica</guimenu
+> <guimenuitem
+>Ferma registrazione</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>Ferma</action
+> la registrazione del filmato corrente.</para
+></listitem>
+          </varlistentry>
+        </variablelist>
+      </sect2>
+
+      <sect2>
+      <title
+>Il menu Visualizza</title>
+
+        <variablelist>
+          <varlistentry>
+            <term
+><menuchoice
+><guimenu
+>Visualizza</guimenu
+> <guimenuitem
+>Località corrente</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>Mostra o nasconde</action
+> la visualizzazione della scheda della località nel pannello a sinistra. Se un dispositivo GPS è connesso al computer, &marble; mostra longitudine e latitudine della tua località corrente.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><guimenu
+>Visualizza</guimenu
+> <guimenuitem
+>Mirino</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>Mostra o nasconde</action
+> un semplice mirino al centro della mappa.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><shortcut
+><keycap
+>F5</keycap
+></shortcut
+> <guimenu
+>Visualizza</guimenu
+> <guimenuitem
+>Aggiorna</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+>La parte visibile della mappa viene scaricata nuovamente e aggiornata sullo schermo.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><guimenu
+>Visualizza</guimenu
+> <guisubmenu
+>Caselle di informazioni</guisubmenu
+></menuchoice
+></term>
+            <listitem
+><para
+>In questo sotto-menu puoi bloccare la posizione delle caselle di informazioni e mostrare o nascondere le estensioni che hai abilitato nella pagina <link linkend="configplugins"
+>Estensioni</link
+> della finestra di configurazione di &marble;.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><guimenu
+>Visualizza</guimenu
+> <guimenuitem
+>Servizi online</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+>L'estensione <guimenuitem
+>Wikipedia</guimenuitem
+> mostra articoli di Wikipedia associati alla posizione geografica come icone sulla mappa. Un clic su un'icona apre una finestra del browser che mostra il sito associato. I dati sono forniti dal servizio web GeoNames.org. In modo simile, l'estensione <guimenuitem
+>Foto</guimenuitem
+> fornisce foto usando il sito di condivisione foto FlickR.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><guimenu
+>Visualizza</guimenu
+> <guimenuitem
+>Nuvole</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>Mostra</action
+> la copertura delle nuvole in tempo reale. Una mappa delle nuvole in tempo reale aggiornata ogni 3 ore. Usa GOES, METEOSAT e le immagini satellitari GMS scaricate dalla pagina «Geostationary Satellite Imagery» dell'Università di Dundee. Riconoscimenti: Hari Nair, progetto Xplanet.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><guimenu
+>Visualizza</guimenu
+> <guimenuitem
+>Atmosfera</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>Mostra</action
+> la riflessione diffusa dell'atmosfera attorno alla Terra.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><guimenu
+>Visualizza</guimenu
+> <guimenuitem
+>Stelle</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>Mostra o nasconde</action
+> la mappa delle stelle vista dal sistema solare.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><guimenu
+>Visualizza</guimenu
+> <guimenuitem
+>Controllo del Sole...</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>Mostra</action
+> il <guilabel
+>Controllo del Sole</guilabel
+>, dove puoi impostare l'<guilabel
+>Ombreggiatura del Sole</guilabel
+> e centrare la mappa alla posizione di un punto subsolare.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><guimenu
+>Visualizza</guimenu
+> <guimenuitem
+>Controllo del tempo...</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>Mostra</action
+> il finestra del <guilabel
+>Controllo del tempo</guilabel
+>, dove puoi impostare la data e l'ora e la velocità del tempo della simulazione.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><guimenu
+>Visualizza</guimenu
+> <guisubmenu
+>Eclissi in <replaceable
+>anno</replaceable
+></guisubmenu
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>Mostra</action
+> la lista delle eclissi nell'anno scelto usando la voce di menu <menuchoice
+><guimenu
+>Visualizza</guimenu
+><guimenuitem
+>Sfoglia eclissi...</guimenuitem
+></menuchoice
+>.</para>
+
+            <para
+>Questa voce di menu sarà mostrata solo se l'estensione <link linkend="eclipsesplugin"
+>Eclissi</link
+> è abilitata.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><guimenu
+>Visualizza</guimenu
+> <guimenuitem
+>Sfoglia eclissi...</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>Mostra</action
+> la finestra <guilabel
+>Navigatore delle eclissi</guilabel
+>, dove puoi impostare l'anno di cui mostrare le eclissi, aprire la finestra delle impostazioni dell'estensione, leggere i dati di inizio, fine, tipo e magnitudine dell'eclissi. Scegli un'eclissi dalla lista e premi <guibutton
+>Vai all'eclissi selezionata</guibutton
+> per visualizzare sul globo la località dell'eclissi.</para>
+
+            <para
+>Questa voce di menu sarà mostrata solo se l'estensione <link linkend="eclipsesplugin"
+>Eclissi</link
+> è abilitata.</para
+></listitem>
+          </varlistentry>
+        </variablelist>
+      </sect2>
+
+      <sect2>
+      <title
+>Il menu Segnalibri</title>
+        <variablelist>
+          <varlistentry>
+            <term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>B</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Segnalibro</guimenu
+> <guimenuitem
+>Aggiungi segnalibro...</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>Apri la finestra <guilabel
+>Modifica segnalibro</guilabel
+></action
+> per gestire un segnalibro.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><guimenu
+>Segnalibri</guimenu
+> <guimenuitem
+>Mostra segnalibri</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+>Una casella per <action
+>abilitare la visualizzazione dei segnalibri sulla mappa.</action
+></para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><guimenu
+>Segnalibri</guimenu
+> <guimenuitem
+>Imposta località di riferimento</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>Imposta la posizione attuale come casa tua.</action
+></para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><guimenu
+>Segnalibri</guimenu
+> <guimenuitem
+>Gestisci segnalibri...</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>Apri la finestra <guilabel
+>Gestisci segnalibri</guilabel
+></action
+> per gestire tutti i segnalibri.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><guimenu
+>Segnalibri</guimenu
+> <guisubmenu
+>Predefinito</guisubmenu
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>Questo sotto-menu mostra le posizioni predefinite.</action
+></para
+></listitem>
+          </varlistentry>
+        </variablelist>
+      </sect2>
+
+      <sect2>
+      <title
+>Il menu Impostazioni</title>
+
+        <variablelist>
+          <varlistentry>
+            <term
+><menuchoice
+><guimenu
+>Impostazioni</guimenu
+> <guimenuitem
+>Mostra la barra degli strumenti</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>Mostra o nasconde</action
+> la barra degli strumenti.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><guimenu
+>Impostazioni</guimenu
+> <guimenuitem
+>Configura la barra di stato</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>Mostra o nasconde</action
+> la barra di stato.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><guimenu
+>Impostazioni</guimenu
+> <guisubmenu
+>Pannelli</guisubmenu
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>Mostra o nasconde</action
+> i pannelli di &marble;.</para>
+
+            <tip
+><para
+>Puoi nascondere o mostrare tutti i pannelli selezionando la voce di menu <menuchoice
+> <guimenu
+>Impostazioni</guimenu
+> <guisubmenu
+>Pannelli</guisubmenu
+> <guimenuitem
+>Nascondi tutti i pannelli/Mostra tutti i pannelli</guimenuitem
+> </menuchoice
+>, oppure premendo il tasto <keycap
+>F9</keycap
+>.</para
+></tip
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><guimenu
+>Impostazioni</guimenu
+> <guisubmenu
+>Dimensione della vista</guisubmenu
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>Passa da una dimensione all'altra dell'area della mappa di &marble;.</action
+> Puoi scegliere una delle dimensioni adatte per screencast oppure mantenere l'area della mappa ridimensionabile (la voce <guimenuitem
+>Predefinita (ridimensionabile)</guimenuitem
+>).</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>F</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Impostazioni</guimenu
+> <guimenuitem
+>Modalità e tutto schermo</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>Passa dalla visualizzazione normale a quella a tutto schermo e viceversa.</action
+> In modalità a tutto schermo, la barra del titolo è nascosta e la finestra dell'applicazione è ridimensionata per coprire tutto lo schermo.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><guimenu
+>Impostazioni</guimenu
+> <guimenuitem
+>Configura Globo virtuale &marble;...</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>Mostra</action
+> la finestra di <link linkend="configure"
+>configurazione di &marble;</link
+>.</para
+></listitem>
+          </varlistentry>
+
+        </variablelist>
+
+      </sect2>
+
+      <sect2>
+      <title
+>Il menu Aiuto</title>
+
+        <para
+>&marble; ha il menu <guimenu
+>Aiuto</guimenu
+> comune di &kde;; per maggiori informazioni, consulta la sezione sul <ulink url="help:/fundamentals/menus.html#menus-help"
+>menu Aiuto</ulink
+> dei «Fondamentali di &kde;». </para>
+      </sect2>
+    </sect1>
+  </chapter>
+
+  <chapter id="configure">
+  <title
+>Configurare &marble;</title>
+
+    <sect1 id="configview">
+    <title
+>Configurazione della vista</title>
+
+      <screenshot>
+        <screeninfo
+>La finestra di configurazione della vista</screeninfo>
+        <mediaobject>
+          <imageobject
+><imagedata fileref="configure-view.png" format="PNG"/></imageobject>
+          <textobject
+><phrase
+>La finestra di configurazione della vista</phrase
+></textobject>
+        </mediaobject>
+      </screenshot>
+
+      <variablelist>
+        <varlistentry>
+          <term
+><guilabel
+>Distanza:</guilabel
+></term>
+          <listitem
+><para
+>L'unità usata per misurare altitudini, lunghezze e distanze (&eg; km, m, ft).</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>Angolo:</guilabel
+></term>
+          <listitem
+><para
+>Specifica la notazione degli angoli nelle coordinate: il valore predefinito è gradi-minuti-secondi (&eg; 54°30'00"). In alternative puoi scegliere i gradi decimali (&eg; 54.5°).</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>Immagini fisse:</guilabel
+></term>
+          <listitem
+><para
+>Specifica la qualità della mappa mostrata quando non c'è attività da parte dell'utente. Di solito è possibile avere una qualità più alta, dato che in questo caso la velocità non è un problema.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>Durante le animazioni:</guilabel
+></term>
+          <listitem
+><para
+>Specifica la qualità della mappa mostrata durante animazioni della mappa (&eg; mentre viene "trascinato" il globo). Si consiglia di impostare questa opzione a <guilabel
+>Bassa qualità</guilabel
+> specialmente in computer lenti, dato che ciò aumenterà la velocità.</para
+></listitem>
+        </varlistentry>
+
+<!--         <varlistentry>
+          <term
+><guilabel
+>Place names:</guilabel
+></term>
+          <listitem
+><para
+>Places often have different names in different languages. The label on the map can show the name in the user's language. Alternatively it can display the name in the official language and glyphs of that place.</para
+></listitem>
+        </varlistentry
+>-->
+
+        <varlistentry>
+          <term
+><guilabel
+>Carattere predefinito della mappa:</guilabel
+></term>
+          <listitem
+><para
+>Il tipo di carattere predefinito usato per la mappa.</para
+></listitem>
+        </varlistentry>
+      </variablelist>
+    </sect1>
+
+    <sect1 id="confignavigation">
+    <title
+>Configurazione della navigazione</title>
+
+      <screenshot>
+        <screeninfo
+>La finestra di configurazione della navigazione</screeninfo>
+        <mediaobject>
+          <imageobject
+><imagedata fileref="configure-navigation.png" format="PNG"/></imageobject>
+          <textobject
+><phrase
+>La finestra di configurazione della navigazione</phrase
+></textobject>
+        </mediaobject>
+      </screenshot>
+
+      <variablelist>
+<!--        <varlistentry>
+          <term
+><guilabel
+>Drag location:</guilabel
+></term>
+          <listitem
+><para
+>While dragging the mouse there are two standard behaviors when dealing with a virtual globe: The location below mouse pointer will follow the cursor exactly: As a result &eg; the north pole will not stay at the top which can lead to confusion. By default &marble; makes sure that north is always up which results in a dragging behavior where the location below the mouse pointer slightly "detaches" from the cursor.</para
+></listitem>
+        </varlistentry
+>-->
+
+        <varlistentry>
+          <term
+><guilabel
+>Rotazione inerziale del globo</guilabel
+></term>
+          <listitem
+><para
+>Come impostazione predefinita, &marble; usa la rotazione cinetica durante il trascinamento della mappa. Puoi disattivare questo comportamento usando questa casella.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>Anima viaggio verso la destinazione</guilabel
+></term>
+          <listitem
+><para
+>Quando viene cercata una località, &marble; può raggiungerla istantaneamente oppure mostrare un'animazione del viaggio dalla località precedente a quella nuova.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>Rotazione della vista col mouse</guilabel
+></term>
+          <listitem
+><para
+>La mappa e il movimento del mouse sono allineati durante il panoramica.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>All'avvio:</guilabel
+></term>
+          <listitem
+><para
+>In modo predefinito &marble; mostrerà la località di riferimento all'avvio dell'applicazione. In alternativa, può essere mostrata anche l'ultima posizione attiva alla chiusura dell'applicazione.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>Editor esterno:</guilabel
+></term>
+          <listitem
+><para
+>Qui puoi definire l'editor predefinito per le mappe, oppure scegliere <guilabel
+>Chiedi sempre</guilabel
+> se vuoi che &marble; ti chieda sempre prima di avviare un editor esterno.</para
+></listitem>
+        </varlistentry>
+      </variablelist>
+    </sect1>
+
+    <sect1 id="configcacheproxy">
+    <title
+>Configurazione della cache e del proxy</title>
+
+      <screenshot>
+        <screeninfo
+>La finestra di configurazione della cache e del proxy</screeninfo>
+        <mediaobject>
+          <imageobject
+><imagedata fileref="configure-cacheproxy.png" format="PNG"/></imageobject>
+          <textobject
+><phrase
+>La finestra di configurazione della cache e del proxy</phrase
+></textobject>
+        </mediaobject>
+      </screenshot>
+
+      <variablelist>
+        <varlistentry>
+          <term
+><guilabel
+>Cache</guilabel
+></term>
+          <listitem
+><para
+>Ci sono due cache usate in &marble;: la <guilabel
+>Memoria fisica:</guilabel
+>, richiesta per tenere i dati delle mappe in memoria. Incrementare il valore renderà l'applicazione più reattiva. La memoria cache su <guilabel
+>Disco rigido:</guilabel
+> è usata per scaricare contenuti da Internet (&eg; i dati delle mappe o da Wikipedia). Diminuisci questo valore per risparmiare spazio su disco rigido e nel caso in cui un elevato uso di Internet non è un problema.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>Proxy</guilabel
+></term>
+          <listitem
+><para
+>Impostazioni del proxy per la tua intranet locale. Lascia vuoto se non c'è un proxy.</para
+></listitem>
+        </varlistentry>
+      </variablelist>
+    </sect1>
+
+    <sect1 id="configdatetime">
+    <title
+>Configurazione della data e dell'ora</title>
+
+      <screenshot>
+        <screeninfo
+>La finestra di configurazione della data e dell'ora</screeninfo>
+        <mediaobject>
+          <imageobject
+><imagedata fileref="configure-dateandtime.png" format="PNG"/></imageobject>
+          <textobject
+><phrase
+>La finestra di configurazione della data e dell'ora</phrase
+></textobject>
+        </mediaobject>
+      </screenshot>
+
+      <variablelist>
+        <varlistentry>
+          <term
+><guilabel
+>Fuso orario</guilabel
+></term>
+          <listitem
+><para
+>Qui puoi scegliere un fuso orario per &marble;: <ulink url="https://it.wikipedia.org/wiki/Tempo_coordinato_universale"
+>UTC</ulink
+>, il fuso orario di sistema oppure un fuso orario personalizzato. L'opzione scelta cambia la vista della mappa solo se la mappa può mostrare le condizioni di luce sulla sua superficie.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>All'avvio di &marble;</guilabel
+></term>
+          <listitem
+><para
+>Qui puoi scegliere la data e l'ora usati all'avvio di &marble;: il tempo di sistema oppure il tempo dell'ultima sessione.</para
+></listitem>
+        </varlistentry>
+      </variablelist>
+    </sect1>
+
+    <sect1 id="configsynchronization">
+    <title
+>Configurazione della sincronizzazione</title>
+
+      <para
+>&marble; può inviare i dati degli itinerari e dei segnalibri su server <ulink url="https://en.wikipedia.org/wiki/OwnCloud"
+>ownCloud</ulink
+> e sincronizzarli tra diverse istanze di &marble; installate su dispositivi diversi. </para>
+
+      <screenshot>
+        <screeninfo
+>La finestra di configurazione della sincronizzazione</screeninfo>
+        <mediaobject>
+          <imageobject
+><imagedata fileref="configure-synchronization.png" format="PNG"/></imageobject>
+          <textobject
+><phrase
+>La finestra di configurazione della sincronizzazione</phrase
+></textobject>
+        </mediaobject>
+      </screenshot>
+
+      <variablelist>
+        <varlistentry>
+          <term
+><guilabel
+>Abilita sincronizzazione</guilabel
+></term>
+          <listitem
+><para
+>La sincronizzazione può essere abilitata o disabilitata usando questa casella. Quando è abilitata, puoi scegliere se sincronizzare i dati degli itinerari e dei segnalibri usando le caselle corrispondenti oppure se premere <guibutton
+>Sincronizza ora</guibutton
+> per far partire immediatamente la sincronizzazione.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>Credenziali</guilabel
+></term>
+          <listitem
+><para
+>Qui puoi inserire le tue credenziali di ownClowd. È possibile trovare ulteriori informazioni sulla configurazione di ownCloud sul <ulink url="https://owncloud.com/"
+>sito web ufficiale di ownClowd</ulink
+>.</para
+></listitem>
+        </varlistentry>
+      </variablelist>
+    </sect1>
+
+    <sect1 id="configrouting">
+    <title
+>Configurazione degli itinerari</title>
+
+      <screenshot>
+        <screeninfo
+>La finestra di configurazione degli itinerari</screeninfo>
+        <mediaobject>
+          <imageobject
+><imagedata fileref="configure-routing.png" format="PNG"/></imageobject>
+          <textobject
+><phrase
+>La finestra di configurazione degli itinerari</phrase
+></textobject>
+        </mediaobject>
+      </screenshot>
+
+      <variablelist>
+        <varlistentry>
+          <term
+><guibutton
+>Aggiungi...</guibutton
+></term>
+          <listitem
+><para
+>Apre una finestra dove puoi aggiungere un nuovo profili per gli itinerari.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guibutton
+>Configura...</guibutton
+></term>
+          <listitem
+><para
+>Apre una finestra in cui puoi configurare il profilo selezionato.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guibutton
+>Rimuovi</guibutton
+></term>
+          <listitem
+><para
+>Elimina il profilo selezionato.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guibutton
+>Sposta in altro</guibutton
+></term>
+          <listitem
+><para
+>Il profilo selezionato è spostato un passo più in alto. Apparirà prima di quello che poco prima era al di sopra di quello selezionato.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guibutton
+>Sposta in basso</guibutton
+></term>
+          <listitem
+><para
+>Il profilo selezionato è spostato un passo più in basso. Apparirà dopo di quello che poco prima era al di sotto di quello selezionato.</para
+></listitem>
+        </varlistentry>
+      </variablelist>
+    </sect1>
+
+    <sect1 id="configplugins">
+    <title
+>Configurazione delle estensioni</title>
+
+      <para
+>Nella scheda di configurazione delle <guilabel
+>Estensioni</guilabel
+> è possibile attivare e disattivare le caselle di informazioni, i servizi in linea e tutte le altre estensioni che possono essere mostrate in &marble;. Le estensioni attive appaiono nel menu <guilabel
+>Visualizza</guilabel
+>, dove puoi nasconderle o mostrarle. </para>
+
+      <screenshot>
+        <screeninfo
+>La finestra di configurazione delle estensioni</screeninfo>
+        <mediaobject>
+          <imageobject
+><imagedata fileref="configure-plugins.png" format="PNG"/></imageobject>
+          <textobject
+><phrase
+>La finestra di configurazione delle estensioni</phrase
+></textobject>
+        </mediaobject>
+      </screenshot>
+
+      <para
+>Ciascuna estensione può essere attivata e disattivata usando la casella di spunta a sinistra. Alcune estensioni forniscono opzioni configurabili che è possibile modificare facendo clic sull'icona di configurazione a sinistra. </para>
+
+      <variablelist>
+        <varlistentry>
+          <term
+><guilabel
+>Estensione APRS radioamatoriale</guilabel
+></term>
+          <listitem
+><para
+>Scarica dati dal sistema automatico di segnalazione a pacchetti (Automatic Packet Reporting System, APRS) da Internet, da un file o da un dispositivo seriale. La posizione e lo stato dei mittenti dei dati sono mostrati sulla mappa ed è aggiornato in tempo reale.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>Annotazione</guilabel
+></term>
+          <listitem
+><para
+>Ti permette di aggiungere annotazioni sulle mappe.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>Atmosfera</guilabel
+></term>
+          <listitem
+><para
+>Mostra gli effetti dell'atmosfera.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>Bussola</guilabel
+></term>
+          <listitem
+><para
+>Mostra una bussola nella mappa.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>Griglia delle coordinate</guilabel
+></term>
+          <listitem
+><para
+>Mostra una griglia delle coordinate (puoi scegliere i colori delle linee della griglia).</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>Mirino</guilabel
+></term>
+          <listitem
+><para
+>Abilita questo per mostrare un piccolo mirino al centro della mappa.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>Indicatore del progresso di scaricamento</guilabel
+></term>
+          <listitem
+><para
+>Un grafico a torta nella parte alta della mappa che mostra il progresso di scaricamenti attivi.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>Terremoti</guilabel
+></term>
+          <listitem
+><para
+>Mostra i marcatori dei terremoti sulla mappa.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry id="eclipsesplugin">
+          <term
+><guilabel
+>Eclissi</guilabel
+></term>
+          <listitem
+><para
+>Mostra i dati sulle eclissi solari e lunari.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>Profilo altimetrico</guilabel
+></term>
+          <listitem
+><para
+>Mostra il profilo altimetrico per <link linkend="routing"
+>gli itinerari nella mappa</link
+>.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>Marcatore del profilo altimetrico</guilabel
+></term>
+          <listitem
+><para
+>Indica l'altezza corrente del profilo altimetrico sulla mappa.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>Informazioni GPS</guilabel
+></term>
+          <listitem
+><para
+>Mostra un oggetto mobile che mostra informazioni <ulink url="https://it.wikipedia.org/wiki/Sistema_di_posizionamento_globale"
+>GPS</ulink
+>.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>Licenza</guilabel
+></term>
+          <listitem
+><para
+>Mostra un oggetto mobile che mostra informazioni di copyright.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry id="measure-tool-config">
+          <term
+><guilabel
+>Strumento di misura</guilabel
+></term>
+          <listitem
+><para
+>L'estensione per <link linkend="measure-distances"
+>misurare la distanza tra due o più punti</link
+>.</para>
+
+          <para
+>La visualizzazione delle distanze e delle rotte tra i punti può essere configurata dopo aver premuto l'icona dello strumento. Basta marcare la corrispondente casella per mostrare le etichette in &marble;, oppure smarcarla per nascondere le etichette.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>Navigazione</guilabel
+></term>
+          <listitem
+><para
+>Mostra il controllo per il mouse per ingrandire e muovere come oggetto mobile sulla mappa.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>Note di OSM Mapper</guilabel
+></term>
+          <listitem
+><para
+>Implementazione delle note di geocodifica.</para
+></listitem>
+        </varlistentry>
+
+<!--        <varlistentry>
+          <term
+><guilabel
+>OpenCaching.com</guilabel
+></term>
+          <listitem
+><para
+>Displays the <ulink url="https://en.wikipedia.org/wiki/Geocaching"
+>geocaching</ulink
+> markers on the map.</para
+></listitem>
+        </varlistentry
+>-->
+
+        <varlistentry>
+          <term
+><guilabel
+>Oggetti di OpenDesktop</guilabel
+></term>
+          <listitem
+><para
+>Mostra sulla mappa gli avatar degli utenti di <ulink url="https://opendesktop.org/"
+>OpenDesktop</ulink
+> e alcune informazioni su di loro.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>Mappa panoramica</guilabel
+></term>
+          <listitem
+><para
+>Questo è un oggetto mobile che mostra una mappa panoramica.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>Foto</guilabel
+></term>
+          <listitem
+><para
+>Scarica automaticamente immagini di tutto il mondo a seconda della loro popolarità.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>Posti</guilabel
+></term>
+          <listitem
+><para
+>Mostra posti interessanti di <ulink url="https://foursquare.com/"
+>Foursquare</ulink
+>.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>Marcatore della posizione</guilabel
+></term>
+          <listitem
+><para
+>Disegna un marcatore alla posizione corrente del <ulink url="https://it.wikipedia.org/wiki/Sistema_di_posizionamento_globale"
+>GPS</ulink
+>.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>Codici postali</guilabel
+></term>
+          <listitem
+><para
+>Mostra <ulink url="https://it.wikipedia.org/wiki/Codice_postale"
+>codici postali</ulink
+> sull'area della mappa.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>Itinerario</guilabel
+></term>
+          <listitem
+><para
+>Mostra gli <link linkend="routing"
+>itinerari</link
+> e i controlli di navigazione.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>Satelliti</guilabel
+></term>
+          <listitem
+><para
+>Mostra i satelliti naturali e artificiali della Terra e di altri pianeti, e le loro orbite.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>Barra della scala</guilabel
+></term>
+          <listitem
+><para
+>Questo è un oggetto mobile che mostra una scala della mappa.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>Tachimetro</guilabel
+></term>
+          <listitem
+><para
+>Mostra la velocità di crociera corrente. Ha bisogno di dati <ulink url="https://it.wikipedia.org/wiki/Sistema_di_posizionamento_globale"
+>GPS</ulink
+>.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>Stelle</guilabel
+></term>
+          <listitem
+><para
+>Un'estensione che mostra il cielo stellato.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>Sole</guilabel
+></term>
+          <listitem
+><para
+>Un'estensione che mostra il Sole.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>Meteo</guilabel
+></term>
+          <listitem
+><para
+>Scarica le informazioni meteorologiche delle città e le mostra nella mappa.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>Articoli di Wikipedia</guilabel
+></term>
+          <listitem
+><para
+>Scarica automaticamente articoli di Wikipedia e li mostra a destra nella mappa.</para
+></listitem>
+        </varlistentry>
+      </variablelist>
+    </sect1>
+  </chapter>
+
+  <chapter id="faq">
+  <title
+>Domande e risposte</title>
+
+    <qandaset id="faqlist">
+      <qandaentry>
+        <question>
+          <para
+>Non riesco a vedere la mia casa sulla mappa / perché dovrei usare &marble; se c'è già <application
+>Google Earth</application
+>?</para>
+        </question>
+        <answer>
+          <para
+>&marble; mira ad essere un educativo navigatore geografico, veloce e leggero, che possa funzionare facilmente su qualsiasi piattaforma supportata da &Qt;. Anche se sarebbe preferibile avere mappe ad una risoluzione più alta, tali mappe non sono necessarie per ogni utente e per ogni utilizzo (esattamente come non usi un completo programma di videoscrittura se quello che vuoi è un semplice editor di testo). Inoltre, tieni in considerazione che &marble; è software libero e si basa su dati che possono essere ridistribuiti liberamente, allo stesso modo del software libero.</para>
+        </answer>
+      </qandaentry>
+
+      <qandaentry>
+        <question>
+          <para
+>Perché &marble; è così veloce anche se non ho l'accelerazione hardware abilitata? / Perché &marble; non gira fluido con la mia costosa scheda grafica 3D?</para>
+        </question>
+        <answer>
+          <para
+>Anche se mostra la Terra come globo, &marble; non usa alcuna accelerazione 3D hardware. Il vantaggio di ciò è che funziona ad una velocità decente su qualsiasi piattaforma e qualsiasi hardware supportato da &Qt;. Tuttavia, ciò ha lo svantaggio che non funziona fluido come potrebbe usando l'accelerazione hardware via OpenGL. &marble; usa semplice grafica 2D e quindi richiede una scheda grafica veloce nel disegno di grafica 2D. Abbiamo pianificato di aggiungere in futuro una opzionale visualizzazione che usi OpenGL.</para>
+        </answer>
+      </qandaentry>
+
+      <qandaentry>
+        <question>
+          <para
+>Dovrò mai pagare per &marble;?</para>
+        </question>
+        <answer>
+          <para
+>No, mai. Ma gli autori accettano sempre e volentieri suggerimenti. &marble; è rilasciato secondo i termini della licenza <ulink url="https://www.gnu.org/licenses/licenses.html#LGPL"
+>LGPL</ulink
+>, e per questo non dovrai mai pagare per questo programma.</para>
+        </answer>
+      </qandaentry>
+
+      <qandaentry>
+        <question>
+          <para
+>Come posso contribuire?</para>
+        </question>
+        <answer>
+          <para
+>&marble; non è solo un'applicazione, ma anche un progetto di software libero. Per questo, collaborare è semplice: contattaci usando la mailing list di marble-devel (marble-devel@kde.org).</para>
+        </answer>
+      </qandaentry>
+    </qandaset>
+  </chapter>
+
+  <chapter id="credits">
+  <title
+>Riconoscimenti e licenza</title>
+
+    <para
+>&marble;</para>
+
+    <para
+>Copyright del programma, 2005-2007 &Torsten.Rahn; &Torsten.Rahn.mail;</para>
+
+    <para
+>Contributi da:</para>
+
+    <itemizedlist>
+      <listitem
+><para
+>&Torsten.Rahn; &Torsten.Rahn.mail;</para
+></listitem>
+      <listitem
+><para
+>Inge Wallin <email
+>inge@lysator.liu.se</email
+></para
+></listitem>
+    </itemizedlist>
+
+    <para
+>Traduzione italiana di Pino Toscano <email
+>toscano.pino@tiscali.it</email
+></para
+> &underFDL; &underLGPL; </chapter>
+
+  &documentation.index;
+</book>
+<!--
+Local Variables:
+mode: sgml
+sgml-minimize-attributes:nil
+sgml-general-insert-case:lower
+sgml-indent-step:0
+sgml-indent-data:nil
+End:
+
+// vim:ts=2:sw=2:tw=78:noet:noai
+-->

@@ -1,0 +1,62 @@
+# Translation of plasma_wallpaper_org.kde.plasma.worldmap.po to Catalan
+# Copyright (C) 2016-2021 This_file_is_part_of_KDE
+# This file is distributed under the license LGPL version 2.1 or
+# version 3 or later versions approved by the membership of KDE e.V.
+#
+# Antoni Bella Pérez <antonibella5@yahoo.com>, 2016, 2021.
+# Josep M. Ferrer <txemaq@gmail.com>, 2021.
+msgid ""
+msgstr ""
+"Project-Id-Version: marble\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2021-09-28 00:13+0000\n"
+"PO-Revision-Date: 2021-11-03 17:36+0100\n"
+"Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
+"Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
+"Language: ca\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Accelerator-Marker: &\n"
+"X-Generator: Lokalize 20.12.0\n"
+
+#: contents/ui/config.qml:22
+#, kde-format
+msgid "Projection:"
+msgstr "Projecció:"
+
+#: contents/ui/config.qml:24
+#, kde-format
+msgid "Equirectangular"
+msgstr "Cilíndrica equidistant"
+
+#: contents/ui/config.qml:25
+#, kde-format
+msgid "Mercator"
+msgstr "Mercator"
+
+#: contents/ui/config.qml:37
+#, kde-format
+msgid "Center on:"
+msgstr "Centra en:"
+
+#: contents/ui/config.qml:39
+#, kde-format
+msgid "Daylight"
+msgstr "Llum de dia"
+
+#: contents/ui/config.qml:40
+#, kde-format
+msgid "Longitude"
+msgstr "Longitud"
+
+#: contents/ui/config.qml:41
+#, kde-format
+msgid "Location"
+msgstr "Emplaçament"
+
+#: contents/ui/config.qml:53
+#, kde-format
+msgid "Longitude:"
+msgstr "Longitud:"

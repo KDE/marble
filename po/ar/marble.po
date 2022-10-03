@@ -1,0 +1,4651 @@
+# translation of marble.po to
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+# Youssef Chahibi <chahibi@gmail.com>, 2007.
+# Ali S AlNoaimi <me@the-ghost.com>, 2010.
+# Zayed Al-Saidi <zayed.alsaidi@gmail.com>, 2022.
+msgid ""
+msgstr ""
+"Project-Id-Version: marble\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2021-10-18 00:13+0000\n"
+"PO-Revision-Date: 2022-01-22 21:09+0400\n"
+"Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
+"Language-Team: ar\n"
+"Language: ar\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
+"&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+"X-Generator: Lokalize 21.07.70\n"
+
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "Mohamed SAAD محمد سعد,زايد السعيدي"
+
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "metehyi@free.fr,zayed.alsaidi@gmail.com"
+
+#: kdemain.cpp:91
+#, kde-format
+msgid "Marble Virtual Globe"
+msgstr "ماربل - الكرة الأرضية"
+
+#: kdemain.cpp:93
+#, fuzzy, kde-format
+msgid "A World Atlas."
+msgstr "A العالم الأطلس."
+
+#: kdemain.cpp:95
+#, kde-format
+msgid "(c) 2007-%1"
+msgstr "(c) 2007-%1"
+
+#: kdemain.cpp:100 kdemain.cpp:286
+#, kde-format
+msgid "Torsten Rahn"
+msgstr "تورستِن راهن"
+
+#: kdemain.cpp:101
+#, kde-format
+msgid "Developer and Original Author"
+msgstr "المطور الرئيسي والكاتب الأصلي"
+
+#: kdemain.cpp:103
+#, kde-format
+msgid "Bernhard Beschow"
+msgstr "Bernhard Beschow"
+
+#: kdemain.cpp:104
+#, kde-format
+msgid "WMS Support, Mobile, Performance"
+msgstr ""
+
+#: kdemain.cpp:106
+#, kde-format
+msgid "Thibaut Gridel"
+msgstr ""
+
+#: kdemain.cpp:107
+#, kde-format
+msgid "Geodata"
+msgstr ""
+
+#: kdemain.cpp:109
+#, kde-format
+msgid "Jens-Michael Hoffmann"
+msgstr "جِنز-ميكائل هوفّمانّ"
+
+#: kdemain.cpp:110
+#, kde-format
+msgid "OpenStreetMap Integration, OSM Namefinder, Download Management"
+msgstr ""
+
+#: kdemain.cpp:112
+#, kde-format
+msgid "Florian E&szlig;er"
+msgstr ""
+
+#: kdemain.cpp:113
+#, kde-format
+msgid "Elevation Profile"
+msgstr "ملف تعريف الارتفاع"
+
+#: kdemain.cpp:115
+#, kde-format
+msgid "Wes Hardaker"
+msgstr ""
+
+#: kdemain.cpp:116
+#, fuzzy, kde-format
+msgid "APRS Plugin"
+msgstr "ابحث سطر"
+
+#: kdemain.cpp:118 kdemain.cpp:202
+#, kde-format
+msgid "Bastian Holst"
+msgstr "باستيان هولست"
+
+#: kdemain.cpp:119
+#, kde-format
+msgid "Online Services support"
+msgstr "دعم الخدمة على الإنترنت"
+
+#: kdemain.cpp:121 kdemain.cpp:172
+#, kde-format
+msgid "Guillaume Martres"
+msgstr ""
+
+#: kdemain.cpp:122
+#, kde-format
+msgid "Satellites"
+msgstr "الأقمار الصناعية"
+
+#: kdemain.cpp:124 kdemain.cpp:168
+#, kde-format
+msgid "Rene Kuettner"
+msgstr ""
+
+#: kdemain.cpp:125
+#, fuzzy, kde-format
+msgid "Satellites, Eclipses"
+msgstr "قمر اصتناعي عرض"
+
+#: kdemain.cpp:127
+#, kde-format
+msgid "Friedrich W. H. Kossebau"
+msgstr "Friedrich W. H. Kossebau"
+
+#: kdemain.cpp:128
+#, kde-format
+msgid "Plasma Integration, Bugfixes"
+msgstr ""
+
+#: kdemain.cpp:130
+#, kde-format
+msgid "Dennis Nienhüser"
+msgstr ""
+
+#: kdemain.cpp:131
+#, fuzzy, kde-format
+msgid "Routing, Navigation, Mobile"
+msgstr "الملاحة"
+
+#: kdemain.cpp:133
+#, kde-format
+msgid "Niko Sams"
+msgstr "Niko Sams"
+
+#: kdemain.cpp:134
+#, fuzzy, kde-format
+msgid "Routing, Elevation Profile"
+msgstr "الملاحة عنصر تحكم"
+
+#: kdemain.cpp:136 kdemain.cpp:206
+#, kde-format
+msgid "Patrick Spendrin"
+msgstr "باترِك سبِندرِن"
+
+#: kdemain.cpp:137
+#, kde-format
+msgid "Core Developer: KML and Windows support"
+msgstr "مطور رئيسي: KML و دعم النوافذ"
+
+#: kdemain.cpp:139
+#, kde-format
+msgid "Eckhart Wörner"
+msgstr ""
+
+#: kdemain.cpp:140
+#, kde-format
+msgid "Bugfixes"
+msgstr ""
+
+#: kdemain.cpp:145
+#, kde-format
+msgid "Inge Wallin"
+msgstr "Inge Wallin"
+
+#: kdemain.cpp:146
+#, fuzzy, kde-format
+msgid "Core Developer and Co-Maintainer"
+msgstr "الأصلي المؤلف المطور و المشرف"
+
+#: kdemain.cpp:148
+#, kde-format
+msgid "Henry de Valence"
+msgstr "هِنري دا فالينس"
+
+#: kdemain.cpp:149
+#, kde-format
+msgid "Core Developer: Marble Runners, World-Clock Plasmoid"
+msgstr ""
+
+#: kdemain.cpp:151
+#, kde-format
+msgid "Pino Toscano"
+msgstr "بينو توسكانو"
+
+#: kdemain.cpp:152
+#, kde-format
+msgid "Network plugins"
+msgstr "إضافات الشبكة"
+
+#: kdemain.cpp:154
+#, kde-format
+msgid "Harshit Jain"
+msgstr "هارشِت جين"
+
+#: kdemain.cpp:155
+#, kde-format
+msgid "Planet filter"
+msgstr ""
+
+#: kdemain.cpp:157
+#, kde-format
+msgid "Simon Edwards"
+msgstr "سَيمون إدووردز"
+
+#: kdemain.cpp:158
+#, fuzzy, kde-format
+msgid "Marble Python Bindings"
+msgstr "إ&عدادات"
+
+#: kdemain.cpp:160
+#, kde-format
+msgid "Magnus Valle"
+msgstr ""
+
+#: kdemain.cpp:161
+#, kde-format
+msgid "Historical Maps"
+msgstr ""
+
+#: kdemain.cpp:163
+#, kde-format
+msgid "Médéric Boquien"
+msgstr ""
+
+#: kdemain.cpp:164
+#, kde-format
+msgid "Astronomical Observatories"
+msgstr ""
+
+#: kdemain.cpp:169
+#, kde-format
+msgid ""
+"ESA Summer of Code in Space 2012 Project: Visualization of planetary "
+"satellites"
+msgstr ""
+
+#: kdemain.cpp:173
+#, kde-format
+msgid ""
+"ESA Summer of Code in Space 2011 Project: Visualization of Satellite Orbits"
+msgstr ""
+
+#: kdemain.cpp:178
+#, kde-format
+msgid "Konstantin Oblaukhov"
+msgstr ""
+
+#: kdemain.cpp:179
+#, kde-format
+msgid "Google Summer of Code 2011 Project: OpenStreetMap Vector Rendering"
+msgstr ""
+
+#: kdemain.cpp:182
+#, kde-format
+msgid "Daniel Marth"
+msgstr ""
+
+#: kdemain.cpp:183
+#, kde-format
+msgid "Google Summer of Code 2011 Project: Marble Touch on MeeGo"
+msgstr ""
+
+#: kdemain.cpp:186
+#, kde-format
+msgid "Gaurav Gupta"
+msgstr ""
+
+#: kdemain.cpp:187
+#, kde-format
+msgid "Google Summer of Code 2010 Project: Bookmarks"
+msgstr ""
+
+#: kdemain.cpp:190
+#, kde-format
+msgid "Harshit Jain "
+msgstr "Harshit Jain "
+
+#: kdemain.cpp:191
+#, kde-format
+msgid "Google Summer of Code 2010 Project: Time Support"
+msgstr ""
+
+#: kdemain.cpp:194
+#, kde-format
+msgid "Siddharth Srivastava"
+msgstr ""
+
+#: kdemain.cpp:195
+#, kde-format
+msgid "Google Summer of Code 2010 Project: Turn-by-turn Navigation"
+msgstr ""
+
+#: kdemain.cpp:198 kdemain.cpp:218
+#, kde-format
+msgid "Andrew Manson"
+msgstr ""
+
+#: kdemain.cpp:199
+#, kde-format
+msgid "Google Summer of Code 2009 Project: OSM Annotation"
+msgstr ""
+
+#: kdemain.cpp:203
+#, kde-format
+msgid "Google Summer of Code 2009 Project: Online Services"
+msgstr ""
+
+#: kdemain.cpp:207
+#, kde-format
+msgid "Google Summer of Code 2008 Project: Vector Tiles for Marble"
+msgstr ""
+
+#: kdemain.cpp:210
+#, kde-format
+msgid "Shashank Singh"
+msgstr ""
+
+#: kdemain.cpp:211
+#, kde-format
+msgid ""
+"Google Summer of Code 2008 Project: Panoramio / Wikipedia -photo support for "
+"Marble"
+msgstr ""
+
+#: kdemain.cpp:214
+#, kde-format
+msgid "Carlos Licea"
+msgstr ""
+
+#: kdemain.cpp:215
+#, kde-format
+msgid ""
+"Google Summer of Code 2007 Project: Equirectangular Projection (\"Flat Map\")"
+msgstr ""
+
+#: kdemain.cpp:219
+#, kde-format
+msgid "Google Summer of Code 2007 Project: GPS Support for Marble"
+msgstr ""
+
+#: kdemain.cpp:222
+#, kde-format
+msgid "Murad Tagirov"
+msgstr ""
+
+#: kdemain.cpp:223
+#, kde-format
+msgid "Google Summer of Code 2007 Project: KML Support for Marble"
+msgstr ""
+
+#: kdemain.cpp:228
+#, kde-format
+msgid "Simon Schmeisser"
+msgstr ""
+
+#: kdemain.cpp:229 kdemain.cpp:231 kdemain.cpp:233 kdemain.cpp:235
+#: kdemain.cpp:237 kdemain.cpp:239 kdemain.cpp:241 kdemain.cpp:243
+#: kdemain.cpp:245 kdemain.cpp:247 kdemain.cpp:249 kdemain.cpp:251
+#: kdemain.cpp:253 kdemain.cpp:255 kdemain.cpp:257 kdemain.cpp:259
+#: kdemain.cpp:261 kdemain.cpp:263 kdemain.cpp:265
+#, kde-format
+msgid "Development & Patches"
+msgstr ""
+
+#: kdemain.cpp:230
+#, kde-format
+msgid "Claudiu Covaci"
+msgstr ""
+
+#: kdemain.cpp:232
+#, fuzzy, kde-format
+msgid "David Roberts"
+msgstr "ديفيد روبرتس"
+
+#: kdemain.cpp:234
+#, kde-format
+msgid "Nikolas Zimmermann"
+msgstr "Nikolas Zimmermann"
+
+#: kdemain.cpp:236
+#, kde-format
+msgid "Jan Becker"
+msgstr ""
+
+#: kdemain.cpp:238
+#, kde-format
+msgid "Stefan Asserhäll"
+msgstr "Stefan Asserhäll"
+
+#: kdemain.cpp:240
+#, kde-format
+msgid "Laurent Montel"
+msgstr "Laurent Montel"
+
+#: kdemain.cpp:242
+#, kde-format
+msgid "Mayank Madan"
+msgstr ""
+
+#: kdemain.cpp:244
+#, kde-format
+msgid "Prashanth Udupa"
+msgstr ""
+
+#: kdemain.cpp:246
+#, kde-format
+msgid "Anne-Marie Mahfouf"
+msgstr "Anne-Marie Mahfouf"
+
+#: kdemain.cpp:248
+#, kde-format
+msgid "Josef Spillner"
+msgstr ""
+
+#: kdemain.cpp:250
+#, kde-format
+msgid "Frerich Raabe"
+msgstr "Frerich Raabe"
+
+#: kdemain.cpp:252
+#, kde-format
+msgid "Frederik Gladhorn"
+msgstr ""
+
+#: kdemain.cpp:254
+#, kde-format
+msgid "Fredrik Höglund"
+msgstr "Fredrik Höglund"
+
+#: kdemain.cpp:256
+#, kde-format
+msgid "Albert Astals Cid"
+msgstr "Albert Astals Cid"
+
+#: kdemain.cpp:258
+#, kde-format
+msgid "Thomas Zander"
+msgstr "Thomas Zander"
+
+#: kdemain.cpp:260
+#, kde-format
+msgid "Joseph Wenninger"
+msgstr "Joseph Wenninger"
+
+#: kdemain.cpp:262
+#, kde-format
+msgid "Kris Thomsen"
+msgstr "Kris Thomsen"
+
+#: kdemain.cpp:264
+#, kde-format
+msgid "Daniel Molkentin"
+msgstr "Daniel Molkentin"
+
+#: kdemain.cpp:266
+#, kde-format
+msgid "Christophe Leske"
+msgstr ""
+
+#: kdemain.cpp:267 kdemain.cpp:269 kdemain.cpp:271 kdemain.cpp:273
+#: kdemain.cpp:275 kdemain.cpp:277 kdemain.cpp:279 kdemain.cpp:281
+#: kdemain.cpp:283
+#, kde-format
+msgid "Platforms & Distributions"
+msgstr ""
+
+#: kdemain.cpp:268
+#, kde-format
+msgid "Sebastian Wiedenroth"
+msgstr ""
+
+#: kdemain.cpp:270
+#, kde-format
+msgid "Tim Sutton"
+msgstr ""
+
+#: kdemain.cpp:272
+#, kde-format
+msgid "Christian Ehrlicher"
+msgstr ""
+
+#: kdemain.cpp:274
+#, kde-format
+msgid "Ralf Habacker"
+msgstr "Ralf Habacker"
+
+#: kdemain.cpp:276
+#, kde-format
+msgid "Steffen Joeris"
+msgstr ""
+
+#: kdemain.cpp:278
+#, kde-format
+msgid "Marcus Czeslinski"
+msgstr ""
+
+#: kdemain.cpp:280
+#, kde-format
+msgid "Marcus D. Hanwell"
+msgstr "Marcus D. Hanwell"
+
+#: kdemain.cpp:282
+#, kde-format
+msgid "Chitlesh Goorah"
+msgstr ""
+
+#: kdemain.cpp:284
+#, kde-format
+msgid "Nuno Pinheiro"
+msgstr "Nuno Pinheiro"
+
+#: kdemain.cpp:285 kdemain.cpp:287
+#, kde-format
+msgid "Artwork"
+msgstr "العمل الفنّي"
+
+#: kdemain.cpp:290
+#, fuzzy, kde-format
+msgid "Luis Silva"
+msgstr "لويس سيلفا"
+
+#: kdemain.cpp:291 kdemain.cpp:293 kdemain.cpp:295 kdemain.cpp:297
+#: kdemain.cpp:299 kdemain.cpp:301 kdemain.cpp:303 kdemain.cpp:305
+#: kdemain.cpp:307 kdemain.cpp:309
+#, kde-format
+msgid "Various Suggestions & Testing"
+msgstr ""
+
+#: kdemain.cpp:292
+#, kde-format
+msgid "Stefan Jordan"
+msgstr ""
+
+#: kdemain.cpp:294
+#, fuzzy, kde-format
+msgid "Robert Scott"
+msgstr "روبرت سكوت"
+
+#: kdemain.cpp:296
+#, kde-format
+msgid "Lubos Petrovic"
+msgstr ""
+
+#: kdemain.cpp:298
+#, kde-format
+msgid "Benoit Sigoure"
+msgstr ""
+
+#: kdemain.cpp:300
+#, fuzzy, kde-format
+msgid "Martin Konold"
+msgstr "شريط الأدوات الرئيسي"
+
+#: kdemain.cpp:302
+#, kde-format
+msgid "Matthias Welwarsky"
+msgstr "Matthias Welwarsky"
+
+#: kdemain.cpp:304
+#, kde-format
+msgid "Rainer Endres"
+msgstr ""
+
+#: kdemain.cpp:306
+#, kde-format
+msgid "Ralf Gesellensetter"
+msgstr ""
+
+#: kdemain.cpp:308
+#, fuzzy, kde-format
+msgid "Tim Alder"
+msgstr "تكبير مزلق"
+
+#: kdemain.cpp:310
+#, kde-format
+msgid "John Layt"
+msgstr ""
+
+#: kdemain.cpp:311
+#, kde-format
+msgid ""
+"Special thanks for providing an important source of inspiration by creating "
+"Marble's predecessor \"Kartographer\"."
+msgstr ""
+
+#: kdemain.cpp:327
+#, kde-format
+msgid "Enable debug output"
+msgstr ""
+
+#: kdemain.cpp:329
+#, kde-format
+msgid "Display OSM placemarks according to the level selected"
+msgstr ""
+
+#: kdemain.cpp:331
+#, fuzzy, kde-format
+msgid "Make a time measurement to check performance"
+msgstr "Make a وقت قياس إلى تفقّد"
+
+#: kdemain.cpp:333
+#, fuzzy, kde-format
+msgid "Show frame rate"
+msgstr "اعرض إطار معدل"
+
+#: kdemain.cpp:335
+#, fuzzy, kde-format
+msgid "Show tile IDs"
+msgstr "اعرض"
+
+#: kdemain.cpp:337
+#, kde-format
+msgid "Show time spent in each layer"
+msgstr ""
+
+#: kdemain.cpp:339
+#, kde-format
+msgid "Use a different directory <directory> which contains map data."
+msgstr ""
+
+#: kdemain.cpp:341
+#, kde-format
+msgid "Do not use the interface optimized for small screens"
+msgstr ""
+
+#: kdemain.cpp:342
+#, kde-format
+msgid "Use the interface optimized for small screens"
+msgstr ""
+
+#: kdemain.cpp:344
+#, kde-format
+msgid "Do not use the interface optimized for high resolutions"
+msgstr ""
+
+#: kdemain.cpp:345
+#, kde-format
+msgid "Use the interface optimized for high resolutions"
+msgstr ""
+
+#: kdemain.cpp:347
+#, kde-format
+msgid "Show map at given lat lon <coordinates>"
+msgstr ""
+
+#: kdemain.cpp:349
+#, kde-format
+msgid "Show map at given geo <uri>"
+msgstr ""
+
+#: kdemain.cpp:351
+#, kde-format
+msgid "Set the distance of the observer to the globe (in km)"
+msgstr ""
+
+#: kdemain.cpp:353
+#, kde-format
+msgid "Use map <id> (e.g. \"earth/openstreetmap/openstreetmap.dgml\")"
+msgstr ""
+
+#: kdemain.cpp:355
+#, kde-format
+msgid "One or more placemark files to be opened"
+msgstr ""
+
+#. i18n: ectx: label, entry, group (Time)
+#: marble.kcfg:58
+#, kde-format
+msgid "The date and time of marble clock"
+msgstr ""
+
+#. i18n: ectx: label, entry, group (Time)
+#: marble.kcfg:61
+#, kde-format
+msgid "The speed of marble clock"
+msgstr ""
+
+#. i18n: ectx: label, entry, group (View)
+#: marble.kcfg:107
+#, kde-format
+msgid "The unit chosen to measure distances."
+msgstr ""
+
+#. i18n: ectx: label, entry, group (View)
+#: marble.kcfg:115
+#, kde-format
+msgid "The unit chosen to measure angles."
+msgstr ""
+
+#. i18n: ectx: label, entry, group (View)
+#: marble.kcfg:124
+#, kde-format
+msgid "The quality at which a still map gets painted."
+msgstr ""
+
+#. i18n: ectx: label, entry, group (View)
+#: marble.kcfg:135
+#, kde-format
+msgid "The quality at which an animated map gets painted."
+msgstr ""
+
+#. i18n: ectx: label, entry, group (View)
+#: marble.kcfg:146
+#, kde-format
+msgid "The localization of the labels."
+msgstr ""
+
+#. i18n: ectx: label, entry (mapFont), group (View)
+#: marble.kcfg:155
+#, kde-format
+msgid "The general font used on the map."
+msgstr ""
+
+#. i18n: ectx: label, entry (lastFileOpenDir), group (View)
+#: marble.kcfg:159
+#, kde-format
+msgid "The last directory that was opened by File->Open."
+msgstr ""
+
+#. i18n: ectx: label, entry, group (Navigation)
+#: marble.kcfg:179
+#, kde-format
+msgid "The behaviour of the planet's axis on mouse dragging."
+msgstr ""
+
+#. i18n: ectx: label, entry, group (Navigation)
+#: marble.kcfg:187
+#, kde-format
+msgid "The location shown on application startup."
+msgstr ""
+
+#. i18n: ectx: label, entry, group (Navigation)
+#: marble.kcfg:201
+#, kde-format
+msgid "Display animation on voyage to target."
+msgstr ""
+
+#. i18n: ectx: label, entry, group (Navigation)
+#: marble.kcfg:205
+#, kde-format
+msgid "The external OpenStreetMap editor application"
+msgstr ""
+
+#. i18n: ectx: label, entry, group (Cache)
+#: marble.kcfg:211
+#, kde-format
+msgid "Cache for tiles reserved in the physical memory."
+msgstr ""
+
+#. i18n: ectx: label, entry, group (Cache)
+#: marble.kcfg:217
+#, kde-format
+msgid "Maximum space on the hard disk that can be used to store tiles."
+msgstr ""
+
+#. i18n: ectx: label, entry (proxyUrl), group (Cache)
+#: marble.kcfg:223
+#, kde-format
+msgid "URL for the proxy server."
+msgstr ""
+
+#. i18n: ectx: label, entry, group (Cache)
+#: marble.kcfg:227
+#, kde-format
+msgid "Port for the proxy server."
+msgstr ""
+
+#. i18n: ectx: label, entry (proxyUser), group (Cache)
+#: marble.kcfg:233
+#, fuzzy, kde-format
+msgid "Username for authorization."
+msgstr "بديل الاسم من موقع."
+
+#. i18n: ectx: label, entry (proxyPass), group (Cache)
+#: marble.kcfg:236
+#, fuzzy, kde-format
+msgid "Password for authorization."
+msgstr "بديل الاسم من موقع."
+
+#. i18n: ectx: label, entry (proxyHttp), group (Cache)
+#: marble.kcfg:239
+#, kde-format
+msgid "Proxy type is HTTP"
+msgstr ""
+
+#. i18n: ectx: label, entry (proxySocks5), group (Cache)
+#: marble.kcfg:250
+#, kde-format
+msgid "Proxy type is Socks5"
+msgstr ""
+
+#. i18n: ectx: label, entry (proxyAuth), group (Cache)
+#: marble.kcfg:254
+#, fuzzy, kde-format
+msgid "Proxy requires Authentication"
+msgstr "اخرج تطبيق"
+
+#. i18n: ectx: label, entry (activePositionTrackingPlugin), group (Plugins)
+#: marble.kcfg:260
+#, kde-format
+msgid "The position tracking plugin used to determine the current location"
+msgstr ""
+
+#: marble_part.cpp:102
+#, kde-format
+msgid "Position: %1"
+msgstr "الموقع: %1"
+
+#: marble_part.cpp:103
+#, kde-format
+msgid "Altitude: %1"
+msgstr "الارتفاع: %1"
+
+#: marble_part.cpp:104
+#, kde-format
+msgid "Tile Zoom Level: %1"
+msgstr ""
+
+#: marble_part.cpp:105
+#, kde-format
+msgid "Time: %1"
+msgstr "الوقت: %1"
+
+#: marble_part.cpp:167
+#, kde-format
+msgid ""
+"Sorry, unable to open '%1':\n"
+"'%2'"
+msgstr ""
+"تعذّر فتح الملفّ '%1':\n"
+"'%2'"
+
+#: marble_part.cpp:168
+#, kde-format
+msgid "File not readable"
+msgstr ""
+
+#: marble_part.cpp:214
+#, fuzzy, kde-format
+msgid "marble_part"
+msgstr "جزء"
+
+#: marble_part.cpp:217
+#, fuzzy, kde-format
+msgid "A Virtual Globe"
+msgstr "A سطح المكتب الكرة الأرضية"
+
+#: marble_part.cpp:231
+#, kde-format
+msgid "Sorry, unable to open '%1'. The file is not accessible."
+msgstr ""
+
+#: marble_part.cpp:232
+#, kde-format
+msgid "File not accessible"
+msgstr ""
+
+#: marble_part.cpp:253
+#, kde-format
+msgid "All Supported Files"
+msgstr "كلّ الملفّات المدعومة"
+
+#: marble_part.cpp:259
+#, kde-format
+msgctxt "@title:window"
+msgid "Open File"
+msgstr "افتح ملفًّا"
+
+#: marble_part.cpp:276
+#, kde-format
+msgctxt "@title:window"
+msgid "Export Map"
+msgstr "صدِّر الخريطة"
+
+#: marble_part.cpp:277
+#, fuzzy, kde-format
+msgid "Images *.jpg *.png"
+msgstr "الصور (*.png *.jpeg)"
+
+#: marble_part.cpp:291
+#, fuzzy, kde-format
+msgctxt "Application name"
+msgid "Marble"
+msgstr "ماربل"
+
+#: marble_part.cpp:292
+#, kde-format
+msgid "An error occurred while trying to save the file.\n"
+msgstr "حدث خطأ أثناء محاولة حفظ الملف.\n"
+
+#: marble_part.cpp:483
+#, kde-format
+msgid "Unnamed"
+msgstr "غير مسمًّى"
+
+#: marble_part.cpp:714
+#, fuzzy, kde-format
+msgctxt "Action for downloading an entire region of a map"
+msgid "Download Region..."
+msgstr "نزّل &منطقة…"
+
+#: marble_part.cpp:728
+#, kde-format
+msgctxt "Action for saving the map to a file"
+msgid "&Export Map..."
+msgstr "&صدِّر الخريطة..."
+
+#: marble_part.cpp:737
+#, kde-format
+msgctxt "Action for toggling offline mode"
+msgid "&Work Offline"
+msgstr "اعمل &بلا اتّصال"
+
+#: marble_part.cpp:747
+#, kde-format
+msgctxt "Action for copying the map to the clipboard"
+msgid "&Copy Map"
+msgstr "ا&نسخ الخريطة"
+
+#: marble_part.cpp:754
+#, kde-format
+msgctxt "Action for copying the coordinates to the clipboard"
+msgid "C&opy Coordinates"
+msgstr "انسخ الإ&حداثيّات"
+
+#: marble_part.cpp:762
+#, kde-format
+msgctxt "Action for opening a file"
+msgid "&Open..."
+msgstr "ا&فتح..."
+
+#: marble_part.cpp:769
+#, fuzzy, kde-format
+msgctxt "Action for downloading maps (GHNS)"
+msgid "Download Maps..."
+msgstr "&نزل الخرائط..."
+
+#: marble_part.cpp:772
+#, fuzzy, kde-format
+msgctxt "Status tip"
+msgid "Download new maps"
+msgstr "نزّل إنتهيت."
+
+#: marble_part.cpp:778
+#, kde-format
+msgctxt "Action for creating new maps"
+msgid "&Create a New Map..."
+msgstr "أنشئ &خريطة جديدة…"
+
+#: marble_part.cpp:783
+#, kde-format
+msgctxt "Status tip"
+msgid "A wizard guides you through the creation of your own map theme."
+msgstr ""
+
+#: marble_part.cpp:810
+#, kde-format
+msgctxt "Action for toggling clouds"
+msgid "&Clouds"
+msgstr "&غيوم"
+
+#: marble_part.cpp:817
+#, kde-format
+msgctxt "Action for sun control dialog"
+msgid "S&un Control..."
+msgstr "تحكم ال&شمس…"
+
+#: marble_part.cpp:827
+#, kde-format
+msgctxt "Action for time control dialog"
+msgid "&Time Control..."
+msgstr "&تحكم الوقت…"
+
+#: marble_part.cpp:836
+#, kde-format
+msgctxt "Action for locking float items on the map"
+msgid "Lock Position"
+msgstr "اقفل الموقع"
+
+#: marble_part.cpp:847
+#, fuzzy, kde-format
+msgid "Show Shadow"
+msgstr "ضل"
+
+#: marble_part.cpp:850
+#, fuzzy, kde-format
+msgid "Hide Shadow"
+msgstr "ضل"
+
+#: marble_part.cpp:851
+#, kde-format
+msgid "Shows and hides the shadow of the sun"
+msgstr ""
+
+#: marble_part.cpp:855
+#, kde-format
+msgid "Show sun icon on the Sub-Solar Point"
+msgstr ""
+
+#: marble_part.cpp:857
+#, kde-format
+msgid "Hide sun icon on the Sub-Solar Point"
+msgstr ""
+
+#: marble_part.cpp:858
+#, kde-format
+msgid "Show sun icon on the sub-solar point"
+msgstr ""
+
+#: marble_part.cpp:863
+#, kde-format
+msgid "Lock Globe to the Sub-Solar Point"
+msgstr ""
+
+#: marble_part.cpp:865
+#, kde-format
+msgid "Unlock Globe to the Sub-Solar Point"
+msgstr ""
+
+#: marble_part.cpp:866
+#, kde-format
+msgid "Lock globe to the sub-solar point"
+msgstr ""
+
+#: marble_part.cpp:881
+#, kde-format
+msgctxt "Add Bookmark"
+msgid "Add &Bookmark..."
+msgstr "أضف &علامة"
+
+#: marble_part.cpp:889
+#, kde-format
+msgctxt "Show Bookmarks"
+msgid "Show &Bookmarks"
+msgstr "أ&ظهر العلامات"
+
+#: marble_part.cpp:890
+#, kde-format
+msgid "Show or hide bookmarks in the map"
+msgstr ""
+
+#: marble_part.cpp:898
+#, kde-format
+msgid "&Set Home Location"
+msgstr "عين موقع ال&بيت"
+
+#: marble_part.cpp:905
+#, kde-format
+msgctxt "Manage Bookmarks"
+msgid "&Manage Bookmarks..."
+msgstr "أ&در العلامات…"
+
+#: marble_part.cpp:917
+#, kde-format
+msgctxt "Edit the map in an external application"
+msgid "&Edit Map..."
+msgstr "&حرّر الخريطة…"
+
+#: marble_part.cpp:925
+#, kde-format
+msgid "&Record Movie"
+msgstr "&سجل فلم"
+
+#: marble_part.cpp:927
+#, kde-format
+msgid "Records a movie of the globe"
+msgstr "يسجل فلم الكرة الأرضية"
+
+#: marble_part.cpp:933
+#, kde-format
+msgid "&Stop Recording"
+msgstr "أ&وقف التسجيل"
+
+#: marble_part.cpp:935
+#, kde-format
+msgid "Stop recording a movie of the globe"
+msgstr "أوقف تسجيل فلم الكرة الأرضية"
+
+#: marble_part.cpp:1287
+#, fuzzy, kde-format
+msgctxt "Action for toggling"
+msgid "Show Position"
+msgstr "الموقع"
+
+#: marble_part.cpp:1289
+#, fuzzy, kde-format
+msgctxt "Action for toggling"
+msgid "Show Date and Time"
+msgstr "اعرض إطار معدل"
+
+#: marble_part.cpp:1291
+#, fuzzy, kde-format
+msgctxt "Action for toggling"
+msgid "Show Altitude"
+msgstr "الإرتفاع 1"
+
+#: marble_part.cpp:1294
+#, kde-format
+msgctxt "Action for toggling"
+msgid "Show Tile Zoom Level"
+msgstr "اعرض مستوى تكبير القطعة"
+
+#: marble_part.cpp:1296
+#, kde-format
+msgctxt "Action for toggling"
+msgid "Show Download Progress Bar"
+msgstr ""
+
+#: marble_part.cpp:1391
+#, kde-format
+msgid "View"
+msgstr "العرض"
+
+#: marble_part.cpp:1402
+#, kde-format
+msgid "Navigation"
+msgstr "التّنقّل"
+
+#: marble_part.cpp:1413
+#, kde-format
+msgid "Cache & Proxy"
+msgstr "الخبيئة والوسيط"
+
+#: marble_part.cpp:1426
+#, kde-format
+msgid "Date & Time"
+msgstr "التّاريخ والوقت"
+
+#: marble_part.cpp:1434
+#, kde-format
+msgid "Synchronization"
+msgstr "المزامنة"
+
+#: marble_part.cpp:1447
+#, kde-format
+msgid "Routing"
+msgstr "التوجيه"
+
+#: marble_part.cpp:1455
+#, kde-format
+msgid "Plugins"
+msgstr "الملحقات"
+
+#. i18n: ectx: Menu (file)
+#: marble_part.rc:6 marbleui.rc:5
+#, kde-format
+msgid "&File"
+msgstr "&ملف"
+
+#. i18n: ectx: Menu (edit)
+#: marble_part.rc:21 marbleui.rc:14
+#, kde-format
+msgid "&Edit"
+msgstr "ت&حرير"
+
+#. i18n: ectx: Menu (view)
+#: marble_part.rc:31 marbleui.rc:18
+#, kde-format
+msgid "&View"
+msgstr "ال&عرض"
+
+#. i18n: ectx: Menu (infoboxes)
+#: marble_part.rc:36
+#, kde-format
+msgid "&Info Boxes"
+msgstr "مربعات المعلومات"
+
+#. i18n: ectx: Menu (onlineservices)
+#: marble_part.rc:42
+#, kde-format
+msgid "&Online Services"
+msgstr "الخدمات على ال&شابكة"
+
+#. i18n: ectx: Menu (settings)
+#: marble_part.rc:55 marbleui.rc:31
+#, kde-format
+msgid "&Settings"
+msgstr "إ&عدادات"
+
+#. i18n: ectx: Menu (panels)
+#: marble_part.rc:59
+#, kde-format
+msgid "&Panels"
+msgstr "ال&لوحات"
+
+#. i18n: ectx: Menu (viewSize)
+#: marble_part.rc:65
+#, kde-format
+msgid "&View Size"
+msgstr "&حجم العرض"
+
+#. i18n: ectx: Menu (bookmarks)
+#: marble_part.rc:73 marbleui.rc:29
+#, kde-format
+msgid "&Bookmarks"
+msgstr "ال&علامات"
+
+#. i18n: ectx: ToolBar (mainToolBar)
+#: marble_part.rc:84 marbleui.rc:36
+#, kde-format
+msgid "Main Toolbar"
+msgstr "شريط الأدوات الرئيسي"
+
+#. i18n: ectx: ToolBar (pluginToolBar)
+#: marble_part.rc:97
+#, kde-format
+msgid "Edit Toolbar"
+msgstr "حرر شريط الأدوات الرئيسي"
+
+#, fuzzy
+#~ msgid "Native"
+#~ msgstr "الملاحة"
+
+#, fuzzy
+#~ msgid "Native (X11)"
+#~ msgstr "الملاحة"
+
+#, fuzzy
+#~ msgid "Night Sky"
+#~ msgstr "خريطة المساء"
+
+#, fuzzy
+#~ msgid "Mountain"
+#~ msgstr "الجبل"
+
+#, fuzzy
+#~ msgid "Volcano"
+#~ msgstr "البركاني"
+
+#, fuzzy
+#~ msgid "Geographic Pole"
+#~ msgstr "جغرافي القطب"
+
+#, fuzzy
+#~ msgid "Magnetic Pole"
+#~ msgstr "مغناطيسي القطب"
+
+#, fuzzy
+#~ msgid "Airport"
+#~ msgstr "مطار"
+
+#, fuzzy
+#~ msgid "Shipwreck"
+#~ msgstr "حطام السفينة"
+
+#, fuzzy
+#~ msgid "Craters"
+#~ msgstr "m ماء"
+
+#, fuzzy
+#~ msgid "Other features"
+#~ msgstr "أخرى مكان"
+
+#, fuzzy
+#~ msgid "Mons, mountain"
+#~ msgstr "الجبل"
+
+#, fuzzy
+#~ msgid "Selenographic Pole"
+#~ msgstr "جغرافي القطب"
+
+#, fuzzy
+#~ msgid "Plain Map"
+#~ msgstr "عادي الخريطة"
+
+#, fuzzy
+#~ msgid ""
+#~ "<p>A <i>plain map</i>.</p><p>It uses vector lines to mark coastlines and "
+#~ "country borders, etc...</p>"
+#~ msgstr "A نص عادي خريطة itإيطالياهو متجه سطور إلى علامة و."
+
+#, fuzzy
+#~ msgid "Urban Areas"
+#~ msgstr "الأطلس"
+
+#, fuzzy
+#~ msgid "Boundaries"
+#~ msgstr "الحدود"
+
+#, fuzzy
+#~ msgid "Water Bodies"
+#~ msgstr "ماء الأجسام"
+
+#, fuzzy
+#~ msgid "Ice and Glaciers"
+#~ msgstr "جليد&amp; الكتل الجليدية"
+
+#, fuzzy
+#~ msgid "International"
+#~ msgstr "عالمي"
+
+#, fuzzy
+#~ msgid "State"
+#~ msgstr "الحالة"
+
+#, fuzzy
+#~ msgid "Lake"
+#~ msgstr "البحيرة"
+
+#, fuzzy
+#~ msgid "River"
+#~ msgstr "النهر"
+
+#, fuzzy
+#~ msgid "Glaciers"
+#~ msgstr "جليد&amp; الكتل الجليدية"
+
+#~ msgid "Temperature (July)"
+#~ msgstr "درجة الحرارة (يوليو - تموز)"
+
+#, fuzzy
+#~ msgid "Earth at Night"
+#~ msgstr "الأرض عند ليلاً"
+
+#, fuzzy
+#~ msgid ""
+#~ "This image of <i>Earth's city lights</i> was created with data from the "
+#~ "Defense Meteorological Satellite Program (DMSP) Operational Linescan "
+#~ "System (OLS)."
+#~ msgstr ""
+#~ "هذا صورة من الأرض s مع البيانات من الدفاع أرصاديّ قمر اصتناعي البرنامج "
+#~ "شغّال النظام "
+
+#, fuzzy
+#~ msgid "Light terrain"
+#~ msgstr "التضاريس"
+
+#, fuzzy
+#~ msgid "Dark terrain"
+#~ msgstr "التضاريس"
+
+#, fuzzy
+#~ msgid "Water"
+#~ msgstr "m ماء"
+
+#, fuzzy
+#~ msgid "Atlas"
+#~ msgstr "الأطلس"
+
+#, fuzzy
+#~ msgid ""
+#~ "<p>A <i>classic topographic map</i>.</p><p>It uses vector lines to mark "
+#~ "coastlines, country borders etc. and bitmap graphics to create the height "
+#~ "relief.</p>"
+#~ msgstr ""
+#~ "A تقليدي، اعتيادي خريطة itإيطالياهو متجه سطور إلى علامة و خارطة ثنائية "
+#~ "رسوم إلى إ_نشئ الارتفاع."
+
+#, fuzzy
+#~ msgid "Relief"
+#~ msgstr "Relief"
+
+#, fuzzy
+#~ msgid "Elevation"
+#~ msgstr "الارتفاع :"
+
+#, fuzzy
+#~ msgid "7000 m"
+#~ msgstr "m"
+
+#, fuzzy
+#~ msgid "5000 m"
+#~ msgstr "m"
+
+#, fuzzy
+#~ msgid "3500 m"
+#~ msgstr "m"
+
+#, fuzzy
+#~ msgid "2000 m"
+#~ msgstr "m"
+
+#, fuzzy
+#~ msgid "1000 m"
+#~ msgstr "m"
+
+#, fuzzy
+#~ msgid "500 m"
+#~ msgstr "m"
+
+#, fuzzy
+#~ msgid "200 m"
+#~ msgstr "m"
+
+#, fuzzy
+#~ msgid "50 m"
+#~ msgstr "m"
+
+#, fuzzy
+#~ msgid "0 m"
+#~ msgstr "m"
+
+#, fuzzy
+#~ msgid "0 m (Water)"
+#~ msgstr "m ماء"
+
+#, fuzzy
+#~ msgid "-50 m"
+#~ msgstr "m"
+
+#, fuzzy
+#~ msgid "-200 m"
+#~ msgstr "m"
+
+#, fuzzy
+#~ msgid "-2000 m"
+#~ msgstr "m"
+
+#, fuzzy
+#~ msgid "-4000 m"
+#~ msgstr "m"
+
+#, fuzzy
+#~ msgid "-6500 m"
+#~ msgstr "m"
+
+#, fuzzy
+#~ msgid "-11000 m"
+#~ msgstr "m"
+
+#~ msgid "Temperature (December)"
+#~ msgstr "درجة الحرارة (كانون الأول - ديسمبر)"
+
+#, fuzzy
+#~ msgid "OSM Bitmap Tiles"
+#~ msgstr "الخريطة عرض"
+
+#, fuzzy
+#~ msgid "Explore the Earth"
+#~ msgstr "الـ الأرض"
+
+#~ msgid "Transportation"
+#~ msgstr "المواصلات"
+
+#, fuzzy
+#~ msgid "Areas"
+#~ msgstr "الأطلس"
+
+#, fuzzy
+#~ msgid "Education"
+#~ msgstr "الموقع"
+
+#, fuzzy
+#~ msgid "Entertainment"
+#~ msgstr "عالمي"
+
+#~ msgid "Primary road"
+#~ msgstr "الطريق الرئيسي"
+
+#~ msgid "Secondary road"
+#~ msgstr "الطريق الثانوي"
+
+#, fuzzy
+#~ msgid "Track"
+#~ msgstr "المقطوعة"
+
+#~ msgid "Footway"
+#~ msgstr "الأرصفة"
+
+#~ msgid "Railway"
+#~ msgstr "سكة حديدية"
+
+#, fuzzy
+#~ msgid "Lightrail, tram"
+#~ msgstr "التضاريس"
+
+#~ msgid "Bridge"
+#~ msgstr "برج"
+
+#~ msgid "Tunnel"
+#~ msgstr "نفق"
+
+#~ msgid "Forest"
+#~ msgstr "غابة"
+
+#~ msgid "Wood"
+#~ msgstr "خشب"
+
+#~ msgid "Golf course"
+#~ msgstr "دورة جولف"
+
+#~ msgid "Park"
+#~ msgstr "منتزه"
+
+#~ msgid "Residential Area"
+#~ msgstr "منطقة سكنية"
+
+#~ msgid "Tourist attraction"
+#~ msgstr "جذب السياح"
+
+#~ msgid "Industrial Area"
+#~ msgstr "منطقة صناعية"
+
+#~ msgid "Commercial Area"
+#~ msgstr "منطقة تجارية"
+
+#~ msgid "Farm"
+#~ msgstr "مزرعة"
+
+#~ msgid "Sports centre"
+#~ msgstr "مركز رياضي"
+
+#~ msgid "Military area"
+#~ msgstr "مناطق عسكرية"
+
+#~ msgid "School, university"
+#~ msgstr "مدرسة, جامعة"
+
+#, fuzzy
+#~ msgid "University"
+#~ msgstr "مدرسة, جامعة"
+
+#, fuzzy
+#~ msgid "Place of worship"
+#~ msgstr "أماكن من الإهتمام"
+
+#, fuzzy
+#~ msgid "Hospital"
+#~ msgstr "REMOVE"
+
+#, fuzzy
+#~ msgid "Fire station"
+#~ msgstr "التقدير"
+
+#, fuzzy
+#~ msgid "Bar"
+#~ msgstr "إ&بحث"
+
+#, fuzzy
+#~ msgid "Books"
+#~ msgstr "إ&بحث"
+
+#, fuzzy
+#~ msgid "Car"
+#~ msgstr "إ&بحث"
+
+#, fuzzy
+#~ msgid "Precipitation"
+#~ msgstr "الوصف"
+
+#, fuzzy
+#~ msgid "0 mm"
+#~ msgstr "m"
+
+#, fuzzy
+#~ msgid "10 mm"
+#~ msgstr "m"
+
+#, fuzzy
+#~ msgid "40 mm"
+#~ msgstr "m"
+
+#, fuzzy
+#~ msgid "63 mm"
+#~ msgstr "m"
+
+#, fuzzy
+#~ msgid "127 mm"
+#~ msgstr "m"
+
+#, fuzzy
+#~ msgid "256 mm"
+#~ msgstr "m"
+
+#, fuzzy
+#~ msgid "512 mm"
+#~ msgstr "m"
+
+#, fuzzy
+#~ msgid "Satellite View"
+#~ msgstr "قمر اصتناعي عرض"
+
+#, fuzzy
+#~ msgid ""
+#~ "<p>Earth as seen from Space.</p><p>The map is based on NASA's beautiful "
+#~ "\"Blue Marble Next Generation\" pictures. Credits: NASA's Earth "
+#~ "Observatory</p>"
+#~ msgstr ""
+#~ "الأرض روجع من فضائي الـ خريطة هو يعمل الوكالة الوطنية للفضاء والطيران s "
+#~ "أزرق رخامي التالي الجيل صور المساهمون الوكالة الوطنية للفضاء والطيران s "
+#~ "الأرض المرصد "
+
+#~ msgid "Ice"
+#~ msgstr "الجليد"
+
+#, fuzzy
+#~ msgid "Vegetation"
+#~ msgstr "الارتفاع"
+
+#~ msgid "Desert"
+#~ msgstr "الصحراء"
+
+#, fuzzy
+#~ msgid "Political Map"
+#~ msgstr "عادي الخريطة"
+
+#, fuzzy
+#~ msgid "Rivers"
+#~ msgstr "النهر"
+
+#, fuzzy
+#~ msgid "Reference lines"
+#~ msgstr "التفضيلات"
+
+#, fuzzy
+#~ msgid "Town"
+#~ msgstr "أسفل"
+
+#, fuzzy
+#~ msgid "Clouds"
+#~ msgstr "أ&غلق"
+
+#, fuzzy
+#~ msgid "Marble: Legend"
+#~ msgstr "مفتاح الرسم البياني"
+
+#, fuzzy
+#~ msgid "Population:"
+#~ msgstr "السكان:"
+
+#, fuzzy
+#~ msgid "Capitals:"
+#~ msgstr "أحرف كبيرة:"
+
+#, fuzzy
+#~ msgid "Red:&nbsp;Nation"
+#~ msgstr "أحمر&nbsp; الأمة"
+
+#, fuzzy
+#~ msgid "Orange:&nbsp;State"
+#~ msgstr "برتقالي&nbsp; الحالة"
+
+#, fuzzy
+#~ msgid "Yellow:&nbsp;County"
+#~ msgstr "أصفر&nbsp; المقاطعة"
+
+#, fuzzy
+#~ msgid "White:&nbsp;None"
+#~ msgstr "أبيض&nbsp; لا شيء"
+
+#, fuzzy
+#~ msgid "Marble - Game"
+#~ msgstr "رخامي"
+
+#, fuzzy
+#~ msgid "The Earth"
+#~ msgstr "الـ الأرض"
+
+#, fuzzy
+#~ msgid "The Marble widget displays a virtual globe."
+#~ msgstr "الـ رخامي a وهمي."
+
+#, fuzzy
+#~ msgid "Navigation Control"
+#~ msgstr "الملاحة عنصر تحكم"
+
+#, fuzzy
+#~ msgid "Use this control to navigate."
+#~ msgstr "إستعمل control إلى."
+
+#, fuzzy
+#~ msgid "Show places"
+#~ msgstr "اعرض"
+
+#, fuzzy
+#~ msgid "Show relief"
+#~ msgstr "اعرض"
+
+#, fuzzy
+#~ msgid "Show scale bar"
+#~ msgstr "اعرض مقياس شريط"
+
+#, fuzzy
+#~ msgid "Show borders"
+#~ msgstr "اعرض الحواف"
+
+#, fuzzy
+#~ msgid "Show ice / snow"
+#~ msgstr "اعرض ثلجي"
+
+#, fuzzy
+#~ msgid "Show compass"
+#~ msgstr "اعرض"
+
+#, fuzzy
+#~ msgid "Show grid"
+#~ msgstr "عرض الشبكة"
+
+#, fuzzy
+#~ msgid "Show rivers / lakes"
+#~ msgstr "اعرض"
+
+#, fuzzy
+#~ msgid "Show elevation model"
+#~ msgstr "اعرض شكل ، نموذج"
+
+#, fuzzy
+#~ msgid "Coordinates: "
+#~ msgstr "الأسس "
+
+#, fuzzy
+#~ msgid "Name:"
+#~ msgstr "الاسم"
+
+#, fuzzy
+#~ msgid "Import Bookmarks..."
+#~ msgstr "صدِّر الخريطة."
+
+#, fuzzy
+#~ msgid "Export Bookmarks..."
+#~ msgstr "صدِّر الخريطة."
+
+#, fuzzy
+#~ msgid "Folders"
+#~ msgstr "&ملف"
+
+#, fuzzy
+#~ msgid "New"
+#~ msgstr "الآن"
+
+#, fuzzy
+#~ msgid "Rename"
+#~ msgstr "&ملف"
+
+#, fuzzy
+#~ msgid "Delete"
+#~ msgstr "الصحراء"
+
+#, fuzzy
+#~ msgid "Bookmarks"
+#~ msgstr "إ&بحث"
+
+#, fuzzy
+#~ msgid "Edit"
+#~ msgstr "&حرّر"
+
+#, fuzzy
+#~ msgid "Cloud Routes"
+#~ msgstr "أ&غلق"
+
+#, fuzzy
+#~ msgid "No route available."
+#~ msgstr "الملاحة"
+
+#, fuzzy
+#~ msgid "Current Location"
+#~ msgstr "الحالي الموقع"
+
+#, fuzzy
+#~ msgid "Position Tracking"
+#~ msgstr "الموضع: %1"
+
+#, fuzzy
+#~ msgid "Show Track"
+#~ msgstr "المقطوعة"
+
+#, fuzzy
+#~ msgid "Clear Track"
+#~ msgstr "المقطوعة"
+
+#, fuzzy
+#~ msgid "..."
+#~ msgstr "..."
+
+#, fuzzy
+#~ msgid "Auto Zoom"
+#~ msgstr "تكبير"
+
+#, fuzzy
+#~ msgid "Data Migration"
+#~ msgstr "الملاحة"
+
+#, fuzzy
+#~ msgid "&Description"
+#~ msgstr "الوصف"
+
+#, fuzzy
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<table border=\"0\" style=\"-qt-table-type: root; margin-top:4px; margin-"
+#~ "bottom:4px; margin-left:4px; margin-right:4px;\">\n"
+#~ "<tr>\n"
+#~ "<td style=\"border: none;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-family:'Ubuntu';\"><br /></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-family:'Ubuntu';\"><br /></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-family:'Ubuntu';\"><br /></p></td></tr></table></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\"> أبيض فراغ\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\"> رخامي سطح المكتب الكرة الأرضية</span></p></body></html>"
+
+#, fuzzy
+#~ msgid "&Folder"
+#~ msgstr "&ملف"
+
+#, fuzzy
+#~ msgid "&Add Folder"
+#~ msgstr "&ملف"
+
+#, fuzzy
+#~ msgid "Edit placemark"
+#~ msgstr "شريط الأدوات الرئيسي"
+
+#, fuzzy
+#~ msgid "Description"
+#~ msgstr "الوصف"
+
+#, fuzzy
+#~ msgid "Color:"
+#~ msgstr "أ&غلق"
+
+#, fuzzy
+#~ msgid "Scale:"
+#~ msgstr "المقياس عمود"
+
+#, fuzzy
+#~ msgid "Show placemark"
+#~ msgstr "اعرض"
+
+#, fuzzy
+#~ msgid "Elevation:"
+#~ msgstr "الارتفاع :"
+
+#, fuzzy
+#~ msgid " m"
+#~ msgstr "m"
+
+#, fuzzy
+#~ msgid "Editor Details"
+#~ msgstr "metehyi@free.fr"
+
+#, fuzzy
+#~ msgid "Editor Preview"
+#~ msgstr "metehyi@free.fr"
+
+#, fuzzy
+#~ msgid "File View"
+#~ msgstr "ملف عرض"
+
+#, fuzzy
+#~ msgid "&Save"
+#~ msgstr "ا&حفظ"
+
+#, fuzzy
+#~ msgid "&Close"
+#~ msgstr "أ&غلق"
+
+#, fuzzy
+#~ msgid "9"
+#~ msgstr "F9"
+
+#, fuzzy
+#~ msgid "Color"
+#~ msgstr "أ&غلق"
+
+#, fuzzy
+#~ msgid "Go To..."
+#~ msgstr "إذهب إلى"
+
+#, fuzzy
+#~ msgid "Browse"
+#~ msgstr "إ&بحث"
+
+#, fuzzy
+#~ msgid "Search"
+#~ msgstr "إ&بحث"
+
+#, fuzzy
+#~ msgid "Select a geographic region"
+#~ msgstr "جغرافي القطب"
+
+#, fuzzy
+#~ msgid "Northern Latitude"
+#~ msgstr "خط العرض"
+
+#, fuzzy
+#~ msgid "&N"
+#~ msgstr "N"
+
+#, fuzzy
+#~ msgid "Western Longitude"
+#~ msgstr "خط الطول"
+
+#, fuzzy
+#~ msgid "&W"
+#~ msgstr "W"
+
+#, fuzzy
+#~ msgid "Eastern Longitude"
+#~ msgstr "خط الطول"
+
+#, fuzzy
+#~ msgid "&E"
+#~ msgstr "E"
+
+#, fuzzy
+#~ msgid "Southern Latitude"
+#~ msgstr "خط العرض"
+
+#, fuzzy
+#~ msgid "&S"
+#~ msgstr "S"
+
+#, fuzzy
+#~ msgid "Legend"
+#~ msgstr "مفتاح الرسم البياني"
+
+#, fuzzy
+#~ msgid "Map View"
+#~ msgstr "الخريطة عرض"
+
+#, fuzzy
+#~ msgid "&Projection"
+#~ msgstr "التقدير"
+
+#, fuzzy
+#~ msgid "Globe"
+#~ msgstr "الكرة الأرضية"
+
+#, fuzzy
+#~ msgid "Flat Map"
+#~ msgstr "مسطح الخريطة"
+
+#, fuzzy
+#~ msgid "Stereographic"
+#~ msgstr "جغرافي القطب"
+
+#, fuzzy
+#~ msgid "&Theme"
+#~ msgstr "ال&سمة"
+
+#, fuzzy
+#~ msgid "Here you can choose the preferred map view from different topics."
+#~ msgstr "هنا اختيار مفضًل خريطة اعرض من مختلف."
+
+#, fuzzy
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">Welcome to the Map Creation Wizard!</span></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">We will guide you "
+#~ "through the process of creating a map theme for Marble. In the end you "
+#~ "will have your own map that you can view in Marble.</p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Please choose the "
+#~ "source that you want to use for the data of your map theme:</p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:12px; margin-bottom:12px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\"> أبيض فراغ\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"> c الـ رخامي مشروع</p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-style:italic;\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">http://edu.kde.org/"
+#~ "marble</p></body></html>"
+
+#, fuzzy
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">WMS Server</span></p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Please choose a <a href="
+#~ "\"http://en.wikipedia.org/wiki/Web_Map_Service\"><span style=\" text-"
+#~ "decoration: underline; color:#0057ae;\">WMS</span></a> server or enter a "
+#~ "custom server URL.</p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\"> أبيض فراغ\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\"> رخامي سطح المكتب الكرة الأرضية</span></p></body></html>"
+
+#, fuzzy
+#~ msgid "Available Maps:"
+#~ msgstr "جاري الإنشاء الخريطة"
+
+#, fuzzy
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">World Map Bitmap Image</span></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-weight:600;\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Please choose the "
+#~ "location of a world map that is stored in a single image file (JPG, PNG, "
+#~ "etc.). It needs to be provided in <a href=\"http://en.wikipedia.org/wiki/"
+#~ "Equirectangular_projection\"><span style=\" text-decoration: underline; "
+#~ "color:#0057ae;\">Equirectangular projection</span></a>, so the shape "
+#~ "should look like this (size ratio: 2:1):</p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><img src=\":/data/svg/"
+#~ "worldmap.svg\" width=\"150\" /></p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\"> أبيض فراغ\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"> لا الوصف متوفّر</p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"> إذا إلى إنترنت انقر "
+#~ "لسان عند الأعلى من صفحة إلى get المزيد معلومات</p></body></html>"
+
+#, fuzzy
+#~ msgid "Source Image:"
+#~ msgstr "مفتاح الرسم البياني"
+
+#, fuzzy
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Bitstream Vera Sans'; font-"
+#~ "size:9pt; font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif'; font-weight:600;\">URL Scheme for Indexed Tiles</"
+#~ "span></p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif';\">Please enter the URL used for downloading "
+#~ "individual tiles. Use the placeholders </span><span style=\" font-"
+#~ "family:'Sans Serif'; font-style:italic;\">{x}</span><span style=\" font-"
+#~ "family:'Sans Serif';\">, </span><span style=\" font-family:'Sans Serif'; "
+#~ "font-style:italic;\">{y}</span><span style=\" font-family:'Sans Serif';"
+#~ "\">, and </span><span style=\" font-family:'Sans Serif'; font-style:"
+#~ "italic;\">{zoomLevel}</span><span style=\" font-family:'Sans Serif';\"> "
+#~ "to reference a tile from the index.</span></p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\"> أبيض فراغ\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"> لا الوصف متوفّر</p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"> إذا إلى إنترنت انقر "
+#~ "لسان عند الأعلى من صفحة إلى get المزيد معلومات</p></body></html>"
+
+#, fuzzy
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Bitstream Vera Sans'; font-"
+#~ "size:9pt; font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif'; font-weight:600;\">General Information</span></p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif';\">Please specify a title, a name and an icon for "
+#~ "your new map. Add a description to let users know what your map is about. "
+#~ "</span></p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\"> أبيض فراغ\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"> لا الوصف متوفّر</p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"> إذا إلى إنترنت انقر "
+#~ "لسان عند الأعلى من صفحة إلى get المزيد معلومات</p></body></html>"
+
+#, fuzzy
+#~ msgid "Map Title:"
+#~ msgstr "الخريطة عرض"
+
+#, fuzzy
+#~ msgid "Map Name:"
+#~ msgstr "الاسم"
+
+#, fuzzy
+#~ msgid "Description:"
+#~ msgstr "الوصف"
+
+#, fuzzy
+#~ msgid "Preview Image:"
+#~ msgstr "جاري الإنشاء الخريطة"
+
+#, fuzzy
+#~ msgid "preview image"
+#~ msgstr "جاري الإنشاء الخريطة"
+
+#, fuzzy
+#~ msgid "Legend Image:"
+#~ msgstr "مفتاح الرسم البياني"
+
+#, fuzzy
+#~ msgid "Places of Interest"
+#~ msgstr "أماكن من الإهتمام"
+
+#, fuzzy
+#~ msgid "Populated Places"
+#~ msgstr "مأهول بالسكان أماكن"
+
+#, fuzzy
+#~ msgid "Terrain"
+#~ msgstr "التضاريس"
+
+#, fuzzy
+#~ msgid "Coordinate Grid"
+#~ msgstr "شبكة الاحداثيات"
+
+#, fuzzy
+#~ msgid "Border Lines"
+#~ msgstr "الحدود"
+
+#, fuzzy
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">Summary</span></p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Congratulations! You "
+#~ "have entered all the data that is necessary to create your map theme. "
+#~ "Check the summary below carefully and press the \"Finish\" button to "
+#~ "create the theme. </p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Please consider "
+#~ "contributing the map theme back to the Marble community if the license "
+#~ "and the terms of use allow for it.</p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:12px; margin-bottom:12px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\"> أبيض فراغ\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"> c الـ رخامي مشروع</p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-style:italic;\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">http://edu.kde.org/"
+#~ "marble</p></body></html>"
+
+#, fuzzy
+#~ msgid "Map name goes here."
+#~ msgstr "اعرض"
+
+#, fuzzy
+#~ msgid "Map Theme:"
+#~ msgstr "ال&سمة"
+
+#, fuzzy
+#~ msgid "Map theme goes here."
+#~ msgstr "اعرض"
+
+#, fuzzy
+#~ msgid "Thumbnail image goes here."
+#~ msgstr "اعرض"
+
+#, fuzzy
+#~ msgid "Preview Map"
+#~ msgstr "جاري الإنشاء الخريطة"
+
+#, fuzzy
+#~ msgid "About Marble"
+#~ msgstr "حول رخامي"
+
+#, fuzzy
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">Marble Virtual Globe</span></p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\"> أبيض فراغ\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\"> رخامي سطح المكتب الكرة الأرضية</span></p></body></html>"
+
+#, fuzzy
+#~ msgid "Version Unknown"
+#~ msgstr "الإصدار مجهول"
+
+#, fuzzy
+#~ msgid "&About"
+#~ msgstr "&حوْل"
+
+#, fuzzy
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:10pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-size:9pt;\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "size:9pt;\">(c) 2007, The Marble Project</span></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-size:9pt; font-style:italic;\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "size:9pt;\">http://edu.kde.org/marble</span></p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\"> أبيض فراغ\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"> c الـ رخامي مشروع</p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-style:italic;\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">http://edu.kde.org/"
+#~ "marble</p></body></html>"
+
+#, fuzzy
+#~ msgid "A&uthors"
+#~ msgstr "المؤلفو&ن"
+
+#, fuzzy
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:10pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-size:9pt;\"></p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\"> أبيض فراغ\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\"> رخامي سطح المكتب الكرة الأرضية</span></p></body></html>"
+
+#, fuzzy
+#~ msgid "&Data"
+#~ msgstr "&بيانات"
+
+#, fuzzy
+#~ msgid "&License Agreement"
+#~ msgstr "أ&تفاق الترخيص"
+
+#, fuzzy
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:10pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-family:'MS Shell Dlg 2'; font-size:8pt;\"></p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\"> أبيض فراغ\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\"> رخامي سطح المكتب الكرة الأرضية</span></p></body></html>"
+
+#, fuzzy
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">There are two caches "
+#~ "being used for Marble: The physical memory which is needed to keep map "
+#~ "data in the computer's memory. Increasing the value will make the "
+#~ "application more responsive. The hard disc memory cache is used by "
+#~ "download contents from the Internet (e.g. Wikipedia data or map data). "
+#~ "Decrease this value if you want to save space on the hard disc and if "
+#~ "high usage of the Internet is not an issue. </p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\"> أبيض فراغ\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"> لا الوصف متوفّر</p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"> إذا إلى إنترنت انقر "
+#~ "لسان عند الأعلى من صفحة إلى get المزيد معلومات</p></body></html>"
+
+#, fuzzy
+#~ msgid "C&ache"
+#~ msgstr "إ&بحث"
+
+#, fuzzy
+#~ msgid "C&lear"
+#~ msgstr "إ&بحث"
+
+#, fuzzy
+#~ msgid "Cl&ear"
+#~ msgstr "إ&بحث"
+
+#, fuzzy
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Proxy settings for your "
+#~ "local intranet. Please leave empty if there is no proxy.</p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\"> أبيض فراغ\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "style:italic;\"> الدّور</span></p></body></html>"
+
+#, fuzzy
+#~ msgid "Requires authentication"
+#~ msgstr "اخرج تطبيق"
+
+#, fuzzy
+#~ msgid "U&sername:"
+#~ msgstr "&ملف"
+
+#, fuzzy
+#~ msgid "Username:"
+#~ msgstr "&ملف"
+
+#, fuzzy
+#~ msgid "Marble Cache Settings"
+#~ msgstr "إ&عدادات"
+
+#, fuzzy
+#~ msgid "&Drag location:"
+#~ msgstr "التقدير"
+
+#, fuzzy
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">While dragging the "
+#~ "mouse there are two standard behaviours when dealing with a virtual globe:"
+#~ "</p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">The location below "
+#~ "mouse pointer will follow the cursor exactly: As a result e.g. the north "
+#~ "pole will not stay at the top which can lead to confusion. By default "
+#~ "Marble makes sure that north is always up which results in a dragging "
+#~ "behaviour where the location below the mouse pointer slightly \"detaches"
+#~ "\" from the cursor. </p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\"> أبيض فراغ\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"> لا الوصف متوفّر</p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"> إذا إلى إنترنت انقر "
+#~ "لسان عند الأعلى من صفحة إلى get المزيد معلومات</p></body></html>"
+
+#~ msgid "Follow Mouse Pointer"
+#~ msgstr "اتبع مؤشر الفأرة"
+
+#, fuzzy
+#~ msgid "&Inertial Globe Rotation"
+#~ msgstr "ضبط المنزل الموقع"
+
+#, fuzzy
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">When searching for a "
+#~ "location Marble can either move instantly to the new location or it can "
+#~ "show a travel animation from the previous place to the new place.</p></"
+#~ "body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\"> أبيض فراغ\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "style:italic;\"> الدّور</span></p></body></html>"
+
+#, fuzzy
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">By default Marble will "
+#~ "display the home location immediately after the application has started. "
+#~ "As an alternative it can also show the last position that was active when "
+#~ "the user left the application. </p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\"> أبيض فراغ\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "style:italic;\"> الدّور</span></p></body></html>"
+
+#, fuzzy
+#~ msgid "Show Home Location"
+#~ msgstr "ضبط المنزل الموقع"
+
+#~ msgid "Return to Last Location Visited"
+#~ msgstr "عد إلى آخر مكان زرته"
+
+#, fuzzy
+#~ msgid "Up"
+#~ msgstr "أعلى"
+
+#, fuzzy
+#~ msgid "Tilts the globe's axis towards the user."
+#~ msgstr "الميول s محور مستخدم."
+
+#, fuzzy
+#~ msgid "Left"
+#~ msgstr "يسار"
+
+#, fuzzy
+#~ msgid "Rotates the globe counterclockwise around its axis."
+#~ msgstr "يدور محور."
+
+#, fuzzy
+#~ msgid "Reset View"
+#~ msgstr "إعادة تعيين عرض"
+
+#, fuzzy
+#~ msgid "Click this button to restore the original zoom level and view angle."
+#~ msgstr "نقر زر إلى استعاد أصلي كبِّر :: تكبير مستوى و اعرض زاوية."
+
+#, fuzzy
+#~ msgid "Home"
+#~ msgstr "المنزل"
+
+#, fuzzy
+#~ msgid "Right"
+#~ msgstr "يمين"
+
+#, fuzzy
+#~ msgid "Rotates the globe clockwise around its axis."
+#~ msgstr "يدور محور."
+
+#, fuzzy
+#~ msgid "Down"
+#~ msgstr "أسفل"
+
+#, fuzzy
+#~ msgid "Tilts the globe's axis away from the user."
+#~ msgstr "الميول s محور من مستخدم."
+
+#, fuzzy
+#~ msgid "Zoom In"
+#~ msgstr "تكبير"
+
+#, fuzzy
+#~ msgid "Zoom in by pressing this button to see more detail."
+#~ msgstr "تكبير بوصة أداء زر إلى المزيد تفاصيل."
+
+#, fuzzy
+#~ msgid "+"
+#~ msgstr "+"
+
+#, fuzzy
+#~ msgid "Zoom Slider"
+#~ msgstr "تكبير مزلق"
+
+#, fuzzy
+#~ msgid "Use this slider to adjust the zoom level of the map."
+#~ msgstr "إستعمل مزلق إلى تسوية كبِّر :: تكبير مستوى من خريطة."
+
+#, fuzzy
+#~ msgid "Zoom Out"
+#~ msgstr "تصغير"
+
+#, fuzzy
+#~ msgid "Zoom out by pressing this button to see less detail."
+#~ msgstr "تكبير خارج أداء زر إلى تفاصيل."
+
+#, fuzzy
+#~ msgid "-"
+#~ msgstr "-"
+
+#, fuzzy
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'DejaVu Sans'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif';\">This is Marble's machine room for advanced users. "
+#~ "Here you can select and deselect the functionality that is provided "
+#~ "through plugins. </span></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif';\">Deselecting a plugin will remove the functionality "
+#~ "from the map, menus and toolbars. </span></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif';\">Also some of the plugins might allow for tweaking "
+#~ "their configuration a bit. </span></p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\"> أبيض فراغ\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"> لا الوصف متوفّر</p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"> إذا إلى إنترنت انقر "
+#~ "لسان عند الأعلى من صفحة إلى get المزيد معلومات</p></body></html>"
+
+#, fuzzy
+#~ msgid "P&lugins"
+#~ msgstr "ابحث سطر"
+
+#, fuzzy
+#~ msgid "Time Zone"
+#~ msgstr "الملاحة عنصر تحكم"
+
+#, fuzzy
+#~ msgid "European Central Time"
+#~ msgstr "خط الطول"
+
+#, fuzzy
+#~ msgid "Eastern European Time"
+#~ msgstr "خط الطول"
+
+#, fuzzy
+#~ msgid "Eastern African Time"
+#~ msgstr "خط الطول"
+
+#, fuzzy
+#~ msgid "Solomon Standard Time"
+#~ msgstr "اعرض إطار معدل"
+
+#, fuzzy
+#~ msgid "Phoenix Standard Time"
+#~ msgstr "اعرض إطار معدل"
+
+#, fuzzy
+#~ msgid "Eastern Standard Time"
+#~ msgstr "خط الطول"
+
+#, fuzzy
+#~ msgid "Indiana Eastern Standard Time"
+#~ msgstr "خط الطول"
+
+#, fuzzy
+#~ msgid "Brazil Eastern Time"
+#~ msgstr "خط الطول"
+
+#, fuzzy
+#~ msgid "&Distance:"
+#~ msgstr "المجموع المسافة m"
+
+#, fuzzy
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">The unit that gets used "
+#~ "to measure altitude, lengths and distances (e.g. km, mi, ft).</p></body></"
+#~ "html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\"> أبيض فراغ\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "style:italic;\"> الدّور</span></p></body></html>"
+
+#~ msgid "Kilometer, Meter"
+#~ msgstr "كيلومتر, متر"
+
+#, fuzzy
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Specifies the notation "
+#~ "of angles in coordinates: By default the Degree-Minute-Second notation (e."
+#~ "g. 54°30'00\" ) gets used. As an alternative you can choose decimal "
+#~ "degrees (e.g. 54.5°).</p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\"> أبيض فراغ\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "style:italic;\"> الدّور</span></p></body></html>"
+
+#, fuzzy
+#~ msgid "Degree (DMS)"
+#~ msgstr "الدرجة (بالنسبة)"
+
+#~ msgid "Degree (Decimal)"
+#~ msgstr "الدرجة (بالنسبة)"
+
+#, fuzzy
+#~ msgid "Map &Quality"
+#~ msgstr "جودة منخفضة"
+
+#, fuzzy
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Specifies the map "
+#~ "quality that gets displayed while there is no user input. Usually this "
+#~ "allows for high map quality as speed is no concern.</p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\"> أبيض فراغ\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "style:italic;\"> الدّور</span></p></body></html>"
+
+#, fuzzy
+#~ msgid "Outline Quality"
+#~ msgstr "اطبع صفحة"
+
+#~ msgid "Low Quality"
+#~ msgstr "جودة منخفضة"
+
+#~ msgid "Normal"
+#~ msgstr "عادي"
+
+#~ msgid "High Quality"
+#~ msgstr "جودة عالية"
+
+#, fuzzy
+#~ msgid "Print Quality"
+#~ msgstr "اطبع صفحة"
+
+#, fuzzy
+#~ msgid "During &animations:"
+#~ msgstr "عالمي"
+
+#, fuzzy
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Specifies the map "
+#~ "quality that gets displayed during map animations (e.g. while dragging "
+#~ "the globe). </p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Especially on slow "
+#~ "machines it is advisable to set this option to \"low quality\" as this "
+#~ "will give better speed.</p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\"> أبيض فراغ\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"> لا الوصف متوفّر</p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"> إذا إلى إنترنت انقر "
+#~ "لسان عند الأعلى من صفحة إلى get المزيد معلومات</p></body></html>"
+
+#~ msgid "OpenGL"
+#~ msgstr "أوبن جي إل"
+
+#, fuzzy
+#~ msgid "&Place names:"
+#~ msgstr "إل&غاء"
+
+#, fuzzy
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Places often have "
+#~ "different names in different languages. The label on the map can show the "
+#~ "name in the user's language. Alternatively it can display the name in the "
+#~ "official language and glyphs of that place. </p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\"> أبيض فراغ\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "style:italic;\"> الدّور</span></p></body></html>"
+
+#~ msgid "Custom & Native Language"
+#~ msgstr "اللغة الاختيارية واللعة الأم"
+
+#~ msgid "Custom Language"
+#~ msgstr "لغة اختيارية"
+
+#~ msgid "Native Language"
+#~ msgstr "اللغة الأم"
+
+#, fuzzy
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">The default font that "
+#~ "gets used on the map.</p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\"> أبيض فراغ\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "style:italic;\"> الدّور</span></p></body></html>"
+
+#, fuzzy
+#~ msgid "Destination video"
+#~ msgstr "الوصف حقل"
+
+#, fuzzy
+#~ msgid "Open..."
+#~ msgstr "افتح الخريطة."
+
+#, fuzzy
+#~ msgid "Cancel"
+#~ msgstr "إل&غاء"
+
+#, fuzzy
+#~ msgid "Start"
+#~ msgstr "الحالة"
+
+#, fuzzy
+#~ msgid "&Folder Name"
+#~ msgstr "&ملف"
+
+#, fuzzy
+#~ msgid "Current Relations"
+#~ msgstr "الحالي الموقع"
+
+#, fuzzy
+#~ msgid "Name"
+#~ msgstr "الاسم"
+
+#, fuzzy
+#~ msgid "Role"
+#~ msgstr "الدّور"
+
+#, fuzzy
+#~ msgid "Add Relation"
+#~ msgstr "&ملف"
+
+#, fuzzy
+#~ msgid "Current Tags"
+#~ msgstr "الحالي الموقع"
+
+#, fuzzy
+#~ msgid "Browse..."
+#~ msgstr "إ&بحث"
+
+#, fuzzy
+#~ msgid "Position:"
+#~ msgstr "الموضع: %1"
+
+#, fuzzy
+#~ msgid "Marble"
+#~ msgstr "رخامي"
+
+#, fuzzy
+#~ msgid "Map"
+#~ msgstr "افتح الخريطة."
+
+#, fuzzy
+#~ msgid "Outer Space"
+#~ msgstr "أخرى مكان"
+
+#, fuzzy
+#~ msgid "Route"
+#~ msgstr "الدّور"
+
+#, fuzzy
+#~ msgid "Footer"
+#~ msgstr "الأرصفة"
+
+#, fuzzy
+#~ msgid "Configure Routing Profile"
+#~ msgstr "الملاحة عنصر تحكم"
+
+#, fuzzy
+#~ msgid "Service Settings"
+#~ msgstr "إ&عدادات"
+
+#, fuzzy
+#~ msgid "No configuration available"
+#~ msgstr "الملاحة"
+
+#, fuzzy
+#~ msgid "Configure"
+#~ msgstr "خط الطول"
+
+#, fuzzy
+#~ msgid "&Configure"
+#~ msgstr "خط الطول"
+
+#, fuzzy
+#~ msgid "&Remove"
+#~ msgstr "ال&سمة"
+
+#, fuzzy
+#~ msgid "Car (fastest)"
+#~ msgstr "m ماء"
+
+#~ msgid "Car (shortest)"
+#~ msgstr "سيارة (الأقصر)"
+
+#~ msgid "Bicycle"
+#~ msgstr "دراجة هوائية"
+
+#~ msgid "Pedestrian"
+#~ msgstr "مشاة"
+
+#, fuzzy
+#~ msgid "Show Details"
+#~ msgstr "اعرض الحواف"
+
+#, fuzzy
+#~ msgid "Sun Control"
+#~ msgstr "الملاحة عنصر تحكم"
+
+#~ msgid "Shadow"
+#~ msgstr "ضل"
+
+#~ msgid "Night Map"
+#~ msgstr "خريطة المساء"
+
+#, fuzzy
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">Attention: Panning the map is disabled now! </span></p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Uncheck the \"Lock map "
+#~ "view to Subsolar Point\" option to allow for viewing a different place on "
+#~ "the globe again.</p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\"> أبيض فراغ\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\"> رخامي سطح المكتب الكرة الأرضية</span></p></body></html>"
+
+#, fuzzy
+#~ msgid "Creating Map"
+#~ msgstr "جاري الإنشاء الخريطة"
+
+#, fuzzy
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /></head><body style="
+#~ "\" white-space: pre-wrap; font-family:Sans Serif; font-size:9pt; font-"
+#~ "weight:400; font-style:normal; text-decoration:none;\"><p style=\" margin-"
+#~ "top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-"
+#~ "indent:0; text-indent:0px;\"><span style=\" font-weight:600;\">Satellite "
+#~ "View</span></p><p style=\" margin-top:0px; margin-bottom:0px; margin-"
+#~ "left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Earth "
+#~ "as seen from Space. The map is based on NASA's beautiful \"Blue Marble "
+#~ "Next Generation\" pictures. Credits: NASA's Earth Observatory</p></body></"
+#~ "html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /></head><body style="
+#~ "\" white-space: pre-wrap; font-family:Sans Serif; font-size:9pt; font-"
+#~ "weight:400; font-style:normal; text-decoration:none;\"><p style=\" margin-"
+#~ "top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-"
+#~ "indent:0; text-indent:0px;\"><span style=\" font-weight:600;\"> قمر "
+#~ "اصتناعي عرض</span></p><p style=\" margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"> الأرض روجع من فضائي الـ خريطة هو يعمل الوكالة الوطنية للفضاء والطيران "
+#~ "s أزرق رخامي التالي الجيل صور المساهمون الوكالة الوطنية للفضاء والطيران s "
+#~ "الأرض المرصد</p></body></html>"
+
+#, fuzzy
+#~ msgid ""
+#~ "Marble needs to create this map. This only needs to be done once and may "
+#~ "take a few seconds."
+#~ msgstr "رخامي إلى إ_نشئ خريطة هذا إلى done و أيار a ثوان."
+
+#, fuzzy
+#~ msgid "&Cancel"
+#~ msgstr "إل&غاء"
+
+#, fuzzy
+#~ msgid "Zoom"
+#~ msgstr "تكبير"
+
+#~ msgid "to"
+#~ msgstr "إلى"
+
+#, fuzzy
+#~ msgid "Time Control"
+#~ msgstr "الملاحة عنصر تحكم"
+
+#, fuzzy
+#~ msgid "Time"
+#~ msgstr "ال&سمة"
+
+#, fuzzy
+#~ msgid "New Date Time      :"
+#~ msgstr "الحالي الموقع"
+
+#~ msgid "Now"
+#~ msgstr "الآن"
+
+#, fuzzy
+#~ msgid "Current Date Time :"
+#~ msgstr "الحالي الموقع"
+
+#, fuzzy
+#~ msgid "Close"
+#~ msgstr "أ&غلق"
+
+#, fuzzy
+#~ msgid "Save Tour"
+#~ msgstr "المقطوعة"
+
+#, fuzzy
+#~ msgid "Save Tour As"
+#~ msgstr "المقطوعة"
+
+#, fuzzy
+#~ msgid "Open Tour"
+#~ msgstr "المقطوعة"
+
+#, fuzzy
+#~ msgid "Worldclock Applet Configuration"
+#~ msgstr "الملاحة"
+
+#, fuzzy
+#~ msgid "Projection:"
+#~ msgstr "التقدير"
+
+#, fuzzy
+#~ msgid "Center map on longitude:"
+#~ msgstr "خط الطول"
+
+#, fuzzy
+#~ msgid "Center map on daylight"
+#~ msgstr "خط الطول"
+
+#, fuzzy
+#~ msgid "Show date"
+#~ msgstr "اعرض"
+
+#, fuzzy
+#~ msgid "Time Zones"
+#~ msgstr "الملاحة عنصر تحكم"
+
+#, fuzzy
+#~ msgid "Coordinates"
+#~ msgstr "الأسس:"
+
+#, fuzzy
+#~ msgid "N"
+#~ msgstr "N"
+
+#, fuzzy
+#~ msgid "W"
+#~ msgstr "W"
+
+#, fuzzy
+#~ msgid "E"
+#~ msgstr "E"
+
+#, fuzzy
+#~ msgid "S"
+#~ msgstr "S"
+
+#, fuzzy
+#~ msgid "Rotation"
+#~ msgstr "الارتفاع"
+
+#, fuzzy
+#~ msgid "Add polygon"
+#~ msgstr "&ملف"
+
+#, fuzzy
+#~ msgid "Area"
+#~ msgstr "الأطلس"
+
+#, fuzzy
+#~ msgid "Internet"
+#~ msgstr "عالمي"
+
+#, fuzzy
+#~ msgid "APRS Data Sources"
+#~ msgstr "البيانات ورقة"
+
+#, fuzzy
+#~ msgid "File"
+#~ msgstr "&ملف"
+
+#, fuzzy
+#~ msgid "Configure Compass Plugin"
+#~ msgstr "الملاحة عنصر تحكم"
+
+#, fuzzy
+#~ msgid "Theme"
+#~ msgstr "ال&سمة"
+
+#, fuzzy
+#~ msgid "Arrows"
+#~ msgstr "إ&بحث"
+
+#, fuzzy
+#~ msgid "Atom"
+#~ msgstr "إلى"
+
+#, fuzzy
+#~ msgid "Magnet"
+#~ msgstr "مغناطيسي القطب"
+
+#, fuzzy
+#~ msgid "Configure Crosshairs Plugin"
+#~ msgstr "الملاحة عنصر تحكم"
+
+#, fuzzy
+#~ msgid "German"
+#~ msgstr "التضاريس"
+
+#, fuzzy
+#~ msgid "Filter"
+#~ msgstr "&ملف"
+
+#, fuzzy
+#~ msgid "Eclipse Browser"
+#~ msgstr "الموقع المتصفح"
+
+#, fuzzy
+#~ msgid "&Settings..."
+#~ msgstr "إ&عدادات"
+
+#, fuzzy
+#~ msgid "&Go To Selected Eclipse"
+#~ msgstr "قمر اصتناعي عرض"
+
+#, fuzzy
+#~ msgid "Eclipses Configuration"
+#~ msgstr "الملاحة"
+
+#, fuzzy
+#~ msgid "&Reminder"
+#~ msgstr "ال&سمة"
+
+#, fuzzy
+#~ msgid "Configure Elevation Profile Plugin"
+#~ msgstr "الملاحة عنصر تحكم"
+
+#, fuzzy
+#~ msgid "Direction"
+#~ msgstr "التقدير"
+
+#, fuzzy
+#~ msgid "Altitude"
+#~ msgstr "الإرتفاع 1"
+
+#, fuzzy
+#~ msgid "Precision"
+#~ msgstr "الوصف"
+
+#, fuzzy
+#~ msgid "Coordinate Grid Plugin"
+#~ msgstr "شبكة الاحداثيات"
+
+#, fuzzy
+#~ msgid "C&olors"
+#~ msgstr "أ&غلق"
+
+#, fuzzy
+#~ msgid "Color of the coordinate grid."
+#~ msgstr "شبكة الاحداثيات"
+
+#, fuzzy
+#~ msgid "Color of the tropical circles."
+#~ msgstr "الدّور من موقع."
+
+#, fuzzy
+#~ msgid "Color of the equator."
+#~ msgstr "الدّور من موقع."
+
+#, fuzzy
+#~ msgid "&Numerical Labels"
+#~ msgstr "اعرض"
+
+#, fuzzy
+#~ msgid "Show numerical Labels."
+#~ msgstr "اعرض"
+
+#, fuzzy
+#~ msgid "Configure Scale Bar Plugin"
+#~ msgstr "الملاحة عنصر تحكم"
+
+#, fuzzy
+#~ msgid "Show Ratio Scale"
+#~ msgstr "اعرض الملاحة شريط"
+
+#, fuzzy
+#~ msgid "Marble - Measure Tool Configuration"
+#~ msgstr "رخامي سطح المكتب الكرة الأرضية"
+
+#, fuzzy
+#~ msgid "Distance "
+#~ msgstr "المجموع المسافة m"
+
+#, fuzzy
+#~ msgid "Circumference"
+#~ msgstr "التفضيلات"
+
+#, fuzzy
+#~ msgid "Cache name:"
+#~ msgstr "إل&غاء"
+
+#, fuzzy
+#~ msgid "User name:"
+#~ msgstr "&ملف"
+
+#, fuzzy
+#~ msgid "Status:"
+#~ msgstr "الحالة"
+
+#, fuzzy
+#~ msgid "Country:"
+#~ msgstr "الدولة:"
+
+#, fuzzy
+#~ msgid "Terrain:"
+#~ msgstr "التضاريس"
+
+#, fuzzy
+#~ msgid "Longitude:"
+#~ msgstr "خط الطول"
+
+#, fuzzy
+#~ msgid "Latitude:"
+#~ msgstr "خط العرض"
+
+#, fuzzy
+#~ msgid "Date hidden:"
+#~ msgstr "ال&سمة"
+
+#, fuzzy
+#~ msgid "Maximum difficulty:"
+#~ msgstr "المجموع المسافة m"
+
+#, fuzzy
+#~ msgid "Maximum Distance:"
+#~ msgstr "المجموع المسافة m"
+
+#, fuzzy
+#~ msgid "Start:"
+#~ msgstr "الحالة"
+
+#, fuzzy
+#~ msgid "Marble - OpenDesktop plugin configuration"
+#~ msgstr "رخامي سطح المكتب الكرة الأرضية"
+
+#, fuzzy
+#~ msgid "Map &Image"
+#~ msgstr "الاسم"
+
+#, fuzzy
+#~ msgid "Preview"
+#~ msgstr "جاري الإنشاء الخريطة"
+
+#, fuzzy
+#~ msgid "Filename"
+#~ msgstr "&ملف"
+
+#, fuzzy
+#~ msgid "Configure Photo Plugin"
+#~ msgstr "الملاحة عنصر تحكم"
+
+#, fuzzy
+#~ msgid "Configure Position Marker Plugin"
+#~ msgstr "الملاحة عنصر تحكم"
+
+#, fuzzy
+#~ msgid "Trail"
+#~ msgstr "التضاريس"
+
+#, fuzzy
+#~ msgid "Color of the position marker's accuracy indicator."
+#~ msgstr "شبكة الاحداثيات"
+
+#, fuzzy
+#~ msgid "Trail:"
+#~ msgstr "التضاريس"
+
+#, fuzzy
+#~ msgid "Color of the position marker's trail."
+#~ msgstr "شبكة الاحداثيات"
+
+#, fuzzy
+#~ msgid "Routing Configuration - Marble"
+#~ msgstr "الملاحة"
+
+#, fuzzy
+#~ msgid "zoom out"
+#~ msgstr "تصغير"
+
+#, fuzzy
+#~ msgid "zoom in"
+#~ msgstr "تكبير"
+
+#, fuzzy
+#~ msgid "total time remaining"
+#~ msgstr "المجموع المسافة m"
+
+#, fuzzy
+#~ msgid "Satellites Configuration - Marble"
+#~ msgstr "الملاحة"
+
+#, fuzzy
+#~ msgid "&Satellites"
+#~ msgstr "قمر اصتناعي عرض"
+
+#, fuzzy
+#~ msgid "&Data Sources"
+#~ msgstr "البيانات ورقة"
+
+#, fuzzy
+#~ msgid "&Reload All Data Sources"
+#~ msgstr "البيانات ورقة"
+
+#, fuzzy
+#~ msgid "Satellite Data Sources:"
+#~ msgstr "البيانات ورقة"
+
+#, fuzzy
+#~ msgid "&Activate Plugin"
+#~ msgstr "ابحث سطر"
+
+#, fuzzy
+#~ msgid "Configure Stars Plugin"
+#~ msgstr "الملاحة عنصر تحكم"
+
+#~ msgid "Moon"
+#~ msgstr "القمر"
+
+#, fuzzy
+#~ msgid "Earth"
+#~ msgstr "الأرض"
+
+#, fuzzy
+#~ msgid "Use name labels"
+#~ msgstr "&ملف"
+
+#, fuzzy
+#~ msgid "Other"
+#~ msgstr "أخرى مكان"
+
+#, fuzzy
+#~ msgid "Constellations"
+#~ msgstr "عالمي"
+
+#, fuzzy
+#~ msgid "Names"
+#~ msgstr "الاسم"
+
+#, fuzzy
+#~ msgid "Latin Name"
+#~ msgstr "الاسم"
+
+#, fuzzy
+#~ msgid "Native Translation"
+#~ msgstr "المواصلات"
+
+#, fuzzy
+#~ msgid "Abbreviation"
+#~ msgstr "الارتفاع :"
+
+#, fuzzy
+#~ msgid "Configure Weather Plugin"
+#~ msgstr "الملاحة عنصر تحكم"
+
+#, fuzzy
+#~ msgid "Information"
+#~ msgstr "عالمي"
+
+#, fuzzy
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Here you can "
+#~ "choose if you want the weather condition to be shown (for example, clouds "
+#~ "or clear sky.) Marble will only show the condition if this information is "
+#~ "available.</p></body></html>\n"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\"> أبيض فراغ\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "style:italic;\"> الدّور</span></p></body></html>"
+
+#, fuzzy
+#~ msgid "Weather condition"
+#~ msgstr "ماء الأجسام"
+
+#, fuzzy
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Selects if you "
+#~ "want the temperature to be shown. The temperature will only be shown for "
+#~ "the stations it is available for.</p></body></html>\n"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\"> أبيض فراغ\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "style:italic;\"> الدّور</span></p></body></html>"
+
+#, fuzzy
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Select if you "
+#~ "want the wind direction to be shown. The wind direction will only be "
+#~ "shown if it is available for the particular station.</p></body></html>\n"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\"> أبيض فراغ\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "style:italic;\"> الدّور</span></p></body></html>"
+
+#, fuzzy
+#~ msgid "Wind direction"
+#~ msgstr "التقدير"
+
+#, fuzzy
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Select if you "
+#~ "want the wind speed to be shown. The wind speed will only be shown if it "
+#~ "is available for the particular station.</p></body></html>\n"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\"> أبيض فراغ\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "style:italic;\"> الدّور</span></p></body></html>"
+
+#, fuzzy
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">The unit used to "
+#~ "measure the temperature.</p></body></html>\n"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\"> أبيض فراغ\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "style:italic;\"> الدّور</span></p></body></html>"
+
+#, fuzzy
+#~ msgid "Celsius"
+#~ msgstr "أ&غلق"
+
+#, fuzzy
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">The unit used to "
+#~ "measure the wind speed.</p></body></html>\n"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\"> أبيض فراغ\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "style:italic;\"> الدّور</span></p></body></html>"
+
+#, fuzzy
+#~ msgid "Kilometers per hour"
+#~ msgstr "كيلومتر, متر"
+
+#, fuzzy
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">The unit used to "
+#~ "measure the air pressure.</p></body></html>\n"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\"> أبيض فراغ\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "style:italic;\"> الدّور</span></p></body></html>"
+
+#, fuzzy
+#~ msgid "Bars"
+#~ msgstr "إ&بحث"
+
+#, fuzzy
+#~ msgid "Weather update interval"
+#~ msgstr "ماء الأجسام"
+
+#, fuzzy
+#~ msgid "Configure Wikipedia Plugin"
+#~ msgstr "الملاحة عنصر تحكم"
+
+#, fuzzy
+#~ msgid "Show thumbnail images"
+#~ msgstr "اعرض"
+
+#, fuzzy
+#~ msgid "Route type:"
+#~ msgstr "الدّور"
+
+#, fuzzy
+#~ msgid "Preference:"
+#~ msgstr "التفضيلات"
+
+#, fuzzy
+#~ msgid "Monav Configuration"
+#~ msgstr "الملاحة"
+
+#, fuzzy
+#~ msgid "Transport Type:"
+#~ msgstr "المواصلات"
+
+#, fuzzy
+#~ msgid "Manage Maps"
+#~ msgstr "جاري الإنشاء الخريطة"
+
+#, fuzzy
+#~ msgid "Install New"
+#~ msgstr "منطقة صناعية"
+
+#, fuzzy
+#~ msgid "Country"
+#~ msgstr "البلد"
+
+#, fuzzy
+#~ msgid "Download Variant"
+#~ msgstr "نزّل إنتهيت."
+
+#, fuzzy
+#~ msgid "Install"
+#~ msgstr "منطقة صناعية"
+
+#, fuzzy
+#~ msgid "Abort"
+#~ msgstr "&حوْل"
+
+#, fuzzy
+#~ msgid "Transport:"
+#~ msgstr "المواصلات"
+
+#, fuzzy
+#~ msgid "Fastest"
+#~ msgstr "غابة"
+
+#, fuzzy
+#~ msgid "Shortest"
+#~ msgstr "غابة"
+
+#, fuzzy
+#~ msgid "Location Browser"
+#~ msgstr "الموقع المتصفح"
+
+#, fuzzy
+#~ msgid "Double click an entry of this list to get it displayed on the map."
+#~ msgstr "مزدوج انقر خانة من قائمة إلى get الإيطالية يعمل خريطة."
+
+#, fuzzy
+#~ msgid "Navigate to your 'Home Location'"
+#~ msgstr "إذهب إلى 'موقع منزلك'"
+
+#, fuzzy
+#~| msgid "Farm"
+#~ msgid "Form"
+#~ msgstr "مزرعة"
+
+#, fuzzy
+#~ msgid "Add SoundCue"
+#~ msgstr "&ملف"
+
+#, fuzzy
+#~ msgid "&Name"
+#~ msgstr "الاسم"
+
+#, fuzzy
+#~ msgid "Land"
+#~ msgstr "مفتاح الرسم البياني"
+
+#, fuzzy
+#~ msgid "Ara"
+#~ msgstr "الأطلس"
+
+#, fuzzy
+#~ msgid "Cancer"
+#~ msgstr "إل&غاء"
+
+#, fuzzy
+#~ msgid "Crater"
+#~ msgstr "m ماء"
+
+#, fuzzy
+#~| msgid "Normal"
+#~ msgid "Norma"
+#~ msgstr "عادي"
+
+#, fuzzy
+#~ msgid "Constellation Labels"
+#~ msgstr "عالمي"
+
+#, fuzzy
+#~ msgid "Constellation Names"
+#~ msgstr "عالمي"
+
+#, fuzzy
+#~| msgid "OpenGL"
+#~ msgid "Open"
+#~ msgstr "أوبن جي إل"
+
+#, fuzzy
+#~ msgctxt "Action for toggling the atmosphere"
+#~ msgid "&Atmosphere"
+#~ msgstr "اعرض إطار معدل"
+
+#, fuzzy
+#~ msgid "Enable tab to see gpxFileView"
+#~ msgstr "مكّن لسان إلى"
+
+#, fuzzy
+#~ msgctxt "Action for toggling the 'current location' box"
+#~ msgid "Current Location"
+#~ msgstr "الحالي الموقع"
+
+#, fuzzy
+#~ msgctxt "Action for toggling the navigation panel"
+#~ msgid "Show &Navigation Panel"
+#~ msgstr "اعرض الملاحة شريط"
+
+#, fuzzy
+#~ msgctxt "Status tip"
+#~ msgid "Show Navigation Panel"
+#~ msgstr "اعرض الملاحة شريط"
+
+#, fuzzy
+#~ msgctxt "Action for showing the File View"
+#~ msgid "&Show File View"
+#~ msgstr "ملف عرض"
+
+#, fuzzy
+#~ msgid "Guides"
+#~ msgstr "&ملف"
+
+#, fuzzy
+#~ msgid "Marble Infocenter"
+#~ msgstr "رخامي"
+
+#, fuzzy
+#~ msgid "Data Sheet"
+#~ msgstr "البيانات ورقة"
+
+#, fuzzy
+#~ msgid "Name of the location"
+#~ msgstr "الاسم من موقع"
+
+#, fuzzy
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "size:14pt; font-weight:600;\">Name</span></p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\"> أبيض فراغ\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "size:14pt; font-weight:600;\"> الاسم</span></p></body></html>"
+
+#, fuzzy
+#~ msgid "Role of the location."
+#~ msgstr "الدّور من موقع."
+
+#, fuzzy
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "style:italic;\">Role</span></p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\"> أبيض فراغ\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "style:italic;\"> الدّور</span></p></body></html>"
+
+#, fuzzy
+#~ msgid "Alternative name"
+#~ msgstr "بديل الاسم"
+
+#, fuzzy
+#~ msgid "Alternative name of the location."
+#~ msgstr "بديل الاسم من موقع."
+
+#, fuzzy
+#~ msgid "Alternative Name"
+#~ msgstr "بديل الاسم"
+
+#, fuzzy
+#~ msgid "Short description:"
+#~ msgstr "قصير الوصف:"
+
+#, fuzzy
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">No description "
+#~ "available.</p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">If you are connected to "
+#~ "the Internet please click the \"Wikipedia\" tab at the top of this page "
+#~ "to get more information.</p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\"> أبيض فراغ\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"> لا الوصف متوفّر</p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"> إذا إلى إنترنت انقر "
+#~ "لسان عند الأعلى من صفحة إلى get المزيد معلومات</p></body></html>"
+
+#, fuzzy
+#~ msgid ""
+#~ "000° 00' 00\" N\n"
+#~ "000° 00' 00\" E "
+#~ msgstr "N E "
+
+#, fuzzy
+#~ msgid "9000.0 m"
+#~ msgstr "m"
+
+#, fuzzy
+#~ msgid "0.0 sq km"
+#~ msgstr "m"
+
+#, fuzzy
+#~ msgid "State:"
+#~ msgstr "الحالة"
+
+#, fuzzy
+#~ msgid "Back"
+#~ msgstr "الخلف"
+
+#, fuzzy
+#~ msgid "Move backwards one step in the browsing history."
+#~ msgstr "نقل خطوة بوصة تاريخ."
+
+#, fuzzy
+#~ msgid "Print Page"
+#~ msgstr "اطبع صفحة"
+
+#, fuzzy
+#~| msgid "Shadow"
+#~ msgid "Show"
+#~ msgstr "ضل"
+
+#, fuzzy
+#~ msgid "Hide"
+#~ msgstr "&ملف"
+
+#, fuzzy
+#~ msgid "Show Zenith"
+#~ msgstr "اعرض"
+
+#, fuzzy
+#~ msgid "Shows and hides the zenith location of the sun"
+#~ msgstr "اعرض a من الأفعال."
+
+#, fuzzy
+#~ msgid ""
+#~ "*.gpx *.kml *.log *.osm *.pnt|All Supported Files\n"
+#~ "*.gpx|GPS Data\n"
+#~ "*.kml|Google Earth KML\n"
+#~ "*.log|TangoGPS Logfile\n"
+#~ "*.osm|OpenStreetMap Data\n"
+#~ "*.pnt|Micro World Data Bank II"
+#~ msgstr "الكل مدعوم ملفات n GPS البيانات n جوجل الأرض"
+
+#, fuzzy
+#~ msgid "&Search"
+#~ msgstr "إ&بحث"
+
+#, fuzzy
+#~ msgid "Search line"
+#~ msgstr "ابحث سطر"
+
+#, fuzzy
+#~ msgid "Here you can enter the name of the location you are searching for."
+#~ msgstr "هنا أدخل الاسم من موقع لـ."
+
+#, fuzzy
+#~ msgid "Check speed of gps drawing"
+#~ msgstr "كِش سرعة من"
+
+#, fuzzy
+#~ msgid "Enable tab to show the current location"
+#~ msgstr "مكّن لسان إلى إظهار الحالي موقع"
+
+#, fuzzy
+#~ msgid "Show or hide routing options"
+#~ msgstr "قصير الوصف:"
+
+#, fuzzy
+#~ msgid "Search..."
+#~ msgstr "إ&بحث"
+
+#, fuzzy
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans'; font-size:10pt; font-"
+#~ "weight:400; font-style:normal;\">\n"
+#~ "<table border=\"0\" style=\"-qt-table-type: root; margin-top:4px; margin-"
+#~ "bottom:4px; margin-left:4px; margin-right:4px;\">\n"
+#~ "<tr>\n"
+#~ "<td style=\"border: none;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-family:'DejaVu Sans'; font-size:9pt;\"></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-family:'DejaVu Sans'; font-size:9pt;\"></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-family:'DejaVu Sans'; font-size:9pt;\"></p></td></tr></table></"
+#~ "body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\"> أبيض فراغ\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"> c الـ رخامي مشروع</p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-style:italic;\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">http://edu.kde.org/"
+#~ "marble</p></body></html>"
+
+#, fuzzy
+#~ msgid "Open File..."
+#~ msgstr "افتح ملف"
+
+#, fuzzy
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "size:small; color:#000000;\">0 m</span></p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\"> أبيض فراغ\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\"> رخامي سطح المكتب الكرة الأرضية</span></p></body></html>"
+
+#, fuzzy
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<table border=\"0\" style=\"-qt-table-type: root; margin-top:4px; margin-"
+#~ "bottom:4px; margin-left:4px; margin-right:4px;\">\n"
+#~ "<tr>\n"
+#~ "<td style=\"border: none;\">\n"
+#~ "<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-"
+#~ "left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span "
+#~ "style=\" font-weight:600;\">Routing Information</span></p></td></tr></"
+#~ "table></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\"> أبيض فراغ\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\"> رخامي سطح المكتب الكرة الأرضية</span></p></body></html>"
+
+#, fuzzy
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><a href=\"http://edu."
+#~ "kde.org/marble\"><span style=\" font-family:'DejaVu Sans'; font-size:8pt; "
+#~ "text-decoration: underline; color:#0057ae;\">Configure</span></a></p></"
+#~ "body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\"> أبيض فراغ\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\"> رخامي سطح المكتب الكرة الأرضية</span></p></body></html>"
+
+#~ msgid "Avoid"
+#~ msgstr "تجنب"
+
+#, fuzzy
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<table border=\"0\" style=\"-qt-table-type: root; margin-top:4px; margin-"
+#~ "bottom:4px; margin-left:4px; margin-right:4px;\">\n"
+#~ "<tr>\n"
+#~ "<td style=\"border: none;\">\n"
+#~ "<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-"
+#~ "left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span "
+#~ "style=\" font-size:12pt; font-weight:600;\">00:00</span></p></td></tr></"
+#~ "table></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\"> أبيض فراغ\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\"> رخامي سطح المكتب الكرة الأرضية</span></p></body></html>"
+
+#, fuzzy
+#~ msgid "Navigator Float Item"
+#~ msgstr "الملاحة"
+
+#, fuzzy
+#~ msgid "Meters"
+#~ msgstr "m ماء"
+
+#, fuzzy
+#~ msgid "Distance Covered"
+#~ msgstr "المجموع المسافة m"
+
+#, fuzzy
+#~ msgid "&Date"
+#~ msgstr "&بيانات"
+
+#, fuzzy
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Change sun time</p></"
+#~ "body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\"> أبيض فراغ\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "style:italic;\"> الدّور</span></p></body></html>"
+
+#, fuzzy
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Center the map on sun "
+#~ "position</p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\"> أبيض فراغ\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "style:italic;\"> الدّور</span></p></body></html>"
+
+#, fuzzy
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Display sun position</"
+#~ "p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\"> أبيض فراغ\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "style:italic;\"> الدّور</span></p></body></html>"
+
+#, fuzzy
+#~ msgid ""
+#~ "This control panel allows you to adjust the map according to your needs."
+#~ msgstr "هذا control شريط إلى تسوية خريطة إلى."
+
+#, fuzzy
+#~ msgid "Navigation mode"
+#~ msgstr "الملاحة"
+
+#, fuzzy
+#~ msgid "Your current position"
+#~ msgstr "الحالي الموقع"
+
+#, fuzzy
+#~ msgid "000 m"
+#~ msgstr "m"
+
+#, fuzzy
+#~ msgid "p"
+#~ msgstr "أعلى"
+
+#, fuzzy
+#~ msgid "Region"
+#~ msgstr "الارتفاع"
+
+#, fuzzy
+#~ msgid "Forward"
+#~ msgstr "مرر"
+
+#, fuzzy
+#~ msgid "Move forward one step in the browsing history."
+#~ msgstr "نقل أمام خطوة بوصة تاريخ."
+
+#, fuzzy
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\"> أبيض فراغ\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p></body></html>"
+
+#, fuzzy
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-family:'MS Shell Dlg 2'; font-size:8pt;\"></p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\"> أبيض فراغ\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-family:'MS Shell Dlg 2'; font-size:8pt;\"></p></body></html>"
+
+#, fuzzy
+#~ msgid "Track Gps"
+#~ msgstr "المقطوعة"
+
+#, fuzzy
+#~ msgid "Catch Gps"
+#~ msgstr "الصيد"
+
+#, fuzzy
+#~ msgid "Draw"
+#~ msgstr "رسم"
+
+#, fuzzy
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">There are two caches "
+#~ "being used for Marble: The physical memory which is needed to keep map "
+#~ "data in the computer's memory. Increasing the value will make the "
+#~ "application more responsive. The hard disc memory cache is used by "
+#~ "download contents from the internet (e.g. Wikipedia data or map data). "
+#~ "Decrease this value if you want to save space on the hard disc and if "
+#~ "high usage of the internet is not an issue. </p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\"> أبيض فراغ\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"> لا الوصف متوفّر</p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"> إذا إلى إنترنت انقر "
+#~ "لسان عند الأعلى من صفحة إلى get المزيد معلومات</p></body></html>"
+
+#, fuzzy
+#~ msgid "Open Map &Data..."
+#~ msgstr "افتح الخريطة."
+
+#, fuzzy
+#~ msgid "&Import Map Data..."
+#~ msgstr "صدِّر الخريطة."
+
+#, fuzzy
+#~ msgid "Co-maintainer and Architect"
+#~ msgstr "شركاء أو كولورادو المشرف على الصيانة و المهندس المعماريّ"
+
+#, fuzzy
+#~ msgid "Scale &Bar"
+#~ msgstr "المقياس عمود"
+
+#, fuzzy
+#~ msgid ""
+#~ "Parse error at line %1, column %2:\n"
+#~ "%3."
+#~ msgstr "يُعرْب :: تُعرب خطأ عند سطر عمود n."
+
+#, fuzzy
+#~ msgid "Save File"
+#~ msgstr "احفظ ملف"
+
+#, fuzzy
+#~ msgid "km"
+#~ msgstr "كم"
+
+#, fuzzy
+#~ msgid "Total Distance: %1 km"
+#~ msgstr "المجموع المسافة كم"
+
+#, fuzzy
+#~ msgctxt "The compass direction"
+#~ msgid "East"
+#~ msgstr "الأرض"
+
+#, fuzzy
+#~ msgid "Path"
+#~ msgstr "المسار"
+
+#, fuzzy
+#~ msgid "File format unrecognized"
+#~ msgstr "ملف تنسيق غير معروف"
+
+#, fuzzy
+#~ msgid "The file is not a valid DGML 2.0 file"
+#~ msgstr "الـ ملفّ هو ليس a سليم ملفّ"
+
+#, fuzzy
+#~ msgid "The file is not a valid GPX 1.0 / 1.1 file"
+#~ msgstr "الـ ملفّ هو ليس a سليم ملفّ"
+
+#, fuzzy
+#~ msgid "The file is not a valid KML 2.0 / 2.1 / 2.2 file"
+#~ msgstr "الـ ملفّ هو ليس a سليم ملفّ"
+
+#, fuzzy
+#~ msgid "Version %1"
+#~ msgstr "الإصدار مجهول"
+
+#, fuzzy
+#~ msgid ""
+#~ "<br />(c) 2007, 2008, The Marble Project<br /><br /><a href=\"http://edu."
+#~ "kde.org/marble\">http://edu.kde.org/marble</a>"
+#~ msgstr ""
+#~ "<br /> c الـ رخامي مشروع<br /><br /><a href=\"http://edu.kde.org/marble"
+#~ "\">http://edu.kde.org/marble</a>"
+
+#, fuzzy
+#~ msgid "0 N 0 W"
+#~ msgstr "N W"
+
+#, fuzzy
+#~ msgid "Add &Measure Point"
+#~ msgstr "إضافة قياس نقطة"
+
+#, fuzzy
+#~ msgid "&Remove Measure Points"
+#~ msgstr "احذف قياس نقاط"
+
+#, fuzzy
+#~ msgid "Copy Coordinates"
+#~ msgstr "الأسس:"
+
+#, fuzzy
+#~ msgid "Marble Info Center - %1"
+#~ msgstr "رخامي معلومات وسط 1"
+
+#, fuzzy
+#~ msgid "Regional Capital"
+#~ msgstr "ريجيونال REMOVE"
+
+#, fuzzy
+#~ msgid "City"
+#~ msgstr "المدينة"
+
+#, fuzzy
+#~ msgid "%1 sq km"
+#~ msgstr "m"
+
+#, fuzzy
+#~ msgid "%1 m"
+#~ msgstr "m"
+
+#, fuzzy
+#~ msgid "Download failed: %1."
+#~ msgstr "نزّل failed."
+
+#, fuzzy
+#~ msgid "Ctrl+O"
+#~ msgstr "Ctrl+O"
+
+#, fuzzy
+#~ msgid "Open a file for viewing on Marble"
+#~ msgstr "افتح a ملفّ لـ يعمل رخامي"
+
+#, fuzzy
+#~ msgid "Ctrl+S"
+#~ msgstr "Ctrl S"
+
+#, fuzzy
+#~ msgid "Save a screenshot of the map"
+#~ msgstr "احفظ a من خريطة"
+
+#, fuzzy
+#~ msgid "&Print..."
+#~ msgstr "ا&طبع..."
+
+#, fuzzy
+#~ msgid "Ctrl+P"
+#~ msgstr "Ctrl P"
+
+#, fuzzy
+#~ msgid "Print a screenshot of the map"
+#~ msgstr "اطبع a من خريطة"
+
+#, fuzzy
+#~ msgid "&Quit"
+#~ msgstr "ا&خرج"
+
+#, fuzzy
+#~ msgid "Ctrl+Q"
+#~ msgstr "Ctrl Q"
+
+#, fuzzy
+#~ msgid "Ctrl+C"
+#~ msgstr "Ctrl C"
+
+#, fuzzy
+#~ msgid "Copy a screenshot of the map"
+#~ msgstr "نسخ a من خريطة"
+
+#, fuzzy
+#~ msgid "&Full Screen Mode"
+#~ msgstr "كامل شاشة الوضع"
+
+#, fuzzy
+#~ msgid "Ctrl+Shift+F"
+#~ msgstr "Ctrl Shift F"
+
+#, fuzzy
+#~ msgid "Full Screen Mode"
+#~ msgstr "نمط الشاشة الكاملة"
+
+#, fuzzy
+#~ msgid "&Status Bar"
+#~ msgstr "&شريط الحالة"
+
+#, fuzzy
+#~ msgid "Show Status Bar"
+#~ msgstr "إظهر شريط الحالة"
+
+#, fuzzy
+#~ msgid "What's &This"
+#~ msgstr "ما &هذا"
+
+#, fuzzy
+#~ msgid "Shift+F1"
+#~ msgstr "Shift F1"
+
+#, fuzzy
+#~ msgid "&About Marble Desktop Globe"
+#~ msgstr "حول رخامي سطح المكتب الكرة الأرضية"
+
+#, fuzzy
+#~ msgid "Show the application's About Box"
+#~ msgstr "اعرض تطبيق s حول صندوق"
+
+#, fuzzy
+#~ msgid "About &Qt"
+#~ msgstr "حول &Qt"
+
+#, fuzzy
+#~ msgid "Show the Qt library's About box"
+#~ msgstr "اعرض Qt مكتبة s حول مربّع"
+
+#, fuzzy
+#~ msgid "&Help"
+#~ msgstr "&مساعدة"
+
+#, fuzzy
+#~ msgid "Ready"
+#~ msgstr "جاهز"
+
+#, fuzzy
+#~ msgid "Images (*.jpg *.png)"
+#~ msgstr "صور"
+
+#, fuzzy
+#~ msgid ""
+#~ "All Supported Files (*.gpx *.kml);;GPS Data (*.gpx);;Google Earth KML (*."
+#~ "kml)"
+#~ msgstr "الكل مدعوم ملفات GPS البيانات جوجل الأرض"
+
+#, fuzzy
+#~ msgid "Compass"
+#~ msgstr "البوصلة"
+
+#, fuzzy
+#~ msgid "&Compass"
+#~ msgstr "البوصلة"
+
+#, fuzzy
+#~ msgid "DataView Plugin"
+#~ msgstr "ابحث سطر"
+
+#, fuzzy
+#~ msgid "&Scale Bar"
+#~ msgstr "المقياس عمود"
+
+#, fuzzy
+#~ msgid "m"
+#~ msgstr "كم"
+
+#, fuzzy
+#~ msgid "&Navigation"
+#~ msgstr "الملاحة"
+
+#, fuzzy
+#~ msgid "GeoData Plugin"
+#~ msgstr "ابحث سطر"
+
+#, fuzzy
+#~ msgid "&GeoData Plugin"
+#~ msgstr "ابحث سطر"
+
+#, fuzzy
+#~ msgid "Placemarks Plugin"
+#~ msgstr "ابحث سطر"
+
+#, fuzzy
+#~ msgid "&Placemarks Plugin"
+#~ msgstr "ابحث سطر"
+
+#, fuzzy
+#~ msgid "None"
+#~ msgstr "الملاحة"
+
+#, fuzzy
+#~ msgid "Show full timezone name"
+#~ msgstr "اعرض شكل ، نموذج"
+
+#, fuzzy
+#~ msgid "Geo Tool"
+#~ msgstr "إذهب إلى"
+
+#, fuzzy
+#~ msgid "Populated places"
+#~ msgstr "مأهول بالسكان أماكن"
+
+#, fuzzy
+#~ msgid "Quick and Dirty"
+#~ msgstr "بسرعة و قذر"
+
+#, fuzzy
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Decrease time step</p></"
+#~ "body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\"> أبيض فراغ\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "style:italic;\"> الدّور</span></p></body></html>"
+
+#, fuzzy
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Backward</p></body></"
+#~ "html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\"> أبيض فراغ\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "style:italic;\"> الدّور</span></p></body></html>"
+
+#, fuzzy
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Forward</p></body></"
+#~ "html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\"> أبيض فراغ\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "style:italic;\"> الدّور</span></p></body></html>"
+
+#, fuzzy
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Increase time step</p></"
+#~ "body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\"> أبيض فراغ\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "style:italic;\"> الدّور</span></p></body></html>"

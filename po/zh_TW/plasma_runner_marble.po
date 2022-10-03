@@ -1,0 +1,38 @@
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Franklin Weng <franklin@goodhorse.idv.tw>, 2011.
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2021-09-28 00:13+0000\n"
+"PO-Revision-Date: 2011-11-09 14:35+0800\n"
+"Last-Translator: Franklin Weng <franklin@goodhorse.idv.tw>\n"
+"Language-Team: Chinese Traditional <zh-l10n@lists.linux.org.tw>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 1.2\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: plasmarunner.cpp:36
+#, kde-format
+msgid "Shows the coordinates :q: in OpenStreetMap with Marble."
+msgstr "在Marble 中呼叫 OpenStreetMap 顯示座標 :q:。"
+
+#: plasmarunner.cpp:37
+#, kde-format
+msgid "Shows the geo bookmark containing :q: in OpenStreetMap with Marble."
+msgstr "在Marble 中呼叫 OpenStreetMap 顯示包含 :q: 的 geo 書籤。"
+
+#: plasmarunner.cpp:58
+#, kde-format
+msgid "Show the coordinates %1 in OpenStreetMap with Marble"
+msgstr "在Marble 中呼叫 OpenStreetMap 顯示座標 %1。"
+
+#: plasmarunner.cpp:124
+#, kde-format
+msgid "Show in OpenStreetMap with Marble"
+msgstr "在Marble 中呼叫 OpenStreetMap 顯示 。"

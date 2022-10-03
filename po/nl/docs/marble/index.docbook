@@ -1,0 +1,2769 @@
+<?xml version="1.0" ?>
+<!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
+ <!ENTITY % addindex "IGNORE">
+ <!ENTITY % Dutch "INCLUDE"
+><!-- change language only here -->
+ ]>
+
+<book id="marble" lang="&language;">
+
+  <bookinfo>
+    <title
+>Handboek van &marble; </title>
+
+    <authorgroup>
+      <author
+><firstname
+>Torsten</firstname
+> <surname
+>Rahn</surname
+> <affiliation
+> <address
+>&Torsten.Rahn.mail;</address>
+        </affiliation>
+      </author>
+      <author
+><firstname
+>Dennis</firstname
+> <surname
+>Nienhüser</surname
+> <affiliation
+> <address
+>&Dennis.Nienhueser.mail;</address>
+        </affiliation>
+      </author>
+
+      <othercredit role="translator"
+><firstname
+>Kristof</firstname
+> <surname
+>Bal</surname
+><affiliation
+><address
+> <email
+>kristof.bal@gmail.com</email
+></address
+></affiliation
+> <contrib
+>Vertaler</contrib
+></othercredit
+> <othercredit role="translator"
+><firstname
+>Jaap</firstname
+> <surname
+>Woldringh</surname
+><affiliation
+><address
+> <email
+>jjhwoldringh@kde.nl</email
+></address
+></affiliation
+> <contrib
+>Vertaler</contrib
+></othercredit
+> 
+    </authorgroup>
+
+    <copyright>
+      <year
+>2005</year>
+      <year
+>2006</year>
+      <year
+>2007</year>
+      <holder
+>&Torsten.Rahn;</holder>
+    </copyright>
+    <copyright>
+      <year
+>2010</year>
+      <year
+>2013</year>
+      <holder
+>&Dennis.Nienhueser;</holder>
+    </copyright>
+
+    <legalnotice
+>&FDLNotice;</legalnotice>
+
+    <date
+>2021-10-17</date>
+    <releaseinfo
+>2.2 (KDE Gear 21.08)</releaseinfo>
+
+    <abstract>
+      <para
+>&marble; is een geografische atlas en een virtuele globe waarmee u snel plaatsen op onze thuisplaneet kunt verkennen. U kunt &marble; gebruiken om plaatsen op te zoeken, op een eenvoudige manier kaarten te maken, afstanden te meten en gedetailleerde informatie te verkrijgen over locaties waar u zojuist iets over hoorde in het nieuws of op het internet. De gebruikersinterface is helder, eenvoudig en makkelijk te gebruiken. </para>
+    </abstract>
+
+    <keywordset>
+      <keyword
+>KDE</keyword>
+      <keyword
+>educatie</keyword>
+      <keyword
+>aarde</keyword>
+      <keyword
+>globe</keyword>
+      <keyword
+>geografie</keyword>
+      <keyword
+>Marble</keyword>
+    </keywordset>
+
+  </bookinfo>
+
+  <chapter id="introduction">
+  <title
+>Inleiding</title>
+    <screenshot>
+      <screeninfo
+>logo van &marble;</screeninfo>
+      <mediaobject>
+        <imageobject
+><imagedata fileref="logo-1.png" format="PNG"/></imageobject>
+        <textobject
+><phrase
+>logo van &marble;</phrase
+></textobject>
+      </mediaobject>
+    </screenshot>
+
+    <para
+>Welkom bij &marble;, een kleine interactieve globe en geografische atlas die de wereld tot u brengt. Net zoals in een echte atlas of op een klassieke globe kunt u in &marble; vrij over de kaart bewegen en plaatsen opzoeken. Verder kunt u in &marble; inzoomen, en het <guilabel
+>Aard</guilabel
+>oppervlak of het <guilabel
+>Maan</guilabel
+>oppervlak op diverse manieren bekijken. In de standaardconfiguratie kan  &marble; u de aarde en de maan op 15 verschillende manieren laten bekijken:  <guilabel
+>Atlas</guilabel
+>, <guilabel
+>Open Street Map</guilabel
+>,  <guilabel
+>Satellietbeeld</guilabel
+>, <guilabel
+>Nachtelijke aarde</guilabel
+>, <guilabel
+>Behaim Globe 1492</guilabel
+>, <guilabel
+>Sentinel2 Satellietkaart</guilabel
+> <guilabel
+>Historische kaart 1689</guilabel
+>, <guilabel
+>Polititieke kaart</guilabel
+><guilabel
+>Maan</guilabel
+>,  <guilabel
+>Gewone kaart</guilabel
+>, <guilabel
+>Neerslag (december)</guilabel
+>, <guilabel
+>Neerslag (juli)</guilabel
+>, <guilabel
+>Temperatuur (december)</guilabel
+> <guilabel
+>Temperatuur (juli)</guilabel
+>. <guilabel
+>Vector OSM</guilabel
+>en <guilabel
+>de Maan</guilabel
+>. </para>
+
+    <para
+>&marble; beschikt over een kleine gegevensbank waarin meer dan 12,000 locaties (steden, bergen, vulkanen) die kunnen worden opgezocht, en die die ook worden  genoemd in Wikipedia. Het is ook mogelijk om &marble; te gebruiken voor het meten van afstanden tussen willekeurige punten. </para>
+
+    <para
+>&marble; is vrije software en wordt uitgegeven onder de &GNU; Lesser General Public License. </para>
+
+  </chapter>
+
+  <chapter id="quick-start">
+  <title
+>Snelle startersgids voor &marble;: Navigatie</title>
+
+  <para
+>Hier is &marble; de eerste keer dat u het start, ofwel met <menuchoice
+><guimenu
+>Toepassingen</guimenu
+><guisubmenu
+>Educatie</guisubmenu
+><guimenuitem
+>&kde; &marble; (Virtuele Globe)</guimenuitem
+></menuchoice
+> in het hoofdmenu of met <keycombo action="simul"
+>&Alt;<keycap
+>F2</keycap
+></keycombo
+> en het invoeren van <command
+>marble</command
+> in het invoerveld.</para>
+
+    <screenshot>
+      <screeninfo
+>Het &marble; hoofdscherm</screeninfo>
+      <mediaobject>
+        <imageobject
+><imagedata fileref="quick-1.png" format="PNG"/></imageobject>
+        <textobject
+><phrase
+>Het hoofdscherm van &marble;</phrase
+></textobject>
+      </mediaobject>
+    </screenshot>
+
+    <para
+>Rechts ziet u een topografische kaart van onze mooie thuisplaneet. Voor een betere oriëntatie ziet u in de kaart zowel een schaalbalk in de linkerbenedenhoek als een kompasroos rechtsboven. Om te navigeren en het beeld aan te passen kunt u het informatievak <guilabel
+>Navigatie</guilabel
+>, rechts, gebruiken: Druk op de pijlen om de globe te roteren. De pijlen <guilabel
+>Omhoog</guilabel
+> en <guilabel
+>Omlaag</guilabel
+> laten de aardas naar voren en naar achteren kantelen. De pijlen <guilabel
+>Links</guilabel
+> en <guilabel
+>Rechts</guilabel
+> laten de aarde draaien om de fysieke as. </para>
+
+    <para
+>U kunt hetzelfde bereiken door ergens op de globe met de &LMB; te klikken en de muis te bewegen terwijl u de &LMB; ingedrukt houdt. Met deze slepen-en neerzetten soort van navigatie kunt u de kijkhoek veel eenvoudiger en nauwkeuriger aanpassen. Ook met de pijltoetsen op uw toetsenbord kunt u snel richtingen aanpassen. </para>
+
+    <para
+>Zoom in of uit door de verticale schuifknop op en neer te bewegen. Als uw muis een muiswiel heeft kunt u dat gebruiken - of druk gewoon de &LMB; of &RMB; samen in terwijl u de muis op en neer beweegt. Het zoomniveau kan in stappen worden aangepast met de knoppen <guilabel
+>Inzoomen</guilabel
+> en <guilabel
+>Uitzoomen</guilabel
+> boven en onder de schuifknop voor zoomen (of met de  <keycap
+>+</keycap
+> en <keycap
+>-</keycap
+> toetsen op uw toetsenbord). </para>
+
+    <para
+>Afhankelijk van de (intrinsieke) resolutie van de kaart ziet u bij inzoomen steeds meer detail. Kleinere steden zullen zichtbaar worden, en als u de topografische kaart gebruikt zult u misschien merken dat kustlijnen eigenlijk vectorafbeeldingen zijn. </para>
+
+    <para
+>Mocht u verdwalen, dan kunt u altijd nog de kijkhoek en het zoomniveau opnieuw instellen op het startpunt: klik op de knop <guibutton
+>Start</guibutton
+>, (of de knop  &Home; op het toetsenbord.. U kunt de thuispositie (kaartmidden) instellen in het menu met <menuchoice
+><guimenu
+>Bladwijzers</guimenu
+> <guimenuitem
+>Stel startpositie in</guimenuitem
+></menuchoice
+>. </para>
+
+    <para
+>Door met de &RMB; te klikken op de statusbalk, krijgt u een menu waarin u de inhoud van de statusbalk kunt aanpassen: de geografische coördinaten van de locatie, de (denkbeeldige) hoogte (van het gezichtspunt), het huidige tegel zoomniveau en de voortgangsindicator bij het ophalen van kaartgegevens. </para>
+  </chapter>
+
+  <chapter id="map-views">
+  <title
+>Verschillende kaartbeelden kiezen voor &marble;</title>
+
+    <para
+>&marble; beschikt over 15 verschillende kaartbeelden: <guilabel
+>Atlas</guilabel
+>, <guilabel
+>Open Street Map</guilabel
+>,  <guilabel
+>Satellietbeeld</guilabel
+>, <guilabel
+>De nachtelijke Aarde</guilabel
+>,  <guilabel
+>De Behaim Globe 1492</guilabel
+>,  <guilabel
+>Sentinel2 Satellietkaart</guilabel
+>, <guilabel
+>Historische kaart 1689</guilabel
+>,   <guilabel
+>Politieke kaart</guilabel
+>, <guilabel
+>Gewone kaart</guilabel
+>,  <guilabel
+>Neerslag (December)</guilabel
+>,  <guilabel
+>Neerslag (Juli)</guilabel
+>,  <guilabel
+>Temperatuur (December)</guilabel
+>,   <guilabel
+>Vector OSM</guilabel
+>,   <guilabel
+>Temperatuur (Juli)</guilabel
+>, en <guilabel
+>De Maan</guilabel
+>, U kunt hieruit kiezen door op hettabblad <guilabel
+>Kaartbeeld</guilabel
+> te klikken bovenin de gereedschapskist van &marble;: </para>
+
+    <screenshot>
+      <screeninfo
+>Kaartbeelden van &marble;</screeninfo>
+      <mediaobject>
+        <imageobject
+><imagedata fileref="mapview-1.png" format="PNG"/></imageobject>
+        <textobject
+><phrase
+>Kaartbeelden van &marble;</phrase
+></textobject>
+      </mediaobject>
+    </screenshot>
+
+    <itemizedlist>
+      <listitem
+><para
+><guilabel
+>Atlas</guilabel
+>: Een klassieke topografische kaart. De kaart gebruikt vectorlijnen ( "MicroWorldDataBase II" ) om kustlijnen, landgrenzen &etc; aan te duiden en bitmapbeelden ( "SRTM30" ) voor het aanmaken van het hoogtereliëf.</para
+></listitem>
+
+      <listitem
+><para
+><guilabel
+>Open Street Map</guilabel
+>: Een globale wegenkaart gemaakt door het  OpenStreetMap-project (OSM).OSM is een open gemeenschap die vrij te bewerken kaarten maakt. De OSM-gegevens werden weergegeven met behulp van Mapnik.</para
+></listitem>
+
+      <listitem
+><para
+><guilabel
+>Satellietbeeld</guilabel
+>: De aarde gezien vanuit de ruimte. De kaart is gebaseerd op NASA's prachtige afbeeldingen op <ulink url="https://earthobservatory.nasa.gov/features/BlueMarble/"
+>Blue &marble; Next Generation</ulink
+>. Met dank aan NASA’s Earth Observatory</para
+></listitem>
+
+      <listitem
+><para
+><guilabel
+>De aarde 's nachts</guilabel
+>: Deze afbeelding van de stedelijke belichting van de aarde is gemaakt met de gegevens van het Defense Meteorological Satellite Program (DMSP) Operational Linescan System (OLS).</para
+></listitem>
+
+      <listitem
+><para
+><guilabel
+>Behaim Globe 1492</guilabel
+>: Gemaakt door Martin Behaim van 1490–1492, is de oudste nog bestaande globe van de aarde.</para
+></listitem>
+
+      <listitem
+><para
+><guilabel
+>Sentinel2 Satellite Map</guilabel
+>: Op basis van de Sentinel-gegevens, voor meer informatie zie <ulink url="https://community.kde.org/Marble/Sentinel2MapTheme"
+>hier</ulink
+>.</para
+></listitem>
+
+      <listitem
+><para
+><guilabel
+>Historische kaart 1689</guilabel
+>: Een historische wereldkaart uit het jaar 1689, gemaakt door G. van Schagen in Amsterdam.</para
+></listitem>
+
+      <listitem
+><para
+><guilabel
+>Politieke kaart</guilabel
+>: Een eenvoudige kaart, waarin de huidige grenzen van de landen zijn getekend.</para
+></listitem>
+
+      <listitem
+><para
+><guilabel
+>Gewone kaart</guilabel
+>: Een gewone kaart. In de kaart wordenvectorlijnen gebruikt om kustlijnen, landgrenzen &etc; weer te geven.</para
+></listitem>
+
+      <listitem
+><para
+><guilabel
+>Neerslag (december)</guilabel
+>: Een kaart die de gemiddelde neerslag in december toont.</para
+></listitem>
+
+      <listitem
+><para
+><guilabel
+>Neerslag (juli)</guilabel
+>: Een kaart die de gemiddelde neerslag (regen, sneeuw,hagel, &etc;) in juli toont.</para
+></listitem>
+
+      <listitem
+><para
+><guilabel
+>Temperatuur (december)</guilabel
+>: Een kaart die de gemiddelde temperatuur in december toont.</para
+></listitem>
+
+      <listitem
+><para
+><guilabel
+>Temperatuur (juli)</guilabel
+>: Een kaart die de gemiddelde temperatuur in juli toont.</para
+></listitem>
+
+      <listitem
+><para
+><guilabel
+>Vector OSM</guilabel
+>: Vector map van het <ulink url="https://www.openstreetmap.org/"
+>OpenStreetMap-project</ulink
+>.</para
+></listitem>
+
+      <listitem
+><para
+><guilabel
+>De maan</guilabel
+>: Een kaart van de maan. De kaart is gebaseerd op gegevens van de Clementine Moon mission (UVVIS Basemap Mosaic). Met dank aan NASA/SDIO, eigendom van het USGS Astrogeology Research Program.</para
+></listitem>
+    </itemizedlist>
+  </chapter>
+
+  <chapter id="search-places">
+  <title
+>Plaatsen opzoeken met &marble;</title>
+
+    <para
+>&marble; beschikt over een kleine gegevensbank waarin meer dan 12,000 steden ( <ulink url="https://www.populationdata.net/monde/"
+></ulink
+> ) en een aantal bergen en vulkanen zijn opgenomen. U kunt een locatie vinden door de naam in te voeren in het zoekveld bovenaan in de gereedschapskist (&marble; gebruikt altijd de plaatselijke naam in het Latijns schrift). Als u met typen begint, ziet u suggesties onder het zoekveld als volgt: </para>
+
+    <screenshot>
+      <screeninfo
+>Plaatsen opzoeken met &marble;</screeninfo>
+      <mediaobject>
+        <imageobject
+><imagedata fileref="search-1.png" format="PNG"/></imageobject>
+        <textobject
+><phrase
+>Plaatsen opzoeken met &marble;</phrase
+></textobject>
+      </mediaobject>
+    </screenshot>
+
+    <para
+>Als u op &Enter; klikt, raadpleegt &marble; zowel online als offline bronnen voor zelfs nog meer nuttige gegevens. </para>
+
+    <para
+>Hiervoor zijn online de volgende diensten beschikbaar:</para>
+
+    <itemizedlist>
+      <listitem
+><para
+>Nominatim: Een online zoek- en omgekeerd geocoding-dienst, met gebruik van gegevens van <ulink url="https://www.openstreetmap.org"
+></ulink
+></para
+></listitem>
+
+      <listitem
+><para
+>HostIP: Een omgekeerd geocoding-dienst op basis van het IP-adres,  met gebruik van gegevens van <ulink url="https://www.hostip.info"
+></ulink
+></para
+></listitem>
+    </itemizedlist>
+
+    <para
+>Ook zijn de volgende offline diensten beschikbaar, afhankelijk van de extra geïnstalleerde software en gegevens:</para>
+
+    <itemizedlist>
+      <listitem
+><para
+>Lokale gegevens: Alle markeringen in alle open documenten worden nagelopen. Hiertoe behoren natuurlijk ook uw bladwijzers.</para
+></listitem>
+
+      <listitem
+><para
+>Monav: Een offline zoekdienst die de gegevens gebruikt van de Monav offline route-informatie, gebaseerd op OSM-gegevens</para
+></listitem>
+
+      <listitem
+><para
+>Gosmore: Een offline omgekeerd geocoding-diens met gebruik van gegevens van gosmore</para
+></listitem>
+
+    </itemizedlist>
+
+    <para
+>Als u wat u zoekt op de kaart heeft gevonden, kunt u op de naam of het symbool klikken met de &LMB;. Na klikken op de naam van de locatie op de kaart ziet u een lijst van gegevens, aldus: </para>
+
+    <screenshot>
+      <screeninfo
+>Gegevensblad van &marble;</screeninfo>
+      <mediaobject>
+        <imageobject
+><imagedata fileref="search-2.png" format="PNG"/></imageobject>
+        <textobject
+><phrase
+>Gegevensblad van &marble;</phrase
+></textobject>
+      </mediaobject>
+    </screenshot>
+
+    <para
+>In het eerste tabblad van de dialoog worden enkele heel basale gegevens weergegeven, zoals naam, coördinaten en vlag van het land waar de locatie toe  behoort. Verder worden bij steden het bevolkingsaantal en bij bergen de hoogte getoond. Als uw computer verbonden is met het internet, en bent u online, dan zal &marble; proberen om te verbinden met de populaire internetencyclopedie <quote
+>Wikipedia</quote
+>. Als een bijpassend Wikipedia-artikel beschikbaar is geeft &marble; dit weer in het gegevensblad van de dialoog. </para>
+
+    <note
+><para
+>De toegevoegde gegevensbronnen kunnen worden ingeschakeld met submenu <menuchoice
+><guimenu
+>Beeld</guimenu
+><guisubmenu
+>Online-diensten</guisubmenu
+></menuchoice
+>. Bijvoorbeeld, u moet <guimenuitem
+>Wikipedia</guimenuitem
+> kiezen om de artikelen in Wikipedia te kunnen raadplegen.</para
+></note>
+  </chapter>
+
+  <chapter id="routing">
+  <title
+>Uw weg vinden in &marble;</title>
+
+    <para
+>Behalve het zoeken naar plaatsen, kan &marble; de mogelijke routes tussen twee of meer plaatsen tonen. Wilt u een fietstocht plannen in een nabij bos?,Wilt u weten hoe u naar een adres in een onbekende stad kunt rijden? Klik op het tabblad <guilabel
+>Routes</guilabel
+> bovenin de gereedschapskist van &marble;, waarna u uw route kunt gaan uitstippelen. </para>
+
+    <sect1 id="routing-route-new">
+    <title
+>Een nieuwe route aanmaken</title>
+
+      <para
+>In het tabblad <guilabel
+>Routes</guilabel
+> ziet u twee groene pictogrammen <guilabel
+>A</guilabel
+> en <guilabel
+>B</guilabel
+>. Vul in het veld voor knop <guilabel
+>A</guilabel
+> het startadres in van de route. Druk op &Enter;, of klik op de knop <guilabel
+>Zoeken</guilabel
+> om passende plaatsen te zoeken. Een kleine voortgangsanimatie verkort de wachttijd tijdens het zoekproces. Met de zoekterm <quote
+>Weavers Lane, London</quote
+>, ziet het resultaat eruit als in het onderstaande schermbeeld: </para>
+
+      <screenshot>
+        <screeninfo
+>Adressen zoeken met &marble;</screeninfo>
+        <mediaobject>
+          <imageobject
+><imagedata fileref="routing-1.png" format="PNG"/></imageobject>
+          <textobject
+><phrase
+>Adressen zoeken met &marble;</phrase
+></textobject>
+        </mediaobject>
+      </screenshot>
+
+      <para
+>Passende plaatsen komen in een lijst onder de invoervelden. Zij worden ook in de kaart getoond. Het eerste resultaat in de lijst wordt automatisch geselecteerd als het startpunt van de route. In de kaart wordt deze plaats met het zelfde pictogram <guilabel
+>A</guilabel
+> gekenmerkt als de knop naast het invoerveld. Als het eerste resultaat niet het gewenste startpunt is, kunt u op een ander resultaat klikken zodat dat de gewenste startpositie wordt. U kunt zowel in de lijst als op het betreffende pictogram in de kaart klikken. Het huidige startpunt wordt altijd met het pictogram <guilabel
+>A</guilabel
+> aangegeven. </para>
+
+      <para
+>Als het startpunt van de route is vastgesteld, kunnen we het eindpunt van de trip invoeren. Dit gaat net zo: Voer het adres van de bestemming in, in het invoerveld naast de knop <guilabel
+>B</guilabel
+>, druk op &Enter; en selecteer het gewenste eindpunt in de verkregen lijst.  </para>
+
+      <para
+>Ziet u dat de knop <guilabel
+>Zoeken</guilabel
+> nu verdwenen is, en vervangen door de knop <guilabel
+>Aanwijzingen ophalen</guilabel
+>? Zo geeft &marble; aan dat alle informatie die nodig is voor het berekenen van een route correct is ingevoerd. Als u klikt op de knop <guilabel
+>Aanwijzingen ophalen</guilabel
+> wordt er een geschikte route berekend. Als uw bestemming <quote
+>Sun Walk, London</quote
+> is, dan ziet het resultaat er ongeveer uit als in het volgende schermbeeld: </para>
+
+      <screenshot>
+        <screeninfo
+>Berekende route in &marble;</screeninfo>
+        <mediaobject>
+          <imageobject
+><imagedata fileref="routing-2.png" format="PNG"/></imageobject>
+          <textobject
+><phrase
+>Route tonen door &marble;</phrase
+></textobject>
+        </mediaobject>
+      </screenshot>
+
+      <para
+>Indien op het scherm de start- (of eind)positie zichtbaar zijn, dan is het wellicht eenvoudiger die direct in de kaart te selecteren. U kunt dit doen door op de knop <guilabel
+>A</guilabel
+> (of <guilabel
+>B</guilabel
+>) naast het invoerveld te klikken. Selecteer <guilabel
+>In de kaart</guilabel
+> in het menu dat u hierdoor krijgt, waardoor het invoeren via de kaart wordt geactiveerd: de volgende klik op een positie in de kaart wordt dan het begin (of einde) van uw route. Om een nauwkeuriger selectie mogelijk te maken verandert de cursor in een kruisje. De geselecteerde positie wordt in de route opgenomen en in de kaart voorzien van een merkteken. U kunt de selectie annuleren door nog een keer op de knop te klikken, of door op &Esc; te drukken. </para>
+
+      <para
+>Een andere methode voor het kiezen van het begin- en eindpunt van de route is met behulp van het contextmenu in de kaart: Klik met de &RMB; op de gewenste locatie, en selecteer <guilabel
+>Aanwijzingen vanaf</guilabel
+> of <guilabel
+>Aanwijzingen naar</guilabel
+>. </para>
+    </sect1>
+
+    <sect1 id="routing-profiles">
+    <title
+>Routeprofielen</title>
+
+      <para
+>Welke route u kiest hangt af van het gebruikte voertuig (indien er een is). U kunt dit in &marble; invoeren, samen met andere voorkeuren, in een routeprofiel. Elk profiel bevat de instellingen voor een bepaald type route. Bij de eerste keer dat &marble; wordt gestart maakt het vier algemene profielen voor u aan: <guilabel
+>Auto (snelste)</guilabel
+>, <guilabel
+>Auto (kortste)</guilabel
+>, <guilabel
+>Fiets</guilabel
+> en <guilabel
+>Voetganger</guilabel
+>. </para>
+
+      <para
+>De voorbeelden in de vorige sectie waren voor het profiel <guilabel
+>Auto (snelste)</guilabel
+>. Laten we die nu bekijken voor een ander profiel: Selecteer <guilabel
+>Voetganger</guilabel
+> in de keuzelijst van  <guilabel
+>Profiel</guilabel
+>. De route ziet er nu uit als volgt: </para>
+
+      <screenshot>
+        <screeninfo
+>Route voor voetganger in &marble;</screeninfo>
+        <mediaobject>
+          <imageobject
+><imagedata fileref="routing-5.png" format="PNG"/></imageobject>
+          <textobject
+><phrase
+>Route voor voetganger in &marble;</phrase
+></textobject>
+        </mediaobject>
+      </screenshot>
+
+      <para
+>De voorgestelde route is nu korter, omdat bij het berekenen van de beste route nu ook voetpaden worden gebruikt. </para>
+
+      <para
+>Indien u een van de standaard routes verder wilt aanpassen, kiest u die in de keuzelijst van <guilabel
+>Profiel</guilabel
+> en klikt u op <guilabel
+>Instellen</guilabel
+>. Er wordt dan een venster geopend. </para>
+
+      <screenshot>
+        <screeninfo
+>Routeprofiel instellen in &marble;</screeninfo>
+        <mediaobject>
+          <imageobject
+><imagedata fileref="routing-6.png" format="PNG"/></imageobject>
+          <textobject
+><phrase
+>Routeprofiel instellen in &marble;</phrase
+></textobject>
+        </mediaobject>
+      </screenshot>
+
+      <para
+>Aan de linkerkant kunt u instellen welke route-backends worden geraadpleegd voor routes. In &marble; worden acht of meer backends gebruikt, enkele online en de andere offline routeprogramma's. Voor online routeaanwijzingen is een internetverbinding nodig. Offline routeaanwijzingen werken zonder een internetverbinding, maar het is wel nodig om eerst de offline routekaarten te downloaden en te installeren. De ondersteunde backends zijn </para>
+
+      <itemizedlist>
+        <listitem
+><para
+>CycleStreets: Fietsroutes  voor het Verenigd Koninkrijk met gebruik van cyclestreets.net</para
+></listitem>
+
+        <listitem
+><para
+>Gosmore: een offline routeprogramma dat ook dienst doet als backend voor het online routeprogramma Yours</para
+></listitem>
+
+        <listitem
+><para
+>Mapquest: Een online routeprogramma met uitgebreide aanwijzingen bij elk daarvoor in aanmerking komend punt. </para>
+
+          <note
+><para
+>Een AppKey is nodig voor MapQuest. U kunt die AppKey<ulink url="https://developer.mapquest.com/plan_purchase/steps/business_edition/business_edition_free/register"
+>hier registreren</ulink
+>.</para
+></note
+></listitem>
+
+        <listitem
+><para
+>Monav: Een offline routeprogramma dat erg lange routes zeer snel berekent.</para
+></listitem>
+
+        <listitem
+><para
+>OSRM: Een online routeprogramma dat erg snel is, zelfs bij de berekening van zeer lange routes.</para
+></listitem>
+
+        <listitem
+><para
+>OpenRouteService: Een online routeprogramma dat ook, binnen Europa, rijaanwijzingen geeft.</para
+></listitem>
+
+        <listitem
+><para
+>Routino: Een offline routeprogramma met erg flexibele instellingen</para
+></listitem>
+
+        <listitem
+><para
+>Yours: Een online routeprogramma dat wereldwijd werkt, maar geen  rijaanwijzingen geeft</para
+></listitem>
+      </itemizedlist>
+
+      <para
+>Na het aan de linkerkant kiezen en activeren van een backend voor de route kunt u de instellingen ervan aan de rechterkant wijzigen. Elke backend heeft zijn eigen instellingen. </para>
+
+      <para
+>Behalve dat u de vier standaard profielen kunt instellen, kunt u ook nieuwe profielen aanmaken, en bestaande profielen in &marble; verwijderen, in de pagina voor <guilabel
+>Routeren</guilabel
+>. </para>
+    </sect1>
+
+    <sect1 id="routing-route-adjustments">
+    <title
+>Routes aanpassen</title>
+
+      <para
+>In &marble; kunt u verschillende aspecten van de route wijzigen: het veranderen van de opties voor de route, het invoegen van punten op de route, het verplaatsen of verwijderen van bestaande punten op de route. Het wijzigen van de opties voor de route is hiervoor al besproken, we zullen ons nu beperken tot het beheer van punten. </para>
+
+      <para
+>U kunt punten op de route invoegen door middel van slepen en neerzetten in de kaart. Als u de muisaanwijzer boven een deel van de route houdt (behalve boven reeds bestaande punten op de route), ziet u een pictogram met een groen vlaggetje, waarmee wordt aangegeven dat een punt kan worden ingevoegd. Dit invoegen gebeurt door te klikken met de &LMB;. Verplaats de muis, met ingedrukte &LMB;, naar de gewenste nieuwe positie. U ziet dan blauwe lijntjes verschijnen vanaf de naburige via-punten op de route naar de nieuwe positie. </para>
+
+      <screenshot>
+        <screeninfo
+>Routepunten toevoegen in &marble;</screeninfo>
+        <mediaobject>
+          <imageobject
+><imagedata fileref="routing-3.png" format="PNG"/></imageobject>
+          <textobject
+><phrase
+>Een routepunt invoegen in &marble;</phrase
+></textobject>
+        </mediaobject>
+      </screenshot>
+
+      <para
+>Het nieuwe routepunt wordt, zodra de &LMB; wordt losgelaten, ingevoegd tussen de beide naburige punten op de route. Daarbij wordt de route gestippeld weergegeven, om aan te geven dat de route verouderde informatie bevat. In de achtergrond wordt een nieuwe route berekend, die de verouderde route automatisch zal vervangen. </para>
+
+      <para
+>Het is ook mogelijk routepunten toe te voegen voor het startpunt of na het eindpunt van de route. U doet dat op dezelfde manier als bij het invoegen van tussenliggende routepunten, maar nu met ingedrukte &Ctrl;-toets, als u de muisaanwijzer verplaatst. U ziet nu een blauw lijntje verschijnen, dat aangeeft of het nieuwe routepunt aan het startpunt of aan het eindpunt wordt toegevoegd.. </para>
+
+      <para
+>Bestaande routepunten kunnen zonder meer over de hele kaart worden verplaatst. Plaats de muisaanwijzer boven een routepunt, en sleep die naar de nieuwe positie. Zodra die wordt neergezet, wordt de route automatisch weer berekend. </para>
+
+      <para
+>Als u routepunten wilt uitsluiten, moet u die verwijderen. Dit kunt u doen met de knop <guilabel
+>Wissen</guilabel
+>, naast het invoerveld voor het routepunt, of door met de &RMB; op het routepunt te klikken, en in het contextmenu <guilabel
+>Deze bestemming wissen</guilabel
+> te kiezen. Als u een geheel nieuwe route wilt, moet u eerst alle routepunten wissen. </para>
+    </sect1>
+
+    <sect1 id="routing-route-export">
+    <title
+>Routes inlezen, opslaan en exporteren</title>
+
+      <para
+>U kunt routes opslaan in het <acronym
+>kml</acronym
+> (Keyhole Markup Language) formaat, en ze later weer inlezen op dezelfde computer of op een ander apparaat, waarop &marble; draait; of deze ter beschikking stellen aan anderen, of aan andere toepassingen die <literal role="extension"
+>.kml</literal
+> -bestanden kunnen lezen (zoals <application
+>Google Earth</application
+>). Als u een route wilt opslaan in een <literal role="extension"
+>.kml</literal
+>-bestand, klikt u op het pictogram voor  <guilabel
+>Opslaan</guilabel
+> onderaan het tabblad voor routes. In de dialoog voor opslaan, die verschijnt, kunt u de naam van het bestand kiezen waarin u de route wilt opslaan. Op dezelfde manier kunt u een route inlezen door te drukken op het pictogram voor  <guibutton
+>Openen</guibutton
+> onderin het tabblad voor routes. Selecteer het te openen <literal role="extension"
+>.kml</literal
+> routebestand in de dialoog die verschijnt, waarna &marble; hieruit de route inleest. </para>
+
+      <para
+>Routes die in &marble; zijn gepland, kunnen in andere toepassingen of navigatieapparaten worden gebruikt, die <acronym
+>gpx</acronym
+> (GPS eXchange Format) of gelijkwaardige formaten ondersteunen. Indien uw navigatieapparaat niet direct <acronym
+>gpx</acronym
+> ondersteunt, kunt u een conversiehulpmiddel gebruiken, zoals gpsbabel, om het <acronym
+>gpx</acronym
+>-bestand dat door &marble; wordt geëxporteerd, naar een (voor uw apparaat) geschikt formaat om te zetten. Het exporteren van een route in &marble; wordt gestart in het contextmenu voor routes in de kaart. Klik met de &RMB; op een willekeurig punt in de kaart. In het verschijnende contextmenu kiest u <guilabel
+>Route exporteren...</guilabel
+>: </para>
+
+      <screenshot>
+        <screeninfo
+>Route exporteren in &marble;</screeninfo>
+        <mediaobject>
+          <imageobject
+><imagedata fileref="routing-4.png" format="PNG"/></imageobject>
+          <textobject
+><phrase
+>Een route exporteren in &marble;</phrase
+></textobject>
+        </mediaobject>
+      </screenshot>
+
+      <para
+>Voer de gewenste naam in, in de dialoog die u krijgt voor opslaan. De extensie van de bestandsnaam moet <literal role="extension"
+>gpx</literal
+>  zijn bij opslaan als  <acronym
+>gpx</acronym
+>-bestand of <filename class="extension"
+>kml</filename
+> bij opslaan als <literal role="extension"
+>kml</literal
+> to store in <acronym
+>kml</acronym
+> (Keyhole Markup Language). Merk op dat Marble standaard het <acronym
+>kml</acronym
+>-formaat gebruikt. Bij twijfel slaat u routes het beste op als <acronym
+>kml</acronym
+>-bestanden, en gebruikt u alleen het <acronym
+>gpx</acronym
+>-formaat als u routes wilt gebruiken in toepassingen die geen <acronym
+>kml</acronym
+>-bestanden kunnen lezen. </para>
+    </sect1>
+  </chapter>
+
+  <chapter id="measure-distances">
+  <title
+>Afstanden meten met &marble;</title>
+
+    <para
+>Als eerder al vermeld toont &marble; altijd een dynamische schaalbalk linksonder aan de kaart. Samen met de kompasroos rechtsboven zijn deze objecten bedoeld voor een betere oriëntatie. Maar er is meer: &marble; maakt het mogelijk om afstanden te meten tussen twee of meer punten op aarde. Om dit te doen klikt u de punten in de juiste volgorde aan met de &RMB;. Bij elke klik zal een popupmenu verschijnen waarin u een meetpunt kunt toevoegen (<guilabel
+>Meetpunt toevoegen</guilabel
+>) of alle meetpunten verwijderen  (<guilabel
+>Meetpunten verwijderen</guilabel
+>): </para>
+
+    <screenshot>
+      <screeninfo
+>Meten met &marble;</screeninfo>
+      <mediaobject>
+        <imageobject
+><imagedata fileref="measure-1.png" format="PNG"/></imageobject>
+        <textobject
+><phrase
+>Afstanden meten met &marble;</phrase
+></textobject>
+      </mediaobject>
+    </screenshot>
+
+    <para
+>Vanaf het moment dat u minstens twee meetpunten heeft toegevoegd zal de totale afstand linksboven worden weergegeven. &marble; zal voor alle metingen uitgaan van een zuiver bolvormige aarde, wat in de meeste gevallen accuraat genoeg zou moeten zijn (in werkelijkheid is de aarde niet helemaal bolvormig). </para>
+
+    <tip
+><para
+>Het tonen van afstanden en richtingen van de gemeten segmenten kan worden ingesteld in de dialoog van het <link linkend="measure-tool-config"
+>Meethulpmiddel</link
+>.</para
+></tip>
+  </chapter>
+
+  <chapter id="download-region">
+  <title
+>Kaartgebieden ophalen</title>
+
+    <para
+>&marble; is klaar voor gebruik, omdat er al een aantal kaarten zijn geïnstalleerd. Als u op sommige plaatsen inzoomt, worden in de achtergrond meer gedetailleerde kaarten van het huidige kaartthema opgehaald. Dit werkt goed als er een internetverbinding is. Maar wat te doen als u reist naar een stad, waar geen constante internetverbinding beschikbaar is voor het downloaden van kaarten? Plan vooruit, en haal die kaartgebieden op die u wilt gaan gebruiken. </para>
+
+    <para
+>Om te kunnen begrijpen wat er moet worden gedownload, om offline (dus zonder internetverbinding) bepaalde kaartdelen te kunnen laten tonen, moeten we kort het begrip tegels beschouwen, die in &marble; intern wordt gebruikt. Een tegel is een afbeelding die overeenkomt met een bepaald gedeelte van de kaart. Tegels worden in &marble; naast elkaar geplaatst, om op die manier de hele kaart te vormen. Afhankelijk van de gebruikte projectie, worden tegels gerangschikt in een rechthoek (Platte kaartprojectie, links) of als een bol (Globe, rechts): </para>
+
+    <screenshot>
+      <screeninfo
+>Projecties in &marble;</screeninfo>
+      <mediaobject>
+        <imageobject
+><imagedata fileref="download-region-1.png" format="PNG"/></imageobject>
+        <textobject
+><phrase
+>Tegels op niveau 1 in Platte kaartprojectie (links) en als globe (rechts)</phrase
+></textobject>
+      </mediaobject>
+    </screenshot>
+
+    <para
+>Als op deze weergave wordt ingezoomd, moeten er steeds meer details worden getoond. Dan zijn de tegels in de bovenstaande schermbeelden te grof. &marble; herkent dit automatisch, en schakelt  naar het volgende tegelniveau, waarin de tegels meer details bevatten. Zo gaat dit verder: hoe verder er wordt ingezoomd, hoe hoger het tegelniveau is, en dus hoe meer details ze bevatten. In de volgende schets worden de verschillende aantallen tegels (gekleurd) weergegeven, voor hetzelfde kaartgebied, op verschillende tegelniveaus: </para>
+
+    <screenshot>
+      <screeninfo
+>Tegelniveaus in &marble;</screeninfo>
+      <mediaobject>
+        <imageobject
+><imagedata fileref="download-region-2.png" format="PNG"/></imageobject>
+        <textobject
+><phrase
+>Verschillende tegelniveaus in &marble;</phrase
+></textobject>
+      </mediaobject>
+    </screenshot>
+
+    <para
+>Als u een kaartgebied ophaalt voor gebruik offline, moet u alle tegels downloaden van dit gebied, voor alle tegelniveaus die u wilt gebruiken. Vanwege het verband tussen de niveaus van tegels en zoom, moet u dit opvatten als het downloaden van alle tegels voor de door u te gebruiken zoomniveaus. </para>
+
+    <para
+>Om dit voor een bepaald gebied te doen, moet u dit gebied zichtbaar maken in het scherm door op de globe in te zoomen en door die te draaien. Selecteer nu het menu-item <menuchoice
+><guilabel
+>Bestand</guilabel
+> <guilabel
+>Gebied ophalen...</guilabel
+></menuchoice
+> en open de dialoog <guilabel
+>Gebied ophalen...</guilabel
+>. De optie <guilabel
+>Zichtbaar gebied</guilabel
+> moet geactiveerd blijven, zodat alleen de tegels voor het gebied dat op het scherm zichtbaar is, worden gedownload. Vervolgens selecteert u het <guilabel
+>Tegelniveaubereik:</guilabel
+> (zoombereik) van de op te halen tegels. Het eerste veld bevat het laagste, het tweede veld het hoogste op te halen tegelniveau. De tussenliggende tegelniveaus worden ook opgehaald. &marble; laat zien hoeveel beelden (tegels) moeten worden gedownload, en past dit aantal aan als u wijzigingen aanbrengt in het op te halen gebied of in het bereik van de tegelniveaus. </para>
+
+    <screenshot>
+      <screeninfo
+>Dialoog voor op te halen gebied in &marble;</screeninfo>
+      <mediaobject>
+        <imageobject
+><imagedata fileref="download-region-3.png" format="PNG"/></imageobject>
+        <textobject
+><phrase
+>&marble;'s dialoog voor op te halen gebied</phrase
+></textobject>
+      </mediaobject>
+    </screenshot>
+
+    <para
+>In de statusbalk onderin ziet u het tegelniveau dat overeenkomt met het huidige zoomniveau. Merk op dat u mogelijk hiervoor eerst &marble; moet instellen: Klik met de &RMB; op de statusbalk, en selecteer <guilabel
+>Tegel-zoomniveau tonen</guilabel
+>. </para>
+
+    <para
+>Drukken op <guibutton
+>OK</guibutton
+> start het ophalen van het kaartgebied. U kunt de voortgang hiervan volgen met de voortgangsbalk van &marble; (indien geactiveerd). </para>
+
+    <para
+>Als u de coördinaten kent van het op te halen kaartgebied, kunt u die opgeven na klikken op de optie <guilabel
+>Gebied opgeven</guilabel
+>. In dat geval wordt het gebied dat op het scherm zichtbaar is genegeerd. </para>
+
+    <para
+>Gedurende de tijd dat de dialoog <guilabel
+>Gebied ophalen...</guilabel
+> geopend is, kunt u &marble; gewoon blijven gebruiken. Dit is nuttig als er een wachtrij is voor het ophalen van verschillende gebieden of tegelniveaus. U moet dan klikken op de knop <guilabel
+>Toepassen</guilabel
+> in plaats van <guilabel
+>OK</guilabel
+> om de download te starten. </para>
+  </chapter>
+
+  <chapter id="recording-movie">
+  <title
+>Een film opnemen met &marble;</title>
+
+    <sect1 id="recording-movie-recording">
+    <title
+>Een film opnemen met &marble;</title>
+
+      <para
+>U kunt in &marble; deze functie gebruiken voor het opnemen van een film. </para>
+
+      <para
+>Starten met opnemen met het menu-item <menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>R</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Bewerken</guimenu
+> <guimenuitem
+>Film opnemen</guimenuitem
+></menuchoice
+> om de dialoog <guilabel
+>Film opnemen</guilabel
+> te openen. U zult een dialoog zien zoals deze: </para>
+
+      <screenshot>
+        <screeninfo
+>Dialoog voor film opnemen in &marble;</screeninfo>
+        <mediaobject>
+          <imageobject
+><imagedata fileref="movie-1.png" format="PNG"/></imageobject>
+          <textobject
+><phrase
+>Dialoog voor film opnemen in &marble;</phrase
+></textobject>
+        </mediaobject>
+      </screenshot>
+
+      <para
+>Druk op de knop <guibutton
+>Openen</guibutton
+> en kies de naam en de doelmap voor de film. U kunt ook het aantal frames per second (FPS) van de film wijzigen tussen 1 en 60. </para>
+
+      <para
+>Als alles is ingesteld, kunt u met opnemen beginnen. Daartoe klikt u op de knop <guibutton
+>Start</guibutton
+>. Hierna kunt u zoomen en draaien, terwijl &marble; een video opneemt van uw reis over de globe. </para>
+
+      <para
+>U kunt de opname van de film stoppen, en de film opslaan met menu-item <menuchoice
+><guimenu
+>Bewerken</guimenu
+> <guimenuitem
+>Stop opnemen</guimenuitem
+></menuchoice
+>. </para>
+
+      <sect2 id="recording-movie-troubleshooting">
+      <title
+>Probleemoplossing</title>
+
+        <para
+>U kunt een foutbericht krijgen als avconv of ffmpeg niet zijn geïnstalleerd. Download die vanaf <ulink url="https://ffmpeg.org/download.html"
+>ffmpeg's downloadpagina</ulink
+> en <ulink url="https://libav.org/download.html"
+>avconv's downloadpagina</ulink
+> of gebruik pakketten van uw distributie. </para>
+      </sect2>
+    </sect1>
+  </chapter>
+
+  <chapter id="commands">
+  <title
+>Overzicht van de opdrachten</title>
+
+    <sect1 id="marble-mainwindow">
+    <title
+>Menu's en sneltoetsen</title>
+
+      <sect2>
+      <title
+>Het menu Bestand</title>
+
+        <variablelist>
+          <varlistentry>
+            <term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>O</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Bestand</guimenu
+> <guimenuitem
+>Openen...</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>Opent</action
+> een kaartbestand.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><guimenu
+>Bestand</guimenu
+> <guimenuitem
+>Recent geopend</guimenuitem
+> </menuchoice
+></term>
+            <listitem
+><para
+>Dit is een sneltoets naar recent geopende kaarten. Als u hierop klikt krijgt u een lijst waarin een aantal van de laatst geopende bestanden. Als u op een ervan klikt wordt dit in &marble; geopend-als dit bestand nog steeds op dezelfde locatie aanwezig is.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>N</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>File</guimenu
+><guimenuitem
+>Kaarten ophalen...</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>Toont</action
+> de dialoog <guilabel
+>Vers van de pers</guilabel
+> waarin u extra kaarten voor &marble; kunt downloaden, waaronder kaarten van Mars en Venus.</para
+></listitem>
+          </varlistentry>
+
+         <varlistentry>
+            <term
+><menuchoice
+><guimenu
+>Bestand</guimenu
+> <guimenuitem
+>Nieuwe kaart aanmaken...</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>Toont</action
+> de dialoog van de <guilabel
+>Assistent voor aanmaken kaarten in &marble;</guilabel
+> waarin u een nieuwe kaart kunt aanmaken met gebruik van de gegevens van Web Map Service (dienst aanmaken kaarten via het web), uw eigen afbeeldingsbestand , of  "indexed tiles" (geïndexeerde tegels) van Open Street Map.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><guimenu
+>Bestand</guimenu
+> <guimenuitem
+>Gebied ophalen...</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>Toont</action
+> de dialoog <guilabel
+>Gebied ophalen...</guilabel
+> voor het ophalen van kaartgegevens in verschillende zoomniveaus, voor offline gebruik. Zie <link linkend="download-region"
+>Kaartgebieden ophalen</link
+> voor bijzonderheden.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>S</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Bestand</guimenu
+> <guimenuitem
+>Kaart exporteren...</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>Exporteert</action
+> een schermbeeld van &marble;'s kaart naar een afbeeldingsbestand.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>P</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Bestand</guimenu
+> <guimenuitem
+>Afdrukken...</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>Drukt</action
+> een schermbeeld van &marble;'s kaart <action
+>af</action
+>.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><guimenu
+>Bestand</guimenu
+> <guimenuitem
+>Afdrukvoorbeeld</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+>Opent een venster met een voorbeeld van hoe de kaart wordt afgedrukt.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><guimenu
+>Bestand</guimenu
+> <guimenuitem
+>Offline werken</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+>Als deze optie wordt gekozen haalt &marble; niet langer kaartgegevens op van het internet. Er wordt nu alleen in de lokale gegevensbank gezocht. Nieuwe routes kunnen niet worden opgehaald.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>Q</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Bestand</guimenu
+> <guimenuitem
+>Afsluiten</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>Sluit</action
+> &marble;.</para
+></listitem>
+          </varlistentry>
+        </variablelist>
+      </sect2>
+
+      <sect2>
+      <title
+>Het menu Bewerken</title>
+
+        <variablelist>
+          <varlistentry>
+            <term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>C</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Bewerken</guimenu
+> <guimenuitem
+>Kaart kopiëren</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>Kopieert</action
+> een schermafdruk van &marble;'s kaart naar het globale klembord.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><guimenu
+>Bewerken</guimenu
+> <guimenuitem
+>Coördinaten kopiëren</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>Kopieert</action
+> de huidige coördinaten naar het globale klembord.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>E</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Bewerken</guimenu
+> <guimenuitem
+>Kaart bewerken</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+>Hiermee <action
+>kunt</action
+> u de huidige kaart openen in het externe bewerkingsprogramma. In de huidige versie worden <application
+>Potlatch</application
+> (in een webbrowser), <application
+>Merkaartor</application
+> en <application
+>JOSM</application
+> ondersteund, dit zijn programma's voor het bewerken van kaarten. </para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>R</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Bewerken</guimenu
+> <guimenuitem
+>Film opnemen</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>Neemt een film op</action
+> met &marble;.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><guimenu
+>Bewerken</guimenu
+> <guimenuitem
+>Opnemen stoppen</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>Stopt</action
+> de huidige filmopname.</para
+></listitem>
+          </varlistentry>
+        </variablelist>
+      </sect2>
+
+      <sect2>
+      <title
+>Het menu Beeld</title>
+
+        <variablelist>
+          <varlistentry>
+            <term
+><menuchoice
+><guimenu
+>Beeld</guimenu
+> <guimenuitem
+>Huidige locatie</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>Tonen/verbergen</action
+> van de locatiepagina in het linkerpaneel. Als uw computer verbonden is met een GPS-apparaat, toont &marble; de geografische lengte en breedte van uw huidige locatie.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><guimenu
+>Beeld</guimenu
+> <guimenuitem
+>Kruisdraad</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>Toont/verbergt</action
+> een eenvoudige kruisdraad in het midden van de kaart.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><shortcut
+><keycap
+>F5</keycap
+></shortcut
+> <guimenu
+>Beeld</guimenu
+> <guimenuitem
+>Opnieuw</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+>Het huidig zichtbare deel van de kaart wordt opnieuw gedownload en  op het scherm weergegeven.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><guimenu
+>Beeld</guimenu
+> <guimenuitem
+>Informatievakken</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+>In dit submenu kunt u de positie van de informatievakken vergrendelen, en de plugins tonen of verbergen die zijn ingeschakeld op de pagina <link linkend="configplugins"
+>Plugins</link
+> van het configuratievenster van &marble;.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><guimenu
+>Beeld</guimenu
+> <guimenuitem
+>Online diensten</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+>De plugin <guimenuitem
+>Wikipedia</guimenuitem
+> toont artikelen in Wikipedia, met betrekking tot de aarde, als een pictogram in de kaart. Door op een pictogram te klikken wordt een bladerprogramma (browser) gestart, waarin de juiste pagina wordt  weergegeven. De gegevens worden geleverd door een dienst op het web, via GeoNames.org. Op dezelfde manier levert de plugin <guimenuitem
+>Photos</guimenuitem
+> op dit moment foto's via de website van FlickR, voor het delen (sharing) van foto's.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><guimenu
+>Beeld</guimenu
+> <guimenuitem
+>Wolken</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>Toont</action
+> een realtime wolkenkaart die elke 3 uur wordt bijgewerkt. Er wordt gebruik gemaakt van beelden van de satellieten GOES, METEOSAT en GMS, die worden gedownload van de pagina voor geostationaire satellietbeelden van de universiteit van Dundee. Met dank aan Hari Nair van het Xplanet Project.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><guimenu
+>Beeld</guimenu
+> <guimenuitem
+>Atmosfeer</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>Tonen</action
+> van de diffuse reflectie van een atmosfeer rondom de aarde.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><guimenu
+>Beeld</guimenu
+> <guimenuitem
+>Sterren</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>Tonen </action
+> van de sterren, zoals gezien vanuit het zonnestelsel.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><guimenu
+>Beeld</guimenu
+> <guimenuitem
+>Zoncontrole...</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>Tonen</action
+> van de <guilabel
+>Zoncontrole</guilabel
+> waarin u de  <guilabel
+>zonschaduw</guilabel
+> kunt instellen, en de kaart kunt centreren op de positie recht onder de zon.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><guimenu
+>Beeld</guimenu
+> <guimenuitem
+>Zoncontrole...</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>Tonen</action
+> van de dialoog van de <guilabel
+>Tijdcontrole</guilabel
+> waarin u datum en tijd kunt instellen, en de simulatiesnelheid.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><guimenu
+>Beeld</guimenu
+> <guisubmenu
+>Verduisteringen in <replaceable
+>year</replaceable
+></guisubmenu
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>Toont</action
+> de lijst van verduisteringen voor het gekozen jaar met menu-item <menuchoice
+><guimenu
+>Beeld</guimenu
+><guimenuitem
+>Toon verduisteringen...</guimenuitem
+></menuchoice
+>.</para>
+
+            <para
+>Dit menuonderdeel is alleen beschikbaar wanneer de plugin <link linkend="eclipsesplugin"
+>Verduisteringen</link
+> actief is.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><guimenu
+>Beeld</guimenu
+> <guimenuitem
+>Toon verduisteringen...</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>Toont</action
+> de dialoog voor <guilabel
+>Verduisteringen</guilabel
+> waarin u het gewenste jaar kunt opgeven, de dialoog kunt openen voor het instellen van de plugin, gegevens kunt bekijken over het begin, eind en helderheid van de eclips. Kies een eclips in de  lijst en druk op <guibutton
+>Ga naar geselecteerde verduistering</guibutton
+> om naar de locatie van de verduistering te gaan op de wereldbol..</para>
+
+            <para
+>Dit menuonderdeel is alleen beschikbaar wanneer de plugin <link linkend="eclipsesplugin"
+>Verduisteringen</link
+> actief is.</para
+></listitem>
+          </varlistentry>
+        </variablelist>
+      </sect2>
+
+      <sect2>
+      <title
+>Het menu Bladwijzers</title>
+        <variablelist>
+          <varlistentry>
+            <term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>B</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Bladwijzer</guimenu
+> <guimenuitem
+>Bladwijzer toevoegen...</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>Open de  <guilabel
+>Bladwijzer bewerken</guilabel
+>-dialoog</action
+> om een bladwijzer te beheren.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><guimenu
+>Instellingen</guimenu
+> <guimenuitem
+>Bladwijzers tonen</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+>Een keuzevakje  voor <action
+> het tonen van bladwijzers in de kaart.</action
+></para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><guimenu
+>Bladwijzers</guimenu
+> <guimenuitem
+>Basislocatie instellen</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>Stel de huidige positie in als uw huis.</action
+></para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><guimenu
+>Bladwijzers</guimenu
+> <guimenuitem
+>Bladwijzers beheren...</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>Open de <guilabel
+>Bladwijzers beheren</guilabel
+> -dialoog</action
+> waarin u alle bladwijzers kunt beheren.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><guimenu
+>Bladwijzers</guimenu
+> <guimenuitem
+>Standaard</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>In dit submenu ziet u al uw standaard locaties.</action
+></para
+></listitem>
+          </varlistentry>
+        </variablelist>
+      </sect2>
+
+      <sect2>
+      <title
+>Het menu Instellingen</title>
+
+        <variablelist>
+          <varlistentry>
+            <term
+><menuchoice
+><guimenu
+>Instellingen</guimenu
+> <guimenuitem
+>Werkbalk tonen</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>Toont of verbergt</action
+> de werkbalk.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><guimenu
+>Instellingen</guimenu
+> <guimenuitem
+>Statusbalk tonen</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>Toont of verbergt</action
+> de statusbalk.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><guimenu
+>Instellingen</guimenu
+> <guimenuitem
+>Panelen</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>Tonen of verbergen</action
+> van de panelen in &marble;. </para>
+
+            <tip
+><para
+>U kunt in &marble; alle panelen verbergen of tonen in het menu-item <menuchoice
+><guimenu
+>Instellingen</guimenu
+> <guisubmenu
+>Panelen</guisubmenu
+> <guimenuitem
+>Alle panelen tonen/verbergen</guimenuitem
+></menuchoice
+> te selecteren of door op de toets <keycap
+>F9</keycap
+> te drukken.</para
+></tip
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><guimenu
+>Instellingen</guimenu
+> <guimenuitem
+>Beeldgrootte</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>Schakelt tussen verschillende beeldgroottes van de kaart in &marble;</action
+>. U kunt kiezen uit de geschikte afmetingen voor screencasts of het mogelijk laten dat de beeldgrootte in &marble; aanpasbaar blijft (item <guimenuitem
+>Standaard (aanpasbaar)</guimenuitem
+>).</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>F</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Instellingen</guimenu
+> <guimenuitem
+>Volledig scherm</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>Wisselt tussen normaal en volledig beeld</action
+> In volledig scherm is de titelbalk verborgen en het eigenlijke programmavenster vergroot zodat het hele scherm wordt gevuld.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><guimenu
+>Instellingen</guimenu
+> <guimenuitem
+>Virtuele Globe van &marble;...</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>Toont</action
+> het <link linkend="configure"
+>configuratiescherm van &marble;</link
+></para
+></listitem>
+          </varlistentry>
+
+        </variablelist>
+
+      </sect2>
+
+      <sect2>
+      <title
+>Het menu Help</title>
+
+        <para
+>&marble; heeft het algemene &kde; <guimenu
+>Help</guimenu
+>-menu, meer informatie vindt u in het <ulink url="help:/fundamentals/ui.html#menus-help"
+>Help Menu</ulink
+> van de Basisinformatie van  &kde;. </para>
+      </sect2>
+    </sect1>
+  </chapter>
+
+  <chapter id="configure">
+  <title
+>&marble; instellen</title>
+
+    <sect1 id="configview">
+    <title
+>Configuratie van Beeld</title>
+
+      <screenshot>
+        <screeninfo
+>Het configuartiescherm voor Beeld</screeninfo>
+        <mediaobject>
+          <imageobject
+><imagedata fileref="configure-view.png" format="PNG"/></imageobject>
+          <textobject
+><phrase
+>Het configuartiescherm voor Beeld</phrase
+></textobject>
+        </mediaobject>
+      </screenshot>
+
+      <variablelist>
+        <varlistentry>
+          <term
+><guilabel
+>Afstand:</guilabel
+></term>
+          <listitem
+><para
+>De eenheid die gebruikt wordt voor het meten van hoogtes, lengten en afstanden (&eg; km, mi, ft).</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>Hoek:</guilabel
+></term>
+          <listitem
+><para
+>Stelt de notatie in die gebruikt wordt voor hoeken in de coördinaten: Standaard wordt de notatie Graden-Minuten-Seconden (b.v. 54°30'00" ) gebruikt. Een alternatief is decimale graden te gebruiken (b.v. 54.5°).</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>Stilstaande afbeelding:</guilabel
+></term>
+          <listitem
+><para
+>Stelt de kwaliteit in van kaarten als de gebruiker niets instelt. Normaal gezien maakt dit een hoge kwaliteit van de kaarten mogelijk als snelheid niet belangrijk is.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>Tijdens animaties:</guilabel
+></term>
+          <listitem
+><para
+>Stelt de kwaliteit in van de kaarten tijdens animaties (&eg;. tijdens het slepen van de globe). Vooral bij trage machines is het aan te raden om dit op <guilabel
+>Lage kwaliteit</guilabel
+> in te stellen, waardoor een hogere animatiesnelheid mogelijk wordt.</para
+></listitem>
+        </varlistentry>
+
+<!--         <varlistentry>
+          <term
+><guilabel
+>Place names:</guilabel
+></term>
+          <listitem
+><para
+>Places often have different names in different languages. The label on the map can show the name in the user's language. Alternatively it can display the name in the official language and glyphs of that place.</para
+></listitem>
+        </varlistentry
+>-->
+
+        <varlistentry>
+          <term
+><guilabel
+>Standaard lettertype in de kaart:</guilabel
+></term>
+          <listitem
+><para
+>Het standaard lettertype dat in de kaart gebruikt wordt.</para
+></listitem>
+        </varlistentry>
+      </variablelist>
+    </sect1>
+
+    <sect1 id="confignavigation">
+    <title
+>Configuratie van Navigatie</title>
+
+      <screenshot>
+        <screeninfo
+>Het configuratiescherm voor Navigatie</screeninfo>
+        <mediaobject>
+          <imageobject
+><imagedata fileref="configure-navigation.png" format="PNG"/></imageobject>
+          <textobject
+><phrase
+>Het configuratiescherm voor Navigatie</phrase
+></textobject>
+        </mediaobject>
+      </screenshot>
+
+      <variablelist>
+<!--        <varlistentry>
+          <term
+><guilabel
+>Drag location:</guilabel
+></term>
+          <listitem
+><para
+>While dragging the mouse there are two standard behaviors when dealing with a virtual globe: The location below mouse pointer will follow the cursor exactly: As a result &eg; the north pole will not stay at the top which can lead to confusion. By default &marble; makes sure that north is always up which results in a dragging behavior where the location below the mouse pointer slightly "detaches" from the cursor.</para
+></listitem>
+        </varlistentry
+>-->
+
+        <varlistentry>
+          <term
+><guilabel
+>Inertiële globerotatie</guilabel
+></term>
+          <listitem
+><para
+>Standaard wordt kinetisch draaien gebruikt wanneer in &marble; de kaart wordt gesleept (de kaart draait door als u loslaat). Dit gedrag kunt u afzetten middels dit keuzevakje. </para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>Reis naar het doel animeren</guilabel
+></term>
+          <listitem
+><para
+>Bij het zoeken naar een locatie kan &marble; ofwel er direct heengaan, of een reisanimatie van de voorgaande naar de nieuwe plaats tonen.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>Rotatie muisbeeld</guilabel
+></term>
+          <listitem
+><para
+>Bij het rondkijken worden kaart en muisbewegingen gekoppeld.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>Bij opstarten:</guilabel
+></term>
+          <listitem
+><para
+>Standaard zal &marble; direct na de start de thuislocatie weergeven. Als alternatief kan ook de laatste eerder actieve locatie worden getoond.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>Extern bewerkingsprogramma:</guilabel
+></term>
+          <listitem
+><para
+>Hier kunt u het bewerkingsprogramma kiezen dat u standaard wilt gebruiken voor het bewerken van kaarten,  of <guilabel
+>Altijd vragen</guilabel
+> instellen, als u wilt dat &marble; u altijd moet vragen welk extern bewerkingsprogramma moet worden gebruikt.</para
+></listitem>
+        </varlistentry>
+      </variablelist>
+    </sect1>
+
+    <sect1 id="configcacheproxy">
+    <title
+>Configuratie van Cache &amp; Proxy</title>
+
+      <screenshot>
+        <screeninfo
+>Het configuratiescherm Cache &amp; Proxy</screeninfo>
+        <mediaobject>
+          <imageobject
+><imagedata fileref="configure-cacheproxy.png" format="PNG"/></imageobject>
+          <textobject
+><phrase
+>Het configuratiescherm Cache &amp; Proxy</phrase
+></textobject>
+        </mediaobject>
+      </screenshot>
+
+      <variablelist>
+        <varlistentry>
+          <term
+><guilabel
+>Cache</guilabel
+></term>
+          <listitem
+><para
+>Er worden twee caches (bewaarplaatsen voor gegevens) gebruikt voor &marble;: Het <guilabel
+>Fysiek geheugen</guilabel
+> is nodig om kaartgegevens in het computergeheugen te bewaren. Door de waarde ervan te verhogen reageert het programma sneller. De <guilabel
+>Vaste schijf</guilabel
+> wordt gebruikt voor downloads van het internet (&eg; Wikipediagegevens of kaartgegevens). U kunt deze waarde kleiner maken als u ruimte op uw vaste schijf wil sparen of als er niet veel van het internet gebruik wordt gemaakt.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>Proxy</guilabel
+></term>
+          <listitem
+><para
+>Proxyinstellingen voor uw lokaal intranet. Leeg laten als er geen proxy is.</para
+></listitem>
+        </varlistentry>
+      </variablelist>
+    </sect1>
+
+    <sect1 id="configdatetime">
+    <title
+>Configuratie van datum &amp; tijd</title>
+
+      <screenshot>
+        <screeninfo
+>Het configuratiescherm Datum &amp; tijd</screeninfo>
+        <mediaobject>
+          <imageobject
+><imagedata fileref="configure-dateandtime.png" format="PNG"/></imageobject>
+          <textobject
+><phrase
+>Het configuratiescherm datum &amp; tijd</phrase
+></textobject>
+        </mediaobject>
+      </screenshot>
+
+      <variablelist>
+        <varlistentry>
+          <term
+><guilabel
+>Tijdzone</guilabel
+></term>
+          <listitem
+><para
+>Hier kunt u voor &marble; een tijdzone kiezen: <ulink url="https://en.wikipedia.org/wiki/Coordinated_Universal_Time"
+>UTC</ulink
+>, systeemtijd of zelf een tijdzone kiezen. De gekozen optie verandert het kaartbeeld alleen indien in de kaart de lichtcondities op de oppervlakte kunnen worden getoond.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>Wanneer &marble; wordt gestart</guilabel
+></term>
+          <listitem
+><para
+>Hier kunt u de datum en het tijdstip kiezen wanneer &marble; wordt gestart: systeemtijd, of de tijd van de laatste sessie.</para
+></listitem>
+        </varlistentry>
+      </variablelist>
+    </sect1>
+
+    <sect1 id="configsynchronization">
+    <title
+>Configuratie van synchronisatie</title>
+
+      <para
+>&marble; kan route- en bladwijzergegevens uploaden naar de <ulink url="https://en.wikipedia.org/wiki/OwnCloud"
+>ownCloud</ulink
+>-server en deze synchroniseren met de diverse apparaten waarop &marble; aanwezig is. </para>
+
+      <screenshot>
+        <screeninfo
+>Het configuratiescherm voor synchroniseren</screeninfo>
+        <mediaobject>
+          <imageobject
+><imagedata fileref="configure-synchronization.png" format="PNG"/></imageobject>
+          <textobject
+><phrase
+>Het configuratiescherm voor synchroniseren</phrase
+></textobject>
+        </mediaobject>
+      </screenshot>
+
+      <variablelist>
+        <varlistentry>
+          <term
+><guilabel
+>Synchroniseren aan</guilabel
+></term>
+          <listitem
+><para
+>Hiermee wordt het synchroniseren aan gezet. Wanneer dit aan is, kunt u kiezen of de route- en bladwijzergegevens worden gesynchroniseerd met behulp van de bijbehorende keuzevakjes, of het synchroniseren direct te laten plaats vinden door op de knop <guibutton
+>Sync nu</guibutton
+> te drukken.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>Credentials</guilabel
+></term>
+          <listitem
+><para
+>Hier kunt u uw zogenaamde Credentials invoeren voor ownCloud. Verdere informatie over het instellen van ownCloud vindt u op de officiële website van <ulink url="https://owncloud.com/"
+>ownCloud</ulink
+>.</para
+></listitem>
+        </varlistentry>
+      </variablelist>
+    </sect1>
+
+    <sect1 id="configrouting">
+    <title
+>Route-instellingen</title>
+
+      <screenshot>
+        <screeninfo
+>De instellingendialoog voor route-instellingen</screeninfo>
+        <mediaobject>
+          <imageobject
+><imagedata fileref="configure-routing.png" format="PNG"/></imageobject>
+          <textobject
+><phrase
+>De instellingendialoog voor route-instellingen</phrase
+></textobject>
+        </mediaobject>
+      </screenshot>
+
+      <variablelist>
+        <varlistentry>
+          <term
+><guibutton
+>Toevoegen...</guibutton
+></term>
+          <listitem
+><para
+>Opent een venster waarin u een nieuw routeprofiel kunt invoeren.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guibutton
+>Instellen:</guibutton
+></term>
+          <listitem
+><para
+>Opent een venster waarin u het huidig ingestelde routeprofiel kunt instellen.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guibutton
+>Verwijderen</guibutton
+></term>
+          <listitem
+><para
+>Verwijdert het geselecteerde routeprofiel</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guibutton
+>Naar boven</guibutton
+></term>
+          <listitem
+><para
+>Verplaatst het geselecteerde routeprofiel een stapje naar boven. Het komt nu terecht boven het profiel dat er eerst boven stond.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guibutton
+>Naar beneden</guibutton
+></term>
+          <listitem
+><para
+>Verplaatst het geselecteerde routeprofiel een stapje naar beneden. Het komt nu terecht onder het profiel dat er eerst onder stond.</para
+></listitem>
+        </varlistentry>
+      </variablelist>
+    </sect1>
+
+    <sect1 id="configplugins">
+    <title
+>Configuratie van Plugins</title>
+
+      <para
+>De widget voor de <guilabel
+>Pluginconfiguratie</guilabel
+> is waar u moet zijn voor het activeren (en deactiveren) van de Infovakken, online diensten en andere plugins die invloed hebben op het gedrag van &marble;. Actieve plugins verschijnen in het menu <guilabel
+>Beeld</guilabel
+>, hier kunt u die zichtbaar maken of verbergen. </para>
+
+      <screenshot>
+        <screeninfo
+>Het configuratiescherm voor plugins</screeninfo>
+        <mediaobject>
+          <imageobject
+><imagedata fileref="configure-plugins.png" format="PNG"/></imageobject>
+          <textobject
+><phrase
+>Het configuratiescherm voor plugins</phrase
+></textobject>
+        </mediaobject>
+      </screenshot>
+
+      <para
+>Elke plugin kan worden ge(de)activeerd met het keuzevakje links. Voor sommige plugins zijn er verdere opties aanwezig voor instellingen, die u kunt bereiken door op het pictogram rechts te klikken. </para>
+
+      <variablelist>
+        <varlistentry>
+          <term
+><guilabel
+>Plugin voor Amateur Radio Aprs</guilabel
+></term>
+          <listitem
+><para
+>Haalt gegevens op van het  Automatic Packet Reporting System, via het internet, een bestand, of een serieel apparaat. De positie en de status van de zenders van de gegevens worden in de kaart getoond en voortdurend bijgewerkt.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>Annotatie</guilabel
+></term>
+          <listitem
+><para
+>Hiermee kunt u aantekeningen plaatsen in de kaarten.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>Atmosfeer</guilabel
+></term>
+          <listitem
+><para
+>Toont atmosferische effecten.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>Windroos</guilabel
+></term>
+          <listitem
+><para
+>Toont een kompasroos in de kaart</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>Coördinatenrooster</guilabel
+></term>
+          <listitem
+><para
+>Toont een coördinatenrooster (u kunt de kleuren kiezen voor de roosterlijnen).</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>Kruisdraad</guilabel
+></term>
+          <listitem
+><para
+>Dit activeren maakt dat er een klein kruisdraadje wordt getoond in het midden van de kaart.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>Indicatie voor downloadvoortgang</guilabel
+></term>
+          <listitem
+><para
+>Een taartdiagram op de kaart toont de voortgang van aan de gang zijn de downloads. </para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>Aardbevingen</guilabel
+></term>
+          <listitem
+><para
+>Toont de merktekens in de kaart van aardbevingen.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry id="eclipsesplugin">
+          <term
+><guilabel
+>Verduisteringen (eclipsen)</guilabel
+></term>
+          <listitem
+><para
+>Toont de gegevens van zon- en maansverduisteringen (eclipsen).</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>Hoogteprofiel</guilabel
+></term>
+          <listitem
+><para
+>Toont de overlay voor het hoogteprofiel voor <link linkend="routing"
+> de routes in de kaart</link
+>.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>Merkteken voor hoogteprofiel</guilabel
+></term>
+          <listitem
+><para
+>Plaatst huidige hoogte in de kaart.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>GpsInfo</guilabel
+></term>
+          <listitem
+><para
+>Toont een losgemaakt venster met hierin de <ulink url="https://en.wikipedia.org/wiki/Global_Positioning_System"
+>GPS</ulink
+>-informatie.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>Licentie</guilabel
+></term>
+          <listitem
+><para
+>Toont een losgemaakt venster met hierin informatie over copyright.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry id="measure-tool-config">
+          <term
+><guilabel
+>Lineaal</guilabel
+></term>
+          <listitem
+><para
+>Plugin <link linkend="measure-distances"
+>voor het meten van afstanden tussen twee of meer punten</link
+>.</para>
+
+          <para
+>Het toen van de afstand en de richting tussen de punten kan worden ingesteld na het indrukken van het pictogram van het hulpmiddel.  Het is voldoende het bijbehorende item aan te vinken om &marble; de teksten te laten zien, en uit te vinken om deze te verbergen.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>Navigatie</guilabel
+></term>
+          <listitem
+><para
+>Toont de muisbesturing voor zoomen en verplaatsen als een losgemaakt object in de kaart.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>Notities OSM-kaarten maken</guilabel
+></term>
+          <listitem
+><para
+>Implementatie notities geocoding.</para
+></listitem>
+        </varlistentry>
+
+<!--        <varlistentry>
+          <term
+><guilabel
+>OpenCaching.com</guilabel
+></term>
+          <listitem
+><para
+>Displays the <ulink url="https://en.wikipedia.org/wiki/Geocaching"
+>geocaching</ulink
+> markers on the map.</para
+></listitem>
+        </varlistentry
+>-->
+
+        <varlistentry>
+          <term
+><guilabel
+>OpenDesktop onderdelen</guilabel
+></term>
+          <listitem
+><para
+>Toont in de kaart de avatars van gebruikers van <ulink url="https://opendesktop.org/"
+>OpenDesktop</ulink
+>, samen met wat extra informatie over hen.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>Overzichtskaart</guilabel
+></term>
+          <listitem
+><para
+>Dit is een verplaatsbare overzichtskaart van de wereldbol.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>Foto's</guilabel
+></term>
+          <listitem
+><para
+>Haalt automatisch foto's op van over de gehele wereld, afhankelijk van hun populariteit.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>Plaatsen</guilabel
+></term>
+          <listitem
+><para
+>Toont populaire <ulink url="https://foursquare.com/"
+>Foursquare</ulink
+>-plaaatsen.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>Positiemerkteken</guilabel
+></term>
+          <listitem
+><para
+>Plaatst een merkteken op de huidige <ulink url="https://en.wikipedia.org/wiki/Global_Positioning_System"
+>GPS</ulink
+>-positie.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>Postcodes</guilabel
+></term>
+          <listitem
+><para
+>Toont <ulink url="https://en.wikipedia.org/wiki/Postal_code"
+>postcodes</ulink
+> in het kaartgebied.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>Routeren</guilabel
+></term>
+          <listitem
+><para
+>Toont de <link linkend="routing"
+>route-informatie</link
+> en  navigatieaanwijzingen.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>Satellieten</guilabel
+></term>
+          <listitem
+><para
+>Toont de natuurlijke en kunstmatige satellieten van aarde en andere planeten, en hun banen.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>Schaalbalk</guilabel
+></term>
+          <listitem
+><para
+>Hierdoor wordt een verplaatsbare schaalbalk in de kaart geplaatst.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>Snelheidsmeter</guilabel
+></term>
+          <listitem
+><para
+>Toont de huidige kruissnelheid. Hiervoor zijn <ulink url="https://en.wikipedia.org/wiki/Global_Positioning_System"
+>GPS</ulink
+>-gegevens nodig.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>Sterren</guilabel
+></term>
+          <listitem
+><para
+>Een plugin waarmee de sterrenhemel wordt getoond.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>Zon</guilabel
+></term>
+          <listitem
+><para
+>Een plugin waarmee de zon wordt getoond.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>Weer</guilabel
+></term>
+          <listitem
+><para
+>Downloadt de huidige weerinformatie voor steden, en toont die in de kaart.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>Artikelen in Wikipedia</guilabel
+></term>
+          <listitem
+><para
+>Haalt automatisch artikelen op uit Wikipedia, en toont die op de juiste plaats in de kaart (als pictogram).</para
+></listitem>
+        </varlistentry>
+      </variablelist>
+    </sect1>
+  </chapter>
+
+  <chapter id="faq">
+  <title
+>Vragen en antwoorden</title>
+
+    <qandaset id="faqlist">
+      <qandaentry>
+        <question>
+          <para
+>Ik vind mijn huis niet in de kaart / Waarom zou ik &marble; gebruiken  als <application
+>Google Earth</application
+> al bestaat? </para>
+        </question>
+        <answer>
+          <para
+>Het doel van &marble; is dat dit  een snelle, lichte educatieve geografische browser is, die eenvoudig werkt op elk platform dat door &Qt; ondersteund wordt. Hoewel kaarten met een hogere resolutie leuk zouden zijn, zijn ze niet  voor elke gebruiker nuttig, of in elke situatie (net zoals u geen complete tekstverwerker gebruikt wanneer een eenvoudige editor volstaat). Merk ook op dat &marble; vrije software is en gebaseerd op gegevens die vrij kunnen worden verspreid, op dezelfde manier als Free Software.</para>
+        </answer>
+      </qandaentry>
+
+      <qandaentry>
+        <question>
+          <para
+>Waarom is &marble; zo snel hoewel hardware acceleratie niet aanstaat? / Waarom werkt &marble; niet soepel met mijn dure 3D grafische kaart?</para>
+        </question>
+        <answer>
+          <para
+>Hoewel &marble; de aarde weergeeft als een globe wordt er geen gebruik van 3D-hardwareversnelling. Dit heeft het voordeel dat het redelijk snel werkt op elk door &Qt; ondersteund platform en hardware. Dit heeft echter wel het nadeel dat het niet zo soepel werkt als zou kunnen met hardwareversnelde OpenGL. &marble; gebruikt slechts 2D-afbeeldingen, en heeft daarom een grafische kaart nodig die snel 2D-afbeeldingen kan weergeven. We zijn van plan om in de toekomst een optionele OpenGL-backend toe te voegen.</para>
+        </answer>
+      </qandaentry>
+
+      <qandaentry>
+        <question>
+          <para
+>Moet ik ooit gaan betalen voor &marble;?</para>
+        </question>
+        <answer>
+          <para
+>Nee, nooit. Maar de makers staan altijd open voor feedback. Voor &marble; is de <ulink url="https://www.gnu.org/licenses/licenses.html#LGPL"
+>LGPL</ulink
+>-licentie van toepassing, u hoeft dus nooit te betalen voor dit programma</para>
+        </answer>
+      </qandaentry>
+
+      <qandaentry>
+        <question>
+          <para
+>Hoe kan ik meehelpen?</para>
+        </question>
+        <answer>
+          <para
+>&marble; is naast een programma ook vrije software. Daardoor is het eenvoudig om mee te doen; neem gewoon contact op met ons via de marble-devel mailing lijst (marble-devel@kde.org).</para>
+        </answer>
+      </qandaentry>
+    </qandaset>
+  </chapter>
+
+  <chapter id="credits">
+  <title
+>Dankbetuigingen en licentie</title>
+
+    <para
+>&marble;</para>
+
+    <para
+>Programma Copyright, 2005-2007 &Torsten.Rahn; &Torsten.Rahn.mail;</para>
+
+    <para
+>Met bijdragen van:</para>
+
+    <itemizedlist>
+      <listitem
+><para
+>&Torsten.Rahn; &Torsten.Rahn.mail;</para
+></listitem>
+      <listitem
+><para
+>Inge Wallin <email
+>inge@lysator.liu.se</email
+></para
+></listitem>
+    </itemizedlist>
+
+    &vertaling.kristof;&vertaling.jaap; &underFDL; &underLGPL; </chapter>
+
+  &documentation.index;
+</book>
+<!--
+Local Variables:
+mode: sgml
+sgml-minimize-attributes:nil
+sgml-general-insert-case:lower
+sgml-indent-step:0
+sgml-indent-data:nil
+End:
+
+// vim:ts=2:sw=2:tw=78:noet:noai
+-->

@@ -1,0 +1,5162 @@
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Sairan Kikkarin <sairan@computer.org>, 2011, 2012, 2013.
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2021-10-18 00:13+0000\n"
+"PO-Revision-Date: 2013-11-01 23:04+0600\n"
+"Last-Translator: Sairan Kikkarin <sairan@computer.org>\n"
+"Language-Team: Kazakh <kde-i18n-doc@kde.org>\n"
+"Language: kk\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 1.2\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "Сайран Киккарин"
+
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "sairan@computer.org"
+
+#: kdemain.cpp:91
+#, kde-format
+msgid "Marble Virtual Globe"
+msgstr "Marble виртуалды глобусы"
+
+#: kdemain.cpp:93
+#, kde-format
+msgid "A World Atlas."
+msgstr "Әлем атласы"
+
+#: kdemain.cpp:95
+#, fuzzy, kde-format
+#| msgid "(c) 2007-2012"
+msgid "(c) 2007-%1"
+msgstr "(c) 2007-2012"
+
+#: kdemain.cpp:100 kdemain.cpp:286
+#, kde-format
+msgid "Torsten Rahn"
+msgstr "Torsten Rahn"
+
+#: kdemain.cpp:101
+#, kde-format
+msgid "Developer and Original Author"
+msgstr "Құрастырушысы және бастапқы авторы"
+
+#: kdemain.cpp:103
+#, kde-format
+msgid "Bernhard Beschow"
+msgstr "Bernhard Beschow"
+
+#: kdemain.cpp:104
+#, kde-format
+msgid "WMS Support, Mobile, Performance"
+msgstr "WMS қолдауы, мобайл нұсқасы, жылдамдық"
+
+#: kdemain.cpp:106
+#, kde-format
+msgid "Thibaut Gridel"
+msgstr "Thibaut Gridel"
+
+#: kdemain.cpp:107
+#, kde-format
+msgid "Geodata"
+msgstr "География деректері"
+
+#: kdemain.cpp:109
+#, kde-format
+msgid "Jens-Michael Hoffmann"
+msgstr "Jens-Michael Hoffmann"
+
+#: kdemain.cpp:110
+#, kde-format
+msgid "OpenStreetMap Integration, OSM Namefinder, Download Management"
+msgstr "OpenStreetMap біріктіруі, OSM атау іздегіші, жүктеуін басқаруы"
+
+#: kdemain.cpp:112
+#, kde-format
+msgid "Florian E&szlig;er"
+msgstr "Florian E&szlig;er"
+
+#: kdemain.cpp:113
+#, kde-format
+msgid "Elevation Profile"
+msgstr "Биіктік бедері"
+
+#: kdemain.cpp:115
+#, kde-format
+msgid "Wes Hardaker"
+msgstr "Wes Hardaker"
+
+#: kdemain.cpp:116
+#, kde-format
+msgid "APRS Plugin"
+msgstr "APRS плагині"
+
+#: kdemain.cpp:118 kdemain.cpp:202
+#, kde-format
+msgid "Bastian Holst"
+msgstr "Bastian Holst"
+
+#: kdemain.cpp:119
+#, kde-format
+msgid "Online Services support"
+msgstr "Онлайн қызметтерді қолдауы"
+
+#: kdemain.cpp:121 kdemain.cpp:172
+#, kde-format
+msgid "Guillaume Martres"
+msgstr "Guillaume Martres"
+
+#: kdemain.cpp:122
+#, kde-format
+msgid "Satellites"
+msgstr "Жерсеріктер"
+
+#: kdemain.cpp:124 kdemain.cpp:168
+#, kde-format
+msgid "Rene Kuettner"
+msgstr "Rene Kuettner"
+
+#: kdemain.cpp:125
+#, kde-format
+msgid "Satellites, Eclipses"
+msgstr " Жерсеріктер, эллипстер"
+
+#: kdemain.cpp:127
+#, kde-format
+msgid "Friedrich W. H. Kossebau"
+msgstr "Friedrich W. H. Kossebau"
+
+#: kdemain.cpp:128
+#, kde-format
+msgid "Plasma Integration, Bugfixes"
+msgstr "Plasma-мен біріктіру, қателерді жөндеу"
+
+#: kdemain.cpp:130
+#, kde-format
+msgid "Dennis Nienhüser"
+msgstr "Dennis Nienhüser"
+
+#: kdemain.cpp:131
+#, kde-format
+msgid "Routing, Navigation, Mobile"
+msgstr "Жол салу, шарлау, мобайл нұсқасы"
+
+#: kdemain.cpp:133
+#, kde-format
+msgid "Niko Sams"
+msgstr "Niko Sams"
+
+#: kdemain.cpp:134
+#, kde-format
+msgid "Routing, Elevation Profile"
+msgstr "Жол салу, биіктік бедері"
+
+#: kdemain.cpp:136 kdemain.cpp:206
+#, kde-format
+msgid "Patrick Spendrin"
+msgstr "Patrick Spendrin"
+
+#: kdemain.cpp:137
+#, kde-format
+msgid "Core Developer: KML and Windows support"
+msgstr "Негізгі құрастырушысы: KML мен Windows-ты қолдауы"
+
+#: kdemain.cpp:139
+#, kde-format
+msgid "Eckhart Wörner"
+msgstr "Eckhart Wörner"
+
+#: kdemain.cpp:140
+#, kde-format
+msgid "Bugfixes"
+msgstr "Bugfixes"
+
+#: kdemain.cpp:145
+#, kde-format
+msgid "Inge Wallin"
+msgstr "Inge Wallin"
+
+#: kdemain.cpp:146
+#, kde-format
+msgid "Core Developer and Co-Maintainer"
+msgstr "Негізгі құрастырушысы және жетілдірушінің бірі"
+
+#: kdemain.cpp:148
+#, kde-format
+msgid "Henry de Valence"
+msgstr "Henry de Valence"
+
+#: kdemain.cpp:149
+#, kde-format
+msgid "Core Developer: Marble Runners, World-Clock Plasmoid"
+msgstr "Негізгі құрастырушысы: Marble жеккіші, дүниежүзілік сағаттың плазмоиді"
+
+#: kdemain.cpp:151
+#, kde-format
+msgid "Pino Toscano"
+msgstr "Pino Toscano"
+
+#: kdemain.cpp:152
+#, kde-format
+msgid "Network plugins"
+msgstr "Желілік плагиндері"
+
+#: kdemain.cpp:154
+#, kde-format
+msgid "Harshit Jain"
+msgstr "Harshit Jain"
+
+#: kdemain.cpp:155
+#, kde-format
+msgid "Planet filter"
+msgstr "Планета сүзгісі"
+
+#: kdemain.cpp:157
+#, kde-format
+msgid "Simon Edwards"
+msgstr "Simon Edwards"
+
+#: kdemain.cpp:158
+#, kde-format
+msgid "Marble Python Bindings"
+msgstr "Marble Python байланыстары"
+
+#: kdemain.cpp:160
+#, kde-format
+msgid "Magnus Valle"
+msgstr "Magnus Valle"
+
+#: kdemain.cpp:161
+#, kde-format
+msgid "Historical Maps"
+msgstr "Тарихи карталары"
+
+#: kdemain.cpp:163
+#, kde-format
+msgid "Médéric Boquien"
+msgstr "Médéric Boquien"
+
+#: kdemain.cpp:164
+#, kde-format
+msgid "Astronomical Observatories"
+msgstr "Астрономиялық обсерваториялары"
+
+#: kdemain.cpp:169
+#, kde-format
+msgid ""
+"ESA Summer of Code in Space 2012 Project: Visualization of planetary "
+"satellites"
+msgstr ""
+"ESA Summer of Code in Space 2011 жобасы: Планеталық серіктерді суреттеу"
+
+#: kdemain.cpp:173
+#, fuzzy, kde-format
+#| msgid ""
+#| "ESA Summer of Code in Space 2011 Project: Visualisation of Satellite "
+#| "Orbits"
+msgid ""
+"ESA Summer of Code in Space 2011 Project: Visualization of Satellite Orbits"
+msgstr "ESA Summer of Code in Space 2011 жобасы: Жерсерік орбиталарын суреттеу"
+
+#: kdemain.cpp:178
+#, kde-format
+msgid "Konstantin Oblaukhov"
+msgstr "Konstantin Oblaukhov"
+
+#: kdemain.cpp:179
+#, kde-format
+msgid "Google Summer of Code 2011 Project: OpenStreetMap Vector Rendering"
+msgstr "Google Summer of Code 2011 жобасы: OpenStreetMap векторларын салу"
+
+#: kdemain.cpp:182
+#, kde-format
+msgid "Daniel Marth"
+msgstr "Daniel Marth"
+
+#: kdemain.cpp:183
+#, kde-format
+msgid "Google Summer of Code 2011 Project: Marble Touch on MeeGo"
+msgstr "Google Summer of Code 2011 жобасы: MeeGo-дегі Marble Touch"
+
+#: kdemain.cpp:186
+#, kde-format
+msgid "Gaurav Gupta"
+msgstr "Gaurav Gupta"
+
+#: kdemain.cpp:187
+#, kde-format
+msgid "Google Summer of Code 2010 Project: Bookmarks"
+msgstr "Google Summer of Code 2010 : Бетбелгілері"
+
+#: kdemain.cpp:190
+#, kde-format
+msgid "Harshit Jain "
+msgstr "Harshit Jain "
+
+#: kdemain.cpp:191
+#, kde-format
+msgid "Google Summer of Code 2010 Project: Time Support"
+msgstr "Google Summer of Code 2010 жобасы: Уақытты қолдау"
+
+#: kdemain.cpp:194
+#, kde-format
+msgid "Siddharth Srivastava"
+msgstr "Siddharth Srivastava"
+
+#: kdemain.cpp:195
+#, kde-format
+msgid "Google Summer of Code 2010 Project: Turn-by-turn Navigation"
+msgstr "Google Summer of Code 2010 жобасы: Бұрап аралауы"
+
+#: kdemain.cpp:198 kdemain.cpp:218
+#, kde-format
+msgid "Andrew Manson"
+msgstr "Andrew Manson"
+
+#: kdemain.cpp:199
+#, kde-format
+msgid "Google Summer of Code 2009 Project: OSM Annotation"
+msgstr "Google Summer of Code 2009 жобасы: OSМ аннотациясы"
+
+#: kdemain.cpp:203
+#, kde-format
+msgid "Google Summer of Code 2009 Project: Online Services"
+msgstr "Google Summer of Code 2009 жобасы: Онлайн қызметтері"
+
+#: kdemain.cpp:207
+#, kde-format
+msgid "Google Summer of Code 2008 Project: Vector Tiles for Marble"
+msgstr "Google Summer of Code 2008 жобасы: Marble-дағы векторлы тор көздері"
+
+#: kdemain.cpp:210
+#, kde-format
+msgid "Shashank Singh"
+msgstr "Shashank Singh"
+
+#: kdemain.cpp:211
+#, kde-format
+msgid ""
+"Google Summer of Code 2008 Project: Panoramio / Wikipedia -photo support for "
+"Marble"
+msgstr ""
+"Google Summer of Code 2008 жобасы: Panoramio / Wikipedia фотоларын Marble-да "
+"қолдауы"
+
+#: kdemain.cpp:214
+#, kde-format
+msgid "Carlos Licea"
+msgstr "Carlos Licea"
+
+#: kdemain.cpp:215
+#, kde-format
+msgid ""
+"Google Summer of Code 2007 Project: Equirectangular Projection (\"Flat Map\")"
+msgstr ""
+"Google Summer of Code 2007 жобасы: Тікбұрышты проекциясы (\"Жалпақ карта\")"
+
+#: kdemain.cpp:219
+#, kde-format
+msgid "Google Summer of Code 2007 Project: GPS Support for Marble"
+msgstr "Google Summer of Code 2007 жобасы: GPS-ты Marble-да қолдауы"
+
+#: kdemain.cpp:222
+#, kde-format
+msgid "Murad Tagirov"
+msgstr "Murad Tagirov"
+
+#: kdemain.cpp:223
+#, kde-format
+msgid "Google Summer of Code 2007 Project: KML Support for Marble"
+msgstr "Google Summer of Code 2007 жобасы: KLM-ді Marble-да қолдауы"
+
+#: kdemain.cpp:228
+#, kde-format
+msgid "Simon Schmeisser"
+msgstr "Simon Schmeisser"
+
+#: kdemain.cpp:229 kdemain.cpp:231 kdemain.cpp:233 kdemain.cpp:235
+#: kdemain.cpp:237 kdemain.cpp:239 kdemain.cpp:241 kdemain.cpp:243
+#: kdemain.cpp:245 kdemain.cpp:247 kdemain.cpp:249 kdemain.cpp:251
+#: kdemain.cpp:253 kdemain.cpp:255 kdemain.cpp:257 kdemain.cpp:259
+#: kdemain.cpp:261 kdemain.cpp:263 kdemain.cpp:265
+#, kde-format
+msgid "Development & Patches"
+msgstr "Құрастыру мен жамау жұмысы"
+
+#: kdemain.cpp:230
+#, kde-format
+msgid "Claudiu Covaci"
+msgstr "Claudiu Covaci"
+
+#: kdemain.cpp:232
+#, kde-format
+msgid "David Roberts"
+msgstr "David Roberts"
+
+#: kdemain.cpp:234
+#, kde-format
+msgid "Nikolas Zimmermann"
+msgstr "Nikolas Zimmermann"
+
+#: kdemain.cpp:236
+#, kde-format
+msgid "Jan Becker"
+msgstr "Jan Becker"
+
+#: kdemain.cpp:238
+#, kde-format
+msgid "Stefan Asserhäll"
+msgstr "Stefan Asserhäll"
+
+#: kdemain.cpp:240
+#, kde-format
+msgid "Laurent Montel"
+msgstr "Laurent Montel"
+
+#: kdemain.cpp:242
+#, kde-format
+msgid "Mayank Madan"
+msgstr "Mayank Madan"
+
+#: kdemain.cpp:244
+#, kde-format
+msgid "Prashanth Udupa"
+msgstr "Prashanth Udupa"
+
+#: kdemain.cpp:246
+#, kde-format
+msgid "Anne-Marie Mahfouf"
+msgstr "Anne-Marie Mahfouf"
+
+#: kdemain.cpp:248
+#, kde-format
+msgid "Josef Spillner"
+msgstr "Josef Spillner"
+
+#: kdemain.cpp:250
+#, kde-format
+msgid "Frerich Raabe"
+msgstr "Frerich Raabe"
+
+#: kdemain.cpp:252
+#, kde-format
+msgid "Frederik Gladhorn"
+msgstr "Frederik Gladhorn"
+
+#: kdemain.cpp:254
+#, kde-format
+msgid "Fredrik Höglund"
+msgstr "Fredrik Höglund"
+
+#: kdemain.cpp:256
+#, kde-format
+msgid "Albert Astals Cid"
+msgstr "Albert Astals Cid"
+
+#: kdemain.cpp:258
+#, kde-format
+msgid "Thomas Zander"
+msgstr "Thomas Zander"
+
+#: kdemain.cpp:260
+#, kde-format
+msgid "Joseph Wenninger"
+msgstr "Joseph Wenninger"
+
+#: kdemain.cpp:262
+#, kde-format
+msgid "Kris Thomsen"
+msgstr "Kris Thomsen"
+
+#: kdemain.cpp:264
+#, kde-format
+msgid "Daniel Molkentin"
+msgstr "Daniel Molkentin"
+
+#: kdemain.cpp:266
+#, kde-format
+msgid "Christophe Leske"
+msgstr "Christophe Leske"
+
+#: kdemain.cpp:267 kdemain.cpp:269 kdemain.cpp:271 kdemain.cpp:273
+#: kdemain.cpp:275 kdemain.cpp:277 kdemain.cpp:279 kdemain.cpp:281
+#: kdemain.cpp:283
+#, kde-format
+msgid "Platforms & Distributions"
+msgstr "Платформалары мен дистрибутивтері"
+
+#: kdemain.cpp:268
+#, kde-format
+msgid "Sebastian Wiedenroth"
+msgstr "Sebastian Wiedenroth"
+
+#: kdemain.cpp:270
+#, kde-format
+msgid "Tim Sutton"
+msgstr "Tim Sutton"
+
+#: kdemain.cpp:272
+#, kde-format
+msgid "Christian Ehrlicher"
+msgstr "Christian Ehrlicher"
+
+#: kdemain.cpp:274
+#, kde-format
+msgid "Ralf Habacker"
+msgstr "Ralf Habacker"
+
+#: kdemain.cpp:276
+#, kde-format
+msgid "Steffen Joeris"
+msgstr "Steffen Joeris"
+
+#: kdemain.cpp:278
+#, kde-format
+msgid "Marcus Czeslinski"
+msgstr "Marcus Czeslinski"
+
+#: kdemain.cpp:280
+#, kde-format
+msgid "Marcus D. Hanwell"
+msgstr "Marcus D. Hanwell"
+
+#: kdemain.cpp:282
+#, kde-format
+msgid "Chitlesh Goorah"
+msgstr "Chitlesh Goorah"
+
+#: kdemain.cpp:284
+#, kde-format
+msgid "Nuno Pinheiro"
+msgstr "Nuno Pinheiro"
+
+#: kdemain.cpp:285 kdemain.cpp:287
+#, kde-format
+msgid "Artwork"
+msgstr "Көркемдетуі"
+
+#: kdemain.cpp:290
+#, kde-format
+msgid "Luis Silva"
+msgstr "Luis Silva"
+
+#: kdemain.cpp:291 kdemain.cpp:293 kdemain.cpp:295 kdemain.cpp:297
+#: kdemain.cpp:299 kdemain.cpp:301 kdemain.cpp:303 kdemain.cpp:305
+#: kdemain.cpp:307 kdemain.cpp:309
+#, kde-format
+msgid "Various Suggestions & Testing"
+msgstr "Түрлі ұсыныстар мен сынау"
+
+#: kdemain.cpp:292
+#, kde-format
+msgid "Stefan Jordan"
+msgstr "Stefan Jordan"
+
+#: kdemain.cpp:294
+#, kde-format
+msgid "Robert Scott"
+msgstr "Robert Scott"
+
+#: kdemain.cpp:296
+#, kde-format
+msgid "Lubos Petrovic"
+msgstr "Lubos Petrovic"
+
+#: kdemain.cpp:298
+#, kde-format
+msgid "Benoit Sigoure"
+msgstr "Benoit Sigoure"
+
+#: kdemain.cpp:300
+#, kde-format
+msgid "Martin Konold"
+msgstr "Martin Konold"
+
+#: kdemain.cpp:302
+#, kde-format
+msgid "Matthias Welwarsky"
+msgstr "Matthias Welwarsky"
+
+#: kdemain.cpp:304
+#, kde-format
+msgid "Rainer Endres"
+msgstr "Rainer Endres"
+
+#: kdemain.cpp:306
+#, kde-format
+msgid "Ralf Gesellensetter"
+msgstr "Ralf Gesellensetter"
+
+#: kdemain.cpp:308
+#, kde-format
+msgid "Tim Alder"
+msgstr "Tim Alder"
+
+#: kdemain.cpp:310
+#, kde-format
+msgid "John Layt"
+msgstr "John Layt"
+
+#: kdemain.cpp:311
+#, kde-format
+msgid ""
+"Special thanks for providing an important source of inspiration by creating "
+"Marble's predecessor \"Kartographer\"."
+msgstr ""
+"Бізге шабыт берген Marble-ға ізашар болған \"Kartographer\" деген "
+"бағдарламаны жазған үшін ерекше рақмет."
+
+#: kdemain.cpp:327
+#, kde-format
+msgid "Enable debug output"
+msgstr "Жөндеу мәліметі болсын "
+
+#: kdemain.cpp:329
+#, kde-format
+msgid "Display OSM placemarks according to the level selected"
+msgstr ""
+
+#: kdemain.cpp:331
+#, kde-format
+msgid "Make a time measurement to check performance"
+msgstr "Жылдамдығын тексеру үшін уақытты өлшеу"
+
+#: kdemain.cpp:333
+#, kde-format
+msgid "Show frame rate"
+msgstr "Кадрлар жиілігі көрсетілсін"
+
+#: kdemain.cpp:335
+#, kde-format
+msgid "Show tile IDs"
+msgstr "Тор көзінің ID-і көрсетілсін"
+
+#: kdemain.cpp:337
+#, kde-format
+msgid "Show time spent in each layer"
+msgstr "Әр қабатта жұмсаған уақытын көрсету"
+
+#: kdemain.cpp:339
+#, fuzzy, kde-format
+#| msgid "Use a different directory which contains map data"
+msgid "Use a different directory <directory> which contains map data."
+msgstr "Басқа карта дерегінің қапшығы пайдалансын "
+
+#: kdemain.cpp:341
+#, kde-format
+msgid "Do not use the interface optimized for small screens"
+msgstr "Интерфейсі шағын экрандарға ыңғайланған болмасын"
+
+#: kdemain.cpp:342
+#, kde-format
+msgid "Use the interface optimized for small screens"
+msgstr "Интерфейсі шағын экрандарға ыңғайланған болсын"
+
+#: kdemain.cpp:344
+#, kde-format
+msgid "Do not use the interface optimized for high resolutions"
+msgstr "Интерфейсі жоғары айырымдылыққа ыңғайланған болмасын"
+
+#: kdemain.cpp:345
+#, kde-format
+msgid "Use the interface optimized for high resolutions"
+msgstr "Интерфейсі жоғары айырымдылыққа ыңғайланған болсын"
+
+#: kdemain.cpp:347
+#, fuzzy, kde-format
+#| msgid "Show map at given lat lon coordinates"
+msgid "Show map at given lat lon <coordinates>"
+msgstr "Келтірілген координаттарды картада көрсету"
+
+#: kdemain.cpp:349
+#, fuzzy, kde-format
+#| msgid "Show map at given lat lon coordinates"
+msgid "Show map at given geo <uri>"
+msgstr "Келтірілген координаттарды картада көрсету"
+
+#: kdemain.cpp:351
+#, kde-format
+msgid "Set the distance of the observer to the globe (in km)"
+msgstr "Қарау қашықтығын (километрлеп) келтіріңіз"
+
+#: kdemain.cpp:353
+#, fuzzy, kde-format
+#| msgid "Use map id (e.g. \"earth/openstreetmap/openstreetmap.dgml\")"
+msgid "Use map <id> (e.g. \"earth/openstreetmap/openstreetmap.dgml\")"
+msgstr ""
+"Картаның ID-ін пайдалану (мысалы: \"earth/openstreetmap/openstreetmap.dgml\")"
+
+#: kdemain.cpp:355
+#, kde-format
+msgid "One or more placemark files to be opened"
+msgstr "Бір не бірнеше ашатын орындар атаулар файлы"
+
+#. i18n: ectx: label, entry, group (Time)
+#: marble.kcfg:58
+#, kde-format
+msgid "The date and time of marble clock"
+msgstr "Marble cағатындағы күн мен уақыты"
+
+#. i18n: ectx: label, entry, group (Time)
+#: marble.kcfg:61
+#, kde-format
+msgid "The speed of marble clock"
+msgstr "Marble cағатының жылдамдығы"
+
+#. i18n: ectx: label, entry, group (View)
+#: marble.kcfg:107
+#, kde-format
+msgid "The unit chosen to measure distances."
+msgstr "Қашықтықтарды өлшеуге таңдалған бірлігі."
+
+#. i18n: ectx: label, entry, group (View)
+#: marble.kcfg:115
+#, kde-format
+msgid "The unit chosen to measure angles."
+msgstr "Бұрыштарды өлшеуге таңдалған бірлігі."
+
+#. i18n: ectx: label, entry, group (View)
+#: marble.kcfg:124
+#, kde-format
+msgid "The quality at which a still map gets painted."
+msgstr "Қимылсыз картасы салынатың сапасы."
+
+#. i18n: ectx: label, entry, group (View)
+#: marble.kcfg:135
+#, kde-format
+msgid "The quality at which an animated map gets painted."
+msgstr "Анимацияланған картасы салынатың сапасы."
+
+#. i18n: ectx: label, entry, group (View)
+#: marble.kcfg:146
+#, kde-format
+msgid "The localization of the labels."
+msgstr "Жазуларын жергілікті тілде жазу."
+
+#. i18n: ectx: label, entry (mapFont), group (View)
+#: marble.kcfg:155
+#, kde-format
+msgid "The general font used on the map."
+msgstr "Картада қолданатын негізгі қаріп."
+
+#. i18n: ectx: label, entry (lastFileOpenDir), group (View)
+#: marble.kcfg:159
+#, kde-format
+msgid "The last directory that was opened by File->Open."
+msgstr "Файл->Ашу деп соңғы ашылған қапшық."
+
+#. i18n: ectx: label, entry, group (Navigation)
+#: marble.kcfg:179
+#, kde-format
+msgid "The behaviour of the planet's axis on mouse dragging."
+msgstr "Тышқанмен тартқандағы планетаның білігінін қимылы."
+
+#. i18n: ectx: label, entry, group (Navigation)
+#: marble.kcfg:187
+#, kde-format
+msgid "The location shown on application startup."
+msgstr "Қолданба жұмысын бастағандағы көрсететін орны."
+
+#. i18n: ectx: label, entry, group (Navigation)
+#: marble.kcfg:201
+#, kde-format
+msgid "Display animation on voyage to target."
+msgstr "Мақсаттаған жерге анимациялап жылжу."
+
+#. i18n: ectx: label, entry, group (Navigation)
+#: marble.kcfg:205
+#, kde-format
+msgid "The external OpenStreetMap editor application"
+msgstr "Сыртқы OpenStreetMap редактор қолданбасы"
+
+#. i18n: ectx: label, entry, group (Cache)
+#: marble.kcfg:211
+#, kde-format
+msgid "Cache for tiles reserved in the physical memory."
+msgstr "Физикалық жадында тор көздеріне арналған кэші."
+
+#. i18n: ectx: label, entry, group (Cache)
+#: marble.kcfg:217
+#, kde-format
+msgid "Maximum space on the hard disk that can be used to store tiles."
+msgstr "Қатқыл дискіде тор көздерін сақтау үшін арналған максималды орын."
+
+#. i18n: ectx: label, entry (proxyUrl), group (Cache)
+#: marble.kcfg:223
+#, kde-format
+msgid "URL for the proxy server."
+msgstr "Прокси-серверінің URL-і."
+
+#. i18n: ectx: label, entry, group (Cache)
+#: marble.kcfg:227
+#, kde-format
+msgid "Port for the proxy server."
+msgstr "Прокси-серверінің порты."
+
+#. i18n: ectx: label, entry (proxyUser), group (Cache)
+#: marble.kcfg:233
+#, kde-format
+msgid "Username for authorization."
+msgstr "Авторизация пайдаланушының аты"
+
+#. i18n: ectx: label, entry (proxyPass), group (Cache)
+#: marble.kcfg:236
+#, kde-format
+msgid "Password for authorization."
+msgstr "Авторизация паролі."
+
+#. i18n: ectx: label, entry (proxyHttp), group (Cache)
+#: marble.kcfg:239
+#, kde-format
+msgid "Proxy type is HTTP"
+msgstr "Проксидің түрі: HTTP"
+
+#. i18n: ectx: label, entry (proxySocks5), group (Cache)
+#: marble.kcfg:250
+#, kde-format
+msgid "Proxy type is Socks5"
+msgstr "Проксидің түрі: Socks5"
+
+#. i18n: ectx: label, entry (proxyAuth), group (Cache)
+#: marble.kcfg:254
+#, kde-format
+msgid "Proxy requires Authentication"
+msgstr "Прокси аутентификацияны талап етеді"
+
+#. i18n: ectx: label, entry (activePositionTrackingPlugin), group (Plugins)
+#: marble.kcfg:260
+#, kde-format
+msgid "The position tracking plugin used to determine the current location"
+msgstr "Қазіргі орынды анықтау үшін қолданатын орын қадағалау плагині"
+
+#: marble_part.cpp:102
+#, kde-format
+msgid "Position: %1"
+msgstr "Орны: %1"
+
+#: marble_part.cpp:103
+#, kde-format
+msgid "Altitude: %1"
+msgstr "Биіктік: %1"
+
+#: marble_part.cpp:104
+#, kde-format
+msgid "Tile Zoom Level: %1"
+msgstr "Тор көзін масштабы: %1"
+
+#: marble_part.cpp:105
+#, kde-format
+msgid "Time: %1"
+msgstr "Уақыт: %1"
+
+#: marble_part.cpp:167
+#, kde-format
+msgid ""
+"Sorry, unable to open '%1':\n"
+"'%2'"
+msgstr ""
+
+#: marble_part.cpp:168
+#, kde-format
+msgid "File not readable"
+msgstr ""
+
+#: marble_part.cpp:214
+#, kde-format
+msgid "marble_part"
+msgstr "marble_part"
+
+#: marble_part.cpp:217
+#, kde-format
+msgid "A Virtual Globe"
+msgstr "Виртуалды глобус"
+
+#: marble_part.cpp:231
+#, kde-format
+msgid "Sorry, unable to open '%1'. The file is not accessible."
+msgstr ""
+
+#: marble_part.cpp:232
+#, kde-format
+msgid "File not accessible"
+msgstr ""
+
+#: marble_part.cpp:253
+#, kde-format
+msgid "All Supported Files"
+msgstr "Бүкіл танитын файлдар"
+
+#: marble_part.cpp:259
+#, fuzzy, kde-format
+#| msgid "Open File"
+msgctxt "@title:window"
+msgid "Open File"
+msgstr "Файлды ашу"
+
+#: marble_part.cpp:276
+#, fuzzy, kde-format
+#| msgid "Export Map"
+msgctxt "@title:window"
+msgid "Export Map"
+msgstr "Картаны экспорттау"
+
+#: marble_part.cpp:277
+#, kde-format
+msgid "Images *.jpg *.png"
+msgstr "*.jpg *.png кескіндері"
+
+#: marble_part.cpp:291
+#, kde-format
+msgctxt "Application name"
+msgid "Marble"
+msgstr "Marble"
+
+#: marble_part.cpp:292
+#, kde-format
+msgid "An error occurred while trying to save the file.\n"
+msgstr "Файлды сақтау кезінде қате орын алды.\n"
+
+#: marble_part.cpp:483
+#, fuzzy, kde-format
+#| msgid "Username:"
+msgid "Unnamed"
+msgstr "Пайдаланушы:"
+
+#: marble_part.cpp:714
+#, kde-format
+msgctxt "Action for downloading an entire region of a map"
+msgid "Download Region..."
+msgstr "Аймақты жүктеп алу...."
+
+#: marble_part.cpp:728
+#, kde-format
+msgctxt "Action for saving the map to a file"
+msgid "&Export Map..."
+msgstr "Картаны эк&спорттау..."
+
+#: marble_part.cpp:737
+#, kde-format
+msgctxt "Action for toggling offline mode"
+msgid "&Work Offline"
+msgstr "&Желіден тыс істеу"
+
+#: marble_part.cpp:747
+#, kde-format
+msgctxt "Action for copying the map to the clipboard"
+msgid "&Copy Map"
+msgstr "&Картаны көшіріп алу"
+
+#: marble_part.cpp:754
+#, kde-format
+msgctxt "Action for copying the coordinates to the clipboard"
+msgid "C&opy Coordinates"
+msgstr "Координаттарды кө&шіріп алу"
+
+#: marble_part.cpp:762
+#, kde-format
+msgctxt "Action for opening a file"
+msgid "&Open..."
+msgstr "&Ашу..."
+
+#: marble_part.cpp:769
+#, kde-format
+msgctxt "Action for downloading maps (GHNS)"
+msgid "Download Maps..."
+msgstr "Карталарды жүктеп алу..."
+
+#: marble_part.cpp:772
+#, kde-format
+msgctxt "Status tip"
+msgid "Download new maps"
+msgstr "Жаңа карталарды жүктеу"
+
+#: marble_part.cpp:778
+#, kde-format
+msgctxt "Action for creating new maps"
+msgid "&Create a New Map..."
+msgstr "&Жаңа картаны құру..."
+
+#: marble_part.cpp:783
+#, kde-format
+msgctxt "Status tip"
+msgid "A wizard guides you through the creation of your own map theme."
+msgstr "Өзіңіздің карта нақышын құруға көмектесетін шебер."
+
+#: marble_part.cpp:810
+#, kde-format
+msgctxt "Action for toggling clouds"
+msgid "&Clouds"
+msgstr "&Бұлттар"
+
+#: marble_part.cpp:817
+#, kde-format
+msgctxt "Action for sun control dialog"
+msgid "S&un Control..."
+msgstr "Күн&нің көзі..."
+
+#: marble_part.cpp:827
+#, kde-format
+msgctxt "Action for time control dialog"
+msgid "&Time Control..."
+msgstr "Уақытты басқару..."
+
+#: marble_part.cpp:836
+#, kde-format
+msgctxt "Action for locking float items on the map"
+msgid "Lock Position"
+msgstr "Орынды қадау"
+
+#: marble_part.cpp:847
+#, kde-format
+msgid "Show Shadow"
+msgstr "Көлеңкені салу"
+
+#: marble_part.cpp:850
+#, kde-format
+msgid "Hide Shadow"
+msgstr "Көлеңкені жасыру"
+
+#: marble_part.cpp:851
+#, kde-format
+msgid "Shows and hides the shadow of the sun"
+msgstr "Күннің көзінің көлеңкесін көрсету - жасыру"
+
+#: marble_part.cpp:855
+#, kde-format
+msgid "Show sun icon on the Sub-Solar Point"
+msgstr "Күн дәл астындағы нүктеде Күннің көзі таңбашасын көрсету"
+
+#: marble_part.cpp:857
+#, kde-format
+msgid "Hide sun icon on the Sub-Solar Point"
+msgstr "Күн дәл астындағы нүктеде Күннің көзі таңбашасын көрсетпеу"
+
+#: marble_part.cpp:858
+#, kde-format
+msgid "Show sun icon on the sub-solar point"
+msgstr "Күн дәл астындағы нүктеде Күннің көзі таңбашасын көрсету"
+
+#: marble_part.cpp:863
+#, kde-format
+msgid "Lock Globe to the Sub-Solar Point"
+msgstr "Глобустағы Күн дәл астындағы нүктені бекіту"
+
+#: marble_part.cpp:865
+#, kde-format
+msgid "Unlock Globe to the Sub-Solar Point"
+msgstr "Глобустағы Күн дәл астындағы нүктені босату"
+
+#: marble_part.cpp:866
+#, kde-format
+msgid "Lock globe to the sub-solar point"
+msgstr "Күн дәл астындағы нүктені бекіту"
+
+#: marble_part.cpp:881
+#, fuzzy, kde-format
+#| msgctxt "Add Bookmark"
+#| msgid "&Add Bookmark"
+msgctxt "Add Bookmark"
+msgid "Add &Bookmark..."
+msgstr "&Бетбелгіні қосу"
+
+#: marble_part.cpp:889
+#, kde-format
+msgctxt "Show Bookmarks"
+msgid "Show &Bookmarks"
+msgstr "&Бетбелгілерді көрсету"
+
+#: marble_part.cpp:890
+#, kde-format
+msgid "Show or hide bookmarks in the map"
+msgstr ""
+
+#: marble_part.cpp:898
+#, fuzzy, kde-format
+#| msgid "Show Home Location"
+msgid "&Set Home Location"
+msgstr "Мекен орының көрсету"
+
+#: marble_part.cpp:905
+#, fuzzy, kde-format
+#| msgctxt "Manage Bookmarks"
+#| msgid "&Manage Bookmarks"
+msgctxt "Manage Bookmarks"
+msgid "&Manage Bookmarks..."
+msgstr "Бетбелгілерді б&асқару"
+
+#: marble_part.cpp:917
+#, fuzzy, kde-format
+#| msgctxt "Edit the map in an external application"
+#| msgid "&Edit Map"
+msgctxt "Edit the map in an external application"
+msgid "&Edit Map..."
+msgstr "Картаны &өңдеу"
+
+#: marble_part.cpp:925
+#, kde-format
+msgid "&Record Movie"
+msgstr ""
+
+#: marble_part.cpp:927
+#, kde-format
+msgid "Records a movie of the globe"
+msgstr ""
+
+#: marble_part.cpp:933
+#, kde-format
+msgid "&Stop Recording"
+msgstr ""
+
+#: marble_part.cpp:935
+#, kde-format
+msgid "Stop recording a movie of the globe"
+msgstr ""
+
+#: marble_part.cpp:1287
+#, kde-format
+msgctxt "Action for toggling"
+msgid "Show Position"
+msgstr "Орынын көрсету"
+
+#: marble_part.cpp:1289
+#, kde-format
+msgctxt "Action for toggling"
+msgid "Show Date and Time"
+msgstr "Күн мен уақытты көрсету"
+
+#: marble_part.cpp:1291
+#, kde-format
+msgctxt "Action for toggling"
+msgid "Show Altitude"
+msgstr "Биіктігін көрсету"
+
+#: marble_part.cpp:1294
+#, kde-format
+msgctxt "Action for toggling"
+msgid "Show Tile Zoom Level"
+msgstr "Тор көзін масштабын көрсету"
+
+#: marble_part.cpp:1296
+#, kde-format
+msgctxt "Action for toggling"
+msgid "Show Download Progress Bar"
+msgstr "Жүктеу барысын көрсету"
+
+#: marble_part.cpp:1391
+#, kde-format
+msgid "View"
+msgstr "Көрініс"
+
+#: marble_part.cpp:1402
+#, kde-format
+msgid "Navigation"
+msgstr "Шарлау"
+
+#: marble_part.cpp:1413
+#, kde-format
+msgid "Cache & Proxy"
+msgstr "Кэш пен прокси"
+
+#: marble_part.cpp:1426
+#, kde-format
+msgid "Date & Time"
+msgstr "Күн мен уақыт"
+
+#: marble_part.cpp:1434
+#, kde-format
+msgid "Synchronization"
+msgstr "Қадамдастыру"
+
+#: marble_part.cpp:1447
+#, kde-format
+msgid "Routing"
+msgstr "Маршрутизация"
+
+#: marble_part.cpp:1455
+#, kde-format
+msgid "Plugins"
+msgstr "Плагиндер"
+
+#. i18n: ectx: Menu (file)
+#: marble_part.rc:6 marbleui.rc:5
+#, kde-format
+msgid "&File"
+msgstr "&Файл"
+
+#. i18n: ectx: Menu (edit)
+#: marble_part.rc:21 marbleui.rc:14
+#, kde-format
+msgid "&Edit"
+msgstr "&Өңдеу"
+
+#. i18n: ectx: Menu (view)
+#: marble_part.rc:31 marbleui.rc:18
+#, kde-format
+msgid "&View"
+msgstr "&Көрініс"
+
+#. i18n: ectx: Menu (infoboxes)
+#: marble_part.rc:36
+#, kde-format
+msgid "&Info Boxes"
+msgstr "&Ақпар жазулары"
+
+#. i18n: ectx: Menu (onlineservices)
+#: marble_part.rc:42
+#, kde-format
+msgid "&Online Services"
+msgstr "&Онлайн қызметтер"
+
+#. i18n: ectx: Menu (settings)
+#: marble_part.rc:55 marbleui.rc:31
+#, kde-format
+msgid "&Settings"
+msgstr "Ба&птау"
+
+#. i18n: ectx: Menu (panels)
+#: marble_part.rc:59
+#, kde-format
+msgid "&Panels"
+msgstr "&Панельдер"
+
+#. i18n: ectx: Menu (viewSize)
+#: marble_part.rc:65
+#, fuzzy, kde-format
+#| msgid "&View"
+msgid "&View Size"
+msgstr "&Көрініс"
+
+#. i18n: ectx: Menu (bookmarks)
+#: marble_part.rc:73 marbleui.rc:29
+#, kde-format
+msgid "&Bookmarks"
+msgstr "&Бетбелгілер"
+
+#. i18n: ectx: ToolBar (mainToolBar)
+#: marble_part.rc:84 marbleui.rc:36
+#, kde-format
+msgid "Main Toolbar"
+msgstr "Негізгі құралдар"
+
+#. i18n: ectx: ToolBar (pluginToolBar)
+#: marble_part.rc:97
+#, kde-format
+msgid "Edit Toolbar"
+msgstr "Өңдеу құралдары"
+
+#~ msgid "The graphics system that is used by Qt to render the graphics."
+#~ msgstr "Графиканы кескіндеу үшін Qt қолданатын графикалық жүйесі."
+
+#~ msgid "Native"
+#~ msgstr "Стандартты"
+
+#~ msgid "Native (X11)"
+#~ msgstr "Стандартты (X11)"
+
+#~ msgid "Native (Mac OS X Core Graphics)"
+#~ msgstr "Стандартты (Mac OS X негізгі графикасы)"
+
+#~ msgid ""
+#~ "You have decided to run Marble with a different graphics system.\n"
+#~ "For this change to become effective, Marble has to be restarted.\n"
+#~ "Please close the application and start Marble again."
+#~ msgstr ""
+#~ "Marble-ды басқа графикалық жүйемен жегуді ұйғардыңыз.\n"
+#~ "Өзгеріс орын алу үшін, Marble жаңадан бастау керек.\n"
+#~ "Қолданбаны жауып, оны қайтадан жегіңіз."
+
+#~ msgid "Graphics System Change"
+#~ msgstr "Графикалық жүйені өзгерту"
+
+#~ msgid "Night Sky"
+#~ msgstr "Түнгі аспан"
+
+#~ msgid ""
+#~ "<p>The <i>night sky</i>.</p><p>Displays the stars and constellations at "
+#~ "night.</p>"
+#~ msgstr ""
+#~ "<p><i>Түнгі аспан</i>.</p><p>Түндегі жұлдыз бен шоқжұлдыздарды көрсетеді."
+#~ "</p>"
+
+#~ msgid "Mountain"
+#~ msgstr "Тау"
+
+#~ msgid "Volcano"
+#~ msgstr "Вулкан"
+
+#~ msgid "Geographic Pole"
+#~ msgstr "Географиялық полюс"
+
+#~ msgid "Magnetic Pole"
+#~ msgstr "Магниттік полюс"
+
+#~ msgid "Airport"
+#~ msgstr "Әуежай"
+
+#~ msgid "Shipwreck"
+#~ msgstr "Кеме апат орны"
+
+#~ msgid "Astronomical Observatory"
+#~ msgstr "Астрономиялық обсерватория"
+
+#~ msgid ""
+#~ "<p>The moon.</p><p>The map is based on data from the Clementine Moon "
+#~ "mission (UVVIS Basemap Mosaic). Credits: NASA/SDIO, Courtesy <a href="
+#~ "\"http://astrogeology.usgs.gov\">USGS Astrogeology Research Program</a></"
+#~ "p>"
+#~ msgstr ""
+#~ "<p>Ай.</p><p>Бұл карта Clementine ай жорығының (UVVIS Basemap Mosaic) "
+#~ "деректерін негіздеген. Алғысымыз NASA/SDIO-ге, <a href=\"http://"
+#~ "astrogeology.usgs.gov\">USGS астрогеологиялық зерттеу бағдарламасының </"
+#~ "a> арқасында</p>"
+
+#~ msgid "Landing Sites"
+#~ msgstr "Қонған орындар"
+
+#~ msgid "Craters"
+#~ msgstr "Кратерлер"
+
+#~ msgid "Maria"
+#~ msgstr "Теңіз"
+
+#~ msgid "Other features"
+#~ msgstr "Басқа нысандар"
+
+#~ msgid "Manned landing site"
+#~ msgstr "Пилотты қону орны"
+
+#~ msgid "Robotic rover"
+#~ msgstr "Луноход"
+
+#~ msgid "Unmanned soft landing"
+#~ msgstr "Пилотсыз жүмсақ қону"
+
+#~ msgid "Unmanned hard landing"
+#~ msgstr "Пилотсыз қатты қону"
+
+#~ msgid "Crater, impact crater"
+#~ msgstr "Кратер, соқпа шұңқыры"
+
+#~ msgid "Mons, mountain"
+#~ msgstr "Дөң, тау"
+
+#~ msgid "Vallis, valley"
+#~ msgstr "Алап, аңғар"
+
+#~ msgid "Selenographic Pole"
+#~ msgstr "Селеногрфиялық полюсы"
+
+#~ msgid "Plain Map"
+#~ msgstr "Кәдімгі карта"
+
+#~ msgid ""
+#~ "<p>A <i>plain map</i>.</p><p>It uses vector lines to mark coastlines and "
+#~ "country borders, etc...</p>"
+#~ msgstr ""
+#~ "<p><i>Кәдімгі карта</i>.</p><p>Су жиектері, ел шекаралары, т.б. векторлы "
+#~ "сызықтармен салынады.</p>"
+
+#, fuzzy
+#~| msgid "Areas"
+#~ msgid "Urban Areas"
+#~ msgstr "Аймақтар"
+
+#~ msgid "Boundaries"
+#~ msgstr "Шекаралары"
+
+#~ msgid "Water Bodies"
+#~ msgstr "Сулар"
+
+#~ msgid "Ice and Glaciers"
+#~ msgstr "Мұз-мұзарт"
+
+#~ msgid "International"
+#~ msgstr "Халықаралық"
+
+#~ msgid "State"
+#~ msgstr "Штат"
+
+#~ msgid "Lake"
+#~ msgstr "Көл"
+
+#, fuzzy
+#~| msgid "Historic"
+#~ msgid "Historic Lake"
+#~ msgstr "Тарихи орын"
+
+#~ msgid "River"
+#~ msgstr "Өзең"
+
+#, fuzzy
+#~| msgid "Ice and Glaciers"
+#~ msgid "Glaciers"
+#~ msgstr "Мұз-мұзарт"
+
+#~ msgid "Temperature (July)"
+#~ msgstr "Температура (Шілде)"
+
+#~ msgid "A map which shows the average temperature in July."
+#~ msgstr "Шілдеде температураның орташа мөлшерін көрсететін карта."
+
+#~ msgid "42&deg;C"
+#~ msgstr "42&deg;C"
+
+#~ msgid "32&deg;C"
+#~ msgstr "32&deg;C"
+
+#~ msgid "23&deg;C"
+#~ msgstr "23&deg;C"
+
+#~ msgid "12&deg;C"
+#~ msgstr "12&deg;C"
+
+#~ msgid "1&deg;C"
+#~ msgstr "1&deg;C"
+
+#~ msgid "-10&deg;C"
+#~ msgstr "-10&deg;C"
+
+#~ msgid "-21&deg;C"
+#~ msgstr "-21&deg;C"
+
+#~ msgid "-32&deg;C"
+#~ msgstr "-32&deg;C"
+
+#~ msgid "-41&deg;C"
+#~ msgstr "-41&deg;C"
+
+#~ msgid "-69&deg;C"
+#~ msgstr "-69&deg;C"
+
+#~ msgid "Earth at Night"
+#~ msgstr "Түңгі Жер"
+
+#~ msgid ""
+#~ "This image of <i>Earth's city lights</i> was created with data from the "
+#~ "Defense Meteorological Satellite Program (DMSP) Operational Linescan "
+#~ "System (OLS)."
+#~ msgstr ""
+#~ "Бұл <i>Жердің қалалар шамдары</i> суреті Қорғаныс метеорологикалық "
+#~ "жерсерік бағдарламасы (DMSP) бойынша Operational Linescan жүйесі (OLS) "
+#~ "мәліметінен жасалған."
+
+#~ msgid "Surface"
+#~ msgstr "Беті"
+
+#~ msgid "Light terrain"
+#~ msgstr "Жарықтағы жер"
+
+#~ msgid "Dark terrain"
+#~ msgstr "Қараңғы жер"
+
+#~ msgid "Water"
+#~ msgstr "Су"
+
+#~ msgid "Atlas"
+#~ msgstr "Атлас"
+
+#~ msgid ""
+#~ "<p>A <i>classic topographic map</i>.</p><p>It uses vector lines to mark "
+#~ "coastlines, country borders etc. and bitmap graphics to create the height "
+#~ "relief.</p>"
+#~ msgstr ""
+#~ "<p><i>Классикалық топографиялық карта</i>.</p><p>Су жиектері, ел "
+#~ "шекаралары, т.б. векторлы сызықтармен салынады да, биіктік бедері нүктелі "
+#~ "графикамен беріледі.</p>"
+
+#~ msgid "Relief"
+#~ msgstr "Бедер"
+
+#~ msgid "Elevation"
+#~ msgstr "Биіктік"
+
+#~ msgid "7000 m"
+#~ msgstr "7000 м"
+
+#~ msgid "5000 m"
+#~ msgstr "5000 м"
+
+#~ msgid "3500 m"
+#~ msgstr "3500 м"
+
+#~ msgid "2000 m"
+#~ msgstr "2000 м"
+
+#~ msgid "1000 m"
+#~ msgstr "1000 м"
+
+#~ msgid "500 m"
+#~ msgstr "500 м"
+
+#~ msgid "200 m"
+#~ msgstr "200 м"
+
+#~ msgid "50 m"
+#~ msgstr "500 м"
+
+#~ msgid "0 m"
+#~ msgstr "0 м"
+
+#~ msgid "0 m (Water)"
+#~ msgstr "0 м (Су)"
+
+#~ msgid "-50 m"
+#~ msgstr "-50 м"
+
+#~ msgid "-200 m"
+#~ msgstr "-200 м"
+
+#~ msgid "-2000 m"
+#~ msgstr "-2000 м"
+
+#~ msgid "-4000 m"
+#~ msgstr "-4000 м"
+
+#~ msgid "-6500 m"
+#~ msgstr "-6500 м"
+
+#~ msgid "-11000 m"
+#~ msgstr "-11000 м"
+
+#~ msgid "Temperature (December)"
+#~ msgstr "Температура (Желтоқсан)"
+
+#~ msgid "A map which shows the average temperature in December."
+#~ msgstr "Желтоқсандағы температураның орташа мөлшерін көрсететін карта."
+
+#~ msgid ""
+#~ "<p>A <i>global roadmap</i> created by the OpenStreetMap (OSM) project.</"
+#~ "p><p>OSM is an open community which creates free editable maps. The OSM "
+#~ "data was rendered using Mapnik.</p>"
+#~ msgstr ""
+#~ "<p>A <i>Әлем жолдар картасы</i> OpenStreetMap (OSM) жобасы бойынша "
+#~ "жасалған.</p><p>OSM - еркін таратылатын карталарды шығаратын ашық қоғам. "
+#~ "OSM деректері Mapnik көмегімен кескінделеді.</p>"
+
+#, fuzzy
+#~| msgid "Map Title:"
+#~ msgid "OSM Bitmap Tiles"
+#~ msgstr "Картаның айдары:"
+
+#, fuzzy
+#~| msgid "The Earth"
+#~ msgid "Explore the Earth"
+#~ msgstr "Жер"
+
+#~ msgid "Hillshading"
+#~ msgstr "Төбелерді көлеңкелеу"
+
+#~ msgid "Transportation"
+#~ msgstr "Транспортты қатынас"
+
+#~ msgid "Areas"
+#~ msgstr "Аймақтар"
+
+#~ msgid "Education"
+#~ msgstr "Оқу-ағарту"
+
+#~ msgid "Financial"
+#~ msgstr "Қаржылық"
+
+#~ msgid "Healthcare"
+#~ msgstr "Денсаулық қорғау"
+
+#~ msgid "Entertainment"
+#~ msgstr "Ойын-сауық"
+
+#~ msgid "Public Buildings"
+#~ msgstr "Қоғамдық ғимараттар"
+
+#~ msgid "Accommodation"
+#~ msgstr "Қону-орналасу"
+
+#~ msgid "Emergency"
+#~ msgstr "Құтқару қызмет"
+
+#~ msgid "Historic"
+#~ msgstr "Тарихи орын"
+
+#~ msgid "Food and Drinks"
+#~ msgstr "Азық-түлік"
+
+#~ msgid "Shop"
+#~ msgstr "Дүкен"
+
+#~ msgid "Motorway"
+#~ msgstr "Автодаңғыл"
+
+#~ msgid "Trunk road"
+#~ msgstr "Күре жол"
+
+#~ msgid "Primary road"
+#~ msgstr "Басты жол"
+
+#~ msgid "Secondary road"
+#~ msgstr "Жергілікті жол"
+
+#~ msgid "Unclassified road"
+#~ msgstr "Жіктелмеген жол"
+
+#~ msgid "Unsurfaced road"
+#~ msgstr "Төселмеген жол"
+
+#~ msgid "Track"
+#~ msgstr "Сүрлеу жол"
+
+#~ msgid "Byway"
+#~ msgstr "Шалғай жол"
+
+#~ msgid "Bridleway"
+#~ msgstr "Ат соқпағы"
+
+#~ msgid "Cycleway"
+#~ msgstr "Велосипед жолы"
+
+#~ msgid "Footway"
+#~ msgstr "Жаяу соқпағы"
+
+#~ msgid "Railway station"
+#~ msgstr "Жемір жол станциясы"
+
+#~ msgid "Railway"
+#~ msgstr "Жемір жол"
+
+#~ msgid "Subway"
+#~ msgstr "Метро жолы"
+
+#~ msgid "Lightrail, tram"
+#~ msgstr "Трамвай"
+
+#~ msgid "Airport runway, taxiway"
+#~ msgstr "Ұшу-қону алаңы"
+
+#~ msgid "Airport apron, terminal"
+#~ msgstr "Әуежай терминалы"
+
+#~ msgid "Administrative boundary"
+#~ msgstr "Әкімшілікті шекара"
+
+#~ msgid "Bridge"
+#~ msgstr "Көпір"
+
+#~ msgid "Tunnel"
+#~ msgstr "Туннель"
+
+#~ msgid "Forest"
+#~ msgstr "Орман"
+
+#~ msgid "Wood"
+#~ msgstr "Ағаш"
+
+#~ msgid "Golf course"
+#~ msgstr "Гольф алаңы"
+
+#~ msgid "Park"
+#~ msgstr "Бақ"
+
+#~ msgid "Residential Area"
+#~ msgstr "Тұрғын аумақ"
+
+#~ msgid "Tourist attraction"
+#~ msgstr "Туристтік назар аудару жері"
+
+#~ msgid "Common, meadow"
+#~ msgstr "Көгал"
+
+#~ msgid "Retail area"
+#~ msgstr "Сауда аумағы"
+
+#~ msgid "Industrial Area"
+#~ msgstr "Өнеркәсіп аумағы"
+
+#~ msgid "Commercial Area"
+#~ msgstr "Коммерциялық аумақ"
+
+#~ msgid "Heathland"
+#~ msgstr "Бос жер"
+
+#~ msgid "Lake, reservoir"
+#~ msgstr "Көл, су қойма"
+
+#~ msgid "Farm"
+#~ msgstr "Аул-шаруашылық жері"
+
+#~ msgid "Brownfield site"
+#~ msgstr "Бұрынғы кәсіпорын жері"
+
+#~ msgid "Cemetery"
+#~ msgstr "Зират"
+
+#~ msgid "Allotments"
+#~ msgstr "Бақша"
+
+#~ msgid "Sports pitch"
+#~ msgstr "Спорт алаңы"
+
+#~ msgid "Sports centre"
+#~ msgstr "Спорт орталығы"
+
+#~ msgid "Nature reserve"
+#~ msgstr "Қорық жері"
+
+#~ msgid "Military area"
+#~ msgstr "Әскери полигон"
+
+#~ msgid "School, university"
+#~ msgstr "Мектеп, университет"
+
+#~ msgid "Significant Building"
+#~ msgstr "Көзге ілегетін ғимарат"
+
+#~ msgid "Summit, peak"
+#~ msgstr "Төбе, шың"
+
+#~ msgid "College"
+#~ msgstr "Колледж"
+
+#~ msgid "Kindergarten"
+#~ msgstr "Балабақша"
+
+#~ msgid "Library"
+#~ msgstr "Кітапхана"
+
+#~ msgid "School"
+#~ msgstr "Мектеп"
+
+#~ msgid "University"
+#~ msgstr "Университет"
+
+#~ msgid "ATM"
+#~ msgstr "Банкомат"
+
+#~ msgid "Bank"
+#~ msgstr "Банк"
+
+#~ msgid "Bureau de change"
+#~ msgstr "Ақша айырбастау"
+
+#~ msgid "Dentist"
+#~ msgstr "Тіс емдеу"
+
+#~ msgid "Doctors"
+#~ msgstr "Дәрігер"
+
+#~ msgid "Pharmacy"
+#~ msgstr "Дәріхана"
+
+#~ msgid "Veterinary"
+#~ msgstr "Мал дәргері"
+
+#~ msgid "Cinema"
+#~ msgstr "Кинотеатр"
+
+#~ msgid "Theatre"
+#~ msgstr "Театр"
+
+#~ msgid "Court"
+#~ msgstr "Сот"
+
+#~ msgid "Embassy"
+#~ msgstr "Елшілік"
+
+#~ msgid "Church"
+#~ msgstr "Шіркеу"
+
+#~ msgid "Playground"
+#~ msgstr "Ойын алаңы"
+
+#~ msgid "Place of worship"
+#~ msgstr "Ғибадат ету орыны"
+
+#~ msgid "Post office"
+#~ msgstr "Пошта"
+
+#~ msgid "Public building"
+#~ msgstr "Қоғамдық ғимараты"
+
+#~ msgid "Toilets"
+#~ msgstr "Дәретхана"
+
+#~ msgid "Hotel"
+#~ msgstr "Мейманхана"
+
+#~ msgid "Motel"
+#~ msgstr "Мотель"
+
+#~ msgid "Hospital"
+#~ msgstr "Аурухана"
+
+#~ msgid "Fire station"
+#~ msgstr "Өрт сөндіруші бекеті"
+
+#~ msgid "Monument"
+#~ msgstr "Ескерткіш"
+
+#~ msgid "Ruins"
+#~ msgstr "Қирандылар"
+
+#~ msgid "Bar"
+#~ msgstr "Бар"
+
+#~ msgid "Biergarten"
+#~ msgstr "Сырахана"
+
+#~ msgid "Cafe"
+#~ msgstr "Кафе"
+
+#~ msgid "Drinking water"
+#~ msgstr "Ауыз су"
+
+#~ msgid "Fast Food"
+#~ msgstr "Фастфуд"
+
+#~ msgid "Ice Cream"
+#~ msgstr "Балмұздақ"
+
+#~ msgid "Pub"
+#~ msgstr "Паб"
+
+#~ msgid "Restaurant"
+#~ msgstr "Мейрамхана"
+
+#~ msgid "Alcohol"
+#~ msgstr "Ішімдіктер"
+
+#~ msgid "Bakery"
+#~ msgstr "Наубайхана"
+
+#~ msgid "Books"
+#~ msgstr "Кітаптар"
+
+#~ msgid "Car"
+#~ msgstr "Автомобиль"
+
+#~ msgid "Clothes"
+#~ msgstr "Киім"
+
+#~ msgid "Convenience"
+#~ msgstr "Ыңғайлық"
+
+#~ msgid "Gas"
+#~ msgstr "Жанар-май"
+
+#~ msgid "Gift"
+#~ msgstr "Сыйлықтар"
+
+#~ msgid "Precipitation (July)"
+#~ msgstr "Жауын-шашын (Шілде)"
+
+#~ msgid ""
+#~ "A map which shows the average precipitation (rain/snow/hail/etc) in July."
+#~ msgstr ""
+#~ "Шілдедегі жауын-шашынның (жаңбыр, қар, бұршақ, т.б.) орташа мөлшерін "
+#~ "көрсететін карта."
+
+#~ msgid "Precipitation"
+#~ msgstr "Жауын-шашын"
+
+#~ msgid "0 mm"
+#~ msgstr "0 мм"
+
+#~ msgid "10 mm"
+#~ msgstr "10 мм"
+
+#~ msgid "40 mm"
+#~ msgstr "40 мм"
+
+#~ msgid "63 mm"
+#~ msgstr "63 мм"
+
+#~ msgid "89 mm"
+#~ msgstr "89 мм"
+
+#~ msgid "127 mm"
+#~ msgstr "127 мм"
+
+#~ msgid "256 mm"
+#~ msgstr "256 мм"
+
+#~ msgid "512 mm"
+#~ msgstr "512 мм"
+
+#~ msgid "1024 mm or more"
+#~ msgstr "1024 мм не артық"
+
+#~ msgid "Satellite View"
+#~ msgstr "Жерсеріктен көрінісі"
+
+#~ msgid ""
+#~ "<p>Earth as seen from Space.</p><p>The map is based on NASA's beautiful "
+#~ "\"Blue Marble Next Generation\" pictures. Credits: NASA's Earth "
+#~ "Observatory</p>"
+#~ msgstr ""
+#~ "<p>Жердің ғарыштан көрінісі.</p><p>Бұл карта NASA-ның тамаша \"Blue "
+#~ "Marble Next Generation\" суреттерін негізінде жасалған. NASA Жер "
+#~ "обсерваториясына алғысымызды білдіреміз</p>"
+
+#~ msgid "Ice"
+#~ msgstr "Мұз"
+
+#~ msgid "Vegetation"
+#~ msgstr "Өсімдіктер"
+
+#~ msgid "Desert"
+#~ msgstr "Шөл"
+
+#, fuzzy
+#~| msgid "Historical Maps"
+#~ msgid "Political Map"
+#~ msgstr "Тарихи карталары"
+
+#, fuzzy
+#~| msgid "River"
+#~ msgid "Rivers"
+#~ msgstr "Өзең"
+
+#~ msgid "Precipitation (December)"
+#~ msgstr "Жауын-шашын (Желтоқсан)"
+
+#~ msgid "A map which shows the average precipitation in December."
+#~ msgstr "Желтоқсандағы жауын-шашынның орташа мөлшерін көрсететін карта."
+
+#~ msgid "SRTM Data"
+#~ msgstr "SRTM деректері"
+
+#, fuzzy
+#~| msgid "Lines and Orientation"
+#~ msgid "Texts and illustrations"
+#~ msgstr "Сызықтары мен Бағдары"
+
+#, fuzzy
+#~| msgid "Preference:"
+#~ msgid "Reference lines"
+#~ msgstr "Басымдықтар:"
+
+#~ msgid "Accurate Coastline"
+#~ msgstr "Нақты жағалау"
+
+#~ msgid "Historical Map 1689"
+#~ msgstr "Тарихи 1689 ж. картасы"
+
+#~ msgid ""
+#~ "<i>Historical world map</i> from the year 1689 created by G. van Schagen "
+#~ "in Amsterdam."
+#~ msgstr "Амстердамда 1689 жылы Г. ван Шаген салған <i>Тарихи карта</i>."
+
+#~ msgid "Town"
+#~ msgstr "Қала"
+
+#~ msgid "OpenStreetMap"
+#~ msgstr "OpenStreetMap"
+
+#~ msgid "Clouds"
+#~ msgstr "Бұлттар"
+
+#~ msgid ""
+#~ "A Real Time Cloud Map that gets updated every 3 hours. It uses GOES, "
+#~ "METEOSAT, and GMS satellite imagery downloaded from the Geostationary "
+#~ "Satellite Imagery page at Dundee University.  Credits: Hari Nair, Xplanet "
+#~ "Project"
+#~ msgstr ""
+#~ "Шын қазіргі, 3 сағат сайынғы бұлттар артасы. Мәлімет GOES, METEOSAT, және "
+#~ "GMS жерсеріктерден алынған Dundee университеттің Geostationary Satellite "
+#~ "Imagery парағынан көшіріледі. Алғыссымыз Hari Nair-ге, Xplanet жобасы."
+
+#~ msgid "Marble: Legend"
+#~ msgstr "Marble: Түсіндірме"
+
+#~ msgid "Population:"
+#~ msgstr "Тұрғындар саны:"
+
+#~ msgid "&gt; 1&nbsp;000&nbsp;000"
+#~ msgstr "&gt; 1&nbsp;000&nbsp;000"
+
+#~ msgid "&ge; 100&nbsp;000"
+#~ msgstr "&ge; 100&nbsp;000"
+
+#~ msgid "&ge; 10&nbsp;000"
+#~ msgstr "&ge; 10&nbsp;000"
+
+#~ msgid "&lt; 10&nbsp;000"
+#~ msgstr "&lt; 10&nbsp;000"
+
+#~ msgid "Capitals:"
+#~ msgstr "Бас қалалар:"
+
+#~ msgid "Red:&nbsp;Nation"
+#~ msgstr "Кызыл:&nbsp;Елдердің"
+
+#~ msgid "Orange:&nbsp;State"
+#~ msgstr "Қызғылт-сары:&nbsp;Штат/Облыстың"
+
+#~ msgid "Yellow:&nbsp;County"
+#~ msgstr "Сары:&nbsp;Ауданның"
+
+#~ msgid "White:&nbsp;None"
+#~ msgstr "Ақ:&nbsp;Өзгелері"
+
+#~ msgid "<!-- ##customLegendEntries:all## -->"
+#~ msgstr "<!-- ##customLegendEntries:all## -->"
+
+#, fuzzy
+#~| msgid "Marble"
+#~ msgid "Marble - Game"
+#~ msgstr "Marble"
+
+#~ msgid "The Earth"
+#~ msgstr "Жер"
+
+#~ msgid "The Marble widget displays a virtual globe."
+#~ msgstr "Виртуалды глобусты көрсететін Marble виджеті."
+
+#~ msgid "Navigation Control"
+#~ msgstr "Шарлауды басқару"
+
+#~ msgid "Use this control to navigate."
+#~ msgstr "Осы тізгінімен шарлауға болады."
+
+#~ msgid "Show places"
+#~ msgstr "Орындар белгіленсін"
+
+#~ msgid "Show relief"
+#~ msgstr "Бедері көрсетілсін"
+
+#~ msgid "Show scale bar"
+#~ msgstr "Масштабы көрсетілсін"
+
+#~ msgid "Show borders"
+#~ msgstr "Шекаралар көретілсін"
+
+#~ msgid "Show ice / snow"
+#~ msgstr "Мұз/қар көрсетілсін"
+
+#~ msgid "Show compass"
+#~ msgstr "Компас көрсетілсін"
+
+#~ msgid "Show grid"
+#~ msgstr "Торы көрсетілсін"
+
+#~ msgid "Show rivers / lakes"
+#~ msgstr "Көл/өзендер көрсетілсін "
+
+#~ msgid "Show elevation model"
+#~ msgstr "Биіктігі модельденсін"
+
+#~ msgid "Coordinates: "
+#~ msgstr "Координаттары: "
+
+#, fuzzy
+#~| msgid "Add Via"
+#~ msgid "Add link"
+#~ msgstr "Не арқылы"
+
+#~ msgid "URL:"
+#~ msgstr "URL:"
+
+#~ msgid "Name:"
+#~ msgstr "Атауы:"
+
+#~ msgid "Bookmark Manager - Marble"
+#~ msgstr "Бетбелгілерді басқару - Marble"
+
+#~ msgid "Import Bookmarks..."
+#~ msgstr "Бетбелгілерді импорттау..."
+
+#~ msgid "Export Bookmarks..."
+#~ msgstr "Бетбелгілерді экспорттау..."
+
+#~ msgid "Folders"
+#~ msgstr "Қапшықтар"
+
+#~ msgid "New"
+#~ msgstr "Жаңа"
+
+#~ msgid "Rename"
+#~ msgstr "Қайта атау"
+
+#~ msgid "Delete"
+#~ msgstr "Өшіру"
+
+#~ msgid "Bookmarks"
+#~ msgstr "Бетбелгі"
+
+#~ msgid "Edit"
+#~ msgstr "Өңдеу"
+
+#~ msgid "Cloud Routes"
+#~ msgstr "Бұлттағы маршруттары"
+
+#~ msgid "No route available."
+#~ msgstr "Маршрут жоқ."
+
+#~ msgid "Current Location"
+#~ msgstr "Назардағы орын"
+
+#~ msgid "Position Tracking"
+#~ msgstr "Орынға еру"
+
+#~ msgid "Disabled"
+#~ msgstr "Рұқсат етілмеген"
+
+#~ msgid "Show Track"
+#~ msgstr "Ізі көрсетілсін"
+
+#~ msgid "Clear Track"
+#~ msgstr "Ізін тазалау"
+
+#~ msgid "..."
+#~ msgstr "..."
+
+#~ msgid "No position available."
+#~ msgstr "Орны белгісіз"
+
+#~ msgctxt "Select the method to use to recenter your GPS location on map."
+#~ msgid "Select the method to use to re-center your GPS location on map."
+#~ msgstr "Картада GPS бойынша орныңызды ортаға келтіру әдісін тандау."
+
+#~ msgid "Map Adjustment"
+#~ msgstr "Картаны туралау"
+
+#~ msgctxt "Disable Auto Recenter"
+#~ msgid "Disabled"
+#~ msgstr "Рұқсат етілмеген"
+
+#~ msgctxt "Always keep gps location at the center of the map"
+#~ msgid "Keep at Center"
+#~ msgstr "Ортаға келтіру"
+
+#~ msgctxt "Auto center when required"
+#~ msgid "When required"
+#~ msgstr "Қажет болғанда"
+
+#~ msgctxt "Auto Zoom to appropriate zoom level"
+#~ msgid "Auto Zoom to appropriate zoom level"
+#~ msgstr "Масштабын лайыкты деңгейіне автокелтіру"
+
+#~ msgid "Auto Zoom"
+#~ msgstr "Автомасштабтау"
+
+#~ msgid "Data Migration"
+#~ msgstr "Деректерді ауыстырп көшу"
+
+#~ msgid ""
+#~ "Marble has found map data stored by a previous Marble version.<br/>Should "
+#~ "this data get converted so that it can be used by the current version?"
+#~ msgstr ""
+#~ "Marble ескі пішіміндегі картасын тапты.<br/>Қазіргісіне аударып, "
+#~ "қолданатындай қылу керек пе?"
+
+#~ msgid "Edit Bookmark - Marble"
+#~ msgstr "Бетбелгіні өңдеу - Marble"
+
+#~ msgid "&Description"
+#~ msgstr "&Сипаттамасы"
+
+#, fuzzy
+#~| msgid ""
+#~| "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/"
+#~| "TR/REC-html40/strict.dtd\">\n"
+#~| "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~| "css\">\n"
+#~| "p, li { white-space: pre-wrap; }\n"
+#~| "</style></head><body style=\" font-family:'Ubuntu'; font-size:9pt; font-"
+#~| "weight:400; font-style:normal;\">\n"
+#~| "<table border=\"0\" style=\"-qt-table-type: root; margin-top:4px; margin-"
+#~| "bottom:4px; margin-left:4px; margin-right:4px;\">\n"
+#~| "<tr>\n"
+#~| "<td style=\"border: none;\">\n"
+#~| "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~| "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~| "\"></p>\n"
+#~| "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~| "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~| "\"></p></td></tr></table></body></html>"
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<table border=\"0\" style=\"-qt-table-type: root; margin-top:4px; margin-"
+#~ "bottom:4px; margin-left:4px; margin-right:4px;\">\n"
+#~ "<tr>\n"
+#~ "<td style=\"border: none;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-family:'Ubuntu';\"><br /></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-family:'Ubuntu';\"><br /></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-family:'Ubuntu';\"><br /></p></td></tr></table></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Ubuntu'; font-size:9pt; font-"
+#~ "weight:400; font-style:normal;\">\n"
+#~ "<table border=\"0\" style=\"-qt-table-type: root; margin-top:4px; margin-"
+#~ "bottom:4px; margin-left:4px; margin-right:4px;\">\n"
+#~ "<tr>\n"
+#~ "<td style=\"border: none;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p></td></tr></table></body></html>"
+
+#~ msgid "&Folder"
+#~ msgstr "&Қапшығы"
+
+#~ msgid "&Add Folder"
+#~ msgstr "Қапшықты қ&осу"
+
+#, fuzzy
+#~| msgid "Edit Toolbar"
+#~ msgid "Edit placemark"
+#~ msgstr "Өңдеу құралдары"
+
+#~ msgid "Description"
+#~ msgstr "Сипаттамасы"
+
+#, fuzzy
+#~| msgid "Labels"
+#~ msgid "Label"
+#~ msgstr "Жарлықтар"
+
+#, fuzzy
+#~| msgid "C&olors"
+#~ msgid "Color:"
+#~ msgstr "Тү&стері"
+
+#, fuzzy
+#~| msgid "Show places"
+#~ msgid "Show placemark"
+#~ msgstr "Орындар белгіленсін"
+
+#~ msgid "Elevation:"
+#~ msgstr "Биіктігі:"
+
+#, fuzzy
+#~| msgid "0 m"
+#~ msgid " m"
+#~ msgstr "0 м"
+
+#~ msgid "External Map Editor Selection"
+#~ msgstr "Сыртқы карта өңдегішін таңдау"
+
+#~ msgid "External Map Editor"
+#~ msgstr "Сыртқы карта өңдегіші"
+
+#, fuzzy
+#~| msgid "Web browser (Potlatch)"
+#~ msgid "Web browser (iD)"
+#~ msgstr "Веб браузер (Potlatch)"
+
+#~ msgid "Merkaartor"
+#~ msgstr "Merkaartor"
+
+#~ msgid "JOSM"
+#~ msgstr "JOSM"
+
+#~ msgid ""
+#~ "Deactivate to be prompted for a map editor selection next time again. "
+#~ "Otherwise, your choice is remembered and will be used automatically in "
+#~ "the future. If you want to alter the default map editor later, you can do "
+#~ "so in the Marble Settings."
+#~ msgstr ""
+#~ "Келесіде карта өңдегіші туралы сұрақ қойылсын десеңіз - белгісін алып "
+#~ "тастаңыз. Әйтпесе, таңдағаныңыз әдетті карта өңдегіші болып жатталады. "
+#~ "Керегінде қажеттісін Marble баптауы арқылы қайта таңдап өзгерте аласыз."
+
+#~ msgid "Make my selection the default map editor"
+#~ msgstr "Таңдағаным әдетті карта өңдегіші болсын"
+
+#~ msgid "Editor Details"
+#~ msgstr "Өңдегіштің егжей-тегжейі"
+
+#~ msgid "Editor Preview"
+#~ msgstr "Қарап-шығуы"
+
+#, fuzzy
+#~| msgid ""
+#~| "Potlatch is an OpenStreetMap editor for quick editing tasks and "
+#~| "beginners. It requires a web browser with flash support."
+#~ msgid ""
+#~ "iD is an OpenStreetMap editor for quick editing tasks and beginners. It "
+#~ "requires a web browser."
+#~ msgstr ""
+#~ "Potlatch деген OpenStreetMap өңдегіші. Бастаушыларға және тез "
+#~ "өзгерістерді енгізуге ыңғайлы. Flash - технологияны қолдайтын Интернет "
+#~ "браузерін қажет етеді."
+
+#~ msgid "File View"
+#~ msgstr "Файлды қарау"
+
+#~ msgid "&Save"
+#~ msgstr "&Сақтау"
+
+#~ msgid "&Close"
+#~ msgstr "&Жабу"
+
+#~ msgid "10"
+#~ msgstr "10"
+
+#, fuzzy
+#~| msgid "C&olors"
+#~ msgid "Color"
+#~ msgstr "Тү&стері"
+
+#~ msgid "Go To..."
+#~ msgstr "Мынаған өту..."
+
+#~ msgid ""
+#~ "Enter a search term and press Enter. <a href=\"http://userbase.kde.org/"
+#~ "Marble/Search\">Details...</a>"
+#~ msgstr ""
+#~ "Іздейтінді келтіріп Enter пернесін басыңыз. <a href=\"http://userbase.kde."
+#~ "org/Marble/Search\">Толығрақ...</a>"
+
+#~ msgid "Browse"
+#~ msgstr "Ақтару"
+
+#~ msgid "Search"
+#~ msgstr "Іздеу"
+
+#~ msgid "Select a geographic region"
+#~ msgstr "Географиялық аумақты таңдау"
+
+#~ msgid "Northern Latitude"
+#~ msgstr "Солтүстік ендігі"
+
+#~ msgid "°"
+#~ msgstr "°"
+
+#~ msgid "&N"
+#~ msgstr "&N"
+
+#~ msgid "Western Longitude"
+#~ msgstr "Батыс бойлығы"
+
+#~ msgid "&W"
+#~ msgstr "&W"
+
+#~ msgid "Eastern Longitude"
+#~ msgstr "Шығыс бойлығы"
+
+#~ msgid "&E"
+#~ msgstr "&E"
+
+#~ msgid "Southern Latitude"
+#~ msgstr "Оңтүстік ендігі"
+
+#~ msgid "&S"
+#~ msgstr "&S"
+
+#~ msgid "′"
+#~ msgstr "′"
+
+#~ msgid "″"
+#~ msgstr "″"
+
+#~ msgid "Legend"
+#~ msgstr "Түсіндірме"
+
+#~ msgid "about:blank"
+#~ msgstr "about:blank"
+
+#~ msgid "Marble - Install Maps"
+#~ msgstr "Marble - Карталарды орнату"
+
+#~ msgid "Map View"
+#~ msgstr "Карта көрінісі"
+
+#~ msgid "&Projection"
+#~ msgstr "&Проекция"
+
+#~ msgid "Globe"
+#~ msgstr "Глобус"
+
+#~ msgid "Flat Map"
+#~ msgstr "Тікбұрышты"
+
+#~ msgid "Mercator"
+#~ msgstr "Меркатор"
+
+#, fuzzy
+#~| msgid "Selenographic Pole"
+#~ msgid "Stereographic"
+#~ msgstr "Селеногрфиялық полюсы"
+
+#~ msgid "&Celestial Body"
+#~ msgstr "&Аспан денесі"
+
+#~ msgid "&Theme"
+#~ msgstr "&Нақыш"
+
+#~ msgid "Here you can choose the preferred map view from different topics."
+#~ msgstr "Мұнда түрлісінен керек карта түрін таңдай аласыз."
+
+#~ msgid "Marble Map Theme Creation Wizard"
+#~ msgstr "Marble картасының түрін құру шебері"
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">Welcome to the Map Creation Wizard!</span></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">We will guide you "
+#~ "through the process of creating a map theme for Marble. In the end you "
+#~ "will have your own map that you can view in Marble.</p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Please choose the "
+#~ "source that you want to use for the data of your map theme:</p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:12px; margin-bottom:12px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">Картаны құру шебері: қош келдіңіз!</span></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Өзіңіздің Marble карта "
+#~ "нақышын кұрып беруге көмектеседі. Түбінде қалауыңыз бойынша жасалған "
+#~ "Marble картаңызға ие боласыз.</p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Карта нақышын жасауға "
+#~ "пайдаланатын деректер көзін таңдаңыз:</p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:12px; margin-bottom:12px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p></body></html>"
+
+#~ msgid ""
+#~ "Connects to a server on the Internet. The map data is queried via the WMS "
+#~ "protocol."
+#~ msgstr ""
+#~ "Интернет арқылы серверге қосады да, WMS протоколы бойынша карта "
+#~ "деректерін сұрайды."
+
+#~ msgid "Web Map Service (WMS)"
+#~ msgstr "Web Map Service (WMS)"
+
+#~ msgid ""
+#~ "You need to provide a bitmap image of a world map that is stored on disk."
+#~ msgstr "Дискіде сақтаулы әлем картасының кескінін келтіруіңіз керек."
+
+#~ msgid "A single image showing the whole world"
+#~ msgstr "Бүкіл әлемінің бір кескіні"
+
+#~ msgid ""
+#~ "Connects to a server on the Internet. The map data is queried via a "
+#~ "static URL."
+#~ msgstr ""
+#~ "Интернет арқылы серверге қосады да, тұрақты URL-адресі бойынша карта "
+#~ "деректерін сұрайды."
+
+#~ msgid "Online map providing indexed tiles (e.g. Open Street Map)"
+#~ msgstr ""
+#~ "Индекстелген тор көздерден құрылған желідегі картасы (мысалы, Open Street "
+#~ "Map)"
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">WMS Server</span></p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Please choose a <a href="
+#~ "\"http://en.wikipedia.org/wiki/Web_Map_Service\"><span style=\" text-"
+#~ "decoration: underline; color:#0057ae;\">WMS</span></a> server or enter a "
+#~ "custom server URL.</p></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">WMS сервері</span></p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><a href=\"http://en."
+#~ "wikipedia.org/wiki/Web_Map_Service\"><span style=\" text-decoration: "
+#~ "underline; color:#0057ae;\">WMS</span></a> серверін немесе өзге сервердің "
+#~ "URL-адресін келтіріңіз.</p></body></html>"
+
+#~ msgid "WMS Server:"
+#~ msgstr "WMS сервері:"
+
+#~ msgid "Custom"
+#~ msgstr "Өзге"
+
+#~ msgid "http://"
+#~ msgstr "http://"
+
+#~ msgid "Available Maps:"
+#~ msgstr "Бар карталар:"
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">World Map Bitmap Image</span></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-weight:600;\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Please choose the "
+#~ "location of a world map that is stored in a single image file (JPG, PNG, "
+#~ "etc.). It needs to be provided in <a href=\"http://en.wikipedia.org/wiki/"
+#~ "Equirectangular_projection\"><span style=\" text-decoration: underline; "
+#~ "color:#0057ae;\">Equirectangular projection</span></a>, so the shape "
+#~ "should look like this (size ratio: 2:1):</p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><img src=\":/data/svg/"
+#~ "worldmap.svg\" width=\"150\" /></p></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">Растрлы әлем карта кескіні</span></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-weight:600;\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Бір кескін (JPG, PNG, т."
+#~ "б.) файлында сақтаулы әлем карта жатқан орынын келтіріңіз. Ол <a href="
+#~ "\"http://en.wikipedia.org/wiki/Equirectangular_projection\"><span style="
+#~ "\" text-decoration: underline; color:#0057ae;\">Тікбұрышты проекцияда</"
+#~ "span></a> болу тиіс, сонымен мына секілді болу керек (өлшемдер қатынасы: "
+#~ "2:1):</p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><img src=\":/data/svg/"
+#~ "worldmap.svg\" width=\"150\" /></p></body></html>"
+
+#~ msgid "Source Image:"
+#~ msgstr "Кескіннің көзі:"
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Bitstream Vera Sans'; font-"
+#~ "size:9pt; font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif'; font-weight:600;\">URL Scheme for Indexed Tiles</"
+#~ "span></p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif';\">Please enter the URL used for downloading "
+#~ "individual tiles. Use the placeholders </span><span style=\" font-"
+#~ "family:'Sans Serif'; font-style:italic;\">{x}</span><span style=\" font-"
+#~ "family:'Sans Serif';\">, </span><span style=\" font-family:'Sans Serif'; "
+#~ "font-style:italic;\">{y}</span><span style=\" font-family:'Sans Serif';"
+#~ "\">, and </span><span style=\" font-family:'Sans Serif'; font-style:"
+#~ "italic;\">{zoomLevel}</span><span style=\" font-family:'Sans Serif';\"> "
+#~ "to reference a tile from the index.</span></p></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Bitstream Vera Sans'; font-"
+#~ "size:9pt; font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif'; font-weight:600;\">Индекстелген тордың URL сұлбасы</"
+#~ "span></p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif';\">Бөлек тор көздерін жүктеп алатын URL-адресін "
+#~ "келтіріңіз. Индекстермен сілтеу үшін мына орынбасарларды қолданыңыз </"
+#~ "span><span style=\" font-family:'Sans Serif'; font-style:italic;\">{x}</"
+#~ "span><span style=\" font-family:'Sans Serif';\">, </span><span style=\" "
+#~ "font-family:'Sans Serif'; font-style:italic;\">{y}</span><span style=\" "
+#~ "font-family:'Sans Serif';\">, and </span><span style=\" font-family:'Sans "
+#~ "Serif'; font-style:italic;\">{zoomLevel}</span><span style=\" font-"
+#~ "family:'Sans Serif';\">.</span></p></body></html>"
+
+#~ msgid "URL Scheme:"
+#~ msgstr "URL сұлбасы:"
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Bitstream Vera Sans'; font-"
+#~ "size:9pt; font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif'; font-weight:600;\">General Information</span></p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif';\">Please specify a title, a name and an icon for "
+#~ "your new map. Add a description to let users know what your map is about. "
+#~ "</span></p></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Bitstream Vera Sans'; font-"
+#~ "size:9pt; font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif'; font-weight:600;\">Жалпы мәлімет</span></p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif';\">Жаңа картаңыздың айдарын, атауын, және таңбашасын "
+#~ "келтіріңіз. Сипаттамасын қосып қойғаны да жөн. </span></p></body></html>"
+
+#~ msgid "Map Title:"
+#~ msgstr "Картаның айдары:"
+
+#~ msgid "A short concise name for your map theme."
+#~ msgstr "Карта нақышыңыздың қысқа тұжырымды атауы."
+
+#~ msgid "Map Name:"
+#~ msgstr "Картаның атауы:"
+
+#~ msgid "The lowercase map theme id."
+#~ msgstr "Нақыштың ID-і (кіші әріпті)."
+
+#~ msgid "The folder name of your new theme."
+#~ msgstr "Жаңа нақыштың орналасатын қапшығы."
+
+#~ msgid "Description:"
+#~ msgstr "Сипаттамасы:"
+
+#~ msgid ""
+#~ "A short description of your map theme. Here you can provide information "
+#~ "about the purpose, origin, copyright and license of the data used in your "
+#~ "map theme."
+#~ msgstr ""
+#~ "Карта түрінің қысқаша сипаттамасы. Бұнда бұл нақыштағы картаның мақсатын, "
+#~ "авторлық құқықтарын, лицензиясының түірін келтіре аласыз."
+
+#~ msgid "It will appear in a tool tip and may contain HTML formatting."
+#~ msgstr "Бұл ишараларында көрсетілетін мәлімет (HMTL-пішімдеуге болады)"
+
+#~ msgid "Preview Image:"
+#~ msgstr "Алдын-ала қарау:"
+
+#~ msgid "preview image"
+#~ msgstr "алдын-ала қарау "
+
+#~ msgid "Change..."
+#~ msgstr "Өзгерту..."
+
+#~ msgid "Legend Image:"
+#~ msgstr "Түсіндірме кескіні:"
+
+#~ msgid "Places of Interest"
+#~ msgstr "Қызық орындары"
+
+#~ msgid "Populated Places"
+#~ msgstr "Елді мекен орындар"
+
+#~ msgid "Terrain"
+#~ msgstr "Топография"
+
+#~ msgid "Coordinate Grid"
+#~ msgstr "Координат торы"
+
+#~ msgid "Border Lines"
+#~ msgstr "Шекаралар"
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">Summary</span></p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Congratulations! You "
+#~ "have entered all the data that is necessary to create your map theme. "
+#~ "Check the summary below carefully and press the \"Finish\" button to "
+#~ "create the theme. </p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Please consider "
+#~ "contributing the map theme back to the Marble community if the license "
+#~ "and the terms of use allow for it.</p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:12px; margin-bottom:12px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">Қортынды</span></p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Сәтті бітті! Жаңа "
+#~ "нақыштағы картаны құру үшін бүкіл мәліметтерді келтірдіңіз. Төмендегі "
+#~ "қортындысын тексеріп шығыңыз да, нақышыңызды құру үшін \"Аяқтау\" дегенді "
+#~ "басыңыз. </p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Катраныздың лицензиясы, "
+#~ "пайдалану шарттары лайық келсе Marble қолданушылар қауымына картаңызды "
+#~ "ашып ұсынудың мүмкіндігін қарастырыңыз.</p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:12px; margin-bottom:12px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p></body></html>"
+
+#~ msgid "Map name goes here."
+#~ msgstr "Картаның атауы."
+
+#~ msgid "Map Theme:"
+#~ msgstr "Карта нақышы:"
+
+#~ msgid "Map theme goes here."
+#~ msgstr "Қартаның нақышы."
+
+#~ msgid "Thumbnail image goes here."
+#~ msgstr "Картаның нобайы."
+
+#~ msgid "Preview Map"
+#~ msgstr "Картаны қарап-шығу"
+
+#~ msgid "About Marble"
+#~ msgstr "Marble туралы"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">Marble Virtual Globe</span></p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">Marble виртуалды глобусы</span></p></body></html>"
+
+#~ msgid "Version Unknown"
+#~ msgstr "Нұсқасы беймәлім"
+
+#~ msgid "&About"
+#~ msgstr "&Осы туралы"
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:10pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-size:9pt;\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "size:9pt;\">(c) 2007, The Marble Project</span></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-size:9pt; font-style:italic;\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "size:9pt;\">http://edu.kde.org/marble</span></p></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:10pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-size:9pt;\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "size:9pt;\">(c) 2007, Marble жобасы</span></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-size:9pt; font-style:italic;\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "size:9pt;\">http://edu.kde.org/marble</span></p></body></html>"
+
+#~ msgid "A&uthors"
+#~ msgstr "Ав&торлары"
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:10pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-size:9pt;\"></p></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:10pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-size:9pt;\"></p></body></html>"
+
+#~ msgid "&Data"
+#~ msgstr "&Деректер"
+
+#~ msgid "&License Agreement"
+#~ msgstr "&Лицензиялық келісім"
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:10pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-family:'MS Shell Dlg 2'; font-size:8pt;\"></p></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:10pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-family:'MS Shell Dlg 2'; font-size:8pt;\"></p></body></html>"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">There are two caches "
+#~ "being used for Marble: The physical memory which is needed to keep map "
+#~ "data in the computer's memory. Increasing the value will make the "
+#~ "application more responsive. The hard disc memory cache is used by "
+#~ "download contents from the Internet (e.g. Wikipedia data or map data). "
+#~ "Decrease this value if you want to save space on the hard disc and if "
+#~ "high usage of the Internet is not an issue. </p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Marble кэштің екі түрін "
+#~ "қолданады: физикалық жадындағысы - картаның деректерін сақтайтың "
+#~ "компьютердің жады. Бұны үлкейтсеңіз - бағдарламаның ісін тездетеді. "
+#~ "Дискідегісі - Интернеттен жүктеп алынған деректерді (мысалы, Уикипедия не "
+#~ "карта деректерін) сақтау үшін. Интернеттен деректерді қайта-қайта "
+#~ "алғаныңыз мәселе туғызбаса бұны кішірейтуге болады. </p></body></html>"
+
+#~ msgid "C&ache"
+#~ msgstr "К&эш"
+
+#~ msgid "&Physical memory:"
+#~ msgstr "&Физикалық жадында:"
+
+#~ msgid " MB"
+#~ msgstr " МБ"
+
+#~ msgid "C&lear"
+#~ msgstr "Таза&лау"
+
+#~ msgid "&Hard disc:"
+#~ msgstr "&Дискіде:"
+
+#~ msgid "Unlimited"
+#~ msgstr "Шектелмеген"
+
+#~ msgid "Cl&ear"
+#~ msgstr "Та&залау"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Proxy settings for your "
+#~ "local intranet. Please leave empty if there is no proxy.</p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Жергілікті "
+#~ "Интранетініздің прокси параметрлері. Прокси қолданылмаса - бос қалдырыңыз."
+#~ "</p> </body></html>"
+
+#~ msgid "&Proxy"
+#~ msgstr "&Прокси"
+
+#~ msgid "&Proxy:"
+#~ msgstr "&Прокси:"
+
+#~ msgid "P&ort:"
+#~ msgstr "П&орты:"
+
+#~ msgid "Proxy type:"
+#~ msgstr "Проксидің түрі:"
+
+#~ msgid "Http"
+#~ msgstr "Http"
+
+#~ msgid "Socks5"
+#~ msgstr "Socks5"
+
+#~ msgid "Requires authentication"
+#~ msgstr "Аутентификация керек"
+
+#~ msgid "U&sername:"
+#~ msgstr "Па&йдаланушы:"
+
+#~ msgid "&Password:"
+#~ msgstr "&Паролі:"
+
+#~ msgid "Enable synchronization"
+#~ msgstr "Қадамдастыру болсын"
+
+#~ msgid ""
+#~ "Allows you to store routes in owncloud. Each route must be uploaded/"
+#~ "downloaded manually."
+#~ msgstr ""
+#~ "owncloud жүйесінде маршрутарды сақтау мүмкіндігі. Әр маршрут қолмен "
+#~ "жүктеп алыну/берілу тиіс."
+
+#~ msgid "Enable route synchronization"
+#~ msgstr "Маршрут қадамдастыруы болсын"
+
+#~ msgid "Automatically sync all bookmarks to the server."
+#~ msgstr "Бүкіл бетбелгілерді сервермен автоматты түрде қадамдастру."
+
+#~ msgid "Enable bookmark synchronization"
+#~ msgstr "Бетбелгілер қадамдастырылсын"
+
+#~ msgid "Sync now"
+#~ msgstr "Қазір қадамдастыру"
+
+#~ msgid "Credentials"
+#~ msgstr "Өкілеттіліктері"
+
+#~ msgid "Server:"
+#~ msgstr "Сервері:"
+
+#~ msgid "Remote server URL, e.g. myserver.com/owncloud"
+#~ msgstr "Қашықтағы серверінің URL-і, мысалы: myserver.com/owncloud"
+
+#~ msgid "Username:"
+#~ msgstr "Пайдаланушы:"
+
+#~ msgid "Password:"
+#~ msgstr "Паролі:"
+
+#~ msgid "Marble Cache Settings"
+#~ msgstr "Marble кэшін баптауы"
+
+#~ msgid "Dragging and Animation"
+#~ msgstr "Ілектіріп тарту мен Анимация"
+
+#~ msgid "&Drag location:"
+#~ msgstr "Ілектіріп &тартқанда:"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">While dragging the "
+#~ "mouse there are two standard behaviours when dealing with a virtual globe:"
+#~ "</p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">The location below "
+#~ "mouse pointer will follow the cursor exactly: As a result e.g. the north "
+#~ "pole will not stay at the top which can lead to confusion. By default "
+#~ "Marble makes sure that north is always up which results in a dragging "
+#~ "behaviour where the location below the mouse pointer slightly \"detaches"
+#~ "\" from the cursor. </p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Тышқанмен глобусты "
+#~ "ілектіріп тартқанда, екі стандартты амал болуға мүмкін:</p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Ілектірген орын тышқан "
+#~ "меңзеріне \"жабысып\" ереді. Бұндайда солтүстік полюс жоғардан жылжып "
+#~ "кетіп, глобус \"еңкиеді\". Бірақ әдетте Marble Жер білігін бекітіп, "
+#~ "тартқанда глобусты тек сол білікті айнала ғана бұрайды. Бұндайда меңзер "
+#~ "глобус нүктесіне жабыспай, оның бетінде сәл жылжып отырады. </p></body></"
+#~ "html>"
+
+#~ msgid "Keep Planet Axis Vertically"
+#~ msgstr "Планетаның білігін тік ұстау"
+
+#~ msgid "Follow Mouse Pointer"
+#~ msgstr "Меңзерге еру"
+
+#~ msgid "Use kinetic spinning when dragging the map"
+#~ msgstr "Картаны ілектіріп тартқанда кинетикалық бұрауды қолдану"
+
+#~ msgid "&Inertial Globe Rotation"
+#~ msgstr "Глобус &инерциямен бұралсын"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">When searching for a "
+#~ "location Marble can either move instantly to the new location or it can "
+#~ "show a travel animation from the previous place to the new place.</p></"
+#~ "body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Орынды іздегенде Marble "
+#~ "тапқан жерге бірден секіріп немесе біртіндеп анимациялап ауыса алады.</"
+#~ "p></body></html>"
+
+#~ msgid "&Animate voyage to the target"
+#~ msgstr "&Анимациялап ауыссын"
+
+#~ msgid "&On startup:"
+#~ msgstr "&Бастағанда:"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">By default Marble will "
+#~ "display the home location immediately after the application has started. "
+#~ "As an alternative it can also show the last position that was active when "
+#~ "the user left the application. </p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Әдетте Marble жұмысын "
+#~ "бастағанда глобус бірден мекен орыны көрсетеді. Немесе қаласаңыз, соңғы "
+#~ "соңғы көрсетілген орынға қайтатын болады. </p> ы</body></html>"
+
+#~ msgid "Show Home Location"
+#~ msgstr "Мекен орының көрсету"
+
+#~ msgid "Return to Last Location Visited"
+#~ msgstr "Соңғы орынға қайту"
+
+#~ msgid "&External Editor:"
+#~ msgstr "&Сыртқы өңдегіші:"
+
+#~ msgid ""
+#~ "<p>The application that is launched to edit maps. Potlatch (default) "
+#~ "requires a web browser with flash support to be installed. When selecting "
+#~ "josm or merkaartor, make sure that the respective application is "
+#~ "installed.</p>"
+#~ msgstr ""
+#~ "<p>Карталарды өңдеуге әдетте қолданатын бағдарламасы. Potlatch (әдетті) "
+#~ "флеш-технологиясын қолдайтын веб-браузердің болуын ажет етеді. Ал josm не "
+#~ "merkaartor бағдарламаларды таңдасаңыз, олар орнатылғанына көз жеткізіңіз."
+#~ "</p>"
+
+#~ msgid "Always ask"
+#~ msgstr "Әрқашанда сұрап"
+
+#~ msgid "Potlatch (Web browser)"
+#~ msgstr "Potlatch (Веб-браузер)"
+
+#~ msgid "Up"
+#~ msgstr "Жоғары"
+
+#~ msgid "Tilts the globe's axis towards the user."
+#~ msgstr "Глобус білігін бері қарай еңкейту."
+
+#~ msgid "Left"
+#~ msgstr "Солға"
+
+#~ msgid "Rotates the globe counterclockwise around its axis."
+#~ msgstr "Глобус білігін айнала сағат тіліне қарсы бұрау."
+
+#~ msgid "Reset View"
+#~ msgstr "Ысырып тастау"
+
+#~ msgid "Click this button to restore the original zoom level and view angle."
+#~ msgstr "Бастапқы масштаб пен қарау нүктесіне қайту."
+
+#~ msgid "Home"
+#~ msgstr "Мекен"
+
+#~ msgid "Right"
+#~ msgstr "Оңға"
+
+#~ msgid "Rotates the globe clockwise around its axis."
+#~ msgstr "Глобус білігін айнала сағат тілі бойынша бұрау."
+
+#~ msgid "Down"
+#~ msgstr "Төмен"
+
+#~ msgid "Tilts the globe's axis away from the user."
+#~ msgstr "Глобус білігін әрі қарай шалқайту."
+
+#~ msgid "Zoom In"
+#~ msgstr "Жақындау"
+
+#~ msgid "Zoom in by pressing this button to see more detail."
+#~ msgstr "Жақындап егжей-тегжейін қөру үшін осыны басыңыз."
+
+#~ msgid "+"
+#~ msgstr "+"
+
+#~ msgid "Zoom Slider"
+#~ msgstr "Масштаб жүгірткісі"
+
+#~ msgid "Use this slider to adjust the zoom level of the map."
+#~ msgstr "Осы жүгірткімен қалған масштабты таңдай аласыз."
+
+#~ msgid "Zoom Out"
+#~ msgstr "Алыстау"
+
+#~ msgid "Zoom out by pressing this button to see less detail."
+#~ msgstr "Алыстап егжей-тегжейін азайту үшін осыны басыңыз."
+
+#~ msgid "-"
+#~ msgstr "-"
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'DejaVu Sans'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif';\">This is Marble's machine room for advanced users. "
+#~ "Here you can select and deselect the functionality that is provided "
+#~ "through plugins. </span></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif';\">Deselecting a plugin will remove the functionality "
+#~ "from the map, menus and toolbars. </span></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif';\">Also some of the plugins might allow for tweaking "
+#~ "their configuration a bit. </span></p></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'DejaVu Sans'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif';\">Мұнда Marble білгіштері плагиндерін қосып-ажыратып "
+#~ "мүмкіндіктерін ыңғайлап алады.</span></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif';\">Плагинді ажырату сәйкесті мүмкіндікті картадан, не "
+#~ "мәзірінен, не панелінен кетіреді.</span></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif';\">Кейбір плагиндер қосымша ыңғайлап баптауға келеді. "
+#~ "</span></p></body></html>"
+
+#~ msgid "P&lugins"
+#~ msgstr "П&лагиндер"
+
+#~ msgid "Time Zone"
+#~ msgstr "Уақыт белдеуі"
+
+#~ msgid "UTC"
+#~ msgstr "БӘУ"
+
+#~ msgid "System time zone"
+#~ msgstr "Жүйелік уақыт белдеуі"
+
+#~ msgid "Choose Time zone"
+#~ msgstr "Уақыт белдеуін таңдау"
+
+#~ msgid "Universal Time Coordinated"
+#~ msgstr "Дүниежүзлік үйлестірілген уақыт"
+
+#~ msgid "European Central Time"
+#~ msgstr "Орта Еуропа уақыты"
+
+#~ msgid "Eastern European Time"
+#~ msgstr "Шығыс Еуропа уақыты"
+
+#~ msgid "Egypt Standard Time"
+#~ msgstr "Мысыр стандартты уақыты"
+
+#~ msgid "Eastern African Time"
+#~ msgstr "Шығыс Африка уақыты"
+
+#~ msgid "Middle East Time"
+#~ msgstr "Орта Шығыс уақыты"
+
+#~ msgid "Near East Time"
+#~ msgstr "Таяу Шығыс уақыты"
+
+#~ msgid "Pakistan Lahore Time"
+#~ msgstr "Пәкістан Лахор уақыты"
+
+#~ msgid "India Standard Time"
+#~ msgstr "Үндістан стандартты уақыты"
+
+#~ msgid "Bangladesh Standard Time"
+#~ msgstr "Бангладеш стандартты уақыты"
+
+#~ msgid "Vietnam Standard Time"
+#~ msgstr "Вьетнам стандартты уақыты"
+
+#~ msgid "China Taiwan Time"
+#~ msgstr "Тайвань уақыты"
+
+#~ msgid "Japan Standard Time"
+#~ msgstr "Жапон стандартты уақыты"
+
+#~ msgid "Australia Central Time"
+#~ msgstr "Орта Аустралия уақыты"
+
+#~ msgid "Australia Eastern Time"
+#~ msgstr "Шығыс Аустралия уақыты"
+
+#~ msgid "Solomon Standard Time"
+#~ msgstr "Соломон стандартты уақыты"
+
+#~ msgid "New Zealand Standard Time"
+#~ msgstr "Жаңа Зеландия стандартты уақыты"
+
+#~ msgid "Midway Islands Time"
+#~ msgstr "Мидуэй аралдарының уақыты"
+
+#~ msgid "Hawaii Standard Time"
+#~ msgstr "Гавайи стандартты уақыты"
+
+#~ msgid "Alaska Standard Time"
+#~ msgstr "Аляска стандартты уақыты"
+
+#~ msgid "Pacific Standard Time"
+#~ msgstr "Тынық мұхит стандартты уақыты"
+
+#~ msgid "Phoenix Standard Time"
+#~ msgstr "Феникс штаттың стандартты уақыты"
+
+#~ msgid "Mountain Standard Time"
+#~ msgstr "Монтана штаттың стандартты уақыты"
+
+#~ msgid "Central Standard Time"
+#~ msgstr "Орталық стандартты уақыты"
+
+#~ msgid "Eastern Standard Time"
+#~ msgstr "Шығыс стандартты уақыты"
+
+#~ msgid "Indiana Eastern Standard Time"
+#~ msgstr "Индиана - Шығыс стандартты уақыты"
+
+#~ msgid "Puerto Rico and US Virgin Islands Time"
+#~ msgstr "Пуэрто-Рико мен АҚШ Виргин ар-ының уақыты"
+
+#~ msgid "Canada Newfoundland Time"
+#~ msgstr "Канада Ньюфаундленд уақыты"
+
+#~ msgid "Argentina Standard Time"
+#~ msgstr "Аргентина стандартты уақыты"
+
+#~ msgid "Brazil Eastern Time"
+#~ msgstr "Бразилия стандартты уақыты"
+
+#~ msgid "Central African Time"
+#~ msgstr "Орталық Африка стандартты уақыты"
+
+#~ msgid "When Marble starts"
+#~ msgstr "Marble бастағанда"
+
+#~ msgid "Load system time"
+#~ msgstr "Уақыты жүйелік болсын"
+
+#~ msgid "Load last session time"
+#~ msgstr "Уақыты өткен сеанстағыдай болсын"
+
+#~ msgid "&Units"
+#~ msgstr "&Бірліктері"
+
+#~ msgid "&Distance:"
+#~ msgstr "&Қашықтық:"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">The unit that gets used "
+#~ "to measure altitude, lengths and distances (e.g. km, mi, ft).</p></body></"
+#~ "html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Биіктік, ұзындық, "
+#~ "қашықтықтарды өлшеу үшін қолданатын бірлік (мыс.: км, миля, фут).</p></"
+#~ "body></html>"
+
+#~ msgid "Kilometer, Meter"
+#~ msgstr "километр, метр"
+
+#~ msgid "Miles, Feet"
+#~ msgstr "миля, фут"
+
+#~ msgid "An&gle:"
+#~ msgstr "Бұ&рыш:"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Specifies the notation "
+#~ "of angles in coordinates: By default the Degree-Minute-Second notation (e."
+#~ "g. 54°30'00\" ) gets used. As an alternative you can choose decimal "
+#~ "degrees (e.g. 54.5°).</p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Координат бұрыштарын "
+#~ "келтіру түрі: Әдетте градус-минут-секунд түрінде болады (мысалы, "
+#~ "54°30'00\" ). Әйтпесе, ондық градустар санмен келтіруді таңдауға болады "
+#~ "(мысалы, 54.5°).</p></body></html>"
+
+#~ msgid "Degree (DMS)"
+#~ msgstr "Градус (ГМС)"
+
+#~ msgid "Degree (Decimal)"
+#~ msgstr "Градус (ондық)"
+
+#~ msgid "Universal Transverse Mercator (UTM)"
+#~ msgstr "UTM координат жүйесі"
+
+#~ msgid "Map &Quality"
+#~ msgstr "Карта &сапасы"
+
+#~ msgid "&Still image:"
+#~ msgstr "&Жылжымайтын кезде:"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Specifies the map "
+#~ "quality that gets displayed while there is no user input. Usually this "
+#~ "allows for high map quality as speed is no concern.</p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Пайдаланушы ештеңе "
+#~ "енгізіп жатпағандағы көрсетілетін картаның сапасы. Жылдамдық мәселесі "
+#~ "болмағанда, әдетте, ол мейлінше жоғары болған жөн.</p></body></html>"
+
+#~ msgid "Outline Quality"
+#~ msgstr "Нобайлап қана"
+
+#~ msgid "Low Quality"
+#~ msgstr "Төмен сапа"
+
+#~ msgid "Normal"
+#~ msgstr "Қәдімгі сапа"
+
+#~ msgid "High Quality"
+#~ msgstr "Жоғары сапа"
+
+#~ msgid "Print Quality"
+#~ msgstr "Басып шығару үшін"
+
+#~ msgid "During &animations:"
+#~ msgstr "&Анимация кезінде:"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Specifies the map "
+#~ "quality that gets displayed during map animations (e.g. while dragging "
+#~ "the globe). </p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Especially on slow "
+#~ "machines it is advisable to set this option to \"low quality\" as this "
+#~ "will give better speed.</p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Картаны анимациялау "
+#~ "(мысалы, глобусты ілектіріп тартқан) кезіндегі суреттің сапасы. </p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Әсіресе баяу "
+#~ "компьютерлерде, жылдамдығын көтеру үшін бұны \"Төмен сапа\" деп қойған "
+#~ "жөн.</p></body></html>"
+
+#~ msgid "G&raphics system:"
+#~ msgstr "Г&рафикалық жүйесі:"
+
+#~ msgid ""
+#~ "Specifies the graphics system that Qt uses to draw the map.\n"
+#~ "Changing this setting might be a good idea if there are performance "
+#~ "issues with the system's graphics drivers."
+#~ msgstr ""
+#~ "Qt суретті салу үшін қолданатын графикалық жүйесін келтіруі.\n"
+#~ "Жүйелік графика драйверінің жылдамдық мәселесі орын алса, осыны өзгерту "
+#~ "керек болар."
+
+#~ msgid "Raster (Software rendering)"
+#~ msgstr "Растрлық (бағдарламамен кескіндеу)"
+
+#~ msgid "OpenGL"
+#~ msgstr "OpenGL"
+
+#~ msgid "&Text Labels"
+#~ msgstr "&Жазулары"
+
+#~ msgid "&Place names:"
+#~ msgstr "&Жер-су атаулары:"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Places often have "
+#~ "different names in different languages. The label on the map can show the "
+#~ "name in the user's language. Alternatively it can display the name in the "
+#~ "official language and glyphs of that place. </p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Жер-су атаулары түрлі "
+#~ "тілдерде өзінше аталады. Картадағы жазулары әдетте пайдаланушының тілінде "
+#~ "көрсетіледі. Ал керек болса, атаулары жергілікті ресми тілінде сол жердің "
+#~ "жазуымен көрсетіледі. </p></body></html>"
+
+#~ msgid "Custom & Native Language"
+#~ msgstr "Қалаған және жергілікті тілде"
+
+#~ msgid "Custom Language"
+#~ msgstr "Қалаған тілде"
+
+#~ msgid "Native Language"
+#~ msgstr "Жергілікті тілде"
+
+#~ msgid "Default map &font:"
+#~ msgstr "Картаның әдетті қ&аріпі:"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">The default font that "
+#~ "gets used on the map.</p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Картада әдетте "
+#~ "қолданатын қаріпі.</p></body></html>"
+
+#, fuzzy
+#~| msgid "Description field"
+#~ msgid "Destination video"
+#~ msgstr "Сипаттама өрісі"
+
+#, fuzzy
+#~| msgctxt "Action for opening a file"
+#~| msgid "&Open..."
+#~ msgid "Open..."
+#~ msgstr "&Ашу..."
+
+#, fuzzy
+#~| msgid "Meters per second"
+#~ msgid "FPS (frames per second)"
+#~ msgstr "Метр/секунд"
+
+#~ msgid "Cancel"
+#~ msgstr "Қайту"
+
+#, fuzzy
+#~| msgid "Start:"
+#~ msgid "Start"
+#~ msgstr "Басы:"
+
+#~ msgid "New Bookmark Folder - Marble"
+#~ msgstr "Жаңа бетбелгі қапшығы - Marble"
+
+#~ msgid "&Folder Name"
+#~ msgstr "&Қапшық атауы"
+
+#, fuzzy
+#~| msgid "Current Location"
+#~ msgid "Current Relations"
+#~ msgstr "Назардағы орын"
+
+#, fuzzy
+#~| msgid "&Name"
+#~ msgid "Name"
+#~ msgstr "&Атауы"
+
+#, fuzzy
+#~| msgid "Type:"
+#~ msgid "Type"
+#~ msgstr "Түрі:"
+
+#~ msgid "Role"
+#~ msgstr "Ол не?"
+
+#, fuzzy
+#~| msgid "Add Via"
+#~ msgid "Add Relation"
+#~ msgstr "Не арқылы"
+
+#, fuzzy
+#~| msgid "Current Location"
+#~ msgid "Current Tags"
+#~ msgstr "Назардағы орын"
+
+#, fuzzy
+#~| msgid "Browse"
+#~ msgid "Browse..."
+#~ msgstr "Ақтару"
+
+#, fuzzy
+#~| msgid "&Position"
+#~ msgid "Position:"
+#~ msgstr "&Орны"
+
+#~ msgid "Marble"
+#~ msgstr "Marble"
+
+#~ msgid "Map"
+#~ msgstr "Карта"
+
+#~ msgid "Visible Globe Region"
+#~ msgstr "Жердің көрінетін аумағы"
+
+#~ msgid "Outer Space"
+#~ msgstr "Ғарыш"
+
+#~ msgid "Route"
+#~ msgstr "Маршрут"
+
+#~ msgid "Route Summary"
+#~ msgstr "Маршрут тұжырымы"
+
+#~ msgid "Driving Instructions"
+#~ msgstr "Жүргізушіге нұсқаулары"
+
+#~ msgid "Footer"
+#~ msgstr "Жаяу жүретін жол"
+
+#~ msgid "Configure Routing Profile"
+#~ msgstr "Бағыттау іс-әлпеті баптау"
+
+#~ msgid "Active Route Services"
+#~ msgstr "Белсенді маршрут қызметтер"
+
+#~ msgid "Service Settings"
+#~ msgstr "Қызметті баптау"
+
+#~ msgid "No configuration available"
+#~ msgstr "Баптауды қажет етпейді"
+
+#~ msgid "Select Service to Configure"
+#~ msgstr "Баптайтың қызметті таңдау"
+
+#~ msgid "Configure"
+#~ msgstr "Баптау"
+
+#~ msgid "&Add"
+#~ msgstr "Қ&осу"
+
+#~ msgid "&Configure"
+#~ msgstr "&Баптау"
+
+#~ msgid "&Remove"
+#~ msgstr "Ө&шіру"
+
+#~ msgid "Move &Up"
+#~ msgstr "Жоғ&арлату"
+
+#~ msgid "Move &Down"
+#~ msgstr "Төм&ендету"
+
+#~ msgid "Car (fastest)"
+#~ msgstr "Автомобиль жолы (ең тезі)"
+
+#~ msgid "Car (shortest)"
+#~ msgstr "Автомобиль жолы (ең қысқасы)"
+
+#~ msgid "Bicycle"
+#~ msgstr "Велосипед жолы"
+
+#~ msgid "Pedestrian"
+#~ msgstr "Жаяу жүру жолы"
+
+#~ msgid "No results."
+#~ msgstr "Нәтижесіз"
+
+#~ msgid "Show Details"
+#~ msgstr "Егжей-тегжейі"
+
+#~ msgid "Choose alternative routes"
+#~ msgstr "Өзге жолдарын таңдау"
+
+#~ msgid "Sun Control"
+#~ msgstr "Күннің көзі"
+
+#~ msgid "Sun Shading"
+#~ msgstr "Күн көлеңкесі"
+
+#~ msgid "Shadow"
+#~ msgstr "Көлеңке"
+
+#~ msgid "Night Map"
+#~ msgstr "Түнгі карта"
+
+#~ msgid "Subsolar Point"
+#~ msgstr "Күн дәл астындағы нүкте"
+
+#~ msgid ""
+#~ "Display <a href=\"http://en.wikipedia.org/wiki/Subsolar_point\">Subsolar "
+#~ "Point</a> icon"
+#~ msgstr ""
+#~ "<a href=\"http://en.wikipedia.org/wiki/Subsolar_point\">Күн дәл астындағы "
+#~ "нүкте</a> таңбашасын көрсету"
+
+#~ msgid ""
+#~ "<b>Lock</b> map view to <a href=\"http://en.wikipedia.org/wiki/"
+#~ "Subsolar_point\">Subsolar Point</a>."
+#~ msgstr ""
+#~ "Карта көрінісін <a href=\"http://en.wikipedia.org/wiki/Subsolar_point"
+#~ "\">Күн дәл астындағы нүктеде</a> <b>бекіту</b>."
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">Attention: Panning the map is disabled now! </span></p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Uncheck the \"Lock map "
+#~ "view to Subsolar Point\" option to allow for viewing a different place on "
+#~ "the globe again.</p></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">Назарыңызға: Картаны көлденең жүгіртуге енді болмайды! </"
+#~ "span></p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Глобусты бұрау "
+#~ "мүмкіндікті қосу үшін \"Күн дәл астындағы нүкте\" деген белгіні алып "
+#~ "тастаңыз.</p> </body></html>"
+
+#~ msgid "OK"
+#~ msgstr "ОК"
+
+#~ msgid "Apply"
+#~ msgstr "Іске асыру"
+
+#~ msgid "Creating Map"
+#~ msgstr "Картаны құру"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /></head><body style="
+#~ "\" white-space: pre-wrap; font-family:Sans Serif; font-size:9pt; font-"
+#~ "weight:400; font-style:normal; text-decoration:none;\"><p style=\" margin-"
+#~ "top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-"
+#~ "indent:0; text-indent:0px;\"><span style=\" font-weight:600;\">Satellite "
+#~ "View</span></p><p style=\" margin-top:0px; margin-bottom:0px; margin-"
+#~ "left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Earth "
+#~ "as seen from Space. The map is based on NASA's beautiful \"Blue Marble "
+#~ "Next Generation\" pictures. Credits: NASA's Earth Observatory</p></body></"
+#~ "html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /></head><body style="
+#~ "\" white-space: pre-wrap; font-family:Sans Serif; font-size:9pt; font-"
+#~ "weight:400; font-style:normal; text-decoration:none;\"><p style=\" margin-"
+#~ "top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-"
+#~ "indent:0; text-indent:0px;\"><span style=\" font-weight:600;\">Satellite "
+#~ "View</span></p><p style=\" margin-top:0px; margin-bottom:0px; margin-"
+#~ "left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Жердің "
+#~ "ғарыштан көрінісі. Бұл карта NASA-ның тамаша \"Blue Marble Next Generation"
+#~ "\" суреттерін негізінде жасалған. NASA Жер обсерваториясына алғысымызды "
+#~ "білдіреміз</p></body></html>"
+
+#~ msgid ""
+#~ "Marble needs to create this map. This only needs to be done once and may "
+#~ "take a few seconds."
+#~ msgstr ""
+#~ "Marble бұл картаны құру керек. Бұл іс бірнеше секунд созылып, бір рет "
+#~ "қана істеледі."
+
+#~ msgid "&Cancel"
+#~ msgstr "&Қайту"
+
+#~ msgid "Zoom"
+#~ msgstr "Масштаб"
+
+#~ msgid "&Tile Level Range:"
+#~ msgstr "&Тор көзін масштаб ауқымы:"
+
+#~ msgid "Minimum Tile Level"
+#~ msgstr "Ең кіші тор көзі"
+
+#~ msgid "to"
+#~ msgstr "-"
+
+#~ msgid "Maximum Tile Level"
+#~ msgstr "Ең үлкен тор көзі"
+
+#~ msgid "Time Control"
+#~ msgstr "Уақытын басқару"
+
+#~ msgid "Time"
+#~ msgstr "Уақыт"
+
+#~ msgid "New Date Time      :"
+#~ msgstr "Жаңа күн/уақыт  :"
+
+#~ msgid "Refresh Interval     :"
+#~ msgstr "Жаңарту аралығы :"
+
+#~ msgid " seconds"
+#~ msgstr " секунд"
+
+#~ msgid "Now"
+#~ msgstr "Қазіргі"
+
+#~ msgid "Current Date Time :"
+#~ msgstr "Қазіргі күн мен уақыт :"
+
+#~ msgid "Time Speed"
+#~ msgstr "Уақыт жылдамдығы"
+
+#, fuzzy
+#~| msgid "&Close"
+#~ msgid "Close"
+#~ msgstr "&Жабу"
+
+#, fuzzy
+#~| msgid "Move &Up"
+#~ msgid "Move up"
+#~ msgstr "Жоғ&арлату"
+
+#, fuzzy
+#~| msgid "Move &Down"
+#~ msgid "Move down"
+#~ msgstr "Төм&ендету"
+
+#, fuzzy
+#~| msgid "Save Track"
+#~ msgid "Save Tour"
+#~ msgstr "Ізін сақтау"
+
+#, fuzzy
+#~| msgid "Save Track"
+#~ msgid "Save Tour As"
+#~ msgstr "Ізін сақтау"
+
+#, fuzzy
+#~| msgid "Open Track"
+#~ msgid "Open Tour"
+#~ msgstr "Ізін ашу"
+
+#~ msgid "Worldclock Applet Configuration"
+#~ msgstr "Worldclock апплетті баптау"
+
+#~ msgid "Map Display"
+#~ msgstr "Картаны көрсету"
+
+#~ msgid "Projection:"
+#~ msgstr "Проекциясы:"
+
+#~ msgid "Equirectangular"
+#~ msgstr "Тең тікбұрыштық"
+
+#~ msgid "Center map on longitude:"
+#~ msgstr "Орталық бойлығы:"
+
+#~ msgid "Center map on daylight"
+#~ msgstr "Күн жарығын ортаға"
+
+#~ msgid "Show date"
+#~ msgstr "Күні жазылсын"
+
+#~ msgid "Time Zones"
+#~ msgstr "Уақыт белдеулері"
+
+#~ msgid "Use custom timezone selection"
+#~ msgstr "Өзгеше белдеулері таңдалсын"
+
+#, fuzzy
+#~| msgid "Coordinates:"
+#~ msgid "Coordinates"
+#~ msgstr "Координаттары:"
+
+#, fuzzy
+#~| msgid "&N"
+#~ msgid "N"
+#~ msgstr "&N"
+
+#, fuzzy
+#~| msgid "&W"
+#~ msgid "W"
+#~ msgstr "&W"
+
+#, fuzzy
+#~| msgid "&E"
+#~ msgid "E"
+#~ msgstr "&E"
+
+#, fuzzy
+#~| msgid "&S"
+#~ msgid "S"
+#~ msgstr "&S"
+
+#, fuzzy
+#~| msgid "Vegetation"
+#~ msgid "Rotation"
+#~ msgstr "Өсімдіктер"
+
+#, fuzzy
+#~| msgid "&Add Folder"
+#~ msgid "Add polygon"
+#~ msgstr "Қапшықты қ&осу"
+
+#, fuzzy
+#~| msgid "Areas"
+#~ msgid "Area"
+#~ msgstr "Аймақтар"
+
+#~ msgid "Display"
+#~ msgstr "Көрсету"
+
+#~ msgid "Fade data older than (minutes)"
+#~ msgstr "Неше минуттан кейін біртіндеп ығайып болсын"
+
+#~ msgid "Do not show data older than (minutes)"
+#~ msgstr "Неше минуттан кейін көрсетілмесін"
+
+#~ msgid "Internet"
+#~ msgstr "Интернет"
+
+#~ msgid "APRS Data Sources"
+#~ msgstr "APRS деректер көзі"
+
+#~ msgid "Should information be gathered from the Internet APRS data source?"
+#~ msgstr "Интернететті APRS деректер көзінен мәлімет алу керек па?"
+
+#~ msgid "Collect data from an APRS Internet server"
+#~ msgstr "Интернететті APRS деректер көзінен мәлімет жиналсын"
+
+#~ msgid "Server"
+#~ msgstr "Сервері"
+
+#~ msgid "rotate.aprs.net"
+#~ msgstr "rotate.aprs.net"
+
+#~ msgid "Port"
+#~ msgstr "Порты"
+
+#~ msgid "10253"
+#~ msgstr "10253"
+
+#~ msgid "Dump TCP/IP records to the debug stream"
+#~ msgstr "TCP/IP ақпары жөндеу арнаға шығарылсын "
+
+#~ msgid "Device"
+#~ msgstr "Құрылғысы"
+
+#~ msgid "TNC Terminal Port"
+#~ msgstr "TNC терминал порты"
+
+#~ msgid "Should information be gathered from a serial port?"
+#~ msgstr "Тізбекті порттан мәлімет алу керек па?"
+
+#~ msgid "Collect data from a serial TNC (In Text Mode)"
+#~ msgstr "Тізбекті TNC порттан (Матін күйінде) мәлімет жиналсын"
+
+#~ msgid "TTY"
+#~ msgstr "TTY"
+
+#~ msgid "/dev/ttyUSB0"
+#~ msgstr "/dev/ttyUSB0"
+
+#~ msgid "Dump TTY records to the debug stream"
+#~ msgstr "TTY ақпары жөндеу арнаға шығарылсын "
+
+#~ msgid "File"
+#~ msgstr "Файл"
+
+#~ msgid "Should information be gathered from a file?"
+#~ msgstr "Файлдан мәлімет алу керек па?"
+
+#~ msgid "Collect data from a file"
+#~ msgstr "Файлдан мәлімет жиналсын"
+
+#~ msgid "Dump file records to the debug stream"
+#~ msgstr "Файл ақпары жөндеу арнаға шығарылсын "
+
+#~ msgid "Configure Compass Plugin"
+#~ msgstr "Компас плагинін баптау"
+
+#~ msgid "Theme"
+#~ msgstr "Нақышы"
+
+#~ msgid "Default"
+#~ msgstr "Әдетті"
+
+#~ msgid "Arrows"
+#~ msgstr "Жебелері"
+
+#~ msgid "Atom"
+#~ msgstr "Атом"
+
+#~ msgid "Magnet"
+#~ msgstr "Магнит"
+
+#~ msgid "Configure Crosshairs Plugin"
+#~ msgstr "Қарауыл плагинін баптау"
+
+#~ msgid "Gun 1"
+#~ msgstr "Көздеуіш 1"
+
+#~ msgid "Gun 2"
+#~ msgstr "Көздеуіш 2"
+
+#~ msgid "Circled"
+#~ msgstr "Шеңберлі"
+
+#~ msgid "German"
+#~ msgstr "Неміс айқышы"
+
+#~ msgid "Dialog"
+#~ msgstr "Диалог"
+
+#~ msgid "Filter"
+#~ msgstr "Сүзгі"
+
+#~ msgid "Maximum number of results:"
+#~ msgstr "Нәтижелер санның жоғарғы шегі:"
+
+#~ msgid "Minimum magnitude:"
+#~ msgstr "Минимум шамасы:"
+
+#~ msgid "Time Range"
+#~ msgstr "Уақыт аралығы"
+
+#, fuzzy
+#~| msgid "Location Browser"
+#~ msgid "Eclipse Browser"
+#~ msgstr "Жер-су шолғышы"
+
+#, fuzzy
+#~| msgid "&Settings"
+#~ msgid "&Settings..."
+#~ msgstr "Ба&птау"
+
+#, fuzzy
+#~| msgid "Satellites, Eclipses"
+#~ msgid "&Go To Selected Eclipse"
+#~ msgstr " Жерсеріктер, эллипстер"
+
+#, fuzzy
+#~| msgid "Monav Configuration"
+#~ msgid "Eclipses Configuration"
+#~ msgstr "Monav баптауы"
+
+#, fuzzy
+#~| msgid "Central African Time"
+#~ msgid "Central &Line"
+#~ msgstr "Орталық Африка стандартты уақыты"
+
+#, fuzzy
+#~| msgid "&Remove"
+#~ msgid "&Reminder"
+#~ msgstr "Ө&шіру"
+
+#~ msgid "Configure Elevation Profile Plugin"
+#~ msgstr "Биіктік бедері плагинін баптау"
+
+#~ msgid "Zoom to viewport"
+#~ msgstr "Масштабы қарау өрісіне келтірілсін"
+
+#~ msgid "Speed"
+#~ msgstr "Жылдамдық"
+
+#~ msgid "Direction"
+#~ msgstr "Бағыт"
+
+#~ msgid "Altitude"
+#~ msgstr "Биіктік"
+
+#~ msgid "Precision"
+#~ msgstr "Дәлділік"
+
+#~ msgid "Coordinate Grid Plugin"
+#~ msgstr "Координат торының пллагині"
+
+#~ msgid "C&olors"
+#~ msgstr "Тү&стері"
+
+#~ msgid "&Grid:"
+#~ msgstr "&Торы:"
+
+#~ msgid "Color of the coordinate grid."
+#~ msgstr "Координаттар торының түсі."
+
+#~ msgid "&Tropics:"
+#~ msgstr "&Тропиктері:"
+
+#~ msgid "Color of the tropical circles."
+#~ msgstr "Тропик шеңберлерінің түсі."
+
+#~ msgid "&Equator:"
+#~ msgstr "&Экватор:"
+
+#~ msgid "Color of the equator."
+#~ msgstr "Экватордың түсі."
+
+#~ msgid "Labels"
+#~ msgstr "Жарлықтар"
+
+#~ msgid "&Named Labels"
+#~ msgstr "Аталған жарлықтар"
+
+#~ msgid "Show Labels for Prime meridian, Equator, Tropics."
+#~ msgstr "Бастапқы меридиан, экватор, тропиктер жарлықтарын көрсету."
+
+#~ msgid "&Numerical Labels"
+#~ msgstr "&Сан жарлықтары"
+
+#~ msgid "Show numerical Labels."
+#~ msgstr "Сан жарлықтарын көрсету."
+
+#~ msgid "Configure Scale Bar Plugin"
+#~ msgstr "Масштаб жолағы плагинін баптау"
+
+#~ msgid "Show Ratio Scale"
+#~ msgstr "Масштаб коэффициенті &көрсетілсін"
+
+#~ msgid "Minimize"
+#~ msgstr "Түю"
+
+#~ msgid "Marble - Measure Tool Configuration"
+#~ msgstr "Marble - Өлшеу құралын баптау"
+
+#, fuzzy
+#~| msgid "Circled"
+#~ msgid "Circle"
+#~ msgstr "Шеңберлі"
+
+#, fuzzy
+#~| msgid "&Text Labels"
+#~ msgid "Segment labels"
+#~ msgstr "&Жазулары"
+
+#, fuzzy
+#~| msgid "&Distance:"
+#~ msgid "Distance "
+#~ msgstr "&Қашықтық:"
+
+#, fuzzy
+#~| msgid "Bureau de change"
+#~ msgid "Bearing Change"
+#~ msgstr "Ақша айырбастау"
+
+#, fuzzy
+#~| msgid "Cemetery"
+#~ msgid "Perimeter"
+#~ msgstr "Зират"
+
+#, fuzzy
+#~| msgid "Preference:"
+#~ msgid "Circumference"
+#~ msgstr "Басымдықтар:"
+
+#~ msgid "General"
+#~ msgstr "Жалпы"
+
+#~ msgid "Cache name:"
+#~ msgstr "Кэштің атауы:"
+
+#~ msgid "User name:"
+#~ msgstr "Пайдаланушы:"
+
+#~ msgid "Type:"
+#~ msgstr "Түрі:"
+
+#~ msgid "Status:"
+#~ msgstr "Күй-жайы:"
+
+#~ msgid "Country:"
+#~ msgstr "Ел:"
+
+#~ msgid "Size:"
+#~ msgstr "Өлшемі:"
+
+#~ msgid "Difficulty:"
+#~ msgstr "Қиындығы:"
+
+#~ msgid "Terrain:"
+#~ msgstr "Топографиясы:"
+
+#~ msgid "Longitude:"
+#~ msgstr "Бойлығы:"
+
+#~ msgid "Latitude:"
+#~ msgstr "Ендігі:"
+
+#~ msgid "Date hidden:"
+#~ msgstr "Жасырылған кезі:"
+
+#~ msgid "Date created:"
+#~ msgstr "Құрылған кезі:"
+
+#~ msgid "Date last modified:"
+#~ msgstr "Соңғы өзгертілген кезі:"
+
+#~ msgid "Log"
+#~ msgstr "Журнал"
+
+#~ msgid "Previous"
+#~ msgstr "Алдыңғы"
+
+#~ msgid "Next"
+#~ msgstr "Келесі"
+
+#~ msgid "Minimum difficulty:"
+#~ msgstr "Минимум қиыншылығы:"
+
+#~ msgid "Maximum difficulty:"
+#~ msgstr "Максимум қиыншылығы:"
+
+#~ msgid "Maximum Distance:"
+#~ msgstr "Минимум қашықтығы:"
+
+#~ msgid "Start:"
+#~ msgstr "Басы:"
+
+#~ msgid "End:"
+#~ msgstr "Аяғы:"
+
+#~ msgid "TextLabel"
+#~ msgstr "ЖарлықЖазуы"
+
+#~ msgid "Hint"
+#~ msgstr "Ишара"
+
+#~ msgid "Logs"
+#~ msgstr "Журнал"
+
+#~ msgid "Marble - OpenDesktop plugin configuration"
+#~ msgstr "Marble - OpenDesktop плагинның баптауы"
+
+#~ msgid "Number of displayed items on the screen:"
+#~ msgstr "Экрандағы аталым саны:"
+
+#~ msgid "Map &Image"
+#~ msgstr "Карта кескіні"
+
+#~ msgid "&Planet:"
+#~ msgstr "&Планета:"
+
+#~ msgid "&Size:"
+#~ msgstr "&Өлшемі:"
+
+#~ msgid "x"
+#~ msgstr "x"
+
+#~ msgid "Preview"
+#~ msgstr "Қарап-шығу"
+
+#~ msgid "Filename"
+#~ msgstr "Файл атауы"
+
+#~ msgid "Position I&ndicator:"
+#~ msgstr "Орын б&елгісі:"
+
+#~ msgid "Configure Photo Plugin"
+#~ msgstr "Фото плагинін баптау"
+
+#~ msgid "License"
+#~ msgstr "Лицензия"
+
+#~ msgid "Number of items on the screen"
+#~ msgstr "Экрандағы аталым саны"
+
+#~ msgid "Configure Position Marker Plugin"
+#~ msgstr "Орын маркер плагинінің баптау"
+
+#~ msgid "Cursor Shape"
+#~ msgstr "Меңзердің қалыпы"
+
+#~ msgid "&Arrow"
+#~ msgstr "&Жебе"
+
+#~ msgid "&Custom:"
+#~ msgstr "&Өзге:"
+
+#~ msgid ""
+#~ "Position marker images indicating the direction should point north (top)."
+#~ msgstr "Солтүстікті (жоғарды) бағдарлайтын орын маркерінің кескіні."
+
+#~ msgid "Trail"
+#~ msgstr "Ізі болсын"
+
+#~ msgid "&Accuracy:"
+#~ msgstr "&Дәлділігі:"
+
+#~ msgid "Color of the position marker's accuracy indicator."
+#~ msgstr "Орын маркерінің дәлділік индикаторының түсі. "
+
+#~ msgid "Trail:"
+#~ msgstr "Ізі:"
+
+#~ msgid "Color of the position marker's trail."
+#~ msgstr "Орын маркері ізінің түсі "
+
+#~ msgid "Routing Configuration - Marble"
+#~ msgstr "Жол салуды баптау - Marble"
+
+#~ msgid "Audible Turn Instructions"
+#~ msgstr "Дыбыстық бұру нұсқаулары болсын"
+
+#~ msgid "Play a sound"
+#~ msgstr "Дыбысты шығару"
+
+#~ msgid "Use this speaker"
+#~ msgstr "Мынау дауыс болсын"
+
+#~ msgid ""
+#~ "<a href=\"http://userbase.kde.org/Marble/CustomSpeakers\">Get more "
+#~ "speakers</a>"
+#~ msgstr ""
+#~ "<a href=\"http://userbase.kde.org/Marble/CustomSpeakers\">Қосымша "
+#~ "дауыстар</a>"
+
+#~ msgid "Guidance Mode"
+#~ msgstr "Бағыттау күйі"
+
+#~ msgid "R"
+#~ msgstr "Б"
+
+#~ msgid "Toggle GPS"
+#~ msgstr "GPS-ты қосу/ажырату"
+
+#~ msgid "zoom out"
+#~ msgstr "алыстау"
+
+#~ msgid "zoom in"
+#~ msgstr "жақындау"
+
+#~ msgid "total time remaining"
+#~ msgstr "жалпы қалған уақт"
+
+#~ msgid "Satellites Configuration - Marble"
+#~ msgstr "Жерсеріктер баптауы - Marble"
+
+#~ msgid "&Satellites"
+#~ msgstr "&Жерсеріктер"
+
+#~ msgid "&Data Sources"
+#~ msgstr "&Деректер көзі"
+
+#~ msgid ""
+#~ "<html><head/><body><p><span style=\" font-weight:600;\">Last update:</"
+#~ "span></p></body></html>"
+#~ msgstr ""
+#~ "<html><head/><body><p><span style=\" font-weight:600;\">Соңғы жаңартуы:</"
+#~ "span></p></body></html>"
+
+#~ msgid "&Reload All Data Sources"
+#~ msgstr "Бүкіл деректер көзін қайта жүктеу"
+
+#~ msgid "Satellite Data Sources:"
+#~ msgstr "Серіктер туралы деректер көзі:"
+
+#~ msgid "Add a new data source (URL)."
+#~ msgstr "Жаңа дерек көзін қосу (URL)."
+
+#~ msgid "Open a new data source from disk."
+#~ msgstr "Дискідегі жаңа дерек көзін ашу."
+
+#~ msgid "Remove selected data source."
+#~ msgstr "Таңдалған дерек көзін кетіру."
+
+#~ msgid "(Built-in Data Sources for Earth Satellites)"
+#~ msgstr "(Құрамындағы жерсеріктер дерек көздері)"
+
+#~ msgid ""
+#~ "<html><head/><body><p>Supported formats: <a href=\"http://techbase.kde."
+#~ "org/Projects/Marble/SatelliteCatalogFormat\"><span style=\" text-"
+#~ "decoration: underline; color:#0000ff;\">Marble Satellite Catalogue</"
+#~ "span></a>, <a href=\"http://en.wikipedia.org/wiki/Two-line_element_set"
+#~ "\"><span style=\" text-decoration: underline; color:#0000ff;\">Two-Line-"
+#~ "Element Set</span></a></p></body></html>"
+#~ msgstr ""
+#~ "<html><head/><body><p>Танитын пішімдері: <a href=\"http://techbase.kde."
+#~ "org/Projects/Marble/SatelliteCatalogFormat\"><span style=\" text-"
+#~ "decoration: underline; color:#0000ff;\">Marble серіктер каталогы</span></"
+#~ "a>, <a href=\"http://en.wikipedia.org/wiki/Two-line_element_set\"><span "
+#~ "style=\" text-decoration: underline; color:#0000ff;\">Two-Line-Element "
+#~ "Set</span></a></p></body></html>"
+
+#~ msgid "Plugin Inactive"
+#~ msgstr "Плагин белсенді емес"
+
+#~ msgid "&Activate Plugin"
+#~ msgstr "Плагинді &белсендету"
+
+#~ msgid ""
+#~ "Configuration options not available since the plugin is disabled at the "
+#~ "moment."
+#~ msgstr "Плагин қазір бұғатталғаннан соң баптайтын параметрлері жоқ."
+
+#~ msgid "km/h"
+#~ msgstr "км/сағ"
+
+#~ msgid "Configure Stars Plugin"
+#~ msgstr "Жұлдыздар плагинін баптау"
+
+#, fuzzy
+#~| msgid "Celestial objects"
+#~ msgid "Celestial Objects"
+#~ msgstr "Аспан нысандары"
+
+#~ msgid "Star Magnitude Limit"
+#~ msgstr "Жұлдыз шамасының шегі"
+
+#~ msgid " mag"
+#~ msgstr " шамасы"
+
+#~ msgid "Sun"
+#~ msgstr "Күннің көзі"
+
+#~ msgid "Moon"
+#~ msgstr "Ай"
+
+#, fuzzy
+#~| msgid "Mercator"
+#~ msgid "Mercury"
+#~ msgstr "Меркатор"
+
+#, fuzzy
+#~| msgid "The Earth"
+#~ msgid "Earth"
+#~ msgstr "Жер"
+
+#, fuzzy
+#~| msgid "&Named Labels"
+#~ msgid "Use name labels"
+#~ msgstr "Аталған жарлықтар"
+
+#~ msgid "Other"
+#~ msgstr "Басқа"
+
+#~ msgid "Deep Sky Object Labels"
+#~ msgstr "Алыс ғарыш нысандар атаулары"
+
+#~ msgid "Deep Sky Objects"
+#~ msgstr "Алыс ғарыш нысандары"
+
+#~ msgid "Lines and Orientation"
+#~ msgstr "Сызықтары мен Бағдары"
+
+#, fuzzy
+#~| msgid "Constellation Lines"
+#~ msgid "Constellations"
+#~ msgstr "Шоқжұлдыз сызықтары"
+
+#, fuzzy
+#~| msgid "&Name"
+#~ msgid "Names"
+#~ msgstr "&Атауы"
+
+#~ msgid "Latin Name"
+#~ msgstr "Латынша атауы"
+
+#~ msgid "Native Translation"
+#~ msgstr "Аудармасы"
+
+#~ msgid "Abbreviation"
+#~ msgstr "Қысқармасы"
+
+#~ msgid "Celestial Equator"
+#~ msgstr "Аспан экваторы"
+
+#~ msgid "Celestial Poles"
+#~ msgstr "Аспан полюстері"
+
+#~ msgid "Ecliptic"
+#~ msgstr "Эклиптика"
+
+#~ msgid "Configure Weather Plugin"
+#~ msgstr "Ауа райы плагинін баптау"
+
+#~ msgid "Information"
+#~ msgstr "Ақпарат"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Here you can "
+#~ "choose if you want the weather condition to be shown (for example, clouds "
+#~ "or clear sky.) Marble will only show the condition if this information is "
+#~ "available.</p></body></html>\n"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Мұнда ауа райы "
+#~ "(мысалы, күн бұлтты ма ашық па) мәліметі көрсетіле ма - жоқ па, "
+#~ "ұйғарылады. Marble ауа райы туралы мәліметіне қолы жетсе ғана оны "
+#~ "келтіреді.</p></body></html>\n"
+
+#~ msgid "Weather condition"
+#~ msgstr "Ауа райы"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Selects if you "
+#~ "want the temperature to be shown. The temperature will only be shown for "
+#~ "the stations it is available for.</p></body></html>\n"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Мұнда "
+#~ "температура туралы мәліметі көрсетіле ма - жоқ па, ұйғарылады. Marble "
+#~ "температура туралы бекеттің мәліметіне қолы жетсе ғана оны келтіреді.</"
+#~ "p></body></html>\n"
+
+#~ msgid "Temperature"
+#~ msgstr "Температура"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Select if you "
+#~ "want the wind direction to be shown. The wind direction will only be "
+#~ "shown if it is available for the particular station.</p></body></html>\n"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Мұнда жел бағыты "
+#~ "туралы мәліметі көрсетіле ма - жоқ па, ұйғарылады. Marble жел туралы "
+#~ "керек бекеттің мәліметіне қолы жетсе ғана оны келтіреді.</p></body></"
+#~ "html>\n"
+
+#~ msgid "Wind direction"
+#~ msgstr "Жел бағыты"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Select if you "
+#~ "want the wind speed to be shown. The wind speed will only be shown if it "
+#~ "is available for the particular station.</p></body></html>\n"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Мұнда жел "
+#~ "жылдамдығы туралы мәліметі көрсетіле ма - жоқ па, ұйғарылады. Marble жел "
+#~ "туралы керек бекеттің мәліметіне қолы жетсе ғана оны келтіреді.</p></"
+#~ "body></html>\n"
+
+#~ msgid "Wind speed"
+#~ msgstr "Жел жылдамдығы"
+
+#~ msgid "Units"
+#~ msgstr "Бірлігі"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">The unit used to "
+#~ "measure the temperature.</p></body></html>\n"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Температураны "
+#~ "өлшейтін бірлігі.</p></body></html>\n"
+
+#~ msgid "Celsius"
+#~ msgstr "Цельсий градусы"
+
+#~ msgid "Fahrenheit"
+#~ msgstr "Фаренгейт градусы"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">The unit used to "
+#~ "measure the wind speed.</p></body></html>\n"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Жел жылдамдығын "
+#~ "өлшейтін бірлігі.</p></body></html>\n"
+
+#~ msgid "Kilometers per hour"
+#~ msgstr "Километр/сағат"
+
+#~ msgid "Miles per hour"
+#~ msgstr "Миля/сағат"
+
+#~ msgid "Meters per second"
+#~ msgstr "Метр/секунд"
+
+#~ msgid "Knots"
+#~ msgstr "Узел"
+
+#~ msgid "Beaufort"
+#~ msgstr "Бофорт"
+
+#~ msgid "Pressure"
+#~ msgstr "Ауа қысымы"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">The unit used to "
+#~ "measure the air pressure.</p></body></html>\n"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Ауа қысымын "
+#~ "өлшейтін бірлігі.</p></body></html>\n"
+
+#~ msgid "Hecto Pascals"
+#~ msgstr "Гектопаскаль"
+
+#~ msgid "Kilo Pascals"
+#~ msgstr "Килопаскаль"
+
+#~ msgid "Bars"
+#~ msgstr "Бар"
+
+#~ msgid "Millimeters of Mercury"
+#~ msgstr "Миллиметр сынап бағанасы"
+
+#~ msgid "Inches of Mercury"
+#~ msgstr "Дюйм сынап бағанасы"
+
+#~ msgid "Miscellaneous"
+#~ msgstr "Түрлі басқа"
+
+#~ msgid "Show only favorite items"
+#~ msgstr "Таңдаулыдағы ғана көрсетілсін"
+
+#~ msgid "Weather update interval"
+#~ msgstr "Ауа райын жаңарту аралығы"
+
+#~ msgid " hours"
+#~ msgstr " сағат"
+
+#~ msgid "Configure Wikipedia Plugin"
+#~ msgstr "Уикипедия плагинін баптау"
+
+#~ msgid "Show thumbnail images"
+#~ msgstr "Нобай кескіндері көрсетілсін"
+
+#, fuzzy
+#~| msgid "Proxy type:"
+#~ msgid "Route type:"
+#~ msgstr "Проксидің түрі:"
+
+#, fuzzy
+#~| msgid "Speed"
+#~ msgid "Speed:"
+#~ msgstr "Жылдамдық"
+
+#~ msgid "Preference:"
+#~ msgstr "Басымдықтар:"
+
+#~ msgid "Avoid motorways"
+#~ msgstr "Автодаңғыл жолдардан безу"
+
+#~ msgid "Avoid tollways"
+#~ msgstr "Ақылы жолдардан безу"
+
+#~ msgid "Avoid ferries"
+#~ msgstr "Өткелдерді безіп"
+
+#~ msgid "Monav Configuration"
+#~ msgstr "Monav баптауы"
+
+#~ msgid "Transport Type:"
+#~ msgstr "Көлік түрі:"
+
+#~ msgid "Any"
+#~ msgstr "Кез-келген"
+
+#~ msgid "Manage Maps"
+#~ msgstr "Қарталарды басқару"
+
+#~ msgid "Install New"
+#~ msgstr "Жаңасын орнату"
+
+#~ msgid "Continent"
+#~ msgstr "Континент"
+
+#~ msgid "Country"
+#~ msgstr "Ел"
+
+#~ msgid "Download Variant"
+#~ msgstr "Вариантын жүктеп алу"
+
+#~ msgid "Install"
+#~ msgstr "Орнату"
+
+#~ msgid "Nothing to do."
+#~ msgstr "Істейтін ештеңе жоқ."
+
+#~ msgid "%v/%m MB"
+#~ msgstr "%v/%m МБ"
+
+#~ msgid "Abort"
+#~ msgstr "Доғару"
+
+#~ msgid "Transport:"
+#~ msgstr "Көлік:"
+
+#~ msgid "Profile:"
+#~ msgstr "Іс-әлпеті:"
+
+#~ msgid "Method"
+#~ msgstr "Әдісі"
+
+#~ msgid "Fastest"
+#~ msgstr "ең жылдамы"
+
+#~ msgid "Shortest"
+#~ msgstr "Ең қысқасы"
+
+#~ msgid "Location Browser"
+#~ msgstr "Жер-су шолғышы"
+
+#~ msgid "Double click an entry of this list to get it displayed on the map."
+#~ msgstr "Картада көрсету үшін тізімдегі аталымында қос түртім жасау керек."
+
+#~ msgid "Navigate to your 'Home Location'"
+#~ msgstr "'Мекен орынға' ауысу"
+
+#~ msgid "Form"
+#~ msgstr "Пішін"
+
+#, fuzzy
+#~| msgid "&Add Folder"
+#~ msgid "Add SoundCue"
+#~ msgstr "Қапшықты қ&осу"
+
+#, fuzzy
+#~| msgid "Circled"
+#~ msgid "Circular"
+#~ msgstr "Шеңберлі"
+
+#~ msgid "&Name"
+#~ msgstr "&Атауы"
+
+#~ msgid "Land"
+#~ msgstr "Жер"
+
+#, fuzzy
+#~| msgid "Areas"
+#~ msgid "Ara"
+#~ msgstr "Аймақтар"
+
+#, fuzzy
+#~| msgid "Cancel"
+#~ msgid "Cancer"
+#~ msgstr "Қайту"
+
+#, fuzzy
+#~| msgid "Craters"
+#~ msgid "Crater"
+#~ msgstr "Кратерлер"
+
+#, fuzzy
+#~| msgid "Log"
+#~ msgid "Leo"
+#~ msgstr "Журнал"
+
+#, fuzzy
+#~| msgid "Library"
+#~ msgid "Libra"
+#~ msgstr "Кітапхана"
+
+#, fuzzy
+#~| msgid "Normal"
+#~ msgid "Norma"
+#~ msgstr "Қәдімгі сапа"
+
+#, fuzzy
+#~| msgid "Doctors"
+#~ msgid "Pictor"
+#~ msgstr "Дәрігер"
+
+#~ msgid "Show distance labels for each section"
+#~ msgstr "Әр аралықтың қашықтық жарлығы көрсетілсін"
+
+#~ msgid "Constellation Labels"
+#~ msgstr "Шоқжұлдыз жарлықтары"
+
+#~ msgid "Constellation Names"
+#~ msgstr "Шоқжұлдыз атаулары"
+
+#, fuzzy
+#~| msgid "OpenGL"
+#~ msgid "Open"
+#~ msgstr "OpenGL"
+
+#~ msgid "Military Grid Reference System (MGRS)"
+#~ msgstr "НАТО әскери координат жүйесі (MGRS)"
+
+#~ msgctxt "Action for toggling the atmosphere"
+#~ msgid "&Atmosphere"
+#~ msgstr "&Атмосфера"
+
+#~ msgid "Enable tab to see gpxFileView"
+#~ msgstr "gpxFileView-ді көретін қойынды болсын"
+
+#~ msgctxt "Action for toggling the 'current location' box"
+#~ msgid "Current Location"
+#~ msgstr "Назардағы орын"
+
+#~ msgctxt "Action for toggling the navigation panel"
+#~ msgid "Show &Navigation Panel"
+#~ msgstr "&Шарлау панелін корсету"
+
+#~ msgctxt "Status tip"
+#~ msgid "Show Navigation Panel"
+#~ msgstr "Шарлау панелін корсету"
+
+#, fuzzy
+#~| msgid "File View"
+#~ msgctxt "Action for showing the File View"
+#~ msgid "&Show File View"
+#~ msgstr "Файлды қарау"
+
+#~ msgid "Guides"
+#~ msgstr "Жолдар"
+
+#~ msgid "Name Ids of plugins."
+#~ msgstr "Плагиндерінің индентификаторлары"
+
+#~ msgid "List of toggles for enabling plugins."
+#~ msgstr "Плагиндерін рұқсат ету-етпеуін басқару тізімі."
+
+#~ msgid "List of toggles for making plugins visible."
+#~ msgstr "Плагиндерін көрсету-көрсетпеуін басқару тізімі."
+
+#~ msgid "Marble Infocenter"
+#~ msgstr "Marble ақпар орталығы"
+
+#~ msgid "Data Sheet"
+#~ msgstr "Мәліметі"
+
+#~ msgid "Name of the location"
+#~ msgstr "Жер-су атауы"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "size:14pt; font-weight:600;\">Name</span></p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "size:14pt; font-weight:600;\">Атауы</span></p></body></html>"
+
+#~ msgid "Role of the location."
+#~ msgstr "Ол не екені"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "style:italic;\">Role</span></p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "style:italic;\">Ол не екені</span></p></body></html>"
+
+#~ msgid "Alternative name"
+#~ msgstr "Басқаша атауы"
+
+#~ msgid "Alternative name of the location."
+#~ msgstr "Жер-судың басқаша атауы."
+
+#~ msgid "Alternative Name"
+#~ msgstr "Басқа атауы"
+
+#~ msgid "Short description:"
+#~ msgstr "Қысқа сипаттамасы:"
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">No description "
+#~ "available.</p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">If you are connected to "
+#~ "the Internet please click the \"Wikipedia\" tab at the top of this page "
+#~ "to get more information.</p></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Сипаттамасы жоқ.</p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Ерер Интернетке қосулы "
+#~ "болсаңыз, онда осы беттің жоғарындағы \"Уикипедия\" қойындысына ауысып "
+#~ "толығрақ мәлімет алыңыз.</p></body></html>"
+
+#~ msgid ""
+#~ "000° 00' 00\" N\n"
+#~ "000° 00' 00\" E "
+#~ msgstr ""
+#~ "000° 00' 00\" С\n"
+#~ "000° 00' 00\" Ш "
+
+#~ msgid "9000.0 m"
+#~ msgstr "9000.0 м"
+
+#~ msgid "1000000"
+#~ msgstr "1000000"
+
+#~ msgid "Area:"
+#~ msgstr "Ауданы:"
+
+#~ msgid "0.0 sq km"
+#~ msgstr "0.0 ш.км"
+
+#~ msgid "Diameter:"
+#~ msgstr "Диаметрі:"
+
+#~ msgid "Timezone (Normal/DST):"
+#~ msgstr "Уақыт белдеуі (Стандартты/Жазғы):"
+
+#~ msgid "gmt / dst"
+#~ msgstr "Гринвич/жазғы уақыты"
+
+#~ msgid "State:"
+#~ msgstr "Өлке/Штат:"
+
+#~ msgid "Wikipedia"
+#~ msgstr "Уикипедия"
+
+#~ msgid "Back"
+#~ msgstr "Артқа"
+
+#~ msgid "Move backwards one step in the browsing history."
+#~ msgstr "Қарап жатқан журналда бір қадам шегіну."
+
+#~ msgid "Print Page"
+#~ msgstr "Бетті басып шығару"
+
+#~ msgid "Reverse"
+#~ msgstr "Кері"
+
+#~ msgid "Sun is Zenith at"
+#~ msgstr "Күн зениттегі уақыт:"
+
+#~ msgid "Show"
+#~ msgstr "Көрсету"
+
+#~ msgid "Hide"
+#~ msgstr "Жасыру"
+
+#~ msgid "Show Zenith"
+#~ msgstr "Зенитті көрсету"
+
+#~ msgid "Hide Zenith"
+#~ msgstr "Зенитті жасыру"
+
+#~ msgid "Shows and hides the zenith location of the sun"
+#~ msgstr "Күннің көзінің тас төбе орынын көрсету - жасыру"
+
+#~ msgid "dd/MM/yyyy hh:mm AP"
+#~ msgstr "dd/MM/yyyy hh:mm"
+
+#~ msgid "M/d/yyyy hh:mm"
+#~ msgstr "d/m/yyyy hh:mm"
+
+#~ msgid "Profile"
+#~ msgstr "Іс-әлпеті"
+
+#, fuzzy
+#~| msgid ""
+#~| "*.gpx *.kml *.osm *.pnt|All Supported Files\n"
+#~| "*.gpx|GPS Data\n"
+#~| "*.kml|Google Earth KML\n"
+#~| "*.osm|OpenStreetMap Data\n"
+#~| "*.pnt|Micro World Data Bank II"
+#~ msgid ""
+#~ "*.gpx *.kml *.log *.osm *.pnt|All Supported Files\n"
+#~ "*.gpx|GPS Data\n"
+#~ "*.kml|Google Earth KML\n"
+#~ "*.log|TangoGPS Logfile\n"
+#~ "*.osm|OpenStreetMap Data\n"
+#~ "*.pnt|Micro World Data Bank II"
+#~ msgstr ""
+#~ "*.gpx *.kml *.osm *.pnt|Бүкіл танитын файлдары\n"
+#~ "*.gpx|GPS дерегі\n"
+#~ "*.kml|Google Earth KML\n"
+#~ "*.osm|OpenStreetMap дерегі\n"
+#~ "*.pnt|Micro World Data Bank II"
+
+#~ msgid "Greenwich Mean Time"
+#~ msgstr "Гринвич уақыты"
+
+#~ msgid "&Search"
+#~ msgstr "&Іздеу"
+
+#~ msgid "Search line"
+#~ msgstr "Іздейтін жол"
+
+#~ msgid "Here you can enter the name of the location you are searching for."
+#~ msgstr "Мұнда іздейтін жер-су атауын келтіру керек."
+
+#~ msgid "WMS Support"
+#~ msgstr "WMS қолдауы"
+
+#~ msgid "Check speed of gps drawing"
+#~ msgstr "Сурет салу GPS  жылдамдығын өлшеу"
+
+#~ msgid "Enable tab to show the current location"
+#~ msgstr "Назардағы орынды көрсететін қойындысы болсын"

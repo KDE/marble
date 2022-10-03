@@ -1,0 +1,41 @@
+# Bosnian translation for bosnianuniversetranslation
+# Copyright (c) 2012 Rosetta Contributors and Canonical Ltd 2012
+# This file is distributed under the same license as the bosnianuniversetranslation package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2012.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: bosnianuniversetranslation\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2021-09-28 00:13+0000\n"
+"PO-Revision-Date: 2012-10-05 22:23+0000\n"
+"Last-Translator: Samir Ribić <Unknown>\n"
+"Language-Team: Bosnian <bs@li.org>\n"
+"Language: bs\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2012-12-21 01:42+0000\n"
+"X-Generator: Launchpad (build 16378)\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+
+#: plasmarunner.cpp:36
+#, kde-format
+msgid "Shows the coordinates :q: in OpenStreetMap with Marble."
+msgstr "Prikazuje koordinate  :q: u OpenStreetMap sa Marble."
+
+#: plasmarunner.cpp:37
+#, kde-format
+msgid "Shows the geo bookmark containing :q: in OpenStreetMap with Marble."
+msgstr "Prikazuje geo zabilješku sa :q: u OpenStreetMap koristeći Marble."
+
+#: plasmarunner.cpp:58
+#, kde-format
+msgid "Show the coordinates %1 in OpenStreetMap with Marble"
+msgstr "Prikaži koordinate %1 u OpenStreetMap sa Marble"
+
+#: plasmarunner.cpp:124
+#, kde-format
+msgid "Show in OpenStreetMap with Marble"
+msgstr "Prikaži u OpenStreetMap sa Marble"

@@ -1,0 +1,4759 @@
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Laszlo Papp <djszapi@archlinux.us>, 2010.
+# Kiszel Kristóf <ulysses@kubuntu.org>, 2010.
+# Kristóf Kiszel <ulysses@kubuntu.org>, 2010, 2012.
+# Balázs Úr <urbalazs@gmail.com>, 2012, 2013, 2014.
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2021-10-18 00:13+0000\n"
+"PO-Revision-Date: 2014-01-22 22:18+0100\n"
+"Last-Translator: Balázs Úr <urbalazs@gmail.com>\n"
+"Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
+"Language: hu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 1.5\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "Úr Balázs"
+
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "urbalazs@gmail.com"
+
+#: kdemain.cpp:91
+#, kde-format
+msgid "Marble Virtual Globe"
+msgstr "Marble virtuális földgömb"
+
+#: kdemain.cpp:93
+#, kde-format
+msgid "A World Atlas."
+msgstr "Egy világatlasz."
+
+#: kdemain.cpp:95
+#, fuzzy, kde-format
+#| msgid "(c) 2007-2014"
+msgid "(c) 2007-%1"
+msgstr "© 2007-2014"
+
+#: kdemain.cpp:100 kdemain.cpp:286
+#, kde-format
+msgid "Torsten Rahn"
+msgstr "Torsten Rahn"
+
+#: kdemain.cpp:101
+#, kde-format
+msgid "Developer and Original Author"
+msgstr "Fő fejlesztő és eredeti szerző"
+
+#: kdemain.cpp:103
+#, kde-format
+msgid "Bernhard Beschow"
+msgstr "Bernhard Beschow"
+
+#: kdemain.cpp:104
+#, kde-format
+msgid "WMS Support, Mobile, Performance"
+msgstr "WMS támogatás, mobil, teljesítmény"
+
+#: kdemain.cpp:106
+#, kde-format
+msgid "Thibaut Gridel"
+msgstr "Thibaut Gridel"
+
+#: kdemain.cpp:107
+#, kde-format
+msgid "Geodata"
+msgstr "Geoadat"
+
+#: kdemain.cpp:109
+#, kde-format
+msgid "Jens-Michael Hoffmann"
+msgstr "Jens-Michael Hoffmann"
+
+#: kdemain.cpp:110
+#, kde-format
+msgid "OpenStreetMap Integration, OSM Namefinder, Download Management"
+msgstr "OpenStreetMap integráció, OSM névkereső, letöltéskezelés"
+
+#: kdemain.cpp:112
+#, kde-format
+msgid "Florian E&szlig;er"
+msgstr "Florian Eßer"
+
+#: kdemain.cpp:113
+#, kde-format
+msgid "Elevation Profile"
+msgstr "Magassági profil"
+
+#: kdemain.cpp:115
+#, kde-format
+msgid "Wes Hardaker"
+msgstr "Wes Hardaker"
+
+#: kdemain.cpp:116
+#, kde-format
+msgid "APRS Plugin"
+msgstr "APRS-bővítmény"
+
+#: kdemain.cpp:118 kdemain.cpp:202
+#, kde-format
+msgid "Bastian Holst"
+msgstr "Bastian Holst"
+
+#: kdemain.cpp:119
+#, kde-format
+msgid "Online Services support"
+msgstr "Online szolgáltatás támogatás"
+
+#: kdemain.cpp:121 kdemain.cpp:172
+#, kde-format
+msgid "Guillaume Martres"
+msgstr "Guillaume Martres"
+
+#: kdemain.cpp:122
+#, kde-format
+msgid "Satellites"
+msgstr "Műholdak"
+
+#: kdemain.cpp:124 kdemain.cpp:168
+#, kde-format
+msgid "Rene Kuettner"
+msgstr "Rene Kuettner"
+
+#: kdemain.cpp:125
+#, kde-format
+msgid "Satellites, Eclipses"
+msgstr "Műholdak, fogyatkozások"
+
+#: kdemain.cpp:127
+#, kde-format
+msgid "Friedrich W. H. Kossebau"
+msgstr "Friedrich W. H. Kossebau"
+
+#: kdemain.cpp:128
+#, kde-format
+msgid "Plasma Integration, Bugfixes"
+msgstr "Plasma integráció, hibajavítások"
+
+#: kdemain.cpp:130
+#, kde-format
+msgid "Dennis Nienhüser"
+msgstr "Dennis Nienhüser"
+
+#: kdemain.cpp:131
+#, kde-format
+msgid "Routing, Navigation, Mobile"
+msgstr "Útválasztás, navigáció, mobil"
+
+#: kdemain.cpp:133
+#, kde-format
+msgid "Niko Sams"
+msgstr "Niko Sams"
+
+#: kdemain.cpp:134
+#, kde-format
+msgid "Routing, Elevation Profile"
+msgstr "Útválasztás, magassági profil"
+
+#: kdemain.cpp:136 kdemain.cpp:206
+#, kde-format
+msgid "Patrick Spendrin"
+msgstr "Patrick Spendrin"
+
+#: kdemain.cpp:137
+#, kde-format
+msgid "Core Developer: KML and Windows support"
+msgstr "Fő fejlesztő: KML és Windows támogatás"
+
+#: kdemain.cpp:139
+#, kde-format
+msgid "Eckhart Wörner"
+msgstr "Eckhart Wörner"
+
+#: kdemain.cpp:140
+#, kde-format
+msgid "Bugfixes"
+msgstr "Hibajavítások"
+
+#: kdemain.cpp:145
+#, kde-format
+msgid "Inge Wallin"
+msgstr "Inge Wallin"
+
+#: kdemain.cpp:146
+#, kde-format
+msgid "Core Developer and Co-Maintainer"
+msgstr "Fő fejlesztő és közreműködő karbantartó"
+
+#: kdemain.cpp:148
+#, kde-format
+msgid "Henry de Valence"
+msgstr "Henry de Valence"
+
+#: kdemain.cpp:149
+#, kde-format
+msgid "Core Developer: Marble Runners, World-Clock Plasmoid"
+msgstr "Fő fejlesztő: Marble Runners, World-Clock Plasmoid"
+
+#: kdemain.cpp:151
+#, kde-format
+msgid "Pino Toscano"
+msgstr "Pino Toscano"
+
+#: kdemain.cpp:152
+#, kde-format
+msgid "Network plugins"
+msgstr "Hálózati bővítmények"
+
+#: kdemain.cpp:154
+#, kde-format
+msgid "Harshit Jain"
+msgstr "Harshit Jain"
+
+#: kdemain.cpp:155
+#, kde-format
+msgid "Planet filter"
+msgstr "Bolygó szűrő"
+
+#: kdemain.cpp:157
+#, kde-format
+msgid "Simon Edwards"
+msgstr "Simon Edwards"
+
+#: kdemain.cpp:158
+#, kde-format
+msgid "Marble Python Bindings"
+msgstr "Marble Python hozzárendelés"
+
+#: kdemain.cpp:160
+#, kde-format
+msgid "Magnus Valle"
+msgstr "Magnus Valle"
+
+#: kdemain.cpp:161
+#, kde-format
+msgid "Historical Maps"
+msgstr "Történelmi térképek"
+
+#: kdemain.cpp:163
+#, kde-format
+msgid "Médéric Boquien"
+msgstr "Médéric Boquien"
+
+#: kdemain.cpp:164
+#, kde-format
+msgid "Astronomical Observatories"
+msgstr "Csillagvizsgálók"
+
+#: kdemain.cpp:169
+#, kde-format
+msgid ""
+"ESA Summer of Code in Space 2012 Project: Visualization of planetary "
+"satellites"
+msgstr ""
+"ESA Summer of Code in Space  2012 projekt: A műholdak pályájának képi "
+"megjelenítése"
+
+#: kdemain.cpp:173
+#, kde-format
+msgid ""
+"ESA Summer of Code in Space 2011 Project: Visualization of Satellite Orbits"
+msgstr ""
+"ESA Summer of Code in Space  2011 projekt: A műholdak pályájának képi "
+"megjelenítése"
+
+#: kdemain.cpp:178
+#, kde-format
+msgid "Konstantin Oblaukhov"
+msgstr "Konstantin Oblaukhov"
+
+#: kdemain.cpp:179
+#, kde-format
+msgid "Google Summer of Code 2011 Project: OpenStreetMap Vector Rendering"
+msgstr "Google Summer of Code 2011 projekt: OpenStreetMap vektor renderelés"
+
+#: kdemain.cpp:182
+#, kde-format
+msgid "Daniel Marth"
+msgstr "Daniel Marth"
+
+#: kdemain.cpp:183
+#, kde-format
+msgid "Google Summer of Code 2011 Project: Marble Touch on MeeGo"
+msgstr "Google Summer of Code 2011 projekt: Marble Touch MeeGo rendszeren"
+
+#: kdemain.cpp:186
+#, kde-format
+msgid "Gaurav Gupta"
+msgstr "Gaurav Gupta"
+
+#: kdemain.cpp:187
+#, kde-format
+msgid "Google Summer of Code 2010 Project: Bookmarks"
+msgstr "Google Summer of Code 2010 projekt: Könyvjelzők"
+
+#: kdemain.cpp:190
+#, kde-format
+msgid "Harshit Jain "
+msgstr "Harshit Jain "
+
+#: kdemain.cpp:191
+#, kde-format
+msgid "Google Summer of Code 2010 Project: Time Support"
+msgstr "Google Summer of Code 2010 projekt: Idő támogatás"
+
+#: kdemain.cpp:194
+#, kde-format
+msgid "Siddharth Srivastava"
+msgstr "Siddharth Srivastava"
+
+#: kdemain.cpp:195
+#, kde-format
+msgid "Google Summer of Code 2010 Project: Turn-by-turn Navigation"
+msgstr "Google Summer of Code 2010 projekt: Fordulásalapú navigáció"
+
+#: kdemain.cpp:198 kdemain.cpp:218
+#, kde-format
+msgid "Andrew Manson"
+msgstr "Andrew Manson"
+
+#: kdemain.cpp:199
+#, kde-format
+msgid "Google Summer of Code 2009 Project: OSM Annotation"
+msgstr "Google Summer of Code 2009 projekt: OSM kommentár"
+
+#: kdemain.cpp:203
+#, kde-format
+msgid "Google Summer of Code 2009 Project: Online Services"
+msgstr "Google Summer of Code 2009 projekt: Online szolgáltatások"
+
+#: kdemain.cpp:207
+#, kde-format
+msgid "Google Summer of Code 2008 Project: Vector Tiles for Marble"
+msgstr "Google Summer of Code 2008 projekt: Vektorcsempék a Marble számára"
+
+#: kdemain.cpp:210
+#, kde-format
+msgid "Shashank Singh"
+msgstr "Shashank Singh"
+
+#: kdemain.cpp:211
+#, kde-format
+msgid ""
+"Google Summer of Code 2008 Project: Panoramio / Wikipedia -photo support for "
+"Marble"
+msgstr ""
+"Google Summer of Code 2008 projekt: Panoramio / Wikipedia fényképtámogatás a "
+"Marble rendszerhez"
+
+#: kdemain.cpp:214
+#, kde-format
+msgid "Carlos Licea"
+msgstr "Carlos Licea"
+
+#: kdemain.cpp:215
+#, kde-format
+msgid ""
+"Google Summer of Code 2007 Project: Equirectangular Projection (\"Flat Map\")"
+msgstr ""
+"Google Summer of Code 2007 projekt: Egyenlő téglalapos leképezés („Lapos "
+"térkép”)"
+
+#: kdemain.cpp:219
+#, kde-format
+msgid "Google Summer of Code 2007 Project: GPS Support for Marble"
+msgstr "Google Summer of Code 2007 projekt: GPS támogatás a Marble számára"
+
+#: kdemain.cpp:222
+#, kde-format
+msgid "Murad Tagirov"
+msgstr "Murad Tagirov"
+
+#: kdemain.cpp:223
+#, kde-format
+msgid "Google Summer of Code 2007 Project: KML Support for Marble"
+msgstr "Google Summer of Code 2007 projekt: KML támogatás a Marble számára"
+
+#: kdemain.cpp:228
+#, kde-format
+msgid "Simon Schmeisser"
+msgstr "Simon Schmeisser"
+
+#: kdemain.cpp:229 kdemain.cpp:231 kdemain.cpp:233 kdemain.cpp:235
+#: kdemain.cpp:237 kdemain.cpp:239 kdemain.cpp:241 kdemain.cpp:243
+#: kdemain.cpp:245 kdemain.cpp:247 kdemain.cpp:249 kdemain.cpp:251
+#: kdemain.cpp:253 kdemain.cpp:255 kdemain.cpp:257 kdemain.cpp:259
+#: kdemain.cpp:261 kdemain.cpp:263 kdemain.cpp:265
+#, kde-format
+msgid "Development & Patches"
+msgstr "Fejlesztés és javítások"
+
+#: kdemain.cpp:230
+#, kde-format
+msgid "Claudiu Covaci"
+msgstr "Claudiu Covaci"
+
+#: kdemain.cpp:232
+#, kde-format
+msgid "David Roberts"
+msgstr "David Roberts"
+
+#: kdemain.cpp:234
+#, kde-format
+msgid "Nikolas Zimmermann"
+msgstr "Nikolas Zimmermann"
+
+#: kdemain.cpp:236
+#, kde-format
+msgid "Jan Becker"
+msgstr "Jan Becker"
+
+#: kdemain.cpp:238
+#, kde-format
+msgid "Stefan Asserhäll"
+msgstr "Stefan Asserhäll"
+
+#: kdemain.cpp:240
+#, kde-format
+msgid "Laurent Montel"
+msgstr "Laurent Montel"
+
+#: kdemain.cpp:242
+#, kde-format
+msgid "Mayank Madan"
+msgstr "Mayank Madan"
+
+#: kdemain.cpp:244
+#, kde-format
+msgid "Prashanth Udupa"
+msgstr "Prashanth Udupa"
+
+#: kdemain.cpp:246
+#, kde-format
+msgid "Anne-Marie Mahfouf"
+msgstr "Anne-Marie Mahfouf"
+
+#: kdemain.cpp:248
+#, kde-format
+msgid "Josef Spillner"
+msgstr "Josef Spillner"
+
+#: kdemain.cpp:250
+#, kde-format
+msgid "Frerich Raabe"
+msgstr "Frerich Raabe"
+
+#: kdemain.cpp:252
+#, kde-format
+msgid "Frederik Gladhorn"
+msgstr "Frederik Gladhorn"
+
+#: kdemain.cpp:254
+#, kde-format
+msgid "Fredrik Höglund"
+msgstr "Fredrik Höglund"
+
+#: kdemain.cpp:256
+#, kde-format
+msgid "Albert Astals Cid"
+msgstr "Albert Astals Cid"
+
+#: kdemain.cpp:258
+#, kde-format
+msgid "Thomas Zander"
+msgstr "Thomas Zander"
+
+#: kdemain.cpp:260
+#, kde-format
+msgid "Joseph Wenninger"
+msgstr "Joseph Wenninger"
+
+#: kdemain.cpp:262
+#, kde-format
+msgid "Kris Thomsen"
+msgstr "Kris Thomsen"
+
+#: kdemain.cpp:264
+#, kde-format
+msgid "Daniel Molkentin"
+msgstr "Daniel Molkentin"
+
+#: kdemain.cpp:266
+#, kde-format
+msgid "Christophe Leske"
+msgstr "Christophe Leske"
+
+#: kdemain.cpp:267 kdemain.cpp:269 kdemain.cpp:271 kdemain.cpp:273
+#: kdemain.cpp:275 kdemain.cpp:277 kdemain.cpp:279 kdemain.cpp:281
+#: kdemain.cpp:283
+#, kde-format
+msgid "Platforms & Distributions"
+msgstr "Platformok és disztribúciók"
+
+#: kdemain.cpp:268
+#, kde-format
+msgid "Sebastian Wiedenroth"
+msgstr "Sebastian Wiedenroth"
+
+#: kdemain.cpp:270
+#, kde-format
+msgid "Tim Sutton"
+msgstr "Tim Sutton"
+
+#: kdemain.cpp:272
+#, kde-format
+msgid "Christian Ehrlicher"
+msgstr "Christian Ehrlicher"
+
+#: kdemain.cpp:274
+#, kde-format
+msgid "Ralf Habacker"
+msgstr "Ralf Habacker"
+
+#: kdemain.cpp:276
+#, kde-format
+msgid "Steffen Joeris"
+msgstr "Steffen Joeris"
+
+#: kdemain.cpp:278
+#, kde-format
+msgid "Marcus Czeslinski"
+msgstr "Marcus Czeslinski"
+
+#: kdemain.cpp:280
+#, kde-format
+msgid "Marcus D. Hanwell"
+msgstr "Marcus D. Hanwell"
+
+#: kdemain.cpp:282
+#, kde-format
+msgid "Chitlesh Goorah"
+msgstr "Chitlesh Goorah"
+
+#: kdemain.cpp:284
+#, kde-format
+msgid "Nuno Pinheiro"
+msgstr "Nuno Pinheiro"
+
+#: kdemain.cpp:285 kdemain.cpp:287
+#, kde-format
+msgid "Artwork"
+msgstr "Grafika"
+
+#: kdemain.cpp:290
+#, kde-format
+msgid "Luis Silva"
+msgstr "Luis Silva"
+
+#: kdemain.cpp:291 kdemain.cpp:293 kdemain.cpp:295 kdemain.cpp:297
+#: kdemain.cpp:299 kdemain.cpp:301 kdemain.cpp:303 kdemain.cpp:305
+#: kdemain.cpp:307 kdemain.cpp:309
+#, kde-format
+msgid "Various Suggestions & Testing"
+msgstr "Különböző javaslatok és tesztelés"
+
+#: kdemain.cpp:292
+#, kde-format
+msgid "Stefan Jordan"
+msgstr "Stefan Jordan"
+
+#: kdemain.cpp:294
+#, kde-format
+msgid "Robert Scott"
+msgstr "Robert Scott"
+
+#: kdemain.cpp:296
+#, kde-format
+msgid "Lubos Petrovic"
+msgstr "Lubos Petrovic"
+
+#: kdemain.cpp:298
+#, kde-format
+msgid "Benoit Sigoure"
+msgstr "Benoit Sigoure"
+
+#: kdemain.cpp:300
+#, kde-format
+msgid "Martin Konold"
+msgstr "Martin Konold"
+
+#: kdemain.cpp:302
+#, kde-format
+msgid "Matthias Welwarsky"
+msgstr "Matthias Welwarsky"
+
+#: kdemain.cpp:304
+#, kde-format
+msgid "Rainer Endres"
+msgstr "Rainer Endres"
+
+#: kdemain.cpp:306
+#, kde-format
+msgid "Ralf Gesellensetter"
+msgstr "Ralf Gesellensetter"
+
+#: kdemain.cpp:308
+#, kde-format
+msgid "Tim Alder"
+msgstr "Tim Alder"
+
+#: kdemain.cpp:310
+#, kde-format
+msgid "John Layt"
+msgstr "John Layt"
+
+#: kdemain.cpp:311
+#, kde-format
+msgid ""
+"Special thanks for providing an important source of inspiration by creating "
+"Marble's predecessor \"Kartographer\"."
+msgstr ""
+
+#: kdemain.cpp:327
+#, kde-format
+msgid "Enable debug output"
+msgstr "Hibakereső kimenet engedélyezése"
+
+#: kdemain.cpp:329
+#, kde-format
+msgid "Display OSM placemarks according to the level selected"
+msgstr ""
+
+#: kdemain.cpp:331
+#, kde-format
+msgid "Make a time measurement to check performance"
+msgstr "Időmérés elvégzése a teljesítmény ellenőrzéséhez"
+
+#: kdemain.cpp:333
+#, kde-format
+msgid "Show frame rate"
+msgstr "Képkockaszám megjelenítése"
+
+#: kdemain.cpp:335
+#, kde-format
+msgid "Show tile IDs"
+msgstr "Csempeazonosítók megjelenítése"
+
+#: kdemain.cpp:337
+#, kde-format
+msgid "Show time spent in each layer"
+msgstr "Az eltöltött idő megjelenítése minden rétegen"
+
+#: kdemain.cpp:339
+#, fuzzy, kde-format
+#| msgid "Use a different directory which contains map data"
+msgid "Use a different directory <directory> which contains map data."
+msgstr "Eltérő könyvtár használata, amely térképadatot tartalmaz"
+
+#: kdemain.cpp:341
+#, kde-format
+msgid "Do not use the interface optimized for small screens"
+msgstr "Ne használja a kis kijelzőkre optimalizált felületet"
+
+#: kdemain.cpp:342
+#, kde-format
+msgid "Use the interface optimized for small screens"
+msgstr "Használja a kis kijelzőkre optimalizált felületet"
+
+#: kdemain.cpp:344
+#, kde-format
+msgid "Do not use the interface optimized for high resolutions"
+msgstr "Ne használja a nagy felbontásra optimalizált felületet"
+
+#: kdemain.cpp:345
+#, kde-format
+msgid "Use the interface optimized for high resolutions"
+msgstr "Használja a nagy felbontásra optimalizált felületet"
+
+#: kdemain.cpp:347
+#, fuzzy, kde-format
+#| msgid "Show map at given lat lon coordinates"
+msgid "Show map at given lat lon <coordinates>"
+msgstr "Térkép megjelenítése a megadott szélesség, hosszúság koordinátákon"
+
+#: kdemain.cpp:349
+#, fuzzy, kde-format
+#| msgid "Show map at given geo uri"
+msgid "Show map at given geo <uri>"
+msgstr "Térkép megjelenítése a megadott földrajzi URI-n"
+
+#: kdemain.cpp:351
+#, kde-format
+msgid "Set the distance of the observer to the globe (in km)"
+msgstr "Távolság megadása a megfigyelő és a földgömb között (km-ben)"
+
+#: kdemain.cpp:353
+#, fuzzy, kde-format
+#| msgid "Use map id (e.g. \"earth/openstreetmap/openstreetmap.dgml\")"
+msgid "Use map <id> (e.g. \"earth/openstreetmap/openstreetmap.dgml\")"
+msgstr ""
+"Térkép azonosító használata (például „earth/openstreetmap/openstreetmap."
+"dgml”)"
+
+#: kdemain.cpp:355
+#, kde-format
+msgid "One or more placemark files to be opened"
+msgstr "Egy vagy több helyjelölő fájl megnyitása"
+
+#. i18n: ectx: label, entry, group (Time)
+#: marble.kcfg:58
+#, kde-format
+msgid "The date and time of marble clock"
+msgstr "A marble óra dátuma és ideje"
+
+#. i18n: ectx: label, entry, group (Time)
+#: marble.kcfg:61
+#, kde-format
+msgid "The speed of marble clock"
+msgstr "A marble óra sebessége"
+
+#. i18n: ectx: label, entry, group (View)
+#: marble.kcfg:107
+#, kde-format
+msgid "The unit chosen to measure distances."
+msgstr "A távolság mérésére választott mértékegység."
+
+#. i18n: ectx: label, entry, group (View)
+#: marble.kcfg:115
+#, kde-format
+msgid "The unit chosen to measure angles."
+msgstr "A szög mérésére választott mértékegység."
+
+#. i18n: ectx: label, entry, group (View)
+#: marble.kcfg:124
+#, kde-format
+msgid "The quality at which a still map gets painted."
+msgstr "Az álló térképek megrajzolásának minősége."
+
+#. i18n: ectx: label, entry, group (View)
+#: marble.kcfg:135
+#, kde-format
+msgid "The quality at which an animated map gets painted."
+msgstr "Az animált térképek megrajzolásának minősége."
+
+#. i18n: ectx: label, entry, group (View)
+#: marble.kcfg:146
+#, kde-format
+msgid "The localization of the labels."
+msgstr "A címkéké honosítása."
+
+#. i18n: ectx: label, entry (mapFont), group (View)
+#: marble.kcfg:155
+#, kde-format
+msgid "The general font used on the map."
+msgstr "A térképen használt általános betűtípus."
+
+#. i18n: ectx: label, entry (lastFileOpenDir), group (View)
+#: marble.kcfg:159
+#, kde-format
+msgid "The last directory that was opened by File->Open."
+msgstr "A „Fájl->Megnyitás…” által utoljára megnyitott könyvtár."
+
+#. i18n: ectx: label, entry, group (Navigation)
+#: marble.kcfg:179
+#, kde-format
+msgid "The behaviour of the planet's axis on mouse dragging."
+msgstr "A bolygók tengelyének viselkedése az egérrel való húzáskor."
+
+#. i18n: ectx: label, entry, group (Navigation)
+#: marble.kcfg:187
+#, kde-format
+msgid "The location shown on application startup."
+msgstr "Az alkalmazás indításkor megjelenített hely."
+
+#. i18n: ectx: label, entry, group (Navigation)
+#: marble.kcfg:201
+#, kde-format
+msgid "Display animation on voyage to target."
+msgstr "Animáció megjelenítése a célhoz vezető úton."
+
+#. i18n: ectx: label, entry, group (Navigation)
+#: marble.kcfg:205
+#, kde-format
+msgid "The external OpenStreetMap editor application"
+msgstr "A külső OpenStreetMap szerkesztő alkalmazás"
+
+#. i18n: ectx: label, entry, group (Cache)
+#: marble.kcfg:211
+#, kde-format
+msgid "Cache for tiles reserved in the physical memory."
+msgstr "A csempékhez lefoglalt gyorsítótár a fizikai memóriában."
+
+#. i18n: ectx: label, entry, group (Cache)
+#: marble.kcfg:217
+#, kde-format
+msgid "Maximum space on the hard disk that can be used to store tiles."
+msgstr "A csempék tárolásához használt maximális hely a merevlemezen."
+
+#. i18n: ectx: label, entry (proxyUrl), group (Cache)
+#: marble.kcfg:223
+#, kde-format
+msgid "URL for the proxy server."
+msgstr "URL a proxykiszolgálóhoz."
+
+#. i18n: ectx: label, entry, group (Cache)
+#: marble.kcfg:227
+#, kde-format
+msgid "Port for the proxy server."
+msgstr "Port a proxykiszolgálóhoz."
+
+#. i18n: ectx: label, entry (proxyUser), group (Cache)
+#: marble.kcfg:233
+#, kde-format
+msgid "Username for authorization."
+msgstr "Felhasználónév a hitelesítéshez."
+
+#. i18n: ectx: label, entry (proxyPass), group (Cache)
+#: marble.kcfg:236
+#, kde-format
+msgid "Password for authorization."
+msgstr "Jelszó a hitelesítéshez."
+
+#. i18n: ectx: label, entry (proxyHttp), group (Cache)
+#: marble.kcfg:239
+#, kde-format
+msgid "Proxy type is HTTP"
+msgstr "A proxy típusa HTTP"
+
+#. i18n: ectx: label, entry (proxySocks5), group (Cache)
+#: marble.kcfg:250
+#, kde-format
+msgid "Proxy type is Socks5"
+msgstr "A proxy típusa Socks5"
+
+#. i18n: ectx: label, entry (proxyAuth), group (Cache)
+#: marble.kcfg:254
+#, kde-format
+msgid "Proxy requires Authentication"
+msgstr "A proxy hitelesítést kér"
+
+#. i18n: ectx: label, entry (activePositionTrackingPlugin), group (Plugins)
+#: marble.kcfg:260
+#, kde-format
+msgid "The position tracking plugin used to determine the current location"
+msgstr "A jelenlegi hely megállapítására használt helyzetkövető bővítmény"
+
+#: marble_part.cpp:102
+#, kde-format
+msgid "Position: %1"
+msgstr "Pozíció: %1"
+
+#: marble_part.cpp:103
+#, kde-format
+msgid "Altitude: %1"
+msgstr "Magasság: %1"
+
+#: marble_part.cpp:104
+#, kde-format
+msgid "Tile Zoom Level: %1"
+msgstr "Csempe nagyítási szint: %1"
+
+#: marble_part.cpp:105
+#, kde-format
+msgid "Time: %1"
+msgstr "Idő: %1"
+
+#: marble_part.cpp:167
+#, kde-format
+msgid ""
+"Sorry, unable to open '%1':\n"
+"'%2'"
+msgstr ""
+
+#: marble_part.cpp:168
+#, fuzzy, kde-format
+#| msgid "File not accessible"
+msgid "File not readable"
+msgstr "A fájl nem érhető el"
+
+#: marble_part.cpp:214
+#, kde-format
+msgid "marble_part"
+msgstr "marble_part"
+
+#: marble_part.cpp:217
+#, kde-format
+msgid "A Virtual Globe"
+msgstr "Virtuális földgömb"
+
+#: marble_part.cpp:231
+#, kde-format
+msgid "Sorry, unable to open '%1'. The file is not accessible."
+msgstr "Elnézést, „%1” nem nyitható meg. A fájl nem érhető el."
+
+#: marble_part.cpp:232
+#, kde-format
+msgid "File not accessible"
+msgstr "A fájl nem érhető el"
+
+#: marble_part.cpp:253
+#, kde-format
+msgid "All Supported Files"
+msgstr "Összes támogatott fájltípus"
+
+#: marble_part.cpp:259
+#, fuzzy, kde-format
+#| msgid "Open File"
+msgctxt "@title:window"
+msgid "Open File"
+msgstr "Fájl megnyitása"
+
+#: marble_part.cpp:276
+#, fuzzy, kde-format
+#| msgid "Export Map"
+msgctxt "@title:window"
+msgid "Export Map"
+msgstr "Térkép exportálása"
+
+#: marble_part.cpp:277
+#, kde-format
+msgid "Images *.jpg *.png"
+msgstr "Képek *.jpg *.png"
+
+#: marble_part.cpp:291
+#, kde-format
+msgctxt "Application name"
+msgid "Marble"
+msgstr "Marble"
+
+#: marble_part.cpp:292
+#, kde-format
+msgid "An error occurred while trying to save the file.\n"
+msgstr "Hiba történt a fájl mentése során.\n"
+
+#: marble_part.cpp:483
+#, kde-format
+msgid "Unnamed"
+msgstr "Névtelen"
+
+#: marble_part.cpp:714
+#, kde-format
+msgctxt "Action for downloading an entire region of a map"
+msgid "Download Region..."
+msgstr "Régió letöltése…"
+
+#: marble_part.cpp:728
+#, kde-format
+msgctxt "Action for saving the map to a file"
+msgid "&Export Map..."
+msgstr "Térkép &exportálása…"
+
+#: marble_part.cpp:737
+#, kde-format
+msgctxt "Action for toggling offline mode"
+msgid "&Work Offline"
+msgstr "Kapcsolat &nélküli munka"
+
+#: marble_part.cpp:747
+#, kde-format
+msgctxt "Action for copying the map to the clipboard"
+msgid "&Copy Map"
+msgstr "&Térkép másolása"
+
+#: marble_part.cpp:754
+#, kde-format
+msgctxt "Action for copying the coordinates to the clipboard"
+msgid "C&opy Coordinates"
+msgstr "Koordináták &másolása"
+
+#: marble_part.cpp:762
+#, kde-format
+msgctxt "Action for opening a file"
+msgid "&Open..."
+msgstr "&Megnyitás…"
+
+#: marble_part.cpp:769
+#, kde-format
+msgctxt "Action for downloading maps (GHNS)"
+msgid "Download Maps..."
+msgstr "Térképek letöltése…"
+
+#: marble_part.cpp:772
+#, kde-format
+msgctxt "Status tip"
+msgid "Download new maps"
+msgstr "Új térképek letöltése"
+
+#: marble_part.cpp:778
+#, kde-format
+msgctxt "Action for creating new maps"
+msgid "&Create a New Map..."
+msgstr "Új térkép lét&rehozása…"
+
+#: marble_part.cpp:783
+#, kde-format
+msgctxt "Status tip"
+msgid "A wizard guides you through the creation of your own map theme."
+msgstr ""
+"Egy varázsló, amely végigvezeti Önt a saját térképtémájának elkészítésén."
+
+#: marble_part.cpp:810
+#, kde-format
+msgctxt "Action for toggling clouds"
+msgid "&Clouds"
+msgstr "&Felhők"
+
+#: marble_part.cpp:817
+#, kde-format
+msgctxt "Action for sun control dialog"
+msgid "S&un Control..."
+msgstr "N&apvezérlés…"
+
+#: marble_part.cpp:827
+#, kde-format
+msgctxt "Action for time control dialog"
+msgid "&Time Control..."
+msgstr "Időve&zérlés…"
+
+#: marble_part.cpp:836
+#, kde-format
+msgctxt "Action for locking float items on the map"
+msgid "Lock Position"
+msgstr "Pozíció zárolása"
+
+#: marble_part.cpp:847
+#, kde-format
+msgid "Show Shadow"
+msgstr "Árnyék megjelenítése"
+
+#: marble_part.cpp:850
+#, kde-format
+msgid "Hide Shadow"
+msgstr "Árnyék elrejtése"
+
+#: marble_part.cpp:851
+#, kde-format
+msgid "Shows and hides the shadow of the sun"
+msgstr "Megjeleníti vagy elrejti a Nap árnyékát"
+
+#: marble_part.cpp:855
+#, kde-format
+msgid "Show sun icon on the Sub-Solar Point"
+msgstr ""
+
+#: marble_part.cpp:857
+#, kde-format
+msgid "Hide sun icon on the Sub-Solar Point"
+msgstr ""
+
+#: marble_part.cpp:858
+#, kde-format
+msgid "Show sun icon on the sub-solar point"
+msgstr ""
+
+#: marble_part.cpp:863
+#, kde-format
+msgid "Lock Globe to the Sub-Solar Point"
+msgstr ""
+
+#: marble_part.cpp:865
+#, kde-format
+msgid "Unlock Globe to the Sub-Solar Point"
+msgstr ""
+
+#: marble_part.cpp:866
+#, kde-format
+msgid "Lock globe to the sub-solar point"
+msgstr ""
+
+#: marble_part.cpp:881
+#, fuzzy, kde-format
+#| msgctxt "Add Bookmark"
+#| msgid "&Add Bookmark"
+msgctxt "Add Bookmark"
+msgid "Add &Bookmark..."
+msgstr "Könyvjelző hozzá&adása"
+
+#: marble_part.cpp:889
+#, kde-format
+msgctxt "Show Bookmarks"
+msgid "Show &Bookmarks"
+msgstr "&Könyvjelzők megjelenítése"
+
+#: marble_part.cpp:890
+#, kde-format
+msgid "Show or hide bookmarks in the map"
+msgstr "Könyvjelzők megjelenítése vagy elrejtése a térképen"
+
+#: marble_part.cpp:898
+#, kde-format
+msgid "&Set Home Location"
+msgstr "Otthoni hely &beállítása"
+
+#: marble_part.cpp:905
+#, fuzzy, kde-format
+#| msgctxt "Manage Bookmarks"
+#| msgid "&Manage Bookmarks"
+msgctxt "Manage Bookmarks"
+msgid "&Manage Bookmarks..."
+msgstr "Kö&nyvjelzők kezelése"
+
+#: marble_part.cpp:917
+#, fuzzy, kde-format
+#| msgctxt "Edit the map in an external application"
+#| msgid "&Edit Map"
+msgctxt "Edit the map in an external application"
+msgid "&Edit Map..."
+msgstr "Térkép sz&erkesztése"
+
+#: marble_part.cpp:925
+#, kde-format
+msgid "&Record Movie"
+msgstr ""
+
+#: marble_part.cpp:927
+#, kde-format
+msgid "Records a movie of the globe"
+msgstr ""
+
+#: marble_part.cpp:933
+#, kde-format
+msgid "&Stop Recording"
+msgstr ""
+
+#: marble_part.cpp:935
+#, kde-format
+msgid "Stop recording a movie of the globe"
+msgstr ""
+
+#: marble_part.cpp:1287
+#, kde-format
+msgctxt "Action for toggling"
+msgid "Show Position"
+msgstr "Pozíció megjelenítése"
+
+#: marble_part.cpp:1289
+#, kde-format
+msgctxt "Action for toggling"
+msgid "Show Date and Time"
+msgstr "Dátum és idő megjelenítése"
+
+#: marble_part.cpp:1291
+#, kde-format
+msgctxt "Action for toggling"
+msgid "Show Altitude"
+msgstr "Magasság megjelenítése"
+
+#: marble_part.cpp:1294
+#, kde-format
+msgctxt "Action for toggling"
+msgid "Show Tile Zoom Level"
+msgstr "Csempe nagyítási szint megjelenítése"
+
+#: marble_part.cpp:1296
+#, kde-format
+msgctxt "Action for toggling"
+msgid "Show Download Progress Bar"
+msgstr "Letöltési folyamatjelző megjelenítése"
+
+#: marble_part.cpp:1391
+#, kde-format
+msgid "View"
+msgstr "Nézet"
+
+#: marble_part.cpp:1402
+#, kde-format
+msgid "Navigation"
+msgstr "Navigálás"
+
+#: marble_part.cpp:1413
+#, kde-format
+msgid "Cache & Proxy"
+msgstr "Gyorsítótár és proxy"
+
+#: marble_part.cpp:1426
+#, kde-format
+msgid "Date & Time"
+msgstr "Dátum és idő"
+
+#: marble_part.cpp:1434
+#, kde-format
+msgid "Synchronization"
+msgstr "Szinkronizálás"
+
+#: marble_part.cpp:1447
+#, kde-format
+msgid "Routing"
+msgstr "Útválasztás"
+
+#: marble_part.cpp:1455
+#, kde-format
+msgid "Plugins"
+msgstr "Bővítmények"
+
+#. i18n: ectx: Menu (file)
+#: marble_part.rc:6 marbleui.rc:5
+#, kde-format
+msgid "&File"
+msgstr "&Fájl"
+
+#. i18n: ectx: Menu (edit)
+#: marble_part.rc:21 marbleui.rc:14
+#, kde-format
+msgid "&Edit"
+msgstr "S&zerkesztés"
+
+#. i18n: ectx: Menu (view)
+#: marble_part.rc:31 marbleui.rc:18
+#, kde-format
+msgid "&View"
+msgstr "&Nézet"
+
+#. i18n: ectx: Menu (infoboxes)
+#: marble_part.rc:36
+#, kde-format
+msgid "&Info Boxes"
+msgstr "&Információs dobozok"
+
+#. i18n: ectx: Menu (onlineservices)
+#: marble_part.rc:42
+#, kde-format
+msgid "&Online Services"
+msgstr "&Online szolgáltatások"
+
+#. i18n: ectx: Menu (settings)
+#: marble_part.rc:55 marbleui.rc:31
+#, kde-format
+msgid "&Settings"
+msgstr "&Beállítások"
+
+#. i18n: ectx: Menu (panels)
+#: marble_part.rc:59
+#, kde-format
+msgid "&Panels"
+msgstr "&Panelek"
+
+#. i18n: ectx: Menu (viewSize)
+#: marble_part.rc:65
+#, fuzzy, kde-format
+#| msgid "&View"
+msgid "&View Size"
+msgstr "&Nézet"
+
+#. i18n: ectx: Menu (bookmarks)
+#: marble_part.rc:73 marbleui.rc:29
+#, kde-format
+msgid "&Bookmarks"
+msgstr "&Könyvjelzők"
+
+#. i18n: ectx: ToolBar (mainToolBar)
+#: marble_part.rc:84 marbleui.rc:36
+#, kde-format
+msgid "Main Toolbar"
+msgstr "Fő eszköztár"
+
+#. i18n: ectx: ToolBar (pluginToolBar)
+#: marble_part.rc:97
+#, kde-format
+msgid "Edit Toolbar"
+msgstr "Eszköztár szerkesztése"
+
+#~ msgid "The graphics system that is used by Qt to render the graphics."
+#~ msgstr "A Qt által használt grafikus rendszer a grafikák renderelésére."
+
+#~ msgid "Native"
+#~ msgstr "Natív"
+
+#~ msgid "Native (X11)"
+#~ msgstr "Natív (X11)"
+
+#~ msgid "Native (Mac OS X Core Graphics)"
+#~ msgstr "Natív (Mac OS X Core Graphics)"
+
+#~ msgid ""
+#~ "You have decided to run Marble with a different graphics system.\n"
+#~ "For this change to become effective, Marble has to be restarted.\n"
+#~ "Please close the application and start Marble again."
+#~ msgstr ""
+#~ "Úgy döntött, hogy a Marble programot másik grafikai rendszerrel "
+#~ "futtatja.\n"
+#~ "Ennek a váltásnak akkor lesz hatása, ha a Marble programot újraindítja.\n"
+#~ "Kérjük zárja be az alkalmazást és indítsa újra a Marble programot!"
+
+#~ msgid "Graphics System Change"
+#~ msgstr "Grafikai rendszer váltása"
+
+#~ msgid "Night Sky"
+#~ msgstr "Éjjeli égbolt"
+
+#~ msgid ""
+#~ "<p>The <i>night sky</i>.</p><p>Displays the stars and constellations at "
+#~ "night.</p>"
+#~ msgstr ""
+#~ "<p>Az <i>éjjeli égbolt</i>.</p><p>Megjeleníti a csillagokat és a "
+#~ "csillagképeket éjjel.</p>"
+
+#~ msgid "Mountain"
+#~ msgstr "Hegység"
+
+#~ msgid "Volcano"
+#~ msgstr "Vulkán"
+
+#~ msgid "Geographic Pole"
+#~ msgstr "Földrajzi pólus"
+
+#~ msgid "Magnetic Pole"
+#~ msgstr "Mágneses pólus"
+
+#~ msgid "Airport"
+#~ msgstr "Repülőtér"
+
+#~ msgid "Shipwreck"
+#~ msgstr "Hajóroncs"
+
+#~ msgid "Astronomical Observatory"
+#~ msgstr "Csillagvizsgáló"
+
+#~ msgid ""
+#~ "<p>The moon.</p><p>The map is based on data from the Clementine Moon "
+#~ "mission (UVVIS Basemap Mosaic). Credits: NASA/SDIO, Courtesy <a href="
+#~ "\"http://astrogeology.usgs.gov\">USGS Astrogeology Research Program</a></"
+#~ "p>"
+#~ msgstr ""
+#~ "<p>A Hold.</p><p>A térkép a Clementine Hold küldetésből származó adaton "
+#~ "alapul (UVVIS Basemap Mosaic). Köszönet: NASA/SDIO, Courtesy <a href="
+#~ "\"http://astrogeology.usgs.gov\">USGS csillagászati kutatóprogram</a></p>"
+
+#~ msgid "Landing Sites"
+#~ msgstr "Leszállóhelyek"
+
+#~ msgid "Craters"
+#~ msgstr "Kráterek"
+
+#~ msgid "Maria"
+#~ msgstr "Maria"
+
+#~ msgid "Other features"
+#~ msgstr "Egyéb szolgáltatások"
+
+#~ msgid "Manned landing site"
+#~ msgstr "Emberi leszállóhely"
+
+#~ msgid "Robotic rover"
+#~ msgstr "Robotjármű"
+
+#~ msgid "Unmanned soft landing"
+#~ msgstr "Pilóta nélküli finom leszállás"
+
+#~ msgid "Unmanned hard landing"
+#~ msgstr "Pilóta nélküli kemény leszállás"
+
+#~ msgid "Crater, impact crater"
+#~ msgstr "Kráter, feltörő kráter"
+
+#~ msgid "Mons, mountain"
+#~ msgstr "Hegység"
+
+#~ msgid "Vallis, valley"
+#~ msgstr "Völgy"
+
+#~ msgid "Selenographic Pole"
+#~ msgstr "Szelenografikus pólus"
+
+#~ msgid "Plain Map"
+#~ msgstr "Egyszerű térkép"
+
+#~ msgid ""
+#~ "<p>A <i>plain map</i>.</p><p>It uses vector lines to mark coastlines and "
+#~ "country borders, etc...</p>"
+#~ msgstr ""
+#~ "<p>Egy <i>egyszerű térkép</i>.</p><p>Vektorvonalakat használ a "
+#~ "partvonalak és országhatárok, stb. jelölésére.</p>"
+
+#~ msgid "Urban Areas"
+#~ msgstr "Városi területek"
+
+#~ msgid "Boundaries"
+#~ msgstr "Határok"
+
+#~ msgid "Water Bodies"
+#~ msgstr "Vízfelületek"
+
+#~ msgid "Ice and Glaciers"
+#~ msgstr "Jég és gleccserek"
+
+#~ msgid "International"
+#~ msgstr "Nemzetközi"
+
+#~ msgid "State"
+#~ msgstr "Állam"
+
+#~ msgid "Disputed Areas"
+#~ msgstr "Vitatott területek"
+
+#~ msgid "Maritime Borders"
+#~ msgstr "Tengeri határok"
+
+#~ msgid "Lake"
+#~ msgstr "Tó"
+
+#~ msgid "Historic Lake"
+#~ msgstr "Történelmi tó"
+
+#~ msgid "River"
+#~ msgstr "Folyó"
+
+#~ msgid "Glaciers"
+#~ msgstr "Gleccserek"
+
+#~ msgid "Temperature (July)"
+#~ msgstr "Hőmérséklet (július)"
+
+#~ msgid "A map which shows the average temperature in July."
+#~ msgstr "Egy térkép, amely a júliusi átlaghőmérsékletet mutatja."
+
+#~ msgid "42&deg;C"
+#~ msgstr "42°C"
+
+#~ msgid "32&deg;C"
+#~ msgstr "32°C"
+
+#~ msgid "23&deg;C"
+#~ msgstr "23°C"
+
+#~ msgid "12&deg;C"
+#~ msgstr "12°C"
+
+#~ msgid "1&deg;C"
+#~ msgstr "1°C"
+
+#~ msgid "-10&deg;C"
+#~ msgstr "-10°C"
+
+#~ msgid "-21&deg;C"
+#~ msgstr "-21°C"
+
+#~ msgid "-32&deg;C"
+#~ msgstr "-32°C"
+
+#~ msgid "-41&deg;C"
+#~ msgstr "-41°C"
+
+#~ msgid "-69&deg;C"
+#~ msgstr "-69°C"
+
+#~ msgid "Earth at Night"
+#~ msgstr "A Föld éjszaka"
+
+#~ msgid ""
+#~ "This image of <i>Earth's city lights</i> was created with data from the "
+#~ "Defense Meteorological Satellite Program (DMSP) Operational Linescan "
+#~ "System (OLS)."
+#~ msgstr ""
+#~ "Ez a kép <i>a Föld éjjeli fényeiről</i> a Defense Meteorological "
+#~ "Satellite Program (DMSP) Operational Linescan System (OLS) rendszerének "
+#~ "adataiból készült."
+
+#~ msgid "Surface"
+#~ msgstr "Felület"
+
+#~ msgid "Light terrain"
+#~ msgstr "Világos terep"
+
+#~ msgid "Dark terrain"
+#~ msgstr "Sötét terep"
+
+#~ msgid "Water"
+#~ msgstr "Víz"
+
+#~ msgid "Atlas"
+#~ msgstr "Atlasz"
+
+#~ msgid ""
+#~ "<p>A <i>classic topographic map</i>.</p><p>It uses vector lines to mark "
+#~ "coastlines, country borders etc. and bitmap graphics to create the height "
+#~ "relief.</p>"
+#~ msgstr ""
+#~ "<p>Egy <i>klasszikus topográfiai térkép</i>.</p><p>Vektorvonalakat "
+#~ "használ a partvonalak, országhatárok, stb. jelölésére és bittérképes "
+#~ "grafikát magasság domborzat létrehozásához.</p>"
+
+#~ msgid "Relief"
+#~ msgstr "Domborzat"
+
+#~ msgid "Elevation"
+#~ msgstr "Magasság"
+
+#~ msgid "7000 m"
+#~ msgstr "7000 m"
+
+#~ msgid "5000 m"
+#~ msgstr "5000 m"
+
+#~ msgid "3500 m"
+#~ msgstr "3500 m"
+
+#~ msgid "2000 m"
+#~ msgstr "2000 m"
+
+#~ msgid "1000 m"
+#~ msgstr "1000 m"
+
+#~ msgid "500 m"
+#~ msgstr "500 m"
+
+#~ msgid "200 m"
+#~ msgstr "200 m"
+
+#~ msgid "50 m"
+#~ msgstr "50 m"
+
+#~ msgid "0 m"
+#~ msgstr "0 m"
+
+#~ msgid "0 m (Water)"
+#~ msgstr "0 m (Water)"
+
+#~ msgid "-50 m"
+#~ msgstr "-50 m"
+
+#~ msgid "-200 m"
+#~ msgstr "-200 m"
+
+#~ msgid "-2000 m"
+#~ msgstr "-2000 m"
+
+#~ msgid "-4000 m"
+#~ msgstr "-4000 m"
+
+#~ msgid "-6500 m"
+#~ msgstr "-6500 m"
+
+#~ msgid "-11000 m"
+#~ msgstr "-11000 m"
+
+#~ msgid "Temperature (December)"
+#~ msgstr "Hőmérséklet (december)"
+
+#~ msgid "A map which shows the average temperature in December."
+#~ msgstr "Egy térkép, amely a decemberi átlaghőmérsékletet mutatja."
+
+#~ msgid ""
+#~ "<p>A <i>global roadmap</i> created by the OpenStreetMap (OSM) project.</"
+#~ "p><p>OSM is an open community which creates free editable maps. The OSM "
+#~ "data was rendered using Mapnik.</p>"
+#~ msgstr ""
+#~ "<p>A <i>globális úttérképet</i> az OpenStreetMap (OSM) projekt készítette."
+#~ "</p><p>Az OSM egy nyílt közösség, amely szabadon szerkeszthető térképeket "
+#~ "készít. Az OSM adat a Mapnik használatával jött létre.</p>"
+
+#, fuzzy
+#~| msgid "Map Title:"
+#~ msgid "OSM Bitmap Tiles"
+#~ msgstr "Térkép címe:"
+
+#, fuzzy
+#~| msgid "The Earth"
+#~ msgid "Explore the Earth"
+#~ msgstr "A Föld"
+
+#~ msgid "Hillshading"
+#~ msgstr "Hegyek árnyalása"
+
+#~ msgid "Transportation"
+#~ msgstr "Szállítás"
+
+#~ msgid "Areas"
+#~ msgstr "Területek"
+
+#~ msgid "Education"
+#~ msgstr "Oktatás"
+
+#~ msgid "Financial"
+#~ msgstr "Pénzügyi"
+
+#~ msgid "Healthcare"
+#~ msgstr "Egészségügy"
+
+#~ msgid "Entertainment"
+#~ msgstr "Szórakozás"
+
+#~ msgid "Public Buildings"
+#~ msgstr "Nyilvános épületek"
+
+#~ msgid "Accommodation"
+#~ msgstr "Szállás"
+
+#~ msgid "Emergency"
+#~ msgstr "Vészhelyzet"
+
+#~ msgid "Historic"
+#~ msgstr "Történelmi"
+
+#~ msgid "Food and Drinks"
+#~ msgstr "Étel és ital"
+
+#~ msgid "Shop"
+#~ msgstr "Vásárlás"
+
+#~ msgid "Motorway"
+#~ msgstr "Autópálya"
+
+#~ msgid "Trunk road"
+#~ msgstr "Fő közlekedési út"
+
+#~ msgid "Primary road"
+#~ msgstr "Elsődleges út"
+
+#~ msgid "Secondary road"
+#~ msgstr "Másodlagos út"
+
+#~ msgid "Unclassified road"
+#~ msgstr "Osztályozatlan út"
+
+#~ msgid "Unsurfaced road"
+#~ msgstr "Burkolatlan út"
+
+#~ msgid "Track"
+#~ msgstr "Követés"
+
+#~ msgid "Byway"
+#~ msgstr "Mellékút"
+
+#~ msgid "Bridleway"
+#~ msgstr "Lovaglóút"
+
+#~ msgid "Cycleway"
+#~ msgstr "Bicikliút"
+
+#~ msgid "Footway"
+#~ msgstr "Gyalogút"
+
+#~ msgid "Railway station"
+#~ msgstr "Vasútállomás"
+
+#~ msgid "Railway"
+#~ msgstr "Vasút"
+
+#~ msgid "Subway"
+#~ msgstr "Metró"
+
+#~ msgid "Lightrail, tram"
+#~ msgstr "Villamos"
+
+#~ msgid "Airport runway, taxiway"
+#~ msgstr "Repülőtéri kifutópálya, taxiút"
+
+#~ msgid "Airport apron, terminal"
+#~ msgstr "Repülőtéri forgalmi előtér, terminál"
+
+#~ msgid "Administrative boundary"
+#~ msgstr "Közigazgatási határ"
+
+#~ msgid "Bridge"
+#~ msgstr "Híd"
+
+#~ msgid "Tunnel"
+#~ msgstr "Alagút"
+
+#~ msgid "Forest"
+#~ msgstr "Erdő"
+
+#~ msgid "Wood"
+#~ msgstr "Fa"
+
+#~ msgid "Golf course"
+#~ msgstr "Golfpálya"
+
+#~ msgid "Park"
+#~ msgstr "Park"
+
+#~ msgid "Residential Area"
+#~ msgstr "Lakónegyed"
+
+#~ msgid "Tourist attraction"
+#~ msgstr "Turista látványosság"
+
+#~ msgid "Common, meadow"
+#~ msgstr "Közlegelő, mező"
+
+#~ msgid "Retail area"
+#~ msgstr "Kiskereskedelmi terület"
+
+#~ msgid "Industrial Area"
+#~ msgstr "Ipari terület"
+
+#~ msgid "Commercial Area"
+#~ msgstr "Kereskedelmi terület"
+
+#~ msgid "Heathland"
+#~ msgstr "Fenyér"
+
+#~ msgid "Lake, reservoir"
+#~ msgstr "Tó, víztároló"
+
+#~ msgid "Farm"
+#~ msgstr "Farm"
+
+#~ msgid "Brownfield site"
+#~ msgstr "Barnamező"
+
+#~ msgid "Cemetery"
+#~ msgstr "Temető"
+
+#~ msgid "Allotments"
+#~ msgstr "Veteményeskertek"
+
+#~ msgid "Sports pitch"
+#~ msgstr "Sportpálya"
+
+#~ msgid "Sports centre"
+#~ msgstr "Sportközpont"
+
+#~ msgid "Nature reserve"
+#~ msgstr "Természetvédelmi terület"
+
+#~ msgid "Military area"
+#~ msgstr "Katonai terület"
+
+#~ msgid "School, university"
+#~ msgstr "Iskola, egyetem"
+
+#~ msgid "Significant Building"
+#~ msgstr "Fontos épület"
+
+#~ msgid "Summit, peak"
+#~ msgstr "Magaslat, hegycsúcs"
+
+#~ msgid "College"
+#~ msgstr "Főiskola"
+
+#~ msgid "Kindergarten"
+#~ msgstr "Óvoda"
+
+#~ msgid "Library"
+#~ msgstr "Könyvtár"
+
+#~ msgid "School"
+#~ msgstr "Iskolai"
+
+#~ msgid "University"
+#~ msgstr "Egyetem"
+
+#~ msgid "ATM"
+#~ msgstr "ATM"
+
+#~ msgid "Bank"
+#~ msgstr "Bank"
+
+#~ msgid "Bureau de change"
+#~ msgstr "Pénzváltó"
+
+#~ msgid "Dentist"
+#~ msgstr "Fogorvos"
+
+#~ msgid "Doctors"
+#~ msgstr "Orvosok"
+
+#~ msgid "Pharmacy"
+#~ msgstr "Gyógyszertár"
+
+#~ msgid "Veterinary"
+#~ msgstr "Állatorvos"
+
+#~ msgid "Cinema"
+#~ msgstr "Mozi"
+
+#~ msgid "Theatre"
+#~ msgstr "Színház"
+
+#~ msgid "Court"
+#~ msgstr "Bíróság"
+
+#~ msgid "Embassy"
+#~ msgstr "Nagykövetség"
+
+#~ msgid "Church"
+#~ msgstr "Templom"
+
+#~ msgid "Playground"
+#~ msgstr "Játszótér"
+
+#~ msgid "Place of worship"
+#~ msgstr "Kegyhely"
+
+#~ msgid "Post office"
+#~ msgstr "Postahivatal"
+
+#~ msgid "Public building"
+#~ msgstr "Nyilvános épület"
+
+#~ msgid "Toilets"
+#~ msgstr "Illemhelyek"
+
+#~ msgid "Hotel"
+#~ msgstr "Hotel"
+
+#~ msgid "Motel"
+#~ msgstr "Motel"
+
+#~ msgid "Hospital"
+#~ msgstr "Kórház"
+
+#~ msgid "Fire station"
+#~ msgstr "Tűzoltóállomás"
+
+#~ msgid "Monument"
+#~ msgstr "Emlékmű"
+
+#~ msgid "Ruins"
+#~ msgstr "Romok"
+
+#~ msgid "Bar"
+#~ msgstr "Bár"
+
+#~ msgid "Biergarten"
+#~ msgstr "Sörkert"
+
+#~ msgid "Cafe"
+#~ msgstr "Kávézó"
+
+#~ msgid "Drinking water"
+#~ msgstr "Ivóvíz"
+
+#~ msgid "Fast Food"
+#~ msgstr "Gyorsétterem"
+
+#~ msgid "Ice Cream"
+#~ msgstr "Jégkrém"
+
+#~ msgid "Pub"
+#~ msgstr "Pub"
+
+#~ msgid "Restaurant"
+#~ msgstr "Étterem"
+
+#~ msgid "Alcohol"
+#~ msgstr "Alkohol"
+
+#~ msgid "Bakery"
+#~ msgstr "Pékség"
+
+#~ msgid "Books"
+#~ msgstr "Könyvek"
+
+#~ msgid "Car"
+#~ msgstr "Autó"
+
+#~ msgid "Clothes"
+#~ msgstr "Ruházat"
+
+#~ msgid "Convenience"
+#~ msgstr "Kényelem"
+
+#~ msgid "Gas"
+#~ msgstr "Gáz"
+
+#~ msgid "Gift"
+#~ msgstr "Ajándék"
+
+#~ msgid "Precipitation (July)"
+#~ msgstr "Csapadék (július)"
+
+#~ msgid ""
+#~ "A map which shows the average precipitation (rain/snow/hail/etc) in July."
+#~ msgstr ""
+#~ "Egy térkép, amely a júliusi átlagos csapadékot (eső/hó/jég/stb.) mutatja."
+
+#~ msgid "Precipitation"
+#~ msgstr "Csapadék"
+
+#~ msgid "0 mm"
+#~ msgstr "0 mm"
+
+#~ msgid "10 mm"
+#~ msgstr "10 mm"
+
+#~ msgid "40 mm"
+#~ msgstr "40 mm"
+
+#~ msgid "63 mm"
+#~ msgstr "63 mm"
+
+#~ msgid "89 mm"
+#~ msgstr "89 mm"
+
+#~ msgid "127 mm"
+#~ msgstr "127 mm"
+
+#~ msgid "256 mm"
+#~ msgstr "256 mm"
+
+#~ msgid "512 mm"
+#~ msgstr "512 mm"
+
+#~ msgid "1024 mm or more"
+#~ msgstr "1024 mm vagy több"
+
+#~ msgid "Satellite View"
+#~ msgstr "Műhold nézet"
+
+#~ msgid ""
+#~ "<p>Earth as seen from Space.</p><p>The map is based on NASA's beautiful "
+#~ "\"Blue Marble Next Generation\" pictures. Credits: NASA's Earth "
+#~ "Observatory</p>"
+#~ msgstr ""
+#~ "<p>A Föld, ahogy az űrből látható.</p><p>A térkép a NASA gyönyörű „Blue "
+#~ "Marble Next Generation” képein alapul. Köszönet: NASA Föld "
+#~ "Obszervatórium</p>"
+
+#~ msgid "Ice"
+#~ msgstr "Jég"
+
+#~ msgid "Vegetation"
+#~ msgstr "Növényzet"
+
+#~ msgid "Desert"
+#~ msgstr "Sivatag"
+
+#, fuzzy
+#~| msgid "Historical Maps"
+#~ msgid "Political Map"
+#~ msgstr "Történelmi térképek"
+
+#, fuzzy
+#~| msgid "River"
+#~ msgid "Rivers"
+#~ msgstr "Folyó"
+
+#~ msgid "Precipitation (December)"
+#~ msgstr "Csapadék (december)"
+
+#~ msgid "A map which shows the average precipitation in December."
+#~ msgstr "Egy térkép, amely a decemberi átlagos csapadékot mutatja."
+
+#~ msgid "SRTM Data"
+#~ msgstr "SRTM adat"
+
+#, fuzzy
+#~| msgid "Lines and Orientation"
+#~ msgid "Texts and illustrations"
+#~ msgstr "Vonalak és tájolás"
+
+#, fuzzy
+#~| msgid "Preference:"
+#~ msgid "Reference lines"
+#~ msgstr "Beállítás:"
+
+#~ msgid "Accurate Coastline"
+#~ msgstr "Pontos partvonal"
+
+#~ msgid "Historical Map 1689"
+#~ msgstr "1689-es történelmi térkép"
+
+#~ msgid ""
+#~ "<i>Historical world map</i> from the year 1689 created by G. van Schagen "
+#~ "in Amsterdam."
+#~ msgstr ""
+#~ "<i>Történelmi világtérkép</i> 1689-ből. Készítette G. van Schagen "
+#~ "Amszterdamban."
+
+#~ msgid "Town"
+#~ msgstr "Város"
+
+#~ msgid "OpenStreetMap"
+#~ msgstr "OpenStreetMap"
+
+#~ msgid "Clouds"
+#~ msgstr "Felhők"
+
+#~ msgid ""
+#~ "A Real Time Cloud Map that gets updated every 3 hours. It uses GOES, "
+#~ "METEOSAT, and GMS satellite imagery downloaded from the Geostationary "
+#~ "Satellite Imagery page at Dundee University.  Credits: Hari Nair, Xplanet "
+#~ "Project"
+#~ msgstr ""
+#~ "3 óránként frissülő valós idejű felhőtérkép. A GOES, a METEOSAT és a GMS "
+#~ "műhold képanyagát használja, amelyet a Dundee egyetem Geostacionárius "
+#~ "műholdképek oldaláról tölt le. Köszönet: Hari Nair, Xplanet projekt."
+
+#~ msgid "Marble: Legend"
+#~ msgstr "Marble: Jelmagyarázat"
+
+#~ msgid "<a href="
+#~ msgstr "<a href="
+
+#~ msgid "Population:"
+#~ msgstr "Népesség:"
+
+#~ msgid "&gt; 1&nbsp;000&nbsp;000"
+#~ msgstr "&gt; 1&nbsp;000&nbsp;000"
+
+#~ msgid "&ge; 100&nbsp;000"
+#~ msgstr "&ge; 100&nbsp;000"
+
+#~ msgid "&ge; 10&nbsp;000"
+#~ msgstr "&ge; 10&nbsp;000"
+
+#~ msgid "&lt; 10&nbsp;000"
+#~ msgstr "&lt; 10&nbsp;000"
+
+#~ msgid "<br/>"
+#~ msgstr "<br/>"
+
+#~ msgid "Capitals:"
+#~ msgstr "Fővárosok:"
+
+#~ msgid "Red:&nbsp;Nation"
+#~ msgstr "Piros:&nbsp;Nemzet"
+
+#~ msgid "Orange:&nbsp;State"
+#~ msgstr "Narancssárga:&nbsp;Állam"
+
+#~ msgid "Yellow:&nbsp;County"
+#~ msgstr "Sárga:&nbsp;Megye"
+
+#~ msgid "White:&nbsp;None"
+#~ msgstr "Fehér:&nbsp;Semmi"
+
+#~ msgid "<!-- ##customLegendEntries:all## -->"
+#~ msgstr "<!-- ##customLegendEntries:all## -->"
+
+#, fuzzy
+#~| msgid "Marble"
+#~ msgid "Marble - Game"
+#~ msgstr "Marble"
+
+#~ msgid "The Earth"
+#~ msgstr "A Föld"
+
+#~ msgid "The Marble widget displays a virtual globe."
+#~ msgstr "A Marble felületi elem egy virtuális földgömböt jelenít meg."
+
+#~ msgid "Navigation Control"
+#~ msgstr "Navigációs vezérlőelem"
+
+#~ msgid "Use this control to navigate."
+#~ msgstr "Használja ezt a vezérlőelemet a navigációhoz."
+
+#~ msgid "Show places"
+#~ msgstr "Helyek megjelenítése"
+
+#~ msgid "Show relief"
+#~ msgstr "Domborzat megjelenítése"
+
+#~ msgid "Show scale bar"
+#~ msgstr "Méretezősáv megjelenítése"
+
+#~ msgid "Show borders"
+#~ msgstr "Szegélyek megjelenítése"
+
+#~ msgid "Show ice / snow"
+#~ msgstr "Jég / hó megjelenítése"
+
+#~ msgid "Show compass"
+#~ msgstr "Iránytű megjelenítése"
+
+#~ msgid "Show grid"
+#~ msgstr "Rács megjelenítése"
+
+#~ msgid "Show rivers / lakes"
+#~ msgstr "Folyók / tavak megjelenítése"
+
+#~ msgid "Show elevation model"
+#~ msgstr "Magasságmodell megjelenítése"
+
+#~ msgid "Coordinates: "
+#~ msgstr "Koordináták: "
+
+#~ msgid "URL:"
+#~ msgstr "URL:"
+
+#~ msgid "Name:"
+#~ msgstr "Név:"
+
+#~ msgid "Bookmark Manager - Marble"
+#~ msgstr "Könyvjelzőkezelő - Marble"
+
+#~ msgid "Import Bookmarks..."
+#~ msgstr "Könyvjelzők importálása…"
+
+#~ msgid "Export Bookmarks..."
+#~ msgstr "Könyvjelzők exportálása…"
+
+#~ msgid "Folders"
+#~ msgstr "Mappák"
+
+#~ msgid "New"
+#~ msgstr "Új"
+
+#~ msgid "Rename"
+#~ msgstr "Átnevezés"
+
+#~ msgid "Delete"
+#~ msgstr "Törlés"
+
+#~ msgid "Bookmarks"
+#~ msgstr "Könyvjelzők"
+
+#~ msgid "Edit"
+#~ msgstr "Szerkesztés"
+
+#~ msgid "Cloud Routes"
+#~ msgstr "Felhőutak"
+
+#~ msgid "No route available."
+#~ msgstr "Nincs elérhető út."
+
+#~ msgid "Current Location"
+#~ msgstr "Jelenlegi hely"
+
+#~ msgid "Position Tracking"
+#~ msgstr "Pozíciókövetés"
+
+#~ msgid "Disabled"
+#~ msgstr "Letiltva"
+
+#~ msgid "Show Track"
+#~ msgstr "Nyomvonal megjelenítése"
+
+#~ msgid "Clear Track"
+#~ msgstr "Nyomvonal törlése"
+
+#~ msgid "..."
+#~ msgstr "…"
+
+#~ msgid "No position available."
+#~ msgstr "Nincs elérhető pozíció."
+
+#~ msgctxt "Select the method to use to recenter your GPS location on map."
+#~ msgid "Select the method to use to re-center your GPS location on map."
+#~ msgstr ""
+#~ "Válassza ki a használni kívánt módszert, amellyel újra középre helyezheti "
+#~ "a GPS helyét a térképen."
+
+#~ msgid "Map Adjustment"
+#~ msgstr "Térkép elrendezés"
+
+#~ msgctxt "Disable Auto Recenter"
+#~ msgid "Disabled"
+#~ msgstr "Letiltva"
+
+#~ msgctxt "Always keep gps location at the center of the map"
+#~ msgid "Keep at Center"
+#~ msgstr "Tartsa középen"
+
+#~ msgctxt "Auto center when required"
+#~ msgid "When required"
+#~ msgstr "Ha szükséges"
+
+#~ msgctxt "Auto Zoom to appropriate zoom level"
+#~ msgid "Auto Zoom to appropriate zoom level"
+#~ msgstr "Automatikus nagyítás a megfelelő nagyítási szintre"
+
+#~ msgid "Auto Zoom"
+#~ msgstr "Automatikus nagyítás"
+
+#~ msgid "Data Migration"
+#~ msgstr "Adatköltöztetés"
+
+#~ msgid ""
+#~ "Marble has found map data stored by a previous Marble version.<br/>Should "
+#~ "this data get converted so that it can be used by the current version?"
+#~ msgstr ""
+#~ "A Marble egy előző verziójú Marble által eltárolt térképadatot talált.<br/"
+#~ "> Konvertálja át ezt az adatot, hogy a jelenlegi verzió használni tudja?"
+
+#~ msgid "Edit Bookmark - Marble"
+#~ msgstr "Könyvjelző szerkesztése - Marble"
+
+#~ msgid "&Description"
+#~ msgstr "&Leírás"
+
+#, fuzzy
+#~| msgid ""
+#~| "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/"
+#~| "TR/REC-html40/strict.dtd\">\n"
+#~| "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~| "css\">\n"
+#~| "p, li { white-space: pre-wrap; }\n"
+#~| "</style></head><body style=\" font-family:'Ubuntu'; font-size:9pt; font-"
+#~| "weight:400; font-style:normal;\">\n"
+#~| "<table border=\"0\" style=\"-qt-table-type: root; margin-top:4px; margin-"
+#~| "bottom:4px; margin-left:4px; margin-right:4px;\">\n"
+#~| "<tr>\n"
+#~| "<td style=\"border: none;\">\n"
+#~| "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~| "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~| "\"></p>\n"
+#~| "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~| "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~| "\"></p></td></tr></table></body></html>"
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<table border=\"0\" style=\"-qt-table-type: root; margin-top:4px; margin-"
+#~ "bottom:4px; margin-left:4px; margin-right:4px;\">\n"
+#~ "<tr>\n"
+#~ "<td style=\"border: none;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-family:'Ubuntu';\"><br /></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-family:'Ubuntu';\"><br /></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-family:'Ubuntu';\"><br /></p></td></tr></table></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Ubuntu'; font-size:9pt; font-"
+#~ "weight:400; font-style:normal;\">\n"
+#~ "<table border=\"0\" style=\"-qt-table-type: root; margin-top:4px; margin-"
+#~ "bottom:4px; margin-left:4px; margin-right:4px;\">\n"
+#~ "<tr>\n"
+#~ "<td style=\"border: none;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p></td></tr></table></body></html>"
+
+#~ msgid "&Folder"
+#~ msgstr "&Mappa"
+
+#~ msgid "&Add Folder"
+#~ msgstr "Mappa &hozzáadása"
+
+#, fuzzy
+#~| msgid "Edit Toolbar"
+#~ msgid "Edit placemark"
+#~ msgstr "Eszköztár szerkesztése"
+
+#~ msgid "Description"
+#~ msgstr "Leírás"
+
+#, fuzzy
+#~| msgid "Labels"
+#~ msgid "Label"
+#~ msgstr "Címkék"
+
+#, fuzzy
+#~| msgid "C&olors"
+#~ msgid "Color:"
+#~ msgstr "S&zínek"
+
+#, fuzzy
+#~| msgid "Show places"
+#~ msgid "Show placemark"
+#~ msgstr "Helyek megjelenítése"
+
+#~ msgid "Elevation:"
+#~ msgstr "Magasság:"
+
+#, fuzzy
+#~| msgid "0 m"
+#~ msgid " m"
+#~ msgstr "0 m"
+
+#~ msgid "External Map Editor Selection"
+#~ msgstr "Külső térképszerkesztő kiválasztás"
+
+#~ msgid "External Map Editor"
+#~ msgstr "Külső térképszerkesztő"
+
+#, fuzzy
+#~| msgid "Web browser (Potlatch)"
+#~ msgid "Web browser (iD)"
+#~ msgstr "Webböngésző (Potlatch)"
+
+#~ msgid "Merkaartor"
+#~ msgstr "Merkaartor"
+
+#~ msgid "JOSM"
+#~ msgstr "JOSM"
+
+#~ msgid "Make my selection the default map editor"
+#~ msgstr "A kiválasztott legyen az alapértelmezett térképszerkesztő"
+
+#~ msgid "Editor Details"
+#~ msgstr "Szerkesztő részletek"
+
+#~ msgid "Editor Preview"
+#~ msgstr "Szerkesztő előnézet"
+
+#, fuzzy
+#~| msgid ""
+#~| "Potlatch is an OpenStreetMap editor for quick editing tasks and "
+#~| "beginners. It requires a web browser with flash support."
+#~ msgid ""
+#~ "iD is an OpenStreetMap editor for quick editing tasks and beginners. It "
+#~ "requires a web browser."
+#~ msgstr ""
+#~ "A Potlatch egy OpenStreetMap szerkesztő gyors szerkesztési feladatokhoz "
+#~ "és kezdőknek. Szükséges hozzá egy webböngésző flash támogatással."
+
+#~ msgid "File View"
+#~ msgstr "Fájlnézet"
+
+#~ msgid "&Save"
+#~ msgstr "&Mentés"
+
+#~ msgid "&Close"
+#~ msgstr "&Bezárás"
+
+#~ msgid "10"
+#~ msgstr "10"
+
+#~ msgid "toolBar"
+#~ msgstr "eszköztár"
+
+#, fuzzy
+#~| msgid "C&olors"
+#~ msgid "Color"
+#~ msgstr "S&zínek"
+
+#~ msgid "Go To..."
+#~ msgstr "Ugrás…"
+
+#~ msgid ""
+#~ "Enter a search term and press Enter. <a href=\"http://userbase.kde.org/"
+#~ "Marble/Search\">Details...</a>"
+#~ msgstr ""
+#~ "Adjon meg egy keresési kifejezést és nyomja meg az Entert. <a href="
+#~ "\"http://userbase.kde.org/Marble/Search\">Részletek…</a>"
+
+#~ msgid "Browse"
+#~ msgstr "Tallózás"
+
+#~ msgid "Search"
+#~ msgstr "Keresés"
+
+#~ msgid "Select a geographic region"
+#~ msgstr "Válasszon egy földrajzi régiót"
+
+#~ msgid "Northern Latitude"
+#~ msgstr "Északi szélesség"
+
+#~ msgid "°"
+#~ msgstr "°"
+
+#~ msgid "&N"
+#~ msgstr "&N"
+
+#~ msgid "Western Longitude"
+#~ msgstr "Nyugati hosszúság"
+
+#~ msgid "&W"
+#~ msgstr "&W"
+
+#~ msgid "Eastern Longitude"
+#~ msgstr "Keleti hosszúság"
+
+#~ msgid "&E"
+#~ msgstr "&E"
+
+#~ msgid "Southern Latitude"
+#~ msgstr "Déli szélesség"
+
+#~ msgid "&S"
+#~ msgstr "&S"
+
+#~ msgid "′"
+#~ msgstr "′"
+
+#~ msgid "″"
+#~ msgstr "″"
+
+#~ msgid "Legend"
+#~ msgstr "Jelmagyarázat"
+
+#~ msgid "about:blank"
+#~ msgstr "about:blank"
+
+#~ msgid "Marble - Install Maps"
+#~ msgstr "Marble - Térképek telepítése"
+
+#~ msgid "Map View"
+#~ msgstr "Térképnézet"
+
+#~ msgid "&Projection"
+#~ msgstr "&Projekció"
+
+#~ msgid "Globe"
+#~ msgstr "Földgömb"
+
+#~ msgid "Flat Map"
+#~ msgstr "Sima térkép"
+
+#~ msgid "Mercator"
+#~ msgstr "Mercator"
+
+#, fuzzy
+#~| msgid "Selenographic Pole"
+#~ msgid "Stereographic"
+#~ msgstr "Szelenografikus pólus"
+
+#~ msgid "&Celestial Body"
+#~ msgstr "É&gitest"
+
+#~ msgid "&Theme"
+#~ msgstr "&Téma"
+
+#~ msgid "Here you can choose the preferred map view from different topics."
+#~ msgstr ""
+#~ "Itt több különböző témakörből választhatja ki az előnyben részesített "
+#~ "térképet."
+
+#~ msgid "Marble Map Theme Creation Wizard"
+#~ msgstr "Marble térképtéma létrehozás varázsló"
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">Welcome to the Map Creation Wizard!</span></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">We will guide you "
+#~ "through the process of creating a map theme for Marble. In the end you "
+#~ "will have your own map that you can view in Marble.</p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Please choose the "
+#~ "source that you want to use for the data of your map theme:</p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:12px; margin-bottom:12px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">Üdvözli a térképlétrehozás varázsló!</span></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Végig fogjuk vezetni a "
+#~ "térképtéma létrehozásának folyamatában a Marble programhoz. A végén lesz "
+#~ "egy saját térképe, amelyet megtekinthet a Marble programban.</p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Kérjük válassza ki a "
+#~ "forrást, amelyet használni szeretne az adatokhoz a térképtémánál:</p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:12px; margin-bottom:12px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p></body></html>"
+
+#~ msgid ""
+#~ "Connects to a server on the Internet. The map data is queried via the WMS "
+#~ "protocol."
+#~ msgstr ""
+#~ "Egy internetes kiszolgálóhoz csatlakozik. A térképadat WMS protokollon "
+#~ "keresztül kerül lekérésre."
+
+#~ msgid "Web Map Service (WMS)"
+#~ msgstr "Webtérkép szolgáltatás (WMS)"
+
+#~ msgid ""
+#~ "You need to provide a bitmap image of a world map that is stored on disk."
+#~ msgstr ""
+#~ "Gondoskodnia kell egy világtérkép bitképről, amely a lemezen van tárolva."
+
+#~ msgid "A single image showing the whole world"
+#~ msgstr "Egyetlen kép, amely az egész világot mutatja"
+
+#~ msgid ""
+#~ "Connects to a server on the Internet. The map data is queried via a "
+#~ "static URL."
+#~ msgstr ""
+#~ "Egy internetes kiszolgálóhoz csatlakozik. A térképadat statikus URL-en "
+#~ "keresztül kerül lekérésre."
+
+#~ msgid "Online map providing indexed tiles (e.g. Open Street Map)"
+#~ msgstr "Online térkép által indexelt csempék (például Open Street Map)"
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">WMS Server</span></p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Please choose a <a href="
+#~ "\"http://en.wikipedia.org/wiki/Web_Map_Service\"><span style=\" text-"
+#~ "decoration: underline; color:#0057ae;\">WMS</span></a> server or enter a "
+#~ "custom server URL.</p></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">WMS kiszolgáló</span></p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Kérjük válasszon egy <a "
+#~ "href=\"http://en.wikipedia.org/wiki/Web_Map_Service\"><span style=\" text-"
+#~ "decoration: underline; color:#0057ae;\">WMS</span></a> kiszolgálót vagy "
+#~ "adjon meg egy egyéni kiszolgáló URL-t.</p></body></html>"
+
+#~ msgid "WMS Server:"
+#~ msgstr "WMS kiszolgáló:"
+
+#~ msgid "Custom"
+#~ msgstr "Egyéni"
+
+#~ msgid "http://"
+#~ msgstr "http://"
+
+#~ msgid "Available Maps:"
+#~ msgstr "Elérhető térképek:"
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">World Map Bitmap Image</span></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-weight:600;\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Please choose the "
+#~ "location of a world map that is stored in a single image file (JPG, PNG, "
+#~ "etc.). It needs to be provided in <a href=\"http://en.wikipedia.org/wiki/"
+#~ "Equirectangular_projection\"><span style=\" text-decoration: underline; "
+#~ "color:#0057ae;\">Equirectangular projection</span></a>, so the shape "
+#~ "should look like this (size ratio: 2:1):</p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><img src=\":/data/svg/"
+#~ "worldmap.svg\" width=\"150\" /></p></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">Világtérkép bitkép</span></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-weight:600;\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Kérjük válassza ki a "
+#~ "világtérkép helyét, amely egyszerű képfájlban van tárolva (JPG, PNG, "
+#~ "stb.). Szükséges, hogy <a href=\"http://en.wikipedia.org/wiki/"
+#~ "Equirectangular_projection\"><span style=\" text-decoration: underline; "
+#~ "color:#0057ae;\">Ekvirektanguláris vetületű</span></a> legyen, ezért az "
+#~ "alakzatoknak így kell kinéznie (méretarány: 2:1):</p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><img src=\":/data/svg/"
+#~ "worldmap.svg\" width=\"150\" /></p></body></html>"
+
+#~ msgid "Source Image:"
+#~ msgstr "Forráskép:"
+
+#~ msgid "URL Scheme:"
+#~ msgstr "URL séma:"
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Bitstream Vera Sans'; font-"
+#~ "size:9pt; font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif'; font-weight:600;\">General Information</span></p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif';\">Please specify a title, a name and an icon for "
+#~ "your new map. Add a description to let users know what your map is about. "
+#~ "</span></p></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Bitstream Vera Sans'; font-"
+#~ "size:9pt; font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif'; font-weight:600;\">Általános információk</span></p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif';\">Kérjük adja meg az új térkép címét, nevét és egy "
+#~ "ikont. Adjon hozzá leírást, hogy a felhasználók tudják, hogy miről szól a "
+#~ "térképe. </span></p></body></html>"
+
+#~ msgid "Map Title:"
+#~ msgstr "Térkép címe:"
+
+#~ msgid "A short concise name for your map theme."
+#~ msgstr "Egy rövid, tömör név a térképtémájának."
+
+#~ msgid "Map Name:"
+#~ msgstr "Térkép neve:"
+
+#~ msgid "The lowercase map theme id."
+#~ msgstr "A kisbetűs térképtéma azonosító."
+
+#~ msgid "The folder name of your new theme."
+#~ msgstr "Az új téma mappájának neve."
+
+#~ msgid "Description:"
+#~ msgstr "Leírás:"
+
+#~ msgid ""
+#~ "A short description of your map theme. Here you can provide information "
+#~ "about the purpose, origin, copyright and license of the data used in your "
+#~ "map theme."
+#~ msgstr ""
+#~ "A térképtémájának rövid leírása. Itt információkat szolgáltathat a "
+#~ "céljáról, a származásáról, a jogállásáról és a térképtémához felhasznált "
+#~ "adatok licencéről."
+
+#~ msgid "It will appear in a tool tip and may contain HTML formatting."
+#~ msgstr "Meg fog jelenni egy buboréksúgóban és tartalmazhat HTML formázást."
+
+#~ msgid "Preview Image:"
+#~ msgstr "Előnézeti kép:"
+
+#~ msgid "preview image"
+#~ msgstr "előnézeti kép"
+
+#~ msgid "Change..."
+#~ msgstr "Módosítás…"
+
+#~ msgid "Legend Image:"
+#~ msgstr "Jelmagyarázat kép:"
+
+#~ msgid "Places of Interest"
+#~ msgstr "Érdekes helyek"
+
+#~ msgid "Populated Places"
+#~ msgstr "Lakott területek"
+
+#~ msgid "Terrain"
+#~ msgstr "Terep"
+
+#~ msgid "Coordinate Grid"
+#~ msgstr "Koordinátarács"
+
+#~ msgid "Border Lines"
+#~ msgstr "Határvonalak"
+
+#~ msgid "Map name goes here."
+#~ msgstr "A térkép neve jön ide."
+
+#~ msgid "Map Theme:"
+#~ msgstr "Térképtéma:"
+
+#~ msgid "Map theme goes here."
+#~ msgstr "A térképtéma jön ide."
+
+#~ msgid "Thumbnail image goes here."
+#~ msgstr "Az előnézeti kép jön ide."
+
+#~ msgid "Preview Map"
+#~ msgstr "Térkép előnézete"
+
+#~ msgid "About Marble"
+#~ msgstr "A Marble névjegye"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">Marble Virtual Globe</span></p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">Marble virtuális földgömb</span></p></body></html>"
+
+#~ msgid "Version Unknown"
+#~ msgstr "Ismeretlen verzió"
+
+#~ msgid "&About"
+#~ msgstr "&Névjegy"
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:10pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-size:9pt;\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "size:9pt;\">(c) 2007, The Marble Project</span></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-size:9pt; font-style:italic;\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "size:9pt;\">http://edu.kde.org/marble</span></p></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:10pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-size:9pt;\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "size:9pt;\">© A Marble projekt, 2007.</span></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-size:9pt; font-style:italic;\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "size:9pt;\">http://edu.kde.org/marble</span></p></body></html>"
+
+#~ msgid "A&uthors"
+#~ msgstr "&Szerzők"
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:10pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-size:9pt;\"></p></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:10pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-size:9pt;\"></p></body></html>"
+
+#~ msgid "&Data"
+#~ msgstr "A&dat"
+
+#~ msgid "&License Agreement"
+#~ msgstr "&Licencegyezmény"
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:10pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-family:'MS Shell Dlg 2'; font-size:8pt;\"></p></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:10pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-family:'MS Shell Dlg 2'; font-size:8pt;\"></p></body></html>"
+
+#~ msgid "C&ache"
+#~ msgstr "&Gyorsítótár"
+
+#~ msgid "&Physical memory:"
+#~ msgstr "&Fizikai memória:"
+
+#~ msgid " MB"
+#~ msgstr " MB"
+
+#~ msgid "C&lear"
+#~ msgstr "&Törlés"
+
+#~ msgid "&Hard disc:"
+#~ msgstr "&Merevlemez:"
+
+#~ msgid "Unlimited"
+#~ msgstr "Korlátlan"
+
+#~ msgid "Cl&ear"
+#~ msgstr "Tö&rlés"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Proxy settings for your "
+#~ "local intranet. Please leave empty if there is no proxy.</p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Proxy-beállítások a "
+#~ "helyi intranethez. Kérjük hagyja üresen, ha nincs proxy.</p></body></html>"
+
+#~ msgid "&Proxy"
+#~ msgstr "&Proxy"
+
+#~ msgid "&Proxy:"
+#~ msgstr "&Proxy:"
+
+#~ msgid "P&ort:"
+#~ msgstr "P&ort:"
+
+#~ msgid "Proxy type:"
+#~ msgstr "Proxy típus:"
+
+#~ msgid "Http"
+#~ msgstr "Http"
+
+#~ msgid "Socks5"
+#~ msgstr "Socks5"
+
+#~ msgid "Requires authentication"
+#~ msgstr "Hitelesítés szükséges"
+
+#~ msgid "U&sername:"
+#~ msgstr "&Felhasználónév:"
+
+#~ msgid "&Password:"
+#~ msgstr "&Jelszó:"
+
+#~ msgid "Enable synchronization"
+#~ msgstr "Szinkronizáció engedélyezése"
+
+#~ msgid "Enable route synchronization"
+#~ msgstr "Útszinkronizáció engedélyezése"
+
+#~ msgid "Automatically sync all bookmarks to the server."
+#~ msgstr "Minden könyvjelző automatikus szinkronizálása a kiszolgálóra."
+
+#~ msgid "Enable bookmark synchronization"
+#~ msgstr "Könyvjelző szinkronizáció engedélyezése"
+
+#~ msgid "Credentials"
+#~ msgstr "Hitelesítési adatok"
+
+#~ msgid "Server:"
+#~ msgstr "Kiszolgáló:"
+
+#~ msgid "Remote server URL, e.g. myserver.com/owncloud"
+#~ msgstr "Távoli kiszolgáló URL, például sajatkiszolgalo.com/owncloud"
+
+#~ msgid "Username:"
+#~ msgstr "Felhasználónév:"
+
+#~ msgid "Password:"
+#~ msgstr "Jelszó:"
+
+#~ msgid "Marble Cache Settings"
+#~ msgstr "Marble gyorsítótár beállítások"
+
+#~ msgid "Dragging and Animation"
+#~ msgstr "Húzás és animáció"
+
+#~ msgid "&Drag location:"
+#~ msgstr "&Megfogás helye:"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">While dragging the "
+#~ "mouse there are two standard behaviours when dealing with a virtual globe:"
+#~ "</p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">The location below "
+#~ "mouse pointer will follow the cursor exactly: As a result e.g. the north "
+#~ "pole will not stay at the top which can lead to confusion. By default "
+#~ "Marble makes sure that north is always up which results in a dragging "
+#~ "behaviour where the location below the mouse pointer slightly \"detaches"
+#~ "\" from the cursor. </p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Az egér húzása a "
+#~ "virtuális földgömbön kétféle hatást válthat ki:</p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Az egér alatti pozíció "
+#~ "pontosan követi az egér mozgását. Ennek következtében az északi sark nem "
+#~ "mindig marad felül, ami félrevezető lehet. Alapértelmezésben a Marble "
+#~ "gondoskodik róla, hogy észak mindig felfelé legyen, ezért az egér húzása "
+#~ "némileg „elválik” az egérmutatótól. </p></body></html>"
+
+#~ msgid "Keep Planet Axis Vertically"
+#~ msgstr "Bolygó tengelyek függőlegesen tartása"
+
+#~ msgid "Follow Mouse Pointer"
+#~ msgstr "Egérmutató követése"
+
+#~ msgid "Use kinetic spinning when dragging the map"
+#~ msgstr "Kinetikus forgás használata a térkép húzásakor"
+
+#~ msgid "&Animate voyage to the target"
+#~ msgstr "Az ut&azás animálása a célig"
+
+#~ msgid "&On startup:"
+#~ msgstr "&Induláskor:"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">By default Marble will "
+#~ "display the home location immediately after the application has started. "
+#~ "As an alternative it can also show the last position that was active when "
+#~ "the user left the application. </p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Alapértelmezetten a "
+#~ "Marble azonnal megjeleníti az otthon helyét az alkalmazás elindulásakor. "
+#~ "Alternatív lehetőségként meg tudja jeleníteni az utolsó pozíciót, amely "
+#~ "akkor volt aktív, amikor a felhasználó elhagyta az alkalmazást. </p></"
+#~ "body></html>"
+
+#~ msgid "Show Home Location"
+#~ msgstr "Otthon helyének megjelenítése"
+
+#~ msgid "Return to Last Location Visited"
+#~ msgstr "Visszatérés az utoljára látogatott helyhez"
+
+#~ msgid "&External Editor:"
+#~ msgstr "&Külső szerkesztő:"
+
+#~ msgid "Always ask"
+#~ msgstr "Rákérdezés mindig"
+
+#~ msgid "Potlatch (Web browser)"
+#~ msgstr "Potlatch (Webböngésző)"
+
+#~ msgid "Up"
+#~ msgstr "Fel"
+
+#~ msgid "Tilts the globe's axis towards the user."
+#~ msgstr "A földgömb tengelyének döntése a felhasználó felé."
+
+#~ msgid "Left"
+#~ msgstr "Balra"
+
+#~ msgid "Rotates the globe counterclockwise around its axis."
+#~ msgstr ""
+#~ "Az óra járásával ellenkező irányba forgatja a földgömböt a tengelye körül."
+
+#~ msgid "Reset View"
+#~ msgstr "Nézet visszaállítása"
+
+#~ msgid "Click this button to restore the original zoom level and view angle."
+#~ msgstr ""
+#~ "Kattintson erre a gombra az eredeti nagyítási szint és a látószög "
+#~ "visszaállítása."
+
+#~ msgid "Home"
+#~ msgstr "Otthon"
+
+#~ msgid "Right"
+#~ msgstr "Jobbra"
+
+#~ msgid "Rotates the globe clockwise around its axis."
+#~ msgstr ""
+#~ "A földgömb forgatása az óra járásával megegyező irányba a tengelye körül."
+
+#~ msgid "Down"
+#~ msgstr "Le"
+
+#~ msgid "Tilts the globe's axis away from the user."
+#~ msgstr "A földgömb tengelyének döntése a felhasználó felől."
+
+#~ msgid "Zoom In"
+#~ msgstr "Nagyítás"
+
+#~ msgid "Zoom in by pressing this button to see more detail."
+#~ msgstr ""
+#~ "Nagyítás ennek a gombnak a lenyomása közben, hogy több részletet lásson."
+
+#~ msgid "+"
+#~ msgstr "+"
+
+#~ msgid "Zoom Slider"
+#~ msgstr "Nagyítási csúszka"
+
+#~ msgid "Use this slider to adjust the zoom level of the map."
+#~ msgstr "Ezzel a csúszkával lehet állítani a térkép nagyításának mértékét."
+
+#~ msgid "Zoom Out"
+#~ msgstr "Kicsinyítés"
+
+#~ msgid "Zoom out by pressing this button to see less detail."
+#~ msgstr ""
+#~ "Kicsinyítés ennek a gombnak a lenyomása közben, hogy kevesebb részletet "
+#~ "lásson."
+
+#~ msgid "-"
+#~ msgstr "-"
+
+#~ msgid "P&lugins"
+#~ msgstr "&Bővítmények"
+
+#~ msgid "Time Zone"
+#~ msgstr "Időzóna"
+
+#~ msgid "UTC"
+#~ msgstr "UTC"
+
+#~ msgid "System time zone"
+#~ msgstr "Rendszer időzóna"
+
+#~ msgid "Choose Time zone"
+#~ msgstr "Időzóna kiválasztása"
+
+#~ msgid "Universal Time Coordinated"
+#~ msgstr "Egyezményes koordinált világidő"
+
+#~ msgid "European Central Time"
+#~ msgstr "Közép-európai idő"
+
+#~ msgid "Eastern European Time"
+#~ msgstr "Kelet-európai idő"
+
+#~ msgid "Egypt Standard Time"
+#~ msgstr "Egyiptomi szabványos idő"
+
+#~ msgid "Eastern African Time"
+#~ msgstr "Kelet-afrikai idő"
+
+#~ msgid "Middle East Time"
+#~ msgstr "Közel-keleti idő"
+
+#~ msgid "Near East Time"
+#~ msgstr "Közel-keleti idő"
+
+#~ msgid "Pakistan Lahore Time"
+#~ msgstr "Pakisztáni Lahore idő"
+
+#~ msgid "India Standard Time"
+#~ msgstr "Indiai szabványos idő"
+
+#~ msgid "Bangladesh Standard Time"
+#~ msgstr "Bangladesi szabványos idő"
+
+#~ msgid "Vietnam Standard Time"
+#~ msgstr "Vietnami szabványos idő"
+
+#~ msgid "China Taiwan Time"
+#~ msgstr "Kínai tajvani idő"
+
+#~ msgid "Japan Standard Time"
+#~ msgstr "Japán szabványos idő"
+
+#~ msgid "Australia Central Time"
+#~ msgstr "Ausztráliai központi idő"
+
+#~ msgid "Australia Eastern Time"
+#~ msgstr "Ausztráliai keleti idő"
+
+#~ msgid "Solomon Standard Time"
+#~ msgstr "Salamon-szigeteki szabványos idő"
+
+#~ msgid "New Zealand Standard Time"
+#~ msgstr "Új-zélandi szabványos idő"
+
+#~ msgid "Midway Islands Time"
+#~ msgstr "Midway-szigeteki idő"
+
+#~ msgid "Hawaii Standard Time"
+#~ msgstr "Hawaii szabványos idő"
+
+#~ msgid "Alaska Standard Time"
+#~ msgstr "Alaszkai szabványos idő"
+
+#~ msgid "Pacific Standard Time"
+#~ msgstr "Csendes-óceáni szabványos idő"
+
+#~ msgid "Phoenix Standard Time"
+#~ msgstr "Phoenix-i szabványos idő"
+
+#~ msgid "Mountain Standard Time"
+#~ msgstr "Mountain szabványos idő"
+
+#~ msgid "Central Standard Time"
+#~ msgstr "Központi szabványos idő"
+
+#~ msgid "Eastern Standard Time"
+#~ msgstr "Keleti szabványos idő"
+
+#~ msgid "Indiana Eastern Standard Time"
+#~ msgstr "Kelet-indiai szabványos idő"
+
+#~ msgid "Puerto Rico and US Virgin Islands Time"
+#~ msgstr "Puerto Rico és Amerikai Virgin-szigeteki idő"
+
+#~ msgid "Canada Newfoundland Time"
+#~ msgstr "Kanada újfundlandi idő"
+
+#~ msgid "Argentina Standard Time"
+#~ msgstr "Argentin szabványos idő"
+
+#~ msgid "Brazil Eastern Time"
+#~ msgstr "Brazil keleti idő"
+
+#~ msgid "Central African Time"
+#~ msgstr "Közép-afrikai idő"
+
+#~ msgid "When Marble starts"
+#~ msgstr "Amikor a Marble elindul"
+
+#~ msgid "Load system time"
+#~ msgstr "Rendszeridő betöltése"
+
+#~ msgid "Load last session time"
+#~ msgstr "Az utolsó munkamenetidő betöltése"
+
+#~ msgid "&Units"
+#~ msgstr "&Egységek"
+
+#~ msgid "&Distance:"
+#~ msgstr "&Távolság:"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">The unit that gets used "
+#~ "to measure altitude, lengths and distances (e.g. km, mi, ft).</p></body></"
+#~ "html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Az egység, amely a "
+#~ "magasság, a hossz és a távolság mérésére szolgál (például km, mi, ft).</"
+#~ "p></body></html>"
+
+#~ msgid "Kilometer, Meter"
+#~ msgstr "Kilométer, méter"
+
+#~ msgid "Miles, Feet"
+#~ msgstr "Mérföld, láb"
+
+#~ msgid "An&gle:"
+#~ msgstr "&Szög:"
+
+#~ msgid "Degree (DMS)"
+#~ msgstr "Fok (DMS)"
+
+#~ msgid "Degree (Decimal)"
+#~ msgstr "Fok (decimális)"
+
+#~ msgid "Universal Transverse Mercator (UTM)"
+#~ msgstr "Universal Transverse Mercator (UTM)"
+
+#~ msgid "Map &Quality"
+#~ msgstr "Térkép&minőség"
+
+#~ msgid "&Still image:"
+#~ msgstr "Á&llókép:"
+
+#~ msgid "Outline Quality"
+#~ msgstr "Körvonal minőség"
+
+#~ msgid "Low Quality"
+#~ msgstr "Alacsony minőség"
+
+#~ msgid "Normal"
+#~ msgstr "Normál"
+
+#~ msgid "High Quality"
+#~ msgstr "Jó minőség"
+
+#~ msgid "Print Quality"
+#~ msgstr "Nyomtatási minőség"
+
+#~ msgid "During &animations:"
+#~ msgstr "&Animációk közben:"
+
+#~ msgid "G&raphics system:"
+#~ msgstr "&Grafikus rendszer:"
+
+#~ msgid "Raster (Software rendering)"
+#~ msgstr "Raszter (Szoftveres renderelés)"
+
+#~ msgid "OpenGL"
+#~ msgstr "OpenGL"
+
+#~ msgid "&Text Labels"
+#~ msgstr "&Szövegcímkék"
+
+#~ msgid "&Place names:"
+#~ msgstr "Nevek &elhelyezése:"
+
+#~ msgid "Custom & Native Language"
+#~ msgstr "Egyéni és natív nyelv"
+
+#~ msgid "Custom Language"
+#~ msgstr "Egyéni nyelv"
+
+#~ msgid "Native Language"
+#~ msgstr "Natív nyelv"
+
+#~ msgid "Default map &font:"
+#~ msgstr "Alapértelmezett térkép &betűtípus:"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">The default font that "
+#~ "gets used on the map.</p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">A térképen használt "
+#~ "alapértelmezett betűtípus.</p></body></html>"
+
+#~ msgid "Movie Recording - Marble"
+#~ msgstr "Videó rögzítés - Marble"
+
+#~ msgid "Destination video"
+#~ msgstr "Cél videó"
+
+#~ msgid "Open..."
+#~ msgstr "Megnyitás…"
+
+#~ msgid "FPS (frames per second)"
+#~ msgstr "FPS (képkocka per másodperc)"
+
+#~ msgid "Cancel"
+#~ msgstr "Mégse"
+
+#~ msgid "Start"
+#~ msgstr "Indítás"
+
+#~ msgid "New Bookmark Folder - Marble"
+#~ msgstr "Új könyvjelzőmappa - Marble"
+
+#~ msgid "&Folder Name"
+#~ msgstr "&Mappanév"
+
+#, fuzzy
+#~| msgid "Current Location"
+#~ msgid "Current Relations"
+#~ msgstr "Jelenlegi hely"
+
+#, fuzzy
+#~| msgid "&Name"
+#~ msgid "Name"
+#~ msgstr "&Név"
+
+#, fuzzy
+#~| msgid "Type:"
+#~ msgid "Type"
+#~ msgstr "Típus:"
+
+#~ msgid "Role"
+#~ msgstr "Szerep"
+
+#, fuzzy
+#~| msgid "Vegetation"
+#~ msgid "Add Relation"
+#~ msgstr "Növényzet"
+
+#, fuzzy
+#~| msgid "Current Location"
+#~ msgid "Current Tags"
+#~ msgstr "Jelenlegi hely"
+
+#, fuzzy
+#~| msgid "Browse"
+#~ msgid "Browse..."
+#~ msgstr "Tallózás"
+
+#, fuzzy
+#~| msgid "&Position"
+#~ msgid "Position:"
+#~ msgstr "&Pozíció"
+
+#~ msgid "Marble"
+#~ msgstr "Marble"
+
+#~ msgid "Map"
+#~ msgstr "Térkép"
+
+#~ msgid "Visible Globe Region"
+#~ msgstr "Látható földgömbterület"
+
+#~ msgid "Outer Space"
+#~ msgstr "Világűr"
+
+#~ msgid "Route"
+#~ msgstr "Útvonal"
+
+#~ msgid "Route Summary"
+#~ msgstr "Útvonal összegzése"
+
+#~ msgid "Driving Instructions"
+#~ msgstr "Vezetési utasítások"
+
+#~ msgid "Footer"
+#~ msgstr "Lábléc"
+
+#~ msgid "Configure Routing Profile"
+#~ msgstr "Útvonalprofil beállítása"
+
+#~ msgid "Active Route Services"
+#~ msgstr "Aktív útvonal szolgáltatások"
+
+#~ msgid "Service Settings"
+#~ msgstr "Szolgáltatás beállítások"
+
+#~ msgid "No configuration available"
+#~ msgstr "Nincs elérhető beállítás"
+
+#~ msgid "Select Service to Configure"
+#~ msgstr "A beállítandó szolgáltatás kiválasztása"
+
+#~ msgid "Configure"
+#~ msgstr "Beállítás"
+
+#~ msgid "&Add"
+#~ msgstr "&Hozzáadás"
+
+#~ msgid "&Configure"
+#~ msgstr "&Beállítás"
+
+#~ msgid "&Remove"
+#~ msgstr "&Eltávolítás"
+
+#~ msgid "Move &Up"
+#~ msgstr "Mozgatás &felfelé"
+
+#~ msgid "Move &Down"
+#~ msgstr "Mozgatás &lefelé"
+
+#~ msgid "Car (fastest)"
+#~ msgstr "Autó (leggyorsabb)"
+
+#~ msgid "Car (shortest)"
+#~ msgstr "Autó (legrövidebb)"
+
+#~ msgid "Bicycle"
+#~ msgstr "Kerékpár"
+
+#~ msgid "Pedestrian"
+#~ msgstr "Gyalog"
+
+#~ msgid "No results."
+#~ msgstr "Nincs találat."
+
+#~ msgid "Show Details"
+#~ msgstr "Részletek megjelenítése"
+
+#~ msgid "Choose alternative routes"
+#~ msgstr "Alternatív út választása"
+
+#~ msgid "Sun Control"
+#~ msgstr "Nap vezérlés"
+
+#~ msgid "Sun Shading"
+#~ msgstr "Nap árnyékolás"
+
+#~ msgid "Shadow"
+#~ msgstr "Árnyék"
+
+#~ msgid "Night Map"
+#~ msgstr "Éjszakai térkép"
+
+#~ msgid "OK"
+#~ msgstr "OK"
+
+#~ msgid "Apply"
+#~ msgstr "Alkalmaz"
+
+#~ msgid "Creating Map"
+#~ msgstr "Térkép létrehozása"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /></head><body style="
+#~ "\" white-space: pre-wrap; font-family:Sans Serif; font-size:9pt; font-"
+#~ "weight:400; font-style:normal; text-decoration:none;\"><p style=\" margin-"
+#~ "top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-"
+#~ "indent:0; text-indent:0px;\"><span style=\" font-weight:600;\">Satellite "
+#~ "View</span></p><p style=\" margin-top:0px; margin-bottom:0px; margin-"
+#~ "left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Earth "
+#~ "as seen from Space. The map is based on NASA's beautiful \"Blue Marble "
+#~ "Next Generation\" pictures. Credits: NASA's Earth Observatory</p></body></"
+#~ "html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /></head><body style="
+#~ "\" white-space: pre-wrap; font-family:Sans Serif; font-size:9pt; font-"
+#~ "weight:400; font-style:normal; text-decoration:none;\"><p style=\" margin-"
+#~ "top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-"
+#~ "indent:0; text-indent:0px;\"><span style=\" font-weight:600;\">Műhold "
+#~ "nézet</span></p><p style=\" margin-top:0px; margin-bottom:0px; margin-"
+#~ "left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">A "
+#~ "Föld, ahogy az űrből látható. A térkép a NASA gyönyörű „Blue Marble Next "
+#~ "Generation” képein alapul. Köszönet: NASA Föld Obszervatórium</p></body></"
+#~ "html>"
+
+#~ msgid ""
+#~ "Marble needs to create this map. This only needs to be done once and may "
+#~ "take a few seconds."
+#~ msgstr ""
+#~ "A Marble programnak létre kell hoznia ezt a térképet. Ezt csak egyszer "
+#~ "kell elvégezni és eltarthat néhány másodpercig."
+
+#~ msgid "&Cancel"
+#~ msgstr "&Mégse"
+
+#~ msgid "Zoom"
+#~ msgstr "Nagyítás"
+
+#~ msgid "&Tile Level Range:"
+#~ msgstr "&Csempe szint tartomány:"
+
+#~ msgid "Minimum Tile Level"
+#~ msgstr "Minimális csempe szint"
+
+#~ msgid "to"
+#~ msgstr "eddig"
+
+#~ msgid "Maximum Tile Level"
+#~ msgstr "Maximális csempe szint"
+
+#~ msgid "Time Control"
+#~ msgstr "Idővezérlés"
+
+#~ msgid "Time"
+#~ msgstr "Idő"
+
+#~ msgid "New Date Time      :"
+#~ msgstr "Új dátum és idő      :"
+
+#~ msgid "Refresh Interval     :"
+#~ msgstr "Frissítési időköz     :"
+
+#~ msgid " seconds"
+#~ msgstr " másodperc"
+
+#~ msgid "Now"
+#~ msgstr "Most"
+
+#~ msgid "Current Date Time :"
+#~ msgstr "Jelenlegi dátum és idő :"
+
+#~ msgid "Time Speed"
+#~ msgstr "Idősebesség"
+
+#, fuzzy
+#~| msgid "&Close"
+#~ msgid "Close"
+#~ msgstr "&Bezárás"
+
+#~ msgid "Tour"
+#~ msgstr "Utazás"
+
+#~ msgid "Move up"
+#~ msgstr "Mozgatás fel"
+
+#~ msgid "Move down"
+#~ msgstr "Mozgatás le"
+
+#~ msgid "New Tour"
+#~ msgstr "Új utazás"
+
+#~ msgid "Save Tour"
+#~ msgstr "Utazás mentése"
+
+#~ msgid "Save Tour As"
+#~ msgstr "Utazás mentése másként"
+
+#~ msgid "Open Tour"
+#~ msgstr "Utazás megnyitása"
+
+#~ msgid "Play"
+#~ msgstr "Lejátszás"
+
+#~ msgid "Begins touring"
+#~ msgstr "Elkezdi az utazást"
+
+#~ msgid "Stop"
+#~ msgstr "Leállítás"
+
+#~ msgid "Stops touring (playing again will start tour from the start)"
+#~ msgstr ""
+#~ "Leállítja az utazást (az ismételt lejátszással a kezdetétől fogja "
+#~ "indítani)"
+
+#~ msgid "Worldclock Applet Configuration"
+#~ msgstr "Világóra kisalkalmazás beállítás"
+
+#~ msgid "Map Display"
+#~ msgstr "Térkép megjelenés"
+
+#~ msgid "Projection:"
+#~ msgstr "Vetület:"
+
+#~ msgid "Equirectangular"
+#~ msgstr "Ekvirektanguláris"
+
+#~ msgid "Center map on longitude:"
+#~ msgstr "Térkép központosítása a hosszúsághoz:"
+
+#~ msgid "Show date"
+#~ msgstr "Dátum megjelenítése"
+
+#~ msgid "Time Zones"
+#~ msgstr "Időzónák"
+
+#~ msgid "Use custom timezone selection"
+#~ msgstr "Egyéni időzóna kiválasztás használata"
+
+#, fuzzy
+#~| msgid "Coordinates:"
+#~ msgid "Coordinates"
+#~ msgstr "Koordináták:"
+
+#, fuzzy
+#~| msgid "&N"
+#~ msgid "N"
+#~ msgstr "&N"
+
+#, fuzzy
+#~| msgid "&W"
+#~ msgid "W"
+#~ msgstr "&W"
+
+#, fuzzy
+#~| msgid "&E"
+#~ msgid "E"
+#~ msgstr "&E"
+
+#, fuzzy
+#~| msgid "&S"
+#~ msgid "S"
+#~ msgstr "&S"
+
+#, fuzzy
+#~| msgid "Vegetation"
+#~ msgid "Rotation"
+#~ msgstr "Növényzet"
+
+#~ msgid "Lines"
+#~ msgstr "Vonalak"
+
+#, fuzzy
+#~| msgid "Areas"
+#~ msgid "Area"
+#~ msgstr "Területek"
+
+#~ msgid "Display"
+#~ msgstr "Megjelenés"
+
+#~ msgid "Fade data older than (minutes)"
+#~ msgstr "Az ennél régebbi adatok elhalványítása (percben)"
+
+#~ msgid "Do not show data older than (minutes)"
+#~ msgstr "Ne mutassa az ennél régebbi adatokat (percben)"
+
+#~ msgid "Internet"
+#~ msgstr "Internet"
+
+#~ msgid "APRS Data Sources"
+#~ msgstr "ARPS adatforrások"
+
+#~ msgid "Should information be gathered from the Internet APRS data source?"
+#~ msgstr "Az információkat az Interner ARPS adatforrásból gyűjtsük be?"
+
+#~ msgid "Collect data from an APRS Internet server"
+#~ msgstr "Adatok begyűjtése egy ARPS Internetes kiszolgálóról"
+
+#~ msgid "Server"
+#~ msgstr "Kiszolgáló"
+
+#~ msgid "rotate.aprs.net"
+#~ msgstr "rotate.aprs.net"
+
+#~ msgid "Port"
+#~ msgstr "Port"
+
+#~ msgid "10253"
+#~ msgstr "10253"
+
+#~ msgid "Dump TCP/IP records to the debug stream"
+#~ msgstr "TCP/IP rekordok kiírása a hibakeresési folyamba"
+
+#~ msgid "Device"
+#~ msgstr "Eszköz"
+
+#~ msgid "TNC Terminal Port"
+#~ msgstr "TNC terminál port"
+
+#~ msgid "Should information be gathered from a serial port?"
+#~ msgstr "Az információkat soros portról gyűjtsük be?"
+
+#~ msgid "Collect data from a serial TNC (In Text Mode)"
+#~ msgstr "Adatok begyűjtése egy soros TNC-ből (szöveges módban)"
+
+#~ msgid "TTY"
+#~ msgstr "TTY"
+
+#~ msgid "/dev/ttyUSB0"
+#~ msgstr "/dev/ttyUSB0"
+
+#~ msgid "Dump TTY records to the debug stream"
+#~ msgstr "TTY rekordok kiírása a hibakeresési folyamba"
+
+#~ msgid "File"
+#~ msgstr "Fájl"
+
+#~ msgid "Should information be gathered from a file?"
+#~ msgstr "Az információkat fájlból gyűjtsük be?"
+
+#~ msgid "Collect data from a file"
+#~ msgstr "Adatok begyűjtés fájlból"
+
+#~ msgid "Dump file records to the debug stream"
+#~ msgstr "Fájlrekordok kiírása a hibakeresési folyamba"
+
+#~ msgid "Configure Compass Plugin"
+#~ msgstr "Iránytű bővítmény beállítása"
+
+#~ msgid "Theme"
+#~ msgstr "Téma"
+
+#~ msgid "Default"
+#~ msgstr "Alapértelmezés"
+
+#~ msgid "Arrows"
+#~ msgstr "Nyilak"
+
+#~ msgid "Atom"
+#~ msgstr "Atom"
+
+#~ msgid "Magnet"
+#~ msgstr "Mágnes"
+
+#~ msgid "Configure Crosshairs Plugin"
+#~ msgstr "Célkereszt bővítmény beállítása"
+
+#~ msgid "Gun 1"
+#~ msgstr "Fegyver 1"
+
+#~ msgid "Gun 2"
+#~ msgstr "Fegyver 2"
+
+#~ msgid "Circled"
+#~ msgstr "Körvonalas"
+
+#~ msgid "German"
+#~ msgstr "Német"
+
+#~ msgid "Dialog"
+#~ msgstr "Párbeszédablak"
+
+#~ msgid "Filter"
+#~ msgstr "Szűrő"
+
+#~ msgid "Maximum number of results:"
+#~ msgstr "A találatok maximális száma:"
+
+#~ msgid "Minimum magnitude:"
+#~ msgstr "Minimum magasság:"
+
+#~ msgid "Time Range"
+#~ msgstr "Időtartomány"
+
+#, fuzzy
+#~| msgid "Location Browser"
+#~ msgid "Eclipse Browser"
+#~ msgstr "Helyböngésző"
+
+#~ msgid "&Settings..."
+#~ msgstr "&Beállítások…"
+
+#, fuzzy
+#~| msgid "Satellites, Eclipses"
+#~ msgid "&Go To Selected Eclipse"
+#~ msgstr "Műholdak, fogyatkozások"
+
+#, fuzzy
+#~| msgid "Monav Configuration"
+#~ msgid "Eclipses Configuration"
+#~ msgstr "Monav beállításai"
+
+#, fuzzy
+#~| msgid "Central African Time"
+#~ msgid "Central &Line"
+#~ msgstr "Közép-afrikai idő"
+
+#~ msgid "&Reminder"
+#~ msgstr "&Emlékeztető"
+
+#~ msgid "Configure Elevation Profile Plugin"
+#~ msgstr "Magassági profil bővítmény beállítása"
+
+#~ msgid "Zoom to viewport"
+#~ msgstr "Nagyítás a munkalapra"
+
+#~ msgid "Speed"
+#~ msgstr "Sebesség"
+
+#~ msgid "Direction"
+#~ msgstr "Irány"
+
+#~ msgid "Altitude"
+#~ msgstr "Magasság"
+
+#~ msgid "Precision"
+#~ msgstr "Pontosság"
+
+#~ msgid "Coordinate Grid Plugin"
+#~ msgstr "Koordinátarács bővítmény"
+
+#~ msgid "C&olors"
+#~ msgstr "S&zínek"
+
+#~ msgid "&Grid:"
+#~ msgstr "&Rács:"
+
+#~ msgid "Color of the coordinate grid."
+#~ msgstr "A koordinátarács színe."
+
+#~ msgid "&Tropics:"
+#~ msgstr "&Trópusok:"
+
+#~ msgid "Color of the tropical circles."
+#~ msgstr "A trópusi körök színe."
+
+#~ msgid "&Equator:"
+#~ msgstr "&Egyenlítő:"
+
+#~ msgid "Color of the equator."
+#~ msgstr "Az egyenlítő színe."
+
+#~ msgid "Labels"
+#~ msgstr "Címkék"
+
+#~ msgid "&Named Labels"
+#~ msgstr "&Elnevezett címkék"
+
+#~ msgid "&Numerical Labels"
+#~ msgstr "&Számszerű címkék"
+
+#~ msgid "Show numerical Labels."
+#~ msgstr "Számszerű címkék megjelenítése."
+
+#~ msgid "Configure Scale Bar Plugin"
+#~ msgstr "Méretezősáv bővítmény beállítása"
+
+#~ msgid "Show Ratio Scale"
+#~ msgstr "Arány skála megjelenítése"
+
+#~ msgid "Minimize"
+#~ msgstr "Minimalizálás"
+
+#~ msgid "Marble - Measure Tool Configuration"
+#~ msgstr "Marble - Mérőeszköz beállítása"
+
+#, fuzzy
+#~| msgid "Circled"
+#~ msgid "Circle"
+#~ msgstr "Körvonalas"
+
+#, fuzzy
+#~| msgid "&Text Labels"
+#~ msgid "Segment labels"
+#~ msgstr "&Szövegcímkék"
+
+#~ msgid "Distance "
+#~ msgstr "Távolság "
+
+#, fuzzy
+#~| msgid "Bureau de change"
+#~ msgid "Bearing Change"
+#~ msgstr "Pénzváltó"
+
+#, fuzzy
+#~| msgid "Cemetery"
+#~ msgid "Perimeter"
+#~ msgstr "Temető"
+
+#, fuzzy
+#~| msgid "Preference:"
+#~ msgid "Circumference"
+#~ msgstr "Beállítás:"
+
+#~ msgid "General"
+#~ msgstr "Általános"
+
+#~ msgid "Cache name:"
+#~ msgstr "Gyorsítótár neve:"
+
+#~ msgid "User name:"
+#~ msgstr "Felhasználó neve:"
+
+#~ msgid "Type:"
+#~ msgstr "Típus:"
+
+#~ msgid "Status:"
+#~ msgstr "Állapot:"
+
+#~ msgid "Country:"
+#~ msgstr "Ország:"
+
+#~ msgid "Size:"
+#~ msgstr "Méret:"
+
+#~ msgid "Difficulty:"
+#~ msgstr "Nehézség:"
+
+#~ msgid "Terrain:"
+#~ msgstr "Terep:"
+
+#~ msgid "Longitude:"
+#~ msgstr "Hosszúság:"
+
+#~ msgid "Latitude:"
+#~ msgstr "Szélesség:"
+
+#~ msgid "Date hidden:"
+#~ msgstr "Elrejtés dátuma:"
+
+#~ msgid "Date created:"
+#~ msgstr "Létrehozás dátuma:"
+
+#~ msgid "Date last modified:"
+#~ msgstr "Utolsó módosítás dátuma:"
+
+#~ msgid "Log"
+#~ msgstr "Napló"
+
+#~ msgid "Previous"
+#~ msgstr "Előző"
+
+#~ msgid "Next"
+#~ msgstr "Következő"
+
+#~ msgid "Minimum difficulty:"
+#~ msgstr "Minimális nehézség:"
+
+#~ msgid "Maximum difficulty:"
+#~ msgstr "Maximális nehézség:"
+
+#~ msgid "Maximum Distance:"
+#~ msgstr "Maximális távolság:"
+
+#~ msgid "Start:"
+#~ msgstr "Kezdet:"
+
+#~ msgid "End:"
+#~ msgstr "Vége:"
+
+#~ msgid "TextLabel"
+#~ msgstr "Szövegcímke"
+
+#~ msgid "Hint"
+#~ msgstr "Tipp"
+
+#~ msgid "Logs"
+#~ msgstr "Naplók"
+
+#~ msgid "Marble - OpenDesktop plugin configuration"
+#~ msgstr "Marble - OpenDesktop bővítmény beállítások"
+
+#~ msgid "Number of displayed items on the screen:"
+#~ msgstr "A képernyőn megjelenő elemek száma:"
+
+#~ msgid "Map &Image"
+#~ msgstr "Térkép &kép"
+
+#~ msgid "&Planet:"
+#~ msgstr "&Bolygó:"
+
+#~ msgid "&Size:"
+#~ msgstr "&Méret:"
+
+#~ msgid "x"
+#~ msgstr "x"
+
+#~ msgid "Preview"
+#~ msgstr "Előnézet"
+
+#~ msgid "Filename"
+#~ msgstr "Fájlnév"
+
+#~ msgid "Position I&ndicator:"
+#~ msgstr "Pozíció&jelző:"
+
+#~ msgid "Configure Photo Plugin"
+#~ msgstr "Fénykép bővítmény beállítása"
+
+#~ msgid "License"
+#~ msgstr "Licenc"
+
+#~ msgid "Number of items on the screen"
+#~ msgstr "A képernyőn levő elemek száma"
+
+#~ msgid "Configure Position Marker Plugin"
+#~ msgstr "A helyzetjelző bővítmény beállítása"
+
+#~ msgid "Cursor Shape"
+#~ msgstr "A kurzor alakja"
+
+#~ msgid "&Arrow"
+#~ msgstr "&Nyíl"
+
+#~ msgid "&Custom:"
+#~ msgstr "&Egyéni:"
+
+#~ msgid ""
+#~ "Position marker images indicating the direction should point north (top)."
+#~ msgstr ""
+#~ "Az irányt mutató helyzetjelző képeknek északra (felülre) kell mutatniuk."
+
+#~ msgid "Trail"
+#~ msgstr "Nyomvonal"
+
+#~ msgid "&Accuracy:"
+#~ msgstr "&Pontosság:"
+
+#~ msgid "Color of the position marker's accuracy indicator."
+#~ msgstr "A helyzetjelző pontossági mutatójának színe."
+
+#~ msgid "Trail:"
+#~ msgstr "Nyomvonal:"
+
+#~ msgid "Color of the position marker's trail."
+#~ msgstr "A helyzetjelző nyomvonalának színe."
+
+#~ msgid "Routing Configuration - Marble"
+#~ msgstr "Útvonal-tervezés beállítások - Marble"
+
+#~ msgid "Audible Turn Instructions"
+#~ msgstr "Hang alapú kanyarodási utasítások"
+
+#~ msgid "Play a sound"
+#~ msgstr "Hang lejátszása"
+
+#~ msgid "Use this speaker"
+#~ msgstr "Navigátor használata"
+
+#~ msgid ""
+#~ "<a href=\"http://userbase.kde.org/Marble/CustomSpeakers\">Get more "
+#~ "speakers</a>"
+#~ msgstr ""
+#~ "<a href=\"http://userbase.kde.org/Marble/CustomSpeakers\">További "
+#~ "navigátorok beszerzése</a>"
+
+#~ msgid "Guidance Mode"
+#~ msgstr "Útmutató mód"
+
+#~ msgid "R"
+#~ msgstr "R"
+
+#~ msgid "Toggle GPS"
+#~ msgstr "GPS Ki/Be"
+
+#~ msgid "zoom out"
+#~ msgstr "kicsinyítés"
+
+#~ msgid "zoom in"
+#~ msgstr "nagyítás"
+
+#~ msgid "total time remaining"
+#~ msgstr "összes hátralévő idő"
+
+#~ msgid "Satellites Configuration - Marble"
+#~ msgstr "Műholdak beállításai - Marble"
+
+#~ msgid "&Satellites"
+#~ msgstr "&Műholdak"
+
+#~ msgid "&Data Sources"
+#~ msgstr "&Adatforrások"
+
+#~ msgid ""
+#~ "<html><head/><body><p><span style=\" font-weight:600;\">Last update:</"
+#~ "span></p></body></html>"
+#~ msgstr ""
+#~ "<html><head/><body><p><span style=\" font-weight:600;\">Utolsó frissítés:"
+#~ "</span></p></body></html>"
+
+#~ msgid "&Reload All Data Sources"
+#~ msgstr "&Minden adatforrás újratöltése"
+
+#~ msgid "Satellite Data Sources:"
+#~ msgstr "Műhold adatforrások:"
+
+#~ msgid "Add a new data source (URL)."
+#~ msgstr "Új adatforrás (URL) hozzáadása."
+
+#~ msgid "Open a new data source from disk."
+#~ msgstr "Új adatforrás megnyitása a lemezről."
+
+#~ msgid "Remove selected data source."
+#~ msgstr "A kijelölt adatforrás eltávolítása."
+
+#~ msgid "(Built-in Data Sources for Earth Satellites)"
+#~ msgstr "(Beépített adatforrások a Föld műholdakhoz)"
+
+#~ msgid ""
+#~ "<html><head/><body><p>Supported formats: <a href=\"http://techbase.kde."
+#~ "org/Projects/Marble/SatelliteCatalogFormat\"><span style=\" text-"
+#~ "decoration: underline; color:#0000ff;\">Marble Satellite Catalogue</"
+#~ "span></a>, <a href=\"http://en.wikipedia.org/wiki/Two-line_element_set"
+#~ "\"><span style=\" text-decoration: underline; color:#0000ff;\">Two-Line-"
+#~ "Element Set</span></a></p></body></html>"
+#~ msgstr ""
+#~ "<html><head/><body><p>Támogatott formátumok: <a href=\"http://techbase."
+#~ "kde.org/Projects/Marble/SatelliteCatalogFormat\"><span style=\" text-"
+#~ "decoration: underline; color:#0000ff;\">Marble műholdkatalógus</span></"
+#~ "a>, <a href=\"http://en.wikipedia.org/wiki/Two-line_element_set\"><span "
+#~ "style=\" text-decoration: underline; color:#0000ff;\">Kétvonalas "
+#~ "elemkészlet</span></a></p></body></html>"
+
+#~ msgid "Plugin Inactive"
+#~ msgstr "A bővítmény inaktív"
+
+#~ msgid "&Activate Plugin"
+#~ msgstr "Bővítmény &aktiválása"
+
+#~ msgid ""
+#~ "Configuration options not available since the plugin is disabled at the "
+#~ "moment."
+#~ msgstr ""
+#~ "A beállítási lehetőségek nem érhetők el, mivel jelenleg le van tiltva a "
+#~ "bővítmény."
+
+#~ msgid "km/h"
+#~ msgstr "km/h"
+
+#~ msgid "Configure Stars Plugin"
+#~ msgstr "Csillagok bővítmény beállítása"
+
+#~ msgid "Celestial Objects"
+#~ msgstr "Égi objektumok"
+
+#~ msgid " mag"
+#~ msgstr " mag"
+
+#~ msgid "Solar System"
+#~ msgstr "Naprendszer"
+
+#~ msgid "Sun"
+#~ msgstr "Nap"
+
+#~ msgid "Moon"
+#~ msgstr "Hold"
+
+#~ msgid "Mercury"
+#~ msgstr "Merkúr"
+
+#~ msgid "Venus"
+#~ msgstr "Vénusz"
+
+#~ msgid "Earth"
+#~ msgstr "Föld"
+
+#~ msgid "Mars"
+#~ msgstr "Mars"
+
+#~ msgid "Jupiter"
+#~ msgstr "Jupiter"
+
+#~ msgid "Saturn"
+#~ msgstr "Szaturnusz"
+
+#~ msgid "Uranus"
+#~ msgstr "Uránusz"
+
+#~ msgid "Neptune"
+#~ msgstr "Neptunusz"
+
+#~ msgid "Use name labels"
+#~ msgstr "Névcímkék használata"
+
+#~ msgid "Other"
+#~ msgstr "Egyéb"
+
+#~ msgid "Lines and Orientation"
+#~ msgstr "Vonalak és tájolás"
+
+#~ msgid "Constellations"
+#~ msgstr "Csillagképek"
+
+#~ msgid "Names"
+#~ msgstr "Nevek"
+
+#~ msgid "Latin Name"
+#~ msgstr "Latin név"
+
+#~ msgid "Native Translation"
+#~ msgstr "Natív fordítás"
+
+#~ msgid "Abbreviation"
+#~ msgstr "Rövidítés"
+
+#~ msgid "Celestial Equator"
+#~ msgstr "Égi egyenlítő"
+
+#~ msgid "Celestial Poles"
+#~ msgstr "Égi pólusok"
+
+#~ msgid "Ecliptic"
+#~ msgstr "Ekliptika"
+
+#~ msgid "Configure Weather Plugin"
+#~ msgstr "Időjárás bővítmény beállítása"
+
+#~ msgid "Information"
+#~ msgstr "Információ"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Here you can "
+#~ "choose if you want the weather condition to be shown (for example, clouds "
+#~ "or clear sky.) Marble will only show the condition if this information is "
+#~ "available.</p></body></html>\n"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Válassza ki, ha "
+#~ "szeretné megjeleníteni az időjárási kondíciókat (például: felhős vagy "
+#~ "napos). Csak akkor lesz megjelenítve, ha az információ elérhető.</p></"
+#~ "body></html>\n"
+
+#~ msgid "Weather condition"
+#~ msgstr "Időjárási körülmény"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Selects if you "
+#~ "want the temperature to be shown. The temperature will only be shown for "
+#~ "the stations it is available for.</p></body></html>\n"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Válassza ki, ha "
+#~ "szeretné megjeleníteni a hőmérsékletet. Csak akkor lesz megjelenítve, ha "
+#~ "az információ elérhető az állomáson.</p></body></html>\n"
+
+#~ msgid "Temperature"
+#~ msgstr "Hőmérséklet"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Select if you "
+#~ "want the wind direction to be shown. The wind direction will only be "
+#~ "shown if it is available for the particular station.</p></body></html>\n"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Válassza ki, ha "
+#~ "szeretné megjeleníteni a szélirányt. Csak akkor lesz megjelenítve, ha az "
+#~ "információ elérhető az állomáson.</p></body></html>\n"
+
+#~ msgid "Wind direction"
+#~ msgstr "Szélirány"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Select if you "
+#~ "want the wind speed to be shown. The wind speed will only be shown if it "
+#~ "is available for the particular station.</p></body></html>\n"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Válassza ki, ha "
+#~ "szeretné megjeleníteni a szélsebességet. Csak akkor lesz megjelenítve, ha "
+#~ "az információ elérhető az állomáson.</p></body></html>\n"
+
+#~ msgid "Wind speed"
+#~ msgstr "Szélsebesség"
+
+#~ msgid "Units"
+#~ msgstr "Egységek"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">The unit used to "
+#~ "measure the temperature.</p></body></html>\n"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">A hőmérséklet "
+#~ "mérésére használt mértékegység.</p></body></html>\n"
+
+#~ msgid "Celsius"
+#~ msgstr "Celsius"
+
+#~ msgid "Fahrenheit"
+#~ msgstr "Fahrenheit"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">The unit used to "
+#~ "measure the wind speed.</p></body></html>\n"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">A szélsebesség "
+#~ "mérésére használt mértékegység.</p></body></html>\n"
+
+#~ msgid "Kilometers per hour"
+#~ msgstr "Kilométer per óra"
+
+#~ msgid "Miles per hour"
+#~ msgstr "Mérföld per óra"
+
+#~ msgid "Meters per second"
+#~ msgstr "Méter per másodperc"
+
+#~ msgid "Knots"
+#~ msgstr "Csomó"
+
+#~ msgid "Beaufort"
+#~ msgstr "Beaufort"
+
+#~ msgid "Pressure"
+#~ msgstr "Nyomás"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">The unit used to "
+#~ "measure the air pressure.</p></body></html>\n"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">A légnyomás "
+#~ "mérésére használt mértékegység.</p></body></html>\n"
+
+#~ msgid "Hecto Pascals"
+#~ msgstr "Hektopascal"
+
+#~ msgid "Kilo Pascals"
+#~ msgstr "Kilopascal"
+
+#~ msgid "Bars"
+#~ msgstr "Bár"
+
+#~ msgid "Millimeters of Mercury"
+#~ msgstr "Higanymilliméter"
+
+#~ msgid "Inches of Mercury"
+#~ msgstr "Higanyhüvelyk"
+
+#~ msgid "Miscellaneous"
+#~ msgstr "Egyebek"
+
+#~ msgid "Show only favorite items"
+#~ msgstr "Csak a kedvenc elemek megjelenítése"
+
+#~ msgid "Weather update interval"
+#~ msgstr "Időjárás frissítési időköz"
+
+#~ msgid " hours"
+#~ msgstr " óra"
+
+#~ msgid "Configure Wikipedia Plugin"
+#~ msgstr "Wikipedia bővítmény beállítása"
+
+#~ msgid "Show thumbnail images"
+#~ msgstr "Bélyegképek megjelenítése"
+
+#~ msgid "Route type:"
+#~ msgstr "Út típus:"
+
+#~ msgid "Speed:"
+#~ msgstr "Sebesség:"
+
+#~ msgid "Preference:"
+#~ msgstr "Beállítás:"
+
+#~ msgid "Avoid motorways"
+#~ msgstr "Autópályák elkerülése"
+
+#~ msgid "Avoid tollways"
+#~ msgstr "Fizetős utak elkerülése"
+
+#~ msgid "Avoid ferries"
+#~ msgstr "Kompok elkerülése"
+
+#~ msgid "Monav Configuration"
+#~ msgstr "Monav beállításai"
+
+#~ msgid "Transport Type:"
+#~ msgstr "Szállítás típusa:"
+
+#~ msgid "Any"
+#~ msgstr "Bármi"
+
+#~ msgid "Manage Maps"
+#~ msgstr "Térképek kezelése"
+
+#~ msgid "Install New"
+#~ msgstr "Új telepítése"
+
+#~ msgid "Continent"
+#~ msgstr "Kontinens"
+
+#~ msgid "Country"
+#~ msgstr "Ország"
+
+#~ msgid "Download Variant"
+#~ msgstr "Változat letöltése"
+
+#~ msgid "Install"
+#~ msgstr "Telepítés"
+
+#~ msgid "Nothing to do."
+#~ msgstr "Nincs mit tenni."
+
+#~ msgid "%v/%m MB"
+#~ msgstr "%v/%m MB"
+
+#~ msgid "Abort"
+#~ msgstr "Megszakítás"
+
+#~ msgid "Transport:"
+#~ msgstr "Szállítás:"
+
+#~ msgid "Profile:"
+#~ msgstr "Profil:"
+
+#~ msgid "Method"
+#~ msgstr "Módszer"
+
+#~ msgid "Fastest"
+#~ msgstr "Leggyorsabb"
+
+#~ msgid "Shortest"
+#~ msgstr "Legrövidebb"
+
+#~ msgid "Please allow access to KWallet."
+#~ msgstr "Kérjük tegye lehetővé a hozzáférést a KWallethez."
+
+#, fuzzy
+#~| msgid "File not accessible"
+#~ msgid "KWallet Access in Marble"
+#~ msgstr "A fájl nem érhető el"
+
+#~ msgid "Location Browser"
+#~ msgstr "Helyböngésző"
+
+#~ msgid "Double click an entry of this list to get it displayed on the map."
+#~ msgstr ""
+#~ "Kattintson duplán egy elemre a listában a térképen való megjelenítéshez."
+
+#~ msgid "Navigate to your 'Home Location'"
+#~ msgstr "Navigálás az „Otthon helyére”"
+
+#, fuzzy
+#~| msgid "&Add Folder"
+#~ msgid "Add SoundCue"
+#~ msgstr "Mappa &hozzáadása"
+
+#, fuzzy
+#~| msgid "Circled"
+#~ msgid "Circular"
+#~ msgstr "Körvonalas"
+
+#~ msgid "&Name"
+#~ msgstr "&Név"
+
+#~ msgid "Pause"
+#~ msgstr "Szünet"
+
+#~ msgid "Pauses touring until you start it again"
+#~ msgstr "Szünetelteti az utazást, amíg ismét el nem indítja"
+
+#~ msgid "Land"
+#~ msgstr "Szárazföld"
+
+#, fuzzy
+#~| msgid "Areas"
+#~ msgid "Ara"
+#~ msgstr "Területek"
+
+#, fuzzy
+#~| msgid "Cancel"
+#~ msgid "Cancer"
+#~ msgstr "Mégse"
+
+#, fuzzy
+#~| msgid "Craters"
+#~ msgid "Crater"
+#~ msgstr "Kráterek"
+
+#, fuzzy
+#~| msgid "Log"
+#~ msgid "Leo"
+#~ msgstr "Napló"
+
+#, fuzzy
+#~| msgid "Library"
+#~ msgid "Libra"
+#~ msgstr "Könyvtár"
+
+#, fuzzy
+#~| msgid "Normal"
+#~ msgid "Norma"
+#~ msgstr "Normál"
+
+#, fuzzy
+#~| msgid "Doctors"
+#~ msgid "Pictor"
+#~ msgstr "Orvosok"
+
+#~ msgid "Show distance labels for each section"
+#~ msgstr "Távolságcímkék megjelenítése minden szakaszhoz"
+
+#~ msgid "Constellation Labels"
+#~ msgstr "Csillagkép címkék"
+
+#~ msgid "Constellation Names"
+#~ msgstr "Csillagképnevek"
+
+#~ msgid "Food"
+#~ msgstr "Élelem"
+
+#~ msgctxt "Action for toggling the atmosphere"
+#~ msgid "&Atmosphere"
+#~ msgstr "&Légkör"
+
+#~ msgid "Enable tab to see gpxFileView"
+#~ msgstr "Lap engedélyezése a gpxFileView megtekintéséhez"
+
+#~ msgctxt "Action for toggling the 'current location' box"
+#~ msgid "Current Location"
+#~ msgstr "Jelenlegi hely"
+
+#~ msgctxt "Action for toggling the navigation panel"
+#~ msgid "Show &Navigation Panel"
+#~ msgstr "&Navigációs panel megjelenítése"
+
+#~ msgctxt "Status tip"
+#~ msgid "Show Navigation Panel"
+#~ msgstr "Navigációs panel megjelenítése"
+
+#, fuzzy
+#~| msgid "File View"
+#~ msgctxt "Action for showing the File View"
+#~ msgid "&Show File View"
+#~ msgstr "Fájlnézet"
+
+#~ msgid "Guides"
+#~ msgstr "Ismertetők"
+
+#~ msgid "Name Ids of plugins."
+#~ msgstr "A bővítmények név azonosítói."
+
+#~ msgid "List of toggles for enabling plugins."
+#~ msgstr "Váltólista a bővítmények engedélyezéséhez."
+
+#~ msgid "List of toggles for making plugins visible."
+#~ msgstr "Váltólista a bővítmények láthatóvá tételéhez."
+
+#~ msgid "Marble Infocenter"
+#~ msgstr "Marble információs központ"
+
+#~ msgid "Data Sheet"
+#~ msgstr "Adatlap"
+
+#~ msgid "Name of the location"
+#~ msgstr "A hely neve"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "size:14pt; font-weight:600;\">Name</span></p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "size:14pt; font-weight:600;\">Név</span></p></body></html>"
+
+#~ msgid "Role of the location."
+#~ msgstr "A hely szerepe."
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "style:italic;\">Role</span></p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "style:italic;\">Szerep</span></p></body></html>"
+
+#~ msgid "Alternative name"
+#~ msgstr "Alternatív név"
+
+#~ msgid "Alternative name of the location."
+#~ msgstr "A hely alternatív neve."
+
+#~ msgid "Alternative Name"
+#~ msgstr "Alternatív név"
+
+#~ msgid "Short description:"
+#~ msgstr "Rövid leírás:"
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">No description "
+#~ "available.</p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">If you are connected to "
+#~ "the Internet please click the \"Wikipedia\" tab at the top of this page "
+#~ "to get more information.</p></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Nincs elérhető leírás.</"
+#~ "p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Ha csatlakozva van az "
+#~ "internethez, további információkért kérjük kattintson a „Wikipédia” lapra "
+#~ "ennek az oldalnak a tetején.</p></body></html>"
+
+#~ msgid ""
+#~ "000° 00' 00\" N\n"
+#~ "000° 00' 00\" E "
+#~ msgstr ""
+#~ "000° 00' 00\" N\n"
+#~ "000° 00' 00\" E "
+
+#~ msgid "9000.0 m"
+#~ msgstr "9000.0 m"
+
+#~ msgid "1000000"
+#~ msgstr "1000000"
+
+#~ msgid "Area:"
+#~ msgstr "Terület:"
+
+#~ msgid "0.0 sq km"
+#~ msgstr "0.0 km2"
+
+#~ msgid "Diameter:"
+#~ msgstr "Átmérő:"
+
+#~ msgid "Timezone (Normal/DST):"
+#~ msgstr "Időzóna (Normál/DST):"
+
+#~ msgid "gmt / dst"
+#~ msgstr "gmt / dst"
+
+#~ msgid "State:"
+#~ msgstr "Állam:"
+
+#~ msgid "Wikipedia"
+#~ msgstr "Wikipédia"
+
+#~ msgid "Back"
+#~ msgstr "Vissza"
+
+#~ msgid "Move backwards one step in the browsing history."
+#~ msgstr "Visszalépés egyet a böngészési előzményekben."
+
+#~ msgid "Print Page"
+#~ msgstr "Lap nyomtatása"
+
+#~ msgid "Reverse"
+#~ msgstr "Megfordítás"
+
+#~ msgid "Show"
+#~ msgstr "Megjelenítés"
+
+#~ msgid "Hide"
+#~ msgstr "Elrejtés"
+
+#~ msgid "Show Zenith"
+#~ msgstr "Zenit megjelenítése"
+
+#~ msgid "Hide Zenith"
+#~ msgstr "Zenit elrejtése"
+
+#~ msgid "Shows and hides the zenith location of the sun"
+#~ msgstr "Megjeleníti vagy elrejti a Nap zenit helyét"
+
+#~ msgid "Check speed of gps drawing"
+#~ msgstr "Gps rajzolás sebességének leellenőrzése"
+
+#~ msgid "(c) 2007, 2008, 2009, 2010"
+#~ msgstr "(C) 2007, 2008, 2009, 2010."
+
+#~ msgid "Navigator Float Item"
+#~ msgstr "Navigátor lebegő elem"

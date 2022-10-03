@@ -1,0 +1,2012 @@
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Chetan Khona <chetan@kompkin.com>, 2013.
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2021-10-18 00:13+0000\n"
+"PO-Revision-Date: 2013-03-28 14:37+0530\n"
+"Last-Translator: Chetan Khona <chetan@kompkin.com>\n"
+"Language-Team: Marathi <kde-i18n-doc@kde.org>\n"
+"Language: mr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\n"
+"X-Generator: Lokalize 1.5\n"
+
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "चेतन खोना"
+
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "chetan@kompkin.com"
+
+#: kdemain.cpp:91
+#, kde-format
+msgid "Marble Virtual Globe"
+msgstr ""
+
+#: kdemain.cpp:93
+#, kde-format
+msgid "A World Atlas."
+msgstr ""
+
+#: kdemain.cpp:95
+#, fuzzy, kde-format
+msgid "(c) 2007-%1"
+msgstr "C"
+
+#: kdemain.cpp:100 kdemain.cpp:286
+#, kde-format
+msgid "Torsten Rahn"
+msgstr "तॉर्स्तेन रान"
+
+#: kdemain.cpp:101
+#, kde-format
+msgid "Developer and Original Author"
+msgstr ""
+
+#: kdemain.cpp:103
+#, kde-format
+msgid "Bernhard Beschow"
+msgstr ""
+
+#: kdemain.cpp:104
+#, kde-format
+msgid "WMS Support, Mobile, Performance"
+msgstr ""
+
+#: kdemain.cpp:106
+#, kde-format
+msgid "Thibaut Gridel"
+msgstr ""
+
+#: kdemain.cpp:107
+#, kde-format
+msgid "Geodata"
+msgstr ""
+
+#: kdemain.cpp:109
+#, kde-format
+msgid "Jens-Michael Hoffmann"
+msgstr ""
+
+#: kdemain.cpp:110
+#, kde-format
+msgid "OpenStreetMap Integration, OSM Namefinder, Download Management"
+msgstr ""
+
+#: kdemain.cpp:112
+#, kde-format
+msgid "Florian E&szlig;er"
+msgstr ""
+
+#: kdemain.cpp:113
+#, kde-format
+msgid "Elevation Profile"
+msgstr ""
+
+#: kdemain.cpp:115
+#, kde-format
+msgid "Wes Hardaker"
+msgstr ""
+
+#: kdemain.cpp:116
+#, kde-format
+msgid "APRS Plugin"
+msgstr ""
+
+#: kdemain.cpp:118 kdemain.cpp:202
+#, kde-format
+msgid "Bastian Holst"
+msgstr ""
+
+#: kdemain.cpp:119
+#, kde-format
+msgid "Online Services support"
+msgstr ""
+
+#: kdemain.cpp:121 kdemain.cpp:172
+#, kde-format
+msgid "Guillaume Martres"
+msgstr ""
+
+#: kdemain.cpp:122
+#, kde-format
+msgid "Satellites"
+msgstr ""
+
+#: kdemain.cpp:124 kdemain.cpp:168
+#, kde-format
+msgid "Rene Kuettner"
+msgstr ""
+
+#: kdemain.cpp:125
+#, kde-format
+msgid "Satellites, Eclipses"
+msgstr ""
+
+#: kdemain.cpp:127
+#, kde-format
+msgid "Friedrich W. H. Kossebau"
+msgstr ""
+
+#: kdemain.cpp:128
+#, kde-format
+msgid "Plasma Integration, Bugfixes"
+msgstr ""
+
+#: kdemain.cpp:130
+#, kde-format
+msgid "Dennis Nienhüser"
+msgstr ""
+
+#: kdemain.cpp:131
+#, kde-format
+msgid "Routing, Navigation, Mobile"
+msgstr ""
+
+#: kdemain.cpp:133
+#, kde-format
+msgid "Niko Sams"
+msgstr ""
+
+#: kdemain.cpp:134
+#, kde-format
+msgid "Routing, Elevation Profile"
+msgstr ""
+
+#: kdemain.cpp:136 kdemain.cpp:206
+#, kde-format
+msgid "Patrick Spendrin"
+msgstr ""
+
+#: kdemain.cpp:137
+#, kde-format
+msgid "Core Developer: KML and Windows support"
+msgstr ""
+
+#: kdemain.cpp:139
+#, kde-format
+msgid "Eckhart Wörner"
+msgstr "एक्हार्ट वोर्नर"
+
+#: kdemain.cpp:140
+#, kde-format
+msgid "Bugfixes"
+msgstr ""
+
+#: kdemain.cpp:145
+#, kde-format
+msgid "Inge Wallin"
+msgstr "इन्गे वाल्लिन"
+
+#: kdemain.cpp:146
+#, kde-format
+msgid "Core Developer and Co-Maintainer"
+msgstr ""
+
+#: kdemain.cpp:148
+#, kde-format
+msgid "Henry de Valence"
+msgstr ""
+
+#: kdemain.cpp:149
+#, kde-format
+msgid "Core Developer: Marble Runners, World-Clock Plasmoid"
+msgstr ""
+
+#: kdemain.cpp:151
+#, kde-format
+msgid "Pino Toscano"
+msgstr "पिनो तोस्कानो"
+
+#: kdemain.cpp:152
+#, kde-format
+msgid "Network plugins"
+msgstr ""
+
+#: kdemain.cpp:154
+#, kde-format
+msgid "Harshit Jain"
+msgstr ""
+
+#: kdemain.cpp:155
+#, kde-format
+msgid "Planet filter"
+msgstr ""
+
+#: kdemain.cpp:157
+#, kde-format
+msgid "Simon Edwards"
+msgstr ""
+
+#: kdemain.cpp:158
+#, kde-format
+msgid "Marble Python Bindings"
+msgstr ""
+
+#: kdemain.cpp:160
+#, kde-format
+msgid "Magnus Valle"
+msgstr ""
+
+#: kdemain.cpp:161
+#, kde-format
+msgid "Historical Maps"
+msgstr ""
+
+#: kdemain.cpp:163
+#, kde-format
+msgid "Médéric Boquien"
+msgstr ""
+
+#: kdemain.cpp:164
+#, kde-format
+msgid "Astronomical Observatories"
+msgstr ""
+
+#: kdemain.cpp:169
+#, kde-format
+msgid ""
+"ESA Summer of Code in Space 2012 Project: Visualization of planetary "
+"satellites"
+msgstr ""
+
+#: kdemain.cpp:173
+#, kde-format
+msgid ""
+"ESA Summer of Code in Space 2011 Project: Visualization of Satellite Orbits"
+msgstr ""
+
+#: kdemain.cpp:178
+#, kde-format
+msgid "Konstantin Oblaukhov"
+msgstr ""
+
+#: kdemain.cpp:179
+#, kde-format
+msgid "Google Summer of Code 2011 Project: OpenStreetMap Vector Rendering"
+msgstr ""
+
+#: kdemain.cpp:182
+#, kde-format
+msgid "Daniel Marth"
+msgstr ""
+
+#: kdemain.cpp:183
+#, kde-format
+msgid "Google Summer of Code 2011 Project: Marble Touch on MeeGo"
+msgstr ""
+
+#: kdemain.cpp:186
+#, kde-format
+msgid "Gaurav Gupta"
+msgstr ""
+
+#: kdemain.cpp:187
+#, kde-format
+msgid "Google Summer of Code 2010 Project: Bookmarks"
+msgstr ""
+
+#: kdemain.cpp:190
+#, kde-format
+msgid "Harshit Jain "
+msgstr ""
+
+#: kdemain.cpp:191
+#, kde-format
+msgid "Google Summer of Code 2010 Project: Time Support"
+msgstr ""
+
+#: kdemain.cpp:194
+#, kde-format
+msgid "Siddharth Srivastava"
+msgstr ""
+
+#: kdemain.cpp:195
+#, kde-format
+msgid "Google Summer of Code 2010 Project: Turn-by-turn Navigation"
+msgstr ""
+
+#: kdemain.cpp:198 kdemain.cpp:218
+#, kde-format
+msgid "Andrew Manson"
+msgstr ""
+
+#: kdemain.cpp:199
+#, kde-format
+msgid "Google Summer of Code 2009 Project: OSM Annotation"
+msgstr ""
+
+#: kdemain.cpp:203
+#, kde-format
+msgid "Google Summer of Code 2009 Project: Online Services"
+msgstr ""
+
+#: kdemain.cpp:207
+#, kde-format
+msgid "Google Summer of Code 2008 Project: Vector Tiles for Marble"
+msgstr ""
+
+#: kdemain.cpp:210
+#, kde-format
+msgid "Shashank Singh"
+msgstr ""
+
+#: kdemain.cpp:211
+#, kde-format
+msgid ""
+"Google Summer of Code 2008 Project: Panoramio / Wikipedia -photo support for "
+"Marble"
+msgstr ""
+
+#: kdemain.cpp:214
+#, fuzzy, kde-format
+msgid "Carlos Licea"
+msgstr "कार्लोस लिसीआ "
+
+#: kdemain.cpp:215
+#, kde-format
+msgid ""
+"Google Summer of Code 2007 Project: Equirectangular Projection (\"Flat Map\")"
+msgstr ""
+
+#: kdemain.cpp:219
+#, kde-format
+msgid "Google Summer of Code 2007 Project: GPS Support for Marble"
+msgstr ""
+
+#: kdemain.cpp:222
+#, kde-format
+msgid "Murad Tagirov"
+msgstr ""
+
+#: kdemain.cpp:223
+#, kde-format
+msgid "Google Summer of Code 2007 Project: KML Support for Marble"
+msgstr ""
+
+#: kdemain.cpp:228
+#, kde-format
+msgid "Simon Schmeisser"
+msgstr ""
+
+#: kdemain.cpp:229 kdemain.cpp:231 kdemain.cpp:233 kdemain.cpp:235
+#: kdemain.cpp:237 kdemain.cpp:239 kdemain.cpp:241 kdemain.cpp:243
+#: kdemain.cpp:245 kdemain.cpp:247 kdemain.cpp:249 kdemain.cpp:251
+#: kdemain.cpp:253 kdemain.cpp:255 kdemain.cpp:257 kdemain.cpp:259
+#: kdemain.cpp:261 kdemain.cpp:263 kdemain.cpp:265
+#, kde-format
+msgid "Development & Patches"
+msgstr ""
+
+#: kdemain.cpp:230
+#, kde-format
+msgid "Claudiu Covaci"
+msgstr ""
+
+#: kdemain.cpp:232
+#, kde-format
+msgid "David Roberts"
+msgstr ""
+
+#: kdemain.cpp:234
+#, kde-format
+msgid "Nikolas Zimmermann"
+msgstr ""
+
+#: kdemain.cpp:236
+#, kde-format
+msgid "Jan Becker"
+msgstr ""
+
+#: kdemain.cpp:238
+#, kde-format
+msgid "Stefan Asserhäll"
+msgstr "स्टीफन असेरहाल"
+
+#: kdemain.cpp:240
+#, fuzzy, kde-format
+msgid "Laurent Montel"
+msgstr "लोरेन्ट मोन्टेल"
+
+#: kdemain.cpp:242
+#, kde-format
+msgid "Mayank Madan"
+msgstr ""
+
+#: kdemain.cpp:244
+#, kde-format
+msgid "Prashanth Udupa"
+msgstr ""
+
+#: kdemain.cpp:246
+#, kde-format
+msgid "Anne-Marie Mahfouf"
+msgstr "आन्ने-मारिआ माहफौफ"
+
+#: kdemain.cpp:248
+#, kde-format
+msgid "Josef Spillner"
+msgstr ""
+
+#: kdemain.cpp:250
+#, fuzzy, kde-format
+msgid "Frerich Raabe"
+msgstr "फ्रेरिश राबे"
+
+#: kdemain.cpp:252
+#, kde-format
+msgid "Frederik Gladhorn"
+msgstr "फ्रडरिक ग्लेडहोर्न"
+
+#: kdemain.cpp:254
+#, kde-format
+msgid "Fredrik Höglund"
+msgstr ""
+
+#: kdemain.cpp:256
+#, fuzzy, kde-format
+msgid "Albert Astals Cid"
+msgstr "आल्बर्ट आस्टल्स किड"
+
+#: kdemain.cpp:258
+#, fuzzy, kde-format
+msgid "Thomas Zander"
+msgstr "थॉमस जेंडर"
+
+#: kdemain.cpp:260
+#, fuzzy, kde-format
+msgid "Joseph Wenninger"
+msgstr "जोसेफ वेनिन्गर"
+
+#: kdemain.cpp:262
+#, kde-format
+msgid "Kris Thomsen"
+msgstr ""
+
+#: kdemain.cpp:264
+#, fuzzy, kde-format
+msgid "Daniel Molkentin"
+msgstr "डेनियल मॉल्केनटिन"
+
+#: kdemain.cpp:266
+#, kde-format
+msgid "Christophe Leske"
+msgstr ""
+
+#: kdemain.cpp:267 kdemain.cpp:269 kdemain.cpp:271 kdemain.cpp:273
+#: kdemain.cpp:275 kdemain.cpp:277 kdemain.cpp:279 kdemain.cpp:281
+#: kdemain.cpp:283
+#, kde-format
+msgid "Platforms & Distributions"
+msgstr ""
+
+#: kdemain.cpp:268
+#, kde-format
+msgid "Sebastian Wiedenroth"
+msgstr ""
+
+#: kdemain.cpp:270
+#, kde-format
+msgid "Tim Sutton"
+msgstr ""
+
+#: kdemain.cpp:272
+#, kde-format
+msgid "Christian Ehrlicher"
+msgstr ""
+
+#: kdemain.cpp:274
+#, kde-format
+msgid "Ralf Habacker"
+msgstr ""
+
+#: kdemain.cpp:276
+#, kde-format
+msgid "Steffen Joeris"
+msgstr ""
+
+#: kdemain.cpp:278
+#, kde-format
+msgid "Marcus Czeslinski"
+msgstr ""
+
+#: kdemain.cpp:280
+#, kde-format
+msgid "Marcus D. Hanwell"
+msgstr ""
+
+#: kdemain.cpp:282
+#, kde-format
+msgid "Chitlesh Goorah"
+msgstr ""
+
+#: kdemain.cpp:284
+#, kde-format
+msgid "Nuno Pinheiro"
+msgstr "नुनो पिन्हेरो"
+
+#: kdemain.cpp:285 kdemain.cpp:287
+#, kde-format
+msgid "Artwork"
+msgstr ""
+
+#: kdemain.cpp:290
+#, kde-format
+msgid "Luis Silva"
+msgstr ""
+
+#: kdemain.cpp:291 kdemain.cpp:293 kdemain.cpp:295 kdemain.cpp:297
+#: kdemain.cpp:299 kdemain.cpp:301 kdemain.cpp:303 kdemain.cpp:305
+#: kdemain.cpp:307 kdemain.cpp:309
+#, kde-format
+msgid "Various Suggestions & Testing"
+msgstr ""
+
+#: kdemain.cpp:292
+#, kde-format
+msgid "Stefan Jordan"
+msgstr ""
+
+#: kdemain.cpp:294
+#, kde-format
+msgid "Robert Scott"
+msgstr ""
+
+#: kdemain.cpp:296
+#, kde-format
+msgid "Lubos Petrovic"
+msgstr ""
+
+#: kdemain.cpp:298
+#, kde-format
+msgid "Benoit Sigoure"
+msgstr ""
+
+#: kdemain.cpp:300
+#, kde-format
+msgid "Martin Konold"
+msgstr ""
+
+#: kdemain.cpp:302
+#, kde-format
+msgid "Matthias Welwarsky"
+msgstr ""
+
+#: kdemain.cpp:304
+#, kde-format
+msgid "Rainer Endres"
+msgstr ""
+
+#: kdemain.cpp:306
+#, kde-format
+msgid "Ralf Gesellensetter"
+msgstr ""
+
+#: kdemain.cpp:308
+#, kde-format
+msgid "Tim Alder"
+msgstr ""
+
+#: kdemain.cpp:310
+#, kde-format
+msgid "John Layt"
+msgstr "जॉन लेट "
+
+#: kdemain.cpp:311
+#, kde-format
+msgid ""
+"Special thanks for providing an important source of inspiration by creating "
+"Marble's predecessor \"Kartographer\"."
+msgstr ""
+
+#: kdemain.cpp:327
+#, kde-format
+msgid "Enable debug output"
+msgstr ""
+
+#: kdemain.cpp:329
+#, kde-format
+msgid "Display OSM placemarks according to the level selected"
+msgstr ""
+
+#: kdemain.cpp:331
+#, kde-format
+msgid "Make a time measurement to check performance"
+msgstr ""
+
+#: kdemain.cpp:333
+#, kde-format
+msgid "Show frame rate"
+msgstr ""
+
+#: kdemain.cpp:335
+#, kde-format
+msgid "Show tile IDs"
+msgstr ""
+
+#: kdemain.cpp:337
+#, kde-format
+msgid "Show time spent in each layer"
+msgstr ""
+
+#: kdemain.cpp:339
+#, kde-format
+msgid "Use a different directory <directory> which contains map data."
+msgstr ""
+
+#: kdemain.cpp:341
+#, kde-format
+msgid "Do not use the interface optimized for small screens"
+msgstr ""
+
+#: kdemain.cpp:342
+#, kde-format
+msgid "Use the interface optimized for small screens"
+msgstr ""
+
+#: kdemain.cpp:344
+#, kde-format
+msgid "Do not use the interface optimized for high resolutions"
+msgstr ""
+
+#: kdemain.cpp:345
+#, kde-format
+msgid "Use the interface optimized for high resolutions"
+msgstr ""
+
+#: kdemain.cpp:347
+#, kde-format
+msgid "Show map at given lat lon <coordinates>"
+msgstr ""
+
+#: kdemain.cpp:349
+#, kde-format
+msgid "Show map at given geo <uri>"
+msgstr ""
+
+#: kdemain.cpp:351
+#, kde-format
+msgid "Set the distance of the observer to the globe (in km)"
+msgstr ""
+
+#: kdemain.cpp:353
+#, kde-format
+msgid "Use map <id> (e.g. \"earth/openstreetmap/openstreetmap.dgml\")"
+msgstr ""
+
+#: kdemain.cpp:355
+#, kde-format
+msgid "One or more placemark files to be opened"
+msgstr ""
+
+#. i18n: ectx: label, entry, group (Time)
+#: marble.kcfg:58
+#, kde-format
+msgid "The date and time of marble clock"
+msgstr ""
+
+#. i18n: ectx: label, entry, group (Time)
+#: marble.kcfg:61
+#, kde-format
+msgid "The speed of marble clock"
+msgstr ""
+
+#. i18n: ectx: label, entry, group (View)
+#: marble.kcfg:107
+#, kde-format
+msgid "The unit chosen to measure distances."
+msgstr ""
+
+#. i18n: ectx: label, entry, group (View)
+#: marble.kcfg:115
+#, kde-format
+msgid "The unit chosen to measure angles."
+msgstr ""
+
+#. i18n: ectx: label, entry, group (View)
+#: marble.kcfg:124
+#, kde-format
+msgid "The quality at which a still map gets painted."
+msgstr ""
+
+#. i18n: ectx: label, entry, group (View)
+#: marble.kcfg:135
+#, kde-format
+msgid "The quality at which an animated map gets painted."
+msgstr ""
+
+#. i18n: ectx: label, entry, group (View)
+#: marble.kcfg:146
+#, kde-format
+msgid "The localization of the labels."
+msgstr ""
+
+#. i18n: ectx: label, entry (mapFont), group (View)
+#: marble.kcfg:155
+#, kde-format
+msgid "The general font used on the map."
+msgstr ""
+
+#. i18n: ectx: label, entry (lastFileOpenDir), group (View)
+#: marble.kcfg:159
+#, kde-format
+msgid "The last directory that was opened by File->Open."
+msgstr ""
+
+#. i18n: ectx: label, entry, group (Navigation)
+#: marble.kcfg:179
+#, kde-format
+msgid "The behaviour of the planet's axis on mouse dragging."
+msgstr ""
+
+#. i18n: ectx: label, entry, group (Navigation)
+#: marble.kcfg:187
+#, kde-format
+msgid "The location shown on application startup."
+msgstr ""
+
+#. i18n: ectx: label, entry, group (Navigation)
+#: marble.kcfg:201
+#, kde-format
+msgid "Display animation on voyage to target."
+msgstr ""
+
+#. i18n: ectx: label, entry, group (Navigation)
+#: marble.kcfg:205
+#, kde-format
+msgid "The external OpenStreetMap editor application"
+msgstr ""
+
+#. i18n: ectx: label, entry, group (Cache)
+#: marble.kcfg:211
+#, kde-format
+msgid "Cache for tiles reserved in the physical memory."
+msgstr ""
+
+#. i18n: ectx: label, entry, group (Cache)
+#: marble.kcfg:217
+#, kde-format
+msgid "Maximum space on the hard disk that can be used to store tiles."
+msgstr ""
+
+#. i18n: ectx: label, entry (proxyUrl), group (Cache)
+#: marble.kcfg:223
+#, kde-format
+msgid "URL for the proxy server."
+msgstr ""
+
+#. i18n: ectx: label, entry, group (Cache)
+#: marble.kcfg:227
+#, kde-format
+msgid "Port for the proxy server."
+msgstr ""
+
+#. i18n: ectx: label, entry (proxyUser), group (Cache)
+#: marble.kcfg:233
+#, kde-format
+msgid "Username for authorization."
+msgstr ""
+
+#. i18n: ectx: label, entry (proxyPass), group (Cache)
+#: marble.kcfg:236
+#, kde-format
+msgid "Password for authorization."
+msgstr ""
+
+#. i18n: ectx: label, entry (proxyHttp), group (Cache)
+#: marble.kcfg:239
+#, kde-format
+msgid "Proxy type is HTTP"
+msgstr ""
+
+#. i18n: ectx: label, entry (proxySocks5), group (Cache)
+#: marble.kcfg:250
+#, kde-format
+msgid "Proxy type is Socks5"
+msgstr ""
+
+#. i18n: ectx: label, entry (proxyAuth), group (Cache)
+#: marble.kcfg:254
+#, kde-format
+msgid "Proxy requires Authentication"
+msgstr ""
+
+#. i18n: ectx: label, entry (activePositionTrackingPlugin), group (Plugins)
+#: marble.kcfg:260
+#, kde-format
+msgid "The position tracking plugin used to determine the current location"
+msgstr ""
+
+#: marble_part.cpp:102
+#, fuzzy, kde-format
+msgid "Position: %1"
+msgstr "स्थिती"
+
+#: marble_part.cpp:103
+#, kde-format
+msgid "Altitude: %1"
+msgstr ""
+
+#: marble_part.cpp:104
+#, kde-format
+msgid "Tile Zoom Level: %1"
+msgstr ""
+
+#: marble_part.cpp:105
+#, kde-format
+msgid "Time: %1"
+msgstr "वेळ : %1"
+
+#: marble_part.cpp:167
+#, kde-format
+msgid ""
+"Sorry, unable to open '%1':\n"
+"'%2'"
+msgstr ""
+
+#: marble_part.cpp:168
+#, kde-format
+msgid "File not readable"
+msgstr ""
+
+#: marble_part.cpp:214
+#, kde-format
+msgid "marble_part"
+msgstr ""
+
+#: marble_part.cpp:217
+#, kde-format
+msgid "A Virtual Globe"
+msgstr ""
+
+#: marble_part.cpp:231
+#, kde-format
+msgid "Sorry, unable to open '%1'. The file is not accessible."
+msgstr ""
+
+#: marble_part.cpp:232
+#, kde-format
+msgid "File not accessible"
+msgstr ""
+
+#: marble_part.cpp:253
+#, kde-format
+msgid "All Supported Files"
+msgstr "सर्व समर्थीत फाईल्स"
+
+#: marble_part.cpp:259
+#, fuzzy, kde-format
+#| msgid "Open File"
+msgctxt "@title:window"
+msgid "Open File"
+msgstr "फाईल उघडा"
+
+#: marble_part.cpp:276
+#, kde-format
+msgctxt "@title:window"
+msgid "Export Map"
+msgstr ""
+
+#: marble_part.cpp:277
+#, kde-format
+msgid "Images *.jpg *.png"
+msgstr ""
+
+#: marble_part.cpp:291
+#, kde-format
+msgctxt "Application name"
+msgid "Marble"
+msgstr ""
+
+#: marble_part.cpp:292
+#, kde-format
+msgid "An error occurred while trying to save the file.\n"
+msgstr ""
+
+#: marble_part.cpp:483
+#, fuzzy, kde-format
+msgid "Unnamed"
+msgstr "वापरकर्ता नाव :"
+
+#: marble_part.cpp:714
+#, kde-format
+msgctxt "Action for downloading an entire region of a map"
+msgid "Download Region..."
+msgstr ""
+
+#: marble_part.cpp:728
+#, kde-format
+msgctxt "Action for saving the map to a file"
+msgid "&Export Map..."
+msgstr ""
+
+#: marble_part.cpp:737
+#, kde-format
+msgctxt "Action for toggling offline mode"
+msgid "&Work Offline"
+msgstr ""
+
+#: marble_part.cpp:747
+#, kde-format
+msgctxt "Action for copying the map to the clipboard"
+msgid "&Copy Map"
+msgstr ""
+
+#: marble_part.cpp:754
+#, kde-format
+msgctxt "Action for copying the coordinates to the clipboard"
+msgid "C&opy Coordinates"
+msgstr ""
+
+#: marble_part.cpp:762
+#, kde-format
+msgctxt "Action for opening a file"
+msgid "&Open..."
+msgstr "उघडा (&O)..."
+
+#: marble_part.cpp:769
+#, kde-format
+msgctxt "Action for downloading maps (GHNS)"
+msgid "Download Maps..."
+msgstr ""
+
+#: marble_part.cpp:772
+#, kde-format
+msgctxt "Status tip"
+msgid "Download new maps"
+msgstr ""
+
+#: marble_part.cpp:778
+#, kde-format
+msgctxt "Action for creating new maps"
+msgid "&Create a New Map..."
+msgstr ""
+
+#: marble_part.cpp:783
+#, kde-format
+msgctxt "Status tip"
+msgid "A wizard guides you through the creation of your own map theme."
+msgstr ""
+
+#: marble_part.cpp:810
+#, kde-format
+msgctxt "Action for toggling clouds"
+msgid "&Clouds"
+msgstr ""
+
+#: marble_part.cpp:817
+#, kde-format
+msgctxt "Action for sun control dialog"
+msgid "S&un Control..."
+msgstr ""
+
+#: marble_part.cpp:827
+#, kde-format
+msgctxt "Action for time control dialog"
+msgid "&Time Control..."
+msgstr ""
+
+#: marble_part.cpp:836
+#, kde-format
+msgctxt "Action for locking float items on the map"
+msgid "Lock Position"
+msgstr ""
+
+#: marble_part.cpp:847
+#, kde-format
+msgid "Show Shadow"
+msgstr ""
+
+#: marble_part.cpp:850
+#, kde-format
+msgid "Hide Shadow"
+msgstr ""
+
+#: marble_part.cpp:851
+#, kde-format
+msgid "Shows and hides the shadow of the sun"
+msgstr ""
+
+#: marble_part.cpp:855
+#, kde-format
+msgid "Show sun icon on the Sub-Solar Point"
+msgstr ""
+
+#: marble_part.cpp:857
+#, kde-format
+msgid "Hide sun icon on the Sub-Solar Point"
+msgstr ""
+
+#: marble_part.cpp:858
+#, kde-format
+msgid "Show sun icon on the sub-solar point"
+msgstr ""
+
+#: marble_part.cpp:863
+#, kde-format
+msgid "Lock Globe to the Sub-Solar Point"
+msgstr ""
+
+#: marble_part.cpp:865
+#, kde-format
+msgid "Unlock Globe to the Sub-Solar Point"
+msgstr ""
+
+#: marble_part.cpp:866
+#, kde-format
+msgid "Lock globe to the sub-solar point"
+msgstr ""
+
+#: marble_part.cpp:881
+#, fuzzy, kde-format
+#| msgctxt "Add Bookmark"
+#| msgid "&Add Bookmark"
+msgctxt "Add Bookmark"
+msgid "Add &Bookmark..."
+msgstr "ओळखचिन्ह जोडा (&A)"
+
+#: marble_part.cpp:889
+#, kde-format
+msgctxt "Show Bookmarks"
+msgid "Show &Bookmarks"
+msgstr ""
+
+#: marble_part.cpp:890
+#, kde-format
+msgid "Show or hide bookmarks in the map"
+msgstr ""
+
+#: marble_part.cpp:898
+#, kde-format
+msgid "&Set Home Location"
+msgstr ""
+
+#: marble_part.cpp:905
+#, fuzzy, kde-format
+msgctxt "Manage Bookmarks"
+msgid "&Manage Bookmarks..."
+msgstr "%1 ओळखचिन्हे आयात करा"
+
+#: marble_part.cpp:917
+#, kde-format
+msgctxt "Edit the map in an external application"
+msgid "&Edit Map..."
+msgstr ""
+
+#: marble_part.cpp:925
+#, kde-format
+msgid "&Record Movie"
+msgstr ""
+
+#: marble_part.cpp:927
+#, kde-format
+msgid "Records a movie of the globe"
+msgstr ""
+
+#: marble_part.cpp:933
+#, kde-format
+msgid "&Stop Recording"
+msgstr ""
+
+#: marble_part.cpp:935
+#, kde-format
+msgid "Stop recording a movie of the globe"
+msgstr ""
+
+#: marble_part.cpp:1287
+#, kde-format
+msgctxt "Action for toggling"
+msgid "Show Position"
+msgstr ""
+
+#: marble_part.cpp:1289
+#, kde-format
+msgctxt "Action for toggling"
+msgid "Show Date and Time"
+msgstr ""
+
+#: marble_part.cpp:1291
+#, kde-format
+msgctxt "Action for toggling"
+msgid "Show Altitude"
+msgstr ""
+
+#: marble_part.cpp:1294
+#, kde-format
+msgctxt "Action for toggling"
+msgid "Show Tile Zoom Level"
+msgstr ""
+
+#: marble_part.cpp:1296
+#, kde-format
+msgctxt "Action for toggling"
+msgid "Show Download Progress Bar"
+msgstr ""
+
+#: marble_part.cpp:1391
+#, kde-format
+msgid "View"
+msgstr "दृश्य"
+
+#: marble_part.cpp:1402
+#, fuzzy, kde-format
+msgid "Navigation"
+msgstr "संचारण"
+
+#: marble_part.cpp:1413
+#, kde-format
+msgid "Cache & Proxy"
+msgstr ""
+
+#: marble_part.cpp:1426
+#, kde-format
+msgid "Date & Time"
+msgstr "दिनांक व वेळ"
+
+#: marble_part.cpp:1434
+#, kde-format
+msgid "Synchronization"
+msgstr ""
+
+#: marble_part.cpp:1447
+#, kde-format
+msgid "Routing"
+msgstr ""
+
+#: marble_part.cpp:1455
+#, kde-format
+msgid "Plugins"
+msgstr "प्लगइन्स"
+
+#. i18n: ectx: Menu (file)
+#: marble_part.rc:6 marbleui.rc:5
+#, fuzzy, kde-format
+msgid "&File"
+msgstr "फाईल (&F)"
+
+#. i18n: ectx: Menu (edit)
+#: marble_part.rc:21 marbleui.rc:14
+#, fuzzy, kde-format
+msgid "&Edit"
+msgstr "संपादन (&E)"
+
+#. i18n: ectx: Menu (view)
+#: marble_part.rc:31 marbleui.rc:18
+#, fuzzy, kde-format
+msgid "&View"
+msgstr "दृश्य (&V)"
+
+#. i18n: ectx: Menu (infoboxes)
+#: marble_part.rc:36
+#, kde-format
+msgid "&Info Boxes"
+msgstr ""
+
+#. i18n: ectx: Menu (onlineservices)
+#: marble_part.rc:42
+#, kde-format
+msgid "&Online Services"
+msgstr ""
+
+#. i18n: ectx: Menu (settings)
+#: marble_part.rc:55 marbleui.rc:31
+#, fuzzy, kde-format
+msgid "&Settings"
+msgstr "संयोजना (&S)"
+
+#. i18n: ectx: Menu (panels)
+#: marble_part.rc:59
+#, kde-format
+msgid "&Panels"
+msgstr ""
+
+#. i18n: ectx: Menu (viewSize)
+#: marble_part.rc:65
+#, fuzzy, kde-format
+msgid "&View Size"
+msgstr "दृश्य (&V)"
+
+#. i18n: ectx: Menu (bookmarks)
+#: marble_part.rc:73 marbleui.rc:29
+#, fuzzy, kde-format
+msgid "&Bookmarks"
+msgstr "ओळखचिन्ह (&B)"
+
+#. i18n: ectx: ToolBar (mainToolBar)
+#: marble_part.rc:84 marbleui.rc:36
+#, fuzzy, kde-format
+msgid "Main Toolbar"
+msgstr "मुख्य साधनपट्टी"
+
+#. i18n: ectx: ToolBar (pluginToolBar)
+#: marble_part.rc:97
+#, kde-format
+msgid "Edit Toolbar"
+msgstr ""
+
+#~ msgid "Native"
+#~ msgstr "मूळ"
+
+#, fuzzy
+#~| msgid "Native"
+#~ msgid "Native (X11)"
+#~ msgstr "मूळ"
+
+#~ msgid "State"
+#~ msgstr "स्थिती"
+
+#, fuzzy
+#~ msgid "7000 m"
+#~ msgstr "M"
+
+#, fuzzy
+#~ msgid "5000 m"
+#~ msgstr "M"
+
+#, fuzzy
+#~ msgid "3500 m"
+#~ msgstr "M"
+
+#, fuzzy
+#~ msgid "2000 m"
+#~ msgstr "M"
+
+#, fuzzy
+#~ msgid "1000 m"
+#~ msgstr "M"
+
+#, fuzzy
+#~ msgid "500 m"
+#~ msgstr "M"
+
+#, fuzzy
+#~ msgid "200 m"
+#~ msgstr "M"
+
+#, fuzzy
+#~ msgid "50 m"
+#~ msgstr "M"
+
+#, fuzzy
+#~ msgid "0 m"
+#~ msgstr "M"
+
+#, fuzzy
+#~ msgid "-50 m"
+#~ msgstr "M"
+
+#, fuzzy
+#~ msgid "-200 m"
+#~ msgstr "M"
+
+#, fuzzy
+#~ msgid "-2000 m"
+#~ msgstr "M"
+
+#, fuzzy
+#~ msgid "-4000 m"
+#~ msgstr "M"
+
+#, fuzzy
+#~ msgid "-6500 m"
+#~ msgstr "M"
+
+#, fuzzy
+#~ msgid "-11000 m"
+#~ msgstr "M"
+
+#~ msgid "Education"
+#~ msgstr "शिक्षण"
+
+#~ msgid "Track"
+#~ msgstr "ट्रॅक"
+
+#~ msgid "Bridge"
+#~ msgstr "ब्रीज"
+
+#, fuzzy
+#~ msgid "University"
+#~ msgstr "विद्यापीठ :"
+
+#~ msgid "Bar"
+#~ msgstr "पट्टी"
+
+#, fuzzy
+#~ msgid "Convenience"
+#~ msgstr "सुविधा (&C)"
+
+#, fuzzy
+#~ msgid "0 mm"
+#~ msgstr "mm"
+
+#, fuzzy
+#~ msgid "10 mm"
+#~ msgstr "mm"
+
+#, fuzzy
+#~ msgid "40 mm"
+#~ msgstr "mm"
+
+#, fuzzy
+#~ msgid "63 mm"
+#~ msgstr "mm"
+
+#, fuzzy
+#~ msgid "89 mm"
+#~ msgstr "mm"
+
+#, fuzzy
+#~ msgid "127 mm"
+#~ msgstr "mm"
+
+#, fuzzy
+#~ msgid "256 mm"
+#~ msgstr "mm"
+
+#, fuzzy
+#~ msgid "512 mm"
+#~ msgstr "mm"
+
+#, fuzzy
+#~ msgid "Rivers"
+#~ msgstr "विद्यापीठ :"
+
+#, fuzzy
+#~ msgid "Show grid"
+#~ msgstr "जाळे दर्शवा (&G)"
+
+#~ msgid "URL:"
+#~ msgstr "URL:"
+
+#, fuzzy
+#~ msgid "Name:"
+#~ msgstr "नाव :"
+
+#~ msgid "Folders"
+#~ msgstr "संचयीका"
+
+#~ msgid "New"
+#~ msgstr "नवीन"
+
+#~ msgid "Rename"
+#~ msgstr "नाव बदला"
+
+#, fuzzy
+#~ msgid "Delete"
+#~ msgstr "काढून टाका"
+
+#, fuzzy
+#~ msgid "Bookmarks"
+#~ msgstr "ओळखचिन्ह"
+
+#, fuzzy
+#~ msgid "Edit"
+#~ msgstr "संपादित करा"
+
+#, fuzzy
+#~ msgid "Disabled"
+#~ msgstr "अकार्यान्वित"
+
+#, fuzzy
+#~ msgctxt "Disable Auto Recenter"
+#~ msgid "Disabled"
+#~ msgstr "अकार्यान्वित"
+
+#~ msgid "&Description"
+#~ msgstr "वर्णन (&D)"
+
+#~ msgid "&Folder"
+#~ msgstr "संचयीका (&F)"
+
+#, fuzzy
+#~ msgid "&Add Folder"
+#~ msgstr "संचयीका जोडा"
+
+#~ msgid "Description"
+#~ msgstr "वर्णन"
+
+#, fuzzy
+#~| msgid "TextLabel"
+#~ msgid "Label"
+#~ msgstr "पाठ्य-लेबल"
+
+#, fuzzy
+#~ msgid "Color:"
+#~ msgstr "रंग"
+
+#, fuzzy
+#~| msgid "Education"
+#~ msgid "Elevation:"
+#~ msgstr "शिक्षण"
+
+#, fuzzy
+#~ msgid " m"
+#~ msgstr "M"
+
+#~ msgid "&Save"
+#~ msgstr "साठवा (&S)"
+
+#~ msgid "&Close"
+#~ msgstr "बंद करा (&C)"
+
+#, fuzzy
+#~ msgid "Color"
+#~ msgstr "रंग"
+
+#, fuzzy
+#~ msgid "Go To..."
+#~ msgstr "येथे जा (&G)..."
+
+#, fuzzy
+#~ msgid "Browse"
+#~ msgstr "ब्राऊज"
+
+#, fuzzy
+#~ msgid "Search"
+#~ msgstr "शोधा"
+
+#, fuzzy
+#~ msgid "&N"
+#~ msgstr "N"
+
+#, fuzzy
+#~ msgid "&W"
+#~ msgstr "W"
+
+#, fuzzy
+#~ msgid "&E"
+#~ msgstr "E"
+
+#, fuzzy
+#~ msgid "&S"
+#~ msgstr "S"
+
+#~ msgid "Globe"
+#~ msgstr "पृथ्वी"
+
+#~ msgid "&Theme"
+#~ msgstr "शैली (&T)"
+
+#~ msgid "Custom"
+#~ msgstr "ऐच्छिक"
+
+#~ msgid "http://"
+#~ msgstr "http://"
+
+#, fuzzy
+#~ msgid "Description:"
+#~ msgstr "वर्णन :"
+
+#~ msgid "Change..."
+#~ msgstr "बदला..."
+
+#~ msgid "&About"
+#~ msgstr "विषयी (&A)"
+
+#~ msgid "A&uthors"
+#~ msgstr "लेखक (&U)"
+
+#~ msgid "&Data"
+#~ msgstr "डेटा (&D)"
+
+#~ msgid "&License Agreement"
+#~ msgstr "परवाना करार (&L)"
+
+#, fuzzy
+#~ msgid "C&ache"
+#~ msgstr "कॅशे"
+
+#, fuzzy
+#~ msgid "&Physical memory:"
+#~ msgstr "वास्तविक स्मृती"
+
+#, fuzzy
+#~ msgid " MB"
+#~ msgstr "%1 MB"
+
+#, fuzzy
+#~ msgid "C&lear"
+#~ msgstr "पुसून टाका (&L)"
+
+#, fuzzy
+#~ msgid "Unlimited"
+#~ msgstr "अमर्यादीत"
+
+#, fuzzy
+#~ msgid "Cl&ear"
+#~ msgstr "पुसून टाका"
+
+#, fuzzy
+#~ msgid "&Proxy"
+#~ msgstr "प्रॉक्सी"
+
+#, fuzzy
+#~ msgid "&Proxy:"
+#~ msgstr "प्रॉक्सी"
+
+#~ msgid "P&ort:"
+#~ msgstr "पोर्ट (&O):"
+
+#, fuzzy
+#~ msgid "Http"
+#~ msgstr "HTTP"
+
+#, fuzzy
+#~ msgid "Socks5"
+#~ msgstr "SOCKS"
+
+#, fuzzy
+#~ msgid "U&sername:"
+#~ msgstr "वापरकर्ता नाव :"
+
+#, fuzzy
+#~ msgid "&Password:"
+#~ msgstr "गुप्तशब्द (&P):"
+
+#, fuzzy
+#~| msgid "Server"
+#~ msgid "Server:"
+#~ msgstr "सर्व्हर"
+
+#, fuzzy
+#~ msgid "Username:"
+#~ msgstr "वापरकर्ता नाव :"
+
+#, fuzzy
+#~ msgid "Password:"
+#~ msgstr "गुप्तशब्द (&P):"
+
+#, fuzzy
+#~ msgid "Always ask"
+#~ msgstr "नेहमी विचारा"
+
+#~ msgid "Up"
+#~ msgstr "वर"
+
+#, fuzzy
+#~ msgid "Left"
+#~ msgstr "डावे"
+
+#, fuzzy
+#~ msgid "Home"
+#~ msgstr "मुख्य"
+
+#, fuzzy
+#~ msgid "Right"
+#~ msgstr "उजवे"
+
+#~ msgid "Down"
+#~ msgstr "खाली"
+
+#~ msgid "Zoom In"
+#~ msgstr "मोठे करा"
+
+#~ msgid "Zoom Out"
+#~ msgstr "लहान करा"
+
+#, fuzzy
+#~ msgid "P&lugins"
+#~ msgstr "प्लगइन्स"
+
+#~ msgid "Time Zone"
+#~ msgstr "वेळ क्षेत्र"
+
+#~ msgid "UTC"
+#~ msgstr "UTC"
+
+#~ msgid "&Units"
+#~ msgstr "एकके (&U):"
+
+#~ msgid "&Distance:"
+#~ msgstr "अंतर (&D):"
+
+#~ msgid "An&gle:"
+#~ msgstr "कोन (&G)"
+
+#~ msgid "Normal"
+#~ msgstr "सामान्य"
+
+#~ msgid "OpenGL"
+#~ msgstr "OpenGL"
+
+#, fuzzy
+#~| msgctxt "Action for opening a file"
+#~| msgid "&Open..."
+#~ msgid "Open..."
+#~ msgstr "उघडा (&O)..."
+
+#~ msgid "Cancel"
+#~ msgstr "रद्द करा"
+
+#, fuzzy
+#~ msgid "Start"
+#~ msgstr "सुरु करा"
+
+#, fuzzy
+#~| msgid "&Name"
+#~ msgid "Name"
+#~ msgstr "नाव (&N)"
+
+#, fuzzy
+#~| msgid "Type:"
+#~ msgid "Type"
+#~ msgstr "प्रकार :"
+
+#, fuzzy
+#~ msgid "Add Relation"
+#~ msgstr "संचयीका जोडा"
+
+#, fuzzy
+#~ msgid "Browse..."
+#~ msgstr "ब्राऊज"
+
+#, fuzzy
+#~| msgid "&Position"
+#~ msgid "Position:"
+#~ msgstr "स्थान (&P)"
+
+#~ msgid "Map"
+#~ msgstr "नकाशा"
+
+#~ msgid "Footer"
+#~ msgstr "अधोशिर्षक"
+
+#, fuzzy
+#~ msgid "Configure"
+#~ msgstr "संयोजीत करा"
+
+#, fuzzy
+#~ msgid "&Add"
+#~ msgstr "जोडा (&A)"
+
+#, fuzzy
+#~ msgid "&Configure"
+#~ msgstr "संयोजीत करा"
+
+#~ msgid "&Remove"
+#~ msgstr "काढून टाका (&R)"
+
+#~ msgid "Move &Up"
+#~ msgstr "वर हलवा (&U)"
+
+#~ msgid "Move &Down"
+#~ msgstr "खाली हलवा (&D)"
+
+#~ msgid "OK"
+#~ msgstr "ठीक आहे"
+
+#~ msgid "Apply"
+#~ msgstr "लागू करा"
+
+#~ msgid "&Cancel"
+#~ msgstr "रद्द करा (&C)"
+
+#, fuzzy
+#~ msgid "Zoom"
+#~ msgstr "झूम"
+
+#, fuzzy
+#~ msgid "to"
+#~ msgstr "पर्यंत"
+
+#~ msgid "Time"
+#~ msgstr "वेळ"
+
+#, fuzzy
+#~ msgid " seconds"
+#~ msgstr " सेकंद"
+
+#, fuzzy
+#~ msgid "Now"
+#~ msgstr "आता"
+
+#, fuzzy
+#~| msgid "&Close"
+#~ msgid "Close"
+#~ msgstr "बंद करा (&C)"
+
+#, fuzzy
+#~| msgid "Move &Up"
+#~ msgid "Move up"
+#~ msgstr "वर हलवा (&U)"
+
+#, fuzzy
+#~| msgid "Move &Down"
+#~ msgid "Move down"
+#~ msgstr "खाली हलवा (&D)"
+
+#, fuzzy
+#~| msgid "OpenGL"
+#~ msgid "Open Tour"
+#~ msgstr "OpenGL"
+
+#~ msgid "Time Zones"
+#~ msgstr "वेळ क्षेत्र"
+
+#, fuzzy
+#~ msgid "N"
+#~ msgstr "N"
+
+#, fuzzy
+#~ msgid "W"
+#~ msgstr "W"
+
+#, fuzzy
+#~ msgid "E"
+#~ msgstr "E"
+
+#, fuzzy
+#~ msgid "S"
+#~ msgstr "S"
+
+#, fuzzy
+#~| msgid "Information"
+#~ msgid "Rotation"
+#~ msgstr "माहिती"
+
+#, fuzzy
+#~ msgid "Add polygon"
+#~ msgstr "संचयीका जोडा"
+
+#, fuzzy
+#~ msgid "Display"
+#~ msgstr "दर्शवा"
+
+#~ msgid "Internet"
+#~ msgstr "महाजाळ"
+
+#~ msgid "Server"
+#~ msgstr "सर्व्हर"
+
+#~ msgid "Port"
+#~ msgstr "पोर्ट"
+
+#~ msgid "Device"
+#~ msgstr "साधन"
+
+#~ msgid "File"
+#~ msgstr "फाईल"
+
+#~ msgid "Theme"
+#~ msgstr "शैली"
+
+#~ msgid "Default"
+#~ msgstr "मूलभूत"
+
+#~ msgid "Arrows"
+#~ msgstr "तीर"
+
+#~ msgid "German"
+#~ msgstr "जर्मन"
+
+#~ msgid "Dialog"
+#~ msgstr "संवाद"
+
+#~ msgid "Filter"
+#~ msgstr "गाळणी"
+
+#, fuzzy
+#~ msgid "&Settings..."
+#~ msgstr "संयोजना (&S)"
+
+#, fuzzy
+#~| msgid "&Remove"
+#~ msgid "&Reminder"
+#~ msgstr "काढून टाका (&R)"
+
+#~ msgid "Speed"
+#~ msgstr "वेग"
+
+#~ msgid "Direction"
+#~ msgstr "दिशा"
+
+#~ msgid "Precision"
+#~ msgstr "काटेकोर"
+
+#, fuzzy
+#~ msgid "C&olors"
+#~ msgstr "रंग"
+
+#, fuzzy
+#~ msgid "&Grid:"
+#~ msgstr "जाळे"
+
+#, fuzzy
+#~| msgid "TextLabel"
+#~ msgid "Labels"
+#~ msgstr "पाठ्य-लेबल"
+
+#~ msgid "Minimize"
+#~ msgstr "लहान करा"
+
+#, fuzzy
+#~| msgid "&Distance:"
+#~ msgid "Distance "
+#~ msgstr "अंतर (&D):"
+
+#, fuzzy
+#~ msgid "General"
+#~ msgstr "सामान्य"
+
+#~ msgid "User name:"
+#~ msgstr "वापरकर्ता नाव :"
+
+#~ msgid "Type:"
+#~ msgstr "प्रकार :"
+
+#~ msgid "Status:"
+#~ msgstr "स्थिती :"
+
+#~ msgid "Country:"
+#~ msgstr "देश :"
+
+#, fuzzy
+#~ msgid "Size:"
+#~ msgstr "आकार :"
+
+#~ msgid "Longitude:"
+#~ msgstr "रेषांश :"
+
+#~ msgid "Latitude:"
+#~ msgstr "अक्षांश :"
+
+#, fuzzy
+#~ msgid "Log"
+#~ msgstr "लॉग"
+
+#, fuzzy
+#~ msgid "Previous"
+#~ msgstr "मागील"
+
+#, fuzzy
+#~ msgid "Next"
+#~ msgstr "पुढील"
+
+#, fuzzy
+#~ msgid "Start:"
+#~ msgstr "सुरु करा"
+
+#, fuzzy
+#~ msgid "End:"
+#~ msgstr "समाप्त"
+
+#~ msgid "TextLabel"
+#~ msgstr "पाठ्य-लेबल"
+
+#~ msgid "&Size:"
+#~ msgstr "आकार (&S):"
+
+#~ msgid "x"
+#~ msgstr "x"
+
+#~ msgid "Preview"
+#~ msgstr "पूर्वावलोकन"
+
+#, fuzzy
+#~ msgid "Filename"
+#~ msgstr "फाईलनाव"
+
+#, fuzzy
+#~ msgid "License"
+#~ msgstr "परवाना :"
+
+#, fuzzy
+#~ msgid "Cursor Shape"
+#~ msgstr "कर्सर आकार:"
+
+#, fuzzy
+#~ msgid "&Custom:"
+#~ msgstr "ऐच्छिक"
+
+#, fuzzy
+#~ msgid "Play a sound"
+#~ msgstr "आवाज ऐकवा (&S)"
+
+#, fuzzy
+#~ msgid "R"
+#~ msgstr "R"
+
+#, fuzzy
+#~ msgid "zoom out"
+#~ msgstr "लहान करा"
+
+#, fuzzy
+#~ msgid "zoom in"
+#~ msgstr "मोठे करा"
+
+#, fuzzy
+#~ msgid " mag"
+#~ msgstr "Mag"
+
+#~ msgid "Sun"
+#~ msgstr "रवि"
+
+#, fuzzy
+#~| msgid "User name:"
+#~ msgid "Use name labels"
+#~ msgstr "वापरकर्ता नाव :"
+
+#~ msgid "Other"
+#~ msgstr "इतर"
+
+#, fuzzy
+#~| msgid "&Name"
+#~ msgid "Names"
+#~ msgstr "नाव (&N)"
+
+#~ msgid "Information"
+#~ msgstr "माहिती"
+
+#~ msgid "Temperature"
+#~ msgstr "तापमान"
+
+#~ msgid "Units"
+#~ msgstr "एकके :"
+
+#~ msgid "Miscellaneous"
+#~ msgstr "किरकोळ"
+
+#~ msgid " hours"
+#~ msgstr " तास"
+
+#, fuzzy
+#~| msgid "Speed"
+#~ msgid "Speed:"
+#~ msgstr "वेग"
+
+#~ msgid "Country"
+#~ msgstr "देश"
+
+#, fuzzy
+#~ msgid "Install"
+#~ msgstr "प्रतिष्ठापीत करा"
+
+#, fuzzy
+#~ msgid "Transport:"
+#~ msgstr "वाहतूक (&T):"
+
+#, fuzzy
+#~ msgid "Profile:"
+#~ msgstr "रूपरेषा"
+
+#~ msgid "Method"
+#~ msgstr "पद्धत"
+
+#, fuzzy
+#~ msgid "Add SoundCue"
+#~ msgstr "संचयीका जोडा"
+
+#~ msgid "&Name"
+#~ msgstr "नाव (&N)"
+
+#, fuzzy
+#~| msgid "Cancel"
+#~ msgid "Cancer"
+#~ msgstr "रद्द करा"
+
+#, fuzzy
+#~ msgid "Leo"
+#~ msgstr "लॉग"
+
+#, fuzzy
+#~| msgid "Normal"
+#~ msgid "Norma"
+#~ msgstr "सामान्य"
+
+#~ msgctxt "Action for toggling the navigation panel"
+#~ msgid "Show &Navigation Panel"
+#~ msgstr "संचारण पटल दर्शवा (&N)"
+
+#, fuzzy
+#~ msgctxt "Status tip"
+#~ msgid "Show Navigation Panel"
+#~ msgstr "संचारण पटल दर्शवा (&N)"

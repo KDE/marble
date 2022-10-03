@@ -1,0 +1,5556 @@
+# translation of marble.po to Hindi
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Ravishankar Shrivastava <raviratlami@yahoo.com>, 2007.
+# Ravishankar Shrivastava <raviratlami@aol.in>, 2009.
+msgid ""
+msgstr ""
+"Project-Id-Version: marble\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2021-10-18 00:13+0000\n"
+"PO-Revision-Date: 2009-02-25 13:50+0530\n"
+"Last-Translator: Ravishankar Shrivastava <raviratlami@aol.in>\n"
+"Language-Team: Hindi <kde-i18n-doc@lists.kde.org>\n"
+"Language: hne\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 0.2\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\n"
+
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "रविसंकर सिरीवास्तव, जी. करूनाकर"
+
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "raviratlami@aol.in,"
+
+#: kdemain.cpp:91
+#, fuzzy, kde-format
+#| msgid "Marble Desktop Globe"
+msgid "Marble Virtual Globe"
+msgstr "मारबल डेस्कटाप ग्लोब"
+
+#: kdemain.cpp:93
+#, kde-format
+msgid "A World Atlas."
+msgstr "विस्व के एटलस."
+
+#: kdemain.cpp:95
+#, kde-format
+msgid "(c) 2007-%1"
+msgstr ""
+
+#: kdemain.cpp:100 kdemain.cpp:286
+#, kde-format
+msgid "Torsten Rahn"
+msgstr "तार्स्तेन रान"
+
+#: kdemain.cpp:101
+#, kde-format
+msgid "Developer and Original Author"
+msgstr ""
+
+#: kdemain.cpp:103
+#, kde-format
+msgid "Bernhard Beschow"
+msgstr ""
+
+#: kdemain.cpp:104
+#, kde-format
+msgid "WMS Support, Mobile, Performance"
+msgstr ""
+
+#: kdemain.cpp:106
+#, kde-format
+msgid "Thibaut Gridel"
+msgstr ""
+
+#: kdemain.cpp:107
+#, kde-format
+msgid "Geodata"
+msgstr ""
+
+#: kdemain.cpp:109
+#, kde-format
+msgid "Jens-Michael Hoffmann"
+msgstr ""
+
+#: kdemain.cpp:110
+#, kde-format
+msgid "OpenStreetMap Integration, OSM Namefinder, Download Management"
+msgstr ""
+
+#: kdemain.cpp:112
+#, kde-format
+msgid "Florian E&szlig;er"
+msgstr ""
+
+#: kdemain.cpp:113
+#, fuzzy, kde-format
+#| msgid "Elevation extreme"
+msgid "Elevation Profile"
+msgstr "एलीवेसन एक्सट्रीम"
+
+#: kdemain.cpp:115
+#, kde-format
+msgid "Wes Hardaker"
+msgstr ""
+
+#: kdemain.cpp:116
+#, fuzzy, kde-format
+#| msgid "Stars Plugin"
+msgid "APRS Plugin"
+msgstr "तारा प्लगइन"
+
+#: kdemain.cpp:118 kdemain.cpp:202
+#, kde-format
+msgid "Bastian Holst"
+msgstr ""
+
+#: kdemain.cpp:119
+#, kde-format
+msgid "Online Services support"
+msgstr ""
+
+#: kdemain.cpp:121 kdemain.cpp:172
+#, kde-format
+msgid "Guillaume Martres"
+msgstr ""
+
+#: kdemain.cpp:122
+#, fuzzy, kde-format
+#| msgid "Satellites"
+msgid "Satellites"
+msgstr "उपग्रह"
+
+#: kdemain.cpp:124 kdemain.cpp:168
+#, kde-format
+msgid "Rene Kuettner"
+msgstr ""
+
+#: kdemain.cpp:125
+#, fuzzy, kde-format
+#| msgid "Satellites"
+msgid "Satellites, Eclipses"
+msgstr "उपग्रह"
+
+#: kdemain.cpp:127
+#, kde-format
+msgid "Friedrich W. H. Kossebau"
+msgstr ""
+
+#: kdemain.cpp:128
+#, kde-format
+msgid "Plasma Integration, Bugfixes"
+msgstr ""
+
+#: kdemain.cpp:130
+#, kde-format
+msgid "Dennis Nienhüser"
+msgstr ""
+
+#: kdemain.cpp:131
+#, fuzzy, kde-format
+#| msgid "not available"
+msgid "Routing, Navigation, Mobile"
+msgstr "नइ मिलत"
+
+#: kdemain.cpp:133
+#, kde-format
+msgid "Niko Sams"
+msgstr ""
+
+#: kdemain.cpp:134
+#, fuzzy, kde-format
+#| msgid "Configure Sun Control"
+msgid "Routing, Elevation Profile"
+msgstr "सूर्यप्रकास नियंत्रक कान्फिगर करव"
+
+#: kdemain.cpp:136 kdemain.cpp:206
+#, kde-format
+msgid "Patrick Spendrin"
+msgstr ""
+
+#: kdemain.cpp:137
+#, kde-format
+msgid "Core Developer: KML and Windows support"
+msgstr ""
+
+#: kdemain.cpp:139
+#, kde-format
+msgid "Eckhart Wörner"
+msgstr ""
+
+#: kdemain.cpp:140
+#, kde-format
+msgid "Bugfixes"
+msgstr ""
+
+#: kdemain.cpp:145
+#, kde-format
+msgid "Inge Wallin"
+msgstr "इंग वालिन"
+
+#: kdemain.cpp:146
+#, fuzzy, kde-format
+msgid "Core Developer and Co-Maintainer"
+msgstr "मूल लेखक, बनइया अउ पहिली के मेंटेनर"
+
+#: kdemain.cpp:148
+#, kde-format
+msgid "Henry de Valence"
+msgstr ""
+
+#: kdemain.cpp:149
+#, kde-format
+msgid "Core Developer: Marble Runners, World-Clock Plasmoid"
+msgstr ""
+
+#: kdemain.cpp:151
+#, kde-format
+msgid "Pino Toscano"
+msgstr ""
+
+#: kdemain.cpp:152
+#, fuzzy, kde-format
+msgid "Network plugins"
+msgstr "जांच प्लगइन"
+
+#: kdemain.cpp:154
+#, kde-format
+msgid "Harshit Jain"
+msgstr ""
+
+#: kdemain.cpp:155
+#, kde-format
+msgid "Planet filter"
+msgstr ""
+
+#: kdemain.cpp:157
+#, kde-format
+msgid "Simon Edwards"
+msgstr ""
+
+#: kdemain.cpp:158
+#, fuzzy, kde-format
+msgid "Marble Python Bindings"
+msgstr "मार्बल कैस सेटिंग"
+
+#: kdemain.cpp:160
+#, kde-format
+msgid "Magnus Valle"
+msgstr ""
+
+#: kdemain.cpp:161
+#, fuzzy, kde-format
+msgid "Historical Maps"
+msgstr "एतिहासिक नक्सा १६८९"
+
+#: kdemain.cpp:163
+#, kde-format
+msgid "Médéric Boquien"
+msgstr ""
+
+#: kdemain.cpp:164
+#, kde-format
+msgid "Astronomical Observatories"
+msgstr ""
+
+#: kdemain.cpp:169
+#, kde-format
+msgid ""
+"ESA Summer of Code in Space 2012 Project: Visualization of planetary "
+"satellites"
+msgstr ""
+
+#: kdemain.cpp:173
+#, kde-format
+msgid ""
+"ESA Summer of Code in Space 2011 Project: Visualization of Satellite Orbits"
+msgstr ""
+
+#: kdemain.cpp:178
+#, kde-format
+msgid "Konstantin Oblaukhov"
+msgstr ""
+
+#: kdemain.cpp:179
+#, kde-format
+msgid "Google Summer of Code 2011 Project: OpenStreetMap Vector Rendering"
+msgstr ""
+
+#: kdemain.cpp:182
+#, kde-format
+msgid "Daniel Marth"
+msgstr ""
+
+#: kdemain.cpp:183
+#, kde-format
+msgid "Google Summer of Code 2011 Project: Marble Touch on MeeGo"
+msgstr ""
+
+#: kdemain.cpp:186
+#, kde-format
+msgid "Gaurav Gupta"
+msgstr ""
+
+#: kdemain.cpp:187
+#, kde-format
+msgid "Google Summer of Code 2010 Project: Bookmarks"
+msgstr ""
+
+#: kdemain.cpp:190
+#, kde-format
+msgid "Harshit Jain "
+msgstr ""
+
+#: kdemain.cpp:191
+#, kde-format
+msgid "Google Summer of Code 2010 Project: Time Support"
+msgstr ""
+
+#: kdemain.cpp:194
+#, kde-format
+msgid "Siddharth Srivastava"
+msgstr ""
+
+#: kdemain.cpp:195
+#, kde-format
+msgid "Google Summer of Code 2010 Project: Turn-by-turn Navigation"
+msgstr ""
+
+#: kdemain.cpp:198 kdemain.cpp:218
+#, kde-format
+msgid "Andrew Manson"
+msgstr ""
+
+#: kdemain.cpp:199
+#, kde-format
+msgid "Google Summer of Code 2009 Project: OSM Annotation"
+msgstr ""
+
+#: kdemain.cpp:203
+#, kde-format
+msgid "Google Summer of Code 2009 Project: Online Services"
+msgstr ""
+
+#: kdemain.cpp:207
+#, kde-format
+msgid "Google Summer of Code 2008 Project: Vector Tiles for Marble"
+msgstr ""
+
+#: kdemain.cpp:210
+#, kde-format
+msgid "Shashank Singh"
+msgstr ""
+
+#: kdemain.cpp:211
+#, kde-format
+msgid ""
+"Google Summer of Code 2008 Project: Panoramio / Wikipedia -photo support for "
+"Marble"
+msgstr ""
+
+#: kdemain.cpp:214
+#, kde-format
+msgid "Carlos Licea"
+msgstr ""
+
+#: kdemain.cpp:215
+#, kde-format
+msgid ""
+"Google Summer of Code 2007 Project: Equirectangular Projection (\"Flat Map\")"
+msgstr ""
+
+#: kdemain.cpp:219
+#, kde-format
+msgid "Google Summer of Code 2007 Project: GPS Support for Marble"
+msgstr ""
+
+#: kdemain.cpp:222
+#, kde-format
+msgid "Murad Tagirov"
+msgstr ""
+
+#: kdemain.cpp:223
+#, kde-format
+msgid "Google Summer of Code 2007 Project: KML Support for Marble"
+msgstr ""
+
+#: kdemain.cpp:228
+#, kde-format
+msgid "Simon Schmeisser"
+msgstr ""
+
+#: kdemain.cpp:229 kdemain.cpp:231 kdemain.cpp:233 kdemain.cpp:235
+#: kdemain.cpp:237 kdemain.cpp:239 kdemain.cpp:241 kdemain.cpp:243
+#: kdemain.cpp:245 kdemain.cpp:247 kdemain.cpp:249 kdemain.cpp:251
+#: kdemain.cpp:253 kdemain.cpp:255 kdemain.cpp:257 kdemain.cpp:259
+#: kdemain.cpp:261 kdemain.cpp:263 kdemain.cpp:265
+#, kde-format
+msgid "Development & Patches"
+msgstr ""
+
+#: kdemain.cpp:230
+#, kde-format
+msgid "Claudiu Covaci"
+msgstr ""
+
+#: kdemain.cpp:232
+#, kde-format
+msgid "David Roberts"
+msgstr ""
+
+#: kdemain.cpp:234
+#, kde-format
+msgid "Nikolas Zimmermann"
+msgstr ""
+
+#: kdemain.cpp:236
+#, kde-format
+msgid "Jan Becker"
+msgstr ""
+
+#: kdemain.cpp:238
+#, kde-format
+msgid "Stefan Asserhäll"
+msgstr ""
+
+#: kdemain.cpp:240
+#, kde-format
+msgid "Laurent Montel"
+msgstr ""
+
+#: kdemain.cpp:242
+#, kde-format
+msgid "Mayank Madan"
+msgstr ""
+
+#: kdemain.cpp:244
+#, kde-format
+msgid "Prashanth Udupa"
+msgstr ""
+
+#: kdemain.cpp:246
+#, kde-format
+msgid "Anne-Marie Mahfouf"
+msgstr ""
+
+#: kdemain.cpp:248
+#, kde-format
+msgid "Josef Spillner"
+msgstr ""
+
+#: kdemain.cpp:250
+#, kde-format
+msgid "Frerich Raabe"
+msgstr ""
+
+#: kdemain.cpp:252
+#, kde-format
+msgid "Frederik Gladhorn"
+msgstr ""
+
+#: kdemain.cpp:254
+#, kde-format
+msgid "Fredrik Höglund"
+msgstr ""
+
+#: kdemain.cpp:256
+#, kde-format
+msgid "Albert Astals Cid"
+msgstr ""
+
+#: kdemain.cpp:258
+#, kde-format
+msgid "Thomas Zander"
+msgstr ""
+
+#: kdemain.cpp:260
+#, kde-format
+msgid "Joseph Wenninger"
+msgstr ""
+
+#: kdemain.cpp:262
+#, kde-format
+msgid "Kris Thomsen"
+msgstr ""
+
+#: kdemain.cpp:264
+#, kde-format
+msgid "Daniel Molkentin"
+msgstr ""
+
+#: kdemain.cpp:266
+#, kde-format
+msgid "Christophe Leske"
+msgstr ""
+
+#: kdemain.cpp:267 kdemain.cpp:269 kdemain.cpp:271 kdemain.cpp:273
+#: kdemain.cpp:275 kdemain.cpp:277 kdemain.cpp:279 kdemain.cpp:281
+#: kdemain.cpp:283
+#, kde-format
+msgid "Platforms & Distributions"
+msgstr ""
+
+#: kdemain.cpp:268
+#, kde-format
+msgid "Sebastian Wiedenroth"
+msgstr ""
+
+#: kdemain.cpp:270
+#, fuzzy, kde-format
+msgid "Tim Sutton"
+msgstr "समय छेत्र"
+
+#: kdemain.cpp:272
+#, kde-format
+msgid "Christian Ehrlicher"
+msgstr ""
+
+#: kdemain.cpp:274
+#, kde-format
+msgid "Ralf Habacker"
+msgstr ""
+
+#: kdemain.cpp:276
+#, kde-format
+msgid "Steffen Joeris"
+msgstr ""
+
+#: kdemain.cpp:278
+#, kde-format
+msgid "Marcus Czeslinski"
+msgstr ""
+
+#: kdemain.cpp:280
+#, kde-format
+msgid "Marcus D. Hanwell"
+msgstr ""
+
+#: kdemain.cpp:282
+#, kde-format
+msgid "Chitlesh Goorah"
+msgstr ""
+
+#: kdemain.cpp:284
+#, kde-format
+msgid "Nuno Pinheiro"
+msgstr ""
+
+#: kdemain.cpp:285 kdemain.cpp:287
+#, kde-format
+msgid "Artwork"
+msgstr ""
+
+#: kdemain.cpp:290
+#, kde-format
+msgid "Luis Silva"
+msgstr ""
+
+#: kdemain.cpp:291 kdemain.cpp:293 kdemain.cpp:295 kdemain.cpp:297
+#: kdemain.cpp:299 kdemain.cpp:301 kdemain.cpp:303 kdemain.cpp:305
+#: kdemain.cpp:307 kdemain.cpp:309
+#, kde-format
+msgid "Various Suggestions & Testing"
+msgstr ""
+
+#: kdemain.cpp:292
+#, kde-format
+msgid "Stefan Jordan"
+msgstr ""
+
+#: kdemain.cpp:294
+#, kde-format
+msgid "Robert Scott"
+msgstr ""
+
+#: kdemain.cpp:296
+#, kde-format
+msgid "Lubos Petrovic"
+msgstr ""
+
+#: kdemain.cpp:298
+#, kde-format
+msgid "Benoit Sigoure"
+msgstr ""
+
+#: kdemain.cpp:300
+#, fuzzy, kde-format
+msgid "Martin Konold"
+msgstr "मुख्य औजार पट्टी"
+
+#: kdemain.cpp:302
+#, kde-format
+msgid "Matthias Welwarsky"
+msgstr ""
+
+#: kdemain.cpp:304
+#, kde-format
+msgid "Rainer Endres"
+msgstr ""
+
+#: kdemain.cpp:306
+#, kde-format
+msgid "Ralf Gesellensetter"
+msgstr ""
+
+#: kdemain.cpp:308
+#, fuzzy, kde-format
+msgid "Tim Alder"
+msgstr "जूम स्लाइडर"
+
+#: kdemain.cpp:310
+#, kde-format
+msgid "John Layt"
+msgstr ""
+
+#: kdemain.cpp:311
+#, kde-format
+msgid ""
+"Special thanks for providing an important source of inspiration by creating "
+"Marble's predecessor \"Kartographer\"."
+msgstr ""
+
+#: kdemain.cpp:327
+#, kde-format
+msgid "Enable debug output"
+msgstr ""
+
+#: kdemain.cpp:329
+#, kde-format
+msgid "Display OSM placemarks according to the level selected"
+msgstr ""
+
+#: kdemain.cpp:331
+#, kde-format
+msgid "Make a time measurement to check performance"
+msgstr "कामकाज जांचे बर समय मापन बनाव"
+
+#: kdemain.cpp:333
+#, kde-format
+msgid "Show frame rate"
+msgstr "फ्रेम दर देखाव"
+
+#: kdemain.cpp:335
+#, fuzzy, kde-format
+msgid "Show tile IDs"
+msgstr "जगह देखाव"
+
+#: kdemain.cpp:337
+#, kde-format
+msgid "Show time spent in each layer"
+msgstr ""
+
+#: kdemain.cpp:339
+#, kde-format
+msgid "Use a different directory <directory> which contains map data."
+msgstr ""
+
+#: kdemain.cpp:341
+#, kde-format
+msgid "Do not use the interface optimized for small screens"
+msgstr ""
+
+#: kdemain.cpp:342
+#, kde-format
+msgid "Use the interface optimized for small screens"
+msgstr ""
+
+#: kdemain.cpp:344
+#, kde-format
+msgid "Do not use the interface optimized for high resolutions"
+msgstr ""
+
+#: kdemain.cpp:345
+#, kde-format
+msgid "Use the interface optimized for high resolutions"
+msgstr ""
+
+#: kdemain.cpp:347
+#, kde-format
+msgid "Show map at given lat lon <coordinates>"
+msgstr ""
+
+#: kdemain.cpp:349
+#, kde-format
+msgid "Show map at given geo <uri>"
+msgstr ""
+
+#: kdemain.cpp:351
+#, kde-format
+msgid "Set the distance of the observer to the globe (in km)"
+msgstr ""
+
+#: kdemain.cpp:353
+#, kde-format
+msgid "Use map <id> (e.g. \"earth/openstreetmap/openstreetmap.dgml\")"
+msgstr ""
+
+#: kdemain.cpp:355
+#, kde-format
+msgid "One or more placemark files to be opened"
+msgstr ""
+
+#. i18n: ectx: label, entry, group (Time)
+#: marble.kcfg:58
+#, kde-format
+msgid "The date and time of marble clock"
+msgstr ""
+
+#. i18n: ectx: label, entry, group (Time)
+#: marble.kcfg:61
+#, kde-format
+msgid "The speed of marble clock"
+msgstr ""
+
+#. i18n: ectx: label, entry, group (View)
+#: marble.kcfg:107
+#, kde-format
+msgid "The unit chosen to measure distances."
+msgstr ""
+
+#. i18n: ectx: label, entry, group (View)
+#: marble.kcfg:115
+#, kde-format
+msgid "The unit chosen to measure angles."
+msgstr ""
+
+#. i18n: ectx: label, entry, group (View)
+#: marble.kcfg:124
+#, kde-format
+msgid "The quality at which a still map gets painted."
+msgstr ""
+
+#. i18n: ectx: label, entry, group (View)
+#: marble.kcfg:135
+#, kde-format
+msgid "The quality at which an animated map gets painted."
+msgstr ""
+
+#. i18n: ectx: label, entry, group (View)
+#: marble.kcfg:146
+#, kde-format
+msgid "The localization of the labels."
+msgstr ""
+
+#. i18n: ectx: label, entry (mapFont), group (View)
+#: marble.kcfg:155
+#, kde-format
+msgid "The general font used on the map."
+msgstr ""
+
+#. i18n: ectx: label, entry (lastFileOpenDir), group (View)
+#: marble.kcfg:159
+#, kde-format
+msgid "The last directory that was opened by File->Open."
+msgstr ""
+
+#. i18n: ectx: label, entry, group (Navigation)
+#: marble.kcfg:179
+#, kde-format
+msgid "The behaviour of the planet's axis on mouse dragging."
+msgstr ""
+
+#. i18n: ectx: label, entry, group (Navigation)
+#: marble.kcfg:187
+#, kde-format
+msgid "The location shown on application startup."
+msgstr ""
+
+#. i18n: ectx: label, entry, group (Navigation)
+#: marble.kcfg:201
+#, kde-format
+msgid "Display animation on voyage to target."
+msgstr ""
+
+#. i18n: ectx: label, entry, group (Navigation)
+#: marble.kcfg:205
+#, kde-format
+msgid "The external OpenStreetMap editor application"
+msgstr ""
+
+#. i18n: ectx: label, entry, group (Cache)
+#: marble.kcfg:211
+#, kde-format
+msgid "Cache for tiles reserved in the physical memory."
+msgstr ""
+
+#. i18n: ectx: label, entry, group (Cache)
+#: marble.kcfg:217
+#, kde-format
+msgid "Maximum space on the hard disk that can be used to store tiles."
+msgstr ""
+
+#. i18n: ectx: label, entry (proxyUrl), group (Cache)
+#: marble.kcfg:223
+#, kde-format
+msgid "URL for the proxy server."
+msgstr ""
+
+#. i18n: ectx: label, entry, group (Cache)
+#: marble.kcfg:227
+#, kde-format
+msgid "Port for the proxy server."
+msgstr ""
+
+#. i18n: ectx: label, entry (proxyUser), group (Cache)
+#: marble.kcfg:233
+#, fuzzy, kde-format
+#| msgid "Alternative name of the location."
+msgid "Username for authorization."
+msgstr "जगह के वैकल्पिक नाम."
+
+#. i18n: ectx: label, entry (proxyPass), group (Cache)
+#: marble.kcfg:236
+#, fuzzy, kde-format
+#| msgid "Alternative name of the location."
+msgid "Password for authorization."
+msgstr "जगह के वैकल्पिक नाम."
+
+#. i18n: ectx: label, entry (proxyHttp), group (Cache)
+#: marble.kcfg:239
+#, kde-format
+msgid "Proxy type is HTTP"
+msgstr ""
+
+#. i18n: ectx: label, entry (proxySocks5), group (Cache)
+#: marble.kcfg:250
+#, kde-format
+msgid "Proxy type is Socks5"
+msgstr ""
+
+#. i18n: ectx: label, entry (proxyAuth), group (Cache)
+#: marble.kcfg:254
+#, fuzzy, kde-format
+#| msgid "Quit the Application"
+msgid "Proxy requires Authentication"
+msgstr "अनुपरयोग से बाहिर आव"
+
+#. i18n: ectx: label, entry (activePositionTrackingPlugin), group (Plugins)
+#: marble.kcfg:260
+#, kde-format
+msgid "The position tracking plugin used to determine the current location"
+msgstr ""
+
+#: marble_part.cpp:102
+#, kde-format
+msgid "Position: %1"
+msgstr "स्थितिः %1"
+
+#: marble_part.cpp:103
+#, kde-format
+msgid "Altitude: %1"
+msgstr "ऊँचाई: %1"
+
+#: marble_part.cpp:104
+#, kde-format
+msgid "Tile Zoom Level: %1"
+msgstr ""
+
+#: marble_part.cpp:105
+#, fuzzy, kde-format
+#| msgid "&Time"
+msgid "Time: %1"
+msgstr "समय (&T)"
+
+#: marble_part.cpp:167
+#, kde-format
+msgid ""
+"Sorry, unable to open '%1':\n"
+"'%2'"
+msgstr ""
+
+#: marble_part.cpp:168
+#, kde-format
+msgid "File not readable"
+msgstr ""
+
+#: marble_part.cpp:214
+#, kde-format
+msgid "marble_part"
+msgstr "मार्बल_पार्ट"
+
+#: marble_part.cpp:217
+#, fuzzy, kde-format
+#| msgid "A Desktop Globe"
+msgid "A Virtual Globe"
+msgstr "डेस्कटाप ग्लोब"
+
+#: marble_part.cpp:231
+#, kde-format
+msgid "Sorry, unable to open '%1'. The file is not accessible."
+msgstr ""
+
+#: marble_part.cpp:232
+#, kde-format
+msgid "File not accessible"
+msgstr ""
+
+#: marble_part.cpp:253
+#, kde-format
+msgid "All Supported Files"
+msgstr ""
+
+#: marble_part.cpp:259
+#, fuzzy, kde-format
+#| msgid "Open File"
+msgctxt "@title:window"
+msgid "Open File"
+msgstr "फाइल खोलव"
+
+#: marble_part.cpp:276
+#, fuzzy, kde-format
+#| msgid "Export Map"
+msgctxt "@title:window"
+msgid "Export Map"
+msgstr "नक्सा निर्यात करव"
+
+#: marble_part.cpp:277
+#, kde-format
+msgid "Images *.jpg *.png"
+msgstr "फोटू *.jpg *.png"
+
+#: marble_part.cpp:291
+#, kde-format
+msgctxt "Application name"
+msgid "Marble"
+msgstr "संगमरमर"
+
+#: marble_part.cpp:292
+#, kde-format
+msgid "An error occurred while trying to save the file.\n"
+msgstr "फाइल ल सहेजे के समय एक गलती होइस\n"
+
+#: marble_part.cpp:483
+#, fuzzy, kde-format
+#| msgid "&Place names:"
+msgid "Unnamed"
+msgstr "स्थान नाम: (&P)"
+
+#: marble_part.cpp:714
+#, fuzzy, kde-format
+msgctxt "Action for downloading an entire region of a map"
+msgid "Download Region..."
+msgstr "डाटा डाउनलोड करत हे..."
+
+#: marble_part.cpp:728
+#, fuzzy, kde-format
+msgctxt "Action for saving the map to a file"
+msgid "&Export Map..."
+msgstr "नक्सा निर्यात करव... (&E)"
+
+#: marble_part.cpp:737
+#, fuzzy, kde-format
+msgctxt "Action for toggling offline mode"
+msgid "&Work Offline"
+msgstr "आफलाइन काम करव (&W)"
+
+#: marble_part.cpp:747
+#, fuzzy, kde-format
+msgctxt "Action for copying the map to the clipboard"
+msgid "&Copy Map"
+msgstr "नक्सा नकल करव (&C)"
+
+#: marble_part.cpp:754
+#, fuzzy, kde-format
+msgctxt "Action for copying the coordinates to the clipboard"
+msgid "C&opy Coordinates"
+msgstr "निर्देसांक नकल करव (&o)"
+
+#: marble_part.cpp:762
+#, fuzzy, kde-format
+msgctxt "Action for opening a file"
+msgid "&Open..."
+msgstr "नक्सा खोलव...(&O)"
+
+#: marble_part.cpp:769
+#, fuzzy, kde-format
+msgctxt "Action for downloading maps (GHNS)"
+msgid "Download Maps..."
+msgstr "डाटा डाउनलोड करत हे..."
+
+#: marble_part.cpp:772
+#, fuzzy, kde-format
+msgctxt "Status tip"
+msgid "Download new maps"
+msgstr "नवा नक्सा डाउनलोड करव (&D)"
+
+#: marble_part.cpp:778
+#, kde-format
+msgctxt "Action for creating new maps"
+msgid "&Create a New Map..."
+msgstr ""
+
+#: marble_part.cpp:783
+#, kde-format
+msgctxt "Status tip"
+msgid "A wizard guides you through the creation of your own map theme."
+msgstr ""
+
+#: marble_part.cpp:810
+#, fuzzy, kde-format
+msgctxt "Action for toggling clouds"
+msgid "&Clouds"
+msgstr "बादल (&C)"
+
+#: marble_part.cpp:817
+#, fuzzy, kde-format
+msgctxt "Action for sun control dialog"
+msgid "S&un Control..."
+msgstr "सूर्यप्रकास नियंत्रक... (&u)"
+
+#: marble_part.cpp:827
+#, fuzzy, kde-format
+msgctxt "Action for time control dialog"
+msgid "&Time Control..."
+msgstr "सूर्यप्रकास नियंत्रक... (&u)"
+
+#: marble_part.cpp:836
+#, fuzzy, kde-format
+msgctxt "Action for locking float items on the map"
+msgid "Lock Position"
+msgstr "स्थिति मं ताला लगाव"
+
+#: marble_part.cpp:847
+#, fuzzy, kde-format
+#| msgid "Shadow"
+msgid "Show Shadow"
+msgstr "छइंहा"
+
+#: marble_part.cpp:850
+#, fuzzy, kde-format
+#| msgid "Shadow"
+msgid "Hide Shadow"
+msgstr "छइंहा"
+
+#: marble_part.cpp:851
+#, kde-format
+msgid "Shows and hides the shadow of the sun"
+msgstr ""
+
+#: marble_part.cpp:855
+#, kde-format
+msgid "Show sun icon on the Sub-Solar Point"
+msgstr ""
+
+#: marble_part.cpp:857
+#, kde-format
+msgid "Hide sun icon on the Sub-Solar Point"
+msgstr ""
+
+#: marble_part.cpp:858
+#, kde-format
+msgid "Show sun icon on the sub-solar point"
+msgstr ""
+
+#: marble_part.cpp:863
+#, kde-format
+msgid "Lock Globe to the Sub-Solar Point"
+msgstr ""
+
+#: marble_part.cpp:865
+#, kde-format
+msgid "Unlock Globe to the Sub-Solar Point"
+msgstr ""
+
+#: marble_part.cpp:866
+#, kde-format
+msgid "Lock globe to the sub-solar point"
+msgstr ""
+
+#: marble_part.cpp:881
+#, fuzzy, kde-format
+#| msgid "&Stars"
+msgctxt "Add Bookmark"
+msgid "Add &Bookmark..."
+msgstr "तारा (&S)"
+
+#: marble_part.cpp:889
+#, fuzzy, kde-format
+#| msgid "&Stars"
+msgctxt "Show Bookmarks"
+msgid "Show &Bookmarks"
+msgstr "तारा (&S)"
+
+#: marble_part.cpp:890
+#, kde-format
+msgid "Show or hide bookmarks in the map"
+msgstr ""
+
+#: marble_part.cpp:898
+#, fuzzy, kde-format
+#| msgid "Show Home Location"
+msgid "&Set Home Location"
+msgstr "घर जगह देखाव"
+
+#: marble_part.cpp:905
+#, fuzzy, kde-format
+#| msgid "&Stars"
+msgctxt "Manage Bookmarks"
+msgid "&Manage Bookmarks..."
+msgstr "तारा (&S)"
+
+#: marble_part.cpp:917
+#, fuzzy, kde-format
+#| msgid "&Edit"
+msgctxt "Edit the map in an external application"
+msgid "&Edit Map..."
+msgstr "संपादन (&E)"
+
+#: marble_part.cpp:925
+#, kde-format
+msgid "&Record Movie"
+msgstr ""
+
+#: marble_part.cpp:927
+#, kde-format
+msgid "Records a movie of the globe"
+msgstr ""
+
+#: marble_part.cpp:933
+#, kde-format
+msgid "&Stop Recording"
+msgstr ""
+
+#: marble_part.cpp:935
+#, kde-format
+msgid "Stop recording a movie of the globe"
+msgstr ""
+
+#: marble_part.cpp:1287
+#, fuzzy, kde-format
+msgctxt "Action for toggling"
+msgid "Show Position"
+msgstr "स्थिति मं ताला लगाव"
+
+#: marble_part.cpp:1289
+#, fuzzy, kde-format
+#| msgid "Show frame rate"
+msgctxt "Action for toggling"
+msgid "Show Date and Time"
+msgstr "फ्रेम दर देखाव"
+
+#: marble_part.cpp:1291
+#, fuzzy, kde-format
+msgctxt "Action for toggling"
+msgid "Show Altitude"
+msgstr "ऊँचाई"
+
+#: marble_part.cpp:1294
+#, kde-format
+msgctxt "Action for toggling"
+msgid "Show Tile Zoom Level"
+msgstr ""
+
+#: marble_part.cpp:1296
+#, kde-format
+msgctxt "Action for toggling"
+msgid "Show Download Progress Bar"
+msgstr ""
+
+#: marble_part.cpp:1391
+#, kde-format
+msgid "View"
+msgstr "दृस्य"
+
+#: marble_part.cpp:1402
+#, kde-format
+msgid "Navigation"
+msgstr "नेविगेसन"
+
+#: marble_part.cpp:1413
+#, kde-format
+msgid "Cache & Proxy"
+msgstr "कैस अउ प्राक्सी"
+
+#: marble_part.cpp:1426
+#, fuzzy, kde-format
+#| msgid "&Time"
+msgid "Date & Time"
+msgstr "समय (&T)"
+
+#: marble_part.cpp:1434
+#, kde-format
+msgid "Synchronization"
+msgstr ""
+
+#: marble_part.cpp:1447
+#, fuzzy, kde-format
+#| msgid "Bridge"
+msgid "Routing"
+msgstr "ब्रिज"
+
+#: marble_part.cpp:1455
+#, kde-format
+msgid "Plugins"
+msgstr "प्लगइन्स"
+
+#. i18n: ectx: Menu (file)
+#: marble_part.rc:6 marbleui.rc:5
+#, kde-format
+msgid "&File"
+msgstr "फाइल (&F)"
+
+#. i18n: ectx: Menu (edit)
+#: marble_part.rc:21 marbleui.rc:14
+#, kde-format
+msgid "&Edit"
+msgstr "संपादन (&E)"
+
+#. i18n: ectx: Menu (view)
+#: marble_part.rc:31 marbleui.rc:18
+#, kde-format
+msgid "&View"
+msgstr "देखव (&V)"
+
+#. i18n: ectx: Menu (infoboxes)
+#: marble_part.rc:36
+#, kde-format
+msgid "&Info Boxes"
+msgstr "जानकारी डब्बा (&I)"
+
+#. i18n: ectx: Menu (onlineservices)
+#: marble_part.rc:42
+#, kde-format
+msgid "&Online Services"
+msgstr ""
+
+#. i18n: ectx: Menu (settings)
+#: marble_part.rc:55 marbleui.rc:31
+#, kde-format
+msgid "&Settings"
+msgstr "सेटिंग (&S)"
+
+#. i18n: ectx: Menu (panels)
+#: marble_part.rc:59
+#, kde-format
+msgid "&Panels"
+msgstr ""
+
+#. i18n: ectx: Menu (viewSize)
+#: marble_part.rc:65
+#, fuzzy, kde-format
+#| msgid "&View"
+msgid "&View Size"
+msgstr "देखव (&V)"
+
+#. i18n: ectx: Menu (bookmarks)
+#: marble_part.rc:73 marbleui.rc:29
+#, fuzzy, kde-format
+#| msgid "&Stars"
+msgid "&Bookmarks"
+msgstr "तारा (&S)"
+
+#. i18n: ectx: ToolBar (mainToolBar)
+#: marble_part.rc:84 marbleui.rc:36
+#, kde-format
+msgid "Main Toolbar"
+msgstr "मुख्य औजार पट्टी"
+
+#. i18n: ectx: ToolBar (pluginToolBar)
+#: marble_part.rc:97
+#, fuzzy, kde-format
+#| msgid "Main Toolbar"
+msgid "Edit Toolbar"
+msgstr "मुख्य औजार पट्टी"
+
+#, fuzzy
+#~| msgid "Nation"
+#~ msgid "Native"
+#~ msgstr "राज्य"
+
+#, fuzzy
+#~| msgid "Nation"
+#~ msgid "Native (X11)"
+#~ msgstr "राज्य"
+
+#, fuzzy
+#~| msgid "Night map"
+#~ msgid "Night Sky"
+#~ msgstr "रात के नक्सा"
+
+#~ msgid "Mountain"
+#~ msgstr "पर्वत"
+
+#~ msgid "Volcano"
+#~ msgstr "ज्वालामुखी"
+
+#~ msgid "Geographic Pole"
+#~ msgstr "भौगोलिक ध्रुव"
+
+#~ msgid "Magnetic Pole"
+#~ msgstr "चुम्बकीय ध्रुव"
+
+#~ msgid "Airport"
+#~ msgstr "एयरपोर्ट"
+
+#~ msgid "Shipwreck"
+#~ msgstr "जहाज तोड़"
+
+#~ msgid "Landing Sites"
+#~ msgstr "लैंडिंग साइट"
+
+#~ msgid "Craters"
+#~ msgstr "क्रेटर"
+
+#~ msgid "Maria"
+#~ msgstr "मारिया"
+
+#~ msgid "Other features"
+#~ msgstr "अऊ दूसर विसेसता"
+
+#~ msgid "Manned landing site"
+#~ msgstr "मैन्ड लैंडिंग साइट"
+
+#~ msgid "Robotic rover"
+#~ msgstr "रोबोटिक रोवर"
+
+#~ msgid "Unmanned soft landing"
+#~ msgstr "अनमैन्ड साफ्ट लैंडिंग"
+
+#~ msgid "Unmanned hard landing"
+#~ msgstr "अनमैन्ड हार्ड लैंडिंग"
+
+#~ msgid "Crater, impact crater"
+#~ msgstr "क्रेटर, इम्पेक्ट क्रेटर"
+
+#~ msgid "Mons, mountain"
+#~ msgstr "पर्वत"
+
+#~ msgid "Vallis, valley"
+#~ msgstr "वेलिस, वेली"
+
+#, fuzzy
+#~ msgid "Selenographic Pole"
+#~ msgstr "भौगोलिक ध्रुव"
+
+#~ msgid "Plain Map"
+#~ msgstr "सादा नक्सा"
+
+#, fuzzy
+#~| msgid "Areas"
+#~ msgid "Urban Areas"
+#~ msgstr "छेत्र"
+
+#~ msgid "Boundaries"
+#~ msgstr "सीमा"
+
+#~ msgid "Water Bodies"
+#~ msgstr "पानी के स्रोत"
+
+#~ msgid "Ice and Glaciers"
+#~ msgstr "बर्फ अउ ग्लेसियर"
+
+#~ msgid "International"
+#~ msgstr "अंतररास्ट्रीय"
+
+#~ msgid "State"
+#~ msgstr "स्थिति"
+
+#~ msgid "Lake"
+#~ msgstr "झील"
+
+#, fuzzy
+#~ msgid "Historic Lake"
+#~ msgstr "एतिहासिक नक्सा १६८९"
+
+#~ msgid "River"
+#~ msgstr "नदी"
+
+#, fuzzy
+#~| msgid "Ice and Glaciers"
+#~ msgid "Glaciers"
+#~ msgstr "बर्फ अउ ग्लेसियर"
+
+#~ msgid "Temperature (July)"
+#~ msgstr "तापमान (जुलाई)"
+
+#~ msgid "42&deg;C"
+#~ msgstr "42&deg;C"
+
+#~ msgid "32&deg;C"
+#~ msgstr "32&deg;C"
+
+#~ msgid "23&deg;C"
+#~ msgstr "23&deg;C"
+
+#~ msgid "12&deg;C"
+#~ msgstr "12&deg;C"
+
+#~ msgid "1&deg;C"
+#~ msgstr "1&deg;C"
+
+#~ msgid "-10&deg;C"
+#~ msgstr "-10&deg;C"
+
+#~ msgid "-21&deg;C"
+#~ msgstr "-21&deg;C"
+
+#~ msgid "-32&deg;C"
+#~ msgstr "-32&deg;C"
+
+#~ msgid "-41&deg;C"
+#~ msgstr "-41&deg;C"
+
+#~ msgid "-69&deg;C"
+#~ msgstr "-69&deg;C"
+
+#~ msgid "Earth at Night"
+#~ msgstr "रात्रि के समय पृथ्वी"
+
+#~ msgid "Surface"
+#~ msgstr "सतह"
+
+#~ msgid "Light terrain"
+#~ msgstr "हल्का मैदान"
+
+#~ msgid "Dark terrain"
+#~ msgstr "गहरा मैदान"
+
+#~ msgid "Water"
+#~ msgstr "पानी"
+
+#~ msgid "Atlas"
+#~ msgstr "एटलस"
+
+#~ msgid "Relief"
+#~ msgstr "रिलीफ"
+
+#~ msgid "Elevation"
+#~ msgstr "एलिवेसन"
+
+#~ msgid "7000 m"
+#~ msgstr "7000 मी"
+
+#~ msgid "5000 m"
+#~ msgstr "5000 मी"
+
+#~ msgid "3500 m"
+#~ msgstr "3500 मी"
+
+#~ msgid "2000 m"
+#~ msgstr "2000 मी"
+
+#~ msgid "1000 m"
+#~ msgstr "1000 मी"
+
+#~ msgid "500 m"
+#~ msgstr "500 मी"
+
+#~ msgid "200 m"
+#~ msgstr "200 मी"
+
+#~ msgid "50 m"
+#~ msgstr "50 मी"
+
+#~ msgid "0 m"
+#~ msgstr "0 मी"
+
+#~ msgid "0 m (Water)"
+#~ msgstr "0 मी (पानी)"
+
+#~ msgid "-50 m"
+#~ msgstr "-50 मी"
+
+#~ msgid "-200 m"
+#~ msgstr "-200 मी"
+
+#~ msgid "-2000 m"
+#~ msgstr "-2000 मी"
+
+#~ msgid "-4000 m"
+#~ msgstr "-4000 मी"
+
+#~ msgid "-6500 m"
+#~ msgstr "-6500 मी"
+
+#~ msgid "-11000 m"
+#~ msgstr "-11000 मी"
+
+#~ msgid "Temperature (December)"
+#~ msgstr "तापमान (दिसम्बर)"
+
+#, fuzzy
+#~| msgid "Map View"
+#~ msgid "OSM Bitmap Tiles"
+#~ msgstr "नक्सा दृस्य"
+
+#, fuzzy
+#~| msgid "The Earth"
+#~ msgid "Explore the Earth"
+#~ msgstr "पृथ्वी"
+
+#~ msgid "Transportation"
+#~ msgstr "ट्रांसपोर्टेसन"
+
+#~ msgid "Areas"
+#~ msgstr "छेत्र"
+
+#, fuzzy
+#~| msgid "Location"
+#~ msgid "Education"
+#~ msgstr "जगह"
+
+#, fuzzy
+#~| msgid "International"
+#~ msgid "Entertainment"
+#~ msgstr "अंतररास्ट्रीय"
+
+#, fuzzy
+#~| msgid "Significant Building"
+#~ msgid "Public Buildings"
+#~ msgstr "विसेस बिल्डिंग"
+
+#, fuzzy
+#~ msgid "Historic"
+#~ msgstr "एतिहासिक नक्सा १६८९"
+
+#~ msgid "Motorway"
+#~ msgstr "मोटरवे"
+
+#~ msgid "Trunk road"
+#~ msgstr "ट्रंक रोड"
+
+#~ msgid "Primary road"
+#~ msgstr "प्राथमिक रोड"
+
+#~ msgid "Secondary road"
+#~ msgstr "सेकेन्डरी रोड"
+
+#~ msgid "Unclassified road"
+#~ msgstr "अवर्गीकृत रोड"
+
+#~ msgid "Unsurfaced road"
+#~ msgstr "अनसरफेस्ड रोड"
+
+#~ msgid "Track"
+#~ msgstr "ट्रैक"
+
+#~ msgid "Byway"
+#~ msgstr "बाइवे"
+
+#~ msgid "Bridleway"
+#~ msgstr "ब्रिडलवे"
+
+#~ msgid "Cycleway"
+#~ msgstr "साइकलवे"
+
+#~ msgid "Footway"
+#~ msgstr "फुटवे"
+
+#~ msgid "Railway station"
+#~ msgstr "रेलवे स्टेसन"
+
+#~ msgid "Railway"
+#~ msgstr "रेलवे"
+
+#~ msgid "Subway"
+#~ msgstr "सबवे"
+
+#~ msgid "Lightrail, tram"
+#~ msgstr "लाइट रेल, ट्राम"
+
+#~ msgid "Airport runway, taxiway"
+#~ msgstr "एयरपोर्ट रनवे, टेक्सीवे"
+
+#~ msgid "Airport apron, terminal"
+#~ msgstr "एयरपोर्ट एप्रन, टर्मिनल"
+
+#~ msgid "Administrative boundary"
+#~ msgstr "प्रसासकीय सीमा"
+
+#~ msgid "Bridge"
+#~ msgstr "ब्रिज"
+
+#~ msgid "Tunnel"
+#~ msgstr "टनल"
+
+#~ msgid "Forest"
+#~ msgstr "जंगल"
+
+#~ msgid "Wood"
+#~ msgstr "लकड़ी"
+
+#~ msgid "Golf course"
+#~ msgstr "गोल्फ कोर्स"
+
+#~ msgid "Park"
+#~ msgstr "पार्क"
+
+#~ msgid "Residential Area"
+#~ msgstr "निवासी छेत्र"
+
+#~ msgid "Tourist attraction"
+#~ msgstr "यात्री आकर्सन"
+
+#~ msgid "Common, meadow"
+#~ msgstr "सामान्य, मेडाव"
+
+#~ msgid "Retail area"
+#~ msgstr "खुदरा छेत्र"
+
+#~ msgid "Industrial Area"
+#~ msgstr "इंडस्ट्रीयल छेत्र"
+
+#~ msgid "Commercial Area"
+#~ msgstr "व्यवसायिक छेत्र"
+
+#~ msgid "Heathland"
+#~ msgstr "हीथलैंड"
+
+#~ msgid "Lake, reservoir"
+#~ msgstr "झील, रिजरवायर"
+
+#~ msgid "Farm"
+#~ msgstr "खेत"
+
+#~ msgid "Brownfield site"
+#~ msgstr "ब्राउनफील्ड साइट"
+
+#~ msgid "Cemetery"
+#~ msgstr "सिमेट्री"
+
+#~ msgid "Allotments"
+#~ msgstr "आबंटन"
+
+#~ msgid "Sports pitch"
+#~ msgstr "खेलकूद पिच"
+
+#~ msgid "Sports centre"
+#~ msgstr "खेलकूद केंद्र"
+
+#~ msgid "Nature reserve"
+#~ msgstr "प्रकृति रिजर्व"
+
+#~ msgid "Military area"
+#~ msgstr "सैन्य छेत्र"
+
+#~ msgid "School, university"
+#~ msgstr "स्कूल, विस्वविद्यालय"
+
+#~ msgid "Significant Building"
+#~ msgstr "विसेस बिल्डिंग"
+
+#~ msgid "Summit, peak"
+#~ msgstr "समिट, पीक"
+
+#, fuzzy
+#~| msgid "School, university"
+#~ msgid "University"
+#~ msgstr "स्कूल, विस्वविद्यालय"
+
+#, fuzzy
+#~| msgid "Places of Interest"
+#~ msgid "Place of worship"
+#~ msgstr "दिलचस्प जगह"
+
+#, fuzzy
+#~| msgid "Capital"
+#~ msgid "Hospital"
+#~ msgstr "राजधानी"
+
+#, fuzzy
+#~| msgid "Railway station"
+#~ msgid "Fire station"
+#~ msgstr "रेलवे स्टेसन"
+
+#, fuzzy
+#~| msgid "Comment"
+#~ msgid "Monument"
+#~ msgstr "टिप्पनी"
+
+#, fuzzy
+#~| msgid "&Stars"
+#~ msgid "Bar"
+#~ msgstr "तारा (&S)"
+
+#, fuzzy
+#~| msgid "&Stars"
+#~ msgid "Books"
+#~ msgstr "तारा (&S)"
+
+#, fuzzy
+#~| msgid "C&lear"
+#~ msgid "Car"
+#~ msgstr "साफ करव (&l)"
+
+#~ msgid "Precipitation (July)"
+#~ msgstr "तलछट (जुलाई)"
+
+#~ msgid "Precipitation"
+#~ msgstr "तलछट"
+
+#~ msgid "0 mm"
+#~ msgstr "0 मिमी"
+
+#~ msgid "10 mm"
+#~ msgstr "10 मिमी"
+
+#~ msgid "40 mm"
+#~ msgstr "40 मिमी"
+
+#~ msgid "63 mm"
+#~ msgstr "63 मिमी"
+
+#~ msgid "89 mm"
+#~ msgstr "89 मिमी"
+
+#~ msgid "127 mm"
+#~ msgstr "127 मिमी"
+
+#~ msgid "256 mm"
+#~ msgstr "256 मिमी"
+
+#~ msgid "512 mm"
+#~ msgstr "512 मिमी"
+
+#~ msgid "1024 mm or more"
+#~ msgstr "1024 मिमी या अधिक"
+
+#~ msgid "Satellite View"
+#~ msgstr "उपग्रह दृस्य"
+
+#, fuzzy
+#~| msgid ""
+#~| "<p>Earth as seen from Space.<p>The map is based on NASA's beautiful "
+#~| "\"Blue Marble Next Generation\" pictures. Credits: NASA's Earth "
+#~| "Observatory "
+#~ msgid ""
+#~ "<p>Earth as seen from Space.</p><p>The map is based on NASA's beautiful "
+#~ "\"Blue Marble Next Generation\" pictures. Credits: NASA's Earth "
+#~ "Observatory</p>"
+#~ msgstr ""
+#~ "<p>पृथ्वी जइसन कि अंतरिक्छ से दिखाई देथे</p>. नक्सा नासा के सुंदर \"ब्लू मारबल नेक्स्ट "
+#~ "जेनरेसन\" फोटू के आधार मं हे. साभार: नासा के पृथ्वी आब्जरवेटरी"
+
+#~ msgid "Ice"
+#~ msgstr "बरफ"
+
+#~ msgid "Vegetation"
+#~ msgstr "वेजीटेसन"
+
+#~ msgid "Desert"
+#~ msgstr "मरूस्थल"
+
+#, fuzzy
+#~ msgid "Political Map"
+#~ msgstr "एतिहासिक नक्सा १६८९"
+
+#, fuzzy
+#~| msgid "River"
+#~ msgid "Rivers"
+#~ msgstr "नदी"
+
+#~ msgid "Precipitation (December)"
+#~ msgstr "तलछट (दिसम्बर)"
+
+#, fuzzy
+#~| msgid "During &animations:"
+#~ msgid "Texts and illustrations"
+#~ msgstr "एनिमेसन के समय: (&a)"
+
+#, fuzzy
+#~| msgid "Search line"
+#~ msgid "Reference lines"
+#~ msgstr "खोजव पंक्ति"
+
+#~ msgid "Accurate Coastline"
+#~ msgstr "सटीक कोस्टलाइन"
+
+#~ msgid "Historical Map 1689"
+#~ msgstr "एतिहासिक नक्सा १६८९"
+
+#~ msgid "Town"
+#~ msgstr "सहर"
+
+#~ msgid "OpenStreetMap"
+#~ msgstr "ओपन-स्ट्रीट-मैप"
+
+#~ msgid "Clouds"
+#~ msgstr "बादल"
+
+#, fuzzy
+#~| msgid "Legend"
+#~ msgid "Marble: Legend"
+#~ msgstr "लीजैंड"
+
+#~ msgid "Population:"
+#~ msgstr "जनसंख्या:"
+
+#~ msgid "&gt; 1&nbsp;000&nbsp;000"
+#~ msgstr "&gt; 1&nbsp;000&nbsp;000"
+
+#~ msgid "&ge; 100&nbsp;000"
+#~ msgstr "&ge; 100&nbsp;000"
+
+#~ msgid "&ge; 10&nbsp;000"
+#~ msgstr "&ge; 10&nbsp;000"
+
+#~ msgid "&lt; 10&nbsp;000"
+#~ msgstr "&lt; 10&nbsp;000"
+
+#~ msgid "Capitals:"
+#~ msgstr "राजधानी:"
+
+#~ msgid "Red:&nbsp;Nation"
+#~ msgstr "लाल:&nbsp;देस"
+
+#~ msgid "Orange:&nbsp;State"
+#~ msgstr "नारंगी:&nbsp;राज्य"
+
+#~ msgid "Yellow:&nbsp;County"
+#~ msgstr "पीला:&nbsp;देस"
+
+#~ msgid "White:&nbsp;None"
+#~ msgstr "सफेद:&nbsp;कुछ नइ"
+
+#~ msgid "<!-- ##customLegendEntries:all## -->"
+#~ msgstr "<!-- ##customLegendEntries:all## -->"
+
+#, fuzzy
+#~| msgid "Marble"
+#~ msgid "Marble - Game"
+#~ msgstr "संगमरमर"
+
+#~ msgid "The Earth"
+#~ msgstr "पृथ्वी"
+
+#~ msgid "The Marble widget displays a virtual globe."
+#~ msgstr "मारबल विजेट आभासी ग्लोब प्रदर्सित करथे ."
+
+#~ msgid "Navigation Control"
+#~ msgstr "नेविगेसन नियंत्रक"
+
+#~ msgid "Use this control to navigate."
+#~ msgstr "नेविगेट करे बर एखर नियंत्रक के परयोग करव."
+
+#~ msgid "Show places"
+#~ msgstr "जगह देखाव"
+
+#~ msgid "Show relief"
+#~ msgstr "रिलीफ देखाव"
+
+#~ msgid "Show scale bar"
+#~ msgstr "स्केल पट्टी देखाव"
+
+#~ msgid "Show borders"
+#~ msgstr "सीमा देखाव"
+
+#~ msgid "Show ice / snow"
+#~ msgstr "बर्फ/हिम देखाव"
+
+#~ msgid "Show compass"
+#~ msgstr "दिसा-सूचक देखाव"
+
+#~ msgid "Show grid"
+#~ msgstr "ग्रिड देखाव"
+
+#~ msgid "Show rivers / lakes"
+#~ msgstr "नदी/झरने देखाव"
+
+#~ msgid "Show elevation model"
+#~ msgstr "एलीवेस माडल देखाव"
+
+#~ msgid "Coordinates: "
+#~ msgstr "निर्देसांक:"
+
+#, fuzzy
+#~| msgid "Name"
+#~ msgid "Name:"
+#~ msgstr "नाम"
+
+#, fuzzy
+#~ msgid "Import Bookmarks..."
+#~ msgstr "नक्सा निर्यात करव... (&E)"
+
+#, fuzzy
+#~ msgid "Export Bookmarks..."
+#~ msgstr "नक्सा निर्यात करव... (&E)"
+
+#, fuzzy
+#~| msgid "&File"
+#~ msgid "Folders"
+#~ msgstr "फाइल (&F)"
+
+#, fuzzy
+#~| msgid "Now"
+#~ msgid "New"
+#~ msgstr "अभी"
+
+#, fuzzy
+#~| msgid "&File"
+#~ msgid "Rename"
+#~ msgstr "फाइल (&F)"
+
+#, fuzzy
+#~| msgid "Desert"
+#~ msgid "Delete"
+#~ msgstr "मरूस्थल"
+
+#, fuzzy
+#~| msgid "&Stars"
+#~ msgid "Bookmarks"
+#~ msgstr "तारा (&S)"
+
+#, fuzzy
+#~| msgid "&Edit"
+#~ msgid "Edit"
+#~ msgstr "संपादन (&E)"
+
+#, fuzzy
+#~| msgid "Clouds"
+#~ msgid "Cloud Routes"
+#~ msgstr "बादल"
+
+#, fuzzy
+#~| msgid "not available"
+#~ msgid "No route available."
+#~ msgstr "नइ मिलत"
+
+#~ msgid "Current Location"
+#~ msgstr "अभी हाल के जगह"
+
+#, fuzzy
+#~| msgid "Position"
+#~ msgid "Position Tracking"
+#~ msgstr "स्थिति"
+
+#, fuzzy
+#~| msgid "Track"
+#~ msgid "Show Track"
+#~ msgstr "ट्रैक"
+
+#, fuzzy
+#~| msgid "Track"
+#~ msgid "Clear Track"
+#~ msgstr "ट्रैक"
+
+#~ msgid "..."
+#~ msgstr "..."
+
+#, fuzzy
+#~| msgid "not available"
+#~ msgid "No position available."
+#~ msgstr "नइ मिलत"
+
+#, fuzzy
+#~| msgid "Zoom In"
+#~ msgid "Auto Zoom"
+#~ msgstr "जूम इन"
+
+#, fuzzy
+#~| msgid "Navigation"
+#~ msgid "Data Migration"
+#~ msgstr "नेविगेसन"
+
+#, fuzzy
+#~| msgid "Description"
+#~ msgid "&Description"
+#~ msgstr "वर्नन"
+
+#, fuzzy
+#~| msgid ""
+#~| "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~| "css\">\n"
+#~| "p, li { white-space: pre-wrap; }\n"
+#~| "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~| "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~| "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~| "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~| "\"></p></body></html>"
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<table border=\"0\" style=\"-qt-table-type: root; margin-top:4px; margin-"
+#~ "bottom:4px; margin-left:4px; margin-right:4px;\">\n"
+#~ "<tr>\n"
+#~ "<td style=\"border: none;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-family:'Ubuntu';\"><br /></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-family:'Ubuntu';\"><br /></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-family:'Ubuntu';\"><br /></p></td></tr></table></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p></body></html>"
+
+#, fuzzy
+#~| msgid "&File"
+#~ msgid "&Folder"
+#~ msgstr "फाइल (&F)"
+
+#, fuzzy
+#~| msgid "&Add Place"
+#~ msgid "&Add Folder"
+#~ msgstr "स्थान जोड़व (&A)"
+
+#, fuzzy
+#~| msgid "Main Toolbar"
+#~ msgid "Edit placemark"
+#~ msgstr "मुख्य औजार पट्टी"
+
+#~ msgid "Description"
+#~ msgstr "वर्नन"
+
+#, fuzzy
+#~| msgid "&Text Labels"
+#~ msgid "Label"
+#~ msgstr "पाठ लेबल्स (&T)"
+
+#, fuzzy
+#~| msgid "Clouds"
+#~ msgid "Color:"
+#~ msgstr "बादल"
+
+#, fuzzy
+#~| msgid "Scale Bar"
+#~ msgid "Scale:"
+#~ msgstr "स्केल पट्टी"
+
+#, fuzzy
+#~| msgid "Show places"
+#~ msgid "Show placemark"
+#~ msgstr "जगह देखाव"
+
+#~ msgid "Elevation:"
+#~ msgstr "एलिवेसन:"
+
+#, fuzzy
+#~| msgid "0 m"
+#~ msgid " m"
+#~ msgstr "0 मी"
+
+#, fuzzy
+#~| msgid "Mercator"
+#~ msgid "Merkaartor"
+#~ msgstr "मर्केटर"
+
+#, fuzzy
+#~| msgctxt "EMAIL OF TRANSLATORS"
+#~| msgid "Your emails"
+#~ msgid "Editor Details"
+#~ msgstr "raviratlami@aol.in"
+
+#, fuzzy
+#~| msgctxt "EMAIL OF TRANSLATORS"
+#~| msgid "Your emails"
+#~ msgid "Editor Preview"
+#~ msgstr "raviratlami@aol.in"
+
+#~ msgid "File View"
+#~ msgstr "फ़ाइल दृस्य"
+
+#~ msgid "&Save"
+#~ msgstr "सहेजव (&S)"
+
+#~ msgid "&Close"
+#~ msgstr "बंद करव (&C)"
+
+#, fuzzy
+#~| msgid "F9"
+#~ msgid "9"
+#~ msgstr "F9"
+
+#, fuzzy
+#~| msgid "Clouds"
+#~ msgid "Color"
+#~ msgstr "बादल"
+
+#, fuzzy
+#~| msgid "Go To"
+#~ msgid "Go To..."
+#~ msgstr " मं जाव"
+
+#, fuzzy
+#~| msgid "&Stars"
+#~ msgid "Browse"
+#~ msgstr "तारा (&S)"
+
+#, fuzzy
+#~| msgid "&Search"
+#~ msgid "Search"
+#~ msgstr "खोजव (&S)"
+
+#, fuzzy
+#~ msgid "Select a geographic region"
+#~ msgstr "भौगोलिक ध्रुव"
+
+#, fuzzy
+#~| msgid "Latitude"
+#~ msgid "Northern Latitude"
+#~ msgstr "अच्छांस"
+
+#, fuzzy
+#~| msgid "N"
+#~ msgid "&N"
+#~ msgstr "उ"
+
+#, fuzzy
+#~| msgid "Longitude"
+#~ msgid "Western Longitude"
+#~ msgstr "देसान्तर"
+
+#, fuzzy
+#~| msgid "W"
+#~ msgid "&W"
+#~ msgstr "प"
+
+#, fuzzy
+#~| msgid "Longitude"
+#~ msgid "Eastern Longitude"
+#~ msgstr "देसान्तर"
+
+#, fuzzy
+#~| msgid "E"
+#~ msgid "&E"
+#~ msgstr "ई"
+
+#, fuzzy
+#~| msgid "Latitude"
+#~ msgid "Southern Latitude"
+#~ msgstr "अच्छांस"
+
+#, fuzzy
+#~| msgid "S"
+#~ msgid "&S"
+#~ msgstr "S"
+
+#~ msgid "Legend"
+#~ msgstr "लीजैंड"
+
+#~ msgid "Map View"
+#~ msgstr "नक्सा दृस्य"
+
+#~ msgid "&Projection"
+#~ msgstr "प्रोजेक्सन (&P)"
+
+#~ msgid "Globe"
+#~ msgstr "ग्लोब"
+
+#~ msgid "Flat Map"
+#~ msgstr "चपटा नक्सा"
+
+#~ msgid "Mercator"
+#~ msgstr "मर्केटर"
+
+#, fuzzy
+#~ msgid "Stereographic"
+#~ msgstr "भौगोलिक ध्रुव"
+
+#~ msgid "&Theme"
+#~ msgstr "प्रसंग (&T)"
+
+#~ msgid "Here you can choose the preferred map view from different topics."
+#~ msgstr "इहां आप मन विभिन्न विसयों मं निसानी नक्सा दृस्य चुन सकथो ."
+
+#, fuzzy
+#~| msgid ""
+#~| "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~| "css\">\n"
+#~| "p, li { white-space: pre-wrap; }\n"
+#~| "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~| "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~| "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~| "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~| "\"></p>\n"
+#~| "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~| "right:0px; -qt-block-indent:0; text-indent:0px;\">(c) 2007, The Marble "
+#~| "Project</p>\n"
+#~| "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~| "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~| "font-style:italic;\"></p>\n"
+#~| "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~| "right:0px; -qt-block-indent:0; text-indent:0px;\">http://edu.kde.org/"
+#~| "marble</p></body></html>"
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">Welcome to the Map Creation Wizard!</span></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">We will guide you "
+#~ "through the process of creating a map theme for Marble. In the end you "
+#~ "will have your own map that you can view in Marble.</p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Please choose the "
+#~ "source that you want to use for the data of your map theme:</p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:12px; margin-bottom:12px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">(c) 2007, मारबल "
+#~ "परियोजना</p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-style:italic;\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">http://edu.kde.org/"
+#~ "marble</p></body></html>"
+
+#, fuzzy
+#~| msgid ""
+#~| "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~| "css\">\n"
+#~| "p, li { white-space: pre-wrap; }\n"
+#~| "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~| "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~| "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~| "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~| "\"></p></body></html>"
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">WMS Server</span></p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Please choose a <a href="
+#~ "\"http://en.wikipedia.org/wiki/Web_Map_Service\"><span style=\" text-"
+#~ "decoration: underline; color:#0057ae;\">WMS</span></a> server or enter a "
+#~ "custom server URL.</p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p></body></html>"
+
+#~ msgid "http://"
+#~ msgstr "http://"
+
+#, fuzzy
+#~| msgid "Creating Map"
+#~ msgid "Available Maps:"
+#~ msgstr "नक्सा बनात हे"
+
+#, fuzzy
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">World Map Bitmap Image</span></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-weight:600;\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Please choose the "
+#~ "location of a world map that is stored in a single image file (JPG, PNG, "
+#~ "etc.). It needs to be provided in <a href=\"http://en.wikipedia.org/wiki/"
+#~ "Equirectangular_projection\"><span style=\" text-decoration: underline; "
+#~ "color:#0057ae;\">Equirectangular projection</span></a>, so the shape "
+#~ "should look like this (size ratio: 2:1):</p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><img src=\":/data/svg/"
+#~ "worldmap.svg\" width=\"150\" /></p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">(c) 2007, मारबल "
+#~ "परियोजना</p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-style:italic;\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">http://edu.kde.org/"
+#~ "marble</p></body></html>"
+
+#, fuzzy
+#~| msgid "Legend"
+#~ msgid "Source Image:"
+#~ msgstr "लीजैंड"
+
+#, fuzzy
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Bitstream Vera Sans'; font-"
+#~ "size:9pt; font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif'; font-weight:600;\">URL Scheme for Indexed Tiles</"
+#~ "span></p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif';\">Please enter the URL used for downloading "
+#~ "individual tiles. Use the placeholders </span><span style=\" font-"
+#~ "family:'Sans Serif'; font-style:italic;\">{x}</span><span style=\" font-"
+#~ "family:'Sans Serif';\">, </span><span style=\" font-family:'Sans Serif'; "
+#~ "font-style:italic;\">{y}</span><span style=\" font-family:'Sans Serif';"
+#~ "\">, and </span><span style=\" font-family:'Sans Serif'; font-style:"
+#~ "italic;\">{zoomLevel}</span><span style=\" font-family:'Sans Serif';\"> "
+#~ "to reference a tile from the index.</span></p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">(c) 2007, मारबल "
+#~ "परियोजना</p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-style:italic;\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">http://edu.kde.org/"
+#~ "marble</p></body></html>"
+
+#, fuzzy
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Bitstream Vera Sans'; font-"
+#~ "size:9pt; font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif'; font-weight:600;\">General Information</span></p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif';\">Please specify a title, a name and an icon for "
+#~ "your new map. Add a description to let users know what your map is about. "
+#~ "</span></p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">(c) 2007, मारबल "
+#~ "परियोजना</p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-style:italic;\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">http://edu.kde.org/"
+#~ "marble</p></body></html>"
+
+#, fuzzy
+#~| msgid "Map View"
+#~ msgid "Map Title:"
+#~ msgstr "नक्सा दृस्य"
+
+#, fuzzy
+#~| msgid "Name"
+#~ msgid "Map Name:"
+#~ msgstr "नाम"
+
+#, fuzzy
+#~| msgid "Description"
+#~ msgid "Description:"
+#~ msgstr "वर्नन"
+
+#, fuzzy
+#~| msgid "Overview Map"
+#~ msgid "Preview Image:"
+#~ msgstr "ओवरव्यू नक्सा"
+
+#, fuzzy
+#~| msgid "Overview Map"
+#~ msgid "preview image"
+#~ msgstr "ओवरव्यू नक्सा"
+
+#, fuzzy
+#~| msgid "Legend"
+#~ msgid "Legend Image:"
+#~ msgstr "लीजैंड"
+
+#~ msgid "Places of Interest"
+#~ msgstr "दिलचस्प जगह"
+
+#~ msgid "Populated Places"
+#~ msgstr "आबादी के जगह"
+
+#~ msgid "Terrain"
+#~ msgstr "मैदान"
+
+#~ msgid "Coordinate Grid"
+#~ msgstr "कोआर्डिनेट ग्रिड"
+
+#, fuzzy
+#~| msgid "Boundaries"
+#~ msgid "Border Lines"
+#~ msgstr "सीमा"
+
+#, fuzzy
+#~| msgid ""
+#~| "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~| "css\">\n"
+#~| "p, li { white-space: pre-wrap; }\n"
+#~| "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~| "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~| "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~| "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~| "\"></p>\n"
+#~| "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~| "right:0px; -qt-block-indent:0; text-indent:0px;\">(c) 2007, The Marble "
+#~| "Project</p>\n"
+#~| "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~| "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~| "font-style:italic;\"></p>\n"
+#~| "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~| "right:0px; -qt-block-indent:0; text-indent:0px;\">http://edu.kde.org/"
+#~| "marble</p></body></html>"
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">Summary</span></p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Congratulations! You "
+#~ "have entered all the data that is necessary to create your map theme. "
+#~ "Check the summary below carefully and press the \"Finish\" button to "
+#~ "create the theme. </p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Please consider "
+#~ "contributing the map theme back to the Marble community if the license "
+#~ "and the terms of use allow for it.</p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:12px; margin-bottom:12px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">(c) 2007, मारबल "
+#~ "परियोजना</p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-style:italic;\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">http://edu.kde.org/"
+#~ "marble</p></body></html>"
+
+#, fuzzy
+#~ msgid "Map name goes here."
+#~ msgstr "जगह देखाव"
+
+#, fuzzy
+#~| msgid "&Theme"
+#~ msgid "Map Theme:"
+#~ msgstr "प्रसंग (&T)"
+
+#, fuzzy
+#~ msgid "Map theme goes here."
+#~ msgstr "जगह देखाव"
+
+#, fuzzy
+#~ msgid "Thumbnail image goes here."
+#~ msgstr "जगह देखाव"
+
+#, fuzzy
+#~| msgid "Overview Map"
+#~ msgid "Preview Map"
+#~ msgstr "ओवरव्यू नक्सा"
+
+#~ msgid "About Marble"
+#~ msgstr "मारबल के बारे में"
+
+#, fuzzy
+#~| msgid ""
+#~| "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~| "css\">\n"
+#~| "p, li { white-space: pre-wrap; }\n"
+#~| "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~| "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~| "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~| "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~| "weight:600;\">Marble Desktop Globe</span></p></body></html>"
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">Marble Virtual Globe</span></p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">मारबल डेस्कटाप ग्लोब</span></p></body></html>"
+
+#~ msgid "Version Unknown"
+#~ msgstr "अग्यात संस्करन"
+
+#~ msgid "&About"
+#~ msgstr "परिचय (&A)"
+
+#, fuzzy
+#~| msgid ""
+#~| "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~| "css\">\n"
+#~| "p, li { white-space: pre-wrap; }\n"
+#~| "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~| "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~| "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~| "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~| "\"></p>\n"
+#~| "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~| "right:0px; -qt-block-indent:0; text-indent:0px;\">(c) 2007, The Marble "
+#~| "Project</p>\n"
+#~| "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~| "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~| "font-style:italic;\"></p>\n"
+#~| "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~| "right:0px; -qt-block-indent:0; text-indent:0px;\">http://edu.kde.org/"
+#~| "marble</p></body></html>"
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:10pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-size:9pt;\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "size:9pt;\">(c) 2007, The Marble Project</span></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-size:9pt; font-style:italic;\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "size:9pt;\">http://edu.kde.org/marble</span></p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">(c) 2007, मारबल "
+#~ "परियोजना</p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-style:italic;\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">http://edu.kde.org/"
+#~ "marble</p></body></html>"
+
+#~ msgid "A&uthors"
+#~ msgstr "लिखइया मन (&u)"
+
+#, fuzzy
+#~| msgid ""
+#~| "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~| "css\">\n"
+#~| "p, li { white-space: pre-wrap; }\n"
+#~| "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~| "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~| "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~| "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~| "\"></p></body></html>"
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:10pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-size:9pt;\"></p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p></body></html>"
+
+#~ msgid "&Data"
+#~ msgstr "डाटा (&D)"
+
+#~ msgid "&License Agreement"
+#~ msgstr "लाइसेंस एग्रीमेंट (&L)"
+
+#, fuzzy
+#~| msgid ""
+#~| "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~| "css\">\n"
+#~| "p, li { white-space: pre-wrap; }\n"
+#~| "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~| "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~| "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~| "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~| "font-family:'MS Shell Dlg 2'; font-size:8pt;\"></p></body></html>"
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:10pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-family:'MS Shell Dlg 2'; font-size:8pt;\"></p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-family:'MS Shell Dlg 2'; font-size:8pt;\"></p></body></html>"
+
+#, fuzzy
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">There are two caches "
+#~ "being used for Marble: The physical memory which is needed to keep map "
+#~ "data in the computer's memory. Increasing the value will make the "
+#~ "application more responsive. The hard disc memory cache is used by "
+#~ "download contents from the Internet (e.g. Wikipedia data or map data). "
+#~ "Decrease this value if you want to save space on the hard disc and if "
+#~ "high usage of the Internet is not an issue. </p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">नक्सा ल सूरज के स्थान मं बीच "
+#~ "मं रखव</p></body></html>"
+
+#~ msgid "C&ache"
+#~ msgstr "कैस (&a)"
+
+#~ msgid "&Physical memory:"
+#~ msgstr "फिजीकल मेमोरी: (&P)"
+
+#, fuzzy
+#~| msgid "MB"
+#~ msgid " MB"
+#~ msgstr "मे.बा."
+
+#~ msgid "C&lear"
+#~ msgstr "साफ करव (&l)"
+
+#~ msgid "&Hard disc:"
+#~ msgstr "हार्ड डिस्क: (&H)"
+
+#~ msgid "Cl&ear"
+#~ msgstr "साफ (&e)"
+
+#, fuzzy
+#~| msgid ""
+#~| "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~| "css\">\n"
+#~| "p, li { white-space: pre-wrap; }\n"
+#~| "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~| "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~| "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~| "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~| "style:italic;\">Role</span></p></body></html>"
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Proxy settings for your "
+#~ "local intranet. Please leave empty if there is no proxy.</p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "style:italic;\">काम</span></p></body></html>"
+
+#~ msgid "&Proxy"
+#~ msgstr "प्राक्सी (&P)"
+
+#, fuzzy
+#~| msgid "&Proxy"
+#~ msgid "&Proxy:"
+#~ msgstr "प्राक्सी (&P)"
+
+#~ msgid "P&ort:"
+#~ msgstr "पोर्ट: (&o)"
+
+#, fuzzy
+#~| msgid "&Proxy"
+#~ msgid "Proxy type:"
+#~ msgstr "प्राक्सी (&P)"
+
+#, fuzzy
+#~| msgid "Quit the Application"
+#~ msgid "Requires authentication"
+#~ msgstr "अनुपरयोग से बाहिर आव"
+
+#, fuzzy
+#~| msgid "&Place names:"
+#~ msgid "U&sername:"
+#~ msgstr "स्थान नाम: (&P)"
+
+#, fuzzy
+#~| msgid "&Place names:"
+#~ msgid "Username:"
+#~ msgstr "स्थान नाम: (&P)"
+
+#, fuzzy
+#~| msgid "&Test Plugin"
+#~ msgid "Test Login"
+#~ msgstr "जांच प्लगइन (&T)"
+
+#~ msgid "Marble Cache Settings"
+#~ msgstr "मार्बल कैस सेटिंग"
+
+#, fuzzy
+#~| msgid "During &animations:"
+#~ msgid "Dragging and Animation"
+#~ msgstr "एनिमेसन के समय: (&a)"
+
+#~ msgid "&Drag location:"
+#~ msgstr "ड्रैग स्थान: (&D)"
+
+#, fuzzy
+#~| msgid ""
+#~| "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~| "css\">\n"
+#~| "p, li { white-space: pre-wrap; }\n"
+#~| "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~| "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~| "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~| "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~| "\"></p></body></html>"
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">While dragging the "
+#~ "mouse there are two standard behaviours when dealing with a virtual globe:"
+#~ "</p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">The location below "
+#~ "mouse pointer will follow the cursor exactly: As a result e.g. the north "
+#~ "pole will not stay at the top which can lead to confusion. By default "
+#~ "Marble makes sure that north is always up which results in a dragging "
+#~ "behaviour where the location below the mouse pointer slightly \"detaches"
+#~ "\" from the cursor. </p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p></body></html>"
+
+#, fuzzy
+#~| msgid "Keep planet axis vertically"
+#~ msgid "Keep Planet Axis Vertically"
+#~ msgstr "ग्रह के अक्छ ल खड़ा रखव"
+
+#, fuzzy
+#~| msgid "Follow mouse pointer"
+#~ msgid "Follow Mouse Pointer"
+#~ msgstr "मुसुवा संकेतक फालो करव"
+
+#, fuzzy
+#~| msgid "&Set Home Location"
+#~ msgid "&Inertial Globe Rotation"
+#~ msgstr "घर जगह सेट करव (&S)"
+
+#, fuzzy
+#~| msgid ""
+#~| "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~| "css\">\n"
+#~| "p, li { white-space: pre-wrap; }\n"
+#~| "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~| "font-weight:400; font-style:normal;\">\n"
+#~| "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~| "right:0px; -qt-block-indent:0; text-indent:0px;\">Center the map on sun "
+#~| "position</p></body></html>"
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">When searching for a "
+#~ "location Marble can either move instantly to the new location or it can "
+#~ "show a travel animation from the previous place to the new place.</p></"
+#~ "body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">नक्सा ल सूरज के स्थान मं बीच "
+#~ "मं रखव</p></body></html>"
+
+#, fuzzy
+#~| msgid "&On Startup:"
+#~ msgid "&On startup:"
+#~ msgstr "सुरू में: (&O)"
+
+#, fuzzy
+#~| msgid ""
+#~| "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~| "css\">\n"
+#~| "p, li { white-space: pre-wrap; }\n"
+#~| "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~| "font-weight:400; font-style:normal;\">\n"
+#~| "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~| "right:0px; -qt-block-indent:0; text-indent:0px;\">Center the map on sun "
+#~| "position</p></body></html>"
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">By default Marble will "
+#~ "display the home location immediately after the application has started. "
+#~ "As an alternative it can also show the last position that was active when "
+#~ "the user left the application. </p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">नक्सा ल सूरज के स्थान मं बीच "
+#~ "मं रखव</p></body></html>"
+
+#~ msgid "Show Home Location"
+#~ msgstr "घर जगह देखाव"
+
+#~ msgid "Up"
+#~ msgstr "ऊपर"
+
+#, fuzzy
+#~| msgid "Tilts the earth's axis towards the user."
+#~ msgid "Tilts the globe's axis towards the user."
+#~ msgstr "पृथ्वी के अक्छ ल कमइया के तरफ टेढ़ा करथे ."
+
+#~ msgid "Left"
+#~ msgstr "डेरी"
+
+#, fuzzy
+#~| msgid "Rotates the earth counterclockwise around its axis."
+#~ msgid "Rotates the globe counterclockwise around its axis."
+#~ msgstr "पृथ्वी ल ए अक्छ के चारों तरफ घड़ी के उलटा दिसा मं घुमाथे ."
+
+#~ msgid "Reset View"
+#~ msgstr "दृस्य रीसेट करव"
+
+#~ msgid "Click this button to restore the original zoom level and view angle."
+#~ msgstr "मूल जूम स्तर अउ देखे के कोन मं वापस जाय बर ए बटन मं किलिक करव."
+
+#~ msgid "Home"
+#~ msgstr "घर"
+
+#~ msgid "Right"
+#~ msgstr "जेवनी"
+
+#, fuzzy
+#~| msgid "Rotates the earth clockwise around its axis."
+#~ msgid "Rotates the globe clockwise around its axis."
+#~ msgstr "पृथ्वी ल ए अक्छ के चारों तरफ घड़ी के दिसा मं घुमाथे ."
+
+#~ msgid "Down"
+#~ msgstr "नीचे"
+
+#, fuzzy
+#~| msgid "Tilts the earth's axis away from the user."
+#~ msgid "Tilts the globe's axis away from the user."
+#~ msgstr "पृथ्वी के अक्छ ल कमइया से दूर टेढ़ा करथे ."
+
+#~ msgid "Zoom In"
+#~ msgstr "जूम इन"
+
+#, fuzzy
+#~ msgid "Zoom in by pressing this button to see more detail."
+#~ msgstr "अधिक विवरन देखे बर ए बटन ल दबाकर जूम इनइ करव."
+
+#~ msgid "+"
+#~ msgstr "+"
+
+#~ msgid "Zoom Slider"
+#~ msgstr "जूम स्लाइडर"
+
+#~ msgid "Use this slider to adjust the zoom level of the map."
+#~ msgstr "ये स्लाइडर के परयोग नक्से के जूम स्तर ल निरधारित करे बर करव."
+
+#~ msgid "Zoom Out"
+#~ msgstr "जूम आउट"
+
+#, fuzzy
+#~ msgid "Zoom out by pressing this button to see less detail."
+#~ msgstr "कम विवरन देखे बर ए बटन ल दबाकर जूम आउट करव."
+
+#~ msgid "-"
+#~ msgstr "-"
+
+#, fuzzy
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'DejaVu Sans'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif';\">This is Marble's machine room for advanced users. "
+#~ "Here you can select and deselect the functionality that is provided "
+#~ "through plugins. </span></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif';\">Deselecting a plugin will remove the functionality "
+#~ "from the map, menus and toolbars. </span></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif';\">Also some of the plugins might allow for tweaking "
+#~ "their configuration a bit. </span></p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">(c) 2007, मारबल "
+#~ "परियोजना</p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-style:italic;\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">http://edu.kde.org/"
+#~ "marble</p></body></html>"
+
+#~ msgid "P&lugins"
+#~ msgstr "प्लगइन्स (&l)"
+
+#, fuzzy
+#~| msgid "Time Zones"
+#~ msgid "Time Zone"
+#~ msgstr "समय छेत्र"
+
+#, fuzzy
+#~| msgid "Time Zones"
+#~ msgid "System time zone"
+#~ msgstr "समय छेत्र"
+
+#, fuzzy
+#~| msgid "Time Zones"
+#~ msgid "Choose Time zone"
+#~ msgstr "समय छेत्र"
+
+#, fuzzy
+#~| msgid "Longitude"
+#~ msgid "European Central Time"
+#~ msgstr "देसान्तर"
+
+#, fuzzy
+#~| msgid "Longitude"
+#~ msgid "Eastern European Time"
+#~ msgstr "देसान्तर"
+
+#, fuzzy
+#~| msgid "Longitude"
+#~ msgid "Eastern African Time"
+#~ msgstr "देसान्तर"
+
+#, fuzzy
+#~| msgid "Show frame rate"
+#~ msgid "Solomon Standard Time"
+#~ msgstr "फ्रेम दर देखाव"
+
+#, fuzzy
+#~| msgid "Show frame rate"
+#~ msgid "Phoenix Standard Time"
+#~ msgstr "फ्रेम दर देखाव"
+
+#, fuzzy
+#~| msgid "Longitude"
+#~ msgid "Eastern Standard Time"
+#~ msgstr "देसान्तर"
+
+#, fuzzy
+#~| msgid "Longitude"
+#~ msgid "Indiana Eastern Standard Time"
+#~ msgstr "देसान्तर"
+
+#, fuzzy
+#~| msgid "Longitude"
+#~ msgid "Brazil Eastern Time"
+#~ msgstr "देसान्तर"
+
+#~ msgid "&Units"
+#~ msgstr "इकाई (&U)"
+
+#~ msgid "&Distance:"
+#~ msgstr "दूरी: (&D)"
+
+#, fuzzy
+#~| msgid ""
+#~| "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~| "css\">\n"
+#~| "p, li { white-space: pre-wrap; }\n"
+#~| "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~| "font-weight:400; font-style:normal;\">\n"
+#~| "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~| "right:0px; -qt-block-indent:0; text-indent:0px;\">Change sun time</p></"
+#~| "body></html>"
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">The unit that gets used "
+#~ "to measure altitude, lengths and distances (e.g. km, mi, ft).</p></body></"
+#~ "html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">सूरज समय बदलव</p></"
+#~ "body></html>"
+
+#~ msgid "Kilometer, Meter"
+#~ msgstr "किलोमीटर, मीटर"
+
+#~ msgid "Miles, Feet"
+#~ msgstr "माइल्स, फीट"
+
+#~ msgid "An&gle:"
+#~ msgstr "कोन: (&g)"
+
+#, fuzzy
+#~| msgid ""
+#~| "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~| "css\">\n"
+#~| "p, li { white-space: pre-wrap; }\n"
+#~| "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~| "font-weight:400; font-style:normal;\">\n"
+#~| "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~| "right:0px; -qt-block-indent:0; text-indent:0px;\">Center the map on sun "
+#~| "position</p></body></html>"
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Specifies the notation "
+#~ "of angles in coordinates: By default the Degree-Minute-Second notation (e."
+#~ "g. 54°30'00\" ) gets used. As an alternative you can choose decimal "
+#~ "degrees (e.g. 54.5°).</p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">नक्सा ल सूरज के स्थान मं बीच "
+#~ "मं रखव</p></body></html>"
+
+#~ msgid "Degree (DMS)"
+#~ msgstr "डिग्री (डीएमएस)"
+
+#~ msgid "Degree (Decimal)"
+#~ msgstr "डिग्री (दसमलव)"
+
+#~ msgid "Map &Quality"
+#~ msgstr "नक्सा क्वालिटी (&Q)"
+
+#~ msgid "&Still image:"
+#~ msgstr "स्टिल फोटू: (&S)"
+
+#, fuzzy
+#~| msgid ""
+#~| "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~| "css\">\n"
+#~| "p, li { white-space: pre-wrap; }\n"
+#~| "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~| "font-weight:400; font-style:normal;\">\n"
+#~| "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~| "right:0px; -qt-block-indent:0; text-indent:0px;\">Center the map on sun "
+#~| "position</p></body></html>"
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Specifies the map "
+#~ "quality that gets displayed while there is no user input. Usually this "
+#~ "allows for high map quality as speed is no concern.</p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">नक्सा ल सूरज के स्थान मं बीच "
+#~ "मं रखव</p></body></html>"
+
+#~ msgid "Outline Quality"
+#~ msgstr "आउटलाइन क्वालिटी"
+
+#~ msgid "Low Quality"
+#~ msgstr "निम्न विसेसता"
+
+#~ msgid "Normal"
+#~ msgstr "सामान्य"
+
+#~ msgid "High Quality"
+#~ msgstr "उच्च गुनवत्ता"
+
+#~ msgid "Print Quality"
+#~ msgstr "प्रिंट विसेसता"
+
+#~ msgid "During &animations:"
+#~ msgstr "एनिमेसन के समय: (&a)"
+
+#, fuzzy
+#~| msgid ""
+#~| "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~| "css\">\n"
+#~| "p, li { white-space: pre-wrap; }\n"
+#~| "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~| "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~| "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~| "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~| "\"></p></body></html>"
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Specifies the map "
+#~ "quality that gets displayed during map animations (e.g. while dragging "
+#~ "the globe). </p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Especially on slow "
+#~ "machines it is advisable to set this option to \"low quality\" as this "
+#~ "will give better speed.</p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p></body></html>"
+
+#, fuzzy
+#~ msgid "OpenGL"
+#~ msgstr "नक्सा खोलव...(&O)"
+
+#~ msgid "&Text Labels"
+#~ msgstr "पाठ लेबल्स (&T)"
+
+#~ msgid "&Place names:"
+#~ msgstr "स्थान नाम: (&P)"
+
+#, fuzzy
+#~| msgid ""
+#~| "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~| "css\">\n"
+#~| "p, li { white-space: pre-wrap; }\n"
+#~| "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~| "font-weight:400; font-style:normal;\">\n"
+#~| "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~| "right:0px; -qt-block-indent:0; text-indent:0px;\">Center the map on sun "
+#~| "position</p></body></html>"
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Places often have "
+#~ "different names in different languages. The label on the map can show the "
+#~ "name in the user's language. Alternatively it can display the name in the "
+#~ "official language and glyphs of that place. </p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">नक्सा ल सूरज के स्थान मं बीच "
+#~ "मं रखव</p></body></html>"
+
+#, fuzzy
+#~| msgid "Custom and native language"
+#~ msgid "Custom & Native Language"
+#~ msgstr "मनमाफिक अउ नेटिव भाखा"
+
+#, fuzzy
+#~| msgid "Custom language"
+#~ msgid "Custom Language"
+#~ msgstr "मनमाफिक भाखा"
+
+#, fuzzy
+#~| msgid "Native language"
+#~ msgid "Native Language"
+#~ msgstr "मातृ भाखा"
+
+#, fuzzy
+#~| msgid "Default Map &Font:"
+#~ msgid "Default map &font:"
+#~ msgstr "डिफाल्ट नक्सा फोंट: (&F)"
+
+#, fuzzy
+#~| msgid ""
+#~| "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~| "css\">\n"
+#~| "p, li { white-space: pre-wrap; }\n"
+#~| "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~| "font-weight:400; font-style:normal;\">\n"
+#~| "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~| "right:0px; -qt-block-indent:0; text-indent:0px;\">Change sun time</p></"
+#~| "body></html>"
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">The default font that "
+#~ "gets used on the map.</p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">सूरज समय बदलव</p></"
+#~ "body></html>"
+
+#, fuzzy
+#~| msgid "Description field"
+#~ msgid "Destination video"
+#~ msgstr "वर्नन छेत्र"
+
+#, fuzzy
+#~ msgid "Open..."
+#~ msgstr "नक्सा खोलव...(&O)"
+
+#, fuzzy
+#~| msgid "Kilometer, Meter"
+#~ msgid "FPS (frames per second)"
+#~ msgstr "किलोमीटर, मीटर"
+
+#, fuzzy
+#~| msgid "&Cancel"
+#~ msgid "Cancel"
+#~ msgstr "खारिज करव (&C)"
+
+#, fuzzy
+#~| msgid "State"
+#~ msgid "Start"
+#~ msgstr "स्थिति"
+
+#, fuzzy
+#~| msgid "&File"
+#~ msgid "&Folder Name"
+#~ msgstr "फाइल (&F)"
+
+#, fuzzy
+#~| msgid "Current Location"
+#~ msgid "Current Relations"
+#~ msgstr "अभी हाल के जगह"
+
+#, fuzzy
+#~| msgid "Name"
+#~ msgid "Name"
+#~ msgstr "नाम"
+
+#~ msgid "Role"
+#~ msgstr "भूमिका"
+
+#, fuzzy
+#~| msgid "&Add Place"
+#~ msgid "Add Relation"
+#~ msgstr "स्थान जोड़व (&A)"
+
+#, fuzzy
+#~| msgid "Current Location"
+#~ msgid "Current Tags"
+#~ msgstr "अभी हाल के जगह"
+
+#, fuzzy
+#~| msgid "&Stars"
+#~ msgid "Browse..."
+#~ msgstr "तारा (&S)"
+
+#, fuzzy
+#~| msgid "Position: %1"
+#~ msgid "Position:"
+#~ msgstr "स्थितिः %1"
+
+#~ msgid "Marble"
+#~ msgstr "संगमरमर"
+
+#, fuzzy
+#~| msgid "Maps..."
+#~ msgid "Map"
+#~ msgstr "नक्सा..."
+
+#, fuzzy
+#~| msgid "Other Place"
+#~ msgid "Outer Space"
+#~ msgstr "अऊ दूसर जगह"
+
+#, fuzzy
+#~| msgid "Role"
+#~ msgid "Route"
+#~ msgstr "भूमिका"
+
+#, fuzzy
+#~| msgid "During &animations:"
+#~ msgid "Driving Instructions"
+#~ msgstr "एनिमेसन के समय: (&a)"
+
+#, fuzzy
+#~| msgid "Footway"
+#~ msgid "Footer"
+#~ msgstr "फुटवे"
+
+#, fuzzy
+#~| msgid "Configure Sun Control"
+#~ msgid "Configure Routing Profile"
+#~ msgstr "सूर्यप्रकास नियंत्रक कान्फिगर करव"
+
+#, fuzzy
+#~| msgid "Marble Cache Settings"
+#~ msgid "Service Settings"
+#~ msgstr "मार्बल कैस सेटिंग"
+
+#, fuzzy
+#~| msgid "not available"
+#~ msgid "No configuration available"
+#~ msgstr "नइ मिलत"
+
+#, fuzzy
+#~| msgid "L&ongitude"
+#~ msgid "Configure"
+#~ msgstr "देसान्तर लकीर (&o)"
+
+#, fuzzy
+#~| msgid "L&ongitude"
+#~ msgid "&Configure"
+#~ msgstr "देसान्तर लकीर (&o)"
+
+#, fuzzy
+#~| msgid "&Theme"
+#~ msgid "&Remove"
+#~ msgstr "प्रसंग (&T)"
+
+#, fuzzy
+#~| msgid "Craters"
+#~ msgid "Car (fastest)"
+#~ msgstr "क्रेटर"
+
+#, fuzzy
+#~| msgid "Craters"
+#~ msgid "Car (shortest)"
+#~ msgstr "क्रेटर"
+
+#, fuzzy
+#~| msgid "Show borders"
+#~ msgid "Show Details"
+#~ msgstr "सीमा देखाव"
+
+#~ msgid "Sun Control"
+#~ msgstr "सूर्यप्रकास नियंत्रक"
+
+#, fuzzy
+#~| msgid "Sun Sh&ading:"
+#~ msgid "Sun Shading"
+#~ msgstr "सूरज धूपछांव: (&a)"
+
+#~ msgid "Shadow"
+#~ msgstr "छइंहा"
+
+#, fuzzy
+#~| msgid "Night map"
+#~ msgid "Night Map"
+#~ msgstr "रात के नक्सा"
+
+#, fuzzy
+#~| msgid ""
+#~| "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~| "css\">\n"
+#~| "p, li { white-space: pre-wrap; }\n"
+#~| "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~| "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~| "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~| "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~| "\"></p></body></html>"
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">Attention: Panning the map is disabled now! </span></p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Uncheck the \"Lock map "
+#~ "view to Subsolar Point\" option to allow for viewing a different place on "
+#~ "the globe again.</p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p></body></html>"
+
+#~ msgid "Creating Map"
+#~ msgstr "नक्सा बनात हे"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /></head><body style="
+#~ "\" white-space: pre-wrap; font-family:Sans Serif; font-size:9pt; font-"
+#~ "weight:400; font-style:normal; text-decoration:none;\"><p style=\" margin-"
+#~ "top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-"
+#~ "indent:0; text-indent:0px;\"><span style=\" font-weight:600;\">Satellite "
+#~ "View</span></p><p style=\" margin-top:0px; margin-bottom:0px; margin-"
+#~ "left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Earth "
+#~ "as seen from Space. The map is based on NASA's beautiful \"Blue Marble "
+#~ "Next Generation\" pictures. Credits: NASA's Earth Observatory</p></body></"
+#~ "html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /></head><body style="
+#~ "\" white-space: pre-wrap; font-family:Sans Serif; font-size:9pt; font-"
+#~ "weight:400; font-style:normal; text-decoration:none;\"><p style=\" margin-"
+#~ "top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-"
+#~ "indent:0; text-indent:0px;\"><span style=\" font-weight:600;\">Satellite "
+#~ "View</span></p><p style=\" margin-top:0px; margin-bottom:0px; margin-"
+#~ "left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">पृथ्वी "
+#~ "जइसन कि अंतरिक्छ से दिखाई देथे . नक्सा नासा के सुंदर \"ब्लू मारबल नेक्स्ट जेनरेसन\" फोटू मं "
+#~ "आधारित हे. साभार: नासा के मतलब ओब्जरवेटरी</p></body></html>"
+
+#~ msgid ""
+#~ "Marble needs to create this map. This only needs to be done once and may "
+#~ "take a few seconds."
+#~ msgstr ""
+#~ "मारबल बर एखर नक्सा ल बनाय जाना जरूरी हे. एला सिरिफ एक बार करना होथे  अउ ये मां "
+#~ "सिरिफ कुछ सेकन्ड ही लगथे ."
+
+#~ msgid "&Cancel"
+#~ msgstr "खारिज करव (&C)"
+
+#, fuzzy
+#~| msgid "Zoom In"
+#~ msgid "Zoom"
+#~ msgstr "जूम इन"
+
+#, fuzzy
+#~| msgid "Time Zones"
+#~ msgid "&Tile Level Range:"
+#~ msgstr "समय छेत्र"
+
+#, fuzzy
+#~| msgid "Zoom In"
+#~ msgid "to"
+#~ msgstr "जूम इन"
+
+#, fuzzy
+#~| msgid "Sun Control"
+#~ msgid "Time Control"
+#~ msgstr "सूर्यप्रकास नियंत्रक"
+
+#, fuzzy
+#~| msgid "&Time"
+#~ msgid "Time"
+#~ msgstr "समय (&T)"
+
+#, fuzzy
+#~| msgid "Current Location"
+#~ msgid "New Date Time      :"
+#~ msgstr "अभी हाल के जगह"
+
+#~ msgid "Now"
+#~ msgstr "अभी"
+
+#, fuzzy
+#~| msgid "Current Location"
+#~ msgid "Current Date Time :"
+#~ msgstr "अभी हाल के जगह"
+
+#, fuzzy
+#~| msgid "Speed"
+#~ msgid "Time Speed"
+#~ msgstr "गति"
+
+#, fuzzy
+#~| msgid "&Close"
+#~ msgid "Close"
+#~ msgstr "बंद करव (&C)"
+
+#, fuzzy
+#~| msgid "Track"
+#~ msgid "Save Tour"
+#~ msgstr "ट्रैक"
+
+#, fuzzy
+#~| msgid "Track"
+#~ msgid "Save Tour As"
+#~ msgstr "ट्रैक"
+
+#, fuzzy
+#~| msgid "Track"
+#~ msgid "Open Tour"
+#~ msgstr "ट्रैक"
+
+#~ msgid "Worldclock Applet Configuration"
+#~ msgstr "वर्डक्लाक एप्लेट कान्फिगरेसन"
+
+#~ msgid "Map Display"
+#~ msgstr "नक्सा देखइया"
+
+#, fuzzy
+#~| msgid "Projection"
+#~ msgid "Projection:"
+#~ msgstr "प्रोजेक्सन"
+
+#~ msgid "Equirectangular"
+#~ msgstr "इक्विरेक्टेंगुलर"
+
+#, fuzzy
+#~| msgid "Center map on longitude"
+#~ msgid "Center map on longitude:"
+#~ msgstr "देसान्तर मं नक्सा ल बीच मं रखव"
+
+#~ msgid "Center map on daylight"
+#~ msgstr "दिन के प्रकास मं नक्सा ल बीच मं रखव"
+
+#~ msgid "Show date"
+#~ msgstr "तारीक देखाव"
+
+#~ msgid "Time Zones"
+#~ msgstr "समय छेत्र"
+
+#, fuzzy
+#~| msgid "Coordinates:"
+#~ msgid "Coordinates"
+#~ msgstr "निर्देसांक:"
+
+#, fuzzy
+#~| msgctxt "North, the direction"
+#~| msgid "N"
+#~ msgid "N"
+#~ msgstr "उ"
+
+#, fuzzy
+#~| msgctxt "West, the direction"
+#~| msgid "W"
+#~ msgid "W"
+#~ msgstr "प"
+
+#, fuzzy
+#~| msgctxt "East, the direction"
+#~| msgid "E"
+#~ msgid "E"
+#~ msgstr "पू"
+
+#, fuzzy
+#~| msgctxt "South, the direction"
+#~| msgid "S"
+#~ msgid "S"
+#~ msgstr "द"
+
+#, fuzzy
+#~| msgid "Vegetation"
+#~ msgid "Rotation"
+#~ msgstr "वेजीटेसन"
+
+#, fuzzy
+#~| msgid "&Add Place"
+#~ msgid "Add polygon"
+#~ msgstr "स्थान जोड़व (&A)"
+
+#, fuzzy
+#~| msgid "Areas"
+#~ msgid "Area"
+#~ msgstr "छेत्र"
+
+#, fuzzy
+#~| msgid "Map Display"
+#~ msgid "Display"
+#~ msgstr "नक्सा देखइया"
+
+#, fuzzy
+#~| msgid "International"
+#~ msgid "Internet"
+#~ msgstr "अंतररास्ट्रीय"
+
+#, fuzzy
+#~| msgid "Data Sheet"
+#~ msgid "APRS Data Sources"
+#~ msgstr "डाटा सीट"
+
+#, fuzzy
+#~| msgid "P&ort:"
+#~ msgid "Port"
+#~ msgstr "पोर्ट: (&o)"
+
+#, fuzzy
+#~| msgid "&File"
+#~ msgid "File"
+#~ msgstr "फाइल (&F)"
+
+#, fuzzy
+#~| msgid "Configure Sun Control"
+#~ msgid "Configure Compass Plugin"
+#~ msgstr "सूर्यप्रकास नियंत्रक कान्फिगर करव"
+
+#, fuzzy
+#~| msgid "&Theme"
+#~ msgid "Theme"
+#~ msgstr "प्रसंग (&T)"
+
+#, fuzzy
+#~| msgid "&Stars"
+#~ msgid "Arrows"
+#~ msgstr "तारा (&S)"
+
+#, fuzzy
+#~| msgid "Zoom In"
+#~ msgid "Atom"
+#~ msgstr "जूम इन"
+
+#, fuzzy
+#~| msgid "Magnetic Pole"
+#~ msgid "Magnet"
+#~ msgstr "चुम्बकीय ध्रुव"
+
+#, fuzzy
+#~| msgid "Configure Sun Control"
+#~ msgid "Configure Crosshairs Plugin"
+#~ msgstr "सूर्यप्रकास नियंत्रक कान्फिगर करव"
+
+#, fuzzy
+#~| msgid "Terrain"
+#~ msgid "German"
+#~ msgstr "मैदान"
+
+#, fuzzy
+#~| msgid "&File"
+#~ msgid "Filter"
+#~ msgstr "फाइल (&F)"
+
+#, fuzzy
+#~| msgid "Time Zones"
+#~ msgid "Time Range"
+#~ msgstr "समय छेत्र"
+
+#, fuzzy
+#~| msgid "Location Browser"
+#~ msgid "Eclipse Browser"
+#~ msgstr "जगह ब्राउजर"
+
+#, fuzzy
+#~| msgid "&Settings"
+#~ msgid "&Settings..."
+#~ msgstr "सेटिंग (&S)"
+
+#, fuzzy
+#~| msgid "Satellites"
+#~ msgid "&Go To Selected Eclipse"
+#~ msgstr "उपग्रह"
+
+#, fuzzy
+#~| msgid "not available"
+#~ msgid "Eclipses Configuration"
+#~ msgstr "नइ मिलत"
+
+#, fuzzy
+#~| msgid "&Theme"
+#~ msgid "&Reminder"
+#~ msgstr "प्रसंग (&T)"
+
+#, fuzzy
+#~| msgid "Configure Sun Control"
+#~ msgid "Configure Elevation Profile Plugin"
+#~ msgstr "सूर्यप्रकास नियंत्रक कान्फिगर करव"
+
+#, fuzzy
+#~| msgid "&Speed"
+#~ msgid "Speed"
+#~ msgstr "गति (&S)"
+
+#, fuzzy
+#~| msgid "&Projection"
+#~ msgid "Direction"
+#~ msgstr "प्रोजेक्सन (&P)"
+
+#~ msgid "Altitude"
+#~ msgstr "ऊँचाई"
+
+#, fuzzy
+#~| msgid "Precipitation"
+#~ msgid "Precision"
+#~ msgstr "तलछट"
+
+#, fuzzy
+#~| msgid "Coordinate Grid"
+#~ msgid "Coordinate Grid Plugin"
+#~ msgstr "कोआर्डिनेट ग्रिड"
+
+#, fuzzy
+#~| msgid "Clouds"
+#~ msgid "C&olors"
+#~ msgstr "बादल"
+
+#, fuzzy
+#~| msgid "Coordinate Grid"
+#~ msgid "Color of the coordinate grid."
+#~ msgstr "कोआर्डिनेट ग्रिड"
+
+#, fuzzy
+#~| msgid "Role of the location."
+#~ msgid "Color of the tropical circles."
+#~ msgstr "जगह के काम."
+
+#, fuzzy
+#~| msgid "Role of the location."
+#~ msgid "Color of the equator."
+#~ msgstr "जगह के काम."
+
+#, fuzzy
+#~| msgid "&Text Labels"
+#~ msgid "Labels"
+#~ msgstr "पाठ लेबल्स (&T)"
+
+#, fuzzy
+#~| msgid "&Text Labels"
+#~ msgid "&Named Labels"
+#~ msgstr "पाठ लेबल्स (&T)"
+
+#, fuzzy
+#~| msgid "&Text Labels"
+#~ msgid "&Numerical Labels"
+#~ msgstr "पाठ लेबल्स (&T)"
+
+#, fuzzy
+#~ msgid "Show numerical Labels."
+#~ msgstr "जगह देखाव"
+
+#, fuzzy
+#~| msgid "Configure Sun Control"
+#~ msgid "Configure Scale Bar Plugin"
+#~ msgstr "सूर्यप्रकास नियंत्रक कान्फिगर करव"
+
+#, fuzzy
+#~ msgid "Show Ratio Scale"
+#~ msgstr "नेविगेसन पेनल देखाव"
+
+#, fuzzy
+#~| msgid "Marble - Desktop Globe"
+#~ msgid "Marble - Measure Tool Configuration"
+#~ msgstr "मारबल - डेस्कटाप ग्लोब"
+
+#, fuzzy
+#~| msgid "Equirectangular"
+#~ msgid "Circle"
+#~ msgstr "इक्विरेक्टेंगुलर"
+
+#, fuzzy
+#~| msgid "&Text Labels"
+#~ msgid "Segment labels"
+#~ msgstr "पाठ लेबल्स (&T)"
+
+#, fuzzy
+#~| msgid "&Distance:"
+#~ msgid "Distance "
+#~ msgstr "दूरी: (&D)"
+
+#, fuzzy
+#~| msgid "Cemetery"
+#~ msgid "Perimeter"
+#~ msgstr "सिमेट्री"
+
+#, fuzzy
+#~| msgid "&Place names:"
+#~ msgid "Cache name:"
+#~ msgstr "स्थान नाम: (&P)"
+
+#, fuzzy
+#~| msgid "&Place names:"
+#~ msgid "User name:"
+#~ msgstr "स्थान नाम: (&P)"
+
+#, fuzzy
+#~| msgid "State"
+#~ msgid "Status:"
+#~ msgstr "स्थिति"
+
+#~ msgid "Country:"
+#~ msgstr "देस:"
+
+#, fuzzy
+#~| msgid "Terrain"
+#~ msgid "Terrain:"
+#~ msgstr "मैदान"
+
+#, fuzzy
+#~| msgid "Longitude"
+#~ msgid "Longitude:"
+#~ msgstr "देसान्तर"
+
+#, fuzzy
+#~| msgid "&Latitude"
+#~ msgid "Latitude:"
+#~ msgstr "अच्छांस (&L)"
+
+#, fuzzy
+#~| msgid "&Time"
+#~ msgid "Date hidden:"
+#~ msgstr "समय (&T)"
+
+#, fuzzy
+#~| msgid "&Distance:"
+#~ msgid "Maximum difficulty:"
+#~ msgstr "दूरी: (&D)"
+
+#, fuzzy
+#~| msgid "&Distance:"
+#~ msgid "Maximum Distance:"
+#~ msgstr "दूरी: (&D)"
+
+#, fuzzy
+#~| msgid "State"
+#~ msgid "Start:"
+#~ msgstr "स्थिति"
+
+#, fuzzy
+#~ msgid "TextLabel"
+#~ msgstr "पाठ लेबल्स (&T)"
+
+#, fuzzy
+#~| msgid "Marble - Desktop Globe"
+#~ msgid "Marble - OpenDesktop plugin configuration"
+#~ msgstr "मारबल - डेस्कटाप ग्लोब"
+
+#, fuzzy
+#~| msgid "Name"
+#~ msgid "Map &Image"
+#~ msgstr "नाम"
+
+#, fuzzy
+#~| msgid "&Place names:"
+#~ msgid "&Planet:"
+#~ msgstr "स्थान नाम: (&P)"
+
+#, fuzzy
+#~| msgid "1x"
+#~ msgid "x"
+#~ msgstr "1x"
+
+#, fuzzy
+#~| msgid "Overview Map"
+#~ msgid "Preview"
+#~ msgstr "ओवरव्यू नक्सा"
+
+#, fuzzy
+#~| msgid "&File"
+#~ msgid "Filename"
+#~ msgstr "फाइल (&F)"
+
+#, fuzzy
+#~| msgid "Configure Sun Control"
+#~ msgid "Configure Photo Plugin"
+#~ msgstr "सूर्यप्रकास नियंत्रक कान्फिगर करव"
+
+#, fuzzy
+#~| msgid "Configure Sun Control"
+#~ msgid "Configure Position Marker Plugin"
+#~ msgstr "सूर्यप्रकास नियंत्रक कान्फिगर करव"
+
+#, fuzzy
+#~| msgid "Terrain"
+#~ msgid "Trail"
+#~ msgstr "मैदान"
+
+#, fuzzy
+#~| msgid "Coordinate Grid"
+#~ msgid "Color of the position marker's accuracy indicator."
+#~ msgstr "कोआर्डिनेट ग्रिड"
+
+#, fuzzy
+#~| msgid "Terrain"
+#~ msgid "Trail:"
+#~ msgstr "मैदान"
+
+#, fuzzy
+#~| msgid "Coordinate Grid"
+#~ msgid "Color of the position marker's trail."
+#~ msgstr "कोआर्डिनेट ग्रिड"
+
+#, fuzzy
+#~| msgid "not available"
+#~ msgid "Routing Configuration - Marble"
+#~ msgstr "नइ मिलत"
+
+#, fuzzy
+#~| msgid "During &animations:"
+#~ msgid "Audible Turn Instructions"
+#~ msgstr "एनिमेसन के समय: (&a)"
+
+#, fuzzy
+#~| msgid "Zoom Out"
+#~ msgid "zoom out"
+#~ msgstr "जूम आउट"
+
+#, fuzzy
+#~| msgid "Zoom In"
+#~ msgid "zoom in"
+#~ msgstr "जूम इन"
+
+#, fuzzy
+#~| msgid "Total Distance: %1 m"
+#~ msgid "total time remaining"
+#~ msgstr "कुल दूरी: %1 मी."
+
+#, fuzzy
+#~| msgid "not available"
+#~ msgid "Satellites Configuration - Marble"
+#~ msgstr "नइ मिलत"
+
+#~ msgid "&Satellites"
+#~ msgstr "उपग्रह (&S)"
+
+#, fuzzy
+#~| msgid "Data Sheet"
+#~ msgid "&Data Sources"
+#~ msgstr "डाटा सीट"
+
+#, fuzzy
+#~| msgid "Data Sheet"
+#~ msgid "&Reload All Data Sources"
+#~ msgstr "डाटा सीट"
+
+#, fuzzy
+#~| msgid "Data Sheet"
+#~ msgid "Satellite Data Sources:"
+#~ msgstr "डाटा सीट"
+
+#, fuzzy
+#~| msgid "&DataView Plugin"
+#~ msgid "&Activate Plugin"
+#~ msgstr "डाटादृस्य प्लगइन (&D)"
+
+#, fuzzy
+#~| msgid "Configure Sun Control"
+#~ msgid "Configure Stars Plugin"
+#~ msgstr "सूर्यप्रकास नियंत्रक कान्फिगर करव"
+
+#, fuzzy
+#~| msgid "S&un"
+#~ msgid "Sun"
+#~ msgstr "सूर्य (&u)"
+
+#~ msgid "Moon"
+#~ msgstr "चन्द्रमा"
+
+#, fuzzy
+#~| msgid "Mercator"
+#~ msgid "Mercury"
+#~ msgstr "मर्केटर"
+
+#, fuzzy
+#~| msgid "&Earth"
+#~ msgid "Earth"
+#~ msgstr "पृथ्वी (&E)"
+
+#, fuzzy
+#~| msgid "&Text Labels"
+#~ msgid "Use name labels"
+#~ msgstr "पाठ लेबल्स (&T)"
+
+#~ msgid "Other"
+#~ msgstr "अऊ दूसर"
+
+#, fuzzy
+#~| msgid "During &animations:"
+#~ msgid "Lines and Orientation"
+#~ msgstr "एनिमेसन के समय: (&a)"
+
+#, fuzzy
+#~| msgid "International"
+#~ msgid "Constellations"
+#~ msgstr "अंतररास्ट्रीय"
+
+#, fuzzy
+#~| msgid "Name"
+#~ msgid "Names"
+#~ msgstr "नाम"
+
+#, fuzzy
+#~| msgid "Name"
+#~ msgid "Latin Name"
+#~ msgstr "नाम"
+
+#, fuzzy
+#~| msgid "Transportation"
+#~ msgid "Native Translation"
+#~ msgstr "ट्रांसपोर्टेसन"
+
+#, fuzzy
+#~| msgid "Elevation"
+#~ msgid "Abbreviation"
+#~ msgstr "एलिवेसन"
+
+#, fuzzy
+#~| msgid "Configure Sun Control"
+#~ msgid "Configure Weather Plugin"
+#~ msgstr "सूर्यप्रकास नियंत्रक कान्फिगर करव"
+
+#, fuzzy
+#~| msgid "International"
+#~ msgid "Information"
+#~ msgstr "अंतररास्ट्रीय"
+
+#, fuzzy
+#~| msgid ""
+#~| "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~| "css\">\n"
+#~| "p, li { white-space: pre-wrap; }\n"
+#~| "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~| "font-weight:400; font-style:normal;\">\n"
+#~| "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~| "right:0px; -qt-block-indent:0; text-indent:0px;\">Center the map on sun "
+#~| "position</p></body></html>"
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Here you can "
+#~ "choose if you want the weather condition to be shown (for example, clouds "
+#~ "or clear sky.) Marble will only show the condition if this information is "
+#~ "available.</p></body></html>\n"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">नक्सा ल सूरज के स्थान मं बीच "
+#~ "मं रखव</p></body></html>"
+
+#, fuzzy
+#~| msgid "Water Bodies"
+#~ msgid "Weather condition"
+#~ msgstr "पानी के स्रोत"
+
+#, fuzzy
+#~| msgid ""
+#~| "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~| "css\">\n"
+#~| "p, li { white-space: pre-wrap; }\n"
+#~| "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~| "font-weight:400; font-style:normal;\">\n"
+#~| "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~| "right:0px; -qt-block-indent:0; text-indent:0px;\">Center the map on sun "
+#~| "position</p></body></html>"
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Selects if you "
+#~ "want the temperature to be shown. The temperature will only be shown for "
+#~ "the stations it is available for.</p></body></html>\n"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">नक्सा ल सूरज के स्थान मं बीच "
+#~ "मं रखव</p></body></html>"
+
+#~ msgid "Temperature"
+#~ msgstr "तापमान"
+
+#, fuzzy
+#~| msgid ""
+#~| "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~| "css\">\n"
+#~| "p, li { white-space: pre-wrap; }\n"
+#~| "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~| "font-weight:400; font-style:normal;\">\n"
+#~| "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~| "right:0px; -qt-block-indent:0; text-indent:0px;\">Center the map on sun "
+#~| "position</p></body></html>"
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Select if you "
+#~ "want the wind direction to be shown. The wind direction will only be "
+#~ "shown if it is available for the particular station.</p></body></html>\n"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">नक्सा ल सूरज के स्थान मं बीच "
+#~ "मं रखव</p></body></html>"
+
+#, fuzzy
+#~| msgid "&Projection"
+#~ msgid "Wind direction"
+#~ msgstr "प्रोजेक्सन (&P)"
+
+#, fuzzy
+#~| msgid ""
+#~| "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~| "css\">\n"
+#~| "p, li { white-space: pre-wrap; }\n"
+#~| "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~| "font-weight:400; font-style:normal;\">\n"
+#~| "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~| "right:0px; -qt-block-indent:0; text-indent:0px;\">Center the map on sun "
+#~| "position</p></body></html>"
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Select if you "
+#~ "want the wind speed to be shown. The wind speed will only be shown if it "
+#~ "is available for the particular station.</p></body></html>\n"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">नक्सा ल सूरज के स्थान मं बीच "
+#~ "मं रखव</p></body></html>"
+
+#, fuzzy
+#~| msgid "Speed"
+#~ msgid "Wind speed"
+#~ msgstr "गति"
+
+#, fuzzy
+#~| msgid "&Units"
+#~ msgid "Units"
+#~ msgstr "इकाई (&U)"
+
+#, fuzzy
+#~| msgid ""
+#~| "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~| "css\">\n"
+#~| "p, li { white-space: pre-wrap; }\n"
+#~| "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~| "font-weight:400; font-style:normal;\">\n"
+#~| "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~| "right:0px; -qt-block-indent:0; text-indent:0px;\">Change sun time</p></"
+#~| "body></html>"
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">The unit used to "
+#~ "measure the temperature.</p></body></html>\n"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">सूरज समय बदलव</p></"
+#~ "body></html>"
+
+#, fuzzy
+#~| msgid "Clouds"
+#~ msgid "Celsius"
+#~ msgstr "बादल"
+
+#, fuzzy
+#~| msgid ""
+#~| "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~| "css\">\n"
+#~| "p, li { white-space: pre-wrap; }\n"
+#~| "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~| "font-weight:400; font-style:normal;\">\n"
+#~| "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~| "right:0px; -qt-block-indent:0; text-indent:0px;\">Change sun time</p></"
+#~| "body></html>"
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">The unit used to "
+#~ "measure the wind speed.</p></body></html>\n"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">सूरज समय बदलव</p></"
+#~ "body></html>"
+
+#, fuzzy
+#~| msgid "Kilometer, Meter"
+#~ msgid "Kilometers per hour"
+#~ msgstr "किलोमीटर, मीटर"
+
+#, fuzzy
+#~| msgid "Kilometer, Meter"
+#~ msgid "Miles per hour"
+#~ msgstr "किलोमीटर, मीटर"
+
+#, fuzzy
+#~| msgid "Kilometer, Meter"
+#~ msgid "Meters per second"
+#~ msgstr "किलोमीटर, मीटर"
+
+#, fuzzy
+#~| msgid ""
+#~| "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~| "css\">\n"
+#~| "p, li { white-space: pre-wrap; }\n"
+#~| "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~| "font-weight:400; font-style:normal;\">\n"
+#~| "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~| "right:0px; -qt-block-indent:0; text-indent:0px;\">Change sun time</p></"
+#~| "body></html>"
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">The unit used to "
+#~ "measure the air pressure.</p></body></html>\n"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">सूरज समय बदलव</p></"
+#~ "body></html>"
+
+#, fuzzy
+#~| msgid "&Stars"
+#~ msgid "Bars"
+#~ msgstr "तारा (&S)"
+
+#, fuzzy
+#~| msgid "Kilometer, Meter"
+#~ msgid "Millimeters of Mercury"
+#~ msgstr "किलोमीटर, मीटर"
+
+#, fuzzy
+#~| msgid "Kilometer, Meter"
+#~ msgid "Inches of Mercury"
+#~ msgstr "किलोमीटर, मीटर"
+
+#, fuzzy
+#~| msgid "Water Bodies"
+#~ msgid "Weather update interval"
+#~ msgstr "पानी के स्रोत"
+
+#, fuzzy
+#~| msgid "Configure Sun Control"
+#~ msgid "Configure Wikipedia Plugin"
+#~ msgstr "सूर्यप्रकास नियंत्रक कान्फिगर करव"
+
+#, fuzzy
+#~ msgid "Show thumbnail images"
+#~ msgstr "जगह देखाव"
+
+#, fuzzy
+#~| msgid "&Proxy"
+#~ msgid "Route type:"
+#~ msgstr "प्राक्सी (&P)"
+
+#, fuzzy
+#~| msgid "&Speed"
+#~ msgid "Speed:"
+#~ msgstr "गति (&S)"
+
+#, fuzzy
+#~| msgid "Motorway"
+#~ msgid "Avoid motorways"
+#~ msgstr "मोटरवे"
+
+#, fuzzy
+#~| msgid "Motorway"
+#~ msgid "Avoid tollways"
+#~ msgstr "मोटरवे"
+
+#, fuzzy
+#~| msgid "not available"
+#~ msgid "Monav Configuration"
+#~ msgstr "नइ मिलत"
+
+#, fuzzy
+#~| msgid "Transportation"
+#~ msgid "Transport Type:"
+#~ msgstr "ट्रांसपोर्टेसन"
+
+#, fuzzy
+#~| msgid "Creating Map"
+#~ msgid "Manage Maps"
+#~ msgstr "नक्सा बनात हे"
+
+#, fuzzy
+#~ msgid "Install New"
+#~ msgstr "एतिहासिक नक्सा १६८९"
+
+#~ msgid "Continent"
+#~ msgstr "महाद्वीप"
+
+#~ msgid "Country"
+#~ msgstr "देस"
+
+#, fuzzy
+#~| msgid "Download finished."
+#~ msgid "Download Variant"
+#~ msgstr "डाउनलोड पूरा."
+
+#, fuzzy
+#~ msgid "Install"
+#~ msgstr "एतिहासिक नक्सा १६८९"
+
+#, fuzzy
+#~| msgid "&About"
+#~ msgid "Abort"
+#~ msgstr "परिचय (&A)"
+
+#, fuzzy
+#~| msgid "Transportation"
+#~ msgid "Transport:"
+#~ msgstr "ट्रांसपोर्टेसन"
+
+#, fuzzy
+#~| msgid "Forest"
+#~ msgid "Fastest"
+#~ msgstr "जंगल"
+
+#, fuzzy
+#~| msgid "Forest"
+#~ msgid "Shortest"
+#~ msgstr "जंगल"
+
+#~ msgid "Location Browser"
+#~ msgstr "जगह ब्राउजर"
+
+#~ msgid "Double click an entry of this list to get it displayed on the map."
+#~ msgstr "नक्से मं प्रदर्सित करे बर एखर सूची के कोनो प्रविस्टि मं दोहरा किलिक करव."
+
+#~ msgid "Navigate to your 'Home Location'"
+#~ msgstr "आप मन के 'घर जगह' मं नेविगेट करव"
+
+#, fuzzy
+#~| msgid "Farm"
+#~ msgid "Form"
+#~ msgstr "खेत"
+
+#, fuzzy
+#~| msgid "&Url:"
+#~ msgid "Url:"
+#~ msgstr "यूआरएल: (&U)"
+
+#, fuzzy
+#~| msgid "&Add Place"
+#~ msgid "Add SoundCue"
+#~ msgstr "स्थान जोड़व (&A)"
+
+#, fuzzy
+#~| msgid "Name"
+#~ msgid "&Name"
+#~ msgstr "नाम"
+
+#~ msgid "Land"
+#~ msgstr "स्थल"
+
+#, fuzzy
+#~| msgid "Area"
+#~ msgid "Ara"
+#~ msgstr "छेत्र"
+
+#, fuzzy
+#~| msgid "&Cancel"
+#~ msgid "Cancer"
+#~ msgstr "खारिज करव (&C)"
+
+#, fuzzy
+#~| msgid "&Center"
+#~ msgid "Centaurus"
+#~ msgstr "बीचोंबीच (&C)"
+
+#, fuzzy
+#~| msgid "Craters"
+#~ msgid "Crater"
+#~ msgstr "क्रेटर"
+
+#, fuzzy
+#~| msgid "Normal"
+#~ msgid "Norma"
+#~ msgstr "सामान्य"
+
+#, fuzzy
+#~| msgid "International"
+#~ msgid "Constellation Labels"
+#~ msgstr "अंतररास्ट्रीय"
+
+#, fuzzy
+#~| msgid "International"
+#~ msgid "Constellation Names"
+#~ msgstr "अंतररास्ट्रीय"
+
+#, fuzzy
+#~ msgid "Open"
+#~ msgstr "नक्सा खोलव...(&O)"
+
+#, fuzzy
+#~ msgctxt "Action for toggling the atmosphere"
+#~ msgid "&Atmosphere"
+#~ msgstr "वायु-मन्डल (&A)"
+
+#~ msgid "Enable tab to see gpxFileView"
+#~ msgstr "जीपीएक्स-फाइलव्यू देखाय बर टैब सक्छम करव"
+
+#, fuzzy
+#~ msgctxt "Action for toggling the 'current location' box"
+#~ msgid "Current Location"
+#~ msgstr "अभी हाल के जगह"
+
+#, fuzzy
+#~ msgctxt "Action for toggling the navigation panel"
+#~ msgid "Show &Navigation Panel"
+#~ msgstr "नेविगेसन पेनल देखाव (&N)"
+
+#, fuzzy
+#~ msgctxt "Status tip"
+#~ msgid "Show Navigation Panel"
+#~ msgstr "नेविगेसन पेनल देखाव"
+
+#, fuzzy
+#~| msgid "File View"
+#~ msgctxt "Action for showing the File View"
+#~ msgid "&Show File View"
+#~ msgstr "फ़ाइल दृस्य"
+
+#, fuzzy
+#~| msgid "&Hide"
+#~ msgid "Guides"
+#~ msgstr "लुकाव (&H)"
+
+#, fuzzy
+#~ msgid "Name Ids of plugins."
+#~ msgstr "जांच प्लगइन"
+
+#~ msgid "Marble Infocenter"
+#~ msgstr "मारबल जानकारी केंद्र"
+
+#~ msgid "Data Sheet"
+#~ msgstr "डाटा सीट"
+
+#~ msgid "Name of the location"
+#~ msgstr "जगह के नाम"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "size:14pt; font-weight:600;\">Name</span></p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "size:14pt; font-weight:600;\">नाम</span></p></body></html>"
+
+#~ msgid "Role of the location."
+#~ msgstr "जगह के काम."
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "style:italic;\">Role</span></p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "style:italic;\">काम</span></p></body></html>"
+
+#~ msgid "Alternative name"
+#~ msgstr "वैकल्पिक नाम"
+
+#~ msgid "Alternative name of the location."
+#~ msgstr "जगह के वैकल्पिक नाम."
+
+#~ msgid "Alternative Name"
+#~ msgstr "वैकल्पिक नाम"
+
+#, fuzzy
+#~| msgid "Short Description:"
+#~ msgid "Short description:"
+#~ msgstr "संक्छिप्त वर्नन:"
+
+#, fuzzy
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">No description "
+#~ "available.</p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">If you are connected to "
+#~ "the Internet please click the \"Wikipedia\" tab at the top of this page "
+#~ "to get more information.</p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">(c) 2007, मारबल "
+#~ "परियोजना</p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-style:italic;\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">http://edu.kde.org/"
+#~ "marble</p></body></html>"
+
+#~ msgid ""
+#~ "000° 00' 00\" N\n"
+#~ "000° 00' 00\" E "
+#~ msgstr ""
+#~ "000° 00' 00\" उ\n"
+#~ "000° 00' 00\" पू"
+
+#~ msgid "9000.0 m"
+#~ msgstr "9000.0 मी"
+
+#~ msgid "1000000"
+#~ msgstr "1000000"
+
+#~ msgid "Area:"
+#~ msgstr "छेत्र:"
+
+#~ msgid "0.0 sq km"
+#~ msgstr "0.0 व. मी."
+
+#, fuzzy
+#~| msgid "State"
+#~ msgid "State:"
+#~ msgstr "स्थिति"
+
+#~ msgid "Wikipedia"
+#~ msgstr "विकिपीडिया"
+
+#~ msgid "Back"
+#~ msgstr "पीछू"
+
+#~ msgid "Move backwards one step in the browsing history."
+#~ msgstr "ब्राउजिंग इतिहास मं एक स्तर पीछू खिसकव."
+
+#~ msgid "Print Page"
+#~ msgstr "पेज छापव"
+
+#, fuzzy
+#~| msgid "Sh&ow"
+#~ msgid "Show"
+#~ msgstr "देखाव (&o)"
+
+#, fuzzy
+#~| msgid "&Hide"
+#~ msgid "Hide"
+#~ msgstr "लुकाव (&H)"
+
+#, fuzzy
+#~| msgid "Show relief"
+#~ msgid "Show Zenith"
+#~ msgstr "रिलीफ देखाव"
+
+#, fuzzy
+#~| msgid "Show a detailed explanation of the action."
+#~ msgid "Shows and hides the zenith location of the sun"
+#~ msgstr "काम के विस्तृत व्याख्या देखाव."
+
+#, fuzzy
+#~| msgid ""
+#~| "*.gpx *.kml|All Supported Files\n"
+#~| "*.gpx|GPS Data\n"
+#~| "*.kml|Google Earth KML"
+#~ msgid ""
+#~ "*.gpx *.kml *.log *.osm *.pnt|All Supported Files\n"
+#~ "*.gpx|GPS Data\n"
+#~ "*.kml|Google Earth KML\n"
+#~ "*.log|TangoGPS Logfile\n"
+#~ "*.osm|OpenStreetMap Data\n"
+#~ "*.pnt|Micro World Data Bank II"
+#~ msgstr ""
+#~ "*.gpx *.kml|सब्बो समर्थित फाइल मन ल\n"
+#~ "*.gpx|जीपीएस डाटा\n"
+#~ "*.kml|गूगल मतलब केएमएल"
+
+#~ msgid "&Search"
+#~ msgstr "खोजव (&S)"
+
+#~ msgid "Here you can enter the name of the location you are searching for."
+#~ msgstr "इहां आप मन जगह के नाम भर सकथो जेखर बर आप मन खोज रहे हे."
+
+#~ msgid "Check speed of gps drawing"
+#~ msgstr "जीपीए ड्राइंग के गति जांचव"
+
+#~ msgid "Enable tab to show the current location"
+#~ msgstr "अभी हाल के जगह देखाय बर टैब सक्छम करव"
+
+#, fuzzy
+#~| msgid "Short Description:"
+#~ msgid "Show or hide routing options"
+#~ msgstr "संक्छिप्त वर्नन:"
+
+#, fuzzy
+#~| msgid "&Search"
+#~ msgid "Search..."
+#~ msgstr "खोजव (&S)"
+
+#, fuzzy
+#~| msgid "(c) 2007, 2008, 2009"
+#~ msgid "(c) 2007, 2008, 2009, 2010"
+#~ msgstr "(c) 2007, 2008, 2009"
+
+#, fuzzy
+#~| msgid "&Center"
+#~ msgid "Re-center"
+#~ msgstr "बीचोंबीच (&C)"
+
+#, fuzzy
+#~| msgid ""
+#~| "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~| "css\">\n"
+#~| "p, li { white-space: pre-wrap; }\n"
+#~| "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~| "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~| "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~| "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~| "\"></p>\n"
+#~| "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~| "right:0px; -qt-block-indent:0; text-indent:0px;\">(c) 2007, The Marble "
+#~| "Project</p>\n"
+#~| "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~| "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~| "font-style:italic;\"></p>\n"
+#~| "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~| "right:0px; -qt-block-indent:0; text-indent:0px;\">http://edu.kde.org/"
+#~| "marble</p></body></html>"
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans'; font-size:10pt; font-"
+#~ "weight:400; font-style:normal;\">\n"
+#~ "<table border=\"0\" style=\"-qt-table-type: root; margin-top:4px; margin-"
+#~ "bottom:4px; margin-left:4px; margin-right:4px;\">\n"
+#~ "<tr>\n"
+#~ "<td style=\"border: none;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-family:'DejaVu Sans'; font-size:9pt;\"></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-family:'DejaVu Sans'; font-size:9pt;\"></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-family:'DejaVu Sans'; font-size:9pt;\"></p></td></tr></table></"
+#~ "body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">(c) 2007, मारबल "
+#~ "परियोजना</p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-style:italic;\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">http://edu.kde.org/"
+#~ "marble</p></body></html>"
+
+#, fuzzy
+#~| msgid "Open File"
+#~ msgid "Open File..."
+#~ msgstr "फाइल खोलव"
+
+#, fuzzy
+#~| msgid "Bridge"
+#~ msgid "RoutingWidget"
+#~ msgstr "ब्रिज"
+
+#, fuzzy
+#~| msgid ""
+#~| "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~| "css\">\n"
+#~| "p, li { white-space: pre-wrap; }\n"
+#~| "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~| "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~| "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~| "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~| "\"></p></body></html>"
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "size:small; color:#000000;\">0 m</span></p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p></body></html>"
+
+#, fuzzy
+#~| msgid "Bridge"
+#~ msgid "Routing Widget"
+#~ msgstr "ब्रिज"
+
+#, fuzzy
+#~| msgid ""
+#~| "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~| "css\">\n"
+#~| "p, li { white-space: pre-wrap; }\n"
+#~| "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~| "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~| "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~| "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~| "\"></p></body></html>"
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<table border=\"0\" style=\"-qt-table-type: root; margin-top:4px; margin-"
+#~ "bottom:4px; margin-left:4px; margin-right:4px;\">\n"
+#~ "<tr>\n"
+#~ "<td style=\"border: none;\">\n"
+#~ "<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-"
+#~ "left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span "
+#~ "style=\" font-weight:600;\">Routing Information</span></p></td></tr></"
+#~ "table></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p></body></html>"
+
+#, fuzzy
+#~| msgid ""
+#~| "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~| "css\">\n"
+#~| "p, li { white-space: pre-wrap; }\n"
+#~| "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~| "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~| "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~| "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~| "\"></p></body></html>"
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><a href=\"http://edu."
+#~ "kde.org/marble\"><span style=\" font-family:'DejaVu Sans'; font-size:8pt; "
+#~ "text-decoration: underline; color:#0057ae;\">Configure</span></a></p></"
+#~ "body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p></body></html>"
+
+#, fuzzy
+#~| msgid "High Quality"
+#~ msgid "Highways"
+#~ msgstr "उच्च गुनवत्ता"
+
+#, fuzzy
+#~| msgid "International"
+#~ msgid "Routing Information"
+#~ msgstr "अंतररास्ट्रीय"
+
+#, fuzzy
+#~| msgid ""
+#~| "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~| "css\">\n"
+#~| "p, li { white-space: pre-wrap; }\n"
+#~| "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~| "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~| "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~| "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~| "\"></p></body></html>"
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<table border=\"0\" style=\"-qt-table-type: root; margin-top:4px; margin-"
+#~ "bottom:4px; margin-left:4px; margin-right:4px;\">\n"
+#~ "<tr>\n"
+#~ "<td style=\"border: none;\">\n"
+#~ "<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-"
+#~ "left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span "
+#~ "style=\" font-size:12pt; font-weight:600;\">00:00</span></p></td></tr></"
+#~ "table></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p></body></html>"
+
+#, fuzzy
+#~ msgid "Navigator Float Item"
+#~ msgstr "नेविगेसन मोड"
+
+#, fuzzy
+#~| msgid "Craters"
+#~ msgid "Meters"
+#~ msgstr "क्रेटर"
+
+#, fuzzy
+#~| msgid "&Distance:"
+#~ msgid "Distance Covered"
+#~ msgstr "दूरी: (&D)"
+
+#~ msgid "&Date"
+#~ msgstr "तारीक (&D)"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Display sun position</"
+#~ "p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">सूरज के स्थिति ल देखाव</p></"
+#~ "body></html>"
+
+#~ msgid ""
+#~ "This control panel allows you to adjust the map according to your needs."
+#~ msgstr "नियंत्रन पेनल से आप मन नक्से ल अपन जरूरतनुसार एडजस्ट कर सकथो ."
+
+#~ msgid "Navigation mode"
+#~ msgstr "नेविगेसन मोड"
+
+#, fuzzy
+#~| msgid "Current Location"
+#~ msgid "Your current position"
+#~ msgstr "अभी हाल के जगह"
+
+#~ msgid "<b>Unidentified Position</b>"
+#~ msgstr "<b>बिन पहिचाने स्थिति</b>"
+
+#~ msgid "+00°00'00\" E"
+#~ msgstr "+00°00'00\" पू"
+
+#~ msgid "+00°00'00\" N"
+#~ msgstr "+00°00'00\" उ"
+
+#~ msgid "000 m"
+#~ msgstr "000 मी"
+
+#, fuzzy
+#~| msgid "Up"
+#~ msgid "p"
+#~ msgstr "ऊपर"
+
+#~ msgid "Region"
+#~ msgstr "छेत्र"
+
+#~ msgid "Forward"
+#~ msgstr "आगू"
+
+#~ msgid "Move forward one step in the browsing history."
+#~ msgstr "ब्राउजिंग इतिहास मं एक स्तर आगू खिसकव."
+
+#~ msgid "Track Gps"
+#~ msgstr "ट्रैक जीपीएस"
+
+#~ msgid "Catch Gps"
+#~ msgstr "कैच जीपीएस"
+
+#~ msgid "Draw"
+#~ msgstr "निकालें"
+
+#~ msgid "Open Map &Data..."
+#~ msgstr "नक्सा डाटा खोलव...(&D)"
+
+#~ msgid "&Import Map Data..."
+#~ msgstr "नक्सा डाटा आयात करव... (&I)"
+
+#~ msgid "Panoramio Photos"
+#~ msgstr "पैनारोमिक फोटो"
+
+#~ msgid "GpxSax"
+#~ msgstr "जीपीएक्स-एसएएक्स"
+
+#~ msgid ""
+#~ "Parse error at line %1, column %2:\n"
+#~ "%3."
+#~ msgstr ""
+#~ "लकीर %1 , खंभा %2 मं पारसिंग गलती\n"
+#~ "%3"
+
+#~ msgid "Save File"
+#~ msgstr "फाइल सहेजव"
+
+#~ msgid "GpxFile (*.gpx)"
+#~ msgstr "जीपीएक्स फाइल (*.gpx)"
+
+#~ msgid "km"
+#~ msgstr "किमी"
+
+#~ msgid "Total Distance: %1 km"
+#~ msgstr "कुल दूरी: %1 कि.मी."
+
+#~ msgctxt "The compass direction"
+#~ msgid "North"
+#~ msgstr "उत्तर"
+
+#~| msgid "&Earth"
+#~ msgctxt "The compass direction"
+#~ msgid "East"
+#~ msgstr "पूर्व"
+
+#~ msgctxt "The compass direction"
+#~ msgid "South"
+#~ msgstr "दक्छिन"
+
+#~ msgctxt "The compass direction"
+#~ msgid "West"
+#~ msgstr "पस्चिम"
+
+#~ msgid "Path"
+#~ msgstr "पथ"
+
+#~ msgid "File format unrecognized"
+#~ msgstr "अग्यात फाइल फार्मेट"
+
+#~| msgid "The file is not a valid KML 2.0 / 2.1 file"
+#~ msgid "The file is not a valid DGML 2.0 file"
+#~ msgstr "फाइल वैध डीजीएमएल २.० फाइल नइ हे"
+
+#~ msgid "The file is not a valid GPX 1.0 / 1.1 file"
+#~ msgstr "फाइल वैध जीपीएक्स 1.0 / 1.1 फाइल नइ हे"
+
+#~| msgid "The file is not a valid KML 2.0 / 2.1 file"
+#~ msgid "The file is not a valid KML 2.0 / 2.1 / 2.2 file"
+#~ msgstr "फाइल वैध केएमएल २.० / २.१ / 2.2 फाइल नइ हे"
+
+#~| msgid "Version Unknown"
+#~ msgid "Version %1"
+#~ msgstr "संस्करन %1"
+
+#~| msgid ""
+#~| "<br />(c) 2007, The Marble Project<br /><br /><a href=\"http://edu.kde."
+#~| "org/marble\">http://edu.kde.org/marble</a>"
+#~ msgid ""
+#~ "<br />(c) 2007, 2008, The Marble Project<br /><br /><a href=\"http://edu."
+#~ "kde.org/marble\">http://edu.kde.org/marble</a>"
+#~ msgstr ""
+#~ "<br />(c) 2007, 2008, मारबल परियोजना<br /><br /><a href=\"http://edu.kde."
+#~ "org/marble\">http://edu.kde.org/marble</a>"
+
+#~ msgid "0 N 0 W"
+#~ msgstr "0 N 0 W"
+
+#~ msgid "Add &Measure Point"
+#~ msgstr "मापक बिन्दु जोड़व (&M)"
+
+#~ msgid "&Remove Measure Points"
+#~ msgstr "मापक बिन्दु हटाव (&R)"
+
+#~| msgid "Coordinates:"
+#~ msgid "Copy Coordinates"
+#~ msgstr "निर्देसांक नकल करव"
+
+#~ msgid "Marble Info Center - %1"
+#~ msgstr "मारबल जानकारी केंद्र - %1"
+
+#~ msgid "Regional Capital"
+#~ msgstr "छेत्रीय राजधानी"
+
+#~ msgid "City"
+#~ msgstr "सहर"
+
+#~ msgid "Ocean"
+#~ msgstr "महासागर"
+
+#~| msgid "%1 m"
+#~ msgid "%1 sq km"
+#~ msgstr "%1 वर्ग कि मी"
+
+#~ msgid "%1 Mio. sq km"
+#~ msgstr "%1 मायो. वर्ग किमी"
+
+#~ msgid "%1 inh."
+#~ msgstr "%1 इं."
+
+#~| msgid "%1 inh."
+#~ msgid "%1 Mio. inh."
+#~ msgstr "%1 मी. इं."
+
+#~ msgid "%1 m"
+#~ msgstr "%1 मी"
+
+#~ msgid "Download failed: %1."
+#~ msgstr "डाउनलोड फेल: %1."
+
+#~ msgid "Ctrl+O"
+#~ msgstr "कंट्रोल+O"
+
+#~ msgid "Open a file for viewing on Marble"
+#~ msgstr "मारबल मं देखे बर फाइल खोलव"
+
+#~ msgid "Ctrl+S"
+#~ msgstr "कंट्रोल+S"
+
+#~ msgid "Save a screenshot of the map"
+#~ msgstr "नक्से के स्क्रीनसाट सहेजव"
+
+#~ msgid "&Print..."
+#~ msgstr "छापव...(&P)"
+
+#~ msgid "Ctrl+P"
+#~ msgstr "कंट्रोल+P"
+
+#~ msgid "Print a screenshot of the map"
+#~ msgstr "नक्से के स्क्रीनसाट छापव"
+
+#~ msgid "&Quit"
+#~ msgstr "बाहिर जाव (&Q)"
+
+#~ msgid "Ctrl+Q"
+#~ msgstr "कंट्रोल+Q"
+
+#~ msgid "Ctrl+C"
+#~ msgstr "कंट्रोल+C"
+
+#~ msgid "Copy a screenshot of the map"
+#~ msgstr "नक्से के स्क्रीनसाट नकल करव"
+
+#~ msgid "Copy the center coordinates as text"
+#~ msgstr "केंद्र के निर्देसांक ल पाठ रूप मं नकल करव"
+
+#~ msgid "&Full Screen Mode"
+#~ msgstr "पूरा स्क्रीन मोड (&F)"
+
+#~ msgid "Ctrl+Shift+F"
+#~ msgstr "कंट्रोल+सिफ्ट+F"
+
+#~ msgid "Full Screen Mode"
+#~ msgstr "पूरा स्क्रीन मोड"
+
+#~ msgid "&Status Bar"
+#~ msgstr "स्थिति पट्टी (&S)"
+
+#~ msgid "Show Status Bar"
+#~ msgstr "स्थिति पट्टी देखाव"
+
+#~ msgid "Show Real Time Cloud Cover"
+#~ msgstr "रीयल टाइम क्लाउड कवर देखाव"
+
+#~| msgid "Show frame rate"
+#~ msgid "Show Atmosphere"
+#~ msgstr "वायु-मन्डल देखाव"
+
+#~ msgid "What's &This"
+#~ msgstr "ये का हे (&T)"
+
+#~ msgid "Shift+F1"
+#~ msgstr "सिफ्ट+F1"
+
+#~ msgid "&About Marble Desktop Globe"
+#~ msgstr "मारबल डेस्कटाप ग्लोब परिचय (&A)"
+
+#~ msgid "Show the application's About Box"
+#~ msgstr "अनुपरयोग परिचय जानकारी देखाव"
+
+#~ msgid "About &Qt"
+#~ msgstr "क्यूटी परिचय (&Q)"
+
+#~ msgid "Show the Qt library's About box"
+#~ msgstr "क्यूटी लाइब्रेरी परिचय जानकारी दिखाव"
+
+#~ msgid "&Help"
+#~ msgstr "मदद (&H)"
+
+#~ msgid "Ready"
+#~ msgstr "तैयार"
+
+#~ msgid "Images (*.jpg *.png)"
+#~ msgstr "फोटू (*.jpg *.png)"
+
+#~ msgid ""
+#~ "All Supported Files (*.gpx *.kml);;GPS Data (*.gpx);;Google Earth KML (*."
+#~ "kml)"
+#~ msgstr ""
+#~ "सब्बो समर्थित फाइल मन ल (*.gpx *.kml);;जीपीएस डाटा (*.gpx);;गूगल मतलब केएमएल "
+#~ "(*.kml)"
+
+#~| msgid "Scale Bar"
+#~ msgid "Scale &Bar"
+#~ msgstr "स्केल पट्टी (&B)"
+
+#~ msgid "Cross&hairs"
+#~ msgstr "क्रासहेयर्स (&h)"
+
+#~ msgid "Co-maintainer and Architect"
+#~ msgstr "सिल्प अउ को-मेंटेनर"
+
+#~ msgid "This is a simple test plugin."
+#~ msgstr "ए एक सादा जांच प्लगइन हे."
+
+#~ msgid "Compass"
+#~ msgstr "दिसा-सूचक"
+
+#~| msgid "Compass"
+#~ msgid "&Compass"
+#~ msgstr "दिसा-सूचक (&C)"
+
+#~| msgid "Search line"
+#~ msgid "DataView Plugin"
+#~ msgstr "डाटादृस्य प्लगइन"
+
+#~ msgid "&Overview Map"
+#~ msgstr "ओवरव्यू नक्सा (&O)"
+
+#~| msgid "Scale Bar"
+#~ msgid "&Scale Bar"
+#~ msgstr "स्केल पट्टी (&S)"
+
+#~| msgid "km"
+#~ msgid "m"
+#~ msgstr "मी"
+
+#~ msgid "&Panoramio"
+#~ msgstr "पैनारोमियो (&P)"
+
+#~| msgid "Navigation"
+#~ msgid "&Navigation"
+#~ msgstr "नेविगेसन (&N)"
+
+#~| msgid "Search line"
+#~ msgid "GeoData Plugin"
+#~ msgstr "जियो डाटा प्लगइन"
+
+#~| msgid "Search line"
+#~ msgid "&GeoData Plugin"
+#~ msgstr "जियो डाटा प्लगइन (&G)"
+
+#~ msgid "FITemplate"
+#~ msgstr "एफआईटेम्प्लेट"
+
+#~ msgid "Float Item &Template"
+#~ msgstr "फ्लोट आइटम टेम्प्लेट (&T)"
+
+#~ msgid "twitter "
+#~ msgstr "ट्विटर"
+
+#~ msgid "&twitter"
+#~ msgstr "ट्विटर (&t)"
+
+#~| msgid "Search line"
+#~ msgid "Placemarks Plugin"
+#~ msgstr "प्लेसमार्क प्लगइन"
+
+#~| msgid "Search line"
+#~ msgid "&Placemarks Plugin"
+#~ msgstr "प्लेसमार्क प्लगइन (&P)"
+
+#, fuzzy
+#~| msgid "Navigation Control"
+#~ msgid "S&un Control"
+#~ msgstr "नेविगेसन नियंत्रक"
+
+#, fuzzy
+#~| msgid "Navigation"
+#~ msgid "None"
+#~ msgstr "नेविगेसन"
+
+#, fuzzy
+#~| msgid "Show elevation model"
+#~ msgid "Show full timezone name"
+#~ msgstr "एलीवेस माडल देखाव"
+
+#, fuzzy
+#~| msgid "N"
+#~ msgctxt "one-letter uppercase abbreviation for North"
+#~ msgid "N"
+#~ msgstr "उ"
+
+#, fuzzy
+#~| msgid "E"
+#~ msgctxt "one-letter uppercase abbreviation for East"
+#~ msgid "E"
+#~ msgstr "ई"
+
+#, fuzzy
+#~| msgid "S"
+#~ msgctxt "one-letter uppercase abbreviation for South"
+#~ msgid "S"
+#~ msgstr "S"
+
+#, fuzzy
+#~| msgid "W"
+#~ msgctxt "one-letter uppercase abbreviation for West"
+#~ msgid "W"
+#~ msgstr "प"
+
+#, fuzzy
+#~| msgid "Go To"
+#~ msgid "Geo Tool"
+#~ msgstr " मं जाव"
+
+#, fuzzy
+#~| msgid "&Cancel"
+#~ msgid "Cache"
+#~ msgstr "खारिज करव (&C)"
+
+#, fuzzy
+#~| msgid "Populated Places"
+#~ msgid "Populated places"
+#~ msgstr "आबादी के जगह"
+
+#~ msgid "Quick and Dirty"
+#~ msgstr "जल्दी अउ गंदला"
+
+#, fuzzy
+#~| msgid ""
+#~| "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~| "css\">\n"
+#~| "p, li { white-space: pre-wrap; }\n"
+#~| "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~| "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~| "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~| "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~| "style:italic;\">Role</span></p></body></html>"
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Backward</p></body></"
+#~ "html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "style:italic;\">काम</span></p></body></html>"
+
+#, fuzzy
+#~| msgid ""
+#~| "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~| "css\">\n"
+#~| "p, li { white-space: pre-wrap; }\n"
+#~| "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~| "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~| "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~| "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~| "style:italic;\">Role</span></p></body></html>"
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Forward</p></body></"
+#~ "html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "style:italic;\">काम</span></p></body></html>"
+
+#, fuzzy
+#~| msgid ""
+#~| "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~| "css\">\n"
+#~| "p, li { white-space: pre-wrap; }\n"
+#~| "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~| "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~| "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~| "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~| "style:italic;\">Role</span></p></body></html>"
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Increase time step</p></"
+#~ "body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "style:italic;\">काम</span></p></body></html>"

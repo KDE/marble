@@ -1,0 +1,73 @@
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Stelios <sstavra@gmail.com>, 2017.
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2021-09-28 00:13+0000\n"
+"PO-Revision-Date: 2017-09-16 14:12+0200\n"
+"Last-Translator: Stelios <sstavra@gmail.com>\n"
+"Language-Team: Greek <kde-i18n-el@kde.org>\n"
+"Language: el\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 2.0\n"
+
+#: package/contents/config/config.qml:12
+#, kde-format
+msgid "Map Display"
+msgstr "Εμφάνιση χάρτη"
+
+#: package/contents/ui/configMapDisplay.qml:28
+#, kde-format
+msgid "Projection:"
+msgstr "Προβολή:"
+
+#: package/contents/ui/configMapDisplay.qml:36
+#, kde-format
+msgid "Equirectangular"
+msgstr "Ισαπέχουσα"
+
+#: package/contents/ui/configMapDisplay.qml:37
+#, kde-format
+msgid "Mercator"
+msgstr "Μερκάτορ"
+
+#: package/contents/ui/configMapDisplay.qml:54
+#, kde-format
+msgid "Center on:"
+msgstr "Κέντρο στο:"
+
+#: package/contents/ui/configMapDisplay.qml:62
+#, kde-format
+msgid "Daylight"
+msgstr "Φως ημέρας"
+
+#: package/contents/ui/configMapDisplay.qml:63
+#, kde-format
+msgid "Longitude"
+msgstr "Γεωγραφικό μήκος"
+
+#: package/contents/ui/configMapDisplay.qml:64
+#, kde-format
+msgid "Location"
+msgstr "Θέση"
+
+#: package/contents/ui/configMapDisplay.qml:82
+#, kde-format
+msgid "Longitude:"
+msgstr "Γεωγραφικό μήκος:"
+
+#: package/contents/ui/configMapDisplay.qml:99
+#, kde-format
+msgid "Show date:"
+msgstr "Εμφάνιση ημερομηνίας:"
+
+#: package/contents/ui/configTimeZones.qml:17
+#, kde-format
+msgid "Use custom time zone selection:"
+msgstr "Χρήση επιλογής προσαρμοσμένης ζώνης ώρας:"

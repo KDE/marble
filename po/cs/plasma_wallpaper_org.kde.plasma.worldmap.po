@@ -1,0 +1,58 @@
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+# Vít Pelčák <vit@pelcak.org>, 2016.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2021-09-28 00:13+0000\n"
+"PO-Revision-Date: 2016-08-16 09:24+0100\n"
+"Last-Translator: Vít Pelčák <vit@pelcak.org>\n"
+"Language-Team: Czech <kde-i18n-doc@kde.org>\n"
+"Language: cs\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+"X-Generator: Lokalize 2.0\n"
+
+#: contents/ui/config.qml:22
+#, kde-format
+msgid "Projection:"
+msgstr "Promítání:"
+
+#: contents/ui/config.qml:24
+#, kde-format
+msgid "Equirectangular"
+msgstr "Pravoúhlé"
+
+#: contents/ui/config.qml:25
+#, kde-format
+msgid "Mercator"
+msgstr "Mercatorovo zobrazení"
+
+#: contents/ui/config.qml:37
+#, kde-format
+msgid "Center on:"
+msgstr "Vystředit na:"
+
+#: contents/ui/config.qml:39
+#, kde-format
+msgid "Daylight"
+msgstr "Denní světlo"
+
+#: contents/ui/config.qml:40
+#, kde-format
+msgid "Longitude"
+msgstr "Zem. délka"
+
+#: contents/ui/config.qml:41
+#, kde-format
+msgid "Location"
+msgstr "Umístění"
+
+#: contents/ui/config.qml:53
+#, kde-format
+msgid "Longitude:"
+msgstr "Zeměpisná délka:"

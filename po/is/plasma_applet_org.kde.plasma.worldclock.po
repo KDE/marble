@@ -1,0 +1,73 @@
+# Copyright (C) YEAR This file is copyright:
+# This file is distributed under the same license as the marble package.
+#
+# Sveinn í Felli <sv1@fellsnet.is>, 2022.
+msgid ""
+msgstr ""
+"Project-Id-Version: marble\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2021-09-28 00:13+0000\n"
+"PO-Revision-Date: 2022-08-21 11:40+0000\n"
+"Last-Translator: Sveinn í Felli <sv1@fellsnet.is>\n"
+"Language-Team: Icelandic\n"
+"Language: is\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 21.12.3\n"
+
+#: package/contents/config/config.qml:12
+#, kde-format
+msgid "Map Display"
+msgstr "Birting landakorts"
+
+#: package/contents/ui/configMapDisplay.qml:28
+#, kde-format
+msgid "Projection:"
+msgstr "Vörpun:"
+
+#: package/contents/ui/configMapDisplay.qml:36
+#, kde-format
+msgid "Equirectangular"
+msgstr "Ferningslaga"
+
+#: package/contents/ui/configMapDisplay.qml:37
+#, kde-format
+msgid "Mercator"
+msgstr "Mercator"
+
+#: package/contents/ui/configMapDisplay.qml:54
+#, kde-format
+msgid "Center on:"
+msgstr "Miðja á:"
+
+#: package/contents/ui/configMapDisplay.qml:62
+#, kde-format
+msgid "Daylight"
+msgstr "Dagsbirta"
+
+#: package/contents/ui/configMapDisplay.qml:63
+#, kde-format
+msgid "Longitude"
+msgstr "Lengdargráða"
+
+#: package/contents/ui/configMapDisplay.qml:64
+#, kde-format
+msgid "Location"
+msgstr "Staðsetning"
+
+#: package/contents/ui/configMapDisplay.qml:82
+#, kde-format
+msgid "Longitude:"
+msgstr "Lengdargráða:"
+
+#: package/contents/ui/configMapDisplay.qml:99
+#, kde-format
+msgid "Show date:"
+msgstr "Sýna dagsetningu:"
+
+#: package/contents/ui/configTimeZones.qml:17
+#, kde-format
+msgid "Use custom time zone selection:"
+msgstr "Nota sérsniðið val tímabeltis:"

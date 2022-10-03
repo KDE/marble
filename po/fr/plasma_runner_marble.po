@@ -1,0 +1,42 @@
+# translation of plasma_runner_marblerunner.po to Français
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+# Joëlle Cornavin <jcorn@free.fr>, 2012.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: plasma_runner_marblerunner\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2021-09-28 00:13+0000\n"
+"PO-Revision-Date: 2012-04-19 14:09+0200\n"
+"Last-Translator: Joëlle Cornavin <jcorn@free.fr>\n"
+"Language-Team: French <kde-francophone@kde.orh>\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Environment: kde\n"
+"X-Accelerator-Marker: &\n"
+"X-Text-Markup: kde4\n"
+
+#: plasmarunner.cpp:36
+#, kde-format
+msgid "Shows the coordinates :q: in OpenStreetMap with Marble."
+msgstr "Affiche les coordonnées :q: dans OpenStreetMap avec Marble."
+
+#: plasmarunner.cpp:37
+#, kde-format
+msgid "Shows the geo bookmark containing :q: in OpenStreetMap with Marble."
+msgstr ""
+"Affiche le signet géographique contenant :q: dans OpenStreetMap avec Marble."
+
+#: plasmarunner.cpp:58
+#, kde-format
+msgid "Show the coordinates %1 in OpenStreetMap with Marble"
+msgstr "Affiche les coordonnées %1 dans OpenStreetMap avec Marble"
+
+#: plasmarunner.cpp:124
+#, kde-format
+msgid "Show in OpenStreetMap with Marble"
+msgstr "Afficher dans OpenStreetMap avec Marble"

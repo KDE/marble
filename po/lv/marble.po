@@ -1,0 +1,4893 @@
+# translation of marble.po to Latvian
+# translation of marble.po to
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Maris Nartiss <maris.kde@gmail.com>, 2007, 2008, 2009, 2010, 2011, 2013.
+# Viesturs Zarins <viesturs.zarins@mii.lu.lv>, 2008.
+# Viesturs Zariņš <viesturs.zarins@algorego.com>, 2008.
+# Viesturs Zariņš <viesturs.zarins@mii.lu.lv>, 2009.
+# Einars Sprugis <einars8@gmail.com>, 2010, 2011, 2012, 2013.
+msgid ""
+msgstr ""
+"Project-Id-Version: marble\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2021-10-18 00:13+0000\n"
+"PO-Revision-Date: 2013-08-03 13:10+0300\n"
+"Last-Translator: Maris Nartiss <maris.kde@gmail.com>\n"
+"Language-Team: Latvian\n"
+"Language: lv\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.11.4\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : "
+"2);\n"
+
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "Māris Nartišs, Viesturs Zariņš, Einārs Sprūģis"
+
+#, fuzzy, kde-format
+#| msgctxt "EMAIL OF TRANSLATORS\""
+#| msgid "Your emails"
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "maris.kde@gmail.com, viesturs.zarins@mi.lu.lv, einars8@gmail.com"
+
+#: kdemain.cpp:91
+#, kde-format
+msgid "Marble Virtual Globe"
+msgstr "Marble virtuālais globuss"
+
+#: kdemain.cpp:93
+#, kde-format
+msgid "A World Atlas."
+msgstr "Pasaules atlants."
+
+#: kdemain.cpp:95
+#, fuzzy, kde-format
+#| msgid "(c) 2007-2012"
+msgid "(c) 2007-%1"
+msgstr "(c) 2007-2012"
+
+#: kdemain.cpp:100 kdemain.cpp:286
+#, kde-format
+msgid "Torsten Rahn"
+msgstr "Torsten Rahn"
+
+#: kdemain.cpp:101
+#, kde-format
+msgid "Developer and Original Author"
+msgstr "Izstrādātājs un sākotnējais autors"
+
+#: kdemain.cpp:103
+#, kde-format
+msgid "Bernhard Beschow"
+msgstr "Bernhard Beschow"
+
+#: kdemain.cpp:104
+#, kde-format
+msgid "WMS Support, Mobile, Performance"
+msgstr "WMS atbalsts, mobilo ier. atbalsts, veiktspēja"
+
+#: kdemain.cpp:106
+#, kde-format
+msgid "Thibaut Gridel"
+msgstr "Thibaut Gridel"
+
+#: kdemain.cpp:107
+#, kde-format
+msgid "Geodata"
+msgstr "Ģeodati"
+
+#: kdemain.cpp:109
+#, kde-format
+msgid "Jens-Michael Hoffmann"
+msgstr "Jens-Michael Hoffmann"
+
+#: kdemain.cpp:110
+#, kde-format
+msgid "OpenStreetMap Integration, OSM Namefinder, Download Management"
+msgstr "OpenStreetMap integrācija, OSM Namefinder, lejupielāžu pārvalde"
+
+#: kdemain.cpp:112
+#, kde-format
+msgid "Florian E&szlig;er"
+msgstr "Florian E&szlig;er"
+
+#: kdemain.cpp:113
+#, kde-format
+msgid "Elevation Profile"
+msgstr "Augstuma profils"
+
+#: kdemain.cpp:115
+#, kde-format
+msgid "Wes Hardaker"
+msgstr "Wes Hardaker"
+
+#: kdemain.cpp:116
+#, kde-format
+msgid "APRS Plugin"
+msgstr "APRS spraudnis"
+
+#: kdemain.cpp:118 kdemain.cpp:202
+#, kde-format
+msgid "Bastian Holst"
+msgstr "Bastian Holst"
+
+#: kdemain.cpp:119
+#, kde-format
+msgid "Online Services support"
+msgstr "Tiešsaistes servisu atbalsts"
+
+#: kdemain.cpp:121 kdemain.cpp:172
+#, kde-format
+msgid "Guillaume Martres"
+msgstr "Guillaume Martres"
+
+#: kdemain.cpp:122
+#, kde-format
+msgid "Satellites"
+msgstr "Satelīti"
+
+#: kdemain.cpp:124 kdemain.cpp:168
+#, kde-format
+msgid "Rene Kuettner"
+msgstr "Rene Kuettner"
+
+#: kdemain.cpp:125
+#, kde-format
+msgid "Satellites, Eclipses"
+msgstr "Satelīti, aptumsumi"
+
+#: kdemain.cpp:127
+#, kde-format
+msgid "Friedrich W. H. Kossebau"
+msgstr "Friedrich W. H. Kossebau"
+
+#: kdemain.cpp:128
+#, kde-format
+msgid "Plasma Integration, Bugfixes"
+msgstr "Plasma integrācija, kļūdu labojumi"
+
+#: kdemain.cpp:130
+#, kde-format
+msgid "Dennis Nienhüser"
+msgstr "Dennis Nienhüser"
+
+#: kdemain.cpp:131
+#, kde-format
+msgid "Routing, Navigation, Mobile"
+msgstr "Maršrutēšana, navigācija, mobilās ierīces"
+
+#: kdemain.cpp:133
+#, kde-format
+msgid "Niko Sams"
+msgstr "Niko Sams"
+
+#: kdemain.cpp:134
+#, kde-format
+msgid "Routing, Elevation Profile"
+msgstr "Maršrutēšana, augstuma profils"
+
+#: kdemain.cpp:136 kdemain.cpp:206
+#, kde-format
+msgid "Patrick Spendrin"
+msgstr "Patrick Spendrin"
+
+#: kdemain.cpp:137
+#, kde-format
+msgid "Core Developer: KML and Windows support"
+msgstr "Galvenais izstrādātājs: KML un Windows atbalsts"
+
+#: kdemain.cpp:139
+#, kde-format
+msgid "Eckhart Wörner"
+msgstr "Eckhart Wörner"
+
+#: kdemain.cpp:140
+#, kde-format
+msgid "Bugfixes"
+msgstr "Kļūdu labojumi"
+
+#: kdemain.cpp:145
+#, kde-format
+msgid "Inge Wallin"
+msgstr "Inge Wallin"
+
+#: kdemain.cpp:146
+#, kde-format
+msgid "Core Developer and Co-Maintainer"
+msgstr "Galvenais izstrādātājs un uzturēšanas palīgs"
+
+#: kdemain.cpp:148
+#, kde-format
+msgid "Henry de Valence"
+msgstr "Henry de Valence"
+
+#: kdemain.cpp:149
+#, kde-format
+msgid "Core Developer: Marble Runners, World-Clock Plasmoid"
+msgstr "Glavenais izstrādātājs: Marble darbinātāji, World-Clock sīkrīks"
+
+#: kdemain.cpp:151
+#, kde-format
+msgid "Pino Toscano"
+msgstr "Pino Toscano"
+
+#: kdemain.cpp:152
+#, kde-format
+msgid "Network plugins"
+msgstr "Tikla spraudņi"
+
+#: kdemain.cpp:154
+#, kde-format
+msgid "Harshit Jain"
+msgstr "Harshit Jain"
+
+#: kdemain.cpp:155
+#, kde-format
+msgid "Planet filter"
+msgstr "Planētas filtrs"
+
+#: kdemain.cpp:157
+#, kde-format
+msgid "Simon Edwards"
+msgstr "Simon Edwards"
+
+#: kdemain.cpp:158
+#, kde-format
+msgid "Marble Python Bindings"
+msgstr "Marble Python piesaistes"
+
+#: kdemain.cpp:160
+#, kde-format
+msgid "Magnus Valle"
+msgstr "Magnus Valle"
+
+#: kdemain.cpp:161
+#, kde-format
+msgid "Historical Maps"
+msgstr "Vēsturiskās kartes"
+
+#: kdemain.cpp:163
+#, kde-format
+msgid "Médéric Boquien"
+msgstr "Médéric Boquien"
+
+#: kdemain.cpp:164
+#, kde-format
+msgid "Astronomical Observatories"
+msgstr "Astronomiskās observatorijas"
+
+#: kdemain.cpp:169
+#, kde-format
+msgid ""
+"ESA Summer of Code in Space 2012 Project: Visualization of planetary "
+"satellites"
+msgstr ""
+"ESA Summer of Code in Space 2012 projekts: planetāro satelītu vizualizācija"
+
+#: kdemain.cpp:173
+#, fuzzy, kde-format
+#| msgid ""
+#| "ESA Summer of Code in Space 2011 Project: Visualisation of Satellite "
+#| "Orbits"
+msgid ""
+"ESA Summer of Code in Space 2011 Project: Visualization of Satellite Orbits"
+msgstr ""
+"ESA Summer of Code in Space 2011 projekts: satelītu orbītu vizualizācija"
+
+#: kdemain.cpp:178
+#, kde-format
+msgid "Konstantin Oblaukhov"
+msgstr "Konstantin Oblaukhov"
+
+#: kdemain.cpp:179
+#, kde-format
+msgid "Google Summer of Code 2011 Project: OpenStreetMap Vector Rendering"
+msgstr "Google Summer of Code 2011 projekts: OpenStreetMap vektoru renderēšana"
+
+#: kdemain.cpp:182
+#, kde-format
+msgid "Daniel Marth"
+msgstr "Daniel Marth"
+
+#: kdemain.cpp:183
+#, kde-format
+msgid "Google Summer of Code 2011 Project: Marble Touch on MeeGo"
+msgstr "Google Summer of Code 2011 projekts: Marble Touch uz MeeGo"
+
+#: kdemain.cpp:186
+#, kde-format
+msgid "Gaurav Gupta"
+msgstr "Gaurav Gupta"
+
+#: kdemain.cpp:187
+#, kde-format
+msgid "Google Summer of Code 2010 Project: Bookmarks"
+msgstr "Google Summer of Code 2010 projekts: grāmatzīmes"
+
+#: kdemain.cpp:190
+#, kde-format
+msgid "Harshit Jain "
+msgstr "Harshit Jain "
+
+#: kdemain.cpp:191
+#, kde-format
+msgid "Google Summer of Code 2010 Project: Time Support"
+msgstr "Google Summer of Code 2010 projekts: laika atbalsts"
+
+#: kdemain.cpp:194
+#, kde-format
+msgid "Siddharth Srivastava"
+msgstr "Siddharth Srivastava"
+
+#: kdemain.cpp:195
+#, kde-format
+msgid "Google Summer of Code 2010 Project: Turn-by-turn Navigation"
+msgstr "Google Summer of Code 2010 projekts: pakāpeniskā navigācija"
+
+#: kdemain.cpp:198 kdemain.cpp:218
+#, kde-format
+msgid "Andrew Manson"
+msgstr "Andrew Manson"
+
+#: kdemain.cpp:199
+#, kde-format
+msgid "Google Summer of Code 2009 Project: OSM Annotation"
+msgstr "Google Summer of Code 2009 projekts: OSM anotācija"
+
+#: kdemain.cpp:203
+#, kde-format
+msgid "Google Summer of Code 2009 Project: Online Services"
+msgstr "Google Summer of Code 2009 projekts: tiešsaistes servisi"
+
+#: kdemain.cpp:207
+#, kde-format
+msgid "Google Summer of Code 2008 Project: Vector Tiles for Marble"
+msgstr "Google Summer of Code 2008 projekts: vektoru flīzes priekš Marble"
+
+#: kdemain.cpp:210
+#, kde-format
+msgid "Shashank Singh"
+msgstr "Shashank Singh"
+
+#: kdemain.cpp:211
+#, kde-format
+msgid ""
+"Google Summer of Code 2008 Project: Panoramio / Wikipedia -photo support for "
+"Marble"
+msgstr ""
+"Google Summer of Code 2008 projekts: Panoramio / Wikipedia fotogrāfiju "
+"atbalsts priekš Marble"
+
+#: kdemain.cpp:214
+#, kde-format
+msgid "Carlos Licea"
+msgstr "Carlos Licea"
+
+#: kdemain.cpp:215
+#, kde-format
+msgid ""
+"Google Summer of Code 2007 Project: Equirectangular Projection (\"Flat Map\")"
+msgstr ""
+"Google Summer of Code 2007 projekts: ekvirektilineārā projekcija (\"Plakana "
+"karte\")"
+
+#: kdemain.cpp:219
+#, kde-format
+msgid "Google Summer of Code 2007 Project: GPS Support for Marble"
+msgstr "Google Summer of Code 2007 projekts: GPS atbalsts priekš Marble"
+
+#: kdemain.cpp:222
+#, kde-format
+msgid "Murad Tagirov"
+msgstr "Murad Tagirov"
+
+#: kdemain.cpp:223
+#, kde-format
+msgid "Google Summer of Code 2007 Project: KML Support for Marble"
+msgstr "Google Summer of Code 2007 projekts: KML atbalsts priekš Marble"
+
+#: kdemain.cpp:228
+#, kde-format
+msgid "Simon Schmeisser"
+msgstr "Simon Schmeisser"
+
+#: kdemain.cpp:229 kdemain.cpp:231 kdemain.cpp:233 kdemain.cpp:235
+#: kdemain.cpp:237 kdemain.cpp:239 kdemain.cpp:241 kdemain.cpp:243
+#: kdemain.cpp:245 kdemain.cpp:247 kdemain.cpp:249 kdemain.cpp:251
+#: kdemain.cpp:253 kdemain.cpp:255 kdemain.cpp:257 kdemain.cpp:259
+#: kdemain.cpp:261 kdemain.cpp:263 kdemain.cpp:265
+#, kde-format
+msgid "Development & Patches"
+msgstr "Izstrāde un ielāpi"
+
+#: kdemain.cpp:230
+#, kde-format
+msgid "Claudiu Covaci"
+msgstr "Claudiu Covaci"
+
+#: kdemain.cpp:232
+#, kde-format
+msgid "David Roberts"
+msgstr "David Roberts"
+
+#: kdemain.cpp:234
+#, kde-format
+msgid "Nikolas Zimmermann"
+msgstr "Nikolas Zimmermann"
+
+#: kdemain.cpp:236
+#, kde-format
+msgid "Jan Becker"
+msgstr "Jan Becker"
+
+#: kdemain.cpp:238
+#, kde-format
+msgid "Stefan Asserhäll"
+msgstr "Stefan Asserhäll"
+
+#: kdemain.cpp:240
+#, kde-format
+msgid "Laurent Montel"
+msgstr "Laurent Montel"
+
+#: kdemain.cpp:242
+#, kde-format
+msgid "Mayank Madan"
+msgstr "Mayank Madan"
+
+#: kdemain.cpp:244
+#, kde-format
+msgid "Prashanth Udupa"
+msgstr "Prashanth Udupa"
+
+#: kdemain.cpp:246
+#, kde-format
+msgid "Anne-Marie Mahfouf"
+msgstr "Anne-Marie Mahfouf"
+
+#: kdemain.cpp:248
+#, kde-format
+msgid "Josef Spillner"
+msgstr "Josef Spillner"
+
+#: kdemain.cpp:250
+#, kde-format
+msgid "Frerich Raabe"
+msgstr "Frerich Raabe"
+
+#: kdemain.cpp:252
+#, kde-format
+msgid "Frederik Gladhorn"
+msgstr "Frederik Gladhorn"
+
+#: kdemain.cpp:254
+#, kde-format
+msgid "Fredrik Höglund"
+msgstr "Fredrik Höglund"
+
+#: kdemain.cpp:256
+#, kde-format
+msgid "Albert Astals Cid"
+msgstr "Albert Astals Cid"
+
+#: kdemain.cpp:258
+#, kde-format
+msgid "Thomas Zander"
+msgstr "Thomas Zander"
+
+#: kdemain.cpp:260
+#, kde-format
+msgid "Joseph Wenninger"
+msgstr "Joseph Wenninger"
+
+#: kdemain.cpp:262
+#, kde-format
+msgid "Kris Thomsen"
+msgstr "Kris Thomsen"
+
+#: kdemain.cpp:264
+#, kde-format
+msgid "Daniel Molkentin"
+msgstr "Daniel Molkentin"
+
+#: kdemain.cpp:266
+#, kde-format
+msgid "Christophe Leske"
+msgstr "Christophe Leske"
+
+#: kdemain.cpp:267 kdemain.cpp:269 kdemain.cpp:271 kdemain.cpp:273
+#: kdemain.cpp:275 kdemain.cpp:277 kdemain.cpp:279 kdemain.cpp:281
+#: kdemain.cpp:283
+#, kde-format
+msgid "Platforms & Distributions"
+msgstr "Platformas un distribūcijas"
+
+#: kdemain.cpp:268
+#, kde-format
+msgid "Sebastian Wiedenroth"
+msgstr "Sebastian Wiedenroth"
+
+#: kdemain.cpp:270
+#, kde-format
+msgid "Tim Sutton"
+msgstr "Tim Sutton"
+
+#: kdemain.cpp:272
+#, kde-format
+msgid "Christian Ehrlicher"
+msgstr "Christian Ehrlicher"
+
+#: kdemain.cpp:274
+#, kde-format
+msgid "Ralf Habacker"
+msgstr "Ralf Habacker"
+
+#: kdemain.cpp:276
+#, kde-format
+msgid "Steffen Joeris"
+msgstr "Steffen Joeris"
+
+#: kdemain.cpp:278
+#, kde-format
+msgid "Marcus Czeslinski"
+msgstr "Marcus Czeslinski"
+
+#: kdemain.cpp:280
+#, kde-format
+msgid "Marcus D. Hanwell"
+msgstr "Marcus D. Hanwell"
+
+#: kdemain.cpp:282
+#, kde-format
+msgid "Chitlesh Goorah"
+msgstr "Chitlesh Goorah"
+
+#: kdemain.cpp:284
+#, kde-format
+msgid "Nuno Pinheiro"
+msgstr "Nuno Pinheiro"
+
+#: kdemain.cpp:285 kdemain.cpp:287
+#, kde-format
+msgid "Artwork"
+msgstr "Noformējums"
+
+#: kdemain.cpp:290
+#, kde-format
+msgid "Luis Silva"
+msgstr "Luis Silva"
+
+#: kdemain.cpp:291 kdemain.cpp:293 kdemain.cpp:295 kdemain.cpp:297
+#: kdemain.cpp:299 kdemain.cpp:301 kdemain.cpp:303 kdemain.cpp:305
+#: kdemain.cpp:307 kdemain.cpp:309
+#, kde-format
+msgid "Various Suggestions & Testing"
+msgstr "Dažādi ieteikumi un testēšana"
+
+#: kdemain.cpp:292
+#, kde-format
+msgid "Stefan Jordan"
+msgstr "Stefan Jordan"
+
+#: kdemain.cpp:294
+#, kde-format
+msgid "Robert Scott"
+msgstr "Robert Scott"
+
+#: kdemain.cpp:296
+#, kde-format
+msgid "Lubos Petrovic"
+msgstr "Lubos Petrovic"
+
+#: kdemain.cpp:298
+#, kde-format
+msgid "Benoit Sigoure"
+msgstr "Benoit Sigoure"
+
+#: kdemain.cpp:300
+#, kde-format
+msgid "Martin Konold"
+msgstr "Martin Konold"
+
+#: kdemain.cpp:302
+#, kde-format
+msgid "Matthias Welwarsky"
+msgstr "Matthias Welwarsky"
+
+#: kdemain.cpp:304
+#, kde-format
+msgid "Rainer Endres"
+msgstr "Rainer Endres"
+
+#: kdemain.cpp:306
+#, kde-format
+msgid "Ralf Gesellensetter"
+msgstr "Ralf Gesellensetter"
+
+#: kdemain.cpp:308
+#, kde-format
+msgid "Tim Alder"
+msgstr "Tim Alder"
+
+#: kdemain.cpp:310
+#, kde-format
+msgid "John Layt"
+msgstr "John Layt"
+
+#: kdemain.cpp:311
+#, kde-format
+msgid ""
+"Special thanks for providing an important source of inspiration by creating "
+"Marble's predecessor \"Kartographer\"."
+msgstr ""
+"Īpašs paldies par nozīmīga iedvesmas avota nodrošināšanu, izveidojot Marble "
+"priekšteci \"Kartographer\"."
+
+#: kdemain.cpp:327
+#, kde-format
+msgid "Enable debug output"
+msgstr "Ieslēgt atkļūdošanas izvadi"
+
+#: kdemain.cpp:329
+#, kde-format
+msgid "Display OSM placemarks according to the level selected"
+msgstr ""
+
+#: kdemain.cpp:331
+#, kde-format
+msgid "Make a time measurement to check performance"
+msgstr "Mērīt laiku, lai noskaidrotu veiktspēju"
+
+#: kdemain.cpp:333
+#, kde-format
+msgid "Show frame rate"
+msgstr "Rādīt kadru skaitu sekundē"
+
+#: kdemain.cpp:335
+#, kde-format
+msgid "Show tile IDs"
+msgstr "Rādīt flīžu id"
+
+#: kdemain.cpp:337
+#, kde-format
+msgid "Show time spent in each layer"
+msgstr "Rādīt laiku, kas pavadīts katrā slānī"
+
+#: kdemain.cpp:339
+#, fuzzy, kde-format
+#| msgid "Use a different directory which contains map data"
+msgid "Use a different directory <directory> which contains map data."
+msgstr "Izmantot citu mapi, kas satur kartes datus"
+
+#: kdemain.cpp:341
+#, kde-format
+msgid "Do not use the interface optimized for small screens"
+msgstr "Neizmantot saskarni, kas optimizēta maziem ekrāniem"
+
+#: kdemain.cpp:342
+#, kde-format
+msgid "Use the interface optimized for small screens"
+msgstr "Izmantot saskarni, kas optimizēta maziem ekrāniem"
+
+#: kdemain.cpp:344
+#, kde-format
+msgid "Do not use the interface optimized for high resolutions"
+msgstr "Neizmantot saskarni, kas optimizēta augstām izšķirtspējām"
+
+#: kdemain.cpp:345
+#, kde-format
+msgid "Use the interface optimized for high resolutions"
+msgstr "Izmantot saskarni, kas optimizēta augstām izšķirtspējām"
+
+#: kdemain.cpp:347
+#, fuzzy, kde-format
+#| msgid "Show map at given lat lon coordinates"
+msgid "Show map at given lat lon <coordinates>"
+msgstr "Rādīt karti dotajās platuma lon koordinātēs"
+
+#: kdemain.cpp:349
+#, fuzzy, kde-format
+#| msgid "Show map at given lat lon coordinates"
+msgid "Show map at given geo <uri>"
+msgstr "Rādīt karti dotajās platuma lon koordinātēs"
+
+#: kdemain.cpp:351
+#, kde-format
+msgid "Set the distance of the observer to the globe (in km)"
+msgstr "Iestatīt attēlumu no novērotāja līdz globusam (kilometros)"
+
+#: kdemain.cpp:353
+#, fuzzy, kde-format
+#| msgid "Use map id (e.g. \"earth/openstreetmap/openstreetmap.dgml\")"
+msgid "Use map <id> (e.g. \"earth/openstreetmap/openstreetmap.dgml\")"
+msgstr "Lietot kartes id (piem., \"earth/openstreetmap/openstreetmap.dgml\")"
+
+#: kdemain.cpp:355
+#, kde-format
+msgid "One or more placemark files to be opened"
+msgstr "Viens vai vairāki atveramie vietu atzīmju faili"
+
+#. i18n: ectx: label, entry, group (Time)
+#: marble.kcfg:58
+#, kde-format
+msgid "The date and time of marble clock"
+msgstr "Marble pulksteņa datums un laiks"
+
+#. i18n: ectx: label, entry, group (Time)
+#: marble.kcfg:61
+#, kde-format
+msgid "The speed of marble clock"
+msgstr "Marble pulksteņa ātrums"
+
+#. i18n: ectx: label, entry, group (View)
+#: marble.kcfg:107
+#, kde-format
+msgid "The unit chosen to measure distances."
+msgstr "Attālumu mērīšanas vienība."
+
+#. i18n: ectx: label, entry, group (View)
+#: marble.kcfg:115
+#, kde-format
+msgid "The unit chosen to measure angles."
+msgstr "Leņķu mērīšanas vienība."
+
+#. i18n: ectx: label, entry, group (View)
+#: marble.kcfg:124
+#, kde-format
+msgid "The quality at which a still map gets painted."
+msgstr "Kartes zīmēšanas kvalitāte."
+
+#. i18n: ectx: label, entry, group (View)
+#: marble.kcfg:135
+#, kde-format
+msgid "The quality at which an animated map gets painted."
+msgstr "Animētas kartes zīmēšanas kvalitāte."
+
+#. i18n: ectx: label, entry, group (View)
+#: marble.kcfg:146
+#, kde-format
+msgid "The localization of the labels."
+msgstr "Etiķešu lokalizācija."
+
+#. i18n: ectx: label, entry (mapFont), group (View)
+#: marble.kcfg:155
+#, kde-format
+msgid "The general font used on the map."
+msgstr "Kartē izmantotais fonts."
+
+#. i18n: ectx: label, entry (lastFileOpenDir), group (View)
+#: marble.kcfg:159
+#, kde-format
+msgid "The last directory that was opened by File->Open."
+msgstr "Pēdējā mape, kas tika atvērta ar Fails->Atvērt."
+
+#. i18n: ectx: label, entry, group (Navigation)
+#: marble.kcfg:179
+#, kde-format
+msgid "The behaviour of the planet's axis on mouse dragging."
+msgstr "Planētas ass uzvedība, velkot ar peli."
+
+#. i18n: ectx: label, entry, group (Navigation)
+#: marble.kcfg:187
+#, kde-format
+msgid "The location shown on application startup."
+msgstr "Vieta, ko rādīt, palaižot programmu."
+
+#. i18n: ectx: label, entry, group (Navigation)
+#: marble.kcfg:201
+#, kde-format
+msgid "Display animation on voyage to target."
+msgstr "Animēt ceļojumu uz mērķi."
+
+#. i18n: ectx: label, entry, group (Navigation)
+#: marble.kcfg:205
+#, kde-format
+msgid "The external OpenStreetMap editor application"
+msgstr "Ārējā OpenStreetMap rediģēšanas programma"
+
+#. i18n: ectx: label, entry, group (Cache)
+#: marble.kcfg:211
+#, kde-format
+msgid "Cache for tiles reserved in the physical memory."
+msgstr "Rezervētais flīžu glabātuves izmērs datora atmiņā."
+
+#. i18n: ectx: label, entry, group (Cache)
+#: marble.kcfg:217
+#, kde-format
+msgid "Maximum space on the hard disk that can be used to store tiles."
+msgstr "Maksimālais izmērs uz diska, ko izmantot flīžu glabāšanai."
+
+#. i18n: ectx: label, entry (proxyUrl), group (Cache)
+#: marble.kcfg:223
+#, kde-format
+msgid "URL for the proxy server."
+msgstr "Starpniekservera URL."
+
+#. i18n: ectx: label, entry, group (Cache)
+#: marble.kcfg:227
+#, kde-format
+msgid "Port for the proxy server."
+msgstr "Starpniekservera ports."
+
+#. i18n: ectx: label, entry (proxyUser), group (Cache)
+#: marble.kcfg:233
+#, kde-format
+msgid "Username for authorization."
+msgstr "Autorizēšanās lietotājvārds."
+
+#. i18n: ectx: label, entry (proxyPass), group (Cache)
+#: marble.kcfg:236
+#, kde-format
+msgid "Password for authorization."
+msgstr "Autorizēšanās parole."
+
+#. i18n: ectx: label, entry (proxyHttp), group (Cache)
+#: marble.kcfg:239
+#, kde-format
+msgid "Proxy type is HTTP"
+msgstr "Starpniekserveris ir HTTP"
+
+#. i18n: ectx: label, entry (proxySocks5), group (Cache)
+#: marble.kcfg:250
+#, kde-format
+msgid "Proxy type is Socks5"
+msgstr "Starpniekserveris ir Socks5"
+
+#. i18n: ectx: label, entry (proxyAuth), group (Cache)
+#: marble.kcfg:254
+#, kde-format
+msgid "Proxy requires Authentication"
+msgstr "Starpniekserveris pieprasa autentificēšanos"
+
+#. i18n: ectx: label, entry (activePositionTrackingPlugin), group (Plugins)
+#: marble.kcfg:260
+#, kde-format
+msgid "The position tracking plugin used to determine the current location"
+msgstr ""
+"Pozīcijas izsekošanas spraudnis tiek izmantots, lai noteiktu pašreizējo "
+"atrašanās vietu."
+
+#: marble_part.cpp:102
+#, kde-format
+msgid "Position: %1"
+msgstr "Novietojums: %1"
+
+#: marble_part.cpp:103
+#, kde-format
+msgid "Altitude: %1"
+msgstr "Augstums: %1"
+
+#: marble_part.cpp:104
+#, kde-format
+msgid "Tile Zoom Level: %1"
+msgstr "Flīžu tuvinājuma līmenis: %1"
+
+#: marble_part.cpp:105
+#, kde-format
+msgid "Time: %1"
+msgstr "Laiks: %1"
+
+#: marble_part.cpp:167
+#, kde-format
+msgid ""
+"Sorry, unable to open '%1':\n"
+"'%2'"
+msgstr ""
+
+#: marble_part.cpp:168
+#, kde-format
+msgid "File not readable"
+msgstr ""
+
+#: marble_part.cpp:214
+#, kde-format
+msgid "marble_part"
+msgstr "marble_part"
+
+#: marble_part.cpp:217
+#, kde-format
+msgid "A Virtual Globe"
+msgstr "Virtuālais globuss"
+
+#: marble_part.cpp:231
+#, kde-format
+msgid "Sorry, unable to open '%1'. The file is not accessible."
+msgstr ""
+
+#: marble_part.cpp:232
+#, kde-format
+msgid "File not accessible"
+msgstr ""
+
+#: marble_part.cpp:253
+#, kde-format
+msgid "All Supported Files"
+msgstr "Visi atbalstītie faili"
+
+#: marble_part.cpp:259
+#, fuzzy, kde-format
+#| msgid "Open File"
+msgctxt "@title:window"
+msgid "Open File"
+msgstr "Atvērt failu"
+
+#: marble_part.cpp:276
+#, fuzzy, kde-format
+#| msgid "Export Map"
+msgctxt "@title:window"
+msgid "Export Map"
+msgstr "Eksportēt karti"
+
+#: marble_part.cpp:277
+#, kde-format
+msgid "Images *.jpg *.png"
+msgstr "Attēli *.jpg *.png"
+
+#: marble_part.cpp:291
+#, kde-format
+msgctxt "Application name"
+msgid "Marble"
+msgstr "Marble"
+
+#: marble_part.cpp:292
+#, kde-format
+msgid "An error occurred while trying to save the file.\n"
+msgstr "Gadījās kļūda, mēģinot saglabāt failā.\n"
+
+#: marble_part.cpp:483
+#, fuzzy, kde-format
+#| msgid "U&sername:"
+msgid "Unnamed"
+msgstr "&Lietotājs:"
+
+#: marble_part.cpp:714
+#, kde-format
+msgctxt "Action for downloading an entire region of a map"
+msgid "Download Region..."
+msgstr "Lejupielādēt reģionu..."
+
+#: marble_part.cpp:728
+#, kde-format
+msgctxt "Action for saving the map to a file"
+msgid "&Export Map..."
+msgstr "&Eksportēt karti..."
+
+#: marble_part.cpp:737
+#, kde-format
+msgctxt "Action for toggling offline mode"
+msgid "&Work Offline"
+msgstr "Strādāt &nesaistē"
+
+#: marble_part.cpp:747
+#, kde-format
+msgctxt "Action for copying the map to the clipboard"
+msgid "&Copy Map"
+msgstr "&Kopēt karti"
+
+#: marble_part.cpp:754
+#, kde-format
+msgctxt "Action for copying the coordinates to the clipboard"
+msgid "C&opy Coordinates"
+msgstr "K&opēt koordinātas"
+
+#: marble_part.cpp:762
+#, kde-format
+msgctxt "Action for opening a file"
+msgid "&Open..."
+msgstr "&Atvērt..."
+
+#: marble_part.cpp:769
+#, kde-format
+msgctxt "Action for downloading maps (GHNS)"
+msgid "Download Maps..."
+msgstr "Lejupielādēt kartes..."
+
+#: marble_part.cpp:772
+#, kde-format
+msgctxt "Status tip"
+msgid "Download new maps"
+msgstr "Ielādēt jaunas kartes"
+
+#: marble_part.cpp:778
+#, kde-format
+msgctxt "Action for creating new maps"
+msgid "&Create a New Map..."
+msgstr "I&zveidot jaunu karti..."
+
+#: marble_part.cpp:783
+#, kde-format
+msgctxt "Status tip"
+msgid "A wizard guides you through the creation of your own map theme."
+msgstr "Vednis, kas palīdzēs jums izveidot pašam savu kartes tēmu."
+
+#: marble_part.cpp:810
+#, kde-format
+msgctxt "Action for toggling clouds"
+msgid "&Clouds"
+msgstr "&Mākoņi"
+
+#: marble_part.cpp:817
+#, kde-format
+msgctxt "Action for sun control dialog"
+msgid "S&un Control..."
+msgstr "Sa&ules kontrole..."
+
+#: marble_part.cpp:827
+#, kde-format
+msgctxt "Action for time control dialog"
+msgid "&Time Control..."
+msgstr "Laika kon&trole..."
+
+#: marble_part.cpp:836
+#, kde-format
+msgctxt "Action for locking float items on the map"
+msgid "Lock Position"
+msgstr "Slēgt vietu"
+
+#: marble_part.cpp:847
+#, kde-format
+msgid "Show Shadow"
+msgstr "Rādīt ēnu"
+
+#: marble_part.cpp:850
+#, kde-format
+msgid "Hide Shadow"
+msgstr "Paslēpt ēnu"
+
+#: marble_part.cpp:851
+#, kde-format
+msgid "Shows and hides the shadow of the sun"
+msgstr "Rāda un paslēpj saules ēnu"
+
+#: marble_part.cpp:855
+#, kde-format
+msgid "Show sun icon on the Sub-Solar Point"
+msgstr "Rādīt saules ikonu uz subsolārā punkta"
+
+#: marble_part.cpp:857
+#, kde-format
+msgid "Hide sun icon on the Sub-Solar Point"
+msgstr "Slēpt saules ikonu uz subsolārā punkta"
+
+#: marble_part.cpp:858
+#, kde-format
+msgid "Show sun icon on the sub-solar point"
+msgstr "Rādīt saules ikonu uz subsolārā punkta"
+
+#: marble_part.cpp:863
+#, kde-format
+msgid "Lock Globe to the Sub-Solar Point"
+msgstr "Noslēgt globusu uz subsolārā punkta"
+
+#: marble_part.cpp:865
+#, kde-format
+msgid "Unlock Globe to the Sub-Solar Point"
+msgstr "Atslēgt globusu uz subsolārā punkta"
+
+#: marble_part.cpp:866
+#, kde-format
+msgid "Lock globe to the sub-solar point"
+msgstr "Noslēgt globusu uz subsolārā punkta"
+
+#: marble_part.cpp:881
+#, fuzzy, kde-format
+#| msgctxt "Add Bookmark"
+#| msgid "&Add Bookmark"
+msgctxt "Add Bookmark"
+msgid "Add &Bookmark..."
+msgstr "&Pievienot grāmatzīmi"
+
+#: marble_part.cpp:889
+#, kde-format
+msgctxt "Show Bookmarks"
+msgid "Show &Bookmarks"
+msgstr "Rādīt &grāmatzīmes"
+
+#: marble_part.cpp:890
+#, kde-format
+msgid "Show or hide bookmarks in the map"
+msgstr ""
+
+#: marble_part.cpp:898
+#, fuzzy, kde-format
+#| msgid "Show Home Location"
+msgid "&Set Home Location"
+msgstr "Rādīt mājas vietu"
+
+#: marble_part.cpp:905
+#, fuzzy, kde-format
+#| msgctxt "Manage Bookmarks"
+#| msgid "&Manage Bookmarks"
+msgctxt "Manage Bookmarks"
+msgid "&Manage Bookmarks..."
+msgstr "Pār&valdīt grāmatzīmes"
+
+#: marble_part.cpp:917
+#, fuzzy, kde-format
+#| msgctxt "Edit the map in an external application"
+#| msgid "&Edit Map"
+msgctxt "Edit the map in an external application"
+msgid "&Edit Map..."
+msgstr "&Rediģēt karti"
+
+#: marble_part.cpp:925
+#, kde-format
+msgid "&Record Movie"
+msgstr ""
+
+#: marble_part.cpp:927
+#, kde-format
+msgid "Records a movie of the globe"
+msgstr ""
+
+#: marble_part.cpp:933
+#, kde-format
+msgid "&Stop Recording"
+msgstr ""
+
+#: marble_part.cpp:935
+#, kde-format
+msgid "Stop recording a movie of the globe"
+msgstr ""
+
+#: marble_part.cpp:1287
+#, kde-format
+msgctxt "Action for toggling"
+msgid "Show Position"
+msgstr "Rādīt vietu"
+
+#: marble_part.cpp:1289
+#, kde-format
+msgctxt "Action for toggling"
+msgid "Show Date and Time"
+msgstr "Rādīt datumu un laiku"
+
+#: marble_part.cpp:1291
+#, kde-format
+msgctxt "Action for toggling"
+msgid "Show Altitude"
+msgstr "Rādīt augstumu"
+
+#: marble_part.cpp:1294
+#, kde-format
+msgctxt "Action for toggling"
+msgid "Show Tile Zoom Level"
+msgstr "Rādīt flīžu tuvinājuma līmeni"
+
+#: marble_part.cpp:1296
+#, kde-format
+msgctxt "Action for toggling"
+msgid "Show Download Progress Bar"
+msgstr "Rādīt lejupielādes progresa joslu"
+
+#: marble_part.cpp:1391
+#, kde-format
+msgid "View"
+msgstr "Skats"
+
+#: marble_part.cpp:1402
+#, kde-format
+msgid "Navigation"
+msgstr "Navigācija"
+
+#: marble_part.cpp:1413
+#, kde-format
+msgid "Cache & Proxy"
+msgstr "Glabātuve un starpniekserveri"
+
+#: marble_part.cpp:1426
+#, kde-format
+msgid "Date & Time"
+msgstr "Datums un laiks"
+
+#: marble_part.cpp:1434
+#, kde-format
+msgid "Synchronization"
+msgstr ""
+
+#: marble_part.cpp:1447
+#, kde-format
+msgid "Routing"
+msgstr "Maršrutēšana"
+
+#: marble_part.cpp:1455
+#, kde-format
+msgid "Plugins"
+msgstr "Spraudņi"
+
+#. i18n: ectx: Menu (file)
+#: marble_part.rc:6 marbleui.rc:5
+#, kde-format
+msgid "&File"
+msgstr "&Fails"
+
+#. i18n: ectx: Menu (edit)
+#: marble_part.rc:21 marbleui.rc:14
+#, kde-format
+msgid "&Edit"
+msgstr "&Rediģēt"
+
+#. i18n: ectx: Menu (view)
+#: marble_part.rc:31 marbleui.rc:18
+#, kde-format
+msgid "&View"
+msgstr "&Skats"
+
+#. i18n: ectx: Menu (infoboxes)
+#: marble_part.rc:36
+#, kde-format
+msgid "&Info Boxes"
+msgstr "&Informācijas rūtis"
+
+#. i18n: ectx: Menu (onlineservices)
+#: marble_part.rc:42
+#, kde-format
+msgid "&Online Services"
+msgstr "&Tiešsaistes pakalpojumi"
+
+#. i18n: ectx: Menu (settings)
+#: marble_part.rc:55 marbleui.rc:31
+#, kde-format
+msgid "&Settings"
+msgstr "&Iestatījumi"
+
+#. i18n: ectx: Menu (panels)
+#: marble_part.rc:59
+#, kde-format
+msgid "&Panels"
+msgstr "&Paneļi"
+
+#. i18n: ectx: Menu (viewSize)
+#: marble_part.rc:65
+#, fuzzy, kde-format
+#| msgid "&View"
+msgid "&View Size"
+msgstr "&Skats"
+
+#. i18n: ectx: Menu (bookmarks)
+#: marble_part.rc:73 marbleui.rc:29
+#, kde-format
+msgid "&Bookmarks"
+msgstr "&Grāmatzīmes"
+
+#. i18n: ectx: ToolBar (mainToolBar)
+#: marble_part.rc:84 marbleui.rc:36
+#, kde-format
+msgid "Main Toolbar"
+msgstr "Galvenā rīkjosla"
+
+#. i18n: ectx: ToolBar (pluginToolBar)
+#: marble_part.rc:97
+#, kde-format
+msgid "Edit Toolbar"
+msgstr "Rediģēšanas rīkjosla"
+
+#~ msgid "The graphics system that is used by Qt to render the graphics."
+#~ msgstr "Qt grafikas sistēma, ko izmantot zīmēšanai."
+
+#~ msgid "Native"
+#~ msgstr "Sistēmas"
+
+#~ msgid "Native (X11)"
+#~ msgstr "Sistēmas (X11)"
+
+#~ msgid "Native (Mac OS X Core Graphics)"
+#~ msgstr "Sistēmas (Mac OS X Core Graphics)"
+
+#~ msgid ""
+#~ "You have decided to run Marble with a different graphics system.\n"
+#~ "For this change to become effective, Marble has to be restarted.\n"
+#~ "Please close the application and start Marble again."
+#~ msgstr ""
+#~ "Jūs izvēlējāties darbināt Marble ar citu grafikas sistēmu.\n"
+#~ "Lai izmaiņas stātos spēkā, nepieciešams pārstartēt Marble.\n"
+#~ "Lūdzu, aizveriet programmu un palaidiet to vēlreiz."
+
+#~ msgid "Graphics System Change"
+#~ msgstr "Grafikas sistēmas maiņa"
+
+#~ msgid "Night Sky"
+#~ msgstr "Nakts debesis"
+
+#~ msgid ""
+#~ "<p>The <i>night sky</i>.</p><p>Displays the stars and constellations at "
+#~ "night.</p>"
+#~ msgstr ""
+#~ "<p><i>Nakts debesis</i>.</p><p>Rāda zvaigznes un zvaigznājus naktī.</p>"
+
+#~ msgid "Mountain"
+#~ msgstr "Kalns"
+
+#~ msgid "Volcano"
+#~ msgstr "Vulkāns"
+
+#~ msgid "Geographic Pole"
+#~ msgstr "Ģeogrāfiskais pols"
+
+#~ msgid "Magnetic Pole"
+#~ msgstr "Magnētiskais pols"
+
+#~ msgid "Airport"
+#~ msgstr "Lidosta"
+
+#~ msgid "Shipwreck"
+#~ msgstr "Kuģa vraks"
+
+#~ msgid "Astronomical Observatory"
+#~ msgstr "Astronomiskā observatorija"
+
+#~ msgid ""
+#~ "<p>The moon.</p><p>The map is based on data from the Clementine Moon "
+#~ "mission (UVVIS Basemap Mosaic). Credits: NASA/SDIO, Courtesy <a href="
+#~ "\"http://astrogeology.usgs.gov\">USGS Astrogeology Research Program</a></"
+#~ "p>"
+#~ msgstr ""
+#~ "<p>Mēness.</p><p>Šī karte ir balstīta uz Clementine mēness misijas datiem "
+#~ "(UVVIS Basemap Mosaic). Avots: NASA/SDIO, paldies <a href=\"http://"
+#~ "astrogeology.usgs.gov\">USGS Astrogeology Research Program</a></p>"
+
+#~ msgid "Landing Sites"
+#~ msgstr "Nolaišanās vietas"
+
+#~ msgid "Craters"
+#~ msgstr "Krāteri"
+
+#~ msgid "Maria"
+#~ msgstr "Jūras"
+
+#~ msgid "Other features"
+#~ msgstr "Citi objekti"
+
+#~ msgid "Manned landing site"
+#~ msgstr "Cilvēku nolaišanās vieta"
+
+#~ msgid "Robotic rover"
+#~ msgstr "Braucošs robots"
+
+#~ msgid "Unmanned soft landing"
+#~ msgstr "Automātiska mīkstā nolaišanās"
+
+#~ msgid "Unmanned hard landing"
+#~ msgstr "Automātiska cietā nolaišanās"
+
+#~ msgid "Crater, impact crater"
+#~ msgstr "Krāteris, trieciena krāteris"
+
+#~ msgid "Mons, mountain"
+#~ msgstr "Mons, kalns"
+
+#~ msgid "Vallis, valley"
+#~ msgstr "Vallis, ieleja"
+
+#~ msgid "Selenographic Pole"
+#~ msgstr "Selenogrāfiskais pols"
+
+#~ msgid "Plain Map"
+#~ msgstr "Vienkārša karte"
+
+#~ msgid ""
+#~ "<p>A <i>plain map</i>.</p><p>It uses vector lines to mark coastlines and "
+#~ "country borders, etc...</p>"
+#~ msgstr ""
+#~ "<p><i>Vienkārša karte</i>.</p><p> Krastu iezīmēšanai, valstu robežām, "
+#~ "utt., tiek izmantotas vektoru līnijas.</p>"
+
+#, fuzzy
+#~| msgid "Areas"
+#~ msgid "Urban Areas"
+#~ msgstr "Laukumi"
+
+#~ msgid "Boundaries"
+#~ msgstr "Robežas"
+
+#~ msgid "Water Bodies"
+#~ msgstr "Ūdenstilpes"
+
+#~ msgid "Ice and Glaciers"
+#~ msgstr "Ledus un ledāji"
+
+#~ msgid "International"
+#~ msgstr "Internacionālās"
+
+#~ msgid "State"
+#~ msgstr "Štats"
+
+#~ msgid "Lake"
+#~ msgstr "Ezers"
+
+#, fuzzy
+#~| msgid "Historic"
+#~ msgid "Historic Lake"
+#~ msgstr "Vēsture"
+
+#~ msgid "River"
+#~ msgstr "Upe"
+
+#, fuzzy
+#~| msgid "Ice and Glaciers"
+#~ msgid "Glaciers"
+#~ msgstr "Ledus un ledāji"
+
+#~ msgid "Temperature (July)"
+#~ msgstr "Temperatūra (jūlijā)"
+
+#~ msgid "A map which shows the average temperature in July."
+#~ msgstr "Karte, kas parāda vidējo temperatūru jūlijā."
+
+#~ msgid "42&deg;C"
+#~ msgstr "42&deg;C"
+
+#~ msgid "32&deg;C"
+#~ msgstr "32&deg;C"
+
+#~ msgid "23&deg;C"
+#~ msgstr "23&deg;C"
+
+#~ msgid "12&deg;C"
+#~ msgstr "12&deg;C"
+
+#~ msgid "1&deg;C"
+#~ msgstr "1&deg;C"
+
+#~ msgid "-10&deg;C"
+#~ msgstr "-10&deg;C"
+
+#~ msgid "-21&deg;C"
+#~ msgstr "-21&deg;C"
+
+#~ msgid "-32&deg;C"
+#~ msgstr "-32&deg;C"
+
+#~ msgid "-41&deg;C"
+#~ msgstr "-41&deg;C"
+
+#~ msgid "-69&deg;C"
+#~ msgstr "-69&deg;C"
+
+#~ msgid "Earth at Night"
+#~ msgstr "Zeme naktī"
+
+#~ msgid ""
+#~ "This image of <i>Earth's city lights</i> was created with data from the "
+#~ "Defense Meteorological Satellite Program (DMSP) Operational Linescan "
+#~ "System (OLS)."
+#~ msgstr ""
+#~ "Šis attēls ar <i>pilsētu nakts gaismām</i> ir izveidots, izmantojot datus "
+#~ "no Defense Meteorological Satellite Program (DMSP) Operational Linescan "
+#~ "System (OLS)."
+
+#~ msgid "Surface"
+#~ msgstr "Virsma"
+
+#~ msgid "Light terrain"
+#~ msgstr "Gaišs reljefs"
+
+#~ msgid "Dark terrain"
+#~ msgstr "Tumšs reljefs"
+
+#~ msgid "Water"
+#~ msgstr "Ūdens"
+
+#~ msgid "Atlas"
+#~ msgstr "Atlants"
+
+#, fuzzy
+#~| msgid ""
+#~| "<p>A <i>classic topographic map</i>.<p>It uses vector lines to mark "
+#~| "coastlines, country borders etc. and bitmap graphics to create the "
+#~| "height relief."
+#~ msgid ""
+#~ "<p>A <i>classic topographic map</i>.</p><p>It uses vector lines to mark "
+#~ "coastlines, country borders etc. and bitmap graphics to create the height "
+#~ "relief.</p>"
+#~ msgstr ""
+#~ "<p><i>Klasiska topogrāfiskā karte</i>.<p> Krastu iezīmēšanai, valstu "
+#~ "robežām, utt., tiek izmantotas vektoru līnijas, bet reljefa attēlošanai — "
+#~ "bitkaršu grafika."
+
+#~ msgid "Relief"
+#~ msgstr "Reljefs"
+
+#~ msgid "Elevation"
+#~ msgstr "Augstums"
+
+#~ msgid "7000 m"
+#~ msgstr "7000 m"
+
+#~ msgid "5000 m"
+#~ msgstr "5000 m"
+
+#~ msgid "3500 m"
+#~ msgstr "3500 m"
+
+#~ msgid "2000 m"
+#~ msgstr "2000 m"
+
+#~ msgid "1000 m"
+#~ msgstr "1000 m"
+
+#~ msgid "500 m"
+#~ msgstr "500 m"
+
+#~ msgid "200 m"
+#~ msgstr "200 m"
+
+#~ msgid "50 m"
+#~ msgstr "50 m"
+
+#~ msgid "0 m"
+#~ msgstr "0 m"
+
+#~ msgid "0 m (Water)"
+#~ msgstr "0 m (ūdens)"
+
+#~ msgid "-50 m"
+#~ msgstr "-50 m"
+
+#~ msgid "-200 m"
+#~ msgstr "-200 m"
+
+#~ msgid "-2000 m"
+#~ msgstr "-2000 m"
+
+#~ msgid "-4000 m"
+#~ msgstr "-4000 m"
+
+#~ msgid "-6500 m"
+#~ msgstr "-6500 m"
+
+#~ msgid "-11000 m"
+#~ msgstr "-11000 m"
+
+#~ msgid "Temperature (December)"
+#~ msgstr "Temperatūra (decembrī)"
+
+#~ msgid "A map which shows the average temperature in December."
+#~ msgstr "Karte, kas parāda vidējo decembra temperatūru."
+
+#~ msgid ""
+#~ "<p>A <i>global roadmap</i> created by the OpenStreetMap (OSM) project.</"
+#~ "p><p>OSM is an open community which creates free editable maps. The OSM "
+#~ "data was rendered using Mapnik.</p>"
+#~ msgstr ""
+#~ "<p><i>Globāla ceļu karte</i>, ko izveidojis OpenStreetMap (OSM) projekts."
+#~ "</p><p>OSM ir atvērta komūna, kas veido brīvas, rediģējamas kartes. OSM "
+#~ "dati tika renderēti, izmantojot Mapnik.</p>"
+
+#, fuzzy
+#~| msgid "Map Title:"
+#~ msgid "OSM Bitmap Tiles"
+#~ msgstr "Kartes nosaukums:"
+
+#, fuzzy
+#~| msgid "The Earth"
+#~ msgid "Explore the Earth"
+#~ msgstr "Zeme"
+
+#~ msgid "Hillshading"
+#~ msgstr "Augstieņu iekrāsošana"
+
+#~ msgid "Transportation"
+#~ msgstr "Transports"
+
+#~ msgid "Areas"
+#~ msgstr "Laukumi"
+
+#~ msgid "Education"
+#~ msgstr "Izglītība"
+
+#~ msgid "Financial"
+#~ msgstr "Finanses"
+
+#~ msgid "Healthcare"
+#~ msgstr "Veselība"
+
+#~ msgid "Entertainment"
+#~ msgstr "Izklaide"
+
+#~ msgid "Public Buildings"
+#~ msgstr "Publiskās celtnes"
+
+#~ msgid "Accommodation"
+#~ msgstr "Pajumte"
+
+#~ msgid "Emergency"
+#~ msgstr "Ārkārtas situācija"
+
+#~ msgid "Historic"
+#~ msgstr "Vēsture"
+
+#~ msgid "Food and Drinks"
+#~ msgstr "Ēdieni un dzērieni"
+
+#~ msgid "Shop"
+#~ msgstr "Veikals"
+
+#~ msgid "Motorway"
+#~ msgstr "Ātrgaitas šoseja"
+
+#~ msgid "Trunk road"
+#~ msgstr "Valsts nozīmes ceļš"
+
+#~ msgid "Primary road"
+#~ msgstr "Pirmās šķiras ceļš"
+
+#~ msgid "Secondary road"
+#~ msgstr "Otrās šķiras ceļš"
+
+#~ msgid "Unclassified road"
+#~ msgstr "Neklasificēts ceļš"
+
+#~ msgid "Unsurfaced road"
+#~ msgstr "Ceļš bez seguma"
+
+#~ msgid "Track"
+#~ msgstr "Taka"
+
+#~ msgid "Byway"
+#~ msgstr "Blakus ceļš"
+
+#~ msgid "Bridleway"
+#~ msgstr "Jājamceliņš"
+
+#~ msgid "Cycleway"
+#~ msgstr "Veloceliņš"
+
+#~ msgid "Footway"
+#~ msgstr "Kājāmgājēju ceļš"
+
+#~ msgid "Railway station"
+#~ msgstr "Dzelzceļa stacija"
+
+#~ msgid "Railway"
+#~ msgstr "Dzelzceļš"
+
+#~ msgid "Subway"
+#~ msgstr "Metro"
+
+#~ msgid "Lightrail, tram"
+#~ msgstr "Tramvajs"
+
+#~ msgid "Airport runway, taxiway"
+#~ msgstr "Lidostas skrejceļš, taksometru ceļš"
+
+#~ msgid "Airport apron, terminal"
+#~ msgstr "Lidostas ēkas, terminālis"
+
+#~ msgid "Administrative boundary"
+#~ msgstr "Administratīvā robeža"
+
+#~ msgid "Bridge"
+#~ msgstr "Tilts"
+
+#~ msgid "Tunnel"
+#~ msgstr "Tunelis"
+
+#~ msgid "Forest"
+#~ msgstr "Mežs"
+
+#~ msgid "Wood"
+#~ msgstr "Mežs"
+
+#~ msgid "Golf course"
+#~ msgstr "Golfa laukums"
+
+#~ msgid "Park"
+#~ msgstr "Parks"
+
+#~ msgid "Residential Area"
+#~ msgstr "Dzīvojamā teritorija"
+
+#~ msgid "Tourist attraction"
+#~ msgstr "Tūrisma objekts"
+
+#~ msgid "Common, meadow"
+#~ msgstr "Pļava"
+
+#~ msgid "Retail area"
+#~ msgstr "Tirzniecības teritorija"
+
+#~ msgid "Industrial Area"
+#~ msgstr "Industriālā teritorija"
+
+#~ msgid "Commercial Area"
+#~ msgstr "Komercdarījumu teritorija"
+
+#~ msgid "Heathland"
+#~ msgstr "Virsājs"
+
+#~ msgid "Lake, reservoir"
+#~ msgstr "Ezers, rezervuārs"
+
+#~ msgid "Farm"
+#~ msgstr "Ferma"
+
+#~ msgid "Brownfield site"
+#~ msgstr "Industriāli piesārņota vieta"
+
+#~ msgid "Cemetery"
+#~ msgstr "Kapsēta"
+
+#~ msgid "Allotments"
+#~ msgstr "Mazdārziņi"
+
+#~ msgid "Sports pitch"
+#~ msgstr "Sporta laukums"
+
+#~ msgid "Sports centre"
+#~ msgstr "Sporta centrs"
+
+#~ msgid "Nature reserve"
+#~ msgstr "Dabas rezervāts"
+
+#~ msgid "Military area"
+#~ msgstr "Militārā teritorija"
+
+#~ msgid "School, university"
+#~ msgstr "Skola, augstskola"
+
+#~ msgid "Significant Building"
+#~ msgstr "Ievērojama celtne"
+
+#~ msgid "Summit, peak"
+#~ msgstr "Virsotne, augstākais punkts"
+
+#~ msgid "College"
+#~ msgstr "Koledža"
+
+#~ msgid "Kindergarten"
+#~ msgstr "Bērnudārzs"
+
+#~ msgid "Library"
+#~ msgstr "Bibliotēka"
+
+#~ msgid "School"
+#~ msgstr "Skola"
+
+#~ msgid "University"
+#~ msgstr "Universitāte"
+
+#~ msgid "ATM"
+#~ msgstr "ATM"
+
+#~ msgid "Bank"
+#~ msgstr "Banka"
+
+#~ msgid "Bureau de change"
+#~ msgstr "Valūtas maiņa"
+
+#~ msgid "Dentist"
+#~ msgstr "Zobārsts"
+
+#~ msgid "Doctors"
+#~ msgstr "Ārsti"
+
+#~ msgid "Pharmacy"
+#~ msgstr "Aptieka"
+
+#~ msgid "Veterinary"
+#~ msgstr "Veterinārā klīnika"
+
+#~ msgid "Cinema"
+#~ msgstr "Kinoteātris"
+
+#~ msgid "Theatre"
+#~ msgstr "Teātris"
+
+#~ msgid "Court"
+#~ msgstr "Tiesa"
+
+#~ msgid "Embassy"
+#~ msgstr "Vēstniecība"
+
+#~ msgid "Church"
+#~ msgstr "Baznīca"
+
+#~ msgid "Playground"
+#~ msgstr "Rotaļu vieta"
+
+#~ msgid "Place of worship"
+#~ msgstr "Kulta vieta"
+
+#~ msgid "Post office"
+#~ msgstr "Pasts"
+
+#~ msgid "Public building"
+#~ msgstr "Publiska ēka"
+
+#~ msgid "Toilets"
+#~ msgstr "Tualetes"
+
+#~ msgid "Hotel"
+#~ msgstr "Viesnīca"
+
+#~ msgid "Motel"
+#~ msgstr "Motelis"
+
+#~ msgid "Hospital"
+#~ msgstr "Slimnīca"
+
+#~ msgid "Fire station"
+#~ msgstr "Ugunsdzēsēju stacija"
+
+#~ msgid "Monument"
+#~ msgstr "Piemineklis"
+
+#~ msgid "Ruins"
+#~ msgstr "Drupas"
+
+#~ msgid "Bar"
+#~ msgstr "Bārs"
+
+#~ msgid "Biergarten"
+#~ msgstr "Alus dārzs"
+
+#~ msgid "Cafe"
+#~ msgstr "Kafejnīca"
+
+#~ msgid "Drinking water"
+#~ msgstr "Dzeramais ūdens"
+
+#~ msgid "Fast Food"
+#~ msgstr "Ātrā ēdināšana"
+
+#~ msgid "Ice Cream"
+#~ msgstr "Saldējums"
+
+#~ msgid "Pub"
+#~ msgstr "Krogs"
+
+#~ msgid "Restaurant"
+#~ msgstr "Restorāns"
+
+#~ msgid "Alcohol"
+#~ msgstr "Alkohols"
+
+#~ msgid "Bakery"
+#~ msgstr "Maiznīca"
+
+#~ msgid "Books"
+#~ msgstr "Grāmatas"
+
+#~ msgid "Car"
+#~ msgstr "Mašīna"
+
+#~ msgid "Clothes"
+#~ msgstr "Apģērbs"
+
+#~ msgid "Convenience"
+#~ msgstr "Ērtības"
+
+#~ msgid "Gas"
+#~ msgstr "Gāze"
+
+#~ msgid "Gift"
+#~ msgstr "Dāvana"
+
+#~ msgid "Precipitation (July)"
+#~ msgstr "Nokrišņi (Jūlijs)"
+
+#~ msgid ""
+#~ "A map which shows the average precipitation (rain/snow/hail/etc) in July."
+#~ msgstr ""
+#~ "Karte, kas parāda vidējo nokrišņu daudzumu jūlijā (lietus/sniegs/utt.)."
+
+#~ msgid "Precipitation"
+#~ msgstr "Nokrišņi"
+
+#~ msgid "0 mm"
+#~ msgstr "0 mm"
+
+#~ msgid "10 mm"
+#~ msgstr "10 mm"
+
+#~ msgid "40 mm"
+#~ msgstr "40 mm"
+
+#~ msgid "63 mm"
+#~ msgstr "63 mm"
+
+#~ msgid "89 mm"
+#~ msgstr "89 mm"
+
+#~ msgid "127 mm"
+#~ msgstr "127 mm"
+
+#~ msgid "256 mm"
+#~ msgstr "256 mm"
+
+#~ msgid "512 mm"
+#~ msgstr "512 mm"
+
+#~ msgid "1024 mm or more"
+#~ msgstr "1024 mm vai vairāk"
+
+#~ msgid "Satellite View"
+#~ msgstr "Skats no satelīta"
+
+#~ msgid ""
+#~ "<p>Earth as seen from Space.</p><p>The map is based on NASA's beautiful "
+#~ "\"Blue Marble Next Generation\" pictures. Credits: NASA's Earth "
+#~ "Observatory</p>"
+#~ msgstr ""
+#~ "<p>Zemes izskats no kosmosa.</p><p> Šī karte ir veidota no skaistajiem "
+#~ "NASA \"Blue Marble Next Generation\" attēliem. Dati pieder: NASA Earth "
+#~ "Observatory</p>"
+
+#~ msgid "Ice"
+#~ msgstr "Ledus"
+
+#~ msgid "Vegetation"
+#~ msgstr "Augu valsts"
+
+#~ msgid "Desert"
+#~ msgstr "Tuksnesis"
+
+#, fuzzy
+#~| msgid "Historical Maps"
+#~ msgid "Political Map"
+#~ msgstr "Vēsturiskās kartes"
+
+#, fuzzy
+#~| msgid "River"
+#~ msgid "Rivers"
+#~ msgstr "Upe"
+
+#~ msgid "Precipitation (December)"
+#~ msgstr "Nokrišņi (decembrī)"
+
+#~ msgid "A map which shows the average precipitation in December."
+#~ msgstr "Karte, kas parāda vidējo nokrišņu daudzumu decembrī."
+
+#~ msgid "SRTM Data"
+#~ msgstr "SRTM dati"
+
+#, fuzzy
+#~| msgid "Lines and Orientation"
+#~ msgid "Texts and illustrations"
+#~ msgstr "Līnijas un orientācija"
+
+#, fuzzy
+#~| msgid "Preference:"
+#~ msgid "Reference lines"
+#~ msgstr "Iestatījums:"
+
+#~ msgid "Accurate Coastline"
+#~ msgstr "Precīzas krasta līnijas"
+
+#~ msgid "Historical Map 1689"
+#~ msgstr "Vēsturiska karte 1689"
+
+#~ msgid ""
+#~ "<i>Historical world map</i> from the year 1689 created by G. van Schagen "
+#~ "in Amsterdam."
+#~ msgstr ""
+#~ "<i>Vēsturiska pasaules karte</i>, 1689. gads, veidojis G. van Schagen, "
+#~ "Amsterdamā."
+
+#~ msgid "Town"
+#~ msgstr "Pilsēta"
+
+#~ msgid "OpenStreetMap"
+#~ msgstr "OpenStreetMap"
+
+#~ msgid "Clouds"
+#~ msgstr "Mākoņi"
+
+#~ msgid ""
+#~ "A Real Time Cloud Map that gets updated every 3 hours. It uses GOES, "
+#~ "METEOSAT, and GMS satellite imagery downloaded from the Geostationary "
+#~ "Satellite Imagery page at Dundee University.  Credits: Hari Nair, Xplanet "
+#~ "Project"
+#~ msgstr ""
+#~ "Reāllaika mākoņu karte, ko atjauno ik pēc 3 stundām. Tā izmanto GOES "
+#~ "METEOSAT, GMS satelītattēlus no Dunee Universitātes ģeostacionārā "
+#~ "satelīta attēlu lapas. Materiāls pieder: Hari nair, Xplanet project"
+
+#~ msgid "Marble: Legend"
+#~ msgstr "Marble: leģenda"
+
+#~ msgid "Population:"
+#~ msgstr "Iedzīvotāju skaits:"
+
+#~ msgid "&gt; 1&nbsp;000&nbsp;000"
+#~ msgstr "&gt; 1&nbsp;000&nbsp;000"
+
+#~ msgid "&ge; 100&nbsp;000"
+#~ msgstr "&ge; 100&nbsp;000"
+
+#~ msgid "&ge; 10&nbsp;000"
+#~ msgstr "&ge; 10&nbsp;000"
+
+#~ msgid "&lt; 10&nbsp;000"
+#~ msgstr "&lt; 10&nbsp;000"
+
+#~ msgid "Capitals:"
+#~ msgstr "Galvaspilsētas:"
+
+#~ msgid "Red:&nbsp;Nation"
+#~ msgstr "Sarkans:&nbsp; nācija"
+
+#~ msgid "Orange:&nbsp;State"
+#~ msgstr "Oranžs:&nbsp; štats"
+
+#~ msgid "Yellow:&nbsp;County"
+#~ msgstr "Dzeltens:&nbsp; pavalsts"
+
+#~ msgid "White:&nbsp;None"
+#~ msgstr "Balts:&nbsp; nav"
+
+#~ msgid "<!-- ##customLegendEntries:all## -->"
+#~ msgstr "<!-- ##customLegendEntries:all## -->"
+
+#, fuzzy
+#~| msgid "Marble"
+#~ msgid "Marble - Game"
+#~ msgstr "Marble"
+
+#~ msgid "The Earth"
+#~ msgstr "Zeme"
+
+#~ msgid "The Marble widget displays a virtual globe."
+#~ msgstr "Marble logdaļa rāda virtuālu globusu."
+
+#~ msgid "Navigation Control"
+#~ msgstr "Navigācijas kontrole"
+
+#~ msgid "Use this control to navigate."
+#~ msgstr "Lietojiet šo, lai pārvietotos."
+
+#~ msgid "Show places"
+#~ msgstr "Rādīt vietas"
+
+#~ msgid "Show relief"
+#~ msgstr "Rādīt reljefu"
+
+#~ msgid "Show scale bar"
+#~ msgstr "Rādīt mērogjoslu"
+
+#~ msgid "Show borders"
+#~ msgstr "Rādīt robežas"
+
+#~ msgid "Show ice / snow"
+#~ msgstr "Rādīt ledu / sniegu"
+
+#~ msgid "Show compass"
+#~ msgstr "Rādīt kompasu"
+
+#~ msgid "Show grid"
+#~ msgstr "Rādīt tīklu"
+
+#~ msgid "Show rivers / lakes"
+#~ msgstr "Rādīt upes / ezerus"
+
+#~ msgid "Show elevation model"
+#~ msgstr "Rādīt augstuma modeli"
+
+#~ msgid "Coordinates: "
+#~ msgstr "Koordinātas: "
+
+#~ msgid "URL:"
+#~ msgstr "URL:"
+
+#~ msgid "Name:"
+#~ msgstr "Nosaukums:"
+
+#~ msgid "Bookmark Manager - Marble"
+#~ msgstr "Grāmatzīmju pārvaldnieks — Marble"
+
+#~ msgid "Import Bookmarks..."
+#~ msgstr "Importēt grāmatzīmes..."
+
+#~ msgid "Export Bookmarks..."
+#~ msgstr "Eksportēt grāmatzīmes..."
+
+#~ msgid "Folders"
+#~ msgstr "Mapes"
+
+#~ msgid "New"
+#~ msgstr "Jauns"
+
+#~ msgid "Rename"
+#~ msgstr "Pārdēvēt"
+
+#~ msgid "Delete"
+#~ msgstr "Dzēst"
+
+#~ msgid "Bookmarks"
+#~ msgstr "Grāmatzīmes"
+
+#~ msgid "Edit"
+#~ msgstr "Rediģēt"
+
+#, fuzzy
+#~| msgid "Clouds"
+#~ msgid "Cloud Routes"
+#~ msgstr "Mākoņi"
+
+#, fuzzy
+#~| msgid "No position available."
+#~ msgid "No route available."
+#~ msgstr "Pozīcija nav pieejama."
+
+#~ msgid "Current Location"
+#~ msgstr "Pašreizējā atrašanās vieta"
+
+#~ msgid "Position Tracking"
+#~ msgstr "Sekošana pozīcijai"
+
+#~ msgid "Disabled"
+#~ msgstr "Atslēgts"
+
+#~ msgid "Show Track"
+#~ msgstr "Rādīt celiņu"
+
+#~ msgid "Clear Track"
+#~ msgstr "Notīrīt celiņu"
+
+#~ msgid "..."
+#~ msgstr "..."
+
+#~ msgid "No position available."
+#~ msgstr "Pozīcija nav pieejama."
+
+#~ msgctxt "Select the method to use to recenter your GPS location on map."
+#~ msgid "Select the method to use to re-center your GPS location on map."
+#~ msgstr ""
+#~ "Izvēlieties izmantojamo metodi jūsu GPS vietas pārcentrēšanai uz kartes."
+
+#~ msgid "Map Adjustment"
+#~ msgstr "Kartes regulācija"
+
+#~ msgctxt "Disable Auto Recenter"
+#~ msgid "Disabled"
+#~ msgstr "Atslēgts"
+
+#~ msgctxt "Always keep gps location at the center of the map"
+#~ msgid "Keep at Center"
+#~ msgstr "Centrēt"
+
+#~ msgctxt "Auto center when required"
+#~ msgid "When required"
+#~ msgstr "Kad nepieciešams"
+
+#~ msgctxt "Auto Zoom to appropriate zoom level"
+#~ msgid "Auto Zoom to appropriate zoom level"
+#~ msgstr "Automātiski uzturēt piemērotu tuvinājuma līmeni"
+
+#~ msgid "Auto Zoom"
+#~ msgstr "Automātiski tuvināt"
+
+#~ msgid "Data Migration"
+#~ msgstr "Datu migrācija"
+
+#~ msgid ""
+#~ "Marble has found map data stored by a previous Marble version.<br/>Should "
+#~ "this data get converted so that it can be used by the current version?"
+#~ msgstr ""
+#~ "Marble atrada karšu datus no iepriekšējās Marble versijas.<br/>Vai "
+#~ "pārveidot šos datus, lai tie varētu tikt izmantoti pašreizējā versijā?"
+
+#~ msgid "Edit Bookmark - Marble"
+#~ msgstr "Rediģēt grāmatzīmi — Marble"
+
+#~ msgid "&Description"
+#~ msgstr "&Apraksts"
+
+#, fuzzy
+#~| msgid ""
+#~| "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/"
+#~| "TR/REC-html40/strict.dtd\">\n"
+#~| "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~| "css\">\n"
+#~| "p, li { white-space: pre-wrap; }\n"
+#~| "</style></head><body style=\" font-family:'Ubuntu'; font-size:9pt; font-"
+#~| "weight:400; font-style:normal;\">\n"
+#~| "<table border=\"0\" style=\"-qt-table-type: root; margin-top:4px; margin-"
+#~| "bottom:4px; margin-left:4px; margin-right:4px;\">\n"
+#~| "<tr>\n"
+#~| "<td style=\"border: none;\">\n"
+#~| "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~| "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~| "\"></p>\n"
+#~| "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~| "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~| "\"></p></td></tr></table></body></html>"
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<table border=\"0\" style=\"-qt-table-type: root; margin-top:4px; margin-"
+#~ "bottom:4px; margin-left:4px; margin-right:4px;\">\n"
+#~ "<tr>\n"
+#~ "<td style=\"border: none;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-family:'Ubuntu';\"><br /></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-family:'Ubuntu';\"><br /></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-family:'Ubuntu';\"><br /></p></td></tr></table></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Ubuntu'; font-size:9pt; font-"
+#~ "weight:400; font-style:normal;\">\n"
+#~ "<table border=\"0\" style=\"-qt-table-type: root; margin-top:4px; margin-"
+#~ "bottom:4px; margin-left:4px; margin-right:4px;\">\n"
+#~ "<tr>\n"
+#~ "<td style=\"border: none;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p></td></tr></table></body></html>"
+
+#~ msgid "&Folder"
+#~ msgstr "&Mape"
+
+#~ msgid "&Add Folder"
+#~ msgstr "&Pievienot mapi"
+
+#, fuzzy
+#~| msgid "Edit Toolbar"
+#~ msgid "Edit placemark"
+#~ msgstr "Rediģēšanas rīkjosla"
+
+#~ msgid "Description"
+#~ msgstr "Apraksts"
+
+#, fuzzy
+#~| msgid "&Text Labels"
+#~ msgid "Label"
+#~ msgstr "&Teksta etiķetes"
+
+#, fuzzy
+#~| msgid "C&olors"
+#~ msgid "Color:"
+#~ msgstr "Krā&sas"
+
+#, fuzzy
+#~| msgid "Show places"
+#~ msgid "Show placemark"
+#~ msgstr "Rādīt vietas"
+
+#, fuzzy
+#~| msgid "Elevation"
+#~ msgid "Elevation:"
+#~ msgstr "Augstums"
+
+#, fuzzy
+#~| msgid "0 m"
+#~ msgid " m"
+#~ msgstr "0 m"
+
+#~ msgid "External Map Editor Selection"
+#~ msgstr "Ārējā karšu redaktora izvēle"
+
+#~ msgid "External Map Editor"
+#~ msgstr "Ārējais karšu redaktors"
+
+#, fuzzy
+#~| msgid "Web browser (Potlatch)"
+#~ msgid "Web browser (iD)"
+#~ msgstr "Tīmekļa pārlūks (Potlatch)"
+
+#~ msgid "Merkaartor"
+#~ msgstr "Merkaartor"
+
+#~ msgid "JOSM"
+#~ msgstr "JOSM"
+
+#~ msgid ""
+#~ "Deactivate to be prompted for a map editor selection next time again. "
+#~ "Otherwise, your choice is remembered and will be used automatically in "
+#~ "the future. If you want to alter the default map editor later, you can do "
+#~ "so in the Marble Settings."
+#~ msgstr ""
+#~ "Atslēdziet, lai nākamajā reizē atkal tiktu pieprasīts karšu redaktors. "
+#~ "Pretējā gadījumā jūsu izvēle tiks saglabāta un izmantota arī nākotnē. Ja "
+#~ "vēlāk vēlaties izmainīt noklusēto karšu redaktoru, to varat izdarīt "
+#~ "Marble iestatījumos."
+
+#~ msgid "Make my selection the default map editor"
+#~ msgstr "Padarīt manu izvēli par noklusēto karšu redaktoru"
+
+#~ msgid "Editor Details"
+#~ msgstr "Redaktora detaļas"
+
+#~ msgid "Editor Preview"
+#~ msgstr "Redaktora priekšskatījums"
+
+#, fuzzy
+#~| msgid ""
+#~| "Potlatch is an OpenStreetMap editor for quick editing tasks and "
+#~| "beginners. It requires a web browser with flash support."
+#~ msgid ""
+#~ "iD is an OpenStreetMap editor for quick editing tasks and beginners. It "
+#~ "requires a web browser."
+#~ msgstr ""
+#~ "Potlatch ir OpenStreetMap redaktors ātriem rediģēšanas uzdevumiem un "
+#~ "iesācējiem. Tam nepieciešams tīmekļa pārlūks ar flash atbalstu."
+
+#~ msgid "File View"
+#~ msgstr "Faila skats"
+
+#~ msgid "&Save"
+#~ msgstr "&Saglabāt"
+
+#~ msgid "&Close"
+#~ msgstr "&Aizvērt"
+
+#~ msgid "10"
+#~ msgstr "10"
+
+#, fuzzy
+#~| msgid "C&olors"
+#~ msgid "Color"
+#~ msgstr "Krā&sas"
+
+#~ msgid "Go To..."
+#~ msgstr "Iet uz..."
+
+#~ msgid ""
+#~ "Enter a search term and press Enter. <a href=\"http://userbase.kde.org/"
+#~ "Marble/Search\">Details...</a>"
+#~ msgstr ""
+#~ "Ievadiet meklējamo frāzi un nospiediet 'Enter'. <a href=\"http://userbase."
+#~ "kde.org/Marble/Search\">Detaļas...</a>"
+
+#~ msgid "Browse"
+#~ msgstr "Pārlūkot"
+
+#~ msgid "Search"
+#~ msgstr "Meklēt"
+
+#~ msgid "Select a geographic region"
+#~ msgstr "Izvēlieties ģeogrāfisko reģionu"
+
+#~ msgid "Northern Latitude"
+#~ msgstr "Ziemeļu platums"
+
+#~ msgid "°"
+#~ msgstr "°"
+
+#~ msgid "&N"
+#~ msgstr "&Z"
+
+#~ msgid "Western Longitude"
+#~ msgstr "Rietumu garums"
+
+#~ msgid "&W"
+#~ msgstr "&R"
+
+#~ msgid "Eastern Longitude"
+#~ msgstr "Austrumu garums"
+
+#~ msgid "&E"
+#~ msgstr "&A"
+
+#~ msgid "Southern Latitude"
+#~ msgstr "Dienvidu platums"
+
+#~ msgid "&S"
+#~ msgstr "&D"
+
+#~ msgid "′"
+#~ msgstr "′"
+
+#~ msgid "″"
+#~ msgstr "″"
+
+#~ msgid "Legend"
+#~ msgstr "Leģenda"
+
+#~ msgid "Marble - Install Maps"
+#~ msgstr "Marble — instalēt kartes"
+
+#~ msgid "Map View"
+#~ msgstr "Kartes skats"
+
+#~ msgid "&Projection"
+#~ msgstr "&Projekcija"
+
+#~ msgid "Globe"
+#~ msgstr "Globuss"
+
+#~ msgid "Flat Map"
+#~ msgstr "Plakana karte"
+
+#~ msgid "Mercator"
+#~ msgstr "Merkatora"
+
+#, fuzzy
+#~| msgid "Selenographic Pole"
+#~ msgid "Stereographic"
+#~ msgstr "Selenogrāfiskais pols"
+
+#~ msgid "&Celestial Body"
+#~ msgstr "&Debess ķermenis"
+
+#~ msgid "&Theme"
+#~ msgstr "&Tēma"
+
+#~ msgid "Here you can choose the preferred map view from different topics."
+#~ msgstr "Šeit varat no vairākiem tematiem izvēlēties vēlamo kartes skatu."
+
+#~ msgid "Marble Map Theme Creation Wizard"
+#~ msgstr "Marble kartes tēmas izveidošanas vednis"
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">Welcome to the Map Creation Wizard!</span></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">We will guide you "
+#~ "through the process of creating a map theme for Marble. In the end you "
+#~ "will have your own map that you can view in Marble.</p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Please choose the "
+#~ "source that you want to use for the data of your map theme:</p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:12px; margin-bottom:12px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">Laipni lūdzam kartes veidošanas vednī!</span></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Mēs izvedīsim jūs caur "
+#~ "Marble kartes izveidošanas procesu. Beigās jums būs pašam sava karte, ko "
+#~ "varēsiet apskatīt šajā programmā.</p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Lūdzu, izvēlieties "
+#~ "izejas materiālu, ko vēlaties izmantot jūsu kartes tēmas datiem:</p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:12px; margin-bottom:12px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p></body></html>"
+
+#~ msgid ""
+#~ "Connects to a server on the Internet. The map data is queried via the WMS "
+#~ "protocol."
+#~ msgstr ""
+#~ "Pievienojas serverim internetā. Kartes dati tiek pieprasīti, izmantojot "
+#~ "WMS protokolu."
+
+#~ msgid "Web Map Service (WMS)"
+#~ msgstr "Web Map Service (WMS)"
+
+#~ msgid ""
+#~ "You need to provide a bitmap image of a world map that is stored on disk."
+#~ msgstr ""
+#~ "Jums jānodrošina pasaules kartes bitkartes attēls, kas glabājas diskā."
+
+#~ msgid "A single image showing the whole world"
+#~ msgstr "Viens attēls, kas parāda visu pasauli"
+
+#~ msgid ""
+#~ "Connects to a server on the Internet. The map data is queried via a "
+#~ "static URL."
+#~ msgstr ""
+#~ "Pievienojas serverim internetā. Kartes dati tiek pieprasīti, izmantojot "
+#~ "statisku URL."
+
+#~ msgid "Online map providing indexed tiles (e.g. Open Street Map)"
+#~ msgstr ""
+#~ "Tiešsaistes karte, kas nodrošina indeksētas flīzes (piem., Open Street "
+#~ "Map)"
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">WMS Server</span></p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Please choose a <a href="
+#~ "\"http://en.wikipedia.org/wiki/Web_Map_Service\"><span style=\" text-"
+#~ "decoration: underline; color:#0057ae;\">WMS</span></a> server or enter a "
+#~ "custom server URL.</p></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">WMS serveris</span></p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Lūdzu, izvēlieties <a "
+#~ "href=\"http://en.wikipedia.org/wiki/Web_Map_Service\"><span style=\" text-"
+#~ "decoration: underline; color:#0057ae;\">WMS</span></a> serveri vai "
+#~ "ievadiet pielāgotu servera URL.</p></body></html>"
+
+#~ msgid "WMS Server:"
+#~ msgstr "WMS serveris:"
+
+#~ msgid "Custom"
+#~ msgstr "Pielāgots"
+
+#~ msgid "http://"
+#~ msgstr "http://"
+
+#~ msgid "Available Maps:"
+#~ msgstr "Pieejamās kartes:"
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">World Map Bitmap Image</span></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-weight:600;\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Please choose the "
+#~ "location of a world map that is stored in a single image file (JPG, PNG, "
+#~ "etc.). It needs to be provided in <a href=\"http://en.wikipedia.org/wiki/"
+#~ "Equirectangular_projection\"><span style=\" text-decoration: underline; "
+#~ "color:#0057ae;\">Equirectangular projection</span></a>, so the shape "
+#~ "should look like this (size ratio: 2:1):</p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><img src=\":/data/svg/"
+#~ "worldmap.svg\" width=\"150\" /></p></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">Pasaules kartes bitkartes attēls</span></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-weight:600;\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Lūdzu, izvēlieties "
+#~ "vietu pasaules kartei, kas tiek glabāta vienā attēla failā (JPG, PNG, "
+#~ "utt.). Tajai jābūt <a href=\"http://en.wikipedia.org/wiki/"
+#~ "Equirectangular_projection\"><span style=\" text-decoration: underline; "
+#~ "color:#0057ae;\">ekvirektangulārā projekcijā</span></a>, lai forma "
+#~ "izskatītos šādi (izmēru attiecība: 2:1):</p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><img src=\":/data/svg/"
+#~ "worldmap.svg\" width=\"150\" /></p></body></html>"
+
+#~ msgid "Source Image:"
+#~ msgstr "Izejas attēls:"
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Bitstream Vera Sans'; font-"
+#~ "size:9pt; font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif'; font-weight:600;\">URL Scheme for Indexed Tiles</"
+#~ "span></p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif';\">Please enter the URL used for downloading "
+#~ "individual tiles. Use the placeholders </span><span style=\" font-"
+#~ "family:'Sans Serif'; font-style:italic;\">{x}</span><span style=\" font-"
+#~ "family:'Sans Serif';\">, </span><span style=\" font-family:'Sans Serif'; "
+#~ "font-style:italic;\">{y}</span><span style=\" font-family:'Sans Serif';"
+#~ "\">, and </span><span style=\" font-family:'Sans Serif'; font-style:"
+#~ "italic;\">{zoomLevel}</span><span style=\" font-family:'Sans Serif';\"> "
+#~ "to reference a tile from the index.</span></p></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Bitstream Vera Sans'; font-"
+#~ "size:9pt; font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif'; font-weight:600;\">URL shēma indeksētajām flīzēm</"
+#~ "span></p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif';\">Lūdzu, ievadiet URL, ko izmantot individuālo flīžu "
+#~ "lejupielādēšanai. Izmantojiet vietturus </span><span style=\" font-"
+#~ "family:'Sans Serif'; font-style:italic;\">{x}</span><span style=\" font-"
+#~ "family:'Sans Serif';\">, </span><span style=\" font-family:'Sans Serif'; "
+#~ "font-style:italic;\">{y}</span><span style=\" font-family:'Sans Serif';"
+#~ "\"> un </span><span style=\" font-family:'Sans Serif'; font-style:italic;"
+#~ "\">{zoomLevel}</span><span style=\" font-family:'Sans Serif';\">, lai no "
+#~ "indeksa izveidotu atsauci uz flīzi.</span></p></body></html>"
+
+#~ msgid "URL Scheme:"
+#~ msgstr "URL shēma:"
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Bitstream Vera Sans'; font-"
+#~ "size:9pt; font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif'; font-weight:600;\">General Information</span></p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif';\">Please specify a title, a name and an icon for "
+#~ "your new map. Add a description to let users know what your map is about. "
+#~ "</span></p></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Bitstream Vera Sans'; font-"
+#~ "size:9pt; font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif'; font-weight:600;\">Vispārēja informācija</span></p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif';\">Lūdzu, norādiet nosaukumu, vārdu un ikonu jūsu "
+#~ "jaunajai kartei. Pievienojiet aprakstu, lai lietotāji zinātu šīs kartes "
+#~ "nolūku. </span></p></body></html>"
+
+#~ msgid "Map Title:"
+#~ msgstr "Kartes nosaukums:"
+
+#~ msgid "A short concise name for your map theme."
+#~ msgstr "Īss nosaukums jūsu kartes tēmai."
+
+#~ msgid "Map Name:"
+#~ msgstr "Kartes vārds:"
+
+#~ msgid "The lowercase map theme id."
+#~ msgstr "Ar mazajiem burtiem uzrakstīts kartes tēmas id."
+
+#~ msgid "The folder name of your new theme."
+#~ msgstr "Jūsu jaunās tēmas mapes nosaukums."
+
+#~ msgid "Description:"
+#~ msgstr "Apraksts:"
+
+#~ msgid ""
+#~ "A short description of your map theme. Here you can provide information "
+#~ "about the purpose, origin, copyright and license of the data used in your "
+#~ "map theme."
+#~ msgstr ""
+#~ "Īss jūsu kartes tēmas apraksts. Šei varat norādīt informāciju par mērķi, "
+#~ "izcelšanos, autortiesībām un licenci datiem, kas izmantoti kartes tēmā."
+
+#~ msgid "It will appear in a tool tip and may contain HTML formatting."
+#~ msgstr "Tas parādīsies paskaidrē un var saturēt HTML formatēšanu."
+
+#~ msgid "Preview Image:"
+#~ msgstr "Priekšapskates attēls:"
+
+#~ msgid "preview image"
+#~ msgstr "priekšapskates attēls"
+
+#~ msgid "Change..."
+#~ msgstr "Mainīt..."
+
+#~ msgid "Legend Image:"
+#~ msgstr "Leģendas attēls:"
+
+#~ msgid "Places of Interest"
+#~ msgstr "Interesantas vietas"
+
+#~ msgid "Populated Places"
+#~ msgstr "Apdzīvotas vietas"
+
+#~ msgid "Terrain"
+#~ msgstr "Reljefs"
+
+#~ msgid "Coordinate Grid"
+#~ msgstr "Koordinātu tīkls"
+
+#~ msgid "Border Lines"
+#~ msgstr "Robežas līnijas"
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">Summary</span></p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Congratulations! You "
+#~ "have entered all the data that is necessary to create your map theme. "
+#~ "Check the summary below carefully and press the \"Finish\" button to "
+#~ "create the theme. </p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Please consider "
+#~ "contributing the map theme back to the Marble community if the license "
+#~ "and the terms of use allow for it.</p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:12px; margin-bottom:12px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">Summary</span></p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Apsveicam! Esat "
+#~ "ievadījis visus datus, kas nepieciešami, lai izveidotu jūsu kartes tēmu. "
+#~ "Pārbaudiet apakšā esošo kopsavilkumu un nospiediet pogu 'Pabeigt', lai "
+#~ "izveidotu tēmu. </p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Lūdzu, apsveriet "
+#~ "iespēju kartes tēmu ziedot atpakaļ Marble kopienai, ja licence un "
+#~ "lietošanas nosacījumi to atļauj.</p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:12px; margin-bottom:12px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p></body></html>"
+
+#~ msgid "Map name goes here."
+#~ msgstr "Šeit jābūt kartes vārdam."
+
+#~ msgid "Map Theme:"
+#~ msgstr "Kartes tēma:"
+
+#~ msgid "Map theme goes here."
+#~ msgstr "Šeit jābūt kartes tēmai."
+
+#~ msgid "Thumbnail image goes here."
+#~ msgstr "Šeit jābūt sīktēlam."
+
+#~ msgid "Preview Map"
+#~ msgstr "Kartes priekšskatījums"
+
+#~ msgid "About Marble"
+#~ msgstr "Par Marble"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">Marble Virtual Globe</span></p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">Marble virtuālais globuss</span></p></body></html>"
+
+#~ msgid "Version Unknown"
+#~ msgstr "Nezināma versija"
+
+#~ msgid "&About"
+#~ msgstr "&Par"
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:10pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-size:9pt;\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "size:9pt;\">(c) 2007, The Marble Project</span></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-size:9pt; font-style:italic;\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "size:9pt;\">http://edu.kde.org/marble</span></p></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:10pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-size:9pt;\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "size:9pt;\">(c) 2007, Marble projekts</span></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-size:9pt; font-style:italic;\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "size:9pt;\">http://edu.kde.org/marble</span></p></body></html>"
+
+#~ msgid "A&uthors"
+#~ msgstr "A&utori"
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:10pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-size:9pt;\"></p></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:10pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-size:9pt;\"></p></body></html>"
+
+#~ msgid "&Data"
+#~ msgstr "&Dati"
+
+#~ msgid "&License Agreement"
+#~ msgstr "&Licences vienošanās"
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:10pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-family:'MS Shell Dlg 2'; font-size:8pt;\"></p></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:10pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-family:'MS Shell Dlg 2'; font-size:8pt;\"></p></body></html>"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">There are two caches "
+#~ "being used for Marble: The physical memory which is needed to keep map "
+#~ "data in the computer's memory. Increasing the value will make the "
+#~ "application more responsive. The hard disc memory cache is used by "
+#~ "download contents from the Internet (e.g. Wikipedia data or map data). "
+#~ "Decrease this value if you want to save space on the hard disc and if "
+#~ "high usage of the Internet is not an issue. </p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Marble izmanto divas "
+#~ "glabātuves: fizisko atmiņu, kas nepieciešama, lai turētu datus datora "
+#~ "atmiņā. Vērtības palielināšana padarīs programmu ātrāk reaģējošu. Cietā "
+#~ "diska atmiņa tiek izmantota lejupielādētā satura saglabāšanai (piem., "
+#~ "Wikipedia dati vai karšu dati). Samaziniet šo vērtību, ja vēlaties "
+#~ "ietaupīt izmantoto diska vietu un nekas nav iebilstams pret augstāku "
+#~ "interneta pieslēguma noslogojumu. </p></body></html>"
+
+#~ msgid "C&ache"
+#~ msgstr "Gl&abātuve"
+
+#~ msgid "&Physical memory:"
+#~ msgstr "&Fiziskā atmiņa:"
+
+#, fuzzy
+#~| msgid "MB"
+#~ msgid " MB"
+#~ msgstr "MB"
+
+#~ msgid "C&lear"
+#~ msgstr "&Tīrīt"
+
+#~ msgid "&Hard disc:"
+#~ msgstr "&Cietais disks:"
+
+#~ msgid "Unlimited"
+#~ msgstr "Neierobežots"
+
+#~ msgid "Cl&ear"
+#~ msgstr "Tī&rīt"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Proxy settings for your "
+#~ "local intranet. Please leave empty if there is no proxy.</p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Jūsu lokālā tīkla "
+#~ "starpniekservera iestatījumi. Ja nav starpniekservera, atstājiet tukšu.</"
+#~ "p></body></html>"
+
+#~ msgid "&Proxy"
+#~ msgstr "&Starpniekserveris"
+
+#~ msgid "&Proxy:"
+#~ msgstr "&Starpniekserveris:"
+
+#~ msgid "P&ort:"
+#~ msgstr "P&orts:"
+
+#~ msgid "Proxy type:"
+#~ msgstr "Starpniekservera tips:"
+
+#~ msgid "Http"
+#~ msgstr "Http"
+
+#~ msgid "Socks5"
+#~ msgstr "Socks5"
+
+#~ msgid "Requires authentication"
+#~ msgstr "Pieprasa autentificēšanu"
+
+#~ msgid "U&sername:"
+#~ msgstr "&Lietotājs:"
+
+#~ msgid "&Password:"
+#~ msgstr "&Parole:"
+
+#, fuzzy
+#~| msgid "Celestial Poles"
+#~ msgid "Credentials"
+#~ msgstr "Debesu poli"
+
+#, fuzzy
+#~| msgid "Server"
+#~ msgid "Server:"
+#~ msgstr "Serveris"
+
+#, fuzzy
+#~| msgid "U&sername:"
+#~ msgid "Username:"
+#~ msgstr "&Lietotājs:"
+
+#, fuzzy
+#~| msgid "&Password:"
+#~ msgid "Password:"
+#~ msgstr "&Parole:"
+
+#~ msgid "Marble Cache Settings"
+#~ msgstr "Marble glabātuves iestatījumi"
+
+#~ msgid "Dragging and Animation"
+#~ msgstr "Vilkšana un animācija"
+
+#~ msgid "&Drag location:"
+#~ msgstr "&Vilkt vietu:"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">While dragging the "
+#~ "mouse there are two standard behaviours when dealing with a virtual globe:"
+#~ "</p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">The location below "
+#~ "mouse pointer will follow the cursor exactly: As a result e.g. the north "
+#~ "pole will not stay at the top which can lead to confusion. By default "
+#~ "Marble makes sure that north is always up which results in a dragging "
+#~ "behaviour where the location below the mouse pointer slightly \"detaches"
+#~ "\" from the cursor. </p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Strādājot ar virtuālo "
+#~ "planētu, ir pieejami divi standarta vilkšanas režīmi:</p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Vieta zem kursora sekos "
+#~ "peles kursoram. Tā rezultātā Ziemeļpols var vairs neatrasties augšā un "
+#~ "izraisīt apjukumu. Noklusētais režīms notur Ziemeļpolu augšpusē, bet tā "
+#~ "rezultātā peles kursors var nedaudz nobīdīties no sākotnējās vietas zem "
+#~ "tā. </p></body></html>"
+
+#~ msgid "Keep Planet Axis Vertically"
+#~ msgstr "Turēt planētas asi vertikālu"
+
+#~ msgid "Follow Mouse Pointer"
+#~ msgstr "Sekot peles kursoram"
+
+#~ msgid "Use kinetic spinning when dragging the map"
+#~ msgstr "Velkot karti, izmantot kinētisko griešanos"
+
+#~ msgid "&Inertial Globe Rotation"
+#~ msgstr "&Inertiālā globusa rotācija"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">When searching for a "
+#~ "location Marble can either move instantly to the new location or it can "
+#~ "show a travel animation from the previous place to the new place.</p></"
+#~ "body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Meklējot vietu, Marble "
+#~ "var vai nu uzreiz uz to pārlēkt, vai parādīt pārceļošanas animāciju no "
+#~ "iepriekšējās vietas uz jauno.</p></body></html>"
+
+#~ msgid "&Animate voyage to the target"
+#~ msgstr "&Animēt ceļojumu uz mērķi"
+
+#~ msgid "&On startup:"
+#~ msgstr "&Palaižot:"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">By default Marble will "
+#~ "display the home location immediately after the application has started. "
+#~ "As an alternative it can also show the last position that was active when "
+#~ "the user left the application. </p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Noklusēti, palaižot "
+#~ "Marble, tiek rādīta mājas vieta. Alternatīvs variants ir rādīt vietu, kas "
+#~ "bija redzama, iepriekšējo reizi aizverot programmu. </p></body></html>"
+
+#~ msgid "Show Home Location"
+#~ msgstr "Rādīt mājas vietu"
+
+#~ msgid "Return to Last Location Visited"
+#~ msgstr "Atgriezties pēdējā apmeklētajā vietā"
+
+#~ msgid "&External Editor:"
+#~ msgstr "Ārējs r&edaktors:"
+
+#~ msgid ""
+#~ "<p>The application that is launched to edit maps. Potlatch (default) "
+#~ "requires a web browser with flash support to be installed. When selecting "
+#~ "josm or merkaartor, make sure that the respective application is "
+#~ "installed.</p>"
+#~ msgstr ""
+#~ "<p>Programma, kas tiek palaista, lai rediģētu kartes. Potlatch "
+#~ "(noklusētā) nepieciešams tīmekļa pārlūks ar instalētu flash atbalstu. "
+#~ "Izvēloties josm vai merkaartor, pārliecinieties, ka atbilstošā programma "
+#~ "ir instalāta.</p>"
+
+#~ msgid "Always ask"
+#~ msgstr "Vienmēr vaicāt"
+
+#~ msgid "Potlatch (Web browser)"
+#~ msgstr "Potlatch (tīmekļa pārlūks)"
+
+#~ msgid "Up"
+#~ msgstr "Uz augšu"
+
+#~ msgid "Tilts the globe's axis towards the user."
+#~ msgstr "Pagriež globusa asi uz skatītāja pusi."
+
+#~ msgid "Left"
+#~ msgstr "Pa kreisi"
+
+#~ msgid "Rotates the globe counterclockwise around its axis."
+#~ msgstr "Pagriež globusu ap tā asi pret pulksteņa rādītāju."
+
+#~ msgid "Reset View"
+#~ msgstr "Atstatīt skatu"
+
+#~ msgid "Click this button to restore the original zoom level and view angle."
+#~ msgstr "Nospiediet šo pogu, lai atjaunotu sākotnējo mērogu un skata leņķi."
+
+#~ msgid "Home"
+#~ msgstr "Mājas"
+
+#~ msgid "Right"
+#~ msgstr "Pa labi"
+
+#~ msgid "Rotates the globe clockwise around its axis."
+#~ msgstr "Pagriež globusu ap tā asi pulksteņa rādītāja virzienā."
+
+#~ msgid "Down"
+#~ msgstr "Uz leju"
+
+#~ msgid "Tilts the globe's axis away from the user."
+#~ msgstr "Pagriež globusa asi prom no skatītāja."
+
+#~ msgid "Zoom In"
+#~ msgstr "Tuvināt"
+
+#~ msgid "Zoom in by pressing this button to see more detail."
+#~ msgstr "Nospiežot šo pogu, karte tiks tuvināta un redzēsiet vairāk detaļu."
+
+#~ msgid "+"
+#~ msgstr "+"
+
+#~ msgid "Zoom Slider"
+#~ msgstr "Tālummaiņas slīdnis"
+
+#~ msgid "Use this slider to adjust the zoom level of the map."
+#~ msgstr "Ar šo slīdni var mainīt kartes mērogu."
+
+#~ msgid "Zoom Out"
+#~ msgstr "Tālināt"
+
+#~ msgid "Zoom out by pressing this button to see less detail."
+#~ msgstr "Nospiežot šo pogu, karte tiks tālināta un redzēsiet mazāk detaļu."
+
+#~ msgid "-"
+#~ msgstr "-"
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'DejaVu Sans'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif';\">This is Marble's machine room for advanced users. "
+#~ "Here you can select and deselect the functionality that is provided "
+#~ "through plugins. </span></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif';\">Deselecting a plugin will remove the functionality "
+#~ "from the map, menus and toolbars. </span></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif';\">Also some of the plugins might allow for tweaking "
+#~ "their configuration a bit. </span></p></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ " p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'DejaVu Sans'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif';\">Šī ir Marble mašīntelpa nopietniem lietotājiem. "
+#~ "Šeit varat ieslēgt vai izslēgt iespējas, kas realizētas kā spraudņi. </"
+#~ "span></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif';\">Atslēdzot spraudni, tā funkcijas tiks noņemtas no "
+#~ "kartes, izvēlnēm un rīkjoslām. </span></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif';\">Daži spraudņi piedāvā arī nelielas konfigurēšanas "
+#~ "iespējas.</span></p></body></html>"
+
+#~ msgid "P&lugins"
+#~ msgstr "&Spraudņi"
+
+#~ msgid "Time Zone"
+#~ msgstr "Laika zona"
+
+#~ msgid "UTC"
+#~ msgstr "UTC"
+
+#~ msgid "System time zone"
+#~ msgstr "Sistēmas laika zona"
+
+#~ msgid "Choose Time zone"
+#~ msgstr "Izvēlieties laika joslu:"
+
+#~ msgid "Universal Time Coordinated"
+#~ msgstr "Universālais koordinētais laiks"
+
+#~ msgid "European Central Time"
+#~ msgstr "Eiropas centrālais laiks"
+
+#~ msgid "Eastern European Time"
+#~ msgstr "Austrumeiropas laiks"
+
+#~ msgid "Egypt Standard Time"
+#~ msgstr "Ēģiptes standarta laiks"
+
+#~ msgid "Eastern African Time"
+#~ msgstr "Austrumāfrikas laiks"
+
+#~ msgid "Middle East Time"
+#~ msgstr "Vidējo Austrumu laiks"
+
+#~ msgid "Near East Time"
+#~ msgstr "Tuvo Austrumu laiks"
+
+#~ msgid "Pakistan Lahore Time"
+#~ msgstr "Pakistānas Lahoras laiks"
+
+#~ msgid "India Standard Time"
+#~ msgstr "Indijas standarta laiks"
+
+#~ msgid "Bangladesh Standard Time"
+#~ msgstr "Bangladešas standarta laiks"
+
+#~ msgid "Vietnam Standard Time"
+#~ msgstr "Vjetnamas standarta laiks"
+
+#~ msgid "China Taiwan Time"
+#~ msgstr "Ķīnas Taivānas laiks"
+
+#~ msgid "Japan Standard Time"
+#~ msgstr "Japānas standarta laiks"
+
+#~ msgid "Australia Central Time"
+#~ msgstr "Austrālijas centrālais laiks"
+
+#~ msgid "Australia Eastern Time"
+#~ msgstr "Austrālijas austrumu laiks"
+
+#~ msgid "Solomon Standard Time"
+#~ msgstr "Zālamana standarta laiks"
+
+#~ msgid "New Zealand Standard Time"
+#~ msgstr "Jaunzēlandes standarta laiks"
+
+#~ msgid "Midway Islands Time"
+#~ msgstr "Midveju salu laiks"
+
+#~ msgid "Hawaii Standard Time"
+#~ msgstr "Havaju standarta laiks"
+
+#~ msgid "Alaska Standard Time"
+#~ msgstr "Aļaskas standarta laiks"
+
+#~ msgid "Pacific Standard Time"
+#~ msgstr "Klusā okeāna standarta laiks"
+
+#~ msgid "Phoenix Standard Time"
+#~ msgstr "Fīniksas standarta laiks"
+
+#~ msgid "Mountain Standard Time"
+#~ msgstr "Montainas standarta laiks"
+
+#~ msgid "Central Standard Time"
+#~ msgstr "Centrālais standarta laiks"
+
+#~ msgid "Eastern Standard Time"
+#~ msgstr "Austrumu standarta laiks"
+
+#~ msgid "Indiana Eastern Standard Time"
+#~ msgstr "Indianas austrumu standarta laiks"
+
+#~ msgid "Puerto Rico and US Virgin Islands Time"
+#~ msgstr "Puerteriko un ASV Virdžīnu salu laiks"
+
+#~ msgid "Canada Newfoundland Time"
+#~ msgstr "Kanādas Ņūfaundlendas laiks"
+
+#~ msgid "Argentina Standard Time"
+#~ msgstr "Argentīnas standarta laiks"
+
+#~ msgid "Brazil Eastern Time"
+#~ msgstr "Brazīlijas austrumu laiks"
+
+#~ msgid "Central African Time"
+#~ msgstr "Centrālāfrikas laiks"
+
+#~ msgid "When Marble starts"
+#~ msgstr "Palaižot Marble"
+
+#~ msgid "Load system time"
+#~ msgstr "Ielādēt sistēmas laiku"
+
+#~ msgid "Load last session time"
+#~ msgstr "Ielādēt pēdējās sesijas laiku"
+
+#~ msgid "&Units"
+#~ msgstr "&Mērvienības"
+
+#~ msgid "&Distance:"
+#~ msgstr "&Attālums:"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">The unit that gets used "
+#~ "to measure altitude, lengths and distances (e.g. km, mi, ft).</p></body></"
+#~ "html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Mērvienības, ar kurām "
+#~ "tiek attēlots augstums, garum un attālums (piem., km, jūdzes, pēdas).</"
+#~ "p></body></html>"
+
+#~ msgid "Kilometer, Meter"
+#~ msgstr "Kilometri, metri"
+
+#~ msgid "Miles, Feet"
+#~ msgstr "Jūdzes, pēdas"
+
+#~ msgid "An&gle:"
+#~ msgstr "&Leņķis:"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Specifies the notation "
+#~ "of angles in coordinates: By default the Degree-Minute-Second notation (e."
+#~ "g. 54°30'00\" ) gets used. As an alternative you can choose decimal "
+#~ "degrees (e.g. 54.5°).</p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Norāda koordināšu leņķu "
+#~ "pieraksta veidu: noklusētais pieraksts ir grādi-minūtes-sekundes (piem. "
+#~ "54°30'00\" ). Alternatīvs pieraksts ir grādi un to decimāldaļas (piem. "
+#~ "54.5°).</p></body></html>"
+
+#~ msgid "Degree (DMS)"
+#~ msgstr "Grādi (GMS)"
+
+#~ msgid "Degree (Decimal)"
+#~ msgstr "Grādi (decimālie)"
+
+#~ msgid "Universal Transverse Mercator (UTM)"
+#~ msgstr "Universālā transversā Merkatora (UTM)"
+
+#~ msgid "Map &Quality"
+#~ msgstr "Kartes &kvalitāte"
+
+#~ msgid "&Still image:"
+#~ msgstr "&Nekustīgs attēls:"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Specifies the map "
+#~ "quality that gets displayed while there is no user input. Usually this "
+#~ "allows for high map quality as speed is no concern.</p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Norāda kartes "
+#~ "kvalitāti, kad lietotājs neko nedara. Parasti šeit var lietot augstas "
+#~ "kvalitātes karti, jo tā netiek bieži pārzīmēta.</p></body></html>"
+
+#~ msgid "Outline Quality"
+#~ msgstr "Aprišu kvalitāte"
+
+#~ msgid "Low Quality"
+#~ msgstr "Zema"
+
+#~ msgid "Normal"
+#~ msgstr "Normāla"
+
+#~ msgid "High Quality"
+#~ msgstr "Augsta"
+
+#~ msgid "Print Quality"
+#~ msgstr "Drukas kvalitāte"
+
+#~ msgid "During &animations:"
+#~ msgstr "Animēš&anas laikā:"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Specifies the map "
+#~ "quality that gets displayed during map animations (e.g. while dragging "
+#~ "the globe). </p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Especially on slow "
+#~ "machines it is advisable to set this option to \"low quality\" as this "
+#~ "will give better speed.</p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Norāda kartes "
+#~ "kvalitāti, kad notiek kartes animācijas (piem., velkot karti). </p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Uz lēniem datoriem "
+#~ "iesakām izmantot \"Zema kvalitāte\", tas padarīs karti ātrāku.</p></"
+#~ "body></html>"
+
+#~ msgid "G&raphics system:"
+#~ msgstr "G&rafikas sistēma:"
+
+#~ msgid ""
+#~ "Specifies the graphics system that Qt uses to draw the map.\n"
+#~ "Changing this setting might be a good idea if there are performance "
+#~ "issues with the system's graphics drivers."
+#~ msgstr ""
+#~ "Norāda grafikas sistēmu, ko Qt izmantot kartes zīmēšanai.\n"
+#~ "Šī iestatījuma izmainīšana var noderēt, ja sastopat ātrdarbības problēmas "
+#~ "ar sistēmas grafiskajiem draiveriem."
+
+#~ msgid "Raster (Software rendering)"
+#~ msgstr "Rastra (programmatūras renderēšana)"
+
+#~ msgid "OpenGL"
+#~ msgstr "OpenGL"
+
+#~ msgid "&Text Labels"
+#~ msgstr "&Teksta etiķetes"
+
+#~ msgid "&Place names:"
+#~ msgstr "&Vietu nosaukumi:"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Places often have "
+#~ "different names in different languages. The label on the map can show the "
+#~ "name in the user's language. Alternatively it can display the name in the "
+#~ "official language and glyphs of that place. </p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Vietu nosaukumi dažādās "
+#~ "valodās bieži vien atšķiras. Etiķete uz kartes rādīs vietas nosaukumu "
+#~ "lietotāja valodā. Alternatīvi, iespējams rādīt nosaukumu vietas "
+#~ "oficiālajā valodā un alfabētā. </p></body></html>"
+
+#~ msgid "Custom & Native Language"
+#~ msgstr "Pielāgoti un vietējā valodā"
+
+#~ msgid "Custom Language"
+#~ msgstr "Pielāgotā valodā"
+
+#~ msgid "Native Language"
+#~ msgstr "Vietējā valodā"
+
+#~ msgid "Default map &font:"
+#~ msgstr "Kartes noklusējuma &fonts:"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">The default font that "
+#~ "gets used on the map.</p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Noklusētais kartē "
+#~ "izmantotais fonts.</p></body></html>"
+
+#, fuzzy
+#~| msgctxt "Action for opening a file"
+#~| msgid "&Open..."
+#~ msgid "Open..."
+#~ msgstr "&Atvērt..."
+
+#, fuzzy
+#~| msgid "Meters per second"
+#~ msgid "FPS (frames per second)"
+#~ msgstr "Metri sekundē"
+
+#~ msgid "Cancel"
+#~ msgstr "Atcelt"
+
+#, fuzzy
+#~| msgid "Start:"
+#~ msgid "Start"
+#~ msgstr "Sākums:"
+
+#~ msgid "New Bookmark Folder - Marble"
+#~ msgstr "Jauna grāmatzīmju mape — Marble"
+
+#~ msgid "&Folder Name"
+#~ msgstr "&Mapes nosaukums"
+
+#, fuzzy
+#~| msgid "Current Location"
+#~ msgid "Current Relations"
+#~ msgstr "Pašreizējā atrašanās vieta"
+
+#, fuzzy
+#~| msgid "&Name"
+#~ msgid "Name"
+#~ msgstr "&Nosaukums"
+
+#, fuzzy
+#~| msgid "Type:"
+#~ msgid "Type"
+#~ msgstr "Tips:"
+
+#, fuzzy
+#~| msgid "&Add Folder"
+#~ msgid "Add Relation"
+#~ msgstr "&Pievienot mapi"
+
+#, fuzzy
+#~| msgid "Current Location"
+#~ msgid "Current Tags"
+#~ msgstr "Pašreizējā atrašanās vieta"
+
+#, fuzzy
+#~| msgid "Browse"
+#~ msgid "Browse..."
+#~ msgstr "Pārlūkot"
+
+#, fuzzy
+#~| msgid "&Position"
+#~ msgid "Position:"
+#~ msgstr "&Novietojums"
+
+#~ msgid "Marble"
+#~ msgstr "Marble"
+
+#~ msgid "Map"
+#~ msgstr "Karte"
+
+#~ msgid "Visible Globe Region"
+#~ msgstr "Redzamais globusa apgabals"
+
+#~ msgid "Outer Space"
+#~ msgstr "Kosmoss"
+
+#~ msgid "Route"
+#~ msgstr "Maršruts"
+
+#~ msgid "Route Summary"
+#~ msgstr "Maršruta kopsavilkums"
+
+#~ msgid "Driving Instructions"
+#~ msgstr "Braukšanas instrukcijas"
+
+#~ msgid "Footer"
+#~ msgstr "Kājene"
+
+#~ msgid "Configure Routing Profile"
+#~ msgstr "Konfigurēt maršrutēšanas profilu"
+
+#~ msgid "Active Route Services"
+#~ msgstr "Aktīvie maršrutu servisi"
+
+#~ msgid "Service Settings"
+#~ msgstr "Servisu iestatījumi"
+
+#~ msgid "No configuration available"
+#~ msgstr "Konfigurācija nav pieejama"
+
+#~ msgid "Select Service to Configure"
+#~ msgstr "Izvēlieties konfigurējamo servisu"
+
+#~ msgid "Configure"
+#~ msgstr "Konfigurēt"
+
+#~ msgid "&Add"
+#~ msgstr "&Pievienot"
+
+#~ msgid "&Configure"
+#~ msgstr "&Konfigurēt"
+
+#~ msgid "&Remove"
+#~ msgstr "&Izņemt"
+
+#~ msgid "Move &Up"
+#~ msgstr "Pārvietot augš&up"
+
+#~ msgid "Move &Down"
+#~ msgstr "Pārvietot &lejup"
+
+#~ msgid "Car (fastest)"
+#~ msgstr "Automašīna (visātrāk)"
+
+#~ msgid "Car (shortest)"
+#~ msgstr "Automašīna (visīsāk)"
+
+#~ msgid "Bicycle"
+#~ msgstr "Velosipēds"
+
+#~ msgid "Pedestrian"
+#~ msgstr "Kājām"
+
+#~ msgid "No results."
+#~ msgstr "Nav rezultātu."
+
+#~ msgid "Show Details"
+#~ msgstr "Rādīt detaļas"
+
+#~ msgid "Choose alternative routes"
+#~ msgstr "Izvēlēties alternatīvus maršrutus"
+
+#~ msgid "Sun Control"
+#~ msgstr "Saules kontrole"
+
+#~ msgid "Sun Shading"
+#~ msgstr "Saules ēnošana"
+
+#~ msgid "Shadow"
+#~ msgstr "Ēna"
+
+#~ msgid "Night Map"
+#~ msgstr "Nakts karte"
+
+#~ msgid "Subsolar Point"
+#~ msgstr "Subsolārais punkts"
+
+#~ msgid ""
+#~ "Display <a href=\"http://en.wikipedia.org/wiki/Subsolar_point\">Subsolar "
+#~ "Point</a> icon"
+#~ msgstr ""
+#~ "Rādīt <a href=\"http://en.wikipedia.org/wiki/Subsolar_point\">subsolārā "
+#~ "punkta</a> ikonu"
+
+#~ msgid ""
+#~ "<b>Lock</b> map view to <a href=\"http://en.wikipedia.org/wiki/"
+#~ "Subsolar_point\">Subsolar Point</a>."
+#~ msgstr ""
+#~ "<b>Noslēgt</b> kartes skatu uz <a href=\"http://en.wikipedia.org/wiki/"
+#~ "Subsolar_point\">subsolāro punktu</a>."
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">Attention: Panning the map is disabled now! </span></p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Uncheck the \"Lock map "
+#~ "view to Subsolar Point\" option to allow for viewing a different place on "
+#~ "the globe again.</p></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">Uzmanību: kartes panomarēšana pašreiz ir atslēgta! </span></"
+#~ "p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Atslēdziet opciju "
+#~ "\"Noslēgt kartes skatu uz subsolāro punktu\", lai atkal ļautu skatīt citu "
+#~ "vietu uz globusa.</p></body></html>"
+
+#~ msgid "OK"
+#~ msgstr "Labi"
+
+#~ msgid "Apply"
+#~ msgstr "Pielietot"
+
+#~ msgid "Creating Map"
+#~ msgstr "Veido karti"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /></head><body style="
+#~ "\" white-space: pre-wrap; font-family:Sans Serif; font-size:9pt; font-"
+#~ "weight:400; font-style:normal; text-decoration:none;\"><p style=\" margin-"
+#~ "top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-"
+#~ "indent:0; text-indent:0px;\"><span style=\" font-weight:600;\">Satellite "
+#~ "View</span></p><p style=\" margin-top:0px; margin-bottom:0px; margin-"
+#~ "left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Earth "
+#~ "as seen from Space. The map is based on NASA's beautiful \"Blue Marble "
+#~ "Next Generation\" pictures. Credits: NASA's Earth Observatory</p></body></"
+#~ "html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /></head><body style="
+#~ "\" white-space: pre-wrap; font-family:Sans Serif; font-size:9pt; font-"
+#~ "weight:400; font-style:normal; text-decoration:none;\"><p style=\" margin-"
+#~ "top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-"
+#~ "indent:0; text-indent:0px;\"><span style=\" font-weight:600;\">Satelīta "
+#~ "skats</span></p><p style=\" margin-top:0px; margin-bottom:0px; margin-"
+#~ "left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Zeme, "
+#~ "kāda tā redzama no kosmosa. Šī karte ir veidota no skaistā NASA \"Blue "
+#~ "Marble Next Generation\" attēliem. Veidotājs: NASA Earth Observatory </"
+#~ "p></body></html>"
+
+#~ msgid ""
+#~ "Marble needs to create this map. This only needs to be done once and may "
+#~ "take a few seconds."
+#~ msgstr ""
+#~ "Marble nepieciešams izveidot šo karti. Šī darbība katrai kartei "
+#~ "nepieciešama tikai vienreiz un aizņems dažas sekundes."
+
+#~ msgid "&Cancel"
+#~ msgstr "&Atcelt"
+
+#~ msgid "Zoom"
+#~ msgstr "Tuvināt"
+
+#~ msgid "&Tile Level Range:"
+#~ msgstr "&Lauciņu līmeņa attālums:"
+
+#~ msgid "Minimum Tile Level"
+#~ msgstr "Minimālais lauciņu līmenis"
+
+#~ msgid "to"
+#~ msgstr "līdz"
+
+#~ msgid "Maximum Tile Level"
+#~ msgstr "Maksimālais lauciņu līmenis"
+
+#~ msgid "Time Control"
+#~ msgstr "Laika kontrole"
+
+#~ msgid "Time"
+#~ msgstr "Laiks"
+
+#~ msgid "New Date Time      :"
+#~ msgstr "Jaunais datums un laiks      :"
+
+#~ msgid "Refresh Interval     :"
+#~ msgstr "Atsvaidzināšanas intervāls     :"
+
+#~ msgid " seconds"
+#~ msgstr " sekundes"
+
+#~ msgid "Now"
+#~ msgstr "Tagad"
+
+#~ msgid "Current Date Time :"
+#~ msgstr "Pašreizējais datums un laiks :"
+
+#~ msgid "Time Speed"
+#~ msgstr "Laika ātrums"
+
+#, fuzzy
+#~| msgid "&Close"
+#~ msgid "Close"
+#~ msgstr "&Aizvērt"
+
+#, fuzzy
+#~| msgid "Move &Up"
+#~ msgid "Move up"
+#~ msgstr "Pārvietot augš&up"
+
+#, fuzzy
+#~| msgid "Move &Down"
+#~ msgid "Move down"
+#~ msgstr "Pārvietot &lejup"
+
+#, fuzzy
+#~| msgid "OpenGL"
+#~ msgid "Open Tour"
+#~ msgstr "OpenGL"
+
+#~ msgid "Worldclock Applet Configuration"
+#~ msgstr "Pasaules pulksteņa sīkrīka konfigurācija"
+
+#~ msgid "Map Display"
+#~ msgstr "Kartes skats"
+
+#~ msgid "Projection:"
+#~ msgstr "Projekcija:"
+
+#~ msgid "Equirectangular"
+#~ msgstr "Ekvirektilineāra"
+
+#~ msgid "Center map on longitude:"
+#~ msgstr "Centrēt karti uz garumu:"
+
+#~ msgid "Center map on daylight"
+#~ msgstr "Centrēt karti uz dienasgaismu"
+
+#~ msgid "Show date"
+#~ msgstr "Rādīt datumu"
+
+#~ msgid "Time Zones"
+#~ msgstr "Laika zonas"
+
+#~ msgid "Use custom timezone selection"
+#~ msgstr "Lietot pielāgotu laika zonu izvēli"
+
+#, fuzzy
+#~| msgid "Coordinates: "
+#~ msgid "Coordinates"
+#~ msgstr "Koordinātas: "
+
+#, fuzzy
+#~| msgid "&N"
+#~ msgid "N"
+#~ msgstr "&Z"
+
+#, fuzzy
+#~| msgid "&W"
+#~ msgid "W"
+#~ msgstr "&R"
+
+#, fuzzy
+#~| msgid "&E"
+#~ msgid "E"
+#~ msgstr "&A"
+
+#, fuzzy
+#~| msgid "&S"
+#~ msgid "S"
+#~ msgstr "&D"
+
+#, fuzzy
+#~| msgid "Vegetation"
+#~ msgid "Rotation"
+#~ msgstr "Augu valsts"
+
+#, fuzzy
+#~| msgid "&Add Folder"
+#~ msgid "Add polygon"
+#~ msgstr "&Pievienot mapi"
+
+#, fuzzy
+#~| msgid "Areas"
+#~ msgid "Area"
+#~ msgstr "Laukumi"
+
+#~ msgid "Display"
+#~ msgstr "Izskats"
+
+#~ msgid "Fade data older than (minutes)"
+#~ msgstr "Izdzisināt datus, kas vecāki par (minūtēs)"
+
+#~ msgid "Do not show data older than (minutes)"
+#~ msgstr "Nerādīt datus, kas vecāki par (minūtēs)"
+
+#~ msgid "Internet"
+#~ msgstr "Internets"
+
+#~ msgid "APRS Data Sources"
+#~ msgstr "APRS datu avoti"
+
+#~ msgid "Should information be gathered from the Internet APRS data source?"
+#~ msgstr "Vai vākt informāciju no interneta APRS datu avota?"
+
+#~ msgid "Collect data from an APRS Internet server"
+#~ msgstr "Savākt datus no APRS interneta servera"
+
+#~ msgid "Server"
+#~ msgstr "Serveris"
+
+#~ msgid "rotate.aprs.net"
+#~ msgstr "rotate.aprs.net"
+
+#~ msgid "Port"
+#~ msgstr "Ports"
+
+#~ msgid "10253"
+#~ msgstr "10253"
+
+#~ msgid "Dump TCP/IP records to the debug stream"
+#~ msgstr "Izmest TCP/IP ierakstus atkļūdošanas plūsmā"
+
+#~ msgid "Device"
+#~ msgstr "Ierīce"
+
+#~ msgid "TNC Terminal Port"
+#~ msgstr "TNC termināļa ports"
+
+#~ msgid "Should information be gathered from a serial port?"
+#~ msgstr "Vai vākt informāciju no seriālā porta?"
+
+#~ msgid "Collect data from a serial TNC (In Text Mode)"
+#~ msgstr "Savākt datus no seriālā TNC (teksta režīmā)"
+
+#~ msgid "TTY"
+#~ msgstr "TTY"
+
+#~ msgid "/dev/ttyUSB0"
+#~ msgstr "/dev/ttyUSB0"
+
+#~ msgid "Dump TTY records to the debug stream"
+#~ msgstr "Izmest TTY ierakstus atkļūdošanas plūsmā"
+
+#~ msgid "File"
+#~ msgstr "Fails"
+
+#~ msgid "Should information be gathered from a file?"
+#~ msgstr "Vai vākt informāciju no faila?"
+
+#~ msgid "Collect data from a file"
+#~ msgstr "Savākt datus no faila"
+
+#~ msgid "Dump file records to the debug stream"
+#~ msgstr "Izmest failu ierakstus atkļūdošanas plūsmā"
+
+#~ msgid "Configure Compass Plugin"
+#~ msgstr "Konfigurēt kompasa spraudni"
+
+#~ msgid "Theme"
+#~ msgstr "Tēma"
+
+#~ msgid "Default"
+#~ msgstr "Noklusējuma"
+
+#~ msgid "Arrows"
+#~ msgstr "Bultas"
+
+#~ msgid "Atom"
+#~ msgstr "Atoms"
+
+#~ msgid "Magnet"
+#~ msgstr "Magnet"
+
+#~ msgid "Configure Crosshairs Plugin"
+#~ msgstr "Konfigurēt mērķa spraudni"
+
+#~ msgid "Gun 1"
+#~ msgstr "Ierocis 1"
+
+#~ msgid "Gun 2"
+#~ msgstr "Ierocis 2"
+
+#~ msgid "Circled"
+#~ msgstr "Apļveida"
+
+#~ msgid "German"
+#~ msgstr "Vācu"
+
+#~ msgid "Dialog"
+#~ msgstr "Dialogs"
+
+#~ msgid "Filter"
+#~ msgstr "Filtrs"
+
+#~ msgid "Maximum number of results:"
+#~ msgstr "Maksimālais rezultātu skaits:"
+
+#~ msgid "Minimum magnitude:"
+#~ msgstr "Minimālais stiprums:"
+
+#~ msgid "Time Range"
+#~ msgstr "Laika diapozons"
+
+#, fuzzy
+#~| msgid "Location Browser"
+#~ msgid "Eclipse Browser"
+#~ msgstr "Vietu pārlūks"
+
+#, fuzzy
+#~| msgid "&Settings"
+#~ msgid "&Settings..."
+#~ msgstr "&Iestatījumi"
+
+#, fuzzy
+#~| msgid "Satellites, Eclipses"
+#~ msgid "&Go To Selected Eclipse"
+#~ msgstr "Satelīti, aptumsumi"
+
+#, fuzzy
+#~| msgid "Monav Configuration"
+#~ msgid "Eclipses Configuration"
+#~ msgstr "Monav konfigurācija"
+
+#, fuzzy
+#~| msgid "Central African Time"
+#~ msgid "Central &Line"
+#~ msgstr "Centrālāfrikas laiks"
+
+#, fuzzy
+#~| msgid "&Remove"
+#~ msgid "&Reminder"
+#~ msgstr "&Izņemt"
+
+#~ msgid "Configure Elevation Profile Plugin"
+#~ msgstr "Konfigurēt augstuma propila spraudni"
+
+#~ msgid "Zoom to viewport"
+#~ msgstr "Pietuvināt skata apgalam"
+
+#~ msgid "Speed"
+#~ msgstr "Ātrums"
+
+#~ msgid "Direction"
+#~ msgstr "Virziens"
+
+#~ msgid "Altitude"
+#~ msgstr "Augstums"
+
+#~ msgid "Precision"
+#~ msgstr "Precizitāte"
+
+#~ msgid "Coordinate Grid Plugin"
+#~ msgstr "Koordinātu tīkla spraudnis"
+
+#~ msgid "C&olors"
+#~ msgstr "Krā&sas"
+
+#~ msgid "&Grid:"
+#~ msgstr "&Tīkls:"
+
+#~ msgid "Color of the coordinate grid."
+#~ msgstr "Koordinātu tīkla krāsa."
+
+#~ msgid "&Tropics:"
+#~ msgstr "&Tropu loki:"
+
+#~ msgid "Color of the tropical circles."
+#~ msgstr "Tropu loku krāsa."
+
+#~ msgid "&Equator:"
+#~ msgstr "&Ekvators:"
+
+#~ msgid "Color of the equator."
+#~ msgstr "Ekvatora krāsa."
+
+#, fuzzy
+#~| msgid "&Text Labels"
+#~ msgid "Labels"
+#~ msgstr "&Teksta etiķetes"
+
+#, fuzzy
+#~| msgid "&Text Labels"
+#~ msgid "&Named Labels"
+#~ msgstr "&Teksta etiķetes"
+
+#, fuzzy
+#~| msgid "&Text Labels"
+#~ msgid "&Numerical Labels"
+#~ msgstr "&Teksta etiķetes"
+
+#, fuzzy
+#~| msgid "Show thumbnail images"
+#~ msgid "Show numerical Labels."
+#~ msgstr "Rādīt sīktēlus"
+
+#~ msgid "Configure Scale Bar Plugin"
+#~ msgstr "Konfigurēt mēroga joslas spraudni"
+
+#~ msgid "Show Ratio Scale"
+#~ msgstr "Rādīt mēroga attiecību"
+
+#~ msgid "Minimize"
+#~ msgstr "Minimizēt"
+
+#~ msgid "Marble - Measure Tool Configuration"
+#~ msgstr "Marble — mērīšanas rīka konfigurācija"
+
+#, fuzzy
+#~| msgid "Circled"
+#~ msgid "Circle"
+#~ msgstr "Apļveida"
+
+#, fuzzy
+#~| msgid "&Text Labels"
+#~ msgid "Segment labels"
+#~ msgstr "&Teksta etiķetes"
+
+#, fuzzy
+#~| msgid "&Distance:"
+#~ msgid "Distance "
+#~ msgstr "&Attālums:"
+
+#, fuzzy
+#~| msgid "Bureau de change"
+#~ msgid "Bearing Change"
+#~ msgstr "Valūtas maiņa"
+
+#, fuzzy
+#~| msgid "Cemetery"
+#~ msgid "Perimeter"
+#~ msgstr "Kapsēta"
+
+#, fuzzy
+#~| msgid "Preference:"
+#~ msgid "Circumference"
+#~ msgstr "Iestatījums:"
+
+#~ msgid "General"
+#~ msgstr "Vispārīgi"
+
+#~ msgid "Cache name:"
+#~ msgstr "Keša nosaukums:"
+
+#~ msgid "User name:"
+#~ msgstr "Lietotājvārds:"
+
+#~ msgid "Type:"
+#~ msgstr "Tips:"
+
+#~ msgid "Status:"
+#~ msgstr "Statuss:"
+
+#~ msgid "Country:"
+#~ msgstr "Valsts:"
+
+#~ msgid "Size:"
+#~ msgstr "Izmērs:"
+
+#~ msgid "Difficulty:"
+#~ msgstr "Grūtība:"
+
+#~ msgid "Terrain:"
+#~ msgstr "Reljefs:"
+
+#~ msgid "Longitude:"
+#~ msgstr "Garums:"
+
+#~ msgid "Latitude:"
+#~ msgstr "Platums:"
+
+#~ msgid "Date hidden:"
+#~ msgstr "Datums paslēpts:"
+
+#~ msgid "Date created:"
+#~ msgstr "Izveidošanas datums:"
+
+#~ msgid "Date last modified:"
+#~ msgstr "Pēdējās izmaiņas datums:"
+
+#~ msgid "Log"
+#~ msgstr "Žurnāls"
+
+#~ msgid "Previous"
+#~ msgstr "Iepriekšējais"
+
+#~ msgid "Next"
+#~ msgstr "Nākamais"
+
+#~ msgid "Minimum difficulty:"
+#~ msgstr "Zemākā grūtība."
+
+#~ msgid "Maximum difficulty:"
+#~ msgstr "Augstākā grūtība."
+
+#~ msgid "Maximum Distance:"
+#~ msgstr "Lielākais attālums:"
+
+#~ msgid "Start:"
+#~ msgstr "Sākums:"
+
+#~ msgid "End:"
+#~ msgstr "Beigas:"
+
+#~ msgid "TextLabel"
+#~ msgstr "TekstaEtiķete"
+
+#~ msgid "Hint"
+#~ msgstr "Ieteikums"
+
+#~ msgid "Logs"
+#~ msgstr "Žurnāli"
+
+#~ msgid "Marble - OpenDesktop plugin configuration"
+#~ msgstr "Marble – OpenDesktop spraudņa konfigurācija"
+
+#~ msgid "Number of displayed items on the screen:"
+#~ msgstr "Uz ekrāna attēlojamo vienību skaits:"
+
+#~ msgid "Map &Image"
+#~ msgstr "Kartes &attēls"
+
+#~ msgid "&Planet:"
+#~ msgstr "&Planēta:"
+
+#~ msgid "&Size:"
+#~ msgstr "&Izmērs:"
+
+#~ msgid "x"
+#~ msgstr "x"
+
+#~ msgid "Preview"
+#~ msgstr "Priekšskatījums"
+
+#~ msgid "Filename"
+#~ msgstr "Faila nosaukums"
+
+#~ msgid "Position I&ndicator:"
+#~ msgstr "Pozīcijas i&ndikators:"
+
+#~ msgid "Configure Photo Plugin"
+#~ msgstr "Konfigurēt fotogrāfiju spraudni"
+
+#~ msgid "License"
+#~ msgstr "Licence"
+
+#~ msgid "Number of items on the screen"
+#~ msgstr "Uz ekrāna attēlojamo vienību skaits"
+
+#~ msgid "Configure Position Marker Plugin"
+#~ msgstr "Konfigurēt pozīcijas marķiera spraudni"
+
+#~ msgid "Cursor Shape"
+#~ msgstr "Kursora forma"
+
+#~ msgid "&Arrow"
+#~ msgstr "&Bulta"
+
+#~ msgid "&Custom:"
+#~ msgstr "Pielāg&ots:"
+
+#~ msgid ""
+#~ "Position marker images indicating the direction should point north (top)."
+#~ msgstr ""
+#~ "Pozīcijas marķiera attēliem, kuri norāda virzienu, vajadzētu būt ziemeļu "
+#~ "virzienā (uz augšu)."
+
+#~ msgid "Trail"
+#~ msgstr "Aste"
+
+#~ msgid "&Accuracy:"
+#~ msgstr "P&recizitāte."
+
+#~ msgid "Color of the position marker's accuracy indicator."
+#~ msgstr "Pozīcijas marķiera precizitātes indikatora krāsa."
+
+#~ msgid "Trail:"
+#~ msgstr "Aste:"
+
+#~ msgid "Color of the position marker's trail."
+#~ msgstr "Pozīcijas marķiera astes krāsa."
+
+#~ msgid "Routing Configuration - Marble"
+#~ msgstr "Maršrutēšanas konfigurācija — Marble"
+
+#~ msgid "Audible Turn Instructions"
+#~ msgstr "Dzirdamas braukšanas instrukcijas"
+
+#~ msgid "Play a sound"
+#~ msgstr "Atskaņot skaņu"
+
+#~ msgid "Use this speaker"
+#~ msgstr "Lietot šo skaļruni"
+
+#~ msgid ""
+#~ "<a href=\"http://userbase.kde.org/Marble/CustomSpeakers\">Get more "
+#~ "speakers</a>"
+#~ msgstr ""
+#~ "<a href=\"http://userbase.kde.org/Marble/CustomSpeakers\">Iegūt vairāk "
+#~ "skaļruņus</a>"
+
+#~ msgid "Guidance Mode"
+#~ msgstr "Vadības režīms"
+
+#~ msgid "R"
+#~ msgstr "R"
+
+#~ msgid "Toggle GPS"
+#~ msgstr "Pārslēgt GPS"
+
+#~ msgid "zoom out"
+#~ msgstr "tālināt"
+
+#~ msgid "zoom in"
+#~ msgstr "tuvināt"
+
+#~ msgid "total time remaining"
+#~ msgstr "kopējais atlikušais laiks"
+
+#~ msgid "Satellites Configuration - Marble"
+#~ msgstr "Satelītu konfigurācija — Marble"
+
+#~ msgid "&Satellites"
+#~ msgstr "&Satelīti"
+
+#~ msgid "&Data Sources"
+#~ msgstr "&Datu avoti"
+
+#~ msgid ""
+#~ "<html><head/><body><p><span style=\" font-weight:600;\">Last update:</"
+#~ "span></p></body></html>"
+#~ msgstr ""
+#~ "<html><head/><body><p><span style=\" font-weight:600;\">Pēdējais "
+#~ "atjauninājums: </span></p></body></html>"
+
+#~ msgid "&Reload All Data Sources"
+#~ msgstr "Pā&rlādēt visus datu avotus"
+
+#~ msgid "Satellite Data Sources:"
+#~ msgstr "Satelītu datu avoti:"
+
+#~ msgid "Add a new data source (URL)."
+#~ msgstr "Pievienot jaunu datu avotu (URL)."
+
+#~ msgid "Open a new data source from disk."
+#~ msgstr "Atvērt jaunu datu avotu no diska."
+
+#~ msgid "Remove selected data source."
+#~ msgstr "Izņemt izvēlēto datu avotu."
+
+#~ msgid "(Built-in Data Sources for Earth Satellites)"
+#~ msgstr "(Iebūvētie datu avoti Zemes satelītiem)"
+
+#~ msgid ""
+#~ "<html><head/><body><p>Supported formats: <a href=\"http://techbase.kde."
+#~ "org/Projects/Marble/SatelliteCatalogFormat\"><span style=\" text-"
+#~ "decoration: underline; color:#0000ff;\">Marble Satellite Catalogue</"
+#~ "span></a>, <a href=\"http://en.wikipedia.org/wiki/Two-line_element_set"
+#~ "\"><span style=\" text-decoration: underline; color:#0000ff;\">Two-Line-"
+#~ "Element Set</span></a></p></body></html>"
+#~ msgstr ""
+#~ "<html><head/><body><p>Atbalstītie formāti: <a href=\"http://techbase.kde."
+#~ "org/Projects/Marble/SatelliteCatalogFormat\"><span style=\" text-"
+#~ "decoration: underline; color:#0000ff;\">Marble satelītu katalogs</span></"
+#~ "a>, <a href=\"http://en.wikipedia.org/wiki/Two-line_element_set\"><span "
+#~ "style=\" text-decoration: underline; color:#0000ff;\">divu-rindu-elementu "
+#~ "komplekts</span></a></p></body></html>"
+
+#~ msgid "Plugin Inactive"
+#~ msgstr "Spraudnis neaktīvs"
+
+#~ msgid "&Activate Plugin"
+#~ msgstr "&Aktivizēt spraudni"
+
+#~ msgid ""
+#~ "Configuration options not available since the plugin is disabled at the "
+#~ "moment."
+#~ msgstr "Konfigurācijas opcijas"
+
+#~ msgid "km/h"
+#~ msgstr "km/h"
+
+#~ msgid "Configure Stars Plugin"
+#~ msgstr "Konfigurēt zvaigžņu spraudni"
+
+#, fuzzy
+#~| msgid "Celestial objects"
+#~ msgid "Celestial Objects"
+#~ msgstr "Debesu objekti"
+
+#~ msgid "Star Magnitude Limit"
+#~ msgstr "Zvaigžņu stipruma ierobežojums"
+
+#~ msgid " mag"
+#~ msgstr "zvaigžņliel."
+
+#~ msgid "Sun"
+#~ msgstr "Saule"
+
+#~ msgid "Moon"
+#~ msgstr "Mēness"
+
+#, fuzzy
+#~| msgid "Mercator"
+#~ msgid "Mercury"
+#~ msgstr "Merkatora"
+
+#, fuzzy
+#~| msgid "The Earth"
+#~ msgid "Earth"
+#~ msgstr "Zeme"
+
+#, fuzzy
+#~| msgid "&Text Labels"
+#~ msgid "Use name labels"
+#~ msgstr "&Teksta etiķetes"
+
+#~ msgid "Other"
+#~ msgstr "Cits"
+
+#~ msgid "Deep Sky Object Labels"
+#~ msgstr "Dziļo debesu objektu etiķetes"
+
+#~ msgid "Deep Sky Objects"
+#~ msgstr "Dziļo debesu objekti"
+
+#~ msgid "Lines and Orientation"
+#~ msgstr "Līnijas un orientācija"
+
+#, fuzzy
+#~| msgid "Constellation Lines"
+#~ msgid "Constellations"
+#~ msgstr "Zvaigznāju līnijas"
+
+#, fuzzy
+#~| msgid "&Name"
+#~ msgid "Names"
+#~ msgstr "&Nosaukums"
+
+#~ msgid "Latin Name"
+#~ msgstr "Latīņu nosaukums"
+
+#~ msgid "Native Translation"
+#~ msgstr "Dzimtais tulkojums"
+
+#~ msgid "Abbreviation"
+#~ msgstr "Saīsinājums"
+
+#~ msgid "Celestial Equator"
+#~ msgstr "Debess ķermenis"
+
+#~ msgid "Celestial Poles"
+#~ msgstr "Debesu poli"
+
+#~ msgid "Ecliptic"
+#~ msgstr "Ekliptika"
+
+#~ msgid "Configure Weather Plugin"
+#~ msgstr "Konfigurēt laikapstākļu spraudni"
+
+#~ msgid "Information"
+#~ msgstr "Informācija"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Here you can "
+#~ "choose if you want the weather condition to be shown (for example, clouds "
+#~ "or clear sky.) Marble will only show the condition if this information is "
+#~ "available.</p></body></html>\n"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Šeit varat "
+#~ "izvēlēties, vai rādīt laika apstākļus (piemēram, mākoņainas vai skaidras "
+#~ "debesis). Marble tos parādīs tikai tad, ja būs pieejama nepieciešamā "
+#~ "informācija.</p></body></html>\n"
+
+#~ msgid "Weather condition"
+#~ msgstr "Laikapstākļi"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Selects if you "
+#~ "want the temperature to be shown. The temperature will only be shown for "
+#~ "the stations it is available for.</p></body></html>\n"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Izvēlieties, ja "
+#~ "vēlaties, lai tiktu rādīta temperatūra. Tā tiks rādīta tikai, ja šie dati "
+#~ "attiecīgajā stacijā ir pieejami.</p></body></html>\n"
+
+#~ msgid "Temperature"
+#~ msgstr "Temperatūra"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Select if you "
+#~ "want the wind direction to be shown. The wind direction will only be "
+#~ "shown if it is available for the particular station.</p></body></html>\n"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Izvēlieties, ja "
+#~ "vēlaties, lai tiktu rādīts vēja virziens. Tas tiks rādīts tikai, ja šie "
+#~ "dati attiecīgajā stacijā ir pieejami.</p></body></html>\n"
+
+#~ msgid "Wind direction"
+#~ msgstr "Vēja virziens"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Select if you "
+#~ "want the wind speed to be shown. The wind speed will only be shown if it "
+#~ "is available for the particular station.</p></body></html>\n"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Izvēlieties, ja "
+#~ "vēlaties, lai tiktu rādīts vēja ātrums. Tas tiks rādīts tikai, ja šie "
+#~ "dati attiecīgajā stacijā ir pieejami.</p></body></html>\n"
+
+#~ msgid "Wind speed"
+#~ msgstr "Vēja ātrums"
+
+#~ msgid "Units"
+#~ msgstr "Mērvienības"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">The unit used to "
+#~ "measure the temperature.</p></body></html>\n"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Temperatūrai "
+#~ "izmantojamās mērvienības.</p></body></html>\n"
+
+#~ msgid "Celsius"
+#~ msgstr "Celsija grādi"
+
+#~ msgid "Fahrenheit"
+#~ msgstr "Farenheita grādi"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">The unit used to "
+#~ "measure the wind speed.</p></body></html>\n"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Vēja ātrumam "
+#~ "izmantojamās mērvienības.</p></body></html>\n"
+
+#~ msgid "Kilometers per hour"
+#~ msgstr "Kilometri stundā"
+
+#~ msgid "Miles per hour"
+#~ msgstr "Jūdzes stundā"
+
+#~ msgid "Meters per second"
+#~ msgstr "Metri sekundē"
+
+#~ msgid "Knots"
+#~ msgstr "Mezgli"
+
+#~ msgid "Beaufort"
+#~ msgstr "Boforta"
+
+#~ msgid "Pressure"
+#~ msgstr "Spiediens"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">The unit used to "
+#~ "measure the air pressure.</p></body></html>\n"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Gaisa spiedienam "
+#~ "izmantojamās mērvienības.</p></body></html>\n"
+
+#~ msgid "Hecto Pascals"
+#~ msgstr "Hektopaskāli"
+
+#~ msgid "Kilo Pascals"
+#~ msgstr "Kilopaskāli"
+
+#~ msgid "Bars"
+#~ msgstr "Bāri"
+
+#~ msgid "Millimeters of Mercury"
+#~ msgstr "Dzīvsudraba stabiņa milimetri"
+
+#~ msgid "Inches of Mercury"
+#~ msgstr "Dzīvsudraba stabiņa collas"
+
+#~ msgid "Miscellaneous"
+#~ msgstr "Dažādi"
+
+#~ msgid "Show only favorite items"
+#~ msgstr "Rādīt tikai iecienītās vienības"
+
+#~ msgid "Weather update interval"
+#~ msgstr "Laikapstākļi atjaunināšanas intervāls"
+
+#~ msgid " hours"
+#~ msgstr " stundas"
+
+#~ msgid "Configure Wikipedia Plugin"
+#~ msgstr "Konfigurēt Wikipedia spraudni"
+
+#~ msgid "Show thumbnail images"
+#~ msgstr "Rādīt sīktēlus"
+
+#, fuzzy
+#~| msgid "Proxy type:"
+#~ msgid "Route type:"
+#~ msgstr "Starpniekservera tips:"
+
+#, fuzzy
+#~| msgid "Speed"
+#~ msgid "Speed:"
+#~ msgstr "Ātrums"
+
+#~ msgid "Preference:"
+#~ msgstr "Iestatījums:"
+
+#~ msgid "Avoid motorways"
+#~ msgstr "Izvairīties no ātrgaitas šosejām"
+
+#~ msgid "Avoid tollways"
+#~ msgstr "Izvairīties no maksas ceļiem"
+
+#~ msgid "Avoid ferries"
+#~ msgstr "Izvairīties no prāmjiem"
+
+#~ msgid "Monav Configuration"
+#~ msgstr "Monav konfigurācija"
+
+#~ msgid "Transport Type:"
+#~ msgstr "Transporta veids:"
+
+#~ msgid "Any"
+#~ msgstr "Jebkāds"
+
+#~ msgid "Manage Maps"
+#~ msgstr "Pārvaldīt kartes"
+
+#~ msgid "Install New"
+#~ msgstr "Instalēt jaunu"
+
+#~ msgid "Continent"
+#~ msgstr "Kontinents"
+
+#~ msgid "Country"
+#~ msgstr "Valsts"
+
+#~ msgid "Download Variant"
+#~ msgstr "Lejuplādēt variantu"
+
+#~ msgid "Install"
+#~ msgstr "Instalēt"
+
+#~ msgid "Nothing to do."
+#~ msgstr "Nav nekā, ko darīt."
+
+#~ msgid "%v/%m MB"
+#~ msgstr "%v/%m MB"
+
+#~ msgid "Abort"
+#~ msgstr "Pārtraukt"
+
+#~ msgid "Transport:"
+#~ msgstr "Transports:"
+
+#~ msgid "Profile:"
+#~ msgstr "Profils:"
+
+#~ msgid "Method"
+#~ msgstr "Metode"
+
+#~ msgid "Fastest"
+#~ msgstr "Ātrākais"
+
+#~ msgid "Shortest"
+#~ msgstr "Īsākais"
+
+#~ msgid "Location Browser"
+#~ msgstr "Vietu pārlūks"
+
+#~ msgid "Double click an entry of this list to get it displayed on the map."
+#~ msgstr "Dubultklikšķis uz ieraksta šajā sarakstā parādīts to kartē."
+
+#~ msgid "Navigate to your 'Home Location'"
+#~ msgstr "Doties uz 'Mājas vietu'"
+
+#, fuzzy
+#~| msgid "&Add Folder"
+#~ msgid "Add SoundCue"
+#~ msgstr "&Pievienot mapi"
+
+#, fuzzy
+#~| msgid "Circled"
+#~ msgid "Circular"
+#~ msgstr "Apļveida"
+
+#~ msgid "&Name"
+#~ msgstr "&Nosaukums"
+
+#~ msgid "Land"
+#~ msgstr "Sauszeme"
+
+#, fuzzy
+#~| msgid "Areas"
+#~ msgid "Ara"
+#~ msgstr "Laukumi"
+
+#, fuzzy
+#~| msgid "Cancel"
+#~ msgid "Cancer"
+#~ msgstr "Atcelt"
+
+#, fuzzy
+#~| msgid "Craters"
+#~ msgid "Crater"
+#~ msgstr "Krāteri"
+
+#, fuzzy
+#~| msgid "Log"
+#~ msgid "Leo"
+#~ msgstr "Žurnāls"
+
+#, fuzzy
+#~| msgid "Library"
+#~ msgid "Libra"
+#~ msgstr "Bibliotēka"
+
+#, fuzzy
+#~| msgid "Normal"
+#~ msgid "Norma"
+#~ msgstr "Normāla"
+
+#, fuzzy
+#~| msgid "Doctors"
+#~ msgid "Pictor"
+#~ msgstr "Ārsti"
+
+#~ msgid "Show distance labels for each section"
+#~ msgstr "Katrai sekcijai rādīt attāluma etiķetes"
+
+#~ msgid "Constellation Labels"
+#~ msgstr "Zvaigznāju etiķetes"
+
+#~ msgid "Constellation Names"
+#~ msgstr "Zvaigznāju nosaukumi"
+
+#~ msgid "Military Grid Reference System (MGRS)"
+#~ msgstr "Militārā tīkla references sistēma (MGRS)"

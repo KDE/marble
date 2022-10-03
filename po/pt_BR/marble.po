@@ -1,0 +1,5110 @@
+# Translation of marble.po to Brazilian Portuguese
+# Copyright (C) 2009-2015 This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Luiz Fernando Ranghetti <elchevive@opensuse.org>, 2009, 2010, 2013, 2014, 2016, 2017, 2020, 2021.
+# André Marcelo Alvarenga <alvarenga@kde.org>, 2009, 2010, 2011, 2012, 2013, 2014, 2015.
+# Marcus Vinícius de Andrade Gama <marcus.gama@gmail.com>, 2010, 2012.
+# Aracele Torres <araceletorres@gmail.com>, 2010.
+msgid ""
+msgstr ""
+"Project-Id-Version: marble\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2021-10-18 00:13+0000\n"
+"PO-Revision-Date: 2021-11-09 17:05-0300\n"
+"Last-Translator: Luiz Fernando Ranghetti <elchevive@opensuse.org>\n"
+"Language-Team: Portuguese <kde-i18n-pt_BR@kde.org>\n"
+"Language: pt_BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Lokalize 20.04.2\n"
+
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "Luiz Fernando Ranghetti, André Marcelo Alvarenga"
+
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "elchevive@opensuse.org, alvarenga@kde.org"
+
+#: kdemain.cpp:91
+#, kde-format
+msgid "Marble Virtual Globe"
+msgstr "Globo Virtual do Marble"
+
+#: kdemain.cpp:93
+#, kde-format
+msgid "A World Atlas."
+msgstr "Um atlas mundial."
+
+#: kdemain.cpp:95
+#, kde-format
+msgid "(c) 2007-%1"
+msgstr "(c) 2007-%1"
+
+#: kdemain.cpp:100 kdemain.cpp:286
+#, kde-format
+msgid "Torsten Rahn"
+msgstr "Torsten Rahn"
+
+#: kdemain.cpp:101
+#, kde-format
+msgid "Developer and Original Author"
+msgstr "Desenvolvedor e autor original"
+
+#: kdemain.cpp:103
+#, kde-format
+msgid "Bernhard Beschow"
+msgstr "Bernhard Beschow"
+
+#: kdemain.cpp:104
+#, kde-format
+msgid "WMS Support, Mobile, Performance"
+msgstr "Suporte à WMS, suporte móvel e desempenho"
+
+#: kdemain.cpp:106
+#, kde-format
+msgid "Thibaut Gridel"
+msgstr "Thibaut Gridel"
+
+#: kdemain.cpp:107
+#, kde-format
+msgid "Geodata"
+msgstr "Dados geográficos"
+
+#: kdemain.cpp:109
+#, kde-format
+msgid "Jens-Michael Hoffmann"
+msgstr "Jens-Michael Hoffmann"
+
+#: kdemain.cpp:110
+#, kde-format
+msgid "OpenStreetMap Integration, OSM Namefinder, Download Management"
+msgstr ""
+"Integração do OpenStreetMap, procura de nomes no OSM, gerenciamento de "
+"download"
+
+#: kdemain.cpp:112
+#, kde-format
+msgid "Florian E&szlig;er"
+msgstr "Florian E&szlig;er"
+
+#: kdemain.cpp:113
+#, kde-format
+msgid "Elevation Profile"
+msgstr "Perfil de elevação"
+
+#: kdemain.cpp:115
+#, kde-format
+msgid "Wes Hardaker"
+msgstr "Wes Hardaker"
+
+#: kdemain.cpp:116
+#, kde-format
+msgid "APRS Plugin"
+msgstr "Plugin de APRS"
+
+#: kdemain.cpp:118 kdemain.cpp:202
+#, kde-format
+msgid "Bastian Holst"
+msgstr "Bastian Holst"
+
+#: kdemain.cpp:119
+#, kde-format
+msgid "Online Services support"
+msgstr "Suporte a serviços online"
+
+#: kdemain.cpp:121 kdemain.cpp:172
+#, kde-format
+msgid "Guillaume Martres"
+msgstr "Guillaume Martres"
+
+#: kdemain.cpp:122
+#, kde-format
+msgid "Satellites"
+msgstr "Satélites"
+
+#: kdemain.cpp:124 kdemain.cpp:168
+#, kde-format
+msgid "Rene Kuettner"
+msgstr "Rene Kuettner"
+
+#: kdemain.cpp:125
+#, kde-format
+msgid "Satellites, Eclipses"
+msgstr "Satélites, eclipses"
+
+#: kdemain.cpp:127
+#, kde-format
+msgid "Friedrich W. H. Kossebau"
+msgstr "Friedrich W. H. Kossebau"
+
+#: kdemain.cpp:128
+#, kde-format
+msgid "Plasma Integration, Bugfixes"
+msgstr "Integração com o Plasma e correções de erros"
+
+#: kdemain.cpp:130
+#, kde-format
+msgid "Dennis Nienhüser"
+msgstr "Dennis Nienhüser"
+
+#: kdemain.cpp:131
+#, kde-format
+msgid "Routing, Navigation, Mobile"
+msgstr "Roteamento, navegação e suporte móvel"
+
+#: kdemain.cpp:133
+#, kde-format
+msgid "Niko Sams"
+msgstr "Niko Sams"
+
+#: kdemain.cpp:134
+#, kde-format
+msgid "Routing, Elevation Profile"
+msgstr "Roteamento e perfil de elevação"
+
+#: kdemain.cpp:136 kdemain.cpp:206
+#, kde-format
+msgid "Patrick Spendrin"
+msgstr "Patrick Spendrin"
+
+#: kdemain.cpp:137
+#, kde-format
+msgid "Core Developer: KML and Windows support"
+msgstr "Desenvolvedor principal: Suporte a KML e Windows"
+
+#: kdemain.cpp:139
+#, kde-format
+msgid "Eckhart Wörner"
+msgstr "Eckhart Wörner"
+
+#: kdemain.cpp:140
+#, kde-format
+msgid "Bugfixes"
+msgstr "Correções de erros"
+
+#: kdemain.cpp:145
+#, kde-format
+msgid "Inge Wallin"
+msgstr "Inge Wallin"
+
+#: kdemain.cpp:146
+#, kde-format
+msgid "Core Developer and Co-Maintainer"
+msgstr "Desenvolvedor principal e co-mantenedor"
+
+#: kdemain.cpp:148
+#, kde-format
+msgid "Henry de Valence"
+msgstr "Henry de Valence"
+
+#: kdemain.cpp:149
+#, kde-format
+msgid "Core Developer: Marble Runners, World-Clock Plasmoid"
+msgstr ""
+"Desenvolvedor do núcleo: executor do Marble, plasmoide do relógio mundial"
+
+#: kdemain.cpp:151
+#, kde-format
+msgid "Pino Toscano"
+msgstr "Pino Toscano"
+
+#: kdemain.cpp:152
+#, kde-format
+msgid "Network plugins"
+msgstr "Plugins de rede"
+
+#: kdemain.cpp:154
+#, kde-format
+msgid "Harshit Jain"
+msgstr "Harshit Jain"
+
+#: kdemain.cpp:155
+#, kde-format
+msgid "Planet filter"
+msgstr "Filtro de planeta"
+
+#: kdemain.cpp:157
+#, kde-format
+msgid "Simon Edwards"
+msgstr "Simon Edwards"
+
+#: kdemain.cpp:158
+#, kde-format
+msgid "Marble Python Bindings"
+msgstr "Interface em Python do Marble"
+
+#: kdemain.cpp:160
+#, kde-format
+msgid "Magnus Valle"
+msgstr "Magnus Valle"
+
+#: kdemain.cpp:161
+#, kde-format
+msgid "Historical Maps"
+msgstr "Mapas históricos"
+
+#: kdemain.cpp:163
+#, kde-format
+msgid "Médéric Boquien"
+msgstr "Médéric Boquien"
+
+#: kdemain.cpp:164
+#, kde-format
+msgid "Astronomical Observatories"
+msgstr "Observatórios astronômicos"
+
+#: kdemain.cpp:169
+#, kde-format
+msgid ""
+"ESA Summer of Code in Space 2012 Project: Visualization of planetary "
+"satellites"
+msgstr ""
+"Projeto ESA Summer of Code no espaço 2012: Visualização dos satélites "
+"planetários"
+
+#: kdemain.cpp:173
+#, kde-format
+msgid ""
+"ESA Summer of Code in Space 2011 Project: Visualization of Satellite Orbits"
+msgstr ""
+"Projeto ESA Summer of Code no espaço 2011: Visualização das órbitas dos "
+"satélites"
+
+#: kdemain.cpp:178
+#, kde-format
+msgid "Konstantin Oblaukhov"
+msgstr "Konstantin Oblaukhov"
+
+#: kdemain.cpp:179
+#, kde-format
+msgid "Google Summer of Code 2011 Project: OpenStreetMap Vector Rendering"
+msgstr "Projeto Google Summer of Code 2011: Desenho vetorial do OpenStreetMap"
+
+#: kdemain.cpp:182
+#, kde-format
+msgid "Daniel Marth"
+msgstr "Daniel Marth"
+
+#: kdemain.cpp:183
+#, kde-format
+msgid "Google Summer of Code 2011 Project: Marble Touch on MeeGo"
+msgstr "Projeto Google Summer of Code 2011: Marble Touch no MeeGo"
+
+#: kdemain.cpp:186
+#, kde-format
+msgid "Gaurav Gupta"
+msgstr "Gaurav Gupta"
+
+#: kdemain.cpp:187
+#, kde-format
+msgid "Google Summer of Code 2010 Project: Bookmarks"
+msgstr "Projeto Google Summer of Code 2010: Favoritos"
+
+#: kdemain.cpp:190
+#, kde-format
+msgid "Harshit Jain "
+msgstr "Harshit Jain "
+
+#: kdemain.cpp:191
+#, kde-format
+msgid "Google Summer of Code 2010 Project: Time Support"
+msgstr "Projeto Google Summer of Code 2010: Suporte para Tempos"
+
+#: kdemain.cpp:194
+#, kde-format
+msgid "Siddharth Srivastava"
+msgstr "Siddharth Srivastava"
+
+#: kdemain.cpp:195
+#, kde-format
+msgid "Google Summer of Code 2010 Project: Turn-by-turn Navigation"
+msgstr "Projeto Google Summer of Code 2010: Navegação por passos"
+
+#: kdemain.cpp:198 kdemain.cpp:218
+#, kde-format
+msgid "Andrew Manson"
+msgstr "Andrew Manson"
+
+#: kdemain.cpp:199
+#, kde-format
+msgid "Google Summer of Code 2009 Project: OSM Annotation"
+msgstr "Projeto Google Summer of Code 2009: Anotação no OSM"
+
+#: kdemain.cpp:203
+#, kde-format
+msgid "Google Summer of Code 2009 Project: Online Services"
+msgstr "Projeto Google Summer of Code 2009: Serviços online"
+
+#: kdemain.cpp:207
+#, kde-format
+msgid "Google Summer of Code 2008 Project: Vector Tiles for Marble"
+msgstr "Projeto Google Summer of Code 2008: Padrões vetoriais para o Marble"
+
+#: kdemain.cpp:210
+#, kde-format
+msgid "Shashank Singh"
+msgstr "Shashank Singh"
+
+#: kdemain.cpp:211
+#, kde-format
+msgid ""
+"Google Summer of Code 2008 Project: Panoramio / Wikipedia -photo support for "
+"Marble"
+msgstr ""
+"Projeto Google Summer of Code 2008: Panoramio / Wikipédia - suporte a fotos "
+"para o Marble"
+
+#: kdemain.cpp:214
+#, kde-format
+msgid "Carlos Licea"
+msgstr "Carlos Licea"
+
+#: kdemain.cpp:215
+#, kde-format
+msgid ""
+"Google Summer of Code 2007 Project: Equirectangular Projection (\"Flat Map\")"
+msgstr ""
+"Projeto Google Summer of Code 2007: Projeção cilíndrica equidistante (\"Mapa "
+"plano\")"
+
+#: kdemain.cpp:219
+#, kde-format
+msgid "Google Summer of Code 2007 Project: GPS Support for Marble"
+msgstr "Projeto Google Summer of Code 2007: Suporte a GPS para o Marble"
+
+#: kdemain.cpp:222
+#, kde-format
+msgid "Murad Tagirov"
+msgstr "Murad Tagirov"
+
+#: kdemain.cpp:223
+#, kde-format
+msgid "Google Summer of Code 2007 Project: KML Support for Marble"
+msgstr "Projeto Google Summer of Code 2007: Suporte a KML para o Marble"
+
+#: kdemain.cpp:228
+#, kde-format
+msgid "Simon Schmeisser"
+msgstr "Simon Schmeisser"
+
+#: kdemain.cpp:229 kdemain.cpp:231 kdemain.cpp:233 kdemain.cpp:235
+#: kdemain.cpp:237 kdemain.cpp:239 kdemain.cpp:241 kdemain.cpp:243
+#: kdemain.cpp:245 kdemain.cpp:247 kdemain.cpp:249 kdemain.cpp:251
+#: kdemain.cpp:253 kdemain.cpp:255 kdemain.cpp:257 kdemain.cpp:259
+#: kdemain.cpp:261 kdemain.cpp:263 kdemain.cpp:265
+#, kde-format
+msgid "Development & Patches"
+msgstr "Desenvolvimento e correções"
+
+#: kdemain.cpp:230
+#, kde-format
+msgid "Claudiu Covaci"
+msgstr "Claudiu Covaci"
+
+#: kdemain.cpp:232
+#, kde-format
+msgid "David Roberts"
+msgstr "David Roberts"
+
+#: kdemain.cpp:234
+#, kde-format
+msgid "Nikolas Zimmermann"
+msgstr "Nikolas Zimmermann"
+
+#: kdemain.cpp:236
+#, kde-format
+msgid "Jan Becker"
+msgstr "Jan Becker"
+
+#: kdemain.cpp:238
+#, kde-format
+msgid "Stefan Asserhäll"
+msgstr "Stefan Asserhäll"
+
+#: kdemain.cpp:240
+#, kde-format
+msgid "Laurent Montel"
+msgstr "Laurent Montel"
+
+#: kdemain.cpp:242
+#, kde-format
+msgid "Mayank Madan"
+msgstr "Mayank Madan"
+
+#: kdemain.cpp:244
+#, kde-format
+msgid "Prashanth Udupa"
+msgstr "Prashanth Udupa"
+
+#: kdemain.cpp:246
+#, kde-format
+msgid "Anne-Marie Mahfouf"
+msgstr "Anne-Marie Mahfouf"
+
+#: kdemain.cpp:248
+#, kde-format
+msgid "Josef Spillner"
+msgstr "Josef Spillner"
+
+#: kdemain.cpp:250
+#, kde-format
+msgid "Frerich Raabe"
+msgstr "Frerich Raabe"
+
+#: kdemain.cpp:252
+#, kde-format
+msgid "Frederik Gladhorn"
+msgstr "Frederik Gladhorn"
+
+#: kdemain.cpp:254
+#, kde-format
+msgid "Fredrik Höglund"
+msgstr "Fredrik Höglund"
+
+#: kdemain.cpp:256
+#, kde-format
+msgid "Albert Astals Cid"
+msgstr "Albert Astals Cid"
+
+#: kdemain.cpp:258
+#, kde-format
+msgid "Thomas Zander"
+msgstr "Thomas Zander"
+
+#: kdemain.cpp:260
+#, kde-format
+msgid "Joseph Wenninger"
+msgstr "Joseph Wenninger"
+
+#: kdemain.cpp:262
+#, kde-format
+msgid "Kris Thomsen"
+msgstr "Kris Thomsen"
+
+#: kdemain.cpp:264
+#, kde-format
+msgid "Daniel Molkentin"
+msgstr "Daniel Molkentin"
+
+#: kdemain.cpp:266
+#, kde-format
+msgid "Christophe Leske"
+msgstr "Christophe Leske"
+
+#: kdemain.cpp:267 kdemain.cpp:269 kdemain.cpp:271 kdemain.cpp:273
+#: kdemain.cpp:275 kdemain.cpp:277 kdemain.cpp:279 kdemain.cpp:281
+#: kdemain.cpp:283
+#, kde-format
+msgid "Platforms & Distributions"
+msgstr "Plataformas e distribuições"
+
+#: kdemain.cpp:268
+#, kde-format
+msgid "Sebastian Wiedenroth"
+msgstr "Sebastian Wiedenroth"
+
+#: kdemain.cpp:270
+#, kde-format
+msgid "Tim Sutton"
+msgstr "Tim Sutton"
+
+#: kdemain.cpp:272
+#, kde-format
+msgid "Christian Ehrlicher"
+msgstr "Christian Ehrlicher"
+
+#: kdemain.cpp:274
+#, kde-format
+msgid "Ralf Habacker"
+msgstr "Ralf Habacker"
+
+#: kdemain.cpp:276
+#, kde-format
+msgid "Steffen Joeris"
+msgstr "Steffen Joeris"
+
+#: kdemain.cpp:278
+#, kde-format
+msgid "Marcus Czeslinski"
+msgstr "Marcus Czeslinski"
+
+#: kdemain.cpp:280
+#, kde-format
+msgid "Marcus D. Hanwell"
+msgstr "Marcus D. Hanwell"
+
+#: kdemain.cpp:282
+#, kde-format
+msgid "Chitlesh Goorah"
+msgstr "Chitlesh Goorah"
+
+#: kdemain.cpp:284
+#, kde-format
+msgid "Nuno Pinheiro"
+msgstr "Nuno Pinheiro"
+
+#: kdemain.cpp:285 kdemain.cpp:287
+#, kde-format
+msgid "Artwork"
+msgstr "Arte"
+
+#: kdemain.cpp:290
+#, kde-format
+msgid "Luis Silva"
+msgstr "Luis Silva"
+
+#: kdemain.cpp:291 kdemain.cpp:293 kdemain.cpp:295 kdemain.cpp:297
+#: kdemain.cpp:299 kdemain.cpp:301 kdemain.cpp:303 kdemain.cpp:305
+#: kdemain.cpp:307 kdemain.cpp:309
+#, kde-format
+msgid "Various Suggestions & Testing"
+msgstr "Várias sugestões e testes"
+
+#: kdemain.cpp:292
+#, kde-format
+msgid "Stefan Jordan"
+msgstr "Stefan Jordan"
+
+#: kdemain.cpp:294
+#, kde-format
+msgid "Robert Scott"
+msgstr "Robert Scott"
+
+#: kdemain.cpp:296
+#, kde-format
+msgid "Lubos Petrovic"
+msgstr "Lubos Petrovic"
+
+#: kdemain.cpp:298
+#, kde-format
+msgid "Benoit Sigoure"
+msgstr "Benoit Sigoure"
+
+#: kdemain.cpp:300
+#, kde-format
+msgid "Martin Konold"
+msgstr "Martin Konold"
+
+#: kdemain.cpp:302
+#, kde-format
+msgid "Matthias Welwarsky"
+msgstr "Matthias Welwarsky"
+
+#: kdemain.cpp:304
+#, kde-format
+msgid "Rainer Endres"
+msgstr "Rainer Endres"
+
+#: kdemain.cpp:306
+#, kde-format
+msgid "Ralf Gesellensetter"
+msgstr "Ralf Gesellensetter"
+
+#: kdemain.cpp:308
+#, kde-format
+msgid "Tim Alder"
+msgstr "Tim Alder"
+
+#: kdemain.cpp:310
+#, kde-format
+msgid "John Layt"
+msgstr "John Layt"
+
+#: kdemain.cpp:311
+#, kde-format
+msgid ""
+"Special thanks for providing an important source of inspiration by creating "
+"Marble's predecessor \"Kartographer\"."
+msgstr ""
+"Obrigado especial por fornecer uma importante fonte de inspiração ao criar o "
+"antecessor do Marble, o \"Kartographer\"."
+
+#: kdemain.cpp:327
+#, kde-format
+msgid "Enable debug output"
+msgstr "Habilitar a saída de depuração"
+
+#: kdemain.cpp:329
+#, kde-format
+msgid "Display OSM placemarks according to the level selected"
+msgstr "Exibir marcadores OSM de acordo com o nível selecionado"
+
+#: kdemain.cpp:331
+#, kde-format
+msgid "Make a time measurement to check performance"
+msgstr "Fazer uma medida de tempo para verificar a performance"
+
+#: kdemain.cpp:333
+#, kde-format
+msgid "Show frame rate"
+msgstr "Exibir taxa de quadros"
+
+#: kdemain.cpp:335
+#, kde-format
+msgid "Show tile IDs"
+msgstr "Exibir os IDs dos padrões"
+
+#: kdemain.cpp:337
+#, kde-format
+msgid "Show time spent in each layer"
+msgstr "Mostrar o tempo decorrido em cada camada"
+
+#: kdemain.cpp:339
+#, kde-format
+msgid "Use a different directory <directory> which contains map data."
+msgstr "Usar uma <pasta> diferente que contém os dados do mapa."
+
+#: kdemain.cpp:341
+#, kde-format
+msgid "Do not use the interface optimized for small screens"
+msgstr "Não usar a interface otimizada para telas pequenas"
+
+#: kdemain.cpp:342
+#, kde-format
+msgid "Use the interface optimized for small screens"
+msgstr "Usar a interface otimizada para telas pequenas"
+
+#: kdemain.cpp:344
+#, kde-format
+msgid "Do not use the interface optimized for high resolutions"
+msgstr "Não usar a interface otimizada para altas resoluções"
+
+#: kdemain.cpp:345
+#, kde-format
+msgid "Use the interface optimized for high resolutions"
+msgstr "Usar a interface otimizada para altas resoluções"
+
+#: kdemain.cpp:347
+#, kde-format
+msgid "Show map at given lat lon <coordinates>"
+msgstr "Mostrar um mapa nas <coordenadas> lat/lon indicadas"
+
+#: kdemain.cpp:349
+#, kde-format
+msgid "Show map at given geo <uri>"
+msgstr "Mostrar um mapa na <URI> de geolocalização indicada"
+
+#: kdemain.cpp:351
+#, kde-format
+msgid "Set the distance of the observer to the globe (in km)"
+msgstr "Definir a distância do observador para o globo (em km)"
+
+#: kdemain.cpp:353
+#, kde-format
+msgid "Use map <id> (e.g. \"earth/openstreetmap/openstreetmap.dgml\")"
+msgstr "Usar o <ID> do mapa (p.ex. \"earth/openstreetmap/openstreetmap.dgml\")"
+
+#: kdemain.cpp:355
+#, kde-format
+msgid "One or more placemark files to be opened"
+msgstr "Um ou mais arquivos de marcador a abrir"
+
+#. i18n: ectx: label, entry, group (Time)
+#: marble.kcfg:58
+#, kde-format
+msgid "The date and time of marble clock"
+msgstr "A data e hora do relógio do Marble"
+
+#. i18n: ectx: label, entry, group (Time)
+#: marble.kcfg:61
+#, kde-format
+msgid "The speed of marble clock"
+msgstr "A velocidade do relógio do Marble"
+
+#. i18n: ectx: label, entry, group (View)
+#: marble.kcfg:107
+#, kde-format
+msgid "The unit chosen to measure distances."
+msgstr "A unidade escolhida para medir distâncias."
+
+#. i18n: ectx: label, entry, group (View)
+#: marble.kcfg:115
+#, kde-format
+msgid "The unit chosen to measure angles."
+msgstr "A unidade escolhida para medir ângulos."
+
+#. i18n: ectx: label, entry, group (View)
+#: marble.kcfg:124
+#, kde-format
+msgid "The quality at which a still map gets painted."
+msgstr "A qualidade a qual um mapa estático é pintado."
+
+#. i18n: ectx: label, entry, group (View)
+#: marble.kcfg:135
+#, kde-format
+msgid "The quality at which an animated map gets painted."
+msgstr "A qualidade a qual um mapa animado é pintado."
+
+#. i18n: ectx: label, entry, group (View)
+#: marble.kcfg:146
+#, kde-format
+msgid "The localization of the labels."
+msgstr "A localização das etiquetas."
+
+#. i18n: ectx: label, entry (mapFont), group (View)
+#: marble.kcfg:155
+#, kde-format
+msgid "The general font used on the map."
+msgstr "A fonte geral usada no mapa."
+
+#. i18n: ectx: label, entry (lastFileOpenDir), group (View)
+#: marble.kcfg:159
+#, kde-format
+msgid "The last directory that was opened by File->Open."
+msgstr "A última pasta aberta com o Arquivo->Abrir."
+
+#. i18n: ectx: label, entry, group (Navigation)
+#: marble.kcfg:179
+#, kde-format
+msgid "The behaviour of the planet's axis on mouse dragging."
+msgstr "O comportamento do eixo do planeta ao arrastar com o mouse."
+
+#. i18n: ectx: label, entry, group (Navigation)
+#: marble.kcfg:187
+#, kde-format
+msgid "The location shown on application startup."
+msgstr "A localização exibida no início do aplicativo."
+
+#. i18n: ectx: label, entry, group (Navigation)
+#: marble.kcfg:201
+#, kde-format
+msgid "Display animation on voyage to target."
+msgstr "Exibir animação na viagem até o destino."
+
+#. i18n: ectx: label, entry, group (Navigation)
+#: marble.kcfg:205
+#, kde-format
+msgid "The external OpenStreetMap editor application"
+msgstr "O aplicativo externo do editor do OpenStreetMap"
+
+#. i18n: ectx: label, entry, group (Cache)
+#: marble.kcfg:211
+#, kde-format
+msgid "Cache for tiles reserved in the physical memory."
+msgstr "Cache para os padrões reservado na memória física."
+
+#. i18n: ectx: label, entry, group (Cache)
+#: marble.kcfg:217
+#, kde-format
+msgid "Maximum space on the hard disk that can be used to store tiles."
+msgstr ""
+"Espaço máximo no disco rígido que pode ser usado para armazenar os padrões."
+
+#. i18n: ectx: label, entry (proxyUrl), group (Cache)
+#: marble.kcfg:223
+#, kde-format
+msgid "URL for the proxy server."
+msgstr "URL do servidor de proxy."
+
+#. i18n: ectx: label, entry, group (Cache)
+#: marble.kcfg:227
+#, kde-format
+msgid "Port for the proxy server."
+msgstr "Porta do servidor de proxy."
+
+#. i18n: ectx: label, entry (proxyUser), group (Cache)
+#: marble.kcfg:233
+#, kde-format
+msgid "Username for authorization."
+msgstr "Nome de usuário para autorização."
+
+#. i18n: ectx: label, entry (proxyPass), group (Cache)
+#: marble.kcfg:236
+#, kde-format
+msgid "Password for authorization."
+msgstr "Senha para autorização."
+
+#. i18n: ectx: label, entry (proxyHttp), group (Cache)
+#: marble.kcfg:239
+#, kde-format
+msgid "Proxy type is HTTP"
+msgstr "O tipo de proxy é HTTP"
+
+#. i18n: ectx: label, entry (proxySocks5), group (Cache)
+#: marble.kcfg:250
+#, kde-format
+msgid "Proxy type is Socks5"
+msgstr "O tipo de proxy é Socks5"
+
+#. i18n: ectx: label, entry (proxyAuth), group (Cache)
+#: marble.kcfg:254
+#, kde-format
+msgid "Proxy requires Authentication"
+msgstr "O proxy requer autenticação"
+
+#. i18n: ectx: label, entry (activePositionTrackingPlugin), group (Plugins)
+#: marble.kcfg:260
+#, kde-format
+msgid "The position tracking plugin used to determine the current location"
+msgstr ""
+"O plugin de seguimento da posição usado para determinar a posição atual"
+
+#: marble_part.cpp:102
+#, kde-format
+msgid "Position: %1"
+msgstr "Posição: %1"
+
+#: marble_part.cpp:103
+#, kde-format
+msgid "Altitude: %1"
+msgstr "Altitude: %1"
+
+#: marble_part.cpp:104
+#, kde-format
+msgid "Tile Zoom Level: %1"
+msgstr "Nível de ampliação do padrão: %1"
+
+# A tradução como "Data" fica mais adequada, pois não fica parcialmente visível, apesar de também mostrar as horas. (Alvarenga)
+# Ex: Data: 12/10/2014 13:43
+#: marble_part.cpp:105
+#, kde-format
+msgid "Time: %1"
+msgstr "Data: %1"
+
+#: marble_part.cpp:167
+#, kde-format
+msgid ""
+"Sorry, unable to open '%1':\n"
+"'%2'"
+msgstr ""
+"Desculpe, não foi possível abrir '%1':\n"
+"'%2'"
+
+#: marble_part.cpp:168
+#, kde-format
+msgid "File not readable"
+msgstr "O arquivo não pode ser lido"
+
+#: marble_part.cpp:214
+#, kde-format
+msgid "marble_part"
+msgstr "componente_do_marble"
+
+#: marble_part.cpp:217
+#, kde-format
+msgid "A Virtual Globe"
+msgstr "Um Globo Virtual"
+
+#: marble_part.cpp:231
+#, kde-format
+msgid "Sorry, unable to open '%1'. The file is not accessible."
+msgstr ""
+"Infelizmente, não foi possível abrir o '%1'. O arquivo não está acessível."
+
+#: marble_part.cpp:232
+#, kde-format
+msgid "File not accessible"
+msgstr "Arquivo não acessível"
+
+#: marble_part.cpp:253
+#, kde-format
+msgid "All Supported Files"
+msgstr "Todos os arquivos suportados"
+
+#: marble_part.cpp:259
+#, kde-format
+msgctxt "@title:window"
+msgid "Open File"
+msgstr "Abrir arquivo"
+
+#: marble_part.cpp:276
+#, kde-format
+msgctxt "@title:window"
+msgid "Export Map"
+msgstr "Exportar mapa"
+
+#: marble_part.cpp:277
+#, kde-format
+msgid "Images *.jpg *.png"
+msgstr "Imagens *.jpg *.png"
+
+#: marble_part.cpp:291
+#, kde-format
+msgctxt "Application name"
+msgid "Marble"
+msgstr "Marble"
+
+#: marble_part.cpp:292
+#, kde-format
+msgid "An error occurred while trying to save the file.\n"
+msgstr "Ocorreu um erro enquanto tentava salvar o arquivo.\n"
+
+#: marble_part.cpp:483
+#, kde-format
+msgid "Unnamed"
+msgstr "Sem nome"
+
+#: marble_part.cpp:714
+#, kde-format
+msgctxt "Action for downloading an entire region of a map"
+msgid "Download Region..."
+msgstr "Baixar região..."
+
+#: marble_part.cpp:728
+#, kde-format
+msgctxt "Action for saving the map to a file"
+msgid "&Export Map..."
+msgstr "&Exportar mapa..."
+
+#: marble_part.cpp:737
+#, kde-format
+msgctxt "Action for toggling offline mode"
+msgid "&Work Offline"
+msgstr "&Trabalhar offline"
+
+#: marble_part.cpp:747
+#, kde-format
+msgctxt "Action for copying the map to the clipboard"
+msgid "&Copy Map"
+msgstr "&Copiar mapa"
+
+#: marble_part.cpp:754
+#, kde-format
+msgctxt "Action for copying the coordinates to the clipboard"
+msgid "C&opy Coordinates"
+msgstr "C&opiar coordenadas"
+
+#: marble_part.cpp:762
+#, kde-format
+msgctxt "Action for opening a file"
+msgid "&Open..."
+msgstr "&Abrir..."
+
+#: marble_part.cpp:769
+#, kde-format
+msgctxt "Action for downloading maps (GHNS)"
+msgid "Download Maps..."
+msgstr "Baixar mapas..."
+
+#: marble_part.cpp:772
+#, kde-format
+msgctxt "Status tip"
+msgid "Download new maps"
+msgstr "Baixar novos mapas"
+
+#: marble_part.cpp:778
+#, kde-format
+msgctxt "Action for creating new maps"
+msgid "&Create a New Map..."
+msgstr "&Criar um novo mapa..."
+
+#: marble_part.cpp:783
+#, kde-format
+msgctxt "Status tip"
+msgid "A wizard guides you through the creation of your own map theme."
+msgstr "Um assistente que o ajuda a criar o seu próprio tema de mapas."
+
+#: marble_part.cpp:810
+#, kde-format
+msgctxt "Action for toggling clouds"
+msgid "&Clouds"
+msgstr "&Nuvens"
+
+#: marble_part.cpp:817
+#, kde-format
+msgctxt "Action for sun control dialog"
+msgid "S&un Control..."
+msgstr "Controle do S&ol..."
+
+#: marble_part.cpp:827
+#, kde-format
+msgctxt "Action for time control dialog"
+msgid "&Time Control..."
+msgstr "Controle da &hora..."
+
+#: marble_part.cpp:836
+#, kde-format
+msgctxt "Action for locking float items on the map"
+msgid "Lock Position"
+msgstr "Bloquear posição"
+
+#: marble_part.cpp:847
+#, kde-format
+msgid "Show Shadow"
+msgstr "Mostrar sombra"
+
+#: marble_part.cpp:850
+#, kde-format
+msgid "Hide Shadow"
+msgstr "Ocultar sombra"
+
+#: marble_part.cpp:851
+#, kde-format
+msgid "Shows and hides the shadow of the sun"
+msgstr "Mostra e oculta a sombra do sol"
+
+#: marble_part.cpp:855
+#, kde-format
+msgid "Show sun icon on the Sub-Solar Point"
+msgstr "Mostrar o ícone do Sol no ponto subsolar"
+
+#: marble_part.cpp:857
+#, kde-format
+msgid "Hide sun icon on the Sub-Solar Point"
+msgstr "Ocultar o ícone do Sol no ponto subsolar"
+
+#: marble_part.cpp:858
+#, kde-format
+msgid "Show sun icon on the sub-solar point"
+msgstr "Mostrar o ícone do Sol no ponto subsolar"
+
+#: marble_part.cpp:863
+#, kde-format
+msgid "Lock Globe to the Sub-Solar Point"
+msgstr "Bloquear o globo no ponto subsolar"
+
+#: marble_part.cpp:865
+#, kde-format
+msgid "Unlock Globe to the Sub-Solar Point"
+msgstr "Desbloquear o globo no ponto subsolar"
+
+#: marble_part.cpp:866
+#, kde-format
+msgid "Lock globe to the sub-solar point"
+msgstr "Bloquear o globo no ponto subsolar"
+
+#: marble_part.cpp:881
+#, kde-format
+msgctxt "Add Bookmark"
+msgid "Add &Bookmark..."
+msgstr "&Adicionar favorito..."
+
+#: marble_part.cpp:889
+#, kde-format
+msgctxt "Show Bookmarks"
+msgid "Show &Bookmarks"
+msgstr "Mostrar &favoritos"
+
+#: marble_part.cpp:890
+#, kde-format
+msgid "Show or hide bookmarks in the map"
+msgstr "Mostrar ou ocultar os favoritos no mapa"
+
+#: marble_part.cpp:898
+#, kde-format
+msgid "&Set Home Location"
+msgstr "&Definir a localização inicial"
+
+#: marble_part.cpp:905
+#, kde-format
+msgctxt "Manage Bookmarks"
+msgid "&Manage Bookmarks..."
+msgstr "&Gerenciar favoritos..."
+
+#: marble_part.cpp:917
+#, kde-format
+msgctxt "Edit the map in an external application"
+msgid "&Edit Map..."
+msgstr "&Editar mapa..."
+
+#: marble_part.cpp:925
+#, kde-format
+msgid "&Record Movie"
+msgstr "Gravar &filme"
+
+#: marble_part.cpp:927
+#, kde-format
+msgid "Records a movie of the globe"
+msgstr "Grava um filme do globo"
+
+#: marble_part.cpp:933
+#, kde-format
+msgid "&Stop Recording"
+msgstr "&Parar gravação"
+
+#: marble_part.cpp:935
+#, kde-format
+msgid "Stop recording a movie of the globe"
+msgstr "Para a gravação do filme do globo"
+
+#: marble_part.cpp:1287
+#, kde-format
+msgctxt "Action for toggling"
+msgid "Show Position"
+msgstr "Mostrar posição"
+
+#: marble_part.cpp:1289
+#, kde-format
+msgctxt "Action for toggling"
+msgid "Show Date and Time"
+msgstr "Mostrar data e hora"
+
+#: marble_part.cpp:1291
+#, kde-format
+msgctxt "Action for toggling"
+msgid "Show Altitude"
+msgstr "Mostrar altitude"
+
+#: marble_part.cpp:1294
+#, kde-format
+msgctxt "Action for toggling"
+msgid "Show Tile Zoom Level"
+msgstr "Mostrar o nível de ampliação do padrão"
+
+#: marble_part.cpp:1296
+#, kde-format
+msgctxt "Action for toggling"
+msgid "Show Download Progress Bar"
+msgstr "Mostrar a barra de progresso de download"
+
+#: marble_part.cpp:1391
+#, kde-format
+msgid "View"
+msgstr "Visualização"
+
+#: marble_part.cpp:1402
+#, kde-format
+msgid "Navigation"
+msgstr "Navegação"
+
+#: marble_part.cpp:1413
+#, kde-format
+msgid "Cache & Proxy"
+msgstr "Cache e proxy"
+
+#: marble_part.cpp:1426
+#, kde-format
+msgid "Date & Time"
+msgstr "Data e hora"
+
+#: marble_part.cpp:1434
+#, kde-format
+msgid "Synchronization"
+msgstr "Sincronização"
+
+#: marble_part.cpp:1447
+#, kde-format
+msgid "Routing"
+msgstr "Rota"
+
+#: marble_part.cpp:1455
+#, kde-format
+msgid "Plugins"
+msgstr "Plugins"
+
+#. i18n: ectx: Menu (file)
+#: marble_part.rc:6 marbleui.rc:5
+#, kde-format
+msgid "&File"
+msgstr "&Arquivo"
+
+#. i18n: ectx: Menu (edit)
+#: marble_part.rc:21 marbleui.rc:14
+#, kde-format
+msgid "&Edit"
+msgstr "&Editar"
+
+#. i18n: ectx: Menu (view)
+#: marble_part.rc:31 marbleui.rc:18
+#, kde-format
+msgid "&View"
+msgstr "E&xibir"
+
+#. i18n: ectx: Menu (infoboxes)
+#: marble_part.rc:36
+#, kde-format
+msgid "&Info Boxes"
+msgstr "Painéis &informativos"
+
+#. i18n: ectx: Menu (onlineservices)
+#: marble_part.rc:42
+#, kde-format
+msgid "&Online Services"
+msgstr "Serviços &online"
+
+#. i18n: ectx: Menu (settings)
+#: marble_part.rc:55 marbleui.rc:31
+#, kde-format
+msgid "&Settings"
+msgstr "&Configurações"
+
+#. i18n: ectx: Menu (panels)
+#: marble_part.rc:59
+#, kde-format
+msgid "&Panels"
+msgstr "&Painéis"
+
+#. i18n: ectx: Menu (viewSize)
+#: marble_part.rc:65
+#, kde-format
+msgid "&View Size"
+msgstr "&Tamanho da janela"
+
+#. i18n: ectx: Menu (bookmarks)
+#: marble_part.rc:73 marbleui.rc:29
+#, kde-format
+msgid "&Bookmarks"
+msgstr "&Favoritos"
+
+#. i18n: ectx: ToolBar (mainToolBar)
+#: marble_part.rc:84 marbleui.rc:36
+#, kde-format
+msgid "Main Toolbar"
+msgstr "Barra de ferramentas principal"
+
+#. i18n: ectx: ToolBar (pluginToolBar)
+#: marble_part.rc:97
+#, kde-format
+msgid "Edit Toolbar"
+msgstr "Barra de ferramentas de edição"
+
+#~ msgid "The graphics system that is used by Qt to render the graphics."
+#~ msgstr "O sistema gráfico que é usado pelo Qt para renderizar os gráficos."
+
+#~ msgid "Native"
+#~ msgstr "Nativo"
+
+#~ msgid "Native (X11)"
+#~ msgstr "Nativo (X11)"
+
+#~ msgid "Native (Mac OS X Core Graphics)"
+#~ msgstr "Nativo (gráficos do núcleo do Mac OS X)"
+
+#~ msgid ""
+#~ "You have decided to run Marble with a different graphics system.\n"
+#~ "For this change to become effective, Marble has to be restarted.\n"
+#~ "Please close the application and start Marble again."
+#~ msgstr ""
+#~ "Você decidiu executar o Marble com um sistema gráfico diferente.\n"
+#~ "Para esta alteração se tornar efetiva, o Marble precisa ser reiniciado.\n"
+#~ "Por favor, feche o aplicativo e inicie o Marble novamente."
+
+#~ msgid "Graphics System Change"
+#~ msgstr "Alteração de sistema gráfico"
+
+#~ msgid "Night Sky"
+#~ msgstr "Céu noturno"
+
+#~ msgid ""
+#~ "<p>The <i>night sky</i>.</p><p>Displays the stars and constellations at "
+#~ "night.</p>"
+#~ msgstr ""
+#~ "<p>O <i>céu noturno</i>.</p><p>Mostra as estrelas e constelações à noite."
+#~ "</p>"
+
+#~ msgid "Mountain"
+#~ msgstr "Montanha"
+
+#~ msgid "Volcano"
+#~ msgstr "Vulcão"
+
+#~ msgid "Geographic Pole"
+#~ msgstr "Polo geográfico"
+
+#~ msgid "Magnetic Pole"
+#~ msgstr "Polo magnético"
+
+#~ msgid "Airport"
+#~ msgstr "Aeroporto"
+
+#~ msgid "Shipwreck"
+#~ msgstr "Destroços"
+
+#~ msgid "Astronomical Observatory"
+#~ msgstr "Observatório astronômico"
+
+#~ msgid ""
+#~ "<p>The moon.</p><p>The map is based on data from the Clementine Moon "
+#~ "mission (UVVIS Basemap Mosaic). Credits: NASA/SDIO, Courtesy <a href="
+#~ "\"http://astrogeology.usgs.gov\">USGS Astrogeology Research Program</a></"
+#~ "p>"
+#~ msgstr ""
+#~ "<p>A Lua.</p><p>O mapa é baseado nos dados da missão a Lua Clementine "
+#~ "(UVVIS Basemap Mosaic). Créditos: NASA/SDIO, cortesia <a href=\"http://"
+#~ "astrogeology.usgs.gov\">USGS Astrogeology Research Program (Programa de "
+#~ "pesquisa astrogeológica)</a></p>"
+
+#~ msgid "Explore the Moon"
+#~ msgstr "Explorar a Lua"
+
+#~ msgid "Landing Sites"
+#~ msgstr "Locais de pouso"
+
+#~ msgid "Craters"
+#~ msgstr "Crateras"
+
+#~ msgid "Maria"
+#~ msgstr "Maria"
+
+#~ msgid "Other features"
+#~ msgstr "Outros recursos"
+
+#~ msgid ""
+#~ "<a href=\"tour://moon/clementine/tour.kml\">Play a tour of different "
+#~ "landing sites.</a>"
+#~ msgstr ""
+#~ "<a href=\"tour://moon/clementine/tour.kml\">Reproduz uma viagem sobre os "
+#~ "diferentes pontos de aterrissagem.</a>"
+
+#~ msgid "Manned landing site"
+#~ msgstr "Local de pouso tripulado"
+
+#~ msgid "Robotic rover"
+#~ msgstr "Veículo explorador robotizado"
+
+#~ msgid "Unmanned soft landing"
+#~ msgstr "Pouso não tripulado leve"
+
+#~ msgid "Unmanned hard landing"
+#~ msgstr "Pouso não tripulado difícil"
+
+#~ msgid "Crater, impact crater"
+#~ msgstr "Cratera"
+
+#~ msgid "Mons, mountain"
+#~ msgstr "Monte, montanha"
+
+#~ msgid "Vallis, valley"
+#~ msgstr "Vales"
+
+#~ msgid "Selenographic Pole"
+#~ msgstr "Polo selenográfico"
+
+#~ msgid "Plain Map"
+#~ msgstr "Mapa plano"
+
+#~ msgid ""
+#~ "<p>A <i>plain map</i>.</p><p>It uses vector lines to mark coastlines and "
+#~ "country borders, etc...</p>"
+#~ msgstr ""
+#~ "<p>Um <i>mapa plano</i>.</p><p>Usa linhas de vetores para marcar as "
+#~ "linhas costeiras, fronteiras dos países, etc...</p>"
+
+#~ msgid "Urban Areas"
+#~ msgstr "Áreas urbanas"
+
+#~ msgid "Boundaries"
+#~ msgstr "Fronteiras"
+
+#~ msgid "Water Bodies"
+#~ msgstr "Corpos de água"
+
+#~ msgid "Ice and Glaciers"
+#~ msgstr "Geleiras e glaciais"
+
+#~ msgid "International"
+#~ msgstr "Internacional"
+
+#~ msgid "State"
+#~ msgstr "Estado"
+
+#~ msgid "Disputed Areas"
+#~ msgstr "Áreas em disputa"
+
+#~ msgid "Maritime Borders"
+#~ msgstr "Fronteiras marítimas"
+
+#~ msgid "Lake"
+#~ msgstr "Lago"
+
+#~ msgid "Historic Lake"
+#~ msgstr "Lago histórico"
+
+#~ msgid "Playa"
+#~ msgstr "Praia"
+
+#~ msgid "River"
+#~ msgstr "Rio"
+
+#~ msgid "Glaciers"
+#~ msgstr "Glaciais"
+
+#~ msgid "Antarctic Iceshelves"
+#~ msgstr "Plataformas de gelo da Antártida"
+
+#~ msgid "Temperature (July)"
+#~ msgstr "Temperatura (julho)"
+
+#~ msgid "A map which shows the average temperature in July."
+#~ msgstr "Um mapa que exibe a precipitação média em julho."
+
+#~ msgid "42&deg;C"
+#~ msgstr "42&deg;C"
+
+#~ msgid "32&deg;C"
+#~ msgstr "32&deg;C"
+
+#~ msgid "23&deg;C"
+#~ msgstr "23&deg;C"
+
+#~ msgid "12&deg;C"
+#~ msgstr "12&deg;C"
+
+#~ msgid "1&deg;C"
+#~ msgstr "1&deg;C"
+
+#~ msgid "-10&deg;C"
+#~ msgstr "-10&deg;C"
+
+#~ msgid "-21&deg;C"
+#~ msgstr "-21&deg;C"
+
+#~ msgid "-32&deg;C"
+#~ msgstr "-32&deg;C"
+
+#~ msgid "-41&deg;C"
+#~ msgstr "-41&deg;C"
+
+#~ msgid "-69&deg;C"
+#~ msgstr "-69&deg;C"
+
+#~ msgid "Earth at Night"
+#~ msgstr "Terra à noite"
+
+#~ msgid ""
+#~ "This image of <i>Earth's city lights</i> was created with data from the "
+#~ "Defense Meteorological Satellite Program (DMSP) Operational Linescan "
+#~ "System (OLS)."
+#~ msgstr ""
+#~ "Esta imagem das <i>luzes das cidades da Terra</i> foi criada com dados do "
+#~ "Programa de Satélite da Defesa Meteorológica - (DMSP - Defense "
+#~ "Meteorological Satellite Program) do Sistema Operacional Linescan (OLS)."
+
+#~ msgid "Surface"
+#~ msgstr "Superfície"
+
+#~ msgid "Light terrain"
+#~ msgstr "Terreno claro"
+
+#~ msgid "Dark terrain"
+#~ msgstr "Terreno escuro"
+
+#~ msgid "Water"
+#~ msgstr "Água"
+
+#~ msgid "Atlas"
+#~ msgstr "Atlas"
+
+#~ msgid ""
+#~ "<p>A <i>classic topographic map</i>.</p><p>It uses vector lines to mark "
+#~ "coastlines, country borders etc. and bitmap graphics to create the height "
+#~ "relief.</p>"
+#~ msgstr ""
+#~ "<p>Um <i>mapa topográfico clássico</i>.</p><p>Usa linhas vetoriais para "
+#~ "marcar as linhas costeiras, fronteiras dos países, etc., e gráficos em "
+#~ "bitmap para criar a altura do relevo.</p>"
+
+#~ msgid "Relief"
+#~ msgstr "Relevo"
+
+#~ msgid "Elevation"
+#~ msgstr "Elevação"
+
+#~ msgid "7000 m"
+#~ msgstr "7000 m"
+
+#~ msgid "5000 m"
+#~ msgstr "5000 m"
+
+#~ msgid "3500 m"
+#~ msgstr "3500 m"
+
+#~ msgid "2000 m"
+#~ msgstr "2000 m"
+
+#~ msgid "1000 m"
+#~ msgstr "1000 m"
+
+#~ msgid "500 m"
+#~ msgstr "500 m"
+
+#~ msgid "200 m"
+#~ msgstr "200 m"
+
+#~ msgid "50 m"
+#~ msgstr "50 m"
+
+#~ msgid "0 m"
+#~ msgstr "0 m"
+
+#~ msgid "0 m (Water)"
+#~ msgstr "0 m (água)"
+
+#~ msgid "-50 m"
+#~ msgstr "-50 m"
+
+#~ msgid "-200 m"
+#~ msgstr "-200 m"
+
+#~ msgid "-2000 m"
+#~ msgstr "-2000 m"
+
+#~ msgid "-4000 m"
+#~ msgstr "-4000 m"
+
+#~ msgid "-6500 m"
+#~ msgstr "-6500 m"
+
+#~ msgid "-11000 m"
+#~ msgstr "-11000 m"
+
+#~ msgid "Temperature (December)"
+#~ msgstr "Temperatura (dezembro)"
+
+#~ msgid "A map which shows the average temperature in December."
+#~ msgstr "Um mapa que exibe a temperatura média em dezembro."
+
+#~ msgid "Vector OSM"
+#~ msgstr "Vetor OSM"
+
+#~ msgid ""
+#~ "<p>A <i>global roadmap</i> created by the OpenStreetMap (OSM) project.</"
+#~ "p><p>OSM is an open community which creates free editable maps. The OSM "
+#~ "data was rendered using Mapnik.</p>"
+#~ msgstr ""
+#~ "<p>Um <i>mapa de ruas global</i> criado pelo projeto OpenStreetMap (OSM)."
+#~ "</p><p>o OpenStreetMap é uma comunidade aberta que cria mapas gratuitos "
+#~ "editáveis. Os dados do OpenStreetMap são renderizados usando o Mapnik.</p>"
+
+#~ msgid "OSM Bitmap Tiles"
+#~ msgstr "Blocos da imagem do OSM"
+
+#~ msgid "Explore the Earth"
+#~ msgstr "Explorar a Terra"
+
+#~ msgid "Hillshading"
+#~ msgstr "Desenho de relevos"
+
+#~ msgid "Transportation"
+#~ msgstr "Meios de transporte"
+
+#~ msgid "Areas"
+#~ msgstr "Áreas"
+
+#~ msgid "Education"
+#~ msgstr "Educação"
+
+#~ msgid "Financial"
+#~ msgstr "Financeiro"
+
+#~ msgid "Healthcare"
+#~ msgstr "Saúde"
+
+#~ msgid "Entertainment"
+#~ msgstr "Entretenimento"
+
+#~ msgid "Public Buildings"
+#~ msgstr "Edifícios públicos"
+
+#~ msgid "Accommodation"
+#~ msgstr "Alojamento"
+
+#~ msgid "Emergency"
+#~ msgstr "Emergência"
+
+#~ msgid "Historic"
+#~ msgstr "Histórico"
+
+#~ msgid "Food and Drinks"
+#~ msgstr "Comida e bebida"
+
+#~ msgid "Shop"
+#~ msgstr "Loja"
+
+#~ msgid ""
+#~ "<a href=\"tour://earth/openstreetmap/tour.kml\">Play a tour of popular "
+#~ "places.</a>"
+#~ msgstr ""
+#~ "<a href=\"tour://earth/openstreetmap/tour.kml\">Reproduz uma viagem em "
+#~ "locais populares.</a>"
+
+#~ msgid "Motorway"
+#~ msgstr "Autoestrada"
+
+#~ msgid "Trunk road"
+#~ msgstr "Estrada principal"
+
+#~ msgid "Primary road"
+#~ msgstr "Estrada primária"
+
+#~ msgid "Secondary road"
+#~ msgstr "Estrada secundária"
+
+#~ msgid "Unclassified road"
+#~ msgstr "Estrada não classificada"
+
+#~ msgid "Unsurfaced road"
+#~ msgstr "Estrada de terra"
+
+#~ msgid "Track"
+#~ msgstr "Trilha"
+
+#~ msgid "Byway"
+#~ msgstr "Caminho"
+
+#~ msgid "Bridleway"
+#~ msgstr "Picada"
+
+#~ msgid "Cycleway"
+#~ msgstr "Ciclovia"
+
+#~ msgid "Footway"
+#~ msgstr "Calçadas"
+
+#~ msgid "Railway station"
+#~ msgstr "Estação ferroviária"
+
+#~ msgid "Railway"
+#~ msgstr "Ferrovia"
+
+#~ msgid "Subway"
+#~ msgstr "Metrô"
+
+#~ msgid "Lightrail, tram"
+#~ msgstr "Veículo leve sobre trilhos, bonde"
+
+#~ msgid "Airport runway, taxiway"
+#~ msgstr "Pista de pouso e decolagem, taxiway"
+
+#~ msgid "Airport apron, terminal"
+#~ msgstr "Terminal de passageiros, pátio de aeronaves"
+
+#~ msgid "Administrative boundary"
+#~ msgstr "Fronteira administrativa"
+
+#~ msgid "Bridge"
+#~ msgstr "Ponte"
+
+#~ msgid "Tunnel"
+#~ msgstr "Túnel"
+
+#~ msgid "Forest"
+#~ msgstr "Floresta"
+
+#~ msgid "Wood"
+#~ msgstr "Madeira"
+
+#~ msgid "Golf course"
+#~ msgstr "Campo de golf"
+
+#~ msgid "Park"
+#~ msgstr "Parque"
+
+#~ msgid "Residential Area"
+#~ msgstr "Área residencial"
+
+#~ msgid "Tourist attraction"
+#~ msgstr "Atração turística"
+
+#~ msgid "Common, meadow"
+#~ msgstr "Campo, pastagem"
+
+#~ msgid "Retail area"
+#~ msgstr "Área varejista"
+
+#~ msgid "Industrial Area"
+#~ msgstr "Área industrial"
+
+#~ msgid "Commercial Area"
+#~ msgstr "Área comercial"
+
+#~ msgid "Heathland"
+#~ msgstr "Terreno inculto"
+
+#~ msgid "Lake, reservoir"
+#~ msgstr "Lago, reservatório"
+
+#~ msgid "Farm"
+#~ msgstr "Fazenda"
+
+#~ msgid "Brownfield site"
+#~ msgstr "Local de campo"
+
+#~ msgid "Cemetery"
+#~ msgstr "Cemitério"
+
+#~ msgid "Allotments"
+#~ msgstr "Hortas comunitárias"
+
+#~ msgid "Sports pitch"
+#~ msgstr "Campo de esportes"
+
+#~ msgid "Sports centre"
+#~ msgstr "Centro de esportes"
+
+#~ msgid "Nature reserve"
+#~ msgstr "Reserva natural"
+
+#~ msgid "Military area"
+#~ msgstr "Área militar"
+
+#~ msgid "School, university"
+#~ msgstr "Escola, universidade"
+
+#~ msgid "Significant Building"
+#~ msgstr "Edifício significativo"
+
+#~ msgid "Summit, peak"
+#~ msgstr "Cume, pico"
+
+#~ msgid "College"
+#~ msgstr "Faculdade"
+
+#~ msgid "Kindergarten"
+#~ msgstr "Creche"
+
+#~ msgid "Library"
+#~ msgstr "Biblioteca"
+
+#~ msgid "School"
+#~ msgstr "Escola"
+
+#~ msgid "University"
+#~ msgstr "Universidade"
+
+#~ msgid "ATM"
+#~ msgstr "Caixa eletrônico"
+
+#~ msgid "Bank"
+#~ msgstr "Banco"
+
+#~ msgid "Bureau de change"
+#~ msgstr "Casa de câmbio"
+
+#~ msgid "Dentist"
+#~ msgstr "Dentista"
+
+#~ msgid "Doctors"
+#~ msgstr "Médico"
+
+#~ msgid "Pharmacy"
+#~ msgstr "Farmácia"
+
+#~ msgid "Veterinary"
+#~ msgstr "Veterinário"
+
+#~ msgid "Cinema"
+#~ msgstr "Cinema"
+
+#~ msgid "Theatre"
+#~ msgstr "Teatro"
+
+#~ msgid "Court"
+#~ msgstr "Tribunal"
+
+#~ msgid "Embassy"
+#~ msgstr "Embaixada"
+
+#~ msgid "Church"
+#~ msgstr "Igreja"
+
+#~ msgid "Playground"
+#~ msgstr "Parque infantil"
+
+#~ msgid "Place of worship"
+#~ msgstr "Local de culto"
+
+#~ msgid "Post office"
+#~ msgstr "Correios"
+
+#~ msgid "Public building"
+#~ msgstr "Edifício público"
+
+#~ msgid "Toilets"
+#~ msgstr "Sanitários"
+
+#~ msgid "Hotel"
+#~ msgstr "Hotel"
+
+#~ msgid "Motel"
+#~ msgstr "Hotel de estrada"
+
+#~ msgid "Hospital"
+#~ msgstr "Hospital"
+
+#~ msgid "Fire station"
+#~ msgstr "Bombeiros"
+
+#~ msgid "Monument"
+#~ msgstr "Monumento"
+
+#~ msgid "Ruins"
+#~ msgstr "Ruínas"
+
+#~ msgid "Bar"
+#~ msgstr "Bar"
+
+#~ msgid "Biergarten"
+#~ msgstr "Biergarten"
+
+#~ msgid "Cafe"
+#~ msgstr "Café"
+
+#~ msgid "Drinking water"
+#~ msgstr "Água potável"
+
+#~ msgid "Fast Food"
+#~ msgstr "Lanchonete"
+
+#~ msgid "Ice Cream"
+#~ msgstr "Sorvete"
+
+#~ msgid "Pub"
+#~ msgstr "Bar (pub)"
+
+#~ msgid "Restaurant"
+#~ msgstr "Restaurante"
+
+#~ msgid "Alcohol"
+#~ msgstr "Álcool"
+
+#~ msgid "Bakery"
+#~ msgstr "Padaria"
+
+#~ msgid "Books"
+#~ msgstr "Livros"
+
+#~ msgid "Car"
+#~ msgstr "Carro"
+
+#~ msgid "Clothes"
+#~ msgstr "Roupas"
+
+#~ msgid "Convenience"
+#~ msgstr "Conveniência"
+
+#~ msgid "Gas"
+#~ msgstr "Gás"
+
+#~ msgid "Gift"
+#~ msgstr "Presente"
+
+#~ msgid "Precipitation (July)"
+#~ msgstr "Precipitação (julho)"
+
+#~ msgid ""
+#~ "A map which shows the average precipitation (rain/snow/hail/etc) in July."
+#~ msgstr ""
+#~ "Um mapa que exibe a precipitação média (chuva, neve, granizo, etc) em "
+#~ "julho."
+
+#~ msgid "Precipitation"
+#~ msgstr "Precipitação"
+
+#~ msgid "0 mm"
+#~ msgstr "0 mm"
+
+#~ msgid "10 mm"
+#~ msgstr "10 mm"
+
+#~ msgid "40 mm"
+#~ msgstr "40 mm"
+
+#~ msgid "63 mm"
+#~ msgstr "63 mm"
+
+#~ msgid "89 mm"
+#~ msgstr "89 mm"
+
+#~ msgid "127 mm"
+#~ msgstr "127 mm"
+
+#~ msgid "256 mm"
+#~ msgstr "256 mm"
+
+#~ msgid "512 mm"
+#~ msgstr "512 mm"
+
+#~ msgid "1024 mm or more"
+#~ msgstr "1024 mm ou mais"
+
+#~ msgid "Empty globe"
+#~ msgstr "Globo vazio"
+
+#~ msgid ""
+#~ "<p>An <i>empty globe</i> used as a base to load and view .osm files "
+#~ "(offline maps).</p>"
+#~ msgstr ""
+#~ "<p>Um <i>globo vazio</i> utilizado como base para carregar e visualizar "
+#~ "arquivos .osm (mapas offline).</p>"
+
+#~ msgid "Satellite View"
+#~ msgstr "Visão de satélite"
+
+#~ msgid ""
+#~ "<p>Earth as seen from Space.</p><p>The map is based on NASA's beautiful "
+#~ "\"Blue Marble Next Generation\" pictures. Credits: NASA's Earth "
+#~ "Observatory</p>"
+#~ msgstr ""
+#~ "<p>A Terra vista do espaço.</p><p>O mapa é baseado nas belas imagens "
+#~ "\"Blue Marble Next Generation\" da NASA. Créditos: Observatório da Terra "
+#~ "da NASA</p>"
+
+#~ msgid "Ice"
+#~ msgstr "Gelo"
+
+#~ msgid "Vegetation"
+#~ msgstr "Vegetação"
+
+#~ msgid "Desert"
+#~ msgstr "Deserto"
+
+#~ msgid "Political Map"
+#~ msgstr "Mapa Político"
+
+#~ msgid ""
+#~ "<p>A <i>Political Map</i>.</p><p>The theme displays various countries.</p>"
+#~ msgstr "<p>Um <i>Mapa Político</i>.</p><p>O tema mostra vários países.</p>"
+
+#~ msgid "Rivers"
+#~ msgstr "Rios"
+
+#~ msgid "Precipitation (December)"
+#~ msgstr "Precipitação (dezembro)"
+
+#~ msgid "A map which shows the average precipitation in December."
+#~ msgstr "Um mapa que exibe a precipitação média em dezembro."
+
+#~ msgid "SRTM Data"
+#~ msgstr "Dados do SRTM"
+
+#~ msgid "Behaim Globe 1492"
+#~ msgstr "Globo Behaim 1492"
+
+#~ msgid ""
+#~ "<p> Martin Behaim's <i>Erdapfel</i> is the oldest existent globe of the "
+#~ "Earth. <i>Credits: Germanisches Nationalmuseum, Nuremberg, License: CC BY-"
+#~ "SA 3.0.</i></p>"
+#~ msgstr ""
+#~ "<p> Martin Behaim's <i>Erdapfel</i> é o globo terrestre mais antigo que "
+#~ "existe. <i>Créditos: Germanisches Nationalmuseum, Nuremberg, Licença: CC "
+#~ "BY-SA 3.0.</i></p>"
+
+#~ msgid "Places (in German)"
+#~ msgstr "Locais (em Alemão)"
+
+#~ msgid "Behaim Places"
+#~ msgstr "Locais de Behaim"
+
+#~ msgid "Texts and illustrations"
+#~ msgstr "Textos e ilustrações"
+
+#~ msgid "Facsimile drawings"
+#~ msgstr "Desenhos em facsimile"
+
+#~ msgid "Ravenstein (1908)"
+#~ msgstr "Ravenstein (1908)"
+
+#~ msgid "Ghillany (1853)"
+#~ msgstr "Ghillany (1853)"
+
+#~ msgid "Reference lines"
+#~ msgstr "Linhas de referência"
+
+#~ msgid "Accurate Coastline"
+#~ msgstr "Linha costeira precisa"
+
+#~ msgid "Historical Map 1689"
+#~ msgstr "Mapa histórico de 1689"
+
+#~ msgid ""
+#~ "<i>Historical world map</i> from the year 1689 created by G. van Schagen "
+#~ "in Amsterdam."
+#~ msgstr ""
+#~ "<i>Mapa mundial histórico</i> do ano de 1689 criado por G. van Schagen em "
+#~ "Amsterdã."
+
+#~ msgid "Town"
+#~ msgstr "Cidade"
+
+#~ msgid "OpenStreetMap"
+#~ msgstr "OpenStreetMap"
+
+#~ msgid "Clouds"
+#~ msgstr "Nuvens"
+
+#~ msgid ""
+#~ "A Real Time Cloud Map that gets updated every 3 hours. It uses GOES, "
+#~ "METEOSAT, and GMS satellite imagery downloaded from the Geostationary "
+#~ "Satellite Imagery page at Dundee University.  Credits: Hari Nair, Xplanet "
+#~ "Project"
+#~ msgstr ""
+#~ "A cobertura de nuvens em tempo real que é atualizada a cada 3 horas. Ela "
+#~ "usa as imagens de satélite GOES, METEOSAT e GMS baixadas da página da "
+#~ "Galeria de Imagens de Satélite Geostacionário da Universidade de Dundee. "
+#~ "Créditos: Hari Nair, Projeto Xplanet"
+
+#~ msgid "Marble: Legend"
+#~ msgstr "Marble: legenda"
+
+#~ msgid "<a href="
+#~ msgstr "<a href="
+
+#~ msgid "Population:"
+#~ msgstr "População:"
+
+#~ msgid "&gt; 1&nbsp;000&nbsp;000"
+#~ msgstr "&gt; 1&nbsp;000&nbsp;000"
+
+#~ msgid "&ge; 100&nbsp;000"
+#~ msgstr "&ge; 100&nbsp;000"
+
+#~ msgid "&ge; 10&nbsp;000"
+#~ msgstr "&ge; 10&nbsp;000"
+
+#~ msgid "&lt; 10&nbsp;000"
+#~ msgstr "&lt; 10&nbsp;000"
+
+#~ msgid "<br/>"
+#~ msgstr "<br/>"
+
+#~ msgid "Capitals:"
+#~ msgstr "Capitais:"
+
+#~ msgid "Red:&nbsp;Nation"
+#~ msgstr "Vermelho:&nbsp;Nação"
+
+#~ msgid "Orange:&nbsp;State"
+#~ msgstr "Laranja:&nbsp;Estado"
+
+#~ msgid "Yellow:&nbsp;County"
+#~ msgstr "Amarelo:&nbsp;País"
+
+#~ msgid "White:&nbsp;None"
+#~ msgstr "Branco:&nbsp;Nenhum"
+
+#~ msgid "<!-- ##customLegendEntries:all## -->"
+#~ msgstr "<!-- ##customLegendEntries:all## -->"
+
+#~ msgid "Marble - Game"
+#~ msgstr "Marble - Jogo"
+
+#~ msgid "The Earth"
+#~ msgstr "A Terra"
+
+#~ msgid "The Marble widget displays a virtual globe."
+#~ msgstr "Widget do Marble que exibe um globo virtual."
+
+#~ msgid "Navigation Control"
+#~ msgstr "Controle de navegação"
+
+#~ msgid "Use this control to navigate."
+#~ msgstr "Use este controle para navegar."
+
+#~ msgid "Show places"
+#~ msgstr "Mostrar lugares"
+
+#~ msgid "Show relief"
+#~ msgstr "Mostrar relevo"
+
+#~ msgid "Show scale bar"
+#~ msgstr "Mostrar barra de escala"
+
+#~ msgid "Show borders"
+#~ msgstr "Mostrar limites"
+
+#~ msgid "Show ice / snow"
+#~ msgstr "Mostrar gelo / neve"
+
+#~ msgid "Show compass"
+#~ msgstr "Mostrar bússola"
+
+#~ msgid "Show grid"
+#~ msgstr "Mostrar grade"
+
+#~ msgid "Show rivers / lakes"
+#~ msgstr "Mostrar rios / lagos"
+
+#~ msgid "Show elevation model"
+#~ msgstr "Mostrar modelo de elevação"
+
+#~ msgid "Coordinates: "
+#~ msgstr "Coordenadas: "
+
+#~ msgid "Add link"
+#~ msgstr "Adicionar link"
+
+#~ msgid "URL:"
+#~ msgstr "URL:"
+
+#~ msgid "Name:"
+#~ msgstr "Nome:"
+
+#~ msgid "Bookmark Manager - Marble"
+#~ msgstr "Gerenciador de Favoritos - Marble"
+
+#~ msgid "Import Bookmarks..."
+#~ msgstr "Importar favoritos..."
+
+#~ msgid "Export Bookmarks..."
+#~ msgstr "Exportar favoritos..."
+
+#~ msgid "Folders"
+#~ msgstr "Pastas"
+
+#~ msgid "New"
+#~ msgstr "Novo"
+
+#~ msgid "Rename"
+#~ msgstr "Renomear"
+
+#~ msgid "Delete"
+#~ msgstr "Excluir"
+
+#~ msgid "Bookmarks"
+#~ msgstr "Favoritos"
+
+#~ msgid "Edit"
+#~ msgstr "Editar"
+
+#~ msgid "Cloud Routes"
+#~ msgstr "Rotas na Nuvem"
+
+#~ msgid "No route available."
+#~ msgstr "Nenhuma rota disponível."
+
+#~ msgid "Current Location"
+#~ msgstr "Localização atual"
+
+#~ msgid "Position Tracking"
+#~ msgstr "Seguimento de posição"
+
+#~ msgid "Disabled"
+#~ msgstr "Desabilitado"
+
+#~ msgid "Show Track"
+#~ msgstr "Mostrar trilha"
+
+#~ msgid "Clear Track"
+#~ msgstr "Limpar trilha"
+
+#~ msgid "..."
+#~ msgstr "..."
+
+#~ msgid "No position available."
+#~ msgstr "Nenhuma posição disponível."
+
+#~ msgctxt "Select the method to use to recenter your GPS location on map."
+#~ msgid "Select the method to use to re-center your GPS location on map."
+#~ msgstr ""
+#~ "Selecione o método para centralizar novamente a sua posição GPS no mapa."
+
+#~ msgid "Map Adjustment"
+#~ msgstr "Ajuste do mapa"
+
+#~ msgctxt "Disable Auto Recenter"
+#~ msgid "Disabled"
+#~ msgstr "Desabilitado"
+
+#~ msgctxt "Always keep gps location at the center of the map"
+#~ msgid "Keep at Center"
+#~ msgstr "Manter no centro"
+
+#~ msgctxt "Auto center when required"
+#~ msgid "When required"
+#~ msgstr "Quando solicitado"
+
+#~ msgctxt "Auto Zoom to appropriate zoom level"
+#~ msgid "Auto Zoom to appropriate zoom level"
+#~ msgstr "Ajustar automaticamente para o nível de zoom adequado"
+
+#~ msgid "Auto Zoom"
+#~ msgstr "Zoom automático"
+
+#~ msgid "Data Migration"
+#~ msgstr "Migração de dados"
+
+#~ msgid ""
+#~ "Marble has found map data stored by a previous Marble version.<br/>Should "
+#~ "this data get converted so that it can be used by the current version?"
+#~ msgstr ""
+#~ "O Marble encontrou dados de mapas armazenados por uma versão anterior do "
+#~ "Marble.<br/>Estes dados devem ser convertidos para que possam ser usados "
+#~ "pela versão atual?"
+
+#~ msgid "Edit Bookmark - Marble"
+#~ msgstr "Editar favorito - Marble"
+
+#~ msgid "&Description"
+#~ msgstr "&Descrição"
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<table border=\"0\" style=\"-qt-table-type: root; margin-top:4px; margin-"
+#~ "bottom:4px; margin-left:4px; margin-right:4px;\">\n"
+#~ "<tr>\n"
+#~ "<td style=\"border: none;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-family:'Ubuntu';\"><br /></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-family:'Ubuntu';\"><br /></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-family:'Ubuntu';\"><br /></p></td></tr></table></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<table border=\"0\" style=\"-qt-table-type: root; margin-top:4px; margin-"
+#~ "bottom:4px; margin-left:4px; margin-right:4px;\">\n"
+#~ "<tr>\n"
+#~ "<td style=\"border: none;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-family:'Ubuntu';\"><br /></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-family:'Ubuntu';\"><br /></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-family:'Ubuntu';\"><br /></p></td></tr></table></body></html>"
+
+#~ msgid "&Folder"
+#~ msgstr "&Pasta"
+
+#~ msgid "&Add Folder"
+#~ msgstr "&Adicionar pasta"
+
+#~ msgid "Edit placemark"
+#~ msgstr "Editar marcador"
+
+#~ msgid "Description"
+#~ msgstr "Descrição"
+
+#~ msgid "Show Balloon Popup"
+#~ msgstr "Mostrar mensagem num balão"
+
+#~ msgid "Style, Color"
+#~ msgstr "Estilo, Cor"
+
+#~ msgid "Label"
+#~ msgstr "Legenda"
+
+#~ msgid "Color:"
+#~ msgstr "Cor:"
+
+#~ msgid "Scale:"
+#~ msgstr "Escala:"
+
+#~ msgid "Icon"
+#~ msgstr "Ícone"
+
+#~ msgid "Show placemark"
+#~ msgstr "Mostrar marcador"
+
+#~ msgid "Bold"
+#~ msgstr "Negrito"
+
+#~ msgid "Italics"
+#~ msgstr "Itálico"
+
+#~ msgid "Underlined"
+#~ msgstr "Sublinhado"
+
+#~ msgid "Add image"
+#~ msgstr "Adicionar imagem"
+
+#~ msgid "Elevation:"
+#~ msgstr "Elevação:"
+
+#~ msgid " m"
+#~ msgstr " m"
+
+#~ msgid "above sea level"
+#~ msgstr "acima do nível do mar"
+
+#~ msgid "External Map Editor Selection"
+#~ msgstr "Seleção do editor de mapas externo"
+
+#~ msgid "External Map Editor"
+#~ msgstr "Editor de mapas externo"
+
+#~ msgid "Web browser (iD)"
+#~ msgstr "Navegador Web (iD)"
+
+#~ msgid "Merkaartor"
+#~ msgstr "Merkaartor"
+
+#~ msgid "JOSM"
+#~ msgstr "JOSM"
+
+# As quebras de linha foram incluídas para que a mensagem fique totalmente visível. Podem ser retiradas após a correção do bug 304031 (Alvarenga)
+#~ msgid ""
+#~ "Deactivate to be prompted for a map editor selection next time again. "
+#~ "Otherwise, your choice is remembered and will be used automatically in "
+#~ "the future. If you want to alter the default map editor later, you can do "
+#~ "so in the Marble Settings."
+#~ msgstr ""
+#~ "Desative para ser solicitada a seleção de um editor de mapas da próxima "
+#~ "vez.\n"
+#~ "Caso contrário, sua escolha é memorizada e será usada automaticamente no "
+#~ "futuro.\n"
+#~ "Se quiser alterar o editor de mapas padrão mais tarde, poderá fazê-lo "
+#~ "nas\n"
+#~ "Configurações do Marble."
+
+#~ msgid "Make my selection the default map editor"
+#~ msgstr "Tornar a minha seleção o editor de mapas padrão"
+
+#~ msgid "Editor Details"
+#~ msgstr "Detalhes do editor"
+
+#~ msgid "Editor Preview"
+#~ msgstr "Visualização do editor"
+
+#~ msgid ""
+#~ "iD is an OpenStreetMap editor for quick editing tasks and beginners. It "
+#~ "requires a web browser."
+#~ msgstr ""
+#~ "O iD é um editor do OpenStreetMap para tarefas de edição rápida e para "
+#~ "iniciantes. Ele requer um navegador web."
+
+#~ msgid "File View"
+#~ msgstr "Visualização do arquivo"
+
+#~ msgid "&Save"
+#~ msgstr "&Salvar"
+
+#~ msgid "&Close"
+#~ msgstr "Fe&char"
+
+#~ msgid "Formatted text"
+#~ msgstr "Texto formatado"
+
+#~ msgid "6"
+#~ msgstr "6"
+
+#~ msgid "8"
+#~ msgstr "8"
+
+#~ msgid "9"
+#~ msgstr "9"
+
+#~ msgid "10"
+#~ msgstr "10"
+
+#~ msgid "11"
+#~ msgstr "11"
+
+#~ msgid "12"
+#~ msgstr "12"
+
+#~ msgid "14"
+#~ msgstr "14"
+
+#~ msgid "16"
+#~ msgstr "16"
+
+#~ msgid "18"
+#~ msgstr "18"
+
+#~ msgid "20"
+#~ msgstr "20"
+
+#~ msgid "24"
+#~ msgstr "24"
+
+#~ msgid "36"
+#~ msgstr "36"
+
+#~ msgid "48"
+#~ msgstr "48"
+
+#~ msgid "72"
+#~ msgstr "72"
+
+#~ msgid "96"
+#~ msgstr "96"
+
+#~ msgid "toolBar"
+#~ msgstr "Barra de ferramentas"
+
+#~ msgid "Color"
+#~ msgstr "Cor"
+
+#~ msgid "Go To..."
+#~ msgstr "Ir para..."
+
+#~ msgid ""
+#~ "Enter a search term and press Enter. <a href=\"http://userbase.kde.org/"
+#~ "Marble/Search\">Details...</a>"
+#~ msgstr ""
+#~ "Digite o termo a pesquisar e pressione Enter. <a href=\"http://userbase."
+#~ "kde.org/Marble/Search\">Detalhes...</a>"
+
+#~ msgid "Browse"
+#~ msgstr "Escolher"
+
+#~ msgid "Search"
+#~ msgstr "Pesquisar"
+
+#~ msgid "Select a geographic region"
+#~ msgstr "Selecione uma região geográfica"
+
+#~ msgid "Northern Latitude"
+#~ msgstr "Latitude a Norte"
+
+#~ msgid "°"
+#~ msgstr "°"
+
+#~ msgid "&N"
+#~ msgstr "&N"
+
+#~ msgid "Western Longitude"
+#~ msgstr "Longitude a Oeste"
+
+#~ msgid "&W"
+#~ msgstr "&O"
+
+#~ msgid "Eastern Longitude"
+#~ msgstr "Longitude a Leste"
+
+#~ msgid "&E"
+#~ msgstr "&L"
+
+#~ msgid "Southern Latitude"
+#~ msgstr "Latitude a Sul"
+
+#~ msgid "&S"
+#~ msgstr "&S"
+
+#~ msgid "′"
+#~ msgstr "′"
+
+#~ msgid "″"
+#~ msgstr "″"
+
+#~ msgid "Legend"
+#~ msgstr "Legenda"
+
+#~ msgid "about:blank"
+#~ msgstr "about:blank"
+
+#~ msgid "Marble - Install Maps"
+#~ msgstr "Marble - Instalar mapas"
+
+#~ msgid "Map View"
+#~ msgstr "Visualização do mapa"
+
+#~ msgid "&Projection"
+#~ msgstr "&Projeção"
+
+#~ msgid "Globe"
+#~ msgstr "Globo"
+
+#~ msgid "Flat Map"
+#~ msgstr "Mapa plano"
+
+#~ msgid "Mercator"
+#~ msgstr "Mercator"
+
+#~ msgid "Gnomonic"
+#~ msgstr "Gnomônico"
+
+#~ msgid "Stereographic"
+#~ msgstr "Estereográfico"
+
+#~ msgid "Lambert Azimuthal Equal Area"
+#~ msgstr "Equi-área do azimute de Lambert"
+
+#~ msgid "Azimuthal Equidistant"
+#~ msgstr "Equidistância de azimute"
+
+#~ msgid "Vertical Perspective Globe"
+#~ msgstr "Globo na perspectiva vertical"
+
+#~ msgid "&Celestial Body"
+#~ msgstr "&Corpo celeste"
+
+#~ msgid "&Theme"
+#~ msgstr "&Tema"
+
+#~ msgid "Here you can choose the preferred map view from different topics."
+#~ msgstr ""
+#~ "Aqui você pode escolher a visão de mapa preferida de diferentes tópicos."
+
+#~ msgid "Marble Map Theme Creation Wizard"
+#~ msgstr "Assistente de criação de temas de mapas do Marble"
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">Welcome to the Map Creation Wizard!</span></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">We will guide you "
+#~ "through the process of creating a map theme for Marble. In the end you "
+#~ "will have your own map that you can view in Marble.</p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Please choose the "
+#~ "source that you want to use for the data of your map theme:</p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:12px; margin-bottom:12px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">Bem-vindo ao assistente de criação de mapas!</span></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Você será guiado no "
+#~ "processo de criação de um tema de mapa para o Marble. No final, você terá "
+#~ "o seu próprio mapa para visualizá-lo no Marble.</p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Por favor, escolha a "
+#~ "origem que deseja usar para os dados do tema do seu mapa:</p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:12px; margin-bottom:12px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p></body></html>"
+
+#~ msgid ""
+#~ "Connects to a server on the Internet. The map data is queried via the WMS "
+#~ "protocol."
+#~ msgstr ""
+#~ "Conecta-se a um servidor na Internet. Os dados do mapa são pesquisados "
+#~ "com o protocolo WMS."
+
+#~ msgid "Web Map Service (WMS)"
+#~ msgstr "Serviço de mapas da Web (WMS)"
+
+#~ msgid ""
+#~ "You need to provide a bitmap image of a world map that is stored on disk."
+#~ msgstr ""
+#~ "Você precisa indicar a imagem de um mapa-múndi armazenada no seu disco "
+#~ "rígido."
+
+#~ msgid "A single image showing the whole world"
+#~ msgstr "Uma única imagem que mostra o mundo inteiro"
+
+#~ msgid ""
+#~ "Connects to a server on the Internet. The map data is queried via a "
+#~ "static URL."
+#~ msgstr ""
+#~ "Conecta-se a um servidor na Internet. Os dados do mapa são consultados "
+#~ "por uma URL estática."
+
+#~ msgid "Online map providing indexed tiles (e.g. Open Street Map)"
+#~ msgstr "Mapa online que fornece padrões indexados (p.ex., Open Street Map)"
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">WMS Server</span></p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Please choose a <a href="
+#~ "\"http://en.wikipedia.org/wiki/Web_Map_Service\"><span style=\" text-"
+#~ "decoration: underline; color:#0057ae;\">WMS</span></a> server or enter a "
+#~ "custom server URL.</p></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">Servidor WMS</span></p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Escolha um servidor <a "
+#~ "href=\"http://en.wikipedia.org/wiki/Web_Map_Service\"><span style=\" text-"
+#~ "decoration: underline; color:#0057ae;\">WMS</span></a> ou digite a URL de "
+#~ "um servidor personalizado.</p></body></html>"
+
+#~ msgid "WMS Server:"
+#~ msgstr "Servidor WMS:"
+
+#~ msgid "Custom"
+#~ msgstr "Personalizado"
+
+#~ msgid "http://"
+#~ msgstr "http://"
+
+#~ msgid "Available Maps:"
+#~ msgstr "Mapas disponíveis:"
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">World Map Bitmap Image</span></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-weight:600;\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Please choose the "
+#~ "location of a world map that is stored in a single image file (JPG, PNG, "
+#~ "etc.). It needs to be provided in <a href=\"http://en.wikipedia.org/wiki/"
+#~ "Equirectangular_projection\"><span style=\" text-decoration: underline; "
+#~ "color:#0057ae;\">Equirectangular projection</span></a>, so the shape "
+#~ "should look like this (size ratio: 2:1):</p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><img src=\":/data/svg/"
+#~ "worldmap.svg\" width=\"150\" /></p></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">Imagem do mapa-múndi</span></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-weight:600;\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Escolha a localização "
+#~ "de um mapa-múndi que esteja armazenado em um único arquivo de imagem "
+#~ "(JPG, PNG, etc.). Ele precisa ser concebido em uma <a href=\"http://en."
+#~ "wikipedia.org/wiki/Equirectangular_projection\"><span style=\" text-"
+#~ "decoration: underline; color:#0057ae;\">Projeção cilíndrica equidistante</"
+#~ "span></a>, para que a forma seja parecida com isto (proporção: 2:1):</p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><img src=\":/data/svg/"
+#~ "worldmap.svg\" width=\"150\" /></p></body></html>"
+
+#~ msgid "Source Image:"
+#~ msgstr "Imagem de origem:"
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Bitstream Vera Sans'; font-"
+#~ "size:9pt; font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif'; font-weight:600;\">URL Scheme for Indexed Tiles</"
+#~ "span></p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif';\">Please enter the URL used for downloading "
+#~ "individual tiles. Use the placeholders </span><span style=\" font-"
+#~ "family:'Sans Serif'; font-style:italic;\">{x}</span><span style=\" font-"
+#~ "family:'Sans Serif';\">, </span><span style=\" font-family:'Sans Serif'; "
+#~ "font-style:italic;\">{y}</span><span style=\" font-family:'Sans Serif';"
+#~ "\">, and </span><span style=\" font-family:'Sans Serif'; font-style:"
+#~ "italic;\">{zoomLevel}</span><span style=\" font-family:'Sans Serif';\"> "
+#~ "to reference a tile from the index.</span></p></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Bitstream Vera Sans'; font-"
+#~ "size:9pt; font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif'; font-weight:600;\">Esquema de URLs para os padrões "
+#~ "indexados</span></p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif';\">Indique a URL usada para baixar os padrões "
+#~ "individuais. Use os espaços reservados </span><span style=\" font-"
+#~ "family:'Sans Serif'; font-style:italic;\">{x}</span><span style=\" font-"
+#~ "family:'Sans Serif';\">, </span><span style=\" font-family:'Sans Serif'; "
+#~ "font-style:italic;\">{y}</span><span style=\" font-family:'Sans Serif';"
+#~ "\">, e </span><span style=\" font-family:'Sans Serif'; font-style:italic;"
+#~ "\">{zoomLevel}</span><span style=\" font-family:'Sans Serif';\"> para "
+#~ "fazer referência a um padrão do índice.</span></p></body></html>"
+
+#~ msgid "URL Scheme:"
+#~ msgstr "Esquema de URLs:"
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Bitstream Vera Sans'; font-"
+#~ "size:9pt; font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif'; font-weight:600;\">General Information</span></p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif';\">Please specify a title, a name and an icon for "
+#~ "your new map. Add a description to let users know what your map is about. "
+#~ "</span></p></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Bitstream Vera Sans'; font-"
+#~ "size:9pt; font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif'; font-weight:600;\">Informação geral</span></p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif';\">Indique um título, um nome e um ícone para o seu "
+#~ "novo mapa. Adicione uma descrição para que os usuários saibam para que "
+#~ "serve o seu mapa. </span></p></body></html>"
+
+#~ msgid "Map Title:"
+#~ msgstr "Título do mapa:"
+
+#~ msgid "A short concise name for your map theme."
+#~ msgstr "Um nome curto e conciso para o seu tema de mapas."
+
+#~ msgid "Map Name:"
+#~ msgstr "Nome do mapa:"
+
+#~ msgid "The lowercase map theme id."
+#~ msgstr "O ID do tema de mapa em minúsculas."
+
+#~ msgid "The folder name of your new theme."
+#~ msgstr "O nome da pasta do seu novo tema."
+
+#~ msgid "Description:"
+#~ msgstr "Descrição:"
+
+#~ msgid ""
+#~ "A short description of your map theme. Here you can provide information "
+#~ "about the purpose, origin, copyright and license of the data used in your "
+#~ "map theme."
+#~ msgstr ""
+#~ "Uma pequena descrição do seu tema de mapa. Aqui você pode fornecer "
+#~ "informações sobre os seus objetivos, origem, direitos de cópia e licença "
+#~ "dos dados usados no seu tema de mapa."
+
+#~ msgid "It will appear in a tool tip and may contain HTML formatting."
+#~ msgstr "Ela aparecerá em uma dica e poderá conter dados em HTML."
+
+#~ msgid "Preview Image:"
+#~ msgstr "Visualização da imagem:"
+
+#~ msgid "preview image"
+#~ msgstr "visualização da imagem"
+
+#~ msgid "Change..."
+#~ msgstr "Alterar..."
+
+#~ msgid "Legend Image:"
+#~ msgstr "Imagem da legenda:"
+
+#~ msgid "Places of Interest"
+#~ msgstr "Lugares de interesse"
+
+#~ msgid "Populated Places"
+#~ msgstr "Lugares populosos"
+
+#~ msgid "Terrain"
+#~ msgstr "Terreno"
+
+#~ msgid "Coordinate Grid"
+#~ msgstr "Grade de coordenadas"
+
+#~ msgid "Border Lines"
+#~ msgstr "Linhas de fronteiras"
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">Summary</span></p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Congratulations! You "
+#~ "have entered all the data that is necessary to create your map theme. "
+#~ "Check the summary below carefully and press the \"Finish\" button to "
+#~ "create the theme. </p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Please consider "
+#~ "contributing the map theme back to the Marble community if the license "
+#~ "and the terms of use allow for it.</p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:12px; margin-bottom:12px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">Resumo</span></p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Parabéns! Você "
+#~ "introduziu todos os dados necessários para criar o seu tema de mapas. "
+#~ "Veja com cuidado o resumo abaixo e clique no botão \"Concluir\" para "
+#~ "criar o tema. </p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Por favor, considere "
+#~ "contribuir com a comunidade do Marble compartilhando o tema, caso a "
+#~ "licença e os termos de uso permitam.</p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:12px; margin-bottom:12px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p></body></html>"
+
+#~ msgid "Map name goes here."
+#~ msgstr "O nome do mapa aparece aqui."
+
+#~ msgid "Map Theme:"
+#~ msgstr "Tema do mapa:"
+
+#~ msgid "Map theme goes here."
+#~ msgstr "O tema de mapa aparece aqui."
+
+#~ msgid "Thumbnail image goes here."
+#~ msgstr "A imagem de miniatura aparece aqui."
+
+#~ msgid "Preview Map"
+#~ msgstr "Visualização do mapa"
+
+#~ msgid "About Marble"
+#~ msgstr "Sobre o Marble"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">Marble Virtual Globe</span></p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">Globo Virtual Marble</span></p></body></html>"
+
+#~ msgid "Version Unknown"
+#~ msgstr "Versão desconhecida"
+
+#~ msgid "&About"
+#~ msgstr "&Sobre"
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:10pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-size:9pt;\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "size:9pt;\">(c) 2007, The Marble Project</span></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-size:9pt; font-style:italic;\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "size:9pt;\">http://edu.kde.org/marble</span></p></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:10pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-size:9pt;\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "size:9pt;\">(c) 2007, O projeto Marble</span></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-size:9pt; font-style:italic;\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "size:9pt;\">http://edu.kde.org/marble</span></p></body></html>"
+
+#~ msgid "A&uthors"
+#~ msgstr "A&utores"
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:10pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-size:9pt;\"></p></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:10pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-size:9pt;\"></p></body></html>"
+
+#~ msgid "&Data"
+#~ msgstr "&Dados"
+
+#~ msgid "&License Agreement"
+#~ msgstr "Contrato de &licença"
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:10pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-family:'MS Shell Dlg 2'; font-size:8pt;\"></p></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:10pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-family:'MS Shell Dlg 2'; font-size:8pt;\"></p></body></html>"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">There are two caches "
+#~ "being used for Marble: The physical memory which is needed to keep map "
+#~ "data in the computer's memory. Increasing the value will make the "
+#~ "application more responsive. The hard disc memory cache is used by "
+#~ "download contents from the Internet (e.g. Wikipedia data or map data). "
+#~ "Decrease this value if you want to save space on the hard disc and if "
+#~ "high usage of the Internet is not an issue. </p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Existem dois caches em "
+#~ "uso pelo Marble: A memória física, necessária para manter os dados do "
+#~ "mapa na memória do computador. Aumentar o valor fará o aplicativo ter uma "
+#~ "melhor velocidade de resposta. A memória cache do disco rígido é usada "
+#~ "pelos downloads de conteúdos da Internet (ex: dados da Wikipédia ou dados "
+#~ "do mapa). Diminua este valor se quiser salvar espaço em disco e se um "
+#~ "alto uso da Internet não seja um problema. </p></body></html>"
+
+#~ msgid "C&ache"
+#~ msgstr "C&ache"
+
+#~ msgid "&Physical memory:"
+#~ msgstr "Memória &física:"
+
+#~ msgid " MB"
+#~ msgstr " MB"
+
+#~ msgid "C&lear"
+#~ msgstr "&Limpar"
+
+#~ msgid "&Hard disc:"
+#~ msgstr "Disco &rígido:"
+
+#~ msgid "Unlimited"
+#~ msgstr "Sem limite"
+
+#~ msgid "Cl&ear"
+#~ msgstr "Lim&par"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Proxy settings for your "
+#~ "local intranet. Please leave empty if there is no proxy.</p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Configuração do proxy "
+#~ "para a sua intranet local. Deixe em branco se não existir um proxy.</p></"
+#~ "body></html>"
+
+#~ msgid "&Proxy"
+#~ msgstr "&Proxy"
+
+#~ msgid "&Proxy:"
+#~ msgstr "&Proxy:"
+
+#~ msgid "P&ort:"
+#~ msgstr "P&orta:"
+
+#~ msgid "Proxy type:"
+#~ msgstr "Tipo de proxy:"
+
+#~ msgid "Http"
+#~ msgstr "Http"
+
+#~ msgid "Socks5"
+#~ msgstr "Socks5"
+
+#~ msgid "Requires authentication"
+#~ msgstr "Necessita de autenticação"
+
+#~ msgid "U&sername:"
+#~ msgstr "Nome de &usuário:"
+
+#~ msgid "&Password:"
+#~ msgstr "&Senha:"
+
+#~ msgid "Enable synchronization"
+#~ msgstr "Ativar a sincronização"
+
+#~ msgid ""
+#~ "Allows you to store routes in owncloud. Each route must be uploaded/"
+#~ "downloaded manually."
+#~ msgstr ""
+#~ "Permite-lhe armazenar as rotas no Owncloud. Cada rota deve ser enviada/"
+#~ "recebida manualmente."
+
+#~ msgid "Enable route synchronization"
+#~ msgstr "Ativar a sincronização de rotas"
+
+#~ msgid "Automatically sync all bookmarks to the server."
+#~ msgstr "Sincroniza automaticamente todos os favoritos com o servidor."
+
+#~ msgid "Enable bookmark synchronization"
+#~ msgstr "Ativar a sincronização de favoritos"
+
+#~ msgid "Sync now"
+#~ msgstr "Sincronizar agora"
+
+#~ msgid "Credentials"
+#~ msgstr "Credenciais"
+
+#~ msgid "Server:"
+#~ msgstr "Servidor:"
+
+#~ msgid "Remote server URL, e.g. myserver.com/owncloud"
+#~ msgstr "URL do servidor remoto, p.ex., meuservidor.com/owncloud"
+
+#~ msgid "Username:"
+#~ msgstr "Nome de usuário:"
+
+#~ msgid "Password:"
+#~ msgstr "Senha:"
+
+#~ msgid "Test Login"
+#~ msgstr "Testar autenticação"
+
+#~ msgid "Marble Cache Settings"
+#~ msgstr "Configurações do cache do Marble"
+
+#~ msgid "Dragging and Animation"
+#~ msgstr "Arrasto e animação"
+
+#~ msgid "&Drag location:"
+#~ msgstr "Arras&tar lugar:"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">While dragging the "
+#~ "mouse there are two standard behaviours when dealing with a virtual globe:"
+#~ "</p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">The location below "
+#~ "mouse pointer will follow the cursor exactly: As a result e.g. the north "
+#~ "pole will not stay at the top which can lead to confusion. By default "
+#~ "Marble makes sure that north is always up which results in a dragging "
+#~ "behaviour where the location below the mouse pointer slightly \"detaches"
+#~ "\" from the cursor. </p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Enquanto estiver "
+#~ "arrastando o mouse existem dois comportamentos padrão quando se tratar de "
+#~ "um globo virtual:</p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">O lugar abaixo do "
+#~ "ponteiro do mouse seguirá o cursor exatamente, como resultado por exemplo "
+#~ "o Polo Norte não ficará mais no topo o que poderá confundir. Por padrão, "
+#~ "o Marble garante que o norte esteja sempre no topo o que resulta num "
+#~ "comportamento que quando se estiver arrastando, o lugar abaixo do "
+#~ "ponteiro do mouse é levemente \"deslocado\" do cursor. </p></body></html>"
+
+#~ msgid "Keep Planet Axis Vertically"
+#~ msgstr "Manter o eixo do planeta verticalmente"
+
+#~ msgid "Follow Mouse Pointer"
+#~ msgstr "Seguir o ponteiro do mouse"
+
+#~ msgid "Use kinetic spinning when dragging the map"
+#~ msgstr "Usar a rotação cinética ao arrastar o mapa"
+
+#~ msgid "&Inertial Globe Rotation"
+#~ msgstr "Rotação de &inércia do globo"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">When searching for a "
+#~ "location Marble can either move instantly to the new location or it can "
+#~ "show a travel animation from the previous place to the new place.</p></"
+#~ "body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Quando pesquisar por um "
+#~ "lugar o Marble pode ou mover-se instantaneamente até o novo lugar ou "
+#~ "exibir uma animação da viagem do último lugar até o novo.</p></body></"
+#~ "html>"
+
+#~ msgid "&Animate voyage to the target"
+#~ msgstr "&Animar a viagem até o destino"
+
+#~ msgid "&On startup:"
+#~ msgstr "Na &inicialização:"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">By default Marble will "
+#~ "display the home location immediately after the application has started. "
+#~ "As an alternative it can also show the last position that was active when "
+#~ "the user left the application. </p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Por padrão, o Marble "
+#~ "exibirá a localização inicial imediatamente após o aplicativo ser "
+#~ "iniciado. Como uma alternativa ele também pode exibir a última posição "
+#~ "que estava ativa quando o usuário saiu do aplicativo. </p></body></html>"
+
+#~ msgid "Show Home Location"
+#~ msgstr "Mostrar a localização inicial"
+
+#~ msgid "Return to Last Location Visited"
+#~ msgstr "Retornar ao último lugar visitado"
+
+#~ msgid "&External Editor:"
+#~ msgstr "&Editor externo:"
+
+#~ msgid ""
+#~ "<p>The application that is launched to edit maps. Potlatch (default) "
+#~ "requires a web browser with flash support to be installed. When selecting "
+#~ "josm or merkaartor, make sure that the respective application is "
+#~ "installed.</p>"
+#~ msgstr ""
+#~ "<p>O aplicativo que foi iniciado para editar mapas. O Potlatch (padrão) "
+#~ "requer um navegador web com suporte a flash para ser instalado. Ao "
+#~ "selecionar josm ou merkaartor, certifique-se de que o respectivo "
+#~ "aplicativo está instalado</p>"
+
+#~ msgid "Always ask"
+#~ msgstr "Sempre perguntar"
+
+#~ msgid "Potlatch (Web browser)"
+#~ msgstr "Potlatch (Navegador Web)"
+
+#~ msgid "Up"
+#~ msgstr "Para cima"
+
+#~ msgid "Tilts the globe's axis towards the user."
+#~ msgstr "Incline o eixo do globo em direção ao usuário."
+
+#~ msgid "Left"
+#~ msgstr "Esquerda"
+
+#~ msgid "Rotates the globe counterclockwise around its axis."
+#~ msgstr "Rotacionar o globo em sentido anti-horário no seu eixo."
+
+#~ msgid "Reset View"
+#~ msgstr "Reiniciar visualização"
+
+#~ msgid "Click this button to restore the original zoom level and view angle."
+#~ msgstr ""
+#~ "Clique neste botão para restaurar o nível original de ampliação e o "
+#~ "ângulo de visão."
+
+#~ msgid "Home"
+#~ msgstr "Início"
+
+#~ msgid "Right"
+#~ msgstr "Direita"
+
+#~ msgid "Rotates the globe clockwise around its axis."
+#~ msgstr "Rotacionar o globo em sentido horário sobre seu eixo."
+
+#~ msgid "Down"
+#~ msgstr "Para baixo"
+
+#~ msgid "Tilts the globe's axis away from the user."
+#~ msgstr "Incline o eixo do globo para longe do usuário."
+
+#~ msgid "Zoom In"
+#~ msgstr "Ampliar"
+
+#~ msgid "Zoom in by pressing this button to see more detail."
+#~ msgstr "Amplie pressionando este botão para ver mais detalhes."
+
+#~ msgid "+"
+#~ msgstr "+"
+
+#~ msgid "Zoom Slider"
+#~ msgstr "Controle deslizante da ampliação"
+
+#~ msgid "Use this slider to adjust the zoom level of the map."
+#~ msgstr ""
+#~ "Use este controle deslizante para ajustar o nível de ampliação do mapa."
+
+#~ msgid "Zoom Out"
+#~ msgstr "Reduzir"
+
+#~ msgid "Zoom out by pressing this button to see less detail."
+#~ msgstr "Diminua pressionando este botão para ver menos detalhes."
+
+#~ msgid "-"
+#~ msgstr "-"
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'DejaVu Sans'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif';\">This is Marble's machine room for advanced users. "
+#~ "Here you can select and deselect the functionality that is provided "
+#~ "through plugins. </span></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif';\">Deselecting a plugin will remove the functionality "
+#~ "from the map, menus and toolbars. </span></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif';\">Also some of the plugins might allow for tweaking "
+#~ "their configuration a bit. </span></p></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'DejaVu Sans'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif';\">Esta é a sala de máquinas do Marble para os "
+#~ "usuários avançados. Aqui você pode selecionar e anular a seleção da "
+#~ "funcionalidade que é fornecida através dos plugins.</span></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif';\">Anulando a seleção de um plugin irá remover a "
+#~ "funcionalidade do mapa, menus e barras de ferramentas. </span></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif';\">Também, alguns dos plugins podem permitir a "
+#~ "alteração de suas configurações. </span></p></body></html>"
+
+#~ msgid "P&lugins"
+#~ msgstr "P&lugins"
+
+#~ msgid "Time Zone"
+#~ msgstr "Fuso horário"
+
+#~ msgid "UTC"
+#~ msgstr "UTC"
+
+#~ msgid "System time zone"
+#~ msgstr "Fuso horário do sistema"
+
+#~ msgid "Choose Time zone"
+#~ msgstr "Selecionar o fuso horário"
+
+#~ msgid "Universal Time Coordinated"
+#~ msgstr "Tempo universal coordenado"
+
+#~ msgid "European Central Time"
+#~ msgstr "Hora da Europa Central"
+
+#~ msgid "Eastern European Time"
+#~ msgstr "Hora da Europa Oriental"
+
+#~ msgid "Egypt Standard Time"
+#~ msgstr "Hora padrão do Egito"
+
+#~ msgid "Eastern African Time"
+#~ msgstr "Hora da África Oriental"
+
+#~ msgid "Middle East Time"
+#~ msgstr "Hora do Oriente Médio"
+
+#~ msgid "Near East Time"
+#~ msgstr "Hora Oriental"
+
+#~ msgid "Pakistan Lahore Time"
+#~ msgstr "Hora Lahore do Paquistão"
+
+#~ msgid "India Standard Time"
+#~ msgstr "Hora padrão da Índia"
+
+#~ msgid "Bangladesh Standard Time"
+#~ msgstr "Hora padrão de Bangladesh"
+
+#~ msgid "Vietnam Standard Time"
+#~ msgstr "Hora padrão do Vietnã"
+
+#~ msgid "China Taiwan Time"
+#~ msgstr "Hora de Formosa"
+
+#~ msgid "Japan Standard Time"
+#~ msgstr "Hora padrão do Japão"
+
+#~ msgid "Australia Central Time"
+#~ msgstr "Hora da Austrália Central"
+
+#~ msgid "Australia Eastern Time"
+#~ msgstr "Hora da Austrália Oriental"
+
+#~ msgid "Solomon Standard Time"
+#~ msgstr "Hora padrão das Ilhas Salomão"
+
+#~ msgid "New Zealand Standard Time"
+#~ msgstr "Hora padrão da Nova Zelândia"
+
+#~ msgid "Midway Islands Time"
+#~ msgstr "Hora das Ilhas Midway"
+
+#~ msgid "Hawaii Standard Time"
+#~ msgstr "Hora padrão do Havaí"
+
+#~ msgid "Alaska Standard Time"
+#~ msgstr "Hora padrão do Alasca"
+
+#~ msgid "Pacific Standard Time"
+#~ msgstr "Hora padrão do Pacífico"
+
+#~ msgid "Phoenix Standard Time"
+#~ msgstr "Hora padrão de Phoenix"
+
+#~ msgid "Mountain Standard Time"
+#~ msgstr "Hora padrão da Montanha"
+
+#~ msgid "Central Standard Time"
+#~ msgstr "Hora padrão Central"
+
+#~ msgid "Eastern Standard Time"
+#~ msgstr "Hora padrão Oriental"
+
+#~ msgid "Indiana Eastern Standard Time"
+#~ msgstr "Hora padrão Oriental da Indiana"
+
+#~ msgid "Puerto Rico and US Virgin Islands Time"
+#~ msgstr "Hora das Ilhas Virgens e Porto Rico"
+
+#~ msgid "Canada Newfoundland Time"
+#~ msgstr "Hora de Terra Nova e Canadá"
+
+#~ msgid "Argentina Standard Time"
+#~ msgstr "Hora padrão da Argentina"
+
+#~ msgid "Brazil Eastern Time"
+#~ msgstr "Hora do leste do Brasil"
+
+#~ msgid "Central African Time"
+#~ msgstr "Hora da África Central"
+
+#~ msgid "When Marble starts"
+#~ msgstr "Ao iniciar o Marble"
+
+#~ msgid "Load system time"
+#~ msgstr "Carregar a hora do sistema"
+
+#~ msgid "Load last session time"
+#~ msgstr "Carregar a hora da última sessão"
+
+#~ msgid "&Units"
+#~ msgstr "&Unidades"
+
+#~ msgid "&Distance:"
+#~ msgstr "&Distância:"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">The unit that gets used "
+#~ "to measure altitude, lengths and distances (e.g. km, mi, ft).</p></body></"
+#~ "html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">A unidade usada para "
+#~ "medir a altitude, comprimentos e distâncias (ex:. km, milhas, pés).</p></"
+#~ "body></html>"
+
+#~ msgid "Kilometer, Meter"
+#~ msgstr "Quilômetros, metros"
+
+#~ msgid "Miles, Feet"
+#~ msgstr "Milhas, pés"
+
+#~ msgid "Nautical miles, Knots"
+#~ msgstr "Milhas náuticas, nós"
+
+#~ msgid "An&gle:"
+#~ msgstr "Ân&gulo:"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Specifies the notation "
+#~ "of angles in coordinates: By default the Degree-Minute-Second notation (e."
+#~ "g. 54°30'00\" ) gets used. As an alternative you can choose decimal "
+#~ "degrees (e.g. 54.5°).</p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Especifica a notação "
+#~ "dos ângulos em coordenadas: Por padrão, a notação graus, minutos e "
+#~ "segundos (ex: 54°30'00\" ) é utilizada. Como alternativa você pode "
+#~ "escolher graus decimais (ex: 54.5°).</p></body></html>"
+
+#~ msgid "Degree (DMS)"
+#~ msgstr "Graus (graus, minutos e segundos)"
+
+#~ msgid "Degree (Decimal)"
+#~ msgstr "Graus (decimal)"
+
+#~ msgid "Universal Transverse Mercator (UTM)"
+#~ msgstr "Universal Transverse Mercator (UTM)"
+
+#~ msgid "Map &Quality"
+#~ msgstr "&Qualidade do mapa"
+
+#~ msgid "&Still image:"
+#~ msgstr "&Imagem estática:"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Specifies the map "
+#~ "quality that gets displayed while there is no user input. Usually this "
+#~ "allows for high map quality as speed is no concern.</p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Especifica a qualidade "
+#~ "do mapa que é exibido enquanto não existe interação do usuário. "
+#~ "Geralmente isto permite uma alta qualidade do mapa se a velocidade não "
+#~ "for algo relevante.</p></body></html>"
+
+#~ msgid "Outline Quality"
+#~ msgstr "Qualidade de rascunho"
+
+#~ msgid "Low Quality"
+#~ msgstr "Baixa qualidade"
+
+#~ msgid "Normal"
+#~ msgstr "Normal"
+
+#~ msgid "High Quality"
+#~ msgstr "Alta qualidade"
+
+#~ msgid "Print Quality"
+#~ msgstr "Qualidade de impressão"
+
+#~ msgid "During &animations:"
+#~ msgstr "Durante &animações:"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Specifies the map "
+#~ "quality that gets displayed during map animations (e.g. while dragging "
+#~ "the globe). </p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Especially on slow "
+#~ "machines it is advisable to set this option to \"low quality\" as this "
+#~ "will give better speed.</p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Especifica a qualidade "
+#~ "do mapa que será exibida durante as animações do mapa (ex: enquanto se "
+#~ "arrasta o globo). </p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Principalmente em "
+#~ "máquinas lentas é recomendável ajustar esta opção para \"Baixa qualidade"
+#~ "\", uma vez que isto dará uma melhor velocidade.</p></body></html>"
+
+#~ msgid "G&raphics system:"
+#~ msgstr "Sistema g&ráfico:"
+
+#~ msgid ""
+#~ "Specifies the graphics system that Qt uses to draw the map.\n"
+#~ "Changing this setting might be a good idea if there are performance "
+#~ "issues with the system's graphics drivers."
+#~ msgstr ""
+#~ "Especifica o sistema gráfico que o Qt irá usar para desenhar o mapa.\n"
+#~ "Alterando esta configuração pode ser uma boa ideia se houver problemas de "
+#~ "performance com os drivers do sistema gráfico."
+
+#~ msgid "Raster (Software rendering)"
+#~ msgstr "Rasterizado (renderização por software)"
+
+#~ msgid "OpenGL"
+#~ msgstr "OpenGL"
+
+#~ msgid "&Text Labels"
+#~ msgstr "Etiquetas de &texto"
+
+#~ msgid "&Place names:"
+#~ msgstr "Nomes de &lugares:"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Places often have "
+#~ "different names in different languages. The label on the map can show the "
+#~ "name in the user's language. Alternatively it can display the name in the "
+#~ "official language and glyphs of that place. </p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Os lugares geralmente "
+#~ "tem nomes diferentes nos diferentes idiomas. A etiqueta no mapa pode "
+#~ "exibir o nome no idioma do usuário. Alternativamente, ele pode exibir o "
+#~ "nome no idioma oficial e glifos daquele lugar. </p></body></html>"
+
+#~ msgid "Custom & Native Language"
+#~ msgstr "Idioma nativo e personalizado"
+
+#~ msgid "Custom Language"
+#~ msgstr "Idioma personalizado"
+
+#~ msgid "Native Language"
+#~ msgstr "Idioma nativo"
+
+#~ msgid "Default map &font:"
+#~ msgstr "&Fonte padrão do mapa:"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">The default font that "
+#~ "gets used on the map.</p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">A fonte padrão usada no "
+#~ "mapa.</p></body></html>"
+
+#~ msgid "Movie Recording - Marble"
+#~ msgstr "Gravando vídeo - Marble"
+
+#~ msgid "Destination video"
+#~ msgstr "Vídeo de destino"
+
+#~ msgid "Open..."
+#~ msgstr "Abrir..."
+
+#~ msgid "FPS (frames per second)"
+#~ msgstr "FPS (frames por segundo)"
+
+#~ msgid "Cancel"
+#~ msgstr "Cancelar"
+
+#~ msgid "Start"
+#~ msgstr "Iniciar"
+
+#~ msgid "New Bookmark Folder - Marble"
+#~ msgstr "Nova pasta de favoritos - Marble"
+
+#~ msgid "&Folder Name"
+#~ msgstr "&Nome da pasta"
+
+#~ msgid "Current Relations"
+#~ msgstr "Relações atuais"
+
+#~ msgid "Name"
+#~ msgstr "Nome"
+
+#~ msgid "Type"
+#~ msgstr "Tipo"
+
+#~ msgid "Role"
+#~ msgstr "Regra"
+
+#~ msgid "Add Relation"
+#~ msgstr "Adicionar relação"
+
+#~ msgid "Current Tags"
+#~ msgstr "Etiquetas atuais"
+
+#~ msgid "Key"
+#~ msgstr "Chave"
+
+#~ msgid "Value"
+#~ msgstr "Valor"
+
+#~ msgid "<<"
+#~ msgstr "<<"
+
+#~ msgid ">>"
+#~ msgstr ">>"
+
+#~ msgid "Related Tags"
+#~ msgstr "Etiquetas relacionadas"
+
+#~ msgid "Browse..."
+#~ msgstr "Escolher..."
+
+#~ msgid "Icon Link:"
+#~ msgstr "Vincular ao ícone:"
+
+#~ msgid "ID:"
+#~ msgstr "ID:"
+
+#~ msgid "Target ID:"
+#~ msgstr "ID do destino:"
+
+#~ msgid "Position:"
+#~ msgstr "Posição:"
+
+#~ msgid "Marble"
+#~ msgstr "Marble"
+
+#~ msgid "Map"
+#~ msgstr "Mapa"
+
+#~ msgid "Visible Globe Region"
+#~ msgstr "Região visível do globo"
+
+#~ msgid "Outer Space"
+#~ msgstr "Espaço exterior"
+
+#~ msgid "Route"
+#~ msgstr "Rota"
+
+#~ msgid "Route Summary"
+#~ msgstr "Resumo da rota"
+
+#~ msgid "Driving Instructions"
+#~ msgstr "Instruções de condução"
+
+#~ msgid "Footer"
+#~ msgstr "Rodapé"
+
+#~ msgid "Configure Routing Profile"
+#~ msgstr "Configurar perfil do roteamento"
+
+#~ msgid "Active Route Services"
+#~ msgstr "Serviços de rota ativos"
+
+#~ msgid "Service Settings"
+#~ msgstr "Configurações do serviço"
+
+#~ msgid "No configuration available"
+#~ msgstr "Nenhuma configuração disponível"
+
+#~ msgid "Select Service to Configure"
+#~ msgstr "Selecione o serviço a configurar"
+
+#~ msgid "Configure"
+#~ msgstr "Configurar"
+
+#~ msgid "&Add"
+#~ msgstr "&Adicionar"
+
+#~ msgid "&Configure"
+#~ msgstr "&Configurar"
+
+#~ msgid "&Remove"
+#~ msgstr "&Remover"
+
+#~ msgid "Move &Up"
+#~ msgstr "Mover para &cima"
+
+#~ msgid "Move &Down"
+#~ msgstr "Mover para &baixo"
+
+#~ msgid "Car (fastest)"
+#~ msgstr "Carro (mais rápido)"
+
+#~ msgid "Car (shortest)"
+#~ msgstr "Carro (mais curto)"
+
+#~ msgid "Bicycle"
+#~ msgstr "Bicicleta"
+
+#~ msgid "Pedestrian"
+#~ msgstr "Pedestre"
+
+#~ msgid "No results."
+#~ msgstr "Nenhum resultado."
+
+#~ msgid "Show Details"
+#~ msgstr "Mostrar detalhes"
+
+#~ msgid "Choose alternative routes"
+#~ msgstr "Escolher rotas alternativas"
+
+#~ msgid "Sun Control"
+#~ msgstr "Controle do Sol"
+
+#~ msgid "Sun Shading"
+#~ msgstr "Sombra do Sol"
+
+#~ msgid "Shadow"
+#~ msgstr "Sombra"
+
+#~ msgid "Night Map"
+#~ msgstr "Mapa noturno"
+
+#~ msgid "Subsolar Point"
+#~ msgstr "Ponto subsolar"
+
+#~ msgid ""
+#~ "Display <a href=\"http://en.wikipedia.org/wiki/Subsolar_point\">Subsolar "
+#~ "Point</a> icon"
+#~ msgstr ""
+#~ "Mostrar o ícone do <a href=\"http://en.wikipedia.org/wiki/Subsolar_point"
+#~ "\">Ponto subsolar</a>"
+
+#~ msgid ""
+#~ "<b>Lock</b> map view to <a href=\"http://en.wikipedia.org/wiki/"
+#~ "Subsolar_point\">Subsolar Point</a>."
+#~ msgstr ""
+#~ "<b>Bloquear</b> a visualização do mapa em um <a href=\"http://en."
+#~ "wikipedia.org/wiki/Subsolar_point\">Ponto subsolar</a>."
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">Attention: Panning the map is disabled now! </span></p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Uncheck the \"Lock map "
+#~ "view to Subsolar Point\" option to allow for viewing a different place on "
+#~ "the globe again.</p></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">Atenção: Agora o deslocamento do mapa está desabilitado! </"
+#~ "span></p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Desmarque a opção "
+#~ "\"Bloquear a visualização do mapa no ponto subsolar\" para permitir ver "
+#~ "um local diferente no globo novamente.</p></body></html>"
+
+#~ msgid "OK"
+#~ msgstr "OK"
+
+#~ msgid "Apply"
+#~ msgstr "Aplicar"
+
+#~ msgid "Creating Map"
+#~ msgstr "Criando o mapa"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /></head><body style="
+#~ "\" white-space: pre-wrap; font-family:Sans Serif; font-size:9pt; font-"
+#~ "weight:400; font-style:normal; text-decoration:none;\"><p style=\" margin-"
+#~ "top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-"
+#~ "indent:0; text-indent:0px;\"><span style=\" font-weight:600;\">Satellite "
+#~ "View</span></p><p style=\" margin-top:0px; margin-bottom:0px; margin-"
+#~ "left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Earth "
+#~ "as seen from Space. The map is based on NASA's beautiful \"Blue Marble "
+#~ "Next Generation\" pictures. Credits: NASA's Earth Observatory</p></body></"
+#~ "html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /></head><body style="
+#~ "\" white-space: pre-wrap; font-family:Sans Serif; font-size:9pt; font-"
+#~ "weight:400; font-style:normal; text-decoration:none;\"><p style=\" margin-"
+#~ "top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-"
+#~ "indent:0; text-indent:0px;\"><span style=\" font-weight:600;\">Visão de "
+#~ "satélite</span></p><p style=\" margin-top:0px; margin-bottom:0px; margin-"
+#~ "left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">A "
+#~ "Terra como vista do espaço. O mapa é baseado nas belas imagens \"Blue "
+#~ "Marble Next Generation\" da NASA. Créditos: Observatório da Terra da "
+#~ "NASA</p></body></html>"
+
+#~ msgid ""
+#~ "Marble needs to create this map. This only needs to be done once and may "
+#~ "take a few seconds."
+#~ msgstr ""
+#~ "O Marble necessita criar este mapa. Isto somente precisa ser feito uma "
+#~ "vez e leva alguns segundos."
+
+#~ msgid "&Cancel"
+#~ msgstr "&Cancelar"
+
+#~ msgid "Zoom"
+#~ msgstr "Ampliar"
+
+#~ msgid "&Tile Level Range:"
+#~ msgstr "In&tervalo de níveis dos padrões:"
+
+#~ msgid "Minimum Tile Level"
+#~ msgstr "Nível mínimo dos padrões"
+
+#~ msgid "to"
+#~ msgstr "até"
+
+#~ msgid "Maximum Tile Level"
+#~ msgstr "Nível máximo dos padrões"
+
+#~ msgid "Time Control"
+#~ msgstr "Controle da hora"
+
+#~ msgid "Time"
+#~ msgstr "Hora"
+
+#~ msgid "New Date Time      :"
+#~ msgstr "Nova data/hora:"
+
+#~ msgid "Refresh Interval     :"
+#~ msgstr "Intervalo de atualização:"
+
+#~ msgid " seconds"
+#~ msgstr " segundos"
+
+#~ msgid "Now"
+#~ msgstr "Agora"
+
+#~ msgid "Current Date Time :"
+#~ msgstr "Data/hora atual:"
+
+#~ msgid "Time Speed"
+#~ msgstr "Velocidade do tempo"
+
+#~ msgid "Close"
+#~ msgstr "Fechar"
+
+#~ msgid "Tour"
+#~ msgstr "Viagem"
+
+#~ msgid "--:--"
+#~ msgstr "--:--"
+
+#~ msgid "Move up"
+#~ msgstr "Mover para cima"
+
+#~ msgid "Move down"
+#~ msgstr "Mover para baixo"
+
+#~ msgid "New Tour"
+#~ msgstr "Nova viagem"
+
+#~ msgid "Save Tour"
+#~ msgstr "Salvar viagem"
+
+#~ msgid "Save Tour As"
+#~ msgstr "Salvar viagem como"
+
+#~ msgid "Open Tour"
+#~ msgstr "Abrir viagem"
+
+#~ msgid "Play"
+#~ msgstr "Reproduzir"
+
+#~ msgid "Begins touring"
+#~ msgstr "Inicia a viagem"
+
+#~ msgid "Stop"
+#~ msgstr "Parar"
+
+#~ msgid "Stops touring (playing again will start tour from the start)"
+#~ msgstr ""
+#~ "Para o roteamento (se reproduzir novamente a viagem começará do início)"
+
+#~ msgid "Converts the loaded tour into a movie"
+#~ msgstr "Converte a viagem carregado em um vídeo"
+
+#~ msgid "Worldclock Applet Configuration"
+#~ msgstr "Miniaplicativo de configuração do relógio mundial"
+
+#~ msgid "Map Display"
+#~ msgstr "Exibir mapa"
+
+#~ msgid "Projection:"
+#~ msgstr "Projeção:"
+
+#~ msgid "Equirectangular"
+#~ msgstr "Cilíndrica equidistante"
+
+#~ msgid "Center map on longitude:"
+#~ msgstr "Centralizar o mapa na longitude:"
+
+#~ msgid "Center map on daylight"
+#~ msgstr "Centralizar o mapa na luz do dia"
+
+#~ msgid "Show date"
+#~ msgstr "Mostrar data"
+
+#~ msgid "Time Zones"
+#~ msgstr "Fusos horários"
+
+#~ msgid "Use custom timezone selection"
+#~ msgstr "Usar a seleção personalizada de fuso horário"
+
+#~ msgid "Edit ground overlay"
+#~ msgstr "Editar a camada do solo"
+
+#~ msgid "Coordinates"
+#~ msgstr "Coordenadas"
+
+#~ msgid "N"
+#~ msgstr "N"
+
+#~ msgid "W"
+#~ msgstr "O"
+
+#~ msgid "E"
+#~ msgstr "L"
+
+#~ msgid "S"
+#~ msgstr "S"
+
+#~ msgid "Rotation"
+#~ msgstr "Rotação"
+
+#~ msgid "Add polygon"
+#~ msgstr "Adicionar polígono"
+
+#~ msgid "Lines"
+#~ msgstr "Linhas"
+
+#~ msgid "Width:"
+#~ msgstr "Largura:"
+
+#~ msgid "Area"
+#~ msgstr "Área"
+
+#~ msgid "Filled"
+#~ msgstr "Preenchido"
+
+#~ msgid "Not Filled"
+#~ msgstr "Não preenchido"
+
+#~ msgid "Nodes"
+#~ msgstr "Nós"
+
+#~ msgid "Add path"
+#~ msgstr "Adicionar caminho"
+
+#~ msgid "Display"
+#~ msgstr "Exibição"
+
+#~ msgid "Fade data older than (minutes)"
+#~ msgstr "Desaparecer dados anteriores a (minutos)"
+
+#~ msgid "Do not show data older than (minutes)"
+#~ msgstr "Não mostrar dados anteriores a (minutos)"
+
+#~ msgid "Internet"
+#~ msgstr "Internet"
+
+#~ msgid "APRS Data Sources"
+#~ msgstr "Fontes de dados APRS"
+
+#~ msgid "Should information be gathered from the Internet APRS data source?"
+#~ msgstr "A informação deve ser obtida da fonte de dados APRS na Internet?"
+
+#~ msgid "Collect data from an APRS Internet server"
+#~ msgstr "Obter dados de um servidor APRS na Internet"
+
+#~ msgid "Server"
+#~ msgstr "Servidor"
+
+#~ msgid "rotate.aprs.net"
+#~ msgstr "rotate.aprs.net"
+
+#~ msgid "Port"
+#~ msgstr "Porta"
+
+#~ msgid "10253"
+#~ msgstr "10253"
+
+#~ msgid "Dump TCP/IP records to the debug stream"
+#~ msgstr "Mostrar registros do TCP/IP na sequência de depuração"
+
+#~ msgid "Device"
+#~ msgstr "Dispositivo"
+
+#~ msgid "TNC Terminal Port"
+#~ msgstr "Porta do terminal TNC"
+
+#~ msgid "Should information be gathered from a serial port?"
+#~ msgstr "A informação deverá ser obtida de uma porta serial?"
+
+#~ msgid "Collect data from a serial TNC (In Text Mode)"
+#~ msgstr "Obter dados de um TNC serial (em modo texto)"
+
+#~ msgid "TTY"
+#~ msgstr "TTY"
+
+#~ msgid "/dev/ttyUSB0"
+#~ msgstr "/dev/ttyUSB0"
+
+#~ msgid "Dump TTY records to the debug stream"
+#~ msgstr "Mostrar registros do TTY na sequência de depuração"
+
+#~ msgid "File"
+#~ msgstr "Arquivo"
+
+#~ msgid "Should information be gathered from a file?"
+#~ msgstr "A informação deve ser obtida a partir de um arquivo?"
+
+#~ msgid "Collect data from a file"
+#~ msgstr "Obter os dados de um arquivo"
+
+#~ msgid "Dump file records to the debug stream"
+#~ msgstr "Mostrar registros do arquivo na sequência de depuração"
+
+#~ msgid "Configure Compass Plugin"
+#~ msgstr "Configurar o plugin de bússola"
+
+#~ msgid "Theme"
+#~ msgstr "Tema"
+
+#~ msgid "Default"
+#~ msgstr "Padrão"
+
+#~ msgid "Arrows"
+#~ msgstr "Setas"
+
+#~ msgid "Atom"
+#~ msgstr "Átomo"
+
+#~ msgid "Magnet"
+#~ msgstr "Magnético"
+
+#~ msgid "Configure Crosshairs Plugin"
+#~ msgstr "Configurar o plugin de mira"
+
+#~ msgid "Gun 1"
+#~ msgstr "Arma 1"
+
+#~ msgid "Gun 2"
+#~ msgstr "Arma 2"
+
+#~ msgid "Circled"
+#~ msgstr "Circular"
+
+#~ msgid "German"
+#~ msgstr "Alemão"
+
+#~ msgid "Dialog"
+#~ msgstr "Diálogo"
+
+#~ msgid "Filter"
+#~ msgstr "Filtro"
+
+#~ msgid "Maximum number of results:"
+#~ msgstr "Número máximo de resultados:"
+
+#~ msgid "Minimum magnitude:"
+#~ msgstr "Magnitude mínima:"
+
+#~ msgid "Time Range"
+#~ msgstr "Intervalo de tempo"
+
+#~ msgid "Past"
+#~ msgstr "Passado"
+
+#~ msgid "From"
+#~ msgstr "De"
+
+#~ msgid "days"
+#~ msgstr "dias"
+
+#~ msgid "Eclipse Browser"
+#~ msgstr "Navegador de eclipses"
+
+#~ msgid "Show eclipses for year:"
+#~ msgstr "Mostrar os eclipses do ano:"
+
+#~ msgid "&Settings..."
+#~ msgstr "&Configurações..."
+
+#~ msgid "&Go To Selected Eclipse"
+#~ msgstr "&Ir para o eclipse selecionado"
+
+#~ msgid "Eclipses Configuration"
+#~ msgstr "Configuração dos eclipses"
+
+#~ msgid "View &Options"
+#~ msgstr "&Opções de visualização"
+
+#~ msgid "Enable &Lunar Eclipses"
+#~ msgstr "Ativar os eclipses &lunares"
+
+#~ msgid "Show Eclipse Control &Widget"
+#~ msgstr "Mostrar o &widget de controle de eclipses"
+
+#~ msgid "&Eclipse Elements"
+#~ msgstr "Elementos do &eclipse"
+
+#~ msgid "&Northern Penumbra"
+#~ msgstr "Penumbra a &Norte"
+
+#~ msgid "&Umbra"
+#~ msgstr "&Umbra"
+
+#~ msgid "Position of Eclipse &Maximum"
+#~ msgstr "Posição do &Máximo do Eclipse"
+
+#~ msgid "Central &Line"
+#~ msgstr "&Linha central"
+
+#~ msgid "Full &Penumbra"
+#~ msgstr "&Penumbra total"
+
+#~ msgid "Sunrise and Sunset &Boundaries"
+#~ msgstr "&Limites do Nascimento e Ocaso"
+
+#~ msgid "&Southern Penumbra"
+#~ msgstr "Penumbra a &Sul"
+
+#~ msgid "Penumbra with 60% Ma&gnitude"
+#~ msgstr "Penumbra com 60% de ma&gnitude"
+
+#~ msgid "&Reminder"
+#~ msgstr "&Lembrete"
+
+#~ msgid "Remind about eclipse events"
+#~ msgstr "Lembrar dos eventos do eclipse"
+
+#~ msgid "Eclipse Event"
+#~ msgstr "Evento do eclipse"
+
+#~ msgid ""
+#~ "<html><head/><body><p>Marble has detected that the following <span style="
+#~ "\" font-weight:600;\">eclipse events</span> will occur in the near "
+#~ "future. If you want more information on a specific event, select it and "
+#~ "click OK.</p></body></html>"
+#~ msgstr ""
+#~ "<html><head/><body><p>O Marble detectou que os seguintes <span style=\" "
+#~ "font-weight:600;\">eventos de eclipses</span> irão ocorrer em futuro "
+#~ "próximo. Se quiser mais informações sobre um evento específico, selecione-"
+#~ "o e clique em OK.</p></body></html>"
+
+#~ msgid "Do not remind me about eclipse events again"
+#~ msgstr "Não lembrar mais dos eventos de eclipses"
+
+#~ msgid "Configure Elevation Profile Plugin"
+#~ msgstr "Configurar o plugin do perfil de elevação"
+
+#~ msgid "Zoom to viewport"
+#~ msgstr "Ampliar para a área de visualização"
+
+#~ msgid "Speed"
+#~ msgstr "Velocidade"
+
+#~ msgid "Direction"
+#~ msgstr "Direção"
+
+#~ msgid "Altitude"
+#~ msgstr "Altitude"
+
+#~ msgid "Precision"
+#~ msgstr "Precisão"
+
+#~ msgid "Coordinate Grid Plugin"
+#~ msgstr "Plugin de grade de coordenadas"
+
+#~ msgid "C&olors"
+#~ msgstr "C&ores"
+
+#~ msgid "&Grid:"
+#~ msgstr "&Grade:"
+
+#~ msgid "Color of the coordinate grid."
+#~ msgstr "Cor da grade de coordenadas."
+
+#~ msgid "&Tropics:"
+#~ msgstr "&Trópicos:"
+
+#~ msgid "Color of the tropical circles."
+#~ msgstr "Cor dos círculos dos trópicos."
+
+#~ msgid "&Equator:"
+#~ msgstr "&Equador:"
+
+#~ msgid "Color of the equator."
+#~ msgstr "Cor do equador."
+
+#~ msgid "Labels"
+#~ msgstr "Legendas"
+
+#~ msgid "&Named Labels"
+#~ msgstr "Legendas com &nome"
+
+#~ msgid "Show Labels for Prime meridian, Equator, Tropics."
+#~ msgstr "Mostra as legendas dos principais meridianos, Trópicos e Equador."
+
+#~ msgid "&Numerical Labels"
+#~ msgstr "Legendas &numéricas"
+
+#~ msgid "Show numerical Labels."
+#~ msgstr "Mostra as legendas numéricas."
+
+#~ msgid "Configure Scale Bar Plugin"
+#~ msgstr "Configurar o plugin da barra de escala"
+
+#~ msgid "Show Ratio Scale"
+#~ msgstr "Mostrar escala de proporções"
+
+#~ msgid "Minimize"
+#~ msgstr "Minimizar"
+
+#~ msgid "Marble - Measure Tool Configuration"
+#~ msgstr "Marble - Configuração da ferramenta de medida"
+
+#~ msgid "Ruler Type"
+#~ msgstr "Tipo de régua"
+
+#~ msgid "Polygon"
+#~ msgstr "Polígono"
+
+#~ msgid "Circle"
+#~ msgstr "Círculo"
+
+#~ msgid "Segment labels"
+#~ msgstr "Legendas do segmento"
+
+#~ msgid "Distance "
+#~ msgstr "Distância "
+
+#~ msgid "Bearing"
+#~ msgstr "Direção"
+
+#~ msgid "Bearing Change"
+#~ msgstr "Mudança de direção"
+
+#~ msgid "Perimeter"
+#~ msgstr "Perímetro"
+
+#~ msgid "Radius"
+#~ msgstr "Raio"
+
+#~ msgid "Circumference"
+#~ msgstr "Circunferência"
+
+#~ msgid "General"
+#~ msgstr "Geral"
+
+#~ msgid "Cache name:"
+#~ msgstr "Nomes da cache:"
+
+#~ msgid "User name:"
+#~ msgstr "Nome do usuário:"
+
+#~ msgid "Type:"
+#~ msgstr "Tipo:"
+
+#~ msgid "Status:"
+#~ msgstr "Estado:"
+
+#~ msgid "Country:"
+#~ msgstr "País:"
+
+#~ msgid "Size:"
+#~ msgstr "Tamanho:"
+
+#~ msgid "Difficulty:"
+#~ msgstr "Dificuldade:"
+
+#~ msgid "Terrain:"
+#~ msgstr "Terreno:"
+
+#~ msgid "Longitude:"
+#~ msgstr "Longitude:"
+
+#~ msgid "Latitude:"
+#~ msgstr "Latitude:"
+
+#~ msgid "Date hidden:"
+#~ msgstr "Data de colocação:"
+
+#~ msgid "Date created:"
+#~ msgstr "Data de criação:"
+
+#~ msgid "Date last modified:"
+#~ msgstr "Data da última modificação:"
+
+#~ msgid "Log"
+#~ msgstr "Registro"
+
+#~ msgid "Previous"
+#~ msgstr "Anterior"
+
+#~ msgid "Next"
+#~ msgstr "Próximo"
+
+#~ msgid "Minimum difficulty:"
+#~ msgstr "Dificuldade mínima:"
+
+#~ msgid "Maximum difficulty:"
+#~ msgstr "Dificuldade máxima:"
+
+#~ msgid "Maximum Distance:"
+#~ msgstr "Distância máxima:"
+
+#~ msgid "Start:"
+#~ msgstr "Início:"
+
+#~ msgid "End:"
+#~ msgstr "Fim:"
+
+#~ msgid "TextLabel"
+#~ msgstr "Etiqueta de texto"
+
+#~ msgid "Hint"
+#~ msgstr "Dica"
+
+#~ msgid "Logs"
+#~ msgstr "Registros"
+
+#~ msgid "Marble - OpenDesktop plugin configuration"
+#~ msgstr "Marble - Configuração do plugin do OpenDesktop"
+
+#~ msgid "Number of displayed items on the screen:"
+#~ msgstr "Número de itens mostrados na tela:"
+
+#~ msgid "Map &Image"
+#~ msgstr "&Imagem do mapa"
+
+#~ msgid "&Planet:"
+#~ msgstr "&Planeta:"
+
+#~ msgid "&Size:"
+#~ msgstr "&Tamanho:"
+
+#~ msgid "x"
+#~ msgstr "x"
+
+#~ msgid "Preview"
+#~ msgstr "Visualização"
+
+#~ msgid "Filename"
+#~ msgstr "Nome do arquivo"
+
+#~ msgid "Position I&ndicator:"
+#~ msgstr "I&ndicador de posição:"
+
+#~ msgid "Configure Photo Plugin"
+#~ msgstr "Configurar o plugin fotográfico"
+
+#~ msgid "License"
+#~ msgstr "Licença"
+
+#~ msgid "Number of items on the screen"
+#~ msgstr "Número de itens na tela"
+
+#~ msgid "Configure Position Marker Plugin"
+#~ msgstr "Configurar o plugin do marcador de posição"
+
+#~ msgid "Cursor Shape"
+#~ msgstr "Forma do cursor"
+
+#~ msgid "&Arrow"
+#~ msgstr "Set&a"
+
+#~ msgid "&Custom:"
+#~ msgstr "&Personalizado:"
+
+#~ msgid ""
+#~ "Position marker images indicating the direction should point north (top)."
+#~ msgstr "Posicionar as imagens dos marcadores da posição do norte (topo)."
+
+#~ msgid "Trail"
+#~ msgstr "Trilha"
+
+#~ msgid "&Accuracy:"
+#~ msgstr "&Precisão:"
+
+#~ msgid "Color of the position marker's accuracy indicator."
+#~ msgstr "Cor do indicador da precisão do marcador de posição."
+
+#~ msgid "Trail:"
+#~ msgstr "Trilha:"
+
+#~ msgid "Color of the position marker's trail."
+#~ msgstr "Cor da trilha do marcador de posição."
+
+#~ msgid "Routing Configuration - Marble"
+#~ msgstr "Configuração das rotas - Marble"
+
+#~ msgid "Audible Turn Instructions"
+#~ msgstr "Instruções de condução audíveis"
+
+#~ msgid "Play a sound"
+#~ msgstr "Reproduzir um som"
+
+#~ msgid "Use this speaker"
+#~ msgstr "Usar este locutor"
+
+#~ msgid ""
+#~ "<a href=\"http://userbase.kde.org/Marble/CustomSpeakers\">Get more "
+#~ "speakers</a>"
+#~ msgstr ""
+#~ "<a href=\"http://userbase.kde.org/Marble/CustomSpeakers\">Obter mais "
+#~ "locutores</a>"
+
+#~ msgid "Guidance Mode"
+#~ msgstr "Modo de condução"
+
+#~ msgid "R"
+#~ msgstr "R"
+
+#~ msgid "Toggle GPS"
+#~ msgstr "Trocar GPS"
+
+#~ msgid "zoom out"
+#~ msgstr "reduzir"
+
+#~ msgid "zoom in"
+#~ msgstr "ampliar"
+
+#~ msgid "total time remaining"
+#~ msgstr "tempo total remanescente"
+
+#~ msgid "Satellites Configuration - Marble"
+#~ msgstr "Configuração dos satélites - Marble"
+
+#~ msgid "&Satellites"
+#~ msgstr "&Satélites"
+
+#~ msgid "&Data Sources"
+#~ msgstr "Fontes de &dados"
+
+#~ msgid ""
+#~ "<html><head/><body><p><span style=\" font-weight:600;\">Last update:</"
+#~ "span></p></body></html>"
+#~ msgstr ""
+#~ "<html><head/><body><p><span style=\" font-weight:600;\">Última "
+#~ "atualização:</span></p></body></html>"
+
+#~ msgid "&Reload All Data Sources"
+#~ msgstr "&Recarregar todas as fontes de dados"
+
+#~ msgid "Satellite Data Sources:"
+#~ msgstr "Fontes de dados do satélite:"
+
+#~ msgid "Add a new data source (URL)."
+#~ msgstr "Adiciona uma nova fonte de dados (URL)."
+
+#~ msgid "Open a new data source from disk."
+#~ msgstr "Abre uma nova fonte de dados a partir do disco."
+
+#~ msgid "Remove selected data source."
+#~ msgstr "Remove a fonte de dados selecionada."
+
+#~ msgid "(Built-in Data Sources for Earth Satellites)"
+#~ msgstr "(Fontes de dados incorporadas para os satélites da Terra)"
+
+#~ msgid ""
+#~ "<html><head/><body><p>Supported formats: <a href=\"http://techbase.kde."
+#~ "org/Projects/Marble/SatelliteCatalogFormat\"><span style=\" text-"
+#~ "decoration: underline; color:#0000ff;\">Marble Satellite Catalogue</"
+#~ "span></a>, <a href=\"http://en.wikipedia.org/wiki/Two-line_element_set"
+#~ "\"><span style=\" text-decoration: underline; color:#0000ff;\">Two-Line-"
+#~ "Element Set</span></a></p></body></html>"
+#~ msgstr ""
+#~ "<html><head/><body><p>Formatos com suporte: <a href=\"http://techbase.kde."
+#~ "org/Projects/Marble/SatelliteCatalogFormat\"><span style=\" text-"
+#~ "decoration: underline; color:#0000ff;\">Catálogo de Satélites do Marble</"
+#~ "span></a>, <a href=\"http://en.wikipedia.org/wiki/Two-line_element_set"
+#~ "\"><span style=\" text-decoration: underline; color:#0000ff;\">Conjunto "
+#~ "de elementos de duas linhas</span></a></p></body></html>"
+
+#~ msgid "Plugin Inactive"
+#~ msgstr "Plugin inativo"
+
+#~ msgid "&Activate Plugin"
+#~ msgstr "&Ativar o plugin"
+
+#~ msgid ""
+#~ "Configuration options not available since the plugin is disabled at the "
+#~ "moment."
+#~ msgstr ""
+#~ "As opções de configuração não estão disponíveis porque o plugin está "
+#~ "desabilitado neste momento."
+
+#~ msgid "km/h"
+#~ msgstr "km/h"
+
+#~ msgid "Configure Stars Plugin"
+#~ msgstr "Configurar o plugin de estrelas"
+
+#~ msgid "Celestial Objects"
+#~ msgstr "Objetos celestes"
+
+#~ msgid "Star Magnitude Limit"
+#~ msgstr "Limite de magnitude das estrelas"
+
+#~ msgid " mag"
+#~ msgstr " mag"
+
+#~ msgid "Solar System"
+#~ msgstr "Sistema solar"
+
+#~ msgid "Sun"
+#~ msgstr "Sol"
+
+#~ msgid "Moon"
+#~ msgstr "Lua"
+
+#~ msgid "Mercury"
+#~ msgstr "Mercúrio"
+
+#~ msgid "Venus"
+#~ msgstr "Vênus"
+
+#~ msgid "Earth"
+#~ msgstr "Terra"
+
+#~ msgid "Mars"
+#~ msgstr "Marte"
+
+#~ msgid "Jupiter"
+#~ msgstr "Júpiter"
+
+#~ msgid "Saturn"
+#~ msgstr "Saturno"
+
+#~ msgid "Uranus"
+#~ msgstr "Urano"
+
+#~ msgid "Neptune"
+#~ msgstr "Netuno"
+
+#~ msgid "Use name labels"
+#~ msgstr "Usar rótulos"
+
+#~ msgid "Magnify Sun and Moon"
+#~ msgstr "Ampliar o Sol e a Lua"
+
+#~ msgid "Other"
+#~ msgstr "Outro"
+
+#~ msgid "Deep Sky Object Labels"
+#~ msgstr "Nomes dos objetos distantes"
+
+#~ msgid "Deep Sky Objects"
+#~ msgstr "Objetos distantes"
+
+#~ msgid "Lines and Orientation"
+#~ msgstr "Linhas e orientação"
+
+#~ msgid "Constellations"
+#~ msgstr "Constelações"
+
+#~ msgid "Names"
+#~ msgstr "Nomes"
+
+#~ msgid "Latin Name"
+#~ msgstr "Nome em latim"
+
+#~ msgid "Native Translation"
+#~ msgstr "Tradução nativa"
+
+#~ msgid "Abbreviation"
+#~ msgstr "Abreviatura"
+
+#~ msgid "Celestial Equator"
+#~ msgstr "Equador celestial"
+
+#~ msgid "Celestial Poles"
+#~ msgstr "Polos celestes"
+
+#~ msgid "Ecliptic"
+#~ msgstr "Eclíptica"
+
+#~ msgid "Configure Weather Plugin"
+#~ msgstr "Configurar o plugin de meteorologia"
+
+#~ msgid "Information"
+#~ msgstr "Informações"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Here you can "
+#~ "choose if you want the weather condition to be shown (for example, clouds "
+#~ "or clear sky.) Marble will only show the condition if this information is "
+#~ "available.</p></body></html>\n"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Aqui você pode "
+#~ "escolher se quer que a condição meteorológica seja exibida (por exemplo, "
+#~ "nuvens ou o céu limpo.) O Marble somente irá mostrar a condição se a "
+#~ "informação estiver disponível.</p></body></html>\n"
+
+#~ msgid "Weather condition"
+#~ msgstr "Condição meteorológica"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Selects if you "
+#~ "want the temperature to be shown. The temperature will only be shown for "
+#~ "the stations it is available for.</p></body></html>\n"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Selecione se "
+#~ "você quer que a temperatura seja exibida. A temperatura somente será "
+#~ "exibida para as estações se elas estiverem disponíveis.</p></body></"
+#~ "html>\n"
+
+#~ msgid "Temperature"
+#~ msgstr "Temperatura"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Select if you "
+#~ "want the wind direction to be shown. The wind direction will only be "
+#~ "shown if it is available for the particular station.</p></body></html>\n"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Selecione se "
+#~ "você quer que a direção do vento seja exibida. A direção do vento somente "
+#~ "será exibida se ela estiver disponível para a estação em particular.</p></"
+#~ "body></html>\n"
+
+#~ msgid "Wind direction"
+#~ msgstr "Direção do vento"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Select if you "
+#~ "want the wind speed to be shown. The wind speed will only be shown if it "
+#~ "is available for the particular station.</p></body></html>\n"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Selecione se "
+#~ "você quer que a velocidade do vento seja exibida. A velocidade do vento "
+#~ "somente será exibida se ela estiver disponível para a estação em "
+#~ "particular.</p></body></html>\n"
+
+#~ msgid "Wind speed"
+#~ msgstr "Velocidade do vento"
+
+#~ msgid "Units"
+#~ msgstr "Unidades"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">The unit used to "
+#~ "measure the temperature.</p></body></html>\n"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">A unidade usada "
+#~ "para medir a temperatura.</p></body></html>\n"
+
+#~ msgid "Celsius"
+#~ msgstr "Celsius"
+
+#~ msgid "Fahrenheit"
+#~ msgstr "Fahrenheit"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">The unit used to "
+#~ "measure the wind speed.</p></body></html>\n"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">A unidade usada "
+#~ "para medir a velocidade do vento.</p></body></html>\n"
+
+#~ msgid "Kilometers per hour"
+#~ msgstr "Quilômetros por hora"
+
+#~ msgid "Miles per hour"
+#~ msgstr "Milhas por hora"
+
+#~ msgid "Meters per second"
+#~ msgstr "Metros por segundo"
+
+#~ msgid "Knots"
+#~ msgstr "Nós"
+
+#~ msgid "Beaufort"
+#~ msgstr "Beaufort"
+
+#~ msgid "Pressure"
+#~ msgstr "Pressão"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">The unit used to "
+#~ "measure the air pressure.</p></body></html>\n"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">A unidade usada "
+#~ "para medir a pressão do ar.</p></body></html>\n"
+
+#~ msgid "Hecto Pascals"
+#~ msgstr "Hectopascals"
+
+#~ msgid "Kilo Pascals"
+#~ msgstr "Quilopascals"
+
+#~ msgid "Bars"
+#~ msgstr "Bars"
+
+#~ msgid "Millimeters of Mercury"
+#~ msgstr "Milímetros de mercúrio"
+
+#~ msgid "Inches of Mercury"
+#~ msgstr "Polegadas de mercúrio"
+
+#~ msgid "Miscellaneous"
+#~ msgstr "Diversos"
+
+#~ msgid "Show only favorite items"
+#~ msgstr "Mostrar somente os itens favoritos"
+
+#~ msgid "Weather update interval"
+#~ msgstr "Intervalo de atualização meteorológica"
+
+#~ msgid " hours"
+#~ msgstr " horas"
+
+#~ msgid "Configure Wikipedia Plugin"
+#~ msgstr "Configurar o plugin da Wikipédia"
+
+#~ msgid "Show thumbnail images"
+#~ msgstr "Exibir miniaturas de imagens"
+
+#~ msgid "Route type:"
+#~ msgstr "Tipo de rota:"
+
+#~ msgid "Speed:"
+#~ msgstr "Velocidade:"
+
+#~ msgid "AppKey"
+#~ msgstr "AppKey"
+
+#~ msgid "Preference:"
+#~ msgstr "Preferência:"
+
+#~ msgid "Avoid motorways"
+#~ msgstr "Evitar autoestradas"
+
+#~ msgid "Avoid tollways"
+#~ msgstr "Evitar pedágios"
+
+#~ msgid "Avoid ferries"
+#~ msgstr "Evitar barcos"
+
+#~ msgid "Ascending slope:"
+#~ msgstr "Inclinação crescente:"
+
+#~ msgid "Descending slope:"
+#~ msgstr "Inclinação decrescente:"
+
+#~ msgid ""
+#~ "An AppKey is required for MapQuest routing to work. You can register one "
+#~ "<a href=\"http://developer.mapquest.com/web/products/open\">here</a>."
+#~ msgstr ""
+#~ "É necessária uma AppKey (chave de aplicação) para as rotas no MapQuest "
+#~ "funcionarem. Você pode registrar uma <a href=\"http://developer.mapquest."
+#~ "com/web/products/open\">aqui</a>."
+
+#~ msgid "Monav Configuration"
+#~ msgstr "Configuração do Monav"
+
+#~ msgid "Transport Type:"
+#~ msgstr "Tipo de transporte:"
+
+#~ msgid "Any"
+#~ msgstr "Qualquer"
+
+#~ msgid "Manage Maps"
+#~ msgstr "Gerenciar mapas"
+
+#~ msgid "Install New"
+#~ msgstr "Instalar um novo"
+
+#~ msgid "Continent"
+#~ msgstr "Continente"
+
+#~ msgid "Country"
+#~ msgstr "País"
+
+#~ msgid "Download Variant"
+#~ msgstr "Baixar variante"
+
+#~ msgid "Install"
+#~ msgstr "Instalar"
+
+#~ msgid "Nothing to do."
+#~ msgstr "Nada a fazer."
+
+#~ msgid "%v/%m MB"
+#~ msgstr "%v/%m MB"
+
+#~ msgid "Abort"
+#~ msgstr "Cancelar"
+
+#~ msgid "Transport:"
+#~ msgstr "Transporte:"
+
+#~ msgid "Profile:"
+#~ msgstr "Perfil:"
+
+#~ msgid "Method"
+#~ msgstr "Método"
+
+#~ msgid "Fastest"
+#~ msgstr "Mais rápido"
+
+#~ msgid "Shortest"
+#~ msgstr "Mais curto"
+
+#~ msgid "Please allow access to KWallet."
+#~ msgstr "Por favor, ative o acesso ao KWallet."
+
+#~ msgid ""
+#~ "You haven't allowed Marble to use KWallet yet.\n"
+#~ "This is dangerous since Marble will store your password without "
+#~ "encryption.\n"
+#~ "Are you sure?"
+#~ msgstr ""
+#~ "Você ainda não permitiu que o Marble use o KWallet.\n"
+#~ "Isto é perigoso, pois assim o Marble irá armazenar sua senha sem "
+#~ "criptografia.\n"
+#~ "Tem certeza disso?"
+
+#~ msgid "KWallet Access in Marble"
+#~ msgstr "Acesso à KWallet no Marble"
+
+#~ msgid ""
+#~ "You still don't allow Marble to use KWallet.\n"
+#~ "If you haven't seen the KWallet dialog asking to allow access, it means "
+#~ "that you have disabled it.\n"
+#~ "If you would like to change this see System Information -> Account "
+#~ "Details -> KDE Wallet -> Access Control.\n"
+#~ "Choose your wallet and allow Marble to use it."
+#~ msgstr ""
+#~ "Você ainda não permitiu que o Marble use o KWallet.\n"
+#~ "Se você não viu a janela do KWallet solicitar o acesso, significa que "
+#~ "está desativada.\n"
+#~ "Se quiser mudar isso, veja em Informação do Sistema -> Detalhes da conta -"
+#~ "> Carteira do KDE -> Controle de acesso.\n"
+#~ "Escolha sua carteira e dê permissão para o Marble usá-la."
+
+#~ msgid "Location Browser"
+#~ msgstr "Navegador de lugares"
+
+#~ msgid "Double click an entry of this list to get it displayed on the map."
+#~ msgstr ""
+#~ "Faça um duplo clique numa entrada desta lista para tê-la exibida no mapa."
+
+#~ msgid "Navigate to your 'Home Location'"
+#~ msgstr "Navegar até sua 'Localização inicial'"

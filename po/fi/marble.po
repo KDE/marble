@@ -1,0 +1,5712 @@
+# Translation of marble.po to Finnish
+# Copyright © 2007, 2010, 2011, 2012 This_file_is_part_of_KDE
+# This file is distributed under the same license as the marble package.
+# Niklas Laxström <niklas.laxstrom+kdetrans@gmail.com>, 2007.
+# Lasse Liehu <lasse.liehu@gmail.com>, 2011, 2012, 2013, 2014, 2015, 2016.
+# Jiri Grönroos <jiri.gronroos+kde@iki.fi>, 2010, 2012.
+# Tommi Nieminen <translator@legisign.org>, 2012, 2015, 2021.
+#
+# KDE Finnish translation sprint participants:
+# Author: Artnay
+# Author: Lliehu
+msgid ""
+msgstr ""
+"Project-Id-Version: marble\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2021-10-18 00:13+0000\n"
+"PO-Revision-Date: 2021-11-10 18:24+0200\n"
+"Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
+"Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
+"Language: fi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-POT-Import-Date: 2012-12-01 22:23:49+0000\n"
+"X-Generator: Lokalize 20.04.2\n"
+
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "Tommi Nieminen, Jiri Grönroos, Niklas Laxström, Lasse Liehu"
+
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr ""
+"translator@legisign.org, jiri.gronroos+kde@iki.fi, niklas.laxstrom"
+"+kdetrans@gmail.com, lasse.liehu@gmail.com"
+
+# pmap: =/gen=Marble-maapallon/
+# pmap: =/elat=Marble-maapallosta/
+#: kdemain.cpp:91
+#, kde-format
+msgid "Marble Virtual Globe"
+msgstr "Marble-maapallo"
+
+#: kdemain.cpp:93
+#, kde-format
+msgid "A World Atlas."
+msgstr "Maailmankartasto."
+
+#: kdemain.cpp:95
+#, kde-format
+msgid "(c) 2007-%1"
+msgstr "© 2007–%1"
+
+#: kdemain.cpp:100 kdemain.cpp:286
+#, kde-format
+msgid "Torsten Rahn"
+msgstr "Torsten Rahn"
+
+#: kdemain.cpp:101
+#, kde-format
+msgid "Developer and Original Author"
+msgstr "Kehittäjä ja alkuperäinen tekijä"
+
+#: kdemain.cpp:103
+#, kde-format
+msgid "Bernhard Beschow"
+msgstr "Bernhard Beschow"
+
+#: kdemain.cpp:104
+#, kde-format
+msgid "WMS Support, Mobile, Performance"
+msgstr "WMS-tuki, mobiiliversio, suorituskyky"
+
+#: kdemain.cpp:106
+#, kde-format
+msgid "Thibaut Gridel"
+msgstr "Thibaut Gridel"
+
+#: kdemain.cpp:107
+#, kde-format
+msgid "Geodata"
+msgstr "Paikkatieto"
+
+#: kdemain.cpp:109
+#, kde-format
+msgid "Jens-Michael Hoffmann"
+msgstr "Jens-Michael Hoffmann"
+
+#: kdemain.cpp:110
+#, kde-format
+msgid "OpenStreetMap Integration, OSM Namefinder, Download Management"
+msgstr "OpenStreetMap-integraatio, OSM-nimihaku, lataushallinta"
+
+#: kdemain.cpp:112
+#, kde-format
+msgid "Florian E&szlig;er"
+msgstr "Florian E&szlig;er"
+
+#: kdemain.cpp:113
+#, kde-format
+msgid "Elevation Profile"
+msgstr "Korkeusprofiili"
+
+#: kdemain.cpp:115
+#, kde-format
+msgid "Wes Hardaker"
+msgstr "Wes Hardaker"
+
+#: kdemain.cpp:116
+#, kde-format
+msgid "APRS Plugin"
+msgstr "APRS-liitännäinen"
+
+#: kdemain.cpp:118 kdemain.cpp:202
+#, kde-format
+msgid "Bastian Holst"
+msgstr "Bastian Holst"
+
+#: kdemain.cpp:119
+#, kde-format
+msgid "Online Services support"
+msgstr "Tuki verkkopalveluille"
+
+#: kdemain.cpp:121 kdemain.cpp:172
+#, kde-format
+msgid "Guillaume Martres"
+msgstr "Guillaume Martres"
+
+#: kdemain.cpp:122
+#, kde-format
+msgid "Satellites"
+msgstr "Satelliitit"
+
+#: kdemain.cpp:124 kdemain.cpp:168
+#, kde-format
+msgid "Rene Kuettner"
+msgstr "Rene Kuettner"
+
+#: kdemain.cpp:125
+#, kde-format
+msgid "Satellites, Eclipses"
+msgstr "Satelliitit, pimennykset"
+
+#: kdemain.cpp:127
+#, kde-format
+msgid "Friedrich W. H. Kossebau"
+msgstr "Friedrich W. H. Kossebau"
+
+#: kdemain.cpp:128
+#, kde-format
+msgid "Plasma Integration, Bugfixes"
+msgstr "Plasma-integraatio, korjauksia"
+
+#: kdemain.cpp:130
+#, kde-format
+msgid "Dennis Nienhüser"
+msgstr "Dennis Nienhüser"
+
+#: kdemain.cpp:131
+#, kde-format
+msgid "Routing, Navigation, Mobile"
+msgstr "Reittihaku, navigointi, mobiiliversio"
+
+#: kdemain.cpp:133
+#, kde-format
+msgid "Niko Sams"
+msgstr "Niko Sams"
+
+#: kdemain.cpp:134
+#, kde-format
+msgid "Routing, Elevation Profile"
+msgstr "Reittihaku, korkeusprofiili"
+
+#: kdemain.cpp:136 kdemain.cpp:206
+#, kde-format
+msgid "Patrick Spendrin"
+msgstr "Patrick Spendrin"
+
+#: kdemain.cpp:137
+#, kde-format
+msgid "Core Developer: KML and Windows support"
+msgstr "Pääkehittäjä: KML- ja Windows-tuki"
+
+#: kdemain.cpp:139
+#, kde-format
+msgid "Eckhart Wörner"
+msgstr "Eckhart Wörner"
+
+#: kdemain.cpp:140
+#, kde-format
+msgid "Bugfixes"
+msgstr "Korjauksia"
+
+#: kdemain.cpp:145
+#, kde-format
+msgid "Inge Wallin"
+msgstr "Inge Wallin"
+
+#: kdemain.cpp:146
+#, kde-format
+msgid "Core Developer and Co-Maintainer"
+msgstr "Pääkehittäjä ja toinen ylläpitäjä"
+
+#: kdemain.cpp:148
+#, kde-format
+msgid "Henry de Valence"
+msgstr "Henry de Valence"
+
+#: kdemain.cpp:149
+#, kde-format
+msgid "Core Developer: Marble Runners, World-Clock Plasmoid"
+msgstr "Pääkehittäjä: Marble-suoritusohjelmat, maailmankellosovelma"
+
+#: kdemain.cpp:151
+#, kde-format
+msgid "Pino Toscano"
+msgstr "Pino Toscano"
+
+#: kdemain.cpp:152
+#, kde-format
+msgid "Network plugins"
+msgstr "Verkkoliitännäiset"
+
+#: kdemain.cpp:154
+#, kde-format
+msgid "Harshit Jain"
+msgstr "Harshit Jain"
+
+#: kdemain.cpp:155
+#, kde-format
+msgid "Planet filter"
+msgstr "Planeettasuodatin"
+
+#: kdemain.cpp:157
+#, kde-format
+msgid "Simon Edwards"
+msgstr "Simon Edwards"
+
+#: kdemain.cpp:158
+#, kde-format
+msgid "Marble Python Bindings"
+msgstr "Marblen Python-sidonnaisuudet"
+
+#: kdemain.cpp:160
+#, kde-format
+msgid "Magnus Valle"
+msgstr "Magnus Valle"
+
+#: kdemain.cpp:161
+#, kde-format
+msgid "Historical Maps"
+msgstr "Historialliset kartat"
+
+#: kdemain.cpp:163
+#, kde-format
+msgid "Médéric Boquien"
+msgstr "Médéric Boquien"
+
+#: kdemain.cpp:164
+#, kde-format
+msgid "Astronomical Observatories"
+msgstr "Tähtitornit"
+
+#: kdemain.cpp:169
+#, kde-format
+msgid ""
+"ESA Summer of Code in Space 2012 Project: Visualization of planetary "
+"satellites"
+msgstr ""
+"ESA Summer of Code in Space 2012 -projekti: planetaaristen satelliittien "
+"visualisointi"
+
+#: kdemain.cpp:173
+#, kde-format
+msgid ""
+"ESA Summer of Code in Space 2011 Project: Visualization of Satellite Orbits"
+msgstr ""
+"ESA Summer of Code in Space 2011 -projekti: satelliittien kiertoratojen "
+"visualisointi"
+
+#: kdemain.cpp:178
+#, kde-format
+msgid "Konstantin Oblaukhov"
+msgstr "Konstantin Oblaukhov"
+
+#: kdemain.cpp:179
+#, kde-format
+msgid "Google Summer of Code 2011 Project: OpenStreetMap Vector Rendering"
+msgstr ""
+"Google Summer of Code 2011 -projekti: OpenStreetMapin vektorirenderöinti"
+
+#: kdemain.cpp:182
+#, kde-format
+msgid "Daniel Marth"
+msgstr "Daniel Marth"
+
+#: kdemain.cpp:183
+#, kde-format
+msgid "Google Summer of Code 2011 Project: Marble Touch on MeeGo"
+msgstr "Google Summer of Code 2011 -projekti: Marble Touch MeeGolle"
+
+#: kdemain.cpp:186
+#, kde-format
+msgid "Gaurav Gupta"
+msgstr "Gaurav Gupta"
+
+#: kdemain.cpp:187
+#, kde-format
+msgid "Google Summer of Code 2010 Project: Bookmarks"
+msgstr "Google Summer of Code 2010 -projekti: Kirjanmerkit"
+
+#: kdemain.cpp:190
+#, kde-format
+msgid "Harshit Jain "
+msgstr "Harshit Jain "
+
+#: kdemain.cpp:191
+#, kde-format
+msgid "Google Summer of Code 2010 Project: Time Support"
+msgstr "Google Summer of Code 2010 -projekti: Tuki ajalle"
+
+#: kdemain.cpp:194
+#, kde-format
+msgid "Siddharth Srivastava"
+msgstr "Siddharth Srivastava"
+
+#: kdemain.cpp:195
+#, kde-format
+msgid "Google Summer of Code 2010 Project: Turn-by-turn Navigation"
+msgstr "Google Summer of Code 2010 -projekti: Käännös käännökseltä -navigointi"
+
+#: kdemain.cpp:198 kdemain.cpp:218
+#, kde-format
+msgid "Andrew Manson"
+msgstr "Andrew Manson"
+
+#: kdemain.cpp:199
+#, kde-format
+msgid "Google Summer of Code 2009 Project: OSM Annotation"
+msgstr "Google Summer of Code 2009 -projekti: OSM-merkinnät"
+
+#: kdemain.cpp:203
+#, kde-format
+msgid "Google Summer of Code 2009 Project: Online Services"
+msgstr "Google Summer of Code 2009 -projekti: Verkkopalvelut"
+
+#: kdemain.cpp:207
+#, kde-format
+msgid "Google Summer of Code 2008 Project: Vector Tiles for Marble"
+msgstr "Google Summer of Code 2008 -projekti: Vektoritiilet Marbleen"
+
+#: kdemain.cpp:210
+#, kde-format
+msgid "Shashank Singh"
+msgstr "Shashank Singh"
+
+#: kdemain.cpp:211
+#, kde-format
+msgid ""
+"Google Summer of Code 2008 Project: Panoramio / Wikipedia -photo support for "
+"Marble"
+msgstr ""
+"Google Summer of Code 2008 -projekti: Marblen tuki Panoramion ja Wikipedian "
+"kuville"
+
+#: kdemain.cpp:214
+#, kde-format
+msgid "Carlos Licea"
+msgstr "Carlos Licea"
+
+#: kdemain.cpp:215
+#, kde-format
+msgid ""
+"Google Summer of Code 2007 Project: Equirectangular Projection (\"Flat Map\")"
+msgstr ""
+"Google Summer of Code 2007 -projekti: Tasavälinen lieriöprojektio "
+"(”neliökartta”)"
+
+#: kdemain.cpp:219
+#, kde-format
+msgid "Google Summer of Code 2007 Project: GPS Support for Marble"
+msgstr "Google Summer of Code 2007 -projekti: Marblen GPS-tuki"
+
+#: kdemain.cpp:222
+#, kde-format
+msgid "Murad Tagirov"
+msgstr "Murad Tagirov"
+
+#: kdemain.cpp:223
+#, kde-format
+msgid "Google Summer of Code 2007 Project: KML Support for Marble"
+msgstr "Google Summer of Code 2007 -projekti: Marblen KML-tuki"
+
+#: kdemain.cpp:228
+#, kde-format
+msgid "Simon Schmeisser"
+msgstr "Simon Schmeisser"
+
+#: kdemain.cpp:229 kdemain.cpp:231 kdemain.cpp:233 kdemain.cpp:235
+#: kdemain.cpp:237 kdemain.cpp:239 kdemain.cpp:241 kdemain.cpp:243
+#: kdemain.cpp:245 kdemain.cpp:247 kdemain.cpp:249 kdemain.cpp:251
+#: kdemain.cpp:253 kdemain.cpp:255 kdemain.cpp:257 kdemain.cpp:259
+#: kdemain.cpp:261 kdemain.cpp:263 kdemain.cpp:265
+#, kde-format
+msgid "Development & Patches"
+msgstr "Kehitystä & paikkauksia"
+
+#: kdemain.cpp:230
+#, kde-format
+msgid "Claudiu Covaci"
+msgstr "Claudiu Covaci"
+
+#: kdemain.cpp:232
+#, kde-format
+msgid "David Roberts"
+msgstr "David Roberts"
+
+#: kdemain.cpp:234
+#, kde-format
+msgid "Nikolas Zimmermann"
+msgstr "Nikolas Zimmermann"
+
+#: kdemain.cpp:236
+#, kde-format
+msgid "Jan Becker"
+msgstr "Jan Becker"
+
+#: kdemain.cpp:238
+#, kde-format
+msgid "Stefan Asserhäll"
+msgstr "Stefan Asserhäll"
+
+#: kdemain.cpp:240
+#, kde-format
+msgid "Laurent Montel"
+msgstr "Laurent Montel"
+
+#: kdemain.cpp:242
+#, kde-format
+msgid "Mayank Madan"
+msgstr "Mayank Madan"
+
+#: kdemain.cpp:244
+#, kde-format
+msgid "Prashanth Udupa"
+msgstr "Prashanth Udupa"
+
+#: kdemain.cpp:246
+#, kde-format
+msgid "Anne-Marie Mahfouf"
+msgstr "Anne-Marie Mahfouf"
+
+#: kdemain.cpp:248
+#, kde-format
+msgid "Josef Spillner"
+msgstr "Josef Spillner"
+
+#: kdemain.cpp:250
+#, kde-format
+msgid "Frerich Raabe"
+msgstr "Frerich Raabe"
+
+#: kdemain.cpp:252
+#, kde-format
+msgid "Frederik Gladhorn"
+msgstr "Frederik Gladhorn"
+
+#: kdemain.cpp:254
+#, kde-format
+msgid "Fredrik Höglund"
+msgstr "Fredrik Höglund"
+
+#: kdemain.cpp:256
+#, kde-format
+msgid "Albert Astals Cid"
+msgstr "Albert Astals Cid"
+
+#: kdemain.cpp:258
+#, kde-format
+msgid "Thomas Zander"
+msgstr "Thomas Zander"
+
+#: kdemain.cpp:260
+#, kde-format
+msgid "Joseph Wenninger"
+msgstr "Joseph Wenninger"
+
+#: kdemain.cpp:262
+#, kde-format
+msgid "Kris Thomsen"
+msgstr "Kris Thomsen"
+
+#: kdemain.cpp:264
+#, kde-format
+msgid "Daniel Molkentin"
+msgstr "Daniel Molkentin"
+
+#: kdemain.cpp:266
+#, kde-format
+msgid "Christophe Leske"
+msgstr "Christophe Leske"
+
+#: kdemain.cpp:267 kdemain.cpp:269 kdemain.cpp:271 kdemain.cpp:273
+#: kdemain.cpp:275 kdemain.cpp:277 kdemain.cpp:279 kdemain.cpp:281
+#: kdemain.cpp:283
+#, kde-format
+msgid "Platforms & Distributions"
+msgstr "Alustat & Jakelut"
+
+#: kdemain.cpp:268
+#, kde-format
+msgid "Sebastian Wiedenroth"
+msgstr "Sebastian Wiedenroth"
+
+#: kdemain.cpp:270
+#, kde-format
+msgid "Tim Sutton"
+msgstr "Tim Sutton"
+
+#: kdemain.cpp:272
+#, kde-format
+msgid "Christian Ehrlicher"
+msgstr "Christian Ehrlicher"
+
+#: kdemain.cpp:274
+#, kde-format
+msgid "Ralf Habacker"
+msgstr "Ralf Habacker"
+
+#: kdemain.cpp:276
+#, kde-format
+msgid "Steffen Joeris"
+msgstr "Steffen Joeris"
+
+#: kdemain.cpp:278
+#, kde-format
+msgid "Marcus Czeslinski"
+msgstr "Marcus Czeslinski"
+
+#: kdemain.cpp:280
+#, kde-format
+msgid "Marcus D. Hanwell"
+msgstr "Marcus D. Hanwell"
+
+#: kdemain.cpp:282
+#, kde-format
+msgid "Chitlesh Goorah"
+msgstr "Chitlesh Goorah"
+
+#: kdemain.cpp:284
+#, kde-format
+msgid "Nuno Pinheiro"
+msgstr "Nuno Pinheiro"
+
+#: kdemain.cpp:285 kdemain.cpp:287
+#, kde-format
+msgid "Artwork"
+msgstr "Graafinen ilme"
+
+#: kdemain.cpp:290
+#, kde-format
+msgid "Luis Silva"
+msgstr "Luis Silva"
+
+#: kdemain.cpp:291 kdemain.cpp:293 kdemain.cpp:295 kdemain.cpp:297
+#: kdemain.cpp:299 kdemain.cpp:301 kdemain.cpp:303 kdemain.cpp:305
+#: kdemain.cpp:307 kdemain.cpp:309
+#, kde-format
+msgid "Various Suggestions & Testing"
+msgstr "Ehdotuksia & testausta"
+
+#: kdemain.cpp:292
+#, kde-format
+msgid "Stefan Jordan"
+msgstr "Stefan Jordan"
+
+#: kdemain.cpp:294
+#, kde-format
+msgid "Robert Scott"
+msgstr "Robert Scott"
+
+#: kdemain.cpp:296
+#, kde-format
+msgid "Lubos Petrovic"
+msgstr "Lubos Petrovic"
+
+#: kdemain.cpp:298
+#, kde-format
+msgid "Benoit Sigoure"
+msgstr "Benoit Sigoure"
+
+#: kdemain.cpp:300
+#, kde-format
+msgid "Martin Konold"
+msgstr "Martin Konold"
+
+#: kdemain.cpp:302
+#, kde-format
+msgid "Matthias Welwarsky"
+msgstr "Matthias Welwarsky"
+
+#: kdemain.cpp:304
+#, kde-format
+msgid "Rainer Endres"
+msgstr "Rainer Endres"
+
+#: kdemain.cpp:306
+#, kde-format
+msgid "Ralf Gesellensetter"
+msgstr "Ralf Gesellensetter"
+
+#: kdemain.cpp:308
+#, kde-format
+msgid "Tim Alder"
+msgstr "Tim Alder"
+
+#: kdemain.cpp:310
+#, kde-format
+msgid "John Layt"
+msgstr "John Layt"
+
+#: kdemain.cpp:311
+#, kde-format
+msgid ""
+"Special thanks for providing an important source of inspiration by creating "
+"Marble's predecessor \"Kartographer\"."
+msgstr ""
+"Erityiskiitokset Marblen edeltäjän ”Kartographer” luomisesta. Se oli suuri "
+"inspiraatiolähde."
+
+#: kdemain.cpp:327
+#, kde-format
+msgid "Enable debug output"
+msgstr "Näytä virheenpaikannustuloste"
+
+#: kdemain.cpp:329
+#, kde-format
+msgid "Display OSM placemarks according to the level selected"
+msgstr "Näytä valitun tason mukaiset OSM-paikkamerkit"
+
+#: kdemain.cpp:331
+#, kde-format
+msgid "Make a time measurement to check performance"
+msgstr "Tarkista suorituskyky tekemällä nopeustesti"
+
+#: kdemain.cpp:333
+#, kde-format
+msgid "Show frame rate"
+msgstr "Näytä kuvataajuus"
+
+#: kdemain.cpp:335
+#, kde-format
+msgid "Show tile IDs"
+msgstr "Näytä tiilien tunnisteet"
+
+#: kdemain.cpp:337
+#, kde-format
+msgid "Show time spent in each layer"
+msgstr "Näytä kuhunkin tasoon käytetty aika"
+
+#: kdemain.cpp:339
+#, kde-format
+msgid "Use a different directory <directory> which contains map data."
+msgstr "Käytä eri karttadatan sisältävää hakemistoa <hakemisto>."
+
+#: kdemain.cpp:341
+#, kde-format
+msgid "Do not use the interface optimized for small screens"
+msgstr "Älä käytä pienille näytöille optimoitua käyttöliittymää"
+
+#: kdemain.cpp:342
+#, kde-format
+msgid "Use the interface optimized for small screens"
+msgstr "Käytä pienille näytöille optimoitua käyttöliittymää"
+
+#: kdemain.cpp:344
+#, kde-format
+msgid "Do not use the interface optimized for high resolutions"
+msgstr "Älä käytä korkealle resoluutiolle optimoitua käyttöliittymää"
+
+#: kdemain.cpp:345
+#, kde-format
+msgid "Use the interface optimized for high resolutions"
+msgstr "Käytä korkealle resoluutiolle optimoitua käyttöliittymää"
+
+#: kdemain.cpp:347
+#, kde-format
+msgid "Show map at given lat lon <coordinates>"
+msgstr "Näytä kartta annetuissa leveys- ja pituusasteen <koordinaateissa>"
+
+#: kdemain.cpp:349
+#, kde-format
+msgid "Show map at given geo <uri>"
+msgstr "Näytä kartta annetun Geo <uri>:n kohdalta"
+
+#: kdemain.cpp:351
+#, kde-format
+msgid "Set the distance of the observer to the globe (in km)"
+msgstr "Aseta katselijan etäisyys palloon (kilometreissä)"
+
+#: kdemain.cpp:353
+#, kde-format
+msgid "Use map <id> (e.g. \"earth/openstreetmap/openstreetmap.dgml\")"
+msgstr "Käytä karttaa <id> (esim. ”earth/openstreetmap/openstreetmap.dgml”)"
+
+#: kdemain.cpp:355
+#, kde-format
+msgid "One or more placemark files to be opened"
+msgstr "Yksi tai useampi avattava paikkamerkkitiedosto"
+
+#. i18n: ectx: label, entry, group (Time)
+#: marble.kcfg:58
+#, kde-format
+msgid "The date and time of marble clock"
+msgstr "Marblen kellon päivämäärä ja aika"
+
+#. i18n: ectx: label, entry, group (Time)
+#: marble.kcfg:61
+#, kde-format
+msgid "The speed of marble clock"
+msgstr "Marble kellon nopeus"
+
+#. i18n: ectx: label, entry, group (View)
+#: marble.kcfg:107
+#, kde-format
+msgid "The unit chosen to measure distances."
+msgstr "Etäisyyden yksikkö."
+
+#. i18n: ectx: label, entry, group (View)
+#: marble.kcfg:115
+#, kde-format
+msgid "The unit chosen to measure angles."
+msgstr "Kulman yksikkö."
+
+#. i18n: ectx: label, entry, group (View)
+#: marble.kcfg:124
+#, kde-format
+msgid "The quality at which a still map gets painted."
+msgstr "Laatu, jolla liikkumaton kartta piirretään."
+
+#. i18n: ectx: label, entry, group (View)
+#: marble.kcfg:135
+#, kde-format
+msgid "The quality at which an animated map gets painted."
+msgstr "Laatu, jolla siirtyvä kartta piirretään."
+
+#. i18n: ectx: label, entry, group (View)
+#: marble.kcfg:146
+#, kde-format
+msgid "The localization of the labels."
+msgstr "Selitteiden lokalisointi."
+
+#. i18n: ectx: label, entry (mapFont), group (View)
+#: marble.kcfg:155
+#, kde-format
+msgid "The general font used on the map."
+msgstr "Kartassa käytettävä fontti."
+
+# File-valikko on suomennettu ”Kartta”.
+#. i18n: ectx: label, entry (lastFileOpenDir), group (View)
+#: marble.kcfg:159
+#, kde-format
+msgid "The last directory that was opened by File->Open."
+msgstr "Kansio, joka viimeksi avattiin valikosta Kartta | Avaa."
+
+#. i18n: ectx: label, entry, group (Navigation)
+#: marble.kcfg:179
+#, kde-format
+msgid "The behaviour of the planet's axis on mouse dragging."
+msgstr "Planeetan akselin toiminta vedettäessä hiirellä."
+
+#. i18n: ectx: label, entry, group (Navigation)
+#: marble.kcfg:187
+#, kde-format
+msgid "The location shown on application startup."
+msgstr "Sovelluksen käynnistyessä näytettävä sijainti."
+
+#. i18n: ectx: label, entry, group (Navigation)
+#: marble.kcfg:201
+#, kde-format
+msgid "Display animation on voyage to target."
+msgstr "Näytä animaatio siirryttäessä kohteeseen."
+
+#. i18n: ectx: label, entry, group (Navigation)
+#: marble.kcfg:205
+#, kde-format
+msgid "The external OpenStreetMap editor application"
+msgstr "Ulkoinen OpenStreetMap-muokkainsovellus"
+
+#. i18n: ectx: label, entry, group (Cache)
+#: marble.kcfg:211
+#, kde-format
+msgid "Cache for tiles reserved in the physical memory."
+msgstr "Välimuisti muistiin varatuille tiilille"
+
+#. i18n: ectx: label, entry, group (Cache)
+#: marble.kcfg:217
+#, kde-format
+msgid "Maximum space on the hard disk that can be used to store tiles."
+msgstr "Tiilien tallentamiseen käytettävän levytilan enimmäismäärä."
+
+#. i18n: ectx: label, entry (proxyUrl), group (Cache)
+#: marble.kcfg:223
+#, kde-format
+msgid "URL for the proxy server."
+msgstr "Välityspalvelimen osoite."
+
+#. i18n: ectx: label, entry, group (Cache)
+#: marble.kcfg:227
+#, kde-format
+msgid "Port for the proxy server."
+msgstr "Välityspalvelimen portti."
+
+#. i18n: ectx: label, entry (proxyUser), group (Cache)
+#: marble.kcfg:233
+#, kde-format
+msgid "Username for authorization."
+msgstr "Käyttäjätunnus tunnistautumiseen."
+
+#. i18n: ectx: label, entry (proxyPass), group (Cache)
+#: marble.kcfg:236
+#, kde-format
+msgid "Password for authorization."
+msgstr "Salasana tunnistautumiseen."
+
+#. i18n: ectx: label, entry (proxyHttp), group (Cache)
+#: marble.kcfg:239
+#, kde-format
+msgid "Proxy type is HTTP"
+msgstr "Välityspalvelimen tyyppi on HTTP"
+
+#. i18n: ectx: label, entry (proxySocks5), group (Cache)
+#: marble.kcfg:250
+#, kde-format
+msgid "Proxy type is Socks5"
+msgstr "Välityspalvelimen tyyppi on Socks5"
+
+#. i18n: ectx: label, entry (proxyAuth), group (Cache)
+#: marble.kcfg:254
+#, kde-format
+msgid "Proxy requires Authentication"
+msgstr "Välityspalvelin vaatii tunnistautumista"
+
+#. i18n: ectx: label, entry (activePositionTrackingPlugin), group (Plugins)
+#: marble.kcfg:260
+#, kde-format
+msgid "The position tracking plugin used to determine the current location"
+msgstr "Sijainninpaikannusliitännäinen, joka kertoo nykyisen sijainnin"
+
+#: marble_part.cpp:102
+#, kde-format
+msgid "Position: %1"
+msgstr "Sijainti: %1"
+
+#: marble_part.cpp:103
+#, kde-format
+msgid "Altitude: %1"
+msgstr "Korkeus: %1"
+
+#: marble_part.cpp:104
+#, kde-format
+msgid "Tile Zoom Level: %1"
+msgstr "Tiilen mittakaavataso: %1"
+
+#: marble_part.cpp:105
+#, kde-format
+msgid "Time: %1"
+msgstr "Aika: %1"
+
+#: marble_part.cpp:167
+#, kde-format
+msgid ""
+"Sorry, unable to open '%1':\n"
+"'%2'"
+msgstr ""
+"Tiedostoa ”%1” ei valitettavasti voi avata:\n"
+"”%2”"
+
+#: marble_part.cpp:168
+#, kde-format
+msgid "File not readable"
+msgstr "Tiedosto ei voi lukea"
+
+#: marble_part.cpp:214
+#, kde-format
+msgid "marble_part"
+msgstr "marble_part"
+
+#: marble_part.cpp:217
+#, kde-format
+msgid "A Virtual Globe"
+msgstr "Virtuaalinen maapallo"
+
+#: marble_part.cpp:231
+#, kde-format
+msgid "Sorry, unable to open '%1'. The file is not accessible."
+msgstr "Tiedoston ”%1” avaaminen epäonnistui. Se ei ole luettavissa."
+
+#: marble_part.cpp:232
+#, kde-format
+msgid "File not accessible"
+msgstr "Tiedosto ei luettavissa"
+
+#: marble_part.cpp:253
+#, kde-format
+msgid "All Supported Files"
+msgstr "Kaikki tuetut tiedostot"
+
+#: marble_part.cpp:259
+#, kde-format
+msgctxt "@title:window"
+msgid "Open File"
+msgstr "Avaa tiedosto"
+
+#: marble_part.cpp:276
+#, kde-format
+msgctxt "@title:window"
+msgid "Export Map"
+msgstr "Vie kartta"
+
+#: marble_part.cpp:277
+#, kde-format
+msgid "Images *.jpg *.png"
+msgstr "Kuvat *.jpg *.png"
+
+#: marble_part.cpp:291
+#, kde-format
+msgctxt "Application name"
+msgid "Marble"
+msgstr "Marble"
+
+#: marble_part.cpp:292
+#, kde-format
+msgid "An error occurred while trying to save the file.\n"
+msgstr "Tiedoston tallennus epäonnistui.\n"
+
+#: marble_part.cpp:483
+#, kde-format
+msgid "Unnamed"
+msgstr "Nimetön"
+
+#: marble_part.cpp:714
+#, kde-format
+msgctxt "Action for downloading an entire region of a map"
+msgid "Download Region..."
+msgstr "Lataa alue…"
+
+#: marble_part.cpp:728
+#, kde-format
+msgctxt "Action for saving the map to a file"
+msgid "&Export Map..."
+msgstr "&Vie kartta…"
+
+#: marble_part.cpp:737
+#, kde-format
+msgctxt "Action for toggling offline mode"
+msgid "&Work Offline"
+msgstr "&Työskentele yhteydettömässä tilassa"
+
+#: marble_part.cpp:747
+#, kde-format
+msgctxt "Action for copying the map to the clipboard"
+msgid "&Copy Map"
+msgstr "&Kopioi kartta"
+
+#: marble_part.cpp:754
+#, kde-format
+msgctxt "Action for copying the coordinates to the clipboard"
+msgid "C&opy Coordinates"
+msgstr "K&opioi koordinaatit"
+
+#: marble_part.cpp:762
+#, kde-format
+msgctxt "Action for opening a file"
+msgid "&Open..."
+msgstr "&Avaa…"
+
+#: marble_part.cpp:769
+#, kde-format
+msgctxt "Action for downloading maps (GHNS)"
+msgid "Download Maps..."
+msgstr "Lataa karttoja…"
+
+#: marble_part.cpp:772
+#, kde-format
+msgctxt "Status tip"
+msgid "Download new maps"
+msgstr "Lataa uusia karttoja"
+
+#: marble_part.cpp:778
+#, kde-format
+msgctxt "Action for creating new maps"
+msgid "&Create a New Map..."
+msgstr "&Luo uusi kartta…"
+
+#: marble_part.cpp:783
+#, kde-format
+msgctxt "Status tip"
+msgid "A wizard guides you through the creation of your own map theme."
+msgstr "Opastettu toiminto uuden karttateeman luomiseen."
+
+#: marble_part.cpp:810
+#, kde-format
+msgctxt "Action for toggling clouds"
+msgid "&Clouds"
+msgstr "&Pilvet"
+
+#: marble_part.cpp:817
+#, kde-format
+msgctxt "Action for sun control dialog"
+msgid "S&un Control..."
+msgstr "&Auringon säädin…"
+
+#: marble_part.cpp:827
+#, kde-format
+msgctxt "Action for time control dialog"
+msgid "&Time Control..."
+msgstr "Ajan &säädin…"
+
+#: marble_part.cpp:836
+#, kde-format
+msgctxt "Action for locking float items on the map"
+msgid "Lock Position"
+msgstr "Lukitse sijainti"
+
+#: marble_part.cpp:847
+#, kde-format
+msgid "Show Shadow"
+msgstr "Näytä varjo"
+
+#: marble_part.cpp:850
+#, kde-format
+msgid "Hide Shadow"
+msgstr "Piilota varjo"
+
+#: marble_part.cpp:851
+#, kde-format
+msgid "Shows and hides the shadow of the sun"
+msgstr "Näyttää ja piilottaa auringon varjon"
+
+#: marble_part.cpp:855
+#, kde-format
+msgid "Show sun icon on the Sub-Solar Point"
+msgstr "Näytä auringon kuvake auringon zeniittipisteessä"
+
+#: marble_part.cpp:857
+#, kde-format
+msgid "Hide sun icon on the Sub-Solar Point"
+msgstr "Piilota auringon kuvake auringon zeniittipisteessä"
+
+#: marble_part.cpp:858
+#, kde-format
+msgid "Show sun icon on the sub-solar point"
+msgstr "Näytä auringon kuvake auringon zeniittipisteessä"
+
+#: marble_part.cpp:863
+#, kde-format
+msgid "Lock Globe to the Sub-Solar Point"
+msgstr "Lukitse pallo auringon zeniittipisteeseen"
+
+#: marble_part.cpp:865
+#, kde-format
+msgid "Unlock Globe to the Sub-Solar Point"
+msgstr "Poista pallon lukitus auringon zeniittipisteeseen"
+
+#: marble_part.cpp:866
+#, kde-format
+msgid "Lock globe to the sub-solar point"
+msgstr "Lukitse pallo auringon zeniittipisteeseen"
+
+#: marble_part.cpp:881
+#, kde-format
+msgctxt "Add Bookmark"
+msgid "Add &Bookmark..."
+msgstr "Lisää kirjan&merkki…"
+
+#: marble_part.cpp:889
+#, kde-format
+msgctxt "Show Bookmarks"
+msgid "Show &Bookmarks"
+msgstr "Näytä ki&rjanmerkit"
+
+#: marble_part.cpp:890
+#, kde-format
+msgid "Show or hide bookmarks in the map"
+msgstr "Näytä tai piilota kirjanmerkit kartalla"
+
+#: marble_part.cpp:898
+#, kde-format
+msgid "&Set Home Location"
+msgstr "&Aseta kotisijainti"
+
+#: marble_part.cpp:905
+#, kde-format
+msgctxt "Manage Bookmarks"
+msgid "&Manage Bookmarks..."
+msgstr "&Hallitse kirjanmerkkejä…"
+
+#: marble_part.cpp:917
+#, kde-format
+msgctxt "Edit the map in an external application"
+msgid "&Edit Map..."
+msgstr "&Muokkaa karttaa…"
+
+#: marble_part.cpp:925
+#, kde-format
+msgid "&Record Movie"
+msgstr "&Tallenna video"
+
+#: marble_part.cpp:927
+#, kde-format
+msgid "Records a movie of the globe"
+msgstr "Tallentaa videon maapallosta"
+
+#: marble_part.cpp:933
+#, kde-format
+msgid "&Stop Recording"
+msgstr "K&eskeytä tallennus"
+
+#: marble_part.cpp:935
+#, kde-format
+msgid "Stop recording a movie of the globe"
+msgstr "Pysäytä videon tallennus maapallosta"
+
+#: marble_part.cpp:1287
+#, kde-format
+msgctxt "Action for toggling"
+msgid "Show Position"
+msgstr "Näytä sijainti"
+
+#: marble_part.cpp:1289
+#, kde-format
+msgctxt "Action for toggling"
+msgid "Show Date and Time"
+msgstr "Näytä päivämäärä ja aika"
+
+#: marble_part.cpp:1291
+#, kde-format
+msgctxt "Action for toggling"
+msgid "Show Altitude"
+msgstr "Näytä korkeus"
+
+#: marble_part.cpp:1294
+#, kde-format
+msgctxt "Action for toggling"
+msgid "Show Tile Zoom Level"
+msgstr "Näytä tiilen mittakaavan taso"
+
+#: marble_part.cpp:1296
+#, kde-format
+msgctxt "Action for toggling"
+msgid "Show Download Progress Bar"
+msgstr "Näytä latauksen edistymispalkki"
+
+#: marble_part.cpp:1391
+#, kde-format
+msgid "View"
+msgstr "Näkymä"
+
+#: marble_part.cpp:1402
+#, kde-format
+msgid "Navigation"
+msgstr "Siirtyminen"
+
+#: marble_part.cpp:1413
+#, kde-format
+msgid "Cache & Proxy"
+msgstr "Välimuisti & välityspalvelin"
+
+#: marble_part.cpp:1426
+#, kde-format
+msgid "Date & Time"
+msgstr "Päivä ja aika"
+
+#: marble_part.cpp:1434
+#, kde-format
+msgid "Synchronization"
+msgstr "Synkronointi"
+
+#: marble_part.cpp:1447
+#, kde-format
+msgid "Routing"
+msgstr "Reittihaku"
+
+#: marble_part.cpp:1455
+#, kde-format
+msgid "Plugins"
+msgstr "Liitännäiset"
+
+#. i18n: ectx: Menu (file)
+#: marble_part.rc:6 marbleui.rc:5
+#, kde-format
+msgid "&File"
+msgstr "&Kartta"
+
+#. i18n: ectx: Menu (edit)
+#: marble_part.rc:21 marbleui.rc:14
+#, kde-format
+msgid "&Edit"
+msgstr "&Muokkaa"
+
+#. i18n: ectx: Menu (view)
+#: marble_part.rc:31 marbleui.rc:18
+#, kde-format
+msgid "&View"
+msgstr "&Näytä"
+
+#. i18n: ectx: Menu (infoboxes)
+#: marble_part.rc:36
+#, kde-format
+msgid "&Info Boxes"
+msgstr "Ti&etokentät"
+
+#. i18n: ectx: Menu (onlineservices)
+#: marble_part.rc:42
+#, kde-format
+msgid "&Online Services"
+msgstr "&Verkkopalvelut"
+
+#. i18n: ectx: Menu (settings)
+#: marble_part.rc:55 marbleui.rc:31
+#, kde-format
+msgid "&Settings"
+msgstr "&Asetukset"
+
+#. i18n: ectx: Menu (panels)
+#: marble_part.rc:59
+#, kde-format
+msgid "&Panels"
+msgstr "&Paneelit"
+
+#. i18n: ectx: Menu (viewSize)
+#: marble_part.rc:65
+#, kde-format
+msgid "&View Size"
+msgstr "Näk&ymän koko"
+
+#. i18n: ectx: Menu (bookmarks)
+#: marble_part.rc:73 marbleui.rc:29
+#, kde-format
+msgid "&Bookmarks"
+msgstr "&Kirjanmerkit"
+
+#. i18n: ectx: ToolBar (mainToolBar)
+#: marble_part.rc:84 marbleui.rc:36
+#, kde-format
+msgid "Main Toolbar"
+msgstr "Työkalurivi"
+
+#. i18n: ectx: ToolBar (pluginToolBar)
+#: marble_part.rc:97
+#, kde-format
+msgid "Edit Toolbar"
+msgstr "Muokkaa työkaluriviä"
+
+#~ msgid "The graphics system that is used by Qt to render the graphics."
+#~ msgstr "Grafiikkajärjestelmä, jota Qt käyttää piirtoa varten."
+
+#~ msgid "Native"
+#~ msgstr "Natiivi"
+
+#~ msgid "Native (X11)"
+#~ msgstr "Natiivi (X11)"
+
+#~ msgid "Native (Mac OS X Core Graphics)"
+#~ msgstr "Natiivi (Mac OS X Core Graphics)"
+
+#~ msgid ""
+#~ "You have decided to run Marble with a different graphics system.\n"
+#~ "For this change to become effective, Marble has to be restarted.\n"
+#~ "Please close the application and start Marble again."
+#~ msgstr ""
+#~ "Päätit käyttää Marblea eri grafiikkajärjestelmällä.\n"
+#~ "Muutos vaatii Marblen uudelleenkäynnistyksen.\n"
+#~ "Lopeta Marble ja käynnistä se uudelleen."
+
+#~ msgid "Graphics System Change"
+#~ msgstr "Grafiikkajärjestelmän muutos"
+
+#~ msgid "Night Sky"
+#~ msgstr "Yötaivas"
+
+#~ msgid ""
+#~ "<p>The <i>night sky</i>.</p><p>Displays the stars and constellations at "
+#~ "night.</p>"
+#~ msgstr "<p><i>Yötaivas</i></p><p>Näyttää tähdet ja tähdistöt yöaikaan.</p>"
+
+#~ msgid "Mountain"
+#~ msgstr "Vuori"
+
+#~ msgid "Volcano"
+#~ msgstr "Tulivuori"
+
+#~ msgid "Geographic Pole"
+#~ msgstr "Maantieteellinen napa"
+
+#~ msgid "Magnetic Pole"
+#~ msgstr "Magneettinen napa"
+
+#~ msgid "Airport"
+#~ msgstr "Lentokenttä"
+
+#~ msgid "Shipwreck"
+#~ msgstr "Laivanhylky"
+
+#~ msgid "Astronomical Observatory"
+#~ msgstr "Tähtitorni"
+
+#~ msgid ""
+#~ "<p>The moon.</p><p>The map is based on data from the Clementine Moon "
+#~ "mission (UVVIS Basemap Mosaic). Credits: NASA/SDIO, Courtesy <a href="
+#~ "\"http://astrogeology.usgs.gov\">USGS Astrogeology Research Program</a></"
+#~ "p>"
+#~ msgstr ""
+#~ "<p>Kuu</p><p>Clementine-kuuluotaimen karttadataa (UVVIS Basemap Mosaic). "
+#~ "Tiedot peräisin: NASA/SDIO,  kiitokset <a href=\"http://astrogeology.usgs."
+#~ "gov\"> USGS Astrogeology Research Programille</a> niiden käyttöön "
+#~ "antamisesta.</p>"
+
+#~ msgid "Explore the Moon"
+#~ msgstr "Kuun tutkiminen"
+
+#~ msgid "Landing Sites"
+#~ msgstr "Laskeutumispaikat"
+
+#~ msgid "Craters"
+#~ msgstr "Kraaterit"
+
+#~ msgid "Maria"
+#~ msgstr "Kuun meret"
+
+#~ msgid "Other features"
+#~ msgstr "Muut ominaisuudet"
+
+#~ msgid ""
+#~ "<a href=\"tour://moon/clementine/tour.kml\">Play a tour of different "
+#~ "landing sites.</a>"
+#~ msgstr ""
+#~ "<a href=\"tour://moon/clementine/tour.kml\">Toista laskeutumispaikkoja "
+#~ "esittelevä kierros.</a>"
+
+#~ msgid "Manned landing site"
+#~ msgstr "Miehitetty laskeutumispaikka"
+
+#~ msgid "Robotic rover"
+#~ msgstr "Mönkijä"
+
+#~ msgid "Unmanned soft landing"
+#~ msgstr "Miehittämätön pehmeä laskeutuminen"
+
+#~ msgid "Unmanned hard landing"
+#~ msgstr "Miehittämätön kova laskeutuminen"
+
+#~ msgid "Crater, impact crater"
+#~ msgstr "Kraatteri, meteoriittikraatteri"
+
+#~ msgid "Mons, mountain"
+#~ msgstr "Mons, vuori"
+
+#~ msgid "Vallis, valley"
+#~ msgstr "Vallis, laakso"
+
+#~ msgid "Selenographic Pole"
+#~ msgstr "Kuun napa"
+
+#~ msgid "Plain Map"
+#~ msgstr "Peruskartta"
+
+#~ msgid ""
+#~ "<p>A <i>plain map</i>.</p><p>It uses vector lines to mark coastlines and "
+#~ "country borders, etc...</p>"
+#~ msgstr ""
+#~ "<p><i>Yksinkertainen peruskartta</i>, joka käyttää vektoreita ilmaisemaan "
+#~ "rantaviivaa, valtioiden rajoja ja vastaavia.</p>"
+
+#~ msgid "Urban Areas"
+#~ msgstr "Kaupunkialueet"
+
+#~ msgid "Boundaries"
+#~ msgstr "Rajat"
+
+#~ msgid "Water Bodies"
+#~ msgstr "Vesialueet"
+
+#~ msgid "Ice and Glaciers"
+#~ msgstr "Jää ja jäätiköt"
+
+#~ msgid "International"
+#~ msgstr "Kansainvälinen"
+
+#~ msgid "State"
+#~ msgstr "Osavaltio"
+
+#~ msgid "Disputed Areas"
+#~ msgstr "Kiistanalaiset alueet"
+
+#~ msgid "Maritime Borders"
+#~ msgstr "Merirajat"
+
+#~ msgid "Lake"
+#~ msgstr "Järvi"
+
+#~ msgid "Historic Lake"
+#~ msgstr "Historiallinen järvi"
+
+#~ msgid "Playa"
+#~ msgstr "Suolatasanko"
+
+#~ msgid "River"
+#~ msgstr "Joki"
+
+#~ msgid "Glaciers"
+#~ msgstr "Jäätiköt"
+
+#~ msgid "Antarctic Iceshelves"
+#~ msgstr "Antarktiset jääkielekkeet"
+
+#~ msgid "Temperature (July)"
+#~ msgstr "Lämpötila (heinäkuu)"
+
+#~ msgid "A map which shows the average temperature in July."
+#~ msgstr "Kartta, joka näyttää heinäkuun keskilämpötilan."
+
+#~ msgid "42&deg;C"
+#~ msgstr "42 &deg;C"
+
+#~ msgid "32&deg;C"
+#~ msgstr "32 &deg;C"
+
+#~ msgid "23&deg;C"
+#~ msgstr "23 &deg;C"
+
+#~ msgid "12&deg;C"
+#~ msgstr "12 &deg;C"
+
+#~ msgid "1&deg;C"
+#~ msgstr "1 &deg;C"
+
+#~ msgid "-10&deg;C"
+#~ msgstr "−10 &deg;C"
+
+#~ msgid "-21&deg;C"
+#~ msgstr "−21 &deg;C"
+
+#~ msgid "-32&deg;C"
+#~ msgstr "−32 &deg;C"
+
+#~ msgid "-41&deg;C"
+#~ msgstr "−41 &deg;C"
+
+#~ msgid "-69&deg;C"
+#~ msgstr "−69 &deg;C"
+
+#~ msgid "Earth at Night"
+#~ msgstr "Maa yöaikaan"
+
+#~ msgid ""
+#~ "This image of <i>Earth's city lights</i> was created with data from the "
+#~ "Defense Meteorological Satellite Program (DMSP) Operational Linescan "
+#~ "System (OLS)."
+#~ msgstr ""
+#~ "Tämä kuva <i>maasta yöaikaan</i> on luotu Defense Meteorological "
+#~ "Satellite Programin (DMSP) Operational Linescan Systemin (OLS) keräämistä "
+#~ "tiedoista."
+
+#~ msgid "Surface"
+#~ msgstr "Pinta"
+
+#~ msgid "Light terrain"
+#~ msgstr "Valoisa maasto"
+
+#~ msgid "Dark terrain"
+#~ msgstr "Pimeä maasto"
+
+#~ msgid "Water"
+#~ msgstr "Vesi"
+
+#~ msgid "Atlas"
+#~ msgstr "Atlas"
+
+#~ msgid ""
+#~ "<p>A <i>classic topographic map</i>.</p><p>It uses vector lines to mark "
+#~ "coastlines, country borders etc. and bitmap graphics to create the height "
+#~ "relief.</p>"
+#~ msgstr ""
+#~ "<p><i>Perinteinen topografinen kartta</i>.</p><p>Käyttää vektoreita "
+#~ "ilmaisemaan rantaviivat, valtioiden rajat ja vastaavat sekä "
+#~ "bittikarttagrafiikkaa luomaan korkokuvan.</p>"
+
+#~ msgid "Relief"
+#~ msgstr "Korkokuva"
+
+#~ msgid "Elevation"
+#~ msgstr "Korkeus merenpinnasta"
+
+#~ msgid "7000 m"
+#~ msgstr "7000 m"
+
+#~ msgid "5000 m"
+#~ msgstr "5000 m"
+
+#~ msgid "3500 m"
+#~ msgstr "3500 m"
+
+#~ msgid "2000 m"
+#~ msgstr "2000 m"
+
+#~ msgid "1000 m"
+#~ msgstr "1000 m"
+
+#~ msgid "500 m"
+#~ msgstr "500 m"
+
+#~ msgid "200 m"
+#~ msgstr "200 m"
+
+#~ msgid "50 m"
+#~ msgstr "50 m"
+
+#~ msgid "0 m"
+#~ msgstr "0 m"
+
+#~ msgid "0 m (Water)"
+#~ msgstr "0 m (merenpinta)"
+
+#~ msgid "-50 m"
+#~ msgstr "−50 m"
+
+#~ msgid "-200 m"
+#~ msgstr "−200 m"
+
+#~ msgid "-2000 m"
+#~ msgstr "−2000 m"
+
+#~ msgid "-4000 m"
+#~ msgstr "−4000 m"
+
+#~ msgid "-6500 m"
+#~ msgstr "−6500 m"
+
+#~ msgid "-11000 m"
+#~ msgstr "−11000 m"
+
+#~ msgid "Temperature (December)"
+#~ msgstr "Lämpötila (joulukuu)"
+
+#~ msgid "A map which shows the average temperature in December."
+#~ msgstr "Kartta, joka näyttää joulukuun keskilämpötilan."
+
+#~ msgid "Vector OSM"
+#~ msgstr "Vektori-OSM"
+
+#~ msgid ""
+#~ "<p>A <i>global roadmap</i> created by the OpenStreetMap (OSM) project.</"
+#~ "p><p>OSM is an open community which creates free editable maps. The OSM "
+#~ "data was rendered using Mapnik.</p>"
+#~ msgstr ""
+#~ "<p><i>Maailman kattava tiekartta</i> – tekijänä OpenStreetMap (OSM) -"
+#~ "projekti.</p><p>OSM on avoin yhteisö, jonka tavoitteena on luoda vapaasti "
+#~ "muokattavia karttoja. OSM-kartta piirtyy Mapnikia käyttäen.</p>"
+
+#~ msgid "OSM Bitmap Tiles"
+#~ msgstr "OSM-bittikarttatiilet"
+
+#~ msgid "Explore the Earth"
+#~ msgstr "Maan tutkiminen"
+
+#~ msgid "Hillshading"
+#~ msgstr "Korkeuserojen varjostus"
+
+#~ msgid "Transportation"
+#~ msgstr "Liikkuminen"
+
+#~ msgid "Areas"
+#~ msgstr "Alueet"
+
+#~ msgid "Education"
+#~ msgstr "Opetus"
+
+#~ msgid "Financial"
+#~ msgstr "Talous"
+
+#~ msgid "Healthcare"
+#~ msgstr "Terveydenhuolto"
+
+#~ msgid "Entertainment"
+#~ msgstr "Viihde"
+
+#~ msgid "Public Buildings"
+#~ msgstr "Julkiset rakennukset"
+
+#~ msgid "Accommodation"
+#~ msgstr "Majoitus"
+
+#~ msgid "Emergency"
+#~ msgstr "Hätätapaukset"
+
+#~ msgid "Historic"
+#~ msgstr "Historialliset kohteet"
+
+#~ msgid "Food and Drinks"
+#~ msgstr "Ruoka ja juoma"
+
+#~ msgid "Shop"
+#~ msgstr "Kauppa"
+
+#~ msgid ""
+#~ "<a href=\"tour://earth/openstreetmap/tour.kml\">Play a tour of popular "
+#~ "places.</a>"
+#~ msgstr ""
+#~ "<a href=\"tour://earth/openstreetmap/tour.kml\">Toista suosittuja "
+#~ "paikkoja esittelevä kierros.</a>"
+
+# Kaikki seuraavat viestit, jotka löytyvät myös OpenStreetMapin suomennoksesta, on pidettävä yhtenäisinä sen kanssa.
+#~ msgid "Motorway"
+#~ msgstr "Moottoritie"
+
+#~ msgid "Trunk road"
+#~ msgstr "Valtatie"
+
+#~ msgid "Primary road"
+#~ msgstr "Kantatie"
+
+#~ msgid "Secondary road"
+#~ msgstr "Seututie"
+
+#~ msgid "Unclassified road"
+#~ msgstr "Luokittelematon tie"
+
+#~ msgid "Unsurfaced road"
+#~ msgstr "Päällystämätön tie"
+
+#~ msgid "Track"
+#~ msgstr "Metsätie"
+
+#~ msgid "Byway"
+#~ msgstr "Sivutie"
+
+#~ msgid "Bridleway"
+#~ msgstr "Ratsastustie"
+
+#~ msgid "Cycleway"
+#~ msgstr "Pyörätie"
+
+#~ msgid "Footway"
+#~ msgstr "Jalankulkutie"
+
+#~ msgid "Railway station"
+#~ msgstr "Rautatieasema"
+
+#~ msgid "Railway"
+#~ msgstr "Junarata"
+
+#~ msgid "Subway"
+#~ msgstr "Metro"
+
+#~ msgid "Lightrail, tram"
+#~ msgstr "Pikaraitiotie ja raitiotie"
+
+#~ msgid "Airport runway, taxiway"
+#~ msgstr "Lentokentän kiitotie ja rullaustie"
+
+#~ msgid "Airport apron, terminal"
+#~ msgstr "Lentokentän asemataso ja terminaali"
+
+#~ msgid "Administrative boundary"
+#~ msgstr "Hallinnollinen raja"
+
+#~ msgid "Bridge"
+#~ msgstr "Silta"
+
+#~ msgid "Tunnel"
+#~ msgstr "Tunneli"
+
+#~ msgid "Forest"
+#~ msgstr "Talousmetsä"
+
+#~ msgid "Wood"
+#~ msgstr "Metsä"
+
+#~ msgid "Golf course"
+#~ msgstr "Golf-rata"
+
+#~ msgid "Park"
+#~ msgstr "Puisto"
+
+#~ msgid "Residential Area"
+#~ msgstr "Asuinalue"
+
+#~ msgid "Tourist attraction"
+#~ msgstr "Turistikohde"
+
+#~ msgid "Common, meadow"
+#~ msgstr "Niitty ja keto"
+
+#~ msgid "Retail area"
+#~ msgstr "Kaupallinen alue"
+
+#~ msgid "Industrial Area"
+#~ msgstr "Teollisuusalue"
+
+#~ msgid "Commercial Area"
+#~ msgstr "Toimistoalue"
+
+#~ msgid "Heathland"
+#~ msgstr "Kanervikko"
+
+#~ msgid "Lake, reservoir"
+#~ msgstr "Järvi, tekojärvi"
+
+#~ msgid "Farm"
+#~ msgstr "Maatila"
+
+#~ msgid "Brownfield site"
+#~ msgstr "Kehitettävä alue"
+
+#~ msgid "Cemetery"
+#~ msgstr "Hautausmaa"
+
+#~ msgid "Allotments"
+#~ msgstr "Siirtolapuutarha"
+
+#~ msgid "Sports pitch"
+#~ msgstr "Urheilukenttä"
+
+#~ msgid "Sports centre"
+#~ msgstr "Urheilukeskus"
+
+#~ msgid "Nature reserve"
+#~ msgstr "Luonnonsuojelualue"
+
+#~ msgid "Military area"
+#~ msgstr "Sotilasalue"
+
+#~ msgid "School, university"
+#~ msgstr "Koulu ja yliopisto"
+
+#~ msgid "Significant Building"
+#~ msgstr "Merkittävä rakennus"
+
+#~ msgid "Summit, peak"
+#~ msgstr "Vuorenhuippu ja huippu"
+
+#~ msgid "College"
+#~ msgstr "Oppilaitos"
+
+#~ msgid "Kindergarten"
+#~ msgstr "Päiväkoti"
+
+#~ msgid "Library"
+#~ msgstr "Kirjasto"
+
+#~ msgid "School"
+#~ msgstr "Koulu"
+
+#~ msgid "University"
+#~ msgstr "Yliopisto"
+
+#~ msgid "ATM"
+#~ msgstr "Pankkiautomaatti"
+
+#~ msgid "Bank"
+#~ msgstr "Pankki"
+
+#~ msgid "Bureau de change"
+#~ msgstr "Rahanvaihto"
+
+#~ msgid "Dentist"
+#~ msgstr "Hammaslääkäri"
+
+#~ msgid "Doctors"
+#~ msgstr "Lääkäreitä"
+
+#~ msgid "Pharmacy"
+#~ msgstr "Apteekki"
+
+#~ msgid "Veterinary"
+#~ msgstr "Eläinlääkäri"
+
+#~ msgid "Cinema"
+#~ msgstr "Elokuvateatteri"
+
+#~ msgid "Theatre"
+#~ msgstr "Teatteri"
+
+#~ msgid "Court"
+#~ msgstr "Oikeustalo"
+
+#~ msgid "Embassy"
+#~ msgstr "Lähetystö"
+
+#~ msgid "Church"
+#~ msgstr "Kirkko"
+
+#~ msgid "Playground"
+#~ msgstr "Leikkikenttä"
+
+#~ msgid "Place of worship"
+#~ msgstr "Kirkko, temppeli, pyhä paikka"
+
+#~ msgid "Post office"
+#~ msgstr "Postitoimisto"
+
+#~ msgid "Public building"
+#~ msgstr "Julkinen rakennus"
+
+#~ msgid "Toilets"
+#~ msgstr "WC"
+
+#~ msgid "Hotel"
+#~ msgstr "Hotelli"
+
+#~ msgid "Motel"
+#~ msgstr "Motelli"
+
+#~ msgid "Hospital"
+#~ msgstr "Sairaala"
+
+#~ msgid "Fire station"
+#~ msgstr "Paloasema"
+
+#~ msgid "Monument"
+#~ msgstr "Muistomerkki"
+
+#~ msgid "Ruins"
+#~ msgstr "Rauniot"
+
+#~ msgid "Bar"
+#~ msgstr "Baari"
+
+#~ msgid "Biergarten"
+#~ msgstr "Terassi"
+
+#~ msgid "Cafe"
+#~ msgstr "Kahvila"
+
+#~ msgid "Drinking water"
+#~ msgstr "Juomavesipiste"
+
+#~ msgid "Fast Food"
+#~ msgstr "Pikaruokala"
+
+#~ msgid "Ice Cream"
+#~ msgstr "Jäätelöä"
+
+#~ msgid "Pub"
+#~ msgstr "Pubi"
+
+#~ msgid "Restaurant"
+#~ msgstr "Ravintola"
+
+#~ msgid "Alcohol"
+#~ msgstr "Alkoholikauppa"
+
+#~ msgid "Bakery"
+#~ msgstr "Leipomo"
+
+#~ msgid "Books"
+#~ msgstr "Kirjakauppa"
+
+#~ msgid "Car"
+#~ msgstr "Autokauppa"
+
+#~ msgid "Clothes"
+#~ msgstr "Vaatekauppa"
+
+#~ msgid "Convenience"
+#~ msgstr "Lähikauppa"
+
+#~ msgid "Gas"
+#~ msgstr "Kaasukauppa"
+
+#~ msgid "Gift"
+#~ msgstr "Lahjakauppa"
+
+#~ msgid "Precipitation (July)"
+#~ msgstr "Sademäärä (heinäkuu)"
+
+#~ msgid ""
+#~ "A map which shows the average precipitation (rain/snow/hail/etc) in July."
+#~ msgstr ""
+#~ "Karttanäkymä heinäkuun keskimääräisestä sademäärästä (vesi-, lumi-, "
+#~ "räntäsade jne.)"
+
+#~ msgid "Precipitation"
+#~ msgstr "Sademäärä"
+
+#~ msgid "0 mm"
+#~ msgstr "0 mm"
+
+#~ msgid "10 mm"
+#~ msgstr "10 mm"
+
+#~ msgid "40 mm"
+#~ msgstr "40 mm"
+
+#~ msgid "63 mm"
+#~ msgstr "63 mm"
+
+#~ msgid "89 mm"
+#~ msgstr "89 mm"
+
+#~ msgid "127 mm"
+#~ msgstr "127 mm"
+
+#~ msgid "256 mm"
+#~ msgstr "256 mm"
+
+#~ msgid "512 mm"
+#~ msgstr "512 mm"
+
+#~ msgid "1024 mm or more"
+#~ msgstr "1024 mm tai enemmän"
+
+#~ msgid "Satellite View"
+#~ msgstr "Satelliittikartta"
+
+#~ msgid ""
+#~ "<p>Earth as seen from Space.</p><p>The map is based on NASA's beautiful "
+#~ "\"Blue Marble Next Generation\" pictures. Credits: NASA's Earth "
+#~ "Observatory</p>"
+#~ msgstr ""
+#~ "<p>Maa avaruudesta nähtynä.</p><p>Kartta pohjautuu NASAn kauniiseen "
+#~ "kuvasarjaan ”Blue Marble Next Generation”. Kuva: Yhdysvaltain ilmailu- ja "
+#~ "avaruushallinto NASA</p>"
+
+#~ msgid "Ice"
+#~ msgstr "Jää"
+
+#~ msgid "Vegetation"
+#~ msgstr "Kasvillisuutta"
+
+#~ msgid "Desert"
+#~ msgstr "Aavikko"
+
+#~ msgid "Political Map"
+#~ msgstr "Valtiokartta"
+
+#~ msgid ""
+#~ "<p>A <i>Political Map</i>.</p><p>The theme displays various countries.</p>"
+#~ msgstr "<p><i>Valtiokartta</i>.</p><p>Teema näyttää valtioita.</p>"
+
+#~ msgid "Rivers"
+#~ msgstr "Joet"
+
+#~ msgid "Precipitation (December)"
+#~ msgstr "Sademäärä (joulukuu)"
+
+#~ msgid "A map which shows the average precipitation in December."
+#~ msgstr "Keskimääräisen sademäärän joulukuussa näyttävä kartta."
+
+#~ msgid "SRTM Data"
+#~ msgstr "SRTM-data"
+
+#~ msgid "Places (in German)"
+#~ msgstr "Paikat (saksaksi)"
+
+#~ msgid "Behaim Places"
+#~ msgstr "Behaim-paikat"
+
+#~ msgid "Texts and illustrations"
+#~ msgstr "Tekstit ja kuvitus"
+
+#~ msgid "Facsimile drawings"
+#~ msgstr "Piirrosten näköispainokset"
+
+#~ msgid "Ravenstein (1908)"
+#~ msgstr "Ravenstein (1908)"
+
+#~ msgid "Ghillany (1853)"
+#~ msgstr "Ghillany (1853)"
+
+#, fuzzy
+#~| msgid "Preference:"
+#~ msgid "Reference lines"
+#~ msgstr "Ensisijainen:"
+
+#~ msgid "Accurate Coastline"
+#~ msgstr "Tarkka rantalinja"
+
+#~ msgid "Historical Map 1689"
+#~ msgstr "Historiallinen kartta 1689"
+
+#~ msgid ""
+#~ "<i>Historical world map</i> from the year 1689 created by G. van Schagen "
+#~ "in Amsterdam."
+#~ msgstr ""
+#~ "<i>Historiallinen maailmankartta</i> vuodelta 1689, tehnyt G. van Schagen "
+#~ "Amsterdamissa."
+
+#~ msgid "Town"
+#~ msgstr "Kaupunki"
+
+#~ msgid "OpenStreetMap"
+#~ msgstr "OpenStreetMap"
+
+#~ msgid "Clouds"
+#~ msgstr "Pilvet"
+
+#~ msgid ""
+#~ "A Real Time Cloud Map that gets updated every 3 hours. It uses GOES, "
+#~ "METEOSAT, and GMS satellite imagery downloaded from the Geostationary "
+#~ "Satellite Imagery page at Dundee University.  Credits: Hari Nair, Xplanet "
+#~ "Project"
+#~ msgstr ""
+#~ "Reaaliaikainen pilvikartta – päivittyy kolmen tunnin välein. Käyttää "
+#~ "GOES-, METEOSAT- ja GMS-satelliittien kuvaa, joka ladataan Dundee-"
+#~ "yliopiston Geostationary Satellite Imagery -sivustolta. Kuva: Hari Nair, "
+#~ "Xplanet Project"
+
+#~ msgid "Marble: Legend"
+#~ msgstr "Marble: Selite"
+
+#~ msgid "<a href="
+#~ msgstr "<a href="
+
+#~ msgid "Population:"
+#~ msgstr "Väkiluku:"
+
+#~ msgid "&gt; 1&nbsp;000&nbsp;000"
+#~ msgstr "&gt; 1&nbsp;000&nbsp;000"
+
+#~ msgid "&ge; 100&nbsp;000"
+#~ msgstr "&ge; 100&nbsp;000"
+
+#~ msgid "&ge; 10&nbsp;000"
+#~ msgstr "&ge; 10&nbsp;000"
+
+#~ msgid "&lt; 10&nbsp;000"
+#~ msgstr "&lt; 10&nbsp;000"
+
+#~ msgid "<br/>"
+#~ msgstr "<br/>"
+
+#~ msgid "Capitals:"
+#~ msgstr "Pääkaupungit:"
+
+#~ msgid "Red:&nbsp;Nation"
+#~ msgstr "Punainen: valtio"
+
+#~ msgid "Orange:&nbsp;State"
+#~ msgstr "Oranssi: osavaltio"
+
+#~ msgid "Yellow:&nbsp;County"
+#~ msgstr "Keltainen: lääni"
+
+#~ msgid "White:&nbsp;None"
+#~ msgstr "Valkoinen: ei mikään"
+
+#~ msgid "<!-- ##customLegendEntries:all## -->"
+#~ msgstr "<!-- ##customLegendEntries:all## -->"
+
+#~ msgid "Marble - Game"
+#~ msgstr "Marble – Peli"
+
+#~ msgid "The Earth"
+#~ msgstr "Maapallo"
+
+#~ msgid "The Marble widget displays a virtual globe."
+#~ msgstr "Marble-sovelma näyttää virtuaalisen maapallon."
+
+#~ msgid "Navigation Control"
+#~ msgstr "Siirtyminen"
+
+#~ msgid "Use this control to navigate."
+#~ msgstr "Navigoi tällä säätimellä."
+
+#~ msgid "Show places"
+#~ msgstr "Näytä paikat"
+
+#~ msgid "Show relief"
+#~ msgstr "Näytä korkeuserot"
+
+#~ msgid "Show scale bar"
+#~ msgstr "Näytä mittakaava"
+
+#~ msgid "Show borders"
+#~ msgstr "Näytä reunukset"
+
+#~ msgid "Show ice / snow"
+#~ msgstr "Näytä jää / lumi"
+
+#~ msgid "Show compass"
+#~ msgstr "Näytä kompassi"
+
+#~ msgid "Show grid"
+#~ msgstr "Näytä ruudukko"
+
+#~ msgid "Show rivers / lakes"
+#~ msgstr "Näytä joet / järvet"
+
+#~ msgid "Show elevation model"
+#~ msgstr "Näytä korkeuserot"
+
+#~ msgid "Coordinates: "
+#~ msgstr "Koordinaatit: "
+
+#~ msgid "Add link"
+#~ msgstr "Lisää linkki"
+
+#~ msgid "URL:"
+#~ msgstr "Osoite:"
+
+#~ msgid "Name:"
+#~ msgstr "Nimi:"
+
+#~ msgid "Bookmark Manager - Marble"
+#~ msgstr "Kirjanmerkkien hallinta–Marble"
+
+#~ msgid "Import Bookmarks..."
+#~ msgstr "Tuo kirjanmerkit…"
+
+#~ msgid "Export Bookmarks..."
+#~ msgstr "Vie kirjanmerkit…"
+
+#~ msgid "Folders"
+#~ msgstr "Kansiot"
+
+#~ msgid "New"
+#~ msgstr "Uusi"
+
+#~ msgid "Rename"
+#~ msgstr "Muuta nimeä"
+
+#~ msgid "Delete"
+#~ msgstr "Poista"
+
+#~ msgid "Bookmarks"
+#~ msgstr "Kirjanmerkit"
+
+#~ msgid "Edit"
+#~ msgstr "Muokkaa"
+
+#~ msgid "Cloud Routes"
+#~ msgstr "Pilvireitit"
+
+#~ msgid "No route available."
+#~ msgstr "Yhtään reittiä ei saatavilla."
+
+#~ msgid "Current Location"
+#~ msgstr "Nykyinen sijainti"
+
+#~ msgid "Position Tracking"
+#~ msgstr "Sijainnin paikannus"
+
+#~ msgid "Disabled"
+#~ msgstr "Ei käytössä"
+
+#~ msgid "Show Track"
+#~ msgstr "Näytä jälki"
+
+#~ msgid "Clear Track"
+#~ msgstr "Poista jälki"
+
+#~ msgid "..."
+#~ msgstr "…"
+
+#~ msgid "No position available."
+#~ msgstr "Ei sijaintia saatavilla"
+
+#~ msgctxt "Select the method to use to recenter your GPS location on map."
+#~ msgid "Select the method to use to re-center your GPS location on map."
+#~ msgstr "Valitse tapa, jolla kartta pidetään keskitettynä GPS-sijaintiin."
+
+#~ msgid "Map Adjustment"
+#~ msgstr "Kartan kohdistus"
+
+#~ msgctxt "Disable Auto Recenter"
+#~ msgid "Disabled"
+#~ msgstr "Ei käytössä"
+
+#~ msgctxt "Always keep gps location at the center of the map"
+#~ msgid "Keep at Center"
+#~ msgstr "Pidä keskitettynä"
+
+#~ msgctxt "Auto center when required"
+#~ msgid "When required"
+#~ msgstr "Tarvittaessa"
+
+#~ msgctxt "Auto Zoom to appropriate zoom level"
+#~ msgid "Auto Zoom to appropriate zoom level"
+#~ msgstr "Automaattinen mittakaavan säätäminen sopivalle tasolle"
+
+#~ msgid "Auto Zoom"
+#~ msgstr "Automaattinen mittakaava"
+
+#~ msgid "Data Migration"
+#~ msgstr "Datan siirto"
+
+#~ msgid ""
+#~ "Marble has found map data stored by a previous Marble version.<br/>Should "
+#~ "this data get converted so that it can be used by the current version?"
+#~ msgstr ""
+#~ "Marble havaitsi aiemman version tallentamaa karttadataa.<br/>Pitäisikö "
+#~ "tämä data muuntaa siten, että sitä voidaan käyttää nykyisellä versiolla?"
+
+#~ msgid "Edit Bookmark - Marble"
+#~ msgstr "Muokkaa kirjanmerkkiä–Marble"
+
+#~ msgid "&Description"
+#~ msgstr "&Kuvaus"
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<table border=\"0\" style=\"-qt-table-type: root; margin-top:4px; margin-"
+#~ "bottom:4px; margin-left:4px; margin-right:4px;\">\n"
+#~ "<tr>\n"
+#~ "<td style=\"border: none;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-family:'Ubuntu';\"><br /></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-family:'Ubuntu';\"><br /></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-family:'Ubuntu';\"><br /></p></td></tr></table></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<table border=\"0\" style=\"-qt-table-type: root; margin-top:4px; margin-"
+#~ "bottom:4px; margin-left:4px; margin-right:4px;\">\n"
+#~ "<tr>\n"
+#~ "<td style=\"border: none;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-family:'Ubuntu';\"><br /></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-family:'Ubuntu';\"><br /></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-family:'Ubuntu';\"><br /></p></td></tr></table></body></html>"
+
+#~ msgid "&Folder"
+#~ msgstr "K&ansio"
+
+#~ msgid "&Add Folder"
+#~ msgstr "&Lisää kansio"
+
+#~ msgid "Edit placemark"
+#~ msgstr "Muokkaa paikkamerkkiä"
+
+#~ msgid "Description"
+#~ msgstr "Kuvaus"
+
+#~ msgid "Show Balloon Popup"
+#~ msgstr "Näytä ponnahduskupla"
+
+#~ msgid "Style, Color"
+#~ msgstr "Tyyli ja väri"
+
+#~ msgid "Label"
+#~ msgstr "Selite"
+
+#~ msgid "Color:"
+#~ msgstr "Väri:"
+
+#~ msgid "Scale:"
+#~ msgstr "Koko:"
+
+#~ msgid "Icon"
+#~ msgstr "Kuvake"
+
+#~ msgid "Show placemark"
+#~ msgstr "Näytä paikkamerkki"
+
+#~ msgid "Bold"
+#~ msgstr "Lihavointi"
+
+#~ msgid "Italics"
+#~ msgstr "Kursiivi"
+
+#~ msgid "Underlined"
+#~ msgstr "Alleviivaus"
+
+#~ msgid "Add image"
+#~ msgstr "Lisää kuva"
+
+#~ msgid "Elevation:"
+#~ msgstr "Korkeus:"
+
+#~ msgid " m"
+#~ msgstr " m"
+
+#~ msgid "above sea level"
+#~ msgstr "merenpinnasta"
+
+#~ msgid "External Map Editor Selection"
+#~ msgstr "Ulkoisen karttamuokkaimen valinta"
+
+#~ msgid "External Map Editor"
+#~ msgstr "Ulkoinen karttamuokkain"
+
+#~ msgid "Web browser (iD)"
+#~ msgstr "Verkkoselain (iD)"
+
+#~ msgid "Merkaartor"
+#~ msgstr "Merkaartor"
+
+#~ msgid "JOSM"
+#~ msgstr "JOSM"
+
+#~ msgid ""
+#~ "Deactivate to be prompted for a map editor selection next time again. "
+#~ "Otherwise, your choice is remembered and will be used automatically in "
+#~ "the future. If you want to alter the default map editor later, you can do "
+#~ "so in the Marble Settings."
+#~ msgstr ""
+#~ "Poistamalla valinnan tästä karttamuokkainta kysytään jälleen ensi "
+#~ "kerralla. Muutoin valintasi muistetaan ja sitä käytetään jatkossa "
+#~ "automaattisesti. Voit muuttaa oletuskarttamuokkainta myöhemmin Marblen "
+#~ "asetuksissa."
+
+# Vapaa käännös, mutta merkitys mielestäni sama.
+#~ msgid "Make my selection the default map editor"
+#~ msgstr "Käytä aina tätä karttamuokkainta"
+
+#~ msgid "Editor Details"
+#~ msgstr "Muokkaimen tiedot"
+
+#~ msgid "Editor Preview"
+#~ msgstr "Muokkaimen esikatselu"
+
+#~ msgid ""
+#~ "iD is an OpenStreetMap editor for quick editing tasks and beginners. It "
+#~ "requires a web browser."
+#~ msgstr ""
+#~ "iD on pieneen pikaiseen muokkaamiseen ja aloittelijoille soveltuva "
+#~ "OpenStreetMap-muokkain. Se vaatii verkkoselaimen."
+
+#~ msgid "File View"
+#~ msgstr "Tiedostonäkymä"
+
+#~ msgid "&Save"
+#~ msgstr "&Tallenna"
+
+#~ msgid "&Close"
+#~ msgstr "&Sulje"
+
+#~ msgid "Formatted text"
+#~ msgstr "Muotoiltu teksti"
+
+#~ msgid "6"
+#~ msgstr "6"
+
+#~ msgid "8"
+#~ msgstr "8"
+
+#~ msgid "9"
+#~ msgstr "9"
+
+#~ msgid "10"
+#~ msgstr "10"
+
+#~ msgid "11"
+#~ msgstr "11"
+
+#~ msgid "12"
+#~ msgstr "12"
+
+#~ msgid "14"
+#~ msgstr "14"
+
+#~ msgid "16"
+#~ msgstr "16"
+
+#~ msgid "18"
+#~ msgstr "18"
+
+#~ msgid "20"
+#~ msgstr "20"
+
+#~ msgid "24"
+#~ msgstr "24"
+
+#~ msgid "36"
+#~ msgstr "36"
+
+#~ msgid "48"
+#~ msgstr "48"
+
+#~ msgid "72"
+#~ msgstr "72"
+
+#~ msgid "96"
+#~ msgstr "96"
+
+#~ msgid "toolBar"
+#~ msgstr "työkalurivi"
+
+#~ msgid "Color"
+#~ msgstr "Väri"
+
+#~ msgid "Go To..."
+#~ msgstr "Siirry sijaintiin…"
+
+#~ msgid ""
+#~ "Enter a search term and press Enter. <a href=\"http://userbase.kde.org/"
+#~ "Marble/Search\">Details...</a>"
+#~ msgstr ""
+#~ "Kirjoita hakusana ja paina Enter. <a href=\"http://userbase.kde.org/"
+#~ "Marble/Search\"> Lisätietoja…</a>"
+
+#~ msgid "Browse"
+#~ msgstr "Selaa"
+
+#~ msgid "Search"
+#~ msgstr "Haku"
+
+#~ msgid "Select a geographic region"
+#~ msgstr "Valitse maantieteellinen alue"
+
+#~ msgid "Northern Latitude"
+#~ msgstr "pohjoista leveyttä"
+
+#~ msgid "°"
+#~ msgstr "°"
+
+#~ msgid "&N"
+#~ msgstr "&P"
+
+#~ msgid "Western Longitude"
+#~ msgstr "läntistä pituutta"
+
+#~ msgid "&W"
+#~ msgstr "&L"
+
+#~ msgid "Eastern Longitude"
+#~ msgstr "itäistä pituutta"
+
+#~ msgid "&E"
+#~ msgstr "&I"
+
+#~ msgid "Southern Latitude"
+#~ msgstr "eteläistä leveyttä"
+
+#~ msgid "&S"
+#~ msgstr "&E"
+
+#~ msgid "′"
+#~ msgstr "′"
+
+#~ msgid "″"
+#~ msgstr "″"
+
+#~ msgid "Legend"
+#~ msgstr "Selite"
+
+#~ msgid "about:blank"
+#~ msgstr "about:blank"
+
+#~ msgid "Marble - Install Maps"
+#~ msgstr "Marble – Asenna karttoja"
+
+#~ msgid "Map View"
+#~ msgstr "Karttanäkymä"
+
+#~ msgid "&Projection"
+#~ msgstr "&Projektio"
+
+#~ msgid "Globe"
+#~ msgstr "Palloprojektio"
+
+#~ msgid "Flat Map"
+#~ msgstr "Neliökartta"
+
+#~ msgid "Mercator"
+#~ msgstr "Mercatorin projektio"
+
+#~ msgid "Gnomonic"
+#~ msgstr "Gnomoninen projektio"
+
+#~ msgid "Stereographic"
+#~ msgstr "Stereografinen projektio"
+
+#~ msgid "Lambert Azimuthal Equal Area"
+#~ msgstr "Lambertin oikeapintainen tasoprojektio"
+
+#~ msgid "Azimuthal Equidistant"
+#~ msgstr "Oikeapituinen tasoprojektio"
+
+#~ msgid "Vertical Perspective Globe"
+#~ msgstr "Pystysuora perspektiiviprojektio"
+
+#~ msgid "&Celestial Body"
+#~ msgstr "&Taivaankappale"
+
+#~ msgid "&Theme"
+#~ msgstr "&Teema"
+
+#~ msgid "Here you can choose the preferred map view from different topics."
+#~ msgstr "Tästä voit valita karttanäkymän eri aiheista."
+
+#~ msgid "Marble Map Theme Creation Wizard"
+#~ msgstr "Marblen opastettu karttateeman luonti"
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">Welcome to the Map Creation Wizard!</span></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">We will guide you "
+#~ "through the process of creating a map theme for Marble. In the end you "
+#~ "will have your own map that you can view in Marble.</p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Please choose the "
+#~ "source that you want to use for the data of your map theme:</p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:12px; margin-bottom:12px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">Tervetuloa opastettuun kartan luontiin!</span></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Opastamme sinua luomaan "
+#~ "uuden kartan. Lopuksi sinulla on valmis Marblessa katsottavissa oleva "
+#~ "kartta.</p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Valitse karttateeman "
+#~ "datalähde:</p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:12px; margin-bottom:12px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p></body></html>"
+
+#~ msgid ""
+#~ "Connects to a server on the Internet. The map data is queried via the WMS "
+#~ "protocol."
+#~ msgstr ""
+#~ "Ottaa yhteyden Internet-palvelimeen. Karttadata haetaan WMS-"
+#~ "yhteyskäytännöllä."
+
+#~ msgid "Web Map Service (WMS)"
+#~ msgstr "Web Map Service (WMS)"
+
+#~ msgid ""
+#~ "You need to provide a bitmap image of a world map that is stored on disk."
+#~ msgstr ""
+#~ "Sinun täytyy antaa bittikarttakuva levylle tallennetusta maailmankartasta"
+
+#~ msgid "A single image showing the whole world"
+#~ msgstr "Yksi kuva, joka kattaa koko maailman"
+
+#~ msgid ""
+#~ "Connects to a server on the Internet. The map data is queried via a "
+#~ "static URL."
+#~ msgstr ""
+#~ "Yhdistää Internet-palvelimeen. Karttadata haetaan staattisesta verkko-"
+#~ "osoitteesta."
+
+#~ msgid "Online map providing indexed tiles (e.g. Open Street Map)"
+#~ msgstr "Verkkokartta indeksoitujen tiilien muodossa (esim. OpenStreetMap)"
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">WMS Server</span></p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Please choose a <a href="
+#~ "\"http://en.wikipedia.org/wiki/Web_Map_Service\"><span style=\" text-"
+#~ "decoration: underline; color:#0057ae;\">WMS</span></a> server or enter a "
+#~ "custom server URL.</p></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">WMS-palvelin</span></p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Valitse <a href="
+#~ "\"http://en.wikipedia.org/wiki/Web_Map_Service\"><span style=\" text-"
+#~ "decoration: underline; color:#0057ae;\">WMS</span></a>-palvelin tai "
+#~ "kirjoita mukautetun palvelimen osoite.</p></body></html>"
+
+#~ msgid "WMS Server:"
+#~ msgstr "WMS-palvelin:"
+
+#~ msgid "Custom"
+#~ msgstr "Mukautettu"
+
+#~ msgid "http://"
+#~ msgstr "http://"
+
+#~ msgid "Available Maps:"
+#~ msgstr "Saatavilla olevat kartat:"
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">World Map Bitmap Image</span></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-weight:600;\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Please choose the "
+#~ "location of a world map that is stored in a single image file (JPG, PNG, "
+#~ "etc.). It needs to be provided in <a href=\"http://en.wikipedia.org/wiki/"
+#~ "Equirectangular_projection\"><span style=\" text-decoration: underline; "
+#~ "color:#0057ae;\">Equirectangular projection</span></a>, so the shape "
+#~ "should look like this (size ratio: 2:1):</p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><img src=\":/data/svg/"
+#~ "worldmap.svg\" width=\"150\" /></p></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">Maailmankartan bittikarttakuva</span></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-weight:600;\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Valitse, minne "
+#~ "maailmankartta yhtenä kuvatiedostona (JPG, PNG jne.) on tallennettu. Sen "
+#~ "täytyy käyttää <a href=\"http://en.wikipedia.org/wiki/"
+#~ "Equirectangular_projection\"><span style=\" text-decoration: underline; "
+#~ "color:#0057ae;\">Equirectangular-projektiota</span></a> eli sen pitäisi "
+#~ "näyttää tältä (kuvasuhde 2:1):</p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><img src=\":/data/svg/"
+#~ "worldmap.svg\" width=\"150\" /></p></body></html>"
+
+#~ msgid "Source Image:"
+#~ msgstr "Lähdekuva:"
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Bitstream Vera Sans'; font-"
+#~ "size:9pt; font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif'; font-weight:600;\">URL Scheme for Indexed Tiles</"
+#~ "span></p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif';\">Please enter the URL used for downloading "
+#~ "individual tiles. Use the placeholders </span><span style=\" font-"
+#~ "family:'Sans Serif'; font-style:italic;\">{x}</span><span style=\" font-"
+#~ "family:'Sans Serif';\">, </span><span style=\" font-family:'Sans Serif'; "
+#~ "font-style:italic;\">{y}</span><span style=\" font-family:'Sans Serif';"
+#~ "\">, and </span><span style=\" font-family:'Sans Serif'; font-style:"
+#~ "italic;\">{zoomLevel}</span><span style=\" font-family:'Sans Serif';\"> "
+#~ "to reference a tile from the index.</span></p></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Bitstream Vera Sans'; font-"
+#~ "size:9pt; font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif'; font-weight:600;\">Indeksoitujen tiilien verkko-"
+#~ "osoitteen muoto</span></p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif';\">Kirjoita verkko-osoite, josta yksittäiset tiilet "
+#~ "haetaan. Käytä merkkijonoja </span><span style=\" font-family:'Sans "
+#~ "Serif'; font-style:italic;\">{x}</span><span style=\" font-family:'Sans "
+#~ "Serif';\">, </span><span style=\" font-family:'Sans Serif'; font-style:"
+#~ "italic;\">{y}</span><span style=\" font-family:'Sans Serif';\"> ja </"
+#~ "span><span style=\" font-family:'Sans Serif'; font-style:italic;"
+#~ "\">{zoomLevel}</span><span style=\" font-family:'Sans Serif';\"> "
+#~ "viittaamaan indeksin tiileen.</span></p></body></html>"
+
+#~ msgid "URL Scheme:"
+#~ msgstr "Verkko-osoitteen muoto:"
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Bitstream Vera Sans'; font-"
+#~ "size:9pt; font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif'; font-weight:600;\">General Information</span></p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif';\">Please specify a title, a name and an icon for "
+#~ "your new map. Add a description to let users know what your map is about. "
+#~ "</span></p></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Bitstream Vera Sans'; font-"
+#~ "size:9pt; font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif'; font-weight:600;\">Yleistiedot</span></p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif';\">Kirjoita uudelle kartallesi otsikko, nimi ja "
+#~ "valitse sille kuvake. Lisää myös kuvaus, jotta muut tietävät, millaisesta "
+#~ "kartasta on kyse. </span></p></body></html>"
+
+#~ msgid "Map Title:"
+#~ msgstr "Kartan otsikko:"
+
+#~ msgid "A short concise name for your map theme."
+#~ msgstr "Lyhyt nimi karttateemalle."
+
+#~ msgid "Map Name:"
+#~ msgstr "Kartan nimi:"
+
+#~ msgid "The lowercase map theme id."
+#~ msgstr "Karttateeman tunniste pienaakkosilla."
+
+#~ msgid "The folder name of your new theme."
+#~ msgstr "Uuden karttateeman kansionimi."
+
+#~ msgid "Description:"
+#~ msgstr "Kuvaus:"
+
+#~ msgid ""
+#~ "A short description of your map theme. Here you can provide information "
+#~ "about the purpose, origin, copyright and license of the data used in your "
+#~ "map theme."
+#~ msgstr ""
+#~ "Karttateeman lyhyt kuvaus. Tähän voi kirjoittaa esimerkiksi kartan "
+#~ "tarkoituksesta, alkuperästä, tekijänoikeuksista ja datan lisenssistä."
+
+#~ msgid "It will appear in a tool tip and may contain HTML formatting."
+#~ msgstr "Näkyy työkaluvihjeessä ja voi sisältää HTML-muotoilua."
+
+#~ msgid "Preview Image:"
+#~ msgstr "Esikatselukuva:"
+
+#~ msgid "preview image"
+#~ msgstr "esikatselukuva"
+
+#~ msgid "Change..."
+#~ msgstr "Muuta…"
+
+#~ msgid "Legend Image:"
+#~ msgstr "Selitekuva:"
+
+#~ msgid "Places of Interest"
+#~ msgstr "Karttakohteet"
+
+#~ msgid "Populated Places"
+#~ msgstr "Asutut paikat"
+
+#~ msgid "Terrain"
+#~ msgstr "Maasto"
+
+#~ msgid "Coordinate Grid"
+#~ msgstr "Koordinaattiruudukko"
+
+#~ msgid "Border Lines"
+#~ msgstr "Rajaviivat"
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">Summary</span></p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Congratulations! You "
+#~ "have entered all the data that is necessary to create your map theme. "
+#~ "Check the summary below carefully and press the \"Finish\" button to "
+#~ "create the theme. </p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Please consider "
+#~ "contributing the map theme back to the Marble community if the license "
+#~ "and the terms of use allow for it.</p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:12px; margin-bottom:12px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">Yhteenveto</span></p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Onnittelut! Olet "
+#~ "antanut kaikki kartan luontiin tarvittavat tiedot. Tarkista alla oleva "
+#~ "yhteenveto huolellisesti ja paina Valmis-painiketta luodaksesi "
+#~ "karttateeman. </p>\n"
+#~ " <p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Mieti, haluaisitko "
+#~ "antaa karttasi Marble-yhteisön käyttöön (jos lisenssi ja käyttöehdot sen "
+#~ "sallivat).</p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:12px; margin-bottom:12px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p></body></html>"
+
+#~ msgid "Map name goes here."
+#~ msgstr "Kartan nimi tulee tähän."
+
+#~ msgid "Map Theme:"
+#~ msgstr "Karttateema:"
+
+#~ msgid "Map theme goes here."
+#~ msgstr "Karttateema tulee tähän."
+
+#~ msgid "Thumbnail image goes here."
+#~ msgstr "Esikatselukuva tulee tähän."
+
+#~ msgid "Preview Map"
+#~ msgstr "Kartan esikatselu"
+
+#~ msgid "About Marble"
+#~ msgstr "Tietoa Marblesta"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">Marble Virtual Globe</span></p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">Marble-maapallo</span></p></body></html>"
+
+#~ msgid "Version Unknown"
+#~ msgstr "Tuntematon versio"
+
+#~ msgid "&About"
+#~ msgstr "&Tietoa"
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:10pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-size:9pt;\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "size:9pt;\">(c) 2007, The Marble Project</span></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-size:9pt; font-style:italic;\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "size:9pt;\">http://edu.kde.org/marble</span></p></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:10pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-size:9pt;\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "size:9pt;\">© 2007 Marble-projekti</span></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-size:9pt; font-style:italic;\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "size:9pt;\">http://edu.kde.org/marble</span></p></body></html>"
+
+#~ msgid "A&uthors"
+#~ msgstr "T&ekijät"
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:10pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-size:9pt;\"></p></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:10pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-size:9pt;\"></p></body></html>"
+
+#~ msgid "&Data"
+#~ msgstr "&Data"
+
+#~ msgid "&License Agreement"
+#~ msgstr "&Lisenssisopimus"
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:10pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-family:'MS Shell Dlg 2'; font-size:8pt;\"></p></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:10pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-family:'MS Shell Dlg 2'; font-size:8pt;\"></p></body></html>"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">There are two caches "
+#~ "being used for Marble: The physical memory which is needed to keep map "
+#~ "data in the computer's memory. Increasing the value will make the "
+#~ "application more responsive. The hard disc memory cache is used by "
+#~ "download contents from the Internet (e.g. Wikipedia data or map data). "
+#~ "Decrease this value if you want to save space on the hard disc and if "
+#~ "high usage of the Internet is not an issue. </p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Marble käyttää kahta "
+#~ "välimuistia: Fyysistä muistia tarvitaan karttadatan pitämiseen "
+#~ "tietokoneen muistissa. Sen kasvattaminen parantaa ohjelman vasteaikaa. "
+#~ "Kiintolevyvälimuistissa pidetään Internetistä ladattua sisältöä, kuten "
+#~ "Wikipedia-artikkeleita tai karttadataa. Pienennä sitä, jos haluat säästää "
+#~ "kiintolevytilaa ja suuri Internetin käyttö ei ole ongelma.</p></body></"
+#~ "html>"
+
+#~ msgid "C&ache"
+#~ msgstr "&Välimuisti"
+
+#~ msgid "&Physical memory:"
+#~ msgstr "&Keskusmuisti:"
+
+#~ msgid " MB"
+#~ msgstr " Mt"
+
+#~ msgid "C&lear"
+#~ msgstr "T&yhjennä"
+
+#~ msgid "&Hard disc:"
+#~ msgstr "K&iintolevy:"
+
+#~ msgid "Unlimited"
+#~ msgstr "Rajoitukseton"
+
+#~ msgid "Cl&ear"
+#~ msgstr "T&yhjennä"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Proxy settings for your "
+#~ "local intranet. Please leave empty if there is no proxy.</p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Välityspalvelimen "
+#~ "asetukset paikallisverkollesi. Jätä tyhjäksi, jos käytössäsi ei ole "
+#~ "välityspalvelinta.</p></body></html>"
+
+#~ msgid "&Proxy"
+#~ msgstr "&Välityspalvelin"
+
+#~ msgid "&Proxy:"
+#~ msgstr "&Välityspalvelin:"
+
+#~ msgid "P&ort:"
+#~ msgstr "P&ortti:"
+
+#~ msgid "Proxy type:"
+#~ msgstr "Välityspalvelimen tyyppi:"
+
+#~ msgid "Http"
+#~ msgstr "Http"
+
+#~ msgid "Socks5"
+#~ msgstr "Socks5"
+
+#~ msgid "Requires authentication"
+#~ msgstr "Vaatii tunnistautumisen"
+
+#~ msgid "U&sername:"
+#~ msgstr "&Käyttäjätunnus:"
+
+#~ msgid "&Password:"
+#~ msgstr "&Salasana:"
+
+#~ msgid "Enable synchronization"
+#~ msgstr "Synkronoi"
+
+#~ msgid ""
+#~ "Allows you to store routes in owncloud. Each route must be uploaded/"
+#~ "downloaded manually."
+#~ msgstr ""
+#~ "Mahdollistaa reittien tallentamisen ownCloudiin. Joka reitti pitää "
+#~ "lähettää/ladata manuaalisesti."
+
+#~ msgid "Enable route synchronization"
+#~ msgstr "Synkronoi reitit"
+
+#~ msgid "Automatically sync all bookmarks to the server."
+#~ msgstr "Synkronoi kaikki kirjanmerkit palvelimelle automaattisesti."
+
+#~ msgid "Enable bookmark synchronization"
+#~ msgstr "Synkronoi kirjanmerkit"
+
+#~ msgid "Sync now"
+#~ msgstr "Synkronoi nyt"
+
+#~ msgid "Credentials"
+#~ msgstr "Käyttäjätiedot"
+
+#~ msgid "Server:"
+#~ msgstr "Palvelin:"
+
+#~ msgid "Remote server URL, e.g. myserver.com/owncloud"
+#~ msgstr "Palvelimen osoite. Esim. omapalvelin.com/owncloud"
+
+#~ msgid "Username:"
+#~ msgstr "Käyttäjätunnus:"
+
+#~ msgid "Password:"
+#~ msgstr "Salasana:"
+
+#~ msgid "Test Login"
+#~ msgstr "Kokeile kirjautumista"
+
+#~ msgid "Marble Cache Settings"
+#~ msgstr "Marblen välimuistiasetukset"
+
+#~ msgid "Dragging and Animation"
+#~ msgstr "Vetäminen ja animointi"
+
+#~ msgid "&Drag location:"
+#~ msgstr "&Suunta vetäessä:"
+
+# Tämä on aika sekava.
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">While dragging the "
+#~ "mouse there are two standard behaviours when dealing with a virtual globe:"
+#~ "</p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">The location below "
+#~ "mouse pointer will follow the cursor exactly: As a result e.g. the north "
+#~ "pole will not stay at the top which can lead to confusion. By default "
+#~ "Marble makes sure that north is always up which results in a dragging "
+#~ "behaviour where the location below the mouse pointer slightly \"detaches"
+#~ "\" from the cursor. </p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Vedettäessä maapalloa "
+#~ "hiirellä voidaan menetellä kahdella tapaa:</p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Hiiren alla oleva "
+#~ "sijainti seuraa osoitinta tarkalleen: sen seurauksena esimerkiksi "
+#~ "pohjoisnapa ei pysy ylimmäisenä, ja saattaa näin aiheuttaa hämmennystä. "
+#~ "Oletuksena Marble huolehtii siitä, että pohjoinen pysyy aina ylhäällä. "
+#~ "Tällöin hiiren osoittimen alla oleva sijainti hieman ”irtoaa” "
+#~ "osoittimesta.</p></body></html>"
+
+#~ msgid "Keep Planet Axis Vertically"
+#~ msgstr "Pidä planeetan akseli pystyasennossa"
+
+#~ msgid "Follow Mouse Pointer"
+#~ msgstr "Seuraa hiiren osoitinta"
+
+#~ msgid "Use kinetic spinning when dragging the map"
+#~ msgstr "Pyöritä kartta kineettisesti vedettäessä sitä"
+
+#~ msgid "&Inertial Globe Rotation"
+#~ msgstr "&Karttapallon inertiaalinen pyörintä"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">When searching for a "
+#~ "location Marble can either move instantly to the new location or it can "
+#~ "show a travel animation from the previous place to the new place.</p></"
+#~ "body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Etsittäessä sijaintia "
+#~ "Marble voi joko siirtyä uuteen sijaintiin heti tai näyttää "
+#~ "liikkumisanimaation vanhasta paikasta uuteen paikkaan.</p></body></html>"
+
+#~ msgid "&Animate voyage to the target"
+#~ msgstr "&Animoi matka kohteeseen"
+
+#~ msgid "&On startup:"
+#~ msgstr "&Kun Marble käynnistetään:"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">By default Marble will "
+#~ "display the home location immediately after the application has started. "
+#~ "As an alternative it can also show the last position that was active when "
+#~ "the user left the application. </p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Oletuksena Marble "
+#~ "näyttää käynnistyessään kotisijainnin. Vaihtoehtoisesti se voi myös "
+#~ "näyttää sijainnin, joka oli viimeksi näkyvissä ohjelman sulkeutuessa.  </"
+#~ "p></body></html>"
+
+#~ msgid "Show Home Location"
+#~ msgstr "Näytä kotisijainti"
+
+#~ msgid "Return to Last Location Visited"
+#~ msgstr "Palaa viimeksi vierailtuun kohteeseen"
+
+#~ msgid "&External Editor:"
+#~ msgstr "&Ulkoinen muokkain:"
+
+#~ msgid ""
+#~ "<p>The application that is launched to edit maps. Potlatch (default) "
+#~ "requires a web browser with flash support to be installed. When selecting "
+#~ "josm or merkaartor, make sure that the respective application is "
+#~ "installed.</p>"
+#~ msgstr ""
+#~ "<p>Sovellus, joka käynnistetään karttojen muokkaamista varten. Potlatch "
+#~ "(oletus) vaatii verkkoselaimen Flash-tuella. Valittaessa josm tai "
+#~ "merkaartor, varmista että kyseinen sovellus on asennettu.</p>"
+
+#~ msgid "Always ask"
+#~ msgstr "Kysy aina"
+
+#~ msgid "Potlatch (Web browser)"
+#~ msgstr "Potlatch (verkkoselain)"
+
+#~ msgid "Up"
+#~ msgstr "Ylös"
+
+#~ msgid "Tilts the globe's axis towards the user."
+#~ msgstr "Kallistaa maapallon akselia kohti käyttäjää."
+
+#~ msgid "Left"
+#~ msgstr "Vasemmalle"
+
+#~ msgid "Rotates the globe counterclockwise around its axis."
+#~ msgstr "Kiertää maapalloa vastapäivään akselinsa ympäri."
+
+#~ msgid "Reset View"
+#~ msgstr "Palauta näkymä"
+
+#~ msgid "Click this button to restore the original zoom level and view angle."
+#~ msgstr ""
+#~ "Palauta alkuperäinen zoomaustaso ja katselukulma napsauttamalla tästä."
+
+#~ msgid "Home"
+#~ msgstr "Koti"
+
+#~ msgid "Right"
+#~ msgstr "Oikealle"
+
+#~ msgid "Rotates the globe clockwise around its axis."
+#~ msgstr "Kiertää maapalloa myötäpäivään akselinsa ympäri."
+
+#~ msgid "Down"
+#~ msgstr "Alas"
+
+#~ msgid "Tilts the globe's axis away from the user."
+#~ msgstr "Kallistaa maapallon akselia pois päin käyttäjästä."
+
+#~ msgid "Zoom In"
+#~ msgstr "Suurenna"
+
+#~ msgid "Zoom in by pressing this button to see more detail."
+#~ msgstr "Suurenna painamalla tästä nähdäksesi lisää yksityiskohtia."
+
+#~ msgid "+"
+#~ msgstr "+"
+
+#~ msgid "Zoom Slider"
+#~ msgstr "Mittakaavan säädin"
+
+#~ msgid "Use this slider to adjust the zoom level of the map."
+#~ msgstr "Käytä tätä liukusäädintä määrittääksesi kartan mittakaavan."
+
+#~ msgid "Zoom Out"
+#~ msgstr "Pienennä"
+
+#~ msgid "Zoom out by pressing this button to see less detail."
+#~ msgstr "Pienennä painamalla tästä nähdäksesi vähemmän yksityiskohtia."
+
+#~ msgid "-"
+#~ msgstr "-"
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'DejaVu Sans'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif';\">This is Marble's machine room for advanced users. "
+#~ "Here you can select and deselect the functionality that is provided "
+#~ "through plugins. </span></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif';\">Deselecting a plugin will remove the functionality "
+#~ "from the map, menus and toolbars. </span></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif';\">Also some of the plugins might allow for tweaking "
+#~ "their configuration a bit. </span></p></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'DejaVu Sans'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif';\">Marblen konehuone edistyneille käyttäjille. Täältä "
+#~ "voit valita, mitä liitännäisten muodossa tarjottavaa toiminnallisuutta "
+#~ "käytetään. </span></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif';\">Valinnan poistaminen liitännäisestä poistaa "
+#~ "toiminnallisuuden kartasta, valikoista ja työkaluriveiltä. </span></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif';\">Joidenkin liitännäisten asetuksia voi lisäksi "
+#~ "hieman säätää.</span></p></body></html>"
+
+#~ msgid "P&lugins"
+#~ msgstr "&Liitännäiset"
+
+#~ msgid "Time Zone"
+#~ msgstr "Aikavyöhyke"
+
+#~ msgid "UTC"
+#~ msgstr "UTC"
+
+#~ msgid "System time zone"
+#~ msgstr "Järjestelmän aikavyöhyke"
+
+#~ msgid "Choose Time zone"
+#~ msgstr "Valitse aikavyöhyke"
+
+#~ msgid "Universal Time Coordinated"
+#~ msgstr "Koordinoitu yleisaika (UTC)"
+
+#~ msgid "European Central Time"
+#~ msgstr "Keski-Euroopan aika"
+
+#~ msgid "Eastern European Time"
+#~ msgstr "Itä-Euroopan aika"
+
+#~ msgid "Egypt Standard Time"
+#~ msgstr "Egyptin normaaliaika"
+
+#~ msgid "Eastern African Time"
+#~ msgstr "Itä-Afrikan aika"
+
+#~ msgid "Middle East Time"
+#~ msgstr "Lähi-idän aika"
+
+#~ msgid "Near East Time"
+#~ msgstr "Lähi-idän aika"
+
+# Lahore on pääkaupungin nimi. Maassa vain yksi aikavyöhyke (+kesäaika), joten jätin pois.
+#~ msgid "Pakistan Lahore Time"
+#~ msgstr "Pakistanin aika"
+
+#~ msgid "India Standard Time"
+#~ msgstr "Intian normaaliaika"
+
+#~ msgid "Bangladesh Standard Time"
+#~ msgstr "Bangladeshin normaaliaika"
+
+#~ msgid "Vietnam Standard Time"
+#~ msgstr "Vietnamin normaaliaika"
+
+#~ msgid "China Taiwan Time"
+#~ msgstr "Kiinan–Taiwanin aika"
+
+#~ msgid "Japan Standard Time"
+#~ msgstr "Japanin normaaliaika"
+
+#~ msgid "Australia Central Time"
+#~ msgstr "Keski-Australian aika"
+
+#~ msgid "Australia Eastern Time"
+#~ msgstr "Itä-Australian aika"
+
+#~ msgid "Solomon Standard Time"
+#~ msgstr "Solomonin normaaliaika"
+
+#~ msgid "New Zealand Standard Time"
+#~ msgstr "Uuden-Seelannin normaaliaika"
+
+#~ msgid "Midway Islands Time"
+#~ msgstr "Midwaysaarten aika"
+
+#~ msgid "Hawaii Standard Time"
+#~ msgstr "Havaijin normaaliaika"
+
+#~ msgid "Alaska Standard Time"
+#~ msgstr "Alaskan normaaliaika"
+
+#~ msgid "Pacific Standard Time"
+#~ msgstr "Tyynenmeren normaaliaika"
+
+#~ msgid "Phoenix Standard Time"
+#~ msgstr "Phoenixin normaaliaika"
+
+#~ msgid "Mountain Standard Time"
+#~ msgstr "Kalliovuorten normaaliaika"
+
+#~ msgid "Central Standard Time"
+#~ msgstr "Keskinen normaaliaika"
+
+#~ msgid "Eastern Standard Time"
+#~ msgstr "Itäinen normaaliaika"
+
+#~ msgid "Indiana Eastern Standard Time"
+#~ msgstr "Itä-Indianan normaaliaika"
+
+#~ msgid "Puerto Rico and US Virgin Islands Time"
+#~ msgstr "Puerto Ricon ja Yhdysvaltain Neitsytsaarten aika"
+
+#~ msgid "Canada Newfoundland Time"
+#~ msgstr "Kanadan Newfoundlandin aika"
+
+#~ msgid "Argentina Standard Time"
+#~ msgstr "Argentiinan normaaliaika"
+
+#~ msgid "Brazil Eastern Time"
+#~ msgstr "Itä-Brasilian aika"
+
+#~ msgid "Central African Time"
+#~ msgstr "Keski-Afrikan aika"
+
+#~ msgid "When Marble starts"
+#~ msgstr "Kun Marble käynnistyy"
+
+#~ msgid "Load system time"
+#~ msgstr "Aseta järjestelmäaikaan"
+
+#~ msgid "Load last session time"
+#~ msgstr "Aseta viime istunnon aikaan"
+
+#~ msgid "&Units"
+#~ msgstr "&Yksiköt"
+
+#~ msgid "&Distance:"
+#~ msgstr "&Etäisyys:"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">The unit that gets used "
+#~ "to measure altitude, lengths and distances (e.g. km, mi, ft).</p></body></"
+#~ "html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Korkeuden, etäisyyksien "
+#~ "ja matkojen yksikkö (esimerkiksi km, m, mi, ft).</p></body></html>"
+
+#~ msgid "Kilometer, Meter"
+#~ msgstr "Kilometri, metri"
+
+#~ msgid "Miles, Feet"
+#~ msgstr "Maili, jalka"
+
+#~ msgid "Nautical miles, Knots"
+#~ msgstr "Merimaili, solmu"
+
+#~ msgid "An&gle:"
+#~ msgstr "Ku&lma:"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Specifies the notation "
+#~ "of angles in coordinates: By default the Degree-Minute-Second notation (e."
+#~ "g. 54°30'00\" ) gets used. As an alternative you can choose decimal "
+#~ "degrees (e.g. 54.5°).</p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Valitse koordinaattien "
+#~ "esitystapa: Oletuksena käytetään aste–minuutti–sekuntti-esitystapaa, "
+#~ "esim. 54°30'00\". Vaihtoehtoisesti voidaan käyttää desimaaliasteita "
+#~ "(esim. 54,5°).</p></body> </html>"
+
+#~ msgid "Degree (DMS)"
+#~ msgstr "Asteet (DMS)"
+
+#~ msgid "Degree (Decimal)"
+#~ msgstr "Asteet (Desimaalit)"
+
+#~ msgid "Universal Transverse Mercator (UTM)"
+#~ msgstr "Universal Transverse Mercator (UTM)"
+
+#~ msgid "Map &Quality"
+#~ msgstr "Kartan &laatuasetukset"
+
+#~ msgid "&Still image:"
+#~ msgstr "&Liikkumaton kuva:"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Specifies the map "
+#~ "quality that gets displayed while there is no user input. Usually this "
+#~ "allows for high map quality as speed is no concern.</p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Määrittää kartan laadun "
+#~ "silloin kun se ei siirry paikasta toiseen tai muuten muutu. Yleensä tämä "
+#~ "mahdollistaa korkean kartan laadun, koska nopeudella ei ole väli. </p></"
+#~ "body></html>"
+
+#~ msgid "Outline Quality"
+#~ msgstr "Luonnoslaatu"
+
+#~ msgid "Low Quality"
+#~ msgstr "Matala laatu"
+
+#~ msgid "Normal"
+#~ msgstr "Tavallinen"
+
+#~ msgid "High Quality"
+#~ msgstr "Korkea laatu"
+
+#~ msgid "Print Quality"
+#~ msgstr "Tulostuslaatu"
+
+#~ msgid "During &animations:"
+#~ msgstr "&Animaation aikana:"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Specifies the map "
+#~ "quality that gets displayed during map animations (e.g. while dragging "
+#~ "the globe). </p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Especially on slow "
+#~ "machines it is advisable to set this option to \"low quality\" as this "
+#~ "will give better speed.</p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Määrittää kartan laadun "
+#~ "silloin kun se näytetään animaatioiden aikana (esimerkiksi maapalloa "
+#~ "vedettäessä)</p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Tämä kannattaa asettaa "
+#~ "”matalaan laatuun” erityisesti hitailla koneilla, koska näin nopeus on "
+#~ "parempi.</p></body></html>"
+
+#~ msgid "G&raphics system:"
+#~ msgstr "G&rafiikkajärjestelmä:"
+
+#~ msgid ""
+#~ "Specifies the graphics system that Qt uses to draw the map.\n"
+#~ "Changing this setting might be a good idea if there are performance "
+#~ "issues with the system's graphics drivers."
+#~ msgstr ""
+#~ "Grafiikkajärjestelmä, jota Qt käyttää kartan piirtoon.\n"
+#~ "Jos järjestelmäsi on hidas karttaa piirtäessä, kannattaa koettaa muita "
+#~ "grafiikkajärjestelmiä."
+
+#~ msgid "Raster (Software rendering)"
+#~ msgstr "Rasteri (ohjelmistorenderöinti)"
+
+#~ msgid "OpenGL"
+#~ msgstr "OpenGL"
+
+#~ msgid "&Text Labels"
+#~ msgstr "&Tekstiselitteet"
+
+#~ msgid "&Place names:"
+#~ msgstr "&Paikkojen nimet:"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Places often have "
+#~ "different names in different languages. The label on the map can show the "
+#~ "name in the user's language. Alternatively it can display the name in the "
+#~ "official language and glyphs of that place. </p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Paikoilla on usein eri "
+#~ "nimiä eri kielillä. Kartan selitteet voidaan näyttää käyttäjän omalla "
+#~ "kielellä tai vaihtoehtoisesti voidaan käyttää paikan virallista kieltä ja "
+#~ "kirjoitusmerkkejä.</p></body></html>"
+
+#~ msgid "Custom & Native Language"
+#~ msgstr "Käyttäjän valitsema ja oletuskieli"
+
+#~ msgid "Custom Language"
+#~ msgstr "Käyttäjän valitsema kieli"
+
+#~ msgid "Native Language"
+#~ msgstr "Oletuskieli"
+
+#~ msgid "Default map &font:"
+#~ msgstr "Kartan &oletusfontti:"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">The default font that "
+#~ "gets used on the map.</p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Oletusfontti, jota "
+#~ "käytetään kartan tekstissä.</p></body></html>"
+
+#~ msgid "Movie Recording - Marble"
+#~ msgstr "Videon tallennus – Marble"
+
+#~ msgid "Destination video"
+#~ msgstr "Kohdevideo"
+
+#~ msgid "Open..."
+#~ msgstr "Avaa…"
+
+#~ msgid "FPS (frames per second)"
+#~ msgstr "FPS (kuvaa sekunnissa)"
+
+#~ msgid "Cancel"
+#~ msgstr "Peru"
+
+#~ msgid "Start"
+#~ msgstr "Aloita"
+
+#~ msgid "New Bookmark Folder - Marble"
+#~ msgstr "Uusi kirjanmerkkikansio–Marble"
+
+#~ msgid "&Folder Name"
+#~ msgstr "&Kansion nimi"
+
+#~ msgid "Current Relations"
+#~ msgstr "Nykyiset relaatiot"
+
+#~ msgid "Name"
+#~ msgstr "Nimi"
+
+#~ msgid "Type"
+#~ msgstr "Tyyppi"
+
+#~ msgid "Role"
+#~ msgstr "Rooli"
+
+#~ msgid "Add Relation"
+#~ msgstr "Lisää relaatio"
+
+#~ msgid "Current Tags"
+#~ msgstr "Nykyiset tunnisteet"
+
+#~ msgid "Key"
+#~ msgstr "Avain"
+
+#~ msgid "Value"
+#~ msgstr "Arvo"
+
+#~ msgid "<<"
+#~ msgstr "<<"
+
+#~ msgid ">>"
+#~ msgstr ">>"
+
+#~ msgid "Related Tags"
+#~ msgstr "Liittyvät tunnisteet"
+
+#~ msgid "Browse..."
+#~ msgstr "Selaa…"
+
+#~ msgid "Icon Link:"
+#~ msgstr "Kuvakelinkki:"
+
+#~ msgid "ID:"
+#~ msgstr "Tunniste:"
+
+#~ msgid "Target ID:"
+#~ msgstr "Kohteen tunniste:"
+
+#~ msgid "Position:"
+#~ msgstr "Sijainti:"
+
+#~ msgid "Marble"
+#~ msgstr "Marble"
+
+#~ msgid "Map"
+#~ msgstr "Kartta"
+
+#~ msgid "Visible Globe Region"
+#~ msgstr "Näkyvä maapallon alue"
+
+#~ msgid "Outer Space"
+#~ msgstr "Ulkoavaruus"
+
+#~ msgid "Route"
+#~ msgstr "Reitti"
+
+#~ msgid "Route Summary"
+#~ msgstr "Reitin yhteenveto"
+
+#~ msgid "Driving Instructions"
+#~ msgstr "Ajo-opasteet"
+
+#~ msgid "Footer"
+#~ msgstr "Alatunniste"
+
+#~ msgid "Configure Routing Profile"
+#~ msgstr "Muokkaa reittihaun profiilia"
+
+#~ msgid "Active Route Services"
+#~ msgstr "Käytössä olevat reittipalvelut"
+
+#~ msgid "Service Settings"
+#~ msgstr "Palveluasetukset"
+
+#~ msgid "No configuration available"
+#~ msgstr "Ei asetuksia"
+
+#~ msgid "Select Service to Configure"
+#~ msgstr "Valitse asetettava palvelu"
+
+# Käytetään sekä painikkeena, josta pääsee asetuksiin että ikkunan ja välilehden otsikkona.
+#~ msgid "Configure"
+#~ msgstr "Asetukset"
+
+#~ msgid "&Add"
+#~ msgstr "&Lisää"
+
+#~ msgid "&Configure"
+#~ msgstr "&Muokkaa"
+
+#~ msgid "&Remove"
+#~ msgstr "&Poista"
+
+#~ msgid "Move &Up"
+#~ msgstr "Siirrä &ylemmäs"
+
+#~ msgid "Move &Down"
+#~ msgstr "Siirrä &alemmas"
+
+#~ msgid "Car (fastest)"
+#~ msgstr "Auto (nopein)"
+
+#~ msgid "Car (shortest)"
+#~ msgstr "Auto (lyhyin)"
+
+#~ msgid "Bicycle"
+#~ msgstr "Polkupyörä"
+
+#~ msgid "Pedestrian"
+#~ msgstr "Jalankulku"
+
+#~ msgid "No results."
+#~ msgstr "Ei tuloksia."
+
+#~ msgid "Show Details"
+#~ msgstr "Näytä yksityiskohdat"
+
+#~ msgid "Choose alternative routes"
+#~ msgstr "Valitse vaihtoehtoisia reittejä"
+
+#~ msgid "Sun Control"
+#~ msgstr "Auringon säädin"
+
+#~ msgid "Sun Shading"
+#~ msgstr "Auringon varjostus"
+
+#~ msgid "Shadow"
+#~ msgstr "Varjo"
+
+#~ msgid "Night Map"
+#~ msgstr "Yökartta"
+
+#~ msgid "Subsolar Point"
+#~ msgstr "Auringon zeniittipiste"
+
+#~ msgid ""
+#~ "Display <a href=\"http://en.wikipedia.org/wiki/Subsolar_point\">Subsolar "
+#~ "Point</a> icon"
+#~ msgstr ""
+#~ "Näytä <a href=\"http://fi.wikipedia.org/wiki/Zeniitti\">auringon "
+#~ "zeniittipisteen</a> kuvake"
+
+#~ msgid ""
+#~ "<b>Lock</b> map view to <a href=\"http://en.wikipedia.org/wiki/"
+#~ "Subsolar_point\">Subsolar Point</a>."
+#~ msgstr ""
+#~ "<b>Lukitse</b> karttanäkymä <a href=\"http://fi.wikipedia.org/wiki/"
+#~ "Zeniitti\">auringon zeniittipisteeseen</a>."
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">Attention: Panning the map is disabled now! </span></p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Uncheck the \"Lock map "
+#~ "view to Subsolar Point\" option to allow for viewing a different place on "
+#~ "the globe again.</p></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">Huomio: Karttaa ei voi tällä hetkellä liikuttaa! </span></"
+#~ "p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Poista valinta kohdasta "
+#~ "Lukitse karttanäkymä auringon zeniittipisteeseen, jotta kartalta voisi "
+#~ "jälleen katsella muita paikkoja.</p></body></html>"
+
+#~ msgid "OK"
+#~ msgstr "OK"
+
+#~ msgid "Apply"
+#~ msgstr "Käytä"
+
+#~ msgid "Creating Map"
+#~ msgstr "Luodaan karttaa"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /></head><body style="
+#~ "\" white-space: pre-wrap; font-family:Sans Serif; font-size:9pt; font-"
+#~ "weight:400; font-style:normal; text-decoration:none;\"><p style=\" margin-"
+#~ "top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-"
+#~ "indent:0; text-indent:0px;\"><span style=\" font-weight:600;\">Satellite "
+#~ "View</span></p><p style=\" margin-top:0px; margin-bottom:0px; margin-"
+#~ "left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Earth "
+#~ "as seen from Space. The map is based on NASA's beautiful \"Blue Marble "
+#~ "Next Generation\" pictures. Credits: NASA's Earth Observatory</p></body></"
+#~ "html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /></head><body style="
+#~ "\" white-space: pre-wrap; font-family:Sans Serif; font-size:9pt; font-"
+#~ "weight:400; font-style:normal; text-decoration:none;\"><p style=\" margin-"
+#~ "top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-"
+#~ "indent:0; text-indent:0px;\"><span style=\" font-weight:600;"
+#~ "\">Satelliittikartta</span></p><p style=\" margin-top:0px; margin-"
+#~ "bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-"
+#~ "indent:0px;\">Maa avaruudesta nähtynä. Kartta pohjautuu NASAn kauniiseen "
+#~ "kuvasarjaan ”Blue Marble Next Generation”. Kuva: Yhdysvaltain ilmailu- ja "
+#~ "avaruushallinto NASA</p></body></html>"
+
+#~ msgid ""
+#~ "Marble needs to create this map. This only needs to be done once and may "
+#~ "take a few seconds."
+#~ msgstr ""
+#~ "Marblen täytyy luoda tämä kartta. Tämä täytyy tehdä vain kerran ja "
+#~ "saattaa kestää muutamia sekunteja."
+
+#~ msgid "&Cancel"
+#~ msgstr "&Peru"
+
+#~ msgid "Zoom"
+#~ msgstr "Mittakaava"
+
+#~ msgid "&Tile Level Range:"
+#~ msgstr "&Tiilien koko:"
+
+#~ msgid "Minimum Tile Level"
+#~ msgstr "Tiilien vähimmäiskoko"
+
+# Konteksti: Tile Level Range: [numero] to [numero]
+#~ msgid "to"
+#~ msgstr "–"
+
+#~ msgid "Maximum Tile Level"
+#~ msgstr "Tiilien enimmäiskoko"
+
+#~ msgid "Time Control"
+#~ msgstr "Ajan säädin"
+
+#~ msgid "Time"
+#~ msgstr "Aika"
+
+#~ msgid "New Date Time      :"
+#~ msgstr "Uusi päivä ja aika:"
+
+#~ msgid "Refresh Interval     :"
+#~ msgstr "Päivitysväli:"
+
+#~ msgid " seconds"
+#~ msgstr " sekuntia"
+
+#~ msgid "Now"
+#~ msgstr "Nyt"
+
+#~ msgid "Current Date Time :"
+#~ msgstr "Nykyinen päivä ja aika:"
+
+#~ msgid "Time Speed"
+#~ msgstr "Ajan kulun nopeus"
+
+#~ msgid "Close"
+#~ msgstr "Sulje"
+
+#~ msgid "Tour"
+#~ msgstr "Kierros"
+
+#~ msgid "--:--"
+#~ msgstr "--:--"
+
+#~ msgid "Move up"
+#~ msgstr "Siirrä ylemmäs"
+
+#~ msgid "Move down"
+#~ msgstr "Siirrä alemmas"
+
+#~ msgid "New Tour"
+#~ msgstr "Uusi kierros"
+
+#~ msgid "Save Tour"
+#~ msgstr "Tallenna kierros"
+
+#~ msgid "Save Tour As"
+#~ msgstr "Tallenna kierros nimellä"
+
+#~ msgid "Open Tour"
+#~ msgstr "Avaa kierros"
+
+#~ msgid "Play"
+#~ msgstr "Toista"
+
+#~ msgid "Begins touring"
+#~ msgstr "Aloittaa kierroksen"
+
+#~ msgid "Stop"
+#~ msgstr "Pysäytä"
+
+#~ msgid "Stops touring (playing again will start tour from the start)"
+#~ msgstr "Pysäyttää kierroksen (kierros alkaa toistettaessa alusta)"
+
+#~ msgid "Converts the loaded tour into a movie"
+#~ msgstr "Muuntaa ladatun kierroksen videoksi"
+
+#~ msgid "Worldclock Applet Configuration"
+#~ msgstr "Maailmankellon asetukset"
+
+#~ msgid "Map Display"
+#~ msgstr "Karttanäkymä"
+
+#~ msgid "Projection:"
+#~ msgstr "Projektio:"
+
+#~ msgid "Equirectangular"
+#~ msgstr "Panoraamakuva (Equirectangular)"
+
+#~ msgid "Center map on longitude:"
+#~ msgstr "Keskitä kartta pituuspiirille:"
+
+#~ msgid "Center map on daylight"
+#~ msgstr "Keskitä kartta päivänvaloon"
+
+#~ msgid "Show date"
+#~ msgstr "Näytä päiväys"
+
+#~ msgid "Time Zones"
+#~ msgstr "Aikavyöhykkeet"
+
+#~ msgid "Use custom timezone selection"
+#~ msgstr "Valitse mukautettu aikavyöhyke"
+
+#~ msgid "Edit ground overlay"
+#~ msgstr "Muokkaa maakerrosta"
+
+#~ msgid "Coordinates"
+#~ msgstr "Koordinaatit"
+
+#~ msgid "N"
+#~ msgstr "P"
+
+#~ msgid "W"
+#~ msgstr "L"
+
+#~ msgid "E"
+#~ msgstr "I"
+
+#~ msgid "S"
+#~ msgstr "E"
+
+#~ msgid "Rotation"
+#~ msgstr "Kiertymä"
+
+#~ msgid "Add polygon"
+#~ msgstr "Lisää monikulmio"
+
+#~ msgid "Lines"
+#~ msgstr "Viivat"
+
+#~ msgid "Width:"
+#~ msgstr "Leveys:"
+
+#~ msgid "Area"
+#~ msgstr "Alue"
+
+#~ msgid "Filled"
+#~ msgstr "Täytetty"
+
+#~ msgid "Not Filled"
+#~ msgstr "Ei täytetty"
+
+#~ msgid "Nodes"
+#~ msgstr "Solmut"
+
+#~ msgid "Add path"
+#~ msgstr "Lisää polku"
+
+#~ msgid "Display"
+#~ msgstr "Näkymä"
+
+#~ msgid "Fade data older than (minutes)"
+#~ msgstr "Häivytä data vanhempaa kuin (minuuteissa)"
+
+#~ msgid "Do not show data older than (minutes)"
+#~ msgstr "Älä näytä dataa vanhempaa kuin (minuuteissa)"
+
+#~ msgid "Internet"
+#~ msgstr "Internet"
+
+#~ msgid "APRS Data Sources"
+#~ msgstr "APRS-tietolähteet"
+
+#~ msgid "Should information be gathered from the Internet APRS data source?"
+#~ msgstr "Kerätäänkö dataa APRS-Internet-tietolähteestä"
+
+#~ msgid "Collect data from an APRS Internet server"
+#~ msgstr "Kerää dataa APRS-Internet-palvelimelta"
+
+#~ msgid "Server"
+#~ msgstr "Palvelin"
+
+#~ msgid "rotate.aprs.net"
+#~ msgstr "rotate.aprs.net"
+
+#~ msgid "Port"
+#~ msgstr "Portti"
+
+#~ msgid "10253"
+#~ msgstr "10253"
+
+#~ msgid "Dump TCP/IP records to the debug stream"
+#~ msgstr "Tulosta TCP/IP-tietueet virheenpaikannusvirtaan"
+
+#~ msgid "Device"
+#~ msgstr "Laite"
+
+#~ msgid "TNC Terminal Port"
+#~ msgstr "TNC-pääteportti"
+
+#~ msgid "Should information be gathered from a serial port?"
+#~ msgstr "Kerätäänkö dataa sarjaportista"
+
+#~ msgid "Collect data from a serial TNC (In Text Mode)"
+#~ msgstr "Kerää dataa sarjaporttiin kytketystä TNC:stä (tekstitilassa)"
+
+#~ msgid "TTY"
+#~ msgstr "TTY"
+
+#~ msgid "/dev/ttyUSB0"
+#~ msgstr "/dev/ttyUSB0"
+
+#~ msgid "Dump TTY records to the debug stream"
+#~ msgstr "Tulosta TTY-tietueet virheenpaikannusvirtaan"
+
+#~ msgid "File"
+#~ msgstr "Tiedosto"
+
+#~ msgid "Should information be gathered from a file?"
+#~ msgstr "Kerätäänkö dataa tiedostosta"
+
+#~ msgid "Collect data from a file"
+#~ msgstr "Kerää dataa tiedostosta"
+
+#~ msgid "Dump file records to the debug stream"
+#~ msgstr "Tulosta tiedostotietueet virheenpaikannusvirtaan"
+
+#~ msgid "Configure Compass Plugin"
+#~ msgstr "Kompassiliitännäisen asetukset"
+
+#~ msgid "Theme"
+#~ msgstr "Teema"
+
+#~ msgid "Default"
+#~ msgstr "Oletus"
+
+#~ msgid "Arrows"
+#~ msgstr "Nuolet"
+
+#~ msgid "Atom"
+#~ msgstr "Atomi"
+
+#~ msgid "Magnet"
+#~ msgstr "Magneetti"
+
+#~ msgid "Configure Crosshairs Plugin"
+#~ msgstr "Ristikkoliitännäisen asetukset"
+
+#~ msgid "Gun 1"
+#~ msgstr "Ase 1"
+
+#~ msgid "Gun 2"
+#~ msgstr "Ase 2"
+
+#~ msgid "Circled"
+#~ msgstr "Ympyrä"
+
+#~ msgid "German"
+#~ msgstr "Saksalainen"
+
+# Rikkinäinen merkkijono. Pyrin saamaan korjauksen itse ohjelmaan.
+#~ msgid "Dialog"
+#~ msgstr "Asetusikkuna"
+
+#~ msgid "Filter"
+#~ msgstr "Suodatin"
+
+#~ msgid "Maximum number of results:"
+#~ msgstr "Tulosten enimmäismäärä:"
+
+#~ msgid "Minimum magnitude:"
+#~ msgstr "Vähimmäisvoimakkuus:"
+
+#~ msgid "Time Range"
+#~ msgstr "Aikaväli"
+
+#~ msgid "Past"
+#~ msgstr "Viime"
+
+#~ msgid "From"
+#~ msgstr "Päivät"
+
+#~ msgid "days"
+#~ msgstr "päivää"
+
+#~ msgid "Eclipse Browser"
+#~ msgstr "Pimennysselain"
+
+#~ msgid "Show eclipses for year:"
+#~ msgstr "Näytä pimennykset vuodelle:"
+
+#~ msgid "&Settings..."
+#~ msgstr "&Asetukset…"
+
+#~ msgid "&Go To Selected Eclipse"
+#~ msgstr "&Siirry valittuun pimennykseen"
+
+#~ msgid "Eclipses Configuration"
+#~ msgstr "Pimennysten asetukset"
+
+#~ msgid "View &Options"
+#~ msgstr "N&äyttämisasetukset"
+
+#~ msgid "Enable &Lunar Eclipses"
+#~ msgstr "Nä&ytä kuunpimennykset"
+
+#~ msgid "Show Eclipse Control &Widget"
+#~ msgstr "Näytä p&imennyksen ohjauselementti"
+
+#~ msgid "&Eclipse Elements"
+#~ msgstr "Pime&nnyksen elementit"
+
+#~ msgid "&Northern Penumbra"
+#~ msgstr "Po&hjoinen puolivarjo"
+
+#~ msgid "&Umbra"
+#~ msgstr "&Täysvarjo"
+
+#~ msgid "Position of Eclipse &Maximum"
+#~ msgstr "Pimennyksen maksimin &sijainti"
+
+#~ msgid "Central &Line"
+#~ msgstr "Keski&viiva"
+
+#~ msgid "Full &Penumbra"
+#~ msgstr "Täy&dellinen puolivarjo"
+
+#~ msgid "Sunrise and Sunset &Boundaries"
+#~ msgstr "&Auringonnousun ja -laskun rajat"
+
+#~ msgid "&Southern Penumbra"
+#~ msgstr "&Eteläinen puolivarjo"
+
+#~ msgid "Penumbra with 60% Ma&gnitude"
+#~ msgstr "60 % mag&nitudin puolivarjo"
+
+#~ msgid "&Reminder"
+#~ msgstr "&Muistuttaminen"
+
+#~ msgid "Remind about eclipse events"
+#~ msgstr "Muistuta pimennystapahtumista"
+
+#~ msgid "Eclipse Event"
+#~ msgstr "Pimennystapahtuma"
+
+#~ msgid ""
+#~ "<html><head/><body><p>Marble has detected that the following <span style="
+#~ "\" font-weight:600;\">eclipse events</span> will occur in the near "
+#~ "future. If you want more information on a specific event, select it and "
+#~ "click OK.</p></body></html>"
+#~ msgstr ""
+#~ "<html><head/><body><p>Marble on havainnut, että seuraavat <span style=\" "
+#~ "font-weight:600;\">pimennystapahtumat</span> tapahtuvat "
+#~ "lähitulevaisuudessa. Jos haluat lisätietoja jostain tapahtumasta, valitse "
+#~ "se ja paina OK.</p></body></html>"
+
+#~ msgid "Do not remind me about eclipse events again"
+#~ msgstr "Älä muistuta minua pimennystapahtumia toiste"
+
+#~ msgid "Configure Elevation Profile Plugin"
+#~ msgstr "Korkeusprofiililiitännäisen asetukset"
+
+#~ msgid "Zoom to viewport"
+#~ msgstr "Zoomaa näkymään"
+
+#~ msgid "Speed"
+#~ msgstr "Nopeus"
+
+#~ msgid "Direction"
+#~ msgstr "Suunta"
+
+#~ msgid "Altitude"
+#~ msgstr "Korkeus"
+
+#~ msgid "Precision"
+#~ msgstr "Tarkkuus"
+
+#~ msgid "Coordinate Grid Plugin"
+#~ msgstr "Koordinaattiruudukkoliitännäinen"
+
+#~ msgid "C&olors"
+#~ msgstr "V&ärit"
+
+#~ msgid "&Grid:"
+#~ msgstr "&Ruudukko:"
+
+#~ msgid "Color of the coordinate grid."
+#~ msgstr "Koordinaattiruudukon väri"
+
+#~ msgid "&Tropics:"
+#~ msgstr "&Kääntöpiirit:"
+
+#~ msgid "Color of the tropical circles."
+#~ msgstr "Kääntöpiirien väri"
+
+#~ msgid "&Equator:"
+#~ msgstr "&Päiväntasaaja:"
+
+#~ msgid "Color of the equator."
+#~ msgstr "Päiväntasaajan väri"
+
+#~ msgid "Labels"
+#~ msgstr "Selitteet"
+
+#~ msgid "&Named Labels"
+#~ msgstr "&Nimet"
+
+#~ msgid "Show Labels for Prime meridian, Equator, Tropics."
+#~ msgstr ""
+#~ "Näytä selitteet nollameridiaanille, päiväntasaajalle ja kääntöpiireille"
+
+#~ msgid "&Numerical Labels"
+#~ msgstr "&Luvut"
+
+#~ msgid "Show numerical Labels."
+#~ msgstr "Näytä lukuselitteet"
+
+#~ msgid "Configure Scale Bar Plugin"
+#~ msgstr "Mittakaavaliitännäisen asetukset"
+
+#~ msgid "Show Ratio Scale"
+#~ msgstr "Näytä mittasuhde"
+
+#~ msgid "Minimize"
+#~ msgstr "Pienennä"
+
+#~ msgid "Marble - Measure Tool Configuration"
+#~ msgstr "Marble – Mittaustyökalun asetukset"
+
+#~ msgid "Ruler Type"
+#~ msgstr "Viivaimen tyyppi"
+
+#~ msgid "Polygon"
+#~ msgstr "Monikulmio"
+
+#~ msgid "Circle"
+#~ msgstr "Ympyrä"
+
+#~ msgid "Segment labels"
+#~ msgstr "Janojen selitteet"
+
+#~ msgid "Distance "
+#~ msgstr "Etäisyys "
+
+#~ msgid "Bearing"
+#~ msgstr "Suuntima"
+
+#~ msgid "Bearing Change"
+#~ msgstr "Suuntiman muutos"
+
+#~ msgid "Perimeter"
+#~ msgstr "Piiri"
+
+#~ msgid "Radius"
+#~ msgstr "Säde"
+
+#~ msgid "Circumference"
+#~ msgstr "Piiri"
+
+#~ msgid "General"
+#~ msgstr "Yleiset"
+
+#~ msgid "Cache name:"
+#~ msgstr "Kätkön nimi:"
+
+#~ msgid "User name:"
+#~ msgstr "Käyttäjätunnus:"
+
+#~ msgid "Type:"
+#~ msgstr "Tyyppi:"
+
+#~ msgid "Status:"
+#~ msgstr "Tila:"
+
+#~ msgid "Country:"
+#~ msgstr "Valtio:"
+
+#~ msgid "Size:"
+#~ msgstr "Koko:"
+
+#~ msgid "Difficulty:"
+#~ msgstr "Vaikeustaso:"
+
+#~ msgid "Terrain:"
+#~ msgstr "Maasto:"
+
+#~ msgid "Longitude:"
+#~ msgstr "Pituusaste:"
+
+#~ msgid "Latitude:"
+#~ msgstr "Leveysaste:"
+
+#~ msgid "Date hidden:"
+#~ msgstr "Piilotuspäivä:"
+
+#~ msgid "Date created:"
+#~ msgstr "Luontipäivä:"
+
+#~ msgid "Date last modified:"
+#~ msgstr "Muutospäivä:"
+
+#~ msgid "Log"
+#~ msgstr "Loki"
+
+#~ msgid "Previous"
+#~ msgstr "Edellinen"
+
+#~ msgid "Next"
+#~ msgstr "Seuraava"
+
+#~ msgid "Minimum difficulty:"
+#~ msgstr "Vähimmäisvaikeustaso:"
+
+#~ msgid "Maximum difficulty:"
+#~ msgstr "Enimmäisvaikeustaso:"
+
+#~ msgid "Maximum Distance:"
+#~ msgstr "Enimmäisetäisyys:"
+
+#~ msgid "Start:"
+#~ msgstr "Alkaen:"
+
+#~ msgid "End:"
+#~ msgstr "Päättyen:"
+
+#~ msgid "TextLabel"
+#~ msgstr "Tekstiselite"
+
+#~ msgid "Hint"
+#~ msgstr "Vihje"
+
+#~ msgid "Logs"
+#~ msgstr "Lokit"
+
+#~ msgid "Marble - OpenDesktop plugin configuration"
+#~ msgstr "Marble – OpenDesktop-liittännäisen asetukset"
+
+#~ msgid "Number of displayed items on the screen:"
+#~ msgstr "Näytettyjen kohteiden määrä näytöllä:"
+
+#~ msgid "Map &Image"
+#~ msgstr "K&arttakuva"
+
+#~ msgid "&Planet:"
+#~ msgstr "&Planeetta:"
+
+#~ msgid "&Size:"
+#~ msgstr "K&oko:"
+
+#~ msgid "x"
+#~ msgstr "×"
+
+#~ msgid "Preview"
+#~ msgstr "Esikatselu"
+
+#~ msgid "Filename"
+#~ msgstr "Tiedostonimi"
+
+#~ msgid "Position I&ndicator:"
+#~ msgstr "Sijainnin &ilmaisin:"
+
+#~ msgid "Configure Photo Plugin"
+#~ msgstr "Kuvaliitännäisen asetukset"
+
+#~ msgid "License"
+#~ msgstr "Lisenssi"
+
+#~ msgid "Number of items on the screen"
+#~ msgstr "Kohteiden määrä näytöllä"
+
+#~ msgid "Configure Position Marker Plugin"
+#~ msgstr "Sijaintimerkkiliitännäisen asetukset"
+
+#~ msgid "Cursor Shape"
+#~ msgstr "Osoittimen muoto"
+
+#~ msgid "&Arrow"
+#~ msgstr "&Nuoli"
+
+#~ msgid "&Custom:"
+#~ msgstr "&Mukautettu:"
+
+#~ msgid ""
+#~ "Position marker images indicating the direction should point north (top)."
+#~ msgstr "Sijaintimerkkikuva, josta näkee missä on pohjoinen (ylälaita)."
+
+#~ msgid "Trail"
+#~ msgstr "Jälki"
+
+#~ msgid "&Accuracy:"
+#~ msgstr "&Tarkkuus:"
+
+#~ msgid "Color of the position marker's accuracy indicator."
+#~ msgstr "Sijaintimerkin tarkkuuden ilmaisimen väri"
+
+#~ msgid "Trail:"
+#~ msgstr "Jälki:"
+
+#~ msgid "Color of the position marker's trail."
+#~ msgstr "Sijaintimerkin jäljen väri"
+
+#~ msgid "Routing Configuration - Marble"
+#~ msgstr "Reittiasetukset–Marble"
+
+#~ msgid "Audible Turn Instructions"
+#~ msgstr "Puhutut opasteet"
+
+#~ msgid "Play a sound"
+#~ msgstr "Toista ääni"
+
+#~ msgid "Use this speaker"
+#~ msgstr "Käytä tätä puhujaa"
+
+#~ msgid ""
+#~ "<a href=\"http://userbase.kde.org/Marble/CustomSpeakers\">Get more "
+#~ "speakers</a>"
+#~ msgstr ""
+#~ "<a href=\"http://userbase.kde.org/Marble/CustomSpeakers\">Hae lisää "
+#~ "puhujia</a>"
+
+#~ msgid "Guidance Mode"
+#~ msgstr "Opastustila"
+
+#~ msgid "R"
+#~ msgstr "R"
+
+#~ msgid "Toggle GPS"
+#~ msgstr "GPS päälle/pois"
+
+#~ msgid "zoom out"
+#~ msgstr "pienennä"
+
+#~ msgid "zoom in"
+#~ msgstr "suurenna"
+
+#~ msgid "total time remaining"
+#~ msgstr "aikaa jäljellä kaikkiaan"
+
+#~ msgid "Satellites Configuration - Marble"
+#~ msgstr "Satelliittiasetukset–Marble"
+
+#~ msgid "&Satellites"
+#~ msgstr "&Satelliitit"
+
+#~ msgid "&Data Sources"
+#~ msgstr "&Tietolähteet"
+
+#~ msgid ""
+#~ "<html><head/><body><p><span style=\" font-weight:600;\">Last update:</"
+#~ "span></p></body></html>"
+#~ msgstr ""
+#~ "<html><head/><body><p><span style=\" font-weight:600;\">Viimeisin "
+#~ "päivitys:</span></p></body></html>"
+
+#~ msgid "&Reload All Data Sources"
+#~ msgstr "Lataa kaikki tietolähteet &uudelleen"
+
+#~ msgid "Satellite Data Sources:"
+#~ msgstr "Satelliittitietolähteet:"
+
+#~ msgid "Add a new data source (URL)."
+#~ msgstr "Lisää uusi tietolähde (verkko-osoite)."
+
+#~ msgid "Open a new data source from disk."
+#~ msgstr "Avaa uusi tietolähde levyltä."
+
+#~ msgid "Remove selected data source."
+#~ msgstr "Poista valittu tietolähde."
+
+# ”Maan” satelliiteille?
+#~ msgid "(Built-in Data Sources for Earth Satellites)"
+#~ msgstr "(Sisään rakennetut tietolähteet satelliiteille)"
+
+#~ msgid ""
+#~ "<html><head/><body><p>Supported formats: <a href=\"http://techbase.kde."
+#~ "org/Projects/Marble/SatelliteCatalogFormat\"><span style=\" text-"
+#~ "decoration: underline; color:#0000ff;\">Marble Satellite Catalogue</"
+#~ "span></a>, <a href=\"http://en.wikipedia.org/wiki/Two-line_element_set"
+#~ "\"><span style=\" text-decoration: underline; color:#0000ff;\">Two-Line-"
+#~ "Element Set</span></a></p></body></html>"
+#~ msgstr ""
+#~ "<html><head/><body><p>Tuetut muodot: <a href=\"http://techbase.kde.org/"
+#~ "Projects/Marble/SatelliteCatalogFormat\"><span style=\" text-decoration: "
+#~ "underline; color:#0000ff;\">Marblen satelliittiluettelo</span></a>, <a "
+#~ "href=\"http://en.wikipedia.org/wiki/Two-line_element_set\"><span style=\" "
+#~ "text-decoration: underline; color:#0000ff;\">Kaksirivinen rata-arvojoukko "
+#~ "(TLE)</span></a></p></body></html>"
+
+#~ msgid "Plugin Inactive"
+#~ msgstr "Liitännäinen ei käytössä"
+
+#~ msgid "&Activate Plugin"
+#~ msgstr "&Aktivoi liitännäinen"
+
+#~ msgid ""
+#~ "Configuration options not available since the plugin is disabled at the "
+#~ "moment."
+#~ msgstr ""
+#~ "Asetukset eivät ole käytettävissä, koska liitännäinen on parhaillaan "
+#~ "poissa käytöstä."
+
+#~ msgid "km/h"
+#~ msgstr "km/h"
+
+#~ msgid "Configure Stars Plugin"
+#~ msgstr "Tähtiliitännäisen asetukset"
+
+#~ msgid "Celestial Objects"
+#~ msgstr "Taivaankappaleet"
+
+#~ msgid "Star Magnitude Limit"
+#~ msgstr "Tähtien suuruusluokkaraja"
+
+#~ msgid " mag"
+#~ msgstr " mag"
+
+#~ msgid "Solar System"
+#~ msgstr "Aurinkokunta"
+
+#~ msgid "Sun"
+#~ msgstr "Aurinko"
+
+#~ msgid "Moon"
+#~ msgstr "Kuu"
+
+#~ msgid "Mercury"
+#~ msgstr "Merkurius"
+
+#~ msgid "Venus"
+#~ msgstr "Venus"
+
+#~ msgid "Earth"
+#~ msgstr "Maa"
+
+#~ msgid "Mars"
+#~ msgstr "Mars"
+
+#~ msgid "Jupiter"
+#~ msgstr "Jupiter"
+
+#~ msgid "Saturn"
+#~ msgstr "Saturnus"
+
+#~ msgid "Uranus"
+#~ msgstr "Uranus"
+
+#~ msgid "Neptune"
+#~ msgstr "Neptunus"
+
+#~ msgid "Use name labels"
+#~ msgstr "Näytä nimet"
+
+#~ msgid "Magnify Sun and Moon"
+#~ msgstr "Suurenna Aurinkoa ja Kuuta"
+
+#~ msgid "Other"
+#~ msgstr "Muu"
+
+#~ msgid "Deep Sky Object Labels"
+#~ msgstr "Syvän taivaan kohteiden nimet"
+
+#~ msgid "Deep Sky Objects"
+#~ msgstr "Syvän taivaan kohteet"
+
+#~ msgid "Lines and Orientation"
+#~ msgstr "Viivat ja suuntaus"
+
+#~ msgid "Constellations"
+#~ msgstr "Tähdistöt"
+
+#~ msgid "Names"
+#~ msgstr "Nimet"
+
+#~ msgid "Latin Name"
+#~ msgstr "Latinalainen nimi"
+
+#~ msgid "Native Translation"
+#~ msgstr "Käännös"
+
+#~ msgid "Abbreviation"
+#~ msgstr "Lyhenne"
+
+#~ msgid "Celestial Equator"
+#~ msgstr "Taivaanekvaattori"
+
+#~ msgid "Celestial Poles"
+#~ msgstr "Taivaannavat"
+
+#~ msgid "Ecliptic"
+#~ msgstr "Ekliptika"
+
+#~ msgid "Configure Weather Plugin"
+#~ msgstr "Sääliitännäisen asetukset"
+
+#~ msgid "Information"
+#~ msgstr "Tiedot"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Here you can "
+#~ "choose if you want the weather condition to be shown (for example, clouds "
+#~ "or clear sky.) Marble will only show the condition if this information is "
+#~ "available.</p></body></html>\n"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Voit valita "
+#~ "näytettävät säätiedot (esimerkiksi pilvet tai ilman pilviä.) Marble "
+#~ "pystyy esittämään tiedon, jos se vain on saatavilla.</p></body></html>\n"
+
+#~ msgid "Weather condition"
+#~ msgstr "Säätila"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Selects if you "
+#~ "want the temperature to be shown. The temperature will only be shown for "
+#~ "the stations it is available for.</p></body></html>\n"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Valitse, "
+#~ "näytetäänkö lämpötila. Se näytetään vain paikoissa, joihin se on "
+#~ "saatavilla. </p></body></html>\n"
+
+#~ msgid "Temperature"
+#~ msgstr "Lämpötila"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Select if you "
+#~ "want the wind direction to be shown. The wind direction will only be "
+#~ "shown if it is available for the particular station.</p></body></html>\n"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Valitse, "
+#~ "näytetäänkö tuulen suunta. Se näytetään vain paikoissa, joihin tieto on "
+#~ "saatavilla. </p></body></html>\n"
+
+#~ msgid "Wind direction"
+#~ msgstr "Tuulen suunta"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Select if you "
+#~ "want the wind speed to be shown. The wind speed will only be shown if it "
+#~ "is available for the particular station.</p></body></html>\n"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Valitse, "
+#~ "näytetäänkö tuulen nopeus. Se näytetään vain paikoissa, joihin tieto on "
+#~ "saatavilla. </p></body></html>\n"
+
+#~ msgid "Wind speed"
+#~ msgstr "Tuulen nopeus"
+
+#~ msgid "Units"
+#~ msgstr "Yksiköt"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">The unit used to "
+#~ "measure the temperature.</p></body></html>\n"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Lämpötilan "
+#~ "yksikkö.</p></body></html>\n"
+
+#~ msgid "Celsius"
+#~ msgstr "Celsius"
+
+#~ msgid "Fahrenheit"
+#~ msgstr "Fahrenheit"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">The unit used to "
+#~ "measure the wind speed.</p></body></html>\n"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Tuulen nopeuden "
+#~ "yksikkö</p></body></html>\n"
+
+#~ msgid "Kilometers per hour"
+#~ msgstr "Kilometriä tunnissa"
+
+#~ msgid "Miles per hour"
+#~ msgstr "Mailia tunnissa"
+
+#~ msgid "Meters per second"
+#~ msgstr "Metriä sekunnissa"
+
+#~ msgid "Knots"
+#~ msgstr "Solmut"
+
+#~ msgid "Beaufort"
+#~ msgstr "Bofori"
+
+#~ msgid "Pressure"
+#~ msgstr "Paine"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">The unit used to "
+#~ "measure the air pressure.</p></body></html>\n"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Ilmanpaineen "
+#~ "yksikkö.</p></body></html>\n"
+
+#~ msgid "Hecto Pascals"
+#~ msgstr "Hehtopascalit"
+
+#~ msgid "Kilo Pascals"
+#~ msgstr "Kilopascalit"
+
+#~ msgid "Bars"
+#~ msgstr "Baarit"
+
+#~ msgid "Millimeters of Mercury"
+#~ msgstr "Elohopeamillimetrit"
+
+#~ msgid "Inches of Mercury"
+#~ msgstr "Elohopeatuumat"
+
+#~ msgid "Miscellaneous"
+#~ msgstr "Sekalaiset"
+
+#~ msgid "Show only favorite items"
+#~ msgstr "Näytä vain suosikkikohteet"
+
+#~ msgid "Weather update interval"
+#~ msgstr "Säätietojen päivitysväli"
+
+#~ msgid " hours"
+#~ msgstr " tuntia"
+
+#~ msgid "Configure Wikipedia Plugin"
+#~ msgstr "Wikipedia-liitännäisen asetukset"
+
+#~ msgid "Show thumbnail images"
+#~ msgstr "Näytä pienoiskuvia"
+
+#~ msgid "Route type:"
+#~ msgstr "Reitin tyyppi:"
+
+#~ msgid "Speed:"
+#~ msgstr "Nopeus:"
+
+#~ msgid "AppKey"
+#~ msgstr "AppKey"
+
+#~ msgid "Preference:"
+#~ msgstr "Ensisijainen:"
+
+#~ msgid "Avoid motorways"
+#~ msgstr "Vältä moottoriteitä"
+
+#~ msgid "Avoid tollways"
+#~ msgstr "Vältä maksullisia teitä"
+
+#~ msgid "Avoid ferries"
+#~ msgstr "Vältä lauttoja"
+
+#~ msgid "Ascending slope:"
+#~ msgstr "Ylämäki:"
+
+#~ msgid "Descending slope:"
+#~ msgstr "Alamäki:"
+
+#~ msgid ""
+#~ "An AppKey is required for MapQuest routing to work. You can register one "
+#~ "<a href=\"http://developer.mapquest.com/web/products/open\">here</a>."
+#~ msgstr ""
+#~ "MapQuest-reittihaun toimimiseen vaaditaan AppKey. Voit rekisteröidä "
+#~ "sellaisen <a href=\"http://developer.mapquest.com/web/products/open"
+#~ "\">täällä</a>."
+
+#~ msgid "Monav Configuration"
+#~ msgstr "Monav-asetukset"
+
+#~ msgid "Transport Type:"
+#~ msgstr "Liikkumistyyppi:"
+
+#~ msgid "Any"
+#~ msgstr "Mikä tahansa"
+
+#~ msgid "Manage Maps"
+#~ msgstr "Hallitse karttoja"
+
+#~ msgid "Install New"
+#~ msgstr "Asenna uusi"
+
+#~ msgid "Continent"
+#~ msgstr "Maanosa"
+
+#~ msgid "Country"
+#~ msgstr "Maa"
+
+#~ msgid "Download Variant"
+#~ msgstr "Lataa muunnelma"
+
+#~ msgid "Install"
+#~ msgstr "Asenna"
+
+#~ msgid "Nothing to do."
+#~ msgstr "Ei mitään tehtävää."
+
+#~ msgid "%v/%m MB"
+#~ msgstr "%v/%m Mt"
+
+#~ msgid "Abort"
+#~ msgstr "Keskeytä"
+
+#~ msgid "Transport:"
+#~ msgstr "Liikkuminen:"
+
+#~ msgid "Profile:"
+#~ msgstr "Profiili:"
+
+#~ msgid "Method"
+#~ msgstr "Tapa"
+
+#~ msgid "Fastest"
+#~ msgstr "Nopein"
+
+#~ msgid "Shortest"
+#~ msgstr "Lyhyin"
+
+#~ msgid "Please allow access to KWallet."
+#~ msgstr "Salli pääsy KWalletiin."
+
+#~ msgid ""
+#~ "You haven't allowed Marble to use KWallet yet.\n"
+#~ "This is dangerous since Marble will store your password without "
+#~ "encryption.\n"
+#~ "Are you sure?"
+#~ msgstr ""
+#~ "Et ole vielä sallinut Marblen käyttää KWalletia.\n"
+#~ "Tämä on vaarallista, koska Marble tallentaa salasanasi ilman salausta.\n"
+#~ "Oletko varma?"
+
+#~ msgid "KWallet Access in Marble"
+#~ msgstr "KWallet-käyttö Marblessa"
+
+#~ msgid ""
+#~ "You still don't allow Marble to use KWallet.\n"
+#~ "If you haven't seen the KWallet dialog asking to allow access, it means "
+#~ "that you have disabled it.\n"
+#~ "If you would like to change this see System Information -> Account "
+#~ "Details -> KDE Wallet -> Access Control.\n"
+#~ "Choose your wallet and allow Marble to use it."
+#~ msgstr ""
+#~ "Et ole vieläkään sallinut Marblen käyttää KWalletia.\n"
+#~ "Jos et ole nähnyt KWalletin ikkunaa, joka pyytää lupaa, olet poistanut "
+#~ "KWalletin käytöstä.\n"
+#~ "Jos haluat ottaa KWalletin uudelleen käyttöön, katso Järjestelmäasetukset "
+#~ "→ Käyttäjätilin tiedot → KDE-lompakko → Käyttöluvat.\n"
+#~ "Valitse lompakkosi ja salli Marblen käyttää sitä."
+
+#~ msgid "Location Browser"
+#~ msgstr "Sijaintiluettelo"
+
+#~ msgid "Double click an entry of this list to get it displayed on the map."
+#~ msgstr "Kaksoisnapsauta kohtaa luettelossa nähdäksesi sen kartalla."
+
+#~ msgid "Navigate to your 'Home Location'"
+#~ msgstr "Siirry kotisijaintiin"
+
+#~ msgid "Do you allow Marble to use KWallet?"
+#~ msgstr "Sallitko Marblen käyttää KWalletia?"
+
+#~ msgid "Form"
+#~ msgstr "Lomake"
+
+#~ msgid "Url:"
+#~ msgstr "Osoite:"
+
+#, fuzzy
+#~| msgid "&Add Folder"
+#~ msgid "Add SoundCue"
+#~ msgstr "&Lisää kansio"
+
+#, fuzzy
+#~| msgid "Circled"
+#~ msgid "Circular"
+#~ msgstr "Ympyrä"
+
+#~ msgid "&Name"
+#~ msgstr "&Nimi"
+
+#~ msgid "Link"
+#~ msgstr "Linkki"
+
+#~ msgid "Pause"
+#~ msgstr "Keskeytä"
+
+#~ msgid "Pauses touring until you start it again"
+#~ msgstr "Keskeyttää kierroksen, kunnes jatkat sitä"
+
+#~ msgid "Land"
+#~ msgstr "Maa"
+
+#, fuzzy
+#~| msgid "Atlas"
+#~ msgid "Ara"
+#~ msgstr "Atlas"
+
+#, fuzzy
+#~| msgid "Cancel"
+#~ msgid "Cancer"
+#~ msgstr "Peru"
+
+#, fuzzy
+#~| msgid "Craters"
+#~ msgid "Crater"
+#~ msgstr "Kraaterit"
+
+#, fuzzy
+#~| msgid "Uranus"
+#~ msgid "Eridanus"
+#~ msgstr "Uranus"
+
+#, fuzzy
+#~| msgid "Log"
+#~ msgid "Leo"
+#~ msgstr "Loki"
+
+#, fuzzy
+#~| msgid "Library"
+#~ msgid "Libra"
+#~ msgstr "Kirjasto"
+
+#, fuzzy
+#~| msgid "Normal"
+#~ msgid "Norma"
+#~ msgstr "Tavallinen"
+
+#, fuzzy
+#~| msgid "Doctors"
+#~ msgid "Pictor"
+#~ msgstr "Lääkäreitä"
+
+#~ msgid "Show distance labels for each section"
+#~ msgstr "Näytä kunkin osion etäisyysselitteet"
+
+#~ msgid "Constellation Labels"
+#~ msgstr "Tähdistojen nimet"
+
+#~ msgid "Constellation Names"
+#~ msgstr "Tähdistöjen nimet"
+
+#, fuzzy
+#~| msgid "OpenGL"
+#~ msgid "Open"
+#~ msgstr "OpenGL"
+
+#~ msgid "Military Grid Reference System (MGRS)"
+#~ msgstr "Military Grid Reference System (MGRS)"
+
+# Konteksti: yhteinen otsikko kaikille OpenStreetMapin ruokaan liittyville amenityille.
+#~ msgid "Food"
+#~ msgstr "Ruokapaikat"
+
+#~ msgctxt "Action for toggling the atmosphere"
+#~ msgid "&Atmosphere"
+#~ msgstr "&Ilmakehä"
+
+#~ msgid "Enable tab to see gpxFileView"
+#~ msgstr "Näytä välilehti tiedostonäkymälle"
+
+#~ msgctxt "Action for toggling the 'current location' box"
+#~ msgid "Current Location"
+#~ msgstr "Nykyinen sijainti"
+
+#~ msgctxt "Action for toggling the navigation panel"
+#~ msgid "Show &Navigation Panel"
+#~ msgstr "Näytä &selauspaneeli"
+
+#~ msgctxt "Status tip"
+#~ msgid "Show Navigation Panel"
+#~ msgstr "Näytä selauspaneeli"
+
+#~ msgctxt "Action for showing the File View"
+#~ msgid "&Show File View"
+#~ msgstr "&Näytä tiedostonäkymä"
+
+# Improvisoitu ”guide line” -sanan apuviiva-suomennoksesta. Kirjoitushetkellä ”Guides” tarkoittaa sekä koordinaattiruudukkoa että kartan varjostusta maaston korkeuksien suhteen.
+#~ msgid "Guides"
+#~ msgstr "Apumerkinnät"
+
+#~ msgid "Name Ids of plugins."
+#~ msgstr "Liitännäisten nimitunnisteet."
+
+#~ msgid "List of toggles for enabling plugins."
+#~ msgstr "Luettelo liitännäisten käyttämisvalintoja."
+
+#~ msgid "List of toggles for making plugins visible."
+#~ msgstr "Luettelo liitännäisten näyttämisvalintoja."
+
+#~ msgid "Marble Infocenter"
+#~ msgstr "Marblen tietokeskus"
+
+#~ msgid "Data Sheet"
+#~ msgstr "Tiedot"
+
+#~ msgid "Name of the location"
+#~ msgstr "Sijainnin nimi"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "size:14pt; font-weight:600;\">Name</span></p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "size:14pt; font-weight:600;\">Nimi</span></p></body></html>"
+
+#~ msgid "Role of the location."
+#~ msgstr "Sijainnin tyyppi."
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "style:italic;\">Role</span></p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "style:italic;\">Tyyppi</span></p></body></html>"
+
+#~ msgid "Alternative name"
+#~ msgstr "Vaihtoehtoinen nimi"
+
+#~ msgid "Alternative name of the location."
+#~ msgstr "Sijainnin vaihtoehtoinen nimi."
+
+#~ msgid "Alternative Name"
+#~ msgstr "Vaihtoehtoinen nimi"
+
+#~ msgid "Short description:"
+#~ msgstr "Lyhyt kuvaus:"
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">No description "
+#~ "available.</p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">If you are connected to "
+#~ "the Internet please click the \"Wikipedia\" tab at the top of this page "
+#~ "to get more information.</p></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Ei kuvausta saatavilla."
+#~ "</p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Jos olet yhteydessä "
+#~ "internetiin, napsauta ylälaidassa olevaa Wikipedia-välilehteä saadaksesi "
+#~ "lisätietoja.</p></body></html>"
+
+#~ msgid ""
+#~ "000° 00' 00\" N\n"
+#~ "000° 00' 00\" E "
+#~ msgstr ""
+#~ "000° 00' 00\" P\n"
+#~ "000° 00' 00\" I "
+
+#~ msgid "9000.0 m"
+#~ msgstr "9000.0 m"
+
+#~ msgid "1000000"
+#~ msgstr "1000000"
+
+#~ msgid "Area:"
+#~ msgstr "Alue:"
+
+#~ msgid "0.0 sq km"
+#~ msgstr "0,0 km²"
+
+#~ msgid "Diameter:"
+#~ msgstr "Halkaisija:"
+
+#~ msgid "Timezone (Normal/DST):"
+#~ msgstr "Aikavyöhyke (normaaliaika/kesäaika):"
+
+#~ msgid "gmt / dst"
+#~ msgstr "normaaliaika / kesäaika"
+
+#~ msgid "State:"
+#~ msgstr "Osavaltio:"
+
+#~ msgid "Wikipedia"
+#~ msgstr "Wikipedia"
+
+#~ msgid "Back"
+#~ msgstr "Takaisin"
+
+#~ msgid "Move backwards one step in the browsing history."
+#~ msgstr "Siirry taaksepäin selaushistoriassa."
+
+#~ msgid "Print Page"
+#~ msgstr "Tulosta sivu"
+
+#~ msgid "Reverse"
+#~ msgstr "Käänteinen"
+
+#~ msgid "Sun is Zenith at"
+#~ msgstr "Auringon lakipiste"
+
+#~ msgid "Show"
+#~ msgstr "Näytä"
+
+#~ msgid "Hide"
+#~ msgstr "Älä näytä"
+
+#~ msgid "Show Zenith"
+#~ msgstr "Näytä auringon lakipiste"
+
+#~ msgid "Hide Zenith"
+#~ msgstr "Piilota auringon lakipiste"
+
+#~ msgid "Shows and hides the zenith location of the sun"
+#~ msgstr "Näyttää ja piilottaa auringon lakipisteen"
+
+#~ msgid "dd/MM/yyyy hh:mm AP"
+#~ msgstr "dd.MM.yyyy hh:mm"
+
+#~ msgid "M/d/yyyy hh:mm"
+#~ msgstr "M.d.yyyy hh:mm"
+
+#~ msgid "Profile"
+#~ msgstr "Profiili"
+
+#, fuzzy
+#~| msgid ""
+#~| "*.gpx *.kml *.osm *.pnt|All Supported Files\n"
+#~| "*.gpx|GPS Data\n"
+#~| "*.kml|Google Earth KML\n"
+#~| "*.osm|OpenStreetMap Data\n"
+#~| "*.pnt|Micro World Data Bank II"
+#~ msgid ""
+#~ "*.gpx *.kml *.log *.osm *.pnt|All Supported Files\n"
+#~ "*.gpx|GPS Data\n"
+#~ "*.kml|Google Earth KML\n"
+#~ "*.log|TangoGPS Logfile\n"
+#~ "*.osm|OpenStreetMap Data\n"
+#~ "*.pnt|Micro World Data Bank II"
+#~ msgstr ""
+#~ "*.gpx *.kml *.osm *.pnt|Tuetut tiedostomuodot\n"
+#~ "*.gpx|GPS-Data\n"
+#~ "*.kml|Google Earth KML\n"
+#~ "*.osm|OpenStreetMap-data\n"
+#~ "*.pnt|Micro World Data Bank II"
+
+#~ msgid "Greenwich Mean Time"
+#~ msgstr "Greenwichin aika"
+
+#~ msgid "&Search"
+#~ msgstr "&Hae"
+
+#~ msgid "Search line"
+#~ msgstr "Hakurivi"
+
+#~ msgid "Here you can enter the name of the location you are searching for."
+#~ msgstr "Kirjoita haettavan sijainnin nimi tähän."
+
+#~ msgid "WMS Support"
+#~ msgstr "WMS-tuki"
+
+#~ msgid "Check speed of gps drawing"
+#~ msgstr "Tarkista gps-piirron nopeus"
+
+#~ msgid "Enable tab to show the current location"
+#~ msgstr "Näytä välilehti nykyiselle sijainnille"
+
+#~ msgid "Show or hide routing options"
+#~ msgstr "Näytä tai piilota reititysvalinnat"
+
+#, fuzzy
+#~| msgid "Search"
+#~ msgid "Search..."
+#~ msgstr "Etsi"
+
+#~ msgid "(c) 2007, 2008, 2009, 2010"
+#~ msgstr "(c) 2007, 2008, 2009, 2010"
+
+#, fuzzy
+#~| msgid "&Center"
+#~ msgid "Re-center"
+#~ msgstr "&Keskitä"
+
+#, fuzzy
+#~| msgid "Open File"
+#~ msgid "Open File..."
+#~ msgstr "Avaa tiedosto"
+
+#, fuzzy
+#~| msgid ""
+#~| "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/"
+#~| "TR/REC-html40/strict.dtd\">\n"
+#~| "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~| "css\">\n"
+#~| "p, li { white-space: pre-wrap; }\n"
+#~| "</style></head><body style=\" font-family:'Sans Serif'; font-size:10pt; "
+#~| "font-weight:400; font-style:normal;\">\n"
+#~| "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~| "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~| "font-size:9pt;\"></p></body></html>"
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "size:small; color:#000000;\">0 m</span></p></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:10pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-size:9pt;\"></p></body></html>"
+
+#, fuzzy
+#~| msgid ""
+#~| "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/"
+#~| "TR/REC-html40/strict.dtd\">\n"
+#~| "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~| "css\">\n"
+#~| "p, li { white-space: pre-wrap; }\n"
+#~| "</style></head><body style=\" font-family:'Sans Serif'; font-size:10pt; "
+#~| "font-weight:400; font-style:normal;\">\n"
+#~| "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~| "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~| "font-size:9pt;\"></p></body></html>"
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<table border=\"0\" style=\"-qt-table-type: root; margin-top:4px; margin-"
+#~ "bottom:4px; margin-left:4px; margin-right:4px;\">\n"
+#~ "<tr>\n"
+#~ "<td style=\"border: none;\">\n"
+#~ "<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-"
+#~ "left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span "
+#~ "style=\" font-weight:600;\">Routing Information</span></p></td></tr></"
+#~ "table></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:10pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-size:9pt;\"></p></body></html>"
+
+#~ msgid "Avoid"
+#~ msgstr "Vältä"
+
+#~ msgid "Toll Roads"
+#~ msgstr "Maksulliset tiet"
+
+#, fuzzy
+#~| msgid "During &animations:"
+#~ msgid "Routing Information"
+#~ msgstr "&Animaation aikana:"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Center the map on sun "
+#~ "position</p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Keskitä kartta auringon "
+#~ "sijaintiin</p></body></html>"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Display sun position</"
+#~ "p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Näytä auringon "
+#~ "sijainti</p></body></html>"
+
+#~ msgid "GMT"
+#~ msgstr "GMT"
+
+#, fuzzy
+#~| msgid "Elevation"
+#~ msgid "Navigation mode"
+#~ msgstr "Korkeus merenpinnasta"
+
+#, fuzzy
+#~| msgid "Current Location"
+#~ msgid "Your current position"
+#~ msgstr "Nykyinen sijainti"
+
+#, fuzzy
+#~| msgid "7000 m"
+#~ msgid "000 m"
+#~ msgstr "7000 m"
+
+#, fuzzy
+#~| msgid "Elevation"
+#~ msgid "Region"
+#~ msgstr "Korkeus merenpinnasta"
+
+#, fuzzy
+#~| msgid "&Open Map..."
+#~ msgid "Open Map &Data..."
+#~ msgstr "&Avaa..."
+
+#, fuzzy
+#~| msgid "&Export Map..."
+#~ msgid "&Import Map Data..."
+#~ msgstr "&Vie..."
+
+#~ msgid "Co-maintainer and Architect"
+#~ msgstr "Kanssaylläpitäjä ja arkkitehti"
+
+#~ msgid "km"
+#~ msgstr "km"
+
+#, fuzzy
+#~| msgid "Position: %1"
+#~ msgid "Version %1"
+#~ msgstr "Sijainti: %1"
+
+#, fuzzy
+#~| msgid "Coordinates:"
+#~ msgid "Copy Coordinates"
+#~ msgstr "Koordinaatit:"
+
+#~ msgid "Ctrl+O"
+#~ msgstr "Ctrl+O"
+
+#~ msgid "Open a file for viewing on Marble"
+#~ msgstr "Avaa tiedoston katseltavaksi Marblessa"
+
+#~ msgid "Ctrl+S"
+#~ msgstr "Ctrl+S"
+
+#~ msgid "Save a screenshot of the map"
+#~ msgstr "Tallentaa kuvakaappauksen kartasta"
+
+#~ msgid "&Print..."
+#~ msgstr "&Tulosta..."
+
+#~ msgid "Ctrl+P"
+#~ msgstr "Ctrl+P"
+
+#~ msgid "Print a screenshot of the map"
+#~ msgstr "Tulostaa kuvakaappauksen kartasta"
+
+#~ msgid "&Quit"
+#~ msgstr "&Lopeta"
+
+#~ msgid "Ctrl+Q"
+#~ msgstr "Ctrl+Q"
+
+#~ msgid "Ctrl+C"
+#~ msgstr "Ctrl+C"
+
+#~ msgid "Copy a screenshot of the map"
+#~ msgstr "Kopioi kuvakaappauksen kartasta"
+
+#~ msgid "&Full Screen Mode"
+#~ msgstr "&Kokonäyttötila"
+
+#~ msgid "Ctrl+Shift+F"
+#~ msgstr "Ctrl+Shift+F"
+
+#~ msgid "Full Screen Mode"
+#~ msgstr "Kokonäyttötila"
+
+#~ msgid "&Status Bar"
+#~ msgstr "&Tilarivi"
+
+#~ msgid "Show Status Bar"
+#~ msgstr "Näyttää tilarivin"
+
+#~ msgid "What's &This"
+#~ msgstr "Mikä tämä on"
+
+#~ msgid "Shift+F1"
+#~ msgstr "Shift+F1"
+
+#~ msgid "About &Qt"
+#~ msgstr "Tietoja &Qt:stä"
+
+#~ msgid "&Help"
+#~ msgstr "&Ohje"
+
+#~ msgid "Ready"
+#~ msgstr "Valmis"
+
+#~ msgid "Images (*.jpg *.png)"
+#~ msgstr "Kuvat (*.jpg *.png)"
+
+#~ msgid ""
+#~ "All Supported Files (*.gpx *.kml);;GPS Data (*.gpx);;Google Earth KML (*."
+#~ "kml)"
+#~ msgstr ""
+#~ "Tuetut tiedostomuodot (*.gpx *.kml);;GPS-data (*.gpx);;Google Earth KML "
+#~ "(*.kml)"
+
+#~ msgid "Compass"
+#~ msgstr "Kompassi"
+
+#, fuzzy
+#~| msgid "Compass"
+#~ msgid "&Compass"
+#~ msgstr "Kompassi"
+
+#, fuzzy
+#~| msgid "km"
+#~ msgid "m"
+#~ msgstr "km"
+
+#, fuzzy
+#~| msgid "Elevation"
+#~ msgid "None"
+#~ msgstr "Korkeus merenpinnasta"
+
+#, fuzzy
+#~| msgid "Populated Places"
+#~ msgid "Populated places"
+#~ msgstr "Asutut paikat"

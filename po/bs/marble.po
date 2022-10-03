@@ -1,0 +1,5063 @@
+# Bosnian translation for kdeedu
+# Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
+# This file is distributed under the same license as the kdeedu package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: kdeedu\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2021-10-18 00:13+0000\n"
+"PO-Revision-Date: 2015-02-25 20:28+0100\n"
+"Last-Translator: Samir Ribić <megaribi@epn.ba>\n"
+"Language-Team: Bosnian <bs@li.org>\n"
+"Language: bs\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Launchpad (build 17341)\n"
+"X-Launchpad-Export-Date: 2015-02-15 06:05+0000\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "Maida Curic,Samir Ribić,Osman Mehinagic,Lejla Agic,Vedran Ljubovic"
+
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr ""
+"Maida@etf.ba,samir.ribic@etf.unsa.ba,omehinagic1@etf.unsa.ba,lagic1@etf.unsa."
+"ba,vljubovic@smartnet.ba"
+
+#: kdemain.cpp:91
+#, kde-format
+msgid "Marble Virtual Globe"
+msgstr "Marble virtualni globus"
+
+#: kdemain.cpp:93
+#, kde-format
+msgid "A World Atlas."
+msgstr "Atlas svijeta."
+
+#: kdemain.cpp:95
+#, fuzzy, kde-format
+#| msgid "(c) 2007-2014"
+msgid "(c) 2007-%1"
+msgstr "(c) 2007-2014"
+
+#: kdemain.cpp:100 kdemain.cpp:286
+#, kde-format
+msgid "Torsten Rahn"
+msgstr "Torsten Rahn"
+
+#: kdemain.cpp:101
+#, kde-format
+msgid "Developer and Original Author"
+msgstr "Programer i Originalni Autor"
+
+#: kdemain.cpp:103
+#, kde-format
+msgid "Bernhard Beschow"
+msgstr "Bernhard Beschow"
+
+#: kdemain.cpp:104
+#, kde-format
+msgid "WMS Support, Mobile, Performance"
+msgstr "WMS podrška, mobilno, performanse"
+
+#: kdemain.cpp:106
+#, kde-format
+msgid "Thibaut Gridel"
+msgstr "Thibaut Gridel"
+
+#: kdemain.cpp:107
+#, kde-format
+msgid "Geodata"
+msgstr "Geodata"
+
+#: kdemain.cpp:109
+#, kde-format
+msgid "Jens-Michael Hoffmann"
+msgstr "Jens-Michael Hoffmann"
+
+#: kdemain.cpp:110
+#, kde-format
+msgid "OpenStreetMap Integration, OSM Namefinder, Download Management"
+msgstr "OpenStreetMap Integracija, OSM Namefinder, Upravljanje preuzimanjima"
+
+#: kdemain.cpp:112
+#, kde-format
+msgid "Florian E&szlig;er"
+msgstr "Florian E&szlig;er"
+
+#: kdemain.cpp:113
+#, kde-format
+msgid "Elevation Profile"
+msgstr "Elevacijski profil"
+
+#: kdemain.cpp:115
+#, kde-format
+msgid "Wes Hardaker"
+msgstr "Wes Hardaker"
+
+#: kdemain.cpp:116
+#, kde-format
+msgid "APRS Plugin"
+msgstr "APRS dodatak"
+
+#: kdemain.cpp:118 kdemain.cpp:202
+#, kde-format
+msgid "Bastian Holst"
+msgstr "Bastian Holst"
+
+#: kdemain.cpp:119
+#, kde-format
+msgid "Online Services support"
+msgstr "Onlajn podrška servisa"
+
+#: kdemain.cpp:121 kdemain.cpp:172
+#, kde-format
+msgid "Guillaume Martres"
+msgstr "Guillaume Martres"
+
+#: kdemain.cpp:122
+#, kde-format
+msgid "Satellites"
+msgstr "Sateliti"
+
+#: kdemain.cpp:124 kdemain.cpp:168
+#, kde-format
+msgid "Rene Kuettner"
+msgstr "Rene Kuettner"
+
+#: kdemain.cpp:125
+#, kde-format
+msgid "Satellites, Eclipses"
+msgstr "Sateliti pomračenja"
+
+#: kdemain.cpp:127
+#, kde-format
+msgid "Friedrich W. H. Kossebau"
+msgstr "Fridrih V.H. Kosebau"
+
+#: kdemain.cpp:128
+#, kde-format
+msgid "Plasma Integration, Bugfixes"
+msgstr "Plasma Integracija, popravak grešaka"
+
+#: kdemain.cpp:130
+#, kde-format
+msgid "Dennis Nienhüser"
+msgstr "Dennis Nienhüser"
+
+#: kdemain.cpp:131
+#, kde-format
+msgid "Routing, Navigation, Mobile"
+msgstr "Rutiranje, Navigacija, Mobilno"
+
+#: kdemain.cpp:133
+#, kde-format
+msgid "Niko Sams"
+msgstr "Niko Sams"
+
+#: kdemain.cpp:134
+#, kde-format
+msgid "Routing, Elevation Profile"
+msgstr "Rutiranje, Elevacijski Profil"
+
+#: kdemain.cpp:136 kdemain.cpp:206
+#, kde-format
+msgid "Patrick Spendrin"
+msgstr "Patrick Spendrin"
+
+#: kdemain.cpp:137
+#, kde-format
+msgid "Core Developer: KML and Windows support"
+msgstr "Razvojni programer: KML i Windows podrška"
+
+#: kdemain.cpp:139
+#, kde-format
+msgid "Eckhart Wörner"
+msgstr "Eckhart Wörner"
+
+#: kdemain.cpp:140
+#, kde-format
+msgid "Bugfixes"
+msgstr "Popravke greškica"
+
+#: kdemain.cpp:145
+#, kde-format
+msgid "Inge Wallin"
+msgstr "Inge Wallin"
+
+#: kdemain.cpp:146
+#, kde-format
+msgid "Core Developer and Co-Maintainer"
+msgstr "Razvojni programer i održavatelj"
+
+#: kdemain.cpp:148
+#, kde-format
+msgid "Henry de Valence"
+msgstr "Henry de Valence"
+
+#: kdemain.cpp:149
+#, kde-format
+msgid "Core Developer: Marble Runners, World-Clock Plasmoid"
+msgstr "Razvojni programer: Marble Runners, World-Clock Plasmoid"
+
+#: kdemain.cpp:151
+#, kde-format
+msgid "Pino Toscano"
+msgstr "Pino Toscano"
+
+#: kdemain.cpp:152
+#, kde-format
+msgid "Network plugins"
+msgstr "Mrežni dodaci"
+
+#: kdemain.cpp:154
+#, kde-format
+msgid "Harshit Jain"
+msgstr "Harshit Jain"
+
+#: kdemain.cpp:155
+#, kde-format
+msgid "Planet filter"
+msgstr "Filter planete"
+
+#: kdemain.cpp:157
+#, kde-format
+msgid "Simon Edwards"
+msgstr "Simon Edwards"
+
+#: kdemain.cpp:158
+#, kde-format
+msgid "Marble Python Bindings"
+msgstr "Marble Python veze"
+
+#: kdemain.cpp:160
+#, kde-format
+msgid "Magnus Valle"
+msgstr "Magnus Valle"
+
+#: kdemain.cpp:161
+#, kde-format
+msgid "Historical Maps"
+msgstr "Historijske karte"
+
+#: kdemain.cpp:163
+#, kde-format
+msgid "Médéric Boquien"
+msgstr "Médéric Boquien"
+
+#: kdemain.cpp:164
+#, kde-format
+msgid "Astronomical Observatories"
+msgstr "Astronomski opservatoriji"
+
+#: kdemain.cpp:169
+#, kde-format
+msgid ""
+"ESA Summer of Code in Space 2012 Project: Visualization of planetary "
+"satellites"
+msgstr ""
+"ESA Summer of Code u svemiru  2011 Projekt: Vizualizacija Satelitskih orbita"
+
+#: kdemain.cpp:173
+#, kde-format
+msgid ""
+"ESA Summer of Code in Space 2011 Project: Visualization of Satellite Orbits"
+msgstr ""
+"ESA Ljeto koda u Svemiru 2011 projekt: Vizualizacija satelitskih orbita"
+
+#: kdemain.cpp:178
+#, kde-format
+msgid "Konstantin Oblaukhov"
+msgstr "Konstantin Oblaukhov"
+
+#: kdemain.cpp:179
+#, kde-format
+msgid "Google Summer of Code 2011 Project: OpenStreetMap Vector Rendering"
+msgstr "Google Summer of Code 2011 Project: OpenStreetMap Vector Rendering"
+
+#: kdemain.cpp:182
+#, kde-format
+msgid "Daniel Marth"
+msgstr "Daniel Marth"
+
+#: kdemain.cpp:183
+#, kde-format
+msgid "Google Summer of Code 2011 Project: Marble Touch on MeeGo"
+msgstr "Google Summer of Code 2011 Project: Marble Touch on MeeGo"
+
+#: kdemain.cpp:186
+#, kde-format
+msgid "Gaurav Gupta"
+msgstr "Gaurav Gupta"
+
+#: kdemain.cpp:187
+#, kde-format
+msgid "Google Summer of Code 2010 Project: Bookmarks"
+msgstr "Google Ljeto programiranja 2010 Projekt: Zabilješke"
+
+#: kdemain.cpp:190
+#, kde-format
+msgid "Harshit Jain "
+msgstr "Harshit Jain "
+
+#: kdemain.cpp:191
+#, kde-format
+msgid "Google Summer of Code 2010 Project: Time Support"
+msgstr "Google Ljeto kodiranja 2010 Projekt: Vremenska podrška"
+
+#: kdemain.cpp:194
+#, kde-format
+msgid "Siddharth Srivastava"
+msgstr "Siddharth Srivastava"
+
+#: kdemain.cpp:195
+#, kde-format
+msgid "Google Summer of Code 2010 Project: Turn-by-turn Navigation"
+msgstr "Google Ljeto kodiranja 2010 Projekt: Navigacija potez po potez"
+
+#: kdemain.cpp:198 kdemain.cpp:218
+#, kde-format
+msgid "Andrew Manson"
+msgstr "Andrew Manson"
+
+#: kdemain.cpp:199
+#, kde-format
+msgid "Google Summer of Code 2009 Project: OSM Annotation"
+msgstr "Google projekat ljeto 2009: OSM anotacija"
+
+#: kdemain.cpp:203
+#, kde-format
+msgid "Google Summer of Code 2009 Project: Online Services"
+msgstr "Google projekat ljeto 2009: Onlajn servisi"
+
+#: kdemain.cpp:207
+#, kde-format
+msgid "Google Summer of Code 2008 Project: Vector Tiles for Marble"
+msgstr "Gogle projekat ljeto 2008: Vektorski blokovi za Marble"
+
+#: kdemain.cpp:210
+#, kde-format
+msgid "Shashank Singh"
+msgstr "Shashank Singh"
+
+#: kdemain.cpp:211
+#, kde-format
+msgid ""
+"Google Summer of Code 2008 Project: Panoramio / Wikipedia -photo support for "
+"Marble"
+msgstr ""
+"Google projekat ljeto 2008: Panoramio / Wikipedia - foto podrška za Marble"
+
+#: kdemain.cpp:214
+#, kde-format
+msgid "Carlos Licea"
+msgstr "Carlos Licea"
+
+#: kdemain.cpp:215
+#, kde-format
+msgid ""
+"Google Summer of Code 2007 Project: Equirectangular Projection (\"Flat Map\")"
+msgstr "Google projekat ljeto 2007: Projekcija na ravan (\"Ravna projekcija\")"
+
+#: kdemain.cpp:219
+#, kde-format
+msgid "Google Summer of Code 2007 Project: GPS Support for Marble"
+msgstr "Google projekat ljeto 2007: GPS podrška za Marble"
+
+#: kdemain.cpp:222
+#, kde-format
+msgid "Murad Tagirov"
+msgstr "Murad Tagirov"
+
+#: kdemain.cpp:223
+#, kde-format
+msgid "Google Summer of Code 2007 Project: KML Support for Marble"
+msgstr "Google projekat ljeto 2007: KML podrška za Marble"
+
+#: kdemain.cpp:228
+#, kde-format
+msgid "Simon Schmeisser"
+msgstr "Simon Schmeisser"
+
+#: kdemain.cpp:229 kdemain.cpp:231 kdemain.cpp:233 kdemain.cpp:235
+#: kdemain.cpp:237 kdemain.cpp:239 kdemain.cpp:241 kdemain.cpp:243
+#: kdemain.cpp:245 kdemain.cpp:247 kdemain.cpp:249 kdemain.cpp:251
+#: kdemain.cpp:253 kdemain.cpp:255 kdemain.cpp:257 kdemain.cpp:259
+#: kdemain.cpp:261 kdemain.cpp:263 kdemain.cpp:265
+#, kde-format
+msgid "Development & Patches"
+msgstr "Razvoj i zakrpe"
+
+#: kdemain.cpp:230
+#, kde-format
+msgid "Claudiu Covaci"
+msgstr "Claudiu Covaci"
+
+#: kdemain.cpp:232
+#, kde-format
+msgid "David Roberts"
+msgstr "David Roberts"
+
+#: kdemain.cpp:234
+#, kde-format
+msgid "Nikolas Zimmermann"
+msgstr "Nikolas Zimmermann"
+
+#: kdemain.cpp:236
+#, kde-format
+msgid "Jan Becker"
+msgstr "Jan Becker"
+
+#: kdemain.cpp:238
+#, kde-format
+msgid "Stefan Asserhäll"
+msgstr "Stefan Asserhäll"
+
+#: kdemain.cpp:240
+#, kde-format
+msgid "Laurent Montel"
+msgstr "Laurent Montel"
+
+#: kdemain.cpp:242
+#, kde-format
+msgid "Mayank Madan"
+msgstr "Mayank Madan"
+
+#: kdemain.cpp:244
+#, kde-format
+msgid "Prashanth Udupa"
+msgstr "Prashanth Udupa"
+
+#: kdemain.cpp:246
+#, kde-format
+msgid "Anne-Marie Mahfouf"
+msgstr "Anne-Marie Mahfouf"
+
+#: kdemain.cpp:248
+#, kde-format
+msgid "Josef Spillner"
+msgstr "Josef Spillner"
+
+#: kdemain.cpp:250
+#, kde-format
+msgid "Frerich Raabe"
+msgstr "Frerich Raabe"
+
+#: kdemain.cpp:252
+#, kde-format
+msgid "Frederik Gladhorn"
+msgstr "Frederik Gladhorn"
+
+#: kdemain.cpp:254
+#, kde-format
+msgid "Fredrik Höglund"
+msgstr "Fredrik Höglund"
+
+#: kdemain.cpp:256
+#, kde-format
+msgid "Albert Astals Cid"
+msgstr "Albert Astals Cid"
+
+#: kdemain.cpp:258
+#, kde-format
+msgid "Thomas Zander"
+msgstr "Thomas Zander"
+
+#: kdemain.cpp:260
+#, kde-format
+msgid "Joseph Wenninger"
+msgstr "Joseph Wenninger"
+
+#: kdemain.cpp:262
+#, kde-format
+msgid "Kris Thomsen"
+msgstr "Kris Thomsen"
+
+#: kdemain.cpp:264
+#, kde-format
+msgid "Daniel Molkentin"
+msgstr "Daniel Molkentin"
+
+#: kdemain.cpp:266
+#, kde-format
+msgid "Christophe Leske"
+msgstr "Christophe Leske"
+
+#: kdemain.cpp:267 kdemain.cpp:269 kdemain.cpp:271 kdemain.cpp:273
+#: kdemain.cpp:275 kdemain.cpp:277 kdemain.cpp:279 kdemain.cpp:281
+#: kdemain.cpp:283
+#, kde-format
+msgid "Platforms & Distributions"
+msgstr "Platforme i raspodjele"
+
+#: kdemain.cpp:268
+#, kde-format
+msgid "Sebastian Wiedenroth"
+msgstr "Sebastian Wiedenroth"
+
+#: kdemain.cpp:270
+#, kde-format
+msgid "Tim Sutton"
+msgstr "Tim Sutton"
+
+#: kdemain.cpp:272
+#, kde-format
+msgid "Christian Ehrlicher"
+msgstr "Christian Ehrlicher"
+
+#: kdemain.cpp:274
+#, kde-format
+msgid "Ralf Habacker"
+msgstr "Ralf Habacker"
+
+#: kdemain.cpp:276
+#, kde-format
+msgid "Steffen Joeris"
+msgstr "Steffen Joeris"
+
+#: kdemain.cpp:278
+#, kde-format
+msgid "Marcus Czeslinski"
+msgstr "Marcus Czeslinski"
+
+#: kdemain.cpp:280
+#, kde-format
+msgid "Marcus D. Hanwell"
+msgstr "Marcus D. Hanwell"
+
+#: kdemain.cpp:282
+#, kde-format
+msgid "Chitlesh Goorah"
+msgstr "Chitlesh Goorah"
+
+#: kdemain.cpp:284
+#, kde-format
+msgid "Nuno Pinheiro"
+msgstr "Nuno Pinheiro"
+
+#: kdemain.cpp:285 kdemain.cpp:287
+#, kde-format
+msgid "Artwork"
+msgstr "Grafika"
+
+#: kdemain.cpp:290
+#, kde-format
+msgid "Luis Silva"
+msgstr "Luis Silva"
+
+#: kdemain.cpp:291 kdemain.cpp:293 kdemain.cpp:295 kdemain.cpp:297
+#: kdemain.cpp:299 kdemain.cpp:301 kdemain.cpp:303 kdemain.cpp:305
+#: kdemain.cpp:307 kdemain.cpp:309
+#, kde-format
+msgid "Various Suggestions & Testing"
+msgstr "Različiti prijedlozi i testiranje"
+
+#: kdemain.cpp:292
+#, kde-format
+msgid "Stefan Jordan"
+msgstr "Stefan Jordan"
+
+#: kdemain.cpp:294
+#, kde-format
+msgid "Robert Scott"
+msgstr "Robert Scott"
+
+#: kdemain.cpp:296
+#, kde-format
+msgid "Lubos Petrovic"
+msgstr "Lubos Petrovic"
+
+#: kdemain.cpp:298
+#, kde-format
+msgid "Benoit Sigoure"
+msgstr "Benoit Sigoure"
+
+#: kdemain.cpp:300
+#, kde-format
+msgid "Martin Konold"
+msgstr "Martin Konold"
+
+#: kdemain.cpp:302
+#, kde-format
+msgid "Matthias Welwarsky"
+msgstr "Matthias Welwarsky"
+
+#: kdemain.cpp:304
+#, kde-format
+msgid "Rainer Endres"
+msgstr "Rainer Endres"
+
+#: kdemain.cpp:306
+#, kde-format
+msgid "Ralf Gesellensetter"
+msgstr "Ralf Gesellensetter"
+
+#: kdemain.cpp:308
+#, kde-format
+msgid "Tim Alder"
+msgstr "Tim Alder"
+
+#: kdemain.cpp:310
+#, kde-format
+msgid "John Layt"
+msgstr "John Layt"
+
+#: kdemain.cpp:311
+#, kde-format
+msgid ""
+"Special thanks for providing an important source of inspiration by creating "
+"Marble's predecessor \"Kartographer\"."
+msgstr ""
+"Posebna zahvala za pružanje važnog izvora inspiracije stvaranjem prethodnika "
+"Marble-a ,\"Kartographer\"-a."
+
+#: kdemain.cpp:327
+#, kde-format
+msgid "Enable debug output"
+msgstr "Omogući opširan ispis radi traženja grešaka"
+
+#: kdemain.cpp:329
+#, kde-format
+msgid "Display OSM placemarks according to the level selected"
+msgstr ""
+
+#: kdemain.cpp:331
+#, kde-format
+msgid "Make a time measurement to check performance"
+msgstr "Napravite mjerenje vremena za provjeru performansi"
+
+#: kdemain.cpp:333
+#, kde-format
+msgid "Show frame rate"
+msgstr "Prikaži protok kadrova"
+
+#: kdemain.cpp:335
+#, kde-format
+msgid "Show tile IDs"
+msgstr "Prikaži ID naslove"
+
+#: kdemain.cpp:337
+#, kde-format
+msgid "Show time spent in each layer"
+msgstr "Prikaži vrijeme provedeno u svakom sloju"
+
+#: kdemain.cpp:339
+#, fuzzy, kde-format
+#| msgid "Use a different directory which contains map data"
+msgid "Use a different directory <directory> which contains map data."
+msgstr "KOristi drugi direktorij s podacima mape"
+
+#: kdemain.cpp:341
+#, kde-format
+msgid "Do not use the interface optimized for small screens"
+msgstr "Ne koristi interfejs optimiziran za male ekrane"
+
+#: kdemain.cpp:342
+#, kde-format
+msgid "Use the interface optimized for small screens"
+msgstr "Koristi interfejs optimiziran za male ekrane"
+
+#: kdemain.cpp:344
+#, kde-format
+msgid "Do not use the interface optimized for high resolutions"
+msgstr "Ne koristi interfejs optimiziran za visoku rezoluciju"
+
+#: kdemain.cpp:345
+#, kde-format
+msgid "Use the interface optimized for high resolutions"
+msgstr "Koristi interfejs optimiziran za visoku rezoluciju"
+
+#: kdemain.cpp:347
+#, fuzzy, kde-format
+#| msgid "Show map at given lat lon coordinates"
+msgid "Show map at given lat lon <coordinates>"
+msgstr "Prikaži mapu na datim geografskim koordinatama"
+
+#: kdemain.cpp:349
+#, fuzzy, kde-format
+#| msgid "Show map at given geo uri"
+msgid "Show map at given geo <uri>"
+msgstr "Prikaži mapu na zadatoj geo uri"
+
+#: kdemain.cpp:351
+#, kde-format
+msgid "Set the distance of the observer to the globe (in km)"
+msgstr "Postavi udaljenost posmatrača na globus (in km)"
+
+#: kdemain.cpp:353
+#, fuzzy, kde-format
+#| msgid "Use map id (e.g. \"earth/openstreetmap/openstreetmap.dgml\")"
+msgid "Use map <id> (e.g. \"earth/openstreetmap/openstreetmap.dgml\")"
+msgstr "Koristi oznaku mape (npr. \"earth/openstreetmap/openstreetmap.dgml\")"
+
+#: kdemain.cpp:355
+#, kde-format
+msgid "One or more placemark files to be opened"
+msgstr "Jedna ili više datoteka oznake da bude otvorena"
+
+#. i18n: ectx: label, entry, group (Time)
+#: marble.kcfg:58
+#, kde-format
+msgid "The date and time of marble clock"
+msgstr "Datum i vrijeme kuglastog sata"
+
+#. i18n: ectx: label, entry, group (Time)
+#: marble.kcfg:61
+#, kde-format
+msgid "The speed of marble clock"
+msgstr "Brzina kuglastog sata"
+
+#. i18n: ectx: label, entry, group (View)
+#: marble.kcfg:107
+#, kde-format
+msgid "The unit chosen to measure distances."
+msgstr "Jedinica izabrana za mjerenje udaljenosti."
+
+#. i18n: ectx: label, entry, group (View)
+#: marble.kcfg:115
+#, kde-format
+msgid "The unit chosen to measure angles."
+msgstr "Jedinica izabrana za mjerenje uglova."
+
+#. i18n: ectx: label, entry, group (View)
+#: marble.kcfg:124
+#, kde-format
+msgid "The quality at which a still map gets painted."
+msgstr "Kvalitet kojim će se karte obojiti."
+
+#. i18n: ectx: label, entry, group (View)
+#: marble.kcfg:135
+#, kde-format
+msgid "The quality at which an animated map gets painted."
+msgstr "Kvalitet po kojem animirana karta biva oslikana."
+
+#. i18n: ectx: label, entry, group (View)
+#: marble.kcfg:146
+#, kde-format
+msgid "The localization of the labels."
+msgstr "Lokalizacija oznaka."
+
+#. i18n: ectx: label, entry (mapFont), group (View)
+#: marble.kcfg:155
+#, kde-format
+msgid "The general font used on the map."
+msgstr "Opšti font korišten na karti."
+
+#. i18n: ectx: label, entry (lastFileOpenDir), group (View)
+#: marble.kcfg:159
+#, kde-format
+msgid "The last directory that was opened by File->Open."
+msgstr "Zadnji direktorij otvoren sa Datoteka->Otvori."
+
+#. i18n: ectx: label, entry, group (Navigation)
+#: marble.kcfg:179
+#, kde-format
+msgid "The behaviour of the planet's axis on mouse dragging."
+msgstr "Ponašanje ose planete na povlačenje mišem."
+
+#. i18n: ectx: label, entry, group (Navigation)
+#: marble.kcfg:187
+#, kde-format
+msgid "The location shown on application startup."
+msgstr "Lokacija prikazana na zahtjev za pokretanje."
+
+#. i18n: ectx: label, entry, group (Navigation)
+#: marble.kcfg:201
+#, kde-format
+msgid "Display animation on voyage to target."
+msgstr "Prikaz animacije na putovanje do cilja."
+
+#. i18n: ectx: label, entry, group (Navigation)
+#: marble.kcfg:205
+#, kde-format
+msgid "The external OpenStreetMap editor application"
+msgstr "Spoljnji OpenStreetMap editor program"
+
+#. i18n: ectx: label, entry, group (Cache)
+#: marble.kcfg:211
+#, kde-format
+msgid "Cache for tiles reserved in the physical memory."
+msgstr "Skrivena memorija za blokove rezervisane u fizičkoj memoriji."
+
+#. i18n: ectx: label, entry, group (Cache)
+#: marble.kcfg:217
+#, kde-format
+msgid "Maximum space on the hard disk that can be used to store tiles."
+msgstr ""
+"Maksimalni prostor na hard disku koji se može koristiti za smještanje "
+"pločica u memoriju."
+
+#. i18n: ectx: label, entry (proxyUrl), group (Cache)
+#: marble.kcfg:223
+#, kde-format
+msgid "URL for the proxy server."
+msgstr "URL za posrednički (proxy) server."
+
+#. i18n: ectx: label, entry, group (Cache)
+#: marble.kcfg:227
+#, kde-format
+msgid "Port for the proxy server."
+msgstr "Port za posrednički (proxy) server."
+
+#. i18n: ectx: label, entry (proxyUser), group (Cache)
+#: marble.kcfg:233
+#, kde-format
+msgid "Username for authorization."
+msgstr "Korisničko ime za odobrenje."
+
+#. i18n: ectx: label, entry (proxyPass), group (Cache)
+#: marble.kcfg:236
+#, kde-format
+msgid "Password for authorization."
+msgstr "Šifra za odobrenje."
+
+#. i18n: ectx: label, entry (proxyHttp), group (Cache)
+#: marble.kcfg:239
+#, kde-format
+msgid "Proxy type is HTTP"
+msgstr "Tip posrednika je HTTP"
+
+#. i18n: ectx: label, entry (proxySocks5), group (Cache)
+#: marble.kcfg:250
+#, kde-format
+msgid "Proxy type is Socks5"
+msgstr "Tip posrednika je Socks5"
+
+#. i18n: ectx: label, entry (proxyAuth), group (Cache)
+#: marble.kcfg:254
+#, kde-format
+msgid "Proxy requires Authentication"
+msgstr "Psrednik zahtijeva provjeru autentičnosti"
+
+#. i18n: ectx: label, entry (activePositionTrackingPlugin), group (Plugins)
+#: marble.kcfg:260
+#, kde-format
+msgid "The position tracking plugin used to determine the current location"
+msgstr ""
+"Dodatak za praćenje pozicije koji se koristi za određivanje trenutne lokacije"
+
+#: marble_part.cpp:102
+#, kde-format
+msgid "Position: %1"
+msgstr "Pozicija: %1"
+
+#: marble_part.cpp:103
+#, kde-format
+msgid "Altitude: %1"
+msgstr "Visina: %1"
+
+#: marble_part.cpp:104
+#, kde-format
+msgid "Tile Zoom Level: %1"
+msgstr "Nivo povećanja bloka: %1"
+
+#: marble_part.cpp:105
+#, kde-format
+msgid "Time: %1"
+msgstr "Vrijeme: %1"
+
+#: marble_part.cpp:167
+#, kde-format
+msgid ""
+"Sorry, unable to open '%1':\n"
+"'%2'"
+msgstr ""
+
+#: marble_part.cpp:168
+#, fuzzy, kde-format
+#| msgid "File not accessible"
+msgid "File not readable"
+msgstr "Datoteci se ne može pristupiti."
+
+#: marble_part.cpp:214
+#, kde-format
+msgid "marble_part"
+msgstr "marble_dio"
+
+#: marble_part.cpp:217
+#, kde-format
+msgid "A Virtual Globe"
+msgstr "Virtualni globus"
+
+#: marble_part.cpp:231
+#, kde-format
+msgid "Sorry, unable to open '%1'. The file is not accessible."
+msgstr "Žao nam je, ne može se otvoriti '%1'. Datoteci se ne može pristupiti."
+
+#: marble_part.cpp:232
+#, kde-format
+msgid "File not accessible"
+msgstr "Datoteci se ne može pristupiti."
+
+#: marble_part.cpp:253
+#, kde-format
+msgid "All Supported Files"
+msgstr "Sve podržane datoteke"
+
+#: marble_part.cpp:259
+#, fuzzy, kde-format
+#| msgid "Open File"
+msgctxt "@title:window"
+msgid "Open File"
+msgstr "Otvori datoteku"
+
+#: marble_part.cpp:276
+#, fuzzy, kde-format
+#| msgid "Export Map"
+msgctxt "@title:window"
+msgid "Export Map"
+msgstr "Izvoz karte"
+
+#: marble_part.cpp:277
+#, kde-format
+msgid "Images *.jpg *.png"
+msgstr "Slike *.jpg *.png"
+
+#: marble_part.cpp:291
+#, kde-format
+msgctxt "Application name"
+msgid "Marble"
+msgstr "Marble"
+
+#: marble_part.cpp:292
+#, kde-format
+msgid "An error occurred while trying to save the file.\n"
+msgstr "Dogodila se greška prilikom spašavanja datoteke.\n"
+
+#: marble_part.cpp:483
+#, kde-format
+msgid "Unnamed"
+msgstr "Neimenovano"
+
+#: marble_part.cpp:714
+#, kde-format
+msgctxt "Action for downloading an entire region of a map"
+msgid "Download Region..."
+msgstr "Preuzmi region..."
+
+#: marble_part.cpp:728
+#, kde-format
+msgctxt "Action for saving the map to a file"
+msgid "&Export Map..."
+msgstr "Izvezi &kartu..."
+
+#: marble_part.cpp:737
+#, kde-format
+msgctxt "Action for toggling offline mode"
+msgid "&Work Offline"
+msgstr "&Raditi izvan mreže"
+
+#: marble_part.cpp:747
+#, kde-format
+msgctxt "Action for copying the map to the clipboard"
+msgid "&Copy Map"
+msgstr "&Kopiraj mapu"
+
+#: marble_part.cpp:754
+#, kde-format
+msgctxt "Action for copying the coordinates to the clipboard"
+msgid "C&opy Coordinates"
+msgstr "&Kopiraj koordinate"
+
+#: marble_part.cpp:762
+#, kde-format
+msgctxt "Action for opening a file"
+msgid "&Open..."
+msgstr "&Otvori..."
+
+#: marble_part.cpp:769
+#, kde-format
+msgctxt "Action for downloading maps (GHNS)"
+msgid "Download Maps..."
+msgstr "Preuzmi mape..."
+
+#: marble_part.cpp:772
+#, kde-format
+msgctxt "Status tip"
+msgid "Download new maps"
+msgstr "Preuzmi nove karte"
+
+#: marble_part.cpp:778
+#, kde-format
+msgctxt "Action for creating new maps"
+msgid "&Create a New Map..."
+msgstr "&Kreiraj novu mapu..."
+
+#: marble_part.cpp:783
+#, kde-format
+msgctxt "Status tip"
+msgid "A wizard guides you through the creation of your own map theme."
+msgstr "Čarobnjak će vam pomoći da kreirate vlastitu  temu mape."
+
+#: marble_part.cpp:810
+#, kde-format
+msgctxt "Action for toggling clouds"
+msgid "&Clouds"
+msgstr "&Oblaci"
+
+#: marble_part.cpp:817
+#, kde-format
+msgctxt "Action for sun control dialog"
+msgid "S&un Control..."
+msgstr "&Sunca kontrola..."
+
+#: marble_part.cpp:827
+#, kde-format
+msgctxt "Action for time control dialog"
+msgid "&Time Control..."
+msgstr "&Vremenska kontrola..."
+
+#: marble_part.cpp:836
+#, kde-format
+msgctxt "Action for locking float items on the map"
+msgid "Lock Position"
+msgstr "Zaključaj poziciju"
+
+#: marble_part.cpp:847
+#, kde-format
+msgid "Show Shadow"
+msgstr "Prikaži sjenu"
+
+#: marble_part.cpp:850
+#, kde-format
+msgid "Hide Shadow"
+msgstr "Sakrij sjenu"
+
+#: marble_part.cpp:851
+#, kde-format
+msgid "Shows and hides the shadow of the sun"
+msgstr "Prikazuje i sakriva sijenku sunca"
+
+#: marble_part.cpp:855
+#, kde-format
+msgid "Show sun icon on the Sub-Solar Point"
+msgstr "Prikaži ikonu Sunca za podsolarnu tačku"
+
+#: marble_part.cpp:857
+#, kde-format
+msgid "Hide sun icon on the Sub-Solar Point"
+msgstr "Sakrij ikonu Sunca za podsolarnu tačku"
+
+#: marble_part.cpp:858
+#, kde-format
+msgid "Show sun icon on the sub-solar point"
+msgstr "Prikaži ikonu Sunca za podsolarnu tačku"
+
+#: marble_part.cpp:863
+#, kde-format
+msgid "Lock Globe to the Sub-Solar Point"
+msgstr "Zaključaj globus na podsolarnu tačku"
+
+#: marble_part.cpp:865
+#, kde-format
+msgid "Unlock Globe to the Sub-Solar Point"
+msgstr "Odključaj globus na podsolarnu tačku"
+
+#: marble_part.cpp:866
+#, kde-format
+msgid "Lock globe to the sub-solar point"
+msgstr "Zaključaj globus na podsolarnu tačku"
+
+#: marble_part.cpp:881
+#, fuzzy, kde-format
+#| msgctxt "Add Bookmark"
+#| msgid "&Add Bookmark"
+msgctxt "Add Bookmark"
+msgid "Add &Bookmark..."
+msgstr "&Dodaj zabilješkama"
+
+#: marble_part.cpp:889
+#, kde-format
+msgctxt "Show Bookmarks"
+msgid "Show &Bookmarks"
+msgstr "Prikaži &Favorite"
+
+#: marble_part.cpp:890
+#, kde-format
+msgid "Show or hide bookmarks in the map"
+msgstr "Prikažite ili sakrijte markere u mapi"
+
+#: marble_part.cpp:898
+#, kde-format
+msgid "&Set Home Location"
+msgstr "&Podesi početnu lokaciju"
+
+#: marble_part.cpp:905
+#, fuzzy, kde-format
+#| msgctxt "Manage Bookmarks"
+#| msgid "&Manage Bookmarks"
+msgctxt "Manage Bookmarks"
+msgid "&Manage Bookmarks..."
+msgstr "&Upravljanje favoritima"
+
+#: marble_part.cpp:917
+#, fuzzy, kde-format
+#| msgctxt "Edit the map in an external application"
+#| msgid "&Edit Map"
+msgctxt "Edit the map in an external application"
+msgid "&Edit Map..."
+msgstr "&Izmijeni mapu"
+
+#: marble_part.cpp:925
+#, fuzzy, kde-format
+#| msgid "Record tour"
+msgid "&Record Movie"
+msgstr "Snimi put"
+
+#: marble_part.cpp:927
+#, kde-format
+msgid "Records a movie of the globe"
+msgstr ""
+
+#: marble_part.cpp:933
+#, kde-format
+msgid "&Stop Recording"
+msgstr ""
+
+#: marble_part.cpp:935
+#, kde-format
+msgid "Stop recording a movie of the globe"
+msgstr ""
+
+#: marble_part.cpp:1287
+#, kde-format
+msgctxt "Action for toggling"
+msgid "Show Position"
+msgstr "Prikaz pozicije"
+
+#: marble_part.cpp:1289
+#, kde-format
+msgctxt "Action for toggling"
+msgid "Show Date and Time"
+msgstr "Prikaži datum i vrijeme"
+
+#: marble_part.cpp:1291
+#, kde-format
+msgctxt "Action for toggling"
+msgid "Show Altitude"
+msgstr "Prikaz visine"
+
+#: marble_part.cpp:1294
+#, kde-format
+msgctxt "Action for toggling"
+msgid "Show Tile Zoom Level"
+msgstr "Pokaži nivo povećanja bloka"
+
+#: marble_part.cpp:1296
+#, kde-format
+msgctxt "Action for toggling"
+msgid "Show Download Progress Bar"
+msgstr "Pokaži traku napretka preuzimanja"
+
+#: marble_part.cpp:1391
+#, kde-format
+msgid "View"
+msgstr "Pregled"
+
+#: marble_part.cpp:1402
+#, kde-format
+msgid "Navigation"
+msgstr "Navigacija"
+
+#: marble_part.cpp:1413
+#, kde-format
+msgid "Cache & Proxy"
+msgstr "Priručna memorija i posrednik"
+
+#: marble_part.cpp:1426
+#, kde-format
+msgid "Date & Time"
+msgstr "Datum i vrijeme"
+
+#: marble_part.cpp:1434
+#, kde-format
+msgid "Synchronization"
+msgstr "Sinhronizacija"
+
+#: marble_part.cpp:1447
+#, kde-format
+msgid "Routing"
+msgstr "Usmjeravanje"
+
+#: marble_part.cpp:1455
+#, kde-format
+msgid "Plugins"
+msgstr "Dodaci"
+
+#. i18n: ectx: Menu (file)
+#: marble_part.rc:6 marbleui.rc:5
+#, kde-format
+msgid "&File"
+msgstr "&Datoteka"
+
+#. i18n: ectx: Menu (edit)
+#: marble_part.rc:21 marbleui.rc:14
+#, kde-format
+msgid "&Edit"
+msgstr "&Izmijeni"
+
+#. i18n: ectx: Menu (view)
+#: marble_part.rc:31 marbleui.rc:18
+#, kde-format
+msgid "&View"
+msgstr "&Pogled"
+
+#. i18n: ectx: Menu (infoboxes)
+#: marble_part.rc:36
+#, kde-format
+msgid "&Info Boxes"
+msgstr "&Info-polja"
+
+#. i18n: ectx: Menu (onlineservices)
+#: marble_part.rc:42
+#, kde-format
+msgid "&Online Services"
+msgstr "&Onlajn servisi"
+
+#. i18n: ectx: Menu (settings)
+#: marble_part.rc:55 marbleui.rc:31
+#, kde-format
+msgid "&Settings"
+msgstr "&Postavke"
+
+#. i18n: ectx: Menu (panels)
+#: marble_part.rc:59
+#, kde-format
+msgid "&Panels"
+msgstr "&Paneli"
+
+#. i18n: ectx: Menu (viewSize)
+#: marble_part.rc:65
+#, kde-format
+msgid "&View Size"
+msgstr "&Veličina pogleda"
+
+#. i18n: ectx: Menu (bookmarks)
+#: marble_part.rc:73 marbleui.rc:29
+#, kde-format
+msgid "&Bookmarks"
+msgstr "&Zabilješke"
+
+#. i18n: ectx: ToolBar (mainToolBar)
+#: marble_part.rc:84 marbleui.rc:36
+#, kde-format
+msgid "Main Toolbar"
+msgstr "Glavna alatna traka"
+
+#. i18n: ectx: ToolBar (pluginToolBar)
+#: marble_part.rc:97
+#, kde-format
+msgid "Edit Toolbar"
+msgstr "Alatna traka za izmjene"
+
+#~ msgid "The graphics system that is used by Qt to render the graphics."
+#~ msgstr "Grafički sistem koji se koristi za Qt za prikaz grafike."
+
+#~ msgid "Native"
+#~ msgstr "Prirodni"
+
+#~ msgid "Native (X11)"
+#~ msgstr "Prirodni (X11)"
+
+#~ msgid "Native (Mac OS X Core Graphics)"
+#~ msgstr "Prirodni (Mac OS X Core Graphics)"
+
+#~ msgid ""
+#~ "You have decided to run Marble with a different graphics system.\n"
+#~ "For this change to become effective, Marble has to be restarted.\n"
+#~ "Please close the application and start Marble again."
+#~ msgstr ""
+#~ "Odlučili ste se za pokretanje Marble-a sa različitim grafičkim sistemom.\n"
+#~ "Da bi ova opcija stupila na snagu, Marble mora biti ponovo pokrenut.\n"
+#~ "Molim zatvorite program i ponovo pokrenite Marble."
+
+#~ msgid "Graphics System Change"
+#~ msgstr "Grafička promjena sistema"
+
+#~ msgid "Night Sky"
+#~ msgstr "Noćno nebo"
+
+#~ msgid ""
+#~ "<p>The <i>night sky</i>.</p><p>Displays the stars and constellations at "
+#~ "night.</p>"
+#~ msgstr ""
+#~ "<p>To <i>noćno nebo</i>.</p><p>Prikazuje zvijezde i sazviježđa noću.</p>"
+
+#~ msgid "Mountain"
+#~ msgstr "Planina"
+
+#~ msgid "Volcano"
+#~ msgstr "Vulkan"
+
+#~ msgid "Geographic Pole"
+#~ msgstr "Geografski pol"
+
+#~ msgid "Magnetic Pole"
+#~ msgstr "Magnetni pol"
+
+#~ msgid "Airport"
+#~ msgstr "Aerodrom"
+
+#~ msgid "Shipwreck"
+#~ msgstr "Brodolom"
+
+#~ msgid "Astronomical Observatory"
+#~ msgstr "Astronomski opservatorij"
+
+#~ msgid ""
+#~ "<p>The moon.</p><p>The map is based on data from the Clementine Moon "
+#~ "mission (UVVIS Basemap Mosaic). Credits: NASA/SDIO, Courtesy <a href="
+#~ "\"http://astrogeology.usgs.gov\">USGS Astrogeology Research Program</a></"
+#~ "p>"
+#~ msgstr ""
+#~ "<p>Mjesec.</p><p>Karta je bazirana na temelju podataka iz misije "
+#~ "Clementine mjesec (UVVIS Basemap Mozaik. Krediti: NASA/SDIO, Uslužnost <a "
+#~ "href=\"http://astrogeology.usgs.gov\">USGS Program astrogeoloških "
+#~ "istraživanja</a></p>"
+
+#~ msgid "Explore the Moon"
+#~ msgstr "Istraži Mjesec"
+
+#~ msgid "Landing Sites"
+#~ msgstr "Mjesta slijetanja"
+
+#~ msgid "Craters"
+#~ msgstr "Krateri"
+
+#~ msgid "Maria"
+#~ msgstr "Maria"
+
+#~ msgid "Other features"
+#~ msgstr "Ostale mogućnosti"
+
+#~ msgid ""
+#~ "<a href=\"tour://moon/clementine/tour.kml\">Play a tour of different "
+#~ "landing sites.</a>"
+#~ msgstr ""
+#~ "<a href=\"tour://moon/clementine/tour.kml\">Napravi putovanje na drugom "
+#~ "mjestu spuštanja.</a>"
+
+#~ msgid "Manned landing site"
+#~ msgstr "Mjesto slijetanja ljudske posade"
+
+#~ msgid "Robotic rover"
+#~ msgstr "Lutalica robot"
+
+#~ msgid "Unmanned soft landing"
+#~ msgstr "Mirno slijetanje bez posade"
+
+#~ msgid "Unmanned hard landing"
+#~ msgstr "Teško slijetanje bez posade"
+
+#~ msgid "Crater, impact crater"
+#~ msgstr "Krater, sudar kratera"
+
+#~ msgid "Mons, mountain"
+#~ msgstr "Mons, planina"
+
+#~ msgid "Vallis, valley"
+#~ msgstr "Vallis, dolina"
+
+#~ msgid "Selenographic Pole"
+#~ msgstr "Mjesečev pol"
+
+#~ msgid "Plain Map"
+#~ msgstr "Čista karta"
+
+#~ msgid ""
+#~ "<p>A <i>plain map</i>.</p><p>It uses vector lines to mark coastlines and "
+#~ "country borders, etc...</p>"
+#~ msgstr ""
+#~ "<p>A <i>čista karta</i>.</p><p>Koristi vektorske linije za označavanje "
+#~ "obala i državnih granica, itd... </p>"
+
+#~ msgid "Urban Areas"
+#~ msgstr "Urbana područja"
+
+#~ msgid "Boundaries"
+#~ msgstr "Granice"
+
+#~ msgid "Water Bodies"
+#~ msgstr "Vodena tijela"
+
+#~ msgid "Ice and Glaciers"
+#~ msgstr "Led i ledenjaci"
+
+#~ msgid "International"
+#~ msgstr "Međunarodno"
+
+#~ msgid "State"
+#~ msgstr "Država/Entitet"
+
+#~ msgid "Disputed Areas"
+#~ msgstr "Sporna područja"
+
+#~ msgid "Maritime Borders"
+#~ msgstr "Morske granice"
+
+#~ msgid "Lake"
+#~ msgstr "Jezero"
+
+#~ msgid "Historic Lake"
+#~ msgstr "Historijsko Jezero"
+
+#~ msgid "Playa"
+#~ msgstr "Plaža"
+
+#~ msgid "River"
+#~ msgstr "Rijeka"
+
+#~ msgid "Glaciers"
+#~ msgstr "Glacijacija"
+
+#~ msgid "Antarctic Iceshelves"
+#~ msgstr "Anktartičke ledene školjke"
+
+#~ msgid "Temperature (July)"
+#~ msgstr "Temperatura (Juli)"
+
+#~ msgid "A map which shows the average temperature in July."
+#~ msgstr "Karta koja pokazuje prosječnu temperaturu u julu."
+
+#~ msgid "42&deg;C"
+#~ msgstr "42&deg;C"
+
+#~ msgid "32&deg;C"
+#~ msgstr "32&deg;C"
+
+#~ msgid "23&deg;C"
+#~ msgstr "23&deg;C"
+
+#~ msgid "12&deg;C"
+#~ msgstr "12&deg;C"
+
+#~ msgid "1&deg;C"
+#~ msgstr "1&deg;C"
+
+#~ msgid "-10&deg;C"
+#~ msgstr "-10&deg;C"
+
+#~ msgid "-21&deg;C"
+#~ msgstr "-21&deg;C"
+
+#~ msgid "-32&deg;C"
+#~ msgstr "-32&deg;C"
+
+#~ msgid "-41&deg;C"
+#~ msgstr "-41&deg;C"
+
+#~ msgid "-69&deg;C"
+#~ msgstr "-69&deg;C"
+
+#~ msgid "Earth at Night"
+#~ msgstr "Zemlja noću"
+
+#~ msgid ""
+#~ "This image of <i>Earth's city lights</i> was created with data from the "
+#~ "Defense Meteorological Satellite Program (DMSP) Operational Linescan "
+#~ "System (OLS)."
+#~ msgstr ""
+#~ "Ova slika <i>svjetala zemljinih gradova</i>je nastala sa podacima iz "
+#~ "programa odbrambenog metereološkog satelita (DMSP) Operativni Linescan "
+#~ "Sistem (OLS)."
+
+#~ msgid "Surface"
+#~ msgstr "Površina"
+
+#~ msgid "Light terrain"
+#~ msgstr "Svijetao teren"
+
+#~ msgid "Dark terrain"
+#~ msgstr "Taman teren"
+
+#~ msgid "Water"
+#~ msgstr "Voda"
+
+#~ msgid "Atlas"
+#~ msgstr "Atlas"
+
+#~ msgid ""
+#~ "<p>A <i>classic topographic map</i>.</p><p>It uses vector lines to mark "
+#~ "coastlines, country borders etc. and bitmap graphics to create the height "
+#~ "relief.</p>"
+#~ msgstr ""
+#~ "<p>A <i>klasična topografska mapa</i>.</p><p>Ona koristi vektorske linije "
+#~ "za označavanje obala, državnih granica itd. i bitmap grafike za stvaranje "
+#~ "visokih reljefa.</p>"
+
+#~ msgid "Relief"
+#~ msgstr "Reljef"
+
+#~ msgid "Elevation"
+#~ msgstr "Visina"
+
+#~ msgid "7000 m"
+#~ msgstr "7000 m"
+
+#~ msgid "5000 m"
+#~ msgstr "5000 m"
+
+#~ msgid "3500 m"
+#~ msgstr "3500 m"
+
+#~ msgid "2000 m"
+#~ msgstr "2000 m"
+
+#~ msgid "1000 m"
+#~ msgstr "1000 m"
+
+#~ msgid "500 m"
+#~ msgstr "500 m"
+
+#~ msgid "200 m"
+#~ msgstr "200 m"
+
+#~ msgid "50 m"
+#~ msgstr "50 m"
+
+#~ msgid "0 m"
+#~ msgstr "0 m"
+
+#~ msgid "0 m (Water)"
+#~ msgstr "0 m (voda)"
+
+#~ msgid "-50 m"
+#~ msgstr "-50 m"
+
+#~ msgid "-200 m"
+#~ msgstr "-200 m"
+
+#~ msgid "-2000 m"
+#~ msgstr "-2000 m"
+
+#~ msgid "-4000 m"
+#~ msgstr "-4000 m"
+
+#~ msgid "-6500 m"
+#~ msgstr "-6500 m"
+
+#~ msgid "-11000 m"
+#~ msgstr "-11000 m"
+
+#~ msgid "Temperature (December)"
+#~ msgstr "Temperatura (Decembar)"
+
+#~ msgid "A map which shows the average temperature in December."
+#~ msgstr "Karta koja pokazuje prosječnu temparaturu u decembru."
+
+#~ msgid ""
+#~ "<p>A <i>global roadmap</i> created by the OpenStreetMap (OSM) project.</"
+#~ "p><p>OSM is an open community which creates free editable maps. The OSM "
+#~ "data was rendered using Mapnik.</p>"
+#~ msgstr ""
+#~ "<p>A <i>globalni putokaz</i> kreiran u  projektu OtvoriKartuUlice (OSM) ."
+#~ "</p><p>OSM je otvorena zajednica koja stvara slobodne karte koje je "
+#~ "moguće uređivati. OSM je podnešen koristeći Mapnik.</p>"
+
+#, fuzzy
+#~| msgid "Map Title:"
+#~ msgid "OSM Bitmap Tiles"
+#~ msgstr "Naslov mape:"
+
+#~ msgid "Explore the Earth"
+#~ msgstr "Istraži Zemlju"
+
+#~ msgid "Hillshading"
+#~ msgstr "Sjenčenje brda"
+
+#~ msgid "Transportation"
+#~ msgstr "Prijevoz"
+
+#~ msgid "Areas"
+#~ msgstr "Područja"
+
+#~ msgid "Education"
+#~ msgstr "Obrazovanje"
+
+#~ msgid "Financial"
+#~ msgstr "Finansijski"
+
+#~ msgid "Healthcare"
+#~ msgstr "Zdravstvo"
+
+#~ msgid "Entertainment"
+#~ msgstr "Zabava"
+
+#~ msgid "Public Buildings"
+#~ msgstr "Javne zgrade"
+
+#~ msgid "Accommodation"
+#~ msgstr "Smještaj"
+
+#~ msgid "Emergency"
+#~ msgstr "Hitne službe"
+
+#~ msgid "Historic"
+#~ msgstr "Historijski objekti"
+
+#~ msgid "Food and Drinks"
+#~ msgstr "Hrana i piće"
+
+#~ msgid "Shop"
+#~ msgstr "Prodavnica"
+
+#~ msgid ""
+#~ "<a href=\"tour://earth/openstreetmap/tour.kml\">Play a tour of popular "
+#~ "places.</a>"
+#~ msgstr ""
+#~ "<a href=\"tour://earth/openstreetmap/tour.kml\">Igraj turu popularnih "
+#~ "mjesta.</a>"
+
+#~ msgid "Motorway"
+#~ msgstr "Autoput"
+
+#~ msgid "Trunk road"
+#~ msgstr "Magistralni put"
+
+#~ msgid "Primary road"
+#~ msgstr "Regionalni put"
+
+#~ msgid "Secondary road"
+#~ msgstr "Lokalni put"
+
+#~ msgid "Unclassified road"
+#~ msgstr "Nekategorisani put"
+
+#~ msgid "Unsurfaced road"
+#~ msgstr "Zemljani put"
+
+#~ msgid "Track"
+#~ msgstr "Staza"
+
+#~ msgid "Byway"
+#~ msgstr "Sporedan put"
+
+#~ msgid "Bridleway"
+#~ msgstr "Prečica"
+
+#~ msgid "Cycleway"
+#~ msgstr "Biciklistička staza"
+
+#~ msgid "Footway"
+#~ msgstr "Pješačka zona"
+
+#~ msgid "Railway station"
+#~ msgstr "Željeznička stanica"
+
+#~ msgid "Railway"
+#~ msgstr "Željeznica"
+
+#~ msgid "Subway"
+#~ msgstr "Podzemna željeznica"
+
+#~ msgid "Lightrail, tram"
+#~ msgstr "Tračnica, tramvaj"
+
+#~ msgid "Airport runway, taxiway"
+#~ msgstr "Aerodromska pista, taksi zona"
+
+#~ msgid "Airport apron, terminal"
+#~ msgstr "Aerodromska pista, terminal"
+
+#~ msgid "Administrative boundary"
+#~ msgstr "Administrativna granica"
+
+#~ msgid "Bridge"
+#~ msgstr "Most"
+
+#~ msgid "Tunnel"
+#~ msgstr "Tunel"
+
+#~ msgid "Forest"
+#~ msgstr "Šuma"
+
+#~ msgid "Wood"
+#~ msgstr "Drvo"
+
+#~ msgid "Golf course"
+#~ msgstr "Teren za golf"
+
+#~ msgid "Park"
+#~ msgstr "Park"
+
+#~ msgid "Residential Area"
+#~ msgstr "Stambeno područje"
+
+#~ msgid "Tourist attraction"
+#~ msgstr "Turistička atrakcija"
+
+#~ msgid "Common, meadow"
+#~ msgstr "Obično,  livada"
+
+#~ msgid "Retail area"
+#~ msgstr "Maloprodajno područje"
+
+#~ msgid "Industrial Area"
+#~ msgstr "Industrijska zona"
+
+#~ msgid "Commercial Area"
+#~ msgstr "Komercijalno područje"
+
+#~ msgid "Heathland"
+#~ msgstr "Ravnica"
+
+#~ msgid "Lake, reservoir"
+#~ msgstr "Jezero, akumulacija"
+
+#~ msgid "Farm"
+#~ msgstr "Farma"
+
+#~ msgid "Brownfield site"
+#~ msgstr "Predio smeđih polja"
+
+#~ msgid "Cemetery"
+#~ msgstr "Groblje"
+
+#~ msgid "Allotments"
+#~ msgstr "Parcele"
+
+#~ msgid "Sports pitch"
+#~ msgstr "Sportski teren"
+
+#~ msgid "Sports centre"
+#~ msgstr "Sportski centar"
+
+#~ msgid "Nature reserve"
+#~ msgstr "Prirodni rezervat"
+
+#~ msgid "Military area"
+#~ msgstr "Vojno područje"
+
+#~ msgid "School, university"
+#~ msgstr "Škola, univerzitet"
+
+#~ msgid "Significant Building"
+#~ msgstr "Značajna građevina"
+
+#~ msgid "Summit, peak"
+#~ msgstr "Vrh, maksimum"
+
+#~ msgid "College"
+#~ msgstr "Koledž"
+
+#~ msgid "Kindergarten"
+#~ msgstr "Obdanište"
+
+#~ msgid "Library"
+#~ msgstr "Biblioteka"
+
+#~ msgid "School"
+#~ msgstr "Škola"
+
+#~ msgid "University"
+#~ msgstr "Univerzitet"
+
+#~ msgid "ATM"
+#~ msgstr "Bankomat"
+
+#~ msgid "Bank"
+#~ msgstr "Banka"
+
+#~ msgid "Bureau de change"
+#~ msgstr "Mjenjačnica"
+
+#~ msgid "Dentist"
+#~ msgstr "Zubar"
+
+#~ msgid "Doctors"
+#~ msgstr "Ljekar"
+
+#~ msgid "Pharmacy"
+#~ msgstr "Apoteka"
+
+#~ msgid "Veterinary"
+#~ msgstr "Veterinar"
+
+#~ msgid "Cinema"
+#~ msgstr "Kino"
+
+#~ msgid "Theatre"
+#~ msgstr "Pozorište"
+
+#~ msgid "Court"
+#~ msgstr "Sud"
+
+#~ msgid "Embassy"
+#~ msgstr "Ambasada"
+
+#~ msgid "Church"
+#~ msgstr "Crkva"
+
+#~ msgid "Playground"
+#~ msgstr "Igralište"
+
+#~ msgid "Place of worship"
+#~ msgstr "Bogomolja"
+
+#~ msgid "Post office"
+#~ msgstr "Pošta"
+
+#~ msgid "Public building"
+#~ msgstr "Javna zgrada"
+
+#~ msgid "Toilets"
+#~ msgstr "Toalet"
+
+#~ msgid "Hotel"
+#~ msgstr "Hotel"
+
+#~ msgid "Motel"
+#~ msgstr "Motel"
+
+#~ msgid "Hospital"
+#~ msgstr "Bolnica"
+
+#~ msgid "Fire station"
+#~ msgstr "Vatrogasna stanica"
+
+#~ msgid "Monument"
+#~ msgstr "Spomenik"
+
+#~ msgid "Ruins"
+#~ msgstr "Ruševina"
+
+#~ msgid "Bar"
+#~ msgstr "Bar"
+
+#~ msgid "Biergarten"
+#~ msgstr "Pivnica"
+
+#~ msgid "Cafe"
+#~ msgstr "Kafe"
+
+#~ msgid "Drinking water"
+#~ msgstr "Pitka voda"
+
+#~ msgid "Fast Food"
+#~ msgstr "Brza hrana"
+
+#~ msgid "Ice Cream"
+#~ msgstr "Sladoled"
+
+#~ msgid "Pub"
+#~ msgstr "Pab"
+
+#~ msgid "Restaurant"
+#~ msgstr "Restoran"
+
+#~ msgid "Alcohol"
+#~ msgstr "Alkohol"
+
+#~ msgid "Bakery"
+#~ msgstr "Pekara"
+
+#~ msgid "Books"
+#~ msgstr "Knjige"
+
+#~ msgid "Car"
+#~ msgstr "Auto"
+
+#~ msgid "Clothes"
+#~ msgstr "Odjeća"
+
+#~ msgid "Convenience"
+#~ msgstr "Ugodnost"
+
+#~ msgid "Gas"
+#~ msgstr "Benzin"
+
+#~ msgid "Gift"
+#~ msgstr "Poklon"
+
+#~ msgid "Precipitation (July)"
+#~ msgstr "Padavine (Juli)"
+
+#~ msgid ""
+#~ "A map which shows the average precipitation (rain/snow/hail/etc) in July."
+#~ msgstr ""
+#~ "Karta koja pokazuje količinu padavina (kiša/snijeg/grad/itd.) u julu."
+
+#~ msgid "Precipitation"
+#~ msgstr "Padavine"
+
+#~ msgid "0 mm"
+#~ msgstr "0 mm"
+
+#~ msgid "10 mm"
+#~ msgstr "10 mm"
+
+#~ msgid "40 mm"
+#~ msgstr "40 mm"
+
+#~ msgid "63 mm"
+#~ msgstr "63 mm"
+
+#~ msgid "89 mm"
+#~ msgstr "89 mm"
+
+#~ msgid "127 mm"
+#~ msgstr "127 mm"
+
+#~ msgid "256 mm"
+#~ msgstr "256 mm"
+
+#~ msgid "512 mm"
+#~ msgstr "512 mm"
+
+#~ msgid "1024 mm or more"
+#~ msgstr "1024 mm ili više"
+
+#~ msgid "Satellite View"
+#~ msgstr "Satelitski pogled"
+
+#~ msgid ""
+#~ "<p>Earth as seen from Space.</p><p>The map is based on NASA's beautiful "
+#~ "\"Blue Marble Next Generation\" pictures. Credits: NASA's Earth "
+#~ "Observatory</p>"
+#~ msgstr ""
+#~ "<p>Zemlja viđena iz svemira.</p><p>Karta je temeljena na  NASA-inim "
+#~ "lijepim slikama \"Blue Marble Next Generation\". Krediti: NASA-in "
+#~ "opservatorij zemlje</p>"
+
+#~ msgid "Ice"
+#~ msgstr "Led"
+
+#~ msgid "Vegetation"
+#~ msgstr "Vegetacija"
+
+#~ msgid "Desert"
+#~ msgstr "Pustinja"
+
+#~ msgid "Political Map"
+#~ msgstr "Politička mapa"
+
+#~ msgid ""
+#~ "<p>A <i>Political Map</i>.</p><p>The theme displays various countries.</p>"
+#~ msgstr ""
+#~ "<p>Ovo je <i>Politička karta</i>.</p><p>Tema prikazuje razne zemalje.</p>"
+
+#~ msgid "Rivers"
+#~ msgstr "Rijeke"
+
+#~ msgid "Precipitation (December)"
+#~ msgstr "Padavine (Decembar)"
+
+#~ msgid "A map which shows the average precipitation in December."
+#~ msgstr "Karta koja pokazuje prosječnu količinu padavina u decembru."
+
+#~ msgid "SRTM Data"
+#~ msgstr "SRTM podaci"
+
+#, fuzzy
+#~| msgid "Lines and Orientation"
+#~ msgid "Texts and illustrations"
+#~ msgstr "Linije i orijentacija"
+
+#, fuzzy
+#~| msgid "Preference:"
+#~ msgid "Reference lines"
+#~ msgstr "Postavke:"
+
+#~ msgid "Accurate Coastline"
+#~ msgstr "Precizna obala"
+
+#~ msgid "Historical Map 1689"
+#~ msgstr "Historijska karta 1689"
+
+#~ msgid ""
+#~ "<i>Historical world map</i> from the year 1689 created by G. van Schagen "
+#~ "in Amsterdam."
+#~ msgstr ""
+#~ "<i>Historijska karta svijeta</i> iz 1689 godine kreirana od strane G. van "
+#~ "Schagen u Amsterdamu."
+
+#~ msgid "Town"
+#~ msgstr "Grad"
+
+#~ msgid "OpenStreetMap"
+#~ msgstr "OpenStreetMap"
+
+#~ msgid "Clouds"
+#~ msgstr "Oblaci"
+
+#~ msgid ""
+#~ "A Real Time Cloud Map that gets updated every 3 hours. It uses GOES, "
+#~ "METEOSAT, and GMS satellite imagery downloaded from the Geostationary "
+#~ "Satellite Imagery page at Dundee University.  Credits: Hari Nair, Xplanet "
+#~ "Project"
+#~ msgstr ""
+#~ "Karta oblaka u realnom vremenu se obnavlja svaka 3 sata. Koristi GOES, "
+#~ "METEOSAT i GMS satelitske snimke preuzete sa stranice geostacionarskih "
+#~ "satelitskih snimaka na univerzitetu Dundee. Krediti: Hari Nair, Xplanet "
+#~ "projekat"
+
+#~ msgid "Marble: Legend"
+#~ msgstr "Marble: Legenda"
+
+#~ msgid "<a href="
+#~ msgstr "<a href="
+
+#~ msgid "Population:"
+#~ msgstr "Stanovništvo:"
+
+#~ msgid "&gt; 1&nbsp;000&nbsp;000"
+#~ msgstr "&gt; 1&nbsp;000&nbsp;000"
+
+#~ msgid "&ge; 100&nbsp;000"
+#~ msgstr "&ge; 100&nbsp;000"
+
+#~ msgid "&ge; 10&nbsp;000"
+#~ msgstr "&ge; 10&nbsp;000"
+
+#~ msgid "&lt; 10&nbsp;000"
+#~ msgstr "&lt; 10&nbsp;000"
+
+#~ msgid "<br/>"
+#~ msgstr "<br/>"
+
+#~ msgid "Capitals:"
+#~ msgstr "Glavni gradovi:"
+
+#~ msgid "Red:&nbsp;Nation"
+#~ msgstr "Crvena:&nbsp;nacija"
+
+#~ msgid "Orange:&nbsp;State"
+#~ msgstr "Narandžasta:&nbsp;država"
+
+#~ msgid "Yellow:&nbsp;County"
+#~ msgstr "Žuta:&nbsp;općina"
+
+#~ msgid "White:&nbsp;None"
+#~ msgstr "Bijela:&nbsp;nijedan"
+
+#~ msgid "<!-- ##customLegendEntries:all## -->"
+#~ msgstr "<!-- ##customLegendEntries:all## -->"
+
+#~ msgid "Marble - Game"
+#~ msgstr "Marble - igra"
+
+#~ msgid "The Earth"
+#~ msgstr "Zemlja"
+
+#~ msgid "The Marble widget displays a virtual globe."
+#~ msgstr "Marble kontrola prikazuje stvarni globus."
+
+#~ msgid "Navigation Control"
+#~ msgstr "Kontrola navigacije"
+
+#~ msgid "Use this control to navigate."
+#~ msgstr "Koristi ovu kontrolu za upravljanje."
+
+#~ msgid "Show places"
+#~ msgstr "Pokaži mjesta"
+
+#~ msgid "Show relief"
+#~ msgstr "Prikaz reljefa"
+
+#~ msgid "Show scale bar"
+#~ msgstr "Pokaži traku promjene veličine"
+
+#~ msgid "Show borders"
+#~ msgstr "Prikaz okvira"
+
+#~ msgid "Show ice / snow"
+#~ msgstr "Pokaži led / snijeg"
+
+#~ msgid "Show compass"
+#~ msgstr "Pokaži kompas"
+
+#~ msgid "Show grid"
+#~ msgstr "Pokaži mrežu"
+
+#~ msgid "Show rivers / lakes"
+#~ msgstr "Prikaži rijeke / jezera"
+
+#~ msgid "Show elevation model"
+#~ msgstr "Prikaži model reljefa"
+
+#~ msgid "Coordinates: "
+#~ msgstr "Koordinate: "
+
+#~ msgid "Add link"
+#~ msgstr "Dodaj vezu"
+
+#~ msgid "URL:"
+#~ msgstr "URL:"
+
+#~ msgid "Name:"
+#~ msgstr "Naziv:"
+
+#~ msgid "Bookmark Manager - Marble"
+#~ msgstr "Bookmark menadžer - Marble"
+
+#~ msgid "Import Bookmarks..."
+#~ msgstr "Uvezi Favorite..."
+
+#~ msgid "Export Bookmarks..."
+#~ msgstr "Izvezi zabilješke..."
+
+#~ msgid "Folders"
+#~ msgstr "Direktoriji"
+
+#~ msgid "New"
+#~ msgstr "Nova"
+
+#~ msgid "Rename"
+#~ msgstr "Preimenuj"
+
+#~ msgid "Delete"
+#~ msgstr "Obriši"
+
+#~ msgid "Bookmarks"
+#~ msgstr "Favoriti(bookmarks)"
+
+#~ msgid "Edit"
+#~ msgstr "Uredi"
+
+#~ msgid "Cloud Routes"
+#~ msgstr "Pravci oblaka"
+
+#~ msgid "No route available."
+#~ msgstr "Nema dostupnih pravaca."
+
+#~ msgid "Current Location"
+#~ msgstr "Trenutna lokacija"
+
+#~ msgid "Position Tracking"
+#~ msgstr "Praćenje položaja"
+
+#~ msgid "Disabled"
+#~ msgstr "Isključeno"
+
+#~ msgid "Show Track"
+#~ msgstr "Prikaži stazu"
+
+#~ msgid "Clear Track"
+#~ msgstr "Očisti stazu"
+
+#~ msgid "..."
+#~ msgstr "..."
+
+#~ msgid "No position available."
+#~ msgstr "Nema dostupne pozicije."
+
+#~ msgctxt "Select the method to use to recenter your GPS location on map."
+#~ msgid "Select the method to use to re-center your GPS location on map."
+#~ msgstr ""
+#~ "Izaberite metod koji se koristi da ponovo centrirate GPS lokaciju na mapi."
+
+#~ msgid "Map Adjustment"
+#~ msgstr "Podešavanja mape"
+
+#~ msgctxt "Disable Auto Recenter"
+#~ msgid "Disabled"
+#~ msgstr "Onemogućen"
+
+#~ msgctxt "Always keep gps location at the center of the map"
+#~ msgid "Keep at Center"
+#~ msgstr "Čuvaj u centru"
+
+#~ msgctxt "Auto center when required"
+#~ msgid "When required"
+#~ msgstr "Kada je potrebno"
+
+#~ msgctxt "Auto Zoom to appropriate zoom level"
+#~ msgid "Auto Zoom to appropriate zoom level"
+#~ msgstr "Automatski zum do potrebnog nivoa"
+
+#~ msgid "Auto Zoom"
+#~ msgstr "Auto Zoom"
+
+#~ msgid "Data Migration"
+#~ msgstr "Podaci o migraciji"
+
+#~ msgid ""
+#~ "Marble has found map data stored by a previous Marble version.<br/>Should "
+#~ "this data get converted so that it can be used by the current version?"
+#~ msgstr ""
+#~ "Marble je pronašao kartu podataka pohranjenu prethodnom verzijom Marble-a."
+#~ "<br/>Treba li se ovaj podatak konvertovati tako da ga mogu koristiti "
+#~ "trenutne verzije?"
+
+#~ msgid "Edit Bookmark - Marble"
+#~ msgstr "Uredi Favorit-Marble"
+
+#~ msgid "&Description"
+#~ msgstr "&Opis"
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<table border=\"0\" style=\"-qt-table-type: root; margin-top:4px; margin-"
+#~ "bottom:4px; margin-left:4px; margin-right:4px;\">\n"
+#~ "<tr>\n"
+#~ "<td style=\"border: none;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-family:'Ubuntu';\"><br /></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-family:'Ubuntu';\"><br /></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-family:'Ubuntu';\"><br /></p></td></tr></table></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<table border=\"0\" style=\"-qt-table-type: root; margin-top:4px; margin-"
+#~ "bottom:4px; margin-left:4px; margin-right:4px;\">\n"
+#~ "<tr>\n"
+#~ "<td style=\"border: none;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-family:'Ubuntu';\"><br /></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-family:'Ubuntu';\"><br /></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-family:'Ubuntu';\"><br /></p></td></tr></table></body></html>"
+
+#~ msgid "&Folder"
+#~ msgstr "&Direktorij"
+
+#~ msgid "&Add Folder"
+#~ msgstr "Doda&aj direktorij"
+
+#~ msgid "Edit placemark"
+#~ msgstr "Uredi marker mjesta"
+
+#~ msgid "Description"
+#~ msgstr "Opis"
+
+#~ msgid "Show Balloon Popup"
+#~ msgstr "Pikaži iskok u balonu"
+
+#~ msgid "Style, Color"
+#~ msgstr "Stil, Boja"
+
+#~ msgid "Label"
+#~ msgstr "Etiketa"
+
+#~ msgid "Color:"
+#~ msgstr "Boja:"
+
+#~ msgid "Scale:"
+#~ msgstr "Razmjer:"
+
+#~ msgid "Icon"
+#~ msgstr "Ikona"
+
+#~ msgid "Show placemark"
+#~ msgstr "Pokaži mjesta markera"
+
+#~ msgid "Bold"
+#~ msgstr "Podebljano"
+
+#~ msgid "Italics"
+#~ msgstr "Kurzivno"
+
+#~ msgid "Underlined"
+#~ msgstr "Podvuče&no"
+
+#~ msgid "Add image"
+#~ msgstr "Dodaj sliku..."
+
+#~ msgid "Elevation:"
+#~ msgstr "Elevacija:"
+
+#~ msgid " m"
+#~ msgstr " m"
+
+#~ msgid "above sea level"
+#~ msgstr "iznad nivoa mora"
+
+#~ msgid "External Map Editor Selection"
+#~ msgstr "Izbor spoljnjeg uređivača mapa"
+
+#~ msgid "External Map Editor"
+#~ msgstr "Spoljnji uređivač mapa"
+
+#, fuzzy
+#~| msgid "Web browser (Potlatch)"
+#~ msgid "Web browser (iD)"
+#~ msgstr "Web preglednik (Potlatch)"
+
+#~ msgid "Merkaartor"
+#~ msgstr "Merkaartor"
+
+#~ msgid "JOSM"
+#~ msgstr "JOSM"
+
+#~ msgid ""
+#~ "Deactivate to be prompted for a map editor selection next time again. "
+#~ "Otherwise, your choice is remembered and will be used automatically in "
+#~ "the future. If you want to alter the default map editor later, you can do "
+#~ "so in the Marble Settings."
+#~ msgstr ""
+#~ "Deaktiviraj da budete upitani za izbor urednik mape sljedeći put ponovo. "
+#~ "U suprotnom, vaš izbor je zapamćen i automatski će se koristiti u "
+#~ "budućnosti. Ako želite da kasnije mijenjate podrazumijevani uređivač "
+#~ "karti, možete to uraditi u Marble Podešavanjijma."
+
+#~ msgid "Make my selection the default map editor"
+#~ msgstr "Učini da moj izbor bude podrazumijevani uređivač mapa"
+
+#~ msgid "Editor Details"
+#~ msgstr "Detalji uređivača"
+
+#~ msgid "Editor Preview"
+#~ msgstr "Pregled uređivača"
+
+#, fuzzy
+#~| msgid ""
+#~| "Potlatch is an OpenStreetMap editor for quick editing tasks and "
+#~| "beginners. It requires a web browser with flash support."
+#~ msgid ""
+#~ "iD is an OpenStreetMap editor for quick editing tasks and beginners. It "
+#~ "requires a web browser."
+#~ msgstr ""
+#~ "Potlatch je OpenStreetMap editor brzo uređivanje i početnike. Zahtijeva "
+#~ "web preglednik s flash podrškom."
+
+#~ msgid "File View"
+#~ msgstr "Pregled datoteke"
+
+#~ msgid "&Save"
+#~ msgstr "&Snimi"
+
+#~ msgid "&Close"
+#~ msgstr "&Zatvori"
+
+#~ msgid "Formatted text"
+#~ msgstr "Formatirani tekst"
+
+#~ msgid "6"
+#~ msgstr "6"
+
+#~ msgid "8"
+#~ msgstr "8"
+
+#~ msgid "9"
+#~ msgstr "9"
+
+#~ msgid "10"
+#~ msgstr "10"
+
+#~ msgid "11"
+#~ msgstr "11"
+
+#~ msgid "12"
+#~ msgstr "12"
+
+#~ msgid "14"
+#~ msgstr "14"
+
+#~ msgid "16"
+#~ msgstr "16"
+
+#~ msgid "18"
+#~ msgstr "18"
+
+#~ msgid "20"
+#~ msgstr "20"
+
+#~ msgid "24"
+#~ msgstr "24"
+
+#~ msgid "36"
+#~ msgstr "36"
+
+#~ msgid "48"
+#~ msgstr "48"
+
+#~ msgid "72"
+#~ msgstr "72"
+
+#~ msgid "96"
+#~ msgstr "96"
+
+#~ msgid "toolBar"
+#~ msgstr "alatna traka"
+
+#, fuzzy
+#~| msgid "Color:"
+#~ msgid "Color"
+#~ msgstr "Boja:"
+
+#~ msgid "Go To..."
+#~ msgstr "Idi do..."
+
+#~ msgid ""
+#~ "Enter a search term and press Enter. <a href=\"http://userbase.kde.org/"
+#~ "Marble/Search\">Details...</a>"
+#~ msgstr ""
+#~ "Unesite pojam za pretraživanje i pritisnite Enter. <a href=\"http://"
+#~ "userbase.kde.org/Marble/Search\">Details...</a>"
+
+#~ msgid "Browse"
+#~ msgstr "Razgledaj..."
+
+#~ msgid "Search"
+#~ msgstr "Traži"
+
+#~ msgid "Select a geographic region"
+#~ msgstr "Izaberi geografsko područje"
+
+#~ msgid "Northern Latitude"
+#~ msgstr "Sjeverna geografska širina"
+
+#~ msgid "°"
+#~ msgstr "°"
+
+#~ msgid "&N"
+#~ msgstr "&S"
+
+#~ msgid "Western Longitude"
+#~ msgstr "Zapadna geografska dužina"
+
+#~ msgid "&W"
+#~ msgstr "&J"
+
+#~ msgid "Eastern Longitude"
+#~ msgstr "Istočna geografska dužina"
+
+#~ msgid "&E"
+#~ msgstr "&I"
+
+#~ msgid "Southern Latitude"
+#~ msgstr "Južna geografska širina"
+
+#~ msgid "&S"
+#~ msgstr "&Z"
+
+#~ msgid "′"
+#~ msgstr "′"
+
+#~ msgid "″"
+#~ msgstr "″"
+
+#~ msgid "Legend"
+#~ msgstr "Legenda"
+
+#~ msgid "about:blank"
+#~ msgstr "about:blank"
+
+#~ msgid "Marble - Install Maps"
+#~ msgstr "Marble - Instalacioja mapa"
+
+#~ msgid "Map View"
+#~ msgstr "Pregled mape"
+
+#~ msgid "&Projection"
+#~ msgstr "&Projekcija"
+
+#~ msgid "Globe"
+#~ msgstr "Globus"
+
+#~ msgid "Flat Map"
+#~ msgstr "Ravna karta:"
+
+#~ msgid "Mercator"
+#~ msgstr "Merkatorova"
+
+#~ msgid "Gnomonic"
+#~ msgstr "Gnomonička metoda"
+
+#~ msgid "Stereographic"
+#~ msgstr "Stereografska"
+
+#~ msgid "Lambert Azimuthal Equal Area"
+#~ msgstr "Lambertova Azimutalna projekcija jednake površine"
+
+#~ msgid "Azimuthal Equidistant"
+#~ msgstr "Azimutalni ekvidistant"
+
+#~ msgid "Vertical Perspective Globe"
+#~ msgstr "Vertikalni perspektivni globe"
+
+#~ msgid "&Celestial Body"
+#~ msgstr "&Nebesko tijelo"
+
+#~ msgid "&Theme"
+#~ msgstr "&Tema"
+
+#~ msgid "Here you can choose the preferred map view from different topics."
+#~ msgstr "Ovdje možete odabrati preferirani prikaz karte iz više tema."
+
+#~ msgid "Marble Map Theme Creation Wizard"
+#~ msgstr "Čarobnjak za stvaranje teme Marble mape"
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">Welcome to the Map Creation Wizard!</span></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">We will guide you "
+#~ "through the process of creating a map theme for Marble. In the end you "
+#~ "will have your own map that you can view in Marble.</p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Please choose the "
+#~ "source that you want to use for the data of your map theme:</p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:12px; margin-bottom:12px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">Dobrodošli u čarobnjak za kreiranje mape!</span></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Vodićeni vas kroz "
+#~ "proces kreiranja teme mape za Marble. Na kraju ćete imati vlastitu mapu "
+#~ "koju možete gledati u Marble.</p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Molim odaberite izvor "
+#~ "koji želite koristiti za podatke vaše teme mape:</p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:12px; margin-bottom:12px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p></body></html>"
+
+#~ msgid ""
+#~ "Connects to a server on the Internet. The map data is queried via the WMS "
+#~ "protocol."
+#~ msgstr ""
+#~ "Priključuje se na server na Internetu. Podaci o mapi su upučeni putem WMS "
+#~ "protokola."
+
+#~ msgid "Web Map Service (WMS)"
+#~ msgstr "Web Map Servis (WMS)"
+
+#~ msgid ""
+#~ "You need to provide a bitmap image of a world map that is stored on disk."
+#~ msgstr ""
+#~ "Morate osigurati bitmap sliku karte svijeta koja je spremljena na disk."
+
+#~ msgid "A single image showing the whole world"
+#~ msgstr "Jedna slika prikazuje cijeli svijet"
+
+#~ msgid ""
+#~ "Connects to a server on the Internet. The map data is queried via a "
+#~ "static URL."
+#~ msgstr ""
+#~ "Povezuje se na Internet server. Podaci o mapi su upučeni putem statičkog "
+#~ "URL-a."
+
+#~ msgid "Online map providing indexed tiles (e.g. Open Street Map)"
+#~ msgstr "Online mapa pruža indeksirane naslove(pr. Otvorena mapa ulice)"
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">WMS Server</span></p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Please choose a <a href="
+#~ "\"http://en.wikipedia.org/wiki/Web_Map_Service\"><span style=\" text-"
+#~ "decoration: underline; color:#0057ae;\">WMS</span></a> server or enter a "
+#~ "custom server URL.</p></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">WMS Server</span></p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Molim izaberite <a href="
+#~ "\"http://en.wikipedia.org/wiki/Web_Map_Service\"><span style=\" text-"
+#~ "decoration: underline; color:#0057ae;\">WMS</span></a> server ili unesite "
+#~ "vlastiti serverski URL.</p></body></html>"
+
+#~ msgid "WMS Server:"
+#~ msgstr "WMS Server:"
+
+#~ msgid "Custom"
+#~ msgstr "Specifično"
+
+#~ msgid "http://"
+#~ msgstr "http://"
+
+#~ msgid "Available Maps:"
+#~ msgstr "Dostupne mape:"
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">World Map Bitmap Image</span></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-weight:600;\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Please choose the "
+#~ "location of a world map that is stored in a single image file (JPG, PNG, "
+#~ "etc.). It needs to be provided in <a href=\"http://en.wikipedia.org/wiki/"
+#~ "Equirectangular_projection\"><span style=\" text-decoration: underline; "
+#~ "color:#0057ae;\">Equirectangular projection</span></a>, so the shape "
+#~ "should look like this (size ratio: 2:1):</p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><img src=\":/data/svg/"
+#~ "worldmap.svg\" width=\"150\" /></p></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">Bit mapirana slika karte svijeta</span></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-weight:600;\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Molim odaberite "
+#~ "lokaciju karte svijeta koja je u jednoj datoteci slike (JPG, PNG, etc.). "
+#~ "Ona treba biti data u <a href=\"http://en.wikipedia.org/wiki/"
+#~ "Equirectangular_projection\"><span style=\" text-decoration: underline; "
+#~ "color:#0057ae;\">Ekvirektangularnoj projekciji</span></a>, pa lik mora "
+#~ "izgledati ovako (omjer dimenzija: 2:1):</p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><img src=\":/data/svg/"
+#~ "worldmap.svg\" width=\"150\" /></p></body></html>"
+
+#~ msgid "Source Image:"
+#~ msgstr "Izvorna slika:"
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Bitstream Vera Sans'; font-"
+#~ "size:9pt; font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif'; font-weight:600;\">URL Scheme for Indexed Tiles</"
+#~ "span></p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif';\">Please enter the URL used for downloading "
+#~ "individual tiles. Use the placeholders </span><span style=\" font-"
+#~ "family:'Sans Serif'; font-style:italic;\">{x}</span><span style=\" font-"
+#~ "family:'Sans Serif';\">, </span><span style=\" font-family:'Sans Serif'; "
+#~ "font-style:italic;\">{y}</span><span style=\" font-family:'Sans Serif';"
+#~ "\">, and </span><span style=\" font-family:'Sans Serif'; font-style:"
+#~ "italic;\">{zoomLevel}</span><span style=\" font-family:'Sans Serif';\"> "
+#~ "to reference a tile from the index.</span></p></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Bitstream Vera Sans'; font-"
+#~ "size:9pt; font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif'; font-weight:600;\">URL šema za indeksirane pločice</"
+#~ "span></p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif';\">Molim unesite URL za preuzimanje pojedinih "
+#~ "pločica. Koristite rezervisana mjesta </span><span style=\" font-"
+#~ "family:'Sans Serif'; font-style:italic;\">{x}</span><span style=\" font-"
+#~ "family:'Sans Serif';\">, </span><span style=\" font-family:'Sans Serif'; "
+#~ "font-style:italic;\">{y}</span><span style=\" font-family:'Sans Serif';"
+#~ "\">, and </span><span style=\" font-family:'Sans Serif'; font-style:"
+#~ "italic;\">{zoomLevel}</span><span style=\" font-family:'Sans Serif';\"> "
+#~ "da referencirate pločicu preko indeksa.</span></p></body></html>"
+
+#~ msgid "URL Scheme:"
+#~ msgstr "URL shema:"
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Bitstream Vera Sans'; font-"
+#~ "size:9pt; font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif'; font-weight:600;\">General Information</span></p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif';\">Please specify a title, a name and an icon for "
+#~ "your new map. Add a description to let users know what your map is about. "
+#~ "</span></p></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Bitstream Vera Sans'; font-"
+#~ "size:9pt; font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif'; font-weight:600;\">General Information</span></p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif';\">Molim navedite naslov, ime i ikonu za vašu novu "
+#~ "mapu. Dodajte opis da korisnik zna na šta se vaša mapa odnosi. </span></"
+#~ "p></body></html>"
+
+#~ msgid "Map Title:"
+#~ msgstr "Naslov mape:"
+
+#~ msgid "A short concise name for your map theme."
+#~ msgstr "Kratki skraćeni naziv za temu vaše mape."
+
+#~ msgid "Map Name:"
+#~ msgstr "Ime mape:"
+
+#~ msgid "The lowercase map theme id."
+#~ msgstr "Podnaslov teme mape."
+
+#~ msgid "The folder name of your new theme."
+#~ msgstr "Ime datoteke tvoje nove teme."
+
+#~ msgid "Description:"
+#~ msgstr "Opis:"
+
+#~ msgid ""
+#~ "A short description of your map theme. Here you can provide information "
+#~ "about the purpose, origin, copyright and license of the data used in your "
+#~ "map theme."
+#~ msgstr ""
+#~ "Kratak opis teme vaše mape. Ovdje možete pružiti informacije o svrsi, "
+#~ "porijeklo, autorskom pravu i licenci podataka korištenih u temi vaše mape."
+
+#~ msgid "It will appear in a tool tip and may contain HTML formatting."
+#~ msgstr "Pojavit će se u tipovima alata i može sadržavati HTML oblikovanja."
+
+#~ msgid "Preview Image:"
+#~ msgstr "Pregled slike:"
+
+#~ msgid "preview image"
+#~ msgstr "pregled slike"
+
+#~ msgid "Change..."
+#~ msgstr "Promijeni..."
+
+#~ msgid "Legend Image:"
+#~ msgstr "Ledenda slike:"
+
+#~ msgid "Places of Interest"
+#~ msgstr "Mjesta interesovanja"
+
+#~ msgid "Populated Places"
+#~ msgstr "Naseljena mjesta"
+
+#~ msgid "Terrain"
+#~ msgstr "Teren"
+
+#~ msgid "Coordinate Grid"
+#~ msgstr "Koordinatna mreža"
+
+#~ msgid "Border Lines"
+#~ msgstr "Linije okvira"
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">Summary</span></p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Congratulations! You "
+#~ "have entered all the data that is necessary to create your map theme. "
+#~ "Check the summary below carefully and press the \"Finish\" button to "
+#~ "create the theme. </p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Please consider "
+#~ "contributing the map theme back to the Marble community if the license "
+#~ "and the terms of use allow for it.</p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:12px; margin-bottom:12px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">Summary</span></p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Čestitamo! Unijeli ste "
+#~ "sve potrebne podatke da kreirate temu vaše mape. Provjerite rezime ispod "
+#~ "pažčjivo i pritisnite \"Završi\" dugme da kreirate temu. </p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Molim razmislite da "
+#~ "pošaljete temu nazad Marble zajednici ako licenca i uslovi upotrebe to "
+#~ "dopuštaju.</p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:12px; margin-bottom:12px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p></body></html>"
+
+#~ msgid "Map name goes here."
+#~ msgstr "Ime mape ide ovdje."
+
+#~ msgid "Map Theme:"
+#~ msgstr "Tema mape:"
+
+#~ msgid "Map theme goes here."
+#~ msgstr "Tema mape ide ovdje:"
+
+#~ msgid "Thumbnail image goes here."
+#~ msgstr "Umanjena sličica ide ovdje."
+
+#~ msgid "Preview Map"
+#~ msgstr "Pregled mape"
+
+#~ msgid "About Marble"
+#~ msgstr "O Marble-u"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">Marble Virtual Globe</span></p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">Marble Virtualni Globus</span></p></body></html>"
+
+#~ msgid "Version Unknown"
+#~ msgstr "Nepoznata verzija"
+
+#~ msgid "&About"
+#~ msgstr "&O programu"
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:10pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-size:9pt;\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "size:9pt;\">(c) 2007, The Marble Project</span></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-size:9pt; font-style:italic;\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "size:9pt;\">http://edu.kde.org/marble</span></p></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:10pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-size:9pt;\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "size:9pt;\">(c) 2007, Marble projekat</span></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-size:9pt; font-style:italic;\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "size:9pt;\">http://edu.kde.org/marble</span></p></body></html>"
+
+#~ msgid "A&uthors"
+#~ msgstr "&Autori"
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:10pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-size:9pt;\"></p></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:10pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-size:9pt;\"></p></body></html>"
+
+#~ msgid "&Data"
+#~ msgstr "&Podaci"
+
+#~ msgid "&License Agreement"
+#~ msgstr "&Licenca"
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:10pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-family:'MS Shell Dlg 2'; font-size:8pt;\"></p></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:10pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-family:'MS Shell Dlg 2'; font-size:8pt;\"></p></body></html>"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">There are two caches "
+#~ "being used for Marble: The physical memory which is needed to keep map "
+#~ "data in the computer's memory. Increasing the value will make the "
+#~ "application more responsive. The hard disc memory cache is used by "
+#~ "download contents from the Internet (e.g. Wikipedia data or map data). "
+#~ "Decrease this value if you want to save space on the hard disc and if "
+#~ "high usage of the Internet is not an issue. </p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Postoje dva cach-a koje "
+#~ "se koriste za Marble: Fizička memorija koja je potrebna da zadrži "
+#~ "podatake o mapi u računarskoj memoriji. Povećanje vrijednosti učinit će "
+#~ "program više odgovarajućim. Hard disk memorija se koristi za preuzimanje "
+#~ "sadržaja sa interneta (npr. Wikipedia podataka ili podataka karata). "
+#~ "Smanjenje ove vrijednosti nije problem, ako želite uštedjeti prostor na "
+#~ "hard disku i ako je ogromno korištenje interneta. </p></body></html>"
+
+#~ msgid "C&ache"
+#~ msgstr "&Priručna memorija"
+
+#~ msgid "&Physical memory:"
+#~ msgstr "&Fizička memorija:"
+
+#~ msgid " MB"
+#~ msgstr " MB"
+
+#~ msgid "C&lear"
+#~ msgstr "&Očisti"
+
+#~ msgid "&Hard disc:"
+#~ msgstr "&Hard disk:"
+
+#~ msgid "Unlimited"
+#~ msgstr "Neograničeno"
+
+#~ msgid "Cl&ear"
+#~ msgstr "&Očisti"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Proxy settings for your "
+#~ "local intranet. Please leave empty if there is no proxy.</p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Proxy postavke za Vaš "
+#~ "lokalni internet. Molimo, ostavite prazno ako ne postoji proxy.</p></"
+#~ "body></html>"
+
+#~ msgid "&Proxy"
+#~ msgstr "&Proksi"
+
+#~ msgid "&Proxy:"
+#~ msgstr "&Posrednik:"
+
+#~ msgid "P&ort:"
+#~ msgstr "P&ort:"
+
+#~ msgid "Proxy type:"
+#~ msgstr "Tip proksija:"
+
+#~ msgid "Http"
+#~ msgstr "Http"
+
+#~ msgid "Socks5"
+#~ msgstr "Socks5"
+
+#~ msgid "Requires authentication"
+#~ msgstr "Potrebna provjera autentičnosti"
+
+#~ msgid "U&sername:"
+#~ msgstr "&Korisničko ime:"
+
+#~ msgid "&Password:"
+#~ msgstr "&Lozinka:"
+
+#~ msgid "Enable synchronization"
+#~ msgstr "Omogući sinhronizaciju"
+
+#~ msgid ""
+#~ "Allows you to store routes in owncloud. Each route must be uploaded/"
+#~ "downloaded manually."
+#~ msgstr ""
+#~ "Omogućava da spremite puteve u vlastiti oblak. Svaki put mora biti "
+#~ "uploadovan/downloadovan ručno."
+
+#~ msgid "Enable route synchronization"
+#~ msgstr "Omogući sinhronizaciju pravaca"
+
+#~ msgid "Automatically sync all bookmarks to the server."
+#~ msgstr "Automatski sinhroniziraj sve oznake na server."
+
+#~ msgid "Enable bookmark synchronization"
+#~ msgstr "Omogući sinhronizaciju oznaka"
+
+#~ msgid "Sync now"
+#~ msgstr "Sinhronizuj sada"
+
+#~ msgid "Credentials"
+#~ msgstr "Akreditivi"
+
+#~ msgid "Server:"
+#~ msgstr "Server:"
+
+#~ msgid "Remote server URL, e.g. myserver.com/owncloud"
+#~ msgstr "URL udaljenog servera, npr. myserver.com/owncloud"
+
+#~ msgid "Username:"
+#~ msgstr "Korisničko ime:"
+
+#~ msgid "Password:"
+#~ msgstr "Lozinka:"
+
+#~ msgid "Test Login"
+#~ msgstr "Proba prijave"
+
+#~ msgid "Marble Cache Settings"
+#~ msgstr "Marble Cache Postavke"
+
+#~ msgid "Dragging and Animation"
+#~ msgstr "Prevlačenje i animacija"
+
+#~ msgid "&Drag location:"
+#~ msgstr "Mjesto &pomicanja:"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">While dragging the "
+#~ "mouse there are two standard behaviours when dealing with a virtual globe:"
+#~ "</p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">The location below "
+#~ "mouse pointer will follow the cursor exactly: As a result e.g. the north "
+#~ "pole will not stay at the top which can lead to confusion. By default "
+#~ "Marble makes sure that north is always up which results in a dragging "
+#~ "behaviour where the location below the mouse pointer slightly \"detaches"
+#~ "\" from the cursor. </p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"> Dok vučete miš postoje "
+#~ "dva standardna ponašanja kada se bave virtualnim globusom::</p><p style="
+#~ "\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -"
+#~ "qt-block-indent:0; text-indent:0px;\">Mjestu ispod pokazivača miša će "
+#~ "tačno slijediti kursor: Kao rezultat npr. sjeverni pol neće ostati na "
+#~ "vrhu, što može dovesti do konfuzije. Po defaultu Marble čini da je sjever "
+#~ "sigurno uvijek gore što rezultira povlačenjem ponašanja gdje se mjesto "
+#~ "ispod pokazivač miša malo \"odvoji\" od kursora.  </p></body></html>"
+
+#~ msgid "Keep Planet Axis Vertically"
+#~ msgstr "Zadrži osu planete vertikalno"
+
+#~ msgid "Follow Mouse Pointer"
+#~ msgstr "Slijedi pokazivač miša"
+
+#~ msgid "Use kinetic spinning when dragging the map"
+#~ msgstr "Koristi kinetičko okretanje pri prevlačenju mape"
+
+#~ msgid "&Inertial Globe Rotation"
+#~ msgstr "&Inerciona rotacija globusa"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">When searching for a "
+#~ "location Marble can either move instantly to the new location or it can "
+#~ "show a travel animation from the previous place to the new place.</p></"
+#~ "body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Kada tražite lokaciju "
+#~ "Marble može ili pomjeriti odmah na novu lokaciju ili može pokazati "
+#~ "putovanje animacije iz prethodnog mjesta do novog.</p></body></html>"
+
+#~ msgid "&Animate voyage to the target"
+#~ msgstr "&Pokrenuti putovanje do cilja"
+
+#~ msgid "&On startup:"
+#~ msgstr "&Prilikom pokretanja:"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">By default Marble will "
+#~ "display the home location immediately after the application has started. "
+#~ "As an alternative it can also show the last position that was active when "
+#~ "the user left the application. </p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Podrazumijevano, Marble "
+#~ "će prikazati početnu lokaciju odmah nakon što se pokrene aplikacija. Kao "
+#~ "alternativa takođe može pokazati zadnje aktivnu poziciju kada korisnik "
+#~ "napusti aplikaciju. </p></body></html>"
+
+#~ msgid "Show Home Location"
+#~ msgstr "Prikaži početnu lokaciju"
+
+#~ msgid "Return to Last Location Visited"
+#~ msgstr "Povratak na zadnje posjećenu lokaciju"
+
+#~ msgid "&External Editor:"
+#~ msgstr "&Vanjski editor:"
+
+#~ msgid ""
+#~ "<p>The application that is launched to edit maps. Potlatch (default) "
+#~ "requires a web browser with flash support to be installed. When selecting "
+#~ "josm or merkaartor, make sure that the respective application is "
+#~ "installed.</p>"
+#~ msgstr ""
+#~ "<p>Aplikacija koja je pokrenuta da izmijenite karte. Potlatch "
+#~ "(podrazumijevana) zahteva Web pretraživač sa Flash podrškom da se "
+#~ "instalira. Prilikom odabira josm ili merkaartor, uvjerite se da je "
+#~ "odgovarajuće aplikacija instalirana.</p>"
+
+#~ msgid "Always ask"
+#~ msgstr "Uvijek pitaj"
+
+#~ msgid "Potlatch (Web browser)"
+#~ msgstr "Potlatch (Web preglednik)"
+
+#~ msgid "Up"
+#~ msgstr "Gore"
+
+#~ msgid "Tilts the globe's axis towards the user."
+#~ msgstr "Naginjanje ose globusa prema korisniku."
+
+#~ msgid "Left"
+#~ msgstr "Lijevo"
+
+#~ msgid "Rotates the globe counterclockwise around its axis."
+#~ msgstr "Rotira globus oko svoje osi u suprotnom smjeru kazaljke na satu."
+
+#~ msgid "Reset View"
+#~ msgstr "Restartuj pogled"
+
+#~ msgid "Click this button to restore the original zoom level and view angle."
+#~ msgstr ""
+#~ "Pritisnite ovo dugme da vratite izvorni nivo zumiranja i pregled ugla."
+
+#~ msgid "Home"
+#~ msgstr "Početak"
+
+#~ msgid "Right"
+#~ msgstr "Desno"
+
+#~ msgid "Rotates the globe clockwise around its axis."
+#~ msgstr "Rotira globus oko svoje osi u smjeru kazaljke na satu."
+
+#~ msgid "Down"
+#~ msgstr "Dolje"
+
+#~ msgid "Tilts the globe's axis away from the user."
+#~ msgstr "Osa slobusa naginje od korisnika."
+
+#~ msgid "Zoom In"
+#~ msgstr "Uvećaj"
+
+#~ msgid "Zoom in by pressing this button to see more detail."
+#~ msgstr "Uvećaj pritiskanjem ovog dugmeta da bi vidio detaljnije."
+
+#~ msgid "+"
+#~ msgstr "+"
+
+#~ msgid "Zoom Slider"
+#~ msgstr "Klizač za uvećanje"
+
+#~ msgid "Use this slider to adjust the zoom level of the map."
+#~ msgstr "Koristi ovaj klizač da prilagodiš nivo povećanja mape."
+
+#~ msgid "Zoom Out"
+#~ msgstr "Umanji"
+
+#~ msgid "Zoom out by pressing this button to see less detail."
+#~ msgstr "Umanji pritiskom ovog dugmeta da biste vidjeli manje detaljno."
+
+#~ msgid "-"
+#~ msgstr "-"
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'DejaVu Sans'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif';\">This is Marble's machine room for advanced users. "
+#~ "Here you can select and deselect the functionality that is provided "
+#~ "through plugins. </span></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif';\">Deselecting a plugin will remove the functionality "
+#~ "from the map, menus and toolbars. </span></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif';\">Also some of the plugins might allow for tweaking "
+#~ "their configuration a bit. </span></p></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'DejaVu Sans'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif';\">Ovo je mašinska soba Marble-a za napredne "
+#~ "korisnike. Ovdje možete uključiti i isključiti funkcionalnosti koje nude "
+#~ "dodaci (plugins). </span></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif';\">Isključivanje dodatka će ukloniti funkcionalnost "
+#~ "iz mape, menija i alatnih traka. </span></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif';\">Takođe neki od dodataka mogu dopustiti i "
+#~ "prilagođavanje njihove konfiguracije. </span></p></body></html>"
+
+#~ msgid "P&lugins"
+#~ msgstr "&Dodaci"
+
+#~ msgid "Time Zone"
+#~ msgstr "Vremenska zona"
+
+#~ msgid "UTC"
+#~ msgstr "UTC"
+
+#~ msgid "System time zone"
+#~ msgstr "Sisatemska vremenska zona"
+
+#~ msgid "Choose Time zone"
+#~ msgstr "Odaberite vremensku zonu"
+
+#~ msgid "Universal Time Coordinated"
+#~ msgstr "Univerzalno Vrijeme Koordinirano"
+
+#~ msgid "European Central Time"
+#~ msgstr "Centralno-evropsko vrijeme"
+
+#~ msgid "Eastern European Time"
+#~ msgstr "Istočno-evropsko vrijeme"
+
+#~ msgid "Egypt Standard Time"
+#~ msgstr "Egipatsko standardno vrijeme"
+
+#~ msgid "Eastern African Time"
+#~ msgstr "Istočno-afričko vrijeme"
+
+#~ msgid "Middle East Time"
+#~ msgstr "Blisko-istočno vrijeme"
+
+#~ msgid "Near East Time"
+#~ msgstr "Levantsko vrijeme"
+
+#~ msgid "Pakistan Lahore Time"
+#~ msgstr "Pakistansko Lahore vrijeme"
+
+#~ msgid "India Standard Time"
+#~ msgstr "Indijsko standardno vrijeme"
+
+#~ msgid "Bangladesh Standard Time"
+#~ msgstr "Bangladeško standardno vrijeme"
+
+#~ msgid "Vietnam Standard Time"
+#~ msgstr "Vijetnamsko standardno vrijeme"
+
+#~ msgid "China Taiwan Time"
+#~ msgstr "Kinesko tajvansko vrijeme"
+
+#~ msgid "Japan Standard Time"
+#~ msgstr "Japanko standardno vrijeme"
+
+#~ msgid "Australia Central Time"
+#~ msgstr "Australijsko centralno vrijeme"
+
+#~ msgid "Australia Eastern Time"
+#~ msgstr "Australijsko istočno vrijeme"
+
+#~ msgid "Solomon Standard Time"
+#~ msgstr "Solomonko standardno vrijeme"
+
+#~ msgid "New Zealand Standard Time"
+#~ msgstr "Novozelandsko standardno vrijeme"
+
+#~ msgid "Midway Islands Time"
+#~ msgstr "Vrijeme Midvejskih ostrva"
+
+#~ msgid "Hawaii Standard Time"
+#~ msgstr "Havajsko standardno vrijeme"
+
+#~ msgid "Alaska Standard Time"
+#~ msgstr "Aljasko standardno vrijeme"
+
+#~ msgid "Pacific Standard Time"
+#~ msgstr "Pacifičko standardno vrijeme"
+
+#~ msgid "Phoenix Standard Time"
+#~ msgstr "Feniks standardno vrijeme"
+
+#~ msgid "Mountain Standard Time"
+#~ msgstr "Planinsko standardno vrijeme"
+
+#~ msgid "Central Standard Time"
+#~ msgstr "Centralno standardno vrijeme"
+
+#~ msgid "Eastern Standard Time"
+#~ msgstr "Istočno standardno vrijeme"
+
+#~ msgid "Indiana Eastern Standard Time"
+#~ msgstr "Indijana istočno standardno vrijeme"
+
+#~ msgid "Puerto Rico and US Virgin Islands Time"
+#~ msgstr "Portoriko i Djevičanska ostrva vrijeme"
+
+#~ msgid "Canada Newfoundland Time"
+#~ msgstr "Kanadsko Newfoundland-sko vrijeme"
+
+#~ msgid "Argentina Standard Time"
+#~ msgstr "Argentinsko standardno vrijeme"
+
+#~ msgid "Brazil Eastern Time"
+#~ msgstr "Brazilsko standardno vrijeme"
+
+#~ msgid "Central African Time"
+#~ msgstr "Centralno afričko vrijeme"
+
+#~ msgid "When Marble starts"
+#~ msgstr "Kada se Marble pokrene"
+
+#~ msgid "Load system time"
+#~ msgstr "Učitaj sistemsko vrijeme"
+
+#~ msgid "Load last session time"
+#~ msgstr "Učitaj vrijeme zadnje sesije"
+
+#~ msgid "&Units"
+#~ msgstr "&Jedinice"
+
+#~ msgid "&Distance:"
+#~ msgstr "&Udaljenost:"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">The unit that gets used "
+#~ "to measure altitude, lengths and distances (e.g. km, mi, ft).</p></body></"
+#~ "html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Jedinica koja se "
+#~ "dobiva, koristi se za mjerenje visine, dužine i udaljenosti(npr. km, mi, "
+#~ "ft).</p></body></html>"
+
+#~ msgid "Kilometer, Meter"
+#~ msgstr "Kilometar, metar"
+
+#~ msgid "Miles, Feet"
+#~ msgstr "Milja, stopa"
+
+#~ msgid "Nautical miles, Knots"
+#~ msgstr "Nautičke milje, Čvorovi"
+
+#~ msgid "An&gle:"
+#~ msgstr "&Ugao:"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Specifies the notation "
+#~ "of angles in coordinates: By default the Degree-Minute-Second notation (e."
+#~ "g. 54°30'00\" ) gets used. As an alternative you can choose decimal "
+#~ "degrees (e.g. 54.5°).</p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Određuje zapis uglova "
+#~ "po koordinatama: Podrazumijevano koristi se stepen-minuta-sekunda "
+#~ "notacija(npr. 54°30'00\" ). Kao alternativa možete izabrati decimalne "
+#~ "stepene (npr. 54.5°).</p></body></html>"
+
+#~ msgid "Degree (DMS)"
+#~ msgstr "Stepen (SMS)"
+
+#~ msgid "Degree (Decimal)"
+#~ msgstr "Stepen (Decimalni oblik)"
+
+#~ msgid "Universal Transverse Mercator (UTM)"
+#~ msgstr "Univerzalni Transverzalni Merkator (UTM)"
+
+#~ msgid "Map &Quality"
+#~ msgstr "&Kvalitet mape"
+
+#~ msgid "&Still image:"
+#~ msgstr "&Spora slika:"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Specifies the map "
+#~ "quality that gets displayed while there is no user input. Usually this "
+#~ "allows for high map quality as speed is no concern.</p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Određuje kvalitet mape "
+#~ "koja će biti prikazana sve dok nema korisnika. Obično ovo dozvoljava mape "
+#~ "visokog kvaliteta kad brzina nije bitna.</p></body></html>"
+
+#~ msgid "Outline Quality"
+#~ msgstr "Grubi kvalitet"
+
+#~ msgid "Low Quality"
+#~ msgstr "Niska kvaliteta"
+
+#~ msgid "Normal"
+#~ msgstr "Normalno"
+
+#~ msgid "High Quality"
+#~ msgstr "Visoki kvalitet"
+
+#~ msgid "Print Quality"
+#~ msgstr "Kvalitet štampanja"
+
+#~ msgid "During &animations:"
+#~ msgstr "&Za vrijeme animacija:"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Specifies the map "
+#~ "quality that gets displayed during map animations (e.g. while dragging "
+#~ "the globe). </p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Especially on slow "
+#~ "machines it is advisable to set this option to \"low quality\" as this "
+#~ "will give better speed.</p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Određuje kvalitet mape "
+#~ "koja će biti prikazana za vrijeme animacije mape(npr. za vrijeme "
+#~ "povlačenja svijetom) . </p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Posebno na sporim "
+#~ "mašinama, pohvalno je postaviti ovu opciju \"slab kvalitet\" i ovo će "
+#~ "dati bolju brzinu.</p></body></html>"
+
+#~ msgid "G&raphics system:"
+#~ msgstr "&Grafički sistem:"
+
+#~ msgid ""
+#~ "Specifies the graphics system that Qt uses to draw the map.\n"
+#~ "Changing this setting might be a good idea if there are performance "
+#~ "issues with the system's graphics drivers."
+#~ msgstr ""
+#~ "Određuje grafički sistem kojeg koristi Qt za crtanje mape.\n"
+#~ "Promjena ove postavke može biti dobra ideja ako postoje problemi s "
+#~ "performansama sistema  grafičkih upravljačkih programa."
+
+#~ msgid "Raster (Software rendering)"
+#~ msgstr "Raster (Softversko iscrtavanje)"
+
+#~ msgid "OpenGL"
+#~ msgstr "OpenGL"
+
+#~ msgid "&Text Labels"
+#~ msgstr "&Tekstualne labele"
+
+#~ msgid "&Place names:"
+#~ msgstr "&Imena mjesta:"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Places often have "
+#~ "different names in different languages. The label on the map can show the "
+#~ "name in the user's language. Alternatively it can display the name in the "
+#~ "official language and glyphs of that place. </p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Mjesta obično imaju "
+#~ "različita imena na različitim jezicima. Labela na mapi može pokazati ime "
+#~ "na korisnikovom jeziku. Alternativno može prikazati ime na oficijelnom "
+#~ "jeziku i slovima tog mjesta. </p></body></html>"
+
+#~ msgid "Custom & Native Language"
+#~ msgstr "Korisnički i maternji jezik"
+
+#~ msgid "Custom Language"
+#~ msgstr "Korisnički jezik"
+
+#~ msgid "Native Language"
+#~ msgstr "Maternji jezik"
+
+#~ msgid "Default map &font:"
+#~ msgstr "Podrazumijevani mapa &font:"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">The default font that "
+#~ "gets used on the map.</p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Podrazumijevani font "
+#~ "koji se koristi na mapi.</p></body></html>"
+
+#~ msgid "Movie Recording - Marble"
+#~ msgstr "Snimanje Videa"
+
+#~ msgid "Destination video"
+#~ msgstr "Destinacija videa"
+
+#~ msgid "Open..."
+#~ msgstr "Otvori..."
+
+#~ msgid "FPS (frames per second)"
+#~ msgstr "FPS (ramova po sekundi)"
+
+#~ msgid "Cancel"
+#~ msgstr "Odustani"
+
+#~ msgid "Start"
+#~ msgstr "Početak"
+
+#~ msgid "New Bookmark Folder - Marble"
+#~ msgstr "Novi Favorit (bookmark) datoteka-Marble"
+
+#~ msgid "&Folder Name"
+#~ msgstr "&Ime foldera"
+
+#, fuzzy
+#~| msgid "Current Location"
+#~ msgid "Current Relations"
+#~ msgstr "Trenutna lokacija"
+
+#~ msgid "Name"
+#~ msgstr "Ime"
+
+#, fuzzy
+#~| msgid "Type:"
+#~ msgid "Type"
+#~ msgstr "Tip:"
+
+#, fuzzy
+#~| msgid "Add link"
+#~ msgid "Add Relation"
+#~ msgstr "Dodaj vezu"
+
+#, fuzzy
+#~| msgid "Current Location"
+#~ msgid "Current Tags"
+#~ msgstr "Trenutna lokacija"
+
+#, fuzzy
+#~| msgid "AppKey"
+#~ msgid "Key"
+#~ msgstr "Ključ aplikacije"
+
+#~ msgid "Browse..."
+#~ msgstr "Pregledaj..."
+
+#~ msgid "Icon Link:"
+#~ msgstr "Poveznica ikone:"
+
+#~ msgid "ID:"
+#~ msgstr "ID:"
+
+#~ msgid "Target ID:"
+#~ msgstr "Odredišni ID:"
+
+#~ msgid "Position:"
+#~ msgstr "Pozicija:"
+
+#~ msgid "Marble"
+#~ msgstr "Marble"
+
+#~ msgid "Map"
+#~ msgstr "Mapa"
+
+#~ msgid "Visible Globe Region"
+#~ msgstr "Vidljivo područje globusa"
+
+#~ msgid "Outer Space"
+#~ msgstr "Svemir"
+
+#~ msgid "Route"
+#~ msgstr "Put"
+
+#~ msgid "Route Summary"
+#~ msgstr "Pregled rute"
+
+#~ msgid "Driving Instructions"
+#~ msgstr "Vozačke instrukcije"
+
+#~ msgid "Footer"
+#~ msgstr "Podnožje"
+
+#~ msgid "Configure Routing Profile"
+#~ msgstr "Izaberi profil puteva"
+
+#~ msgid "Active Route Services"
+#~ msgstr "Aktivni servisi rutiranja"
+
+#~ msgid "Service Settings"
+#~ msgstr "Postavke servisa"
+
+#~ msgid "No configuration available"
+#~ msgstr "Nema raspoložive konfiguracije"
+
+#~ msgid "Select Service to Configure"
+#~ msgstr "Izaberi servis za konfiguraciju"
+
+#~ msgid "Configure"
+#~ msgstr "Podesi"
+
+#~ msgid "&Add"
+#~ msgstr "&Dodaj"
+
+#~ msgid "&Configure"
+#~ msgstr "&Podesi"
+
+#~ msgid "&Remove"
+#~ msgstr "&Ukloni"
+
+#~ msgid "Move &Up"
+#~ msgstr "Pomjeri &gore"
+
+#~ msgid "Move &Down"
+#~ msgstr "Pomjeri &dolje"
+
+#~ msgid "Car (fastest)"
+#~ msgstr "Automobil (najbrže)"
+
+#~ msgid "Car (shortest)"
+#~ msgstr "Automobil (najkraće)"
+
+#~ msgid "Bicycle"
+#~ msgstr "Bicikl"
+
+#~ msgid "Pedestrian"
+#~ msgstr "Pješice"
+
+#~ msgid "No results."
+#~ msgstr "Nema rezultata."
+
+#~ msgid "Show Details"
+#~ msgstr "Prikaži detalje"
+
+#~ msgid "Choose alternative routes"
+#~ msgstr "Izaberi alternativne puteve"
+
+#~ msgid "Sun Control"
+#~ msgstr "Sunčana kontrola"
+
+#~ msgid "Sun Shading"
+#~ msgstr "Sunčeve sjene"
+
+#~ msgid "Shadow"
+#~ msgstr "Sjena"
+
+#~ msgid "Night Map"
+#~ msgstr "Noćna karta"
+
+#~ msgid "Subsolar Point"
+#~ msgstr "Podsolarna tačka"
+
+#~ msgid ""
+#~ "Display <a href=\"http://en.wikipedia.org/wiki/Subsolar_point\">Subsolar "
+#~ "Point</a> icon"
+#~ msgstr ""
+#~ "Prikaži <a href=\"http://en.wikipedia.org/wiki/Subsolar_point"
+#~ "\">posdolarne tačke</a> ikonu"
+
+#~ msgid ""
+#~ "<b>Lock</b> map view to <a href=\"http://en.wikipedia.org/wiki/"
+#~ "Subsolar_point\">Subsolar Point</a>."
+#~ msgstr ""
+#~ "<b>Zaključaj</b> pogled mape za <a href=\"http://en.wikipedia.org/wiki/"
+#~ "Subsolar_point\">podsloarnu tačku</a>."
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">Attention: Panning the map is disabled now! </span></p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Uncheck the \"Lock map "
+#~ "view to Subsolar Point\" option to allow for viewing a different place on "
+#~ "the globe again.</p></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">Upozorenje: micanje mape je isključeno! </span></p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Isključite \"Zaključaj "
+#~ "pogled mape na podsolarnu tačku\" da vidite različito mjesto globusa.</"
+#~ "p></body></html>"
+
+#~ msgid "OK"
+#~ msgstr "U redu"
+
+#~ msgid "Apply"
+#~ msgstr "Primijeni"
+
+#~ msgid "Creating Map"
+#~ msgstr "Kreiranje mape"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /></head><body style="
+#~ "\" white-space: pre-wrap; font-family:Sans Serif; font-size:9pt; font-"
+#~ "weight:400; font-style:normal; text-decoration:none;\"><p style=\" margin-"
+#~ "top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-"
+#~ "indent:0; text-indent:0px;\"><span style=\" font-weight:600;\">Satellite "
+#~ "View</span></p><p style=\" margin-top:0px; margin-bottom:0px; margin-"
+#~ "left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Earth "
+#~ "as seen from Space. The map is based on NASA's beautiful \"Blue Marble "
+#~ "Next Generation\" pictures. Credits: NASA's Earth Observatory</p></body></"
+#~ "html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /></head><body style="
+#~ "\" white-space: pre-wrap; font-family:Sans Serif; font-size:9pt; font-"
+#~ "weight:400; font-style:normal; text-decoration:none;\"><p style=\" margin-"
+#~ "top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-"
+#~ "indent:0; text-indent:0px;\"><span style=\" font-weight:600;\">Satellite "
+#~ "View</span></p><p style=\" margin-top:0px; margin-bottom:0px; margin-"
+#~ "left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Zemlja "
+#~ "viđena iz svemira. Mapa je bazirana na NASA-inoj lijepoj \"Blue Marble "
+#~ "Next Generation\" slici. Krediti:NASA-in Zemljin Obzervatorij  </p></"
+#~ "body></html>"
+
+#~ msgid ""
+#~ "Marble needs to create this map. This only needs to be done once and may "
+#~ "take a few seconds."
+#~ msgstr ""
+#~ "Marble treba napraviti ovu mapu, Ovo samo treba biti urađeno jednom i "
+#~ "uzima nekih par sekundi."
+
+#~ msgid "&Cancel"
+#~ msgstr "&Odustani"
+
+#~ msgid "Zoom"
+#~ msgstr "Uvećaj"
+
+#~ msgid "&Tile Level Range:"
+#~ msgstr "&Popločani opseg nivoa:"
+
+#~ msgid "Minimum Tile Level"
+#~ msgstr "Minimalni nivo popločavanja"
+
+#~ msgid "to"
+#~ msgstr "do"
+
+#~ msgid "Maximum Tile Level"
+#~ msgstr "Maksimalni nivo popločavanja"
+
+#~ msgid "Time Control"
+#~ msgstr "Vremenska kontrola"
+
+#~ msgid "Time"
+#~ msgstr "Vrijeme"
+
+#~ msgid "New Date Time      :"
+#~ msgstr "Novi datum i vrijeme      :"
+
+#~ msgid "Refresh Interval     :"
+#~ msgstr "Interval osvježavanja:"
+
+#~ msgid " seconds"
+#~ msgstr " sekundi"
+
+#~ msgid "Now"
+#~ msgstr "Sada"
+
+#~ msgid "Current Date Time :"
+#~ msgstr "Trenutni datum i vrijeme :"
+
+#~ msgid "Time Speed"
+#~ msgstr "Vremenska brzina"
+
+#~ msgid "Close"
+#~ msgstr "Zatvori"
+
+#~ msgid "Tour"
+#~ msgstr "Put"
+
+#~ msgid "--:--"
+#~ msgstr "--:--"
+
+#~ msgid "Move up"
+#~ msgstr "Pomjeri gore"
+
+#~ msgid "Move down"
+#~ msgstr "Pomjeri dolje"
+
+#~ msgid "New Tour"
+#~ msgstr "Novi put"
+
+#~ msgid "Save Tour"
+#~ msgstr "Spasi put"
+
+#~ msgid "Save Tour As"
+#~ msgstr "Spasi put kao"
+
+#~ msgid "Open Tour"
+#~ msgstr "Otvori put"
+
+#~ msgid "Play"
+#~ msgstr "Reprodukuj"
+
+#~ msgid "Begins touring"
+#~ msgstr "Početak puta"
+
+#~ msgid "Stop"
+#~ msgstr "Zaustavi"
+
+#~ msgid "Stops touring (playing again will start tour from the start)"
+#~ msgstr "Zaustavlja put (reprodukcija će početi ponovo od početka)"
+
+#~ msgid "Converts the loaded tour into a movie"
+#~ msgstr "Pretvara učitani obilazak u film"
+
+#~ msgid "Worldclock Applet Configuration"
+#~ msgstr "Konfiguracija apleta svjetskog sata"
+
+#~ msgid "Map Display"
+#~ msgstr "Prikaz mape"
+
+#~ msgid "Projection:"
+#~ msgstr "Projekcija:"
+
+#~ msgid "Equirectangular"
+#~ msgstr "Ekvirektangularno"
+
+#~ msgid "Center map on longitude:"
+#~ msgstr "Centriraj mapu na geograskoj dužini:"
+
+#~ msgid "Center map on daylight"
+#~ msgstr "Centriraj mapu na dnevnoj svjetlosti"
+
+#~ msgid "Show date"
+#~ msgstr "Prikaži datum"
+
+#~ msgid "Time Zones"
+#~ msgstr "Vremenske zone"
+
+#~ msgid "Use custom timezone selection"
+#~ msgstr "Koristite vlastito izabranu vremensku zonu"
+
+#~ msgid "Edit ground overlay"
+#~ msgstr "Uredi preklop zemlje"
+
+#~ msgid "Coordinates"
+#~ msgstr "Koordinate"
+
+#~ msgid "N"
+#~ msgstr "N"
+
+#~ msgid "W"
+#~ msgstr "W"
+
+#~ msgid "E"
+#~ msgstr "E"
+
+#~ msgid "S"
+#~ msgstr "S"
+
+#~ msgid "Rotation"
+#~ msgstr "Rotacija"
+
+#, fuzzy
+#~| msgid "Add FlyTo"
+#~ msgid "Add polygon"
+#~ msgstr "Dodaj FlyTo"
+
+#~ msgid "Lines"
+#~ msgstr "Linije"
+
+#~ msgid "Width:"
+#~ msgstr "Širina:"
+
+#~ msgid "Area"
+#~ msgstr "Područje"
+
+#~ msgid "Filled"
+#~ msgstr "Ispunjen"
+
+#~ msgid "Not Filled"
+#~ msgstr "Nije popunjen"
+
+#~ msgid "Nodes"
+#~ msgstr "Čvorovi"
+
+#~ msgid "Display"
+#~ msgstr "Prikaz"
+
+#~ msgid "Fade data older than (minutes)"
+#~ msgstr "Gubljenje podataka starijih od (minute)"
+
+#~ msgid "Do not show data older than (minutes)"
+#~ msgstr "Ne prikazuj podatke starije od (minute)"
+
+#~ msgid "Internet"
+#~ msgstr "Internet"
+
+#~ msgid "APRS Data Sources"
+#~ msgstr "APRS izvor podataka"
+
+#~ msgid "Should information be gathered from the Internet APRS data source?"
+#~ msgstr ""
+#~ "Trebaju li informacije biti prikupljene sa izvora podataka internet APSR ?"
+
+#~ msgid "Collect data from an APRS Internet server"
+#~ msgstr "Sakupi podatke sa APRS internet servera"
+
+#~ msgid "Server"
+#~ msgstr "Server"
+
+#~ msgid "rotate.aprs.net"
+#~ msgstr "rotate.aprs.net"
+
+#~ msgid "Port"
+#~ msgstr "Port"
+
+#~ msgid "10253"
+#~ msgstr "10253"
+
+#~ msgid "Dump TCP/IP records to the debug stream"
+#~ msgstr "Izbaci TCP/IP arhivu do toka ispravljanja greškica"
+
+#~ msgid "Device"
+#~ msgstr "Uređaj"
+
+#~ msgid "TNC Terminal Port"
+#~ msgstr "TNC Terminal Port"
+
+#~ msgid "Should information be gathered from a serial port?"
+#~ msgstr "Trebaju li informacije biti prikupljene sa porta koji je na redu?"
+
+#~ msgid "Collect data from a serial TNC (In Text Mode)"
+#~ msgstr "Sakupi podatke sa sljedećeg TNC ( u tekst modu)"
+
+#~ msgid "TTY"
+#~ msgstr "TTY"
+
+#~ msgid "/dev/ttyUSB0"
+#~ msgstr "/dev/ttyUSB0"
+
+#~ msgid "Dump TTY records to the debug stream"
+#~ msgstr "Izbaci TTY arhivu do toka ispravljanja greškica"
+
+#~ msgid "File"
+#~ msgstr "Datoteka"
+
+#~ msgid "Should information be gathered from a file?"
+#~ msgstr "Trebaju li informacije biti prikupljene iz datoteke?"
+
+#~ msgid "Collect data from a file"
+#~ msgstr "Sakupi informacije iz datoteke"
+
+#~ msgid "Dump file records to the debug stream"
+#~ msgstr "Izbaci arhivu datoteke do toka ispravljanja greškica"
+
+#~ msgid "Configure Compass Plugin"
+#~ msgstr "Podesi priključak kompasa"
+
+#~ msgid "Theme"
+#~ msgstr "Tema"
+
+#~ msgid "Default"
+#~ msgstr "Podrazumijevani"
+
+#~ msgid "Arrows"
+#~ msgstr "Strelice"
+
+#~ msgid "Atom"
+#~ msgstr "Atom"
+
+#~ msgid "Magnet"
+#~ msgstr "Magnet"
+
+#~ msgid "Configure Crosshairs Plugin"
+#~ msgstr "Konfiguracija nišsanskih priključaka"
+
+#~ msgid "Gun 1"
+#~ msgstr "Top 1"
+
+#~ msgid "Gun 2"
+#~ msgstr "Top 2"
+
+#~ msgid "Circled"
+#~ msgstr "Okružen"
+
+#~ msgid "German"
+#~ msgstr "Njemački"
+
+#~ msgid "Dialog"
+#~ msgstr "Dijalog"
+
+#~ msgid "Filter"
+#~ msgstr "Filter"
+
+#~ msgid "Maximum number of results:"
+#~ msgstr "Maksimalan broj rezultata:"
+
+#~ msgid "Minimum magnitude:"
+#~ msgstr "Minimalna magnituda:"
+
+#~ msgid "Time Range"
+#~ msgstr "Vremenski okvir"
+
+#~ msgid "Eclipse Browser"
+#~ msgstr "Preglednik pomračenja"
+
+#~ msgid "Show eclipses for year:"
+#~ msgstr "Prikaži pomračenja za godinu:"
+
+#~ msgid "&Settings..."
+#~ msgstr "&Postavke..."
+
+#~ msgid "&Go To Selected Eclipse"
+#~ msgstr "&Idi na selektovano pomračenje"
+
+#~ msgid "Eclipses Configuration"
+#~ msgstr "Konfiguracija pomračenja"
+
+#~ msgid "View &Options"
+#~ msgstr "Pogledaj &Opcije"
+
+#~ msgid "Enable &Lunar Eclipses"
+#~ msgstr "Dozvoli &Lunarno pomračenje"
+
+#~ msgid "Show Eclipse Control &Widget"
+#~ msgstr "Prikaži kontrole &pomračenja"
+
+#~ msgid "&Eclipse Elements"
+#~ msgstr "&Elementi pomračenja"
+
+#~ msgid "&Northern Penumbra"
+#~ msgstr "&Sjeverna Penumbra"
+
+#~ msgid "&Umbra"
+#~ msgstr "&Sjena"
+
+#~ msgid "Position of Eclipse &Maximum"
+#~ msgstr "Pozicija pomračenja &Maksimum"
+
+#~ msgid "Central &Line"
+#~ msgstr "Centralna &Linija"
+
+#~ msgid "Full &Penumbra"
+#~ msgstr "Popuni &Penumbru"
+
+#~ msgid "Sunrise and Sunset &Boundaries"
+#~ msgstr "&Granice izlaska i zalaska sunca"
+
+#~ msgid "&Southern Penumbra"
+#~ msgstr "&Sjeverna Penumbra"
+
+#~ msgid "Penumbra with 60% Ma&gnitude"
+#~ msgstr "Penumbra sa 60% &veličine"
+
+#~ msgid "&Reminder"
+#~ msgstr "&Podsjetnik"
+
+#~ msgid "Remind about eclipse events"
+#~ msgstr "Podsjeti o događajima pomračenja"
+
+#~ msgid "Eclipse Event"
+#~ msgstr "Događaj pomračenja"
+
+#~ msgid ""
+#~ "<html><head/><body><p>Marble has detected that the following <span style="
+#~ "\" font-weight:600;\">eclipse events</span> will occur in the near "
+#~ "future. If you want more information on a specific event, select it and "
+#~ "click OK.</p></body></html>"
+#~ msgstr ""
+#~ "<html><head/><body><p>Marble je prepoznao sljedeće <span style=\" font-"
+#~ "weight:600;\">događaje pomračenja</span> koji će se desiti u bliskoj "
+#~ "budućnosti. Ako želite više informacija o navedenom događaju, odaberite "
+#~ "ga i kliknite U redu.</p></body></html>"
+
+#~ msgid "Do not remind me about eclipse events again"
+#~ msgstr "Ne podsjećaj me o događajima pomračenja više"
+
+#~ msgid "Configure Elevation Profile Plugin"
+#~ msgstr "Konfiguriši dodatak za elevacijski profil"
+
+#~ msgid "Zoom to viewport"
+#~ msgstr "Uvećaj na vizuelno područje"
+
+#~ msgid "Speed"
+#~ msgstr "Brzina"
+
+#~ msgid "Direction"
+#~ msgstr "Smijer"
+
+#~ msgid "Altitude"
+#~ msgstr "Visina"
+
+#~ msgid "Precision"
+#~ msgstr "Tačnost"
+
+#~ msgid "Coordinate Grid Plugin"
+#~ msgstr "Podesi rešetku priključka"
+
+#~ msgid "C&olors"
+#~ msgstr "B&oje"
+
+#~ msgid "&Grid:"
+#~ msgstr "&Mreža:"
+
+#~ msgid "Color of the coordinate grid."
+#~ msgstr "Boja koordinate rešetke."
+
+#~ msgid "&Tropics:"
+#~ msgstr "&Tropici:"
+
+#~ msgid "Color of the tropical circles."
+#~ msgstr "Boja tropskih krugova."
+
+#~ msgid "&Equator:"
+#~ msgstr "&Ekvator:"
+
+#~ msgid "Color of the equator."
+#~ msgstr "Boja ekvatora."
+
+#~ msgid "Labels"
+#~ msgstr "Natpisi"
+
+#~ msgid "&Named Labels"
+#~ msgstr "&Imenovani natpisi"
+
+#~ msgid "Show Labels for Prime meridian, Equator, Tropics."
+#~ msgstr "Pokaži natpise za početni meridijan, Ekvator, trope."
+
+#~ msgid "&Numerical Labels"
+#~ msgstr "&Numerički natpisi"
+
+#~ msgid "Show numerical Labels."
+#~ msgstr "Pokaži numeričke natpise."
+
+#~ msgid "Configure Scale Bar Plugin"
+#~ msgstr "Podesi Scale Bar priključka"
+
+#~ msgid "Show Ratio Scale"
+#~ msgstr "Prikaži skalu omjera"
+
+#~ msgid "Minimize"
+#~ msgstr "Minimiziraj"
+
+#~ msgid "Marble - Measure Tool Configuration"
+#~ msgstr "Marble - Konfigurisanje alata za mjerenje"
+
+#~ msgid "Ruler Type"
+#~ msgstr "Vrsta linijara"
+
+#~ msgid "Polygon"
+#~ msgstr "Poligon"
+
+#~ msgid "Circle"
+#~ msgstr "Krug"
+
+#~ msgid "Segment labels"
+#~ msgstr "Segmenti etikete"
+
+#~ msgid "Distance "
+#~ msgstr "Udaljenost "
+
+#~ msgid "Bearing"
+#~ msgstr "Držanje"
+
+#~ msgid "Bearing Change"
+#~ msgstr "Držanje promjene"
+
+#~ msgid "Perimeter"
+#~ msgstr "Prečnik"
+
+#~ msgid "Radius"
+#~ msgstr "Poluprečnik"
+
+#~ msgid "Circumference"
+#~ msgstr "Obim"
+
+#~ msgid "General"
+#~ msgstr "Glavno"
+
+#~ msgid "Cache name:"
+#~ msgstr "Ime skrovišta:"
+
+#~ msgid "User name:"
+#~ msgstr "Korisničko ime:"
+
+#~ msgid "Type:"
+#~ msgstr "Tip:"
+
+#~ msgid "Status:"
+#~ msgstr "Status:"
+
+#~ msgid "Country:"
+#~ msgstr "Država:"
+
+#~ msgid "Size:"
+#~ msgstr "Veličina:"
+
+#~ msgid "Difficulty:"
+#~ msgstr "Težina:"
+
+#~ msgid "Terrain:"
+#~ msgstr "Teren:"
+
+#~ msgid "Longitude:"
+#~ msgstr "Geografska dužina:"
+
+#~ msgid "Latitude:"
+#~ msgstr "Geografska širina:"
+
+#~ msgid "Date hidden:"
+#~ msgstr "Skriveni datum:"
+
+#~ msgid "Date created:"
+#~ msgstr "Datum kreiranja:"
+
+#~ msgid "Date last modified:"
+#~ msgstr "Datum zadnje izmjene:"
+
+#~ msgid "Log"
+#~ msgstr "Log"
+
+#~ msgid "Previous"
+#~ msgstr "Prethodni"
+
+#~ msgid "Next"
+#~ msgstr "Sljedeći"
+
+#~ msgid "Minimum difficulty:"
+#~ msgstr "Minimum težine:"
+
+#~ msgid "Maximum difficulty:"
+#~ msgstr "Maksimum težine:"
+
+#~ msgid "Maximum Distance:"
+#~ msgstr "Maksimum udaljenosti:"
+
+#~ msgid "Start:"
+#~ msgstr "Početak:"
+
+#~ msgid "End:"
+#~ msgstr "Kraj:"
+
+#~ msgid "TextLabel"
+#~ msgstr "TextLabel"
+
+#~ msgid "Hint"
+#~ msgstr "Savjet"
+
+#~ msgid "Logs"
+#~ msgstr "Dnevnici"
+
+#~ msgid "Marble - OpenDesktop plugin configuration"
+#~ msgstr "Marble - OpenDesktop plugin konfiguracija"
+
+#~ msgid "Number of displayed items on the screen:"
+#~ msgstr "Broj  stavki koje se prikazuju na zaslonu:"
+
+#~ msgid "Map &Image"
+#~ msgstr "Mapa &Slika"
+
+#~ msgid "&Planet:"
+#~ msgstr "&Planet:"
+
+#~ msgid "&Size:"
+#~ msgstr "&Veličina:"
+
+#~ msgid "x"
+#~ msgstr "x"
+
+#~ msgid "Preview"
+#~ msgstr "Prikaz"
+
+#~ msgid "Filename"
+#~ msgstr "Ime datoteke"
+
+#~ msgid "Position I&ndicator:"
+#~ msgstr "Pozicija i indikator:"
+
+#~ msgid "Configure Photo Plugin"
+#~ msgstr "Podesi foto priključak"
+
+#~ msgid "License"
+#~ msgstr "Licenca"
+
+#~ msgid "Number of items on the screen"
+#~ msgstr "Broj stavki na ekranu"
+
+#~ msgid "Configure Position Marker Plugin"
+#~ msgstr "Podesi poziciju priključka markera"
+
+#~ msgid "Cursor Shape"
+#~ msgstr "Oblik kursora"
+
+#~ msgid "&Arrow"
+#~ msgstr "&Strelica"
+
+#~ msgid "&Custom:"
+#~ msgstr "&Posebno:"
+
+#~ msgid ""
+#~ "Position marker images indicating the direction should point north (top)."
+#~ msgstr ""
+#~ "Položaj oznake slike koja pokazuje pravac bi trebala pokazivati "
+#~ "sjever(vrh)."
+
+#~ msgid "Trail"
+#~ msgstr "Trag"
+
+#~ msgid "&Accuracy:"
+#~ msgstr "&Preciznost:"
+
+#~ msgid "Color of the position marker's accuracy indicator."
+#~ msgstr "Boja pozicije pokazatelja preciznosti oznake."
+
+#~ msgid "Trail:"
+#~ msgstr "Trag:"
+
+#~ msgid "Color of the position marker's trail."
+#~ msgstr "Boja pozicije traga oznake."
+
+#~ msgid "Routing Configuration - Marble"
+#~ msgstr "Usmjeravanje konfiguracija - Marble"
+
+#~ msgid "Audible Turn Instructions"
+#~ msgstr "Instrukcije zvučnog skretanja"
+
+#~ msgid "Play a sound"
+#~ msgstr "Odsviraj zvuk"
+
+#~ msgid "Use this speaker"
+#~ msgstr "Koristi ovaj zvučnik"
+
+#~ msgid ""
+#~ "<a href=\"http://userbase.kde.org/Marble/CustomSpeakers\">Get more "
+#~ "speakers</a>"
+#~ msgstr ""
+#~ "<a href=\"http://userbase.kde.org/Marble/CustomSpeakers\">Dobavite još "
+#~ "programa za izgovor</a>"
+
+#~ msgid "Guidance Mode"
+#~ msgstr "Režim vođenja"
+
+#~ msgid "R"
+#~ msgstr "R"
+
+#~ msgid "Toggle GPS"
+#~ msgstr "Preklopi GPS"
+
+#~ msgid "zoom out"
+#~ msgstr "umanji"
+
+#~ msgid "zoom in"
+#~ msgstr "uvećaj"
+
+#~ msgid "total time remaining"
+#~ msgstr "ukupno preostalo vrijeme"
+
+#~ msgid "Satellites Configuration - Marble"
+#~ msgstr "Konfiguracija satelita - Marble"
+
+#~ msgid "&Satellites"
+#~ msgstr "&Sateliti"
+
+#~ msgid "&Data Sources"
+#~ msgstr "&Izvori podataka"
+
+#~ msgid ""
+#~ "<html><head/><body><p><span style=\" font-weight:600;\">Last update:</"
+#~ "span></p></body></html>"
+#~ msgstr ""
+#~ "<html><head/><body><p><span style=\" font-weight:600;\">Zadnja "
+#~ "nadogradnja:</span></p></body></html>"
+
+#~ msgid "&Reload All Data Sources"
+#~ msgstr "&Ponovo učitaj izvore podataka"
+
+#~ msgid "Satellite Data Sources:"
+#~ msgstr "Izvor satelitskih podataka:"
+
+#~ msgid "Add a new data source (URL)."
+#~ msgstr "Dodaj novi izvor podataka (URL)."
+
+#~ msgid "Open a new data source from disk."
+#~ msgstr "Otvori novi izvor podataka s diska."
+
+#~ msgid "Remove selected data source."
+#~ msgstr "Ukloni izabrani izvor podataka."
+
+#~ msgid "(Built-in Data Sources for Earth Satellites)"
+#~ msgstr "(Ugrađeni izvori podataka s zemaljskih satelita)"
+
+#~ msgid ""
+#~ "<html><head/><body><p>Supported formats: <a href=\"http://techbase.kde."
+#~ "org/Projects/Marble/SatelliteCatalogFormat\"><span style=\" text-"
+#~ "decoration: underline; color:#0000ff;\">Marble Satellite Catalogue</"
+#~ "span></a>, <a href=\"http://en.wikipedia.org/wiki/Two-line_element_set"
+#~ "\"><span style=\" text-decoration: underline; color:#0000ff;\">Two-Line-"
+#~ "Element Set</span></a></p></body></html>"
+#~ msgstr ""
+#~ "<html><head/><body><p>Podržani formati: <a href=\"http://techbase.kde.org/"
+#~ "Projects/Marble/SatelliteCatalogFormat\"><span style=\" text-decoration: "
+#~ "underline; color:#0000ff;\">Marble satelitski katalog</span></a>, <a href="
+#~ "\"http://en.wikipedia.org/wiki/Two-line_element_set\"><span style=\" text-"
+#~ "decoration: underline; color:#0000ff;\">Skup dvolinijeksih elemenata</"
+#~ "span></a></p></body></html>"
+
+#~ msgid "Plugin Inactive"
+#~ msgstr "Priključak neaktivan"
+
+#~ msgid "&Activate Plugin"
+#~ msgstr "&Aktiviraj priključak"
+
+#~ msgid ""
+#~ "Configuration options not available since the plugin is disabled at the "
+#~ "moment."
+#~ msgstr ""
+#~ "Konfiguracione opcije nisu dostupne, jer je priključak trenutno isključen."
+
+#~ msgid "km/h"
+#~ msgstr "km/h"
+
+#~ msgid "Configure Stars Plugin"
+#~ msgstr "Podesi zvjezdani priključak"
+
+#~ msgid "Celestial Objects"
+#~ msgstr "Nebeska tijela"
+
+#~ msgid "Star Magnitude Limit"
+#~ msgstr "Limit magnitude zvijezde"
+
+#~ msgid " mag"
+#~ msgstr " mag"
+
+#~ msgid "Solar System"
+#~ msgstr "Solarni sistem"
+
+#~ msgid "Sun"
+#~ msgstr "Sunce"
+
+#~ msgid "Moon"
+#~ msgstr "Mjesec"
+
+#~ msgid "Mercury"
+#~ msgstr "Merkur"
+
+#~ msgid "Venus"
+#~ msgstr "Venera"
+
+#~ msgid "Earth"
+#~ msgstr "Zemlja"
+
+#~ msgid "Mars"
+#~ msgstr "Mars"
+
+#~ msgid "Jupiter"
+#~ msgstr "Jupiter"
+
+#~ msgid "Saturn"
+#~ msgstr "Saturn"
+
+#~ msgid "Uranus"
+#~ msgstr "Uran"
+
+#~ msgid "Neptune"
+#~ msgstr "Neptun"
+
+#~ msgid "Use name labels"
+#~ msgstr "Koristi oznake s imenom"
+
+#~ msgid "Magnify Sun and Moon"
+#~ msgstr "Uvećaj Sunce i Mjesec"
+
+#~ msgid "Other"
+#~ msgstr "Ostalo"
+
+#~ msgid "Deep Sky Object Labels"
+#~ msgstr "Oznake dalekih nebeskih objekata"
+
+#~ msgid "Deep Sky Objects"
+#~ msgstr "Daleki nebeski objekti"
+
+#~ msgid "Lines and Orientation"
+#~ msgstr "Linije i orijentacija"
+
+#~ msgid "Constellations"
+#~ msgstr "Sazvježđa"
+
+#~ msgid "Names"
+#~ msgstr "Imena"
+
+#~ msgid "Latin Name"
+#~ msgstr "Latinsko ime"
+
+#~ msgid "Native Translation"
+#~ msgstr "Prirodni prijevod"
+
+#~ msgid "Abbreviation"
+#~ msgstr "Skraćenica"
+
+#~ msgid "Celestial Equator"
+#~ msgstr "Nebeski ekvator"
+
+#~ msgid "Celestial Poles"
+#~ msgstr "Nebeski polovi"
+
+#~ msgid "Ecliptic"
+#~ msgstr "Ekliptika"
+
+#~ msgid "Configure Weather Plugin"
+#~ msgstr "Konfiguriši vremenske dodatke"
+
+#~ msgid "Information"
+#~ msgstr "Informacija"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Here you can "
+#~ "choose if you want the weather condition to be shown (for example, clouds "
+#~ "or clear sky.) Marble will only show the condition if this information is "
+#~ "available.</p></body></html>\n"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Ovdje možete "
+#~ "uzabrati ako želite da budu prikazani vremenski uvjeti (naprimjer oblačno "
+#~ "ili vedro nebo.) Marble će samo prikazati uvjete ako je informacija "
+#~ "dostupna.</p></body></html>\n"
+
+#~ msgid "Weather condition"
+#~ msgstr "Vremenski uvjeti"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Selects if you "
+#~ "want the temperature to be shown. The temperature will only be shown for "
+#~ "the stations it is available for.</p></body></html>\n"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Obilježi ako "
+#~ "želiš da bud eprikazana temperatura. Temperatura će biti prikazana samo "
+#~ "za dostupne stanice.</p></body></html>\n"
+
+#~ msgid "Temperature"
+#~ msgstr "Temperatura"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Select if you "
+#~ "want the wind direction to be shown. The wind direction will only be "
+#~ "shown if it is available for the particular station.</p></body></html>\n"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Izaberite ako "
+#~ "želite da bude prikazan smjer vjetra.Smjer vjetra će biti prikazan samo "
+#~ "ako je dostupan za određenu stanicu.</p></body></html>\n"
+
+#~ msgid "Wind direction"
+#~ msgstr "Smijer vjetra"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Select if you "
+#~ "want the wind speed to be shown. The wind speed will only be shown if it "
+#~ "is available for the particular station.</p></body></html>\n"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Izaberi ako "
+#~ "želiš da bud eprikazana brzina vjetra.Brzina vjetra će biti prikazana "
+#~ "samo ako je dostupno za određenu stanicu.</p></body></html>\n"
+
+#~ msgid "Wind speed"
+#~ msgstr "Brzina vjetra"
+
+#~ msgid "Units"
+#~ msgstr "Jedinice"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">The unit used to "
+#~ "measure the temperature.</p></body></html>\n"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Jedinice se "
+#~ "koriste za mjerenje temperature.</p></body></html>\n"
+
+#~ msgid "Celsius"
+#~ msgstr "Celzijus"
+
+#~ msgid "Fahrenheit"
+#~ msgstr "Farenhajt"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">The unit used to "
+#~ "measure the wind speed.</p></body></html>\n"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Jedinica se "
+#~ "koristi za mjerenje brzine vjetra.</p></body></html>\n"
+
+#~ msgid "Kilometers per hour"
+#~ msgstr "Kilometara na sat"
+
+#~ msgid "Miles per hour"
+#~ msgstr "Milja na sat"
+
+#~ msgid "Meters per second"
+#~ msgstr "Metar u sekundi"
+
+#~ msgid "Knots"
+#~ msgstr "Čvor"
+
+#~ msgid "Beaufort"
+#~ msgstr "Bofor"
+
+#~ msgid "Pressure"
+#~ msgstr "Pritisak"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">The unit used to "
+#~ "measure the air pressure.</p></body></html>\n"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Jedinica se "
+#~ "koristi za mjerenje pritiska zraka.</p></body></html>\n"
+
+#~ msgid "Hecto Pascals"
+#~ msgstr "Hekto Paskal"
+
+#~ msgid "Kilo Pascals"
+#~ msgstr "Kilo Paskal"
+
+#~ msgid "Bars"
+#~ msgstr "Bari"
+
+#~ msgid "Millimeters of Mercury"
+#~ msgstr "Milimetri žive"
+
+#~ msgid "Inches of Mercury"
+#~ msgstr "Inči žive"
+
+#~ msgid "Miscellaneous"
+#~ msgstr "Razno"
+
+#~ msgid "Show only favorite items"
+#~ msgstr "Prikaži samo omiljene stavke"
+
+#~ msgid "Weather update interval"
+#~ msgstr "Vrijeme ažuriranje intervala"
+
+#~ msgid " hours"
+#~ msgstr " sati"
+
+#~ msgid "Configure Wikipedia Plugin"
+#~ msgstr "Konfiguriši WIkipedia dodatke"
+
+#~ msgid "Show thumbnail images"
+#~ msgstr "Prikaži umanjene slike"
+
+#~ msgid "Route type:"
+#~ msgstr "Tip rute:"
+
+#~ msgid "Speed:"
+#~ msgstr "Brzina:"
+
+#~ msgid "AppKey"
+#~ msgstr "Ključ aplikacije"
+
+#~ msgid "Preference:"
+#~ msgstr "Postavke:"
+
+#~ msgid "Avoid motorways"
+#~ msgstr "Izbjegavaj autoputeve"
+
+#~ msgid "Avoid tollways"
+#~ msgstr "Izbjegavaj puteve koji se plaćaju"
+
+#~ msgid "Avoid ferries"
+#~ msgstr "Izbjegavajte trajekte"
+
+#~ msgid "Ascending slope:"
+#~ msgstr "Uzlazni nagib:"
+
+#~ msgid "Descending slope:"
+#~ msgstr "Silazni nagib:"
+
+#~ msgid ""
+#~ "An AppKey is required for MapQuest routing to work. You can register one "
+#~ "<a href=\"http://developer.mapquest.com/web/products/open\">here</a>."
+#~ msgstr ""
+#~ "Ključ aplikacije je potreban da Map zahtjev radi. Možete registrovati "
+#~ "jedan<a href=\"http://developer.mapquest.com/web/products/open\">here</a>."
+
+#~ msgid "Monav Configuration"
+#~ msgstr "Monav konfiguracija"
+
+#~ msgid "Transport Type:"
+#~ msgstr "Vrsta transporta:"
+
+#~ msgid "Any"
+#~ msgstr "Bilo koji"
+
+#~ msgid "Manage Maps"
+#~ msgstr "Upravljaj mapama"
+
+#~ msgid "Install New"
+#~ msgstr "Instaliraj novu"
+
+#~ msgid "Continent"
+#~ msgstr "Kontinent"
+
+#~ msgid "Country"
+#~ msgstr "Država"
+
+#~ msgid "Download Variant"
+#~ msgstr "Preuzmi varijantu"
+
+#~ msgid "Install"
+#~ msgstr "Instaliraj"
+
+#~ msgid "Nothing to do."
+#~ msgstr "Nema šta da se radi."
+
+#~ msgid "%v/%m MB"
+#~ msgstr "%v/%m MB"
+
+#~ msgid "Abort"
+#~ msgstr "Prekid"
+
+#~ msgid "Transport:"
+#~ msgstr "Transport:"
+
+#~ msgid "Profile:"
+#~ msgstr "Profil:"
+
+#~ msgid "Method"
+#~ msgstr "Metoda"
+
+#~ msgid "Fastest"
+#~ msgstr "Najbrži"
+
+#~ msgid "Shortest"
+#~ msgstr "Najkraći"
+
+#~ msgid "Please allow access to KWallet."
+#~ msgstr "Molimo odobrite pristup KWallet."
+
+#~ msgid ""
+#~ "You haven't allowed Marble to use KWallet yet.\n"
+#~ "This is dangerous since Marble will store your password without "
+#~ "encryption.\n"
+#~ "Are you sure?"
+#~ msgstr ""
+#~ "Niste omogućili Marble-u da koristi KWallet još uvijek.\n"
+#~ "To je opasno jer će Marble sačuvati vašu lozinku bez enkripcije.\n"
+#~ "Da li ste sigurni?"
+
+#, fuzzy
+#~| msgid "File not accessible"
+#~ msgid "KWallet Access in Marble"
+#~ msgstr "Datoteci se ne može pristupiti."
+
+#~ msgid ""
+#~ "You still don't allow Marble to use KWallet.\n"
+#~ "If you haven't seen the KWallet dialog asking to allow access, it means "
+#~ "that you have disabled it.\n"
+#~ "If you would like to change this see System Information -> Account "
+#~ "Details -> KDE Wallet -> Access Control.\n"
+#~ "Choose your wallet and allow Marble to use it."
+#~ msgstr ""
+#~ "Niste omogućili Marble-u da koristi KWallet još uvijek.\n"
+#~ "Ako još uvijek niste vidjeli KWallet prozor za odobravanje pristupa, to "
+#~ "znači da ste ga onemogućili.\n"
+#~ "Ako želite ovo da promijenite pogledajte Sistemske informacije -> Detalji "
+#~ "računa -> KD Wallet -> Pristupne kontrole.\n"
+#~ "Odaberite novčanik i dopustite da ga Marble koristi."
+
+#~ msgid "Location Browser"
+#~ msgstr "Pretraživač lokacije"
+
+#~ msgid "Double click an entry of this list to get it displayed on the map."
+#~ msgstr "Dva puta kliknite na upis ove liste da bude prikazan na karti."
+
+#~ msgid "Navigate to your 'Home Location'"
+#~ msgstr "Idi na 'početnu lokaciju'"
+
+#~ msgid "Do you allow Marble to use KWallet?"
+#~ msgstr "Da li želite da omogućite Marble-u da koristi KWallet?"
+
+#~ msgid "&Name"
+#~ msgstr "&Ime"
+
+#~ msgid "Link"
+#~ msgstr "Poveznica"

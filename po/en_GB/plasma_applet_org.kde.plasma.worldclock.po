@@ -1,0 +1,73 @@
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Steve Allewell <steve.allewell@gmail.com>, 2016.
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2021-09-28 00:13+0000\n"
+"PO-Revision-Date: 2016-08-28 11:58+0000\n"
+"Last-Translator: Steve Allewell <steve.allewell@gmail.com>\n"
+"Language-Team: British English <kde-l10n-en_gb@kde.org>\n"
+"Language: en_GB\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 2.0\n"
+
+#: package/contents/config/config.qml:12
+#, kde-format
+msgid "Map Display"
+msgstr "Map Display"
+
+#: package/contents/ui/configMapDisplay.qml:28
+#, kde-format
+msgid "Projection:"
+msgstr "Projection:"
+
+#: package/contents/ui/configMapDisplay.qml:36
+#, kde-format
+msgid "Equirectangular"
+msgstr "Equirectangular"
+
+#: package/contents/ui/configMapDisplay.qml:37
+#, kde-format
+msgid "Mercator"
+msgstr "Mercator"
+
+#: package/contents/ui/configMapDisplay.qml:54
+#, kde-format
+msgid "Center on:"
+msgstr "Centre on:"
+
+#: package/contents/ui/configMapDisplay.qml:62
+#, kde-format
+msgid "Daylight"
+msgstr "Daylight"
+
+#: package/contents/ui/configMapDisplay.qml:63
+#, kde-format
+msgid "Longitude"
+msgstr "Longitude"
+
+#: package/contents/ui/configMapDisplay.qml:64
+#, kde-format
+msgid "Location"
+msgstr "Location"
+
+#: package/contents/ui/configMapDisplay.qml:82
+#, kde-format
+msgid "Longitude:"
+msgstr "Longitude:"
+
+#: package/contents/ui/configMapDisplay.qml:99
+#, kde-format
+msgid "Show date:"
+msgstr "Show date:"
+
+#: package/contents/ui/configTimeZones.qml:17
+#, kde-format
+msgid "Use custom time zone selection:"
+msgstr "Use custom time zone selection:"

@@ -1,0 +1,43 @@
+# Copyright (C) 2012 This_file_is_part_of_KDE
+# This file is distributed under the same license as the KDE package.
+#
+# Balázs Úr <urbalazs@gmail.com>, 2012.
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2021-09-28 00:13+0000\n"
+"PO-Revision-Date: 2012-06-06 22:39+0200\n"
+"Last-Translator: Balázs Úr <urbalazs@gmail.com>\n"
+"Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
+"Language: hu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lokalize 1.4\n"
+
+#: plasmarunner.cpp:36
+#, kde-format
+msgid "Shows the coordinates :q: in OpenStreetMap with Marble."
+msgstr ""
+"A(z) :q: koordináta megjelenítése az OpenStreetMap térképen Marble "
+"használatával."
+
+#: plasmarunner.cpp:37
+#, kde-format
+msgid "Shows the geo bookmark containing :q: in OpenStreetMap with Marble."
+msgstr ""
+"A(z) :q: értéket tartalmazó geo könyvjelző megjelenítése az OpenStreetMap "
+"térképen Marble használatával."
+
+#: plasmarunner.cpp:58
+#, kde-format
+msgid "Show the coordinates %1 in OpenStreetMap with Marble"
+msgstr ""
+"%1 koordináták megjelenítése az OpenStreetMap térképen Marble használatával"
+
+#: plasmarunner.cpp:124
+#, kde-format
+msgid "Show in OpenStreetMap with Marble"
+msgstr "Megjelenítés az OpenStreetMap térképen Marble használatával"

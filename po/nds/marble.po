@@ -1,0 +1,6283 @@
+# Translation of marble.po to Low Saxon
+# translation of marble.po to Low Saxon
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Sönke Dibbern <s_dibbern@web.de>, 2007, 2008, 2009, 2014.
+# Manfred Wiese <m.j.wiese@web.de>, 2008, 2009, 2010, 2011.
+msgid ""
+msgstr ""
+"Project-Id-Version: marble\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2021-10-18 00:13+0000\n"
+"PO-Revision-Date: 2014-09-18 16:24+0200\n"
+"Last-Translator: Sönke Dibbern <s_dibbern@web.de>\n"
+"Language-Team: Low Saxon <kde-i18n-nds@kde.org>\n"
+"Language: nds\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 1.4\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "Sönke Dibbern, Heiko Evermann, Manfred Wiese"
+
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "s_dibbern@web.de, heiko.evermann@gmx.de, m.j.wiese@web.de"
+
+#: kdemain.cpp:91
+#, kde-format
+msgid "Marble Virtual Globe"
+msgstr "Marble, de virtuelle Globus"
+
+#: kdemain.cpp:93
+#, kde-format
+msgid "A World Atlas."
+msgstr "En Atlas vun de Welt."
+
+#: kdemain.cpp:95
+#, fuzzy, kde-format
+#| msgid "(c) 2007-2014"
+msgid "(c) 2007-%1"
+msgstr "(c) 2007-2014"
+
+#: kdemain.cpp:100 kdemain.cpp:286
+#, kde-format
+msgid "Torsten Rahn"
+msgstr "Torsten Rahn"
+
+#: kdemain.cpp:101
+#, kde-format
+msgid "Developer and Original Author"
+msgstr "Orginaalschriever"
+
+#: kdemain.cpp:103
+#, kde-format
+msgid "Bernhard Beschow"
+msgstr "Bernhard Beschow"
+
+#: kdemain.cpp:104
+#, kde-format
+msgid "WMS Support, Mobile, Performance"
+msgstr "WMS-Ünnerstütten, Mobilredschappen, Leisten"
+
+#: kdemain.cpp:106
+#, kde-format
+msgid "Thibaut Gridel"
+msgstr "Thibaut Gridel"
+
+#: kdemain.cpp:107
+#, kde-format
+msgid "Geodata"
+msgstr "Geodata"
+
+#: kdemain.cpp:109
+#, kde-format
+msgid "Jens-Michael Hoffmann"
+msgstr "Jens-Michael Hoffmann"
+
+#: kdemain.cpp:110
+#, kde-format
+msgid "OpenStreetMap Integration, OSM Namefinder, Download Management"
+msgstr "OpenStreetMap-Inbinnen, OSM-Naamfinner, Daallaadpleeg"
+
+#: kdemain.cpp:112
+#, kde-format
+msgid "Florian E&szlig;er"
+msgstr "Florian E&szlig;er"
+
+#: kdemain.cpp:113
+#, kde-format
+msgid "Elevation Profile"
+msgstr "Hööchdenprofil"
+
+#: kdemain.cpp:115
+#, kde-format
+msgid "Wes Hardaker"
+msgstr "Wes Hardaker"
+
+#: kdemain.cpp:116
+#, kde-format
+msgid "APRS Plugin"
+msgstr "APRS-Moduul"
+
+#: kdemain.cpp:118 kdemain.cpp:202
+#, kde-format
+msgid "Bastian Holst"
+msgstr "Bastian Holst"
+
+#: kdemain.cpp:119
+#, kde-format
+msgid "Online Services support"
+msgstr "Ünnerstütten för Nettdeensten"
+
+#: kdemain.cpp:121 kdemain.cpp:172
+#, kde-format
+msgid "Guillaume Martres"
+msgstr "Guillaume Martres"
+
+#: kdemain.cpp:122
+#, kde-format
+msgid "Satellites"
+msgstr "Satelliten"
+
+#: kdemain.cpp:124 kdemain.cpp:168
+#, kde-format
+msgid "Rene Kuettner"
+msgstr "Rene Kuettner"
+
+#: kdemain.cpp:125
+#, kde-format
+msgid "Satellites, Eclipses"
+msgstr "Satelliten, Verdüüstern"
+
+#: kdemain.cpp:127
+#, kde-format
+msgid "Friedrich W. H. Kossebau"
+msgstr "Friedrich W. H. Kossebau"
+
+#: kdemain.cpp:128
+#, kde-format
+msgid "Plasma Integration, Bugfixes"
+msgstr "Plasma-Integreren, Fehlerrichten"
+
+#: kdemain.cpp:130
+#, kde-format
+msgid "Dennis Nienhüser"
+msgstr "Dennis Nienhüser"
+
+#: kdemain.cpp:131
+#, kde-format
+msgid "Routing, Navigation, Mobile"
+msgstr "Weegplanen, Navigeren, Mobilredschappen"
+
+#: kdemain.cpp:133
+#, kde-format
+msgid "Niko Sams"
+msgstr "Niko Sams"
+
+#: kdemain.cpp:134
+#, kde-format
+msgid "Routing, Elevation Profile"
+msgstr "Weegplanen, Hööchdenprofil"
+
+#: kdemain.cpp:136 kdemain.cpp:206
+#, kde-format
+msgid "Patrick Spendrin"
+msgstr "Patrick Spendrin"
+
+#: kdemain.cpp:137
+#, kde-format
+msgid "Core Developer: KML and Windows support"
+msgstr "Hööftschriever: KML- un Windows-Ünnerstütten"
+
+#: kdemain.cpp:139
+#, kde-format
+msgid "Eckhart Wörner"
+msgstr "Eckhart Wörner"
+
+#: kdemain.cpp:140
+#, kde-format
+msgid "Bugfixes"
+msgstr "Fehlerrichten"
+
+#: kdemain.cpp:145
+#, kde-format
+msgid "Inge Wallin"
+msgstr "Inge Wallin"
+
+#: kdemain.cpp:146
+#, kde-format
+msgid "Core Developer and Co-Maintainer"
+msgstr "Hööftschriever un Topleger"
+
+#: kdemain.cpp:148
+#, kde-format
+msgid "Henry de Valence"
+msgstr "Henry de Valence"
+
+#: kdemain.cpp:149
+#, kde-format
+msgid "Core Developer: Marble Runners, World-Clock Plasmoid"
+msgstr "Hööftschriever: Marble-Dregers, Welttietklock-Lüttprogramm för Plasma"
+
+#: kdemain.cpp:151
+#, kde-format
+msgid "Pino Toscano"
+msgstr "Pino Toscano"
+
+#: kdemain.cpp:152
+#, kde-format
+msgid "Network plugins"
+msgstr "Nettwarkmodulen"
+
+#: kdemain.cpp:154
+#, kde-format
+msgid "Harshit Jain"
+msgstr "Harshit Jain"
+
+#: kdemain.cpp:155
+#, kde-format
+msgid "Planet filter"
+msgstr "Planetenfilter"
+
+#: kdemain.cpp:157
+#, kde-format
+msgid "Simon Edwards"
+msgstr "Simon Edwards"
+
+#: kdemain.cpp:158
+#, kde-format
+msgid "Marble Python Bindings"
+msgstr "Python-Binnen för Marble"
+
+#: kdemain.cpp:160
+#, kde-format
+msgid "Magnus Valle"
+msgstr "Magnus Valle"
+
+#: kdemain.cpp:161
+#, kde-format
+msgid "Historical Maps"
+msgstr "Histoorsch Koorten"
+
+#: kdemain.cpp:163
+#, kde-format
+msgid "Médéric Boquien"
+msgstr "Médéric Boquien"
+
+#: kdemain.cpp:164
+#, kde-format
+msgid "Astronomical Observatories"
+msgstr "Astronoomsch Steernwachten"
+
+#: kdemain.cpp:169
+#, kde-format
+msgid ""
+"ESA Summer of Code in Space 2012 Project: Visualization of planetary "
+"satellites"
+msgstr ""
+"ESA ehr „Summer of Code in Space 2012“-Projekt: Dorstellen vun "
+"Planetensatelliten"
+
+#: kdemain.cpp:173
+#, kde-format
+msgid ""
+"ESA Summer of Code in Space 2011 Project: Visualization of Satellite Orbits"
+msgstr ""
+"ESA ehr „Summer of Code in Space 2011“-Projekt: Dorstellen vun Satelliten-"
+"Ümloopbahnen"
+
+#: kdemain.cpp:178
+#, kde-format
+msgid "Konstantin Oblaukhov"
+msgstr "Konstantin Oblaukhov"
+
+#: kdemain.cpp:179
+#, kde-format
+msgid "Google Summer of Code 2011 Project: OpenStreetMap Vector Rendering"
+msgstr "Google sien „Summer of Code“-Projekt 2011: OpenStreetMap-Vektorteken"
+
+#: kdemain.cpp:182
+#, kde-format
+msgid "Daniel Marth"
+msgstr "Daniel Marth"
+
+#: kdemain.cpp:183
+#, kde-format
+msgid "Google Summer of Code 2011 Project: Marble Touch on MeeGo"
+msgstr "Google sien „Summer of Code“-Projekt 2011: Anröög-Marble op MeeGo"
+
+#: kdemain.cpp:186
+#, kde-format
+msgid "Gaurav Gupta"
+msgstr "Gaurav Gupta"
+
+#: kdemain.cpp:187
+#, kde-format
+msgid "Google Summer of Code 2010 Project: Bookmarks"
+msgstr "Google sien „Summer of Code“-Projekt2010: Leestekens"
+
+#: kdemain.cpp:190
+#, kde-format
+msgid "Harshit Jain "
+msgstr "Harshit Jain "
+
+#: kdemain.cpp:191
+#, kde-format
+msgid "Google Summer of Code 2010 Project: Time Support"
+msgstr "Google sien „Summer of Code“-Projekt2010: Tiet-Ünnerstütten"
+
+#: kdemain.cpp:194
+#, kde-format
+msgid "Siddharth Srivastava"
+msgstr "Siddharth Srivastava"
+
+#: kdemain.cpp:195
+#, kde-format
+msgid "Google Summer of Code 2010 Project: Turn-by-turn Navigation"
+msgstr "Google sien „Summer of Code“-Projekt2010: Wegafsnitt-Navigeren"
+
+#: kdemain.cpp:198 kdemain.cpp:218
+#, kde-format
+msgid "Andrew Manson"
+msgstr "Andrew Manson"
+
+#: kdemain.cpp:199
+#, kde-format
+msgid "Google Summer of Code 2009 Project: OSM Annotation"
+msgstr "Google sien „Summer of Code“-Projekt2008: OSM-Anmarken"
+
+#: kdemain.cpp:203
+#, kde-format
+msgid "Google Summer of Code 2009 Project: Online Services"
+msgstr "Google sien „Summer of Code“-Projekt2009: Internetdeensten"
+
+#: kdemain.cpp:207
+#, kde-format
+msgid "Google Summer of Code 2008 Project: Vector Tiles for Marble"
+msgstr "Google sien „Summer of Code“-Projekt2008: Vektorkacheln för Marble"
+
+#: kdemain.cpp:210
+#, kde-format
+msgid "Shashank Singh"
+msgstr "Shashank Singh"
+
+#: kdemain.cpp:211
+#, kde-format
+msgid ""
+"Google Summer of Code 2008 Project: Panoramio / Wikipedia -photo support for "
+"Marble"
+msgstr ""
+"Google sien „Summer of Code“-Projekt2008: Ünnerstütten vun Panoramio- / "
+"Wikipediafotos för Marble"
+
+#: kdemain.cpp:214
+#, kde-format
+msgid "Carlos Licea"
+msgstr "Carlos Licea"
+
+#: kdemain.cpp:215
+#, kde-format
+msgid ""
+"Google Summer of Code 2007 Project: Equirectangular Projection (\"Flat Map\")"
+msgstr ""
+"Google sien „Summer of Code“-Projekt2007: Längdenliek Zylinnerprojizeren "
+"(\"Flach Koort\")"
+
+#: kdemain.cpp:219
+#, kde-format
+msgid "Google Summer of Code 2007 Project: GPS Support for Marble"
+msgstr "Google sien „Summer of Code“-Projekt2008: GPS-Ünnerstütten för Marble"
+
+#: kdemain.cpp:222
+#, kde-format
+msgid "Murad Tagirov"
+msgstr "Murad Tagirov"
+
+#: kdemain.cpp:223
+#, kde-format
+msgid "Google Summer of Code 2007 Project: KML Support for Marble"
+msgstr "Google sien „Summer of Code“-Projekt2008: KML-Ünnerstütten för Marble"
+
+#: kdemain.cpp:228
+#, kde-format
+msgid "Simon Schmeisser"
+msgstr "Simon Schmeisser"
+
+#: kdemain.cpp:229 kdemain.cpp:231 kdemain.cpp:233 kdemain.cpp:235
+#: kdemain.cpp:237 kdemain.cpp:239 kdemain.cpp:241 kdemain.cpp:243
+#: kdemain.cpp:245 kdemain.cpp:247 kdemain.cpp:249 kdemain.cpp:251
+#: kdemain.cpp:253 kdemain.cpp:255 kdemain.cpp:257 kdemain.cpp:259
+#: kdemain.cpp:261 kdemain.cpp:263 kdemain.cpp:265
+#, kde-format
+msgid "Development & Patches"
+msgstr "Utwickeln un Kodeplasters"
+
+#: kdemain.cpp:230
+#, kde-format
+msgid "Claudiu Covaci"
+msgstr "Claudiu Covaci"
+
+#: kdemain.cpp:232
+#, kde-format
+msgid "David Roberts"
+msgstr "David Roberts"
+
+#: kdemain.cpp:234
+#, kde-format
+msgid "Nikolas Zimmermann"
+msgstr "Nikolas Zimmermann"
+
+#: kdemain.cpp:236
+#, kde-format
+msgid "Jan Becker"
+msgstr "Jan Becker"
+
+#: kdemain.cpp:238
+#, kde-format
+msgid "Stefan Asserhäll"
+msgstr "Stefan Asserhäll"
+
+#: kdemain.cpp:240
+#, kde-format
+msgid "Laurent Montel"
+msgstr "Laurent Montel"
+
+#: kdemain.cpp:242
+#, kde-format
+msgid "Mayank Madan"
+msgstr "Mayank Madan"
+
+#: kdemain.cpp:244
+#, kde-format
+msgid "Prashanth Udupa"
+msgstr "Prashanth Udupa"
+
+#: kdemain.cpp:246
+#, kde-format
+msgid "Anne-Marie Mahfouf"
+msgstr "Anne-Marie Mahfouf"
+
+#: kdemain.cpp:248
+#, kde-format
+msgid "Josef Spillner"
+msgstr "Josef Spillner"
+
+#: kdemain.cpp:250
+#, kde-format
+msgid "Frerich Raabe"
+msgstr "Frerich Raabe"
+
+#: kdemain.cpp:252
+#, kde-format
+msgid "Frederik Gladhorn"
+msgstr "Frederik Gladhorn"
+
+#: kdemain.cpp:254
+#, kde-format
+msgid "Fredrik Höglund"
+msgstr "Fredrik Höglund"
+
+#: kdemain.cpp:256
+#, kde-format
+msgid "Albert Astals Cid"
+msgstr "Albert Astals Cid"
+
+#: kdemain.cpp:258
+#, kde-format
+msgid "Thomas Zander"
+msgstr "Thomas Zander"
+
+#: kdemain.cpp:260
+#, kde-format
+msgid "Joseph Wenninger"
+msgstr "Joseph Wenninger"
+
+#: kdemain.cpp:262
+#, kde-format
+msgid "Kris Thomsen"
+msgstr "Kris Thomsen"
+
+#: kdemain.cpp:264
+#, kde-format
+msgid "Daniel Molkentin"
+msgstr "Daniel Molkentin"
+
+#: kdemain.cpp:266
+#, kde-format
+msgid "Christophe Leske"
+msgstr "Christophe Leske"
+
+#: kdemain.cpp:267 kdemain.cpp:269 kdemain.cpp:271 kdemain.cpp:273
+#: kdemain.cpp:275 kdemain.cpp:277 kdemain.cpp:279 kdemain.cpp:281
+#: kdemain.cpp:283
+#, kde-format
+msgid "Platforms & Distributions"
+msgstr "Bedriefümgeven un Distributschonen"
+
+#: kdemain.cpp:268
+#, kde-format
+msgid "Sebastian Wiedenroth"
+msgstr "Sebastian Wiedenroth"
+
+#: kdemain.cpp:270
+#, kde-format
+msgid "Tim Sutton"
+msgstr "Tim Sutton"
+
+#: kdemain.cpp:272
+#, kde-format
+msgid "Christian Ehrlicher"
+msgstr "Christian Ehrlicher"
+
+#: kdemain.cpp:274
+#, kde-format
+msgid "Ralf Habacker"
+msgstr "Ralf Habacker"
+
+#: kdemain.cpp:276
+#, kde-format
+msgid "Steffen Joeris"
+msgstr "Steffen Joeris"
+
+#: kdemain.cpp:278
+#, kde-format
+msgid "Marcus Czeslinski"
+msgstr "Marcus Czeslinski"
+
+#: kdemain.cpp:280
+#, kde-format
+msgid "Marcus D. Hanwell"
+msgstr "Marcus D. Hanwell"
+
+#: kdemain.cpp:282
+#, kde-format
+msgid "Chitlesh Goorah"
+msgstr "Chitlesh Goorah"
+
+#: kdemain.cpp:284
+#, kde-format
+msgid "Nuno Pinheiro"
+msgstr "Nuno Pinheiro"
+
+#: kdemain.cpp:285 kdemain.cpp:287
+#, kde-format
+msgid "Artwork"
+msgstr "Billerwark"
+
+#: kdemain.cpp:290
+#, kde-format
+msgid "Luis Silva"
+msgstr "Luis Silva"
+
+#: kdemain.cpp:291 kdemain.cpp:293 kdemain.cpp:295 kdemain.cpp:297
+#: kdemain.cpp:299 kdemain.cpp:301 kdemain.cpp:303 kdemain.cpp:305
+#: kdemain.cpp:307 kdemain.cpp:309
+#, kde-format
+msgid "Various Suggestions & Testing"
+msgstr "Verscheden Vörslääg un Utproberen"
+
+#: kdemain.cpp:292
+#, kde-format
+msgid "Stefan Jordan"
+msgstr "Stefan Jordan"
+
+#: kdemain.cpp:294
+#, kde-format
+msgid "Robert Scott"
+msgstr "Robert Scott"
+
+#: kdemain.cpp:296
+#, kde-format
+msgid "Lubos Petrovic"
+msgstr "Lubos Petrovic"
+
+#: kdemain.cpp:298
+#, kde-format
+msgid "Benoit Sigoure"
+msgstr "Benoit Sigoure"
+
+#: kdemain.cpp:300
+#, kde-format
+msgid "Martin Konold"
+msgstr "Martin Konold"
+
+#: kdemain.cpp:302
+#, kde-format
+msgid "Matthias Welwarsky"
+msgstr "Matthias Welwarsky"
+
+#: kdemain.cpp:304
+#, kde-format
+msgid "Rainer Endres"
+msgstr "Rainer Endres"
+
+#: kdemain.cpp:306
+#, kde-format
+msgid "Ralf Gesellensetter"
+msgstr "Ralf Gesellensetter"
+
+#: kdemain.cpp:308
+#, kde-format
+msgid "Tim Alder"
+msgstr "Tim Alder"
+
+#: kdemain.cpp:310
+#, kde-format
+msgid "John Layt"
+msgstr "John Layt"
+
+#: kdemain.cpp:311
+#, kde-format
+msgid ""
+"Special thanks for providing an important source of inspiration by creating "
+"Marble's predecessor \"Kartographer\"."
+msgstr ""
+"Besünner Dank för't Praatstellen vun en wichtig Ideenborn, Marble sien "
+"Vörahn „Kartographer“."
+
+#: kdemain.cpp:327
+#, kde-format
+msgid "Enable debug output"
+msgstr "Fehlersöök-Utgaav anmaken"
+
+#: kdemain.cpp:329
+#, kde-format
+msgid "Display OSM placemarks according to the level selected"
+msgstr ""
+
+#: kdemain.cpp:331
+#, kde-format
+msgid "Make a time measurement to check performance"
+msgstr "De Tiet as Maat för de Leisten meten"
+
+#: kdemain.cpp:333
+#, kde-format
+msgid "Show frame rate"
+msgstr "Bildrate wiesen"
+
+#: kdemain.cpp:335
+#, kde-format
+msgid "Show tile IDs"
+msgstr "IDs wiesen"
+
+#: kdemain.cpp:337
+#, kde-format
+msgid "Show time spent in each layer"
+msgstr "Tiet för elk Laag wiesen"
+
+#: kdemain.cpp:339
+#, fuzzy, kde-format
+#| msgid "Use a different directory which contains map data"
+msgid "Use a different directory <directory> which contains map data."
+msgstr "En anner Orner för de Koortendaten bruken"
+
+#: kdemain.cpp:341
+#, kde-format
+msgid "Do not use the interface optimized for small screens"
+msgstr "De för lütte Schirmen topasste Koppelsteed nich bruken"
+
+#: kdemain.cpp:342
+#, kde-format
+msgid "Use the interface optimized for small screens"
+msgstr "De för lütte Schirmen topasste Koppelsteed bruken"
+
+#: kdemain.cpp:344
+#, kde-format
+msgid "Do not use the interface optimized for high resolutions"
+msgstr "De för hoge Oplösen topasste Koppelsteed nich bruken"
+
+#: kdemain.cpp:345
+#, kde-format
+msgid "Use the interface optimized for high resolutions"
+msgstr "De för hoge Oplösen topasste Koppelsteed bruken"
+
+#: kdemain.cpp:347
+#, fuzzy, kde-format
+#| msgid "Show map at given lat lon coordinates"
+msgid "Show map at given lat lon <coordinates>"
+msgstr "Koort för angeven klassch Koordinaten wiesen"
+
+#: kdemain.cpp:349
+#, fuzzy, kde-format
+#| msgid "Show map at given geo uri"
+msgid "Show map at given geo <uri>"
+msgstr "Koort för angeven Geo-URI wiesen"
+
+#: kdemain.cpp:351
+#, kde-format
+msgid "Set the distance of the observer to the globe (in km)"
+msgstr "Den Kiekafstand to den Eerball (in km) angeven"
+
+#: kdemain.cpp:353
+#, fuzzy, kde-format
+#| msgid "Use map id (e.g. \"earth/openstreetmap/openstreetmap.dgml\")"
+msgid "Use map <id> (e.g. \"earth/openstreetmap/openstreetmap.dgml\")"
+msgstr "Koortbeteker bruken (a.B. „earth/openstreetmap/openstreetmap.dgml“)"
+
+#: kdemain.cpp:355
+#, kde-format
+msgid "One or more placemark files to be opened"
+msgstr "Een oder mehr Steedmark-Dateien, de Du opmaken wullt"
+
+#. i18n: ectx: label, entry, group (Time)
+#: marble.kcfg:58
+#, kde-format
+msgid "The date and time of marble clock"
+msgstr "Datum un Tiet vun de Marble-Klock"
+
+#. i18n: ectx: label, entry, group (Time)
+#: marble.kcfg:61
+#, kde-format
+msgid "The speed of marble clock"
+msgstr "Dat Tempo vun de Marble-Klock"
+
+#. i18n: ectx: label, entry, group (View)
+#: marble.kcfg:107
+#, kde-format
+msgid "The unit chosen to measure distances."
+msgstr "De Eenheit, in de Afstänn meten warrt"
+
+#. i18n: ectx: label, entry, group (View)
+#: marble.kcfg:115
+#, kde-format
+msgid "The unit chosen to measure angles."
+msgstr "De Eenheit, in de Winkels meten warrt"
+
+#. i18n: ectx: label, entry, group (View)
+#: marble.kcfg:124
+#, kde-format
+msgid "The quality at which a still map gets painted."
+msgstr "De Gööd, mit de en stillstahn Koort wiest warrt"
+
+#. i18n: ectx: label, entry, group (View)
+#: marble.kcfg:135
+#, kde-format
+msgid "The quality at which an animated map gets painted."
+msgstr "De Gööd, mit de en animeert Koort wiest warrt"
+
+#. i18n: ectx: label, entry, group (View)
+#: marble.kcfg:146
+#, kde-format
+msgid "The localization of the labels."
+msgstr "De Spraak vun de Betekers"
+
+#. i18n: ectx: label, entry (mapFont), group (View)
+#: marble.kcfg:155
+#, kde-format
+msgid "The general font used on the map."
+msgstr "Allmeen de Schriftoort op de Koort"
+
+#. i18n: ectx: label, entry (lastFileOpenDir), group (View)
+#: marble.kcfg:159
+#, kde-format
+msgid "The last directory that was opened by File->Open."
+msgstr "De Orner, de tolest mit „Datei -> Opmaken“ opmaakt wöör"
+
+#. i18n: ectx: label, entry, group (Navigation)
+#: marble.kcfg:179
+#, kde-format
+msgid "The behaviour of the planet's axis on mouse dragging."
+msgstr "Dat Bedregen vun den Planet sien Ass bi't Trecken mit de Muus"
+
+#. i18n: ectx: label, entry, group (Navigation)
+#: marble.kcfg:187
+#, kde-format
+msgid "The location shown on application startup."
+msgstr "De Steed, de bi't Starten wiest warrt"
+
+#. i18n: ectx: label, entry, group (Navigation)
+#: marble.kcfg:201
+#, kde-format
+msgid "Display animation on voyage to target."
+msgstr "Op den Floog na't Teel Animeren wiesen"
+
+#. i18n: ectx: label, entry, group (Navigation)
+#: marble.kcfg:205
+#, kde-format
+msgid "The external OpenStreetMap editor application"
+msgstr "Dat externe Editorprogramm för OpenStreetMap"
+
+#. i18n: ectx: label, entry, group (Cache)
+#: marble.kcfg:211
+#, kde-format
+msgid "Cache for tiles reserved in the physical memory."
+msgstr ""
+"För Kacheln reserveert Twischenspieker binnen den phyikaalschen Spieker"
+
+#. i18n: ectx: label, entry, group (Cache)
+#: marble.kcfg:217
+#, kde-format
+msgid "Maximum space on the hard disk that can be used to store tiles."
+msgstr ""
+"De hööchste Ruum op de Fastplaat, de för't Wohren vun Kacheln bruukt warrn "
+"dörv"
+
+#. i18n: ectx: label, entry (proxyUrl), group (Cache)
+#: marble.kcfg:223
+#, kde-format
+msgid "URL for the proxy server."
+msgstr "URL för den Proxy-Server"
+
+#. i18n: ectx: label, entry, group (Cache)
+#: marble.kcfg:227
+#, kde-format
+msgid "Port for the proxy server."
+msgstr "Port för den Proxy-Server"
+
+#. i18n: ectx: label, entry (proxyUser), group (Cache)
+#: marble.kcfg:233
+#, kde-format
+msgid "Username for authorization."
+msgstr "Brukernaam för de Identiteetprööv"
+
+#. i18n: ectx: label, entry (proxyPass), group (Cache)
+#: marble.kcfg:236
+#, kde-format
+msgid "Password for authorization."
+msgstr "Passwoort för de Identiteetprööv"
+
+#. i18n: ectx: label, entry (proxyHttp), group (Cache)
+#: marble.kcfg:239
+#, kde-format
+msgid "Proxy type is HTTP"
+msgstr "Proxy-Typ is HTTP"
+
+#. i18n: ectx: label, entry (proxySocks5), group (Cache)
+#: marble.kcfg:250
+#, kde-format
+msgid "Proxy type is Socks5"
+msgstr "Proxy-Typ is Socks5"
+
+#. i18n: ectx: label, entry (proxyAuth), group (Cache)
+#: marble.kcfg:254
+#, kde-format
+msgid "Proxy requires Authentication"
+msgstr "Proxy pröövt Identiteet"
+
+#. i18n: ectx: label, entry (activePositionTrackingPlugin), group (Plugins)
+#: marble.kcfg:260
+#, kde-format
+msgid "The position tracking plugin used to determine the current location"
+msgstr "Dat Stedentreckermoduul, mit dat de aktuelle Steed fastleggt warrt"
+
+#: marble_part.cpp:102
+#, kde-format
+msgid "Position: %1"
+msgstr "Positschoon: %1"
+
+#: marble_part.cpp:103
+#, kde-format
+msgid "Altitude: %1"
+msgstr "Hööchde: %1"
+
+#: marble_part.cpp:104
+#, kde-format
+msgid "Tile Zoom Level: %1"
+msgstr "Kachel-Ansichtgrött: %1"
+
+#: marble_part.cpp:105
+#, kde-format
+msgid "Time: %1"
+msgstr "Tiet: %1"
+
+#: marble_part.cpp:167
+#, kde-format
+msgid ""
+"Sorry, unable to open '%1':\n"
+"'%2'"
+msgstr ""
+
+#: marble_part.cpp:168
+#, fuzzy, kde-format
+#| msgid "File not accessible"
+msgid "File not readable"
+msgstr "Keen Togriep op Datei"
+
+#: marble_part.cpp:214
+#, kde-format
+msgid "marble_part"
+msgstr "marble_part"
+
+#: marble_part.cpp:217
+#, kde-format
+msgid "A Virtual Globe"
+msgstr "En virtuell Globus"
+
+#: marble_part.cpp:231
+#, kde-format
+msgid "Sorry, unable to open '%1'. The file is not accessible."
+msgstr "„%1“ lett sik nich opmaken, deit mi leed. Du hest keen Togriep dor op."
+
+#: marble_part.cpp:232
+#, kde-format
+msgid "File not accessible"
+msgstr "Keen Togriep op Datei"
+
+#: marble_part.cpp:253
+#, kde-format
+msgid "All Supported Files"
+msgstr "All ünnerstütt Dateien"
+
+#: marble_part.cpp:259
+#, fuzzy, kde-format
+#| msgid "Open File"
+msgctxt "@title:window"
+msgid "Open File"
+msgstr "Datei opmaken"
+
+#: marble_part.cpp:276
+#, fuzzy, kde-format
+#| msgid "Export Map"
+msgctxt "@title:window"
+msgid "Export Map"
+msgstr "Koort exporteren"
+
+#: marble_part.cpp:277
+#, kde-format
+msgid "Images *.jpg *.png"
+msgstr "Biller *.jpg *.png"
+
+#: marble_part.cpp:291
+#, kde-format
+msgctxt "Application name"
+msgid "Marble"
+msgstr "Marble"
+
+#: marble_part.cpp:292
+#, kde-format
+msgid "An error occurred while trying to save the file.\n"
+msgstr "Bi den Versöök, de Datei to sekern is en Fehler passeert.\n"
+
+#: marble_part.cpp:483
+#, kde-format
+msgid "Unnamed"
+msgstr "Ahn Naam"
+
+#: marble_part.cpp:714
+#, kde-format
+msgctxt "Action for downloading an entire region of a map"
+msgid "Download Region..."
+msgstr "Rebeet daalladen..."
+
+#: marble_part.cpp:728
+#, kde-format
+msgctxt "Action for saving the map to a file"
+msgid "&Export Map..."
+msgstr "Koort &exporteren..."
+
+#: marble_part.cpp:737
+#, kde-format
+msgctxt "Action for toggling offline mode"
+msgid "&Work Offline"
+msgstr "&Afkoppeln"
+
+#: marble_part.cpp:747
+#, kde-format
+msgctxt "Action for copying the map to the clipboard"
+msgid "&Copy Map"
+msgstr "&Koort koperen"
+
+#: marble_part.cpp:754
+#, kde-format
+msgctxt "Action for copying the coordinates to the clipboard"
+msgid "C&opy Coordinates"
+msgstr "K&oordinaten koperen"
+
+#: marble_part.cpp:762
+#, kde-format
+msgctxt "Action for opening a file"
+msgid "&Open..."
+msgstr "&Opmaken..."
+
+#: marble_part.cpp:769
+#, kde-format
+msgctxt "Action for downloading maps (GHNS)"
+msgid "Download Maps..."
+msgstr "Koorten daalladen..."
+
+#: marble_part.cpp:772
+#, kde-format
+msgctxt "Status tip"
+msgid "Download new maps"
+msgstr "Nieg Koorten daalladen"
+
+#: marble_part.cpp:778
+#, kde-format
+msgctxt "Action for creating new maps"
+msgid "&Create a New Map..."
+msgstr "Nieg Koort &opstellen…"
+
+#: marble_part.cpp:783
+#, kde-format
+msgctxt "Status tip"
+msgid "A wizard guides you through the creation of your own map theme."
+msgstr "En Hölper, mit den Du Dien egen Koortmuster opstellen kannst"
+
+#: marble_part.cpp:810
+#, kde-format
+msgctxt "Action for toggling clouds"
+msgid "&Clouds"
+msgstr "&Wulken"
+
+#: marble_part.cpp:817
+#, kde-format
+msgctxt "Action for sun control dialog"
+msgid "S&un Control..."
+msgstr "&Sünn-Instellen..."
+
+#: marble_part.cpp:827
+#, kde-format
+msgctxt "Action for time control dialog"
+msgid "&Time Control..."
+msgstr "&Tiet-Instellen..."
+
+#: marble_part.cpp:836
+#, kde-format
+msgctxt "Action for locking float items on the map"
+msgid "Lock Position"
+msgstr "Steed fastsetten"
+
+#: marble_part.cpp:847
+#, kde-format
+msgid "Show Shadow"
+msgstr "Schadden wiesen"
+
+#: marble_part.cpp:850
+#, kde-format
+msgid "Hide Shadow"
+msgstr "Schadden versteken"
+
+#: marble_part.cpp:851
+#, kde-format
+msgid "Shows and hides the shadow of the sun"
+msgstr "Wiest oder verstickt den Sünnschadden"
+
+#: marble_part.cpp:855
+#, kde-format
+msgid "Show sun icon on the Sub-Solar Point"
+msgstr "Sünnlüttbild op den Punkt nerrn de Sünn wiesen"
+
+#: marble_part.cpp:857
+#, kde-format
+msgid "Hide sun icon on the Sub-Solar Point"
+msgstr "Sünnlüttbild nich wiesen"
+
+#: marble_part.cpp:858
+#, kde-format
+msgid "Show sun icon on the sub-solar point"
+msgstr "Sünnlüttbild op den Punkt nerrn de Sünn wiesen"
+
+#: marble_part.cpp:863
+#, kde-format
+msgid "Lock Globe to the Sub-Solar Point"
+msgstr "Eerball op den Punkt nerrn de Sünn fastsetten"
+
+#: marble_part.cpp:865
+#, kde-format
+msgid "Unlock Globe to the Sub-Solar Point"
+msgstr "Eerball nich mehr op den Punkt nerrn de Sünn fastsetten"
+
+#: marble_part.cpp:866
+#, kde-format
+msgid "Lock globe to the sub-solar point"
+msgstr "Eerball op den Punkt nerrn de Sünn fastsetten"
+
+#: marble_part.cpp:881
+#, fuzzy, kde-format
+#| msgctxt "Add Bookmark"
+#| msgid "&Add Bookmark"
+msgctxt "Add Bookmark"
+msgid "Add &Bookmark..."
+msgstr "&Leesteken tofögen"
+
+#: marble_part.cpp:889
+#, kde-format
+msgctxt "Show Bookmarks"
+msgid "Show &Bookmarks"
+msgstr "&Leestekens wiesen"
+
+#: marble_part.cpp:890
+#, kde-format
+msgid "Show or hide bookmarks in the map"
+msgstr "Leestekens op de Koort wiesen oder versteken"
+
+#: marble_part.cpp:898
+#, kde-format
+msgid "&Set Home Location"
+msgstr "Heimatoort &fastleggen"
+
+#: marble_part.cpp:905
+#, fuzzy, kde-format
+#| msgctxt "Manage Bookmarks"
+#| msgid "&Manage Bookmarks"
+msgctxt "Manage Bookmarks"
+msgid "&Manage Bookmarks..."
+msgstr "&Leestekens plegen"
+
+#: marble_part.cpp:917
+#, fuzzy, kde-format
+#| msgctxt "Edit the map in an external application"
+#| msgid "&Edit Map"
+msgctxt "Edit the map in an external application"
+msgid "&Edit Map..."
+msgstr "Koort b&ewerken"
+
+#: marble_part.cpp:925
+#, fuzzy, kde-format
+#| msgid "Record tour"
+msgid "&Record Movie"
+msgstr "Törn opnehmen"
+
+#: marble_part.cpp:927
+#, kde-format
+msgid "Records a movie of the globe"
+msgstr ""
+
+#: marble_part.cpp:933
+#, kde-format
+msgid "&Stop Recording"
+msgstr ""
+
+#: marble_part.cpp:935
+#, kde-format
+msgid "Stop recording a movie of the globe"
+msgstr ""
+
+#: marble_part.cpp:1287
+#, kde-format
+msgctxt "Action for toggling"
+msgid "Show Position"
+msgstr "Steed wiesen"
+
+#: marble_part.cpp:1289
+#, kde-format
+msgctxt "Action for toggling"
+msgid "Show Date and Time"
+msgstr "Datum un Tiet wiesen"
+
+#: marble_part.cpp:1291
+#, kde-format
+msgctxt "Action for toggling"
+msgid "Show Altitude"
+msgstr "Hööchde wiesen"
+
+#: marble_part.cpp:1294
+#, kde-format
+msgctxt "Action for toggling"
+msgid "Show Tile Zoom Level"
+msgstr "Kachel-Ansichtgrött wiesen"
+
+#: marble_part.cpp:1296
+#, kde-format
+msgctxt "Action for toggling"
+msgid "Show Download Progress Bar"
+msgstr "Daallaad-Vörankamenbalken wiesen"
+
+#: marble_part.cpp:1391
+#, kde-format
+msgid "View"
+msgstr "Ansicht"
+
+#: marble_part.cpp:1402
+#, kde-format
+msgid "Navigation"
+msgstr "Navigatschoon"
+
+#: marble_part.cpp:1413
+#, kde-format
+msgid "Cache & Proxy"
+msgstr "Twischenspieker un Proxy"
+
+#: marble_part.cpp:1426
+#, kde-format
+msgid "Date & Time"
+msgstr "Datum un Tiet"
+
+#: marble_part.cpp:1434
+#, kde-format
+msgid "Synchronization"
+msgstr "Synkroniseren"
+
+#: marble_part.cpp:1447
+#, kde-format
+msgid "Routing"
+msgstr "Weegplanen"
+
+#: marble_part.cpp:1455
+#, kde-format
+msgid "Plugins"
+msgstr "Modulen"
+
+#. i18n: ectx: Menu (file)
+#: marble_part.rc:6 marbleui.rc:5
+#, kde-format
+msgid "&File"
+msgstr "&Datei"
+
+#. i18n: ectx: Menu (edit)
+#: marble_part.rc:21 marbleui.rc:14
+#, kde-format
+msgid "&Edit"
+msgstr "&Bewerken"
+
+#. i18n: ectx: Menu (view)
+#: marble_part.rc:31 marbleui.rc:18
+#, kde-format
+msgid "&View"
+msgstr "&Ansicht"
+
+#. i18n: ectx: Menu (infoboxes)
+#: marble_part.rc:36
+#, kde-format
+msgid "&Info Boxes"
+msgstr "&Infofinstern"
+
+#. i18n: ectx: Menu (onlineservices)
+#: marble_part.rc:42
+#, kde-format
+msgid "&Online Services"
+msgstr "&Nettdeensten"
+
+#. i18n: ectx: Menu (settings)
+#: marble_part.rc:55 marbleui.rc:31
+#, kde-format
+msgid "&Settings"
+msgstr "&Instellen"
+
+#. i18n: ectx: Menu (panels)
+#: marble_part.rc:59
+#, kde-format
+msgid "&Panels"
+msgstr "&Paneels"
+
+#. i18n: ectx: Menu (viewSize)
+#: marble_part.rc:65
+#, kde-format
+msgid "&View Size"
+msgstr "&Ansichtgrött"
+
+#. i18n: ectx: Menu (bookmarks)
+#: marble_part.rc:73 marbleui.rc:29
+#, kde-format
+msgid "&Bookmarks"
+msgstr "&Leestekens"
+
+#. i18n: ectx: ToolBar (mainToolBar)
+#: marble_part.rc:84 marbleui.rc:36
+#, kde-format
+msgid "Main Toolbar"
+msgstr "Hööft-Warktüüchbalken"
+
+#. i18n: ectx: ToolBar (pluginToolBar)
+#: marble_part.rc:97
+#, kde-format
+msgid "Edit Toolbar"
+msgstr "Warktüüchbalken bewerken"
+
+#~ msgid "The graphics system that is used by Qt to render the graphics."
+#~ msgstr "Dat Grafiksysteem, dat Qt för de Grafiken bruukt"
+
+#~ msgid "Native"
+#~ msgstr "Normaal"
+
+#~ msgid "Native (X11)"
+#~ msgstr "Normaal (X11)"
+
+#~ msgid "Native (Mac OS X Core Graphics)"
+#~ msgstr "Normaal (Grafikkarn för MacOS X)"
+
+#~ msgid ""
+#~ "You have decided to run Marble with a different graphics system.\n"
+#~ "For this change to become effective, Marble has to be restarted.\n"
+#~ "Please close the application and start Marble again."
+#~ msgstr ""
+#~ "Du wullt Marble mit en anner Grafiksysteem utföhren.\n"
+#~ "Du muttst Marble nieg starten, ehr disse Ännern bruukt warrt.\n"
+#~ "Maak Marble bitte to un roop dat denn nochmaal nieg op."
+
+#~ msgid "Graphics System Change"
+#~ msgstr "Grafiksysteem ännert"
+
+#~ msgid "Night Sky"
+#~ msgstr "Nachtheven"
+
+#~ msgid ""
+#~ "<p>The <i>night sky</i>.</p><p>Displays the stars and constellations at "
+#~ "night.</p>"
+#~ msgstr ""
+#~ "<p>De <i>Nachtheven</i>.</p><p>Wiest de Steerns un Steernbiller bi Nacht."
+#~ "</p>"
+
+#~ msgid "Mountain"
+#~ msgstr "Barg"
+
+#~ msgid "Volcano"
+#~ msgstr "Vulkaan"
+
+#~ msgid "Geographic Pole"
+#~ msgstr "Geograafsch Pool"
+
+#~ msgid "Magnetic Pole"
+#~ msgstr "Magneetsch Pool"
+
+#~ msgid "Airport"
+#~ msgstr "Flegerhaven"
+
+#~ msgid "Shipwreck"
+#~ msgstr "Wrack"
+
+#~ msgid "Astronomical Observatory"
+#~ msgstr "Astronoomsch Steernwacht"
+
+#~ msgid ""
+#~ "<p>The moon.</p><p>The map is based on data from the Clementine Moon "
+#~ "mission (UVVIS Basemap Mosaic). Credits: NASA/SDIO, Courtesy <a href="
+#~ "\"http://astrogeology.usgs.gov\">USGS Astrogeology Research Program</a></"
+#~ "p>"
+#~ msgstr ""
+#~ "<p>De Maand.</p><p>De Koort baseert op den Daten vun de Maandfloog "
+#~ "\"Clementine\" (UVVIS Basemap Mosaic). Dank an: NASA/SDIO, <a href="
+#~ "\"http://astrogeology.usgs.gov\">USGS Astrogeology Research Program</a></"
+#~ "p>"
+
+#~ msgid "Explore the Moon"
+#~ msgstr "Op'n Maand ümkieken"
+
+#~ msgid "Landing Sites"
+#~ msgstr "Landesteden"
+
+#~ msgid "Craters"
+#~ msgstr "Kraters"
+
+#~ msgid "Maria"
+#~ msgstr "Meren"
+
+#~ msgid "Other features"
+#~ msgstr "Anner Markmalen"
+
+#~ msgid ""
+#~ "<a href=\"tour://moon/clementine/tour.kml\">Play a tour of different "
+#~ "landing sites.</a>"
+#~ msgstr ""
+#~ "<a href=\"tour://moon/clementine/tour.kml\">En Törn mit verscheden "
+#~ "Landesteden afspelen.</a>"
+
+#~ msgid "Manned landing site"
+#~ msgstr "Bemannt Landesteed"
+
+#~ msgid "Robotic rover"
+#~ msgstr "Automaatsch Koor"
+
+#~ msgid "Unmanned soft landing"
+#~ msgstr "Nich bemannt week Lannen"
+
+#~ msgid "Unmanned hard landing"
+#~ msgstr "Nich bemannt hart Lannen"
+
+#~ msgid "Crater, impact crater"
+#~ msgstr "Crater, Inslagkrater"
+
+#~ msgid "Mons, mountain"
+#~ msgstr "Mons, Barg"
+
+#~ msgid "Vallis, valley"
+#~ msgstr "Vallis, Daal"
+
+#~ msgid "Selenographic Pole"
+#~ msgstr "Maand-Geograafsch Pool"
+
+#~ msgid "Plain Map"
+#~ msgstr "Eenfach Koort"
+
+#~ msgid ""
+#~ "<p>A <i>plain map</i>.</p><p>It uses vector lines to mark coastlines and "
+#~ "country borders, etc...</p>"
+#~ msgstr ""
+#~ "<p>En <i>eenfach Koort</i>.</p><p> Se bruukt Vektorlienen för de Küsten, "
+#~ "Landgrenzen usw.</p>"
+
+#~ msgid "Urban Areas"
+#~ msgstr "Stadtrebeden"
+
+#~ msgid "Boundaries"
+#~ msgstr "Grenzen"
+
+#~ msgid "Water Bodies"
+#~ msgstr "Water"
+
+#~ msgid "Ice and Glaciers"
+#~ msgstr "Ies un Gletschers"
+
+#~ msgid "International"
+#~ msgstr "Internatschonaal"
+
+#~ msgid "State"
+#~ msgstr "Staat"
+
+#~ msgid "Disputed Areas"
+#~ msgstr "Ümstreden Rebeden"
+
+#~ msgid "Maritime Borders"
+#~ msgstr "Seegrenzen"
+
+#~ msgid "Lake"
+#~ msgstr "See"
+
+#~ msgid "Historic Lake"
+#~ msgstr "Verleden See"
+
+#~ msgid "Playa"
+#~ msgstr "Saltpann"
+
+#~ msgid "River"
+#~ msgstr "Stroom"
+
+#~ msgid "Glaciers"
+#~ msgstr "Gletschers"
+
+#~ msgid "Antarctic Iceshelves"
+#~ msgstr "Antarktsch Iesschelf"
+
+#~ msgid "Temperature (July)"
+#~ msgstr "Temperatuur (Juli)"
+
+#~ msgid "A map which shows the average temperature in July."
+#~ msgstr "En Koort, de de Dörsnittstemperatuur in'n Juli wiest."
+
+#~ msgid "42&deg;C"
+#~ msgstr "42&deg;C"
+
+#~ msgid "32&deg;C"
+#~ msgstr "32&deg;C"
+
+#~ msgid "23&deg;C"
+#~ msgstr "23&deg;C"
+
+#~ msgid "12&deg;C"
+#~ msgstr "12&deg;C"
+
+#~ msgid "1&deg;C"
+#~ msgstr "1&deg;C"
+
+#~ msgid "-10&deg;C"
+#~ msgstr "-10&deg;C"
+
+#~ msgid "-21&deg;C"
+#~ msgstr "-21&deg;C"
+
+#~ msgid "-32&deg;C"
+#~ msgstr "-32&deg;C"
+
+#~ msgid "-41&deg;C"
+#~ msgstr "-41&deg;C"
+
+#~ msgid "-69&deg;C"
+#~ msgstr "-69&deg;C"
+
+#~ msgid "Earth at Night"
+#~ msgstr "De Eer bi Nacht"
+
+#~ msgid ""
+#~ "This image of <i>Earth's city lights</i> was created with data from the "
+#~ "Defense Meteorological Satellite Program (DMSP) Operational Linescan "
+#~ "System (OLS)."
+#~ msgstr ""
+#~ "Dit Bild vun de <i>Lichten vun de Städer op de Eer</i> wöör mit Daten ut "
+#~ "dat \"Defense Meteorological Satellite Program\" (DMSP) un dat "
+#~ "\"Operational Linescan System\" (OLS) opstellt."
+
+#~ msgid "Surface"
+#~ msgstr "Böversiet"
+
+#~ msgid "Light terrain"
+#~ msgstr "Hell Landschap"
+
+#~ msgid "Dark terrain"
+#~ msgstr "Düüster Landschap"
+
+#~ msgid "Water"
+#~ msgstr "Water"
+
+#~ msgid "Atlas"
+#~ msgstr "Atlas"
+
+#~ msgid ""
+#~ "<p>A <i>classic topographic map</i>.</p><p>It uses vector lines to mark "
+#~ "coastlines, country borders etc. and bitmap graphics to create the height "
+#~ "relief.</p>"
+#~ msgstr ""
+#~ "<p>En <i>klassch topograafsch Koort</i>.</p><p> Se bruukt Vektorlienen "
+#~ "för de Küsten, Landgrenzen usw. un Pixelgrafik för't Hööchdenrelief.</p>"
+
+#~ msgid "Relief"
+#~ msgstr "Struktuur:"
+
+#~ msgid "Elevation"
+#~ msgstr "Hööchd"
+
+#~ msgid "7000 m"
+#~ msgstr "7000 m"
+
+#~ msgid "5000 m"
+#~ msgstr "5000 m"
+
+#~ msgid "3500 m"
+#~ msgstr "3500 m"
+
+#~ msgid "2000 m"
+#~ msgstr "2000 m"
+
+#~ msgid "1000 m"
+#~ msgstr "1000 m"
+
+#~ msgid "500 m"
+#~ msgstr "500 m"
+
+#~ msgid "200 m"
+#~ msgstr "200 m"
+
+#~ msgid "50 m"
+#~ msgstr "50 m"
+
+#~ msgid "0 m"
+#~ msgstr "0 m"
+
+#~ msgid "0 m (Water)"
+#~ msgstr "0 m (Water)"
+
+#~ msgid "-50 m"
+#~ msgstr "-50 m"
+
+#~ msgid "-200 m"
+#~ msgstr "-200 m"
+
+#~ msgid "-2000 m"
+#~ msgstr "-2000 m"
+
+#~ msgid "-4000 m"
+#~ msgstr "-4000 m"
+
+#~ msgid "-6500 m"
+#~ msgstr "-6500 m"
+
+#~ msgid "-11000 m"
+#~ msgstr "-11000 m"
+
+#~ msgid "Temperature (December)"
+#~ msgstr "Temperatuur (Dezember)"
+
+#~ msgid "A map which shows the average temperature in December."
+#~ msgstr "En Koort, de de Dörsnittstemperatuur in'n Dezember wiest."
+
+#~ msgid ""
+#~ "<p>A <i>global roadmap</i> created by the OpenStreetMap (OSM) project.</"
+#~ "p><p>OSM is an open community which creates free editable maps. The OSM "
+#~ "data was rendered using Mapnik.</p>"
+#~ msgstr ""
+#~ "<p>En <i>globaal Stratenkoort</i>, opstellt vun't \"OpenStreetMap (OSM)-"
+#~ "Projekt\".</p><p>\"OSM\" is en apen Gemeenschap, de free bewerkbor "
+#~ "Koorten opstellt. De OSM-Daten warrt mit \"Mapnik\" opstellt.</p>"
+
+#, fuzzy
+#~| msgid "Map Title:"
+#~ msgid "OSM Bitmap Tiles"
+#~ msgstr "Titel vun de Koort:"
+
+#, fuzzy
+#~| msgid "Explore the Moon"
+#~ msgid "Explore the Earth"
+#~ msgstr "Op'n Maand ümkieken"
+
+#~ msgid "Hillshading"
+#~ msgstr "Bargschaddens"
+
+#~ msgid "Transportation"
+#~ msgstr "Verkehr"
+
+#~ msgid "Areas"
+#~ msgstr "Rebeden"
+
+#~ msgid "Education"
+#~ msgstr "Lehren"
+
+#~ msgid "Financial"
+#~ msgstr "Geld"
+
+#~ msgid "Healthcare"
+#~ msgstr "Gesundheitspleeg"
+
+#~ msgid "Entertainment"
+#~ msgstr "Kortwiel"
+
+#~ msgid "Public Buildings"
+#~ msgstr "Apen Buu"
+
+#~ msgid "Accommodation"
+#~ msgstr "Övernachten"
+
+#~ msgid "Emergency"
+#~ msgstr "Nootfall"
+
+#~ msgid "Historic"
+#~ msgstr "Geschicht"
+
+#~ msgid "Food and Drinks"
+#~ msgstr "Eten un Drinken"
+
+#~ msgid "Shop"
+#~ msgstr "Laden"
+
+#, fuzzy
+#~| msgid ""
+#~| "<a href=\"tour://moon/clementine/tour.kml\">Play a tour of different "
+#~| "landing sites.</a>"
+#~ msgid ""
+#~ "<a href=\"tour://earth/openstreetmap/tour.kml\">Play a tour of popular "
+#~ "places.</a>"
+#~ msgstr ""
+#~ "<a href=\"tour://moon/clementine/tour.kml\">En Törn mit verscheden "
+#~ "Landesteden afspelen.</a>"
+
+#~ msgid "Motorway"
+#~ msgstr "Autobahn"
+
+#~ msgid "Trunk road"
+#~ msgstr "Feernstraat"
+
+#~ msgid "Primary road"
+#~ msgstr "Hööftstraat"
+
+#~ msgid "Secondary road"
+#~ msgstr "Nevenstraat"
+
+#~ msgid "Unclassified road"
+#~ msgstr "Nich inornt Straat"
+
+#~ msgid "Unsurfaced road"
+#~ msgstr "Schotterstraat"
+
+#~ msgid "Track"
+#~ msgstr "Padd"
+
+#~ msgid "Byway"
+#~ msgstr "Privaatpadd"
+
+#~ msgid "Bridleway"
+#~ msgstr "Riedpadd"
+
+#~ msgid "Cycleway"
+#~ msgstr "Radpadd"
+
+#~ msgid "Footway"
+#~ msgstr "Footpadd"
+
+#~ msgid "Railway station"
+#~ msgstr "Bahnhoff"
+
+#~ msgid "Railway"
+#~ msgstr "Iesenbahn"
+
+#~ msgid "Subway"
+#~ msgstr "U-Bahn"
+
+#~ msgid "Lightrail, tram"
+#~ msgstr "Stratenbahn"
+
+#~ msgid "Airport runway, taxiway"
+#~ msgstr "Flaaghaven-Lannbahn, Rullbahn"
+
+#~ msgid "Airport apron, terminal"
+#~ msgstr "Flaaghaven-Vörfeld, Gebüüd"
+
+#~ msgid "Administrative boundary"
+#~ msgstr "Verwaltengrenz"
+
+#~ msgid "Bridge"
+#~ msgstr "Brüch"
+
+#~ msgid "Tunnel"
+#~ msgstr "Tunnel"
+
+#~ msgid "Forest"
+#~ msgstr "Woold"
+
+#~ msgid "Wood"
+#~ msgstr "Holt"
+
+#~ msgid "Golf course"
+#~ msgstr "Golfplatz"
+
+#~ msgid "Park"
+#~ msgstr "Park"
+
+#~ msgid "Residential Area"
+#~ msgstr "Wahnrebeet"
+
+#~ msgid "Tourist attraction"
+#~ msgstr "Touristenattrakschoon"
+
+#~ msgid "Common, meadow"
+#~ msgstr "Weid, Wisch"
+
+#~ msgid "Retail area"
+#~ msgstr "Enkelhannelrebeet"
+
+#~ msgid "Industrial Area"
+#~ msgstr "Industrierebeet"
+
+#~ msgid "Commercial Area"
+#~ msgstr "Warvenrebeet"
+
+#~ msgid "Heathland"
+#~ msgstr "Heid"
+
+#~ msgid "Lake, reservoir"
+#~ msgstr "See"
+
+#~ msgid "Farm"
+#~ msgstr "Hoffsteed, Bueree"
+
+#~ msgid "Brownfield site"
+#~ msgstr "Opgeven Industrierebeet"
+
+#~ msgid "Cemetery"
+#~ msgstr "Karkhoff"
+
+#~ msgid "Allotments"
+#~ msgstr "Goorns"
+
+#~ msgid "Sports pitch"
+#~ msgstr "Sportplatz"
+
+#~ msgid "Sports centre"
+#~ msgstr "Sportsteed"
+
+#~ msgid "Nature reserve"
+#~ msgstr "Natuurschuulrebeet"
+
+#~ msgid "Military area"
+#~ msgstr "Militeersch Rebeet"
+
+#~ msgid "School, university"
+#~ msgstr "School, Universiteet"
+
+#~ msgid "Significant Building"
+#~ msgstr "Wichtig Buu"
+
+#~ msgid "Summit, peak"
+#~ msgstr "Tipp"
+
+#~ msgid "College"
+#~ msgstr "Hoochschool"
+
+#~ msgid "Kindergarten"
+#~ msgstr "Kinnergoorn"
+
+#~ msgid "Library"
+#~ msgstr "Bibliotheek"
+
+#~ msgid "School"
+#~ msgstr "School"
+
+#~ msgid "University"
+#~ msgstr "Universiteet"
+
+#~ msgid "ATM"
+#~ msgstr "Geldautomaat"
+
+#~ msgid "Bank"
+#~ msgstr "Bank"
+
+#~ msgid "Bureau de change"
+#~ msgstr "Wesselstuuv"
+
+#~ msgid "Dentist"
+#~ msgstr "Kusenklempner"
+
+#~ msgid "Doctors"
+#~ msgstr "Doktoren"
+
+#~ msgid "Pharmacy"
+#~ msgstr "Afteek"
+
+#~ msgid "Veterinary"
+#~ msgstr "Deertendokter"
+
+#~ msgid "Cinema"
+#~ msgstr "Kino"
+
+#~ msgid "Theatre"
+#~ msgstr "Theater"
+
+#~ msgid "Court"
+#~ msgstr "Gericht"
+
+#~ msgid "Embassy"
+#~ msgstr "Budschap"
+
+#~ msgid "Church"
+#~ msgstr "Kark"
+
+#~ msgid "Playground"
+#~ msgstr "Speelplatz"
+
+#~ msgid "Place of worship"
+#~ msgstr "Religioonssteden"
+
+#~ msgid "Post office"
+#~ msgstr "Post"
+
+#~ msgid "Public building"
+#~ msgstr "Apen Buu"
+
+#~ msgid "Toilets"
+#~ msgstr "Schiethüüs"
+
+#~ msgid "Hotel"
+#~ msgstr "Hotel"
+
+#~ msgid "Motel"
+#~ msgstr "Motel"
+
+#~ msgid "Hospital"
+#~ msgstr "Krankenhuus"
+
+#~ msgid "Fire station"
+#~ msgstr "Füerwacht"
+
+#~ msgid "Monument"
+#~ msgstr "Munjement"
+
+#~ msgid "Ruins"
+#~ msgstr "Ruinen"
+
+#~ msgid "Bar"
+#~ msgstr "Bar"
+
+#~ msgid "Biergarten"
+#~ msgstr "Beergoorn"
+
+#~ msgid "Cafe"
+#~ msgstr "Café"
+
+#~ msgid "Drinking water"
+#~ msgstr "Drinkwater"
+
+#~ msgid "Fast Food"
+#~ msgstr "Straatfoder"
+
+#~ msgid "Ice Cream"
+#~ msgstr "Ies"
+
+#~ msgid "Pub"
+#~ msgstr "Kroog"
+
+#~ msgid "Restaurant"
+#~ msgstr "Eethuus"
+
+#~ msgid "Alcohol"
+#~ msgstr "Snaps"
+
+#~ msgid "Bakery"
+#~ msgstr "Bäcker"
+
+#~ msgid "Books"
+#~ msgstr "Böker"
+
+#~ msgid "Car"
+#~ msgstr "Auto"
+
+#~ msgid "Clothes"
+#~ msgstr "Kledaasch"
+
+#~ msgid "Convenience"
+#~ msgstr "Kommoodigkeit"
+
+#~ msgid "Gas"
+#~ msgstr "Benzin"
+
+#~ msgid "Gift"
+#~ msgstr "Gaav"
+
+#~ msgid "Precipitation (July)"
+#~ msgstr "Nedderslag (Juli)"
+
+#~ msgid ""
+#~ "A map which shows the average precipitation (rain/snow/hail/etc) in July."
+#~ msgstr ""
+#~ "En Koort, de de Dörsnittsnedderslagmengde (Regen, Snee, Hagel, usw.) in'n "
+#~ "Juli wiest."
+
+#~ msgid "Precipitation"
+#~ msgstr "Nedderslag"
+
+#~ msgid "0 mm"
+#~ msgstr "0 mm"
+
+#~ msgid "10 mm"
+#~ msgstr "10 mm"
+
+#~ msgid "40 mm"
+#~ msgstr "40 mm"
+
+#~ msgid "63 mm"
+#~ msgstr "63 mm"
+
+#~ msgid "89 mm"
+#~ msgstr "89 mm"
+
+#~ msgid "127 mm"
+#~ msgstr "127 mm"
+
+#~ msgid "256 mm"
+#~ msgstr "256 mm"
+
+#~ msgid "512 mm"
+#~ msgstr "512 mm"
+
+#~ msgid "1024 mm or more"
+#~ msgstr "1024 mm oder mehr"
+
+#~ msgid "Satellite View"
+#~ msgstr "Satellitenbild"
+
+#~ msgid ""
+#~ "<p>Earth as seen from Space.</p><p>The map is based on NASA's beautiful "
+#~ "\"Blue Marble Next Generation\" pictures. Credits: NASA's Earth "
+#~ "Observatory</p>"
+#~ msgstr ""
+#~ "<p>De Eer, ankeken vun den Weltruum ut.</p><p>De Koort buut op de NASA "
+#~ "ehr smuck \"Blue Marble Next Generation\"-Biller. Dank an de NASA ehr "
+#~ "Eerdsteernwacht.</p>"
+
+#~ msgid "Ice"
+#~ msgstr "Ies"
+
+#~ msgid "Vegetation"
+#~ msgstr "Planten"
+
+#~ msgid "Desert"
+#~ msgstr "Wööst"
+
+#~ msgid "Political Map"
+#~ msgstr "Politisch Koort"
+
+#~ msgid ""
+#~ "<p>A <i>Political Map</i>.</p><p>The theme displays various countries.</p>"
+#~ msgstr ""
+#~ "<p>En <i>politisch Koort</i>.</p><p>Dat Muster wiest verscheden Länner.</"
+#~ "p>"
+
+#~ msgid "Rivers"
+#~ msgstr "Strööm"
+
+#~ msgid "Precipitation (December)"
+#~ msgstr "Nedderslag (Dezember)"
+
+#~ msgid "A map which shows the average precipitation in December."
+#~ msgstr "En Koort, de de Dörsnittsnedderslagmengde in'n Dezember wiest."
+
+#~ msgid "SRTM Data"
+#~ msgstr "SRTM-Daten"
+
+#, fuzzy
+#~| msgid "Lines and Orientation"
+#~ msgid "Texts and illustrations"
+#~ msgstr "Lienen un Utrichten"
+
+#, fuzzy
+#~| msgid "Preference:"
+#~ msgid "Reference lines"
+#~ msgstr "Vörinstellen:"
+
+#~ msgid "Accurate Coastline"
+#~ msgstr "Akraat Waterkant"
+
+#~ msgid "Historical Map 1689"
+#~ msgstr "Geschichtkoort vun 1689"
+
+#~ msgid ""
+#~ "<i>Historical world map</i> from the year 1689 created by G. van Schagen "
+#~ "in Amsterdam."
+#~ msgstr ""
+#~ "<i>Geschichtkoort</i> ut dat Johr 1689, opstellt vun G. van Schagen in "
+#~ "Amsterdam."
+
+#~ msgid "Town"
+#~ msgstr "Stadt"
+
+#~ msgid "OpenStreetMap"
+#~ msgstr "OpenStreetMap"
+
+#~ msgid "Clouds"
+#~ msgstr "Wulken"
+
+#~ msgid ""
+#~ "A Real Time Cloud Map that gets updated every 3 hours. It uses GOES, "
+#~ "METEOSAT, and GMS satellite imagery downloaded from the Geostationary "
+#~ "Satellite Imagery page at Dundee University.  Credits: Hari Nair, Xplanet "
+#~ "Project"
+#~ msgstr ""
+#~ "En Echttiet-Wulkenkoort, de all dree Stünnen opfrischt warrt. Bruukt "
+#~ "warrt GOES-, METEOSAT- un GMS-Satellitenbiller, daallaadt vun de Dundee-"
+#~ "Universiteet ehr Siet mit eersynkroon Satellitenbiller. Dank an Hari "
+#~ "Nair, Schriever vun't Xplanet-Projekt."
+
+#~ msgid "Marble: Legend"
+#~ msgstr "Marble: Legenn"
+
+#~ msgid "<a href="
+#~ msgstr "<a href="
+
+#~ msgid "Population:"
+#~ msgstr "Inwahnertall:"
+
+#~ msgid "&gt; 1&nbsp;000&nbsp;000"
+#~ msgstr "&gt; 1.000.000"
+
+#~ msgid "&ge; 100&nbsp;000"
+#~ msgstr "&ge; 100.000"
+
+#~ msgid "&ge; 10&nbsp;000"
+#~ msgstr "&ge; 10.000"
+
+#~ msgid "&lt; 10&nbsp;000"
+#~ msgstr "&lt; 10.000"
+
+#~ msgid "<br/>"
+#~ msgstr "<br/>"
+
+#~ msgid "Capitals:"
+#~ msgstr "Hööftstäder:"
+
+#~ msgid "Red:&nbsp;Nation"
+#~ msgstr "Root:&nbsp;Land"
+
+#~ msgid "Orange:&nbsp;State"
+#~ msgstr "Orange:&nbsp;Bunnsland"
+
+#~ msgid "Yellow:&nbsp;County"
+#~ msgstr "Geel:&nbsp;Krink"
+
+#~ msgid "White:&nbsp;None"
+#~ msgstr "Witt:&nbsp;Nix"
+
+#~ msgid "<!-- ##customLegendEntries:all## -->"
+#~ msgstr "<!-- ##Egen Verkloren-Indrääg: All## -->"
+
+#, fuzzy
+#~| msgid "Marble"
+#~ msgid "Marble - Game"
+#~ msgstr "Marble"
+
+#~ msgid "The Earth"
+#~ msgstr "De Eer"
+
+#~ msgid "The Marble widget displays a virtual globe."
+#~ msgstr "Dat Marble-Stüerelement wiest en Globus."
+
+#~ msgid "Navigation Control"
+#~ msgstr "Navigatschoonkuntrull"
+
+#~ msgid "Use this control to navigate."
+#~ msgstr "Bruuk disse Kuntrull för't Stüern."
+
+#~ msgid "Show places"
+#~ msgstr "Steden wiesen"
+
+#~ msgid "Show relief"
+#~ msgstr "Struktuur wiesen"
+
+#~ msgid "Show scale bar"
+#~ msgstr "Maatbalken wiesen"
+
+#~ msgid "Show borders"
+#~ msgstr "Grenzen wiesen"
+
+#~ msgid "Show ice / snow"
+#~ msgstr "Ies un Snee wiesen"
+
+#~ msgid "Show compass"
+#~ msgstr "Kompass wiesen"
+
+#~ msgid "Show grid"
+#~ msgstr "Gadder wiesen"
+
+#~ msgid "Show rivers / lakes"
+#~ msgstr "Strööm /Seen wiesen"
+
+#~ msgid "Show elevation model"
+#~ msgstr "Hööchden wiesen"
+
+#~ msgid "Coordinates: "
+#~ msgstr "Koordinaten: "
+
+#~ msgid "URL:"
+#~ msgstr "URL:"
+
+#~ msgid "Name:"
+#~ msgstr "Naam:"
+
+#~ msgid "Bookmark Manager - Marble"
+#~ msgstr "Leesteken-Pleger - Marble"
+
+#~ msgid "Import Bookmarks..."
+#~ msgstr "Leestekens importeren…"
+
+#~ msgid "Export Bookmarks..."
+#~ msgstr "Leestekens exporteren…"
+
+#~ msgid "Folders"
+#~ msgstr "Ornern"
+
+#~ msgid "New"
+#~ msgstr "Nieg"
+
+#~ msgid "Rename"
+#~ msgstr "Ümnömen"
+
+#~ msgid "Delete"
+#~ msgstr "Wegmaken"
+
+#~ msgid "Bookmarks"
+#~ msgstr "Leestekens"
+
+#~ msgid "Edit"
+#~ msgstr "Bewerken"
+
+#~ msgid "Cloud Routes"
+#~ msgstr "Nettspieker-Weeg"
+
+#~ msgid "No route available."
+#~ msgstr "Keen Weg verföögbor."
+
+#~ msgid "Current Location"
+#~ msgstr "Aktuell Steed"
+
+#~ msgid "Position Tracking"
+#~ msgstr "Positschoon nagahn"
+
+#~ msgid "Disabled"
+#~ msgstr "Utmaakt"
+
+#~ msgid "Show Track"
+#~ msgstr "Weg wiesen"
+
+#~ msgid "Clear Track"
+#~ msgstr "Weg wegmaken"
+
+#~ msgid "..."
+#~ msgstr "..."
+
+#~ msgid "No position available."
+#~ msgstr "Keen Positschoon verföögbor"
+
+#~ msgctxt "Select the method to use to recenter your GPS location on map."
+#~ msgid "Select the method to use to re-center your GPS location on map."
+#~ msgstr ""
+#~ "Söök de Metood ut, mit de Du Dien GPS-Steed nieg op de Koort inmiddeln "
+#~ "wullt."
+
+#~ msgid "Map Adjustment"
+#~ msgstr "Koort-Topassen"
+
+#~ msgctxt "Disable Auto Recenter"
+#~ msgid "Disabled"
+#~ msgstr "Utmaakt"
+
+#~ msgctxt "Always keep gps location at the center of the map"
+#~ msgid "Keep at Center"
+#~ msgstr "Inmiddelt laten"
+
+#~ msgctxt "Auto center when required"
+#~ msgid "When required"
+#~ msgstr "Wenn nödig"
+
+#~ msgctxt "Auto Zoom to appropriate zoom level"
+#~ msgid "Auto Zoom to appropriate zoom level"
+#~ msgstr "Ansichtgrött automaatsch topassen"
+
+#~ msgid "Auto Zoom"
+#~ msgstr "Autom. Ansichtgrött"
+
+#~ msgid "Data Migration"
+#~ msgstr "Daten wanneln"
+
+#~ msgid ""
+#~ "Marble has found map data stored by a previous Marble version.<br/>Should "
+#~ "this data get converted so that it can be used by the current version?"
+#~ msgstr ""
+#~ "Marble hett sekert Koortendaten vun en öller Marble-Utgaav opdeckt.<br/"
+#~ ">Wullt Du disse Daten för den Bruuk mit de lopen Verschoon wanneln?"
+
+#~ msgid "Edit Bookmark - Marble"
+#~ msgstr "Leesteken bewerken - Marble"
+
+#~ msgid "&Description"
+#~ msgstr "&Beschrieven"
+
+#, fuzzy
+#~| msgid ""
+#~| "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/"
+#~| "TR/REC-html40/strict.dtd\">\n"
+#~| "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~| "css\">\n"
+#~| "p, li { white-space: pre-wrap; }\n"
+#~| "</style></head><body style=\" font-family:'Ubuntu'; font-size:9pt; font-"
+#~| "weight:400; font-style:normal;\">\n"
+#~| "<table border=\"0\" style=\"-qt-table-type: root; margin-top:4px; margin-"
+#~| "bottom:4px; margin-left:4px; margin-right:4px;\">\n"
+#~| "<tr>\n"
+#~| "<td style=\"border: none;\">\n"
+#~| "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~| "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~| "\"></p>\n"
+#~| "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~| "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~| "\"></p></td></tr></table></body></html>"
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<table border=\"0\" style=\"-qt-table-type: root; margin-top:4px; margin-"
+#~ "bottom:4px; margin-left:4px; margin-right:4px;\">\n"
+#~ "<tr>\n"
+#~ "<td style=\"border: none;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-family:'Ubuntu';\"><br /></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-family:'Ubuntu';\"><br /></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-family:'Ubuntu';\"><br /></p></td></tr></table></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Ubuntu'; font-size:9pt; font-"
+#~ "weight:400; font-style:normal;\">\n"
+#~ "<table border=\"0\" style=\"-qt-table-type: root; margin-top:4px; margin-"
+#~ "bottom:4px; margin-left:4px; margin-right:4px;\">\n"
+#~ "<tr>\n"
+#~ "<td style=\"border: none;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p></td></tr></table></body></html>"
+
+#~ msgid "&Folder"
+#~ msgstr "&Orner"
+
+#~ msgid "&Add Folder"
+#~ msgstr "&Orner tofögen"
+
+#, fuzzy
+#~| msgid "Edit Toolbar"
+#~ msgid "Edit placemark"
+#~ msgstr "Warktüüchbalken bewerken"
+
+#~ msgid "Description"
+#~ msgstr "Beschrieven"
+
+#~ msgid "Style, Color"
+#~ msgstr "Stil, Klöör"
+
+#~ msgid "Label"
+#~ msgstr "Beteker"
+
+#~ msgid "Color:"
+#~ msgstr "Klöör:"
+
+#~ msgid "Scale:"
+#~ msgstr "Topassen:"
+
+#~ msgid "Icon"
+#~ msgstr "Lüttbild"
+
+#, fuzzy
+#~| msgid "Show places"
+#~ msgid "Show placemark"
+#~ msgstr "Steden wiesen"
+
+#~ msgid "Elevation:"
+#~ msgstr "Hööchd:"
+
+#, fuzzy
+#~| msgid "0 m"
+#~ msgid " m"
+#~ msgstr "0 m"
+
+#~ msgid "External Map Editor Selection"
+#~ msgstr "Extern Koorten-Editor utsöken"
+
+#~ msgid "External Map Editor"
+#~ msgstr "Extern Koorten-Editor"
+
+#, fuzzy
+#~| msgid "Web browser (Potlatch)"
+#~ msgid "Web browser (iD)"
+#~ msgstr "Nettkieker (Potlatch)"
+
+#~ msgid "Merkaartor"
+#~ msgstr "Merkaartor"
+
+#~ msgid "JOSM"
+#~ msgstr "JOSM"
+
+#~ msgid ""
+#~ "Deactivate to be prompted for a map editor selection next time again. "
+#~ "Otherwise, your choice is remembered and will be used automatically in "
+#~ "the future. If you want to alter the default map editor later, you can do "
+#~ "so in the Marble Settings."
+#~ msgstr ""
+#~ "Maak dit ut, wenn Du dat tokamen Maal wedder na en Koorten-Editor fraagt "
+#~ "warrn wullt. Anners warrt Dien Köör ok later wedder automaatsch bruukt. "
+#~ "De Standard-Editor lett sik in de Marble-Instellen wesseln."
+
+#~ msgid "Make my selection the default map editor"
+#~ msgstr "Köör as Standard för Koorten-Editor bruken"
+
+#~ msgid "Editor Details"
+#~ msgstr "Editor-Enkelheiten"
+
+#~ msgid "Editor Preview"
+#~ msgstr "Editor-Vöransicht"
+
+#, fuzzy
+#~| msgid ""
+#~| "Potlatch is an OpenStreetMap editor for quick editing tasks and "
+#~| "beginners. It requires a web browser with flash support."
+#~ msgid ""
+#~ "iD is an OpenStreetMap editor for quick editing tasks and beginners. It "
+#~ "requires a web browser."
+#~ msgstr ""
+#~ "Potlatch is en OpenStreetMap-Editor för gaue Bewerken un för Anfängers. "
+#~ "Bruukt en Nettkieker mit Flash-Ünnerstütten"
+
+#~ msgid "File View"
+#~ msgstr "Dateiansicht"
+
+#~ msgid "&Save"
+#~ msgstr "&Sekern"
+
+#~ msgid "&Close"
+#~ msgstr "&Tomaken"
+
+#, fuzzy
+#~| msgid "F9"
+#~ msgid "9"
+#~ msgstr "F9"
+
+#~ msgid "10"
+#~ msgstr "10"
+
+#, fuzzy
+#~| msgid "10"
+#~ msgid "20"
+#~ msgstr "10"
+
+#~ msgid "toolBar"
+#~ msgstr "Warktüüchbalken"
+
+#, fuzzy
+#~| msgid "Color:"
+#~ msgid "Color"
+#~ msgstr "Klöör:"
+
+#~ msgid "Go To..."
+#~ msgstr "Gah na..."
+
+#~ msgid ""
+#~ "Enter a search term and press Enter. <a href=\"http://userbase.kde.org/"
+#~ "Marble/Search\">Details...</a>"
+#~ msgstr ""
+#~ "Söökutdruck ingeven un de Ingaavtast drücken. <a href=\"http://userbase."
+#~ "kde.org/Marble/Search\">Enkelheiten…</a>"
+
+#~ msgid "Browse"
+#~ msgstr "Utsöken"
+
+#~ msgid "Search"
+#~ msgstr "Söök"
+
+#~ msgid "Select a geographic region"
+#~ msgstr "En geograafsch Rebeet utsöken"
+
+#~ msgid "Northern Latitude"
+#~ msgstr "Nöördlich Breed"
+
+#~ msgid "°"
+#~ msgstr "°"
+
+#~ msgid "&N"
+#~ msgstr "&N"
+
+#~ msgid "Western Longitude"
+#~ msgstr "Westlich Längde"
+
+#~ msgid "&W"
+#~ msgstr "&W"
+
+#~ msgid "Eastern Longitude"
+#~ msgstr "Ööstlich Längde"
+
+#~ msgid "&E"
+#~ msgstr "&O"
+
+#~ msgid "Southern Latitude"
+#~ msgstr "Söödlich Breed"
+
+#~ msgid "&S"
+#~ msgstr "&S"
+
+#~ msgid "′"
+#~ msgstr "′"
+
+#~ msgid "″"
+#~ msgstr "″"
+
+#~ msgid "Legend"
+#~ msgstr "Legenn"
+
+#~ msgid "about:blank"
+#~ msgstr "about:blank"
+
+#~ msgid "Marble - Install Maps"
+#~ msgstr "Marble - Koorten installeren"
+
+#~ msgid "Map View"
+#~ msgstr "Koortansicht"
+
+#~ msgid "&Projection"
+#~ msgstr "&Projekschoon"
+
+#~ msgid "Globe"
+#~ msgstr "Globus"
+
+#~ msgid "Flat Map"
+#~ msgstr "Flache Koort"
+
+#~ msgid "Mercator"
+#~ msgstr "Mercator"
+
+#~ msgid "Gnomonic"
+#~ msgstr "Zentraalprojizeren"
+
+#~ msgid "Stereographic"
+#~ msgstr "Stereograafsch Azimutaalprojizeren"
+
+#~ msgid "Lambert Azimuthal Equal Area"
+#~ msgstr "Rebedenliek Azimutaalprojizeren"
+
+#~ msgid "Vertical Perspective Globe"
+#~ msgstr "Eerball mit pielrecht Kiekwinkel"
+
+#~ msgid "&Celestial Body"
+#~ msgstr "&Hevenkörper"
+
+#~ msgid "&Theme"
+#~ msgstr "&Muster"
+
+#~ msgid "Here you can choose the preferred map view from different topics."
+#~ msgstr "Hier kannst Du Dien vörtrocken Koortansicht utsöken."
+
+#~ msgid "Marble Map Theme Creation Wizard"
+#~ msgstr "Marble-Opstellhölper för Koortmustern"
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">Welcome to the Map Creation Wizard!</span></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">We will guide you "
+#~ "through the process of creating a map theme for Marble. In the end you "
+#~ "will have your own map that you can view in Marble.</p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Please choose the "
+#~ "source that you want to use for the data of your map theme:</p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:12px; margin-bottom:12px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">Willkamen bi den Opstellhülper för Koortmustern!</span></"
+#~ "p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Disse Hölper wiest Di, "
+#~ "wodennig sik en Koort för den Bruuk mit Marble opstellen lett. Du hest "
+#~ "denn Dien egen Koort un kannst se Di ankieken.</p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Bitte söök den "
+#~ "Datenborn ut, ut den Du Dien Koortmuster opstellen wullt:</p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:12px; margin-bottom:12px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p></body></html>"
+
+#~ msgid ""
+#~ "Connects to a server on the Internet. The map data is queried via the WMS "
+#~ "protocol."
+#~ msgstr ""
+#~ "Stellt en Verbinnen na en Internettserver op. De Daten för de Koort warrt "
+#~ "över dat WMS-Protokoll affraagt."
+
+#~ msgid "Web Map Service (WMS)"
+#~ msgstr "Web Map Service (WMS, Nettkoortendeenst)"
+
+#~ msgid ""
+#~ "You need to provide a bitmap image of a world map that is stored on disk."
+#~ msgstr ""
+#~ "Du muttst en Weltkoort in't Bitmap-Formaat angeven, dat Du op Dien "
+#~ "Fastplaat hest."
+
+#~ msgid "A single image showing the whole world"
+#~ msgstr "En Enkelbild, dat de hele Welt wiesen deit"
+
+#~ msgid ""
+#~ "Connects to a server on the Internet. The map data is queried via a "
+#~ "static URL."
+#~ msgstr ""
+#~ "Stellt en Verbinnen na en Internettserver op. De Daten för de Koort warrt "
+#~ "över en fast URL affraagt."
+
+#~ msgid "Online map providing indexed tiles (e.g. Open Street Map)"
+#~ msgstr "Internett-Koort mit indizeert Kachelkoorten (a.B. Open-Street-Map)"
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">WMS Server</span></p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Please choose a <a href="
+#~ "\"http://en.wikipedia.org/wiki/Web_Map_Service\"><span style=\" text-"
+#~ "decoration: underline; color:#0057ae;\">WMS</span></a> server or enter a "
+#~ "custom server URL.</p></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">WMS-Server</span></p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Bitte en <a href="
+#~ "\"http://en.wikipedia.org/wiki/Web_Map_Service\"><span style=\" text-"
+#~ "decoration: underline; color:#0057ae;\">WMS</span></a>-Server utsöken "
+#~ "oder en anner Serveradress ingeven.</p></body></html>"
+
+#~ msgid "WMS Server:"
+#~ msgstr "WMS-Server:"
+
+#~ msgid "Custom"
+#~ msgstr "Anner"
+
+#~ msgid "http://"
+#~ msgstr "http://"
+
+#~ msgid "Available Maps:"
+#~ msgstr "Verföögbor Koorten:"
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">World Map Bitmap Image</span></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-weight:600;\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Please choose the "
+#~ "location of a world map that is stored in a single image file (JPG, PNG, "
+#~ "etc.). It needs to be provided in <a href=\"http://en.wikipedia.org/wiki/"
+#~ "Equirectangular_projection\"><span style=\" text-decoration: underline; "
+#~ "color:#0057ae;\">Equirectangular projection</span></a>, so the shape "
+#~ "should look like this (size ratio: 2:1):</p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><img src=\":/data/svg/"
+#~ "worldmap.svg\" width=\"150\" /></p></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">Weltkoort in't Bitmap-Formaat</span></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-weight:600;\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Bitte den Padd na en "
+#~ "Weltkoort as Enkelbilddatei (JPG, PNG, usw.) angeven. Dat mutt en <a href="
+#~ "\"http://en.wikipedia.org/wiki/Equirectangular_projection\"><span style="
+#~ "\" text-decoration: underline; color:#0057ae;\">Längdenliek "
+#~ "Zylinnerprojizeren wesen</span></a>, un villicht so utsehn "
+#~ "(Proportschoon: 2:1):</p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><img src=\":/data/svg/"
+#~ "worldmap.svg\" width=\"150\" /></p></body></html>"
+
+#~ msgid "Source Image:"
+#~ msgstr "Bornbild:"
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Bitstream Vera Sans'; font-"
+#~ "size:9pt; font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif'; font-weight:600;\">URL Scheme for Indexed Tiles</"
+#~ "span></p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif';\">Please enter the URL used for downloading "
+#~ "individual tiles. Use the placeholders </span><span style=\" font-"
+#~ "family:'Sans Serif'; font-style:italic;\">{x}</span><span style=\" font-"
+#~ "family:'Sans Serif';\">, </span><span style=\" font-family:'Sans Serif'; "
+#~ "font-style:italic;\">{y}</span><span style=\" font-family:'Sans Serif';"
+#~ "\">, and </span><span style=\" font-family:'Sans Serif'; font-style:"
+#~ "italic;\">{zoomLevel}</span><span style=\" font-family:'Sans Serif';\"> "
+#~ "to reference a tile from the index.</span></p></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Bitstream Vera Sans'; font-"
+#~ "size:9pt; font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif'; font-weight:600;\">URL-Schema för indizeert "
+#~ "Koortenkacheln</span></p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif';\">Bitte de URL för't Daalladen vun besünner Kacheln "
+#~ "ingeven. Bruuk de Platzhollers </span><span style=\" font-family:'Sans "
+#~ "Serif'; font-style:italic;\">{x}</span><span style=\" font-family:'Sans "
+#~ "Serif';\">, </span><span style=\" font-family:'Sans Serif'; font-style:"
+#~ "italic;\">{y}</span><span style=\" font-family:'Sans Serif';\">, un </"
+#~ "span><span style=\" font-family:'Sans Serif'; font-style:italic;"
+#~ "\">{Ansichtgrött}</span><span style=\" font-family:'Sans Serif';\"> as "
+#~ "Angaav, welk Tegel Du daalladen wullt.</span></p></body></html>"
+
+#~ msgid "URL Scheme:"
+#~ msgstr "URL-Schema:"
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Bitstream Vera Sans'; font-"
+#~ "size:9pt; font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif'; font-weight:600;\">General Information</span></p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif';\">Please specify a title, a name and an icon for "
+#~ "your new map. Add a description to let users know what your map is about. "
+#~ "</span></p></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Bitstream Vera Sans'; font-"
+#~ "size:9pt; font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif'; font-weight:600;\">Allmeen Informatschoon</span></"
+#~ "p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif';\">Bitte giff en Titel, en Naam un en Lüttbild för "
+#~ "Dien nieg Koort an. Föög ok en Beschrieven bi, dormit anner Brukers sik "
+#~ "en Bild vun Dien Koort maken köönt. </span></p></body></html>"
+
+#~ msgid "Map Title:"
+#~ msgstr "Titel vun de Koort:"
+
+#~ msgid "A short concise name for your map theme."
+#~ msgstr "En kort un passen Naam för Dien Koortmuster"
+
+#~ msgid "Map Name:"
+#~ msgstr "Naam vun de Koort:"
+
+#~ msgid "The lowercase map theme id."
+#~ msgstr "De lüttschreven Koortmuster-ID"
+
+#~ msgid "The folder name of your new theme."
+#~ msgstr "De Ornernaam för Dien nieg Muster"
+
+#~ msgid "Description:"
+#~ msgstr "Beschrieven:"
+
+#~ msgid ""
+#~ "A short description of your map theme. Here you can provide information "
+#~ "about the purpose, origin, copyright and license of the data used in your "
+#~ "map theme."
+#~ msgstr ""
+#~ "En Kortbeschrieven för Dien Koortmuster. Hier kannst Du Informatschonen "
+#~ "över Sinn un Herkomst, Copyright, Verlööfnis un anner Daten ingeven."
+
+#~ msgid "It will appear in a tool tip and may contain HTML formatting."
+#~ msgstr "Dat dukt as Kortinformatschoon op un kann as HTML formateert wesen."
+
+#~ msgid "Preview Image:"
+#~ msgstr "Bildvöransicht:"
+
+#~ msgid "preview image"
+#~ msgstr "Bildvöransicht"
+
+#~ msgid "Change..."
+#~ msgstr "Ännern…"
+
+#~ msgid "Legend Image:"
+#~ msgstr "Verklorenbild:"
+
+#~ msgid "Places of Interest"
+#~ msgstr "Besünner Steden"
+
+#~ msgid "Populated Places"
+#~ msgstr "Bewahnt Rebeden"
+
+#~ msgid "Terrain"
+#~ msgstr "Landschap"
+
+#~ msgid "Coordinate Grid"
+#~ msgstr "Koordinatengadder"
+
+#~ msgid "Border Lines"
+#~ msgstr "Grenzlienen"
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">Summary</span></p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Congratulations! You "
+#~ "have entered all the data that is necessary to create your map theme. "
+#~ "Check the summary below carefully and press the \"Finish\" button to "
+#~ "create the theme. </p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Please consider "
+#~ "contributing the map theme back to the Marble community if the license "
+#~ "and the terms of use allow for it.</p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:12px; margin-bottom:12px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">Tosamenfaten</span></p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Graleren! Du hest all "
+#~ "för't Opstellen bruukt Daten ingeven. Kiek Di de Tosamenfaten nerrn "
+#~ "nochmaal an, un klick op \"Fardig maken\".</p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Wenn Du wullt un de "
+#~ "Verlööfnissen dat tolaten deit, kannst Du Dien Koortmuster ok för anner "
+#~ "Marble-Brukers praatstellen.</p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:12px; margin-bottom:12px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p></body></html>"
+
+#~ msgid "Map name goes here."
+#~ msgstr "Hier kummt de Naam vun de Koort hen"
+
+#~ msgid "Map Theme:"
+#~ msgstr "Koortmuster:"
+
+#~ msgid "Map theme goes here."
+#~ msgstr "Hier kummt dat Koortmuster hen."
+
+#~ msgid "Thumbnail image goes here."
+#~ msgstr "Hier kummt dat Vöransichtbild hen."
+
+#~ msgid "Preview Map"
+#~ msgstr "Koortvöransicht"
+
+#~ msgid "About Marble"
+#~ msgstr "Över Marble"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">Marble Virtual Globe</span></p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">Marble - Virtuell Globus</span></p></body></html>"
+
+#~ msgid "Version Unknown"
+#~ msgstr "Verschoon nich begäng"
+
+#~ msgid "&About"
+#~ msgstr "&Vertell wat över"
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:10pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-size:9pt;\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "size:9pt;\">(c) 2007, The Marble Project</span></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-size:9pt; font-style:italic;\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "size:9pt;\">http://edu.kde.org/marble</span></p></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:10pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-size:9pt;\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "size:9pt;\">(c) 2007: Dat Marble-Projekt</span></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-size:9pt; font-style:italic;\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "size:9pt;\">http://edu.kde.org/marble</span></p></body></html>"
+
+#~ msgid "A&uthors"
+#~ msgstr "&Schrieverslüüd"
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:10pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-size:9pt;\"></p></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:10pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-size:9pt;\"></p></body></html>"
+
+#~ msgid "&Data"
+#~ msgstr "&Daten"
+
+#~ msgid "&License Agreement"
+#~ msgstr "&Lizenzövereenkamen"
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:10pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-family:'MS Shell Dlg 2'; font-size:8pt;\"></p></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:10pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-family:'MS Shell Dlg 2'; font-size:8pt;\"></p></body></html>"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">There are two caches "
+#~ "being used for Marble: The physical memory which is needed to keep map "
+#~ "data in the computer's memory. Increasing the value will make the "
+#~ "application more responsive. The hard disc memory cache is used by "
+#~ "download contents from the Internet (e.g. Wikipedia data or map data). "
+#~ "Decrease this value if you want to save space on the hard disc and if "
+#~ "high usage of the Internet is not an issue. </p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Marble bruukt twee "
+#~ "Oorden vun Twischenspiekers: De physikaalsch Spieker för't Wohren vun "
+#~ "Koortendaten in'n Reeknerspieker. En grötter Weert lett dat Programm "
+#~ "gauer reageren. De Fastplatten-Twischenspieker warrt för't Daalladen vun "
+#~ "Daten ut dat Internet (a.B. Wiki- oder Koortendaten) bruukt. Maak dissen "
+#~ "Weert lütter, wenn Du Fastplattenplatz sporen wullt un nich faken op dat "
+#~ "Internet togrippst.</p></body></html>"
+
+#~ msgid "C&ache"
+#~ msgstr "&Twischenspieker"
+
+#~ msgid "&Physical memory:"
+#~ msgstr "&Physikaalsch Spieker:"
+
+#~ msgid " MB"
+#~ msgstr " MB"
+
+#~ msgid "C&lear"
+#~ msgstr "&Leddig maken"
+
+#~ msgid "&Hard disc:"
+#~ msgstr "&Fastplaat:"
+
+#~ msgid "Unlimited"
+#~ msgstr "Ahn Grenz"
+
+#~ msgid "Cl&ear"
+#~ msgstr "L&eddig maken"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Proxy settings for your "
+#~ "local intranet. Please leave empty if there is no proxy.</p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Proxy-Instellen för "
+#~ "Dien lokaal Reeknernettwark. Wenn keen Proxy bruukt warrt, bitte leddig "
+#~ "laten.</p></body></html>"
+
+#~ msgid "&Proxy"
+#~ msgstr "&Proxy"
+
+#~ msgid "&Proxy:"
+#~ msgstr "&Proxy:"
+
+#~ msgid "P&ort:"
+#~ msgstr "P&ort:"
+
+#~ msgid "Proxy type:"
+#~ msgstr "Proxy-Typ:"
+
+#~ msgid "Http"
+#~ msgstr "Http"
+
+#~ msgid "Socks5"
+#~ msgstr "Socks5"
+
+#~ msgid "Requires authentication"
+#~ msgstr "Pröövt Identiteet"
+
+#~ msgid "U&sername:"
+#~ msgstr "&Brukernaam:"
+
+#~ msgid "&Password:"
+#~ msgstr "&Passwoort:"
+
+#~ msgid "Enable synchronization"
+#~ msgstr "Synkroniseren anmaken"
+
+#~ msgid ""
+#~ "Allows you to store routes in owncloud. Each route must be uploaded/"
+#~ "downloaded manually."
+#~ msgstr ""
+#~ "Hier kannst Du Dien Weeg binnen OwnCloud afleggen. Du muttst elk Weg vun "
+#~ "Hand hooch- oder daalladen."
+
+#~ msgid "Enable route synchronization"
+#~ msgstr "Weg-Synkroniseren anmaken"
+
+#~ msgid "Automatically sync all bookmarks to the server."
+#~ msgstr "All Leestekens automaatsch mit den Server synkroniseren"
+
+#~ msgid "Enable bookmark synchronization"
+#~ msgstr "Leestekensynkroniseren anmaken"
+
+#~ msgid "Sync now"
+#~ msgstr "Nu synkroniseren"
+
+#~ msgid "Credentials"
+#~ msgstr "Togangdaten"
+
+#~ msgid "Server:"
+#~ msgstr "Server:"
+
+#~ msgid "Remote server URL, e.g. myserver.com/owncloud"
+#~ msgstr "De URL vun den Server, a.B. mienserver.de/owncloud"
+
+#~ msgid "Username:"
+#~ msgstr "Brukernaam:"
+
+#~ msgid "Password:"
+#~ msgstr "Passwoort:"
+
+#~ msgid "Test Login"
+#~ msgstr "Anmellen utproberen"
+
+#~ msgid "Marble Cache Settings"
+#~ msgstr "Twischenspieker-Instellen för Marble"
+
+#~ msgid "Dragging and Animation"
+#~ msgstr "Trecken un animeren"
+
+#~ msgid "&Drag location:"
+#~ msgstr "Steed &trecken:"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">While dragging the "
+#~ "mouse there are two standard behaviours when dealing with a virtual globe:"
+#~ "</p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">The location below "
+#~ "mouse pointer will follow the cursor exactly: As a result e.g. the north "
+#~ "pole will not stay at the top which can lead to confusion. By default "
+#~ "Marble makes sure that north is always up which results in a dragging "
+#~ "behaviour where the location below the mouse pointer slightly \"detaches"
+#~ "\" from the cursor. </p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Bi't Trecken mit de "
+#~ "Muus gifft dat twee Standardbedregen för den Globus:</p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">De Steed ünner den "
+#~ "Muuswieser geiht den Wieser nipp un nau na. Dat bedüüdt a.B., de "
+#~ "Noordpool blifft nich baven, wat Een villicht dörenannerbringen kann. "
+#~ "Standardwies höllt Marble den Noordpool man jümmers baven. Dat bedüüdt "
+#~ "bi't Trecken en lütten Verscheel twischen de Steed nerrn den Muuswieser "
+#~ "un den Wieser. </p></body></html>"
+
+#~ msgid "Keep Planet Axis Vertically"
+#~ msgstr "Planetenass pielrecht laten"
+
+#~ msgid "Follow Mouse Pointer"
+#~ msgstr "Muuswieser nagahn"
+
+#~ msgid "Use kinetic spinning when dragging the map"
+#~ msgstr "Bi't Trecken vun de Koort Traagheit bruken"
+
+#~ msgid "&Inertial Globe Rotation"
+#~ msgstr "Eerball &inert dreihen"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">When searching for a "
+#~ "location Marble can either move instantly to the new location or it can "
+#~ "show a travel animation from the previous place to the new place.</p></"
+#~ "body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Bi de Steedsöök kann "
+#~ "Marble de niege Steed direktemang anstüern, oder en Teelfloog vun de "
+#~ "verleden na de niege Steed wiesen .</p></body></html>"
+
+#~ msgid "&Animate voyage to the target"
+#~ msgstr "&Animeert Teelfloog"
+
+#~ msgid "&On startup:"
+#~ msgstr "&Bi't Starten:"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">By default Marble will "
+#~ "display the home location immediately after the application has started. "
+#~ "As an alternative it can also show the last position that was active when "
+#~ "the user left the application. </p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Marble wiest na den "
+#~ "Programmstart standardwies direktemang dat Tohuus. Een kann aver ok "
+#~ "fastleggen, dat de Steed wiest warrt, de ehr't verleden Utmaken ankeken "
+#~ "wöör. </p></body></html>"
+
+#~ msgid "Show Home Location"
+#~ msgstr "Tohuus wiesen"
+
+#~ msgid "Return to Last Location Visited"
+#~ msgstr "Na de tolest ankeken Steed torüchgahn"
+
+#~ msgid "&External Editor:"
+#~ msgstr "&Extern Editor:"
+
+#~ msgid ""
+#~ "<p>The application that is launched to edit maps. Potlatch (default) "
+#~ "requires a web browser with flash support to be installed. When selecting "
+#~ "josm or merkaartor, make sure that the respective application is "
+#~ "installed.</p>"
+#~ msgstr ""
+#~ "<p>Dat Programm, dat för't Bewerken vun Koorten bruukt warrt. Potlatch "
+#~ "(Standard) bruukt en Nettkieker mit Flash-Ünnerstütten. För den Bruuk vun "
+#~ "JOSM oder Merkaartor deit de tohören Programmen noot.</p>"
+
+#~ msgid "Always ask"
+#~ msgstr "Jümmers fragen"
+
+#~ msgid "Potlatch (Web browser)"
+#~ msgstr "Potlatch (Nettkieker)"
+
+#~ msgid "Up"
+#~ msgstr "Hooch"
+
+#~ msgid "Tilts the globe's axis towards the user."
+#~ msgstr "Kippt de Eerass na den Bruker to"
+
+#~ msgid "Left"
+#~ msgstr "Links"
+
+#~ msgid "Rotates the globe counterclockwise around its axis."
+#~ msgstr "Dreiht de Eer gegen de Klockricht rund ehr Ass."
+
+#~ msgid "Reset View"
+#~ msgstr "Ansicht torüchsetten"
+
+#~ msgid "Click this button to restore the original zoom level and view angle."
+#~ msgstr ""
+#~ "Mit dissen Knoop kannst Du de Orginaal-Ansichtgrött un den Orginaal-"
+#~ "Kiekwinkel wedderherstellen."
+
+#~ msgid "Home"
+#~ msgstr "Tohuus"
+
+#~ msgid "Right"
+#~ msgstr "Rechts"
+
+#~ msgid "Rotates the globe clockwise around its axis."
+#~ msgstr "Dreiht de Eer mit de Klockricht rund ehr Ass."
+
+#~ msgid "Down"
+#~ msgstr "Daal"
+
+#~ msgid "Tilts the globe's axis away from the user."
+#~ msgstr "Kippt de Eerass vun den Bruker weg"
+
+#~ msgid "Zoom In"
+#~ msgstr "Grötter maken"
+
+#~ msgid "Zoom in by pressing this button to see more detail."
+#~ msgstr ""
+#~ "Klick op dissen Knoop, wenn Du de Ansicht grötter maken un mehr "
+#~ "Enkelheiten wiest hebben wullt."
+
+#~ msgid "+"
+#~ msgstr "+"
+
+#~ msgid "Zoom Slider"
+#~ msgstr "Ansichtgrött-Schuver"
+
+#~ msgid "Use this slider to adjust the zoom level of the map."
+#~ msgstr "Mit dissen Schuver kannst Du de Ansichtgrött vun de Koort topassen."
+
+#~ msgid "Zoom Out"
+#~ msgstr "Lütter maken"
+
+#~ msgid "Zoom out by pressing this button to see less detail."
+#~ msgstr ""
+#~ "Klick op dissen Knoop, wenn Du de Ansicht lütter maken un minn "
+#~ "Enkelheiten wiest hebben wullt."
+
+#~ msgid "-"
+#~ msgstr "-"
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'DejaVu Sans'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif';\">This is Marble's machine room for advanced users. "
+#~ "Here you can select and deselect the functionality that is provided "
+#~ "through plugins. </span></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif';\">Deselecting a plugin will remove the functionality "
+#~ "from the map, menus and toolbars. </span></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif';\">Also some of the plugins might allow for tweaking "
+#~ "their configuration a bit. </span></p></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'DejaVu Sans'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif';\">Dit is dat Stüerzentrum för Brukers mit mehr "
+#~ "Könen. Hier laat sik verscheden Moduulfunkschonen an- un utmaken. </"
+#~ "span></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif';\">Is en Moduul utmaakt, warrt de tohören Funkschoon "
+#~ "ut de Koorten, Menüs un Warktüüchbalkens wegmaakt. </span></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif';\">Hier laat sik ok noch en poor Moduulinstellen en "
+#~ "beten topassen. </span></p></body></html>"
+
+#~ msgid "P&lugins"
+#~ msgstr "&Modulen"
+
+#~ msgid "Time Zone"
+#~ msgstr "Tietrebeet"
+
+#~ msgid "UTC"
+#~ msgstr "UTC"
+
+#~ msgid "System time zone"
+#~ msgstr "Systeem-Tietrebeet"
+
+#~ msgid "Choose Time zone"
+#~ msgstr "Tietrebeet utsöken"
+
+#~ msgid "Universal Time Coordinated"
+#~ msgstr "Universal Time Coordinated"
+
+#~ msgid "European Central Time"
+#~ msgstr "Middeleuropääsch Tiet"
+
+#~ msgid "Eastern European Time"
+#~ msgstr "Oosteuropääsch Tiet"
+
+#~ msgid "Egypt Standard Time"
+#~ msgstr "Ägyptsch Standardtiet"
+
+#~ msgid "Eastern African Time"
+#~ msgstr "Oostafrikaansch Tiet"
+
+#~ msgid "Middle East Time"
+#~ msgstr "Middelööstlich Tiet"
+
+#~ msgid "Near East Time"
+#~ msgstr "Neegööstlich Tiet"
+
+#~ msgid "Pakistan Lahore Time"
+#~ msgstr "Pakistaansch Lahore-Tiet"
+
+#~ msgid "India Standard Time"
+#~ msgstr "Indsch Standardtiet"
+
+#~ msgid "Bangladesh Standard Time"
+#~ msgstr "Bangladesch-Standardtiet"
+
+#~ msgid "Vietnam Standard Time"
+#~ msgstr "Vietnameesch Standardtiet"
+
+#~ msgid "China Taiwan Time"
+#~ msgstr "China/Taiwan-Tiet"
+
+#~ msgid "Japan Standard Time"
+#~ msgstr "Japaansch Standardtiet"
+
+#~ msgid "Australia Central Time"
+#~ msgstr "Middelaustraalsch Tiet"
+
+#~ msgid "Australia Eastern Time"
+#~ msgstr "Oostaustraalsch Tiet"
+
+#~ msgid "Solomon Standard Time"
+#~ msgstr "Salomonsch Standardtiet"
+
+#~ msgid "New Zealand Standard Time"
+#~ msgstr "Niegseelannsch Standardtiet"
+
+#~ msgid "Midway Islands Time"
+#~ msgstr "Midway-Eilannen-Tiet"
+
+#~ msgid "Hawaii Standard Time"
+#~ msgstr "Hawaiiansch Standardtiet"
+
+#~ msgid "Alaska Standard Time"
+#~ msgstr "Alaska-Standardtiet"
+
+#~ msgid "Pacific Standard Time"
+#~ msgstr "Pazifisch Standardtiet"
+
+#~ msgid "Phoenix Standard Time"
+#~ msgstr "Phoenix-Standardtiet"
+
+#~ msgid "Mountain Standard Time"
+#~ msgstr "Barg-Standardtiet"
+
+#~ msgid "Central Standard Time"
+#~ msgstr "Standard-Zentraaltiet"
+
+#~ msgid "Eastern Standard Time"
+#~ msgstr "Ööstlich Standardtiet"
+
+#~ msgid "Indiana Eastern Standard Time"
+#~ msgstr "Ööstlich Indiana-Standardtiet"
+
+#~ msgid "Puerto Rico and US Virgin Islands Time"
+#~ msgstr "\"Puerto Rico un Amerikaansche Jumfern-Eilannen\"-Tiet"
+
+#~ msgid "Canada Newfoundland Time"
+#~ msgstr "Kanada-Niegfundlandtiet"
+
+#~ msgid "Argentina Standard Time"
+#~ msgstr "Argentiensch Standardtiet"
+
+#~ msgid "Brazil Eastern Time"
+#~ msgstr "Oostbrasiliaansch Tiet"
+
+#~ msgid "Central African Time"
+#~ msgstr "Zentraalafrikaansch Tiet"
+
+#~ msgid "When Marble starts"
+#~ msgstr "Bi't Opropen vun Marble"
+
+#~ msgid "Load system time"
+#~ msgstr "Systeemtiet laden"
+
+#~ msgid "Load last session time"
+#~ msgstr "Tolest bruukt Törntiet laden"
+
+#~ msgid "&Units"
+#~ msgstr "&Eenheiten"
+
+#~ msgid "&Distance:"
+#~ msgstr "&Afstand:"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">The unit that gets used "
+#~ "to measure altitude, lengths and distances (e.g. km, mi, ft).</p></body></"
+#~ "html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">De Standard-Maateenheit "
+#~ "för Hööchden, Längden un Afstänn (a.B. km, mi, ft).</p></body></html>"
+
+#~ msgid "Kilometer, Meter"
+#~ msgstr "Kilometer, Meter"
+
+#~ msgid "Miles, Feet"
+#~ msgstr "Mielen, Foot"
+
+#~ msgid "Nautical miles, Knots"
+#~ msgstr "Seemielen, Knütten"
+
+#~ msgid "An&gle:"
+#~ msgstr "Win&kel:"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Specifies the notation "
+#~ "of angles in coordinates: By default the Degree-Minute-Second notation (e."
+#~ "g. 54°30'00\" ) gets used. As an alternative you can choose decimal "
+#~ "degrees (e.g. 54.5°).</p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Gifft de Schriefwies "
+#~ "vun Koordinatenwinkels an: As Standard warrt Graad-Minuten-Sekunnen (a.B. "
+#~ "54°30'00\" ) bruukt. As anner Schriefwies lett sik ok Dezimaalgraad (a.B. "
+#~ "54.5°) instellen.</p></body></html>"
+
+#~ msgid "Degree (DMS)"
+#~ msgstr "Graad (GMS)"
+
+#~ msgid "Degree (Decimal)"
+#~ msgstr "Graad (Dezimaal)"
+
+#~ msgid "Universal Transverse Mercator (UTM)"
+#~ msgstr "Universal Transverse Mercator (UTM)"
+
+#~ msgid "Map &Quality"
+#~ msgstr "Koorten&gööd"
+
+#~ msgid "&Still image:"
+#~ msgstr "&Standbild:"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Specifies the map "
+#~ "quality that gets displayed while there is no user input. Usually this "
+#~ "allows for high map quality as speed is no concern.</p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Gifft de Koortengööd "
+#~ "för Dorstellen ahn Brukeringaven an. Normalerwies lett dat hoge "
+#~ "Koortengööd to, wiel dat nich op de Gauheit ankummt.</p></body></html>"
+
+#~ msgid "Outline Quality"
+#~ msgstr "Ümreetgööd"
+
+#~ msgid "Low Quality"
+#~ msgstr "Siete Gööd"
+
+#~ msgid "Normal"
+#~ msgstr "Normaal"
+
+#~ msgid "High Quality"
+#~ msgstr "Hoge Gööd"
+
+#~ msgid "Print Quality"
+#~ msgstr "Druckgööd"
+
+#~ msgid "During &animations:"
+#~ msgstr "Wielt &Animatschonen:"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Specifies the map "
+#~ "quality that gets displayed during map animations (e.g. while dragging "
+#~ "the globe). </p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Especially on slow "
+#~ "machines it is advisable to set this option to \"low quality\" as this "
+#~ "will give better speed.</p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Gifft de Koortengööd "
+#~ "wielt Animatschonen an (a.B. wielt dat Trecken vun den Globus). </p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Besünners op langsam "
+#~ "Reekners warrt \"Siete Gööd\" anraadt, wiel se en höger Gauheit tolett.</"
+#~ "p></body></html>"
+
+#~ msgid "G&raphics system:"
+#~ msgstr "&Grafiksysteem:"
+
+#~ msgid ""
+#~ "Specifies the graphics system that Qt uses to draw the map.\n"
+#~ "Changing this setting might be a good idea if there are performance "
+#~ "issues with the system's graphics drivers."
+#~ msgstr ""
+#~ "Gifft dat Grafiksysteem an, mit dat Qt de Koort teken deit.\n"
+#~ "Änner disse Instellen man, wenn dat Problemen mit de Leisten vun't "
+#~ "Systeem sien Grafikdrievers gifft."
+
+#~ msgid "Raster (Software rendering)"
+#~ msgstr "Raster (Software-Dorstellen)"
+
+#~ msgid "OpenGL"
+#~ msgstr "OpenGL"
+
+#~ msgid "&Text Labels"
+#~ msgstr "&Textfeld"
+
+#~ msgid "&Place names:"
+#~ msgstr "Öö&rdnaams:"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Places often have "
+#~ "different names in different languages. The label on the map can show the "
+#~ "name in the user's language. Alternatively it can display the name in the "
+#~ "official language and glyphs of that place. </p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Steden warrt in anner "
+#~ "Spraken faken anners nöömt. Dat Textfeld op de Koort kann den Naam in den "
+#~ "Bruker sien Spraak wiesen. Dor lett sik aver ok de Naam in de amtliche "
+#~ "Spraak un de Schrifttekens vun de Steed mit wiesen.</p></body></html>"
+
+#~ msgid "Custom & Native Language"
+#~ msgstr "Egen un Moderspraak"
+
+#~ msgid "Custom Language"
+#~ msgstr "Egen Spraak"
+
+#~ msgid "Native Language"
+#~ msgstr "Moderspraak"
+
+#~ msgid "Default map &font:"
+#~ msgstr "&Standardschrift för de Koort:"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">The default font that "
+#~ "gets used on the map.</p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">De Standardschrift för "
+#~ "de Koorten.</p></body></html>"
+
+#~ msgid "Movie Recording - Marble"
+#~ msgstr "Film opnehmen - Marble"
+
+#~ msgid "Destination video"
+#~ msgstr "Teelvideo"
+
+#~ msgid "Open..."
+#~ msgstr "Opmaken…"
+
+#~ msgid "FPS (frames per second)"
+#~ msgstr "FPS (Biller per Sekunn)"
+
+#~ msgid "Cancel"
+#~ msgstr "Afbreken"
+
+#~ msgid "Start"
+#~ msgstr "Start"
+
+#~ msgid "New Bookmark Folder - Marble"
+#~ msgstr "Nieg Leestekenorner - Marble"
+
+#~ msgid "&Folder Name"
+#~ msgstr "&Ornernaam"
+
+#, fuzzy
+#~| msgid "Current Location"
+#~ msgid "Current Relations"
+#~ msgstr "Aktuell Steed"
+
+#~ msgid "Name"
+#~ msgstr "Naam"
+
+#, fuzzy
+#~| msgid "Type:"
+#~ msgid "Type"
+#~ msgstr "Typ:"
+
+#~ msgid "Role"
+#~ msgstr "Rull"
+
+#, fuzzy
+#~| msgid "Add FlyTo"
+#~ msgid "Add Relation"
+#~ msgstr "Teel tofögen"
+
+#, fuzzy
+#~| msgid "Current Location"
+#~ msgid "Current Tags"
+#~ msgstr "Aktuell Steed"
+
+#, fuzzy
+#~| msgid "AppKey"
+#~ msgid "Key"
+#~ msgstr "Programmslötel"
+
+#~ msgid "Browse..."
+#~ msgstr "Utsöken..."
+
+#, fuzzy
+#~| msgid "Icon Link"
+#~ msgid "Icon Link:"
+#~ msgstr "Link-Lüttbild"
+
+#, fuzzy
+#~| msgid "&Position"
+#~ msgid "Position:"
+#~ msgstr "&Positschoon"
+
+#~ msgid "Marble"
+#~ msgstr "Marble"
+
+#~ msgid "Map"
+#~ msgstr "Koort"
+
+#~ msgid "Visible Globe Region"
+#~ msgstr "Sichtbor Rebeet op den Globus"
+
+#~ msgid "Outer Space"
+#~ msgstr "Weltruum"
+
+#~ msgid "Route"
+#~ msgstr "Weg"
+
+#~ msgid "Route Summary"
+#~ msgstr "Weg-Tosamenfaten"
+
+#~ msgid "Driving Instructions"
+#~ msgstr "Fohranwiesen"
+
+#~ msgid "Footer"
+#~ msgstr "Footreeg"
+
+#~ msgid "Configure Routing Profile"
+#~ msgstr "Weegplanen instellen"
+
+#~ msgid "Active Route Services"
+#~ msgstr "Anmaakt Weegplanendeensten"
+
+#~ msgid "Service Settings"
+#~ msgstr "Deenstinstellen"
+
+#~ msgid "No configuration available"
+#~ msgstr "Keen Instellen verföögbor"
+
+#~ msgid "Select Service to Configure"
+#~ msgstr "Deenst utsöken, den Du instellen wullt"
+
+#~ msgid "Configure"
+#~ msgstr "Instellen"
+
+#~ msgid "&Add"
+#~ msgstr "&Tofögen"
+
+#~ msgid "&Configure"
+#~ msgstr "&Instellen"
+
+#~ msgid "&Remove"
+#~ msgstr "&Wegmaken"
+
+#~ msgid "Move &Up"
+#~ msgstr "Na &baven"
+
+#~ msgid "Move &Down"
+#~ msgstr "Na &nerrn"
+
+#~ msgid "Car (fastest)"
+#~ msgstr "Auto (gauest)"
+
+#~ msgid "Car (shortest)"
+#~ msgstr "Auto (körtst)"
+
+#~ msgid "Bicycle"
+#~ msgstr "Fohrrad"
+
+#~ msgid "Pedestrian"
+#~ msgstr "Footgänger"
+
+#~ msgid "No results."
+#~ msgstr "Keen Drepers"
+
+#~ msgid "Show Details"
+#~ msgstr "Enkelheiten wiesen"
+
+#~ msgid "Choose alternative routes"
+#~ msgstr "Anner Weeg utsöken"
+
+#~ msgid "Sun Control"
+#~ msgstr "Sünn-Instellen"
+
+#~ msgid "Sun Shading"
+#~ msgstr "Sünnschadden"
+
+#~ msgid "Shadow"
+#~ msgstr "Schadden"
+
+#~ msgid "Night Map"
+#~ msgstr "Nachtkoort"
+
+#~ msgid "Subsolar Point"
+#~ msgstr "Punkt nerrn de Sünn"
+
+#~ msgid ""
+#~ "Display <a href=\"http://en.wikipedia.org/wiki/Subsolar_point\">Subsolar "
+#~ "Point</a> icon"
+#~ msgstr ""
+#~ "Lüttbild för <a href=\"http://de.wikipedia.org/wiki/Subsolarer_Punkt"
+#~ "\">Punkt nerrn de Sünn</a> wiesen"
+
+#~ msgid ""
+#~ "<b>Lock</b> map view to <a href=\"http://en.wikipedia.org/wiki/"
+#~ "Subsolar_point\">Subsolar Point</a>."
+#~ msgstr ""
+#~ "Koortansicht op den <a href=\"http://de.wikipedia.org/wiki/"
+#~ "Subsolarer_Punkt\">Punkt nerrn de Sünn</a> <b>fastsetten</b>."
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">Attention: Panning the map is disabled now! </span></p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Uncheck the \"Lock map "
+#~ "view to Subsolar Point\" option to allow for viewing a different place on "
+#~ "the globe again.</p></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">Beacht: De Koort lett sik nu nich mehr verschuven!</span></"
+#~ "p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Maak de Optschoon "
+#~ "„Koortansicht op Punkt nerrn de Sünn fastsetten“ ut, wenn Du wedder en "
+#~ "anner Steed op de Eer ankieken wullt.</p></body></html>"
+
+#~ msgid "OK"
+#~ msgstr "OK"
+
+#~ msgid "Apply"
+#~ msgstr "Bruken"
+
+#~ msgid "Creating Map"
+#~ msgstr "Koort warrt opstellt"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /></head><body style="
+#~ "\" white-space: pre-wrap; font-family:Sans Serif; font-size:9pt; font-"
+#~ "weight:400; font-style:normal; text-decoration:none;\"><p style=\" margin-"
+#~ "top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-"
+#~ "indent:0; text-indent:0px;\"><span style=\" font-weight:600;\">Satellite "
+#~ "View</span></p><p style=\" margin-top:0px; margin-bottom:0px; margin-"
+#~ "left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Earth "
+#~ "as seen from Space. The map is based on NASA's beautiful \"Blue Marble "
+#~ "Next Generation\" pictures. Credits: NASA's Earth Observatory</p></body></"
+#~ "html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /></head><body style="
+#~ "\" white-space: pre-wrap; font-family:Sans Serif; font-size:9pt; font-"
+#~ "weight:400; font-style:normal; text-decoration:none;\"><p style=\" margin-"
+#~ "top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-"
+#~ "indent:0; text-indent:0px;\"><span style=\" font-weight:600;"
+#~ "\">Satellitenbild</span></p><p style=\" margin-top:0px; margin-"
+#~ "bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-"
+#~ "indent:0px;\">De Eer, ankeken vun den Weltruum ut. De Koort buut op de "
+#~ "NASA ehr smuck \"Blue Marble Next Generation\"-Biller. Dank an de NASA "
+#~ "ehr Eersteernwacht</p></body></html>"
+
+#~ msgid ""
+#~ "Marble needs to create this map. This only needs to be done once and may "
+#~ "take a few seconds."
+#~ msgstr ""
+#~ "Marble mutt de Koort opstellen. Dat mutt bloots eenmaal maakt warrn un "
+#~ "kann en poor Sekunnen duern."
+
+#~ msgid "&Cancel"
+#~ msgstr "&Afbreken"
+
+#~ msgid "Zoom"
+#~ msgstr "Ansichtgrött"
+
+#~ msgid "&Tile Level Range:"
+#~ msgstr "&Deelkoort-Stooprebeet:"
+
+#~ msgid "Minimum Tile Level"
+#~ msgstr "Lüttst Deelkoort-Stoop"
+
+#~ msgid "to"
+#~ msgstr "bet"
+
+#~ msgid "Maximum Tile Level"
+#~ msgstr "Hööchst Deelkoort-Stoop"
+
+#~ msgid "Time Control"
+#~ msgstr "Tiet-Instellen"
+
+#~ msgid "Time"
+#~ msgstr "Tiet"
+
+#~ msgid "New Date Time      :"
+#~ msgstr "Nieg Datum un Tiet      :"
+
+#~ msgid "Refresh Interval     :"
+#~ msgstr "Opfrischtiet:"
+
+#~ msgid " seconds"
+#~ msgstr " Sekunnen"
+
+#~ msgid "Now"
+#~ msgstr "Nu"
+
+#~ msgid "Current Date Time :"
+#~ msgstr "Aktuell Datum un Tiet :"
+
+#~ msgid "Time Speed"
+#~ msgstr "Tiet-Tempo"
+
+#~ msgid "Close"
+#~ msgstr "Tomaken"
+
+#~ msgid "Tour"
+#~ msgstr "Törn"
+
+#~ msgid "Move up"
+#~ msgstr "Na baven"
+
+#~ msgid "Move down"
+#~ msgstr "Na nerrn"
+
+#~ msgid "New Tour"
+#~ msgstr "Nieg Törn"
+
+#~ msgid "Save Tour"
+#~ msgstr "Törn sekern"
+
+#~ msgid "Save Tour As"
+#~ msgstr "Törn sekern as"
+
+#~ msgid "Open Tour"
+#~ msgstr "Törn opmaken"
+
+#~ msgid "Play"
+#~ msgstr "Afspelen"
+
+#~ msgid "Begins touring"
+#~ msgstr "Fangt den Törn an"
+
+#~ msgid "Stop"
+#~ msgstr "Ophollen"
+
+#~ msgid "Stops touring (playing again will start tour from the start)"
+#~ msgstr "Höllt den Törn op (afspelen fangt wedder vörn an)"
+
+#~ msgid "Converts the loaded tour into a movie"
+#~ msgstr "Wannelt den laadten Törn na en Film üm"
+
+#~ msgid "Worldclock Applet Configuration"
+#~ msgstr "Weltklock-Lüttprogramm instellen"
+
+#~ msgid "Map Display"
+#~ msgstr "Koort-Dorstellen"
+
+#~ msgid "Projection:"
+#~ msgstr "Projekschoon:"
+
+#~ msgid "Equirectangular"
+#~ msgstr "Längdenliek Zylinnerprojizeren"
+
+#~ msgid "Center map on longitude:"
+#~ msgstr "Koort op Längde inmiddeln:"
+
+#~ msgid "Center map on daylight"
+#~ msgstr "Koort na Daaglicht inmiddeln"
+
+#~ msgid "Show date"
+#~ msgstr "Datum wiesen"
+
+#~ msgid "Time Zones"
+#~ msgstr "Tietrebeden"
+
+#~ msgid "Use custom timezone selection"
+#~ msgstr "Egen Tietrebeet-Köör bruken"
+
+#~ msgid "Coordinates"
+#~ msgstr "Koordinaten"
+
+#~ msgid "N"
+#~ msgstr "N"
+
+#~ msgid "W"
+#~ msgstr "W"
+
+#~ msgid "E"
+#~ msgstr "O"
+
+#~ msgid "S"
+#~ msgstr "S"
+
+#~ msgid "Rotation"
+#~ msgstr "Dreihen"
+
+#, fuzzy
+#~| msgid "Add FlyTo"
+#~ msgid "Add polygon"
+#~ msgstr "Teel tofögen"
+
+#~ msgid "Lines"
+#~ msgstr "Lienen"
+
+#~ msgid "Width:"
+#~ msgstr "Breed:"
+
+#~ msgid "Area"
+#~ msgstr "Rebeet"
+
+#~ msgid "Filled"
+#~ msgstr "Vullmaakt"
+
+#~ msgid "Not Filled"
+#~ msgstr "Nich vullmaakt"
+
+#~ msgid "Display"
+#~ msgstr "Dorstellen"
+
+#~ msgid "Fade data older than (minutes)"
+#~ msgstr "Daten utblennen, de öller sünd as (Minuten)"
+
+#~ msgid "Do not show data older than (minutes)"
+#~ msgstr "Daten nich wiesen, de öller sünd as (Minuten)"
+
+#~ msgid "Internet"
+#~ msgstr "Internet"
+
+#~ msgid "APRS Data Sources"
+#~ msgstr "APRS-Datenborns"
+
+#~ msgid "Should information be gathered from the Internet APRS data source?"
+#~ msgstr ""
+#~ "Wullt Du Informatschonen ut dat Internet vun en APRS-Datenborn halen?"
+
+#~ msgid "Collect data from an APRS Internet server"
+#~ msgstr "Daten ut dat Internet vun en APRS-Server halen"
+
+#~ msgid "Server"
+#~ msgstr "Server"
+
+#~ msgid "rotate.aprs.net"
+#~ msgstr "rotate.aprs.net"
+
+#~ msgid "Port"
+#~ msgstr "Port"
+
+#~ msgid "10253"
+#~ msgstr "10253"
+
+#~ msgid "Dump TCP/IP records to the debug stream"
+#~ msgstr "TCP/IP-Opnahmen na Fehlersöök-Stroom utgeven"
+
+#~ msgid "Device"
+#~ msgstr "Reedschap"
+
+#~ msgid "TNC Terminal Port"
+#~ msgstr "TNC-Konsoolport"
+
+#~ msgid "Should information be gathered from a serial port?"
+#~ msgstr "Wullt Du Informatschonen vun en seriell Port halen?"
+
+#~ msgid "Collect data from a serial TNC (In Text Mode)"
+#~ msgstr "Daten vun en seriell TNC halen (in Textbedrief)"
+
+#~ msgid "TTY"
+#~ msgstr "TTY"
+
+#~ msgid "/dev/ttyUSB0"
+#~ msgstr "/dev/ttyUSB0"
+
+#~ msgid "Dump TTY records to the debug stream"
+#~ msgstr "TTY-Opnahmen na Fehlersöök-Stroom utgeven"
+
+#~ msgid "File"
+#~ msgstr "Datei"
+
+#~ msgid "Should information be gathered from a file?"
+#~ msgstr "Wullt Du Informatschonen ut en Datei halen?"
+
+#~ msgid "Collect data from a file"
+#~ msgstr "Daten ut en Datei tohoopstellen"
+
+#~ msgid "Dump file records to the debug stream"
+#~ msgstr "Datei-Opnahmen na Fehlersöök-Stroom utgeven"
+
+#~ msgid "Configure Compass Plugin"
+#~ msgstr "Kompassmoduul instellen"
+
+#~ msgid "Theme"
+#~ msgstr "Muster"
+
+#~ msgid "Default"
+#~ msgstr "Standard"
+
+#~ msgid "Arrows"
+#~ msgstr "Pielen"
+
+#~ msgid "Atom"
+#~ msgstr "Atom"
+
+#~ msgid "Magnet"
+#~ msgstr "Magnet"
+
+#~ msgid "Configure Crosshairs Plugin"
+#~ msgstr "Teelkrüüzmoduul instellen"
+
+#~ msgid "Gun 1"
+#~ msgstr "Sprütt 1"
+
+#~ msgid "Gun 2"
+#~ msgstr "Sprütt 2"
+
+#~ msgid "Circled"
+#~ msgstr "Krink"
+
+#~ msgid "German"
+#~ msgstr "Hoochdüütsch"
+
+#~ msgid "Dialog"
+#~ msgstr "Dialoog"
+
+#~ msgid "Filter"
+#~ msgstr "Filter"
+
+#~ msgid "Maximum number of results:"
+#~ msgstr "Gröttst Tall vun Resultaten:"
+
+#~ msgid "Minimum magnitude:"
+#~ msgstr "Lüttst Eerdbevenstärk:"
+
+#~ msgid "Time Range"
+#~ msgstr "Tietrebeet"
+
+#~ msgid "Eclipse Browser"
+#~ msgstr "Verdüüsternkieker"
+
+#~ msgid "Show eclipses for year:"
+#~ msgstr "Verdüüstern wiesen för't Johr:"
+
+#~ msgid "&Settings..."
+#~ msgstr "&Instellen..."
+
+#~ msgid "&Go To Selected Eclipse"
+#~ msgstr "Na utsöcht Verdüüstern &gahn"
+
+#~ msgid "Eclipses Configuration"
+#~ msgstr "Verdüüstern-Instellen"
+
+#~ msgid "View &Options"
+#~ msgstr "Ansicht-&Optschonen"
+
+#~ msgid "Enable &Lunar Eclipses"
+#~ msgstr "&Maandverdüüstern anmaken"
+
+#~ msgid "Show Eclipse Control &Widget"
+#~ msgstr "Verdüüstern-&Stüern wiesen"
+
+#~ msgid "&Eclipse Elements"
+#~ msgstr "Verdüüstern-&Elementen"
+
+#~ msgid "&Northern Penumbra"
+#~ msgstr "&Noorden Halfschadden"
+
+#~ msgid "&Umbra"
+#~ msgstr "&Karnschadden"
+
+#~ msgid "Position of Eclipse &Maximum"
+#~ msgstr "Punkt vun de &deepst Verdüüstern wiesen"
+
+#~ msgid "Central &Line"
+#~ msgstr "Zentraal&lien"
+
+#~ msgid "Full &Penumbra"
+#~ msgstr "Vull &Halfschadden"
+
+#~ msgid "Sunrise and Sunset &Boundaries"
+#~ msgstr "Sünnop- un -ünnergang&grenzen"
+
+#~ msgid "&Southern Penumbra"
+#~ msgstr "&Söden Halfschadden"
+
+#~ msgid "Penumbra with 60% Ma&gnitude"
+#~ msgstr "Halfschadden mit 60% &Grött"
+
+#~ msgid "&Reminder"
+#~ msgstr "&Vöranstoot"
+
+#~ msgid "Remind about eclipse events"
+#~ msgstr "Vöranstööt för Verdüüstern weisen"
+
+#~ msgid "Eclipse Event"
+#~ msgstr "Verdüüstern"
+
+#~ msgid ""
+#~ "<html><head/><body><p>Marble has detected that the following <span style="
+#~ "\" font-weight:600;\">eclipse events</span> will occur in the near "
+#~ "future. If you want more information on a specific event, select it and "
+#~ "click OK.</p></body></html>"
+#~ msgstr ""
+#~ "<html><head/><body><p>Marble hett opdeckt, de nakamen <span style=\" font-"
+#~ "weight:600;\">Verdüüstern</span> warrt sik bald todregen. Wenn Du över "
+#~ "een mehr Informatschonen hebben wullt, söök ehr ut un klick op OK.</p></"
+#~ "body></html>"
+
+#~ msgid "Do not remind me about eclipse events again"
+#~ msgstr "Keen Vöranstööt mehr för Verdüüstern wiesen"
+
+#~ msgid "Configure Elevation Profile Plugin"
+#~ msgstr "Hööchdenprofil-Moduul instellen"
+
+#~ msgid "Zoom to viewport"
+#~ msgstr "Kiekrebeetgrött ännern"
+
+#~ msgid "Speed"
+#~ msgstr "Gauheit"
+
+#~ msgid "Direction"
+#~ msgstr "Richt"
+
+#~ msgid "Altitude"
+#~ msgstr "Hööchd"
+
+#~ msgid "Precision"
+#~ msgstr "Nauigkeit"
+
+#~ msgid "Coordinate Grid Plugin"
+#~ msgstr "Koordinatengadder-Moduul"
+
+#~ msgid "C&olors"
+#~ msgstr "&Klören"
+
+#~ msgid "&Grid:"
+#~ msgstr "&Gadder:"
+
+#~ msgid "Color of the coordinate grid."
+#~ msgstr "De Klöör för dat Koordinatengadder"
+
+#~ msgid "&Tropics:"
+#~ msgstr "&Wennkrinken:"
+
+#~ msgid "Color of the tropical circles."
+#~ msgstr "Klöör vun de Wennkrinken"
+
+#~ msgid "&Equator:"
+#~ msgstr "Ä&quater:"
+
+#~ msgid "Color of the equator."
+#~ msgstr "De Klöör vun den Äquater"
+
+#~ msgid "Labels"
+#~ msgstr "Betekers"
+
+#~ msgid "&Named Labels"
+#~ msgstr "&Nöömt Betekers"
+
+#~ msgid "Show Labels for Prime meridian, Equator, Tropics."
+#~ msgstr "Betekers för Nullmeridiaan, Äquater un Wennkrinken wiesen"
+
+#~ msgid "&Numerical Labels"
+#~ msgstr "&Tallbetekers"
+
+#~ msgid "Show numerical Labels."
+#~ msgstr "Tallbetekers wiesen"
+
+#~ msgid "Configure Scale Bar Plugin"
+#~ msgstr "Maatbalkenmoduul instellen"
+
+#~ msgid "Show Ratio Scale"
+#~ msgstr "Maatbalken wiesen"
+
+#~ msgid "Minimize"
+#~ msgstr "Minimeren"
+
+#~ msgid "Marble - Measure Tool Configuration"
+#~ msgstr "Marble - Meetwarktüüch instellen"
+
+#, fuzzy
+#~| msgid "Circled"
+#~ msgid "Circle"
+#~ msgstr "Krink"
+
+#~ msgid "Segment labels"
+#~ msgstr "Afsnittbetekers"
+
+#~ msgid "Distance "
+#~ msgstr "Afstand "
+
+#~ msgid "Bearing"
+#~ msgstr "Richt"
+
+#, fuzzy
+#~| msgid "Bearing"
+#~ msgid "Bearing Change"
+#~ msgstr "Richt"
+
+#, fuzzy
+#~| msgid "Cemetery"
+#~ msgid "Perimeter"
+#~ msgstr "Karkhoff"
+
+#, fuzzy
+#~| msgid "Preference:"
+#~ msgid "Circumference"
+#~ msgstr "Vörinstellen:"
+
+#~ msgid "General"
+#~ msgstr "Allmeen"
+
+#~ msgid "Cache name:"
+#~ msgstr "Naam vun den Schatt:"
+
+#~ msgid "User name:"
+#~ msgstr "Brukernaam:"
+
+#~ msgid "Type:"
+#~ msgstr "Typ:"
+
+#~ msgid "Status:"
+#~ msgstr "Status:"
+
+#~ msgid "Country:"
+#~ msgstr "Land:"
+
+#~ msgid "Size:"
+#~ msgstr "Grött:"
+
+#~ msgid "Difficulty:"
+#~ msgstr "Swoorheit:"
+
+#~ msgid "Terrain:"
+#~ msgstr "Landschap:"
+
+#~ msgid "Longitude:"
+#~ msgstr "Geogr. Längde:"
+
+#~ msgid "Latitude:"
+#~ msgstr "Geogr. Breed:"
+
+#~ msgid "Date hidden:"
+#~ msgstr "Datum versteken:"
+
+#~ msgid "Date created:"
+#~ msgstr "Opstelldatum:"
+
+#~ msgid "Date last modified:"
+#~ msgstr "Tolest ännert:"
+
+#~ msgid "Log"
+#~ msgstr "Logbook"
+
+#~ msgid "Previous"
+#~ msgstr "Verleden"
+
+#~ msgid "Next"
+#~ msgstr "Nakamen"
+
+#~ msgid "Minimum difficulty:"
+#~ msgstr "Minimaal-Swoorheit:"
+
+#~ msgid "Maximum difficulty:"
+#~ msgstr "Maximaal-Speelstärk:"
+
+#~ msgid "Maximum Distance:"
+#~ msgstr "Hööchstafstand:"
+
+#~ msgid "Start:"
+#~ msgstr "Start:"
+
+#~ msgid "End:"
+#~ msgstr "Enn:"
+
+#~ msgid "TextLabel"
+#~ msgstr "Textfeld"
+
+#~ msgid "Hint"
+#~ msgstr "Tipp"
+
+#~ msgid "Logs"
+#~ msgstr "Logböker"
+
+#~ msgid "Marble - OpenDesktop plugin configuration"
+#~ msgstr "Marble - OpenDesktop-Moduul instellen"
+
+#~ msgid "Number of displayed items on the screen:"
+#~ msgstr "Tall vun op den Schirm wiest Indrääg:"
+
+#~ msgid "Map &Image"
+#~ msgstr "Koort&bild"
+
+#~ msgid "&Planet:"
+#~ msgstr "&Planet:"
+
+#~ msgid "&Size:"
+#~ msgstr "&Grött:"
+
+#~ msgid "x"
+#~ msgstr "x"
+
+#~ msgid "Preview"
+#~ msgstr "Vöransicht"
+
+#~ msgid "Filename"
+#~ msgstr "Dateinaam"
+
+#~ msgid "Position I&ndicator:"
+#~ msgstr "&Positschoonwieser:"
+
+#~ msgid "Configure Photo Plugin"
+#~ msgstr "Fotomoduul instellen"
+
+#~ msgid "License"
+#~ msgstr "Verlööfnis"
+
+#~ msgid "Number of items on the screen"
+#~ msgstr "Tall vun wiest Indrääg"
+
+#~ msgid "Configure Position Marker Plugin"
+#~ msgstr "Steedmark-Moduul instellen"
+
+#~ msgid "Cursor Shape"
+#~ msgstr "Blinkerform"
+
+#~ msgid "&Arrow"
+#~ msgstr "&Piel"
+
+#~ msgid "&Custom:"
+#~ msgstr "&Egen:"
+
+#~ msgid ""
+#~ "Position marker images indicating the direction should point north (top)."
+#~ msgstr ""
+#~ "Biller för Steedmarken, de de Richt kennig maakt, mööt na Noorden wiesen "
+#~ "(baven)."
+
+#~ msgid "Trail"
+#~ msgstr "Spoor"
+
+#~ msgid "&Accuracy:"
+#~ msgstr "&Nauigkeit:"
+
+#~ msgid "Color of the position marker's accuracy indicator."
+#~ msgstr "De Klöör vun den Steedmarker sien Nauigkeitwieser"
+
+#~ msgid "Trail:"
+#~ msgstr "Spoor:"
+
+#~ msgid "Color of the position marker's trail."
+#~ msgstr "De Klöör vun de Steedmarkerspoor"
+
+#~ msgid "Routing Configuration - Marble"
+#~ msgstr "Weegplanen instellen - Marble"
+
+#~ msgid "Audible Turn Instructions"
+#~ msgstr "Höörbor Fohranwiesen"
+
+#~ msgid "Play a sound"
+#~ msgstr "En Klang afspelen"
+
+#~ msgid "Use this speaker"
+#~ msgstr "Disse Stimm bruken"
+
+#~ msgid ""
+#~ "<a href=\"http://userbase.kde.org/Marble/CustomSpeakers\">Get more "
+#~ "speakers</a>"
+#~ msgstr ""
+#~ "<a href=\"http://userbase.kde.org/index.php?title=Marble/"
+#~ "CustomSpeakers&setlang=de\">Mehr Stimmen halen</a>"
+
+#~ msgid "Guidance Mode"
+#~ msgstr "Lootsenbedrief"
+
+#~ msgid "R"
+#~ msgstr "T"
+
+#~ msgid "Toggle GPS"
+#~ msgstr "GPS an-/utmaken"
+
+#~ msgid "zoom out"
+#~ msgstr "Lütter maken"
+
+#~ msgid "zoom in"
+#~ msgstr "Grötter maken"
+
+#~ msgid "total time remaining"
+#~ msgstr "heel nablieven Tiet"
+
+#~ msgid "Satellites Configuration - Marble"
+#~ msgstr "Satelliten-Instellen - Marble"
+
+#~ msgid "&Satellites"
+#~ msgstr "&Satelliten"
+
+#~ msgid "&Data Sources"
+#~ msgstr "&Datenborns"
+
+#~ msgid ""
+#~ "<html><head/><body><p><span style=\" font-weight:600;\">Last update:</"
+#~ "span></p></body></html>"
+#~ msgstr ""
+#~ "<html><head/><body><p><span style=\" font-weight:600;\">Tolest opfrischt:"
+#~ "</span></p></body></html>"
+
+#~ msgid "&Reload All Data Sources"
+#~ msgstr "All Datenborns &nieg laden"
+
+#~ msgid "Satellite Data Sources:"
+#~ msgstr "Satelliten-Datenborns:"
+
+#~ msgid "Add a new data source (URL)."
+#~ msgstr "Nieg Datenborn (URL) tofögen."
+
+#~ msgid "Open a new data source from disk."
+#~ msgstr "En nieg Datenborn op de Fastplaat opmaken"
+
+#~ msgid "Remove selected data source."
+#~ msgstr "Utsöcht Datenborn wegmaken"
+
+#~ msgid "(Built-in Data Sources for Earth Satellites)"
+#~ msgstr "(Inbuut Datenborns för Eer-Satelliten)"
+
+#~ msgid ""
+#~ "<html><head/><body><p>Supported formats: <a href=\"http://techbase.kde."
+#~ "org/Projects/Marble/SatelliteCatalogFormat\"><span style=\" text-"
+#~ "decoration: underline; color:#0000ff;\">Marble Satellite Catalogue</"
+#~ "span></a>, <a href=\"http://en.wikipedia.org/wiki/Two-line_element_set"
+#~ "\"><span style=\" text-decoration: underline; color:#0000ff;\">Two-Line-"
+#~ "Element Set</span></a></p></body></html>"
+#~ msgstr ""
+#~ "<html><head/><body><p>Ünnerstütt Formaten: <a href=\"http://techbase.kde."
+#~ "org/Projects/Marble/SatelliteCatalogFormat\"><span style=\" text-"
+#~ "decoration: underline; color:#0000ff;\">Marble-Satellitenkataloog</span></"
+#~ "a>, <a href=\"http://de.wikipedia.org/wiki/"
+#~ "Satellitenbahnelement#Das_Two_Line_Elements_Format_TLE\"><span style=\" "
+#~ "text-decoration: underline; color:#0000ff;\">Twee-Regen-Element-Sett</"
+#~ "span></a></p></body></html>"
+
+#~ msgid "Plugin Inactive"
+#~ msgstr "Moduul nich anmaakt"
+
+#~ msgid "&Activate Plugin"
+#~ msgstr "Moduul &anmaken"
+
+#~ msgid ""
+#~ "Configuration options not available since the plugin is disabled at the "
+#~ "moment."
+#~ msgstr "Keen Instellen verföögbor, dat Moduul is opstunns utmaakt."
+
+#~ msgid "km/h"
+#~ msgstr "km/h"
+
+#~ msgid "Configure Stars Plugin"
+#~ msgstr "Steernmoduul instellen"
+
+#~ msgid "Celestial Objects"
+#~ msgstr "Hevenkörper"
+
+#~ msgid "Star Magnitude Limit"
+#~ msgstr "Süllweert för Steernmagnituud"
+
+#~ msgid " mag"
+#~ msgstr " mag"
+
+#~ msgid "Solar System"
+#~ msgstr "Sünnsysteem"
+
+#~ msgid "Sun"
+#~ msgstr "Sünn"
+
+#~ msgid "Moon"
+#~ msgstr "Maand"
+
+#~ msgid "Mercury"
+#~ msgstr "Merkuur"
+
+#~ msgid "Venus"
+#~ msgstr "Venus"
+
+#~ msgid "Earth"
+#~ msgstr "Eer"
+
+#~ msgid "Mars"
+#~ msgstr "Mars"
+
+#~ msgid "Jupiter"
+#~ msgstr "Jupiter"
+
+#~ msgid "Saturn"
+#~ msgstr "Saturn"
+
+#~ msgid "Uranus"
+#~ msgstr "Uranus"
+
+#~ msgid "Neptune"
+#~ msgstr "Neptuun"
+
+#~ msgid "Use name labels"
+#~ msgstr "Naams wiesen"
+
+#~ msgid "Magnify Sun and Moon"
+#~ msgstr "Sünn un Maand grötter maken"
+
+#~ msgid "Other"
+#~ msgstr "Anner"
+
+#~ msgid "Deep Sky Object Labels"
+#~ msgstr "Betekers för Deepruumobjekten"
+
+#~ msgid "Deep Sky Objects"
+#~ msgstr "Deepruumobjekten"
+
+#~ msgid "Lines and Orientation"
+#~ msgstr "Lienen un Utrichten"
+
+#~ msgid "Constellations"
+#~ msgstr "Steernbiller"
+
+#~ msgid "Names"
+#~ msgstr "Naams"
+
+#~ msgid "Latin Name"
+#~ msgstr "Latiensch Naam"
+
+#~ msgid "Native Translation"
+#~ msgstr "Översetten"
+
+#~ msgid "Abbreviation"
+#~ msgstr "Afkörten"
+
+#~ msgid "Celestial Equator"
+#~ msgstr "Hevenäquater"
+
+#~ msgid "Celestial Poles"
+#~ msgstr "Hevenpolen"
+
+#~ msgid "Ecliptic"
+#~ msgstr "Sünnbahn"
+
+#~ msgid "Configure Weather Plugin"
+#~ msgstr "Wedermoduul instellen"
+
+#~ msgid "Information"
+#~ msgstr "Informatschonen"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Here you can "
+#~ "choose if you want the weather condition to be shown (for example, clouds "
+#~ "or clear sky.) Marble will only show the condition if this information is "
+#~ "available.</p></body></html>\n"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Hier kannst Du "
+#~ "utsöken, wat Du de Wederbedingen wiesen wullt, a.B. Wulken oder kloor "
+#~ "Heven. Marble wiest de Informatschonen bloots, wenn se verföögbor sünd.</"
+#~ "p></body></html>\n"
+
+#~ msgid "Weather condition"
+#~ msgstr "Wederbedingen"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Selects if you "
+#~ "want the temperature to be shown. The temperature will only be shown for "
+#~ "the stations it is available for.</p></body></html>\n"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Leggt fast, wat "
+#~ "Du de Temperatuur wiesen wullt. Se warrt bloots bi Statschonen wiest, för "
+#~ "de se verföögbor is.</p></body></html>\n"
+
+#~ msgid "Temperature"
+#~ msgstr "Temperatuur"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Select if you "
+#~ "want the wind direction to be shown. The wind direction will only be "
+#~ "shown if it is available for the particular station.</p></body></html>\n"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Leggt fast, wat "
+#~ "Du de Windricht wiesen wullt. Se warrt bloots bi Statschonen wiest, för "
+#~ "de se verföögbor is.</p></body></html>\n"
+
+#~ msgid "Wind direction"
+#~ msgstr "Windricht"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Select if you "
+#~ "want the wind speed to be shown. The wind speed will only be shown if it "
+#~ "is available for the particular station.</p></body></html>\n"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Leggt fast, wat "
+#~ "Du den Wind sien Gauigkeit wiesen wullt. Se warrt bloots bi Statschonen "
+#~ "wiest, för de se verföögbor is.</p></body></html>\n"
+
+#~ msgid "Wind speed"
+#~ msgstr "Windgauigkeit"
+
+#~ msgid "Units"
+#~ msgstr "Eenheiten"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">The unit used to "
+#~ "measure the temperature.</p></body></html>\n"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">De Eenheit, de "
+#~ "för Temperaturen bruukt warrt.</p></body></html>\n"
+
+#~ msgid "Celsius"
+#~ msgstr "Celsius"
+
+#~ msgid "Fahrenheit"
+#~ msgstr "Fahrenheit"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">The unit used to "
+#~ "measure the wind speed.</p></body></html>\n"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">De Eenheit, de "
+#~ "för de Windgauigkeit bruukt warrt.</p></body></html>\n"
+
+#~ msgid "Kilometers per hour"
+#~ msgstr "Kilometers per Stünn"
+
+#~ msgid "Miles per hour"
+#~ msgstr "Mielen per Stünn"
+
+#~ msgid "Meters per second"
+#~ msgstr "Meters per Sekunn"
+
+#~ msgid "Knots"
+#~ msgstr "Knütten"
+
+#~ msgid "Beaufort"
+#~ msgstr "Beaufort"
+
+#~ msgid "Pressure"
+#~ msgstr "Druck"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">The unit used to "
+#~ "measure the air pressure.</p></body></html>\n"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">De Eenheit, de "
+#~ "för den Luftdruck bruukt warrt.</p></body></html>\n"
+
+#~ msgid "Hecto Pascals"
+#~ msgstr "Hektopascal"
+
+#~ msgid "Kilo Pascals"
+#~ msgstr "Kilopascal"
+
+#~ msgid "Bars"
+#~ msgstr "Bar"
+
+#~ msgid "Millimeters of Mercury"
+#~ msgstr "Millimeter Quecksülversüül"
+
+#~ msgid "Inches of Mercury"
+#~ msgstr "Toll Quecksülversüül"
+
+#~ msgid "Miscellaneous"
+#~ msgstr "Anner Saken"
+
+#~ msgid "Show only favorite items"
+#~ msgstr "Bloots vörtrocken Indrääg wiesen"
+
+#~ msgid "Weather update interval"
+#~ msgstr "Weder-Opfrischtiet"
+
+#~ msgid " hours"
+#~ msgstr " Stünnen"
+
+#~ msgid "Configure Wikipedia Plugin"
+#~ msgstr "Wikipediamoduul instellen"
+
+#~ msgid "Show thumbnail images"
+#~ msgstr "Vöransichtbiller wiesen"
+
+#~ msgid "Route type:"
+#~ msgstr "Wegtyp:"
+
+#~ msgid "Speed:"
+#~ msgstr "Gauheit:"
+
+#~ msgid "AppKey"
+#~ msgstr "Programmslötel"
+
+#~ msgid "Preference:"
+#~ msgstr "Vörinstellen:"
+
+#~ msgid "Avoid motorways"
+#~ msgstr "Autobahnen ümfohren"
+
+#~ msgid "Avoid tollways"
+#~ msgstr "Mautstraten ümfohren"
+
+#~ msgid "Avoid ferries"
+#~ msgstr "Fähren ümfohren"
+
+#~ msgid "Ascending slope:"
+#~ msgstr "Anstiegen Hang:"
+
+#~ msgid "Descending slope:"
+#~ msgstr "Daalgahn Hang:"
+
+#~ msgid ""
+#~ "An AppKey is required for MapQuest routing to work. You can register one "
+#~ "<a href=\"http://developer.mapquest.com/web/products/open\">here</a>."
+#~ msgstr ""
+#~ "Du bruukst en Programmslötel, wenn de MapQuest-Weegplanen funkscheneren "
+#~ "schall. Du kannst <a href=\"http://developer.mapquest.com/web/products/"
+#~ "open\">hier</a> en inmellen. "
+
+#~ msgid "Monav Configuration"
+#~ msgstr "Monav instellen"
+
+#~ msgid "Transport Type:"
+#~ msgstr "Transportmetood:"
+
+#~ msgid "Any"
+#~ msgstr "Elk"
+
+#~ msgid "Manage Maps"
+#~ msgstr "Koorten plegen"
+
+#~ msgid "Install New"
+#~ msgstr "Nieg installeren"
+
+#~ msgid "Continent"
+#~ msgstr "Eerdeel"
+
+#~ msgid "Country"
+#~ msgstr "Land"
+
+#~ msgid "Download Variant"
+#~ msgstr "Variant daalladen"
+
+#~ msgid "Install"
+#~ msgstr "Installeren"
+
+#~ msgid "Nothing to do."
+#~ msgstr "Nix to doon."
+
+#~ msgid "%v/%m MB"
+#~ msgstr "%v/%m MB"
+
+#~ msgid "Abort"
+#~ msgstr "Afbreken"
+
+#~ msgid "Transport:"
+#~ msgstr "Transport:"
+
+#~ msgid "Profile:"
+#~ msgstr "Profil:"
+
+#~ msgid "Method"
+#~ msgstr "Metood"
+
+#~ msgid "Fastest"
+#~ msgstr "Gauest"
+
+#~ msgid "Shortest"
+#~ msgstr "Körtst"
+
+#~ msgid "Please allow access to KWallet."
+#~ msgstr "Bitte Togriep op KWallet tolaten"
+
+#~ msgid ""
+#~ "You haven't allowed Marble to use KWallet yet.\n"
+#~ "This is dangerous since Marble will store your password without "
+#~ "encryption.\n"
+#~ "Are you sure?"
+#~ msgstr ""
+#~ "Du hest Marble noch keen Verlööf dor för geven, dat dat op KWallet "
+#~ "togriepen dörv.\n"
+#~ "Wohrschau: Marble wohrt Dien Passwoort nu ahn Verslöteln.\n"
+#~ "Büst Du seker, Du wullt dat so?"
+
+#, fuzzy
+#~| msgid "File not accessible"
+#~ msgid "KWallet Access in Marble"
+#~ msgstr "Keen Togriep op Datei"
+
+#~ msgid ""
+#~ "You still don't allow Marble to use KWallet.\n"
+#~ "If you haven't seen the KWallet dialog asking to allow access, it means "
+#~ "that you have disabled it.\n"
+#~ "If you would like to change this see System Information -> Account "
+#~ "Details -> KDE Wallet -> Access Control.\n"
+#~ "Choose your wallet and allow Marble to use it."
+#~ msgstr ""
+#~ "Du hest Marble jümmers noch keen Verlööf geven, dat dat KWallet bruken "
+#~ "dörv.\n"
+#~ "Hest Du keen Dialoog to sehn kregen, de Di na Togriepverlööf fraag, hest "
+#~ "Du KWallet utmaakt.\n"
+#~ "Du kannst dat binnen de Systeeminstellen -> Kontoinformatschonen -> KDE-"
+#~ "Knipp -> Togriepkuntrull ännern.\n"
+#~ "Söök bitte Dien Knipp ut un giff Marble bitte Verlööf, dat dat KWallet "
+#~ "bruken dörv."
+
+#~ msgid "Location Browser"
+#~ msgstr "Stedenkieker"
+
+#~ msgid "Double click an entry of this list to get it displayed on the map."
+#~ msgstr "En Dubbelklick op en Listindrag wiest em op de Koort."
+
+#~ msgid "Navigate to your 'Home Location'"
+#~ msgstr "Na Dien \"Tohuus\" gahn"
+
+#~ msgid "Do you allow Marble to use KWallet?"
+#~ msgstr "Wullt Du Marble KWallet bruken laten?"
+
+#, fuzzy
+#~| msgid "Farm"
+#~ msgid "Form"
+#~ msgstr "Bueree"
+
+#, fuzzy
+#~| msgid "&Url:"
+#~ msgid "Url:"
+#~ msgstr "&URL:"
+
+#, fuzzy
+#~| msgid "&Add Folder"
+#~ msgid "Add SoundCue"
+#~ msgstr "&Orner tofögen"
+
+#, fuzzy
+#~| msgid "Circled"
+#~ msgid "Circular"
+#~ msgstr "Krink"
+
+#~ msgid "&Name"
+#~ msgstr "&Naam"
+
+#~ msgid "Link"
+#~ msgstr "Link"
+
+#~ msgid "Pause"
+#~ msgstr "Anhollen"
+
+#~ msgid "Pauses touring until you start it again"
+#~ msgstr "Höllt den Törn an, bet Du dor mit wiedermaakst"
+
+#~ msgid "Land"
+#~ msgstr "Land"
+
+#, fuzzy
+#~| msgid "Area"
+#~ msgid "Ara"
+#~ msgstr "Rebeet"
+
+#, fuzzy
+#~| msgid "Cancel"
+#~ msgid "Cancer"
+#~ msgstr "Afbreken"
+
+#, fuzzy
+#~| msgid "&Center"
+#~ msgid "Centaurus"
+#~ msgstr "&Inmiddeln"
+
+#, fuzzy
+#~| msgid "Craters"
+#~ msgid "Crater"
+#~ msgstr "Kraters"
+
+#, fuzzy
+#~| msgid "Log"
+#~ msgid "Leo"
+#~ msgstr "Logbook"
+
+#, fuzzy
+#~| msgid "Normal"
+#~ msgid "Norma"
+#~ msgstr "Normaal"
+
+#, fuzzy
+#~| msgid "International"
+#~ msgid "Constellation Labels"
+#~ msgstr "Internatschonaal"
+
+#, fuzzy
+#~| msgid "International"
+#~ msgid "Constellation Names"
+#~ msgstr "Internatschonaal"
+
+#, fuzzy
+#~| msgid "OpenGL"
+#~ msgid "Open"
+#~ msgstr "OpenGL"
+
+#~ msgctxt "Action for toggling the atmosphere"
+#~ msgid "&Atmosphere"
+#~ msgstr "&Atmosfeer"
+
+#~ msgid "Enable tab to see gpxFileView"
+#~ msgstr "Paneel för de GPX-Dateiansicht opmaken"
+
+#~ msgctxt "Action for toggling the 'current location' box"
+#~ msgid "Current Location"
+#~ msgstr "Aktuell Steed"
+
+#~ msgctxt "Action for toggling the navigation panel"
+#~ msgid "Show &Navigation Panel"
+#~ msgstr "&Stüerpaneel wiesen"
+
+#~ msgctxt "Status tip"
+#~ msgid "Show Navigation Panel"
+#~ msgstr "Stüerpaneel wiesen"
+
+#, fuzzy
+#~| msgid "File View"
+#~ msgctxt "Action for showing the File View"
+#~ msgid "&Show File View"
+#~ msgstr "Dateiansicht"
+
+#~ msgid "Guides"
+#~ msgstr "Hülplienen"
+
+#~ msgid "Name Ids of plugins."
+#~ msgstr "Naam-IDs vun Modulen"
+
+#~ msgid "List of toggles for enabling plugins."
+#~ msgstr "List vun Marken för't Anmaken vun Modulen"
+
+#~ msgid "List of toggles for making plugins visible."
+#~ msgstr "List vun Marken för't Sichtbormaken vun Modulen"
+
+#~ msgid "Marble Infocenter"
+#~ msgstr "Marble-Infozentrum"
+
+#~ msgid "Data Sheet"
+#~ msgstr "Datenblatt"
+
+#~ msgid "Name of the location"
+#~ msgstr "Naam vun de Steed"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "size:14pt; font-weight:600;\">Name</span></p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "size:14pt; font-weight:600;\">Naam</span></p></body></html>"
+
+#~ msgid "Role of the location."
+#~ msgstr "Rull vun de Steed"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "style:italic;\">Role</span></p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "style:italic;\">Rull</span></p></body></html>"
+
+#~ msgid "Alternative name"
+#~ msgstr "Anner Naam"
+
+#~ msgid "Alternative name of the location."
+#~ msgstr "Anner Naam vun de Steed"
+
+#~ msgid "Alternative Name"
+#~ msgstr "Anner Naam"
+
+#~ msgid "Short description:"
+#~ msgstr "Kort Beschrieven:"
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">No description "
+#~ "available.</p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">If you are connected to "
+#~ "the Internet please click the \"Wikipedia\" tab at the top of this page "
+#~ "to get more information.</p></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Keen Beschrieven "
+#~ "verföögbor.</p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Wenn Du na't Internet "
+#~ "tokoppelt büst, klick bitte baven op dat \"Wikipedia\"-Paneel, wenn Du "
+#~ "mehr weten wullt.</p></body></html>"
+
+#~ msgid ""
+#~ "000° 00' 00\" N\n"
+#~ "000° 00' 00\" E "
+#~ msgstr ""
+#~ "000° 00' 00\" N\n"
+#~ "000° 00' 00\" O "
+
+#~ msgid "9000.0 m"
+#~ msgstr "9000,0 m"
+
+#~ msgid "1000000"
+#~ msgstr "1.000.000"
+
+#~ msgid "Area:"
+#~ msgstr "Rebeet:"
+
+#~ msgid "0.0 sq km"
+#~ msgstr "0,0 km²"
+
+#~ msgid "Diameter:"
+#~ msgstr "Dörmaat:"
+
+#~ msgid "Timezone (Normal/DST):"
+#~ msgstr "Tietrebeet (Normaal/Sommertiet):"
+
+#~ msgid "gmt / dst"
+#~ msgstr "MET / MEST"
+
+#~ msgid "State:"
+#~ msgstr "Staat:"
+
+#~ msgid "Wikipedia"
+#~ msgstr "Wikipedia"
+
+#~ msgid "Back"
+#~ msgstr "Torüch"
+
+#~ msgid "Move backwards one step in the browsing history."
+#~ msgstr "Een Schritt in de Vörgeschicht torüchgahn"
+
+#~ msgid "Print Page"
+#~ msgstr "Siet drucken"
+
+#~ msgid "Sun is Zenith at"
+#~ msgstr "Sünn-Hööchststand is Klock"
+
+#~ msgid "Show"
+#~ msgstr "Wiesen"
+
+#~ msgid "Hide"
+#~ msgstr "Versteken"
+
+#~ msgid "Show Zenith"
+#~ msgstr "Sünn-Hööchststand wiesen"
+
+#~ msgid "Hide Zenith"
+#~ msgstr "Sünn-Hööchststand versteken"
+
+#~ msgid "Shows and hides the zenith location of the sun"
+#~ msgstr "Wiest oder verstickt de Sünn ehr Hööchststand"
+
+#~ msgid "dd/MM/yyyy hh:mm AP"
+#~ msgstr "dd/MM/jjjj ss:mm AP"
+
+#~ msgid "M/d/yyyy hh:mm"
+#~ msgstr "M/d/jjjj ss:mm"
+
+#~ msgid "Profile"
+#~ msgstr "Profil"
+
+#, fuzzy
+#~| msgid ""
+#~| "*.gpx *.kml *.osm *.pnt|All Supported Files\n"
+#~| "*.gpx|GPS Data\n"
+#~| "*.kml|Google Earth KML\n"
+#~| "*.osm|OpenStreetMap Data\n"
+#~| "*.pnt|Micro World Data Bank II"
+#~ msgid ""
+#~ "*.gpx *.kml *.log *.osm *.pnt|All Supported Files\n"
+#~ "*.gpx|GPS Data\n"
+#~ "*.kml|Google Earth KML\n"
+#~ "*.log|TangoGPS Logfile\n"
+#~ "*.osm|OpenStreetMap Data\n"
+#~ "*.pnt|Micro World Data Bank II"
+#~ msgstr ""
+#~ "*.gpx *.kml *.osm *.pnt|All ünnerstütt Dateien\n"
+#~ "*.gpx|GPS-Daten\n"
+#~ "*.kml|Google Earth\"-KML\n"
+#~ "*.osm|OpenStreetMap-Daten\n"
+#~ "*.pnt|Micro World Datenbank II"
+
+#~ msgid "Greenwich Mean Time"
+#~ msgstr "Zentraal Greenwich-Tiet"
+
+#~ msgid "&Search"
+#~ msgstr "&Söken"
+
+#~ msgid "Search line"
+#~ msgstr "Söökreeg"
+
+#~ msgid "Here you can enter the name of the location you are searching for."
+#~ msgstr "Hier kannst Du de Steed ingeven, na de Du söchst."
+
+#~ msgid "WMS Support"
+#~ msgstr "WMS-Ünnerstütten"
+
+#~ msgid "Check speed of gps drawing"
+#~ msgstr "Gauheit vun't GPS-Teken pröven"
+
+#~ msgid "Enable tab to show the current location"
+#~ msgstr "Paneel för de aktuelle Steed opmaken"
+
+#~ msgid "Show or hide routing options"
+#~ msgstr "Törn-Optschonen wiesen oder versteken"
+
+#~ msgid "<a href=\"http://edu.kde.org\">Configure</a>"
+#~ msgstr "<a href=\"http://edu.kde.org\">Instellen</a>"
+
+#, fuzzy
+#~| msgid "Search"
+#~ msgid "Search..."
+#~ msgstr "Söök"
+
+#~ msgid "(c) 2007, 2008, 2009, 2010"
+#~ msgstr "© 2007, 2008, 2009, 2010"
+
+#, fuzzy
+#~| msgid "Server"
+#~ msgid "Server URL:"
+#~ msgstr "Server"
+
+#, fuzzy
+#~| msgid "The format to display the time in"
+#~ msgid "Image format of the tiles."
+#~ msgstr "Dat Tietformaat"
+
+#~ msgctxt "Remove All Bookmarks"
+#~ msgid "&Remove All Bookmarks"
+#~ msgstr "&All Leestekens wegmaken"
+
+#~ msgid "Are you sure you want to delete all bookmarks?"
+#~ msgstr "Wullt Du redig all Leestekens wegdoon?"
+
+#~ msgid "&OK"
+#~ msgstr "&OK"
+
+#~ msgid "Re-center"
+#~ msgstr "Nieg inmiddeln"
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans'; font-size:10pt; font-"
+#~ "weight:400; font-style:normal;\">\n"
+#~ "<table border=\"0\" style=\"-qt-table-type: root; margin-top:4px; margin-"
+#~ "bottom:4px; margin-left:4px; margin-right:4px;\">\n"
+#~ "<tr>\n"
+#~ "<td style=\"border: none;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-family:'DejaVu Sans'; font-size:9pt;\"></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-family:'DejaVu Sans'; font-size:9pt;\"></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-family:'DejaVu Sans'; font-size:9pt;\"></p></td></tr></table></"
+#~ "body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans'; font-size:10pt; font-"
+#~ "weight:400; font-style:normal;\">\n"
+#~ "<table border=\"0\" style=\"-qt-table-type: root; margin-top:4px; margin-"
+#~ "bottom:4px; margin-left:4px; margin-right:4px;\">\n"
+#~ "<tr>\n"
+#~ "<td style=\"border: none;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-family:'DejaVu Sans'; font-size:9pt;\"></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-family:'DejaVu Sans'; font-size:9pt;\"></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-family:'DejaVu Sans'; font-size:9pt;\"></p></td></tr></table></"
+#~ "body></html>"
+
+#, fuzzy
+#~| msgid "Open File"
+#~ msgid "Open File..."
+#~ msgstr "Datei opmaken"
+
+#, fuzzy
+#~| msgid "Input Widgets"
+#~ msgid "RoutingWidget"
+#~ msgstr "Ingaavelementen"
+
+#, fuzzy
+#~| msgid ""
+#~| "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/"
+#~| "TR/REC-html40/strict.dtd\">\n"
+#~| "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~| "css\">\n"
+#~| "p, li { white-space: pre-wrap; }\n"
+#~| "</style></head><body style=\" font-family:'DejaVu Sans'; font-size:10pt; "
+#~| "font-weight:400; font-style:normal;\">\n"
+#~| "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~| "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~| "weight:600;\">000,0 km/h</span></p></body></html>"
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "size:small; color:#000000;\">0 m</span></p></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'DejaVu Sans'; font-size:10pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">000,0 km/h</span></p></body></html>"
+
+#, fuzzy
+#~| msgid "Input Widgets"
+#~ msgid "Routing Widget"
+#~ msgstr "Ingaavelementen"
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<table border=\"0\" style=\"-qt-table-type: root; margin-top:4px; margin-"
+#~ "bottom:4px; margin-left:4px; margin-right:4px;\">\n"
+#~ "<tr>\n"
+#~ "<td style=\"border: none;\">\n"
+#~ "<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-"
+#~ "left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span "
+#~ "style=\" font-weight:600;\">Routing Information</span></p></td></tr></"
+#~ "table></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<table border=\"0\" style=\"-qt-table-type: root; margin-top:4px; margin-"
+#~ "bottom:4px; margin-left:4px; margin-right:4px;\">\n"
+#~ "<tr>\n"
+#~ "<td style=\"border: none;\">\n"
+#~ "<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-"
+#~ "left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span "
+#~ "style=\" font-weight:600;\">Törn-Informatschonen</span></p></td></tr></"
+#~ "table></body></html>"
+
+#~ msgid "0 Hours  0 Minutes"
+#~ msgstr "0 Stünnen, 0 Minuten"
+
+#, fuzzy
+#~| msgid ""
+#~| "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/"
+#~| "TR/REC-html40/strict.dtd\">\n"
+#~| "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~| "css\">\n"
+#~| "p, li { white-space: pre-wrap; }\n"
+#~| "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~| "font-weight:400; font-style:normal;\">\n"
+#~| "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~| "right:0px; -qt-block-indent:0; text-indent:0px;\"><a href=\"http://edu."
+#~| "kde.org/marble\"><span style=\" font-family:'DejaVu Sans'; font-"
+#~| "size:8pt; text-decoration: underline; color:#0057ae;\">Options</span></"
+#~| "a></p></body></html>"
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><a href=\"http://edu."
+#~ "kde.org/marble\"><span style=\" font-family:'DejaVu Sans'; font-size:8pt; "
+#~ "text-decoration: underline; color:#0057ae;\">Configure</span></a></p></"
+#~ "body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><a href=\"http://edu."
+#~ "kde.org/marble\"><span style=\" font-family:'DejaVu Sans'; font-size:8pt; "
+#~ "text-decoration: underline; color:#0057ae;\">Optschonen</span></a></p></"
+#~ "body></html>"
+
+#~ msgid "Avoid"
+#~ msgstr "Övergahn"
+
+#~ msgid "When checked, highways will be avoided in car routing"
+#~ msgstr "Is dit anmaakt, warrt Autobahnen ümfohrt."
+
+#~ msgid "Highways"
+#~ msgstr "Autobahnen"
+
+#~ msgid "When checked, toll roads will be avoided"
+#~ msgstr "Is dit anmaakt, warrt Mautstraten ümfohrt."
+
+#~ msgid "Toll Roads"
+#~ msgstr "Mautstraten"
+
+#~ msgid "Routing Information"
+#~ msgstr "Törn-Informatschonen"
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<table border=\"0\" style=\"-qt-table-type: root; margin-top:4px; margin-"
+#~ "bottom:4px; margin-left:4px; margin-right:4px;\">\n"
+#~ "<tr>\n"
+#~ "<td style=\"border: none;\">\n"
+#~ "<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-"
+#~ "left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span "
+#~ "style=\" font-size:12pt; font-weight:600;\">00:00</span></p></td></tr></"
+#~ "table></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<table border=\"0\" style=\"-qt-table-type: root; margin-top:4px; margin-"
+#~ "bottom:4px; margin-left:4px; margin-right:4px;\">\n"
+#~ "<tr>\n"
+#~ "<td style=\"border: none;\">\n"
+#~ "<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-"
+#~ "left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span "
+#~ "style=\" font-size:12pt; font-weight:600;\">00:00</span></p></td></tr></"
+#~ "table></body></html>"
+
+#~ msgid "Navigator Float Item"
+#~ msgstr "Navigatschoon-Sweevelement"
+
+#, fuzzy
+#~| msgid "Craters"
+#~ msgid "Meters"
+#~ msgstr "Kraters"
+
+#, fuzzy
+#~| msgid "&Distance:"
+#~ msgid "Distance Covered"
+#~ msgstr "&Afstand:"
+
+#~ msgid "&Date"
+#~ msgstr "&Datum"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Change sun time</p></"
+#~ "body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Sünntiet ännern</p></"
+#~ "body></html>"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Center the map on sun "
+#~ "position</p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Koort na Sünnstand "
+#~ "inmiddeln</p></body></html>"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Display sun position</"
+#~ "p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Sünnstand wiesen</p></"
+#~ "body></html>"
+
+#~ msgid "GMT"
+#~ msgstr "GMT"
+
+#~ msgid ""
+#~ "This control panel allows you to adjust the map according to your needs."
+#~ msgstr "Mit dat Stüerfeld kannst Du de Koort na Dien Möög topassen."
+
+#~ msgid "Centers onto your current position"
+#~ msgstr "Dien aktuelle Steed inmiddeln"
+
+#~ msgid ""
+#~ "In navigation mode the view will center onto your current position and "
+#~ "will try to emulate the behaviour of a navigation system"
+#~ msgstr ""
+#~ "Binnen den Stüerbedrief middelt de Ansicht Dien aktuelle Steed in un "
+#~ "funkscheneert liek as en Stüersysteem"
+
+#~ msgid "Navigation mode"
+#~ msgstr "Stüerbedrief"
+
+#~ msgid "Your current speed"
+#~ msgstr "Dien Gauigkeit opstunns"
+
+#~ msgid "Your current speed (measured e.g. via a GPS device)"
+#~ msgstr "Dien Gauigkeit opstunns (a.B. mit en GPS-Reedschap meten)"
+
+#~ msgid "Your current position"
+#~ msgstr "Dien Steed opstunns"
+
+#~ msgid "Your current position (measured e.g. via a GPS device)"
+#~ msgstr "Dien Steed opstunns (a.B. mit en GPS-Reedschap meten)"
+
+#~ msgid "Fuzzy description of your position"
+#~ msgstr "De Beschrieven vun Dien Steed, so üm un bi"
+
+#~ msgid "<b>Unidentified Position</b>"
+#~ msgstr "<b>Nich begäng Positschoon</b>"
+
+#~ msgid "Longitude of your current position"
+#~ msgstr "Längde vun Dien aktuelle Steed"
+
+#~ msgid "+00°00'00\" E"
+#~ msgstr "+00°00'00\" O"
+
+#~ msgid "Latitude of your current position"
+#~ msgstr "Breed vun Dien aktuelle Steed"
+
+#~ msgid "+00°00'00\" N"
+#~ msgstr "+00°00'00\" N"
+
+#~ msgid "Altitude of your current position"
+#~ msgstr "Dien aktuelle Hööchde"
+
+#~ msgid "000 m"
+#~ msgstr "000 m"
+
+#~ msgid "p"
+#~ msgstr "p"
+
+#~ msgid "Region"
+#~ msgstr "Regioon"
+
+#, fuzzy
+#~| msgid "Bridge"
+#~ msgid "Widget"
+#~ msgstr "Brüch"
+
+#~ msgid "Forward"
+#~ msgstr "Vörut"
+
+#~ msgid "Move forward one step in the browsing history."
+#~ msgstr "Een Schritt in de Vörgeschicht vörutgahn"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p></body></html>"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-family:'MS Shell Dlg 2'; font-size:8pt;\"></p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-family:'MS Shell Dlg 2'; font-size:8pt;\"></p></body></html>"
+
+#~ msgid "Track Gps"
+#~ msgstr "GPS beluern"
+
+#~ msgid "Catch Gps"
+#~ msgstr "GPS infangen"
+
+#~ msgid "Draw"
+#~ msgstr "Teken"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">There are two caches "
+#~ "being used for Marble: The physical memory which is needed to keep map "
+#~ "data in the computer's memory. Increasing the value will make the "
+#~ "application more responsive. The hard disc memory cache is used by "
+#~ "download contents from the internet (e.g. Wikipedia data or map data). "
+#~ "Decrease this value if you want to save space on the hard disc and if "
+#~ "high usage of the internet is not an issue. </p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Marble bruukt twee "
+#~ "Oorden vun Twischenspiekers: De physikaalsch Spieker för't Wohren vun "
+#~ "Koortendaten in'n Reeknerspieker. En grötter Weert lett dat Programm "
+#~ "gauer reageren. De Fastplatten-Twischenspieker warrt för't Daalladen vun "
+#~ "Daten ut dat Internet (a.B. Wiki- oder Koortendaten) bruukt. Maak dissen "
+#~ "Weert lütter, wenn Du Fastplattenplatz sporen wullt un nich faken op dat "
+#~ "Internet togrippst.</p></body></html>"
+
+#~ msgid "Open Map &Data..."
+#~ msgstr "Koort&daten opmaken..."
+
+#~ msgid "&Import Map Data..."
+#~ msgstr "Koortdaten &importeren..."
+
+#~ msgid "Panoramio Photos"
+#~ msgstr "\"Panoramio\"-Fotos"
+
+#~ msgid "Co-maintainer and Architect"
+#~ msgstr "Mitplegersch un Architektin"
+
+#~ msgid "Cross&hairs"
+#~ msgstr "Teel&krüüz"
+
+#~ msgid "Scale &Bar"
+#~ msgstr "Maat&balken"
+
+#~ msgid "GpxSax"
+#~ msgstr "GpxSax"
+
+#~ msgid ""
+#~ "Parse error at line %1, column %2:\n"
+#~ "%3."
+#~ msgstr ""
+#~ "Inlees-Fehler bi Reeg %1, Striep %2:\n"
+#~ "%3."
+
+#~ msgid "Save File"
+#~ msgstr "Datei sekern"
+
+#~ msgid "GpxFile (*.gpx)"
+#~ msgstr "Gpx-Datei (*.gpx)"
+
+#~ msgid "km"
+#~ msgstr "km"
+
+#~ msgid "Total Distance: %1 km"
+#~ msgstr "Afstand tosamen: %1 km"
+
+#~ msgctxt "The compass direction"
+#~ msgid "North"
+#~ msgstr "Noord"
+
+#~ msgctxt "The compass direction"
+#~ msgid "East"
+#~ msgstr "Oost"
+
+#~ msgctxt "The compass direction"
+#~ msgid "South"
+#~ msgstr "Sööd"
+
+#~ msgctxt "The compass direction"
+#~ msgid "West"
+#~ msgstr "West"
+
+#~ msgid "Path"
+#~ msgstr "Padd"
+
+#~ msgid "Could not convert <minimum> child text content to integer. Was: '%1'"
+#~ msgstr ""
+#~ "De <minimum>-Ünnertextinholt lett sik nich na en Heeltall wanneln. Wöör: "
+#~ "\"%1\""
+
+#~ msgid "Could not convert <maximum> child text content to integer. Was: '%1'"
+#~ msgstr ""
+#~ "De <maximum>-Ünnertextinholt lett sik nich na en Heeltall wanneln. Wöör: "
+#~ "\"%1\""
+
+#~ msgid "Parsing failed. Still %1 unclosed tags after document end."
+#~ msgstr "Inlesen fehlslaan. Noch %1 nich slaten Betekers achter Dokment-Enn."
+
+#~ msgid "File format unrecognized"
+#~ msgstr "Nich begäng Dateiformaat"
+
+#~ msgid "The file is not a valid DGML 2.0 file"
+#~ msgstr "De Datei is keen tolaten DGML 2.0 Datei"
+
+#~ msgid "The file is not a valid GPX 1.0 / 1.1 file"
+#~ msgstr "De Datei is keen tolaten GPX 1.0 / 1.1-Datei"
+
+#~ msgid "The file is not a valid KML 2.0 / 2.1 / 2.2 file"
+#~ msgstr "De Datei is keen tolaten KML 2.0 / 2.1 / 2.2 Datei"
+
+#~ msgid "Version %1"
+#~ msgstr "Verschoon %1"
+
+#~ msgid ""
+#~ "<br />(c) 2007, 2008, The Marble Project<br /><br /><a href=\"http://edu."
+#~ "kde.org/marble\">http://edu.kde.org/marble</a>"
+#~ msgstr ""
+#~ "<br />(c) 2007, 2008, dat Marble-Projekt<br /><br /><a href=\"http://edu."
+#~ "kde.org/marble\">http://edu.kde.org/marble</a>"
+
+#~ msgid "0 N 0 W"
+#~ msgstr "0 N 0 W"
+
+#~ msgid "Add &Measure Point"
+#~ msgstr "&Meetpunkt tofögen"
+
+#~ msgid "&Remove Measure Points"
+#~ msgstr "Meetpunkten &wegnehmen"
+
+#~ msgid "Copy Coordinates"
+#~ msgstr "Koordinaten koperen"
+
+#~ msgid "Marble Info Center - %1"
+#~ msgstr "Marble-Infozentrum - %1"
+
+#~ msgid "Regional Capital"
+#~ msgstr "Hööftstadt vun de Regioon"
+
+#~ msgid "City"
+#~ msgstr "Stadt"
+
+#~ msgid "Ocean"
+#~ msgstr "Ozean"
+
+#~ msgid "%1 sq km"
+#~ msgstr "%1 km²"
+
+#~ msgid "%1 Mio. sq km"
+#~ msgstr "%1 Mio. km²"
+
+#~ msgid "%1 inh."
+#~ msgstr "%1 Inw."
+
+#~ msgid "%1 Mio. inh."
+#~ msgstr "%1 Mio. Inw."
+
+#~ msgid "%1 m"
+#~ msgstr "%1 m"
+
+#~ msgid "Download failed: %1."
+#~ msgstr "Fehler bi't Daalladen: %1."
+
+#~ msgid "Ctrl+O"
+#~ msgstr "Strg+O"
+
+#~ msgid "Open a file for viewing on Marble"
+#~ msgstr "En Datei opmaken, de Du mit Marble bekieken wullt"
+
+#~ msgid "Ctrl+S"
+#~ msgstr "Strg+S"
+
+#~ msgid "Save a screenshot of the map"
+#~ msgstr "En Schirmfoto vun de Koort sekern"
+
+#~ msgid "&Print..."
+#~ msgstr "&Drucken..."
+
+#~ msgid "Ctrl+P"
+#~ msgstr "Strg+P"
+
+#~ msgid "Print a screenshot of the map"
+#~ msgstr "En Schirmfoto vun de Koort drucken"
+
+#~ msgid "&Quit"
+#~ msgstr "&Verlaten"
+
+#~ msgid "Ctrl+Q"
+#~ msgstr "Strg+V"
+
+#~ msgid "Ctrl+C"
+#~ msgstr "Strg+C"
+
+#~ msgid "Copy a screenshot of the map"
+#~ msgstr "En Schirmfoto vun de Koort koperen"
+
+#~ msgid "Copy the center coordinates as text"
+#~ msgstr "Merrnkoordinaten as Text koperen"
+
+#~ msgid "&Full Screen Mode"
+#~ msgstr "&Heelschirm-Bedrief"
+
+#~ msgid "Ctrl+Shift+F"
+#~ msgstr "Strg+Ümschalt+F"
+
+#~ msgid "Full Screen Mode"
+#~ msgstr "Heelschirm-Bedrief"
+
+#~ msgid "&Status Bar"
+#~ msgstr "&Statusbalken"
+
+#~ msgid "Show Status Bar"
+#~ msgstr "Statusbalken wiesen"
+
+#~ msgid "Show Real Time Cloud Cover"
+#~ msgstr "Echttiet-Wulkendeck wiesen"
+
+#~ msgid "Show Atmosphere"
+#~ msgstr "Atmosfeer wiesen"
+
+#~ msgid "What's &This"
+#~ msgstr "Wat is dat?"
+
+#~ msgid "Shift+F1"
+#~ msgstr "Ümschalt+F1"
+
+#~ msgid "&About Marble Desktop Globe"
+#~ msgstr "&Vertell wat över den Marble-Schriefdischglobus"
+
+#~ msgid "Show the application's About Box"
+#~ msgstr "De Informatschonen över dat Programm wiesen"
+
+#~ msgid "About &Qt"
+#~ msgstr "Över &Qt"
+
+#~ msgid "Show the Qt library's About box"
+#~ msgstr "De Informatschonen över de Qt-Bibliotheek wiesen"
+
+#~ msgid "&Help"
+#~ msgstr "&Hülp"
+
+#~ msgid "Ready"
+#~ msgstr "Praat"
+
+#~ msgid "Images (*.jpg *.png)"
+#~ msgstr "Biller (*.jpg *.png)"
+
+#~ msgid ""
+#~ "All Supported Files (*.gpx *.kml);;GPS Data (*.gpx);;Google Earth KML (*."
+#~ "kml)"
+#~ msgstr ""
+#~ "Alle Dateitypen, de ünnerstütt warrt (*.gpx *.kml);;GPS-Daten (*.gpx);;"
+#~ "Google Earth KML (*.kml)"
+
+#~ msgid "This is a simple test plugin."
+#~ msgstr "Dit is en eenfach Probeermoduul."
+
+#~ msgid "Compass"
+#~ msgstr "Kompass"
+
+#~ msgid "&Compass"
+#~ msgstr "&Kompass"
+
+#~ msgid "This is a float item that provides a compass."
+#~ msgstr "Dit is en sweven Element, dat en Kompass praatstellt."
+
+#~ msgid "This plugin displays TBD satellites."
+#~ msgstr "Dit Moduul stellt noch nich fastleggt Satelliten praat."
+
+#~ msgid "DataView Plugin"
+#~ msgstr "Datenkiek-Moduul"
+
+#~ msgid "A plugin that displays all the loaded data in a separate window."
+#~ msgstr "En Moduul, dat all laadt Daten binnen en egen Finster wiest"
+
+#~ msgid "&Stars"
+#~ msgstr "&Steerns"
+
+#~ msgid "A plugin that shows the Starry Sky."
+#~ msgstr "En Moduul, dat den Steernheven wiest."
+
+#~ msgid "&Overview Map"
+#~ msgstr "Ö&versichtkoort"
+
+#~ msgid "This is a float item that provides an overview map."
+#~ msgstr "Dit is en sweven Element, dat en Översichtkoort praatstellt."
+
+#~ msgid "&Scale Bar"
+#~ msgstr "&Maatbalken"
+
+#~ msgid "This is a float item that provides a map scale."
+#~ msgstr "Dit is en sweven Element, dat en Maatbalken praatstellt."
+
+#~ msgid "m"
+#~ msgstr "m"
+
+#~ msgid "&Panoramio"
+#~ msgstr "&Panoramio"
+
+#~ msgid ""
+#~ "Automatically downloads images from around the world in preference to "
+#~ "their popularity"
+#~ msgstr "Laadt automaatsch de mehrst vörtrocken Biller ut de hele Welt daal."
+
+#~ msgid "&Navigation"
+#~ msgstr "&Navigatschoon"
+
+#~ msgid "A mouse control to zoom and move the map"
+#~ msgstr "Mit de Muus de Koort bewegen un ehr Grött ännern"
+
+#~ msgid "GeoData Plugin"
+#~ msgstr "GeoData-Moduul"
+
+#~ msgid "&GeoData Plugin"
+#~ msgstr "&GeoData-Moduul"
+
+#~ msgid "FITemplate"
+#~ msgstr "Sweev-Vörlaag"
+
+#~ msgid "Float Item &Template"
+#~ msgstr "Sweevelement-&Vörlaag"
+
+#~ msgid "This is a template class for float items."
+#~ msgstr "Dit is en Vörlaagklass för Sweevelementen"
+
+#~ msgid "twitter "
+#~ msgstr "Twitter "
+
+#~ msgid "&twitter"
+#~ msgstr "&Twitter"
+
+#~ msgid "show public twitts in their places"
+#~ msgstr "Apen Tweets in ehr Steden wiesen"
+
+#~ msgid "Placemarks Plugin"
+#~ msgstr "Steedmarken-Moduul"
+
+#~ msgid "&Placemarks Plugin"
+#~ msgstr "&Steedmarken-Moduul"
+
+#~ msgid "A plugin that displays placemarks."
+#~ msgstr "En Moduul, dat den Steedmarken wiest."
+
+#~ msgid ""
+#~ "<p>The moon.<p>The map is based on data from the clementine mission. "
+#~ "Credits: NASA "
+#~ msgstr ""
+#~ "<p>De Maand.<p>De Koort bruukt Daten ut de Clementine-Fohrt. Dank an de "
+#~ "NASA."
+
+#~ msgid "S&un Control"
+#~ msgstr "&Sünnkuntrull"
+
+#~ msgid "Mare (dark plain)"
+#~ msgstr "Mare (düüster Evene)"
+
+#~ msgid "None"
+#~ msgstr "Keen"
+
+#~ msgid "This box allows you to choose the way the time is displayed"
+#~ msgstr "Mit dit Feld lett sik dat Tietformaat fastleggen"
+
+#~ msgid "24-hour clock"
+#~ msgstr "24-Stünnen-Tiet"
+
+#~ msgid "12-hour clock"
+#~ msgstr "12-Stünnen-Tiet"
+
+#~ msgid "Check to show the date as well as the time"
+#~ msgstr "Maak dit an, wenn dat Datum ok wiest warrn schall."
+
+#~ msgid ""
+#~ "This checkbox allows you to choose to show the date as well as the time"
+#~ msgstr ""
+#~ "Mit dit Ankrüüzfeld lett sik fastleggen, wat ok dat Datum wiest warrt."
+
+#~ msgid "Chooses whether to show the full name of the timezone"
+#~ msgstr "Fastleggen, wat de hele Naam vun't Tietrebeet wiest warrt"
+
+#~ msgid ""
+#~ "This checkbox chooses whether to show the full name of the timezone; eg "
+#~ "\"Europe/London\" or simply \"London\""
+#~ msgstr ""
+#~ "Mit dit Ankrüüzfeld lett sik fastleggen, wat de hele Naam vun't "
+#~ "Tietrebeet wiest warrt, a.B. \"Europa/London\" oder bloots \"London\"."
+
+#~ msgid "Show full timezone name"
+#~ msgstr "Heel Naam vun dat Tietrebeet wiesen"
+
+#~ msgid "Show map only"
+#~ msgstr "Bloots Koort wiesen"
+
+#~ msgid "Check to centre the map on the area currently illuminated by the sun"
+#~ msgstr ""
+#~ "Maak dit an, wenn Du de Koort na dat opstunns vun de Sünn belicht Rebeet "
+#~ "inmiddeln wullt."
+
+#~ msgid ""
+#~ "This checkbox allows you to choose to centre the map over the area that "
+#~ "is currently illuminated by the sun."
+#~ msgstr ""
+#~ "Mit dit Ankrüüzfeld lett sik de Koort na dat opstunns vun de Sünn belicht "
+#~ "Rebeet inmiddeln."
+
+#~ msgid "This longitude will be the centre of the map"
+#~ msgstr "Disse geograafsch Längde warrt de Middelpunkt vun de Koort"
+
+#~ msgid ""
+#~ "Here you can select the longitude which will be the centre of the map"
+#~ msgstr ""
+#~ "Hier kannst Du de geograafsch Längde för den Middelpunkt vun de Koort "
+#~ "kören."
+
+#~ msgid "Latitude / Longitude Runner"
+#~ msgstr "Dreger för geograafsch Breed/Längde"
+
+#~ msgctxt "one-letter uppercase abbreviation for North"
+#~ msgid "N"
+#~ msgstr "N"
+
+#~ msgctxt "one-letter uppercase abbreviation for East"
+#~ msgid "E"
+#~ msgstr "O"
+
+#~ msgctxt "one-letter uppercase abbreviation for South"
+#~ msgid "S"
+#~ msgstr "S"
+
+#~ msgctxt "one-letter uppercase abbreviation for West"
+#~ msgid "W"
+#~ msgstr "W"
+
+#, fuzzy
+#~| msgid "Go To"
+#~ msgid "Geo Tool"
+#~ msgstr "Gahn na"
+
+#, fuzzy
+#~ msgid "Cache"
+#~ msgstr "&Afbreken"
+
+#, fuzzy
+#~ msgid "Populated places"
+#~ msgstr "Bewahnt Rebeden"
+
+#~ msgid "Quick and Dirty"
+#~ msgstr "Gau un gresig"

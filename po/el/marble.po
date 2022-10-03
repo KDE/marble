@@ -1,0 +1,6155 @@
+# translation of marble.po to Greek
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Spiros Georgaras <sng@hellug.gr>, 2007, 2008.
+# Toussis Manolis <manolis@koppermind.homelinux.org>, 2007, 2008, 2009.
+# Yannis Kaskamanidis <ttnfy17@yahoo.gr>, 2007.
+# Σπύρος Γεωργαράς <sng@hellug.gr>, 2008.
+# Spiros Georgaras <sngeorgaras@otenet.gr>, 2008.
+# Giorgos Koutsikos <ragecryx@yahoo.gr>, 2009.
+# Petros <pvidalis@gmail.com>, 2009.
+# Dimitrios Glentadakis <dglent@gmail.com>, 2011, 2012.
+# Antonis Geralis <capoiosct@gmail.com>, 2011, 2012.
+# Dimitris Kardarakos <dimkard@gmail.com>, 2012, 2013, 2016.
+# Stelios <sstavra@gmail.com>, 2017.
+msgid ""
+msgstr ""
+"Project-Id-Version: marble\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2021-10-18 00:13+0000\n"
+"PO-Revision-Date: 2017-09-15 17:30+0200\n"
+"Last-Translator: Stelios <sstavra@gmail.com>\n"
+"Language-Team: Greek <kde-i18n-el@kde.org>\n"
+"Language: el\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 2.0\n"
+
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "Γέραλης Αντώνης, Σπύρος Γεωργαράς, Τούσης Μανώλης"
+
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "capoiosct@gmail.com, sng@hellug.gr, manolis@koppermind.homelinux.org"
+
+#: kdemain.cpp:91
+#, kde-format
+msgid "Marble Virtual Globe"
+msgstr "Εικονική υδρόγειος Marble"
+
+#: kdemain.cpp:93
+#, kde-format
+msgid "A World Atlas."
+msgstr "Ένας παγκόσμιος Άτλας."
+
+#: kdemain.cpp:95
+#, kde-format
+msgid "(c) 2007-%1"
+msgstr "(c) 2007-%1"
+
+#: kdemain.cpp:100 kdemain.cpp:286
+#, kde-format
+msgid "Torsten Rahn"
+msgstr "Torsten Rahn"
+
+#: kdemain.cpp:101
+#, kde-format
+msgid "Developer and Original Author"
+msgstr "Προγραμματιστής και αρχικός συγγραφέας"
+
+#: kdemain.cpp:103
+#, kde-format
+msgid "Bernhard Beschow"
+msgstr "Bernhard Beschow"
+
+#: kdemain.cpp:104
+#, kde-format
+msgid "WMS Support, Mobile, Performance"
+msgstr "Υποστήριξη WMS, κινητό, επιδόσεις"
+
+#: kdemain.cpp:106
+#, kde-format
+msgid "Thibaut Gridel"
+msgstr "Thibaut Gridel"
+
+#: kdemain.cpp:107
+#, kde-format
+msgid "Geodata"
+msgstr "Γεωδεδομένα"
+
+#: kdemain.cpp:109
+#, kde-format
+msgid "Jens-Michael Hoffmann"
+msgstr "Jens-Michael Hoffmann"
+
+#: kdemain.cpp:110
+#, kde-format
+msgid "OpenStreetMap Integration, OSM Namefinder, Download Management"
+msgstr "Ενσωμάτωση OpenStreetMap, OSM Namefinder, διαχείριση λήψεων"
+
+#: kdemain.cpp:112
+#, kde-format
+msgid "Florian E&szlig;er"
+msgstr "Florian E&szlig;er"
+
+#: kdemain.cpp:113
+#, kde-format
+msgid "Elevation Profile"
+msgstr "Προφίλ υψόμετρου"
+
+#: kdemain.cpp:115
+#, kde-format
+msgid "Wes Hardaker"
+msgstr "Wes Hardaker"
+
+#: kdemain.cpp:116
+#, kde-format
+msgid "APRS Plugin"
+msgstr "Πρόσθετο APRS"
+
+#: kdemain.cpp:118 kdemain.cpp:202
+#, kde-format
+msgid "Bastian Holst"
+msgstr "Bastian Holst"
+
+#: kdemain.cpp:119
+#, kde-format
+msgid "Online Services support"
+msgstr "Υποστήριξη διαδικτυακών υπηρεσιών"
+
+#: kdemain.cpp:121 kdemain.cpp:172
+#, kde-format
+msgid "Guillaume Martres"
+msgstr "Guillaume Martres"
+
+#: kdemain.cpp:122
+#, kde-format
+msgid "Satellites"
+msgstr "Δορυφόροι"
+
+#: kdemain.cpp:124 kdemain.cpp:168
+#, kde-format
+msgid "Rene Kuettner"
+msgstr "Rene Kuettner"
+
+#: kdemain.cpp:125
+#, kde-format
+msgid "Satellites, Eclipses"
+msgstr "Δορυφόροι, Εκλειπτικές"
+
+#: kdemain.cpp:127
+#, kde-format
+msgid "Friedrich W. H. Kossebau"
+msgstr "Friedrich W. H. Kossebau"
+
+#: kdemain.cpp:128
+#, kde-format
+msgid "Plasma Integration, Bugfixes"
+msgstr "Ενσωμάτωση Plasma, διορθώσεις"
+
+#: kdemain.cpp:130
+#, kde-format
+msgid "Dennis Nienhüser"
+msgstr "Dennis Nienhüser"
+
+#: kdemain.cpp:131
+#, kde-format
+msgid "Routing, Navigation, Mobile"
+msgstr "Δρομολόγηση, πλοήγηση, κινητό"
+
+#: kdemain.cpp:133
+#, kde-format
+msgid "Niko Sams"
+msgstr "Niko Sams"
+
+#: kdemain.cpp:134
+#, kde-format
+msgid "Routing, Elevation Profile"
+msgstr "Προφίλ δρομολόγησης, υψόμετρου"
+
+#: kdemain.cpp:136 kdemain.cpp:206
+#, kde-format
+msgid "Patrick Spendrin"
+msgstr "Patrick Spendrin"
+
+#: kdemain.cpp:137
+#, kde-format
+msgid "Core Developer: KML and Windows support"
+msgstr "Βασικός προγραμματιστής: υποστήριξη KML και Windows"
+
+#: kdemain.cpp:139
+#, kde-format
+msgid "Eckhart Wörner"
+msgstr "Eckhart Wörner"
+
+#: kdemain.cpp:140
+#, kde-format
+msgid "Bugfixes"
+msgstr "Διορθώσεις"
+
+#: kdemain.cpp:145
+#, kde-format
+msgid "Inge Wallin"
+msgstr "Inge Wallin"
+
+#: kdemain.cpp:146
+#, kde-format
+msgid "Core Developer and Co-Maintainer"
+msgstr "Βασικός προγραμματιστής και συντηρητής"
+
+#: kdemain.cpp:148
+#, kde-format
+msgid "Henry de Valence"
+msgstr "Henry de Valence"
+
+#: kdemain.cpp:149
+#, kde-format
+msgid "Core Developer: Marble Runners, World-Clock Plasmoid"
+msgstr "Βασικός προγραμματιστής: marble runners, πλασμοειδές παγκόσμιο ρολόι"
+
+#: kdemain.cpp:151
+#, kde-format
+msgid "Pino Toscano"
+msgstr "Pino Toscano"
+
+#: kdemain.cpp:152
+#, kde-format
+msgid "Network plugins"
+msgstr "Πρόσθετα δικτύου"
+
+#: kdemain.cpp:154
+#, kde-format
+msgid "Harshit Jain"
+msgstr "Harshit Jain"
+
+#: kdemain.cpp:155
+#, kde-format
+msgid "Planet filter"
+msgstr "Φίλτρο πλανητών"
+
+#: kdemain.cpp:157
+#, kde-format
+msgid "Simon Edwards"
+msgstr "Simon Edwards"
+
+#: kdemain.cpp:158
+#, kde-format
+msgid "Marble Python Bindings"
+msgstr "Συνδέσεις Python του Marble"
+
+#: kdemain.cpp:160
+#, kde-format
+msgid "Magnus Valle"
+msgstr "Magnus Valle"
+
+#: kdemain.cpp:161
+#, kde-format
+msgid "Historical Maps"
+msgstr "Ιστορικοί χάρτες"
+
+#: kdemain.cpp:163
+#, kde-format
+msgid "Médéric Boquien"
+msgstr "Médéric Boquien"
+
+#: kdemain.cpp:164
+#, kde-format
+msgid "Astronomical Observatories"
+msgstr "Αστρονομικά παρατηρητήρια"
+
+#: kdemain.cpp:169
+#, kde-format
+msgid ""
+"ESA Summer of Code in Space 2012 Project: Visualization of planetary "
+"satellites"
+msgstr ""
+"Έργο ESA Summer of Code in Space 2012: Οπτικοποίηση πλανητικών δορυφόρων"
+
+#: kdemain.cpp:173
+#, kde-format
+msgid ""
+"ESA Summer of Code in Space 2011 Project: Visualization of Satellite Orbits"
+msgstr ""
+"Έργο ESA Summer of Code in Space 2011: Οπτικοποίηση δορυφορικών τροχιών"
+
+#: kdemain.cpp:178
+#, kde-format
+msgid "Konstantin Oblaukhov"
+msgstr "Konstantin Oblaukhov"
+
+#: kdemain.cpp:179
+#, kde-format
+msgid "Google Summer of Code 2011 Project: OpenStreetMap Vector Rendering"
+msgstr ""
+"Έργο του Google Summer of Code 2011: Αποτύπωση διανυσμάτων OpenStreetMap"
+
+#: kdemain.cpp:182
+#, kde-format
+msgid "Daniel Marth"
+msgstr "Daniel Marth"
+
+#: kdemain.cpp:183
+#, kde-format
+msgid "Google Summer of Code 2011 Project: Marble Touch on MeeGo"
+msgstr "Google Summer of Code 2011 Project: Marble Touch για το MeeGo"
+
+#: kdemain.cpp:186
+#, kde-format
+msgid "Gaurav Gupta"
+msgstr "Gaurav Gupta"
+
+#: kdemain.cpp:187
+#, kde-format
+msgid "Google Summer of Code 2010 Project: Bookmarks"
+msgstr "Έργο του Google Summer of Code 2010: Σελιδοδείκτες"
+
+#: kdemain.cpp:190
+#, kde-format
+msgid "Harshit Jain "
+msgstr "Harshit Jain "
+
+#: kdemain.cpp:191
+#, kde-format
+msgid "Google Summer of Code 2010 Project: Time Support"
+msgstr "Έργο του Google Summer of Code 2010: Υποστήριξη χρόνου"
+
+#: kdemain.cpp:194
+#, kde-format
+msgid "Siddharth Srivastava"
+msgstr "Siddharth Srivastava"
+
+#: kdemain.cpp:195
+#, kde-format
+msgid "Google Summer of Code 2010 Project: Turn-by-turn Navigation"
+msgstr "Έργο του Google Summer of Code 2010: Πλοήγηση Turn-by-turn"
+
+#: kdemain.cpp:198 kdemain.cpp:218
+#, kde-format
+msgid "Andrew Manson"
+msgstr "Andrew Manson"
+
+#: kdemain.cpp:199
+#, kde-format
+msgid "Google Summer of Code 2009 Project: OSM Annotation"
+msgstr "Έργο του Google Summer of Code 2009: Επισήμανση OSM"
+
+#: kdemain.cpp:203
+#, kde-format
+msgid "Google Summer of Code 2009 Project: Online Services"
+msgstr "Έργο του Google Summer of Code 2009: Διαδικτυακές υπηρεσίες"
+
+#: kdemain.cpp:207
+#, kde-format
+msgid "Google Summer of Code 2008 Project: Vector Tiles for Marble"
+msgstr ""
+"Έργο του Google Summer of Code 2008: Διανυσματικά πλακίδια για το Marble"
+
+#: kdemain.cpp:210
+#, kde-format
+msgid "Shashank Singh"
+msgstr "Shashank Singh"
+
+#: kdemain.cpp:211
+#, kde-format
+msgid ""
+"Google Summer of Code 2008 Project: Panoramio / Wikipedia -photo support for "
+"Marble"
+msgstr ""
+"Έργο του Google Summer of Code 2008: Υποστήριξη φωτογραφιών Panoramio / "
+"Wikipedia για το Marble"
+
+#: kdemain.cpp:214
+#, kde-format
+msgid "Carlos Licea"
+msgstr "Carlos Licea"
+
+#: kdemain.cpp:215
+#, kde-format
+msgid ""
+"Google Summer of Code 2007 Project: Equirectangular Projection (\"Flat Map\")"
+msgstr ""
+"Έργο του Google Summer of Code 2007: Ισορθογώνια προβολή (\"Επίπεδος χάρτης"
+"\")"
+
+#: kdemain.cpp:219
+#, kde-format
+msgid "Google Summer of Code 2007 Project: GPS Support for Marble"
+msgstr "Έργο του Google Summer of Code 2007: Υποστήριξη GPS για το Marble"
+
+#: kdemain.cpp:222
+#, kde-format
+msgid "Murad Tagirov"
+msgstr "Murad Tagirov"
+
+#: kdemain.cpp:223
+#, kde-format
+msgid "Google Summer of Code 2007 Project: KML Support for Marble"
+msgstr "Έργο του Google Summer of Code 2007: Υποστήριξη KML για το Marble"
+
+#: kdemain.cpp:228
+#, kde-format
+msgid "Simon Schmeisser"
+msgstr "Simon Schmeisser"
+
+#: kdemain.cpp:229 kdemain.cpp:231 kdemain.cpp:233 kdemain.cpp:235
+#: kdemain.cpp:237 kdemain.cpp:239 kdemain.cpp:241 kdemain.cpp:243
+#: kdemain.cpp:245 kdemain.cpp:247 kdemain.cpp:249 kdemain.cpp:251
+#: kdemain.cpp:253 kdemain.cpp:255 kdemain.cpp:257 kdemain.cpp:259
+#: kdemain.cpp:261 kdemain.cpp:263 kdemain.cpp:265
+#, kde-format
+msgid "Development & Patches"
+msgstr "Ανάπτυξη και διορθώσεις"
+
+#: kdemain.cpp:230
+#, kde-format
+msgid "Claudiu Covaci"
+msgstr "Claudiu Covaci"
+
+#: kdemain.cpp:232
+#, kde-format
+msgid "David Roberts"
+msgstr "David Roberts"
+
+#: kdemain.cpp:234
+#, kde-format
+msgid "Nikolas Zimmermann"
+msgstr "Nikolas Zimmermann"
+
+#: kdemain.cpp:236
+#, kde-format
+msgid "Jan Becker"
+msgstr "Jan Becker"
+
+#: kdemain.cpp:238
+#, kde-format
+msgid "Stefan Asserhäll"
+msgstr "Stefan Asserhäll"
+
+#: kdemain.cpp:240
+#, kde-format
+msgid "Laurent Montel"
+msgstr "Laurent Montel"
+
+#: kdemain.cpp:242
+#, kde-format
+msgid "Mayank Madan"
+msgstr "Mayank Madan"
+
+#: kdemain.cpp:244
+#, kde-format
+msgid "Prashanth Udupa"
+msgstr "Prashanth Udupa"
+
+#: kdemain.cpp:246
+#, kde-format
+msgid "Anne-Marie Mahfouf"
+msgstr "Anne-Marie Mahfouf"
+
+#: kdemain.cpp:248
+#, kde-format
+msgid "Josef Spillner"
+msgstr "Josef Spillner"
+
+#: kdemain.cpp:250
+#, kde-format
+msgid "Frerich Raabe"
+msgstr "Frerich Raabe"
+
+#: kdemain.cpp:252
+#, kde-format
+msgid "Frederik Gladhorn"
+msgstr "Frederik Gladhorn"
+
+#: kdemain.cpp:254
+#, kde-format
+msgid "Fredrik Höglund"
+msgstr "Fredrik Höglund"
+
+#: kdemain.cpp:256
+#, kde-format
+msgid "Albert Astals Cid"
+msgstr "Albert Astals Cid"
+
+#: kdemain.cpp:258
+#, kde-format
+msgid "Thomas Zander"
+msgstr "Thomas Zander"
+
+#: kdemain.cpp:260
+#, kde-format
+msgid "Joseph Wenninger"
+msgstr "Joseph Wenninger"
+
+#: kdemain.cpp:262
+#, kde-format
+msgid "Kris Thomsen"
+msgstr "Kris Thomsen"
+
+#: kdemain.cpp:264
+#, kde-format
+msgid "Daniel Molkentin"
+msgstr "Daniel Molkentin"
+
+#: kdemain.cpp:266
+#, kde-format
+msgid "Christophe Leske"
+msgstr "Christophe Leske"
+
+#: kdemain.cpp:267 kdemain.cpp:269 kdemain.cpp:271 kdemain.cpp:273
+#: kdemain.cpp:275 kdemain.cpp:277 kdemain.cpp:279 kdemain.cpp:281
+#: kdemain.cpp:283
+#, kde-format
+msgid "Platforms & Distributions"
+msgstr "Πλατφόρμες και διανομές"
+
+#: kdemain.cpp:268
+#, kde-format
+msgid "Sebastian Wiedenroth"
+msgstr "Sebastian Wiedenroth"
+
+#: kdemain.cpp:270
+#, kde-format
+msgid "Tim Sutton"
+msgstr "Tim Sutton"
+
+#: kdemain.cpp:272
+#, kde-format
+msgid "Christian Ehrlicher"
+msgstr "Christian Ehrlicher"
+
+#: kdemain.cpp:274
+#, kde-format
+msgid "Ralf Habacker"
+msgstr "Ralf Habacker"
+
+#: kdemain.cpp:276
+#, kde-format
+msgid "Steffen Joeris"
+msgstr "Steffen Joeris"
+
+#: kdemain.cpp:278
+#, kde-format
+msgid "Marcus Czeslinski"
+msgstr "Marcus Czeslinski"
+
+#: kdemain.cpp:280
+#, kde-format
+msgid "Marcus D. Hanwell"
+msgstr "Marcus D. Hanwell"
+
+#: kdemain.cpp:282
+#, kde-format
+msgid "Chitlesh Goorah"
+msgstr "Chitlesh Goorah"
+
+#: kdemain.cpp:284
+#, kde-format
+msgid "Nuno Pinheiro"
+msgstr "Nuno Pinheiro"
+
+#: kdemain.cpp:285 kdemain.cpp:287
+#, kde-format
+msgid "Artwork"
+msgstr "Γραφικά"
+
+#: kdemain.cpp:290
+#, kde-format
+msgid "Luis Silva"
+msgstr "Luis Silva"
+
+#: kdemain.cpp:291 kdemain.cpp:293 kdemain.cpp:295 kdemain.cpp:297
+#: kdemain.cpp:299 kdemain.cpp:301 kdemain.cpp:303 kdemain.cpp:305
+#: kdemain.cpp:307 kdemain.cpp:309
+#, kde-format
+msgid "Various Suggestions & Testing"
+msgstr "Διάφορες προτάσεις και δοκιμές"
+
+#: kdemain.cpp:292
+#, kde-format
+msgid "Stefan Jordan"
+msgstr "Stefan Jordan"
+
+#: kdemain.cpp:294
+#, kde-format
+msgid "Robert Scott"
+msgstr "Robert Scott"
+
+#: kdemain.cpp:296
+#, kde-format
+msgid "Lubos Petrovic"
+msgstr "Lubos Petrovic"
+
+#: kdemain.cpp:298
+#, kde-format
+msgid "Benoit Sigoure"
+msgstr "Benoit Sigoure"
+
+#: kdemain.cpp:300
+#, kde-format
+msgid "Martin Konold"
+msgstr "Martin Konold"
+
+#: kdemain.cpp:302
+#, kde-format
+msgid "Matthias Welwarsky"
+msgstr "Matthias Welwarsky"
+
+#: kdemain.cpp:304
+#, kde-format
+msgid "Rainer Endres"
+msgstr "Rainer Endres"
+
+#: kdemain.cpp:306
+#, kde-format
+msgid "Ralf Gesellensetter"
+msgstr "Ralf Gesellensetter"
+
+#: kdemain.cpp:308
+#, kde-format
+msgid "Tim Alder"
+msgstr "Tim Alder"
+
+#: kdemain.cpp:310
+#, kde-format
+msgid "John Layt"
+msgstr "John Layt"
+
+#: kdemain.cpp:311
+#, kde-format
+msgid ""
+"Special thanks for providing an important source of inspiration by creating "
+"Marble's predecessor \"Kartographer\"."
+msgstr ""
+"Ευχαριστούμε τον προκάτοχο του Marble, \"Kartograpger\" ως μια σημαντική "
+"πηγή έμπνευσης."
+
+#: kdemain.cpp:327
+#, kde-format
+msgid "Enable debug output"
+msgstr "Ενεργοποίηση εξόδου αποσφαλμάτωσης"
+
+#: kdemain.cpp:329
+#, kde-format
+msgid "Display OSM placemarks according to the level selected"
+msgstr ""
+"Να εμφανίζονται OSM σημεία επισήμανσης θέσης σύμφωνα με το επιλεγμένο επίπεδο"
+
+#: kdemain.cpp:331
+#, kde-format
+msgid "Make a time measurement to check performance"
+msgstr "Εκτελέστε μια μέτρηση χρόνου για τον έλεγχο της απόδοσης"
+
+#: kdemain.cpp:333
+#, kde-format
+msgid "Show frame rate"
+msgstr "Εμφάνιση ρυθμού πλαισίου"
+
+#: kdemain.cpp:335
+#, kde-format
+msgid "Show tile IDs"
+msgstr "Εμφάνιση ID πλακιδίων"
+
+#: kdemain.cpp:337
+#, kde-format
+msgid "Show time spent in each layer"
+msgstr "Εμφάνιση του χρόνου που ξοδεύτηκε σε κάθε επίπεδο"
+
+#: kdemain.cpp:339
+#, kde-format
+msgid "Use a different directory <directory> which contains map data."
+msgstr ""
+"Χρήση ενός διαφορετικού κατάλογου <directory> που περιέχει δεδομένα χαρτών."
+
+#: kdemain.cpp:341
+#, kde-format
+msgid "Do not use the interface optimized for small screens"
+msgstr "Να μη γίνει χρήση της βελτιστοποιημένης διεπαφής για μικρές οθόνες"
+
+#: kdemain.cpp:342
+#, kde-format
+msgid "Use the interface optimized for small screens"
+msgstr "Χρήση της βελτιστοποιημένης διεπαφής για μικρές οθόνες"
+
+#: kdemain.cpp:344
+#, kde-format
+msgid "Do not use the interface optimized for high resolutions"
+msgstr "Να μη γίνει χρήση της βελτιστοποιημένης διεπαφής για υψηλές αναλύσεις"
+
+#: kdemain.cpp:345
+#, kde-format
+msgid "Use the interface optimized for high resolutions"
+msgstr "Χρήση της βελτιστοποιημένης διεπαφής για υψηλές αναλύσεις"
+
+#: kdemain.cpp:347
+#, kde-format
+msgid "Show map at given lat lon <coordinates>"
+msgstr "Εμφάνιση χάρτη στις δοσμένες πλατ μηκ <coordinates>"
+
+#: kdemain.cpp:349
+#, kde-format
+msgid "Show map at given geo <uri>"
+msgstr "Εμφάνιση χάρτη στο δοσμένο <uri>"
+
+#: kdemain.cpp:351
+#, kde-format
+msgid "Set the distance of the observer to the globe (in km)"
+msgstr "Ρύθμιση της απόστασης του παρατηρητή από την υδρόγειο (σε χμ)"
+
+#: kdemain.cpp:353
+#, kde-format
+msgid "Use map <id> (e.g. \"earth/openstreetmap/openstreetmap.dgml\")"
+msgstr "Χρήση <id> χάρτη (π.χ. \"earth/openstreetmap/openstreetmap.dgml\")"
+
+#: kdemain.cpp:355
+#, kde-format
+msgid "One or more placemark files to be opened"
+msgstr "Άνοιγμα ενός ή περισσοτέρων αρχείων επισήμανσης θέσης"
+
+#. i18n: ectx: label, entry, group (Time)
+#: marble.kcfg:58
+#, kde-format
+msgid "The date and time of marble clock"
+msgstr "Η ημερομηνία και ώρα του ρολογιού του marble "
+
+#. i18n: ectx: label, entry, group (Time)
+#: marble.kcfg:61
+#, kde-format
+msgid "The speed of marble clock"
+msgstr "Η ταχύτητα του ρολογιού του marble "
+
+#. i18n: ectx: label, entry, group (View)
+#: marble.kcfg:107
+#, kde-format
+msgid "The unit chosen to measure distances."
+msgstr "Η επιλεγμένη μονάδα μέτρησης αποστάσεων."
+
+#. i18n: ectx: label, entry, group (View)
+#: marble.kcfg:115
+#, kde-format
+msgid "The unit chosen to measure angles."
+msgstr "Η επιλεγμένη μονάδα μέτρησης γωνιών."
+
+#. i18n: ectx: label, entry, group (View)
+#: marble.kcfg:124
+#, kde-format
+msgid "The quality at which a still map gets painted."
+msgstr "Η ποιότητα σχεδίασης του ακίνητου χάρτη."
+
+#. i18n: ectx: label, entry, group (View)
+#: marble.kcfg:135
+#, kde-format
+msgid "The quality at which an animated map gets painted."
+msgstr "Η ποιότητα σχεδίασης του κινούμενου χάρτη."
+
+#. i18n: ectx: label, entry, group (View)
+#: marble.kcfg:146
+#, kde-format
+msgid "The localization of the labels."
+msgstr "Η εντοπιότητα των ετικετών."
+
+#. i18n: ectx: label, entry (mapFont), group (View)
+#: marble.kcfg:155
+#, kde-format
+msgid "The general font used on the map."
+msgstr "Η γενική γραμματοσειρά που χρησιμοποιείται στον χάρτη."
+
+#. i18n: ectx: label, entry (lastFileOpenDir), group (View)
+#: marble.kcfg:159
+#, kde-format
+msgid "The last directory that was opened by File->Open."
+msgstr "Ο τελευταίος κατάλογος που άνοιξε με Αρχείο-> Άνοιγμα."
+
+#. i18n: ectx: label, entry, group (Navigation)
+#: marble.kcfg:179
+#, kde-format
+msgid "The behaviour of the planet's axis on mouse dragging."
+msgstr "Η συμπεριφορά του άξονα του πλανήτη με το σύρσιμο του ποντικιού."
+
+#. i18n: ectx: label, entry, group (Navigation)
+#: marble.kcfg:187
+#, kde-format
+msgid "The location shown on application startup."
+msgstr "Η εμφανιζόμενη τοποθεσία κατά την έναρξη της εφαρμογής."
+
+#. i18n: ectx: label, entry, group (Navigation)
+#: marble.kcfg:201
+#, kde-format
+msgid "Display animation on voyage to target."
+msgstr "Εμφάνιση κίνησης ταξιδιού στον προορισμό."
+
+#. i18n: ectx: label, entry, group (Navigation)
+#: marble.kcfg:205
+#, kde-format
+msgid "The external OpenStreetMap editor application"
+msgstr "Η εξωτερική εφαρμογή επεξεργασίας του OpenStreetMap"
+
+#. i18n: ectx: label, entry, group (Cache)
+#: marble.kcfg:211
+#, kde-format
+msgid "Cache for tiles reserved in the physical memory."
+msgstr "Δεσμευμένη φυσική μνήμη για τη λανθάνουσα μνήμη πλακιδίων."
+
+#. i18n: ectx: label, entry, group (Cache)
+#: marble.kcfg:217
+#, kde-format
+msgid "Maximum space on the hard disk that can be used to store tiles."
+msgstr "Μέγιστος χώρος στο δίσκο για την αποθήκευση πλακιδίων."
+
+#. i18n: ectx: label, entry (proxyUrl), group (Cache)
+#: marble.kcfg:223
+#, kde-format
+msgid "URL for the proxy server."
+msgstr "URL του διαμεσολαβητή."
+
+#. i18n: ectx: label, entry, group (Cache)
+#: marble.kcfg:227
+#, kde-format
+msgid "Port for the proxy server."
+msgstr "Θύρα του διαμεσολαβητή."
+
+#. i18n: ectx: label, entry (proxyUser), group (Cache)
+#: marble.kcfg:233
+#, kde-format
+msgid "Username for authorization."
+msgstr "Όνομα χρήστη για την ταυτοποίηση."
+
+#. i18n: ectx: label, entry (proxyPass), group (Cache)
+#: marble.kcfg:236
+#, kde-format
+msgid "Password for authorization."
+msgstr "Κωδικός πρόσβασης για την ταυτοποίηση."
+
+#. i18n: ectx: label, entry (proxyHttp), group (Cache)
+#: marble.kcfg:239
+#, kde-format
+msgid "Proxy type is HTTP"
+msgstr "Ο τύπος διαμεσολαβητή είναι HTTP"
+
+#. i18n: ectx: label, entry (proxySocks5), group (Cache)
+#: marble.kcfg:250
+#, kde-format
+msgid "Proxy type is Socks5"
+msgstr "Ο τύπος διαμεσολαβητή είναι Socks5"
+
+#. i18n: ectx: label, entry (proxyAuth), group (Cache)
+#: marble.kcfg:254
+#, kde-format
+msgid "Proxy requires Authentication"
+msgstr "Ο διαμεσολαβητής απαιτεί ταυτοποίηση"
+
+#. i18n: ectx: label, entry (activePositionTrackingPlugin), group (Plugins)
+#: marble.kcfg:260
+#, kde-format
+msgid "The position tracking plugin used to determine the current location"
+msgstr ""
+"Το πρόσθετο ανίχνευσης τοποθεσίας  που χρησιμοποιείται για τον καθορισμό της "
+"τρέχουσας τοποθεσίας"
+
+#: marble_part.cpp:102
+#, kde-format
+msgid "Position: %1"
+msgstr "Θέση: %1"
+
+#: marble_part.cpp:103
+#, kde-format
+msgid "Altitude: %1"
+msgstr "Υψόμετρο: %1"
+
+#: marble_part.cpp:104
+#, kde-format
+msgid "Tile Zoom Level: %1"
+msgstr "Επίπεδο εστίασης πλακιδίων: %1"
+
+#: marble_part.cpp:105
+#, kde-format
+msgid "Time: %1"
+msgstr "Χρονολογία: %1"
+
+#: marble_part.cpp:167
+#, kde-format
+msgid ""
+"Sorry, unable to open '%1':\n"
+"'%2'"
+msgstr ""
+
+#: marble_part.cpp:168
+#, fuzzy, kde-format
+#| msgid "File not accessible"
+msgid "File not readable"
+msgstr "Μη προσβάσιμο αρχείο"
+
+#: marble_part.cpp:214
+#, kde-format
+msgid "marble_part"
+msgstr "τμήμα_marble"
+
+#: marble_part.cpp:217
+#, kde-format
+msgid "A Virtual Globe"
+msgstr "Μια εικονική υδρόγειος"
+
+#: marble_part.cpp:231
+#, kde-format
+msgid "Sorry, unable to open '%1'. The file is not accessible."
+msgstr ""
+"Λυπούμαστε, αδυναμία ανοίγματος του '%1'. Το αρχείο δεν είναι προσβάσιμο."
+
+#: marble_part.cpp:232
+#, kde-format
+msgid "File not accessible"
+msgstr "Μη προσβάσιμο αρχείο"
+
+#: marble_part.cpp:253
+#, kde-format
+msgid "All Supported Files"
+msgstr "Όλα τα υποστηριζόμενα αρχεία"
+
+#: marble_part.cpp:259
+#, fuzzy, kde-format
+#| msgid "Open File"
+msgctxt "@title:window"
+msgid "Open File"
+msgstr "Άνοιγμα αρχείου"
+
+#: marble_part.cpp:276
+#, fuzzy, kde-format
+#| msgid "Export Map"
+msgctxt "@title:window"
+msgid "Export Map"
+msgstr "Εξαγωγή χάρτη"
+
+#: marble_part.cpp:277
+#, kde-format
+msgid "Images *.jpg *.png"
+msgstr "Εικόνες *.jpg *.png"
+
+#: marble_part.cpp:291
+#, kde-format
+msgctxt "Application name"
+msgid "Marble"
+msgstr "Marble"
+
+#: marble_part.cpp:292
+#, kde-format
+msgid "An error occurred while trying to save the file.\n"
+msgstr "Παρουσιάστηκε σφάλμα κατά την προσπάθεια αποθήκευσης του αρχείου.\n"
+
+#: marble_part.cpp:483
+#, kde-format
+msgid "Unnamed"
+msgstr "Χωρίς όνομα"
+
+#: marble_part.cpp:714
+#, kde-format
+msgctxt "Action for downloading an entire region of a map"
+msgid "Download Region..."
+msgstr "Λήψη περιοχής..."
+
+#: marble_part.cpp:728
+#, kde-format
+msgctxt "Action for saving the map to a file"
+msgid "&Export Map..."
+msgstr "&Εξαγωγή χάρτη..."
+
+#: marble_part.cpp:737
+#, kde-format
+msgctxt "Action for toggling offline mode"
+msgid "&Work Offline"
+msgstr "Εργασία &χωρίς σύνδεση"
+
+#: marble_part.cpp:747
+#, kde-format
+msgctxt "Action for copying the map to the clipboard"
+msgid "&Copy Map"
+msgstr "&Αντιγραφή χάρτη"
+
+#: marble_part.cpp:754
+#, kde-format
+msgctxt "Action for copying the coordinates to the clipboard"
+msgid "C&opy Coordinates"
+msgstr "Α&ντιγραφή συντεταγμένων"
+
+#: marble_part.cpp:762
+#, kde-format
+msgctxt "Action for opening a file"
+msgid "&Open..."
+msgstr "&Άνοιγμα..."
+
+#: marble_part.cpp:769
+#, kde-format
+msgctxt "Action for downloading maps (GHNS)"
+msgid "Download Maps..."
+msgstr "Λήψη χαρτών..."
+
+#: marble_part.cpp:772
+#, kde-format
+msgctxt "Status tip"
+msgid "Download new maps"
+msgstr "Λήψη νέων χαρτών"
+
+#: marble_part.cpp:778
+#, kde-format
+msgctxt "Action for creating new maps"
+msgid "&Create a New Map..."
+msgstr "&Δημιουργία νέου χάρτη..."
+
+#: marble_part.cpp:783
+#, kde-format
+msgctxt "Status tip"
+msgid "A wizard guides you through the creation of your own map theme."
+msgstr ""
+"Ένας βοηθός σας καθοδηγεί για τη δημιουργία του δικού σας θέματος χάρτη."
+
+#: marble_part.cpp:810
+#, kde-format
+msgctxt "Action for toggling clouds"
+msgid "&Clouds"
+msgstr "&Σύννεφα"
+
+#: marble_part.cpp:817
+#, kde-format
+msgctxt "Action for sun control dialog"
+msgid "S&un Control..."
+msgstr "Έλεγχος Ή&λιου..."
+
+#: marble_part.cpp:827
+#, kde-format
+msgctxt "Action for time control dialog"
+msgid "&Time Control..."
+msgstr "Έλεγχος &χρόνου..."
+
+#: marble_part.cpp:836
+#, kde-format
+msgctxt "Action for locking float items on the map"
+msgid "Lock Position"
+msgstr "Κλείδωμα τοποθεσίας"
+
+#: marble_part.cpp:847
+#, kde-format
+msgid "Show Shadow"
+msgstr "Εμφάνιση σκιάς"
+
+#: marble_part.cpp:850
+#, kde-format
+msgid "Hide Shadow"
+msgstr "Απόκρυφη σκιάς"
+
+#: marble_part.cpp:851
+#, kde-format
+msgid "Shows and hides the shadow of the sun"
+msgstr "Εμφάνιση και απόκρυψη της σκιάς του ήλιου"
+
+#: marble_part.cpp:855
+#, kde-format
+msgid "Show sun icon on the Sub-Solar Point"
+msgstr "Εμφάνιση του εικονιδίου του ήλιου στο υπο-ηλιακό σημείο"
+
+#: marble_part.cpp:857
+#, kde-format
+msgid "Hide sun icon on the Sub-Solar Point"
+msgstr "Απόκρυψη του εικονιδίου του ήλιου στο υπο-ηλιακό σημείο"
+
+#: marble_part.cpp:858
+#, kde-format
+msgid "Show sun icon on the sub-solar point"
+msgstr "Εμφάνιση του εικονιδίου του ήλιου στο υπο-ηλιακό σημείο"
+
+#: marble_part.cpp:863
+#, kde-format
+msgid "Lock Globe to the Sub-Solar Point"
+msgstr "Κλείδωμα υδρογείου στο υπο-ηλιακό σημείο"
+
+#: marble_part.cpp:865
+#, kde-format
+msgid "Unlock Globe to the Sub-Solar Point"
+msgstr "Ξεκλείδωμα υδρογείου στο υπο-ηλιακό σημείο"
+
+#: marble_part.cpp:866
+#, kde-format
+msgid "Lock globe to the sub-solar point"
+msgstr "Κλείδωμα υδρογείου στο υπο-ηλιακό σημείο"
+
+#: marble_part.cpp:881
+#, fuzzy, kde-format
+#| msgctxt "Add Bookmark"
+#| msgid "&Add Bookmark"
+msgctxt "Add Bookmark"
+msgid "Add &Bookmark..."
+msgstr "&Προσθήκη σελιδοδείκτη"
+
+#: marble_part.cpp:889
+#, kde-format
+msgctxt "Show Bookmarks"
+msgid "Show &Bookmarks"
+msgstr "&Εμφάνιση σελιδοδεικτών"
+
+#: marble_part.cpp:890
+#, kde-format
+msgid "Show or hide bookmarks in the map"
+msgstr "Εμφάνιση ή απόκρυψη σελιδοδεικτών στον χάρτη"
+
+#: marble_part.cpp:898
+#, kde-format
+msgid "&Set Home Location"
+msgstr "&Ορισμός αρχικής τοποθεσίας"
+
+#: marble_part.cpp:905
+#, fuzzy, kde-format
+#| msgctxt "Manage Bookmarks"
+#| msgid "&Manage Bookmarks"
+msgctxt "Manage Bookmarks"
+msgid "&Manage Bookmarks..."
+msgstr "&Διαχείριση σελιδοδεικτών"
+
+#: marble_part.cpp:917
+#, fuzzy, kde-format
+#| msgctxt "Edit the map in an external application"
+#| msgid "&Edit Map"
+msgctxt "Edit the map in an external application"
+msgid "&Edit Map..."
+msgstr "&Επεξεργασία χάρτη"
+
+#: marble_part.cpp:925
+#, kde-format
+msgid "&Record Movie"
+msgstr "&Εγγραφή βίντεο"
+
+#: marble_part.cpp:927
+#, kde-format
+msgid "Records a movie of the globe"
+msgstr "Εγγραφή βίντεο με την υδρόγειο"
+
+#: marble_part.cpp:933
+#, fuzzy, kde-format
+#| msgid "&Stop recording"
+msgid "&Stop Recording"
+msgstr "&Σταμάτημα εγγραφής"
+
+#: marble_part.cpp:935
+#, kde-format
+msgid "Stop recording a movie of the globe"
+msgstr "Σταμάτημα εγγραφής βίντεο με την υδρόγειο"
+
+#: marble_part.cpp:1287
+#, kde-format
+msgctxt "Action for toggling"
+msgid "Show Position"
+msgstr "Εμφάνιση τοποθεσίας"
+
+#: marble_part.cpp:1289
+#, kde-format
+msgctxt "Action for toggling"
+msgid "Show Date and Time"
+msgstr "Εμφάνιση ημερομηνίας και ώρας"
+
+#: marble_part.cpp:1291
+#, kde-format
+msgctxt "Action for toggling"
+msgid "Show Altitude"
+msgstr "Εμφάνιση υψομέτρου"
+
+#: marble_part.cpp:1294
+#, kde-format
+msgctxt "Action for toggling"
+msgid "Show Tile Zoom Level"
+msgstr "Εμφάνιση επιπέδου εστίασης πλακιδίων"
+
+#: marble_part.cpp:1296
+#, kde-format
+msgctxt "Action for toggling"
+msgid "Show Download Progress Bar"
+msgstr "Εμφάνιση γραμμής προόδου λήψης"
+
+#: marble_part.cpp:1391
+#, kde-format
+msgid "View"
+msgstr "Προβολή"
+
+#: marble_part.cpp:1402
+#, kde-format
+msgid "Navigation"
+msgstr "Πλοήγηση"
+
+#: marble_part.cpp:1413
+#, kde-format
+msgid "Cache & Proxy"
+msgstr "Λανθάνουσα μνήμη και διαμεσολαβητής"
+
+#: marble_part.cpp:1426
+#, kde-format
+msgid "Date & Time"
+msgstr "Ημερομηνία και Ώρα"
+
+#: marble_part.cpp:1434
+#, kde-format
+msgid "Synchronization"
+msgstr "Συγχρονισμός"
+
+#: marble_part.cpp:1447
+#, kde-format
+msgid "Routing"
+msgstr "Δρομολόγηση"
+
+#: marble_part.cpp:1455
+#, kde-format
+msgid "Plugins"
+msgstr "Πρόσθετα"
+
+#. i18n: ectx: Menu (file)
+#: marble_part.rc:6 marbleui.rc:5
+#, kde-format
+msgid "&File"
+msgstr "&Αρχείο"
+
+#. i18n: ectx: Menu (edit)
+#: marble_part.rc:21 marbleui.rc:14
+#, kde-format
+msgid "&Edit"
+msgstr "&Επεξεργασία"
+
+#. i18n: ectx: Menu (view)
+#: marble_part.rc:31 marbleui.rc:18
+#, kde-format
+msgid "&View"
+msgstr "Π&ροβολή"
+
+#. i18n: ectx: Menu (infoboxes)
+#: marble_part.rc:36
+#, kde-format
+msgid "&Info Boxes"
+msgstr "Πλαίσια &πληροφοριών"
+
+#. i18n: ectx: Menu (onlineservices)
+#: marble_part.rc:42
+#, kde-format
+msgid "&Online Services"
+msgstr "&Διαδικτυακές υπηρεσίες"
+
+#. i18n: ectx: Menu (settings)
+#: marble_part.rc:55 marbleui.rc:31
+#, kde-format
+msgid "&Settings"
+msgstr "&Ρυθμίσεις"
+
+#. i18n: ectx: Menu (panels)
+#: marble_part.rc:59
+#, kde-format
+msgid "&Panels"
+msgstr "&Πίνακες"
+
+#. i18n: ectx: Menu (viewSize)
+#: marble_part.rc:65
+#, kde-format
+msgid "&View Size"
+msgstr "&Μέγεθος προβολής"
+
+#. i18n: ectx: Menu (bookmarks)
+#: marble_part.rc:73 marbleui.rc:29
+#, kde-format
+msgid "&Bookmarks"
+msgstr "&Σελιδοδείκτες"
+
+#. i18n: ectx: ToolBar (mainToolBar)
+#: marble_part.rc:84 marbleui.rc:36
+#, kde-format
+msgid "Main Toolbar"
+msgstr "Κύρια γραμμή εργαλείων"
+
+#. i18n: ectx: ToolBar (pluginToolBar)
+#: marble_part.rc:97
+#, kde-format
+msgid "Edit Toolbar"
+msgstr "Επεξεργασία γραμμής εργαλείων"
+
+#~ msgid "The graphics system that is used by Qt to render the graphics."
+#~ msgstr ""
+#~ "Το γραφικό σύστημα που χρησιμοποιείται από το Qt για την αποτύπωση των "
+#~ "γραφικών."
+
+#~ msgid "Native"
+#~ msgstr "Εγγενές"
+
+#~ msgid "Native (X11)"
+#~ msgstr "Εγγενές (X11)"
+
+#~ msgid "Native (Mac OS X Core Graphics)"
+#~ msgstr "Εγγενές (Mac OS X Core Graphics)"
+
+#~ msgid ""
+#~ "You have decided to run Marble with a different graphics system.\n"
+#~ "For this change to become effective, Marble has to be restarted.\n"
+#~ "Please close the application and start Marble again."
+#~ msgstr ""
+#~ "Αποφασίσατε να εκτελέσετε το Marble με ένα διαφορετικό σύστημα "
+#~ "απεικόνισης γραφικών.\n"
+#~ "Για να ενεργοποιηθεί η αλλαγή, πρέπει να γίνει επανεκκίνηση του Marble\n"
+#~ " Παρακαλώ κλείστε την εφαρμογή και ανοίξτε το Marble ξανά. "
+
+#~ msgid "Graphics System Change"
+#~ msgstr "Τροποποίηση του συστήματος γραφικών"
+
+#~ msgid "Night Sky"
+#~ msgstr "Νυχτερινός ουρανός"
+
+#~ msgid ""
+#~ "<p>The <i>night sky</i>.</p><p>Displays the stars and constellations at "
+#~ "night.</p>"
+#~ msgstr ""
+#~ "<p>Ο<i>νυχτερινός ουρανός</i>.</p><p>Εμφανίζει άστρα και αστερισμούς τη "
+#~ "νύχτα.</p>"
+
+#~ msgid "Mountain"
+#~ msgstr "Βουνό"
+
+#~ msgid "Volcano"
+#~ msgstr "Ηφαίστειο"
+
+#~ msgid "Geographic Pole"
+#~ msgstr "Γεωγραφικός πόλος"
+
+#~ msgid "Magnetic Pole"
+#~ msgstr "Μαγνητικός πόλος"
+
+#~ msgid "Airport"
+#~ msgstr "Αεροδρόμιο"
+
+#~ msgid "Shipwreck"
+#~ msgstr "Ναυάγιο"
+
+#~ msgid "Astronomical Observatory"
+#~ msgstr "Αστρονομικό παρατηρητήριο"
+
+#~ msgid ""
+#~ "<p>The moon.</p><p>The map is based on data from the Clementine Moon "
+#~ "mission (UVVIS Basemap Mosaic). Credits: NASA/SDIO, Courtesy <a href="
+#~ "\"http://astrogeology.usgs.gov\">USGS Astrogeology Research Program</a></"
+#~ "p>"
+#~ msgstr ""
+#~ "<p>Η σελήνη.</p><p>Ο χάρτης βασίζεται σε δεδομένα από την αποστολή στη "
+#~ "Σελήνη Clementine(UVVIS Basemap Mosaic). Ευχαριστίες: NASA/SDIO, "
+#~ "Ιδιοκτησία <a href=\"http://astrogeology.usgs.gov\">Αστρογεωλογικό "
+#~ "πρόγραμμα έρευνας USGS</a></p>"
+
+#~ msgid "Landing Sites"
+#~ msgstr "Τοποθεσίες προσγείωσης"
+
+#~ msgid "Craters"
+#~ msgstr "Κρατήρες"
+
+#~ msgid "Maria"
+#~ msgstr "Σεληνιακές θάλασσες"
+
+#~ msgid "Other features"
+#~ msgstr "Άλλα χαρακτηριστικά"
+
+#~ msgid "Manned landing site"
+#~ msgstr "Τοποθεσία προσγείωσης επανδρωμένης αποστολής"
+
+#~ msgid "Robotic rover"
+#~ msgstr "Περιπλάνηση ρομπότ"
+
+#~ msgid "Unmanned soft landing"
+#~ msgstr "Μη επανδρωμένη ομαλή προσγείωση"
+
+#~ msgid "Unmanned hard landing"
+#~ msgstr "Μη επανδρωμένη ανώμαλη προσγείωση"
+
+#~ msgid "Crater, impact crater"
+#~ msgstr "Κρατήρας, κρατήρας σύγκρουσης"
+
+#~ msgid "Mons, mountain"
+#~ msgstr "Μονς, βουνό"
+
+#~ msgid "Vallis, valley"
+#~ msgstr "Βάλις, πεδιάδα"
+
+#~ msgid "Selenographic Pole"
+#~ msgstr "Σεληνογραφικός πόλος"
+
+#~ msgid "Plain Map"
+#~ msgstr "Απλός χάρτης"
+
+#~ msgid ""
+#~ "<p>A <i>plain map</i>.</p><p>It uses vector lines to mark coastlines and "
+#~ "country borders, etc...</p>"
+#~ msgstr ""
+#~ "<p>Ένας <i>απλός χάρτης</i>.</p><p>Χρησιμοποιεί διανυσματικές γραμμές για "
+#~ "τη σήμανση των ακτογραμμών και των συνόρων των χωρών...</p>"
+
+#, fuzzy
+#~| msgid "Areas"
+#~ msgid "Urban Areas"
+#~ msgstr "Περιοχές"
+
+#~ msgid "Boundaries"
+#~ msgstr "Σύνορα"
+
+#~ msgid "Water Bodies"
+#~ msgstr "Υδάτινα σώματα"
+
+#~ msgid "Ice and Glaciers"
+#~ msgstr "Πάγοι και παγετώνες"
+
+#~ msgid "International"
+#~ msgstr "Διεθνές"
+
+#~ msgid "State"
+#~ msgstr "Πολιτεία"
+
+#~ msgid "Lake"
+#~ msgstr "Λίμνη"
+
+#, fuzzy
+#~| msgid "Historic"
+#~ msgid "Historic Lake"
+#~ msgstr "Ιστορικά"
+
+#~ msgid "River"
+#~ msgstr "Ποταμός"
+
+#, fuzzy
+#~| msgid "Ice and Glaciers"
+#~ msgid "Glaciers"
+#~ msgstr "Πάγοι και παγετώνες"
+
+#~ msgid "Temperature (July)"
+#~ msgstr "Θερμοκρασία (Ιούλιος)"
+
+#~ msgid "A map which shows the average temperature in July."
+#~ msgstr "Ένας χάρτης εμφάνισης της μέσης θερμοκρασίας τον μήνα Ιούλιο."
+
+#~ msgid "42&deg;C"
+#~ msgstr "42&deg;C"
+
+#~ msgid "32&deg;C"
+#~ msgstr "32&deg;C"
+
+#~ msgid "23&deg;C"
+#~ msgstr "23&deg;C"
+
+#~ msgid "12&deg;C"
+#~ msgstr "12&deg;C"
+
+#~ msgid "1&deg;C"
+#~ msgstr "1&deg;C"
+
+#~ msgid "-10&deg;C"
+#~ msgstr "-10&deg;C"
+
+#~ msgid "-21&deg;C"
+#~ msgstr "-21&deg;C"
+
+#~ msgid "-32&deg;C"
+#~ msgstr "-32&deg;C"
+
+#~ msgid "-41&deg;C"
+#~ msgstr "-41&deg;C"
+
+#~ msgid "-69&deg;C"
+#~ msgstr "-69&deg;C"
+
+#~ msgid "Earth at Night"
+#~ msgstr "Η Γη τη νύχτα"
+
+#~ msgid ""
+#~ "This image of <i>Earth's city lights</i> was created with data from the "
+#~ "Defense Meteorological Satellite Program (DMSP) Operational Linescan "
+#~ "System (OLS)."
+#~ msgstr ""
+#~ "Αυτή η εικόνα της <i>Γης με τα φώτα των πόλεων</i> δημιουργήθηκε από το "
+#~ "Αμυντικό Μετεωρολογικό Δορυφορικό Πρόγραμμα (DMSP), σύστημα σάρωσης "
+#~ "γραμμής (OLS)."
+
+#~ msgid "Surface"
+#~ msgstr "Επιφάνεια"
+
+#~ msgid "Light terrain"
+#~ msgstr "Φωτεινό έδαφος"
+
+#~ msgid "Dark terrain"
+#~ msgstr "Σκοτεινό έδαφος"
+
+#~ msgid "Water"
+#~ msgstr "Νερό"
+
+#~ msgid "Atlas"
+#~ msgstr "Άτλας"
+
+#, fuzzy
+#~| msgid ""
+#~| "<p>A <i>classic topographic map</i>.<p>It uses vector lines to mark "
+#~| "coastlines, country borders etc. and bitmap graphics to create the "
+#~| "height relief."
+#~ msgid ""
+#~ "<p>A <i>classic topographic map</i>.</p><p>It uses vector lines to mark "
+#~ "coastlines, country borders etc. and bitmap graphics to create the height "
+#~ "relief.</p>"
+#~ msgstr ""
+#~ "<p>Ένας <i>κλασσικός τοπογραφικός χάρτης</i>.<p>Χρησιμοποιεί "
+#~ "διανυσματικές γραμμές για τη σήμανση των ακτογραμμών, των συνόρων των "
+#~ "χωρών κλπ και γραφικά χρωματικού πλέγματος για τη δημιουργία του "
+#~ "ανάγλυφου του υψομέτρου."
+
+#~ msgid "Relief"
+#~ msgstr "Ανάγλυφο"
+
+#~ msgid "Elevation"
+#~ msgstr "Υψόμετρο"
+
+#~ msgid "7000 m"
+#~ msgstr "7000 μ"
+
+#~ msgid "5000 m"
+#~ msgstr "5000 μ"
+
+#~ msgid "3500 m"
+#~ msgstr "3500 μ"
+
+#~ msgid "2000 m"
+#~ msgstr "2000 μ"
+
+#~ msgid "1000 m"
+#~ msgstr "1000 μ"
+
+#~ msgid "500 m"
+#~ msgstr "500 μ"
+
+#~ msgid "200 m"
+#~ msgstr "200 μ"
+
+#~ msgid "50 m"
+#~ msgstr "50 μ"
+
+#~ msgid "0 m"
+#~ msgstr "0 μ"
+
+#~ msgid "0 m (Water)"
+#~ msgstr "0 μ (νερό)"
+
+#~ msgid "-50 m"
+#~ msgstr "-50 μ"
+
+#~ msgid "-200 m"
+#~ msgstr "-200 μ"
+
+#~ msgid "-2000 m"
+#~ msgstr "-2000 μ"
+
+#~ msgid "-4000 m"
+#~ msgstr "-4000 μ"
+
+#~ msgid "-6500 m"
+#~ msgstr "-6500 μ"
+
+#~ msgid "-11000 m"
+#~ msgstr "-11000 μ"
+
+#~ msgid "Temperature (December)"
+#~ msgstr "Θερμοκρασία (Δεκέμβριος)"
+
+#~ msgid "A map which shows the average temperature in December."
+#~ msgstr "Ένας χάρτης εμφάνισης της μέσης θερμοκρασίας τον Δεκέμβριο."
+
+#~ msgid ""
+#~ "<p>A <i>global roadmap</i> created by the OpenStreetMap (OSM) project.</"
+#~ "p><p>OSM is an open community which creates free editable maps. The OSM "
+#~ "data was rendered using Mapnik.</p>"
+#~ msgstr ""
+#~ "<p>Ένας <i>παγκόσμιος οδικός χάρτης</i> δημιουργημένος από το έργο "
+#~ "OpenStreetMap (OSM).</p><p>Η OSM είναι μια ανοιχτή κοινότητα που "
+#~ "δημιουργεί ελεύθερους επεξεργάσιμους χάρτες. Τα δεδομένα OSM αποτυπώθηκαν "
+#~ "με τη χρήση του Mapnik.</p>"
+
+#, fuzzy
+#~| msgid "Map Title:"
+#~ msgid "OSM Bitmap Tiles"
+#~ msgstr "Τίτλος χάρτη:"
+
+#, fuzzy
+#~| msgid "The Earth"
+#~ msgid "Explore the Earth"
+#~ msgstr "Η γη"
+
+#~ msgid "Hillshading"
+#~ msgstr "Σκίαση λόφων"
+
+#~ msgid "Transportation"
+#~ msgstr "Μεταφορές"
+
+#~ msgid "Areas"
+#~ msgstr "Περιοχές"
+
+#~ msgid "Education"
+#~ msgstr "Εκπαίδευση"
+
+#~ msgid "Financial"
+#~ msgstr "Οικονομικά"
+
+#~ msgid "Healthcare"
+#~ msgstr "Υγειονομική περίθαλψη"
+
+#~ msgid "Entertainment"
+#~ msgstr "Διασκέδαση"
+
+#~ msgid "Public Buildings"
+#~ msgstr "Δημόσια κτήρια"
+
+#~ msgid "Accommodation"
+#~ msgstr "Κατάλυμα"
+
+#~ msgid "Emergency"
+#~ msgstr "Επείγον"
+
+#~ msgid "Historic"
+#~ msgstr "Ιστορικά"
+
+#~ msgid "Food and Drinks"
+#~ msgstr "Φαγητό και πότο"
+
+#~ msgid "Shop"
+#~ msgstr "Κατάστημα"
+
+#~ msgid "Motorway"
+#~ msgstr "Αυτοκινητόδρομος"
+
+#~ msgid "Trunk road"
+#~ msgstr "Οδός φορτηγών"
+
+#~ msgid "Primary road"
+#~ msgstr "Κύριος δρόμος"
+
+#~ msgid "Secondary road"
+#~ msgstr "Δευτερεύων δρόμος"
+
+#~ msgid "Unclassified road"
+#~ msgstr "Μη κατηγοριοποιημένος δρόμος"
+
+#~ msgid "Unsurfaced road"
+#~ msgstr "Μη καλυμμένος δρόμος"
+
+#~ msgid "Track"
+#~ msgstr "Πορεία"
+
+#~ msgid "Byway"
+#~ msgstr "Παράδρομος"
+
+#~ msgid "Bridleway"
+#~ msgstr "Δρόμος αναβατών"
+
+#~ msgid "Cycleway"
+#~ msgstr "Ποδηλατόδρομος"
+
+#~ msgid "Footway"
+#~ msgstr "Πεζόδρομος"
+
+#~ msgid "Railway station"
+#~ msgstr "Σιδηροδρομικός σταθμός"
+
+#~ msgid "Railway"
+#~ msgstr "Σιδηρόδρομος"
+
+#~ msgid "Subway"
+#~ msgstr "Υπόγειος"
+
+#~ msgid "Lightrail, tram"
+#~ msgstr "Τραμ"
+
+#~ msgid "Airport runway, taxiway"
+#~ msgstr "Αεροδιάδρομος"
+
+#~ msgid "Airport apron, terminal"
+#~ msgstr "Τερματικό αεροδρομίου"
+
+#~ msgid "Administrative boundary"
+#~ msgstr "Διοικητικό όριο"
+
+#~ msgid "Bridge"
+#~ msgstr "Γέφυρα"
+
+#~ msgid "Tunnel"
+#~ msgstr "Τούνελ"
+
+#~ msgid "Forest"
+#~ msgstr "Δάσος"
+
+#~ msgid "Wood"
+#~ msgstr "Μικρό δάσος"
+
+#~ msgid "Golf course"
+#~ msgstr "Γήπεδο γκολφ"
+
+#~ msgid "Park"
+#~ msgstr "Πάρκο"
+
+#~ msgid "Residential Area"
+#~ msgstr "Οικιστική περιοχή"
+
+#~ msgid "Tourist attraction"
+#~ msgstr "Τουριστικό αξιοθέατο"
+
+#~ msgid "Common, meadow"
+#~ msgstr "Λιβάδι"
+
+#~ msgid "Retail area"
+#~ msgstr "Λιανεμπόριο"
+
+#~ msgid "Industrial Area"
+#~ msgstr "Βιομηχανική περιοχή"
+
+#~ msgid "Commercial Area"
+#~ msgstr "Εμπορική περιοχή"
+
+#~ msgid "Heathland"
+#~ msgstr "Ακαλλιέργητη περιοχή"
+
+#~ msgid "Lake, reservoir"
+#~ msgstr "Λίμνη, τεχνητή"
+
+#~ msgid "Farm"
+#~ msgstr "Φάρμα"
+
+#~ msgid "Brownfield site"
+#~ msgstr "Μολυσμένη τοποθεσία"
+
+#~ msgid "Cemetery"
+#~ msgstr "Κοιμητήριο"
+
+#~ msgid "Allotments"
+#~ msgstr "Κλήροι"
+
+#~ msgid "Sports pitch"
+#~ msgstr "Αθλητικός χώρος"
+
+#~ msgid "Sports centre"
+#~ msgstr "Αθλητικό κέντρο"
+
+#~ msgid "Nature reserve"
+#~ msgstr "Προστατευόμενος φυσικός χώρος"
+
+#~ msgid "Military area"
+#~ msgstr "Στρατιωτική περιοχή"
+
+#~ msgid "School, university"
+#~ msgstr "Σχολείο, πανεπιστήμιο"
+
+#~ msgid "Significant Building"
+#~ msgstr "Σημαντικό κτίσμα"
+
+#~ msgid "Summit, peak"
+#~ msgstr "Κορυφή"
+
+#~ msgid "College"
+#~ msgstr "Κολλέγιο"
+
+#~ msgid "Kindergarten"
+#~ msgstr "Νηπιαγωγείο"
+
+#~ msgid "Library"
+#~ msgstr "Βιβλιοθήκη"
+
+#~ msgid "School"
+#~ msgstr "Σχολείο"
+
+#~ msgid "University"
+#~ msgstr "Πανεπιστήμιο"
+
+#~ msgid "ATM"
+#~ msgstr "ATM"
+
+#~ msgid "Bank"
+#~ msgstr "Τράπεζα"
+
+#~ msgid "Bureau de change"
+#~ msgstr "Ανταλλακτήριο συναλλάγματος"
+
+#~ msgid "Dentist"
+#~ msgstr "Οδοντίατρος"
+
+#~ msgid "Doctors"
+#~ msgstr "Γιατροί"
+
+#~ msgid "Pharmacy"
+#~ msgstr "Φαρμακείο"
+
+#~ msgid "Veterinary"
+#~ msgstr "Κτηνίατρος"
+
+#~ msgid "Cinema"
+#~ msgstr "Κινηματογράφος"
+
+#~ msgid "Theatre"
+#~ msgstr "Θέατρο"
+
+#~ msgid "Court"
+#~ msgstr "Γήπεδο"
+
+#~ msgid "Embassy"
+#~ msgstr "Πρεσβεία"
+
+#~ msgid "Church"
+#~ msgstr "Εκκλησία"
+
+#~ msgid "Playground"
+#~ msgstr "Γήπεδο"
+
+#~ msgid "Place of worship"
+#~ msgstr "Τόπος λατρείας"
+
+#~ msgid "Post office"
+#~ msgstr "Ταχυδρομείο"
+
+#~ msgid "Public building"
+#~ msgstr "Δημόσιο κτήριο"
+
+#~ msgid "Toilets"
+#~ msgstr "Τουαλέτες"
+
+#~ msgid "Hotel"
+#~ msgstr "Ξενοδοχείο"
+
+#~ msgid "Motel"
+#~ msgstr "Μοτέλ"
+
+#~ msgid "Hospital"
+#~ msgstr "Νοσοκομείο"
+
+#~ msgid "Fire station"
+#~ msgstr "Πυροσβεστικός σταθμός"
+
+#~ msgid "Monument"
+#~ msgstr "Μνημείο"
+
+#~ msgid "Ruins"
+#~ msgstr "Ερείπια"
+
+#~ msgid "Bar"
+#~ msgstr "Μπαρ"
+
+#~ msgid "Biergarten"
+#~ msgstr "Μπυραρία"
+
+#~ msgid "Cafe"
+#~ msgstr "Καφέ"
+
+#~ msgid "Drinking water"
+#~ msgstr "Πόσιμο νερό"
+
+#~ msgid "Fast Food"
+#~ msgstr "Γρήγορο φαγητό"
+
+#~ msgid "Ice Cream"
+#~ msgstr "Παγωτό"
+
+#~ msgid "Pub"
+#~ msgstr "Παμπ"
+
+#~ msgid "Restaurant"
+#~ msgstr "Εστιατόριο"
+
+#~ msgid "Alcohol"
+#~ msgstr "Αλκοόλ"
+
+#~ msgid "Bakery"
+#~ msgstr "Αρτοποιείο"
+
+#~ msgid "Books"
+#~ msgstr "Βιβλία"
+
+#~ msgid "Car"
+#~ msgstr "Αυτοκίνητο"
+
+#~ msgid "Clothes"
+#~ msgstr "Ρουχισμός"
+
+#~ msgid "Convenience"
+#~ msgstr "Ανέσεις"
+
+#~ msgid "Gas"
+#~ msgstr "Βενζίνη"
+
+#~ msgid "Gift"
+#~ msgstr "Δώρο"
+
+#~ msgid "Precipitation (July)"
+#~ msgstr "Κατακρήμνιση (Ιούλιος)"
+
+#~ msgid ""
+#~ "A map which shows the average precipitation (rain/snow/hail/etc) in July."
+#~ msgstr ""
+#~ "Ένας χάρτης εμφάνισης της μέσης κατακρήμνισης (βροχή/χιόνι/πάγος/κ.τ.λ.) "
+#~ "τον Ιούλιο."
+
+#~ msgid "Precipitation"
+#~ msgstr "Κατακρήμνιση"
+
+#~ msgid "0 mm"
+#~ msgstr "0 χιλστα"
+
+#~ msgid "10 mm"
+#~ msgstr "10 χιλστα"
+
+#~ msgid "40 mm"
+#~ msgstr "40 χιλστα"
+
+#~ msgid "63 mm"
+#~ msgstr "63 χιλστα"
+
+#~ msgid "89 mm"
+#~ msgstr "89 χιλστα"
+
+#~ msgid "127 mm"
+#~ msgstr "127 χιλστα"
+
+#~ msgid "256 mm"
+#~ msgstr "256 χιλστα"
+
+#~ msgid "512 mm"
+#~ msgstr "512 χιλστα"
+
+#~ msgid "1024 mm or more"
+#~ msgstr "1024 χιλστα και πάνω"
+
+#~ msgid "Satellite View"
+#~ msgstr "Προβολή δορυφόρου"
+
+#~ msgid ""
+#~ "<p>Earth as seen from Space.</p><p>The map is based on NASA's beautiful "
+#~ "\"Blue Marble Next Generation\" pictures. Credits: NASA's Earth "
+#~ "Observatory</p>"
+#~ msgstr ""
+#~ "<p>Η Γη όπως εμφανίζεται από το διάστημα.</p><p>Ο χάρτης βασίζεται στις "
+#~ "όμορφες εικόνες \"Blue Marble Next Generation\" της NASA. Ευχαριστίες: "
+#~ "Παρατηρητήριο Γης της NASA</p>"
+
+#~ msgid "Ice"
+#~ msgstr "Πάγος"
+
+#~ msgid "Vegetation"
+#~ msgstr "Βλάστηση"
+
+#~ msgid "Desert"
+#~ msgstr "Έρημος"
+
+#, fuzzy
+#~| msgid "Historical Maps"
+#~ msgid "Political Map"
+#~ msgstr "Ιστορικοί χάρτες"
+
+#, fuzzy
+#~| msgid "River"
+#~ msgid "Rivers"
+#~ msgstr "Ποταμός"
+
+#~ msgid "Precipitation (December)"
+#~ msgstr "Κατακρήμνιση (Δεκέμβριος)"
+
+#~ msgid "A map which shows the average precipitation in December."
+#~ msgstr "Ένας χάρτης εμφάνισης της μέσης κατακρήμνισης τον μήνα Δεκέμβριο."
+
+#~ msgid "SRTM Data"
+#~ msgstr "Δεδομένα SRTM"
+
+#, fuzzy
+#~| msgid "Lines and Orientation"
+#~ msgid "Texts and illustrations"
+#~ msgstr "Γραμμές και προσανατολισμός"
+
+#, fuzzy
+#~| msgid "Preference:"
+#~ msgid "Reference lines"
+#~ msgstr "Προτίμηση:"
+
+#~ msgid "Accurate Coastline"
+#~ msgstr "Ακριβής ακτογραμμή"
+
+#~ msgid "Historical Map 1689"
+#~ msgstr "Ιστορικός χάρτης 1689"
+
+#~ msgid ""
+#~ "<i>Historical world map</i> from the year 1689 created by G. van Schagen "
+#~ "in Amsterdam."
+#~ msgstr ""
+#~ "<i>Ιστορικός παγκόσμιος χάρτης</i> για το έτος 1689, μια δημιουργία του "
+#~ "G. van Schagen στο Amsterdam."
+
+#~ msgid "Town"
+#~ msgstr "Πόλη"
+
+#~ msgid "OpenStreetMap"
+#~ msgstr "OpenStreetMap"
+
+#~ msgid "Clouds"
+#~ msgstr "Σύννεφα"
+
+#~ msgid ""
+#~ "A Real Time Cloud Map that gets updated every 3 hours. It uses GOES, "
+#~ "METEOSAT, and GMS satellite imagery downloaded from the Geostationary "
+#~ "Satellite Imagery page at Dundee University.  Credits: Hari Nair, Xplanet "
+#~ "Project"
+#~ msgstr ""
+#~ "Ένας χάρτης των σύννεφων πραγματικού χρόνου που ενημερώνεται κάθε 3 ώρες. "
+#~ "Χρησιμοποιεί τον GOES, METEOSAT και τον GMS, δεδομένα που λαμβάνονται από "
+#~ "τη σελίδα γεωστατικού δορυφόρου του πανεπιστημίου Dundee. Ευχαριστίες: "
+#~ "Hari Nair, Xplanet Project"
+
+#~ msgid "Marble: Legend"
+#~ msgstr "Marble: Υπόμνημα"
+
+#~ msgid "Population:"
+#~ msgstr "Πληθυσμός:"
+
+#~ msgid "&gt; 1&nbsp;000&nbsp;000"
+#~ msgstr "&gt; 1&nbsp;000&nbsp;000"
+
+#~ msgid "&ge; 100&nbsp;000"
+#~ msgstr "&ge; 100&nbsp;000"
+
+#~ msgid "&ge; 10&nbsp;000"
+#~ msgstr "&ge; 10&nbsp;000"
+
+#~ msgid "&lt; 10&nbsp;000"
+#~ msgstr "&lt; 10&nbsp;000"
+
+#~ msgid "Capitals:"
+#~ msgstr "Πρωτεύουσες:"
+
+#~ msgid "Red:&nbsp;Nation"
+#~ msgstr "Κόκκινο:&nbsp;Έθνος"
+
+#~ msgid "Orange:&nbsp;State"
+#~ msgstr "Πορτοκαλί:&nbsp;Πολιτεία"
+
+#~ msgid "Yellow:&nbsp;County"
+#~ msgstr "Κίτρινο:&nbsp;Επαρχία"
+
+#~ msgid "White:&nbsp;None"
+#~ msgstr "Λευκό:&nbsp;Κανένα"
+
+#~ msgid "<!-- ##customLegendEntries:all## -->"
+#~ msgstr "<!-- ##customLegendEntries:all## -->"
+
+#, fuzzy
+#~| msgid "Marble"
+#~ msgid "Marble - Game"
+#~ msgstr "Marble"
+
+#~ msgid "The Earth"
+#~ msgstr "Η γη"
+
+#~ msgid "The Marble widget displays a virtual globe."
+#~ msgstr "Το γραφικό συστατικό Marble εμφανίζει μια εικονική υδρόγειο."
+
+#~ msgid "Navigation Control"
+#~ msgstr "Έλεγχος πλοήγησης"
+
+#~ msgid "Use this control to navigate."
+#~ msgstr "Χρησιμοποιήστε αυτό για να πλοηγηθείτε."
+
+#~ msgid "Show places"
+#~ msgstr "Εμφάνιση τοποθεσιών"
+
+#~ msgid "Show relief"
+#~ msgstr "Εμφάνιση προβολής"
+
+#~ msgid "Show scale bar"
+#~ msgstr "Εμφάνιση γραμμής κλίμακας"
+
+#~ msgid "Show borders"
+#~ msgstr "Εμφάνιση περιθωρίων"
+
+#~ msgid "Show ice / snow"
+#~ msgstr "Εμφάνιση πάγου / χιονιού"
+
+#~ msgid "Show compass"
+#~ msgstr "Εμφάνιση πυξίδας"
+
+#~ msgid "Show grid"
+#~ msgstr "Εμφάνιση καννάβου"
+
+#~ msgid "Show rivers / lakes"
+#~ msgstr "Εμφάνιση ποταμών / λιμνών"
+
+#~ msgid "Show elevation model"
+#~ msgstr "Εμφάνιση μοντέλου υψομέτρου"
+
+#~ msgid "Coordinates: "
+#~ msgstr "Συντεταγμένες: "
+
+#, fuzzy
+#~| msgid "Add Via"
+#~ msgid "Add link"
+#~ msgstr "Προσθήκη ενδιάμεσου"
+
+#~ msgid "URL:"
+#~ msgstr "URL:"
+
+#~ msgid "Name:"
+#~ msgstr "Όνομα:"
+
+#~ msgid "Bookmark Manager - Marble"
+#~ msgstr "Διαχειριστής σελιδοδεικτών - Marble"
+
+#~ msgid "Import Bookmarks..."
+#~ msgstr "Εισαγωγή σελιδοδεικτών..."
+
+#~ msgid "Export Bookmarks..."
+#~ msgstr "Εξαγωγή σελιδοδεικτών..."
+
+#~ msgid "Folders"
+#~ msgstr "Φάκελοι"
+
+#~ msgid "New"
+#~ msgstr "Νέος"
+
+#~ msgid "Rename"
+#~ msgstr "Μετονομασία"
+
+#~ msgid "Delete"
+#~ msgstr "Διαγραφή"
+
+#~ msgid "Bookmarks"
+#~ msgstr "Σελιδοδείκτες"
+
+#~ msgid "Edit"
+#~ msgstr "Επεξεργασία"
+
+#, fuzzy
+#~| msgid "Clouds"
+#~ msgid "Cloud Routes"
+#~ msgstr "Σύννεφα"
+
+#, fuzzy
+#~| msgid "No position available."
+#~ msgid "No route available."
+#~ msgstr "Μη διαθέσιμη θέση."
+
+#~ msgid "Current Location"
+#~ msgstr "Τρέχουσα τοποθεσία"
+
+#~ msgid "Position Tracking"
+#~ msgstr "Ανίχνευση τοποθεσίας"
+
+#~ msgid "Disabled"
+#~ msgstr "Απενεργοποιημένη"
+
+#~ msgid "Show Track"
+#~ msgstr "Εμφάνιση πορείας"
+
+#~ msgid "Clear Track"
+#~ msgstr "Καθαρισμός πορείας"
+
+#~ msgid "..."
+#~ msgstr "..."
+
+#~ msgid "No position available."
+#~ msgstr "Μη διαθέσιμη θέση."
+
+#~ msgctxt "Select the method to use to recenter your GPS location on map."
+#~ msgid "Select the method to use to re-center your GPS location on map."
+#~ msgstr ""
+#~ "Επιλογή της μεθόδου που θα χρησιμοποιηθεί για το εκ νέου κεντράρισμα της "
+#~ "GPS θέσης σας στο χάρτη."
+
+#~ msgid "Map Adjustment"
+#~ msgstr "Προσαρμογή χάρτη"
+
+#~ msgctxt "Disable Auto Recenter"
+#~ msgid "Disabled"
+#~ msgstr "Απενεργοποιημένη"
+
+#~ msgctxt "Always keep gps location at the center of the map"
+#~ msgid "Keep at Center"
+#~ msgstr "Διατήρηση στο κέντρο"
+
+#~ msgctxt "Auto center when required"
+#~ msgid "When required"
+#~ msgstr "Όταν απαιτείται"
+
+#~ msgctxt "Auto Zoom to appropriate zoom level"
+#~ msgid "Auto Zoom to appropriate zoom level"
+#~ msgstr "Αυτόματη εστίαση στο κατάλληλο επίπεδο εστίασης"
+
+#~ msgid "Auto Zoom"
+#~ msgstr "Αυτόματη εστίαση"
+
+#~ msgid "Data Migration"
+#~ msgstr "Μεταφορά δεδομένων"
+
+#~ msgid ""
+#~ "Marble has found map data stored by a previous Marble version.<br/>Should "
+#~ "this data get converted so that it can be used by the current version?"
+#~ msgstr ""
+#~ "Το Marble βρήκε δεδομένα χαρτών αποθηκευμένα από προηγούμενη έκδοση του "
+#~ "Marble. <br/> Θα θέλατε τα δεδομένα αυτά να μετατραπούν ώστε να να "
+#~ "μπορούν να χρησιμοποιηθούν στην τρέχουσα έκδοση;"
+
+#~ msgid "Edit Bookmark - Marble"
+#~ msgstr "Επεξεργασία σελιδοδεικτών - Marble"
+
+#~ msgid "&Description"
+#~ msgstr "&Περιγραφή"
+
+#, fuzzy
+#~| msgid ""
+#~| "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/"
+#~| "TR/REC-html40/strict.dtd\">\n"
+#~| "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~| "css\">\n"
+#~| "p, li { white-space: pre-wrap; }\n"
+#~| "</style></head><body style=\" font-family:'Ubuntu'; font-size:9pt; font-"
+#~| "weight:400; font-style:normal;\">\n"
+#~| "<table border=\"0\" style=\"-qt-table-type: root; margin-top:4px; margin-"
+#~| "bottom:4px; margin-left:4px; margin-right:4px;\">\n"
+#~| "<tr>\n"
+#~| "<td style=\"border: none;\">\n"
+#~| "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~| "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~| "\"></p>\n"
+#~| "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~| "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~| "\"></p></td></tr></table></body></html>"
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<table border=\"0\" style=\"-qt-table-type: root; margin-top:4px; margin-"
+#~ "bottom:4px; margin-left:4px; margin-right:4px;\">\n"
+#~ "<tr>\n"
+#~ "<td style=\"border: none;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-family:'Ubuntu';\"><br /></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-family:'Ubuntu';\"><br /></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-family:'Ubuntu';\"><br /></p></td></tr></table></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Ubuntu'; font-size:9pt; font-"
+#~ "weight:400; font-style:normal;\">\n"
+#~ "<table border=\"0\" style=\"-qt-table-type: root; margin-top:4px; margin-"
+#~ "bottom:4px; margin-left:4px; margin-right:4px;\">\n"
+#~ "<tr>\n"
+#~ "<td style=\"border: none;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p></td></tr></table></body></html>"
+
+#~ msgid "&Folder"
+#~ msgstr "&Φάκελος"
+
+#~ msgid "&Add Folder"
+#~ msgstr "Π&ροσθήκη φακέλου"
+
+#, fuzzy
+#~| msgid "Edit Toolbar"
+#~ msgid "Edit placemark"
+#~ msgstr "Επεξεργασία γραμμής εργαλείων"
+
+#~ msgid "Description"
+#~ msgstr "Περιγραφή"
+
+#, fuzzy
+#~| msgid "&Text Labels"
+#~ msgid "Label"
+#~ msgstr "Ετικέτες &κειμένου"
+
+#, fuzzy
+#~| msgid "C&olors"
+#~ msgid "Color:"
+#~ msgstr "Χρώμα&τα"
+
+#, fuzzy
+#~| msgid "Scale Bar"
+#~ msgid "Scale:"
+#~ msgstr "Γραμμή κλίμακας"
+
+#, fuzzy
+#~| msgid "Show places"
+#~ msgid "Show placemark"
+#~ msgstr "Εμφάνιση τοποθεσιών"
+
+#~ msgid "Elevation:"
+#~ msgstr "Υψόμετρο:"
+
+#, fuzzy
+#~| msgid "0 m"
+#~ msgid " m"
+#~ msgstr "0 μ"
+
+#~ msgid "External Map Editor Selection"
+#~ msgstr "Επιλογή εξωτερικού επεξεργαστή χάρτη"
+
+#~ msgid "External Map Editor"
+#~ msgstr "Εξωτερικός επεξεργαστής χάρτη"
+
+#, fuzzy
+#~| msgid "Web browser (Potlatch)"
+#~ msgid "Web browser (iD)"
+#~ msgstr "Περιηγητής ιστού (Potlatch)"
+
+#~ msgid "Merkaartor"
+#~ msgstr "Merkaartor"
+
+#~ msgid "JOSM"
+#~ msgstr "JOSM"
+
+#~ msgid ""
+#~ "Deactivate to be prompted for a map editor selection next time again. "
+#~ "Otherwise, your choice is remembered and will be used automatically in "
+#~ "the future. If you want to alter the default map editor later, you can do "
+#~ "so in the Marble Settings."
+#~ msgstr ""
+#~ "Υπενθύμιση απενεργοποίησης επιλογής επεξεργαστή χάρτη την επόμενη φορά. "
+#~ "Διαφορετικά, η επιλογή σας θα παραμείνει και θα χρησιμοποιείται αυτόματα "
+#~ "κάθε φορά στο μέλλον. Αν επιθυμείτε την αλλαγή του προεπιλεγμένου "
+#~ "επεξεργαστή χάρτη, μπορείτε να το κάνετε από τις Ρυθμίσεις του Marble."
+
+#~ msgid "Make my selection the default map editor"
+#~ msgstr "Ορισμός επιλογής ως προκαθορισμένο επεξεργαστή χαρτών"
+
+#~ msgid "Editor Details"
+#~ msgstr "Λεπτομέρειες επεξεργαστή"
+
+#~ msgid "Editor Preview"
+#~ msgstr "Προεπισκόπηση επεξεργαστή"
+
+#, fuzzy
+#~| msgid ""
+#~| "Potlatch is an OpenStreetMap editor for quick editing tasks and "
+#~| "beginners. It requires a web browser with flash support."
+#~ msgid ""
+#~ "iD is an OpenStreetMap editor for quick editing tasks and beginners. It "
+#~ "requires a web browser."
+#~ msgstr ""
+#~ "Ο Potlatch είναι ένας επεξεργαστής του OpenStreetMap για γρήγορες "
+#~ "εργασίες επεξεργασίας και για αρχαρίους. Απαιτεί περιηγητή με υποστήριξη "
+#~ "flash."
+
+#~ msgid "File View"
+#~ msgstr "Προβολή αρχείου"
+
+#~ msgid "&Save"
+#~ msgstr "Απο&θήκευση"
+
+#~ msgid "&Close"
+#~ msgstr "&Κλείσιμο"
+
+#, fuzzy
+#~| msgid "F9"
+#~ msgid "9"
+#~ msgstr "F9"
+
+#~ msgid "10"
+#~ msgstr "10"
+
+#, fuzzy
+#~| msgid "C&olors"
+#~ msgid "Color"
+#~ msgstr "Χρώμα&τα"
+
+#~ msgid "Go To..."
+#~ msgstr "Μετάβαση σε..."
+
+#~ msgid ""
+#~ "Enter a search term and press Enter. <a href=\"http://userbase.kde.org/"
+#~ "Marble/Search\">Details...</a>"
+#~ msgstr ""
+#~ "Εισάγετε έναν όρο αναζήτησης και πατήστε Enter. <a href=\"http://userbase."
+#~ "kde.org/Marble/Search\">Λεπτομέρειες...</a>"
+
+#~ msgid "Browse"
+#~ msgstr "Περιήγηση"
+
+#~ msgid "Search"
+#~ msgstr "Αναζήτηση"
+
+#~ msgid "Select a geographic region"
+#~ msgstr "Επιλογή μιας γεωγραφικής περιοχής"
+
+#~ msgid "Northern Latitude"
+#~ msgstr "Βόρειο γεωγραφικό πλάτος"
+
+#~ msgid "°"
+#~ msgstr "°"
+
+#~ msgid "&N"
+#~ msgstr "&Β"
+
+#~ msgid "Western Longitude"
+#~ msgstr "Δυτικό γεωγραφικό μήκος"
+
+#~ msgid "&W"
+#~ msgstr "&Δ"
+
+#~ msgid "Eastern Longitude"
+#~ msgstr "Ανατολικό γεωγραφικό μήκος"
+
+#~ msgid "&E"
+#~ msgstr "&Α"
+
+#~ msgid "Southern Latitude"
+#~ msgstr "Νότιο γεωγραφικό πλάτος"
+
+#~ msgid "&S"
+#~ msgstr "&Ν"
+
+#~ msgid "′"
+#~ msgstr "′"
+
+#~ msgid "″"
+#~ msgstr "″"
+
+#~ msgid "Legend"
+#~ msgstr "Υπόμνημα"
+
+#~ msgid "Marble - Install Maps"
+#~ msgstr "Marble - Εγκατάσταση χαρτών"
+
+#~ msgid "Map View"
+#~ msgstr "Προβολή χάρτη"
+
+#~ msgid "&Projection"
+#~ msgstr "&Προβολή"
+
+#~ msgid "Globe"
+#~ msgstr "Υδρόγειος"
+
+#~ msgid "Flat Map"
+#~ msgstr "Επίπεδος χάρτης"
+
+#~ msgid "Mercator"
+#~ msgstr "Μερκατορικός"
+
+#, fuzzy
+#~| msgid "Selenographic Pole"
+#~ msgid "Stereographic"
+#~ msgstr "Σεληνογραφικός πόλος"
+
+#~ msgid "&Celestial Body"
+#~ msgstr "&Ουράνιο σώμα"
+
+#~ msgid "&Theme"
+#~ msgstr "&Θέμα"
+
+#~ msgid "Here you can choose the preferred map view from different topics."
+#~ msgstr ""
+#~ "Εδώ μπορείτε να επιλέξετε την προτιμώμενη προβολή χάρτη μέσα από διάφορα "
+#~ "θέματα."
+
+#~ msgid "Marble Map Theme Creation Wizard"
+#~ msgstr "Οδηγός δημιουργίας θέματος χάρτη Marble"
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">Welcome to the Map Creation Wizard!</span></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">We will guide you "
+#~ "through the process of creating a map theme for Marble. In the end you "
+#~ "will have your own map that you can view in Marble.</p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Please choose the "
+#~ "source that you want to use for the data of your map theme:</p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:12px; margin-bottom:12px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">Καλώς ορίσατε στον οδηγό δημιουργίας χάρτη του Marble!</"
+#~ "span></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Θα σας οδηγήσουμε καθ' "
+#~ "όλη τη διαδικασία δημιουργίας ενός θέματος χάρτη για το Marble. Στο τέλος "
+#~ "θα έχετε τον δικό σας χάρτη που θα μπορείτε να προβάλλετε στο Marble.</"
+#~ "p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Παρακαλώ επιλέξτε την "
+#~ "πηγή που επιθυμείτε να χρησιμοποιήσετε για τα δεδομένα του θέματος του "
+#~ "χάρτη σας:</p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:12px; margin-bottom:12px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p></body></html>"
+
+#~ msgid ""
+#~ "Connects to a server on the Internet. The map data is queried via the WMS "
+#~ "protocol."
+#~ msgstr ""
+#~ "Σύνδεση με έναν εξυπηρετητή στο Διαδίκτυο. Τα δεδομένα χαρτών "
+#~ "αναζητούνται μέσω του πρωτοκόλλου WMS."
+
+#~ msgid "Web Map Service (WMS)"
+#~ msgstr "Υπηρεσία χαρτών Ιστού (WMS)"
+
+#~ msgid ""
+#~ "You need to provide a bitmap image of a world map that is stored on disk."
+#~ msgstr ""
+#~ "Χρειάζεται να δώσετε μια εικόνα bitmap ενός παγκόσμιου χάρτη που είναι "
+#~ "αποθηκευμένη στο δίσκο."
+
+#~ msgid "A single image showing the whole world"
+#~ msgstr "Μια εικόνα που δείχνει ολόκληρο τον κόσμο"
+
+#~ msgid ""
+#~ "Connects to a server on the Internet. The map data is queried via a "
+#~ "static URL."
+#~ msgstr ""
+#~ "Σύνδεση με έναν εξυπηρετητή στο Διαδίκτυο. Τα δεδομένα χαρτών "
+#~ "αναζητούνται μέσω ενός στατικού URL."
+
+#~ msgid "Online map providing indexed tiles (e.g. Open Street Map)"
+#~ msgstr ""
+#~ "Διαδικτυακός χάρτης που παρέχει ταξινομημένα πλακίδια (π.χ. Open Street "
+#~ "Map)"
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">WMS Server</span></p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Please choose a <a href="
+#~ "\"http://en.wikipedia.org/wiki/Web_Map_Service\"><span style=\" text-"
+#~ "decoration: underline; color:#0057ae;\">WMS</span></a> server or enter a "
+#~ "custom server URL.</p></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">Εξυπηρετητής WMS</span></p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Παρακαλώ επιλέξτε έναν "
+#~ "εξυπηρετητή  <a href=\"http://en.wikipedia.org/wiki/Web_Map_Service"
+#~ "\"><span style=\" text-decoration: underline; color:#0057ae;\">WMS</"
+#~ "span></a> ή εισάγετε το URL ενός προσαρμοσμένου εξυπηρετητή.</p></body></"
+#~ "html>"
+
+#~ msgid "WMS Server:"
+#~ msgstr "Εξυπηρετητής WMS:"
+
+#~ msgid "Custom"
+#~ msgstr "Προσαρμοσμένος"
+
+#~ msgid "http://"
+#~ msgstr "http://"
+
+#~ msgid "Available Maps:"
+#~ msgstr "Διαθέσιμοι χάρτες:"
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">World Map Bitmap Image</span></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-weight:600;\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Please choose the "
+#~ "location of a world map that is stored in a single image file (JPG, PNG, "
+#~ "etc.). It needs to be provided in <a href=\"http://en.wikipedia.org/wiki/"
+#~ "Equirectangular_projection\"><span style=\" text-decoration: underline; "
+#~ "color:#0057ae;\">Equirectangular projection</span></a>, so the shape "
+#~ "should look like this (size ratio: 2:1):</p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><img src=\":/data/svg/"
+#~ "worldmap.svg\" width=\"150\" /></p></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">Εικόνα bitmap παγκόσμιου χάρτη</span></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-weight:600;\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Παρακαλώ επιλέξτε την "
+#~ "τοποθεσία ενός παγκόσμιου χάρτη που είναι αποθηκευμένος σε ένα μεμονωμένο "
+#~ "αρχείο εικόνας (JPG, PNG, κτλ.). Χρειάζεται να παρέχεται σε <a href="
+#~ "\"http://en.wikipedia.org/wiki/Equirectangular_projection\"><span style="
+#~ "\" text-decoration: underline; color:#0057ae;\">Ισορθογώνια προβολή</"
+#~ "span></a>, έτσι ώστε το σχήμα να μοιάζει με αυτό (αναλογία μεγέθους: 2:1):"
+#~ "</p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><img src=\":/data/svg/"
+#~ "worldmap.svg\" width=\"150\" /></p></body></html>"
+
+#~ msgid "Source Image:"
+#~ msgstr "Πηγαία εικόνα:"
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Bitstream Vera Sans'; font-"
+#~ "size:9pt; font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif'; font-weight:600;\">URL Scheme for Indexed Tiles</"
+#~ "span></p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif';\">Please enter the URL used for downloading "
+#~ "individual tiles. Use the placeholders </span><span style=\" font-"
+#~ "family:'Sans Serif'; font-style:italic;\">{x}</span><span style=\" font-"
+#~ "family:'Sans Serif';\">, </span><span style=\" font-family:'Sans Serif'; "
+#~ "font-style:italic;\">{y}</span><span style=\" font-family:'Sans Serif';"
+#~ "\">, and </span><span style=\" font-family:'Sans Serif'; font-style:"
+#~ "italic;\">{zoomLevel}</span><span style=\" font-family:'Sans Serif';\"> "
+#~ "to reference a tile from the index.</span></p></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Bitstream Vera Sans'; font-"
+#~ "size:9pt; font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif'; font-weight:600;\">Σχήμα URL για ταξινομημένα "
+#~ "πλακίδια</span></p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif';\">Παρακαλώ εισάγετε το URL που θα χρησιμοποιείται "
+#~ "για τη λήψη ανεξάρτητων πλακιδίων. Χρησιμοποιήστε τους αντικαταστάτες </"
+#~ "span><span style=\" font-family:'Sans Serif'; font-style:italic;\">{x}</"
+#~ "span><span style=\" font-family:'Sans Serif';\">, </span><span style=\" "
+#~ "font-family:'Sans Serif'; font-style:italic;\">{y}</span><span style=\" "
+#~ "font-family:'Sans Serif';\"> και </span><span style=\" font-family:'Sans "
+#~ "Serif'; font-style:italic;\">{zoomLevel}</span><span style=\" font-"
+#~ "family:'Sans Serif';\"> για αναφορά σε κάποιο από τα ταξινομημένα "
+#~ "πλακίδια.</span></p></body></html>"
+
+#~ msgid "URL Scheme:"
+#~ msgstr "Σχήμα URL:"
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Bitstream Vera Sans'; font-"
+#~ "size:9pt; font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif'; font-weight:600;\">General Information</span></p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif';\">Please specify a title, a name and an icon for "
+#~ "your new map. Add a description to let users know what your map is about. "
+#~ "</span></p></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Bitstream Vera Sans'; font-"
+#~ "size:9pt; font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif'; font-weight:600;\">Γενικές πληροφορίες</span></p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif';\">Ορίστε παρακαλώ έναν τίτλο, ένα όνομα και ένα "
+#~ "εικονίδιο για τον νέο σας χάρτη. Προσθέστε μια περιγραφή για να γνωρίζουν "
+#~ "οι χρήστες σε τι αναφέρεται ο χάρτης σας.</span></p></body></html>"
+
+#~ msgid "Map Title:"
+#~ msgstr "Τίτλος χάρτη:"
+
+#~ msgid "A short concise name for your map theme."
+#~ msgstr "Ένα σύντομο και περιεκτικό όνομα για το θέμα χάρτη σας."
+
+#~ msgid "Map Name:"
+#~ msgstr "Όνομα χάρτη:"
+
+#~ msgid "The lowercase map theme id."
+#~ msgstr "Το αναγνωριστικό θέματος χάρτη (μικρά γράμματα)"
+
+#~ msgid "The folder name of your new theme."
+#~ msgstr "Το όνομα φακέλου του νέου θέματός σας."
+
+#~ msgid "Description:"
+#~ msgstr "Περιγραφή:"
+
+#~ msgid ""
+#~ "A short description of your map theme. Here you can provide information "
+#~ "about the purpose, origin, copyright and license of the data used in your "
+#~ "map theme."
+#~ msgstr ""
+#~ "Μια σύντομη περιγραφή του θέματος χάρτη που φτιάξατε. Μπορείτε να "
+#~ "παρέχετε πληροφορίες σχετικά με το σκοπό, τις πηγές, τα πνευματικά "
+#~ "δικαιώματα και την άδεια χρήσης των δεδομένων που χρησιμοποιήσατε στον "
+#~ "χάρτη σας."
+
+#~ msgid "It will appear in a tool tip and may contain HTML formatting."
+#~ msgstr ""
+#~ "Θα εμφανίζεται μια υπόδειξη και μπορεί να περιέχει μορφοποίηση HTML."
+
+#~ msgid "Preview Image:"
+#~ msgstr "Εικόνα προεπισκόπησης:"
+
+#~ msgid "preview image"
+#~ msgstr "εικόνα προεπισκόπησης"
+
+#~ msgid "Change..."
+#~ msgstr "Αλλαγή..."
+
+#~ msgid "Legend Image:"
+#~ msgstr "Εικόνα υπομνήματος:"
+
+#~ msgid "Places of Interest"
+#~ msgstr "Περιοχές ενδιαφέροντος"
+
+#~ msgid "Populated Places"
+#~ msgstr "Κατοικημένες περιοχές"
+
+#~ msgid "Terrain"
+#~ msgstr "Έδαφος"
+
+#~ msgid "Coordinate Grid"
+#~ msgstr "Κάνναβος συντεταγμένων"
+
+#~ msgid "Border Lines"
+#~ msgstr "Γραμμές συνόρων"
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">Summary</span></p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Congratulations! You "
+#~ "have entered all the data that is necessary to create your map theme. "
+#~ "Check the summary below carefully and press the \"Finish\" button to "
+#~ "create the theme. </p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Please consider "
+#~ "contributing the map theme back to the Marble community if the license "
+#~ "and the terms of use allow for it.</p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:12px; margin-bottom:12px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">Σύνοψη</span></p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Συγχαρητήρια! Έχετε "
+#~ "εισάγει όλα τα απαραίτητα δεδομένα για να δημιουργήσετε το δικό σας θέμα "
+#~ "χάρτη. Ελέγξτε τη σύνοψη παρακάτω προσεκτικά και πιέστε το κουμπί \"Τέλος"
+#~ "\" για να δημιουργήσετε το θέμα.</p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Παρακαλώ σκεφτείτε τη "
+#~ "συνεισφορά του θέματος χάρτη στην κοινότητα του Marble εάν η άδεια και οι "
+#~ "όροι χρήσης το επιτρέπουν.</p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:12px; margin-bottom:12px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p></body></html>"
+
+#~ msgid "Map name goes here."
+#~ msgstr "Η θέση του ονόματος χάρτη."
+
+#~ msgid "Map Theme:"
+#~ msgstr "Θέμα χάρτη:"
+
+#~ msgid "Map theme goes here."
+#~ msgstr "Η θέση του θέματος χάρτη."
+
+#~ msgid "Thumbnail image goes here."
+#~ msgstr "Η θέση των εικόνων επισκόπησης."
+
+#~ msgid "Preview Map"
+#~ msgstr "Προεπισκόπηση χάρτη"
+
+#~ msgid "About Marble"
+#~ msgstr "Σχετικά με το Marble"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">Marble Virtual Globe</span></p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">Εικονική υδρόγειος Marble</span></p></body></html>"
+
+#~ msgid "Version Unknown"
+#~ msgstr "Άγνωστη έκδοση"
+
+#~ msgid "&About"
+#~ msgstr "&Σχετικά"
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:10pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-size:9pt;\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "size:9pt;\">(c) 2007, The Marble Project</span></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-size:9pt; font-style:italic;\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "size:9pt;\">http://edu.kde.org/marble</span></p></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:10pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-size:9pt;\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "size:9pt;\">(c) 2007, το έργο Marble</span></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-size:9pt; font-style:italic;\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "size:9pt;\">http://edu.kde.org/marble</span></p></body></html>"
+
+#~ msgid "A&uthors"
+#~ msgstr "Συ&γγραφείς"
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:10pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-size:9pt;\"></p></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:10pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-size:9pt;\"></p></body></html>"
+
+#~ msgid "&Data"
+#~ msgstr "&Δεδομένα"
+
+#~ msgid "&License Agreement"
+#~ msgstr "Άδεια &χρήσης"
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:10pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-family:'MS Shell Dlg 2'; font-size:8pt;\"></p></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:10pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-family:'MS Shell Dlg 2'; font-size:8pt;\"></p></body></html>"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">There are two caches "
+#~ "being used for Marble: The physical memory which is needed to keep map "
+#~ "data in the computer's memory. Increasing the value will make the "
+#~ "application more responsive. The hard disc memory cache is used by "
+#~ "download contents from the Internet (e.g. Wikipedia data or map data). "
+#~ "Decrease this value if you want to save space on the hard disc and if "
+#~ "high usage of the Internet is not an issue. </p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Υπάρχουν δύο "
+#~ "λανθάνουσες μνήμες σε χρήση από το Marble: Η φυσική μνήμη για τη "
+#~ "διατήρηση των δεδομένων του χάρτη στη μνήμη του υπολογιστή. Η αύξηση της "
+#~ "τιμής της έχει σαν αποτέλεσμα τη μεγαλύτερη αποκρισιμότητα της εφαρμογής. "
+#~ "Η λανθάνουσα μνήμη στον σκληρό δίσκο χρησιμοποιείται για τη λήψη "
+#~ "περιεχομένου από το διαδίκτυο (π.χ. δεδομένα Wikipedia ή δεδομένα χάρτη). "
+#~ "Μειώστε την τιμή αυτή αν επιθυμείτε να ελευθερώσετε χώρο στον δίσκο και "
+#~ "αν η υψηλή χρήση του διαδικτύου δεν αποτελεί πρόβλημα. </p></body></html>"
+
+#~ msgid "C&ache"
+#~ msgstr "Λαν&θάνουσα μνήμη"
+
+#~ msgid "&Physical memory:"
+#~ msgstr "&Φυσική μνήμη:"
+
+#, fuzzy
+#~| msgid "MB"
+#~ msgid " MB"
+#~ msgstr "MB"
+
+#~ msgid "C&lear"
+#~ msgstr "&Καθαρισμός"
+
+#~ msgid "&Hard disc:"
+#~ msgstr "&Σκληρός δίσκος:"
+
+#~ msgid "Unlimited"
+#~ msgstr "Απεριόριστο"
+
+#~ msgid "Cl&ear"
+#~ msgstr "&Καθαρισμός"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Proxy settings for your "
+#~ "local intranet. Please leave empty if there is no proxy.</p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Ρυθμίσεις διαμεσολαβητή "
+#~ "για το τοπικό σας δίκτυο intranet. Παρακαλώ αφήστε το κενό αν δεν υπάρχει "
+#~ "διαμεσολαβητής.</p></body></html>"
+
+#~ msgid "&Proxy"
+#~ msgstr "&Διαμεσολαβητής"
+
+#~ msgid "&Proxy:"
+#~ msgstr "&Διαμεσολαβητής:"
+
+#~ msgid "P&ort:"
+#~ msgstr "&Θύρα:"
+
+#~ msgid "Proxy type:"
+#~ msgstr "Τύπος διαμεσολαβητή:"
+
+#~ msgid "Http"
+#~ msgstr "Http"
+
+#~ msgid "Socks5"
+#~ msgstr "Socks5"
+
+#~ msgid "Requires authentication"
+#~ msgstr "Απαιτεί ταυτοποίηση"
+
+#~ msgid "U&sername:"
+#~ msgstr "Ό&νομα χρήστη:"
+
+#~ msgid "&Password:"
+#~ msgstr "&Κωδικός πρόσβασης:"
+
+#, fuzzy
+#~| msgid "Celestial Poles"
+#~ msgid "Credentials"
+#~ msgstr "Ουράνιοι πόλοι"
+
+#, fuzzy
+#~| msgid "Server"
+#~ msgid "Server:"
+#~ msgstr "Εξυπηρετητής"
+
+#, fuzzy
+#~| msgid "U&sername:"
+#~ msgid "Username:"
+#~ msgstr "Ό&νομα χρήστη:"
+
+#, fuzzy
+#~| msgid "&Password:"
+#~ msgid "Password:"
+#~ msgstr "&Κωδικός πρόσβασης:"
+
+#, fuzzy
+#~| msgid "&Test Plugin"
+#~ msgid "Test Login"
+#~ msgstr "Πρόσθετο &ελέγχου"
+
+#~ msgid "Marble Cache Settings"
+#~ msgstr "Ρυθμίσεις λανθάνουσας μνήμης Marble"
+
+#~ msgid "Dragging and Animation"
+#~ msgstr "Σύρσιμο και κίνηση"
+
+#~ msgid "&Drag location:"
+#~ msgstr "&Σύρσιμο τοποθεσίας:"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">While dragging the "
+#~ "mouse there are two standard behaviours when dealing with a virtual globe:"
+#~ "</p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">The location below "
+#~ "mouse pointer will follow the cursor exactly: As a result e.g. the north "
+#~ "pole will not stay at the top which can lead to confusion. By default "
+#~ "Marble makes sure that north is always up which results in a dragging "
+#~ "behaviour where the location below the mouse pointer slightly \"detaches"
+#~ "\" from the cursor. </p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Κατά το σύρσιμο του "
+#~ "ποντικιού υπάρχουν δύο τυπικές συμπεριφορές ως προς το χειρισμό της "
+#~ "εικονικής υδρογείου:</p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Η τοποθεσία κάτω από το "
+#~ "ποντίκι θα ακολουθεί με ακρίβεια τον δρομέα: Ως αποτέλεσμα π.χ. ο βόρειος "
+#~ "πόλος δε θα παραμένει στο πάνω μέρος το οποίο μπορεί να προκαλέσει "
+#~ "σύγχυση. Προκαθορισμένα το Marble διατηρεί πάντα τον βορρά στο πάνω "
+#~ "μέρος, το οποίο έχει ως αποτέλεσμα η τοποθεσία κάτω από τον δείκτη του "
+#~ "ποντικιού να \"αποκολλάται\" ελαφρά από τον δρομέα. </p></body></html>"
+
+#~ msgid "Keep Planet Axis Vertically"
+#~ msgstr "Διατήρηση άξονα του πλανήτη κατακόρυφη"
+
+#~ msgid "Follow Mouse Pointer"
+#~ msgstr "Ακολούθηση δείκτη του ποντικιού"
+
+#~ msgid "Use kinetic spinning when dragging the map"
+#~ msgstr "Χρησιμοποιήστε την κινητική περιστροφή κατά το σύρσιμο του χάρτη"
+
+#~ msgid "&Inertial Globe Rotation"
+#~ msgstr "&Αδρανειακή περιστροφή υδρογείου"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">When searching for a "
+#~ "location Marble can either move instantly to the new location or it can "
+#~ "show a travel animation from the previous place to the new place.</p></"
+#~ "body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Κατά την αναζήτηση μιας "
+#~ "τοποθεσίας το Marble μπορεί να κινηθεί ακαριαία στη νέα τοποθεσία ή να "
+#~ "εμφανίσει μια κίνηση ταξιδιού από την τρέχουσα τοποθεσία στη νέα.</p></"
+#~ "body></html>"
+
+#~ msgid "&Animate voyage to the target"
+#~ msgstr "&Κίνηση ταξιδιού στον προορισμού"
+
+#~ msgid "&On startup:"
+#~ msgstr "&Κατά την εκκίνηση:"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">By default Marble will "
+#~ "display the home location immediately after the application has started. "
+#~ "As an alternative it can also show the last position that was active when "
+#~ "the user left the application. </p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Προκαθορισμένα το "
+#~ "Marble θα εμφανίζει την αρχική τοποθεσία αμέσως μετά την εκκίνηση της "
+#~ "εφαρμογής. Εναλλακτικά μπορεί να εμφανίζει την τελευταία τοποθεσία που "
+#~ "ήταν ενεργή κατά την έξοδο από την εφαρμογή από τον χρήστη. </p></body></"
+#~ "html>"
+
+#~ msgid "Show Home Location"
+#~ msgstr "Εμφάνιση αρχικής τοποθεσίας"
+
+#~ msgid "Return to Last Location Visited"
+#~ msgstr "Επιστροφή στην τελευταία τοποθεσία"
+
+#~ msgid "&External Editor:"
+#~ msgstr "&Εξωτερικός επεξεργαστής"
+
+#~ msgid ""
+#~ "<p>The application that is launched to edit maps. Potlatch (default) "
+#~ "requires a web browser with flash support to be installed. When selecting "
+#~ "josm or merkaartor, make sure that the respective application is "
+#~ "installed.</p>"
+#~ msgstr ""
+#~ "<p>Η εφαρμογή που εκτελείται για την επεξεργασία χαρτών. Ο Potlatch "
+#~ "(προκαθορισμένος) απαιτεί έναν περιηγητή με υποστήριξη flash. Όταν "
+#~ "επιλέξετε josm ή merkaartor, σιγουρευτείτε ότι η αντίστοιχη εφαρμογή "
+#~ "είναι εγκατεστημένη.</p>"
+
+#~ msgid "Always ask"
+#~ msgstr "Ερώτηση πάντα"
+
+#~ msgid "Potlatch (Web browser)"
+#~ msgstr "Potlatch (Περιηγητής ιστού)"
+
+#~ msgid "Up"
+#~ msgstr "Πάνω"
+
+#~ msgid "Tilts the globe's axis towards the user."
+#~ msgstr "Κλίση του άξονα της υδρογείου προς τον χρήστη."
+
+#~ msgid "Left"
+#~ msgstr "Αριστερά"
+
+#~ msgid "Rotates the globe counterclockwise around its axis."
+#~ msgstr "Περιστροφή της υδρογείου αριστερόστροφα γύρω από τον άξονά της."
+
+#~ msgid "Reset View"
+#~ msgstr "Επαναφορά προβολής"
+
+#~ msgid "Click this button to restore the original zoom level and view angle."
+#~ msgstr ""
+#~ "Κάντε κλικ σε αυτό το κουμπί για την επαναφορά του επιπέδου εστίασης και "
+#~ "της γωνίας προβολής."
+
+#~ msgid "Home"
+#~ msgstr "Αρχική τοποθεσία"
+
+#~ msgid "Right"
+#~ msgstr "Δεξιά"
+
+#~ msgid "Rotates the globe clockwise around its axis."
+#~ msgstr "Περιστροφή της υδρογείου δεξιόστροφα γύρω από τον άξονά της."
+
+#~ msgid "Down"
+#~ msgstr "Κάτω"
+
+#~ msgid "Tilts the globe's axis away from the user."
+#~ msgstr "Κλίση του άξονα της υδρογείου μακριά από τον χρήστη."
+
+#~ msgid "Zoom In"
+#~ msgstr "Μεγέθυνση"
+
+#~ msgid "Zoom in by pressing this button to see more detail."
+#~ msgstr ""
+#~ "Μεγεθύνετε την προβολή πατώντας αυτό το κουμπί για την εμφάνιση "
+#~ "περισσότερων λεπτομερειών."
+
+#~ msgid "+"
+#~ msgstr "+"
+
+#~ msgid "Zoom Slider"
+#~ msgstr "Κύλιση εστίασης"
+
+#~ msgid "Use this slider to adjust the zoom level of the map."
+#~ msgstr ""
+#~ "Χρησιμοποιήστε αυτήν την κύλιση για τη ρύθμιση του επιπέδου εστίασης του "
+#~ "χάρτη."
+
+#~ msgid "Zoom Out"
+#~ msgstr "Σμίκρυνση"
+
+#~ msgid "Zoom out by pressing this button to see less detail."
+#~ msgstr ""
+#~ "Σμικρύνετε την προβολή πατώντας αυτό το κουμπί για την εμφάνιση λιγότερων "
+#~ "λεπτομερειών."
+
+#~ msgid "-"
+#~ msgstr "-"
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'DejaVu Sans'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif';\">This is Marble's machine room for advanced users. "
+#~ "Here you can select and deselect the functionality that is provided "
+#~ "through plugins. </span></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif';\">Deselecting a plugin will remove the functionality "
+#~ "from the map, menus and toolbars. </span></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif';\">Also some of the plugins might allow for tweaking "
+#~ "their configuration a bit. </span></p></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'DejaVu Sans'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif';\">Αυτή είναι η τοποθεσία του Marble για τους "
+#~ "προχωρημένους χρήστες. Εδώ μπορείτε να επιλέξετε τις λειτουργικότητες που "
+#~ "θα παρέχονται μέσω των πρόσθετων.</span></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif';\"> Αναιρώντας την επιλογή ενός πρόσθετου θα "
+#~ "αφαιρεθεί η λειτουργικότητά του από τον χάρτη, τα μενού και τις γραμμές "
+#~ "εργαλείων. </span></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif';\"> Επίσης, ορισμένα πρόσθετα ενδέχεται να επιτρέπουν "
+#~ "μια μικρή τροποποίηση της διαμόρφωσής τους. </span></p></body></html>"
+
+#~ msgid "P&lugins"
+#~ msgstr "Π&ρόσθετα"
+
+#~ msgid "Time Zone"
+#~ msgstr "Ζώνη ώρας"
+
+#~ msgid "UTC"
+#~ msgstr "UTC"
+
+#~ msgid "System time zone"
+#~ msgstr "Ζώνη ώρας συστήματος"
+
+#~ msgid "Choose Time zone"
+#~ msgstr "Επιλογή ζώνης ώρας"
+
+#~ msgid "Universal Time Coordinated"
+#~ msgstr "Συγχρονισμένος Παγκόσμιος Χρόνος"
+
+#~ msgid "European Central Time"
+#~ msgstr "Ώρα Κεντρικής Ευρώπης"
+
+#~ msgid "Eastern European Time"
+#~ msgstr "Ώρα Ανατολικής Ευρώπης"
+
+#~ msgid "Egypt Standard Time"
+#~ msgstr "Επίσημη Ώρα Αιγύπτου"
+
+#~ msgid "Eastern African Time"
+#~ msgstr "Ώρα Ανατολικής Αφρικής"
+
+#~ msgid "Middle East Time"
+#~ msgstr "Ώρα Μέσης Ανατολής"
+
+#~ msgid "Near East Time"
+#~ msgstr "Ώρα Εγγύς Ανατολής"
+
+#~ msgid "Pakistan Lahore Time"
+#~ msgstr "Ώρα Πακιστάν Λαχόρης"
+
+#~ msgid "India Standard Time"
+#~ msgstr "Επίσημη Ώρα Ινδίας"
+
+#~ msgid "Bangladesh Standard Time"
+#~ msgstr "Επίσημη Ώρα Μπανγκλαντές"
+
+#~ msgid "Vietnam Standard Time"
+#~ msgstr "Επίσημη Ώρα Βιετνάμ"
+
+#~ msgid "China Taiwan Time"
+#~ msgstr "Ώρα Κίνας Ταϊβάν"
+
+#~ msgid "Japan Standard Time"
+#~ msgstr "Επίσημη Ώρα Ιαπωνίας"
+
+#~ msgid "Australia Central Time"
+#~ msgstr "Ώρα Κεντρικής Αυστραλίας"
+
+#~ msgid "Australia Eastern Time"
+#~ msgstr "Ώρα Ανατολικής Αυστραλίας"
+
+#~ msgid "Solomon Standard Time"
+#~ msgstr "Επίσημη Ώρα Σολομώντα"
+
+#~ msgid "New Zealand Standard Time"
+#~ msgstr "Επίσημη Ώρα Νέας Ζηλανδίας"
+
+#~ msgid "Midway Islands Time"
+#~ msgstr "Ώρα νησιών Μίντγουεϊ"
+
+#~ msgid "Hawaii Standard Time"
+#~ msgstr "Επίσημη Ώρα Χαβάης"
+
+#~ msgid "Alaska Standard Time"
+#~ msgstr "Επίσημη ώρα Αλάσκας"
+
+#~ msgid "Pacific Standard Time"
+#~ msgstr "Επίσημη Ώρα Ειρηνικού"
+
+#~ msgid "Phoenix Standard Time"
+#~ msgstr "Επίσημη Ώρα Φοίνιξ"
+
+#~ msgid "Mountain Standard Time"
+#~ msgstr "Επίσημη Ώρα Βουνών"
+
+#~ msgid "Central Standard Time"
+#~ msgstr "Κεντρική Επίσημη Ώρα"
+
+#~ msgid "Eastern Standard Time"
+#~ msgstr "Ανατολική Επίσημη Ώρα"
+
+#~ msgid "Indiana Eastern Standard Time"
+#~ msgstr "Επίσημη Ώρα Ανατολικής Ιντιάνα"
+
+#~ msgid "Puerto Rico and US Virgin Islands Time"
+#~ msgstr "Ώρα Πουέρτο Ρίκο και Αμερικανικών Παρθένων Νήσων"
+
+#~ msgid "Canada Newfoundland Time"
+#~ msgstr "Ώρα Καναδά Νέας Γης"
+
+#~ msgid "Argentina Standard Time"
+#~ msgstr "Επίσημη Ώρα Αργεντινής"
+
+#~ msgid "Brazil Eastern Time"
+#~ msgstr "Ώρα Ανατολικής Βραζιλίας"
+
+#~ msgid "Central African Time"
+#~ msgstr "Ώρα Κεντρικής Αφρικής"
+
+#~ msgid "When Marble starts"
+#~ msgstr "Όταν εκκινείται το Marble"
+
+#~ msgid "Load system time"
+#~ msgstr "Φόρτωση ώρας συστήματος"
+
+#~ msgid "Load last session time"
+#~ msgstr "Φόρτωση ώρας τελευταίας συνεδρίας"
+
+#~ msgid "&Units"
+#~ msgstr "&Μονάδες"
+
+#~ msgid "&Distance:"
+#~ msgstr "&Απόσταση:"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">The unit that gets used "
+#~ "to measure altitude, lengths and distances (e.g. km, mi, ft).</p></body></"
+#~ "html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Η μονάδα μέτρησης "
+#~ "υψομέτρων, μηκών και αποστάσεων (π.χ. km, mi, ft).</p></body></html>"
+
+#~ msgid "Kilometer, Meter"
+#~ msgstr "Χιλιόμετρα, μέτρα"
+
+#~ msgid "Miles, Feet"
+#~ msgstr "Μίλια, πόδια"
+
+#~ msgid "An&gle:"
+#~ msgstr "&Γωνία:"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Specifies the notation "
+#~ "of angles in coordinates: By default the Degree-Minute-Second notation (e."
+#~ "g. 54°30'00\" ) gets used. As an alternative you can choose decimal "
+#~ "degrees (e.g. 54.5°).</p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Καθορίζει την έκφραση "
+#~ "των γωνιών σε συντεταγμένες: Προκαθορισμένα χρησιμοποιείται η σημειολογία "
+#~ "Μοίρες-Λεπτά-Δεύτερα (π.χ. 54°30'00\" ). Εναλλακτικά μπορείτε να "
+#~ "χρησιμοποιήσετε δεκαδικές μοίρες (π.χ. 54.5°).</p></body></html>"
+
+#~ msgid "Degree (DMS)"
+#~ msgstr "Μοίρες (εξηνταδικό)"
+
+#~ msgid "Degree (Decimal)"
+#~ msgstr "Μοίρες (δεκαδικό)"
+
+#~ msgid "Universal Transverse Mercator (UTM)"
+#~ msgstr "Εγκάρσια Μερκατορική προβολή (UTM)"
+
+#~ msgid "Map &Quality"
+#~ msgstr "&Ποιότητα χάρτη"
+
+#~ msgid "&Still image:"
+#~ msgstr "&Στατική εικόνα:"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Specifies the map "
+#~ "quality that gets displayed while there is no user input. Usually this "
+#~ "allows for high map quality as speed is no concern.</p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Καθορίζει την ποιότητα "
+#~ "του χάρτη που εμφανίζεται όταν δεν υπάρχει είσοδος από τον χρήστη. "
+#~ "Συνήθως αυτό επιτρέπει την υψηλή ποιότητα του χάρτη όταν δεν υπάρχει "
+#~ "ανάγκη για ταχύτητα.</p></body></html>"
+
+#~ msgid "Outline Quality"
+#~ msgstr "Ποιότητα περιγράμματος"
+
+#~ msgid "Low Quality"
+#~ msgstr "Χαμηλή ποιότητα"
+
+#~ msgid "Normal"
+#~ msgstr "Κανονική"
+
+#~ msgid "High Quality"
+#~ msgstr "Υψηλή ποιότητα"
+
+#~ msgid "Print Quality"
+#~ msgstr "Ποιότητα εκτύπωσης"
+
+#~ msgid "During &animations:"
+#~ msgstr "Κατά την &κίνηση:"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Specifies the map "
+#~ "quality that gets displayed during map animations (e.g. while dragging "
+#~ "the globe). </p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Especially on slow "
+#~ "machines it is advisable to set this option to \"low quality\" as this "
+#~ "will give better speed.</p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Καθορίζει την ποιότητα "
+#~ "του χάρτη κατά την κίνηση (π.χ. κατά το σύρσιμο της υδρογείου). </p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Ειδικά για αργά "
+#~ "μηχανήματα προτείνεται η χρήση της επιλογής \"χαμηλή ποιότητα\" καθώς "
+#~ "αυτό θα δώσει καλύτερη ταχύτητα.</p></body></html>"
+
+#~ msgid "G&raphics system:"
+#~ msgstr "Γ&ραφικό σύστημα:"
+
+#~ msgid ""
+#~ "Specifies the graphics system that Qt uses to draw the map.\n"
+#~ "Changing this setting might be a good idea if there are performance "
+#~ "issues with the system's graphics drivers."
+#~ msgstr ""
+#~ "Καθορίζει το σύστημα γραφικών που χρησιμοποιεί το Qt για τη σχεδίαση του "
+#~ "χάρτη.\n"
+#~ "Η αλλαγή αυτής της ρύθμισης μπορεί να είναι καλή ιδέα αν υπάρχουν "
+#~ "ζητήματα επιδόσεων με τους οδηγούς γραφικών του συστήματος."
+
+#~ msgid "Raster (Software rendering)"
+#~ msgstr "Χρωματικό πλέγμα (αποτύπωση με λογισμικό)"
+
+#~ msgid "OpenGL"
+#~ msgstr "OpenGL"
+
+#~ msgid "&Text Labels"
+#~ msgstr "Ετικέτες &κειμένου"
+
+#~ msgid "&Place names:"
+#~ msgstr "Ονόματα &τοποθεσιών:"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Places often have "
+#~ "different names in different languages. The label on the map can show the "
+#~ "name in the user's language. Alternatively it can display the name in the "
+#~ "official language and glyphs of that place. </p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Οι τοποθεσίες έχουν "
+#~ "διαφορετικά ονόματα σε διάφορες γλώσσες. Η ετικέτα στον χάρτη μπορεί να "
+#~ "εμφανίζει το όνομα στη γλώσσα του χρήστη. Εναλλακτικά μπορεί να εμφανίσει "
+#~ "το όνομα στην επίσημη γλώσσα και το ανάγλυφο της συγκεκριμένης "
+#~ "τοποθεσίας. </p></body></html>"
+
+#~ msgid "Custom & Native Language"
+#~ msgstr "Προσαρμοσμένη και εγγενής γλώσσα"
+
+#~ msgid "Custom Language"
+#~ msgstr "Προσαρμοσμένη γλώσσα"
+
+#~ msgid "Native Language"
+#~ msgstr "Μητρική γλώσσα"
+
+#~ msgid "Default map &font:"
+#~ msgstr "Προκαθορισμένη &γραμματοσειρά χάρτη:"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">The default font that "
+#~ "gets used on the map.</p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Η προκαθορισμένη "
+#~ "γραμματοσειρά που θα χρησιμοποιείται στον χάρτη.</p></body></html>"
+
+#, fuzzy
+#~| msgid "Description field"
+#~ msgid "Destination video"
+#~ msgstr "Πεδίο περιγραφής"
+
+#, fuzzy
+#~| msgctxt "Action for opening a file"
+#~| msgid "&Open..."
+#~ msgid "Open..."
+#~ msgstr "&Άνοιγμα..."
+
+#, fuzzy
+#~| msgid "Meters per second"
+#~ msgid "FPS (frames per second)"
+#~ msgstr "Μέτρα ανά ώρα"
+
+#~ msgid "Cancel"
+#~ msgstr "Ακύρωση"
+
+#, fuzzy
+#~| msgid "Start:"
+#~ msgid "Start"
+#~ msgstr "Έναρξη:"
+
+#~ msgid "New Bookmark Folder - Marble"
+#~ msgstr "Νέος φάκελος σελιδοδεικτών - Marble"
+
+#~ msgid "&Folder Name"
+#~ msgstr "&Όνομα φακέλου"
+
+#, fuzzy
+#~| msgid "Current Location"
+#~ msgid "Current Relations"
+#~ msgstr "Τρέχουσα τοποθεσία"
+
+#, fuzzy
+#~| msgid "&Name"
+#~ msgid "Name"
+#~ msgstr "&Όνομα"
+
+#, fuzzy
+#~| msgid "Type:"
+#~ msgid "Type"
+#~ msgstr "Τύπος:"
+
+#~ msgid "Role"
+#~ msgstr "Ρόλος"
+
+#, fuzzy
+#~| msgid "Add Via"
+#~ msgid "Add Relation"
+#~ msgstr "Προσθήκη ενδιάμεσου"
+
+#, fuzzy
+#~| msgid "Current Location"
+#~ msgid "Current Tags"
+#~ msgstr "Τρέχουσα τοποθεσία"
+
+#, fuzzy
+#~| msgid "Browse"
+#~ msgid "Browse..."
+#~ msgstr "Περιήγηση"
+
+#, fuzzy
+#~| msgid "&Position"
+#~ msgid "Position:"
+#~ msgstr "Θέ&ση"
+
+#~ msgid "Marble"
+#~ msgstr "Marble"
+
+#~ msgid "Map"
+#~ msgstr "Χάρτης"
+
+#~ msgid "Visible Globe Region"
+#~ msgstr "Ορατή περιοχή υδρογείου"
+
+#~ msgid "Outer Space"
+#~ msgstr "Απώτερο διάστημα"
+
+#~ msgid "Route"
+#~ msgstr "Διαδρομή"
+
+#~ msgid "Route Summary"
+#~ msgstr "Σύνοψη διαδρομής"
+
+#~ msgid "Driving Instructions"
+#~ msgstr "Εντολές οδήγησης"
+
+#~ msgid "Footer"
+#~ msgstr "Υποσημείωση"
+
+#~ msgid "Configure Routing Profile"
+#~ msgstr "Διαμόρφωση προφίλ δρομολόγησης"
+
+#~ msgid "Active Route Services"
+#~ msgstr "Ενεργές υπηρεσίες διαδρομής"
+
+#~ msgid "Service Settings"
+#~ msgstr "Ρυθμίσεις υπηρεσίας"
+
+#~ msgid "No configuration available"
+#~ msgstr "Μη διαθέσιμες ρυθμίσεις"
+
+#~ msgid "Select Service to Configure"
+#~ msgstr "Επιλογή υπηρεσίας για διαμόρφωση"
+
+#~ msgid "Configure"
+#~ msgstr "Διαμόρφωση"
+
+#~ msgid "&Add"
+#~ msgstr "&Προσθήκη"
+
+#~ msgid "&Configure"
+#~ msgstr "&Διαμόρφωση"
+
+#~ msgid "&Remove"
+#~ msgstr "&Αφαίρεση"
+
+#~ msgid "Move &Up"
+#~ msgstr "Μετακίνηση &πάνω"
+
+#~ msgid "Move &Down"
+#~ msgstr "Μετακίνηση &κάτω"
+
+#~ msgid "Car (fastest)"
+#~ msgstr "Αυτοκίνητο (ταχύτερη)"
+
+#~ msgid "Car (shortest)"
+#~ msgstr "Αυτοκίνητο (συντομότερη)"
+
+#~ msgid "Bicycle"
+#~ msgstr "Ποδήλατο"
+
+#~ msgid "Pedestrian"
+#~ msgstr "Πεζός"
+
+#~ msgid "No results."
+#~ msgstr "Δεν υπάρχουν αποτελέσματα."
+
+#~ msgid "Show Details"
+#~ msgstr "Εμφάνιση λεπτομερειών"
+
+#~ msgid "Choose alternative routes"
+#~ msgstr "Επιλογή εναλλακτικών διαδρομών"
+
+#~ msgid "Sun Control"
+#~ msgstr "Έλεγχος Ήλιου"
+
+#~ msgid "Sun Shading"
+#~ msgstr "Σκίαση Ήλιου"
+
+#~ msgid "Shadow"
+#~ msgstr "Σκιά"
+
+#~ msgid "Night Map"
+#~ msgstr "Νυχτερινός χάρτης"
+
+#~ msgid "Subsolar Point"
+#~ msgstr "Υποηλιακό σημείο"
+
+#~ msgid ""
+#~ "Display <a href=\"http://en.wikipedia.org/wiki/Subsolar_point\">Subsolar "
+#~ "Point</a> icon"
+#~ msgstr ""
+#~ "Εμφάνιση εικονιδίου<a href=\"http://en.wikipedia.org/wiki/Subsolar_point"
+#~ "\"> υποηλιακού σημείου</a>"
+
+#~ msgid ""
+#~ "<b>Lock</b> map view to <a href=\"http://en.wikipedia.org/wiki/"
+#~ "Subsolar_point\">Subsolar Point</a>."
+#~ msgstr ""
+#~ "<b>Κλείδωμα</b>προβολής χάρτη στο <a href=\"http://en.wikipedia.org/wiki/"
+#~ "Subsolar_point\">υποηλιακό σημείο</a>."
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">Attention: Panning the map is disabled now! </span></p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Uncheck the \"Lock map "
+#~ "view to Subsolar Point\" option to allow for viewing a different place on "
+#~ "the globe again.</p></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">Προσοχή: Η μετακίνηση του χάρτη έχει απενεργοποιηθεί προς "
+#~ "το παρόν! </span></p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Απενεργοποιήστε την "
+#~ "επιλογή \"Κλείδωμα προβολής χάρτη στο υποηλιακό σημείο\" ώστε να "
+#~ "επιτραπεί η προβολή ενός διαφορετικού σημείου στην υδρόγειο ξανά.</p></"
+#~ "body></html>"
+
+#~ msgid "OK"
+#~ msgstr "Εντάξει"
+
+#~ msgid "Apply"
+#~ msgstr "Εφαρμογή"
+
+#~ msgid "Creating Map"
+#~ msgstr "Δημιουργία χάρτη"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /></head><body style="
+#~ "\" white-space: pre-wrap; font-family:Sans Serif; font-size:9pt; font-"
+#~ "weight:400; font-style:normal; text-decoration:none;\"><p style=\" margin-"
+#~ "top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-"
+#~ "indent:0; text-indent:0px;\"><span style=\" font-weight:600;\">Satellite "
+#~ "View</span></p><p style=\" margin-top:0px; margin-bottom:0px; margin-"
+#~ "left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Earth "
+#~ "as seen from Space. The map is based on NASA's beautiful \"Blue Marble "
+#~ "Next Generation\" pictures. Credits: NASA's Earth Observatory</p></body></"
+#~ "html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /></head><body style="
+#~ "\" white-space: pre-wrap; font-family:Sans Serif; font-size:9pt; font-"
+#~ "weight:400; font-style:normal; text-decoration:none;\"><p style=\" margin-"
+#~ "top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-"
+#~ "indent:0; text-indent:0px;\"><span style=\" font-weight:600;\">Προβολή "
+#~ "δορυφόρου </span></p><p style=\" margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\">Η Γη όπως φαίνεται από το διάστημα, ο χάρτης βασίστηκε στις όμορφες "
+#~ "φωτογραφίες της NASA \"Blue Marble Next Generation\". Ευχαριστίες: "
+#~ "Παρατηρητήριο Γης της NASA</p></body></html>"
+
+#~ msgid ""
+#~ "Marble needs to create this map. This only needs to be done once and may "
+#~ "take a few seconds."
+#~ msgstr ""
+#~ "Το Marble πρέπει να δημιουργήσει αυτόν το χάρτη. Αυτό απαιτείται να γίνει "
+#~ "μια φορά και μπορεί να διαρκέσει κάποια δευτερόλεπτα."
+
+#~ msgid "&Cancel"
+#~ msgstr "&Ακύρωση"
+
+#~ msgid "Zoom"
+#~ msgstr "Μεγέθυνση"
+
+#~ msgid "&Tile Level Range:"
+#~ msgstr "Εύρος επιπέδου &πλακιδίων:"
+
+#~ msgid "Minimum Tile Level"
+#~ msgstr "Ελάχιστο επίπεδο πλακιδίων"
+
+#~ msgid "to"
+#~ msgstr "έως"
+
+#~ msgid "Maximum Tile Level"
+#~ msgstr "Μέγιστο επίπεδο πλακιδίων"
+
+#~ msgid "Time Control"
+#~ msgstr "Έλεγχος χρόνου"
+
+#~ msgid "Time"
+#~ msgstr "Ώρα"
+
+#~ msgid "New Date Time      :"
+#~ msgstr "Νέα ημερομηνία ώρα      :"
+
+#~ msgid "Refresh Interval     :"
+#~ msgstr "Μεσοδιάστημα ανανέωσης     :"
+
+#~ msgid " seconds"
+#~ msgstr " δευτερόλεπτα"
+
+#~ msgid "Now"
+#~ msgstr "Τώρα"
+
+#~ msgid "Current Date Time :"
+#~ msgstr "Τρέχουσα ημερομηνία και ώρα :"
+
+#~ msgid "Time Speed"
+#~ msgstr "Ταχύτητα χρόνου"
+
+#, fuzzy
+#~| msgid "&Close"
+#~ msgid "Close"
+#~ msgstr "&Κλείσιμο"
+
+#, fuzzy
+#~| msgid "Move &Up"
+#~ msgid "Move up"
+#~ msgstr "Μετακίνηση &πάνω"
+
+#, fuzzy
+#~| msgid "Move &Down"
+#~ msgid "Move down"
+#~ msgstr "Μετακίνηση &κάτω"
+
+#, fuzzy
+#~| msgid "Save Track"
+#~ msgid "Save Tour"
+#~ msgstr "Αποθήκευση πορείας"
+
+#, fuzzy
+#~| msgid "Save Track"
+#~ msgid "Save Tour As"
+#~ msgstr "Αποθήκευση πορείας"
+
+#, fuzzy
+#~| msgid "Open Track"
+#~ msgid "Open Tour"
+#~ msgstr "Άνοιγμα πορείας"
+
+#~ msgid "Worldclock Applet Configuration"
+#~ msgstr "Διαμόρφωση μικροεφαρμογής παγκόσμιου ρολογιού"
+
+#~ msgid "Map Display"
+#~ msgstr "Εμφάνιση χάρτη"
+
+#~ msgid "Projection:"
+#~ msgstr "Προβολή:"
+
+#~ msgid "Equirectangular"
+#~ msgstr "Ισορθογώνια"
+
+#~ msgid "Center map on longitude:"
+#~ msgstr "Κεντράρισμα χάρτη στο γεωγραφικό μήκος:"
+
+#~ msgid "Center map on daylight"
+#~ msgstr "Κεντράρισμα χάρτη στο φως της ημέρας"
+
+#~ msgid "Show date"
+#~ msgstr "Εμφάνιση ημερομηνίας"
+
+#~ msgid "Time Zones"
+#~ msgstr "Ζώνες ώρας"
+
+#~ msgid "Use custom timezone selection"
+#~ msgstr "Χρήση προσαρμοσμένης επιλογής ζώνης ώρας"
+
+#, fuzzy
+#~| msgid "Coordinates:"
+#~ msgid "Coordinates"
+#~ msgstr "Συντεταγμένες:"
+
+#, fuzzy
+#~| msgctxt "North, the direction"
+#~| msgid "N"
+#~ msgid "N"
+#~ msgstr "Β"
+
+#, fuzzy
+#~| msgctxt "West, the direction"
+#~| msgid "W"
+#~ msgid "W"
+#~ msgstr "Δ"
+
+#, fuzzy
+#~| msgctxt "East, the direction"
+#~| msgid "E"
+#~ msgid "E"
+#~ msgstr "Α"
+
+#, fuzzy
+#~| msgctxt "South, the direction"
+#~| msgid "S"
+#~ msgid "S"
+#~ msgstr "Ν"
+
+#, fuzzy
+#~| msgid "Vegetation"
+#~ msgid "Rotation"
+#~ msgstr "Βλάστηση"
+
+#, fuzzy
+#~| msgid "&Add Folder"
+#~ msgid "Add polygon"
+#~ msgstr "Π&ροσθήκη φακέλου"
+
+#, fuzzy
+#~| msgid "Areas"
+#~ msgid "Area"
+#~ msgstr "Περιοχές"
+
+#~ msgid "Display"
+#~ msgstr "Απεικόνιση"
+
+#~ msgid "Fade data older than (minutes)"
+#~ msgstr "Εξασθένιση δεδομένων παλαιότερων από (σε λεπτά)"
+
+#~ msgid "Do not show data older than (minutes)"
+#~ msgstr "Δε θα εμφανίζονται δεδομένα παλαιότερα από (σε λεπτά)"
+
+#~ msgid "Internet"
+#~ msgstr "Διαδίκτυο"
+
+#~ msgid "APRS Data Sources"
+#~ msgstr "Πηγές δεδομένων ARPS"
+
+#~ msgid "Should information be gathered from the Internet APRS data source?"
+#~ msgstr "Να συλλέγονται δεδομένα από τη διαδικτυακή πηγή δεδομένων ARPS;"
+
+#~ msgid "Collect data from an APRS Internet server"
+#~ msgstr "Συλλογή δεδομένων από διαδικτυακό εξυπηρετητή ARPS"
+
+#~ msgid "Server"
+#~ msgstr "Εξυπηρετητής"
+
+#~ msgid "rotate.aprs.net"
+#~ msgstr "rotate.aprs.net"
+
+#~ msgid "Port"
+#~ msgstr "Θύρα"
+
+#~ msgid "10253"
+#~ msgstr "10253"
+
+#~ msgid "Dump TCP/IP records to the debug stream"
+#~ msgstr "Αποτύπωση καταχωρήσεων TCP/IP στη ροή αποσφαλμάτωσης"
+
+#~ msgid "Device"
+#~ msgstr "Συσκευή"
+
+#~ msgid "TNC Terminal Port"
+#~ msgstr "Θύρα τερματικού TNC"
+
+#~ msgid "Should information be gathered from a serial port?"
+#~ msgstr "Θα πρέπει οι πληροφορίες να συγκεντρώνονται από μια σειριακή θύρα;"
+
+#~ msgid "Collect data from a serial TNC (In Text Mode)"
+#~ msgstr "Συλλογή δεδομένων από σειριακή TNC (προβολή κειμένου)"
+
+#~ msgid "TTY"
+#~ msgstr "TTY"
+
+#~ msgid "/dev/ttyUSB0"
+#~ msgstr "/dev/ttyUSB0"
+
+#~ msgid "Dump TTY records to the debug stream"
+#~ msgstr "Αποτύπωση εγγραφών TTY στη ροή αποσφαλμάτωσης"
+
+#~ msgid "File"
+#~ msgstr "Αρχείο"
+
+#~ msgid "Should information be gathered from a file?"
+#~ msgstr "Να συλλέγονται δεδομένα από αρχείο;"
+
+#~ msgid "Collect data from a file"
+#~ msgstr "Συλλογή δεδομένων από αρχείο"
+
+#~ msgid "Dump file records to the debug stream"
+#~ msgstr "Αποτύπωση εγγραφών αρχείου στη ροή αποσφαλμάτωσης"
+
+#~ msgid "Configure Compass Plugin"
+#~ msgstr "Διαμόρφωση πρόσθετου πυξίδας"
+
+#~ msgid "Theme"
+#~ msgstr "Θέμα"
+
+#~ msgid "Default"
+#~ msgstr "Προκαθορισμένο"
+
+#~ msgid "Arrows"
+#~ msgstr "Βέλη"
+
+#~ msgid "Atom"
+#~ msgstr "Άτομο"
+
+#~ msgid "Magnet"
+#~ msgstr "Μαγνήτης"
+
+#~ msgid "Configure Crosshairs Plugin"
+#~ msgstr "Διαμόρφωση πρόσθετου σταυρονήματος"
+
+#~ msgid "Gun 1"
+#~ msgstr "Όπλο 1"
+
+#~ msgid "Gun 2"
+#~ msgstr "Όπλο 2"
+
+#~ msgid "Circled"
+#~ msgstr "Κυκλικό"
+
+#~ msgid "German"
+#~ msgstr "Γερμανικό"
+
+#~ msgid "Dialog"
+#~ msgstr "Διάλογος"
+
+#~ msgid "Filter"
+#~ msgstr "Φίλτρο"
+
+#~ msgid "Maximum number of results:"
+#~ msgstr "Μέγιστος αριθμός αποτελεσμάτων:"
+
+#~ msgid "Minimum magnitude:"
+#~ msgstr "Ελάχιστο μέγεθος:"
+
+#~ msgid "Time Range"
+#~ msgstr "Χρονικό εύρος"
+
+#, fuzzy
+#~| msgid "Location Browser"
+#~ msgid "Eclipse Browser"
+#~ msgstr "Περιηγητής τοποθεσίας"
+
+#, fuzzy
+#~| msgid "&Settings"
+#~ msgid "&Settings..."
+#~ msgstr "&Ρυθμίσεις"
+
+#, fuzzy
+#~| msgid "Satellites, Eclipses"
+#~ msgid "&Go To Selected Eclipse"
+#~ msgstr "Δορυφόροι, Εκλειπτικές"
+
+#, fuzzy
+#~| msgid "Monav Configuration"
+#~ msgid "Eclipses Configuration"
+#~ msgstr "Διαμόρφωση Monav"
+
+#, fuzzy
+#~| msgid "Central African Time"
+#~ msgid "Central &Line"
+#~ msgstr "Ώρα Κεντρικής Αφρικής"
+
+#, fuzzy
+#~| msgid "&Remove"
+#~ msgid "&Reminder"
+#~ msgstr "&Αφαίρεση"
+
+#~ msgid "Configure Elevation Profile Plugin"
+#~ msgstr "Διαμόρφωση πρόσθετου προφίλ υψομέτρου"
+
+#~ msgid "Zoom to viewport"
+#~ msgstr "Μεγέθυνση στη θύρα προβολής"
+
+#~ msgid "Speed"
+#~ msgstr "Ταχύτητα"
+
+#~ msgid "Direction"
+#~ msgstr "Κατεύθυνση"
+
+#~ msgid "Altitude"
+#~ msgstr "Υψόμετρο"
+
+#~ msgid "Precision"
+#~ msgstr "Ακρίβεια"
+
+#~ msgid "Coordinate Grid Plugin"
+#~ msgstr "Πρόσθετο καννάβου συντεταγμένων"
+
+#~ msgid "C&olors"
+#~ msgstr "Χρώμα&τα"
+
+#~ msgid "&Grid:"
+#~ msgstr "&Κάνναβος:"
+
+#~ msgid "Color of the coordinate grid."
+#~ msgstr "Χρώμα καννάβου συντεταγμένων."
+
+#~ msgid "&Tropics:"
+#~ msgstr "&Τροπικοί:"
+
+#~ msgid "Color of the tropical circles."
+#~ msgstr "Χρώμα Τροπικών κύκλων"
+
+#~ msgid "&Equator:"
+#~ msgstr "&Ισημερινός:"
+
+#~ msgid "Color of the equator."
+#~ msgstr "Χρώμα Ισημερινού."
+
+#, fuzzy
+#~| msgid "&Text Labels"
+#~ msgid "Labels"
+#~ msgstr "Ετικέτες &κειμένου"
+
+#, fuzzy
+#~| msgid "&Text Labels"
+#~ msgid "&Named Labels"
+#~ msgstr "Ετικέτες &κειμένου"
+
+#, fuzzy
+#~| msgid "&Text Labels"
+#~ msgid "&Numerical Labels"
+#~ msgstr "Ετικέτες &κειμένου"
+
+#, fuzzy
+#~| msgid "Show thumbnail images"
+#~ msgid "Show numerical Labels."
+#~ msgstr "Εμφάνιση εικόνων επισκόπησης"
+
+#~ msgid "Configure Scale Bar Plugin"
+#~ msgstr "Διαμόρφωση πρόσθετου γραμμής κλίμακας"
+
+#~ msgid "Show Ratio Scale"
+#~ msgstr "Εμφάνιση κλίμακας αναλογίας"
+
+#~ msgid "Minimize"
+#~ msgstr "Ελαχιστοποίηση"
+
+#~ msgid "Marble - Measure Tool Configuration"
+#~ msgstr "Διαμόρφωση του εργαλείου μέτρησης αποστάσεων του Marble"
+
+#, fuzzy
+#~| msgid "Circled"
+#~ msgid "Circle"
+#~ msgstr "Κυκλικό"
+
+#, fuzzy
+#~| msgid "&Text Labels"
+#~ msgid "Segment labels"
+#~ msgstr "Ετικέτες &κειμένου"
+
+#, fuzzy
+#~| msgid "&Distance:"
+#~ msgid "Distance "
+#~ msgstr "&Απόσταση:"
+
+#, fuzzy
+#~| msgid "Bureau de change"
+#~ msgid "Bearing Change"
+#~ msgstr "Ανταλλακτήριο συναλλάγματος"
+
+#, fuzzy
+#~| msgid "Cemetery"
+#~ msgid "Perimeter"
+#~ msgstr "Κοιμητήριο"
+
+#, fuzzy
+#~| msgid "Preference:"
+#~ msgid "Circumference"
+#~ msgstr "Προτίμηση:"
+
+#~ msgid "General"
+#~ msgstr "Γενικά"
+
+#~ msgid "Cache name:"
+#~ msgstr "Όνομα κρύπτης:"
+
+#~ msgid "User name:"
+#~ msgstr "Όνομα χρήστη:"
+
+#~ msgid "Type:"
+#~ msgstr "Τύπος:"
+
+#~ msgid "Status:"
+#~ msgstr "Κατάσταση:"
+
+#~ msgid "Country:"
+#~ msgstr "Χώρα:"
+
+#~ msgid "Size:"
+#~ msgstr "Μέγεθος:"
+
+#~ msgid "Difficulty:"
+#~ msgstr "Δυσκολία:"
+
+#~ msgid "Terrain:"
+#~ msgstr "Έδαφος:"
+
+#~ msgid "Longitude:"
+#~ msgstr "Γεωγραφικό μήκος:"
+
+#~ msgid "Latitude:"
+#~ msgstr "Γεωγραφικό πλάτος:"
+
+#~ msgid "Date hidden:"
+#~ msgstr "Ημερομηνία απόκρυψης:"
+
+#~ msgid "Date created:"
+#~ msgstr "Ημερομηνία δημιουργίας:"
+
+#~ msgid "Date last modified:"
+#~ msgstr "Ημερομηνία τελευταίας τροποποίησης:"
+
+#~ msgid "Log"
+#~ msgstr "Καταγραφή"
+
+#~ msgid "Previous"
+#~ msgstr "Προηγούμενο"
+
+#~ msgid "Next"
+#~ msgstr "Επόμενο"
+
+#~ msgid "Minimum difficulty:"
+#~ msgstr "Ελάχιστη δυσκολία:"
+
+#~ msgid "Maximum difficulty:"
+#~ msgstr "Μέγιστη δυσκολία:"
+
+#~ msgid "Maximum Distance:"
+#~ msgstr "Μέγιστη απόσταση:"
+
+#~ msgid "Start:"
+#~ msgstr "Έναρξη:"
+
+#~ msgid "End:"
+#~ msgstr "Τέλος:"
+
+#~ msgid "TextLabel"
+#~ msgstr "ΕτικέταΚειμένου"
+
+#~ msgid "Hint"
+#~ msgstr "Υπόδειξη"
+
+#~ msgid "Logs"
+#~ msgstr "Καταγραφές"
+
+#~ msgid "Marble - OpenDesktop plugin configuration"
+#~ msgstr "Διαμόρφωση του πρόσθετου OpenDesktop του Marble"
+
+#~ msgid "Number of displayed items on the screen:"
+#~ msgstr "Αριθμός στοιχείων που εμφανίζονται στην οθόνη"
+
+#~ msgid "Map &Image"
+#~ msgstr "&Εικόνα χάρτη"
+
+#~ msgid "&Planet:"
+#~ msgstr "&Πλανήτης:"
+
+#~ msgid "&Size:"
+#~ msgstr "&Μέγεθος:"
+
+#~ msgid "x"
+#~ msgstr "x"
+
+#~ msgid "Preview"
+#~ msgstr "Προεπισκόπηση"
+
+#~ msgid "Filename"
+#~ msgstr "Όνομα αρχείου"
+
+#~ msgid "Position I&ndicator:"
+#~ msgstr "Έ&νδειξη θέσης:"
+
+#~ msgid "Configure Photo Plugin"
+#~ msgstr "Διαμόρφωση πρόσθετου φωτογραφιών"
+
+#~ msgid "License"
+#~ msgstr "Άδεια χρήσης"
+
+#~ msgid "Number of items on the screen"
+#~ msgstr "Αριθμός στοιχείων στην οθόνη"
+
+#~ msgid "Configure Position Marker Plugin"
+#~ msgstr "Διαμόρφωση πρόσθετου δείκτη θέσης"
+
+#~ msgid "Cursor Shape"
+#~ msgstr "Σχήμα δρομέα"
+
+#~ msgid "&Arrow"
+#~ msgstr "&Βέλος"
+
+#~ msgid "&Custom:"
+#~ msgstr "&Προσαρμοσμένο:"
+
+#~ msgid ""
+#~ "Position marker images indicating the direction should point north (top)."
+#~ msgstr ""
+#~ "Οι εικόνες του δείκτη θέσης που υποδεικνύουν την κατεύθυνση θα πρέπει να "
+#~ "δείχνουν προς το βορρά (προς τα πάνω)."
+
+#~ msgid "Trail"
+#~ msgstr "Ίχνος"
+
+#~ msgid "&Accuracy:"
+#~ msgstr "&Ακρίβεια:"
+
+#~ msgid "Color of the position marker's accuracy indicator."
+#~ msgstr "Χρώμα ένδειξης ακρίβειας του δείκτη θέσης."
+
+#~ msgid "Trail:"
+#~ msgstr "Ίχνος:"
+
+#~ msgid "Color of the position marker's trail."
+#~ msgstr "Χρώμα ίχνους του δείκτη θέσης."
+
+#~ msgid "Routing Configuration - Marble"
+#~ msgstr "Διαμόρφωση δρομολόγησης - Marble"
+
+#~ msgid "Audible Turn Instructions"
+#~ msgstr "Ηχητικές οδηγίες"
+
+#~ msgid "Play a sound"
+#~ msgstr "Αναπαραγωγή ενός ήχου"
+
+#~ msgid "Use this speaker"
+#~ msgstr "Χρήση του συγκεκριμένου ομιλητή"
+
+#~ msgid ""
+#~ "<a href=\"http://userbase.kde.org/Marble/CustomSpeakers\">Get more "
+#~ "speakers</a>"
+#~ msgstr ""
+#~ "<a href=\"http://userbase.kde.org/Marble/CustomSpeakers\">Λήψη επιπλέον "
+#~ "ομιλητών</a>"
+
+#~ msgid "Guidance Mode"
+#~ msgstr "Λειτουργία καθοδήγησης"
+
+#~ msgid "R"
+#~ msgstr "R"
+
+#~ msgid "Toggle GPS"
+#~ msgstr "Εναλλαγή GPS"
+
+#~ msgid "zoom out"
+#~ msgstr "σμίκρυνση"
+
+#~ msgid "zoom in"
+#~ msgstr "μεγέθυνση"
+
+#~ msgid "total time remaining"
+#~ msgstr "συνολικός χρόνος που απομένει"
+
+#~ msgid "Satellites Configuration - Marble"
+#~ msgstr "Διαμόρφωση δορυφόρων - Marble"
+
+#~ msgid "&Satellites"
+#~ msgstr "&Δορυφόροι"
+
+#~ msgid "&Data Sources"
+#~ msgstr "&Πηγές δεδομένων"
+
+#~ msgid ""
+#~ "<html><head/><body><p><span style=\" font-weight:600;\">Last update:</"
+#~ "span></p></body></html>"
+#~ msgstr ""
+#~ "<html><head/><body><p><span style=\" font-weight:600;\">Τελευταία "
+#~ "ενημέρωση:</span></p></body></html>"
+
+#~ msgid "&Reload All Data Sources"
+#~ msgstr "&Επαναφόρτωση όλων των πηγών δεδομένων"
+
+#~ msgid "Satellite Data Sources:"
+#~ msgstr "Πηγές δεδομένων δορυφόρων:"
+
+#~ msgid "Add a new data source (URL)."
+#~ msgstr "Προσθήκη νέας πηγής δεδομένων (URL)."
+
+#~ msgid "Open a new data source from disk."
+#~ msgstr "Άνοιγμα νέας πηγής δεδομένων από τον δίσκο."
+
+#~ msgid "Remove selected data source."
+#~ msgstr "Αφαίρεση της επιλεγμένης πηγής δεδομένων"
+
+#~ msgid "(Built-in Data Sources for Earth Satellites)"
+#~ msgstr "(Ενσωματωμένες πηγές δεδομένων για τους δορυφόρους της γης)"
+
+#~ msgid ""
+#~ "<html><head/><body><p>Supported formats: <a href=\"http://techbase.kde."
+#~ "org/Projects/Marble/SatelliteCatalogFormat\"><span style=\" text-"
+#~ "decoration: underline; color:#0000ff;\">Marble Satellite Catalogue</"
+#~ "span></a>, <a href=\"http://en.wikipedia.org/wiki/Two-line_element_set"
+#~ "\"><span style=\" text-decoration: underline; color:#0000ff;\">Two-Line-"
+#~ "Element Set</span></a></p></body></html>"
+#~ msgstr ""
+#~ "<html><head/><body><p>Υποστηριζόμενοι τύποι: <a href=\"http://techbase."
+#~ "kde.org/Projects/Marble/SatelliteCatalogFormat\"><span style=\" text-"
+#~ "decoration: underline; color:#0000ff;\">Κατάλογος δορυφόρων του Marble</"
+#~ "span></a>, <a href=\"http://en.wikipedia.org/wiki/Two-line_element_set"
+#~ "\"><span style=\" text-decoration: underline; color:#0000ff;\">Τροχιακά "
+#~ "στοιχεία (TLE) </span></a></p></body></html>"
+
+#~ msgid "Plugin Inactive"
+#~ msgstr "Πρόσθετο ανενεργό"
+
+#~ msgid "&Activate Plugin"
+#~ msgstr "&Ενεργοποίηση πρόσθετου"
+
+#~ msgid ""
+#~ "Configuration options not available since the plugin is disabled at the "
+#~ "moment."
+#~ msgstr ""
+#~ "Οι επιλογές διαμόρφωσης δεν είναι διαθέσιμες γιατί το πρόσθετο είναι "
+#~ "απενεργοποιημένο αυτή τη στιγμή."
+
+#~ msgid "km/h"
+#~ msgstr "χλμ/ω"
+
+#~ msgid "Configure Stars Plugin"
+#~ msgstr "Διαμόρφωση πρόσθετου Stars"
+
+#, fuzzy
+#~| msgid "Celestial objects"
+#~ msgid "Celestial Objects"
+#~ msgstr "Ουράνια σώματα"
+
+#~ msgid "Star Magnitude Limit"
+#~ msgstr "Όριο φαινόμενου μεγέθους αστέρα"
+
+#~ msgid " mag"
+#~ msgstr " mag"
+
+#~ msgid "Sun"
+#~ msgstr "Ήλιος"
+
+#~ msgid "Moon"
+#~ msgstr "Σελήνη"
+
+#, fuzzy
+#~| msgid "Mercator"
+#~ msgid "Mercury"
+#~ msgstr "Μερκατορικός"
+
+#, fuzzy
+#~| msgid "&Earth"
+#~ msgid "Earth"
+#~ msgstr "&Γη"
+
+#, fuzzy
+#~| msgid "&Text Labels"
+#~ msgid "Use name labels"
+#~ msgstr "Ετικέτες &κειμένου"
+
+#~ msgid "Other"
+#~ msgstr "Άλλο"
+
+#~ msgid "Deep Sky Object Labels"
+#~ msgstr "Ετικέτες αντικειμένων βαθέως ουρανού"
+
+#~ msgid "Deep Sky Objects"
+#~ msgstr "Αντικείμενα βαθέως ουρανού"
+
+#~ msgid "Lines and Orientation"
+#~ msgstr "Γραμμές και προσανατολισμός"
+
+#, fuzzy
+#~| msgid "Constellation Lines"
+#~ msgid "Constellations"
+#~ msgstr "Γραμμές αστερισμών"
+
+#, fuzzy
+#~| msgid "&Name"
+#~ msgid "Names"
+#~ msgstr "&Όνομα"
+
+#~ msgid "Latin Name"
+#~ msgstr "Όνομα στα λατινικά"
+
+#~ msgid "Native Translation"
+#~ msgstr "Μετάφραση στη μητρική"
+
+#~ msgid "Abbreviation"
+#~ msgstr "Συντομογραφία"
+
+#~ msgid "Celestial Equator"
+#~ msgstr "Ουράνιος Ισημερινός"
+
+#~ msgid "Celestial Poles"
+#~ msgstr "Ουράνιοι πόλοι"
+
+#~ msgid "Ecliptic"
+#~ msgstr "Εκλειπτική"
+
+#~ msgid "Configure Weather Plugin"
+#~ msgstr "Διαμόρφωση πρόσθετου καιρού"
+
+#~ msgid "Information"
+#~ msgstr "Πληροφορίες"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Here you can "
+#~ "choose if you want the weather condition to be shown (for example, clouds "
+#~ "or clear sky.) Marble will only show the condition if this information is "
+#~ "available.</p></body></html>\n"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Εδώ μπορείτε να "
+#~ "επιλέξετε αν επιθυμείτε να εμφανίζονται οι καιρικές συνθήκες (για "
+#~ "παράδειγμα, σύννεφα ή καθαρός ουρανός) Το Marble θα εμφανίζει τις "
+#~ "καιρικές συνθήκες μόνο αν η συγκεκριμένη πληροφορία είναι διαθέσιμη .</"
+#~ "p></body></html>\n"
+
+#~ msgid "Weather condition"
+#~ msgstr "Καιρικές συνθήκες"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Selects if you "
+#~ "want the temperature to be shown. The temperature will only be shown for "
+#~ "the stations it is available for.</p></body></html>\n"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Επιλέξτε αν "
+#~ "επιθυμείτε να εμφανίζεται η θερμοκρασία. Η θερμοκρασία θα εμφανίζεται "
+#~ "μόνο για τους σταθμούς που είναι διαθέσιμη.</p></body></html>\n"
+
+#~ msgid "Temperature"
+#~ msgstr "Θερμοκρασία"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Select if you "
+#~ "want the wind direction to be shown. The wind direction will only be "
+#~ "shown if it is available for the particular station.</p></body></html>\n"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Επιλέξτε αν "
+#~ "επιθυμείτε να εμφανίζεται η διεύθυνση του ανέμου. Η διεύθυνση του ανέμου "
+#~ "θα εμφανίζεται μόνο αν είναι διαθέσιμη για τη συγκεκριμένη περιοχή.</p></"
+#~ "body></html>\n"
+
+#~ msgid "Wind direction"
+#~ msgstr "Διεύθυνση ανέμου"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Select if you "
+#~ "want the wind speed to be shown. The wind speed will only be shown if it "
+#~ "is available for the particular station.</p></body></html>\n"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Επιλέξτε αν "
+#~ "επιθυμείτε να εμφανίζεται η ταχύτητα του ανέμου. Η ταχύτητα του ανέμου θα "
+#~ "εμφανίζεται μόνο αν είναι διαθέσιμη για τη συγκεκριμένη περιοχή. </p></"
+#~ "body></html>\n"
+
+#~ msgid "Wind speed"
+#~ msgstr "Ταχύτητα ανέμου"
+
+#~ msgid "Units"
+#~ msgstr "Μονάδες"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">The unit used to "
+#~ "measure the temperature.</p></body></html>\n"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Η μονάδα "
+#~ "μέτρησης που χρησιμοποιείται για τη θερμοκρασία.</p></body></html>\n"
+
+#~ msgid "Celsius"
+#~ msgstr "Κελσίου"
+
+#~ msgid "Fahrenheit"
+#~ msgstr "Φαρενάιτ"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">The unit used to "
+#~ "measure the wind speed.</p></body></html>\n"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Η μονάδα που "
+#~ "χρησιμοποιείται για τη μέτρηση της ταχύτητας του ανέμου.</p></body></"
+#~ "html>\n"
+
+#~ msgid "Kilometers per hour"
+#~ msgstr "Χιλιόμετρα ανά ώρα"
+
+#~ msgid "Miles per hour"
+#~ msgstr "Μίλια ανά ώρα"
+
+#~ msgid "Meters per second"
+#~ msgstr "Μέτρα ανά ώρα"
+
+#~ msgid "Knots"
+#~ msgstr "Κόμβοι"
+
+#~ msgid "Beaufort"
+#~ msgstr "Μποφόρ"
+
+#~ msgid "Pressure"
+#~ msgstr "Πίεση"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">The unit used to "
+#~ "measure the air pressure.</p></body></html>\n"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Η μονάδα που "
+#~ "χρησιμοποιείται για τη μέτρηση της πίεσης του αέρα.</p></body></html>\n"
+
+#~ msgid "Hecto Pascals"
+#~ msgstr "Εκατό Πασκάλ"
+
+#~ msgid "Kilo Pascals"
+#~ msgstr "Κιλό Πασκάλ"
+
+#~ msgid "Bars"
+#~ msgstr "Μπαρ"
+
+#~ msgid "Millimeters of Mercury"
+#~ msgstr "Χιλιοστά υδραργύρου"
+
+#~ msgid "Inches of Mercury"
+#~ msgstr "Ίντσες υδραργύρου"
+
+#~ msgid "Miscellaneous"
+#~ msgstr "Διάφορα"
+
+#~ msgid "Show only favorite items"
+#~ msgstr "Προβολή μόνο των αγαπημένων αντικειμένων"
+
+#~ msgid "Weather update interval"
+#~ msgstr "Χρονικό διάστημα ανανέωσης πληροφοριών καιρού"
+
+#~ msgid " hours"
+#~ msgstr "ώρες"
+
+#~ msgid "Configure Wikipedia Plugin"
+#~ msgstr "Διαμόρφωση πρόσθετου Wikipedia"
+
+#~ msgid "Show thumbnail images"
+#~ msgstr "Εμφάνιση εικόνων επισκόπησης"
+
+#, fuzzy
+#~| msgid "Proxy type:"
+#~ msgid "Route type:"
+#~ msgstr "Τύπος διαμεσολαβητή:"
+
+#, fuzzy
+#~| msgid "Speed"
+#~ msgid "Speed:"
+#~ msgstr "Ταχύτητα"
+
+#~ msgid "Preference:"
+#~ msgstr "Προτίμηση:"
+
+#~ msgid "Avoid motorways"
+#~ msgstr "Αποφυγή αυτοκινητόδρομων"
+
+#~ msgid "Avoid tollways"
+#~ msgstr "Αποφυγή διοδίων"
+
+#~ msgid "Avoid ferries"
+#~ msgstr "Αποφυγή φέρι μποτ"
+
+#~ msgid "Monav Configuration"
+#~ msgstr "Διαμόρφωση Monav"
+
+#~ msgid "Transport Type:"
+#~ msgstr "Τύπος μεταφορών:"
+
+#~ msgid "Any"
+#~ msgstr "Κάθε"
+
+#~ msgid "Manage Maps"
+#~ msgstr "Διαχείριση χαρτών"
+
+#~ msgid "Install New"
+#~ msgstr "Εγκατάσταση νέου"
+
+#~ msgid "Continent"
+#~ msgstr "Ήπειρος"
+
+#~ msgid "Country"
+#~ msgstr "Χώρα"
+
+#~ msgid "Download Variant"
+#~ msgstr "Παραλλαγή λήψης"
+
+#~ msgid "Install"
+#~ msgstr "Εγκατάσταση"
+
+#~ msgid "Nothing to do."
+#~ msgstr "Καμία ενέργεια προς υλοποίηση."
+
+#~ msgid "%v/%m MB"
+#~ msgstr "%v/%m MB"
+
+#~ msgid "Abort"
+#~ msgstr "Εγκατάλειψη"
+
+#~ msgid "Transport:"
+#~ msgstr "Μεταφορές:"
+
+#~ msgid "Profile:"
+#~ msgstr "Προφίλ:"
+
+#~ msgid "Method"
+#~ msgstr "Μέθοδος"
+
+#~ msgid "Fastest"
+#~ msgstr "Ταχύτερη"
+
+#~ msgid "Shortest"
+#~ msgstr "Συντομότερη"
+
+#~ msgid "Location Browser"
+#~ msgstr "Περιηγητής τοποθεσίας"
+
+#~ msgid "Double click an entry of this list to get it displayed on the map."
+#~ msgstr ""
+#~ "Κάντε διπλό κλικ σε μια καταχώρηση της λίστας για την εμφάνισή της στο "
+#~ "χάρτη."
+
+#~ msgid "Navigate to your 'Home Location'"
+#~ msgstr "Μετάβαση στην 'αρχική τοποθεσία' σας"
+
+#, fuzzy
+#~| msgid "Farm"
+#~ msgid "Form"
+#~ msgstr "Φάρμα"
+
+#, fuzzy
+#~| msgid "&Url:"
+#~ msgid "Url:"
+#~ msgstr "&Url:"
+
+#, fuzzy
+#~| msgid "&Add Folder"
+#~ msgid "Add SoundCue"
+#~ msgstr "Π&ροσθήκη φακέλου"
+
+#, fuzzy
+#~| msgid "Circled"
+#~ msgid "Circular"
+#~ msgstr "Κυκλικό"
+
+#~ msgid "&Name"
+#~ msgstr "&Όνομα"
+
+#~ msgid "Land"
+#~ msgstr "Ξηρά"
+
+#, fuzzy
+#~| msgid "Area"
+#~ msgid "Ara"
+#~ msgstr "Επικράτεια"
+
+#, fuzzy
+#~| msgid "Cancel"
+#~ msgid "Cancer"
+#~ msgstr "Ακύρωση"
+
+#, fuzzy
+#~| msgid "&Center"
+#~ msgid "Centaurus"
+#~ msgstr "&Κέντρο"
+
+#, fuzzy
+#~| msgid "Craters"
+#~ msgid "Crater"
+#~ msgstr "Κρατήρες"
+
+#, fuzzy
+#~| msgid "Log"
+#~ msgid "Leo"
+#~ msgstr "Καταγραφή"
+
+#, fuzzy
+#~| msgid "Library"
+#~ msgid "Libra"
+#~ msgstr "Βιβλιοθήκη"
+
+#, fuzzy
+#~| msgid "Normal"
+#~ msgid "Norma"
+#~ msgstr "Κανονική"
+
+#, fuzzy
+#~| msgid "Doctors"
+#~ msgid "Pictor"
+#~ msgstr "Γιατροί"
+
+#~ msgid "Show distance labels for each section"
+#~ msgstr "Προβολή ετικέτας αποστάσεων σε κάθε τμήμα"
+
+#~ msgid "Constellation Labels"
+#~ msgstr "Ετικέτες αστερισμών"
+
+#~ msgid "Constellation Names"
+#~ msgstr "Ονόματα αστερισμών"
+
+#, fuzzy
+#~| msgid "OpenGL"
+#~ msgid "Open"
+#~ msgstr "OpenGL"
+
+#~ msgid "Military Grid Reference System (MGRS)"
+#~ msgstr "Σύστημα Αναφοράς Στρατιωτικού Πλέγματος (MGRS)"
+
+#~ msgid "Food"
+#~ msgstr "Φαγητό"
+
+#~ msgctxt "Action for toggling the atmosphere"
+#~ msgid "&Atmosphere"
+#~ msgstr "&Ατμόσφαιρα"
+
+#~ msgid "Enable tab to see gpxFileView"
+#~ msgstr "Ενεργοποίηση καρτέλας για την εμφάνιση του gpxFileView"
+
+#~ msgctxt "Action for toggling the 'current location' box"
+#~ msgid "Current Location"
+#~ msgstr "Τρέχουσα τοποθεσία"
+
+#~ msgctxt "Action for toggling the navigation panel"
+#~ msgid "Show &Navigation Panel"
+#~ msgstr "Εμφάνιση πίνακα &πλοήγησης"
+
+#~ msgctxt "Status tip"
+#~ msgid "Show Navigation Panel"
+#~ msgstr "Εμφάνιση πίνακα πλοήγησης"
+
+#~ msgctxt "Action for showing the File View"
+#~ msgid "&Show File View"
+#~ msgstr "Εμφάνιση προβολής αρχείου"
+
+#~ msgid "Guides"
+#~ msgstr "Οδηγοί"
+
+#~ msgid "Name Ids of plugins."
+#~ msgstr "Τα Id ονομάτων των πρόσθετων."
+
+#~ msgid "List of toggles for enabling plugins."
+#~ msgstr "Λίστα εναλλαγής για την ενεργοποίηση των πρόσθετων."
+
+#~ msgid "List of toggles for making plugins visible."
+#~ msgstr "Λίστα εναλλαγής για την εμφάνιση των πρόσθετων."
+
+#~ msgid "Marble Infocenter"
+#~ msgstr "Κέντρο πληροφοριών του Marble"
+
+#~ msgid "Data Sheet"
+#~ msgstr "Φύλλο δεδομένων"
+
+#~ msgid "Name of the location"
+#~ msgstr "Ονομασία της τοποθεσίας"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "size:14pt; font-weight:600;\">Name</span></p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "size:14pt; font-weight:600;\">Όνομα</span></p></body></html>"
+
+#~ msgid "Role of the location."
+#~ msgstr "Ρόλος της τοποθεσίας."
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "style:italic;\">Role</span></p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "style:italic;\">Ρόλος</span></p></body></html>"
+
+#~ msgid "Alternative name"
+#~ msgstr "Εναλλακτικό όνομα"
+
+#~ msgid "Alternative name of the location."
+#~ msgstr "Εναλλακτικό όνομα της τοποθεσίας."
+
+#~ msgid "Alternative Name"
+#~ msgstr "Εναλλακτικό όνομα"
+
+#~ msgid "Short description:"
+#~ msgstr "Σύντομη περιγραφή:"
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">No description "
+#~ "available.</p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">If you are connected to "
+#~ "the Internet please click the \"Wikipedia\" tab at the top of this page "
+#~ "to get more information.</p></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Δεν υπάρχει διαθέσιμη "
+#~ "περιγραφή.</p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Αν είστε συνδεδεμένοι "
+#~ "στο διαδίκτυο, κάντε κλικ στο \"Wikipedia\" στο πάνω μέρος της σελίδας "
+#~ "για να λάβετε περισσότερες πληροφορίες..</p></body></html>"
+
+#~ msgid ""
+#~ "000° 00' 00\" N\n"
+#~ "000° 00' 00\" E "
+#~ msgstr ""
+#~ "000° 00' 00\" Β\n"
+#~ "000° 00' 00\" Α "
+
+#~ msgid "9000.0 m"
+#~ msgstr "9000.0 μ"
+
+#~ msgid "1000000"
+#~ msgstr "1000000"
+
+#~ msgid "Area:"
+#~ msgstr "Περιοχή:"
+
+#~ msgid "0.0 sq km"
+#~ msgstr "0.0 τετρ. χλμ"
+
+#~ msgid "Diameter:"
+#~ msgstr "Διάμετρος:"
+
+#~ msgid "Timezone (Normal/DST):"
+#~ msgstr "Ζώνη ώρας (Κανονική/Θερινή):"
+
+#~ msgid "gmt / dst"
+#~ msgstr "gmt / dst"
+
+#~ msgid "State:"
+#~ msgstr "Πολιτεία:"
+
+#~ msgid "Wikipedia"
+#~ msgstr "Wikipedia"
+
+#~ msgid "Back"
+#~ msgstr "Πίσω"
+
+#~ msgid "Move backwards one step in the browsing history."
+#~ msgstr "Μετακίνηση ένα βήμα πίσω στο ιστορικό περιήγησης."
+
+#~ msgid "Print Page"
+#~ msgstr "Εκτύπωση σελίδας"
+
+#~ msgid "Reverse"
+#~ msgstr "Αντίστροφα"
+
+#~ msgid "Sun is Zenith at"
+#~ msgstr "Ο Ήλιος βρίσκεται στο Ζενίθ σε"
+
+#~ msgid "Show"
+#~ msgstr "Εμφάνιση"
+
+#~ msgid "Hide"
+#~ msgstr "Απόκρυψη"
+
+#~ msgid "Show Zenith"
+#~ msgstr "Εμφάνιση ζενίθ"
+
+#~ msgid "Hide Zenith"
+#~ msgstr "Απόκρυφη ζενίθ"
+
+#~ msgid "Shows and hides the zenith location of the sun"
+#~ msgstr "Εμφάνιση και απόκρυψη θέσης ζενίθ του ήλιου"
+
+#~ msgid "Around"
+#~ msgstr "Γύρω"
+
+#~ msgid "dd/MM/yyyy hh:mm AP"
+#~ msgstr "ηη/μμ/εεεε ωω:λλ AP"
+
+#~ msgid "M/d/yyyy hh:mm"
+#~ msgstr "μ/η/εεεε ωω:λλ"
+
+#, fuzzy
+#~| msgid ""
+#~| "*.gpx *.kml *.osm *.pnt|All Supported Files\n"
+#~| "*.gpx|GPS Data\n"
+#~| "*.kml|Google Earth KML\n"
+#~| "*.osm|OpenStreetMap Data\n"
+#~| "*.pnt|Micro World Data Bank II"
+#~ msgid ""
+#~ "*.gpx *.kml *.log *.osm *.pnt|All Supported Files\n"
+#~ "*.gpx|GPS Data\n"
+#~ "*.kml|Google Earth KML\n"
+#~ "*.log|TangoGPS Logfile\n"
+#~ "*.osm|OpenStreetMap Data\n"
+#~ "*.pnt|Micro World Data Bank II"
+#~ msgstr ""
+#~ "*.gpx *.kml|Όλα τα υποστηριζόμενα αρχεία\n"
+#~ "*.gpx|δεδομένα GPS\n"
+#~ "*.kml|Google Earth KML\n"
+#~ "*.osm|δεδομένα OpenStreetMap\n"
+#~ "*.pnt|Micro World Data Bank II"
+
+#~ msgid "Profile"
+#~ msgstr "Προφίλ"
+
+#~ msgid "Greenwich Mean Time"
+#~ msgstr "Μέση Ώρα Γκρίνουιτς"
+
+#~ msgid "&Search"
+#~ msgstr "&Αναζήτηση"
+
+#~ msgid "Search line"
+#~ msgstr "Γραμμή αναζήτησης"
+
+#~ msgid "Here you can enter the name of the location you are searching for."
+#~ msgstr "Εδώ μπορείτε να εισάγετε το όνομα της τοποθεσίας που αναζητείτε."
+
+#~ msgid "Check speed of gps drawing"
+#~ msgstr "Έλεγχος ταχύτητας σχεδίασης gps"
+
+#~ msgid "Enable tab to show the current location"
+#~ msgstr "Ενεργοποίηση καρτέλας για την εμφάνιση της τρέχουσας τοποθεσίας"
+
+#, fuzzy
+#~| msgid "Short Description:"
+#~ msgid "Show or hide routing options"
+#~ msgstr "Σύντομη περιγραφή:"
+
+#, fuzzy
+#~| msgid "&Search"
+#~ msgid "Search..."
+#~ msgstr "&Αναζήτηση"
+
+#, fuzzy
+#~| msgid "(c) 2007, 2008, 2009"
+#~ msgid "(c) 2007, 2008, 2009, 2010"
+#~ msgstr "(c) 2007, 2008, 2009"
+
+#, fuzzy
+#~| msgid "The format to display the time in"
+#~ msgid "Image format of the tiles."
+#~ msgstr "Η μορφή εμφάνισης της ώρας"
+
+#, fuzzy
+#~| msgid "&Center"
+#~ msgid "Re-center"
+#~ msgstr "&Κέντρο"
+
+#, fuzzy
+#~| msgid ""
+#~| "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~| "css\">\n"
+#~| "p, li { white-space: pre-wrap; }\n"
+#~| "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~| "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~| "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~| "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~| "\"></p>\n"
+#~| "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~| "right:0px; -qt-block-indent:0; text-indent:0px;\">(c) 2007, The Marble "
+#~| "Project</p>\n"
+#~| "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~| "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~| "font-style:italic;\"></p>\n"
+#~| "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~| "right:0px; -qt-block-indent:0; text-indent:0px;\">http://edu.kde.org/"
+#~| "marble</p></body></html>"
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans'; font-size:10pt; font-"
+#~ "weight:400; font-style:normal;\">\n"
+#~ "<table border=\"0\" style=\"-qt-table-type: root; margin-top:4px; margin-"
+#~ "bottom:4px; margin-left:4px; margin-right:4px;\">\n"
+#~ "<tr>\n"
+#~ "<td style=\"border: none;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-family:'DejaVu Sans'; font-size:9pt;\"></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-family:'DejaVu Sans'; font-size:9pt;\"></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-family:'DejaVu Sans'; font-size:9pt;\"></p></td></tr></table></"
+#~ "body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">(c) 2007, το έργο "
+#~ "Marble</p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-style:italic;\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">http://edu.kde.org/"
+#~ "marble</p></body></html>"
+
+#, fuzzy
+#~| msgid "Open File"
+#~ msgid "Open File..."
+#~ msgstr "Άνοιγμα αρχείου"
+
+#, fuzzy
+#~| msgid "Input Widgets"
+#~ msgid "RoutingWidget"
+#~ msgstr "Συστατικά εισόδου"
+
+#, fuzzy
+#~| msgid ""
+#~| "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/"
+#~| "TR/REC-html40/strict.dtd\">\n"
+#~| "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~| "css\">\n"
+#~| "p, li { white-space: pre-wrap; }\n"
+#~| "</style></head><body style=\" font-family:'DejaVu Sans'; font-size:10pt; "
+#~| "font-weight:400; font-style:normal;\">\n"
+#~| "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~| "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~| "weight:600;\">000,0 km/h</span></p></body></html>"
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "size:small; color:#000000;\">0 m</span></p></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'DejaVu Sans'; font-size:10pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">000,0 χλμ/ώρα</span></p></body></html>"
+
+#, fuzzy
+#~| msgid "Input Widgets"
+#~ msgid "Routing Widget"
+#~ msgstr "Συστατικά εισόδου"
+
+#, fuzzy
+#~| msgid ""
+#~| "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/"
+#~| "TR/REC-html40/strict.dtd\">\n"
+#~| "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~| "css\">\n"
+#~| "p, li { white-space: pre-wrap; }\n"
+#~| "</style></head><body style=\" font-family:'DejaVu Sans'; font-size:10pt; "
+#~| "font-weight:400; font-style:normal;\">\n"
+#~| "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~| "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~| "weight:600;\">000,0 km/h</span></p></body></html>"
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<table border=\"0\" style=\"-qt-table-type: root; margin-top:4px; margin-"
+#~ "bottom:4px; margin-left:4px; margin-right:4px;\">\n"
+#~ "<tr>\n"
+#~ "<td style=\"border: none;\">\n"
+#~ "<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-"
+#~ "left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span "
+#~ "style=\" font-weight:600;\">Routing Information</span></p></td></tr></"
+#~ "table></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'DejaVu Sans'; font-size:10pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">000,0 χλμ/ώρα</span></p></body></html>"
+
+#, fuzzy
+#~| msgid ""
+#~| "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/"
+#~| "TR/REC-html40/strict.dtd\">\n"
+#~| "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~| "css\">\n"
+#~| "p, li { white-space: pre-wrap; }\n"
+#~| "</style></head><body style=\" font-family:'DejaVu Sans'; font-size:10pt; "
+#~| "font-weight:400; font-style:normal;\">\n"
+#~| "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~| "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~| "weight:600;\">000,0 km/h</span></p></body></html>"
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><a href=\"http://edu."
+#~ "kde.org/marble\"><span style=\" font-family:'DejaVu Sans'; font-size:8pt; "
+#~ "text-decoration: underline; color:#0057ae;\">Configure</span></a></p></"
+#~ "body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'DejaVu Sans'; font-size:10pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">000,0 χλμ/ώρα</span></p></body></html>"
+
+#, fuzzy
+#~| msgid "High Quality"
+#~ msgid "Highways"
+#~ msgstr "Υψηλή ποιότητα"
+
+#, fuzzy
+#~| msgid "International"
+#~ msgid "Routing Information"
+#~ msgstr "Διεθνές"
+
+#, fuzzy
+#~| msgid ""
+#~| "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/"
+#~| "TR/REC-html40/strict.dtd\">\n"
+#~| "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~| "css\">\n"
+#~| "p, li { white-space: pre-wrap; }\n"
+#~| "</style></head><body style=\" font-family:'DejaVu Sans'; font-size:10pt; "
+#~| "font-weight:400; font-style:normal;\">\n"
+#~| "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~| "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~| "weight:600;\">000,0 km/h</span></p></body></html>"
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<table border=\"0\" style=\"-qt-table-type: root; margin-top:4px; margin-"
+#~ "bottom:4px; margin-left:4px; margin-right:4px;\">\n"
+#~ "<tr>\n"
+#~ "<td style=\"border: none;\">\n"
+#~ "<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-"
+#~ "left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span "
+#~ "style=\" font-size:12pt; font-weight:600;\">00:00</span></p></td></tr></"
+#~ "table></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'DejaVu Sans'; font-size:10pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">000,0 χλμ/ώρα</span></p></body></html>"
+
+#~ msgid "Navigator Float Item"
+#~ msgstr "Αντικείμενο πλοήγησης"
+
+#, fuzzy
+#~| msgid "Craters"
+#~ msgid "Meters"
+#~ msgstr "Κρατήρες"
+
+#, fuzzy
+#~| msgid "&Distance:"
+#~ msgid "Distance Covered"
+#~ msgstr "&Απόσταση:"
+
+#~ msgid "&Date"
+#~ msgstr "&Ημερομηνία"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Change sun time</p></"
+#~ "body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Τροποποίηση ηλιακής "
+#~ "ώρας</p></body></html>"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Center the map on sun "
+#~ "position</p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Κεντράρισμα του χάρτη "
+#~ "στη θέση του Ήλιου</p></body></html>"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Display sun position</"
+#~ "p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Εμφάνιση θέσης του "
+#~ "Ήλιου</p></body></html>"
+
+#~ msgid ""
+#~ "This control panel allows you to adjust the map according to your needs."
+#~ msgstr ""
+#~ "Αυτός ο πίνακας ελέγχου σας επιτρέπει τη ρύθμιση του χάρτη ανάλογα με τις "
+#~ "απαιτήσεις σας."
+
+#~ msgid "Navigation mode"
+#~ msgstr "Λειτουργία πλοήγησης"
+
+#, fuzzy
+#~| msgid "Current Location"
+#~ msgid "Your current position"
+#~ msgstr "Τρέχουσα τοποθεσία"
+
+#~ msgid "<b>Unidentified Position</b>"
+#~ msgstr "<b>Μη ορισμένη τοποθεσία</b>"
+
+#~ msgid "+00°00'00\" E"
+#~ msgstr "+00°00'00\" Α"
+
+#~ msgid "+00°00'00\" N"
+#~ msgstr "+00°00'00\" Β"
+
+#~ msgid "000 m"
+#~ msgstr "000 μ"
+
+#, fuzzy
+#~| msgid "Up"
+#~ msgid "p"
+#~ msgstr "Πάνω"
+
+#~ msgid "Region"
+#~ msgstr "Περιοχή"
+
+#, fuzzy
+#~| msgid "Bridge"
+#~ msgid "Widget"
+#~ msgstr "Γέφυρα"
+
+#~ msgid "Forward"
+#~ msgstr "Εμπρός"
+
+#~ msgid "Move forward one step in the browsing history."
+#~ msgstr "Μετακίνηση ένα βήμα εμπρός στο ιστορικό περιήγησης."
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p></body></html>"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-family:'MS Shell Dlg 2'; font-size:8pt;\"></p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-family:'MS Shell Dlg 2'; font-size:8pt;\"></p></body></html>"
+
+#~ msgid "Track Gps"
+#~ msgstr "Ανίχνευση Gps"
+
+#~ msgid "Catch Gps"
+#~ msgstr "Εντοπισμός Gps"
+
+#~ msgid "Draw"
+#~ msgstr "Σχεδίαση"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">There are two caches "
+#~ "being used for Marble: The physical memory which is needed to keep map "
+#~ "data in the computer's memory. Increasing the value will make the "
+#~ "application more responsive. The hard disc memory cache is used by "
+#~ "download contents from the internet (e.g. Wikipedia data or map data). "
+#~ "Decrease this value if you want to save space on the hard disc and if "
+#~ "high usage of the internet is not an issue. </p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Υπάρχουν δύο "
+#~ "λανθάνουσες μνήμες σε χρήση από το Marble: Η φυσική μνήμη για τη "
+#~ "διατήρηση των δεδομένων του χάρτη στη μνήμη του υπολογιστή. Η αύξηση της "
+#~ "τιμής της έχει σαν αποτέλεσμα μεγαλύτερη ανταποκρισιμότητα της εφαρμογής. "
+#~ "Η λανθάνουσα μνήμη στο σκληρό δίσκο που χρησιμοποιείται για τη λήψη "
+#~ "περιεχομένου από οτ διαδίκτυο (π.χ. δεδομένα Wikipedia ή δεδομένα χάρτη). "
+#~ "Μειώστε την τιμή αυτή αν επιθυμείτε να ελευθερώσετε χώρο στο δίσκο και αν "
+#~ "η υψηλή χρήση του διαδικτύου δεν αποτελεί πρόβλημα. </p></body></html>"
+
+#~ msgid "Authenticated"
+#~ msgstr "Με ταυτοποίηση"
+
+#~ msgid "Open Map &Data..."
+#~ msgstr "Ά&νοιγμα δεδομένων χάρτη..."
+
+#~ msgid "&Import Map Data..."
+#~ msgstr "&Εισαγωγή δεδομένων χάρτη..."
+
+#~ msgid "Panoramio Photos"
+#~ msgstr "Φωτογραφίες panoramio"
+
+#~ msgid "Co-maintainer and Architect"
+#~ msgstr "Βοηθός συντηρητής και αρχιτέκτονας"
+
+#~ msgid "Cross&hairs"
+#~ msgstr "Σταυρό&νημα"
+
+#~ msgid "Scale &Bar"
+#~ msgstr "&Γραμμή κλίμακας"
+
+#~ msgid "GpxSax"
+#~ msgstr "GpxSax"
+
+#~ msgid ""
+#~ "Parse error at line %1, column %2:\n"
+#~ "%3."
+#~ msgstr ""
+#~ "Σφάλμα ανάλυσης στη γραμμή %1, στήλη %2:\n"
+#~ "%3."
+
+#~ msgid "Save File"
+#~ msgstr "Αποθήκευση αρχείου"
+
+#~ msgid "GpxFile (*.gpx)"
+#~ msgstr "Αρχείο Gpx (*.gpx)"
+
+#~ msgid "km"
+#~ msgstr "χλμ"
+
+#~ msgid "Total Distance: %1 km"
+#~ msgstr "Συνολική απόσταση: %1 χλμ"
+
+#~ msgctxt "The compass direction"
+#~ msgid "North"
+#~ msgstr "Βορράς"
+
+#~ msgctxt "The compass direction"
+#~ msgid "East"
+#~ msgstr "Ανατολή"
+
+#~ msgctxt "The compass direction"
+#~ msgid "South"
+#~ msgstr "Νότος"
+
+#~ msgctxt "The compass direction"
+#~ msgid "West"
+#~ msgstr "Δύση"
+
+#~ msgid "Path"
+#~ msgstr "Διαδρομή"
+
+#~ msgid "Could not convert <minimum> child text content to integer. Was: '%1'"
+#~ msgstr ""
+#~ "Αδυναμία μετατροπής του κειμένου <minimum> σε ακέραιο. Το κείμενο: '%1'"
+
+#~ msgid "Could not convert <maximum> child text content to integer. Was: '%1'"
+#~ msgstr ""
+#~ "Αδυναμία μετατροπής του κειμένου <maximum> σε ακέραιο. Το κείμενο: '%1'"
+
+#~ msgid "Parsing failed. Still %1 unclosed tags after document end."
+#~ msgstr ""
+#~ "Αποτυχία ανάλυσης. Ακόμη %1 μη κλειστές ετικέτες μετά το τέλος του "
+#~ "εγγράφου."
+
+#~ msgid "File format unrecognized"
+#~ msgstr "Το φορμά του αρχείου δεν αναγνωρίζεται"
+
+#~ msgid "The file is not a valid DGML 2.0 file"
+#~ msgstr "Το αρχείο δεν είναι ένα έγκυρο αρχείο DGML 2.0"
+
+#~ msgid "The file is not a valid GPX 1.0 / 1.1 file"
+#~ msgstr "Το αρχείο δεν είναι ένα έγκυρο αρχείο GPX 1.0 / 1.1"
+
+#~ msgid "The file is not a valid KML 2.0 / 2.1 / 2.2 file"
+#~ msgstr "Το αρχείο δεν είναι ένα έγκυρο αρχείο KML 2.0 / 2.1 / 2.2"
+
+#~ msgid "Version %1"
+#~ msgstr "Έκδοση %1"
+
+#~ msgid ""
+#~ "<br />(c) 2007, 2008, The Marble Project<br /><br /><a href=\"http://edu."
+#~ "kde.org/marble\">http://edu.kde.org/marble</a>"
+#~ msgstr ""
+#~ "<br />(c) 2007, 2008, Το έργο του Marble<br /><br /><a href=\"http://edu."
+#~ "kde.org/marble\">http://edu.kde.org/marble</a>"
+
+#~ msgid "0 N 0 W"
+#~ msgstr "0 Β 0 Δ"
+
+#~ msgid "Add &Measure Point"
+#~ msgstr "&Προσθήκη σημείου μέτρησης"
+
+#~ msgid "&Remove Measure Points"
+#~ msgstr "&Αφαίρεση σημείων μέτρησης"
+
+#~ msgid "Copy Coordinates"
+#~ msgstr "Αντιγραφή συντεταγμένων"
+
+#~ msgid "Marble Info Center - %1"
+#~ msgstr "Κέντρο πληροφοριών του Marble - %1"
+
+#~ msgid "Regional Capital"
+#~ msgstr "Πρωτεύουσα περιοχής"
+
+#~ msgid "City"
+#~ msgstr "Πόλη"
+
+#~ msgid "Ocean"
+#~ msgstr "Ωκεανός"
+
+#~ msgid "%1 sq km"
+#~ msgstr "%1 τετ. χλμ."
+
+#~ msgid "%1 Mio. sq km"
+#~ msgstr "%1 Mio τετ. χλμ."
+
+#~ msgid "%1 inh."
+#~ msgstr "%1 inh."
+
+#~ msgid "%1 Mio. inh."
+#~ msgstr "%1 Mio. inh."
+
+#~ msgid "%1 m"
+#~ msgstr "%1 μ"
+
+#~ msgid "Download failed: %1."
+#~ msgstr "Αποτυχία λήψης: %1."
+
+#~ msgid "Ctrl+O"
+#~ msgstr "Ctrl+Α"
+
+#~ msgid "Open a file for viewing on Marble"
+#~ msgstr "Άνοιγμα ενός αρχείου για προβολή στο Marble"
+
+#~ msgid "Ctrl+S"
+#~ msgstr "Ctrl+Ε"
+
+#~ msgid "Save a screenshot of the map"
+#~ msgstr "Αποθήκευση ενός στιγμιότυπου του χάρτη"
+
+#~ msgid "&Print..."
+#~ msgstr "&Εκτύπωση..."
+
+#~ msgid "Ctrl+P"
+#~ msgstr "Ctrl+Ε"
+
+#~ msgid "Print a screenshot of the map"
+#~ msgstr "Εκτύπωση ενός στιγμιότυπου του χάρτη"
+
+#~ msgid "&Quit"
+#~ msgstr "Έ&ξοδος"
+
+#~ msgid "Ctrl+Q"
+#~ msgstr "Ctrl+Ξ"
+
+#~ msgid "Quit the Application"
+#~ msgstr "Έξοδος από την εφαρμογή"
+
+#~ msgid "Ctrl+C"
+#~ msgstr "Ctrl+Α"
+
+#~ msgid "Copy a screenshot of the map"
+#~ msgstr "Αντιγραφή ενός στιγμιότυπου του χάρτη"
+
+#~ msgid "Copy the center coordinates as text"
+#~ msgstr "Αντιγραφή συντεταγμένων του κέντρου ως κείμενο"
+
+#~ msgid "&Full Screen Mode"
+#~ msgstr "&Λειτουργία πλήρους οθόνης"
+
+#~ msgid "Ctrl+Shift+F"
+#~ msgstr "Ctrl+Shift+Λ"
+
+#~ msgid "Full Screen Mode"
+#~ msgstr "Λειτουργία πλήρους οθόνης"
+
+#~ msgid "&Status Bar"
+#~ msgstr "&Γραμμή κατάστασης"
+
+#~ msgid "Show Status Bar"
+#~ msgstr "Εμφάνιση γραμμής κατάστασης"
+
+#~ msgid "Show Real Time Cloud Cover"
+#~ msgstr "Εμφάνιση σύννεφων σε πραγματικό χρόνο"
+
+#~ msgid "Show Atmosphere"
+#~ msgstr "Εμφάνιση ατμόσφαιρας"
+
+#~ msgid "What's &This"
+#~ msgstr "Τί &είναι αυτό"
+
+#~ msgid "Shift+F1"
+#~ msgstr "Shift+F1"
+
+#~ msgid "&About Marble Desktop Globe"
+#~ msgstr "&Σχετικά με την υδρόγειος επιφάνειας εργασίας Marble"
+
+#~ msgid "Show the application's About Box"
+#~ msgstr "Εμφάνιση των σχετικών πληροφοριών της εφαρμογής"
+
+#~ msgid "About &Qt"
+#~ msgstr "Σχετικά με την &Qt"
+
+#~ msgid "Show the Qt library's About box"
+#~ msgstr "Εμφάνιση πληροφοριών σχετικά με τη βιβλιοθήκη Qt"
+
+#~ msgid "&Help"
+#~ msgstr "&Βοήθεια"
+
+#~ msgid "Ready"
+#~ msgstr "Έτοιμο"
+
+#~ msgid "Images (*.jpg *.png)"
+#~ msgstr "Εικόνες (*.jpg *.png)"
+
+#~ msgid ""
+#~ "All Supported Files (*.gpx *.kml);;GPS Data (*.gpx);;Google Earth KML (*."
+#~ "kml)"
+#~ msgstr ""
+#~ "Όλα τα υποστηριζόμενα αρχεία (*.gpx *.kml);;δεδομένα GPS (*.gpx);;Google "
+#~ "Earth KML (*.kml)"
+
+#~ msgid "This is a simple test plugin."
+#~ msgstr "Αυτό είναι ένα απλό πρόσθετο ελέγχου."
+
+#~ msgid "Compass"
+#~ msgstr "Πυξίδα"
+
+#~ msgid "&Compass"
+#~ msgstr "&Πυξίδα"
+
+#~ msgid "This is a float item that provides a compass."
+#~ msgstr "Αυτό το ελεύθερο αντικείμενο προσφέρει μια πυξίδα."
+
+#~ msgid "This plugin displays TBD satellites."
+#~ msgstr "Αυτό το πρόσθετο εμφανίζει δορυφόρους TBD."
+
+#~ msgid "DataView Plugin"
+#~ msgstr "Πρόσθετο DataView"
+
+#~ msgid "A plugin that displays all the loaded data in a separate window."
+#~ msgstr ""
+#~ "Ένα πρόσθετο εμφάνισης των φορτωμένων δεδομένων σε ένα ξεχωριστό παράθυρο."
+
+#~ msgid "A plugin that shows the Starry Sky."
+#~ msgstr "Ένα πρόσθετο εμφάνισης του έναστρου ουρανού."
+
+#~ msgid "&Overview Map"
+#~ msgstr "Χάρτης ε&πισκόπησης"
+
+#~ msgid "This is a float item that provides an overview map."
+#~ msgstr "Αυτό το ελεύθερο αντικείμενο προσφέρει ένα χάρτη επισκόπησης."
+
+#~ msgid "&Scale Bar"
+#~ msgstr "&Γραμμή κλίμακας"
+
+#~ msgid "This is a float item that provides a map scale."
+#~ msgstr "Αυτό το ελεύθερο αντικείμενο προσφέρει μια κλίμακα χάρτη."
+
+#~ msgid "m"
+#~ msgstr "μ"
+
+#~ msgid "&Panoramio"
+#~ msgstr "&Panoramio"
+
+#~ msgid ""
+#~ "Automatically downloads images from around the world in preference to "
+#~ "their popularity"
+#~ msgstr ""
+#~ "Κατεβάζει αυτόματα εικόνες από όλον τον κόσμο ανάλογα με τη δημοτικότητα "
+#~ "τους"
+
+#~ msgid "&Navigation"
+#~ msgstr "&Πλοήγηση"
+
+#~ msgid "A mouse control to zoom and move the map"
+#~ msgstr ""
+#~ "Ένα συστατικό ελέγχου του ποντικιού για την εστίαση και την μετακίνηση "
+#~ "του χάρτη"
+
+#~ msgid "GeoData Plugin"
+#~ msgstr "Πρόσθετο GeoData"
+
+#~ msgid "&GeoData Plugin"
+#~ msgstr "Πρόσθετο &GeoData"
+
+#~ msgid "FITemplate"
+#~ msgstr "FITemplate"
+
+#~ msgid "Float Item &Template"
+#~ msgstr "&Πρότυπο ελεύθερου αντικειμένου"
+
+#~ msgid "This is a template class for float items."
+#~ msgstr "Αυτή είναι μια κλάση προτύπου για ελεύθερα αντικείμενα."
+
+#~ msgid "twitter "
+#~ msgstr "twitter "
+
+#~ msgid "&twitter"
+#~ msgstr "&twitter"
+
+#~ msgid "show public twitts in their places"
+#~ msgstr "εμφάνιση δημόσιων twitt στις τοποθεσίες τους"
+
+#~ msgid "Placemarks Plugin"
+#~ msgstr "Πρόσθετο σημείων τοποθεσιών"
+
+#~ msgid "&Placemarks Plugin"
+#~ msgstr "Πρόσθετο &σημείων τοποθεσιών"
+
+#~ msgid "A plugin that displays placemarks."
+#~ msgstr "Ένα πρόσθετο εμφάνισης σημείων τοποθεσίων."
+
+#~ msgid ""
+#~ "<p>The moon.<p>The map is based on data from the clementine mission. "
+#~ "Credits: NASA "
+#~ msgstr ""
+#~ "<p>Η σελήνη.<p>Ο χάρτης βασίζεται σε δεδομένα από την αποστολή "
+#~ "clementine. Ευχαριστήρια: NASA "
+
+#~ msgid "S&un Control"
+#~ msgstr "Έλεγχος Ή&λιου"
+
+#~ msgid "Mare (dark plain)"
+#~ msgstr "Θάλασσα (σκούρο επίπεδο)"
+
+#~ msgid "None"
+#~ msgstr "Κανένα"
+
+#~ msgid "This box allows you to choose the way the time is displayed"
+#~ msgstr "Αυτό το πλαίσιο επιτρέπει τη ρύθμιση του τρόπου εμφάνισης της ώρας"
+
+#~ msgid "24-hour clock"
+#~ msgstr "ρολόι 24 ωρών"
+
+#~ msgid "12-hour clock"
+#~ msgstr "ρολόι 12 ωρών"
+
+#~ msgid "Check to show the date as well as the time"
+#~ msgstr ""
+#~ "Ενεργοποιήστε αυτήν την επιλογή για την εμφάνιση και της ημερομηνίας"
+
+#~ msgid ""
+#~ "This checkbox allows you to choose to show the date as well as the time"
+#~ msgstr ""
+#~ "Αυτό το πλαίσιο ενεργοποίησης σας επιτρέπει να επιλέξετε την εμφάνιση της "
+#~ "ημερομηνίας μαζί με την ώρα"
+
+#~ msgid "Chooses whether to show the full name of the timezone"
+#~ msgstr "Επιλογή εμφάνισης του πλήρους ονόματος της ωρολογιακής ζώνης"
+
+#~ msgid ""
+#~ "This checkbox chooses whether to show the full name of the timezone; eg "
+#~ "\"Europe/London\" or simply \"London\""
+#~ msgstr ""
+#~ "Αυτό το πλαίσιο ενεργοποίησης ορίζει την εμφάνιση του πλήρους ονόματος "
+#~ "της ωρολογιακής ζώνης: π.χ. \"Ευρώπη/Λονδίνο\" ή απλά \"Λονδίνο\""
+
+#~ msgid "Show full timezone name"
+#~ msgstr "Εμφάνιση πλήρους ωρολογιακής ζώνης"
+
+#~ msgid "Show map only"
+#~ msgstr "Εμφάνιση μόνο χάρτη"
+
+#~ msgid "Check to centre the map on the area currently illuminated by the sun"
+#~ msgstr ""
+#~ "Με την επιλογή αυτή γίνεται τοποθέτηση του χάρτη με κέντρο την τρέχουσα "
+#~ "φωτισμένη περιοχή από τον ήλιο"
+
+#~ msgid ""
+#~ "This checkbox allows you to choose to centre the map over the area that "
+#~ "is currently illuminated by the sun."
+#~ msgstr ""
+#~ "Αυτό το πλαίσιο ενεργοποίησης σας επιτρέπει την τοποθέτηση του χάρτη με "
+#~ "κέντρο την τρέχουσα φωτισμένη περιοχή από τον ήλιο."
+
+#~ msgid "This longitude will be the centre of the map"
+#~ msgstr "Αυτό το γεωγραφικό μήκος θα είναι το κέντρο του χάρτη."
+
+#~ msgid ""
+#~ "Here you can select the longitude which will be the centre of the map"
+#~ msgstr ""
+#~ "Εδώ μπορείτε να επιλέξετε το γεωγραφικό μήκος το οποίο θα οριστεί στο "
+#~ "κέντρο του χάρτη"
+
+#, fuzzy
+#~| msgid "N"
+#~ msgctxt "one-letter uppercase abbreviation for North"
+#~ msgid "N"
+#~ msgstr "Β"
+
+#, fuzzy
+#~| msgid "E"
+#~ msgctxt "one-letter uppercase abbreviation for East"
+#~ msgid "E"
+#~ msgstr "Α"
+
+#, fuzzy
+#~| msgid "S"
+#~ msgctxt "one-letter uppercase abbreviation for South"
+#~ msgid "S"
+#~ msgstr "Ν"
+
+#, fuzzy
+#~| msgid "W"
+#~ msgctxt "one-letter uppercase abbreviation for West"
+#~ msgid "W"
+#~ msgstr "Δ"
+
+#~ msgid "<![CDATA[42&deg;C]]>"
+#~ msgstr "<![CDATA[42&deg;C]]>"
+
+#~ msgid "<![CDATA[32&deg;C]]>"
+#~ msgstr "<![CDATA[32&deg;C]]>"
+
+#~ msgid "<![CDATA[23&deg;C]]>"
+#~ msgstr "<![CDATA[23&deg;C]]>"
+
+#~ msgid "<![CDATA[12&deg;C]]>"
+#~ msgstr "<![CDATA[12&deg;C]]>"
+
+#~ msgid "<![CDATA[1&deg;C]]>"
+#~ msgstr "<![CDATA[1&deg;C]]>"

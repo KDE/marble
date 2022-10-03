@@ -1,0 +1,35 @@
+# Panagiotis Papadopoulos <pano_90@gmx.net>, 2011.
+# Frederik Schwarzer <schwarzer@kde.org>, 2012.
+msgid ""
+msgstr ""
+"Project-Id-Version: plasma_runner_marblerunner\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2021-09-28 00:13+0000\n"
+"PO-Revision-Date: 2012-03-29 19:37+0200\n"
+"Last-Translator: Frederik Schwarzer <schwarzer@kde.org>\n"
+"Language-Team: German <kde-i18n-de@kde.org>\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#: plasmarunner.cpp:36
+#, kde-format
+msgid "Shows the coordinates :q: in OpenStreetMap with Marble."
+msgstr "Zeigt die Koordinaten :q: mit Marble in OpenStreetMap an"
+
+#: plasmarunner.cpp:37
+#, kde-format
+msgid "Shows the geo bookmark containing :q: in OpenStreetMap with Marble."
+msgstr "Zeigt das Geo-Lesezeichen, das :q: enthält, in OpenStreetMap an"
+
+#: plasmarunner.cpp:58
+#, kde-format
+msgid "Show the coordinates %1 in OpenStreetMap with Marble"
+msgstr "Die Koordinaten „%1“ mit Marble in OpenStreetMap anzeigen"
+
+#: plasmarunner.cpp:124
+#, kde-format
+msgid "Show in OpenStreetMap with Marble"
+msgstr "Mit Marble in OpenStreetMap anzeigen"

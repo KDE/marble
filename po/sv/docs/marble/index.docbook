@@ -1,0 +1,2759 @@
+<?xml version="1.0" ?>
+<!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
+ <!ENTITY % addindex "IGNORE">
+ <!ENTITY % Swedish "INCLUDE"
+><!-- change language only here -->
+ ]>
+
+<book id="marble" lang="&language;">
+
+  <bookinfo>
+    <title
+>Handbok &marble;</title>
+
+    <authorgroup>
+      <author
+><firstname
+>Torsten</firstname
+> <surname
+>Rahn</surname
+> <affiliation
+> <address
+>&Torsten.Rahn.mail;</address>
+        </affiliation>
+      </author>
+      <author
+><firstname
+>Dennis</firstname
+> <surname
+>Nienhüser</surname
+> <affiliation
+> <address
+>&Dennis.Nienhueser.mail;</address>
+        </affiliation>
+      </author>
+
+      <othercredit role="translator"
+> <firstname
+>Stefan</firstname
+> <surname
+>Asserhäll</surname
+> <affiliation
+><address
+><email
+>stefan.asserhall@bredband.net</email
+></address
+></affiliation
+> <contrib
+>Översättare</contrib
+></othercredit
+> 
+    </authorgroup>
+
+    <copyright>
+      <year
+>2005</year>
+      <year
+>2006</year>
+      <year
+>2007</year>
+      <holder
+>&Torsten.Rahn;</holder>
+    </copyright>
+    <copyright>
+      <year
+>2010</year>
+      <year
+>2013</year>
+      <holder
+>&Dennis.Nienhueser;</holder>
+    </copyright>
+
+    <legalnotice
+>&FDLNotice;</legalnotice>
+
+    <date
+>2021-10-17</date>
+    <releaseinfo
+>2.2 (KDE Gear 21.08)</releaseinfo>
+
+    <abstract>
+      <para
+>&marble; är en geografisk atlas och virtuell glob som låter dig snabbt utforska andra platser på vår hemplanet. Du kan använda &marble; för att slå upp adresser, enkelt skapa kartor, mäta avstånd och att hämta detaljerad information om platser som du precis har hört talas om på nyheterna eller på Internet. Användargränssnittet är rent, enkelt och lättanvänt. </para>
+    </abstract>
+
+    <keywordset>
+      <keyword
+>KDE</keyword>
+      <keyword
+>utbildning</keyword>
+      <keyword
+>jorden</keyword>
+      <keyword
+>jordglob</keyword>
+      <keyword
+>geografi</keyword>
+      <keyword
+>Marble</keyword>
+    </keywordset>
+
+  </bookinfo>
+
+  <chapter id="introduction">
+  <title
+>Inledning</title>
+    <screenshot>
+      <screeninfo
+>&marble;s logotyp</screeninfo>
+      <mediaobject>
+        <imageobject
+><imagedata fileref="logo-1.png" format="PNG"/></imageobject>
+        <textobject
+><phrase
+>&marble;s logotyp</phrase
+></textobject>
+      </mediaobject>
+    </screenshot>
+
+    <para
+>Välkommen till &marble;, en liten interaktiv glob och geografisk atlas som gör att du har världen på dina fem fingrar. Precis som en riktig atlas eller en vanlig glob låter &marble; dig flytta fritt över kartan och slå upp platser. Dessutom låter &marble; dig zooma in och ha många olika vyer av ytan på <guilabel
+>Jorden</guilabel
+> eller <guilabel
+>Månen</guilabel
+> (med den vyn). Med standardinställningen erbjuder &marble; 15 olika vyer: <guilabel
+>Atlas</guilabel
+>, <guilabel
+>OpenStreetMap</guilabel
+>, <guilabel
+>Satellitvy</guilabel
+>, <guilabel
+>Jorden på natten</guilabel
+>, <guilabel
+>Behaim jordglob 1492</guilabel
+>. <guilabel
+>Sentinel2 satellitkarta</guilabel
+>, <guilabel
+>Historisk karta 1689</guilabel
+>, <guilabel
+>Politisk karta</guilabel
+>, <guilabel
+>Enkel karta</guilabel
+>, <guilabel
+>Nederbörd (december)</guilabel
+>, <guilabel
+>Nederbörd (juli)</guilabel
+>, <guilabel
+>Temperatur (december)</guilabel
+>, <guilabel
+>Temperatur (juli)</guilabel
+>, <guilabel
+>Vektor OSM</guilabel
+> och <guilabel
+>Månen</guilabel
+>. </para>
+
+    <para
+>&marble; levereras med en liten databas med mer än 12 000 platser (städer, berg, vulkaner), som kan sökas igenom och som delvis är sammankopplad med Wikipedia. Dessutom kan du mäta avstånd med &marble; mellan flera olika mätpunkter som kan anges fritt. </para>
+
+    <para
+>&marble; är fri programvara och licensieras under villkoren i &GNU; Lesser General Public License. </para>
+
+  </chapter>
+
+  <chapter id="quick-start">
+  <title
+>Snabbstartsguide för &marble;: Att navigera</title>
+
+  <para
+>Här är &marble; första gången du kör det, antingen med <menuchoice
+><guimenu
+>Program</guimenu
+> <guisubmenu
+>Utbildning</guisubmenu
+> <guimenuitem
+>&kde; &marble; (virtuell glob)</guimenuitem
+></menuchoice
+> i den globala menyn, eller med att trycka på <keycombo action="simul"
+>&Alt;<keycap
+>F2</keycap
+></keycombo
+> och skriva in <command
+>marble</command
+> i inmatningsfältet.</para>
+
+    <screenshot>
+      <screeninfo
+>Huvudfönstret i &marble;</screeninfo>
+      <mediaobject>
+        <imageobject
+><imagedata fileref="quick-1.png" format="PNG"/></imageobject>
+        <textobject
+><phrase
+>Huvudfönstret i &marble;</phrase
+></textobject>
+      </mediaobject>
+    </screenshot>
+
+    <para
+>Till höger ser du en topografisk karta av vår vackra hemplanet. För att kunna orientera sig bättre erbjuder kartan en skala i nedre vänstra hörnet, samt en kompassros i övre högra hörnet. För att navigera och styra vyn kan verktygen i informationsrutan <guilabel
+>Navigering</guilabel
+> till höger användas: Tryck på piltangenterna för att rotera jordgloben. Piltangenterna <guibutton
+>Upp</guibutton
+> och <guibutton
+>Ner</guibutton
+> lutar jordaxeln framåt och bakåt. Piltangenterna <guibutton
+>Vänster</guibutton
+> och <guibutton
+>Höger</guibutton
+> gör att jorden snurrar runt sin fysiska axel. </para>
+
+    <para
+>Du kan åstadkomma samma beteende genom att klicka med vänster musknapp någonstans på globen och flytta musen medan du håller nere vänster musknapp. Genom att använda denna metod med drag och släpp kan du justera vyns vinkel mycket enklare och noggrannare. Tangentbordets piltangenter erbjuder ett alternativt sätt att snabbt byta riktning. </para>
+
+    <para
+>Zooma in och ut genom att flytta det vertikala skjutreglaget uppåt och neråt. Om musen har ett mushjul kan du använda det istället, eller klicka bara på vänster och höger musknapp samtidigt medan du rör musen uppåt och neråt. Att ändra zoomnivå stegvis kan göras med knapparna <guibutton
+>Zooma in</guibutton
+> och <guibutton
+>Zooma ut</guibutton
+> som är placerade ovanför och under skjutreglaget (eller använd tangentbordets tangenter <keycap
+>+</keycap
+> och <keycap
+>-</keycap
+>). </para>
+
+    <para
+>Beroende på kartans upplösning erhåller du mer detaljer när du zoomar in. Mindre städer visas, och när den topografiska kartan används kanske du märker att kustlinjer tillhandahålls som vektorgrafik. </para>
+
+    <para
+>Om du skulle gå vilse kan du alltid återställa visningsvinkel och zoomnivå tillbaka till platsen där vi började. Tryck bara på knappen <guibutton
+>Hem</guibutton
+> (eller tangentbordets tangent <keycap
+>Home</keycap
+>). För att ställa in hemplatsen till nuvarande position (kartans mitt) välj menyalternativet <menuchoice
+><guimenu
+>Bokmärken</guimenu
+> <guimenuitem
+>Ställ in hemplats</guimenuitem
+></menuchoice
+>. </para>
+
+    <para
+>Ett klick på statusraden med höger musknapp visar en meny som låter dig anpassa statusradens utseende. Du kan visa position, höjd, aktuell rutnivå och en förloppsindikering som visar status för nerladdning av kartdata. </para>
+  </chapter>
+
+  <chapter id="map-views">
+  <title
+>Välja andra kartbilder för &marble;</title>
+
+    <para
+>&marble; levereras med 15 olika vyer: <guilabel
+>Atlas</guilabel
+>, <guilabel
+>OpenStreetMap</guilabel
+>, <guilabel
+>Satellitvy</guilabel
+>, <guilabel
+>Jorden på natten</guilabel
+>, <guilabel
+>Behaim jordglob 1492</guilabel
+>, <guilabel
+>Sentinel2 satellitkarta</guilabel
+>, <guilabel
+>Historisk karta 1689</guilabel
+>, <guilabel
+>Politisk karta</guilabel
+>, <guilabel
+>Enkel karta</guilabel
+>, <guilabel
+>Nederbörd (december)</guilabel
+>, <guilabel
+>Nederbörd (juli)</guilabel
+>, <guilabel
+>Temperatur (december)</guilabel
+>, <guilabel
+>Temperatur (juli)</guilabel
+>, <guilabel
+>Vektor OSM</guilabel
+> och <guilabel
+>Månen</guilabel
+>. Du kan välja bland dem genom att trycka på fliken <guilabel
+>Kartvy</guilabel
+> längst upp i &marble;s verktygslåda: </para>
+
+    <screenshot>
+      <screeninfo
+>Kartvisning i &marble;</screeninfo>
+      <mediaobject>
+        <imageobject
+><imagedata fileref="mapview-1.png" format="PNG"/></imageobject>
+        <textobject
+><phrase
+>Kartvisning i &marble;</phrase
+></textobject>
+      </mediaobject>
+    </screenshot>
+
+    <itemizedlist>
+      <listitem
+><para
+><guilabel
+>Atlas</guilabel
+>: En klassisk topografisk karta. Den använder vektorlinjer ("MicroWorldDataBase II") för att markera kustlinjer, landsgränser, etc. och punktavbildad grafik ("SRTM30") för att skapa höjdkurvor.</para
+></listitem>
+
+      <listitem
+><para
+><guilabel
+>Öppen vägkarta</guilabel
+>: En världsomfattande vägkarta skapad av projektet OpenStreetMap (OSM). OSM är en öppen gemenskap som skapar fria redigerbara kartor. OSM-data är återgiven med användning av Mapnik.</para
+></listitem>
+
+      <listitem
+><para
+><guilabel
+>Satellitvy</guilabel
+>: Jorden som den ser ut från rymden. Kartan är baserad på NASA:s vackra bilder benämnda <ulink url="https://earthobservatory.nasa.gov/Features/BlueMarble/"
+>Blue Marble Next Generation</ulink
+>. Erkännande: NASA:s jordobservatorium.</para
+></listitem>
+
+      <listitem
+><para
+><guilabel
+>Jorden på natten</guilabel
+>: Denna bild av ljus från jordens städer skapades med data från Defense Meteorological Satellite Program (DMSP) Operational Linescan System (OLS).</para
+></listitem>
+
+      <listitem
+><para
+><guilabel
+>Behaim-jordglob 1492</guilabel
+>: Skapad av Martin Behaim 1490–1492, är det den äldsta kvarvarande jordgloben.</para
+></listitem>
+
+      <listitem
+><para
+><guilabel
+>Sentinel2 satellitkarta</guilabel
+>: Baserad på Sentinel data, se mer information <ulink url="https://community.kde.org/Marble/Sentinel2MapTheme"
+>här</ulink
+>.</para
+></listitem>
+
+      <listitem
+><para
+><guilabel
+>Historisk karta 1689</guilabel
+>: En historisk världskarta från år 1689 skapad av G. van Schagen i Amsterdam.</para
+></listitem>
+
+      <listitem
+><para
+><guilabel
+>Politisk karta</guilabel
+>: En enkel karta med nuvarande landsgränser.</para
+></listitem>
+
+      <listitem
+><para
+><guilabel
+>Enkel karta</guilabel
+>: En enkel karta. Den använder vektorlinjer för att markera kustlinjer, landsgränser, etc.</para
+></listitem>
+
+      <listitem
+><para
+><guilabel
+>Nederbörd (december)</guilabel
+>: En karta som visar medelnederbörden under december.</para
+></listitem>
+
+      <listitem
+><para
+><guilabel
+>Nederbörd (juli)</guilabel
+>: En karta som visar medelnederbörden (regn, snö, hagel, etc.) under' juli.</para
+></listitem>
+
+      <listitem
+><para
+><guilabel
+>Temperatur (december)</guilabel
+>: En karta som visar medeltemperaturen under december.</para
+></listitem>
+
+      <listitem
+><para
+><guilabel
+>Temperatur (juli)</guilabel
+>: En karta som visar medeltemperaturen under juli.</para
+></listitem>
+
+      <listitem
+><para
+><guilabel
+>Vektor-OSM</guilabel
+>: Vektorkarta från projektet <ulink url="https://www.openstreetmap.org/"
+>OpenStreetMap</ulink
+>.</para
+></listitem>
+
+      <listitem
+><para
+><guilabel
+>Månen</guilabel
+>: En månkarta. Kartan är baserad på data från Clementines månutforskning (mosaik från UVVIS grundkarta). Tack till: NASA/SDIO, Med benäget tillstånd av USGS astrogeologiska forskningsprogram.</para
+></listitem>
+    </itemizedlist>
+  </chapter>
+
+  <chapter id="search-places">
+  <title
+>Söka efter platser med &marble;</title>
+
+    <para
+>&marble; levereras med en liten databas med mer än 12 000 städer (från <ulink url="https://www.populationdata.net/monde/"
+></ulink
+>), samt några berg och vulkaner. Du hittar en plats genom att skriva in dess namn på sökraden längst upp i verktygslådan (&marble; använder alltid det inhemska namnet med latinska bokstäver). När du börjar skriva, visas förslag nedanför sökraden på följande sätt: </para>
+
+    <screenshot>
+      <screeninfo
+>Söka efter platser i &marble;</screeninfo>
+      <mediaobject>
+        <imageobject
+><imagedata fileref="search-1.png" format="PNG"/></imageobject>
+        <textobject
+><phrase
+>Söka efter platser i &marble;</phrase
+></textobject>
+      </mediaobject>
+    </screenshot>
+
+    <para
+>När du trycker på <keycap
+>returtangenten</keycap
+> skickar &marble;s körprogram förfrågningar till både Internet-baserade och lokala söktjänster för att returnera ännu mer användbar information. </para>
+
+    <para
+>Följande körprogram för Internet-baserade söktjänster är tillgängliga:</para>
+
+    <itemizedlist>
+      <listitem
+><para
+>Nominatim: En Internet-söktjänst och tjänst för omvänd geografisk kodning, som använder data från <ulink url="https://www.openstreetmap.org"
+></ulink
+>.</para
+></listitem>
+
+      <listitem
+><para
+>HostIP: En tjänst för omvänd geografisk kodning baserad på IP-adress, som använder data från <ulink url="https://www.hostip.info"
+></ulink
+></para
+></listitem>
+    </itemizedlist>
+
+    <para
+>Följande körprogram för lokala söktjänster är också tillgängliga, beroende på extra programvara och data som har installerats:</para>
+
+    <itemizedlist>
+      <listitem
+><para
+>Lokal databas: Alla platser i alla öppna dokument söks igenom. Det omfattar förstås också bokmärken.</para
+></listitem>
+
+      <listitem
+><para
+>Monav: En lokal söktjänst som använder data från Monav lokal vägbeskrivningsinformation, baserad på OSM-data.</para
+></listitem>
+
+      <listitem
+><para
+>Gosmore: En lokal tjänst för omvänd geografisk kodning som använder data från inställningen av Gosmore</para
+></listitem>
+
+    </itemizedlist>
+
+    <para
+>När du väl har hittat det du söker efter på kartan kan du klicka på dess beteckning eller symbol med vänster musknapp. Efter att ha klickat på platsens namn på kartan visas ett datablad som detta: </para>
+
+    <screenshot>
+      <screeninfo
+>&marble;s datablad</screeninfo>
+      <mediaobject>
+        <imageobject
+><imagedata fileref="search-2.png" format="PNG"/></imageobject>
+        <textobject
+><phrase
+>&marble;s datablad</phrase
+></textobject>
+      </mediaobject>
+    </screenshot>
+
+    <para
+>Under dialogrutans första flik tillhandahålls grundläggande information, som koordinater, och namn och flagga för landet platsen tillhör. Dessutom visas invånarantal för städer, samt höjd för berg. Om datorn är ansluten till Internet och är uppkopplad, försöker &marble; ansluta till den populära Internet-encyklopedin <quote
+>Wikipedia</quote
+>. Om en matchande artikel är tillgänglig på Wikipedia, visar &marble; den på databladet. </para>
+
+    <note
+><para
+>Ytterligare datakällor kan aktiveras genom att använda undermenyn <menuchoice
+><guimenu
+>Visa</guimenu
+> <guisubmenu
+>Nättjänster</guisubmenu
+></menuchoice
+>. För att exempelvis se artiklar från Wikipedia ska du markera menyalternativet <guimenuitem
+>Wikipedia</guimenuitem
+>.</para
+></note>
+  </chapter>
+
+  <chapter id="routing">
+  <title
+>Hitta rätt med &marble;</title>
+
+    <para
+>Förutom att söka efter platser, kan &marble; visa möjliga färdvägar mellan två eller flera av dem. Vill du planera en cykeltur i grannskogen? Behöver du köranvisningar för att komma till en viss adress i en utländsk stad? Välj fliken <guilabel
+>Vägbeskrivning</guilabel
+> längst upp i &marble;s verktygslåda för att börja planera resan. </para>
+
+    <sect1 id="routing-route-new">
+    <title
+>Skapa en ny vägbeskrivning</title>
+
+      <para
+>Under fliken <guilabel
+>Vägbeskrivning</guilabel
+> finns två gröna knappar <guibutton
+>A</guibutton
+> och <guibutton
+>B</guibutton
+>. Skriv in startadressen i inmatningsfältet intill knappen <guibutton
+>A</guibutton
+>, inmatningsfältet för färdvägens start. Tryck på returtangenten eller tryck på knappen <guibutton
+>Sök</guibutton
+> för att hitta motsvarande platsmarkörer. En liten förloppsanimering som förkortar väntetiden medan sökningen pågår. Med användning av sökbegreppet <quote
+>Weavers Lane, London</quote
+>, kommer resultatet att likna skärmbilden nedan. </para>
+
+      <screenshot>
+        <screeninfo
+>Adressökning i &marble;</screeninfo>
+        <mediaobject>
+          <imageobject
+><imagedata fileref="routing-1.png" format="PNG"/></imageobject>
+          <textobject
+><phrase
+>Söka efter adresser i &marble;</phrase
+></textobject>
+        </mediaobject>
+      </screenshot>
+
+      <para
+>Motsvarande platsmarkörer radas up i listan under inmatningsfälten. De visas också på kartan. Det första resultatet väljes automatiskt som färdvägens start. På kartan anges positionen med samma <guiicon
+>A</guiicon
+> som ikonen på knappen intill inmatningsfältet för färdvägens start. Om det första resultatet inte är den önskade färdvägens start, klicka på vilket annat resultat som helst för att göra det till ny startposition. Du kan antingen klicka på det i resultatlistan eller på dess ikon på kartan för att åstadkomma det. Färdvägens start som för närvarande är vald anges alltid med ikonen <guiicon
+>A</guiicon
+>. </para>
+
+      <para
+>När färdvägens start finns tillhanda, låt oss gå vidare för att skriva in målet för resan. Proceduren är likadan. Skriv in måladressen i inmatningsfältet intill knappen <guibutton
+>B</guibutton
+>, tryck på returtangenten och välj önskat objekt i resultatlistan. </para>
+
+      <para
+>Märkte du att knappen <guilabel
+>Sök</guilabel
+> nu är borta och ersatt av knappen <guilabel
+>Hämta vägbeskrivning</guilabel
+>? &marble; signalerar att alla information som behövs för att beräkna färdvägen har matats in riktigt. Tryck nu på knappen <guilabel
+>Hämta vägbeskrivning</guilabel
+> för att hämta en lämplig färdväg. Om sökbegreppet för målet är <quote
+>Sun Walk, London</quote
+>, kommer resultatet att likna den här skärmbilden. </para>
+
+      <screenshot>
+        <screeninfo
+>Vägbeskrivningsresultat i &marble;</screeninfo>
+        <mediaobject>
+          <imageobject
+><imagedata fileref="routing-2.png" format="PNG"/></imageobject>
+          <textobject
+><phrase
+>&marble; som visar en färdväg</phrase
+></textobject>
+        </mediaobject>
+      </screenshot>
+
+      <para
+>Om startpositionen (eller målpositionen) redan syns på skärmen, kanske du tycker att det är bekvämare att välja den direkt på kartan. För att göra det, tryck på knappen <guibutton
+>A</guibutton
+> (eller <guibutton
+>B</guibutton
+>) intill inmatningsfältet. Välj <guilabel
+>Från karta</guilabel
+> i menyn som dyker upp. När det väl har gjorts, är kartinmatningsläget aktiverat. Nästa klick på en position på kartan blir resans start (eller slut). Muspekaren ändras till ett kors för att förenkla ett noggrant val. Den markerade positionen inkluderas i färdvägen och markeras på kartan. Tryck antingen på knappen igen eller tryck på Esc, för att avbryta valet. </para>
+
+      <para
+>Ett alternativt sätt att välja färdvägens start och mål tillhandahålls av kartans sammanhangsberoende meny: Klicka med högerknappen på önskad plats och välj <guilabel
+>Vägbeskrivning härifrån</guilabel
+> eller <guilabel
+>Vägbeskrivning hit</guilabel
+>. </para>
+    </sect1>
+
+    <sect1 id="routing-profiles">
+    <title
+>Vägbeskrivningsprofiler</title>
+
+      <para
+>Vilken väg som ska väljas beror på fordonstyp som du tänker använda (om någon). Du kan tala om det för &marble; och ange andra inställningar med vägbeskrivningsprofiler. Varje profil innehåller inställningar för ett visst scenario för vägbeskrivningen. När &marble; startas för första gången, skapas fyra vanliga profiler åt dig: <guilabel
+>Bil (snabbast)</guilabel
+>, <guilabel
+>Bil (kortast)</guilabel
+>, <guilabel
+>Cykel</guilabel
+> och <guilabel
+>Fotgängare</guilabel
+>. </para>
+
+      <para
+>Exemplen i föregående avsnitt använda profilen <guilabel
+>Bil (snabbast)</guilabel
+>. Låt oss åter titta på den senaste vägbeskrivningen med en annan profil: Välj alternativet <guilabel
+>Fotgängare</guilabel
+> i kombinationsrutan <guilabel
+>Profil</guilabel
+>. Vägbeskrivningen ser nu ut så här: </para>
+
+      <screenshot>
+        <screeninfo
+>Vägbeskrivning för fotgängare i &marble;</screeninfo>
+        <mediaobject>
+          <imageobject
+><imagedata fileref="routing-5.png" format="PNG"/></imageobject>
+          <textobject
+><phrase
+>Vägbeskrivning för fotgängare i &marble;</phrase
+></textobject>
+        </mediaobject>
+      </screenshot>
+
+      <para
+>Den föreslagna vägen har blivit kortare, eftersom gångvägar också ingår när den bästa vägen beräknas. </para>
+
+      <para
+>Om du vill justera någon av standardprofilerna ytterligare, markera den i kombinationsrutan <guilabel
+>Profil</guilabel
+> och klicka på länken <guilabel
+>Anpassa</guilabel
+>. Ett nytt fönster visas. </para>
+
+      <screenshot>
+        <screeninfo
+>Inställning av vägbeskrivningsprofil i &marble;</screeninfo>
+        <mediaobject>
+          <imageobject
+><imagedata fileref="routing-6.png" format="PNG"/></imageobject>
+          <textobject
+><phrase
+>Inställning av vägbeskrivningsprofil i &marble;</phrase
+></textobject>
+        </mediaobject>
+      </screenshot>
+
+      <para
+>Den vänstra sidan låter dig ställa in vilka bakgrundsprogram för vägbeskrivning som används för att hämta färdvägar. Åtta eller fler bakgrundsprogram stöds av &marble;, vissa som fungerar via Internet och andra som fungerar vid arbete i nerkopplat läge. Internet-vägbeskrivningstjänster kräver en Internet-anslutning för att hämta en färdväg. Lokala vägbeskrivningstjänster fungerar utan en Internet-anslutning, men kräver att du laddar ner och installerar vägbeskrivningskartor för lokal användning i förväg. Bakgrundsprogrammen för vägbeskrivning som stöds är: </para>
+
+      <itemizedlist>
+        <listitem
+><para
+>CycleStreets: Cykelvägar för Storbritannien med användning av cyclestreets.net</para
+></listitem>
+
+        <listitem
+><para
+>Gosmore: En lokal vägbeskrivningstjänst som också fungerar som bakgrundsprogram för Yours uppkopplade vägbeskrivningstjänst.</para
+></listitem>
+
+        <listitem
+><para
+>MapQuest: En Internet-vägbeskrivningstjänst som fungerar i hela världen, men saknar köranvisningar.</para>
+
+          <note
+><para
+>En programnyckel krävs för att vägbeskrivning med MapQuest ska fungera. Du kan registrera en <ulink url="https://developer.mapquest.com/plan_purchase/steps/business_edition/business_edition_free/register"
+>här</ulink
+>.</para
+></note
+></listitem>
+
+        <listitem
+><para
+>Monav: En lokal vägbeskrivningstjänst som är mycket snabb även vid beräkning av mycket långa färdvägar.</para
+></listitem>
+
+        <listitem
+><para
+>OSRM: En Internet-vägbeskrivningstjänst som är mycket snabb även vid beräkning av mycket långa färdvägar.</para
+></listitem>
+
+        <listitem
+><para
+>OpenRouteService: En Internet-vägbeskrivningstjänst som också skapar köranvisningar, begränsad till Europa.</para
+></listitem>
+
+        <listitem
+><para
+>Routino: En lokal vägbeskrivningstjänst med mycket flexibel inställning.</para
+></listitem>
+
+        <listitem
+><para
+>Yours: En Internet-vägbeskrivningstjänst som fungerar i hela världen, men saknar köranvisningar.</para
+></listitem>
+      </itemizedlist>
+
+      <para
+>När du väl har valt och aktiverat ett bakgrundsprogram för vägbeskrivning till vänster för att det ska ingå i förfrågningar om vägbeskrivning, kan du ändra dess inställningar till höger. Inställningarna är specifika för varje bakgrundsprogram. </para>
+
+      <para
+>Förutom att anpassa de fyra standardprofilerna, kan du lägga till nya profiler och ta bort befintliga under &marble;s inställningar på sidan <guilabel
+>Vägbeskrivning</guilabel
+>. </para>
+    </sect1>
+
+    <sect1 id="routing-route-adjustments">
+    <title
+>Justera färdvägar</title>
+
+      <para
+>&marble; låter dig ändra flera av vägbeskrivningens aspekter för finjustering: ändra vägbeskrivningens inställningar, infoga stopp, flytta och ta bort befintliga stopp. Ändring av vägbeskrivningens inställningar har redan behandlats i föregående avsnitt, här koncentrerar vi oss på hantering av stopp. </para>
+
+      <para
+>Att infoga stopp görs med drag och släpp på kartan. Varje gång du rör muspekaren över någon del av färdvägen (utom ovanpå befintliga stopp), visas en grön flagga som anger att det är möjligt att infoga ett stopp. För att börja infoga, tryck ner vänster musknapp. Flytta muspekaren till den önskade nya positionen medan vänster musknapp hålls nere. Blå linjer från intilliggande stopp till den nya positionen dyker upp: </para>
+
+      <screenshot>
+        <screeninfo
+>Tillägg av stopp för vägbeskrivning i &marble;</screeninfo>
+        <mediaobject>
+          <imageobject
+><imagedata fileref="routing-3.png" format="PNG"/></imageobject>
+          <textobject
+><phrase
+>Infoga ett stopp i &marble;</phrase
+></textobject>
+        </mediaobject>
+      </screenshot>
+
+      <para
+>Det nya stoppet kommer att infogas mellan befintliga intilliggande stopp, när du väl släpper vänster musknapp. Samtidigt ritas den befintliga färdvägen med punkter, för att ange att den innehåller föråldrad information. I bakgrunden förbereds en ny färdväg som automatiskt kommer att ersätta den föråldrade. </para>
+
+      <para
+>Det är också möjligt att lägga till stopp innan färdvägens start eller efter dess slut. Följ instruktionerna ovan för att infoga ett stopp för att göra det, men tryck på &Ctrl; när musen förflyttas. En blå linje från färdvägens start eller slut visas. Dess början anger var det nya stoppet kommer att läggas till. </para>
+
+      <para
+>Befintliga stopp kan flyttas fritt över kartan. Flytta muspekaren ovanför ett stopp och dra det till dess nya plats. När det väl har släppts, uppdateras färdvägen automatiskt. </para>
+
+      <para
+>För att undanta stopp från färdvägen, ta bort dem. Det kan antingen göras med knappen <guibutton
+>Ta bort</guibutton
+> intill stoppets inmatningsfält, eller genom att klicka med höger musknapp på stoppet på kartan. Välj <guimenuitem
+>Ta bort denna destination</guimenuitem
+> i den sammanhangsberoende menyn. Ta bort alla stopp för att börja på en helt ny färdväg. </para>
+    </sect1>
+
+    <sect1 id="routing-route-export">
+    <title
+>Läsa in, spara och exportera vägbeskrivningar</title>
+
+      <para
+>Det går att spara färdvägar med formatet <acronym
+>kml</acronym
+> (Keyhole Markup Language) och läsa in dem igen vid ett senare tillfälle, på samma dator eller en annan enhet som kör &marble;, eller dela dem med vänner eller andra program som klarar av att läsa kml-filer (som <application
+>Google Earth</application
+>). För att spara en färdväg i en <literal role="extension"
+>kml</literal
+>-fil, tryck på knappen <guibutton
+>Spara</guibutton
+> längst ner under färdvägsfliken. Dialogrutan för att spara som dyker upp låter dig välja ett filnamn för att spara färdvägen. På liknande sätt, kan en färdväg läsas in med knappen <guibutton
+>Öppna</guibutton
+> längst ner under färdvägsfliken. Välj <literal role="extension"
+>kml</literal
+>-färdvägsfilen att öppna i dialogrutan som dyker upp, så läser &marble; in färdvägen från den. </para>
+
+      <para
+>Färdvägar planerade i &marble; kan användas i andra program eller navigeringsenheter, som stöder <acronym
+>gpx</acronym
+> (GPS utbytesformat) eller motsvarande format. Om navigeringsenheten inte direkt stöder <acronym
+>gpx</acronym
+>, kan ett konverteringsverktyg som <command
+>gpsbabel</command
+> användas för att konvertera en <acronym
+>gpx</acronym
+>-fil exporterad av &marble; till ett lämpligt format. Export av en färdväg i &marble; startas från den sammanhangsberoende menyn för färdvägar på kartan. Klicka med höger musknapp på vilket ställe i färdvägen som helst på kartan. Välj <guilabel
+>Exportera färdväg...</guilabel
+> i den sammanhangsberoende menyn som visas. </para>
+
+      <screenshot>
+        <screeninfo
+>Export av vägbeskrivning i &marble;</screeninfo>
+        <mediaobject>
+          <imageobject
+><imagedata fileref="routing-4.png" format="PNG"/></imageobject>
+          <textobject
+><phrase
+>&marble; som exporterar en vägbeskrivning</phrase
+></textobject>
+        </mediaobject>
+      </screenshot>
+
+      <para
+>Ange önskat filnamn i dialogrutan för att spara som dyker upp. Filnamnets ändelse ska vara <literal role="extension"
+>gpx</literal
+> för att lagra med <acronym
+>gpx</acronym
+>-format eller <literal role="extension"
+>kml</literal
+> för att lagra med <acronym
+>kml</acronym
+>-format (Keyhole Markup Language). Observera att det interna formatet i &marble; är <acronym
+>kml</acronym
+>. Om du är osäker, spara som <acronym
+>kml</acronym
+> och använd bara <acronym
+>gpx</acronym
+> för att dela färdvägar med andra program som inte klarar av att läsa <acronym
+>kml</acronym
+>-filer. </para>
+    </sect1>
+  </chapter>
+
+  <chapter id="measure-distances">
+  <title
+>Mäta avstånd med &marble;</title>
+
+    <para
+>Som redan nämnts visar &marble; alltid en dynamisk skala längst ner till vänster för att uppskatta avstånd på kartan. Tillsammans med kompassrosen i övre högra hörnet tillhandahålls den för bättre orientering. Men det finns mer: &marble; låter dig också mäta avstånd mellan två eller flera punkter på jordytan. För att göra det, klicka på respektive punkter i rätt ordning på jordgloben med höger musknapp. Vid varje klick visas en sammanhangsberoende meny som låter dig lägga till en mätpunkt (<guimenuitem
+>Lägg till mätpunkt</guimenuitem
+>) eller ta bort alla mätpunkter (<guimenuitem
+>Ta bort mätpunkter</guimenuitem
+>). </para>
+
+    <screenshot>
+      <screeninfo
+>Mäta i &marble;</screeninfo>
+      <mediaobject>
+        <imageobject
+><imagedata fileref="measure-1.png" format="PNG"/></imageobject>
+        <textobject
+><phrase
+>Mäta avstånd i &marble;</phrase
+></textobject>
+      </mediaobject>
+    </screenshot>
+
+    <para
+>När du har lagt till minst två mätpunkter visas det totala avståndet i kartans övre vänstra hörn. &marble; antar en sfärisk jord för alla mätningar, vilket bör vara tillräckligt noggrant i de flesta fall. </para>
+
+    <tip
+><para
+>Visning av avstånd och riktningar för uppmätta segment kan ställas in genom att använda <link linkend="measure-tool-config"
+>dialogrutan för inställning av mätverktyget</link
+>.</para
+></tip>
+  </chapter>
+
+  <chapter id="download-region">
+  <title
+>Ladda ner kartområden</title>
+
+    <para
+>&marble; är klart att använda med en förinstallerad uppsättning kartor. När du zoomar in på platser, laddas mer detaljerade delar av den aktuella kartan ner i bakgrunden. Det fungerar utmärkt närhelst en Internet-anslutning är tillgänglig. Men vad ska man då göra vid en resa till en utländsk stad, där en ständig Internet-anslutning inte är tillgänglig för att ladda ner kartor? Planera i förväg, och ladda ner de kartområden du kommer att använda. </para>
+
+    <para
+>För att förstå vad som måste laddas ner för att visa vissa delar av kartan i nerkopplat läge, låt oss ta en snabbtitt på begreppet rutor som &marble; använder internt. En ruta är en bild som motsvarar en viss del av kartan. Rutor arrangeras av &marble; intill varandra för att skapa kartbilden som visas för dig. Beroende på vald projektion, arrangeras rutor för att skapa en rektangel (vanlig karta, till vänster) eller ett klot (jordglob, till höger): </para>
+
+    <screenshot>
+      <screeninfo
+>Projektioner i &marble;</screeninfo>
+      <mediaobject>
+        <imageobject
+><imagedata fileref="download-region-1.png" format="PNG"/></imageobject>
+        <textobject
+><phrase
+>Rutor för nivå 1 på vanlig karta (till vänster) och jordglob (till höger)</phrase
+></textobject>
+      </mediaobject>
+    </screenshot>
+
+    <para
+>Vid inzoomning i vyn, måste fler detaljer visas. Rutorna som visas ii de två ovanstående skärmbilderna är då för grova. &marble; känner automatiskt igen det, och byter till nästa rutnivå där bilderna tillhandahåller fler detaljer. Detta fortsätter: Ju mer du zoomar in, desto högre rutnivå. Följande skiss åskådliggör de olika antalet rutor (färgade) som motsvarar samma kartområde vid olika rutnivåer: </para>
+
+    <screenshot>
+      <screeninfo
+>Rutnivåer i &marble;</screeninfo>
+      <mediaobject>
+        <imageobject
+><imagedata fileref="download-region-2.png" format="PNG"/></imageobject>
+        <textobject
+><phrase
+>Olika rutnivåer i &marble;</phrase
+></textobject>
+      </mediaobject>
+    </screenshot>
+
+    <para
+>När ett kartområde laddas ner för användning i nerkopplat läge, måste du ladda ner alla rutor i det önskade området för all rutnivåer du tänker använda. På grund av kopplingen mellan rutnivåer och zoomnivåer kan du föreställa dig det som att ladda ner alla rutor för de zoomnivåer du tänker använda. </para>
+
+    <para
+>För att åstadkomma detta för ett visst område, gör området synligt på skärmen genom att zooma och flytta jordklotet. Välj nu menyalternativet <menuchoice
+><guilabel
+>Arkiv</guilabel
+> <guilabel
+>Ladda ner område...</guilabel
+></menuchoice
+>. Behåll alternativet <guilabel
+>Synligt område</guilabel
+> markerad, för att ladda ner de rutor som motsvarar kartområdet som är synligt på skärmen. Välj därefter <guilabel
+>Rutornas nivåintervall:</guilabel
+> (zoomintervall) som du vill ladda ner. Det första fältet motsvarar den minsta och det andra fältet motsvarar den största rutnivån som kommer att laddas ner. Rutnivåer däremellan kommer också att laddas ner. &marble; visar hur många rutor (bilder) som behöver laddas ner, och uppdaterar talet så snart du ändra område eller rutornas nivåintervall. </para>
+
+    <screenshot>
+      <screeninfo
+>Dialogrutan för nerladdning av områden i &marble;</screeninfo>
+      <mediaobject>
+        <imageobject
+><imagedata fileref="download-region-3.png" format="PNG"/></imageobject>
+        <textobject
+><phrase
+>&marble;s dialogruta för nerladdning av områden</phrase
+></textobject>
+      </mediaobject>
+    </screenshot>
+
+    <para
+>Rutnivån som motsvarar nuvarande zoomnivå visas i statusraden längst ner. Observera att du kanske måste ställa in &marble; att visa informationen. Klicka med höger musknapp på statusraden, och välj <guilabel
+>Visa rutornas zoomnivå</guilabel
+>. </para>
+
+    <para
+>Välj <guibutton
+>Ok</guibutton
+> för att sätta igång nerladdningen av kartområden. Förloppsraden i &marble; visar nerladdningens förlopp (om den är aktiverad). </para>
+
+    <para
+>Ifall du känner till koordinaterna för kartområdet som ska laddas ner, kan du skriva in dem genom att klicka på alternativet <guilabel
+>Ange område</guilabel
+>. Kartområdet synligt på skärmen ignoreras i detta fall. </para>
+
+    <para
+>Du kan fortsätta att använda &marble; medan dialogrutan <guilabel
+>Ladda ner område</guilabel
+> är öppen. Det är användbart för att köa flera nerladdningar av olika områden eller olika intervall av rutor. Välj bara <guibutton
+>Verkställ</guibutton
+> istället för <guibutton
+>Ok</guibutton
+> för att starta nerladdningen av kartområdet. </para>
+  </chapter>
+
+  <chapter id="recording-movie">
+  <title
+>Spela in en film med &marble;</title>
+
+    <sect1 id="recording-movie-recording">
+    <title
+>Spela in en film med &marble;</title>
+
+      <para
+>För att spela in en film med &marble;, använd den här funktionen för inspelning. </para>
+
+      <para
+>Börja inspelning med menyalternativet <menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl; &Shift;<keycap
+>R</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Redigera</guimenu
+> <guimenuitem
+>Spela in film</guimenuitem
+></menuchoice
+> för att visa dialogrutan <guilabel
+>Spela in film</guilabel
+>. En dialogruta som den här visas: </para>
+
+      <screenshot>
+        <screeninfo
+>Dialogrutan för filminspelning i &marble;</screeninfo>
+        <mediaobject>
+          <imageobject
+><imagedata fileref="movie-1.png" format="PNG"/></imageobject>
+          <textobject
+><phrase
+>Dialogrutan för filminspelning i &marble;</phrase
+></textobject>
+        </mediaobject>
+      </screenshot>
+
+      <para
+>Tryck på knappen <guibutton
+>Öppna...</guibutton
+> för att välja filmens namn och målkatalog. Det går också att ändra filmens bildrutor per sekund (FPS) mellan 1 och 60. </para>
+
+      <para
+>När allt är inställt kan inspelningen påbörjas. För att starta den, tryck på knappen <guibutton
+>Starta</guibutton
+>. När det är gjort kan du zooma och panorera omkring, och &marble; spelar in en video av resan över globen. </para>
+
+      <para
+>För att stoppa filminspelningen och spara den, välj menyalternativet <menuchoice
+><guimenu
+>Redigera</guimenu
+> <guimenuitem
+>Stoppa  inspelning</guimenuitem
+></menuchoice
+>. </para>
+
+      <sect2 id="recording-movie-troubleshooting">
+      <title
+>Felsökning</title>
+
+        <para
+>Ett felmeddelande kan visas på grund av att avconv eller ffmpeg inte är installerade. Ladda ner dem från <ulink url="https://ffmpeg.org/download.html"
+>nerladdningssidan för ffmpeg</ulink
+> och <ulink url="https://libav.org/download.html"
+>nerladdningssidan för avconv</ulink
+>, eller använd paket från distributionen. </para>
+      </sect2>
+    </sect1>
+  </chapter>
+
+  <chapter id="commands">
+  <title
+>Kommandoreferens</title>
+
+    <sect1 id="marble-mainwindow">
+    <title
+>Menyer och snabbtangenter</title>
+
+      <sect2>
+      <title
+>Menyn Arkiv</title>
+
+        <variablelist>
+          <varlistentry>
+            <term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>O</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Arkiv</guimenu
+> <guimenuitem
+>Öppna...</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>Öppnar</action
+> en kartfil.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><guimenu
+>Arkiv</guimenu
+> <guimenuitem
+>Öppna senaste</guimenuitem
+> </menuchoice
+></term>
+            <listitem
+><para
+>Det här är en genväg för att öppna de senast visade kartorna. Genom att klicka på alternativet visas en lista vid sidan av menyn med flera av de senast öppnade filerna. Genom att klicka på en viss fil öppnas den i &marble;, om filen fortfarande finns på samma ställe.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>N</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Arkiv</guimenu
+> <guimenuitem
+>Ladda ner kartor...</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>Visar</action
+> dialogrutan <guilabel
+>Hämta heta nyheter</guilabel
+> för att ladda ner ytterligare kartor till &marble;, bland annat kartor för Mars och Venus.</para
+></listitem>
+          </varlistentry>
+
+         <varlistentry>
+            <term
+><menuchoice
+><guimenu
+>Arkiv</guimenu
+> <guimenuitem
+>Skapa en ny karta...</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>Visar</action
+> dialogrutan <guilabel
+>Guide för att skapa kartteman i &marble;</guilabel
+>, för att skapa en ny karta med användning av data från webbkarttjänsten, en egen bildfil eller indexerade rutor från Open Street Map.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><guimenu
+>Arkiv</guimenu
+> <guimenuitem
+>Ladda ner område...</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>Visar</action
+> dialogrutan <guilabel
+>Ladda ner område</guilabel
+> för att ladda ner kartdata med olika zoomnivåer för användning i nerkopplat läge. Se <link linkend="download-region"
+>Ladda ner kartområden</link
+> för detaljinformation.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>S</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Arkiv</guimenu
+> <guimenuitem
+>Exportera karta...</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>Exporterar</action
+> en skärmbild av &marble;s karta till en bildfil.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>P</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Arkiv</guimenu
+> <guimenuitem
+>Skriv ut...</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>Skriver ut</action
+> en skärmbild av &marble;s karta.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><guimenu
+>Arkiv</guimenu
+> <guimenuitem
+>Förhandsgranskning av utskrift</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+>Öppnar ett fönster som visar en förhandsgranskning av den utskrivna kartan.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><guimenu
+>Arkiv</guimenu
+> <guimenuitem
+>Arbeta nerkopplad</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+>Om alternativet är markerat, kommer inte &marble; längre ladda ner kartdata från Internet. Sökfunktionen begränsas till den lokala databasen. Nya färdvägar kan inte hämtas.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>Q</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Arkiv</guimenu
+> <guimenuitem
+>Avsluta</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>Avslutar</action
+> &marble;.</para
+></listitem>
+          </varlistentry>
+        </variablelist>
+      </sect2>
+
+      <sect2>
+      <title
+>Menyn Redigera</title>
+
+        <variablelist>
+          <varlistentry>
+            <term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>C</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Redigera</guimenu
+> <guimenuitem
+>Kopiera karta</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>Kopierar</action
+> en skärmbild av &marble;s karta till det allmänna klippbordet.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><guimenu
+>Redigera</guimenu
+> <guimenuitem
+>Kopiera koordinater</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>Kopierar</action
+> nuvarande koordinater till det allmänna klippbordet.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>E</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Redigera</guimenu
+> <guimenuitem
+>Redigera karta...</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>Låter</action
+> dig öppna aktuell karta i den externa karteditorn. Nuvarande version stöder karteditorerna <application
+>Potlatch</application
+> (i en webbläsare), <application
+>Merkaartor</application
+> och <application
+>JOSM</application
+>.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl; &Shift;<keycap
+>R</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Redigera</guimenu
+> <guimenuitem
+>Spela in film</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>Spelar in</action
+> en film med &marble;.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><guimenu
+>Redigera</guimenu
+> <guimenuitem
+>Stoppa inspelning</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>Stoppar</action
+> nuvarande filminspelning.</para
+></listitem>
+          </varlistentry>
+        </variablelist>
+      </sect2>
+
+      <sect2>
+      <title
+>Menyn Visa</title>
+
+        <variablelist>
+          <varlistentry>
+            <term
+><menuchoice
+><guimenu
+>Visa</guimenu
+> <guimenuitem
+>Nuvarande plats</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>Visa eller dölj</action
+> positionssidan i vänstra rutan. Om en GPS-enhet ansluts till datorn, visar &marble; longitud och latitud för din nuvarande position.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><guimenu
+>Visa</guimenu
+> <guimenuitem
+>Hårkors</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>Visa eller dölj</action
+> ett enkelt hårkors i kartans mitt.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><shortcut
+> <keycap
+>F5</keycap
+> </shortcut
+> <guimenu
+>Visa</guimenu
+> <guimenuitem
+>Uppdatera</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+>Den delen av kartan som för närvarande är synlig laddas ner igen och uppdateras på skärmen.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><guimenu
+>Visa</guimenu
+> <guisubmenu
+>Informationsrutor</guisubmenu
+></menuchoice
+></term>
+            <listitem
+><para
+>I den här undermenyn kan du låsa positionen hos informationsrutorna, och visa eller dölja insticksprogram du har aktiverad på sidan <link linkend="configplugins"
+>Insticksprogram</link
+> i &marble;s inställningsdialogruta.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><guimenu
+>Visa</guimenu
+> <guimenuitem
+>Nättjänster</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+>Insticksprogrammet <guimenuitem
+>Wikipedia</guimenuitem
+> visar artiklar från Wikipedia med geografiska referenser som ikoner på kartan. Ett klick på ikonen startar ett webbläsarfönster som visar sidan som hänvisas till. Data tillhandahålls genom en webbtjänst via GeoNames.org. På liknande sätt tillhandahåller insticksprogrammet <guimenuitem
+>Foton</guimenuitem
+> för närvarande foton via fotodelningsplatsen FlickR.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><guimenu
+>Visa</guimenu
+> <guimenuitem
+>Moln</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>Visa</action
+> molntäcke i realtid. En realtidskarta av moln som uppdateras var tredje timme. Den använder bilder från satelliterna GOES, METEOSAT och GMS nerladdade från sidan med geostationära satellitbilder hos Dundee Universitet. Erkännande: Hari Nair, Xplanet-projektet.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><guimenu
+>Visa</guimenu
+> <guimenuitem
+>Atmosfär</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>Visa</action
+> den diffusa reflektionen av atmosfären runt jorden.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><guimenu
+>Visa</guimenu
+> <guimenuitem
+>Stjärnor</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>Visa</action
+> stjärnkartan som den ser ut från solsystemet.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><guimenu
+>Visa</guimenu
+> <guimenuitem
+>Solstyrning...</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>Visar</action
+> <guilabel
+>Solstyrning</guilabel
+>, där du kan ställa in <guilabel
+>Solskugga</guilabel
+> och centrera kartan på solens position.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><guimenu
+>Visa</guimenu
+> <guimenuitem
+>Tidstyrning...</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>Visar</action
+> dialogrutan <guilabel
+>Tidkontroll</guilabel
+> där det går att ställa in datum och tid, samt simulerad tidshastighet.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><guimenu
+>Visa</guimenu
+> <guisubmenu
+>Visa förmörkelser under <replaceable
+>år</replaceable
+></guisubmenu
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>Visar</action
+> listan med förmörkelser för året som väljes med menyalternativet <menuchoice
+><guimenu
+>Visa</guimenu
+> <guimenuitem
+>Bläddra bland förmörkelser...</guimenuitem
+></menuchoice
+>.</para>
+
+            <para
+>Menyalternativet visas bara när insticksprogrammet <link linkend="eclipsesplugin"
+>Förmörkelser</link
+> är aktiverat.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><guimenu
+>Visa</guimenu
+> <guimenuitem
+>Bläddra bland förmörkelser...</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>Visar</action
+> dialogrutan <guilabel
+>Förmörkelsebläddrare</guilabel
+> där det går att ställa in året som förmörkelser ska visas för, öppna insticksprogrammets inställningsdialogruta, visa data om förmörkelsernas start, slut, magnitud och typ. Välj ett förmörkelseobjekt i listan och tryck på <guibutton
+>Gå till vald förmörkelse</guibutton
+> för att visa förmörkelsens plats på globen.</para>
+
+            <para
+>Menyalternativet visas bara när insticksprogrammet <link linkend="eclipsesplugin"
+>Förmörkelser</link
+> är aktiverat.</para
+></listitem>
+          </varlistentry>
+        </variablelist>
+      </sect2>
+
+      <sect2>
+      <title
+>Menyn Bokmärken</title>
+        <variablelist>
+          <varlistentry>
+            <term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>B</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Bokmärken</guimenu
+> <guimenuitem
+>Lägg till bokmärke...</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>Visa dialogrutan <guilabel
+>Redigera bokmärke</guilabel
+></action
+> för att hantera ett bokmärke.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><guimenu
+>Bokmärken</guimenu
+> <guimenuitem
+>Visa bokmärken</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+>En kryssruta för att <action
+>aktivera bokmärkessynkronisering på kartan.</action
+></para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><guimenu
+>Bokmärken</guimenu
+> <guimenuitem
+>Ställ in hemplats</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>Ange aktuell position som din bostad.</action
+></para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><guimenu
+>Bokmärken</guimenu
+> <guimenuitem
+>Hantera bokmärken...</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>Visar dialogrutan <guilabel
+>Hantera bokmärken</guilabel
+></action
+> för att hantera alla bokmärken.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><guimenu
+>Bokmärken</guimenu
+> <guisubmenu
+>Förval</guisubmenu
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>Undermenyn visar standardplatser.</action
+></para
+></listitem>
+          </varlistentry>
+        </variablelist>
+      </sect2>
+
+      <sect2>
+      <title
+>Menyn Inställningar</title>
+
+        <variablelist>
+          <varlistentry>
+            <term
+><menuchoice
+><guimenu
+>Inställningar</guimenu
+> <guimenuitem
+>Visa verktygsrad</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>Visa eller dölj</action
+> verktygsraden.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><guimenu
+>Inställningar</guimenu
+> <guimenuitem
+>Visa statusrad</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>Visa eller dölj</action
+> statusraden.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><guimenu
+>Inställningar</guimenu
+> <guisubmenu
+>Paneler</guisubmenu
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>Visa eller dölj</action
+> panelerna i &marble;.</para>
+
+            <tip
+><para
+>Du kan få &marble; att dölja alla paneler eller visa dem genom att använda menyalternativet <menuchoice
+><guimenu
+>Inställningar</guimenu
+> <guisubmenu
+>Paneler</guisubmenu
+> <guimenuitem
+>Dölj alla paneler/Visa alla paneler</guimenuitem
+></menuchoice
+> eller trycka på <keycap
+>F9</keycap
+> på tangentbordet.</para
+></tip
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><guimenu
+>Inställningar</guimenu
+> <guisubmenu
+>Visningsstorlek</guisubmenu
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>Byter mellan olika storlekar på kartområdet i &marble;.</action
+> Du kan välja en av storlekarna som är lämplig för att spela in bilder för en skärmfilm eller behålla möjlighet att ändra storlek på &marble;s kartområde (alternativet <guimenuitem
+>Normal (storlek kan ändras)</guimenuitem
+>).</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>F</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Inställningar</guimenu
+> <guimenuitem
+>Fullskärmsläge</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>Byter mellan normal vy och fullskärmsvy.</action
+> I fullskärmsvy är namnlisten dold och själva programfönstrets storlek ändrad till hela skärmen.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><guimenu
+>Inställningar</guimenu
+> <guimenuitem
+>Anpassa &marble; virtuell jordglob...</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>Visa</action
+> <link linkend="configure"
+>&marble;s inställningsdialogruta</link
+>.</para
+></listitem>
+          </varlistentry>
+
+        </variablelist>
+
+      </sect2>
+
+      <sect2>
+      <title
+>Menyn Hjälp</title>
+
+        <para
+>&marble; har &kde;:s vanliga menyalternativ i menyn <guimenu
+>Hjälp</guimenu
+>. För mer information läs avsnittet om <ulink url="help:/fundamentals/menus.html#menus-help"
+>hjälpmenyn</ulink
+> i &kde;:s grunder. </para>
+      </sect2>
+    </sect1>
+  </chapter>
+
+  <chapter id="configure">
+  <title
+>Anpassa &marble;</title>
+
+    <sect1 id="configview">
+    <title
+>Vyinställning</title>
+
+      <screenshot>
+        <screeninfo
+>Dialogrutan för vyinställning</screeninfo>
+        <mediaobject>
+          <imageobject
+><imagedata fileref="configure-view.png" format="PNG"/></imageobject>
+          <textobject
+><phrase
+>Dialogrutan för vyinställning</phrase
+></textobject>
+        </mediaobject>
+      </screenshot>
+
+      <variablelist>
+        <varlistentry>
+          <term
+><guilabel
+>Avstånd:</guilabel
+></term>
+          <listitem
+><para
+>Enhet som används för att mäta höjd, längder och avstånd (t.ex. km, mile, fot).</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>Vinkel:</guilabel
+></term>
+          <listitem
+><para
+>Anger beteckningar för vinklar i koordinater: Normalt används beteckningen grad, minut, sekund (t.ex. 54°30'00"). Som ett alternativ kan du välja decimala grader (t.ex. 54.5°).</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>Stillbild:</guilabel
+></term>
+          <listitem
+><para
+>Anger kartans kvalitet som visas när användaren inte gör någonting. Oftast tillåter det hög kvalitet eftersom hastighet inte spelar någon roll.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>Under animering:</guilabel
+></term>
+          <listitem
+><para
+>Anger kartans kvalitet som visas vid animering av kartan (t.ex. när globen dras). Det är lämpligt att ställa in alternativet till <guilabel
+>Låg kvalitet</guilabel
+>, särskilt på långsamma datorer, eftersom det ger bättre hastighet.</para
+></listitem>
+        </varlistentry>
+
+<!--         <varlistentry>
+          <term
+><guilabel
+>Place names:</guilabel
+></term>
+          <listitem
+><para
+>Places often have different names in different languages. The label on the map can show the name in the user's language. Alternatively it can display the name in the official language and glyphs of that place.</para
+></listitem>
+        </varlistentry
+>-->
+
+        <varlistentry>
+          <term
+><guilabel
+>Kartans standardteckensnitt:</guilabel
+></term>
+          <listitem
+><para
+>Standardteckensnittet som används på kartan.</para
+></listitem>
+        </varlistentry>
+      </variablelist>
+    </sect1>
+
+    <sect1 id="confignavigation">
+    <title
+>Navigeringsinställning</title>
+
+      <screenshot>
+        <screeninfo
+>Inställningsdialogrutan för navigering</screeninfo>
+        <mediaobject>
+          <imageobject
+><imagedata fileref="configure-navigation.png" format="PNG"/></imageobject>
+          <textobject
+><phrase
+>Inställningsdialogrutan för navigering</phrase
+></textobject>
+        </mediaobject>
+      </screenshot>
+
+      <variablelist>
+<!--        <varlistentry>
+          <term
+><guilabel
+>Drag location:</guilabel
+></term>
+          <listitem
+><para
+>While dragging the mouse there are two standard behaviors when dealing with a virtual globe: The location below mouse pointer will follow the cursor exactly: As a result &eg; the north pole will not stay at the top which can lead to confusion. By default &marble; makes sure that north is always up which results in a dragging behavior where the location below the mouse pointer slightly "detaches" from the cursor.</para
+></listitem>
+        </varlistentry
+>-->
+
+        <varlistentry>
+          <term
+><guilabel
+>Trög globrotation</guilabel
+></term>
+          <listitem
+><para
+>Normalt använder &marble; kinetisk rörelse när kartan dras. Det går att stänga av beteendet genom att använda den här kryssrutan.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>Animera resan till målet</guilabel
+></term>
+          <listitem
+><para
+>Vid sökning efter en plats kan &marble; antingen gå direkt till den nya platsen, eller visa en animering av en resa från föregående plats till den nya platsen.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>Vyrotation med musen</guilabel
+></term>
+          <listitem
+><para
+>Karta och musförflyttning är likformiga under panorering.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>Vid start:</guilabel
+></term>
+          <listitem
+><para
+>Normalt visar &marble; hemplatsen direkt efter programmet har startat. Som ett alternativ kan också den senaste positionen som var aktiv när användaren lämnade programmet visas.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>Extern editor:</guilabel
+></term>
+          <listitem
+><para
+>Här kan man definiera standardeditor för kartorna eller välja <guilabel
+>Fråga alltid</guilabel
+> om &marble; ska låta dig välja innan den externa editorn startas.</para
+></listitem>
+        </varlistentry>
+      </variablelist>
+    </sect1>
+
+    <sect1 id="configcacheproxy">
+    <title
+>Inställning av cache och proxy</title>
+
+      <screenshot>
+        <screeninfo
+>Inställningsdialogrutan för cache och proxy</screeninfo>
+        <mediaobject>
+          <imageobject
+><imagedata fileref="configure-cacheproxy.png" format="PNG"/></imageobject>
+          <textobject
+><phrase
+>Inställningsdialogrutan för cache och proxy</phrase
+></textobject>
+        </mediaobject>
+      </screenshot>
+
+      <variablelist>
+        <varlistentry>
+          <term
+><guilabel
+>Cache</guilabel
+></term>
+          <listitem
+><para
+>Det finns två cachar som används av &marble;: <guilabel
+>Fysiskt minne:</guilabel
+> som behövs för att hålla kartans data i datorns minne. Ökas värdet svarar programmet snabbare. Minnescachen på <guilabel
+>Hårddisk:</guilabel
+> används av nerladdat innehåll från Internet (t.ex. data från Wikipedia eller kartans data). Minska värdet om du vill spara utrymme på hårddisken och hög användning av Internet inte är ett problem.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>Proxy</guilabel
+></term>
+          <listitem
+><para
+>Proxyinställningar för lokalt intranät. Lämna tomt om det inte finns någon proxy.</para
+></listitem>
+        </varlistentry>
+      </variablelist>
+    </sect1>
+
+    <sect1 id="configdatetime">
+    <title
+>Inställning av datum och tid</title>
+
+      <screenshot>
+        <screeninfo
+>Inställningsdialogrutan för datum och tid</screeninfo>
+        <mediaobject>
+          <imageobject
+><imagedata fileref="configure-dateandtime.png" format="PNG"/></imageobject>
+          <textobject
+><phrase
+>Inställningsdialogrutan för datum och tid</phrase
+></textobject>
+        </mediaobject>
+      </screenshot>
+
+      <variablelist>
+        <varlistentry>
+          <term
+><guilabel
+>Tidszon</guilabel
+></term>
+          <listitem
+><para
+>Här kan man välja tidszon i &marble;: <ulink url="https://sv.wikipedia.org/wiki/Koordinerad_universell_tid"
+>UTC</ulink
+>, systemets tidszon eller välja en egen tidszon. Det valda alternativet ändrar bara kartans utseende om den kan visa dagsljustillståndet på jordytan.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>När &marble; startar</guilabel
+></term>
+          <listitem
+><para
+>Här kan man välja datum och tid som visas när &marble; startas: systemtiden eller den senaste sessionens tid.</para
+></listitem>
+        </varlistentry>
+      </variablelist>
+    </sect1>
+
+    <sect1 id="configsynchronization">
+    <title
+>Inställning av synkronisering</title>
+
+      <para
+>&marble; kan ladda up vägbeskrivnings- och bokmärkesinformation till en <ulink url="https://en.wikipedia.org/wiki/OwnCloud"
+>ownCloud</ulink
+>-server och synkronisera dem mellan instanser av &marble; installerade på olika enheter. </para>
+
+      <screenshot>
+        <screeninfo
+>Inställningsdialogrutan för synkronisering</screeninfo>
+        <mediaobject>
+          <imageobject
+><imagedata fileref="configure-synchronization.png" format="PNG"/></imageobject>
+          <textobject
+><phrase
+>Inställningsdialogrutan för synkronisering</phrase
+></textobject>
+        </mediaobject>
+      </screenshot>
+
+      <variablelist>
+        <varlistentry>
+          <term
+><guilabel
+>Aktivera synkronisering</guilabel
+></term>
+          <listitem
+><para
+>Synkroniseringen kan aktiveras eller inaktiveras med det här alternativet. När synkroniseringen är aktiverad kan du välja om vägbeskrivnings- och bokmärkesinformation ska synkroniseras med motsvarande kryssrutor eller tryck på <guibutton
+>Synkronisera nu</guibutton
+> för att omedelbart påbörja synkronisering.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>Inloggningsinformation</guilabel
+></term>
+          <listitem
+><para
+>Här går det att skriva in inloggningsinformation för ownCloud. Mer information om inställning av ownCloud finns på <ulink url="https://owncloud.com/"
+>owClouds officiella webbplats</ulink
+>.</para
+></listitem>
+        </varlistentry>
+      </variablelist>
+    </sect1>
+
+    <sect1 id="configrouting">
+    <title
+>Inställning av vägbeskrivning</title>
+
+      <screenshot>
+        <screeninfo
+>Inställningsdialogrutan för vägbeskrivning</screeninfo>
+        <mediaobject>
+          <imageobject
+><imagedata fileref="configure-routing.png" format="PNG"/></imageobject>
+          <textobject
+><phrase
+>Inställningsdialogrutan för vägbeskrivning</phrase
+></textobject>
+        </mediaobject>
+      </screenshot>
+
+      <variablelist>
+        <varlistentry>
+          <term
+><guibutton
+>Lägg till...</guibutton
+></term>
+          <listitem
+><para
+>Öppnar ett fönster där en ny vägbeskrivningsprofil kan läggas till.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guibutton
+>Anpassa...</guibutton
+></term>
+          <listitem
+><para
+>Öppnar ett fönster där vägbeskrivningsprofilen som för närvarande är vald kan anpassas.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guibutton
+>Ta bort</guibutton
+></term>
+          <listitem
+><para
+>Tar bort den markerade vägbeskrivningsprofilen.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guibutton
+>Flytta upp</guibutton
+></term>
+          <listitem
+><para
+>Den markerade vägbeskrivningsprofilen flyttas upp ett steg. Den visas ovanför den som tidigare var ovanför den.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guibutton
+>Flytta ner</guibutton
+></term>
+          <listitem
+><para
+>Den markerade vägbeskrivningsprofilen flyttas ner ett steg. Den visas under den som tidigare var under den.</para
+></listitem>
+        </varlistentry>
+      </variablelist>
+    </sect1>
+
+    <sect1 id="configplugins">
+    <title
+>Inställning av insticksprogram</title>
+
+      <para
+>Den grafiska komponenten <guilabel
+>Inställning av insticksprogram</guilabel
+> är stället att aktivera (eller inaktivera) informationsrutor, nättjänster och andra insticksprogram som påverkar &marble;s utseende. Aktiva insticksprogram syns i menyn <guilabel
+>Visa</guilabel
+>, där du kan ändra deras synlighet. </para>
+
+      <screenshot>
+        <screeninfo
+>Inställningsdialogrutan för insticksprogram</screeninfo>
+        <mediaobject>
+          <imageobject
+><imagedata fileref="configure-plugins.png" format="PNG"/></imageobject>
+          <textobject
+><phrase
+>Inställningsdialogrutan för insticksprogram</phrase
+></textobject>
+        </mediaobject>
+      </screenshot>
+
+      <para
+>Varje insticksprogram kan aktiveras eller inaktiverats med kryssrutan till vänster. Vissa insticksprogram tillhandahåller ytterligare inställningsalternativ, som kan kommas åt genom att klicka på verktygsikonen till höger. </para>
+
+      <variablelist>
+        <varlistentry>
+          <term
+><guilabel
+>APRS-insticksprogram för amatörradio</guilabel
+></term>
+          <listitem
+><para
+>Hämtar data från det Automatiska paketrapporteringssystemet (APRS) via Internet, en fil eller en seriell enhet. Positionen och status för datasändare visas på kartan och uppdateras i realtid.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>Beteckningar</guilabel
+></term>
+          <listitem
+><para
+>Låter dig lägga till beteckningar på kartorna.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>Atmosfär</guilabel
+></term>
+          <listitem
+><para
+>Visar atmosfäreffekter.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>Kompass</guilabel
+></term>
+          <listitem
+><para
+>Visar en kompass på kartan.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>Koordinatnät</guilabel
+></term>
+          <listitem
+><para
+>Visar koordinatlinjer i ett rutnät (det går att välja linjernas färger).</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>Hårkors</guilabel
+></term>
+          <listitem
+><para
+>Aktivera för att visa ett litet hårkors i kartans mitt.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>Förloppsindikering för nerladdning</guilabel
+></term>
+          <listitem
+><para
+>Ett cirkeldiagram ovanpå kartan som visar förloppet för pågående nerladdningar.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>Jordbävningar</guilabel
+></term>
+          <listitem
+><para
+>Visar jordbävningsmarkeringar på kartan.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry id="eclipsesplugin">
+          <term
+><guilabel
+>Förmörkelser</guilabel
+></term>
+          <listitem
+><para
+>Visar information om sol- och månförmörkelser.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>Höjdprofil</guilabel
+></term>
+          <listitem
+><para
+>Visar den överlagrade höjdprofilen för <link linkend="routing"
+>vägbeskrivningarna på kartan</link
+>.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>Höjdprofilmarkör</guilabel
+></term>
+          <listitem
+><para
+>Markerar höjdprofilens nuvarande höjd på kartan.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>GPS-information</guilabel
+></term>
+          <listitem
+><para
+>Visar ett flyttbart objekt som tillhandahåller information från <ulink url="https://sv.wikipedia.org/wiki/Global_Positioning_System"
+>GPS</ulink
+>.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>Licens</guilabel
+></term>
+          <listitem
+><para
+>Visar ett flyttbart objekt som tillhandahåller upphovsrättslig information.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry id="measure-tool-config">
+          <term
+><guilabel
+>Mätverktyg</guilabel
+></term>
+          <listitem
+><para
+>Insticksprogram för att <link linkend="measure-distances"
+>mäta avstånd mellan två eller flera platser</link
+>.</para>
+
+          <para
+>Visning av avstånd och riktningar mellan punkterna kan ställas in efter att ha klickat på verktygsikonen. Det är tillräckligt att markera motsvarande alternativ för att &marble; ska visa beteckningarna eller avmarkera alternativet för att dölja beteckningarna.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>Navigering</guilabel
+></term>
+          <listitem
+><para
+>Visar musstyrning för att zooma och flytta som ett flytande objekt på kartan.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>OSM kartläggningsanmärkningar</guilabel
+></term>
+          <listitem
+><para
+>Implementering av anmärkningar för geografisk kodning.</para
+></listitem>
+        </varlistentry>
+
+<!--        <varlistentry>
+          <term
+><guilabel
+>OpenCaching.com</guilabel
+></term>
+          <listitem
+><para
+>Displays the <ulink url="https://en.wikipedia.org/wiki/Geocaching"
+>geocaching</ulink
+> markers on the map.</para
+></listitem>
+        </varlistentry
+>-->
+
+        <varlistentry>
+          <term
+><guilabel
+>Objekt från OpenDesktop</guilabel
+></term>
+          <listitem
+><para
+>Visar avatarer för <ulink url="https://opendesktop.org/"
+>OpenDesktop</ulink
+>-användare och en del extra information om dem på kartan.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>Översiktskarta</guilabel
+></term>
+          <listitem
+><para
+>Det här är ett flyttbart objekt som tillhandahåller en översiktskarta.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>Foton</guilabel
+></term>
+          <listitem
+><para
+>Laddar automatiskt ner bilder från hela världen i förhållande till deras popularitet.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>Platser</guilabel
+></term>
+          <listitem
+><para
+>Visar populära platser från <ulink url="https://foursquare.com/"
+>Foursquare</ulink
+>.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>Platsmarkering</guilabel
+></term>
+          <listitem
+><para
+>Ritar en markering vid nuvarande plats enligt <ulink url="https://sv.wikipedia.org/wiki/Global_Positioning_System"
+>GPS</ulink
+>.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>Postnummer</guilabel
+></term>
+          <listitem
+><para
+>Visar <ulink url="https://sv.wikipedia.org/wiki/Postnummer"
+>postnummer</ulink
+> för området på kartan.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>Vägbeskrivning</guilabel
+></term>
+          <listitem
+><para
+>Visar <link linkend="routing"
+>vägbeskrivningsinformation</link
+> och navigeringskontroller.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>Satelliter</guilabel
+></term>
+          <listitem
+><para
+>Visar jordens och andra planeters naturliga och artificiella satelliter och deras banor.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>Skala</guilabel
+></term>
+          <listitem
+><para
+>Det här är ett flyttbart objekt som tillhandahåller en skala för kartan.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>Hastighetsmätare</guilabel
+></term>
+          <listitem
+><para
+>Visa aktuell färdhastighet. Kräver data från <ulink url="https://sv.wikipedia.org/wiki/Global_Positioning_System"
+>GPS</ulink
+>.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>Stjärnor</guilabel
+></term>
+          <listitem
+><para
+>Ett insticksprogram som visar stjärnhimlen.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>Solen</guilabel
+></term>
+          <listitem
+><para
+>Ett insticksprogram som visar solen.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>Väder</guilabel
+></term>
+          <listitem
+><para
+>Laddar ner aktuell väderinformation för städer och visar den på kartan.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>Wikipedia-artiklar</guilabel
+></term>
+          <listitem
+><para
+>Laddar automatiskt ner Wikipedia-artiklar och visar dem på rätt plats på kartan.</para
+></listitem>
+        </varlistentry>
+      </variablelist>
+    </sect1>
+  </chapter>
+
+  <chapter id="faq">
+  <title
+>Vanliga frågor</title>
+
+    <qandaset id="faqlist">
+      <qandaentry>
+        <question>
+          <para
+>Jag kan inte se mitt hus på kartan. Varför ska jag använda &marble; när <application
+>Google Earth</application
+> redan finns?</para>
+        </question>
+        <answer>
+          <para
+>&marble; siktar på att vara en lättviktig snabb geografisk bläddrare för utbildning som enkelt kör på alla plattformar som stöds av &Qt;. Även om det vore trevligt att ha kartor med högre upplösning är de inte nödvändiga för varje användare och varje användarfall (precis som du inte använder en fullständig ordbehandlare varje gång du behöver en enkel editor). Observera också att &marble; är fri programvara och är baserad på data som fritt kan distribueras vidare på samma sätt som gäller för fri programvara.</para>
+        </answer>
+      </qandaentry>
+
+      <qandaentry>
+        <question>
+          <para
+>Varför är &marble; så snabbt även om jag inte har aktiverad acceleration i hårdvara? / Varför kör inte &marble; jämt på mitt dyra tredimensionella grafikkort?</para>
+        </question>
+        <answer>
+          <para
+>Trots att jorden avbildas som en glob använder inte &marble; någon tredimensionell hårdvaruacceleration. Det ger fördelen att det kör med hyfsad hastighet på alla plattformar och all hårdvara som stöds av &Qt;. Det har dock nackdelen att det inte kör så mjukt som det skulle kunnat om hårdvaruaccelererad OpenGL använts. &marble; använder enkel tvådimensionell grafik, och kräver därför ett grafikkort som snabbt ritar tvådimensionell grafik. Vi planerar att lägga till ett valfritt OpenGL-gränssnitt i framtiden.</para>
+        </answer>
+      </qandaentry>
+
+      <qandaentry>
+        <question>
+          <para
+>Kommer jag någonsin att behöva betala för &marble;?</para>
+        </question>
+        <answer>
+          <para
+>Nej, aldrig. Men upphovsmännen välkomnar alltid återmatning. &marble; är licensierat under villkoren i <ulink url="https://www.gnu.org/licenses/licenses.html#LGPL"
+>LGPL </ulink
+>, så du kommer aldrig att behöva betala för programmet.</para>
+        </answer>
+      </qandaentry>
+
+      <qandaentry>
+        <question>
+          <para
+>Hur kan jag bidra?</para>
+        </question>
+        <answer>
+          <para
+>&marble; är inte bara ett program, utan också ett projekt med fri programvara. Som sådant, är det enkelt att gå med: kontakta oss bara via e-postlistan marble-devel (marble-devel@kde.org).</para>
+        </answer>
+      </qandaentry>
+    </qandaset>
+  </chapter>
+
+  <chapter id="credits">
+  <title
+>Tack till och licens</title>
+
+    <para
+>&marble;</para>
+
+    <para
+>Program Copyright, 2005-2007 &Torsten.Rahn; &Torsten.Rahn.mail;</para>
+
+    <para
+>Bidragsgivare:</para>
+
+    <itemizedlist>
+      <listitem
+><para
+>&Torsten.Rahn; &Torsten.Rahn.mail;</para
+></listitem>
+      <listitem
+><para
+>Inge Wallin <email
+>inge@lysator.liu.se</email
+></para
+></listitem>
+    </itemizedlist>
+
+    <para
+>Översättning Stefan Asserhäll <email
+>stefan.asserhall@bredband.net</email
+></para
+> &underFDL; <para
+>Det här programmet licensieras under villkoren i <ulink url="common/lgpl-translated.html"
+>GNU Lesser General Public License</ulink
+>.</para
+> </chapter>
+
+  &documentation.index;
+</book>
+<!--
+Local Variables:
+mode: sgml
+sgml-minimize-attributes:nil
+sgml-general-insert-case:lower
+sgml-indent-step:0
+sgml-indent-data:nil
+End:
+
+// vim:ts=2:sw=2:tw=78:noet:noai
+-->

@@ -1,0 +1,6084 @@
+# translation of marble.po to Swedish
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Stefan Asserhäll <stefan.asserhall@bredband.net>, 2007, 2008, 2009, 2010.
+# Stefan Asserhall <stefan.asserhall@bredband.net>, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2020, 2021.
+# Arve Eriksson <031299870@telia.com>, 2011.
+msgid ""
+msgstr ""
+"Project-Id-Version: marble\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2021-10-18 00:13+0000\n"
+"PO-Revision-Date: 2021-10-18 16:51+0200\n"
+"Last-Translator: Stefan Asserhäll <stefan.asserhall@bredband.net>\n"
+"Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
+"Language: sv\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 20.08.1\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "Stefan Asserhäll"
+
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "stefan.asserhall@bredband.net"
+
+#: kdemain.cpp:91
+#, kde-format
+msgid "Marble Virtual Globe"
+msgstr "Marble virtuell jordglob"
+
+#: kdemain.cpp:93
+#, kde-format
+msgid "A World Atlas."
+msgstr "En världsatlas."
+
+#: kdemain.cpp:95
+#, kde-format
+msgid "(c) 2007-%1"
+msgstr "© 2007-%1"
+
+#: kdemain.cpp:100 kdemain.cpp:286
+#, kde-format
+msgid "Torsten Rahn"
+msgstr "Torsten Rahn"
+
+#: kdemain.cpp:101
+#, kde-format
+msgid "Developer and Original Author"
+msgstr "Utvecklare och ursprunglig upphovsman"
+
+#: kdemain.cpp:103
+#, kde-format
+msgid "Bernhard Beschow"
+msgstr "Bernhard Beschow"
+
+#: kdemain.cpp:104
+#, kde-format
+msgid "WMS Support, Mobile, Performance"
+msgstr "Stöd för WMS, mobil, prestanda"
+
+#: kdemain.cpp:106
+#, kde-format
+msgid "Thibaut Gridel"
+msgstr "Thibaut Gridel"
+
+#: kdemain.cpp:107
+#, kde-format
+msgid "Geodata"
+msgstr "Geografisk data"
+
+#: kdemain.cpp:109
+#, kde-format
+msgid "Jens-Michael Hoffmann"
+msgstr "Jens-Michael Hoffmann"
+
+#: kdemain.cpp:110
+#, kde-format
+msgid "OpenStreetMap Integration, OSM Namefinder, Download Management"
+msgstr "Integrering med OpenStreetMap, OSM-namnsökning, nerladdningshantering"
+
+#: kdemain.cpp:112
+#, kde-format
+msgid "Florian E&szlig;er"
+msgstr "Florian E&szlig;er"
+
+#: kdemain.cpp:113
+#, kde-format
+msgid "Elevation Profile"
+msgstr "Höjdprofil"
+
+#: kdemain.cpp:115
+#, kde-format
+msgid "Wes Hardaker"
+msgstr "Wes Hardaker"
+
+#: kdemain.cpp:116
+#, kde-format
+msgid "APRS Plugin"
+msgstr "APRS-insticksprogram"
+
+#: kdemain.cpp:118 kdemain.cpp:202
+#, kde-format
+msgid "Bastian Holst"
+msgstr "Bastian Holst"
+
+#: kdemain.cpp:119
+#, kde-format
+msgid "Online Services support"
+msgstr "Stöd för nättjänster"
+
+#: kdemain.cpp:121 kdemain.cpp:172
+#, kde-format
+msgid "Guillaume Martres"
+msgstr "Guillaume Martres"
+
+#: kdemain.cpp:122
+#, kde-format
+msgid "Satellites"
+msgstr "Satelliter"
+
+#: kdemain.cpp:124 kdemain.cpp:168
+#, kde-format
+msgid "Rene Kuettner"
+msgstr "Rene Kuettner"
+
+#: kdemain.cpp:125
+#, kde-format
+msgid "Satellites, Eclipses"
+msgstr "Satelliter, förmörkelser"
+
+#: kdemain.cpp:127
+#, kde-format
+msgid "Friedrich W. H. Kossebau"
+msgstr "Friedrich W. H. Kossebau"
+
+#: kdemain.cpp:128
+#, kde-format
+msgid "Plasma Integration, Bugfixes"
+msgstr "Integrering med Plasma, felrättningar"
+
+#: kdemain.cpp:130
+#, kde-format
+msgid "Dennis Nienhüser"
+msgstr "Dennis Nienhüser"
+
+#: kdemain.cpp:131
+#, kde-format
+msgid "Routing, Navigation, Mobile"
+msgstr "Vägbeskrivning, navigering, mobil"
+
+#: kdemain.cpp:133
+#, kde-format
+msgid "Niko Sams"
+msgstr "Niko Sams"
+
+#: kdemain.cpp:134
+#, kde-format
+msgid "Routing, Elevation Profile"
+msgstr "Vägbeskrivning, höjdprofil"
+
+#: kdemain.cpp:136 kdemain.cpp:206
+#, kde-format
+msgid "Patrick Spendrin"
+msgstr "Patrick Spendrin"
+
+#: kdemain.cpp:137
+#, kde-format
+msgid "Core Developer: KML and Windows support"
+msgstr "Huvudutvecklare, stöd för KML och Windows"
+
+#: kdemain.cpp:139
+#, kde-format
+msgid "Eckhart Wörner"
+msgstr "Eckhart Wörner"
+
+#: kdemain.cpp:140
+#, kde-format
+msgid "Bugfixes"
+msgstr "Felrättningar"
+
+#: kdemain.cpp:145
+#, kde-format
+msgid "Inge Wallin"
+msgstr "Inge Wallin"
+
+#: kdemain.cpp:146
+#, kde-format
+msgid "Core Developer and Co-Maintainer"
+msgstr "Huvudutvecklare och bidragande underhåll"
+
+#: kdemain.cpp:148
+#, kde-format
+msgid "Henry de Valence"
+msgstr "Henry de Valence"
+
+#: kdemain.cpp:149
+#, kde-format
+msgid "Core Developer: Marble Runners, World-Clock Plasmoid"
+msgstr "Huvudutvecklare, Marble-körprogram, Plasmoid med världsklocka"
+
+#: kdemain.cpp:151
+#, kde-format
+msgid "Pino Toscano"
+msgstr "Pino Toscano"
+
+#: kdemain.cpp:152
+#, kde-format
+msgid "Network plugins"
+msgstr "Nätverksinsticksprogram"
+
+#: kdemain.cpp:154
+#, kde-format
+msgid "Harshit Jain"
+msgstr "Harshit Jain"
+
+#: kdemain.cpp:155
+#, kde-format
+msgid "Planet filter"
+msgstr "Planetfilter"
+
+#: kdemain.cpp:157
+#, kde-format
+msgid "Simon Edwards"
+msgstr "Simon Edwards"
+
+#: kdemain.cpp:158
+#, kde-format
+msgid "Marble Python Bindings"
+msgstr "Marble Python-bindningar"
+
+#: kdemain.cpp:160
+#, kde-format
+msgid "Magnus Valle"
+msgstr "Magnus Valle"
+
+#: kdemain.cpp:161
+#, kde-format
+msgid "Historical Maps"
+msgstr "Historiska kartor"
+
+#: kdemain.cpp:163
+#, kde-format
+msgid "Médéric Boquien"
+msgstr "Médéric Boquien"
+
+#: kdemain.cpp:164
+#, kde-format
+msgid "Astronomical Observatories"
+msgstr "Astronomiska observatorier"
+
+#: kdemain.cpp:169
+#, kde-format
+msgid ""
+"ESA Summer of Code in Space 2012 Project: Visualization of planetary "
+"satellites"
+msgstr ""
+"Projekt i ESA:s Summer of Code i rymden 2012: Visualisering av planetära "
+"satelliter"
+
+#: kdemain.cpp:173
+#, kde-format
+msgid ""
+"ESA Summer of Code in Space 2011 Project: Visualization of Satellite Orbits"
+msgstr ""
+"Projekt i ESA:s Summer of Code i rymden 2011: Visualisering av satellitbanor"
+
+#: kdemain.cpp:178
+#, kde-format
+msgid "Konstantin Oblaukhov"
+msgstr "Konstantin Oblaukhov"
+
+#: kdemain.cpp:179
+#, kde-format
+msgid "Google Summer of Code 2011 Project: OpenStreetMap Vector Rendering"
+msgstr "Projekt i Googles Summer of Code 2011: OpenStreetMap vektoråtergivning"
+
+#: kdemain.cpp:182
+#, kde-format
+msgid "Daniel Marth"
+msgstr "Daniel Marth"
+
+#: kdemain.cpp:183
+#, kde-format
+msgid "Google Summer of Code 2011 Project: Marble Touch on MeeGo"
+msgstr "Projekt i Googles Summer of Code 2011: Marble Touch på MeeGo"
+
+#: kdemain.cpp:186
+#, kde-format
+msgid "Gaurav Gupta"
+msgstr "Gaurav Gupta"
+
+#: kdemain.cpp:187
+#, kde-format
+msgid "Google Summer of Code 2010 Project: Bookmarks"
+msgstr "Projekt i Googles Summer of Code 2010: Bokmärken"
+
+#: kdemain.cpp:190
+#, kde-format
+msgid "Harshit Jain "
+msgstr "Harshit Jain "
+
+#: kdemain.cpp:191
+#, kde-format
+msgid "Google Summer of Code 2010 Project: Time Support"
+msgstr "Projekt i Googles Summer of Code 2010: Stöd för tid"
+
+#: kdemain.cpp:194
+#, kde-format
+msgid "Siddharth Srivastava"
+msgstr "Siddharth Srivastava"
+
+#: kdemain.cpp:195
+#, kde-format
+msgid "Google Summer of Code 2010 Project: Turn-by-turn Navigation"
+msgstr "Projekt i Googles Summer of Code 2010: Navigering sväng för sväng"
+
+#: kdemain.cpp:198 kdemain.cpp:218
+#, kde-format
+msgid "Andrew Manson"
+msgstr "Andrew Manson"
+
+#: kdemain.cpp:199
+#, kde-format
+msgid "Google Summer of Code 2009 Project: OSM Annotation"
+msgstr "Projekt i Googles Summer of Code 2009: OSM-beteckningar"
+
+#: kdemain.cpp:203
+#, kde-format
+msgid "Google Summer of Code 2009 Project: Online Services"
+msgstr "Projekt i Googles Summer of Code 2009: Nättjänster"
+
+#: kdemain.cpp:207
+#, kde-format
+msgid "Google Summer of Code 2008 Project: Vector Tiles for Marble"
+msgstr "Projekt i Googles Summer of Code: Vektorrutor för Marble"
+
+#: kdemain.cpp:210
+#, kde-format
+msgid "Shashank Singh"
+msgstr "Shashank Singh"
+
+#: kdemain.cpp:211
+#, kde-format
+msgid ""
+"Google Summer of Code 2008 Project: Panoramio / Wikipedia -photo support for "
+"Marble"
+msgstr ""
+"Projekt i Googles Summer of Code: Stöd för Panoramio- och Wikipedia-foton i "
+"Marble"
+
+#: kdemain.cpp:214
+#, kde-format
+msgid "Carlos Licea"
+msgstr "Carlos Licea"
+
+#: kdemain.cpp:215
+#, kde-format
+msgid ""
+"Google Summer of Code 2007 Project: Equirectangular Projection (\"Flat Map\")"
+msgstr ""
+"Projekt i Googles Summer of Code: Ekvirektangulär projektion (\"platt karta"
+"\")"
+
+#: kdemain.cpp:219
+#, kde-format
+msgid "Google Summer of Code 2007 Project: GPS Support for Marble"
+msgstr "Projekt i Googles Summer of Code: Stöd för GPS i Marble"
+
+#: kdemain.cpp:222
+#, kde-format
+msgid "Murad Tagirov"
+msgstr "Murad Tagirov"
+
+#: kdemain.cpp:223
+#, kde-format
+msgid "Google Summer of Code 2007 Project: KML Support for Marble"
+msgstr "Projekt i Googles Summer of Code: Stöd för KML i Marble"
+
+#: kdemain.cpp:228
+#, kde-format
+msgid "Simon Schmeisser"
+msgstr "Simon Schmeisser"
+
+#: kdemain.cpp:229 kdemain.cpp:231 kdemain.cpp:233 kdemain.cpp:235
+#: kdemain.cpp:237 kdemain.cpp:239 kdemain.cpp:241 kdemain.cpp:243
+#: kdemain.cpp:245 kdemain.cpp:247 kdemain.cpp:249 kdemain.cpp:251
+#: kdemain.cpp:253 kdemain.cpp:255 kdemain.cpp:257 kdemain.cpp:259
+#: kdemain.cpp:261 kdemain.cpp:263 kdemain.cpp:265
+#, kde-format
+msgid "Development & Patches"
+msgstr "Utveckling och programfixar"
+
+#: kdemain.cpp:230
+#, kde-format
+msgid "Claudiu Covaci"
+msgstr "Claudiu Covaci"
+
+#: kdemain.cpp:232
+#, kde-format
+msgid "David Roberts"
+msgstr "David Roberts"
+
+#: kdemain.cpp:234
+#, kde-format
+msgid "Nikolas Zimmermann"
+msgstr "Nikolas Zimmermann"
+
+#: kdemain.cpp:236
+#, kde-format
+msgid "Jan Becker"
+msgstr "Jan Becker"
+
+#: kdemain.cpp:238
+#, kde-format
+msgid "Stefan Asserhäll"
+msgstr "Stefan Asserhäll"
+
+#: kdemain.cpp:240
+#, kde-format
+msgid "Laurent Montel"
+msgstr "Laurent Montel"
+
+#: kdemain.cpp:242
+#, kde-format
+msgid "Mayank Madan"
+msgstr "Mayank Madan"
+
+#: kdemain.cpp:244
+#, kde-format
+msgid "Prashanth Udupa"
+msgstr "Prashanth Udupa"
+
+#: kdemain.cpp:246
+#, kde-format
+msgid "Anne-Marie Mahfouf"
+msgstr "Anne-Marie Mahfouf"
+
+#: kdemain.cpp:248
+#, kde-format
+msgid "Josef Spillner"
+msgstr "Josef Spillner"
+
+#: kdemain.cpp:250
+#, kde-format
+msgid "Frerich Raabe"
+msgstr "Frerich Raabe"
+
+#: kdemain.cpp:252
+#, kde-format
+msgid "Frederik Gladhorn"
+msgstr "Frederik Gladhorn"
+
+#: kdemain.cpp:254
+#, kde-format
+msgid "Fredrik Höglund"
+msgstr "Fredrik Höglund"
+
+#: kdemain.cpp:256
+#, kde-format
+msgid "Albert Astals Cid"
+msgstr "Albert Astals Cid"
+
+#: kdemain.cpp:258
+#, kde-format
+msgid "Thomas Zander"
+msgstr "Thomas Zander"
+
+#: kdemain.cpp:260
+#, kde-format
+msgid "Joseph Wenninger"
+msgstr "Joseph Wenninger"
+
+#: kdemain.cpp:262
+#, kde-format
+msgid "Kris Thomsen"
+msgstr "Kris Thomsen"
+
+#: kdemain.cpp:264
+#, kde-format
+msgid "Daniel Molkentin"
+msgstr "Daniel Molkentin"
+
+#: kdemain.cpp:266
+#, kde-format
+msgid "Christophe Leske"
+msgstr "Christophe Leske"
+
+#: kdemain.cpp:267 kdemain.cpp:269 kdemain.cpp:271 kdemain.cpp:273
+#: kdemain.cpp:275 kdemain.cpp:277 kdemain.cpp:279 kdemain.cpp:281
+#: kdemain.cpp:283
+#, kde-format
+msgid "Platforms & Distributions"
+msgstr "Plattform och distributioner"
+
+#: kdemain.cpp:268
+#, kde-format
+msgid "Sebastian Wiedenroth"
+msgstr "Sebastian Wiedenroth"
+
+#: kdemain.cpp:270
+#, kde-format
+msgid "Tim Sutton"
+msgstr "Tim Sutton"
+
+#: kdemain.cpp:272
+#, kde-format
+msgid "Christian Ehrlicher"
+msgstr "Christian Ehrlicher"
+
+#: kdemain.cpp:274
+#, kde-format
+msgid "Ralf Habacker"
+msgstr "Ralf Habacker"
+
+#: kdemain.cpp:276
+#, kde-format
+msgid "Steffen Joeris"
+msgstr "Steffen Joeris"
+
+#: kdemain.cpp:278
+#, kde-format
+msgid "Marcus Czeslinski"
+msgstr "Marcus Czeslinski"
+
+#: kdemain.cpp:280
+#, kde-format
+msgid "Marcus D. Hanwell"
+msgstr "Marcus D. Hanwell"
+
+#: kdemain.cpp:282
+#, kde-format
+msgid "Chitlesh Goorah"
+msgstr "Chitlesh Goorah"
+
+#: kdemain.cpp:284
+#, kde-format
+msgid "Nuno Pinheiro"
+msgstr "Nuno Pinheiro"
+
+#: kdemain.cpp:285 kdemain.cpp:287
+#, kde-format
+msgid "Artwork"
+msgstr "Grafik"
+
+#: kdemain.cpp:290
+#, kde-format
+msgid "Luis Silva"
+msgstr "Luis Silva"
+
+#: kdemain.cpp:291 kdemain.cpp:293 kdemain.cpp:295 kdemain.cpp:297
+#: kdemain.cpp:299 kdemain.cpp:301 kdemain.cpp:303 kdemain.cpp:305
+#: kdemain.cpp:307 kdemain.cpp:309
+#, kde-format
+msgid "Various Suggestions & Testing"
+msgstr "Diverse förslag och testning"
+
+#: kdemain.cpp:292
+#, kde-format
+msgid "Stefan Jordan"
+msgstr "Stefan Jordan"
+
+#: kdemain.cpp:294
+#, kde-format
+msgid "Robert Scott"
+msgstr "Robert Scott"
+
+#: kdemain.cpp:296
+#, kde-format
+msgid "Lubos Petrovic"
+msgstr "Lubos Petrovic"
+
+#: kdemain.cpp:298
+#, kde-format
+msgid "Benoit Sigoure"
+msgstr "Benoit Sigoure"
+
+#: kdemain.cpp:300
+#, kde-format
+msgid "Martin Konold"
+msgstr "Martin Konold"
+
+#: kdemain.cpp:302
+#, kde-format
+msgid "Matthias Welwarsky"
+msgstr "Matthias Welwarsky"
+
+#: kdemain.cpp:304
+#, kde-format
+msgid "Rainer Endres"
+msgstr "Rainer Endres"
+
+#: kdemain.cpp:306
+#, kde-format
+msgid "Ralf Gesellensetter"
+msgstr "Ralf Gesellensetter"
+
+#: kdemain.cpp:308
+#, kde-format
+msgid "Tim Alder"
+msgstr "Tim Alder"
+
+#: kdemain.cpp:310
+#, kde-format
+msgid "John Layt"
+msgstr "John Layt"
+
+#: kdemain.cpp:311
+#, kde-format
+msgid ""
+"Special thanks for providing an important source of inspiration by creating "
+"Marble's predecessor \"Kartographer\"."
+msgstr ""
+"Särskilt tack för bidrag av en viktig inspirationskälla genom att ha skapat "
+"Marbles föregångare \"Kartographer\"."
+
+#: kdemain.cpp:327
+#, kde-format
+msgid "Enable debug output"
+msgstr "Aktivera felsökningsutmatning"
+
+#: kdemain.cpp:329
+#, kde-format
+msgid "Display OSM placemarks according to the level selected"
+msgstr "Visa OSM platsmarkörer enligt vald nivå"
+
+#: kdemain.cpp:331
+#, kde-format
+msgid "Make a time measurement to check performance"
+msgstr "Utför en tidmätning för att kontrollera prestanda"
+
+#: kdemain.cpp:333
+#, kde-format
+msgid "Show frame rate"
+msgstr "Visa bildfrekvens"
+
+#: kdemain.cpp:335
+#, kde-format
+msgid "Show tile IDs"
+msgstr "Visa rutidentifierare"
+
+#: kdemain.cpp:337
+#, kde-format
+msgid "Show time spent in each layer"
+msgstr "Visa spenderad tid för varje lager"
+
+#: kdemain.cpp:339
+#, kde-format
+msgid "Use a different directory <directory> which contains map data."
+msgstr "Använd en annan katalog <katalog> som innehåller kartdata."
+
+#: kdemain.cpp:341
+#, kde-format
+msgid "Do not use the interface optimized for small screens"
+msgstr "Använd inte gränssnittet optimerat för små skärmar"
+
+#: kdemain.cpp:342
+#, kde-format
+msgid "Use the interface optimized for small screens"
+msgstr "Använd gränssnittet optimerat för små skärmar"
+
+#: kdemain.cpp:344
+#, kde-format
+msgid "Do not use the interface optimized for high resolutions"
+msgstr "Använd inte gränssnittet optimerat för hög upplösning"
+
+#: kdemain.cpp:345
+#, kde-format
+msgid "Use the interface optimized for high resolutions"
+msgstr "Använd gränssnittet optimerat för hög upplösning"
+
+#: kdemain.cpp:347
+#, kde-format
+msgid "Show map at given lat lon <coordinates>"
+msgstr "Visa karta vid angivna latitud- och longitud <koordinater>"
+
+#: kdemain.cpp:349
+#, kde-format
+msgid "Show map at given geo <uri>"
+msgstr "Visa karta vid angiven geografisk <webbadress>"
+
+#: kdemain.cpp:351
+#, kde-format
+msgid "Set the distance of the observer to the globe (in km)"
+msgstr "Ställ in betraktarens avstånd från globen (i km)"
+
+#: kdemain.cpp:353
+#, kde-format
+msgid "Use map <id> (e.g. \"earth/openstreetmap/openstreetmap.dgml\")"
+msgstr ""
+"Använd kartans <identifikation> (t.ex. \"earth/openstreetmap/openstreetmap."
+"dgml\")"
+
+#: kdemain.cpp:355
+#, kde-format
+msgid "One or more placemark files to be opened"
+msgstr "En eller flera platsmarkeringsfiler att öppna"
+
+#. i18n: ectx: label, entry, group (Time)
+#: marble.kcfg:58
+#, kde-format
+msgid "The date and time of marble clock"
+msgstr "Datum och tid för Marbles klocka"
+
+#. i18n: ectx: label, entry, group (Time)
+#: marble.kcfg:61
+#, kde-format
+msgid "The speed of marble clock"
+msgstr "Hastigheten på Marbles klocka"
+
+#. i18n: ectx: label, entry, group (View)
+#: marble.kcfg:107
+#, kde-format
+msgid "The unit chosen to measure distances."
+msgstr "Enhet vald att mäta avstånd."
+
+#. i18n: ectx: label, entry, group (View)
+#: marble.kcfg:115
+#, kde-format
+msgid "The unit chosen to measure angles."
+msgstr "Enhet vald att mäta vinklar."
+
+#. i18n: ectx: label, entry, group (View)
+#: marble.kcfg:124
+#, kde-format
+msgid "The quality at which a still map gets painted."
+msgstr "Kvaliteten som en stillastående karta ritas med."
+
+#. i18n: ectx: label, entry, group (View)
+#: marble.kcfg:135
+#, kde-format
+msgid "The quality at which an animated map gets painted."
+msgstr "Kvaliteten som en animerad karta ritas med."
+
+#. i18n: ectx: label, entry, group (View)
+#: marble.kcfg:146
+#, kde-format
+msgid "The localization of the labels."
+msgstr "Placeringen av beteckningar."
+
+#. i18n: ectx: label, entry (mapFont), group (View)
+#: marble.kcfg:155
+#, kde-format
+msgid "The general font used on the map."
+msgstr "Allmänt teckensnitt använt på kartan."
+
+#. i18n: ectx: label, entry (lastFileOpenDir), group (View)
+#: marble.kcfg:159
+#, kde-format
+msgid "The last directory that was opened by File->Open."
+msgstr "Den senaste katalogen som öppnades med Arkiv -> Öppna"
+
+#. i18n: ectx: label, entry, group (Navigation)
+#: marble.kcfg:179
+#, kde-format
+msgid "The behaviour of the planet's axis on mouse dragging."
+msgstr "Beteendet hos planetens axel när musen dras."
+
+#. i18n: ectx: label, entry, group (Navigation)
+#: marble.kcfg:187
+#, kde-format
+msgid "The location shown on application startup."
+msgstr "Platsen som visas när programmet startas."
+
+#. i18n: ectx: label, entry, group (Navigation)
+#: marble.kcfg:201
+#, kde-format
+msgid "Display animation on voyage to target."
+msgstr "Visa animering av resan till målet."
+
+#. i18n: ectx: label, entry, group (Navigation)
+#: marble.kcfg:205
+#, kde-format
+msgid "The external OpenStreetMap editor application"
+msgstr "Den externa karteditorn för OpenStreetMap"
+
+#. i18n: ectx: label, entry, group (Cache)
+#: marble.kcfg:211
+#, kde-format
+msgid "Cache for tiles reserved in the physical memory."
+msgstr "Cache för rutor reserveras i fysiskt minne."
+
+#. i18n: ectx: label, entry, group (Cache)
+#: marble.kcfg:217
+#, kde-format
+msgid "Maximum space on the hard disk that can be used to store tiles."
+msgstr "Maximalt utrymme på hårddisken som kan användas för att lagra rutor."
+
+#. i18n: ectx: label, entry (proxyUrl), group (Cache)
+#: marble.kcfg:223
+#, kde-format
+msgid "URL for the proxy server."
+msgstr "Webbadress till proxyservern."
+
+#. i18n: ectx: label, entry, group (Cache)
+#: marble.kcfg:227
+#, kde-format
+msgid "Port for the proxy server."
+msgstr "Port för proxyservern."
+
+#. i18n: ectx: label, entry (proxyUser), group (Cache)
+#: marble.kcfg:233
+#, kde-format
+msgid "Username for authorization."
+msgstr "Användarnamn för behörighetskontroll."
+
+#. i18n: ectx: label, entry (proxyPass), group (Cache)
+#: marble.kcfg:236
+#, kde-format
+msgid "Password for authorization."
+msgstr "Lösenord för behörighetskontroll."
+
+#. i18n: ectx: label, entry (proxyHttp), group (Cache)
+#: marble.kcfg:239
+#, kde-format
+msgid "Proxy type is HTTP"
+msgstr "Proxytyp är HTTP"
+
+#. i18n: ectx: label, entry (proxySocks5), group (Cache)
+#: marble.kcfg:250
+#, kde-format
+msgid "Proxy type is Socks5"
+msgstr "Proxytyp är Socks5"
+
+#. i18n: ectx: label, entry (proxyAuth), group (Cache)
+#: marble.kcfg:254
+#, kde-format
+msgid "Proxy requires Authentication"
+msgstr "Proxy kräver behörighetskontroll"
+
+#. i18n: ectx: label, entry (activePositionTrackingPlugin), group (Plugins)
+#: marble.kcfg:260
+#, kde-format
+msgid "The position tracking plugin used to determine the current location"
+msgstr ""
+"Insticksprogrammet för positionsföljning som används för att bestämma "
+"nuvarande plats"
+
+#: marble_part.cpp:102
+#, kde-format
+msgid "Position: %1"
+msgstr "Position: %1"
+
+#: marble_part.cpp:103
+#, kde-format
+msgid "Altitude: %1"
+msgstr "Höjd: %1"
+
+#: marble_part.cpp:104
+#, kde-format
+msgid "Tile Zoom Level: %1"
+msgstr "Rutornas zoomnivå: %1"
+
+#: marble_part.cpp:105
+#, kde-format
+msgid "Time: %1"
+msgstr "Tid: %1"
+
+#: marble_part.cpp:167
+#, kde-format
+msgid ""
+"Sorry, unable to open '%1':\n"
+"'%2'"
+msgstr ""
+"Kan tyvärr inte öppna '%1':\n"
+"'%2'"
+
+#: marble_part.cpp:168
+#, kde-format
+msgid "File not readable"
+msgstr "Filen är inte läsbar"
+
+#: marble_part.cpp:214
+#, kde-format
+msgid "marble_part"
+msgstr "Marble-delprogram"
+
+#: marble_part.cpp:217
+#, kde-format
+msgid "A Virtual Globe"
+msgstr "En virtuell jordglob"
+
+#: marble_part.cpp:231
+#, kde-format
+msgid "Sorry, unable to open '%1'. The file is not accessible."
+msgstr "Kan tyvärr inte öppna '%1'. Filen är inte tillgänglig."
+
+#: marble_part.cpp:232
+#, kde-format
+msgid "File not accessible"
+msgstr "Filen är inte tillgänglig"
+
+#: marble_part.cpp:253
+#, kde-format
+msgid "All Supported Files"
+msgstr "Alla filer som stöds"
+
+#: marble_part.cpp:259
+#, kde-format
+msgctxt "@title:window"
+msgid "Open File"
+msgstr "Öppna fil"
+
+#: marble_part.cpp:276
+#, kde-format
+msgctxt "@title:window"
+msgid "Export Map"
+msgstr "Exportera karta"
+
+#: marble_part.cpp:277
+#, kde-format
+msgid "Images *.jpg *.png"
+msgstr "Bilder *.jpg *.png"
+
+#: marble_part.cpp:291
+#, kde-format
+msgctxt "Application name"
+msgid "Marble"
+msgstr "Marble"
+
+#: marble_part.cpp:292
+#, kde-format
+msgid "An error occurred while trying to save the file.\n"
+msgstr "Ett fel uppstod vid försök att spara filen.\n"
+
+#: marble_part.cpp:483
+#, kde-format
+msgid "Unnamed"
+msgstr "Namnlös"
+
+#: marble_part.cpp:714
+#, kde-format
+msgctxt "Action for downloading an entire region of a map"
+msgid "Download Region..."
+msgstr "Ladda ner område..."
+
+#: marble_part.cpp:728
+#, kde-format
+msgctxt "Action for saving the map to a file"
+msgid "&Export Map..."
+msgstr "&Exportera karta..."
+
+#: marble_part.cpp:737
+#, kde-format
+msgctxt "Action for toggling offline mode"
+msgid "&Work Offline"
+msgstr "&Arbeta nerkopplad"
+
+#: marble_part.cpp:747
+#, kde-format
+msgctxt "Action for copying the map to the clipboard"
+msgid "&Copy Map"
+msgstr "&Kopiera karta"
+
+#: marble_part.cpp:754
+#, kde-format
+msgctxt "Action for copying the coordinates to the clipboard"
+msgid "C&opy Coordinates"
+msgstr "K&opiera koordinater"
+
+#: marble_part.cpp:762
+#, kde-format
+msgctxt "Action for opening a file"
+msgid "&Open..."
+msgstr "Ö&ppna..."
+
+#: marble_part.cpp:769
+#, kde-format
+msgctxt "Action for downloading maps (GHNS)"
+msgid "Download Maps..."
+msgstr "Ladda ner kartor..."
+
+#: marble_part.cpp:772
+#, kde-format
+msgctxt "Status tip"
+msgid "Download new maps"
+msgstr "Ladda ner nya kartor"
+
+#: marble_part.cpp:778
+#, kde-format
+msgctxt "Action for creating new maps"
+msgid "&Create a New Map..."
+msgstr "&Skapa en ny karta..."
+
+#: marble_part.cpp:783
+#, kde-format
+msgctxt "Status tip"
+msgid "A wizard guides you through the creation of your own map theme."
+msgstr "En guide leder dig igenom processen att skapa ett eget karttema."
+
+#: marble_part.cpp:810
+#, kde-format
+msgctxt "Action for toggling clouds"
+msgid "&Clouds"
+msgstr "&Moln"
+
+#: marble_part.cpp:817
+#, kde-format
+msgctxt "Action for sun control dialog"
+msgid "S&un Control..."
+msgstr "S&olstyrning..."
+
+#: marble_part.cpp:827
+#, kde-format
+msgctxt "Action for time control dialog"
+msgid "&Time Control..."
+msgstr "&Tidstyrning..."
+
+#: marble_part.cpp:836
+#, kde-format
+msgctxt "Action for locking float items on the map"
+msgid "Lock Position"
+msgstr "Lås position"
+
+#: marble_part.cpp:847
+#, kde-format
+msgid "Show Shadow"
+msgstr "Visa skugga"
+
+#: marble_part.cpp:850
+#, kde-format
+msgid "Hide Shadow"
+msgstr "Dölj skugga"
+
+#: marble_part.cpp:851
+#, kde-format
+msgid "Shows and hides the shadow of the sun"
+msgstr "Visar och döljer solens skugga"
+
+#: marble_part.cpp:855
+#, kde-format
+msgid "Show sun icon on the Sub-Solar Point"
+msgstr "Visa solikon på platsen där solen står i zenit"
+
+#: marble_part.cpp:857
+#, kde-format
+msgid "Hide sun icon on the Sub-Solar Point"
+msgstr "Dölj solikon på platsen där solen står i zenit"
+
+#: marble_part.cpp:858
+#, kde-format
+msgid "Show sun icon on the sub-solar point"
+msgstr "Visa solikon på platsen där solen står i zenit"
+
+#: marble_part.cpp:863
+#, kde-format
+msgid "Lock Globe to the Sub-Solar Point"
+msgstr "Lås globen till platsen där solen står i zenit"
+
+#: marble_part.cpp:865
+#, kde-format
+msgid "Unlock Globe to the Sub-Solar Point"
+msgstr "Lås inte globen till platsen där solen står i zenit"
+
+#: marble_part.cpp:866
+#, kde-format
+msgid "Lock globe to the sub-solar point"
+msgstr "Lås globen till platsen där solen står i zenit"
+
+#: marble_part.cpp:881
+#, kde-format
+msgctxt "Add Bookmark"
+msgid "Add &Bookmark..."
+msgstr "Lägg till &bokmärke..."
+
+#: marble_part.cpp:889
+#, kde-format
+msgctxt "Show Bookmarks"
+msgid "Show &Bookmarks"
+msgstr "Visa &bokmärken"
+
+#: marble_part.cpp:890
+#, kde-format
+msgid "Show or hide bookmarks in the map"
+msgstr "Visa eller dölj bokmärken på kartan"
+
+#: marble_part.cpp:898
+#, kde-format
+msgid "&Set Home Location"
+msgstr "&Ställ in hemplats"
+
+#: marble_part.cpp:905
+#, kde-format
+msgctxt "Manage Bookmarks"
+msgid "&Manage Bookmarks..."
+msgstr "&Hantera bokmärken..."
+
+#: marble_part.cpp:917
+#, kde-format
+msgctxt "Edit the map in an external application"
+msgid "&Edit Map..."
+msgstr "&Redigera karta..."
+
+#: marble_part.cpp:925
+#, kde-format
+msgid "&Record Movie"
+msgstr "Spela in &film"
+
+#: marble_part.cpp:927
+#, kde-format
+msgid "Records a movie of the globe"
+msgstr "Spelar in en film av globen"
+
+#: marble_part.cpp:933
+#, kde-format
+msgid "&Stop Recording"
+msgstr "&Stoppa inspelning"
+
+#: marble_part.cpp:935
+#, kde-format
+msgid "Stop recording a movie of the globe"
+msgstr "Stoppa filminspelningen av globen"
+
+#: marble_part.cpp:1287
+#, kde-format
+msgctxt "Action for toggling"
+msgid "Show Position"
+msgstr "Visa position"
+
+#: marble_part.cpp:1289
+#, kde-format
+msgctxt "Action for toggling"
+msgid "Show Date and Time"
+msgstr "Visa datum och tid"
+
+#: marble_part.cpp:1291
+#, kde-format
+msgctxt "Action for toggling"
+msgid "Show Altitude"
+msgstr "Visa höjd"
+
+#: marble_part.cpp:1294
+#, kde-format
+msgctxt "Action for toggling"
+msgid "Show Tile Zoom Level"
+msgstr "Visa rutornas zoomnivå"
+
+#: marble_part.cpp:1296
+#, kde-format
+msgctxt "Action for toggling"
+msgid "Show Download Progress Bar"
+msgstr "Visa förloppsrad vid nerladdning"
+
+#: marble_part.cpp:1391
+#, kde-format
+msgid "View"
+msgstr "Visa"
+
+#: marble_part.cpp:1402
+#, kde-format
+msgid "Navigation"
+msgstr "Navigering"
+
+#: marble_part.cpp:1413
+#, kde-format
+msgid "Cache & Proxy"
+msgstr "Cache och proxy"
+
+#: marble_part.cpp:1426
+#, kde-format
+msgid "Date & Time"
+msgstr "Datum och tid"
+
+#: marble_part.cpp:1434
+#, kde-format
+msgid "Synchronization"
+msgstr "Synkronisering"
+
+#: marble_part.cpp:1447
+#, kde-format
+msgid "Routing"
+msgstr "Vägbeskrivning"
+
+#: marble_part.cpp:1455
+#, kde-format
+msgid "Plugins"
+msgstr "Insticksprogram"
+
+#. i18n: ectx: Menu (file)
+#: marble_part.rc:6 marbleui.rc:5
+#, kde-format
+msgid "&File"
+msgstr "&Arkiv"
+
+#. i18n: ectx: Menu (edit)
+#: marble_part.rc:21 marbleui.rc:14
+#, kde-format
+msgid "&Edit"
+msgstr "&Redigera"
+
+#. i18n: ectx: Menu (view)
+#: marble_part.rc:31 marbleui.rc:18
+#, kde-format
+msgid "&View"
+msgstr "&Visa"
+
+#. i18n: ectx: Menu (infoboxes)
+#: marble_part.rc:36
+#, kde-format
+msgid "&Info Boxes"
+msgstr "&Informationsrutor"
+
+#. i18n: ectx: Menu (onlineservices)
+#: marble_part.rc:42
+#, kde-format
+msgid "&Online Services"
+msgstr "&Nättjänster"
+
+#. i18n: ectx: Menu (settings)
+#: marble_part.rc:55 marbleui.rc:31
+#, kde-format
+msgid "&Settings"
+msgstr "In&ställningar"
+
+#. i18n: ectx: Menu (panels)
+#: marble_part.rc:59
+#, kde-format
+msgid "&Panels"
+msgstr "&Paneler"
+
+#. i18n: ectx: Menu (viewSize)
+#: marble_part.rc:65
+#, kde-format
+msgid "&View Size"
+msgstr "&Visningsstorlek"
+
+#. i18n: ectx: Menu (bookmarks)
+#: marble_part.rc:73 marbleui.rc:29
+#, kde-format
+msgid "&Bookmarks"
+msgstr "&Bokmärken"
+
+#. i18n: ectx: ToolBar (mainToolBar)
+#: marble_part.rc:84 marbleui.rc:36
+#, kde-format
+msgid "Main Toolbar"
+msgstr "Huvudverktygsrad"
+
+#. i18n: ectx: ToolBar (pluginToolBar)
+#: marble_part.rc:97
+#, kde-format
+msgid "Edit Toolbar"
+msgstr "Redigeringsverktygsrad"
+
+#~ msgid "The graphics system that is used by Qt to render the graphics."
+#~ msgstr "Grafiksystem som används av Qt för att rita grafiken."
+
+#~ msgid "Native"
+#~ msgstr "Inbyggd"
+
+#~ msgid "Native (X11)"
+#~ msgstr "Inbyggd (X11)"
+
+#~ msgid "Native (Mac OS X Core Graphics)"
+#~ msgstr "Inbyggd (Mac OS X-kärngrafik)"
+
+#~ msgid ""
+#~ "You have decided to run Marble with a different graphics system.\n"
+#~ "For this change to become effective, Marble has to be restarted.\n"
+#~ "Please close the application and start Marble again."
+#~ msgstr ""
+#~ "Du har bestämt dig för att köra Marble med ett annat grafiksystem.\n"
+#~ "För att ändringen ska få effekt, måste Marble startas om.\n"
+#~ "Stäng programmet och starta Marble igen."
+
+#~ msgid "Graphics System Change"
+#~ msgstr "Ändring av grafiksystem"
+
+#~ msgid "Night Sky"
+#~ msgstr "Natthimmel"
+
+#~ msgid ""
+#~ "<p>The <i>night sky</i>.</p><p>Displays the stars and constellations at "
+#~ "night.</p>"
+#~ msgstr ""
+#~ "<p><i>Natthimlen</i>.</p><p>Visar stjärnorna och stjärnbilderna på natten."
+#~ "</p>"
+
+#~ msgid "Mountain"
+#~ msgstr "Berg"
+
+#~ msgid "Volcano"
+#~ msgstr "Vulkan"
+
+#~ msgid "Geographic Pole"
+#~ msgstr "Geografisk pol"
+
+#~ msgid "Magnetic Pole"
+#~ msgstr "Magnetisk pol"
+
+#~ msgid "Airport"
+#~ msgstr "Flygplats"
+
+#~ msgid "Shipwreck"
+#~ msgstr "Vrak"
+
+#~ msgid "Astronomical Observatory"
+#~ msgstr "Astronomiskt observatorium"
+
+#~ msgid ""
+#~ "<p>The moon.</p><p>The map is based on data from the Clementine Moon "
+#~ "mission (UVVIS Basemap Mosaic). Credits: NASA/SDIO, Courtesy <a href="
+#~ "\"http://astrogeology.usgs.gov\">USGS Astrogeology Research Program</a></"
+#~ "p>"
+#~ msgstr ""
+#~ "<p>Månen.</p><p>Kartan är baserad på data från Clementines månutforskning "
+#~ "(mosaik från UVVIS grundkarta). Tack till: NASA/SDIO, Med benäget "
+#~ "tillstånd av <a href=\"http://astrogeology.usgs.gov\">USGS "
+#~ "astrogeologiska forskningsprogram</a></p>"
+
+#~ msgid "Explore the Moon"
+#~ msgstr "Utforska månen"
+
+#~ msgid "Landing Sites"
+#~ msgstr "Landningsplatser"
+
+#~ msgid "Craters"
+#~ msgstr "Kratrar"
+
+#~ msgid "Maria"
+#~ msgstr "Hav (maria)"
+
+#~ msgid "Other features"
+#~ msgstr "Övriga kännetecken"
+
+#~ msgid ""
+#~ "<a href=\"tour://moon/clementine/tour.kml\">Play a tour of different "
+#~ "landing sites.</a>"
+#~ msgstr ""
+#~ "<a href=\"tour://moon/clementine/tour.kml\">Visa en tur av olika "
+#~ "landningsplatser.</a>"
+
+#~ msgid "Manned landing site"
+#~ msgstr "Bemannad landningsplats"
+
+#~ msgid "Robotic rover"
+#~ msgstr "Månrobot"
+
+#~ msgid "Unmanned soft landing"
+#~ msgstr "Obemannad mjuklandning"
+
+#~ msgid "Unmanned hard landing"
+#~ msgstr "Obemannad hård landning"
+
+#~ msgid "Crater, impact crater"
+#~ msgstr "Krater, nedslagskrater"
+
+#~ msgid "Mons, mountain"
+#~ msgstr "Berg (mons)"
+
+#~ msgid "Vallis, valley"
+#~ msgstr "Dalar (vallis)"
+
+#~ msgid "Selenographic Pole"
+#~ msgstr "Selenografisk pol"
+
+#~ msgid "Plain Map"
+#~ msgstr "Vanlig karta"
+
+#~ msgid ""
+#~ "<p>A <i>plain map</i>.</p><p>It uses vector lines to mark coastlines and "
+#~ "country borders, etc...</p>"
+#~ msgstr ""
+#~ "<p>En <i>vanlig karta</i>.</p><p>Den använder vektorlinjer för att "
+#~ "markera kustlinjer, landsgränser, etc.</p>"
+
+#~ msgid "Urban Areas"
+#~ msgstr "Stadsområden"
+
+#~ msgid "Boundaries"
+#~ msgstr "Gränser"
+
+#~ msgid "Water Bodies"
+#~ msgstr "Vattensamlingar"
+
+#~ msgid "Ice and Glaciers"
+#~ msgstr "Is och glaciärer"
+
+#~ msgid "International"
+#~ msgstr "Internationell"
+
+#~ msgid "State"
+#~ msgstr "Stat"
+
+#~ msgid "Disputed Areas"
+#~ msgstr "Omstridda områden"
+
+#~ msgid "Maritime Borders"
+#~ msgstr "Havsgränser"
+
+#~ msgid "Lake"
+#~ msgstr "Insjö"
+
+#~ msgid "Historic Lake"
+#~ msgstr "Historisk insjö"
+
+#~ msgid "Playa"
+#~ msgstr "Strand"
+
+#~ msgid "River"
+#~ msgstr "Flod"
+
+#~ msgid "Glaciers"
+#~ msgstr "Glaciärer"
+
+#~ msgid "Antarctic Iceshelves"
+#~ msgstr "Antarktisk shelfis"
+
+#~ msgid "Temperature (July)"
+#~ msgstr "Temperatur (juli)"
+
+#~ msgid "A map which shows the average temperature in July."
+#~ msgstr "En karta som visar medeltemperaturen i juli."
+
+#~ msgid "42&deg;C"
+#~ msgstr "42&deg;C"
+
+#~ msgid "32&deg;C"
+#~ msgstr "32&deg;C"
+
+#~ msgid "23&deg;C"
+#~ msgstr "23&deg;C"
+
+#~ msgid "12&deg;C"
+#~ msgstr "12&deg;C"
+
+#~ msgid "1&deg;C"
+#~ msgstr "1&deg;C"
+
+#~ msgid "-10&deg;C"
+#~ msgstr "-10&deg;C"
+
+#~ msgid "-21&deg;C"
+#~ msgstr "-21&deg;C"
+
+#~ msgid "-32&deg;C"
+#~ msgstr "-32&deg;C"
+
+#~ msgid "-41&deg;C"
+#~ msgstr "-41&deg;C"
+
+#~ msgid "-69&deg;C"
+#~ msgstr "-69&deg;C"
+
+#~ msgid "Earth at Night"
+#~ msgstr "Jorden på natten"
+
+#~ msgid ""
+#~ "This image of <i>Earth's city lights</i> was created with data from the "
+#~ "Defense Meteorological Satellite Program (DMSP) Operational Linescan "
+#~ "System (OLS)."
+#~ msgstr ""
+#~ "Den här bilden av <i>jordens stadsljus</i> skapades med data från det "
+#~ "operationella linjeavsökningssystemet (OLS) i försvarets meterologiska "
+#~ "satellitprogram (DMSP)."
+
+#~ msgid "Surface"
+#~ msgstr "Yta"
+
+#~ msgid "Light terrain"
+#~ msgstr "Ljus terräng"
+
+#~ msgid "Dark terrain"
+#~ msgstr "Mörk terräng"
+
+#~ msgid "Water"
+#~ msgstr "Vatten"
+
+#~ msgid "Atlas"
+#~ msgstr "Atlas"
+
+#~ msgid ""
+#~ "<p>A <i>classic topographic map</i>.</p><p>It uses vector lines to mark "
+#~ "coastlines, country borders etc. and bitmap graphics to create the height "
+#~ "relief.</p>"
+#~ msgstr ""
+#~ "<p>En <i>klassisk topografisk karta</i>.</p><p>Den använder vektorlinjer "
+#~ "för att markera kustlinjer, landsgränser, etc., och punktavbildad grafik "
+#~ "för att skapa höjdreliefen.</p>"
+
+#~ msgid "Relief"
+#~ msgstr "Konturer"
+
+#~ msgid "Elevation"
+#~ msgstr "Höjd"
+
+#~ msgid "7000 m"
+#~ msgstr "7000 m"
+
+#~ msgid "5000 m"
+#~ msgstr "5000 m"
+
+#~ msgid "3500 m"
+#~ msgstr "3500 m"
+
+#~ msgid "2000 m"
+#~ msgstr "2000 m"
+
+#~ msgid "1000 m"
+#~ msgstr "1000 m"
+
+#~ msgid "500 m"
+#~ msgstr "500 m"
+
+#~ msgid "200 m"
+#~ msgstr "200 m"
+
+#~ msgid "50 m"
+#~ msgstr "50 m"
+
+#~ msgid "0 m"
+#~ msgstr "0 m"
+
+#~ msgid "0 m (Water)"
+#~ msgstr "0 m (Vatten)"
+
+#~ msgid "-50 m"
+#~ msgstr "-50 m"
+
+#~ msgid "-200 m"
+#~ msgstr "-200 m"
+
+#~ msgid "-2000 m"
+#~ msgstr "-2000 m"
+
+#~ msgid "-4000 m"
+#~ msgstr "-4000 m"
+
+#~ msgid "-6500 m"
+#~ msgstr "-6500 m"
+
+#~ msgid "-11000 m"
+#~ msgstr "-11000 m"
+
+#~ msgid "Temperature (December)"
+#~ msgstr "Temperatur (december)"
+
+#~ msgid "A map which shows the average temperature in December."
+#~ msgstr "En karta som visar medeltemperatur i december."
+
+#~ msgid "Vector OSM"
+#~ msgstr "Vektor-OSM"
+
+#~ msgid ""
+#~ "<p>A <i>global roadmap</i> created by the OpenStreetMap (OSM) project.</"
+#~ "p><p>OSM is an open community which creates free editable maps. The OSM "
+#~ "data was rendered using Mapnik.</p>"
+#~ msgstr ""
+#~ "<p>En <i>världsomfattande vägkarta</i> skapad av projektet OpenStreetMap "
+#~ "(OSM).</p><p>OSM är en öppen gemenskap som skapar fria redigerbara "
+#~ "kartor. Data från OSM är återgiven med användning av Mapnik.</p>"
+
+#~ msgid "OSM Bitmap Tiles"
+#~ msgstr "OSM-bildpunktsavbildningsrutor"
+
+#~ msgid "Explore the Earth"
+#~ msgstr "Utforska jorden"
+
+#~ msgid "Hillshading"
+#~ msgstr "Skuggning av kullar"
+
+#~ msgid "Transportation"
+#~ msgstr "Transport"
+
+#~ msgid "Areas"
+#~ msgstr "Områden"
+
+#~ msgid "Education"
+#~ msgstr "Utbildning"
+
+#~ msgid "Financial"
+#~ msgstr "Finans"
+
+#~ msgid "Healthcare"
+#~ msgstr "Sjukvård"
+
+#~ msgid "Entertainment"
+#~ msgstr "Underhållning"
+
+#~ msgid "Public Buildings"
+#~ msgstr "Offentliga byggnader"
+
+#~ msgid "Accommodation"
+#~ msgstr "Boende"
+
+#~ msgid "Emergency"
+#~ msgstr "Nödfall"
+
+#~ msgid "Historic"
+#~ msgstr "Minnesmärke"
+
+#~ msgid "Food and Drinks"
+#~ msgstr "Mat och dryck"
+
+#~ msgid "Shop"
+#~ msgstr "Affär"
+
+#~ msgid ""
+#~ "<a href=\"tour://earth/openstreetmap/tour.kml\">Play a tour of popular "
+#~ "places.</a>"
+#~ msgstr ""
+#~ "<a href=\"tour://earth/openstreetmap/tour.kml\">Visa en tur av populära "
+#~ "platser.</a>"
+
+#~ msgid "Motorway"
+#~ msgstr "Motorväg"
+
+#~ msgid "Trunk road"
+#~ msgstr "Motortrafikled"
+
+#~ msgid "Primary road"
+#~ msgstr "Huvudväg"
+
+#~ msgid "Secondary road"
+#~ msgstr "Mindre väg"
+
+#~ msgid "Unclassified road"
+#~ msgstr "Enskild väg"
+
+#~ msgid "Unsurfaced road"
+#~ msgstr "Grusväg"
+
+#~ msgid "Track"
+#~ msgstr "Bruksväg"
+
+#~ msgid "Byway"
+#~ msgstr "Cykelväg"
+
+#~ msgid "Bridleway"
+#~ msgstr "Större gångstig"
+
+#~ msgid "Cycleway"
+#~ msgstr "Cykelbana"
+
+#~ msgid "Footway"
+#~ msgstr "Gångstig"
+
+#~ msgid "Railway station"
+#~ msgstr "Järnvägsstation"
+
+#~ msgid "Railway"
+#~ msgstr "Järnväg"
+
+#~ msgid "Subway"
+#~ msgstr "Tunnelbana"
+
+#~ msgid "Lightrail, tram"
+#~ msgstr "Pendeltåg, spårvagn"
+
+#~ msgid "Airport runway, taxiway"
+#~ msgstr "Landningsbana, taxibana"
+
+#~ msgid "Airport apron, terminal"
+#~ msgstr "Flygplatsplatta, terminal"
+
+#~ msgid "Administrative boundary"
+#~ msgstr "Administrativ gräns"
+
+#~ msgid "Bridge"
+#~ msgstr "Bro"
+
+#~ msgid "Tunnel"
+#~ msgstr "Tunnel"
+
+#~ msgid "Forest"
+#~ msgstr "Kulturskog"
+
+#~ msgid "Wood"
+#~ msgstr "Naturskog"
+
+#~ msgid "Golf course"
+#~ msgstr "Golfbana"
+
+#~ msgid "Park"
+#~ msgstr "Park"
+
+#~ msgid "Residential Area"
+#~ msgstr "Bostadsområde"
+
+#~ msgid "Tourist attraction"
+#~ msgstr "Turistattraktion"
+
+#~ msgid "Common, meadow"
+#~ msgstr "Allmänning, äng"
+
+#~ msgid "Retail area"
+#~ msgstr "Detaljhandelsområde"
+
+#~ msgid "Industrial Area"
+#~ msgstr "Industriområde"
+
+#~ msgid "Commercial Area"
+#~ msgstr "Handelsområde"
+
+#~ msgid "Heathland"
+#~ msgstr "Hedmark"
+
+#~ msgid "Lake, reservoir"
+#~ msgstr "Sjö, reservoar"
+
+#~ msgid "Farm"
+#~ msgstr "Jordbruk"
+
+#~ msgid "Brownfield site"
+#~ msgstr "Tidigare exploaterad mark"
+
+#~ msgid "Cemetery"
+#~ msgstr "Begravningsplats"
+
+#~ msgid "Allotments"
+#~ msgstr "Kolonilott"
+
+#~ msgid "Sports pitch"
+#~ msgstr "Idrottsplan"
+
+#~ msgid "Sports centre"
+#~ msgstr "Sportanläggning"
+
+#~ msgid "Nature reserve"
+#~ msgstr "Naturreservat"
+
+#~ msgid "Military area"
+#~ msgstr "Militärområde"
+
+#~ msgid "School, university"
+#~ msgstr "Skola, universitet"
+
+#~ msgid "Significant Building"
+#~ msgstr "Betydande byggnad"
+
+#~ msgid "Summit, peak"
+#~ msgstr "Bergstopp, höjd"
+
+#~ msgid "College"
+#~ msgstr "Högskola"
+
+#~ msgid "Kindergarten"
+#~ msgstr "Daghem"
+
+#~ msgid "Library"
+#~ msgstr "Bibliotek"
+
+#~ msgid "School"
+#~ msgstr "Skola"
+
+#~ msgid "University"
+#~ msgstr "Universitet"
+
+#~ msgid "ATM"
+#~ msgstr "Bankomat"
+
+#~ msgid "Bank"
+#~ msgstr "Bank"
+
+#~ msgid "Bureau de change"
+#~ msgstr "Växlingskontor"
+
+#~ msgid "Dentist"
+#~ msgstr "Tandläkare"
+
+#~ msgid "Doctors"
+#~ msgstr "Läkare"
+
+#~ msgid "Pharmacy"
+#~ msgstr "Apotek"
+
+#~ msgid "Veterinary"
+#~ msgstr "Veterinär"
+
+#~ msgid "Cinema"
+#~ msgstr "Biograf"
+
+#~ msgid "Theatre"
+#~ msgstr "Teater"
+
+#~ msgid "Court"
+#~ msgstr "Domstol"
+
+#~ msgid "Embassy"
+#~ msgstr "Ambassad"
+
+#~ msgid "Church"
+#~ msgstr "Kyrka"
+
+#~ msgid "Playground"
+#~ msgstr "Lekplats"
+
+#~ msgid "Place of worship"
+#~ msgstr "Religiös byggnad"
+
+#~ msgid "Post office"
+#~ msgstr "Postkontor"
+
+#~ msgid "Public building"
+#~ msgstr "Offentlig byggnad"
+
+#~ msgid "Toilets"
+#~ msgstr "Toaletter"
+
+#~ msgid "Hotel"
+#~ msgstr "Hotell"
+
+#~ msgid "Motel"
+#~ msgstr "Motell"
+
+#~ msgid "Hospital"
+#~ msgstr "Sjukhus"
+
+#~ msgid "Fire station"
+#~ msgstr "Brandstation"
+
+#~ msgid "Monument"
+#~ msgstr "Monument"
+
+#~ msgid "Ruins"
+#~ msgstr "Ruiner"
+
+#~ msgid "Bar"
+#~ msgstr "Bar"
+
+#~ msgid "Biergarten"
+#~ msgstr "Ölträdgård"
+
+#~ msgid "Cafe"
+#~ msgstr "Kafé"
+
+#~ msgid "Drinking water"
+#~ msgstr "Dricksvatten"
+
+#~ msgid "Fast Food"
+#~ msgstr "Snabbmat"
+
+#~ msgid "Ice Cream"
+#~ msgstr "Glass"
+
+#~ msgid "Pub"
+#~ msgstr "Pub"
+
+#~ msgid "Restaurant"
+#~ msgstr "Restaurant"
+
+#~ msgid "Alcohol"
+#~ msgstr "Alkohol"
+
+#~ msgid "Bakery"
+#~ msgstr "Bageri"
+
+#~ msgid "Books"
+#~ msgstr "Böcker"
+
+#~ msgid "Car"
+#~ msgstr "Bil"
+
+#~ msgid "Clothes"
+#~ msgstr "Kläder"
+
+#~ msgid "Convenience"
+#~ msgstr "Närbutik"
+
+#~ msgid "Gas"
+#~ msgstr "Bensin"
+
+#~ msgid "Gift"
+#~ msgstr "Gåvor"
+
+#~ msgid "Precipitation (July)"
+#~ msgstr "Nederbörd (juli)"
+
+#~ msgid ""
+#~ "A map which shows the average precipitation (rain/snow/hail/etc) in July."
+#~ msgstr "En karta som visar medelnederbörden (regn, snö, hagel etc.) i juli."
+
+#~ msgid "Precipitation"
+#~ msgstr "Nederbörd"
+
+#~ msgid "0 mm"
+#~ msgstr "0 mm"
+
+#~ msgid "10 mm"
+#~ msgstr "10 mm"
+
+#~ msgid "40 mm"
+#~ msgstr "40 mm"
+
+#~ msgid "63 mm"
+#~ msgstr "63 mm"
+
+#~ msgid "89 mm"
+#~ msgstr "89 mm"
+
+#~ msgid "127 mm"
+#~ msgstr "127 mm"
+
+#~ msgid "256 mm"
+#~ msgstr "256 mm"
+
+#~ msgid "512 mm"
+#~ msgstr "512 mm"
+
+#~ msgid "1024 mm or more"
+#~ msgstr "1024 mm eller mer"
+
+#~ msgid "Empty globe"
+#~ msgstr "Tom glob"
+
+#~ msgid ""
+#~ "<p>An <i>empty globe</i> used as a base to load and view .osm files "
+#~ "(offline maps).</p>"
+#~ msgstr ""
+#~ "<p>En <i>tom glob</i> använd som en grund för att läsa in och betrakta ."
+#~ "osm-filer (lokala kartor).</p>"
+
+#~ msgid "Satellite View"
+#~ msgstr "Satellitvy"
+
+#~ msgid ""
+#~ "<p>Earth as seen from Space.</p><p>The map is based on NASA's beautiful "
+#~ "\"Blue Marble Next Generation\" pictures. Credits: NASA's Earth "
+#~ "Observatory</p>"
+#~ msgstr ""
+#~ "<p>Jorden sedd från rymden.</p><p>Kartan är baserad på NASA:s vackra "
+#~ "bilder \"Blue Marble Next Generation\". Tack till: NASA:s "
+#~ "jordobservatorium</p>"
+
+#~ msgid "Ice"
+#~ msgstr "Is"
+
+#~ msgid "Vegetation"
+#~ msgstr "Vegetation"
+
+#~ msgid "Desert"
+#~ msgstr "Öken"
+
+#~ msgid "Political Map"
+#~ msgstr "Politisk karta"
+
+#~ msgid ""
+#~ "<p>A <i>Political Map</i>.</p><p>The theme displays various countries.</p>"
+#~ msgstr "<p>En <i>politisk karta</i>.</p><p>Temat visar diverse länder.</p>"
+
+#~ msgid "Rivers"
+#~ msgstr "Floder"
+
+#~ msgid "Precipitation (December)"
+#~ msgstr "Nederbörd (december)"
+
+#~ msgid "A map which shows the average precipitation in December."
+#~ msgstr "En karta som visar medelnederbörden i december."
+
+#~ msgid "SRTM Data"
+#~ msgstr "SRTM-data"
+
+#~ msgid "Behaim Globe 1492"
+#~ msgstr "Behaim-jordglob 1492"
+
+#~ msgid ""
+#~ "<p> Martin Behaim's <i>Erdapfel</i> is the oldest existent globe of the "
+#~ "Earth. <i>Credits: Germanisches Nationalmuseum, Nuremberg, License: CC BY-"
+#~ "SA 3.0.</i></p>"
+#~ msgstr ""
+#~ "<p> Martin Behaims <i>Erdapfel</i> är den älsta existerande jordgloben. "
+#~ "<i>Tack till: Germanisches Nationalmuseum, Nüremberg, Licens: CC BY-SA "
+#~ "3.0.</i></p>"
+
+#~ msgid "Places (in German)"
+#~ msgstr "Platser (i Tyskland)"
+
+#~ msgid "Behaim Places"
+#~ msgstr "Behaim-platser"
+
+#~ msgid "Texts and illustrations"
+#~ msgstr "Texter och illustrationer"
+
+#~ msgid "Facsimile drawings"
+#~ msgstr "Faksimil"
+
+#~ msgid "Ravenstein (1908)"
+#~ msgstr "Ravenstein (1908)"
+
+#~ msgid "Ghillany (1853)"
+#~ msgstr "Ghillany (1853)"
+
+#~ msgid "Reference lines"
+#~ msgstr "Referenslinjer"
+
+#~ msgid "Accurate Coastline"
+#~ msgstr "Noggrann kustlinje"
+
+#~ msgid "Historical Map 1689"
+#~ msgstr "Historisk karta från 1689"
+
+#~ msgid ""
+#~ "<i>Historical world map</i> from the year 1689 created by G. van Schagen "
+#~ "in Amsterdam."
+#~ msgstr ""
+#~ "<i>Historisk världskarta</i> från år 1689 skapad av G. van Schagen i "
+#~ "Amsterdam."
+
+#~ msgid "Town"
+#~ msgstr "Stad"
+
+#~ msgid "OpenStreetMap"
+#~ msgstr "OpenStreetMap"
+
+#~ msgid "Clouds"
+#~ msgstr "Moln"
+
+#~ msgid ""
+#~ "A Real Time Cloud Map that gets updated every 3 hours. It uses GOES, "
+#~ "METEOSAT, and GMS satellite imagery downloaded from the Geostationary "
+#~ "Satellite Imagery page at Dundee University.  Credits: Hari Nair, Xplanet "
+#~ "Project"
+#~ msgstr ""
+#~ "Molnlager i realtid som uppdateras var 3:e timme. Det använder GOES,\n"
+#~ "METEOSAT, och GMS satellitbilder som laddats ner från sidan med\n"
+#~ "geostationära satellitbilder vid Universitetet i Dundee.  Tack till:\n"
+#~ "Hari Nair, Xplanetprojektet"
+
+#~ msgid "Marble: Legend"
+#~ msgstr "Marble: Förklaring"
+
+#~ msgid "<a href="
+#~ msgstr "<a href="
+
+#~ msgid "Population:"
+#~ msgstr "Befolkning:"
+
+#~ msgid "&gt; 1&nbsp;000&nbsp;000"
+#~ msgstr "&gt; 1&nbsp;000&nbsp;000"
+
+#~ msgid "&ge; 100&nbsp;000"
+#~ msgstr "&ge; 100&nbsp;000"
+
+#~ msgid "&ge; 10&nbsp;000"
+#~ msgstr "&ge; 10&nbsp;000"
+
+#~ msgid "&lt; 10&nbsp;000"
+#~ msgstr "&lt; 10&nbsp;000"
+
+#~ msgid "<br/>"
+#~ msgstr "<br/>"
+
+#~ msgid "Capitals:"
+#~ msgstr "Huvudstäder:"
+
+#~ msgid "Red:&nbsp;Nation"
+#~ msgstr "Röd:&nbsp;Land"
+
+#~ msgid "Orange:&nbsp;State"
+#~ msgstr "Orange:&nbsp;Stat"
+
+#~ msgid "Yellow:&nbsp;County"
+#~ msgstr "Gul:&nbsp;Provins"
+
+#~ msgid "White:&nbsp;None"
+#~ msgstr "Vit:&nbsp;Ingen"
+
+#~ msgid "<!-- ##customLegendEntries:all## -->"
+#~ msgstr "<!-- ##customLegendEntries:all## -->"
+
+#~ msgid "Marble - Game"
+#~ msgstr "Marble - Spel"
+
+#~ msgid "The Earth"
+#~ msgstr "Jorden"
+
+#~ msgid "The Marble widget displays a virtual globe."
+#~ msgstr "Marble-komponenten visar ett virtuellt klot."
+
+#~ msgid "Navigation Control"
+#~ msgstr "Navigeringskontroll"
+
+#~ msgid "Use this control to navigate."
+#~ msgstr "Använd kontrollen för att navigera."
+
+#~ msgid "Show places"
+#~ msgstr "Visa platser"
+
+#~ msgid "Show relief"
+#~ msgstr "Visa relief"
+
+#~ msgid "Show scale bar"
+#~ msgstr "Visa skala"
+
+#~ msgid "Show borders"
+#~ msgstr "Visa gränser"
+
+#~ msgid "Show ice / snow"
+#~ msgstr "Visa is och snö"
+
+#~ msgid "Show compass"
+#~ msgstr "Visa kompass"
+
+#~ msgid "Show grid"
+#~ msgstr "Visa rutnät"
+
+#~ msgid "Show rivers / lakes"
+#~ msgstr "Visa floder och sjöar"
+
+#~ msgid "Show elevation model"
+#~ msgstr "Visa höjdmodell"
+
+#~ msgid "Coordinates: "
+#~ msgstr "Koordinater: "
+
+#~ msgid "Add link"
+#~ msgstr "Lägg till länk"
+
+#~ msgid "URL:"
+#~ msgstr "Webbadress:"
+
+#~ msgid "Name:"
+#~ msgstr "Namn:"
+
+#~ msgid "Bookmark Manager - Marble"
+#~ msgstr "Bokmärkeshantering - Marble"
+
+#~ msgid "Import Bookmarks..."
+#~ msgstr "Importera bokmärken..."
+
+#~ msgid "Export Bookmarks..."
+#~ msgstr "Exportera bokmärken...."
+
+#~ msgid "Folders"
+#~ msgstr "Kataloger"
+
+#~ msgid "New"
+#~ msgstr "Ny"
+
+#~ msgid "Rename"
+#~ msgstr "Byt namn"
+
+#~ msgid "Delete"
+#~ msgstr "Ta bort"
+
+#~ msgid "Bookmarks"
+#~ msgstr "Bokmärken"
+
+#~ msgid "Edit"
+#~ msgstr "Redigera"
+
+#~ msgid "Cloud Routes"
+#~ msgstr "Färdvägar i molnet"
+
+#~ msgid "No route available."
+#~ msgstr "Ingen färdväg tillgänglig."
+
+#~ msgid "Current Location"
+#~ msgstr "Nuvarande plats"
+
+#~ msgid "Position Tracking"
+#~ msgstr "Positionsföljning"
+
+#~ msgid "Disabled"
+#~ msgstr "Inaktiverad"
+
+#~ msgid "Show Track"
+#~ msgstr "Visa spår"
+
+#~ msgid "Clear Track"
+#~ msgstr "Rensa spår"
+
+#~ msgid "..."
+#~ msgstr "..."
+
+#~ msgid "No position available."
+#~ msgstr "Ingen position tillgänglig."
+
+#~ msgctxt "Select the method to use to recenter your GPS location on map."
+#~ msgid "Select the method to use to re-center your GPS location on map."
+#~ msgstr "Välj metod att centrera din GPS-position på kartan igen "
+
+#~ msgid "Map Adjustment"
+#~ msgstr "Kartjustering"
+
+#~ msgctxt "Disable Auto Recenter"
+#~ msgid "Disabled"
+#~ msgstr "Inaktiverad"
+
+#~ msgctxt "Always keep gps location at the center of the map"
+#~ msgid "Keep at Center"
+#~ msgstr "Behåll centrerad"
+
+#~ msgctxt "Auto center when required"
+#~ msgid "When required"
+#~ msgstr "Vid behov"
+
+#~ msgctxt "Auto Zoom to appropriate zoom level"
+#~ msgid "Auto Zoom to appropriate zoom level"
+#~ msgstr "Zooma automatiskt till lämplig zoomnivå"
+
+#~ msgid "Auto Zoom"
+#~ msgstr "Zooma automatiskt"
+
+#~ msgid "Data Migration"
+#~ msgstr "Dataöverföring"
+
+#~ msgid ""
+#~ "Marble has found map data stored by a previous Marble version.<br/>Should "
+#~ "this data get converted so that it can be used by the current version?"
+#~ msgstr ""
+#~ "Marble har hittat kartinformation lagrad av en tidigare version av Marble."
+#~ "<br/>Ska informationen konverteras så att den kan användas av den "
+#~ "nuvarande versionen?"
+
+#~ msgid "Edit Bookmark - Marble"
+#~ msgstr "Redigera bokmärke - Marble"
+
+#~ msgid "&Description"
+#~ msgstr "&Beskrivning"
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<table border=\"0\" style=\"-qt-table-type: root; margin-top:4px; margin-"
+#~ "bottom:4px; margin-left:4px; margin-right:4px;\">\n"
+#~ "<tr>\n"
+#~ "<td style=\"border: none;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-family:'Ubuntu';\"><br /></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-family:'Ubuntu';\"><br /></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-family:'Ubuntu';\"><br /></p></td></tr></table></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<table border=\"0\" style=\"-qt-table-type: root; margin-top:4px; margin-"
+#~ "bottom:4px; margin-left:4px; margin-right:4px;\">\n"
+#~ "<tr>\n"
+#~ "<td style=\"border: none;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-family:'Ubuntu';\"><br /></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-family:'Ubuntu';\"><br /></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-family:'Ubuntu';\"><br /></p></td></tr></table></body></html>"
+
+#~ msgid "&Folder"
+#~ msgstr "&Katalog"
+
+#~ msgid "&Add Folder"
+#~ msgstr "&Lägg till katalog"
+
+#~ msgid "Edit placemark"
+#~ msgstr "Redigera platsmarkering"
+
+#~ msgid "Description"
+#~ msgstr "Beskrivning"
+
+#~ msgid "Show Balloon Popup"
+#~ msgstr "Visa meddelanderuta"
+
+#~ msgid "Style, Color"
+#~ msgstr "Stil, färg"
+
+#~ msgid "Label"
+#~ msgstr "Beteckning"
+
+#~ msgid "Color:"
+#~ msgstr "Färg:"
+
+#~ msgid "Scale:"
+#~ msgstr "Skala:"
+
+#~ msgid "Icon"
+#~ msgstr "Ikon"
+
+#~ msgid "Show placemark"
+#~ msgstr "Visa platsmarkering"
+
+#~ msgid "Bold"
+#~ msgstr "Fetstil"
+
+#~ msgid "Italics"
+#~ msgstr "Kursiv"
+
+#~ msgid "Underlined"
+#~ msgstr "Understreck"
+
+#~ msgid "Add image"
+#~ msgstr "Lägg till bild"
+
+#~ msgid "Elevation:"
+#~ msgstr "Höjd:"
+
+#~ msgid " m"
+#~ msgstr " m"
+
+#~ msgid "above sea level"
+#~ msgstr "över havet"
+
+#~ msgid "External Map Editor Selection"
+#~ msgstr "Val av extern karteditor"
+
+#~ msgid "External Map Editor"
+#~ msgstr "Extern karteditor"
+
+#~ msgid "Web browser (iD)"
+#~ msgstr "Webbläsare (iD)"
+
+#~ msgid "Merkaartor"
+#~ msgstr "Merkaartor"
+
+#~ msgid "JOSM"
+#~ msgstr "JOSM"
+
+#~ msgid ""
+#~ "Deactivate to be prompted for a map editor selection next time again. "
+#~ "Otherwise, your choice is remembered and will be used automatically in "
+#~ "the future. If you want to alter the default map editor later, you can do "
+#~ "so in the Marble Settings."
+#~ msgstr ""
+#~ "Inaktivera för att bli tillfrågad om val av karteditor igen nästa gång. "
+#~ "Annars blir ditt val ihågkommet, och används automatiskt i framtiden. Om "
+#~ "du senare vill ändra standardvärdet för karteditorn, kan du göra det i "
+#~ "Marbles inställningar."
+
+#~ msgid "Make my selection the default map editor"
+#~ msgstr "Gör mit val till standardvärde för karteditor"
+
+#~ msgid "Editor Details"
+#~ msgstr "Detaljinformation om editor"
+
+#~ msgid "Editor Preview"
+#~ msgstr "Förhandsgranskning av editor"
+
+#~ msgid ""
+#~ "iD is an OpenStreetMap editor for quick editing tasks and beginners. It "
+#~ "requires a web browser."
+#~ msgstr ""
+#~ "iD är en editor för OpenStreetMap för snabbredigering och nybörjare. Den "
+#~ "kräver en webbläsare."
+
+#~ msgid "File View"
+#~ msgstr "Filvy"
+
+#~ msgid "&Save"
+#~ msgstr "&Spara"
+
+#~ msgid "&Close"
+#~ msgstr "Stän&g"
+
+#~ msgid "Formatted text"
+#~ msgstr "Formaterad text"
+
+#~ msgid "6"
+#~ msgstr "6"
+
+#~ msgid "8"
+#~ msgstr "8"
+
+#~ msgid "9"
+#~ msgstr "9"
+
+#~ msgid "10"
+#~ msgstr "10"
+
+#~ msgid "11"
+#~ msgstr "11"
+
+#~ msgid "12"
+#~ msgstr "12"
+
+#~ msgid "14"
+#~ msgstr "14"
+
+#~ msgid "16"
+#~ msgstr "16"
+
+#~ msgid "18"
+#~ msgstr "18"
+
+#~ msgid "20"
+#~ msgstr "20"
+
+#~ msgid "24"
+#~ msgstr "24"
+
+#~ msgid "36"
+#~ msgstr "36"
+
+#~ msgid "48"
+#~ msgstr "48"
+
+#~ msgid "72"
+#~ msgstr "72"
+
+#~ msgid "96"
+#~ msgstr "96"
+
+#~ msgid "toolBar"
+#~ msgstr "verktygsrad"
+
+#~ msgid "Color"
+#~ msgstr "Färg"
+
+#~ msgid "Go To..."
+#~ msgstr "Gå till..."
+
+#~ msgid ""
+#~ "Enter a search term and press Enter. <a href=\"http://userbase.kde.org/"
+#~ "Marble/Search\">Details...</a>"
+#~ msgstr ""
+#~ "Ange ett sökbegrepp och tryck på returtangenten. <a href=\"http://"
+#~ "userbase.kde.org/Marble/Search\">Detaljinformation...</a>"
+
+#~ msgid "Browse"
+#~ msgstr "Bläddra"
+
+#~ msgid "Search"
+#~ msgstr "Sök"
+
+#~ msgid "Select a geographic region"
+#~ msgstr "Välj ett geografiskt område"
+
+#~ msgid "Northern Latitude"
+#~ msgstr "Norrlatitud"
+
+#~ msgid "°"
+#~ msgstr "°"
+
+#~ msgid "&N"
+#~ msgstr "&N"
+
+#~ msgid "Western Longitude"
+#~ msgstr "Västlongitud"
+
+#~ msgid "&W"
+#~ msgstr "&V"
+
+#~ msgid "Eastern Longitude"
+#~ msgstr "Östlongitud"
+
+#~ msgid "&E"
+#~ msgstr "&E"
+
+#~ msgid "Southern Latitude"
+#~ msgstr "Sydlatitud"
+
+#~ msgid "&S"
+#~ msgstr "&S"
+
+#~ msgid "′"
+#~ msgstr "′"
+
+#~ msgid "″"
+#~ msgstr "″"
+
+#~ msgid "Legend"
+#~ msgstr "Förklaring"
+
+#~ msgid "about:blank"
+#~ msgstr "om:tom"
+
+#~ msgid "Marble - Install Maps"
+#~ msgstr "Marble - Installera kartor"
+
+#~ msgid "Map View"
+#~ msgstr "Kartvy"
+
+#~ msgid "&Projection"
+#~ msgstr "&Projektion"
+
+#~ msgid "Globe"
+#~ msgstr "Glob"
+
+#~ msgid "Flat Map"
+#~ msgstr "Vanlig karta"
+
+#~ msgid "Mercator"
+#~ msgstr "Mercator"
+
+#~ msgid "Gnomonic"
+#~ msgstr "Gnomonisk"
+
+#~ msgid "Stereographic"
+#~ msgstr "Selenografisk"
+
+#~ msgid "Lambert Azimuthal Equal Area"
+#~ msgstr "Lamberts azimutala ytriktiga"
+
+#~ msgid "Azimuthal Equidistant"
+#~ msgstr "Azimutal ekvidistant"
+
+#~ msgid "Vertical Perspective Globe"
+#~ msgstr "Glob med vertikalt perspektiv"
+
+#~ msgid "&Celestial Body"
+#~ msgstr "&Himmelskropp"
+
+#~ msgid "&Theme"
+#~ msgstr "&Tema"
+
+#~ msgid "Here you can choose the preferred map view from different topics."
+#~ msgstr "Här kan du välja önskad karta från olika typer."
+
+#~ msgid "Marble Map Theme Creation Wizard"
+#~ msgstr "Guide för att skapa kartteman i Marble"
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">Welcome to the Map Creation Wizard!</span></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">We will guide you "
+#~ "through the process of creating a map theme for Marble. In the end you "
+#~ "will have your own map that you can view in Marble.</p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Please choose the "
+#~ "source that you want to use for the data of your map theme:</p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:12px; margin-bottom:12px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">Välkommen till guiden för att skapa kartor!</span></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Vi kommer att leda dig "
+#~ "igenom processen att skapa en karttema för Marble. När du är klar kommer "
+#~ "du att ha en egen karta som du kan visa med Marble.</p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Välj källa som du vill "
+#~ "använda för karttemats data:</p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:12px; margin-bottom:12px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p></body></html>"
+
+#~ msgid ""
+#~ "Connects to a server on the Internet. The map data is queried via the WMS "
+#~ "protocol."
+#~ msgstr ""
+#~ "Ansluter till en server på Internet. Kartans data hämtas via WMS-"
+#~ "protokollet."
+
+#~ msgid "Web Map Service (WMS)"
+#~ msgstr "Webbkarttjänst (WMS)"
+
+#~ msgid ""
+#~ "You need to provide a bitmap image of a world map that is stored on disk."
+#~ msgstr ""
+#~ "En bildpunktsavbildning av en världskarta som är lagrad på hårddisken "
+#~ "måste tillhandahållas."
+
+#~ msgid "A single image showing the whole world"
+#~ msgstr "En ensam bild som visar hela världen"
+
+#~ msgid ""
+#~ "Connects to a server on the Internet. The map data is queried via a "
+#~ "static URL."
+#~ msgstr ""
+#~ "Ansluter till en server på Internet. Kartans data hämtas via en statisk "
+#~ "webbadress."
+
+#~ msgid "Online map providing indexed tiles (e.g. Open Street Map)"
+#~ msgstr ""
+#~ "Internet-karta som tillhandahåller indexerade rutor (t.ex. Open Street "
+#~ "Map)"
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">WMS Server</span></p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Please choose a <a href="
+#~ "\"http://en.wikipedia.org/wiki/Web_Map_Service\"><span style=\" text-"
+#~ "decoration: underline; color:#0057ae;\">WMS</span></a> server or enter a "
+#~ "custom server URL.</p></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">WMS-server</span></p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Välj en <a href="
+#~ "\"http://en.wikipedia.org/wiki/Web_Map_Service\"><span style=\" text-"
+#~ "decoration: underline; color:#0057ae;\">WMS</span></a>-server eller skriv "
+#~ "in en egen webbadress till en server.</p></body></html>"
+
+#~ msgid "WMS Server:"
+#~ msgstr "WMS-server:"
+
+#~ msgid "Custom"
+#~ msgstr "Egen"
+
+#~ msgid "http://"
+#~ msgstr "http://"
+
+#~ msgid "Available Maps:"
+#~ msgstr "Tillgängliga kartor:"
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">World Map Bitmap Image</span></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-weight:600;\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Please choose the "
+#~ "location of a world map that is stored in a single image file (JPG, PNG, "
+#~ "etc.). It needs to be provided in <a href=\"http://en.wikipedia.org/wiki/"
+#~ "Equirectangular_projection\"><span style=\" text-decoration: underline; "
+#~ "color:#0057ae;\">Equirectangular projection</span></a>, so the shape "
+#~ "should look like this (size ratio: 2:1):</p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><img src=\":/data/svg/"
+#~ "worldmap.svg\" width=\"150\" /></p></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">Punktavbildning av världskarta</span></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-weight:600;\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Ange platsen för en "
+#~ "världskarta som är lagrad i en enda bildfil (JPG, PNG, etc.). Den måste "
+#~ "tillhandahållas med <a href=\"http://en.wikipedia.org/wiki/"
+#~ "Equirectangular_projection\"><span style=\" text-decoration: underline; "
+#~ "color:#0057ae;\">ekvirektangulär projektion</span></a>, alltså måste den "
+#~ "vara formad så här (storleksförhållande: 2:1):</p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><img src=\":/data/svg/"
+#~ "worldmap.svg\" width=\"150\" /></p></body></html>"
+
+#~ msgid "Source Image:"
+#~ msgstr "Källbild:"
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Bitstream Vera Sans'; font-"
+#~ "size:9pt; font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif'; font-weight:600;\">URL Scheme for Indexed Tiles</"
+#~ "span></p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif';\">Please enter the URL used for downloading "
+#~ "individual tiles. Use the placeholders </span><span style=\" font-"
+#~ "family:'Sans Serif'; font-style:italic;\">{x}</span><span style=\" font-"
+#~ "family:'Sans Serif';\">, </span><span style=\" font-family:'Sans Serif'; "
+#~ "font-style:italic;\">{y}</span><span style=\" font-family:'Sans Serif';"
+#~ "\">, and </span><span style=\" font-family:'Sans Serif'; font-style:"
+#~ "italic;\">{zoomLevel}</span><span style=\" font-family:'Sans Serif';\"> "
+#~ "to reference a tile from the index.</span></p></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Bitstream Vera Sans'; font-"
+#~ "size:9pt; font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif'; font-weight:600;\">Webbadress för indexerade rutor</"
+#~ "span></p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif';\">Ange webbadressen som används för att ladda ner "
+#~ "enskilda rutor. Använd platsmarkeringarna </span><span style=\" font-"
+#~ "family:'Sans Serif'; font-style:italic;\">{x}</span><span style=\" font-"
+#~ "family:'Sans Serif';\">, </span><span style=\" font-family:'Sans Serif'; "
+#~ "font-style:italic;\">{y}</span><span style=\" font-family:'Sans Serif';"
+#~ "\">, och </span><span style=\" font-family:'Sans Serif'; font-style:"
+#~ "italic;\">{zoomLevel}</span><span style=\" font-family:'Sans Serif';\"> "
+#~ "för att ange en ruta från index.</span></p></body></html>"
+
+#~ msgid "URL Scheme:"
+#~ msgstr "Webbadress-schema:"
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Bitstream Vera Sans'; font-"
+#~ "size:9pt; font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif'; font-weight:600;\">General Information</span></p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif';\">Please specify a title, a name and an icon for "
+#~ "your new map. Add a description to let users know what your map is about. "
+#~ "</span></p></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Bitstream Vera Sans'; font-"
+#~ "size:9pt; font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif'; font-weight:600;\">Allmän information</span></p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif';\">Ange en rubrik, ett namn och en ikon för den nya "
+#~ "kartan. Lägg till en beskrivning för att låta användare få reda på vad "
+#~ "kartan är till för. </span></p></body></html>"
+
+#~ msgid "Map Title:"
+#~ msgstr "Kartrubrik:"
+
+#~ msgid "A short concise name for your map theme."
+#~ msgstr "Ett kortfattat namn på kartans tema."
+
+#~ msgid "Map Name:"
+#~ msgstr "Kartnamn:"
+
+#~ msgid "The lowercase map theme id."
+#~ msgstr "Identifieraren för kartans tema med små bokstäver."
+
+#~ msgid "The folder name of your new theme."
+#~ msgstr "Det nya temats katalognamn."
+
+#~ msgid "Description:"
+#~ msgstr "Beskrivning:"
+
+#~ msgid ""
+#~ "A short description of your map theme. Here you can provide information "
+#~ "about the purpose, origin, copyright and license of the data used in your "
+#~ "map theme."
+#~ msgstr ""
+#~ "En kort beskrivning av kartans tema. Här kan information om syfte, "
+#~ "ursprung, äganderätt och licens för data som används av temat anges."
+
+#~ msgid "It will appear in a tool tip and may contain HTML formatting."
+#~ msgstr ""
+#~ "Den kommer att visas som ett verktygstips, och får använda HTML-"
+#~ "formatering."
+
+#~ msgid "Preview Image:"
+#~ msgstr "Förhandsgranskningsbild:"
+
+#~ msgid "preview image"
+#~ msgstr "förhandsgranskningsbild"
+
+#~ msgid "Change..."
+#~ msgstr "Ändra..."
+
+#~ msgid "Legend Image:"
+#~ msgstr "Förklaringsbild:"
+
+#~ msgid "Places of Interest"
+#~ msgstr "Sevärdheter"
+
+#~ msgid "Populated Places"
+#~ msgstr "Befolkade platser"
+
+#~ msgid "Terrain"
+#~ msgstr "Terräng"
+
+#~ msgid "Coordinate Grid"
+#~ msgstr "Koordinatlinjer"
+
+#~ msgid "Border Lines"
+#~ msgstr "Gränslinjer"
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">Summary</span></p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Congratulations! You "
+#~ "have entered all the data that is necessary to create your map theme. "
+#~ "Check the summary below carefully and press the \"Finish\" button to "
+#~ "create the theme. </p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Please consider "
+#~ "contributing the map theme back to the Marble community if the license "
+#~ "and the terms of use allow for it.</p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:12px; margin-bottom:12px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">Sammanfattning</span></p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Gratulerar! All "
+#~ "nödvändig information för att skapa ett eget karttema har matats in. "
+#~ "Kontrollera sammanfattningen nedan noggrant, och klicka därefter på "
+#~ "knappen \"Slutför\" för att skapa temat.</p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Överväg att bidra med "
+#~ "temat till andra användare av Marble, om licensen och "
+#~ "användningsvillkoren tillåter det.</p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:12px; margin-bottom:12px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p></body></html>"
+
+#~ msgid "Map name goes here."
+#~ msgstr "Kartans namn ska anges här."
+
+#~ msgid "Map Theme:"
+#~ msgstr "Kartans tema:"
+
+#~ msgid "Map theme goes here."
+#~ msgstr "Kartans tema ska anges här."
+
+#~ msgid "Thumbnail image goes here."
+#~ msgstr "Miniatyrbild ska anges här."
+
+#~ msgid "Preview Map"
+#~ msgstr "Förhandsgranska karta"
+
+#~ msgid "About Marble"
+#~ msgstr "Om Marble"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">Marble Virtual Globe</span></p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">Marble virtuell jordglob</span></p></body></html>"
+
+#~ msgid "Version Unknown"
+#~ msgstr "Okänd version"
+
+#~ msgid "&About"
+#~ msgstr "&Om"
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:10pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-size:9pt;\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "size:9pt;\">(c) 2007, The Marble Project</span></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-size:9pt; font-style:italic;\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "size:9pt;\">http://edu.kde.org/marble</span></p></body></html>"
+#~ msgstr ""
+#~ "!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:10pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-size:9pt;\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "size:9pt;\">© 2007, Marble-projektet</span></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-size:9pt; font-style:italic;\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "size:9pt;\">http://edu.kde.org/marble</span></p></body></html>"
+
+#~ msgid "A&uthors"
+#~ msgstr "&Upphovsmän"
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:10pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-size:9pt;\"></p></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:10pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-size:9pt;\"></p></body></html>"
+
+#~ msgid "&Data"
+#~ msgstr "&Data"
+
+#~ msgid "&License Agreement"
+#~ msgstr "&Licensavtal"
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:10pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-family:'MS Shell Dlg 2'; font-size:8pt;\"></p></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:10pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-family:'MS Shell Dlg 2'; font-size:8pt;\"></p></body></html>"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">There are two caches "
+#~ "being used for Marble: The physical memory which is needed to keep map "
+#~ "data in the computer's memory. Increasing the value will make the "
+#~ "application more responsive. The hard disc memory cache is used by "
+#~ "download contents from the Internet (e.g. Wikipedia data or map data). "
+#~ "Decrease this value if you want to save space on the hard disc and if "
+#~ "high usage of the Internet is not an issue. </p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Det finns två cachar "
+#~ "som används av Marble: Det fysiska minne som behövs för att hålla kartans "
+#~ "data i datorns minne. Ökas värdet svarar programmet snabbare. Hårddiskens "
+#~ "minnescache används av nerladdat innehåll från Internet (t.ex. data från "
+#~ "Wikipedia eller kartans data). Minska värdet om du vill spara utrymme på "
+#~ "hårddisken och hög användning av Internet inte är ett problem. </p></"
+#~ "body></html>"
+
+#~ msgid "C&ache"
+#~ msgstr "C&ache"
+
+#~ msgid "&Physical memory:"
+#~ msgstr "&Fysiskt minne:"
+
+#~ msgid " MB"
+#~ msgstr " Mibyte"
+
+#~ msgid "C&lear"
+#~ msgstr "&Rensa"
+
+#~ msgid "&Hard disc:"
+#~ msgstr "&Hårddisk:"
+
+#~ msgid "Unlimited"
+#~ msgstr "Obegränsad"
+
+#~ msgid "Cl&ear"
+#~ msgstr "R&ensa"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Proxy settings for your "
+#~ "local intranet. Please leave empty if there is no proxy.</p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Proxyinställningar för "
+#~ "lokalt intranät. Lämna tomt om det inte finns någon proxy.</p></body></"
+#~ "html>"
+
+#~ msgid "&Proxy"
+#~ msgstr "&Proxy"
+
+#~ msgid "&Proxy:"
+#~ msgstr "&Proxy:"
+
+#~ msgid "P&ort:"
+#~ msgstr "P&ort:"
+
+#~ msgid "Proxy type:"
+#~ msgstr "Proxytyp:"
+
+#~ msgid "Http"
+#~ msgstr "Http"
+
+#~ msgid "Socks5"
+#~ msgstr "Socks5"
+
+#~ msgid "Requires authentication"
+#~ msgstr "Kräver behörighetskontroll"
+
+#~ msgid "U&sername:"
+#~ msgstr "An&vändarnamn"
+
+#~ msgid "&Password:"
+#~ msgstr "&Lösenord"
+
+#~ msgid "Enable synchronization"
+#~ msgstr "Aktivera synkronisering"
+
+#~ msgid ""
+#~ "Allows you to store routes in owncloud. Each route must be uploaded/"
+#~ "downloaded manually."
+#~ msgstr ""
+#~ "Låter dig lagra färdvägar på ownCloud. Varje färdväg måste laddas upp och "
+#~ "laddas ner manuellt."
+
+#~ msgid "Enable route synchronization"
+#~ msgstr "Aktivera synkronisering av färdvägar"
+
+#~ msgid "Automatically sync all bookmarks to the server."
+#~ msgstr "Synkronisera automatiskt alla bokmärken med servern."
+
+#~ msgid "Enable bookmark synchronization"
+#~ msgstr "Aktivera bokmärkessynkronisering"
+
+#~ msgid "Sync now"
+#~ msgstr "Synkronisera nu"
+
+#~ msgid "Credentials"
+#~ msgstr "Inloggningsinformation"
+
+#~ msgid "Server:"
+#~ msgstr "Server:"
+
+#~ msgid "Remote server URL, e.g. myserver.com/owncloud"
+#~ msgstr "Webbadress till fjärrserver, t.ex. min-server.com/ownCloud"
+
+#~ msgid "Username:"
+#~ msgstr "Användarnamn:"
+
+#~ msgid "Password:"
+#~ msgstr "Lösenord:"
+
+#~ msgid "Test Login"
+#~ msgstr "Prova inloggning"
+
+#~ msgid "Marble Cache Settings"
+#~ msgstr "Marble cacheinställningar"
+
+#~ msgid "Dragging and Animation"
+#~ msgstr "Dragbeteende och animering"
+
+#~ msgid "&Drag location:"
+#~ msgstr "Plats att &dra till:"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">While dragging the "
+#~ "mouse there are two standard behaviours when dealing with a virtual globe:"
+#~ "</p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">The location below "
+#~ "mouse pointer will follow the cursor exactly: As a result e.g. the north "
+#~ "pole will not stay at the top which can lead to confusion. By default "
+#~ "Marble makes sure that north is always up which results in a dragging "
+#~ "behaviour where the location below the mouse pointer slightly \"detaches"
+#~ "\" from the cursor. </p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Det finns två "
+#~ "standardbeteenden vid hantering av en virtuell jordglob när musen dras:</"
+#~ "p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Platsen under "
+#~ "muspekaren följer markören exakt: Resulterar i att t.ex. nordpolen inte "
+#~ "förblir längst upp, vilket kan leda till förvirring. Normalt försäkrar "
+#~ "Marble att norr alltid är uppåt, vilket ger ett dragbeteende där platsen "
+#~ "under musen \"kopplas loss\" något från markören.</p></body></html>"
+
+#~ msgid "Keep Planet Axis Vertically"
+#~ msgstr "Håll planetens axel vertikal"
+
+#~ msgid "Follow Mouse Pointer"
+#~ msgstr "Följ muspekaren"
+
+#~ msgid "Use kinetic spinning when dragging the map"
+#~ msgstr "Använd kinetisk rörelse vid dragning av kartan"
+
+#~ msgid "&Inertial Globe Rotation"
+#~ msgstr "Trög &globrotation"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">When searching for a "
+#~ "location Marble can either move instantly to the new location or it can "
+#~ "show a travel animation from the previous place to the new place.</p></"
+#~ "body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Vid sökning efter en "
+#~ "plats kan Marble antingen gå direkt till den nya platsen, eller visa en "
+#~ "animering av en resa från föregående plats till den nya platsen.</p></"
+#~ "body></html>"
+
+#~ msgid "&Animate voyage to the target"
+#~ msgstr "&Animera resan till målet"
+
+#~ msgid "&On startup:"
+#~ msgstr "&Vid start:"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">By default Marble will "
+#~ "display the home location immediately after the application has started. "
+#~ "As an alternative it can also show the last position that was active when "
+#~ "the user left the application. </p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Normalt visar Marble "
+#~ "hemplatsen direkt efter programmet har startat. Som ett alternativ kan "
+#~ "också den senaste positionen som var aktiv när användaren lämnade "
+#~ "programmet visas. </p></body></html>"
+
+#~ msgid "Show Home Location"
+#~ msgstr "Visa hemplats"
+
+#~ msgid "Return to Last Location Visited"
+#~ msgstr "Gå tillbaka till senast besökta plats"
+
+#~ msgid "&External Editor:"
+#~ msgstr "&Extern editor:"
+
+#~ msgid ""
+#~ "<p>The application that is launched to edit maps. Potlatch (default) "
+#~ "requires a web browser with flash support to be installed. When selecting "
+#~ "josm or merkaartor, make sure that the respective application is "
+#~ "installed.</p>"
+#~ msgstr ""
+#~ "<p>Programmet som startas för att redigera kartor. Potlatch (standard) "
+#~ "kräver att en webbläsare med stöd för Flash är installerad. När josm "
+#~ "eller merkaartor väljes, försäkra dig om att respektive program är "
+#~ "installerat.</p>"
+
+#~ msgid "Always ask"
+#~ msgstr "Fråga alltid"
+
+#~ msgid "Potlatch (Web browser)"
+#~ msgstr "Potlatch (webbläsare)"
+
+#~ msgid "Up"
+#~ msgstr "Upp"
+
+#~ msgid "Tilts the globe's axis towards the user."
+#~ msgstr "Lutar klotets axel mot användaren."
+
+#~ msgid "Left"
+#~ msgstr "Vänster"
+
+#~ msgid "Rotates the globe counterclockwise around its axis."
+#~ msgstr "Roterar klotet moturs runt sin axel."
+
+#~ msgid "Reset View"
+#~ msgstr "Återställ vy"
+
+#~ msgid "Click this button to restore the original zoom level and view angle."
+#~ msgstr ""
+#~ "Klicka på den här knappen för att återställa ursprunglig zoomnivå och "
+#~ "visningsvinkel."
+
+#~ msgid "Home"
+#~ msgstr "Hem"
+
+#~ msgid "Right"
+#~ msgstr "Höger"
+
+#~ msgid "Rotates the globe clockwise around its axis."
+#~ msgstr "Roterar klotet medurs runt sin axel."
+
+#~ msgid "Down"
+#~ msgstr "Ner"
+
+#~ msgid "Tilts the globe's axis away from the user."
+#~ msgstr "Lutar klotets axel bort från användaren."
+
+#~ msgid "Zoom In"
+#~ msgstr "Zooma in"
+
+#~ msgid "Zoom in by pressing this button to see more detail."
+#~ msgstr ""
+#~ "Zooma in genom att klicka på den här knappen för att se fler detaljer."
+
+#~ msgid "+"
+#~ msgstr "+"
+
+#~ msgid "Zoom Slider"
+#~ msgstr "Zoomreglage"
+
+#~ msgid "Use this slider to adjust the zoom level of the map."
+#~ msgstr "Använd skjutreglaget för att justera kartans zoomnivå."
+
+#~ msgid "Zoom Out"
+#~ msgstr "Zooma ut"
+
+#~ msgid "Zoom out by pressing this button to see less detail."
+#~ msgstr ""
+#~ "Zooma ut genom att klicka på den här knappen för att se färre detaljer."
+
+#~ msgid "-"
+#~ msgstr "-"
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'DejaVu Sans'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif';\">This is Marble's machine room for advanced users. "
+#~ "Here you can select and deselect the functionality that is provided "
+#~ "through plugins. </span></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif';\">Deselecting a plugin will remove the functionality "
+#~ "from the map, menus and toolbars. </span></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif';\">Also some of the plugins might allow for tweaking "
+#~ "their configuration a bit. </span></p></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'DejaVu Sans'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif';\">Det här är Marbles maskinrum för avancerade "
+#~ "användare. Här kan du aktivera och inaktivera funktioner som "
+#~ "tillhandahålls via insticksprogram. </span></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif';\">Avmarkera ett insticksprogram för att ta bort dess "
+#~ "funktion från kartan, menyer och verktygsrader. </span></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif';\">Dessutom kan vissa insticksprogram tillåta att "
+#~ "deras inställning finjusteras lite grand. </span></p></body></html>"
+
+#~ msgid "P&lugins"
+#~ msgstr "&Insticksprogram"
+
+#~ msgid "Time Zone"
+#~ msgstr "Tidszon"
+
+#~ msgid "UTC"
+#~ msgstr "UTC"
+
+#~ msgid "System time zone"
+#~ msgstr "Systemets tidszon"
+
+#~ msgid "Choose Time zone"
+#~ msgstr "Välj tidszon"
+
+#~ msgid "Universal Time Coordinated"
+#~ msgstr "Koordinerad universell tid"
+
+#~ msgid "European Central Time"
+#~ msgstr "Medeleuropeisk tid"
+
+#~ msgid "Eastern European Time"
+#~ msgstr "Östeuropeisk tid"
+
+#~ msgid "Egypt Standard Time"
+#~ msgstr "Egyptisk normaltid"
+
+#~ msgid "Eastern African Time"
+#~ msgstr "Östafrikansk tid"
+
+#~ msgid "Middle East Time"
+#~ msgstr "Mellanösterntid"
+
+#~ msgid "Near East Time"
+#~ msgstr "Främre orienttid"
+
+#~ msgid "Pakistan Lahore Time"
+#~ msgstr "Pakistan Lahore-tid"
+
+#~ msgid "India Standard Time"
+#~ msgstr "Indisk normaltid"
+
+#~ msgid "Bangladesh Standard Time"
+#~ msgstr "Bangladesh normaltid"
+
+#~ msgid "Vietnam Standard Time"
+#~ msgstr "Vietnamesisk normaltid"
+
+#~ msgid "China Taiwan Time"
+#~ msgstr "Kina Taiwan-tid"
+
+#~ msgid "Japan Standard Time"
+#~ msgstr "Japansk normaltid"
+
+#~ msgid "Australia Central Time"
+#~ msgstr "Autraliensisk centraltid"
+
+#~ msgid "Australia Eastern Time"
+#~ msgstr "Australiensisk östkusttid"
+
+#~ msgid "Solomon Standard Time"
+#~ msgstr "Solomonsk normaltid"
+
+#~ msgid "New Zealand Standard Time"
+#~ msgstr "Nya zeeländsk normaltid"
+
+#~ msgid "Midway Islands Time"
+#~ msgstr "Midwayöarnas tid"
+
+#~ msgid "Hawaii Standard Time"
+#~ msgstr "Hawaiiansk normaltid"
+
+#~ msgid "Alaska Standard Time"
+#~ msgstr "Alaska normaltid"
+
+#~ msgid "Pacific Standard Time"
+#~ msgstr "Normal stilla havstid"
+
+#~ msgid "Phoenix Standard Time"
+#~ msgstr "Phoenix normaltid"
+
+#~ msgid "Mountain Standard Time"
+#~ msgstr "Normal bergstid"
+
+#~ msgid "Central Standard Time"
+#~ msgstr "Normal centraltid"
+
+#~ msgid "Eastern Standard Time"
+#~ msgstr "Normal östkusttid"
+
+#~ msgid "Indiana Eastern Standard Time"
+#~ msgstr "Normal Indiana östkusttid"
+
+#~ msgid "Puerto Rico and US Virgin Islands Time"
+#~ msgstr "Puerto Rico och Amerikanska Jungfruöarnas tid"
+
+#~ msgid "Canada Newfoundland Time"
+#~ msgstr "Kanada- och Newfoundlandtid"
+
+#~ msgid "Argentina Standard Time"
+#~ msgstr "Argentinsk normaltid"
+
+#~ msgid "Brazil Eastern Time"
+#~ msgstr "Brasiliansk östkusttid"
+
+#~ msgid "Central African Time"
+#~ msgstr "Centralafrikansk tid"
+
+#~ msgid "When Marble starts"
+#~ msgstr "När Marble startar"
+
+#~ msgid "Load system time"
+#~ msgstr "Ladda systemtid"
+
+#~ msgid "Load last session time"
+#~ msgstr "Ladda senaste sessionstid"
+
+#~ msgid "&Units"
+#~ msgstr "&Enheter"
+
+#~ msgid "&Distance:"
+#~ msgstr "Avstån&d:"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">The unit that gets used "
+#~ "to measure altitude, lengths and distances (e.g. km, mi, ft).</p></body></"
+#~ "html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Enheten som används för "
+#~ "att mäta höjder, länger och avstånd (t.ex. km, mile, fot).</p></body></"
+#~ "html>"
+
+#~ msgid "Kilometer, Meter"
+#~ msgstr "Kilometer, meter"
+
+#~ msgid "Miles, Feet"
+#~ msgstr "Mile, fot"
+
+#~ msgid "Nautical miles, Knots"
+#~ msgstr "Nautiska mil, knop"
+
+#~ msgid "An&gle:"
+#~ msgstr "Vin&kel:"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Specifies the notation "
+#~ "of angles in coordinates: By default the Degree-Minute-Second notation (e."
+#~ "g. 54°30'00\" ) gets used. As an alternative you can choose decimal "
+#~ "degrees (e.g. 54.5°).</p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Anger beteckningar för "
+#~ "vinklar i koordinater: Normalt används beteckningen grad, minut, sekund "
+#~ "(t.ex. 54°30'00\"). Som ett alternativ kan du välja decimala grader (t."
+#~ "ex. 54.5°).</p></body></html>"
+
+#~ msgid "Degree (DMS)"
+#~ msgstr "Grader (GMS)"
+
+#~ msgid "Degree (Decimal)"
+#~ msgstr "Grader (decimala)"
+
+#~ msgid "Universal Transverse Mercator (UTM)"
+#~ msgstr "Universal Transverse Mercator (UTM)"
+
+#~ msgid "Map &Quality"
+#~ msgstr "&Kartans kvalitet"
+
+#~ msgid "&Still image:"
+#~ msgstr "&Stillbild:"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Specifies the map "
+#~ "quality that gets displayed while there is no user input. Usually this "
+#~ "allows for high map quality as speed is no concern.</p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Anger kartans kvalitet "
+#~ "som visas när användaren inte gör någonting. Oftast tillåter det hög "
+#~ "kvalitet eftersom hastighet inte spelar någon roll.</p></body></html>"
+
+#~ msgid "Outline Quality"
+#~ msgstr "Konturkvalitet"
+
+#~ msgid "Low Quality"
+#~ msgstr "Låg kvalitet"
+
+#~ msgid "Normal"
+#~ msgstr "Normal"
+
+#~ msgid "High Quality"
+#~ msgstr "Hög kvalitet"
+
+#~ msgid "Print Quality"
+#~ msgstr "Utskriftskvalitet"
+
+#~ msgid "During &animations:"
+#~ msgstr "Under &animering:"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Specifies the map "
+#~ "quality that gets displayed during map animations (e.g. while dragging "
+#~ "the globe). </p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Especially on slow "
+#~ "machines it is advisable to set this option to \"low quality\" as this "
+#~ "will give better speed.</p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Anger kartans kvalitet "
+#~ "som visas under animering av kartan (t.ex. när globen dras). </p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Det är lämpligt att "
+#~ "ställa in alternativet till \"låg kvalitet\", särskilt på långsamma "
+#~ "datorer, eftersom det ger bättre hastighet.</p></body></html>"
+
+#~ msgid "G&raphics system:"
+#~ msgstr "G&rafiksystem:"
+
+#~ msgid ""
+#~ "Specifies the graphics system that Qt uses to draw the map.\n"
+#~ "Changing this setting might be a good idea if there are performance "
+#~ "issues with the system's graphics drivers."
+#~ msgstr ""
+#~ "Anger grafiksystem som Qt använder för att rita kartan.\n"
+#~ "Det kan vara en god idé att ändra inställningen om det är "
+#~ "prestandaproblem med datorns grafikdrivrutiner."
+
+#~ msgid "Raster (Software rendering)"
+#~ msgstr "Raster (programvaruåtergivning)"
+
+#~ msgid "OpenGL"
+#~ msgstr "OpenGL"
+
+#~ msgid "&Text Labels"
+#~ msgstr "&Textbeteckningar"
+
+#~ msgid "&Place names:"
+#~ msgstr "&Platsnamn:"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Places often have "
+#~ "different names in different languages. The label on the map can show the "
+#~ "name in the user's language. Alternatively it can display the name in the "
+#~ "official language and glyphs of that place. </p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Platser har ofta olika "
+#~ "namn på olika språk. Beteckningen på kartan kan visa namnet på "
+#~ "användarens språk. Som ett alternativ kan den visa platsens namn med den "
+#~ "platsens officiella språk och alfabete. </p></body></html>"
+
+#~ msgid "Custom & Native Language"
+#~ msgstr "Eget och modersmål"
+
+#~ msgid "Custom Language"
+#~ msgstr "Eget språk"
+
+#~ msgid "Native Language"
+#~ msgstr "Modersmål"
+
+#~ msgid "Default map &font:"
+#~ msgstr "Kartans standard&teckensnitt:"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">The default font that "
+#~ "gets used on the map.</p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Standardteckensnitt som "
+#~ "används på kartan.</p></body></html>"
+
+#~ msgid "Movie Recording - Marble"
+#~ msgstr "Filminspelning - Marble"
+
+#~ msgid "Destination video"
+#~ msgstr "Målvideo"
+
+#~ msgid "Open..."
+#~ msgstr "Öppna..."
+
+#~ msgid "FPS (frames per second)"
+#~ msgstr "BPS (bilder per sekund)"
+
+#~ msgid "Cancel"
+#~ msgstr "Avbryt"
+
+#~ msgid "Start"
+#~ msgstr "Starta"
+
+#~ msgid "New Bookmark Folder - Marble"
+#~ msgstr "Ny bokmärkeskatalog - Marble"
+
+#~ msgid "&Folder Name"
+#~ msgstr "&Katalognamn"
+
+#~ msgid "Current Relations"
+#~ msgstr "Nuvarande relationer"
+
+#~ msgid "Name"
+#~ msgstr "Namn"
+
+#~ msgid "Type"
+#~ msgstr "Typ"
+
+#~ msgid "Role"
+#~ msgstr "Typ"
+
+#~ msgid "Add Relation"
+#~ msgstr "Lägg till relation"
+
+#~ msgid "Current Tags"
+#~ msgstr "Nuvarande etiketter"
+
+#~ msgid "Key"
+#~ msgstr "Nyckel"
+
+#~ msgid "Value"
+#~ msgstr "Värde"
+
+#~ msgid "<<"
+#~ msgstr "<<"
+
+#~ msgid ">>"
+#~ msgstr ">>"
+
+#~ msgid "Related Tags"
+#~ msgstr "Relaterade etiketter"
+
+#~ msgid "Browse..."
+#~ msgstr "Bläddra..."
+
+#~ msgid "Icon Link:"
+#~ msgstr "Ikonlänk:"
+
+#~ msgid "ID:"
+#~ msgstr "Identifikation:"
+
+#~ msgid "Target ID:"
+#~ msgstr "Målidentifikation:"
+
+#~ msgid "Position:"
+#~ msgstr "Position:"
+
+#~ msgid "Marble"
+#~ msgstr "Marble"
+
+#~ msgid "Map"
+#~ msgstr "Karta"
+
+#~ msgid "Visible Globe Region"
+#~ msgstr "Synligt område på klotet"
+
+#~ msgid "Outer Space"
+#~ msgstr "Yttre rymden"
+
+#~ msgid "Route"
+#~ msgstr "Färdväg"
+
+#~ msgid "Route Summary"
+#~ msgstr "Sammanfattning av vägbeskrivning"
+
+#~ msgid "Driving Instructions"
+#~ msgstr "Köranvisningar"
+
+#~ msgid "Footer"
+#~ msgstr "Sidfot"
+
+#~ msgid "Configure Routing Profile"
+#~ msgstr "Anpassa vägbeskrivningsprofil"
+
+#~ msgid "Active Route Services"
+#~ msgstr "Aktiv vägbeskrivningstjänst"
+
+#~ msgid "Service Settings"
+#~ msgstr "Tjänstinställningar"
+
+#~ msgid "No configuration available"
+#~ msgstr "Ingen inställning tillgänglig"
+
+#~ msgid "Select Service to Configure"
+#~ msgstr "Välj tjänst att anpassa"
+
+#~ msgid "Configure"
+#~ msgstr "Anpassa"
+
+#~ msgid "&Add"
+#~ msgstr "&Lägg till"
+
+#~ msgid "&Configure"
+#~ msgstr "A&npassa"
+
+#~ msgid "&Remove"
+#~ msgstr "&Ta bort"
+
+#~ msgid "Move &Up"
+#~ msgstr "Flytta &upp"
+
+#~ msgid "Move &Down"
+#~ msgstr "Flytta &ner"
+
+#~ msgid "Car (fastest)"
+#~ msgstr "Bil (snabbast)"
+
+#~ msgid "Car (shortest)"
+#~ msgstr "Bil (kortast)"
+
+#~ msgid "Bicycle"
+#~ msgstr "Cykel"
+
+#~ msgid "Pedestrian"
+#~ msgstr "Fotgängare"
+
+#~ msgid "No results."
+#~ msgstr "Inga resultat."
+
+#~ msgid "Show Details"
+#~ msgstr "Visa information"
+
+#~ msgid "Choose alternative routes"
+#~ msgstr "Välj alternativa färdvägar"
+
+#~ msgid "Sun Control"
+#~ msgstr "Solstyrning"
+
+#~ msgid "Sun Shading"
+#~ msgstr "Solskugga"
+
+#~ msgid "Shadow"
+#~ msgstr "Skugga"
+
+#~ msgid "Night Map"
+#~ msgstr "Nattkarta"
+
+#~ msgid "Subsolar Point"
+#~ msgstr "Solen står i zenit"
+
+#~ msgid ""
+#~ "Display <a href=\"http://en.wikipedia.org/wiki/Subsolar_point\">Subsolar "
+#~ "Point</a> icon"
+#~ msgstr ""
+#~ "Visa ikon då solen står i <a href=\"http://sv.wikipedia.org/wiki/Zenit"
+#~ "\">zenit</a>"
+
+#~ msgid ""
+#~ "<b>Lock</b> map view to <a href=\"http://en.wikipedia.org/wiki/"
+#~ "Subsolar_point\">Subsolar Point</a>."
+#~ msgstr ""
+#~ "<b>Lås</b> kartans visning till platsen där solen står i <a href=\"http://"
+#~ "en.wikipedia.org/wiki/Subsolar_point\">zenit</a>."
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">Attention: Panning the map is disabled now! </span></p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Uncheck the \"Lock map "
+#~ "view to Subsolar Point\" option to allow for viewing a different place on "
+#~ "the globe again.</p></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">Observera: Det är inte möjligt att panorera kartan nu. </"
+#~ "span></p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Avmarkera \"Lås kartans "
+#~ "visning till platsen där solen står i zenit\" för att göra det möjligt "
+#~ "att visa en annan plats på globen igen.</p></body></html>"
+
+#~ msgid "OK"
+#~ msgstr "Ok"
+
+#~ msgid "Apply"
+#~ msgstr "Verkställ"
+
+#~ msgid "Creating Map"
+#~ msgstr "Skapar karta"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /></head><body style="
+#~ "\" white-space: pre-wrap; font-family:Sans Serif; font-size:9pt; font-"
+#~ "weight:400; font-style:normal; text-decoration:none;\"><p style=\" margin-"
+#~ "top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-"
+#~ "indent:0; text-indent:0px;\"><span style=\" font-weight:600;\">Satellite "
+#~ "View</span></p><p style=\" margin-top:0px; margin-bottom:0px; margin-"
+#~ "left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Earth "
+#~ "as seen from Space. The map is based on NASA's beautiful \"Blue Marble "
+#~ "Next Generation\" pictures. Credits: NASA's Earth Observatory</p></body></"
+#~ "html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /></head><body style="
+#~ "\" white-space: pre-wrap; font-family:Sans Serif; font-size:9pt; font-"
+#~ "weight:400; font-style:normal; text-decoration:none;\"><p style=\" margin-"
+#~ "top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-"
+#~ "indent:0; text-indent:0px;\"><span style=\" font-weight:600;"
+#~ "\">Satellitvy</span></p><p style=\" margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\">Jorden sedd från rymden. Kartan är baserad på NASA:s vackra bilder "
+#~ "\"Blue Marble Next Generation\". Tack till: NASA:s jordobservatorium</p></"
+#~ "body></html>"
+
+#~ msgid ""
+#~ "Marble needs to create this map. This only needs to be done once and may "
+#~ "take a few seconds."
+#~ msgstr ""
+#~ "Marble måste skapa kartan. Det behöver bara göras en gång, och kan ta "
+#~ "några sekunder."
+
+#~ msgid "&Cancel"
+#~ msgstr "&Avbryt"
+
+#~ msgid "Zoom"
+#~ msgstr "Zooma"
+
+#~ msgid "&Tile Level Range:"
+#~ msgstr "&Rutornas nivåintervall:"
+
+#~ msgid "Minimum Tile Level"
+#~ msgstr "Minimal rutnivå"
+
+#~ msgid "to"
+#~ msgstr "till"
+
+#~ msgid "Maximum Tile Level"
+#~ msgstr "Minaximal rutnivå"
+
+#~ msgid "Time Control"
+#~ msgstr "Tidstyrning"
+
+#~ msgid "Time"
+#~ msgstr "Tid"
+
+#~ msgid "New Date Time      :"
+#~ msgstr "Nytt datum och tid"
+
+#~ msgid "Refresh Interval     :"
+#~ msgstr "Uppdateringsintervall:"
+
+#~ msgid " seconds"
+#~ msgstr " sekunder"
+
+#~ msgid "Now"
+#~ msgstr "Nu"
+
+#~ msgid "Current Date Time :"
+#~ msgstr "Aktuellt datum och tid: "
+
+#~ msgid "Time Speed"
+#~ msgstr "Tidshastighet"
+
+#~ msgid "Close"
+#~ msgstr "Stäng"
+
+#~ msgid "Tour"
+#~ msgstr "Tur"
+
+#~ msgid "--:--"
+#~ msgstr "--:--"
+
+#~ msgid "Move up"
+#~ msgstr "Flytta upp"
+
+#~ msgid "Move down"
+#~ msgstr "Flytta ner"
+
+#~ msgid "New Tour"
+#~ msgstr "Ny tur"
+
+#~ msgid "Save Tour"
+#~ msgstr "Spara tur"
+
+#~ msgid "Save Tour As"
+#~ msgstr "Spara tur som"
+
+#~ msgid "Open Tour"
+#~ msgstr "Öppna tur"
+
+#~ msgid "Play"
+#~ msgstr "Spela"
+
+#~ msgid "Begins touring"
+#~ msgstr "inleder turen"
+
+#~ msgid "Stop"
+#~ msgstr "Stopp"
+
+#~ msgid "Stops touring (playing again will start tour from the start)"
+#~ msgstr "Stoppar turen (spelas den igen börjar turen från början)"
+
+#~ msgid "Converts the loaded tour into a movie"
+#~ msgstr "Konverterar den inlästa turen till en film"
+
+#~ msgid "Worldclock Applet Configuration"
+#~ msgstr "Inställning av miniprogrammet Världsklocka"
+
+#~ msgid "Map Display"
+#~ msgstr "Kartvisning"
+
+#~ msgid "Projection:"
+#~ msgstr "Projektion:"
+
+#~ msgid "Equirectangular"
+#~ msgstr "Ekvirektangulär"
+
+#~ msgid "Center map on longitude:"
+#~ msgstr "Centrera kartan på longitud:"
+
+#~ msgid "Center map on daylight"
+#~ msgstr "Centrera kartan på dagsljus"
+
+#~ msgid "Show date"
+#~ msgstr "Visa datum"
+
+#~ msgid "Time Zones"
+#~ msgstr "Tidszoner"
+
+#~ msgid "Use custom timezone selection"
+#~ msgstr "Använd eget val av tidszon"
+
+#~ msgid "Edit ground overlay"
+#~ msgstr "Redigera överlagrad mark"
+
+#~ msgid "Coordinates"
+#~ msgstr "Koordinater"
+
+#~ msgid "N"
+#~ msgstr "N"
+
+#~ msgid "W"
+#~ msgstr "V"
+
+#~ msgid "E"
+#~ msgstr "Ö"
+
+#~ msgid "S"
+#~ msgstr "S"
+
+#~ msgid "Rotation"
+#~ msgstr "Rotation"
+
+#~ msgid "Add polygon"
+#~ msgstr "Lägg till polygon"
+
+#~ msgid "Lines"
+#~ msgstr "Linjer"
+
+#~ msgid "Width:"
+#~ msgstr "Bredd:"
+
+#~ msgid "Area"
+#~ msgstr "Område"
+
+#~ msgid "Filled"
+#~ msgstr "Fyllt"
+
+#~ msgid "Not Filled"
+#~ msgstr "Inte fyllt"
+
+#~ msgid "Nodes"
+#~ msgstr "Noder"
+
+#~ msgid "Add path"
+#~ msgstr "Lägg till kontur"
+
+#~ msgid "Display"
+#~ msgstr "Visning"
+
+#~ msgid "Fade data older than (minutes)"
+#~ msgstr "Tona bort data äldre än (minuter)"
+
+#~ msgid "Do not show data older than (minutes)"
+#~ msgstr "Visa inte data äldre än (minuter)"
+
+#~ msgid "Internet"
+#~ msgstr "Internet"
+
+#~ msgid "APRS Data Sources"
+#~ msgstr "APRS-datakällor"
+
+#~ msgid "Should information be gathered from the Internet APRS data source?"
+#~ msgstr "Ska information hämtas från APRS-datakällan på Internet?"
+
+#~ msgid "Collect data from an APRS Internet server"
+#~ msgstr "Samla in data från en APRS-server på Internet"
+
+#~ msgid "Server"
+#~ msgstr "Server"
+
+#~ msgid "rotate.aprs.net"
+#~ msgstr "rotate.aprs.net"
+
+#~ msgid "Port"
+#~ msgstr "Port"
+
+#~ msgid "10253"
+#~ msgstr "10253"
+
+#~ msgid "Dump TCP/IP records to the debug stream"
+#~ msgstr "Dumpa TCP/IP-poster till felsökningsströmmen"
+
+#~ msgid "Device"
+#~ msgstr "Enhet"
+
+#~ msgid "TNC Terminal Port"
+#~ msgstr "TNC-terminalport"
+
+#~ msgid "Should information be gathered from a serial port?"
+#~ msgstr "Ska information samlas in från en serieport?"
+
+#~ msgid "Collect data from a serial TNC (In Text Mode)"
+#~ msgstr "Samla in data från en seriell TNC (i textläge)"
+
+#~ msgid "TTY"
+#~ msgstr "TTY"
+
+#~ msgid "/dev/ttyUSB0"
+#~ msgstr "/dev/ttyUSB0"
+
+#~ msgid "Dump TTY records to the debug stream"
+#~ msgstr "Dumpa TTY-poster till felsökningsströmmen"
+
+#~ msgid "File"
+#~ msgstr "Arkiv"
+
+#~ msgid "Should information be gathered from a file?"
+#~ msgstr "Ska information samlas in från en fil?"
+
+#~ msgid "Collect data from a file"
+#~ msgstr "Samla in data från en fil"
+
+#~ msgid "Dump file records to the debug stream"
+#~ msgstr "Dumpa filposter till felsökningsströmmen"
+
+#~ msgid "Configure Compass Plugin"
+#~ msgstr "Anpassa insticksprogram för kompass"
+
+#~ msgid "Theme"
+#~ msgstr "Tema"
+
+#~ msgid "Default"
+#~ msgstr "Förval"
+
+#~ msgid "Arrows"
+#~ msgstr "Pilar"
+
+#~ msgid "Atom"
+#~ msgstr "Atom"
+
+#~ msgid "Magnet"
+#~ msgstr "Magnet"
+
+#~ msgid "Configure Crosshairs Plugin"
+#~ msgstr "Anpassa insticksprogram för korshår"
+
+#~ msgid "Gun 1"
+#~ msgstr "Gevär 1"
+
+#~ msgid "Gun 2"
+#~ msgstr "Gevär 2"
+
+#~ msgid "Circled"
+#~ msgstr "Cirkel"
+
+#~ msgid "German"
+#~ msgstr "Tyska"
+
+#~ msgid "Dialog"
+#~ msgstr "Dialogruta"
+
+#~ msgid "Filter"
+#~ msgstr "Filter"
+
+#~ msgid "Maximum number of results:"
+#~ msgstr "Maximalt antal resultat:"
+
+#~ msgid "Minimum magnitude:"
+#~ msgstr "Minimal magnitud:"
+
+#~ msgid "Time Range"
+#~ msgstr "Tidsintervall"
+
+#~ msgid "Past"
+#~ msgstr "Tidigare"
+
+#~ msgid "From"
+#~ msgstr "Från"
+
+#~ msgid "days"
+#~ msgstr "dagar"
+
+#~ msgid "Eclipse Browser"
+#~ msgstr "Förmörkelsebläddrare"
+
+#~ msgid "Show eclipses for year:"
+#~ msgstr "Visa förmörkelser under år:"
+
+#~ msgid "&Settings..."
+#~ msgstr "In&ställningar..."
+
+#~ msgid "&Go To Selected Eclipse"
+#~ msgstr "&Gå till vald förmörkelse"
+
+#~ msgid "Eclipses Configuration"
+#~ msgstr "Inställning av förmörkelser"
+
+#~ msgid "View &Options"
+#~ msgstr "Visnings&alternativ"
+
+#~ msgid "Enable &Lunar Eclipses"
+#~ msgstr "Aktivera &månförmörkelser"
+
+#~ msgid "Show Eclipse Control &Widget"
+#~ msgstr "Visa grafisk kontrollkomponent för förmörkelser"
+
+#~ msgid "&Eclipse Elements"
+#~ msgstr "&Förmörkelsedelar"
+
+#~ msgid "&Northern Penumbra"
+#~ msgstr "&Nordlig halvskugga"
+
+#~ msgid "&Umbra"
+#~ msgstr "&Helskugga"
+
+#~ msgid "Position of Eclipse &Maximum"
+#~ msgstr "Position för förmörkelse&maximum"
+
+#~ msgid "Central &Line"
+#~ msgstr "Central&linje"
+
+#~ msgid "Full &Penumbra"
+#~ msgstr "Fullständig &halvskugga"
+
+#~ msgid "Sunrise and Sunset &Boundaries"
+#~ msgstr "Soluppgångs- och solnedgångs&gränser"
+
+#~ msgid "&Southern Penumbra"
+#~ msgstr "&Sydlig halvskugga"
+
+#~ msgid "Penumbra with 60% Ma&gnitude"
+#~ msgstr "Halvskugga med 60 % ma&gnitud"
+
+#~ msgid "&Reminder"
+#~ msgstr "&Påminnelse"
+
+#~ msgid "Remind about eclipse events"
+#~ msgstr "Påminn om förmörkelsehändelser"
+
+#~ msgid "Eclipse Event"
+#~ msgstr "Förmörkelsehändelse"
+
+#~ msgid ""
+#~ "<html><head/><body><p>Marble has detected that the following <span style="
+#~ "\" font-weight:600;\">eclipse events</span> will occur in the near "
+#~ "future. If you want more information on a specific event, select it and "
+#~ "click OK.</p></body></html>"
+#~ msgstr ""
+#~ "<html><head/><body><p>Marble har detekterat att följande <span style=\" "
+#~ "font-weight:600;\">förmörkelsehändelser</span> inträffar i en nära "
+#~ "framtid. Om du vill ha mer information om en specifik händelse, markera "
+#~ "den och klicka på Ok.</p></body></html>"
+
+#~ msgid "Do not remind me about eclipse events again"
+#~ msgstr "Påminn mig inte om förmörkelsehändelser igen"
+
+#~ msgid "Configure Elevation Profile Plugin"
+#~ msgstr "Anpassa insticksprogram för höjdprofil"
+
+#~ msgid "Zoom to viewport"
+#~ msgstr "Zooma till visningsområde"
+
+#~ msgid "Speed"
+#~ msgstr "Hastighet"
+
+#~ msgid "Direction"
+#~ msgstr "Riktning"
+
+#~ msgid "Altitude"
+#~ msgstr "Höjd"
+
+#~ msgid "Precision"
+#~ msgstr "Precision"
+
+#~ msgid "Coordinate Grid Plugin"
+#~ msgstr "Insticksprogram för koordinatnät"
+
+#~ msgid "C&olors"
+#~ msgstr "&Färger"
+
+#~ msgid "&Grid:"
+#~ msgstr "&Rutnät:"
+
+#~ msgid "Color of the coordinate grid."
+#~ msgstr "Koordinatnätets färg."
+
+#~ msgid "&Tropics:"
+#~ msgstr "&Vändkretsar:"
+
+#~ msgid "Color of the tropical circles."
+#~ msgstr "Vändkretsarnas färg."
+
+#~ msgid "&Equator:"
+#~ msgstr "&Ekvator:"
+
+#~ msgid "Color of the equator."
+#~ msgstr "Ekvatorns färg."
+
+#~ msgid "Labels"
+#~ msgstr "Beteckningar"
+
+#~ msgid "&Named Labels"
+#~ msgstr "&Namnbeteckningar"
+
+#~ msgid "Show Labels for Prime meridian, Equator, Tropics."
+#~ msgstr "Visa beteckningar för nollmeridian, ekvator, vändkretsar."
+
+#~ msgid "&Numerical Labels"
+#~ msgstr "&Numeriska beteckningar"
+
+#~ msgid "Show numerical Labels."
+#~ msgstr "Visa numeriska beteckningar."
+
+#~ msgid "Configure Scale Bar Plugin"
+#~ msgstr "Anpassa insticksprogram för skalrad"
+
+#~ msgid "Show Ratio Scale"
+#~ msgstr "Visa förhållandeskala"
+
+#~ msgid "Minimize"
+#~ msgstr "Minimera"
+
+#~ msgid "Marble - Measure Tool Configuration"
+#~ msgstr "Marble - Inställning av mätverktyg"
+
+#~ msgid "Ruler Type"
+#~ msgstr "Linjaltyp"
+
+#~ msgid "Polygon"
+#~ msgstr "Polygon"
+
+#~ msgid "Circle"
+#~ msgstr "Cirkel"
+
+#~ msgid "Segment labels"
+#~ msgstr "Segmentbeteckningar"
+
+#~ msgid "Distance "
+#~ msgstr "Avstånd "
+
+#~ msgid "Bearing"
+#~ msgstr "Riktning"
+
+#~ msgid "Bearing Change"
+#~ msgstr "Riktningsändring"
+
+#~ msgid "Perimeter"
+#~ msgstr "Periferi"
+
+#~ msgid "Radius"
+#~ msgstr "Radie"
+
+#~ msgid "Circumference"
+#~ msgstr "Omkrets"
+
+#~ msgid "General"
+#~ msgstr "Allmänt"
+
+#~ msgid "Cache name:"
+#~ msgstr "Gömställets namn:"
+
+#~ msgid "User name:"
+#~ msgstr "Användarnamn:"
+
+#~ msgid "Type:"
+#~ msgstr "Typ:"
+
+#~ msgid "Status:"
+#~ msgstr "Status:"
+
+#~ msgid "Country:"
+#~ msgstr "Land:"
+
+#~ msgid "Size:"
+#~ msgstr "Storlek:"
+
+#~ msgid "Difficulty:"
+#~ msgstr "Svårighetsgrad:"
+
+#~ msgid "Terrain:"
+#~ msgstr "Terräng:"
+
+#~ msgid "Longitude:"
+#~ msgstr "Longitud:"
+
+#~ msgid "Latitude:"
+#~ msgstr "Latitud:"
+
+#~ msgid "Date hidden:"
+#~ msgstr "Datum dolt:"
+
+#~ msgid "Date created:"
+#~ msgstr "Datum skapat:"
+
+#~ msgid "Date last modified:"
+#~ msgstr "Datum senast ändrat:"
+
+#~ msgid "Log"
+#~ msgstr "Logg"
+
+#~ msgid "Previous"
+#~ msgstr "Föregående"
+
+#~ msgid "Next"
+#~ msgstr "Nästa"
+
+#~ msgid "Minimum difficulty:"
+#~ msgstr "Minimal svårighetsgrad:"
+
+#~ msgid "Maximum difficulty:"
+#~ msgstr "Maximal svårighetsgrad:"
+
+#~ msgid "Maximum Distance:"
+#~ msgstr "Maximalt avstånd:"
+
+#~ msgid "Start:"
+#~ msgstr "Start:"
+
+#~ msgid "End:"
+#~ msgstr "Slut:"
+
+#~ msgid "TextLabel"
+#~ msgstr "Textbeteckning"
+
+#~ msgid "Hint"
+#~ msgstr "Tips"
+
+#~ msgid "Logs"
+#~ msgstr "Loggar"
+
+#~ msgid "Marble - OpenDesktop plugin configuration"
+#~ msgstr "Marble - Inställning av insticksprogram för OpenDesktop"
+
+#~ msgid "Number of displayed items on the screen:"
+#~ msgstr "Antal objekt visade på skärmen:"
+
+#~ msgid "Map &Image"
+#~ msgstr "Kart&bild"
+
+#~ msgid "&Planet:"
+#~ msgstr "&Planet:"
+
+#~ msgid "&Size:"
+#~ msgstr "&Storlek:"
+
+#~ msgid "x"
+#~ msgstr "x"
+
+#~ msgid "Preview"
+#~ msgstr "Förhandsgranskning"
+
+#~ msgid "Filename"
+#~ msgstr "Filnamn"
+
+#~ msgid "Position I&ndicator:"
+#~ msgstr "Plats&markering:"
+
+#~ msgid "Configure Photo Plugin"
+#~ msgstr "Anpassa fotoinsticksprogram"
+
+#~ msgid "License"
+#~ msgstr "Licens"
+
+#~ msgid "Number of items on the screen"
+#~ msgstr "Antal objekt på skärmen"
+
+#~ msgid "Configure Position Marker Plugin"
+#~ msgstr "Anpassa insticksprogram för platsmarkering"
+
+#~ msgid "Cursor Shape"
+#~ msgstr "Markörform"
+
+#~ msgid "&Arrow"
+#~ msgstr "&Pil"
+
+#~ msgid "&Custom:"
+#~ msgstr "&Egen:"
+
+#~ msgid ""
+#~ "Position marker images indicating the direction should point north (top)."
+#~ msgstr ""
+#~ "Bilder för platsmarkering som anger riktningen som ska peka norrut "
+#~ "(uppåt)."
+
+#~ msgid "Trail"
+#~ msgstr "Spår"
+
+#~ msgid "&Accuracy:"
+#~ msgstr "Noggr&annhet:"
+
+#~ msgid "Color of the position marker's accuracy indicator."
+#~ msgstr "Färg på platsmarkeringens noggrannhetsindikering."
+
+#~ msgid "Trail:"
+#~ msgstr "Spår:"
+
+#~ msgid "Color of the position marker's trail."
+#~ msgstr "Färg på platsmarkeringens spår."
+
+#~ msgid "Routing Configuration - Marble"
+#~ msgstr "Anpassa vägbeskrivning - Marble"
+
+#~ msgid "Audible Turn Instructions"
+#~ msgstr "Hörbara köranvisningar"
+
+#~ msgid "Play a sound"
+#~ msgstr "Spela ett ljud"
+
+#~ msgid "Use this speaker"
+#~ msgstr "Använd den här talaren"
+
+#~ msgid ""
+#~ "<a href=\"http://userbase.kde.org/Marble/CustomSpeakers\">Get more "
+#~ "speakers</a>"
+#~ msgstr ""
+#~ "<a href=\"http://userbase.kde.org/Marble/CustomSpeakers\">Hämta fler "
+#~ "talare</a>"
+
+#~ msgid "Guidance Mode"
+#~ msgstr "Vägvisningsläge"
+
+#~ msgid "R"
+#~ msgstr "V"
+
+#~ msgid "Toggle GPS"
+#~ msgstr "Växla GPS"
+
+#~ msgid "zoom out"
+#~ msgstr "zooma ut"
+
+#~ msgid "zoom in"
+#~ msgstr "zooma in"
+
+#~ msgid "total time remaining"
+#~ msgstr "totalt återstående tid"
+
+#~ msgid "Satellites Configuration - Marble"
+#~ msgstr "Satellitinställning - Marble"
+
+#~ msgid "&Satellites"
+#~ msgstr "&Satelliter"
+
+#~ msgid "&Data Sources"
+#~ msgstr "&Datakällor"
+
+#~ msgid ""
+#~ "<html><head/><body><p><span style=\" font-weight:600;\">Last update:</"
+#~ "span></p></body></html>"
+#~ msgstr ""
+#~ "<html><head/><body><p><span style=\" font-weight:600;\">Senaste "
+#~ "uppdatering:</span></p></body></html>"
+
+#~ msgid "&Reload All Data Sources"
+#~ msgstr "&Ladda om alla datakällor"
+
+#~ msgid "Satellite Data Sources:"
+#~ msgstr "Satellitdatakällor:"
+
+#~ msgid "Add a new data source (URL)."
+#~ msgstr "Lägg till en ny datakälla (webbadress)."
+
+#~ msgid "Open a new data source from disk."
+#~ msgstr "Öppna en ny datakälla från disk."
+
+#~ msgid "Remove selected data source."
+#~ msgstr "Ta bort markerad datakälla."
+
+#~ msgid "(Built-in Data Sources for Earth Satellites)"
+#~ msgstr "(Inbyggda datakällor för jordsatelliter)"
+
+#~ msgid ""
+#~ "<html><head/><body><p>Supported formats: <a href=\"http://techbase.kde."
+#~ "org/Projects/Marble/SatelliteCatalogFormat\"><span style=\" text-"
+#~ "decoration: underline; color:#0000ff;\">Marble Satellite Catalogue</"
+#~ "span></a>, <a href=\"http://en.wikipedia.org/wiki/Two-line_element_set"
+#~ "\"><span style=\" text-decoration: underline; color:#0000ff;\">Two-Line-"
+#~ "Element Set</span></a></p></body></html>"
+#~ msgstr ""
+#~ "<html><head/><body><p>Format som stöds: <a href=\"http://techbase.kde.org/"
+#~ "Projects/Marble/SatelliteCatalogFormat\"><span style=\" text-decoration: "
+#~ "underline; color:#0000ff;\">Marble-satellitkatalog</span></a>, <a href="
+#~ "\"http://en.wikipedia.org/wiki/Two-line_element_set\"><span style=\" text-"
+#~ "decoration: underline; color:#0000ff;\">Tvåradselementmängd</span></a></"
+#~ "p></body></html>"
+
+#~ msgid "Plugin Inactive"
+#~ msgstr "Insticksprogram inaktivt"
+
+#~ msgid "&Activate Plugin"
+#~ msgstr "&Aktivera insticksprogram"
+
+#~ msgid ""
+#~ "Configuration options not available since the plugin is disabled at the "
+#~ "moment."
+#~ msgstr ""
+#~ "Inställning av alternativ ej tillgängligt eftersom insticksprogrammet för "
+#~ "närvarande är inaktiverat."
+
+#~ msgid "km/h"
+#~ msgstr "km/t"
+
+#~ msgid "Configure Stars Plugin"
+#~ msgstr "Anpassa stjärninsticksprogram"
+
+#~ msgid "Celestial Objects"
+#~ msgstr "Himmelskroppar"
+
+#~ msgid "Star Magnitude Limit"
+#~ msgstr "Magnitudgräns för stjärnor"
+
+#~ msgid " mag"
+#~ msgstr " mag"
+
+#~ msgid "Solar System"
+#~ msgstr "Solsystemet"
+
+#~ msgid "Sun"
+#~ msgstr "Sol"
+
+#~ msgid "Moon"
+#~ msgstr "Månen"
+
+#~ msgid "Mercury"
+#~ msgstr "Merkurius"
+
+#~ msgid "Venus"
+#~ msgstr "Venus"
+
+#~ msgid "Earth"
+#~ msgstr "Jorden"
+
+#~ msgid "Mars"
+#~ msgstr "Mars"
+
+#~ msgid "Jupiter"
+#~ msgstr "Jupiter"
+
+#~ msgid "Saturn"
+#~ msgstr "Saturnus"
+
+#~ msgid "Uranus"
+#~ msgstr "Uranus"
+
+#~ msgid "Neptune"
+#~ msgstr "Neptunus"
+
+#~ msgid "Use name labels"
+#~ msgstr "Använd namnbeteckningar"
+
+#~ msgid "Magnify Sun and Moon"
+#~ msgstr "Förstora solen och månen"
+
+#~ msgid "Other"
+#~ msgstr "Övrigt"
+
+#~ msgid "Deep Sky Object Labels"
+#~ msgstr "Beteckningar för avlägsna himmelskroppar"
+
+#~ msgid "Deep Sky Objects"
+#~ msgstr "Avlägsna himmelskroppar"
+
+#~ msgid "Lines and Orientation"
+#~ msgstr "Linjer och orientering"
+
+#~ msgid "Constellations"
+#~ msgstr "Stjärnbilder"
+
+#~ msgid "Names"
+#~ msgstr "Namn"
+
+#~ msgid "Latin Name"
+#~ msgstr "Latinskt namn"
+
+#~ msgid "Native Translation"
+#~ msgstr "Översättning"
+
+#~ msgid "Abbreviation"
+#~ msgstr "Förkortning"
+
+#~ msgid "Celestial Equator"
+#~ msgstr "Himmelsekvator"
+
+#~ msgid "Celestial Poles"
+#~ msgstr "Himmelspoler"
+
+#~ msgid "Ecliptic"
+#~ msgstr "Ekliptikan"
+
+#~ msgid "Configure Weather Plugin"
+#~ msgstr "Anpassa insticksprogram för väder"
+
+#~ msgid "Information"
+#~ msgstr "Information"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Here you can "
+#~ "choose if you want the weather condition to be shown (for example, clouds "
+#~ "or clear sky.) Marble will only show the condition if this information is "
+#~ "available.</p></body></html>\n"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Här kan du välja "
+#~ "om du vill att väderförhållanden ska visas (exempelvis moln eller klar "
+#~ "himmel). Marble visar bara förhållanden om informationen är tillgänglig.</"
+#~ "p></body></html>\n"
+
+#~ msgid "Weather condition"
+#~ msgstr "Väderförhållanden"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Selects if you "
+#~ "want the temperature to be shown. The temperature will only be shown for "
+#~ "the stations it is available for.</p></body></html>\n"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Välj om du vill "
+#~ "att tempetaturen ska visas. Temperaturen visas bara för stationer där den "
+#~ "är tillgänglig.</p></body></html>\n"
+
+#~ msgid "Temperature"
+#~ msgstr "Temperatur"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Select if you "
+#~ "want the wind direction to be shown. The wind direction will only be "
+#~ "shown if it is available for the particular station.</p></body></html>\n"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Välj om du vill "
+#~ "att vindriktningen ska visas. Vindriktningen visas bara om den är "
+#~ "tillgänglig för en viss station.</p></body></html>\n"
+
+#~ msgid "Wind direction"
+#~ msgstr "Vindriktning"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Select if you "
+#~ "want the wind speed to be shown. The wind speed will only be shown if it "
+#~ "is available for the particular station.</p></body></html>\n"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Välj om du vill "
+#~ "att vindhastigheten ska visas. Vindhastigheten visas bara om den är "
+#~ "tillgänglig för en viss station.</p></body></html>\n"
+
+#~ msgid "Wind speed"
+#~ msgstr "Vindhastighet"
+
+#~ msgid "Units"
+#~ msgstr "Enheter"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">The unit used to "
+#~ "measure the temperature.</p></body></html>\n"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Enheten som "
+#~ "används för att mäta temperatur.</p></body></html>\n"
+
+#~ msgid "Celsius"
+#~ msgstr "Celsius"
+
+#~ msgid "Fahrenheit"
+#~ msgstr "Fahrenheit"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">The unit used to "
+#~ "measure the wind speed.</p></body></html>\n"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Enheten som "
+#~ "används för att mäta vindhastighet.</p></body></html>\n"
+
+#~ msgid "Kilometers per hour"
+#~ msgstr "Kilometer/timme"
+
+#~ msgid "Miles per hour"
+#~ msgstr "Mile/timme"
+
+#~ msgid "Meters per second"
+#~ msgstr "Sekundmeter"
+
+#~ msgid "Knots"
+#~ msgstr "Knop"
+
+#~ msgid "Beaufort"
+#~ msgstr "Beaufort"
+
+#~ msgid "Pressure"
+#~ msgstr "Tryck"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">The unit used to "
+#~ "measure the air pressure.</p></body></html>\n"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Enheten som "
+#~ "används för att mäta lufttryck.</p></body></html>\n"
+
+#~ msgid "Hecto Pascals"
+#~ msgstr "Hektopascal"
+
+#~ msgid "Kilo Pascals"
+#~ msgstr "Kilopascal"
+
+#~ msgid "Bars"
+#~ msgstr "Bar"
+
+#~ msgid "Millimeters of Mercury"
+#~ msgstr "Millimeter kvicksilver"
+
+#~ msgid "Inches of Mercury"
+#~ msgstr "Tum kvicksilver"
+
+#~ msgid "Miscellaneous"
+#~ msgstr "Diverse"
+
+#~ msgid "Show only favorite items"
+#~ msgstr "Visa bara favoritobjekt"
+
+#~ msgid "Weather update interval"
+#~ msgstr "Uppdateringsintervall för väder"
+
+#~ msgid " hours"
+#~ msgstr " timmar"
+
+#~ msgid "Configure Wikipedia Plugin"
+#~ msgstr "Anpassa insticksprogram för Wikipedia"
+
+#~ msgid "Show thumbnail images"
+#~ msgstr "Visa miniatyrbilder"
+
+#~ msgid "Route type:"
+#~ msgstr "Typ av färdväg:"
+
+#~ msgid "Speed:"
+#~ msgstr "Hastighet:"
+
+#~ msgid "AppKey"
+#~ msgstr "Programnyckel"
+
+#~ msgid "Preference:"
+#~ msgstr "Önskemål:"
+
+#~ msgid "Avoid motorways"
+#~ msgstr "Undvik motorvägar"
+
+#~ msgid "Avoid tollways"
+#~ msgstr "Undvik betalvägar"
+
+#~ msgid "Avoid ferries"
+#~ msgstr "Undvik färjor"
+
+#~ msgid "Ascending slope:"
+#~ msgstr "Uppförsbacke:"
+
+#~ msgid "Descending slope:"
+#~ msgstr "Utförsbacke:"
+
+#~ msgid ""
+#~ "An AppKey is required for MapQuest routing to work. You can register one "
+#~ "<a href=\"http://developer.mapquest.com/web/products/open\">here</a>."
+#~ msgstr ""
+#~ "En programnyckel krävs för att vägbeskrivning med MapQuest. Du kan "
+#~ "registrera en <a href=\"http://developer.mapquest.com/web/products/open"
+#~ "\">här</a>."
+
+#~ msgid "Monav Configuration"
+#~ msgstr "Inställning av Monav"
+
+#~ msgid "Transport Type:"
+#~ msgstr "Överföringstyp:"
+
+#~ msgid "Any"
+#~ msgstr "Godtycklig"
+
+#~ msgid "Manage Maps"
+#~ msgstr "Hantera kartor"
+
+#~ msgid "Install New"
+#~ msgstr "Installera nya"
+
+#~ msgid "Continent"
+#~ msgstr "Kontinent"
+
+#~ msgid "Country"
+#~ msgstr "Land"
+
+#~ msgid "Download Variant"
+#~ msgstr "Ladda ner variant"
+
+#~ msgid "Install"
+#~ msgstr "Installera"
+
+#~ msgid "Nothing to do."
+#~ msgstr "Ingenting att göra."
+
+#~ msgid "%v/%m MB"
+#~ msgstr "%v/%m MiB"
+
+#~ msgid "Abort"
+#~ msgstr "Avbryt"
+
+#~ msgid "Transport:"
+#~ msgstr "Färdsätt:"
+
+#~ msgid "Profile:"
+#~ msgstr "Profil:"
+
+#~ msgid "Method"
+#~ msgstr "Metod"
+
+#~ msgid "Fastest"
+#~ msgstr "Snabbaste"
+
+#~ msgid "Shortest"
+#~ msgstr "Kortaste"
+
+#~ msgid "Please allow access to KWallet."
+#~ msgstr "Tillåt åtkomst till plånboken"
+
+#~ msgid ""
+#~ "You haven't allowed Marble to use KWallet yet.\n"
+#~ "This is dangerous since Marble will store your password without "
+#~ "encryption.\n"
+#~ "Are you sure?"
+#~ msgstr ""
+#~ "Du har inte tillåtit att Marble använder plånboken ännu.\n"
+#~ "Det är farligt eftersom Marble kommer att lagra lösenordet utan "
+#~ "kryptering.\n"
+#~ "Är du säker?"
+
+#~ msgid "KWallet Access in Marble"
+#~ msgstr "Åtkomst av plånboken i Marble"
+
+#~ msgid ""
+#~ "You still don't allow Marble to use KWallet.\n"
+#~ "If you haven't seen the KWallet dialog asking to allow access, it means "
+#~ "that you have disabled it.\n"
+#~ "If you would like to change this see System Information -> Account "
+#~ "Details -> KDE Wallet -> Access Control.\n"
+#~ "Choose your wallet and allow Marble to use it."
+#~ msgstr ""
+#~ "Du har fortfarande inte tillåtit att Marble använder plånboken.\n"
+#~ "Om du inte har sett dialogrutan från plånboken som frågar om du tillåter "
+#~ "åtkomst, betyder det att du har inaktiverat den.\n"
+#~ "Om du vill ändra det, se Systeminställningarna -> Kontoinformation -> KDE-"
+#~ "plånbok -> Åtkomstkontroll.\n"
+#~ "Välj plånbok och tillåt att Marble använder den."
+
+#~ msgid "Location Browser"
+#~ msgstr "Platsbläddrare"
+
+#~ msgid "Double click an entry of this list to get it displayed on the map."
+#~ msgstr "Dubbelklicka på en post i listan för att visa den på kartan."
+
+#~ msgid "Navigate to your 'Home Location'"
+#~ msgstr "Gå till din hemplats"
+
+#~ msgid "Do you allow Marble to use KWallet?"
+#~ msgstr "Tillåter du att Marble använder plånboken?"
+
+#~ msgid "Form"
+#~ msgstr "Formulär"
+
+#~ msgid "Url:"
+#~ msgstr "Webbadress:"
+
+#, fuzzy
+#~| msgid "&Add Folder"
+#~ msgid "Add SoundCue"
+#~ msgstr "&Lägg till katalog"
+
+#, fuzzy
+#~| msgid "Circled"
+#~ msgid "Circular"
+#~ msgstr "Cirkel"
+
+#~ msgid "&Name"
+#~ msgstr "&Namn"
+
+#~ msgid "Link"
+#~ msgstr "Länk"
+
+#~ msgid "Pause"
+#~ msgstr "Paus"
+
+#~ msgid "Pauses touring until you start it again"
+#~ msgstr "Pausar turen till du startar den igen"
+
+#~ msgid "Land"
+#~ msgstr "Land"
+
+#~ msgid "Andromeda"
+#~ msgstr "Andromeda"
+
+#~ msgid "Antlia"
+#~ msgstr "Luftpumpen"
+
+#~ msgid "Apus"
+#~ msgstr "Paradisfågeln"
+
+#~ msgid "Aquarius"
+#~ msgstr "Vattumannen"
+
+#~ msgid "Aquila"
+#~ msgstr "Örnen"
+
+#~ msgid "Ara"
+#~ msgstr "Altaret"
+
+#~ msgid "Aries"
+#~ msgstr "Väduren"
+
+#~ msgid "Auriga"
+#~ msgstr "Kusken"
+
+#~ msgid "Boötes"
+#~ msgstr "Björnvaktaren"
+
+#~ msgid "Caelum"
+#~ msgstr "Gravstickeln"
+
+#~ msgid "Camelopardalis"
+#~ msgstr "Giraffen"
+
+#~ msgid "Cancer"
+#~ msgstr "Kräftan"
+
+#~ msgid "Canes Venatici"
+#~ msgstr "Jakthundarna"
+
+#~ msgid "Canis Major"
+#~ msgstr "Stora hunden"
+
+#~ msgid "Canis Minor"
+#~ msgstr "Lilla hunden"
+
+#~ msgid "Capricornus"
+#~ msgstr "Stenbocken"
+
+#~ msgid "Carina"
+#~ msgstr "Kölen"
+
+#~ msgid "Cassiopeia"
+#~ msgstr "Cassiopeia"
+
+#~ msgid "Centaurus"
+#~ msgstr "Kentauren"
+
+#~ msgid "Cepheus"
+#~ msgstr "Valfisken"
+
+#~ msgid "Cetus"
+#~ msgstr "Cetus"
+
+#~ msgid "Chamaeleon"
+#~ msgstr "Kameleonten"
+
+#~ msgid "Circinus"
+#~ msgstr "Cirkelpassaren"
+
+#~ msgid "Columba"
+#~ msgstr "Duvan"
+
+#~ msgid "Coma Berenices"
+#~ msgstr "Berenices hår"
+
+#~ msgid "Corona Australis"
+#~ msgstr "Södra kronan"
+
+#~ msgid "Corona Borealis"
+#~ msgstr "Norra kronan"
+
+#~ msgid "Corvus"
+#~ msgstr "Korpen"
+
+#~ msgid "Crater"
+#~ msgstr "Krater"
+
+#~ msgid "Crux"
+#~ msgstr "Korset"
+
+#~ msgid "Cygnus"
+#~ msgstr "Svanen"
+
+#~ msgid "Delphinus"
+#~ msgstr "Delfinen"
+
+#~ msgid "Dorado"
+#~ msgstr "Dorado"
+
+#~ msgid "Draco"
+#~ msgstr "Draken"
+
+#~ msgid "Equuleus"
+#~ msgstr "Lilla hästen"
+
+#~ msgid "Eridanus"
+#~ msgstr "Eridanus"
+
+#~ msgid "Fornax"
+#~ msgstr "Ugnen"
+
+#~ msgid "Gemini"
+#~ msgstr "Tvillingarna"
+
+#~ msgid "Grus"
+#~ msgstr "Tranan"
+
+#~ msgid "Hercules"
+#~ msgstr "Herkules"
+
+#~ msgid "Horologium"
+#~ msgstr "Pendeluret"
+
+#~ msgid "Hydra"
+#~ msgstr "Vattenormen"
+
+#~ msgid "Hydrus"
+#~ msgstr "Lilla vattenormen"
+
+#~ msgid "Indus"
+#~ msgstr "Indus"
+
+#~ msgid "Lacerta"
+#~ msgstr "Ödlan"
+
+#~ msgid "Leo"
+#~ msgstr "Lejonet"
+
+#~ msgid "Leo Minor"
+#~ msgstr "Lilla lejonet"
+
+#~ msgid "Lepus"
+#~ msgstr "Haren"
+
+#~ msgid "Libra"
+#~ msgstr "Vågen"
+
+#~ msgid "Lupus"
+#~ msgstr "Vargen"
+
+#~ msgid "Lynx"
+#~ msgstr "Lynx"
+
+#~ msgid "Lyra"
+#~ msgstr "Lyran"
+
+#~ msgid "Mensa"
+#~ msgstr "Taffelberget"
+
+#~ msgid "Microscopium"
+#~ msgstr "Mikroskopet"
+
+#~ msgid "Monoceros"
+#~ msgstr "Enhörningen"
+
+#~ msgid "Musca"
+#~ msgstr "Flugan"
+
+#~ msgid "Norma"
+#~ msgstr "Vattenpasset"
+
+#~ msgid "Octans"
+#~ msgstr "Oktanten"
+
+#~ msgid "Ophiuchus"
+#~ msgstr "Ormbäraren"
+
+#~ msgid "Orion"
+#~ msgstr "Orion"
+
+#~ msgid "Pavo"
+#~ msgstr "Påfågeln"
+
+#~ msgid "Pegasus"
+#~ msgstr "Pegasus"
+
+#~ msgid "Perseus"
+#~ msgstr "Perseus"
+
+#~ msgid "Phoenix"
+#~ msgstr "Fenix"
+
+#~ msgid "Pictor"
+#~ msgstr "Målaren"
+
+#~ msgid "Pisces"
+#~ msgstr "Fiskarna"
+
+#~ msgid "Piscis Austrinus"
+#~ msgstr "Södra fisken"
+
+#~ msgid "Puppis"
+#~ msgstr "Akterskeppet"
+
+#~ msgid "Pyxis"
+#~ msgstr "Kompassen"
+
+#~ msgid "Reticulum"
+#~ msgstr "Rombiska nätet"
+
+#~ msgid "Sagitta"
+#~ msgstr "Pilen"
+
+#~ msgid "Sagittarius"
+#~ msgstr "Skytten"
+
+#~ msgid "Scorpius"
+#~ msgstr "Skorpionen"
+
+#~ msgid "Sculptor"
+#~ msgstr "Bildhuggaren"
+
+#~ msgid "Scutum"
+#~ msgstr "Sobieskis sköld"
+
+#~ msgid "Serpens"
+#~ msgstr "Ormhuvudet"
+
+#~ msgid "Sextans"
+#~ msgstr "Sextanten"
+
+#~ msgid "Taurus"
+#~ msgstr "Oxen"
+
+#~ msgid "Telescopium"
+#~ msgstr "Teleskopet"
+
+#~ msgid "Triangulum"
+#~ msgstr "Triangeln"
+
+#~ msgid "Triangulum Australe"
+#~ msgstr "Södra triangeln"
+
+#~ msgid "Tucana"
+#~ msgstr "Tukanen"
+
+#~ msgid "Ursa Major"
+#~ msgstr "Stora björnen"
+
+#~ msgid "Ursa Minor"
+#~ msgstr "Lilla björnen"
+
+#~ msgid "Vela"
+#~ msgstr "Seglen"
+
+#~ msgid "Virgo"
+#~ msgstr "Jungfrun"
+
+#~ msgid "Volans"
+#~ msgstr "Flygfisken"
+
+#~ msgid "Vulpecula"
+#~ msgstr "Räven"
+
+#~ msgid "Show distance labels for each section"
+#~ msgstr "Visa avståndsbeteckningar för varje sektion"
+
+#~ msgid "Constellation Labels"
+#~ msgstr "Beteckningar för stjärnbilder"
+
+#~ msgid "Constellation Names"
+#~ msgstr "Stjärnbildernas namn"
+
+#~ msgid "Open"
+#~ msgstr "Öppna"
+
+#~ msgid "Military Grid Reference System (MGRS)"
+#~ msgstr "Military Grid Reference System (MGRS)"
+
+#~ msgid "Food"
+#~ msgstr "Mat"
+
+#~ msgctxt "Action for toggling the atmosphere"
+#~ msgid "&Atmosphere"
+#~ msgstr "&Atmosfär"
+
+#~ msgid "Enable tab to see gpxFileView"
+#~ msgstr "Aktivera flik för att visa GPX-filvy"
+
+#~ msgctxt "Action for toggling the 'current location' box"
+#~ msgid "Current Location"
+#~ msgstr "Nuvarande plats"
+
+#~ msgctxt "Action for toggling the navigation panel"
+#~ msgid "Show &Navigation Panel"
+#~ msgstr "Visa &navigationsruta"
+
+#~ msgctxt "Status tip"
+#~ msgid "Show Navigation Panel"
+#~ msgstr "Visa navigationsruta"
+
+#~ msgctxt "Action for showing the File View"
+#~ msgid "&Show File View"
+#~ msgstr "Vi&sa filvy"
+
+#~ msgid "<!DOCTYPE html>"
+#~ msgstr "<!DOCTYPE html>"
+
+#~ msgid "body {        padding: 10px;    }"
+#~ msgstr "body {        padding: 10px;    }"
+
+#~ msgid "Guides"
+#~ msgstr "Hjälplinjer"
+
+#~ msgid "Name Ids of plugins."
+#~ msgstr "Namnidentifikation för insticksprogram."
+
+#~ msgid "List of toggles for enabling plugins."
+#~ msgstr "Lista med knappar för att aktivera insticksprogram."
+
+#~ msgid "List of toggles for making plugins visible."
+#~ msgstr "Lista med knappar för att göra insticksprogram synliga."
+
+#~ msgid "Marble Infocenter"
+#~ msgstr "Marbles informationcentral"
+
+#~ msgid "Data Sheet"
+#~ msgstr "Datablad"
+
+#~ msgid "Name of the location"
+#~ msgstr "Platsens namn"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "size:14pt; font-weight:600;\">Name</span></p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "size:14pt; font-weight:600;\">Namn</span></p></body></html>"
+
+#~ msgid "Role of the location."
+#~ msgstr "Platsens typ."
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "style:italic;\">Role</span></p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "style:italic;\">Typ</span></p></body></html>"
+
+#~ msgid "Alternative name"
+#~ msgstr "Alternativt namn"
+
+#~ msgid "Alternative name of the location."
+#~ msgstr "Alternativt namn på platsen."
+
+#~ msgid "Alternative Name"
+#~ msgstr "Alternativt namn"
+
+#~ msgid "Short description:"
+#~ msgstr "Kort beskrivning:"
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">No description "
+#~ "available.</p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">If you are connected to "
+#~ "the Internet please click the \"Wikipedia\" tab at the top of this page "
+#~ "to get more information.</p></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Ingen beskrivning "
+#~ "tillgänglig.</p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Om du är ansluten till "
+#~ "Internet, klicka gärna på fliken \"Wikipedia\" längst upp på den här "
+#~ "sidan för att få mer information.</p></body></html>"
+
+#~ msgid ""
+#~ "000° 00' 00\" N\n"
+#~ "000° 00' 00\" E "
+#~ msgstr ""
+#~ "000° 00' 00\" N\n"
+#~ "000° 00' 00\" Ö "
+
+#~ msgid "9000.0 m"
+#~ msgstr "9000,0 m"
+
+#~ msgid "1000000"
+#~ msgstr "1000000"
+
+#~ msgid "Area:"
+#~ msgstr "Yta:"
+
+#~ msgid "0.0 sq km"
+#~ msgstr "0,0 km²"
+
+#~ msgid "Diameter:"
+#~ msgstr "Diameter:"
+
+#~ msgid "Timezone (Normal/DST):"
+#~ msgstr "Tidszon (normal eller sommartid):"
+
+#~ msgid "gmt / dst"
+#~ msgstr "Normaltid/sommartid"
+
+#~ msgid "State:"
+#~ msgstr "Stat:"
+
+#~ msgid "Wikipedia"
+#~ msgstr "Wikipedia"
+
+#~ msgid "Back"
+#~ msgstr "Tillbaka"
+
+#~ msgid "Move backwards one step in the browsing history."
+#~ msgstr "Gå tillbaka ett steg i bläddringshistoriken."
+
+#~ msgid "Print Page"
+#~ msgstr "Skriv ut sida"
+
+#~ msgid "Reverse"
+#~ msgstr "Vänd"
+
+#~ msgid "Sun is Zenith at"
+#~ msgstr "Solen är i zenit"
+
+#~ msgid "Show"
+#~ msgstr "Visa"
+
+#~ msgid "Hide"
+#~ msgstr "Dölj"
+
+#~ msgid "Show Zenith"
+#~ msgstr "Visa zenit"
+
+#~ msgid "Hide Zenith"
+#~ msgstr "Dölj zenit"
+
+#~ msgid "Shows and hides the zenith location of the sun"
+#~ msgstr "Visar och döljer solens zenitposition"
+
+#~ msgid "Around"
+#~ msgstr "Omkring"
+
+#~ msgid "dd/MM/yyyy hh:mm AP"
+#~ msgstr "yyyy-MM-dd hh:mm"
+
+#~ msgid "M/d/yyyy hh:mm"
+#~ msgstr "yyyy-MM-dd hh:mm"
+
+#~ msgid "Profile"
+#~ msgstr "Profil"
+
+#~ msgid ""
+#~ "*.gpx *.kml *.log *.osm *.pnt|All Supported Files\n"
+#~ "*.gpx|GPS Data\n"
+#~ "*.kml|Google Earth KML\n"
+#~ "*.log|TangoGPS Logfile\n"
+#~ "*.osm|OpenStreetMap Data\n"
+#~ "*.pnt|Micro World Data Bank II"
+#~ msgstr ""
+#~ "*.gpx *.kml *.log *.osm *.pnt|Alla filer som stöds\n"
+#~ "*.gpx|GPS-data\n"
+#~ "*.kml|Google Earth KML\n"
+#~ "*.log|TangoGPS loggfil\n"
+#~ "*.osm|OpenStreetMap-data\n"
+#~ "*.pnt|Micro World Data Bank II"
+
+#~ msgid "Greenwich Mean Time"
+#~ msgstr "Greenwichtid"
+
+#~ msgid "&Search"
+#~ msgstr "&Sök"
+
+#~ msgid "Search line"
+#~ msgstr "Sökrad"
+
+#~ msgid "Here you can enter the name of the location you are searching for."
+#~ msgstr "Här kan du skriva in namnet på platsen du söker efter."
+
+#~ msgid "WMS Support"
+#~ msgstr "Stöd för WMS"
+
+#~ msgid "Check speed of gps drawing"
+#~ msgstr "Kontrollera GPS-uppritningens hastighet"
+
+#~ msgid "Enable tab to show the current location"
+#~ msgstr "Aktivera fliken för att visa nuvarande plats"
+
+#~ msgid "Show or hide routing options"
+#~ msgstr "Visa eller dölj alternativ för vägbeskrivning"
+
+#~ msgid "<a href=\"http://edu.kde.org\">Configure</a>"
+#~ msgstr "<a href=\"http://edu.kde.org\">Anpassa</a>"
+
+#~ msgid "Address or search term"
+#~ msgstr "Adress eller sökbegrepp"
+
+#~ msgid "Enter a search term and press Enter."
+#~ msgstr "Ange ett sökbegrepp och tryck på returtangenten."
+
+#, fuzzy
+#~| msgid "Search"
+#~ msgid "Search..."
+#~ msgstr "Sök"
+
+#~ msgid "(c) 2007, 2008, 2009, 2010"
+#~ msgstr "© 2007, 2008, 2009, 2010"
+
+#~ msgid "Online Maps (Static URL, OSM style)"
+#~ msgstr "Nätkartor (statisk webbadress, OSM-stil)"
+
+#~ msgid "Server URL:"
+#~ msgstr "Serverwebbadress:"
+
+#~ msgid "Image Format:"
+#~ msgstr "Bildformat:"
+
+#~ msgid "Image format of the tiles."
+#~ msgstr "Rutornas bildformat."
+
+#~ msgid "Re-center"
+#~ msgstr "Centrera igen"
+
+#~ msgctxt "Remove All Bookmarks"
+#~ msgid "&Remove All Bookmarks"
+#~ msgstr "&Ta bort alla bokmärken"
+
+#~ msgid "Are you sure you want to delete all bookmarks?"
+#~ msgstr "Är du säker på att du vill ta bort alla bokmärken?"
+
+#~ msgid "&OK"
+#~ msgstr "&Ok"
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans'; font-size:10pt; font-"
+#~ "weight:400; font-style:normal;\">\n"
+#~ "<table border=\"0\" style=\"-qt-table-type: root; margin-top:4px; margin-"
+#~ "bottom:4px; margin-left:4px; margin-right:4px;\">\n"
+#~ "<tr>\n"
+#~ "<td style=\"border: none;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-family:'DejaVu Sans'; font-size:9pt;\"></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-family:'DejaVu Sans'; font-size:9pt;\"></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-family:'DejaVu Sans'; font-size:9pt;\"></p></td></tr></table></"
+#~ "body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans'; font-size:10pt; font-"
+#~ "weight:400; font-style:normal;\">\n"
+#~ "<table border=\"0\" style=\"-qt-table-type: root; margin-top:4px; margin-"
+#~ "bottom:4px; margin-left:4px; margin-right:4px;\">\n"
+#~ "<tr>\n"
+#~ "<td style=\"border: none;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-family:'DejaVu Sans'; font-size:9pt;\"></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-family:'DejaVu Sans'; font-size:9pt;\"></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-family:'DejaVu Sans'; font-size:9pt;\"></p></td></tr></table></"
+#~ "body></html>"
+
+#~ msgid "Open File..."
+#~ msgstr "Öppna fil..."
+
+#~ msgid "RoutingWidget"
+#~ msgstr "Grafisk resvägskomponent"
+
+#~ msgid ""
+#~ "<font size=\"-1\" color=\"black\">Next Instruction On The Route</font>"
+#~ msgstr ""
+#~ "<font size=\"-1\" color=\"black\">Nästa instruktion om färdvägen</font>"
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "size:small; color:#000000;\">0 m</span></p></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "size:small; color:#000000;\">0 m</span></p></body></html>"
+
+#~ msgid "Routing Widget"
+#~ msgstr "Grafisk resvägskomponent"
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<table border=\"0\" style=\"-qt-table-type: root; margin-top:4px; margin-"
+#~ "bottom:4px; margin-left:4px; margin-right:4px;\">\n"
+#~ "<tr>\n"
+#~ "<td style=\"border: none;\">\n"
+#~ "<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-"
+#~ "left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span "
+#~ "style=\" font-weight:600;\">Routing Information</span></p></td></tr></"
+#~ "table></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<table border=\"0\" style=\"-qt-table-type: root; margin-top:4px; margin-"
+#~ "bottom:4px; margin-left:4px; margin-right:4px;\">\n"
+#~ "<tr>\n"
+#~ "<td style=\"border: none;\">\n"
+#~ "<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-"
+#~ "left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span "
+#~ "style=\" font-weight:600;\">Resvägsinformation</span></p></td></tr></"
+#~ "table></body></html>"
+
+#~ msgid "Time remaining to reach destination"
+#~ msgstr "Återstående tid innan resmålet nås"
+
+#~ msgid "0 Hours  0 Minutes"
+#~ msgstr "0 timmar  0 minuter"
+
+#~ msgid "Next Instruction On The Route"
+#~ msgstr "Nästa instruktion om färdvägen"
+
+#~ msgid "Distance Covered on the current instruction"
+#~ msgstr "Tillryggalagt avstånd för nuvarande instruktion"
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><a href=\"http://edu."
+#~ "kde.org/marble\"><span style=\" font-family:'DejaVu Sans'; font-size:8pt; "
+#~ "text-decoration: underline; color:#0057ae;\">Configure</span></a></p></"
+#~ "body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><a href=\"http://edu."
+#~ "kde.org/marble\"><span style=\" font-family:'DejaVu Sans'; font-size:8pt; "
+#~ "text-decoration: underline; color:#0057ae;\">Anpassa</span></a></p></"
+#~ "body></html>"
+
+#~ msgid "Avoid"
+#~ msgstr "Undvik"
+
+#~ msgid "When checked, highways will be avoided in car routing"
+#~ msgstr "Om markerat, undviks motorvägar vid vägbeskrivningar för bil"
+
+#~ msgid "Highways"
+#~ msgstr "Motorvägar"
+
+#~ msgid "When checked, toll roads will be avoided"
+#~ msgstr "Om markerat, undviks betalvägar"
+
+#~ msgid "Toll Roads"
+#~ msgstr "Betalvägar"
+
+#~ msgid "<font size=\"-1\" color=\"black\">Next</font>"
+#~ msgstr "<font size=\"-1\" color=\"black\">Nästa</font>"
+
+#~ msgid "<font size=\"-1\" color=\"black\">0 m</font>"
+#~ msgstr "<font size=\"-1\" color=\"black\">0 m</font>"
+
+#~ msgid "Provides options for adjusting navigation"
+#~ msgstr "Tillhandahåller alternativ för att justera navigering"
+
+#~ msgid "Routing Information"
+#~ msgstr "Vägbeskrivningsinformation"
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<table border=\"0\" style=\"-qt-table-type: root; margin-top:4px; margin-"
+#~ "bottom:4px; margin-left:4px; margin-right:4px;\">\n"
+#~ "<tr>\n"
+#~ "<td style=\"border: none;\">\n"
+#~ "<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-"
+#~ "left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span "
+#~ "style=\" font-size:12pt; font-weight:600;\">00:00</span></p></td></tr></"
+#~ "table></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<table border=\"0\" style=\"-qt-table-type: root; margin-top:4px; margin-"
+#~ "bottom:4px; margin-left:4px; margin-right:4px;\">\n"
+#~ "<tr>\n"
+#~ "<td style=\"border: none;\">\n"
+#~ "<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-"
+#~ "left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span "
+#~ "style=\" font-size:12pt; font-weight:600;\">00:00</span></p></td></tr></"
+#~ "table></body></html>"
+
+#~ msgid "distance covered on the current instruction"
+#~ msgstr "tillryggalagt avstånd för nuvarande instruktion"
+
+#~ msgid "Navigator Float Item"
+#~ msgstr "Frikopplat navigeringsobjekt"
+
+#~ msgid "Minutes"
+#~ msgstr "Minuter"
+
+#~ msgid "Meters"
+#~ msgstr "Meter"
+
+#~ msgid "Distance Covered"
+#~ msgstr "Tillryggalagt avstånd"
+
+#~ msgid "&Date"
+#~ msgstr "&Datum"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Change sun time</p></"
+#~ "body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Ändra soltid</p></"
+#~ "body></html>"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Center the map on sun "
+#~ "position</p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Centrera kartan på "
+#~ "solens position</p></body></html>"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Display sun position</"
+#~ "p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Visa solens position</"
+#~ "p></body></html>"
+
+#~ msgid "Bookmark"
+#~ msgstr "Bokmärke"
+
+#~ msgid "GMT"
+#~ msgstr "GMT"
+
+#~ msgid ""
+#~ "This control panel allows you to adjust the map according to your needs."
+#~ msgstr "Styrrutan låter dig justera kartan enligt dina behov."
+
+#~ msgid "Click to add another routing destination input field"
+#~ msgstr ""
+#~ "Klicka för att lägga till ytterligare ett inmatningsfält av destination "
+#~ "för vägbeskrivning"
+
+#~ msgid "Centers onto your current position"
+#~ msgstr "Centrera på din nuvarande position"
+
+#~ msgid ""
+#~ "In navigation mode the view will center onto your current position and "
+#~ "will try to emulate the behaviour of a navigation system"
+#~ msgstr ""
+#~ "I navigeringsläge kommer vyn att centreras på din nuvarande position, och "
+#~ "försöker efterlikna beteendet hos ett navigeringssystem"
+
+#~ msgid "Navigation mode"
+#~ msgstr "Navigeringsläge"
+
+#~ msgid "Your current speed"
+#~ msgstr "Din nuvarande hastighet"
+
+#~ msgid "Your current speed (measured e.g. via a GPS device)"
+#~ msgstr "Din nuvarande hastighet (t.ex. mätt via en GPS-enhet)"
+
+#~ msgid "Your current position"
+#~ msgstr "Din nuvarande plats"
+
+#~ msgid "Your current position (measured e.g. via a GPS device)"
+#~ msgstr "Din nuvarande plats (t.ex. mätt via en GPS-enhet)"
+
+#~ msgid "Fuzzy description of your position"
+#~ msgstr "Grov beskrivning av din position"
+
+#~ msgid "<b>Unidentified Position</b>"
+#~ msgstr "<b>Oidentifierad position</b>"
+
+#~ msgid "Longitude of your current position"
+#~ msgstr "Din nuvarande positions longitud"
+
+#~ msgid "+00°00'00\" E"
+#~ msgstr "+00°00'00\" Ö"
+
+#~ msgid "Latitude of your current position"
+#~ msgstr "Din nuvarande positions latitud"
+
+#~ msgid "+00°00'00\" N"
+#~ msgstr "+00°00'00\" N"
+
+#~ msgid "Altitude of your current position"
+#~ msgstr "Din nuvarande positions höjd"
+
+#~ msgid "000 m"
+#~ msgstr "000 m"
+
+#~ msgid "p"
+#~ msgstr "p"
+
+#~ msgid "Region"
+#~ msgstr "Område"

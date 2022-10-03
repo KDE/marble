@@ -1,0 +1,2456 @@
+<?xml version="1.0" ?>
+<!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
+ <!ENTITY % addindex "IGNORE">
+ <!ENTITY % German "INCLUDE"
+><!-- change language only here -->
+ ]>
+
+ <book id="marble" lang="&language;">
+
+	 <bookinfo>
+		 <title
+>Das Handbuch zu &marble;</title>
+
+		 <authorgroup>
+			 <author
+><firstname
+>Torsten</firstname
+> <surname
+>Rahn</surname
+> <affiliation
+> <address
+>&Torsten.Rahn.mail;</address>
+				 </affiliation>
+			 </author>
+			 <author
+><firstname
+>Dennis</firstname
+> <surname
+>Nienhüser</surname
+> <affiliation
+> <address
+>&Dennis.Nienhueser.mail;</address>
+				 </affiliation
+>				 
+			 </author>
+
+			 <othercredit role="translator"
+><firstname
+>Stephan</firstname
+><surname
+>Johach</surname
+><affiliation
+><address
+><email
+>hunsum@gmx.de</email
+></address
+></affiliation
+><contrib
+>Deutsche Übersetzung</contrib
+></othercredit
+> 
+		 </authorgroup>
+
+		 <copyright>
+			 <year
+>2005</year>
+             <year
+>2006</year>
+             <year
+>2007</year>
+			 <holder
+>&Torsten.Rahn;</holder>
+		 </copyright>
+		 <copyright>
+			 <year
+>2010</year>
+                         <year
+>2013</year>
+			 <holder
+>&Dennis.Nienhueser;</holder>
+		 </copyright>
+
+		 <legalnotice
+>&FDLNotice;</legalnotice>
+
+		 <date
+>2013-12-12</date>
+		 <releaseinfo
+>1.7 (&kde; 4.13)</releaseinfo>
+
+		 <abstract>
+			<para
+>&marble; ist ein geografischer Atlas und ein virtueller Globus, mit dem Sie ganz leicht Orte auf Ihrem Planeten erkunden können. Sie können &marble; dazu benutzen einen Adressen zu finden, auf einfache Art Karten zu erstellen, Entfernungen zu messen und Informationen über bestimmte Orte abzufragen, über die Sie gerade etwas in den Nachrichten gehört oder im Internet gelesen haben. Die Benutzeroberfläche ist klar, einfach und leicht zu bedienen. </para>
+		 </abstract>
+
+		 <keywordset>
+			 <keyword
+>KDE</keyword>
+			 <keyword
+>Bildung</keyword>
+			 <keyword
+>Erde</keyword>
+			 <keyword
+>Globus</keyword>
+			 <keyword
+>Geografie</keyword>
+			 <keyword
+>Marble</keyword>
+		 </keywordset>
+
+	 </bookinfo>
+
+	 <chapter id="introduction">
+		 <title
+>Einleitung</title>
+         <screenshot>
+             <screeninfo
+>&marble; Logo</screeninfo>
+             <mediaobject>
+                 <imageobject
+><imagedata fileref="logo-1.png" format="PNG"/></imageobject>
+                 <textobject
+><phrase
+>&marble; Logo</phrase
+></textobject>
+             </mediaobject>
+         </screenshot>
+		 <para
+>Willkommen zu &marble;, einem kleinen interaktiven Globus und geografischen Atlas, der immer zur Hand ist. Wie bei einem richtiger Atlas oder Globus können Sie sich mit &marble; beliebig auf der Karte bewegen und nach Orten suchen. Darüber hinaus können Sie mit &marble; Ausschnitte vergrößern und die Erdoberfläche über viele verschiedene Ansichten betrachten. In der Voreinstellung bietet &marble; 11 verschiedene Ansichten: <guilabel
+>Atlas</guilabel
+>, <guilabel
+>OpenStreetMap</guilabel
+>, <guilabel
+>Satellitenansicht</guilabel
+>, <guilabel
+>Die Erde bei Nacht</guilabel
+>, <guilabel
+>Historische Karte 1689</guilabel
+>, <guilabel
+>Mond</guilabel
+>, <guilabel
+>Einfache Karte</guilabel
+>,  <guilabel
+>Niederschlag (Dezember)</guilabel
+>, <guilabel
+>Niederschlag (Juli)</guilabel
+>, <guilabel
+>Temperatur (Dezember)</guilabel
+> und <guilabel
+>Temperatur (Juli)</guilabel
+>. </para>
+         <para
+>&marble; verfügt über eine kleine Datenbank von mehr als 12000 Orten (Städte, Berge, Vulkane) nach denen gesucht werden kann und die mit der Wikipedia verknüpft sind. Darüber hinaus können Sie mit &marble; Entfernungen zwischen mehreren frei platzierbaren Punkten messen. </para>
+         <para
+>&marble; ist freie Software und unter der &GNU; Lesser Public License lizensiert. </para>
+
+	 </chapter>
+
+	 <chapter id="quick-start">
+		 <title
+>&marble; Schnelleinstieg: Navigation</title>
+
+		 <para
+>Hier sehen Sie &marble;, nachdem Sie es zum ersten Mal gestartet haben, entweder aus dem &kmenu; mit <menuchoice
+><guimenu
+>Programme</guimenu
+><guisubmenu
+>Lernprogramme</guisubmenu
+><guisubmenu
+>Verschiedenes</guisubmenu
+><guimenuitem
+>Marble (Schreibtischglobus)</guimenuitem
+></menuchoice
+> oder mit <keycombo action="simul"
+>&Alt;<keycap
+>F2</keycap
+></keycombo
+> und Eingabe von <command
+>marble</command
+> in das Textfeld.</para>
+		 <screenshot>
+			 <screeninfo
+>Das Hauptfenster von &marble;</screeninfo>
+			 <mediaobject>
+				 <imageobject
+><imagedata fileref="quick-1.png" format="PNG"/></imageobject>
+				 <textobject
+><phrase
+>Das Hauptfenster von &marble;</phrase
+></textobject>
+			 </mediaobject>
+		 </screenshot>
+
+		 <para
+>Rechts sehen Sie eine topologische Karte unseres schönen Heimatplaneten. Zur besseren Orientierung bietet die Karte in der linken unteren Ecke einen Maßstab und rechts oben eine Windrose. Zum Navigieren und Steuern der Ansicht können Sie die Werkzeuge rechts auf dem Werkzeugkarte <guilabel
+>Navigation</guilabel
+> verwenden. Drücken Sie die Pfeiltasten, um den Globus zu rotieren. Die Pfeil-Knöpfe <guilabel
+>Nach oben</guilabel
+> und <guilabel
+>Nach unten</guilabel
+> kippen die Erdachse vor und zurück. Die Pfeil-Knöpfe <guilabel
+>Links</guilabel
+> und <guilabel
+>Rechts</guilabel
+> drehen die Erde um ihre physikalische Achse. </para>
+         <para
+>Dasselbe Verhalten erreichen Sie durch Drücken der &LMBn; wenn sich der Mauszeiger über dem Globus befindet und Bewegen der Maus bei gedrückter &LMBr;. Mit dieser Navigation durch <quote
+>Ziehen und Ablegen</quote
+> können Sie den Blickwinkel wesentlich einfacher und genauer justieren. Die Pfeiltasten auf der Tastatur sind eine weitere Alternative zur schnellen Änderung der Richtungen. </para>
+         <para
+>Mit dem senkrechten Schieberegler können Sie die Vergrößerung steuern. Wenn Ihre Maus über ein Mausrad verfügt, können Sie stattdessen auch dieses benutzen, oder bewegen Sie die Maus bei gleichzeitig gedrückter &LMBr; und &RMBr; auf und ab. Das schrittweise Ändern der Vergrößerung kann über die Knöpfe <guilabel
+>Vergrößern</guilabel
+> und <guilabel
+>Verkleinern</guilabel
+>, die sich oberhalb bzw. unterhalb des Schiebereglers befinden, durchgeführt werden. Alternativ können Sie auch die Tasten <keycap
+>+</keycap
+> und <keycap
+>-</keycap
+> verwenden. </para>
+         <para
+>Abhängig von der Auflösung der Karte werden beim Vergrößern mehr Details angezeigt. Kleinere Städte erscheinen und bei der topografischen Karte wird Ihnen auffallen, dass die Küstenlinien als Vektorgrafiken bereitgestellt werden. </para>
+         <para
+>Falls Sie mal die Orientierung verlieren, können Sie den Blickwinkel und die Vergrößerungsstufe wieder auf die Anfangswerte zurücksetzen: Klicken Sie einfach auf das <guiicon
+>Haus</guiicon
+>-Symbol oder drücken Sie die Taste <keycap
+>Pos 1</keycap
+> auf Ihrer Tastatur. Um die aktuelle Position (Mitte der Karte) zur Startposition zu machen,wählen Sie <guilabel
+>Heimatort setzen</guilabel
+> im Menü <guimenu
+>Lesezeichen</guimenu
+>. </para>
+	 <para
+>Klicken auf die Statusleiste mit der &RMBn; öffnet ein Menü, in dem das Aussehen der Statusleiste eingestellt werden kann. Die Position, Höhe, die aktuelle Kachel-Vergrößerungsstufe und eine Fortschrittsanzeige beim Herunterladen von Kartendaten kann angezeigt werden. </para>
+	 </chapter>
+
+     <chapter id="map-views">
+         <title
+>Das Auswählen verschiedener Kartenansichten für &marble;</title>
+         <para
+>&marble; verfügt über 11 unterschiedliche Ansichten: <guilabel
+>Atlas</guilabel
+>, <guilabel
+>OpenStreetMap</guilabel
+>, <guilabel
+>Satellitenansicht</guilabel
+>, <guilabel
+>Die Erde bei Nacht</guilabel
+>, <guilabel
+>Historische Karte 1689</guilabel
+>, <guilabel
+>Mond</guilabel
+>, <guilabel
+>Einfache Karte</guilabel
+>,  <guilabel
+>Niederschlag (Dezember)</guilabel
+>, <guilabel
+>Niederschlag (Juli)</guilabel
+>, <guilabel
+>Temperatur (Dezember)</guilabel
+> und <guilabel
+>Temperatur (Juli)</guilabel
+>.  Sie können zwischen diesen Ansichten umschalten, indem Sie den Reiter <guilabel
+>Kartenansicht</guilabel
+> bei den Werkzeugen von &marble; anklicken. </para>
+
+         <screenshot>
+             <screeninfo
+>&marble; Kartenansichten</screeninfo>
+             <mediaobject>
+                 <imageobject
+><imagedata fileref="mapview-1.png" format="PNG"/></imageobject>
+                 <textobject
+><phrase
+>&marble; Kartenansichten</phrase
+></textobject>
+             </mediaobject>
+         </screenshot>
+
+         <itemizedlist>
+             <listitem>
+                <para
+><guilabel
+>Atlas</guilabel
+>: Eine klassische topografische Karte. Sie verwendet Vektorlinien ( <quote
+>MicroWorldDataBase II</quote
+> ) zur Markierung der Küstenlinien, Ländergrenzen &etc; und Bitmap-Grafiken  (<quote
+>SRTM30</quote
+>)  zur Darstellung der Höhenlinien.  </para>
+             </listitem>
+              <listitem>
+                <para
+><guilabel
+>OpenStreetMap</guilabel
+>: Eine globale Straßenkarte des Projektes OpenStreetMap (OSM). Bei OSM handelt es sich um eine offene Gemeinschaftsarbeit, die freies editierbares Kartenmaterial erstellt. Die OSM-Daten wurden mit Hilfe von Mapnik in grafische Karten umgewandelt. </para>
+             </listitem>
+             <listitem>
+                <para
+><guilabel
+>Satellitenansicht</guilabel
+>: Die Erde vom Weltraum aus gesehen. Diese Karte basiert auf den wunderschönen <ulink url="https://earthobservatory.nasa.gov/Features/BlueMarble/"
+>Blue Marble Next Generation</ulink
+> Bildern der NASA. Dank an: Erdobservatorium der NASA </para>
+             </listitem>
+             <listitem>
+                <para
+><guilabel
+>Die Erde bei Nacht</guilabel
+>: Dieses Bild der Stadtlichter der Erde wurde aus den Daten des Defense Meteorological Satellite Program (DMSP) Operational Linescan System (OLS) erstellt. </para>
+             </listitem>
+             <listitem>
+                <para
+><guilabel
+>Historische Weltkarte</guilabel
+>: Eine historische Karte aus dem Jahr 1689, erstellt durch G. van Schagen in Amsterdam. </para>
+             </listitem>
+             <listitem>
+                <para
+><guilabel
+>Mond</guilabel
+>: Die Karte basiert auf Daten der Mondmission ‚Clementine‘ (Basiskartenmosaik UVVIS). Dank an: NASA/SDIO, mit freundlicher Genehmigung vom USGS Astrogeologischen Forschungsprogramm. </para>
+             </listitem>
+             <listitem>
+                <para
+><guilabel
+>Einfache Karte</guilabel
+>: Eine klassische topografische Karte. Sie verwendet Vektorlinien zur Markierung der Küstenlinien, Ländergrenzen &etc; </para>
+             </listitem>
+             <listitem>
+                <para
+><guilabel
+>Niederschlag (Dezember)</guilabel
+>: Eine Karte, die den durchschnittlichen Niederschlag im Dezember anzeigt. </para>
+             </listitem>
+             <listitem>
+                <para
+><guilabel
+>Niederschlag (Juli)</guilabel
+>: Eine Karte, die den durchschnittlichen Niederschlag (Regen/Schnee/Hagel/usw.) im Juli anzeigt. </para>
+             </listitem>
+             <listitem>
+                <para
+><guilabel
+>Temperatur (Dezember)</guilabel
+>: Eine Karte, die die durchschnittliche Temperatur im Dezember anzeigt. </para>
+             </listitem>
+             <listitem>
+                <para
+><guilabel
+>Temperatur (Juli)</guilabel
+>: Eine Karte, die die durchschnittliche Temperatur im Juli anzeigt. </para>
+             </listitem>
+         </itemizedlist>
+     </chapter>
+
+     <chapter id="search-places">
+         <title
+>Orte suchen mit &marble;</title>
+         <para
+>&marble; verfügt über eine kleine Datenbank von mehr als 12000 Städten (von  <ulink url="https://www.populationdata.net/monde/"
+></ulink
+>) und einiger Berge und Vulkane. Sie können einen Ort durch Eingabe des Namens in das Suchfeld im Werkzeugbereich finden. &marble; verwendet immer den Originalnamen in lateinischer Schrift. Wenn Sie die ersten Zeichen eingegeben haben, werden Vorschläge unter dem Suchfeld wie im folgenden Bildschirmfoto angezeigt: </para>
+         <screenshot>
+             <screeninfo
+>Ortssuche von &marble;</screeninfo>
+             <mediaobject>
+                 <imageobject
+><imagedata fileref="search-1.png" format="PNG"/></imageobject>
+                 <textobject
+><phrase
+>Ortssuche in &marble;</phrase
+></textobject>
+             </mediaobject>
+         </screenshot>
+         <para
+>Wenn Sie die Taste &Enter; drücken, werden Module zur Online- und Offline-Suche gestartet, um möglichst viele nützliche Daten zu finden. </para>
+        <para
+>Die folgenden Module für eine Onlinesuche sind verfügbar:</para>
+        <itemizedlist>
+          <listitem>
+            <para
+>Nominatim: Ein Dienst zur Onlinesuche und umgekehrter Geolokalisierung. Es werden die Daten von <ulink url="https://www.openstreetmap.org"
+></ulink
+> verwendet</para>
+          </listitem>
+          <listitem>
+            <para
+>HostIP: Ein Dienst zur umgekehrten Geolokalisierung auf der Basis von IP-Adressen. Es werden die Daten von <ulink url="https://www.hostip.info"
+></ulink
+> verwendet</para>
+          </listitem>
+        </itemizedlist>
+
+        <para
+>Außerdem sind auch, abhängig von zusätzlich installierter Software und Daten, die folgenden Module für eine Offlinesuche sind verfügbar:</para>
+        <itemizedlist>
+          <listitem>
+            <para
+>Lokale Datenbank: Alle Ortsmarken in allen geöffneten Dokumenten werden durchsucht. Natürlich werden auch Ihre Lesezeichen in die Suche eingeschlossen.</para>
+          </listitem>
+          <listitem>
+            <para
+>Monav: Ein Offline-Suchdienst, der Daten vom Offline-Routenplaner Monav verwendet, die auf OSM-Daten basieren</para>
+          </listitem>
+          <listitem>
+            <para
+>Gosmore: Ein Offline Dienst für umgekehrte Geolokalisierung, der Daten aus der Gosmore-Einrichtung benutzt</para>
+          </listitem>
+        </itemizedlist>
+         <para
+>Wenn Sie einen Ort auf der Karte gefunden haben, können Sie mit der &LMBn; auf dessen Beschriftung oder Symbol klicken. Daraufhin erscheint ein ein Fenster mit einem Datenblatt wie diesem: </para>
+         <screenshot>
+             <screeninfo
+>Datenblatt von &marble;</screeninfo>
+             <mediaobject>
+                 <imageobject
+><imagedata fileref="search-2.png" format="PNG"/></imageobject>
+                 <textobject
+><phrase
+>Datenblatt von &marble;</phrase
+></textobject>
+             </mediaobject>
+         </screenshot>
+         <para
+>Auf der ersten Karteikarte des Dialogs werden nur grundlegende Daten angezeigt wie Koordinaten und der Name des Landes, zu dem der Ort gehört, sowie dessen Landesflagge. Dazu kommt bei Städten die Bevölkerungszahl und bei Bergen die Höhenangabe. Wenn Ihr Rechner mit dem Internet verbunden ist, versucht &marble; eine Verbindung mit der beliebten Internet-Enzyklopädie <quote
+>Wikipedia</quote
+> herzustellen. Findet sich ein passender Wikipedia-Artikel, zeigt &marble; diesen auf dem Datenblatt an. </para>
+	 <note>
+	   <para
+>Die zusätzlichen Datenquellen können im Untermenü <menuchoice
+><guimenu
+>Ansicht</guimenu
+><guisubmenu
+>Online-Dienste</guisubmenu
+></menuchoice
+> aktiviert werden. </para>
+	 </note>
+     </chapter>
+
+     <chapter id="routing">
+         <title
+>Routenplanung mit &marble;</title>
+         <para
+>Zusätzlich zur Suche nach Orten kann &marble; auch mögliche Routen zwischen zwei oder mehr Orten anzeigen. Möchten Sie mit dem Fahrrad in den nahe gelegenen Wald fahren? Brauchen Sie Anweisungen, um eine Adresse in einer fremden Stadt zu finden? Klicken Sie auf die Karteikarte <guilabel
+>Routenplaner</guilabel
+> oben in &marble;s Navigationsleiste und beginnen Sie mit der Planung der Route für Ihren Ausflug. </para>
+         <sect1 id="routing-route-new">
+         <title
+>Eine neue Route erstellen</title>
+         <para
+>Auf der Karteikarte <guilabel
+>Routenplaner</guilabel
+> gibt es zwei grüne Knöpfe <guilabel
+>A</guilabel
+> und <guilabel
+>B</guilabel
+>. Geben Sie die Startadresse in das Eingabefeld neben dem Knopf <guilabel
+>A</guilabel
+> ein. Drücken Sie die &Enter;taste oder klicken Sie auf <guilabel
+>Suchen</guilabel
+>, um passende Orte in der Karte zu finden. Während der Suche wird eine animierte Fortschrittsanzeige eingeblendet. Mit dem Suchbegriff <quote
+>Weavers Lane, London</quote
+> wird als Ergebnis das folgende Bildschirmfoto angezeigt: </para>
+         <screenshot>
+             <screeninfo
+>Adressensuche in &marble;</screeninfo>
+             <mediaobject>
+                 <imageobject
+><imagedata fileref="routing-1.png" format="PNG"/></imageobject>
+                 <textobject
+><phrase
+>Adressensuche in &marble;</phrase
+></textobject>
+             </mediaobject>
+         </screenshot>
+         <para
+>Passende Orte werden in einer Liste unter dem Eingabefeld angezeigt und auch auf der Karte markiert. Der erste Eintrag der Liste ist automatisch als Startpunkt der Route ausgewählt. Auf der Karte wird dieser Ort mit dem gleichen Symbol <guilabel
+>A</guilabel
+> wie neben dem Eingabefeld gekennzeichnet. Ist der erste Eintrag in der Liste nicht Ihr gewünschter Startpunkt, wählen Sie durch klicken mit der &LMBn; einen anderen Eintrag als neuen Routenstart aus. Dazu können Sie entweder auf den Eintrag in der Liste oder das Symbol auf der Karte klicken. Der aktuell ausgewählte Startpunkt der Route wird immer durch das Symbol <guilabel
+>A</guilabel
+>  gekennzeichnet. </para>
+         <para
+>Ist der Startpunkt der Fahrt bestimmt, geht es mit der Eingabe des Zielortes weiter. Dazu geben Sie wie beim Start die Zieladresse in das Eingabefeld neben dem Knopf <guilabel
+>B</guilabel
+> ein, drücken die &Enter;taste und wählen den Zielort aus der angezeigten Liste. </para>
+         <para
+>Jetzt wird der Knopf <guilabel
+>Suchen</guilabel
+> durch <guilabel
+>Richtungsanweisungen abrufen</guilabel
+> ersetzt. &marble; zeigt damit an, dass alle Informationen für die Berechnung der Route vollständig eingegeben wurden. Klicken Sie nun auf  <guilabel
+>Richtungsanweisungen abrufen</guilabel
+>, damit eine passende Route angezeigt wird. Mit dem Ziel <quote
+>Sun Walk, London</quote
+> wird als Ergebnis das folgende Bildschirmfoto angezeigt: </para>
+         <screenshot>
+             <screeninfo
+>Ergebnisse des Routenplaners in &marble;</screeninfo>
+             <mediaobject>
+                 <imageobject
+><imagedata fileref="routing-2.png" format="PNG"/></imageobject>
+                 <textobject
+><phrase
+>Routenanzeige in &marble;</phrase
+></textobject>
+             </mediaobject>
+         </screenshot>
+         <para
+>Ist der Start oder das Ziel bereits auf dem Bildschirm sichtbar, finden Sie es vielleicht praktischer, die Punkte direkt auf der Karte zu markieren. Dazu klicken Sie auf das Symbol <guilabel
+>A</guilabel
+> oder <guilabel
+>B</guilabel
+> neben den Eingabefeldern. Wählen Sie dann <guilabel
+>Von Karte ...</guilabel
+> aus dem Menü. Dann wird auf der Karte der Eingabemodus aktiviert. Der nächste Mausklick auf einen Punkt der Karte wird Start oder Ziel der Route. Das Mauszeigersymbol wechselt zum Kreuz, um eine genaue Auswahl zu erleichtern. Die gewählte Position wird in die Route eingefügt und auf der Karte markiert. Um die Auswahl abzubrechen, klicken Sie erneut auf diesen Knopf oder drücken die &Esc;-Taste. </para>
+         <para
+>Eine andere Auswahlmöglichkeit für den Start und das Ziel einer Route finden Sie im Kontextmenü der Karte: Klicken Sie mit der &RMBn; aus den gewünschten Ort und wählen Sie <guilabel
+>Route von hier</guilabel
+> beziehungsweise <guilabel
+>Route hierher</guilabel
+>. </para>
+         </sect1>
+         <sect1 id="routing-profiles">
+         <title
+>Routenprofile</title>
+         <para
+>Welche Route Ihnen vorgeschlagen wird, hängt von der ausgewählten Fahrzeugart ab. &marble; benutzt Routenprofile für bestimmte Fahrzeugarten und weitere Einstellungen. Jedes Profil enthält die Einstellungen für ein bestimmte Art von Routen. Beim ersten Start legt &marble; vier übliche Profile für Sie an: <guilabel
+>Auto (schnellste)</guilabel
+>, <guilabel
+>Auto (kürzeste)</guilabel
+>, <guilabel
+>Fahrrad</guilabel
+> und <guilabel
+>Fußgänger</guilabel
+>. </para
+>             
+         <para
+>Im Beispiel im vorherigen Abschnitt wurde das Profil <guilabel
+>Auto (schnellste)</guilabel
+> verwendet. Probieren Sie für die letzte Route ein anderes Profil: Wählen Sie die Einstellung <guilabel
+>Fußgänger</guilabel
+> aus dem Kombinationsfeld <guilabel
+>Profil</guilabel
+>. Die Route ändert sich dann wie im folgenden Bildschirmfoto: </para
+>                       
+         <screenshot>
+             <screeninfo
+>Eine Route für Fußgänger in &marble;</screeninfo>
+             <mediaobject>
+                 <imageobject
+><imagedata fileref="routing-5.png" format="PNG"/></imageobject>
+                 <textobject
+><phrase
+>Eine Route für Fußgänger in &marble;</phrase
+></textobject>
+             </mediaobject>
+         </screenshot>
+         <para
+>Die vorgeschlagene Route wird jetzt kürzer, da auch Fußwege bei der Berechnung der günstigsten Route berücksichtigt werden. </para>
+         <para
+>Wenn Sie eines der Standard-Routenprofile weiter bearbeiten möchten, wählen Sie es im Kombinationsfeld <guilabel
+>Profil</guilabel
+> aus und klicken auf <guilabel
+>Einrichten</guilabel
+>. Damit öffnen Sie einen neuen Dialog. </para>
+         <screenshot>
+             <screeninfo
+>Einrichtung von Routenprofilen in &marble;</screeninfo>
+             <mediaobject>
+                 <imageobject
+><imagedata fileref="routing-6.png" format="PNG"/></imageobject>
+                 <textobject
+><phrase
+>Einrichtung von Routenprofilen in &marble;</phrase
+></textobject>
+             </mediaobject>
+         </screenshot
+>         
+         <para
+>Auf der linken Seite können Sie einstellen, welche Routenplaner-Backends abgefragt werden. Acht oder mehr Backends werden durch &marble; unterstützt, einige Online und die anderen Offline. Für die Online-Routenplaner brauchen Sie eine Internetverbindung zur Routenabfrage. Die Offline-Routenplaner können Sie auch ohne Internetverbindung verwenden, Sie müssen aber vorher Karten für die Routenplanung herunterladen und installieren. Folgende Backends stehen zur Auswahl: </para>
+         <itemizedlist>
+	     <listitem>
+               <para
+>CycleStreets: Fahrrad-Routenplaner für das Vereinigtes Königreich mit cyclestreets.net</para>
+             </listitem>
+             <listitem>
+               <para
+>Gosmore: Ein Offline-Routenplaner, der auch als Backend für den Yours-Online-Routenplaner verwendet wird</para>
+             </listitem>
+             <listitem>
+               <para
+>MapQuest: Ein Online-Routenplaner mit erweiterten Fahranweisungen</para>
+	       <note>
+		 <para
+>Ein Anwendungs-Schlüssel ist für die Routenfunktion von MapQuest erforderlich. Sie können <ulink url="https://developer.mapquest.com/plan_purchase/steps/business_edition/business_edition_free/register"
+>hier</ulink
+> einen Schlüssel registrieren lassen.</para>
+	       </note>
+	     </listitem>
+             <listitem>
+               <para
+>Monav: Ein Offline-Routenplaner, der bei der Berechnung langer Routen sehr schnell ist</para>
+             </listitem>
+             <listitem>
+               <para
+>OSRM: Ein Online-Routenplaner, der auch bei der Berechnung langer Routen sehr schnell ist</para>
+             </listitem>
+             <listitem>
+               <para
+>OpenRouteService: Ein Online-Routenplaner, der auch Fahranweisungen generiert, aber nur für Europa</para>
+             </listitem>
+             <listitem>
+               <para
+>Routino: Ein Offline-Routenplaner mit einer sehr flexiblen Konfiguration</para>
+             </listitem>
+             <listitem>
+               <para
+>Yours: Ein Online-Routenplaner für die ganze Welt, es fehlen aber Fahranweisungen</para>
+             </listitem>
+         </itemizedlist>
+         <para
+>Wenn Sie ein Backend für Routenplanung auf der linken Seite ausgewählt und für die Abfrage von Routen aktiviert haben, können Sie rechts die Einstellungen dafür ändern. Für jedes Backend gibt es eigene Einstellungen. </para>
+         <para
+>Zusätzlich zur Einstellung der vier Standardprofile können Sie im Einstellungsdialog für &marble; auf der Seite <guilabel
+>Routenplaner</guilabel
+> auch neue Profile hinzufügen und vorhandene Profile löschen. </para>
+         </sect1>
+         <sect1 id="routing-route-adjustments">
+         <title
+>Routen anpassen</title>
+         <para
+>In &marble; können Sie mehrere Aspekte der Route zur genauen Anpassung an Ihre Wünsche ändern, Vorgaben für Routen einstellen, Zwischenpunkte einfügen und vorhandenen Punkte verschieben oder entfernen. Die Einstellung von Vorgaben für Routen wurde im letzten Abschnitt erklärt, jetzt ist der Umgang mit einzelnen Punkten der Route dran. </para>
+         <para
+>Zwischenpunkte werden mit Ziehen und Ablegen in der Karte eingefügt. Wenn Sie den Mauszeiger über einen beliebigen Teil der Route führen, erscheint ein grünes Flaggensymbol, um anzuzeigen, dass ein Zwischenpunkt eingefügt werden kann. Dies funktioniert nicht für die Berechnungspunkte der Route. Klicken Sie mit der &LMBn; um das Einfügen zu starten. Verschieben Sie den Zeiger mit gedrückter Maustaste an die neue Position. Dann werden blaue Linien von den benachbarten Routenpunkten zum neu eingefügten Punkt gezeichnet: </para>
+         <screenshot>
+             <screeninfo
+>&marble; - Zwischenpunkte hinzufügen</screeninfo>
+             <mediaobject>
+                 <imageobject
+><imagedata fileref="routing-3.png" format="PNG"/></imageobject>
+                 <textobject
+><phrase
+>&marble; - Zwischenpunkt einfügen</phrase
+></textobject>
+             </mediaobject>
+         </screenshot>
+         <para
+>Der neue Punkt wird zwischen den bereits vorhandenen benachbarten Routenpunkten eingefügt, wenn Sie die &LMB; loslassen. Dann wird die alte Route gestrichelt dargestellt, damit wird sie als veraltet gekennzeichnet. Im Hintergrund wird eine neue Route berechnet und ersetzt dann die alte Route. </para>
+         <para
+>Ein neuer Punkt einer Route kann auch vor dem Start- oder nach dem Endpunkt hinzugefügt werden. Das funktioniert wie das Einfügen von Zwischenpunkten, Sie müssen dabei aber die Taste &Ctrl; beim Verschieben des Mauszeigers drücken. Eine blaue Linie vom Start- oder Endpunkt dann gezeichnet. Der Ursprung dieser Linie zeigt an, wo der neue Routenpunkt angefügt wird. </para>
+         <para
+>Vorhandene Zwischenpunkte können beliebig auf der Karte verschoben werden. Klicken Sie mit der &LMBn; auf einen Zwischenpunkt und ziehen Sie ihn an die neue Position. Wenn Sie die Maustaste loslassen, wird die Route automatisch aktualisiert. </para>
+         <para
+>Um Zwischenpunkte von der Route zu entfernen, klicken Sie entweder auf den Knopf <guilabel
+>Entfernen</guilabel
+> rechts neben dem Eingabefeld für diesen Punkt oder klicken Sie mit der &RMBn; auf einen Zwischenpunkt in der Karte. Wählen Sie dann im Kontextmenü <guilabel
+>Diese Ziel entfernen</guilabel
+>. Um eine ganz neue Route zu planen, entfernen Sie alle Punkte. </para>
+         </sect1>
+         <sect1 id="routing-route-export">
+         <title
+>Routen laden, speichern und exportieren</title>
+         <para
+>Sie können Routen im Format <acronym
+>kml</acronym
+> (Keyhole Markup Language) speichern und sie später wieder laden - auf denselben Rechner oder ein anderes Gerät, auf dem &marble; läuft. Oder geben Sie diese Routen weiter, die dann in allen Anwendungen benutzt werden können, die Dateien im Format <acronym
+>kml</acronym
+> wie Google Earth lesen können. Um eine Route als <acronym
+>kml</acronym
+>-Datei zu speichern, klicken Sie auf das Symbol <guilabel
+>Speichern</guilabel
+> unten auf der Karteikarte Routenplaner. Das Laden einer Route starten Sie durch Klicken auf das Symbol  <guilabel
+>Öffnen</guilabel
+> unten auf dieser Karteikarte. Wählen Sie dann dir <acronym
+>kml</acronym
+>-Routendatei im Dateidialog und laden Sie damit wieder in &marble; </para>
+         <para
+>Routen, die mit &marble; geplant wurden, können in anderen Programmen und Navigationsgeräten verwendet werden, die das Format <acronym
+>gpx</acronym
+> (GPS eXchange Format) oder gleichwertige Formate unterstützen. Kann Ihr Navigationsgerät das Format <acronym
+>gpx</acronym
+> nicht einlesen, benutzen Sie Programme wie gpsbabel, um eine von &marble; exportierte <acronym
+>gpx</acronym
+>-Datei in ein passendes Format umzuwandeln.Zum Export einer Route in &marble; benutzen Sie das Kontextmenü der Karte. Klicken Sie mit der &RMBn; auf einen beliebten Punkt der Route und wählen Sie dann <guilabel
+>Route exportieren ...</guilabel
+>. </para>
+         <screenshot>
+             <screeninfo
+>Routenexport in &marble;</screeninfo>
+             <mediaobject>
+                 <imageobject
+><imagedata fileref="routing-4.png" format="PNG"/></imageobject>
+                 <textobject
+><phrase
+>Export einer Route in &marble;</phrase
+></textobject>
+             </mediaobject>
+         </screenshot>
+         <para
+>Geben Sie den gewünschten Dateinamen im Dateidialog ein. Als Dateierweiterung sollten Sie <filename class="extension"
+>gpx</filename
+> zur  Speicherung im Format <acronym
+>gpx</acronym
+> oder <filename class="extension"
+>kml</filename
+> zur Speicherung im Format <acronym
+>kml</acronym
+> (Keyhole Markup Language) verwenden. Beachten Sie, dass &marble; intern das Format <acronym
+>kml</acronym
+> benutzt. Daher wählen Sie im Zweifelsfall diese Format für den Export. Das Format <acronym
+>gpx</acronym
+> sollten Sie nur verwenden, um Routen für Anwendungen zu exportieren, die das Format <acronym
+>kml</acronym
+> nicht lesen können. </para>
+         </sect1>
+     </chapter>
+
+     <chapter id="measure-distances">
+         <title
+>Entfernungsmessung mit &marble;</title>
+         <para
+>Wie bereits erwähnt zeigt &marble; links unten immer einen dynamischen Größenmaßstab an, um Entfernungen auf der Karte abschätzen zu können. Zusammen mit der Windrose in der rechten oberen Ecke dienen diese Einblendungen der besseren Orientierung. Aber das ist nicht alles: Mit &marble; können Sie Entfernungen zwischen zwei oder mehr Punkten auf der Erde messen. Dazu klicken Sie mit der &RMBn; in der richtigen Reihenfolge auf die entsprechenden Punkt. Bei jedem Mausklick erscheint ein Aufklappmenü, mit dem Sie einen Messpunkt hinzufügen (<guilabel
+>Messpunkt hinzufügen</guilabel
+>) oder alle Messpunkt löschen können (<guilabel
+>Messpunkte entfernen</guilabel
+>).  </para>
+         <screenshot>
+             <screeninfo
+>&marble; Messungen</screeninfo>
+             <mediaobject>
+                 <imageobject
+><imagedata fileref="measure-1.png" format="PNG"/></imageobject>
+                 <textobject
+><phrase
+>Entfernungsmessung mit &marble;</phrase
+></textobject>
+             </mediaobject>
+         </screenshot>
+         <para
+>Sobald mindestens zwei Messpunkte vorliegen, wird die Gesamtentfernung in der linken oberen Ecke der Karte angezeigt. &marble; nimmt bei allen Berechnungen eine Kugelgestalt der Erde an, was für die meisten Fälle eine ausreichende Genauigkeit bieten sollte. </para>
+	 <tip>
+	   <para
+>Die Anzeige der Entfernung und Position für die gemessenen Abschnitte kann im Einrichtungsdialog für das <link linkend="measure-tool-config"
+>Messwerkzeug</link
+> eingestellt werden. </para>
+	 </tip>
+     </chapter>
+     
+     <chapter id="download-region">
+         <title
+>Kartenregionen herunterladen</title>
+         <para
+>&marble; hat einen vorinstallierten Satz von Karten und kann sofort benutzt werden. Wenn Sie einen Kartenausschnitt vergrößern, werden weitere  Teile der aktuellen Karte mit höherer Auflösung im Hintergrund heruntergeladen. Dies funktioniert mit einer Internetverbindung ausgezeichnet. Was aber, wenn Sie in eine andere Stadt reisen möchten, wo es keine Internetverbindung zum Herunterladen von Karten gibt? Dann müssen Sie die Karten für diese Region vorher herunterladen. </para>
+         <para
+>Um verstehen zu können, was zur Anzeige bestimmter Bereiche einer Karte ohne Internetverbindung heruntergeladen werden muss, folgt hier ein kurzer Überblick über das Kachel-Konzept, das &marble; intern benutzt. Eine Kachel ist ein Bild für einen bestimmten Ausschnitt der Karte. Kacheln werden in &marble; aneinander gelegt, um das Kartenbild zur Anzeige zu erstellen. Abhängig von der ausgewählten Projektionsart werden Karten in einem Rechteck für die flache Karte links und auf einer Kugel für die Globus-Projektion rechts. </para>
+         <screenshot>
+             <screeninfo
+>&marble; Projektionen</screeninfo>
+             <mediaobject>
+                 <imageobject
+><imagedata fileref="download-region-1.png" format="PNG"/></imageobject>
+                 <textobject
+><phrase
+>Kacheln in Stufe 1 in der flachen Karte (links) und der Globus-Projektion (rechts)</phrase
+></textobject>
+             </mediaobject>
+         </screenshot>
+         <para
+>Bei der Vergrößerung dieser Ansicht müssen mehr Einzelheiten angezeigt werden. Die in den beiden vorigen Bildschirmfotos verwendeten Kacheln haben dafür keine ausreichende Auflösung. &marble; erkennt das automatisch und wechselt zur nächsten Kachelstufe, in der die Bilder mehr Einzelheiten enthalten. Dieser Ablauf wiederholt sich immer wieder: je mehr Sie die Ansicht vergrößern, desto größer wird die Kachelstufe. Die folgende Skizze zeigt farbig die unterschiedliche Anzahl von Kacheln für dieselbe Kartenregion in verschiedenen Kachelstufen. </para>
+         <screenshot>
+             <screeninfo
+>Kachelstufen in &marble;</screeninfo>
+             <mediaobject>
+                 <imageobject
+><imagedata fileref="download-region-2.png" format="PNG"/></imageobject>
+                 <textobject
+><phrase
+>Verschiedene Kachelstufen in &marble;</phrase
+></textobject>
+             </mediaobject>
+         </screenshot>
+         <para
+>Möchten Sie Karten herunterladen, um sie ohne Internetverbindung zu benutzen, benötigen Sie alle Kacheln für die gewünschte Region in allen zu verwendenden Kachelstufen. Da Kachel- und Vergrößerungsstufen von einander abhängen, müssen Sie alle Kacheln in den Vergrößerungsstufen, die Sie benutzen möchten, herunterladen. </para>
+         <para
+>Um diese Aufgabe für eine bestimmte Region durchzuführen, verändern Sie den Kartenausschnitt und die Vergrößerung durch Drehen des Globus. Nun öffnen Sie den Dialog <guilabel
+>Region herunterladen</guilabel
+> im Menü <guilabel
+>Datei</guilabel
+>. Aktivieren Sie die Einstellung <guilabel
+>Sichtbare Region</guilabel
+>, dann werden nur die zugehörigen Kacheln für Teil der Karte geladen, der auf dem Bildschirm sichtbar ist. Als nächstes wählen Sie den Kachelstufenbereich (Vergrößerungsbereich), den verwenden möchten. Der Wert im ersten Feld entspricht der kleinsten und der Wert im rechten Feld der größten Kachelstufe, die zusammen mit allen Stufen dazwischen geladen wird. &marble; zeigt an, wieviele Kacheln (Bilder) zu laden sind und aktualisiert diese Zahl immer, wenn die Region oder Kachelstufe geändert wird. </para>
+         <screenshot>
+             <screeninfo
+>&marble;s Dialog „Region herunterladen“</screeninfo>
+             <mediaobject>
+                 <imageobject
+><imagedata fileref="download-region-3.png" format="PNG"/></imageobject>
+                 <textobject
+><phrase
+>&marble;s Dialog „Region herunterladen“</phrase
+></textobject>
+             </mediaobject>
+         </screenshot>
+         <para
+>Die Kachelstufe zur aktuell benutzten Vergrößerung wird unten in der Statusleiste angezeigt. Diese Anzeige muss aktiviert werden. Klicken Sie dazu mit der &RMBn; in die Statusleiste und wählen dann im Kontextmenü <guilabel
+>Vergrößerungsstufe anzeigen</guilabel
+>. </para>
+         <para
+>Wählen Sie <guilabel
+>OK</guilabel
+> um das Herunterladen der Kartenregion zu starten. Der zeitliche Ablauf dieser Aktion wird in &marble; durch eine animierte Fortschrittsanzeige dargestellt, falls dies aktiviert ist. </para>
+         <para
+>Sind Ihnen die Koordinaten der Region bekannt, deren Karte Sie herunterladen möchten, klicken Sie auf <guilabel
+>Region angeben</guilabel
+> und tragen sie dann direkt ein. Der auf dem Bildschirm sichtbare Kartenbereich wird dann ignoriert. </para>
+         <para
+>Sie können &marble; weiter benutzen, wenn der Dialog <guilabel
+>Region herunterladen</guilabel
+> geöffnet ist. Diese Funktion können dazu benutzen, um Karten für verschiedene Regionen und in verschiedenen Kachelstufen herunterzuladen. Drücken Sie dazu auf <guilabel
+>Anwenden</guilabel
+> anstatt <guilabel
+>OK</guilabel
+>, um das Herunterladen der Kartendaten zu starten. </para>
+         </chapter>
+         
+     <chapter id="recording-movie">
+	 	<title
+>Aufnahme eines Films mit &marble;</title>
+       <sect1 id="recording-movie-recording">
+           <title
+>Aufnahme eines Films mit &marble;</title>
+	 	<para
+>Um einen Film mit Marble aufzunehmen, verwenden Sie diese Funktion. </para>
+	 	<para
+>Starten Sie die Aufnahme mit der Aktion <guilabel
+>Film aufnehmen</guilabel
+> aus dem Menü <guilabel
+>Bearbeiten</guilabel
+>. Alternativ können Sie auch den Kurzbefehl <keycombo
+>&Ctrl; &Shift;<keycap
+>S</keycap
+></keycombo
+> benutzen. Dann wird folgender Dialog angezeigt: </para>
+	 	<screenshot>
+         	    <screeninfo
+>&marble;s Dialog „Film aufnehmen“</screeninfo>
+         	    <mediaobject>
+         	        <imageobject
+><imagedata fileref="movie-1.png" format="PNG"/></imageobject>
+         	        <textobject
+><phrase
+>&marble;s Dialog „„Film aufnehmen““</phrase
+></textobject>
+         	    </mediaobject>
+         	</screenshot>
+	 	<para
+>Klicken Sie auf <guilabel
+>Öffnen</guilabel
+> und wählen Sie den Namen und Zielordner des Films. Außerdem können Sie die Anzahl der Bilder pro Sekunde von 1 bis 60 einstellen. </para>
+		<para
+>Wenn alles eingestellt ist, beginnen Sie die Aufnahme mit Klicken auf <guilabel
+>Start</guilabel
+>. Dann können Sie die Ansicht vergrößern und verschieben und ein Video wird aufgezeichnet. </para>
+	 	<para
+>Um die Aufnahme zu beenden und den Film zu speichern, wählen Sie <guilabel
+>Aufnahme beenden</guilabel
+> aus dem Menü <guilabel
+>Bearbeiten</guilabel
+>. </para>
+        
+        <sect2 id="recording-movie-troubleshooting">
+        <title
+>Problembeseitigung</title>
+        <para
+>Erhalten sie eine Fehlermeldung über fehlende Programme „avconv“ oder „ffmpeg“, dann installieren Sie ffmpeg von der <ulink url="https://ffmpeg.org/download.html"
+>ffmpeg-Seite</ulink
+> und  avconv von der <ulink url="https://libav.org/download.html"
+>avconv</ulink
+> oder verwenden Sie Pakete aus Ihrer Distribution. </para>
+        </sect2>
+	</sect1>
+	
+     </chapter>
+
+	 <chapter id="commands">
+		 <title
+>Befehlsreferenz</title>
+
+		 <sect1 id="marble-mainwindow">
+			 <title
+>Menüs und Kurzbefehle</title>
+
+			 <sect2>
+				 <title
+>Das Menü Datei</title>
+
+				 <variablelist>
+                     <varlistentry>
+                         <term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>O</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Datei</guimenu
+> <guimenuitem
+>Öffnen ...</guimenuitem
+> </menuchoice
+></term>
+                         <listitem
+><para
+><action
+>Öffnet</action
+> eine Karte.</para
+></listitem>
+                     </varlistentry>
+		     <varlistentry>
+                         <term
+><menuchoice
+><guimenu
+>Datei</guimenu
+> <guimenuitem
+>Zuletzt geöffnete Dateien</guimenuitem
+> </menuchoice
+></term>
+                         <listitem>
+			   <para
+>Dies ist eine Aktion, um zuletzt benutzte Karten zu öffnen. Dieser Menüpunkt öffnet eine Liste mit einigen zuletzt geöffneten Dateien. Klicken auf eine der Dateien, wird diese in &marble; geladen - wenn diese Datei noch am selben Ort gespeichert ist. </para>
+			 </listitem>
+                     </varlistentry>
+                     <varlistentry>
+                         <term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>N</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Datei</guimenu
+> <guimenuitem
+>Karten herunterladen ...</guimenuitem
+> </menuchoice
+></term>
+                         <listitem
+><para
+><action
+>Öffnet</action
+> den Dialog <guilabel
+>Neue Erweiterungen herunterladen</guilabel
+>, in dem Sie weitere Karten für &marble; herunterladen können, darunter auch Karten für den Mars und die Venus.</para
+></listitem>
+                     </varlistentry>
+		     <varlistentry>
+                         <term
+><menuchoice
+><guimenu
+>Datei</guimenu
+> <guimenuitem
+>Neue Karte erstellen ...</guimenuitem
+> </menuchoice
+></term>
+                         <listitem
+><para
+><action
+>Zeigt</action
+> den <guilabel
+>&marble;-Assistent zur Erstellung neuer Kartendesigns</guilabel
+>. In diesem Assistenten können neue Karten mit Daten von „Web Map Service“, eigenen Bilddateien oder mit indizierten Kacheln (Open Street Map) erstellt werden.</para
+></listitem>
+                     </varlistentry>
+                     <varlistentry>
+                         <term
+><menuchoice
+><guimenu
+>Datei</guimenu
+><guimenuitem
+>Region herunterladen ...</guimenuitem
+>  </menuchoice
+></term>
+                         <listitem
+><para
+><action
+>Zeigt</action
+> den Dialog <guilabel
+>Region herunterladen</guilabel
+> an, in dem Sie Kartendaten in verschiedenen Massstäben herunterladen können, um sie auch ohne Internetverbindung zu nutzen. Weitere Informationen finden Sie im Abschnitt <link linkend="download-region"
+>Kartenregionen herunterladen</link
+>.</para
+></listitem>
+                     </varlistentry>
+                     <varlistentry>
+                         <term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>S</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Datei</guimenu
+> <guimenuitem
+>Karte exportieren ...</guimenuitem
+> </menuchoice
+></term>
+                         <listitem
+><para
+><action
+>Exportiert</action
+> ein Bildschirmfoto der Karte von &marble; in eine Bilddatei.</para
+></listitem>
+                     </varlistentry>
+                     <varlistentry>
+                         <term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>P</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Datei</guimenu
+> <guimenuitem
+>Drucken ...</guimenuitem
+> </menuchoice
+></term>
+                         <listitem
+><para
+><action
+>Druckt</action
+> ein Bildschirmfoto der Karte von &marble;.</para
+></listitem>
+                     </varlistentry>
+                     <varlistentry>
+                         <term
+><menuchoice
+><guimenu
+>Datei</guimenu
+> <guimenuitem
+>Druckvorschau</guimenuitem
+> </menuchoice
+></term>
+                         <listitem
+><para
+>Öffner ein Fenster mit der Vorschau der zu druckenden Karte.</para
+></listitem>
+                     </varlistentry>
+                     <varlistentry>
+                         <term
+><menuchoice
+><guimenu
+>Datei</guimenu
+><guimenuitem
+>Offline arbeiten</guimenuitem
+>  </menuchoice
+></term>
+                         <listitem
+><para
+>Ist diese Einstellung aktiv, werden keine Kartendaten aus dem Internet heruntergeladen. Die Suche ist nur in den lokalen Daten möglich. Neue Routen können nicht berechnet werden.</para
+></listitem>
+                     </varlistentry>
+					 <varlistentry>
+						 <term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>Q</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Datei</guimenu
+> <guimenuitem
+>Beenden</guimenuitem
+> </menuchoice
+></term>
+						 <listitem
+><para
+><action
+>Beendet</action
+> &marble;</para
+></listitem>
+					 </varlistentry>
+				 </variablelist>
+
+			 </sect2>
+
+             <sect2>
+                 <title
+>Das Menü Bearbeiten</title>
+
+                 <variablelist>
+                     <varlistentry>
+                         <term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>C</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Bearbeiten</guimenu
+> <guimenuitem
+>Karte kopieren</guimenuitem
+> </menuchoice
+></term>
+                         <listitem
+><para
+><action
+>Kopiert</action
+> ein Bildschirmfoto der Karte von &marble; in die globale Zwischenablage.</para
+></listitem>
+                     </varlistentry>
+                     <varlistentry>
+                         <term
+><menuchoice
+><guimenu
+>Bearbeiten</guimenu
+><guimenuitem
+>Koordinaten kopieren</guimenuitem
+>  </menuchoice
+></term>
+                         <listitem
+><para
+><action
+>Kopiert</action
+> die aktuellen Koordinaten in die globale Zwischenablage.</para
+></listitem>
+                     </varlistentry>
+		     <varlistentry>
+                         <term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>E</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Bearbeiten</guimenu
+> <guimenuitem
+>Karte bearbeiten</guimenuitem
+> </menuchoice
+></term>
+			 <listitem
+><para
+><action
+>Ermöglicht</action
+> das Öffnen der aktuellen Karten im externen Karteneditor. Zur Zeit werden <application
+>Potlatch</application
+> (im Webbrowser), <application
+>Merkaartor</application
+>- und <application
+>JOSM</application
+>-Karteneditoren unterstützt.</para
+></listitem>
+                     </varlistentry>
+		     <varlistentry>
+                         <term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl; &Shift;<keycap
+>R</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Bearbeiten</guimenu
+> <guimenuitem
+>Film aufnehmen</guimenuitem
+> </menuchoice
+></term>
+                         <listitem
+><para
+><action
+>Aufnahme</action
+> eines Films mit &marble;.</para
+></listitem>
+                     </varlistentry>
+		     <varlistentry>
+                         <term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl; &Shift;<keycap
+>S</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Bearbeiten</guimenu
+> <guimenuitem
+>Aufnahme beenden</guimenuitem
+> </menuchoice
+></term>
+                         <listitem
+><para
+><action
+>Beendet</action
+> die aktuelle Aufnahme eines Films.</para
+></listitem>
+                     </varlistentry>
+                 </variablelist>
+
+             </sect2>
+
+<sect2>
+<title
+>Das Menü Ansicht</title>
+
+<variablelist>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Ansicht</guimenu
+><guimenuitem
+>Aktueller Standort</guimenuitem
+>  </menuchoice
+></term>
+<listitem
+><para
+><action
+>Schaltet</action
+> die Ansicht der Karteikarte <guilabel
+>Aktueller Standort</guilabel
+> in der Seitenleiste ein oder aus. Wenn ein GPS-Gerät mit dem Rechner verbunden ist, kann Breiten- und Längengrad der aktuellen Standorts hier angezeigt werden. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Ansicht</guimenu
+><guimenuitem
+>Fadenkreuz</guimenuitem
+>  </menuchoice
+></term>
+<listitem
+><para
+><action
+>Blendet</action
+> die Anzeige der eines kleinen Fadenkreuzes in der Mitte der Karte ein oder aus.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycap
+>F5</keycap
+></shortcut
+><guimenu
+>Ansicht</guimenu
+> <guimenuitem
+>Anzeige auffrischen</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Der aktuell sichtbare Teil der Karte wird erneut heruntergeladen und die Anzeige wird aktualisiert.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Ansicht</guimenu
+><guisubmenu
+>Informationskästen</guisubmenu
+>  </menuchoice
+></term>
+<listitem
+><para
+>In diesem Untermenü können Sie die Anzeige der Informationskästen ein- und ausschalten, die Sie auf der Seite <link linkend="configplugins"
+>Module</link
+> des Einrichtungsdialogs von &marble; ausgewählt haben.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Ansicht</guimenu
+><guimenuitem
+>Online-Dienste</guimenuitem
+>  </menuchoice
+></term>
+<listitem
+><para
+>Das Modul <guimenuitem
+>Wikipedia</guimenuitem
+> zeigt Symbole für Orte mit Wikipedia-Artikeln auf der Karte an. Klicken auf diese Symbole öffnet ein Browserfenster mit Informationen über diesen Ort. Die geografischen Daten werden durch den Webdienst GeoNames.org zu Verfügung gestellt. Gleichermaßen ermöglicht es das Modul <guimenuitem
+>Fotos</guimenuitem
+>, Bilder über die Webseite FlickR anzuzeigen. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Ansicht</guimenu
+><guimenuitem
+>Wolken</guimenuitem
+>  </menuchoice
+></term>
+<listitem
+><para
+><action
+>Zeigt</action
+> die Bewölkung in Echtzeit. Die Wolkenkarte wird alle 3 Stunden aktualisiert. Sie verwendet GOES, METEOSAT und GMS-Satellitenbilder, die von der ‚Geostationary Satellite Imagery‘-Webseite der Dundee-Universität heruntergeladen werden. Danksagungen gehen an Hari Nair, das Xplanet-Projekt.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Ansicht</guimenu
+><guimenuitem
+>Atmosphäre</guimenuitem
+>  </menuchoice
+></term>
+<listitem
+><para
+><action
+>Zeigt</action
+> die diffuse Reflexion der Erd-Atmosphäre.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Ansicht</guimenu
+><guimenuitem
+>Sterne</guimenuitem
+>  </menuchoice
+></term>
+<listitem
+><para
+><action
+>Schaltet</action
+> die Sternkarte in der Ansicht vom Sonnensystem.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Ansicht</guimenu
+><guimenuitem
+>Sonneneinstellung ...</guimenuitem
+>  </menuchoice
+></term>
+<listitem
+><para
+><action
+>Öffnet</action
+> den Dialog <guilabel
+>Sonnenregulierung</guilabel
+>, in dem den <guilabel
+>Sonnenschatten</guilabel
+> einstellen und die Karte zur Sonnenposition zentrieren können.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Ansicht</guimenu
+><guimenuitem
+>Zeiteinstellung ...</guimenuitem
+>  </menuchoice
+></term>
+<listitem
+><para
+><action
+>Öffnet</action
+> den Dialog <guilabel
+>Zeiteinstellung</guilabel
+>, in dem Sie Datum, Zeit, die Geschwindigkeit der Simulation ändern können.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Ansicht</guimenu
+><guisubmenu
+>Finsternisse in <replaceable
+>Jahr</replaceable
+></guisubmenu
+>  </menuchoice
+></term>
+<listitem>
+<para
+><action
+>Zeigt</action
+> die Finsternisse für das ausgewählte Jahr mit dem Menüeintrag <menuchoice
+><guimenu
+>Ansicht</guimenu
+><guimenuitem
+>Finsternisse durchsehen...</guimenuitem
+></menuchoice
+>.</para>
+<para
+>Dieser Menüeintrag wird nur angezeigt, wenn das Modul <link linkend="eclipsesplugin"
+>Finsternisse</link
+> aktiviert ist.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Ansicht</guimenu
+><guimenuitem
+>Finsternisse durchsehen ...</guimenuitem
+>  </menuchoice
+></term>
+<listitem
+><para
+><action
+>Öffnet</action
+> den Dialog <guilabel
+>Finsternis-Browser</guilabel
+>, in dem Sie ein Jahr für die Anzeige von  Finsternissen auswählen, den Einrichtungsdialog für dieses Modul öffnen können und in dem Start, Ende, Typ und Magnitude der Finsternisse angezeigt wird. Wählen Sie eine Finsternis aus der Liste aus, klicken Sie auf <guibutton
+>Zur ausgewählten Finsternis gehen</guibutton
+> und das Ereignis wird auf dem Globus angezeigt.</para>
+<para
+>Dieser Menüeintrag wird nur angezeigt, wenn das Modul <link linkend="eclipsesplugin"
+>Finsternisse</link
+> aktiviert ist.</para>
+</listitem>
+</varlistentry>
+
+</variablelist>
+
+</sect2>
+
+			 <sect2>
+				 <title
+>Das Menü Einstellungen</title>
+
+				 <variablelist>
+					 <varlistentry>
+						 <term
+><menuchoice
+><guimenu
+>Einstellungen</guimenu
+><guimenuitem
+>Werkzeugleiste anzeigen</guimenuitem
+>  </menuchoice
+></term>
+						 <listitem
+><para
+><action
+>Schaltet</action
+> die Anzeige der Werkzeugleiste ein und aus.</para>
+						 </listitem>
+					 </varlistentry>
+					 <varlistentry>
+						 <term
+><menuchoice
+><guimenu
+>Einstellungen</guimenu
+><guimenuitem
+>Statusleiste anzeigen</guimenuitem
+>  </menuchoice
+></term>
+						 <listitem
+><para
+><action
+>Blendet</action
+> die Karteikarte Aktueller Standort ein bzw. aus.</para
+></listitem>
+					 </varlistentry>
+					 <varlistentry>
+						 <term
+><menuchoice
+><guimenu
+>Einstellungen</guimenu
+><guisubmenu
+>Seitenleisten</guisubmenu
+>  </menuchoice
+></term>
+						 <listitem
+><para
+><action
+>Schaltet</action
+> die Anzeige der Seitenleisten ein und aus.</para>
+						   <tip>
+						     <para
+>Sie können die Anzeige der Seitenleisten mit  <menuchoice
+> <guimenu
+>Einstellungen</guimenu
+> <guisubmenu
+>Seitenleisten</guisubmenu
+> <guimenuitem
+>Alle Seitenleisten ausblenden/Alle Seitenleisten anzeigen</guimenuitem
+> </menuchoice
+> im Menü oder mit dem Kurzbefehl <keycap
+>F9</keycap
+> ein- und ausschalten. </para>
+						   </tip>
+						 </listitem>
+					 </varlistentry>
+					 <varlistentry>
+						 <term
+><menuchoice
+><guimenu
+>Einstellungen</guimenu
+><guisubmenu
+>Ansichtsgröße</guisubmenu
+>  </menuchoice
+></term>
+					     <listitem
+><para
+><action
+>Wechselt zwischen den verschiedenen Größen der Kartenanzeige von &marble;</action
+>. Hier können Sie eine feste Größe passen für eine Bildschirmaufnahme einstellen oder eine veränderliche Anzeige mit dem Menüeintrag <guimenuitem
+>Standard (Größenveränderlich)</guimenuitem
+> für &marble; auswählen.</para
+></listitem>
+					 </varlistentry>
+					 <varlistentry>
+						 <term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>F</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Einstellungen</guimenu
+> <guimenuitem
+>Vollbildmodus</guimenuitem
+> </menuchoice
+></term>
+						 <listitem
+><para
+><action
+>Wechselt zwischen der normalen Ansicht und dem Vollbildmodus.</action
+> Im Vollbildmodus wird die Titelleiste ausgeblendet und das Programmfenster auf den gesamten Bildschirm vergrößert.</para
+></listitem>
+					 </varlistentry>
+					 <varlistentry>
+						 <term
+><menuchoice
+><guimenu
+>Einstellungen</guimenu
+><guimenuitem
+>&marble;-Schreibtischglobus einrichten ...</guimenuitem
+>  </menuchoice
+></term>
+						 <listitem
+><para
+><action
+>Öffnet</action
+> den <link linkend="configure"
+>Einrichtungsdialog</link
+> für &marble;.</para
+></listitem>
+					 </varlistentry>
+
+				 </variablelist>
+
+			 </sect2>
+
+			 <sect2>
+				 <title
+>Das Menü Hilfe</title>
+				 <para
+>&marble; benutzt die bekannten &kde;-Einträge im Menü <guimenu
+>Hilfe</guimenu
+>, weitere Informationen dazu finden Sie im Abschnitt über das Menü <ulink url="help:/fundamentals/menus.html#menus-help"
+>Hilfe</ulink
+> der &kde;-Grundlagen.</para>
+			 </sect2>
+		 </sect1>
+	 </chapter>
+
+<chapter id="configure">
+<title
+>Einrichtung von &marble;</title>
+
+<sect1 id="configview">
+<title
+>Einrichtung der Ansicht</title>
+<screenshot>
+<screeninfo
+>Einrichtungsdialog Ansicht</screeninfo>
+<mediaobject>
+<imageobject>
+<imagedata fileref="configure-view.png" format="PNG"/>
+</imageobject>
+<textobject>
+<phrase
+>Einrichtungsdialog Ansicht</phrase>
+</textobject>
+</mediaobject>
+</screenshot>
+<variablelist>
+
+<varlistentry>
+<term
+><guilabel
+>Entfernung:</guilabel
+></term>
+<listitem>
+<para
+>Die Einheit, die zum Messen von Höhe, Länge und Entfernungen verwendet wird (&eg; km, mi, ft).</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Winkel</guilabel
+></term>
+<listitem>
+<para
+>Legt fest, wie Winkel in Koordinaten angegeben werden: Voreingestellt ist Grad-Minute-Sekunde (&eg; 54°30'00"). Alternativ können auch dezimale Gradzahlen verwendet werden (&eg; 54,5°).</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Unbewegtes Bild</guilabel
+></term>
+<listitem>
+<para
+>Legt die Qualität der Karte fest, wenn der Benutzer keine Eingaben tätigt. Dies erlaubt eine hohe Qualität, da die Geschwindigkeit keine Rolle spielt.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Während der Animation</guilabel
+></term>
+<listitem>
+<para
+>Legt die Qualität der Karte während der Animation fest (&eg; beim Ziehen des Globus). Besonders auf langsamen Rechnern ist es ratsam, diese auf <guilabel
+>Niedrige Qualität</guilabel
+> zu stellen, da so eine höhere Geschwindigkeit erreicht wird.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Namen der Orte:</guilabel
+></term>
+<listitem>
+<para
+>Viele Orte haben in verschiedenen Sprachen verschiedene Namen. Die Textmarke in der Karte kann die Namen in der Sprache des Benutzers oder alternativ in der offiziellen Sprache des Ortes anzeigen.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Standardschriftart in der Karte</guilabel
+></term>
+<listitem>
+<para
+>Die Standardschriftart, die in der Karte verwendet wird.</para>
+</listitem>
+</varlistentry>
+</variablelist>
+
+</sect1>
+
+<sect1 id="confignavigation">
+<title
+>Einrichtung der Navigation</title>
+<screenshot>
+<screeninfo
+>Einrichtungsdialog für Navigation</screeninfo>
+<mediaobject>
+<imageobject>
+<imagedata fileref="configure-navigation.png" format="PNG"/>
+</imageobject>
+<textobject>
+<phrase
+>Einrichtungsdialog für Navigation</phrase>
+</textobject>
+</mediaobject>
+</screenshot>
+
+<variablelist>
+<varlistentry>
+<term
+><guilabel
+>Orte ziehen</guilabel
+></term>
+<listitem>
+<para
+>Wenn Sie mit der Maus ziehen, gibt es zwei Standard-Aktionen, die sich auf die virtuelle Weltkugel beziehen: Der Ort unter der Maus folgt der Mausbewegung ganz genau: Dies führt allerdings auch dazu, dass der Nordpol nicht unbedingt oben bleibt, was zu Verwirrungen führen kann. In der Voreinstellung sorgt &marble; allerdings dafür, dass der Globus genordet bleibt. Dadurch folgt die Karte dem Mauszeiger nicht exakt, sondern „entkoppelt“ sich, um die Nordausrichtung beizubehalten.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Träge Drehung des Globus</guilabel
+></term>
+<listitem>
+<para
+>Als Standard wird kinetisches Drehen beim Ziehen der Karte benutzt. Dieses Verhalten können Sie mit diesem Ankreuzfeld abschalten.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Reise zum Ziel animieren</guilabel
+></term>
+<listitem>
+<para
+>Bei der Suche nach einem Ort kann &marble; entweder direkt zu diesem Ort springen oder Sie können sich eine Reiseanimation vom ersten zum zweiten Ort anzeigen lassen.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Beim Start</guilabel
+></term>
+<listitem>
+<para
+>Voreingestellt zeigt &marble; beim Start den Heimatort an. Alternativ kann es auch die Position anzeigen, an der der Benutzer die Anwendung zuletzt beendet hat.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Externer Editor</guilabel
+></term>
+<listitem>
+  <para
+>Hier können Sie den Standardeditor für Karten einstellen oder <guilabel
+>Immer nachfragen</guilabel
+> wählen, wenn Sie vor dem Start eines externen Editors gefragt werden möchten.</para>
+</listitem>
+</varlistentry>
+
+</variablelist>
+</sect1>
+
+<sect1 id="configcacheproxy">
+<title
+>Einrichtung von Zwischenspeicher &amp; Proxy</title>
+<screenshot>
+<screeninfo
+>Einrichtungsdialog für Zwischenspeicher &amp; Proxy</screeninfo>
+<mediaobject>
+<imageobject>
+<imagedata fileref="configure-cacheproxy.png" format="PNG"/>
+</imageobject>
+<textobject>
+<phrase
+>Einrichtungsdialog für Zwischenspeicher &amp; Proxy</phrase>
+</textobject>
+</mediaobject>
+</screenshot>
+
+<variablelist>
+<varlistentry>
+<term
+><guilabel
+>Zwischenspeicher</guilabel
+></term>
+<listitem>
+<para
+>&marble; verwendet zwei Zwischenspeicher: Den physikalischen Speicher, um die Kartendaten im Speicher des Rechners vorzuhalten. Wenn Sie diesen Speicher vergrößern, wird die Anwendung flüssiger reagieren. Dann gibt es noch den Festplattenspeicher, welcher zum Herunterladen von Inhalten aus dem Internet Verwendung findet (&eg; Wikipedia-Daten oder Kartenmaterial). Verkleinern Sie diesen Speicher, wenn Sie Platz auf der Festplatte sparen möchten und das Herunterladen von Daten aus dem Internet nur eine untergeordnete Rolle spielt.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Proxy</guilabel
+></term>
+<listitem>
+<para
+>Proxy-Einstellungen für Ihr lokales Intranet. Wenn Sie keinen Proxy haben, lassen Sie das Feld leer.</para>
+</listitem>
+</varlistentry>
+
+</variablelist>
+</sect1>
+
+<sect1 id="configdatetime">
+<title
+>Einrichtung von Datum &amp; Zeit</title>
+<screenshot>
+<screeninfo
+>Einrichtungsdialog für Datum &amp; Zeit</screeninfo>
+<mediaobject>
+<imageobject>
+<imagedata fileref="configure-dateandtime.png" format="PNG"/>
+</imageobject>
+<textobject>
+<phrase
+>Einrichtungsdialog für Datum &amp; Zeit</phrase>
+</textobject>
+</mediaobject>
+</screenshot>
+
+<variablelist>
+<varlistentry>
+<term
+><guilabel
+>Zeitzone</guilabel
+></term>
+<listitem>
+  <para
+>Hier können Sie eine Zeitzone für &marble; einstellen:  <ulink url="https://de.wikipedia.org/wiki/UTC"
+>UTC</ulink
+>, Zeitzone des Systems oder eine benutzerdefinierte Zeitzone. Die ausgewählte Einstellung ändert die Kartenansicht nur dann, wenn die Beleuchtungsbedingungen auf der Oberfläche angezeigt werden können.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Beim Start von &marble;</guilabel
+></term>
+<listitem>
+<para
+>Hier können Sie das beim Starten von &marble; verwendete Datum und die Zeit einstellen: Systemzeit oder die Zeit der letzten Sitzung.</para>
+</listitem>
+</varlistentry>
+
+</variablelist>
+</sect1>
+
+<sect1 id="configsynchronization">
+<title
+>Einrichtung des Abgleichs</title>
+<para
+>Mit &marble; können Sie Routen- und Lesezeichendaten zu einem <ulink url="https://de.wikipedia.org/wiki/OwnCloud"
+>ownCloud</ulink
+>-Server hochladen und sie zwischen Instanzen von &marble; abgleichen, die auf verschiedenen Geräten installiert sind. </para>
+<screenshot>
+<screeninfo
+>Einrichtungsdialog für Abgleich</screeninfo>
+<mediaobject>
+<imageobject>
+<imagedata fileref="configure-synchronization.png" format="PNG"/>
+</imageobject>
+<textobject>
+<phrase
+>Einrichtungsdialog für Abgleich</phrase>
+</textobject>
+</mediaobject>
+</screenshot>
+
+<variablelist>
+<varlistentry>
+<term
+><guilabel
+>Abgleich aktivieren</guilabel
+></term>
+<listitem>
+  <para
+>Das Abgleichen kann mit diesem Eintrag ein- oder ausgeschaltet werden. Ist der Abgleich eingeschaltet, dann können Sie mit den Ankreuzfeldern auswählen, ob Routen- und Lesezeichendaten abgeglichen werden sollen oder auf <guibutton
+>Jetzt abgleichen</guibutton
+> klicken, um den Vorgang sofort zu starten.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Anmeldungsdaten</guilabel
+></term>
+<listitem>
+<para
+>Hier geben Sie die Anmeldedaten für ownClowd. Weitere Informationen zur Einrichtung finden Sie auf der <ulink url="https://owncloud.com/"
+>offiziellen ownClowd-Webseite</ulink
+>.</para>
+</listitem>
+</varlistentry>
+
+</variablelist>
+</sect1>
+
+<sect1 id="configrouting">
+<title
+>Einrichtungsdialog „Routenplaner“</title>
+<screenshot>
+<screeninfo
+>Einrichtungsdialog „Routenplaner“</screeninfo>
+<mediaobject>
+<imageobject>
+<imagedata fileref="configure-routing.png" format="PNG"/>
+</imageobject>
+<textobject>
+<phrase
+>Einrichtungsdialog für Routenplanung</phrase>
+</textobject>
+</mediaobject>
+</screenshot>
+
+<variablelist>
+
+<varlistentry>
+<term
+><guilabel
+>Hinzufügen</guilabel
+></term>
+<listitem>
+<para
+>Öffnet einen Dialog, in dem neue Routenprofile hinzugefügt werden können.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Einrichten</guilabel
+></term>
+<listitem>
+<para
+>Öffnet einen Dialog, in dem das aktuell ausgewählte Routenprofil eingerichtet werden kann.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Entfernen</guilabel
+></term>
+<listitem>
+<para
+>Löscht das ausgewählte Routenprofil.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Nach oben</guilabel
+></term>
+<listitem>
+<para
+>Das ausgewählte Routenprofil wird eine Zeile nach oben geschoben und tauscht den Platz mit dem vorher dort vorhandenen Profil.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Nach unten</guilabel
+></term>
+<listitem>
+<para
+>Das ausgewählte Routenprofil wird eine Zeile nach unten geschoben und tauscht den Platz mit dem vorher dort vorhandenen Profil.</para>
+</listitem>
+</varlistentry>
+
+</variablelist>
+
+</sect1>
+
+<sect1 id="configplugins">
+<title
+>Einrichtung der Module</title>
+<para
+>Auf der Seite <guilabel
+>Module</guilabel
+> des Einrichtungsdialogs können Informationskästen, Online-Dienste und andere Module aus- und abgewählt werden. Alle aktivierten Module werden im Menü <guilabel
+>Ansicht</guilabel
+> angezeigt, hier können Sie die aktivierten Module dann ein- oder ausblenden. </para>
+<screenshot>
+<screeninfo
+>Einrichtungsdialog  der Module</screeninfo>
+<mediaobject>
+<imageobject>
+<imagedata fileref="configure-plugins.png" format="PNG"/>
+</imageobject>
+<textobject>
+<phrase
+>Einrichtungsdialog  der Module</phrase>
+</textobject>
+</mediaobject>
+</screenshot>
+<para
+>Jedes Modul kann mit den Ankreuzfeldern links neben den Namen des Moduls aktiviert oder deaktiviert werden. Für einige Module gibt es weitere Einstellungsmöglichkeiten, die Sie durch Klicken auf das Werkzeugsymbol auf der rechten Seite erreichen. </para>
+
+<variablelist>
+
+<varlistentry>
+<term
+><guilabel
+>Amateur-Radio-Modul Aprs</guilabel
+></term>
+<listitem>
+<para
+>Lädt Daten vom „Automatic Packet Reporting System“ über das Internet, von einer Datei oder der seriellen Schnittstelle. Die Position und der Status der Datensender werden in Echtzeit aktualisiert.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Anmerkung</guilabel
+></term>
+<listitem>
+<para
+>Ermöglicht das Einfügen von Anmerkungen auf den Karten.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Atmosphäre</guilabel
+></term>
+<listitem>
+<para
+>Zeigt Effekte der Atmosphäre.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Kompass</guilabel
+></term>
+<listitem>
+<para
+>Zeigt einen Kompass in der Karte an.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Koordinatensystem</guilabel
+></term>
+<listitem>
+<para
+>Zeigt ein Koordinatengitter an, die Farbe der Gitterlinien kann eingestellt werden.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Fadenkreuz</guilabel
+></term>
+<listitem>
+<para
+>Aktivieren Sie diese Einstellung, um ein kleines Kreuz in der Mitte der Karte anzuzeigen.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Download-Fortschrittsanzeige</guilabel
+></term>
+<listitem>
+<para
+>Eine Tortengrafik auf der Karte, die den Fortschritt beim Herunterladen von Daten anzeigt.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Erdbeben</guilabel
+></term>
+<listitem>
+<para
+>Zeigt Markierungen für Erdbeben auf der Karte.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry id="eclipsesplugin">
+<term
+><guilabel
+>Finsternisse</guilabel
+></term>
+<listitem>
+<para
+>Zeigt die Daten von Sonnen- und Mond-Finsternissen.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Höhenprofil</guilabel
+></term>
+<listitem>
+  <para
+>Zeigt das Höhenprofil für <link linkend="routing"
+>Routen in der Karte</link
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Höhenprofil-Markierung</guilabel
+></term>
+<listitem>
+  <para
+>Markiert die aktuelle Höhe des Höhenprofils auf der Karte.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>GpsInfo</guilabel
+></term>
+<listitem>
+  <para
+>Zeigt ist ein freischwebendes Objekt, das <ulink url="https://de.wikipedia.org/wiki/GPS"
+>GPS</ulink
+>-Informationen bereitstellt.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Lizenz</guilabel
+></term>
+<listitem>
+  <para
+>Zeigt ist ein freischwebendes Objekt für die Anzeige von Copyright-Informationen .</para>
+</listitem>
+</varlistentry>
+
+<varlistentry id="measure-tool-config">
+<term
+><guilabel
+>Messwerkzeug</guilabel
+></term>
+<listitem>
+  <para
+>Das Modul, um den <link linkend="measure-distances"
+>Abstand zwischen zwei oder mehr Punkten zu messen</link
+>.</para>
+  <para
+>Die Anzeige von Entfernung und Position zwischen Messpunkten kann eingestellt werden, wenn Sie auf das Werkzeugsymbol drücken. Dann können Sie die Beschriftung der Abschnitte ein- oder ausschalten.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Navigation</guilabel
+></term>
+<listitem>
+<para
+>Zeigt ein Navigationselement zur Vergrößerung und Verschiebung der Karte mit der Maus als freischwebendes halb durchsichtiges Fenster auf der Karte an.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>OpenCaching.com</guilabel
+></term>
+<listitem>
+  <para
+>Zeigt die Markierungen für <ulink url="https://de.wikipedia.org/wiki/Geocaching"
+>Geocaching</ulink
+> auf der Karte.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>OpenDesktop-Einträge</guilabel
+></term>
+<listitem>
+  <para
+>Zeigt die Avatare und einige weitere Informationen über <ulink url="https://opendesktop.org/"
+>OpenDesktop</ulink
+>-Benutzer auf der Karte an.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Übersichtskarte</guilabel
+></term>
+<listitem>
+<para
+>Dies ist ein freischwebendes Objekt, das eine Übersichtskarte bereitstellt.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Fotos</guilabel
+></term>
+<listitem>
+<para
+>Lädt automatisch Bilder aus aller Welt anhand ihres Beliebtheitsgrades herunter.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Orte</guilabel
+></term>
+<listitem>
+  <para
+>Zeigt tolle Orte mithilfe von <ulink url="https://foursquare.com/"
+>Foursquare</ulink
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Positionsmarkierung</guilabel
+></term>
+<listitem>
+  <para
+>Zeichnet eine Markierung an die aktuelle <ulink url="https://de.wikipedia.org/wiki/GPS"
+>GPS</ulink
+>-Position.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Postleitzahlen</guilabel
+></term>
+<listitem>
+  <para
+>Zeigt <ulink url="https://de.wikipedia.org/wiki/Postleitzahlen"
+>Postleitzahlen</ulink
+> für den Bereich auf der Karte an.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Routenplaner</guilabel
+></term>
+<listitem>
+  <para
+>Zeigt <link linkend="routing"
+>Routenplanerinformationen</link
+> und Navigationselemente.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Satelliten</guilabel
+></term>
+<listitem>
+  <para
+>Zeigt natürliche und künstliche Satelliten der Erde und anderer Planeten mit den Orbitalbahnen.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Maßstab</guilabel
+></term>
+<listitem>
+<para
+>Dies ist ein freischwebendes Objekt, das einen Maßstab bereitstellt.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Geschwindigkeitsmesser</guilabel
+></term>
+<listitem>
+  <para
+>Zeigt die aktuelle Reisegeschwindigkeit. Dafür werden <ulink url="https://de.wikipedia.org/wiki/GPS"
+>GPS</ulink
+>-Daten benötigt.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Sterne</guilabel
+></term>
+<listitem>
+<para
+>Ein Modul, das die Sterne am Himmel anzeigt.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Sonne</guilabel
+></term>
+<listitem>
+  <para
+>Ein Modul, das die Sonne anzeigt.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Wetter</guilabel
+></term>
+<listitem>
+<para
+>Lädt aktuelle Informationen über das Wetter in Städten und zeigt sie auf der Karte an.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Wikipedia-Artikel</guilabel
+></term>
+<listitem>
+<para
+>Lädt automatisch Wikipedia-Artikel und zeigt sie an der richtigen Position in der Karte an.</para>
+</listitem>
+</varlistentry>
+
+</variablelist>
+</sect1>
+
+</chapter>
+
+	 <chapter id="faq">
+		 <title
+>Fragen und Antworten</title>
+
+		 <qandaset id="faqlist">
+             <qandaentry>
+                 <question>
+                     <para
+>Ich kann auf der Karte mein Haus nicht erkennen. Warum sollte ich &marble; benutzen, wenn es doch schon Google Earth gibt?</para>
+                 </question>
+                 <answer>
+                     <para
+>&marble; ist als schlanker und schneller Geografie-Browser für Ausbildungszwecke gedacht, der auf allen von &Qt; unterstützten Plattformen läuft. Auch wenn höher aufgelöste Karten schön wären, sind sie nicht für jeden Benutzer und jeden Anwendungsfall nötig (genausowenig wie sie jedesmal eine ausgewachsene Textverarbeitung benutzen, wenn ein einfacher Editor ausreicht). Beachten Sie außerdem, dass &marble; eine freie Software ist und mit Daten arbeitet, die genauso frei verteilt werden können wie freie Software. </para>
+                 </answer>
+             </qandaentry>
+             <qandaentry>
+                 <question>
+                     <para
+>Warum ist &marble; so schnell obwohl ich keine Hardware-Beschleunigung aktiviert habe? Warum läuft &marble; auf meiner teuren 3D-Grafikkarten nicht schneller?</para>
+                 </question>
+                 <answer>
+                     <para
+>Obwohl die Erde als Globus darstellt wird, macht &marble; keinen Gebrauch von 3D-Hardware-Beschleunigung. Das hat den Vorteil, dass es grundsätzlich auf jeder von &Qt; unterstützten Plattform und Hardware mit halbwegs ordentlicher Geschwindigkeit läuft. Das hat allerdings den Nachteil, dass es nicht so flüssig läuft wie es der Fall wäre, wenn es hardwarebeschleunigtes OpenGL benutzen würde. &marble; verwendet einfache 2D-Grafiken und benötigt darum eine Grafikkarte, die 2D-Grafiken flüssig und schnell verarbeiten kann. Wir planen zukünftig ein optionales OpenGL-Backend. </para>
+                 </answer>
+             </qandaentry>
+			 <qandaentry>
+				 <question>
+					 <para
+>Werde ich jemals für &marble; bezahlen müssen?</para>
+				 </question>
+				 <answer>
+					 <para
+>Nein, nie. Aber die Autoren freuen sich über Rückmeldungen. &marble; ist unter der <ulink url="https://www.gnu.org/licenses/licenses.html#LGPL"
+>LGPL</ulink
+> lizensiert, darum werden Sie niemals für dieses Programm zahlen müssen. </para>
+				 </answer>
+			 </qandaentry>
+             <qandaentry>
+                 <question>
+                     <para
+>Wie kann ich selbst dazu beitragen?</para>
+                 </question>
+
+                 <answer>
+                     <para
+>&marble; ist nicht nur ein Programm, sondern auch ein freies Software-Projekt. Als solches können Sie sich uns leicht anschließen. Nehmen Sie einfach über die marble-devel-Mailingliste (marble-devel@kde.org) Kontakt mit uns auf. </para>
+                 </answer>
+             </qandaentry>
+		 </qandaset>
+	 </chapter>
+
+	 <chapter id="credits">
+
+		 <title
+>Danksagungen und Lizenz</title>
+		 <para
+>&marble;</para>
+		 <para
+>Copyright des Programms, 2005-2007 &Torsten.Rahn; &Torsten.Rahn.mail; </para>
+
+		 <para
+>Mitwirkende:</para>
+
+		 <itemizedlist>
+             <listitem
+><para
+>&Torsten.Rahn; &Torsten.Rahn.mail; </para
+></listitem>
+			 <listitem
+><para
+>Inge Wallin <email
+>inge@lysator.liu.se</email
+> </para
+></listitem>
+		 </itemizedlist>
+
+		 <para
+>Übersetzung Stephan Johach<email
+>hunsum@gmx.de</email
+></para
+> &underFDL; &underLGPL; </chapter>
+
+	 &documentation.index;
+ </book>
+ <!--
+ Local Variables:
+ mode: sgml
+ sgml-minimize-attributes:nil
+ sgml-general-insert-case:lower
+ sgml-indent-step:0
+ sgml-indent-data:nil
+ End:
+
+ // vim:ts=2:sw=2:tw=78:noet:noai
+ -->

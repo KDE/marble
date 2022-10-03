@@ -1,0 +1,2737 @@
+<?xml version="1.0" ?>
+<!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
+ <!ENTITY % addindex "IGNORE">
+ <!ENTITY % Catalan  "INCLUDE"
+><!-- change language only here -->
+ ]>
+
+<book id="marble" lang="&language;">
+
+  <bookinfo>
+    <title
+>El manual del &marble;</title>
+
+    <authorgroup>
+      <author
+><firstname
+>Torsten</firstname
+> <surname
+>Rahn</surname
+> <affiliation
+> <address
+>&Torsten.Rahn.mail;</address>
+        </affiliation>
+      </author>
+      <author
+><firstname
+>Dennis</firstname
+> <surname
+>Nienhüser</surname
+> <affiliation
+> <address
+>&Dennis.Nienhueser.mail;</address>
+        </affiliation>
+      </author>
+
+      &traductor.Antoni.Bella; 
+    </authorgroup>
+
+    <copyright>
+      <year
+>2005</year>
+      <year
+>2006</year>
+      <year
+>2007</year>
+      <holder
+>&Torsten.Rahn;</holder>
+    </copyright>
+    <copyright>
+      <year
+>2010</year>
+      <year
+>2013</year>
+      <holder
+>&Dennis.Nienhueser;</holder>
+    </copyright>
+
+    <legalnotice
+>&FDLNotice;</legalnotice>
+
+    <date
+>17 d'octubre de 2021</date>
+    <releaseinfo
+>2.2 (KDE Gear 21.08)</releaseinfo>
+
+    <abstract>
+      <para
+>El &marble; és un atles geogràfic i un globus terraqüi virtual que permet explorar ràpidament llocs al nostre planeta. El podeu utilitzar per a cercar adreces, per a crear mapes amb facilitat, mesurar distàncies i per a recuperar informació detallada sobre els emplaçaments que acabem d'escoltar en les notícies o a Internet. La interfície d'usuari és clara, senzilla i fàcil d'utilitzar. </para>
+    </abstract>
+
+    <keywordset>
+      <keyword
+>KDE</keyword>
+      <keyword
+>educació</keyword>
+      <keyword
+>terra</keyword>
+      <keyword
+>globus</keyword>
+      <keyword
+>geografia</keyword>
+      <keyword
+>Marble</keyword>
+    </keywordset>
+
+  </bookinfo>
+
+  <chapter id="introduction">
+  <title
+>Introducció</title>
+    <screenshot>
+      <screeninfo
+>Logotip del &marble;</screeninfo>
+      <mediaobject>
+        <imageobject
+><imagedata fileref="logo-1.png" format="PNG"/></imageobject>
+        <textobject
+><phrase
+>Logotip del &marble;</phrase
+></textobject>
+      </mediaobject>
+    </screenshot>
+
+    <para
+>Us donem la benvinguda al &marble;, un petit globus interactiu i atles geogràfic que posa el món a les vostres mans. Igual que un atles real o un globus convencional, el &marble; permet moure-us lliurement a través del seu mapa i cercar llocs. A més, el &marble; permet apropar i tenir molts punts de vista diferents sobre la superfície de la <guilabel
+>Terra</guilabel
+> o la <guilabel
+>Lluna</guilabel
+> (amb la seva vista). En la seva configuració predeterminada, el &marble; compta amb 15 vistes diferents: <guilabel
+>Atles</guilabel
+>, <guilabel
+>OpenStreetMap</guilabel
+>, <guilabel
+>Vista de satèl·lit</guilabel
+>, <guilabel
+>La terra de nit</guilabel
+>, <guilabel
+>Globus terraqüi de Behaim de 1492</guilabel
+>, <guilabel
+>Mapa de satèl·lit Sentinel2</guilabel
+>, <guilabel
+>Mapa històric, 1689</guilabel
+>, <guilabel
+>Mapa polític</guilabel
+>, <guilabel
+>Mapa simple</guilabel
+>, <guilabel
+>Precipitació (desembre)</guilabel
+>, <guilabel
+>Precipitació (juliol)</guilabel
+>, <guilabel
+>Temperatura (desembre)</guilabel
+> i <guilabel
+>Temperatura (juliol)</guilabel
+>, <guilabel
+>OSM amb vectors</guilabel
+> i <guilabel
+>Lluna</guilabel
+>. </para>
+
+    <para
+>El &marble; ve amb una petita base de dades de més de 12.000 emplaçaments (ciutats, muntanyes, volcans) que es poden cercar i que estan integrats amb la Viquipèdia. A més, podeu mesurar distàncies utilitzant el &marble; entre múltiples punts de mesura que es poden establir amb llibertat. </para>
+
+    <para
+>El &marble; és programari lliure i està llicenciat sota la Llicència Pública General de &GNU;. </para>
+
+  </chapter>
+
+  <chapter id="quick-start">
+  <title
+>Guia d'inici ràpid al &marble;: Navegació</title>
+
+  <para
+>Així és el &marble; la primera vegada que l'executeu, ja sigui amb <menuchoice
+><guimenu
+>Aplicacions</guimenu
+> <guisubmenu
+>Educació</guisubmenu
+> <guimenuitem
+>&marble; del &kde; (globus terraqüi virtual)</guimenuitem
+></menuchoice
+> des del menú global o amb <keycombo action="simul"
+>&Alt;<keycap
+>F2</keycap
+></keycombo
+> i introduint <command
+>marble</command
+> al camp d'entrada.</para>
+
+    <screenshot>
+      <screeninfo
+>Finestra principal del &marble;</screeninfo>
+      <mediaobject>
+        <imageobject
+><imagedata fileref="quick-1.png" format="PNG"/></imageobject>
+        <textobject
+><phrase
+>Finestra principal del &marble;</phrase
+></textobject>
+      </mediaobject>
+    </screenshot>
+
+    <para
+>A la dreta podeu veure un mapa topogràfic del nostre bonic planeta. Per a permetre una millor orientació, el mapa ofereix una barra d'escala a la cantonada inferior esquerra, així com una rosa dels vents a la part superior dreta. Per a navegar i controlar el punt de vista podeu utilitzar les eines al rètol informatiu <guilabel
+>Navegació</guilabel
+> a la dreta: Premeu els botons de fletxa per a fer girar el globus. Els botons de fletxa <guibutton
+>Amunt</guibutton
+> i <guibutton
+>Avall</guibutton
+> inclinaran l'eix de la terra enrere i endavant. Els botons de fletxa <guibutton
+>Esquerra</guibutton
+> i <guibutton
+>Dreta</guibutton
+> faran que la Terra giri al voltant del seu eix físic. </para>
+
+    <para
+>Podeu aconseguir el mateix comportament mantenint premut el &BER; sobre algun lloc del globus i movent el ratolí. Utilitzant aquest estil de navegació d'arrossegar i deixar anar se us permetrà ajustar l'angle de visió de manera molt més fàcil i precisa. Les tecles de cursor del teclat ofereixen una altra manera alternativa de canviar ràpidament les direccions. </para>
+
+    <para
+>Apropar o allunyar movent amunt i avall el control lliscant vertical. Si el ratolí té una roda, també la podreu utilitzar -o senzillament manteniu premut el &BER; i el &BDR; alhora mentre moveu el ratolí cap amunt i cap avall-. Canviar el nivell d'apropament pas a pas es pot fer mitjançant els botons <guibutton
+>Apropa</guibutton
+> i <guibutton
+>Allunya</guibutton
+> situats per sobre i per sota del botó lliscant d'apropament (o amb les tecles <keycap
+>+</keycap
+> i <keycap
+>-</keycap
+> en el teclat). </para>
+
+    <para
+>Depenent de la resolució del mapa l'apropament us proporcionarà més detalls. Apareixeran les ciutats més petites i utilitzant el mapa topogràfic podreu apreuar que les línies de les costes es proporcionen en forma de gràfics vectorials. </para>
+
+    <para
+>En cas que us perdeu sempre es pot restablir l'angle de visió i el nivell d'apropament al punt de partida: Senzillament premeu el botó <guibutton
+>Casa vostra</guibutton
+> (o el botó <guibutton
+>Inici</guibutton
+> en el teclat). Per a definir l'emplaçament d'inici a la posició actual (al centre del mapa) seleccioneu l'element de menú <menuchoice
+><guimenu
+>Adreces d'interès</guimenu
+> <guimenuitem
+>Estableix el vostre emplaçament</guimenuitem
+></menuchoice
+>. </para>
+
+    <para
+>Un clic a la barra d'estat amb el &BDR; ofereix un menú que us permetrà personalitzar l'aparença de la barra d'estat. Podeu mostrar la posició, l'altitud, el nivell del mosaic actual i un indicador de progrés que mostri l'estat de la descàrrega de les dades del mapa. </para>
+  </chapter>
+
+  <chapter id="map-views">
+  <title
+>Escollir diferents vistes de mapa per al &marble;</title>
+
+    <para
+>El &marble; ve amb 15 vistes diferents: <guilabel
+>Atles</guilabel
+>, <guilabel
+>OpenStreetMap</guilabel
+>, <guilabel
+>Vista de satèl·lit</guilabel
+>, <guilabel
+>La terra de nit</guilabel
+>, <guilabel
+>Globus terraqüi de Behaim de 1492</guilabel
+>, <guilabel
+>Mapa de satèl·lit Sentinel2</guilabel
+>, <guilabel
+>Mapa històric, 1689</guilabel
+>, <guilabel
+>Mapa polític</guilabel
+>, <guilabel
+>Mapa simple</guilabel
+>, <guilabel
+>Precipitació (desembre)</guilabel
+>, <guilabel
+>Precipitació (juliol)</guilabel
+>, <guilabel
+>Temperatura (desembre)</guilabel
+> i <guilabel
+>Temperatura (juliol)</guilabel
+>, <guilabel
+>OSM amb vectors</guilabel
+> i <guilabel
+>Lluna</guilabel
+>. Podeu escollir entre aquests prement la pestanya <guilabel
+>Vista de mapa</guilabel
+> a la part superior del quadre d'eines del &marble;: </para>
+
+    <screenshot>
+      <screeninfo
+>Vistes de mapa al &marble;</screeninfo>
+      <mediaobject>
+        <imageobject
+><imagedata fileref="mapview-1.png" format="PNG"/></imageobject>
+        <textobject
+><phrase
+>Vistes de mapa al &marble;</phrase
+></textobject>
+      </mediaobject>
+    </screenshot>
+
+    <itemizedlist>
+      <listitem
+><para
+><guilabel
+>Atles</guilabel
+>: Un mapa topogràfic clàssic. Utilitza línies vectorials («MicroWorldDataBase II») per a marcar les costes, fronteres dels països, &etc; i gràfics de mapa de bits («SRTM30») per a crear el relleu de l'altitud.</para
+></listitem>
+
+      <listitem
+><para
+><guilabel
+>OpenStreetMap</guilabel
+>: Un mapa de carreteres global creat pel projecte OpenStreetMap (OSM). OSM és una comunitat oberta que crea mapes editables lliures. Les dades OSM s'han renderitzat amb Mapnik.</para
+></listitem>
+
+      <listitem
+><para
+><guilabel
+>Vista de satèl·lit</guilabel
+>: La Terra vista des de l'espai. El mapa està basat en les belles imatges de la NASA «<ulink url="https://earthobservatory.nasa.gov/features/BlueMarble/"
+>Blue &marble; Next Generation</ulink
+>» (Següent generació del &marble; blau). Crèdits: Observatori de la Terra de la NASA.</para
+></listitem>
+
+      <listitem
+><para
+><guilabel
+>La terra de nit</guilabel
+>: Aquesta imatge dels llums de ciutats de la Terra ha estat creada a partir del programa de satèl·lits meteorològics de defensa (Defense Meteorological Satellite Program -DMSP-) sistema d'escaneig de línies operacional (Operational Linescan System -OLS-).</para
+></listitem>
+
+      <listitem
+><para
+><guilabel
+>Globus terraqüi de Behaim de 1492</guilabel
+>: Produït per en Martin Behaim entre 1490-1492, és el globus terrestre més antic.</para
+></listitem>
+
+      <listitem
+><para
+><guilabel
+>Mapa de satèl·lit Sentinel2</guilabel
+>: Basat en les dades de Sentinel, vegeu més informació <ulink url="https://community.kde.org/Marble/Sentinel2MapTheme"
+>aquí</ulink
+>.</para
+></listitem>
+
+      <listitem
+><para
+><guilabel
+>Mapa històric, 1689</guilabel
+>: Mapamundi històric de l'any 1689 creat a Amsterdam per en G. van Schagen.</para
+></listitem>
+
+      <listitem
+><para
+><guilabel
+>Mapa polític</guilabel
+>: Un mapa senzill amb les fronteres actuals dels països.</para
+></listitem>
+
+      <listitem
+><para
+><guilabel
+>Mapa simple</guilabel
+>: Un mapa senzill. Utilitza línies vectorials per a dibuixar la línia de la costa i les fronteres dels països, &etc;</para
+></listitem>
+
+      <listitem
+><para
+><guilabel
+>Precipitació (desembre)</guilabel
+>: Un mapa que mostra la precipitació mitjana al desembre.</para
+></listitem>
+
+      <listitem
+><para
+><guilabel
+>Precipitació (juliol)</guilabel
+>: Un mapa que mostra la precipitació mitjana (pluja, neu, pedra, &etc;) al juliol.</para
+></listitem>
+
+      <listitem
+><para
+><guilabel
+>Temperatura (desembre)</guilabel
+>: Un mapa que mostra la temperatura mitjana al desembre.</para
+></listitem>
+
+      <listitem
+><para
+><guilabel
+>Temperatura (juliol)</guilabel
+>: Un mapa que mostra la temperatura mitjana al juliol.</para
+></listitem>
+
+      <listitem
+><para
+><guilabel
+>OSM amb vectors</guilabel
+>: Mapa vectorial des del <ulink url="https://www.openstreetmap.org/"
+>projecte OpenStreetMap</ulink
+>.</para
+></listitem>
+
+      <listitem
+><para
+><guilabel
+>Lluna</guilabel
+>: Un mapa de la lluna. El mapa es basa en dades de la missió «Clementine» (UVVIS Basemap Mosaic) Credits: NASA/SDIO, Cortesia del Programa de Recerca Astrogeològica USGS.</para
+></listitem>
+    </itemizedlist>
+  </chapter>
+
+  <chapter id="search-places">
+  <title
+>Cercar llocs utilitzant el &marble;</title>
+
+    <para
+>El &marble; ve amb una petita base de dades de més de 12.000 ciutats (des de <ulink url="https://www.populationdata.net/monde/"
+>PopulationData.net</ulink
+>) i algunes muntanyes i volcans. Trobareu un emplaçament teclejant el seu nom en la línia de cerca a la part superior del quadre d'eines. Si no esteu segur de l'ortografia (el &marble; sempre utilitza el nom natiu en lletres llatines). Quan comenceu a escriure, apareixeran suggeriments sota de la línia de cerca de la següent manera: </para>
+
+    <screenshot>
+      <screeninfo
+>Cercant llocs al &marble;</screeninfo>
+      <mediaobject>
+        <imageobject
+><imagedata fileref="search-1.png" format="PNG"/></imageobject>
+        <textobject
+><phrase
+>Cercant llocs al &marble;</phrase
+></textobject>
+      </mediaobject>
+    </screenshot>
+
+    <para
+>Quan premeu &Intro;, els executors del &marble; consultaran ambdues cerques; en línia i fora de línia per a retornar dades de més utilitat. </para>
+
+    <para
+>Hi ha disponibles els següents executors de cerca en línia:</para>
+
+    <itemizedlist>
+      <listitem
+><para
+>Nominatim: Una cerca en línia i servei de geocodificació inversa, emprant les dades d'<ulink url="https://www.openstreetmap.org"
+>OpenStreetMap</ulink
+>.</para
+></listitem>
+
+      <listitem
+><para
+>HostIP: Una geocodificació inversa basada en l'adreça IP, emprant les dades des de <ulink url="https://www.hostip.info"
+>HostIP.info</ulink
+>.</para
+></listitem>
+    </itemizedlist>
+
+    <para
+>Hi ha disponibles els següents executors de cerca fora de línia, depenent del programari addicional i les dades que teniu instal·lades:</para>
+
+    <itemizedlist>
+      <listitem
+><para
+>Base de dades local: Se cerquen totes els noms de lloc en tots els documents oberts. Per descomptat, això inclou les vostres adreces d'interès.</para
+></listitem>
+
+      <listitem
+><para
+>Monav: Un servei de cerca per a quan s'està desconnectat emprant les dades de la informació de ruta fora de línia des de Monav, basada en dades OSM.</para
+></listitem>
+
+      <listitem
+><para
+>Gosmore: Un servei de geocodificació inversa en estar desconnectat emprant les dades de la configuració Gosmore.</para
+></listitem>
+
+    </itemizedlist>
+
+    <para
+>Una vegada trobeu la vostra cerca al mapa podreu fer clic en la seva etiqueta o símbol amb el &BER;. Després de fer clic al nom de l'emplaçament al menú emergent, es mostrarà un diàleg amb un full de dades, tal com: </para>
+
+    <screenshot>
+      <screeninfo
+>Full de dades al &marble;</screeninfo>
+      <mediaobject>
+        <imageobject
+><imagedata fileref="search-2.png" format="PNG"/></imageobject>
+        <textobject
+><phrase
+>Full de dades al &marble;</phrase
+></textobject>
+      </mediaobject>
+    </screenshot>
+
+    <para
+>A la primera pestanya del diàleg es proporcionen algunes dades molt bàsiques, com el nom, les coordenades i la bandera del país on pertany el lloc. A més, es mostren els números de població de les ciutats, així com l'elevació de les muntanyes. Si el vostre ordinador està connectat a Internet i esteu en línia, el &marble; intentarà connectar-se a la popular enciclopèdia d'Internet <quote
+>Viquipèdia</quote
+>. Si hi ha disponible algun article de Viquipèdia, el &marble; el mostrarà al full de dades. </para>
+
+    <note
+><para
+>Les fonts de dades addicionals es poden activar utilitzant el submenú <menuchoice
+><guimenu
+>Visualitza</guimenu
+><guisubmenu
+>Serveis en línia</guisubmenu
+></menuchoice
+>. Per exemple, haureu de marcar l'element de menú <guimenuitem
+>Viquipèdia</guimenuitem
+> per a veure els articles de la Viquipèdia.</para
+></note>
+  </chapter>
+
+  <chapter id="routing">
+  <title
+>Ubicar-vos amb el &marble;</title>
+
+    <para
+>A més de cercar llocs, el &marble; pot mostrar els itineraris possibles entre dos llocs o més. Voleu planejar una excursió amb bicicleta a un bosc proper? Us calen instruccions de guia per a arribar fins a una adreça en una ciutat estrangera? Seleccioneu la pestanya <guilabel
+>Itineraris</guilabel
+> a la part superior del quadre d'eines del &marble; per a començar a planificar el vostre viatge. </para>
+
+    <sect1 id="routing-route-new">
+    <title
+>Crear un itinerari nou</title>
+
+      <para
+>A la pestanya <guilabel
+>Itineraris</guilabel
+> veureu dos botons verds <guibutton
+>A</guibutton
+> i <guibutton
+>B</guibutton
+>. Introduïu l'adreça d'inici en el camp d'entrada que hi ha al costat del botó <guibutton
+>A</guibutton
+>, l'origen de l'itinerari. Premeu &Intro; o feu clic sobre el botó <guibutton
+>Cerca</guibutton
+> per a trobar els llocs assenyalats corresponents. Es mostrarà una petita animació de progrés del progrés mentre espereu que acabi. Utilitzant el terme de cerca <quote
+>Weavers Lane, London</quote
+>, el resultat serà similar a la captura de pantalla a sota: </para>
+
+      <screenshot>
+        <screeninfo
+>Cerca d'una adreça al &marble;</screeninfo>
+        <mediaobject>
+          <imageobject
+><imagedata fileref="routing-1.png" format="PNG"/></imageobject>
+          <textobject
+><phrase
+>Cerca d'una adreça al &marble;</phrase
+></textobject>
+        </mediaobject>
+      </screenshot>
+
+      <para
+>Els llocs assenyalats corresponents s'alineen per sota dels camps d'entrada. Pel que també es mostren en el mapa. El primer resultat se selecciona automàticament com a punt inicial de l'itinerari. En el mapa, aquesta posició s'indica utilitzant la mateixa icona <guiicon
+>A</guiicon
+> que té el botó que hi ha al costat del camp d'entrada d'origen de l'itinerari. Si el primer resultat no és l'origen de l'itinerari que desitgeu, feu clic a qualsevol altre resultat que s'ajusti a la nova posició d'origen. Podeu fer clic sobre seu en la llista de resultats o en la seva icona al mapa per a aconseguir-ho. L'origen de l'itinerari escollit en l'actualitat sempre s'indica utilitzant la icona <guiicon
+>A</guiicon
+>. </para>
+
+      <para
+>Una vegada seleccionat l'origen de l'itinerari, seguirem introduint la destinació del nostre viatge. El procediment és el mateix: Introduïu l'adreça de destinació en el camp d'entrada que hi ha al costat del botó <guibutton
+>B</guibutton
+>, premeu &Intro; i seleccioneu l'element desitjat a la llista de resultats. </para>
+
+      <para
+>Us heu adonat que el botó <guilabel
+>Cerca</guilabel
+> ha desaparegut i se substitueix per un botó <guilabel
+>Obtén indicacions</guilabel
+>? El &marble; està indicant que s'ha introduït correctament tota la informació necessària per a calcular un itinerari. Premeu el botó <guilabel
+>Obtén indicacions</guilabel
+> per a obtenir un itinerari adequat. Si la vostra destinació és el terme de cerca <quote
+>Sun Walk, London</quote
+>, el resultat serà similar a aquesta captura de pantalla: </para>
+
+      <screenshot>
+        <screeninfo
+>Resultat d'un itinerari al &marble;</screeninfo>
+        <mediaobject>
+          <imageobject
+><imagedata fileref="routing-2.png" format="PNG"/></imageobject>
+          <textobject
+><phrase
+>Mostrant un itinerari al &marble;</phrase
+></textobject>
+        </mediaobject>
+      </screenshot>
+
+      <para
+>Si la posició d'origen (o de destinació) ja és visible a la pantalla, potser resulta més còmode seleccionar-la directament al mapa. Per a fer-ho, feu clic al botó <guibutton
+>A</guibutton
+> (o <guibutton
+>B</guibutton
+>) al costat del camp d'entrada. Seleccioneu <guilabel
+>Des del mapa</guilabel
+> en el menú que apareixerà. Una vegada hi feu clic, s'activarà el mode d'entrada al mapa: El següent clic sobre una posició en el mapa es convertirà en l'inici (o final) del vostre viatge. El cursor del ratolí es convertirà en una creu per a facilitar una selecció precisa. La posició seleccionada s'inclourà en l'itinerari i serà marcada en el mapa. Per a cancel·lar la selecció, premeu el botó de nou o premeu la tecla &Esc;. </para>
+
+      <para
+>També es proporciona una selecció alternativa d'origen i de destinació de l'itinerari a través del menú contextual del mapa: Feu clic amb el &BDR; sobre l'emplaçament desitjat i seleccioneu <guilabel
+>Indicacions des d'aquí</guilabel
+> o <guilabel
+>Indicacions cap aquí</guilabel
+>, respectivament. </para>
+    </sect1>
+
+    <sect1 id="routing-profiles">
+    <title
+>Perfils de l'itinerari</title>
+
+      <para
+>Quin itinerari escollir dependrà del tipus de vehicle que utilitzareu (si n'hi ha cap). Li podeu dir això al &marble; i altres preferències utilitzant els perfils de l'itinerari. Cada perfil conté les preferències per a un determinat escenari d'itineraris. En el primer inici, el &marble; crearà quatre perfils comuns: <guilabel
+>Cotxe (més ràpid)</guilabel
+>, <guilabel
+>Cotxe (més curt)</guilabel
+>, <guilabel
+>Bicicleta</guilabel
+> i <guilabel
+>Vianant</guilabel
+>. </para>
+
+      <para
+>Els exemples en les seccions anteriors utilitzen el perfil <guilabel
+>Cotxe (més ràpid)</guilabel
+>. Tornem a l'últim itinerari amb un perfil diferent: Seleccioneu l'opció <guilabel
+>Vianant</guilabel
+> al quadre combinat <guilabel
+>Perfil</guilabel
+>. Ara, l'itinerari es veurà així: </para>
+
+      <screenshot>
+        <screeninfo
+>Itineraris de vianant amb el &marble;</screeninfo>
+        <mediaobject>
+          <imageobject
+><imagedata fileref="routing-5.png" format="PNG"/></imageobject>
+          <textobject
+><phrase
+>Itineraris de vianant amb el &marble;</phrase
+></textobject>
+        </mediaobject>
+      </screenshot>
+
+      <para
+>L'itinerari proposat s'ha escurçat a causa que ara també s'inclouen les voreres en el càlcul del millor itinerari. </para>
+
+      <para
+>Si voleu modificar un dels perfils predeterminats, seleccioneu-lo al quadre combinat <guilabel
+>Perfil</guilabel
+> i feu clic a l'enllaç <guilabel
+>Configura</guilabel
+>. S'obrirà una finestra nova. </para>
+
+      <screenshot>
+        <screeninfo
+>Configuració del perfil de l'itinerari al &marble;</screeninfo>
+        <mediaobject>
+          <imageobject
+><imagedata fileref="routing-6.png" format="PNG"/></imageobject>
+          <textobject
+><phrase
+>Configuració del perfil de l'itinerari al &marble;</phrase
+></textobject>
+        </mediaobject>
+      </screenshot>
+
+      <para
+>El costat esquerre permet configurar quins dorsals d'itineraris es consulten per als itineraris. Hi ha vuit o més dorsals admesos pel &marble;, alguns treballen en línia i els altres fora de línia. Els d'ús en línia requereixen una connexió a Internet per a consultar un itinerari. Els d'ús desconnectat funcionen sense connexió a Internet, però requereixen descarregar i instal·lar mapes d'itineraris amb antelació. Els dorsals d'itineraris suportats són </para>
+
+      <itemizedlist>
+        <listitem
+><para
+>CycleStreets: Itineraris en bicicleta per al Regne Unit utilitzant cyclestreets.net</para
+></listitem>
+
+        <listitem
+><para
+>Gosmore: Un servei d'itineraris per a quan s'està desconnectat que també serveix com a dorsal per al vostre servei d'itineraris en línia.</para
+></listitem>
+
+        <listitem
+><para
+>MapQuest: Un servei d'itineraris per a quan s'està connectat que proporciona instruccions pas a pas avançades.</para>
+
+          <note
+><para
+>Es requereix una AppKey perquè funcioni l'itinerari de MapQuest. La podeu registrar <ulink url="https://developer.mapquest.com/plan_purchase/steps/business_edition/business_edition_free/register"
+>aquí</ulink
+>.</para
+></note
+></listitem>
+
+        <listitem
+><para
+>Monav: Un servei d'itineraris estant desconnectat que és molt ràpid, fins i tot en el càlcul d'itineraris molt grans.</para
+></listitem>
+
+        <listitem
+><para
+>OSRM: Un servei d'itineraris estant connectat que és molt ràpid, fins i tot en el càlcul d'itineraris molt grans.</para
+></listitem>
+
+        <listitem
+><para
+>OpenRouteService: Un servei d'itineraris per a quan s'està connectat que també genera instruccions per a conduir (es limiten a Europa).</para
+></listitem>
+
+        <listitem
+><para
+>Routino: Un servei d'itineraris estant desconnectat amb una configuració molt flexible.</para
+></listitem>
+
+        <listitem
+><para
+>Yours: Un servei d'itineraris per a quan s'està connectat que opera a tot el món (però li falten les instruccions per a conduir).</para
+></listitem>
+      </itemizedlist>
+
+      <para
+>Un cop seleccionat i activat un dorsal d'itineraris al costat esquerre s'inclourà en les consultes, podeu modificar la seva configuració al costat dret. La configuració dependrà de cada dorsal. </para>
+
+      <para
+>A més de la configuració dels quatre perfils predeterminats, podeu afegir perfils nous i eliminar els ja existents en la configuració del &marble; a la pàgina <guilabel
+>Itineraris</guilabel
+>. </para>
+    </sect1>
+
+    <sect1 id="routing-route-adjustments">
+    <title
+>Ajustar els itineraris</title>
+
+      <para
+>El &marble; permet modificar diversos aspectes de l'itinerari per a un ajust més fi: Canviar les opcions de l'itinerari, inserir punts de pas, moure o eliminar punts existents. La modificació de les opcions de l'itinerari ja s'ha discutit en la secció anterior, així que ara ens concentrarem en la gestió dels punts de pas. </para>
+
+      <para
+>La inserció de punts de pas es realitza mitjançant arrossegat i deixat anar en el mapa. Cada vegada que moveu el punter del ratolí per sobre de qualsevol part de l'itinerari (excepte per sobre dels punts de viatge existents), apareixerà una icona de bandera verda per a indicar que és possible inserir un punt de pas. Per a iniciar l'operació d'inserció, feu clic amb el &BER;. Moveu el punter del ratolí cap a la nova posició desitjada mentre manteniu premut el &BER;. Apareixeran línies blaves des dels punts de pas més propers cap a la nova posició: </para>
+
+      <screenshot>
+        <screeninfo
+>Afegint punts de pas a un itinerari al &marble;</screeninfo>
+        <mediaobject>
+          <imageobject
+><imagedata fileref="routing-3.png" format="PNG"/></imageobject>
+          <textobject
+><phrase
+>Inserint un punt de pas al &marble;</phrase
+></textobject>
+        </mediaobject>
+      </screenshot>
+
+      <para
+>El nou punt de pas s'inserirà entre els punts de pas existents una vegada deixeu anar el &BER;. Alhora es dibuixarà l'itinerari existent amb punts per a indicar que conté informació obsoleta. En segon pla, es prepararà un nou itinerari que substituirà l'obsolet de forma automàtica. </para>
+
+      <para
+>També és possible afegir punts de pas abans de l'inici o després del final de l'itinerari. Per a fer-ho, seguiu les instruccions anteriors per a inserir un nou punt de pas, però premeu &Ctrl; mentre moveu el ratolí. Apareixerà una línia blava des del principi o el final de l'itinerari. El seu origen indicarà on s'afegirà el nou punt de pas. </para>
+
+      <para
+>Els punts de pas existents es poden moure lliurement per tot el mapa. Moveu el punter del ratolí per sobre d'un punt de pas i arrossegueu-lo al seu nou emplaçament. Un cop alliberat, l'itinerari s'actualitzarà de forma automàtica. </para>
+
+      <para
+>Per a excloure punts de pas de l'itinerari, eliminar-los. Ho podeu fer utilitzant el botó <guibutton
+>Elimina</guibutton
+> que hi ha al costat del camp d'entrada del punt de pas o fent clic amb el &BDR; sobre el punt de pas en el mapa. Al menú contextual, escolliu <guimenuitem
+>Elimina aquesta destinació</guimenuitem
+>. Per a iniciar un itinerari totalment nou, elimineu tots els punts de pas. </para>
+    </sect1>
+
+    <sect1 id="routing-route-export">
+    <title
+>Carregar, desar i exportar els itineraris</title>
+
+      <para
+>Podeu desar els itineraris en el format <acronym
+>kml</acronym
+> (Keyhole Markup Language -llenguatge de marques Keyhole-) i carregar-los de nou en un moment posterior -al mateix ordinador o en un dispositiu diferent amb el &marble;-, o compartir-los amb els vostres amics o altres aplicacions que puguin llegir fitxers kml (com <application
+>Google Earth</application
+>). Per a desar un itinerari a un fitxer <literal role="extension"
+>.kml</literal
+>, premeu el botó <guibutton
+>Desa</guibutton
+> a la part inferior de la pestanya Itineraris. El proper diàleg Desa us permetrà triar un nom de fitxer per a desar l'itinerari. Es carreguen de manera similar, començant amb el botó <guibutton
+>Obre</guibutton
+> a la part inferior de la pestanya Itineraris. Seleccioneu en el diàleg el fitxer d'itinerari <literal role="extension"
+>.kml</literal
+> a obrir i el &marble; el carregarà. </para>
+
+      <para
+>Els itineraris planificats en el &marble; es poden utilitzar en altres aplicacions o dispositius de navegació que suportin <acronym
+>gpx</acronym
+> (el format eXchange per al GPS) o formats equivalents. Si el vostre dispositiu de navegació no suporta <acronym
+>gpx</acronym
+> directament, podeu utilitzar una utilitat de conversió com <command
+>gpsbabel</command
+> per a convertir un fitxer <acronym
+>gpx</acronym
+> exportat pel &marble; a un format adequat. L'exportació d'un itinerari en el &marble; s'inicia des del menú contextual de l'itinerari en el mapa. Feu clic amb el &BDR; en qualsevol punt de l'itinerari. Al menú contextual que apareix, seleccioneu <guimenuitem
+>Exporta l'itinerari...</guimenuitem
+>: </para>
+
+      <screenshot>
+        <screeninfo
+>Exportant un itinerari al &marble;</screeninfo>
+        <mediaobject>
+          <imageobject
+><imagedata fileref="routing-4.png" format="PNG"/></imageobject>
+          <textobject
+><phrase
+>Exportant un itinerari al &marble;</phrase
+></textobject>
+        </mediaobject>
+      </screenshot>
+
+      <para
+>Introduïu el nom de fitxer desitjat en el següent diàleg de desament. L'extensió del nom de fitxer haurà de ser <literal role="extension"
+>gpx</literal
+> per a emmagatzemar en el format <acronym
+>gpx</acronym
+> o <literal role="extension"
+>kml</literal
+> per a emmagatzemar en el format <acronym
+>kml</acronym
+> (Keyhole Markup Language -llenguatge de marques Keyhole-). Cal tenir en compte que el format intern del &marble; és <acronym
+>kml</acronym
+>, en cas de dubte, deseu els itineraris com <acronym
+>kml</acronym
+> i sols empreu <acronym
+>gpx</acronym
+> per a compartir-los amb altres aplicacions que no puguin llegir fitxers <acronym
+>kml</acronym
+>. </para>
+    </sect1>
+  </chapter>
+
+  <chapter id="measure-distances">
+  <title
+>Mesurar distàncies amb el &marble;</title>
+
+    <para
+>Com ja s'ha esmentat, el &marble; sempre mostra una barra d'escala dinàmica a la part inferior esquerra per a estimar les distàncies en el mapa. Per a una millor orientació, també es proporciona una rosa dels vents a la part superior dreta d'aquestes superposicions. Però encara hi ha més: el &marble; permet mesurar distàncies entre dos o més punts en la Terra. Per a fer-ho, feu clic als respectius punts en l'ordre correcte sobre el globus utilitzant el &BDR;. Amb cada clic apareixerà un menú emergent que us permetrà afegir un punt de mesura (<guimenuitem
+>Afegeix un punt de mesura</guimenuitem
+>), o eliminar tots els punts de mesura (<guimenuitem
+>Elimina els punts de mesura</guimenuitem
+>): </para>
+
+    <screenshot>
+      <screeninfo
+>Mesurant amb el &marble;</screeninfo>
+      <mediaobject>
+        <imageobject
+><imagedata fileref="measure-1.png" format="PNG"/></imageobject>
+        <textobject
+><phrase
+>Mesurant distàncies amb el &marble;</phrase
+></textobject>
+      </mediaobject>
+    </screenshot>
+
+    <para
+>Una vegada afegits com a mínim dos punts de mesura, la distància total es mostrarà a la part superior esquerra del mapa. El &marble; assumirà una Terra esfèrica per a totes les mesures, el qual serà prou precís en la majoria dels casos. </para>
+
+    <tip
+><para
+>Veure les distàncies i les orientacions per als segments mesurats es pot configurar utilitzant <link linkend="measure-tool-config"
+>l'eina Mesura al diàleg de configuració</link
+>.</para
+></tip>
+  </chapter>
+
+  <chapter id="download-region">
+  <title
+>Descarregar regions del mapa</title>
+
+    <para
+>Preinstal·lat amb un conjunt de mapes, el &marble; estarà llest per a utilitzar. En ampliar algun lloc, es descarregaran en segon pla les parts més detallades del tema del mapa actual. Això funcionarà sempre que hi hagi disponible una excel·lent connexió a Internet. Què fer, però, quan es viatja a una ciutat estrangera, on no hi ha disponible una connexió constant a Internet per a descarregar els mapes? Planifiqueu amb antelació i descarregueu les regions del mapa que s'utilitzaran. </para>
+
+    <para
+>Per a entendre el que cal descarregar per a mostrar determinades parts del mapa estant desconnectat, vegem breument el concepte de mosaics, que el &marble; utilitza internament. Un mosaic és una imatge que correspon a una certa part del mapa. Els mosaics són disposats pel &marble; un al costat de l'altre per a formar la imatge del mapa que us mostra. Depenent del mode de projecció seleccionat, els mosaics estaran disposats per a formar un rectangle (projecció de mapa pla, a l'esquerra) o una esfera (projecció de globus, a la dreta): </para>
+
+    <screenshot>
+      <screeninfo
+>Projeccions del &marble;</screeninfo>
+      <mediaobject>
+        <imageobject
+><imagedata fileref="download-region-1.png" format="PNG"/></imageobject>
+        <textobject
+><phrase
+>Mosaics al nivell 1 en projecció de mapa pla (a l'esquerra) i de globus (a la dreta)</phrase
+></textobject>
+      </mediaobject>
+    </screenshot>
+
+    <para
+>Per a apropar en aquesta vista, cal mostrar més detalls. Els mosaics que es mostren en les dues captures de pantalla de dalt són massa bastes. El &marble; reconeixerà automàticament aquests canvis i canvia al següent nivell del mosaic, on les imatges proporcionaran més detalls. Succeirà el següent: Com més apropeu, major serà el nivell del mosaic. El següent esquema il·lustra el nombre diferent de mosaics (acolorit) corresponent a la mateixa regió del mapa amb diferents nivells del mosaic: </para>
+
+    <screenshot>
+      <screeninfo
+>Nivells del mosaic al &marble;</screeninfo>
+      <mediaobject>
+        <imageobject
+><imagedata fileref="download-region-2.png" format="PNG"/></imageobject>
+        <textobject
+><phrase
+>Diferents nivells del mosaic al &marble;</phrase
+></textobject>
+      </mediaobject>
+    </screenshot>
+
+    <para
+>Quan descarregueu una regió del mapa per a un ús desconnectat, és necessari que descarregueu tots els mosaics d'aquesta regió per a tots els nivells del mosaic que utilitzareu. A causa de la connexió entre els nivells del mosaic i els nivells d'apropament, podeu pensar en ells com en la descàrrega de tots els mosaics en els nivells d'apropament que utilitzareu. </para>
+
+    <para
+>Per a aconseguir això per a una determinada regió, feu-la visible a la pantalla, apropant i movent el globus. Ara seleccioneu l'element de menú <menuchoice
+><guilabel
+>Fitxer</guilabel
+> <guilabel
+>Descarrega una regió...</guilabel
+></menuchoice
+> per a obrir el diàleg <guilabel
+>Descarrega una regió</guilabel
+>. Manteniu seleccionada l'opció <guilabel
+>Regió visible</guilabel
+> per a descarregar els mosaics que corresponen a la regió del mapa visible a la pantalla. A continuació, seleccioneu l'<guilabel
+>Interval de nivells del mosaic:</guilabel
+> (interval d'apropament) que voleu descarregar. El primer camp correspon als més petits, el segon camp correspon al nivell dels mosaics més grans a baixar. També es descarregaran els mosaics en els nivells intermedis. El &marble; mostrarà quants mosaics (imatges) calen descarregar-se i actualitzarà aquest número cada vegada que canvieu la regió o l'interval de nivells del mosaic. </para>
+
+    <screenshot>
+      <screeninfo
+>Diàleg de descàrrega de regions al &marble;</screeninfo>
+      <mediaobject>
+        <imageobject
+><imagedata fileref="download-region-3.png" format="PNG"/></imageobject>
+        <textobject
+><phrase
+>Diàleg de descàrrega de regions al &marble;</phrase
+></textobject>
+      </mediaobject>
+    </screenshot>
+
+    <para
+>El nivell del mosaic corresponent al nivell d'apropament actual es mostra a la barra d'estat a la part inferior. Cal tenir en compte que potser haureu de configurar el &marble; per a mostrar aquesta informació: Feu clic amb el &BDR; sobre la barra d'estat i seleccioneu <guilabel
+>Mostra el nivell de zoom del mosaic</guilabel
+>. </para>
+
+    <para
+>Seleccioneu <guibutton
+>D'acord</guibutton
+> per a iniciar la descàrrega de la regió del mapa. La barra de progrés del &marble; mostrarà el progrés de la descàrrega (si està activada). </para>
+
+    <para
+>En el cas que no conegueu les coordenades de la regió del mapa a descarregar, les podeu introduir fent clic sobre l'opció <guilabel
+>Especifica una regió</guilabel
+>. La regió del mapa visible a la pantalla serà ignorada en aquest cas. </para>
+
+    <para
+>Podeu seguir utilitzant el &marble; mentre el diàleg <guilabel
+>Descarrega una regió</guilabel
+> romà obert. Això és d'utilitat per a posar a la cua diverses descàrregues per a regions o intervals del mosaic diferents. Senzillament seleccioneu <guibutton
+>Aplica</guibutton
+> en comptes de <guibutton
+>D'acord</guibutton
+> per a iniciar la descàrrega de la regió del mapa. </para>
+  </chapter>
+
+  <chapter id="recording-movie">
+  <title
+>Enregistrar una pel·lícula amb el &marble;</title>
+
+    <sect1 id="recording-movie-recording">
+    <title
+>Enregistrar una pel·lícula amb el &marble;</title>
+
+      <para
+>Per a enregistrar una pel·lícula amb el &marble;, utilitzeu aquesta característica per a l'enregistrament. </para>
+
+      <para
+>Comenceu a enregistrar des de l'element de menú <menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;&Maj;<keycap
+>R</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Edita</guimenu
+> <guimenuitem
+>Enregistrament de la pel·lícula</guimenuitem
+></menuchoice
+>. Veureu un diàleg com aquest: </para>
+
+      <screenshot>
+        <screeninfo
+>Diàleg d'enregistrament de pel·lícula amb el &marble;</screeninfo>
+        <mediaobject>
+          <imageobject
+><imagedata fileref="movie-1.png" format="PNG"/></imageobject>
+          <textobject
+><phrase
+>Diàleg d'enregistrament de pel·lícula amb el &marble;</phrase
+></textobject>
+        </mediaobject>
+      </screenshot>
+
+      <para
+>Premeu el botó <guibutton
+>Obre...</guibutton
+> per a triar el nom de la carpeta de destinació per a la pel·lícula. També podeu canviar els fotogrames per segon (FPS) de la pel·lícula, entre 1 i 60. </para>
+
+      <para
+>Quan estigui tot a punt, podreu començar a enregistrar. Per a començar, premeu el botó <guibutton
+>Comença</guibutton
+>. Un cop fet, podreu fer zoom i desplaçar-vos pel &marble; i es capturarà un vídeo del vostre viatge per tot el món. </para>
+
+      <para
+>Per a aturar l'enregistrament de la pel·lícula i desar-la, seleccioneu l'element de menú <menuchoice
+><guimenu
+>Edita</guimenu
+> <guimenuitem
+>Atura l'enregistrament</guimenuitem
+></menuchoice
+>. </para>
+
+      <sect2 id="recording-movie-troubleshooting">
+      <title
+>Solució de problemes</title>
+
+        <para
+>És possible que aparegui un missatge d'error perquè «avconv» o «ffmpeg» no estan instal·lats. Descarregueu-los des de la <ulink url="https://ffmpeg.org/download.html"
+>pàgina de descàrregues del «ffmpeg»</ulink
+> i <ulink url="https://libav.org/download.html"
+>pàgina de descàrregues de l'«avconv»</ulink
+> de la vostra distribució. </para>
+      </sect2>
+    </sect1>
+  </chapter>
+
+  <chapter id="commands">
+  <title
+>Referència d'ordres</title>
+
+    <sect1 id="marble-mainwindow">
+    <title
+>Menús i dreceres de teclat</title>
+
+      <sect2>
+      <title
+>El menú Fitxer</title>
+
+        <variablelist>
+          <varlistentry>
+            <term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>O</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Fitxer</guimenu
+> <guimenuitem
+>Obre...</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>Obre</action
+> un fitxer de mapa.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><guimenu
+>Fitxer</guimenu
+> <guisubmenu
+>Obre recent</guisubmenu
+> </menuchoice
+></term>
+            <listitem
+><para
+>Aquesta és una drecera per a obrir els últims mapes oberts. Fent clic sobre aquest element s'obre una llista al costat del menú amb diversos fitxers oberts recentment. Fent clic sobre un fitxer en concret farà que s'obri en el &marble; -si el fitxer encara resideix en el mateix lloc-.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>N</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Fitxer</guimenu
+> <guimenuitem
+>Descarrega els mapes...</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>Mostra</action
+> el diàleg <guilabel
+>Obtén les novetats candents</guilabel
+> per a descarregar mapes addicionals per al &marble;, entre altres, els mapes de Mart i Venus.</para
+></listitem>
+          </varlistentry>
+
+         <varlistentry>
+            <term
+><menuchoice
+><guimenu
+>Fitxer</guimenu
+> <guimenuitem
+>Crea un mapa nou...</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>Mostra</action
+> el diàleg <guilabel
+>Assistent per a la creació de temes de mapa del &marble;</guilabel
+> per a crear un mapa nou utilitzant les dades del «Servei web de mapes», el vostre propi fitxer d'imatge o els mosaics indexats de l'Open Street Map.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><guimenu
+>Fitxer</guimenu
+> <guimenuitem
+>Descarrega una regió...</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>Mostra</action
+> el diàleg <guilabel
+>Descarrega una regió</guilabel
+> per a descarregar les dades del mapa en diferents nivells d'apropament per a un ús desconnectat. Per a més informació, vegeu <link linkend="download-region"
+>Descarregar regions del mapa</link
+>.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>S</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Fitxer</guimenu
+> <guimenuitem
+>Exporta el mapa...</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>Exporta</action
+> una captura de pantalla del mapa del &marble; a un fitxer d'imatge.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>P</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Fitxer</guimenu
+> <guimenuitem
+>Imprimeix...</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>Imprimeix</action
+> una captura de pantalla del mapa del &marble;.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><guimenu
+>Fitxer</guimenu
+> <guimenuitem
+>Vista prèvia d'impressió...</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+>Obre una finestra que mostra una vista prèvia del mapa a imprimir.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><guimenu
+>Fitxer</guimenu
+> <guimenuitem
+>Treballa desconnectat</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+>Si seleccioneu aquesta opció, el &marble; ja no descarregarà dades de mapes a través d'Internet. La funció de cerca es restringirà a la base de dades local. No es podran rebre itineraris nous.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>Q</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Fitxer</guimenu
+> <guimenuitem
+>Surt</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>Surt</action
+> del &marble;.</para
+></listitem>
+          </varlistentry>
+        </variablelist>
+      </sect2>
+
+      <sect2>
+      <title
+>El menú Edita</title>
+
+        <variablelist>
+          <varlistentry>
+            <term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>C</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Edita</guimenu
+> <guimenuitem
+>Copia el mapa</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>Copia</action
+> una captura de pantalla del mapa del &marble; en el porta-retalls global.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><guimenu
+>Edita</guimenu
+> <guimenuitem
+>Copia les coordenades</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>Copia</action
+> les coordenades actuals en el porta-retalls global.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>E</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Edita</guimenu
+> <guimenuitem
+>Edita el mapa...</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>Permet</action
+> obrir el mapa actual a l'editor de mapes extern. La versió actual suporta els editors de mapes <application
+>Potlatch</application
+> (en un navegador web), <application
+>Merkaartor</application
+> i <application
+>JOSM</application
+>.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl; &Maj;<keycap
+>R</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Edita</guimenu
+> <guimenuitem
+>Enregistra una pel·lícula</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>Enregistra</action
+> una pel·lícula amb el &marble;.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><guimenu
+>Edita</guimenu
+> <guimenuitem
+>Atura l'enregistrament</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>Atura</action
+> l'enregistrament actual de la pel·lícula.</para
+></listitem>
+          </varlistentry>
+        </variablelist>
+      </sect2>
+
+      <sect2>
+      <title
+>El menú Visualitza</title>
+
+        <variablelist>
+          <varlistentry>
+            <term
+><menuchoice
+><guimenu
+>Visualitza</guimenu
+> <guimenuitem
+>Emplaçament actual</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>Alterna</action
+> la visualització de la pàgina de l'emplaçament en el plafó de l'esquerra. Si hi ha connectat un dispositiu GPS amb l'ordinador, el &marble; mostrarà la longitud i la latitud del vostre emplaçament actual.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><guimenu
+>Visualitza</guimenu
+> <guimenuitem
+>Punts de mira</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>Alterna</action
+> la visualització d'una creu simple al centre del mapa.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><shortcut
+> <keycap
+>F5</keycap
+> </shortcut
+> <guimenu
+>Visualitza</guimenu
+> <guimenuitem
+>Actualitza</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+>La part actualment visible del mapa és descarregada de nou i es torna a dibuixar sobre la pantalla.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><guimenu
+>Visualitza</guimenu
+> <guisubmenu
+>Rètols informatius</guisubmenu
+></menuchoice
+></term>
+            <listitem
+><para
+>En aquest submenú podreu bloquejar la posició dels rètols informatius i mostrar o ocultar els connectors que heu activat a la pàgina <link linkend="configplugins"
+>Connectors</link
+> del diàleg de configuració del &marble;.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><guimenu
+>Visualitza</guimenu
+> <guimenuitem
+>Serveis en línia</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+>El connector <guimenuitem
+>Viquipèdia</guimenuitem
+> mostra els articles de la Viquipèdia amb referència geogràfica com una icona en el mapa. Un clic sobre la icona llançarà una finestra del navegador mostrant el lloc de referència. Les dades es proporcionen a través d'un servei web mitjançant GeoNames.org. Així mateix, un connector <guimenuitem
+>Fotos</guimenuitem
+> ofereix fotos mitjançant el lloc d'intercanvi de fotos FlickR.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><guimenu
+>Visualitza</guimenu
+> <guimenuitem
+>Núvols</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>Mostra</action
+> en temps real la coberta de núvols. Un mapa en temps real dels núvols, que s'actualitza cada 3 hores. Utilitza imatges dels satèl·lits GOES, METEOSAT i GMS descarregades des de la pàgina d'imatges de satèl·lits geoestacionaris de la universitat de Dundee. Crèdits: Hari Nair, projecte Xplanet.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><guimenu
+>Visualitza</guimenu
+> <guimenuitem
+>Atmosfera</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>Mostra</action
+> la reflexió difusa de l'atmosfera al voltant de la Terra.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><guimenu
+>Visualitza</guimenu
+> <guimenuitem
+>Estrelles</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>Mostra</action
+> el mapa estel·lar com es veu des del Sistema Solar.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><guimenu
+>Visualitza</guimenu
+> <guimenuitem
+>Control del sol...</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>Mostra</action
+> el <guilabel
+>Control del Sol</guilabel
+>, des d'on podreu establir l'<guilabel
+>Ombreig solar</guilabel
+> i centrar el mapa a la posició del Sol.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><guimenu
+>Visualitza</guimenu
+> <guimenuitem
+>Control del temps...</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>Mostra</action
+> el diàleg <guilabel
+>Control de l'hora</guilabel
+>, des d'on podreu establir la data i l'hora, i la velocitat en temps de la simulació.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><guimenu
+>Visualitza</guimenu
+> <guisubmenu
+>Eclipsis a l'<replaceable
+>any</replaceable
+></guisubmenu
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>Mostra</action
+> la llista dels eclipsis per a l'any escollit utilitzant l'element de menú <menuchoice
+><guimenu
+>Visualitza</guimenu
+> <guimenuitem
+>Mostra els eclipsis...</guimenuitem
+></menuchoice
+>.</para>
+
+            <para
+>Aquest element de menú només es mostrarà quan està habilitat el connector <link linkend="eclipsesplugin"
+>Eclipsis</link
+>.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><guimenu
+>Visualitza</guimenu
+> <guimenuitem
+>Mostra els eclipsis...</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>Mostra</action
+> el diàleg <guilabel
+>Navegador d'eclipsis</guilabel
+> on podreu establir l'any per al qual mostrar els eclipsis, obre el diàleg de configuració del connector, veureu les dades sobre l'inici de l'eclipsi, final, tipus i magnitud. Escolliu algun element d'eclipsi de la llista i premeu el botó <guibutton
+>Ves a l'eclipsi seleccionat</guibutton
+> per a veure la ubicació de l'eclipsi en el globus.</para>
+
+            <para
+>Aquest element de menú només es mostrarà quan està habilitat el connector <link linkend="eclipsesplugin"
+>Eclipsis</link
+>.</para
+></listitem>
+          </varlistentry>
+        </variablelist>
+      </sect2>
+
+      <sect2>
+      <title
+>El menú Adreces d'interès</title>
+        <variablelist>
+          <varlistentry>
+            <term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>B</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Adreces d'interès</guimenu
+> <guimenuitem
+>Afegeix una adreça d'interès...</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>Obre el diàleg <guilabel
+>Edició de les adreces d'interès</guilabel
+></action
+> per a gestionar-ne una.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><guimenu
+>Adreces d'interès</guimenu
+> <guimenuitem
+>Mostra les adreces d'interès</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+>Una casella de selecció per a <action
+>habilitar la visualització de les adreces d'interès en el mapa.</action
+></para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><guimenu
+>Adreces d'interès</guimenu
+> <guimenuitem
+>Estableix l'emplaçament de casa</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>Estableix la posició actual com a casa.</action
+></para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><guimenu
+>Adreces d'interès</guimenu
+> <guimenuitem
+>Gestiona les adreces d'interès...</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>Obre el diàleg <guilabel
+>Gestiona les adreces d'interès</guilabel
+></action
+> per a gestionar-les totes.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><guimenu
+>Adreces d'interès</guimenu
+> <guisubmenu
+>Predeterminada</guisubmenu
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>Aquest submenú mostra les vostres ubicacions predeterminades.</action
+></para
+></listitem>
+          </varlistentry>
+        </variablelist>
+      </sect2>
+
+      <sect2>
+      <title
+>El menú Arranjament</title>
+
+        <variablelist>
+          <varlistentry>
+            <term
+><menuchoice
+><guimenu
+>Arranjament</guimenu
+> <guimenuitem
+>Mostra la barra d'eines</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>Alterna</action
+> la visualització de la barra d'eines.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><guimenu
+>Arranjament</guimenu
+> <guimenuitem
+>Mostra la barra d'estat</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>Alterna</action
+> la visualització de la barra d'estat.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><guimenu
+>Arranjament</guimenu
+> <guisubmenu
+>Plafons</guisubmenu
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>Alterna</action
+> la visualització dels plafons del &marble;.</para>
+
+            <tip
+><para
+>Podeu fer que el &marble; oculti tots els plafons o que els mostri seleccionant l'element de menú <menuchoice
+><guimenu
+>Arranjament</guimenu
+> <guisubmenu
+>Plafons</guisubmenu
+> <guimenuitem
+>Oculta tots els plafons/Mostra tots els plafons</guimenuitem
+></menuchoice
+> o prement la tecla <keycap
+>F9</keycap
+> en el vostre teclat.</para
+></tip
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><guimenu
+>Arranjament</guimenu
+> <guisubmenu
+>Mida de la vista</guisubmenu
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>Canvia entre les diferents mides de l'àrea del mapa del &marble;.</action
+> Podeu escollir una de les mides que són adequades per a la captura de fotogrames per a presentacions o mantenir l'àrea del mapa del &marble; de mida variable (element de menú <guimenuitem
+>Predeterminada (es pot redimensionar)</guimenuitem
+>).</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Maj; <keycap
+>F</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Arranjament</guimenu
+> <guimenuitem
+>Mode de pantalla completa</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>Alterna entre la vista normal i la de pantalla completa.</action
+> En la vista de pantalla completa, la barra de títol restarà oculta i la finestra de l'aplicació real serà canviada de mida a pantalla completa.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><menuchoice
+><guimenu
+>Arranjament</guimenu
+> <guimenuitem
+>Configura el globus terraqüi virtual &marble;...</guimenuitem
+></menuchoice
+></term>
+            <listitem
+><para
+><action
+>Mostra</action
+> el diàleg de <link linkend="configure"
+>configuració del &marble;</link
+>.</para
+></listitem>
+          </varlistentry>
+
+        </variablelist>
+
+      </sect2>
+
+      <sect2>
+      <title
+>El menú Ajuda</title>
+
+        <para
+>El &marble; té la configuració comuna al &kde; i els elements del menú <guimenu
+>Ajuda</guimenu
+>. Per a obtenir més informació, llegiu la secció sobre <ulink url="help:/fundamentals/menus.html#menus-help"
+>El menú Ajuda</ulink
+> en els Fonaments del &kde;. </para>
+      </sect2>
+    </sect1>
+  </chapter>
+
+  <chapter id="configure">
+  <title
+>Configurar el &marble;</title>
+
+    <sect1 id="configview">
+    <title
+>Configurar la vista</title>
+
+      <screenshot>
+        <screeninfo
+>El diàleg de configuració de la vista</screeninfo>
+        <mediaobject>
+          <imageobject
+><imagedata fileref="configure-view.png" format="PNG"/></imageobject>
+          <textobject
+><phrase
+>El diàleg de configuració de la vista</phrase
+></textobject>
+        </mediaobject>
+      </screenshot>
+
+      <variablelist>
+        <varlistentry>
+          <term
+><guilabel
+>Distància:</guilabel
+></term>
+          <listitem
+><para
+>La unitat que s'utilitza per a mesurar l'altitud, longitud i distàncies (&pex; quilòmetres, milles, peus).</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>Angle:</guilabel
+></term>
+          <listitem
+><para
+>Especifica la notació dels angles en les coordenades: De manera predeterminada, s'utilitza la notació de graus-minuts-segons lloc (&pex; 54°30'00"). Com a alternativa es poden escollir graus decimals (&pex; 54,5°).</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>Imatge estàtica:</guilabel
+></term>
+          <listitem
+><para
+>Especifica la qualitat del mapa que es mostra mentre que no hi ha entrada de l'usuari. Normalment això permet una alta qualitat del mapa mentre la velocitat no sigui una preocupació.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>Durant les animacions:</guilabel
+></term>
+          <listitem
+><para
+>Especifica la qualitat de mapa que es mostrarà durant les animacions del mapa (&pex;, mentre s'arrossega el globus). Sobretot en màquines lentes, és aconsellable establir aquesta opció a <guilabel
+>Qualitat baixa</guilabel
+>, ja que això donarà més velocitat.</para
+></listitem>
+        </varlistentry>
+
+<!--         <varlistentry>
+          <term
+><guilabel
+>Place names:</guilabel
+></term>
+          <listitem
+><para
+>Places often have different names in different languages. The label on the map can show the name in the user's language. Alternatively it can display the name in the official language and glyphs of that place.</para
+></listitem>
+        </varlistentry
+>-->
+
+        <varlistentry>
+          <term
+><guilabel
+>Tipus de lletra predeterminat del mapa:</guilabel
+></term>
+          <listitem
+><para
+>El tipus de lletra predeterminat que s'utilitzarà en el mapa.</para
+></listitem>
+        </varlistentry>
+      </variablelist>
+    </sect1>
+
+    <sect1 id="confignavigation">
+    <title
+>Configurar la navegació</title>
+
+      <screenshot>
+        <screeninfo
+>El diàleg de configuració de la navegació</screeninfo>
+        <mediaobject>
+          <imageobject
+><imagedata fileref="configure-navigation.png" format="PNG"/></imageobject>
+          <textobject
+><phrase
+>El diàleg de configuració de la navegació</phrase
+></textobject>
+        </mediaobject>
+      </screenshot>
+
+      <variablelist>
+<!--        <varlistentry>
+          <term
+><guilabel
+>Drag location:</guilabel
+></term>
+          <listitem
+><para
+>While dragging the mouse there are two standard behaviors when dealing with a virtual globe: The location below mouse pointer will follow the cursor exactly: As a result &eg; the north pole will not stay at the top which can lead to confusion. By default &marble; makes sure that north is always up which results in a dragging behavior where the location below the mouse pointer slightly "detaches" from the cursor.</para
+></listitem>
+        </varlistentry
+>-->
+
+        <varlistentry>
+          <term
+><guilabel
+>Rotació inercial del globus</guilabel
+></term>
+          <listitem
+><para
+>De manera predeterminada, el &marble; utilitzarà un gir cinètic mentre arrossegueu el mapa. Podeu desactivar aquest comportament utilitzant aquesta casella de selecció.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>Anima el desplaçament fins a l'objectiu</guilabel
+></term>
+          <listitem
+><para
+>En cercar un emplaçament, el &marble; es pot moure instantàniament al nou emplaçament o pot mostrar una animació del viatge des del lloc anterior fins al nou.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>Gir de la vista amb el ratolí</guilabel
+></term>
+          <listitem
+><para
+>El moviment del mapa i del ratolí s'alinearan mentre es fa una panoràmica.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>En arrencar:</guilabel
+></term>
+          <listitem
+><para
+>De manera predeterminada, el &marble; mostra l'emplaçament de casa immediatament després d'iniciar l'aplicació. Com a alternativa, també es pot mostrar l'última posició que estava activa quan l'usuari va sortir de l'aplicació.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>Editor extern:</guilabel
+></term>
+          <listitem
+><para
+>Aquí, podeu definir l'editor predeterminat per als mapes o escollir <guilabel
+>Pregunta sempre</guilabel
+>, de manera que el &marble; us demanarà que escolliu abans d'iniciar l'editor extern.</para
+></listitem>
+        </varlistentry>
+      </variablelist>
+    </sect1>
+
+    <sect1 id="configcacheproxy">
+    <title
+>Configurar la memòria cau i el servidor intermediari</title>
+
+      <screenshot>
+        <screeninfo
+>El diàleg de configuració de la memòria cau i l'intermediari</screeninfo>
+        <mediaobject>
+          <imageobject
+><imagedata fileref="configure-cacheproxy.png" format="PNG"/></imageobject>
+          <textobject
+><phrase
+>El diàleg de configuració de la memòria cau i l'intermediari</phrase
+></textobject>
+        </mediaobject>
+      </screenshot>
+
+      <variablelist>
+        <varlistentry>
+          <term
+><guilabel
+>Cau</guilabel
+></term>
+          <listitem
+><para
+>El &marble; utilitza dues memòries cau: La <guilabel
+>Memòria física:</guilabel
+>, necessària per a mantenir les dades del mapa en la memòria de l'ordinador. Augmentant el valor fareu que l'aplicació respongui millor. La memòria cau del <guilabel
+>Disc dur:</guilabel
+> s'utilitza per a la descàrrega de continguts des d'Internet (&pex;, dades de la Viquipèdia o del mapa). Disminuïu-lo si voleu estalviar espai al disc dur i si l'ús elevat d'Internet no és un problema.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>Servidor intermediari</guilabel
+></term>
+          <listitem
+><para
+>La configuració del servidor intermediari per a la vostra intranet local. Si us plau, deixeu-ho en blanc si no hi ha intermediari.</para
+></listitem>
+        </varlistentry>
+      </variablelist>
+    </sect1>
+
+    <sect1 id="configdatetime">
+    <title
+>Configurar la data i l'hora</title>
+
+      <screenshot>
+        <screeninfo
+>El diàleg de configuració «Hora i data»</screeninfo>
+        <mediaobject>
+          <imageobject
+><imagedata fileref="configure-dateandtime.png" format="PNG"/></imageobject>
+          <textobject
+><phrase
+>El diàleg de configuració «Hora i data»</phrase
+></textobject>
+        </mediaobject>
+      </screenshot>
+
+      <variablelist>
+        <varlistentry>
+          <term
+><guilabel
+>Zona horària</guilabel
+></term>
+          <listitem
+><para
+>Aquí, podeu escollir la zona horària per al &marble;: <ulink url="https://ca.wikipedia.org/wiki/Temps_universal_coordinat"
+>UTC</ulink
+>, zona horària del sistema o escollir una zona horària personalitzada. L'opció triada només canviarà la vista del mapa si el mapa pot mostrar les condicions de llum a la superfície.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>Quan s'iniciï el &marble;</guilabel
+></term>
+          <listitem
+><para
+>Aquí, podeu escollir la data i hora que s'utilitzarà en iniciar el &marble;: hora del sistema o l'hora de l'última sessió.</para
+></listitem>
+        </varlistentry>
+      </variablelist>
+    </sect1>
+
+    <sect1 id="configsynchronization">
+    <title
+>Configurar la sincronització</title>
+
+      <para
+>El &marble; pot publicar les dades de la ruta i les adreces d'interès al servidor <ulink url="https://en.wikipedia.org/wiki/OwnCloud"
+>ownCloud</ulink
+> i sincronitzar-les entre les diferents instàncies del &marble; instal·lades en diferents dispositius. </para>
+
+      <screenshot>
+        <screeninfo
+>El diàleg de configuració de la sincronització</screeninfo>
+        <mediaobject>
+          <imageobject
+><imagedata fileref="configure-synchronization.png" format="PNG"/></imageobject>
+          <textobject
+><phrase
+>El diàleg de configuració de la sincronització</phrase
+></textobject>
+        </mediaobject>
+      </screenshot>
+
+      <variablelist>
+        <varlistentry>
+          <term
+><guilabel
+>Habilita la sincronització</guilabel
+></term>
+          <listitem
+><para
+>La sincronització es pot habilitar o inhabilitar utilitzant aquest element. Quan la sincronització està habilitada, podreu decidir si voleu sincronitzar les dades de la ruta i de les adreces d'interès utilitzant les caselles de selecció corresponents o premeu el botó <guibutton
+>Sincronitza ara</guibutton
+> per a iniciar la sincronització immediatament.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>Credencials</guilabel
+></term>
+          <listitem
+><para
+>Aquí, podeu introduir les vostres credencials ownClowd. Més informació sobre la configuració d'ownClowd la trobareu al <ulink url="https://owncloud.com/"
+>lloc web oficial d'ownClowd</ulink
+>.</para
+></listitem>
+        </varlistentry>
+      </variablelist>
+    </sect1>
+
+    <sect1 id="configrouting">
+    <title
+>Configurar els itineraris</title>
+
+      <screenshot>
+        <screeninfo
+>El diàleg de configuració dels itineraris</screeninfo>
+        <mediaobject>
+          <imageobject
+><imagedata fileref="configure-routing.png" format="PNG"/></imageobject>
+          <textobject
+><phrase
+>El diàleg de configuració dels itineraris</phrase
+></textobject>
+        </mediaobject>
+      </screenshot>
+
+      <variablelist>
+        <varlistentry>
+          <term
+><guibutton
+>Afegeix...</guibutton
+></term>
+          <listitem
+><para
+>Obre una finestra on podreu afegir un nou perfil de l'itinerari.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guibutton
+>Configura...</guibutton
+></term>
+          <listitem
+><para
+>Obre una finestra on es podrà configurar el perfil de l'itinerari seleccionat.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guibutton
+>Elimina</guibutton
+></term>
+          <listitem
+><para
+>Elimina el perfil de l'itinerari seleccionat.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guibutton
+>Mou amunt</guibutton
+></term>
+          <listitem
+><para
+>El perfil de l'itinerari seleccionat es mourà cap amunt un sol pas. Apareixerà abans del que estava prèviament a sobre seu.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guibutton
+>Mou avall</guibutton
+></term>
+          <listitem
+><para
+>El perfil de l'itinerari seleccionat es mourà cap avall un sol pas. Apareixerà després del que estava prèviament a sota seu.</para
+></listitem>
+        </varlistentry>
+      </variablelist>
+    </sect1>
+
+    <sect1 id="configplugins">
+    <title
+>Configurar els connectors</title>
+
+      <para
+>El giny <guilabel
+>Configuració del connector</guilabel
+> és el lloc per a activar (o desactivar) els rètols informatius, els serveis en línia i altres connectors que afecten l'aspecte del &marble;. Els connectors actius apareixen en el menú <guilabel
+>Visualitza</guilabel
+>, on podreu canviar la seva visibilitat. </para>
+
+      <screenshot>
+        <screeninfo
+>El diàleg de configuració dels connectors</screeninfo>
+        <mediaobject>
+          <imageobject
+><imagedata fileref="configure-plugins.png" format="PNG"/></imageobject>
+          <textobject
+><phrase
+>El diàleg de configuració dels connectors</phrase
+></textobject>
+        </mediaobject>
+      </screenshot>
+
+      <para
+>Cada connector es pot activar i desactivar mitjançant la casella de selecció a l'esquerra. Alguns connectors ofereixen més opcions de configuració, a les quals es pot accedir fent clic a la icona de l'eina a la dreta. </para>
+
+      <variablelist>
+        <varlistentry>
+          <term
+><guilabel
+>Connector APRS de radioaficionats</guilabel
+></term>
+          <listitem
+><para
+>Rep les dades des del sistema automàtic d'informe de paquets a través d'Internet, un fitxer o un dispositiu sèrie. La posició i l'estat dels remitents de dades es mostra al mapa i s'actualitza en temps real.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>Anotació</guilabel
+></term>
+          <listitem
+><para
+>Permet afegir anotacions als mapes.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>Atmosfera</guilabel
+></term>
+          <listitem
+><para
+>Mostra els efectes de l'atmosfera.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>Brúixola</guilabel
+></term>
+          <listitem
+><para
+>Mostra una brúixola en el mapa.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>Graella de coordenades</guilabel
+></term>
+          <listitem
+><para
+>Mostra una graella de coordenades (podeu triar els colors de les línies de la graella).</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>Punts de mira</guilabel
+></term>
+          <listitem
+><para
+>Activeu això per a mostrar una petita creu al centre del mapa.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>Indicador del progrés de la baixada</guilabel
+></term>
+          <listitem
+><para
+>Un gràfic circular a la part superior del mapa que mostra el progrés de les descàrregues en curs.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>Terratrèmols</guilabel
+></term>
+          <listitem
+><para
+>Mostra els marcadors de terratrèmol al mapa.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry id="eclipsesplugin">
+          <term
+><guilabel
+>Eclipsis</guilabel
+></term>
+          <listitem
+><para
+>Mostra les dades sobre els eclipsis del Sol i de la Lluna.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>Perfil de desnivell</guilabel
+></term>
+          <listitem
+><para
+>Mostra una capa amb el perfil de desnivell <link linkend="routing"
+>dels itineraris al mapa</link
+>.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>Marcador del perfil de desnivell</guilabel
+></term>
+          <listitem
+><para
+>Marca al mapa l'elevació actual del perfil de desnivell.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>GpsInfo</guilabel
+></term>
+          <listitem
+><para
+>Mostra un element flotant que subministra informació de <ulink url="https://ca.wikipedia.org/wiki/Sistema_de_posicionament_global"
+>GPS</ulink
+>.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>Llicència</guilabel
+></term>
+          <listitem
+><para
+>Mostra un element flotant que subministra informació de copyright.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry id="measure-tool-config">
+          <term
+><guilabel
+>Eina de mesura</guilabel
+></term>
+          <listitem
+><para
+>El connector per a <link linkend="measure-distances"
+>mesurar la distància entre dos o més punts</link
+>.</para>
+
+          <para
+>La visualització de la distància i l'orientació entre els punts es pot configurar després de prémer la icona de l'eina. N'hi ha prou amb marcar l'element corresponent per a fer que el &marble; mostri les etiquetes o desactiveu l'opció per a ocultar-les.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>Navegació</guilabel
+></term>
+          <listitem
+><para
+>Mostra el control del ratolí per a apropar i moure com un element flotant sobre el mapa.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>Notes de l'OSM Mapper</guilabel
+></term>
+          <listitem
+><para
+>Implementació de les notes de geocodificació.</para
+></listitem>
+        </varlistentry>
+
+<!--        <varlistentry>
+          <term
+><guilabel
+>OpenCaching.com</guilabel
+></term>
+          <listitem
+><para
+>Displays the <ulink url="https://en.wikipedia.org/wiki/Geocaching"
+>geocaching</ulink
+> markers on the map.</para
+></listitem>
+        </varlistentry
+>-->
+
+        <varlistentry>
+          <term
+><guilabel
+>Elements OpenDesktop</guilabel
+></term>
+          <listitem
+><para
+>Mostra sobre el mapa els avatars dels usuaris d'<ulink url="https://opendesktop.org/"
+>OpenDesktop</ulink
+> i també altres informacions extres sobre ells.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>Mapa general</guilabel
+></term>
+          <listitem
+><para
+>És un element flotant que mostra un mapa global resumit.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>Fotos</guilabel
+></term>
+          <listitem
+><para
+>Descarrega automàticament imatges d'arreu del món d'acord amb la seva popularitat.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>Llocs</guilabel
+></term>
+          <listitem
+><para
+>Mostra els llocs que estan <ulink url="https://foursquare.com/"
+>més de moda</ulink
+>.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>Marcador de posició</guilabel
+></term>
+          <listitem
+><para
+>Dibuixa un marcador a la posició <ulink url="https://ca.wikipedia.org/wiki/Sistema_de_posicionament_global"
+>GPS</ulink
+> actual.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>Codis postals</guilabel
+></term>
+          <listitem
+><para
+>Mostra els <ulink url="https://ca.wikipedia.org/wiki/Codi_postal"
+>codis postals</ulink
+> de la zona al mapa.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>Itineraris</guilabel
+></term>
+          <listitem
+><para
+>Mostra la <link linkend="routing"
+>informació d'itineraris</link
+> i els controls de navegació.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>Satèl·lits</guilabel
+></term>
+          <listitem
+><para
+>Mostra els satèl·lits naturals i artificials de la Terra i d'altres planetes amb les seves òrbites.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>Barra d'escala</guilabel
+></term>
+          <listitem
+><para
+>Aquest és un element flotant que mostra l'escala del mapa.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>Velocímetre</guilabel
+></term>
+          <listitem
+><para
+>Mostra la velocitat de creuer actual. Necessita alguna dada del <ulink url="https://ca.wikipedia.org/wiki/Sistema_de_posicionament_global"
+>GPS</ulink
+>.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>Estrelles</guilabel
+></term>
+          <listitem
+><para
+>Un connector que mostra el cel estelat.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>Sol</guilabel
+></term>
+          <listitem
+><para
+>Un connector que mostra el sol.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>Meteorologia</guilabel
+></term>
+          <listitem
+><para
+>Descarrega la informació meteorològica de les ciutats i les mostra en el mapa.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><guilabel
+>Articles de la Viquipèdia</guilabel
+></term>
+          <listitem
+><para
+>Descarrega automàticament articles de la Viquipèdia i els mostra en la posició correcta del mapa.</para
+></listitem>
+        </varlistentry>
+      </variablelist>
+    </sect1>
+  </chapter>
+
+  <chapter id="faq">
+  <title
+>Preguntes i respostes</title>
+
+    <qandaset id="faqlist">
+      <qandaentry>
+        <question>
+          <para
+>No puc veure casa meva en el mapa? Per què haig d'utilitzar el &marble; si ja hi ha el <application
+>Google Earth</application
+>?</para>
+        </question>
+        <answer>
+          <para
+>El &marble; aspira a ser un navegador geogràfic educatiu, ràpid i senzill, que alhora es pugui executar sobre qualsevol plataforma reconeguda per les &Qt;. Encara que és interessant disposar de mapes de gran resolució, aquests no són necessàriament útils per a tots els usuaris ni en cada cas d'ús (de la mateixa manera que no feu servir un processador de text complet quan el que us cal és un editor senzill). A més, cal tenir en compte que el &marble; és programari lliure i es basa en dades que poden ser redistribuïdes lliurement de la mateixa manera en què s'aplica al programari lliure.</para>
+        </answer>
+      </qandaentry>
+
+      <qandaentry>
+        <question>
+          <para
+>Perquè és tan ràpid el &marble; si encara que no tinc acceleració per maquinari? / Perquè el &marble; no funciona fluid amb la meva targeta de gràfics en 3D, amb el car que em va costar?</para>
+        </question>
+        <answer>
+          <para
+>Tot i que representa a la terra com un globus, el &marble; no utilitza cap acceleració 3D per maquinari. Això té l'avantatge de córrer a una velocitat decent sobre qualsevol plataforma i el maquinari admès per les &Qt;. No obstant això, té el desavantatge que no funciona tan bé com podria fer-ho si s'utilitza acceleració OpenGL per maquinari. El &marble; només utilitza gràfics en 2D i per tant requereix un adaptador de gràfics que sigui ràpid en el dibuix de gràfics en 2D. Hem planejat afegir un dorsal OpenGL opcional en el futur.</para>
+        </answer>
+      </qandaentry>
+
+      <qandaentry>
+        <question>
+          <para
+>Hauré de pagar pel &marble;?</para>
+        </question>
+        <answer>
+          <para
+>No, mai. No obstant això, els autors sempre acolliran els vostres comentaris. El &marble; està llicenciat sota la <ulink url="https://www.gnu.org/licenses/licenses.html#LGPL"
+>LGPL</ulink
+>, de manera que mai haureu de pagar per aquest programa.</para>
+        </answer>
+      </qandaentry>
+
+      <qandaentry>
+        <question>
+          <para
+>Com puc col·laborar?</para>
+        </question>
+        <answer>
+          <para
+>El &marble; no és només una aplicació, sinó també un projecte de programari lliure. Com a tal, és fàcil unir-s'hi: senzillament contacteu amb nosaltres a través de la llista de correu marble-devel (marble-devel@kde.org).</para>
+        </answer>
+      </qandaentry>
+    </qandaset>
+  </chapter>
+
+  <chapter id="credits">
+  <title
+>Crèdits i llicència</title>
+
+    <para
+>&marble;</para>
+
+    <para
+>Copyright del programa, 2005-2007 &Torsten.Rahn; &Torsten.Rahn.mail;</para>
+
+    <para
+>Col·laboradors:</para>
+
+    <itemizedlist>
+      <listitem
+><para
+>&Torsten.Rahn; &Torsten.Rahn.mail;</para
+></listitem>
+      <listitem
+><para
+>Inge Wallin <email
+>inge@lysator.liu.se</email
+></para
+></listitem>
+    </itemizedlist>
+
+    <para
+>Traductor de la documentació: &credits.Antoni.Bella;</para
+> &underFDL; &underLGPL; </chapter>
+
+  &documentation.index;
+</book>
+<!--
+Local Variables:
+mode: sgml
+sgml-minimize-attributes:nil
+sgml-general-insert-case:lower
+sgml-indent-step:0
+sgml-indent-data:nil
+End:
+
+// vim:ts=2:sw=2:tw=78:noet:noai
+-->

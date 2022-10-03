@@ -1,0 +1,1818 @@
+<?xml version="1.0" ?>
+<!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
+<!ENTITY kappname "&marble;"
+><!-- replace kapp here -->
+ <!ENTITY package "kdeedu">
+ <!ENTITY % addindex "IGNORE">
+ <!ENTITY % Lithuanian "INCLUDE"
+><!-- change language only here -->
+ ]>
+
+ <book lang="&language;">
+
+	 <bookinfo>
+		 <title
+>&marble; vadovas</title>
+
+		 <authorgroup>
+			 <author
+><firstname
+>Torsten</firstname
+> <surname
+>Rahn</surname
+> <affiliation
+> <address
+>&Torsten.Rahn.mail;</address>
+				 </affiliation>
+			 </author>
+			 <author
+><firstname
+>Dennis</firstname
+> <surname
+>Nienhüser</surname
+> <affiliation
+> <address
+><email
+>earthwings@gentoo.org</email
+></address>
+				 </affiliation
+>				 
+			 </author>
+
+			 <othercredit role="translator"
+><firstname
+>Tomas</firstname
+><surname
+>Straupis</surname
+><affiliation
+><address
+><email
+>tomasstraupis@gmail.com</email
+></address
+></affiliation
+><contrib
+>Vertė</contrib
+></othercredit
+> 
+		 </authorgroup>
+
+		 <copyright>
+			 <year
+>2005</year>
+             <year
+>2006</year>
+             <year
+>2007</year>
+			 <holder
+>&Torsten.Rahn;</holder>
+		 </copyright>
+		 <copyright>
+			 <year
+>2010</year>
+			 <holder
+>Dennis Nienhüser</holder>
+		 </copyright>
+
+		 <legalnotice
+>&FDLNotice;</legalnotice>
+
+		 <date
+>2010-11-13</date>
+		 <releaseinfo
+>1.0</releaseinfo>
+
+		 <abstract>
+			<para
+>&marble; yra geografinis atlasas ir virtualus darbastalio gaublys, leidžiantis greitai tyrinėti įvairias mūsų planetos vietoves. &marble; pagalba galite surasti vietoves, lengvai kurti žemėlapius, matuoti atstumus bei gauti detalią informaciją vietovių, apie kurias ką tik išgirdote per žinias arba radote internete. Naudotojo sąsaja yra švari, paprasta ir lengvai naudojama. </para>
+		 </abstract>
+
+		 <keywordset>
+			 <keyword
+>KDE</keyword>
+			 <keyword
+>švietimas</keyword>
+			 <keyword
+>žemė</keyword>
+			 <keyword
+>gaublys</keyword>
+			 <keyword
+>geografija</keyword>
+			 <keyword
+>marble</keyword>
+		 </keywordset>
+
+	 </bookinfo>
+
+	 <chapter id="introduction">
+		 <title
+>Įvadas</title>
+         <screenshot>
+             <screeninfo
+>&marble; logo</screeninfo>
+             <mediaobject>
+                 <imageobject
+><imagedata fileref="logo-1.png" format="PNG"/></imageobject>
+                 <textobject
+><phrase
+>&marble; logo</phrase
+></textobject>
+             </mediaobject>
+         </screenshot>
+		 <para
+>&marble; – nedidelis interaktyvus gaublys bei geografinis atlasas, akimirksniu perkeliantis jus į bet kurią pasaulio vietą. Kaip tikras atlasas ar įprastas gaublys, &marble; leidžia laisvai judėti po žemėlapį ieškant įvairių vietovių. &marble; taipogi leidžia keisti vaizdo mastelį bei Žemės paviršių tyrinėti įvairiais požiūriais. Standartinės konfigūracijos &marble; turi 11 skirtingų rodymo būdų: <guilabel
+>Atlasas</guilabel
+>, <guilabel
+>OpenStreetMap</guilabel
+>, <guilabel
+>Vaizdas iš palydovo</guilabel
+>, <guilabel
+>Žemė naktį</guilabel
+>, <guilabel
+>Istorinis žemėlapis 1689</guilabel
+>, <guilabel
+>Mėnulis</guilabel
+>, <guilabel
+>Paprastas žemėlapis</guilabel
+>, <guilabel
+>Krituliai (gruodžio mėn.)</guilabel
+>, <guilabel
+>Krituliai (liepos mėn.)</guilabel
+>, <guilabel
+>Temperatūra (gruodžio mėn.)</guilabel
+> ir <guilabel
+>Temperatūra (liepos mėn.)</guilabel
+>. </para>
+         <para
+>&marble; teikiamas su nedidele 12,000 vietovių (miestų, kalnų, ugnikalnių) duomenų baze, kurioje galima ieškoti. Ši duomenų bazė dalinai integruota su populiariąja internetine enciklopedija Wikipedija. Taipogi galite matuoti atstumą tarp bet kokių žemėlapyje padėtų taškų. </para>
+         <para
+>&marble; – nemokama programa, leidžiama pagal „&GNU; Lesser General Public License“ licenciją. </para>
+
+	 </chapter>
+
+	 <chapter id="quick-start">
+		 <title
+>&marble; trumpas pradžiamokslis: naršymas</title>
+
+		 <para
+>Čia matote &marble; tokį, kaip jis atrodo pirmą kartą paleidus. Paleisti jį galite arba naudojant K meniu <menuchoice
+><guimenu
+>Programos</guimenu
+><guisubmenu
+>Švietimas</guisubmenu
+><guisubmenu
+>Įvairios</guisubmenu
+><guimenuitem
+>Darbastalio gaublys</guimenuitem
+></menuchoice
+>, arba paspaudę klavišų kombinaciją <keycombo action="simul"
+>&Alt;<keycap
+>F2</keycap
+></keycombo
+> ir atsiradusiame lauke įvedę <command
+>marble</command
+>.</para>
+		 <screenshot>
+			 <screeninfo
+>pagrindinis &marble; langas</screeninfo>
+			 <mediaobject>
+				 <imageobject
+><imagedata fileref="quick-1.png" format="PNG"/></imageobject>
+				 <textobject
+><phrase
+>pagrindinis &marble; langas</phrase
+></textobject>
+			 </mediaobject>
+		 </screenshot>
+
+		 <para
+>Dešinėje pusėje matote mūsų gražiosios planetos topografinį žemėlapį. Kad būtų galima lengviau orientuotis, žemėlapis apatiniame kairiame kampe turi mastelį, o viršutiniame dešiniame – vėjų rožę. Naršymui ir rodinio kontrolei galite naudoti kairėje pusėje esančios <guilabel
+>Žvalgymosi</guilabel
+> kortelės įrankius: spauskite rodykles, kad pasuktumėte gaublį. Mygtukai <guilabel
+>Aukštyn</guilabel
+> ir <guilabel
+>Žemyn</guilabel
+> pakreips Žemės ašį pirmyn ir atgal. Mygtukai <guilabel
+>Kairėn</guilabel
+> ir <guilabel
+>Dešinėn</guilabel
+> pasuks Žemę aplink jos ašį. </para>
+         <para
+>Tą patį galite padaryti bet kurioje gaublio vietoje paspaudę kairįjį pelės mygtuką ir jo neatleisdami vesdami pelę. Naudodami tokį paspaudimo ir tempimo metodą, galėsite kur kas lengviau ir tiksliau reguliuoti rodinį. Sukinėti gaublį taipogi galite ir klaviatūros kursoriaus klavišais. </para>
+         <para
+>Didinti ir mažinti galite naudodami vertikalų slinkiklį. Jei jūsų pelė turi ratuką, galite jo pagalba didinti ir mažinti. Dar vienas būdas – laikyti vienu metu paspaustus tiek kairįjį, tiek ir dešinįjį pelės mygtukus ir tada pele važiuoti aukštyn ar žemyn. Žemėlapio mastelio keitimas žingsniais gali būti vykdomas mygtukais <guilabel
+>Didinti</guilabel
+> ir <guilabel
+>Mažinti</guilabel
+>, kuriuos rasite virš ir po slankikliu (taip pat galite spausti klaviatūros mygtukus <keycap
+>+</keycap
+> ir <keycap
+>-</keycap
+>). </para>
+         <para
+>Priklausomai nuo žemėlapio raiškos, didinant matysite daugiau detalių. Pasirodys mažesni miesteliai. Jei naudojate topografinį žemėlapį, pastebėsite, kad krantai paišomi naudojant vektorinę grafiką. </para>
+         <para
+>Jei pasimesite – visada galite atstatyti pradinį rodinį paspaudę mygtuką <guilabel
+>Pareiti į pradžios tašką</guilabel
+> (arba paspaudę klaviatūros mygtuką <keycap
+>Home</keycap
+>). Norėdami nustatyti namų vietą, spauskite ant žemėlapio dešinį pelės mygtuką ir kontekstiniame meniu parinkite <guimenuitem
+>Nustatyti pradžios tašką</guimenuitem
+>. </para>
+	 <para
+>Dešiniu pelės mygtuku paspaudę ant būsenos juostos iškviesite meniu, kurio pagalba galėsite keisti būsenos juostos išvaizdą. Galite rodyti poziciją, aukštį, dabartinį plytelių lygį bei žemėlapio atsiuntimo progreso juostą. </para>
+	 </chapter>
+
+     <chapter id="map-views">
+         <title
+>Skirtingų žemėlapių rodymų parinkimas</title>
+         <para
+>&marble; pateikiamas su 11 skirtingų rodinių: <guilabel
+>Atlasas</guilabel
+>, <guilabel
+>OpenStreetMap</guilabel
+>, <guilabel
+>Vaizdas iš palydovo</guilabel
+>, <guilabel
+>Žemė naktį</guilabel
+>, <guilabel
+>Istorinis žemėlapis 1689</guilabel
+>, <guilabel
+>Mėnulis</guilabel
+>, <guilabel
+>Paprastas žemėlapis</guilabel
+>, <guilabel
+>Krituliai (gruodžio mėn.)</guilabel
+>, <guilabel
+>Krituliai (liepos mėn.)</guilabel
+>, <guilabel
+>Temperatūra (gruodžio mėn.)</guilabel
+> ir <guilabel
+>Temperatūra (liepos mėn.)</guilabel
+>. Kortelėje <guilabel
+>Žemėlapio rodymas</guilabel
+> galite pasirinkti bet kurį iš jų: </para>
+
+         <screenshot>
+             <screeninfo
+>&marble; žemėlapio rodymas</screeninfo>
+             <mediaobject>
+                 <imageobject
+><imagedata fileref="mapview-1.png" format="PNG"/></imageobject>
+                 <textobject
+><phrase
+>&marble; žemėlapio rodymas</phrase
+></textobject>
+             </mediaobject>
+         </screenshot>
+
+         <itemizedlist>
+             <listitem>
+                <para
+><guilabel
+>Atlasas</guilabel
+>: Klasikinis topografinis žemėlapis. Krantui bei valstybių sienoms žymėti naudoja vektorius („MicroWorldDataBase II“), reljefas paišomas naudojant taškinius grafinius duomenis („SRTM30“). </para>
+             </listitem>
+              <listitem>
+                <para
+><guilabel
+>OpenStreetMap</guilabel
+>: Pasaulinis žemėlapis, kuriamas projekte OpenStreetMap (OSM). OSM – atvira bendruomenė, kurianti nemokamus ir redaguojamus žemėlapius. OSM duomenis buvo braižomi naudojant Mapnik. </para>
+             </listitem>
+             <listitem>
+                <para
+><guilabel
+>Vaizdas iš palydovo</guilabel
+>: Žemė tokia, kaip matosi iš kosmoso. Žemėlapio pagrindas – puikios NASA nuotraukos „Mėlynas gaublys, ateinanti karta“. Sukurta NASA žemės observatorijos. </para>
+             </listitem>
+             <listitem>
+                <para
+><guilabel
+>Žemė naktį</guilabel
+>: ši Žemės su miestų šviesomis nuotrauka buvo sukurta iš DMSP (gynybos meteorologinės palydovų programos) OLS (veikiančios linijinio skenavimo sistemos). </para>
+             </listitem>
+             <listitem>
+                <para
+><guilabel
+>Istorinis žemėlapis 1689</guilabel
+>: Istorinis 1689 metų žemėlapis, sukurtas G. van Schagen'o Amsterdame. </para>
+             </listitem>
+             <listitem>
+                <para
+><guilabel
+>Mėnulis</guilabel
+>: Mėnulio žemėlapis. Žemėlapis sukurtas naudojantis Clementine mėnulio misijos (UVVIS Basemap Mosaic) duomenis. Sukurta: NASA/SDIO, padėka USGS Astrogeologijos tyrimų programai. </para>
+             </listitem>
+             <listitem>
+                <para
+><guilabel
+>Paprastas žemėlapis</guilabel
+>: Paprastas žemėlapis. Kranto ir šalių sienų žymėjimui naudoja vektorinius duomenis. </para>
+             </listitem>
+             <listitem>
+                <para
+><guilabel
+>Krituliai (gruodžio mėn.)</guilabel
+>: Žemėlapis rodantis vidutinį kritulių kiekį gruodžio mėn. </para>
+             </listitem>
+             <listitem>
+                <para
+><guilabel
+>Krituliai (liepos mėn.)</guilabel
+>: Žemėlapis, rodantis vidutinį kritulių (lietaus, sniego, krušos ir pan.) kiekį liepos mėn. </para>
+             </listitem>
+             <listitem>
+                <para
+><guilabel
+>Temperatūra (gruodžio mėn.)</guilabel
+>: Žemėlapis, rodantis vidutinę temperatūrą gruodžio mėn. </para>
+             </listitem>
+             <listitem>
+                <para
+><guilabel
+>Temperatūra (liepos mėn.)</guilabel
+>: Žemėlapis, rodantis vidutinę temperatūrą liepos mėn. </para>
+             </listitem>
+         </itemizedlist>
+     </chapter>
+
+     <chapter id="search-places">
+         <title
+>Marble vietovių paieška</title>
+         <para
+>&marble; turi nedidelę duomenų bazę, su 12000 miestų (iš http://www.worldgazetteer.com) bei keliais kalnais ir ugnikalniais. Vietovę galite rasti viršutinėje įrankinės dalyje įvedę jos pavadinimą. Jei nesate įsitikinę dėl rašybos (&marble; visada naudoja vietinį pavadinimą lotyniškomis raidėmis), galite pasirinkti iš sąraše rodomų vietovių: dvigubas spragtelėjimas ant kokio nors įrašo iš karto parodys jį žemėlapyje. </para>
+         <screenshot>
+             <screeninfo
+>&marble; vietovių paieška</screeninfo>
+             <mediaobject>
+                 <imageobject
+><imagedata fileref="search-1.png" format="PNG"/></imageobject>
+                 <textobject
+><phrase
+>&marble; vietovių paieška</phrase
+></textobject>
+             </mediaobject>
+         </screenshot>
+         <para
+>Žemėlapyje radę dominantį miestą, galite kairiu pelės mygtuku spausti ant jo pavadinimo arba ženkliuko. Iššokančiame meniu galėsite nurodyti, kad norite gauti daugiau informacijos apie parinktą miestą. Iššokančio meniu pagalba taipogi galite sužinoti bet kokio gaublio taško koordinates, kurios rodomos iššokančio meniu apačioje. Iššokančiame meniu parinkus vietovės pavadinimą bus atvertas duomenų langas, atrodantis daugmaž taip: </para>
+         <screenshot>
+             <screeninfo
+>&marble; Duomenų lapas</screeninfo>
+             <mediaobject>
+                 <imageobject
+><imagedata fileref="search-2.png" format="PNG"/></imageobject>
+                 <textobject
+><phrase
+>&marble; Duomenų lapas</phrase
+></textobject>
+             </mediaobject>
+         </screenshot>
+         <para
+>Pirmoje dialogo kortelėje bus pateikiami pagrindiniai duomenys: pavadinimas, koordinatės bei šalies, kuriai priklauso vietovė, vėliava. Miestams rodomas gyventojų skaičius, o kalnams – aukštis. Jei jūsų kompiuteris prijungtas prie interneto, &marble; pabandys prisijungti prie <quote
+>Wikipedijos</quote
+>. Jei Wikipedijoje bus rastas atitinkamas straipsnis, jis irgi bus parodytas dialoge. </para>
+     </chapter>
+
+     <chapter id="routing">
+         <title
+>Raskite kelią naudodami &marble;</title>
+         <para
+>&marble; gali ne tik rasti vietoves, bet ir parodyti kelią tarp dviejų iš jų. Norite suplanuoti dviračių žygį į gretimą girią? Jums reikia važiavimo instrukcijų svetimame mieste? Norėdami pradėti planuoti kelionę, parinkite įrankinės apačioje esančią kortelę <guilabel
+>Maršrutizavimas</guilabel
+>. </para>
+         <sect1 id="routing-route-new">
+         <title
+>Naujo maršruto kūrimas</title>
+         <para
+><guilabel
+>Maršrutizavimo</guilabel
+> kortelėje rasite du žalius mygtukus, pažymėtus raidėmis <guilabel
+>A</guilabel
+> ir <guilabel
+>B</guilabel
+>. Išvykimo taško adresą įveskite ties mygtuku <guilabel
+>A</guilabel
+> – maršruto pradžios lauku. Spauskite &Enter; arba spauskite mygtuką <guilabel
+>Search</guilabel
+>, kad pradėtumėte paiešką. Kad neprailgtų vykdoma paieška, bus rodoma nedidelė progreso animacija. Jei naudosite paiešką <quote
+>Kapsų g., Palanga</quote
+>, rezultatas bus panašus į štai tokį: </para>
+         <screenshot>
+             <screeninfo
+>&marble; adreso paieška</screeninfo>
+             <mediaobject>
+                 <imageobject
+><imagedata fileref="routing-1.png" format="PNG"/></imageobject>
+                 <textobject
+><phrase
+>&marble; adreso paieška</phrase
+></textobject>
+             </mediaobject>
+         </screenshot>
+         <para
+>Paieškos kriterijų atitinkančios vietovės bus rodomos žemiau esančiame sąraše. Jos taipogi išskiriamos ir žemėlapyje. Pirmas rezultatas automatiškai pažymimas kaip išvykimo taškas. Žemėlapyje šis taškas žymimas tuo pačiu ženkliuku <guilabel
+>A</guilabel
+>, kaip ir atitinkamas įvedimo laukas. Jei jums reikalingas ne pirmas rezultatas, spauskite ant bet kurio kito tinkamo, kad pakeistumėte išvykimo vietą. Galite spausti arba rastų vietovių sąraše arba tiesiai ant žemėlapyje rodomų rezultatų ženkliukų. Einamuoju metu parinkto maršruto pradžia visada žymima ženkliuku <guilabel
+>A</guilabel
+>. </para>
+         <para
+>Užpildžius išvykimo tašką galima nurodyti ir kelionės tikslą. Veiksmus reikia atlikti lygiai tokius pačius: įveskite paskirties adresą įvesties lauke, esančiame šalia mygtuko <guilabel
+>B</guilabel
+>, ir spauskite &Enter;. Pasirodžiusiame sąraše parinkite reikiamą rezultatą. </para>
+         <para
+>Ar pastebėjote, kad dingo mygtukas <guilabel
+>Ieškoti</guilabel
+> ir vietoje jo atsirado mygtukas <guilabel
+>Instrukcijos</guilabel
+>? Šitaip &marble; parodo, kad visa informacija, kurios reikia maršruto skaičiavimui, suvesta teisingai. Spauskite mygtuką <guilabel
+>Instrukcijos</guilabel
+>, kad gautumėte maršruto aprašymą. Jei jūsų paskirties aprašymas yra <quote
+>Dzūkų g., Palanga</quote
+>, rezultatas turėtų būti panašus į šį: </para>
+         <screenshot>
+             <screeninfo
+>&marble; maršruto rezultatas</screeninfo>
+             <mediaobject>
+                 <imageobject
+><imagedata fileref="routing-2.png" format="PNG"/></imageobject>
+                 <textobject
+><phrase
+>&marble; rodo maršrutą</phrase
+></textobject>
+             </mediaobject>
+         </screenshot>
+         <para
+>Jei pradžios (ar paskirties) taškas jau matomas ekrane, jums gali būti paprasčiau tiesiog pažymėti jį žemėlapyje. Tai padaryti galite paspaudę mygtuką <guilabel
+>A</guilabel
+> (arba <guilabel
+>B</guilabel
+>), esantį šalia įvedimo lauko. Spauskite <guilabel
+>Iš žemėlapio</guilabel
+>. Bus įjungtas žemėlapio įvedimo režimas: sekantis spustelėjimas žemėlapyje nurodys išvykimo (arba atvykimo) tašką. Taško parinkimo metu pelės žymeklis pasikeičia į kryžiuką, kad būtų paprasčiau nurodyti tašką. Parinktas taškas bus įtrauktas į maršrutą ir pažymėtas žemėlapyje. Jei norite nutraukti žymėjimą, spauskite dar kartą ant mygtuko arba tiesiog spauskite &Esc;. </para>
+         <para
+>Kitas būdas parinkti maršruto pradžią ir pabaigą yra naudojant žemėlapio kontekstiniu meniu: norimoje vietoje spauskite dešinį pelės mygtuką ir parinkite arba <guilabel
+>Išvykimo taškas</guilabel
+>, arba <guilabel
+>Atvykimo taškas</guilabel
+>. </para>
+         </sect1>
+         <sect1 id="routing-profiles">
+         <title
+>Maršrutų profiliai</title>
+         <para
+>Parenkamas maršrutas priklauso nuo to, kokią transporto priemonę naudosite (jei iš viso kokią nors naudosite). Galite nurodyti šią ir kita maršrutizavimo informaciją naudodami profilius. Kiekviename profilyje yra maršrutizavimo nustatymai, pritaikyti kokiam nors konkrečiam keliavimo tipui. Pirmą kartą paleidus &marble;, sukuriami populiariausi profiliai: <guilabel
+>Mašina (greičiausias)</guilabel
+>, <guilabel
+>Mašina (trumpiausias)</guilabel
+>, <guilabel
+>Dviratis</guilabel
+> ir <guilabel
+>Pėstysis</guilabel
+>. </para
+>             
+         <para
+>Ankstesnių skyrių pavyzdžiuose naudotas profilis <guilabel
+>Mašina (greičiausias)</guilabel
+>. Perskaičiuokite paskutinį maršrutą, naudodami kitą profilį: profilyje parinkite <guilabel
+>Pėstysis</guilabel
+>. Dabar maršrutas atrodys taip: </para
+>                       
+         <screenshot>
+             <screeninfo
+>&marble; pėsčiojo maršrutas</screeninfo>
+             <mediaobject>
+                 <imageobject
+><imagedata fileref="routing-5.png" format="PNG"/></imageobject>
+                 <textobject
+><phrase
+>&marble; pėsčiojo maršrutas</phrase
+></textobject>
+             </mediaobject>
+         </screenshot>
+         <para
+>Siūlomas maršrutas sutrumpėjo, nes buvo panaudoti ir tik pėstiesiems skirti keliai. </para>
+         <para
+>Jei norite pakoreguoti vieną iš numatytųjų profilių, parinkite jį ir spauskite nuorodą <guilabel
+>Konfigūruoti</guilabel
+>. Bus atidarytas naujas langas. </para>
+         <screenshot>
+             <screeninfo
+>&marble; maršrutizavimo profilio konfigūravimas</screeninfo>
+             <mediaobject>
+                 <imageobject
+><imagedata fileref="routing-6.png" format="PNG"/></imageobject>
+                 <textobject
+><phrase
+>&marble; maršrutizavimo profilio konfigūravimas</phrase
+></textobject>
+             </mediaobject>
+         </screenshot
+>         
+         <para
+>Kairėje pusėje galite nurodyti, kokie bus naudojami maršruto skaičiavimo paslaugų tiekėjai. &marble; palaiko iki penkių servisų, du internetinius ir tris atjungtinius. Norint pasinaudoti internetiniu maršrutizavimu reikia būti prisijungus prie interneto. Atjungtinis maršrutizavimas veikia ir atsijungus nuo interneto, bet prieš jį naudojant jūs turite iš anksto atsisiųsti ir įsidiegti atjungtinius maršrutizavimo žemėlapius. Palaikomi tokie maršrutizavimo paslaugų tiekėjai </para>
+         <itemizedlist>
+             <listitem>
+               <para
+>Gosmore: atjungtinis maršrutizatorius, kuris naudojamas ir internetiniam maršrutizavimui „yours“</para>
+             </listitem>
+             <listitem>
+               <para
+>Monav: labai greitas atjungtinis maršrutizavimas, sparčiai veikiantis net su labai tolimais maršrutais</para>
+             </listitem>
+             <listitem>
+               <para
+>OpenRouteService: internetinis maršrutizatorius, kuris taipogi generuoja ir važiavimo instrukcijas, veikia tik Europoje</para>
+             </listitem>
+             <listitem>
+               <para
+>Routino: atjungtinis maršrutizatorius, leidžiantis labai lanksčias konfigūracijas</para>
+             </listitem>
+             <listitem>
+               <para
+>Yours: internetinis maršrutizatorius, kuris veikia visame pasaulyje, bet nesukuria važiavimo instrukcijų</para>
+             </listitem>
+         </itemizedlist>
+         <para
+>Parinkus ir įjungus maršrutizavimo paslaugą kairėje pusėje, dešinėje galėsite keisti jos konfigūraciją. Nustatymai skirtingi kiekvienai konkrečiai paslaugai. </para>
+         <para
+>Jūs galite ne tik konfigūruoti keturis numatytuosius profilius, bet ir sukurti naujus bei pašalinti jau esančius, naudodami &marble; nustatymų puslapį <guilabel
+>Maršrutizavimas</guilabel
+>. </para>
+         </sect1>
+         <sect1 id="routing-route-adjustments">
+         <title
+>Maršrutų keitimas</title>
+         <para
+>&marble; leidžia jums pakeisti keletą maršruto aspektų: keisti maršruto parinktis, įterpti papildomus, perkelti ar ištrinti esamus tarpinius taškus. Maršruto parinkčių keitimas jau buvo aptartas ankstesniame skyriuje. Dabar sutelksime dėmesį ties taškų valdymų. </para>
+         <para
+>Tarpinius taškus į maršrutą galima įterpti naudojant tempimo režimą. Kiekvieną kartą, kai jūs užvedate pelės žymeklį virš bet kurios maršruto dalies (išskyrus jau esamus tarpinius taškus), pelės žymeklis pasikeičia į žalią rodyklę, taip rodant, kad galite įterpti tarpinį tašką. Kad pradėtumėte įterpimą, spauskite kairįjį pelės mygtuką ir laikydami nuspaudę pelės mygtuką tempkite pelės žymeklį iki norimo taško. Mėlynos linijos nuo gretimų tarpinių taškų ves iki naujojo tarpinio taško: </para>
+         <screenshot>
+             <screeninfo
+>&marble; tarpinių maršruto tašku pridėjimas</screeninfo>
+             <mediaobject>
+                 <imageobject
+><imagedata fileref="routing-3.png" format="PNG"/></imageobject>
+                 <textobject
+><phrase
+>&marble; tarpinio maršruto taško pridėjimas</phrase
+></textobject>
+             </mediaobject>
+         </screenshot>
+         <para
+>Naujas tarpinis taškas bus įterptas tarp esamų taškų jums atleidus kairįjį pelės mygtuką. Tuo pačiu metu esamas marštutas žymimas brūkšniukais, nes jis rodo pasenusią informaciją. Fone jau ruošiama naujo maršruto informacija, kuri automatiškai pakeis pasenusiąją. </para>
+         <para
+>Tarpinius taškus galite įterpti ir prieš išvykimo tašką bei po paskirties taško. Tai galite padaryti atlikdami tokius pačius veiksmus, kaip ir aukščiau aprašytu tarpinių taškų pridėjimo atveju, tik papildomai tempdami pelę laikykite &Ctrl; mygtuką. Papildoma mėlyna linija atsiras nuo pradžios arba paskirties taško. Ši linija jums nurodys, kurioje maršruto pusėje bus pridėtas naujas taškas. </para>
+         <para
+>Jau esami tarpiniai taškai gali būti laisvai pertempiami į bet kurią kitą žemėlapio vietą. Užveskite pelės žymeklį ant tarpinio taško ir pertempkite jį į naują vietą. Atleidus pelės mygtuką maršrutas bus automatiškai perskaičiuotas. </para>
+         <para
+>Jei norite pašalinti tarpinius taškus iš maršruto – ištrinkite juos. Tai galite padaryti arba spausdami mygtuką <guilabel
+>Pašalinti</guilabel
+>, esantį prie taškų įvesties eilutės, arba ant taško paspaudę dešinį pelės mygtuką ir kontekstiniame meniu parinkę <guilabel
+>Pašalinti šią paskirties vietą</guilabel
+>. Norėdami pradėti kurti naują maršrutą – panaikinkite visus taškus. </para>
+         </sect1>
+         <sect1 id="routing-route-export">
+         <title
+>Maršrutų eksportavimas</title>
+         <para
+>&marble; sukurti maršrutai gali būti naudojami kitose programose ar navigacijos įrenginiuose, palaikančiuose <acronym
+>gpx</acronym
+> (GPS eXchange Format) arba atitinkamus formatus. Jei jūsų navigacijos įrenginys nepalaiko <acronym
+>gpx</acronym
+> tiesiogiai, jūs galite panaudoti konvertavimo pagalbininkus, tokius kaip gpsbabel, kad konvertuotumėte &marble; sukurtą <acronym
+>gpx</acronym
+> failą į reikiamą formatą. </para>
+         <para
+>Maršruto eksportavimas paleidžiamas per kontekstinį žemėlapio meniu. Spauskite dešinį pelės mygtuką bet kurioje maršruto vietoje. Atsiradusiame kontekstiniame meniu parinkite <guilabel
+>Eksportuoti maršrutą</guilabel
+>: </para>
+         <screenshot>
+             <screeninfo
+>&marble; maršruto eksportavimas</screeninfo>
+             <mediaobject>
+                 <imageobject
+><imagedata fileref="routing-4.png" format="PNG"/></imageobject>
+                 <textobject
+><phrase
+>&marble; maršruto eksportavimas</phrase
+></textobject>
+             </mediaobject>
+         </screenshot>
+         <para
+>Parodytame įrašymo dialoge įveskite norimą failo pavadinimą. Failo praplėtimas turi būti <filename class="extension"
+>gpx</filename
+>, jei norite įrašyti <acronym
+>gpx</acronym
+> formatu arba <filename class="extension"
+>kml</filename
+>, jei norite įrašyti <acronym
+>kml</acronym
+> (Keyhole Markup Language) formatu. </para>
+         </sect1>
+     </chapter>
+
+     <chapter id="measure-distances">
+         <title
+>Atstumų skaičiavimas</title>
+         <para
+>Kaip jau buvo minėta anksčiau, &marble; visada rodo kintamą mastelio juostą apatiniame kairiame kampe. Jo pagalba galite įvertinti atstumus žemėlapyje. Kartu su vėjų rože, esančia viršutiniame dešiniame kampe, šie elementai pateikiami geresnei orientacijai. Bet &marble; gali daugiau: jūs galite išmatuoti atstumą tarp bet kurių dviejų žemės taškų. Norėdami tą padaryti, spauskite atitinkamus taškus žemėlapyje reikiama tvarka dešiniu pelės mygtuku. Po kiekvieno spragtelėjimo pasirodys meniu, leidžiantis jums pridėti matavimo tašką (<guilabel
+>Pridėti matavimo tašką</guilabel
+>) arba pašalinti visus esamus matavimo taškus (<guilabel
+>Pašalinti matavimo taškus</guilabel
+>): </para>
+         <screenshot>
+             <screeninfo
+>&marble; matavimas</screeninfo>
+             <mediaobject>
+                 <imageobject
+><imagedata fileref="measure-1.png" format="PNG"/></imageobject>
+                 <textobject
+><phrase
+>&marble; atstumų matavimas</phrase
+></textobject>
+             </mediaobject>
+         </screenshot>
+         <para
+>Pridėjus bent du matavimo taškus, suminis atstumas bus rodomas viršutiniame kairiame žemėlapio kampe. &marble; skaičiuos atstumus ant Žemės, kaip sferos, o tai daugumoje atveju turėtų būti pakankamai tikslus skaičiavimas. </para>
+     </chapter>
+     
+     <chapter id="download-region">
+         <title
+>Parsisiųsti žemėlapio sritis</title>
+         <para
+>&marble; diegiamas iš karto su keliais žemėlapiais. Didinant ar mažinant mastelį, papildomos žemėlapio dalys parsiunčiamos fone. Tai puikiai veikia, kai jūs prisijungę prie interneto. Ką gi daryti, jei keliaujate į užsienio miestą, kuriame jūs neturite pastovaus priėjimo prie interneto, kad parsisiųstumėte žemėlapius? Reikia galvoti apie ateitį ir iš anksto atsisiųsti reikiamas žemėlapio sritis. </para>
+         <para
+>Kad suprastume, ką reikia parsisiųsti, kad be interneto būtų galima peržiūrėti žemėlapį, pradžiai trumpai panagrinėkime &marble; naudojamą kaladėlių sąvoką. Kaladėlė – tai piešinys, atitinkantis kažkokią žemėlapio dalį (fragmentą). Kaladėles &marble; išdėsto vieną šalia kitos, kad sukurtų jums rodomą žemėlapį. Kaladėlės dėliojamos skirtingai, priklausomai nuo parinktos projekcijos. Parinkus plokščio žemėlapio projekciją (kairė) kaladėlės bus dėliojamos kaip plokšti stačiakampiai. Parinkus gaublio projekciją (dešinė), kaladėlės bus dėliojamos kaip sferos. </para>
+         <screenshot>
+             <screeninfo
+>&marble; projekcijos</screeninfo>
+             <mediaobject>
+                 <imageobject
+><imagedata fileref="download-region-1.png" format="PNG"/></imageobject>
+                 <textobject
+><phrase
+>1 lygmens kaladėlės. Plokščias žemėlapis (kairė) ir gaublio projekcija (dešinė)</phrase
+></textobject>
+             </mediaobject>
+         </screenshot>
+         <para
+>Didinant vaizdą reikia parodyti daugiau detalių, todėl anksčiau pavaizduotos kaladėlės nebetinka, nes yra per daug grubios. &marble; automatiškai atpažįsta tokią situaciją ir persijungia į sekantį kaladėlių lygmenį, kuris suteikia daugiau detalių. Ir taip tęsiasi toliau: kuo labiau jūs priartinate vaizdą, tuo aukštesnis kaladėlių lygmuo parenkamas. Žemiau pateikiama iliustracija parodo, kaip skirtingiems lygmenims naudojamas skirtingas kiekis kaladėlių (nuspalvintų skirtingomis spalvomis). </para>
+         <screenshot>
+             <screeninfo
+>&marble; kaladėlių lygmenys</screeninfo>
+             <mediaobject>
+                 <imageobject
+><imagedata fileref="download-region-2.png" format="PNG"/></imageobject>
+                 <textobject
+><phrase
+>Skirtingi &marble; kaladėlių lygmenys</phrase
+></textobject>
+             </mediaobject>
+         </screenshot>
+         <para
+>Parsisiųsdami žemėlapio sritį naudojimui be interneto, jūs turite atsisiųsti visas norimos srities kaladėles visuose planuojamuose naudoti kaladėlių lygmenyse. Kadangi kaladėlių lygmuo atitinka mastelį, galima sakyti ir taip: atsiųsti visas kaladėles dominančiuose masteliuose. </para>
+         <para
+>Norėdami tai atlikti, pasukite gaublį iki dominančios srities ir parinkite reikiamą mastelį. Dabar iš <guilabel
+>Failų</guilabel
+> meniu atverkite dialogą <guilabel
+>Atsiųsti sritį...</guilabel
+>. Palikite įjungtą parinktį <guilabel
+>Matoma sritis</guilabel
+> tam, kad parsiųstumėte kaladėles tos srities, kuri matoma ekrane. Tada parinkite parsiųsti norimą lygmenų diapazoną (mastelio diapazoną). Pirmame lauke įvedamas mažiausias, o antrame - didžiausias parsiunčiamų kaladėlių lygmuo. Bus parsiųstos ir tarpinių lygmenų kaladėlės. &marble; parodys, kiek kaladėlių (piešinukų) reikės atsisiųsti. Šis skaičius keičiamas automatiškai, jei jūs keičiate sritį ar parsiunčiamų kaladėlių lygmenis. </para>
+         <screenshot>
+             <screeninfo
+>&marble; srities atsiuntimo dialogas</screeninfo>
+             <mediaobject>
+                 <imageobject
+><imagedata fileref="download-region-3.png" format="PNG"/></imageobject>
+                 <textobject
+><phrase
+>&marble; srities atsiuntimo dialogas</phrase
+></textobject>
+             </mediaobject>
+         </screenshot>
+         <para
+>Šiuo metu rodomų kaladėlių lygmuo rodomas apačioje esančioje būsenos juostoje. Pastebėtina, kad jums gali reikėti atitinkamai sukonfigūruoti &marble;, kad būtų rodoma tokia informacija. Spauskite dešinį pelės mygtuką ant būsenos juostos ir ten parinkite <guilabel
+>Rodyti kaladėlių lygmenį</guilabel
+>. </para>
+         <para
+>Srities parsiuntimui spauskite <guilabel
+>Gerai</guilabel
+>. &marble; būsenos juosta rodys atsiuntimo progresą (jei bus įjungta). </para>
+         <para
+>Jei jūs žinote koordinates srities, kurią norite atsisiųsti, jūs galite įvesti jas įjungę parinktį <guilabel
+>Nurodyti sritį</guilabel
+>. Tokiu atveju šiuo metu matoma žemėlapio sritis bus ignoruojama. </para>
+         <para
+>Jūs galite ir toliau naudoti &marble;, kol atvertas dialogas <guilabel
+>Atsiųsti sritį</guilabel
+>. Tai naudinga, jei norite atsiųsti daugiau nei vieną sritį ar kaladėlių lygmenį. Spauskite <guilabel
+>Pritaikyti</guilabel
+>, o ne <guilabel
+>Gerai</guilabel
+>, kad pradėtumėte kaladėlių parsiuntimą. </para>
+     </chapter>
+
+	 <chapter id="commands">
+		 <title
+>Komandų aprašas</title>
+
+		 <sect1 id="marble-mainwindow">
+			 <title
+>Meniu ir spartieji klavišai</title>
+
+			 <sect2>
+				 <title
+>Meniu <guimenu
+>Failas</guimenu
+></title>
+
+				 <variablelist>
+                     <varlistentry>
+                         <term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>O</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Failas</guimenu
+><guimenuitem
+>Atverti...</guimenuitem
+> </menuchoice
+></term>
+                         <listitem
+><para
+><action
+>Atidaro</action
+> žemėlapio failą.</para
+></listitem>
+                     </varlistentry>
+                     <varlistentry>
+                         <term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>N</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Failas</guimenu
+> <guimenuitem
+>Atsiųsti žemėlapių...</guimenuitem
+> </menuchoice
+></term>
+                         <listitem
+><para
+><action
+>Rodo</action
+> dialogą <guilabel
+>Gauk karštas naujienas!</guilabel
+>, leidžiantį parsiųsti papildomų &marble; žemėlapių, tokių kaip Marso ar Veneros.</para
+></listitem>
+                     </varlistentry>
+                     <varlistentry>
+                         <term
+><menuchoice
+><guimenu
+>Failas</guimenu
+><guimenuitem
+>Atsiųsti sritį...</guimenuitem
+> </menuchoice
+></term>
+                         <listitem
+><para
+><action
+>Rodo</action
+> dialogą <guilabel
+>Atsiųsti sritį</guilabel
+>, leidžiantį parsiųsti skirtingo mastelio žemėlapio duomenis naudojimui neprisijungus prie interneto. Daugiau informacijos rasite skiltyje <link linkend="download-region"
+>Atsiųsti žemėlapio sritį</link
+>.</para
+></listitem>
+                     </varlistentry>
+                     <varlistentry>
+                         <term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>S</keycap
+></keycombo
+></shortcut
+><guimenu
+>Failas</guimenu
+><guimenuitem
+>Eksportuoti žemėlapį...</guimenuitem
+> </menuchoice
+></term>
+                         <listitem
+><para
+><action
+>Eksportuoja</action
+> &marble; rodomo žemėlapio nuotrauką į vieną failą.</para
+></listitem>
+                     </varlistentry>
+                     <varlistentry>
+                         <term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>P</keycap
+></keycombo
+></shortcut
+><guimenu
+>Failas</guimenu
+><guimenuitem
+>Spausdinti...</guimenuitem
+> </menuchoice
+></term>
+                         <listitem
+><para
+><action
+>Spausdina</action
+> &marble; rodomo žemėlapio nuotrauką.</para
+></listitem>
+                     </varlistentry>
+                     <varlistentry>
+                         <term
+><menuchoice
+><guimenu
+>Failas</guimenu
+> <guimenuitem
+>Spaudinio peržiūra</guimenuitem
+> </menuchoice
+></term>
+                         <listitem
+><para
+>Atveria langą, kuriame rodoma spausdinamo žemėlapio peržiūra.</para
+></listitem>
+                     </varlistentry>
+                     <varlistentry>
+                         <term
+><menuchoice
+><guimenu
+>Failas</guimenu
+> <guimenuitem
+>Dirbti atsijungus</guimenuitem
+> </menuchoice
+></term>
+                         <listitem
+><para
+>Įjungus šią parinktį &marble; nebesiųs žemėlapio duomenų iš interneto. Paieška vykdoma tik vietinėje duomenų bazėje. Negalima atsiųsti naujų maršrutų.</para
+></listitem>
+                     </varlistentry>
+					 <varlistentry>
+						 <term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>Q</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Failas</guimenu
+><guimenuitem
+>Išjungti</guimenuitem
+> </menuchoice
+></term>
+						 <listitem
+><para
+><action
+>Išjungia</action
+> &marble;</para
+></listitem>
+					 </varlistentry>
+				 </variablelist>
+
+			 </sect2>
+
+             <sect2>
+                 <title
+>Meniu <guimenu
+>Keisti</guimenu
+></title>
+
+                 <variablelist>
+                     <varlistentry>
+                         <term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>C</keycap
+></keycombo
+></shortcut
+><guimenu
+>Taisa</guimenu
+><guimenuitem
+>Kopijuoti žemėlapį</guimenuitem
+> </menuchoice
+></term>
+                         <listitem
+><para
+><action
+>Kopijuoja</action
+> &marble; žemėlapio nuotrauką į bendrą iškarpinę.</para
+></listitem>
+                     </varlistentry>
+                     <varlistentry>
+                         <term
+><menuchoice
+><guimenu
+>Taisa</guimenu
+> <guimenuitem
+>Kopijuoti koordinates</guimenuitem
+> </menuchoice
+></term>
+                         <listitem
+><para
+><action
+>Kopijuoja</action
+> dabartines koordinates į bendrą iškarpinę.</para
+></listitem>
+                     </varlistentry>
+                 </variablelist>
+
+             </sect2>
+
+<sect2>
+<title
+>Meniu <guimenu
+>Rodymas</guimenu
+></title>
+
+<variablelist>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Rodymas</guimenu
+> <guimenuitem
+>Dabartinė vieta</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+><action
+>Įjungti/išjungti</action
+> dabartinės vietos rodymas kairėje skiltyje. Jei prie kompiuterio prijungtas GPS įrenginys, &marble; rodys jūsų buvimo vietos ilgumą ir platumą. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Rodymas</guimenu
+><guimenuitem
+>Žymekliai</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+><action
+>Įjungti/išjungti</action
+> paprasto žymeklio rodymą žemėlapio centre.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+> <keycap
+>F5</keycap
+></shortcut
+><guimenu
+>Rodymas</guimenu
+><guimenuitem
+>Rodyti iš naujo</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Šiuo metu rodoma žemėlapio sritis iš naujo parsiunčiama ir atnaujinama ekrane.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Rodymas</guimenu
+><guisubmenu
+>Informaciniai laukeliai</guisubmenu
+> </menuchoice
+></term>
+<listitem
+><para
+>Šiame meniu jūs galite fiksuoti info laukelių poziciją bei įjungti ar išjungti <link linkend="configplugins"
+>Priedus</link
+>, kuriuos jūs įgalinot &marble; konfigūracijos dialoge.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Rodymas</guimenu
+> <guimenuitem
+>Internetinės tarnybos</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+><guimenuitem
+>Wikipedia</guimenuitem
+> priedas, Wikipedijos straipsnius, turinčius geografinę informaciją, rodo žemėlapyje atitinkamu ženkliuku. Paspaudus ženkliuką, straipsnis atidaromas naršyklėje. Duomenys teikiami per GeoNames.org tinklo paslaugą. Analogiškai <guimenuitem
+>Photos</guimenuitem
+> priedas duoda priėjimą prie FlickR dalinimosi nuotraukomis svetainės.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Rodymas</guimenu
+> <guimenuitem
+>Debesys</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+><action
+>Rodyti</action
+> realaus laiko debesuotumo informaciją, kuri atsinaujina kas 3 valandas. Naudojamos GOES, METEOSAT ir GMS palydovų nuotraukos, atsiunčiamos iš geostacionarių palydovų nuotraukų svetainės, esančios Dundee Universitete. Tai Hari Nair, Xplanet projekto nuopelnas.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Rodymas</guimenu
+> <guimenuitem
+>Atmosfera</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+><action
+>Rodyti</action
+> aplink Žemę išsklaidytą atmosferos atspindį.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Rodymas</guimenu
+> <guimenuitem
+>Saulės valdymas...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+><action
+>Rodo</action
+> <guilabel
+>saulės valdymą</guilabel
+>, kuriame galite nurodyti datą ir laiką, imitavimo greitį, <guilabel
+>saulės šešėlį</guilabel
+> ir centruoti žemėlapį ties saulės pozicija.</para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+</sect2>
+
+			 <sect2>
+				 <title
+><guimenu
+>Nustatymų</guimenu
+> meniu</title>
+
+				 <variablelist>
+					 <varlistentry>
+						 <term
+><menuchoice
+><guimenu
+>Nustatymai</guimenu
+> <guimenuitem
+>Rodyti įrankių juostą</guimenuitem
+> </menuchoice
+></term>
+						 <listitem
+><para
+><action
+>Įjungti/išjungti</action
+> įrankių juostą.</para>
+						 </listitem>
+					 </varlistentry>
+					 <varlistentry>
+						 <term
+><menuchoice
+><guimenu
+>Nustatymai</guimenu
+> <guimenuitem
+>Rodyti būsenos juostą</guimenuitem
+> </menuchoice
+></term>
+						 <listitem
+><para
+><action
+>Įjungti/išjungti</action
+> būsenos juostą.</para
+></listitem>
+					 </varlistentry>
+					 <varlistentry>
+						 <term
+><menuchoice
+><shortcut
+> <keycap
+>F9</keycap
+> </shortcut
+> <guimenu
+>Nustatymai</guimenu
+> <guimenuitem
+>Rodyti žvalgiklio pultą</guimenuitem
+> </menuchoice
+></term>
+						 <listitem
+><para
+><action
+>Įjungti/išjungti</action
+> pagrindinio lango kairėje pusėje esantį žvalgiklio pultą.</para
+></listitem>
+					 </varlistentry>
+					 <varlistentry>
+						 <term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>F</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Nustatymai</guimenu
+> <guimenuitem
+>Rodyti visame ekrane</guimenuitem
+> </menuchoice
+></term>
+						 <listitem
+><para
+><action
+>Persijungia tarp paprasto ir pilno ekrano rodinio.</action
+> Pilno ekrano rodinyje paslepiama lango antraštė, o langas padidinamas iki ekrano ribų.</para
+></listitem>
+					 </varlistentry>
+					 <varlistentry>
+						 <term
+><menuchoice
+><guimenu
+>Nustatymai</guimenu
+><guimenuitem
+>Konfigūruoti darbastalio gaublį &marble;...</guimenuitem
+> </menuchoice
+></term>
+						 <listitem
+><para
+><action
+>Rodyti</action
+> <link linkend="configure"
+>&marble; konfigūravimo</link
+> dialogą.</para
+></listitem>
+					 </varlistentry>
+
+				 </variablelist>
+
+			 </sect2>
+
+			 <sect2>
+				 <title
+><guimenu
+>Pagalbos</guimenu
+> meniu</title>
+&help.menu.documentation; </sect2>
+		 </sect1>
+	 </chapter>
+
+<chapter id="configure">
+<title
+>&marble; konfigūravimas</title>
+
+<sect1 id="configview">
+<title
+>Rodymo konfigūravimas</title>
+<screenshot>
+<screeninfo
+>Rodymo konfigūravimo dialogas</screeninfo>
+<mediaobject>
+<imageobject>
+<imagedata fileref="configure-view.png" format="PNG"/>
+</imageobject>
+<textobject>
+<phrase
+>Rodymo konfigūravimo dialogas</phrase>
+</textobject>
+</mediaobject>
+</screenshot>
+<variablelist>
+
+<varlistentry>
+<term
+><guilabel
+>Atstumo</guilabel
+></term>
+<listitem>
+<para
+>Vienetai, kuriais matuojami aukščiai, ilgiai ir atstumai (pavyzdžiui kilometrai, mylios, pėdos).</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Kampo</guilabel
+></term>
+<listitem>
+<para
+>Nurodo koordinačių kampų rodymo tipą. Pagal nutylėjimą naudojamas laipsnis-minutės-sekundės (pvz. 54°30'00"). Taipogi galite nurodyti naudoti dešimtainius kampus (pvz. 54.5°).</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Vaizdui nejudant</guilabel
+></term>
+<listitem>
+<para
+>Nurodo, kokios kokybės žemėlapis rodomas, kai naudotojas nieko nedaro. Paprastai tokiu atveju galima naudoti aukštos kokybės žemėlapį, nes vaizdo nereikia keisti.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Grafinė sistema</guilabel
+></term>
+<listitem>
+<para
+>Nurodo, kurią grafinę sistemą – (<guilabel
+>X11</guilabel
+> ar <guilabel
+>taškinę (programinės įrangos paišymas)</guilabel
+> – &Qt; turėtų naudoti žemėlapio paišymui. Šio nustatymo pakeitimas gali būti teisingas sprendimas, jei turite problemų su sistemos grafinės tvarkyklės pajėgumu. </para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Per animacijas</guilabel
+></term>
+<listitem>
+<para
+>Nurodo, kokios kokybės žemėlapis rodomas žemėlapio keitimo metu (pavyzdžiui perstumiant žemėlapį). Lėtuose kompiuteriuose siūloma čia parinkti <guilabel
+>Žemą kokybę</guilabel
+>, nes taip bus galima greičiau perpaišyti žemėlapį.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Vietovių pavadinimai</guilabel
+></term>
+<listitem>
+<para
+>Vietovės dažnai turi skirtingus skirtingų kalbų pavadinimus. Žemėlapyje galima rodyti naudotojo kalbos pavadinimus. Taipogi galima rodyti oficialius vietovių pavadinimus.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Numatytasis žemėlapio šriftas</guilabel
+></term>
+<listitem>
+<para
+>Pagal nutylėjimą žemėlapyje naudojamas šriftas.</para>
+</listitem>
+</varlistentry>
+</variablelist>
+
+</sect1>
+
+<sect1 id="confignavigation">
+<title
+>Žvalgymosi konfigūravimas</title>
+<screenshot>
+<screeninfo
+>Žvalgymosi konfigūravimo dialogas</screeninfo>
+<mediaobject>
+<imageobject>
+<imagedata fileref="configure-navigation.png" format="PNG"/>
+</imageobject>
+<textobject>
+<phrase
+>Žvalgymosi konfigūravimo dialogas</phrase>
+</textobject>
+</mediaobject>
+</screenshot>
+
+<variablelist>
+<varlistentry>
+<term
+><guilabel
+>Velkant</guilabel
+></term>
+<listitem>
+<para
+>Gaublį velkant pele, gaublys gali elgtis dvejopai: tempiama vietovė nuolatos bus ties pelės žymekliu, dėl to, šiaurinis polius, vietoje to kad nuolat būtų viršuje, gali pasisukti (dėl to gali kilti nesusipratimų). arba šiaurinis polius gali būti nuolat laikomas viršuje, ko pasekoje tempiama vietovė gali atitrūkti nuo pelės žymeklio .</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Pradedant darbą</guilabel
+></term>
+<listitem>
+<para
+>Yra numatyta, kad startavus Marble programai, bus rodomas pradžios taškas. Vietoje to, galima nurodyti kad būtų rodomas taškas, kuris buvo aktyvus baigiant darbą Marble programa.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Rodyti animuotą kelionę link tikslo</guilabel
+></term>
+<listitem>
+<para
+>Ieškant vietovės, &marble; gali arba akimirksniu peršokti į naują vietą, arba rodyti persikėlimo į naują vietovę judesį.</para>
+</listitem>
+</varlistentry>
+
+</variablelist>
+</sect1>
+
+<sect1 id="configcacheproxy">
+<title
+>Podėlio ir įgaliotojo serverio konfigūravimas</title>
+<screenshot>
+<screeninfo
+>Podėlio ir įgaliotojo serverio konfigūravimas</screeninfo>
+<mediaobject>
+<imageobject>
+<imagedata fileref="configure-cacheproxy.png" format="PNG"/>
+</imageobject>
+<textobject>
+<phrase
+>Podėlio ir įgaliotojo serverio konfigūravimas</phrase>
+</textobject>
+</mediaobject>
+</screenshot>
+
+<variablelist>
+<varlistentry>
+<term
+><guilabel
+>Podėlis</guilabel
+></term>
+<listitem>
+<para
+>&marble; naudoja du podėlius. Fizinę atmintį, kurioje laikomi žemėlapio duomenys. Didinantį šį skaičių programa veiks greičiau. Kietojo disko podėlis naudojamas iš interneto atsiųstos informacijos saugojimui (pavyzdžiui wikipedijos ar žemėlapio duomenims saugoti). Sumažinkite šią reikšmę, jei norite naudoti mažiau vietos diske ir jei didelis, iš interneto atsiunčiamos informacijos kiekis, nėra problema.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Įgaliotasis serveris</guilabel
+></term>
+<listitem>
+<para
+>Jūsų interneto įgaliotasis serveris. Palikite tuščią, jei įgaliotasis serveris nenaudojamas.</para>
+</listitem>
+</varlistentry>
+
+</variablelist>
+</sect1>
+
+<sect1 id="configrouting">
+<title
+>Maršrutizavimo konfigūracija</title>
+<screenshot>
+<screeninfo
+>Maršrutizavimo konfigūravimo dialogas</screeninfo>
+<mediaobject>
+<imageobject>
+<imagedata fileref="configure-routing.png" format="PNG"/>
+</imageobject>
+<textobject>
+<phrase
+>Maršrutizavimo konfigūravimo dialogas</phrase>
+</textobject>
+</mediaobject>
+</screenshot>
+
+<variablelist>
+
+<varlistentry>
+<term
+><guilabel
+>Pridėti</guilabel
+></term>
+<listitem>
+<para
+>Atidaro langą, kuriame galite pridėti naują maršrutizavimo profilį.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Konfigūruoti</guilabel
+></term>
+<listitem>
+<para
+>Atidaro langą, kuriame galite konfigūruoti pažymėtą maršrutizavimo profilį.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Pašalinti</guilabel
+></term>
+<listitem>
+<para
+>Pašalina pažymėtą maršrutizavimo profilį.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Aukštyn</guilabel
+></term>
+<listitem>
+<para
+>Pažymėtas maršrutizavimo profilis perkeliamas viena pozicija aukštyn.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Žemyn</guilabel
+></term>
+<listitem>
+<para
+>Pažymėtas maršrutizavimo profilis perkeliamas viena pozicija žemyn.</para>
+</listitem>
+</varlistentry>
+
+</variablelist>
+
+</sect1>
+
+<sect1 id="configplugins">
+<title
+>Papildinių konfigūravimas</title>
+<para
+><guilabel
+>Papildinių konfigūravimas</guilabel
+> – tai vieta, kurioje galite įjungti ir išjungti informacijos lenteles, internetines tarnybas ir kitus priedus, įtakojančius &marble; išvaizdą. Aktyvūs priedai rodomi <guilabel
+>Rodymo</guilabel
+> meniu, kur galite juos įjungti ir išjungti. </para>
+<screenshot>
+<screeninfo
+>Priedų konfigūravimo dialogas</screeninfo>
+<mediaobject>
+<imageobject>
+<imagedata fileref="configure-plugins.png" format="PNG"/>
+</imageobject>
+<textobject>
+<phrase
+>Priedų konfigūravimo dialogas</phrase>
+</textobject>
+</mediaobject>
+</screenshot>
+<para
+>Kiekvienas priedas gali būti aktyvuotas ir deaktyvuotas naudojant kairėje pusėje esančias varneles. Kai kuriuos priedus galima papildomai konfigūruoti, paspaudus įrankių mygtuką dešinėje pusėje. </para>
+
+<variablelist>
+
+<varlistentry>
+<term
+><guilabel
+>APRS papildinys</guilabel
+></term>
+<listitem>
+<para
+>Atsiunčia duomenis iš APRS (Automatic Packet Reporting System) internetu, per failą arba serijinį įrenginį. Duomenų siuntėjų pozicija ir būsena rodoma žemėlapyje ir atnaujinama gyvai.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Kompasas</guilabel
+></term>
+<listitem>
+<para
+>Žemėlapyje rodo kompasą.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Žymekliai</guilabel
+></term>
+<listitem>
+<para
+>Įjunkite šį papildinį, jei norite žemėlapio viduryje rodyti mažą kryžiuką.</para>
+</listitem>
+</varlistentry>
+
+<!-- Not enabled in released version
+<varlistentry>
+<term
+><guilabel
+>File view</guilabel
+></term>
+<listitem>
+<para
+>Displays a list of currently opened files.</para>
+</listitem>
+</varlistentry
+>-->
+
+<varlistentry>
+<term
+><guilabel
+>GeoRender papildinys</guilabel
+></term>
+<listitem>
+<para
+>Šis papildinys paišo žemėlapio turinį (pvz. iš KML failo).</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Koordinačių tinklelis</guilabel
+></term>
+<listitem>
+<para
+>Papildinys, kuris rodo koordinačių tinklelį.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Mastelio juosta</guilabel
+></term>
+<listitem>
+<para
+>Papildinys rodo žemėlapio mastelį.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Navigacija</guilabel
+></term>
+<listitem>
+<para
+>Rodo perkeliamą pelės valdiklį, kuriuo galima keisti žemėlapio mastelį bei poziciją žemėlapyje.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Apžvalginis žemėlapis</guilabel
+></term>
+<listitem>
+<para
+>Perkeliamame langelyje rodomas apžvalginis žemėlapis.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Nuotraukos</guilabel
+></term>
+<listitem>
+<para
+>Automatiškai parsiunčia pasaulio vietovių nuotraukas, pradedant nuo populiariausių.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Atsiuntimo eigos juosta</guilabel
+></term>
+<listitem>
+<para
+>Žemėlapio viršuje esanti diagrama, kuri rodo atsiuntimų būseną.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Žvaigždžių papildinys</guilabel
+></term>
+<listitem>
+<para
+>Papildinys, kuris rodo žvaigždėtą dangų.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Orai</guilabel
+></term>
+<listitem>
+<para
+>Parsiunčia dabartine miestų orų prognozę ir parodo ją žemėlapyje.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Vikipedijos straipsniai</guilabel
+></term>
+<listitem>
+<para
+>Automatiškai atsiunčia Vikipedijos straipsnius, ir juos parodo žemėlapio dešinėje.</para>
+</listitem>
+</varlistentry>
+
+</variablelist>
+</sect1>
+
+</chapter>
+
+	 <chapter id="faq">
+		 <title
+>Klausimai ir atsakymai</title>
+
+		 <qandaset id="faqlist">
+             <qandaentry>
+                 <question>
+                     <para
+>Žemėlapyje nematau savo namo / Kodėl turėčiau naudoti &marble;, jei jau yra Google Earth?</para>
+                 </question>
+                 <answer>
+                     <para
+>&marble; stengiasi būti nedidele ir greita mokomąja geografine naršykle, veikiančia bet kurioje, Qt palaikomoje platformoje. Nors būtų gerai turėti didesnės raiškos žemėlapius, ne visiems naudotojams ir ne visiems naudojimo scenarijams jie reikalingi (kaip ir jūs nenaudojate pilnos tekstų tvarkyklės kiekvieną kartą, kai reikia pažiūrėti paprastą tekstą). Taipogi pastebėtina, kad &marble; – atvira programinė įranga, naudojanti duomenis, kurie gali būti laisvai platinami taip pat, kaip ir atvira programinė įranga. </para>
+                 </answer>
+             </qandaentry>
+             <qandaentry>
+                 <question>
+                     <para
+>Kodėl &marble; veikia taip greitai, nors aš ir neįjungiau spartintuvo? / Kodėl &marble; lėtai veikia, net naudojant mano brangią 3D grafikos plokštę?</para>
+                 </question>
+                 <answer>
+                     <para
+>Nors &marble; ir vaizduoja Žemę kaip gaublį, tam nenaudojamas joks 3D greitintuvas. Tokios sistemos privalumas tas, kad ji greitai veikia bet kokioje sistemoje su bet kokia įranga. Deja tai turi ir trūkumą – sistema neveikia taip greitai, kaip galėtų, naudodama aparatinės įrangos greitintuvus su OpenGL. &marble; naudoja 2D grafiką, todėl jai reikia grafinio adapterio, kuris greitai paišo 2D objektus. Ateityje planuojame pridėti pasirinktinį OpenGL varikliuką. </para>
+                 </answer>
+             </qandaentry>
+			 <qandaentry>
+				 <question>
+					 <para
+>Ar man kada nors reikės mokėti už &marble;?</para>
+				 </question>
+				 <answer>
+					 <para
+>Ne, niekada. Bet autoriams visada įdomu sužinoti jūsų nuomonę. &marble; licencija yra <ulink url="http://www.gnu.org/licenses/licenses.html#LGPL"
+>LGPL</ulink
+>, todėl jums niekada nereikės mokėti už šią programą. </para>
+				 </answer>
+			 </qandaentry>
+             <qandaentry>
+                 <question>
+                     <para
+>Kaip galiu prisidėti?</para>
+                 </question>
+
+                 <answer>
+                     <para
+>&marble; – tai ne tik programa, bet ir atviro kodo projektas. Dėl to prisijungti labai paprasta: susisiekite su mumis kde-edu sąrašyne (kde-edu@kde.org). </para>
+                 </answer>
+             </qandaentry>
+		 </qandaset>
+	 </chapter>
+
+	 <chapter id="credits">
+
+		 <title
+>Padėkos ir licencija</title>
+		 <para
+>&marble;</para>
+		 <para
+>Programos autorinės teisės, 2005-2007 &Torsten.Rahn; &Torsten.Rahn.mail; </para>
+
+		 <para
+>Talkininkai:</para>
+
+		 <itemizedlist>
+             <listitem
+><para
+>&Torsten.Rahn; &Torsten.Rahn.mail; </para
+></listitem>
+			 <listitem
+><para
+>Inge Wallin <email
+>inge@lysator.liu.se</email
+> </para
+></listitem>
+		 </itemizedlist>
+
+		 <para
+>Tomas Straupis<email
+>tomasstraupis@gmail.com</email
+></para
+> 
+&underFDL; &underLGPL; </chapter>
+
+	 <appendix id="installation">
+		 <title
+>Diegimas</title>
+
+		 <sect1 id="getting-marble">
+			 <title
+>Iš kur gauti &marble;</title>
+&install.intro.documentation; </sect1>
+
+		 <sect1 id="requirements">
+			 <title
+>Reikalavimai</title>
+
+			 <para
+>&marble; galima rasti <ulink url="http://edu.kde.org/marble"
+>&marble; svetainėje</ulink
+>. &marble; yra &kde;-Edu projekto dalis.</para>
+
+			 <para
+>Pakeitimų sąrašą galite rasti faile <filename
+>ChangeLog</filename
+> &marble; distributyve.</para>
+		 </sect1>
+
+		 <sect1 id="compilation">
+			 <title
+>Kompiliavimas ir diegimas</title>
+
+             <para
+>&marble; gali būti sukompiliuota kaip tik &Qt; 4 versija bei kaip &kde; 4 dalis. Norėdami sukompiliuoti &marble; tik su &Qt; 4 palaikymu – atsisiųskite &marble; iš &kde; SVN į ~/marble ir įvykdykite tokią komandą: <command
+>cmake -DQTONLY=ON ~/marble</command
+> bei <command
+>sudo make install</command
+>. Norėdami sukompiliuoti &marble; su &kde; palaikymu – peržiūrėkite &kde; programų kompiliavimo nurodymus <ulink url="http://techbase.kde.org/"
+>&kde; TechBase</ulink
+>. </para
+> 
+		 </sect1>
+
+	 </appendix>
+
+	 &documentation.index;
+ </book>
+ <!--
+ Local Variables:
+ mode: sgml
+ sgml-minimize-attributes:nil
+ sgml-general-insert-case:lower
+ sgml-indent-step:0
+ sgml-indent-data:nil
+ End:
+
+ // vim:ts=2:sw=2:tw=78:noet:noai
+ -->

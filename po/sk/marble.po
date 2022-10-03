@@ -1,0 +1,5080 @@
+# translation of marble.po to Slovak
+# Richard Fric <Richard.Fric@kdemail.net>, 2007, 2009.
+# Lubos Balazovic <balazovic@fns.uniba.sk>, 2009.
+# Lubos Balazovic <lubos.balazovic@gmail.com>, 2009, 2011, 2012.
+# Roman Paholík <wizzardsk@gmail.com>, 2012, 2013, 2014, 2015, 2016, 2017, 2021.
+msgid ""
+msgstr ""
+"Project-Id-Version: marble\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2021-10-18 00:13+0000\n"
+"PO-Revision-Date: 2021-11-15 17:29+0100\n"
+"Last-Translator: Roman Paholik <wizzardsk@gmail.com>\n"
+"Language-Team: Slovak <kde-sk@linux.sk>\n"
+"Language: sk\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 21.08.3\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "Ľuboš Balážovič"
+
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "lubos.balazovic@gmail.com"
+
+#: kdemain.cpp:91
+#, kde-format
+msgid "Marble Virtual Globe"
+msgstr "Marble virtuálny glóbus"
+
+#: kdemain.cpp:93
+#, kde-format
+msgid "A World Atlas."
+msgstr "Atlas sveta."
+
+#: kdemain.cpp:95
+#, kde-format
+msgid "(c) 2007-%1"
+msgstr "(c) 2007-%1"
+
+#: kdemain.cpp:100 kdemain.cpp:286
+#, kde-format
+msgid "Torsten Rahn"
+msgstr "Torsten Rahn"
+
+#: kdemain.cpp:101
+#, kde-format
+msgid "Developer and Original Author"
+msgstr "Vývojár a pôvodný autor"
+
+#: kdemain.cpp:103
+#, kde-format
+msgid "Bernhard Beschow"
+msgstr "Bernhard Beschow"
+
+#: kdemain.cpp:104
+#, kde-format
+msgid "WMS Support, Mobile, Performance"
+msgstr "Podpora WMS, mobilných technológii, vylepšený výkon"
+
+#: kdemain.cpp:106
+#, kde-format
+msgid "Thibaut Gridel"
+msgstr "Thibaut Gridel"
+
+#: kdemain.cpp:107
+#, kde-format
+msgid "Geodata"
+msgstr "Geoúdaje"
+
+#: kdemain.cpp:109
+#, kde-format
+msgid "Jens-Michael Hoffmann"
+msgstr "Jens-Michael Hoffmann"
+
+#: kdemain.cpp:110
+#, kde-format
+msgid "OpenStreetMap Integration, OSM Namefinder, Download Management"
+msgstr "Integrácia OpenStreetMap, OSM namefinder, správa sťahovania"
+
+#: kdemain.cpp:112
+#, kde-format
+msgid "Florian E&szlig;er"
+msgstr "Florian E&szlig;er"
+
+#: kdemain.cpp:113
+#, kde-format
+msgid "Elevation Profile"
+msgstr "Výškový profil"
+
+#: kdemain.cpp:115
+#, kde-format
+msgid "Wes Hardaker"
+msgstr "Wes Hardaker"
+
+#: kdemain.cpp:116
+#, kde-format
+msgid "APRS Plugin"
+msgstr "Modul APRS"
+
+#: kdemain.cpp:118 kdemain.cpp:202
+#, kde-format
+msgid "Bastian Holst"
+msgstr "Bastian Holst"
+
+#: kdemain.cpp:119
+#, kde-format
+msgid "Online Services support"
+msgstr "Podpora online služieb"
+
+#: kdemain.cpp:121 kdemain.cpp:172
+#, kde-format
+msgid "Guillaume Martres"
+msgstr "Guillaume Martres"
+
+#: kdemain.cpp:122
+#, kde-format
+msgid "Satellites"
+msgstr "Satelity"
+
+#: kdemain.cpp:124 kdemain.cpp:168
+#, kde-format
+msgid "Rene Kuettner"
+msgstr "Rene Kuettner"
+
+#: kdemain.cpp:125
+#, kde-format
+msgid "Satellites, Eclipses"
+msgstr "Satelity, zatmenia"
+
+#: kdemain.cpp:127
+#, kde-format
+msgid "Friedrich W. H. Kossebau"
+msgstr "Friedrich W. H. Kossebau"
+
+#: kdemain.cpp:128
+#, kde-format
+msgid "Plasma Integration, Bugfixes"
+msgstr "Plasma Integration, Bugfixes"
+
+#: kdemain.cpp:130
+#, kde-format
+msgid "Dennis Nienhüser"
+msgstr "Dennis Nienhüser"
+
+#: kdemain.cpp:131
+#, kde-format
+msgid "Routing, Navigation, Mobile"
+msgstr "Smerovanie, navigácia, mobil"
+
+#: kdemain.cpp:133
+#, kde-format
+msgid "Niko Sams"
+msgstr "Niko Sams"
+
+#: kdemain.cpp:134
+#, kde-format
+msgid "Routing, Elevation Profile"
+msgstr "Smerovanie, výškový profil"
+
+#: kdemain.cpp:136 kdemain.cpp:206
+#, kde-format
+msgid "Patrick Spendrin"
+msgstr "Patrick Spendrin"
+
+#: kdemain.cpp:137
+#, kde-format
+msgid "Core Developer: KML and Windows support"
+msgstr "Hlavný vývojár: KML a podpora systému Windows"
+
+#: kdemain.cpp:139
+#, kde-format
+msgid "Eckhart Wörner"
+msgstr "Eckhart Wörner"
+
+#: kdemain.cpp:140
+#, kde-format
+msgid "Bugfixes"
+msgstr "Oprava chýb"
+
+#: kdemain.cpp:145
+#, kde-format
+msgid "Inge Wallin"
+msgstr "Inge Wallin"
+
+#: kdemain.cpp:146
+#, kde-format
+msgid "Core Developer and Co-Maintainer"
+msgstr "Hlavný vývojár a správca"
+
+#: kdemain.cpp:148
+#, kde-format
+msgid "Henry de Valence"
+msgstr "Henry de Valence"
+
+#: kdemain.cpp:149
+#, kde-format
+msgid "Core Developer: Marble Runners, World-Clock Plasmoid"
+msgstr "Hlavný vývojár: Marble Runners, Plasmoid 'Svetové hodiny'"
+
+#: kdemain.cpp:151
+#, kde-format
+msgid "Pino Toscano"
+msgstr "Pino Toscano"
+
+#: kdemain.cpp:152
+#, kde-format
+msgid "Network plugins"
+msgstr "Sieťové moduly"
+
+#: kdemain.cpp:154
+#, kde-format
+msgid "Harshit Jain"
+msgstr "Harshit Jain"
+
+#: kdemain.cpp:155
+#, kde-format
+msgid "Planet filter"
+msgstr "Filter planét"
+
+#: kdemain.cpp:157
+#, kde-format
+msgid "Simon Edwards"
+msgstr "Simon Edwards"
+
+#: kdemain.cpp:158
+#, kde-format
+msgid "Marble Python Bindings"
+msgstr "Previazania Marble s Pythonom"
+
+#: kdemain.cpp:160
+#, kde-format
+msgid "Magnus Valle"
+msgstr "Magnus Valle"
+
+#: kdemain.cpp:161
+#, kde-format
+msgid "Historical Maps"
+msgstr "Historické mapy"
+
+#: kdemain.cpp:163
+#, kde-format
+msgid "Médéric Boquien"
+msgstr "Médéric Boquien"
+
+#: kdemain.cpp:164
+#, kde-format
+msgid "Astronomical Observatories"
+msgstr "Astronomické observatóriá"
+
+#: kdemain.cpp:169
+#, kde-format
+msgid ""
+"ESA Summer of Code in Space 2012 Project: Visualization of planetary "
+"satellites"
+msgstr ""
+"Projekt ESA Summer of Code in Space 2012: Vizualizácia satelitov planét"
+
+#: kdemain.cpp:173
+#, kde-format
+msgid ""
+"ESA Summer of Code in Space 2011 Project: Visualization of Satellite Orbits"
+msgstr ""
+"Projekt ESA Summer of Code in Space 2011: Vizualizácia obežných dráh "
+"satelitov"
+
+#: kdemain.cpp:178
+#, kde-format
+msgid "Konstantin Oblaukhov"
+msgstr "Konstantin Oblaukhov"
+
+#: kdemain.cpp:179
+#, kde-format
+msgid "Google Summer of Code 2011 Project: OpenStreetMap Vector Rendering"
+msgstr ""
+"Projekt Google Summer of Code 2011: Vektorové renderovanie OpenStreetMap"
+
+#: kdemain.cpp:182
+#, kde-format
+msgid "Daniel Marth"
+msgstr "Daniel Marth"
+
+#: kdemain.cpp:183
+#, kde-format
+msgid "Google Summer of Code 2011 Project: Marble Touch on MeeGo"
+msgstr "Projekt Google Summer of Code 2011: Marble Touch na MeeGo"
+
+#: kdemain.cpp:186
+#, kde-format
+msgid "Gaurav Gupta"
+msgstr "Gaurav Gupta"
+
+#: kdemain.cpp:187
+#, kde-format
+msgid "Google Summer of Code 2010 Project: Bookmarks"
+msgstr "Projekt Google Summer of Code 2010: Záložky"
+
+#: kdemain.cpp:190
+#, kde-format
+msgid "Harshit Jain "
+msgstr "Harshit Jain "
+
+#: kdemain.cpp:191
+#, kde-format
+msgid "Google Summer of Code 2010 Project: Time Support"
+msgstr "Projekt Google Summer of Code 2010: Podpora času"
+
+#: kdemain.cpp:194
+#, kde-format
+msgid "Siddharth Srivastava"
+msgstr "Siddharth Srivastava"
+
+#: kdemain.cpp:195
+#, kde-format
+msgid "Google Summer of Code 2010 Project: Turn-by-turn Navigation"
+msgstr "Projekt Google Summer of Code 2010: Kroková navigácia"
+
+#: kdemain.cpp:198 kdemain.cpp:218
+#, kde-format
+msgid "Andrew Manson"
+msgstr "Andrew Manson"
+
+#: kdemain.cpp:199
+#, kde-format
+msgid "Google Summer of Code 2009 Project: OSM Annotation"
+msgstr "Projekt Google Summer of Code 2009: Popisy OSM"
+
+#: kdemain.cpp:203
+#, kde-format
+msgid "Google Summer of Code 2009 Project: Online Services"
+msgstr "Projekt Google Summer of Code 2009: Online služby"
+
+#: kdemain.cpp:207
+#, kde-format
+msgid "Google Summer of Code 2008 Project: Vector Tiles for Marble"
+msgstr "Projekt Google Summer of Code 2008: Vektorové dlaždice pre Marble"
+
+#: kdemain.cpp:210
+#, kde-format
+msgid "Shashank Singh"
+msgstr "Shashank Singh"
+
+#: kdemain.cpp:211
+#, kde-format
+msgid ""
+"Google Summer of Code 2008 Project: Panoramio / Wikipedia -photo support for "
+"Marble"
+msgstr ""
+"Projekt Google Summer of Code 2008: Panoramio / Wikipedia - podpora fotiek "
+"pre Marble"
+
+#: kdemain.cpp:214
+#, kde-format
+msgid "Carlos Licea"
+msgstr "Carlos Licea"
+
+#: kdemain.cpp:215
+#, kde-format
+msgid ""
+"Google Summer of Code 2007 Project: Equirectangular Projection (\"Flat Map\")"
+msgstr ""
+"Projekt Google Summer of Code 2007: Ekvirektangulárna projekcia (\"Flat Map"
+"\")"
+
+#: kdemain.cpp:219
+#, kde-format
+msgid "Google Summer of Code 2007 Project: GPS Support for Marble"
+msgstr "Google Summer of Code 2007 Project: Podpora GPS pre Marble"
+
+#: kdemain.cpp:222
+#, kde-format
+msgid "Murad Tagirov"
+msgstr "Murad Tagirov"
+
+#: kdemain.cpp:223
+#, kde-format
+msgid "Google Summer of Code 2007 Project: KML Support for Marble"
+msgstr "Projekt Google Summer of Code 2007: Podpora KML pre Marble"
+
+#: kdemain.cpp:228
+#, kde-format
+msgid "Simon Schmeisser"
+msgstr "Simon Schmeisser"
+
+#: kdemain.cpp:229 kdemain.cpp:231 kdemain.cpp:233 kdemain.cpp:235
+#: kdemain.cpp:237 kdemain.cpp:239 kdemain.cpp:241 kdemain.cpp:243
+#: kdemain.cpp:245 kdemain.cpp:247 kdemain.cpp:249 kdemain.cpp:251
+#: kdemain.cpp:253 kdemain.cpp:255 kdemain.cpp:257 kdemain.cpp:259
+#: kdemain.cpp:261 kdemain.cpp:263 kdemain.cpp:265
+#, kde-format
+msgid "Development & Patches"
+msgstr "Vývoj a záplaty"
+
+#: kdemain.cpp:230
+#, kde-format
+msgid "Claudiu Covaci"
+msgstr "Claudiu Covaci"
+
+#: kdemain.cpp:232
+#, kde-format
+msgid "David Roberts"
+msgstr "David Roberts"
+
+#: kdemain.cpp:234
+#, kde-format
+msgid "Nikolas Zimmermann"
+msgstr "Nikolas Zimmermann"
+
+#: kdemain.cpp:236
+#, kde-format
+msgid "Jan Becker"
+msgstr "Jan Becker"
+
+#: kdemain.cpp:238
+#, kde-format
+msgid "Stefan Asserhäll"
+msgstr "Stefan Asserhäll"
+
+#: kdemain.cpp:240
+#, kde-format
+msgid "Laurent Montel"
+msgstr "Laurent Montel"
+
+#: kdemain.cpp:242
+#, kde-format
+msgid "Mayank Madan"
+msgstr "Mayank Madan"
+
+#: kdemain.cpp:244
+#, kde-format
+msgid "Prashanth Udupa"
+msgstr "Prashanth Udupa"
+
+#: kdemain.cpp:246
+#, kde-format
+msgid "Anne-Marie Mahfouf"
+msgstr "Anne-Marie Mahfouf"
+
+#: kdemain.cpp:248
+#, kde-format
+msgid "Josef Spillner"
+msgstr "Josef Spillner"
+
+#: kdemain.cpp:250
+#, kde-format
+msgid "Frerich Raabe"
+msgstr "Frerich Raabe"
+
+#: kdemain.cpp:252
+#, kde-format
+msgid "Frederik Gladhorn"
+msgstr "Frederik Gladhorn"
+
+#: kdemain.cpp:254
+#, kde-format
+msgid "Fredrik Höglund"
+msgstr "Fredrik Höglund"
+
+#: kdemain.cpp:256
+#, kde-format
+msgid "Albert Astals Cid"
+msgstr "Albert Astals Cid"
+
+#: kdemain.cpp:258
+#, kde-format
+msgid "Thomas Zander"
+msgstr "Thomas Zander"
+
+#: kdemain.cpp:260
+#, kde-format
+msgid "Joseph Wenninger"
+msgstr "Joseph Wenninger"
+
+#: kdemain.cpp:262
+#, kde-format
+msgid "Kris Thomsen"
+msgstr "Kris Thomsen"
+
+#: kdemain.cpp:264
+#, kde-format
+msgid "Daniel Molkentin"
+msgstr "Daniel Molkentin"
+
+#: kdemain.cpp:266
+#, kde-format
+msgid "Christophe Leske"
+msgstr "Christophe Leske"
+
+#: kdemain.cpp:267 kdemain.cpp:269 kdemain.cpp:271 kdemain.cpp:273
+#: kdemain.cpp:275 kdemain.cpp:277 kdemain.cpp:279 kdemain.cpp:281
+#: kdemain.cpp:283
+#, kde-format
+msgid "Platforms & Distributions"
+msgstr "Platformy a distribúcie"
+
+#: kdemain.cpp:268
+#, kde-format
+msgid "Sebastian Wiedenroth"
+msgstr "Sebastian Wiedenroth"
+
+#: kdemain.cpp:270
+#, kde-format
+msgid "Tim Sutton"
+msgstr "Tim Sutton"
+
+#: kdemain.cpp:272
+#, kde-format
+msgid "Christian Ehrlicher"
+msgstr "Christian Ehrlicher"
+
+#: kdemain.cpp:274
+#, kde-format
+msgid "Ralf Habacker"
+msgstr "Ralf Habacker"
+
+#: kdemain.cpp:276
+#, kde-format
+msgid "Steffen Joeris"
+msgstr "Steffen Joeris"
+
+#: kdemain.cpp:278
+#, kde-format
+msgid "Marcus Czeslinski"
+msgstr "Marcus Czeslinski"
+
+#: kdemain.cpp:280
+#, kde-format
+msgid "Marcus D. Hanwell"
+msgstr "Marcus D. Hanwell"
+
+#: kdemain.cpp:282
+#, kde-format
+msgid "Chitlesh Goorah"
+msgstr "Chitlesh Goorah"
+
+#: kdemain.cpp:284
+#, kde-format
+msgid "Nuno Pinheiro"
+msgstr "Nuno Pinheiro"
+
+#: kdemain.cpp:285 kdemain.cpp:287
+#, kde-format
+msgid "Artwork"
+msgstr "Grafický dizajn"
+
+#: kdemain.cpp:290
+#, kde-format
+msgid "Luis Silva"
+msgstr "Luis Silva"
+
+#: kdemain.cpp:291 kdemain.cpp:293 kdemain.cpp:295 kdemain.cpp:297
+#: kdemain.cpp:299 kdemain.cpp:301 kdemain.cpp:303 kdemain.cpp:305
+#: kdemain.cpp:307 kdemain.cpp:309
+#, kde-format
+msgid "Various Suggestions & Testing"
+msgstr "Rôzne návrhy a testovanie"
+
+#: kdemain.cpp:292
+#, kde-format
+msgid "Stefan Jordan"
+msgstr "Stefan Jordan"
+
+#: kdemain.cpp:294
+#, kde-format
+msgid "Robert Scott"
+msgstr "Robert Scott"
+
+#: kdemain.cpp:296
+#, kde-format
+msgid "Lubos Petrovic"
+msgstr "Lubos Petrovic"
+
+#: kdemain.cpp:298
+#, kde-format
+msgid "Benoit Sigoure"
+msgstr "Benoit Sigoure"
+
+#: kdemain.cpp:300
+#, kde-format
+msgid "Martin Konold"
+msgstr "Martin Konold"
+
+#: kdemain.cpp:302
+#, kde-format
+msgid "Matthias Welwarsky"
+msgstr "Matthias Welwarsky"
+
+#: kdemain.cpp:304
+#, kde-format
+msgid "Rainer Endres"
+msgstr "Rainer Endres"
+
+#: kdemain.cpp:306
+#, kde-format
+msgid "Ralf Gesellensetter"
+msgstr "Ralf Gesellensetter"
+
+#: kdemain.cpp:308
+#, kde-format
+msgid "Tim Alder"
+msgstr "Tim Alder"
+
+#: kdemain.cpp:310
+#, kde-format
+msgid "John Layt"
+msgstr "John Layt"
+
+#: kdemain.cpp:311
+#, kde-format
+msgid ""
+"Special thanks for providing an important source of inspiration by creating "
+"Marble's predecessor \"Kartographer\"."
+msgstr ""
+"Osobitné poďakovanie za vytvorenie dôležitého zdroja inšpirácie - aplikácie "
+"\"Kartographer\" - predchodcu Marble."
+
+#: kdemain.cpp:327
+#, kde-format
+msgid "Enable debug output"
+msgstr "Povoliť ladiaci výstup"
+
+#: kdemain.cpp:329
+#, kde-format
+msgid "Display OSM placemarks according to the level selected"
+msgstr "Zobraziť označenia miest OSM podľa vybranej úrovne"
+
+#: kdemain.cpp:331
+#, kde-format
+msgid "Make a time measurement to check performance"
+msgstr "Urobiť časový test merania na zistenie výkonu"
+
+#: kdemain.cpp:333
+#, kde-format
+msgid "Show frame rate"
+msgstr "Ukázať frekvenciu snímok"
+
+#: kdemain.cpp:335
+#, kde-format
+msgid "Show tile IDs"
+msgstr "Zobraziť ID dlaždice"
+
+#: kdemain.cpp:337
+#, kde-format
+msgid "Show time spent in each layer"
+msgstr "Zobraziť čas strávený v každej vrstve"
+
+#: kdemain.cpp:339
+#, kde-format
+msgid "Use a different directory <directory> which contains map data."
+msgstr "Použiť iný adresár <directory>, ktorý obsahuje mapové údaje."
+
+#: kdemain.cpp:341
+#, kde-format
+msgid "Do not use the interface optimized for small screens"
+msgstr "Použiť rozhranie prispôsobené pre malé displeje"
+
+#: kdemain.cpp:342
+#, kde-format
+msgid "Use the interface optimized for small screens"
+msgstr "Nepoužiť rozhranie prispôsobené pre malé displeje"
+
+#: kdemain.cpp:344
+#, kde-format
+msgid "Do not use the interface optimized for high resolutions"
+msgstr "Nepoužiť rozhranie prispôsobené pre vysoké rozlíšenia"
+
+#: kdemain.cpp:345
+#, kde-format
+msgid "Use the interface optimized for high resolutions"
+msgstr "Použiť rozhranie prispôsobené pre vysoké rozlíšenia"
+
+#: kdemain.cpp:347
+#, kde-format
+msgid "Show map at given lat lon <coordinates>"
+msgstr ""
+"Zobraziť mapu na danej súradnici zemepsinej šírky a dĺžky <coordinates>"
+
+#: kdemain.cpp:349
+#, kde-format
+msgid "Show map at given geo <uri>"
+msgstr "Zobraziť mapu na danej geo <uri>"
+
+#: kdemain.cpp:351
+#, kde-format
+msgid "Set the distance of the observer to the globe (in km)"
+msgstr "Nastaviť vzdialenosť pozorovateľa od glóbusu (v km)"
+
+#: kdemain.cpp:353
+#, kde-format
+msgid "Use map <id> (e.g. \"earth/openstreetmap/openstreetmap.dgml\")"
+msgstr "Použiť <id> mapy (t.j. \"earth/openstreetmap/openstreetmap.dgml\")"
+
+#: kdemain.cpp:355
+#, kde-format
+msgid "One or more placemark files to be opened"
+msgstr "Otvoriť jeden alebo viac súborov so značkami miest"
+
+#. i18n: ectx: label, entry, group (Time)
+#: marble.kcfg:58
+#, kde-format
+msgid "The date and time of marble clock"
+msgstr "Dátum a čas hodín v Marble"
+
+#. i18n: ectx: label, entry, group (Time)
+#: marble.kcfg:61
+#, kde-format
+msgid "The speed of marble clock"
+msgstr "Rýchlosť hodín v Marble"
+
+#. i18n: ectx: label, entry, group (View)
+#: marble.kcfg:107
+#, kde-format
+msgid "The unit chosen to measure distances."
+msgstr "Jednotky v ktorých sa budú merať vzdialenosti."
+
+#. i18n: ectx: label, entry, group (View)
+#: marble.kcfg:115
+#, kde-format
+msgid "The unit chosen to measure angles."
+msgstr "Jednotky v ktorých sa budú merať uhly."
+
+#. i18n: ectx: label, entry, group (View)
+#: marble.kcfg:124
+#, kde-format
+msgid "The quality at which a still map gets painted."
+msgstr "Kvalita v ktorej budú vykresľované statické mapy"
+
+#. i18n: ectx: label, entry, group (View)
+#: marble.kcfg:135
+#, kde-format
+msgid "The quality at which an animated map gets painted."
+msgstr "Kvalita v ktorej budú vykresľované animované mapy."
+
+#. i18n: ectx: label, entry, group (View)
+#: marble.kcfg:146
+#, kde-format
+msgid "The localization of the labels."
+msgstr "Lokalizácia popisov v mape."
+
+#. i18n: ectx: label, entry (mapFont), group (View)
+#: marble.kcfg:155
+#, kde-format
+msgid "The general font used on the map."
+msgstr "Štandardné písmo použité v mape."
+
+#. i18n: ectx: label, entry (lastFileOpenDir), group (View)
+#: marble.kcfg:159
+#, kde-format
+msgid "The last directory that was opened by File->Open."
+msgstr "Naposledy otvorený adresár cez Súbor->Otvoriť."
+
+#. i18n: ectx: label, entry, group (Navigation)
+#: marble.kcfg:179
+#, kde-format
+msgid "The behaviour of the planet's axis on mouse dragging."
+msgstr "Správanie sa osí planét pri ťahaní myšou."
+
+#. i18n: ectx: label, entry, group (Navigation)
+#: marble.kcfg:187
+#, kde-format
+msgid "The location shown on application startup."
+msgstr "Miesto zobrazené pri štarte aplikácie."
+
+#. i18n: ectx: label, entry, group (Navigation)
+#: marble.kcfg:201
+#, kde-format
+msgid "Display animation on voyage to target."
+msgstr "Animovať cestu k cieľu."
+
+#. i18n: ectx: label, entry, group (Navigation)
+#: marble.kcfg:205
+#, kde-format
+msgid "The external OpenStreetMap editor application"
+msgstr "Externá aplikácia editoru OpenStreetMap"
+
+#. i18n: ectx: label, entry, group (Cache)
+#: marble.kcfg:211
+#, kde-format
+msgid "Cache for tiles reserved in the physical memory."
+msgstr "Vyrovnávacia pamäť na dlaždice vyčlenená z fyzickej pamäti."
+
+#. i18n: ectx: label, entry, group (Cache)
+#: marble.kcfg:217
+#, kde-format
+msgid "Maximum space on the hard disk that can be used to store tiles."
+msgstr ""
+"Maximálny priestor na pevnom disku, ktorý môže byť použitý na ukladanie "
+"dlaždíc."
+
+#. i18n: ectx: label, entry (proxyUrl), group (Cache)
+#: marble.kcfg:223
+#, kde-format
+msgid "URL for the proxy server."
+msgstr "URL proxy servera."
+
+#. i18n: ectx: label, entry, group (Cache)
+#: marble.kcfg:227
+#, kde-format
+msgid "Port for the proxy server."
+msgstr "Port proxy servera."
+
+#. i18n: ectx: label, entry (proxyUser), group (Cache)
+#: marble.kcfg:233
+#, kde-format
+msgid "Username for authorization."
+msgstr "Meno používateľa na overenie."
+
+#. i18n: ectx: label, entry (proxyPass), group (Cache)
+#: marble.kcfg:236
+#, kde-format
+msgid "Password for authorization."
+msgstr "Heslo na overenie."
+
+#. i18n: ectx: label, entry (proxyHttp), group (Cache)
+#: marble.kcfg:239
+#, kde-format
+msgid "Proxy type is HTTP"
+msgstr "Typ proxy je HTTP"
+
+#. i18n: ectx: label, entry (proxySocks5), group (Cache)
+#: marble.kcfg:250
+#, kde-format
+msgid "Proxy type is Socks5"
+msgstr "Typ proxy je Socks5"
+
+#. i18n: ectx: label, entry (proxyAuth), group (Cache)
+#: marble.kcfg:254
+#, kde-format
+msgid "Proxy requires Authentication"
+msgstr "Proxy vyžaduje overenie"
+
+#. i18n: ectx: label, entry (activePositionTrackingPlugin), group (Plugins)
+#: marble.kcfg:260
+#, kde-format
+msgid "The position tracking plugin used to determine the current location"
+msgstr "Modul na zisťovanie aktuálnej polohy"
+
+#: marble_part.cpp:102
+#, kde-format
+msgid "Position: %1"
+msgstr "Poloha: %1"
+
+#: marble_part.cpp:103
+#, kde-format
+msgid "Altitude: %1"
+msgstr "Výška: %1"
+
+#: marble_part.cpp:104
+#, kde-format
+msgid "Tile Zoom Level: %1"
+msgstr "Úroveň priblíženia dlaždice: %1"
+
+#: marble_part.cpp:105
+#, kde-format
+msgid "Time: %1"
+msgstr "Čas: %1"
+
+#: marble_part.cpp:167
+#, kde-format
+msgid ""
+"Sorry, unable to open '%1':\n"
+"'%2'"
+msgstr ""
+"Prepáčte, nemôžem otvoriť '%1':\n"
+"'%2'"
+
+#: marble_part.cpp:168
+#, kde-format
+msgid "File not readable"
+msgstr "Súbor nečitateľný"
+
+#: marble_part.cpp:214
+#, kde-format
+msgid "marble_part"
+msgstr "marble_part"
+
+#: marble_part.cpp:217
+#, kde-format
+msgid "A Virtual Globe"
+msgstr "Virtuálny glóbus"
+
+#: marble_part.cpp:231
+#, kde-format
+msgid "Sorry, unable to open '%1'. The file is not accessible."
+msgstr "Prepáčte, nemôžem otvoriť '%1'. Súbor nie je prístupný."
+
+#: marble_part.cpp:232
+#, kde-format
+msgid "File not accessible"
+msgstr "Súbor neprístupný"
+
+#: marble_part.cpp:253
+#, kde-format
+msgid "All Supported Files"
+msgstr "Všetky podporované súbory"
+
+#: marble_part.cpp:259
+#, kde-format
+msgctxt "@title:window"
+msgid "Open File"
+msgstr "Otvoriť súbor"
+
+#: marble_part.cpp:276
+#, kde-format
+msgctxt "@title:window"
+msgid "Export Map"
+msgstr "Export mapy"
+
+#: marble_part.cpp:277
+#, kde-format
+msgid "Images *.jpg *.png"
+msgstr "Obrázky *.jpg *.png"
+
+#: marble_part.cpp:291
+#, kde-format
+msgctxt "Application name"
+msgid "Marble"
+msgstr "Marble"
+
+#: marble_part.cpp:292
+#, kde-format
+msgid "An error occurred while trying to save the file.\n"
+msgstr "Pri ukladaní do súboru nastala chyba.\n"
+
+#: marble_part.cpp:483
+#, kde-format
+msgid "Unnamed"
+msgstr "Nepomenované"
+
+#: marble_part.cpp:714
+#, kde-format
+msgctxt "Action for downloading an entire region of a map"
+msgid "Download Region..."
+msgstr "Stiahnuť oblasť..."
+
+#: marble_part.cpp:728
+#, kde-format
+msgctxt "Action for saving the map to a file"
+msgid "&Export Map..."
+msgstr "&Exportovať mapu..."
+
+#: marble_part.cpp:737
+#, kde-format
+msgctxt "Action for toggling offline mode"
+msgid "&Work Offline"
+msgstr "&Pracovať offline"
+
+#: marble_part.cpp:747
+#, kde-format
+msgctxt "Action for copying the map to the clipboard"
+msgid "&Copy Map"
+msgstr "&Kopírovať mapu"
+
+#: marble_part.cpp:754
+#, kde-format
+msgctxt "Action for copying the coordinates to the clipboard"
+msgid "C&opy Coordinates"
+msgstr "Sk&opírovať súradnice"
+
+#: marble_part.cpp:762
+#, kde-format
+msgctxt "Action for opening a file"
+msgid "&Open..."
+msgstr "&Otvoriť..."
+
+#: marble_part.cpp:769
+#, kde-format
+msgctxt "Action for downloading maps (GHNS)"
+msgid "Download Maps..."
+msgstr "Stiahnuť mapy..."
+
+#: marble_part.cpp:772
+#, kde-format
+msgctxt "Status tip"
+msgid "Download new maps"
+msgstr "Stiahne nové mapy"
+
+#: marble_part.cpp:778
+#, kde-format
+msgctxt "Action for creating new maps"
+msgid "&Create a New Map..."
+msgstr "&Vytvoriť novú mapu..."
+
+#: marble_part.cpp:783
+#, kde-format
+msgctxt "Status tip"
+msgid "A wizard guides you through the creation of your own map theme."
+msgstr "Sprievodca, ktorý vás prevedie vytvorením vlastnej mapovej témy."
+
+#: marble_part.cpp:810
+#, kde-format
+msgctxt "Action for toggling clouds"
+msgid "&Clouds"
+msgstr "&Oblaky"
+
+#: marble_part.cpp:817
+#, kde-format
+msgctxt "Action for sun control dialog"
+msgid "S&un Control..."
+msgstr "Ovládanie Slnka..."
+
+#: marble_part.cpp:827
+#, kde-format
+msgctxt "Action for time control dialog"
+msgid "&Time Control..."
+msgstr "Ovládanie čas&u..."
+
+#: marble_part.cpp:836
+#, kde-format
+msgctxt "Action for locking float items on the map"
+msgid "Lock Position"
+msgstr "Zamknúť polohu"
+
+#: marble_part.cpp:847
+#, kde-format
+msgid "Show Shadow"
+msgstr "Zobraziť tieň"
+
+#: marble_part.cpp:850
+#, kde-format
+msgid "Hide Shadow"
+msgstr "Skryť tieň"
+
+#: marble_part.cpp:851
+#, kde-format
+msgid "Shows and hides the shadow of the sun"
+msgstr "Zobrazuje a skrýva tieň Slnka"
+
+#: marble_part.cpp:855
+#, kde-format
+msgid "Show sun icon on the Sub-Solar Point"
+msgstr "Zobraziť ikonu Slnka na subsolárnom bode"
+
+#: marble_part.cpp:857
+#, kde-format
+msgid "Hide sun icon on the Sub-Solar Point"
+msgstr "Skryť ikonu Slnka na subsolárnom bode"
+
+#: marble_part.cpp:858
+#, kde-format
+msgid "Show sun icon on the sub-solar point"
+msgstr "Zobraziť ikonu Slnka na subsolárnom bode"
+
+#: marble_part.cpp:863
+#, kde-format
+msgid "Lock Globe to the Sub-Solar Point"
+msgstr "Zamknúť glóbus na subsolárnom bode"
+
+#: marble_part.cpp:865
+#, kde-format
+msgid "Unlock Globe to the Sub-Solar Point"
+msgstr "Odokmnúť glóbus na subsolárnom bode"
+
+#: marble_part.cpp:866
+#, kde-format
+msgid "Lock globe to the sub-solar point"
+msgstr "Zamknúť glóbus na subsolárnom bode"
+
+#: marble_part.cpp:881
+#, kde-format
+msgctxt "Add Bookmark"
+msgid "Add &Bookmark..."
+msgstr "Pridať záložku..."
+
+#: marble_part.cpp:889
+#, kde-format
+msgctxt "Show Bookmarks"
+msgid "Show &Bookmarks"
+msgstr "Zobraziť záložky"
+
+#: marble_part.cpp:890
+#, kde-format
+msgid "Show or hide bookmarks in the map"
+msgstr "Zobraziť alebo skryť záložky v mape"
+
+#: marble_part.cpp:898
+#, kde-format
+msgid "&Set Home Location"
+msgstr "Nastaviť domovskú polohu"
+
+#: marble_part.cpp:905
+#, kde-format
+msgctxt "Manage Bookmarks"
+msgid "&Manage Bookmarks..."
+msgstr "Spravovať záložky..."
+
+#: marble_part.cpp:917
+#, kde-format
+msgctxt "Edit the map in an external application"
+msgid "&Edit Map..."
+msgstr "&Upraviť mapu..."
+
+#: marble_part.cpp:925
+#, kde-format
+msgid "&Record Movie"
+msgstr "Nahrať film"
+
+#: marble_part.cpp:927
+#, kde-format
+msgid "Records a movie of the globe"
+msgstr "Nahrá film zemegule"
+
+#: marble_part.cpp:933
+#, kde-format
+msgid "&Stop Recording"
+msgstr "Zastaviť nahrávanie"
+
+#: marble_part.cpp:935
+#, kde-format
+msgid "Stop recording a movie of the globe"
+msgstr "Zastaviť záznam filmu glóbusu"
+
+#: marble_part.cpp:1287
+#, kde-format
+msgctxt "Action for toggling"
+msgid "Show Position"
+msgstr "Zobraziť polohu"
+
+#: marble_part.cpp:1289
+#, kde-format
+msgctxt "Action for toggling"
+msgid "Show Date and Time"
+msgstr "Zobraziť čas a dátum"
+
+#: marble_part.cpp:1291
+#, kde-format
+msgctxt "Action for toggling"
+msgid "Show Altitude"
+msgstr "Zobraziť výšku"
+
+#: marble_part.cpp:1294
+#, kde-format
+msgctxt "Action for toggling"
+msgid "Show Tile Zoom Level"
+msgstr "Ukázať úroveň priblíženia dlaždice"
+
+#: marble_part.cpp:1296
+#, kde-format
+msgctxt "Action for toggling"
+msgid "Show Download Progress Bar"
+msgstr "Zobraziť ukazovateľ priebehu sťahovania"
+
+#: marble_part.cpp:1391
+#, kde-format
+msgid "View"
+msgstr "Pohľad"
+
+#: marble_part.cpp:1402
+#, kde-format
+msgid "Navigation"
+msgstr "Ovládanie"
+
+#: marble_part.cpp:1413
+#, kde-format
+msgid "Cache & Proxy"
+msgstr "Vyrovnávacia pamäť a proxy"
+
+#: marble_part.cpp:1426
+#, kde-format
+msgid "Date & Time"
+msgstr "Dátum a čas"
+
+#: marble_part.cpp:1434
+#, kde-format
+msgid "Synchronization"
+msgstr "Synchronizácia"
+
+#: marble_part.cpp:1447
+#, kde-format
+msgid "Routing"
+msgstr "Navigácia"
+
+#: marble_part.cpp:1455
+#, kde-format
+msgid "Plugins"
+msgstr "Moduly"
+
+#. i18n: ectx: Menu (file)
+#: marble_part.rc:6 marbleui.rc:5
+#, kde-format
+msgid "&File"
+msgstr "&Súbor"
+
+#. i18n: ectx: Menu (edit)
+#: marble_part.rc:21 marbleui.rc:14
+#, kde-format
+msgid "&Edit"
+msgstr "&Upraviť"
+
+#. i18n: ectx: Menu (view)
+#: marble_part.rc:31 marbleui.rc:18
+#, kde-format
+msgid "&View"
+msgstr "&Zobraziť"
+
+#. i18n: ectx: Menu (infoboxes)
+#: marble_part.rc:36
+#, kde-format
+msgid "&Info Boxes"
+msgstr "&Infopanely"
+
+#. i18n: ectx: Menu (onlineservices)
+#: marble_part.rc:42
+#, kde-format
+msgid "&Online Services"
+msgstr "&Online služby"
+
+#. i18n: ectx: Menu (settings)
+#: marble_part.rc:55 marbleui.rc:31
+#, kde-format
+msgid "&Settings"
+msgstr "&Nastavenia"
+
+#. i18n: ectx: Menu (panels)
+#: marble_part.rc:59
+#, kde-format
+msgid "&Panels"
+msgstr "&Panely"
+
+#. i18n: ectx: Menu (viewSize)
+#: marble_part.rc:65
+#, kde-format
+msgid "&View Size"
+msgstr "Veľkosť zobrazenia"
+
+#. i18n: ectx: Menu (bookmarks)
+#: marble_part.rc:73 marbleui.rc:29
+#, kde-format
+msgid "&Bookmarks"
+msgstr "&Záložky"
+
+#. i18n: ectx: ToolBar (mainToolBar)
+#: marble_part.rc:84 marbleui.rc:36
+#, kde-format
+msgid "Main Toolbar"
+msgstr "Hlavný panel"
+
+#. i18n: ectx: ToolBar (pluginToolBar)
+#: marble_part.rc:97
+#, kde-format
+msgid "Edit Toolbar"
+msgstr "Panel Upraviť"
+
+#~ msgid "The graphics system that is used by Qt to render the graphics."
+#~ msgstr "Grafický systém ktorý použije Qt na vykresľovanie grafiky."
+
+#~ msgid "Native"
+#~ msgstr "Natívny"
+
+#~ msgid "Native (X11)"
+#~ msgstr "Natívny (X11)"
+
+#~ msgid "Native (Mac OS X Core Graphics)"
+#~ msgstr "Natívny (Mac OS X systémová grafika)"
+
+#~ msgid ""
+#~ "You have decided to run Marble with a different graphics system.\n"
+#~ "For this change to become effective, Marble has to be restarted.\n"
+#~ "Please close the application and start Marble again."
+#~ msgstr ""
+#~ "Rozhodli ste sa spustiť Marble v inom grafickom systéme.\n"
+#~ "Zmena bude účinná až po opätovnom spustení aplikácie Marble.\n"
+#~ "Aplikáciu Marble zatvorte a znova spustite ."
+
+#~ msgid "Graphics System Change"
+#~ msgstr "Zmena grafického systému"
+
+#~ msgid "Night Sky"
+#~ msgstr "Nočná obloha"
+
+#~ msgid ""
+#~ "<p>The <i>night sky</i>.</p><p>Displays the stars and constellations at "
+#~ "night.</p>"
+#~ msgstr ""
+#~ "<p><i>Nočná obloha</i>.</p><p>Zobrazuje hviezdy a súhvezdia v noci.</p>"
+
+#~ msgid "Mountain"
+#~ msgstr "Pohorie"
+
+#~ msgid "Volcano"
+#~ msgstr "Sopka"
+
+#~ msgid "Geographic Pole"
+#~ msgstr "Zemepisný pól"
+
+#~ msgid "Magnetic Pole"
+#~ msgstr "Magnetický pól"
+
+#~ msgid "Airport"
+#~ msgstr "Letisko"
+
+#~ msgid "Shipwreck"
+#~ msgstr "Vrak lode"
+
+#~ msgid "Astronomical Observatory"
+#~ msgstr "Astronomické observatórium"
+
+#~ msgid ""
+#~ "<p>The moon.</p><p>The map is based on data from the Clementine Moon "
+#~ "mission (UVVIS Basemap Mosaic). Credits: NASA/SDIO, Courtesy <a href="
+#~ "\"http://astrogeology.usgs.gov\">USGS Astrogeology Research Program</a></"
+#~ "p>"
+#~ msgstr ""
+#~ "<p>Mesiac.</p><p>Mapa je vytvorená z údajov z Clementine Moon mission "
+#~ "(UVVIS Basemap Mosaic). Zdroj: NASA/SDIO, Courtesy <a href=\"http://"
+#~ "astrogeology.usgs.gov\">Astrogeologický výskumný program inštitútu USGS</"
+#~ "a></p>"
+
+#~ msgid "Explore the Moon"
+#~ msgstr "Preskúmať Mesiac"
+
+#~ msgid "Landing Sites"
+#~ msgstr "Miesta pristátia"
+
+#~ msgid "Craters"
+#~ msgstr "Krátery"
+
+#~ msgid "Maria"
+#~ msgstr "Mesačné moria"
+
+#~ msgid "Other features"
+#~ msgstr "Iné objekty"
+
+#~ msgid ""
+#~ "<a href=\"tour://moon/clementine/tour.kml\">Play a tour of different "
+#~ "landing sites.</a>"
+#~ msgstr ""
+#~ "<a href=\"tour://moon/clementine/tour.kml\">Hrať cestu inými pristátiami."
+#~ "</a>"
+
+#~ msgid "Manned landing site"
+#~ msgstr "Miesto pristátia s ľudskou posádkou"
+
+#~ msgid "Robotic rover"
+#~ msgstr "Robotické vozidlo"
+
+#~ msgid "Unmanned soft landing"
+#~ msgstr "Mäkké pristátie bez ľudskej posádky"
+
+#~ msgid "Unmanned hard landing"
+#~ msgstr "Tvrdé pristátie bez ľudskej posádky"
+
+#~ msgid "Crater, impact crater"
+#~ msgstr "Kráter, dopadový kráter"
+
+#~ msgid "Mons, mountain"
+#~ msgstr "Vrch, pohorie"
+
+#~ msgid "Vallis, valley"
+#~ msgstr "Údolie, kaňon"
+
+#~ msgid "Selenographic Pole"
+#~ msgstr "Mesačný pól"
+
+#~ msgid "Plain Map"
+#~ msgstr "Jednoduchá mapa"
+
+#~ msgid ""
+#~ "<p>A <i>plain map</i>.</p><p>It uses vector lines to mark coastlines and "
+#~ "country borders, etc...</p>"
+#~ msgstr ""
+#~ "<p><i>Jednoduchá mapa</i>.</p><p>Využíva vektorové línie na zobrazenie "
+#~ "pobrežnej čiary, štátnych hraníc atď.</p>"
+
+#~ msgid "Urban Areas"
+#~ msgstr "Mestské oblasti"
+
+#~ msgid "Boundaries"
+#~ msgstr "Hranice"
+
+#~ msgid "Water Bodies"
+#~ msgstr "Vodstvo"
+
+#~ msgid "Ice and Glaciers"
+#~ msgstr "Ľad a ľadovce"
+
+#~ msgid "International"
+#~ msgstr "Medzinárodné"
+
+#~ msgid "State"
+#~ msgstr "Štátne"
+
+#~ msgid "Disputed Areas"
+#~ msgstr "Sporné oblasti"
+
+#~ msgid "Maritime Borders"
+#~ msgstr "Námorné hranice"
+
+#~ msgid "Lake"
+#~ msgstr "Jazero"
+
+#~ msgid "Historic Lake"
+#~ msgstr "Historické jazero"
+
+#~ msgid "Playa"
+#~ msgstr "Pláž"
+
+#~ msgid "River"
+#~ msgstr "Rieka"
+
+#~ msgid "Glaciers"
+#~ msgstr "Ľadovce"
+
+#~ msgid "Antarctic Iceshelves"
+#~ msgstr "Antarktické ľadovcové šelfy"
+
+#~ msgid "Temperature (July)"
+#~ msgstr "Teplota (júl)"
+
+#~ msgid "A map which shows the average temperature in July."
+#~ msgstr "Mapa zobrazujúca priemerné júlové teploty."
+
+#~ msgid "42&deg;C"
+#~ msgstr "42&deg;C"
+
+#~ msgid "32&deg;C"
+#~ msgstr "32&deg;C"
+
+#~ msgid "23&deg;C"
+#~ msgstr "23&deg;C"
+
+#~ msgid "12&deg;C"
+#~ msgstr "12&deg;C"
+
+#~ msgid "1&deg;C"
+#~ msgstr "1&deg;C"
+
+#~ msgid "-10&deg;C"
+#~ msgstr "-10&deg;C"
+
+#~ msgid "-21&deg;C"
+#~ msgstr "-21&deg;C"
+
+#~ msgid "-32&deg;C"
+#~ msgstr "-32&deg;C"
+
+#~ msgid "-41&deg;C"
+#~ msgstr "-41&deg;C"
+
+#~ msgid "-69&deg;C"
+#~ msgstr "-69&deg;C"
+
+#~ msgid "Earth at Night"
+#~ msgstr "Zem v noci"
+
+#~ msgid ""
+#~ "This image of <i>Earth's city lights</i> was created with data from the "
+#~ "Defense Meteorological Satellite Program (DMSP) Operational Linescan "
+#~ "System (OLS)."
+#~ msgstr ""
+#~ "Obrázok <i>svetiel miest zo Zeme</i> bol vytvorený z údajov Defense "
+#~ "Meteorological Satellite Program (DMSP) Operational Linescan System (OLS)."
+
+#~ msgid "Surface"
+#~ msgstr "Povrch"
+
+#~ msgid "Light terrain"
+#~ msgstr "Svetlý tetén"
+
+#~ msgid "Dark terrain"
+#~ msgstr "Tmavý terén"
+
+#~ msgid "Water"
+#~ msgstr "Vodstvo"
+
+#~ msgid "Atlas"
+#~ msgstr "Atlas"
+
+#~ msgid ""
+#~ "<p>A <i>classic topographic map</i>.</p><p>It uses vector lines to mark "
+#~ "coastlines, country borders etc. and bitmap graphics to create the height "
+#~ "relief.</p>"
+#~ msgstr ""
+#~ "<p><i>Klasická topografická mapa</i>.</p><p>Využíva vektorové línie na "
+#~ "zobrazenie pobrežnej čiary, štátnych hraníc atď. a rastrovú grafiku na "
+#~ "vytvorenie výškového reliéfu.</p>"
+
+#~ msgid "Relief"
+#~ msgstr "Reliéf"
+
+#~ msgid "Elevation"
+#~ msgstr "Výškové stupne"
+
+#~ msgid "7000 m"
+#~ msgstr "7000 m"
+
+#~ msgid "5000 m"
+#~ msgstr "5000 m"
+
+#~ msgid "3500 m"
+#~ msgstr "3500 m"
+
+#~ msgid "2000 m"
+#~ msgstr "2000 m"
+
+#~ msgid "1000 m"
+#~ msgstr "1000 m"
+
+#~ msgid "500 m"
+#~ msgstr "500 m"
+
+#~ msgid "200 m"
+#~ msgstr "200 m"
+
+#~ msgid "50 m"
+#~ msgstr "50 m"
+
+#~ msgid "0 m"
+#~ msgstr "0 m"
+
+#~ msgid "0 m (Water)"
+#~ msgstr "0 m (vodná hladina)"
+
+#~ msgid "-50 m"
+#~ msgstr "-50 m"
+
+#~ msgid "-200 m"
+#~ msgstr "-200 m"
+
+#~ msgid "-2000 m"
+#~ msgstr "-2000 m"
+
+#~ msgid "-4000 m"
+#~ msgstr "-4000 m"
+
+#~ msgid "-6500 m"
+#~ msgstr "-6500 m"
+
+#~ msgid "-11000 m"
+#~ msgstr "-11000 m"
+
+#~ msgid "Temperature (December)"
+#~ msgstr "Teploty (december)"
+
+#~ msgid "A map which shows the average temperature in December."
+#~ msgstr "Mapa zobrazujúca priemerné decembrové teploty."
+
+#~ msgid "Vector OSM"
+#~ msgstr "Vektorové OSM"
+
+#~ msgid ""
+#~ "<p>A <i>global roadmap</i> created by the OpenStreetMap (OSM) project.</"
+#~ "p><p>OSM is an open community which creates free editable maps. The OSM "
+#~ "data was rendered using Mapnik.</p>"
+#~ msgstr ""
+#~ "<p><i>Mapa ulíc</i> vytvorená projektom OpenStreetMap (OSM).</p><p>OSM je "
+#~ "otvorená komunita, ktorá vytvára voľne editovateľné mapy. Údaje z OSM sú "
+#~ "vykresľované s použitím toolkitu Mapnik.</p>"
+
+#~ msgid "OSM Bitmap Tiles"
+#~ msgstr "Bitmapové dlaždice OSM"
+
+#~ msgid "Explore the Earth"
+#~ msgstr "Preskúmať Zem"
+
+#~ msgid "Hillshading"
+#~ msgstr "Tieňovanie reliéfu"
+
+#~ msgid "Transportation"
+#~ msgstr "Doprava"
+
+#~ msgid "Areas"
+#~ msgstr "Plochy"
+
+#~ msgid "Education"
+#~ msgstr "Vzdelávanie"
+
+#~ msgid "Financial"
+#~ msgstr "Finančné"
+
+#~ msgid "Healthcare"
+#~ msgstr "Zdravotná starostlivosť"
+
+#~ msgid "Entertainment"
+#~ msgstr "Zábava"
+
+#~ msgid "Public Buildings"
+#~ msgstr "Verejné budovy"
+
+#~ msgid "Accommodation"
+#~ msgstr "Ubytovanie"
+
+#~ msgid "Emergency"
+#~ msgstr "Nebezpečenstvo"
+
+#~ msgid "Historic"
+#~ msgstr "Historické"
+
+#~ msgid "Food and Drinks"
+#~ msgstr "Jedná a nápoje"
+
+#~ msgid "Shop"
+#~ msgstr "Obchod"
+
+#~ msgid ""
+#~ "<a href=\"tour://earth/openstreetmap/tour.kml\">Play a tour of popular "
+#~ "places.</a>"
+#~ msgstr ""
+#~ "<a href=\"tour://moon/clementine/tour.kml\">Hrať cestu inými populárnych "
+#~ "miest.</a>"
+
+#~ msgid "Motorway"
+#~ msgstr "Diaľnica"
+
+#~ msgid "Trunk road"
+#~ msgstr "Rýchlostná komunikácia"
+
+#~ msgid "Primary road"
+#~ msgstr "Hlavná cesta"
+
+#~ msgid "Secondary road"
+#~ msgstr "Vedľajšia cesta"
+
+#~ msgid "Unclassified road"
+#~ msgstr "Ostatné cesty"
+
+#~ msgid "Unsurfaced road"
+#~ msgstr "Nespevnená cesta"
+
+#~ msgid "Track"
+#~ msgstr "Lesná alebo poľná cesta"
+
+#~ msgid "Byway"
+#~ msgstr "Byway (len vo Veľkej Británii)"
+
+#~ msgid "Bridleway"
+#~ msgstr "Cesty pre kone"
+
+#~ msgid "Cycleway"
+#~ msgstr "Cycklocesta"
+
+#~ msgid "Footway"
+#~ msgstr "Chodník"
+
+#~ msgid "Railway station"
+#~ msgstr "Železničná stanica"
+
+#~ msgid "Railway"
+#~ msgstr "Železnica"
+
+#~ msgid "Subway"
+#~ msgstr "Metro"
+
+#~ msgid "Lightrail, tram"
+#~ msgstr "Rýchlodráha, električková trať"
+
+#~ msgid "Airport runway, taxiway"
+#~ msgstr "Pristávacia/vzletová dráha, vedľajšia dráha"
+
+#~ msgid "Airport apron, terminal"
+#~ msgstr "Parkovisko lietadiel, terminál"
+
+#~ msgid "Administrative boundary"
+#~ msgstr "Administratívna hranica"
+
+#~ msgid "Bridge"
+#~ msgstr "Most"
+
+#~ msgid "Tunnel"
+#~ msgstr "Tunel"
+
+#~ msgid "Forest"
+#~ msgstr "Hospodársky les"
+
+#~ msgid "Wood"
+#~ msgstr "Ochranný les"
+
+#~ msgid "Golf course"
+#~ msgstr "Golfové ihrisko"
+
+#~ msgid "Park"
+#~ msgstr "Park"
+
+#~ msgid "Residential Area"
+#~ msgstr "Obytná zóna"
+
+#~ msgid "Tourist attraction"
+#~ msgstr "Turisticky zaujímavé miesto"
+
+#~ msgid "Common, meadow"
+#~ msgstr "Lúka, iná zeleň"
+
+#~ msgid "Retail area"
+#~ msgstr "Obchodná zóna"
+
+#~ msgid "Industrial Area"
+#~ msgstr "Priemyselná zóna"
+
+#~ msgid "Commercial Area"
+#~ msgstr "Kancelárske priestory"
+
+#~ msgid "Heathland"
+#~ msgstr "Vresovisko"
+
+#~ msgid "Lake, reservoir"
+#~ msgstr "Jazero, priehrada"
+
+#~ msgid "Farm"
+#~ msgstr "Farma"
+
+#~ msgid "Brownfield site"
+#~ msgstr "Tzv. hnedé plochy (miesto pre novú výstavbu, po zbúraní starej)"
+
+#~ msgid "Cemetery"
+#~ msgstr "Cintorín"
+
+#~ msgid "Allotments"
+#~ msgstr "Záhradkárska kolónia"
+
+#~ msgid "Sports pitch"
+#~ msgstr "Športové ihriská"
+
+#~ msgid "Sports centre"
+#~ msgstr "Športové centrum"
+
+#~ msgid "Nature reserve"
+#~ msgstr "Prírodná rezervácia"
+
+#~ msgid "Military area"
+#~ msgstr "Vojenský priestor"
+
+#~ msgid "School, university"
+#~ msgstr "Škola, univerzita"
+
+#~ msgid "Significant Building"
+#~ msgstr "Výrazná budova"
+
+#~ msgid "Summit, peak"
+#~ msgstr "Vrchol, vyvýšenina"
+
+#~ msgid "College"
+#~ msgstr "Vysoká škola"
+
+#~ msgid "Kindergarten"
+#~ msgstr "Materská škôlka"
+
+#~ msgid "Library"
+#~ msgstr "Knižnica"
+
+#~ msgid "School"
+#~ msgstr "Škola"
+
+#~ msgid "University"
+#~ msgstr "Univerzita"
+
+#~ msgid "ATM"
+#~ msgstr "ATM"
+
+#~ msgid "Bank"
+#~ msgstr "Banka"
+
+#~ msgid "Bureau de change"
+#~ msgstr "Zmenáreň"
+
+#~ msgid "Dentist"
+#~ msgstr "Zubár"
+
+#~ msgid "Doctors"
+#~ msgstr "Lekár"
+
+#~ msgid "Pharmacy"
+#~ msgstr "Lekáreň"
+
+#~ msgid "Veterinary"
+#~ msgstr "Veterinár"
+
+#~ msgid "Cinema"
+#~ msgstr "Kino"
+
+#~ msgid "Theatre"
+#~ msgstr "Divadlo"
+
+#~ msgid "Court"
+#~ msgstr "Súd"
+
+#~ msgid "Embassy"
+#~ msgstr "Veľvyslanectvo"
+
+#~ msgid "Church"
+#~ msgstr "Kostol"
+
+#~ msgid "Playground"
+#~ msgstr "Ihrisko"
+
+#~ msgid "Place of worship"
+#~ msgstr "Miesto uctievania"
+
+#~ msgid "Post office"
+#~ msgstr "Pošta"
+
+#~ msgid "Public building"
+#~ msgstr "Verejná budova"
+
+#~ msgid "Toilets"
+#~ msgstr "Toalety"
+
+#~ msgid "Hotel"
+#~ msgstr "Hotel"
+
+#~ msgid "Motel"
+#~ msgstr "Motel"
+
+#~ msgid "Hospital"
+#~ msgstr "Nemocnica"
+
+#~ msgid "Fire station"
+#~ msgstr "Požiarna stanica"
+
+#~ msgid "Monument"
+#~ msgstr "Pamiatka"
+
+#~ msgid "Ruins"
+#~ msgstr "Pozostatky"
+
+#~ msgid "Bar"
+#~ msgstr "Stĺpec"
+
+#~ msgid "Biergarten"
+#~ msgstr "Pivná záhrada"
+
+#~ msgid "Cafe"
+#~ msgstr "Kaviareň"
+
+#~ msgid "Drinking water"
+#~ msgstr "Pitná voda"
+
+#~ msgid "Fast Food"
+#~ msgstr "Rýchle občerstvenie"
+
+#~ msgid "Ice Cream"
+#~ msgstr "Zmrzlina"
+
+#~ msgid "Pub"
+#~ msgstr "Krčma"
+
+#~ msgid "Restaurant"
+#~ msgstr "Reštaurácia"
+
+#~ msgid "Alcohol"
+#~ msgstr "Alkohol"
+
+#~ msgid "Bakery"
+#~ msgstr "Pekáreň"
+
+#~ msgid "Books"
+#~ msgstr "Knihy"
+
+#~ msgid "Car"
+#~ msgstr "Auto"
+
+#~ msgid "Clothes"
+#~ msgstr "Oblečenie"
+
+#~ msgid "Convenience"
+#~ msgstr "Pohodlie"
+
+#~ msgid "Gas"
+#~ msgstr "Plyn"
+
+#~ msgid "Gift"
+#~ msgstr "Darček"
+
+#~ msgid "Precipitation (July)"
+#~ msgstr "Zrážky (júl)"
+
+#~ msgid ""
+#~ "A map which shows the average precipitation (rain/snow/hail/etc) in July."
+#~ msgstr "Mapa zobrazujúca priemerné júlové zrážky (dažďové/snehové/krúpy)."
+
+#~ msgid "Precipitation"
+#~ msgstr "Zrážky"
+
+#~ msgid "0 mm"
+#~ msgstr "0 mm"
+
+#~ msgid "10 mm"
+#~ msgstr "10 mm"
+
+#~ msgid "40 mm"
+#~ msgstr "40 mm"
+
+#~ msgid "63 mm"
+#~ msgstr "63 mm"
+
+#~ msgid "89 mm"
+#~ msgstr "89 mm"
+
+#~ msgid "127 mm"
+#~ msgstr "127 mm"
+
+#~ msgid "256 mm"
+#~ msgstr "256 mm"
+
+#~ msgid "512 mm"
+#~ msgstr "512 mm"
+
+#~ msgid "1024 mm or more"
+#~ msgstr "1024 mm a viac"
+
+#~ msgid "Empty globe"
+#~ msgstr "Prázdny glóbus"
+
+#~ msgid ""
+#~ "<p>An <i>empty globe</i> used as a base to load and view .osm files "
+#~ "(offline maps).</p>"
+#~ msgstr ""
+#~ "<p><i>Prázdny glóbus</i> použitý ako základ na načítanie a zobrazenie ."
+#~ "osm súborov (offline mapy).</p>"
+
+#~ msgid "Satellite View"
+#~ msgstr "Satelitný pohľad"
+
+#~ msgid ""
+#~ "<p>Earth as seen from Space.</p><p>The map is based on NASA's beautiful "
+#~ "\"Blue Marble Next Generation\" pictures. Credits: NASA's Earth "
+#~ "Observatory</p>"
+#~ msgstr ""
+#~ "<p>Pohľad na Zem z vesmíru</p><p>Mapa založená na obrázkoch NASA z "
+#~ "projektu \"Blue Marble Next Generation\". Poskytli: NASA's Earth "
+#~ "Observatory</p>"
+
+#~ msgid "Ice"
+#~ msgstr "Ľad"
+
+#~ msgid "Vegetation"
+#~ msgstr "Vegetácia"
+
+#~ msgid "Desert"
+#~ msgstr "Púšť"
+
+#~ msgid "Political Map"
+#~ msgstr "Politická mapa"
+
+#~ msgid ""
+#~ "<p>A <i>Political Map</i>.</p><p>The theme displays various countries.</p>"
+#~ msgstr "<p><i>Politická mapa</i>.</p><p>Téma zobrazí rôzne krajiny.</p>"
+
+#~ msgid "Rivers"
+#~ msgstr "Rieky"
+
+#~ msgid "Precipitation (December)"
+#~ msgstr "Zrážky (december)"
+
+#~ msgid "A map which shows the average precipitation in December."
+#~ msgstr "Mapa zobrazujúca priemerné decembrové zrážky."
+
+#~ msgid "SRTM Data"
+#~ msgstr "Údaje SRTM"
+
+#~ msgid "Behaim Globe 1492"
+#~ msgstr "Behaim Globe 1492"
+
+#~ msgid ""
+#~ "<p> Martin Behaim's <i>Erdapfel</i> is the oldest existent globe of the "
+#~ "Earth. <i>Credits: Germanisches Nationalmuseum, Nuremberg, License: CC BY-"
+#~ "SA 3.0.</i></p>"
+#~ msgstr ""
+#~ "<p><i>Erdapfel</i> Martina Behaima je najstarší existujúci glóbus Zeme. "
+#~ "<i>Zásluhy: Germanisches Nationalmuseum, Nuremberg, License: CC BY-SA 3.0."
+#~ "</i></p>"
+
+#~ msgid "Places (in German)"
+#~ msgstr "Miesta (v nemčine)"
+
+#~ msgid "Behaim Places"
+#~ msgstr "Behaimove miesta"
+
+#~ msgid "Texts and illustrations"
+#~ msgstr "Texty a ilustrácie"
+
+#~ msgid "Facsimile drawings"
+#~ msgstr "Faksimilné kresby"
+
+#~ msgid "Ravenstein (1908)"
+#~ msgstr "Ravenstein (1908)"
+
+#~ msgid "Ghillany (1853)"
+#~ msgstr "Ghillany (1853)"
+
+#~ msgid "Reference lines"
+#~ msgstr "Referenčné riadky"
+
+#~ msgid "Accurate Coastline"
+#~ msgstr "Skutočná pobrežná čiara"
+
+#~ msgid "Historical Map 1689"
+#~ msgstr "Historická mapa z r. 1689"
+
+#~ msgid ""
+#~ "<i>Historical world map</i> from the year 1689 created by G. van Schagen "
+#~ "in Amsterdam."
+#~ msgstr ""
+#~ "<i>Historická mapa sveta</i> z roku 1689 vytvorená G. van Schagenom v "
+#~ "Amsterdame."
+
+#~ msgid "Town"
+#~ msgstr "Mesto"
+
+#~ msgid "OpenStreetMap"
+#~ msgstr "OpenStreetMap"
+
+#~ msgid "Clouds"
+#~ msgstr "Oblaky"
+
+#~ msgid ""
+#~ "A Real Time Cloud Map that gets updated every 3 hours. It uses GOES, "
+#~ "METEOSAT, and GMS satellite imagery downloaded from the Geostationary "
+#~ "Satellite Imagery page at Dundee University.  Credits: Hari Nair, Xplanet "
+#~ "Project"
+#~ msgstr ""
+#~ "Mapa oblakov v reálnom čase aktualizovaná každé 3 hodiny. Používa snímky "
+#~ "z družíc GEOS, METEOSAT a GMS stiahnuté zo stránky Geostationary "
+#~ "Satellite Imagery Univerzity v Dundee. Poskytli: Hari Nair, Projekt "
+#~ "Xplanet "
+
+#~ msgid "Marble: Legend"
+#~ msgstr "Marble: Legenda"
+
+#~ msgid "<a href="
+#~ msgstr "<a href="
+
+#~ msgid "Population:"
+#~ msgstr "Obyvateľstvo:"
+
+#~ msgid "&gt; 1&nbsp;000&nbsp;000"
+#~ msgstr "&gt; 1&nbsp;000&nbsp;000"
+
+#~ msgid "&ge; 100&nbsp;000"
+#~ msgstr "&ge; 100&nbsp;000"
+
+#~ msgid "&ge; 10&nbsp;000"
+#~ msgstr "&ge; 10&nbsp;000"
+
+#~ msgid "&lt; 10&nbsp;000"
+#~ msgstr "&lt; 10&nbsp;000"
+
+#~ msgid "<br/>"
+#~ msgstr "<br/>"
+
+#~ msgid "Capitals:"
+#~ msgstr "Hlavné mestá:"
+
+#~ msgid "Red:&nbsp;Nation"
+#~ msgstr "Červená: národ"
+
+#~ msgid "Orange:&nbsp;State"
+#~ msgstr "Oranžová: štát"
+
+#~ msgid "Yellow:&nbsp;County"
+#~ msgstr "Žltá: Vyšší územný celok"
+
+#~ msgid "White:&nbsp;None"
+#~ msgstr "Biela: Nič"
+
+#~ msgid "<!-- ##customLegendEntries:all## -->"
+#~ msgstr "<!-- ##customLegendEntries:all## -->"
+
+#~ msgid "Marble - Game"
+#~ msgstr "Marble - hra"
+
+#~ msgid "The Earth"
+#~ msgstr "Zem"
+
+#~ msgid "The Marble widget displays a virtual globe."
+#~ msgstr "Widget Marble na zobrazenie virtuálneho glóbusu."
+
+#~ msgid "Navigation Control"
+#~ msgstr "Ovládanie"
+
+#~ msgid "Use this control to navigate."
+#~ msgstr "Týmto ovládaním sa možno pohybovať v mape."
+
+#~ msgid "Show places"
+#~ msgstr "Zobraziť miesta"
+
+#~ msgid "Show relief"
+#~ msgstr "Zobraziť reliéf"
+
+#~ msgid "Show scale bar"
+#~ msgstr "Zobraziť grafickú mierku"
+
+#~ msgid "Show borders"
+#~ msgstr "Zobraziť hranice"
+
+#~ msgid "Show ice / snow"
+#~ msgstr "Zobraziť ľad/sneh"
+
+#~ msgid "Show compass"
+#~ msgstr "Zobraziť kompas"
+
+#~ msgid "Show grid"
+#~ msgstr "Zobraziť súradnicovú sieť"
+
+#~ msgid "Show rivers / lakes"
+#~ msgstr "Zobraziť rieky/jazerá"
+
+#~ msgid "Show elevation model"
+#~ msgstr "Zobraziť výškový model"
+
+#~ msgid "Coordinates: "
+#~ msgstr "Súradnice: "
+
+#~ msgid "Add link"
+#~ msgstr "Pridať odkaz"
+
+#~ msgid "URL:"
+#~ msgstr "URL:"
+
+#~ msgid "Name:"
+#~ msgstr "Názov:"
+
+#~ msgid "Bookmark Manager - Marble"
+#~ msgstr "Správa záložiek - Marble"
+
+#~ msgid "Import Bookmarks..."
+#~ msgstr "Importovať záložky..."
+
+#~ msgid "Export Bookmarks..."
+#~ msgstr "&Exportovať záložky..."
+
+#~ msgid "Folders"
+#~ msgstr "Priečinky"
+
+#~ msgid "New"
+#~ msgstr "Nový"
+
+#~ msgid "Rename"
+#~ msgstr "Premenovať"
+
+#~ msgid "Delete"
+#~ msgstr "Zmazať"
+
+#~ msgid "Bookmarks"
+#~ msgstr "Záložky"
+
+#~ msgid "Edit"
+#~ msgstr "Upraviť"
+
+#~ msgid "Cloud Routes"
+#~ msgstr "Cloud cesty"
+
+#~ msgid "No route available."
+#~ msgstr "Cesta nie je dostupná."
+
+#~ msgid "Current Location"
+#~ msgstr "Aktuálna poloha"
+
+#~ msgid "Position Tracking"
+#~ msgstr "Sledovanie polohy"
+
+#~ msgid "Disabled"
+#~ msgstr "Vypnuté"
+
+#~ msgid "Show Track"
+#~ msgstr "Zobraziť trasu"
+
+#~ msgid "Clear Track"
+#~ msgstr "Vyčistiť trasu"
+
+#~ msgid "..."
+#~ msgstr "..."
+
+#~ msgid "No position available."
+#~ msgstr "Poloha nie je dostupná."
+
+#~ msgctxt "Select the method to use to recenter your GPS location on map."
+#~ msgid "Select the method to use to re-center your GPS location on map."
+#~ msgstr "Vyberie spôsob akým centrovať vašu GPS polohu na mape."
+
+#~ msgid "Map Adjustment"
+#~ msgstr "Nastavenie mapy"
+
+#~ msgctxt "Disable Auto Recenter"
+#~ msgid "Disabled"
+#~ msgstr "Vypnuté"
+
+#~ msgctxt "Always keep gps location at the center of the map"
+#~ msgid "Keep at Center"
+#~ msgstr "Udržiavať v strede"
+
+#~ msgctxt "Auto center when required"
+#~ msgid "When required"
+#~ msgstr "Na požiadanie"
+
+#~ msgctxt "Auto Zoom to appropriate zoom level"
+#~ msgid "Auto Zoom to appropriate zoom level"
+#~ msgstr "Automaticky nastaviť stupeň priblíženia"
+
+#~ msgid "Auto Zoom"
+#~ msgstr "Automatické priblíženie"
+
+#~ msgid "Data Migration"
+#~ msgstr "Presun údajov"
+
+#~ msgid ""
+#~ "Marble has found map data stored by a previous Marble version.<br/>Should "
+#~ "this data get converted so that it can be used by the current version?"
+#~ msgstr ""
+#~ "Marble našiel mapové údaje uložené predchádzajúcou verziou Marble. <br/> "
+#~ "Majú byť tieto údaje prevedené do aktuálnej verzie?"
+
+#~ msgid "Edit Bookmark - Marble"
+#~ msgstr "Úprava záložiek - Marble"
+
+#~ msgid "&Description"
+#~ msgstr "&Stručný popis"
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<table border=\"0\" style=\"-qt-table-type: root; margin-top:4px; margin-"
+#~ "bottom:4px; margin-left:4px; margin-right:4px;\">\n"
+#~ "<tr>\n"
+#~ "<td style=\"border: none;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-family:'Ubuntu';\"><br /></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-family:'Ubuntu';\"><br /></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-family:'Ubuntu';\"><br /></p></td></tr></table></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<table border=\"0\" style=\"-qt-table-type: root; margin-top:4px; margin-"
+#~ "bottom:4px; margin-left:4px; margin-right:4px;\">\n"
+#~ "<tr>\n"
+#~ "<td style=\"border: none;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-family:'Ubuntu';\"><br /></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-family:'Ubuntu';\"><br /></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-family:'Ubuntu';\"><br /></p></td></tr></table></body></html>"
+
+#~ msgid "&Folder"
+#~ msgstr "&Priečinok"
+
+#~ msgid "&Add Folder"
+#~ msgstr "&Pridať priečinok"
+
+#~ msgid "Edit placemark"
+#~ msgstr "Upraviť značku miesta"
+
+#~ msgid "Description"
+#~ msgstr "Popis"
+
+#~ msgid "Show Balloon Popup"
+#~ msgstr "Zobraziť bublinovú nápovedu"
+
+#~ msgid "Style, Color"
+#~ msgstr "Štýl, farba"
+
+#~ msgid "Label"
+#~ msgstr "Štítok"
+
+#~ msgid "Color:"
+#~ msgstr "Farba:"
+
+#~ msgid "Scale:"
+#~ msgstr "Mierka:"
+
+#~ msgid "Icon"
+#~ msgstr "Ikona"
+
+#~ msgid "Show placemark"
+#~ msgstr "Zobraziť označník miesta"
+
+#~ msgid "Bold"
+#~ msgstr "Tučné"
+
+#~ msgid "Italics"
+#~ msgstr "Kurzíva"
+
+#~ msgid "Underlined"
+#~ msgstr "Podčiarknuté"
+
+#~ msgid "Add image"
+#~ msgstr "Pridať obrázok"
+
+#~ msgid "Elevation:"
+#~ msgstr "Nadmorská výška:"
+
+#~ msgid " m"
+#~ msgstr " m"
+
+#~ msgid "above sea level"
+#~ msgstr "nad úrovňou mora"
+
+#~ msgid "External Map Editor Selection"
+#~ msgstr "Výber externého mapového editora"
+
+#~ msgid "External Map Editor"
+#~ msgstr "Externý mapový editor"
+
+#~ msgid "Web browser (iD)"
+#~ msgstr "Webový prehliadač (iD)"
+
+#~ msgid "Merkaartor"
+#~ msgstr "Merkaator"
+
+#~ msgid "JOSM"
+#~ msgstr "JOSM"
+
+#~ msgid ""
+#~ "Deactivate to be prompted for a map editor selection next time again. "
+#~ "Otherwise, your choice is remembered and will be used automatically in "
+#~ "the future. If you want to alter the default map editor later, you can do "
+#~ "so in the Marble Settings."
+#~ msgstr ""
+#~ "Deaktivovaním možnosti sa Marble nabudúce znova opýta na mapový editor. V "
+#~ "opačnom prípade sa váš výber zapamätá a bude použitý automaticky v "
+#~ "budúcnosti. Pokiaľ  budete chcieť zmeniť predvolený mapový editor, bude "
+#~ "to možné v nastavení Marble."
+
+#~ msgid "Make my selection the default map editor"
+#~ msgstr "Nastaví podľa výberu predvolený mapový editor"
+
+#~ msgid "Editor Details"
+#~ msgstr "Podrobnosti o editore"
+
+#~ msgid "Editor Preview"
+#~ msgstr "Náhľad editora"
+
+#~ msgid ""
+#~ "iD is an OpenStreetMap editor for quick editing tasks and beginners. It "
+#~ "requires a web browser."
+#~ msgstr ""
+#~ "iD je editor OpenStreetMap na rýchle editovacie úlohy a začiatočníkov. "
+#~ "Vyžaduje webový prehliadač."
+
+#~ msgid "File View"
+#~ msgstr "Prezrieť súbor"
+
+#~ msgid "&Save"
+#~ msgstr "&Uložiť"
+
+#~ msgid "&Close"
+#~ msgstr "&Zavrieť"
+
+#~ msgid "Formatted text"
+#~ msgstr "Formátovaný text"
+
+#~ msgid "6"
+#~ msgstr "6"
+
+#~ msgid "8"
+#~ msgstr "8"
+
+#~ msgid "9"
+#~ msgstr "9"
+
+#~ msgid "10"
+#~ msgstr "10"
+
+#~ msgid "11"
+#~ msgstr "11"
+
+#~ msgid "12"
+#~ msgstr "12"
+
+#~ msgid "14"
+#~ msgstr "14"
+
+#~ msgid "16"
+#~ msgstr "16"
+
+#~ msgid "18"
+#~ msgstr "18"
+
+#~ msgid "20"
+#~ msgstr "20"
+
+#~ msgid "24"
+#~ msgstr "24"
+
+#~ msgid "36"
+#~ msgstr "36"
+
+#~ msgid "48"
+#~ msgstr "48"
+
+#~ msgid "72"
+#~ msgstr "72"
+
+#~ msgid "96"
+#~ msgstr "96"
+
+#~ msgid "toolBar"
+#~ msgstr "Panel nástrojov"
+
+#~ msgid "Color"
+#~ msgstr "Farba"
+
+#~ msgid "Go To..."
+#~ msgstr "Prejsť na..."
+
+#~ msgid ""
+#~ "Enter a search term and press Enter. <a href=\"http://userbase.kde.org/"
+#~ "Marble/Search\">Details...</a>"
+#~ msgstr ""
+#~ "Zadajte vyhľadávané slovo a stlačte Enter. <a href=\"http://userbase.kde."
+#~ "org/Marble/Search\">Podrobnosti...</a>"
+
+#~ msgid "Browse"
+#~ msgstr "Prehliadať"
+
+#~ msgid "Search"
+#~ msgstr "Hľadať"
+
+#~ msgid "Select a geographic region"
+#~ msgstr "Výber geografického regiónu"
+
+#~ msgid "Northern Latitude"
+#~ msgstr "Severná zemepisná šírka"
+
+#~ msgid "°"
+#~ msgstr "°"
+
+#~ msgid "&N"
+#~ msgstr "&S"
+
+#~ msgid "Western Longitude"
+#~ msgstr "Západná zemepisná dĺžka"
+
+#~ msgid "&W"
+#~ msgstr "&Z"
+
+#~ msgid "Eastern Longitude"
+#~ msgstr "Východná zemepisná dĺžka"
+
+#~ msgid "&E"
+#~ msgstr "&V"
+
+#~ msgid "Southern Latitude"
+#~ msgstr "Južná zemepisná šírka"
+
+#~ msgid "&S"
+#~ msgstr "&J"
+
+#~ msgid "′"
+#~ msgstr "′"
+
+#~ msgid "″"
+#~ msgstr "″"
+
+#~ msgid "Legend"
+#~ msgstr "Vysvetlivky"
+
+#~ msgid "about:blank"
+#~ msgstr "about:blank"
+
+#~ msgid "Marble - Install Maps"
+#~ msgstr "Marble - Nainštalovať mapy"
+
+#~ msgid "Map View"
+#~ msgstr "Mapa"
+
+#~ msgid "&Projection"
+#~ msgstr "&Zobrazenie"
+
+#~ msgid "Globe"
+#~ msgstr "Glóbus"
+
+#~ msgid "Flat Map"
+#~ msgstr "Jednoduchá mapa"
+
+#~ msgid "Mercator"
+#~ msgstr "Mercatorovo"
+
+#~ msgid "Gnomonic"
+#~ msgstr "Gnómonické"
+
+#~ msgid "Stereographic"
+#~ msgstr "Stereografický"
+
+#~ msgid "Lambert Azimuthal Equal Area"
+#~ msgstr "Lambertova azimutálna rovnoplocha"
+
+#~ msgid "Azimuthal Equidistant"
+#~ msgstr "Azimutálne ekvidistantné"
+
+#~ msgid "Vertical Perspective Globe"
+#~ msgstr "Vertikálny perspektívny glóbus"
+
+#~ msgid "&Celestial Body"
+#~ msgstr "&Teleso"
+
+#~ msgid "&Theme"
+#~ msgstr "&Téma"
+
+#~ msgid "Here you can choose the preferred map view from different topics."
+#~ msgstr "To možno vybrať mapu spomedzi viacerých tematických máp"
+
+#~ msgid "Marble Map Theme Creation Wizard"
+#~ msgstr "Sprievodca vytvorením novej mapovej témy"
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">Welcome to the Map Creation Wizard!</span></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">We will guide you "
+#~ "through the process of creating a map theme for Marble. In the end you "
+#~ "will have your own map that you can view in Marble.</p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Please choose the "
+#~ "source that you want to use for the data of your map theme:</p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:12px; margin-bottom:12px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">Vitajte v sprievodcovi tvorbou mapy!</span></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Sprievodca vás prevedie "
+#~ "procesom tvorby mapovej témy pre Marble. Na jeho konci budete mať k "
+#~ "dispozícii vlastnú mapu ktorú možno prezerať v Marble.</p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Prosím zvoľte zdroj "
+#~ "údajov pre vašu mapovú tému:</p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:12px; margin-bottom:12px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p></body></html>"
+
+#~ msgid ""
+#~ "Connects to a server on the Internet. The map data is queried via the WMS "
+#~ "protocol."
+#~ msgstr ""
+#~ "Pripojí sa k serveru na internete. Mapové údaje sú vyžiadané cez protokol "
+#~ "WMS."
+
+#~ msgid "Web Map Service (WMS)"
+#~ msgstr "Webová Mapová Služba (WMS)"
+
+#~ msgid ""
+#~ "You need to provide a bitmap image of a world map that is stored on disk."
+#~ msgstr ""
+#~ "Je potrebné poskytnúť bitmapový obrázok mapy sveta uložený na disku."
+
+#~ msgid "A single image showing the whole world"
+#~ msgstr "Jeden mapový obrázok pre celý svet"
+
+#~ msgid ""
+#~ "Connects to a server on the Internet. The map data is queried via a "
+#~ "static URL."
+#~ msgstr ""
+#~ "Pripojí sa na server na internete. Mapové údaje sa získajú cez statickú "
+#~ "URL adresu."
+
+#~ msgid "Online map providing indexed tiles (e.g. Open Street Map)"
+#~ msgstr ""
+#~ "Online prístupná mapa poskytujúca indexovanú mozaiku (napr. mapy projektu "
+#~ "Open Street Map)"
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">WMS Server</span></p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Please choose a <a href="
+#~ "\"http://en.wikipedia.org/wiki/Web_Map_Service\"><span style=\" text-"
+#~ "decoration: underline; color:#0057ae;\">WMS</span></a> server or enter a "
+#~ "custom server URL.</p></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">WMS Server</span></p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Vyberte server <a href="
+#~ "\"http://en.wikipedia.org/wiki/Web_Map_Service\"><span style=\" text-"
+#~ "decoration: underline; color:#0057ae;\">WMS</span></a>alebo zadajte "
+#~ "adresu vlastného servera.</p></body></html>"
+
+#~ msgid "WMS Server:"
+#~ msgstr "WMS Server:"
+
+#~ msgid "Custom"
+#~ msgstr "Vlastné"
+
+#~ msgid "http://"
+#~ msgstr "http://"
+
+#~ msgid "Available Maps:"
+#~ msgstr "Dostupné mapy:"
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">World Map Bitmap Image</span></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-weight:600;\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Please choose the "
+#~ "location of a world map that is stored in a single image file (JPG, PNG, "
+#~ "etc.). It needs to be provided in <a href=\"http://en.wikipedia.org/wiki/"
+#~ "Equirectangular_projection\"><span style=\" text-decoration: underline; "
+#~ "color:#0057ae;\">Equirectangular projection</span></a>, so the shape "
+#~ "should look like this (size ratio: 2:1):</p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><img src=\":/data/svg/"
+#~ "worldmap.svg\" width=\"150\" /></p></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">Obrázok svetovej mapy</span></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-weight:600;\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Prosím vyberte "
+#~ "umiestnenie mapy sveta uloženej v jednom obrázku (JPG, PNG, atď). Je "
+#~ "potrebné aby mapa bola v <a href=\"http://en.wikipedia.org/wiki/"
+#~ "Equirectangular_projection\"><span style=\" text-decoration: underline; "
+#~ "color:#0057ae;\">ekvirektangulárnom zobrazení</span></a>, Takže obrázok "
+#~ "bude vyzerať nasledovne (pomer strán 2:1):</p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><img src=\":/data/svg/"
+#~ "worldmap.svg\" width=\"150\" /></p></body></html>"
+
+#~ msgid "Source Image:"
+#~ msgstr "Zdroj obrázku:"
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Bitstream Vera Sans'; font-"
+#~ "size:9pt; font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif'; font-weight:600;\">URL Scheme for Indexed Tiles</"
+#~ "span></p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif';\">Please enter the URL used for downloading "
+#~ "individual tiles. Use the placeholders </span><span style=\" font-"
+#~ "family:'Sans Serif'; font-style:italic;\">{x}</span><span style=\" font-"
+#~ "family:'Sans Serif';\">, </span><span style=\" font-family:'Sans Serif'; "
+#~ "font-style:italic;\">{y}</span><span style=\" font-family:'Sans Serif';"
+#~ "\">, and </span><span style=\" font-family:'Sans Serif'; font-style:"
+#~ "italic;\">{zoomLevel}</span><span style=\" font-family:'Sans Serif';\"> "
+#~ "to reference a tile from the index.</span></p></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Bitstream Vera Sans'; font-"
+#~ "size:9pt; font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif'; font-weight:600;\">URL schéma pre indexované "
+#~ "dlaždice</span></p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif';\">Please enter the URL used for downloading "
+#~ "individual tiles. Use the placeholders </span><span style=\" font-"
+#~ "family:'Sans Serif'; font-style:italic;\">{x}</span><span style=\" font-"
+#~ "family:'Sans Serif';\">, </span><span style=\" font-family:'Sans Serif'; "
+#~ "font-style:italic;\">{y}</span><span style=\" font-family:'Sans Serif';"
+#~ "\">, and </span><span style=\" font-family:'Sans Serif'; font-style:"
+#~ "italic;\">{zoomLevel}</span><span style=\" font-family:'Sans Serif';\"> "
+#~ "to reference a tile from the index.</span></p></body></html>"
+
+#~ msgid "URL Scheme:"
+#~ msgstr "Schéma URL:"
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Bitstream Vera Sans'; font-"
+#~ "size:9pt; font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif'; font-weight:600;\">General Information</span></p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif';\">Please specify a title, a name and an icon for "
+#~ "your new map. Add a description to let users know what your map is about. "
+#~ "</span></p></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Bitstream Vera Sans'; font-"
+#~ "size:9pt; font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif'; font-weight:600;\">Všeobecné informácie</span></p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif';\">Prosím zadajte titulok, názov a ikonu pre vašu "
+#~ "novú mapu. Pridajte popis, aby užívatelia vedeli čo je obsahom vašej "
+#~ "mapy. </span></p></body></html>"
+
+#~ msgid "Map Title:"
+#~ msgstr "Titulok mapy:"
+
+#~ msgid "A short concise name for your map theme."
+#~ msgstr "Krátky stručný názov pre vašu mapovú tému."
+
+#~ msgid "Map Name:"
+#~ msgstr "Názov mapy:"
+
+#~ msgid "The lowercase map theme id."
+#~ msgstr "Názov id mapovej témy (malými písmenami)"
+
+#~ msgid "The folder name of your new theme."
+#~ msgstr "Názov priečinka vašej novej témy"
+
+#~ msgid "Description:"
+#~ msgstr "Popis:"
+
+#~ msgid ""
+#~ "A short description of your map theme. Here you can provide information "
+#~ "about the purpose, origin, copyright and license of the data used in your "
+#~ "map theme."
+#~ msgstr ""
+#~ "Krátky popis mapovej témy. Tu možno zaznačiť informácie o účele, pôvode, "
+#~ "autorských právach a licencii údajov použitých v tejto mapovej téme."
+
+#~ msgid "It will appear in a tool tip and may contain HTML formatting."
+#~ msgstr "Objaví sa ako tip a môže obsahovať aj formátovanie HTML."
+
+#~ msgid "Preview Image:"
+#~ msgstr "Náhľad:"
+
+#~ msgid "preview image"
+#~ msgstr "náhľad"
+
+#~ msgid "Change..."
+#~ msgstr "Zmeniť..."
+
+#~ msgid "Legend Image:"
+#~ msgstr "Obrázok s vysvetlivkami:"
+
+#~ msgid "Places of Interest"
+#~ msgstr "Záujmové miesta"
+
+#~ msgid "Populated Places"
+#~ msgstr "Osídlené oblasti"
+
+#~ msgid "Terrain"
+#~ msgstr "Terén"
+
+#~ msgid "Coordinate Grid"
+#~ msgstr "Súradnicová sieť"
+
+#~ msgid "Border Lines"
+#~ msgstr "Hranice"
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">Summary</span></p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Congratulations! You "
+#~ "have entered all the data that is necessary to create your map theme. "
+#~ "Check the summary below carefully and press the \"Finish\" button to "
+#~ "create the theme. </p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Please consider "
+#~ "contributing the map theme back to the Marble community if the license "
+#~ "and the terms of use allow for it.</p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:12px; margin-bottom:12px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">Zhrnutie</span></p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Gratulujeme! Zadali ste "
+#~ "všetky údaje, ktoré boli potrebné na vytvorenie mapovej témy. "
+#~ "Skontrolujte nižšie uvedené zhrnutie a stlačením tlačidla \"Dokončiť\" "
+#~ "vytvoríte mapovú tému. </p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Prosím, ak to licenčné "
+#~ "podmienky dovoľujú, zverejnite mapovú tému aj pre komunitu užívateľov "
+#~ "Marble.</p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:12px; margin-bottom:12px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p></body></html>"
+
+#~ msgid "Map name goes here."
+#~ msgstr "Sem sa zadáva názov mapy."
+
+#~ msgid "Map Theme:"
+#~ msgstr "Mapová téma:"
+
+#~ msgid "Map theme goes here."
+#~ msgstr "Sem ide mapová téma."
+
+#~ msgid "Thumbnail image goes here."
+#~ msgstr "Sem ide miniatúra obrázku."
+
+#~ msgid "Preview Map"
+#~ msgstr "Náhľad mapy"
+
+#~ msgid "About Marble"
+#~ msgstr "O aplikácii Marble"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">Marble Virtual Globe</span></p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">Marble virtuálny glóbus</span></p></body></html>"
+
+#~ msgid "Version Unknown"
+#~ msgstr "Neznáma verzia"
+
+#~ msgid "&About"
+#~ msgstr "&O programe"
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:10pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-size:9pt;\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "size:9pt;\">(c) 2007, The Marble Project</span></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-size:9pt; font-style:italic;\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "size:9pt;\">http://edu.kde.org/marble</span></p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">(c) 2007, Projekt "
+#~ "Marble </p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-style:italic;\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">http://edu.kde.org/"
+#~ "marble</p></body></html>"
+
+#~ msgid "A&uthors"
+#~ msgstr "&Autori"
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:10pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-size:9pt;\"></p></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:10pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-size:9pt;\"></p></body></html>"
+
+#~ msgid "&Data"
+#~ msgstr "Ú&daje"
+
+#~ msgid "&License Agreement"
+#~ msgstr "&Licenčná zmluva"
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:10pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-family:'MS Shell Dlg 2'; font-size:8pt;\"></p></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:10pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-family:'MS Shell Dlg 2'; font-size:8pt;\"></p></body></html>"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">There are two caches "
+#~ "being used for Marble: The physical memory which is needed to keep map "
+#~ "data in the computer's memory. Increasing the value will make the "
+#~ "application more responsive. The hard disc memory cache is used by "
+#~ "download contents from the Internet (e.g. Wikipedia data or map data). "
+#~ "Decrease this value if you want to save space on the hard disc and if "
+#~ "high usage of the Internet is not an issue. </p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Marble používa dve "
+#~ "vyrovnávacie pamäte: fyzickú pamäť ktorá je potrebná na uchovávanie "
+#~ "údajov v pamäti počítača. Zväčšením tejto hodnoty bude mať aplikácia "
+#~ "lepšiu odozvu. Znížením hodnoty možno ušetriť miesto na pevnom disku a "
+#~ "tiež je vhodné pokiaľ nie sú žiadne problémy s pripojením na internet</"
+#~ "p></body></html>"
+
+#~ msgid "C&ache"
+#~ msgstr "Vyrovnávacia p&amäť"
+
+#~ msgid "&Physical memory:"
+#~ msgstr "&Fyzická pamäť:"
+
+#~ msgid " MB"
+#~ msgstr " MB"
+
+#~ msgid "C&lear"
+#~ msgstr "&Vyčistiť"
+
+#~ msgid "&Hard disc:"
+#~ msgstr "&Pevný disk"
+
+#~ msgid "Unlimited"
+#~ msgstr "Neobmedzené"
+
+#~ msgid "Cl&ear"
+#~ msgstr "&Vyčistiť"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Proxy settings for your "
+#~ "local intranet. Please leave empty if there is no proxy.</p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Nastavenie proxy pre "
+#~ "vašu lokálnu sieť. Pokiaľ nepoužívate proxy, nechajte pole prázdne.</p></"
+#~ "body></html>"
+
+#~ msgid "&Proxy"
+#~ msgstr "&Proxy"
+
+#~ msgid "&Proxy:"
+#~ msgstr "&Proxy:"
+
+#~ msgid "P&ort:"
+#~ msgstr "P&ort:"
+
+#~ msgid "Proxy type:"
+#~ msgstr "Typ proxy:"
+
+#~ msgid "Http"
+#~ msgstr "Http"
+
+#~ msgid "Socks5"
+#~ msgstr "Socks5"
+
+#~ msgid "Requires authentication"
+#~ msgstr "Vyžaduje overenie"
+
+#~ msgid "U&sername:"
+#~ msgstr "Meno používateľa:"
+
+#~ msgid "&Password:"
+#~ msgstr "&Heslo:"
+
+#~ msgid "Enable synchronization"
+#~ msgstr "Povoliť synchronizáciu"
+
+#~ msgid ""
+#~ "Allows you to store routes in owncloud. Each route must be uploaded/"
+#~ "downloaded manually."
+#~ msgstr ""
+#~ "Umožní vám uložiť cesty vo vlastnom cloude. Každá cesta sa musí nahrať/"
+#~ "stiahnuť ručne."
+
+#~ msgid "Enable route synchronization"
+#~ msgstr "Povoliť synchronizáciu cesty"
+
+#~ msgid "Automatically sync all bookmarks to the server."
+#~ msgstr "Automaticky synchronizovať všetky záložky na server."
+
+#~ msgid "Enable bookmark synchronization"
+#~ msgstr "Povoliť synchronizáciu záložiek"
+
+#~ msgid "Sync now"
+#~ msgstr "Synchronizovať teraz"
+
+#~ msgid "Credentials"
+#~ msgstr "Prihlasovacie údaje"
+
+#~ msgid "Server:"
+#~ msgstr "Server:"
+
+#~ msgid "Remote server URL, e.g. myserver.com/owncloud"
+#~ msgstr "URL vzdialeného servera, napr. mojserver.com/mojcloud"
+
+#~ msgid "Username:"
+#~ msgstr "Užívateľské meno:"
+
+#~ msgid "Password:"
+#~ msgstr "Heslo:"
+
+#~ msgid "Test Login"
+#~ msgstr "Vyskúšať prihlásenie"
+
+#~ msgid "Marble Cache Settings"
+#~ msgstr "Nastavenie vyrovnávacej pamäte pre Marble"
+
+#~ msgid "Dragging and Animation"
+#~ msgstr "Posun a animácia"
+
+#~ msgid "&Drag location:"
+#~ msgstr "Pretiahnuť umiestnenie:"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">While dragging the "
+#~ "mouse there are two standard behaviours when dealing with a virtual globe:"
+#~ "</p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">The location below "
+#~ "mouse pointer will follow the cursor exactly: As a result e.g. the north "
+#~ "pole will not stay at the top which can lead to confusion. By default "
+#~ "Marble makes sure that north is always up which results in a dragging "
+#~ "behaviour where the location below the mouse pointer slightly \"detaches"
+#~ "\" from the cursor. </p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Pri ťahaní myši sú sa "
+#~ "virtuálny glóbus môže správať dvojako:</p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Lokalita pod "
+#~ "ukazovateľom myši bude nasledovať presne kurzor: výsledkom bude napr. to, "
+#~ "že severný pól neostane navrchu, čo môže byť zmätočné. Predvolene sa "
+#~ "Marble správa tak, aby sever bol vždy hore, čo vedie k tomu, že pri "
+#~ "ťahaní glóbusu myšou sa lokalita pod ukazovateľom myši mierne odchyľuje "
+#~ "od kurzora. </p></body></html>"
+
+#~ msgid "Keep Planet Axis Vertically"
+#~ msgstr "Zachovať os planéty v zvislej polohe"
+
+#~ msgid "Follow Mouse Pointer"
+#~ msgstr "Nasledovať kurzor myši"
+
+#~ msgid "Use kinetic spinning when dragging the map"
+#~ msgstr "Použiť kinetické otáčanie pri ťahaní mapy"
+
+#~ msgid "&Inertial Globe Rotation"
+#~ msgstr "Inerciálna rotácia glóbusu"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">When searching for a "
+#~ "location Marble can either move instantly to the new location or it can "
+#~ "show a travel animation from the previous place to the new place.</p></"
+#~ "body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Pri vyhľadávaní miesta "
+#~ "môžeMarble zmeniť pohľad (polohu) hneď, alebo ho môže cestu na dané "
+#~ "miesto animovať z práve aktuálnej polohy.</p></body></html>"
+
+#~ msgid "&Animate voyage to the target"
+#~ msgstr "&Animovať cestu k cieľu"
+
+#~ msgid "&On startup:"
+#~ msgstr "&Pri štarte:"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">By default Marble will "
+#~ "display the home location immediately after the application has started. "
+#~ "As an alternative it can also show the last position that was active when "
+#~ "the user left the application. </p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Predvolene Marble "
+#~ "zobrazuje domovskú lokalitu ihneď po svojom štarte. Je však možné "
+#~ "nastavenie, pri ktorom bude zobrazovať poslednú polohu pred posledným "
+#~ "vypnutím. </p></body></html>"
+
+#~ msgid "Show Home Location"
+#~ msgstr "Zobraziť domovskú polohu"
+
+#~ msgid "Return to Last Location Visited"
+#~ msgstr "Vrátiť sa na posledne navštívené miesto"
+
+#~ msgid "&External Editor:"
+#~ msgstr "&Externý editor:"
+
+#~ msgid ""
+#~ "<p>The application that is launched to edit maps. Potlatch (default) "
+#~ "requires a web browser with flash support to be installed. When selecting "
+#~ "josm or merkaartor, make sure that the respective application is "
+#~ "installed.</p>"
+#~ msgstr ""
+#~ "<p>Aplikácia, ktorá je spustená na úpravu máp. Potlatch (predvolená) "
+#~ "vyžaduje nainštalovaný webový prehliadač s podporou technológie flash. "
+#~ "Pri vybratí možnosti josm alebo merkaartor sa uistite že máte "
+#~ "nainštalované príslušné aplikácie.</p>"
+
+#~ msgid "Always ask"
+#~ msgstr "Vždy sa pýtať"
+
+#~ msgid "Potlatch (Web browser)"
+#~ msgstr "Potlatch (webový prehliadač)"
+
+#~ msgid "Up"
+#~ msgstr "Hore"
+
+#~ msgid "Tilts the globe's axis towards the user."
+#~ msgstr "Nakláňa zemskú os smerom k užívateľovi."
+
+#~ msgid "Left"
+#~ msgstr "Vľavo"
+
+#~ msgid "Rotates the globe counterclockwise around its axis."
+#~ msgstr "Otáča Zem okolo svojej osi proti smeru hodinových ručičiek"
+
+#~ msgid "Reset View"
+#~ msgstr "Znovunastaviť pohľad"
+
+#~ msgid "Click this button to restore the original zoom level and view angle."
+#~ msgstr ""
+#~ "Kliknutím na tlačidlo sa obnoví základný pohľad (miera priblíženia a uhol "
+#~ "pohľadu)."
+
+#~ msgid "Home"
+#~ msgstr "Domov"
+
+#~ msgid "Right"
+#~ msgstr "Vpravo"
+
+#~ msgid "Rotates the globe clockwise around its axis."
+#~ msgstr "Otáča Zem okolo svojej osi v smere hodinových ručičiek."
+
+#~ msgid "Down"
+#~ msgstr "Dole"
+
+#~ msgid "Tilts the globe's axis away from the user."
+#~ msgstr "Nakláňa zemskú os v smere od užívateľa."
+
+#~ msgid "Zoom In"
+#~ msgstr "Priblížiť"
+
+#~ msgid "Zoom in by pressing this button to see more detail."
+#~ msgstr ""
+#~ "Stlačením tohoto tlačidla priblíži pohľad tak aby bolo vidno viac "
+#~ "detailov."
+
+#~ msgid "+"
+#~ msgstr "+"
+
+#~ msgid "Zoom Slider"
+#~ msgstr "Posuvník priblíženia"
+
+#~ msgid "Use this slider to adjust the zoom level of the map."
+#~ msgstr "Posuvníkom možno nastaviť mieru priblíženia mapy."
+
+#~ msgid "Zoom Out"
+#~ msgstr "Oddialiť"
+
+#~ msgid "Zoom out by pressing this button to see less detail."
+#~ msgstr "Oddiaľte pohľad stlačením tohto tlačidla pre menej detailov."
+
+#~ msgid "-"
+#~ msgstr "-"
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'DejaVu Sans'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif';\">This is Marble's machine room for advanced users. "
+#~ "Here you can select and deselect the functionality that is provided "
+#~ "through plugins. </span></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif';\">Deselecting a plugin will remove the functionality "
+#~ "from the map, menus and toolbars. </span></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif';\">Also some of the plugins might allow for tweaking "
+#~ "their configuration a bit. </span></p></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ " p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'DejaVu Sans'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif';\">Toto je miestnosť pre skúsených užívateľov Marble. "
+#~ "Zapnúť a vypnúť funkcie ktoré sú zabezpečované prostredníctvom modulov. </"
+#~ "span></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif';\">Odznačením modulu sa odoberie jeho funkcionalita z "
+#~ "mapy, menu a panelov. </span></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif';\">Niektoré moduly umožňujú upraviť niektoré svoje "
+#~ "nastavenia. </span></p></body></html>"
+
+#~ msgid "P&lugins"
+#~ msgstr "Moduly"
+
+#~ msgid "Time Zone"
+#~ msgstr "Časové pásmo"
+
+#~ msgid "UTC"
+#~ msgstr "UTC"
+
+#~ msgid "System time zone"
+#~ msgstr "Systémové časové pásmo"
+
+#~ msgid "Choose Time zone"
+#~ msgstr "Vyberte časové pásmo"
+
+#~ msgid "Universal Time Coordinated"
+#~ msgstr "Koordinovaný svetový čas"
+
+#~ msgid "European Central Time"
+#~ msgstr "Stredoeurópsky čas"
+
+#~ msgid "Eastern European Time"
+#~ msgstr "Východoeurópsky čas"
+
+#~ msgid "Egypt Standard Time"
+#~ msgstr "Egyptský štandardný čas"
+
+#~ msgid "Eastern African Time"
+#~ msgstr "Východoafrický čas"
+
+#~ msgid "Middle East Time"
+#~ msgstr "Čas stredného východu"
+
+#~ msgid "Near East Time"
+#~ msgstr "Čas blízkeho východu"
+
+#~ msgid "Pakistan Lahore Time"
+#~ msgstr "Pakistanský Lahore čas"
+
+#~ msgid "India Standard Time"
+#~ msgstr "Indický štandardný čas"
+
+#~ msgid "Bangladesh Standard Time"
+#~ msgstr "Bangladéšsky štandardný čas"
+
+#~ msgid "Vietnam Standard Time"
+#~ msgstr "Vietnamský štandardný čas"
+
+#~ msgid "China Taiwan Time"
+#~ msgstr "Čínsky taiwanský čas"
+
+#~ msgid "Japan Standard Time"
+#~ msgstr "Japonský štandardný čas"
+
+#~ msgid "Australia Central Time"
+#~ msgstr "Austrálsky centrálny čas"
+
+#~ msgid "Australia Eastern Time"
+#~ msgstr "Austrálsky východný čas"
+
+#~ msgid "Solomon Standard Time"
+#~ msgstr "Slomonský štandardný čas"
+
+#~ msgid "New Zealand Standard Time"
+#~ msgstr "Novozélandský štandardný čas"
+
+#~ msgid "Midway Islands Time"
+#~ msgstr "Čas ostrovov Midway"
+
+#~ msgid "Hawaii Standard Time"
+#~ msgstr "Hawaiský štandardný čas"
+
+#~ msgid "Alaska Standard Time"
+#~ msgstr "Aljašský štandardný čas"
+
+#~ msgid "Pacific Standard Time"
+#~ msgstr "Pacifický štandardný čas"
+
+#~ msgid "Phoenix Standard Time"
+#~ msgstr "Phoenixský štandardný čas"
+
+#~ msgid "Mountain Standard Time"
+#~ msgstr "Horský štandardný čas"
+
+#~ msgid "Central Standard Time"
+#~ msgstr "Centrálny štandardný čas"
+
+#~ msgid "Eastern Standard Time"
+#~ msgstr "Východný štandardný čas"
+
+#~ msgid "Indiana Eastern Standard Time"
+#~ msgstr "Indiana východný štandardný čas"
+
+#~ msgid "Puerto Rico and US Virgin Islands Time"
+#~ msgstr "Čas pre Porto Rico Panenské ostrovy"
+
+#~ msgid "Canada Newfoundland Time"
+#~ msgstr "Kanadský Newfoundladnský čas"
+
+#~ msgid "Argentina Standard Time"
+#~ msgstr "Argentínsky štandardný čas"
+
+#~ msgid "Brazil Eastern Time"
+#~ msgstr "Brazílsky východný čas"
+
+#~ msgid "Central African Time"
+#~ msgstr "Stredoafrický čas"
+
+#~ msgid "When Marble starts"
+#~ msgstr "Pri spustení Marble"
+
+#~ msgid "Load system time"
+#~ msgstr "Nahrať systémový čas"
+
+#~ msgid "Load last session time"
+#~ msgstr "Nahrať čas pri poslednom zapnutí"
+
+#~ msgid "&Units"
+#~ msgstr "&Jednotky"
+
+#~ msgid "&Distance:"
+#~ msgstr "&Vzdialenosť:"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">The unit that gets used "
+#~ "to measure altitude, lengths and distances (e.g. km, mi, ft).</p></body></"
+#~ "html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Jednotky ktoré sa "
+#~ "použijú pri meranínadmorskej výšky, dĺžok a vzdialeností (t.j. km, míle, "
+#~ "stopy).</p></body></html>"
+
+#~ msgid "Kilometer, Meter"
+#~ msgstr "Kilometer, Meter"
+
+#~ msgid "Miles, Feet"
+#~ msgstr "Míle, stopy"
+
+#~ msgid "Nautical miles, Knots"
+#~ msgstr "Námorné míle, uzly"
+
+#~ msgid "An&gle:"
+#~ msgstr "&Uhol:"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Specifies the notation "
+#~ "of angles in coordinates: By default the Degree-Minute-Second notation (e."
+#~ "g. 54°30'00\" ) gets used. As an alternative you can choose decimal "
+#~ "degrees (e.g. 54.5°).</p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Upresňuje zápis uhlov v "
+#~ "súradniciach: predvolene sa súradnice zobrazujú v tvare stupne-minúty-"
+#~ "sekundy (t.j. 54°30'00\" ). Druhou možnosťou je použitie desatinných "
+#~ "čísel (t.j.54.5°).</p></body></html>"
+
+#~ msgid "Degree (DMS)"
+#~ msgstr "Stupeň (DMS)"
+
+#~ msgid "Degree (Decimal)"
+#~ msgstr "Stupne (desiatkovo)"
+
+#~ msgid "Universal Transverse Mercator (UTM)"
+#~ msgstr "Universal Transverse Mercator (UTM)"
+
+#~ msgid "Map &Quality"
+#~ msgstr "&Kvalita mapy"
+
+#~ msgid "&Still image:"
+#~ msgstr "Statický obrázok:"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Specifies the map "
+#~ "quality that gets displayed while there is no user input. Usually this "
+#~ "allows for high map quality as speed is no concern.</p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Určuje kvalitu "
+#~ "mapyktorá sa zobrazí, v čase kým užívateľ nemení nič na vstupe. Vzhľadom "
+#~ "na to, že rýchlosť v tomto prípade nie je problémom možno používať mapy "
+#~ "vysokej kvality.</p></body></html>"
+
+#~ msgid "Outline Quality"
+#~ msgstr "Kvalita obrysu"
+
+#~ msgid "Low Quality"
+#~ msgstr "Nízka kvalita"
+
+#~ msgid "Normal"
+#~ msgstr "Normálna"
+
+#~ msgid "High Quality"
+#~ msgstr "Vysoká kvalita"
+
+#~ msgid "Print Quality"
+#~ msgstr "Kvalita tlače"
+
+#~ msgid "During &animations:"
+#~ msgstr "Počas &animácií:"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Specifies the map "
+#~ "quality that gets displayed during map animations (e.g. while dragging "
+#~ "the globe). </p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Especially on slow "
+#~ "machines it is advisable to set this option to \"low quality\" as this "
+#~ "will give better speed.</p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Určuje kvalituv ktorej "
+#~ "sa zobrazuje mapa počas animácií (t.j. kým je uchopený glóbus). </p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Zvlášť na "
+#~ "pomalšíchpočítačoch sa odporúča vybrať možnosť \"nízka kvalita\", čo "
+#~ "zrýchliprácu.</p></body></html>"
+
+#~ msgid "G&raphics system:"
+#~ msgstr "G&rafický systém:"
+
+#~ msgid ""
+#~ "Specifies the graphics system that Qt uses to draw the map.\n"
+#~ "Changing this setting might be a good idea if there are performance "
+#~ "issues with the system's graphics drivers."
+#~ msgstr ""
+#~ "Určuje grafický systém, ktorý použije Qt na vykreslenie mapy. Zmena tohto "
+#~ "nastavenia má zmysel, pokiaľ sa vyskytnú problémy s výkonom grafických "
+#~ "ovládačov."
+
+#~ msgid "Raster (Software rendering)"
+#~ msgstr "Raster (softvérové vykresľovanie)"
+
+#~ msgid "OpenGL"
+#~ msgstr "OpenGL"
+
+#~ msgid "&Text Labels"
+#~ msgstr "Textové návestia"
+
+#~ msgid "&Place names:"
+#~ msgstr "&Názvy miest:"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Places often have "
+#~ "different names in different languages. The label on the map can show the "
+#~ "name in the user's language. Alternatively it can display the name in the "
+#~ "official language and glyphs of that place. </p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Miesta majú častokrát v "
+#~ "rôznych jazykoch rôzne pomenovanie. Popis na mape môže zobrazovaťnázvy v "
+#~ "jazyku používateľa alebo môže zobrazovať názov oficiálnom jazyku písme "
+#~ "daného miesta. </p></body></html>"
+
+#~ msgid "Custom & Native Language"
+#~ msgstr "Vlastný & miestny jazyk"
+
+#~ msgid "Custom Language"
+#~ msgstr "Vlastný jazyk"
+
+#~ msgid "Native Language"
+#~ msgstr "Miestny jazyk"
+
+#~ msgid "Default map &font:"
+#~ msgstr "Predvolené mapové písmo:"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">The default font that "
+#~ "gets used on the map.</p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Predvolené písmo, ktoré "
+#~ "sa bude používať v mapách.</p></body></html>"
+
+#~ msgid "Movie Recording - Marble"
+#~ msgstr "Nahrávanie filmov - Marble"
+
+#~ msgid "Destination video"
+#~ msgstr "Cieľové video"
+
+#~ msgid "Open..."
+#~ msgstr "Otvoriť..."
+
+#~ msgid "FPS (frames per second)"
+#~ msgstr "FPS (snímky za sekundu)"
+
+#~ msgid "Cancel"
+#~ msgstr "Zrušiť"
+
+#~ msgid "Start"
+#~ msgstr "Spustiť"
+
+#~ msgid "New Bookmark Folder - Marble"
+#~ msgstr "Nový priečinok so záložkami - Marble"
+
+#~ msgid "&Folder Name"
+#~ msgstr "&Názov priečinka"
+
+#~ msgid "Current Relations"
+#~ msgstr "Aktuálne vzťahy"
+
+#~ msgid "Name"
+#~ msgstr "Názov"
+
+#~ msgid "Type"
+#~ msgstr "Typ"
+
+#~ msgid "Role"
+#~ msgstr "Rola"
+
+#~ msgid "Add Relation"
+#~ msgstr "Pridať vzťah"
+
+#~ msgid "Current Tags"
+#~ msgstr "Aktuálne značky"
+
+#~ msgid "Key"
+#~ msgstr "Kľúč"
+
+#~ msgid "Value"
+#~ msgstr "Hodnota"
+
+#~ msgid "<<"
+#~ msgstr "<<"
+
+#~ msgid ">>"
+#~ msgstr ">>"
+
+#~ msgid "Related Tags"
+#~ msgstr "Súvisiace značky"
+
+#~ msgid "Browse..."
+#~ msgstr "Prechádzať..."
+
+#~ msgid "Icon Link:"
+#~ msgstr "Odkaz ikony:"
+
+#~ msgid "ID:"
+#~ msgstr "ID:"
+
+#~ msgid "Target ID:"
+#~ msgstr "Cieľové ID:"
+
+#~ msgid "Position:"
+#~ msgstr "Pozícia:"
+
+#~ msgid "Marble"
+#~ msgstr "Marble"
+
+#~ msgid "Map"
+#~ msgstr "Mapa"
+
+#~ msgid "Visible Globe Region"
+#~ msgstr "Viditeľný región glóbusu"
+
+#~ msgid "Outer Space"
+#~ msgstr "Vonkajší priestor"
+
+#~ msgid "Route"
+#~ msgstr "Cesta"
+
+#~ msgid "Route Summary"
+#~ msgstr "Zhrnutie cesty"
+
+#~ msgid "Driving Instructions"
+#~ msgstr "Plán cesty"
+
+#~ msgid "Footer"
+#~ msgstr "Pätička"
+
+#~ msgid "Configure Routing Profile"
+#~ msgstr "Nastaviť navigačný profil"
+
+#~ msgid "Active Route Services"
+#~ msgstr "Aktivácia navigačných služieb"
+
+#~ msgid "Service Settings"
+#~ msgstr "Nastavenie služieb"
+
+#~ msgid "No configuration available"
+#~ msgstr "Žiadne nastavenie nie je k dispozícii"
+
+#~ msgid "Select Service to Configure"
+#~ msgstr "Vybrať službu pre nastavenie"
+
+#~ msgid "Configure"
+#~ msgstr "Nastaviť"
+
+#~ msgid "&Add"
+#~ msgstr "Prid&ať"
+
+#~ msgid "&Configure"
+#~ msgstr "&Nastaviť"
+
+#~ msgid "&Remove"
+#~ msgstr "&Odobrať"
+
+#~ msgid "Move &Up"
+#~ msgstr "Presunúť &vyššie"
+
+#~ msgid "Move &Down"
+#~ msgstr "Presunúť &nižšie"
+
+#~ msgid "Car (fastest)"
+#~ msgstr "Autom (najrýchlejšie)"
+
+#~ msgid "Car (shortest)"
+#~ msgstr "Autom (najkratšie)"
+
+#~ msgid "Bicycle"
+#~ msgstr "Bicyklom"
+
+#~ msgid "Pedestrian"
+#~ msgstr "Pešo"
+
+#~ msgid "No results."
+#~ msgstr "Žiadne výsledky."
+
+#~ msgid "Show Details"
+#~ msgstr "Zobraziť podrobnosti"
+
+#~ msgid "Choose alternative routes"
+#~ msgstr "Vyberte iné cesty"
+
+#~ msgid "Sun Control"
+#~ msgstr "Ovládanie Slnka"
+
+#~ msgid "Sun Shading"
+#~ msgstr "Slnečné tieňovanie"
+
+#~ msgid "Shadow"
+#~ msgstr "Tieň"
+
+#~ msgid "Night Map"
+#~ msgstr "Nočná mapa"
+
+#~ msgid "Subsolar Point"
+#~ msgstr "Bod ležiaci medzi obratníkmi"
+
+#~ msgid ""
+#~ "Display <a href=\"http://en.wikipedia.org/wiki/Subsolar_point\">Subsolar "
+#~ "Point</a> icon"
+#~ msgstr ""
+#~ "Zobraziť ikonu <a href=\"http://en.wikipedia.org/wiki/Subsolar_point"
+#~ "\">subsolárneho bodu</a>"
+
+#~ msgid ""
+#~ "<b>Lock</b> map view to <a href=\"http://en.wikipedia.org/wiki/"
+#~ "Subsolar_point\">Subsolar Point</a>."
+#~ msgstr ""
+#~ "<b>Zamknúť</b> pohľad mapy na <a href=\"http://en.wikipedia.org/wiki/"
+#~ "Subsolar_point\">subsolárnom bode</a>."
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">Attention: Panning the map is disabled now! </span></p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Uncheck the \"Lock map "
+#~ "view to Subsolar Point\" option to allow for viewing a different place on "
+#~ "the globe again.</p></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">Pozor: Panoramatický pohyb mapy je teraz zakázaný! </span></"
+#~ "p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Odškrtnite voľbu "
+#~ "\"Zamknúť pohľad mapy na subsolárnom bode\" na povolenie pohľadu na inom "
+#~ "mieste glóbusu.</p></body></html>"
+
+#~ msgid "OK"
+#~ msgstr "OK"
+
+#~ msgid "Apply"
+#~ msgstr "Použiť"
+
+#~ msgid "Creating Map"
+#~ msgstr "Vytváranie mapy"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /></head><body style="
+#~ "\" white-space: pre-wrap; font-family:Sans Serif; font-size:9pt; font-"
+#~ "weight:400; font-style:normal; text-decoration:none;\"><p style=\" margin-"
+#~ "top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-"
+#~ "indent:0; text-indent:0px;\"><span style=\" font-weight:600;\">Satellite "
+#~ "View</span></p><p style=\" margin-top:0px; margin-bottom:0px; margin-"
+#~ "left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Earth "
+#~ "as seen from Space. The map is based on NASA's beautiful \"Blue Marble "
+#~ "Next Generation\" pictures. Credits: NASA's Earth Observatory</p></body></"
+#~ "html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /></head><body style="
+#~ "\" white-space: pre-wrap; font-family:Sans Serif; font-size:9pt; font-"
+#~ "weight:400; font-style:normal; text-decoration:none;\"><p style=\" margin-"
+#~ "top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-"
+#~ "indent:0; text-indent:0px;\"><span style=\" font-weight:600;\">Pohľad z "
+#~ "družice</span></p><p style=\" margin-top:0px; margin-bottom:0px; margin-"
+#~ "left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Zem "
+#~ "ako ju vidno z vesmíru. Mapa založená na obrázkoch NASA's z \"Blue Marble "
+#~ "Next Generation\". Zdroj: NASA's Earth Observatory</p></body></html>"
+
+#~ msgid ""
+#~ "Marble needs to create this map. This only needs to be done once and may "
+#~ "take a few seconds."
+#~ msgstr ""
+#~ "Marble potrebuje vytvoriť túto mapu. To sa udeje iba raz a môže to trvať "
+#~ "niekoľko sekúnd."
+
+#~ msgid "&Cancel"
+#~ msgstr "&Zrušiť"
+
+#~ msgid "Zoom"
+#~ msgstr "Priblíženie"
+
+#~ msgid "&Tile Level Range:"
+#~ msgstr "&Rozsah dlaždíc:"
+
+#~ msgid "Minimum Tile Level"
+#~ msgstr "Minimálny stupeň dlaždíc"
+
+#~ msgid "to"
+#~ msgstr "do"
+
+#~ msgid "Maximum Tile Level"
+#~ msgstr "Maximálny stupeň dlaždíc"
+
+#~ msgid "Time Control"
+#~ msgstr "Ovládanie času"
+
+#~ msgid "Time"
+#~ msgstr "Čas"
+
+#~ msgid "New Date Time      :"
+#~ msgstr "Nový dátum a čas   :"
+
+#~ msgid "Refresh Interval     :"
+#~ msgstr "Obnovovacia frekvencia:"
+
+#~ msgid " seconds"
+#~ msgstr " sekúnd"
+
+#~ msgid "Now"
+#~ msgstr "Teraz"
+
+#~ msgid "Current Date Time :"
+#~ msgstr "Aktuálny dátum a čas :"
+
+#~ msgid "Time Speed"
+#~ msgstr "&Rýchlosť času"
+
+#~ msgid "Close"
+#~ msgstr "Zavrieť"
+
+#~ msgid "Tour"
+#~ msgstr "Prehliadka"
+
+#~ msgid "--:--"
+#~ msgstr "--:--"
+
+#~ msgid "Move up"
+#~ msgstr "Posunúť vyššie"
+
+#~ msgid "Move down"
+#~ msgstr "Posunúť nižšie"
+
+#~ msgid "New Tour"
+#~ msgstr "Nová prehliadka"
+
+#~ msgid "Save Tour"
+#~ msgstr "Uložiť prehliadku"
+
+#~ msgid "Save Tour As"
+#~ msgstr "Uložiť prehliadku ako"
+
+#~ msgid "Open Tour"
+#~ msgstr "Otvoriť prehliadku"
+
+#~ msgid "Play"
+#~ msgstr "Prehrať"
+
+#~ msgid "Begins touring"
+#~ msgstr "Začne prehliadku"
+
+#~ msgid "Stop"
+#~ msgstr "Zastaviť"
+
+#~ msgid "Stops touring (playing again will start tour from the start)"
+#~ msgstr "Zastaví prehliadku (nové spustenie ju spustí od začiatku)"
+
+#~ msgid "Converts the loaded tour into a movie"
+#~ msgstr "Prevedie načítanú cestu na film"
+
+#~ msgid "Worldclock Applet Configuration"
+#~ msgstr "Nastavenie appletu Svetové hodiny"
+
+#~ msgid "Map Display"
+#~ msgstr "Zobrazenie mapy"
+
+#~ msgid "Projection:"
+#~ msgstr "Mapové zobrazenie:"
+
+#~ msgid "Equirectangular"
+#~ msgstr "Ekvirektangulárne"
+
+#~ msgid "Center map on longitude:"
+#~ msgstr "Vycentrovať mapu na poludník:"
+
+#~ msgid "Center map on daylight"
+#~ msgstr "Vycentrovať mapu na denné svetlo"
+
+#~ msgid "Show date"
+#~ msgstr "Zobraziť dátum"
+
+#~ msgid "Time Zones"
+#~ msgstr "Časové pásma"
+
+#~ msgid "Use custom timezone selection"
+#~ msgstr "Použiť vlastné nastavenie časového pásma"
+
+#~ msgid "Edit ground overlay"
+#~ msgstr "Upraviť pokrytie zeme"
+
+#~ msgid "Coordinates"
+#~ msgstr "Súradnice"
+
+#~ msgid "N"
+#~ msgstr "S"
+
+#~ msgid "W"
+#~ msgstr "Z"
+
+#~ msgid "E"
+#~ msgstr "V"
+
+#~ msgid "S"
+#~ msgstr "J"
+
+#~ msgid "Rotation"
+#~ msgstr "Otočenie"
+
+#~ msgid "Add polygon"
+#~ msgstr "Pridať mnohouholník"
+
+#~ msgid "Lines"
+#~ msgstr "Čiary"
+
+#~ msgid "Width:"
+#~ msgstr "Šírka:"
+
+#~ msgid "Area"
+#~ msgstr "Oblasť"
+
+#~ msgid "Filled"
+#~ msgstr "Vyplnené"
+
+#~ msgid "Not Filled"
+#~ msgstr "Nevyplnené"
+
+#~ msgid "Nodes"
+#~ msgstr "Uzly"
+
+#~ msgid "Add path"
+#~ msgstr "Pridať cestu"
+
+#~ msgid "Display"
+#~ msgstr "Zobraziť"
+
+#~ msgid "Fade data older than (minutes)"
+#~ msgstr "Vytrácať údaje staršie ako (v minútach)"
+
+#~ msgid "Do not show data older than (minutes)"
+#~ msgstr "Neukazovať údaje staršie ako  (v minútach)"
+
+#~ msgid "Internet"
+#~ msgstr "Internet"
+
+#~ msgid "APRS Data Sources"
+#~ msgstr "Zdroje údajov APRS"
+
+#~ msgid "Should information be gathered from the Internet APRS data source?"
+#~ msgstr ""
+#~ "Mali by byť zozbierané informácie zo internetového zdroja údajov APRS?"
+
+#~ msgid "Collect data from an APRS Internet server"
+#~ msgstr "Zbierať údaje z internetového serveru APRS"
+
+#~ msgid "Server"
+#~ msgstr "Server"
+
+#~ msgid "rotate.aprs.net"
+#~ msgstr "rotate.aprs.net"
+
+#~ msgid "Port"
+#~ msgstr "Port"
+
+#~ msgid "10253"
+#~ msgstr "10253"
+
+#~ msgid "Dump TCP/IP records to the debug stream"
+#~ msgstr "Poslať TCP/IP záznamy na ladiaci prúd"
+
+#~ msgid "Device"
+#~ msgstr "Zariadenie"
+
+#~ msgid "TNC Terminal Port"
+#~ msgstr "TNC Terminal Port"
+
+#~ msgid "Should information be gathered from a serial port?"
+#~ msgstr "Majú byť zbierané informácie zo sériového portu?"
+
+#~ msgid "Collect data from a serial TNC (In Text Mode)"
+#~ msgstr "Zbierať údaje zo sériového TNC (v textovom režime)"
+
+#~ msgid "TTY"
+#~ msgstr "TTY"
+
+#~ msgid "/dev/ttyUSB0"
+#~ msgstr "/dev/ttyUSB0"
+
+#~ msgid "Dump TTY records to the debug stream"
+#~ msgstr "Poslať TTY záznamy na ladiaci prúd"
+
+#~ msgid "File"
+#~ msgstr "Súbor"
+
+#~ msgid "Should information be gathered from a file?"
+#~ msgstr "Mali by byť zozbierané informácie zo súboru?"
+
+#~ msgid "Collect data from a file"
+#~ msgstr "Zozbierať údaje zo súboru"
+
+#~ msgid "Dump file records to the debug stream"
+#~ msgstr "Poslať záznam zo súboru na ladiaci prúd"
+
+#~ msgid "Configure Compass Plugin"
+#~ msgstr "Nastaviť modul Kompas"
+
+#~ msgid "Theme"
+#~ msgstr "Téma"
+
+#~ msgid "Default"
+#~ msgstr "Predvolené"
+
+#~ msgid "Arrows"
+#~ msgstr "Šípky"
+
+#~ msgid "Atom"
+#~ msgstr "Atóm"
+
+#~ msgid "Magnet"
+#~ msgstr "Magnet"
+
+#~ msgid "Configure Crosshairs Plugin"
+#~ msgstr "Nastaviť modul zameriavacieho kríža"
+
+#~ msgid "Gun 1"
+#~ msgstr "Zbraň 1"
+
+#~ msgid "Gun 2"
+#~ msgstr "Zbraň 2"
+
+#~ msgid "Circled"
+#~ msgstr "Krúžok"
+
+#~ msgid "German"
+#~ msgstr "Nemecky"
+
+#~ msgid "Dialog"
+#~ msgstr "Dialóg"
+
+#~ msgid "Filter"
+#~ msgstr "Filter"
+
+#~ msgid "Maximum number of results:"
+#~ msgstr "Maximálny počet výsledkov:"
+
+#~ msgid "Minimum magnitude:"
+#~ msgstr "Minimálna magnitúda:"
+
+#~ msgid "Time Range"
+#~ msgstr "Časový rozsah"
+
+#~ msgid "Past"
+#~ msgstr "Minulosť"
+
+#~ msgid "From"
+#~ msgstr "Od"
+
+#~ msgid "days"
+#~ msgstr "dní"
+
+#~ msgid "Eclipse Browser"
+#~ msgstr "Prehliadač zatmení"
+
+#~ msgid "Show eclipses for year:"
+#~ msgstr "Zobraziť zatmenia pre rok:"
+
+#~ msgid "&Settings..."
+#~ msgstr "&Nastavenia..."
+
+#~ msgid "&Go To Selected Eclipse"
+#~ msgstr "Prejsť na vybrané zatmenie"
+
+#~ msgid "Eclipses Configuration"
+#~ msgstr "Nastavenie zatmení"
+
+#~ msgid "View &Options"
+#~ msgstr "Možnosti zobrazenia"
+
+#~ msgid "Enable &Lunar Eclipses"
+#~ msgstr "Povoliť zatmenia mesiaca"
+
+#~ msgid "Show Eclipse Control &Widget"
+#~ msgstr "Zobraziť ovládací prvok zatmení"
+
+#~ msgid "&Eclipse Elements"
+#~ msgstr "Elementy zatmenia"
+
+#~ msgid "&Northern Penumbra"
+#~ msgstr "Severný polotieň"
+
+#~ msgid "&Umbra"
+#~ msgstr "Tieň"
+
+#~ msgid "Position of Eclipse &Maximum"
+#~ msgstr "Poloha maximu zatmenia"
+
+#~ msgid "Central &Line"
+#~ msgstr "Stredná čiara"
+
+#~ msgid "Full &Penumbra"
+#~ msgstr "Plný polotieň"
+
+#~ msgid "Sunrise and Sunset &Boundaries"
+#~ msgstr "Hranice východu a západu slnka"
+
+#~ msgid "&Southern Penumbra"
+#~ msgstr "Južný polotieň"
+
+#~ msgid "Penumbra with 60% Ma&gnitude"
+#~ msgstr "Polotieň s 60% magnitúdou"
+
+#~ msgid "&Reminder"
+#~ msgstr "Upozornenie"
+
+#~ msgid "Remind about eclipse events"
+#~ msgstr "Upozorniť pri udalostiach zatmenia"
+
+#~ msgid "Eclipse Event"
+#~ msgstr "Udalosť zatmenia"
+
+#~ msgid ""
+#~ "<html><head/><body><p>Marble has detected that the following <span style="
+#~ "\" font-weight:600;\">eclipse events</span> will occur in the near "
+#~ "future. If you want more information on a specific event, select it and "
+#~ "click OK.</p></body></html>"
+#~ msgstr ""
+#~ "<html><head/><body><p>Marble zistil, že nasledovné <span style=\" font-"
+#~ "weight:600;\">udalosti zatmení</span> nastanú v blízkej budúcnosti. Ak "
+#~ "chcete viac informácií o určitej udalosti, vyberte ju a kliknite na OK.</"
+#~ "p></body></html>"
+
+#~ msgid "Do not remind me about eclipse events again"
+#~ msgstr "Nepripomínať už udalosti zatmenia"
+
+#~ msgid "Configure Elevation Profile Plugin"
+#~ msgstr "Nastaviť Modul zobrazenia výškového profilu"
+
+#~ msgid "Zoom to viewport"
+#~ msgstr "Priblížiť na výrez"
+
+#~ msgid "Speed"
+#~ msgstr "Rýchlosť"
+
+#~ msgid "Direction"
+#~ msgstr "Smer"
+
+#~ msgid "Altitude"
+#~ msgstr "Výška"
+
+#~ msgid "Precision"
+#~ msgstr "Presnosť"
+
+#~ msgid "Coordinate Grid Plugin"
+#~ msgstr "Modul Súradnicová sieť"
+
+#~ msgid "C&olors"
+#~ msgstr "&Farby"
+
+#~ msgid "&Grid:"
+#~ msgstr "&Súradnicová sieť:"
+
+#~ msgid "Color of the coordinate grid."
+#~ msgstr "Farba súradnicovej siete."
+
+#~ msgid "&Tropics:"
+#~ msgstr "&Obratníky:"
+
+#~ msgid "Color of the tropical circles."
+#~ msgstr "Farba obratníkov."
+
+#~ msgid "&Equator:"
+#~ msgstr "&Rovník:"
+
+#~ msgid "Color of the equator."
+#~ msgstr "Farba rovníka."
+
+#~ msgid "Labels"
+#~ msgstr "Štítky"
+
+#~ msgid "&Named Labels"
+#~ msgstr "Pomenované štítky"
+
+#~ msgid "Show Labels for Prime meridian, Equator, Tropics."
+#~ msgstr "Zobraziť štítky pre nultý poludník, rovník, trópy."
+
+#~ msgid "&Numerical Labels"
+#~ msgstr "Číselné štítky"
+
+#~ msgid "Show numerical Labels."
+#~ msgstr "Zobraziť číselné štítky"
+
+#~ msgid "Configure Scale Bar Plugin"
+#~ msgstr "Nastaviť modul grafickej mierky"
+
+#~ msgid "Show Ratio Scale"
+#~ msgstr "Zobraziť mierku"
+
+#~ msgid "Minimize"
+#~ msgstr "Minimalizovať"
+
+#~ msgid "Marble - Measure Tool Configuration"
+#~ msgstr "Marble - Nastavenie meracích nástrojov"
+
+#~ msgid "Ruler Type"
+#~ msgstr "Typ pravítka"
+
+#~ msgid "Polygon"
+#~ msgstr "Mnohouholník"
+
+#~ msgid "Circle"
+#~ msgstr "Kružnica"
+
+#~ msgid "Segment labels"
+#~ msgstr "Segmentové návestia"
+
+#~ msgid "Distance "
+#~ msgstr "Vzdialenosť"
+
+#~ msgid "Bearing"
+#~ msgstr "Azimut"
+
+#~ msgid "Bearing Change"
+#~ msgstr "Zmena ložiska"
+
+#~ msgid "Perimeter"
+#~ msgstr "Obvod"
+
+#~ msgid "Radius"
+#~ msgstr "Polomer"
+
+#~ msgid "Circumference"
+#~ msgstr "Obvod kruhu"
+
+#~ msgid "General"
+#~ msgstr "Všeobecné"
+
+#~ msgid "Cache name:"
+#~ msgstr "Názov vyrovnávacej pamäte:"
+
+#~ msgid "User name:"
+#~ msgstr "Meno používateľa:"
+
+#~ msgid "Type:"
+#~ msgstr "Typ:"
+
+#~ msgid "Status:"
+#~ msgstr "Stav:"
+
+#~ msgid "Country:"
+#~ msgstr "Krajina:"
+
+#~ msgid "Size:"
+#~ msgstr "Veľkosť:"
+
+#~ msgid "Difficulty:"
+#~ msgstr "Obtiažnosť:"
+
+#~ msgid "Terrain:"
+#~ msgstr "Terén:"
+
+#~ msgid "Longitude:"
+#~ msgstr "Zemepisná dĺžka:"
+
+#~ msgid "Latitude:"
+#~ msgstr "Zemepisná šírka:"
+
+#~ msgid "Date hidden:"
+#~ msgstr "Dátum skrytý:"
+
+#~ msgid "Date created:"
+#~ msgstr "Dátum vytvorenia:"
+
+#~ msgid "Date last modified:"
+#~ msgstr "Dátum poslednej zmeny:"
+
+#~ msgid "Log"
+#~ msgstr "Záznam"
+
+#~ msgid "Previous"
+#~ msgstr "Späť"
+
+#~ msgid "Next"
+#~ msgstr "Ďalej"
+
+#~ msgid "Minimum difficulty:"
+#~ msgstr "Minimálna obtiažnosť:"
+
+#~ msgid "Maximum difficulty:"
+#~ msgstr "Maximálna obtiažnosť:"
+
+#~ msgid "Maximum Distance:"
+#~ msgstr "Maximálna vzdialenosť:"
+
+#~ msgid "Start:"
+#~ msgstr "Začiatok:"
+
+#~ msgid "End:"
+#~ msgstr "Koniec:"
+
+#~ msgid "TextLabel"
+#~ msgstr "TextLabel"
+
+#~ msgid "Hint"
+#~ msgstr "Rada"
+
+#~ msgid "Logs"
+#~ msgstr "Logy"
+
+#~ msgid "Marble - OpenDesktop plugin configuration"
+#~ msgstr "Marble - Nastavenie pluginu OpenDesktop"
+
+#~ msgid "Number of displayed items on the screen:"
+#~ msgstr "Počet zobrazených položiek na obrazovke:"
+
+#~ msgid "Map &Image"
+#~ msgstr "Obrázok &mapy"
+
+#~ msgid "&Planet:"
+#~ msgstr "&Planéta:"
+
+#~ msgid "&Size:"
+#~ msgstr "&Veľkosť:"
+
+#~ msgid "x"
+#~ msgstr "x"
+
+#~ msgid "Preview"
+#~ msgstr "Náhľad"
+
+#~ msgid "Filename"
+#~ msgstr "Meno súboru"
+
+#~ msgid "Position I&ndicator:"
+#~ msgstr "Ukazovateľ polohy:"
+
+#~ msgid "Configure Photo Plugin"
+#~ msgstr "Nastaviť plugin fotiek"
+
+#~ msgid "License"
+#~ msgstr "Licencia"
+
+#~ msgid "Number of items on the screen"
+#~ msgstr "Počet položiek na obrazovke"
+
+#~ msgid "Configure Position Marker Plugin"
+#~ msgstr "Nastaviť modul ukazovateľa polohy"
+
+#~ msgid "Cursor Shape"
+#~ msgstr "Tvar kurzora"
+
+#~ msgid "&Arrow"
+#~ msgstr "Šípk&a"
+
+#~ msgid "&Custom:"
+#~ msgstr "&Vlastný:"
+
+#~ msgid ""
+#~ "Position marker images indicating the direction should point north (top)."
+#~ msgstr "Obrázky ukazovateľov polohy by mali smerovať na sever (hore)."
+
+#~ msgid "Trail"
+#~ msgstr "Cestička"
+
+#~ msgid "&Accuracy:"
+#~ msgstr "&Presnosť:"
+
+#~ msgid "Color of the position marker's accuracy indicator."
+#~ msgstr "Farba ukazovateľa presnosti polohy."
+
+#~ msgid "Trail:"
+#~ msgstr "Stopa:"
+
+#~ msgid "Color of the position marker's trail."
+#~ msgstr "Farba značenia stopy."
+
+#~ msgid "Routing Configuration - Marble"
+#~ msgstr "Nastavenie navigácie - Marble"
+
+#~ msgid "Audible Turn Instructions"
+#~ msgstr "Zvukové inštrukcie navigácie"
+
+#~ msgid "Play a sound"
+#~ msgstr "Zahrať zvuk"
+
+#~ msgid "Use this speaker"
+#~ msgstr "Použiť tohto hovorcu"
+
+#~ msgid ""
+#~ "<a href=\"http://userbase.kde.org/Marble/CustomSpeakers\">Get more "
+#~ "speakers</a>"
+#~ msgstr ""
+#~ "<a href=\"http://userbase.kde.org/Marble/CustomSpeakers\">Získať viac "
+#~ "hovorcov</a>"
+
+#~ msgid "Guidance Mode"
+#~ msgstr "Predvádzací režim"
+
+#~ msgid "R"
+#~ msgstr "R"
+
+#~ msgid "Toggle GPS"
+#~ msgstr "Prepnúť GPS"
+
+#~ msgid "zoom out"
+#~ msgstr "oddialiť"
+
+#~ msgid "zoom in"
+#~ msgstr "priblížiť"
+
+#~ msgid "total time remaining"
+#~ msgstr "zostávajúci čas"
+
+#~ msgid "Satellites Configuration - Marble"
+#~ msgstr "Nastavenia družíc - Marble"
+
+#~ msgid "&Satellites"
+#~ msgstr "&Satelity"
+
+#~ msgid "&Data Sources"
+#~ msgstr "Zdroje údajov"
+
+#~ msgid ""
+#~ "<html><head/><body><p><span style=\" font-weight:600;\">Last update:</"
+#~ "span></p></body></html>"
+#~ msgstr ""
+#~ "<html><head/><body><p><span style=\" font-weight:600;\">Posledná "
+#~ "aktualizácia:</span></p></body></html>"
+
+#~ msgid "&Reload All Data Sources"
+#~ msgstr "Znovu načítať všetky zdroje údajov"
+
+#~ msgid "Satellite Data Sources:"
+#~ msgstr "Zdroje údajov satelitov:"
+
+#~ msgid "Add a new data source (URL)."
+#~ msgstr "Pridať nový zdroj údajov (URL)."
+
+#~ msgid "Open a new data source from disk."
+#~ msgstr "Otvoriť nový zdroj údajov z disku."
+
+#~ msgid "Remove selected data source."
+#~ msgstr "Odstrániť vybraný zdroj údajov."
+
+#~ msgid "(Built-in Data Sources for Earth Satellites)"
+#~ msgstr "(Zabudované zdroje údajov pre zemské satelity)"
+
+#~ msgid ""
+#~ "<html><head/><body><p>Supported formats: <a href=\"http://techbase.kde."
+#~ "org/Projects/Marble/SatelliteCatalogFormat\"><span style=\" text-"
+#~ "decoration: underline; color:#0000ff;\">Marble Satellite Catalogue</"
+#~ "span></a>, <a href=\"http://en.wikipedia.org/wiki/Two-line_element_set"
+#~ "\"><span style=\" text-decoration: underline; color:#0000ff;\">Two-Line-"
+#~ "Element Set</span></a></p></body></html>"
+#~ msgstr ""
+#~ "<html><head/><body><p>Podporované formáty: <a href=\"http://techbase.kde."
+#~ "org/Projects/Marble/SatelliteCatalogFormat\"><span style=\" text-"
+#~ "decoration: underline; color:#0000ff;\">Marble Satellite Catalogue</"
+#~ "span></a>, <a href=\"http://en.wikipedia.org/wiki/Two-line_element_set"
+#~ "\"><span style=\" text-decoration: underline; color:#0000ff;\">Two-Line-"
+#~ "Element Set</span></a></p></body></html>"
+
+#~ msgid "Plugin Inactive"
+#~ msgstr "Plugin neaktívny"
+
+#~ msgid "&Activate Plugin"
+#~ msgstr "Aktivovať plugin"
+
+#~ msgid ""
+#~ "Configuration options not available since the plugin is disabled at the "
+#~ "moment."
+#~ msgstr "Voľby nastavenia nie sú dostupné keďže plugin je práve zakázaný."
+
+#~ msgid "km/h"
+#~ msgstr "km/h"
+
+#~ msgid "Configure Stars Plugin"
+#~ msgstr "Nastaviť plugin hviezd"
+
+#~ msgid "Celestial Objects"
+#~ msgstr "Nebeské objekty"
+
+#~ msgid "Star Magnitude Limit"
+#~ msgstr "Obmedzenie magnitúdy hviezd"
+
+#~ msgid " mag"
+#~ msgstr " mag"
+
+#~ msgid "Solar System"
+#~ msgstr "Slnečná sústava"
+
+#~ msgid "Sun"
+#~ msgstr "Slnko"
+
+#~ msgid "Moon"
+#~ msgstr "Mesiac"
+
+#~ msgid "Mercury"
+#~ msgstr "Merkúr"
+
+#~ msgid "Venus"
+#~ msgstr "Venuša"
+
+#~ msgid "Earth"
+#~ msgstr "Zem"
+
+#~ msgid "Mars"
+#~ msgstr "Mars"
+
+#~ msgid "Jupiter"
+#~ msgstr "Jupiter"
+
+#~ msgid "Saturn"
+#~ msgstr "Saturn"
+
+#~ msgid "Uranus"
+#~ msgstr "Urán"
+
+#~ msgid "Neptune"
+#~ msgstr "Neptún"
+
+#~ msgid "Use name labels"
+#~ msgstr "Použiť mená"
+
+#~ msgid "Magnify Sun and Moon"
+#~ msgstr "Zväčšiť Slnko a Mesiac"
+
+#~ msgid "Other"
+#~ msgstr "Ostatné"
+
+#~ msgid "Deep Sky Object Labels"
+#~ msgstr "Názvy deep sky objektov"
+
+#~ msgid "Deep Sky Objects"
+#~ msgstr "Deep sky objekty"
+
+#~ msgid "Lines and Orientation"
+#~ msgstr "Čiary a orientácia"
+
+#~ msgid "Constellations"
+#~ msgstr "Súhvezdia"
+
+#~ msgid "Names"
+#~ msgstr "Mená"
+
+#~ msgid "Latin Name"
+#~ msgstr "Latinský názov"
+
+#~ msgid "Native Translation"
+#~ msgstr "Natívny preklad"
+
+#~ msgid "Abbreviation"
+#~ msgstr "Skratka"
+
+#~ msgid "Celestial Equator"
+#~ msgstr "Nebeský rovník"
+
+#~ msgid "Celestial Poles"
+#~ msgstr "Nebeské póly"
+
+#~ msgid "Ecliptic"
+#~ msgstr "Ekliptika"
+
+#~ msgid "Configure Weather Plugin"
+#~ msgstr "Nastaviť modul Počasie"
+
+#~ msgid "Information"
+#~ msgstr "Informácie"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Here you can "
+#~ "choose if you want the weather condition to be shown (for example, clouds "
+#~ "or clear sky.) Marble will only show the condition if this information is "
+#~ "available.</p></body></html>\n"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Tu môžete "
+#~ "nastaviť, či sa bude zobrazovať počasie (napríklad oblaky alebo čistá "
+#~ "obloha). Marble tietoinformácie zobrazí pokiaľ budú dostupné</p></body></"
+#~ "html>\n"
+
+#~ msgid "Weather condition"
+#~ msgstr "Informácie o počasí"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Selects if you "
+#~ "want the temperature to be shown. The temperature will only be shown for "
+#~ "the stations it is available for.</p></body></html>\n"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Vyberte, či si "
+#~ "želáte zobrazovanieteplôt. Teploty sa zobrazia len pri staniciach ktoré "
+#~ "túto informáciu poskytujú.</p> </body></html>\n"
+
+#~ msgid "Temperature"
+#~ msgstr "Teplota"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Select if you "
+#~ "want the wind direction to be shown. The wind direction will only be "
+#~ "shown if it is available for the particular station.</p></body></html>\n"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Vyberte, či si "
+#~ "želáte zobrazovaniesmeru vetra. Smer vetra sa zobrazí len pri staniciach, "
+#~ "ktoré túto informáciu poskytujú.</p></body></html>\n"
+
+#~ msgid "Wind direction"
+#~ msgstr "Smer vetra"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Select if you "
+#~ "want the wind speed to be shown. The wind speed will only be shown if it "
+#~ "is available for the particular station.</p></body></html>\n"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Vyberte, či si "
+#~ "želáte zobrazovanierýchlosti vetra. Rýchlosť vetra sa zobrazí len pri "
+#~ "staniciach ktoré túto informáciu poskytujú.</p></body></html>\n"
+
+#~ msgid "Wind speed"
+#~ msgstr "Rýchlosť vetra"
+
+#~ msgid "Units"
+#~ msgstr "Jednotky"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">The unit used to "
+#~ "measure the temperature.</p></body></html>\n"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Jednotka na "
+#~ "meranie teploty. </p></body></html>\n"
+
+#~ msgid "Celsius"
+#~ msgstr "Celzius"
+
+#~ msgid "Fahrenheit"
+#~ msgstr "Fahrenheit"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">The unit used to "
+#~ "measure the wind speed.</p></body></html>\n"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Jednotka na "
+#~ "meranie rýchlosti vetra.</p></body></html>\n"
+
+#~ msgid "Kilometers per hour"
+#~ msgstr "Kilometrov za hodinu"
+
+#~ msgid "Miles per hour"
+#~ msgstr "Míľ za hodinu"
+
+#~ msgid "Meters per second"
+#~ msgstr "Metrov za sekundu"
+
+#~ msgid "Knots"
+#~ msgstr "uzlov"
+
+#~ msgid "Beaufort"
+#~ msgstr "Beaufort"
+
+#~ msgid "Pressure"
+#~ msgstr "Tlak"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">The unit used to "
+#~ "measure the air pressure.</p></body></html>\n"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Jednotka na "
+#~ "meranietlaku vzduchu.</p></body></html>\n"
+
+#~ msgid "Hecto Pascals"
+#~ msgstr "Hektopaskaly"
+
+#~ msgid "Kilo Pascals"
+#~ msgstr "kilopaskaly"
+
+#~ msgid "Bars"
+#~ msgstr "bary"
+
+#~ msgid "Millimeters of Mercury"
+#~ msgstr "milimetrov ortuťového stĺpca"
+
+#~ msgid "Inches of Mercury"
+#~ msgstr "Palce ortuti"
+
+#~ msgid "Miscellaneous"
+#~ msgstr "Rôzne"
+
+#~ msgid "Show only favorite items"
+#~ msgstr "Zobraziť iba obľúbené položky"
+
+#~ msgid "Weather update interval"
+#~ msgstr "Interval aktualizácia počasia"
+
+#~ msgid " hours"
+#~ msgstr " hodiny"
+
+#~ msgid "Configure Wikipedia Plugin"
+#~ msgstr "Nastaviť modul WIkipédia"
+
+#~ msgid "Show thumbnail images"
+#~ msgstr "Zobraziť miniatúry"
+
+#~ msgid "Route type:"
+#~ msgstr "Typ cesty:"
+
+#~ msgid "Speed:"
+#~ msgstr "Rýchlosť:"
+
+#~ msgid "AppKey"
+#~ msgstr "AppKey"
+
+#~ msgid "Preference:"
+#~ msgstr "Priorita:"
+
+#~ msgid "Avoid motorways"
+#~ msgstr "Vyhnúť sa diaľniciam"
+
+#~ msgid "Avoid tollways"
+#~ msgstr "Vyhnúť sa poplatkom"
+
+#~ msgid "Avoid ferries"
+#~ msgstr "Vyhnúť sa trajektom"
+
+#~ msgid "Ascending slope:"
+#~ msgstr "Výstupný svah:"
+
+#~ msgid "Descending slope:"
+#~ msgstr "Zostupný svah:"
+
+#~ msgid ""
+#~ "An AppKey is required for MapQuest routing to work. You can register one "
+#~ "<a href=\"http://developer.mapquest.com/web/products/open\">here</a>."
+#~ msgstr ""
+#~ "AppKey sa vyžaduje pre prácu MapQuest smerovania. Môžete si zaregistrovať "
+#~ "<a href=\"http://developer.mapquest.com/web/products/open\">tu</a>."
+
+#~ msgid "Monav Configuration"
+#~ msgstr "Nastavenie Monav"
+
+#~ msgid "Transport Type:"
+#~ msgstr "Spôsob dopravy:"
+
+#~ msgid "Any"
+#~ msgstr "Ľubovoľný"
+
+#~ msgid "Manage Maps"
+#~ msgstr "Spravovať mapy"
+
+#~ msgid "Install New"
+#~ msgstr "Nainštalovať nové"
+
+#~ msgid "Continent"
+#~ msgstr "Kontinent"
+
+#~ msgid "Country"
+#~ msgstr "Krajina"
+
+#~ msgid "Download Variant"
+#~ msgstr "Prevziať alternatívy"
+
+#~ msgid "Install"
+#~ msgstr "Inštalovať"
+
+#~ msgid "Nothing to do."
+#~ msgstr "Niet čo robiť."
+
+#~ msgid "%v/%m MB"
+#~ msgstr "%v/%m MB"
+
+#~ msgid "Abort"
+#~ msgstr "Zrušiť"
+
+#~ msgid "Transport:"
+#~ msgstr "Doprava:"
+
+#~ msgid "Profile:"
+#~ msgstr "Profil:"
+
+#~ msgid "Method"
+#~ msgstr "Spôsob"
+
+#~ msgid "Fastest"
+#~ msgstr "Najrýchlejšie"
+
+#~ msgid "Shortest"
+#~ msgstr "Najkratšie"
+
+#~ msgid "Please allow access to KWallet."
+#~ msgstr "Prosím povoľte prístup ku KWallet."
+
+#~ msgid ""
+#~ "You haven't allowed Marble to use KWallet yet.\n"
+#~ "This is dangerous since Marble will store your password without "
+#~ "encryption.\n"
+#~ "Are you sure?"
+#~ msgstr ""
+#~ "Ešte ste nepovolili Marble používať KWallet.\n"
+#~ "Toto je nebezpečné, pretože Marble ukladá vaše heslo bez šifrovania.\n"
+#~ "Ste si istý?"
+
+#~ msgid "KWallet Access in Marble"
+#~ msgstr "Prístup na KWallet v Marble"
+
+#~ msgid ""
+#~ "You still don't allow Marble to use KWallet.\n"
+#~ "If you haven't seen the KWallet dialog asking to allow access, it means "
+#~ "that you have disabled it.\n"
+#~ "If you would like to change this see System Information -> Account "
+#~ "Details -> KDE Wallet -> Access Control.\n"
+#~ "Choose your wallet and allow Marble to use it."
+#~ msgstr ""
+#~ "Stále ste nepovolili Marble používať KWallet.\n"
+#~ "Ak ste nevideli dialóg KWallet žiadajúci o povolenie prístupu, znamená "
+#~ "to, že ho máte zakázaný.\n"
+#~ "Ak to chcete zmeniť, pozrite Systémové informácie -> Detaily účtu -> KDE "
+#~ "Wallet -> Ovládanie prístupu.\n"
+#~ "Vyberte vašu peňaženku a povoľte Marble ju používať."
+
+#~ msgid "Location Browser"
+#~ msgstr "Prehliadač miest"
+
+#~ msgid "Double click an entry of this list to get it displayed on the map."
+#~ msgstr "Dvojklikom na položku zoznamu ju zobrazíte v mape."
+
+#~ msgid "Navigate to your 'Home Location'"
+#~ msgstr "Prejsť na váš 'Domovský priečinok'"
+
+#~ msgid "Do you allow Marble to use KWallet?"
+#~ msgstr "Povolíte Marble používať KWallet?"

@@ -1,0 +1,74 @@
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>, 2016.
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2021-09-28 00:13+0000\n"
+"PO-Revision-Date: 2016-08-13 08:58+0100\n"
+"Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
+"Language-Team: Polish <kde-i18n-doc@kde.org>\n"
+"Language: pl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
+"|| n%100>=20) ? 1 : 2);\n"
+"X-Generator: Lokalize 2.0\n"
+
+#: package/contents/config/config.qml:12
+#, kde-format
+msgid "Map Display"
+msgstr "Wyświetlanie mapy"
+
+#: package/contents/ui/configMapDisplay.qml:28
+#, kde-format
+msgid "Projection:"
+msgstr "Projekcja:"
+
+#: package/contents/ui/configMapDisplay.qml:36
+#, kde-format
+msgid "Equirectangular"
+msgstr "Walcowa równoodległościowa"
+
+#: package/contents/ui/configMapDisplay.qml:37
+#, kde-format
+msgid "Mercator"
+msgstr "Merkator"
+
+#: package/contents/ui/configMapDisplay.qml:54
+#, kde-format
+msgid "Center on:"
+msgstr "Wyśrodkuj na:"
+
+#: package/contents/ui/configMapDisplay.qml:62
+#, kde-format
+msgid "Daylight"
+msgstr "Światło dzienne"
+
+#: package/contents/ui/configMapDisplay.qml:63
+#, kde-format
+msgid "Longitude"
+msgstr "Długość geograficzna"
+
+#: package/contents/ui/configMapDisplay.qml:64
+#, kde-format
+msgid "Location"
+msgstr "Położenie"
+
+#: package/contents/ui/configMapDisplay.qml:82
+#, kde-format
+msgid "Longitude:"
+msgstr "Długość geograficzna:"
+
+#: package/contents/ui/configMapDisplay.qml:99
+#, kde-format
+msgid "Show date:"
+msgstr "Pokaż datę:"
+
+#: package/contents/ui/configTimeZones.qml:17
+#, kde-format
+msgid "Use custom time zone selection:"
+msgstr "Użyj własnej strefy czasowej:"

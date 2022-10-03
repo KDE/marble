@@ -1,0 +1,5823 @@
+# translation of marble.po to Romanian
+# translation of marble.po to
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+# Claudiu Covaci <claudiu.covaci@gmail.com>, 2008.
+# Sergiu Bivol <sergiu@cip.md>, 2008, 2009, 2012, 2013.
+# Laurenţiu Buzdugan <lbuz@rolix.org>, 2009.
+# Cristian Oneț <onet.cristian@gmail.com>, 2011, 2012.
+# Laurențiu Cristian Ion <ionlaurentiucristian@gmail.com>, 2011.
+msgid ""
+msgstr ""
+"Project-Id-Version: marble\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2021-10-18 00:13+0000\n"
+"PO-Revision-Date: 2013-01-12 05:02+0200\n"
+"Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
+"Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
+"Language: ro\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < "
+"20)) ? 1 : 2;\n"
+
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "Sergiu Bivol"
+
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "sergiu@cip.md"
+
+#: kdemain.cpp:91
+#, kde-format
+msgid "Marble Virtual Globe"
+msgstr "Center map on longitude:Globul virtual Marble"
+
+#: kdemain.cpp:93
+#, kde-format
+msgid "A World Atlas."
+msgstr "Un atlas al lumii."
+
+#: kdemain.cpp:95
+#, fuzzy, kde-format
+#| msgid "(c) 2007-2012"
+msgid "(c) 2007-%1"
+msgstr "(c) 2007-2012"
+
+#: kdemain.cpp:100 kdemain.cpp:286
+#, kde-format
+msgid "Torsten Rahn"
+msgstr "Torsten Rahn"
+
+#: kdemain.cpp:101
+#, kde-format
+msgid "Developer and Original Author"
+msgstr "Dezvoltator și autor original"
+
+#: kdemain.cpp:103
+#, kde-format
+msgid "Bernhard Beschow"
+msgstr "Bernhard Beschow"
+
+#: kdemain.cpp:104
+#, kde-format
+msgid "WMS Support, Mobile, Performance"
+msgstr "Suport WMS, Mobil, performanță"
+
+#: kdemain.cpp:106
+#, kde-format
+msgid "Thibaut Gridel"
+msgstr "Thibaud Gridel"
+
+#: kdemain.cpp:107
+#, kde-format
+msgid "Geodata"
+msgstr "Date geografice"
+
+#: kdemain.cpp:109
+#, kde-format
+msgid "Jens-Michael Hoffmann"
+msgstr "Jens-Michael Hoffmann"
+
+#: kdemain.cpp:110
+#, kde-format
+msgid "OpenStreetMap Integration, OSM Namefinder, Download Management"
+msgstr ""
+"Integrare cu OpenStreetMap, Motorul de căutare de nume OSM, Administrarea "
+"descărcărilor"
+
+#: kdemain.cpp:112
+#, kde-format
+msgid "Florian E&szlig;er"
+msgstr "Florian E&szlig;er"
+
+#: kdemain.cpp:113
+#, kde-format
+msgid "Elevation Profile"
+msgstr "Profil de altitudine"
+
+#: kdemain.cpp:115
+#, kde-format
+msgid "Wes Hardaker"
+msgstr "Wes Hardaker"
+
+#: kdemain.cpp:116
+#, kde-format
+msgid "APRS Plugin"
+msgstr "Modul APRS"
+
+#: kdemain.cpp:118 kdemain.cpp:202
+#, kde-format
+msgid "Bastian Holst"
+msgstr "Bastian Holst"
+
+#: kdemain.cpp:119
+#, kde-format
+msgid "Online Services support"
+msgstr "Asistență online pentru servicii"
+
+#: kdemain.cpp:121 kdemain.cpp:172
+#, kde-format
+msgid "Guillaume Martres"
+msgstr "Guillaume Martres"
+
+#: kdemain.cpp:122
+#, fuzzy, kde-format
+#| msgid " Satellites"
+msgid "Satellites"
+msgstr "Sateliți"
+
+#: kdemain.cpp:124 kdemain.cpp:168
+#, kde-format
+msgid "Rene Kuettner"
+msgstr ""
+
+#: kdemain.cpp:125
+#, fuzzy, kde-format
+#| msgid " Satellites"
+msgid "Satellites, Eclipses"
+msgstr "Sateliți"
+
+#: kdemain.cpp:127
+#, kde-format
+msgid "Friedrich W. H. Kossebau"
+msgstr "Friedrich W. H. Kossebau"
+
+#: kdemain.cpp:128
+#, kde-format
+msgid "Plasma Integration, Bugfixes"
+msgstr "Integrarea plasmei, corecții erori"
+
+#: kdemain.cpp:130
+#, kde-format
+msgid "Dennis Nienhüser"
+msgstr "Dennis Nienhüser"
+
+#: kdemain.cpp:131
+#, kde-format
+msgid "Routing, Navigation, Mobile"
+msgstr "Ghidare, navigare, mobil"
+
+#: kdemain.cpp:133
+#, kde-format
+msgid "Niko Sams"
+msgstr "Niko Sams"
+
+#: kdemain.cpp:134
+#, kde-format
+msgid "Routing, Elevation Profile"
+msgstr "Ghidare, profil de altitudine"
+
+#: kdemain.cpp:136 kdemain.cpp:206
+#, kde-format
+msgid "Patrick Spendrin"
+msgstr "Patrick Spendrin"
+
+#: kdemain.cpp:137
+#, kde-format
+msgid "Core Developer: KML and Windows support"
+msgstr "Dezvoltator de bază: Suport KML și Windows"
+
+#: kdemain.cpp:139
+#, kde-format
+msgid "Eckhart Wörner"
+msgstr "Eckhart Wörner"
+
+#: kdemain.cpp:140
+#, kde-format
+msgid "Bugfixes"
+msgstr "Corecții erori"
+
+#: kdemain.cpp:145
+#, kde-format
+msgid "Inge Wallin"
+msgstr "Inge Wallin"
+
+#: kdemain.cpp:146
+#, kde-format
+msgid "Core Developer and Co-Maintainer"
+msgstr "Dezvoltator de bază și coresponsabil"
+
+#: kdemain.cpp:148
+#, kde-format
+msgid "Henry de Valence"
+msgstr "Henry de Valence"
+
+#: kdemain.cpp:149
+#, kde-format
+msgid "Core Developer: Marble Runners, World-Clock Plasmoid"
+msgstr "Dezvoltator de bază: Marmura Runners, World-Clock Plasmoid"
+
+#: kdemain.cpp:151
+#, kde-format
+msgid "Pino Toscano"
+msgstr "Pino Toscano"
+
+#: kdemain.cpp:152
+#, kde-format
+msgid "Network plugins"
+msgstr "Module de rețea"
+
+#: kdemain.cpp:154
+#, kde-format
+msgid "Harshit Jain"
+msgstr "Harshit Jain"
+
+#: kdemain.cpp:155
+#, kde-format
+msgid "Planet filter"
+msgstr "Filtru de planete"
+
+#: kdemain.cpp:157
+#, kde-format
+msgid "Simon Edwards"
+msgstr "Simon Edwards"
+
+#: kdemain.cpp:158
+#, kde-format
+msgid "Marble Python Bindings"
+msgstr "Asocieri Marble cu Python"
+
+#: kdemain.cpp:160
+#, kde-format
+msgid "Magnus Valle"
+msgstr "Magnus Valle"
+
+#: kdemain.cpp:161
+#, kde-format
+msgid "Historical Maps"
+msgstr "Hărți istorice"
+
+#: kdemain.cpp:163
+#, kde-format
+msgid "Médéric Boquien"
+msgstr "Médéric Boquien"
+
+#: kdemain.cpp:164
+#, kde-format
+msgid "Astronomical Observatories"
+msgstr "Observatoare astronomice"
+
+#: kdemain.cpp:169
+#, fuzzy, kde-format
+#| msgid ""
+#| "ESA Summer of Code in Space  2011 Project: Visualisation of Satellite "
+#| "Orbits"
+msgid ""
+"ESA Summer of Code in Space 2012 Project: Visualization of planetary "
+"satellites"
+msgstr ""
+"Proiect ESA Summer of Code in Space  2011: Vizualizare a orbitelor de "
+"sateliți"
+
+#: kdemain.cpp:173
+#, fuzzy, kde-format
+#| msgid ""
+#| "ESA Summer of Code in Space  2011 Project: Visualisation of Satellite "
+#| "Orbits"
+msgid ""
+"ESA Summer of Code in Space 2011 Project: Visualization of Satellite Orbits"
+msgstr ""
+"Proiect ESA Summer of Code in Space  2011: Vizualizare a orbitelor de "
+"sateliți"
+
+#: kdemain.cpp:178
+#, kde-format
+msgid "Konstantin Oblaukhov"
+msgstr "Konstantin Oblaukhov"
+
+#: kdemain.cpp:179
+#, kde-format
+msgid "Google Summer of Code 2011 Project: OpenStreetMap Vector Rendering"
+msgstr "Proiect Google Summer of Code 2011: Randare vectorială a OpenStreetMap"
+
+#: kdemain.cpp:182
+#, kde-format
+msgid "Daniel Marth"
+msgstr "Daniel Marth"
+
+#: kdemain.cpp:183
+#, kde-format
+msgid "Google Summer of Code 2011 Project: Marble Touch on MeeGo"
+msgstr "Proiect Google Summer of Code 2011: Marble Touch pe MeeGo"
+
+#: kdemain.cpp:186
+#, kde-format
+msgid "Gaurav Gupta"
+msgstr "Gaurav Gupta"
+
+#: kdemain.cpp:187
+#, kde-format
+msgid "Google Summer of Code 2010 Project: Bookmarks"
+msgstr "Proiect Google Summer of Code 2010: Marcaje"
+
+#: kdemain.cpp:190
+#, kde-format
+msgid "Harshit Jain "
+msgstr "Harshit Jain "
+
+#: kdemain.cpp:191
+#, kde-format
+msgid "Google Summer of Code 2010 Project: Time Support"
+msgstr "Proiect Google Summer of Code 2010: Asistență timp"
+
+#: kdemain.cpp:194
+#, kde-format
+msgid "Siddharth Srivastava"
+msgstr "Siddharth Srivastava"
+
+#: kdemain.cpp:195
+#, kde-format
+msgid "Google Summer of Code 2010 Project: Turn-by-turn Navigation"
+msgstr "Proiect Google Summer of Code 2011: Navigare viraj-cu-viraj"
+
+#: kdemain.cpp:198 kdemain.cpp:218
+#, kde-format
+msgid "Andrew Manson"
+msgstr "Andrew Manson"
+
+#: kdemain.cpp:199
+#, kde-format
+msgid "Google Summer of Code 2009 Project: OSM Annotation"
+msgstr "Proiect Google Summer of Code 2009: Adnotare OSM"
+
+#: kdemain.cpp:203
+#, kde-format
+msgid "Google Summer of Code 2009 Project: Online Services"
+msgstr "Proiect Google Summer of Code 2009: Servicii online"
+
+#: kdemain.cpp:207
+#, kde-format
+msgid "Google Summer of Code 2008 Project: Vector Tiles for Marble"
+msgstr "Proiect Google Summer of Code 2008: Dale vectoriale pentru Marble"
+
+#: kdemain.cpp:210
+#, kde-format
+msgid "Shashank Singh"
+msgstr "Shashank Singh"
+
+#: kdemain.cpp:211
+#, kde-format
+msgid ""
+"Google Summer of Code 2008 Project: Panoramio / Wikipedia -photo support for "
+"Marble"
+msgstr ""
+"Proiect Google Summer of Code 2008: Compatibilitate fotografii Panoramio / "
+"Wikipedia pentru Marble"
+
+#: kdemain.cpp:214
+#, kde-format
+msgid "Carlos Licea"
+msgstr "Carlos Licea"
+
+#: kdemain.cpp:215
+#, kde-format
+msgid ""
+"Google Summer of Code 2007 Project: Equirectangular Projection (\"Flat Map\")"
+msgstr ""
+"Proiect Google Summer of Code 2007: Proiecție Echidreptunghiulară („Flat "
+"Map”)"
+
+#: kdemain.cpp:219
+#, kde-format
+msgid "Google Summer of Code 2007 Project: GPS Support for Marble"
+msgstr "Proiect Google Summer of Code 2007: Compatibilitate GPS pentru Marble"
+
+#: kdemain.cpp:222
+#, kde-format
+msgid "Murad Tagirov"
+msgstr "Murad Tagirov"
+
+#: kdemain.cpp:223
+#, kde-format
+msgid "Google Summer of Code 2007 Project: KML Support for Marble"
+msgstr "Proiect Google Summer of Code 2007: Compatibilitate KML pentru Marble"
+
+#: kdemain.cpp:228
+#, kde-format
+msgid "Simon Schmeisser"
+msgstr "Simon Schmeisser"
+
+#: kdemain.cpp:229 kdemain.cpp:231 kdemain.cpp:233 kdemain.cpp:235
+#: kdemain.cpp:237 kdemain.cpp:239 kdemain.cpp:241 kdemain.cpp:243
+#: kdemain.cpp:245 kdemain.cpp:247 kdemain.cpp:249 kdemain.cpp:251
+#: kdemain.cpp:253 kdemain.cpp:255 kdemain.cpp:257 kdemain.cpp:259
+#: kdemain.cpp:261 kdemain.cpp:263 kdemain.cpp:265
+#, kde-format
+msgid "Development & Patches"
+msgstr "Dezvoltare și patch-uri"
+
+#: kdemain.cpp:230
+#, kde-format
+msgid "Claudiu Covaci"
+msgstr "Claudiu Covaci"
+
+#: kdemain.cpp:232
+#, kde-format
+msgid "David Roberts"
+msgstr "David Roberts"
+
+#: kdemain.cpp:234
+#, kde-format
+msgid "Nikolas Zimmermann"
+msgstr "Nikolas Zimmermann"
+
+#: kdemain.cpp:236
+#, kde-format
+msgid "Jan Becker"
+msgstr "Jan Becker"
+
+#: kdemain.cpp:238
+#, kde-format
+msgid "Stefan Asserhäll"
+msgstr "Stefan Asserhäll"
+
+#: kdemain.cpp:240
+#, kde-format
+msgid "Laurent Montel"
+msgstr "Laurent Montel"
+
+#: kdemain.cpp:242
+#, kde-format
+msgid "Mayank Madan"
+msgstr ""
+
+#: kdemain.cpp:244
+#, kde-format
+msgid "Prashanth Udupa"
+msgstr "Prashanth Udupa"
+
+#: kdemain.cpp:246
+#, kde-format
+msgid "Anne-Marie Mahfouf"
+msgstr "Anne-Marie Mahfouf"
+
+#: kdemain.cpp:248
+#, kde-format
+msgid "Josef Spillner"
+msgstr "Josef Spillner"
+
+#: kdemain.cpp:250
+#, kde-format
+msgid "Frerich Raabe"
+msgstr "Frerich Raabe"
+
+#: kdemain.cpp:252
+#, kde-format
+msgid "Frederik Gladhorn"
+msgstr "Frederik Gladhorn"
+
+#: kdemain.cpp:254
+#, kde-format
+msgid "Fredrik Höglund"
+msgstr "Fredrik Höglund"
+
+#: kdemain.cpp:256
+#, kde-format
+msgid "Albert Astals Cid"
+msgstr "Albert Astals Cid"
+
+#: kdemain.cpp:258
+#, kde-format
+msgid "Thomas Zander"
+msgstr "Thomas Zander"
+
+#: kdemain.cpp:260
+#, kde-format
+msgid "Joseph Wenninger"
+msgstr "Joseph Wenninger"
+
+#: kdemain.cpp:262
+#, kde-format
+msgid "Kris Thomsen"
+msgstr "Kris Thomsen"
+
+#: kdemain.cpp:264
+#, kde-format
+msgid "Daniel Molkentin"
+msgstr "Daniel Molkentin"
+
+#: kdemain.cpp:266
+#, kde-format
+msgid "Christophe Leske"
+msgstr "Christophe Leske"
+
+#: kdemain.cpp:267 kdemain.cpp:269 kdemain.cpp:271 kdemain.cpp:273
+#: kdemain.cpp:275 kdemain.cpp:277 kdemain.cpp:279 kdemain.cpp:281
+#: kdemain.cpp:283
+#, kde-format
+msgid "Platforms & Distributions"
+msgstr "Platforme și distribuții"
+
+#: kdemain.cpp:268
+#, kde-format
+msgid "Sebastian Wiedenroth"
+msgstr "Sebastian Wiedenroth"
+
+#: kdemain.cpp:270
+#, kde-format
+msgid "Tim Sutton"
+msgstr "Tim Sutton"
+
+#: kdemain.cpp:272
+#, kde-format
+msgid "Christian Ehrlicher"
+msgstr "Christian Ehrlicher"
+
+#: kdemain.cpp:274
+#, kde-format
+msgid "Ralf Habacker"
+msgstr "Ralf Habacker"
+
+#: kdemain.cpp:276
+#, kde-format
+msgid "Steffen Joeris"
+msgstr "Steffen Joeris"
+
+#: kdemain.cpp:278
+#, kde-format
+msgid "Marcus Czeslinski"
+msgstr "Marcus Czeslinski"
+
+#: kdemain.cpp:280
+#, kde-format
+msgid "Marcus D. Hanwell"
+msgstr "Marcus D. Hanwell"
+
+#: kdemain.cpp:282
+#, kde-format
+msgid "Chitlesh Goorah"
+msgstr "Chitlesh Goorah"
+
+#: kdemain.cpp:284
+#, kde-format
+msgid "Nuno Pinheiro"
+msgstr "Nuno Pinheiro"
+
+#: kdemain.cpp:285 kdemain.cpp:287
+#, kde-format
+msgid "Artwork"
+msgstr "Grafică"
+
+#: kdemain.cpp:290
+#, kde-format
+msgid "Luis Silva"
+msgstr "Luis Silva"
+
+#: kdemain.cpp:291 kdemain.cpp:293 kdemain.cpp:295 kdemain.cpp:297
+#: kdemain.cpp:299 kdemain.cpp:301 kdemain.cpp:303 kdemain.cpp:305
+#: kdemain.cpp:307 kdemain.cpp:309
+#, kde-format
+msgid "Various Suggestions & Testing"
+msgstr "Diverse sugestii și testare"
+
+#: kdemain.cpp:292
+#, kde-format
+msgid "Stefan Jordan"
+msgstr "Stefan Jordan"
+
+#: kdemain.cpp:294
+#, kde-format
+msgid "Robert Scott"
+msgstr "Robert Scott"
+
+#: kdemain.cpp:296
+#, kde-format
+msgid "Lubos Petrovic"
+msgstr "Lubos Petrovic"
+
+#: kdemain.cpp:298
+#, kde-format
+msgid "Benoit Sigoure"
+msgstr "Benoit Sigoure"
+
+#: kdemain.cpp:300
+#, kde-format
+msgid "Martin Konold"
+msgstr "Martin Konold"
+
+#: kdemain.cpp:302
+#, kde-format
+msgid "Matthias Welwarsky"
+msgstr "Matthias Welwarsky"
+
+#: kdemain.cpp:304
+#, kde-format
+msgid "Rainer Endres"
+msgstr "Rainer Endres"
+
+#: kdemain.cpp:306
+#, kde-format
+msgid "Ralf Gesellensetter"
+msgstr "Ralf Gesellensetter"
+
+#: kdemain.cpp:308
+#, kde-format
+msgid "Tim Alder"
+msgstr "Tim Alder"
+
+#: kdemain.cpp:310
+#, kde-format
+msgid "John Layt"
+msgstr "John Layt"
+
+#: kdemain.cpp:311
+#, kde-format
+msgid ""
+"Special thanks for providing an important source of inspiration by creating "
+"Marble's predecessor \"Kartographer\"."
+msgstr ""
+"Mulțumiri speciale pentru oferirea unei importante surse de inspirație prin "
+"crearea predecesorului Marble, „Kartographer”."
+
+#: kdemain.cpp:327
+#, kde-format
+msgid "Enable debug output"
+msgstr "Activează ieșirea de depanare"
+
+#: kdemain.cpp:329
+#, kde-format
+msgid "Display OSM placemarks according to the level selected"
+msgstr ""
+
+#: kdemain.cpp:331
+#, kde-format
+msgid "Make a time measurement to check performance"
+msgstr "Efectuează o măsurare a timpului pentru a verifica performanța"
+
+#: kdemain.cpp:333
+#, kde-format
+msgid "Show frame rate"
+msgstr "Afișează cadre pe secundă"
+
+#: kdemain.cpp:335
+#, kde-format
+msgid "Show tile IDs"
+msgstr "Arată ID-urile dalelor"
+
+#: kdemain.cpp:337
+#, kde-format
+msgid "Show time spent in each layer"
+msgstr ""
+
+#: kdemain.cpp:339
+#, fuzzy, kde-format
+#| msgid "Use a different directory which contains map data"
+msgid "Use a different directory <directory> which contains map data."
+msgstr "Folosește un director diferit care conține date pentru hartă"
+
+#: kdemain.cpp:341
+#, kde-format
+msgid "Do not use the interface optimized for small screens"
+msgstr "Nu folosi interfața optimizată pentru ecrane mici"
+
+#: kdemain.cpp:342
+#, kde-format
+msgid "Use the interface optimized for small screens"
+msgstr "Folosește interfața optimizată pentru ecrane mici"
+
+#: kdemain.cpp:344
+#, kde-format
+msgid "Do not use the interface optimized for high resolutions"
+msgstr "Nu folosi interfața optimizată pentru rezoluții mari"
+
+#: kdemain.cpp:345
+#, kde-format
+msgid "Use the interface optimized for high resolutions"
+msgstr "Folosește interfața optimizată pentru rezoluții mari"
+
+#: kdemain.cpp:347
+#, fuzzy, kde-format
+#| msgid "Show map at given lat lon coordinates"
+msgid "Show map at given lat lon <coordinates>"
+msgstr "Arată hartă la coordonatele lat lon date"
+
+#: kdemain.cpp:349
+#, fuzzy, kde-format
+#| msgid "Show map at given lat lon coordinates"
+msgid "Show map at given geo <uri>"
+msgstr "Arată hartă la coordonatele lat lon date"
+
+#: kdemain.cpp:351
+#, kde-format
+msgid "Set the distance of the observer to the globe (in km)"
+msgstr "Setați distanța observatorului față de glob (în km)"
+
+#: kdemain.cpp:353
+#, fuzzy, kde-format
+#| msgid "Use map id (e.g. \"earth/openstreetmap/openstreetmap.dgml\")"
+msgid "Use map <id> (e.g. \"earth/openstreetmap/openstreetmap.dgml\")"
+msgstr ""
+"Folosește id hartă (de exemplu \"earth/openstreetmap/openstreetmap.dgml\")"
+
+#: kdemain.cpp:355
+#, kde-format
+msgid "One or more placemark files to be opened"
+msgstr "Una sau mai multe fișiere placemark de deschis"
+
+#. i18n: ectx: label, entry, group (Time)
+#: marble.kcfg:58
+#, kde-format
+msgid "The date and time of marble clock"
+msgstr ""
+
+#. i18n: ectx: label, entry, group (Time)
+#: marble.kcfg:61
+#, kde-format
+msgid "The speed of marble clock"
+msgstr ""
+
+#. i18n: ectx: label, entry, group (View)
+#: marble.kcfg:107
+#, kde-format
+msgid "The unit chosen to measure distances."
+msgstr "Unitatea aleasă pentru măsura distanțelor."
+
+#. i18n: ectx: label, entry, group (View)
+#: marble.kcfg:115
+#, kde-format
+msgid "The unit chosen to measure angles."
+msgstr "Unitatea aleasă pentru măsura unghiurilor."
+
+#. i18n: ectx: label, entry, group (View)
+#: marble.kcfg:124
+#, kde-format
+msgid "The quality at which a still map gets painted."
+msgstr "Calitatea la care este desenată o hartă statică."
+
+#. i18n: ectx: label, entry, group (View)
+#: marble.kcfg:135
+#, kde-format
+msgid "The quality at which an animated map gets painted."
+msgstr "Calitatea la care este desenată o hartă animată."
+
+#. i18n: ectx: label, entry, group (View)
+#: marble.kcfg:146
+#, kde-format
+msgid "The localization of the labels."
+msgstr "Localizarea etichetelor."
+
+#. i18n: ectx: label, entry (mapFont), group (View)
+#: marble.kcfg:155
+#, kde-format
+msgid "The general font used on the map."
+msgstr "Fontul general utilizat pe hartă."
+
+#. i18n: ectx: label, entry (lastFileOpenDir), group (View)
+#: marble.kcfg:159
+#, kde-format
+msgid "The last directory that was opened by File->Open."
+msgstr ""
+
+#. i18n: ectx: label, entry, group (Navigation)
+#: marble.kcfg:179
+#, kde-format
+msgid "The behaviour of the planet's axis on mouse dragging."
+msgstr ""
+
+#. i18n: ectx: label, entry, group (Navigation)
+#: marble.kcfg:187
+#, kde-format
+msgid "The location shown on application startup."
+msgstr ""
+
+#. i18n: ectx: label, entry, group (Navigation)
+#: marble.kcfg:201
+#, fuzzy, kde-format
+#| msgid "&Animate voyage to the target"
+msgid "Display animation on voyage to target."
+msgstr "&Animează călătoria până la țintă"
+
+#. i18n: ectx: label, entry, group (Navigation)
+#: marble.kcfg:205
+#, fuzzy, kde-format
+#| msgid "External Map Editor Selection"
+msgid "The external OpenStreetMap editor application"
+msgstr "Selectarea unui editor de hărți extern"
+
+#. i18n: ectx: label, entry, group (Cache)
+#: marble.kcfg:211
+#, kde-format
+msgid "Cache for tiles reserved in the physical memory."
+msgstr ""
+
+#. i18n: ectx: label, entry, group (Cache)
+#: marble.kcfg:217
+#, kde-format
+msgid "Maximum space on the hard disk that can be used to store tiles."
+msgstr ""
+
+#. i18n: ectx: label, entry (proxyUrl), group (Cache)
+#: marble.kcfg:223
+#, kde-format
+msgid "URL for the proxy server."
+msgstr "URL pentru serverul proxy."
+
+#. i18n: ectx: label, entry, group (Cache)
+#: marble.kcfg:227
+#, kde-format
+msgid "Port for the proxy server."
+msgstr "Port pentru serverul proxy."
+
+#. i18n: ectx: label, entry (proxyUser), group (Cache)
+#: marble.kcfg:233
+#, kde-format
+msgid "Username for authorization."
+msgstr "Utilizator pentru autorizare."
+
+#. i18n: ectx: label, entry (proxyPass), group (Cache)
+#: marble.kcfg:236
+#, kde-format
+msgid "Password for authorization."
+msgstr "Parola pentru autrizare."
+
+#. i18n: ectx: label, entry (proxyHttp), group (Cache)
+#: marble.kcfg:239
+#, fuzzy, kde-format
+#| msgid "Proxy type:"
+msgid "Proxy type is HTTP"
+msgstr "Tipul de proxy:"
+
+#. i18n: ectx: label, entry (proxySocks5), group (Cache)
+#: marble.kcfg:250
+#, fuzzy, kde-format
+#| msgid "Proxy type:"
+msgid "Proxy type is Socks5"
+msgstr "Tipul de proxy:"
+
+#. i18n: ectx: label, entry (proxyAuth), group (Cache)
+#: marble.kcfg:254
+#, fuzzy, kde-format
+#| msgid "Requires authentication"
+msgid "Proxy requires Authentication"
+msgstr "Necesită autentificare"
+
+#. i18n: ectx: label, entry (activePositionTrackingPlugin), group (Plugins)
+#: marble.kcfg:260
+#, kde-format
+msgid "The position tracking plugin used to determine the current location"
+msgstr ""
+
+#: marble_part.cpp:102
+#, kde-format
+msgid "Position: %1"
+msgstr "Poziția: %1"
+
+#: marble_part.cpp:103
+#, kde-format
+msgid "Altitude: %1"
+msgstr "Altitudinea: %1"
+
+#: marble_part.cpp:104
+#, kde-format
+msgid "Tile Zoom Level: %1"
+msgstr "Nivelul de mărire al dalelor: %1"
+
+#: marble_part.cpp:105
+#, kde-format
+msgid "Time: %1"
+msgstr "Timp: %1"
+
+#: marble_part.cpp:167
+#, kde-format
+msgid ""
+"Sorry, unable to open '%1':\n"
+"'%2'"
+msgstr ""
+
+#: marble_part.cpp:168
+#, kde-format
+msgid "File not readable"
+msgstr ""
+
+#: marble_part.cpp:214
+#, kde-format
+msgid "marble_part"
+msgstr "marble_part"
+
+#: marble_part.cpp:217
+#, kde-format
+msgid "A Virtual Globe"
+msgstr "Un glob virtual"
+
+#: marble_part.cpp:231
+#, kde-format
+msgid "Sorry, unable to open '%1'. The file is not accessible."
+msgstr ""
+
+#: marble_part.cpp:232
+#, kde-format
+msgid "File not accessible"
+msgstr ""
+
+#: marble_part.cpp:253
+#, kde-format
+msgid "All Supported Files"
+msgstr ""
+
+#: marble_part.cpp:259
+#, fuzzy, kde-format
+#| msgid "Open File"
+msgctxt "@title:window"
+msgid "Open File"
+msgstr "Deschide fișier"
+
+#: marble_part.cpp:276
+#, fuzzy, kde-format
+#| msgid "Export Map"
+msgctxt "@title:window"
+msgid "Export Map"
+msgstr "Exportă harta"
+
+#: marble_part.cpp:277
+#, kde-format
+msgid "Images *.jpg *.png"
+msgstr "Imagini *.jpg *.png"
+
+#: marble_part.cpp:291
+#, kde-format
+msgctxt "Application name"
+msgid "Marble"
+msgstr "Marble"
+
+#: marble_part.cpp:292
+#, kde-format
+msgid "An error occurred while trying to save the file.\n"
+msgstr "A apărut o eroare la salvarea fișierului.\n"
+
+#: marble_part.cpp:483
+#, fuzzy, kde-format
+#| msgid "U&sername:"
+msgid "Unnamed"
+msgstr "Nume de u&tilizator:"
+
+#: marble_part.cpp:714
+#, kde-format
+msgctxt "Action for downloading an entire region of a map"
+msgid "Download Region..."
+msgstr "Descarcă regiunea..."
+
+#: marble_part.cpp:728
+#, kde-format
+msgctxt "Action for saving the map to a file"
+msgid "&Export Map..."
+msgstr "&Exportă harta..."
+
+#: marble_part.cpp:737
+#, kde-format
+msgctxt "Action for toggling offline mode"
+msgid "&Work Offline"
+msgstr "L&ucrează deconectat"
+
+#: marble_part.cpp:747
+#, kde-format
+msgctxt "Action for copying the map to the clipboard"
+msgid "&Copy Map"
+msgstr "&Copiază harta"
+
+#: marble_part.cpp:754
+#, kde-format
+msgctxt "Action for copying the coordinates to the clipboard"
+msgid "C&opy Coordinates"
+msgstr "C&opiază coordonatele"
+
+#: marble_part.cpp:762
+#, kde-format
+msgctxt "Action for opening a file"
+msgid "&Open..."
+msgstr "&Deschide..."
+
+#: marble_part.cpp:769
+#, kde-format
+msgctxt "Action for downloading maps (GHNS)"
+msgid "Download Maps..."
+msgstr "Descarca hărți..."
+
+#: marble_part.cpp:772
+#, kde-format
+msgctxt "Status tip"
+msgid "Download new maps"
+msgstr "Descarcă hărți noi"
+
+#: marble_part.cpp:778
+#, kde-format
+msgctxt "Action for creating new maps"
+msgid "&Create a New Map..."
+msgstr "&Creează o hartă nouă..."
+
+#: marble_part.cpp:783
+#, kde-format
+msgctxt "Status tip"
+msgid "A wizard guides you through the creation of your own map theme."
+msgstr "Un expert vă ghidează prin crearea propriei teme de hartă."
+
+#: marble_part.cpp:810
+#, kde-format
+msgctxt "Action for toggling clouds"
+msgid "&Clouds"
+msgstr "N&ori"
+
+#: marble_part.cpp:817
+#, kde-format
+msgctxt "Action for sun control dialog"
+msgid "S&un Control..."
+msgstr "Controlul soarel&ui..."
+
+#: marble_part.cpp:827
+#, kde-format
+msgctxt "Action for time control dialog"
+msgid "&Time Control..."
+msgstr "Controlul &timpului..."
+
+#: marble_part.cpp:836
+#, kde-format
+msgctxt "Action for locking float items on the map"
+msgid "Lock Position"
+msgstr "Fixează poziția"
+
+#: marble_part.cpp:847
+#, kde-format
+msgid "Show Shadow"
+msgstr "Arată umbra"
+
+#: marble_part.cpp:850
+#, kde-format
+msgid "Hide Shadow"
+msgstr "Ascunde umbra"
+
+#: marble_part.cpp:851
+#, kde-format
+msgid "Shows and hides the shadow of the sun"
+msgstr "Arată și ascunde umbra soarelui"
+
+#: marble_part.cpp:855
+#, kde-format
+msgid "Show sun icon on the Sub-Solar Point"
+msgstr ""
+
+#: marble_part.cpp:857
+#, kde-format
+msgid "Hide sun icon on the Sub-Solar Point"
+msgstr ""
+
+#: marble_part.cpp:858
+#, kde-format
+msgid "Show sun icon on the sub-solar point"
+msgstr ""
+
+#: marble_part.cpp:863
+#, kde-format
+msgid "Lock Globe to the Sub-Solar Point"
+msgstr ""
+
+#: marble_part.cpp:865
+#, kde-format
+msgid "Unlock Globe to the Sub-Solar Point"
+msgstr ""
+
+#: marble_part.cpp:866
+#, kde-format
+msgid "Lock globe to the sub-solar point"
+msgstr ""
+
+#: marble_part.cpp:881
+#, fuzzy, kde-format
+#| msgctxt "Add Bookmark"
+#| msgid "&Add Bookmark"
+msgctxt "Add Bookmark"
+msgid "Add &Bookmark..."
+msgstr "&Adaugă favorit"
+
+#: marble_part.cpp:889
+#, fuzzy, kde-format
+#| msgid "&Bookmarks"
+msgctxt "Show Bookmarks"
+msgid "Show &Bookmarks"
+msgstr "Fa&vorite"
+
+#: marble_part.cpp:890
+#, kde-format
+msgid "Show or hide bookmarks in the map"
+msgstr ""
+
+#: marble_part.cpp:898
+#, fuzzy, kde-format
+#| msgid "Show Home Location"
+msgid "&Set Home Location"
+msgstr "Arată locația „acasă”"
+
+#: marble_part.cpp:905
+#, fuzzy, kde-format
+#| msgctxt "Manage Bookmarks"
+#| msgid "&Manage Bookmarks"
+msgctxt "Manage Bookmarks"
+msgid "&Manage Bookmarks..."
+msgstr "&Administrează favoritele"
+
+#: marble_part.cpp:917
+#, fuzzy, kde-format
+#| msgctxt "Edit the map in an external application"
+#| msgid "&Edit Map"
+msgctxt "Edit the map in an external application"
+msgid "&Edit Map..."
+msgstr "&Editează harta"
+
+#: marble_part.cpp:925
+#, kde-format
+msgid "&Record Movie"
+msgstr ""
+
+#: marble_part.cpp:927
+#, kde-format
+msgid "Records a movie of the globe"
+msgstr ""
+
+#: marble_part.cpp:933
+#, kde-format
+msgid "&Stop Recording"
+msgstr ""
+
+#: marble_part.cpp:935
+#, kde-format
+msgid "Stop recording a movie of the globe"
+msgstr ""
+
+#: marble_part.cpp:1287
+#, kde-format
+msgctxt "Action for toggling"
+msgid "Show Position"
+msgstr "Arată poziția"
+
+#: marble_part.cpp:1289
+#, kde-format
+msgctxt "Action for toggling"
+msgid "Show Date and Time"
+msgstr "Arată data și ora"
+
+#: marble_part.cpp:1291
+#, kde-format
+msgctxt "Action for toggling"
+msgid "Show Altitude"
+msgstr "Arată altitudinea"
+
+#: marble_part.cpp:1294
+#, kde-format
+msgctxt "Action for toggling"
+msgid "Show Tile Zoom Level"
+msgstr "Arată nivelul de mărire a dalelor"
+
+#: marble_part.cpp:1296
+#, kde-format
+msgctxt "Action for toggling"
+msgid "Show Download Progress Bar"
+msgstr "Arată bara de progres al descărcărilor"
+
+#: marble_part.cpp:1391
+#, kde-format
+msgid "View"
+msgstr "Vizualizare"
+
+#: marble_part.cpp:1402
+#, kde-format
+msgid "Navigation"
+msgstr "Navigare"
+
+#: marble_part.cpp:1413
+#, kde-format
+msgid "Cache & Proxy"
+msgstr "Cache și Proxy"
+
+#: marble_part.cpp:1426
+#, kde-format
+msgid "Date & Time"
+msgstr "Data și ora"
+
+#: marble_part.cpp:1434
+#, kde-format
+msgid "Synchronization"
+msgstr ""
+
+#: marble_part.cpp:1447
+#, kde-format
+msgid "Routing"
+msgstr "Pod"
+
+#: marble_part.cpp:1455
+#, kde-format
+msgid "Plugins"
+msgstr "Extensii"
+
+#. i18n: ectx: Menu (file)
+#: marble_part.rc:6 marbleui.rc:5
+#, kde-format
+msgid "&File"
+msgstr "&Fișier"
+
+#. i18n: ectx: Menu (edit)
+#: marble_part.rc:21 marbleui.rc:14
+#, kde-format
+msgid "&Edit"
+msgstr "&Editare"
+
+#. i18n: ectx: Menu (view)
+#: marble_part.rc:31 marbleui.rc:18
+#, kde-format
+msgid "&View"
+msgstr "&Vizualizare"
+
+#. i18n: ectx: Menu (infoboxes)
+#: marble_part.rc:36
+#, kde-format
+msgid "&Info Boxes"
+msgstr "Casete &informative"
+
+#. i18n: ectx: Menu (onlineservices)
+#: marble_part.rc:42
+#, kde-format
+msgid "&Online Services"
+msgstr "Servicii &online"
+
+#. i18n: ectx: Menu (settings)
+#: marble_part.rc:55 marbleui.rc:31
+#, kde-format
+msgid "&Settings"
+msgstr "&Configurări"
+
+#. i18n: ectx: Menu (panels)
+#: marble_part.rc:59
+#, kde-format
+msgid "&Panels"
+msgstr ""
+
+#. i18n: ectx: Menu (viewSize)
+#: marble_part.rc:65
+#, fuzzy, kde-format
+#| msgid "&View"
+msgid "&View Size"
+msgstr "&Vizualizare"
+
+#. i18n: ectx: Menu (bookmarks)
+#: marble_part.rc:73 marbleui.rc:29
+#, kde-format
+msgid "&Bookmarks"
+msgstr "Fa&vorite"
+
+#. i18n: ectx: ToolBar (mainToolBar)
+#: marble_part.rc:84 marbleui.rc:36
+#, kde-format
+msgid "Main Toolbar"
+msgstr "Bara de unelte principală"
+
+#. i18n: ectx: ToolBar (pluginToolBar)
+#: marble_part.rc:97
+#, kde-format
+msgid "Edit Toolbar"
+msgstr "Bara de editare"
+
+#~ msgid "Native"
+#~ msgstr "Nativ"
+
+#~ msgid "Native (X11)"
+#~ msgstr "Nativ (X11)"
+
+#~ msgid "Native (Mac OS X Core Graphics)"
+#~ msgstr "Nativ (Grafică de bază a Mac OS X)"
+
+#~ msgid ""
+#~ "You have decided to run Marble with a different graphics system.\n"
+#~ "For this change to become effective, Marble has to be restarted.\n"
+#~ "Please close the application and start Marble again."
+#~ msgstr ""
+#~ "V-ați decis să rulați Marble cu un sistem grafic diferit.\n"
+#~ "Pentru ca această schimbare să aibă efect, Marble trebuie să fie "
+#~ "repornit.\n"
+#~ "Închideți aplicația și porniți Marble din nou."
+
+#~ msgid "Graphics System Change"
+#~ msgstr "Schimbare a sistemului grafic"
+
+#, fuzzy
+#~| msgid "Night Map"
+#~ msgid "Night Sky"
+#~ msgstr "Hartă nocturnă"
+
+#~ msgid "Mountain"
+#~ msgstr "Munte"
+
+#~ msgid "Volcano"
+#~ msgstr "Vulcan"
+
+#~ msgid "Geographic Pole"
+#~ msgstr "Pol geografic"
+
+#~ msgid "Magnetic Pole"
+#~ msgstr "Pol magnetic"
+
+#~ msgid "Airport"
+#~ msgstr "Aeroport"
+
+#~ msgid "Shipwreck"
+#~ msgstr "Epavă"
+
+#~ msgid "Astronomical Observatory"
+#~ msgstr "Observator astronomic"
+
+#~ msgid ""
+#~ "<p>The moon.</p><p>The map is based on data from the Clementine Moon "
+#~ "mission (UVVIS Basemap Mosaic). Credits: NASA/SDIO, Courtesy <a href="
+#~ "\"http://astrogeology.usgs.gov\">USGS Astrogeology Research Program</a></"
+#~ "p>"
+#~ msgstr ""
+#~ "<p>Luna.</p><p>Harta este bazată pe date la misiunea Clementine Moon "
+#~ "(UVVIS Basemap Mosaic). Mulțumiri: NASA/SDIO, curtoazia <a href=\"http://"
+#~ "astrogeology.usgs.gov\">Programul de cercetare astrologică USGS</a></p>"
+
+#~ msgid "Landing Sites"
+#~ msgstr "Locuri de aterizare"
+
+#~ msgid "Craters"
+#~ msgstr "Cratere"
+
+#~ msgid "Maria"
+#~ msgstr "Maria"
+
+#~ msgid "Other features"
+#~ msgstr "Alte funcționalități"
+
+#~ msgid "Manned landing site"
+#~ msgstr "Loc de aterizare cu echipaj"
+
+#~ msgid "Robotic rover"
+#~ msgstr "Mașină robotizată"
+
+#~ msgid "Unmanned soft landing"
+#~ msgstr "Aterizare ușoară fără pilot"
+
+#~ msgid "Unmanned hard landing"
+#~ msgstr "Aterizare dură fără pilot"
+
+#~ msgid "Crater, impact crater"
+#~ msgstr "Crater, crater de impact"
+
+#~ msgid "Mons, mountain"
+#~ msgstr "Mons, munte"
+
+#~ msgid "Vallis, valley"
+#~ msgstr "Vallis, vale"
+
+#~ msgid "Selenographic Pole"
+#~ msgstr "Pol selenografic"
+
+#~ msgid "Plain Map"
+#~ msgstr "Hartă simplă"
+
+#~ msgid ""
+#~ "<p>A <i>plain map</i>.</p><p>It uses vector lines to mark coastlines and "
+#~ "country borders, etc...</p>"
+#~ msgstr ""
+#~ "<p>O <i>hartă simplă</i>.</p><p>Folosește linii vectoriale pentru "
+#~ "demarcația liniilor de coastă, a granițelor de țări etc...</p>"
+
+#, fuzzy
+#~| msgid "Areas"
+#~ msgid "Urban Areas"
+#~ msgstr "Zone"
+
+#~ msgid "Boundaries"
+#~ msgstr "Granițe"
+
+#~ msgid "Water Bodies"
+#~ msgstr "Hotare de apă"
+
+#~ msgid "Ice and Glaciers"
+#~ msgstr "Gheață și ghețari"
+
+#~ msgid "International"
+#~ msgstr "Internațional"
+
+#~ msgid "State"
+#~ msgstr "Stat"
+
+#~ msgid "Lake"
+#~ msgstr "Lac"
+
+#, fuzzy
+#~| msgid "Historical Maps"
+#~ msgid "Historic Lake"
+#~ msgstr "Hărți istorice"
+
+#~ msgid "River"
+#~ msgstr "Râu"
+
+#, fuzzy
+#~| msgid "Ice and Glaciers"
+#~ msgid "Glaciers"
+#~ msgstr "Gheață și ghețari"
+
+#~ msgid "Temperature (July)"
+#~ msgstr "Temperatură (iulie)"
+
+#~ msgid "A map which shows the average temperature in July."
+#~ msgstr "O hartă care arată temperatura medie în iulie."
+
+#~ msgid "42&deg;C"
+#~ msgstr "42&deg;C"
+
+#~ msgid "32&deg;C"
+#~ msgstr "32&deg;C"
+
+#~ msgid "23&deg;C"
+#~ msgstr "23&deg;C"
+
+#~ msgid "12&deg;C"
+#~ msgstr "12&deg;C"
+
+#~ msgid "1&deg;C"
+#~ msgstr "1&deg;C"
+
+#~ msgid "-10&deg;C"
+#~ msgstr "-10&deg;C"
+
+#~ msgid "-21&deg;C"
+#~ msgstr "-21&deg;C"
+
+#~ msgid "-32&deg;C"
+#~ msgstr "-32&deg;C"
+
+#~ msgid "-41&deg;C"
+#~ msgstr "-41&deg;C"
+
+#~ msgid "-69&deg;C"
+#~ msgstr "-69&deg;C"
+
+#~ msgid "Earth at Night"
+#~ msgstr "Pământul noaptea"
+
+#~ msgid ""
+#~ "This image of <i>Earth's city lights</i> was created with data from the "
+#~ "Defense Meteorological Satellite Program (DMSP) Operational Linescan "
+#~ "System (OLS)."
+#~ msgstr ""
+#~ "Această imagine a <i>luminilor pe Pământ</i> a fost creată cu date de la  "
+#~ "Defense Meteorological Satellite Program (DMSP) Operational Linescan "
+#~ "System (OLS)."
+
+#~ msgid "Surface"
+#~ msgstr "Suprafață"
+
+#~ msgid "Light terrain"
+#~ msgstr "Teren luminos"
+
+#~ msgid "Dark terrain"
+#~ msgstr "Teren întunecat"
+
+#~ msgid "Water"
+#~ msgstr "Apă"
+
+#~ msgid "Atlas"
+#~ msgstr "Atlas"
+
+#, fuzzy
+#~| msgid ""
+#~| "<p>A <i>plain map</i>.</p><p>It uses vector lines to mark coastlines and "
+#~| "country borders, etc...</p>"
+#~ msgid ""
+#~ "<p>A <i>classic topographic map</i>.</p><p>It uses vector lines to mark "
+#~ "coastlines, country borders etc. and bitmap graphics to create the height "
+#~ "relief.</p>"
+#~ msgstr ""
+#~ "<p>O <i>hartă simplă</i>.</p><p>Folosește linii vectoriale pentru "
+#~ "demarcația liniilor de coastă, a granițelor de țări etc...</p>"
+
+#~ msgid "Relief"
+#~ msgstr "Relief"
+
+#~ msgid "Elevation"
+#~ msgstr "Înălțime"
+
+#~ msgid "7000 m"
+#~ msgstr "7000 m"
+
+#~ msgid "5000 m"
+#~ msgstr "5000 m"
+
+#~ msgid "3500 m"
+#~ msgstr "3500 m"
+
+#~ msgid "2000 m"
+#~ msgstr "2000 m"
+
+#~ msgid "1000 m"
+#~ msgstr "1000 m"
+
+#~ msgid "500 m"
+#~ msgstr "500 m"
+
+#~ msgid "200 m"
+#~ msgstr "200 m"
+
+#~ msgid "50 m"
+#~ msgstr "50 m"
+
+#~ msgid "0 m"
+#~ msgstr "0 m"
+
+#~ msgid "0 m (Water)"
+#~ msgstr "0 m (apă)"
+
+#~ msgid "-50 m"
+#~ msgstr "-50 m"
+
+#~ msgid "-200 m"
+#~ msgstr "-200 m"
+
+#~ msgid "-2000 m"
+#~ msgstr "-2000 m"
+
+#~ msgid "-4000 m"
+#~ msgstr "-4000 m"
+
+#~ msgid "-6500 m"
+#~ msgstr "-6500 m"
+
+#~ msgid "-11000 m"
+#~ msgstr "-11000 m"
+
+#~ msgid "Temperature (December)"
+#~ msgstr "Temperatură (decembrie)"
+
+#~ msgid "A map which shows the average temperature in December."
+#~ msgstr "O hartă care arată temperatura medie în decembrie."
+
+#~ msgid ""
+#~ "<p>A <i>global roadmap</i> created by the OpenStreetMap (OSM) project.</"
+#~ "p><p>OSM is an open community which creates free editable maps. The OSM "
+#~ "data was rendered using Mapnik.</p>"
+#~ msgstr ""
+#~ "<p>O <i>hartă globală rutieră</i> creată de proiectul OpenStreetMap (OSM)."
+#~ "</p><p>OSM este o comunitate deschisă care creează hărți editabile "
+#~ "gratuite. Datele OSM au fost randate folosind Mapnik.</p>"
+
+#, fuzzy
+#~| msgid "Map Title:"
+#~ msgid "OSM Bitmap Tiles"
+#~ msgstr "Titlul hărții:"
+
+#, fuzzy
+#~| msgid "The Earth"
+#~ msgid "Explore the Earth"
+#~ msgstr "Pământul"
+
+#~ msgid "Hillshading"
+#~ msgstr "Hillshading"
+
+#~ msgid "Transportation"
+#~ msgstr "Transport"
+
+#~ msgid "Areas"
+#~ msgstr "Zone"
+
+#, fuzzy
+#~| msgid "Location"
+#~ msgid "Education"
+#~ msgstr "Locația"
+
+#, fuzzy
+#~| msgid "Internet"
+#~ msgid "Entertainment"
+#~ msgstr "Internet"
+
+#, fuzzy
+#~| msgid "Significant Building"
+#~ msgid "Public Buildings"
+#~ msgstr "Clădire semnificativă"
+
+#, fuzzy
+#~| msgid "Historical Maps"
+#~ msgid "Historic"
+#~ msgstr "Hărți istorice"
+
+#~ msgid "Motorway"
+#~ msgstr "Autostradă"
+
+#~ msgid "Trunk road"
+#~ msgstr "Autostradă"
+
+#~ msgid "Primary road"
+#~ msgstr "Drum principal"
+
+#~ msgid "Secondary road"
+#~ msgstr "Drum secundar"
+
+#~ msgid "Unclassified road"
+#~ msgstr "Drum neclasificat"
+
+#~ msgid "Unsurfaced road"
+#~ msgstr "Drum neasfaltat"
+
+#~ msgid "Track"
+#~ msgstr "Pistă"
+
+#~ msgid "Byway"
+#~ msgstr "Drum secundar"
+
+#~ msgid "Bridleway"
+#~ msgstr "Alee"
+
+#~ msgid "Cycleway"
+#~ msgstr "Drum pentru bicicliști"
+
+#~ msgid "Footway"
+#~ msgstr "Trotuar"
+
+#~ msgid "Railway station"
+#~ msgstr "Stație de cale ferată"
+
+#~ msgid "Railway"
+#~ msgstr "Cale ferată"
+
+#~ msgid "Subway"
+#~ msgstr "Metrou"
+
+#~ msgid "Lightrail, tram"
+#~ msgstr "Tramvai"
+
+#~ msgid "Airport runway, taxiway"
+#~ msgstr "Pistă de aeroport"
+
+#~ msgid "Airport apron, terminal"
+#~ msgstr "Terminal aeroport"
+
+#~ msgid "Administrative boundary"
+#~ msgstr "Frontieră administrativă"
+
+#~ msgid "Bridge"
+#~ msgstr "Pod"
+
+#~ msgid "Tunnel"
+#~ msgstr "Tunel"
+
+#~ msgid "Forest"
+#~ msgstr "Pădure"
+
+#~ msgid "Wood"
+#~ msgstr "Lemn"
+
+#~ msgid "Golf course"
+#~ msgstr "Teren de golf"
+
+#~ msgid "Park"
+#~ msgstr "Parc"
+
+#~ msgid "Residential Area"
+#~ msgstr "Zonă rezidențială"
+
+#~ msgid "Tourist attraction"
+#~ msgstr "Atracție turistică"
+
+#~ msgid "Common, meadow"
+#~ msgstr "Luncă, câmp"
+
+#~ msgid "Retail area"
+#~ msgstr "Zonă de vânzare cu amănuntul"
+
+#~ msgid "Industrial Area"
+#~ msgstr "Zonă industrială"
+
+#~ msgid "Commercial Area"
+#~ msgstr "Zonă comercială"
+
+#~ msgid "Heathland"
+#~ msgstr "Câmp uscat"
+
+#~ msgid "Lake, reservoir"
+#~ msgstr "Lac, rezervor"
+
+#~ msgid "Farm"
+#~ msgstr "Fermă"
+
+#~ msgid "Brownfield site"
+#~ msgstr "Șantier"
+
+#~ msgid "Cemetery"
+#~ msgstr "Cimitir"
+
+#~ msgid "Allotments"
+#~ msgstr "Alocări"
+
+#~ msgid "Sports pitch"
+#~ msgstr "Teren de sport"
+
+#~ msgid "Sports centre"
+#~ msgstr "Centru sportiv"
+
+#~ msgid "Nature reserve"
+#~ msgstr "Rezervație naturală"
+
+#~ msgid "Military area"
+#~ msgstr "Regiune militară"
+
+#~ msgid "School, university"
+#~ msgstr "Școală, universitate"
+
+#~ msgid "Significant Building"
+#~ msgstr "Clădire semnificativă"
+
+#~ msgid "Summit, peak"
+#~ msgstr "Vârf"
+
+#, fuzzy
+#~| msgid "School, university"
+#~ msgid "University"
+#~ msgstr "Școală, universitate"
+
+#, fuzzy
+#~| msgid "Places of Interest"
+#~ msgid "Place of worship"
+#~ msgstr "Locuri de interes"
+
+#, fuzzy
+#~| msgid "Capital"
+#~ msgid "Hospital"
+#~ msgstr "Capitală"
+
+#, fuzzy
+#~| msgid "Railway station"
+#~ msgid "Fire station"
+#~ msgstr "Stație de cale ferată"
+
+#, fuzzy
+#~| msgid "&Search"
+#~ msgid "Bar"
+#~ msgstr "&Caută"
+
+#, fuzzy
+#~| msgid "Bookmarks"
+#~ msgid "Books"
+#~ msgstr "Favorite"
+
+#, fuzzy
+#~| msgid "C&lear"
+#~ msgid "Car"
+#~ msgstr "C&urăță"
+
+#~ msgid "Precipitation (July)"
+#~ msgstr "Precipitații (iulie)"
+
+#~ msgid ""
+#~ "A map which shows the average precipitation (rain/snow/hail/etc) in July."
+#~ msgstr ""
+#~ "O hartă care arată precipitațiile medii (ploaie/zăpadă/grindină/etc) în "
+#~ "iulie."
+
+#~ msgid "Precipitation"
+#~ msgstr "Precipitații"
+
+#~ msgid "0 mm"
+#~ msgstr "0 mm"
+
+#~ msgid "10 mm"
+#~ msgstr "10 mm"
+
+#~ msgid "40 mm"
+#~ msgstr "40 mm"
+
+#~ msgid "63 mm"
+#~ msgstr "63 mm"
+
+#~ msgid "89 mm"
+#~ msgstr "89 mm"
+
+#~ msgid "127 mm"
+#~ msgstr "127 mm"
+
+#~ msgid "256 mm"
+#~ msgstr "256 mm"
+
+#~ msgid "512 mm"
+#~ msgstr "512 mm"
+
+#~ msgid "1024 mm or more"
+#~ msgstr "1024 mm sau mai mult"
+
+#~ msgid "Satellite View"
+#~ msgstr "Imagine din satelit"
+
+#~ msgid ""
+#~ "<p>Earth as seen from Space.</p><p>The map is based on NASA's beautiful "
+#~ "\"Blue Marble Next Generation\" pictures. Credits: NASA's Earth "
+#~ "Observatory</p>"
+#~ msgstr ""
+#~ "<p>Pământul văzut din spațiu.</p><p>Harta se bazează pe imaginile \"Blue "
+#~ "Marble Next Generation\" de la NASA. Credite: Observatorul Pământesc al "
+#~ "NASA</p>"
+
+#~ msgid "Ice"
+#~ msgstr "Gheață"
+
+#~ msgid "Vegetation"
+#~ msgstr "Vegetație"
+
+#~ msgid "Desert"
+#~ msgstr "Deșert"
+
+#, fuzzy
+#~| msgid "Historical Maps"
+#~ msgid "Political Map"
+#~ msgstr "Hărți istorice"
+
+#, fuzzy
+#~| msgid "River"
+#~ msgid "Rivers"
+#~ msgstr "Râu"
+
+#~ msgid "Precipitation (December)"
+#~ msgstr "Precipitații (decembrie)"
+
+#~ msgid "A map which shows the average precipitation in December."
+#~ msgstr "O hartă care arată precipitațiile medii în decembrie."
+
+#~ msgid "SRTM Data"
+#~ msgstr "Date SRTM"
+
+#, fuzzy
+#~| msgid "During &animations:"
+#~ msgid "Texts and illustrations"
+#~ msgstr "În timpul &animațiilor:"
+
+#, fuzzy
+#~| msgid "Search line"
+#~ msgid "Reference lines"
+#~ msgstr "Linie de căutare"
+
+#~ msgid "Accurate Coastline"
+#~ msgstr "Litoral exact"
+
+#~ msgid "Historical Map 1689"
+#~ msgstr "Hartă istorică 1689"
+
+#~ msgid ""
+#~ "<i>Historical world map</i> from the year 1689 created by G. van Schagen "
+#~ "in Amsterdam."
+#~ msgstr ""
+#~ "<i>Harta istorică a lumii</i> din anul 1689 creată by G. van Schagen în "
+#~ "Amsterdam."
+
+#~ msgid "Town"
+#~ msgstr "Oraș"
+
+#~ msgid "OpenStreetMap"
+#~ msgstr "OpenStreetMap"
+
+#~ msgid "Clouds"
+#~ msgstr "Nori"
+
+#~ msgid ""
+#~ "A Real Time Cloud Map that gets updated every 3 hours. It uses GOES, "
+#~ "METEOSAT, and GMS satellite imagery downloaded from the Geostationary "
+#~ "Satellite Imagery page at Dundee University.  Credits: Hari Nair, Xplanet "
+#~ "Project"
+#~ msgstr ""
+#~ "Hartă a norilor în timp real care este actualizată la fiecare 3 ore. "
+#~ "Aceasta utilizează GOES, METEOSAT, și imagini de satelit GMS descărcate "
+#~ "de pe pagina Imagini geostaționare de satelit de la Universitatea Dundee. "
+#~ "Mulțumiri: Hari Nair, proiectul Xplanet"
+
+#, fuzzy
+#~| msgid "Legend"
+#~ msgid "Marble: Legend"
+#~ msgstr "Legendă"
+
+#~ msgid "Population:"
+#~ msgstr "Populație:"
+
+#~ msgid "&gt; 1&nbsp;000&nbsp;000"
+#~ msgstr "&gt; 1&nbsp;000&nbsp;000"
+
+#~ msgid "&ge; 100&nbsp;000"
+#~ msgstr "&ge; 100&nbsp;000"
+
+#~ msgid "&ge; 10&nbsp;000"
+#~ msgstr "&ge; 10&nbsp;000"
+
+#~ msgid "&lt; 10&nbsp;000"
+#~ msgstr "&lt; 10&nbsp;000"
+
+#~ msgid "Capitals:"
+#~ msgstr "Capitale:"
+
+#~ msgid "Red:&nbsp;Nation"
+#~ msgstr "Roșu:&nbsp;Națiune"
+
+#~ msgid "Orange:&nbsp;State"
+#~ msgstr "Portocaliu:&nbsp;Stat"
+
+#~ msgid "Yellow:&nbsp;County"
+#~ msgstr "Galben:&nbsp;Județ"
+
+#~ msgid "White:&nbsp;None"
+#~ msgstr "Alb:&nbsp;Nimic"
+
+#~ msgid "<!-- ##customLegendEntries:all## -->"
+#~ msgstr "<!-- ##customLegendEntries:all## -->"
+
+#, fuzzy
+#~| msgid "Marble"
+#~ msgid "Marble - Game"
+#~ msgstr "Marble"
+
+#~ msgid "The Earth"
+#~ msgstr "Pământul"
+
+#~ msgid "The Marble widget displays a virtual globe."
+#~ msgstr "Widgetul Marble afișează un glob terestru virtual"
+
+#~ msgid "Navigation Control"
+#~ msgstr "Control al navigării"
+
+#~ msgid "Use this control to navigate."
+#~ msgstr "Foloseste acest reglaj pentru a naviga."
+
+#~ msgid "Show places"
+#~ msgstr "Arată localități"
+
+#~ msgid "Show relief"
+#~ msgstr "Afișează relieful"
+
+#~ msgid "Show scale bar"
+#~ msgstr "Arată bara de măsură"
+
+#~ msgid "Show borders"
+#~ msgstr "Arată granițe"
+
+#~ msgid "Show ice / snow"
+#~ msgstr "Afișează gheața / zăpada"
+
+#~ msgid "Show compass"
+#~ msgstr "Afișează compasul"
+
+#~ msgid "Show grid"
+#~ msgstr "Arată grilaj"
+
+#~ msgid "Show rivers / lakes"
+#~ msgstr "Arată râurile / lacurile"
+
+#~ msgid "Show elevation model"
+#~ msgstr "Arată modelul de elevație"
+
+#~ msgid "Coordinates: "
+#~ msgstr "Coordonate: "
+
+#~ msgid "URL:"
+#~ msgstr "URL:"
+
+#~ msgid "Name:"
+#~ msgstr "Nume:"
+
+#~ msgid "Bookmark Manager - Marble"
+#~ msgstr "Administrator de favorite - Marble"
+
+#~ msgid "Import Bookmarks..."
+#~ msgstr "Importă favorite..."
+
+#~ msgid "Export Bookmarks..."
+#~ msgstr "Exportă favorite..."
+
+#~ msgid "Folders"
+#~ msgstr "Dosare"
+
+#~ msgid "New"
+#~ msgstr "Nou"
+
+#~ msgid "Rename"
+#~ msgstr "Redenumește"
+
+#~ msgid "Delete"
+#~ msgstr "Șterge"
+
+#~ msgid "Bookmarks"
+#~ msgstr "Favorite"
+
+#~ msgid "Edit"
+#~ msgstr "Modifică"
+
+#, fuzzy
+#~| msgid "Clouds"
+#~ msgid "Cloud Routes"
+#~ msgstr "Nori"
+
+#, fuzzy
+#~| msgid "No position available."
+#~ msgid "No route available."
+#~ msgstr "Nicio poziție disponibilă."
+
+#~ msgid "Current Location"
+#~ msgstr "Poziția curentă pe hartă"
+
+#~ msgid "Position Tracking"
+#~ msgstr "Urmărirea poziției"
+
+#~ msgid "Disabled"
+#~ msgstr "Dezactivat"
+
+#~ msgid "Show Track"
+#~ msgstr "Arată pistă"
+
+#~ msgid "Clear Track"
+#~ msgstr "Golește pistă"
+
+#~ msgid "..."
+#~ msgstr "..."
+
+#~ msgid "No position available."
+#~ msgstr "Nicio poziție disponibilă."
+
+#~ msgctxt "Select the method to use to recenter your GPS location on map."
+#~ msgid "Select the method to use to re-center your GPS location on map."
+#~ msgstr ""
+#~ "Selectați metoda folosită pentru a recentra locația dumneavoastră GPS pe "
+#~ "hartă."
+
+#~ msgid "Map Adjustment"
+#~ msgstr "Ajustare hartă"
+
+#~ msgctxt "Disable Auto Recenter"
+#~ msgid "Disabled"
+#~ msgstr "Dezactivat"
+
+#~ msgctxt "Always keep gps location at the center of the map"
+#~ msgid "Keep at Center"
+#~ msgstr "Păstrează la centru"
+
+#~ msgctxt "Auto center when required"
+#~ msgid "When required"
+#~ msgstr "Atunci când este necesar"
+
+#~ msgctxt "Auto Zoom to appropriate zoom level"
+#~ msgid "Auto Zoom to appropriate zoom level"
+#~ msgstr "Mărire automată la nivelul de panoramare corespunzător"
+
+#~ msgid "Auto Zoom"
+#~ msgstr "Mărire automată"
+
+#~ msgid "Data Migration"
+#~ msgstr "Migrare de date"
+
+#~ msgid ""
+#~ "Marble has found map data stored by a previous Marble version.<br/>Should "
+#~ "this data get converted so that it can be used by the current version?"
+#~ msgstr ""
+#~ "Marble a găsit date pentru hărți stocate de către o versiune anterioară "
+#~ "de Marble.<br/>Ar trebui ca aceste date să fie convertite astfel încât să "
+#~ "poată fi folosite de versiunea curentă?"
+
+#~ msgid "Edit Bookmark - Marble"
+#~ msgstr "Editare favorit - Marble"
+
+#~ msgid "&Description"
+#~ msgstr "&Descriere"
+
+#, fuzzy
+#~| msgid ""
+#~| "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/"
+#~| "TR/REC-html40/strict.dtd\">\n"
+#~| "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~| "css\">\n"
+#~| "p, li { white-space: pre-wrap; }\n"
+#~| "</style></head><body style=\" font-family:'Ubuntu'; font-size:9pt; font-"
+#~| "weight:400; font-style:normal;\">\n"
+#~| "<table border=\"0\" style=\"-qt-table-type: root; margin-top:4px; margin-"
+#~| "bottom:4px; margin-left:4px; margin-right:4px;\">\n"
+#~| "<tr>\n"
+#~| "<td style=\"border: none;\">\n"
+#~| "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~| "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~| "\"></p>\n"
+#~| "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~| "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~| "\"></p></td></tr></table></body></html>"
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<table border=\"0\" style=\"-qt-table-type: root; margin-top:4px; margin-"
+#~ "bottom:4px; margin-left:4px; margin-right:4px;\">\n"
+#~ "<tr>\n"
+#~ "<td style=\"border: none;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-family:'Ubuntu';\"><br /></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-family:'Ubuntu';\"><br /></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-family:'Ubuntu';\"><br /></p></td></tr></table></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Ubuntu'; font-size:9pt; font-"
+#~ "weight:400; font-style:normal;\">\n"
+#~ "<table border=\"0\" style=\"-qt-table-type: root; margin-top:4px; margin-"
+#~ "bottom:4px; margin-left:4px; margin-right:4px;\">\n"
+#~ "<tr>\n"
+#~ "<td style=\"border: none;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p></td></tr></table></body></html>"
+
+#~ msgid "&Folder"
+#~ msgstr "&Dosar"
+
+#~ msgid "&Add Folder"
+#~ msgstr "&Adaugă dosar"
+
+#, fuzzy
+#~| msgid "Edit Toolbar"
+#~ msgid "Edit placemark"
+#~ msgstr "Bara de editare"
+
+#~ msgid "Description"
+#~ msgstr "Descriere"
+
+#, fuzzy
+#~| msgid "&Text Labels"
+#~ msgid "Label"
+#~ msgstr "Etichete &textuale"
+
+#, fuzzy
+#~| msgid "Clouds"
+#~ msgid "Color:"
+#~ msgstr "Nori"
+
+#, fuzzy
+#~| msgid "Show places"
+#~ msgid "Show placemark"
+#~ msgstr "Arată localități"
+
+#~ msgid "Elevation:"
+#~ msgstr "Înălțime:"
+
+#, fuzzy
+#~| msgid "0 m"
+#~ msgid " m"
+#~ msgstr "0 m"
+
+#~ msgid "External Map Editor Selection"
+#~ msgstr "Selectarea unui editor de hărți extern"
+
+#~ msgid "External Map Editor"
+#~ msgstr "Editor de hărți extern"
+
+#, fuzzy
+#~| msgid "Web browser (Potlatch)"
+#~ msgid "Web browser (iD)"
+#~ msgstr "Navigator Web (Potlatch)"
+
+#~ msgid "Merkaartor"
+#~ msgstr "Merkaartor"
+
+#~ msgid "JOSM"
+#~ msgstr "JOSM"
+
+#~ msgid ""
+#~ "Deactivate to be prompted for a map editor selection next time again. "
+#~ "Otherwise, your choice is remembered and will be used automatically in "
+#~ "the future. If you want to alter the default map editor later, you can do "
+#~ "so in the Marble Settings."
+#~ msgstr ""
+#~ "Dezactivați pentru ca data viitoare să fiți solicitat să alegeți din nou "
+#~ "un editor de hărți. În caz contrar, alegerea dumneavoastră este reținută "
+#~ "și va fi utilizată în mod automat în viitor. Dacă doriți să schimbați "
+#~ "editorul implicit de hărți mai târziu, puteți face acest lucru în "
+#~ "setările Marble."
+
+#~ msgid "Make my selection the default map editor"
+#~ msgstr "Fă alegerea mea editorul implicit de hărți"
+
+#~ msgid "Editor Details"
+#~ msgstr "Detalii editor"
+
+#~ msgid "Editor Preview"
+#~ msgstr "Previzualizare editor"
+
+#, fuzzy
+#~| msgid ""
+#~| "Potlatch is an OpenStreetMap editor for quick editing tasks and "
+#~| "beginners. It requires a web browser with flash support."
+#~ msgid ""
+#~ "iD is an OpenStreetMap editor for quick editing tasks and beginners. It "
+#~ "requires a web browser."
+#~ msgstr ""
+#~ "Potlatch este un editor OpenStreetMap pentru sarcini rapide de editare și "
+#~ "pentru începători. Necesită un navigator web compatibil cu flash."
+
+#~ msgid "File View"
+#~ msgstr "Vizualizare fișiere"
+
+#~ msgid "&Save"
+#~ msgstr "&Salvează"
+
+#~ msgid "&Close"
+#~ msgstr "În&chide"
+
+#~ msgid "10"
+#~ msgstr "10"
+
+#, fuzzy
+#~| msgid "Clouds"
+#~ msgid "Color"
+#~ msgstr "Nori"
+
+#~ msgid "Go To..."
+#~ msgstr "Du-te la..."
+
+#~ msgid ""
+#~ "Enter a search term and press Enter. <a href=\"http://userbase.kde.org/"
+#~ "Marble/Search\">Details...</a>"
+#~ msgstr ""
+#~ "Introduceți un termen de căutare și apăsați Enter. <a href=\"http://"
+#~ "userbase.kde.org/Marble/Search\">Detalii...</a>"
+
+#~ msgid "Browse"
+#~ msgstr "Răsfoiește"
+
+#~ msgid "Search"
+#~ msgstr "Caută"
+
+#~ msgid "Select a geographic region"
+#~ msgstr "Selectați o regiune geografică"
+
+#~ msgid "Northern Latitude"
+#~ msgstr "Latitudine nordică"
+
+#~ msgid "°"
+#~ msgstr "°"
+
+#~ msgid "&N"
+#~ msgstr "&N"
+
+#~ msgid "Western Longitude"
+#~ msgstr "Longitudine vestică"
+
+#~ msgid "&W"
+#~ msgstr "&W"
+
+#~ msgid "Eastern Longitude"
+#~ msgstr "Longitudine estică"
+
+#~ msgid "&E"
+#~ msgstr "&E"
+
+#~ msgid "Southern Latitude"
+#~ msgstr "Latitudine sudică"
+
+#~ msgid "&S"
+#~ msgstr "&S"
+
+#~ msgid "′"
+#~ msgstr "′"
+
+#~ msgid "″"
+#~ msgstr "″"
+
+#~ msgid "Legend"
+#~ msgstr "Legendă"
+
+#~ msgid "Map View"
+#~ msgstr "Mod vizualizare hartă"
+
+#~ msgid "&Projection"
+#~ msgstr "&Proiecție"
+
+#~ msgid "Globe"
+#~ msgstr "Glob terestru"
+
+#~ msgid "Flat Map"
+#~ msgstr "Hartă plană"
+
+#~ msgid "Mercator"
+#~ msgstr "Mercator"
+
+#, fuzzy
+#~| msgid "Selenographic Pole"
+#~ msgid "Stereographic"
+#~ msgstr "Pol selenografic"
+
+#~ msgid "&Celestial Body"
+#~ msgstr "&Corp ceresc"
+
+#~ msgid "&Theme"
+#~ msgstr "&Temă"
+
+#~ msgid "Here you can choose the preferred map view from different topics."
+#~ msgstr ""
+#~ "Aici poți alege modul de vizualizare a hărții folosind informații din "
+#~ "diverse domenii"
+
+#~ msgid "Marble Map Theme Creation Wizard"
+#~ msgstr "Expertul de creare a unei teme de hartă"
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">Welcome to the Map Creation Wizard!</span></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">We will guide you "
+#~ "through the process of creating a map theme for Marble. In the end you "
+#~ "will have your own map that you can view in Marble.</p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Please choose the "
+#~ "source that you want to use for the data of your map theme:</p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:12px; margin-bottom:12px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">Bine ați venit la Expertul de creare a unei hărți!</span></"
+#~ "p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Vă vom ghida prin "
+#~ "procesul de creare a unei teme de hartă pentru Marble. La final veți avea "
+#~ "propria hartă pe care o veți putea vedea în Marble.</p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Alegeți sursa pe care "
+#~ "doriți să o folosiți pentru datele temei dumneavoastră de hartă:</p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:12px; margin-bottom:12px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p></body></html>"
+
+#~ msgid ""
+#~ "Connects to a server on the Internet. The map data is queried via the WMS "
+#~ "protocol."
+#~ msgstr ""
+#~ "Se conectează la un server de pe Internet. Datele hărții sunt interogate "
+#~ "prin Protocolul WMS."
+
+#~ msgid "Web Map Service (WMS)"
+#~ msgstr "Serviciul web de hărți (WMS)"
+
+#~ msgid ""
+#~ "You need to provide a bitmap image of a world map that is stored on disk."
+#~ msgstr ""
+#~ "Trebuie să furnizați o imagine bitmap al unei hărți a lumii care este "
+#~ "stocată pe disc."
+
+#~ msgid "A single image showing the whole world"
+#~ msgstr "O singură imagine ce arată întreaga lume"
+
+#~ msgid ""
+#~ "Connects to a server on the Internet. The map data is queried via a "
+#~ "static URL."
+#~ msgstr ""
+#~ "Se conectează la un server de pe Internet. Datele hărții sunt interogate "
+#~ "printr-un  URL static."
+
+#~ msgid "Online map providing indexed tiles (e.g. Open Street Map)"
+#~ msgstr "Hartă online ce furnizează dale indexate (ex. Open Street Map)"
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">WMS Server</span></p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Please choose a <a href="
+#~ "\"http://en.wikipedia.org/wiki/Web_Map_Service\"><span style=\" text-"
+#~ "decoration: underline; color:#0057ae;\">WMS</span></a> server or enter a "
+#~ "custom server URL.</p></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">WMS Server</span></p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Alegeți un server<a "
+#~ "href=\"http://en.wikipedia.org/wiki/Web_Map_Service\"><span style=\" text-"
+#~ "decoration: underline; color:#0057ae;\">WMS</span></a> sau introduceți "
+#~ "URL-ul unui server personalizat.</p></body></html>"
+
+#~ msgid "WMS Server:"
+#~ msgstr "Server WMS:"
+
+#~ msgid "Custom"
+#~ msgstr "Personalizat"
+
+#~ msgid "http://"
+#~ msgstr "http://"
+
+#~ msgid "Available Maps:"
+#~ msgstr "Hărți disponibile:"
+
+#, fuzzy
+#~| msgid ""
+#~| "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~| "css\">\n"
+#~| "p, li { white-space: pre-wrap; }\n"
+#~| "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~| "font-weight:400; font-style:normal;\">\n"
+#~| "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~| "right:0px; -qt-block-indent:0; text-indent:0px;\">No description "
+#~| "available.</p>\n"
+#~| "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~| "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~| "\"></p>\n"
+#~| "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~| "right:0px; -qt-block-indent:0; text-indent:0px;\">If you are connected "
+#~| "to the internet please click the \"Wikipedia\" tab at the top of this "
+#~| "page to get more information.</p></body></html>"
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">World Map Bitmap Image</span></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-weight:600;\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Please choose the "
+#~ "location of a world map that is stored in a single image file (JPG, PNG, "
+#~ "etc.). It needs to be provided in <a href=\"http://en.wikipedia.org/wiki/"
+#~ "Equirectangular_projection\"><span style=\" text-decoration: underline; "
+#~ "color:#0057ae;\">Equirectangular projection</span></a>, so the shape "
+#~ "should look like this (size ratio: 2:1):</p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><img src=\":/data/svg/"
+#~ "worldmap.svg\" width=\"150\" /></p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Nici o descriere "
+#~ "disponibilă.</p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Dacă ai o conexiune la "
+#~ "internet, acceseaza fila \"Wikipedia\" situată la inceputul acestei "
+#~ "pagini, pentru a obține mai multe informatiii</p></body></html>"
+
+#~ msgid "Source Image:"
+#~ msgstr "Imaginea sursă:"
+
+#, fuzzy
+#~| msgid ""
+#~| "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~| "css\">\n"
+#~| "p, li { white-space: pre-wrap; }\n"
+#~| "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~| "font-weight:400; font-style:normal;\">\n"
+#~| "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~| "right:0px; -qt-block-indent:0; text-indent:0px;\">No description "
+#~| "available.</p>\n"
+#~| "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~| "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~| "\"></p>\n"
+#~| "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~| "right:0px; -qt-block-indent:0; text-indent:0px;\">If you are connected "
+#~| "to the internet please click the \"Wikipedia\" tab at the top of this "
+#~| "page to get more information.</p></body></html>"
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Bitstream Vera Sans'; font-"
+#~ "size:9pt; font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif'; font-weight:600;\">URL Scheme for Indexed Tiles</"
+#~ "span></p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif';\">Please enter the URL used for downloading "
+#~ "individual tiles. Use the placeholders </span><span style=\" font-"
+#~ "family:'Sans Serif'; font-style:italic;\">{x}</span><span style=\" font-"
+#~ "family:'Sans Serif';\">, </span><span style=\" font-family:'Sans Serif'; "
+#~ "font-style:italic;\">{y}</span><span style=\" font-family:'Sans Serif';"
+#~ "\">, and </span><span style=\" font-family:'Sans Serif'; font-style:"
+#~ "italic;\">{zoomLevel}</span><span style=\" font-family:'Sans Serif';\"> "
+#~ "to reference a tile from the index.</span></p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Nici o descriere "
+#~ "disponibilă.</p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Dacă ai o conexiune la "
+#~ "internet, acceseaza fila \"Wikipedia\" situată la inceputul acestei "
+#~ "pagini, pentru a obține mai multe informatiii</p></body></html>"
+
+#~ msgid "URL Scheme:"
+#~ msgstr "Schema URL:"
+
+#, fuzzy
+#~| msgid ""
+#~| "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~| "css\">\n"
+#~| "p, li { white-space: pre-wrap; }\n"
+#~| "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~| "font-weight:400; font-style:normal;\">\n"
+#~| "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~| "right:0px; -qt-block-indent:0; text-indent:0px;\">No description "
+#~| "available.</p>\n"
+#~| "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~| "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~| "\"></p>\n"
+#~| "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~| "right:0px; -qt-block-indent:0; text-indent:0px;\">If you are connected "
+#~| "to the internet please click the \"Wikipedia\" tab at the top of this "
+#~| "page to get more information.</p></body></html>"
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Bitstream Vera Sans'; font-"
+#~ "size:9pt; font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif'; font-weight:600;\">General Information</span></p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif';\">Please specify a title, a name and an icon for "
+#~ "your new map. Add a description to let users know what your map is about. "
+#~ "</span></p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Nici o descriere "
+#~ "disponibilă.</p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Dacă ai o conexiune la "
+#~ "internet, acceseaza fila \"Wikipedia\" situată la inceputul acestei "
+#~ "pagini, pentru a obține mai multe informatiii</p></body></html>"
+
+#~ msgid "Map Title:"
+#~ msgstr "Titlul hărții:"
+
+#~ msgid "A short concise name for your map theme."
+#~ msgstr "Un nume scurt pentru tema hărții dumneavoastră."
+
+#~ msgid "Map Name:"
+#~ msgstr "Numele hărții:"
+
+#~ msgid "The lowercase map theme id."
+#~ msgstr "ID-ul cu minuscule al temei hărții."
+
+#~ msgid "The folder name of your new theme."
+#~ msgstr "Numele folderului al noii dumneavoastre teme."
+
+#~ msgid "Description:"
+#~ msgstr "Descriere:"
+
+#~ msgid ""
+#~ "A short description of your map theme. Here you can provide information "
+#~ "about the purpose, origin, copyright and license of the data used in your "
+#~ "map theme."
+#~ msgstr ""
+#~ "O scurtă descriere a temei hărții dumneavoastră. Aici puteți furniza "
+#~ "informații despre scopul, originea, drepturile de autor și licența "
+#~ "datelor utilizate în tema hărții dumneavoastră."
+
+#~ msgid "It will appear in a tool tip and may contain HTML formatting."
+#~ msgstr ""
+#~ "Va apărea într-o sugestie de unealtă și poate să conțină formatare HTML."
+
+#~ msgid "Preview Image:"
+#~ msgstr "Previzualizare imagine:"
+
+#~ msgid "preview image"
+#~ msgstr "previzualizarea imaginii"
+
+#~ msgid "Change..."
+#~ msgstr "Modifică..."
+
+#~ msgid "Legend Image:"
+#~ msgstr "Imaginea legendei:"
+
+#~ msgid "Places of Interest"
+#~ msgstr "Locuri de interes"
+
+#~ msgid "Populated Places"
+#~ msgstr "Locurile populate"
+
+#~ msgid "Terrain"
+#~ msgstr "Teren"
+
+#~ msgid "Coordinate Grid"
+#~ msgstr "Grilaj al coordonatelor"
+
+#~ msgid "Border Lines"
+#~ msgstr "Linii de frontieră"
+
+#, fuzzy
+#~| msgid ""
+#~| "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~| "css\">\n"
+#~| "p, li { white-space: pre-wrap; }\n"
+#~| "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~| "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~| "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~| "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~| "\"></p>\n"
+#~| "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~| "right:0px; -qt-block-indent:0; text-indent:0px;\">(c) 2007, The Marble "
+#~| "Project</p>\n"
+#~| "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~| "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~| "font-style:italic;\"></p>\n"
+#~| "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~| "right:0px; -qt-block-indent:0; text-indent:0px;\">http://edu.kde.org/"
+#~| "marble</p></body></html>"
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">Summary</span></p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Congratulations! You "
+#~ "have entered all the data that is necessary to create your map theme. "
+#~ "Check the summary below carefully and press the \"Finish\" button to "
+#~ "create the theme. </p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Please consider "
+#~ "contributing the map theme back to the Marble community if the license "
+#~ "and the terms of use allow for it.</p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:12px; margin-bottom:12px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">(c) 2007, Proiectul "
+#~ "Marble</p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-style:italic;\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">http://edu.kde.org/"
+#~ "marble</p></body></html>"
+
+#~ msgid "Map name goes here."
+#~ msgstr "Numele hărții se introduce aici."
+
+#~ msgid "Map Theme:"
+#~ msgstr "Tema hărții:"
+
+#~ msgid "Map theme goes here."
+#~ msgstr "Tema hărții se introduce aici."
+
+#~ msgid "Thumbnail image goes here."
+#~ msgstr "Imaginea în miniatură se introduce aici."
+
+#, fuzzy
+#~| msgid "Preview"
+#~ msgid "Preview Map"
+#~ msgstr "Previzualizează"
+
+#~ msgid "About Marble"
+#~ msgstr "Despre Marble"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">Marble Virtual Globe</span></p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">Globul terestru virtual Marble</span></p></body></html>"
+
+#~ msgid "Version Unknown"
+#~ msgstr "Versiune necunoscută"
+
+#~ msgid "&About"
+#~ msgstr "&Despre"
+
+#, fuzzy
+#~| msgid ""
+#~| "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~| "css\">\n"
+#~| "p, li { white-space: pre-wrap; }\n"
+#~| "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~| "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~| "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~| "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~| "\"></p>\n"
+#~| "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~| "right:0px; -qt-block-indent:0; text-indent:0px;\">(c) 2007, The Marble "
+#~| "Project</p>\n"
+#~| "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~| "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~| "font-style:italic;\"></p>\n"
+#~| "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~| "right:0px; -qt-block-indent:0; text-indent:0px;\">http://edu.kde.org/"
+#~| "marble</p></body></html>"
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:10pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-size:9pt;\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "size:9pt;\">(c) 2007, The Marble Project</span></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-size:9pt; font-style:italic;\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "size:9pt;\">http://edu.kde.org/marble</span></p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">(c) 2007, Proiectul "
+#~ "Marble</p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-style:italic;\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">http://edu.kde.org/"
+#~ "marble</p></body></html>"
+
+#~ msgid "A&uthors"
+#~ msgstr "A&utori"
+
+#, fuzzy
+#~| msgid ""
+#~| "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~| "css\">\n"
+#~| "p, li { white-space: pre-wrap; }\n"
+#~| "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~| "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~| "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~| "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~| "weight:600;\">Marble Desktop Globe</span></p></body></html>"
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:10pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-size:9pt;\"></p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">Globul terestru pentru desktop Marble</span></p></body></"
+#~ "html>"
+
+#~ msgid "&Data"
+#~ msgstr "&Date"
+
+#~ msgid "&License Agreement"
+#~ msgstr "Acord de &Licență"
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:10pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-family:'MS Shell Dlg 2'; font-size:8pt;\"></p></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:10pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-family:'MS Shell Dlg 2'; font-size:8pt;\"></p></body></html>"
+
+#, fuzzy
+#~| msgid ""
+#~| "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~| "css\">\n"
+#~| "p, li { white-space: pre-wrap; }\n"
+#~| "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~| "font-weight:400; font-style:normal;\">\n"
+#~| "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~| "right:0px; -qt-block-indent:0; text-indent:0px;\">No description "
+#~| "available.</p>\n"
+#~| "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~| "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~| "\"></p>\n"
+#~| "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~| "right:0px; -qt-block-indent:0; text-indent:0px;\">If you are connected "
+#~| "to the internet please click the \"Wikipedia\" tab at the top of this "
+#~| "page to get more information.</p></body></html>"
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">There are two caches "
+#~ "being used for Marble: The physical memory which is needed to keep map "
+#~ "data in the computer's memory. Increasing the value will make the "
+#~ "application more responsive. The hard disc memory cache is used by "
+#~ "download contents from the Internet (e.g. Wikipedia data or map data). "
+#~ "Decrease this value if you want to save space on the hard disc and if "
+#~ "high usage of the Internet is not an issue. </p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Nici o descriere "
+#~ "disponibilă.</p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Dacă ai o conexiune la "
+#~ "internet, acceseaza fila \"Wikipedia\" situată la inceputul acestei "
+#~ "pagini, pentru a obține mai multe informatiii</p></body></html>"
+
+#~ msgid "C&ache"
+#~ msgstr "C&ache"
+
+#~ msgid "&Physical memory:"
+#~ msgstr "Memorie &fizică:"
+
+#, fuzzy
+#~| msgid "MB"
+#~ msgid " MB"
+#~ msgstr "MO"
+
+#~ msgid "C&lear"
+#~ msgstr "C&urăță"
+
+#~ msgid "&Hard disc:"
+#~ msgstr "&Hard disc:"
+
+#~ msgid "Unlimited"
+#~ msgstr "Nelimitat"
+
+#~ msgid "Cl&ear"
+#~ msgstr "Gol&ește"
+
+#, fuzzy
+#~| msgid ""
+#~| "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~| "css\">\n"
+#~| "p, li { white-space: pre-wrap; }\n"
+#~| "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~| "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~| "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~| "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~| "style:italic;\">Role</span></p></body></html>"
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Proxy settings for your "
+#~ "local intranet. Please leave empty if there is no proxy.</p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "style:italic;\">Rol</span></p></body></html>"
+
+#~ msgid "&Proxy"
+#~ msgstr "&Proxy"
+
+#~ msgid "&Proxy:"
+#~ msgstr "&Proxy:"
+
+#~ msgid "P&ort:"
+#~ msgstr "P&ort:"
+
+#~ msgid "Proxy type:"
+#~ msgstr "Tipul de proxy:"
+
+#~ msgid "Http"
+#~ msgstr "Http"
+
+#~ msgid "Socks5"
+#~ msgstr "Socks5"
+
+#~ msgid "Requires authentication"
+#~ msgstr "Necesită autentificare"
+
+#~ msgid "U&sername:"
+#~ msgstr "Nume de u&tilizator:"
+
+#~ msgid "&Password:"
+#~ msgstr "&Parolă:"
+
+#, fuzzy
+#~| msgid "&Celestial Body"
+#~ msgid "Credentials"
+#~ msgstr "&Corp ceresc"
+
+#, fuzzy
+#~| msgid "Server"
+#~ msgid "Server:"
+#~ msgstr "Server"
+
+#, fuzzy
+#~| msgid "U&sername:"
+#~ msgid "Username:"
+#~ msgstr "Nume de u&tilizator:"
+
+#, fuzzy
+#~| msgid "&Password:"
+#~ msgid "Password:"
+#~ msgstr "&Parolă:"
+
+#~ msgid "Marble Cache Settings"
+#~ msgstr "Setări Marble pentru cache"
+
+#, fuzzy
+#~| msgid "During &animations:"
+#~ msgid "Dragging and Animation"
+#~ msgstr "În timpul &animațiilor:"
+
+#~ msgid "&Drag location:"
+#~ msgstr "Locația &de tragere:"
+
+#, fuzzy
+#~| msgid ""
+#~| "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~| "css\">\n"
+#~| "p, li { white-space: pre-wrap; }\n"
+#~| "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~| "font-weight:400; font-style:normal;\">\n"
+#~| "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~| "right:0px; -qt-block-indent:0; text-indent:0px;\">No description "
+#~| "available.</p>\n"
+#~| "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~| "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~| "\"></p>\n"
+#~| "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~| "right:0px; -qt-block-indent:0; text-indent:0px;\">If you are connected "
+#~| "to the internet please click the \"Wikipedia\" tab at the top of this "
+#~| "page to get more information.</p></body></html>"
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">While dragging the "
+#~ "mouse there are two standard behaviours when dealing with a virtual globe:"
+#~ "</p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">The location below "
+#~ "mouse pointer will follow the cursor exactly: As a result e.g. the north "
+#~ "pole will not stay at the top which can lead to confusion. By default "
+#~ "Marble makes sure that north is always up which results in a dragging "
+#~ "behaviour where the location below the mouse pointer slightly \"detaches"
+#~ "\" from the cursor. </p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Nici o descriere "
+#~ "disponibilă.</p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Dacă ai o conexiune la "
+#~ "internet, acceseaza fila \"Wikipedia\" situată la inceputul acestei "
+#~ "pagini, pentru a obține mai multe informatiii</p></body></html>"
+
+#~ msgid "Keep Planet Axis Vertically"
+#~ msgstr "Păstrează axa planetei verticală"
+
+#~ msgid "Follow Mouse Pointer"
+#~ msgstr "Urmărește indicatorul mausului"
+
+#, fuzzy
+#~| msgid "&Set Home Location"
+#~ msgid "&Inertial Globe Rotation"
+#~ msgstr "&Setează locația \"acasă\""
+
+#, fuzzy
+#~| msgid ""
+#~| "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~| "css\">\n"
+#~| "p, li { white-space: pre-wrap; }\n"
+#~| "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~| "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~| "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~| "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~| "style:italic;\">Role</span></p></body></html>"
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">When searching for a "
+#~ "location Marble can either move instantly to the new location or it can "
+#~ "show a travel animation from the previous place to the new place.</p></"
+#~ "body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "style:italic;\">Rol</span></p></body></html>"
+
+#~ msgid "&Animate voyage to the target"
+#~ msgstr "&Animează călătoria până la țintă"
+
+#~ msgid "&On startup:"
+#~ msgstr "La p&ornire:"
+
+#, fuzzy
+#~| msgid ""
+#~| "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~| "css\">\n"
+#~| "p, li { white-space: pre-wrap; }\n"
+#~| "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~| "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~| "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~| "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~| "style:italic;\">Role</span></p></body></html>"
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">By default Marble will "
+#~ "display the home location immediately after the application has started. "
+#~ "As an alternative it can also show the last position that was active when "
+#~ "the user left the application. </p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "style:italic;\">Rol</span></p></body></html>"
+
+#~ msgid "Show Home Location"
+#~ msgstr "Arată locația „acasă”"
+
+#~ msgid "Return to Last Location Visited"
+#~ msgstr "Revino la ultima locație vizitată"
+
+#~ msgid "&External Editor:"
+#~ msgstr "&Editor extern:"
+
+#~ msgid ""
+#~ "<p>The application that is launched to edit maps. Potlatch (default) "
+#~ "requires a web browser with flash support to be installed. When selecting "
+#~ "josm or merkaartor, make sure that the respective application is "
+#~ "installed.</p>"
+#~ msgstr ""
+#~ "<p>Aplicația care este lansată pentru a edita hărți. Potlatch (implicit) "
+#~ "necesită un navigator web compatibil cu flash pentru a fi instalat. La "
+#~ "selectarea unui josm sau merkaartor, asigurați-vă că aplicația respectivă "
+#~ "este instalată.</p>"
+
+#~ msgid "Always ask"
+#~ msgstr "Întreabă întotdeauna"
+
+#~ msgid "Potlatch (Web browser)"
+#~ msgstr "Potlatch (Navigator web)"
+
+#~ msgid "Up"
+#~ msgstr "Sus"
+
+#, fuzzy
+#~| msgid "Tilts the earth's axis towards the user."
+#~ msgid "Tilts the globe's axis towards the user."
+#~ msgstr "Înclină axa pământului în direcția utilizatorului."
+
+#~ msgid "Left"
+#~ msgstr "Stânga"
+
+#, fuzzy
+#~| msgid "Rotates the earth counterclockwise around its axis."
+#~ msgid "Rotates the globe counterclockwise around its axis."
+#~ msgstr ""
+#~ "Rotește pământul în jurul axei proprii în sens invers al acelor de "
+#~ "ceasornic"
+
+#~ msgid "Reset View"
+#~ msgstr "Reinițializează vizualizarea"
+
+#~ msgid "Click this button to restore the original zoom level and view angle."
+#~ msgstr ""
+#~ "Apasă acest buton pentru a reveni la valoarea originală a nivelului de "
+#~ "apropiere si a unghiului perspectivei"
+
+#~ msgid "Home"
+#~ msgstr "Acasă"
+
+#~ msgid "Right"
+#~ msgstr "Dreapta"
+
+#, fuzzy
+#~| msgid "Rotates the earth clockwise around its axis."
+#~ msgid "Rotates the globe clockwise around its axis."
+#~ msgstr ""
+#~ "Rotește pământul în jurul axei proprii în sensul acelor de ceasornic"
+
+#~ msgid "Down"
+#~ msgstr "Jos"
+
+#, fuzzy
+#~| msgid "Tilts the earth's axis away from the user."
+#~ msgid "Tilts the globe's axis away from the user."
+#~ msgstr "Înclină axa pământului în direcția opusă utilizatorului."
+
+#~ msgid "Zoom In"
+#~ msgstr "Apropie"
+
+#~ msgid "Zoom in by pressing this button to see more detail."
+#~ msgstr "Apropie apăsând acest buton pentru a vedea mai multe detalii."
+
+#~ msgid "+"
+#~ msgstr "+"
+
+#~ msgid "Zoom Slider"
+#~ msgstr "Reglaj al magnificării"
+
+#~ msgid "Use this slider to adjust the zoom level of the map."
+#~ msgstr "Folosește acest reglaj pentru a ajusta nivelul magnificării hărții"
+
+#~ msgid "Zoom Out"
+#~ msgstr "Depărtează"
+
+#~ msgid "Zoom out by pressing this button to see less detail."
+#~ msgstr "Micșorează apăsând acest buton pentru a vedea mai puține detalii."
+
+#~ msgid "-"
+#~ msgstr "-"
+
+#, fuzzy
+#~| msgid ""
+#~| "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~| "css\">\n"
+#~| "p, li { white-space: pre-wrap; }\n"
+#~| "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~| "font-weight:400; font-style:normal;\">\n"
+#~| "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~| "right:0px; -qt-block-indent:0; text-indent:0px;\">No description "
+#~| "available.</p>\n"
+#~| "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~| "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~| "\"></p>\n"
+#~| "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~| "right:0px; -qt-block-indent:0; text-indent:0px;\">If you are connected "
+#~| "to the internet please click the \"Wikipedia\" tab at the top of this "
+#~| "page to get more information.</p></body></html>"
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'DejaVu Sans'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif';\">This is Marble's machine room for advanced users. "
+#~ "Here you can select and deselect the functionality that is provided "
+#~ "through plugins. </span></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif';\">Deselecting a plugin will remove the functionality "
+#~ "from the map, menus and toolbars. </span></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif';\">Also some of the plugins might allow for tweaking "
+#~ "their configuration a bit. </span></p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Nici o descriere "
+#~ "disponibilă.</p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Dacă ai o conexiune la "
+#~ "internet, acceseaza fila \"Wikipedia\" situată la inceputul acestei "
+#~ "pagini, pentru a obține mai multe informatiii</p></body></html>"
+
+#~ msgid "P&lugins"
+#~ msgstr "E&xtensii"
+
+#~ msgid "Time Zone"
+#~ msgstr "Fus orar"
+
+#~ msgid "UTC"
+#~ msgstr "UTC"
+
+#~ msgid "System time zone"
+#~ msgstr "Fusul orar al sistemului"
+
+#~ msgid "Choose Time zone"
+#~ msgstr "Alege fusul orar"
+
+#~ msgid "European Central Time"
+#~ msgstr "Ora Europei Centrale"
+
+#~ msgid "Eastern European Time"
+#~ msgstr "Ora Europei de Est"
+
+#~ msgid "Egypt Standard Time"
+#~ msgstr "Ora Standard a Egiptului"
+
+#~ msgid "Eastern African Time"
+#~ msgstr "Ora Africii de Est"
+
+#~ msgid "Middle East Time"
+#~ msgstr "Ora Orientului mijlociu"
+
+#~ msgid "Near East Time"
+#~ msgstr "Ora de lângă Est"
+
+#~ msgid "Pakistan Lahore Time"
+#~ msgstr "Ora Pakistan Lahore"
+
+#~ msgid "India Standard Time"
+#~ msgstr "Ora Standard a Indiei"
+
+#~ msgid "Bangladesh Standard Time"
+#~ msgstr "Ora Standard a Bangladeshului"
+
+#~ msgid "Vietnam Standard Time"
+#~ msgstr "Ora Standard a Vietnamului"
+
+#~ msgid "China Taiwan Time"
+#~ msgstr "Ora Chinei Taiwan"
+
+#~ msgid "Japan Standard Time"
+#~ msgstr "Ora Standard Japoniei"
+
+#~ msgid "Australia Central Time"
+#~ msgstr "Ora centrală a Australiei"
+
+#~ msgid "Australia Eastern Time"
+#~ msgstr "Ora de est a Australiei"
+
+#~ msgid "Solomon Standard Time"
+#~ msgstr "Ora Solomon Standard"
+
+#~ msgid "New Zealand Standard Time"
+#~ msgstr "Ora standard a Noii Zeelande"
+
+#~ msgid "Midway Islands Time"
+#~ msgstr "Ora Insulelor Midway"
+
+#~ msgid "Hawaii Standard Time"
+#~ msgstr "Ora Standard a Hawaii"
+
+#~ msgid "Alaska Standard Time"
+#~ msgstr "Ora Standard a Alaskăi"
+
+#~ msgid "Pacific Standard Time"
+#~ msgstr "Ora Standard a Pacificului"
+
+#~ msgid "Phoenix Standard Time"
+#~ msgstr "Ora Standard a Pheonixului"
+
+#~ msgid "Mountain Standard Time"
+#~ msgstr "Ora Standard de munte"
+
+#~ msgid "Central Standard Time"
+#~ msgstr "Ora Standard Centrală"
+
+#~ msgid "Eastern Standard Time"
+#~ msgstr "Ora Standard de Est"
+
+#~ msgid "Indiana Eastern Standard Time"
+#~ msgstr "Ora Standard a Indianei"
+
+#~ msgid "Puerto Rico and US Virgin Islands Time"
+#~ msgstr "Ora Puerto Rico și a Insulelor Virgine ale SUA"
+
+#~ msgid "Canada Newfoundland Time"
+#~ msgstr "Ora Canada și Newfoundland"
+
+#~ msgid "Argentina Standard Time"
+#~ msgstr "Ora Standard a Argentinei"
+
+#~ msgid "Brazil Eastern Time"
+#~ msgstr "Ora de est a Braziliei"
+
+#~ msgid "Central African Time"
+#~ msgstr "Ora Africii centrale"
+
+#~ msgid "When Marble starts"
+#~ msgstr "Când pornește Marble"
+
+#~ msgid "Load system time"
+#~ msgstr "Încarcă ora sistemului"
+
+#~ msgid "Load last session time"
+#~ msgstr "Încarcă ora ultimei sesiuni"
+
+#~ msgid "&Units"
+#~ msgstr "&Unități"
+
+#~ msgid "&Distance:"
+#~ msgstr "&Distanță:"
+
+#, fuzzy
+#~| msgid ""
+#~| "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~| "css\">\n"
+#~| "p, li { white-space: pre-wrap; }\n"
+#~| "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~| "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~| "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~| "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~| "style:italic;\">Role</span></p></body></html>"
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">The unit that gets used "
+#~ "to measure altitude, lengths and distances (e.g. km, mi, ft).</p></body></"
+#~ "html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "style:italic;\">Rol</span></p></body></html>"
+
+#~ msgid "Kilometer, Meter"
+#~ msgstr "Kilometru, metru"
+
+#~ msgid "Miles, Feet"
+#~ msgstr "Mile, picioare"
+
+#~ msgid "An&gle:"
+#~ msgstr "Un&ghi:"
+
+#, fuzzy
+#~| msgid ""
+#~| "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~| "css\">\n"
+#~| "p, li { white-space: pre-wrap; }\n"
+#~| "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~| "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~| "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~| "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~| "style:italic;\">Role</span></p></body></html>"
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Specifies the notation "
+#~ "of angles in coordinates: By default the Degree-Minute-Second notation (e."
+#~ "g. 54°30'00\" ) gets used. As an alternative you can choose decimal "
+#~ "degrees (e.g. 54.5°).</p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "style:italic;\">Rol</span></p></body></html>"
+
+#~ msgid "Degree (DMS)"
+#~ msgstr "Gradul (DMS)"
+
+#~ msgid "Degree (Decimal)"
+#~ msgstr "Gradul (zecimal)"
+
+#~ msgid "Map &Quality"
+#~ msgstr "&Calitate hartă"
+
+#, fuzzy
+#~| msgid ""
+#~| "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~| "css\">\n"
+#~| "p, li { white-space: pre-wrap; }\n"
+#~| "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~| "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~| "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~| "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~| "style:italic;\">Role</span></p></body></html>"
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Specifies the map "
+#~ "quality that gets displayed while there is no user input. Usually this "
+#~ "allows for high map quality as speed is no concern.</p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "style:italic;\">Rol</span></p></body></html>"
+
+#~ msgid "Outline Quality"
+#~ msgstr "Calitatea conturului"
+
+#~ msgid "Low Quality"
+#~ msgstr "Calitate slabă"
+
+#~ msgid "Normal"
+#~ msgstr "Normală"
+
+#~ msgid "High Quality"
+#~ msgstr "Calitate înaltă"
+
+#~ msgid "Print Quality"
+#~ msgstr "Calitate tipărire"
+
+#~ msgid "During &animations:"
+#~ msgstr "În timpul &animațiilor:"
+
+#, fuzzy
+#~| msgid ""
+#~| "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~| "css\">\n"
+#~| "p, li { white-space: pre-wrap; }\n"
+#~| "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~| "font-weight:400; font-style:normal;\">\n"
+#~| "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~| "right:0px; -qt-block-indent:0; text-indent:0px;\">No description "
+#~| "available.</p>\n"
+#~| "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~| "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~| "\"></p>\n"
+#~| "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~| "right:0px; -qt-block-indent:0; text-indent:0px;\">If you are connected "
+#~| "to the internet please click the \"Wikipedia\" tab at the top of this "
+#~| "page to get more information.</p></body></html>"
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Specifies the map "
+#~ "quality that gets displayed during map animations (e.g. while dragging "
+#~ "the globe). </p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Especially on slow "
+#~ "machines it is advisable to set this option to \"low quality\" as this "
+#~ "will give better speed.</p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Nici o descriere "
+#~ "disponibilă.</p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Dacă ai o conexiune la "
+#~ "internet, acceseaza fila \"Wikipedia\" situată la inceputul acestei "
+#~ "pagini, pentru a obține mai multe informatiii</p></body></html>"
+
+#~ msgid "G&raphics system:"
+#~ msgstr "Sistem g&rafic:"
+
+#~ msgid ""
+#~ "Specifies the graphics system that Qt uses to draw the map.\n"
+#~ "Changing this setting might be a good idea if there are performance "
+#~ "issues with the system's graphics drivers."
+#~ msgstr ""
+#~ "Specifică sistemul grafic pe care îl utilizează Qt pentru a desena "
+#~ "harta.\n"
+#~ "Modificarea acestei setări ar putea fi o idee bună în cazul în care "
+#~ "există probleme de performanță cu driverele grafice ale sistemului."
+
+#~ msgid "Raster (Software rendering)"
+#~ msgstr "Rasterizare (randare software)"
+
+#~ msgid "OpenGL"
+#~ msgstr "OpenGL"
+
+#~ msgid "&Text Labels"
+#~ msgstr "Etichete &textuale"
+
+#~ msgid "&Place names:"
+#~ msgstr "&Denumiri locuri:"
+
+#, fuzzy
+#~| msgid ""
+#~| "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~| "css\">\n"
+#~| "p, li { white-space: pre-wrap; }\n"
+#~| "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~| "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~| "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~| "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~| "style:italic;\">Role</span></p></body></html>"
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Places often have "
+#~ "different names in different languages. The label on the map can show the "
+#~ "name in the user's language. Alternatively it can display the name in the "
+#~ "official language and glyphs of that place. </p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "style:italic;\">Rol</span></p></body></html>"
+
+#~ msgid "Custom & Native Language"
+#~ msgstr "Limba maternă și personalizată"
+
+#~ msgid "Custom Language"
+#~ msgstr "Limbă personalizată"
+
+#~ msgid "Native Language"
+#~ msgstr "Limba maternă"
+
+#~ msgid "Default map &font:"
+#~ msgstr "&Fontul implicit al hărții:"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">The default font that "
+#~ "gets used on the map.</p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Fontul utilizat "
+#~ "implicit pe hartă.</p></body></html>"
+
+#, fuzzy
+#~| msgid "Description field"
+#~ msgid "Destination video"
+#~ msgstr "Câmp rezervat descrierii"
+
+#~ msgid "Open..."
+#~ msgstr "&Deschide harta..."
+
+#, fuzzy
+#~| msgid "Kilometer, Meter"
+#~ msgid "FPS (frames per second)"
+#~ msgstr "Kilometru, metru"
+
+#~ msgid "Cancel"
+#~ msgstr "Renunță"
+
+#, fuzzy
+#~| msgid "State"
+#~ msgid "Start"
+#~ msgstr "Start:"
+
+#~ msgid "New Bookmark Folder - Marble"
+#~ msgstr "Dosar favorite nou - Marble"
+
+#~ msgid "&Folder Name"
+#~ msgstr "&Nume dosar"
+
+#, fuzzy
+#~| msgid "Current Location"
+#~ msgid "Current Relations"
+#~ msgstr "Poziția curentă pe hartă"
+
+#, fuzzy
+#~| msgid "&Name"
+#~ msgid "Name"
+#~ msgstr "&Nume"
+
+#~ msgid "Role"
+#~ msgstr "Rolul"
+
+#, fuzzy
+#~| msgid "&Add Folder"
+#~ msgid "Add Relation"
+#~ msgstr "&Adaugă dosar"
+
+#, fuzzy
+#~| msgid "Current Location"
+#~ msgid "Current Tags"
+#~ msgstr "Poziția curentă pe hartă"
+
+#, fuzzy
+#~| msgid "Browse"
+#~ msgid "Browse..."
+#~ msgstr "Răsfoiește"
+
+#, fuzzy
+#~| msgid "&Position"
+#~ msgid "Position:"
+#~ msgstr "&Poziție"
+
+#~ msgid "Marble"
+#~ msgstr "Marble"
+
+#~ msgid "Map"
+#~ msgstr "Hartă"
+
+#~ msgid "Visible Globe Region"
+#~ msgstr "Regiunea vizibilă a globului"
+
+#~ msgid "Outer Space"
+#~ msgstr "Spațiu"
+
+#~ msgid "Route"
+#~ msgstr "Rută"
+
+#~ msgid "Route Summary"
+#~ msgstr "Rezumatul rutei"
+
+#~ msgid "Driving Instructions"
+#~ msgstr "Instrucțiuni de conducere"
+
+#~ msgid "Footer"
+#~ msgstr "Subsol"
+
+#~ msgid "Configure Routing Profile"
+#~ msgstr "Configureză profilul de rutare"
+
+#~ msgid "Active Route Services"
+#~ msgstr "Serviciile de rutare active"
+
+#~ msgid "Service Settings"
+#~ msgstr "Setările serviciului"
+
+#~ msgid "No configuration available"
+#~ msgstr "Nicio configurație nu este disponibilă"
+
+#~ msgid "Select Service to Configure"
+#~ msgstr "Selectați serviciul pentru configurare"
+
+#~ msgid "Configure"
+#~ msgstr "Configurează"
+
+#~ msgid "&Add"
+#~ msgstr "&Adaugă"
+
+#~ msgid "&Configure"
+#~ msgstr "&Configurează"
+
+#~ msgid "&Remove"
+#~ msgstr "&Elimină"
+
+#~ msgid "Move &Up"
+#~ msgstr "Mută mai s&us"
+
+#~ msgid "Move &Down"
+#~ msgstr "Mută mai j&os"
+
+#~ msgid "Car (fastest)"
+#~ msgstr "Mașină (cel mai rapid)"
+
+#~ msgid "Car (shortest)"
+#~ msgstr "Mașină (cel mai scurt)"
+
+#~ msgid "Bicycle"
+#~ msgstr "Bicicletă"
+
+#~ msgid "Pedestrian"
+#~ msgstr "Pieton"
+
+#~ msgid "No results."
+#~ msgstr "Niciun rezultat."
+
+#~ msgid "Show Details"
+#~ msgstr "Arată detalii"
+
+#~ msgid "Choose alternative routes"
+#~ msgstr "Alege rute alternative"
+
+#~ msgid "Sun Control"
+#~ msgstr "Controlul solar"
+
+#~ msgid "Sun Shading"
+#~ msgstr "Umbra soarelui"
+
+#~ msgid "Shadow"
+#~ msgstr "Umbră"
+
+#~ msgid "Night Map"
+#~ msgstr "Hartă nocturnă"
+
+#, fuzzy
+#~| msgid ""
+#~| "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/"
+#~| "TR/REC-html40/strict.dtd\">\n"
+#~| "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~| "css\">\n"
+#~| "p, li { white-space: pre-wrap; }\n"
+#~| "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~| "font-weight:400; font-style:normal;\">\n"
+#~| "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~| "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~| "weight:600;\">WMS Server</span></p>\n"
+#~| "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~| "right:0px; -qt-block-indent:0; text-indent:0px;\">Please choose a <a "
+#~| "href=\"http://en.wikipedia.org/wiki/Web_Map_Service\"><span style=\" "
+#~| "text-decoration: underline; color:#0057ae;\">WMS</span></a> server or "
+#~| "enter a custom server URL.</p></body></html>"
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">Attention: Panning the map is disabled now! </span></p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Uncheck the \"Lock map "
+#~ "view to Subsolar Point\" option to allow for viewing a different place on "
+#~ "the globe again.</p></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">WMS Server</span></p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Alegeți un server<a "
+#~ "href=\"http://en.wikipedia.org/wiki/Web_Map_Service\"><span style=\" text-"
+#~ "decoration: underline; color:#0057ae;\">WMS</span></a> sau introduceți "
+#~ "URL-ul unui server personalizat.</p></body></html>"
+
+#~ msgid "OK"
+#~ msgstr "OK"
+
+#~ msgid "Apply"
+#~ msgstr "Aplică"
+
+#~ msgid "Creating Map"
+#~ msgstr "Creez harta"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /></head><body style="
+#~ "\" white-space: pre-wrap; font-family:Sans Serif; font-size:9pt; font-"
+#~ "weight:400; font-style:normal; text-decoration:none;\"><p style=\" margin-"
+#~ "top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-"
+#~ "indent:0; text-indent:0px;\"><span style=\" font-weight:600;\">Satellite "
+#~ "View</span></p><p style=\" margin-top:0px; margin-bottom:0px; margin-"
+#~ "left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Earth "
+#~ "as seen from Space. The map is based on NASA's beautiful \"Blue Marble "
+#~ "Next Generation\" pictures. Credits: NASA's Earth Observatory</p></body></"
+#~ "html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /></head><body style="
+#~ "\" white-space: pre-wrap; font-family:Sans Serif; font-size:9pt; font-"
+#~ "weight:400; font-style:normal; text-decoration:none;\"><p style=\" margin-"
+#~ "top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-"
+#~ "indent:0; text-indent:0px;\"><span style=\" font-weight:600;\">Vedere din "
+#~ "satelit </span></p><p style=\" margin-top:0px; margin-bottom:0px; margin-"
+#~ "left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"> "
+#~ "Pământul privit din spațiu. Harta aceasta se bazează pe imaginile  \"Blue "
+#~ "Marble Next Generation\" ale NASA. Responsabil: Earth Observatory al "
+#~ "NASA</p></body></html>"
+
+#~ msgid ""
+#~ "Marble needs to create this map. This only needs to be done once and may "
+#~ "take a few seconds."
+#~ msgstr ""
+#~ "Marble trebuie sa creeze această hartă. Acest lucru trebuie făcut doar o "
+#~ "singură dată și ar putea dura câteva secunde."
+
+#~ msgid "&Cancel"
+#~ msgstr "&Renunță"
+
+#~ msgid "Zoom"
+#~ msgstr "Mărește"
+
+#, fuzzy
+#~| msgid "Time Zones"
+#~ msgid "&Tile Level Range:"
+#~ msgstr "Fusuri orare"
+
+#~ msgid "Minimum Tile Level"
+#~ msgstr "Nivelul minim al dalelor"
+
+#~ msgid "to"
+#~ msgstr "către"
+
+#~ msgid "Maximum Tile Level"
+#~ msgstr "Nivelul maxim al dalelor"
+
+#~ msgid "Time Control"
+#~ msgstr "Controlul orei"
+
+#~ msgid "Time"
+#~ msgstr "Oră"
+
+#~ msgid "New Date Time      :"
+#~ msgstr "Dată și oră noi      :"
+
+#~ msgid "Refresh Interval     :"
+#~ msgstr "Interval de reîmprospătare     :"
+
+#~ msgid " seconds"
+#~ msgstr " secunde"
+
+#~ msgid "Now"
+#~ msgstr "Acum"
+
+#~ msgid "Current Date Time :"
+#~ msgstr "Data și ora curente :"
+
+#~ msgid "Time Speed"
+#~ msgstr "Viteza timpului"
+
+#, fuzzy
+#~| msgid "&Close"
+#~ msgid "Close"
+#~ msgstr "În&chide"
+
+#, fuzzy
+#~| msgid "Move &Up"
+#~ msgid "Move up"
+#~ msgstr "Mută mai s&us"
+
+#, fuzzy
+#~| msgid "Move &Down"
+#~ msgid "Move down"
+#~ msgstr "Mută mai j&os"
+
+#, fuzzy
+#~| msgid "Save Track"
+#~ msgid "Save Tour"
+#~ msgstr "Salvează pistă"
+
+#, fuzzy
+#~| msgid "Save Track"
+#~ msgid "Save Tour As"
+#~ msgstr "Salvează pistă"
+
+#, fuzzy
+#~| msgid "Open Track"
+#~ msgid "Open Tour"
+#~ msgstr "Deschide pistă"
+
+#~ msgid "Worldclock Applet Configuration"
+#~ msgstr "Configurare miniaplicație Worldclock"
+
+#~ msgid "Map Display"
+#~ msgstr "Afișare hartă"
+
+#~ msgid "Projection:"
+#~ msgstr "Proiecție:"
+
+#~ msgid "Equirectangular"
+#~ msgstr "Echirectangular"
+
+#, fuzzy
+#~| msgid "L&ongitude"
+#~ msgid "Center map on longitude:"
+#~ msgstr "L&ongitudine"
+
+#, fuzzy
+#~| msgid "L&ongitude"
+#~ msgid "Center map on daylight"
+#~ msgstr "L&ongitudine"
+
+#~ msgid "Show date"
+#~ msgstr "Afișare dată"
+
+#~ msgid "Time Zones"
+#~ msgstr "Fusuri orare"
+
+#, fuzzy
+#~| msgid "Coordinates:"
+#~ msgid "Coordinates"
+#~ msgstr "Coordonate:"
+
+#~ msgid "N"
+#~ msgstr "N"
+
+#, fuzzy
+#~| msgid "&W"
+#~ msgid "W"
+#~ msgstr "&W"
+
+#, fuzzy
+#~| msgid "&E"
+#~ msgid "E"
+#~ msgstr "&E"
+
+#, fuzzy
+#~| msgid "&S"
+#~ msgid "S"
+#~ msgstr "&S"
+
+#, fuzzy
+#~| msgid "Vegetation"
+#~ msgid "Rotation"
+#~ msgstr "Vegetație"
+
+#, fuzzy
+#~| msgid "&Add Folder"
+#~ msgid "Add polygon"
+#~ msgstr "&Adaugă dosar"
+
+#, fuzzy
+#~| msgid "Areas"
+#~ msgid "Area"
+#~ msgstr "Zone"
+
+#~ msgid "Display"
+#~ msgstr "Afișaj"
+
+#~ msgid "Internet"
+#~ msgstr "Internet"
+
+#, fuzzy
+#~| msgid "Data Sheet"
+#~ msgid "APRS Data Sources"
+#~ msgstr "Foaie de date"
+
+#, fuzzy
+#~| msgid "Collect data from a file"
+#~ msgid "Collect data from an APRS Internet server"
+#~ msgstr "Colectarea de date dintr-un fișier"
+
+#~ msgid "Server"
+#~ msgstr "Server"
+
+#~ msgid "rotate.aprs.net"
+#~ msgstr "rotate.aprs.net"
+
+#, fuzzy
+#~| msgid "P&ort:"
+#~ msgid "Port"
+#~ msgstr "Port"
+
+#~ msgid "10253"
+#~ msgstr "10253"
+
+#~ msgid "Device"
+#~ msgstr "Dispozitiv"
+
+#, fuzzy
+#~| msgid "Collect data from a file"
+#~ msgid "Collect data from a serial TNC (In Text Mode)"
+#~ msgstr "Colectarea de date dintr-un fișier"
+
+#~ msgid "TTY"
+#~ msgstr "TTY"
+
+#~ msgid "/dev/ttyUSB0"
+#~ msgstr "/dev/ttyUSB0"
+
+#~ msgid "File"
+#~ msgstr "Fișier"
+
+#~ msgid "Collect data from a file"
+#~ msgstr "Colectarea de date dintr-un fișier"
+
+#, fuzzy
+#~| msgid "Navigation Control"
+#~ msgid "Configure Compass Plugin"
+#~ msgstr "Control al navigării"
+
+#~ msgid "Theme"
+#~ msgstr "Temă"
+
+#~ msgid "Default"
+#~ msgstr "Implicit"
+
+#~ msgid "Arrows"
+#~ msgstr "Săgeți"
+
+#~ msgid "Atom"
+#~ msgstr "Atom"
+
+#~ msgid "Magnet"
+#~ msgstr "Magnet"
+
+#, fuzzy
+#~| msgid "Navigation Control"
+#~ msgid "Configure Crosshairs Plugin"
+#~ msgstr "Control al navigării"
+
+#~ msgid "Gun 1"
+#~ msgstr "Arma 1"
+
+#~ msgid "Gun 2"
+#~ msgstr "Arma 1"
+
+#~ msgid "German"
+#~ msgstr "Germană"
+
+#~ msgid "Dialog"
+#~ msgstr "Fereastră de dialog"
+
+#~ msgid "Filter"
+#~ msgstr "Filtru"
+
+#, fuzzy
+#~| msgid "Time Zones"
+#~ msgid "Time Range"
+#~ msgstr "Fusuri orare"
+
+#, fuzzy
+#~| msgid "Location Browser"
+#~ msgid "Eclipse Browser"
+#~ msgstr "Browser al pozitiilor pe hartă"
+
+#, fuzzy
+#~| msgid "&Settings"
+#~ msgid "&Settings..."
+#~ msgstr "&Configurări"
+
+#, fuzzy
+#~| msgid " Satellites"
+#~ msgid "&Go To Selected Eclipse"
+#~ msgstr "Sateliți"
+
+#, fuzzy
+#~| msgid "Navigation"
+#~ msgid "Eclipses Configuration"
+#~ msgstr "Navigare"
+
+#, fuzzy
+#~| msgid "Central African Time"
+#~ msgid "Central &Line"
+#~ msgstr "Ora Africii centrale"
+
+#, fuzzy
+#~| msgid "&Remove"
+#~ msgid "&Reminder"
+#~ msgstr "&Elimină"
+
+#, fuzzy
+#~| msgid "Navigation Control"
+#~ msgid "Configure Elevation Profile Plugin"
+#~ msgstr "Control al navigării"
+
+#~ msgid "Speed"
+#~ msgstr "Viteză"
+
+#~ msgid "Direction"
+#~ msgstr "Direcție"
+
+#~ msgid "Altitude"
+#~ msgstr "Altitudine"
+
+#~ msgid "Precision"
+#~ msgstr "Precizie"
+
+#, fuzzy
+#~| msgid "Coordinate Grid"
+#~ msgid "Coordinate Grid Plugin"
+#~ msgstr "Grilaj al coordonatelor"
+
+#, fuzzy
+#~| msgid "Clouds"
+#~ msgid "C&olors"
+#~ msgstr "Nori"
+
+#, fuzzy
+#~| msgid "Coordinate Grid"
+#~ msgid "Color of the coordinate grid."
+#~ msgstr "Grilaj al coordonatelor."
+
+#, fuzzy
+#~| msgid "Role of the location."
+#~ msgid "Color of the tropical circles."
+#~ msgstr "Rolul poziției de pe hartă."
+
+#, fuzzy
+#~| msgid "Role of the location."
+#~ msgid "Color of the equator."
+#~ msgstr "Rolul poziției de pe hartă."
+
+#, fuzzy
+#~| msgid "&Text Labels"
+#~ msgid "Labels"
+#~ msgstr "Etichete &textuale"
+
+#, fuzzy
+#~| msgid "&Text Labels"
+#~ msgid "&Named Labels"
+#~ msgstr "Etichete &textuale"
+
+#, fuzzy
+#~| msgid "&Text Labels"
+#~ msgid "&Numerical Labels"
+#~ msgstr "Etichete &textuale"
+
+#, fuzzy
+#~| msgid "Show places"
+#~ msgid "Show numerical Labels."
+#~ msgstr "Arată localități"
+
+#, fuzzy
+#~| msgid "Navigation Control"
+#~ msgid "Configure Scale Bar Plugin"
+#~ msgstr "Control al navigării"
+
+#, fuzzy
+#~| msgid "Show Navigation Panel"
+#~ msgid "Show Ratio Scale"
+#~ msgstr "Afișează panoul de navigare"
+
+#, fuzzy
+#~| msgid "Marble - Desktop Globe"
+#~ msgid "Marble - Measure Tool Configuration"
+#~ msgstr "Marble - glob terestru pentru desktop"
+
+#, fuzzy
+#~| msgid "Equirectangular"
+#~ msgid "Circle"
+#~ msgstr "Echirectangular"
+
+#, fuzzy
+#~| msgid "&Text Labels"
+#~ msgid "Segment labels"
+#~ msgstr "Etichete &textuale"
+
+#, fuzzy
+#~| msgid "&Distance:"
+#~ msgid "Distance "
+#~ msgstr "&Distanță:"
+
+#, fuzzy
+#~| msgid "Cemetery"
+#~ msgid "Perimeter"
+#~ msgstr "Cimitir"
+
+#, fuzzy
+#~| msgid "&Place names:"
+#~ msgid "Cache name:"
+#~ msgstr "&Denumiri locuri:"
+
+#~ msgid "User name:"
+#~ msgstr "Nume utilizator:"
+
+#~ msgid "Status:"
+#~ msgstr "Status:"
+
+#~ msgid "Country:"
+#~ msgstr "Țara:"
+
+#~ msgid "Terrain:"
+#~ msgstr "Teren:"
+
+#~ msgid "Longitude:"
+#~ msgstr "Longitudine:"
+
+#~ msgid "Latitude:"
+#~ msgstr "Latitudine:"
+
+#, fuzzy
+#~| msgid "&Time"
+#~ msgid "Date hidden:"
+#~ msgstr "&Oră"
+
+#, fuzzy
+#~| msgid "Preview"
+#~ msgid "Previous"
+#~ msgstr "Previzualizează"
+
+#, fuzzy
+#~| msgid "&Distance:"
+#~ msgid "Maximum difficulty:"
+#~ msgstr "&Distanță:"
+
+#, fuzzy
+#~| msgid "&Distance:"
+#~ msgid "Maximum Distance:"
+#~ msgstr "&Distanță:"
+
+#, fuzzy
+#~| msgid "State"
+#~ msgid "Start:"
+#~ msgstr "Start:"
+
+#~ msgid "End:"
+#~ msgstr "Sfârșit:"
+
+#~ msgid "TextLabel"
+#~ msgstr "EtichetăTextuală"
+
+#, fuzzy
+#~| msgid "Marble - Desktop Globe"
+#~ msgid "Marble - OpenDesktop plugin configuration"
+#~ msgstr "Marble - glob terestru pentru desktop"
+
+#, fuzzy
+#~| msgid "Map Name:"
+#~ msgid "Map &Image"
+#~ msgstr "Numele hărții:"
+
+#, fuzzy
+#~| msgid "&Place names:"
+#~ msgid "&Planet:"
+#~ msgstr "&Denumiri locuri:"
+
+#~ msgid "x"
+#~ msgstr "x"
+
+#~ msgid "Preview"
+#~ msgstr "Previzualizează"
+
+#~ msgid "Filename"
+#~ msgstr "Numele fișierului"
+
+#, fuzzy
+#~| msgid "Navigation Control"
+#~ msgid "Configure Photo Plugin"
+#~ msgstr "Control al navigării"
+
+#, fuzzy
+#~| msgid "Navigation Control"
+#~ msgid "Configure Position Marker Plugin"
+#~ msgstr "Control al navigării"
+
+#~ msgid "Cursor Shape"
+#~ msgstr "Forma cursorului"
+
+#~ msgid "&Arrow"
+#~ msgstr "&Săgeată"
+
+#~ msgid "&Custom:"
+#~ msgstr "&Personalizat:"
+
+#, fuzzy
+#~| msgid "Terrain"
+#~ msgid "Trail"
+#~ msgstr "Teren"
+
+#~ msgid "&Accuracy:"
+#~ msgstr "&Precizie:"
+
+#, fuzzy
+#~| msgid "Coordinate Grid"
+#~ msgid "Color of the position marker's accuracy indicator."
+#~ msgstr "Grilaj al coordonatelor."
+
+#, fuzzy
+#~| msgid "Terrain"
+#~ msgid "Trail:"
+#~ msgstr "Teren:"
+
+#, fuzzy
+#~| msgid "Coordinate Grid"
+#~ msgid "Color of the position marker's trail."
+#~ msgstr "Grilaj al coordonatelor."
+
+#, fuzzy
+#~| msgid "Navigation"
+#~ msgid "Routing Configuration - Marble"
+#~ msgstr "Navigare"
+
+#, fuzzy
+#~| msgid "Driving Instructions"
+#~ msgid "Audible Turn Instructions"
+#~ msgstr "Instrucțiuni de conducere"
+
+#, fuzzy
+#~| msgid ""
+#~| "Enter a search term and press Enter. <a href=\"http://userbase.kde.org/"
+#~| "Marble/Search\">Details...</a>"
+#~ msgid ""
+#~ "<a href=\"http://userbase.kde.org/Marble/CustomSpeakers\">Get more "
+#~ "speakers</a>"
+#~ msgstr ""
+#~ "Introduceți un termen de căutare și apăsați Enter. <a href=\"http://"
+#~ "userbase.kde.org/Marble/Search\">Detalii...</a>"
+
+#, fuzzy
+#~| msgid "Zoom Out"
+#~ msgid "zoom out"
+#~ msgstr "Depărtează"
+
+#, fuzzy
+#~| msgid "Zoom In"
+#~ msgid "zoom in"
+#~ msgstr "Apropie"
+
+#, fuzzy
+#~| msgid "Total Distance: %1 m"
+#~ msgid "total time remaining"
+#~ msgstr "Distanța totală: %1 m"
+
+#, fuzzy
+#~| msgid "Navigation"
+#~ msgid "Satellites Configuration - Marble"
+#~ msgstr "Navigare"
+
+#, fuzzy
+#~| msgid " Satellites"
+#~ msgid "&Satellites"
+#~ msgstr "Sateliți"
+
+#, fuzzy
+#~| msgid "Data Sheet"
+#~ msgid "&Data Sources"
+#~ msgstr "Foaie de date"
+
+#, fuzzy
+#~| msgid "Data Sheet"
+#~ msgid "&Reload All Data Sources"
+#~ msgstr "Foaie de date"
+
+#, fuzzy
+#~| msgid "Data Sheet"
+#~ msgid "Satellite Data Sources:"
+#~ msgstr "Foaie de date"
+
+#~ msgid "km/h"
+#~ msgstr "km/h"
+
+#, fuzzy
+#~| msgid "Navigation Control"
+#~ msgid "Configure Stars Plugin"
+#~ msgstr "Control al navigării"
+
+#, fuzzy
+#~| msgid "&Celestial Body"
+#~ msgid "Celestial Objects"
+#~ msgstr "&Corp ceresc"
+
+#, fuzzy
+#~| msgid "S&un"
+#~ msgid "Sun"
+#~ msgstr "S&oare"
+
+#~ msgid "Moon"
+#~ msgstr "Luna"
+
+#, fuzzy
+#~| msgid "Mercator"
+#~ msgid "Mercury"
+#~ msgstr "Mercator"
+
+#, fuzzy
+#~| msgid "&Earth"
+#~ msgid "Earth"
+#~ msgstr "&Pământul"
+
+#, fuzzy
+#~| msgid "&Text Labels"
+#~ msgid "Use name labels"
+#~ msgstr "Etichete &textuale"
+
+#~ msgid "Other"
+#~ msgstr "Altul"
+
+#, fuzzy
+#~| msgid "During &animations:"
+#~ msgid "Lines and Orientation"
+#~ msgstr "În timpul &animațiilor:"
+
+#, fuzzy
+#~| msgid "International"
+#~ msgid "Constellations"
+#~ msgstr "Internațional"
+
+#, fuzzy
+#~| msgid "&Name"
+#~ msgid "Names"
+#~ msgstr "&Nume"
+
+#, fuzzy
+#~| msgid "Map Name:"
+#~ msgid "Latin Name"
+#~ msgstr "Numele hărții:"
+
+#, fuzzy
+#~| msgid "Transportation"
+#~ msgid "Native Translation"
+#~ msgstr "Transport"
+
+#, fuzzy
+#~| msgid "Elevation"
+#~ msgid "Abbreviation"
+#~ msgstr "Înălțime"
+
+#, fuzzy
+#~| msgid "&Celestial Body"
+#~ msgid "Celestial Equator"
+#~ msgstr "&Corp ceresc"
+
+#, fuzzy
+#~| msgid "&Celestial Body"
+#~ msgid "Celestial Poles"
+#~ msgstr "&Corp ceresc"
+
+#, fuzzy
+#~| msgid "Navigation Control"
+#~ msgid "Configure Weather Plugin"
+#~ msgstr "Control al navigării"
+
+#, fuzzy
+#~| msgid "International"
+#~ msgid "Information"
+#~ msgstr "Internațional"
+
+#, fuzzy
+#~| msgid ""
+#~| "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~| "css\">\n"
+#~| "p, li { white-space: pre-wrap; }\n"
+#~| "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~| "font-weight:400; font-style:normal;\">\n"
+#~| "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~| "right:0px; -qt-block-indent:0; text-indent:0px;\">The default font that "
+#~| "gets used on the map.</p></body></html>"
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Here you can "
+#~ "choose if you want the weather condition to be shown (for example, clouds "
+#~ "or clear sky.) Marble will only show the condition if this information is "
+#~ "available.</p></body></html>\n"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Fontul utilizat "
+#~ "implicit pe hartă.</p></body></html>"
+
+#, fuzzy
+#~| msgid "Water Bodies"
+#~ msgid "Weather condition"
+#~ msgstr "Hotare de apă"
+
+#, fuzzy
+#~| msgid ""
+#~| "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~| "css\">\n"
+#~| "p, li { white-space: pre-wrap; }\n"
+#~| "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~| "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~| "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~| "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~| "style:italic;\">Role</span></p></body></html>"
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Selects if you "
+#~ "want the temperature to be shown. The temperature will only be shown for "
+#~ "the stations it is available for.</p></body></html>\n"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "style:italic;\">Rol</span></p></body></html>"
+
+#~ msgid "Temperature"
+#~ msgstr "Temperatură"
+
+#, fuzzy
+#~| msgid ""
+#~| "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~| "css\">\n"
+#~| "p, li { white-space: pre-wrap; }\n"
+#~| "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~| "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~| "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~| "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~| "style:italic;\">Role</span></p></body></html>"
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Select if you "
+#~ "want the wind direction to be shown. The wind direction will only be "
+#~ "shown if it is available for the particular station.</p></body></html>\n"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "style:italic;\">Rol</span></p></body></html>"
+
+#, fuzzy
+#~| msgid "Direction"
+#~ msgid "Wind direction"
+#~ msgstr "Direcție"
+
+#, fuzzy
+#~| msgid ""
+#~| "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~| "css\">\n"
+#~| "p, li { white-space: pre-wrap; }\n"
+#~| "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~| "font-weight:400; font-style:normal;\">\n"
+#~| "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~| "right:0px; -qt-block-indent:0; text-indent:0px;\">The default font that "
+#~| "gets used on the map.</p></body></html>"
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Select if you "
+#~ "want the wind speed to be shown. The wind speed will only be shown if it "
+#~ "is available for the particular station.</p></body></html>\n"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Fontul utilizat "
+#~ "implicit pe hartă.</p></body></html>"
+
+#, fuzzy
+#~| msgid "Time Speed"
+#~ msgid "Wind speed"
+#~ msgstr "Viteza timpului"
+
+#, fuzzy
+#~| msgid "&Units"
+#~ msgid "Units"
+#~ msgstr "&Unități"
+
+#, fuzzy
+#~| msgid ""
+#~| "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~| "css\">\n"
+#~| "p, li { white-space: pre-wrap; }\n"
+#~| "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~| "font-weight:400; font-style:normal;\">\n"
+#~| "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~| "right:0px; -qt-block-indent:0; text-indent:0px;\">The default font that "
+#~| "gets used on the map.</p></body></html>"
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">The unit used to "
+#~ "measure the temperature.</p></body></html>\n"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Fontul utilizat "
+#~ "implicit pe hartă.</p></body></html>"
+
+#, fuzzy
+#~| msgid "Clouds"
+#~ msgid "Celsius"
+#~ msgstr "Nori"
+
+#, fuzzy
+#~| msgid ""
+#~| "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~| "css\">\n"
+#~| "p, li { white-space: pre-wrap; }\n"
+#~| "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~| "font-weight:400; font-style:normal;\">\n"
+#~| "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~| "right:0px; -qt-block-indent:0; text-indent:0px;\">The default font that "
+#~| "gets used on the map.</p></body></html>"
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">The unit used to "
+#~ "measure the wind speed.</p></body></html>\n"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Fontul utilizat "
+#~ "implicit pe hartă.</p></body></html>"
+
+#, fuzzy
+#~| msgid "Kilometer, Meter"
+#~ msgid "Kilometers per hour"
+#~ msgstr "Kilometru, metru"
+
+#, fuzzy
+#~| msgid "Kilometer, Meter"
+#~ msgid "Miles per hour"
+#~ msgstr "Kilometru, metru"
+
+#, fuzzy
+#~| msgid "Kilometer, Meter"
+#~ msgid "Meters per second"
+#~ msgstr "Kilometru, metru"
+
+#, fuzzy
+#~| msgid ""
+#~| "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~| "css\">\n"
+#~| "p, li { white-space: pre-wrap; }\n"
+#~| "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~| "font-weight:400; font-style:normal;\">\n"
+#~| "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~| "right:0px; -qt-block-indent:0; text-indent:0px;\">The default font that "
+#~| "gets used on the map.</p></body></html>"
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">The unit used to "
+#~ "measure the air pressure.</p></body></html>\n"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Fontul utilizat "
+#~ "implicit pe hartă.</p></body></html>"
+
+#, fuzzy
+#~| msgid "&Search"
+#~ msgid "Bars"
+#~ msgstr "&Caută"
+
+#, fuzzy
+#~| msgid "Kilometer, Meter"
+#~ msgid "Millimeters of Mercury"
+#~ msgstr "Kilometru, metru"
+
+#, fuzzy
+#~| msgid "Kilometer, Meter"
+#~ msgid "Inches of Mercury"
+#~ msgstr "Kilometru, metru"
+
+#, fuzzy
+#~| msgid "Water Bodies"
+#~ msgid "Weather update interval"
+#~ msgstr "Hotare de apă"
+
+#, fuzzy
+#~| msgid "Navigation Control"
+#~ msgid "Configure Wikipedia Plugin"
+#~ msgstr "Control al navigării"
+
+#, fuzzy
+#~| msgid "Show places"
+#~ msgid "Show thumbnail images"
+#~ msgstr "Arată localități"
+
+#, fuzzy
+#~| msgid "Proxy type:"
+#~ msgid "Route type:"
+#~ msgstr "Tipul de proxy:"
+
+#, fuzzy
+#~| msgid "Speed"
+#~ msgid "Speed:"
+#~ msgstr "Viteză"
+
+#, fuzzy
+#~| msgid "Motorway"
+#~ msgid "Avoid motorways"
+#~ msgstr "Autostradă"
+
+#, fuzzy
+#~| msgid "Navigation"
+#~ msgid "Monav Configuration"
+#~ msgstr "Navigare"
+
+#~ msgid "Transport Type:"
+#~ msgstr "Tipul de transport:"
+
+#~ msgid "Any"
+#~ msgstr "Oricare"
+
+#, fuzzy
+#~| msgid "Creating Map"
+#~ msgid "Manage Maps"
+#~ msgstr "Creez harta"
+
+#, fuzzy
+#~| msgid "Industrial Area"
+#~ msgid "Install New"
+#~ msgstr "Zonă industrială"
+
+#, fuzzy
+#~| msgid "Comment"
+#~ msgid "Continent"
+#~ msgstr "Comentariu"
+
+#~ msgid "Country"
+#~ msgstr "Țara"
+
+#, fuzzy
+#~| msgid "Download finished."
+#~ msgid "Download Variant"
+#~ msgstr "Descărcarea completă."
+
+#~ msgid "Install"
+#~ msgstr "Instalează"
+
+#~ msgid "Nothing to do."
+#~ msgstr "Nimic de făcut."
+
+#~ msgid "%v/%m MB"
+#~ msgstr "%v/%m MB"
+
+#~ msgid "Abort"
+#~ msgstr "Renunță"
+
+#~ msgid "Transport:"
+#~ msgstr "Transport:"
+
+#~ msgid "Profile:"
+#~ msgstr "Profil:"
+
+#~ msgid "Method"
+#~ msgstr "Metodă"
+
+#, fuzzy
+#~| msgid "Forest"
+#~ msgid "Fastest"
+#~ msgstr "Pădure"
+
+#, fuzzy
+#~| msgid "Forest"
+#~ msgid "Shortest"
+#~ msgstr "Pădure"
+
+#~ msgid "Location Browser"
+#~ msgstr "Browser al pozitiilor pe hartă"
+
+#~ msgid "Double click an entry of this list to get it displayed on the map."
+#~ msgstr "Fă click dublu pe un element al listei pentru a-l vedea pe hartă."
+
+#~ msgid "Navigate to your 'Home Location'"
+#~ msgstr "Du-te la \"zona ta de start\""
+
+#~ msgid "Form"
+#~ msgstr "Fermă"
+
+#, fuzzy
+#~| msgid "&Url:"
+#~ msgid "Url:"
+#~ msgstr "&Url:"
+
+#, fuzzy
+#~| msgid "&Add Folder"
+#~ msgid "Add SoundCue"
+#~ msgstr "&Adaugă dosar"
+
+#~ msgid "&Name"
+#~ msgstr "&Nume"
+
+#~ msgid "Land"
+#~ msgstr "Uscat"
+
+#, fuzzy
+#~| msgid "Area"
+#~ msgid "Ara"
+#~ msgstr "Suprafață"
+
+#, fuzzy
+#~| msgid "Cancel"
+#~ msgid "Cancer"
+#~ msgstr "Renunță"
+
+#, fuzzy
+#~| msgid "&Center"
+#~ msgid "Centaurus"
+#~ msgstr "Ce&ntrează"
+
+#, fuzzy
+#~| msgid "Craters"
+#~ msgid "Crater"
+#~ msgstr "Cratere"
+
+#, fuzzy
+#~| msgid "Normal"
+#~ msgid "Norma"
+#~ msgstr "Normală"
+
+#, fuzzy
+#~| msgid "International"
+#~ msgid "Constellation Labels"
+#~ msgstr "Internațional"
+
+#, fuzzy
+#~| msgid "International"
+#~ msgid "Constellation Names"
+#~ msgstr "Internațional"
+
+#, fuzzy
+#~| msgid "OpenGL"
+#~ msgid "Open"
+#~ msgstr "OpenGL"
+
+#~ msgctxt "Action for toggling the atmosphere"
+#~ msgid "&Atmosphere"
+#~ msgstr "&Atmosferă"
+
+#~ msgid "Enable tab to see gpxFileView"
+#~ msgstr "Permite deschiderea unei file care să arate gpxFileView"
+
+#~ msgctxt "Action for toggling the 'current location' box"
+#~ msgid "Current Location"
+#~ msgstr "Locația curentă"
+
+#~ msgctxt "Action for toggling the navigation panel"
+#~ msgid "Show &Navigation Panel"
+#~ msgstr "Arată panoul de &navigare"
+
+#~ msgctxt "Status tip"
+#~ msgid "Show Navigation Panel"
+#~ msgstr "Arată panoul de navigare"
+
+#, fuzzy
+#~| msgid "File View"
+#~ msgctxt "Action for showing the File View"
+#~ msgid "&Show File View"
+#~ msgstr "Vizualizare fișiere"
+
+#~ msgid "Guides"
+#~ msgstr "Ghidaje"
+
+#~ msgid "Marble Infocenter"
+#~ msgstr "Centru de informații Marble"
+
+#~ msgid "Data Sheet"
+#~ msgstr "Foaie de date"
+
+#~ msgid "Name of the location"
+#~ msgstr "Numele poziției de pe hartă"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "size:14pt; font-weight:600;\">Name</span></p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "size:14pt; font-weight:600;\">Nume</span></p></body></html>"
+
+#~ msgid "Role of the location."
+#~ msgstr "Rolul poziției de pe hartă."
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "style:italic;\">Role</span></p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "style:italic;\">Rol</span></p></body></html>"
+
+#~ msgid "Alternative name"
+#~ msgstr "Nume alternativ"
+
+#~ msgid "Alternative name of the location."
+#~ msgstr "Nume alternativ al poziției pe hartă."
+
+#~ msgid "Alternative Name"
+#~ msgstr "Nume alternativ"
+
+#~ msgid "Short description:"
+#~ msgstr "Scurtă descriere:"
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">No description "
+#~ "available.</p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">If you are connected to "
+#~ "the Internet please click the \"Wikipedia\" tab at the top of this page "
+#~ "to get more information.</p></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Nicio descriere "
+#~ "disponibilă.</p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Dacă sunteți conectat "
+#~ "la internet, accesați fila \"Wikipedia\" situată la începutul acestei "
+#~ "pagini pentru a obține mai multe informații</p></body></html>"
+
+#~ msgid ""
+#~ "000° 00' 00\" N\n"
+#~ "000° 00' 00\" E "
+#~ msgstr ""
+#~ "000° 00' 00\" N\n"
+#~ "000° 00' 00\" E "
+
+#~ msgid "9000.0 m"
+#~ msgstr "9000.0 m"
+
+#~ msgid "1000000"
+#~ msgstr "1000000"
+
+#~ msgid "Area:"
+#~ msgstr "Suprafața:"
+
+#~ msgid "0.0 sq km"
+#~ msgstr "0.0 km pătrați"
+
+#~ msgid "Diameter:"
+#~ msgstr "Diametru:"
+
+#~ msgid "Timezone (Normal/DST):"
+#~ msgstr "Fus orar (Normal/DST):"
+
+#~ msgid "gmt / dst"
+#~ msgstr "gmt / dst"
+
+#~ msgid "State:"
+#~ msgstr "Stare:"
+
+#~ msgid "Wikipedia"
+#~ msgstr "Wikipedia"
+
+#~ msgid "Back"
+#~ msgstr "Înapoi"
+
+#~ msgid "Move backwards one step in the browsing history."
+#~ msgstr "Un pas înapoi în desfășurarea navigării."
+
+#~ msgid "Print Page"
+#~ msgstr "Tipărește pagina"
+
+#~ msgid "Sun is Zenith at"
+#~ msgstr "Soarele este Zenit la"
+
+#~ msgid "Show"
+#~ msgstr "Arată"
+
+#~ msgid "Hide"
+#~ msgstr "Ascunde"
+
+#~ msgid "Show Zenith"
+#~ msgstr "Afișează zenit"
+
+#~ msgid "Hide Zenith"
+#~ msgstr "Ascunde zenit"
+
+#~ msgid "Shows and hides the zenith location of the sun"
+#~ msgstr "Arată și ascunde locația zenit a soarelui"
+
+#~ msgid "dd/MM/yyyy hh:mm AP"
+#~ msgstr "dd/MM/yyyy hh:mm AP"
+
+#~ msgid "M/d/yyyy hh:mm"
+#~ msgstr "M/d/yyyy hh:mm"
+
+#~ msgid "Profile"
+#~ msgstr "Profil"
+
+#, fuzzy
+#~| msgid ""
+#~| "*.gpx *.kml *.osm *.pnt|All Supported Files\n"
+#~| "*.gpx|GPS Data\n"
+#~| "*.kml|Google Earth KML\n"
+#~| "*.osm|OpenStreetMap Data\n"
+#~| "*.pnt|Micro World Data Bank II"
+#~ msgid ""
+#~ "*.gpx *.kml *.log *.osm *.pnt|All Supported Files\n"
+#~ "*.gpx|GPS Data\n"
+#~ "*.kml|Google Earth KML\n"
+#~ "*.log|TangoGPS Logfile\n"
+#~ "*.osm|OpenStreetMap Data\n"
+#~ "*.pnt|Micro World Data Bank II"
+#~ msgstr ""
+#~ "*.gpx *.kml *.osm *.pnt|Toate fișierele acceptate\n"
+#~ "*.gpx|Date GPS\n"
+#~ "*.kml|KML Google Earth\n"
+#~ "*.osm|Date OpenStreetMap\n"
+#~ "*.pnt|Banca de date Micro World 2"
+
+#~ msgid "Greenwich Mean Time"
+#~ msgstr "Ora Greenwich"
+
+#~ msgid "&Search"
+#~ msgstr "&Caută"
+
+#~ msgid "Here you can enter the name of the location you are searching for."
+#~ msgstr "Aici poți introduce numele poziției de pe hartă pe care o cauți."
+
+#~ msgid "Check speed of gps drawing"
+#~ msgstr "Verifică viteza desenării gps-ului"
+
+#~ msgid "Enable tab to show the current location"
+#~ msgstr "Permite deschiderea unei file care să arate locația curentă"
+
+#~| msgid "Short Description:"
+#~ msgid "Show or hide routing options"
+#~ msgstr "Descriere succintă:"
+
+#~| msgid "&Search"
+#~ msgid "Search..."
+#~ msgstr "&Caută"
+
+#~| msgid "(c) 2007, 2008, 2009"
+#~ msgid "(c) 2007, 2008, 2009, 2010"
+#~ msgstr "(c) 2007, 2008, 2009"
+
+#~| msgid "&Center"
+#~ msgid "Re-center"
+#~ msgstr "Ce&ntrează"
+
+#~| msgid ""
+#~| "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~| "css\">\n"
+#~| "p, li { white-space: pre-wrap; }\n"
+#~| "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~| "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~| "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~| "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~| "\"></p>\n"
+#~| "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~| "right:0px; -qt-block-indent:0; text-indent:0px;\">(c) 2007, The Marble "
+#~| "Project</p>\n"
+#~| "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~| "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~| "font-style:italic;\"></p>\n"
+#~| "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~| "right:0px; -qt-block-indent:0; text-indent:0px;\">http://edu.kde.org/"
+#~| "marble</p></body></html>"
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans'; font-size:10pt; font-"
+#~ "weight:400; font-style:normal;\">\n"
+#~ "<table border=\"0\" style=\"-qt-table-type: root; margin-top:4px; margin-"
+#~ "bottom:4px; margin-left:4px; margin-right:4px;\">\n"
+#~ "<tr>\n"
+#~ "<td style=\"border: none;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-family:'DejaVu Sans'; font-size:9pt;\"></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-family:'DejaVu Sans'; font-size:9pt;\"></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-family:'DejaVu Sans'; font-size:9pt;\"></p></td></tr></table></"
+#~ "body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">(c) 2007, Proiectul "
+#~ "Marble</p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-style:italic;\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">http://edu.kde.org/"
+#~ "marble</p></body></html>"
+
+#~| msgid "Open File"
+#~ msgid "Open File..."
+#~ msgstr "Deschide fișier"
+
+#~| msgid "Bridge"
+#~ msgid "RoutingWidget"
+#~ msgstr "Pod"
+
+#~| msgid ""
+#~| "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~| "css\">\n"
+#~| "p, li { white-space: pre-wrap; }\n"
+#~| "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~| "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~| "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~| "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~| "weight:600;\">Marble Desktop Globe</span></p></body></html>"
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "size:small; color:#000000;\">0 m</span></p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">Globul terestru pentru desktop Marble</span></p></body></"
+#~ "html>"
+
+#~| msgid "Bridge"
+#~ msgid "Routing Widget"
+#~ msgstr "Pod"
+
+#~| msgid ""
+#~| "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~| "css\">\n"
+#~| "p, li { white-space: pre-wrap; }\n"
+#~| "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~| "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~| "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~| "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~| "weight:600;\">Marble Desktop Globe</span></p></body></html>"
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<table border=\"0\" style=\"-qt-table-type: root; margin-top:4px; margin-"
+#~ "bottom:4px; margin-left:4px; margin-right:4px;\">\n"
+#~ "<tr>\n"
+#~ "<td style=\"border: none;\">\n"
+#~ "<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-"
+#~ "left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span "
+#~ "style=\" font-weight:600;\">Routing Information</span></p></td></tr></"
+#~ "table></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">Globul terestru pentru desktop Marble</span></p></body></"
+#~ "html>"
+
+#~| msgid ""
+#~| "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~| "css\">\n"
+#~| "p, li { white-space: pre-wrap; }\n"
+#~| "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~| "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~| "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~| "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~| "weight:600;\">Marble Desktop Globe</span></p></body></html>"
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><a href=\"http://edu."
+#~ "kde.org/marble\"><span style=\" font-family:'DejaVu Sans'; font-size:8pt; "
+#~ "text-decoration: underline; color:#0057ae;\">Configure</span></a></p></"
+#~ "body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">Globul terestru pentru desktop Marble</span></p></body></"
+#~ "html>"
+
+#~| msgid "High Quality"
+#~ msgid "Highways"
+#~ msgstr "Calitate înaltă"
+
+#~| msgid "International"
+#~ msgid "Routing Information"
+#~ msgstr "Internațional"
+
+#~| msgid ""
+#~| "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~| "css\">\n"
+#~| "p, li { white-space: pre-wrap; }\n"
+#~| "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~| "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~| "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~| "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~| "weight:600;\">Marble Desktop Globe</span></p></body></html>"
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<table border=\"0\" style=\"-qt-table-type: root; margin-top:4px; margin-"
+#~ "bottom:4px; margin-left:4px; margin-right:4px;\">\n"
+#~ "<tr>\n"
+#~ "<td style=\"border: none;\">\n"
+#~ "<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-"
+#~ "left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span "
+#~ "style=\" font-size:12pt; font-weight:600;\">00:00</span></p></td></tr></"
+#~ "table></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">Globul terestru pentru desktop Marble</span></p></body></"
+#~ "html>"
+
+#~| msgid "Navigation mode"
+#~ msgid "Navigator Float Item"
+#~ msgstr "Regim de navigare"
+
+#~| msgid "Craters"
+#~ msgid "Meters"
+#~ msgstr "Cratere"
+
+#~| msgid "&Distance:"
+#~ msgid "Distance Covered"
+#~ msgstr "&Distanță:"
+
+#~ msgid "&Date"
+#~ msgstr "&Dată"
+
+#~| msgid ""
+#~| "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~| "css\">\n"
+#~| "p, li { white-space: pre-wrap; }\n"
+#~| "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~| "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~| "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~| "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~| "style:italic;\">Role</span></p></body></html>"
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Change sun time</p></"
+#~ "body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "style:italic;\">Rol</span></p></body></html>"
+
+#~| msgid ""
+#~| "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~| "css\">\n"
+#~| "p, li { white-space: pre-wrap; }\n"
+#~| "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~| "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~| "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~| "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~| "style:italic;\">Role</span></p></body></html>"
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Center the map on sun "
+#~ "position</p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "style:italic;\">Rol</span></p></body></html>"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Display sun position</"
+#~ "p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Afișează poziția "
+#~ "soarelui</p></body></html>"
+
+#~ msgid ""
+#~ "This control panel allows you to adjust the map according to your needs."
+#~ msgstr ""
+#~ "Acest panou de comanda îți permite sa ajustezi harta cerințelor tale."
+
+#~ msgid "Navigation mode"
+#~ msgstr "Regim de navigare"
+
+#~| msgid "Current Location"
+#~ msgid "Your current position"
+#~ msgstr "Poziția curentă pe hartă"
+
+#~ msgid "<b>Unidentified Position</b>"
+#~ msgstr "<b>Poziție neidentificată</b>"
+
+#~ msgid "+00°00'00\" E"
+#~ msgstr "+00°00'00\" E"
+
+#~ msgid "+00°00'00\" N"
+#~ msgstr "+00°00'00\" N"
+
+#~ msgid "000 m"
+#~ msgstr "000 m"
+
+#~| msgid "Up"
+#~ msgid "p"
+#~ msgstr "Sus"
+
+#~ msgid "Region"
+#~ msgstr "Regiune"
+
+#~ msgid "Forward"
+#~ msgstr "Înainte"
+
+#~ msgid "Move forward one step in the browsing history."
+#~ msgstr "Un pas înapoi în desfășurarea navigării."
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p></body></html>"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-family:'MS Shell Dlg 2'; font-size:8pt;\"></p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-family:'MS Shell Dlg 2'; font-size:8pt;\"></p></body></html>"
+
+#~ msgid "Draw"
+#~ msgstr "Desenează"
+
+#~| msgid ""
+#~| "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~| "css\">\n"
+#~| "p, li { white-space: pre-wrap; }\n"
+#~| "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~| "font-weight:400; font-style:normal;\">\n"
+#~| "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~| "right:0px; -qt-block-indent:0; text-indent:0px;\">No description "
+#~| "available.</p>\n"
+#~| "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~| "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~| "\"></p>\n"
+#~| "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~| "right:0px; -qt-block-indent:0; text-indent:0px;\">If you are connected "
+#~| "to the internet please click the \"Wikipedia\" tab at the top of this "
+#~| "page to get more information.</p></body></html>"
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">There are two caches "
+#~ "being used for Marble: The physical memory which is needed to keep map "
+#~ "data in the computer's memory. Increasing the value will make the "
+#~ "application more responsive. The hard disc memory cache is used by "
+#~ "download contents from the internet (e.g. Wikipedia data or map data). "
+#~ "Decrease this value if you want to save space on the hard disc and if "
+#~ "high usage of the internet is not an issue. </p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Nici o descriere "
+#~ "disponibilă.</p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Dacă ai o conexiune la "
+#~ "internet, acceseaza fila \"Wikipedia\" situată la inceputul acestei "
+#~ "pagini, pentru a obține mai multe informatiii</p></body></html>"
+
+#~| msgid "&Open Map..."
+#~ msgid "Open Map &Data..."
+#~ msgstr "&Deschide harta..."
+
+#~| msgid "&Export Map..."
+#~ msgid "&Import Map Data..."
+#~ msgstr "&Exportă harta..."
+
+#~ msgid "Co-maintainer and Architect"
+#~ msgstr "Coresponsabil și arhitect"
+
+#, fuzzy
+#~ msgid ""
+#~ "Parse error at line %1, column %2:\n"
+#~ "%3."
+#~ msgstr ""
+#~ "Eroare de parser la linia %1, coloana %2:\n"
+#~ "%3."
+
+#~ msgid "Save File"
+#~ msgstr "Salvează fișierul"
+
+#~ msgid "Total Distance: %1 km"
+#~ msgstr "Distanța totală: %1 km"
+
+#~| msgid "&Earth"
+#~ msgctxt "The compass direction"
+#~ msgid "East"
+#~ msgstr "&Pământul"
+
+#~ msgid "Path"
+#~ msgstr "Cale"
+
+#~ msgid "File format unrecognized"
+#~ msgstr "Formatul fișierului necunoscut"
+
+#~| msgid "The file is not a valid KML 2.0 / 2.1 file"
+#~ msgid "The file is not a valid DGML 2.0 file"
+#~ msgstr "Acest fișier nu este unul KML 2.0 / 2.1 valid"
+
+#~ msgid "The file is not a valid GPX 1.0 / 1.1 file"
+#~ msgstr "Acest fișier nu este un fișier GPX 1.0 / 1.1 valid "
+
+#~| msgid "The file is not a valid KML 2.0 / 2.1 file"
+#~ msgid "The file is not a valid KML 2.0 / 2.1 / 2.2 file"
+#~ msgstr "Acest fișier nu este unul KML 2.0 / 2.1 valid"
+
+#~| msgid "Version Unknown"
+#~ msgid "Version %1"
+#~ msgstr "Versiune necunoscută"
+
+#~ msgid "Add &Measure Point"
+#~ msgstr "&Adaugă punct de măsură"
+
+#~ msgid "&Remove Measure Points"
+#~ msgstr "&Șterge punctele de măsură"
+
+#~| msgid "Coordinates:"
+#~ msgid "Copy Coordinates"
+#~ msgstr "Coordonate:"
+
+#~ msgid "Marble Info Center - %1"
+#~ msgstr "Centrul de informare Marble - %1"
+
+#~ msgid "Regional Capital"
+#~ msgstr "Capitala regională"
+
+#~ msgid "City"
+#~ msgstr "Oraș"
+
+#~ msgid "%1 sq km"
+#~ msgstr "%1 km pătrați"
+
+#~ msgid "%1 Mio. sq km"
+#~ msgstr "%1 mil. km pătrați"
+
+#~ msgid "%1 inh."
+#~ msgstr "%1 loc."
+
+#~ msgid "%1 Mio. inh."
+#~ msgstr "%1 mil. loc."
+
+#~ msgid "Download failed: %1."
+#~ msgstr "Descărcare eșuată: %1."
+
+#~ msgid "Open a file for viewing on Marble"
+#~ msgstr "Deschide un fișier pentru vizualizare în Marble"
+
+#~ msgid "Save a screenshot of the map"
+#~ msgstr "Salvează un screenshot al hărții"
+
+#~ msgid "&Print..."
+#~ msgstr "&Tipărește..."
+
+#~ msgid "Print a screenshot of the map"
+#~ msgstr "Tipărește un screenshot al hărții"
+
+#~ msgid "&Quit"
+#~ msgstr "Ter&mină"
+
+#~ msgid "Copy a screenshot of the map"
+#~ msgstr "Copiază un screenshot al hărții"
+
+#~ msgid "&Full Screen Mode"
+#~ msgstr "Pe tot &ecranul"
+
+#~ msgid "Full Screen Mode"
+#~ msgstr "Pe tot ecranul"
+
+#, fuzzy
+#~ msgid "&Status Bar"
+#~ msgstr "&Bara de stare"
+
+#~ msgid "Show Status Bar"
+#~ msgstr "Afișează bara de stare"

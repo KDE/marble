@@ -1,0 +1,36 @@
+# Axel Rousseau <axel584@gmail.com>, 2015. #zanata
+msgid ""
+msgstr ""
+"Project-Id-Version: plasma_runner_marblerunner\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2021-09-28 00:13+0000\n"
+"PO-Revision-Date: 2015-03-07 08:59-0500\n"
+"Last-Translator: Axel Rousseau <axel584@gmail.com>\n"
+"Language-Team: Esperanto\n"
+"Language: eo\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Zanata 3.6.0\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#: plasmarunner.cpp:36
+#, kde-format
+msgid "Shows the coordinates :q: in OpenStreetMap with Marble."
+msgstr "Montri la koordinatojn :q: en OpenStreetMap per Marble"
+
+#: plasmarunner.cpp:37
+#, kde-format
+msgid "Shows the geo bookmark containing :q: in OpenStreetMap with Marble."
+msgstr ""
+"Montri la memoritan geografikan punkton :q: en OpenStreetMap per Marble"
+
+#: plasmarunner.cpp:58
+#, kde-format
+msgid "Show the coordinates %1 in OpenStreetMap with Marble"
+msgstr "Montri la koordinatojn %1 en OpenStreetMap per Marble"
+
+#: plasmarunner.cpp:124
+#, kde-format
+msgid "Show in OpenStreetMap with Marble"
+msgstr "Montri en OpenStreetMap per Marble"

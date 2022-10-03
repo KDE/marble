@@ -1,0 +1,74 @@
+# Copyright (C) YEAR This file is copyright:
+# This file is distributed under the same license as the marble package.
+# Sergiu Bivol <sergiu@cip.md>, 2022.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: marble\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2021-09-28 00:13+0000\n"
+"PO-Revision-Date: 2022-02-05 19:13+0000\n"
+"Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
+"Language-Team: Romanian\n"
+"Language: ro\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < "
+"20)) ? 1 : 2;\n"
+"X-Generator: Lokalize 21.12.2\n"
+
+#: package/contents/config/config.qml:12
+#, kde-format
+msgid "Map Display"
+msgstr "Afișare hartă"
+
+#: package/contents/ui/configMapDisplay.qml:28
+#, kde-format
+msgid "Projection:"
+msgstr "Proiecție:"
+
+#: package/contents/ui/configMapDisplay.qml:36
+#, kde-format
+msgid "Equirectangular"
+msgstr "Echirectangular"
+
+#: package/contents/ui/configMapDisplay.qml:37
+#, kde-format
+msgid "Mercator"
+msgstr "Mercator"
+
+#: package/contents/ui/configMapDisplay.qml:54
+#, kde-format
+msgid "Center on:"
+msgstr "Centrează pe:"
+
+#: package/contents/ui/configMapDisplay.qml:62
+#, kde-format
+msgid "Daylight"
+msgstr "Ziuă"
+
+#: package/contents/ui/configMapDisplay.qml:63
+#, kde-format
+msgid "Longitude"
+msgstr "Longitudine"
+
+#: package/contents/ui/configMapDisplay.qml:64
+#, kde-format
+msgid "Location"
+msgstr "Localizare"
+
+#: package/contents/ui/configMapDisplay.qml:82
+#, kde-format
+msgid "Longitude:"
+msgstr "Longitudine:"
+
+#: package/contents/ui/configMapDisplay.qml:99
+#, kde-format
+msgid "Show date:"
+msgstr "Arată data:"
+
+#: package/contents/ui/configTimeZones.qml:17
+#, kde-format
+msgid "Use custom time zone selection:"
+msgstr "Folosește alegere personalizată de fus orar:"
