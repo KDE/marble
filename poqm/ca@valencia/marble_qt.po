@@ -2650,7 +2650,7 @@ msgstr ""
 #: src/apps/marble-qt/QtMainWindow.cpp:264
 msgctxt "Marble::MainWindow|"
 msgid "&Open..."
-msgstr "&Obri..."
+msgstr "O&bri..."
 
 #: src/apps/marble-qt/QtMainWindow.cpp:265
 msgctxt "Marble::MainWindow|"
@@ -3022,7 +3022,7 @@ msgstr "Universal Transversa de Mercator (UTM)"
 #: src/apps/marble-qt/QtMainWindow.cpp:449
 msgctxt "Marble::MainWindow|"
 msgid "&File"
-msgstr "&Fitxer"
+msgstr "Fi&txer"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:462
 msgctxt "Marble::MainWindow|"
@@ -3032,7 +3032,7 @@ msgstr "&Edita"
 #: src/apps/marble-qt/QtMainWindow.cpp:470
 msgctxt "Marble::MainWindow|"
 msgid "&View"
-msgstr "&Visualitza"
+msgstr "Vi&sualitza"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:471
 msgctxt "Marble::MainWindow|"
@@ -3062,7 +3062,7 @@ msgstr "Mida de la &vista"
 #: src/apps/marble-qt/QtMainWindow.cpp:487
 msgctxt "Marble::MainWindow|"
 msgid "&Settings"
-msgstr "&Configuració"
+msgstr "Con&figuració"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:496
 msgctxt "Marble::MainWindow|"
@@ -5337,7 +5337,7 @@ msgstr "&Carpeta:"
 #: src/lib/marble/EditBookmarkDialog.ui:79
 msgctxt "UiEditBookmarkDialog|"
 msgid "&Add Folder..."
-msgstr "&Afig una carpeta..."
+msgstr "Afi&g una carpeta..."
 
 #: src/lib/marble/EditPlacemarkDialog.cpp:108
 msgctxt "Marble::EditPlacemarkDialog|"
@@ -12120,7 +12120,7 @@ msgstr "Perfil nou"
 #: src/lib/marble/routing/RoutingSettingsWidget.ui:22
 msgctxt "RoutingSettingsWidget|"
 msgid "&Add..."
-msgstr "&Afig..."
+msgstr "Afi&g..."
 
 #: src/lib/marble/routing/RoutingSettingsWidget.ui:32
 msgctxt "RoutingSettingsWidget|"
@@ -12902,27 +12902,30 @@ msgstr "Informa de l'emplaçament a través de l'entorn d'ubicació GeoClue."
 #: src/plugins/positionprovider/gpsd/GpsdConnection.cpp:64
 msgctxt "Marble::GpsdConnection|"
 msgid "Internal gpsd error (cannot get service entry)"
-msgstr "Error intern de «gpsd» (no es pot accedir al servei)"
+msgstr "S'ha produït un error intern de «gpsd» (no es pot accedir al servei)"
 
 #: src/plugins/positionprovider/gpsd/GpsdConnection.cpp:67
 msgctxt "Marble::GpsdConnection|"
 msgid "Internal gpsd error (cannot get host entry)"
-msgstr "Error intern de «gpsd» (no es pot accedir a la màquina)"
+msgstr ""
+"S'ha produït un error intern de «gpsd» (no es pot accedir a la màquina)"
 
 #: src/plugins/positionprovider/gpsd/GpsdConnection.cpp:70
 msgctxt "Marble::GpsdConnection|"
 msgid "Internal gpsd error (cannot get protocol entry)"
-msgstr "Error intern de «gpsd» (no es pot accedir al protocol)"
+msgstr "S'ha produït un error intern de «gpsd» (no es pot accedir al protocol)"
 
 #: src/plugins/positionprovider/gpsd/GpsdConnection.cpp:73
 msgctxt "Marble::GpsdConnection|"
 msgid "Internal gpsd error (unable to create socket)"
-msgstr "Error intern de «gpsd» (no s'ha pogut crear el sòcol)"
+msgstr "S'ha produït un error intern de «gpsd» (no s'ha pogut crear el sòcol)"
 
 #: src/plugins/positionprovider/gpsd/GpsdConnection.cpp:76
 msgctxt "Marble::GpsdConnection|"
 msgid "Internal gpsd error (unable to set socket option)"
-msgstr "Error intern de «gpsd» (no s'ha pogut establir l'opció del sòcol)"
+msgstr ""
+"S'ha produït un error intern de «gpsd» (no s'ha pogut establir l'opció del "
+"sòcol)"
 
 #: src/plugins/positionprovider/gpsd/GpsdConnection.cpp:79
 msgctxt "Marble::GpsdConnection|"
@@ -13884,7 +13887,7 @@ msgstr "Mostra els eclipsis per a l'any:"
 #: src/plugins/render/eclipses/EclipsesBrowserDialog.ui:104
 msgctxt "EclipsesBrowserDialog|"
 msgid "&Settings..."
-msgstr "&Configuració..."
+msgstr "Con&figuració..."
 
 #: src/plugins/render/eclipses/EclipsesBrowserDialog.ui:145
 msgctxt "EclipsesBrowserDialog|"
@@ -14230,7 +14233,7 @@ msgstr "Vista de fitxer"
 #: src/plugins/render/fileview/FileViewFloatItem.cpp:54
 msgctxt "Marble::FileViewFloatItem|"
 msgid "&File View"
-msgstr "Vista de &fitxer"
+msgstr "Vista de fi&txer"
 
 #: src/plugins/render/fileview/FileViewFloatItem.cpp:64
 msgctxt "Marble::FileViewFloatItem|"
@@ -15360,7 +15363,8 @@ msgctxt "QObject|"
 msgid ""
 "Arrived at destination. <a href=\"#reverse\">Calculate the way back.</a>"
 msgstr ""
-"Heu arribat al destí. <a href=\"#reverse\">Calcula el camí de tornada</a>"
+"Heu arribat a la destinació. <a href=\"#reverse\">Calcula el camí de "
+"tornada</a>"
 
 #: src/plugins/render/routing/RoutingPlugin.cpp:446
 msgctxt "Marble::RoutingPlugin|"
@@ -16488,7 +16492,7 @@ msgstr "Polzades de mercuri"
 #: src/plugins/render/weather/WeatherConfigWidget.ui:202
 msgctxt "WeatherConfigWidget|"
 msgid "Miscellaneous"
-msgstr "Miscelànea"
+msgstr "Miscel·lània"
 
 #: src/plugins/render/weather/WeatherConfigWidget.ui:208
 msgctxt "WeatherConfigWidget|"

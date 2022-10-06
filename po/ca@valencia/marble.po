@@ -971,7 +971,7 @@ msgstr "C&opia les coordenades"
 #, kde-format
 msgctxt "Action for opening a file"
 msgid "&Open..."
-msgstr "&Obri..."
+msgstr "O&bri..."
 
 #: marble_part.cpp:769
 #, kde-format
@@ -1071,7 +1071,7 @@ msgstr "Bloqueja el globus en el punt subsolar"
 #, kde-format
 msgctxt "Add Bookmark"
 msgid "Add &Bookmark..."
-msgstr "&Afig una adreça d'interés..."
+msgstr "Afi&g una adreça d'interés..."
 
 #: marble_part.cpp:889
 #, kde-format
@@ -1190,7 +1190,7 @@ msgstr "Connectors"
 #: marble_part.rc:6 marbleui.rc:5
 #, kde-format
 msgid "&File"
-msgstr "&Fitxer"
+msgstr "Fi&txer"
 
 #. i18n: ectx: Menu (edit)
 #: marble_part.rc:21 marbleui.rc:14
@@ -1202,7 +1202,7 @@ msgstr "&Edita"
 #: marble_part.rc:31 marbleui.rc:18
 #, kde-format
 msgid "&View"
-msgstr "&Visualitza"
+msgstr "Vi&sualitza"
 
 #. i18n: ectx: Menu (infoboxes)
 #: marble_part.rc:36
@@ -1220,7 +1220,7 @@ msgstr "Serveis en &línia"
 #: marble_part.rc:55 marbleui.rc:31
 #, kde-format
 msgid "&Settings"
-msgstr "&Configuració"
+msgstr "Con&figuració"
 
 #. i18n: ectx: Menu (panels)
 #: marble_part.rc:59
