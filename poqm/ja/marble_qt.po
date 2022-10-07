@@ -19183,21 +19183,3 @@ msgstr "フロート要素のテンプレート(&T)"
 msgctxt "Marble::FITemplateFloatItem|"
 msgid "This is a template class for float items."
 msgstr "フロート要素のテンプレートクラスです。"
-
-#, fuzzy
-#~| msgid "Placemarks Plugin"
-#~ msgctxt "Marble::MainWindow|"
-#~ msgid "&Add Bookmark"
-#~ msgstr "プレースマークプラグイン"
-
-#, fuzzy
-#~| msgid "Configure"
-#~ msgctxt "RoutingSettingsWidget|"
-#~ msgid "&Configure"
-#~ msgstr "設定"
-
-#, fuzzy
-#~| msgid "Save File"
-#~ msgctxt "Marble::MapViewWidget|"
-#~ msgid "&Upload Map..."
-#~ msgstr "ファイルを保存"
