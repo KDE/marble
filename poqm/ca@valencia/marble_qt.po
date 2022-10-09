@@ -3809,7 +3809,7 @@ msgctxt ""
 "on map."
 msgid "Select the method to use to re-center your GPS location on map."
 msgstr ""
-"Seleccioneu el mètode que s'utilitzarà per tornar a centrar la posició del "
+"Seleccioneu el mètode que s'utilitzarà per a tornar a centrar la posició del "
 "GPS en el mapa."
 
 #: src/lib/marble/CurrentLocationWidget.ui:154
