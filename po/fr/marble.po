@@ -9,15 +9,15 @@
 # xavier <xavier.besnard@neuf.fr>, 2012, 2020, 2021.
 # Pierre Buard <pierre.buard@gmail.com>, 2013, 2014, 2015.
 # Simon Depiets <sdepiets@gmail.com>, 2018.
-# Thomas Vergnaud <thomas.vergnaud@gmx.fr>, 2018.
+# Thomas Vergnaud <thomas.vergnaud@gmx.fr>, 2018, 2022.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2021-10-18 00:13+0000\n"
-"PO-Revision-Date: 2021-10-18 20:28+0200\n"
-"Last-Translator: Xavier Besnard <xavier.besnard@neuf.fr>\n"
+"PO-Revision-Date: 2022-10-09 17:34+0200\n"
+"Last-Translator: Thomas Vergnaud <thomas.vergnaud@mailo.eu>\n"
 "Language-Team: French <kde-francophone@kde.org>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
@@ -27,7 +27,7 @@ msgstr ""
 "X-Environment: kde\n"
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
-"X-Generator: Lokalize 21.08.1\n"
+"X-Generator: Lokalize 21.12.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -38,8 +38,8 @@ msgstr "Jean-Jacques Finazzi, Pierre Buard, Thomas Vergnaud, Xavier Besnard"
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr ""
-"mrjay01@users.sourceforge.net, pierre.buard@gmail.com, thomas.vergnaud@gmx."
-"fr, xavier.besnard@neuf.fr"
+"mrjay01@users.sourceforge.net, pierre.buard@gmail.com, thomas.vergnaud@mailo."
+"eu, xavier.besnard@neuf.fr"
 
 #: kdemain.cpp:91
 #, kde-format
