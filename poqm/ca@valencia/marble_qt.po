@@ -7694,7 +7694,7 @@ msgstr "Casa"
 #: src/lib/marble/GoToDialog.cpp:351
 msgctxt "Marble::GoToDialog|"
 msgid "Address or search term"
-msgstr "Adreça o terme que cal buscar"
+msgstr "Adreça o terme que s'ha de buscar"
 
 #: src/lib/marble/GoToDialog.cpp:437
 #, qt-format
@@ -11946,7 +11946,7 @@ msgstr "%2, %3"
 #: src/lib/marble/routing/RoutingInputWidget.cpp:140
 msgctxt "QObject|"
 msgid "Address or search term..."
-msgstr "Adreça o terme que cal buscar..."
+msgstr "Adreça o terme que s'ha de buscar..."
 
 #: src/lib/marble/routing/RoutingInputWidget.cpp:167
 msgctxt "QObject|"
@@ -17487,7 +17487,7 @@ msgstr "Base de dades local"
 #: src/plugins/runner/localdatabase/LocalDatabasePlugin.cpp:39
 msgctxt "Marble::LocalDatabasePlugin|"
 msgid "Searches the internal Marble database for placemarks"
-msgstr "Busca marques de llocs a la base de dades interna de Marble"
+msgstr "Busca marques de lloc a la base de dades interna de Marble"
 
 #: src/plugins/runner/log/LogPlugin.cpp:18
 msgctxt "Marble::LogfilePlugin|"

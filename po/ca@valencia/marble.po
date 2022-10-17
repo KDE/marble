@@ -631,7 +631,7 @@ msgstr "Activa l'eixida de depuració"
 #: kdemain.cpp:329
 #, kde-format
 msgid "Display OSM placemarks according to the level selected"
-msgstr "Mostra les marques de llocs de l'OSM segons el nivell seleccionat"
+msgstr "Mostra les marques de lloc de l'OSM segons el nivell seleccionat"
 
 #: kdemain.cpp:331
 #, kde-format
@@ -702,7 +702,7 @@ msgstr ""
 #: kdemain.cpp:355
 #, kde-format
 msgid "One or more placemark files to be opened"
-msgstr "Un o més fitxers de marques de llocs que s'obrirà"
+msgstr "Un o més fitxers de marques de lloc que s'han d'obrir"
 
 #. i18n: ectx: label, entry, group (Time)
 #: marble.kcfg:58
