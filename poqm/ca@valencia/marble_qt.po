@@ -9978,7 +9978,7 @@ msgstr ""
 "El cau de disc s'utilitza per a descarregar continguts d'Internet (p. ex. "
 "dades de la Viquipèdia o dades de mapes). Disminuïu este valor si voleu "
 "estalviar espai en disc i si no vos importa fer un ús elevat de la connexió "
-"a Internet.</p></body></html>"
+"amb Internet.</p></body></html>"
 
 #: src/lib/marble/MarbleCacheSettingsWidget.ui:23
 msgctxt "MarbleCacheSettingsWidget|"
@@ -12075,7 +12075,7 @@ msgstr "No hi ha cap configuració disponible"
 #: src/lib/marble/routing/RoutingProfileSettingsDialog.ui:128
 msgctxt "RoutingProfileSettingsDialog|"
 msgid "Select Service to Configure"
-msgstr "Selecciona el servei a configurar"
+msgstr "Selecciona el servei que s'ha de configurar"
 
 #: src/lib/marble/routing/RoutingProfileSettingsDialog.ui:142
 msgctxt "RoutingProfileSettingsDialog|"
@@ -13267,7 +13267,7 @@ msgid ""
 "Sorry, a network error occurred. Please check your internet connection or "
 "try again later."
 msgstr ""
-"S'ha produït un error de la xarxa. Comproveu la connexió a Internet o "
+"S'ha produït un error de la xarxa. Comproveu la connexió amb Internet o "
 "intenteu-ho més tard."
 
 #: src/plugins/render/annotate/DownloadOsmDialog.ui:14
@@ -17018,7 +17018,7 @@ msgstr "ràpid (15 mph)"
 #: src/plugins/runner/cyclestreets/CycleStreetsPlugin.cpp:82
 msgctxt "Marble::CycleStreetsPlugin|"
 msgid "This service requires an Internet connection."
-msgstr "Este servei requerix una connexió a Internet."
+msgstr "Este servei requerix una connexió amb Internet."
 
 #: src/plugins/runner/cyclestreets/CycleStreetsPlugin.cpp:87
 msgctxt "Marble::CycleStreetsPlugin|"
@@ -17553,7 +17553,7 @@ msgstr ""
 #: src/plugins/runner/mapquest/MapQuestPlugin.cpp:19
 msgctxt "Marble::MapQuestPlugin|"
 msgid "This service requires an Internet connection."
-msgstr "Este servei requerix una connexió a Internet."
+msgstr "Este servei requerix una connexió amb Internet."
 
 #: src/plugins/runner/mapquest/MapQuestPlugin.cpp:24
 msgctxt "Marble::MapQuestPlugin|"
@@ -17806,7 +17806,7 @@ msgstr ""
 #: src/plugins/runner/open-source-routing-machine/OSRMPlugin.cpp:17
 msgctxt "Marble::OSRMPlugin|"
 msgid "This service requires an Internet connection."
-msgstr "Este servei requerix una connexió a Internet."
+msgstr "Este servei requerix una connexió amb Internet."
 
 #: src/plugins/runner/open-source-routing-machine/OSRMPlugin.cpp:22
 msgctxt "Marble::OSRMPlugin|"
@@ -17865,7 +17865,7 @@ msgstr "Evita els transbordadors"
 #: src/plugins/runner/openrouteservice/OpenRouteServicePlugin.cpp:19
 msgctxt "Marble::OpenRouteServicePlugin|"
 msgid "This service requires an Internet connection."
-msgstr "Este servei requerix una connexió a Internet."
+msgstr "Este servei requerix una connexió amb Internet."
 
 #: src/plugins/runner/openrouteservice/OpenRouteServicePlugin.cpp:24
 msgctxt "Marble::OpenRouteServicePlugin|"
@@ -18110,7 +18110,7 @@ msgstr "Més curt"
 #: src/plugins/runner/yours/YoursPlugin.cpp:20
 msgctxt "Marble::YoursPlugin|"
 msgid "This service requires an Internet connection."
-msgstr "Este servei requerix una connexió a Internet."
+msgstr "Este servei requerix una connexió amb Internet."
 
 #: src/plugins/runner/yours/YoursPlugin.cpp:25
 msgctxt "Marble::YoursPlugin|"
