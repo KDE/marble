@@ -5242,7 +5242,7 @@ msgstr "Mètode de selecció"
 #: src/lib/marble/DownloadRegionDialog.cpp:180
 msgctxt "Marble::DownloadRegionDialog|"
 msgid "Number of tiles to download:"
-msgstr "Nombre de mosaics a descarregar:"
+msgstr "Nombre de mosaics que s'han de descarregar:"
 
 #: src/lib/marble/DownloadRegionDialog.cpp:225
 msgctxt "Marble::DownloadRegionDialog|"
@@ -5254,13 +5254,13 @@ msgstr "Descarrega una regió"
 msgctxt "Marble::DownloadRegionDialog|"
 msgid "There is a limit of %n tile(s) to download."
 msgid_plural "There is a limit of %n tile(s) to download."
-msgstr[0] "Hi ha un límit de %n mosaic a descarregar."
-msgstr[1] "Hi ha un límit de %n mosaics a descarregar."
+msgstr[0] "Hi ha un límit d'%n mosaic que es pot descarregar."
+msgstr[1] "Hi ha un límit de %n mosaics que es poden descarregar."
 
 #: src/lib/marble/DownloadRegionDialog.cpp:462
 msgctxt "Marble::DownloadRegionDialog|"
 msgid "Approximate size of the tiles to be downloaded"
-msgstr "Mida aproximada dels mosaics a descarregar"
+msgstr "Mida aproximada dels mosaics que s'han de descarregar"
 
 #: src/lib/marble/DownloadRegionDialog.cpp:466
 #, qt-format
@@ -15719,7 +15719,7 @@ msgstr ""
 "Elements orbitals dels satèl·lits terrestres de <ul><li><a href=\"https://"
 "www.celestrak.com\">https://www.celestrak.com</a></li></ul>Elements orbitals "
 "dels satèl·lits planetaris de <ul><li><a href=\"https://ssd.jpl.nasa.gov/?"
-"horizons\">«Horizons», del JPL</a></li></ul>"
+"horizons\">«Horizons», de JPL</a></li></ul>"
 
 #: src/plugins/render/satellites/SatellitesPlugin.cpp:443
 msgctxt "Marble::SatellitesPlugin|"
@@ -17079,12 +17079,12 @@ msgstr "Baixada d'itineraris mentre s'està desconnectat utilitzant Gosmore"
 #: src/plugins/runner/gpsbabel/GpsbabelPlugin.cpp:18
 msgctxt "Marble::GpsbabelPlugin|"
 msgid "GPSBabel NMEA File Parser"
-msgstr "Intèrpret de fitxers NMEA del GPSBabel"
+msgstr "Intèrpret de fitxers NMEA de GPSBabel"
 
 #: src/plugins/runner/gpsbabel/GpsbabelPlugin.cpp:33
 msgctxt "Marble::GpsbabelPlugin|"
 msgid "Allows loading of NMEA files through GPSBabel."
-msgstr "Permet la càrrega de fitxers NMEA a través del GPSBabel."
+msgstr "Permet la càrrega de fitxers NMEA a través de GPSBabel."
 
 #: src/plugins/runner/gpsbabel/GpsbabelPlugin.cpp:49
 msgctxt "Marble::GpsbabelPlugin|"
