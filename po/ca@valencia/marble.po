@@ -356,7 +356,7 @@ msgid ""
 "Marble"
 msgstr ""
 "Projecte Google Summer of Code 2008: Implementació de les fotografies de "
-"Panoramio / Viquipèdia a Marble"
+"Panoramio / Viquipèdia en Marble"
 
 #: kdemain.cpp:214
 #, kde-format

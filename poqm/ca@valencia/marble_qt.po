@@ -9454,7 +9454,7 @@ msgid ""
 msgstr ""
 "<p>Shashank Singh <a href=\"mailto:shashank.personal@gmail.com\">shashank."
 "personal@gmail.com</a><br /><i>Projecte: Implementació de les fotografies "
-"del Panoramio / Viquipèdia a Marble</i></p>"
+"del Panoramio / Viquipèdia en Marble</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:242
 msgctxt "QObject|"
