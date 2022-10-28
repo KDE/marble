@@ -28,7 +28,8 @@ namespace Marble
         m_observable(false),
         m_lineColor(Qt::black),
         m_lineWidth(1),
-        m_tessellate(true)
+        m_tessellate(true),
+        m_clipScreenCoordinates(true)
     {
         setFlag(ItemHasContents, true);
     }
@@ -59,9 +60,18 @@ namespace Marble
             m_screenPolygons.clear();
             QVector<QPolygonF*> fullScreenPolygons;
             bool success = m_map->screenCoordinatesFromGeoDataLineString(lineString, fullScreenPolygons);
-            for (auto reducedPolygon : qAsConst(fullScreenPolygons)) {
-                m_screenPolygons << reducedPolygon->intersected(displayPolygon);
+            if (m_clipScreenCoordinates) {
+                for (auto reducedPolygon : qAsConst(fullScreenPolygons)) {
+                    m_screenPolygons << reducedPolygon->intersected(displayPolygon);
+                }
             }
+            else {
+                for (auto eachPolygon : qAsConst(fullScreenPolygons)) {
+                    m_screenPolygons << *eachPolygon;
+                }
+            }
+
+            qDeleteAll(fullScreenPolygons);
 
             QVariantList previousScreenCoordinates;
             previousScreenCoordinates = m_screenCoordinates;
@@ -178,6 +188,11 @@ namespace Marble
         return m_tessellate;
     }
 
+    bool GeoPolyline::clipScreenCoordinates() const
+    {
+        return m_clipScreenCoordinates;
+    }
+
     void GeoPolyline::setTessellate(bool tessellate)
     {
         if (m_tessellate == tessellate)
@@ -185,6 +200,15 @@ namespace Marble
 
         m_tessellate = tessellate;
         emit tessellateChanged(m_tessellate);
+    }
+
+    void GeoPolyline::setClipScreenCoordinates(bool clipped)
+    {
+        if (m_clipScreenCoordinates == clipped)
+            return;
+
+        m_clipScreenCoordinates = clipped;
+        emit clipScreenCoordinatesChanged(m_clipScreenCoordinates);
     }
 
     qreal GeoPolyline::readonlyX() const

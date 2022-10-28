@@ -38,6 +38,10 @@ namespace Marble
         Q_PROPERTY( QColor lineColor READ lineColor WRITE setLineColor NOTIFY lineColorChanged )
         Q_PROPERTY( qreal lineWidth READ lineWidth WRITE setLineWidth NOTIFY lineWidthChanged )
 
+        // When enabled only those screenCoordinates are calculated and rendered that are visible on the screen.
+        // Setting this to false can severely reduce performance. Therefore this defaults to true.
+        Q_PROPERTY( bool clipScreenCoordinates READ clipScreenCoordinates WRITE setClipScreenCoordinates NOTIFY clipScreenCoordinatesChanged )
+
     public:
         /** Constructor */
         explicit GeoPolyline( QQuickItem *parent = nullptr );
@@ -57,10 +61,12 @@ namespace Marble
         QColor lineColor() const;
         qreal lineWidth() const;
         bool tessellate() const;
+        bool clipScreenCoordinates() const;
 
         void setLineColor(const QColor& lineColor);
         void setLineWidth(const qreal lineWidth);
         void setTessellate(bool tessellate);
+        void setClipScreenCoordinates(bool clipped);
 
         qreal readonlyX() const;
 
@@ -79,6 +85,7 @@ namespace Marble
         void lineWidthChanged(qreal lineWidth);
 
         void tessellateChanged(bool tessellate);
+        void clipScreenCoordinatesChanged(bool enabled);
 
         void readonlyXChanged();
         void readonlyYChanged();
@@ -98,6 +105,7 @@ namespace Marble
         QColor m_lineColor;
         qreal m_lineWidth;
         bool m_tessellate;
+        bool m_clipScreenCoordinates;
 
         void updateScreenPositions();
     };
