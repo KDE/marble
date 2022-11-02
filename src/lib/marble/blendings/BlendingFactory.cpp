@@ -77,6 +77,8 @@ BlendingFactory::BlendingFactory( const SunLocator *sunLocator )
     m_blendings.insert( "CloudsBlending", new CloudsBlending );
     m_blendings.insert( "SunLightBlending", m_sunLightBlending );
     m_blendings.insert( "GrayscaleBlending", new GrayscaleBlending );
+    m_blendings.insert( "InvertColorBlending", new InvertColorBlending );
+    m_blendings.insert( "InvertHueBlending", new InvertHueBlending );
 }
 
 BlendingFactory::~BlendingFactory()

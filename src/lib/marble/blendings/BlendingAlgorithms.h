@@ -242,6 +242,18 @@ class GrayscaleBlending: public Blending
     void blend( QImage * const bottom, TextureTile const * const top ) const override;
 };
 
+class InvertColorBlending: public Blending
+{
+ public:
+    void blend( QImage * const bottom, TextureTile const * const top ) const override;
+};
+
+class InvertHueBlending: public Blending
+{
+ public:
+    void blend( QImage * const bottom, TextureTile const * const top ) const override;
+};
+
 }
 
 #endif

@@ -51,6 +51,55 @@ void GrayscaleBlending::blend( QImage * const bottom, TextureTile const * const 
 
 }
 
+void InvertColorBlending::blend( QImage * const bottom, TextureTile const * const top ) const
+{
+    Q_ASSERT( bottom );
+    Q_ASSERT( top );
+    Q_ASSERT( top->image() );
+    Q_ASSERT( bottom->size() == top->image()->size() );
+    Q_ASSERT( bottom->format() == QImage::Format_ARGB32_Premultiplied );
+    QImage const topImagePremult = top->image()->convertToFormat( QImage::Format_ARGB32_Premultiplied );
+
+    // Draw an inverted version of the bottom image
+    int const width = bottom->width();
+    int const height = bottom->height();
+
+    for ( int y = 0; y < height; ++y ) {
+        for ( int x = 0; x < width; ++x ) {
+            QRgb const topPixel = topImagePremult.pixel( x, y );
+            QRgb const invertedPixel = qRgb( 255 - qRed(topPixel), 255 - qGreen(topPixel), 255 - qBlue(topPixel) );
+            bottom->setPixel( x, y, invertedPixel );
+        }
+    }
+}
+
+void InvertHueBlending::blend( QImage * const bottom, TextureTile const * const top ) const
+{
+    Q_ASSERT( bottom );
+    Q_ASSERT( top );
+    Q_ASSERT( top->image() );
+    Q_ASSERT( bottom->size() == top->image()->size() );
+    Q_ASSERT( bottom->format() == QImage::Format_ARGB32_Premultiplied );
+    QImage const topImagePremult = top->image()->convertToFormat( QImage::Format_ARGB32_Premultiplied );
+
+    // Draw an inverted version of the bottom image
+    int const width = bottom->width();
+    int const height = bottom->height();
+
+    for ( int y = 0; y < height; ++y ) {
+        for ( int x = 0; x < width; ++x ) {
+            QRgb const topPixel = topImagePremult.pixel( x, y );
+            QColor invertedColor(255 - qRed(topPixel), 255 - qGreen(topPixel), 255 - qBlue(topPixel));
+            int hue = invertedColor.hslHue();
+            int saturation = invertedColor.hslSaturation();
+            int lightness = invertedColor.lightness();
+            QColor naturalInvertedColor = QColor::fromHsl((hue + 195) % 255 , saturation, lightness);
+            QRgb naturalInvertedPixel = naturalInvertedColor.rgb();
+            bottom->setPixel( x, y, naturalInvertedPixel );
+        }
+    }
+}
+
 // pre-conditions:
 // - bottom and top image have the same size
 // - bottom image format is ARGB32_Premultiplied
