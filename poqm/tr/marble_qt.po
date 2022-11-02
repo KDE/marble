@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2022-10-12 14:32+0300\n"
+"PO-Revision-Date: 2022-11-01 13:04+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -21,7 +21,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 22.08.1\n"
+"X-Generator: Lokalize 22.08.2\n"
 "X-Qt-Contexts: true\n"
 
 #. file data/maps/moon/clementine/clementine.dgml:5
@@ -1234,7 +1234,7 @@ msgstr "Anaokulu"
 #. file data/maps/earth/openstreetmap/openstreetmap.dgml:336
 msgctxt "DGML|"
 msgid "Library"
-msgstr "Kütüphane"
+msgstr "Kitaplık"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:317
 #. ----------
@@ -2939,7 +2939,7 @@ msgstr "&Qt Hakkında"
 #: src/apps/marble-qt/QtMainWindow.cpp:388
 msgctxt "Marble::MainWindow|"
 msgid "Show the Qt library's About box"
-msgstr "Qt Kütüphanesinin Hakkında Kutusunu Göster"
+msgstr "Qt Kitaplığının Hakkında Kutusunu Göster"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:392
 msgctxt "Marble::MainWindow|"
@@ -9753,7 +9753,7 @@ msgstr ""
 #, qt-format
 msgctxt "Marble::MarbleAboutDialog|"
 msgid "Using Marble Library version %1"
-msgstr "Kullanılan Marble Kütüphanesi sürümü %1"
+msgstr "Marble kitaplığının %1 sürümü kullanılıyor"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:380
 #, qt-format
