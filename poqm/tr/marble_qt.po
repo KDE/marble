@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2022-11-01 13:04+0300\n"
+"PO-Revision-Date: 2022-11-02 11:22+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -12611,24 +12611,24 @@ msgstr "%1 saniye bekleyin"
 #, qt-format
 msgctxt "Marble::TourItemDelegate|"
 msgid "Create item %1"
-msgstr "%1 öğesini oluştur"
+msgstr "%1 ögesini oluştur"
 
 #: src/lib/marble/TourItemDelegate.cpp:175
 #, qt-format
 msgctxt "Marble::TourItemDelegate|"
 msgid "Remove item %1"
-msgstr "%1 öğesini kaldır"
+msgstr "%1 ögesini kaldır"
 
 #: src/lib/marble/TourItemDelegate.cpp:179
 #, qt-format
 msgctxt "Marble::TourItemDelegate|"
 msgid "Change item %1"
-msgstr "%1 öğesini değiştir"
+msgstr "%1 ögesini değiştir"
 
 #: src/lib/marble/TourItemDelegate.cpp:184
 msgctxt "Marble::TourItemDelegate|"
 msgid "Update items"
-msgstr "Öğeleri güncelle"
+msgstr "Ögeleri güncelle"
 
 #: src/lib/marble/TourItemDelegate.cpp:405
 msgctxt "QObject|"
@@ -12698,12 +12698,12 @@ msgstr "KML Turları (*.kml)"
 #: src/lib/marble/TourWidget.cpp:547
 msgctxt "QObject|"
 msgid "Remove Selected Items"
-msgstr "Seçili Öğeleri Kaldır"
+msgstr "Seçili Ögeleri Kaldır"
 
 #: src/lib/marble/TourWidget.cpp:548
 msgctxt "QObject|"
 msgid "Are you sure want to remove selected items?"
-msgstr "Seçili öğeleri kaldırmak istediğinizden emin misiniz?"
+msgstr "Seçili ögeleri kaldırmak istediğinizden emin misiniz?"
 
 #: src/lib/marble/TourWidget.cpp:829
 msgctxt "QObject|"
@@ -12948,12 +12948,12 @@ msgstr "Bilgi Notları"
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:307
 msgctxt "QObject|"
 msgid "Remove current item"
-msgstr "Mevcut öğeyi kaldır"
+msgstr "Geçerli ögeyi kaldır"
 
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:308
 msgctxt "QObject|"
 msgid "Are you sure you want to remove the current item?"
-msgstr "Mevcut öğeyi kaldırmak istediğinizden emin misiniz?"
+msgstr "Geçerli ögeyi kaldırmak istediğinizden emin misiniz?"
 
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:345
 msgctxt "QObject|"
@@ -14085,7 +14085,7 @@ msgstr "&Yükseklik Profili"
 #: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:117
 msgctxt "Marble::ElevationProfileFloatItem|"
 msgid "A float item that shows the elevation profile of the current route."
-msgstr "Uçan bir öğe, mevcut rotanın yüksekli profilini gösterir."
+msgstr "Uçan bir öge, geçerli rotanın yüksekli profilini gösterir."
 
 #: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:192
 msgctxt "Marble::ElevationProfileFloatItem|"
@@ -14227,7 +14227,7 @@ msgstr "&GpsInfo"
 #: src/plugins/render/gpsinfo/GpsInfo.cpp:69
 msgctxt "Marble::GpsInfo|"
 msgid "This is a float item that provides Gps Information."
-msgstr "Bu uçan öğe, Gps bilgisi sunar"
+msgstr "Bu uçan öge, GPS bilgisi sunar"
 
 #: src/plugins/render/gpsinfo/GpsInfo.cpp:126
 msgctxt "Marble::GpsInfo|"
@@ -14422,7 +14422,7 @@ msgstr "&Lisans"
 #: src/plugins/render/license/License.cpp:110
 msgctxt "Marble::License|"
 msgid "This is a float item that provides copyright information."
-msgstr "Bu kayan öğe, telif hakkı bilgisini sağlar."
+msgstr "Bu kayan öge, telif hakkı bilgisini sağlar."
 
 #: src/plugins/render/license/License.cpp:228
 msgctxt "Marble::License|"
@@ -15473,7 +15473,7 @@ msgstr "Marble Uydu Kataloğu (*.msc)"
 #: src/plugins/render/satellites/SatellitesConfigDialog.cpp:291
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Two Line Element Set (*.txt)"
-msgstr "İki Satırlı Öğe Kümesi (*.txt)"
+msgstr "İki Satırlı Öge Kümesi (*.txt)"
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.cpp:292
 msgctxt "Marble::SatellitesConfigDialog|"
@@ -15643,10 +15643,10 @@ msgid ""
 "orbital elements from <ul><li><a href=\"https://ssd.jpl.nasa.gov/?horizons"
 "\">JPL Horizons</a></li></ul>"
 msgstr ""
-"Şuradan Dünya-Uyduları yörüngesel öğeleri <ul><li><a href=\"http://www."
+"Şuradan Dünya-Uyduları yörünge ögeleri <ul><li><a href=\"http://www."
 "celestrak.com\">http://www.celestrak.com</a></li></ul>Gezegensel Dünya-"
-"Uyduları yörüngesel öğeleri <ul><li><a href=\"http://tasc.esa.int/\">ESA "
-"TASC servisi</a></li><li><a href=\"https://ssd.jpl.nasa.gov/?horizons\">JPL "
+"Uyduları yörünge ögeleri <ul><li><a href=\"http://tasc.esa.int/\">ESA TASC "
+"servisi</a></li><li><a href=\"https://ssd.jpl.nasa.gov/?horizons\">JPL "
 "Horizons</a></li></ul>"
 
 #: src/plugins/render/satellites/SatellitesPlugin.cpp:443
