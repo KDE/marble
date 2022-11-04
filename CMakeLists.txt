@@ -107,16 +107,14 @@ endif()
 
 #######################################################
 # Find Qt dependencies
+set(REQUIRED_QT_VERSION 5.14.0)
 
 find_package(Protobuf)
 set_package_properties(Protobuf PROPERTIES TYPE OPTIONAL PURPOSE "Parsing of OSM PBF files.")
 
 if(ANDROID)
-    set(REQUIRED_QT_VERSION 5.14.0)
    # TODO: still needed with ECM toolchain?
    SET(QT_QMAKE_EXECUTABLE "$ENV{Qt5_android}/bin/qmake")
-else()
-    set(REQUIRED_QT_VERSION 5.14.0)
 endif()
 
 find_package(Qt5 ${REQUIRED_QT_VERSION} REQUIRED
@@ -176,7 +174,7 @@ add_feature_info("Unit tests" BUILD_MARBLE_TESTS "Build unit tests. Toggle with 
 if( BUILD_MARBLE_TESTS )
 #  SET (TEST_DATA_DIR "${CMAKE_CURRENT_SOURCE_DIR}/src/tests/test_data")
   #where unit test binaries should be installed to and run from
-#  SET (MARBLE_TEST_DIR   ${CMAKE_CURRENT_BINARY_DIR}/tests)
+#  SET (MARBLE_TEST_DIR   "${CMAKE_CURRENT_BINARY_DIR}/tests")
 endif( BUILD_MARBLE_TESTS )
 
 ####################################################
@@ -186,7 +184,7 @@ add_feature_info("Qt Designer plugins" WITH_DESIGNER_PLUGIN "Marble widget suppo
 
 set(EXEC_INSTALL_PREFIX  ${CMAKE_INSTALL_PREFIX} CACHE PATH  "Base directory for executables and libraries" FORCE)
 if (NOT QT_PLUGINS_DIR)
-   set(QT_PLUGINS_DIR ${CMAKE_INSTALL_LIBDIR}/plugins)
+   set(QT_PLUGINS_DIR "${CMAKE_INSTALL_LIBDIR}/plugins")
 endif()
 
 ####################################################
@@ -207,18 +205,18 @@ elseif(APPLE)
       SET (CMAKE_INSTALL_NAME_DIR @executable_path/lib)
       # install the Info.plist file
       install(FILES src/mac/Info.plist DESTINATION ${CMAKE_INSTALL_PREFIX}/Marble.app/Contents)
-      #SET (lib_dir ${CMAKE_INSTALL_PREFIX}/Marble.app/Contents/MacOS/lib)
-      SET (data_dir   ${CMAKE_INSTALL_PREFIX}/Marble.app/Contents/MacOS/resources/data)
+      #SET (lib_dir "${CMAKE_INSTALL_PREFIX}/Marble.app/Contents/MacOS/lib")
+      SET (data_dir   "${CMAKE_INSTALL_PREFIX}/Marble.app/Contents/MacOS/resources/data")
       set(locale_dir "${data_dir}/locale")
-      SET (plugin_dir   ${CMAKE_INSTALL_PREFIX}/Marble.app/Contents/MacOS/resources/plugins)
+      SET (plugin_dir   "${CMAKE_INSTALL_PREFIX}/Marble.app/Contents/MacOS/resources/plugins")
 elseif(ANDROID)
       set(plugin_dir "${CMAKE_INSTALL_PREFIX}/assets/plugins")
       set(data_dir "${CMAKE_INSTALL_PREFIX}/assets/data")
       set(locale_dir "${data_dir}/locale")
 else() # Linux / bsd etc...
-      set(data_dir ${CMAKE_INSTALL_FULL_DATAROOTDIR}/marble/data)
+      set(data_dir "${CMAKE_INSTALL_FULL_DATAROOTDIR}/marble/data")
       set(locale_dir "${CMAKE_INSTALL_FULL_DATAROOTDIR}/locale")
-      set(plugin_dir ${CMAKE_INSTALL_FULL_LIBDIR}/marble/plugins)
+      set(plugin_dir "${CMAKE_INSTALL_FULL_LIBDIR}/marble/plugins")
 endif()
 
 if(NOT ICON_INSTALL_DIR)
