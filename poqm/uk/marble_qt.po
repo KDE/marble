@@ -12552,8 +12552,10 @@ msgstr "Кодеки недоступні"
 
 #: src/lib/marble/TourCaptureDialog.cpp:65
 msgctxt "Marble::TourCaptureDialog|"
-msgid "Supported codecs are not found."
-msgstr "Не знайдено підтримуваних кодеків."
+msgid ""
+"Supported codecs are not found. (ffmpeg/avconv needs to be installed and in "
+"PATH.)"
+msgstr ""
 
 #: src/lib/marble/TourCaptureDialog.cpp:77
 msgctxt "Marble::TourCaptureDialog|"
@@ -18148,6 +18150,10 @@ msgstr "&Шаблон плаваючих елементів"
 msgctxt "Marble::FITemplateFloatItem|"
 msgid "This is a template class for float items."
 msgstr "Це клас шаблонів для плаваючих елементів."
+
+#~ msgctxt "Marble::TourCaptureDialog|"
+#~ msgid "Supported codecs are not found."
+#~ msgstr "Не знайдено підтримуваних кодеків."
 
 #~ msgctxt "Marble::MainWindow|"
 #~ msgid "&Add Bookmark"

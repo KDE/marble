@@ -12244,7 +12244,9 @@ msgstr ""
 
 #: src/lib/marble/TourCaptureDialog.cpp:65
 msgctxt "Marble::TourCaptureDialog|"
-msgid "Supported codecs are not found."
+msgid ""
+"Supported codecs are not found. (ffmpeg/avconv needs to be installed and in "
+"PATH.)"
 msgstr ""
 
 #: src/lib/marble/TourCaptureDialog.cpp:77

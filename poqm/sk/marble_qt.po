@@ -12498,8 +12498,10 @@ msgstr "Kodeky nie sú k dispozícii"
 
 #: src/lib/marble/TourCaptureDialog.cpp:65
 msgctxt "Marble::TourCaptureDialog|"
-msgid "Supported codecs are not found."
-msgstr "Podporované kodeky sa nenašli."
+msgid ""
+"Supported codecs are not found. (ffmpeg/avconv needs to be installed and in "
+"PATH.)"
+msgstr ""
 
 #: src/lib/marble/TourCaptureDialog.cpp:77
 msgctxt "Marble::TourCaptureDialog|"
@@ -18067,6 +18069,10 @@ msgstr "Plávajúca položka Š&ablóna"
 msgctxt "Marble::FITemplateFloatItem|"
 msgid "This is a template class for float items."
 msgstr "Toto je trieda šablóny pre plávajúce položky."
+
+#~ msgctxt "Marble::TourCaptureDialog|"
+#~ msgid "Supported codecs are not found."
+#~ msgstr "Podporované kodeky sa nenašli."
 
 #~ msgctxt "Marble::MainWindow|"
 #~ msgid "&Add Bookmark"

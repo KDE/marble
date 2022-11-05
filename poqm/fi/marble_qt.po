@@ -12549,8 +12549,10 @@ msgstr "Koodekkeja ei ole käytettävissä"
 
 #: src/lib/marble/TourCaptureDialog.cpp:65
 msgctxt "Marble::TourCaptureDialog|"
-msgid "Supported codecs are not found."
-msgstr "Tuettuja koodekkeja ei löydy."
+msgid ""
+"Supported codecs are not found. (ffmpeg/avconv needs to be installed and in "
+"PATH.)"
+msgstr ""
 
 #: src/lib/marble/TourCaptureDialog.cpp:77
 msgctxt "Marble::TourCaptureDialog|"
@@ -18145,6 +18147,10 @@ msgstr "Kelluvan alkion &malli"
 msgctxt "Marble::FITemplateFloatItem|"
 msgid "This is a template class for float items."
 msgstr "Tämä on kelluvien alkioiden malliluokka."
+
+#~ msgctxt "Marble::TourCaptureDialog|"
+#~ msgid "Supported codecs are not found."
+#~ msgstr "Tuettuja koodekkeja ei löydy."
 
 #~ msgctxt "Marble::MainWindow|"
 #~ msgid "&Add Bookmark"

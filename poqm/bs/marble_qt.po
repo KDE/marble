@@ -14710,11 +14710,11 @@ msgid "Codecs are unavailable"
 msgstr "Nema dostupnog kodeka."
 
 #: src/lib/marble/TourCaptureDialog.cpp:65
-#, fuzzy
-#| msgid "Supported codecs are not found."
 msgctxt "Marble::TourCaptureDialog|"
-msgid "Supported codecs are not found."
-msgstr "Podržani kodeci nisu nađeni"
+msgid ""
+"Supported codecs are not found. (ffmpeg/avconv needs to be installed and in "
+"PATH.)"
+msgstr ""
 
 #: src/lib/marble/TourCaptureDialog.cpp:77
 #, fuzzy
@@ -22004,6 +22004,12 @@ msgstr "&Šablon plutajućeg predmeta"
 msgctxt "Marble::FITemplateFloatItem|"
 msgid "This is a template class for float items."
 msgstr "Ovo je šablonska klasa za plutajuće predmete."
+
+#, fuzzy
+#~| msgid "Supported codecs are not found."
+#~ msgctxt "Marble::TourCaptureDialog|"
+#~ msgid "Supported codecs are not found."
+#~ msgstr "Podržani kodeci nisu nađeni"
 
 #, fuzzy
 #~| msgid "&Add Bookmark"

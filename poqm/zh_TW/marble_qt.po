@@ -13531,8 +13531,10 @@ msgstr "沒有可用的編解碼器"
 
 #: src/lib/marble/TourCaptureDialog.cpp:65
 msgctxt "Marble::TourCaptureDialog|"
-msgid "Supported codecs are not found."
-msgstr "找不到支援的編解碼器"
+msgid ""
+"Supported codecs are not found. (ffmpeg/avconv needs to be installed and in "
+"PATH.)"
+msgstr ""
 
 #: src/lib/marble/TourCaptureDialog.cpp:77
 msgctxt "Marble::TourCaptureDialog|"
@@ -19519,6 +19521,10 @@ msgstr "浮動項目樣本(&T)"
 msgctxt "Marble::FITemplateFloatItem|"
 msgid "This is a template class for float items."
 msgstr "這是浮動項目的樣本類別。"
+
+#~ msgctxt "Marble::TourCaptureDialog|"
+#~ msgid "Supported codecs are not found."
+#~ msgstr "找不到支援的編解碼器"
 
 #~ msgctxt "Marble::MainWindow|"
 #~ msgid "&Add Bookmark"

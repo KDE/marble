@@ -12546,8 +12546,10 @@ msgstr "No hi ha cap còdec disponible"
 
 #: src/lib/marble/TourCaptureDialog.cpp:65
 msgctxt "Marble::TourCaptureDialog|"
-msgid "Supported codecs are not found."
-msgstr "No s'ha trobat cap còdec compatible."
+msgid ""
+"Supported codecs are not found. (ffmpeg/avconv needs to be installed and in "
+"PATH.)"
+msgstr ""
 
 #: src/lib/marble/TourCaptureDialog.cpp:77
 msgctxt "Marble::TourCaptureDialog|"
@@ -18151,6 +18153,10 @@ msgstr "Plan&tilla d'element flotant"
 msgctxt "Marble::FITemplateFloatItem|"
 msgid "This is a template class for float items."
 msgstr "Aquesta és una classe de plantilla per a elements flotants."
+
+#~ msgctxt "Marble::TourCaptureDialog|"
+#~ msgid "Supported codecs are not found."
+#~ msgstr "No s'ha trobat cap còdec compatible."
 
 #~ msgctxt "Marble::MainWindow|"
 #~ msgid "&Add Bookmark"

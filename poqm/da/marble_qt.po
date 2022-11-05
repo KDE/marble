@@ -12857,8 +12857,10 @@ msgstr "Codecs ikke tilgængelige"
 
 #: src/lib/marble/TourCaptureDialog.cpp:65
 msgctxt "Marble::TourCaptureDialog|"
-msgid "Supported codecs are not found."
-msgstr "Understøttede codecs ikke fundet."
+msgid ""
+"Supported codecs are not found. (ffmpeg/avconv needs to be installed and in "
+"PATH.)"
+msgstr ""
 
 #: src/lib/marble/TourCaptureDialog.cpp:77
 msgctxt "Marble::TourCaptureDialog|"
@@ -18534,6 +18536,10 @@ msgstr "Flydeelement-&skabelon"
 msgctxt "Marble::FITemplateFloatItem|"
 msgid "This is a template class for float items."
 msgstr "Dette er en skabelonklasse for flydeelementer."
+
+#~ msgctxt "Marble::TourCaptureDialog|"
+#~ msgid "Supported codecs are not found."
+#~ msgstr "Understøttede codecs ikke fundet."
 
 #~ msgctxt "Marble::MainWindow|"
 #~ msgid "&Add Bookmark"

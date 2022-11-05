@@ -12496,8 +12496,10 @@ msgstr "Kodare är inte tillgängliga"
 
 #: src/lib/marble/TourCaptureDialog.cpp:65
 msgctxt "Marble::TourCaptureDialog|"
-msgid "Supported codecs are not found."
-msgstr "Någon kodare som stöds hittades inte."
+msgid ""
+"Supported codecs are not found. (ffmpeg/avconv needs to be installed and in "
+"PATH.)"
+msgstr ""
 
 #: src/lib/marble/TourCaptureDialog.cpp:77
 msgctxt "Marble::TourCaptureDialog|"
@@ -18082,6 +18084,10 @@ msgstr "&Mall för flyttbart objekt"
 msgctxt "Marble::FITemplateFloatItem|"
 msgid "This is a template class for float items."
 msgstr "Det här är en mallklass för flyttbara objekt."
+
+#~ msgctxt "Marble::TourCaptureDialog|"
+#~ msgid "Supported codecs are not found."
+#~ msgstr "Någon kodare som stöds hittades inte."
 
 #~ msgctxt "Marble::MainWindow|"
 #~ msgid "&Add Bookmark"

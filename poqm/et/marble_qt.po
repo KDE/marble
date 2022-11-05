@@ -12523,8 +12523,10 @@ msgstr "Koodekeid pole saadaval"
 
 #: src/lib/marble/TourCaptureDialog.cpp:65
 msgctxt "Marble::TourCaptureDialog|"
-msgid "Supported codecs are not found."
-msgstr "Toetatud koodekeid ei leitud."
+msgid ""
+"Supported codecs are not found. (ffmpeg/avconv needs to be installed and in "
+"PATH.)"
+msgstr ""
 
 #: src/lib/marble/TourCaptureDialog.cpp:77
 msgctxt "Marble::TourCaptureDialog|"
@@ -18090,6 +18092,10 @@ msgstr "Lah&tise elemendi mall"
 msgctxt "Marble::FITemplateFloatItem|"
 msgid "This is a template class for float items."
 msgstr "See on lahtiste elementide malliklass."
+
+#~ msgctxt "Marble::TourCaptureDialog|"
+#~ msgid "Supported codecs are not found."
+#~ msgstr "Toetatud koodekeid ei leitud."
 
 #~ msgctxt "Marble::MainWindow|"
 #~ msgid "&Add Bookmark"
