@@ -74,7 +74,7 @@ void FlightGearPositionProviderPlugin::initialize()
     emit statusChanged( m_status );
 
     m_socket = new QUdpSocket(this);
-    m_socket->bind(QHostAddress::LocalHost, 5500);
+    m_socket->bind(QHostAddress::Any, 5500);
 
     connect(m_socket, SIGNAL(readyRead()),
              this, SLOT(readPendingDatagrams()));
