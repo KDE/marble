@@ -9,7 +9,7 @@ include:
 # Manual job for building of maps.kde.org binaries
 maps-kde-org-binaries:
   stage: build
-  image: ubuntu:20.04
+  image: ubuntu:22.04
   tags:
     - Linux
   when: manual
