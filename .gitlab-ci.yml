@@ -18,8 +18,6 @@ maps-kde-org-binaries:
     - export DEBCONF_NONINTERACTIVE_SEEN=true
     - apt-get update && apt-get -y install
         cmake
-        debhelper
-        devscripts
         g++
         git
         libboost-program-options-dev
@@ -28,13 +26,11 @@ maps-kde-org-binaries:
         libshp-dev
         protobuf-compiler
         qtbase5-dev
-    - tools/vectorosm-tilecreator/setup/build/build-tirex.sh
     - tools/vectorosm-tilecreator/setup/build/build-tilegenerator.sh
   artifacts:
     expire_in: 1 week
     when: on_success
     paths:
-     - "*.deb"
      - build/tools/vectorosm-tilecreator/marble-vectorosm-tirex-backend
      - build/tools/vectorosm-tilecreator/marble-vectorosm-process-land-polygons
      - build/tools/vectorosm-tilecreator/marble-vectorosm-tilecreator
