@@ -34,3 +34,31 @@ maps-kde-org-binaries:
      - build/tools/vectorosm-tilecreator/marble-vectorosm-tirex-backend
      - build/tools/vectorosm-tilecreator/marble-vectorosm-process-land-polygons
      - build/tools/vectorosm-tilecreator/marble-vectorosm-tilecreator
+
+# Manual job for building OSMX for maps.kde.org
+maps-kde-org-osmx:
+  stage: build
+  image: ubuntu:22.04
+  tags:
+    - Linux
+  when: manual
+  script:
+    - export DEBIAN_FRONTEND=noninteractive
+    - export DEBCONF_NONINTERACTIVE_SEEN=true
+    - apt-get update && apt-get -y install
+        git
+        cmake
+        clang
+        libbz2-dev
+        libz-dev
+        libexpat-dev
+        libssl-dev
+    - git clone --recursive https://github.com/protomaps/OSMExpress.git
+    - cd OSMExpress
+    - cmake -DCMAKE_BUILD_TYPE=Release .
+    - make
+  artifacts:
+    expire_in: 1 week
+    when: on_success
+    paths:
+     - OSMExpress/osmx
