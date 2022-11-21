@@ -1,5 +1,5 @@
 #!/bin/bash
-# SPDX-License-Identifier: BSD-3-clause
+# SPDX-License-Identifier: BSD-3-Clause
 # SPDX-FileCopyrightText: 2022 Volker Krause <vkrause@kde.org>
 
 # get osmx
