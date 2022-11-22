@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2022-11-05 20:33+0300\n"
+"PO-Revision-Date: 2022-11-21 22:35+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -21,7 +21,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 22.08.2\n"
+"X-Generator: Lokalize 22.08.3\n"
 "X-Qt-Contexts: true\n"
 
 #. file data/maps/moon/clementine/clementine.dgml:5
@@ -2744,7 +2744,7 @@ msgstr "Haritanın ekran görüntüsünü kopyala"
 #: src/apps/marble-qt/QtMainWindow.cpp:302
 msgctxt "Marble::MainWindow|"
 msgid "&Edit Map..."
-msgstr "Harita &Düzenle..."
+msgstr "Haritayı Dü&zenle..."
 
 #: src/apps/marble-qt/QtMainWindow.cpp:303
 msgctxt "Marble::MainWindow|"
@@ -3055,7 +3055,7 @@ msgstr "&Görünüm Boyutu"
 #: src/apps/marble-qt/QtMainWindow.cpp:487
 msgctxt "Marble::MainWindow|"
 msgid "&Settings"
-msgstr "&Ayarlar"
+msgstr "Ayar&lar"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:496
 msgctxt "Marble::MainWindow|"
@@ -13828,7 +13828,7 @@ msgstr "Şu yıldaki tutulmaları göster:"
 #: src/plugins/render/eclipses/EclipsesBrowserDialog.ui:104
 msgctxt "EclipsesBrowserDialog|"
 msgid "&Settings..."
-msgstr "&Ayarlar..."
+msgstr "Ayar&lar..."
 
 #: src/plugins/render/eclipses/EclipsesBrowserDialog.ui:145
 msgctxt "EclipsesBrowserDialog|"
