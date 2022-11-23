@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2022-11-05 10:56+0100\n"
+"PO-Revision-Date: 2022-11-22 10:31+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
@@ -6066,7 +6066,7 @@ msgstr "Senyals de trànsit"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:377
 msgctxt "GeoDataPlacemark|"
 msgid "Elevator"
-msgstr "Elevador"
+msgstr "Ascensor"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:378
 msgctxt "GeoDataPlacemark|"
