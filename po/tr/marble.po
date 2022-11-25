@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: kdeedu-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2021-10-18 00:13+0000\n"
-"PO-Revision-Date: 2022-11-21 22:35+0300\n"
+"PO-Revision-Date: 2022-11-24 17:06+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -960,13 +960,13 @@ msgstr "Çevrim&dışı Çalış"
 #, kde-format
 msgctxt "Action for copying the map to the clipboard"
 msgid "&Copy Map"
-msgstr "&Haritayı Kopyala"
+msgstr "Haritayı Ko&pyala"
 
 #: marble_part.cpp:754
 #, kde-format
 msgctxt "Action for copying the coordinates to the clipboard"
 msgid "C&opy Coordinates"
-msgstr "K&oordinatları Kopyala"
+msgstr "Koordinatları Ko&pyala"
 
 #: marble_part.cpp:762
 #, kde-format
