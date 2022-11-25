@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2022-11-22 16:57+0300\n"
+"PO-Revision-Date: 2022-11-24 17:07+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -2729,7 +2729,7 @@ msgstr "Uygulamadan Çık"
 #: src/apps/marble-qt/QtMainWindow.cpp:297
 msgctxt "Marble::MainWindow|"
 msgid "&Copy Map"
-msgstr "Haritayı &Kopyala"
+msgstr "Haritayı Ko&pyala"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:298
 msgctxt "Marble::MainWindow|"
@@ -2789,7 +2789,7 @@ msgstr "Yapılandırma penceresini göster"
 #: src/apps/marble-qt/QtMainWindow.cpp:326
 msgctxt "Marble::MainWindow|"
 msgid "C&opy Coordinates"
-msgstr "K&oordinatları Kopyala"
+msgstr "Koordinatları Ko&pyala"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:327
 msgctxt "Marble::MainWindow|"
