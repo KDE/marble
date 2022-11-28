@@ -3,14 +3,14 @@
 # This file is distributed under the same license as the PACKAGE package.
 #
 # Stefan Asserhäll <stefan.asserhall@bredband.net>, 2007, 2008, 2009, 2010.
-# Stefan Asserhall <stefan.asserhall@bredband.net>, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021.
+# Stefan Asserhall <stefan.asserhall@bredband.net>, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022.
 # Arve Eriksson <031299870@telia.com>, 2011.
 msgid ""
 msgstr ""
 "Project-Id-Version: marble_qt\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2021-10-18 22:18+0200\n"
+"PO-Revision-Date: 2022-11-27 11:34+0100\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@bredband.net>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
 "Language: sv\n"
@@ -12500,6 +12500,8 @@ msgid ""
 "Supported codecs are not found. (ffmpeg/avconv needs to be installed and in "
 "PATH.)"
 msgstr ""
+"Någon kodare som stöds hittades inte (ffmpeg/avconv måste vara installerade "
+"och i PATH)."
 
 #: src/lib/marble/TourCaptureDialog.cpp:77
 msgctxt "Marble::TourCaptureDialog|"
