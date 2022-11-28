@@ -70,6 +70,7 @@ namespace Marble
         Q_PROPERTY(bool animationsEnabled READ animationsEnabled WRITE setAnimationsEnabled NOTIFY animationsEnabledChanged)
         Q_PROPERTY(QQmlComponent* placemarkDelegate READ placemarkDelegate WRITE setPlacemarkDelegate NOTIFY placemarkDelegateChanged)
         Q_PROPERTY(bool hoverEnabled READ hoverEnabled WRITE setHoverEnabled NOTIFY hoverEnabledChanged)
+        Q_PROPERTY(bool invertColorEnabled READ invertColorEnabled WRITE setInvertColorEnabled NOTIFY invertColorEnabledChanged)
 
     public:
         explicit MarbleQuickItem(QQuickItem *parent = nullptr);
@@ -89,6 +90,8 @@ namespace Marble
         MarbleInputHandler *inputHandler();
         int zoom() const;
         int radius() const;
+
+        Q_INVOKABLE bool invertColorEnabled();
 
     public Q_SLOTS:
         void goHome();
@@ -138,6 +141,7 @@ namespace Marble
         void setPropertyEnabled(const QString &property, bool enabled);
         bool isPropertyEnabled(const QString &property) const;
 
+        Q_INVOKABLE void setInvertColorEnabled(bool enabled, const QString &blending = QString("InvertColorBlending"));
         Q_INVOKABLE void setShowRuntimeTrace(bool showRuntimeTrace);
         Q_INVOKABLE void setShowDebugPolygons(bool showDebugPolygons);
         Q_INVOKABLE void setShowDebugPlacemarks(bool showDebugPlacemarks);
@@ -273,6 +277,8 @@ namespace Marble
 
         void minimumZoomChanged(int minimumZoom);
         void maximumZoomChanged(int maximumZoom);
+
+        void invertColorEnabledChanged(bool enabled);
 
     protected:
         QObject *getEventFilter() const;

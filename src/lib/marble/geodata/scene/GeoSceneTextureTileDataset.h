@@ -14,7 +14,7 @@
 namespace Marble
 {
 
-class GeoSceneTextureTileDataset : public GeoSceneTileDataset
+class GEODATA_EXPORT GeoSceneTextureTileDataset : public GeoSceneTileDataset
 {
  public:
 

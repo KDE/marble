@@ -6,6 +6,8 @@
 #ifndef MARBLE_GEOSCENETYPES_H
 #define MARBLE_GEOSCENETYPES_H
 
+#include "geodata_export.h"
+
 namespace Marble
 {
 
@@ -14,27 +16,27 @@ namespace GeoSceneTypes
 /**
  * Please keep alphabetic order to prevent mess
  */
-extern const char GeoSceneDocumentType[];
-extern const char GeoSceneFilterType[];
-extern const char GeoSceneGeodataType[];
-extern const char GeoSceneGroupType[];
-extern const char GeoSceneHeadType[];
-extern const char GeoSceneIconType[];
-extern const char GeoSceneItemType[];
-extern const char GeoSceneLayerType[];
-extern const char GeoSceneLegendType[];
-extern const char GeoSceneLicenseType[];
-extern const char GeoSceneMapType[];
-extern const char GeoScenePaletteType[];
-extern const char GeoScenePropertyType[];
-extern const char GeoSceneSectionType[];
-extern const char GeoSceneSettingsType[];
-extern const char GeoSceneTextureTileType[];
-extern const char GeoSceneTileDatasetType[];
-extern const char GeoSceneVectorType[];
-extern const char GeoSceneVectorTileType[];
-extern const char GeoSceneXmlDataSourceType[];
-extern const char GeoSceneZoomType[];
+GEODATA_EXPORT extern const char GeoSceneDocumentType[];
+GEODATA_EXPORT extern const char GeoSceneFilterType[];
+GEODATA_EXPORT extern const char GeoSceneGeodataType[];
+GEODATA_EXPORT extern const char GeoSceneGroupType[];
+GEODATA_EXPORT extern const char GeoSceneHeadType[];
+GEODATA_EXPORT extern const char GeoSceneIconType[];
+GEODATA_EXPORT extern const char GeoSceneItemType[];
+GEODATA_EXPORT extern const char GeoSceneLayerType[];
+GEODATA_EXPORT extern const char GeoSceneLegendType[];
+GEODATA_EXPORT extern const char GeoSceneLicenseType[];
+GEODATA_EXPORT extern const char GeoSceneMapType[];
+GEODATA_EXPORT extern const char GeoScenePaletteType[];
+GEODATA_EXPORT extern const char GeoScenePropertyType[];
+GEODATA_EXPORT extern const char GeoSceneSectionType[];
+GEODATA_EXPORT extern const char GeoSceneSettingsType[];
+GEODATA_EXPORT extern const char GeoSceneTextureTileType[];
+GEODATA_EXPORT extern const char GeoSceneTileDatasetType[];
+GEODATA_EXPORT extern const char GeoSceneVectorType[];
+GEODATA_EXPORT extern const char GeoSceneVectorTileType[];
+GEODATA_EXPORT extern const char GeoSceneXmlDataSourceType[];
+GEODATA_EXPORT extern const char GeoSceneZoomType[];
 }
 
 }

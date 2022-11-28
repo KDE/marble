@@ -35,6 +35,11 @@
 #include "GeoDataRelation.h"
 #include "osm/OsmPlacemarkData.h"
 #include "GeoDataDocument.h"
+#include <geodata/parser/GeoSceneTypes.h>
+#include <geodata/scene/GeoSceneDocument.h>
+#include <geodata/scene/GeoSceneMap.h>
+#include <geodata/scene/GeoSceneLayer.h>
+#include <geodata/scene/GeoSceneTextureTileDataset.h>
 
 namespace Marble
 {
@@ -175,7 +180,8 @@ namespace Marble
             m_showPublicTransport(false),
             m_showOutdoorActivities(false),
             m_heading(0.0),
-            m_hoverEnabled(false)
+            m_hoverEnabled(false),
+            m_invertColorEnabled(false)
         {
             m_currentPosition.setName(QObject::tr("Current Location"));
             m_relationTypeConverter["road"] = GeoDataRelation::RouteRoad;
@@ -199,6 +205,7 @@ namespace Marble
         }
 
         void updateVisibleRoutes();
+        void changeBlending(bool enabled, const QString &blendingName);
 
     private:
         MarbleQuickItem *m_marble;
@@ -223,6 +230,7 @@ namespace Marble
         bool m_showOutdoorActivities;
         qreal m_heading;
         bool m_hoverEnabled;
+        bool m_invertColorEnabled;
     };
 
     MarbleQuickItem::MarbleQuickItem(QQuickItem *parent) : QQuickPaintedItem(parent)
@@ -859,6 +867,8 @@ namespace Marble
             return;
         }
 
+        bool invertColor = invertColorEnabled();
+
         bool const showCompass = d->m_map.showCompass();
         bool const showOverviewMap = d->m_map.showOverviewMap();
         bool const showOtherPlaces = d->m_map.showOtherPlaces();
@@ -874,6 +884,8 @@ namespace Marble
         d->m_map.setShowScaleBar(d->m_showScaleBar);
 
         emit mapThemeIdChanged(mapThemeId);
+
+        setInvertColorEnabled(invertColor);
     }
 
     void MarbleQuickItem::setShowAtmosphere(bool showAtmosphere)
@@ -1077,6 +1089,23 @@ namespace Marble
         return d->m_map.propertyValue(property);
     }
 
+    void MarbleQuickItem::setInvertColorEnabled(bool enabled, const QString &blendingName)
+    {
+        d->changeBlending(enabled, blendingName);
+
+        if (d->m_invertColorEnabled == enabled)
+            return;
+
+        d->m_invertColorEnabled = enabled;
+
+        emit invertColorEnabledChanged(d->m_invertColorEnabled);
+    }
+
+    bool MarbleQuickItem::invertColorEnabled()
+    {
+        return d->m_invertColorEnabled;
+    }
+
     void MarbleQuickItem::setShowRuntimeTrace(bool showRuntimeTrace)
     {
         d->m_map.setShowRuntimeTrace(showRuntimeTrace);
@@ -1270,5 +1299,35 @@ namespace Marble
             relationTypes &= ~GeoDataRelation::RouteSled;
         }
         m_map.setVisibleRelationTypes(relationTypes);
+    }
+
+    void MarbleQuickItemPrivate::changeBlending(bool enabled, const QString &blendingName)
+    {
+        GeoSceneDocument * mapTheme = m_map.model()->mapTheme();
+        if (mapTheme == nullptr) return;
+
+        GeoSceneMap * map = mapTheme->map();
+        if (map == nullptr) return;
+
+        GeoSceneTextureTileDataset * textureDataset = nullptr;
+        if (map->hasTextureLayers()) {
+            for (auto layer : map->layers()) {
+                for (auto dataset : layer->datasets()) {
+                    if (dataset->nodeType() == GeoSceneTypes::GeoSceneTextureTileType) {
+                        textureDataset = dynamic_cast<GeoSceneTextureTileDataset*>(dataset);
+                        break;
+                    }
+                }
+            }
+            if (textureDataset == nullptr) return;
+            if (enabled && textureDataset->blending().isEmpty()) {
+                textureDataset->setBlending(blendingName);
+                m_map.clearVolatileTileCache();
+            }
+            else if (!enabled && textureDataset->blending() == blendingName) {
+                textureDataset->setBlending("");
+                m_map.clearVolatileTileCache();
+            }
+        }
     }
 }
