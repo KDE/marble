@@ -3816,7 +3816,7 @@ msgid ""
 msgstr ""
 "Marble 发现了先前版本保存的数据。<br/>是否要转换这些数据以用于当前版本？"
 
-#: src/lib/marble/declarative/MarbleQuickItem.cpp:180
+#: src/lib/marble/declarative/MarbleQuickItem.cpp:186
 #: src/lib/marble/routing/RoutingManager.cpp:560
 #: src/lib/marble/routing/RoutingManager.cpp:563
 msgctxt "QObject|"

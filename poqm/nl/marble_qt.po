@@ -3866,7 +3866,7 @@ msgstr ""
 "zijn opgeslagen.<br/>Moeten deze gegevens worden aangepast, zodat die door "
 "de huidige versie kunnen worden gebruikt?"
 
-#: src/lib/marble/declarative/MarbleQuickItem.cpp:180
+#: src/lib/marble/declarative/MarbleQuickItem.cpp:186
 #: src/lib/marble/routing/RoutingManager.cpp:560
 #: src/lib/marble/routing/RoutingManager.cpp:563
 msgctxt "QObject|"

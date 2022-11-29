@@ -3853,7 +3853,7 @@ msgstr ""
 ">Bu veriler, mevcut sürüm tarafından kullanılabilecek şekilde dönüştürülsün "
 "mü?"
 
-#: src/lib/marble/declarative/MarbleQuickItem.cpp:180
+#: src/lib/marble/declarative/MarbleQuickItem.cpp:186
 #: src/lib/marble/routing/RoutingManager.cpp:560
 #: src/lib/marble/routing/RoutingManager.cpp:563
 msgctxt "QObject|"

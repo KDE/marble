@@ -3851,7 +3851,7 @@ msgstr ""
 "<br/>Ska informationen konverteras så att den kan användas av den nuvarande "
 "versionen?"
 
-#: src/lib/marble/declarative/MarbleQuickItem.cpp:180
+#: src/lib/marble/declarative/MarbleQuickItem.cpp:186
 #: src/lib/marble/routing/RoutingManager.cpp:560
 #: src/lib/marble/routing/RoutingManager.cpp:563
 msgctxt "QObject|"

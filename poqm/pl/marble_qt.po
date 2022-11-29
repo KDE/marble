@@ -3863,7 +3863,7 @@ msgstr ""
 "Marble znalazło mapy zapisane przez poprzednią wersję programu.<br/>Czy je "
 "przekształcić, żeby mogły zostać użyte przez bieżącą wersję?"
 
-#: src/lib/marble/declarative/MarbleQuickItem.cpp:180
+#: src/lib/marble/declarative/MarbleQuickItem.cpp:186
 #: src/lib/marble/routing/RoutingManager.cpp:560
 #: src/lib/marble/routing/RoutingManager.cpp:563
 msgctxt "QObject|"
