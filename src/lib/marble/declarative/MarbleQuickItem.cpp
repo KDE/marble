@@ -262,6 +262,7 @@ namespace Marble
         connect(&d->m_reverseGeocoding, SIGNAL(reverseGeocodingFinished(GeoDataCoordinates,GeoDataPlacemark)),
                 this, SLOT(handleReverseGeocoding(GeoDataCoordinates,GeoDataPlacemark)));
         connect(&d->m_map, &MarbleMap::visibleLatLonAltBoxChanged, this, &MarbleQuickItem::handleVisibleLatLonAltBoxChanged);
+        connect(d->m_map.model(), &MarbleModel::workOfflineChanged, this, &MarbleQuickItem::workOfflineChanged);
 
         setAcceptedMouseButtons(Qt::AllButtons);
         installEventFilter(&d->m_inputHandler);
@@ -1089,6 +1090,16 @@ namespace Marble
         return d->m_map.propertyValue(property);
     }
 
+    void MarbleQuickItem::setWorkOffline(bool enabled)
+    {
+        if (d->m_map.model()->workOffline() == enabled)
+            return;
+
+        else {
+            d->m_map.model()->setWorkOffline(enabled);
+        }
+    }
+
     void MarbleQuickItem::setInvertColorEnabled(bool enabled, const QString &blendingName)
     {
         d->changeBlending(enabled, blendingName);
@@ -1104,6 +1115,11 @@ namespace Marble
     bool MarbleQuickItem::invertColorEnabled()
     {
         return d->m_invertColorEnabled;
+    }
+
+    bool MarbleQuickItem::workOffline()
+    {
+        return d->m_map.model()->workOffline();
     }
 
     void MarbleQuickItem::setShowRuntimeTrace(bool showRuntimeTrace)

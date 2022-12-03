@@ -71,6 +71,7 @@ namespace Marble
         Q_PROPERTY(QQmlComponent* placemarkDelegate READ placemarkDelegate WRITE setPlacemarkDelegate NOTIFY placemarkDelegateChanged)
         Q_PROPERTY(bool hoverEnabled READ hoverEnabled WRITE setHoverEnabled NOTIFY hoverEnabledChanged)
         Q_PROPERTY(bool invertColorEnabled READ invertColorEnabled WRITE setInvertColorEnabled NOTIFY invertColorEnabledChanged)
+        Q_PROPERTY(bool workOffline READ workOffline WRITE setWorkOffline NOTIFY workOfflineChanged)
 
     public:
         explicit MarbleQuickItem(QQuickItem *parent = nullptr);
@@ -90,8 +91,6 @@ namespace Marble
         MarbleInputHandler *inputHandler();
         int zoom() const;
         int radius() const;
-
-        Q_INVOKABLE bool invertColorEnabled();
 
     public Q_SLOTS:
         void goHome();
@@ -141,7 +140,10 @@ namespace Marble
         void setPropertyEnabled(const QString &property, bool enabled);
         bool isPropertyEnabled(const QString &property) const;
 
+        void setWorkOffline(bool enabled);
+
         Q_INVOKABLE void setInvertColorEnabled(bool enabled, const QString &blending = QString("InvertColorBlending"));
+
         Q_INVOKABLE void setShowRuntimeTrace(bool showRuntimeTrace);
         Q_INVOKABLE void setShowDebugPolygons(bool showDebugPolygons);
         Q_INVOKABLE void setShowDebugPlacemarks(bool showDebugPlacemarks);
@@ -222,6 +224,9 @@ namespace Marble
         void reverseGeocoding(const QPoint &point);
 
         bool hoverEnabled() const;
+        Q_INVOKABLE bool invertColorEnabled();
+        bool workOffline();
+
 
         Q_INVOKABLE void moveUp();
         Q_INVOKABLE void moveDown();
@@ -279,6 +284,7 @@ namespace Marble
         void maximumZoomChanged(int maximumZoom);
 
         void invertColorEnabledChanged(bool enabled);
+        void workOfflineChanged();
 
     protected:
         QObject *getEventFilter() const;
