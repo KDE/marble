@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2022-11-24 17:07+0300\n"
+"PO-Revision-Date: 2022-12-04 14:39+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -2344,9 +2344,9 @@ msgid ""
 "data and open standards and respects your privacy.</p>"
 msgstr ""
 "<h3>Marble Haritaları</h3><p>Yolunu bul! Marble Haritaları, çok ayrıntılı "
-"olan OpenStreetMap'ı mobil cihazlarınıza getirir. Sezgisel bir kullanıcı "
-"arayüzü ile net, güzel bir haritaya sahiptir. Açık kaynak, tamamen özgür "
-"verilere ve açık standartlara dayanır ve gizliliğinize saygı duyar.</p>"
+"olan OpenStreetMap'ı taşınabilir aygıtlarınıza getirir. Sezgisel bir "
+"kullanıcı arayüzü ile net, güzel bir haritaya sahiptir. Açık kaynak, tamamen "
+"özgür verilere ve açık standartlara dayanır ve gizliliğinize saygı duyar.</p>"
 
 #: src/apps/marble-maps/AboutDialog.qml:64
 msgctxt "AboutDialog|"
@@ -12875,7 +12875,7 @@ msgstr "Dahili gpsd hatası (soket seçenekleri ayarlanamadı)"
 #: src/plugins/positionprovider/gpsd/GpsdConnection.cpp:79
 msgctxt "Marble::GpsdConnection|"
 msgid "No GPS device found by gpsd."
-msgstr "gpsd tarafından herhangi bir GPS cihazı bulunamadı"
+msgstr "gpsd tarafından herhangi bir GPS aygıtı bulunamadı"
 
 #: src/plugins/positionprovider/gpsd/GpsdConnection.cpp:82
 msgctxt "Marble::GpsdConnection|"
@@ -12910,7 +12910,7 @@ msgstr "Qt Konumlandırma Konumu"
 #: src/plugins/positionprovider/qtpositioning/QtPositioningPositionProviderPlugin.cpp:66
 msgctxt "Marble::QtPositioningPositionProviderPlugin|"
 msgid "Reports the GPS position of a QtPositioning compatible device."
-msgstr "Bir QtPositioning uyumlu cihazın GPS konumunu raporlar."
+msgstr "Bir QtPositioning uyumlu aygıtın GPS konumunu raporlar."
 
 #: src/plugins/positionprovider/wlocate/WlocatePositionProviderPlugin.cpp:63
 msgctxt "Marble::WlocatePositionProviderPlugin|"
