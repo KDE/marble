@@ -398,6 +398,7 @@ marble_install_po_files_as_qm(poqm)
 # Let releaseme know about this:
 # SKIP_PO_INSTALL
 
+ki18n_install(po)
 
 ####################################################
 # Install extra files
