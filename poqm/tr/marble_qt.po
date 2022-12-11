@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2022-12-04 14:39+0300\n"
+"PO-Revision-Date: 2022-12-10 18:28+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -7697,7 +7697,7 @@ msgstr ""
 #: src/lib/marble/GoToDialog.ui:93
 msgctxt "GoTo|"
 msgid "Browse"
-msgstr "Gözat"
+msgstr "Göz At"
 
 #: src/lib/marble/GoToDialog.ui:103
 msgctxt "GoTo|"
@@ -9210,7 +9210,7 @@ msgid ""
 "a><br /><i>Project: Improve Marble's OSM vector rendering support</i></p>"
 msgstr ""
 "<p>Dávid Kolozsvári <a href=\"freedawson@gmail.com\">freedawson@gmail.com</"
-"a><br /><i>Proje: Marble'ın OSM vektör oluşturma desteğini geliştirme</i></p>"
+"a><br /><i>Proje: Marble'ın OSM vektör sunum desteğini geliştirme</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:193
 msgctxt "QObject|"
@@ -9304,7 +9304,7 @@ msgid ""
 "a><br /><i>Project: OpenStreetMap Vector Rendering</i></p>"
 msgstr ""
 "<p>Ander Pijoan <a href=\"ander.pijoan@deusto.es\">ander.pijoan@deusto.es</"
-"a><br /><i>Proje: OpenStreetMap Vektör Gerçekleme</i></p>"
+"a><br /><i>Proje: OpenStreetMap Vektör Sunumu</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:216
 msgctxt "QObject|"
@@ -9332,8 +9332,7 @@ msgid ""
 "i></p>"
 msgstr ""
 "<p>Konstantin Oblaukhov <a href=\"oblaukhov.konstantin@gmail.com\">oblaukhov."
-"konstantin@gmail.com</a><br /><i>Proje: OpenStreetMap Vektör Gerçekleme</i></"
-"p>"
+"konstantin@gmail.com</a><br /><i>Proje: OpenStreetMap Vektör Sunumu</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:223
 msgctxt "QObject|"
@@ -11322,7 +11321,7 @@ msgstr "Tüm Desteklenen Dosyalar (*.png)"
 #: src/lib/marble/PlacemarkEditHeader.ui:46
 msgctxt "PlacemarkEditHeaderPrivate|"
 msgid "Browse..."
-msgstr "Gözat..."
+msgstr "Göz At..."
 
 #: src/lib/marble/PlacemarkEditHeader.ui:64
 msgctxt "PlacemarkEditHeaderPrivate|"
@@ -14003,7 +14002,7 @@ msgstr "Bu eklenti, güneş tutulmalarını görseller."
 #: src/plugins/render/eclipses/EclipsesPlugin.cpp:199
 msgctxt "Marble::EclipsesPlugin|"
 msgid "Browse Ecli&pses..."
-msgstr "&Tutulmalara Gözat..."
+msgstr "&Tutulmalara Göz At..."
 
 #: src/plugins/render/eclipses/EclipsesPlugin.cpp:348
 msgctxt "Marble::EclipsesPlugin|"
