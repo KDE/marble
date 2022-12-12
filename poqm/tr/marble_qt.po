@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2022-12-10 18:28+0300\n"
+"PO-Revision-Date: 2022-12-11 20:25+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -21,7 +21,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 22.08.3\n"
+"X-Generator: Lokalize 22.12.0\n"
 "X-Qt-Contexts: true\n"
 
 #. file data/maps/moon/clementine/clementine.dgml:5
@@ -11744,7 +11744,7 @@ msgstr "Yuvarlak kavşaktan %1 tarafından şuraya çık, %2."
 #: src/lib/marble/routing/instructions/RoutingInstruction.cpp:385
 msgctxt "QObject|"
 msgid "Continue."
-msgstr "Devam et."
+msgstr "Sürdür."
 
 #: src/lib/marble/routing/instructions/RoutingInstruction.cpp:387
 msgctxt "QObject|"
@@ -11759,7 +11759,7 @@ msgstr "Çevresinde dön."
 #: src/lib/marble/routing/instructions/RoutingInstruction.cpp:391
 msgctxt "QObject|"
 msgid "Turn sharp left."
-msgstr "Sola keskin dönüş yap."
+msgstr "Sola keskin dön."
 
 #: src/lib/marble/routing/instructions/RoutingInstruction.cpp:393
 msgctxt "QObject|"
@@ -11789,64 +11789,64 @@ msgstr "Sağa dön."
 #: src/lib/marble/routing/instructions/RoutingInstruction.cpp:403
 msgctxt "QObject|"
 msgid "Turn sharp right."
-msgstr "Sağa keskin dönüş yap."
+msgstr "Sağa keskin dön."
 
 #: src/lib/marble/routing/instructions/RoutingInstruction.cpp:405
 msgctxt "QObject|"
 msgid "Exit the roundabout."
-msgstr "Yuvarlak kavşaktan çık."
+msgstr "Dönel kavşaktan çık."
 
 #: src/lib/marble/routing/instructions/RoutingInstruction.cpp:413
 msgctxt "QObject|"
 msgid "Take the exit to the left."
-msgstr "Sola doğru çık."
+msgstr "Soldan çıkış yap."
 
 #: src/lib/marble/routing/instructions/RoutingInstruction.cpp:415
 msgctxt "QObject|"
 msgid "Take the exit to the right."
-msgstr "Sağa doğru çık."
+msgstr "Sağdan çıkış yap."
 
 #: src/lib/marble/routing/instructions/RoutingInstruction.cpp:420
 #, qt-format
 msgctxt "QObject|"
 msgid "Continue onto %1."
-msgstr "Şuraya devam et, %1."
+msgstr "%1 üzerinde sürdür."
 
 #: src/lib/marble/routing/instructions/RoutingInstruction.cpp:422
 #, qt-format
 msgctxt "QObject|"
 msgid "Merge onto %1."
-msgstr "Şurada birleş, %1."
+msgstr "%1 yoluna birleş."
 
 #: src/lib/marble/routing/instructions/RoutingInstruction.cpp:424
 #, qt-format
 msgctxt "QObject|"
 msgid "Turn around onto %1."
-msgstr "Şuranın çevresinde dön, %1."
+msgstr "%1 üzerinde geri dön."
 
 #: src/lib/marble/routing/instructions/RoutingInstruction.cpp:426
 #, qt-format
 msgctxt "QObject|"
 msgid "Turn sharp left on %1."
-msgstr "Şurada sola keskin dön, %1."
+msgstr "%1 üzerinde keskin sol yap."
 
 #: src/lib/marble/routing/instructions/RoutingInstruction.cpp:428
 #, qt-format
 msgctxt "QObject|"
 msgid "Turn left into %1."
-msgstr "Şuradan sola dön, %1."
+msgstr "%1 üzerine sola dön."
 
 #: src/lib/marble/routing/instructions/RoutingInstruction.cpp:430
 #, qt-format
 msgctxt "QObject|"
 msgid "Keep slightly left on %1."
-msgstr "Şurada hafifçe solda kal, %1."
+msgstr "%1 üzerinde hafifçe solda kal."
 
 #: src/lib/marble/routing/instructions/RoutingInstruction.cpp:432
 #, qt-format
 msgctxt "QObject|"
 msgid "Continue on %1."
-msgstr "Şurdan devam et, %1."
+msgstr "%1 üzerinde sürdür."
 
 #: src/lib/marble/routing/instructions/RoutingInstruction.cpp:434
 #, qt-format
