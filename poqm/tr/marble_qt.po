@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2022-12-10 18:28+0300\n"
+"PO-Revision-Date: 2022-12-11 20:25+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -21,7 +21,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 22.08.3\n"
+"X-Generator: Lokalize 22.12.0\n"
 "X-Qt-Contexts: true\n"
 
 #. file data/maps/moon/clementine/clementine.dgml:5
@@ -11643,7 +11643,7 @@ msgstr "Dolaşım"
 #: src/lib/marble/QtMarbleConfigDialog.cpp:123
 msgctxt "Marble::QtMarbleConfigDialog|"
 msgid "Cache and Proxy"
-msgstr "Ön bellek ve Vekil Sunucu"
+msgstr "Önbellek ve Vekil Sunucu"
 
 #: src/lib/marble/QtMarbleConfigDialog.cpp:131
 msgctxt "Marble::QtMarbleConfigDialog|"
@@ -11744,7 +11744,7 @@ msgstr "Yuvarlak kavşaktan %1 tarafından şuraya çık, %2."
 #: src/lib/marble/routing/instructions/RoutingInstruction.cpp:385
 msgctxt "QObject|"
 msgid "Continue."
-msgstr "Devam et."
+msgstr "Sürdür."
 
 #: src/lib/marble/routing/instructions/RoutingInstruction.cpp:387
 msgctxt "QObject|"
@@ -11759,7 +11759,7 @@ msgstr "Çevresinde dön."
 #: src/lib/marble/routing/instructions/RoutingInstruction.cpp:391
 msgctxt "QObject|"
 msgid "Turn sharp left."
-msgstr "Sola keskin dönüş yap."
+msgstr "Sola keskin dön."
 
 #: src/lib/marble/routing/instructions/RoutingInstruction.cpp:393
 msgctxt "QObject|"
@@ -11789,64 +11789,64 @@ msgstr "Sağa dön."
 #: src/lib/marble/routing/instructions/RoutingInstruction.cpp:403
 msgctxt "QObject|"
 msgid "Turn sharp right."
-msgstr "Sağa keskin dönüş yap."
+msgstr "Sağa keskin dön."
 
 #: src/lib/marble/routing/instructions/RoutingInstruction.cpp:405
 msgctxt "QObject|"
 msgid "Exit the roundabout."
-msgstr "Yuvarlak kavşaktan çık."
+msgstr "Dönel kavşaktan çık."
 
 #: src/lib/marble/routing/instructions/RoutingInstruction.cpp:413
 msgctxt "QObject|"
 msgid "Take the exit to the left."
-msgstr "Sola doğru çık."
+msgstr "Soldan çıkış yap."
 
 #: src/lib/marble/routing/instructions/RoutingInstruction.cpp:415
 msgctxt "QObject|"
 msgid "Take the exit to the right."
-msgstr "Sağa doğru çık."
+msgstr "Sağdan çıkış yap."
 
 #: src/lib/marble/routing/instructions/RoutingInstruction.cpp:420
 #, qt-format
 msgctxt "QObject|"
 msgid "Continue onto %1."
-msgstr "Şuraya devam et, %1."
+msgstr "%1 üzerinde sürdür."
 
 #: src/lib/marble/routing/instructions/RoutingInstruction.cpp:422
 #, qt-format
 msgctxt "QObject|"
 msgid "Merge onto %1."
-msgstr "Şurada birleş, %1."
+msgstr "%1 yoluna birleş."
 
 #: src/lib/marble/routing/instructions/RoutingInstruction.cpp:424
 #, qt-format
 msgctxt "QObject|"
 msgid "Turn around onto %1."
-msgstr "Şuranın çevresinde dön, %1."
+msgstr "%1 üzerinde geri dön."
 
 #: src/lib/marble/routing/instructions/RoutingInstruction.cpp:426
 #, qt-format
 msgctxt "QObject|"
 msgid "Turn sharp left on %1."
-msgstr "Şurada sola keskin dön, %1."
+msgstr "%1 üzerinde keskin sol yap."
 
 #: src/lib/marble/routing/instructions/RoutingInstruction.cpp:428
 #, qt-format
 msgctxt "QObject|"
 msgid "Turn left into %1."
-msgstr "Şuradan sola dön, %1."
+msgstr "%1 üzerine sola dön."
 
 #: src/lib/marble/routing/instructions/RoutingInstruction.cpp:430
 #, qt-format
 msgctxt "QObject|"
 msgid "Keep slightly left on %1."
-msgstr "Şurada hafifçe solda kal, %1."
+msgstr "%1 üzerinde hafifçe solda kal."
 
 #: src/lib/marble/routing/instructions/RoutingInstruction.cpp:432
 #, qt-format
 msgctxt "QObject|"
 msgid "Continue on %1."
-msgstr "Şurdan devam et, %1."
+msgstr "%1 üzerinde sürdür."
 
 #: src/lib/marble/routing/instructions/RoutingInstruction.cpp:434
 #, qt-format
@@ -14736,7 +14736,7 @@ msgstr "Genel"
 #: src/plugins/render/opencaching/OpenCachingCacheDialog.ui:36
 msgctxt "OpenCachingCacheDialog|"
 msgid "Cache name:"
-msgstr "Ön bellek adı:"
+msgstr "Önbellek adı:"
 
 #: src/plugins/render/opencaching/OpenCachingCacheDialog.ui:43
 #: src/plugins/render/opencaching/OpenCachingCacheDialog.ui:63
@@ -14883,7 +14883,7 @@ msgstr "Bitiş:"
 #: src/plugins/render/opencaching/OpenCachingItem.cpp:176
 msgctxt "Marble::OpenCachingItem|"
 msgid "<tr><td align=\"right\">Cache name</td>"
-msgstr "<tr><td align=\"right\">Ön bellek adı</td>"
+msgstr "<tr><td align=\"right\">Önbellek adı</td>"
 
 #: src/plugins/render/opencaching/OpenCachingItem.cpp:178
 msgctxt "Marble::OpenCachingItem|"
@@ -14908,7 +14908,7 @@ msgstr "<tr><td align=\"right\">Boyut</td><td>"
 #: src/plugins/render/opencaching/OpenCachingPlugin.cpp:22
 msgctxt "Marble::OpenCachingPlugin|"
 msgid "Cache positions by opencaching.de."
-msgstr "Opencaching.de tarafından sağlanan ön bellek konumları"
+msgstr "Opencaching.de tarafından sağlanan önbellek konumları"
 
 #: src/plugins/render/opencaching/OpenCachingPlugin.cpp:46
 msgctxt "Marble::OpenCachingPlugin|"
@@ -14923,7 +14923,7 @@ msgstr "&OpenCaching"
 #: src/plugins/render/opencaching/OpenCachingPlugin.cpp:56
 msgctxt "Marble::OpenCachingPlugin|"
 msgid "Shows caches from OpenCaching.de on the screen."
-msgstr "OpenCachin.de üzerindeki ön bellekleri ekranda göster."
+msgstr "OpenCachin.de üzerindeki önbellekleri ekranda göster."
 
 #: src/plugins/render/opendesktop/OpenDesktopConfigWidget.ui:14
 msgctxt "OpenDesktopConfigWidget|"
@@ -16876,17 +16876,17 @@ msgstr ""
 #: src/plugins/runner/cache/CachePlugin.cpp:18
 msgctxt "Marble::CachePlugin|"
 msgid "Cache File Parser"
-msgstr "Ön Bellek Dosyası Ayrıştırıcı"
+msgstr "Önbellek Dosyası Ayrıştırıcı"
 
 #: src/plugins/runner/cache/CachePlugin.cpp:33
 msgctxt "Marble::CachePlugin|"
 msgid "Create GeoDataDocument from Cache Files"
-msgstr "Ön Bellek Dosyasından GeoDataDocument Oluştur"
+msgstr "Önbellek Dosyasından GeoDataDocument Oluştur"
 
 #: src/plugins/runner/cache/CachePlugin.cpp:49
 msgctxt "Marble::CachePlugin|"
 msgid "Marble Cache Files"
-msgstr "Marble Ön bellek Dosyaları"
+msgstr "Marble Önbellek Dosyaları"
 
 #: src/plugins/runner/cyclestreets/CycleStreetsConfigWidget.ui:20
 msgctxt "CycleStreetsConfigWidget|"
