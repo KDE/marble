@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2021-10-18 00:13+0000\n"
-"PO-Revision-Date: 2022-08-21 14:16+0000\n"
+"PO-Revision-Date: 2022-12-12 11:44+0000\n"
 "Last-Translator: Sveinn í Felli <sv1@fellsnet.is>\n"
 "Language-Team: Icelandic\n"
 "Language: is\n"
@@ -73,7 +73,7 @@ msgstr "Thibaut Gridel"
 #: kdemain.cpp:107
 #, kde-format
 msgid "Geodata"
-msgstr ""
+msgstr "Hnattræn gögn"
 
 #: kdemain.cpp:109
 #, kde-format
@@ -261,12 +261,16 @@ msgid ""
 "ESA Summer of Code in Space 2012 Project: Visualization of planetary "
 "satellites"
 msgstr ""
+"Google Summer of Code 2012 verkefnið: Myndræn framsetning á tunglum "
+"plánetanna"
 
 #: kdemain.cpp:173
 #, kde-format
 msgid ""
 "ESA Summer of Code in Space 2011 Project: Visualization of Satellite Orbits"
 msgstr ""
+"Google Summer of Code 2011 verkefnið: Myndræn framsetning á brautum "
+"gervihnatta"
 
 #: kdemain.cpp:178
 #, kde-format
@@ -276,7 +280,7 @@ msgstr "Konstantin Oblaukhov"
 #: kdemain.cpp:179
 #, kde-format
 msgid "Google Summer of Code 2011 Project: OpenStreetMap Vector Rendering"
-msgstr ""
+msgstr "Google Summer of Code 2011 verkefnið: OpenStreetMap vektormyndgerð"
 
 #: kdemain.cpp:182
 #, kde-format
@@ -286,7 +290,7 @@ msgstr "Daniel Marth"
 #: kdemain.cpp:183
 #, kde-format
 msgid "Google Summer of Code 2011 Project: Marble Touch on MeeGo"
-msgstr ""
+msgstr "Google Summer of Code 2011 verkefnið: Marble Touch á MeeGo"
 
 #: kdemain.cpp:186
 #, kde-format
@@ -296,7 +300,7 @@ msgstr "Gaurav Gupta"
 #: kdemain.cpp:187
 #, kde-format
 msgid "Google Summer of Code 2010 Project: Bookmarks"
-msgstr ""
+msgstr "Google Summer of Code 2010 verkefnið: Bókamerki"
 
 #: kdemain.cpp:190
 #, kde-format
@@ -306,7 +310,7 @@ msgstr "Harshit Jain "
 #: kdemain.cpp:191
 #, kde-format
 msgid "Google Summer of Code 2010 Project: Time Support"
-msgstr ""
+msgstr "Google Summer of Code 2010 verkefnið: Tímastuðningur"
 
 #: kdemain.cpp:194
 #, kde-format
@@ -316,7 +320,7 @@ msgstr "Siddharth Srivastava"
 #: kdemain.cpp:195
 #, kde-format
 msgid "Google Summer of Code 2010 Project: Turn-by-turn Navigation"
-msgstr ""
+msgstr "Google Summer of Code 2010 verkefnið: Beygju-fyrir-beygju leiðsögn"
 
 #: kdemain.cpp:198 kdemain.cpp:218
 #, kde-format
@@ -326,17 +330,17 @@ msgstr "Andrew Manson"
 #: kdemain.cpp:199
 #, kde-format
 msgid "Google Summer of Code 2009 Project: OSM Annotation"
-msgstr ""
+msgstr "Google Summer of Code 2009 verkefnið: OSM-glósur"
 
 #: kdemain.cpp:203
 #, kde-format
 msgid "Google Summer of Code 2009 Project: Online Services"
-msgstr ""
+msgstr "Google Summer of Code 2009 verkefnið: Netþjónustur"
 
 #: kdemain.cpp:207
 #, kde-format
 msgid "Google Summer of Code 2008 Project: Vector Tiles for Marble"
-msgstr ""
+msgstr "Google Summer of Code 2008 verkefnið: Vektorflísar fyrir Marble"
 
 #: kdemain.cpp:210
 #, kde-format
@@ -349,6 +353,8 @@ msgid ""
 "Google Summer of Code 2008 Project: Panoramio / Wikipedia -photo support for "
 "Marble"
 msgstr ""
+"Google Summer of Code 2008 verkefnið: Stuðningur við Panoramio/Wikipedia-"
+"myndir fyrir Marble"
 
 #: kdemain.cpp:214
 #, kde-format
@@ -360,11 +366,13 @@ msgstr "Carlos Licea"
 msgid ""
 "Google Summer of Code 2007 Project: Equirectangular Projection (\"Flat Map\")"
 msgstr ""
+"Google Summer of Code 2007 verkefnið: Ferningslaga vörpun (\"Útflatt "
+"landakort\")"
 
 #: kdemain.cpp:219
 #, kde-format
 msgid "Google Summer of Code 2007 Project: GPS Support for Marble"
-msgstr ""
+msgstr "Google Summer of Code 2007 verkefnið: GPS-stuðningur fyrir Marble"
 
 #: kdemain.cpp:222
 #, kde-format
@@ -374,7 +382,7 @@ msgstr "Murad Tagirov"
 #: kdemain.cpp:223
 #, kde-format
 msgid "Google Summer of Code 2007 Project: KML Support for Marble"
-msgstr ""
+msgstr "Google Summer of Code 2007 verkefnið: KML-stuðningur fyrir Marble"
 
 #: kdemain.cpp:228
 #, kde-format
@@ -538,9 +546,9 @@ msgid "Nuno Pinheiro"
 msgstr "Nuno Pinheiro"
 
 #: kdemain.cpp:285 kdemain.cpp:287
-#, fuzzy, kde-format
+#, kde-format
 msgid "Artwork"
-msgstr "Listaverk"
+msgstr "Myndefni"
 
 #: kdemain.cpp:290
 #, kde-format
@@ -684,7 +692,7 @@ msgstr ""
 #: kdemain.cpp:353
 #, kde-format
 msgid "Use map <id> (e.g. \"earth/openstreetmap/openstreetmap.dgml\")"
-msgstr ""
+msgstr "Nota landakort <id> (t.d. \"earth/openstreetmap/openstreetmap.dgml\")"
 
 #: kdemain.cpp:355
 #, kde-format
@@ -695,25 +703,25 @@ msgstr ""
 #: marble.kcfg:58
 #, kde-format
 msgid "The date and time of marble clock"
-msgstr ""
+msgstr "Dagsetning og tími Marble-klukkunnar"
 
 #. i18n: ectx: label, entry, group (Time)
 #: marble.kcfg:61
 #, kde-format
 msgid "The speed of marble clock"
-msgstr ""
+msgstr "Hraði Marble-klukkunnar"
 
 #. i18n: ectx: label, entry, group (View)
 #: marble.kcfg:107
 #, kde-format
 msgid "The unit chosen to measure distances."
-msgstr ""
+msgstr "Einingin sem valin er til að mæla vegalengdir."
 
 #. i18n: ectx: label, entry, group (View)
 #: marble.kcfg:115
 #, kde-format
 msgid "The unit chosen to measure angles."
-msgstr ""
+msgstr "Einingin sem valin er til að mæla horn."
 
 #. i18n: ectx: label, entry, group (View)
 #: marble.kcfg:124
@@ -755,7 +763,7 @@ msgstr ""
 #: marble.kcfg:187
 #, kde-format
 msgid "The location shown on application startup."
-msgstr ""
+msgstr "Staðsetningin sem birtist við ræsingu forrits."
 
 #. i18n: ectx: label, entry, group (Navigation)
 #: marble.kcfg:201
@@ -1191,7 +1199,7 @@ msgstr "S&koða"
 #: marble_part.rc:36
 #, kde-format
 msgid "&Info Boxes"
-msgstr ""
+msgstr "Upplýs&ingareitir"
 
 #. i18n: ectx: Menu (onlineservices)
 #: marble_part.rc:42
