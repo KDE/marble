@@ -256,7 +256,6 @@ namespace Marble
         connect(this, &MarbleQuickItem::widthChanged, this, &MarbleQuickItem::resizeMap);
         connect(this, &MarbleQuickItem::heightChanged, this, &MarbleQuickItem::resizeMap);
         connect(&d->m_map, &MarbleMap::visibleLatLonAltBoxChanged, this, &MarbleQuickItem::updatePositionVisibility);
-        connect(&d->m_map, &MarbleMap::visibleLatLonAltBoxChanged, this, &MarbleQuickItem::visibleLatLonAltBoxChanged);
         connect(&d->m_map, &MarbleMap::radiusChanged, this, &MarbleQuickItem::radiusChanged);
         connect(&d->m_map, &MarbleMap::radiusChanged, this, &MarbleQuickItem::zoomChanged);
         connect(&d->m_reverseGeocoding, SIGNAL(reverseGeocodingFinished(GeoDataCoordinates,GeoDataPlacemark)),
@@ -355,11 +354,13 @@ namespace Marble
             d->m_heading = d->m_map.heading();
             emit headingChanged(d->m_heading);
         }
+        emit visibleLatLonAltBoxChanged();
+        emit geoItemUpdateRequested();
     }
 
     void MarbleQuickItem::paint(QPainter *painter)
     {   //TODO - much to be done here still, i.e paint !enabled version
-        QPaintDevice *paintDevice = painter->device();
+        QPaintDevice * paintDevice = painter->device();
         QRect rect = contentsBoundingRect().toRect();
 
         painter->end();

@@ -28,10 +28,13 @@ namespace Marble
 
     bool GeoItem::moveToScreenCoordinates(qreal x, qreal y)
     {
-        return m_map->screenCoordinatesToGeoDataCoordinates(QPoint(x,y), m_coordinate);
-        updateScreenPosition();
-        emit longitudeChanged();
-        emit latitudeChanged();
+        bool valid = m_map->screenCoordinatesToGeoDataCoordinates(QPoint(x,y), m_coordinate);
+        if (valid) {
+            updateScreenPosition();
+            emit longitudeChanged();
+            emit latitudeChanged();
+        }
+        return valid;
     }
 
     qreal GeoItem::longitude() const
@@ -41,9 +44,11 @@ namespace Marble
 
     void GeoItem::setLongitude( qreal lon )
     {
-        m_coordinate.setLongitude( lon, GeoDataCoordinates::Degree );
-        updateScreenPosition();
-        emit longitudeChanged();
+        if (m_coordinate.longitude(GeoDataCoordinates::Degree) != lon) {
+            m_coordinate.setLongitude( lon, GeoDataCoordinates::Degree );
+            updateScreenPosition();
+            emit longitudeChanged();
+        }
     }
 
     qreal GeoItem::latitude() const
@@ -53,9 +58,11 @@ namespace Marble
 
     void GeoItem::setLatitude( qreal lat )
     {
-        m_coordinate.setLatitude( lat, GeoDataCoordinates::Degree );
-        updateScreenPosition();
-        emit latitudeChanged();
+        if (m_coordinate.latitude(GeoDataCoordinates::Degree) != lat) {
+            m_coordinate.setLatitude( lat, GeoDataCoordinates::Degree );
+            updateScreenPosition();
+            emit latitudeChanged();
+        }
     }
 
     qreal GeoItem::altitude() const
@@ -65,9 +72,11 @@ namespace Marble
 
     void GeoItem::setAltitude( qreal alt )
     {
-        m_coordinate.setAltitude( alt );
-        updateScreenPosition();
-        emit altitudeChanged();
+        if (m_coordinate.altitude() != alt) {
+            m_coordinate.setAltitude( alt );
+            updateScreenPosition();
+            emit altitudeChanged();
+        }
     }
 
     GeoDataCoordinates GeoItem::coordinates() const
@@ -77,8 +86,10 @@ namespace Marble
 
     void GeoItem::setCoordinates( const GeoDataCoordinates &coordinates )
     {
-        m_coordinate = coordinates;
-        updateScreenPosition();
+        if (m_coordinate != coordinates) {
+            m_coordinate = coordinates;
+            updateScreenPosition();
+        }
     }
 
     MarbleQuickItem *GeoItem::map() const
@@ -93,7 +104,7 @@ namespace Marble
 
         m_map = map;
 
-        connect(m_map, &MarbleQuickItem::visibleLatLonAltBoxChanged, this, [=]() { updateScreenPosition(); });
+        connect(m_map, &MarbleQuickItem::geoItemUpdateRequested, this, &GeoItem::updateScreenPosition);
         emit mapChanged(m_map);
     }
 
@@ -103,10 +114,12 @@ namespace Marble
             bool observable = !relativePoint.isNull();
             if (observable != m_observable) {
                 m_observable = observable;
-                QQuickItem::setVisible(m_visible && m_observable);
                 emit observableChanged(m_observable);
             }
-            else {
+            if (!m_coordinate.isValid()) {
+                setPosition(QPointF(-childrenRect().width(), -childrenRect().height()));
+            }
+            else if (observable) {
                 setPosition(QPointF(0.0,0.0));
                 QPointF screenPoint = mapFromItem(m_map, relativePoint);
                 screenPoint -= QPointF(width()/2.0, height()/2.0);
@@ -114,6 +127,7 @@ namespace Marble
                 emit readonlyXChanged(readonlyX()) ;
                 emit readonlyYChanged(readonlyY()) ;
             }
+            QQuickItem::setVisible(m_visible && m_observable);
         }
     }
 

@@ -286,6 +286,8 @@ namespace Marble
         void invertColorEnabledChanged(bool enabled);
         void workOfflineChanged();
 
+        void geoItemUpdateRequested();
+
     protected:
         QObject *getEventFilter() const;
         void pinch(const QPointF& center, qreal scale, Qt::GestureState state);
