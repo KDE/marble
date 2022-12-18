@@ -106,7 +106,8 @@ void FileStorageWatcherThread::getCurrentCacheSize()
              ((suffix == QLatin1String("jpg") ||
                suffix == QLatin1String("png") ||
                suffix == QLatin1String("gif") ||
-               suffix == QLatin1String("svg")))) {
+               suffix == QLatin1String("svg") ||
+               suffix == QLatin1String("o5m")))) {
             dataSize += file.size();
             m_filesCache.insert(file.lastModified(), file.absoluteFilePath());
         }

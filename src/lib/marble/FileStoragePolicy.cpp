@@ -80,8 +80,13 @@ bool FileStoragePolicy::updateFile( const QString &fileName, const QByteArray &d
 
 void FileStoragePolicy::clearCache()
 {
-    if ( m_dataDirectory.isEmpty() || !m_dataDirectory.endsWith(QLatin1String( "data" )) )
+    mDebug() << Q_FUNC_INFO;
+    if ( m_dataDirectory.isEmpty()
+    || !(m_dataDirectory.endsWith(QLatin1String( "data" ))   // on Windows
+    ||   m_dataDirectory.endsWith(QLatin1String( "marble" )) // on all other OSes
+    ))
     {
+        mDebug() << "Data Directory:" << m_dataDirectory;
         mDebug() << "Error: Refusing to erase files under unknown conditions for safety reasons!";
         return;
     }
@@ -119,6 +124,7 @@ void FileStoragePolicy::clearCache()
                       || lowerCase.endsWith( QLatin1String( ".png" ) )
                       || lowerCase.endsWith( QLatin1String( ".gif" ) )
                       || lowerCase.endsWith( QLatin1String( ".svg" ) )
+                      || lowerCase.endsWith( QLatin1String( ".o5m" ) )
                     )
                     {
                         // We cannot emit clear, because we don't make a full clear
