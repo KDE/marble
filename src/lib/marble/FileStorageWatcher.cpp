@@ -38,7 +38,6 @@ FileStorageWatcherThread::FileStorageWatcherThread( const QString &dataDirectory
     connect( this, SIGNAL(variableChanged()),
 	     this, SLOT(ensureCacheSize()),
 	     Qt::QueuedConnection );
-    emit variableChanged();
 }
 
 FileStorageWatcherThread::~FileStorageWatcherThread()
@@ -54,7 +53,7 @@ void FileStorageWatcherThread::setCacheLimit( quint64 bytes )
 {
     m_limitMutex.lock();
     m_cacheLimit = bytes;
-    m_cacheSoftLimit = bytes / 100 * ( 100 - softLimitPercent );
+    m_cacheSoftLimit = bytes * ( 100 - softLimitPercent ) / 100;
     m_limitMutex.unlock();
     emit variableChanged();
 }
@@ -95,21 +94,25 @@ void FileStorageWatcherThread::getCurrentCacheSize()
         it.next();
         QFileInfo file = it.fileInfo();
         // We try to be very careful and just delete images
-        // FIXME, when vectortiling I suppose also vector tiles will have
-        // to be deleted
         QString suffix = file.suffix().toLower();
         const QStringList path = file.path().split(QLatin1Char('/'));
 
         // planet/theme/tilelevel should be deeper than 4
-        if ( ( path.size() > basePathDepth + 3 ) &&
-             ( path[basePathDepth + 2].toInt() >= maxBaseTileLevel ) &&
-             ((suffix == QLatin1String("jpg") ||
+        if ( path.size() > basePathDepth + 3 ) {
+            bool ok = false;
+            int tileLevel = path[basePathDepth + 2].toInt(&ok);
+            // internal theme layer case
+            // (e.g. "earth/openseamap/seamarks/4")
+            if (!ok) tileLevel = path[basePathDepth + 3].toInt(&ok);
+            if ((ok && tileLevel >= maxBaseTileLevel ) &&
+              (suffix == QLatin1String("jpg") ||
                suffix == QLatin1String("png") ||
                suffix == QLatin1String("gif") ||
                suffix == QLatin1String("svg") ||
-               suffix == QLatin1String("o5m")))) {
-            dataSize += file.size();
-            m_filesCache.insert(file.lastModified(), file.absoluteFilePath());
+               suffix == QLatin1String("o5m"))) {
+                dataSize += file.size();
+                m_filesCache.insert(file.lastModified(), file.absoluteFilePath());
+            }
         }
     }
     m_currentCacheSize = dataSize;
@@ -120,9 +123,9 @@ void FileStorageWatcherThread::ensureCacheSize()
 //     mDebug() << "Size of tile cache: " << m_currentCacheSize;
     // We start deleting files if m_currentCacheSize is larger than
     // the hard cache limit. Then we delete files until our cache size
-    // is smaller than the cache limit.
+    // is smaller than the cache (soft) limit.
     // m_cacheLimit = 0 means no limit.
-    if(    (    ( m_currentCacheSize > m_cacheLimit )
+    if( ( ( m_currentCacheSize > m_cacheLimit )
 	     || ( m_deleting && ( m_currentCacheSize > m_cacheSoftLimit ) ) )
 	&& ( m_cacheLimit != 0 )
 	&& ( m_cacheSoftLimit != 0 )
@@ -134,34 +137,40 @@ void FileStorageWatcherThread::ensureCacheSize()
         // We have not reached our soft limit, yet.
         m_deleting = true;
 
+        // We iterate over the m_filesCache which is sorted by lastModified
+        // and remove a chunk of the oldest 20 (maxFilesDelete) files.
         QMultiMap<QDateTime, QString>::iterator it= m_filesCache.begin();
         while ( it != m_filesCache.end() &&
                 keepDeleting() ) {
             QString filePath = it.value();
             QFileInfo info( filePath );
 
-            m_filesDeleted++;
+            ++m_filesDeleted;
             m_currentCacheSize -= info.size();
             it = m_filesCache.erase(it);
-            QFile::remove( filePath );
+            bool success = QFile::remove( filePath );
+            if (!success) {
+                mDebug() << "Failed to remove:" << filePath;
+            }
         }
-
-        // We have deleted enough files.
-        // Perhaps there are changes.
-        if( m_filesDeleted > maxFilesDelete ) {
+        // There might be more chunks left for deletion which we
+        // process with a delay to account for for load-reduction.
+        if( m_filesDeleted >= maxFilesDelete ) {
             QTimer::singleShot( 1000, this, SLOT(ensureCacheSize()) );
             return;
         }
         else {
-            // We haven't stopped because of too many files
+            // A partial chunk is reached at the end of m_filesCache.
+            // At this point deletion is done.
             m_deleting = false;
         }
 
+        // If the current Cache Size is still larger than the cacheSoftLimit
+        // then our requested cacheSoftLimit is unreachable.
         if( m_currentCacheSize > m_cacheSoftLimit ) {
-            mDebug() << "FileStorageWatcher: Could not set cache size.";
-            // Set the cache limit to a higher value, so we won't start
-            // trying to delete something next time.  Softlimit is now exactly
-            // on the current cache size.
+            mDebug() << "FileStorageWatcher: Requested Cache Limit could not be reached!";
+            mDebug() << "Increasing Cache Limit to prevent further futile attempts.";
+            // Softlimit is now exactly on the current cache size.
             setCacheLimit( m_currentCacheSize / ( 100 - softLimitPercent ) * 100 );
         }
     }
@@ -170,7 +179,7 @@ void FileStorageWatcherThread::ensureCacheSize()
 bool FileStorageWatcherThread::keepDeleting() const
 {
     return ( ( m_currentCacheSize > m_cacheSoftLimit ) &&
-	     ( m_filesDeleted <= maxFilesDelete ) &&
+         ( m_filesDeleted < maxFilesDelete ) &&
               !m_willQuit );
 }
 // End of methods of our Thread

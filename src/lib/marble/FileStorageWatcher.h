@@ -14,7 +14,7 @@
 namespace Marble
 {
     
-// Lives inside the new Thread
+// Worker object that lives inside the new Thread
 class FileStorageWatcherThread : public QObject
 {
     Q_OBJECT
@@ -34,8 +34,8 @@ class FileStorageWatcherThread : public QObject
 	
     public Q_SLOTS:
 	/**
-         * Sets the limit of the cache in @p bytes.
-         */
+     * Sets the limit of the cache in @p bytes.
+    */
 	void setCacheLimit( quint64 bytes );
 	
 	/**
