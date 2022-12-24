@@ -11341,7 +11341,7 @@ msgid ""
 "size:9pt; font-style:italic;\"></p>\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
 "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
-"size:9pt;\">https://edu.kde.org/marble</span></p></body></html>"
+"size:9pt;\">https://marble.kde.org/</span></p></body></html>"
 msgstr ""
 
 #: src/lib/marble/MarbleAboutDialog.ui:116
