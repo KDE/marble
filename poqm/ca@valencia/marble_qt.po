@@ -13302,7 +13302,7 @@ msgstr "Especifiqueu un fitxer d'imatge."
 #: src/plugins/render/annotate/EditGroundOverlayDialog.cpp:115
 msgctxt "Marble::EditGroundOverlayDialog|"
 msgid "Invalid image path"
-msgstr "El camí a les imatges no és vàlid"
+msgstr "El camí cap a les imatges no és vàlid"
 
 #: src/plugins/render/annotate/EditGroundOverlayDialog.cpp:116
 msgctxt "Marble::EditGroundOverlayDialog|"
