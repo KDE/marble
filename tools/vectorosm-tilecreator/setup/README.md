@@ -137,7 +137,7 @@ no built-in database compaction command. We therefore have to rebuild it from sc
 out of disk space.
 
 ```
-ssh mapsadmin@telemid.kde.org
+ssh mapsadmin@rhei.kde.org
 
 # Make sure to start the lengthy process in a screen session independent of the SSH session
 screen
