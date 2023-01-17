@@ -2599,7 +2599,7 @@ msgstr "Busca"
 #: src/apps/marble-maps/SettingsDialog.qml:48
 msgctxt "SettingsDialog|"
 msgid "Network Settings"
-msgstr "Configuració de la xarxa"
+msgstr "Configureu la xarxa"
 
 #: src/apps/marble-maps/SettingsDialog.qml:53
 msgctxt "SettingsDialog|"
@@ -3418,7 +3418,7 @@ msgstr ""
 #: src/lib/marble/BookmarkManagerDialog.cpp:421
 msgctxt "Marble::BookmarkManagerDialog|"
 msgid "Bookmark Export"
-msgstr "Exportació de les adreces d'interés"
+msgstr "Exporteu les adreces d'interés"
 
 #: src/lib/marble/BookmarkManagerDialog.cpp:428
 msgctxt "Marble::BookmarkManagerDialog|"
@@ -3439,7 +3439,7 @@ msgstr "El fitxer %1 no es pot obrir com a fitxer KML."
 #: src/lib/marble/BookmarkManagerDialog.cpp:437
 msgctxt "Marble::BookmarkManagerDialog|"
 msgid "Bookmark Import"
-msgstr "Importació de les adreces d'interés"
+msgstr "Importeu les adreces d'interés"
 
 #: src/lib/marble/BookmarkManagerDialog.cpp:471
 msgctxt "BookmarkManagerDialogPrivate|"
@@ -12065,7 +12065,7 @@ msgstr "Serveis d'itinerari actius"
 #: src/lib/marble/routing/RoutingProfileSettingsDialog.ui:65
 msgctxt "RoutingProfileSettingsDialog|"
 msgid "Service Settings"
-msgstr "Configuració del servei"
+msgstr "Configureu el servei"
 
 #: src/lib/marble/routing/RoutingProfileSettingsDialog.ui:117
 msgctxt "RoutingProfileSettingsDialog|"
@@ -13906,7 +13906,7 @@ msgstr "&Ves a l'eclipsi seleccionat"
 #: src/plugins/render/eclipses/EclipsesConfigDialog.ui:17
 msgctxt "EclipsesConfigDialog|"
 msgid "Eclipses Configuration"
-msgstr "Configuració dels eclipsis"
+msgstr "Configureu els eclipsis"
 
 #: src/plugins/render/eclipses/EclipsesConfigDialog.ui:30
 msgctxt "EclipsesConfigDialog|"
@@ -14578,7 +14578,7 @@ msgstr "&Relació d'escala"
 #: src/plugins/render/measure/MeasureConfigDialog.ui:14
 msgctxt "MeasureConfigDialog|"
 msgid "Measure Tool Configuration"
-msgstr "Configuració de l'eina de mesura"
+msgstr "Configureu l'eina de mesura"
 
 #: src/plugins/render/measure/MeasureConfigDialog.ui:20
 msgctxt "MeasureConfigDialog|"
@@ -14995,7 +14995,7 @@ msgstr "Mostra el cau d'OpenCaching.d'a la pantalla."
 #: src/plugins/render/opendesktop/OpenDesktopConfigWidget.ui:14
 msgctxt "OpenDesktopConfigWidget|"
 msgid "OpenDesktop plugin configuration"
-msgstr "Configuració del connector OpenDesktop"
+msgstr "Configureu el connector OpenDesktop"
 
 #: src/plugins/render/opendesktop/OpenDesktopConfigWidget.ui:22
 msgctxt "OpenDesktopConfigWidget|"
@@ -15316,7 +15316,7 @@ msgstr "Mostra un diagrama de sectors indicant del progrés de la baixada"
 #: src/plugins/render/routing/RoutingConfigDialog.ui:14
 msgctxt "RoutingConfigDialog|"
 msgid "Routing Configuration"
-msgstr "Configuració dels itineraris"
+msgstr "Configureu els itineraris"
 
 #: src/plugins/render/routing/RoutingConfigDialog.ui:20
 msgctxt "RoutingConfigDialog|"
@@ -15573,7 +15573,7 @@ msgstr "Segur que voleu suprimir la font de dades seleccionada?"
 #: src/plugins/render/satellites/SatellitesConfigDialog.ui:14
 msgctxt "SatellitesConfigDialog|"
 msgid "Satellites Configuration"
-msgstr "Configuració dels satèl·lits"
+msgstr "Configureu els satèl·lits"
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.ui:27
 msgctxt "SatellitesConfigDialog|"
