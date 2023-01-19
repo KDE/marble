@@ -7,13 +7,13 @@
 # H. İbrahim Güngör <ibrahim@pardus.org.tr>, 2011.
 # Hasan Kiran <sunder67@hotmail.com>, 2013.
 # Volkan Gezer <volkangezer@gmail.com>, 2013, 2014, 2017.
-# Emir SARI <emir_sari@icloud.com>, 2022.
+# Emir SARI <emir_sari@icloud.com>, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2022-12-26 21:51+0300\n"
+"PO-Revision-Date: 2023-01-18 22:39+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -21,7 +21,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 22.12.0\n"
+"X-Generator: Lokalize 22.12.1\n"
 "X-Qt-Contexts: true\n"
 
 #. file data/maps/moon/clementine/clementine.dgml:5
@@ -2687,7 +2687,7 @@ msgstr "&Bölge İndir..."
 msgctxt "Marble::MainWindow|"
 msgid "Download a map region in different zoom levels for offline usage"
 msgstr ""
-"Çevrim içi kullanım için, farklı yakılaştırma seviyelerinde bir bölge "
+"Çevrim içi kullanım için, farklı yakılaştırma düzeylerinde bir bölge "
 "haritası indir"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:283
@@ -3821,7 +3821,7 @@ msgstr "Gerektiğinde"
 #: src/lib/marble/CurrentLocationWidget.ui:186
 msgctxt "CurrentLocationWidget|Auto Zoom to appropriate zoom level"
 msgid "Auto Zoom to appropriate zoom level"
-msgstr "Uygun seviyeye otomatik yakınlaştırma"
+msgstr "Uygun düzeye otomatik yakınlaştırma"
 
 #: src/lib/marble/CurrentLocationWidget.ui:189
 msgctxt "CurrentLocationWidget|"
@@ -4019,7 +4019,7 @@ msgstr "Organik yiyecekler satılmaz"
 #: src/lib/marble/declarative/Placemark.cpp:158
 msgctxt "Marble::Placemark|A deli that only sells organic food"
 msgid "Only sells organic food"
-msgstr "Sadece organik yiyecekler satılır"
+msgstr "Yalnızca organik yiyecekler satılır"
 
 #: src/lib/marble/declarative/Placemark.cpp:160
 msgctxt "Marble::Placemark|A deli that sells gluten free food"
@@ -4034,7 +4034,7 @@ msgstr "Glutensiz yiyecekler satılmaz"
 #: src/lib/marble/declarative/Placemark.cpp:162
 msgctxt "Marble::Placemark|A deli that only sells gluten free food"
 msgid "Only sells gluten free food"
-msgstr "Sadece glutensiz yiyecekler satılır"
+msgstr "Yalnızca glutensiz yiyecekler satılır"
 
 #: src/lib/marble/declarative/Placemark.cpp:164
 msgctxt "Marble::Placemark|A deli that sells lactose free food"
@@ -4049,7 +4049,7 @@ msgstr "Laktoz içermeyen yiyecekler satılmaz"
 #: src/lib/marble/declarative/Placemark.cpp:166
 msgctxt "Marble::Placemark|A deli that only sells lactose free food"
 msgid "Only sells lactose free food"
-msgstr "Sadece laktoz içermeyen yiyecekler satılır"
+msgstr "Yalnızca laktoz içermeyen yiyecekler satılır"
 
 #: src/lib/marble/declarative/Placemark.cpp:168
 msgctxt "Marble::Placemark|A tobacco shop that also sells lottery tickets"
@@ -4837,7 +4837,7 @@ msgstr "Bisiklet taşıma mümkün"
 #: src/lib/marble/declarative/Placemark.cpp:378
 msgctxt "Marble::Placemark|Bicycles can only be transported in summer"
 msgid "Bicycle transportation only in summer"
-msgstr "Bisiklet taşıma sadece yazın mümkün"
+msgstr "Bisiklet taşıma yalnızca yazın mümkün"
 
 #: src/lib/marble/declarative/Placemark.cpp:379
 msgctxt "Marble::Placemark|Bicyles cannot be transported"
@@ -5484,7 +5484,7 @@ msgstr " m"
 #: src/lib/marble/ElevationWidget.ui:36
 msgctxt "ElevationWidget|"
 msgid "above sea level"
-msgstr "deniz seviyesinden yukarıda"
+msgstr "deniz düzeyinden yukarıda"
 
 #: src/lib/marble/ExternalEditor.ui:14
 msgctxt "ExternalEditor|"
@@ -7339,57 +7339,57 @@ msgstr "Kayakla Atlama"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:638
 msgctxt "GeoDataPlacemark|"
 msgid "Admin Boundary (Level 1)"
-msgstr "İdari Sınır (Seviye 1)"
+msgstr "İdari Sınır (1. Düzey)"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:639
 msgctxt "GeoDataPlacemark|"
 msgid "Admin Boundary (Level 2)"
-msgstr "İdari Sınır (Seviye 2)"
+msgstr "İdari Sınır (2. Düzey)"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:640
 msgctxt "GeoDataPlacemark|"
 msgid "Admin Boundary (Level 3)"
-msgstr "İdari Sınır (Seviye 3)"
+msgstr "İdari Sınır (3. Düzey)"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:641
 msgctxt "GeoDataPlacemark|"
 msgid "Admin Boundary (Level 4)"
-msgstr "İdari Sınır (Seviye 4)"
+msgstr "İdari Sınır (4. Düzey)"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:642
 msgctxt "GeoDataPlacemark|"
 msgid "Admin Boundary (Level 5)"
-msgstr "İdari Sınır (Seviye 5)"
+msgstr "İdari Sınır (5. Düzey)"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:643
 msgctxt "GeoDataPlacemark|"
 msgid "Admin Boundary (Level 6)"
-msgstr "İdari Sınır (Seviye 6)"
+msgstr "İdari Sınır (6. Düzey)"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:644
 msgctxt "GeoDataPlacemark|"
 msgid "Admin Boundary (Level 7)"
-msgstr "İdari Sınır (Seviye 7)"
+msgstr "İdari Sınır (7. Düzey)"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:645
 msgctxt "GeoDataPlacemark|"
 msgid "Admin Boundary (Level 8)"
-msgstr "İdari Sınır (Seviye 8)"
+msgstr "İdari Sınır (8. Düzey)"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:646
 msgctxt "GeoDataPlacemark|"
 msgid "Admin Boundary (Level 9)"
-msgstr "İdari Sınır (Seviye 9)"
+msgstr "İdari Sınır (9. Düzey)"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:647
 msgctxt "GeoDataPlacemark|"
 msgid "Admin Boundary (Level 10)"
-msgstr "İdari Sınır (Seviye 10)"
+msgstr "İdari Sınır (10. Düzey)"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:648
 msgctxt "GeoDataPlacemark|"
 msgid "Admin Boundary (Level 11)"
-msgstr "İdari Sınır (Seviye 11)"
+msgstr "İdari Sınır (11. Düzey)"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:649
 msgctxt "GeoDataPlacemark|"
@@ -9189,8 +9189,8 @@ msgid ""
 "vector map</i></p>"
 msgstr ""
 "<p>Dávid Kolozsvári <a href=\"freedawson@gmail.com\">freedawson@gmail.com</"
-"a><br /><i>Proje: Marble OSM vektör haritasındaki her döşeme seviyesinde "
-"akıcı grafik sağlama</i></p>"
+"a><br /><i>Proje: Marble OSM vektör haritasındaki her döşeme düzeyinde akıcı "
+"grafik sağlama</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:188
 msgctxt "QObject|"
@@ -9201,7 +9201,7 @@ msgid ""
 msgstr ""
 "<p>Akshat Tandon <a href=\"akshat.tandon@research.iiit.ac.in\">akshat."
 "tandon@research.iiit.ac.in</a><br /><i>Proje: Marble OSM Vektör Haritası'nda "
-"orta ve düşük döşeme seviyeleri için destek</i></p>"
+"orta ve düşük döşeme düzeyleri için destek</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:191
 msgctxt "QObject|"
@@ -10380,7 +10380,7 @@ msgstr "Görünümü Sıfırla"
 msgctxt "MarbleNavigator|"
 msgid "Click this button to restore the original zoom level and view angle."
 msgstr ""
-"Öntanımlı yakınlaştırma seviyesine ve görüş açısına dönmek için düğmeyi "
+"Öntanımlı yakınlaştırma düzeyine ve görüş açısına dönmek için düğmeyi "
 "tıklayın."
 
 #: src/lib/marble/MarbleNavigator.ui:109
@@ -10411,7 +10411,7 @@ msgstr "Küre'nin eksenini kullanıcıdan uzaklaşacak şekilde eğer."
 #: src/lib/marble/MarbleNavigator.ui:151
 msgctxt "MarbleNavigator|"
 msgid "Zoom In"
-msgstr "Büyüt"
+msgstr "Yakınlaştır"
 
 #: src/lib/marble/MarbleNavigator.ui:154
 msgctxt "MarbleNavigator|"
@@ -12420,8 +12420,8 @@ msgid ""
 "Marble needs to create this map. This only needs to be done once and may "
 "take a few seconds."
 msgstr ""
-"Marble'ın bu haritayı yaratması gerekiyor. Bu işlem sadece bir defa "
-"gerçekleştirilir ve sadece bir kaç saniye sürer."
+"Marble'ın bu haritayı yaratması gerekiyor. Bu işlem yalnızca bir defa "
+"gerçekleştirilir ve yalnızca bir kaç saniye sürer."
 
 #: src/lib/marble/TileLevelRangeWidget.ui:17
 msgctxt "TileLevelRangeWidget|"
@@ -12436,7 +12436,7 @@ msgstr "&Döşeme düzeyi aralığı:"
 #: src/lib/marble/TileLevelRangeWidget.ui:35
 msgctxt "TileLevelRangeWidget|"
 msgid "Minimum Tile Level"
-msgstr "Asgari Döşeme Seviyesi"
+msgstr "Asgari Döşeme Düzeyi"
 
 #: src/lib/marble/TileLevelRangeWidget.ui:51
 msgctxt "TileLevelRangeWidget|"
@@ -12446,7 +12446,7 @@ msgstr "bitiş"
 #: src/lib/marble/TileLevelRangeWidget.ui:58
 msgctxt "TileLevelRangeWidget|"
 msgid "Maximum Tile Level"
-msgstr "Azami Döşeme Seviyesi"
+msgstr "Azami Döşeme Düzeyi"
 
 #: src/lib/marble/TimeControlWidget.ui:14
 msgctxt "TimeControlWidget|"
@@ -15331,7 +15331,7 @@ msgstr "GPS Aç/Kapat"
 #: src/plugins/render/routing/RoutingPlugin.ui:187
 msgctxt "RoutingPlugin|"
 msgid "Zoom Out"
-msgstr "Küçült"
+msgstr "Uzaklaştır"
 
 #: src/plugins/render/routing/RoutingPlugin.ui:190
 msgctxt "RoutingPlugin|"
@@ -15341,7 +15341,7 @@ msgstr "-"
 #: src/plugins/render/routing/RoutingPlugin.ui:219
 msgctxt "RoutingPlugin|"
 msgid "Zoom In"
-msgstr "Büyüt"
+msgstr "Yakınlaştır"
 
 #: src/plugins/render/routing/RoutingPlugin.ui:222
 msgctxt "RoutingPlugin|"
@@ -16427,7 +16427,7 @@ msgstr "Çeşitli"
 #: src/plugins/render/weather/WeatherConfigWidget.ui:208
 msgctxt "WeatherConfigWidget|"
 msgid "Show only favorite items"
-msgstr "Sadece favori ögeleri göster"
+msgstr "Yalnızca favori ögeleri göster"
 
 #: src/plugins/render/weather/WeatherConfigWidget.ui:217
 msgctxt "WeatherConfigWidget|"
