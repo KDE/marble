@@ -86,6 +86,8 @@ public:
     // Q_ASSERT( !(outline && color == outlineColor && brushStyle == Qt::SolidPattern) );
     void initializeDefaultStyles();
 
+    static QColor effectColor(const QColor& color);
+
     static QString createPaintLayerItem(const QString &itemType, GeoDataPlacemark::GeoDataVisualCategory visualCategory, const QString &subType = QString());
 
     static void initializeOsmVisualCategories();
@@ -110,12 +112,14 @@ public:
     static int s_defaultMinZoomLevels[GeoDataPlacemark::LastIndex];
     static bool s_defaultMinZoomLevelsInitialized;
     static QHash<GeoDataPlacemark::GeoDataVisualCategory, qint64> s_popularities;
+    static StyleEffect s_styleEffect;
 };
 
 QHash<StyleBuilder::OsmTag, GeoDataPlacemark::GeoDataVisualCategory> StyleBuilder::Private::s_visualCategories;
 int StyleBuilder::Private::s_defaultMinZoomLevels[GeoDataPlacemark::LastIndex];
 bool StyleBuilder::Private::s_defaultMinZoomLevelsInitialized = false;
 QHash<GeoDataPlacemark::GeoDataVisualCategory, qint64> StyleBuilder::Private::s_popularities;
+StyleEffect StyleBuilder::Private::s_styleEffect = NoEffect;
 
 StyleBuilder::Private::Private() :
     m_maximumZoomLevel(15),
@@ -149,13 +153,13 @@ StyleBuilder::Private::Private() :
 GeoDataStyle::Ptr StyleBuilder::Private::createPOIStyle(const QFont &font, const QString &path,
         const QColor &textColor, const QColor &color, const QColor &outlineColor, bool fill, bool renderOutline)
 {
-    GeoDataStyle::Ptr style =  createStyle(1, 0, color, outlineColor, fill, renderOutline, Qt::SolidPattern, Qt::SolidLine, Qt::RoundCap, false, QVector<qreal>(), font);
+    GeoDataStyle::Ptr style =  createStyle(1, 0, effectColor(color), effectColor(outlineColor), fill, renderOutline, Qt::SolidPattern, Qt::SolidLine, Qt::RoundCap, false, QVector<qreal>(), font);
     style->setIconStyle(GeoDataIconStyle(path));
     auto const screen = QApplication::screens().first();
     double const physicalSize = 6.0; // mm
     int const pixelSize = qRound(physicalSize * screen->physicalDotsPerInch() / (IN2M * M2MM));
     style->iconStyle().setSize(QSize(pixelSize, pixelSize));
-    style->setLabelStyle(GeoDataLabelStyle(font, textColor));
+    style->setLabelStyle(GeoDataLabelStyle(font, effectColor(textColor)));
     style->labelStyle().setAlignment(GeoDataLabelStyle::Center);
     return style;
 }
@@ -348,7 +352,7 @@ GeoDataStyle::ConstPtr StyleBuilder::Private::createPlacemarkStyle(const StylePa
         GeoDataLineStyle lineStyle = style->lineStyle();
         if (visualCategory == GeoDataPlacemark::NaturalWater) {
             if (osmData.containsTag(QStringLiteral("salt"), QStringLiteral("yes"))) {
-                polyStyle.setColor("#ffff80");
+                polyStyle.setColor(effectColor("#ffff80"));
                 lineStyle.setPenStyle(Qt::DashLine);
                 lineStyle.setWidth(2);
                 adjustStyle = true;
@@ -358,8 +362,8 @@ GeoDataStyle::ConstPtr StyleBuilder::Private::createPlacemarkStyle(const StylePa
             if (tagIter != osmData.tagsEnd()) {
                 const QString& elevation = tagIter.value();
                 if (elevation == QLatin1String("4000")) {
-                    polyStyle.setColor("#94c2c2");
-                    lineStyle.setColor("#94c2c2");
+                    polyStyle.setColor(effectColor("#94c2c2"));
+                    lineStyle.setColor(effectColor("#94c2c2"));
                     adjustStyle = true;
                 }
             }
@@ -409,8 +413,8 @@ GeoDataStyle::ConstPtr StyleBuilder::Private::createPlacemarkStyle(const StylePa
 
         if (visualCategory == GeoDataPlacemark::AdminLevel2) {
             if (osmData.containsTag(QStringLiteral("maritime"), QStringLiteral("yes"))) {
-                lineStyle.setColor("#88b3bf");
-                polyStyle.setColor("#88b3bf");
+                lineStyle.setColor(effectColor("#88b3bf"));
+                polyStyle.setColor(effectColor("#88b3bf"));
                 if (osmData.containsTag(QStringLiteral("marble:disputed"), QStringLiteral("yes"))) {
                     lineStyle.setPenStyle(Qt::DashLine);
                 }
@@ -440,8 +444,8 @@ GeoDataStyle::ConstPtr StyleBuilder::Private::createPlacemarkStyle(const StylePa
                 qreal hue, sat, val;
                 polyColor.getHsvF(&hue, &sat, &val);
                 polyColor.setHsvF(0.98, qMin(1.0, 0.2 + sat), val);
-                polyStyle.setColor(polyColor);
-                lineStyle.setColor(lineStyle.color().darker(150));
+                polyStyle.setColor(effectColor(polyColor));
+                lineStyle.setColor(effectColor(lineStyle.color().darker(150)));
             }
 
             if (osmData.containsTag("tunnel", "yes")) {
@@ -449,8 +453,8 @@ GeoDataStyle::ConstPtr StyleBuilder::Private::createPlacemarkStyle(const StylePa
                 qreal hue, sat, val;
                 polyColor.getHsvF(&hue, &sat, &val);
                 polyColor.setHsvF(hue, 0.25 * sat, 0.95 * val);
-                polyStyle.setColor(polyColor);
-                lineStyle.setColor(lineStyle.color().lighter(115));
+                polyStyle.setColor(effectColor(polyColor));
+                lineStyle.setColor(effectColor(lineStyle.color().lighter(115)));
             }
 
         } else if (visualCategory >= GeoDataPlacemark::WaterwayCanal && visualCategory <= GeoDataPlacemark::WaterwayStream) {
@@ -495,7 +499,6 @@ GeoDataStyle::ConstPtr StyleBuilder::Private::createPlacemarkStyle(const StylePa
             }
         }
 
-
     } else if (geodata_cast<GeoDataPolygon>(placemark->geometry())) {
         GeoDataPolyStyle polyStyle = style->polyStyle();
         GeoDataLineStyle lineStyle = style->lineStyle();
@@ -505,8 +508,8 @@ GeoDataStyle::ConstPtr StyleBuilder::Private::createPlacemarkStyle(const StylePa
             if (tagIter != osmData.tagsEnd()) {
                 const QString& elevation = tagIter.value();
                 if (elevation == QLatin1String("4000")) {
-                    polyStyle.setColor("#a5c9c9");
-                    lineStyle.setColor("#a5c9c9");
+                    polyStyle.setColor(effectColor("#a5c9c9"));
+                    lineStyle.setColor(effectColor("#a5c9c9"));
                     adjustStyle = true;
                 }
             }
@@ -597,7 +600,7 @@ GeoDataStyle::ConstPtr StyleBuilder::Private::adjustPisteStyle(const StyleParame
     }
 
     GeoDataPolyStyle polyStyle = style->polyStyle();
-    polyStyle.setColor(lineStyle.color());
+    polyStyle.setColor(effectColor(lineStyle.color()));
     GeoDataStyle::Ptr newStyle(new GeoDataStyle(*style));
     newStyle->setPolyStyle(polyStyle);
     newStyle->setLineStyle(lineStyle);
@@ -643,19 +646,19 @@ GeoDataStyle::Ptr StyleBuilder::Private::createStyle(qreal width, qreal realWidt
         const QFont& font, const QColor& fontColor, const QString& texturePath)
 {
     GeoDataStyle *style = new GeoDataStyle;
-    GeoDataLineStyle lineStyle(outlineColor);
+    GeoDataLineStyle lineStyle(effectColor(outlineColor));
     lineStyle.setCapStyle(capStyle);
     lineStyle.setPenStyle(penStyle);
     lineStyle.setWidth(width);
     lineStyle.setPhysicalWidth(realWidth);
     lineStyle.setBackground(lineBackground);
     lineStyle.setDashPattern(dashPattern);
-    GeoDataPolyStyle polyStyle(color);
+    GeoDataPolyStyle polyStyle(effectColor(color));
     polyStyle.setOutline(outline);
     polyStyle.setFill(fill);
     polyStyle.setBrushStyle(brushStyle);
     polyStyle.setTexturePath(texturePath);
-    GeoDataLabelStyle labelStyle(font, fontColor);
+    GeoDataLabelStyle labelStyle(font, effectColor(fontColor));
     style->setLineStyle(lineStyle);
     style->setPolyStyle(polyStyle);
     style->setLabelStyle(labelStyle);
@@ -682,7 +685,7 @@ void StyleBuilder::Private::initializeDefaultStyles()
     int defaultSize = 8;
 #endif
 
-    QColor const defaultLabelColor = m_defaultLabelColor;
+    QColor const defaultLabelColor = effectColor(m_defaultLabelColor);
 
     m_defaultStyle[GeoDataPlacemark::None]
         = GeoDataStyle::Ptr(new GeoDataStyle(QString(),
@@ -882,7 +885,7 @@ void StyleBuilder::Private::initializeDefaultStyles()
 
     m_defaultStyle[GeoDataPlacemark::Bookmark]
         = createPOIStyle(QFont(defaultFamily, defaultSize, 50, false),
-                         MarbleDirs::path("svg/bookmark.svg"), defaultLabelColor);
+                         MarbleDirs::path("svg/bookmark.svg"), m_defaultLabelColor);
     m_defaultStyle[GeoDataPlacemark::Bookmark]->iconStyle().setScale(0.75);
 
     QColor const shopColor("#ac39ac");
@@ -1314,6 +1317,25 @@ void StyleBuilder::Private::initializeDefaultStyles()
         }
     }
 
+}
+
+QColor StyleBuilder::Private::effectColor(const QColor& color)
+{
+    int gray;
+    switch (s_styleEffect) {
+    case InvertedEffect:
+        return QColor(255 - color.red(), 255 - color.green(), 255 - color.blue());
+    case GrayscaleEffect:
+        gray = qMin(255, static_cast<int>(7 * qGray(color.darker(800).rgb())));
+        return QColor(gray, gray, gray);
+    case RedModeEffect:
+        gray = qMin(255, static_cast<int>(7 * qGray(color.darker(800).rgb())));
+        return QColor(gray, 0, 0);
+    case NoEffect:
+        return color;
+    }
+
+    return color;
 }
 
 QString StyleBuilder::Private::createPaintLayerItem(const QString &itemType, GeoDataPlacemark::GeoDataVisualCategory visualCategory, const QString &subType)
@@ -2837,6 +2859,21 @@ QString StyleBuilder::visualCategoryName(GeoDataPlacemark::GeoDataVisualCategory
 
     Q_ASSERT(visualCategoryNames.contains(category));
     return visualCategoryNames[category];
+}
+
+QColor StyleBuilder::effectColor(const QColor& color)
+{
+    return Private::effectColor(color);
+}
+
+StyleEffect StyleBuilder::styleEffect()
+{
+    return Private::s_styleEffect;
+}
+
+void StyleBuilder::setStyleEffect(StyleEffect effect)
+{
+    Private::s_styleEffect = effect;
 }
 
 QHash<StyleBuilder::OsmTag, GeoDataPlacemark::GeoDataVisualCategory> StyleBuilder::osmTagMapping()

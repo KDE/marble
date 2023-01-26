@@ -903,7 +903,9 @@ void MarbleMapPrivate::updateMapTheme()
                       m_model, SLOT(updateProperty(QString,bool)) );
 
     q->setPropertyValue(QStringLiteral("clouds_data"), m_viewParams.showClouds());
-    m_groundLayer.setColor( m_model->mapTheme()->map()->backgroundColor() );
+
+    QColor backgroundColor = m_styleBuilder.effectColor(m_model->mapTheme()->map()->backgroundColor());
+    m_groundLayer.setColor(backgroundColor);
 
     // Check whether there is a texture layer and vectortile layer available:
     if ( m_model->mapTheme()->map()->hasTextureLayers() ) {

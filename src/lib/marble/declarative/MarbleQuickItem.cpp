@@ -25,6 +25,7 @@
 #include <PluginManager.h>
 #include <RenderPlugin.h>
 #include <MarbleMath.h>
+#include <StyleBuilder.h>
 #include <GeoDataLatLonAltBox.h>
 #include <GeoDataCoordinates.h>
 #include <ReverseGeocodingRunnerManager.h>
@@ -206,6 +207,7 @@ namespace Marble
 
         void updateVisibleRoutes();
         void changeBlending(bool enabled, const QString &blendingName);
+        void changeStyleBuilder(bool invert);
 
     private:
         MarbleQuickItem *m_marble;
@@ -1105,6 +1107,8 @@ namespace Marble
     {
         d->changeBlending(enabled, blendingName);
 
+        d->changeStyleBuilder(enabled);
+
         if (d->m_invertColorEnabled == enabled)
             return;
 
@@ -1345,6 +1349,29 @@ namespace Marble
                 textureDataset->setBlending("");
                 m_map.clearVolatileTileCache();
             }
+        }
+    }
+
+    void MarbleQuickItemPrivate::changeStyleBuilder(bool invert)
+    {
+        GeoSceneDocument * mapTheme = m_map.model()->mapTheme();
+        if (mapTheme == nullptr) return;
+
+        GeoSceneMap * map = mapTheme->map();
+        if (map == nullptr) return;
+
+        if (map->hasVectorLayers()) {
+            StyleBuilder * styleBuilder = const_cast<StyleBuilder*>(m_map.styleBuilder());
+
+            if (invert) {
+                styleBuilder->setStyleEffect(InvertedEffect);
+            }
+            else {
+                styleBuilder->setStyleEffect(NoEffect);
+            }
+            styleBuilder->reset();
+            // trigger groundlayer update
+            emit m_map.model()->themeChanged(QString());
         }
     }
 }

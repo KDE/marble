@@ -253,7 +253,7 @@ void VisiblePlacemark::drawLabelText(QPainter &labelPainter, const QString &text
         font.setWeight( 75 );
         fontAscent = QFontMetrics( font ).ascent();
 
-        QPen outlinepen( color == QColor( Qt::white ) ? Qt::black : Qt::white );
+        QPen outlinepen( (color.red() + color.green() + color.blue())/3 < 160 ? Qt::white : Qt::black);
         outlinepen.setWidthF( s_labelOutlineWidth );
         QBrush  outlinebrush( color );
 

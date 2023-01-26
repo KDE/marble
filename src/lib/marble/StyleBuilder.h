@@ -31,6 +31,13 @@ public:
     const GeoDataRelation *relation;
 };
 
+enum StyleEffect {
+    NoEffect,
+    InvertedEffect,
+    GrayscaleEffect,
+    RedModeEffect
+};
+
 class MARBLE_EXPORT StyleBuilder
 {
 public:
@@ -76,6 +83,10 @@ public:
     int maximumZoomLevel() const;
 
     static QString visualCategoryName(GeoDataPlacemark::GeoDataVisualCategory category);
+
+    static QColor effectColor(const QColor& color);
+    static StyleEffect styleEffect();
+    static void setStyleEffect(StyleEffect effect);
 
     /**
      * @brief Mapping between osm key=value pairs and visual categories
