@@ -3868,7 +3868,7 @@ msgstr ""
 "Обнаружены данные карты, сохранённые в предыдущей версии Marble.<br/"
 ">Преобразовать эти данные для использования в текущей версии программы?"
 
-#: src/lib/marble/declarative/MarbleQuickItem.cpp:186
+#: src/lib/marble/declarative/MarbleQuickItem.cpp:187
 #: src/lib/marble/routing/RoutingManager.cpp:560
 #: src/lib/marble/routing/RoutingManager.cpp:563
 msgctxt "QObject|"

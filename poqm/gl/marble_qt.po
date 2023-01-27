@@ -3883,7 +3883,7 @@ msgstr ""
 "Marble atopou datos de mapas almacenados por unha versión anterior de Marble."
 "<br/>Desexa converter estes datos para podelos empregar coa versión actual?"
 
-#: src/lib/marble/declarative/MarbleQuickItem.cpp:186
+#: src/lib/marble/declarative/MarbleQuickItem.cpp:187
 #: src/lib/marble/routing/RoutingManager.cpp:560
 #: src/lib/marble/routing/RoutingManager.cpp:563
 msgctxt "QObject|"

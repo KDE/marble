@@ -3855,7 +3855,7 @@ msgstr ""
 "Marble leidis tarkvara eelmise versiooniga salvestatud andmete kaardi.<br/"
 ">Kas konvertida need andmed, et neid saaks kasutada ka praeguse versiooniga?"
 
-#: src/lib/marble/declarative/MarbleQuickItem.cpp:186
+#: src/lib/marble/declarative/MarbleQuickItem.cpp:187
 #: src/lib/marble/routing/RoutingManager.cpp:560
 #: src/lib/marble/routing/RoutingManager.cpp:563
 msgctxt "QObject|"

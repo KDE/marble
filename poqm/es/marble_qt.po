@@ -3867,7 +3867,7 @@ msgstr ""
 "programa.<br/>¿Se deben convertir estos datos para que se puedan usar con la "
 "versión actual del programa?"
 
-#: src/lib/marble/declarative/MarbleQuickItem.cpp:186
+#: src/lib/marble/declarative/MarbleQuickItem.cpp:187
 #: src/lib/marble/routing/RoutingManager.cpp:560
 #: src/lib/marble/routing/RoutingManager.cpp:563
 msgctxt "QObject|"
