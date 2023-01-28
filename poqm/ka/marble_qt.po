@@ -11,7 +11,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Qt-Contexts: true\n"
-"X-Generator: Poedit 3.1.1\n"
+"X-Generator: Poedit 3.2.2\n"
 
 #. file data/maps/moon/clementine/clementine.dgml:5
 msgctxt "DGML|"
@@ -1701,7 +1701,7 @@ msgstr "ქალაქი"
 #. file data/maps/earth/srtm2/srtm2.dgml:9
 msgctxt "DGML|"
 msgid "SRTM Data"
-msgstr ""
+msgstr "SRTM მონაცემები"
 
 #. file data/maps/earth/political/political.dgml:11
 msgctxt "DGML|"
@@ -1787,7 +1787,7 @@ msgstr ""
 #. file data/legend.html
 msgctxt "Legends|"
 msgid "<a href=\"checkbox:cities\"/>"
-msgstr ""
+msgstr "<a href=\"checkbox:cities\"/>"
 
 #. file data/legend.html
 msgctxt "Legends|"
@@ -1852,7 +1852,7 @@ msgstr ""
 #. file data/legend.html
 msgctxt "Legends|"
 msgid "<!-- ##customLegendEntries:all## -->"
-msgstr ""
+msgstr "<!-- ##customLegendEntries:all## -->"
 
 #. file data/stars/names.csv
 msgctxt "StarNames|"
@@ -2441,22 +2441,22 @@ msgstr ""
 #: src/apps/marble-maps/OutdoorActivities.qml:21
 msgctxt "OutdoorActivities|"
 msgid "Walkways"
-msgstr ""
+msgstr "ხეივანი"
 
 #: src/apps/marble-maps/OutdoorActivities.qml:26
 msgctxt "OutdoorActivities|"
 msgid "Hiking Routes"
-msgstr ""
+msgstr "სალაშქრო ტრასები"
 
 #: src/apps/marble-maps/OutdoorActivities.qml:31
 msgctxt "OutdoorActivities|"
 msgid "Bicycle Routes"
-msgstr ""
+msgstr "ველოტრასები"
 
 #: src/apps/marble-maps/OutdoorActivities.qml:36
 msgctxt "OutdoorActivities|"
 msgid "Mountainbike Routes"
-msgstr ""
+msgstr "სამთო ველოტრასები"
 
 #: src/apps/marble-maps/OutdoorActivities.qml:41
 msgctxt "OutdoorActivities|"
@@ -2466,17 +2466,17 @@ msgstr ""
 #: src/apps/marble-maps/OutdoorActivities.qml:46
 msgctxt "OutdoorActivities|"
 msgid "Bridleways"
-msgstr ""
+msgstr "საჯირითო ტრასები"
 
 #: src/apps/marble-maps/PlacemarkDialog.qml:168
 msgctxt "PlacemarkDialog|"
 msgid "<h2>Routes</h2>"
-msgstr ""
+msgstr "<h2>გზები</h2>"
 
 #: src/apps/marble-maps/ProfileSelectorMenu.qml:43
 msgctxt "ProfileSelectorMenu|"
 msgid "Car (fastest)"
-msgstr ""
+msgstr "მანქანა (უსწრაფესი)"
 
 #: src/apps/marble-maps/ProfileSelectorMenu.qml:49
 msgctxt "ProfileSelectorMenu|"
@@ -2658,7 +2658,7 @@ msgstr "Ctrl+Q"
 #: src/apps/marble-qt/QtMainWindow.cpp:294
 msgctxt "Marble::MainWindow|"
 msgid "Quit the Application"
-msgstr ""
+msgstr "აპლიკაციიდან გასვლა"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:297
 msgctxt "Marble::MainWindow|"
@@ -2833,7 +2833,7 @@ msgstr ""
 #: src/apps/marble-qt/QtMainWindow.cpp:374
 msgctxt "Marble::MainWindow|"
 msgid "What's &This"
-msgstr ""
+msgstr "რა არის &ეს"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:375
 msgctxt "Marble::MainWindow|"
@@ -3224,17 +3224,17 @@ msgstr "რუკების ჩასწორება"
 #: src/apps/marble-ui/ControlView.cpp:868
 msgctxt "Marble::ControlView|"
 msgid "Hide &All Panels"
-msgstr ""
+msgstr "&ყველა პანელის დამალვა"
 
 #: src/apps/marble-ui/ControlView.cpp:732
 msgctxt "Marble::ControlView|"
 msgid "Show or hide all panels."
-msgstr ""
+msgstr "პანელების ჩვენება ან დამალვა."
 
 #: src/apps/marble-ui/ControlView.cpp:857
 msgctxt "Marble::ControlView|"
 msgid "Show &All Panels"
-msgstr ""
+msgstr "&ყველა პანელის დამალვა"
 
 #: src/lib/marble/AbstractFloatItem.cpp:235
 msgctxt "Marble::AbstractFloatItem|"
@@ -3322,7 +3322,7 @@ msgstr "სანიშნების გატანა"
 #: src/lib/marble/BookmarkManagerDialog.cpp:415
 msgctxt "Marble::BookmarkManagerDialog|"
 msgid "KML files (*.kml)"
-msgstr ""
+msgstr "KML ფაილები (*.kml)"
 
 #: src/lib/marble/BookmarkManagerDialog.cpp:420
 msgctxt "Marble::BookmarkManagerDialog|"
@@ -3332,7 +3332,7 @@ msgstr ""
 #: src/lib/marble/BookmarkManagerDialog.cpp:421
 msgctxt "Marble::BookmarkManagerDialog|"
 msgid "Bookmark Export"
-msgstr ""
+msgstr "სანიშნის გატანა"
 
 #: src/lib/marble/BookmarkManagerDialog.cpp:428
 msgctxt "Marble::BookmarkManagerDialog|"
@@ -3342,7 +3342,7 @@ msgstr "სანიშნების შემოტანა"
 #: src/lib/marble/BookmarkManagerDialog.cpp:429
 msgctxt "Marble::BookmarkManagerDialog|"
 msgid "KML Files (*.kml)"
-msgstr ""
+msgstr "KML ფაილები (*.kml)"
 
 #: src/lib/marble/BookmarkManagerDialog.cpp:436
 #, qt-format
@@ -3353,7 +3353,7 @@ msgstr ""
 #: src/lib/marble/BookmarkManagerDialog.cpp:437
 msgctxt "Marble::BookmarkManagerDialog|"
 msgid "Bookmark Import"
-msgstr ""
+msgstr "შემოტანილი სანიშნე"
 
 #: src/lib/marble/BookmarkManagerDialog.cpp:471
 msgctxt "BookmarkManagerDialogPrivate|"
@@ -3363,12 +3363,12 @@ msgstr ""
 #: src/lib/marble/BookmarkManagerDialog.cpp:472
 msgctxt "BookmarkManagerDialogPrivate|"
 msgid "Imported bookmark"
-msgstr ""
+msgstr "შემოტანილი სანიშნე"
 
 #: src/lib/marble/BookmarkManagerDialog.cpp:473
 msgctxt "BookmarkManagerDialogPrivate|"
 msgid "Existing bookmark"
-msgstr ""
+msgstr "არსებული სანიშნე"
 
 #: src/lib/marble/BookmarkManagerDialog.cpp:474
 msgctxt "BookmarkManagerDialogPrivate|"
@@ -3507,7 +3507,7 @@ msgstr ""
 #, qt-format
 msgctxt "Marble::ConflictDialog|"
 msgid "Path: %0 <br /> Name: %1 <br /> Description: %2 <br /> Status: %3"
-msgstr ""
+msgstr "ბილიკი: %0 <br /> სახელი: %1 <br /> აღწერა: %2 <br /> მდგომარეობა: %3"
 
 #: src/lib/marble/cloudsync/ConflictDialog.cpp:126
 #: src/lib/marble/cloudsync/ConflictDialog.cpp:146
@@ -3580,23 +3580,23 @@ msgstr "ჩატვირთვა"
 #: src/lib/marble/cloudsync/RouteItemDelegate.cpp:213
 msgctxt "Marble::RouteItemDelegate|"
 msgid "Remove from device"
-msgstr ""
+msgstr "მოწყობილობიდან წაშლა"
 
 #: src/lib/marble/cloudsync/RouteItemDelegate.cpp:185
 #: src/lib/marble/cloudsync/RouteItemDelegate.cpp:218
 msgctxt "Marble::RouteItemDelegate|"
 msgid "Delete from cloud"
-msgstr ""
+msgstr "ღრუბლიდან წაშლა"
 
 #: src/lib/marble/cloudsync/RouteItemDelegate.cpp:223
 msgctxt "Marble::RouteItemDelegate|"
 msgid "Upload to cloud"
-msgstr ""
+msgstr "ღრუბელში ატვირთვა"
 
 #: src/lib/marble/CurrentLocationWidget.cpp:199
 msgctxt "QObject|"
 msgid "No position available."
-msgstr ""
+msgstr "მდებარეობა ხელმიუწვდომელია."
 
 #: src/lib/marble/CurrentLocationWidget.cpp:202
 msgctxt "QObject|"
@@ -3661,7 +3661,7 @@ msgstr ""
 #: src/lib/marble/CurrentLocationWidget.cpp:387
 msgctxt "QObject|"
 msgid "KML File (*.kml)"
-msgstr ""
+msgstr "KML ფაილი (*.kml)"
 
 #: src/lib/marble/CurrentLocationWidget.cpp:386
 msgctxt "QObject|"
@@ -3712,7 +3712,7 @@ msgstr "..."
 #: src/lib/marble/CurrentLocationWidget.ui:116
 msgctxt "CurrentLocationWidget|"
 msgid "No position available."
-msgstr ""
+msgstr "მდებარეობა ხელმიუწვდომელია."
 
 #: src/lib/marble/CurrentLocationWidget.ui:151
 msgctxt ""
@@ -3794,8 +3794,8 @@ msgstr[1] "%n ოთახი"
 msgctxt "Marble::Placemark|"
 msgid "%n beds"
 msgid_plural "%n beds"
-msgstr[0] "%s საწოლი"
-msgstr[1] "%s საწოლი"
+msgstr[0] "%n საწოლი"
+msgstr[1] "%n საწოლი"
 
 #: src/lib/marble/declarative/Placemark.cpp:105
 #, qt-format
@@ -3812,92 +3812,92 @@ msgstr ""
 #: src/lib/marble/declarative/Placemark.cpp:137
 msgctxt "Marble::Placemark|A copy shop provides computers for customer use"
 msgid "Computers available"
-msgstr ""
+msgstr "ხელმისაწვდომია კომპიუტერები"
 
 #: src/lib/marble/declarative/Placemark.cpp:138
 msgctxt ""
 "Marble::Placemark|A copy shop does not provide computers for customer use"
 msgid "No computers available"
-msgstr ""
+msgstr "კომპიუტერები ხელმიუწვდომელია"
 
 #: src/lib/marble/declarative/Placemark.cpp:139
 msgctxt "Marble::Placemark|A copy shop provides photocopying service"
 msgid "Photocopying service"
-msgstr ""
+msgstr "ფოტოების ასლის გადაღების სერვისი"
 
 #: src/lib/marble/declarative/Placemark.cpp:140
 msgctxt "Marble::Placemark|A copy shop does not provide photocopying service"
 msgid "No photocopying service"
-msgstr ""
+msgstr "ფოტოების ასლის გადაღების სერვისის გარეშე"
 
 #: src/lib/marble/declarative/Placemark.cpp:141
 msgctxt ""
 "Marble::Placemark|A copy shop provides a service for scanning documents into "
 "digital files"
 msgid "Digital scanning"
-msgstr ""
+msgstr "ციფრული სკანირება"
 
 #: src/lib/marble/declarative/Placemark.cpp:142
 msgctxt ""
 "Marble::Placemark|A copy shop does not provide a service for scanning "
 "documents into digital files"
 msgid "No digital scanning"
-msgstr ""
+msgstr "ციფრული სკანირების გარეშე"
 
 #: src/lib/marble/declarative/Placemark.cpp:143
 msgctxt ""
 "Marble::Placemark|A copy shop provides a service to send documents through "
 "fax"
 msgid "Fax service"
-msgstr ""
+msgstr "ფაქსის სერვისი"
 
 #: src/lib/marble/declarative/Placemark.cpp:144
 msgctxt ""
 "Marble::Placemark|A copy shop does not provide a service to send documents "
 "through fax"
 msgid "No fax service"
-msgstr ""
+msgstr "ფაქსის სერვისის გარეშე"
 
 #: src/lib/marble/declarative/Placemark.cpp:145
 msgctxt ""
 "Marble::Placemark|A copy shop provides a paid service to make phone calls"
 msgid "Phone service"
-msgstr ""
+msgstr "სატელეფონო სერვისი"
 
 #: src/lib/marble/declarative/Placemark.cpp:146
 msgctxt ""
 "Marble::Placemark|A copy shop does not provide a paid service to make phone "
 "calls"
 msgid "No phone service"
-msgstr ""
+msgstr "სატელეფონო სერვისის გარეშე"
 
 #: src/lib/marble/declarative/Placemark.cpp:147
 msgctxt ""
 "Marble::Placemark|A copy shop provides services to print paper documents "
 "from digital files"
 msgid "Digital printing"
-msgstr ""
+msgstr "ციფრული ბეჭდვა"
 
 #: src/lib/marble/declarative/Placemark.cpp:148
 msgctxt ""
 "Marble::Placemark|A copy shop does not provide services to print paper "
 "documents from digital files"
 msgid "No digital printing"
-msgstr ""
+msgstr "ციფრული ბეჭდვის გარეშე"
 
 #: src/lib/marble/declarative/Placemark.cpp:149
 msgctxt ""
 "Marble::Placemark|A copy shop provides a professional service to print a "
 "large number of copies of a document"
 msgid "Press printing service"
-msgstr ""
+msgstr "პრესის ბეჭდვის სერვისი"
 
 #: src/lib/marble/declarative/Placemark.cpp:150
 msgctxt ""
 "Marble::Placemark|A copy shop does not provide a professional service to "
 "print a large number of copies of a document"
 msgid "No press printing service"
-msgstr ""
+msgstr "პრესის ბეჭდვის სერვისის გარეშე"
 
 #: src/lib/marble/declarative/Placemark.cpp:151
 msgctxt ""
@@ -3930,32 +3930,32 @@ msgstr " თვითმომსახურების გარეშე"
 #: src/lib/marble/declarative/Placemark.cpp:156
 msgctxt "Marble::Placemark|A deli that sells organic food"
 msgid "Sells organic food"
-msgstr ""
+msgstr "ყიდის ორგანულ საჭმელს"
 
 #: src/lib/marble/declarative/Placemark.cpp:157
 msgctxt "Marble::Placemark|A deli that does not sell organic food"
 msgid "Does not sell organic food"
-msgstr ""
+msgstr "არ ყიდის ორგანულ საჭმელს"
 
 #: src/lib/marble/declarative/Placemark.cpp:158
 msgctxt "Marble::Placemark|A deli that only sells organic food"
 msgid "Only sells organic food"
-msgstr ""
+msgstr "ყიდის მხოლოდ ორგანულ საჭმელს"
 
 #: src/lib/marble/declarative/Placemark.cpp:160
 msgctxt "Marble::Placemark|A deli that sells gluten free food"
 msgid "Sells gluten free food"
-msgstr ""
+msgstr "ყიდის საჭმელს გლუტენის გარეშე"
 
 #: src/lib/marble/declarative/Placemark.cpp:161
 msgctxt "Marble::Placemark|A deli that does not sell gluten free food"
 msgid "Does not sell gluten free food"
-msgstr ""
+msgstr "არ ყიდის საჭმელს გლუტენის გარეშე"
 
 #: src/lib/marble/declarative/Placemark.cpp:162
 msgctxt "Marble::Placemark|A deli that only sells gluten free food"
 msgid "Only sells gluten free food"
-msgstr ""
+msgstr "ყიდის მხოლოდ საჭმელს გლუტენის გარეშე"
 
 #: src/lib/marble/declarative/Placemark.cpp:164
 msgctxt "Marble::Placemark|A deli that sells lactose free food"
@@ -4261,8 +4261,8 @@ msgstr "ლაპარაკის თერაპია"
 msgctxt "Marble::Placemark|number of seats a bench provides"
 msgid "%n seats"
 msgid_plural "%n seats"
-msgstr[0] "%s ადგილი"
-msgstr[1] "%s ადგილი"
+msgstr[0] "%n ადგილი"
+msgstr[1] "%n ადგილი"
 
 #: src/lib/marble/declarative/Placemark.cpp:257
 msgctxt "Marble::Placemark|A bench provides a backrest to lean against"
@@ -4733,22 +4733,22 @@ msgstr "%1 წუთი"
 #: src/lib/marble/declarative/Placemark.cpp:373
 msgctxt "Marble::Placemark|A carriage is protected from the weather"
 msgid "Has weather protection"
-msgstr ""
+msgstr "აქვს ამინდისგან დაცვა"
 
 #: src/lib/marble/declarative/Placemark.cpp:374
 msgctxt "Marble::Placemark|A carriage is not protected from the weather"
 msgid "No weather protection"
-msgstr ""
+msgstr "არ აქვს ამინდისგან დაცვა"
 
 #: src/lib/marble/declarative/Placemark.cpp:375
 msgctxt "Marble::Placemark|A carriage is heated"
 msgid "Is heated"
-msgstr ""
+msgstr "თბება"
 
 #: src/lib/marble/declarative/Placemark.cpp:376
 msgctxt "Marble::Placemark|A carriage is not heated"
 msgid "Not heated"
-msgstr ""
+msgstr "არ თბება"
 
 #: src/lib/marble/declarative/Placemark.cpp:377
 msgctxt "Marble::Placemark|Bicycles can be transported"
@@ -4768,12 +4768,12 @@ msgstr ""
 #: src/lib/marble/declarative/Placemark.cpp:381
 msgctxt "Marble::Placemark|"
 msgid "Lit at night"
-msgstr ""
+msgstr "ღამით განათებულია"
 
 #: src/lib/marble/declarative/Placemark.cpp:382
 msgctxt "Marble::Placemark|"
 msgid "Lit in winter"
-msgstr ""
+msgstr "ზამთარში განათებულია"
 
 #: src/lib/marble/declarative/Placemark.cpp:383
 msgctxt "Marble::Placemark|A ski piste with trees (gladed)"
@@ -4845,22 +4845,22 @@ msgstr "გასვლა"
 #: src/lib/marble/declarative/Placemark.cpp:407
 msgctxt "Marble::Placemark|Entry and exit station of an aerialway"
 msgid "Entry and exit"
-msgstr ""
+msgstr "შესასვლელი და გასასვლელი"
 
 #: src/lib/marble/declarative/Placemark.cpp:408
 msgctxt "Marble::Placemark|Transit only station of an aerialway"
 msgid "No entry or exit"
-msgstr ""
+msgstr "შესასვლელის და გასასვლელის გარეშე"
 
 #: src/lib/marble/declarative/Placemark.cpp:409
 msgctxt "Marble::Placemark|Entry station of an aerialway during summer"
 msgid "Entry during summer"
-msgstr ""
+msgstr "შესასვლელი ზაფხულში"
 
 #: src/lib/marble/declarative/Placemark.cpp:410
 msgctxt "Marble::Placemark|Exit station of an aerialway during summer"
 msgid "Exit during summer"
-msgstr ""
+msgstr "გასასვლელი ზაფხულში"
 
 #: src/lib/marble/declarative/Placemark.cpp:411
 msgctxt ""
@@ -4981,49 +4981,49 @@ msgstr ""
 msgctxt ""
 "Marble::Placemark|This location does not provide public Internet access"
 msgid "No public Internet access"
-msgstr ""
+msgstr "ინტერნეტთან საჯარო წვდომის გარეშე"
 
 #: src/lib/marble/declarative/Placemark.cpp:565
 msgctxt ""
 "Marble::Placemark|This location provides an unknown type of public Internet "
 "access."
 msgid "Public Internet access available"
-msgstr ""
+msgstr "საჯარო წვდომა ინტერნეტთან"
 
 #: src/lib/marble/declarative/Placemark.cpp:568
 msgctxt ""
 "Marble::Placemark|Public wireless Internet access is available here for a "
 "fee."
 msgid "Charged public wifi available"
-msgstr ""
+msgstr "ხელმისაწვდომია ფასიანი საჯარო WiFi"
 
 #: src/lib/marble/declarative/Placemark.cpp:570
 msgctxt ""
 "Marble::Placemark|Public wireless Internet access is available here for no "
 "cost."
 msgid "Free public wifi available"
-msgstr ""
+msgstr "ხელმისაწვდომია უფასო საჯარო WiFi"
 
 #: src/lib/marble/declarative/Placemark.cpp:572
 msgctxt "Marble::Placemark|Public wireless Internet access is available here."
 msgid "Public wifi available"
-msgstr ""
+msgstr "ხელმისაწვდომია უფასო WiFi"
 
 #: src/lib/marble/declarative/Placemark.cpp:576
 msgctxt "Marble::Placemark|Public wifi is not available here."
 msgid "No public wifi"
-msgstr ""
+msgstr "საჯარო WiFi-ის გარეშე"
 
 #: src/lib/marble/declarative/Placemark.cpp:577
 msgctxt "Marble::Placemark|Public wireless Internet is available here."
 msgid "Public wifi available"
-msgstr ""
+msgstr "ხელმისაწვდომია უფასო WiFi"
 
 #: src/lib/marble/declarative/Placemark.cpp:578
 msgctxt ""
 "Marble::Placemark|Public wireless Internet is available here for no cost."
 msgid "Free public wifi available"
-msgstr ""
+msgstr "ხელმისაწვდომია უფასო საჯარო WiFi"
 
 #: src/lib/marble/declarative/Placemark.cpp:683
 #, qt-format
@@ -5031,7 +5031,7 @@ msgctxt ""
 "Marble::Placemark|House number (first argument) and street name (second "
 "argument) in an address"
 msgid "%1 %2"
-msgstr ""
+msgstr "%1 %2"
 
 #: src/lib/marble/declarative/RouteRelationModel.cpp:19
 msgctxt "Marble::RouteRelationModel|"
@@ -5116,17 +5116,17 @@ msgstr ""
 #: src/lib/marble/DownloadRegionDialog.cpp:116
 msgctxt "Marble::DownloadRegionDialog|"
 msgid "Visible region"
-msgstr ""
+msgstr "ხილული რეგიონი"
 
 #: src/lib/marble/DownloadRegionDialog.cpp:117
 msgctxt "Marble::DownloadRegionDialog|"
 msgid "Specify region"
-msgstr ""
+msgstr "მიუთითეთ რეგიონი"
 
 #: src/lib/marble/DownloadRegionDialog.cpp:119
 msgctxt "Marble::DownloadRegionDialog|"
 msgid "Download Route"
-msgstr ""
+msgstr "გზის გადმოწერა"
 
 #: src/lib/marble/DownloadRegionDialog.cpp:120
 msgctxt "Marble::DownloadRegionDialog|"
@@ -5212,6 +5212,26 @@ msgid ""
 "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-"
 "family:'Ubuntu';\"><br /></p></td></tr></table></body></html>"
 msgstr ""
+"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+"REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; font-"
+"weight:400; font-style:normal;\">\n"
+"<table border=\"0\" style=\"-qt-table-type: root; margin-top:4px; margin-"
+"bottom:4px; margin-left:4px; margin-right:4px;\">\n"
+"<tr>\n"
+"<td style=\"border: none;\">\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+"margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-"
+"family:'Ubuntu';\"><br /></p>\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+"margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-"
+"family:'Ubuntu';\"><br /></p>\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+"margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-"
+"family:'Ubuntu';\"><br /></p></td></tr></table></body></html>"
 
 #: src/lib/marble/EditBookmarkDialog.ui:57
 msgctxt "UiEditBookmarkDialog|"
@@ -5529,7 +5549,7 @@ msgstr ""
 #: src/lib/marble/FormattedTextWidget.cpp:179
 msgctxt "Marble::FormattedTextWidget|"
 msgid "Choose image"
-msgstr ""
+msgstr "გამოსახულების არჩევა"
 
 #: src/lib/marble/FormattedTextWidget.cpp:179
 msgctxt "Marble::FormattedTextWidget|"
@@ -6218,7 +6238,7 @@ msgstr "ღამის კლუბი"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:435
 msgctxt "GeoDataPlacemark|"
 msgid "Bench"
-msgstr ""
+msgstr "მერხი"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:436
 msgctxt "GeoDataPlacemark|"
@@ -6349,7 +6369,7 @@ msgstr ""
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:462
 msgctxt "GeoDataPlacemark|"
 msgid "Beverages"
-msgstr ""
+msgstr "სასმელები"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:463
 msgctxt "GeoDataPlacemark|"
@@ -6359,7 +6379,7 @@ msgstr ""
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:464
 msgctxt "GeoDataPlacemark|"
 msgid "Supermarket"
-msgstr ""
+msgstr "სუპერმარკეტი"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:465
 msgctxt "GeoDataPlacemark|"
@@ -6379,7 +6399,7 @@ msgstr "ყასაბი"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:468
 msgctxt "GeoDataPlacemark|"
 msgid "Confectionery"
-msgstr ""
+msgstr "კონფეკტიონერია"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:469
 msgctxt "GeoDataPlacemark|"
@@ -6389,7 +6409,7 @@ msgstr ""
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:470
 msgctxt "GeoDataPlacemark|"
 msgid "Greengrocer"
-msgstr ""
+msgstr "მემწვანილე"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:471
 msgctxt "GeoDataPlacemark|"
@@ -6399,7 +6419,7 @@ msgstr ""
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:472
 msgctxt "GeoDataPlacemark|"
 msgid "Department Store"
-msgstr ""
+msgstr "უნივერსალური მაღაზია"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:473
 msgctxt "GeoDataPlacemark|"
@@ -6434,7 +6454,7 @@ msgstr ""
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:479
 msgctxt "GeoDataPlacemark|"
 msgid "Variety Store"
-msgstr ""
+msgstr "ფართო პროფილის უნივერსამი"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:480
 msgctxt "GeoDataPlacemark|"
@@ -6444,12 +6464,12 @@ msgstr ""
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:481
 msgctxt "GeoDataPlacemark|"
 msgid "Chemist"
-msgstr ""
+msgstr "ქიმიკოსი"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:482
 msgctxt "GeoDataPlacemark|"
 msgid "Cosmetics"
-msgstr ""
+msgstr "კოსმეტიკა"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:483
 msgctxt "GeoDataPlacemark|"
@@ -6560,12 +6580,12 @@ msgstr "საჩუქრების მაღაზია"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:505
 msgctxt "GeoDataPlacemark|"
 msgid "Stationery"
-msgstr ""
+msgstr "საკანცელარიო საქონელი"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:506
 msgctxt "GeoDataPlacemark|"
 msgid "Laundry"
-msgstr ""
+msgstr "სამრეცხაო"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:507
 msgctxt "GeoDataPlacemark|"
@@ -6580,12 +6600,12 @@ msgstr ""
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:509
 msgctxt "GeoDataPlacemark|"
 msgid "Travel Agency"
-msgstr ""
+msgstr "სამოგზაურო ბიურო"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:510
 msgctxt "GeoDataPlacemark|"
 msgid "Deli"
-msgstr ""
+msgstr "გასტრონომი"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:511
 msgctxt "GeoDataPlacemark|"
@@ -6645,7 +6665,7 @@ msgstr ""
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:522
 msgctxt "GeoDataPlacemark|"
 msgid "Tourist Attraction"
-msgstr ""
+msgstr "ტურისტული ღირსშესანიშნაობა"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:523
 msgctxt "GeoDataPlacemark|"
@@ -6715,7 +6735,7 @@ msgstr ""
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:536
 msgctxt "GeoDataPlacemark|"
 msgid "Memorial"
-msgstr ""
+msgstr "მემორიალი"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:537
 msgctxt "GeoDataPlacemark|"
@@ -6810,7 +6830,7 @@ msgstr ""
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:555
 msgctxt "GeoDataPlacemark|"
 msgid "Train Station"
-msgstr ""
+msgstr "რკინიგზის სადგური"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:556
 msgctxt "GeoDataPlacemark|"
@@ -6820,12 +6840,12 @@ msgstr ""
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:557
 msgctxt "GeoDataPlacemark|"
 msgid "Bicycle Parking"
-msgstr ""
+msgstr "ველოსიპედის პარკინგი"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:558
 msgctxt "GeoDataPlacemark|"
 msgid "Motorcycle Parking"
-msgstr ""
+msgstr "მოტოციკლის პარკინგი"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:559
 msgctxt "GeoDataPlacemark|"
@@ -6855,7 +6875,7 @@ msgstr ""
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:564
 msgctxt "GeoDataPlacemark|"
 msgid "Christian"
-msgstr ""
+msgstr "ქრისტიანური"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:565
 msgctxt "GeoDataPlacemark|"
@@ -6865,7 +6885,7 @@ msgstr ""
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:566
 msgctxt "GeoDataPlacemark|"
 msgid "Hindu"
-msgstr ""
+msgstr "ინდური"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:567
 msgctxt "GeoDataPlacemark|"
@@ -6955,7 +6975,7 @@ msgstr "სასაფლაო"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:585
 msgctxt "GeoDataPlacemark|"
 msgid "Commercial"
-msgstr ""
+msgstr "რეკლამა"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:586
 msgctxt "GeoDataPlacemark|"
@@ -6985,7 +7005,7 @@ msgstr ""
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:591
 msgctxt "GeoDataPlacemark|"
 msgid "Industrial"
-msgstr ""
+msgstr "ინდასტრიალი"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:592
 msgctxt "GeoDataPlacemark|"
@@ -7000,7 +7020,7 @@ msgstr ""
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:594
 msgctxt "GeoDataPlacemark|"
 msgid "Military"
-msgstr ""
+msgstr "სამხედრო"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:595
 msgctxt "GeoDataPlacemark|"
@@ -7055,7 +7075,7 @@ msgstr "ტრამვაი"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:605
 msgctxt "GeoDataPlacemark|"
 msgid "Light Rail"
-msgstr ""
+msgstr "მსუბუქი რკინიგზა"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:606
 msgctxt "GeoDataPlacemark|"
@@ -7922,7 +7942,7 @@ msgstr ""
 #: src/lib/marble/MapWizard.cpp:623 src/lib/marble/MapWizard.cpp:626
 msgctxt "Marble::MapWizard|"
 msgid "Archiving failed"
-msgstr ""
+msgstr "არქივაციის შეცდომა"
 
 #: src/lib/marble/MapWizard.cpp:623
 msgctxt "Marble::MapWizard|"
@@ -10324,7 +10344,7 @@ msgstr ""
 #: src/lib/marble/MarbleWidgetPopupMenu.cpp:179
 msgctxt "Marble::MarbleWidgetPopupMenu|"
 msgid "No description available."
-msgstr ""
+msgstr "აღწერის გარეშე."
 
 #: src/lib/marble/MarbleWidgetPopupMenu.cpp:381
 msgctxt "Marble::MarbleWidgetPopupMenu|"
@@ -10810,7 +10830,7 @@ msgstr ""
 #: src/lib/marble/PrintOptions.ui:118
 msgctxt "PrintOptions|"
 msgid "Footer"
-msgstr ""
+msgstr "ქვესართი"
 
 #: src/lib/marble/projections/AzimuthalEquidistantProjection.cpp:56
 msgctxt "QObject|"
@@ -11314,7 +11334,7 @@ msgstr "მორგება"
 #: src/lib/marble/routing/RoutingProfilesModel.cpp:110
 msgctxt "Marble::RoutingProfilesModel|"
 msgid "Car (fastest)"
-msgstr ""
+msgstr "მანქანა (უსწრაფესი)"
 
 #: src/lib/marble/routing/RoutingProfilesModel.cpp:112
 msgctxt "Marble::RoutingProfilesModel|"
@@ -11468,7 +11488,7 @@ msgstr "გზის გახსნა"
 #: src/lib/marble/routing/RoutingWidget.cpp:694
 msgctxt "Marble::RoutingWidget|"
 msgid "KML Files (*.kml)"
-msgstr ""
+msgstr "KML ფაილები (*.kml)"
 
 #: src/lib/marble/routing/RoutingWidget.cpp:726
 msgctxt "Marble::RoutingWidget|"
@@ -11478,7 +11498,7 @@ msgstr "გზის შენახვა"
 #: src/lib/marble/routing/RoutingWidget.cpp:728
 msgctxt "Marble::RoutingWidget|"
 msgid "KML files (*.kml)"
-msgstr ""
+msgstr "KML ფაილები (*.kml)"
 
 #: src/lib/marble/routing/RoutingWidget.cpp:746
 msgctxt "Marble::RoutingWidget|"
@@ -11488,7 +11508,7 @@ msgstr ""
 #: src/lib/marble/routing/RoutingWidget.ui:46
 msgctxt "RoutingWidget|"
 msgid "Car (fastest)"
-msgstr ""
+msgstr "მანქანა (უსწრაფესი)"
 
 #: src/lib/marble/routing/RoutingWidget.ui:51
 msgctxt "RoutingWidget|"
@@ -12282,7 +12302,7 @@ msgstr ""
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:916
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Add Nodes"
-msgstr ""
+msgstr "კვანძების დამატება"
 
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:923
 msgctxt "Marble::AnnotatePlugin|"
@@ -12302,7 +12322,7 @@ msgstr ""
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:938
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Remove Item"
-msgstr ""
+msgstr "ჩანაწერისწაშლა"
 
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:944
 msgctxt "Marble::AnnotatePlugin|"
@@ -12952,7 +12972,7 @@ msgstr "გერმანული"
 #: src/plugins/render/crosshairs/CrosshairsPlugin.cpp:72
 msgctxt "Marble::CrosshairsPlugin|"
 msgid "Crosshairs"
-msgstr ""
+msgstr "გადაჯვარედინება"
 
 #: src/plugins/render/crosshairs/CrosshairsPlugin.cpp:77
 msgctxt "Marble::CrosshairsPlugin|"
@@ -13017,7 +13037,7 @@ msgstr "თარიღი:"
 #: src/plugins/render/earthquake/EarthquakeItem.cpp:129
 msgctxt "Marble::EarthquakeItem|"
 msgid "Magnitude:"
-msgstr ""
+msgstr "ვარსკვლავური სიდიდე:"
 
 #: src/plugins/render/earthquake/EarthquakeItem.cpp:129
 msgctxt "Marble::EarthquakeItem|"
@@ -13207,7 +13227,7 @@ msgstr "ტიპით"
 #: src/plugins/render/eclipses/EclipsesModel.cpp:167
 msgctxt "Marble::EclipsesModel|"
 msgid "Magnitude"
-msgstr ""
+msgstr "ვარსკვლავური სიდიდე"
 
 #: src/plugins/render/eclipses/EclipsesPlugin.cpp:96
 msgctxt "Marble::EclipsesPlugin|"
@@ -13648,7 +13668,7 @@ msgstr ""
 #: src/plugins/render/license/License.cpp:233
 msgctxt "Marble::License|"
 msgid "&Show Details"
-msgstr ""
+msgstr "&დეტალების ჩვენება"
 
 #: src/plugins/render/mapscale/MapScaleConfigWidget.ui:14
 msgctxt "MapScaleConfigWidget|"
@@ -14166,7 +14186,7 @@ msgstr ""
 #: src/plugins/render/overviewmap/OverviewMap.cpp:74
 msgctxt "Marble::OverviewMap|"
 msgid "Overview Map"
-msgstr ""
+msgstr "მიმოხილვის რუკა"
 
 #: src/plugins/render/overviewmap/OverviewMap.cpp:79
 msgctxt "Marble::OverviewMap|"
@@ -14406,7 +14426,7 @@ msgstr "&ფერები"
 #: src/plugins/render/positionmarker/PositionMarkerConfigWidget.ui:169
 msgctxt "PositionMarkerConfigWidget|"
 msgid "&Accuracy:"
-msgstr ""
+msgstr "&სიზუსტე:"
 
 #: src/plugins/render/positionmarker/PositionMarkerConfigWidget.ui:191
 msgctxt "PositionMarkerConfigWidget|"
@@ -14530,7 +14550,7 @@ msgstr "მარჯ"
 #: src/plugins/render/routing/RoutingPlugin.ui:158
 msgctxt "RoutingPlugin|"
 msgid "Toggle GPS"
-msgstr ""
+msgstr "GPS-ის გადართვა"
 
 #: src/plugins/render/routing/RoutingPlugin.ui:187
 msgctxt "RoutingPlugin|"
@@ -14540,17 +14560,17 @@ msgstr "დაპატარავება"
 #: src/plugins/render/routing/RoutingPlugin.ui:190
 msgctxt "RoutingPlugin|"
 msgid "-"
-msgstr ""
+msgstr "-"
 
 #: src/plugins/render/routing/RoutingPlugin.ui:219
 msgctxt "RoutingPlugin|"
 msgid "Zoom In"
-msgstr ""
+msgstr "გადიდება"
 
 #: src/plugins/render/routing/RoutingPlugin.ui:222
 msgctxt "RoutingPlugin|"
 msgid "+"
-msgstr ""
+msgstr "+"
 
 #: src/plugins/render/routing/RoutingPlugin.ui:260
 msgctxt "RoutingPlugin|"
@@ -14565,7 +14585,7 @@ msgstr "კომეტები"
 #: src/plugins/render/satellites/SatellitesConfigDialog.cpp:32
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Moons"
-msgstr ""
+msgstr "მთვარეები"
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.cpp:33
 msgctxt "Marble::SatellitesConfigDialog|"
@@ -14575,12 +14595,12 @@ msgstr "სხვები"
 #: src/plugins/render/satellites/SatellitesConfigDialog.cpp:34
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Spacecrafts"
-msgstr ""
+msgstr "კოსმოსური ხომალდები"
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.cpp:35
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Spaceprobes"
-msgstr ""
+msgstr "კოსმოსური ზონდები"
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.cpp:37
 msgctxt "Marble::SatellitesConfigDialog|"
@@ -14635,27 +14655,27 @@ msgstr "ნეპტუნი"
 #: src/plugins/render/satellites/SatellitesConfigDialog.cpp:137
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "&Satellites"
-msgstr ""
+msgstr "&თანამგზავრები"
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.cpp:139
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "&Data Sources"
-msgstr ""
+msgstr "&მონაცემების წყაროები"
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.cpp:142
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "&Activate Plugin"
-msgstr ""
+msgstr "&დამატების აქტივაცია"
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.cpp:254
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Add Data Source"
-msgstr ""
+msgstr "მონაცემების წყაროს დამატება"
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.cpp:255
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "URL or File path:"
-msgstr ""
+msgstr "URL ან ფაილის ბილიკი:"
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.cpp:264
 msgctxt "Marble::SatellitesConfigDialog|"
@@ -14685,7 +14705,7 @@ msgstr ""
 #: src/plugins/render/satellites/SatellitesConfigDialog.cpp:292
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "All Files (*.*)"
-msgstr ""
+msgstr "ყველა ფაილი (*.*)"
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.cpp:295
 msgctxt "Marble::SatellitesConfigDialog|"
@@ -14705,17 +14725,17 @@ msgstr ""
 #: src/plugins/render/satellites/SatellitesConfigDialog.ui:14
 msgctxt "SatellitesConfigDialog|"
 msgid "Satellites Configuration"
-msgstr ""
+msgstr "თანამგზავრების მორგება"
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.ui:27
 msgctxt "SatellitesConfigDialog|"
 msgid "&Satellites"
-msgstr ""
+msgstr "&თანამგზავრები"
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.ui:44
 msgctxt "SatellitesConfigDialog|"
 msgid "&Data Sources"
-msgstr ""
+msgstr "&მონაცემების წყაროები"
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.ui:74
 msgctxt "SatellitesConfigDialog|"
@@ -14723,12 +14743,14 @@ msgid ""
 "<html><head/><body><p><span style=\" font-weight:600;\">Last update:</span></"
 "p></body></html>"
 msgstr ""
+"<html><head/><body><p><span style=\" font-weight:600;\">ბოლო განახლება:</"
+"span></p></body></html>"
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.ui:81
 #: src/plugins/render/satellites/SatellitesConfigDialog.ui:164
 msgctxt "SatellitesConfigDialog|"
 msgid "-"
-msgstr ""
+msgstr "-"
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.ui:104
 msgctxt "SatellitesConfigDialog|"
@@ -14748,7 +14770,7 @@ msgstr ""
 #: src/plugins/render/satellites/SatellitesConfigDialog.ui:150
 msgctxt "SatellitesConfigDialog|"
 msgid "+"
-msgstr ""
+msgstr "+"
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.ui:161
 msgctxt "SatellitesConfigDialog|"
@@ -14763,7 +14785,7 @@ msgstr ""
 #: src/plugins/render/satellites/SatellitesConfigDialog.ui:181
 msgctxt "SatellitesConfigDialog|"
 msgid "..."
-msgstr ""
+msgstr "..."
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.ui:204
 msgctxt "SatellitesConfigDialog|"
@@ -14789,7 +14811,7 @@ msgstr ""
 #: src/plugins/render/satellites/SatellitesConfigDialog.ui:289
 msgctxt "SatellitesConfigDialog|"
 msgid "&Activate Plugin"
-msgstr ""
+msgstr "&დამატების აქტივაცია"
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.ui:315
 msgctxt "SatellitesConfigDialog|"
@@ -14827,7 +14849,7 @@ msgstr "თანამგზავრები"
 #: src/plugins/render/satellites/SatellitesPlugin.cpp:89
 msgctxt "Marble::SatellitesPlugin|"
 msgid "&Satellites"
-msgstr ""
+msgstr "&თანამგზავრები"
 
 #: src/plugins/render/satellites/SatellitesPlugin.cpp:99
 msgctxt "Marble::SatellitesPlugin|"
@@ -14921,7 +14943,7 @@ msgstr "ტრეკინგისა და მონაცემების 
 #: src/plugins/render/satellites/SatellitesPlugin.cpp:460
 msgctxt "Marble::SatellitesPlugin|"
 msgid "Communications Satellites"
-msgstr ""
+msgstr "კომუნიკაციის სატელიტები"
 
 #: src/plugins/render/satellites/SatellitesPlugin.cpp:461
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
@@ -14966,7 +14988,7 @@ msgstr "Globalstar"
 #: src/plugins/render/satellites/SatellitesPlugin.cpp:469
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Amateur radio"
-msgstr ""
+msgstr "სამოყვარულო რადიო"
 
 #: src/plugins/render/satellites/SatellitesPlugin.cpp:470
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
@@ -14982,7 +15004,7 @@ msgstr "სხვები"
 #: src/plugins/render/satellites/SatellitesPlugin.cpp:473
 msgctxt "Marble::SatellitesPlugin|"
 msgid "Navigation Satellites"
-msgstr ""
+msgstr "ნავიგაციის თანამგზავრები"
 
 #: src/plugins/render/satellites/SatellitesPlugin.cpp:474
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
@@ -15017,7 +15039,7 @@ msgstr "რუსული LEO ნავიგაცია"
 #: src/plugins/render/satellites/SatellitesPlugin.cpp:481
 msgctxt "Marble::SatellitesPlugin|"
 msgid "Scientific Satellites"
-msgstr ""
+msgstr "სამეცნიერო თანამგზავრები"
 
 #: src/plugins/render/satellites/SatellitesPlugin.cpp:482
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
@@ -15042,7 +15064,7 @@ msgstr "განათლება"
 #: src/plugins/render/satellites/SatellitesPlugin.cpp:487
 msgctxt "Marble::SatellitesPlugin|"
 msgid "Miscellaneous Satellites"
-msgstr ""
+msgstr "სხვადასხვა თანამგზავრები"
 
 #: src/plugins/render/satellites/SatellitesPlugin.cpp:488
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
@@ -15062,12 +15084,12 @@ msgstr "კუბსატები"
 #: src/plugins/render/speedometer/Speedometer.cpp:53
 msgctxt "Marble::Speedometer|"
 msgid "Speedometer"
-msgstr ""
+msgstr "სპიდომეტრი"
 
 #: src/plugins/render/speedometer/Speedometer.cpp:58
 msgctxt "Marble::Speedometer|"
 msgid "&Speedometer"
-msgstr ""
+msgstr "&სპიდომეტრი"
 
 #: src/plugins/render/speedometer/Speedometer.cpp:73
 msgctxt "Marble::Speedometer|"
@@ -15197,7 +15219,7 @@ msgstr ""
 #: src/plugins/render/stars/StarsConfigWidget.ui:278
 msgctxt "StarsConfigWidget|"
 msgid "Lines and Orientation"
-msgstr ""
+msgstr "ხაზები და ორიენტაცია"
 
 #: src/plugins/render/stars/StarsConfigWidget.ui:284
 msgctxt "StarsConfigWidget|"
@@ -15222,7 +15244,7 @@ msgstr "სახელები"
 #: src/plugins/render/stars/StarsConfigWidget.ui:401
 msgctxt "StarsConfigWidget|"
 msgid "Latin Name"
-msgstr ""
+msgstr "ლათინური სახელი"
 
 #: src/plugins/render/stars/StarsConfigWidget.ui:406
 msgctxt "StarsConfigWidget|"
@@ -15262,7 +15284,7 @@ msgstr "ვარსკვლავი"
 #: src/plugins/render/stars/StarsPlugin.cpp:112
 msgctxt "Marble::StarsPlugin|"
 msgid "&Stars"
-msgstr ""
+msgstr "&ვარსკვლავები"
 
 #: src/plugins/render/stars/StarsPlugin.cpp:127
 msgctxt "Marble::StarsPlugin|"
@@ -15303,17 +15325,17 @@ msgstr "კვი"
 #: src/plugins/render/stars/StarsPlugin.cpp:1442
 msgctxt "Marble::StarsPlugin|"
 msgid "Show &Constellations"
-msgstr ""
+msgstr "თანავარსკვლავედების &ჩვენება"
 
 #: src/plugins/render/stars/StarsPlugin.cpp:1446
 msgctxt "Marble::StarsPlugin|"
 msgid "Show &Sun and Moon"
-msgstr ""
+msgstr "&მზისა და მთვარის ჩვენება"
 
 #: src/plugins/render/stars/StarsPlugin.cpp:1450
 msgctxt "Marble::StarsPlugin|"
 msgid "Show &Planets"
-msgstr ""
+msgstr "&პლანეტების ჩვენება"
 
 #: src/plugins/render/stars/StarsPlugin.cpp:1454
 msgctxt "Marble::StarsPlugin|"
@@ -15339,12 +15361,12 @@ msgstr ""
 #: src/plugins/render/twitter/twitterPlugin.cpp:40
 msgctxt "Marble::twitterPlugin|"
 msgid "twitter "
-msgstr ""
+msgstr "twitter "
 
 #: src/plugins/render/twitter/twitterPlugin.cpp:45
 msgctxt "Marble::twitterPlugin|"
 msgid "&twitter"
-msgstr ""
+msgstr "&twitter"
 
 #: src/plugins/render/twitter/twitterPlugin.cpp:55
 msgctxt "Marble::twitterPlugin|"
@@ -15373,7 +15395,7 @@ msgstr ""
 #: src/plugins/render/weather/StationListParser.cpp:43
 msgctxt "QObject|"
 msgid "The file is not a valid file."
-msgstr ""
+msgstr "ფაილი არასწორია."
 
 #: src/plugins/render/weather/WeatherConfigWidget.ui:14
 msgctxt "WeatherConfigWidget|"
@@ -15401,7 +15423,7 @@ msgstr ""
 #: src/plugins/render/weather/WeatherConfigWidget.ui:33
 msgctxt "WeatherConfigWidget|"
 msgid "Weather condition"
-msgstr ""
+msgstr "ამინდის მდგომარეობა"
 
 #: src/plugins/render/weather/WeatherConfigWidget.ui:40
 msgctxt "WeatherConfigWidget|"
@@ -15436,7 +15458,7 @@ msgstr ""
 #: src/plugins/render/weather/WeatherConfigWidget.ui:55
 msgctxt "WeatherConfigWidget|"
 msgid "Wind direction"
-msgstr ""
+msgstr "ქარის მიმართულება"
 
 #: src/plugins/render/weather/WeatherConfigWidget.ui:62
 msgctxt "WeatherConfigWidget|"
@@ -15454,7 +15476,7 @@ msgstr ""
 #: src/plugins/render/weather/WeatherConfigWidget.ui:113
 msgctxt "WeatherConfigWidget|"
 msgid "Wind speed"
-msgstr ""
+msgstr "ქარის სიჩქარე"
 
 #: src/plugins/render/weather/WeatherConfigWidget.ui:76
 msgctxt "WeatherConfigWidget|"
@@ -15496,17 +15518,17 @@ msgstr ""
 #: src/plugins/render/weather/WeatherConfigWidget.ui:125
 msgctxt "WeatherConfigWidget|"
 msgid "Kilometers per hour"
-msgstr ""
+msgstr "კილომეტრი საათში"
 
 #: src/plugins/render/weather/WeatherConfigWidget.ui:130
 msgctxt "WeatherConfigWidget|"
 msgid "Miles per hour"
-msgstr ""
+msgstr "მილი საათში"
 
 #: src/plugins/render/weather/WeatherConfigWidget.ui:135
 msgctxt "WeatherConfigWidget|"
 msgid "Meters per second"
-msgstr ""
+msgstr "მეტრი წამში"
 
 #: src/plugins/render/weather/WeatherConfigWidget.ui:140
 msgctxt "WeatherConfigWidget|"
@@ -15533,31 +15555,37 @@ msgid ""
 "right:0px; -qt-block-indent:0; text-indent:0px;\">The unit used to measure "
 "the air pressure.</p></body></html>\n"
 msgstr ""
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" font-"
+"family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;\"><p "
+"style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">ჰაერის წნევის საზომი "
+"ერთეული.</p></body></html>\n"
 
 #: src/plugins/render/weather/WeatherConfigWidget.ui:169
 msgctxt "WeatherConfigWidget|"
 msgid "Hecto Pascals"
-msgstr ""
+msgstr "ჰექტოპასკალი"
 
 #: src/plugins/render/weather/WeatherConfigWidget.ui:174
 msgctxt "WeatherConfigWidget|"
 msgid "Kilo Pascals"
-msgstr ""
+msgstr "კილოპასკალი"
 
 #: src/plugins/render/weather/WeatherConfigWidget.ui:179
 msgctxt "WeatherConfigWidget|"
 msgid "Bars"
-msgstr ""
+msgstr "მართკუთხედები"
 
 #: src/plugins/render/weather/WeatherConfigWidget.ui:184
 msgctxt "WeatherConfigWidget|"
 msgid "Millimeters of Mercury"
-msgstr ""
+msgstr "ვერცხლისწყლის მილიმეტრი"
 
 #: src/plugins/render/weather/WeatherConfigWidget.ui:189
 msgctxt "WeatherConfigWidget|"
 msgid "Inches of Mercury"
-msgstr ""
+msgstr "ვერცხლისწყლის დუიმი"
 
 #: src/plugins/render/weather/WeatherConfigWidget.ui:202
 msgctxt "WeatherConfigWidget|"
@@ -15567,22 +15595,22 @@ msgstr "სხვადასხვა"
 #: src/plugins/render/weather/WeatherConfigWidget.ui:208
 msgctxt "WeatherConfigWidget|"
 msgid "Show only favorite items"
-msgstr ""
+msgstr "მხოლოდ რჩეული ჩანაწერების ჩვენება"
 
 #: src/plugins/render/weather/WeatherConfigWidget.ui:217
 msgctxt "WeatherConfigWidget|"
 msgid "Weather update interval"
-msgstr ""
+msgstr "ამინდის განახლების ინტერვალი"
 
 #: src/plugins/render/weather/WeatherConfigWidget.ui:224
 msgctxt "WeatherConfigWidget|"
 msgid " hours"
-msgstr ""
+msgstr " საათი"
 
 #: src/plugins/render/weather/WeatherData.cpp:355
 msgctxt "WeatherData|"
 msgid "sunny"
-msgstr ""
+msgstr "მზიანი"
 
 #: src/plugins/render/weather/WeatherData.cpp:357
 msgctxt "WeatherData|"
@@ -15597,7 +15625,7 @@ msgstr "აქა-იქ ღრუბლები"
 #: src/plugins/render/weather/WeatherData.cpp:363
 msgctxt "WeatherData|"
 msgid "partly cloudy"
-msgstr ""
+msgstr "ნაწილობრივ მოღრუბლული"
 
 #: src/plugins/render/weather/WeatherData.cpp:365
 msgctxt "WeatherData|"
@@ -15772,7 +15800,7 @@ msgstr "ბიუფორტი"
 #: src/plugins/render/weather/WeatherData.cpp:749
 msgctxt "WeatherData|"
 msgid "hPa"
-msgstr ""
+msgstr "ჰპა"
 
 #: src/plugins/render/weather/WeatherData.cpp:752
 msgctxt "WeatherData|"
@@ -15787,7 +15815,7 @@ msgstr "ზოლი"
 #: src/plugins/render/weather/WeatherData.cpp:758
 msgctxt "WeatherData|"
 msgid "mmHg"
-msgstr ""
+msgstr "მმHg"
 
 #: src/plugins/render/weather/WeatherData.cpp:761
 msgctxt "WeatherData|"
@@ -15813,49 +15841,49 @@ msgstr ""
 #, qt-format
 msgctxt "WeatherData|"
 msgid "Publishing time: %1<br>"
-msgstr ""
+msgstr "გამოქვეყნების დრო: %1<br>"
 
 #: src/plugins/render/weather/WeatherData.cpp:828
 #, qt-format
 msgctxt "WeatherData|"
 msgid "Condition: %1<br>"
-msgstr ""
+msgstr "მდგომარეობა: %1<br>"
 
 #: src/plugins/render/weather/WeatherData.cpp:832
 #, qt-format
 msgctxt "WeatherData|"
 msgid "Temperature: %1<br>"
-msgstr ""
+msgstr "ტემპერატურა: %1<br>"
 
 #: src/plugins/render/weather/WeatherData.cpp:836
 #, qt-format
 msgctxt "WeatherData|"
 msgid "Max temperature: %1<br>"
-msgstr ""
+msgstr "მაქს. ტემპერატურა: %1<br>"
 
 #: src/plugins/render/weather/WeatherData.cpp:840
 #, qt-format
 msgctxt "WeatherData|"
 msgid "Min temperature: %1<br>"
-msgstr ""
+msgstr "მინ. ტემპერატურა: %1<br>"
 
 #: src/plugins/render/weather/WeatherData.cpp:844
 #, qt-format
 msgctxt "WeatherData|"
 msgid "Wind direction: %1<br>"
-msgstr ""
+msgstr "ქარის მიმართულება: %1<br>"
 
 #: src/plugins/render/weather/WeatherData.cpp:848
 #, qt-format
 msgctxt "WeatherData|"
 msgid "Wind speed: %1<br>"
-msgstr ""
+msgstr "ქარის სიჩქარე: %1<br>"
 
 #: src/plugins/render/weather/WeatherData.cpp:852
 #, qt-format
 msgctxt "WeatherData|"
 msgid "Pressure: %1<br>"
-msgstr ""
+msgstr "წნევა: %1<br>"
 
 #: src/plugins/render/weather/WeatherData.cpp:856
 #, qt-format
@@ -15867,7 +15895,7 @@ msgstr ""
 #, qt-format
 msgctxt "WeatherData|"
 msgid "Humidity: %1<br>"
-msgstr ""
+msgstr "ტენიანობა: %1<br>"
 
 #: src/plugins/render/weather/WeatherItem.cpp:49
 msgctxt "WeatherItemPrivate|"
@@ -15878,49 +15906,49 @@ msgstr "ამინდი"
 #, qt-format
 msgctxt "WeatherItemPrivate|"
 msgid "Station: %1\n"
-msgstr ""
+msgstr "სადგური: %1\n"
 
 #: src/plugins/render/weather/WeatherItem.cpp:112
 #, qt-format
 msgctxt "WeatherItemPrivate|Wind: WindSpeed, WindDirection"
 msgid "Wind: %4, %5\n"
-msgstr ""
+msgstr "ქარი: %4, %5\n"
 
 #: src/plugins/render/weather/WeatherItem.cpp:116
 #, qt-format
 msgctxt "WeatherItemPrivate|Wind: WindSpeed"
 msgid "Wind: %4\n"
-msgstr ""
+msgstr "ქარი: %4\n"
 
 #: src/plugins/render/weather/WeatherItem.cpp:119
 #, qt-format
 msgctxt "WeatherItemPrivate|Wind: WindDirection"
 msgid "Wind: %4\n"
-msgstr ""
+msgstr "ქარი: %4\n"
 
 #: src/plugins/render/weather/WeatherItem.cpp:123
 #, qt-format
 msgctxt "WeatherItemPrivate|Pressure: Pressure, Development"
 msgid "Pressure: %6, %7"
-msgstr ""
+msgstr "წნევა: %6, %7"
 
 #: src/plugins/render/weather/WeatherItem.cpp:127
 #, qt-format
 msgctxt "WeatherItemPrivate|Pressure: Pressure"
 msgid "Pressure: %6"
-msgstr ""
+msgstr "წნევა: %6"
 
 #: src/plugins/render/weather/WeatherItem.cpp:130
 #, qt-format
 msgctxt "WeatherItemPrivate|Pressure Development"
 msgid "Pressure %7"
-msgstr ""
+msgstr "წნევა%7"
 
 #: src/plugins/render/weather/WeatherItem.cpp:145
 #, qt-format
 msgctxt "WeatherItemPrivate|DayOfWeek: Condition, MinTemp to MaxTemp"
 msgid "%1: %2, %3 to %4"
-msgstr ""
+msgstr "%1: %2, %3 to %4"
 
 #: src/plugins/render/weather/WeatherItem.cpp:215
 msgctxt "WeatherItemPrivate|"
@@ -15940,7 +15968,7 @@ msgstr "ამინდი"
 #: src/plugins/render/weather/WeatherPlugin.cpp:79
 msgctxt "Marble::WeatherPlugin|"
 msgid "&Weather"
-msgstr ""
+msgstr "&ამინდი"
 
 #: src/plugins/render/weather/WeatherPlugin.cpp:94
 msgctxt "Marble::WeatherPlugin|"
@@ -15981,7 +16009,7 @@ msgctxt ""
 "Marble::WikipediaItem|Title:\n"
 "Summary"
 msgid "<b>%1</b><br>%2"
-msgstr ""
+msgstr "<b>%1</b><br>%2"
 
 #: src/plugins/render/wikipedia/WikipediaPlugin.cpp:67
 msgctxt "Marble::WikipediaPlugin|"
@@ -16196,12 +16224,12 @@ msgstr ""
 #: src/plugins/runner/json/JsonPlugin.cpp:53
 msgctxt "Marble::JsonPlugin|"
 msgid "GeoJSON"
-msgstr ""
+msgstr "GeoJSON"
 
 #: src/plugins/runner/kml/KmlPlugin.cpp:19
 msgctxt "Marble::KmlPlugin|"
 msgid "KML File Parser"
-msgstr ""
+msgstr "KML ფალის დამმუშავებელი"
 
 #: src/plugins/runner/kml/KmlPlugin.cpp:34
 msgctxt "Marble::KmlPlugin|"
@@ -16271,7 +16299,7 @@ msgstr ""
 #: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:78
 msgctxt "QObject|"
 msgid "school"
-msgstr ""
+msgstr "სკოლა"
 
 #: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:80
 msgctxt "QObject|"
@@ -16281,7 +16309,7 @@ msgstr ""
 #: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:82
 msgctxt "QObject|"
 msgid "bar"
-msgstr ""
+msgstr "მართკუთხედი"
 
 #: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:84
 msgctxt "QObject|"
@@ -16311,12 +16339,12 @@ msgstr ""
 #: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:94
 msgctxt "QObject|"
 msgid "doctor"
-msgstr ""
+msgstr "ექიმი"
 
 #: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:96
 msgctxt "QObject|"
 msgid "hospital"
-msgstr ""
+msgstr "საავადმყოფო"
 
 #: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:98
 msgctxt "QObject|"
@@ -16326,7 +16354,7 @@ msgstr ""
 #: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:100
 msgctxt "QObject|"
 msgid "bank"
-msgstr ""
+msgstr "ბანკი"
 
 #: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:102
 msgctxt "QObject|"
@@ -16351,32 +16379,32 @@ msgstr ""
 #: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:110
 msgctxt "QObject|"
 msgid "castle"
-msgstr ""
+msgstr "სასახლე"
 
 #: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:112
 msgctxt "QObject|"
 msgid "cinema"
-msgstr ""
+msgstr "კინო"
 
 #: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:114
 msgctxt "QObject|"
 msgid "monument"
-msgstr ""
+msgstr "ძეგლი"
 
 #: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:116
 msgctxt "QObject|"
 msgid "museum"
-msgstr ""
+msgstr "მუზეუმი"
 
 #: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:118
 msgctxt "QObject|"
 msgid "ruin"
-msgstr ""
+msgstr "ნანგრევები"
 
 #: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:120
 msgctxt "QObject|"
 msgid "theatre"
-msgstr ""
+msgstr "თეატრი"
 
 #: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:122
 msgctxt "QObject|"
@@ -16386,42 +16414,42 @@ msgstr ""
 #: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:124
 msgctxt "QObject|"
 msgid "view point"
-msgstr ""
+msgstr "ხედის წერტილი"
 
 #: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:126
 msgctxt "QObject|"
 msgid "zoo"
-msgstr ""
+msgstr "ზოოპარკი"
 
 #: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:128
 msgctxt "QObject|"
 msgid "airport"
-msgstr ""
+msgstr "აეროპორტი"
 
 #: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:130
 msgctxt "QObject|"
 msgid "airport runway"
-msgstr ""
+msgstr "ასაფრენი ბილიკი"
 
 #: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:132
 msgctxt "QObject|"
 msgid "airport apron"
-msgstr ""
+msgstr "აეროპორტის აპრონი"
 
 #: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:134
 msgctxt "QObject|"
 msgid "airport taxiway"
-msgstr ""
+msgstr "აეროპორტის ტაქსის ბილიკი"
 
 #: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:136
 msgctxt "QObject|"
 msgid "bus station"
-msgstr ""
+msgstr "ავტობუსების სადგური"
 
 #: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:138
 msgctxt "QObject|"
 msgid "bus stop"
-msgstr ""
+msgstr "ავტობუსის გაჩერება"
 
 #: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:140
 msgctxt "QObject|"
@@ -16431,22 +16459,22 @@ msgstr ""
 #: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:142
 msgctxt "QObject|"
 msgid "fuel"
-msgstr ""
+msgstr "საწვავი"
 
 #: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:144
 msgctxt "QObject|"
 msgid "parking"
-msgstr ""
+msgstr "პარკინგი"
 
 #: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:146
 msgctxt "QObject|"
 msgid "train station"
-msgstr ""
+msgstr "რკინიგზის სადგური"
 
 #: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:148
 msgctxt "QObject|"
 msgid "atm"
-msgstr ""
+msgstr "ატმ"
 
 #: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:150
 msgctxt "QObject|"
@@ -16471,12 +16499,12 @@ msgstr ""
 #: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:158
 msgctxt "QObject|"
 msgid "taxi"
-msgstr ""
+msgstr "ტაქსი"
 
 #: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:160
 msgctxt "QObject|"
 msgid "memorial"
-msgstr ""
+msgstr "მემორიალი"
 
 #: src/plugins/runner/local-osm-search/LocalOsmSearchPlugin.cpp:40
 msgctxt "Marble::LocalOsmSearchPlugin|"
@@ -16502,7 +16530,7 @@ msgstr "ჩრდილოეთი"
 #: src/plugins/runner/local-osm-search/OsmDatabase.cpp:264
 msgctxt "QObject|"
 msgid "north-west"
-msgstr ""
+msgstr "ჩრდილო-დასავლეთი"
 
 #: src/plugins/runner/local-osm-search/OsmDatabase.cpp:266
 msgctxt "QObject|"
@@ -16512,7 +16540,7 @@ msgstr "დასავლეთი"
 #: src/plugins/runner/local-osm-search/OsmDatabase.cpp:268
 msgctxt "QObject|"
 msgid "south-west"
-msgstr ""
+msgstr "სამხრეთ-დასავლეთი"
 
 #: src/plugins/runner/local-osm-search/OsmDatabase.cpp:270
 msgctxt "QObject|"
@@ -16522,7 +16550,7 @@ msgstr "სამხრეთი"
 #: src/plugins/runner/local-osm-search/OsmDatabase.cpp:272
 msgctxt "QObject|"
 msgid "south-east"
-msgstr ""
+msgstr "სამხრეთ-აღმოსავლეთი"
 
 #: src/plugins/runner/local-osm-search/OsmDatabase.cpp:274
 msgctxt "QObject|"
@@ -16532,17 +16560,17 @@ msgstr "აღმოსავლეთი"
 #: src/plugins/runner/local-osm-search/OsmDatabase.cpp:276
 msgctxt "QObject|"
 msgid "north-east"
-msgstr ""
+msgstr "ჩრდილო-აღმოსავლეთი"
 
 #: src/plugins/runner/localdatabase/LocalDatabasePlugin.cpp:19
 msgctxt "Marble::LocalDatabasePlugin|"
 msgid "Local Database Search"
-msgstr ""
+msgstr "ლოკალურ ბაზაში ძებნა"
 
 #: src/plugins/runner/localdatabase/LocalDatabasePlugin.cpp:24
 msgctxt "Marble::LocalDatabasePlugin|"
 msgid "Local Database"
-msgstr ""
+msgstr "ლოკალური ბაზა"
 
 #: src/plugins/runner/localdatabase/LocalDatabasePlugin.cpp:39
 msgctxt "Marble::LocalDatabasePlugin|"
@@ -16620,7 +16648,7 @@ msgstr ""
 #: src/plugins/runner/mapquest/MapQuestPlugin.cpp:29
 msgctxt "Marble::MapQuestPlugin|"
 msgid "MapQuest"
-msgstr ""
+msgstr "MapQuest"
 
 #: src/plugins/runner/mapquest/MapQuestPlugin.cpp:44
 msgctxt "Marble::MapQuestPlugin|"
@@ -16680,7 +16708,7 @@ msgstr "%1-ის გადმოწერა"
 #, qt-format
 msgctxt "QObject|"
 msgid "Installing %1"
-msgstr ""
+msgstr "%1-ის დაყენება"
 
 #: src/plugins/runner/monav/MonavConfigWidget.cpp:618
 msgctxt "QObject|"
@@ -16705,7 +16733,7 @@ msgstr ""
 #: src/plugins/runner/monav/MonavConfigWidget.cpp:679
 msgctxt "QObject|"
 msgid "Nothing to do."
-msgstr ""
+msgstr "გასაკეთებელი არაფერია."
 
 #: src/plugins/runner/monav/MonavConfigWidget.ui:20
 msgctxt "MonavConfigWidget|"
@@ -16760,7 +16788,7 @@ msgstr "ჩადგმა"
 #: src/plugins/runner/monav/MonavConfigWidget.ui:228
 msgctxt "MonavConfigWidget|"
 msgid "Nothing to do."
-msgstr ""
+msgstr "გასაკეთებელი არაფერია."
 
 #: src/plugins/runner/monav/MonavConfigWidget.ui:244
 msgctxt "MonavConfigWidget|"
@@ -16775,7 +16803,7 @@ msgstr "შეწყვეტა"
 #: src/plugins/runner/monav/MonavMapsModel.cpp:41
 msgctxt "Marble::MonavMapsModel|"
 msgid "Name"
-msgstr ""
+msgstr "სახელი"
 
 #: src/plugins/runner/monav/MonavMapsModel.cpp:43
 msgctxt "Marble::MonavMapsModel|"
@@ -16785,7 +16813,7 @@ msgstr "ტრანსპორტი"
 #: src/plugins/runner/monav/MonavMapsModel.cpp:45
 msgctxt "Marble::MonavMapsModel|"
 msgid "Size"
-msgstr ""
+msgstr "ზომა"
 
 #: src/plugins/runner/monav/MonavMapsModel.cpp:47
 msgctxt "Marble::MonavMapsModel|"
@@ -16866,7 +16894,7 @@ msgstr ""
 #: src/plugins/runner/open-source-routing-machine/OSRMPlugin.cpp:27
 msgctxt "Marble::OSRMPlugin|"
 msgid "OSRM"
-msgstr ""
+msgstr "OSRM"
 
 #: src/plugins/runner/open-source-routing-machine/OSRMPlugin.cpp:42
 msgctxt "Marble::OSRMPlugin|"
@@ -17023,7 +17051,7 @@ msgstr ""
 #: src/plugins/runner/routino/RoutinoConfigWidget.ui:17
 msgctxt "RoutinoConfigWidget|"
 msgid "Transport:"
-msgstr ""
+msgstr "ტრანსპორტი:"
 
 #: src/plugins/runner/routino/RoutinoConfigWidget.ui:27
 msgctxt "RoutinoConfigWidget|"
@@ -17068,7 +17096,7 @@ msgstr "ცხენი"
 #: src/plugins/runner/routino/RoutinoPlugin.cpp:76
 msgctxt "Marble::RoutinoConfigWidget|"
 msgid "Wheelchair"
-msgstr ""
+msgstr "ბორბლებიანი სავარძელი"
 
 #: src/plugins/runner/routino/RoutinoPlugin.cpp:77
 msgctxt "Marble::RoutinoConfigWidget|"
@@ -17138,7 +17166,7 @@ msgstr ""
 #: src/plugins/runner/yours/YoursConfigWidget.ui:17
 msgctxt "YoursConfigWidget|"
 msgid "Transport:"
-msgstr ""
+msgstr "ტრანსპორტი:"
 
 #: src/plugins/runner/yours/YoursConfigWidget.ui:27
 msgctxt "YoursConfigWidget|"
