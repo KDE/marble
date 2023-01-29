@@ -2426,12 +2426,12 @@ msgstr "%1 მ"
 #: src/apps/marble-maps/Options.qml:31
 msgctxt "Options|"
 msgid "<h3>Layer Options</h3>"
-msgstr ""
+msgstr "<h3>ფენის მორგება</h3>"
 
 #: src/apps/marble-maps/Options.qml:35
 msgctxt "Options|"
 msgid "<h4>Public Transport Layers</h4>"
-msgstr ""
+msgstr "<h4>საჯარო ტრანსპორტის ფენები</h4>"
 
 #: src/apps/marble-maps/Options.qml:56
 msgctxt "Options|"
@@ -2617,7 +2617,7 @@ msgstr ""
 #: src/apps/marble-qt/QtMainWindow.cpp:279
 msgctxt "Marble::MainWindow|"
 msgid "Download &Region..."
-msgstr ""
+msgstr "&რეგიონის გადმოწერა..."
 
 #: src/apps/marble-qt/QtMainWindow.cpp:280
 msgctxt "Marble::MainWindow|"
@@ -2638,12 +2638,12 @@ msgstr "Ctrl+P"
 #: src/apps/marble-qt/QtMainWindow.cpp:289
 msgctxt "Marble::MainWindow|"
 msgid "Print a screenshot of the map"
-msgstr ""
+msgstr "რუკის ანაბეჭდის დაბეჭდვა"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:288
 msgctxt "Marble::MainWindow|"
 msgid "Print Previe&w ..."
-msgstr ""
+msgstr "&დასაბეჭდის გადახედვა..."
 
 #: src/apps/marble-qt/QtMainWindow.cpp:292
 msgctxt "Marble::MainWindow|"
@@ -2713,12 +2713,12 @@ msgstr ""
 #: src/apps/marble-qt/QtMainWindow.cpp:322
 msgctxt "Marble::MainWindow|"
 msgid "&Configure Marble"
-msgstr ""
+msgstr "Marble-ის &მორგება"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:323
 msgctxt "Marble::MainWindow|"
 msgid "Show the configuration dialog"
-msgstr ""
+msgstr "მორგების ფანჯრის ჩვენება"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:326
 msgctxt "Marble::MainWindow|"
@@ -2733,7 +2733,7 @@ msgstr ""
 #: src/apps/marble-qt/QtMainWindow.cpp:330
 msgctxt "Marble::MainWindow|"
 msgid "&Full Screen Mode"
-msgstr ""
+msgstr "&მთელი ეკრანის რეჟიმი"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:331
 msgctxt "Marble::MainWindow|"
@@ -2748,7 +2748,7 @@ msgstr "მთელი ეკრანის რეჟიმი"
 #: src/apps/marble-qt/QtMainWindow.cpp:336
 msgctxt "Marble::MainWindow|"
 msgid "&Show Status Bar"
-msgstr ""
+msgstr "&მდგომარეობის ზოლის ჩვენება"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:338
 msgctxt "Marble::MainWindow|"
