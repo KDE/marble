@@ -3686,7 +3686,7 @@ msgstr "მიმდინარე მდებარეობა"
 #: src/lib/marble/CurrentLocationWidget.ui:26
 msgctxt "CurrentLocationWidget|"
 msgid "Position Tracking"
-msgstr ""
+msgstr "მდებარეობის ტრეკინგი"
 
 #: src/lib/marble/CurrentLocationWidget.ui:37
 msgctxt "CurrentLocationWidget|"
@@ -3696,12 +3696,12 @@ msgstr "გამორთულია"
 #: src/lib/marble/CurrentLocationWidget.ui:53
 msgctxt "CurrentLocationWidget|"
 msgid "Show Track"
-msgstr ""
+msgstr "ტრეკის ჩვენება"
 
 #: src/lib/marble/CurrentLocationWidget.ui:66
 msgctxt "CurrentLocationWidget|"
 msgid "Clear Track"
-msgstr ""
+msgstr "ტრეკის გასუფთავება"
 
 #: src/lib/marble/CurrentLocationWidget.ui:80
 #: src/lib/marble/CurrentLocationWidget.ui:91
@@ -3724,7 +3724,7 @@ msgstr ""
 #: src/lib/marble/CurrentLocationWidget.ui:154
 msgctxt "CurrentLocationWidget|"
 msgid "Map Adjustment"
-msgstr ""
+msgstr "რუკის სწორება"
 
 #: src/lib/marble/CurrentLocationWidget.ui:165
 msgctxt "CurrentLocationWidget|Disable Auto Recenter"
@@ -3735,12 +3735,12 @@ msgstr "გამორთულია"
 msgctxt ""
 "CurrentLocationWidget|Always keep gps location at the center of the map"
 msgid "Keep at Center"
-msgstr ""
+msgstr "ცენტრში შენარჩუნება"
 
 #: src/lib/marble/CurrentLocationWidget.ui:175
 msgctxt "CurrentLocationWidget|Auto center when required"
 msgid "When required"
-msgstr ""
+msgstr "როცა საჭიროა"
 
 #: src/lib/marble/CurrentLocationWidget.ui:186
 msgctxt "CurrentLocationWidget|Auto Zoom to appropriate zoom level"
@@ -10329,7 +10329,7 @@ msgstr ""
 #: src/lib/marble/MarbleWidgetPopupMenu.cpp:131
 msgctxt "Marble::MarbleWidgetPopupMenu|"
 msgid "&Full Screen Mode"
-msgstr ""
+msgstr "&მთელი ეკრანის რეჟიმი"
 
 #: src/lib/marble/MarbleWidgetPopupMenu.cpp:134
 msgctxt "Marble::MarbleWidgetPopupMenu|"
@@ -16289,7 +16289,7 @@ msgstr ""
 #: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:74
 msgctxt "QObject|"
 msgid "library"
-msgstr ""
+msgstr "ბიბლიოთეკა"
 
 #: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:76
 msgctxt "QObject|"
