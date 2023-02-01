@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2023-01-27 20:01+0300\n"
+"PO-Revision-Date: 2023-01-31 21:50+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -7819,7 +7819,7 @@ msgstr "about:blank"
 #: src/lib/marble/MapThemeDownloadDialog.cpp:274
 msgctxt "Marble::MapItemDelegate|"
 msgid "Install"
-msgstr "Yükle"
+msgstr "Kur"
 
 #: src/lib/marble/MapThemeDownloadDialog.cpp:253
 #: src/lib/marble/MapThemeDownloadDialog.cpp:292
@@ -7851,7 +7851,7 @@ msgstr "Aç"
 #: src/lib/marble/MapThemeDownloadDialog.ui:14
 msgctxt "MapThemeDownloadDialog|"
 msgid "Install Maps"
-msgstr "Haritaları Yükle"
+msgstr "Haritaları Kur"
 
 #: src/lib/marble/MapThemeManager.cpp:402
 msgctxt "QObject|"
