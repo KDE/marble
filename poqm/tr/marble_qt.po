@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2023-01-31 21:50+0300\n"
+"PO-Revision-Date: 2023-02-01 14:05+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -37,7 +37,7 @@ msgid ""
 "astrogeology.usgs.gov\">USGS Astrogeology Research Program</a></p>"
 msgstr ""
 "<p>Ay.</p><p>Harita, Clementine Ay görevi (UVVIS Basemap Mosaic) tabanlıdır. "
-"Hazırlayanlar: NASA/SDIO, Saygı <a href=\"http://astrogeology.usgs.gov"
+"Emeği Geçenler: NASA/SDIO, Saygı <a href=\"http://astrogeology.usgs.gov"
 "\">USGS Astrojeoloji Araştırma Programı</a></p>"
 
 #. file data/maps/moon/clementine/clementine.dgml:111
@@ -1579,8 +1579,8 @@ msgid ""
 "3.0.</i></p>"
 msgstr ""
 "<p> Martin Behaim'in <i>Erdapfel'i</i> Dünya'nın mevcut olan en eski "
-"küresidir. <i>Hazırlayanlar: Alman Ulusal Müzesi, Nürnberg, Lisans: License: "
-"CC BY-SA 3.0.</i></p>"
+"küresidir. <i>Emeği Geçenler: Alman Ulusal Müzesi, Nürnberg, Lisans: "
+"License: CC BY-SA 3.0.</i></p>"
 
 #. file data/maps/earth/behaim1492/behaim1492.dgml:181
 msgctxt "DGML|"
@@ -1788,7 +1788,7 @@ msgid ""
 "p>"
 msgstr ""
 "<p>Dünya'nın Uzay'dan görünümü.</p><p>Harita NASA'nın güzel \"Blue Marble "
-"Next Generation\" görsellerine dayanmaktadır. Hazırlayanlar: NASA'nın Dünya "
+"Next Generation\" görsellerine dayanmaktadır. Emeği Geçenler: NASA'nın Dünya "
 "Gözlemevi</ p>"
 
 #. file data/maps/earth/bluemarble/bluemarble.dgml:252
@@ -9469,7 +9469,7 @@ msgstr ""
 #: src/lib/marble/MarbleAboutDialog.cpp:250
 msgctxt "QObject|"
 msgid "<b>Credits</b>"
-msgstr "<b>Hazırlayanlar</b>"
+msgstr "<b>Emeği Geçenler</b>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:251
 msgctxt "QObject|"
@@ -12411,7 +12411,7 @@ msgstr ""
 "span></p><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
 "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Uzaydan görüldüğü "
 "gibi Dünya. Harita, NASA'nın güzel \"Blue Marble Next Generation\" "
-"resimlerine dayanmaktadır. Hazırlayanlar: NASA'nın Dünya Gözlemevi</p></"
+"resimlerine dayanmaktadır. Emeği Geçenler: NASA'nın Dünya Gözlemevi</p></"
 "body></html>"
 
 #: src/lib/marble/TileCreatorDialog.ui:517
