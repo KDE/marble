@@ -88,7 +88,6 @@ class PlacemarkLayer : public QObject, public LayerInterface
     bool levelTagDebugModeEnabled() const;
     void setDebugLevelTag(int level);
 
-    static bool m_useXWorkaround;  // Indicates need for an X windows workaround.
  public Q_SLOTS:
    // earth
    void setShowPlaces( bool show );
@@ -109,7 +108,6 @@ class PlacemarkLayer : public QObject, public LayerInterface
 
  private:
     void renderDebug(GeoPainter *painter, ViewportParams *viewport, const QVector<VisiblePlacemark*> & placemarks) const;
-    static bool testXBug();
 
     PlacemarkLayout m_layout;
     bool m_debugModeEnabled;

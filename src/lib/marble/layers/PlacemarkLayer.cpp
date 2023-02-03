@@ -23,8 +23,6 @@
 
 using namespace Marble;
 
-bool PlacemarkLayer::m_useXWorkaround = false;
-
 PlacemarkLayer::PlacemarkLayer(QAbstractItemModel *placemarkModel,
                                 QItemSelectionModel *selectionModel,
                                 MarbleClock *clock, const StyleBuilder *styleBuilder,
@@ -36,9 +34,6 @@ PlacemarkLayer::PlacemarkLayer(QAbstractItemModel *placemarkModel,
     m_tileLevel(0),
     m_debugLevelTag(0)
 {
-    m_useXWorkaround = testXBug();
-    mDebug() << "Use workaround: " << ( m_useXWorkaround ? "1" : "0" );
-
     connect( &m_layout, SIGNAL(repaintNeeded()), SIGNAL(repaintNeeded()) );
 }
 
@@ -265,43 +260,6 @@ void PlacemarkLayer::requestStyleReset()
 void PlacemarkLayer::setTileLevel(int tileLevel)
 {
     m_tileLevel = tileLevel;
-}
-
-
-// Test if there a bug in the X server which makes
-// text fully transparent if it gets written on
-// QPixmaps that were initialized by filling them
-// with Qt::transparent
-
-bool PlacemarkLayer::testXBug()
-{
-    QString  testchar( "K" );
-    QFont    font( "Sans Serif", 10 );
-
-    int fontheight = QFontMetrics( font ).height();
-    int fontwidth  = QFontMetrics( font ).horizontalAdvance(testchar);
-    int fontascent = QFontMetrics( font ).ascent();
-
-    QPixmap  pixmap( fontwidth, fontheight );
-    pixmap.fill( Qt::transparent );
-
-    QPainter textpainter;
-    textpainter.begin( &pixmap );
-    textpainter.setPen( QColor( 0, 0, 0, 255 ) );
-    textpainter.setFont( font );
-    textpainter.drawText( 0, fontascent, testchar );
-    textpainter.end();
-
-    QImage image = pixmap.toImage();
-
-    for ( int x = 0; x < fontwidth; ++x ) {
-        for ( int y = 0; y < fontheight; ++y ) {
-            if ( qAlpha( image.pixel( x, y ) ) > 0 )
-                return false;
-        }
-    }
-
-    return true;
 }
 
 void PlacemarkLayer::renderDebug(GeoPainter *painter, ViewportParams *viewport, const QVector<VisiblePlacemark *> &placemarks) const

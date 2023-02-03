@@ -207,29 +207,12 @@ void VisiblePlacemark::drawLabelPixmap()
         textWidth = ( QFontMetrics( labelFont ).horizontalAdvance( labelName ) );
     }
 
+    m_labelPixmap = QPixmap( QSize( textWidth, textHeight ) );
+    m_labelPixmap.fill( Qt::transparent );
 
-    // Due to some XOrg bug this requires a workaround via
-    // QImage in some cases (at least with Qt 4.2).
-    if ( !PlacemarkLayer::m_useXWorkaround ) {
-        m_labelPixmap = QPixmap( QSize( textWidth, textHeight ) );
-        m_labelPixmap.fill( Qt::transparent );
+    QPainter labelPainter( &m_labelPixmap );
 
-        QPainter labelPainter( &m_labelPixmap );
-
-        drawLabelText( labelPainter, labelName, labelFont, labelStyle, labelColor );
-    } else {
-        QImage image( QSize( textWidth, textHeight ),
-                      QImage::Format_ARGB32_Premultiplied );
-        image.fill( 0 );
-
-        QPainter labelPainter( &image );
-
-        drawLabelText( labelPainter, labelName, labelFont, labelStyle, labelColor );
-
-        labelPainter.end();
-
-        m_labelPixmap = QPixmap::fromImage( image );
-    }
+    drawLabelText( labelPainter, labelName, labelFont, labelStyle, labelColor );
 }
 
 void VisiblePlacemark::drawLabelText(QPainter &labelPainter, const QString &text,
