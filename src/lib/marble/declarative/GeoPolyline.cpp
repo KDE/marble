@@ -132,7 +132,7 @@ namespace Marble
     {
         m_lineString.clear();
         m_lineString.setTessellate(m_tessellate);
-        for(auto item : coordinates) {
+        for(auto & item : coordinates) {
             QVariantMap map = item.toMap();
             m_lineString << GeoDataCoordinates(
                                 map["lon"].toReal(),
@@ -141,9 +141,6 @@ namespace Marble
                                 GeoDataCoordinates::Degree
                             );
         }
-
-        if (m_geoCoordinates == coordinates)
-            return;
 
         m_geoCoordinates = coordinates;
         emit geoCoordinatesChanged();
