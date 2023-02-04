@@ -299,8 +299,13 @@ bool TextureLayer::render( GeoPainter *painter, ViewportParams *viewport,
     d->m_runtimeTrace = QStringLiteral("Texture Cache: %1 ").arg(d->m_tileLoader.tileCount());
     d->m_renderState = RenderState(QStringLiteral("Texture Tiles"));
 
-    // Stop repaint timer if it is already running
-    d->m_repaintTimer.stop();
+    // Timers cannot be stopped from another thread (e.g. from QtQuick RenderThread).
+    if (QThread::currentThread() == QCoreApplication::instance()->thread()) {
+        // Stop repaint timer if it is already running
+        if (d->m_repaintTimer.isActive()) {
+            d->m_repaintTimer.stop();
+        }
+    }
 
     if ( d->m_textures.isEmpty() )
         return false;

@@ -18,6 +18,7 @@
 #include <QPaintDevice>
 #include <QPainter>
 #include <QPainterPath>
+#include <QThread>
 
 namespace Marble
 {
@@ -162,8 +163,13 @@ QPainterPath ProgressFloatItem::backgroundShape() const
 
 void ProgressFloatItem::paintContent( QPainter *painter )
 {
-    // Stop repaint timer if it is already running
-    m_repaintTimer.stop();
+    // Timers cannot be stopped from another thread (e.g. from QtQuick RenderThread).
+    if (QThread::currentThread() == QCoreApplication::instance()->thread()) {
+        // Stop repaint timer if it is already running
+        if (m_repaintTimer.isActive()) {
+            m_repaintTimer.stop();
+        }
+    }
 
     if ( !active() ) {
         return;
