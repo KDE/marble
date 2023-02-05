@@ -15250,17 +15250,17 @@ msgctxt "Marble::PostalCodePlugin|"
 msgid "Shows postal codes of the area on the map."
 msgstr "Visar områdets postnummer på kartan."
 
-#: src/plugins/render/progress/ProgressFloatItem.cpp:71
+#: src/plugins/render/progress/ProgressFloatItem.cpp:72
 msgctxt "Marble::ProgressFloatItem|"
 msgid "Download Progress Indicator"
 msgstr "Förloppsindikering för nerladdning"
 
-#: src/plugins/render/progress/ProgressFloatItem.cpp:76
+#: src/plugins/render/progress/ProgressFloatItem.cpp:77
 msgctxt "Marble::ProgressFloatItem|"
 msgid "&Download Progress"
 msgstr "&Nerladdningsförlopp"
 
-#: src/plugins/render/progress/ProgressFloatItem.cpp:91
+#: src/plugins/render/progress/ProgressFloatItem.cpp:92
 msgctxt "Marble::ProgressFloatItem|"
 msgid "Shows a pie chart download progress indicator"
 msgstr "Visar ett cirkeldiagram som anger nerladdningens förlopp"

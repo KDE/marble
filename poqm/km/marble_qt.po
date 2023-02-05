@@ -17580,21 +17580,21 @@ msgctxt "Marble::PostalCodePlugin|"
 msgid "Shows postal codes of the area on the map."
 msgstr "បង្ហាញ​កូដ​ប្រៃសណីយ៍​របស់​តំបន់​នៅ​លើ​ផែនទី ។"
 
-#: src/plugins/render/progress/ProgressFloatItem.cpp:71
+#: src/plugins/render/progress/ProgressFloatItem.cpp:72
 #, fuzzy
 #| msgid "Download Progress Indicator"
 msgctxt "Marble::ProgressFloatItem|"
 msgid "Download Progress Indicator"
 msgstr "ទាញ​យក​ទ្រនិច​បង្ហាញ​វឌ្ឍនភាព"
 
-#: src/plugins/render/progress/ProgressFloatItem.cpp:76
+#: src/plugins/render/progress/ProgressFloatItem.cpp:77
 #, fuzzy
 #| msgid "&Download Progress"
 msgctxt "Marble::ProgressFloatItem|"
 msgid "&Download Progress"
 msgstr "វឌ្ឍនភាព​ការ​ទាញ​យក"
 
-#: src/plugins/render/progress/ProgressFloatItem.cpp:91
+#: src/plugins/render/progress/ProgressFloatItem.cpp:92
 #, fuzzy
 #| msgid "Shows a pie chart download progress indicator"
 msgctxt "Marble::ProgressFloatItem|"

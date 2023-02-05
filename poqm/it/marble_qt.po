@@ -15281,17 +15281,17 @@ msgctxt "Marble::PostalCodePlugin|"
 msgid "Shows postal codes of the area on the map."
 msgstr "Mostra i codici postali dell'area sulla mappa."
 
-#: src/plugins/render/progress/ProgressFloatItem.cpp:71
+#: src/plugins/render/progress/ProgressFloatItem.cpp:72
 msgctxt "Marble::ProgressFloatItem|"
 msgid "Download Progress Indicator"
 msgstr "Indicatore dell'avanzamento di scaricamento"
 
-#: src/plugins/render/progress/ProgressFloatItem.cpp:76
+#: src/plugins/render/progress/ProgressFloatItem.cpp:77
 msgctxt "Marble::ProgressFloatItem|"
 msgid "&Download Progress"
 msgstr "&Avanzamento di scaricamento"
 
-#: src/plugins/render/progress/ProgressFloatItem.cpp:91
+#: src/plugins/render/progress/ProgressFloatItem.cpp:92
 msgctxt "Marble::ProgressFloatItem|"
 msgid "Shows a pie chart download progress indicator"
 msgstr "Mostra un indicatore a torta dell'avanzamento di scaricamento"

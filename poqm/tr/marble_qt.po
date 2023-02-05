@@ -15227,17 +15227,17 @@ msgctxt "Marble::PostalCodePlugin|"
 msgid "Shows postal codes of the area on the map."
 msgstr "Haritadaki bölgenin posta kodlarını gösterir."
 
-#: src/plugins/render/progress/ProgressFloatItem.cpp:71
+#: src/plugins/render/progress/ProgressFloatItem.cpp:72
 msgctxt "Marble::ProgressFloatItem|"
 msgid "Download Progress Indicator"
 msgstr "İndirme Süreci Göstergesi"
 
-#: src/plugins/render/progress/ProgressFloatItem.cpp:76
+#: src/plugins/render/progress/ProgressFloatItem.cpp:77
 msgctxt "Marble::ProgressFloatItem|"
 msgid "&Download Progress"
 msgstr "&İndirme Süreci"
 
-#: src/plugins/render/progress/ProgressFloatItem.cpp:91
+#: src/plugins/render/progress/ProgressFloatItem.cpp:92
 msgctxt "Marble::ProgressFloatItem|"
 msgid "Shows a pie chart download progress indicator"
 msgstr "İndirme süreci göstergesini pasta grafik şeklinde gösterir"

@@ -16926,21 +16926,21 @@ msgctxt "Marble::PostalCodePlugin|"
 msgid "Shows postal codes of the area on the map."
 msgstr "अनुप्रयोग के बारे में जानकारी दिखाएँ"
 
-#: src/plugins/render/progress/ProgressFloatItem.cpp:71
+#: src/plugins/render/progress/ProgressFloatItem.cpp:72
 #, fuzzy
 #| msgid "Download finished."
 msgctxt "Marble::ProgressFloatItem|"
 msgid "Download Progress Indicator"
 msgstr "डाउनलोड सम्पन्न."
 
-#: src/plugins/render/progress/ProgressFloatItem.cpp:76
+#: src/plugins/render/progress/ProgressFloatItem.cpp:77
 #, fuzzy
 #| msgid "Download finished."
 msgctxt "Marble::ProgressFloatItem|"
 msgid "&Download Progress"
 msgstr "डाउनलोड सम्पन्न."
 
-#: src/plugins/render/progress/ProgressFloatItem.cpp:91
+#: src/plugins/render/progress/ProgressFloatItem.cpp:92
 msgctxt "Marble::ProgressFloatItem|"
 msgid "Shows a pie chart download progress indicator"
 msgstr ""

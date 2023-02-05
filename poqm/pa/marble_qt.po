@@ -15669,17 +15669,17 @@ msgctxt "Marble::PostalCodePlugin|"
 msgid "Shows postal codes of the area on the map."
 msgstr "ਨਕਸ਼ੇ ਉੱਤੇ ਭੁਚਾਲ ਵੇਖੋ।"
 
-#: src/plugins/render/progress/ProgressFloatItem.cpp:71
+#: src/plugins/render/progress/ProgressFloatItem.cpp:72
 msgctxt "Marble::ProgressFloatItem|"
 msgid "Download Progress Indicator"
 msgstr "ਡਾਊਨਲੋਡ ਤਰੱਕੀ ਇੰਡੀਕੇਟਰ"
 
-#: src/plugins/render/progress/ProgressFloatItem.cpp:76
+#: src/plugins/render/progress/ProgressFloatItem.cpp:77
 msgctxt "Marble::ProgressFloatItem|"
 msgid "&Download Progress"
 msgstr "ਡਾਊਨਲੋਡ ਤਰੱਕੀ(&D)"
 
-#: src/plugins/render/progress/ProgressFloatItem.cpp:91
+#: src/plugins/render/progress/ProgressFloatItem.cpp:92
 #, fuzzy
 #| msgid "Shows a pie chart download progress indicator"
 msgctxt "Marble::ProgressFloatItem|"
