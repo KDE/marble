@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2021-10-18 00:13+0000\n"
-"PO-Revision-Date: 2022-08-27 05:17+0200\n"
+"PO-Revision-Date: 2023-02-05 09:49+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.1.1\n"
+"X-Generator: Poedit 3.2.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -695,25 +695,25 @@ msgstr ""
 #: marble.kcfg:58
 #, kde-format
 msgid "The date and time of marble clock"
-msgstr ""
+msgstr "Marble-ის საათის დრო და თარიღი"
 
 #. i18n: ectx: label, entry, group (Time)
 #: marble.kcfg:61
 #, kde-format
 msgid "The speed of marble clock"
-msgstr ""
+msgstr "Marble-ის საათის სიჩქარე"
 
 #. i18n: ectx: label, entry, group (View)
 #: marble.kcfg:107
 #, kde-format
 msgid "The unit chosen to measure distances."
-msgstr ""
+msgstr "მანძილის გასაზომი ერთეული."
 
 #. i18n: ectx: label, entry, group (View)
 #: marble.kcfg:115
 #, kde-format
 msgid "The unit chosen to measure angles."
-msgstr ""
+msgstr "კუთხის გასაზომი ერთეული."
 
 #. i18n: ectx: label, entry, group (View)
 #: marble.kcfg:124
@@ -731,19 +731,19 @@ msgstr ""
 #: marble.kcfg:146
 #, kde-format
 msgid "The localization of the labels."
-msgstr ""
+msgstr "ჭდეების ლოკალიზაცია."
 
 #. i18n: ectx: label, entry (mapFont), group (View)
 #: marble.kcfg:155
 #, kde-format
 msgid "The general font used on the map."
-msgstr ""
+msgstr "რუკაზე გამოყენებული ფონტი."
 
 #. i18n: ectx: label, entry (lastFileOpenDir), group (View)
 #: marble.kcfg:159
 #, kde-format
 msgid "The last directory that was opened by File->Open."
-msgstr ""
+msgstr "ბოლო საქაღალდის გახსნა შეგიძლიათ მენიუში ფაილი->გახსნა."
 
 #. i18n: ectx: label, entry, group (Navigation)
 #: marble.kcfg:179
@@ -755,7 +755,7 @@ msgstr ""
 #: marble.kcfg:187
 #, kde-format
 msgid "The location shown on application startup."
-msgstr ""
+msgstr "აპლიკაციის გაშვებისას ნაჩვენები ადგილი."
 
 #. i18n: ectx: label, entry, group (Navigation)
 #: marble.kcfg:201
@@ -842,7 +842,7 @@ msgstr "სიმაღლე: %1"
 #: marble_part.cpp:104
 #, kde-format
 msgid "Tile Zoom Level: %1"
-msgstr ""
+msgstr "ფილის გადიდების დონე: %1"
 
 #: marble_part.cpp:105
 #, kde-format
@@ -1018,7 +1018,7 @@ msgstr "ჩრდილის დამალვა"
 #: marble_part.cpp:851
 #, kde-format
 msgid "Shows and hides the shadow of the sun"
-msgstr ""
+msgstr "მზის ჩრდილის დამალვა/ჩვენება"
 
 #: marble_part.cpp:855
 #, kde-format
