@@ -2,22 +2,22 @@
 # This file is distributed under the same license as the PACKAGE package.
 # Vít Pelčák <vit@pelcak.org>, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2019.
 # Tomáš Chvátal <tomas.chvatal@gmail.com>, 2012, 2013.
-# Vit Pelcak <vit@pelcak.org>, 2021.
+# Vit Pelcak <vit@pelcak.org>, 2021, 2023.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2021-10-18 00:13+0000\n"
-"PO-Revision-Date: 2021-03-24 16:20+0100\n"
-"Last-Translator: Vit Pelcak <vpelcak@suse.cz>\n"
+"PO-Revision-Date: 2023-02-07 09:50+0100\n"
+"Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Lokalize 20.12.3\n"
+"X-Generator: Lokalize 22.12.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -903,7 +903,7 @@ msgstr "Otevřít soubor"
 #, kde-format
 msgctxt "@title:window"
 msgid "Export Map"
-msgstr ""
+msgstr "Exportovat mapu"
 
 #: marble_part.cpp:277
 #, kde-format
@@ -1059,7 +1059,7 @@ msgstr ""
 #, kde-format
 msgctxt "Add Bookmark"
 msgid "Add &Bookmark..."
-msgstr ""
+msgstr "Přidat zálož&ku..."
 
 #: marble_part.cpp:889
 #, kde-format
@@ -1081,13 +1081,13 @@ msgstr "Na&stavit umístění domova"
 #, kde-format
 msgctxt "Manage Bookmarks"
 msgid "&Manage Bookmarks..."
-msgstr ""
+msgstr "&Spravovat záložky..."
 
 #: marble_part.cpp:917
 #, kde-format
 msgctxt "Edit the map in an external application"
 msgid "&Edit Map..."
-msgstr ""
+msgstr "&Upravit mapu..."
 
 #: marble_part.cpp:925
 #, kde-format

@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2023-02-01 14:05+0300\n"
+"PO-Revision-Date: 2023-02-08 20:01+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -21,7 +21,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 22.12.1\n"
+"X-Generator: Lokalize 22.12.2\n"
 "X-Qt-Contexts: true\n"
 
 #. file data/maps/moon/clementine/clementine.dgml:5
@@ -3638,7 +3638,7 @@ msgstr "Kullanıcı adı veya parola yanlış"
 #: src/lib/marble/cloudsync/OwncloudSyncBackend.cpp:325
 msgctxt "Marble::OwncloudSyncBackend|"
 msgid "Login successful"
-msgstr "Giriş başarılı"
+msgstr "Oturum açma başarılı"
 
 #: src/lib/marble/cloudsync/RouteItemDelegate.cpp:182
 #: src/lib/marble/cloudsync/RouteItemDelegate.cpp:203
@@ -10095,7 +10095,7 @@ msgstr "Uzak sunucu URL, örn. sunucum.com/owncloud"
 #: src/lib/marble/MarbleCloudSyncSettingsWidget.ui:167
 msgctxt "MarbleCloudSyncSettingsWidget|"
 msgid "Username:"
-msgstr "Kullanıcı: "
+msgstr "Kullanıcı adı:"
 
 #: src/lib/marble/MarbleCloudSyncSettingsWidget.ui:181
 msgctxt "MarbleCloudSyncSettingsWidget|"
@@ -10105,7 +10105,7 @@ msgstr "Parola:"
 #: src/lib/marble/MarbleCloudSyncSettingsWidget.ui:197
 msgctxt "MarbleCloudSyncSettingsWidget|"
 msgid "Test Login"
-msgstr "Test Girişi"
+msgstr "Oturumu Sına"
 
 #: src/lib/marble/MarbleGlobal.h:249
 msgctxt "Marble|"

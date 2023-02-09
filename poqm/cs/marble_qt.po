@@ -1,22 +1,22 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # Vít Pelčák <vit@pelcak.org>, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2019, 2020.
-# Vit Pelcak <vit@pelcak.org>, 2021.
+# Vit Pelcak <vit@pelcak.org>, 2021, 2023.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: marble_qt\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2021-06-23 12:40+0200\n"
-"Last-Translator: Vit Pelcak <vpelcak@suse.cz>\n"
+"PO-Revision-Date: 2023-02-07 09:50+0100\n"
+"Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Lokalize 21.04.2\n"
+"X-Generator: Lokalize 22.12.2\n"
 "X-Qt-Contexts: true\n"
 
 #. file data/maps/moon/clementine/clementine.dgml:5
@@ -2703,7 +2703,7 @@ msgstr "Zkopírovat snímek obrazovky s mapou"
 #: src/apps/marble-qt/QtMainWindow.cpp:302
 msgctxt "Marble::MainWindow|"
 msgid "&Edit Map..."
-msgstr ""
+msgstr "&Upravit mapu..."
 
 #: src/apps/marble-qt/QtMainWindow.cpp:303
 msgctxt "Marble::MainWindow|"
@@ -2903,7 +2903,7 @@ msgstr "Zobrazit okénko s informacemi o knihovně Qt"
 #: src/apps/marble-qt/QtMainWindow.cpp:392
 msgctxt "Marble::MainWindow|"
 msgid "Add &Bookmark..."
-msgstr ""
+msgstr "Přidat zálož&ku..."
 
 #: src/apps/marble-qt/QtMainWindow.cpp:393
 msgctxt "Marble::MainWindow|"
@@ -2934,7 +2934,7 @@ msgstr "Zapnout zobrazení záložek"
 #: src/apps/marble-qt/QtMainWindow.cpp:406
 msgctxt "Marble::MainWindow|"
 msgid "&Manage Bookmarks..."
-msgstr ""
+msgstr "&Spravovat záložky..."
 
 #: src/apps/marble-qt/QtMainWindow.cpp:407
 msgctxt "Marble::MainWindow|"
@@ -3445,12 +3445,12 @@ msgstr "Složky"
 #: src/lib/marble/BookmarkManagerDialog.ui:74
 msgctxt "UiBookmarkManagerDialog|"
 msgid "New..."
-msgstr ""
+msgstr "Nový..."
 
 #: src/lib/marble/BookmarkManagerDialog.ui:81
 msgctxt "UiBookmarkManagerDialog|"
 msgid "Rename..."
-msgstr ""
+msgstr "Přejmenovat..."
 
 #: src/lib/marble/BookmarkManagerDialog.ui:91
 #: src/lib/marble/BookmarkManagerDialog.ui:151
@@ -4235,7 +4235,7 @@ msgstr ""
 #: src/lib/marble/declarative/Placemark.cpp:237
 msgctxt "Marble::Placemark|"
 msgid "Clinic"
-msgstr ""
+msgstr "Klinika"
 
 #: src/lib/marble/declarative/Placemark.cpp:238
 msgctxt "Marble::Placemark|"
@@ -4265,7 +4265,7 @@ msgstr ""
 #: src/lib/marble/declarative/Placemark.cpp:243
 msgctxt "Marble::Placemark|"
 msgid "Physiotherapist"
-msgstr ""
+msgstr "Fyzioterapeut"
 
 #: src/lib/marble/declarative/Placemark.cpp:244
 msgctxt "Marble::Placemark|"
@@ -4275,7 +4275,7 @@ msgstr ""
 #: src/lib/marble/declarative/Placemark.cpp:245
 msgctxt "Marble::Placemark|"
 msgid "Psychotherapist"
-msgstr ""
+msgstr "Psychoterapeut"
 
 #: src/lib/marble/declarative/Placemark.cpp:246
 msgctxt "Marble::Placemark|"
@@ -5219,7 +5219,7 @@ msgstr "Upravit záložku"
 #: src/lib/marble/EditBookmarkDialog.ui:25
 msgctxt "UiEditBookmarkDialog|"
 msgid "&Description:"
-msgstr ""
+msgstr "&Popis:"
 
 #: src/lib/marble/EditBookmarkDialog.ui:41
 msgctxt "UiEditBookmarkDialog|"
@@ -5269,12 +5269,12 @@ msgstr ""
 #: src/lib/marble/EditBookmarkDialog.ui:57
 msgctxt "UiEditBookmarkDialog|"
 msgid "&Folder:"
-msgstr ""
+msgstr "&Složka:"
 
 #: src/lib/marble/EditBookmarkDialog.ui:79
 msgctxt "UiEditBookmarkDialog|"
 msgid "&Add Folder..."
-msgstr ""
+msgstr "Přid&at složku..."
 
 #: src/lib/marble/EditPlacemarkDialog.cpp:108
 msgctxt "Marble::EditPlacemarkDialog|"
@@ -6353,7 +6353,7 @@ msgstr "Hřbitov"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:451
 msgctxt "GeoDataPlacemark|"
 msgid "Charging Station"
-msgstr ""
+msgstr "Dobíjecí stanice"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:452
 msgctxt "GeoDataPlacemark|"
@@ -6363,7 +6363,7 @@ msgstr ""
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:453
 msgctxt "GeoDataPlacemark|"
 msgid "Social Facility"
-msgstr ""
+msgstr "Sociální zařízení"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:454
 msgctxt "GeoDataPlacemark|"
@@ -6499,7 +6499,7 @@ msgstr ""
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:481
 msgctxt "GeoDataPlacemark|"
 msgid "Chemist"
-msgstr ""
+msgstr "Drogerie"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:482
 msgctxt "GeoDataPlacemark|"
@@ -6845,12 +6845,12 @@ msgstr "Platforma"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:551
 msgctxt "GeoDataPlacemark|"
 msgid "Bicycle Rental"
-msgstr ""
+msgstr "Půjčovna kol"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:552
 msgctxt "GeoDataPlacemark|"
 msgid "Car Rental"
-msgstr ""
+msgstr "Půjčovna vozů"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:553
 msgctxt "GeoDataPlacemark|"
@@ -6880,7 +6880,7 @@ msgstr "Stojan na kola"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:558
 msgctxt "GeoDataPlacemark|"
 msgid "Motorcycle Parking"
-msgstr ""
+msgstr "Parkoviště pro motocykly"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:559
 msgctxt "GeoDataPlacemark|"
@@ -9516,6 +9516,25 @@ msgid ""
 "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
 "size:9pt;\">https://marble.kde.org/</span></p></body></html>"
 msgstr ""
+"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+"REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'Sans Serif'; font-size:10pt; font-"
+"weight:400; font-style:normal;\">\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+"margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-"
+"size:9pt;\"></p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+"size:9pt;\">(c) 2007, Projekt Marble</span></p>\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+"margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-"
+"size:9pt; font-style:italic;\"></p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+"size:9pt;\">https://marble.kde.org/</span></p></body></html>"
 
 #: src/lib/marble/MarbleAboutDialog.ui:116
 msgctxt "MarbleAboutDialog|"
@@ -9748,7 +9767,7 @@ msgstr ""
 #: src/lib/marble/MarbleCloudSyncSettingsWidget.ui:119
 msgctxt "MarbleCloudSyncSettingsWidget|"
 msgid "Sync now"
-msgstr ""
+msgstr "Synchronizovat nyní"
 
 #: src/lib/marble/MarbleCloudSyncSettingsWidget.ui:147
 msgctxt "MarbleCloudSyncSettingsWidget|"
@@ -9983,7 +10002,7 @@ msgstr "Vrátit se na poslední navštívenou polohu"
 #: src/lib/marble/MarbleNavigationSettingsWidget.ui:184
 msgctxt "MarbleNavigationSettingsWidget|"
 msgid "&External editor:"
-msgstr ""
+msgstr "&Externí editor:"
 
 #: src/lib/marble/MarbleNavigationSettingsWidget.ui:194
 msgctxt "MarbleNavigationSettingsWidget|"
@@ -10829,7 +10848,7 @@ msgstr "Nová složka záložek"
 #: src/lib/marble/NewBookmarkFolderDialog.ui:22
 msgctxt "UiNewBookmarkFolderDialog|"
 msgid "&Folder name:"
-msgstr ""
+msgstr "Název s&ložky:"
 
 #: src/lib/marble/NewstuffModel.cpp:715 src/lib/marble/NewstuffModel.cpp:724
 msgctxt "Marble::NewstuffModel|"
@@ -11571,12 +11590,12 @@ msgstr ""
 #: src/lib/marble/routing/RoutingLayer.cpp:185
 msgctxt "QObject|"
 msgid "&Remove this Destination"
-msgstr ""
+msgstr "Odst&ranit tyto cíle"
 
 #: src/lib/marble/routing/RoutingLayer.cpp:188
 msgctxt "QObject|"
 msgid "&Export Route..."
-msgstr ""
+msgstr "&Exportovat cestu..."
 
 #: src/lib/marble/routing/RoutingLayer.cpp:760
 msgctxt "Marble::RoutingLayer|"
@@ -11694,12 +11713,12 @@ msgstr "Nový profil"
 #: src/lib/marble/routing/RoutingSettingsWidget.ui:22
 msgctxt "RoutingSettingsWidget|"
 msgid "&Add..."
-msgstr ""
+msgstr "Přid&at..."
 
 #: src/lib/marble/routing/RoutingSettingsWidget.ui:32
 msgctxt "RoutingSettingsWidget|"
 msgid "&Configure..."
-msgstr ""
+msgstr "N&astavit..."
 
 #: src/lib/marble/routing/RoutingSettingsWidget.ui:42
 msgctxt "RoutingSettingsWidget|"
@@ -13353,7 +13372,7 @@ msgstr "Časový rozsah"
 #: src/plugins/render/earthquake/EarthquakeConfigWidget.ui:65
 msgctxt "EarthquakeConfigWidget|"
 msgid "Past"
-msgstr ""
+msgstr "Minulý"
 
 #: src/plugins/render/earthquake/EarthquakeConfigWidget.ui:78
 msgctxt "EarthquakeConfigWidget|"
@@ -16246,13 +16265,13 @@ msgstr "Teplota: %1<br>"
 #, qt-format
 msgctxt "WeatherData|"
 msgid "Max temperature: %1<br>"
-msgstr ""
+msgstr "Maximální teplota: %1<br>"
 
 #: src/plugins/render/weather/WeatherData.cpp:840
 #, qt-format
 msgctxt "WeatherData|"
 msgid "Min temperature: %1<br>"
-msgstr ""
+msgstr "Minimální teplota: %1<br>"
 
 #: src/plugins/render/weather/WeatherData.cpp:844
 #, qt-format
@@ -16452,7 +16471,7 @@ msgstr "Rychlost:"
 #: src/plugins/runner/cyclestreets/CycleStreetsPlugin.cpp:35
 msgctxt "Marble::CycleStreetsConfigWidget|"
 msgid "balanced"
-msgstr ""
+msgstr "vyvážený"
 
 #: src/plugins/runner/cyclestreets/CycleStreetsPlugin.cpp:36
 msgctxt "Marble::CycleStreetsConfigWidget|"
@@ -16873,12 +16892,12 @@ msgstr "zastávka tramvaje"
 #: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:152
 msgctxt "QObject|"
 msgid "bicycle rental"
-msgstr ""
+msgstr "půjčovna kol"
 
 #: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:154
 msgctxt "QObject|"
 msgid "car rental"
-msgstr ""
+msgstr "půjčovna vozů"
 
 #: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:156
 msgctxt "QObject|"
@@ -17510,12 +17529,12 @@ msgstr ""
 #: src/plugins/runner/routino/RoutinoPlugin.cpp:81
 msgctxt "Marble::RoutinoConfigWidget|"
 msgid "Small lorry"
-msgstr ""
+msgstr "Malá dodávka"
 
 #: src/plugins/runner/routino/RoutinoPlugin.cpp:82
 msgctxt "Marble::RoutinoConfigWidget|"
 msgid "Large lorry"
-msgstr ""
+msgstr "Velká dodávka"
 
 #: src/plugins/runner/routino/RoutinoPlugin.cpp:83
 msgctxt "Marble::RoutinoConfigWidget|"
