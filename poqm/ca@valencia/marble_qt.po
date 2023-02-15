@@ -1,8 +1,8 @@
 # Translation of marble_qt.po to Catalan (Valencian)
-# Copyright (C) 2007-2022 This_file_is_part_of_KDE
+# Copyright (C) 2007-2023 This_file_is_part_of_KDE
 #
 # Orestes Mas Casals <orestes@tsc.upc.edu>, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014.
-# Josep M. Ferrer <txemaq@gmail.com>, 2008, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022.
+# Josep M. Ferrer <txemaq@gmail.com>, 2008, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023.
 # Joan Maspons <joanmaspons@gmail.com>, 2011.
 # Antoni Bella Pérez <antonibella5@yahoo.com>, 2012, 2013, 2015, 2016, 2017, 2018, 2019, 2020, 2021.
 msgid ""
@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2022-12-24 11:19+0100\n"
+"PO-Revision-Date: 2023-02-14 15:38+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
@@ -10580,152 +10580,152 @@ msgstr "Temps Coordinat Universal"
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:73
 msgctxt "MarbleTimeSettingsWidget|"
 msgid "European Central Time"
-msgstr "Temps de l'Europa central"
+msgstr "Hora de l'Europa central"
 
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:78
 msgctxt "MarbleTimeSettingsWidget|"
 msgid "Eastern European Time"
-msgstr "Temps de l'Europa oriental"
+msgstr "Hora de l'Europa oriental"
 
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:83
 msgctxt "MarbleTimeSettingsWidget|"
 msgid "Egypt Standard Time"
-msgstr "Temps estàndard Egipci"
+msgstr "Hora estàndard d'Egipte"
 
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:88
 msgctxt "MarbleTimeSettingsWidget|"
 msgid "Eastern African Time"
-msgstr "Temps africà oriental"
+msgstr "Hora d'Àfrica oriental"
 
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:93
 msgctxt "MarbleTimeSettingsWidget|"
 msgid "Middle East Time"
-msgstr "Temps de l'Orient Mitjà"
+msgstr "Hora de l'Orient Mitjà"
 
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:98
 msgctxt "MarbleTimeSettingsWidget|"
 msgid "Near East Time"
-msgstr "Temps del Pròxim Orient"
+msgstr "Hora del Pròxim Orient"
 
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:103
 msgctxt "MarbleTimeSettingsWidget|"
 msgid "Pakistan Lahore Time"
-msgstr "Temps del Lahore pakistanés"
+msgstr "Hora del Lahore pakistanés"
 
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:108
 msgctxt "MarbleTimeSettingsWidget|"
 msgid "India Standard Time"
-msgstr "Temps estàndard de l'Índia"
+msgstr "Hora estàndard de l'Índia"
 
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:113
 msgctxt "MarbleTimeSettingsWidget|"
 msgid "Bangladesh Standard Time"
-msgstr "Temps estàndard de Bangladesh"
+msgstr "Hora estàndard de Bangladesh"
 
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:118
 msgctxt "MarbleTimeSettingsWidget|"
 msgid "Vietnam Standard Time"
-msgstr "Temps estàndard de Vietnam"
+msgstr "Hora estàndard de Vietnam"
 
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:123
 msgctxt "MarbleTimeSettingsWidget|"
 msgid "China Taiwan Time"
-msgstr "Temps del Taiwan xinés"
+msgstr "Hora del Taiwan xinés"
 
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:128
 msgctxt "MarbleTimeSettingsWidget|"
 msgid "Japan Standard Time"
-msgstr "Temps estàndard del Japó"
+msgstr "Hora estàndard del Japó"
 
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:133
 msgctxt "MarbleTimeSettingsWidget|"
 msgid "Australia Central Time"
-msgstr "Temps d'Austràlia central"
+msgstr "Hora d'Austràlia central"
 
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:138
 msgctxt "MarbleTimeSettingsWidget|"
 msgid "Australia Eastern Time"
-msgstr "Temps d'Austràlia oriental"
+msgstr "Hora d'Austràlia oriental"
 
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:143
 msgctxt "MarbleTimeSettingsWidget|"
 msgid "Solomon Standard Time"
-msgstr "Temps estàndard de les Salomó"
+msgstr "Hora estàndard de les Salomó"
 
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:148
 msgctxt "MarbleTimeSettingsWidget|"
 msgid "New Zealand Standard Time"
-msgstr "Temps estàndard de Nova Zelanda"
+msgstr "Hora estàndard de Nova Zelanda"
 
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:153
 msgctxt "MarbleTimeSettingsWidget|"
 msgid "Midway Islands Time"
-msgstr "Temps de les Illes Midway"
+msgstr "Hora de les Illes Midway"
 
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:158
 msgctxt "MarbleTimeSettingsWidget|"
 msgid "Hawaii Standard Time"
-msgstr "Temps estàndard de Hawaii"
+msgstr "Hora estàndard de Hawaii"
 
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:163
 msgctxt "MarbleTimeSettingsWidget|"
 msgid "Alaska Standard Time"
-msgstr "Temps estàndard d'Alaska"
+msgstr "Hora estàndard d'Alaska"
 
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:168
 msgctxt "MarbleTimeSettingsWidget|"
 msgid "Pacific Standard Time"
-msgstr "Temps estàndard del pacífic"
+msgstr "Hora estàndard del pacífic"
 
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:173
 msgctxt "MarbleTimeSettingsWidget|"
 msgid "Phoenix Standard Time"
-msgstr "Temps estàndard de Phoenix"
+msgstr "Hora estàndard de Phoenix"
 
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:178
 msgctxt "MarbleTimeSettingsWidget|"
 msgid "Mountain Standard Time"
-msgstr "Temps estàndard de les muntanyes"
+msgstr "Hora estàndard de les muntanyes"
 
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:183
 msgctxt "MarbleTimeSettingsWidget|"
 msgid "Central Standard Time"
-msgstr "Temps estàndard central"
+msgstr "Hora estàndard central"
 
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:188
 msgctxt "MarbleTimeSettingsWidget|"
 msgid "Eastern Standard Time"
-msgstr "Temps estàndard oriental"
+msgstr "Hora estàndard oriental"
 
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:193
 msgctxt "MarbleTimeSettingsWidget|"
 msgid "Indiana Eastern Standard Time"
-msgstr "Temps estàndard oriental d'Indiana"
+msgstr "Hora estàndard oriental d'Indiana"
 
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:198
 msgctxt "MarbleTimeSettingsWidget|"
 msgid "Puerto Rico and US Virgin Islands Time"
-msgstr "Temps de Puerto Rico i Illes Verges Americanes"
+msgstr "Hora de Puerto Rico i Illes Verges Americanes"
 
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:203
 msgctxt "MarbleTimeSettingsWidget|"
 msgid "Canada Newfoundland Time"
-msgstr "Temps de Newfoundland canadenc"
+msgstr "Hora de Newfoundland canadenc"
 
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:208
 msgctxt "MarbleTimeSettingsWidget|"
 msgid "Argentina Standard Time"
-msgstr "Temps estàndard d'Argentina"
+msgstr "Hora estàndard d'Argentina"
 
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:213
 msgctxt "MarbleTimeSettingsWidget|"
 msgid "Brazil Eastern Time"
-msgstr "Temps oriental del Brasil"
+msgstr "Hora oriental del Brasil"
 
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:218
 msgctxt "MarbleTimeSettingsWidget|"
 msgid "Central African Time"
-msgstr "Temps central africà"
+msgstr "Hora central africana"
 
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:231
 msgctxt "MarbleTimeSettingsWidget|"
