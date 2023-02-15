@@ -14,6 +14,7 @@
   <name xml:lang="cs">Mapy Marble</name>
   <name xml:lang="de">Marble-Karten</name>
   <name xml:lang="en-GB">Marble Maps</name>
+  <name xml:lang="eo">Marble Mapoj</name>
   <name xml:lang="es">Mapas de Marble</name>
   <name xml:lang="eu">Marble Mapak</name>
   <name xml:lang="fi">Marble-kartat</name>
@@ -42,6 +43,7 @@
   <summary xml:lang="cs">Najděte si cestu</summary>
   <summary xml:lang="de">Routenplanung</summary>
   <summary xml:lang="en-GB">Find your way</summary>
+  <summary xml:lang="eo">Trovu vian vojon</summary>
   <summary xml:lang="es">Encuentre la ruta</summary>
   <summary xml:lang="eu">Aurkitu zure bidea</summary>
   <summary xml:lang="fi">Löydä reittisi</summary>
@@ -71,6 +73,7 @@
     <p xml:lang="cs">Navigace OpenStreetMap.</p>
     <p xml:lang="de">OpenStreetMap-Navigation.</p>
     <p xml:lang="en-GB">OpenStreetMap Navigation.</p>
+    <p xml:lang="eo">OpenStreetMap-Navigado.</p>
     <p xml:lang="es">Navegación de OpenStreetMap.</p>
     <p xml:lang="eu">OpenStreetMap Nabigazioa.</p>
     <p xml:lang="fi">OpenStreetMap-navigointi.</p>
