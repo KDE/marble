@@ -999,16 +999,16 @@ bool StarsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
 
                    
                     if ( idx1 < 0 ) {
-                        mDebug() << "unknown star, "
-                                 << starId1 <<  ", in constellation "
-                                 << m_constellations.at( c ).name();
+//                        mDebug() << "unknown star, "
+//                                 << starId1 <<  ", in constellation "
+//                                 << m_constellations.at( c ).name();
                         continue;
                     }
 
                     if ( idx2 < 0 ) {
-                        mDebug() << "unknown star, "
-                                 << starId1 <<  ", in constellation "
-                                 << m_constellations.at( c ).name();
+//                        mDebug() << "unknown star, "
+//                                 << starId1 <<  ", in constellation "
+//                                 << m_constellations.at( c ).name();
                         continue;
                     }
                     // Fetch quaternion from star s in constellation c
