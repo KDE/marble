@@ -5539,7 +5539,7 @@ msgstr "რბილი"
 #: src/lib/marble/FlyToEditWidget.cpp:63
 msgctxt "Marble::FlyToEditWidget|"
 msgid "Bounce"
-msgstr ""
+msgstr "ხტუნვა"
 
 #: src/lib/marble/FlyToEditWidget.cpp:80
 msgctxt "Marble::FlyToEditWidget|"
@@ -10324,7 +10324,7 @@ msgstr ""
 #: src/lib/marble/MarbleWidgetPopupMenu.cpp:130
 msgctxt "Marble::MarbleWidgetPopupMenu|"
 msgid "Add &Bookmark"
-msgstr ""
+msgstr "&სანიშნის დამატება"
 
 #: src/lib/marble/MarbleWidgetPopupMenu.cpp:131
 msgctxt "Marble::MarbleWidgetPopupMenu|"
@@ -12907,7 +12907,7 @@ msgstr "ატომი"
 #: src/plugins/render/compass/CompassConfigWidget.ui:70
 msgctxt "CompassConfigWidget|"
 msgid "Magnet"
-msgstr ""
+msgstr "მაგნიტი"
 
 #: src/plugins/render/compass/CompassFloatItem.cpp:58
 msgctxt "Marble::CompassFloatItem|"
@@ -13786,7 +13786,7 @@ msgstr ""
 #: src/plugins/render/measure/MeasureConfigDialog.ui:90
 msgctxt "MeasureConfigDialog|"
 msgid "Perimeter"
-msgstr ""
+msgstr "პერიმეტრი"
 
 #: src/plugins/render/measure/MeasureConfigDialog.ui:100
 #: src/plugins/render/measure/MeasureConfigDialog.ui:159
@@ -15254,7 +15254,7 @@ msgstr ""
 #: src/plugins/render/stars/StarsConfigWidget.ui:411
 msgctxt "StarsConfigWidget|"
 msgid "Abbreviation"
-msgstr ""
+msgstr "აბრევიატურა"
 
 #: src/plugins/render/stars/StarsConfigWidget.ui:435
 msgctxt "StarsConfigWidget|"
@@ -15805,7 +15805,7 @@ msgstr "ჰპა"
 #: src/plugins/render/weather/WeatherData.cpp:752
 msgctxt "WeatherData|"
 msgid "kPa"
-msgstr ""
+msgstr "კპა"
 
 #: src/plugins/render/weather/WeatherData.cpp:755
 msgctxt "WeatherData|"
