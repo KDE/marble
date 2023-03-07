@@ -641,6 +641,7 @@ QString MapViewWidget::Private::favoriteKey(const QModelIndex &index) const
 
 void MapViewWidget::Private::showContextMenu( const QPoint& pos )
 {
+    Q_UNUSED(pos)
     QMenu menu;
 
     QAction* iconSizeAction = menu.addAction( tr( "&Show Large Icons" ), q, SLOT(toggleIconSize()) );

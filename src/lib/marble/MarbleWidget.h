@@ -1127,6 +1127,8 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
 
     void highlightedPlacemarksChanged( qreal lon, qreal lat, GeoDataCoordinates::Unit unit );
 
+    void propertyValueChanged( const QString& name, bool value );
+
  protected:
     /**
      * @brief Reimplementation of the leaveEvent() function in QWidget.

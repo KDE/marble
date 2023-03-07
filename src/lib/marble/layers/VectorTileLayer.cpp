@@ -196,6 +196,12 @@ int VectorTileLayer::tileRowCount(int level) const
     return TileLoaderHelper::levelToRow( 1, level );
 }
 
+int VectorTileLayer::layerCount() const
+{
+    // So far we only support one sublayer of vector tiles
+    return 1;
+}
+
 void VectorTileLayer::downloadTile(const TileId &id)
 {
     const QVector<const GeoSceneVectorTileDataset *> vectorLayers = d->findRelevantVectorLayers( id );

@@ -21,6 +21,8 @@ public:
 
     virtual int tileColumnCount( int level ) const = 0;
     virtual int tileRowCount( int level ) const = 0;
+
+    virtual int layerCount() const = 0;
 };
 
 }

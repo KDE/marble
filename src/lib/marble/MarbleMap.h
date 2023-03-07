@@ -776,6 +776,8 @@ class MARBLE_EXPORT MarbleMap : public QObject
 
     void visibleRelationTypesChanged(GeoDataRelation::RelationTypes relationTypes);
 
+    void propertyValueChanged( const QString& name, bool value );
+
  protected:
 
     /**

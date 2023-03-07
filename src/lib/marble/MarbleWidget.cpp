@@ -216,6 +216,9 @@ void MarbleWidgetPrivate::construct()
     m_widget->connect( &m_map,   SIGNAL(renderStateChanged(RenderState)),
                        m_widget, SIGNAL(renderStateChanged(RenderState)) );
 
+    m_widget->connect( &m_map,   SIGNAL(propertyValueChanged(QString,bool)),
+                       m_widget, SIGNAL(propertyValueChanged(QString,bool)) );
+
     m_widget->connect( m_model.fileManager(), SIGNAL(centeredDocument(GeoDataLatLonBox)),
                        m_widget, SLOT(centerOn(GeoDataLatLonBox)) );
 

@@ -276,7 +276,7 @@ void TextureLayer::addLandDocument( const GeoDataDocument *landDocument )
     }
 }
 
-int TextureLayer::textureLayerCount() const
+int TextureLayer::layerCount() const
 {
     return d->m_layerDecorator.textureLayersSize();
 }

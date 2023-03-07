@@ -6,6 +6,8 @@
 #include <QDialog>
 #include <QVector>
 
+#include <MarbleGlobal.h>
+
 #include "marble_export.h"
 
 namespace Marble
@@ -31,10 +33,13 @@ class MARBLE_EXPORT DownloadRegionDialog: public QDialog
 
     QVector<TileCoordsPyramid> region() const;
 
+    TileType tileType() const;
+
  public Q_SLOTS:
     void setSpecifiedLatLonAltBox( GeoDataLatLonAltBox const & );
     void setVisibleLatLonAltBox( GeoDataLatLonAltBox const & );
-    void updateTextureLayer();
+    void updateTileLayer();
+    void delayUpdateTileLayer();
 
  Q_SIGNALS:
     /// This signal is emitted when the "Apply" button is pressed.
@@ -50,7 +55,8 @@ class MARBLE_EXPORT DownloadRegionDialog: public QDialog
 
  private Q_SLOTS:
     void toggleSelectionMethod();
-    void updateTilesCount();
+    void updateTileCount();
+    void updateTileType();
 
     /// This slot is called upon to update the route download UI when a route exists
     void updateRouteDialog();

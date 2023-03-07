@@ -56,6 +56,8 @@ public:
     int tileColumnCount( int level ) const;
     int tileRowCount( int level ) const;
 
+    int layerCount() const;
+
     void downloadTile( const TileId &stackedTileId );
 
 Q_SIGNALS:

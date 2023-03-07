@@ -142,6 +142,11 @@ enum Pole {
     SouthPole            ///< Only South Pole
 };
 
+enum TileType {
+    TextureTileType,        ///< Tiles that consist of bitmap data
+    VectorTileType          ///< Tiles that consist of vector data
+};
+
 /**
  * @brief This enum is used to describe the type of download
  */

@@ -1045,7 +1045,7 @@ void MarbleMapPrivate::updateMapTheme()
 
         m_vectorTileLayer.setMapTheme( vectorTiles, vectorTileLayerSettings );
 
-        if (m_textureLayer.textureLayerCount() == 0) {
+        if (m_textureLayer.layerCount() == 0) {
             m_layerManager.addLayer( &m_groundLayer );
         }
 
@@ -1093,11 +1093,12 @@ void MarbleMap::setPropertyValue( const QString& name, bool value )
     if ( d->m_model->mapTheme() ) {
         d->m_model->mapTheme()->settings()->setPropertyValue( name, value );
         d->m_textureLayer.setNeedsUpdate();
+        emit propertyValueChanged(name, value);
     }
     else {
         mDebug() << "WARNING: Failed to access a map theme! Property: " << name;
     }
-    if (d->m_textureLayer.textureLayerCount() == 0) {
+    if (d->m_textureLayer.layerCount() == 0) {
         d->m_layerManager.addLayer( &d->m_groundLayer );
     }
     else {

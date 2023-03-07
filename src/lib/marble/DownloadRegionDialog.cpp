@@ -12,13 +12,17 @@
 #include <QHBoxLayout>
 #include <QHideEvent>
 #include <QLabel>
+#include <QComboBox>
 #include <QPushButton>
+#include <QButtonGroup>
 #include <QRadioButton>
 #include <QShowEvent>
 #include <QVBoxLayout>
 #include <QSpinBox>
 #include <QScrollArea>
 #include <QSet>
+#include <QStandardItemModel>
+#include <QTimer>
 
 #include "GeoDataLatLonAltBox.h"
 #include "MarbleDebug.h"
@@ -47,7 +51,8 @@ namespace Marble
 int const maxTilesCount = 100000;
 int const minimumRouteOffset = 0;
 int const maximumRouteOffset = 10000;
-int averageTileSize = 13; //The average size of a tile in kilobytes
+int averageTextureTileSize = 13; //The average size of a tile in kilobytes
+int averageVectorTileSize = 30; // The average size of a vector tile in kilobytes
 
 class Q_DECL_HIDDEN DownloadRegionDialog::Private
 {
@@ -58,8 +63,12 @@ public:
     QWidget * createOkCancelButtonBox();
 
     bool hasRoute() const;
-    bool hasTextureLayer() const;
+    bool hasTextureLayers() const;
+    bool hasVectorLayers() const;
     QDialog * m_dialog;
+    QLabel * m_layerLabel;
+    QComboBox * m_layerComboBox;
+    QButtonGroup * m_buttonGroup;
     QRadioButton * m_visibleRegionMethodButton;
     QRadioButton * m_specifiedRegionMethodButton;
     LatLonBoxWidget * m_latLonBoxWidget;
@@ -80,11 +89,15 @@ public:
     GeoDataLatLonAltBox m_visibleRegion;
     RoutingModel *m_routingModel;
     DownloadRegion m_downloadRegion;
+    TileType m_tileType;
 };
 
 DownloadRegionDialog::Private::Private( MarbleWidget * const widget,
                                         QDialog * const dialog )
     : m_dialog( dialog ),
+      m_layerLabel( nullptr ),
+      m_layerComboBox( nullptr ),
+      m_buttonGroup(nullptr),
       m_visibleRegionMethodButton( nullptr ),
       m_specifiedRegionMethodButton( nullptr ),
       m_latLonBoxWidget( new LatLonBoxWidget ),
@@ -98,7 +111,7 @@ DownloadRegionDialog::Private::Private( MarbleWidget * const widget,
       m_applyButton( nullptr ),
       m_textureLayer( widget->textureLayer() ),
       m_vectorTileLayer( widget->vectorTileLayer() ),
-      m_visibleTileLevel( m_textureLayer->tileZoomLevel() ),
+      m_visibleTileLevel( 0 ),
       m_model( widget->model() ),
       m_widget( widget ),
       m_selectionMethod( VisibleRegionMethod ),
@@ -111,12 +124,18 @@ DownloadRegionDialog::Private::Private( MarbleWidget * const widget,
     m_downloadRegion.setMarbleModel( widget->model() );
 }
 
+
+
 QWidget * DownloadRegionDialog::Private::createSelectionMethodBox()
 {
+    m_buttonGroup = new QButtonGroup(m_dialog);
+    m_buttonGroup->setExclusive(true);
     m_visibleRegionMethodButton = new QRadioButton( tr( "Visible region" ) );
+    m_buttonGroup->addButton(m_visibleRegionMethodButton);
     m_specifiedRegionMethodButton = new QRadioButton( tr( "Specify region" ) );
-
+    m_buttonGroup->addButton(m_specifiedRegionMethodButton);
     m_routeDownloadMethodButton = new QRadioButton( tr( "Download Route" ) );
+    m_buttonGroup->addButton(m_routeDownloadMethodButton);
     m_routeDownloadMethodButton->setToolTip( tr( "Enabled when a route exists" ) );
     m_routeDownloadMethodButton->setEnabled( hasRoute() );
     m_routeDownloadMethodButton->setChecked( hasRoute() );
@@ -133,11 +152,7 @@ QWidget * DownloadRegionDialog::Private::createSelectionMethodBox()
     m_routeOffsetLabel = new QLabel( tr( "Offset from route:" ) );
     m_routeOffsetLabel->setAlignment( Qt::AlignHCenter );
 
-    connect( m_visibleRegionMethodButton, SIGNAL(toggled(bool)),
-             m_dialog, SLOT(toggleSelectionMethod()) );
-    connect( m_specifiedRegionMethodButton, SIGNAL(toggled(bool)),
-             m_dialog, SLOT(toggleSelectionMethod()));
-    connect( m_routeDownloadMethodButton, SIGNAL(toggled(bool)),
+    connect( m_buttonGroup, SIGNAL(buttonToggled(QAbstractButton*,bool)),
              m_dialog, SLOT(toggleSelectionMethod()) );
     connect( m_routingModel, SIGNAL(modelReset()), m_dialog, SLOT(updateRouteDialog()) );
     connect( m_routingModel, SIGNAL(rowsInserted(QModelIndex,int,int)),
@@ -212,9 +227,14 @@ bool DownloadRegionDialog::Private::hasRoute() const
     return !m_routingModel->route().path().isEmpty();
 }
 
-bool DownloadRegionDialog::Private::hasTextureLayer() const
+bool DownloadRegionDialog::Private::hasTextureLayers() const
 {
     return m_model->mapTheme()->map()->hasTextureLayers();
+}
+
+bool DownloadRegionDialog::Private::hasVectorLayers() const
+{
+    return m_model->mapTheme()->map()->hasVectorLayers();
 }
 
 DownloadRegionDialog::DownloadRegionDialog( MarbleWidget *const widget, QWidget * const parent,
@@ -224,8 +244,18 @@ DownloadRegionDialog::DownloadRegionDialog( MarbleWidget *const widget, QWidget 
 {
     setWindowTitle( tr( "Download Region" ));
     QVBoxLayout * const layout = new QVBoxLayout;
+    d->m_layerLabel = new QLabel( tr( "Tile type to be downloaded:" ));
+    d->m_layerComboBox = new QComboBox();
+    d->m_layerComboBox->addItem(tr("Texture tiles"));
+    d->m_layerComboBox->addItem(tr("Vector tiles"));
+    d->m_layerComboBox->setToolTip(tr("Allows selection between layer types that are visibly being rendered."));
+    updateTileLayer();
+
+    layout->addWidget( d->m_layerLabel );
+    layout->addWidget( d->m_layerComboBox );
     layout->addWidget( d->createSelectionMethodBox() );
     layout->addWidget( d->m_tileLevelRangeWidget );
+    layout->addStretch();
     layout->addLayout( d->createTilesCounter() );
 
     if ( MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen ) {
@@ -243,14 +273,20 @@ DownloadRegionDialog::DownloadRegionDialog( MarbleWidget *const widget, QWidget 
         setLayout( layout );
     }
 
-    connect( d->m_latLonBoxWidget, SIGNAL(valueChanged()), SLOT(updateTilesCount()) );
-    connect( d->m_tileLevelRangeWidget, SIGNAL(topLevelChanged(int)),
-             SLOT(updateTilesCount()) );
-    connect( d->m_tileLevelRangeWidget, SIGNAL(bottomLevelChanged(int)),
-             SLOT(updateTilesCount()) );
-    connect( d->m_routeOffsetSpinBox, SIGNAL(valueChanged(double)), SLOT(updateTilesCount()) );
-    connect( d->m_routeOffsetSpinBox, SIGNAL(valueChanged(double)), SLOT(setOffsetUnit()) );
-    connect( d->m_model, SIGNAL(themeChanged(QString)), SLOT(updateTilesCount()) );
+    connect( d->m_layerComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged),
+             this, &DownloadRegionDialog::updateTileCount );
+    connect( d->m_latLonBoxWidget, &Marble::LatLonBoxWidget::valueChanged,
+             this, &DownloadRegionDialog::updateTileCount );
+    connect( d->m_tileLevelRangeWidget, &TileLevelRangeWidget::topLevelChanged,
+             this, &DownloadRegionDialog::updateTileCount );
+    connect( d->m_tileLevelRangeWidget, &TileLevelRangeWidget::bottomLevelChanged,
+             this, &DownloadRegionDialog::updateTileCount );
+    connect( d->m_routeOffsetSpinBox, QOverload<double>::of(&QDoubleSpinBox::valueChanged),
+             this, &DownloadRegionDialog::updateTileCount );
+    connect( d->m_routeOffsetSpinBox, QOverload<double>::of(&QDoubleSpinBox::valueChanged),
+             this, &DownloadRegionDialog::setOffsetUnit );
+    connect( d->m_model, &MarbleModel::themeChanged,
+             this, &DownloadRegionDialog::delayUpdateTileLayer);
 }
 
 DownloadRegionDialog::~DownloadRegionDialog()
@@ -273,13 +309,6 @@ void DownloadRegionDialog::setVisibleTileLevel( int const tileLevel )
 
 void DownloadRegionDialog::setSelectionMethod( SelectionMethod const selectionMethod )
 {
-    // block signals to prevent infinite recursion:
-    // radioButton->setChecked() -> toggleSelectionMethod() -> setSelectionMethod()
-    //     -> radioButton->setChecked() -> ...
-    d->m_visibleRegionMethodButton->blockSignals( true );
-    d->m_specifiedRegionMethodButton->blockSignals( true );
-    d->m_routeDownloadMethodButton->blockSignals( true );
-
     d->m_selectionMethod = selectionMethod;
     switch ( selectionMethod ) {
     case VisibleRegionMethod:
@@ -302,24 +331,26 @@ void DownloadRegionDialog::setSelectionMethod( SelectionMethod const selectionMe
         d->m_latLonBoxWidget->setEnabled( false );
     }
 
-    updateTilesCount();
-    d->m_visibleRegionMethodButton->blockSignals( false );
-    d->m_specifiedRegionMethodButton->blockSignals( false );
-    d->m_routeDownloadMethodButton->blockSignals( false );
+    updateTileCount();
 }
 
 QVector<TileCoordsPyramid> DownloadRegionDialog::region() const
 {
-    if ( !d->hasTextureLayer() ) {
+    if ( !d->hasTextureLayers() && !d->hasVectorLayers() ) {
         return QVector<TileCoordsPyramid>();
     }
 
-    const TileLayer * tileLayer = d->m_textureLayer->textureLayerCount() > 0 ? dynamic_cast<const TileLayer *>(d->m_textureLayer) : dynamic_cast<const TileLayer *>(d->m_vectorTileLayer);
+    d->m_visibleTileLevel = (tileType() == TextureTileType && d->m_textureLayer->tileZoomLevel() != -1)
+            ? d->m_textureLayer->tileZoomLevel() : d->m_vectorTileLayer->tileZoomLevel();
 
-    // TODO: enhance for VectorLayer support
+    const TileLayer * tileLayer = (tileType() == TextureTileType && d->m_textureLayer->layerCount() > 0)
+            ? dynamic_cast<const TileLayer *>(d->m_textureLayer)
+            : dynamic_cast<const TileLayer *>(d->m_vectorTileLayer);
+
     d->m_downloadRegion.setTileLevelRange( d->m_tileLevelRangeWidget->topLevel(),
                                            d->m_tileLevelRangeWidget->bottomLevel() );
     d->m_downloadRegion.setVisibleTileLevel( d->m_visibleTileLevel );
+
     // check whether "visible region" or "lat/lon region" is selection method
     GeoDataLatLonAltBox downloadRegion;
     switch ( d->m_selectionMethod ) {
@@ -329,7 +360,7 @@ QVector<TileCoordsPyramid> DownloadRegionDialog::region() const
     case SpecifiedRegionMethod:
         downloadRegion = GeoDataLatLonAltBox( d->m_latLonBoxWidget->latLonBox(), 0, 0 );
         break;
-   case RouteDownloadMethod:
+    case RouteDownloadMethod:
         qreal offset = d->m_routeOffsetSpinBox->value();
         if (d->m_routeOffsetSpinBox->suffix() == QLatin1String(" km")) {
             offset *= KM2METER;
@@ -338,7 +369,18 @@ QVector<TileCoordsPyramid> DownloadRegionDialog::region() const
         return d->m_downloadRegion.fromPath( tileLayer, offset, waypoints );
     }
 
+    // For Mercator tiles limit the LatLonBox to the valid tile range.
+    if (tileLayer->tileProjection()->type() == GeoSceneAbstractTileProjection::Mercator) {
+        downloadRegion.setNorth(qMin(downloadRegion.north(), +1.4835));
+        downloadRegion.setSouth(qMax(downloadRegion.south(), -1.4835));
+    }
+
     return d->m_downloadRegion.region( tileLayer, downloadRegion );
+}
+
+TileType DownloadRegionDialog::tileType() const
+{
+    return d->m_layerComboBox->currentIndex() == 0 ? TextureTileType : VectorTileType;
 }
 
 void DownloadRegionDialog::setSpecifiedLatLonAltBox( GeoDataLatLonAltBox const & region )
@@ -355,13 +397,18 @@ void DownloadRegionDialog::setVisibleLatLonAltBox( GeoDataLatLonAltBox const & r
     if ( d->m_selectionMethod == VisibleRegionMethod ) {
         setSpecifiedLatLonAltBox( region );
     }
-    updateTilesCount();
+    updateTileCount();
 }
 
-void DownloadRegionDialog::updateTextureLayer()
+void DownloadRegionDialog::updateTileLayer()
 {
-    mDebug() << "DownloadRegionDialog::updateTextureLayer";
-    updateTilesCount();
+    updateTileType();
+    updateTileCount();
+}
+
+void DownloadRegionDialog::delayUpdateTileLayer()
+{
+    QTimer::singleShot(500, this, &DownloadRegionDialog::updateTileLayer);
 }
 
 void DownloadRegionDialog::hideEvent( QHideEvent * event )
@@ -369,7 +416,9 @@ void DownloadRegionDialog::hideEvent( QHideEvent * event )
     disconnect( d->m_widget, SIGNAL(visibleLatLonAltBoxChanged(GeoDataLatLonAltBox)),
                 this, SLOT(setVisibleLatLonAltBox(GeoDataLatLonAltBox)) );
     disconnect( d->m_widget, SIGNAL(themeChanged(QString)),
-                this, SLOT(updateTextureLayer()) );
+                this, SLOT(delayUpdateTileLayer()) );
+    disconnect( d->m_widget, SIGNAL(propertyValueChanged(QString,bool)),
+                this, SLOT(delayUpdateTileLayer()) );
 
     emit hidden();
     event->accept();
@@ -380,7 +429,13 @@ void DownloadRegionDialog::showEvent( QShowEvent * event )
     connect( d->m_widget, SIGNAL(visibleLatLonAltBoxChanged(GeoDataLatLonAltBox)),
              this, SLOT(setVisibleLatLonAltBox(GeoDataLatLonAltBox)) );
     connect( d->m_widget, SIGNAL(themeChanged(QString)),
-             this, SLOT(updateTextureLayer()) );
+             this, SLOT(delayUpdateTileLayer()) );
+    connect( d->m_widget, SIGNAL(propertyValueChanged(QString,bool)),
+             this, SLOT(delayUpdateTileLayer()) );
+
+    setVisibleTileLevel(d->m_widget->tileZoomLevel());
+
+    updateTileCount();
 
     emit shown();
     event->accept();
@@ -388,40 +443,46 @@ void DownloadRegionDialog::showEvent( QShowEvent * event )
 
 void DownloadRegionDialog::toggleSelectionMethod()
 {
-    // TODO:QButtonGroup would be easier to handle
-    switch ( d->m_selectionMethod ) {
-    case VisibleRegionMethod:
-        if( d->m_specifiedRegionMethodButton->isChecked() ) {
-            setSelectionMethod( SpecifiedRegionMethod );
-        }
-        else if( d->m_routeDownloadMethodButton->isChecked() ) {
-            setSelectionMethod( RouteDownloadMethod );
-        }
-
-        break;
-    case SpecifiedRegionMethod:
-        if( d->m_visibleRegionMethodButton->isChecked() ) {
-            setSelectionMethod( VisibleRegionMethod );
-        }
-        else if ( d->m_routeDownloadMethodButton->isChecked() ) {
-            setSelectionMethod( RouteDownloadMethod );
-        }
-        break;
-    case RouteDownloadMethod:
-        if( d->m_specifiedRegionMethodButton->isChecked() ) {
-            setSelectionMethod( SpecifiedRegionMethod );
-        }
-        else if ( d->m_visibleRegionMethodButton->isChecked() ) {
-            setSelectionMethod( VisibleRegionMethod );
-        }
-        break;
-
+    if( d->m_specifiedRegionMethodButton->isChecked() ) {
+        setSelectionMethod( SpecifiedRegionMethod );
+    }
+    else if( d->m_routeDownloadMethodButton->isChecked() ) {
+        setSelectionMethod( RouteDownloadMethod );
+    }
+    else if( d->m_specifiedRegionMethodButton->isChecked() ) {
+        setSelectionMethod( SpecifiedRegionMethod );
     }
 }
 
-void DownloadRegionDialog::updateTilesCount()
+void DownloadRegionDialog::updateTileType()
 {
-    if ( !isVisible() || !d->hasTextureLayer() ) {
+    bool hasVisibleTextureLayers = d->hasTextureLayers() && d->m_textureLayer->layerCount() > 0;
+    bool hasVisibleVectorLayers = d->hasVectorLayers() && d->m_vectorTileLayer->layerCount() > 0;
+
+    QStandardItemModel *model = qobject_cast<QStandardItemModel *>(d->m_layerComboBox->model());
+    Q_ASSERT(model != nullptr);
+    QStandardItem *item = nullptr;
+    item = model->item(0);
+    item->setFlags(hasVisibleTextureLayers ? item->flags() | Qt::ItemIsEnabled
+                                           : item->flags() & ~Qt::ItemIsEnabled);
+    item = model->item(1);
+    item->setFlags(hasVisibleVectorLayers ? item->flags() | Qt::ItemIsEnabled
+                                          : item->flags() & ~Qt::ItemIsEnabled);
+
+    bool allTileTypesAvailable = hasVisibleTextureLayers && hasVisibleVectorLayers;
+
+    d->m_layerComboBox->setEnabled(allTileTypesAvailable);
+    if (hasVisibleVectorLayers) {
+        d->m_layerComboBox->setCurrentIndex(1);
+    }
+    else if (hasVisibleTextureLayers && !hasVisibleVectorLayers) {
+        d->m_layerComboBox->setCurrentIndex(0);
+    }
+}
+
+void DownloadRegionDialog::updateTileCount()
+{
+    if ( !isVisible() ) {
         return;
     }
 
@@ -450,29 +511,37 @@ void DownloadRegionDialog::updateTilesCount()
         }
     }
 
+    qreal tileDownloadSize = 0;
+
     if ( tilesCount > maxTilesCount ) {
         d->m_tileSizeInfo->setToolTip( QString() );
         //~ singular There is a limit of %n tile to download.
         //~ plural There is a limit of %n tiles to download.
         d->m_tileSizeInfo->setText( tr( "There is a limit of %n tile(s) to download.", "",
                                                maxTilesCount ) );
-    } else if (themeId == QLatin1String("earth/openstreetmap/openstreetmap.dgml")) {
-        qreal tileDownloadSize = tilesCount * averageTileSize;
+    } else {
+        if (themeId == QLatin1String("earth/openstreetmap/openstreetmap.dgml") ||
+            themeId == QLatin1String("earth/openstreetmap/openseamap.dgml") ||
+            themeId == QLatin1String("earth/vectorosm/vectorosm.dgml") ) {
 
-        d->m_tileSizeInfo->setToolTip( tr( "Approximate size of the tiles to be downloaded" ) );
+            tileDownloadSize = tileType() == TextureTileType
+                    ? tilesCount * averageTextureTileSize
+                    : tilesCount * averageVectorTileSize;
 
-        if( tileDownloadSize > 1024 ) {
-            tileDownloadSize = tileDownloadSize / 1024;
-            d->m_tileSizeInfo->setText( tr( "Estimated download size: %1 MB" ).arg( ceil( tileDownloadSize ) ) );
+            d->m_tileSizeInfo->setToolTip( tr( "Approximate size of the tiles to be downloaded" ) );
+
+            if( tileDownloadSize > 1024 ) {
+                tileDownloadSize = tileDownloadSize / 1024;
+                d->m_tileSizeInfo->setText( tr( "Estimated download size: %1 MB" ).arg( ceil( tileDownloadSize ) ) );
+            }
+            else {
+                d->m_tileSizeInfo->setText( tr( "Estimated download size: %1 kB" ).arg( tileDownloadSize ) );
+            }
         }
         else {
-            d->m_tileSizeInfo->setText( tr( "Estimated download size: %1 kB" ).arg( tileDownloadSize ) );
+            d->m_tileSizeInfo->setToolTip( QString() );
+            d->m_tileSizeInfo->clear();
         }
-
-    }
-    else {
-        d->m_tileSizeInfo->setToolTip( QString() );
-        d->m_tileSizeInfo->clear();
     }
 
     d->m_tilesCountLabel->setText( QString::number( tilesCount ) );

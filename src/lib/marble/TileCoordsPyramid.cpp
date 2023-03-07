@@ -3,6 +3,8 @@
 #include "TileCoordsPyramid.h"
 
 #include <QRect>
+#include <QVector>
+#include <MarbleDebug.h>
 
 #include <algorithm>
 
@@ -17,6 +19,7 @@ public:
     int m_topLevel;
     int m_bottomLevel;
     QRect m_bottomLevelCoords;
+    QVector<int> m_validLevels;
 };
 
 TileCoordsPyramid::Private::Private( int const topLevel, int const bottomLevel )
@@ -85,10 +88,22 @@ QRect TileCoordsPyramid::coords( int const level ) const
     return result;
 }
 
+void TileCoordsPyramid::setValidTileLevels(const QVector<int> validLevels)
+{
+    d->m_validLevels = validLevels;
+}
+
+QVector<int> TileCoordsPyramid::validTileLevels()
+{
+    return d->m_validLevels;
+}
+
 qint64 TileCoordsPyramid::tilesCount() const
 {
     qint64 result = 0;
     for ( int level = d->m_topLevel; level <= d->m_bottomLevel; ++level ) {
+        if (!d->m_validLevels.isEmpty() && !d->m_validLevels.contains(level)) continue;
+
         QRect const levelCoords = coords( level );
         // w*h can exceed 32 bit range, so force 64 bit calculation; see bug 342397
         result += qint64( levelCoords.width() ) * levelCoords.height();

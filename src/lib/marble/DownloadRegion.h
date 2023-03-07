@@ -9,6 +9,8 @@
 #include <QObject>
 #include <QVector>
 
+#include <MarbleGlobal.h>
+
 #include "marble_export.h"
 
 namespace Marble
@@ -42,6 +44,8 @@ class MARBLE_EXPORT DownloadRegion : public QObject
       * @brief calculates the region to be downloaded around a path
       */
     QVector<TileCoordsPyramid> fromPath( const TileLayer *tileLayer, qreal offset, const GeoDataLineString &path ) const;
+
+    QVector<int> validTileLevels( const TileType tileType ) const;
 
   private:
     DownloadRegionPrivate* const d;

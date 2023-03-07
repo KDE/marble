@@ -44,7 +44,7 @@ class MARBLE_EXPORT TextureLayer : public TileLayer
 
     void addLandDocument( const GeoDataDocument *landDocument );
 
-    int textureLayerCount() const;
+    int layerCount() const;
 
     /**
      * @brief Adds texture sublayer, taking ownership of the object's memory
