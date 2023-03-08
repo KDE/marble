@@ -5754,63 +5754,87 @@ msgctxt "Marble::RouteRelationModel|"
 msgid "United States route"
 msgstr ""
 
-#: src/lib/marble/DownloadRegionDialog.cpp:116
+#: src/lib/marble/DownloadRegionDialog.cpp:133
 #, fuzzy
 #| msgid "Visible region"
 msgctxt "Marble::DownloadRegionDialog|"
 msgid "Visible region"
 msgstr "តំបន់​ដែល​មើល​ឃើញ"
 
-#: src/lib/marble/DownloadRegionDialog.cpp:117
+#: src/lib/marble/DownloadRegionDialog.cpp:135
 #, fuzzy
 #| msgid "Specify region"
 msgctxt "Marble::DownloadRegionDialog|"
 msgid "Specify region"
 msgstr "បញ្ជាក់​តំបន់"
 
-#: src/lib/marble/DownloadRegionDialog.cpp:119
+#: src/lib/marble/DownloadRegionDialog.cpp:137
 #, fuzzy
 #| msgid "Download Route"
 msgctxt "Marble::DownloadRegionDialog|"
 msgid "Download Route"
 msgstr "ទាញ​យក​ផ្លូវ"
 
-#: src/lib/marble/DownloadRegionDialog.cpp:120
+#: src/lib/marble/DownloadRegionDialog.cpp:139
 #, fuzzy
 #| msgid "Enabled when a route exists"
 msgctxt "Marble::DownloadRegionDialog|"
 msgid "Enabled when a route exists"
 msgstr "បើក​នៅ​ពេល​មាន​ផ្លូវ"
 
-#: src/lib/marble/DownloadRegionDialog.cpp:133
+#: src/lib/marble/DownloadRegionDialog.cpp:152
 #, fuzzy
 #| msgid "Offset from route:"
 msgctxt "Marble::DownloadRegionDialog|"
 msgid "Offset from route:"
 msgstr "អុហ្វសិត​ពី​ផ្លូវ ៖"
 
-#: src/lib/marble/DownloadRegionDialog.cpp:172
+#: src/lib/marble/DownloadRegionDialog.cpp:187
 #, fuzzy
 #| msgid "Selection Method"
 msgctxt "Marble::DownloadRegionDialog|"
 msgid "Selection Method"
 msgstr "វិធីសាស្ត្រ​ជម្រើស"
 
-#: src/lib/marble/DownloadRegionDialog.cpp:180
+#: src/lib/marble/DownloadRegionDialog.cpp:195
 #, fuzzy
 #| msgid "Number of tiles to download:"
 msgctxt "Marble::DownloadRegionDialog|"
 msgid "Number of tiles to download:"
 msgstr "ចំនួន​គម្រប​ដែល​ត្រូវ​ទាញ​យក ៖"
 
-#: src/lib/marble/DownloadRegionDialog.cpp:225
+#: src/lib/marble/DownloadRegionDialog.cpp:245
 #, fuzzy
 #| msgid "Download Region"
 msgctxt "Marble::DownloadRegionDialog|"
 msgid "Download Region"
 msgstr "ទាញ​យក​តំបន់"
 
-#: src/lib/marble/DownloadRegionDialog.cpp:457
+#: src/lib/marble/DownloadRegionDialog.cpp:247
+#, fuzzy
+#| msgid "The base tile could not be downloaded."
+msgctxt "Marble::DownloadRegionDialog|"
+msgid "Tile type to be downloaded:"
+msgstr "មិន​អាច​ទាញ​យក​ក្រឡា​ក្បឿង​គោល​បាន​ទេ ។"
+
+#: src/lib/marble/DownloadRegionDialog.cpp:249
+msgctxt "Marble::DownloadRegionDialog|"
+msgid "Texture tiles"
+msgstr ""
+
+#: src/lib/marble/DownloadRegionDialog.cpp:250
+#, fuzzy
+#| msgid "Map View"
+msgctxt "Marble::DownloadRegionDialog|"
+msgid "Vector tiles"
+msgstr "ទិដ្ឋភាព​ផែនទី"
+
+#: src/lib/marble/DownloadRegionDialog.cpp:251
+msgctxt "Marble::DownloadRegionDialog|"
+msgid "Allows selection between layer types that are visibly being rendered."
+msgstr ""
+
+#: src/lib/marble/DownloadRegionDialog.cpp:520
 #, fuzzy, qt-format
 #| msgid "Number of tiles to download:"
 msgctxt "Marble::DownloadRegionDialog|"
@@ -5818,21 +5842,21 @@ msgid "There is a limit of %n tile(s) to download."
 msgid_plural "There is a limit of %n tile(s) to download."
 msgstr[0] "ចំនួន​គម្រប​ដែល​ត្រូវ​ទាញ​យក ៖"
 
-#: src/lib/marble/DownloadRegionDialog.cpp:462
+#: src/lib/marble/DownloadRegionDialog.cpp:531
 #, fuzzy
 #| msgid "Approximate size of the tiles to be downloaded"
 msgctxt "Marble::DownloadRegionDialog|"
 msgid "Approximate size of the tiles to be downloaded"
 msgstr "ទំហំ​ប្រហែល​របស់​គម្រប​ដែល​ត្រូវ​ទាញ​យក"
 
-#: src/lib/marble/DownloadRegionDialog.cpp:466
+#: src/lib/marble/DownloadRegionDialog.cpp:535
 #, fuzzy, qt-format
 #| msgid "Estimated download size: %1 MB"
 msgctxt "Marble::DownloadRegionDialog|"
 msgid "Estimated download size: %1 MB"
 msgstr "ទំហំ​ទាញ​យក​ដែល​បាន​ប៉ាន់ស្មាន ៖ %1 មេកាបៃ"
 
-#: src/lib/marble/DownloadRegionDialog.cpp:469
+#: src/lib/marble/DownloadRegionDialog.cpp:538
 #, fuzzy, qt-format
 #| msgid "Estimated download size: %1 kB"
 msgctxt "Marble::DownloadRegionDialog|"
@@ -8960,40 +8984,40 @@ msgctxt "Marble::MapViewWidget|"
 msgid "Perspective Globe view"
 msgstr ""
 
-#: src/lib/marble/MapViewWidget.cpp:646
+#: src/lib/marble/MapViewWidget.cpp:647
 msgctxt "Marble::MapViewWidget|"
 msgid "&Show Large Icons"
 msgstr ""
 
-#: src/lib/marble/MapViewWidget.cpp:649
+#: src/lib/marble/MapViewWidget.cpp:650
 #, fuzzy
 #| msgid "&Favorite"
 msgctxt "Marble::MapViewWidget|"
 msgid "&Favorite"
 msgstr "សំណព្វ"
 
-#: src/lib/marble/MapViewWidget.cpp:654
+#: src/lib/marble/MapViewWidget.cpp:655
 #, fuzzy
 #| msgid "&Create a New Map..."
 msgctxt "Marble::MapViewWidget|"
 msgid "&Create a New Map..."
 msgstr "បង្កើត​ផែនទី​ថ្មី..."
 
-#: src/lib/marble/MapViewWidget.cpp:656
+#: src/lib/marble/MapViewWidget.cpp:657
 #, fuzzy
 #| msgid "&Delete Map Theme"
 msgctxt "Marble::MapViewWidget|"
 msgid "&Delete Map Theme"
 msgstr "លុប​រូបរាង​ផែនទី"
 
-#: src/lib/marble/MapViewWidget.cpp:663
+#: src/lib/marble/MapViewWidget.cpp:664
 #, fuzzy
 #| msgid "Marble"
 msgctxt "Marble::MapViewWidget|"
 msgid "Marble"
 msgstr "Marble"
 
-#: src/lib/marble/MapViewWidget.cpp:664
+#: src/lib/marble/MapViewWidget.cpp:665
 #, fuzzy, qt-format
 #| msgid "Are you sure that you want to delete \"%1\"?"
 msgctxt "Marble::MapViewWidget|"
@@ -11579,7 +11603,7 @@ msgctxt "MarbleCloudSyncSettingsWidget|"
 msgid "Test Login"
 msgstr ""
 
-#: src/lib/marble/MarbleGlobal.h:249
+#: src/lib/marble/MarbleGlobal.h:254
 msgctxt "Marble|"
 msgid "not available"
 msgstr ""
@@ -14185,29 +14209,29 @@ msgid ""
 "take a few seconds."
 msgstr ""
 
-#: src/lib/marble/TileLevelRangeWidget.ui:17
+#: src/lib/marble/TileLevelRangeWidget.ui:29
 #, fuzzy
 #| msgid "Zoom &In"
 msgctxt "TileLevelRangeWidget|"
 msgid "Zoom"
 msgstr "ពង្រីក"
 
-#: src/lib/marble/TileLevelRangeWidget.ui:25
+#: src/lib/marble/TileLevelRangeWidget.ui:37
 msgctxt "TileLevelRangeWidget|"
 msgid "&Tile level range:"
 msgstr ""
 
-#: src/lib/marble/TileLevelRangeWidget.ui:35
+#: src/lib/marble/TileLevelRangeWidget.ui:47
 msgctxt "TileLevelRangeWidget|"
 msgid "Minimum Tile Level"
 msgstr ""
 
-#: src/lib/marble/TileLevelRangeWidget.ui:51
+#: src/lib/marble/TileLevelRangeWidget.ui:63
 msgctxt "TileLevelRangeWidget|"
 msgid "to"
 msgstr ""
 
-#: src/lib/marble/TileLevelRangeWidget.ui:58
+#: src/lib/marble/TileLevelRangeWidget.ui:70
 msgctxt "TileLevelRangeWidget|"
 msgid "Maximum Tile Level"
 msgstr ""

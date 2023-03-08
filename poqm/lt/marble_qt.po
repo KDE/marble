@@ -5327,53 +5327,77 @@ msgctxt "Marble::RouteRelationModel|"
 msgid "United States route"
 msgstr ""
 
-#: src/lib/marble/DownloadRegionDialog.cpp:116
+#: src/lib/marble/DownloadRegionDialog.cpp:133
 msgctxt "Marble::DownloadRegionDialog|"
 msgid "Visible region"
 msgstr "Matoma sritis"
 
-#: src/lib/marble/DownloadRegionDialog.cpp:117
+#: src/lib/marble/DownloadRegionDialog.cpp:135
 msgctxt "Marble::DownloadRegionDialog|"
 msgid "Specify region"
 msgstr "Nurodykite sritį"
 
-#: src/lib/marble/DownloadRegionDialog.cpp:119
+#: src/lib/marble/DownloadRegionDialog.cpp:137
 msgctxt "Marble::DownloadRegionDialog|"
 msgid "Download Route"
 msgstr "Atsiųsti maršrutą"
 
-#: src/lib/marble/DownloadRegionDialog.cpp:120
+#: src/lib/marble/DownloadRegionDialog.cpp:139
 msgctxt "Marble::DownloadRegionDialog|"
 msgid "Enabled when a route exists"
 msgstr "Įjungti, kai yra maršrutas"
 
-#: src/lib/marble/DownloadRegionDialog.cpp:133
+#: src/lib/marble/DownloadRegionDialog.cpp:152
 #, fuzzy
 #| msgid "Offset from route:"
 msgctxt "Marble::DownloadRegionDialog|"
 msgid "Offset from route:"
 msgstr "Atitraukti nuo maršruto:"
 
-#: src/lib/marble/DownloadRegionDialog.cpp:172
+#: src/lib/marble/DownloadRegionDialog.cpp:187
 #, fuzzy
 #| msgid "Selection Method"
 msgctxt "Marble::DownloadRegionDialog|"
 msgid "Selection Method"
 msgstr "Žymėjimo būdas"
 
-#: src/lib/marble/DownloadRegionDialog.cpp:180
+#: src/lib/marble/DownloadRegionDialog.cpp:195
 #, fuzzy
 #| msgid "Number of tiles to download:"
 msgctxt "Marble::DownloadRegionDialog|"
 msgid "Number of tiles to download:"
 msgstr "Atsiųstinų fragmentų skaičius:"
 
-#: src/lib/marble/DownloadRegionDialog.cpp:225
+#: src/lib/marble/DownloadRegionDialog.cpp:245
 msgctxt "Marble::DownloadRegionDialog|"
 msgid "Download Region"
 msgstr "Atsiųsti sritį"
 
-#: src/lib/marble/DownloadRegionDialog.cpp:457
+#: src/lib/marble/DownloadRegionDialog.cpp:247
+#, fuzzy
+#| msgid "The base tile could not be downloaded."
+msgctxt "Marble::DownloadRegionDialog|"
+msgid "Tile type to be downloaded:"
+msgstr "Nepavyko atsiųsti pagrindo kaladėlės."
+
+#: src/lib/marble/DownloadRegionDialog.cpp:249
+msgctxt "Marble::DownloadRegionDialog|"
+msgid "Texture tiles"
+msgstr ""
+
+#: src/lib/marble/DownloadRegionDialog.cpp:250
+#, fuzzy
+#| msgid "Map View"
+msgctxt "Marble::DownloadRegionDialog|"
+msgid "Vector tiles"
+msgstr "Žemėlapio rodymas"
+
+#: src/lib/marble/DownloadRegionDialog.cpp:251
+msgctxt "Marble::DownloadRegionDialog|"
+msgid "Allows selection between layer types that are visibly being rendered."
+msgstr ""
+
+#: src/lib/marble/DownloadRegionDialog.cpp:520
 #, fuzzy, qt-format
 #| msgid "Number of tiles to download:"
 msgctxt "Marble::DownloadRegionDialog|"
@@ -5384,18 +5408,18 @@ msgstr[1] "Atsiųstinų fragmentų skaičius:"
 msgstr[2] "Atsiųstinų fragmentų skaičius:"
 msgstr[3] "Atsiųstinų fragmentų skaičius:"
 
-#: src/lib/marble/DownloadRegionDialog.cpp:462
+#: src/lib/marble/DownloadRegionDialog.cpp:531
 msgctxt "Marble::DownloadRegionDialog|"
 msgid "Approximate size of the tiles to be downloaded"
 msgstr "Apytikslis siuntinių dydis"
 
-#: src/lib/marble/DownloadRegionDialog.cpp:466
+#: src/lib/marble/DownloadRegionDialog.cpp:535
 #, qt-format
 msgctxt "Marble::DownloadRegionDialog|"
 msgid "Estimated download size: %1 MB"
 msgstr "Numatomas atsiuntimo dydis: %1 MB"
 
-#: src/lib/marble/DownloadRegionDialog.cpp:469
+#: src/lib/marble/DownloadRegionDialog.cpp:538
 #, qt-format
 msgctxt "Marble::DownloadRegionDialog|"
 msgid "Estimated download size: %1 kB"
@@ -8257,34 +8281,34 @@ msgctxt "Marble::MapViewWidget|"
 msgid "Perspective Globe view"
 msgstr ""
 
-#: src/lib/marble/MapViewWidget.cpp:646
+#: src/lib/marble/MapViewWidget.cpp:647
 msgctxt "Marble::MapViewWidget|"
 msgid "&Show Large Icons"
 msgstr "Rodyti &didelius ženkliukus"
 
-#: src/lib/marble/MapViewWidget.cpp:649
+#: src/lib/marble/MapViewWidget.cpp:650
 #, fuzzy
 #| msgid "&Favorite"
 msgctxt "Marble::MapViewWidget|"
 msgid "&Favorite"
 msgstr "Mėgiamas"
 
-#: src/lib/marble/MapViewWidget.cpp:654
+#: src/lib/marble/MapViewWidget.cpp:655
 msgctxt "Marble::MapViewWidget|"
 msgid "&Create a New Map..."
 msgstr "&Kurti naują žemėlapį..."
 
-#: src/lib/marble/MapViewWidget.cpp:656
+#: src/lib/marble/MapViewWidget.cpp:657
 msgctxt "Marble::MapViewWidget|"
 msgid "&Delete Map Theme"
 msgstr "Šalinti žemėlapio &apipavidalinimą"
 
-#: src/lib/marble/MapViewWidget.cpp:663
+#: src/lib/marble/MapViewWidget.cpp:664
 msgctxt "Marble::MapViewWidget|"
 msgid "Marble"
 msgstr "Marble"
 
-#: src/lib/marble/MapViewWidget.cpp:664
+#: src/lib/marble/MapViewWidget.cpp:665
 #, qt-format
 msgctxt "Marble::MapViewWidget|"
 msgid "Are you sure that you want to delete \"%1\"?"
@@ -10819,7 +10843,7 @@ msgctxt "MarbleCloudSyncSettingsWidget|"
 msgid "Test Login"
 msgstr "Bandyti prisijungti"
 
-#: src/lib/marble/MarbleGlobal.h:249
+#: src/lib/marble/MarbleGlobal.h:254
 msgctxt "Marble|"
 msgid "not available"
 msgstr "nėra"
@@ -13095,28 +13119,28 @@ msgid ""
 "take a few seconds."
 msgstr ""
 
-#: src/lib/marble/TileLevelRangeWidget.ui:17
+#: src/lib/marble/TileLevelRangeWidget.ui:29
 msgctxt "TileLevelRangeWidget|"
 msgid "Zoom"
 msgstr "Mastelis"
 
-#: src/lib/marble/TileLevelRangeWidget.ui:25
+#: src/lib/marble/TileLevelRangeWidget.ui:37
 msgctxt "TileLevelRangeWidget|"
 msgid "&Tile level range:"
 msgstr ""
 
-#: src/lib/marble/TileLevelRangeWidget.ui:35
+#: src/lib/marble/TileLevelRangeWidget.ui:47
 msgctxt "TileLevelRangeWidget|"
 msgid "Minimum Tile Level"
 msgstr ""
 
-#: src/lib/marble/TileLevelRangeWidget.ui:51
+#: src/lib/marble/TileLevelRangeWidget.ui:63
 #, fuzzy
 msgctxt "TileLevelRangeWidget|"
 msgid "to"
 msgstr "Kam:"
 
-#: src/lib/marble/TileLevelRangeWidget.ui:58
+#: src/lib/marble/TileLevelRangeWidget.ui:70
 msgctxt "TileLevelRangeWidget|"
 msgid "Maximum Tile Level"
 msgstr ""

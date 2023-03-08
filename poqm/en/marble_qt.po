@@ -7,7 +7,7 @@ msgstr ""
 "X-Language: en\n"
 "X-Qt-Contexts: true\n"
 
-#: ../src/lib/marble/DownloadRegionDialog.cpp:457
+#: ../src/lib/marble/DownloadRegionDialog.cpp:520
 #, qt-format
 msgctxt "Marble::DownloadRegionDialog|"
 msgid "There is a limit of %n tile(s) to download."

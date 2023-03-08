@@ -5216,47 +5216,73 @@ msgctxt "Marble::RouteRelationModel|"
 msgid "United States route"
 msgstr "Маршрут США"
 
-#: src/lib/marble/DownloadRegionDialog.cpp:116
+#: src/lib/marble/DownloadRegionDialog.cpp:133
 msgctxt "Marble::DownloadRegionDialog|"
 msgid "Visible region"
 msgstr "Видимая область"
 
-#: src/lib/marble/DownloadRegionDialog.cpp:117
+#: src/lib/marble/DownloadRegionDialog.cpp:135
 msgctxt "Marble::DownloadRegionDialog|"
 msgid "Specify region"
 msgstr "Указать область"
 
-#: src/lib/marble/DownloadRegionDialog.cpp:119
+#: src/lib/marble/DownloadRegionDialog.cpp:137
 msgctxt "Marble::DownloadRegionDialog|"
 msgid "Download Route"
 msgstr "Загрузить маршрут"
 
-#: src/lib/marble/DownloadRegionDialog.cpp:120
+#: src/lib/marble/DownloadRegionDialog.cpp:139
 msgctxt "Marble::DownloadRegionDialog|"
 msgid "Enabled when a route exists"
 msgstr "Включён, когда маршрут существует"
 
-#: src/lib/marble/DownloadRegionDialog.cpp:133
+#: src/lib/marble/DownloadRegionDialog.cpp:152
 msgctxt "Marble::DownloadRegionDialog|"
 msgid "Offset from route:"
 msgstr "Смещение от маршрута:"
 
-#: src/lib/marble/DownloadRegionDialog.cpp:172
+#: src/lib/marble/DownloadRegionDialog.cpp:187
 msgctxt "Marble::DownloadRegionDialog|"
 msgid "Selection Method"
 msgstr "Метод выбора"
 
-#: src/lib/marble/DownloadRegionDialog.cpp:180
+#: src/lib/marble/DownloadRegionDialog.cpp:195
 msgctxt "Marble::DownloadRegionDialog|"
 msgid "Number of tiles to download:"
 msgstr "Количество клеток для загрузки:"
 
-#: src/lib/marble/DownloadRegionDialog.cpp:225
+#: src/lib/marble/DownloadRegionDialog.cpp:245
 msgctxt "Marble::DownloadRegionDialog|"
 msgid "Download Region"
 msgstr "Загрузить область"
 
-#: src/lib/marble/DownloadRegionDialog.cpp:457
+#: src/lib/marble/DownloadRegionDialog.cpp:247
+#, fuzzy
+#| msgctxt "Marble::MapWizard|"
+#| msgid "The base tile could not be downloaded."
+msgctxt "Marble::DownloadRegionDialog|"
+msgid "Tile type to be downloaded:"
+msgstr "Базовая клетка не может быть загружена."
+
+#: src/lib/marble/DownloadRegionDialog.cpp:249
+msgctxt "Marble::DownloadRegionDialog|"
+msgid "Texture tiles"
+msgstr ""
+
+#: src/lib/marble/DownloadRegionDialog.cpp:250
+#, fuzzy
+#| msgctxt "Marble::MapViewWidget|"
+#| msgid "Mercator View"
+msgctxt "Marble::DownloadRegionDialog|"
+msgid "Vector tiles"
+msgstr "Проекция Меркатора"
+
+#: src/lib/marble/DownloadRegionDialog.cpp:251
+msgctxt "Marble::DownloadRegionDialog|"
+msgid "Allows selection between layer types that are visibly being rendered."
+msgstr ""
+
+#: src/lib/marble/DownloadRegionDialog.cpp:520
 #, qt-format
 msgctxt "Marble::DownloadRegionDialog|"
 msgid "There is a limit of %n tile(s) to download."
@@ -5265,18 +5291,18 @@ msgstr[0] "Количество тайлов для загрузки не дол
 msgstr[1] "Количество тайлов для загрузки не должно превышать %n."
 msgstr[2] "Количество тайлов для загрузки не должно превышать %n."
 
-#: src/lib/marble/DownloadRegionDialog.cpp:462
+#: src/lib/marble/DownloadRegionDialog.cpp:531
 msgctxt "Marble::DownloadRegionDialog|"
 msgid "Approximate size of the tiles to be downloaded"
 msgstr "Примерный размер клеток для загрузки:"
 
-#: src/lib/marble/DownloadRegionDialog.cpp:466
+#: src/lib/marble/DownloadRegionDialog.cpp:535
 #, qt-format
 msgctxt "Marble::DownloadRegionDialog|"
 msgid "Estimated download size: %1 MB"
 msgstr "Примерный размер загрузки: %1 Мб"
 
-#: src/lib/marble/DownloadRegionDialog.cpp:469
+#: src/lib/marble/DownloadRegionDialog.cpp:538
 #, qt-format
 msgctxt "Marble::DownloadRegionDialog|"
 msgid "Estimated download size: %1 kB"
@@ -7932,32 +7958,32 @@ msgctxt "Marble::MapViewWidget|"
 msgid "Perspective Globe view"
 msgstr "Глобус"
 
-#: src/lib/marble/MapViewWidget.cpp:646
+#: src/lib/marble/MapViewWidget.cpp:647
 msgctxt "Marble::MapViewWidget|"
 msgid "&Show Large Icons"
 msgstr "&Крупные значки"
 
-#: src/lib/marble/MapViewWidget.cpp:649
+#: src/lib/marble/MapViewWidget.cpp:650
 msgctxt "Marble::MapViewWidget|"
 msgid "&Favorite"
 msgstr "&Избранный"
 
-#: src/lib/marble/MapViewWidget.cpp:654
+#: src/lib/marble/MapViewWidget.cpp:655
 msgctxt "Marble::MapViewWidget|"
 msgid "&Create a New Map..."
 msgstr "&Создать новую карту"
 
-#: src/lib/marble/MapViewWidget.cpp:656
+#: src/lib/marble/MapViewWidget.cpp:657
 msgctxt "Marble::MapViewWidget|"
 msgid "&Delete Map Theme"
 msgstr "&Удалить тему карты"
 
-#: src/lib/marble/MapViewWidget.cpp:663
+#: src/lib/marble/MapViewWidget.cpp:664
 msgctxt "Marble::MapViewWidget|"
 msgid "Marble"
 msgstr "Marble"
 
-#: src/lib/marble/MapViewWidget.cpp:664
+#: src/lib/marble/MapViewWidget.cpp:665
 #, qt-format
 msgctxt "Marble::MapViewWidget|"
 msgid "Are you sure that you want to delete \"%1\"?"
@@ -10164,7 +10190,7 @@ msgctxt "MarbleCloudSyncSettingsWidget|"
 msgid "Test Login"
 msgstr "Тестовый вход"
 
-#: src/lib/marble/MarbleGlobal.h:249
+#: src/lib/marble/MarbleGlobal.h:254
 msgctxt "Marble|"
 msgid "not available"
 msgstr "недоступно"
@@ -12486,27 +12512,27 @@ msgstr ""
 "Программе необходимо создать эту карту. Данную операцию достаточно выполнить "
 "один раз, её выполнение может занять несколько секунд."
 
-#: src/lib/marble/TileLevelRangeWidget.ui:17
+#: src/lib/marble/TileLevelRangeWidget.ui:29
 msgctxt "TileLevelRangeWidget|"
 msgid "Zoom"
 msgstr "Масштаб"
 
-#: src/lib/marble/TileLevelRangeWidget.ui:25
+#: src/lib/marble/TileLevelRangeWidget.ui:37
 msgctxt "TileLevelRangeWidget|"
 msgid "&Tile level range:"
 msgstr "Диапазон &уровней тайлов:"
 
-#: src/lib/marble/TileLevelRangeWidget.ui:35
+#: src/lib/marble/TileLevelRangeWidget.ui:47
 msgctxt "TileLevelRangeWidget|"
 msgid "Minimum Tile Level"
 msgstr "Минимальный уровень тайлов"
 
-#: src/lib/marble/TileLevelRangeWidget.ui:51
+#: src/lib/marble/TileLevelRangeWidget.ui:63
 msgctxt "TileLevelRangeWidget|"
 msgid "to"
 msgstr "до"
 
-#: src/lib/marble/TileLevelRangeWidget.ui:58
+#: src/lib/marble/TileLevelRangeWidget.ui:70
 msgctxt "TileLevelRangeWidget|"
 msgid "Maximum Tile Level"
 msgstr "Максимальный уровень тайлов"
