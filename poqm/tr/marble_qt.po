@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2023-03-07 20:24+0300\n"
+"PO-Revision-Date: 2023-03-08 12:09+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -828,7 +828,7 @@ msgstr ""
 #. file data/maps/earth/vectorosm/vectorosm.dgml:107
 msgctxt "DGML|"
 msgid "OSM Bitmap Tiles"
-msgstr "OSM Bitmap Döşemeleri"
+msgstr "OSM Biteşlem Karoları"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:121
 #. ----------
@@ -2995,7 +2995,7 @@ msgstr "Kendi harita temanızı oluşturmanıza rehberlik eden bir sihirbaz."
 #: src/apps/marble-qt/QtMainWindow.cpp:416
 msgctxt "Marble::MainWindow|"
 msgid "Show Tile Zoom Level"
-msgstr "Yakınlaştırma Düzeyini Göster"
+msgstr "Karo Yakınlaştırma Düzeyini Göster"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:424
 msgctxt "Marble::MainWindow|"
@@ -5225,7 +5225,7 @@ msgstr "Seçim Yöntemi"
 #: src/lib/marble/DownloadRegionDialog.cpp:180
 msgctxt "Marble::DownloadRegionDialog|"
 msgid "Number of tiles to download:"
-msgstr "İndirilecek parçaların sayısı:"
+msgstr "İndirilecek karoların sayısı:"
 
 #: src/lib/marble/DownloadRegionDialog.cpp:225
 msgctxt "Marble::DownloadRegionDialog|"
@@ -5237,13 +5237,13 @@ msgstr "Bölge İndir"
 msgctxt "Marble::DownloadRegionDialog|"
 msgid "There is a limit of %n tile(s) to download."
 msgid_plural "There is a limit of %n tile(s) to download."
-msgstr[0] "İndirilecek parça(ların) limiti"
-msgstr[1] "İndirilecek parça(ların) limiti"
+msgstr[0] "İndirilecek %n karoluk bir sınır vardır."
+msgstr[1] "İndirilecek %n karoluk bir sınır vardır."
 
 #: src/lib/marble/DownloadRegionDialog.cpp:462
 msgctxt "Marble::DownloadRegionDialog|"
 msgid "Approximate size of the tiles to be downloaded"
-msgstr "İndirilecek parçaların yaklaşık boyutu"
+msgstr "İndirilecek karoların yaklaşık boyutu"
 
 #: src/lib/marble/DownloadRegionDialog.cpp:466
 #, qt-format
@@ -8027,12 +8027,12 @@ msgstr "Özel"
 #: src/lib/marble/MapWizard.cpp:496 src/lib/marble/MapWizard.cpp:503
 msgctxt "Marble::MapWizard|"
 msgid "Base Tile"
-msgstr "Taban Döşemesi"
+msgstr "Taban Karosu"
 
 #: src/lib/marble/MapWizard.cpp:497
 msgctxt "Marble::MapWizard|"
 msgid "The base tile could not be downloaded."
-msgstr "Taban döşemesi indirilemedi."
+msgstr "Taban karosu indirilemedi."
 
 #: src/lib/marble/MapWizard.cpp:504
 #, qt-format
@@ -8042,7 +8042,7 @@ msgid ""
 "\n"
 "%1"
 msgstr ""
-"Tabal döşemesi başarıyla indirilemedi. Sunucu cevabı:\n"
+"Taban karosu başarılı bir biçimde indirilemedi. Sunucu yanıtı:\n"
 "\n"
 "%1"
 
@@ -8277,7 +8277,7 @@ msgstr ""
 #: src/lib/marble/MapWizard.ui:83
 msgctxt "MapWizard|"
 msgid "Online map providing indexed tiles (e.g. Open Street Map)"
-msgstr "Dizinlenmiş döşemeler sunan çevrim içi harita "
+msgstr "İndekslenmiş karolar sağlayan çevrimiçi harita (örn. OpenStreetMap)"
 
 #: src/lib/marble/MapWizard.ui:94
 msgctxt "MapWizard|"
@@ -8434,18 +8434,18 @@ msgstr ""
 "size:9pt; font-weight:400; font-style:normal;\">\n"
 "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
 "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
-"family:'Sans Serif'; font-weight:600;\">İndekslenmiş Döşemeler için URL "
+"family:'Sans Serif'; font-weight:600;\">İndekslenmiş Karolar için URL "
 "Şeması</span></p>\n"
 "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
 "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
-"family:'Sans Serif';\">Döşemeleri indirmek için bir URL girin. Yer "
-"tutucuları kullanarak </span><span style=\" font-family:'Sans Serif'; font-"
-"style:italic;\">{x}</span><span style=\" font-family:'Sans Serif';\">, </"
-"span><span style=\" font-family:'Sans Serif'; font-style:italic;\">{y}</"
-"span><span style=\" font-family:'Sans Serif';\">, and </span><span style=\" "
-"font-family:'Sans Serif'; font-style:italic;\">{zoomLevel}</span><span style="
-"\" font-family:'Sans Serif';\"> indeks üzerinden bir döşemeyi örnek gösterin."
-"</span></p></body></html>"
+"family:'Sans Serif';\">Karoları indirmek için bir URL girin. Yer tutucuları "
+"kullanarak </span><span style=\" font-family:'Sans Serif'; font-style:italic;"
+"\">{x}</span><span style=\" font-family:'Sans Serif';\">, </span><span style="
+"\" font-family:'Sans Serif'; font-style:italic;\">{y}</span><span style=\" "
+"font-family:'Sans Serif';\">, and </span><span style=\" font-family:'Sans "
+"Serif'; font-style:italic;\">{zoomLevel}</span><span style=\" font-"
+"family:'Sans Serif';\"> indeks üzerinden bir karoyu örnek gösterin.</span></"
+"p></body></html>"
 
 #: src/lib/marble/MapWizard.ui:293
 msgctxt "MapWizard|"
@@ -9410,7 +9410,7 @@ msgid ""
 "a><br /><i>Project: Vector Tiles for Marble</i></p>"
 msgstr ""
 "<p>Patrick Spendrin <a href=\"pspendrin@gmail.com\">pspendrin@gmail.com</"
-"a><br /><i>Proje: Marble için Vektör Döşemeleri</i></p>"
+"a><br /><i>Proje: Marble için Vektör Karoları</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:240
 msgctxt "QObject|"
@@ -12426,12 +12426,12 @@ msgstr ""
 #: src/lib/marble/TileLevelRangeWidget.ui:17
 msgctxt "TileLevelRangeWidget|"
 msgid "Zoom"
-msgstr "Yaklaştır"
+msgstr "Yaklaştırma"
 
 #: src/lib/marble/TileLevelRangeWidget.ui:25
 msgctxt "TileLevelRangeWidget|"
 msgid "&Tile level range:"
-msgstr "&Döşeme düzeyi aralığı:"
+msgstr "&Karo düzeyi aralığı:"
 
 #: src/lib/marble/TileLevelRangeWidget.ui:35
 msgctxt "TileLevelRangeWidget|"
@@ -12441,7 +12441,7 @@ msgstr "Asgari Döşeme Seviyesi"
 #: src/lib/marble/TileLevelRangeWidget.ui:51
 msgctxt "TileLevelRangeWidget|"
 msgid "to"
-msgstr "bitiş"
+msgstr "-"
 
 #: src/lib/marble/TileLevelRangeWidget.ui:58
 msgctxt "TileLevelRangeWidget|"
