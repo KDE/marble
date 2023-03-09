@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2023-02-14 15:38+0100\n"
+"PO-Revision-Date: 2023-03-08 15:51+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
@@ -5250,30 +5250,26 @@ msgid "Download Region"
 msgstr "Descarrega una regió"
 
 #: src/lib/marble/DownloadRegionDialog.cpp:247
-#, fuzzy
-#| msgctxt "Marble::MapWizard|"
-#| msgid "The base tile could not be downloaded."
 msgctxt "Marble::DownloadRegionDialog|"
 msgid "Tile type to be downloaded:"
-msgstr "El mosaic base no s'ha pogut descarregar correctament."
+msgstr "Tipus de mosaic a descarregar:"
 
 #: src/lib/marble/DownloadRegionDialog.cpp:249
 msgctxt "Marble::DownloadRegionDialog|"
 msgid "Texture tiles"
-msgstr ""
+msgstr "Mosaics de textura"
 
 #: src/lib/marble/DownloadRegionDialog.cpp:250
-#, fuzzy
-#| msgctxt "Marble::MapViewWidget|"
-#| msgid "Mercator View"
 msgctxt "Marble::DownloadRegionDialog|"
 msgid "Vector tiles"
-msgstr "Vista Mercator"
+msgstr "Mosaics vectorials"
 
 #: src/lib/marble/DownloadRegionDialog.cpp:251
 msgctxt "Marble::DownloadRegionDialog|"
 msgid "Allows selection between layer types that are visibly being rendered."
 msgstr ""
+"Permet la selecció entre tipus de capes que són visibles en ser "
+"renderitzades."
 
 #: src/lib/marble/DownloadRegionDialog.cpp:520
 #, qt-format

@@ -5164,12 +5164,9 @@ msgid "Texture tiles"
 msgstr ""
 
 #: src/lib/marble/DownloadRegionDialog.cpp:250
-#, fuzzy
-#| msgctxt "DGML|"
-#| msgid "Vector OSM"
 msgctxt "Marble::DownloadRegionDialog|"
 msgid "Vector tiles"
-msgstr "ვექტორული OSM"
+msgstr "ვექტორული ფილები"
 
 #: src/lib/marble/DownloadRegionDialog.cpp:251
 msgctxt "Marble::DownloadRegionDialog|"
