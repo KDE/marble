@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2023-03-07 20:24+0300\n"
+"PO-Revision-Date: 2023-03-09 13:33+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -828,7 +828,7 @@ msgstr ""
 #. file data/maps/earth/vectorosm/vectorosm.dgml:105
 msgctxt "DGML|"
 msgid "OSM Bitmap Tiles"
-msgstr "OSM Bitmap Döşemeleri"
+msgstr "OSM Biteşlem Karoları"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:119
 #. ----------
@@ -2995,7 +2995,7 @@ msgstr "Kendi harita temanızı oluşturmanıza rehberlik eden bir sihirbaz."
 #: src/apps/marble-qt/QtMainWindow.cpp:416
 msgctxt "Marble::MainWindow|"
 msgid "Show Tile Zoom Level"
-msgstr "Yakınlaştırma Düzeyini Göster"
+msgstr "Karo Yakınlaştırma Düzeyini Göster"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:424
 msgctxt "Marble::MainWindow|"
@@ -5225,7 +5225,7 @@ msgstr "Seçim Yöntemi"
 #: src/lib/marble/DownloadRegionDialog.cpp:195
 msgctxt "Marble::DownloadRegionDialog|"
 msgid "Number of tiles to download:"
-msgstr "İndirilecek parçaların sayısı:"
+msgstr "İndirilecek karoların sayısı:"
 
 #: src/lib/marble/DownloadRegionDialog.cpp:245
 msgctxt "Marble::DownloadRegionDialog|"
@@ -5233,43 +5233,39 @@ msgid "Download Region"
 msgstr "Bölge İndir"
 
 #: src/lib/marble/DownloadRegionDialog.cpp:247
-#, fuzzy
-#| msgctxt "Marble::MapWizard|"
-#| msgid "The base tile could not be downloaded."
 msgctxt "Marble::DownloadRegionDialog|"
 msgid "Tile type to be downloaded:"
-msgstr "Taban döşemesi indirilemedi."
+msgstr "İndirilecek karo türü:"
 
 #: src/lib/marble/DownloadRegionDialog.cpp:249
 msgctxt "Marble::DownloadRegionDialog|"
 msgid "Texture tiles"
-msgstr ""
+msgstr "Doku karoları"
 
 #: src/lib/marble/DownloadRegionDialog.cpp:250
-#, fuzzy
-#| msgctxt "Marble::MapViewWidget|"
-#| msgid "Mercator View"
 msgctxt "Marble::DownloadRegionDialog|"
 msgid "Vector tiles"
-msgstr "Merkator Görünümü"
+msgstr "Vektör karoları"
 
 #: src/lib/marble/DownloadRegionDialog.cpp:251
 msgctxt "Marble::DownloadRegionDialog|"
 msgid "Allows selection between layer types that are visibly being rendered."
 msgstr ""
+"Görünür bir biçimde sunulmakta olan katman türleri arasında seçim "
+"yapılmasına izin verir."
 
 #: src/lib/marble/DownloadRegionDialog.cpp:520
 #, qt-format
 msgctxt "Marble::DownloadRegionDialog|"
 msgid "There is a limit of %n tile(s) to download."
 msgid_plural "There is a limit of %n tile(s) to download."
-msgstr[0] "İndirilecek parça(ların) limiti"
-msgstr[1] "İndirilecek parça(ların) limiti"
+msgstr[0] "İndirilecek %n karoluk bir sınır vardır."
+msgstr[1] "İndirilecek %n karoluk bir sınır vardır."
 
 #: src/lib/marble/DownloadRegionDialog.cpp:531
 msgctxt "Marble::DownloadRegionDialog|"
 msgid "Approximate size of the tiles to be downloaded"
-msgstr "İndirilecek parçaların yaklaşık boyutu"
+msgstr "İndirilecek karoların yaklaşık boyutu"
 
 #: src/lib/marble/DownloadRegionDialog.cpp:535
 #, qt-format
@@ -5572,7 +5568,7 @@ msgid ""
 "requires a web browser."
 msgstr ""
 "iD, yeni başlayanlar ve hızlı düzenleme için bir OpenStreetMap "
-"düzenleyicisidir. Web tarayıcıya ihtiyaç duyar."
+"düzenleyicisidir. Web tarayıcıya gereksinim duyar."
 
 #: src/lib/marble/ExternalEditorDialog.cpp:87
 msgctxt "Marble::ExternalEditorDialog|"
@@ -8053,12 +8049,12 @@ msgstr "Özel"
 #: src/lib/marble/MapWizard.cpp:496 src/lib/marble/MapWizard.cpp:503
 msgctxt "Marble::MapWizard|"
 msgid "Base Tile"
-msgstr "Taban Döşemesi"
+msgstr "Taban Karosu"
 
 #: src/lib/marble/MapWizard.cpp:497
 msgctxt "Marble::MapWizard|"
 msgid "The base tile could not be downloaded."
-msgstr "Taban döşemesi indirilemedi."
+msgstr "Taban karosu indirilemedi."
 
 #: src/lib/marble/MapWizard.cpp:504
 #, qt-format
@@ -8068,7 +8064,7 @@ msgid ""
 "\n"
 "%1"
 msgstr ""
-"Tabal döşemesi başarıyla indirilemedi. Sunucu cevabı:\n"
+"Taban karosu başarılı bir biçimde indirilemedi. Sunucu yanıtı:\n"
 "\n"
 "%1"
 
@@ -8303,7 +8299,7 @@ msgstr ""
 #: src/lib/marble/MapWizard.ui:83
 msgctxt "MapWizard|"
 msgid "Online map providing indexed tiles (e.g. Open Street Map)"
-msgstr "Dizinlenmiş döşemeler sunan çevrim içi harita "
+msgstr "İndekslenmiş karolar sağlayan çevrimiçi harita (örn. OpenStreetMap)"
 
 #: src/lib/marble/MapWizard.ui:94
 msgctxt "MapWizard|"
@@ -8460,18 +8456,18 @@ msgstr ""
 "size:9pt; font-weight:400; font-style:normal;\">\n"
 "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
 "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
-"family:'Sans Serif'; font-weight:600;\">İndekslenmiş Döşemeler için URL "
+"family:'Sans Serif'; font-weight:600;\">İndekslenmiş Karolar için URL "
 "Şeması</span></p>\n"
 "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
 "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
-"family:'Sans Serif';\">Döşemeleri indirmek için bir URL girin. Yer "
-"tutucuları kullanarak </span><span style=\" font-family:'Sans Serif'; font-"
-"style:italic;\">{x}</span><span style=\" font-family:'Sans Serif';\">, </"
-"span><span style=\" font-family:'Sans Serif'; font-style:italic;\">{y}</"
-"span><span style=\" font-family:'Sans Serif';\">, and </span><span style=\" "
-"font-family:'Sans Serif'; font-style:italic;\">{zoomLevel}</span><span style="
-"\" font-family:'Sans Serif';\"> indeks üzerinden bir döşemeyi örnek gösterin."
-"</span></p></body></html>"
+"family:'Sans Serif';\">Karoları indirmek için bir URL girin. Yer tutucuları "
+"kullanarak </span><span style=\" font-family:'Sans Serif'; font-style:italic;"
+"\">{x}</span><span style=\" font-family:'Sans Serif';\">, </span><span style="
+"\" font-family:'Sans Serif'; font-style:italic;\">{y}</span><span style=\" "
+"font-family:'Sans Serif';\">, and </span><span style=\" font-family:'Sans "
+"Serif'; font-style:italic;\">{zoomLevel}</span><span style=\" font-"
+"family:'Sans Serif';\"> indeks üzerinden bir karoyu örnek gösterin.</span></"
+"p></body></html>"
 
 #: src/lib/marble/MapWizard.ui:293
 msgctxt "MapWizard|"
@@ -9215,7 +9211,7 @@ msgid ""
 "vector map</i></p>"
 msgstr ""
 "<p>Dávid Kolozsvári <a href=\"freedawson@gmail.com\">freedawson@gmail.com</"
-"a><br /><i>Proje: Marble OSM vektör haritasındaki her döşeme düzeyinde akıcı "
+"a><br /><i>Proje: Marble OSM vektör haritasındaki her karo düzeyinde akıcı "
 "grafik sağlama</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:188
@@ -9227,7 +9223,7 @@ msgid ""
 msgstr ""
 "<p>Akshat Tandon <a href=\"akshat.tandon@research.iiit.ac.in\">akshat."
 "tandon@research.iiit.ac.in</a><br /><i>Proje: Marble OSM Vektör Haritası'nda "
-"orta ve düşük döşeme düzeyleri için destek</i></p>"
+"orta ve düşük karo düzeyleri için destek</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:191
 msgctxt "QObject|"
@@ -9436,7 +9432,7 @@ msgid ""
 "a><br /><i>Project: Vector Tiles for Marble</i></p>"
 msgstr ""
 "<p>Patrick Spendrin <a href=\"pspendrin@gmail.com\">pspendrin@gmail.com</"
-"a><br /><i>Proje: Marble için Vektör Döşemeleri</i></p>"
+"a><br /><i>Proje: Marble için Vektör Karoları</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:240
 msgctxt "QObject|"
@@ -11097,8 +11093,8 @@ msgctxt "QObject|"
 msgid ""
 "Marble requires additional software in order to create movies. Please get %1 "
 msgstr ""
-"Marble, videolar oluşturmak amacıyla ek yazılımlara ihtiyaç duyuor. Lütfen "
-"%1 kurun "
+"Marble, videolar oluşturmak amacıyla ek yazılımlara gereksinim duyuor. "
+"Lütfen %1 kurun "
 
 #: src/lib/marble/MovieCapture.cpp:59
 msgctxt "Marble::MovieCapture|"
@@ -12446,33 +12442,33 @@ msgid ""
 "Marble needs to create this map. This only needs to be done once and may "
 "take a few seconds."
 msgstr ""
-"Marble'ın bu haritayı yaratması gerekiyor. Bu işlem yalnızca bir defa "
-"gerçekleştirilir ve yalnızca bir kaç saniye sürer."
+"Marble'ın bu haritayı oluşturması gerekiyor. Bu işlem yalnızca bir defa "
+"gerçekleştirilir ve yalnızca birkaç saniye sürer."
 
 #: src/lib/marble/TileLevelRangeWidget.ui:29
 msgctxt "TileLevelRangeWidget|"
 msgid "Zoom"
-msgstr "Yaklaştır"
+msgstr "Yaklaştırma"
 
 #: src/lib/marble/TileLevelRangeWidget.ui:37
 msgctxt "TileLevelRangeWidget|"
 msgid "&Tile level range:"
-msgstr "&Döşeme düzeyi aralığı:"
+msgstr "&Karo düzeyi aralığı:"
 
 #: src/lib/marble/TileLevelRangeWidget.ui:47
 msgctxt "TileLevelRangeWidget|"
 msgid "Minimum Tile Level"
-msgstr "Asgari Döşeme Düzeyi"
+msgstr "En Düşük Karo Düzeyi"
 
 #: src/lib/marble/TileLevelRangeWidget.ui:63
 msgctxt "TileLevelRangeWidget|"
 msgid "to"
-msgstr "bitiş"
+msgstr "-"
 
 #: src/lib/marble/TileLevelRangeWidget.ui:70
 msgctxt "TileLevelRangeWidget|"
 msgid "Maximum Tile Level"
-msgstr "Azami Döşeme Düzeyi"
+msgstr "En Yüksek Karo Düzeyi"
 
 #: src/lib/marble/TimeControlWidget.ui:14
 msgctxt "TimeControlWidget|"
@@ -16972,7 +16968,7 @@ msgstr "hızlı (15 mph)"
 #: src/plugins/runner/cyclestreets/CycleStreetsPlugin.cpp:82
 msgctxt "Marble::CycleStreetsPlugin|"
 msgid "This service requires an Internet connection."
-msgstr "Bu servis, bir İnternet bağlantısına ihtiyaç duyuyor."
+msgstr "Bu servis, bir İnternet bağlantısına gereksinim duyuyor."
 
 #: src/plugins/runner/cyclestreets/CycleStreetsPlugin.cpp:87
 msgctxt "Marble::CycleStreetsPlugin|"
@@ -17507,7 +17503,7 @@ msgstr ""
 #: src/plugins/runner/mapquest/MapQuestPlugin.cpp:19
 msgctxt "Marble::MapQuestPlugin|"
 msgid "This service requires an Internet connection."
-msgstr "Bu servis, bir İnternet bağlantısına ihtiyaç duyuyor."
+msgstr "Bu servis, bir İnternet bağlantısına gereksinim duyuyor."
 
 #: src/plugins/runner/mapquest/MapQuestPlugin.cpp:24
 msgctxt "Marble::MapQuestPlugin|"
@@ -17756,7 +17752,7 @@ msgstr ""
 #: src/plugins/runner/open-source-routing-machine/OSRMPlugin.cpp:17
 msgctxt "Marble::OSRMPlugin|"
 msgid "This service requires an Internet connection."
-msgstr "Bu servis, bir İnternet bağlantısına ihtiyaç duyuyor."
+msgstr "Bu servis, bir İnternet bağlantısına gereksinim duyuyor."
 
 #: src/plugins/runner/open-source-routing-machine/OSRMPlugin.cpp:22
 msgctxt "Marble::OSRMPlugin|"
@@ -17813,7 +17809,7 @@ msgstr "Feribotları iptal et"
 #: src/plugins/runner/openrouteservice/OpenRouteServicePlugin.cpp:19
 msgctxt "Marble::OpenRouteServicePlugin|"
 msgid "This service requires an Internet connection."
-msgstr "Bu servis, bir İnternet bağlantısına ihtiyaç duyuyor."
+msgstr "Bu servis, bir İnternet bağlantısına gereksinim duyuyor."
 
 #: src/plugins/runner/openrouteservice/OpenRouteServicePlugin.cpp:24
 msgctxt "Marble::OpenRouteServicePlugin|"
@@ -18058,7 +18054,7 @@ msgstr "En Kısa"
 #: src/plugins/runner/yours/YoursPlugin.cpp:20
 msgctxt "Marble::YoursPlugin|"
 msgid "This service requires an Internet connection."
-msgstr "Bu servis, bir İnternet bağlantısına ihtiyaç duyuyor."
+msgstr "Bu servis, bir İnternet bağlantısına gereksinim duyuyor."
 
 #: src/plugins/runner/yours/YoursPlugin.cpp:25
 msgctxt "Marble::YoursPlugin|"
