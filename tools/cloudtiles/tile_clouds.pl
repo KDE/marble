@@ -4,7 +4,7 @@ use LWP::Simple;
 use Image::Magick;
 
 print 'downloading image from server...' . "\n";
-$response = getstore('http://xplanet.sourceforge.net/clouds/clouds_4096.jpg', 'clouds.jpg');
+$response = getstore('https://realearth.ssec.wisc.edu/cgi-bin/mapserv?map=globalir.map&layer=latest_globalir&mode=map&srs=EPSG:4326&width=40&height=20&bbox=-180,-90,180,90&format=image/jpg', 'clouds.jpg');
 die 'error downloading image' unless is_success($response);
 
 $clouds = Image::Magick->new();

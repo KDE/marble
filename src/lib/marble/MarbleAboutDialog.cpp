@@ -377,7 +377,7 @@ void MarbleAboutDialog::setApplicationTitle( const QString &title )
     if( MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen ) {
         text = titleHtml + QLatin1String("<br />") + applicationVersion + QLatin1String("<br />");
     }
-    browser->setHtml( text + tr("<br />(c) 2007-%1 by the authors of Marble Virtual Globe<br /><br /><a href=\"https://edu.kde.org/marble\">https://edu.kde.org/marble</a>").arg( 2015 ) );
+    browser->setHtml( text + tr("<br />(c) 2007-%1 by the authors of Marble Virtual Globe<br /><br /><a href=\"https://edu.kde.org/marble\">https://edu.kde.org/marble</a>").arg( 2023 ) );
     QTextFrameFormat  format = browser->document()->rootFrame()->frameFormat();
     format.setMargin(12);
     browser->document()->rootFrame()->setFrameFormat( format );
