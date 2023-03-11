@@ -1769,7 +1769,7 @@ msgstr "Sentinel2-satelliittikartta"
 #. file data/maps/earth/sentinel2/sentinel2.dgml:11
 msgctxt "DGML|"
 msgid "<p>A <i>satellite map</i> based on ESA's Sentinel 2 mission.</p>"
-msgstr "<p><i>Satelliittikartta/i> perustuu ESAn Sentinel 2 -tehtävään.</p>"
+msgstr "<p><i>Satelliittikartta</i> perustuu ESAn Sentinel 2 -tehtävään.</p>"
 
 #. file data/maps/earth/temp-dec/temp-dec.dgml:11
 msgctxt "DGML|"
@@ -9250,7 +9250,7 @@ msgid ""
 "technocool@gmail.com</a><br /><i>Project: Marble Indoor Maps</i></p>"
 msgstr ""
 "<p>Mohammed Nafees <a href=\"mailto:nafees.technocool@gmail.com\">nafees."
-"technocool@gmail.com</a></p><br /></p>"
+"technocool@gmail.com</a><br /><i>Projekti: Marble Indoor Maps</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:183
 msgctxt "QObject|"
