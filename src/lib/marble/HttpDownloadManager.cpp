@@ -11,6 +11,7 @@
 #include <QMap>
 #include <QTimer>
 #include <QNetworkAccessManager>
+#include <QCoreApplication>
 
 #include "DownloadPolicy.h"
 #include "DownloadQueueSet.h"
@@ -221,10 +222,11 @@ bool HttpDownloadManager::Private::hasDownloadPolicy( const DownloadPolicy& poli
 
 QByteArray HttpDownloadManager::userAgent(const QString &platform, const QString &component)
 {
-    QString result( "Mozilla/5.0 (compatible; Marble/%1; %2; %3; %4)" );
+    QString result( "Mozilla/5.0 (compatible; Marble/%1; %2; %3; %4; %5)" );
     bool const smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
     QString const device = smallScreen ? "MobileDevice" : "DesktopDevice";
-    result = result.arg( MARBLE_VERSION_STRING, device, platform, component);
+    QString const app = QCoreApplication::applicationName();
+    result = result.arg( MARBLE_VERSION_STRING, device, platform, component, app);
     return result.toLatin1();
 }
 
