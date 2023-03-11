@@ -58,6 +58,7 @@ public Q_SLOTS:
     void queryLegendImage();
 
     // Other
+    void setLineEditWms(const QString& text);
     void autoFillDetails();
     void downloadLevelZero();
     void createLevelZero( QNetworkReply* reply = nullptr );

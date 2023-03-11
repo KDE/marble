@@ -69,6 +69,7 @@ public:
     QNetworkAccessManager levelZeroAccessManager;
     QStringList wmsServerList;
     QMap<QString, QString> wmsFetchedMaps;
+    QMap<QString, QStringList> wmsFetchedMapsMetaInfo;
     QStringList staticUrlServerList;
     bool m_serverCapabilitiesValid;
 
@@ -196,7 +197,7 @@ MapWizard::MapWizard( QWidget* parent ) : QWizard( parent ), d( new MapWizardPri
     connect( d->uiWidget.pushButtonPreview, SIGNAL(clicked(bool)), this, SLOT(queryPreviewImage()) );
     connect( d->uiWidget.pushButtonLegend_2, SIGNAL(clicked(bool)), this, SLOT(queryLegendImage()) );
 
-    connect( d->uiWidget.comboBoxWmsServer, SIGNAL(currentIndexChanged(QString)), d->uiWidget.lineEditWmsUrl, SLOT(setText(QString)) );
+    connect( d->uiWidget.comboBoxWmsServer, SIGNAL(currentIndexChanged(QString)), this, SLOT(setLineEditWms(QString)) );
     connect( d->uiWidget.listWidgetWmsMaps, SIGNAL(itemSelectionChanged()), this, SLOT(autoFillDetails()) );
     
     connect( d->uiWidget.lineEditTitle, SIGNAL(textChanged(QString)), d->uiWidget.labelSumMName, SLOT(setText(QString)) );
@@ -233,6 +234,7 @@ void MapWizard::parseServerCapabilities( QNetworkReply* reply )
 
     mDebug() << "received reply from" << reply->url();
     QString result( reply->readAll() );
+
     QDomDocument xml;
     if( !xml.setContent( result ) )
     {
@@ -247,17 +249,23 @@ void MapWizard::parseServerCapabilities( QNetworkReply* reply )
     }
 
     QDomElement firstLayer = xml.documentElement().firstChildElement( "Capability" ).firstChildElement( "Layer" );
+    QDomElement service = xml.documentElement().firstChildElement( "Service" );
     QDomNodeList layers = firstLayer.elementsByTagName( "Layer" );
 
     d->uiWidget.listWidgetWmsMaps->clear();
     d->wmsFetchedMaps.clear();
+    d->wmsFetchedMapsMetaInfo.clear();
 
     for( int i = 0; i < layers.size(); ++i )
     {
         QString theme = layers.at( i ).firstChildElement( "Name" ).text();
         QString title = layers.at( i ).firstChildElement( "Title" ).text();
+        QString abstract = layers.at( i ).firstChildElement( "Abstract" ).text();
+        QString contactEmail = service.firstChildElement( "ContactInformation").firstChildElement("ContactElectronicMailAddress" ).text();
+        QString fees = service.firstChildElement( "Fees" ).text();
         QDomElement legendUrl = layers.at( i ).firstChildElement( "Style" ).firstChildElement( "LegendURL" );
         d->wmsFetchedMaps[ theme ] = title;
+        d->wmsFetchedMapsMetaInfo[ theme ] = QStringList() << title << abstract << contactEmail << fees;
 
         d->wmsLegends.clear();
         if( legendUrl.isNull() ) {
@@ -268,6 +276,9 @@ void MapWizard::parseServerCapabilities( QNetworkReply* reply )
     }
     
     d->uiWidget.listWidgetWmsMaps->addItems( d->wmsFetchedMaps.values() );
+    if (!d->wmsFetchedMaps.isEmpty()) {
+        d->uiWidget.listWidgetWmsMaps->setCurrentRow(0);
+    }
 
     QDomElement format = xml.documentElement().firstChildElement( "Capability" ).firstChildElement( "Request" )
                          .firstChildElement( "GetMap" ).firstChildElement( "Format" );
@@ -328,11 +339,37 @@ void MapWizard::setStaticUrlServers( const QStringList& uris )
     d->staticUrlServerList = uris;
 }
 
+
+void MapWizard::setLineEditWms(const QString &text)
+{
+    if (text == tr("Custom")) {
+        d->uiWidget.lineEditWmsUrl->setText(QString());
+    }
+    else {
+        d->uiWidget.lineEditWmsUrl->setText(text);
+    }
+}
+
 void MapWizard::autoFillDetails()
 {
     QString selected = d->uiWidget.listWidgetWmsMaps->currentItem()->text();
     d->uiWidget.lineEditTitle->setText( selected );
     d->uiWidget.lineEditTheme->setText( d->wmsFetchedMaps.key( selected ) );
+    QString title = d->wmsFetchedMaps.key( selected );
+    QStringList metaInfo = d->wmsFetchedMapsMetaInfo[title];
+    qDebug() << ":::" << d->wmsFetchedMapsMetaInfo[title];
+    QString description;
+    if (metaInfo.length() >= 2 ) {
+        description += metaInfo.at(1);
+    }
+    if (metaInfo.length() >= 3 && !(metaInfo.at(2).isEmpty()) ) {
+        description += QString("<br><br><i>Contact:</i> %1").arg( metaInfo.at(2));
+    }
+    if (metaInfo.length() >= 4 && !metaInfo.at(3).isEmpty() ) {
+        description += QString("<br><br><i>Fee:</i> %1").arg( metaInfo.at(3));
+    }
+
+    d->uiWidget.textEditDesc->setText(description);
 }
 
 bool MapWizard::createFiles( const GeoSceneDocument* document )
