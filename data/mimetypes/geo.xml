@@ -14,6 +14,7 @@ Notes:
     <comment xml:lang="cs">Data OSM</comment>
     <comment xml:lang="de">OSM-Daten</comment>
     <comment xml:lang="en_GB">OSM Data</comment>
+    <comment xml:lang="eo">OSM Datumoj</comment>
     <comment xml:lang="es">Datos OSM</comment>
     <comment xml:lang="eu">OSM datuak</comment>
     <comment xml:lang="fi">OSM-data</comment>
@@ -56,6 +57,7 @@ Notes:
     <comment xml:lang="cs">Soubor tvaru ESRI</comment>
     <comment xml:lang="de">ESRI-Shapefile</comment>
     <comment xml:lang="en_GB">ESRI Shapefile</comment>
+    <comment xml:lang="eo">ESRI Shapefile</comment>
     <comment xml:lang="es">Archivo de formas ESRI</comment>
     <comment xml:lang="eu">ESRI forma-fitxategia</comment>
     <comment xml:lang="fi">ESRI Shapefile</comment>
@@ -92,6 +94,7 @@ Notes:
     <comment xml:lang="cs">Index souboru tvaru ESRI</comment>
     <comment xml:lang="de">ESRI-Shapefile-Index</comment>
     <comment xml:lang="en_GB">ESRI Shapefile Index</comment>
+    <comment xml:lang="eo">ESRI Shapefile Indekso</comment>
     <comment xml:lang="es">Índice de archivo de formas ESRI</comment>
     <comment xml:lang="eu">ESRI forma-fitxategiaren indizea</comment>
     <comment xml:lang="fi">ESRI Shapefile -hakemisto</comment>
