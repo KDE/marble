@@ -9876,56 +9876,56 @@ msgctxt "MapViewWidget|"
 msgid "Here you can choose the preferred map view from different topics."
 msgstr "Hier kannst Du Dien vörtrocken Koortansicht utsöken."
 
-#: src/lib/marble/MapWizard.cpp:130
+#: src/lib/marble/MapWizard.cpp:131
 #, fuzzy
 #| msgid "Preview Map"
 msgctxt "Marble::PreviewDialog|"
 msgid "Preview Map"
 msgstr "Koortvöransicht"
 
-#: src/lib/marble/MapWizard.cpp:239 src/lib/marble/MapWizard.cpp:245
+#: src/lib/marble/MapWizard.cpp:241 src/lib/marble/MapWizard.cpp:247
 #, fuzzy
 #| msgid "Error while parsing"
 msgctxt "Marble::MapWizard|"
 msgid "Error while parsing"
 msgstr "Fehler bi't Inlesen"
 
-#: src/lib/marble/MapWizard.cpp:239
+#: src/lib/marble/MapWizard.cpp:241
 #, fuzzy
 #| msgid "Wizard cannot parse server's response"
 msgctxt "Marble::MapWizard|"
 msgid "Wizard cannot parse server's response"
 msgstr "Hölper kann de Serverantwoort nich inlesen."
 
-#: src/lib/marble/MapWizard.cpp:245
+#: src/lib/marble/MapWizard.cpp:247
 #, fuzzy
 #| msgid "Server is not a Web Map Server."
 msgctxt "Marble::MapWizard|"
 msgid "Server is not a Web Map Server."
 msgstr "Server is keen Nettkoort-Server"
 
-#: src/lib/marble/MapWizard.cpp:313
+#: src/lib/marble/MapWizard.cpp:324 src/lib/marble/MapWizard.cpp:345
 #, fuzzy
 #| msgid "Custom"
 msgctxt "Marble::MapWizard|"
 msgid "Custom"
 msgstr "Topasst"
 
-#: src/lib/marble/MapWizard.cpp:496 src/lib/marble/MapWizard.cpp:503
+#: src/lib/marble/MapWizard.cpp:533 src/lib/marble/MapWizard.cpp:540
 #, fuzzy
 #| msgid "Base Tile"
 msgctxt "Marble::MapWizard|"
 msgid "Base Tile"
 msgstr "Basiskachel"
 
-#: src/lib/marble/MapWizard.cpp:497
+#: src/lib/marble/MapWizard.cpp:534
 #, fuzzy
 #| msgid "The base tile could not be downloaded."
 msgctxt "Marble::MapWizard|"
 msgid "The base tile could not be downloaded."
 msgstr "De Basiskachel lett sik nich daalladen."
 
-#: src/lib/marble/MapWizard.cpp:504
+#: src/lib/marble/MapWizard.cpp:541
 #, fuzzy, qt-format
 #| msgid ""
 #| "The base tile could not be downloaded successfully. The server replied:\n"
@@ -9941,43 +9941,43 @@ msgstr ""
 "\n"
 "%1"
 
-#: src/lib/marble/MapWizard.cpp:623 src/lib/marble/MapWizard.cpp:626
+#: src/lib/marble/MapWizard.cpp:660 src/lib/marble/MapWizard.cpp:663
 #, fuzzy
 #| msgid "Archiving failed"
 msgctxt "Marble::MapWizard|"
 msgid "Archiving failed"
 msgstr "Archiveren fehlslaan"
 
-#: src/lib/marble/MapWizard.cpp:623
+#: src/lib/marble/MapWizard.cpp:660
 #, fuzzy
 #| msgid "Archiving process cannot be started."
 msgctxt "Marble::MapWizard|"
 msgid "Archiving process cannot be started."
 msgstr "Archiverenperzess lett sik nich starten"
 
-#: src/lib/marble/MapWizard.cpp:626
+#: src/lib/marble/MapWizard.cpp:663
 #, fuzzy
 #| msgid "Archiving process crashed."
 msgctxt "Marble::MapWizard|"
 msgid "Archiving process crashed."
 msgstr "Archiverenperzess afstört"
 
-#: src/lib/marble/MapWizard.cpp:661 src/lib/marble/MapWizard.cpp:669
-#: src/lib/marble/MapWizard.cpp:678
+#: src/lib/marble/MapWizard.cpp:698 src/lib/marble/MapWizard.cpp:706
+#: src/lib/marble/MapWizard.cpp:715
 #, fuzzy
 #| msgid "Source Image"
 msgctxt "Marble::MapWizard|"
 msgid "Source Image"
 msgstr "Bornbild"
 
-#: src/lib/marble/MapWizard.cpp:662
+#: src/lib/marble/MapWizard.cpp:699
 #, fuzzy
 #| msgid "Please specify a source image."
 msgctxt "Marble::MapWizard|"
 msgid "Please specify a source image."
 msgstr "Bitte en Bornbild angeven"
 
-#: src/lib/marble/MapWizard.cpp:670
+#: src/lib/marble/MapWizard.cpp:707
 #, fuzzy
 #| msgid ""
 #| "The source image you specified does not exist. Please specify a different "
@@ -9988,7 +9988,7 @@ msgid ""
 "one."
 msgstr "Dat angeven Bornbild gifft dat nich. Bitte giff en anner Bild an."
 
-#: src/lib/marble/MapWizard.cpp:679
+#: src/lib/marble/MapWizard.cpp:716
 #, fuzzy
 #| msgid ""
 #| "The source image you specified does not seem to be an image. Please "
@@ -10001,35 +10001,35 @@ msgstr ""
 "As't lett is dat angeven Bornbild gor keen Bild. Bitte giff en anner "
 "Bilddatei an."
 
-#: src/lib/marble/MapWizard.cpp:688
+#: src/lib/marble/MapWizard.cpp:725
 #, fuzzy
 #| msgid "Map Title"
 msgctxt "Marble::MapWizard|"
 msgid "Map Title"
 msgstr "Titel vun de Koort"
 
-#: src/lib/marble/MapWizard.cpp:688
+#: src/lib/marble/MapWizard.cpp:725
 #, fuzzy
 #| msgid "Please specify a map title."
 msgctxt "Marble::MapWizard|"
 msgid "Please specify a map title."
 msgstr "Bitte en Titel för de Koort angeven"
 
-#: src/lib/marble/MapWizard.cpp:695 src/lib/marble/MapWizard.cpp:703
+#: src/lib/marble/MapWizard.cpp:732 src/lib/marble/MapWizard.cpp:740
 #, fuzzy
 #| msgid "Map Name"
 msgctxt "Marble::MapWizard|"
 msgid "Map Name"
 msgstr "Naam vun de Koort"
 
-#: src/lib/marble/MapWizard.cpp:695
+#: src/lib/marble/MapWizard.cpp:732
 #, fuzzy
 #| msgid "Please specify a map name."
 msgctxt "Marble::MapWizard|"
 msgid "Please specify a map name."
 msgstr "Bitte en Naam för de Koort angeven"
 
-#: src/lib/marble/MapWizard.cpp:704
+#: src/lib/marble/MapWizard.cpp:741
 #, fuzzy, qt-format
 #| msgid ""
 #| "Please specify another map name, since there is already a map named "
@@ -10041,91 +10041,91 @@ msgstr ""
 "Bitte en anner Naam för de Koort ingeven. - Dat gifft al en Koort mit den "
 "Naam \"%1\"."
 
-#: src/lib/marble/MapWizard.cpp:711
+#: src/lib/marble/MapWizard.cpp:748
 #, fuzzy
 #| msgid "Preview Image"
 msgctxt "Marble::MapWizard|"
 msgid "Preview Image"
 msgstr "Bildvöransicht"
 
-#: src/lib/marble/MapWizard.cpp:711
+#: src/lib/marble/MapWizard.cpp:748
 #, fuzzy
 #| msgid "Please specify a preview image."
 msgctxt "Marble::MapWizard|"
 msgid "Please specify a preview image."
 msgstr "Bitte en Vöransichtbild angeven"
 
-#: src/lib/marble/MapWizard.cpp:895
+#: src/lib/marble/MapWizard.cpp:932
 #, fuzzy
 #| msgid "Geographic Pole"
 msgctxt "Marble::MapWizard|"
 msgid "Geographic Pole"
 msgstr "Geograafsch Pool"
 
-#: src/lib/marble/MapWizard.cpp:901
+#: src/lib/marble/MapWizard.cpp:938
 #, fuzzy
 #| msgid "Magnetic Pole"
 msgctxt "Marble::MapWizard|"
 msgid "Magnetic Pole"
 msgstr "Magneetsch Pool"
 
-#: src/lib/marble/MapWizard.cpp:907
+#: src/lib/marble/MapWizard.cpp:944
 #, fuzzy
 #| msgid "Airport"
 msgctxt "Marble::MapWizard|"
 msgid "Airport"
 msgstr "Flaaghaven"
 
-#: src/lib/marble/MapWizard.cpp:913
+#: src/lib/marble/MapWizard.cpp:950
 #, fuzzy
 #| msgid "Shipwreck"
 msgctxt "Marble::MapWizard|"
 msgid "Shipwreck"
 msgstr "Wrack"
 
-#: src/lib/marble/MapWizard.cpp:919
+#: src/lib/marble/MapWizard.cpp:956
 #, fuzzy
 #| msgid "Observatory"
 msgctxt "Marble::MapWizard|"
 msgid "Observatory"
 msgstr "Steernwacht"
 
-#: src/lib/marble/MapWizard.cpp:941
+#: src/lib/marble/MapWizard.cpp:978
 #, fuzzy
 #| msgid "Mountain"
 msgctxt "Marble::MapWizard|"
 msgid "Mountain"
 msgstr "Barg"
 
-#: src/lib/marble/MapWizard.cpp:947
+#: src/lib/marble/MapWizard.cpp:984
 #, fuzzy
 #| msgid "Volcano"
 msgctxt "Marble::MapWizard|"
 msgid "Volcano"
 msgstr "Vulkaan"
 
-#: src/lib/marble/MapWizard.cpp:978
+#: src/lib/marble/MapWizard.cpp:1015
 #, fuzzy
 #| msgid "International"
 msgctxt "Marble::MapWizard|"
 msgid "International"
 msgstr "Internatschonaal"
 
-#: src/lib/marble/MapWizard.cpp:984
+#: src/lib/marble/MapWizard.cpp:1021
 #, fuzzy
 #| msgid "State"
 msgctxt "Marble::MapWizard|"
 msgid "State"
 msgstr "Staat"
 
-#: src/lib/marble/MapWizard.cpp:1088
+#: src/lib/marble/MapWizard.cpp:1125
 #, fuzzy
 #| msgid "Problem while creating files"
 msgctxt "Marble::MapWizard|"
 msgid "Problem while creating files"
 msgstr "Problem bi't Opstellen vun Dateien"
 
-#: src/lib/marble/MapWizard.cpp:1088
+#: src/lib/marble/MapWizard.cpp:1125
 #, fuzzy
 #| msgid "Check if a theme with the same name exists."
 msgctxt "Marble::MapWizard|"
@@ -10283,7 +10283,7 @@ msgctxt "MapWizard|"
 msgid "WMS Server:"
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:135
+#: src/lib/marble/MapWizard.ui:135 src/lib/marble/MapWizard.ui:159
 #, fuzzy
 #| msgid "Custom"
 msgctxt "MapWizard|"
@@ -10296,18 +10296,25 @@ msgid "URL:"
 msgstr ""
 
 #: src/lib/marble/MapWizard.ui:153
+msgctxt "MapWizard|"
+msgid ""
+"Enter the base Url of the WMS service (e.g. <i>https://www.wms.nrw.de/"
+"geobasis/wms_nw_dop_overlay</i>)"
+msgstr ""
+
+#: src/lib/marble/MapWizard.ui:156
 #, fuzzy
 #| msgid "http://"
 msgctxt "MapWizard|"
 msgid "https://"
 msgstr "http://"
 
-#: src/lib/marble/MapWizard.ui:179
+#: src/lib/marble/MapWizard.ui:185
 msgctxt "MapWizard|"
 msgid "Available Maps:"
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:196
+#: src/lib/marble/MapWizard.ui:202
 #, fuzzy
 #| msgid ""
 #| "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
@@ -10367,21 +10374,21 @@ msgstr ""
 "na't Internet tokoppelt büst, klick bitte baven op dat \"Wikipedia\"-Paneel, "
 "wenn Du mehr weten wullt..</p></body></html>"
 
-#: src/lib/marble/MapWizard.ui:215
+#: src/lib/marble/MapWizard.ui:221
 #, fuzzy
 #| msgid "Source Image"
 msgctxt "MapWizard|"
 msgid "Source Image:"
 msgstr "Bornbild"
 
-#: src/lib/marble/MapWizard.ui:231 src/lib/marble/MapWizard.ui:481
+#: src/lib/marble/MapWizard.ui:237 src/lib/marble/MapWizard.ui:496
 #, fuzzy
 #| msgid "..."
 msgctxt "MapWizard|"
 msgid "..."
 msgstr "..."
 
-#: src/lib/marble/MapWizard.ui:257
+#: src/lib/marble/MapWizard.ui:263
 #, fuzzy
 #| msgid ""
 #| "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
@@ -10434,12 +10441,12 @@ msgstr ""
 "Reekners warrt \"Siete Gööd\" anraadt, wiel se en höger Gauheit tolett.</p></"
 "body></html>"
 
-#: src/lib/marble/MapWizard.ui:293
+#: src/lib/marble/MapWizard.ui:299
 msgctxt "MapWizard|"
 msgid "URL Scheme:"
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:332
+#: src/lib/marble/MapWizard.ui:338
 #, fuzzy
 #| msgid ""
 #| "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
@@ -10481,43 +10488,43 @@ msgstr ""
 "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
 "weight:600;\">000,0 km/h</span></p></body></html>"
 
-#: src/lib/marble/MapWizard.ui:347
+#: src/lib/marble/MapWizard.ui:353
 #, fuzzy
 #| msgid "Map Title"
 msgctxt "MapWizard|"
 msgid "Map Title:"
 msgstr "Titel vun de Koort"
 
-#: src/lib/marble/MapWizard.ui:360
+#: src/lib/marble/MapWizard.ui:366
 msgctxt "MapWizard|"
 msgid "A short concise name for your map theme."
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:367 src/lib/marble/MapWizard.ui:563
+#: src/lib/marble/MapWizard.ui:373 src/lib/marble/MapWizard.ui:580
 #, fuzzy
 #| msgid "Map Name"
 msgctxt "MapWizard|"
 msgid "Map Name:"
 msgstr "Naam vun de Koort"
 
-#: src/lib/marble/MapWizard.ui:377
+#: src/lib/marble/MapWizard.ui:383
 msgctxt "MapWizard|"
 msgid "The lowercase map theme id."
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:380
+#: src/lib/marble/MapWizard.ui:386
 msgctxt "MapWizard|"
 msgid "The folder name of your new theme."
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:387
+#: src/lib/marble/MapWizard.ui:393
 #, fuzzy
 #| msgid "Description"
 msgctxt "MapWizard|"
 msgid "Description:"
 msgstr "Beschrieven"
 
-#: src/lib/marble/MapWizard.ui:400
+#: src/lib/marble/MapWizard.ui:406
 msgctxt "MapWizard|"
 msgid ""
 "A short description of your map theme. Here you can provide information "
@@ -10525,73 +10532,78 @@ msgid ""
 "map theme."
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:403
+#: src/lib/marble/MapWizard.ui:409
 msgctxt "MapWizard|"
 msgid "It will appear in a tool tip and may contain HTML formatting."
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:410 src/lib/marble/MapWizard.ui:603
+#: src/lib/marble/MapWizard.ui:416 src/lib/marble/MapWizard.ui:620
 #, fuzzy
 #| msgid "Preview Image"
 msgctxt "MapWizard|"
 msgid "Preview Image:"
 msgstr "Bildvöransicht"
 
-#: src/lib/marble/MapWizard.ui:436
+#: src/lib/marble/MapWizard.ui:442
 #, fuzzy
 #| msgid "Preview Image"
 msgctxt "MapWizard|"
 msgid "preview image"
 msgstr "Bildvöransicht"
 
-#: src/lib/marble/MapWizard.ui:443
+#: src/lib/marble/MapWizard.ui:449
 #, fuzzy
 #| msgid "Changed"
 msgctxt "MapWizard|"
 msgid "Change..."
 msgstr "Ännert"
 
-#: src/lib/marble/MapWizard.ui:471
+#: src/lib/marble/MapWizard.ui:477
+msgctxt "MapWizard|"
+msgid "<b>Optional: Addition of a Map Key<b>"
+msgstr ""
+
+#: src/lib/marble/MapWizard.ui:486
 #, fuzzy
 #| msgid "Legend"
 msgctxt "MapWizard|"
 msgid "Legend Image:"
 msgstr "Legenn"
 
-#: src/lib/marble/MapWizard.ui:495
+#: src/lib/marble/MapWizard.ui:512
 #, fuzzy
 #| msgid "Places of Interest"
 msgctxt "MapWizard|"
 msgid "Places of Interest"
 msgstr "Besünner Öörd"
 
-#: src/lib/marble/MapWizard.ui:502
+#: src/lib/marble/MapWizard.ui:519
 #, fuzzy
 #| msgid "Populated Places"
 msgctxt "MapWizard|"
 msgid "Populated Places"
 msgstr "Bewahnt Rebeden"
 
-#: src/lib/marble/MapWizard.ui:509
+#: src/lib/marble/MapWizard.ui:526
 #, fuzzy
 #| msgid "Terrain"
 msgctxt "MapWizard|"
 msgid "Terrain"
 msgstr "Landschap"
 
-#: src/lib/marble/MapWizard.ui:516
+#: src/lib/marble/MapWizard.ui:533
 #, fuzzy
 #| msgid "Coordinate Grid"
 msgctxt "MapWizard|"
 msgid "Coordinate Grid"
 msgstr "Koordinatengadder"
 
-#: src/lib/marble/MapWizard.ui:523
+#: src/lib/marble/MapWizard.ui:540
 msgctxt "MapWizard|"
 msgid "Border Lines"
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:538
+#: src/lib/marble/MapWizard.ui:555
 #, fuzzy
 #| msgid ""
 #| "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
@@ -10654,29 +10666,29 @@ msgstr ""
 "right:0px; -qt-block-indent:0; text-indent:0px;\">http://edu.kde.org/marble</"
 "p></body></html>"
 
-#: src/lib/marble/MapWizard.ui:570
+#: src/lib/marble/MapWizard.ui:587
 msgctxt "MapWizard|"
 msgid "Map name goes here."
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:583
+#: src/lib/marble/MapWizard.ui:600
 #, fuzzy
 #| msgid "&Delete Map Theme"
 msgctxt "MapWizard|"
 msgid "Map Theme:"
 msgstr "Koortmuster weg&doon"
 
-#: src/lib/marble/MapWizard.ui:590
+#: src/lib/marble/MapWizard.ui:607
 msgctxt "MapWizard|"
 msgid "Map theme goes here."
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:610
+#: src/lib/marble/MapWizard.ui:627
 msgctxt "MapWizard|"
 msgid "Thumbnail image goes here."
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:622
+#: src/lib/marble/MapWizard.ui:639
 #, fuzzy
 #| msgid "Preview Map"
 msgctxt "MapWizard|"

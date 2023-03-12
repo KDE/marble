@@ -8046,42 +8046,42 @@ msgctxt "MapViewWidget|"
 msgid "Here you can choose the preferred map view from different topics."
 msgstr "Ací podeu escollir la vista preferida del mapa entre diversos modes."
 
-#: src/lib/marble/MapWizard.cpp:130
+#: src/lib/marble/MapWizard.cpp:131
 msgctxt "Marble::PreviewDialog|"
 msgid "Preview Map"
 msgstr "Vista prèvia del mapa"
 
-#: src/lib/marble/MapWizard.cpp:239 src/lib/marble/MapWizard.cpp:245
+#: src/lib/marble/MapWizard.cpp:241 src/lib/marble/MapWizard.cpp:247
 msgctxt "Marble::MapWizard|"
 msgid "Error while parsing"
 msgstr "S'ha produït un error en analitzar"
 
-#: src/lib/marble/MapWizard.cpp:239
+#: src/lib/marble/MapWizard.cpp:241
 msgctxt "Marble::MapWizard|"
 msgid "Wizard cannot parse server's response"
 msgstr "L'assistent no ha pogut interpretar la resposta del servidor"
 
-#: src/lib/marble/MapWizard.cpp:245
+#: src/lib/marble/MapWizard.cpp:247
 msgctxt "Marble::MapWizard|"
 msgid "Server is not a Web Map Server."
 msgstr "El servidor no és cap servidor web de mapes."
 
-#: src/lib/marble/MapWizard.cpp:313
+#: src/lib/marble/MapWizard.cpp:324 src/lib/marble/MapWizard.cpp:345
 msgctxt "Marble::MapWizard|"
 msgid "Custom"
 msgstr "Personalitzat"
 
-#: src/lib/marble/MapWizard.cpp:496 src/lib/marble/MapWizard.cpp:503
+#: src/lib/marble/MapWizard.cpp:533 src/lib/marble/MapWizard.cpp:540
 msgctxt "Marble::MapWizard|"
 msgid "Base Tile"
 msgstr "Mosaic base"
 
-#: src/lib/marble/MapWizard.cpp:497
+#: src/lib/marble/MapWizard.cpp:534
 msgctxt "Marble::MapWizard|"
 msgid "The base tile could not be downloaded."
 msgstr "El mosaic base no s'ha pogut descarregar correctament."
 
-#: src/lib/marble/MapWizard.cpp:504
+#: src/lib/marble/MapWizard.cpp:541
 #, qt-format
 msgctxt "Marble::MapWizard|"
 msgid ""
@@ -8094,33 +8094,33 @@ msgstr ""
 "\n"
 "%1"
 
-#: src/lib/marble/MapWizard.cpp:623 src/lib/marble/MapWizard.cpp:626
+#: src/lib/marble/MapWizard.cpp:660 src/lib/marble/MapWizard.cpp:663
 msgctxt "Marble::MapWizard|"
 msgid "Archiving failed"
 msgstr "No s'ha pogut fer l'arxivament"
 
-#: src/lib/marble/MapWizard.cpp:623
+#: src/lib/marble/MapWizard.cpp:660
 msgctxt "Marble::MapWizard|"
 msgid "Archiving process cannot be started."
 msgstr "No s'ha pogut iniciar el procés d'arxivament."
 
-#: src/lib/marble/MapWizard.cpp:626
+#: src/lib/marble/MapWizard.cpp:663
 msgctxt "Marble::MapWizard|"
 msgid "Archiving process crashed."
 msgstr "El procés d'arxivament s'ha interromput."
 
-#: src/lib/marble/MapWizard.cpp:661 src/lib/marble/MapWizard.cpp:669
-#: src/lib/marble/MapWizard.cpp:678
+#: src/lib/marble/MapWizard.cpp:698 src/lib/marble/MapWizard.cpp:706
+#: src/lib/marble/MapWizard.cpp:715
 msgctxt "Marble::MapWizard|"
 msgid "Source Image"
 msgstr "Imatge origen"
 
-#: src/lib/marble/MapWizard.cpp:662
+#: src/lib/marble/MapWizard.cpp:699
 msgctxt "Marble::MapWizard|"
 msgid "Please specify a source image."
 msgstr "Especifiqueu una imatge d'origen."
 
-#: src/lib/marble/MapWizard.cpp:670
+#: src/lib/marble/MapWizard.cpp:707
 msgctxt "Marble::MapWizard|"
 msgid ""
 "The source image you specified does not exist. Please specify a different "
@@ -8129,7 +8129,7 @@ msgstr ""
 "La imatge d'origen que heu especificat no existix. Especifiqueu-ne una de "
 "diferent."
 
-#: src/lib/marble/MapWizard.cpp:679
+#: src/lib/marble/MapWizard.cpp:716
 msgctxt "Marble::MapWizard|"
 msgid ""
 "The source image you specified does not seem to be an image. Please specify "
@@ -8138,27 +8138,27 @@ msgstr ""
 "La imatge d'origen que heu especificat no pareix que siga cap imatge. "
 "Especifiqueu un fitxer d'imatge diferent."
 
-#: src/lib/marble/MapWizard.cpp:688
+#: src/lib/marble/MapWizard.cpp:725
 msgctxt "Marble::MapWizard|"
 msgid "Map Title"
 msgstr "Títol del mapa"
 
-#: src/lib/marble/MapWizard.cpp:688
+#: src/lib/marble/MapWizard.cpp:725
 msgctxt "Marble::MapWizard|"
 msgid "Please specify a map title."
 msgstr "Especifiqueu un títol de mapa."
 
-#: src/lib/marble/MapWizard.cpp:695 src/lib/marble/MapWizard.cpp:703
+#: src/lib/marble/MapWizard.cpp:732 src/lib/marble/MapWizard.cpp:740
 msgctxt "Marble::MapWizard|"
 msgid "Map Name"
 msgstr "Nom del mapa"
 
-#: src/lib/marble/MapWizard.cpp:695
+#: src/lib/marble/MapWizard.cpp:732
 msgctxt "Marble::MapWizard|"
 msgid "Please specify a map name."
 msgstr "Especifiqueu un nom de mapa."
 
-#: src/lib/marble/MapWizard.cpp:704
+#: src/lib/marble/MapWizard.cpp:741
 #, qt-format
 msgctxt "Marble::MapWizard|"
 msgid ""
@@ -8166,67 +8166,67 @@ msgid ""
 msgstr ""
 "Especifiqueu un altre nom de mapa, perquè ja hi ha un mapa anomenat «%1»."
 
-#: src/lib/marble/MapWizard.cpp:711
+#: src/lib/marble/MapWizard.cpp:748
 msgctxt "Marble::MapWizard|"
 msgid "Preview Image"
 msgstr "Previsualitza la imatge"
 
-#: src/lib/marble/MapWizard.cpp:711
+#: src/lib/marble/MapWizard.cpp:748
 msgctxt "Marble::MapWizard|"
 msgid "Please specify a preview image."
 msgstr "Especifiqueu una imatge de previsualització."
 
-#: src/lib/marble/MapWizard.cpp:895
+#: src/lib/marble/MapWizard.cpp:932
 msgctxt "Marble::MapWizard|"
 msgid "Geographic Pole"
 msgstr "Pol geogràfic"
 
-#: src/lib/marble/MapWizard.cpp:901
+#: src/lib/marble/MapWizard.cpp:938
 msgctxt "Marble::MapWizard|"
 msgid "Magnetic Pole"
 msgstr "Pol magnètic"
 
-#: src/lib/marble/MapWizard.cpp:907
+#: src/lib/marble/MapWizard.cpp:944
 msgctxt "Marble::MapWizard|"
 msgid "Airport"
 msgstr "Aeroport"
 
-#: src/lib/marble/MapWizard.cpp:913
+#: src/lib/marble/MapWizard.cpp:950
 msgctxt "Marble::MapWizard|"
 msgid "Shipwreck"
 msgstr "Naufragi"
 
-#: src/lib/marble/MapWizard.cpp:919
+#: src/lib/marble/MapWizard.cpp:956
 msgctxt "Marble::MapWizard|"
 msgid "Observatory"
 msgstr "Observatori"
 
-#: src/lib/marble/MapWizard.cpp:941
+#: src/lib/marble/MapWizard.cpp:978
 msgctxt "Marble::MapWizard|"
 msgid "Mountain"
 msgstr "Muntanya"
 
-#: src/lib/marble/MapWizard.cpp:947
+#: src/lib/marble/MapWizard.cpp:984
 msgctxt "Marble::MapWizard|"
 msgid "Volcano"
 msgstr "Volcà"
 
-#: src/lib/marble/MapWizard.cpp:978
+#: src/lib/marble/MapWizard.cpp:1015
 msgctxt "Marble::MapWizard|"
 msgid "International"
 msgstr "Internacional"
 
-#: src/lib/marble/MapWizard.cpp:984
+#: src/lib/marble/MapWizard.cpp:1021
 msgctxt "Marble::MapWizard|"
 msgid "State"
 msgstr "Estat"
 
-#: src/lib/marble/MapWizard.cpp:1088
+#: src/lib/marble/MapWizard.cpp:1125
 msgctxt "Marble::MapWizard|"
 msgid "Problem while creating files"
 msgstr "S'ha detectat un problema tot creant els fitxers"
 
-#: src/lib/marble/MapWizard.cpp:1088
+#: src/lib/marble/MapWizard.cpp:1125
 msgctxt "Marble::MapWizard|"
 msgid "Check if a theme with the same name exists."
 msgstr "Comprova si existix un tema amb el mateix nom."
@@ -8367,7 +8367,7 @@ msgctxt "MapWizard|"
 msgid "WMS Server:"
 msgstr "Servidor WMS:"
 
-#: src/lib/marble/MapWizard.ui:135
+#: src/lib/marble/MapWizard.ui:135 src/lib/marble/MapWizard.ui:159
 msgctxt "MapWizard|"
 msgid "Custom"
 msgstr "Personalitzat"
@@ -8379,15 +8379,22 @@ msgstr "URL:"
 
 #: src/lib/marble/MapWizard.ui:153
 msgctxt "MapWizard|"
+msgid ""
+"Enter the base Url of the WMS service (e.g. <i>https://www.wms.nrw.de/"
+"geobasis/wms_nw_dop_overlay</i>)"
+msgstr ""
+
+#: src/lib/marble/MapWizard.ui:156
+msgctxt "MapWizard|"
 msgid "https://"
 msgstr "https://"
 
-#: src/lib/marble/MapWizard.ui:179
+#: src/lib/marble/MapWizard.ui:185
 msgctxt "MapWizard|"
 msgid "Available Maps:"
 msgstr "Mapes disponibles:"
 
-#: src/lib/marble/MapWizard.ui:196
+#: src/lib/marble/MapWizard.ui:202
 msgctxt "MapWizard|"
 msgid ""
 "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
@@ -8438,17 +8445,17 @@ msgstr ""
 "right:0px; -qt-block-indent:0; text-indent:0px;\"><img src=\":/data/svg/"
 "worldmap.svg\" width=\"150\" /></p></body></html>"
 
-#: src/lib/marble/MapWizard.ui:215
+#: src/lib/marble/MapWizard.ui:221
 msgctxt "MapWizard|"
 msgid "Source Image:"
 msgstr "Imatge origen:"
 
-#: src/lib/marble/MapWizard.ui:231 src/lib/marble/MapWizard.ui:481
+#: src/lib/marble/MapWizard.ui:237 src/lib/marble/MapWizard.ui:496
 msgctxt "MapWizard|"
 msgid "..."
 msgstr "..."
 
-#: src/lib/marble/MapWizard.ui:257
+#: src/lib/marble/MapWizard.ui:263
 msgctxt "MapWizard|"
 msgid ""
 "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
@@ -8495,12 +8502,12 @@ msgstr ""
 "\">{zoomLevel}</span><span style=\" font-family:'Sans Serif';\"> per a "
 "referenciar una rajola des de l'índex.</span></p></body></html>"
 
-#: src/lib/marble/MapWizard.ui:293
+#: src/lib/marble/MapWizard.ui:299
 msgctxt "MapWizard|"
 msgid "URL Scheme:"
 msgstr "Esquema d'URL:"
 
-#: src/lib/marble/MapWizard.ui:332
+#: src/lib/marble/MapWizard.ui:338
 msgctxt "MapWizard|"
 msgid ""
 "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
@@ -8535,37 +8542,37 @@ msgstr ""
 "Afegiu-hi una descripció per tal que els usuaris sàpien de què va el mapa. </"
 "span></p></body></html>"
 
-#: src/lib/marble/MapWizard.ui:347
+#: src/lib/marble/MapWizard.ui:353
 msgctxt "MapWizard|"
 msgid "Map Title:"
 msgstr "Títol del mapa:"
 
-#: src/lib/marble/MapWizard.ui:360
+#: src/lib/marble/MapWizard.ui:366
 msgctxt "MapWizard|"
 msgid "A short concise name for your map theme."
 msgstr "Un nom curt i concís per al vostre tema de mapa."
 
-#: src/lib/marble/MapWizard.ui:367 src/lib/marble/MapWizard.ui:563
+#: src/lib/marble/MapWizard.ui:373 src/lib/marble/MapWizard.ui:580
 msgctxt "MapWizard|"
 msgid "Map Name:"
 msgstr "Nom del mapa:"
 
-#: src/lib/marble/MapWizard.ui:377
+#: src/lib/marble/MapWizard.ui:383
 msgctxt "MapWizard|"
 msgid "The lowercase map theme id."
 msgstr "L'id del tema de mapa, en minúscula."
 
-#: src/lib/marble/MapWizard.ui:380
+#: src/lib/marble/MapWizard.ui:386
 msgctxt "MapWizard|"
 msgid "The folder name of your new theme."
 msgstr "El nom de la carpeta del tema nou."
 
-#: src/lib/marble/MapWizard.ui:387
+#: src/lib/marble/MapWizard.ui:393
 msgctxt "MapWizard|"
 msgid "Description:"
 msgstr "Descripció:"
 
-#: src/lib/marble/MapWizard.ui:400
+#: src/lib/marble/MapWizard.ui:406
 msgctxt "MapWizard|"
 msgid ""
 "A short description of your map theme. Here you can provide information "
@@ -8576,57 +8583,62 @@ msgstr ""
 "finalitat, origen, copyright i llicència de les dades utilitzades en el tema "
 "de mapa."
 
-#: src/lib/marble/MapWizard.ui:403
+#: src/lib/marble/MapWizard.ui:409
 msgctxt "MapWizard|"
 msgid "It will appear in a tool tip and may contain HTML formatting."
 msgstr "Apareixerà en un rètol informatiu i pot contindre format HTML."
 
-#: src/lib/marble/MapWizard.ui:410 src/lib/marble/MapWizard.ui:603
+#: src/lib/marble/MapWizard.ui:416 src/lib/marble/MapWizard.ui:620
 msgctxt "MapWizard|"
 msgid "Preview Image:"
 msgstr "Previsualitza la imatge:"
 
-#: src/lib/marble/MapWizard.ui:436
+#: src/lib/marble/MapWizard.ui:442
 msgctxt "MapWizard|"
 msgid "preview image"
 msgstr "previsualitza la imatge"
 
-#: src/lib/marble/MapWizard.ui:443
+#: src/lib/marble/MapWizard.ui:449
 msgctxt "MapWizard|"
 msgid "Change..."
 msgstr "Canvia..."
 
-#: src/lib/marble/MapWizard.ui:471
+#: src/lib/marble/MapWizard.ui:477
+msgctxt "MapWizard|"
+msgid "<b>Optional: Addition of a Map Key<b>"
+msgstr ""
+
+#: src/lib/marble/MapWizard.ui:486
 msgctxt "MapWizard|"
 msgid "Legend Image:"
 msgstr "Imatge de la llegenda:"
 
-#: src/lib/marble/MapWizard.ui:495
+#: src/lib/marble/MapWizard.ui:512
 msgctxt "MapWizard|"
 msgid "Places of Interest"
 msgstr "Llocs d'interés"
 
-#: src/lib/marble/MapWizard.ui:502
+#: src/lib/marble/MapWizard.ui:519
 msgctxt "MapWizard|"
 msgid "Populated Places"
 msgstr "Llocs poblats"
 
-#: src/lib/marble/MapWizard.ui:509
+#: src/lib/marble/MapWizard.ui:526
 msgctxt "MapWizard|"
 msgid "Terrain"
 msgstr "Terreny"
 
-#: src/lib/marble/MapWizard.ui:516
+#: src/lib/marble/MapWizard.ui:533
 msgctxt "MapWizard|"
 msgid "Coordinate Grid"
 msgstr "Quadrícula de coordenades"
 
-#: src/lib/marble/MapWizard.ui:523
+#: src/lib/marble/MapWizard.ui:540
 msgctxt "MapWizard|"
 msgid "Border Lines"
 msgstr "Línies de frontera"
 
-#: src/lib/marble/MapWizard.ui:538
+#: src/lib/marble/MapWizard.ui:555
 msgctxt "MapWizard|"
 msgid ""
 "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
@@ -8675,27 +8687,27 @@ msgstr ""
 "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"></"
 "p></body></html>"
 
-#: src/lib/marble/MapWizard.ui:570
+#: src/lib/marble/MapWizard.ui:587
 msgctxt "MapWizard|"
 msgid "Map name goes here."
 msgstr "Ací hi va el nom del mapa."
 
-#: src/lib/marble/MapWizard.ui:583
+#: src/lib/marble/MapWizard.ui:600
 msgctxt "MapWizard|"
 msgid "Map Theme:"
 msgstr "Tema del mapa:"
 
-#: src/lib/marble/MapWizard.ui:590
+#: src/lib/marble/MapWizard.ui:607
 msgctxt "MapWizard|"
 msgid "Map theme goes here."
 msgstr "Ací hi va el tema del mapa."
 
-#: src/lib/marble/MapWizard.ui:610
+#: src/lib/marble/MapWizard.ui:627
 msgctxt "MapWizard|"
 msgid "Thumbnail image goes here."
 msgstr "Ací hi va la imatge en miniatura."
 
-#: src/lib/marble/MapWizard.ui:622
+#: src/lib/marble/MapWizard.ui:639
 msgctxt "MapWizard|"
 msgid "Preview Map"
 msgstr "Vista prèvia del mapa"

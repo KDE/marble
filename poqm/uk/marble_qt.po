@@ -8052,42 +8052,42 @@ msgctxt "MapViewWidget|"
 msgid "Here you can choose the preferred map view from different topics."
 msgstr "Тут ви можете вибрати належний вигляд карти за різними темами."
 
-#: src/lib/marble/MapWizard.cpp:130
+#: src/lib/marble/MapWizard.cpp:131
 msgctxt "Marble::PreviewDialog|"
 msgid "Preview Map"
 msgstr "Переглянути карту"
 
-#: src/lib/marble/MapWizard.cpp:239 src/lib/marble/MapWizard.cpp:245
+#: src/lib/marble/MapWizard.cpp:241 src/lib/marble/MapWizard.cpp:247
 msgctxt "Marble::MapWizard|"
 msgid "Error while parsing"
 msgstr "Помилка під час обробки"
 
-#: src/lib/marble/MapWizard.cpp:239
+#: src/lib/marble/MapWizard.cpp:241
 msgctxt "Marble::MapWizard|"
 msgid "Wizard cannot parse server's response"
 msgstr "Майстру не вдалося обробити відповідь сервера"
 
-#: src/lib/marble/MapWizard.cpp:245
+#: src/lib/marble/MapWizard.cpp:247
 msgctxt "Marble::MapWizard|"
 msgid "Server is not a Web Map Server."
 msgstr "Сервер не є сервером інтернет-карти"
 
-#: src/lib/marble/MapWizard.cpp:313
+#: src/lib/marble/MapWizard.cpp:324 src/lib/marble/MapWizard.cpp:345
 msgctxt "Marble::MapWizard|"
 msgid "Custom"
 msgstr "Нетиповий"
 
-#: src/lib/marble/MapWizard.cpp:496 src/lib/marble/MapWizard.cpp:503
+#: src/lib/marble/MapWizard.cpp:533 src/lib/marble/MapWizard.cpp:540
 msgctxt "Marble::MapWizard|"
 msgid "Base Tile"
 msgstr "Основний елемент"
 
-#: src/lib/marble/MapWizard.cpp:497
+#: src/lib/marble/MapWizard.cpp:534
 msgctxt "Marble::MapWizard|"
 msgid "The base tile could not be downloaded."
 msgstr "Не вдалося отримати основний елемент."
 
-#: src/lib/marble/MapWizard.cpp:504
+#: src/lib/marble/MapWizard.cpp:541
 #, qt-format
 msgctxt "Marble::MapWizard|"
 msgid ""
@@ -8099,33 +8099,33 @@ msgstr ""
 "\n"
 "%1"
 
-#: src/lib/marble/MapWizard.cpp:623 src/lib/marble/MapWizard.cpp:626
+#: src/lib/marble/MapWizard.cpp:660 src/lib/marble/MapWizard.cpp:663
 msgctxt "Marble::MapWizard|"
 msgid "Archiving failed"
 msgstr "Помилка архівування"
 
-#: src/lib/marble/MapWizard.cpp:623
+#: src/lib/marble/MapWizard.cpp:660
 msgctxt "Marble::MapWizard|"
 msgid "Archiving process cannot be started."
 msgstr "Не вдалося розпочати процес архівування."
 
-#: src/lib/marble/MapWizard.cpp:626
+#: src/lib/marble/MapWizard.cpp:663
 msgctxt "Marble::MapWizard|"
 msgid "Archiving process crashed."
 msgstr "Аварійне завершення процесу архівування."
 
-#: src/lib/marble/MapWizard.cpp:661 src/lib/marble/MapWizard.cpp:669
-#: src/lib/marble/MapWizard.cpp:678
+#: src/lib/marble/MapWizard.cpp:698 src/lib/marble/MapWizard.cpp:706
+#: src/lib/marble/MapWizard.cpp:715
 msgctxt "Marble::MapWizard|"
 msgid "Source Image"
 msgstr "Початкове зображення"
 
-#: src/lib/marble/MapWizard.cpp:662
+#: src/lib/marble/MapWizard.cpp:699
 msgctxt "Marble::MapWizard|"
 msgid "Please specify a source image."
 msgstr "Будь ласка, вкажіть початкове зображення."
 
-#: src/lib/marble/MapWizard.cpp:670
+#: src/lib/marble/MapWizard.cpp:707
 msgctxt "Marble::MapWizard|"
 msgid ""
 "The source image you specified does not exist. Please specify a different "
@@ -8133,7 +8133,7 @@ msgid ""
 msgstr ""
 "Вказаного вами початкового зображення не існує. Будь ласка, вкажіть інше."
 
-#: src/lib/marble/MapWizard.cpp:679
+#: src/lib/marble/MapWizard.cpp:716
 msgctxt "Marble::MapWizard|"
 msgid ""
 "The source image you specified does not seem to be an image. Please specify "
@@ -8142,27 +8142,27 @@ msgstr ""
 "Вказане вами початкове зображення не є зображенням. Будь ласка, вкажіть "
 "інший файл зображення."
 
-#: src/lib/marble/MapWizard.cpp:688
+#: src/lib/marble/MapWizard.cpp:725
 msgctxt "Marble::MapWizard|"
 msgid "Map Title"
 msgstr "Заголовок карти"
 
-#: src/lib/marble/MapWizard.cpp:688
+#: src/lib/marble/MapWizard.cpp:725
 msgctxt "Marble::MapWizard|"
 msgid "Please specify a map title."
 msgstr "Будь ласка, вкажіть заголовок карти."
 
-#: src/lib/marble/MapWizard.cpp:695 src/lib/marble/MapWizard.cpp:703
+#: src/lib/marble/MapWizard.cpp:732 src/lib/marble/MapWizard.cpp:740
 msgctxt "Marble::MapWizard|"
 msgid "Map Name"
 msgstr "Назва карти"
 
-#: src/lib/marble/MapWizard.cpp:695
+#: src/lib/marble/MapWizard.cpp:732
 msgctxt "Marble::MapWizard|"
 msgid "Please specify a map name."
 msgstr "Будь ласка, вкажіть назву карти."
 
-#: src/lib/marble/MapWizard.cpp:704
+#: src/lib/marble/MapWizard.cpp:741
 #, qt-format
 msgctxt "Marble::MapWizard|"
 msgid ""
@@ -8170,67 +8170,67 @@ msgid ""
 msgstr ""
 "Будь ласка, вкажіть іншу назву карти, оскільки карта з назвою «%1» вже існує."
 
-#: src/lib/marble/MapWizard.cpp:711
+#: src/lib/marble/MapWizard.cpp:748
 msgctxt "Marble::MapWizard|"
 msgid "Preview Image"
 msgstr "Ескіз зображення"
 
-#: src/lib/marble/MapWizard.cpp:711
+#: src/lib/marble/MapWizard.cpp:748
 msgctxt "Marble::MapWizard|"
 msgid "Please specify a preview image."
 msgstr "Будь ласка, вкажіть зображення ескізу."
 
-#: src/lib/marble/MapWizard.cpp:895
+#: src/lib/marble/MapWizard.cpp:932
 msgctxt "Marble::MapWizard|"
 msgid "Geographic Pole"
 msgstr "Географічний полюс"
 
-#: src/lib/marble/MapWizard.cpp:901
+#: src/lib/marble/MapWizard.cpp:938
 msgctxt "Marble::MapWizard|"
 msgid "Magnetic Pole"
 msgstr "Магнітний полюс"
 
-#: src/lib/marble/MapWizard.cpp:907
+#: src/lib/marble/MapWizard.cpp:944
 msgctxt "Marble::MapWizard|"
 msgid "Airport"
 msgstr "Аеропорт"
 
-#: src/lib/marble/MapWizard.cpp:913
+#: src/lib/marble/MapWizard.cpp:950
 msgctxt "Marble::MapWizard|"
 msgid "Shipwreck"
 msgstr "Місце, де затонув корабель"
 
-#: src/lib/marble/MapWizard.cpp:919
+#: src/lib/marble/MapWizard.cpp:956
 msgctxt "Marble::MapWizard|"
 msgid "Observatory"
 msgstr "Обсерваторія"
 
-#: src/lib/marble/MapWizard.cpp:941
+#: src/lib/marble/MapWizard.cpp:978
 msgctxt "Marble::MapWizard|"
 msgid "Mountain"
 msgstr "Гора"
 
-#: src/lib/marble/MapWizard.cpp:947
+#: src/lib/marble/MapWizard.cpp:984
 msgctxt "Marble::MapWizard|"
 msgid "Volcano"
 msgstr "Вулкан"
 
-#: src/lib/marble/MapWizard.cpp:978
+#: src/lib/marble/MapWizard.cpp:1015
 msgctxt "Marble::MapWizard|"
 msgid "International"
 msgstr "Міжнародна територія"
 
-#: src/lib/marble/MapWizard.cpp:984
+#: src/lib/marble/MapWizard.cpp:1021
 msgctxt "Marble::MapWizard|"
 msgid "State"
 msgstr "Держава"
 
-#: src/lib/marble/MapWizard.cpp:1088
+#: src/lib/marble/MapWizard.cpp:1125
 msgctxt "Marble::MapWizard|"
 msgid "Problem while creating files"
 msgstr "Проблема під час створення файлів"
 
-#: src/lib/marble/MapWizard.cpp:1088
+#: src/lib/marble/MapWizard.cpp:1125
 msgctxt "Marble::MapWizard|"
 msgid "Check if a theme with the same name exists."
 msgstr "Перевірте, чи немає вже теми з також назвою."
@@ -8372,7 +8372,7 @@ msgctxt "MapWizard|"
 msgid "WMS Server:"
 msgstr "Сервер WMS:"
 
-#: src/lib/marble/MapWizard.ui:135
+#: src/lib/marble/MapWizard.ui:135 src/lib/marble/MapWizard.ui:159
 msgctxt "MapWizard|"
 msgid "Custom"
 msgstr "Нетиповий"
@@ -8384,15 +8384,22 @@ msgstr "Адреса:"
 
 #: src/lib/marble/MapWizard.ui:153
 msgctxt "MapWizard|"
+msgid ""
+"Enter the base Url of the WMS service (e.g. <i>https://www.wms.nrw.de/"
+"geobasis/wms_nw_dop_overlay</i>)"
+msgstr ""
+
+#: src/lib/marble/MapWizard.ui:156
+msgctxt "MapWizard|"
 msgid "https://"
 msgstr "https://"
 
-#: src/lib/marble/MapWizard.ui:179
+#: src/lib/marble/MapWizard.ui:185
 msgctxt "MapWizard|"
 msgid "Available Maps:"
 msgstr "Доступні карти:"
 
-#: src/lib/marble/MapWizard.ui:196
+#: src/lib/marble/MapWizard.ui:202
 msgctxt "MapWizard|"
 msgid ""
 "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
@@ -8443,17 +8450,17 @@ msgstr ""
 "right:0px; -qt-block-indent:0; text-indent:0px;\"><img src=\":/data/svg/"
 "worldmap.svg\" width=\"150\" /></p></body></html>"
 
-#: src/lib/marble/MapWizard.ui:215
+#: src/lib/marble/MapWizard.ui:221
 msgctxt "MapWizard|"
 msgid "Source Image:"
 msgstr "Початкове зображення:"
 
-#: src/lib/marble/MapWizard.ui:231 src/lib/marble/MapWizard.ui:481
+#: src/lib/marble/MapWizard.ui:237 src/lib/marble/MapWizard.ui:496
 msgctxt "MapWizard|"
 msgid "..."
 msgstr "…"
 
-#: src/lib/marble/MapWizard.ui:257
+#: src/lib/marble/MapWizard.ui:263
 msgctxt "MapWizard|"
 msgid ""
 "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
@@ -8500,12 +8507,12 @@ msgstr ""
 "\">{zoomLevel}</span><span style=\" font-family:'Sans Serif';\"> для "
 "посилання на елемент з покажчика (індексу).</span></p></body></html>"
 
-#: src/lib/marble/MapWizard.ui:293
+#: src/lib/marble/MapWizard.ui:299
 msgctxt "MapWizard|"
 msgid "URL Scheme:"
 msgstr "Схема адрес:"
 
-#: src/lib/marble/MapWizard.ui:332
+#: src/lib/marble/MapWizard.ui:338
 msgctxt "MapWizard|"
 msgid ""
 "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
@@ -8540,37 +8547,37 @@ msgstr ""
 "вашої нової карти. Додайте опис з даними щодо призначення, авторських прав "
 "та умов ліцензування карти.</span></p></body></html>"
 
-#: src/lib/marble/MapWizard.ui:347
+#: src/lib/marble/MapWizard.ui:353
 msgctxt "MapWizard|"
 msgid "Map Title:"
 msgstr "Заголовок карти:"
 
-#: src/lib/marble/MapWizard.ui:360
+#: src/lib/marble/MapWizard.ui:366
 msgctxt "MapWizard|"
 msgid "A short concise name for your map theme."
 msgstr "Коротка описова назва теми карти."
 
-#: src/lib/marble/MapWizard.ui:367 src/lib/marble/MapWizard.ui:563
+#: src/lib/marble/MapWizard.ui:373 src/lib/marble/MapWizard.ui:580
 msgctxt "MapWizard|"
 msgid "Map Name:"
 msgstr "Назва карти:"
 
-#: src/lib/marble/MapWizard.ui:377
+#: src/lib/marble/MapWizard.ui:383
 msgctxt "MapWizard|"
 msgid "The lowercase map theme id."
 msgstr "Ідентифікатор карти малими літерами."
 
-#: src/lib/marble/MapWizard.ui:380
+#: src/lib/marble/MapWizard.ui:386
 msgctxt "MapWizard|"
 msgid "The folder name of your new theme."
 msgstr "Назва теки вашої нової теми."
 
-#: src/lib/marble/MapWizard.ui:387
+#: src/lib/marble/MapWizard.ui:393
 msgctxt "MapWizard|"
 msgid "Description:"
 msgstr "Опис:"
 
-#: src/lib/marble/MapWizard.ui:400
+#: src/lib/marble/MapWizard.ui:406
 msgctxt "MapWizard|"
 msgid ""
 "A short description of your map theme. Here you can provide information "
@@ -8581,59 +8588,64 @@ msgstr ""
 "походження, авторських прав та умов ліцензування даних, використаних у вашій "
 "темі карти."
 
-#: src/lib/marble/MapWizard.ui:403
+#: src/lib/marble/MapWizard.ui:409
 msgctxt "MapWizard|"
 msgid "It will appear in a tool tip and may contain HTML formatting."
 msgstr ""
 "Вказані дані буде показано на панелі підказки, у них можна використовувати "
 "теґи форматування HTML."
 
-#: src/lib/marble/MapWizard.ui:410 src/lib/marble/MapWizard.ui:603
+#: src/lib/marble/MapWizard.ui:416 src/lib/marble/MapWizard.ui:620
 msgctxt "MapWizard|"
 msgid "Preview Image:"
 msgstr "Ескіз зображення:"
 
-#: src/lib/marble/MapWizard.ui:436
+#: src/lib/marble/MapWizard.ui:442
 msgctxt "MapWizard|"
 msgid "preview image"
 msgstr "ескіз зображення"
 
-#: src/lib/marble/MapWizard.ui:443
+#: src/lib/marble/MapWizard.ui:449
 msgctxt "MapWizard|"
 msgid "Change..."
 msgstr "Змінити…"
 
-#: src/lib/marble/MapWizard.ui:471
+#: src/lib/marble/MapWizard.ui:477
+msgctxt "MapWizard|"
+msgid "<b>Optional: Addition of a Map Key<b>"
+msgstr ""
+
+#: src/lib/marble/MapWizard.ui:486
 msgctxt "MapWizard|"
 msgid "Legend Image:"
 msgstr "Зображення умовних позначень:"
 
-#: src/lib/marble/MapWizard.ui:495
+#: src/lib/marble/MapWizard.ui:512
 msgctxt "MapWizard|"
 msgid "Places of Interest"
 msgstr "Цікаве місце"
 
-#: src/lib/marble/MapWizard.ui:502
+#: src/lib/marble/MapWizard.ui:519
 msgctxt "MapWizard|"
 msgid "Populated Places"
 msgstr "Населені місця"
 
-#: src/lib/marble/MapWizard.ui:509
+#: src/lib/marble/MapWizard.ui:526
 msgctxt "MapWizard|"
 msgid "Terrain"
 msgstr "Місцевість"
 
-#: src/lib/marble/MapWizard.ui:516
+#: src/lib/marble/MapWizard.ui:533
 msgctxt "MapWizard|"
 msgid "Coordinate Grid"
 msgstr "Координатна сітка"
 
-#: src/lib/marble/MapWizard.ui:523
+#: src/lib/marble/MapWizard.ui:540
 msgctxt "MapWizard|"
 msgid "Border Lines"
 msgstr "Лінії кордонів"
 
-#: src/lib/marble/MapWizard.ui:538
+#: src/lib/marble/MapWizard.ui:555
 msgctxt "MapWizard|"
 msgid ""
 "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
@@ -8682,27 +8694,27 @@ msgstr ""
 "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"></"
 "p></body></html>"
 
-#: src/lib/marble/MapWizard.ui:570
+#: src/lib/marble/MapWizard.ui:587
 msgctxt "MapWizard|"
 msgid "Map name goes here."
 msgstr "Тут слід вказати назву карти."
 
-#: src/lib/marble/MapWizard.ui:583
+#: src/lib/marble/MapWizard.ui:600
 msgctxt "MapWizard|"
 msgid "Map Theme:"
 msgstr "Тема карти:"
 
-#: src/lib/marble/MapWizard.ui:590
+#: src/lib/marble/MapWizard.ui:607
 msgctxt "MapWizard|"
 msgid "Map theme goes here."
 msgstr "Тут слід вказати тему карти."
 
-#: src/lib/marble/MapWizard.ui:610
+#: src/lib/marble/MapWizard.ui:627
 msgctxt "MapWizard|"
 msgid "Thumbnail image goes here."
 msgstr "Тут слід вказати мініатюру зображення."
 
-#: src/lib/marble/MapWizard.ui:622
+#: src/lib/marble/MapWizard.ui:639
 msgctxt "MapWizard|"
 msgid "Preview Map"
 msgstr "Переглянути карту"
