@@ -16,14 +16,14 @@ msgstr ""
 "Project-Id-Version: marble_qt\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2023-01-04 20:53+0100\n"
+"PO-Revision-Date: 2023-03-12 09:25+0100\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 22.12.0\n"
+"X-Generator: Lokalize 22.12.3\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
 "X-Qt-Contexts: true\n"
@@ -833,7 +833,7 @@ msgstr ""
 #. file data/maps/earth/vectorosm/vectorosm.dgml:105
 msgctxt "DGML|"
 msgid "OSM Bitmap Tiles"
-msgstr "Bitmapy obszarów OSM"
+msgstr "Pola bitmap z OSM"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:119
 #. ----------
@@ -5247,30 +5247,26 @@ msgid "Download Region"
 msgstr "Pobierz region"
 
 #: src/lib/marble/DownloadRegionDialog.cpp:247
-#, fuzzy
-#| msgctxt "Marble::MapWizard|"
-#| msgid "The base tile could not be downloaded."
 msgctxt "Marble::DownloadRegionDialog|"
 msgid "Tile type to be downloaded:"
-msgstr "Nie można pobrać podstawy tytułu."
+msgstr "Rodzaj pola do pobrania:"
 
 #: src/lib/marble/DownloadRegionDialog.cpp:249
 msgctxt "Marble::DownloadRegionDialog|"
 msgid "Texture tiles"
-msgstr ""
+msgstr "Pola teksturowane"
 
 #: src/lib/marble/DownloadRegionDialog.cpp:250
-#, fuzzy
-#| msgctxt "Marble::MapViewWidget|"
-#| msgid "Mercator View"
 msgctxt "Marble::DownloadRegionDialog|"
 msgid "Vector tiles"
-msgstr "Widok Mercatora"
+msgstr "Pola wektorowe"
 
 #: src/lib/marble/DownloadRegionDialog.cpp:251
 msgctxt "Marble::DownloadRegionDialog|"
 msgid "Allows selection between layer types that are visibly being rendered."
 msgstr ""
+"Zezwala na zaznaczanie pomiędzy rodzajami warstw, które widać, że są w "
+"trakcie wyświetlania."
 
 #: src/lib/marble/DownloadRegionDialog.cpp:520
 #, qt-format
@@ -8073,12 +8069,12 @@ msgstr "Własna"
 #: src/lib/marble/MapWizard.cpp:496 src/lib/marble/MapWizard.cpp:503
 msgctxt "Marble::MapWizard|"
 msgid "Base Tile"
-msgstr "Podstawa tytułu"
+msgstr "Pole podstawowe"
 
 #: src/lib/marble/MapWizard.cpp:497
 msgctxt "Marble::MapWizard|"
 msgid "The base tile could not be downloaded."
-msgstr "Nie można pobrać podstawy tytułu."
+msgstr "Nie można pobrać podstawowego pola."
 
 #: src/lib/marble/MapWizard.cpp:504
 #, qt-format
