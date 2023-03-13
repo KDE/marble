@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2023-03-09 13:33+0300\n"
+"PO-Revision-Date: 2023-03-12 12:34+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -8357,6 +8357,8 @@ msgid ""
 "Enter the base Url of the WMS service (e.g. <i>https://www.wms.nrw.de/"
 "geobasis/wms_nw_dop_overlay</i>)"
 msgstr ""
+"WMS hizmetinin taban URL'sini girin (örn. <i>https://www.wms.nrw.de/geobasis/"
+"wms_nw_dop_overlay</i>)"
 
 #: src/lib/marble/MapWizard.ui:156
 msgctxt "MapWizard|"
@@ -8577,9 +8579,12 @@ msgid "Change..."
 msgstr "Değiştir..."
 
 #: src/lib/marble/MapWizard.ui:477
+#, fuzzy
+#| msgctxt "MapWizard|"
+#| msgid "<b>Optional: Addition of a Map Key<b>"
 msgctxt "MapWizard|"
-msgid "<b>Optional: Addition of a Map Key<b>"
-msgstr ""
+msgid "<b>Optional: Addition of a Map Key</b>"
+msgstr "<b>İsteğe bağlı: Harita Anahtarı Eklenmesi<b>"
 
 #: src/lib/marble/MapWizard.ui:486
 msgctxt "MapWizard|"

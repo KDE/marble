@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: marble_qt\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2023-02-15 21:37+0100\n"
+"PO-Revision-Date: 2023-03-12 22:53+0100\n"
 "Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: esperanto <kde-i18n-eo@kde.org>\n"
 "Language: eo\n"
@@ -5230,38 +5230,32 @@ msgid "Download Region"
 msgstr "Elŝuti regionon"
 
 #: src/lib/marble/DownloadRegionDialog.cpp:247
-#, fuzzy
-#| msgctxt "Marble::MapWizard|"
-#| msgid "The base tile could not be downloaded."
 msgctxt "Marble::DownloadRegionDialog|"
 msgid "Tile type to be downloaded:"
-msgstr "La bazaj kaheloj en elŝuteblas."
+msgstr "Kaheltipo elŝutenda:"
 
 #: src/lib/marble/DownloadRegionDialog.cpp:249
 msgctxt "Marble::DownloadRegionDialog|"
 msgid "Texture tiles"
-msgstr ""
+msgstr "Teksturkaheloj"
 
 #: src/lib/marble/DownloadRegionDialog.cpp:250
-#, fuzzy
-#| msgctxt "Marble::MapViewWidget|"
-#| msgid "Mercator View"
 msgctxt "Marble::DownloadRegionDialog|"
 msgid "Vector tiles"
-msgstr "Merkatora Vido"
+msgstr "Vektoraj kaheloj"
 
 #: src/lib/marble/DownloadRegionDialog.cpp:251
 msgctxt "Marble::DownloadRegionDialog|"
 msgid "Allows selection between layer types that are visibly being rendered."
-msgstr ""
+msgstr "Permesas elekton inter tavoltipoj kiuj estas videble bildiĝantaj."
 
 #: src/lib/marble/DownloadRegionDialog.cpp:520
 #, qt-format
 msgctxt "Marble::DownloadRegionDialog|"
 msgid "There is a limit of %n tile(s) to download."
 msgid_plural "There is a limit of %n tile(s) to download."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Estas limo de %n kahelo por elŝuti."
+msgstr[1] "Estas limo de %n kaheloj por elŝuti."
 
 #: src/lib/marble/DownloadRegionDialog.cpp:531
 msgctxt "Marble::DownloadRegionDialog|"
@@ -8572,7 +8566,7 @@ msgstr "Ŝanĝi..."
 
 #: src/lib/marble/MapWizard.ui:477
 msgctxt "MapWizard|"
-msgid "<b>Optional: Addition of a Map Key<b>"
+msgid "<b>Optional: Addition of a Map Key</b>"
 msgstr ""
 
 #: src/lib/marble/MapWizard.ui:486

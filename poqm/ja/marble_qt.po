@@ -9153,7 +9153,7 @@ msgstr "設定"
 
 #: src/lib/marble/MapWizard.ui:477
 msgctxt "MapWizard|"
-msgid "<b>Optional: Addition of a Map Key<b>"
+msgid "<b>Optional: Addition of a Map Key</b>"
 msgstr ""
 
 #: src/lib/marble/MapWizard.ui:486

@@ -15,7 +15,7 @@ msgstr ""
 "Project-Id-Version: marble_qt\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2023-03-09 01:06+0100\n"
+"PO-Revision-Date: 2023-03-12 13:59+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -8375,6 +8375,8 @@ msgid ""
 "Enter the base Url of the WMS service (e.g. <i>https://www.wms.nrw.de/"
 "geobasis/wms_nw_dop_overlay</i>)"
 msgstr ""
+"Introduzca la URL base del servicio WMS (por ejemplo, <i>https://www.wms.nrw."
+"de/geobasis/wms_nw_dop_overlay</i>)"
 
 #: src/lib/marble/MapWizard.ui:156
 msgctxt "MapWizard|"
@@ -8598,9 +8600,12 @@ msgid "Change..."
 msgstr "Cambiar..."
 
 #: src/lib/marble/MapWizard.ui:477
+#, fuzzy
+#| msgctxt "MapWizard|"
+#| msgid "<b>Optional: Addition of a Map Key<b>"
 msgctxt "MapWizard|"
-msgid "<b>Optional: Addition of a Map Key<b>"
-msgstr ""
+msgid "<b>Optional: Addition of a Map Key</b>"
+msgstr "<b>Opcional: Adición de una clave de mapa<b>"
 
 #: src/lib/marble/MapWizard.ui:486
 msgctxt "MapWizard|"

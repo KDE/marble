@@ -3,14 +3,14 @@
 # This file is distributed under the same license as the PACKAGE package.
 # Pino Toscano <toscano.pino@tiscali.it>, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020.
 # Paolo Zamponi <zapaolo@email.it>, 2022.
-# Vincenzo Reale <smart2128vr@gmail.com>, 2022.
+# Vincenzo Reale <smart2128vr@gmail.com>, 2022, 2023.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: marble_qt\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2022-12-25 10:58+0100\n"
+"PO-Revision-Date: 2023-03-09 09:22+0100\n"
 "Last-Translator: Vincenzo Reale <smart2128vr@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "Language: it\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Qt-Contexts: true\n"
-"X-Generator: Lokalize 22.12.0\n"
+"X-Generator: Lokalize 22.12.3\n"
 
 #. file data/maps/moon/clementine/clementine.dgml:5
 msgctxt "DGML|"
@@ -5246,30 +5246,26 @@ msgid "Download Region"
 msgstr "Scarica regione"
 
 #: src/lib/marble/DownloadRegionDialog.cpp:247
-#, fuzzy
-#| msgctxt "Marble::MapWizard|"
-#| msgid "The base tile could not be downloaded."
 msgctxt "Marble::DownloadRegionDialog|"
 msgid "Tile type to be downloaded:"
-msgstr "Non è stato possibile scaricare la tessera base."
+msgstr "Tipo di tessera da scaricare:"
 
 #: src/lib/marble/DownloadRegionDialog.cpp:249
 msgctxt "Marble::DownloadRegionDialog|"
 msgid "Texture tiles"
-msgstr ""
+msgstr "Tessere delle texture"
 
 #: src/lib/marble/DownloadRegionDialog.cpp:250
-#, fuzzy
-#| msgctxt "Marble::MapViewWidget|"
-#| msgid "Mercator View"
 msgctxt "Marble::DownloadRegionDialog|"
 msgid "Vector tiles"
-msgstr "Vista Mercatore"
+msgstr "Tessere dei vettori"
 
 #: src/lib/marble/DownloadRegionDialog.cpp:251
 msgctxt "Marble::DownloadRegionDialog|"
 msgid "Allows selection between layer types that are visibly being rendered."
 msgstr ""
+"Consente la selezione tra i tipi di livello che vengono generati "
+"visibilmente."
 
 #: src/lib/marble/DownloadRegionDialog.cpp:520
 #, qt-format
@@ -8602,7 +8598,7 @@ msgstr "Cambia..."
 
 #: src/lib/marble/MapWizard.ui:477
 msgctxt "MapWizard|"
-msgid "<b>Optional: Addition of a Map Key<b>"
+msgid "<b>Optional: Addition of a Map Key</b>"
 msgstr ""
 
 #: src/lib/marble/MapWizard.ui:486
@@ -11600,9 +11596,8 @@ msgid ""
 "p><p>Applications: Display of seismic and radio data and for use in digital "
 "planetariums.</p>"
 msgstr ""
-"<p><b>Proiezione azimutale equidistante</b> (\"fisheye\")</"
-"p><p>Applicazioni: visualizzazione di dati sismici e radio, e nei planetari "
-"digitali.</p>"
+"<p><b>Proiezione azimutale equidistante</b> («fisheye»)</p><p>Applicazioni: "
+"visualizzazione di dati sismici e radio, e nei planetari digitali.</p>"
 
 #: src/lib/marble/projections/EquirectProjection.cpp:35
 msgctxt "QObject|"
@@ -11630,7 +11625,7 @@ msgid ""
 "displaying panorama photography. Also used for navigation, radio and seismic "
 "work.</p>"
 msgstr ""
-"<p><b>Proiezione gnomonica</b> (\"centrografica\")</p><p>Applicazioni: usata "
+"<p><b>Proiezione gnomonica</b> («centrografica»)</p><p>Applicazioni: usata "
 "per mostrare fotografie panoramiche. Usata anche per attività di "
 "navigazione, radio e sismiche.</p>"
 
@@ -13039,7 +13034,7 @@ msgstr "Rimuovi oggetto corrente"
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:308
 msgctxt "QObject|"
 msgid "Are you sure you want to remove the current item?"
-msgstr "Sei sicuro di voler rimuovere l'oggetto corrente?"
+msgstr "Sei sicuro di voler rimuovere l'oggetto attuale?"
 
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:345
 msgctxt "QObject|"
@@ -14824,7 +14819,7 @@ msgstr "Generale"
 #: src/plugins/render/opencaching/OpenCachingCacheDialog.ui:36
 msgctxt "OpenCachingCacheDialog|"
 msgid "Cache name:"
-msgstr "Nome del cache:"
+msgstr "Nome cache:"
 
 #: src/plugins/render/opencaching/OpenCachingCacheDialog.ui:43
 #: src/plugins/render/opencaching/OpenCachingCacheDialog.ui:63

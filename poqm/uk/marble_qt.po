@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: marble_qt\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2023-03-08 08:07+0200\n"
+"PO-Revision-Date: 2023-03-12 08:53+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
 "Language: uk\n"
@@ -8388,6 +8388,8 @@ msgid ""
 "Enter the base Url of the WMS service (e.g. <i>https://www.wms.nrw.de/"
 "geobasis/wms_nw_dop_overlay</i>)"
 msgstr ""
+"Введіть базову адресу служби WMS (наприклад <i>https://www.wms.nrw.de/"
+"geobasis/wms_nw_dop_overlay</i>)"
 
 #: src/lib/marble/MapWizard.ui:156
 msgctxt "MapWizard|"
@@ -8612,8 +8614,8 @@ msgstr "Змінити…"
 
 #: src/lib/marble/MapWizard.ui:477
 msgctxt "MapWizard|"
-msgid "<b>Optional: Addition of a Map Key<b>"
-msgstr ""
+msgid "<b>Optional: Addition of a Map Key</b>"
+msgstr "<b>Необов'язкове: додавання ключа карти</b>"
 
 #: src/lib/marble/MapWizard.ui:486
 msgctxt "MapWizard|"
