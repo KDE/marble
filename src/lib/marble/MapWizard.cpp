@@ -197,14 +197,13 @@ MapWizard::MapWizard( QWidget* parent ) : QWizard( parent ), d( new MapWizardPri
     connect( d->uiWidget.pushButtonPreview, SIGNAL(clicked(bool)), this, SLOT(queryPreviewImage()) );
     connect( d->uiWidget.pushButtonLegend_2, SIGNAL(clicked(bool)), this, SLOT(queryLegendImage()) );
 
-    connect( d->uiWidget.comboBoxWmsServer, SIGNAL(currentIndexChanged(QString)), this, SLOT(setLineEditWms(QString)) );
+    connect( d->uiWidget.comboBoxWmsServer, SIGNAL(activated(QString)), this, SLOT(setLineEditWms(QString)) );
     connect( d->uiWidget.listWidgetWmsMaps, SIGNAL(itemSelectionChanged()), this, SLOT(autoFillDetails()) );
     
     connect( d->uiWidget.lineEditTitle, SIGNAL(textChanged(QString)), d->uiWidget.labelSumMName, SLOT(setText(QString)) );
     connect( d->uiWidget.lineEditTheme, SIGNAL(textChanged(QString)), d->uiWidget.labelSumMTheme, SLOT(setText(QString)) );
     
     connect( d->uiWidget.pushButtonPreviewMap, SIGNAL(clicked(bool)), this, SLOT(showPreview()) );
-    
 }
 
 MapWizard::~MapWizard()
@@ -348,13 +347,10 @@ void MapWizard::setWmsServers( const QStringList& uris )
 {
     d->wmsServerList = uris;
 
-    disconnect( d->uiWidget.comboBoxWmsServer, SIGNAL(currentIndexChanged(QString)), this, SLOT(setLineEditWms(QString)) );
-
     d->uiWidget.comboBoxWmsServer->clear();
     d->uiWidget.comboBoxWmsServer->addItems( d->wmsServerList );
     d->uiWidget.comboBoxWmsServer->addItem( tr( "Custom" ), "http://" );
-
-    connect( d->uiWidget.comboBoxWmsServer, SIGNAL(currentIndexChanged(QString)), this, SLOT(setLineEditWms(QString)) );
+    d->uiWidget.comboBoxWmsServer->setCurrentText(tr( "Custom" ));
 }
 
 QStringList MapWizard::wmsServers() const
