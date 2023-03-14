@@ -8195,22 +8195,33 @@ msgctxt "Marble::MapWizard|"
 msgid "Server is not a Web Map Server."
 msgstr "Zerbitzaria ez da web-mapa zerbitzaria."
 
-#: src/lib/marble/MapWizard.cpp:324 src/lib/marble/MapWizard.cpp:345
+#: src/lib/marble/MapWizard.cpp:262
+msgctxt "Marble::MapWizard|"
+msgid "Equirectangular (epsg:4326)"
+msgstr ""
+
+#: src/lib/marble/MapWizard.cpp:265 src/lib/marble/MapWizard.cpp:526
+#: src/lib/marble/MapWizard.cpp:540 src/lib/marble/MapWizard.cpp:877
+msgctxt "Marble::MapWizard|"
+msgid "Web Mercator (epsg:3857)"
+msgstr ""
+
+#: src/lib/marble/MapWizard.cpp:355 src/lib/marble/MapWizard.cpp:378
 msgctxt "Marble::MapWizard|"
 msgid "Custom"
 msgstr "Norberak finkatua"
 
-#: src/lib/marble/MapWizard.cpp:533 src/lib/marble/MapWizard.cpp:540
+#: src/lib/marble/MapWizard.cpp:584 src/lib/marble/MapWizard.cpp:591
 msgctxt "Marble::MapWizard|"
 msgid "Base Tile"
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:534
+#: src/lib/marble/MapWizard.cpp:585
 msgctxt "Marble::MapWizard|"
 msgid "The base tile could not be downloaded."
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:541
+#: src/lib/marble/MapWizard.cpp:592
 #, qt-format
 msgctxt "Marble::MapWizard|"
 msgid ""
@@ -8219,68 +8230,68 @@ msgid ""
 "%1"
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:660 src/lib/marble/MapWizard.cpp:663
+#: src/lib/marble/MapWizard.cpp:711 src/lib/marble/MapWizard.cpp:714
 #, fuzzy
 msgctxt "Marble::MapWizard|"
 msgid "Archiving failed"
 msgstr "Artxibatzea huts egin du"
 
-#: src/lib/marble/MapWizard.cpp:660
+#: src/lib/marble/MapWizard.cpp:711
 msgctxt "Marble::MapWizard|"
 msgid "Archiving process cannot be started."
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:663
+#: src/lib/marble/MapWizard.cpp:714
 msgctxt "Marble::MapWizard|"
 msgid "Archiving process crashed."
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:698 src/lib/marble/MapWizard.cpp:706
-#: src/lib/marble/MapWizard.cpp:715
+#: src/lib/marble/MapWizard.cpp:749 src/lib/marble/MapWizard.cpp:757
+#: src/lib/marble/MapWizard.cpp:766
 msgctxt "Marble::MapWizard|"
 msgid "Source Image"
 msgstr "Sorburu-irudia"
 
-#: src/lib/marble/MapWizard.cpp:699
+#: src/lib/marble/MapWizard.cpp:750
 msgctxt "Marble::MapWizard|"
 msgid "Please specify a source image."
 msgstr "Mesedez, zehaztu sorburu-irudi bat."
 
-#: src/lib/marble/MapWizard.cpp:707
+#: src/lib/marble/MapWizard.cpp:758
 msgctxt "Marble::MapWizard|"
 msgid ""
 "The source image you specified does not exist. Please specify a different "
 "one."
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:716
+#: src/lib/marble/MapWizard.cpp:767
 msgctxt "Marble::MapWizard|"
 msgid ""
 "The source image you specified does not seem to be an image. Please specify "
 "a different image file."
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:725
+#: src/lib/marble/MapWizard.cpp:776
 msgctxt "Marble::MapWizard|"
 msgid "Map Title"
 msgstr "Maparen titulua"
 
-#: src/lib/marble/MapWizard.cpp:725
+#: src/lib/marble/MapWizard.cpp:776
 msgctxt "Marble::MapWizard|"
 msgid "Please specify a map title."
 msgstr "Mesedez, zehaztu mapa-titulu bat."
 
-#: src/lib/marble/MapWizard.cpp:732 src/lib/marble/MapWizard.cpp:740
+#: src/lib/marble/MapWizard.cpp:783 src/lib/marble/MapWizard.cpp:791
 msgctxt "Marble::MapWizard|"
 msgid "Map Name"
 msgstr "Maparen izena"
 
-#: src/lib/marble/MapWizard.cpp:732
+#: src/lib/marble/MapWizard.cpp:783
 msgctxt "Marble::MapWizard|"
 msgid "Please specify a map name."
 msgstr "Mesedez, zehaztu mapa-izen bat."
 
-#: src/lib/marble/MapWizard.cpp:741
+#: src/lib/marble/MapWizard.cpp:792
 #, qt-format
 msgctxt "Marble::MapWizard|"
 msgid ""
@@ -8288,68 +8299,68 @@ msgid ""
 msgstr ""
 "Mesedez, zehaztu beste mapa-izen bat, «%1» izeneko mapa bat badago eta."
 
-#: src/lib/marble/MapWizard.cpp:748
+#: src/lib/marble/MapWizard.cpp:799
 msgctxt "Marble::MapWizard|"
 msgid "Preview Image"
 msgstr "Aurreikusi irudia"
 
-#: src/lib/marble/MapWizard.cpp:748
+#: src/lib/marble/MapWizard.cpp:799
 msgctxt "Marble::MapWizard|"
 msgid "Please specify a preview image."
 msgstr "Mesedez, zehaztu aurreikuspen irudi bat."
 
-#: src/lib/marble/MapWizard.cpp:932
+#: src/lib/marble/MapWizard.cpp:989
 msgctxt "Marble::MapWizard|"
 msgid "Geographic Pole"
 msgstr "Polo geografikoa"
 
-#: src/lib/marble/MapWizard.cpp:938
+#: src/lib/marble/MapWizard.cpp:995
 msgctxt "Marble::MapWizard|"
 msgid "Magnetic Pole"
 msgstr "Polo magnetikoa"
 
-#: src/lib/marble/MapWizard.cpp:944
+#: src/lib/marble/MapWizard.cpp:1001
 msgctxt "Marble::MapWizard|"
 msgid "Airport"
 msgstr "Aireportua"
 
-#: src/lib/marble/MapWizard.cpp:950
+#: src/lib/marble/MapWizard.cpp:1007
 #, fuzzy
 msgctxt "Marble::MapWizard|"
 msgid "Shipwreck"
 msgstr "Ontzia hondoratzea"
 
-#: src/lib/marble/MapWizard.cpp:956
+#: src/lib/marble/MapWizard.cpp:1013
 msgctxt "Marble::MapWizard|"
 msgid "Observatory"
 msgstr "Behatokia"
 
-#: src/lib/marble/MapWizard.cpp:978
+#: src/lib/marble/MapWizard.cpp:1035
 msgctxt "Marble::MapWizard|"
 msgid "Mountain"
 msgstr "Mendia"
 
-#: src/lib/marble/MapWizard.cpp:984
+#: src/lib/marble/MapWizard.cpp:1041
 msgctxt "Marble::MapWizard|"
 msgid "Volcano"
 msgstr "Sumendia"
 
-#: src/lib/marble/MapWizard.cpp:1015
+#: src/lib/marble/MapWizard.cpp:1072
 msgctxt "Marble::MapWizard|"
 msgid "International"
 msgstr "Nazioartekoa"
 
-#: src/lib/marble/MapWizard.cpp:1021
+#: src/lib/marble/MapWizard.cpp:1078
 msgctxt "Marble::MapWizard|"
 msgid "State"
 msgstr "Estatua"
 
-#: src/lib/marble/MapWizard.cpp:1125
+#: src/lib/marble/MapWizard.cpp:1182
 msgctxt "Marble::MapWizard|"
 msgid "Problem while creating files"
 msgstr "Arazoa fitxategi bat sortzean"
 
-#: src/lib/marble/MapWizard.cpp:1125
+#: src/lib/marble/MapWizard.cpp:1182
 msgctxt "Marble::MapWizard|"
 msgid "Check if a theme with the same name exists."
 msgstr "Egiaztatu izen bereko gairik dagoen."
@@ -8477,7 +8488,30 @@ msgctxt "MapWizard|"
 msgid "Available Maps:"
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:202
+#: src/lib/marble/MapWizard.ui:203
+msgctxt "MapWizard|"
+msgid "Tile Format:"
+msgstr ""
+
+#: src/lib/marble/MapWizard.ui:210
+msgctxt "MapWizard|"
+msgid "Indicates the file format of the tiles."
+msgstr ""
+
+#: src/lib/marble/MapWizard.ui:217
+msgctxt "MapWizard|"
+msgid "Indicates the projection in which the tiles are rendered."
+msgstr ""
+
+#: src/lib/marble/MapWizard.ui:224
+#, fuzzy
+#| msgctxt "MapViewWidget|"
+#| msgid "&Projection"
+msgctxt "MapWizard|"
+msgid "Tile Projection:"
+msgstr "&Proiekzioa"
+
+#: src/lib/marble/MapWizard.ui:237
 msgctxt "MapWizard|"
 msgid ""
 "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
@@ -8505,18 +8539,18 @@ msgid ""
 "worldmap.svg\" width=\"150\" /></p></body></html>"
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:221
+#: src/lib/marble/MapWizard.ui:256
 #, fuzzy
 msgctxt "MapWizard|"
 msgid "Source Image:"
 msgstr "Sorburu-irudia"
 
-#: src/lib/marble/MapWizard.ui:237 src/lib/marble/MapWizard.ui:496
+#: src/lib/marble/MapWizard.ui:272 src/lib/marble/MapWizard.ui:531
 msgctxt "MapWizard|"
 msgid "..."
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:263
+#: src/lib/marble/MapWizard.ui:298
 msgctxt "MapWizard|"
 msgid ""
 "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
@@ -8542,12 +8576,12 @@ msgid ""
 "p></body></html>"
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:299
+#: src/lib/marble/MapWizard.ui:334
 msgctxt "MapWizard|"
 msgid "URL Scheme:"
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:338
+#: src/lib/marble/MapWizard.ui:373
 msgctxt "MapWizard|"
 msgid ""
 "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
@@ -8567,40 +8601,40 @@ msgid ""
 "span></p></body></html>"
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:353
+#: src/lib/marble/MapWizard.ui:388
 #, fuzzy
 msgctxt "MapWizard|"
 msgid "Map Title:"
 msgstr "Maparen titulua"
 
-#: src/lib/marble/MapWizard.ui:366
+#: src/lib/marble/MapWizard.ui:401
 msgctxt "MapWizard|"
 msgid "A short concise name for your map theme."
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:373 src/lib/marble/MapWizard.ui:580
+#: src/lib/marble/MapWizard.ui:408 src/lib/marble/MapWizard.ui:615
 #, fuzzy
 msgctxt "MapWizard|"
 msgid "Map Name:"
 msgstr "Maparen ize&na..."
 
-#: src/lib/marble/MapWizard.ui:383
+#: src/lib/marble/MapWizard.ui:418
 msgctxt "MapWizard|"
 msgid "The lowercase map theme id."
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:386
+#: src/lib/marble/MapWizard.ui:421
 msgctxt "MapWizard|"
 msgid "The folder name of your new theme."
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:393
+#: src/lib/marble/MapWizard.ui:428
 #, fuzzy
 msgctxt "MapWizard|"
 msgid "Description:"
 msgstr "Azalpena:"
 
-#: src/lib/marble/MapWizard.ui:406
+#: src/lib/marble/MapWizard.ui:441
 msgctxt "MapWizard|"
 msgid ""
 "A short description of your map theme. Here you can provide information "
@@ -8608,67 +8642,67 @@ msgid ""
 "map theme."
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:409
+#: src/lib/marble/MapWizard.ui:444
 msgctxt "MapWizard|"
 msgid "It will appear in a tool tip and may contain HTML formatting."
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:416 src/lib/marble/MapWizard.ui:620
+#: src/lib/marble/MapWizard.ui:451 src/lib/marble/MapWizard.ui:655
 #, fuzzy
 msgctxt "MapWizard|"
 msgid "Preview Image:"
 msgstr "Aurreikusi irudia"
 
-#: src/lib/marble/MapWizard.ui:442
+#: src/lib/marble/MapWizard.ui:477
 #, fuzzy
 msgctxt "MapWizard|"
 msgid "preview image"
 msgstr "Aurreikusi irudia"
 
-#: src/lib/marble/MapWizard.ui:449
+#: src/lib/marble/MapWizard.ui:484
 #, fuzzy
 msgctxt "MapWizard|"
 msgid "Change..."
 msgstr "Aldatu..."
 
-#: src/lib/marble/MapWizard.ui:477
+#: src/lib/marble/MapWizard.ui:512
 msgctxt "MapWizard|"
 msgid "<b>Optional: Addition of a Map Key</b>"
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:486
+#: src/lib/marble/MapWizard.ui:521
 msgctxt "MapWizard|"
 msgid "Legend Image:"
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:512
+#: src/lib/marble/MapWizard.ui:547
 #, fuzzy
 msgctxt "MapWizard|"
 msgid "Places of Interest"
 msgstr "Interesguneak"
 
-#: src/lib/marble/MapWizard.ui:519
+#: src/lib/marble/MapWizard.ui:554
 msgctxt "MapWizard|"
 msgid "Populated Places"
 msgstr "Populatutako lekuak"
 
-#: src/lib/marble/MapWizard.ui:526
+#: src/lib/marble/MapWizard.ui:561
 msgctxt "MapWizard|"
 msgid "Terrain"
 msgstr "Lurzorua"
 
-#: src/lib/marble/MapWizard.ui:533
+#: src/lib/marble/MapWizard.ui:568
 #, fuzzy
 msgctxt "MapWizard|"
 msgid "Coordinate Grid"
 msgstr "Koordenatu sareta"
 
-#: src/lib/marble/MapWizard.ui:540
+#: src/lib/marble/MapWizard.ui:575
 msgctxt "MapWizard|"
 msgid "Border Lines"
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:555
+#: src/lib/marble/MapWizard.ui:590
 msgctxt "MapWizard|"
 msgid ""
 "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
@@ -8695,27 +8729,27 @@ msgid ""
 "p></body></html>"
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:587
+#: src/lib/marble/MapWizard.ui:622
 msgctxt "MapWizard|"
 msgid "Map name goes here."
 msgstr "Maparen izena hemen doa."
 
-#: src/lib/marble/MapWizard.ui:600
+#: src/lib/marble/MapWizard.ui:635
 msgctxt "MapWizard|"
 msgid "Map Theme:"
 msgstr "Maparen gaia:"
 
-#: src/lib/marble/MapWizard.ui:607
+#: src/lib/marble/MapWizard.ui:642
 msgctxt "MapWizard|"
 msgid "Map theme goes here."
 msgstr "Maparen gaia hemen doa."
 
-#: src/lib/marble/MapWizard.ui:627
+#: src/lib/marble/MapWizard.ui:662
 msgctxt "MapWizard|"
 msgid "Thumbnail image goes here."
 msgstr "Koadro-txikiko irudia hemen doa."
 
-#: src/lib/marble/MapWizard.ui:639
+#: src/lib/marble/MapWizard.ui:674
 msgctxt "MapWizard|"
 msgid "Preview Map"
 msgstr "Aurreikusi mapa"

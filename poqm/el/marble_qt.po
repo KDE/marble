@@ -8298,22 +8298,33 @@ msgstr ""
 "Ο διακομιστής δεν αποτελεί έναν διακομιστή διαδικτυακών χαρτών (Web Map "
 "Server)."
 
-#: src/lib/marble/MapWizard.cpp:324 src/lib/marble/MapWizard.cpp:345
+#: src/lib/marble/MapWizard.cpp:262
+msgctxt "Marble::MapWizard|"
+msgid "Equirectangular (epsg:4326)"
+msgstr ""
+
+#: src/lib/marble/MapWizard.cpp:265 src/lib/marble/MapWizard.cpp:526
+#: src/lib/marble/MapWizard.cpp:540 src/lib/marble/MapWizard.cpp:877
+msgctxt "Marble::MapWizard|"
+msgid "Web Mercator (epsg:3857)"
+msgstr ""
+
+#: src/lib/marble/MapWizard.cpp:355 src/lib/marble/MapWizard.cpp:378
 msgctxt "Marble::MapWizard|"
 msgid "Custom"
 msgstr "Προσαρμοσμένος"
 
-#: src/lib/marble/MapWizard.cpp:533 src/lib/marble/MapWizard.cpp:540
+#: src/lib/marble/MapWizard.cpp:584 src/lib/marble/MapWizard.cpp:591
 msgctxt "Marble::MapWizard|"
 msgid "Base Tile"
 msgstr "Πλακίδιο βάσης"
 
-#: src/lib/marble/MapWizard.cpp:534
+#: src/lib/marble/MapWizard.cpp:585
 msgctxt "Marble::MapWizard|"
 msgid "The base tile could not be downloaded."
 msgstr "Αδυναμία λήψης του πλακιδίου βάσης."
 
-#: src/lib/marble/MapWizard.cpp:541
+#: src/lib/marble/MapWizard.cpp:592
 #, qt-format
 msgctxt "Marble::MapWizard|"
 msgid ""
@@ -8325,33 +8336,33 @@ msgstr ""
 "\n"
 "%1"
 
-#: src/lib/marble/MapWizard.cpp:660 src/lib/marble/MapWizard.cpp:663
+#: src/lib/marble/MapWizard.cpp:711 src/lib/marble/MapWizard.cpp:714
 msgctxt "Marble::MapWizard|"
 msgid "Archiving failed"
 msgstr "Η αρχειοθέτηση απέτυχε"
 
-#: src/lib/marble/MapWizard.cpp:660
+#: src/lib/marble/MapWizard.cpp:711
 msgctxt "Marble::MapWizard|"
 msgid "Archiving process cannot be started."
 msgstr "Αδυναμία εκκίνησης της διαδικασίας αρχειοθέτησης."
 
-#: src/lib/marble/MapWizard.cpp:663
+#: src/lib/marble/MapWizard.cpp:714
 msgctxt "Marble::MapWizard|"
 msgid "Archiving process crashed."
 msgstr "Η διαδικασία αρχειοθέτησης κατέρρευσε."
 
-#: src/lib/marble/MapWizard.cpp:698 src/lib/marble/MapWizard.cpp:706
-#: src/lib/marble/MapWizard.cpp:715
+#: src/lib/marble/MapWizard.cpp:749 src/lib/marble/MapWizard.cpp:757
+#: src/lib/marble/MapWizard.cpp:766
 msgctxt "Marble::MapWizard|"
 msgid "Source Image"
 msgstr "Πηγαία εικόνα"
 
-#: src/lib/marble/MapWizard.cpp:699
+#: src/lib/marble/MapWizard.cpp:750
 msgctxt "Marble::MapWizard|"
 msgid "Please specify a source image."
 msgstr "Παρακαλώ καθορίστε μια πηγαία εικόνα."
 
-#: src/lib/marble/MapWizard.cpp:707
+#: src/lib/marble/MapWizard.cpp:758
 msgctxt "Marble::MapWizard|"
 msgid ""
 "The source image you specified does not exist. Please specify a different "
@@ -8360,7 +8371,7 @@ msgstr ""
 "Η πηγαία εικόνα που καθορίσατε δεν υπάρχει. Παρακαλώ καθορίστε μια άλλη "
 "εικόνα."
 
-#: src/lib/marble/MapWizard.cpp:716
+#: src/lib/marble/MapWizard.cpp:767
 msgctxt "Marble::MapWizard|"
 msgid ""
 "The source image you specified does not seem to be an image. Please specify "
@@ -8369,27 +8380,27 @@ msgstr ""
 "Η πηγαία εικόνα που καθορίσατε δε φαίνεται να αποτελεί όντως εικόνα. "
 "Παρακαλώ καθορίστε ένα άλλο αρχείο εικόνας."
 
-#: src/lib/marble/MapWizard.cpp:725
+#: src/lib/marble/MapWizard.cpp:776
 msgctxt "Marble::MapWizard|"
 msgid "Map Title"
 msgstr "Τίτλος χάρτη"
 
-#: src/lib/marble/MapWizard.cpp:725
+#: src/lib/marble/MapWizard.cpp:776
 msgctxt "Marble::MapWizard|"
 msgid "Please specify a map title."
 msgstr "Παρακαλώ καθορίστε έναν τίτλο για τον χάρτη."
 
-#: src/lib/marble/MapWizard.cpp:732 src/lib/marble/MapWizard.cpp:740
+#: src/lib/marble/MapWizard.cpp:783 src/lib/marble/MapWizard.cpp:791
 msgctxt "Marble::MapWizard|"
 msgid "Map Name"
 msgstr "Όνομα χάρτη"
 
-#: src/lib/marble/MapWizard.cpp:732
+#: src/lib/marble/MapWizard.cpp:783
 msgctxt "Marble::MapWizard|"
 msgid "Please specify a map name."
 msgstr "Παρακαλώ καθορίστε ένα όνομα για τον χάρτη."
 
-#: src/lib/marble/MapWizard.cpp:741
+#: src/lib/marble/MapWizard.cpp:792
 #, qt-format
 msgctxt "Marble::MapWizard|"
 msgid ""
@@ -8398,67 +8409,67 @@ msgstr ""
 "Παρακαλώ καθορίστε ένα άλλο όνομα για τον χάρτη, αφού υπάρχει ήδη χάρτης με "
 "το όνομα \"%1\"."
 
-#: src/lib/marble/MapWizard.cpp:748
+#: src/lib/marble/MapWizard.cpp:799
 msgctxt "Marble::MapWizard|"
 msgid "Preview Image"
 msgstr "Εικόνα προεπισκόπησης"
 
-#: src/lib/marble/MapWizard.cpp:748
+#: src/lib/marble/MapWizard.cpp:799
 msgctxt "Marble::MapWizard|"
 msgid "Please specify a preview image."
 msgstr "Παρακαλώ καθορίστε μια εικόνα προεπισκόπησης."
 
-#: src/lib/marble/MapWizard.cpp:932
+#: src/lib/marble/MapWizard.cpp:989
 msgctxt "Marble::MapWizard|"
 msgid "Geographic Pole"
 msgstr "Γεωγραφικός πόλος"
 
-#: src/lib/marble/MapWizard.cpp:938
+#: src/lib/marble/MapWizard.cpp:995
 msgctxt "Marble::MapWizard|"
 msgid "Magnetic Pole"
 msgstr "Μαγνητικός πόλος"
 
-#: src/lib/marble/MapWizard.cpp:944
+#: src/lib/marble/MapWizard.cpp:1001
 msgctxt "Marble::MapWizard|"
 msgid "Airport"
 msgstr "Αεροδρόμιο"
 
-#: src/lib/marble/MapWizard.cpp:950
+#: src/lib/marble/MapWizard.cpp:1007
 msgctxt "Marble::MapWizard|"
 msgid "Shipwreck"
 msgstr "Ναυάγιο"
 
-#: src/lib/marble/MapWizard.cpp:956
+#: src/lib/marble/MapWizard.cpp:1013
 msgctxt "Marble::MapWizard|"
 msgid "Observatory"
 msgstr "Παρατηρητήριο"
 
-#: src/lib/marble/MapWizard.cpp:978
+#: src/lib/marble/MapWizard.cpp:1035
 msgctxt "Marble::MapWizard|"
 msgid "Mountain"
 msgstr "Βουνό"
 
-#: src/lib/marble/MapWizard.cpp:984
+#: src/lib/marble/MapWizard.cpp:1041
 msgctxt "Marble::MapWizard|"
 msgid "Volcano"
 msgstr "Ηφαίστειο"
 
-#: src/lib/marble/MapWizard.cpp:1015
+#: src/lib/marble/MapWizard.cpp:1072
 msgctxt "Marble::MapWizard|"
 msgid "International"
 msgstr "Διεθνές"
 
-#: src/lib/marble/MapWizard.cpp:1021
+#: src/lib/marble/MapWizard.cpp:1078
 msgctxt "Marble::MapWizard|"
 msgid "State"
 msgstr "Πολιτεία"
 
-#: src/lib/marble/MapWizard.cpp:1125
+#: src/lib/marble/MapWizard.cpp:1182
 msgctxt "Marble::MapWizard|"
 msgid "Problem while creating files"
 msgstr "Πρόβλημα κατά τη δημιουργία των αρχείων"
 
-#: src/lib/marble/MapWizard.cpp:1125
+#: src/lib/marble/MapWizard.cpp:1182
 msgctxt "Marble::MapWizard|"
 msgid "Check if a theme with the same name exists."
 msgstr "Ελέγξτε αν υπάρχει θέμα με το ίδιο όνομα."
@@ -8648,7 +8659,30 @@ msgctxt "MapWizard|"
 msgid "Available Maps:"
 msgstr "Διαθέσιμοι χάρτες:"
 
-#: src/lib/marble/MapWizard.ui:202
+#: src/lib/marble/MapWizard.ui:203
+msgctxt "MapWizard|"
+msgid "Tile Format:"
+msgstr ""
+
+#: src/lib/marble/MapWizard.ui:210
+msgctxt "MapWizard|"
+msgid "Indicates the file format of the tiles."
+msgstr ""
+
+#: src/lib/marble/MapWizard.ui:217
+msgctxt "MapWizard|"
+msgid "Indicates the projection in which the tiles are rendered."
+msgstr ""
+
+#: src/lib/marble/MapWizard.ui:224
+#, fuzzy
+#| msgctxt "MapViewWidget|"
+#| msgid "&Projection"
+msgctxt "MapWizard|"
+msgid "Tile Projection:"
+msgstr "&Προβολή"
+
+#: src/lib/marble/MapWizard.ui:237
 #, fuzzy
 #| msgctxt "MapWizard|"
 #| msgid ""
@@ -8725,17 +8759,17 @@ msgstr ""
 "right:0px; -qt-block-indent:0; text-indent:0px;\"><img src=\":/data/svg/"
 "worldmap.svg\" width=\"150\" /></p></body></html>"
 
-#: src/lib/marble/MapWizard.ui:221
+#: src/lib/marble/MapWizard.ui:256
 msgctxt "MapWizard|"
 msgid "Source Image:"
 msgstr "Πηγαία εικόνα:"
 
-#: src/lib/marble/MapWizard.ui:237 src/lib/marble/MapWizard.ui:496
+#: src/lib/marble/MapWizard.ui:272 src/lib/marble/MapWizard.ui:531
 msgctxt "MapWizard|"
 msgid "..."
 msgstr "..."
 
-#: src/lib/marble/MapWizard.ui:263
+#: src/lib/marble/MapWizard.ui:298
 #, fuzzy
 #| msgid ""
 #| "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
@@ -8788,12 +8822,12 @@ msgstr ""
 "προτείνεται η χρήση της επιλογής \"χαμηλή ποιότητα\" καθώς αυτό θα δώσει "
 "καλύτερη ταχύτητα.</p></body></html>"
 
-#: src/lib/marble/MapWizard.ui:299
+#: src/lib/marble/MapWizard.ui:334
 msgctxt "MapWizard|"
 msgid "URL Scheme:"
 msgstr "URL σχήμα:"
 
-#: src/lib/marble/MapWizard.ui:338
+#: src/lib/marble/MapWizard.ui:373
 #, fuzzy
 #| msgid ""
 #| "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
@@ -8835,37 +8869,37 @@ msgstr ""
 "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
 "weight:600;\">000,0 χλμ/ώρα</span></p></body></html>"
 
-#: src/lib/marble/MapWizard.ui:353
+#: src/lib/marble/MapWizard.ui:388
 msgctxt "MapWizard|"
 msgid "Map Title:"
 msgstr "Τίτλος χάρτη:"
 
-#: src/lib/marble/MapWizard.ui:366
+#: src/lib/marble/MapWizard.ui:401
 msgctxt "MapWizard|"
 msgid "A short concise name for your map theme."
 msgstr "Ένα σύντομο όνομα για το θέμα του χάρτη σας."
 
-#: src/lib/marble/MapWizard.ui:373 src/lib/marble/MapWizard.ui:580
+#: src/lib/marble/MapWizard.ui:408 src/lib/marble/MapWizard.ui:615
 msgctxt "MapWizard|"
 msgid "Map Name:"
 msgstr "Όνομα χάρτη:"
 
-#: src/lib/marble/MapWizard.ui:383
+#: src/lib/marble/MapWizard.ui:418
 msgctxt "MapWizard|"
 msgid "The lowercase map theme id."
 msgstr "Η ταυτότητα του θέματος χάρτη με πεζά."
 
-#: src/lib/marble/MapWizard.ui:386
+#: src/lib/marble/MapWizard.ui:421
 msgctxt "MapWizard|"
 msgid "The folder name of your new theme."
 msgstr "Το όνομα φακέλου του νέου θέματος."
 
-#: src/lib/marble/MapWizard.ui:393
+#: src/lib/marble/MapWizard.ui:428
 msgctxt "MapWizard|"
 msgid "Description:"
 msgstr "Περιγραφή:"
 
-#: src/lib/marble/MapWizard.ui:406
+#: src/lib/marble/MapWizard.ui:441
 msgctxt "MapWizard|"
 msgid ""
 "A short description of your map theme. Here you can provide information "
@@ -8876,62 +8910,62 @@ msgstr ""
 "πληροφορίες για το σκοπό, την προέλευση, τα πνευματικά δικαιώματα και την "
 "άδεια χρήσης των δεδομένων που χρησιμοποιούνται στο θέμα του χάρτη σας."
 
-#: src/lib/marble/MapWizard.ui:409
+#: src/lib/marble/MapWizard.ui:444
 msgctxt "MapWizard|"
 msgid "It will appear in a tool tip and may contain HTML formatting."
 msgstr "Θα εμφανίζεται σε υπόδειξη και ίσως περιέχει διαμόρφωση HTML."
 
-#: src/lib/marble/MapWizard.ui:416 src/lib/marble/MapWizard.ui:620
+#: src/lib/marble/MapWizard.ui:451 src/lib/marble/MapWizard.ui:655
 msgctxt "MapWizard|"
 msgid "Preview Image:"
 msgstr "Εικόνα προεπισκόπησης:"
 
-#: src/lib/marble/MapWizard.ui:442
+#: src/lib/marble/MapWizard.ui:477
 msgctxt "MapWizard|"
 msgid "preview image"
 msgstr "εικόνα προεπισκόπησης"
 
-#: src/lib/marble/MapWizard.ui:449
+#: src/lib/marble/MapWizard.ui:484
 msgctxt "MapWizard|"
 msgid "Change..."
 msgstr "Αλλαγή..."
 
-#: src/lib/marble/MapWizard.ui:477
+#: src/lib/marble/MapWizard.ui:512
 msgctxt "MapWizard|"
 msgid "<b>Optional: Addition of a Map Key</b>"
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:486
+#: src/lib/marble/MapWizard.ui:521
 msgctxt "MapWizard|"
 msgid "Legend Image:"
 msgstr "Εικόνα υπομνήματος:"
 
-#: src/lib/marble/MapWizard.ui:512
+#: src/lib/marble/MapWizard.ui:547
 msgctxt "MapWizard|"
 msgid "Places of Interest"
 msgstr "Περιοχές ενδιαφέροντος"
 
-#: src/lib/marble/MapWizard.ui:519
+#: src/lib/marble/MapWizard.ui:554
 msgctxt "MapWizard|"
 msgid "Populated Places"
 msgstr "Κατοικημένες περιοχές"
 
-#: src/lib/marble/MapWizard.ui:526
+#: src/lib/marble/MapWizard.ui:561
 msgctxt "MapWizard|"
 msgid "Terrain"
 msgstr "Έδαφος"
 
-#: src/lib/marble/MapWizard.ui:533
+#: src/lib/marble/MapWizard.ui:568
 msgctxt "MapWizard|"
 msgid "Coordinate Grid"
 msgstr "Κάνναβος συντεταγμένων"
 
-#: src/lib/marble/MapWizard.ui:540
+#: src/lib/marble/MapWizard.ui:575
 msgctxt "MapWizard|"
 msgid "Border Lines"
 msgstr "Οριογραμμές"
 
-#: src/lib/marble/MapWizard.ui:555
+#: src/lib/marble/MapWizard.ui:590
 msgctxt "MapWizard|"
 msgid ""
 "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
@@ -8980,27 +9014,27 @@ msgstr ""
 "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"></"
 "p></body></html>"
 
-#: src/lib/marble/MapWizard.ui:587
+#: src/lib/marble/MapWizard.ui:622
 msgctxt "MapWizard|"
 msgid "Map name goes here."
 msgstr "Το όνομα του χάρτη πηγαίνει εδώ."
 
-#: src/lib/marble/MapWizard.ui:600
+#: src/lib/marble/MapWizard.ui:635
 msgctxt "MapWizard|"
 msgid "Map Theme:"
 msgstr "Θέμα χάρτη:"
 
-#: src/lib/marble/MapWizard.ui:607
+#: src/lib/marble/MapWizard.ui:642
 msgctxt "MapWizard|"
 msgid "Map theme goes here."
 msgstr "Το θέμα του χάρτη πηγαίνει εδώ."
 
-#: src/lib/marble/MapWizard.ui:627
+#: src/lib/marble/MapWizard.ui:662
 msgctxt "MapWizard|"
 msgid "Thumbnail image goes here."
 msgstr "Η προεπισκόπηση εικόνας πηγαίνει εδώ."
 
-#: src/lib/marble/MapWizard.ui:639
+#: src/lib/marble/MapWizard.ui:674
 msgctxt "MapWizard|"
 msgid "Preview Map"
 msgstr "Προεπισκόπηση χάρτη"
