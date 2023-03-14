@@ -252,6 +252,26 @@ void MapWizard::parseServerCapabilities( QNetworkReply* reply )
     QDomElement service = xml.documentElement().firstChildElement( "Service" );
     QDomNodeList layers = firstLayer.elementsByTagName( "Layer" );
 
+    d->uiWidget.comboBoxWmsMaps->clear();
+    QDomNodeList srsList = firstLayer.elementsByTagName("SRS");
+    if (srsList.length() == 0) {
+        srsList = firstLayer.elementsByTagName("CRS");
+    }
+    for ( int s = 0; s < srsList.size(); ++s ) {
+        if (srsList.at(s).parentNode() == firstLayer && srsList.at(s).toElement().text().toLower() == "epsg:4326") {
+            d->uiWidget.comboBoxWmsMaps->insertItem(0, tr("Equirectangular (epsg:4326)"));
+        }
+        else if (srsList.at(s).parentNode() == firstLayer && srsList.at(s).toElement().text().toLower() == "epsg:3857") {
+            d->uiWidget.comboBoxWmsMaps->insertItem(1, tr("Web Mercator (epsg:3857)"));
+        }
+    }
+    d->uiWidget.comboBoxWmsMaps->setCurrentIndex(0);
+
+    bool projectionSelectionVisible = d->uiWidget.comboBoxWmsMaps->count() > 0;
+    d->uiWidget.comboBoxWmsMaps->setVisible(projectionSelectionVisible);
+    d->uiWidget.projectionWmsLabel->setVisible(projectionSelectionVisible);
+    d->uiWidget.comboBoxWmsMaps->setEnabled(d->uiWidget.comboBoxWmsMaps->count() > 1);
+
     d->uiWidget.listWidgetWmsMaps->clear();
     d->wmsFetchedMaps.clear();
     d->wmsFetchedMapsMetaInfo.clear();
@@ -283,11 +303,20 @@ void MapWizard::parseServerCapabilities( QNetworkReply* reply )
     QDomElement format = xml.documentElement().firstChildElement( "Capability" ).firstChildElement( "Request" )
                          .firstChildElement( "GetMap" ).firstChildElement( "Format" );
 
-    d->format = format.text().right(format.text().length() - format.text().indexOf(QLatin1Char('/')) - 1).toLower();
+    d->uiWidget.comboBoxWmsFormat->clear();
+    QDomNodeList formats = xml.documentElement().firstChildElement( "Capability" ).firstChildElement( "Request" )
+            .firstChildElement( "GetMap" ).elementsByTagName("Format");
 
-    if (d->format == QLatin1String("jpeg")) {
-        d->format = "jpg";
+    for ( int f = 0; f < formats.size(); ++f ) {
+        QString format = formats.at(f).toElement().text();
+        format = format.right(format.length() - format.indexOf(QLatin1Char('/')) - 1).toLower();
+        if (format == "jpeg" || format == "png") {
+            d->uiWidget.comboBoxWmsFormat->addItem(format);
+        }
     }
+
+    int preferredIndex = d->uiWidget.comboBoxWmsFormat->findText("jpeg");
+    d->uiWidget.comboBoxWmsFormat->setCurrentIndex(preferredIndex);
 
     if( !d->wmsFetchedMaps.isEmpty() && !d->wmsServerList.contains( d->uiWidget.lineEditWmsUrl->text() ) ) {
         d->wmsServerList.append( d->uiWidget.lineEditWmsUrl->text() );
@@ -319,9 +348,13 @@ void MapWizard::setWmsServers( const QStringList& uris )
 {
     d->wmsServerList = uris;
 
+    disconnect( d->uiWidget.comboBoxWmsServer, SIGNAL(currentIndexChanged(QString)), this, SLOT(setLineEditWms(QString)) );
+
     d->uiWidget.comboBoxWmsServer->clear();
     d->uiWidget.comboBoxWmsServer->addItems( d->wmsServerList );
     d->uiWidget.comboBoxWmsServer->addItem( tr( "Custom" ), "http://" );
+
+    connect( d->uiWidget.comboBoxWmsServer, SIGNAL(currentIndexChanged(QString)), this, SLOT(setLineEditWms(QString)) );
 }
 
 QStringList MapWizard::wmsServers() const
@@ -490,11 +523,29 @@ void MapWizard::downloadLevelZero()
         downloadUrl.addQueryItem( "request", "GetMap" );
         downloadUrl.addQueryItem( "version", "1.1.1" );
         downloadUrl.addQueryItem( "layers", d->wmsFetchedMaps.key( selected ) );
-        downloadUrl.addQueryItem( "srs", "EPSG:4326" );
-        downloadUrl.addQueryItem( "width", "400" );
-        downloadUrl.addQueryItem( "height", "200" );
-        downloadUrl.addQueryItem( "bbox", "-180,-90,180,90" );
-        downloadUrl.addQueryItem( "format", "image/jpeg" );
+        if (d->uiWidget.comboBoxWmsMaps->currentText() == tr("Web Mercator (epsg:3857)")) {
+            downloadUrl.addQueryItem( "srs", "EPSG:3857" );
+        }
+        else {
+            downloadUrl.addQueryItem( "srs", "EPSG:4326" );
+        }
+        d->format = d->uiWidget.comboBoxWmsFormat->currentText();
+        if (d->format == QLatin1String("jpeg")) {
+            d->format = "jpg";
+        }
+
+        downloadUrl.addQueryItem( "width", "256" );
+        downloadUrl.addQueryItem( "height", "256" );
+
+        if (d->uiWidget.comboBoxWmsMaps->currentText() == tr("Web Mercator (epsg:3857)")) {
+            // Oddly enough epsg:3857 is measured in meters - so let's convert the bbox accordingly
+            downloadUrl.addQueryItem( "bbox", "-20037508.34,-20048966.1,20037508.34,20048966.1" );
+        }
+        else {
+            downloadUrl.addQueryItem( "bbox", "-180,-90,180,90" );
+        }
+
+        downloadUrl.addQueryItem( "format", QString("image/%1").arg(d->uiWidget.comboBoxWmsFormat->currentText()) );
         downloadUrl.addQueryItem( "styles", "" );
 
         finalDownloadUrl.setQuery( downloadUrl );
@@ -823,7 +874,12 @@ GeoSceneDocument* MapWizard::createDocument()
         texture->setLevelZeroRows( 1 );
         texture->setLevelZeroColumns( 1 );
         texture->setServerLayout( new WmsServerLayout( texture ) );
-        texture->setTileProjection(GeoSceneAbstractTileProjection::Equirectangular);
+        if (d->uiWidget.comboBoxWmsMaps->currentText() == tr("Web Mercator (epsg:3857)")) {
+            texture->setTileProjection(GeoSceneAbstractTileProjection::Mercator);
+        }
+        else {
+            texture->setTileProjection(GeoSceneAbstractTileProjection::Equirectangular);
+        }
     }
     
     else if( d->mapProviderType == MapWizardPrivate::StaticUrlMap )
@@ -834,6 +890,7 @@ GeoSceneDocument* MapWizard::createDocument()
         texture->addDownloadPolicy( DownloadBulk, 2 );
         texture->addDownloadUrl( downloadUrl );
         texture->setMaximumTileLevel( 20 );
+        texture->setTileSize(QSize(256, 256));
         texture->setLevelZeroRows( 1 );
         texture->setLevelZeroColumns( 1 );
         texture->setServerLayout( new CustomServerLayout( texture ) );

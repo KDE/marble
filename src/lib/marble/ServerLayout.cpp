@@ -139,10 +139,25 @@ QUrl WmsServerLayout::downloadUrl( const QUrl &prototypeUrl, const Marble::TileI
         url.addQueryItem( "layers", m_textureLayer->name() );
     url.addQueryItem( "width", QString::number( m_textureLayer->tileSize().width() ) );
     url.addQueryItem( "height", QString::number( m_textureLayer->tileSize().height() ) );
-    url.addQueryItem( "bbox", QString( "%1,%2,%3,%4" ).arg( QString::number( box.west( GeoDataCoordinates::Degree ), 'f', 12 ),
-                                                            QString::number( box.south( GeoDataCoordinates::Degree ), 'f', 12 ),
-                                                            QString::number( box.east( GeoDataCoordinates::Degree ), 'f', 12 ),
-                                                            QString::number( box.north( GeoDataCoordinates::Degree ), 'f', 12 ) ) );
+    double west, south, east, north;
+    if (m_textureLayer->tileProjectionType() == GeoSceneAbstractTileProjection::Mercator) {
+        // Oddly enough epsg:3857 is measured in meters - so let's convert this accordingly
+        west = (box.west( GeoDataCoordinates::Degree ) * 20037508.34) / 180;
+        south = 20037508.34 / M_PI * log(tan(((90 + box.south( GeoDataCoordinates::Degree )) * M_PI) / 360));
+        east = (box.east( GeoDataCoordinates::Degree ) * 20037508.34) / 180;
+        north = 20037508.34 / M_PI * log(tan(((90 + box.north( GeoDataCoordinates::Degree )) * M_PI) / 360));
+    }
+    else {
+        west = box.west( GeoDataCoordinates::Degree );
+        south = box.south( GeoDataCoordinates::Degree );
+        east = box.east( GeoDataCoordinates::Degree );
+        north = box.north( GeoDataCoordinates::Degree );
+    }
+
+    url.addQueryItem( "bbox", QString( "%1,%2,%3,%4" ).arg( QString::number( west, 'f', 12 ),
+                                                            QString::number( south, 'f', 12 ),
+                                                            QString::number( east, 'f', 12 ),
+                                                            QString::number( north, 'f', 12 ) ) );
     QUrl finalUrl = prototypeUrl;
     finalUrl.setQuery(url);
     return finalUrl;
@@ -159,7 +174,7 @@ QString WmsServerLayout::epsgCode() const
         case GeoSceneAbstractTileProjection::Equirectangular:
             return "EPSG:4326";
         case GeoSceneAbstractTileProjection::Mercator:
-            return "EPSG:3785";
+            return "EPSG:3857";
     }
 
     Q_ASSERT( false ); // not reached

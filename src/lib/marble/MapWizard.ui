@@ -192,6 +192,41 @@ p, li { white-space: pre-wrap; }
     <item>
      <widget class="QListWidget" name="listWidgetWmsMaps"/>
     </item>
+    <item>
+     <layout class="QGridLayout" name="gridLayout_3">
+      <property name="horizontalSpacing">
+       <number>40</number>
+      </property>
+      <item row="0" column="1">
+       <widget class="QLabel" name="formatWmsLabel_2">
+        <property name="text">
+         <string>Tile Format:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QComboBox" name="comboBoxWmsFormat">
+        <property name="toolTip">
+         <string>Indicates the file format of the tiles.</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QComboBox" name="comboBoxWmsMaps">
+        <property name="toolTip">
+         <string>Indicates the projection in which the tiles are rendered.</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="0">
+       <widget class="QLabel" name="projectionWmsLabel">
+        <property name="text">
+         <string>Tile Projection:</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
    </layout>
   </widget>
   <widget class="QWizardPage" name="wizardPageBitmap">
