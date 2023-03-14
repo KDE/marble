@@ -11028,7 +11028,7 @@ msgstr "Langue native"
 #: src/lib/marble/MarbleViewSettingsWidget.ui:340
 msgctxt "MarbleViewSettingsWidget|"
 msgid "Default map &font:"
-msgstr "&Police de carte par dé&faut :"
+msgstr "Police de carte par dé&faut :"
 
 #: src/lib/marble/MarbleViewSettingsWidget.ui:350
 msgctxt "MarbleViewSettingsWidget|"
