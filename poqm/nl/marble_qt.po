@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: marble_qt\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2023-03-13 12:02+0100\n"
+"PO-Revision-Date: 2023-03-14 14:15+0100\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -8055,13 +8055,13 @@ msgstr "Server is geen Web Map-server."
 #: src/lib/marble/MapWizard.cpp:262
 msgctxt "Marble::MapWizard|"
 msgid "Equirectangular (epsg:4326)"
-msgstr ""
+msgstr "Gelijke rechthoeken (epsg:4326)"
 
 #: src/lib/marble/MapWizard.cpp:265 src/lib/marble/MapWizard.cpp:526
 #: src/lib/marble/MapWizard.cpp:540 src/lib/marble/MapWizard.cpp:877
 msgctxt "Marble::MapWizard|"
 msgid "Web Mercator (epsg:3857)"
-msgstr ""
+msgstr "Web Mercator (epsg:3857)"
 
 #: src/lib/marble/MapWizard.cpp:355 src/lib/marble/MapWizard.cpp:378
 msgctxt "Marble::MapWizard|"
@@ -8395,25 +8395,22 @@ msgstr "Beschikbare kaarten:"
 #: src/lib/marble/MapWizard.ui:203
 msgctxt "MapWizard|"
 msgid "Tile Format:"
-msgstr ""
+msgstr "Tegelformat:"
 
 #: src/lib/marble/MapWizard.ui:210
 msgctxt "MapWizard|"
 msgid "Indicates the file format of the tiles."
-msgstr ""
+msgstr "Geeft het bestandsformaat van de tegels aan."
 
 #: src/lib/marble/MapWizard.ui:217
 msgctxt "MapWizard|"
 msgid "Indicates the projection in which the tiles are rendered."
-msgstr ""
+msgstr "Geeft de projectie aan waarin de tegels worden weergegeven."
 
 #: src/lib/marble/MapWizard.ui:224
-#, fuzzy
-#| msgctxt "MapViewWidget|"
-#| msgid "&Projection"
 msgctxt "MapWizard|"
 msgid "Tile Projection:"
-msgstr "&Projectie"
+msgstr "Tegelprojectie:"
 
 #: src/lib/marble/MapWizard.ui:237
 msgctxt "MapWizard|"

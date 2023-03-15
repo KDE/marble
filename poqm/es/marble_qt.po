@@ -15,7 +15,7 @@ msgstr ""
 "Project-Id-Version: marble_qt\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2023-03-13 21:11+0100\n"
+"PO-Revision-Date: 2023-03-14 13:41+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -8059,13 +8059,13 @@ msgstr "El servidor no es un servidor de mapas Web."
 #: src/lib/marble/MapWizard.cpp:262
 msgctxt "Marble::MapWizard|"
 msgid "Equirectangular (epsg:4326)"
-msgstr ""
+msgstr "Equirrectangular (epsg:4326)"
 
 #: src/lib/marble/MapWizard.cpp:265 src/lib/marble/MapWizard.cpp:526
 #: src/lib/marble/MapWizard.cpp:540 src/lib/marble/MapWizard.cpp:877
 msgctxt "Marble::MapWizard|"
 msgid "Web Mercator (epsg:3857)"
-msgstr ""
+msgstr "Mercator web (epsg:3857)"
 
 #: src/lib/marble/MapWizard.cpp:355 src/lib/marble/MapWizard.cpp:378
 msgctxt "Marble::MapWizard|"
@@ -8402,25 +8402,22 @@ msgstr "Mapas disponibles:"
 #: src/lib/marble/MapWizard.ui:203
 msgctxt "MapWizard|"
 msgid "Tile Format:"
-msgstr ""
+msgstr "Formato de las cuadrículas:"
 
 #: src/lib/marble/MapWizard.ui:210
 msgctxt "MapWizard|"
 msgid "Indicates the file format of the tiles."
-msgstr ""
+msgstr "Indica el formato de archivo de las cuadrículas."
 
 #: src/lib/marble/MapWizard.ui:217
 msgctxt "MapWizard|"
 msgid "Indicates the projection in which the tiles are rendered."
-msgstr ""
+msgstr "Indica la proyección que se usa para generar las cuadrículas."
 
 #: src/lib/marble/MapWizard.ui:224
-#, fuzzy
-#| msgctxt "MapViewWidget|"
-#| msgid "&Projection"
 msgctxt "MapWizard|"
 msgid "Tile Projection:"
-msgstr "&Proyección"
+msgstr "Proyección de las cuadrículas:"
 
 #: src/lib/marble/MapWizard.ui:237
 msgctxt "MapWizard|"

@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: marble_qt\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2023-03-12 08:53+0200\n"
+"PO-Revision-Date: 2023-03-14 08:37+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
 "Language: uk\n"
@@ -8075,13 +8075,13 @@ msgstr "Сервер не є сервером інтернет-карти"
 #: src/lib/marble/MapWizard.cpp:262
 msgctxt "Marble::MapWizard|"
 msgid "Equirectangular (epsg:4326)"
-msgstr ""
+msgstr "Циліндрична (epsg:4326)"
 
 #: src/lib/marble/MapWizard.cpp:265 src/lib/marble/MapWizard.cpp:526
 #: src/lib/marble/MapWizard.cpp:540 src/lib/marble/MapWizard.cpp:877
 msgctxt "Marble::MapWizard|"
 msgid "Web Mercator (epsg:3857)"
-msgstr ""
+msgstr "Меркатора (epsg:3857)"
 
 #: src/lib/marble/MapWizard.cpp:355 src/lib/marble/MapWizard.cpp:378
 msgctxt "Marble::MapWizard|"
@@ -8415,25 +8415,22 @@ msgstr "Доступні карти:"
 #: src/lib/marble/MapWizard.ui:203
 msgctxt "MapWizard|"
 msgid "Tile Format:"
-msgstr ""
+msgstr "Формат плиток:"
 
 #: src/lib/marble/MapWizard.ui:210
 msgctxt "MapWizard|"
 msgid "Indicates the file format of the tiles."
-msgstr ""
+msgstr "Вказує на формат файлів плиток."
 
 #: src/lib/marble/MapWizard.ui:217
 msgctxt "MapWizard|"
 msgid "Indicates the projection in which the tiles are rendered."
-msgstr ""
+msgstr "Вказує на проєкцію, у якій буде показано плитки."
 
 #: src/lib/marble/MapWizard.ui:224
-#, fuzzy
-#| msgctxt "MapViewWidget|"
-#| msgid "&Projection"
 msgctxt "MapWizard|"
 msgid "Tile Projection:"
-msgstr "&Проєкція"
+msgstr "Проєкція плиток:"
 
 #: src/lib/marble/MapWizard.ui:237
 msgctxt "MapWizard|"

@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2023-03-13 12:30+0300\n"
+"PO-Revision-Date: 2023-03-14 14:46+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -8044,13 +8044,13 @@ msgstr "Sunucu, bir Web Harita Sunucusu değil."
 #: src/lib/marble/MapWizard.cpp:262
 msgctxt "Marble::MapWizard|"
 msgid "Equirectangular (epsg:4326)"
-msgstr ""
+msgstr "Eşdikdörtgen (epsg:4326)"
 
 #: src/lib/marble/MapWizard.cpp:265 src/lib/marble/MapWizard.cpp:526
 #: src/lib/marble/MapWizard.cpp:540 src/lib/marble/MapWizard.cpp:877
 msgctxt "Marble::MapWizard|"
 msgid "Web Mercator (epsg:3857)"
-msgstr ""
+msgstr "Web Merkatörü (epsg:3857)"
 
 #: src/lib/marble/MapWizard.cpp:355 src/lib/marble/MapWizard.cpp:378
 msgctxt "Marble::MapWizard|"
@@ -8384,25 +8384,22 @@ msgstr "Kullanılabilir Haritalar:"
 #: src/lib/marble/MapWizard.ui:203
 msgctxt "MapWizard|"
 msgid "Tile Format:"
-msgstr ""
+msgstr "Karo Biçimi:"
 
 #: src/lib/marble/MapWizard.ui:210
 msgctxt "MapWizard|"
 msgid "Indicates the file format of the tiles."
-msgstr ""
+msgstr "Karoların dosya biçimini belirtir."
 
 #: src/lib/marble/MapWizard.ui:217
 msgctxt "MapWizard|"
 msgid "Indicates the projection in which the tiles are rendered."
-msgstr ""
+msgstr "Karoların sunulduğu projeksiyonu belirtir."
 
 #: src/lib/marble/MapWizard.ui:224
-#, fuzzy
-#| msgctxt "MapViewWidget|"
-#| msgid "&Projection"
 msgctxt "MapWizard|"
 msgid "Tile Projection:"
-msgstr "Pro&jeksiyon"
+msgstr "Karo Projeksiyonu:"
 
 #: src/lib/marble/MapWizard.ui:237
 msgctxt "MapWizard|"

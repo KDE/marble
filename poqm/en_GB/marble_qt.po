@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: marble_qt\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2023-03-10 17:32+0000\n"
+"PO-Revision-Date: 2023-03-14 20:55+0000\n"
 "Last-Translator: Steve Allewell <steve.allewell@gmail.com>\n"
 "Language-Team: British English\n"
 "Language: en_GB\n"
@@ -8030,13 +8030,13 @@ msgstr "Server is not a Web Map Server."
 #: src/lib/marble/MapWizard.cpp:262
 msgctxt "Marble::MapWizard|"
 msgid "Equirectangular (epsg:4326)"
-msgstr ""
+msgstr "Equirectangular (epsg:4326)"
 
 #: src/lib/marble/MapWizard.cpp:265 src/lib/marble/MapWizard.cpp:526
 #: src/lib/marble/MapWizard.cpp:540 src/lib/marble/MapWizard.cpp:877
 msgctxt "Marble::MapWizard|"
 msgid "Web Mercator (epsg:3857)"
-msgstr ""
+msgstr "Web Mercator (epsg:3857)"
 
 #: src/lib/marble/MapWizard.cpp:355 src/lib/marble/MapWizard.cpp:378
 msgctxt "Marble::MapWizard|"
@@ -8354,6 +8354,8 @@ msgid ""
 "Enter the base Url of the WMS service (e.g. <i>https://www.wms.nrw.de/"
 "geobasis/wms_nw_dop_overlay</i>)"
 msgstr ""
+"Enter the base URL of the WMS service (e.g. <i>https://www.wms.nrw.de/"
+"geobasis/wms_nw_dop_overlay</i>)"
 
 #: src/lib/marble/MapWizard.ui:156
 msgctxt "MapWizard|"
@@ -8368,25 +8370,22 @@ msgstr "Available Maps:"
 #: src/lib/marble/MapWizard.ui:203
 msgctxt "MapWizard|"
 msgid "Tile Format:"
-msgstr ""
+msgstr "Tile Format:"
 
 #: src/lib/marble/MapWizard.ui:210
 msgctxt "MapWizard|"
 msgid "Indicates the file format of the tiles."
-msgstr ""
+msgstr "Indicates the file format of the tiles."
 
 #: src/lib/marble/MapWizard.ui:217
 msgctxt "MapWizard|"
 msgid "Indicates the projection in which the tiles are rendered."
-msgstr ""
+msgstr "Indicates the projection in which the tiles are rendered."
 
 #: src/lib/marble/MapWizard.ui:224
-#, fuzzy
-#| msgctxt "MapViewWidget|"
-#| msgid "&Projection"
 msgctxt "MapWizard|"
 msgid "Tile Projection:"
-msgstr "&Projection"
+msgstr "Tile Projection:"
 
 #: src/lib/marble/MapWizard.ui:237
 msgctxt "MapWizard|"
@@ -8600,7 +8599,7 @@ msgstr "Change..."
 #: src/lib/marble/MapWizard.ui:512
 msgctxt "MapWizard|"
 msgid "<b>Optional: Addition of a Map Key</b>"
-msgstr ""
+msgstr "<b>Optional: Addition of a Map Key</b>"
 
 #: src/lib/marble/MapWizard.ui:521
 msgctxt "MapWizard|"
