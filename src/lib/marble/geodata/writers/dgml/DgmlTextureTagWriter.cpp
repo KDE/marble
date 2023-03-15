@@ -34,6 +34,11 @@ bool DgmlTextureTagWriter::write(const GeoNode *node, GeoWriter& writer) const
     }
     writer.writeCharacters( texture->sourceDir() );
     writer.writeEndElement();
+    writer.writeStartElement( dgml::dgmlTag_TileSize );
+    writer.writeAttribute( "width", QString::number( texture->tileSize().width() ) );
+    writer.writeAttribute( "height", QString::number( texture->tileSize().height() ) );
+    writer.writeEndElement();
+
     writer.writeOptionalElement( dgml::dgmlTag_InstallMap, texture->installMap() );
     
     writer.writeStartElement( dgml::dgmlTag_StorageLayout );

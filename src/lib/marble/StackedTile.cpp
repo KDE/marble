@@ -83,7 +83,7 @@ uint StackedTile::pixel( int x, int y ) const
         else
             return m_resultImage.color( (jumpTable8)[y][x] );
     }
-    if ( m_depth == 32 )
+    if ( m_depth == 32 && !m_isGrayscale )
         return (jumpTable32)[y][x];
 
     if ( m_depth == 1 && !m_isGrayscale )

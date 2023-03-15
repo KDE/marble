@@ -45,6 +45,7 @@ public:
     void accept() override;
     bool validateCurrentPage() override;
     int nextId() const override;
+    void cleanupPage(int id) override;
 
 public Q_SLOTS:
     // WMS protocol
@@ -60,7 +61,7 @@ public Q_SLOTS:
     // Other
     void setLineEditWms(const QString& text);
     void autoFillDetails();
-    void downloadLevelZero();
+    void downloadLevelZero(const bool previewModeEnabled = false);
     void createLevelZero( QNetworkReply* reply = nullptr );
     void showPreview();
 
