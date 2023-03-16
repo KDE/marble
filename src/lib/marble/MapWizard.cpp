@@ -83,6 +83,8 @@ public:
     QMap<QString, QString> wmsFetchedMaps;
     QMap<QString, QStringList> wmsFetchedMapsMetaInfo;
     QMap<QString, QString> wmsPreviewBoundingBox;
+    QString wmsVersion;
+    QString refSystem; // SRS (1.1.1) or CRS (1.3.0)
     QStringList staticUrlServerList;
     bool m_serverCapabilitiesValid;
 
@@ -268,19 +270,18 @@ void MapWizard::parseServerCapabilities( QNetworkReply* reply )
     QDomElement service = xml.documentElement().firstChildElement( "Service" );
     QDomNodeList layers = firstLayer.elementsByTagName( "Layer" );
 
+    d->wmsVersion = xml.documentElement().attribute("version");
+    d->refSystem = d->wmsVersion == "1.1.1" ? "SRS" : "CRS";
+
     d->uiWidget.comboBoxWmsMaps->clear();
-    QString rsType = "SRS";
-    QDomNodeList srsList = firstLayer.elementsByTagName("SRS");
-    if (srsList.length() == 0) {
-        rsType = "CRS";
-        srsList = firstLayer.elementsByTagName("CRS");
-    }
+
+    QDomNodeList srsList = firstLayer.elementsByTagName(d->refSystem);
     for ( int s = 0; s < srsList.size(); ++s ) {
-        if (srsList.at(s).parentNode() == firstLayer && srsList.at(s).toElement().text().toLower() == "epsg:4326") {
-            d->uiWidget.comboBoxWmsMaps->insertItem(0, tr("Equirectangular (epsg:4326)"));
+        if (srsList.at(s).parentNode() == firstLayer && srsList.at(s).toElement().text().toLower() == "epsg:3857") {
+            d->uiWidget.comboBoxWmsMaps->insertItem(0, tr("Web Mercator (epsg:3857)"));
         }
-        else if (srsList.at(s).parentNode() == firstLayer && srsList.at(s).toElement().text().toLower() == "epsg:3857") {
-            d->uiWidget.comboBoxWmsMaps->insertItem(1, tr("Web Mercator (epsg:3857)"));
+        else if (srsList.at(s).parentNode() == firstLayer && srsList.at(s).toElement().text().toLower() == "epsg:4326") {
+            d->uiWidget.comboBoxWmsMaps->insertItem(1, tr("Equirectangular (epsg:4326)"));
         }
     }
     d->uiWidget.comboBoxWmsMaps->setCurrentIndex(0);
@@ -289,13 +290,13 @@ void MapWizard::parseServerCapabilities( QNetworkReply* reply )
     for ( int b = 0; b < previewBoundaries.size(); ++b ) {
         if (previewBoundaries.at(b).parentNode() == firstLayer) {
             QDomElement bboxElement = previewBoundaries.at(b).toElement();
-            if ( bboxElement.attribute(rsType).toLower() == "epsg:4326"
-                 || bboxElement.attribute(rsType).toLower() == "epsg:3857") {
+            if ( bboxElement.attribute(d->refSystem).toLower() == "epsg:4326"
+                 || bboxElement.attribute(d->refSystem).toLower() == "epsg:3857") {
                 double west = bboxElement.attribute("minx").toDouble();
                 double south = bboxElement.attribute("miny").toDouble();
                 double east = bboxElement.attribute("maxx").toDouble();
                 double north = bboxElement.attribute("maxy").toDouble();
-                d->wmsPreviewBoundingBox[bboxElement.attribute(rsType).toLower()] =
+                d->wmsPreviewBoundingBox[bboxElement.attribute(d->refSystem).toLower()] =
                 QString("%1,%2,%3,%4")
                 .arg(QString::number(west, 'f', 12),
                      QString::number(south, 'f', 12),
@@ -564,11 +565,12 @@ void MapWizard::downloadLevelZero(const bool previewModeEnabled)
         downloadUrl.addQueryItem( "request", "GetMap" );
         downloadUrl.addQueryItem( "version", "1.1.1" );
         downloadUrl.addQueryItem( "layers", d->wmsFetchedMaps.key( selected ) );
-        if (d->uiWidget.comboBoxWmsMaps->currentText() == tr("Web Mercator (epsg:3857)")) {
-            downloadUrl.addQueryItem( "srs", "EPSG:3857" );
+
+        if (d->uiWidget.comboBoxWmsMaps->currentText() == tr("Equirectangular (epsg:4326))")) {
+            downloadUrl.addQueryItem( "srs", "EPSG:4326" );
         }
         else {
-            downloadUrl.addQueryItem( "srs", "EPSG:4326" );
+            downloadUrl.addQueryItem( "srs", "EPSG:3857" );
         }
         d->format = d->uiWidget.comboBoxWmsFormat->currentText();
         if (d->format == QLatin1String("jpeg")) {
