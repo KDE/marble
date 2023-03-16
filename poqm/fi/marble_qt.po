@@ -8043,53 +8043,85 @@ msgctxt "MapViewWidget|"
 msgid "Here you can choose the preferred map view from different topics."
 msgstr "Tässä voit valita eri mahdollisuuksista haluamasi karttanäkymän."
 
-#: src/lib/marble/MapWizard.cpp:131
+#: src/lib/marble/MapWizard.cpp:145
 msgctxt "Marble::PreviewDialog|"
 msgid "Preview Map"
 msgstr "Kartan esikatselu"
 
-#: src/lib/marble/MapWizard.cpp:241 src/lib/marble/MapWizard.cpp:247
+#: src/lib/marble/MapWizard.cpp:257 src/lib/marble/MapWizard.cpp:263
 msgctxt "Marble::MapWizard|"
 msgid "Error while parsing"
 msgstr "Virhe jäsennettäessä"
 
-#: src/lib/marble/MapWizard.cpp:241
+#: src/lib/marble/MapWizard.cpp:257
 msgctxt "Marble::MapWizard|"
 msgid "Wizard cannot parse server's response"
 msgstr "Opastettu toiminto ei voi jäsentää palvelimen vastausta"
 
-#: src/lib/marble/MapWizard.cpp:247
+#: src/lib/marble/MapWizard.cpp:263
 msgctxt "Marble::MapWizard|"
 msgid "Server is not a Web Map Server."
 msgstr "Palvelin ei ole Web Map -palvelin."
 
-#: src/lib/marble/MapWizard.cpp:262
+#: src/lib/marble/MapWizard.cpp:280
 msgctxt "Marble::MapWizard|"
 msgid "Equirectangular (epsg:4326)"
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:265 src/lib/marble/MapWizard.cpp:526
-#: src/lib/marble/MapWizard.cpp:540 src/lib/marble/MapWizard.cpp:877
+#: src/lib/marble/MapWizard.cpp:283 src/lib/marble/MapWizard.cpp:567
+#: src/lib/marble/MapWizard.cpp:581 src/lib/marble/MapWizard.cpp:996
 msgctxt "Marble::MapWizard|"
 msgid "Web Mercator (epsg:3857)"
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:355 src/lib/marble/MapWizard.cpp:378
+#: src/lib/marble/MapWizard.cpp:398 src/lib/marble/MapWizard.cpp:399
+#: src/lib/marble/MapWizard.cpp:420
 msgctxt "Marble::MapWizard|"
 msgid "Custom"
 msgstr "Mukautettu"
 
-#: src/lib/marble/MapWizard.cpp:584 src/lib/marble/MapWizard.cpp:591
+#: src/lib/marble/MapWizard.cpp:651 src/lib/marble/MapWizard.cpp:673
 msgctxt "Marble::MapWizard|"
 msgid "Base Tile"
 msgstr "Perustiili"
 
-#: src/lib/marble/MapWizard.cpp:585
+#: src/lib/marble/MapWizard.cpp:652
 msgctxt "Marble::MapWizard|"
 msgid "The base tile could not be downloaded."
 msgstr "Perustiiltä ei voitu ladata."
 
-#: src/lib/marble/MapWizard.cpp:592
+#: src/lib/marble/MapWizard.cpp:658 src/lib/marble/MapWizard.cpp:667
+#: src/lib/marble/MapWizard.cpp:891
+msgctxt "Marble::MapWizard|"
+msgid "Preview Image"
+msgstr "Esikatsele kuvaa"
+
+#: src/lib/marble/MapWizard.cpp:659
+#, fuzzy
+#| msgctxt "Marble::MapWizard|"
+#| msgid "The base tile could not be downloaded."
+msgctxt "Marble::MapWizard|"
+msgid "The preview image could not be downloaded."
+msgstr "Perustiiltä ei voitu ladata."
+
+#: src/lib/marble/MapWizard.cpp:668
+#, fuzzy, qt-format
+#| msgctxt "Marble::MapWizard|"
+#| msgid ""
+#| "The base tile could not be downloaded successfully. The server replied:\n"
+#| "\n"
+#| "%1"
+msgctxt "Marble::MapWizard|"
+msgid ""
+"The preview image could not be downloaded successfully. The server replied:\n"
+"\n"
+"%1"
+msgstr ""
+"Perustiilen lataus ei onnistunut. Palvelin vastasi:\n"
+"\n"
+"%1"
+
+#: src/lib/marble/MapWizard.cpp:674
 #, qt-format
 msgctxt "Marble::MapWizard|"
 msgid ""
@@ -8101,134 +8133,129 @@ msgstr ""
 "\n"
 "%1"
 
-#: src/lib/marble/MapWizard.cpp:711 src/lib/marble/MapWizard.cpp:714
+#: src/lib/marble/MapWizard.cpp:802 src/lib/marble/MapWizard.cpp:805
 msgctxt "Marble::MapWizard|"
 msgid "Archiving failed"
 msgstr "Arkistointi epäonnistui"
 
-#: src/lib/marble/MapWizard.cpp:711
+#: src/lib/marble/MapWizard.cpp:802
 msgctxt "Marble::MapWizard|"
 msgid "Archiving process cannot be started."
 msgstr "Arkistointiprosessia ei voitu käynnistää."
 
-#: src/lib/marble/MapWizard.cpp:714
+#: src/lib/marble/MapWizard.cpp:805
 msgctxt "Marble::MapWizard|"
 msgid "Archiving process crashed."
 msgstr "Arkistointiprosessi kaatui."
 
-#: src/lib/marble/MapWizard.cpp:749 src/lib/marble/MapWizard.cpp:757
-#: src/lib/marble/MapWizard.cpp:766
+#: src/lib/marble/MapWizard.cpp:841 src/lib/marble/MapWizard.cpp:849
+#: src/lib/marble/MapWizard.cpp:858
 msgctxt "Marble::MapWizard|"
 msgid "Source Image"
 msgstr "Lähdekuva"
 
-#: src/lib/marble/MapWizard.cpp:750
+#: src/lib/marble/MapWizard.cpp:842
 msgctxt "Marble::MapWizard|"
 msgid "Please specify a source image."
 msgstr "Anna lähdekuva."
 
-#: src/lib/marble/MapWizard.cpp:758
+#: src/lib/marble/MapWizard.cpp:850
 msgctxt "Marble::MapWizard|"
 msgid ""
 "The source image you specified does not exist. Please specify a different "
 "one."
 msgstr "Valitsemaasi lähdekuvaa ei ole olemassa. Valitse toinen."
 
-#: src/lib/marble/MapWizard.cpp:767
+#: src/lib/marble/MapWizard.cpp:859
 msgctxt "Marble::MapWizard|"
 msgid ""
 "The source image you specified does not seem to be an image. Please specify "
 "a different image file."
 msgstr "Valitsemasi lähde ei vaikuta kuvalta. Anna toinen kuvatiedosto."
 
-#: src/lib/marble/MapWizard.cpp:776
+#: src/lib/marble/MapWizard.cpp:868
 msgctxt "Marble::MapWizard|"
 msgid "Map Title"
 msgstr "Kartan otsikko"
 
-#: src/lib/marble/MapWizard.cpp:776
+#: src/lib/marble/MapWizard.cpp:868
 msgctxt "Marble::MapWizard|"
 msgid "Please specify a map title."
 msgstr "Anna kartan otsikko."
 
-#: src/lib/marble/MapWizard.cpp:783 src/lib/marble/MapWizard.cpp:791
+#: src/lib/marble/MapWizard.cpp:875 src/lib/marble/MapWizard.cpp:883
 msgctxt "Marble::MapWizard|"
 msgid "Map Name"
 msgstr "Kartan nimi"
 
-#: src/lib/marble/MapWizard.cpp:783
+#: src/lib/marble/MapWizard.cpp:875
 msgctxt "Marble::MapWizard|"
 msgid "Please specify a map name."
 msgstr "Anna kartalle nimi."
 
-#: src/lib/marble/MapWizard.cpp:792
+#: src/lib/marble/MapWizard.cpp:884
 #, qt-format
 msgctxt "Marble::MapWizard|"
 msgid ""
 "Please specify another map name, since there is already a map named \"%1\"."
 msgstr "Anna kartalle toinen nimi, koska kartta nimeltä ”%1” on jo olemassa."
 
-#: src/lib/marble/MapWizard.cpp:799
-msgctxt "Marble::MapWizard|"
-msgid "Preview Image"
-msgstr "Esikatsele kuvaa"
-
-#: src/lib/marble/MapWizard.cpp:799
+#: src/lib/marble/MapWizard.cpp:891
 msgctxt "Marble::MapWizard|"
 msgid "Please specify a preview image."
 msgstr "Valitse esikatselukuva."
 
-#: src/lib/marble/MapWizard.cpp:989
+#: src/lib/marble/MapWizard.cpp:1108
 msgctxt "Marble::MapWizard|"
 msgid "Geographic Pole"
 msgstr "Maantieteellinen napa"
 
-#: src/lib/marble/MapWizard.cpp:995
+#: src/lib/marble/MapWizard.cpp:1114
 msgctxt "Marble::MapWizard|"
 msgid "Magnetic Pole"
 msgstr "Magneettinen napa"
 
-#: src/lib/marble/MapWizard.cpp:1001
+#: src/lib/marble/MapWizard.cpp:1120
 msgctxt "Marble::MapWizard|"
 msgid "Airport"
 msgstr "Lentokenttä"
 
-#: src/lib/marble/MapWizard.cpp:1007
+#: src/lib/marble/MapWizard.cpp:1126
 msgctxt "Marble::MapWizard|"
 msgid "Shipwreck"
 msgstr "Hylky"
 
-#: src/lib/marble/MapWizard.cpp:1013
+#: src/lib/marble/MapWizard.cpp:1132
 msgctxt "Marble::MapWizard|"
 msgid "Observatory"
 msgstr "Tähtitorni"
 
-#: src/lib/marble/MapWizard.cpp:1035
+#: src/lib/marble/MapWizard.cpp:1154
 msgctxt "Marble::MapWizard|"
 msgid "Mountain"
 msgstr "Vuori"
 
-#: src/lib/marble/MapWizard.cpp:1041
+#: src/lib/marble/MapWizard.cpp:1160
 msgctxt "Marble::MapWizard|"
 msgid "Volcano"
 msgstr "Tulivuori"
 
-#: src/lib/marble/MapWizard.cpp:1072
+#: src/lib/marble/MapWizard.cpp:1191
 msgctxt "Marble::MapWizard|"
 msgid "International"
 msgstr "Kansainvälinen osoite"
 
-#: src/lib/marble/MapWizard.cpp:1078
+#: src/lib/marble/MapWizard.cpp:1197
 msgctxt "Marble::MapWizard|"
 msgid "State"
 msgstr "Osavaltio"
 
-#: src/lib/marble/MapWizard.cpp:1182
+#: src/lib/marble/MapWizard.cpp:1301
 msgctxt "Marble::MapWizard|"
 msgid "Problem while creating files"
 msgstr "Ongelma luotaessa tiedostoja"
 
-#: src/lib/marble/MapWizard.cpp:1182
+#: src/lib/marble/MapWizard.cpp:1301
 msgctxt "Marble::MapWizard|"
 msgid "Check if a theme with the same name exists."
 msgstr "Tarkista, onko samannimistä teemaa olemassa."

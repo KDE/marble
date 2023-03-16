@@ -9419,67 +9419,99 @@ msgctxt "MapViewWidget|"
 msgid "Here you can choose the preferred map view from different topics."
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:131
+#: src/lib/marble/MapWizard.cpp:145
 #, fuzzy
 #| msgid "Preview Map"
 msgctxt "Marble::PreviewDialog|"
 msgid "Preview Map"
 msgstr "Pregled mape"
 
-#: src/lib/marble/MapWizard.cpp:241 src/lib/marble/MapWizard.cpp:247
+#: src/lib/marble/MapWizard.cpp:257 src/lib/marble/MapWizard.cpp:263
 #, fuzzy
 #| msgid "Error while parsing"
 msgctxt "Marble::MapWizard|"
 msgid "Error while parsing"
 msgstr "Greška tokom gramatičkog raščlanjivanja"
 
-#: src/lib/marble/MapWizard.cpp:241
+#: src/lib/marble/MapWizard.cpp:257
 #, fuzzy
 #| msgid "Wizard cannot parse server's response"
 msgctxt "Marble::MapWizard|"
 msgid "Wizard cannot parse server's response"
 msgstr "Čarobnjak ne može raščlaniti odziv servera"
 
-#: src/lib/marble/MapWizard.cpp:247
+#: src/lib/marble/MapWizard.cpp:263
 #, fuzzy
 #| msgid "Server is not a Web Map Server."
 msgctxt "Marble::MapWizard|"
 msgid "Server is not a Web Map Server."
 msgstr "Server nije Web Map Server."
 
-#: src/lib/marble/MapWizard.cpp:262
+#: src/lib/marble/MapWizard.cpp:280
 msgctxt "Marble::MapWizard|"
 msgid "Equirectangular (epsg:4326)"
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:265 src/lib/marble/MapWizard.cpp:526
-#: src/lib/marble/MapWizard.cpp:540 src/lib/marble/MapWizard.cpp:877
+#: src/lib/marble/MapWizard.cpp:283 src/lib/marble/MapWizard.cpp:567
+#: src/lib/marble/MapWizard.cpp:581 src/lib/marble/MapWizard.cpp:996
 msgctxt "Marble::MapWizard|"
 msgid "Web Mercator (epsg:3857)"
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:355 src/lib/marble/MapWizard.cpp:378
+#: src/lib/marble/MapWizard.cpp:398 src/lib/marble/MapWizard.cpp:399
+#: src/lib/marble/MapWizard.cpp:420
 #, fuzzy
 #| msgid "Custom"
 msgctxt "Marble::MapWizard|"
 msgid "Custom"
 msgstr "Prilagođeno"
 
-#: src/lib/marble/MapWizard.cpp:584 src/lib/marble/MapWizard.cpp:591
+#: src/lib/marble/MapWizard.cpp:651 src/lib/marble/MapWizard.cpp:673
 #, fuzzy
 #| msgid "Base Tile"
 msgctxt "Marble::MapWizard|"
 msgid "Base Tile"
 msgstr "Bazna Pločica"
 
-#: src/lib/marble/MapWizard.cpp:585
+#: src/lib/marble/MapWizard.cpp:652
 #, fuzzy
 #| msgid "The base tile could not be downloaded."
 msgctxt "Marble::MapWizard|"
 msgid "The base tile could not be downloaded."
 msgstr "Bazna pločicase ne može skinuti."
 
-#: src/lib/marble/MapWizard.cpp:592
+#: src/lib/marble/MapWizard.cpp:658 src/lib/marble/MapWizard.cpp:667
+#: src/lib/marble/MapWizard.cpp:891
+#, fuzzy
+#| msgid "Preview Image"
+msgctxt "Marble::MapWizard|"
+msgid "Preview Image"
+msgstr "Pregled slike"
+
+#: src/lib/marble/MapWizard.cpp:659
+#, fuzzy
+#| msgid "The base tile could not be downloaded."
+msgctxt "Marble::MapWizard|"
+msgid "The preview image could not be downloaded."
+msgstr "Bazna pločicase ne može skinuti."
+
+#: src/lib/marble/MapWizard.cpp:668
+#, fuzzy, qt-format
+#| msgid ""
+#| "The base tile could not be downloaded successfully. The server replied:\n"
+#| "\n"
+#| "%1"
+msgctxt "Marble::MapWizard|"
+msgid ""
+"The preview image could not be downloaded successfully. The server replied:\n"
+"\n"
+"%1"
+msgstr ""
+"Bazna pločica ne može se skinuti uspješno. Server odgovara:\n"
+"\n"
+"%1"
+
+#: src/lib/marble/MapWizard.cpp:674
 #, fuzzy, qt-format
 #| msgid ""
 #| "The base tile could not be downloaded successfully. The server replied:\n"
@@ -9495,43 +9527,43 @@ msgstr ""
 "\n"
 "%1"
 
-#: src/lib/marble/MapWizard.cpp:711 src/lib/marble/MapWizard.cpp:714
+#: src/lib/marble/MapWizard.cpp:802 src/lib/marble/MapWizard.cpp:805
 #, fuzzy
 #| msgid "Archiving failed"
 msgctxt "Marble::MapWizard|"
 msgid "Archiving failed"
 msgstr "Arhiviranje neuspjelo"
 
-#: src/lib/marble/MapWizard.cpp:711
+#: src/lib/marble/MapWizard.cpp:802
 #, fuzzy
 #| msgid "Archiving process cannot be started."
 msgctxt "Marble::MapWizard|"
 msgid "Archiving process cannot be started."
 msgstr "Proces arhiviranja ne može početi."
 
-#: src/lib/marble/MapWizard.cpp:714
+#: src/lib/marble/MapWizard.cpp:805
 #, fuzzy
 #| msgid "Archiving process crashed."
 msgctxt "Marble::MapWizard|"
 msgid "Archiving process crashed."
 msgstr "Proces arhiviranja se srušio."
 
-#: src/lib/marble/MapWizard.cpp:749 src/lib/marble/MapWizard.cpp:757
-#: src/lib/marble/MapWizard.cpp:766
+#: src/lib/marble/MapWizard.cpp:841 src/lib/marble/MapWizard.cpp:849
+#: src/lib/marble/MapWizard.cpp:858
 #, fuzzy
 #| msgid "Source Image"
 msgctxt "Marble::MapWizard|"
 msgid "Source Image"
 msgstr "Izvorna slika"
 
-#: src/lib/marble/MapWizard.cpp:750
+#: src/lib/marble/MapWizard.cpp:842
 #, fuzzy
 #| msgid "Please specify a source image."
 msgctxt "Marble::MapWizard|"
 msgid "Please specify a source image."
 msgstr "Molimo odredite izvornu sliku."
 
-#: src/lib/marble/MapWizard.cpp:758
+#: src/lib/marble/MapWizard.cpp:850
 #, fuzzy
 #| msgid ""
 #| "The source image you specified does not exist. Please specify a different "
@@ -9543,7 +9575,7 @@ msgid ""
 msgstr ""
 "Izvorna slika koju ste odredili ne postoji. Molimo odredite neku drugu."
 
-#: src/lib/marble/MapWizard.cpp:767
+#: src/lib/marble/MapWizard.cpp:859
 #, fuzzy
 #| msgid ""
 #| "The source image you specified does not seem to be an image. Please "
@@ -9556,35 +9588,35 @@ msgstr ""
 "Izvorna slika koju ste odredili ne izgleda kao slika. Molimo odredite drugu "
 "slikovnu datoteku."
 
-#: src/lib/marble/MapWizard.cpp:776
+#: src/lib/marble/MapWizard.cpp:868
 #, fuzzy
 #| msgid "Map Title"
 msgctxt "Marble::MapWizard|"
 msgid "Map Title"
 msgstr "Naslov Mape"
 
-#: src/lib/marble/MapWizard.cpp:776
+#: src/lib/marble/MapWizard.cpp:868
 #, fuzzy
 #| msgid "Please specify a map title."
 msgctxt "Marble::MapWizard|"
 msgid "Please specify a map title."
 msgstr "Molimo odredite naslov mape."
 
-#: src/lib/marble/MapWizard.cpp:783 src/lib/marble/MapWizard.cpp:791
+#: src/lib/marble/MapWizard.cpp:875 src/lib/marble/MapWizard.cpp:883
 #, fuzzy
 #| msgid "Map Name"
 msgctxt "Marble::MapWizard|"
 msgid "Map Name"
 msgstr "Ime Mape"
 
-#: src/lib/marble/MapWizard.cpp:783
+#: src/lib/marble/MapWizard.cpp:875
 #, fuzzy
 #| msgid "Please specify a map name."
 msgctxt "Marble::MapWizard|"
 msgid "Please specify a map name."
 msgstr "Molimo odredite ime mape."
 
-#: src/lib/marble/MapWizard.cpp:792
+#: src/lib/marble/MapWizard.cpp:884
 #, fuzzy, qt-format
 #| msgid ""
 #| "Please specify another map name, since there is already a map named "
@@ -9595,91 +9627,84 @@ msgid ""
 msgstr ""
 "Molimo odredite drugo ime mape, jer već postoji mapa imenovana kao \"%1\"."
 
-#: src/lib/marble/MapWizard.cpp:799
-#, fuzzy
-#| msgid "Preview Image"
-msgctxt "Marble::MapWizard|"
-msgid "Preview Image"
-msgstr "Pregled slike"
-
-#: src/lib/marble/MapWizard.cpp:799
+#: src/lib/marble/MapWizard.cpp:891
 #, fuzzy
 #| msgid "Please specify a preview image."
 msgctxt "Marble::MapWizard|"
 msgid "Please specify a preview image."
 msgstr "Molimo odredite pregled slike."
 
-#: src/lib/marble/MapWizard.cpp:989
+#: src/lib/marble/MapWizard.cpp:1108
 #, fuzzy
 #| msgid "Geographic Pole"
 msgctxt "Marble::MapWizard|"
 msgid "Geographic Pole"
 msgstr "Geografski pol"
 
-#: src/lib/marble/MapWizard.cpp:995
+#: src/lib/marble/MapWizard.cpp:1114
 #, fuzzy
 #| msgid "Magnetic Pole"
 msgctxt "Marble::MapWizard|"
 msgid "Magnetic Pole"
 msgstr "Magnetni pol"
 
-#: src/lib/marble/MapWizard.cpp:1001
+#: src/lib/marble/MapWizard.cpp:1120
 #, fuzzy
 #| msgid "Airport"
 msgctxt "Marble::MapWizard|"
 msgid "Airport"
 msgstr "Aerodrom"
 
-#: src/lib/marble/MapWizard.cpp:1007
+#: src/lib/marble/MapWizard.cpp:1126
 #, fuzzy
 #| msgid "Shipwreck"
 msgctxt "Marble::MapWizard|"
 msgid "Shipwreck"
 msgstr "Brodolom"
 
-#: src/lib/marble/MapWizard.cpp:1013
+#: src/lib/marble/MapWizard.cpp:1132
 #, fuzzy
 #| msgid "Observatory"
 msgctxt "Marble::MapWizard|"
 msgid "Observatory"
 msgstr "Opservatorij"
 
-#: src/lib/marble/MapWizard.cpp:1035
+#: src/lib/marble/MapWizard.cpp:1154
 #, fuzzy
 #| msgid "Mountain"
 msgctxt "Marble::MapWizard|"
 msgid "Mountain"
 msgstr "Planina"
 
-#: src/lib/marble/MapWizard.cpp:1041
+#: src/lib/marble/MapWizard.cpp:1160
 #, fuzzy
 #| msgid "Volcano"
 msgctxt "Marble::MapWizard|"
 msgid "Volcano"
 msgstr "Vulkan"
 
-#: src/lib/marble/MapWizard.cpp:1072
+#: src/lib/marble/MapWizard.cpp:1191
 #, fuzzy
 #| msgid "International"
 msgctxt "Marble::MapWizard|"
 msgid "International"
 msgstr "Međunarodno"
 
-#: src/lib/marble/MapWizard.cpp:1078
+#: src/lib/marble/MapWizard.cpp:1197
 #, fuzzy
 #| msgid "State"
 msgctxt "Marble::MapWizard|"
 msgid "State"
 msgstr "Stanje"
 
-#: src/lib/marble/MapWizard.cpp:1182
+#: src/lib/marble/MapWizard.cpp:1301
 #, fuzzy
 #| msgid "Problem while creating files"
 msgctxt "Marble::MapWizard|"
 msgid "Problem while creating files"
 msgstr "Problem tokom stvaranja datoteka"
 
-#: src/lib/marble/MapWizard.cpp:1182
+#: src/lib/marble/MapWizard.cpp:1301
 #, fuzzy
 #| msgid "Check if a theme with the same name exists."
 msgctxt "Marble::MapWizard|"
