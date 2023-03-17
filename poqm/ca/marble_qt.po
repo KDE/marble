@@ -10,14 +10,14 @@ msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2023-03-14 16:12+0100\n"
-"Last-Translator: Antoni Bella Pérez <antonibella5@yahoo.com>\n"
+"PO-Revision-Date: 2023-03-16 10:48+0100\n"
+"Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: Lokalize 20.12.0\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Accelerator-Marker: &\n"
 "X-Qt-Contexts: true\n"
@@ -8046,86 +8046,86 @@ msgctxt "MapViewWidget|"
 msgid "Here you can choose the preferred map view from different topics."
 msgstr "Aquí podeu escollir la vista preferida del mapa entre diversos modes."
 
-#: src/lib/marble/MapWizard.cpp:145
+#: src/lib/marble/MapWizard.cpp:147
 msgctxt "Marble::PreviewDialog|"
 msgid "Preview Map"
 msgstr "Vista prèvia del mapa"
 
-#: src/lib/marble/MapWizard.cpp:257 src/lib/marble/MapWizard.cpp:263
+#: src/lib/marble/MapWizard.cpp:259 src/lib/marble/MapWizard.cpp:265
 msgctxt "Marble::MapWizard|"
 msgid "Error while parsing"
 msgstr "Error en analitzar"
 
-#: src/lib/marble/MapWizard.cpp:257
+#: src/lib/marble/MapWizard.cpp:259
 msgctxt "Marble::MapWizard|"
 msgid "Wizard cannot parse server's response"
 msgstr "L'assistent no ha pogut interpretar la resposta del servidor"
 
-#: src/lib/marble/MapWizard.cpp:263
+#: src/lib/marble/MapWizard.cpp:265
 msgctxt "Marble::MapWizard|"
 msgid "Server is not a Web Map Server."
 msgstr "El servidor no és cap servidor web de mapes."
 
-#: src/lib/marble/MapWizard.cpp:280
-msgctxt "Marble::MapWizard|"
-msgid "Equirectangular (epsg:4326)"
-msgstr "Cilíndrica equidistant (epsg:4326)"
-
-#: src/lib/marble/MapWizard.cpp:283 src/lib/marble/MapWizard.cpp:567
-#: src/lib/marble/MapWizard.cpp:581 src/lib/marble/MapWizard.cpp:996
+#: src/lib/marble/MapWizard.cpp:281 src/lib/marble/MapWizard.cpp:583
+#: src/lib/marble/MapWizard.cpp:998
 msgctxt "Marble::MapWizard|"
 msgid "Web Mercator (epsg:3857)"
 msgstr "Mercator de web (epsg:3857)"
 
-#: src/lib/marble/MapWizard.cpp:398 src/lib/marble/MapWizard.cpp:399
-#: src/lib/marble/MapWizard.cpp:420
+#: src/lib/marble/MapWizard.cpp:284
+msgctxt "Marble::MapWizard|"
+msgid "Equirectangular (epsg:4326)"
+msgstr "Cilíndrica equidistant (epsg:4326)"
+
+#: src/lib/marble/MapWizard.cpp:399 src/lib/marble/MapWizard.cpp:400
+#: src/lib/marble/MapWizard.cpp:421
 msgctxt "Marble::MapWizard|"
 msgid "Custom"
 msgstr "Personalitzat"
 
-#: src/lib/marble/MapWizard.cpp:651 src/lib/marble/MapWizard.cpp:673
+#: src/lib/marble/MapWizard.cpp:569
+#, fuzzy
+#| msgctxt "Marble::MapWizard|"
+#| msgid "Equirectangular (epsg:4326)"
+msgctxt "Marble::MapWizard|"
+msgid "Equirectangular (epsg:4326))"
+msgstr "Cilíndrica equidistant (epsg:4326)"
+
+#: src/lib/marble/MapWizard.cpp:653 src/lib/marble/MapWizard.cpp:675
 msgctxt "Marble::MapWizard|"
 msgid "Base Tile"
 msgstr "Tessel·la base"
 
-#: src/lib/marble/MapWizard.cpp:652
+#: src/lib/marble/MapWizard.cpp:654
 msgctxt "Marble::MapWizard|"
 msgid "The base tile could not be downloaded."
 msgstr "La tessel·la base no s'ha pogut descarregar correctament."
 
-#: src/lib/marble/MapWizard.cpp:658 src/lib/marble/MapWizard.cpp:667
-#: src/lib/marble/MapWizard.cpp:891
+#: src/lib/marble/MapWizard.cpp:660 src/lib/marble/MapWizard.cpp:669
+#: src/lib/marble/MapWizard.cpp:893
 msgctxt "Marble::MapWizard|"
 msgid "Preview Image"
 msgstr "Previsualitza la imatge"
 
-#: src/lib/marble/MapWizard.cpp:659
-#, fuzzy
-#| msgctxt "Marble::MapWizard|"
-#| msgid "The base tile could not be downloaded."
+#: src/lib/marble/MapWizard.cpp:661
 msgctxt "Marble::MapWizard|"
 msgid "The preview image could not be downloaded."
-msgstr "La tessel·la base no s'ha pogut descarregar correctament."
+msgstr "La imatge de vista prèvia no s'ha pogut descarregar."
 
-#: src/lib/marble/MapWizard.cpp:668
-#, fuzzy, qt-format
-#| msgctxt "Marble::MapWizard|"
-#| msgid ""
-#| "The base tile could not be downloaded successfully. The server replied:\n"
-#| "\n"
-#| "%1"
+#: src/lib/marble/MapWizard.cpp:670
+#, qt-format
 msgctxt "Marble::MapWizard|"
 msgid ""
 "The preview image could not be downloaded successfully. The server replied:\n"
 "\n"
 "%1"
 msgstr ""
-"La tessel·la base no s'ha pogut descarregar correctament. El servidor ha "
-"respost:\n"
+"La imatge de vista prèvia no s'ha pogut descarregar correctament. El "
+"servidor ha respost:\n"
 "\n"
 "%1"
 
-#: src/lib/marble/MapWizard.cpp:674
+#: src/lib/marble/MapWizard.cpp:676
 #, qt-format
 msgctxt "Marble::MapWizard|"
 msgid ""
@@ -8138,33 +8138,33 @@ msgstr ""
 "\n"
 "%1"
 
-#: src/lib/marble/MapWizard.cpp:802 src/lib/marble/MapWizard.cpp:805
+#: src/lib/marble/MapWizard.cpp:804 src/lib/marble/MapWizard.cpp:807
 msgctxt "Marble::MapWizard|"
 msgid "Archiving failed"
 msgstr "Ha fallat l'arxivament"
 
-#: src/lib/marble/MapWizard.cpp:802
+#: src/lib/marble/MapWizard.cpp:804
 msgctxt "Marble::MapWizard|"
 msgid "Archiving process cannot be started."
 msgstr "No s'ha pogut iniciar el procés d'arxivament."
 
-#: src/lib/marble/MapWizard.cpp:805
+#: src/lib/marble/MapWizard.cpp:807
 msgctxt "Marble::MapWizard|"
 msgid "Archiving process crashed."
 msgstr "El procés d'arxivament s'ha interromput."
 
-#: src/lib/marble/MapWizard.cpp:841 src/lib/marble/MapWizard.cpp:849
-#: src/lib/marble/MapWizard.cpp:858
+#: src/lib/marble/MapWizard.cpp:843 src/lib/marble/MapWizard.cpp:851
+#: src/lib/marble/MapWizard.cpp:860
 msgctxt "Marble::MapWizard|"
 msgid "Source Image"
 msgstr "Imatge origen"
 
-#: src/lib/marble/MapWizard.cpp:842
+#: src/lib/marble/MapWizard.cpp:844
 msgctxt "Marble::MapWizard|"
 msgid "Please specify a source image."
 msgstr "Si us plau, especifiqueu una imatge d'origen."
 
-#: src/lib/marble/MapWizard.cpp:850
+#: src/lib/marble/MapWizard.cpp:852
 msgctxt "Marble::MapWizard|"
 msgid ""
 "The source image you specified does not exist. Please specify a different "
@@ -8173,7 +8173,7 @@ msgstr ""
 "La imatge d'origen que heu especificat no existeix. Si us plau, especifiqueu-"
 "ne una de diferent."
 
-#: src/lib/marble/MapWizard.cpp:859
+#: src/lib/marble/MapWizard.cpp:861
 msgctxt "Marble::MapWizard|"
 msgid ""
 "The source image you specified does not seem to be an image. Please specify "
@@ -8182,27 +8182,27 @@ msgstr ""
 "La imatge d'origen que heu especificat no sembla que sigui cap imatge. Si us "
 "plau, especifiqueu un fitxer d'imatge diferent."
 
-#: src/lib/marble/MapWizard.cpp:868
+#: src/lib/marble/MapWizard.cpp:870
 msgctxt "Marble::MapWizard|"
 msgid "Map Title"
 msgstr "Títol del mapa"
 
-#: src/lib/marble/MapWizard.cpp:868
+#: src/lib/marble/MapWizard.cpp:870
 msgctxt "Marble::MapWizard|"
 msgid "Please specify a map title."
 msgstr "Si us plau, especifiqueu un títol de mapa."
 
-#: src/lib/marble/MapWizard.cpp:875 src/lib/marble/MapWizard.cpp:883
+#: src/lib/marble/MapWizard.cpp:877 src/lib/marble/MapWizard.cpp:885
 msgctxt "Marble::MapWizard|"
 msgid "Map Name"
 msgstr "Nom del mapa"
 
-#: src/lib/marble/MapWizard.cpp:875
+#: src/lib/marble/MapWizard.cpp:877
 msgctxt "Marble::MapWizard|"
 msgid "Please specify a map name."
 msgstr "Si us plau, especifiqueu un nom de mapa."
 
-#: src/lib/marble/MapWizard.cpp:884
+#: src/lib/marble/MapWizard.cpp:886
 #, qt-format
 msgctxt "Marble::MapWizard|"
 msgid ""
@@ -8211,62 +8211,62 @@ msgstr ""
 "Si us plau, especifiqueu un altre nom de mapa, perquè ja hi ha un mapa "
 "anomenat «%1»."
 
-#: src/lib/marble/MapWizard.cpp:891
+#: src/lib/marble/MapWizard.cpp:893
 msgctxt "Marble::MapWizard|"
 msgid "Please specify a preview image."
 msgstr "Si us plau, especifiqueu una imatge de previsualització."
 
-#: src/lib/marble/MapWizard.cpp:1108
+#: src/lib/marble/MapWizard.cpp:1110
 msgctxt "Marble::MapWizard|"
 msgid "Geographic Pole"
 msgstr "Pol geogràfic"
 
-#: src/lib/marble/MapWizard.cpp:1114
+#: src/lib/marble/MapWizard.cpp:1116
 msgctxt "Marble::MapWizard|"
 msgid "Magnetic Pole"
 msgstr "Pol magnètic"
 
-#: src/lib/marble/MapWizard.cpp:1120
+#: src/lib/marble/MapWizard.cpp:1122
 msgctxt "Marble::MapWizard|"
 msgid "Airport"
 msgstr "Aeroport"
 
-#: src/lib/marble/MapWizard.cpp:1126
+#: src/lib/marble/MapWizard.cpp:1128
 msgctxt "Marble::MapWizard|"
 msgid "Shipwreck"
 msgstr "Naufragi"
 
-#: src/lib/marble/MapWizard.cpp:1132
+#: src/lib/marble/MapWizard.cpp:1134
 msgctxt "Marble::MapWizard|"
 msgid "Observatory"
 msgstr "Observatori"
 
-#: src/lib/marble/MapWizard.cpp:1154
+#: src/lib/marble/MapWizard.cpp:1156
 msgctxt "Marble::MapWizard|"
 msgid "Mountain"
 msgstr "Muntanya"
 
-#: src/lib/marble/MapWizard.cpp:1160
+#: src/lib/marble/MapWizard.cpp:1162
 msgctxt "Marble::MapWizard|"
 msgid "Volcano"
 msgstr "Volcà"
 
-#: src/lib/marble/MapWizard.cpp:1191
+#: src/lib/marble/MapWizard.cpp:1193
 msgctxt "Marble::MapWizard|"
 msgid "International"
 msgstr "Internacional"
 
-#: src/lib/marble/MapWizard.cpp:1197
+#: src/lib/marble/MapWizard.cpp:1199
 msgctxt "Marble::MapWizard|"
 msgid "State"
 msgstr "Estat"
 
-#: src/lib/marble/MapWizard.cpp:1301
+#: src/lib/marble/MapWizard.cpp:1303
 msgctxt "Marble::MapWizard|"
 msgid "Problem while creating files"
 msgstr "S'ha detectat un problema tot creant els fitxers"
 
-#: src/lib/marble/MapWizard.cpp:1301
+#: src/lib/marble/MapWizard.cpp:1303
 msgctxt "Marble::MapWizard|"
 msgid "Check if a theme with the same name exists."
 msgstr "Comprova si existeix un tema amb el mateix nom."

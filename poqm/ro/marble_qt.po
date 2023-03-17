@@ -8897,71 +8897,76 @@ msgstr ""
 "Aici poți alege modul de vizualizare a hărții folosind informații din "
 "diverse domenii"
 
-#: src/lib/marble/MapWizard.cpp:145
+#: src/lib/marble/MapWizard.cpp:147
 #, fuzzy
 #| msgid "Overview Map"
 msgctxt "Marble::PreviewDialog|"
 msgid "Preview Map"
 msgstr "Hartă sumară"
 
-#: src/lib/marble/MapWizard.cpp:257 src/lib/marble/MapWizard.cpp:263
+#: src/lib/marble/MapWizard.cpp:259 src/lib/marble/MapWizard.cpp:265
 msgctxt "Marble::MapWizard|"
 msgid "Error while parsing"
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:257
+#: src/lib/marble/MapWizard.cpp:259
 msgctxt "Marble::MapWizard|"
 msgid "Wizard cannot parse server's response"
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:263
+#: src/lib/marble/MapWizard.cpp:265
 msgctxt "Marble::MapWizard|"
 msgid "Server is not a Web Map Server."
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:280
-msgctxt "Marble::MapWizard|"
-msgid "Equirectangular (epsg:4326)"
-msgstr ""
-
-#: src/lib/marble/MapWizard.cpp:283 src/lib/marble/MapWizard.cpp:567
-#: src/lib/marble/MapWizard.cpp:581 src/lib/marble/MapWizard.cpp:996
+#: src/lib/marble/MapWizard.cpp:281 src/lib/marble/MapWizard.cpp:583
+#: src/lib/marble/MapWizard.cpp:998
 msgctxt "Marble::MapWizard|"
 msgid "Web Mercator (epsg:3857)"
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:398 src/lib/marble/MapWizard.cpp:399
-#: src/lib/marble/MapWizard.cpp:420
+#: src/lib/marble/MapWizard.cpp:284
+msgctxt "Marble::MapWizard|"
+msgid "Equirectangular (epsg:4326)"
+msgstr ""
+
+#: src/lib/marble/MapWizard.cpp:399 src/lib/marble/MapWizard.cpp:400
+#: src/lib/marble/MapWizard.cpp:421
 msgctxt "Marble::MapWizard|"
 msgid "Custom"
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:651 src/lib/marble/MapWizard.cpp:673
+#: src/lib/marble/MapWizard.cpp:569
+msgctxt "Marble::MapWizard|"
+msgid "Equirectangular (epsg:4326))"
+msgstr ""
+
+#: src/lib/marble/MapWizard.cpp:653 src/lib/marble/MapWizard.cpp:675
 #, fuzzy
 #| msgid "Save File"
 msgctxt "Marble::MapWizard|"
 msgid "Base Tile"
 msgstr "Salvează fișierul"
 
-#: src/lib/marble/MapWizard.cpp:652
+#: src/lib/marble/MapWizard.cpp:654
 msgctxt "Marble::MapWizard|"
 msgid "The base tile could not be downloaded."
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:658 src/lib/marble/MapWizard.cpp:667
-#: src/lib/marble/MapWizard.cpp:891
+#: src/lib/marble/MapWizard.cpp:660 src/lib/marble/MapWizard.cpp:669
+#: src/lib/marble/MapWizard.cpp:893
 #, fuzzy
 #| msgid "Print Page"
 msgctxt "Marble::MapWizard|"
 msgid "Preview Image"
 msgstr "Tipărește pagina"
 
-#: src/lib/marble/MapWizard.cpp:659
+#: src/lib/marble/MapWizard.cpp:661
 msgctxt "Marble::MapWizard|"
 msgid "The preview image could not be downloaded."
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:668
+#: src/lib/marble/MapWizard.cpp:670
 #, qt-format
 msgctxt "Marble::MapWizard|"
 msgid ""
@@ -8970,7 +8975,7 @@ msgid ""
 "%1"
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:674
+#: src/lib/marble/MapWizard.cpp:676
 #, qt-format
 msgctxt "Marble::MapWizard|"
 msgid ""
@@ -8979,161 +8984,161 @@ msgid ""
 "%1"
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:802 src/lib/marble/MapWizard.cpp:805
+#: src/lib/marble/MapWizard.cpp:804 src/lib/marble/MapWizard.cpp:807
 msgctxt "Marble::MapWizard|"
 msgid "Archiving failed"
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:802
+#: src/lib/marble/MapWizard.cpp:804
 msgctxt "Marble::MapWizard|"
 msgid "Archiving process cannot be started."
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:805
+#: src/lib/marble/MapWizard.cpp:807
 msgctxt "Marble::MapWizard|"
 msgid "Archiving process crashed."
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:841 src/lib/marble/MapWizard.cpp:849
-#: src/lib/marble/MapWizard.cpp:858
+#: src/lib/marble/MapWizard.cpp:843 src/lib/marble/MapWizard.cpp:851
+#: src/lib/marble/MapWizard.cpp:860
 #, fuzzy
 #| msgid "Print Page"
 msgctxt "Marble::MapWizard|"
 msgid "Source Image"
 msgstr "Tipărește pagina"
 
-#: src/lib/marble/MapWizard.cpp:842
+#: src/lib/marble/MapWizard.cpp:844
 #, fuzzy
 #| msgid "Alternative name of the location."
 msgctxt "Marble::MapWizard|"
 msgid "Please specify a source image."
 msgstr "Nume alternativ al poziției pe hartă."
 
-#: src/lib/marble/MapWizard.cpp:850
+#: src/lib/marble/MapWizard.cpp:852
 msgctxt "Marble::MapWizard|"
 msgid ""
 "The source image you specified does not exist. Please specify a different "
 "one."
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:859
+#: src/lib/marble/MapWizard.cpp:861
 msgctxt "Marble::MapWizard|"
 msgid ""
 "The source image you specified does not seem to be an image. Please specify "
 "a different image file."
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:868
+#: src/lib/marble/MapWizard.cpp:870
 #, fuzzy
 #| msgid "Map View"
 msgctxt "Marble::MapWizard|"
 msgid "Map Title"
 msgstr "Mod vizualizare hartă"
 
-#: src/lib/marble/MapWizard.cpp:868
+#: src/lib/marble/MapWizard.cpp:870
 #, fuzzy
 #| msgid "Alternative name of the location."
 msgctxt "Marble::MapWizard|"
 msgid "Please specify a map title."
 msgstr "Nume alternativ al poziției pe hartă."
 
-#: src/lib/marble/MapWizard.cpp:875 src/lib/marble/MapWizard.cpp:883
+#: src/lib/marble/MapWizard.cpp:877 src/lib/marble/MapWizard.cpp:885
 #, fuzzy
 #| msgid "Name"
 msgctxt "Marble::MapWizard|"
 msgid "Map Name"
 msgstr "Nume"
 
-#: src/lib/marble/MapWizard.cpp:875
+#: src/lib/marble/MapWizard.cpp:877
 #, fuzzy
 #| msgid "Alternative name of the location."
 msgctxt "Marble::MapWizard|"
 msgid "Please specify a map name."
 msgstr "Nume alternativ al poziției pe hartă."
 
-#: src/lib/marble/MapWizard.cpp:884
+#: src/lib/marble/MapWizard.cpp:886
 #, qt-format
 msgctxt "Marble::MapWizard|"
 msgid ""
 "Please specify another map name, since there is already a map named \"%1\"."
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:891
+#: src/lib/marble/MapWizard.cpp:893
 #, fuzzy
 #| msgid "Alternative name of the location."
 msgctxt "Marble::MapWizard|"
 msgid "Please specify a preview image."
 msgstr "Nume alternativ al poziției pe hartă."
 
-#: src/lib/marble/MapWizard.cpp:1108
+#: src/lib/marble/MapWizard.cpp:1110
 #, fuzzy
 #| msgid "Geographic Pole"
 msgctxt "Marble::MapWizard|"
 msgid "Geographic Pole"
 msgstr "Pol geografic"
 
-#: src/lib/marble/MapWizard.cpp:1114
+#: src/lib/marble/MapWizard.cpp:1116
 #, fuzzy
 #| msgid "Magnetic Pole"
 msgctxt "Marble::MapWizard|"
 msgid "Magnetic Pole"
 msgstr "Pol magnetic"
 
-#: src/lib/marble/MapWizard.cpp:1120
+#: src/lib/marble/MapWizard.cpp:1122
 #, fuzzy
 #| msgid "Airport"
 msgctxt "Marble::MapWizard|"
 msgid "Airport"
 msgstr "Aeroport"
 
-#: src/lib/marble/MapWizard.cpp:1126
+#: src/lib/marble/MapWizard.cpp:1128
 #, fuzzy
 #| msgid "Shipwreck"
 msgctxt "Marble::MapWizard|"
 msgid "Shipwreck"
 msgstr "Epavă"
 
-#: src/lib/marble/MapWizard.cpp:1132
+#: src/lib/marble/MapWizard.cpp:1134
 #, fuzzy
 #| msgid "Current Location"
 msgctxt "Marble::MapWizard|"
 msgid "Observatory"
 msgstr "Poziția curentă pe hartă"
 
-#: src/lib/marble/MapWizard.cpp:1154
+#: src/lib/marble/MapWizard.cpp:1156
 #, fuzzy
 #| msgid "Mountain"
 msgctxt "Marble::MapWizard|"
 msgid "Mountain"
 msgstr "Munte"
 
-#: src/lib/marble/MapWizard.cpp:1160
+#: src/lib/marble/MapWizard.cpp:1162
 #, fuzzy
 #| msgid "Volcano"
 msgctxt "Marble::MapWizard|"
 msgid "Volcano"
 msgstr "Vulcan"
 
-#: src/lib/marble/MapWizard.cpp:1191
+#: src/lib/marble/MapWizard.cpp:1193
 #, fuzzy
 #| msgid "International"
 msgctxt "Marble::MapWizard|"
 msgid "International"
 msgstr "Internațional"
 
-#: src/lib/marble/MapWizard.cpp:1197
+#: src/lib/marble/MapWizard.cpp:1199
 #, fuzzy
 #| msgid "State"
 msgctxt "Marble::MapWizard|"
 msgid "State"
 msgstr "Stat"
 
-#: src/lib/marble/MapWizard.cpp:1301
+#: src/lib/marble/MapWizard.cpp:1303
 msgctxt "Marble::MapWizard|"
 msgid "Problem while creating files"
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:1301
+#: src/lib/marble/MapWizard.cpp:1303
 msgctxt "Marble::MapWizard|"
 msgid "Check if a theme with the same name exists."
 msgstr ""

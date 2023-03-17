@@ -9343,83 +9343,88 @@ msgctxt "MapViewWidget|"
 msgid "Here you can choose the preferred map view from different topics."
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:145
+#: src/lib/marble/MapWizard.cpp:147
 #, fuzzy
 #| msgid "Preview Map"
 msgctxt "Marble::PreviewDialog|"
 msgid "Preview Map"
 msgstr "Картаны қарап-шығу"
 
-#: src/lib/marble/MapWizard.cpp:257 src/lib/marble/MapWizard.cpp:263
+#: src/lib/marble/MapWizard.cpp:259 src/lib/marble/MapWizard.cpp:265
 #, fuzzy
 #| msgid "Error while parsing"
 msgctxt "Marble::MapWizard|"
 msgid "Error while parsing"
 msgstr "Талдау қатесі"
 
-#: src/lib/marble/MapWizard.cpp:257
+#: src/lib/marble/MapWizard.cpp:259
 #, fuzzy
 #| msgid "Wizard cannot parse server's response"
 msgctxt "Marble::MapWizard|"
 msgid "Wizard cannot parse server's response"
 msgstr "Шебер сервердің жауабын түсінбеді"
 
-#: src/lib/marble/MapWizard.cpp:263
+#: src/lib/marble/MapWizard.cpp:265
 #, fuzzy
 #| msgid "Server is not a Web Map Server."
 msgctxt "Marble::MapWizard|"
 msgid "Server is not a Web Map Server."
 msgstr "Бұл Веб-карталар сервері емес."
 
-#: src/lib/marble/MapWizard.cpp:280
-msgctxt "Marble::MapWizard|"
-msgid "Equirectangular (epsg:4326)"
-msgstr ""
-
-#: src/lib/marble/MapWizard.cpp:283 src/lib/marble/MapWizard.cpp:567
-#: src/lib/marble/MapWizard.cpp:581 src/lib/marble/MapWizard.cpp:996
+#: src/lib/marble/MapWizard.cpp:281 src/lib/marble/MapWizard.cpp:583
+#: src/lib/marble/MapWizard.cpp:998
 msgctxt "Marble::MapWizard|"
 msgid "Web Mercator (epsg:3857)"
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:398 src/lib/marble/MapWizard.cpp:399
-#: src/lib/marble/MapWizard.cpp:420
+#: src/lib/marble/MapWizard.cpp:284
+msgctxt "Marble::MapWizard|"
+msgid "Equirectangular (epsg:4326)"
+msgstr ""
+
+#: src/lib/marble/MapWizard.cpp:399 src/lib/marble/MapWizard.cpp:400
+#: src/lib/marble/MapWizard.cpp:421
 #, fuzzy
 #| msgid "Custom"
 msgctxt "Marble::MapWizard|"
 msgid "Custom"
 msgstr "Өзгеше"
 
-#: src/lib/marble/MapWizard.cpp:651 src/lib/marble/MapWizard.cpp:673
+#: src/lib/marble/MapWizard.cpp:569
+msgctxt "Marble::MapWizard|"
+msgid "Equirectangular (epsg:4326))"
+msgstr ""
+
+#: src/lib/marble/MapWizard.cpp:653 src/lib/marble/MapWizard.cpp:675
 #, fuzzy
 #| msgid "Base Tile"
 msgctxt "Marble::MapWizard|"
 msgid "Base Tile"
 msgstr "Негізгі тор көзі"
 
-#: src/lib/marble/MapWizard.cpp:652
+#: src/lib/marble/MapWizard.cpp:654
 #, fuzzy
 #| msgid "The base tile could not be downloaded."
 msgctxt "Marble::MapWizard|"
 msgid "The base tile could not be downloaded."
 msgstr "Негізгі тор көзі жүктелмеді."
 
-#: src/lib/marble/MapWizard.cpp:658 src/lib/marble/MapWizard.cpp:667
-#: src/lib/marble/MapWizard.cpp:891
+#: src/lib/marble/MapWizard.cpp:660 src/lib/marble/MapWizard.cpp:669
+#: src/lib/marble/MapWizard.cpp:893
 #, fuzzy
 #| msgid "Preview Image"
 msgctxt "Marble::MapWizard|"
 msgid "Preview Image"
 msgstr "Кескіннің нобайы"
 
-#: src/lib/marble/MapWizard.cpp:659
+#: src/lib/marble/MapWizard.cpp:661
 #, fuzzy
 #| msgid "The base tile could not be downloaded."
 msgctxt "Marble::MapWizard|"
 msgid "The preview image could not be downloaded."
 msgstr "Негізгі тор көзі жүктелмеді."
 
-#: src/lib/marble/MapWizard.cpp:668
+#: src/lib/marble/MapWizard.cpp:670
 #, fuzzy, qt-format
 #| msgid ""
 #| "The base tile could not be downloaded successfully. The server replied:\n"
@@ -9435,7 +9440,7 @@ msgstr ""
 "\n"
 "%1"
 
-#: src/lib/marble/MapWizard.cpp:674
+#: src/lib/marble/MapWizard.cpp:676
 #, fuzzy, qt-format
 #| msgid ""
 #| "The base tile could not be downloaded successfully. The server replied:\n"
@@ -9451,43 +9456,43 @@ msgstr ""
 "\n"
 "%1"
 
-#: src/lib/marble/MapWizard.cpp:802 src/lib/marble/MapWizard.cpp:805
+#: src/lib/marble/MapWizard.cpp:804 src/lib/marble/MapWizard.cpp:807
 #, fuzzy
 #| msgid "Archiving failed"
 msgctxt "Marble::MapWizard|"
 msgid "Archiving failed"
 msgstr "Архивтеу жаңылысы"
 
-#: src/lib/marble/MapWizard.cpp:802
+#: src/lib/marble/MapWizard.cpp:804
 #, fuzzy
 #| msgid "Archiving process cannot be started."
 msgctxt "Marble::MapWizard|"
 msgid "Archiving process cannot be started."
 msgstr "Архвтеу процесі басталмады."
 
-#: src/lib/marble/MapWizard.cpp:805
+#: src/lib/marble/MapWizard.cpp:807
 #, fuzzy
 #| msgid "Archiving process crashed."
 msgctxt "Marble::MapWizard|"
 msgid "Archiving process crashed."
 msgstr "Архивтеу процесі қирады."
 
-#: src/lib/marble/MapWizard.cpp:841 src/lib/marble/MapWizard.cpp:849
-#: src/lib/marble/MapWizard.cpp:858
+#: src/lib/marble/MapWizard.cpp:843 src/lib/marble/MapWizard.cpp:851
+#: src/lib/marble/MapWizard.cpp:860
 #, fuzzy
 #| msgid "Source Image"
 msgctxt "Marble::MapWizard|"
 msgid "Source Image"
 msgstr "Бастапқы кескін"
 
-#: src/lib/marble/MapWizard.cpp:842
+#: src/lib/marble/MapWizard.cpp:844
 #, fuzzy
 #| msgid "Please specify a source image."
 msgctxt "Marble::MapWizard|"
 msgid "Please specify a source image."
 msgstr "Бастапқы кескінін келтіріңіз."
 
-#: src/lib/marble/MapWizard.cpp:850
+#: src/lib/marble/MapWizard.cpp:852
 #, fuzzy
 #| msgid ""
 #| "The source image you specified does not exist. Please specify a different "
@@ -9498,7 +9503,7 @@ msgid ""
 "one."
 msgstr "Келтірілген бастапқы кескін жоқ. Басқасын келтіріңіз."
 
-#: src/lib/marble/MapWizard.cpp:859
+#: src/lib/marble/MapWizard.cpp:861
 #, fuzzy
 #| msgid ""
 #| "The source image you specified does not seem to be an image. Please "
@@ -9511,35 +9516,35 @@ msgstr ""
 "Келтірілген бастапқы кескін дегеніңіз - кескін емес. Басқа, кескін файлын "
 "келтіріңіз."
 
-#: src/lib/marble/MapWizard.cpp:868
+#: src/lib/marble/MapWizard.cpp:870
 #, fuzzy
 #| msgid "Map Title"
 msgctxt "Marble::MapWizard|"
 msgid "Map Title"
 msgstr "Картаның айдары"
 
-#: src/lib/marble/MapWizard.cpp:868
+#: src/lib/marble/MapWizard.cpp:870
 #, fuzzy
 #| msgid "Please specify a map title."
 msgctxt "Marble::MapWizard|"
 msgid "Please specify a map title."
 msgstr "Картаның айдарын келтіріңіз."
 
-#: src/lib/marble/MapWizard.cpp:875 src/lib/marble/MapWizard.cpp:883
+#: src/lib/marble/MapWizard.cpp:877 src/lib/marble/MapWizard.cpp:885
 #, fuzzy
 #| msgid "Map Name"
 msgctxt "Marble::MapWizard|"
 msgid "Map Name"
 msgstr "Картаның атауы"
 
-#: src/lib/marble/MapWizard.cpp:875
+#: src/lib/marble/MapWizard.cpp:877
 #, fuzzy
 #| msgid "Please specify a map name."
 msgctxt "Marble::MapWizard|"
 msgid "Please specify a map name."
 msgstr "Картаның атауын келтіріңіз."
 
-#: src/lib/marble/MapWizard.cpp:884
+#: src/lib/marble/MapWizard.cpp:886
 #, fuzzy, qt-format
 #| msgid ""
 #| "Please specify another map name, since there is already a map named "
@@ -9549,84 +9554,84 @@ msgid ""
 "Please specify another map name, since there is already a map named \"%1\"."
 msgstr "Картаны басқаша атаңыз, өйткені \"%1\" деп аталған карта бар екен."
 
-#: src/lib/marble/MapWizard.cpp:891
+#: src/lib/marble/MapWizard.cpp:893
 #, fuzzy
 #| msgid "Please specify a preview image."
 msgctxt "Marble::MapWizard|"
 msgid "Please specify a preview image."
 msgstr "Нобай кескінін келтіріңіз."
 
-#: src/lib/marble/MapWizard.cpp:1108
+#: src/lib/marble/MapWizard.cpp:1110
 #, fuzzy
 #| msgid "Geographic Pole"
 msgctxt "Marble::MapWizard|"
 msgid "Geographic Pole"
 msgstr "Географиялық полюс"
 
-#: src/lib/marble/MapWizard.cpp:1114
+#: src/lib/marble/MapWizard.cpp:1116
 #, fuzzy
 #| msgid "Magnetic Pole"
 msgctxt "Marble::MapWizard|"
 msgid "Magnetic Pole"
 msgstr "Магниттік полюс"
 
-#: src/lib/marble/MapWizard.cpp:1120
+#: src/lib/marble/MapWizard.cpp:1122
 #, fuzzy
 #| msgid "Airport"
 msgctxt "Marble::MapWizard|"
 msgid "Airport"
 msgstr "Әуежай"
 
-#: src/lib/marble/MapWizard.cpp:1126
+#: src/lib/marble/MapWizard.cpp:1128
 #, fuzzy
 #| msgid "Shipwreck"
 msgctxt "Marble::MapWizard|"
 msgid "Shipwreck"
 msgstr "Кеме апат орны"
 
-#: src/lib/marble/MapWizard.cpp:1132
+#: src/lib/marble/MapWizard.cpp:1134
 #, fuzzy
 #| msgid "Observatory"
 msgctxt "Marble::MapWizard|"
 msgid "Observatory"
 msgstr "Обсерватория"
 
-#: src/lib/marble/MapWizard.cpp:1154
+#: src/lib/marble/MapWizard.cpp:1156
 #, fuzzy
 #| msgid "Mountain"
 msgctxt "Marble::MapWizard|"
 msgid "Mountain"
 msgstr "Тау"
 
-#: src/lib/marble/MapWizard.cpp:1160
+#: src/lib/marble/MapWizard.cpp:1162
 #, fuzzy
 #| msgid "Volcano"
 msgctxt "Marble::MapWizard|"
 msgid "Volcano"
 msgstr "Вулкан"
 
-#: src/lib/marble/MapWizard.cpp:1191
+#: src/lib/marble/MapWizard.cpp:1193
 #, fuzzy
 #| msgid "International"
 msgctxt "Marble::MapWizard|"
 msgid "International"
 msgstr "Халықаралық"
 
-#: src/lib/marble/MapWizard.cpp:1197
+#: src/lib/marble/MapWizard.cpp:1199
 #, fuzzy
 #| msgid "State"
 msgctxt "Marble::MapWizard|"
 msgid "State"
 msgstr "Мемлекет"
 
-#: src/lib/marble/MapWizard.cpp:1301
+#: src/lib/marble/MapWizard.cpp:1303
 #, fuzzy
 #| msgid "Problem while creating files"
 msgctxt "Marble::MapWizard|"
 msgid "Problem while creating files"
 msgstr "Файлды құрғанда бір мәселе орын алды"
 
-#: src/lib/marble/MapWizard.cpp:1301
+#: src/lib/marble/MapWizard.cpp:1303
 #, fuzzy
 #| msgid "Check if a theme with the same name exists."
 msgctxt "Marble::MapWizard|"
