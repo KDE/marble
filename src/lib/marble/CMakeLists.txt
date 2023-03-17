@@ -268,6 +268,7 @@ set(marblewidget_SRCS
     GoToDialog.cpp
 
     MapWizard.cpp
+    OwsServiceManager.cpp
     MapThemeDownloadDialog.cpp
     GeoGraphicsScene.cpp
     ElevationModel.cpp

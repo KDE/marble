@@ -28,6 +28,7 @@
 #include "DgmlElementDictionary.h"
 #include "MarbleWidget.h"
 #include "MarbleNavigator.h"
+#include "OwsServiceManager.h"
 
 #include <QBuffer>
 #include <QDir>
@@ -50,6 +51,8 @@
 namespace Marble
 {
 
+int const layerIdRole = 1001;
+
 enum wizardPage
 {
     WelcomePage,
@@ -67,6 +70,8 @@ class MapWizardPrivate
 public:
     MapWizardPrivate()
         : m_serverCapabilitiesValid( false ),
+          m_levelZeroTileValid( false ),
+          m_previewImageValid( false ),
           mapProviderType()
     {}
 
@@ -76,17 +81,16 @@ public:
 
     QString mapTheme;
 
+    OwsServiceManager owsManager;
+
     QNetworkAccessManager xmlAccessManager;
     QNetworkAccessManager legendAccessManager;
     QNetworkAccessManager levelZeroAccessManager;
     QStringList wmsServerList;
-    QMap<QString, QString> wmsFetchedMaps;
-    QMap<QString, QStringList> wmsFetchedMapsMetaInfo;
-    QMap<QString, QString> wmsPreviewBoundingBox;
-    QString wmsVersion;
-    QString refSystem; // SRS (1.1.1) or CRS (1.3.0)
     QStringList staticUrlServerList;
     bool m_serverCapabilitiesValid;
+    bool m_levelZeroTileValid;
+    bool m_previewImageValid;
 
     enum mapType
     {
@@ -99,6 +103,7 @@ public:
     mapType mapProviderType;
     QByteArray levelZero;
     QByteArray preview;
+    QImage levelZeroTile;
     QImage previewImage;
 
     QString format;
@@ -183,6 +188,7 @@ void MapWizardPrivate::pageEntered( int id )
     if ( id == WmsSelectionPage ) {
         m_serverCapabilitiesValid = false;
     } else if ( id == LayerSelectionPage || id == GlobalSourceImagePage ) {
+        m_previewImageValid = false;
         levelZero.clear();
         uiWidget.comboBoxStaticUrlServer->clear();
         uiWidget.comboBoxStaticUrlServer->addItems( staticUrlServerList );
@@ -190,15 +196,10 @@ void MapWizardPrivate::pageEntered( int id )
     } else if ( id == ThemeInfoPage ) {
         if ( mapProviderType == MapWizardPrivate::StaticImageMap ) {
             previewImage = QImage( uiWidget.lineEditSource->text() ).scaled( 136, 136, Qt::IgnoreAspectRatio, Qt::SmoothTransformation );
-        } else {
-            if (!preview.isEmpty()) {
-                previewImage = QImage::fromData( preview ).scaled( 136, 136, Qt::IgnoreAspectRatio, Qt::SmoothTransformation );
-                preview.clear();
-            }
+            uiWidget.labelPreview->setPixmap( QPixmap::fromImage( previewImage ) );
         }
-        uiWidget.labelPreview->setPixmap( QPixmap::fromImage( previewImage ) );
-    } else if ( id == SummaryPage ) {
-        uiWidget.labelThumbnail->setPixmap( QPixmap::fromImage( previewImage ) );
+    } else if ( id == LegendPage ) {
+        m_levelZeroTileValid = false;
     }
 }
 
@@ -208,17 +209,20 @@ MapWizard::MapWizard( QWidget* parent ) : QWizard( parent ), d( new MapWizardPri
     
     connect( this, SIGNAL(currentIdChanged(int)), this, SLOT(pageEntered(int)) );
 
-    connect( &( d->xmlAccessManager ), &QNetworkAccessManager::finished, this, &MapWizard::parseServerCapabilities );
+    connect( &d->owsManager, &OwsServiceManager::wmsCapabilitiesReady,
+             this, &MapWizard::processCapabilitiesResults);
+    connect( &d->owsManager, &OwsServiceManager::imageRequestResultReady,
+             this, &MapWizard::processImageResults);
+
     connect( &( d->legendAccessManager ), &QNetworkAccessManager::finished, this, &MapWizard::createWmsLegend );
-    connect( &( d->levelZeroAccessManager ), &QNetworkAccessManager::finished, this, &MapWizard::createLevelZero );
 
     connect( d->uiWidget.pushButtonSource, &QAbstractButton::clicked, this, &MapWizard::querySourceImage );
     connect( d->uiWidget.pushButtonPreview, &QAbstractButton::clicked, this, &MapWizard::queryPreviewImage );
     connect( d->uiWidget.pushButtonLegend_2, &QAbstractButton::clicked, this, &MapWizard::queryLegendImage );
 
     connect( d->uiWidget.comboBoxWmsServer, SIGNAL(activated(QString)), this, SLOT(setLineEditWms(QString)) );
-    connect( d->uiWidget.listWidgetWmsMaps, &QListWidget::itemSelectionChanged, this, &MapWizard::autoFillDetails );
-    
+    connect( d->uiWidget.listWidgetWmsMaps, &QListWidget::itemPressed, this, &MapWizard::processSelectedLayerInformation );
+
     connect( d->uiWidget.lineEditTitle, &QLineEdit::textChanged, d->uiWidget.labelSumMName, &QLabel::setText );
     connect( d->uiWidget.lineEditTheme, &QLineEdit::textChanged, d->uiWidget.labelSumMTheme, &QLabel::setText );
     
@@ -230,147 +234,118 @@ MapWizard::~MapWizard()
     delete d;
 }
 
-void MapWizard::queryServerCapabilities()
-{
-    QUrl url( d->uiWidget.lineEditWmsUrl->text() );
-    QUrlQuery urlQuery;
-    urlQuery.addQueryItem( "service", "WMS" );
-    urlQuery.addQueryItem( "request", "GetCapabilities" );
-    url.setQuery(urlQuery);
-
-    QNetworkRequest request;
-    request.setUrl( url );
-    request.setAttribute(QNetworkRequest::FollowRedirectsAttribute, true);
-
-    mDebug() << "for url" << url;
-    d->xmlAccessManager.get( request );
-}
-
-void MapWizard::parseServerCapabilities( QNetworkReply* reply )
+void MapWizard::processCapabilitiesResults()
 {
     button( MapWizard::NextButton )->setEnabled( true );
 
-    mDebug() << "received reply from" << reply->url();
-    QString result( reply->readAll() );
-
-    QDomDocument xml;
-    if( !xml.setContent( result ) )
+    WmsCapabilities capabilities = d->owsManager.wmsCapabilities();
+    if (capabilities.capabilitiesStatus() == WmsCapabilitiesReplyUnreadable)
     {
         QMessageBox::critical( this, tr( "Error while parsing" ), tr( "Wizard cannot parse server's response" ) );
         return;
     }
-
-    if( xml.documentElement().firstChildElement().tagName().isNull() )
+    if(capabilities.capabilitiesStatus() == WmsCapabilitiesNoWmsServer)
     {
         QMessageBox::critical( this, tr( "Error while parsing" ), tr( "Server is not a Web Map Server." ) );
         return;
+    }    
+    d->uiWidget.labelWmsTitle->setText(QString("<b>%1</b>").arg(d->owsManager.wmsCapabilities().title() ) );
+    d->uiWidget.labelWmsTitle->setToolTip(QString("<small>%1</small>").arg(d->owsManager.wmsCapabilities().abstract() ) );
+    d->uiWidget.listWidgetWmsMaps->clear();
+    for (auto layer : capabilities.layers()) {
+        QListWidgetItem * item = new QListWidgetItem(d->owsManager.wmsCapabilities().title(layer));
+        item->setData(layerIdRole, layer);
+        d->uiWidget.listWidgetWmsMaps->addItem(item);
+    }
+    // default to the first layer
+    d->uiWidget.listWidgetWmsMaps->setCurrentRow(0);
+
+    d->uiWidget.comboBoxWmsFormat->clear();
+    d->uiWidget.comboBoxWmsFormat->addItems(capabilities.formats());
+
+    // default to png or jpeg
+    d->uiWidget.comboBoxWmsFormat->setCurrentText("png");
+    if (d->uiWidget.comboBoxWmsFormat->currentText() != "png") {
+        d->uiWidget.comboBoxWmsFormat->setCurrentText("jpeg");
     }
 
-    QDomElement firstLayer = xml.documentElement().firstChildElement( "Capability" ).firstChildElement( "Layer" );
-    QDomElement service = xml.documentElement().firstChildElement( "Service" );
-    QDomNodeList layers = firstLayer.elementsByTagName( "Layer" );
+    processSelectedLayerInformation();
 
-    d->wmsVersion = xml.documentElement().attribute("version");
-    d->refSystem = d->wmsVersion == "1.1.1" ? "SRS" : "CRS";
+    d->m_serverCapabilitiesValid = true;
 
+    next();
+}
+
+void MapWizard::processSelectedLayerInformation()
+{
+    QString selected = d->uiWidget.listWidgetWmsMaps->currentItem()->data(layerIdRole).toString();
+    WmsCapabilities capabilities = d->owsManager.wmsCapabilities();
     d->uiWidget.comboBoxWmsMaps->clear();
-
-    QDomNodeList srsList = firstLayer.elementsByTagName(d->refSystem);
-    for ( int s = 0; s < srsList.size(); ++s ) {
-        if (srsList.at(s).parentNode() == firstLayer && srsList.at(s).toElement().text().toLower() == "epsg:3857") {
-            d->uiWidget.comboBoxWmsMaps->insertItem(0, tr("Web Mercator (epsg:3857)"));
-        }
-        else if (srsList.at(s).parentNode() == firstLayer && srsList.at(s).toElement().text().toLower() == "epsg:4326") {
-            d->uiWidget.comboBoxWmsMaps->insertItem(1, tr("Equirectangular (epsg:4326)"));
-        }
+    QMap<QString, QString> epsgToText;
+    epsgToText["epsg:3857"] = tr("Web Mercator (epsg:3857)");
+    epsgToText["epsg:4326"] = tr("Equirectangular (epsg:4326)");
+    QStringList projectionTextList;
+    for (auto projection : capabilities.projections(selected)) {
+        projectionTextList << epsgToText[projection];
     }
-    d->uiWidget.comboBoxWmsMaps->setCurrentIndex(0);
+    d->uiWidget.comboBoxWmsMaps->addItems(projectionTextList);
 
-    QDomNodeList previewBoundaries = firstLayer.elementsByTagName("BoundingBox");
-    for ( int b = 0; b < previewBoundaries.size(); ++b ) {
-        if (previewBoundaries.at(b).parentNode() == firstLayer) {
-            QDomElement bboxElement = previewBoundaries.at(b).toElement();
-            if ( bboxElement.attribute(d->refSystem).toLower() == "epsg:4326"
-                 || bboxElement.attribute(d->refSystem).toLower() == "epsg:3857") {
-                double west = bboxElement.attribute("minx").toDouble();
-                double south = bboxElement.attribute("miny").toDouble();
-                double east = bboxElement.attribute("maxx").toDouble();
-                double north = bboxElement.attribute("maxy").toDouble();
-                d->wmsPreviewBoundingBox[bboxElement.attribute(d->refSystem).toLower()] =
-                QString("%1,%2,%3,%4")
-                .arg(QString::number(west, 'f', 12),
-                     QString::number(south, 'f', 12),
-                     QString::number(east, 'f', 12),
-                     QString::number(north, 'f', 12));
-            }
-        }
-    }
+    // default to Web Mercator
+    d->uiWidget.comboBoxWmsMaps->setCurrentText(tr("Web Mercator (epsg:3857)"));
+
     bool projectionSelectionVisible = d->uiWidget.comboBoxWmsMaps->count() > 0;
     d->uiWidget.comboBoxWmsMaps->setVisible(projectionSelectionVisible);
     d->uiWidget.projectionWmsLabel->setVisible(projectionSelectionVisible);
     d->uiWidget.comboBoxWmsMaps->setEnabled(d->uiWidget.comboBoxWmsMaps->count() > 1);
 
-    d->uiWidget.listWidgetWmsMaps->clear();
-    d->wmsFetchedMaps.clear();
-    d->wmsFetchedMapsMetaInfo.clear();
+    d->uiWidget.lineEditTitle->setText( d->owsManager.wmsCapabilities().title(selected) );
+    d->uiWidget.lineEditTheme->setText( selected );
+    QString description;
+    description += d->owsManager.wmsCapabilities().abstract(selected);
+    description += QString("<br><br><i>Contact:</i> %1").arg( d->owsManager.wmsCapabilities().contactInformation());
+    description += QString("<br><br><i>Fees:</i> %1").arg( d->owsManager.wmsCapabilities().fees());
+    d->uiWidget.textEditDesc->setText(description);
+}
 
-    for( int i = 0; i < layers.size(); ++i )
-    {
-        QString theme = layers.at( i ).firstChildElement( "Name" ).text();
-        QString title = layers.at( i ).firstChildElement( "Title" ).text();
-        QString abstract = layers.at( i ).firstChildElement( "Abstract" ).text();
-        QString contactEmail = service.firstChildElement( "ContactInformation").firstChildElement("ContactElectronicMailAddress" ).text();
-        QString fees = service.firstChildElement( "Fees" ).text();
-        QDomElement legendUrl = layers.at( i ).firstChildElement( "Style" ).firstChildElement( "LegendURL" );
-        d->wmsFetchedMaps[ theme ] = title;
-        d->wmsFetchedMapsMetaInfo[ theme ] = QStringList() << title << abstract << contactEmail << fees;
+void MapWizard::processImageResults()
+{
+    QString imageType;
+    if (d->owsManager.imageRequestResult().resultType() == PreviewImage) {
+        d->m_previewImageValid = true;
+        qDebug() << true;
+        imageType = tr("Preview Image");
+    }
+    if (d->owsManager.imageRequestResult().resultType() == LevelZeroTile) {
+        d->m_levelZeroTileValid = true;
+        imageType = tr("Base Tile");
+    }
 
-        d->wmsLegends.clear();
-        if( legendUrl.isNull() ) {
-            d->wmsLegends.append( QString() );
-        } else {
-            d->wmsLegends.append( legendUrl.firstChildElement( "OnlineResource" ).attribute( "xlink:href" ) );
+    if (d->owsManager.imageRequestResult().imageStatus() == WmsImageFailed ) {
+        QMessageBox::information( this,
+                                    tr( "%1" ).arg(imageType),
+                                    tr( "The %1 could not be downloaded." ).arg(imageType) );
+    }
+    else if  (d->owsManager.imageRequestResult().imageStatus() == WmsImageFailedServerMessage ) {
+        QMessageBox::information( this,
+                                    tr( "%1" ).arg(imageType),
+                                    tr( "The %1 could not be downloaded successfully. The server replied:\n\n%2" ).arg( imageType, QString( d->owsManager.resultRaw() ) ) );
+    }
+    else {
+        if (d->owsManager.imageRequestResult().resultType() == PreviewImage) {
+            d->previewImage = d->owsManager.resultImage().scaled( 100, 100, Qt::IgnoreAspectRatio, Qt::SmoothTransformation );;
+            QPixmap previewPixmap = QPixmap::fromImage( d->previewImage );
+            d->uiWidget.labelThumbnail->setPixmap( previewPixmap );
+            d->uiWidget.labelThumbnail->resize( QSize(100, 100) );
+            d->uiWidget.labelPreview->setPixmap( previewPixmap );
+            d->uiWidget.labelPreview->resize( QSize(100, 100) );
+        }
+        if (d->owsManager.imageRequestResult().resultType() == LevelZeroTile) {
+            d->levelZeroTile = d->owsManager.resultImage();
+            d->levelZero = d->owsManager.resultRaw();
         }
     }
-    
-    d->uiWidget.listWidgetWmsMaps->addItems( d->wmsFetchedMaps.values() );
-    if (!d->wmsFetchedMaps.isEmpty()) {
-        d->uiWidget.listWidgetWmsMaps->setCurrentRow(0);
-    }
-
-    QDomElement format = xml.documentElement().firstChildElement( "Capability" ).firstChildElement( "Request" )
-                         .firstChildElement( "GetMap" ).firstChildElement( "Format" );
-
-    d->uiWidget.comboBoxWmsFormat->clear();
-    QDomNodeList formats = xml.documentElement().firstChildElement( "Capability" ).firstChildElement( "Request" )
-            .firstChildElement( "GetMap" ).elementsByTagName("Format");
-
-    for ( int f = 0; f < formats.size(); ++f ) {
-        QString format = formats.at(f).toElement().text();
-        format = format.right(format.length() - format.indexOf(QLatin1Char('/')) - 1).toLower();
-        if (format == "jpeg" || format.contains("png")
-            || format.contains("tif") || format.contains("gif")
-            || format.contains("bmp") || format.contains("jpg") ) {
-            d->uiWidget.comboBoxWmsFormat->addItem(format);
-        }
-    }
-
-    int preferredIndex = d->uiWidget.comboBoxWmsFormat->findText("jpeg");
-    d->uiWidget.comboBoxWmsFormat->setCurrentIndex(preferredIndex);
-
-    if( !d->wmsFetchedMaps.isEmpty() && !d->wmsServerList.contains( d->uiWidget.lineEditWmsUrl->text() ) ) {
-        d->wmsServerList.append( d->uiWidget.lineEditWmsUrl->text() );
-        setWmsServers( d->wmsServerList );
-    }
-
-    d->m_serverCapabilitiesValid = true;
-
+    button( MapWizard::NextButton )->setEnabled( true );
     next();
-
-    if (d->wmsFetchedMaps.isEmpty()) {
-        button( MapWizard::NextButton )->setEnabled( false );
-    }
-
 }
 
 void MapWizard::createWmsLegend( QNetworkReply* reply )
@@ -426,27 +401,6 @@ void MapWizard::setLineEditWms(const QString &text)
     }
 }
 
-void MapWizard::autoFillDetails()
-{
-    QString selected = d->uiWidget.listWidgetWmsMaps->currentItem()->text();
-    d->uiWidget.lineEditTitle->setText( selected );
-    d->uiWidget.lineEditTheme->setText( d->wmsFetchedMaps.key( selected ) );
-    QString title = d->wmsFetchedMaps.key( selected );
-    QStringList metaInfo = d->wmsFetchedMapsMetaInfo[title];
-    QString description;
-    if (metaInfo.length() >= 2 ) {
-        description += metaInfo.at(1);
-    }
-    if (metaInfo.length() >= 3 && !(metaInfo.at(2).isEmpty()) ) {
-        description += QString("<br><br><i>Contact:</i> %1").arg( metaInfo.at(2));
-    }
-    if (metaInfo.length() >= 4 && !metaInfo.at(3).isEmpty() ) {
-        description += QString("<br><br><i>Fee:</i> %1").arg( metaInfo.at(3));
-    }
-
-    d->uiWidget.textEditDesc->setText(description);
-}
-
 bool MapWizard::createFiles( const GeoSceneDocument* document )
 {
     // Create directories
@@ -471,7 +425,7 @@ bool MapWizard::createFiles( const GeoSceneDocument* document )
             maps.mkdir( QString( "%1/0/0" ).arg( document->head()->theme() ) );
             const QString path = QString( "%1/%2/0/0/0.%3" ).arg( maps.absolutePath(),
                                                                   document->head()->theme(),
-                                                                  d->format );
+                                                                  d->owsManager.resultFormat() );
             QFile baseTile( path );
             baseTile.open( QFile::WriteOnly );
             baseTile.write( d->levelZero );
@@ -552,151 +506,6 @@ void MapWizard::downloadLegend( const QString& url )
     QUrl downloadUrl( url );
     QNetworkRequest request( downloadUrl );
     d->legendAccessManager.get( request );
-}
-
-void MapWizard::downloadLevelZero(const bool previewModeEnabled)
-{
-    if( d->mapProviderType == MapWizardPrivate::WmsMap )
-    {
-        QString selected = d->uiWidget.listWidgetWmsMaps->currentItem()->text();
-        
-        QUrl finalDownloadUrl( d->uiWidget.lineEditWmsUrl->text() );
-        QUrlQuery downloadUrl;
-        downloadUrl.addQueryItem( "request", "GetMap" );
-        downloadUrl.addQueryItem( "version", "1.1.1" );
-        downloadUrl.addQueryItem( "layers", d->wmsFetchedMaps.key( selected ) );
-
-        if (d->uiWidget.comboBoxWmsMaps->currentText() == tr("Equirectangular (epsg:4326))")) {
-            downloadUrl.addQueryItem( "srs", "EPSG:4326" );
-        }
-        else {
-            downloadUrl.addQueryItem( "srs", "EPSG:3857" );
-        }
-        d->format = d->uiWidget.comboBoxWmsFormat->currentText();
-        if (d->format == QLatin1String("jpeg")) {
-            d->format = "jpg";
-        }
-
-        downloadUrl.addQueryItem( "width", "256" );
-        downloadUrl.addQueryItem( "height", "256" );
-
-        if (d->uiWidget.comboBoxWmsMaps->currentText() == tr("Web Mercator (epsg:3857)")) {
-            // Oddly enough epsg:3857 is measured in meters - so let's convert the bbox accordingly
-
-            if (!previewModeEnabled || d->wmsPreviewBoundingBox["epsg:3857"].isEmpty()) {
-                downloadUrl.addQueryItem( "bbox", "-20037508.34,-20048966.1,20037508.34,20048966.1" );
-            }
-            else {
-                downloadUrl.addQueryItem( "bbox", d->wmsPreviewBoundingBox["epsg:3857"]);
-            }
-        }
-        else {
-            if (!previewModeEnabled || d->wmsPreviewBoundingBox["epsg:4326"].isEmpty()) {
-                downloadUrl.addQueryItem( "bbox", "-180,-90,180,90" );
-            }
-            else {
-                downloadUrl.addQueryItem( "bbox", d->wmsPreviewBoundingBox["epsg:4326"]);
-            }
-        }
-
-        downloadUrl.addQueryItem( "format", QString("image/%1").arg(d->uiWidget.comboBoxWmsFormat->currentText()) );
-        downloadUrl.addQueryItem( "styles", "" );
-
-        finalDownloadUrl.setQuery( downloadUrl );
-        mDebug() << "requesting WMS" << finalDownloadUrl;
-
-        QNetworkRequest request( finalDownloadUrl );
-
-        d->levelZeroAccessManager.get( request );
-    }
-    
-    else if( d->mapProviderType == MapWizardPrivate::StaticUrlMap )
-    {
-        QString server = d->uiWidget.comboBoxStaticUrlServer->currentText();
-        QUrl downloadUrl;
-
-        server.replace(server.indexOf(QLatin1String("{x}")), 3,  QString::number(0));
-        server.replace(server.indexOf(QLatin1String("{y}")), 3,  QString::number(0));
-        server.replace(server.indexOf(QLatin1String("{zoomLevel}")), 11,  QString::number(0));
-        downloadUrl.setUrl( server );
-
-        QNetworkRequest request( downloadUrl );
-        mDebug() << "requesting static map" << downloadUrl;
-        d->levelZeroAccessManager.get( request );
-    }
-}
-
-void MapWizard::createLevelZero( QNetworkReply* reply )
-{
-    QString request = reply->request().url().toString();
-    bool previewMode = false;
-
-    if ( d->mapProviderType == MapWizardPrivate::WmsMap ) {
-        previewMode =  (!d->wmsPreviewBoundingBox["epsg:4326"].isEmpty() && request.contains(d->wmsPreviewBoundingBox["epsg:4326"]))
-                    || (!d->wmsPreviewBoundingBox["epsg:3857"].isEmpty() && request.contains(d->wmsPreviewBoundingBox["epsg:3857"]));
-
-    }
-
-    QImage testImage;
-
-    if (previewMode) {
-        d->preview = reply->readAll();
-        testImage = QImage::fromData( d->preview );
-    }
-    else {
-        d->levelZero = reply->readAll();
-        testImage = QImage::fromData( d->levelZero );
-    }
-
-    if ( !previewMode && d->levelZero.isNull() ) {
-        QMessageBox::information( this,
-                                    tr( "Base Tile" ),
-                                    tr( "The base tile could not be downloaded." ) );
-        button( MapWizard::NextButton )->setEnabled( true );
-        return;
-    }
-    if ( previewMode && d->preview.isNull() ) {
-        QMessageBox::information( this,
-                                    tr( "Preview Image" ),
-                                    tr( "The preview image could not be downloaded." ) );
-        button( MapWizard::NextButton )->setEnabled( true );
-        return;
-    }
-
-    if ( testImage.isNull() ) {
-        if (previewMode) {
-            QMessageBox::information( this,
-                                        tr( "Preview Image" ),
-                                        tr( "The preview image could not be downloaded successfully. The server replied:\n\n%1" ).arg( QString( d->preview ) ) );
-            d->preview.clear();
-        }
-        else {
-            QMessageBox::information( this,
-                                        tr( "Base Tile" ),
-                                        tr( "The base tile could not be downloaded successfully. The server replied:\n\n%1" ).arg( QString( d->levelZero ) ) );
-            d->levelZero.clear();
-        }
-        button( MapWizard::NextButton )->setEnabled( true );
-        return;
-    }
-
-    if (!previewMode) {
-        QBuffer testBuffer( &d->levelZero );
-        d->format = QImageReader( &testBuffer ).format();
-    }
-    else {
-        QBuffer testBuffer( &d->preview );
-        d->format = QImageReader( &testBuffer ).format();
-    }
-    if ( d->mapProviderType == MapWizardPrivate::StaticUrlMap ) {
-        const QString url = d->uiWidget.comboBoxStaticUrlServer->currentText();
-        d->staticUrlServerList.removeAll( url );
-        d->staticUrlServerList.prepend( url );
-        d->preview = d->levelZero;
-    }
-
-
-    next();
 }
 
 void MapWizard::createLegend()
@@ -824,14 +633,38 @@ void MapWizard::deleteArchive( const QString& mapId )
 bool MapWizard::validateCurrentPage()
 {
     if ( currentId() == WmsSelectionPage && !d->m_serverCapabilitiesValid ) {
-        queryServerCapabilities();
+        d->owsManager.queryWmsCapabilities(QUrl(d->uiWidget.lineEditWmsUrl->text()));
         button( MapWizard::NextButton )->setEnabled( false );
         return false;
     }
 
-    if ( (currentId() == LayerSelectionPage && d->preview.isNull())
-      || (currentId() == XYZUrlPage && d->levelZero.isNull() ) ){
-        downloadLevelZero(true);
+    if ( (currentId() == LayerSelectionPage && !d->m_previewImageValid)
+      || (currentId() == XYZUrlPage && !d->m_previewImageValid ) ){
+        if( d->mapProviderType == MapWizardPrivate::WmsMap )
+        {
+            QString selected = d->uiWidget.listWidgetWmsMaps->currentItem()->data(layerIdRole).toString();
+            QString projection = d->uiWidget.comboBoxWmsMaps->currentText() == tr("Equirectangular (epsg:4326)")
+                    ? "epsg:4326" : "epsg:3857";
+            QString format = d->uiWidget.comboBoxWmsFormat->currentText();
+            if (format == QLatin1String("jpeg")) {
+                format = "jpg";
+            }
+            QString style = d->owsManager.wmsCapabilities().style(selected);
+            d->owsManager.queryWmsPreviewImage(QUrl(d->uiWidget.lineEditWmsUrl->text()),
+                        selected, projection, format, style);
+        }
+        else if( d->mapProviderType == MapWizardPrivate::StaticUrlMap )
+        {
+            QString urlString = d->uiWidget.comboBoxStaticUrlServer->currentText();
+            d->owsManager.queryXYZPreviewImage(urlString);
+            d->staticUrlServerList.removeAll( urlString );
+            d->staticUrlServerList.prepend( urlString );
+            // Reset the Theme Description page
+            d->uiWidget.lineEditTitle->clear();
+            d->uiWidget.lineEditTheme->clear();
+            d->uiWidget.textEditDesc->clear();
+            d->uiWidget.labelPreview->clear();
+        }
         button( MapWizard::NextButton )->setEnabled( false );
         return false;
     }
@@ -863,6 +696,17 @@ bool MapWizard::validateCurrentPage()
             d->uiWidget.lineEditSource->selectAll();
             return false;
         }
+        // Reset the Theme Description page
+        d->uiWidget.lineEditTitle->clear();
+        d->uiWidget.lineEditTheme->clear();
+        d->uiWidget.textEditDesc->clear();
+        d->uiWidget.labelPreview->clear();
+        d->previewImage = QImage( d->sourceImage ).scaled( 100, 100, Qt::IgnoreAspectRatio, Qt::SmoothTransformation );;
+        QPixmap previewPixmap = QPixmap::fromImage( d->previewImage );
+        d->uiWidget.labelPreview->setPixmap( previewPixmap );
+        d->uiWidget.labelPreview->resize( QSize(100, 100) );
+        d->uiWidget.labelThumbnail->setPixmap( previewPixmap );
+        d->uiWidget.labelThumbnail->resize( QSize(100, 100) );
     }
 
     if ( currentId() == ThemeInfoPage ) {
@@ -895,9 +739,26 @@ bool MapWizard::validateCurrentPage()
             return false;
         }
     }
-    if (currentId() == LegendPage && d->levelZero.isNull()
+    if (currentId() == LegendPage && !d->m_levelZeroTileValid
         && d->mapProviderType != MapWizardPrivate::StaticImageMap ) {
-        downloadLevelZero(false);
+        if( d->mapProviderType == MapWizardPrivate::WmsMap )
+        {
+            QString selected = d->uiWidget.listWidgetWmsMaps->currentItem()->data(layerIdRole).toString();
+            QString projection = d->uiWidget.comboBoxWmsMaps->currentText() == tr("Equirectangular (epsg:4326)")
+                    ? "epsg:4326" : "epsg:3857";
+            QString format = d->uiWidget.comboBoxWmsFormat->currentText();
+            if (format == QLatin1String("jpeg")) {
+                format = "jpg";
+            }
+            QString style = d->owsManager.wmsCapabilities().style(selected);
+            d->owsManager.queryWmsLevelZeroTile(QUrl(d->uiWidget.lineEditWmsUrl->text()),
+                        selected, projection, format, style);
+        }
+        else if( d->mapProviderType == MapWizardPrivate::StaticUrlMap )
+        {
+            QString urlString = d->uiWidget.comboBoxStaticUrlServer->currentText();
+            d->owsManager.queryXYZLevelZeroTile(urlString);
+        }
         button( MapWizard::NextButton )->setEnabled( false );
         return false;
     }
@@ -942,7 +803,6 @@ int MapWizard::nextId() const
 
     default:
         break;
-
     }
     
     return currentId() + 1;
@@ -983,11 +843,13 @@ GeoSceneDocument* MapWizard::createDocument()
     texture->setSourceDir(QLatin1String("earth/") + document->head()->theme());
     if( d->mapProviderType == MapWizardPrivate::WmsMap )
     {
-        texture->setFileFormat( d->format );
-        QString layer = d->wmsFetchedMaps.key( d->uiWidget.listWidgetWmsMaps->currentItem()->text() );
+        texture->setFileFormat( d->owsManager.resultFormat() );
+        QString layer = d->uiWidget.listWidgetWmsMaps->currentItem()->data(layerIdRole).toString();
+        QString style = d->owsManager.wmsCapabilities().style(layer);
         QUrl downloadUrl = QUrl( d->uiWidget.lineEditWmsUrl->text() );
         QUrlQuery urlQuery;
         urlQuery.addQueryItem( "layers", layer );
+        urlQuery.addQueryItem( "style", style );
         downloadUrl.setQuery( urlQuery );
         texture->addDownloadUrl( downloadUrl );
         texture->setMaximumTileLevel( 20 );
@@ -1263,9 +1125,8 @@ void MapWizard::accept()
     }
     else if ( d->mapProviderType == MapWizardPrivate::WmsMap )
     {
-        Q_ASSERT( !d->wmsFetchedMaps.isEmpty() );
+        Q_ASSERT( !d->owsManager.wmsCapabilities().layers().isEmpty() );
         Q_ASSERT( !d->levelZero.isNull() );
-        Q_ASSERT( !QImage::fromData( d->levelZero ).isNull() );
     }
     else if ( d->mapProviderType == MapWizardPrivate::StaticUrlMap )
     {
@@ -1281,9 +1142,9 @@ void MapWizard::accept()
     {
         if( d->mapProviderType == MapWizardPrivate::WmsMap )
         {
-            if( d->wmsLegends.isEmpty() && d->wmsLegends.at( d->uiWidget.listWidgetWmsMaps->currentRow() ).isEmpty() )
+            if( !d->owsManager.wmsCapabilities().legendUrl(d->uiWidget.listWidgetWmsMaps->currentItem()->data(layerIdRole).toString()).isEmpty() )
             {
-                downloadLegend( d->wmsLegends.at( d->uiWidget.listWidgetWmsMaps->currentRow() ) );
+                downloadLegend( d->owsManager.wmsCapabilities().legendUrl(d->uiWidget.listWidgetWmsMaps->currentItem()->data(layerIdRole).toString() ) );
             }
         } else if( d->mapProviderType == MapWizardPrivate::StaticImageMap || d->mapProviderType == MapWizardPrivate::StaticUrlMap ) {
             createLegend();
@@ -1313,9 +1174,9 @@ void MapWizard::showPreview()
     {
         if( d->mapProviderType == MapWizardPrivate::WmsMap )
         {
-            if( d->wmsLegends.isEmpty() && d->wmsLegends.at( d->uiWidget.listWidgetWmsMaps->currentRow() ).isEmpty() )
+            if( !d->owsManager.wmsCapabilities().legendUrl(d->uiWidget.listWidgetWmsMaps->currentItem()->data(layerIdRole).toString()).isEmpty() )
             {
-                downloadLegend( d->wmsLegends.at( d->uiWidget.listWidgetWmsMaps->currentRow() ) );
+                downloadLegend( d->owsManager.wmsCapabilities().legendUrl(d->uiWidget.listWidgetWmsMaps->currentItem()->data(layerIdRole).toString() ) );
             }
         } else if( d->mapProviderType == MapWizardPrivate::StaticImageMap || d->mapProviderType == MapWizardPrivate::StaticUrlMap ) {
             createLegend();

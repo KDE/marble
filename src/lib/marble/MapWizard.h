@@ -49,8 +49,10 @@ public:
 
 public Q_SLOTS:
     // WMS protocol
-    void queryServerCapabilities();
-    void parseServerCapabilities( QNetworkReply* reply );
+    void processCapabilitiesResults();
+    void processSelectedLayerInformation();
+    void processImageResults();
+
     void createWmsLegend( QNetworkReply* reply );
 
     // Open file dialogs
@@ -60,9 +62,6 @@ public Q_SLOTS:
 
     // Other
     void setLineEditWms(const QString& text);
-    void autoFillDetails();
-    void downloadLevelZero(const bool previewModeEnabled = false);
-    void createLevelZero( QNetworkReply* reply = nullptr );
     void showPreview();
 
 private:
