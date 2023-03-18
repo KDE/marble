@@ -64,9 +64,6 @@ public:
     void setReferenceSystemType(const QString& refSystem);
     QString referenceSystemType() const; // SRS (1.1.1) or CRS (1.3.0)
 
-    void setCoordinateSystems(const QMap<QString, QString>& coordinateSystems);
-    QMap<QString, QString> coordinateSystems() const;
-
     void setWmsLayerMetaInfo(const QMap<QString, QStringList>& wmsLayerMetaInfo);
     QMap<QString, QStringList> wmsLayerMetaInfo() const;
 
@@ -95,7 +92,8 @@ public:
 enum ImageResultType {
     GenericImage,
     LevelZeroTile,
-    PreviewImage
+    PreviewImage,
+    LegendImage
 };
 
 class ImageRequestResult {
@@ -139,6 +137,7 @@ public Q_SLOTS:
                             const QString &format, const QString &styles = QString());
     void queryWmsPreviewImage(const QUrl& url, const QString &layer, const QString &projection,
                            const QString &format, const QString &styles = QString());
+    void queryWmsLegendImage(const QUrl& url);
 
     void queryXYZPreviewImage(const QString& urlString);
     void queryXYZLevelZeroTile(const QString& urlString);

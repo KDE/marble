@@ -148,6 +148,7 @@ QStringList WmsCapabilities::layers() const
 QStringList WmsCapabilities::projections(const QString &layer)
 {
     QStringList result = m_wmsLayerCoordinateSystems.value(layer).keys() << m_coordinateSystems.keys();
+
     result.removeDuplicates();
 
     return result;
@@ -158,7 +159,7 @@ QString WmsCapabilities::boundingBox(const QString &layer, const QString &projec
     QString result;
     result = m_wmsLayerCoordinateSystems.value(layer).value(projection);
     if (result.isEmpty()) {
-        result = m_coordinateSystems.value(projection);
+        result = m_wmsLayerCoordinateSystems.value(0).value(projection);
     }
     return result;
 }
@@ -191,16 +192,6 @@ void WmsCapabilities::setReferenceSystemType(const QString &refSystem)
 QString WmsCapabilities::referenceSystemType() const
 {
     return m_referenceSystemType;
-}
-
-void WmsCapabilities::setCoordinateSystems(const QMap<QString, QString> &coordinateSystems)
-{
-    m_coordinateSystems = coordinateSystems;
-}
-
-QMap<QString, QString> WmsCapabilities::coordinateSystems() const
-{
-    return m_coordinateSystems;
 }
 
 void WmsCapabilities::setWmsLayerMetaInfo(const QMap<QString, QStringList> &wmsLayerMetaInfo)
@@ -265,13 +256,15 @@ void OwsServiceManager::queryWmsMap(const QUrl &url, const QString &layer, const
     m_imageRequestResult.setResultRaw("");
     m_imageRequestResult.setResultFormat(QString());
 
+    QString initialQuery = url.query();
+
     QUrl finalDownloadUrl( url );
     QUrlQuery downloadUrl;
     downloadUrl.addQueryItem( "request", "GetMap" );
-    downloadUrl.addQueryItem( "version", "1.1.1" );
+    downloadUrl.addQueryItem( "version", wmsCapabilities().version() );
     downloadUrl.addQueryItem( "layers", layer );
 
-    downloadUrl.addQueryItem( "srs", projection );
+    downloadUrl.addQueryItem( wmsCapabilities().referenceSystemType(), projection );
 
 
     downloadUrl.addQueryItem( "width", "256" );
@@ -280,10 +273,10 @@ void OwsServiceManager::queryWmsMap(const QUrl &url, const QString &layer, const
     QString boundingBox = bbox;
     if (boundingBox.isEmpty()) {
         if (projection == "epsg:3857") {
-            boundingBox = "-20037508.34,-20048966.1,20037508.34,20048966.1";
+            boundingBox = "-20048966.1,-20037508.34,20048966.1,20037508.34";
         }
         else if (projection == "epsg:4326") {
-            boundingBox = "-180,-90,180,90";
+            boundingBox = "-90,-180,90,180";
         }
     }
     downloadUrl.addQueryItem( "bbox", boundingBox );
@@ -292,7 +285,9 @@ void OwsServiceManager::queryWmsMap(const QUrl &url, const QString &layer, const
     downloadUrl.addQueryItem( "styles", style );
     m_imageRequestResult.setResultFormat((format == QLatin1String("jpeg")) ? "jpg" : format); // Is this needed here?
 
-    finalDownloadUrl.setQuery( downloadUrl );
+    QString combinedQuery = initialQuery + downloadUrl.query();
+
+    finalDownloadUrl.setQuery( combinedQuery );
     mDebug() << "requesting WMS" << finalDownloadUrl;
 
     QNetworkRequest request( finalDownloadUrl );
@@ -305,10 +300,10 @@ void OwsServiceManager::queryWmsLevelZeroTile(const QUrl& url, const QString &la
 {
     QString bbox;
     if (projection == "epsg:3857") {
-        bbox = "-20037508.34,-20048966.1,20037508.34,20048966.1";
+        bbox = "-20048966.1,-20037508.34,20048966.1,20037508.34";
     }
     else if (projection == "epsg:4326") {
-        bbox = "-180,-90,180,90";
+        bbox = "-90,-180,90,180";
     }
 
     m_imageRequestResult.setResultType(LevelZeroTile);
@@ -324,6 +319,21 @@ void OwsServiceManager::queryWmsPreviewImage(const QUrl& url, const QString &lay
     m_imageRequestResult.setResultType(PreviewImage);
 
     queryWmsMap(url, layer, projection, bbox, format, style);
+}
+
+void OwsServiceManager::queryWmsLegendImage(const QUrl &url)
+{
+    m_imageRequestResult.setResultImage(QImage());
+    m_imageRequestResult.setImageStatus(WmsImageNone);
+    m_imageRequestResult.setResultRaw("");
+    m_imageRequestResult.setResultFormat(QString());
+    m_imageRequestResult.setResultType(LegendImage);
+
+    mDebug() << "requesting legend" << url;
+
+    QNetworkRequest request( url );
+
+    m_imageAccessManager.get( request );
 }
 
 void OwsServiceManager::queryXYZPreviewImage(const QString &urlString)
@@ -388,7 +398,6 @@ void OwsServiceManager::parseWmsCapabilities(QNetworkReply *reply)
     QString result( reply->readAll() );
 
     m_capabilities = WmsCapabilities(); // clear()
-
     QDomDocument xml;
     if( !xml.setContent( result ) )
     {
@@ -397,7 +406,8 @@ void OwsServiceManager::parseWmsCapabilities(QNetworkReply *reply)
         return;
     }
 
-    if( xml.documentElement().firstChildElement().tagName().isNull() )
+    if( xml.documentElement().firstChildElement().tagName().isNull()
+        || xml.documentElement().firstChildElement( "Capability" ).isNull() )
     {
         m_capabilities.setCapabilitiesStatus(WmsCapabilitiesNoWmsServer); // Server is not a Web Map Server.
         emit wmsCapabilitiesReady();
@@ -405,11 +415,12 @@ void OwsServiceManager::parseWmsCapabilities(QNetworkReply *reply)
     }
 
     m_capabilities.setVersion( xml.documentElement().attribute("version") );
-    m_capabilities.setReferenceSystemType( m_capabilities.version() == "1.1.1" ? "SRS" : "CRS" );
+    m_capabilities.setReferenceSystemType( (m_capabilities.version() == "1.1.0" || m_capabilities.version() == "1.1.1")  ? "SRS" : "CRS" );
 
     QDomElement globalLayer = xml.documentElement().firstChildElement( "Capability" ).firstChildElement( "Layer" );
     QDomElement service = xml.documentElement().firstChildElement( "Service" );
-    QDomNodeList layers = globalLayer.elementsByTagName( "Layer" );
+//    QDomNodeList layers = globalLayer.elementsByTagName( "Layer" );
+    QDomNodeList layers = xml.documentElement().firstChildElement( "Capability" ).elementsByTagName("Layer");
 
     m_capabilities.setTitle(service.firstChildElement( "Title" ).text());
     m_capabilities.setAbstract(service.firstChildElement( "Abstract" ).text() );
@@ -418,42 +429,6 @@ void OwsServiceManager::parseWmsCapabilities(QNetworkReply *reply)
     m_capabilities.setContactInformation(contactEmail);
     QString fees = service.firstChildElement( "Fees" ).text();
     m_capabilities.setFees(fees);
-
-    QDomNodeList srsList = globalLayer.elementsByTagName(m_capabilities.referenceSystemType());
-    QStringList projections;
-    QMap<QString, QString> coordinateSystems;
-    QDomNodeList previewBBoxList = globalLayer.elementsByTagName("BoundingBox");
-
-    // If there is no bbox (optional in 1.1.0) then collect the projections directly.
-    for (int s = 0; s < srsList.size(); ++s) {
-        if (srsList.at(s).parentNode() == globalLayer && srsList.at(s).toElement().text().toLower() == "epsg:3857") {
-            coordinateSystems["epsg:3857"] = QString();
-        }
-        else if (srsList.at(s).parentNode() == globalLayer && srsList.at(s).toElement().text().toLower() == "epsg:4326") {
-            coordinateSystems["epsg:4326"] = QString();
-        }
-    }
-    // Otherwise get projections and bbox right from the BoundingBox tags (mandatory in 1.3.0)
-    for ( int b = 0; b < previewBBoxList.size(); ++b ) {
-        if (previewBBoxList.at(b).parentNode() != globalLayer) continue;
-        QDomElement bboxElement = previewBBoxList.at(b).toElement();
-        QString bboxProjection = bboxElement.attribute(m_capabilities.referenceSystemType()).toLower();
-        if (bboxProjection != "epsg:3857" && bboxProjection != "epsg:4326") continue;
-
-        int precision = bboxProjection == "epsg:3857" ? 6 : 12;
-        double west = bboxElement.attribute("minx").toDouble();
-        double south = bboxElement.attribute("miny").toDouble();
-        double east = bboxElement.attribute("maxx").toDouble();
-        double north = bboxElement.attribute("maxy").toDouble();
-        QString bboxString = QString("%1,%2,%3,%4")
-        .arg(QString::number(west, 'f', precision),
-             QString::number(south, 'f', precision),
-             QString::number(east, 'f', precision),
-             QString::number(north, 'f', precision));
-        coordinateSystems[bboxProjection] = bboxString;
-    }
-
-    m_capabilities.setCoordinateSystems(coordinateSystems);
 
     QMap<QString, QStringList> wmsLayerMetaInfo;
 
@@ -466,36 +441,34 @@ void OwsServiceManager::parseWmsCapabilities(QNetworkReply *reply)
         QString legendUrl;
         if (!legendElement.isNull()) legendUrl = legendElement.firstChildElement( "OnlineResource" ).attribute( "xlink:href" );
         QString style = layers.at(i).firstChildElement("Style").firstChildElement( "Name" ).text();
+        if (style.isEmpty()) style = "default";
 
         wmsLayerMetaInfo[ name ] << title << abstract << legendUrl << style;
     }
 
-
     m_capabilities.setWmsLayerMetaInfo(wmsLayerMetaInfo);
 
     QMap<QString, QMap<QString, QString>> wmsLayerCoordinateSystems;
-
     for( int i = 0; i < layers.size(); ++i )
     {
-        QString layerName = layers.at(i).toElement().text();
+        QString layerName = layers.at(i).firstChildElement( "Name" ).text();
         QDomNodeList projectionList = layers.at(i).toElement().elementsByTagName(m_capabilities.referenceSystemType());
         QDomNodeList layerPreviewBBox = layers.at(i).toElement().elementsByTagName("BoundingBox");
 
-        // If there is no bbox (optional in 1.1.0) then collect the projections directly.
-        if (layerPreviewBBox.isEmpty()) {
-            for ( int s = 0; s < projectionList.size(); ++s ) {
-                QString projection = projectionList.at(s).toElement().text().toLower();
-                if (projection == "epsg:3857" || projection == "epsg:4326") {
-                    wmsLayerCoordinateSystems[layerName][projection] = QString();
-                }
+        for ( int s = 0; s < projectionList.size(); ++s ) {
+            QString projection = projectionList.at(s).toElement().text().toLower();
+            // SRS and CRS tags might contain a list of epsgs, so we need to use contains()
+            if (projection.contains("epsg:3857")) {
+                wmsLayerCoordinateSystems[layerName]["epsg:3857"] = QString();
+            }
+            if (projection.contains("epsg:4326")) {
+                wmsLayerCoordinateSystems[layerName]["epsg:4326"] = QString();
             }
         }
-        // Otherwise get projections and bbox right from the BoundingBox tags (mandatory in 1.3.0)
         for ( int b = 0; b < layerPreviewBBox.size(); ++b ) {
             QDomElement bboxElement = layerPreviewBBox.at(b).toElement();
             QString bboxProjection = bboxElement.attribute(m_capabilities.referenceSystemType()).toLower();
             if (bboxProjection != "epsg:3857" && bboxProjection != "epsg:4326") continue;
-
             int precision = bboxProjection == "epsg:3857" ? 6 : 12;
             double west = bboxElement.attribute("minx").toDouble();
             double south = bboxElement.attribute("miny").toDouble();
@@ -506,9 +479,11 @@ void OwsServiceManager::parseWmsCapabilities(QNetworkReply *reply)
                  QString::number(south, 'f', precision),
                  QString::number(east, 'f', precision),
                  QString::number(north, 'f', precision));
+//          TODO: convert bbox coordinates from UTM to 3857 (e.g. from epsg:25832/33)
             wmsLayerCoordinateSystems[layerName][bboxProjection] = bboxString;
         }
     }
+
 
     m_capabilities.setWmsLayerCoordinateSystems(wmsLayerCoordinateSystems);
 

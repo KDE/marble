@@ -53,7 +53,7 @@ public Q_SLOTS:
     void processSelectedLayerInformation();
     void processImageResults();
 
-    void createWmsLegend( QNetworkReply* reply );
+    void createWmsLegend();
 
     // Open file dialogs
     void querySourceImage();
@@ -62,7 +62,11 @@ public Q_SLOTS:
 
     // Other
     void setLineEditWms(const QString& text);
+    void setLayerButtonsVisible( bool visible );
+    void setSearchFieldVisible( bool visible );
     void showPreview();
+
+    void updateSearchFilter(const QString& text);
 
 private:
     Q_PRIVATE_SLOT( d, void pageEntered( int ) )

@@ -175,6 +175,29 @@ p, li { white-space: pre-wrap; }
       </property>
      </spacer>
     </item>
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout_2">
+      <item>
+       <widget class="QProgressBar" name="progressBarWmsCapabilities">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="maximum">
+         <number>0</number>
+        </property>
+        <property name="value">
+         <number>-1</number>
+        </property>
+        <property name="textVisible">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
    </layout>
   </widget>
   <widget class="QWizardPage" name="wizardPageWmsAvailableMaps">
@@ -187,52 +210,184 @@ p, li { white-space: pre-wrap; }
      </widget>
     </item>
     <item>
-     <widget class="QLabel" name="labelWmsMaps">
-      <property name="text">
-       <string>Available Layers:</string>
+     <widget class="QTabWidget" name="tabWidget">
+      <property name="currentIndex">
+       <number>0</number>
       </property>
-      <property name="alignment">
-       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
-      </property>
+      <widget class="QWidget" name="tabLayerSelection">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <attribute name="title">
+        <string>Layer Selection</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout_12">
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_6">
+          <property name="bottomMargin">
+           <number>6</number>
+          </property>
+          <item>
+           <widget class="QLabel" name="labelWmsMaps">
+            <property name="text">
+             <string>Available Layers:</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer name="horizontalSpacer_4">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QLabel" name="labelWmsSearch">
+            <property name="text">
+             <string>Search:</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="lineEditWmsSearch">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <widget class="QListView" name="listViewWmsLayers"/>
+        </item>
+        <item>
+         <layout class="QGridLayout" name="gridLayoutWmsButtons">
+          <item row="0" column="0" colspan="2">
+           <widget class="QCheckBox" name="checkBoxWmsMultipleSelections">
+            <property name="text">
+             <string>Multiple Selections</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="2" rowspan="2">
+           <spacer name="horizontalSpacer_3">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeType">
+             <enum>QSizePolicy::Fixed</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>12</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item row="0" column="3">
+           <widget class="QLabel" name="labelWmsBackdrop">
+            <property name="text">
+             <string>Backdrop:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="4">
+           <widget class="QComboBox" name="comboBoxWmsBackdrop"/>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="labelWmsTileProjection">
+            <property name="text">
+             <string>Tile Projection:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QComboBox" name="comboBoxWmsMaps">
+            <property name="toolTip">
+             <string>Indicates the projection in which the tiles are rendered.</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="3">
+           <widget class="QLabel" name="labelWmsTileFormat">
+            <property name="text">
+             <string>Tile Format:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="4">
+           <widget class="QComboBox" name="comboBoxWmsFormat">
+            <property name="toolTip">
+             <string>Indicates the file format of the tiles.</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <widget class="QProgressBar" name="progressBarWmsLayers">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="maximum">
+           <number>0</number>
+          </property>
+          <property name="value">
+           <number>-1</number>
+          </property>
+          <property name="textVisible">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tabLayerInfo">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <attribute name="title">
+        <string>Layer Info</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout_9">
+        <item>
+         <widget class="QTextEdit" name="textEditWmsLayerInfo"/>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tabServiceInfo">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <attribute name="title">
+        <string>Service Info</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout_10">
+        <item>
+         <widget class="QTextEdit" name="textEditWmsServiceInfo"/>
+        </item>
+       </layout>
+      </widget>
      </widget>
-    </item>
-    <item>
-     <widget class="QListWidget" name="listWidgetWmsMaps"/>
-    </item>
-    <item>
-     <layout class="QGridLayout" name="gridLayout_3">
-      <property name="horizontalSpacing">
-       <number>40</number>
-      </property>
-      <item row="0" column="1">
-       <widget class="QLabel" name="formatWmsLabel_2">
-        <property name="text">
-         <string>Tile Format:</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="1">
-       <widget class="QComboBox" name="comboBoxWmsFormat">
-        <property name="toolTip">
-         <string>Indicates the file format of the tiles.</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="0">
-       <widget class="QComboBox" name="comboBoxWmsMaps">
-        <property name="toolTip">
-         <string>Indicates the projection in which the tiles are rendered.</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="0">
-       <widget class="QLabel" name="projectionWmsLabel">
-        <property name="text">
-         <string>Tile Projection:</string>
-        </property>
-       </widget>
-      </item>
-     </layout>
     </item>
    </layout>
   </widget>
@@ -433,6 +588,12 @@ p, li { white-space: pre-wrap; }
       </item>
       <item row="2" column="0">
        <widget class="QLabel" name="labelMapDesc">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
         <property name="text">
          <string>Description:</string>
         </property>
@@ -446,6 +607,12 @@ p, li { white-space: pre-wrap; }
       </item>
       <item row="2" column="1" colspan="2">
        <widget class="QTextEdit" name="textEditDesc">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
         <property name="toolTip">
          <string>A short description of your map theme. Here you can provide information about the purpose, origin, copyright and license of the data used in your map theme.</string>
         </property>
@@ -456,6 +623,12 @@ p, li { white-space: pre-wrap; }
       </item>
       <item row="3" column="0" colspan="2">
        <widget class="QLabel" name="labelMapIcon">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
         <property name="text">
          <string>Preview Image:</string>
         </property>
@@ -520,7 +693,7 @@ p, li { white-space: pre-wrap; }
    </layout>
   </widget>
   <widget class="QWizardPage" name="wizardPageLegend">
-   <layout class="QVBoxLayout" name="verticalLayout_8">
+   <layout class="QVBoxLayout" name="verticalLayout_6">
     <item>
      <widget class="QLabel" name="label_3">
       <property name="text">
@@ -550,50 +723,42 @@ p, li { white-space: pre-wrap; }
      </layout>
     </item>
     <item>
-     <layout class="QHBoxLayout" name="horizontalLayout_2">
-      <item>
-       <widget class="QTextBrowser" name="textBrowserLegend"/>
-      </item>
-      <item>
-       <layout class="QVBoxLayout" name="verticalLayout_6">
+     <widget class="QScrollArea" name="scrollArea">
+      <property name="verticalScrollBarPolicy">
+       <enum>Qt::ScrollBarAsNeeded</enum>
+      </property>
+      <property name="horizontalScrollBarPolicy">
+       <enum>Qt::ScrollBarAsNeeded</enum>
+      </property>
+      <property name="sizeAdjustPolicy">
+       <enum>QAbstractScrollArea::AdjustToContents</enum>
+      </property>
+      <property name="widgetResizable">
+       <bool>true</bool>
+      </property>
+      <widget class="QWidget" name="scrollAreaWidgetContents">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>562</width>
+         <height>250</height>
+        </rect>
+       </property>
+       <layout class="QVBoxLayout" name="verticalLayout_8">
         <item>
-         <widget class="QCheckBox" name="checkBoxInterest">
+         <widget class="QLabel" name="labelLegendImage">
           <property name="text">
-           <string>Places of Interest</string>
+           <string/>
           </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QCheckBox" name="checkBoxPop">
-          <property name="text">
-           <string>Populated Places</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QCheckBox" name="checkBoxTer">
-          <property name="text">
-           <string>Terrain</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QCheckBox" name="checkBoxCoord">
-          <property name="text">
-           <string>Coordinate Grid</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QCheckBox" name="checkBoxBorder">
-          <property name="text">
-           <string>Border Lines</string>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
           </property>
          </widget>
         </item>
        </layout>
-      </item>
-     </layout>
+      </widget>
+     </widget>
     </item>
    </layout>
   </widget>
@@ -713,6 +878,33 @@ p, li { white-space: pre-wrap; }
    </layout>
   </widget>
  </widget>
+ <tabstops>
+  <tabstop>radioButtonWms</tabstop>
+  <tabstop>radioButtonBitmap</tabstop>
+  <tabstop>radioButtonStaticUrl</tabstop>
+  <tabstop>comboBoxWmsServer</tabstop>
+  <tabstop>lineEditWmsUrl</tabstop>
+  <tabstop>tabWidget</tabstop>
+  <tabstop>lineEditWmsSearch</tabstop>
+  <tabstop>listViewWmsLayers</tabstop>
+  <tabstop>checkBoxWmsMultipleSelections</tabstop>
+  <tabstop>comboBoxWmsBackdrop</tabstop>
+  <tabstop>comboBoxWmsMaps</tabstop>
+  <tabstop>comboBoxWmsFormat</tabstop>
+  <tabstop>lineEditSource</tabstop>
+  <tabstop>pushButtonSource</tabstop>
+  <tabstop>comboBoxStaticUrlServer</tabstop>
+  <tabstop>lineEditTitle</tabstop>
+  <tabstop>lineEditTheme</tabstop>
+  <tabstop>textEditDesc</tabstop>
+  <tabstop>pushButtonPreview</tabstop>
+  <tabstop>lineEditLegend_2</tabstop>
+  <tabstop>pushButtonLegend_2</tabstop>
+  <tabstop>scrollArea</tabstop>
+  <tabstop>pushButtonPreviewMap</tabstop>
+  <tabstop>textEditWmsServiceInfo</tabstop>
+  <tabstop>textEditWmsLayerInfo</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>
