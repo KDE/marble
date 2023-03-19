@@ -184,6 +184,15 @@ QString WmsCapabilities::style(const QString &layer)
     return m_wmsLayerMetaInfo.value(layer).at(3);
 }
 
+QStringList WmsCapabilities::styles(const QStringList &layers)
+{
+    QStringList retVal;
+    for (auto layer : layers) {
+        retVal << style(layer);
+    }
+    return retVal;
+}
+
 void WmsCapabilities::setReferenceSystemType(const QString &refSystem)
 {
     m_referenceSystemType = refSystem;
@@ -248,7 +257,7 @@ void OwsServiceManager::queryWmsCapabilities(const QUrl& queryUrl)
     m_capabilitiesAccessManager.get( request );
 }
 
-void OwsServiceManager::queryWmsMap(const QUrl &url, const QString &layer, const QString &projection,
+void OwsServiceManager::queryWmsMap(const QUrl &url, const QString &layers, const QString &projection,
                                     const QString &bbox, const QString &format, const QString &style)
 {
     m_imageRequestResult.setResultImage(QImage());
@@ -256,19 +265,18 @@ void OwsServiceManager::queryWmsMap(const QUrl &url, const QString &layer, const
     m_imageRequestResult.setResultRaw("");
     m_imageRequestResult.setResultFormat(QString());
 
-    QString initialQuery = url.query();
+    QUrlQuery downloadQuery;
+    downloadQuery.addQueryItem( "request", "GetMap" ); // Requests that the server generates a map.
+    downloadQuery.addQueryItem( "service", "wms" ); // Service name. Value is WMS.
+    downloadQuery.addQueryItem( "version", wmsCapabilities().version() ); // Service version. Value is one of 1.0.0, 1.1.0, 1.1.1, 1.3.0.
+    downloadQuery.addQueryItem( "layers", layers ); // Layers to display on map. Value is a comma-separated list of layer names.
 
-    QUrl finalDownloadUrl( url );
-    QUrlQuery downloadUrl;
-    downloadUrl.addQueryItem( "request", "GetMap" );
-    downloadUrl.addQueryItem( "version", wmsCapabilities().version() );
-    downloadUrl.addQueryItem( "layers", layer );
+    // Spatial Reference System for map output. Value is in the form EPSG:nnn. srs was used before WMS 1.3.0, crs has been used since then.
+    downloadQuery.addQueryItem( wmsCapabilities().referenceSystemType(), projection );
+    // downloadQuery.addQueryItem( "bgcolor", "#ff0000" ); // rarely supported by servers
 
-    downloadUrl.addQueryItem( wmsCapabilities().referenceSystemType(), projection );
-
-
-    downloadUrl.addQueryItem( "width", "256" );
-    downloadUrl.addQueryItem( "height", "256" );
+    downloadQuery.addQueryItem( "width", "256" ); // Width of map output, in pixels.
+    downloadQuery.addQueryItem( "height", "256" ); // Height of map output, in pixels.
 
     QString boundingBox = bbox;
     if (boundingBox.isEmpty()) {
@@ -279,23 +287,30 @@ void OwsServiceManager::queryWmsMap(const QUrl &url, const QString &layer, const
             boundingBox = "-90,-180,90,180";
         }
     }
-    downloadUrl.addQueryItem( "bbox", boundingBox );
+    downloadQuery.addQueryItem( "bbox", boundingBox );
+    downloadQuery.addQueryItem( "transparent", "true");
 
-    downloadUrl.addQueryItem( "format", QString("image/%1").arg(format) );
-    downloadUrl.addQueryItem( "styles", style );
+    // Format for the map output. In addition to common bitmap formats WMS servers
+    // sometimes support "vector" formats (PDF, SVG, KML, etc.)
+    // Currently Marble only supports JPEG, PNG, TIFF, GIF, BMP and their variants.
+    downloadQuery.addQueryItem( "format", QString("image/%1").arg(format) );
+
+    // Styles in which layers are to be rendered. Value is a comma-separated list of style names,
+    // or empty if default styling is required. Style names may be empty in the list,
+    // to use default layer styling. However some servers do not accept empty style names.
+    downloadQuery.addQueryItem( "styles", style );
     m_imageRequestResult.setResultFormat((format == QLatin1String("jpeg")) ? "jpg" : format); // Is this needed here?
 
-    QString combinedQuery = initialQuery + downloadUrl.query();
-
-    finalDownloadUrl.setQuery( combinedQuery );
-    mDebug() << "requesting WMS" << finalDownloadUrl;
+    QUrl finalDownloadUrl( url );
+    finalDownloadUrl.setQuery( downloadQuery );
+    mDebug() << "requesting WMS image" << finalDownloadUrl;
 
     QNetworkRequest request( finalDownloadUrl );
 
     m_imageAccessManager.get( request );
 }
 
-void OwsServiceManager::queryWmsLevelZeroTile(const QUrl& url, const QString &layer, const QString &projection,
+void OwsServiceManager::queryWmsLevelZeroTile(const QUrl& url, const QString &layers, const QString &projection,
                                            const QString &format, const QString &style)
 {
     QString bbox;
@@ -308,17 +323,19 @@ void OwsServiceManager::queryWmsLevelZeroTile(const QUrl& url, const QString &la
 
     m_imageRequestResult.setResultType(LevelZeroTile);
 
-    queryWmsMap(url, layer, projection, bbox, format, style);
+    queryWmsMap(url, layers, projection, bbox, format, style);
 }
 
-void OwsServiceManager::queryWmsPreviewImage(const QUrl& url, const QString &layer, const QString &projection,
+void OwsServiceManager::queryWmsPreviewImage(const QUrl& url, const QString &layers, const QString &projection,
                                           const QString &format, const QString &style)
 {
-    QString bbox = wmsCapabilities().boundingBox(layer, projection);
+
+    QString firstLayer = layers.contains(',') ? layers.section(',',0,0) : layers;
+    QString bbox = wmsCapabilities().boundingBox(firstLayer, projection);
 
     m_imageRequestResult.setResultType(PreviewImage);
 
-    queryWmsMap(url, layer, projection, bbox, format, style);
+    queryWmsMap(url, layers, projection, bbox, format, style);
 }
 
 void OwsServiceManager::queryWmsLegendImage(const QUrl &url)
@@ -415,7 +432,9 @@ void OwsServiceManager::parseWmsCapabilities(QNetworkReply *reply)
     }
 
     m_capabilities.setVersion( xml.documentElement().attribute("version") );
-    m_capabilities.setReferenceSystemType( (m_capabilities.version() == "1.1.0" || m_capabilities.version() == "1.1.1")  ? "SRS" : "CRS" );
+    m_capabilities.setReferenceSystemType( (m_capabilities.version() == "1.0.0"
+                                         || m_capabilities.version() == "1.1.0"
+                                         || m_capabilities.version() == "1.1.1")  ? "SRS" : "CRS" );
 
     QDomElement globalLayer = xml.documentElement().firstChildElement( "Capability" ).firstChildElement( "Layer" );
     QDomElement service = xml.documentElement().firstChildElement( "Service" );
@@ -482,6 +501,8 @@ void OwsServiceManager::parseWmsCapabilities(QNetworkReply *reply)
 //          TODO: convert bbox coordinates from UTM to 3857 (e.g. from epsg:25832/33)
             wmsLayerCoordinateSystems[layerName][bboxProjection] = bboxString;
         }
+        // FIXME: parse EX_GeographicBoundingBox if wmsLayerCoordinateSystems[layerName]["epsg:4326"/"epsg:3857"] == QString()
+
     }
 
 

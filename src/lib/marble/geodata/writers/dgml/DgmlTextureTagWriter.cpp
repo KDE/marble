@@ -101,7 +101,13 @@ bool DgmlTextureTagWriter::write(const GeoNode *node, GeoWriter& writer) const
         writer.writeAttribute( "name", "Equirectangular" );        
     }
     writer.writeEndElement();
-    
+
+    writer.writeStartElement( dgml::dgmlTag_Blending );
+    if (!texture->blending().isEmpty()) {
+        writer.writeAttribute( "name", texture->blending() );
+    }
+    writer.writeEndElement();
+
     writer.writeEndElement();
     return true;
 }

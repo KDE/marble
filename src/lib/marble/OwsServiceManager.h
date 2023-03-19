@@ -60,6 +60,7 @@ public:
     QString abstract(const QString& layer);
     QString legendUrl(const QString& layer);
     QString style(const QString& layer);
+    QStringList styles(const QStringList& layers);
 
     void setReferenceSystemType(const QString& refSystem);
     QString referenceSystemType() const; // SRS (1.1.1) or CRS (1.3.0)
@@ -131,11 +132,11 @@ public:
 
 public Q_SLOTS:
     void queryWmsCapabilities(const QUrl& queryUrl);
-    void queryWmsMap(const QUrl& url, const QString& layer, const QString& projection,
+    void queryWmsMap(const QUrl& url, const QString& layers, const QString& projection,
                      const QString& bbox, const QString& format, const QString& styles = QString());
-    void queryWmsLevelZeroTile(const QUrl& url, const QString &layer, const QString &projection,
+    void queryWmsLevelZeroTile(const QUrl& url, const QString &layers, const QString &projection,
                             const QString &format, const QString &styles = QString());
-    void queryWmsPreviewImage(const QUrl& url, const QString &layer, const QString &projection,
+    void queryWmsPreviewImage(const QUrl& url, const QString &layers, const QString &projection,
                            const QString &format, const QString &styles = QString());
     void queryWmsLegendImage(const QUrl& url);
 

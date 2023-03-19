@@ -105,6 +105,7 @@ public:
         WmsMap,
         StaticUrlMap
     };
+    QStringList selectedLayers;
 
     mapType mapProviderType;
     QByteArray levelZero;
@@ -240,12 +241,15 @@ MapWizard::MapWizard( QWidget* parent ) : QWizard( parent ), d( new MapWizardPri
     
     connect( d->uiWidget.pushButtonPreviewMap, &QAbstractButton::clicked, this, &MapWizard::showPreview );
     connect( d->uiWidget.lineEditWmsSearch, &QLineEdit::textChanged, this, &MapWizard::updateSearchFilter );
+    connect( d->uiWidget.comboBoxWmsMaps, SIGNAL(currentIndexChanged(int)), this, SLOT(updateBackdropCheckBox()) );
 
-    d->uiWidget.checkBoxWmsMultipleSelections->setVisible(false);
-    d->uiWidget.comboBoxWmsBackdrop->setVisible(false);
-    d->uiWidget.labelWmsBackdrop->setVisible(false);
+    connect( d->uiWidget.checkBoxWmsMultipleSelections, &QCheckBox::stateChanged, this, &MapWizard::updateListViewSelection);
+    updateListViewSelection();
 
+    d->uiWidget.checkBoxWmsMultipleSelections->setVisible(true);
+    d->uiWidget.checkBoxWmsBackdrop->setVisible(true);
     d->uiWidget.listViewWmsLayers->setModel(d->sortModel);
+    d->uiWidget.listViewWmsLayers->setSelectionMode(QAbstractItemView::ExtendedSelection);
 
     d->uiWidget.progressBarWmsCapabilities->setVisible(false);
     setLayerButtonsVisible(true);
@@ -324,31 +328,42 @@ void MapWizard::processCapabilitiesResults()
 
 void MapWizard::processSelectedLayerInformation()
 {
-    QString selected = d->sortModel->data(d->uiWidget.listViewWmsLayers->currentIndex(), layerIdRole).toString();
+    QStringList selectedList;
+    QModelIndexList selectedIndexes = d->uiWidget.listViewWmsLayers->selectionModel()->selectedIndexes();
+    for (auto selectedIndex : selectedIndexes) {
+        selectedList << d->sortModel->data(selectedIndex, layerIdRole).toString();
+    }
+    d->selectedLayers = selectedList;
     WmsCapabilities capabilities = d->owsManager.wmsCapabilities();
     d->uiWidget.comboBoxWmsMaps->clear();
     QMap<QString, QString> epsgToText;
     epsgToText["epsg:3857"] = tr("Web Mercator (epsg:3857)");
     epsgToText["epsg:4326"] = tr("Equirectangular (epsg:4326)");
     QStringList projectionTextList;
-    for (auto projection : capabilities.projections(selected)) {
+    if (d->selectedLayers.isEmpty()) {
+        return;
+    }
+    for (auto projection : capabilities.projections(d->selectedLayers.first())) {
         projectionTextList << epsgToText[projection];
     }
     d->uiWidget.comboBoxWmsMaps->addItems(projectionTextList);
 
     // default to Web Mercator
     d->uiWidget.comboBoxWmsMaps->setCurrentText(tr("Web Mercator (epsg:3857)"));
+
+    updateBackdropCheckBox(); // align the backdrop checkbox state with the available/selected projection
+
 /*
     bool projectionSelectionVisible = d->uiWidget.comboBoxWmsMaps->count() > 0;
     d->uiWidget.comboBoxWmsMaps->setVisible(projectionSelectionVisible);
     d->uiWidget.labelWmsTileProjection->setVisible(projectionSelectionVisible);
     d->uiWidget.comboBoxWmsMaps->setEnabled(d->uiWidget.comboBoxWmsMaps->count() > 1);
 */
-    d->uiWidget.lineEditTitle->setText( d->owsManager.wmsCapabilities().title(selected) );
+    d->uiWidget.lineEditTitle->setText( d->owsManager.wmsCapabilities().title(d->selectedLayers.first()) );
 
     // Remove all invalid characters from the theme-String
     // that will make the TileLoader malfunction.
-    QString themeString = selected;
+    QString themeString = d->selectedLayers.first();
     themeString.remove(QRegExp("[:\"\\\\/]"));
     d->uiWidget.lineEditTheme->setText( themeString );
     QRegularExpression rx("^[^:\"\\\\/]*$");
@@ -356,13 +371,13 @@ void MapWizard::processSelectedLayerInformation()
     d->uiWidget.lineEditTheme->setValidator(validator);
 
     QString description;
-    description += d->owsManager.wmsCapabilities().abstract(selected);
+    description += d->owsManager.wmsCapabilities().abstract(d->selectedLayers.first());
     description += QString("<br><br><i>Contact:</i> %1").arg( d->owsManager.wmsCapabilities().contactInformation());
     description += QString("<br><br><i>Fees:</i> %1").arg( d->owsManager.wmsCapabilities().fees());
     d->uiWidget.textEditDesc->setText(description);
 
     QString layerInfo;
-    layerInfo += d->owsManager.wmsCapabilities().abstract(selected);
+    layerInfo += d->owsManager.wmsCapabilities().abstract(d->selectedLayers.first());
     d->uiWidget.tabLayerInfo->setEnabled(!layerInfo.isEmpty());
     d->uiWidget.textEditWmsLayerInfo->setText(layerInfo);
 }
@@ -480,8 +495,8 @@ void MapWizard::setLineEditWms(const QString &text)
 
 void MapWizard::setLayerButtonsVisible(bool visible)
 {
-    d->uiWidget.checkBoxWmsMultipleSelections->setVisible(false);
-    d->uiWidget.comboBoxWmsBackdrop->setVisible(false);
+    d->uiWidget.checkBoxWmsMultipleSelections->setVisible(visible);
+    d->uiWidget.checkBoxWmsBackdrop->setVisible(visible);
     d->uiWidget.comboBoxWmsFormat->setVisible(visible);
     d->uiWidget.comboBoxWmsMaps->setVisible(visible);
     d->uiWidget.labelWmsTileFormat->setVisible(visible);
@@ -733,17 +748,23 @@ bool MapWizard::validateCurrentPage()
       || (currentId() == XYZUrlPage && !d->m_previewImageValid ) ){
         if( d->mapProviderType == MapWizardPrivate::WmsMap && d->uiWidget.listViewWmsLayers->currentIndex().isValid())
         {
-            QString selected = d->sortModel->data(d->uiWidget.listViewWmsLayers->currentIndex(), layerIdRole).toString();
+            QStringList selectedList;
+            QModelIndexList selectedIndexes = d->uiWidget.listViewWmsLayers->selectionModel()->selectedIndexes();
+            for (auto selectedIndex : selectedIndexes) {
+                selectedList << d->sortModel->data(selectedIndex, layerIdRole).toString();
+            }
+            d->selectedLayers = selectedList;
+
             QString projection = d->uiWidget.comboBoxWmsMaps->currentText() == tr("Equirectangular (epsg:4326)")
                     ? "epsg:4326" : "epsg:3857";
             QString format = d->uiWidget.comboBoxWmsFormat->currentText();
             if (format == QLatin1String("jpeg")) {
                 format = "jpg";
             }
-            QString style = d->owsManager.wmsCapabilities().style(selected);
-            setLayerButtonsVisible(false);
+            QStringList styles = d->owsManager.wmsCapabilities().styles(d->selectedLayers);
             d->owsManager.queryWmsPreviewImage(QUrl(d->uiWidget.lineEditWmsUrl->text()),
-                        selected, projection, format, style);
+                        d->selectedLayers.join(','), projection, format, styles.join(','));
+            setLayerButtonsVisible(false);
             button( MapWizard::NextButton )->setEnabled( false );
         }
         else if( d->mapProviderType == MapWizardPrivate::StaticUrlMap )
@@ -806,8 +827,7 @@ bool MapWizard::validateCurrentPage()
     if ( currentId() == ThemeInfoPage ) {
         if( d->mapProviderType == MapWizardPrivate::WmsMap && !d->m_legendImageValid )
         {
-            QString selected = d->sortModel->data(d->uiWidget.listViewWmsLayers->currentIndex(), layerIdRole).toString();
-            QString legendUrl = d->owsManager.wmsCapabilities().legendUrl(selected);
+            QString legendUrl = d->owsManager.wmsCapabilities().legendUrl(d->selectedLayers.first());
             if (!legendUrl.isEmpty()) {
                 d->m_legendImageValid = true;
                 d->owsManager.queryWmsLegendImage(QUrl(legendUrl));
@@ -848,16 +868,15 @@ bool MapWizard::validateCurrentPage()
         && d->mapProviderType != MapWizardPrivate::StaticImageMap ) {
         if( d->mapProviderType == MapWizardPrivate::WmsMap )
         {
-            QString selected = d->sortModel->data(d->uiWidget.listViewWmsLayers->currentIndex(), layerIdRole).toString();
             QString projection = d->uiWidget.comboBoxWmsMaps->currentText() == tr("Equirectangular (epsg:4326)")
                     ? "epsg:4326" : "epsg:3857";
             QString format = d->uiWidget.comboBoxWmsFormat->currentText();
             if (format == QLatin1String("jpeg")) {
                 format = "jpg";
             }
-            QString style = d->owsManager.wmsCapabilities().style(selected);
+            QStringList styles = d->owsManager.wmsCapabilities().styles(d->selectedLayers);
             d->owsManager.queryWmsLevelZeroTile(QUrl(d->uiWidget.lineEditWmsUrl->text()),
-                        selected, projection, format, style);
+                        d->selectedLayers.first(), projection, format, styles.first());
         }
         else if( d->mapProviderType == MapWizardPrivate::StaticUrlMap )
         {
@@ -943,18 +962,41 @@ GeoSceneDocument* MapWizard::createDocument()
     zoom->setMaximum( 3500 );
     zoom->setDiscrete( false );
     
+    GeoSceneTileDataset *osmTexture = nullptr;
+    bool isBackdropAvailable = d->uiWidget.checkBoxWmsBackdrop->isEnabled()
+            && d->uiWidget.checkBoxWmsBackdrop->isChecked();
+    if (isBackdropAvailable) {
+        osmTexture = new GeoSceneTileDataset( "backdrop" );
+        osmTexture->setExpire( 31536000 );
+        osmTexture->setSourceDir(QLatin1String("earth/openstreetmap"));
+        osmTexture->setFileFormat( "PNG" );
+        osmTexture->addDownloadPolicy( DownloadBrowse, 20 );
+        osmTexture->addDownloadPolicy( DownloadBulk, 2 );
+        osmTexture->addDownloadUrl( QUrl("https://tile.openstreetmap.org/") );
+        osmTexture->setMaximumTileLevel( 20 );
+        osmTexture->setTileSize(QSize(256, 256));
+        osmTexture->setLevelZeroRows( 1 );
+        osmTexture->setLevelZeroColumns( 1 );
+        osmTexture->setServerLayout( new OsmServerLayout( osmTexture ) );
+        osmTexture->setTileProjection(GeoSceneAbstractTileProjection::Mercator);
+    }
+
     GeoSceneTileDataset *texture = new GeoSceneTileDataset( "map" );
     texture->setExpire( 31536000 );
     texture->setSourceDir(QLatin1String("earth/") + document->head()->theme());
     if( d->mapProviderType == MapWizardPrivate::WmsMap )
     {
         texture->setFileFormat( d->owsManager.resultFormat() );
-        QString layer = d->sortModel->data(d->uiWidget.listViewWmsLayers->currentIndex(), layerIdRole).toString();
-        QString style = d->owsManager.wmsCapabilities().style(layer);
+        QStringList styles = d->owsManager.wmsCapabilities().styles(d->selectedLayers);
         QUrl downloadUrl = QUrl( d->uiWidget.lineEditWmsUrl->text() );
         QUrlQuery urlQuery;
-        urlQuery.addQueryItem( "layers", layer );
-        urlQuery.addQueryItem( "style", style );
+        urlQuery.addQueryItem( "layers", d->selectedLayers.join(',') );
+        urlQuery.addQueryItem( "style", styles.join(",") );
+        bool isBackdropAvailable = d->uiWidget.checkBoxWmsBackdrop->isEnabled()
+                && d->uiWidget.checkBoxWmsBackdrop->isChecked();
+        urlQuery.addQueryItem( "transparent", isBackdropAvailable ? "true" : "false" );
+
+ //       urlQuery.addQueryItem( "bgcolor", "#ff0000");
         downloadUrl.setQuery( urlQuery );
         texture->addDownloadUrl( downloadUrl );
         texture->setMaximumTileLevel( 20 );
@@ -967,6 +1009,9 @@ GeoSceneDocument* MapWizard::createDocument()
         }
         else {
             texture->setTileProjection(GeoSceneAbstractTileProjection::Equirectangular);
+        }
+        if (isBackdropAvailable) {
+            texture->setBlending("AlphaBlending");
         }
     }
     
@@ -1008,6 +1053,7 @@ GeoSceneDocument* MapWizard::createDocument()
     
     GeoSceneLayer *layer = new GeoSceneLayer( d->uiWidget.lineEditTheme->text() );
     layer->setBackend( "texture" );
+    layer->addDataset( osmTexture );
     layer->addDataset( texture );
     
     GeoSceneLayer* secondLayer = new GeoSceneLayer( "standardplaces" );    
@@ -1297,6 +1343,22 @@ void MapWizard::showPreview()
 void MapWizard::updateSearchFilter(const QString &text)
 {
     d->sortModel->setFilterFixedString(text);
+}
+
+void MapWizard::updateListViewSelection()
+{
+    QAbstractItemView::SelectionMode selectionMode =
+            d->uiWidget.checkBoxWmsMultipleSelections->isChecked()
+            ? QAbstractItemView::MultiSelection
+            : QAbstractItemView::ExtendedSelection;
+    d->uiWidget.listViewWmsLayers->setSelectionMode(selectionMode);
+}
+
+void MapWizard::updateBackdropCheckBox()
+{
+    // The only backdrop supported is the Mercator-based OSM tile server map
+    bool isMercator = d->uiWidget.comboBoxWmsMaps->currentText() == "Web Mercator (epsg:3857)";
+    d->uiWidget.checkBoxWmsBackdrop->setEnabled(isMercator);
 }
 
 

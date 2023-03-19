@@ -205,7 +205,7 @@ p, li { white-space: pre-wrap; }
     <item>
      <widget class="QLabel" name="labelWmsTitle">
       <property name="text">
-       <string>Wms-Service</string>
+       <string>Wms-Service:</string>
       </property>
      </widget>
     </item>
@@ -230,7 +230,7 @@ p, li { white-space: pre-wrap; }
           <item>
            <widget class="QLabel" name="labelWmsMaps">
             <property name="text">
-             <string>Available Layers:</string>
+             <string>Choose your Layer(s):</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -273,42 +273,30 @@ p, li { white-space: pre-wrap; }
          </layout>
         </item>
         <item>
-         <widget class="QListView" name="listViewWmsLayers"/>
+         <widget class="QListView" name="listViewWmsLayers">
+          <property name="toolTip">
+           <string>The order in which multiple layers are selected directly affects their rendering order.</string>
+          </property>
+         </widget>
         </item>
         <item>
-         <layout class="QGridLayout" name="gridLayoutWmsButtons">
+         <layout class="QGridLayout" name="gridLayout_3">
           <item row="0" column="0" colspan="2">
            <widget class="QCheckBox" name="checkBoxWmsMultipleSelections">
+            <property name="toolTip">
+             <string>Enable this to select multiple layers without keyboard shortcuts (Shift, Strg, Strg+A, ...)</string>
+            </property>
             <property name="text">
              <string>Multiple Selections</string>
             </property>
            </widget>
           </item>
-          <item row="0" column="2" rowspan="2">
-           <spacer name="horizontalSpacer_3">
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
-            </property>
-            <property name="sizeType">
-             <enum>QSizePolicy::Fixed</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>12</width>
-              <height>20</height>
-             </size>
-            </property>
-           </spacer>
-          </item>
-          <item row="0" column="3">
-           <widget class="QLabel" name="labelWmsBackdrop">
+          <item row="0" column="3" colspan="2">
+           <widget class="QCheckBox" name="checkBoxWmsBackdrop">
             <property name="text">
-             <string>Backdrop:</string>
+             <string>Custom Backdrop</string>
             </property>
            </widget>
-          </item>
-          <item row="0" column="4">
-           <widget class="QComboBox" name="comboBoxWmsBackdrop"/>
           </item>
           <item row="1" column="0">
            <widget class="QLabel" name="labelWmsTileProjection">
@@ -323,6 +311,22 @@ p, li { white-space: pre-wrap; }
              <string>Indicates the projection in which the tiles are rendered.</string>
             </property>
            </widget>
+          </item>
+          <item row="1" column="2">
+           <spacer name="horizontalSpacer_3">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeType">
+             <enum>QSizePolicy::Fixed</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>13</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
           </item>
           <item row="1" column="3">
            <widget class="QLabel" name="labelWmsTileFormat">
@@ -384,6 +388,119 @@ p, li { white-space: pre-wrap; }
        <layout class="QVBoxLayout" name="verticalLayout_10">
         <item>
          <widget class="QTextEdit" name="textEditWmsServiceInfo"/>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tabPage">
+       <attribute name="title">
+        <string>Customize Backdrop</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout_13">
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_7">
+          <item>
+           <widget class="QRadioButton" name="radioButton">
+            <property name="text">
+             <string>Preset Layers</string>
+            </property>
+            <property name="checkable">
+             <bool>false</bool>
+            </property>
+            <property name="checked">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QComboBox" name="comboBox">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <item>
+             <property name="text">
+              <string>OpenStreetMap</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_8">
+          <item>
+           <widget class="QRadioButton" name="radioButton_3">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+            <property name="text">
+             <string>XYZ Server Url</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="lineEdit">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+            <property name="text">
+             <string>https://</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_9">
+          <item>
+           <widget class="QRadioButton" name="radioButton_2">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+            <property name="text">
+             <string>Color</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pushButton">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+            <property name="text">
+             <string>#87CEFA</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer name="horizontalSpacer_5">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <spacer name="verticalSpacer_3">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>131</height>
+           </size>
+          </property>
+         </spacer>
         </item>
        </layout>
       </widget>
@@ -741,8 +858,8 @@ p, li { white-space: pre-wrap; }
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>562</width>
-         <height>250</height>
+         <width>66</width>
+         <height>36</height>
         </rect>
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_8">
@@ -888,7 +1005,6 @@ p, li { white-space: pre-wrap; }
   <tabstop>lineEditWmsSearch</tabstop>
   <tabstop>listViewWmsLayers</tabstop>
   <tabstop>checkBoxWmsMultipleSelections</tabstop>
-  <tabstop>comboBoxWmsBackdrop</tabstop>
   <tabstop>comboBoxWmsMaps</tabstop>
   <tabstop>comboBoxWmsFormat</tabstop>
   <tabstop>lineEditSource</tabstop>

@@ -67,6 +67,8 @@ public Q_SLOTS:
     void showPreview();
 
     void updateSearchFilter(const QString& text);
+    void updateListViewSelection();
+    void updateBackdropCheckBox();
 
 private:
     Q_PRIVATE_SLOT( d, void pageEntered( int ) )
