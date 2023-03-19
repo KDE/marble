@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2023-03-09 13:33+0300\n"
+"PO-Revision-Date: 2023-03-18 12:54+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -1578,9 +1578,9 @@ msgid ""
 "Earth. <i>Credits: Germanisches Nationalmuseum, Nuremberg, License: CC BY-SA "
 "3.0.</i></p>"
 msgstr ""
-"<p> Martin Behaim'in <i>Erdapfel'i</i> Dünya'nın mevcut olan en eski "
-"küresidir. <i>Emeği Geçenler: Alman Ulusal Müzesi, Nürnberg, Lisans: "
-"License: CC BY-SA 3.0.</i></p>"
+"<p> Martin Behaim'in <i>Erdapfel'i</i> Dünya'nın var olan en eski küresidir. "
+"<i>Emeği Geçenler: Alman Ulusal Müzesi, Nürnberg, Lisans: License: CC BY-SA "
+"3.0.</i></p>"
 
 #. file data/maps/earth/behaim1492/behaim1492.dgml:181
 msgctxt "DGML|"
@@ -2415,7 +2415,7 @@ msgstr "Yer imleriniz burada görünecektir."
 #: src/apps/marble-maps/CurrentPosition.qml:65
 msgctxt "CurrentPosition|"
 msgid "Follow Current Position"
-msgstr "Mevcut Konumu Takip Et"
+msgstr "Geçerli Konumu İzle"
 
 #: src/apps/marble-maps/MainScreen.qml:19
 #: src/apps/marble-maps/MainScreen.qml:205
@@ -2687,8 +2687,8 @@ msgstr "&Bölge İndir..."
 msgctxt "Marble::MainWindow|"
 msgid "Download a map region in different zoom levels for offline usage"
 msgstr ""
-"Çevrim içi kullanım için, farklı yakılaştırma düzeylerinde bir bölge "
-"haritası indir"
+"Çevrimiçi kullanım için farklı yakılaştırma düzeylerinde bir bölge haritası "
+"indir"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:283
 msgctxt "Marble::MainWindow|"
@@ -2754,7 +2754,7 @@ msgstr "Ctrl+E"
 #: src/apps/marble-qt/QtMainWindow.cpp:304
 msgctxt "Marble::MainWindow|"
 msgid "Edit the current map region in an external editor"
-msgstr "Harici bir düzenleyicide mevcut bölge haritasını düzenle"
+msgstr "Dış bir düzenleyicide geçerli bölge haritasını düzenle"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:308
 msgctxt "Marble::MainWindow|"
@@ -2879,7 +2879,7 @@ msgstr "F5"
 #: src/apps/marble-qt/QtMainWindow.cpp:366
 msgctxt "Marble::MainWindow|"
 msgid "Reload Current Map"
-msgstr "Mevcut Haritayı Yeniden Yükle"
+msgstr "Geçerli Haritayı Yeniden Yükle"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:369
 msgctxt "Marble::MainWindow|"
@@ -3035,7 +3035,7 @@ msgstr "&Bilgi Kutuları"
 #: src/apps/marble-qt/QtMainWindow.cpp:472
 msgctxt "Marble::MainWindow|"
 msgid "&Online Services"
-msgstr "Çevrim &İçi Servisler"
+msgstr "Çevrim&içi Hizmetler"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:475
 msgctxt "Marble::MainWindow|"
@@ -3441,13 +3441,12 @@ msgstr "İçe aktarılmış yer imi"
 #: src/lib/marble/BookmarkManagerDialog.cpp:473
 msgctxt "BookmarkManagerDialogPrivate|"
 msgid "Existing bookmark"
-msgstr "Mevcut yer imi"
+msgstr "Var olan yer imi"
 
 #: src/lib/marble/BookmarkManagerDialog.cpp:474
 msgctxt "BookmarkManagerDialogPrivate|"
 msgid "Do you want to replace the existing bookmark with the imported one?"
-msgstr ""
-"İçe aktarılmış bir yer imi ile mevcut olanı yer değiştirmek istiyor musunuz?"
+msgstr "Var olan yer imini içe aktarılanla değiştirmek istiyor musunuz?"
 
 #: src/lib/marble/BookmarkManagerDialog.cpp:482
 msgctxt "BookmarkManagerDialogPrivate|"
@@ -3682,7 +3681,7 @@ msgstr "Geçerli konum bilgisi bekleniyor..."
 #: src/lib/marble/CurrentLocationWidget.cpp:208
 msgctxt "QObject|"
 msgid "Error when determining current location: "
-msgstr "Mevcut konum belirlenirken hata oluştu: "
+msgstr "Geçerli konum belirlenirken hata oluştu: "
 
 #: src/lib/marble/CurrentLocationWidget.cpp:269
 #: src/plugins/render/weather/WeatherData.cpp:590
@@ -3747,17 +3746,17 @@ msgstr "Yol Aç"
 #: src/lib/marble/CurrentLocationWidget.cpp:398
 msgctxt "QObject|"
 msgid "Clear current track"
-msgstr "Mevcut yolu temizle"
+msgstr "Geçerli yolu temizle"
 
 #: src/lib/marble/CurrentLocationWidget.cpp:399
 msgctxt "QObject|"
 msgid "Are you sure you want to clear the current track?"
-msgstr "Mevcut yolu silmek istediğinize emin misiniz?"
+msgstr "Geçerli yolu silmek istediğinize emin misiniz?"
 
 #: src/lib/marble/CurrentLocationWidget.ui:14
 msgctxt "CurrentLocationWidget|"
 msgid "Current Location"
-msgstr "Mevcut Konum"
+msgstr "Geçerli Konum"
 
 #: src/lib/marble/CurrentLocationWidget.ui:26
 msgctxt "CurrentLocationWidget|"
@@ -3850,7 +3849,7 @@ msgid ""
 "this data get converted so that it can be used by the current version?"
 msgstr ""
 "Marble, önceki Marble sürümü ile depolanmış bir harita verisine sahip.<br/"
-">Bu veriler, mevcut sürüm tarafından kullanılabilecek şekilde dönüştürülsün "
+">Bu veriler, geçerli sürüm tarafından kullanılabilecek şekilde dönüştürülsün "
 "mü?"
 
 #: src/lib/marble/declarative/MarbleQuickItem.cpp:187
@@ -3858,7 +3857,7 @@ msgstr ""
 #: src/lib/marble/routing/RoutingManager.cpp:563
 msgctxt "QObject|"
 msgid "Current Location"
-msgstr "Mevcut Konum"
+msgstr "Geçerli Konum"
 
 #: src/lib/marble/declarative/Placemark.cpp:94
 #, qt-format
@@ -3902,12 +3901,12 @@ msgstr "Kullanılabilir bilgisyar yok."
 #: src/lib/marble/declarative/Placemark.cpp:139
 msgctxt "Marble::Placemark|A copy shop provides photocopying service"
 msgid "Photocopying service"
-msgstr "Fotokopi servisi"
+msgstr "Fotokopi hizmeti"
 
 #: src/lib/marble/declarative/Placemark.cpp:140
 msgctxt "Marble::Placemark|A copy shop does not provide photocopying service"
 msgid "No photocopying service"
-msgstr "Fotokopi servisi yok"
+msgstr "Fotokopi hizmeti yok"
 
 #: src/lib/marble/declarative/Placemark.cpp:141
 msgctxt ""
@@ -3928,27 +3927,27 @@ msgctxt ""
 "Marble::Placemark|A copy shop provides a service to send documents through "
 "fax"
 msgid "Fax service"
-msgstr "Faks servisi"
+msgstr "Faks hizmeti"
 
 #: src/lib/marble/declarative/Placemark.cpp:144
 msgctxt ""
 "Marble::Placemark|A copy shop does not provide a service to send documents "
 "through fax"
 msgid "No fax service"
-msgstr "Faks servisi yok"
+msgstr "Faks hizmeti yok"
 
 #: src/lib/marble/declarative/Placemark.cpp:145
 msgctxt ""
 "Marble::Placemark|A copy shop provides a paid service to make phone calls"
 msgid "Phone service"
-msgstr "Telefon servisi"
+msgstr "Telefon hizmeti"
 
 #: src/lib/marble/declarative/Placemark.cpp:146
 msgctxt ""
 "Marble::Placemark|A copy shop does not provide a paid service to make phone "
 "calls"
 msgid "No phone service"
-msgstr "Telefon servisi yok"
+msgstr "Telefon hizmeti yok"
 
 #: src/lib/marble/declarative/Placemark.cpp:147
 msgctxt ""
@@ -3969,21 +3968,21 @@ msgctxt ""
 "Marble::Placemark|A copy shop provides a professional service to print a "
 "large number of copies of a document"
 msgid "Press printing service"
-msgstr "Baskı makinesi servisi"
+msgstr "Baskı hizmeti servisi"
 
 #: src/lib/marble/declarative/Placemark.cpp:150
 msgctxt ""
 "Marble::Placemark|A copy shop does not provide a professional service to "
 "print a large number of copies of a document"
 msgid "No press printing service"
-msgstr "Baskı makinesi servisi yok"
+msgstr "Baskı makinesi hizmeti yok"
 
 #: src/lib/marble/declarative/Placemark.cpp:151
 msgctxt ""
 "Marble::Placemark|A copy shop provides help with preparing special printing "
 "techniques"
 msgid "Press printing assistance"
-msgstr "Baskı makinesi servisi asistanı"
+msgstr "Baskı makinesi hizmeti yardımı"
 
 #: src/lib/marble/declarative/Placemark.cpp:152
 msgctxt ""
@@ -4641,12 +4640,12 @@ msgstr "Azami araç yüksekliği: %1"
 #: src/lib/marble/declarative/Placemark.cpp:335
 msgctxt "Marble::Placemark|"
 msgid "Self-service"
-msgstr "Self-servis"
+msgstr "Self servis"
 
 #: src/lib/marble/declarative/Placemark.cpp:336
 msgctxt "Marble::Placemark|"
 msgid "No self-service"
-msgstr "Self-servis değil"
+msgstr "Self servis değil"
 
 #: src/lib/marble/declarative/Placemark.cpp:337
 msgctxt "Marble::Placemark|"
@@ -5210,7 +5209,7 @@ msgstr "Rota İndir"
 #: src/lib/marble/DownloadRegionDialog.cpp:139
 msgctxt "Marble::DownloadRegionDialog|"
 msgid "Enabled when a route exists"
-msgstr "Bir rota mevcut olduğunda etkinleştir"
+msgstr "Bir rota var olduğunda etkinleştir"
 
 #: src/lib/marble/DownloadRegionDialog.cpp:152
 msgctxt "Marble::DownloadRegionDialog|"
@@ -5479,7 +5478,7 @@ msgstr "Yatık"
 #: src/lib/marble/EditPlacemarkDialog.ui:359
 msgctxt "UiEditPlacemarkDialog|"
 msgid "Underlined"
-msgstr "Alt çizili"
+msgstr "Altı Çizili"
 
 #: src/lib/marble/EditPlacemarkDialog.ui:368
 #: src/lib/marble/EditPlacemarkDialog.ui:371
@@ -5586,7 +5585,7 @@ msgstr ""
 msgctxt "Marble::ExternalEditorDialog|"
 msgid "Please ask your system administrator to install %1 on your system."
 msgstr ""
-"%1 uygulamasını sisteminize kurulması için, sistem yöneticiniz ile görüşün."
+"%1 uygulamasının sisteminize kurulması için sistem yöneticiniz ile görüşün."
 
 #: src/lib/marble/ExternalEditorDialog.cpp:94
 msgctxt "Marble::ExternalEditorDialog|"
@@ -5664,7 +5663,7 @@ msgstr "Sıçrama"
 #: src/lib/marble/FlyToEditWidget.cpp:80
 msgctxt "Marble::FlyToEditWidget|"
 msgid "Current map center"
-msgstr "Mevcut harita merkezi"
+msgstr "Geçerli harita merkezi"
 
 #: src/lib/marble/FormattedTextWidget.cpp:179
 msgctxt "Marble::FormattedTextWidget|"
@@ -5777,7 +5776,7 @@ msgstr "Yatık"
 #: src/lib/marble/FormattedTextWidget.ui:223
 msgctxt "FormattedTextWidget|"
 msgid "Underlined"
-msgstr "Altı çizili"
+msgstr "Altı Çizili"
 
 #: src/lib/marble/FormattedTextWidget.ui:232
 #: src/lib/marble/FormattedTextWidget.ui:235
@@ -7682,7 +7681,7 @@ msgstr "Çalma Listesi"
 #, qt-format
 msgctxt "Marble::TargetModel|"
 msgid "Current Location: %1"
-msgstr "Mevcut Konum: %1"
+msgstr "Geçerli Konum: %1"
 
 #: src/lib/marble/GoToDialog.cpp:194
 msgctxt "Marble::TargetModel|"
@@ -8099,8 +8098,7 @@ msgctxt "Marble::MapWizard|"
 msgid ""
 "The source image you specified does not exist. Please specify a different "
 "one."
-msgstr ""
-"Belirttiğiniz kaynak görsel mevcut değil. Lütfen başka bir tane belirtin."
+msgstr "Belirttiğiniz kaynak görsel yok. Lütfen başka bir tane belirtin."
 
 #: src/lib/marble/MapWizard.cpp:679
 msgctxt "Marble::MapWizard|"
@@ -8137,7 +8135,8 @@ msgctxt "Marble::MapWizard|"
 msgid ""
 "Please specify another map name, since there is already a map named \"%1\"."
 msgstr ""
-"Lütfen başka bir harita adı belirtin, \"%1\" adında bir harita zaten mevcut."
+"Lütfen başka bir harita adı belirtin, \"%1\" adında bir harita halihazırda "
+"var."
 
 #: src/lib/marble/MapWizard.cpp:711
 msgctxt "Marble::MapWizard|"
@@ -8272,14 +8271,14 @@ msgstr ""
 #: src/lib/marble/MapWizard.ui:60
 msgctxt "MapWizard|"
 msgid "Web Map Service (WMS)"
-msgstr "Web Harita Servisi (WMS)"
+msgstr "Web Harita hizmeti (WMS)"
 
 #: src/lib/marble/MapWizard.ui:70
 msgctxt "MapWizard|"
 msgid ""
 "You need to provide a bitmap image of a world map that is stored on disk."
 msgstr ""
-"Disk üzerinde saklanması için, dünyanın bir biteşlem görselini temin "
+"Disk üzerinde saklanması için dünyanın bir biteşlem görselini temin "
 "etmelisiniz."
 
 #: src/lib/marble/MapWizard.ui:73
@@ -8762,7 +8761,7 @@ msgid ""
 "de</a><br /><i>Online Services Support</i></p>"
 msgstr ""
 "<p>Bastian Holst, <a href=\"mailto:bastianholst@gmx.de\">bastianholst@gmx."
-"de</a><br /><i>Çevrim İçi Servis Destek</i></p>"
+"de</a><br /><i>Çevrimiçi Hizmetler Desteği</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:97
 msgctxt "QObject|"
@@ -9418,7 +9417,7 @@ msgid ""
 "a><br /><i>Project: Online Services</i></p>"
 msgstr ""
 "<p>Bastian Holst <a href=\"mailto:bastianholst@gmx.de\">bastianholst@gmx.de</"
-"a><br /><i>Proje: Çevrim İçi Servisler</i></p>"
+"a><br /><i>Proje: Çevrimiçi Hizmetler</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:237
 msgctxt "QObject|"
@@ -11040,7 +11039,7 @@ msgstr "&Adres Ayrıntıları"
 #: src/lib/marble/MarbleWidgetPopupMenu.cpp:179
 msgctxt "Marble::MarbleWidgetPopupMenu|"
 msgid "No description available."
-msgstr "Açıklama mevcut değil."
+msgstr "Kullanılabilir açıklama yok."
 
 #: src/lib/marble/MarbleWidgetPopupMenu.cpp:381
 msgctxt "Marble::MarbleWidgetPopupMenu|"
@@ -11256,7 +11255,7 @@ msgstr "Düzenle"
 #: src/lib/marble/osm/OsmRelationManagerWidget.ui:23
 msgctxt "OsmRelationManagerWidgetPrivate|"
 msgid "Current Relations"
-msgstr "Mevcut İlişkiler"
+msgstr "Geçerli İlişkiler"
 
 #: src/lib/marble/osm/OsmRelationManagerWidget.ui:34
 msgctxt "OsmRelationManagerWidgetPrivate|"
@@ -11291,7 +11290,7 @@ msgstr "değer"
 #: src/lib/marble/osm/OsmTagEditorWidget.ui:25
 msgctxt "OsmTagEditorWidgetPrivate|"
 msgid "Current Tags"
-msgstr "Mevcut Etiketler"
+msgstr "Geçerli Etiketler"
 
 #: src/lib/marble/osm/OsmTagEditorWidget.ui:33
 #: src/lib/marble/osm/OsmTagEditorWidget.ui:88
@@ -11706,17 +11705,17 @@ msgstr "Öge seç:"
 #: src/lib/marble/RouteSimulationPositionProviderPlugin.cpp:27
 msgctxt "Marble::RouteSimulationPositionProviderPlugin|"
 msgid "Current Route Position Provider Plugin"
-msgstr "Mevcut Rota Konumu Sağlayıcı Eklenti"
+msgstr "Geçerli Rota Konumu Sağlayıcı Eklenti"
 
 #: src/lib/marble/RouteSimulationPositionProviderPlugin.cpp:37
 msgctxt "Marble::RouteSimulationPositionProviderPlugin|"
 msgid "Current Route"
-msgstr "Mevcut Rota"
+msgstr "Geçerli Rota"
 
 #: src/lib/marble/RouteSimulationPositionProviderPlugin.cpp:47
 msgctxt "Marble::RouteSimulationPositionProviderPlugin|"
 msgid "Simulates traveling along the current route."
-msgstr "Mevcut rota boyuncaki seyahati taklit eder."
+msgstr "Geçerli rota boyuncaki seyahati simüle eder."
 
 #: src/lib/marble/routing/instructions/RoutingInstruction.cpp:249
 msgctxt "QObject|"
@@ -12031,22 +12030,22 @@ msgstr "Ad:"
 #: src/lib/marble/routing/RoutingProfileSettingsDialog.ui:41
 msgctxt "RoutingProfileSettingsDialog|"
 msgid "Active Route Services"
-msgstr "Etkin Rota Servisleri"
+msgstr "Etkin Rota Hizmetleri"
 
 #: src/lib/marble/routing/RoutingProfileSettingsDialog.ui:65
 msgctxt "RoutingProfileSettingsDialog|"
 msgid "Service Settings"
-msgstr "Servis Ayarları"
+msgstr "Hizmetleri Ayarları"
 
 #: src/lib/marble/routing/RoutingProfileSettingsDialog.ui:117
 msgctxt "RoutingProfileSettingsDialog|"
 msgid "No configuration available"
-msgstr "Yapılandırma mevcut değil"
+msgstr "Kullanılabilir yapılandırma yok"
 
 #: src/lib/marble/routing/RoutingProfileSettingsDialog.ui:128
 msgctxt "RoutingProfileSettingsDialog|"
 msgid "Select Service to Configure"
-msgstr "Yapılandırılacak Servisi Seçin"
+msgstr "Yapılandırılacak Hizmeti Seç"
 
 #: src/lib/marble/routing/RoutingProfileSettingsDialog.ui:142
 msgctxt "RoutingProfileSettingsDialog|"
@@ -12503,7 +12502,7 @@ msgstr "Şimdi"
 #: src/lib/marble/TimeControlWidget.ui:123
 msgctxt "TimeControlWidget|"
 msgid "Current &date and time:"
-msgstr "Mevcut &tarih ve zaman:"
+msgstr "Geçerli &tarih ve zaman:"
 
 #: src/lib/marble/TimeControlWidget.ui:136
 msgctxt "TimeControlWidget|"
@@ -12745,7 +12744,7 @@ msgctxt "QObject|"
 msgid ""
 "Are you sure want to discard all unsaved changes and close current document?"
 msgstr ""
-"Tüm kaydedilmemiş değişliklerden vazgeçmek ve mevcut belgeyi kapatmak "
+"Tüm kaydedilmemiş değişikliklerden vazgeçmek ve geçerli belgeyi kapatmak "
 "istediğinizden emin misiniz?"
 
 #: src/lib/marble/TourWidget.ui:14
@@ -12871,7 +12870,7 @@ msgstr "GeoClue Konum Çatısı ile konumları raporlar."
 #: src/plugins/positionprovider/gpsd/GpsdConnection.cpp:64
 msgctxt "Marble::GpsdConnection|"
 msgid "Internal gpsd error (cannot get service entry)"
-msgstr "Dahili gpsd hatası (servis girişi alınamadı)"
+msgstr "Dahili gpsd hatası (hizmet girişi alınamadı)"
 
 #: src/plugins/positionprovider/gpsd/GpsdConnection.cpp:67
 msgctxt "Marble::GpsdConnection|"
@@ -12946,7 +12945,7 @@ msgstr "WLAN (Açık WLAN Haritası)"
 #: src/plugins/positionprovider/wlocate/WlocatePositionProviderPlugin.cpp:83
 msgctxt "Marble::WlocatePositionProviderPlugin|"
 msgid "Reports the current position based on nearby WLAN access points"
-msgstr "En yakın WLAN erişim noktası tabanlı mevcut konumu raporlar"
+msgstr "En yakın WLAN erişim noktası tabanlı geçerli konumu raporlar"
 
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:125
 msgctxt "Marble::AnnotatePlugin|"
@@ -14125,7 +14124,7 @@ msgid ""
 "Not enough points in the current viewport.\n"
 "Try to disable 'Zoom to viewport'."
 msgstr ""
-"Mevcut görüş alanı içinde yeterli nokta yok.\n"
+"Geçerli görüş alanı içinde yeterli nokta yok.\n"
 "'Görüş alanına yakınlaştır' seçeneğini kaldırmayı deneyin."
 
 #: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:282
@@ -14172,7 +14171,7 @@ msgstr "&Yükseklik Profili İşaretçisi"
 #: src/plugins/render/elevationprofilemarker/ElevationProfileMarker.cpp:89
 msgctxt "Marble::ElevationProfileMarker|"
 msgid "Marks the current elevation of the elevation profile on the map."
-msgstr "Yükseklik profilinin mevcut yüksekliğini harita üzerinde işaretler."
+msgstr "Yükseklik profilinin geçerli yüksekliğini harita üzerinde işaretler."
 
 #: src/plugins/render/elevationprofilemarker/ElevationProfileMarker.cpp:139
 msgctxt "Marble::ElevationProfileMarker|"
@@ -14198,7 +14197,7 @@ msgstr "&Dosya Görünümü"
 #: src/plugins/render/fileview/FileViewFloatItem.cpp:64
 msgctxt "Marble::FileViewFloatItem|"
 msgid "A list of currently opened files"
-msgstr "Mevcut halde açık olan dosyaların listesi"
+msgstr "Şu anda açık olan dosyaların bir listesi"
 
 #: src/plugins/render/fileview/FileViewFloatItem.cpp:212
 msgctxt "Marble::FileViewFloatItem|"
@@ -14723,7 +14722,7 @@ msgstr "Haritayı oynatmak ve yakınlaştırmak için kullanılan bir fare denet
 #: src/plugins/render/navigation/NavigationFloatItem.cpp:240
 msgctxt "Marble::NavigationFloatItem|"
 msgid "Current Location Button"
-msgstr "Mevcut Konum Düğmesi"
+msgstr "Geçerli Konum Düğmesi"
 
 #: src/plugins/render/navigation/NavigationFloatItem.cpp:243
 msgctxt "Marble::NavigationFloatItem|"
@@ -15157,7 +15156,7 @@ msgstr "&Konum İşaretçisi"
 #: src/plugins/render/positionmarker/PositionMarker.cpp:101
 msgctxt "Marble::PositionMarker|"
 msgid "draws a marker at the current position"
-msgstr "mevcut konuma bir işaretçi çizer"
+msgstr "geçerli konuma bir işaretçi çizer"
 
 #: src/plugins/render/positionmarker/PositionMarker.cpp:346
 #: src/plugins/render/positionmarker/PositionMarker.cpp:460
@@ -15671,7 +15670,7 @@ msgstr ""
 "Şuradan Dünya-Uyduları yörünge ögeleri <ul><li><a href=\"http://www."
 "celestrak.com\">http://www.celestrak.com</a></li></ul>Gezegensel Dünya-"
 "Uyduları yörünge ögeleri <ul><li><a href=\"http://tasc.esa.int/\">ESA TASC "
-"servisi</a></li><li><a href=\"https://ssd.jpl.nasa.gov/?horizons\">JPL "
+"hizmeti</a></li><li><a href=\"https://ssd.jpl.nasa.gov/?horizons\">JPL "
 "Horizons</a></li></ul>"
 
 #: src/plugins/render/satellites/SatellitesPlugin.cpp:443
@@ -16238,8 +16237,8 @@ msgstr ""
 "style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
 "right:0px; -qt-block-indent:0; text-indent:0px;\">Burada hava koşullarının "
 "gösterilmesini isteyip istemediğinizi seçebilirsiniz (örneğin, bulutlar veya "
-"açık gökyüzü.) Marble yalnızca bu bilgi mevcutsa durumu gösterecektir.</p></"
-"body></html>\n"
+"açık gökyüzü.) Marble yalnızca bu bilgi kullanılabilirse durumu "
+"gösterecektir.</p></body></html>\n"
 
 #: src/plugins/render/weather/WeatherConfigWidget.ui:33
 msgctxt "WeatherConfigWidget|"
@@ -16262,8 +16261,8 @@ msgstr ""
 "family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;\"><p "
 "style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
 "right:0px; -qt-block-indent:0; text-indent:0px;\">Sıcaklığın gösterilmesini "
-"isteyip istemediğinizi belirler. Sıcaklık, yalnızca mevcut istasyonlar için "
-"gösterilir.</p></body></html>\n"
+"isteyip istemediğinizi belirler. Sıcaklık, yalnızca kullanılabilir "
+"istasyonlar için gösterilir.</p></body></html>\n"
 
 #: src/plugins/render/weather/WeatherConfigWidget.ui:44
 #: src/plugins/render/weather/WeatherConfigWidget.ui:84
@@ -16288,7 +16287,7 @@ msgstr ""
 "style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
 "right:0px; -qt-block-indent:0; text-indent:0px;\">Rüzgar yönünün "
 "gösterilmesini isteyip istemediğinizi seçin. Rüzgar yönü, o istasyon için "
-"mevcutsa gösterilir.</p></body></html>\n"
+"kullanılabilirse gösterilir.</p></body></html>\n"
 
 #: src/plugins/render/weather/WeatherConfigWidget.ui:55
 msgctxt "WeatherConfigWidget|"
@@ -16312,7 +16311,7 @@ msgstr ""
 "style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
 "right:0px; -qt-block-indent:0; text-indent:0px;\">Rüzgar hızının "
 "gösterilmesini isteyip istemediğinizi seçin. Rüzgar hızı yalnızca belirli "
-"istasyon için mevcutsa gösterilecektir.</p></body></html>\n"
+"istasyon için kullanılabilirse gösterilecektir.</p></body></html>\n"
 
 #: src/plugins/render/weather/WeatherConfigWidget.ui:66
 #: src/plugins/render/weather/WeatherConfigWidget.ui:113
@@ -16968,7 +16967,7 @@ msgstr "hızlı (15 mph)"
 #: src/plugins/runner/cyclestreets/CycleStreetsPlugin.cpp:82
 msgctxt "Marble::CycleStreetsPlugin|"
 msgid "This service requires an Internet connection."
-msgstr "Bu servis, bir İnternet bağlantısına gereksinim duyuyor."
+msgstr "Bu hizmet, bir İnternet bağlantısına gereksinim duyuyor."
 
 #: src/plugins/runner/cyclestreets/CycleStreetsPlugin.cpp:87
 msgctxt "Marble::CycleStreetsPlugin|"
@@ -17071,7 +17070,7 @@ msgstr "Hostip.info"
 msgctxt "Marble::HostipPlugin|"
 msgid "Host name and IP geolocation search using the hostip.info service"
 msgstr ""
-"Hostip.info servisini kullanarak makine adı ve IP coğrafi konum araması"
+"Hostip.info hizmetini kullanarak makine adı ve IP coğrafi konum araması"
 
 #: src/plugins/runner/json/JsonPlugin.cpp:21
 msgctxt "Marble::JsonPlugin|"
@@ -17503,7 +17502,7 @@ msgstr ""
 #: src/plugins/runner/mapquest/MapQuestPlugin.cpp:19
 msgctxt "Marble::MapQuestPlugin|"
 msgid "This service requires an Internet connection."
-msgstr "Bu servis, bir İnternet bağlantısına gereksinim duyuyor."
+msgstr "Bu hizmet, bir İnternet bağlantısına gereksinim duyuyor."
 
 #: src/plugins/runner/mapquest/MapQuestPlugin.cpp:24
 msgctxt "Marble::MapQuestPlugin|"
@@ -17578,12 +17577,12 @@ msgstr "%1 Kuruluyor"
 #: src/plugins/runner/monav/MonavConfigWidget.cpp:618
 msgctxt "QObject|"
 msgid "An update is available. Click to install it."
-msgstr "Bir güncelleme mevcut. Kurmak için tıklayın."
+msgstr "Kullanılabilir güncelleme var. Kurmak için tıklayın."
 
 #: src/plugins/runner/monav/MonavConfigWidget.cpp:619
 msgctxt "QObject|"
 msgid "No update available. You are running the latest version."
-msgstr "Mevcut bir güncelleme yok. En son sürümü kullanıyorsunuz."
+msgstr "Kullanılabilir güncelleme yok. En son sürümü kullanıyorsunuz."
 
 #: src/plugins/runner/monav/MonavConfigWidget.cpp:647
 msgctxt "Marble::MonavConfigWidget|"
@@ -17735,7 +17734,7 @@ msgstr "OpenStreetMap Nominatim"
 msgctxt "Marble::NominatimPlugin|"
 msgid "Online reverse geocoding using the OpenStreetMap Nominatim service"
 msgstr ""
-"OpenStreetMap Nominatim servisini kullanan çevrim için ters coğrafik kodlama"
+"OpenStreetMap Nominatim hizmetini kullanan çevrimiçi ters coğrafik kodlama"
 
 #: src/plugins/runner/nominatim-search/NominatimSearchPlugin.cpp:22
 msgctxt "Marble::NominatimPlugin|"
@@ -17746,13 +17745,13 @@ msgstr "OpenStreetMap Nominatim Arama"
 msgctxt "Marble::NominatimPlugin|"
 msgid "Online search for placemarks using the OpenStreetMap Nominatim service"
 msgstr ""
-"OpenStreetMap Nominatim servisini kullanan, yer işaretleri için çevrim içi "
+"OpenStreetMap Nominatim hizmetini kullanan, yer işaretleri için çevrimiçi "
 "arama"
 
 #: src/plugins/runner/open-source-routing-machine/OSRMPlugin.cpp:17
 msgctxt "Marble::OSRMPlugin|"
 msgid "This service requires an Internet connection."
-msgstr "Bu servis, bir İnternet bağlantısına gereksinim duyuyor."
+msgstr "Bu hizmet, bir İnternet bağlantısına gereksinim duyuyor."
 
 #: src/plugins/runner/open-source-routing-machine/OSRMPlugin.cpp:22
 msgctxt "Marble::OSRMPlugin|"
@@ -17809,7 +17808,7 @@ msgstr "Feribotları iptal et"
 #: src/plugins/runner/openrouteservice/OpenRouteServicePlugin.cpp:19
 msgctxt "Marble::OpenRouteServicePlugin|"
 msgid "This service requires an Internet connection."
-msgstr "Bu servis, bir İnternet bağlantısına gereksinim duyuyor."
+msgstr "Bu hizmet, bir İnternet bağlantısına gereksinim duyuyor."
 
 #: src/plugins/runner/openrouteservice/OpenRouteServicePlugin.cpp:24
 msgctxt "Marble::OpenRouteServicePlugin|"
@@ -18054,7 +18053,7 @@ msgstr "En Kısa"
 #: src/plugins/runner/yours/YoursPlugin.cpp:20
 msgctxt "Marble::YoursPlugin|"
 msgid "This service requires an Internet connection."
-msgstr "Bu servis, bir İnternet bağlantısına gereksinim duyuyor."
+msgstr "Bu hizmet, bir İnternet bağlantısına gereksinim duyuyor."
 
 #: src/plugins/runner/yours/YoursPlugin.cpp:25
 msgctxt "Marble::YoursPlugin|"
