@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2023-03-17 22:09+0100\n"
+"PO-Revision-Date: 2023-03-18 07:23+0100\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
@@ -8036,121 +8036,120 @@ msgctxt "MapViewWidget|"
 msgid "Here you can choose the preferred map view from different topics."
 msgstr "Tu lahko izberete prednostni prikaz karte iz različnih tem."
 
-#: src/lib/marble/MapWizard.cpp:152
+#: src/lib/marble/MapWizard.cpp:163
 msgctxt "Marble::PreviewDialog|"
 msgid "Preview Map"
 msgstr "Predogled karte"
 
-#: src/lib/marble/MapWizard.cpp:244 src/lib/marble/MapWizard.cpp:249
+#: src/lib/marble/MapWizard.cpp:268 src/lib/marble/MapWizard.cpp:273
 msgctxt "Marble::MapWizard|"
 msgid "Error while parsing"
 msgstr "Napaka med razčlenjevanjem"
 
-#: src/lib/marble/MapWizard.cpp:244
+#: src/lib/marble/MapWizard.cpp:268
 msgctxt "Marble::MapWizard|"
 msgid "Wizard cannot parse server's response"
 msgstr "Čarovnik ne more razčleniti odgovora strežnika"
 
-#: src/lib/marble/MapWizard.cpp:249
+#: src/lib/marble/MapWizard.cpp:273
 msgctxt "Marble::MapWizard|"
 msgid "Server is not a Web Map Server."
 msgstr "Strežnik ni Web Map Server."
 
-#: src/lib/marble/MapWizard.cpp:285 src/lib/marble/MapWizard.cpp:294
-#: src/lib/marble/MapWizard.cpp:860
+#: src/lib/marble/MapWizard.cpp:331 src/lib/marble/MapWizard.cpp:340
+#: src/lib/marble/MapWizard.cpp:965
 msgctxt "Marble::MapWizard|"
 msgid "Web Mercator (epsg:3857)"
 msgstr "Spletna Mercatorjeva (epsg:3857)"
 
-#: src/lib/marble/MapWizard.cpp:286 src/lib/marble/MapWizard.cpp:646
-#: src/lib/marble/MapWizard.cpp:747
+#: src/lib/marble/MapWizard.cpp:332 src/lib/marble/MapWizard.cpp:737
+#: src/lib/marble/MapWizard.cpp:852
 msgctxt "Marble::MapWizard|"
 msgid "Equirectangular (epsg:4326)"
 msgstr "Enakostranična (epsg:4326)"
 
-#: src/lib/marble/MapWizard.cpp:316 src/lib/marble/MapWizard.cpp:737
+#: src/lib/marble/MapWizard.cpp:376 src/lib/marble/MapWizard.cpp:842
 msgctxt "Marble::MapWizard|"
 msgid "Preview Image"
 msgstr "Slika za predogled"
 
-#: src/lib/marble/MapWizard.cpp:320
+#: src/lib/marble/MapWizard.cpp:380
 msgctxt "Marble::MapWizard|"
 msgid "Base Tile"
 msgstr "Osnovna ploščica"
 
-#: src/lib/marble/MapWizard.cpp:325 src/lib/marble/MapWizard.cpp:330
-#, fuzzy, qt-format
-#| msgctxt "NavigationInfoBar|"
-#| msgid "%1 m"
+#: src/lib/marble/MapWizard.cpp:384
+#, fuzzy
+#| msgctxt "MapWizard|"
+#| msgid "Legend Image:"
+msgctxt "Marble::MapWizard|"
+msgid "Legend Image"
+msgstr "Slika za legendo:"
+
+#: src/lib/marble/MapWizard.cpp:391 src/lib/marble/MapWizard.cpp:399
+#, qt-format
 msgctxt "Marble::MapWizard|"
 msgid "%1"
-msgstr "%1 m"
+msgstr "%1"
 
-#: src/lib/marble/MapWizard.cpp:326
-#, fuzzy, qt-format
-#| msgctxt "Marble::MapWizard|"
-#| msgid "The base tile could not be downloaded."
+#: src/lib/marble/MapWizard.cpp:392
+#, qt-format
 msgctxt "Marble::MapWizard|"
 msgid "The %1 could not be downloaded."
-msgstr "Osnovne ploščice ni bilo mogoče prejeti."
+msgstr "%1 ni bilo mogoče prenesti sem."
 
-#: src/lib/marble/MapWizard.cpp:331
-#, fuzzy, qt-format
-#| msgctxt "Marble::MapWizard|"
-#| msgid ""
-#| "The base tile could not be downloaded successfully. The server replied:\n"
-#| "\n"
-#| "%1"
+#: src/lib/marble/MapWizard.cpp:400
+#, qt-format
 msgctxt "Marble::MapWizard|"
 msgid ""
 "The %1 could not be downloaded successfully. The server replied:\n"
 "\n"
 "%2"
 msgstr ""
-"Osnovne ploščice ni bilo mogoče uspešno prejeti. Strežnik je odgovoril:\n"
+"%1 ni bilo mogoče uspešno prenesti sem. Strežnik je odgovoril:\n"
 "\n"
-"%1"
+"%2"
 
-#: src/lib/marble/MapWizard.cpp:374 src/lib/marble/MapWizard.cpp:375
-#: src/lib/marble/MapWizard.cpp:396
+#: src/lib/marble/MapWizard.cpp:451 src/lib/marble/MapWizard.cpp:452
+#: src/lib/marble/MapWizard.cpp:473
 msgctxt "Marble::MapWizard|"
 msgid "Custom"
 msgstr "Po meri"
 
-#: src/lib/marble/MapWizard.cpp:613 src/lib/marble/MapWizard.cpp:616
+#: src/lib/marble/MapWizard.cpp:703 src/lib/marble/MapWizard.cpp:706
 msgctxt "Marble::MapWizard|"
 msgid "Archiving failed"
 msgstr "Arhiviranje ni uspelo"
 
-#: src/lib/marble/MapWizard.cpp:613
+#: src/lib/marble/MapWizard.cpp:703
 msgctxt "Marble::MapWizard|"
 msgid "Archiving process cannot be started."
 msgstr "Opravila arhiviranja ni bilo mogoče zagnati."
 
-#: src/lib/marble/MapWizard.cpp:616
+#: src/lib/marble/MapWizard.cpp:706
 msgctxt "Marble::MapWizard|"
 msgid "Archiving process crashed."
 msgstr "Opravilo arhiviranja se je nepredvideno prekinilo."
 
-#: src/lib/marble/MapWizard.cpp:676 src/lib/marble/MapWizard.cpp:684
-#: src/lib/marble/MapWizard.cpp:693
+#: src/lib/marble/MapWizard.cpp:770 src/lib/marble/MapWizard.cpp:778
+#: src/lib/marble/MapWizard.cpp:787
 msgctxt "Marble::MapWizard|"
 msgid "Source Image"
 msgstr "Izvorna slika"
 
-#: src/lib/marble/MapWizard.cpp:677
+#: src/lib/marble/MapWizard.cpp:771
 msgctxt "Marble::MapWizard|"
 msgid "Please specify a source image."
 msgstr "Navedite izvorno sliko."
 
-#: src/lib/marble/MapWizard.cpp:685
+#: src/lib/marble/MapWizard.cpp:779
 msgctxt "Marble::MapWizard|"
 msgid ""
 "The source image you specified does not exist. Please specify a different "
 "one."
 msgstr "Navedena izvorna slika ne obstaja. Navedite drugo."
 
-#: src/lib/marble/MapWizard.cpp:694
+#: src/lib/marble/MapWizard.cpp:788
 msgctxt "Marble::MapWizard|"
 msgid ""
 "The source image you specified does not seem to be an image. Please specify "
@@ -8159,89 +8158,44 @@ msgstr ""
 "Videti je, da navedena izvorna slika ni slika. Navedite drugo slikovno "
 "datoteko."
 
-#: src/lib/marble/MapWizard.cpp:714
+#: src/lib/marble/MapWizard.cpp:819
 msgctxt "Marble::MapWizard|"
 msgid "Map Title"
 msgstr "Naslov karte"
 
-#: src/lib/marble/MapWizard.cpp:714
+#: src/lib/marble/MapWizard.cpp:819
 msgctxt "Marble::MapWizard|"
 msgid "Please specify a map title."
 msgstr "Navedite naslov karte."
 
-#: src/lib/marble/MapWizard.cpp:721 src/lib/marble/MapWizard.cpp:729
+#: src/lib/marble/MapWizard.cpp:826 src/lib/marble/MapWizard.cpp:834
 msgctxt "Marble::MapWizard|"
 msgid "Map Name"
 msgstr "Ime karte"
 
-#: src/lib/marble/MapWizard.cpp:721
+#: src/lib/marble/MapWizard.cpp:826
 msgctxt "Marble::MapWizard|"
 msgid "Please specify a map name."
 msgstr "Navedite ime karte."
 
-#: src/lib/marble/MapWizard.cpp:730
+#: src/lib/marble/MapWizard.cpp:835
 #, qt-format
 msgctxt "Marble::MapWizard|"
 msgid ""
 "Please specify another map name, since there is already a map named \"%1\"."
 msgstr "Karta z imenom »%1« že obstaja. Navedite drugo ime karte."
 
-#: src/lib/marble/MapWizard.cpp:737
+#: src/lib/marble/MapWizard.cpp:842
 msgctxt "Marble::MapWizard|"
 msgid "Please specify a preview image."
 msgstr "Navedite sliko za predogled."
 
-#: src/lib/marble/MapWizard.cpp:972
-msgctxt "Marble::MapWizard|"
-msgid "Geographic Pole"
-msgstr "Geografski pol"
-
-#: src/lib/marble/MapWizard.cpp:978
-msgctxt "Marble::MapWizard|"
-msgid "Magnetic Pole"
-msgstr "Magnetni pol"
-
-#: src/lib/marble/MapWizard.cpp:984
-msgctxt "Marble::MapWizard|"
-msgid "Airport"
-msgstr "Letališče"
-
-#: src/lib/marble/MapWizard.cpp:990
-msgctxt "Marble::MapWizard|"
-msgid "Shipwreck"
-msgstr "Razbitina ladje"
-
-#: src/lib/marble/MapWizard.cpp:996
-msgctxt "Marble::MapWizard|"
-msgid "Observatory"
-msgstr "Observatorij"
-
-#: src/lib/marble/MapWizard.cpp:1018
-msgctxt "Marble::MapWizard|"
-msgid "Mountain"
-msgstr "Gora"
-
-#: src/lib/marble/MapWizard.cpp:1024
-msgctxt "Marble::MapWizard|"
-msgid "Volcano"
-msgstr "Vulkan"
-
-#: src/lib/marble/MapWizard.cpp:1055
-msgctxt "Marble::MapWizard|"
-msgid "International"
-msgstr "Mednarodne"
-
-#: src/lib/marble/MapWizard.cpp:1061
-msgctxt "Marble::MapWizard|"
-msgid "State"
-msgstr "Država"
-
-#: src/lib/marble/MapWizard.cpp:1164
+#: src/lib/marble/MapWizard.cpp:1270
 msgctxt "Marble::MapWizard|"
 msgid "Problem while creating files"
 msgstr "Težava med ustvarjanjem datotek"
 
-#: src/lib/marble/MapWizard.cpp:1164
+#: src/lib/marble/MapWizard.cpp:1270
 msgctxt "Marble::MapWizard|"
 msgid "Check if a theme with the same name exists."
 msgstr "Preverite, ali tema z enakim imenom že obstaja."
@@ -8405,45 +8359,79 @@ msgctxt "MapWizard|"
 msgid "https://"
 msgstr "https://"
 
-#: src/lib/marble/MapWizard.ui:185
-#, fuzzy
-#| msgctxt ""
-#| "Marble::Placemark|A copy shop provides a service to send documents "
-#| "through fax"
-#| msgid "Fax service"
+#: src/lib/marble/MapWizard.ui:208
 msgctxt "MapWizard|"
 msgid "Wms-Service"
-msgstr "Storitev faksa"
+msgstr "Storitev Wms"
 
-#: src/lib/marble/MapWizard.ui:192
+#: src/lib/marble/MapWizard.ui:222
 #, fuzzy
-#| msgctxt "MapWizard|"
-#| msgid "Available Maps:"
+#| msgctxt "MainScreen|"
+#| msgid "Layer Options"
+msgctxt "MapWizard|"
+msgid "Layer Selection"
+msgstr "Možnosti plasti"
+
+#: src/lib/marble/MapWizard.ui:233
 msgctxt "MapWizard|"
 msgid "Available Layers:"
-msgstr "Razpoložljive karte:"
+msgstr "Razpoložljive plasti:"
 
-#: src/lib/marble/MapWizard.ui:210
+#: src/lib/marble/MapWizard.ui:256
+#, fuzzy
+#| msgctxt "SearchField|"
+#| msgid "Search"
 msgctxt "MapWizard|"
-msgid "Tile Format:"
-msgstr "Format ploščice:"
+msgid "Search:"
+msgstr "Poišči"
 
-#: src/lib/marble/MapWizard.ui:217
+#: src/lib/marble/MapWizard.ui:283
 msgctxt "MapWizard|"
-msgid "Indicates the file format of the tiles."
-msgstr "Kaže format datoteke ploščic."
+msgid "Multiple Selections"
+msgstr ""
 
-#: src/lib/marble/MapWizard.ui:224
+#: src/lib/marble/MapWizard.ui:306
 msgctxt "MapWizard|"
-msgid "Indicates the projection in which the tiles are rendered."
-msgstr "Kaže projekcijo v kateri so ploščice upodobljene."
+msgid "Backdrop:"
+msgstr ""
 
-#: src/lib/marble/MapWizard.ui:231
+#: src/lib/marble/MapWizard.ui:316
 msgctxt "MapWizard|"
 msgid "Tile Projection:"
 msgstr "Projekcija ploščice:"
 
-#: src/lib/marble/MapWizard.ui:244
+#: src/lib/marble/MapWizard.ui:323
+msgctxt "MapWizard|"
+msgid "Indicates the projection in which the tiles are rendered."
+msgstr "Kaže projekcijo v kateri so ploščice upodobljene."
+
+#: src/lib/marble/MapWizard.ui:330
+msgctxt "MapWizard|"
+msgid "Tile Format:"
+msgstr "Format ploščice:"
+
+#: src/lib/marble/MapWizard.ui:337
+msgctxt "MapWizard|"
+msgid "Indicates the file format of the tiles."
+msgstr "Kaže format datoteke ploščic."
+
+#: src/lib/marble/MapWizard.ui:369
+#, fuzzy
+#| msgctxt "MainScreen|"
+#| msgid "Layer Options"
+msgctxt "MapWizard|"
+msgid "Layer Info"
+msgstr "Možnosti plasti"
+
+#: src/lib/marble/MapWizard.ui:382
+#, fuzzy
+#| msgctxt "GeoDataPlacemark|"
+#| msgid "Service Road"
+msgctxt "MapWizard|"
+msgid "Service Info"
+msgstr "Vzporedna cesta"
+
+#: src/lib/marble/MapWizard.ui:399
 msgctxt "MapWizard|"
 msgid ""
 "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
@@ -8494,17 +8482,17 @@ msgstr ""
 "right:0px; -qt-block-indent:0; text-indent:0px;\"><img src=\":/data/svg/"
 "worldmap.svg\" width=\"150\" /></p></body></html>"
 
-#: src/lib/marble/MapWizard.ui:263
+#: src/lib/marble/MapWizard.ui:418
 msgctxt "MapWizard|"
 msgid "Source Image:"
 msgstr "Izvorna slika:"
 
-#: src/lib/marble/MapWizard.ui:279 src/lib/marble/MapWizard.ui:546
+#: src/lib/marble/MapWizard.ui:434 src/lib/marble/MapWizard.ui:719
 msgctxt "MapWizard|"
 msgid "..."
 msgstr "..."
 
-#: src/lib/marble/MapWizard.ui:305
+#: src/lib/marble/MapWizard.ui:460
 msgctxt "MapWizard|"
 msgid ""
 "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
@@ -8551,12 +8539,12 @@ msgstr ""
 "\">{zoomLevel}</span><span style=\" font-family:'Sans Serif';\">.</span></"
 "p></body></html>"
 
-#: src/lib/marble/MapWizard.ui:341
+#: src/lib/marble/MapWizard.ui:496
 msgctxt "MapWizard|"
 msgid "URL Scheme:"
 msgstr "Shema naslovov URL:"
 
-#: src/lib/marble/MapWizard.ui:380
+#: src/lib/marble/MapWizard.ui:535
 msgctxt "MapWizard|"
 msgid ""
 "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
@@ -8591,37 +8579,37 @@ msgstr ""
 "bodo uporabniki vedeli, kaj prikazuje karta, dodajte še opis.</span></p></"
 "body></html>"
 
-#: src/lib/marble/MapWizard.ui:397
+#: src/lib/marble/MapWizard.ui:552
 msgctxt "MapWizard|"
 msgid "Map Title:"
 msgstr "Naslov karte:"
 
-#: src/lib/marble/MapWizard.ui:410
+#: src/lib/marble/MapWizard.ui:565
 msgctxt "MapWizard|"
 msgid "A short concise name for your map theme."
 msgstr "Kratko in jedrnato ime za vašo temo karte."
 
-#: src/lib/marble/MapWizard.ui:417 src/lib/marble/MapWizard.ui:630
+#: src/lib/marble/MapWizard.ui:572 src/lib/marble/MapWizard.ui:795
 msgctxt "MapWizard|"
 msgid "Map Name:"
 msgstr "Ime karte:"
 
-#: src/lib/marble/MapWizard.ui:427
+#: src/lib/marble/MapWizard.ui:582
 msgctxt "MapWizard|"
 msgid "The lowercase map theme id."
 msgstr "Id teme karte v malih črkah."
 
-#: src/lib/marble/MapWizard.ui:430
+#: src/lib/marble/MapWizard.ui:585
 msgctxt "MapWizard|"
 msgid "The folder name of your new theme."
 msgstr "Ime mape vaše nove teme."
 
-#: src/lib/marble/MapWizard.ui:437
+#: src/lib/marble/MapWizard.ui:598
 msgctxt "MapWizard|"
 msgid "Description:"
 msgstr "Opis:"
 
-#: src/lib/marble/MapWizard.ui:450
+#: src/lib/marble/MapWizard.ui:617
 msgctxt "MapWizard|"
 msgid ""
 "A short description of your map theme. Here you can provide information "
@@ -8631,62 +8619,37 @@ msgstr ""
 "Kratek opis vaše teme karte. Sem lahko vnesete podatke o namenu, izvoru, "
 "avtorskih pravicah in licenci podatkov, ki jih karta uporablja."
 
-#: src/lib/marble/MapWizard.ui:453
+#: src/lib/marble/MapWizard.ui:620
 msgctxt "MapWizard|"
 msgid "It will appear in a tool tip and may contain HTML formatting."
 msgstr "Prikazan bo v orodnem namigu in lahko vsebuje oblikovanje s HTML."
 
-#: src/lib/marble/MapWizard.ui:460 src/lib/marble/MapWizard.ui:670
+#: src/lib/marble/MapWizard.ui:633 src/lib/marble/MapWizard.ui:835
 msgctxt "MapWizard|"
 msgid "Preview Image:"
 msgstr "Slika za predogled:"
 
-#: src/lib/marble/MapWizard.ui:475
+#: src/lib/marble/MapWizard.ui:648
 msgctxt "MapWizard|"
 msgid "preview image"
 msgstr "slika za predogled"
 
-#: src/lib/marble/MapWizard.ui:497
+#: src/lib/marble/MapWizard.ui:670
 msgctxt "MapWizard|"
 msgid "Change..."
 msgstr "Spremeni..."
 
-#: src/lib/marble/MapWizard.ui:527
+#: src/lib/marble/MapWizard.ui:700
 msgctxt "MapWizard|"
 msgid "<b>Optional: Addition of a Map Key</b>"
 msgstr "<b>Neobvezno: Dodatek ključa zemljevida</b>"
 
-#: src/lib/marble/MapWizard.ui:536
+#: src/lib/marble/MapWizard.ui:709
 msgctxt "MapWizard|"
 msgid "Legend Image:"
 msgstr "Slika za legendo:"
 
-#: src/lib/marble/MapWizard.ui:562
-msgctxt "MapWizard|"
-msgid "Places of Interest"
-msgstr "Zanimiva mesta"
-
-#: src/lib/marble/MapWizard.ui:569
-msgctxt "MapWizard|"
-msgid "Populated Places"
-msgstr "Poseljeni kraji"
-
-#: src/lib/marble/MapWizard.ui:576
-msgctxt "MapWizard|"
-msgid "Terrain"
-msgstr "Teren"
-
-#: src/lib/marble/MapWizard.ui:583
-msgctxt "MapWizard|"
-msgid "Coordinate Grid"
-msgstr "Koordinatna mreža"
-
-#: src/lib/marble/MapWizard.ui:590
-msgctxt "MapWizard|"
-msgid "Border Lines"
-msgstr "Mejne črte"
-
-#: src/lib/marble/MapWizard.ui:605
+#: src/lib/marble/MapWizard.ui:770
 msgctxt "MapWizard|"
 msgid ""
 "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
@@ -8734,27 +8697,27 @@ msgstr ""
 "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"></"
 "p></body></html>"
 
-#: src/lib/marble/MapWizard.ui:637
+#: src/lib/marble/MapWizard.ui:802
 msgctxt "MapWizard|"
 msgid "Map name goes here."
 msgstr "Sem gre ime karte."
 
-#: src/lib/marble/MapWizard.ui:650
+#: src/lib/marble/MapWizard.ui:815
 msgctxt "MapWizard|"
 msgid "Map Theme:"
 msgstr "Tema karte:"
 
-#: src/lib/marble/MapWizard.ui:657
+#: src/lib/marble/MapWizard.ui:822
 msgctxt "MapWizard|"
 msgid "Map theme goes here."
 msgstr "Sem gre tema karte."
 
-#: src/lib/marble/MapWizard.ui:682
+#: src/lib/marble/MapWizard.ui:847
 msgctxt "MapWizard|"
 msgid "Thumbnail"
-msgstr ""
+msgstr "Predogledna sličica"
 
-#: src/lib/marble/MapWizard.ui:692
+#: src/lib/marble/MapWizard.ui:857
 msgctxt "MapWizard|"
 msgid "Preview Map"
 msgstr "Predogled karte"
@@ -18179,6 +18142,62 @@ msgstr "Predloga plavajočega predmeta"
 msgctxt "Marble::FITemplateFloatItem|"
 msgid "This is a template class for float items."
 msgstr "Ta razred je predloga za plavajoče predmete."
+
+#~ msgctxt "Marble::MapWizard|"
+#~ msgid "Geographic Pole"
+#~ msgstr "Geografski pol"
+
+#~ msgctxt "Marble::MapWizard|"
+#~ msgid "Magnetic Pole"
+#~ msgstr "Magnetni pol"
+
+#~ msgctxt "Marble::MapWizard|"
+#~ msgid "Airport"
+#~ msgstr "Letališče"
+
+#~ msgctxt "Marble::MapWizard|"
+#~ msgid "Shipwreck"
+#~ msgstr "Razbitina ladje"
+
+#~ msgctxt "Marble::MapWizard|"
+#~ msgid "Observatory"
+#~ msgstr "Observatorij"
+
+#~ msgctxt "Marble::MapWizard|"
+#~ msgid "Mountain"
+#~ msgstr "Gora"
+
+#~ msgctxt "Marble::MapWizard|"
+#~ msgid "Volcano"
+#~ msgstr "Vulkan"
+
+#~ msgctxt "Marble::MapWizard|"
+#~ msgid "International"
+#~ msgstr "Mednarodne"
+
+#~ msgctxt "Marble::MapWizard|"
+#~ msgid "State"
+#~ msgstr "Država"
+
+#~ msgctxt "MapWizard|"
+#~ msgid "Places of Interest"
+#~ msgstr "Zanimiva mesta"
+
+#~ msgctxt "MapWizard|"
+#~ msgid "Populated Places"
+#~ msgstr "Poseljeni kraji"
+
+#~ msgctxt "MapWizard|"
+#~ msgid "Terrain"
+#~ msgstr "Teren"
+
+#~ msgctxt "MapWizard|"
+#~ msgid "Coordinate Grid"
+#~ msgstr "Koordinatna mreža"
+
+#~ msgctxt "MapWizard|"
+#~ msgid "Border Lines"
+#~ msgstr "Mejne črte"
 
 #~| msgctxt "Marble::MapWizard|"
 #~| msgid "Equirectangular (epsg:4326)"

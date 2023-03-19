@@ -9099,75 +9099,82 @@ msgctxt "MapViewWidget|"
 msgid "Here you can choose the preferred map view from different topics."
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:152
+#: src/lib/marble/MapWizard.cpp:163
 #, fuzzy
 #| msgid "Preview Map"
 msgctxt "Marble::PreviewDialog|"
 msgid "Preview Map"
 msgstr "មើល​ផែនទី​ជាមុន"
 
-#: src/lib/marble/MapWizard.cpp:244 src/lib/marble/MapWizard.cpp:249
+#: src/lib/marble/MapWizard.cpp:268 src/lib/marble/MapWizard.cpp:273
 #, fuzzy
 #| msgid "Error while parsing"
 msgctxt "Marble::MapWizard|"
 msgid "Error while parsing"
 msgstr "កំហុស​ពេល​ញែក"
 
-#: src/lib/marble/MapWizard.cpp:244
+#: src/lib/marble/MapWizard.cpp:268
 #, fuzzy
 #| msgid "Wizard cannot parse server's response"
 msgctxt "Marble::MapWizard|"
 msgid "Wizard cannot parse server's response"
 msgstr "អ្នកជំនួយការ​មិន​អាច​ញែក​ចម្លើយ​តប​របស់​ម៉ាស៊ីន​បម្រើ​បាន​ទេ"
 
-#: src/lib/marble/MapWizard.cpp:249
+#: src/lib/marble/MapWizard.cpp:273
 #, fuzzy
 #| msgid "Server is not a Web Map Server."
 msgctxt "Marble::MapWizard|"
 msgid "Server is not a Web Map Server."
 msgstr "ម៉ាស៊ីន​បម្រើ​មិនមែន​ជា​ម៉ាស៊ីន​បម្រើ​ផែនទី​បណ្ដាញ​ទេ ។"
 
-#: src/lib/marble/MapWizard.cpp:285 src/lib/marble/MapWizard.cpp:294
-#: src/lib/marble/MapWizard.cpp:860
+#: src/lib/marble/MapWizard.cpp:331 src/lib/marble/MapWizard.cpp:340
+#: src/lib/marble/MapWizard.cpp:965
 msgctxt "Marble::MapWizard|"
 msgid "Web Mercator (epsg:3857)"
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:286 src/lib/marble/MapWizard.cpp:646
-#: src/lib/marble/MapWizard.cpp:747
+#: src/lib/marble/MapWizard.cpp:332 src/lib/marble/MapWizard.cpp:737
+#: src/lib/marble/MapWizard.cpp:852
 msgctxt "Marble::MapWizard|"
 msgid "Equirectangular (epsg:4326)"
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:316 src/lib/marble/MapWizard.cpp:737
+#: src/lib/marble/MapWizard.cpp:376 src/lib/marble/MapWizard.cpp:842
 #, fuzzy
 #| msgid "Preview Image"
 msgctxt "Marble::MapWizard|"
 msgid "Preview Image"
 msgstr "មើល​រួប​ភាព​ជាមុន"
 
-#: src/lib/marble/MapWizard.cpp:320
+#: src/lib/marble/MapWizard.cpp:380
 #, fuzzy
 #| msgid "Base Tile"
 msgctxt "Marble::MapWizard|"
 msgid "Base Tile"
 msgstr "ក្រឡា​ក្បឿង​គោល"
 
-#: src/lib/marble/MapWizard.cpp:325 src/lib/marble/MapWizard.cpp:330
+#: src/lib/marble/MapWizard.cpp:384
+#, fuzzy
+#| msgid "Legend"
+msgctxt "Marble::MapWizard|"
+msgid "Legend Image"
+msgstr "កំណត់​សម្គាល់"
+
+#: src/lib/marble/MapWizard.cpp:391 src/lib/marble/MapWizard.cpp:399
 #, fuzzy, qt-format
 #| msgid "%1 m"
 msgctxt "Marble::MapWizard|"
 msgid "%1"
 msgstr "%1 ម."
 
-#: src/lib/marble/MapWizard.cpp:326
+#: src/lib/marble/MapWizard.cpp:392
 #, fuzzy, qt-format
 #| msgid "The base tile could not be downloaded."
 msgctxt "Marble::MapWizard|"
 msgid "The %1 could not be downloaded."
 msgstr "មិន​អាច​ទាញ​យក​ក្រឡា​ក្បឿង​គោល​បាន​ទេ ។"
 
-#: src/lib/marble/MapWizard.cpp:331
+#: src/lib/marble/MapWizard.cpp:400
 #, fuzzy, qt-format
 #| msgid ""
 #| "The base tile could not be downloaded successfully. The server replied:\n"
@@ -9183,51 +9190,51 @@ msgstr ""
 "\n"
 "%1"
 
-#: src/lib/marble/MapWizard.cpp:374 src/lib/marble/MapWizard.cpp:375
-#: src/lib/marble/MapWizard.cpp:396
+#: src/lib/marble/MapWizard.cpp:451 src/lib/marble/MapWizard.cpp:452
+#: src/lib/marble/MapWizard.cpp:473
 #, fuzzy
 #| msgid "Custom"
 msgctxt "Marble::MapWizard|"
 msgid "Custom"
 msgstr "ផ្ទាល់ខ្លួន"
 
-#: src/lib/marble/MapWizard.cpp:613 src/lib/marble/MapWizard.cpp:616
+#: src/lib/marble/MapWizard.cpp:703 src/lib/marble/MapWizard.cpp:706
 #, fuzzy
 #| msgid "Archiving failed"
 msgctxt "Marble::MapWizard|"
 msgid "Archiving failed"
 msgstr "ការ​ទុក​ក្នុង​ប័ណ្ណសារ​បាន​បរាជ័យ"
 
-#: src/lib/marble/MapWizard.cpp:613
+#: src/lib/marble/MapWizard.cpp:703
 #, fuzzy
 #| msgid "Archiving process cannot be started."
 msgctxt "Marble::MapWizard|"
 msgid "Archiving process cannot be started."
 msgstr "មិន​អាច​ចាប់ផ្ដើម​ដំណើរការ​ទុក​ក្នុង​ប័ណ្ណសារ​បាន​ទេ ។"
 
-#: src/lib/marble/MapWizard.cpp:616
+#: src/lib/marble/MapWizard.cpp:706
 #, fuzzy
 #| msgid "Archiving process crashed."
 msgctxt "Marble::MapWizard|"
 msgid "Archiving process crashed."
 msgstr "ដំណើរការ​ទុក​ក្នុង​ប័ណ្ណសារ​បាន​គាំង ។"
 
-#: src/lib/marble/MapWizard.cpp:676 src/lib/marble/MapWizard.cpp:684
-#: src/lib/marble/MapWizard.cpp:693
+#: src/lib/marble/MapWizard.cpp:770 src/lib/marble/MapWizard.cpp:778
+#: src/lib/marble/MapWizard.cpp:787
 #, fuzzy
 #| msgid "Source Image"
 msgctxt "Marble::MapWizard|"
 msgid "Source Image"
 msgstr "រូបភាព​ប្រភព"
 
-#: src/lib/marble/MapWizard.cpp:677
+#: src/lib/marble/MapWizard.cpp:771
 #, fuzzy
 #| msgid "Please specify a source image."
 msgctxt "Marble::MapWizard|"
 msgid "Please specify a source image."
 msgstr "សូម​បញ្ជាក់​រូបភាព​ប្រភព ។"
 
-#: src/lib/marble/MapWizard.cpp:685
+#: src/lib/marble/MapWizard.cpp:779
 #, fuzzy
 #| msgid ""
 #| "The source image you specified does not exist. Please specify a different "
@@ -9238,7 +9245,7 @@ msgid ""
 "one."
 msgstr "រូបភាព​ប្រភព​ដែល​អ្នក​បាន​បញ្ជាក់​មិន​មាន​ទេ ។ សូម​បញ្ជាក់​មួយ​ផ្សេង​ទៀត ។"
 
-#: src/lib/marble/MapWizard.cpp:694
+#: src/lib/marble/MapWizard.cpp:788
 #, fuzzy
 #| msgid ""
 #| "The source image you specified does not seem to be an image. Please "
@@ -9249,35 +9256,35 @@ msgid ""
 "a different image file."
 msgstr "រូបភាព​ប្រភព​ដែល​អ្នក​បាន​បញ្ជាក់​ហាក់​មិនមែន​ជា​រូបភាព​ទេ ។ សូម​បញ្ជាក់​ឯកសារ​រូបភាព​ផ្សេង​ទៀត ។"
 
-#: src/lib/marble/MapWizard.cpp:714
+#: src/lib/marble/MapWizard.cpp:819
 #, fuzzy
 #| msgid "Map Title"
 msgctxt "Marble::MapWizard|"
 msgid "Map Title"
 msgstr "ចំណងជើង​ផែនទី"
 
-#: src/lib/marble/MapWizard.cpp:714
+#: src/lib/marble/MapWizard.cpp:819
 #, fuzzy
 #| msgid "Please specify a map title."
 msgctxt "Marble::MapWizard|"
 msgid "Please specify a map title."
 msgstr "សូម​បញ្ជាក់​ចំណងជើង​ផែនទី ។"
 
-#: src/lib/marble/MapWizard.cpp:721 src/lib/marble/MapWizard.cpp:729
+#: src/lib/marble/MapWizard.cpp:826 src/lib/marble/MapWizard.cpp:834
 #, fuzzy
 #| msgid "Map Name"
 msgctxt "Marble::MapWizard|"
 msgid "Map Name"
 msgstr "ឈ្មោះ​ផែនទី"
 
-#: src/lib/marble/MapWizard.cpp:721
+#: src/lib/marble/MapWizard.cpp:826
 #, fuzzy
 #| msgid "Please specify a map name."
 msgctxt "Marble::MapWizard|"
 msgid "Please specify a map name."
 msgstr "សូម​បញ្ជាក់​ឈ្មោះ​ផែនទី ។"
 
-#: src/lib/marble/MapWizard.cpp:730
+#: src/lib/marble/MapWizard.cpp:835
 #, fuzzy, qt-format
 #| msgid ""
 #| "Please specify another map name, since there is already a map named "
@@ -9287,84 +9294,21 @@ msgid ""
 "Please specify another map name, since there is already a map named \"%1\"."
 msgstr "សូម​បញ្ជាក់​ឈ្មោះ​ផែនទី​ផ្សេងទៀត ព្រោះ​ផែនទី​ឈ្មោះ \"%1\" មាន​រួចហើយ ។"
 
-#: src/lib/marble/MapWizard.cpp:737
+#: src/lib/marble/MapWizard.cpp:842
 #, fuzzy
 #| msgid "Please specify a preview image."
 msgctxt "Marble::MapWizard|"
 msgid "Please specify a preview image."
 msgstr "សូម​បញ្ជាក់​រូបភាព​មើល​ជាមុន ។"
 
-#: src/lib/marble/MapWizard.cpp:972
-#, fuzzy
-#| msgid "Geographic Pole"
-msgctxt "Marble::MapWizard|"
-msgid "Geographic Pole"
-msgstr "ប៉ូល​ភូមិសាស្ត្រ"
-
-#: src/lib/marble/MapWizard.cpp:978
-#, fuzzy
-#| msgid "Magnetic Pole"
-msgctxt "Marble::MapWizard|"
-msgid "Magnetic Pole"
-msgstr "ប៉ូល​មេដែក"
-
-#: src/lib/marble/MapWizard.cpp:984
-#, fuzzy
-#| msgid "Airport"
-msgctxt "Marble::MapWizard|"
-msgid "Airport"
-msgstr "អាកាស​យាន្តដ្ឋាន"
-
-#: src/lib/marble/MapWizard.cpp:990
-#, fuzzy
-#| msgid "Shipwreck"
-msgctxt "Marble::MapWizard|"
-msgid "Shipwreck"
-msgstr "លិច​នាវា"
-
-#: src/lib/marble/MapWizard.cpp:996
-#, fuzzy
-#| msgid "Observatory"
-msgctxt "Marble::MapWizard|"
-msgid "Observatory"
-msgstr "ការ​អង្កេត"
-
-#: src/lib/marble/MapWizard.cpp:1018
-#, fuzzy
-#| msgid "Mountain"
-msgctxt "Marble::MapWizard|"
-msgid "Mountain"
-msgstr "ភ្នំ"
-
-#: src/lib/marble/MapWizard.cpp:1024
-#, fuzzy
-#| msgid "Volcano"
-msgctxt "Marble::MapWizard|"
-msgid "Volcano"
-msgstr "ភ្នំ​ភ្លើង"
-
-#: src/lib/marble/MapWizard.cpp:1055
-#, fuzzy
-#| msgid "International"
-msgctxt "Marble::MapWizard|"
-msgid "International"
-msgstr "អន្តរជាតិ"
-
-#: src/lib/marble/MapWizard.cpp:1061
-#, fuzzy
-#| msgid "State"
-msgctxt "Marble::MapWizard|"
-msgid "State"
-msgstr "រដ្ឋ"
-
-#: src/lib/marble/MapWizard.cpp:1164
+#: src/lib/marble/MapWizard.cpp:1270
 #, fuzzy
 #| msgid "Problem while creating files"
 msgctxt "Marble::MapWizard|"
 msgid "Problem while creating files"
 msgstr "បញ្ហា​នៅ​ពេល​បង្កើត​ឯកសារ"
 
-#: src/lib/marble/MapWizard.cpp:1164
+#: src/lib/marble/MapWizard.cpp:1270
 #, fuzzy
 #| msgid "Check if a theme with the same name exists."
 msgctxt "Marble::MapWizard|"
@@ -9488,40 +9432,79 @@ msgctxt "MapWizard|"
 msgid "https://"
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:185
+#: src/lib/marble/MapWizard.ui:208
 #, fuzzy
 #| msgid "OpenRouteService"
 msgctxt "MapWizard|"
 msgid "Wms-Service"
 msgstr "OpenRouteService"
 
-#: src/lib/marble/MapWizard.ui:192
+#: src/lib/marble/MapWizard.ui:222
+#, fuzzy
+#| msgid "New Profile"
+msgctxt "MapWizard|"
+msgid "Layer Selection"
+msgstr "ទម្រង់​ថ្មី"
+
+#: src/lib/marble/MapWizard.ui:233
 msgctxt "MapWizard|"
 msgid "Available Layers:"
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:210
+#: src/lib/marble/MapWizard.ui:256
+#, fuzzy
+#| msgid "Search"
 msgctxt "MapWizard|"
-msgid "Tile Format:"
+msgid "Search:"
+msgstr "ស្វែងរក"
+
+#: src/lib/marble/MapWizard.ui:283
+msgctxt "MapWizard|"
+msgid "Multiple Selections"
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:217
+#: src/lib/marble/MapWizard.ui:306
+#, fuzzy
 msgctxt "MapWizard|"
-msgid "Indicates the file format of the tiles."
-msgstr ""
+msgid "Backdrop:"
+msgstr "ថយ​​ក្រោយ"
 
-#: src/lib/marble/MapWizard.ui:224
-msgctxt "MapWizard|"
-msgid "Indicates the projection in which the tiles are rendered."
-msgstr ""
-
-#: src/lib/marble/MapWizard.ui:231
+#: src/lib/marble/MapWizard.ui:316
 #, fuzzy
 msgctxt "MapWizard|"
 msgid "Tile Projection:"
 msgstr "ការពិពណ៌នា"
 
-#: src/lib/marble/MapWizard.ui:244
+#: src/lib/marble/MapWizard.ui:323
+msgctxt "MapWizard|"
+msgid "Indicates the projection in which the tiles are rendered."
+msgstr ""
+
+#: src/lib/marble/MapWizard.ui:330
+msgctxt "MapWizard|"
+msgid "Tile Format:"
+msgstr ""
+
+#: src/lib/marble/MapWizard.ui:337
+msgctxt "MapWizard|"
+msgid "Indicates the file format of the tiles."
+msgstr ""
+
+#: src/lib/marble/MapWizard.ui:369
+#, fuzzy
+#| msgid "New Profile"
+msgctxt "MapWizard|"
+msgid "Layer Info"
+msgstr "ទម្រង់​ថ្មី"
+
+#: src/lib/marble/MapWizard.ui:382
+#, fuzzy
+#| msgid "&Settings"
+msgctxt "MapWizard|"
+msgid "Service Info"
+msgstr "ការ​កំណត់"
+
+#: src/lib/marble/MapWizard.ui:399
 msgctxt "MapWizard|"
 msgid ""
 "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
@@ -9549,20 +9532,20 @@ msgid ""
 "worldmap.svg\" width=\"150\" /></p></body></html>"
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:263
+#: src/lib/marble/MapWizard.ui:418
 #, fuzzy
 #| msgid "Source Image"
 msgctxt "MapWizard|"
 msgid "Source Image:"
 msgstr "រូបភាព​ប្រភព"
 
-#: src/lib/marble/MapWizard.ui:279 src/lib/marble/MapWizard.ui:546
+#: src/lib/marble/MapWizard.ui:434 src/lib/marble/MapWizard.ui:719
 #, fuzzy
 msgctxt "MapWizard|"
 msgid "..."
 msgstr "..."
 
-#: src/lib/marble/MapWizard.ui:305
+#: src/lib/marble/MapWizard.ui:460
 msgctxt "MapWizard|"
 msgid ""
 "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
@@ -9588,12 +9571,12 @@ msgid ""
 "p></body></html>"
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:341
+#: src/lib/marble/MapWizard.ui:496
 msgctxt "MapWizard|"
 msgid "URL Scheme:"
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:380
+#: src/lib/marble/MapWizard.ui:535
 msgctxt "MapWizard|"
 msgid ""
 "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
@@ -9613,43 +9596,43 @@ msgid ""
 "span></p></body></html>"
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:397
+#: src/lib/marble/MapWizard.ui:552
 #, fuzzy
 #| msgid "Map Title"
 msgctxt "MapWizard|"
 msgid "Map Title:"
 msgstr "ចំណងជើង​ផែនទី"
 
-#: src/lib/marble/MapWizard.ui:410
+#: src/lib/marble/MapWizard.ui:565
 msgctxt "MapWizard|"
 msgid "A short concise name for your map theme."
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:417 src/lib/marble/MapWizard.ui:630
+#: src/lib/marble/MapWizard.ui:572 src/lib/marble/MapWizard.ui:795
 #, fuzzy
 #| msgid "Map Name"
 msgctxt "MapWizard|"
 msgid "Map Name:"
 msgstr "ឈ្មោះ​ផែនទី"
 
-#: src/lib/marble/MapWizard.ui:427
+#: src/lib/marble/MapWizard.ui:582
 msgctxt "MapWizard|"
 msgid "The lowercase map theme id."
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:430
+#: src/lib/marble/MapWizard.ui:585
 msgctxt "MapWizard|"
 msgid "The folder name of your new theme."
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:437
+#: src/lib/marble/MapWizard.ui:598
 #, fuzzy
 #| msgid "Description"
 msgctxt "MapWizard|"
 msgid "Description:"
 msgstr "ការពណ៌នា"
 
-#: src/lib/marble/MapWizard.ui:450
+#: src/lib/marble/MapWizard.ui:617
 msgctxt "MapWizard|"
 msgid ""
 "A short description of your map theme. Here you can provide information "
@@ -9657,74 +9640,45 @@ msgid ""
 "map theme."
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:453
+#: src/lib/marble/MapWizard.ui:620
 msgctxt "MapWizard|"
 msgid "It will appear in a tool tip and may contain HTML formatting."
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:460 src/lib/marble/MapWizard.ui:670
+#: src/lib/marble/MapWizard.ui:633 src/lib/marble/MapWizard.ui:835
 #, fuzzy
 #| msgid "Preview Image"
 msgctxt "MapWizard|"
 msgid "Preview Image:"
 msgstr "មើល​រួប​ភាព​ជាមុន"
 
-#: src/lib/marble/MapWizard.ui:475
+#: src/lib/marble/MapWizard.ui:648
 #, fuzzy
 #| msgid "Preview Image"
 msgctxt "MapWizard|"
 msgid "preview image"
 msgstr "មើល​រួប​ភាព​ជាមុន"
 
-#: src/lib/marble/MapWizard.ui:497
+#: src/lib/marble/MapWizard.ui:670
 #, fuzzy
 #| msgid "&Configure..."
 msgctxt "MapWizard|"
 msgid "Change..."
 msgstr "កំណត់​រចនាសម្ព័ន្ធ..."
 
-#: src/lib/marble/MapWizard.ui:527
+#: src/lib/marble/MapWizard.ui:700
 msgctxt "MapWizard|"
 msgid "<b>Optional: Addition of a Map Key</b>"
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:536
+#: src/lib/marble/MapWizard.ui:709
 #, fuzzy
 #| msgid "Legend"
 msgctxt "MapWizard|"
 msgid "Legend Image:"
 msgstr "កំណត់​សម្គាល់"
 
-#: src/lib/marble/MapWizard.ui:562
-msgctxt "MapWizard|"
-msgid "Places of Interest"
-msgstr ""
-
-#: src/lib/marble/MapWizard.ui:569
-msgctxt "MapWizard|"
-msgid "Populated Places"
-msgstr ""
-
-#: src/lib/marble/MapWizard.ui:576
-#, fuzzy
-#| msgid "rain"
-msgctxt "MapWizard|"
-msgid "Terrain"
-msgstr "ភ្លៀង"
-
-#: src/lib/marble/MapWizard.ui:583
-#, fuzzy
-#| msgid "Coordinate Grid"
-msgctxt "MapWizard|"
-msgid "Coordinate Grid"
-msgstr "ក្រឡាចត្រង្គ​កូអរដោណេ"
-
-#: src/lib/marble/MapWizard.ui:590
-msgctxt "MapWizard|"
-msgid "Border Lines"
-msgstr ""
-
-#: src/lib/marble/MapWizard.ui:605
+#: src/lib/marble/MapWizard.ui:770
 msgctxt "MapWizard|"
 msgid ""
 "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
@@ -9751,29 +9705,29 @@ msgid ""
 "p></body></html>"
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:637
+#: src/lib/marble/MapWizard.ui:802
 msgctxt "MapWizard|"
 msgid "Map name goes here."
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:650
+#: src/lib/marble/MapWizard.ui:815
 #, fuzzy
 #| msgid "&Delete Map Theme"
 msgctxt "MapWizard|"
 msgid "Map Theme:"
 msgstr "លុប​រូបរាង​ផែនទី"
 
-#: src/lib/marble/MapWizard.ui:657
+#: src/lib/marble/MapWizard.ui:822
 msgctxt "MapWizard|"
 msgid "Map theme goes here."
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:682
+#: src/lib/marble/MapWizard.ui:847
 msgctxt "MapWizard|"
 msgid "Thumbnail"
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:692
+#: src/lib/marble/MapWizard.ui:857
 #, fuzzy
 #| msgid "Preview Map"
 msgctxt "MapWizard|"
@@ -21271,6 +21225,72 @@ msgid "This is a template class for float items."
 msgstr "នេះ​ជា​ពុម្ព​សម្រាប់​ធាតុ​អណ្ដែត ។"
 
 #, fuzzy
+#~| msgid "Geographic Pole"
+#~ msgctxt "Marble::MapWizard|"
+#~ msgid "Geographic Pole"
+#~ msgstr "ប៉ូល​ភូមិសាស្ត្រ"
+
+#, fuzzy
+#~| msgid "Magnetic Pole"
+#~ msgctxt "Marble::MapWizard|"
+#~ msgid "Magnetic Pole"
+#~ msgstr "ប៉ូល​មេដែក"
+
+#, fuzzy
+#~| msgid "Airport"
+#~ msgctxt "Marble::MapWizard|"
+#~ msgid "Airport"
+#~ msgstr "អាកាស​យាន្តដ្ឋាន"
+
+#, fuzzy
+#~| msgid "Shipwreck"
+#~ msgctxt "Marble::MapWizard|"
+#~ msgid "Shipwreck"
+#~ msgstr "លិច​នាវា"
+
+#, fuzzy
+#~| msgid "Observatory"
+#~ msgctxt "Marble::MapWizard|"
+#~ msgid "Observatory"
+#~ msgstr "ការ​អង្កេត"
+
+#, fuzzy
+#~| msgid "Mountain"
+#~ msgctxt "Marble::MapWizard|"
+#~ msgid "Mountain"
+#~ msgstr "ភ្នំ"
+
+#, fuzzy
+#~| msgid "Volcano"
+#~ msgctxt "Marble::MapWizard|"
+#~ msgid "Volcano"
+#~ msgstr "ភ្នំ​ភ្លើង"
+
+#, fuzzy
+#~| msgid "International"
+#~ msgctxt "Marble::MapWizard|"
+#~ msgid "International"
+#~ msgstr "អន្តរជាតិ"
+
+#, fuzzy
+#~| msgid "State"
+#~ msgctxt "Marble::MapWizard|"
+#~ msgid "State"
+#~ msgstr "រដ្ឋ"
+
+#, fuzzy
+#~| msgid "rain"
+#~ msgctxt "MapWizard|"
+#~ msgid "Terrain"
+#~ msgstr "ភ្លៀង"
+
+#, fuzzy
+#~| msgid "Coordinate Grid"
+#~ msgctxt "MapWizard|"
+#~ msgid "Coordinate Grid"
+#~ msgstr "ក្រឡាចត្រង្គ​កូអរដោណេ"
+
+#, fuzzy
 #~| msgid "The base tile could not be downloaded."
 #~ msgctxt "Marble::MapWizard|"
 #~ msgid "The preview image could not be downloaded."
@@ -22537,10 +22557,6 @@ msgstr "នេះ​ជា​ពុម្ព​សម្រាប់​ធាត
 #, fuzzy
 #~ msgid "Short Description:"
 #~ msgstr "ការ​ពិពណ៌នា:"
-
-#, fuzzy
-#~ msgid "Back"
-#~ msgstr "ថយ​​ក្រោយ"
 
 #, fuzzy
 #~ msgid "Forward"
