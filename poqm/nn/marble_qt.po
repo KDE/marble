@@ -7899,210 +7899,158 @@ msgctxt "MapViewWidget|"
 msgid "Here you can choose the preferred map view from different topics."
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:147
+#: src/lib/marble/MapWizard.cpp:163
 msgctxt "Marble::PreviewDialog|"
 msgid "Preview Map"
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:259 src/lib/marble/MapWizard.cpp:265
+#: src/lib/marble/MapWizard.cpp:268 src/lib/marble/MapWizard.cpp:273
 msgctxt "Marble::MapWizard|"
 msgid "Error while parsing"
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:259
+#: src/lib/marble/MapWizard.cpp:268
 msgctxt "Marble::MapWizard|"
 msgid "Wizard cannot parse server's response"
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:265
+#: src/lib/marble/MapWizard.cpp:273
 msgctxt "Marble::MapWizard|"
 msgid "Server is not a Web Map Server."
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:281 src/lib/marble/MapWizard.cpp:583
-#: src/lib/marble/MapWizard.cpp:998
+#: src/lib/marble/MapWizard.cpp:331 src/lib/marble/MapWizard.cpp:340
+#: src/lib/marble/MapWizard.cpp:965
 msgctxt "Marble::MapWizard|"
 msgid "Web Mercator (epsg:3857)"
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:284
+#: src/lib/marble/MapWizard.cpp:332 src/lib/marble/MapWizard.cpp:737
+#: src/lib/marble/MapWizard.cpp:852
 msgctxt "Marble::MapWizard|"
 msgid "Equirectangular (epsg:4326)"
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:399 src/lib/marble/MapWizard.cpp:400
-#: src/lib/marble/MapWizard.cpp:421
-msgctxt "Marble::MapWizard|"
-msgid "Custom"
-msgstr ""
-
-#: src/lib/marble/MapWizard.cpp:569
-msgctxt "Marble::MapWizard|"
-msgid "Equirectangular (epsg:4326))"
-msgstr ""
-
-#: src/lib/marble/MapWizard.cpp:653 src/lib/marble/MapWizard.cpp:675
-msgctxt "Marble::MapWizard|"
-msgid "Base Tile"
-msgstr ""
-
-#: src/lib/marble/MapWizard.cpp:654
-msgctxt "Marble::MapWizard|"
-msgid "The base tile could not be downloaded."
-msgstr ""
-
-#: src/lib/marble/MapWizard.cpp:660 src/lib/marble/MapWizard.cpp:669
-#: src/lib/marble/MapWizard.cpp:893
+#: src/lib/marble/MapWizard.cpp:376 src/lib/marble/MapWizard.cpp:842
 msgctxt "Marble::MapWizard|"
 msgid "Preview Image"
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:661
+#: src/lib/marble/MapWizard.cpp:380
 msgctxt "Marble::MapWizard|"
-msgid "The preview image could not be downloaded."
+msgid "Base Tile"
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:670
+#: src/lib/marble/MapWizard.cpp:384
+msgctxt "Marble::MapWizard|"
+msgid "Legend Image"
+msgstr ""
+
+#: src/lib/marble/MapWizard.cpp:391 src/lib/marble/MapWizard.cpp:399
+#, qt-format
+msgctxt "Marble::MapWizard|"
+msgid "%1"
+msgstr ""
+
+#: src/lib/marble/MapWizard.cpp:392
+#, qt-format
+msgctxt "Marble::MapWizard|"
+msgid "The %1 could not be downloaded."
+msgstr ""
+
+#: src/lib/marble/MapWizard.cpp:400
 #, qt-format
 msgctxt "Marble::MapWizard|"
 msgid ""
-"The preview image could not be downloaded successfully. The server replied:\n"
+"The %1 could not be downloaded successfully. The server replied:\n"
 "\n"
-"%1"
+"%2"
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:676
-#, qt-format
+#: src/lib/marble/MapWizard.cpp:451 src/lib/marble/MapWizard.cpp:452
+#: src/lib/marble/MapWizard.cpp:473
 msgctxt "Marble::MapWizard|"
-msgid ""
-"The base tile could not be downloaded successfully. The server replied:\n"
-"\n"
-"%1"
+msgid "Custom"
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:804 src/lib/marble/MapWizard.cpp:807
+#: src/lib/marble/MapWizard.cpp:703 src/lib/marble/MapWizard.cpp:706
 msgctxt "Marble::MapWizard|"
 msgid "Archiving failed"
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:804
+#: src/lib/marble/MapWizard.cpp:703
 msgctxt "Marble::MapWizard|"
 msgid "Archiving process cannot be started."
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:807
+#: src/lib/marble/MapWizard.cpp:706
 msgctxt "Marble::MapWizard|"
 msgid "Archiving process crashed."
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:843 src/lib/marble/MapWizard.cpp:851
-#: src/lib/marble/MapWizard.cpp:860
+#: src/lib/marble/MapWizard.cpp:770 src/lib/marble/MapWizard.cpp:778
+#: src/lib/marble/MapWizard.cpp:787
 msgctxt "Marble::MapWizard|"
 msgid "Source Image"
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:844
+#: src/lib/marble/MapWizard.cpp:771
 msgctxt "Marble::MapWizard|"
 msgid "Please specify a source image."
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:852
+#: src/lib/marble/MapWizard.cpp:779
 msgctxt "Marble::MapWizard|"
 msgid ""
 "The source image you specified does not exist. Please specify a different "
 "one."
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:861
+#: src/lib/marble/MapWizard.cpp:788
 msgctxt "Marble::MapWizard|"
 msgid ""
 "The source image you specified does not seem to be an image. Please specify "
 "a different image file."
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:870
+#: src/lib/marble/MapWizard.cpp:819
 msgctxt "Marble::MapWizard|"
 msgid "Map Title"
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:870
+#: src/lib/marble/MapWizard.cpp:819
 msgctxt "Marble::MapWizard|"
 msgid "Please specify a map title."
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:877 src/lib/marble/MapWizard.cpp:885
+#: src/lib/marble/MapWizard.cpp:826 src/lib/marble/MapWizard.cpp:834
 msgctxt "Marble::MapWizard|"
 msgid "Map Name"
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:877
+#: src/lib/marble/MapWizard.cpp:826
 msgctxt "Marble::MapWizard|"
 msgid "Please specify a map name."
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:886
+#: src/lib/marble/MapWizard.cpp:835
 #, qt-format
 msgctxt "Marble::MapWizard|"
 msgid ""
 "Please specify another map name, since there is already a map named \"%1\"."
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:893
+#: src/lib/marble/MapWizard.cpp:842
 msgctxt "Marble::MapWizard|"
 msgid "Please specify a preview image."
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:1110
-msgctxt "Marble::MapWizard|"
-msgid "Geographic Pole"
-msgstr ""
-
-#: src/lib/marble/MapWizard.cpp:1116
-msgctxt "Marble::MapWizard|"
-msgid "Magnetic Pole"
-msgstr ""
-
-#: src/lib/marble/MapWizard.cpp:1122
-msgctxt "Marble::MapWizard|"
-msgid "Airport"
-msgstr ""
-
-#: src/lib/marble/MapWizard.cpp:1128
-msgctxt "Marble::MapWizard|"
-msgid "Shipwreck"
-msgstr ""
-
-#: src/lib/marble/MapWizard.cpp:1134
-msgctxt "Marble::MapWizard|"
-msgid "Observatory"
-msgstr ""
-
-#: src/lib/marble/MapWizard.cpp:1156
-msgctxt "Marble::MapWizard|"
-msgid "Mountain"
-msgstr ""
-
-#: src/lib/marble/MapWizard.cpp:1162
-msgctxt "Marble::MapWizard|"
-msgid "Volcano"
-msgstr ""
-
-#: src/lib/marble/MapWizard.cpp:1193
-msgctxt "Marble::MapWizard|"
-msgid "International"
-msgstr ""
-
-#: src/lib/marble/MapWizard.cpp:1199
-msgctxt "Marble::MapWizard|"
-msgid "State"
-msgstr ""
-
-#: src/lib/marble/MapWizard.cpp:1303
+#: src/lib/marble/MapWizard.cpp:1270
 msgctxt "Marble::MapWizard|"
 msgid "Problem while creating files"
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:1303
+#: src/lib/marble/MapWizard.cpp:1270
 msgctxt "Marble::MapWizard|"
 msgid "Check if a theme with the same name exists."
 msgstr ""
@@ -8222,32 +8170,67 @@ msgctxt "MapWizard|"
 msgid "https://"
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:185
+#: src/lib/marble/MapWizard.ui:208
 msgctxt "MapWizard|"
-msgid "Available Maps:"
+msgid "Wms-Service"
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:203
+#: src/lib/marble/MapWizard.ui:222
 msgctxt "MapWizard|"
-msgid "Tile Format:"
+msgid "Layer Selection"
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:210
+#: src/lib/marble/MapWizard.ui:233
 msgctxt "MapWizard|"
-msgid "Indicates the file format of the tiles."
+msgid "Available Layers:"
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:217
+#: src/lib/marble/MapWizard.ui:256
 msgctxt "MapWizard|"
-msgid "Indicates the projection in which the tiles are rendered."
+msgid "Search:"
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:224
+#: src/lib/marble/MapWizard.ui:283
+msgctxt "MapWizard|"
+msgid "Multiple Selections"
+msgstr ""
+
+#: src/lib/marble/MapWizard.ui:306
+msgctxt "MapWizard|"
+msgid "Backdrop:"
+msgstr ""
+
+#: src/lib/marble/MapWizard.ui:316
 msgctxt "MapWizard|"
 msgid "Tile Projection:"
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:237
+#: src/lib/marble/MapWizard.ui:323
+msgctxt "MapWizard|"
+msgid "Indicates the projection in which the tiles are rendered."
+msgstr ""
+
+#: src/lib/marble/MapWizard.ui:330
+msgctxt "MapWizard|"
+msgid "Tile Format:"
+msgstr ""
+
+#: src/lib/marble/MapWizard.ui:337
+msgctxt "MapWizard|"
+msgid "Indicates the file format of the tiles."
+msgstr ""
+
+#: src/lib/marble/MapWizard.ui:369
+msgctxt "MapWizard|"
+msgid "Layer Info"
+msgstr ""
+
+#: src/lib/marble/MapWizard.ui:382
+msgctxt "MapWizard|"
+msgid "Service Info"
+msgstr ""
+
+#: src/lib/marble/MapWizard.ui:399
 msgctxt "MapWizard|"
 msgid ""
 "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
@@ -8275,17 +8258,17 @@ msgid ""
 "worldmap.svg\" width=\"150\" /></p></body></html>"
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:256
+#: src/lib/marble/MapWizard.ui:418
 msgctxt "MapWizard|"
 msgid "Source Image:"
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:272 src/lib/marble/MapWizard.ui:531
+#: src/lib/marble/MapWizard.ui:434 src/lib/marble/MapWizard.ui:719
 msgctxt "MapWizard|"
 msgid "..."
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:298
+#: src/lib/marble/MapWizard.ui:460
 msgctxt "MapWizard|"
 msgid ""
 "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
@@ -8311,12 +8294,12 @@ msgid ""
 "span></p></body></html>"
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:334
+#: src/lib/marble/MapWizard.ui:496
 msgctxt "MapWizard|"
 msgid "URL Scheme:"
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:373
+#: src/lib/marble/MapWizard.ui:535
 msgctxt "MapWizard|"
 msgid ""
 "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
@@ -8336,37 +8319,37 @@ msgid ""
 "span></p></body></html>"
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:388
+#: src/lib/marble/MapWizard.ui:552
 msgctxt "MapWizard|"
 msgid "Map Title:"
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:401
+#: src/lib/marble/MapWizard.ui:565
 msgctxt "MapWizard|"
 msgid "A short concise name for your map theme."
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:408 src/lib/marble/MapWizard.ui:615
+#: src/lib/marble/MapWizard.ui:572 src/lib/marble/MapWizard.ui:795
 msgctxt "MapWizard|"
 msgid "Map Name:"
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:418
+#: src/lib/marble/MapWizard.ui:582
 msgctxt "MapWizard|"
 msgid "The lowercase map theme id."
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:421
+#: src/lib/marble/MapWizard.ui:585
 msgctxt "MapWizard|"
 msgid "The folder name of your new theme."
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:428
+#: src/lib/marble/MapWizard.ui:598
 msgctxt "MapWizard|"
 msgid "Description:"
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:441
+#: src/lib/marble/MapWizard.ui:617
 msgctxt "MapWizard|"
 msgid ""
 "A short description of your map theme. Here you can provide information "
@@ -8374,62 +8357,37 @@ msgid ""
 "map theme."
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:444
+#: src/lib/marble/MapWizard.ui:620
 msgctxt "MapWizard|"
 msgid "It will appear in a tool tip and may contain HTML formatting."
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:451 src/lib/marble/MapWizard.ui:655
+#: src/lib/marble/MapWizard.ui:633 src/lib/marble/MapWizard.ui:835
 msgctxt "MapWizard|"
 msgid "Preview Image:"
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:477
+#: src/lib/marble/MapWizard.ui:648
 msgctxt "MapWizard|"
 msgid "preview image"
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:484
+#: src/lib/marble/MapWizard.ui:670
 msgctxt "MapWizard|"
 msgid "Change..."
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:512
+#: src/lib/marble/MapWizard.ui:700
 msgctxt "MapWizard|"
 msgid "<b>Optional: Addition of a Map Key</b>"
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:521
+#: src/lib/marble/MapWizard.ui:709
 msgctxt "MapWizard|"
 msgid "Legend Image:"
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:547
-msgctxt "MapWizard|"
-msgid "Places of Interest"
-msgstr "Interessante stadar"
-
-#: src/lib/marble/MapWizard.ui:554
-msgctxt "MapWizard|"
-msgid "Populated Places"
-msgstr "Stadar med folk"
-
-#: src/lib/marble/MapWizard.ui:561
-msgctxt "MapWizard|"
-msgid "Terrain"
-msgstr ""
-
-#: src/lib/marble/MapWizard.ui:568
-msgctxt "MapWizard|"
-msgid "Coordinate Grid"
-msgstr ""
-
-#: src/lib/marble/MapWizard.ui:575
-msgctxt "MapWizard|"
-msgid "Border Lines"
-msgstr ""
-
-#: src/lib/marble/MapWizard.ui:590
+#: src/lib/marble/MapWizard.ui:770
 msgctxt "MapWizard|"
 msgid ""
 "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
@@ -8456,27 +8414,27 @@ msgid ""
 "p></body></html>"
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:622
+#: src/lib/marble/MapWizard.ui:802
 msgctxt "MapWizard|"
 msgid "Map name goes here."
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:635
+#: src/lib/marble/MapWizard.ui:815
 msgctxt "MapWizard|"
 msgid "Map Theme:"
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:642
+#: src/lib/marble/MapWizard.ui:822
 msgctxt "MapWizard|"
 msgid "Map theme goes here."
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:662
+#: src/lib/marble/MapWizard.ui:847
 msgctxt "MapWizard|"
-msgid "Thumbnail image goes here."
+msgid "Thumbnail"
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:674
+#: src/lib/marble/MapWizard.ui:857
 msgctxt "MapWizard|"
 msgid "Preview Map"
 msgstr ""

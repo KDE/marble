@@ -1526,7 +1526,7 @@ msgstr ""
 #. file data/maps/earth/plain/plain.dgml:11
 msgctxt "DGML|"
 msgid "Plain Map"
-msgstr ""
+msgstr "უბრალო რუკა"
 
 #. file data/maps/earth/plain/plain.dgml:21
 msgctxt "DGML|"
@@ -1581,7 +1581,7 @@ msgstr ""
 #. file data/maps/earth/behaim1492/behaim1492.dgml:199
 msgctxt "DGML|"
 msgid "Reference lines"
-msgstr ""
+msgstr "მიმართვის ხაზები"
 
 #. file data/maps/earth/behaim1492/behaim1492.dgml:202
 #. ----------
@@ -1593,7 +1593,7 @@ msgstr ""
 #. file data/maps/earth/precip-july/precip-july.dgml:11
 msgctxt "DGML|"
 msgid "Precipitation (July)"
-msgstr ""
+msgstr "ნალექი (ივლისი)"
 
 #. file data/maps/earth/precip-july/precip-july.dgml:21
 msgctxt "DGML|"
@@ -1722,7 +1722,7 @@ msgstr "მდინარეები"
 #. file data/maps/earth/sentinel2/sentinel2.dgml:5
 msgctxt "DGML|"
 msgid "Sentinel2 Satellite Map"
-msgstr ""
+msgstr "Sentinel2 სატელიტური რუკა"
 
 #. file data/maps/earth/sentinel2/sentinel2.dgml:11
 msgctxt "DGML|"
@@ -2346,12 +2346,12 @@ msgstr "ამოღებულია"
 #: src/apps/marble-maps/Bookmarks.qml:219
 msgctxt "Bookmarks|"
 msgid "Your bookmarks will appear here."
-msgstr "თქვენი სანიშნები აქ გამოჩნდება"
+msgstr "თქვენი სანიშნები აქ გამოჩნდება."
 
 #: src/apps/marble-maps/CurrentPosition.qml:65
 msgctxt "CurrentPosition|"
 msgid "Follow Current Position"
-msgstr ""
+msgstr "მიმდინარე მდებარეობის მიყოლა"
 
 #: src/apps/marble-maps/MainScreen.qml:19
 #: src/apps/marble-maps/MainScreen.qml:205
@@ -2521,7 +2521,7 @@ msgstr ""
 #: src/apps/marble-maps/Search.qml:161
 msgctxt "Search|"
 msgid "Your bookmarks will appear here."
-msgstr ""
+msgstr "თქვენი სანიშნები აქ გამოჩნდება."
 
 #: src/apps/marble-maps/SearchField.qml:71
 msgctxt "SearchField|"
@@ -4965,7 +4965,7 @@ msgstr "სავარძლით წვდომადი"
 #: src/lib/marble/declarative/Placemark.cpp:532
 msgctxt "Marble::Placemark|"
 msgid "Wheelchair inaccessible"
-msgstr ""
+msgstr "ბორბლებიანი სავარძელი მიუწვდომელია"
 
 #: src/lib/marble/declarative/Placemark.cpp:533
 msgctxt "Marble::Placemark|"
@@ -4975,7 +4975,7 @@ msgstr "შეზღუდული წვდომა სავარძლი�
 #: src/lib/marble/declarative/Placemark.cpp:534
 msgctxt "Marble::Placemark|"
 msgid "Designated wheelchair access"
-msgstr ""
+msgstr "სავარძლით წვდომა"
 
 #: src/lib/marble/declarative/Placemark.cpp:564
 msgctxt ""
@@ -5081,37 +5081,37 @@ msgstr ""
 #: src/lib/marble/declarative/RouteRelationModel.cpp:28
 msgctxt "Marble::RouteRelationModel|"
 msgid "Regional route"
-msgstr ""
+msgstr "რეგიონალური გზა"
 
 #: src/lib/marble/declarative/RouteRelationModel.cpp:29
 msgctxt "Marble::RouteRelationModel|"
 msgid "National route"
-msgstr ""
+msgstr "ნაციონალური გზა"
 
 #: src/lib/marble/declarative/RouteRelationModel.cpp:30
 msgctxt "Marble::RouteRelationModel|"
 msgid "Municipal route"
-msgstr ""
+msgstr "მუნიციპალური გზა"
 
 #: src/lib/marble/declarative/RouteRelationModel.cpp:31
 msgctxt "Marble::RouteRelationModel|"
 msgid "Territorial route"
-msgstr ""
+msgstr "ტერიტორიული გზა"
 
 #: src/lib/marble/declarative/RouteRelationModel.cpp:32
 msgctxt "Marble::RouteRelationModel|"
 msgid "Local route"
-msgstr ""
+msgstr "ლოკალური გზა"
 
 #: src/lib/marble/declarative/RouteRelationModel.cpp:33
 msgctxt "Marble::RouteRelationModel|"
 msgid "Prefectural route"
-msgstr ""
+msgstr "პრეფექტურული გზა"
 
 #: src/lib/marble/declarative/RouteRelationModel.cpp:34
 msgctxt "Marble::RouteRelationModel|"
 msgid "United States route"
-msgstr ""
+msgstr "აშშ-ის გზა"
 
 #: src/lib/marble/DownloadRegionDialog.cpp:133
 msgctxt "Marble::DownloadRegionDialog|"
@@ -5131,17 +5131,17 @@ msgstr "გზის გადმოწერა"
 #: src/lib/marble/DownloadRegionDialog.cpp:139
 msgctxt "Marble::DownloadRegionDialog|"
 msgid "Enabled when a route exists"
-msgstr ""
+msgstr "ჩართულია, თუ გზა არსებობს"
 
 #: src/lib/marble/DownloadRegionDialog.cpp:152
 msgctxt "Marble::DownloadRegionDialog|"
 msgid "Offset from route:"
-msgstr ""
+msgstr "წანაცვლება გზიდან:"
 
 #: src/lib/marble/DownloadRegionDialog.cpp:187
 msgctxt "Marble::DownloadRegionDialog|"
 msgid "Selection Method"
-msgstr ""
+msgstr "მონიშვნის მეთოდი"
 
 #: src/lib/marble/DownloadRegionDialog.cpp:195
 msgctxt "Marble::DownloadRegionDialog|"
@@ -5151,7 +5151,7 @@ msgstr ""
 #: src/lib/marble/DownloadRegionDialog.cpp:245
 msgctxt "Marble::DownloadRegionDialog|"
 msgid "Download Region"
-msgstr ""
+msgstr "რეგიონის გადმოწერა"
 
 #: src/lib/marble/DownloadRegionDialog.cpp:247
 msgctxt "Marble::DownloadRegionDialog|"
@@ -5306,7 +5306,7 @@ msgstr ""
 #: src/lib/marble/EditPlacemarkDialog.cpp:363
 msgctxt "Marble::EditPlacemarkDialog|"
 msgid "ID is invalid"
-msgstr ""
+msgstr "ID არასწორია"
 
 #: src/lib/marble/EditPlacemarkDialog.cpp:364
 msgctxt "Marble::EditPlacemarkDialog|"
@@ -5316,7 +5316,7 @@ msgstr ""
 #: src/lib/marble/EditPlacemarkDialog.cpp:367
 msgctxt "Marble::EditPlacemarkDialog|"
 msgid "No image specified"
-msgstr ""
+msgstr "გამოსახულება მითითებული არაა"
 
 #: src/lib/marble/EditPlacemarkDialog.cpp:368
 msgctxt "Marble::EditPlacemarkDialog|"
@@ -5326,7 +5326,7 @@ msgstr ""
 #: src/lib/marble/EditPlacemarkDialog.cpp:371
 msgctxt "Marble::EditPlacemarkDialog|"
 msgid "Invalid icon path"
-msgstr ""
+msgstr "ხატულის არასწორი ბილიკი"
 
 #: src/lib/marble/EditPlacemarkDialog.cpp:372
 msgctxt "Marble::EditPlacemarkDialog|"
@@ -5336,7 +5336,7 @@ msgstr ""
 #: src/lib/marble/EditPlacemarkDialog.ui:20
 msgctxt "UiEditPlacemarkDialog|"
 msgid "Edit placemark"
-msgstr ""
+msgstr "ადგილის რედაქტირება"
 
 #: src/lib/marble/EditPlacemarkDialog.ui:38
 msgctxt "UiEditPlacemarkDialog|"
@@ -6073,7 +6073,7 @@ msgstr ""
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:398
 msgctxt "GeoDataPlacemark|"
 msgid "Trunk Road"
-msgstr ""
+msgstr "მაგისტრალური გზა"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:399
 msgctxt "GeoDataPlacemark|"
@@ -6243,7 +6243,7 @@ msgstr "წყლის პარკი"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:432
 msgctxt "GeoDataPlacemark|"
 msgid "Community Centre"
-msgstr ""
+msgstr "საზოგადოებრივი ცენტრი"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:433
 msgctxt "GeoDataPlacemark|"
@@ -6268,12 +6268,12 @@ msgstr "სასამართლო"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:437
 msgctxt "GeoDataPlacemark|"
 msgid "Fire Station"
-msgstr ""
+msgstr "სახანძრო სადგური"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:438
 msgctxt "GeoDataPlacemark|"
 msgid "Hunting Stand"
-msgstr ""
+msgstr "სანადირო სტენდი"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:439
 msgctxt "GeoDataPlacemark|"
@@ -6384,7 +6384,7 @@ msgstr "ხე"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:461
 msgctxt "GeoDataPlacemark|"
 msgid "Cave Entrance"
-msgstr ""
+msgstr "მღვიმის შესასვლელი"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:462
 msgctxt "GeoDataPlacemark|"
@@ -6404,7 +6404,7 @@ msgstr "სუპერმარკეტი"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:465
 msgctxt "GeoDataPlacemark|"
 msgid "Liquor Store"
-msgstr ""
+msgstr "სასმელების მაღაზია"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:466
 msgctxt "GeoDataPlacemark|"
@@ -6434,7 +6434,7 @@ msgstr "მემწვანილე"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:471
 msgctxt "GeoDataPlacemark|"
 msgid "Seafood Shop"
-msgstr ""
+msgstr "ზღვის პროდუქტების მაღაზია"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:472
 msgctxt "GeoDataPlacemark|"
@@ -6449,27 +6449,27 @@ msgstr "კიოსკი"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:474
 msgctxt "GeoDataPlacemark|"
 msgid "Bag Shop"
-msgstr ""
+msgstr "ჩანთების მაღაზია"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:475
 msgctxt "GeoDataPlacemark|"
 msgid "Clothes Shop"
-msgstr ""
+msgstr "ტანსაცმლის მაღაზია"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:476
 msgctxt "GeoDataPlacemark|"
 msgid "Fashion Shop"
-msgstr ""
+msgstr "მოდის მაღაზია"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:477
 msgctxt "GeoDataPlacemark|"
 msgid "Jewelry Shop"
-msgstr ""
+msgstr "სამკაულების მაღაზია"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:478
 msgctxt "GeoDataPlacemark|"
 msgid "Shoe Shop"
-msgstr ""
+msgstr "ფეხსაცმლის მაღაზია"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:479
 msgctxt "GeoDataPlacemark|"
@@ -6479,7 +6479,7 @@ msgstr "ფართო პროფილის უნივერსამი"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:480
 msgctxt "GeoDataPlacemark|"
 msgid "Beauty Services"
-msgstr ""
+msgstr "სილამაზე, ესთეტიკური სერვისი"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:481
 msgctxt "GeoDataPlacemark|"
@@ -6540,17 +6540,17 @@ msgstr "ველოსიპედების მაღაზია"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:493
 msgctxt "GeoDataPlacemark|"
 msgid "Car Dealer"
-msgstr ""
+msgstr "ავტომობილების დილერი"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:494
 msgctxt "GeoDataPlacemark|"
 msgid "Car Repair Shop"
-msgstr ""
+msgstr "მანქანის შეკეთების მაღაზია"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:495
 msgctxt "GeoDataPlacemark|"
 msgid "Car Parts"
-msgstr ""
+msgstr "მანქანის ნაწილები"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:496
 msgctxt "GeoDataPlacemark|"
@@ -6610,12 +6610,12 @@ msgstr "სამრეცხაო"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:507
 msgctxt "GeoDataPlacemark|"
 msgid "Pet Shop"
-msgstr ""
+msgstr "მაღაზია ცხოველებისთვის"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:508
 msgctxt "GeoDataPlacemark|"
 msgid "Toy Store"
-msgstr ""
+msgstr "სათამაშოების მაღაზია"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:509
 msgctxt "GeoDataPlacemark|"
@@ -6630,22 +6630,22 @@ msgstr "გასტრონომი"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:511
 msgctxt "GeoDataPlacemark|"
 msgid "Tobacco Shop"
-msgstr ""
+msgstr "თამბაქოს მაღაზია"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:512
 msgctxt "GeoDataPlacemark|"
 msgid "Tea Shop"
-msgstr ""
+msgstr "ჩაის მაღაზია"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:513
 msgctxt "GeoDataPlacemark|"
 msgid "Computer Shop"
-msgstr ""
+msgstr "კომპიუტერული მაღაზია"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:514
 msgctxt "GeoDataPlacemark|"
 msgid "Garden Centre"
-msgstr ""
+msgstr "ბაღის ცენტრი"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:515
 msgctxt "GeoDataPlacemark|"
@@ -6660,7 +6660,7 @@ msgstr "ხიდი"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:517
 msgctxt "GeoDataPlacemark|"
 msgid "Lighthouse"
-msgstr ""
+msgstr "შუქურა"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:518
 msgctxt "GeoDataPlacemark|"
@@ -6675,7 +6675,7 @@ msgstr ""
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:520
 msgctxt "GeoDataPlacemark|"
 msgid "Wind Mill"
-msgstr ""
+msgstr "ქარის წისქვილი"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:521
 msgctxt "GeoDataPlacemark|"
@@ -6720,7 +6720,7 @@ msgstr "მუზეუმი"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:529
 msgctxt "GeoDataPlacemark|"
 msgid "Ruin"
-msgstr ""
+msgstr "ნანგრევები"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:530
 msgctxt "GeoDataPlacemark|"
@@ -6730,12 +6730,12 @@ msgstr "თეატრი"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:531
 msgctxt "GeoDataPlacemark|"
 msgid "Theme Park"
-msgstr ""
+msgstr "თემატური პარკი"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:532
 msgctxt "GeoDataPlacemark|"
 msgid "View Point"
-msgstr ""
+msgstr "ხედის წერტილი"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:533
 msgctxt "GeoDataPlacemark|"
@@ -6745,7 +6745,7 @@ msgstr "ზოოპარკი"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:534
 msgctxt "GeoDataPlacemark|"
 msgid "Alpine Hut"
-msgstr ""
+msgstr "ალპური ქოხი"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:535
 msgctxt "GeoDataPlacemark|"
@@ -6760,7 +6760,7 @@ msgstr "მემორიალი"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:537
 msgctxt "GeoDataPlacemark|"
 msgid "Aerodrome"
-msgstr ""
+msgstr "აეროდრომი"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:538
 msgctxt "GeoDataPlacemark|"
@@ -6840,7 +6840,7 @@ msgstr "მანქანის ქირაობა"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:553
 msgctxt "GeoDataPlacemark|"
 msgid "Ski Rental"
-msgstr ""
+msgstr "თხილამურების გაქირავება"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:554
 msgctxt "GeoDataPlacemark|"
@@ -6885,12 +6885,12 @@ msgstr ""
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:562
 msgctxt "GeoDataPlacemark|"
 msgid "Bahai"
-msgstr ""
+msgstr "ბაჰაი"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:563
 msgctxt "GeoDataPlacemark|"
 msgid "Buddhist"
-msgstr ""
+msgstr "ბუდისტი"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:564
 msgctxt "GeoDataPlacemark|"
@@ -6900,7 +6900,7 @@ msgstr "ქრისტიანური"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:565
 msgctxt "GeoDataPlacemark|"
 msgid "Muslim"
-msgstr ""
+msgstr "მუსულმანური"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:566
 msgctxt "GeoDataPlacemark|"
@@ -6940,7 +6940,7 @@ msgstr ""
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:573
 msgctxt "GeoDataPlacemark|"
 msgid "Marina"
-msgstr ""
+msgstr "მარინა"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:574
 msgctxt "GeoDataPlacemark|"
@@ -6960,7 +6960,7 @@ msgstr "Pitch"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:577
 msgctxt "GeoDataPlacemark|"
 msgid "Sports Centre"
-msgstr ""
+msgstr "სპორტული ცენტრი"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:578
 msgctxt "GeoDataPlacemark|"
@@ -6975,7 +6975,7 @@ msgstr "საცურაო აუზი"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:581
 msgctxt "GeoDataPlacemark|"
 msgid "Miniature Golf Course"
-msgstr ""
+msgstr "მინიატურული გოლფის მოედანი"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:582
 msgctxt "GeoDataPlacemark|"
@@ -6985,7 +6985,7 @@ msgstr "მიწის ნაკვეთი"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:583
 msgctxt "GeoDataPlacemark|"
 msgid "Basin"
-msgstr ""
+msgstr "აუზი"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:584
 msgctxt "GeoDataPlacemark|"
@@ -7000,12 +7000,12 @@ msgstr "რეკლამა"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:586
 msgctxt "GeoDataPlacemark|"
 msgid "Construction"
-msgstr ""
+msgstr "მშენებლობა"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:587
 msgctxt "GeoDataPlacemark|"
 msgid "Farmland"
-msgstr ""
+msgstr "ფერმა"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:588
 msgctxt "GeoDataPlacemark|"
@@ -7015,12 +7015,12 @@ msgstr ""
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:589
 msgctxt "GeoDataPlacemark|"
 msgid "Garages"
-msgstr ""
+msgstr "ავტოფარეხი"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:590
 msgctxt "GeoDataPlacemark|"
 msgid "Grass"
-msgstr ""
+msgstr "ბალახი"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:591
 msgctxt "GeoDataPlacemark|"
@@ -7030,12 +7030,12 @@ msgstr "ინდასტრიალი"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:592
 msgctxt "GeoDataPlacemark|"
 msgid "Landfill"
-msgstr ""
+msgstr "ნაგავსაყრელი"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:593
 msgctxt "GeoDataPlacemark|"
 msgid "Meadow"
-msgstr ""
+msgstr "ჭალა"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:594
 msgctxt "GeoDataPlacemark|"
@@ -7045,7 +7045,7 @@ msgstr "სამხედრო"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:595
 msgctxt "GeoDataPlacemark|"
 msgid "Quarry"
-msgstr ""
+msgstr "კარიერი"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:596
 msgctxt "GeoDataPlacemark|"
@@ -7055,37 +7055,37 @@ msgstr "რკინიგზა"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:597
 msgctxt "GeoDataPlacemark|"
 msgid "Reservoir"
-msgstr ""
+msgstr "წყალსაცავი"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:598
 msgctxt "GeoDataPlacemark|"
 msgid "Residential"
-msgstr ""
+msgstr "საცხოვრებელი"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:599
 msgctxt "GeoDataPlacemark|"
 msgid "Retail"
-msgstr ""
+msgstr "საცალო"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:600
 msgctxt "GeoDataPlacemark|"
 msgid "Orchard"
-msgstr ""
+msgstr "ხილის ბაღი"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:601
 msgctxt "GeoDataPlacemark|"
 msgid "Vineyard"
-msgstr ""
+msgstr "ვენახი"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:602
 msgctxt "GeoDataPlacemark|"
 msgid "Rail"
-msgstr ""
+msgstr "სარკინიგზო"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:603
 msgctxt "GeoDataPlacemark|"
 msgid "Narrow Gauge"
-msgstr ""
+msgstr "ვიწრო ლიანდაგი"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:604
 msgctxt "GeoDataPlacemark|"
@@ -7100,7 +7100,7 @@ msgstr "მსუბუქი რკინიგზა"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:606
 msgctxt "GeoDataPlacemark|"
 msgid "Abandoned Railway"
-msgstr ""
+msgstr "მიტოვებული რკინიგზა"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:607
 msgctxt "GeoDataPlacemark|"
@@ -7110,27 +7110,27 @@ msgstr "მეტრო"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:608
 msgctxt "GeoDataPlacemark|"
 msgid "Preserved Railway"
-msgstr ""
+msgstr "შემონახული რკინიგზა"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:609
 msgctxt "GeoDataPlacemark|"
 msgid "Miniature Railway"
-msgstr ""
+msgstr "მინიატურული რკინიგზა"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:610
 msgctxt "GeoDataPlacemark|"
 msgid "Railway Construction"
-msgstr ""
+msgstr "რკინიგზის მშენებლობა"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:611
 msgctxt "GeoDataPlacemark|"
 msgid "Monorail"
-msgstr ""
+msgstr "მონორელსი"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:612
 msgctxt "GeoDataPlacemark|"
 msgid "Funicular Railway"
-msgstr ""
+msgstr "ფუნიკულიორის რკინიგზა"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:613
 msgctxt "GeoDataPlacemark|"
@@ -7140,7 +7140,7 @@ msgstr ""
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:614
 msgctxt "GeoDataPlacemark|"
 msgid "Aerialway Station"
-msgstr ""
+msgstr "საჰაერო სადგური"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:615
 msgctxt ""
@@ -7151,7 +7151,7 @@ msgstr "პილონი"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:616
 msgctxt "GeoDataPlacemark|"
 msgid "Cable Car"
-msgstr ""
+msgstr "საბაგირო"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:617
 msgctxt "GeoDataPlacemark|"
@@ -7915,57 +7915,54 @@ msgctxt "MapViewWidget|"
 msgid "Here you can choose the preferred map view from different topics."
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:163
+#: src/lib/marble/MapWizard.cpp:164
 msgctxt "Marble::PreviewDialog|"
 msgid "Preview Map"
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:268 src/lib/marble/MapWizard.cpp:273
+#: src/lib/marble/MapWizard.cpp:272 src/lib/marble/MapWizard.cpp:277
 msgctxt "Marble::MapWizard|"
 msgid "Error while parsing"
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:268
+#: src/lib/marble/MapWizard.cpp:272
 msgctxt "Marble::MapWizard|"
 msgid "Wizard cannot parse server's response"
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:273
+#: src/lib/marble/MapWizard.cpp:277
 msgctxt "Marble::MapWizard|"
 msgid "Server is not a Web Map Server."
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:331 src/lib/marble/MapWizard.cpp:340
-#: src/lib/marble/MapWizard.cpp:965
+#: src/lib/marble/MapWizard.cpp:340 src/lib/marble/MapWizard.cpp:352
+#: src/lib/marble/MapWizard.cpp:1007
 msgctxt "Marble::MapWizard|"
 msgid "Web Mercator (epsg:3857)"
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:332 src/lib/marble/MapWizard.cpp:737
-#: src/lib/marble/MapWizard.cpp:852
+#: src/lib/marble/MapWizard.cpp:341 src/lib/marble/MapWizard.cpp:758
+#: src/lib/marble/MapWizard.cpp:871
 msgctxt "Marble::MapWizard|"
 msgid "Equirectangular (epsg:4326)"
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:376 src/lib/marble/MapWizard.cpp:842
+#: src/lib/marble/MapWizard.cpp:391 src/lib/marble/MapWizard.cpp:862
 msgctxt "Marble::MapWizard|"
 msgid "Preview Image"
 msgstr "გამოსახულების გადახედვა"
 
-#: src/lib/marble/MapWizard.cpp:380
+#: src/lib/marble/MapWizard.cpp:395
 msgctxt "Marble::MapWizard|"
 msgid "Base Tile"
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:384
-#, fuzzy
-#| msgctxt "Marble::ControlView|"
-#| msgid "Legend"
+#: src/lib/marble/MapWizard.cpp:399
 msgctxt "Marble::MapWizard|"
 msgid "Legend Image"
-msgstr "შინაარსი"
+msgstr "შინაარსის გამოსახულება"
 
-#: src/lib/marble/MapWizard.cpp:391 src/lib/marble/MapWizard.cpp:399
+#: src/lib/marble/MapWizard.cpp:406 src/lib/marble/MapWizard.cpp:414
 #, fuzzy, qt-format
 #| msgctxt "NavigationInfoBar|"
 #| msgid "%1 m"
@@ -7973,13 +7970,13 @@ msgctxt "Marble::MapWizard|"
 msgid "%1"
 msgstr "%1 მ"
 
-#: src/lib/marble/MapWizard.cpp:392
+#: src/lib/marble/MapWizard.cpp:407
 #, qt-format
 msgctxt "Marble::MapWizard|"
 msgid "The %1 could not be downloaded."
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:400
+#: src/lib/marble/MapWizard.cpp:415
 #, qt-format
 msgctxt "Marble::MapWizard|"
 msgid ""
@@ -7988,90 +7985,90 @@ msgid ""
 "%2"
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:451 src/lib/marble/MapWizard.cpp:452
-#: src/lib/marble/MapWizard.cpp:473
+#: src/lib/marble/MapWizard.cpp:466 src/lib/marble/MapWizard.cpp:467
+#: src/lib/marble/MapWizard.cpp:488
 msgctxt "Marble::MapWizard|"
 msgid "Custom"
 msgstr "ხელით მითითებული"
 
-#: src/lib/marble/MapWizard.cpp:703 src/lib/marble/MapWizard.cpp:706
+#: src/lib/marble/MapWizard.cpp:718 src/lib/marble/MapWizard.cpp:721
 msgctxt "Marble::MapWizard|"
 msgid "Archiving failed"
 msgstr "არქივაციის შეცდომა"
 
-#: src/lib/marble/MapWizard.cpp:703
+#: src/lib/marble/MapWizard.cpp:718
 msgctxt "Marble::MapWizard|"
 msgid "Archiving process cannot be started."
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:706
+#: src/lib/marble/MapWizard.cpp:721
 msgctxt "Marble::MapWizard|"
 msgid "Archiving process crashed."
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:770 src/lib/marble/MapWizard.cpp:778
-#: src/lib/marble/MapWizard.cpp:787
+#: src/lib/marble/MapWizard.cpp:791 src/lib/marble/MapWizard.cpp:799
+#: src/lib/marble/MapWizard.cpp:808
 msgctxt "Marble::MapWizard|"
 msgid "Source Image"
 msgstr "საწყისი გამოსახულება"
 
-#: src/lib/marble/MapWizard.cpp:771
+#: src/lib/marble/MapWizard.cpp:792
 msgctxt "Marble::MapWizard|"
 msgid "Please specify a source image."
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:779
+#: src/lib/marble/MapWizard.cpp:800
 msgctxt "Marble::MapWizard|"
 msgid ""
 "The source image you specified does not exist. Please specify a different "
 "one."
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:788
+#: src/lib/marble/MapWizard.cpp:809
 msgctxt "Marble::MapWizard|"
 msgid ""
 "The source image you specified does not seem to be an image. Please specify "
 "a different image file."
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:819
+#: src/lib/marble/MapWizard.cpp:839
 msgctxt "Marble::MapWizard|"
 msgid "Map Title"
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:819
+#: src/lib/marble/MapWizard.cpp:839
 msgctxt "Marble::MapWizard|"
 msgid "Please specify a map title."
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:826 src/lib/marble/MapWizard.cpp:834
+#: src/lib/marble/MapWizard.cpp:846 src/lib/marble/MapWizard.cpp:854
 msgctxt "Marble::MapWizard|"
 msgid "Map Name"
 msgstr "რუკის სახელი"
 
-#: src/lib/marble/MapWizard.cpp:826
+#: src/lib/marble/MapWizard.cpp:846
 msgctxt "Marble::MapWizard|"
 msgid "Please specify a map name."
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:835
+#: src/lib/marble/MapWizard.cpp:855
 #, qt-format
 msgctxt "Marble::MapWizard|"
 msgid ""
 "Please specify another map name, since there is already a map named \"%1\"."
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:842
+#: src/lib/marble/MapWizard.cpp:862
 msgctxt "Marble::MapWizard|"
 msgid "Please specify a preview image."
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:1270
+#: src/lib/marble/MapWizard.cpp:1316
 msgctxt "Marble::MapWizard|"
 msgid "Problem while creating files"
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:1270
+#: src/lib/marble/MapWizard.cpp:1316
 msgctxt "Marble::MapWizard|"
 msgid "Check if a theme with the same name exists."
 msgstr ""
@@ -8186,92 +8183,125 @@ msgid ""
 "geobasis/wms_nw_dop_overlay</i>)"
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:156
+#: src/lib/marble/MapWizard.ui:156 src/lib/marble/MapWizard.ui:449
 msgctxt "MapWizard|"
 msgid "https://"
 msgstr "https://"
 
 #: src/lib/marble/MapWizard.ui:208
 #, fuzzy
-#| msgctxt ""
-#| "Marble::Placemark|A copy shop provides a service to send documents "
-#| "through fax"
-#| msgid "Fax service"
+#| msgctxt "MapWizard|"
+#| msgid "Wms-Service"
 msgctxt "MapWizard|"
-msgid "Wms-Service"
-msgstr "ფაქსის სერვისი"
+msgid "Wms-Service:"
+msgstr "Wms-სერვისი"
 
 #: src/lib/marble/MapWizard.ui:222
-#, fuzzy
-#| msgctxt "MainScreen|"
-#| msgid "Layer Options"
 msgctxt "MapWizard|"
 msgid "Layer Selection"
-msgstr "ფენის პარამეტრები"
+msgstr "ფენის არჩევანი"
 
 #: src/lib/marble/MapWizard.ui:233
-#, fuzzy
-#| msgctxt "MapWizard|"
-#| msgid "Available Maps:"
 msgctxt "MapWizard|"
-msgid "Available Layers:"
-msgstr "ხელმისაწვდომი რუკები:"
+msgid "Choose your Layer(s):"
+msgstr ""
 
 #: src/lib/marble/MapWizard.ui:256
-#, fuzzy
-#| msgctxt "SearchField|"
-#| msgid "Search"
 msgctxt "MapWizard|"
 msgid "Search:"
-msgstr "ძებნა"
+msgstr "ძებნა:"
 
-#: src/lib/marble/MapWizard.ui:283
+#: src/lib/marble/MapWizard.ui:278
+msgctxt "MapWizard|"
+msgid ""
+"The order in which multiple layers are selected directly affects their "
+"rendering order."
+msgstr ""
+
+#: src/lib/marble/MapWizard.ui:287
+msgctxt "MapWizard|"
+msgid ""
+"Enable this to select multiple layers without keyboard shortcuts (Shift, "
+"Strg, Strg+A, ...)"
+msgstr ""
+
+#: src/lib/marble/MapWizard.ui:290
 msgctxt "MapWizard|"
 msgid "Multiple Selections"
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:306
+#: src/lib/marble/MapWizard.ui:297
 msgctxt "MapWizard|"
-msgid "Backdrop:"
+msgid "Custom Backdrop"
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:316
+#: src/lib/marble/MapWizard.ui:304
 msgctxt "MapWizard|"
 msgid "Tile Projection:"
 msgstr "ფილის პროექცია:"
 
-#: src/lib/marble/MapWizard.ui:323
+#: src/lib/marble/MapWizard.ui:311
 msgctxt "MapWizard|"
 msgid "Indicates the projection in which the tiles are rendered."
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:330
+#: src/lib/marble/MapWizard.ui:334
 msgctxt "MapWizard|"
 msgid "Tile Format:"
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:337
+#: src/lib/marble/MapWizard.ui:341
 msgctxt "MapWizard|"
 msgid "Indicates the file format of the tiles."
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:369
-#, fuzzy
-#| msgctxt "MainScreen|"
-#| msgid "Layer Options"
+#: src/lib/marble/MapWizard.ui:373
 msgctxt "MapWizard|"
 msgid "Layer Info"
-msgstr "ფენის პარამეტრები"
+msgstr "ფენის ინფორმაცია"
 
-#: src/lib/marble/MapWizard.ui:382
-#, fuzzy
-#| msgctxt "GeoDataPlacemark|"
-#| msgid "Service Road"
+#: src/lib/marble/MapWizard.ui:386
 msgctxt "MapWizard|"
 msgid "Service Info"
-msgstr "სერვისული გზა"
+msgstr "ინფორმაცია სერვისის შესახებ"
 
-#: src/lib/marble/MapWizard.ui:399
+#: src/lib/marble/MapWizard.ui:396
+msgctxt "MapWizard|"
+msgid "Customize Backdrop"
+msgstr ""
+
+#: src/lib/marble/MapWizard.ui:404
+msgctxt "MapWizard|"
+msgid "Preset Layers"
+msgstr ""
+
+#: src/lib/marble/MapWizard.ui:424
+#, fuzzy
+#| msgctxt "DGML|"
+#| msgid "OpenStreetMap"
+msgctxt "MapWizard|"
+msgid "OpenStreetMap"
+msgstr "OpenStreetMap"
+
+#: src/lib/marble/MapWizard.ui:439
+msgctxt "MapWizard|"
+msgid "XYZ Server Url"
+msgstr ""
+
+#: src/lib/marble/MapWizard.ui:463
+#, fuzzy
+#| msgctxt "FormattedTextWidget|"
+#| msgid "Color"
+msgctxt "MapWizard|"
+msgid "Color"
+msgstr "ფერი"
+
+#: src/lib/marble/MapWizard.ui:473
+msgctxt "MapWizard|"
+msgid "#87CEFA"
+msgstr ""
+
+#: src/lib/marble/MapWizard.ui:516
 msgctxt "MapWizard|"
 msgid ""
 "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
@@ -8299,17 +8329,17 @@ msgid ""
 "worldmap.svg\" width=\"150\" /></p></body></html>"
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:418
+#: src/lib/marble/MapWizard.ui:535
 msgctxt "MapWizard|"
 msgid "Source Image:"
 msgstr "საწყისი გამოსახულება:"
 
-#: src/lib/marble/MapWizard.ui:434 src/lib/marble/MapWizard.ui:719
+#: src/lib/marble/MapWizard.ui:551 src/lib/marble/MapWizard.ui:836
 msgctxt "MapWizard|"
 msgid "..."
 msgstr "..."
 
-#: src/lib/marble/MapWizard.ui:460
+#: src/lib/marble/MapWizard.ui:577
 msgctxt "MapWizard|"
 msgid ""
 "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
@@ -8335,12 +8365,12 @@ msgid ""
 "p></body></html>"
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:496
+#: src/lib/marble/MapWizard.ui:613
 msgctxt "MapWizard|"
 msgid "URL Scheme:"
 msgstr "URL -ის სქემა:"
 
-#: src/lib/marble/MapWizard.ui:535
+#: src/lib/marble/MapWizard.ui:652
 msgctxt "MapWizard|"
 msgid ""
 "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
@@ -8360,37 +8390,37 @@ msgid ""
 "span></p></body></html>"
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:552
+#: src/lib/marble/MapWizard.ui:669
 msgctxt "MapWizard|"
 msgid "Map Title:"
 msgstr "რუკის სათაური:"
 
-#: src/lib/marble/MapWizard.ui:565
+#: src/lib/marble/MapWizard.ui:682
 msgctxt "MapWizard|"
 msgid "A short concise name for your map theme."
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:572 src/lib/marble/MapWizard.ui:795
+#: src/lib/marble/MapWizard.ui:689 src/lib/marble/MapWizard.ui:912
 msgctxt "MapWizard|"
 msgid "Map Name:"
 msgstr "რუკის სახელი:"
 
-#: src/lib/marble/MapWizard.ui:582
+#: src/lib/marble/MapWizard.ui:699
 msgctxt "MapWizard|"
 msgid "The lowercase map theme id."
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:585
+#: src/lib/marble/MapWizard.ui:702
 msgctxt "MapWizard|"
 msgid "The folder name of your new theme."
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:598
+#: src/lib/marble/MapWizard.ui:715
 msgctxt "MapWizard|"
 msgid "Description:"
 msgstr "აღწერა:"
 
-#: src/lib/marble/MapWizard.ui:617
+#: src/lib/marble/MapWizard.ui:734
 msgctxt "MapWizard|"
 msgid ""
 "A short description of your map theme. Here you can provide information "
@@ -8398,37 +8428,37 @@ msgid ""
 "map theme."
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:620
+#: src/lib/marble/MapWizard.ui:737
 msgctxt "MapWizard|"
 msgid "It will appear in a tool tip and may contain HTML formatting."
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:633 src/lib/marble/MapWizard.ui:835
+#: src/lib/marble/MapWizard.ui:750 src/lib/marble/MapWizard.ui:952
 msgctxt "MapWizard|"
 msgid "Preview Image:"
 msgstr "გამოსახულების გადახედვა:"
 
-#: src/lib/marble/MapWizard.ui:648
+#: src/lib/marble/MapWizard.ui:765
 msgctxt "MapWizard|"
 msgid "preview image"
 msgstr "გამოსახულების გადახედვა"
 
-#: src/lib/marble/MapWizard.ui:670
+#: src/lib/marble/MapWizard.ui:787
 msgctxt "MapWizard|"
 msgid "Change..."
 msgstr "შეცვლა..."
 
-#: src/lib/marble/MapWizard.ui:700
+#: src/lib/marble/MapWizard.ui:817
 msgctxt "MapWizard|"
 msgid "<b>Optional: Addition of a Map Key</b>"
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:709
+#: src/lib/marble/MapWizard.ui:826
 msgctxt "MapWizard|"
 msgid "Legend Image:"
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:770
+#: src/lib/marble/MapWizard.ui:887
 msgctxt "MapWizard|"
 msgid ""
 "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
@@ -8455,27 +8485,27 @@ msgid ""
 "p></body></html>"
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:802
+#: src/lib/marble/MapWizard.ui:919
 msgctxt "MapWizard|"
 msgid "Map name goes here."
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:815
+#: src/lib/marble/MapWizard.ui:932
 msgctxt "MapWizard|"
 msgid "Map Theme:"
 msgstr "რუკის თემა:"
 
-#: src/lib/marble/MapWizard.ui:822
+#: src/lib/marble/MapWizard.ui:939
 msgctxt "MapWizard|"
 msgid "Map theme goes here."
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:847
+#: src/lib/marble/MapWizard.ui:964
 msgctxt "MapWizard|"
 msgid "Thumbnail"
-msgstr ""
+msgstr "მინიატურა"
 
-#: src/lib/marble/MapWizard.ui:857
+#: src/lib/marble/MapWizard.ui:974
 msgctxt "MapWizard|"
 msgid "Preview Map"
 msgstr ""
@@ -17299,6 +17329,10 @@ msgstr ""
 msgctxt "Marble::FITemplateFloatItem|"
 msgid "This is a template class for float items."
 msgstr ""
+
+#~ msgctxt "MapWizard|"
+#~ msgid "Available Layers:"
+#~ msgstr "ხელმისაწვდომი ფენები:"
 
 #~ msgctxt "Marble::MapWizard|"
 #~ msgid "Geographic Pole"
