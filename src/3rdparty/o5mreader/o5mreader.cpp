@@ -5,11 +5,13 @@
 #include <cstring>
 #include <cerrno>
 #include <cstdlib>
+#include <mutex>
 
 
 #define STR_PAIR_TABLE_SIZE 15000
 #define STR_PAIR_STRING_SIZE 256
 
+std::mutex mtx;
 
 O5mreaderRet o5mreader_readUInt(O5mreader *pReader, uint64_t *ret) {
 	uint8_t b;
@@ -43,8 +45,8 @@ O5mreaderRet o5mreader_readInt(O5mreader *pReader, uint64_t *ret) {
 
 
 O5mreaderRet o5mreader_readStrPair(O5mreader *pReader, char **tagpair, int single) {	
-	static char buffer[1024];
-	char* pBuf;
+    static char buffer[1024];
+    char* pBuf;
 	static uint64_t pointer = 0;
 	int length;
 	uint64_t key; 
@@ -54,15 +56,15 @@ O5mreaderRet o5mreader_readStrPair(O5mreader *pReader, char **tagpair, int singl
 		return O5MREADER_RET_ERR;
 	}
 	
-	if ( key ) {
-		*tagpair = pReader->strPairTable[(pointer+15000-key)%15000];		
-		return key;
+    if ( key ) {
+        *tagpair = pReader->strPairTable[(pointer+15000-key)%15000];
+        return key;
 	}
 	else {
 		pBuf = buffer;
 		for ( i=0; i<(single?1:2); i++ ) {
-			do {
-				if ( fread(pBuf,1,1,pReader->f) == 0 ) {
+            do {
+                if ( fread(pBuf,1,1,pReader->f) == 0 ) {
 					o5mreader_setError(pReader,
 						O5MREADER_ERR_CODE_UNEXPECTED_END_OF_FILE,
 						NULL
@@ -277,8 +279,11 @@ O5mreaderIterateRet o5mreader_readVersion(O5mreader *pReader, O5mreaderDataset* 
 		
 		if ( o5mreader_thereAreNoMoreData(pReader) ) 
 			return O5MREADER_ITERATE_RET_DONE;
-			
-		if ( o5mreader_readStrPair(pReader,&pReader->tagPair,0) == O5MREADER_ITERATE_RET_ERR ) {
+
+        mtx.lock();
+        O5mreaderRet strPair = o5mreader_readStrPair(pReader,&pReader->tagPair,0);
+        mtx.unlock();
+        if ( strPair == O5MREADER_ITERATE_RET_ERR ) {
 			return O5MREADER_ITERATE_RET_ERR;
 		}
 	}
@@ -309,8 +314,11 @@ O5mreaderIterateRet o5mreader_iterateTags(O5mreader *pReader, char** pKey, char*
 		pReader->canIterateTags = 0;		
 		return O5MREADER_ITERATE_RET_DONE;
 	}
-			
-	if ( o5mreader_readStrPair(pReader,&pReader->tagPair,0) == O5MREADER_RET_ERR ) {		
+
+    mtx.lock();
+    O5mreaderRet strPair = o5mreader_readStrPair(pReader,&pReader->tagPair,0);
+    mtx.unlock();
+    if ( strPair == O5MREADER_RET_ERR ) {
 		return O5MREADER_ITERATE_RET_ERR;
 	}
 	if ( pKey )
@@ -451,7 +459,10 @@ O5mreaderIterateRet o5mreader_iterateRefs(O5mreader *pReader, uint64_t *refId, u
 	
 	//fread(_,1,1,pReader->f);
 	
-	if ( o5mreader_readStrPair(pReader, &pReader->tagPair,1) == O5MREADER_RET_ERR ) {
+    mtx.lock();
+    O5mreaderRet strPair = o5mreader_readStrPair(pReader, &pReader->tagPair,1);
+    mtx.unlock();
+    if ( strPair == O5MREADER_RET_ERR ) {
 		return O5MREADER_ITERATE_RET_ERR;
 	}
 		
