@@ -827,7 +827,7 @@ msgstr ""
 #. file data/maps/earth/vectorosm/vectorosm.dgml:105
 msgctxt "DGML|"
 msgid "OSM Bitmap Tiles"
-msgstr "Mosaics de mapa de bits OSM"
+msgstr "Tessel·les de mapa de bits OSM"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:119
 #. ----------
@@ -3002,7 +3002,7 @@ msgstr "Un assistent vos guia a través de la creació d'un tema de mapa propi."
 #: src/apps/marble-qt/QtMainWindow.cpp:416
 msgctxt "Marble::MainWindow|"
 msgid "Show Tile Zoom Level"
-msgstr "Mostra el nivell de zoom dels mosaics"
+msgstr "Mostra el nivell de zoom de les tessel·les"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:424
 msgctxt "Marble::MainWindow|"
@@ -5242,7 +5242,7 @@ msgstr "Mètode de selecció"
 #: src/lib/marble/DownloadRegionDialog.cpp:195
 msgctxt "Marble::DownloadRegionDialog|"
 msgid "Number of tiles to download:"
-msgstr "Nombre de mosaics que s'han de descarregar:"
+msgstr "Nombre de tessel·les que s'han de descarregar:"
 
 #: src/lib/marble/DownloadRegionDialog.cpp:245
 msgctxt "Marble::DownloadRegionDialog|"
@@ -5252,17 +5252,17 @@ msgstr "Descarrega una regió"
 #: src/lib/marble/DownloadRegionDialog.cpp:247
 msgctxt "Marble::DownloadRegionDialog|"
 msgid "Tile type to be downloaded:"
-msgstr "Tipus de mosaic que s'ha de descarregar:"
+msgstr "Tipus de tessel·la que s'ha de descarregar:"
 
 #: src/lib/marble/DownloadRegionDialog.cpp:249
 msgctxt "Marble::DownloadRegionDialog|"
 msgid "Texture tiles"
-msgstr "Mosaics de textura"
+msgstr "Tessel·les de textura"
 
 #: src/lib/marble/DownloadRegionDialog.cpp:250
 msgctxt "Marble::DownloadRegionDialog|"
 msgid "Vector tiles"
-msgstr "Mosaics vectorials"
+msgstr "Tessel·les vectorials"
 
 #: src/lib/marble/DownloadRegionDialog.cpp:251
 msgctxt "Marble::DownloadRegionDialog|"
@@ -5276,13 +5276,13 @@ msgstr ""
 msgctxt "Marble::DownloadRegionDialog|"
 msgid "There is a limit of %n tile(s) to download."
 msgid_plural "There is a limit of %n tile(s) to download."
-msgstr[0] "Hi ha un límit d'%n mosaic que es pot descarregar."
-msgstr[1] "Hi ha un límit de %n mosaics que es poden descarregar."
+msgstr[0] "Hi ha un límit d'%n tessel·la que es pot descarregar."
+msgstr[1] "Hi ha un límit de %n tessel·les que es poden descarregar."
 
 #: src/lib/marble/DownloadRegionDialog.cpp:531
 msgctxt "Marble::DownloadRegionDialog|"
 msgid "Approximate size of the tiles to be downloaded"
-msgstr "Mida aproximada dels mosaics que s'han de descarregar"
+msgstr "Mida aproximada de les tessel·les que s'han de descarregar"
 
 #: src/lib/marble/DownloadRegionDialog.cpp:535
 #, qt-format
@@ -8074,12 +8074,12 @@ msgstr "Personalitzat"
 #: src/lib/marble/MapWizard.cpp:496 src/lib/marble/MapWizard.cpp:503
 msgctxt "Marble::MapWizard|"
 msgid "Base Tile"
-msgstr "Mosaic base"
+msgstr "Tessel·la base"
 
 #: src/lib/marble/MapWizard.cpp:497
 msgctxt "Marble::MapWizard|"
 msgid "The base tile could not be downloaded."
-msgstr "El mosaic base no s'ha pogut descarregar correctament."
+msgstr "La tessel·la base no s'ha pogut descarregar correctament."
 
 #: src/lib/marble/MapWizard.cpp:504
 #, qt-format
@@ -8089,7 +8089,7 @@ msgid ""
 "\n"
 "%1"
 msgstr ""
-"El mosaic base no s'ha pogut descarregar correctament. El servidor ha "
+"La tessel·la base no s'ha pogut descarregar correctament. El servidor ha "
 "respost:\n"
 "\n"
 "%1"
@@ -8325,7 +8325,7 @@ msgstr ""
 #: src/lib/marble/MapWizard.ui:83
 msgctxt "MapWizard|"
 msgid "Online map providing indexed tiles (e.g. Open Street Map)"
-msgstr "Mapa en línia que oferix mosaics indexats (p. ex. Open Street Map)"
+msgstr "Mapa en línia que oferix tessel·les indexades (p. ex. Open Street Map)"
 
 #: src/lib/marble/MapWizard.ui:94
 msgctxt "MapWizard|"
@@ -8482,18 +8482,19 @@ msgstr ""
 "size:9pt; font-weight:400; font-style:normal;\">\n"
 "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
 "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
-"family:'Sans Serif'; font-weight:600;\">Esquema d'URL per als mosaics "
-"indexats</span></p>\n"
+"family:'Sans Serif'; font-weight:600;\">Esquema d'URL per a les tessel·les "
+"indexades</span></p>\n"
 "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
 "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
-"family:'Sans Serif';\">Introduïu l'URL utilitzat per a descarregar mosaics "
-"individuals. Utilitzeu els marcadors de posició </span><span style=\" font-"
-"family:'Sans Serif'; font-style:italic;\">{x}</span><span style=\" font-"
-"family:'Sans Serif';\">, </span><span style=\" font-family:'Sans Serif'; "
-"font-style:italic;\">{y}</span><span style=\" font-family:'Sans Serif';\">, "
-"i </span><span style=\" font-family:'Sans Serif'; font-style:italic;"
-"\">{zoomLevel}</span><span style=\" font-family:'Sans Serif';\"> per a "
-"referenciar un mosaic des de l'índex.</span></p></body></html>"
+"family:'Sans Serif';\">Introduïu l'URL utilitzat per a descarregar "
+"tessel·les individuals. Utilitzeu els marcadors de posició </span><span "
+"style=\" font-family:'Sans Serif'; font-style:italic;\">{x}</span><span "
+"style=\" font-family:'Sans Serif';\">, </span><span style=\" font-"
+"family:'Sans Serif'; font-style:italic;\">{y}</span><span style=\" font-"
+"family:'Sans Serif';\">, i </span><span style=\" font-family:'Sans Serif'; "
+"font-style:italic;\">{zoomLevel}</span><span style=\" font-family:'Sans "
+"Serif';\"> per a referenciar una tessel·la des de l'índex.</span></p></"
+"body></html>"
 
 #: src/lib/marble/MapWizard.ui:293
 msgctxt "MapWizard|"
@@ -9240,7 +9241,7 @@ msgid ""
 "vector map</i></p>"
 msgstr ""
 "<p>Dávid Kolozsvári <a href=\"freedawson@gmail.com\">freedawson@gmail.com</"
-"a><br /><i>Projecte: Gràfics fluids a cada nivell de mosaic en el mapa "
+"a><br /><i>Projecte: Gràfics fluids a cada nivell de tessel·la en el mapa "
 "vectorial OSM de Marble</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:188
@@ -9252,7 +9253,7 @@ msgid ""
 msgstr ""
 "<p>Akshat Tandon <a href=\"akshat.tandon@research.iiit.ac.in\">akshat."
 "tandon@research.iiit.ac.in</a><br /><i>Projecte: Implementar els nivells "
-"mitjà i baix de mosaic en el mapa vectorial OSM de Marble</i></p>"
+"mitjà i baix de tessel·la en el mapa vectorial OSM de Marble</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:191
 msgctxt "QObject|"
@@ -9465,7 +9466,7 @@ msgid ""
 "a><br /><i>Project: Vector Tiles for Marble</i></p>"
 msgstr ""
 "<p>Patrick Spendrin <a href=\"pspendrin@gmail.com\">pspendrin@gmail.com</"
-"a><br /><i>Projecte: Mosaics vectorials per a Marble</i></p>"
+"a><br /><i>Projecte: Tessel·les vectorials per a Marble</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:240
 msgctxt "QObject|"
@@ -12506,12 +12507,12 @@ msgstr "Zoom"
 #: src/lib/marble/TileLevelRangeWidget.ui:37
 msgctxt "TileLevelRangeWidget|"
 msgid "&Tile level range:"
-msgstr "Interval de nivells del &mosaic:"
+msgstr "Interval de nivells de la &tessel·la:"
 
 #: src/lib/marble/TileLevelRangeWidget.ui:47
 msgctxt "TileLevelRangeWidget|"
 msgid "Minimum Tile Level"
-msgstr "Nivell mínim del mosaic"
+msgstr "Nivell mínim de la tessel·la"
 
 #: src/lib/marble/TileLevelRangeWidget.ui:63
 msgctxt "TileLevelRangeWidget|"
@@ -12521,7 +12522,7 @@ msgstr "a"
 #: src/lib/marble/TileLevelRangeWidget.ui:70
 msgctxt "TileLevelRangeWidget|"
 msgid "Maximum Tile Level"
-msgstr "Nivell màxim del mosaic"
+msgstr "Nivell màxim de la tessel·la"
 
 #: src/lib/marble/TimeControlWidget.ui:14
 msgctxt "TimeControlWidget|"
