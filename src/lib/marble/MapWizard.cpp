@@ -48,6 +48,7 @@
 #include <QUrlQuery>
 #include <QStandardItemModel>
 #include <QSortFilterProxyModel>
+#include <QColorDialog>
 
 namespace Marble
 {
@@ -242,8 +243,10 @@ MapWizard::MapWizard( QWidget* parent ) : QWizard( parent ), d( new MapWizardPri
     connect( d->uiWidget.pushButtonPreviewMap, &QAbstractButton::clicked, this, &MapWizard::showPreview );
     connect( d->uiWidget.lineEditWmsSearch, &QLineEdit::textChanged, this, &MapWizard::updateSearchFilter );
     connect( d->uiWidget.comboBoxWmsMaps, SIGNAL(currentIndexChanged(int)), this, SLOT(updateBackdropCheckBox()) );
+    connect( d->uiWidget.checkBoxWmsBackdrop, &QCheckBox::stateChanged, this, &MapWizard::updateBackdropCheckBox );
 
     connect( d->uiWidget.checkBoxWmsMultipleSelections, &QCheckBox::stateChanged, this, &MapWizard::updateListViewSelection);
+    connect( d->uiWidget.pushButtonColor, &QPushButton::clicked, this, &MapWizard::chooseBackgroundColor);
     updateListViewSelection();
 
     d->uiWidget.checkBoxWmsMultipleSelections->setVisible(true);
@@ -253,6 +256,15 @@ MapWizard::MapWizard( QWidget* parent ) : QWizard( parent ), d( new MapWizardPri
 
     d->uiWidget.progressBarWmsCapabilities->setVisible(false);
     setLayerButtonsVisible(true);
+
+    d->uiWidget.tabWidgetLayers->setCurrentIndex(0);
+
+    QPalette p = d->uiWidget.labelBackgroundColor->palette();
+    p.setColor(QPalette::Window, d->uiWidget.labelBackgroundColor->text());
+    d->uiWidget.labelBackgroundColor->setAutoFillBackground(true);
+    d->uiWidget.labelBackgroundColor->setPalette(p);
+
+    d->uiWidget.radioButtonXYZServer->setVisible(false);
 }
 
 MapWizard::~MapWizard()
@@ -277,7 +289,7 @@ void MapWizard::processCapabilitiesResults()
         QMessageBox::critical( this, tr( "Error while parsing" ), tr( "Server is not a Web Map Server." ) );
         return;
     }    
-    d->uiWidget.labelWmsTitle->setText(QString("<b>%1</b>").arg(d->owsManager.wmsCapabilities().title() ) );
+    d->uiWidget.labelWmsTitle->setText(QString("Web Service: <b>%1</b>").arg(d->owsManager.wmsCapabilities().title() ) );
     d->uiWidget.labelWmsTitle->setToolTip(QString("<small>%1</small>").arg(d->owsManager.wmsCapabilities().abstract() ) );
     d->model->clear();
 
@@ -962,23 +974,41 @@ GeoSceneDocument* MapWizard::createDocument()
     zoom->setMaximum( 3500 );
     zoom->setDiscrete( false );
     
-    GeoSceneTileDataset *osmTexture = nullptr;
-    bool isBackdropAvailable = d->uiWidget.checkBoxWmsBackdrop->isEnabled()
-            && d->uiWidget.checkBoxWmsBackdrop->isChecked();
-    if (isBackdropAvailable) {
-        osmTexture = new GeoSceneTileDataset( "backdrop" );
-        osmTexture->setExpire( 31536000 );
-        osmTexture->setSourceDir(QLatin1String("earth/openstreetmap"));
-        osmTexture->setFileFormat( "PNG" );
-        osmTexture->addDownloadPolicy( DownloadBrowse, 20 );
-        osmTexture->addDownloadPolicy( DownloadBulk, 2 );
-        osmTexture->addDownloadUrl( QUrl("https://tile.openstreetmap.org/") );
-        osmTexture->setMaximumTileLevel( 20 );
-        osmTexture->setTileSize(QSize(256, 256));
-        osmTexture->setLevelZeroRows( 1 );
-        osmTexture->setLevelZeroColumns( 1 );
-        osmTexture->setServerLayout( new OsmServerLayout( osmTexture ) );
-        osmTexture->setTileProjection(GeoSceneAbstractTileProjection::Mercator);
+    GeoSceneTileDataset *backdropTexture = nullptr;
+    bool isBackdropTextureAvailable = d->uiWidget.checkBoxWmsBackdrop->isEnabled()
+            && d->uiWidget.checkBoxWmsBackdrop->isChecked()
+            && d->uiWidget.radioButtonOpenStreetMap->isChecked();
+    if (isBackdropTextureAvailable) {
+        if (d->uiWidget.radioButtonXYZServer) {
+            backdropTexture = new GeoSceneTileDataset( "backdrop" );
+            backdropTexture->setExpire( 31536000 );
+            backdropTexture->setSourceDir(QLatin1String("earth/openstreetmap"));
+            backdropTexture->setFileFormat( "PNG" );
+            backdropTexture->addDownloadPolicy( DownloadBrowse, 20 );
+            backdropTexture->addDownloadPolicy( DownloadBulk, 2 );
+            backdropTexture->addDownloadUrl( QUrl("https://tile.openstreetmap.org/") );
+            backdropTexture->setMaximumTileLevel( 20 );
+            backdropTexture->setTileSize(QSize(256, 256));
+            backdropTexture->setLevelZeroRows( 1 );
+            backdropTexture->setLevelZeroColumns( 1 );
+            backdropTexture->setServerLayout( new OsmServerLayout( backdropTexture ) );
+            backdropTexture->setTileProjection(GeoSceneAbstractTileProjection::Mercator);
+        }
+/*
+        if (d->uiWidget.radioButtonXYZServer) {
+            backdropTexture->setFileFormat( d->format );
+            QUrl downloadUrl = QUrl( d->uiWidget.lineEditXYZServer->text() );
+            backdropTexture->addDownloadPolicy( DownloadBrowse, 20 );
+            backdropTexture->addDownloadPolicy( DownloadBulk, 2 );
+            backdropTexture->addDownloadUrl( downloadUrl );
+            backdropTexture->setMaximumTileLevel( 20 );
+            backdropTexture->setTileSize(QSize(256, 256));
+            backdropTexture->setLevelZeroRows( 1 );
+            backdropTexture->setLevelZeroColumns( 1 );
+            backdropTexture->setServerLayout( new CustomServerLayout( backdropTexture ) );
+            backdropTexture->setTileProjection(GeoSceneAbstractTileProjection::Mercator);
+        }
+        */
     }
 
     GeoSceneTileDataset *texture = new GeoSceneTileDataset( "map" );
@@ -994,9 +1024,14 @@ GeoSceneDocument* MapWizard::createDocument()
         urlQuery.addQueryItem( "style", styles.join(",") );
         bool isBackdropAvailable = d->uiWidget.checkBoxWmsBackdrop->isEnabled()
                 && d->uiWidget.checkBoxWmsBackdrop->isChecked();
-        urlQuery.addQueryItem( "transparent", isBackdropAvailable ? "true" : "false" );
+        urlQuery.addQueryItem( "transparent", isBackdropTextureAvailable ? "true" : "false" );
 
- //       urlQuery.addQueryItem( "bgcolor", "#ff0000");
+        if (d->uiWidget.checkBoxWmsBackdrop->isChecked() && d->uiWidget.radioButtonColor->isChecked()) {
+            QString bgColorName = d->uiWidget.labelBackgroundColor->palette().color(QPalette::Window).name();
+            bgColorName = bgColorName.remove("#");
+            bgColorName = "0x" + bgColorName;
+            urlQuery.addQueryItem( "bgcolor", bgColorName);
+        }
         downloadUrl.setQuery( urlQuery );
         texture->addDownloadUrl( downloadUrl );
         texture->setMaximumTileLevel( 20 );
@@ -1053,7 +1088,7 @@ GeoSceneDocument* MapWizard::createDocument()
     
     GeoSceneLayer *layer = new GeoSceneLayer( d->uiWidget.lineEditTheme->text() );
     layer->setBackend( "texture" );
-    layer->addDataset( osmTexture );
+    layer->addDataset( backdropTexture );
     layer->addDataset( texture );
     
     GeoSceneLayer* secondLayer = new GeoSceneLayer( "standardplaces" );    
@@ -1359,6 +1394,18 @@ void MapWizard::updateBackdropCheckBox()
     // The only backdrop supported is the Mercator-based OSM tile server map
     bool isMercator = d->uiWidget.comboBoxWmsMaps->currentText() == "Web Mercator (epsg:3857)";
     d->uiWidget.checkBoxWmsBackdrop->setEnabled(isMercator);
+    d->uiWidget.tabCustomizeBackdrop->setEnabled(isMercator && d->uiWidget.checkBoxWmsBackdrop->isChecked());
+}
+
+void MapWizard::chooseBackgroundColor()
+{
+    QColor selectedColor = QColorDialog::getColor(d->uiWidget.pushButtonColor->text());
+    if (selectedColor.isValid()) {
+        d->uiWidget.labelBackgroundColor->setText(selectedColor.name());
+        QPalette p = d->uiWidget.labelBackgroundColor->palette();
+        p.setColor(QPalette::Window, selectedColor);
+        d->uiWidget.labelBackgroundColor->setPalette(p);
+    }
 }
 
 

@@ -210,9 +210,9 @@ p, li { white-space: pre-wrap; }
      </widget>
     </item>
     <item>
-     <widget class="QTabWidget" name="tabWidget">
+     <widget class="QTabWidget" name="tabWidgetLayers">
       <property name="currentIndex">
-       <number>0</number>
+       <number>3</number>
       </property>
       <widget class="QWidget" name="tabLayerSelection">
        <property name="enabled">
@@ -391,23 +391,26 @@ p, li { white-space: pre-wrap; }
         </item>
        </layout>
       </widget>
-      <widget class="QWidget" name="tabPage">
+      <widget class="QWidget" name="tabCustomizeBackdrop">
        <attribute name="title">
         <string>Customize Backdrop</string>
        </attribute>
        <layout class="QVBoxLayout" name="verticalLayout_13">
+        <property name="spacing">
+         <number>12</number>
+        </property>
         <item>
          <layout class="QHBoxLayout" name="horizontalLayout_7">
           <item>
-           <widget class="QRadioButton" name="radioButton">
+           <widget class="QRadioButton" name="radioButtonOpenStreetMap">
             <property name="text">
              <string>Preset Layers</string>
             </property>
             <property name="checkable">
-             <bool>false</bool>
+             <bool>true</bool>
             </property>
             <property name="checked">
-             <bool>false</bool>
+             <bool>true</bool>
             </property>
            </widget>
           </item>
@@ -431,7 +434,7 @@ p, li { white-space: pre-wrap; }
         <item>
          <layout class="QHBoxLayout" name="horizontalLayout_8">
           <item>
-           <widget class="QRadioButton" name="radioButton_3">
+           <widget class="QRadioButton" name="radioButtonXYZServer">
             <property name="enabled">
              <bool>false</bool>
             </property>
@@ -441,9 +444,12 @@ p, li { white-space: pre-wrap; }
            </widget>
           </item>
           <item>
-           <widget class="QLineEdit" name="lineEdit">
+           <widget class="QLineEdit" name="lineEditXYZServer">
             <property name="enabled">
              <bool>false</bool>
+            </property>
+            <property name="toolTip">
+             <string>The XYZ server needs to provide map tiles in Mercator projection.</string>
             </property>
             <property name="text">
              <string>https://</string>
@@ -455,9 +461,9 @@ p, li { white-space: pre-wrap; }
         <item>
          <layout class="QHBoxLayout" name="horizontalLayout_9">
           <item>
-           <widget class="QRadioButton" name="radioButton_2">
+           <widget class="QRadioButton" name="radioButtonColor">
             <property name="enabled">
-             <bool>false</bool>
+             <bool>true</bool>
             </property>
             <property name="text">
              <string>Color</string>
@@ -465,12 +471,34 @@ p, li { white-space: pre-wrap; }
            </widget>
           </item>
           <item>
-           <widget class="QPushButton" name="pushButton">
-            <property name="enabled">
-             <bool>false</bool>
+           <widget class="QLabel" name="labelBackgroundColor">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>0</height>
+             </size>
             </property>
             <property name="text">
              <string>#87CEFA</string>
+            </property>
+            <property name="margin">
+             <number>3</number>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pushButtonColor">
+            <property name="enabled">
+             <bool>true</bool>
+            </property>
+            <property name="text">
+             <string>Select Color</string>
             </property>
            </widget>
           </item>
@@ -1001,7 +1029,7 @@ p, li { white-space: pre-wrap; }
   <tabstop>radioButtonStaticUrl</tabstop>
   <tabstop>comboBoxWmsServer</tabstop>
   <tabstop>lineEditWmsUrl</tabstop>
-  <tabstop>tabWidget</tabstop>
+  <tabstop>tabWidgetLayers</tabstop>
   <tabstop>lineEditWmsSearch</tabstop>
   <tabstop>listViewWmsLayers</tabstop>
   <tabstop>checkBoxWmsMultipleSelections</tabstop>

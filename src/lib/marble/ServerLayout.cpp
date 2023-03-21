@@ -94,6 +94,7 @@ QUrl CustomServerLayout::downloadUrl( const QUrl &prototypeUrl, const TileId &id
 
     QString urlStr = prototypeUrl.toString( QUrl::DecodeReserved );
 
+    urlStr.replace( "{z}", QString::number( id.zoomLevel() ) );
     urlStr.replace( "{zoomLevel}", QString::number( id.zoomLevel() ) );
     urlStr.replace( "{x}", QString::number( id.x() ) );
     urlStr.replace( "{y}", QString::number( id.y() ) );
