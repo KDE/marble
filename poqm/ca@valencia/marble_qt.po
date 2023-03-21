@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2023-03-16 10:48+0100\n"
+"PO-Revision-Date: 2023-03-20 09:46+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
@@ -827,7 +827,7 @@ msgstr ""
 #. file data/maps/earth/vectorosm/vectorosm.dgml:105
 msgctxt "DGML|"
 msgid "OSM Bitmap Tiles"
-msgstr "Mosaics de mapa de bits OSM"
+msgstr "Tessel·les de mapa de bits OSM"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:119
 #. ----------
@@ -3002,7 +3002,7 @@ msgstr "Un assistent vos guia a través de la creació d'un tema de mapa propi."
 #: src/apps/marble-qt/QtMainWindow.cpp:416
 msgctxt "Marble::MainWindow|"
 msgid "Show Tile Zoom Level"
-msgstr "Mostra el nivell de zoom dels mosaics"
+msgstr "Mostra el nivell de zoom de les tessel·les"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:424
 msgctxt "Marble::MainWindow|"
@@ -5242,7 +5242,7 @@ msgstr "Mètode de selecció"
 #: src/lib/marble/DownloadRegionDialog.cpp:195
 msgctxt "Marble::DownloadRegionDialog|"
 msgid "Number of tiles to download:"
-msgstr "Nombre de mosaics que s'han de descarregar:"
+msgstr "Nombre de tessel·les que s'han de descarregar:"
 
 #: src/lib/marble/DownloadRegionDialog.cpp:245
 msgctxt "Marble::DownloadRegionDialog|"
@@ -5252,17 +5252,17 @@ msgstr "Descarrega una regió"
 #: src/lib/marble/DownloadRegionDialog.cpp:247
 msgctxt "Marble::DownloadRegionDialog|"
 msgid "Tile type to be downloaded:"
-msgstr "Tipus de mosaic que s'ha de descarregar:"
+msgstr "Tipus de tessel·la que s'ha de descarregar:"
 
 #: src/lib/marble/DownloadRegionDialog.cpp:249
 msgctxt "Marble::DownloadRegionDialog|"
 msgid "Texture tiles"
-msgstr "Mosaics de textura"
+msgstr "Tessel·les de textura"
 
 #: src/lib/marble/DownloadRegionDialog.cpp:250
 msgctxt "Marble::DownloadRegionDialog|"
 msgid "Vector tiles"
-msgstr "Mosaics vectorials"
+msgstr "Tessel·les vectorials"
 
 #: src/lib/marble/DownloadRegionDialog.cpp:251
 msgctxt "Marble::DownloadRegionDialog|"
@@ -5276,13 +5276,13 @@ msgstr ""
 msgctxt "Marble::DownloadRegionDialog|"
 msgid "There is a limit of %n tile(s) to download."
 msgid_plural "There is a limit of %n tile(s) to download."
-msgstr[0] "Hi ha un límit d'%n mosaic que es pot descarregar."
-msgstr[1] "Hi ha un límit de %n mosaics que es poden descarregar."
+msgstr[0] "Hi ha un límit d'%n tessel·la que es pot descarregar."
+msgstr[1] "Hi ha un límit de %n tessel·les que es poden descarregar."
 
 #: src/lib/marble/DownloadRegionDialog.cpp:531
 msgctxt "Marble::DownloadRegionDialog|"
 msgid "Approximate size of the tiles to be downloaded"
-msgstr "Mida aproximada dels mosaics que s'han de descarregar"
+msgstr "Mida aproximada de les tessel·les que s'han de descarregar"
 
 #: src/lib/marble/DownloadRegionDialog.cpp:535
 #, qt-format
@@ -8086,49 +8086,36 @@ msgstr "Previsualitza la imatge"
 #: src/lib/marble/MapWizard.cpp:395
 msgctxt "Marble::MapWizard|"
 msgid "Base Tile"
-msgstr "Mosaic base"
+msgstr "Tessel·la base"
 
 #: src/lib/marble/MapWizard.cpp:399
-#, fuzzy
-#| msgctxt "MapWizard|"
-#| msgid "Legend Image:"
 msgctxt "Marble::MapWizard|"
 msgid "Legend Image"
-msgstr "Imatge de la llegenda:"
+msgstr "Imatge de la llegenda"
 
 #: src/lib/marble/MapWizard.cpp:406 src/lib/marble/MapWizard.cpp:414
-#, fuzzy, qt-format
-#| msgctxt "NavigationInfoBar|"
-#| msgid "%1 m"
+#, qt-format
 msgctxt "Marble::MapWizard|"
 msgid "%1"
-msgstr "%1 m"
+msgstr "%1"
 
 #: src/lib/marble/MapWizard.cpp:407
-#, fuzzy, qt-format
-#| msgctxt "Marble::MapWizard|"
-#| msgid "The base tile could not be downloaded."
+#, qt-format
 msgctxt "Marble::MapWizard|"
 msgid "The %1 could not be downloaded."
-msgstr "El mosaic base no s'ha pogut descarregar correctament."
+msgstr "No s'ha pogut descarregar %1."
 
 #: src/lib/marble/MapWizard.cpp:415
-#, fuzzy, qt-format
-#| msgctxt "Marble::MapWizard|"
-#| msgid ""
-#| "The base tile could not be downloaded successfully. The server replied:\n"
-#| "\n"
-#| "%1"
+#, qt-format
 msgctxt "Marble::MapWizard|"
 msgid ""
 "The %1 could not be downloaded successfully. The server replied:\n"
 "\n"
 "%2"
 msgstr ""
-"El mosaic base no s'ha pogut descarregar correctament. El servidor ha "
-"respost:\n"
+"No s'ha pogut descarregar correctament %1. El servidor ha respost:\n"
 "\n"
-"%1"
+"%2"
 
 #: src/lib/marble/MapWizard.cpp:466 src/lib/marble/MapWizard.cpp:467
 #: src/lib/marble/MapWizard.cpp:488
@@ -8317,7 +8304,7 @@ msgstr ""
 #: src/lib/marble/MapWizard.ui:83
 msgctxt "MapWizard|"
 msgid "Online map providing indexed tiles (e.g. Open Street Map)"
-msgstr "Mapa en línia que oferix mosaics indexats (p. ex. Open Street Map)"
+msgstr "Mapa en línia que oferix tessel·les indexades (p. ex. Open Street Map)"
 
 #: src/lib/marble/MapWizard.ui:94
 msgctxt "MapWizard|"
@@ -8384,35 +8371,24 @@ msgid "https://"
 msgstr "https://"
 
 #: src/lib/marble/MapWizard.ui:208
-#, fuzzy
-#| msgctxt ""
-#| "Marble::Placemark|A copy shop provides a service to send documents "
-#| "through fax"
-#| msgid "Fax service"
 msgctxt "MapWizard|"
 msgid "Wms-Service:"
-msgstr "Servei de fax"
+msgstr "Servei de WMS:"
 
 #: src/lib/marble/MapWizard.ui:222
-#, fuzzy
-#| msgctxt "MainScreen|"
-#| msgid "Layer Options"
 msgctxt "MapWizard|"
 msgid "Layer Selection"
-msgstr "Opcions de la capa"
+msgstr "Seleccioneu les capes"
 
 #: src/lib/marble/MapWizard.ui:233
 msgctxt "MapWizard|"
 msgid "Choose your Layer(s):"
-msgstr ""
+msgstr "Escolliu les capes:"
 
 #: src/lib/marble/MapWizard.ui:256
-#, fuzzy
-#| msgctxt "SearchField|"
-#| msgid "Search"
 msgctxt "MapWizard|"
 msgid "Search:"
-msgstr "Busca"
+msgstr "Busca:"
 
 #: src/lib/marble/MapWizard.ui:278
 msgctxt "MapWizard|"
@@ -8420,6 +8396,8 @@ msgid ""
 "The order in which multiple layers are selected directly affects their "
 "rendering order."
 msgstr ""
+"L'ordre en què se seleccionen múltiples capes afecta directament el seu "
+"ordre de renderització."
 
 #: src/lib/marble/MapWizard.ui:287
 msgctxt "MapWizard|"
@@ -8427,67 +8405,60 @@ msgid ""
 "Enable this to select multiple layers without keyboard shortcuts (Shift, "
 "Strg, Strg+A, ...)"
 msgstr ""
+"Activeu-la per a seleccionar múltiples capes sense dreceres de teclat "
+"(Majúscules, Ctrl, Ctrl+A...)"
 
 #: src/lib/marble/MapWizard.ui:290
 msgctxt "MapWizard|"
 msgid "Multiple Selections"
-msgstr ""
+msgstr "Seleccions múltiples"
 
 #: src/lib/marble/MapWizard.ui:297
 msgctxt "MapWizard|"
 msgid "Custom Backdrop"
-msgstr ""
+msgstr "Fons personalitzat"
 
 #: src/lib/marble/MapWizard.ui:304
 msgctxt "MapWizard|"
 msgid "Tile Projection:"
-msgstr "Projecció dels mosaics:"
+msgstr "Projecció de les tessel·les:"
 
 #: src/lib/marble/MapWizard.ui:311
 msgctxt "MapWizard|"
 msgid "Indicates the projection in which the tiles are rendered."
-msgstr "Indica la projecció en que es renderitzaran els mosaics."
+msgstr "Indica la projecció en que es renderitzaran les tessel·les."
 
 #: src/lib/marble/MapWizard.ui:334
 msgctxt "MapWizard|"
 msgid "Tile Format:"
-msgstr "Format del mosaic:"
+msgstr "Format de la tessel·la:"
 
 #: src/lib/marble/MapWizard.ui:341
 msgctxt "MapWizard|"
 msgid "Indicates the file format of the tiles."
-msgstr "Indica el format de fitxer dels mosaics."
+msgstr "Indica el format de fitxer de les tessel·les."
 
 #: src/lib/marble/MapWizard.ui:373
-#, fuzzy
-#| msgctxt "MainScreen|"
-#| msgid "Layer Options"
 msgctxt "MapWizard|"
 msgid "Layer Info"
-msgstr "Opcions de la capa"
+msgstr "Informació de la capa"
 
 #: src/lib/marble/MapWizard.ui:386
-#, fuzzy
-#| msgctxt "GeoDataPlacemark|"
-#| msgid "Service Road"
 msgctxt "MapWizard|"
 msgid "Service Info"
-msgstr "Via de servei"
+msgstr "Informació del servei"
 
 #: src/lib/marble/MapWizard.ui:396
 msgctxt "MapWizard|"
 msgid "Customize Backdrop"
-msgstr ""
+msgstr "Personalitza el fons"
 
 #: src/lib/marble/MapWizard.ui:404
 msgctxt "MapWizard|"
 msgid "Preset Layers"
-msgstr ""
+msgstr "Capes predefinides"
 
 #: src/lib/marble/MapWizard.ui:424
-#, fuzzy
-#| msgctxt "DGML|"
-#| msgid "OpenStreetMap"
 msgctxt "MapWizard|"
 msgid "OpenStreetMap"
 msgstr "OpenStreetMap"
@@ -8495,12 +8466,9 @@ msgstr "OpenStreetMap"
 #: src/lib/marble/MapWizard.ui:439
 msgctxt "MapWizard|"
 msgid "XYZ Server Url"
-msgstr ""
+msgstr "URL del servidor XYZ"
 
 #: src/lib/marble/MapWizard.ui:463
-#, fuzzy
-#| msgctxt "FormattedTextWidget|"
-#| msgid "Color"
 msgctxt "MapWizard|"
 msgid "Color"
 msgstr "Color"
@@ -8508,7 +8476,7 @@ msgstr "Color"
 #: src/lib/marble/MapWizard.ui:473
 msgctxt "MapWizard|"
 msgid "#87CEFA"
-msgstr ""
+msgstr "#87CEFA"
 
 #: src/lib/marble/MapWizard.ui:516
 msgctxt "MapWizard|"
@@ -8605,18 +8573,19 @@ msgstr ""
 "size:9pt; font-weight:400; font-style:normal;\">\n"
 "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
 "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
-"family:'Sans Serif'; font-weight:600;\">Esquema d'URL per als mosaics "
-"indexats</span></p>\n"
+"family:'Sans Serif'; font-weight:600;\">Esquema d'URL per a les tessel·les "
+"indexades</span></p>\n"
 "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
 "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
-"family:'Sans Serif';\">Introduïu l'URL utilitzat per a descarregar mosaics "
-"individuals. Utilitzeu els marcadors de posició </span><span style=\" font-"
-"family:'Sans Serif'; font-style:italic;\">{x}</span><span style=\" font-"
-"family:'Sans Serif';\">, </span><span style=\" font-family:'Sans Serif'; "
-"font-style:italic;\">{y}</span><span style=\" font-family:'Sans Serif';\">, "
-"i </span><span style=\" font-family:'Sans Serif'; font-style:italic;"
-"\">{zoomLevel}</span><span style=\" font-family:'Sans Serif';\"> per a "
-"referenciar un mosaic des de l'índex.</span></p></body></html>"
+"family:'Sans Serif';\">Introduïu l'URL utilitzat per a descarregar "
+"tessel·les individuals. Utilitzeu els marcadors de posició </span><span "
+"style=\" font-family:'Sans Serif'; font-style:italic;\">{x}</span><span "
+"style=\" font-family:'Sans Serif';\">, </span><span style=\" font-"
+"family:'Sans Serif'; font-style:italic;\">{y}</span><span style=\" font-"
+"family:'Sans Serif';\">, i </span><span style=\" font-family:'Sans Serif'; "
+"font-style:italic;\">{zoomLevel}</span><span style=\" font-family:'Sans "
+"Serif';\"> per a referenciar una tessel·la des de l'índex.</span></p></"
+"body></html>"
 
 #: src/lib/marble/MapWizard.ui:613
 msgctxt "MapWizard|"
@@ -8796,7 +8765,7 @@ msgstr "Ací hi va el tema del mapa."
 #: src/lib/marble/MapWizard.ui:964
 msgctxt "MapWizard|"
 msgid "Thumbnail"
-msgstr ""
+msgstr "Miniatura"
 
 #: src/lib/marble/MapWizard.ui:974
 msgctxt "MapWizard|"
@@ -9343,7 +9312,7 @@ msgid ""
 "vector map</i></p>"
 msgstr ""
 "<p>Dávid Kolozsvári <a href=\"freedawson@gmail.com\">freedawson@gmail.com</"
-"a><br /><i>Projecte: Gràfics fluids a cada nivell de mosaic en el mapa "
+"a><br /><i>Projecte: Gràfics fluids a cada nivell de tessel·la en el mapa "
 "vectorial OSM de Marble</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:188
@@ -9355,7 +9324,7 @@ msgid ""
 msgstr ""
 "<p>Akshat Tandon <a href=\"akshat.tandon@research.iiit.ac.in\">akshat."
 "tandon@research.iiit.ac.in</a><br /><i>Projecte: Implementar els nivells "
-"mitjà i baix de mosaic en el mapa vectorial OSM de Marble</i></p>"
+"mitjà i baix de tessel·la en el mapa vectorial OSM de Marble</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:191
 msgctxt "QObject|"
@@ -9568,7 +9537,7 @@ msgid ""
 "a><br /><i>Project: Vector Tiles for Marble</i></p>"
 msgstr ""
 "<p>Patrick Spendrin <a href=\"pspendrin@gmail.com\">pspendrin@gmail.com</"
-"a><br /><i>Projecte: Mosaics vectorials per a Marble</i></p>"
+"a><br /><i>Projecte: Tessel·les vectorials per a Marble</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:240
 msgctxt "QObject|"
@@ -12609,12 +12578,12 @@ msgstr "Zoom"
 #: src/lib/marble/TileLevelRangeWidget.ui:37
 msgctxt "TileLevelRangeWidget|"
 msgid "&Tile level range:"
-msgstr "Interval de nivells del &mosaic:"
+msgstr "Interval de nivells de la &tessel·la:"
 
 #: src/lib/marble/TileLevelRangeWidget.ui:47
 msgctxt "TileLevelRangeWidget|"
 msgid "Minimum Tile Level"
-msgstr "Nivell mínim del mosaic"
+msgstr "Nivell mínim de la tessel·la"
 
 #: src/lib/marble/TileLevelRangeWidget.ui:63
 msgctxt "TileLevelRangeWidget|"
@@ -12624,7 +12593,7 @@ msgstr "a"
 #: src/lib/marble/TileLevelRangeWidget.ui:70
 msgctxt "TileLevelRangeWidget|"
 msgid "Maximum Tile Level"
-msgstr "Nivell màxim del mosaic"
+msgstr "Nivell màxim de la tessel·la"
 
 #: src/lib/marble/TimeControlWidget.ui:14
 msgctxt "TimeControlWidget|"
@@ -18285,93 +18254,3 @@ msgstr "Plan&tilla d'element flotant"
 msgctxt "Marble::FITemplateFloatItem|"
 msgid "This is a template class for float items."
 msgstr "Esta és una classe de plantilla per a elements flotants."
-
-#, fuzzy
-#~| msgctxt "MapWizard|"
-#~| msgid "Available Maps:"
-#~ msgctxt "MapWizard|"
-#~ msgid "Available Layers:"
-#~ msgstr "Mapes disponibles:"
-
-#~ msgctxt "Marble::MapWizard|"
-#~ msgid "Geographic Pole"
-#~ msgstr "Pol geogràfic"
-
-#~ msgctxt "Marble::MapWizard|"
-#~ msgid "Magnetic Pole"
-#~ msgstr "Pol magnètic"
-
-#~ msgctxt "Marble::MapWizard|"
-#~ msgid "Airport"
-#~ msgstr "Aeroport"
-
-#~ msgctxt "Marble::MapWizard|"
-#~ msgid "Shipwreck"
-#~ msgstr "Naufragi"
-
-#~ msgctxt "Marble::MapWizard|"
-#~ msgid "Observatory"
-#~ msgstr "Observatori"
-
-#~ msgctxt "Marble::MapWizard|"
-#~ msgid "Mountain"
-#~ msgstr "Muntanya"
-
-#~ msgctxt "Marble::MapWizard|"
-#~ msgid "Volcano"
-#~ msgstr "Volcà"
-
-#~ msgctxt "Marble::MapWizard|"
-#~ msgid "International"
-#~ msgstr "Internacional"
-
-#~ msgctxt "Marble::MapWizard|"
-#~ msgid "State"
-#~ msgstr "Estat"
-
-#~ msgctxt "MapWizard|"
-#~ msgid "Places of Interest"
-#~ msgstr "Llocs d'interés"
-
-#~ msgctxt "MapWizard|"
-#~ msgid "Populated Places"
-#~ msgstr "Llocs poblats"
-
-#~ msgctxt "MapWizard|"
-#~ msgid "Terrain"
-#~ msgstr "Terreny"
-
-#~ msgctxt "MapWizard|"
-#~ msgid "Coordinate Grid"
-#~ msgstr "Quadrícula de coordenades"
-
-#~ msgctxt "MapWizard|"
-#~ msgid "Border Lines"
-#~ msgstr "Línies de frontera"
-
-#, fuzzy
-#~| msgctxt "Marble::MapWizard|"
-#~| msgid "Equirectangular (epsg:4326)"
-#~ msgctxt "Marble::MapWizard|"
-#~ msgid "Equirectangular (epsg:4326))"
-#~ msgstr "Cilíndrica equidistant (epsg:4326)"
-
-#~ msgctxt "Marble::MapWizard|"
-#~ msgid "The preview image could not be downloaded."
-#~ msgstr "La imatge de vista prèvia no s'ha pogut descarregar."
-
-#~ msgctxt "Marble::MapWizard|"
-#~ msgid ""
-#~ "The preview image could not be downloaded successfully. The server "
-#~ "replied:\n"
-#~ "\n"
-#~ "%1"
-#~ msgstr ""
-#~ "La imatge de vista prèvia no s'ha pogut descarregar correctament. El "
-#~ "servidor ha respost:\n"
-#~ "\n"
-#~ "%1"
-
-#~ msgctxt "MapWizard|"
-#~ msgid "Thumbnail image goes here."
-#~ msgstr "Ací hi va la imatge en miniatura."

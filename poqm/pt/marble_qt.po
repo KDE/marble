@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2023-03-08 09:15+0000\n"
+"PO-Revision-Date: 2023-03-20 13:49+0000\n"
 "Last-Translator: José Nuno Coelho Pires <zepires@gmail.com>\n"
 "Language-Team: Portuguese <kde-i18n-doc@kde.org>\n"
 "Language: pt\n"
@@ -101,7 +101,7 @@ msgstr ""
 "X-POFile-SpellExtra: Optometrista Psicoterapeuta Boutique Schuko CEE\n"
 "X-POFile-SpellExtra: CHAdeMO NEMA Tesla Charge Magne BS Roadster glúten\n"
 "X-POFile-SpellExtra: estratosférico tweets Fi Wi skate downhill Skate\n"
-"X-POFile-SpellExtra: Ferry Taoista ffmpeg avconv\n"
+"X-POFile-SpellExtra: Ferry Taoista ffmpeg avconv epsg XYZ CEFA\n"
 
 #. file data/maps/moon/clementine/clementine.dgml:5
 msgctxt "DGML|"
@@ -8138,13 +8138,13 @@ msgstr "O servidor não é um Servidor de Mapas na Web."
 #: src/lib/marble/MapWizard.cpp:1007
 msgctxt "Marble::MapWizard|"
 msgid "Web Mercator (epsg:3857)"
-msgstr ""
+msgstr "Mercator da Web (epsg:3857)"
 
 #: src/lib/marble/MapWizard.cpp:341 src/lib/marble/MapWizard.cpp:758
 #: src/lib/marble/MapWizard.cpp:871
 msgctxt "Marble::MapWizard|"
 msgid "Equirectangular (epsg:4326)"
-msgstr ""
+msgstr "Equirectangular (epsg:4326)"
 
 #: src/lib/marble/MapWizard.cpp:391 src/lib/marble/MapWizard.cpp:862
 msgctxt "Marble::MapWizard|"
@@ -8157,45 +8157,33 @@ msgid "Base Tile"
 msgstr "Padrão de Base"
 
 #: src/lib/marble/MapWizard.cpp:399
-#, fuzzy
-#| msgctxt "MapWizard|"
-#| msgid "Legend Image:"
 msgctxt "Marble::MapWizard|"
 msgid "Legend Image"
-msgstr "Imagem da Legenda:"
+msgstr "Imagem da Legenda"
 
 #: src/lib/marble/MapWizard.cpp:406 src/lib/marble/MapWizard.cpp:414
-#, fuzzy, qt-format
-#| msgctxt "NavigationInfoBar|"
-#| msgid "%1 m"
+#, qt-format
 msgctxt "Marble::MapWizard|"
 msgid "%1"
-msgstr "%1 m"
+msgstr "%1"
 
 #: src/lib/marble/MapWizard.cpp:407
-#, fuzzy, qt-format
-#| msgctxt "Marble::MapWizard|"
-#| msgid "The base tile could not be downloaded."
+#, qt-format
 msgctxt "Marble::MapWizard|"
 msgid "The %1 could not be downloaded."
-msgstr "Não foi possível obter o  padrão de base."
+msgstr "Não foi possível obter o %1."
 
 #: src/lib/marble/MapWizard.cpp:415
-#, fuzzy, qt-format
-#| msgctxt "Marble::MapWizard|"
-#| msgid ""
-#| "The base tile could not be downloaded successfully. The server replied:\n"
-#| "\n"
-#| "%1"
+#, qt-format
 msgctxt "Marble::MapWizard|"
 msgid ""
 "The %1 could not be downloaded successfully. The server replied:\n"
 "\n"
 "%2"
 msgstr ""
-"Não foi possível obter com sucesso o padrão de base. O servidor respondeu:\n"
+"Não foi possível obter com sucesso o %1. O servidor respondeu:\n"
 "\n"
-"%1"
+"%2"
 
 #: src/lib/marble/MapWizard.cpp:466 src/lib/marble/MapWizard.cpp:467
 #: src/lib/marble/MapWizard.cpp:488
@@ -8443,6 +8431,8 @@ msgid ""
 "Enter the base Url of the WMS service (e.g. <i>https://www.wms.nrw.de/"
 "geobasis/wms_nw_dop_overlay</i>)"
 msgstr ""
+"Indique o URL de base do serviço WMS (p.ex. <i>https://www.wms.nrw.de/"
+"geobasis/wms_nw_dop_overlay</i>)"
 
 #: src/lib/marble/MapWizard.ui:156 src/lib/marble/MapWizard.ui:449
 msgctxt "MapWizard|"
@@ -8450,35 +8440,24 @@ msgid "https://"
 msgstr "https://"
 
 #: src/lib/marble/MapWizard.ui:208
-#, fuzzy
-#| msgctxt ""
-#| "Marble::Placemark|A copy shop provides a service to send documents "
-#| "through fax"
-#| msgid "Fax service"
 msgctxt "MapWizard|"
 msgid "Wms-Service:"
-msgstr "Serviço de fax"
+msgstr "Serviço WMS"
 
 #: src/lib/marble/MapWizard.ui:222
-#, fuzzy
-#| msgctxt "MainScreen|"
-#| msgid "Layer Options"
 msgctxt "MapWizard|"
 msgid "Layer Selection"
-msgstr "Opções da Camada"
+msgstr "Selecção das Camadas"
 
 #: src/lib/marble/MapWizard.ui:233
 msgctxt "MapWizard|"
 msgid "Choose your Layer(s):"
-msgstr ""
+msgstr "Escolher as suas Camadas:"
 
 #: src/lib/marble/MapWizard.ui:256
-#, fuzzy
-#| msgctxt "SearchField|"
-#| msgid "Search"
 msgctxt "MapWizard|"
 msgid "Search:"
-msgstr "Procurar"
+msgstr "Procurar:"
 
 #: src/lib/marble/MapWizard.ui:278
 msgctxt "MapWizard|"
@@ -8486,6 +8465,8 @@ msgid ""
 "The order in which multiple layers are selected directly affects their "
 "rendering order."
 msgstr ""
+"A ordem pela qual são seleccionadas as várias camadas afecta directamente a "
+"sua ordem de desenho."
 
 #: src/lib/marble/MapWizard.ui:287
 msgctxt "MapWizard|"
@@ -8493,70 +8474,60 @@ msgid ""
 "Enable this to select multiple layers without keyboard shortcuts (Shift, "
 "Strg, Strg+A, ...)"
 msgstr ""
+"Active isto para seleccionar várias camadas sem atalhos de teclado (Shift, "
+"Texto, Texto+A, ...)"
 
 #: src/lib/marble/MapWizard.ui:290
 msgctxt "MapWizard|"
 msgid "Multiple Selections"
-msgstr ""
+msgstr "Selecções Múltiplas"
 
 #: src/lib/marble/MapWizard.ui:297
 msgctxt "MapWizard|"
 msgid "Custom Backdrop"
-msgstr ""
+msgstr "Fundo Personalizado"
 
 #: src/lib/marble/MapWizard.ui:304
-#, fuzzy
-#| msgctxt "MapViewWidget|"
-#| msgid "&Projection"
 msgctxt "MapWizard|"
 msgid "Tile Projection:"
-msgstr "&Projecção"
+msgstr "Projecção dos Padrões:"
 
 #: src/lib/marble/MapWizard.ui:311
 msgctxt "MapWizard|"
 msgid "Indicates the projection in which the tiles are rendered."
-msgstr ""
+msgstr "Indica a projecção na qual são desenhados os blocos"
 
 #: src/lib/marble/MapWizard.ui:334
 msgctxt "MapWizard|"
 msgid "Tile Format:"
-msgstr ""
+msgstr "Formato dos Padrões:"
 
 #: src/lib/marble/MapWizard.ui:341
 msgctxt "MapWizard|"
 msgid "Indicates the file format of the tiles."
-msgstr ""
+msgstr "Indica o formato do ficheiro dos padrões."
 
 #: src/lib/marble/MapWizard.ui:373
-#, fuzzy
-#| msgctxt "MainScreen|"
-#| msgid "Layer Options"
 msgctxt "MapWizard|"
 msgid "Layer Info"
-msgstr "Opções da Camada"
+msgstr "Informação da Camada"
 
 #: src/lib/marble/MapWizard.ui:386
-#, fuzzy
-#| msgctxt "GeoDataPlacemark|"
-#| msgid "Service Road"
 msgctxt "MapWizard|"
 msgid "Service Info"
-msgstr "Estrada de Serviço"
+msgstr "Informação do Serviço"
 
 #: src/lib/marble/MapWizard.ui:396
 msgctxt "MapWizard|"
 msgid "Customize Backdrop"
-msgstr ""
+msgstr "Personalizar o Fundo"
 
 #: src/lib/marble/MapWizard.ui:404
 msgctxt "MapWizard|"
 msgid "Preset Layers"
-msgstr ""
+msgstr "Camadas de Predefinição"
 
 #: src/lib/marble/MapWizard.ui:424
-#, fuzzy
-#| msgctxt "DGML|"
-#| msgid "OpenStreetMap"
 msgctxt "MapWizard|"
 msgid "OpenStreetMap"
 msgstr "OpenStreetMap"
@@ -8564,12 +8535,9 @@ msgstr "OpenStreetMap"
 #: src/lib/marble/MapWizard.ui:439
 msgctxt "MapWizard|"
 msgid "XYZ Server Url"
-msgstr ""
+msgstr "URL do Servidor de XYZ"
 
 #: src/lib/marble/MapWizard.ui:463
-#, fuzzy
-#| msgctxt "FormattedTextWidget|"
-#| msgid "Color"
 msgctxt "MapWizard|"
 msgid "Color"
 msgstr "Cor"
@@ -8577,7 +8545,7 @@ msgstr "Cor"
 #: src/lib/marble/MapWizard.ui:473
 msgctxt "MapWizard|"
 msgid "#87CEFA"
-msgstr ""
+msgstr "#87CEFA"
 
 #: src/lib/marble/MapWizard.ui:516
 msgctxt "MapWizard|"
@@ -8791,7 +8759,7 @@ msgstr "Modificar..."
 #: src/lib/marble/MapWizard.ui:817
 msgctxt "MapWizard|"
 msgid "<b>Optional: Addition of a Map Key</b>"
-msgstr ""
+msgstr "<b>Opcional: Adição de uma Chave do Mapa</b>"
 
 #: src/lib/marble/MapWizard.ui:826
 msgctxt "MapWizard|"
@@ -8865,7 +8833,7 @@ msgstr "O tema de mapas vem aqui."
 #: src/lib/marble/MapWizard.ui:964
 msgctxt "MapWizard|"
 msgid "Thumbnail"
-msgstr ""
+msgstr "Miniatura"
 
 #: src/lib/marble/MapWizard.ui:974
 msgctxt "MapWizard|"
@@ -18341,95 +18309,3 @@ msgstr "Modelo de Item Flu&tuante"
 msgctxt "Marble::FITemplateFloatItem|"
 msgid "This is a template class for float items."
 msgstr "Esta é uma classe-modelo para os itens flutuantes."
-
-#, fuzzy
-#~| msgctxt "MapWizard|"
-#~| msgid "Available Maps:"
-#~ msgctxt "MapWizard|"
-#~ msgid "Available Layers:"
-#~ msgstr "Mapas Disponíveis:"
-
-#~ msgctxt "Marble::MapWizard|"
-#~ msgid "Geographic Pole"
-#~ msgstr "Pólo Geográfico"
-
-#~ msgctxt "Marble::MapWizard|"
-#~ msgid "Magnetic Pole"
-#~ msgstr "Pólo Magnético"
-
-#~ msgctxt "Marble::MapWizard|"
-#~ msgid "Airport"
-#~ msgstr "Aeroporto"
-
-#~ msgctxt "Marble::MapWizard|"
-#~ msgid "Shipwreck"
-#~ msgstr "Destroços"
-
-#~ msgctxt "Marble::MapWizard|"
-#~ msgid "Observatory"
-#~ msgstr "Observatório"
-
-#~ msgctxt "Marble::MapWizard|"
-#~ msgid "Mountain"
-#~ msgstr "Montanha"
-
-#~ msgctxt "Marble::MapWizard|"
-#~ msgid "Volcano"
-#~ msgstr "Vulcão"
-
-#~ msgctxt "Marble::MapWizard|"
-#~ msgid "International"
-#~ msgstr "Internacional"
-
-#~ msgctxt "Marble::MapWizard|"
-#~ msgid "State"
-#~ msgstr "Estado"
-
-#~ msgctxt "MapWizard|"
-#~ msgid "Places of Interest"
-#~ msgstr "Locais de Interesse"
-
-#~ msgctxt "MapWizard|"
-#~ msgid "Populated Places"
-#~ msgstr "Locais Populados"
-
-#~ msgctxt "MapWizard|"
-#~ msgid "Terrain"
-#~ msgstr "Terreno"
-
-#~ msgctxt "MapWizard|"
-#~ msgid "Coordinate Grid"
-#~ msgstr "Grelha de Coordenadas"
-
-#~ msgctxt "MapWizard|"
-#~ msgid "Border Lines"
-#~ msgstr "Linhas Fronteiriças"
-
-#, fuzzy
-#~| msgctxt "Marble::MapWizard|"
-#~| msgid "The base tile could not be downloaded."
-#~ msgctxt "Marble::MapWizard|"
-#~ msgid "The preview image could not be downloaded."
-#~ msgstr "Não foi possível obter o  padrão de base."
-
-#, fuzzy
-#~| msgctxt "Marble::MapWizard|"
-#~| msgid ""
-#~| "The base tile could not be downloaded successfully. The server replied:\n"
-#~| "\n"
-#~| "%1"
-#~ msgctxt "Marble::MapWizard|"
-#~ msgid ""
-#~ "The preview image could not be downloaded successfully. The server "
-#~ "replied:\n"
-#~ "\n"
-#~ "%1"
-#~ msgstr ""
-#~ "Não foi possível obter com sucesso o padrão de base. O servidor "
-#~ "respondeu:\n"
-#~ "\n"
-#~ "%1"
-
-#~ msgctxt "MapWizard|"
-#~ msgid "Thumbnail image goes here."
-#~ msgstr "A imagem em miniatura vem aqui."

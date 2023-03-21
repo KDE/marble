@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: marble_qt\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2023-03-08 14:57+0100\n"
+"PO-Revision-Date: 2023-03-20 14:27+0100\n"
 "Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
 "Language: cs\n"
@@ -7997,28 +7997,21 @@ msgid "Base Tile"
 msgstr "Základní dlaždice"
 
 #: src/lib/marble/MapWizard.cpp:399
-#, fuzzy
-#| msgctxt "MapWizard|"
-#| msgid "Legend Image:"
 msgctxt "Marble::MapWizard|"
 msgid "Legend Image"
-msgstr "Obrázek s vysvětlivkami:"
+msgstr "Obrázek s vysvětlivkami"
 
 #: src/lib/marble/MapWizard.cpp:406 src/lib/marble/MapWizard.cpp:414
-#, fuzzy, qt-format
-#| msgctxt "NavigationInfoBar|"
-#| msgid "%1 m"
+#, qt-format
 msgctxt "Marble::MapWizard|"
 msgid "%1"
-msgstr "%1 m"
+msgstr "%1"
 
 #: src/lib/marble/MapWizard.cpp:407
-#, fuzzy, qt-format
-#| msgctxt "Marble::DownloadRegionDialog|"
-#| msgid "Tile type to be downloaded:"
+#, qt-format
 msgctxt "Marble::MapWizard|"
 msgid "The %1 could not be downloaded."
-msgstr "Typ dlaždice, která má být stažena:"
+msgstr ""
 
 #: src/lib/marble/MapWizard.cpp:415
 #, qt-format
@@ -8252,33 +8245,24 @@ msgid "https://"
 msgstr "https://"
 
 #: src/lib/marble/MapWizard.ui:208
-#, fuzzy
-#| msgctxt "MarbleCloudSyncSettingsWidget|"
-#| msgid "Server:"
 msgctxt "MapWizard|"
 msgid "Wms-Service:"
-msgstr "Server:"
+msgstr ""
 
 #: src/lib/marble/MapWizard.ui:222
-#, fuzzy
-#| msgctxt "MainScreen|"
-#| msgid "Layer Options"
 msgctxt "MapWizard|"
 msgid "Layer Selection"
-msgstr "Možnosti vrstev"
+msgstr "Výběr vrstvy"
 
 #: src/lib/marble/MapWizard.ui:233
 msgctxt "MapWizard|"
 msgid "Choose your Layer(s):"
-msgstr ""
+msgstr "Vyberte své vrstvy:"
 
 #: src/lib/marble/MapWizard.ui:256
-#, fuzzy
-#| msgctxt "SearchField|"
-#| msgid "Search"
 msgctxt "MapWizard|"
 msgid "Search:"
-msgstr "Hledat"
+msgstr "Hledat:"
 
 #: src/lib/marble/MapWizard.ui:278
 msgctxt "MapWizard|"
@@ -8297,7 +8281,7 @@ msgstr ""
 #: src/lib/marble/MapWizard.ui:290
 msgctxt "MapWizard|"
 msgid "Multiple Selections"
-msgstr ""
+msgstr "Více výběrů"
 
 #: src/lib/marble/MapWizard.ui:297
 msgctxt "MapWizard|"
@@ -8305,12 +8289,9 @@ msgid "Custom Backdrop"
 msgstr ""
 
 #: src/lib/marble/MapWizard.ui:304
-#, fuzzy
-#| msgctxt "MapViewWidget|"
-#| msgid "&Projection"
 msgctxt "MapWizard|"
 msgid "Tile Projection:"
-msgstr "&Promítání"
+msgstr ""
 
 #: src/lib/marble/MapWizard.ui:311
 msgctxt "MapWizard|"
@@ -8320,28 +8301,22 @@ msgstr ""
 #: src/lib/marble/MapWizard.ui:334
 msgctxt "MapWizard|"
 msgid "Tile Format:"
-msgstr ""
+msgstr "Formát dlaždic:"
 
 #: src/lib/marble/MapWizard.ui:341
 msgctxt "MapWizard|"
 msgid "Indicates the file format of the tiles."
-msgstr ""
+msgstr "Ukazuje formát dlaždic."
 
 #: src/lib/marble/MapWizard.ui:373
-#, fuzzy
-#| msgctxt "MainScreen|"
-#| msgid "Layer Options"
 msgctxt "MapWizard|"
 msgid "Layer Info"
-msgstr "Možnosti vrstev"
+msgstr "Informace o vrstvě"
 
 #: src/lib/marble/MapWizard.ui:386
-#, fuzzy
-#| msgctxt "RoutingProfileSettingsDialog|"
-#| msgid "Service Settings"
 msgctxt "MapWizard|"
 msgid "Service Info"
-msgstr "Nastavení služby"
+msgstr "Informace o službě"
 
 #: src/lib/marble/MapWizard.ui:396
 msgctxt "MapWizard|"
@@ -8354,9 +8329,6 @@ msgid "Preset Layers"
 msgstr ""
 
 #: src/lib/marble/MapWizard.ui:424
-#, fuzzy
-#| msgctxt "DGML|"
-#| msgid "OpenStreetMap"
 msgctxt "MapWizard|"
 msgid "OpenStreetMap"
 msgstr "OpenStreetMap"
@@ -8364,12 +8336,9 @@ msgstr "OpenStreetMap"
 #: src/lib/marble/MapWizard.ui:439
 msgctxt "MapWizard|"
 msgid "XYZ Server Url"
-msgstr ""
+msgstr "URL serveru XYZ"
 
 #: src/lib/marble/MapWizard.ui:463
-#, fuzzy
-#| msgctxt "FormattedTextWidget|"
-#| msgid "Color"
 msgctxt "MapWizard|"
 msgid "Color"
 msgstr "Barva"
@@ -8617,7 +8586,7 @@ msgstr "Zde se zadává motiv mapy."
 #: src/lib/marble/MapWizard.ui:964
 msgctxt "MapWizard|"
 msgid "Thumbnail"
-msgstr ""
+msgstr "Náhled"
 
 #: src/lib/marble/MapWizard.ui:974
 msgctxt "MapWizard|"
@@ -17757,70 +17726,3 @@ msgstr "Šablona &plovoucího nástroje"
 msgctxt "Marble::FITemplateFloatItem|"
 msgid "This is a template class for float items."
 msgstr "Toto je třída šablony pro plovoucí nástroje."
-
-#, fuzzy
-#~| msgctxt "MapWizard|"
-#~| msgid "Available Maps:"
-#~ msgctxt "MapWizard|"
-#~ msgid "Available Layers:"
-#~ msgstr "Dostupné mapy:"
-
-#~ msgctxt "Marble::MapWizard|"
-#~ msgid "Geographic Pole"
-#~ msgstr "Zeměpisný pól"
-
-#~ msgctxt "Marble::MapWizard|"
-#~ msgid "Magnetic Pole"
-#~ msgstr "Magnetický pól"
-
-#~ msgctxt "Marble::MapWizard|"
-#~ msgid "Airport"
-#~ msgstr "Letiště"
-
-#~ msgctxt "Marble::MapWizard|"
-#~ msgid "Shipwreck"
-#~ msgstr "Vrak lodi"
-
-#~ msgctxt "Marble::MapWizard|"
-#~ msgid "Observatory"
-#~ msgstr "Observatoř"
-
-#~ msgctxt "Marble::MapWizard|"
-#~ msgid "Mountain"
-#~ msgstr "Hora"
-
-#~ msgctxt "Marble::MapWizard|"
-#~ msgid "Volcano"
-#~ msgstr "Sopka"
-
-#~ msgctxt "Marble::MapWizard|"
-#~ msgid "International"
-#~ msgstr "Mezinárodní"
-
-#~ msgctxt "Marble::MapWizard|"
-#~ msgid "State"
-#~ msgstr "Stát"
-
-#~ msgctxt "MapWizard|"
-#~ msgid "Places of Interest"
-#~ msgstr "Zajímavá místa"
-
-#~ msgctxt "MapWizard|"
-#~ msgid "Populated Places"
-#~ msgstr "Zalidněná místa"
-
-#~ msgctxt "MapWizard|"
-#~ msgid "Terrain"
-#~ msgstr "Terén"
-
-#~ msgctxt "MapWizard|"
-#~ msgid "Coordinate Grid"
-#~ msgstr "Síť souřadnic"
-
-#~ msgctxt "MapWizard|"
-#~ msgid "Border Lines"
-#~ msgstr "Hranice"
-
-#~ msgctxt "MapWizard|"
-#~ msgid "Thumbnail image goes here."
-#~ msgstr "Sem jde náhled obrázku."

@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: marble_qt\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2023-03-19 08:46+0200\n"
+"PO-Revision-Date: 2023-03-20 08:15+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
 "Language: uk\n"
@@ -8377,12 +8377,9 @@ msgid "https://"
 msgstr "https://"
 
 #: src/lib/marble/MapWizard.ui:208
-#, fuzzy
-#| msgctxt "MapWizard|"
-#| msgid "Wms-Service"
 msgctxt "MapWizard|"
 msgid "Wms-Service:"
-msgstr "Wms-служба"
+msgstr "Wms-служба:"
 
 #: src/lib/marble/MapWizard.ui:222
 msgctxt "MapWizard|"
@@ -8392,7 +8389,7 @@ msgstr "Вибір шару"
 #: src/lib/marble/MapWizard.ui:233
 msgctxt "MapWizard|"
 msgid "Choose your Layer(s):"
-msgstr ""
+msgstr "Виберіть ваші шари:"
 
 #: src/lib/marble/MapWizard.ui:256
 msgctxt "MapWizard|"
@@ -8405,6 +8402,8 @@ msgid ""
 "The order in which multiple layers are selected directly affects their "
 "rendering order."
 msgstr ""
+"Порядок, у якому позначають декілька шарів, безпосередньо впливає на порядок "
+"обробки."
 
 #: src/lib/marble/MapWizard.ui:287
 msgctxt "MapWizard|"
@@ -8412,6 +8411,8 @@ msgid ""
 "Enable this to select multiple layers without keyboard shortcuts (Shift, "
 "Strg, Strg+A, ...)"
 msgstr ""
+"Позначте, щоб вибрати декілька шарів без клавіатурних комбінацій (Shift, "
+"Ctrl, Ctrl+A, ...)"
 
 #: src/lib/marble/MapWizard.ui:290
 msgctxt "MapWizard|"
@@ -8419,12 +8420,9 @@ msgid "Multiple Selections"
 msgstr "Вибір з варіантів"
 
 #: src/lib/marble/MapWizard.ui:297
-#, fuzzy
-#| msgctxt "MapWizard|"
-#| msgid "Backdrop:"
 msgctxt "MapWizard|"
 msgid "Custom Backdrop"
-msgstr "Декорації:"
+msgstr "Нетипові декорації"
 
 #: src/lib/marble/MapWizard.ui:304
 msgctxt "MapWizard|"
@@ -8459,17 +8457,14 @@ msgstr "Відомості щодо служби"
 #: src/lib/marble/MapWizard.ui:396
 msgctxt "MapWizard|"
 msgid "Customize Backdrop"
-msgstr ""
+msgstr "Нетипові декорації"
 
 #: src/lib/marble/MapWizard.ui:404
 msgctxt "MapWizard|"
 msgid "Preset Layers"
-msgstr ""
+msgstr "Попередньо визначені шари"
 
 #: src/lib/marble/MapWizard.ui:424
-#, fuzzy
-#| msgctxt "DGML|"
-#| msgid "OpenStreetMap"
 msgctxt "MapWizard|"
 msgid "OpenStreetMap"
 msgstr "OpenStreetMap"
@@ -8477,12 +8472,9 @@ msgstr "OpenStreetMap"
 #: src/lib/marble/MapWizard.ui:439
 msgctxt "MapWizard|"
 msgid "XYZ Server Url"
-msgstr ""
+msgstr "Адреса сервера XYZ"
 
 #: src/lib/marble/MapWizard.ui:463
-#, fuzzy
-#| msgctxt "FormattedTextWidget|"
-#| msgid "Color"
 msgctxt "MapWizard|"
 msgid "Color"
 msgstr "Колір"
@@ -8490,7 +8482,7 @@ msgstr "Колір"
 #: src/lib/marble/MapWizard.ui:473
 msgctxt "MapWizard|"
 msgid "#87CEFA"
-msgstr ""
+msgstr "#87CEFA"
 
 #: src/lib/marble/MapWizard.ui:516
 msgctxt "MapWizard|"

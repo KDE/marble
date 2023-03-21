@@ -19,7 +19,7 @@ msgstr ""
 "Project-Id-Version: marble_qt\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2023-03-15 14:46+0100\n"
+"PO-Revision-Date: 2023-03-19 09:08+0100\n"
 "Last-Translator: Xavier BESNARD <xavier.besnard]neuf.fr>\n"
 "Language-Team: fr\n"
 "Language: fr\n"
@@ -8108,37 +8108,28 @@ msgid "Legend Image"
 msgstr "Légende :"
 
 #: src/lib/marble/MapWizard.cpp:406 src/lib/marble/MapWizard.cpp:414
-#, fuzzy, qt-format
-#| msgctxt "NavigationInfoBar|"
-#| msgid "%1 m"
+#, qt-format
 msgctxt "Marble::MapWizard|"
 msgid "%1"
-msgstr "%1 m"
+msgstr "%1"
 
 #: src/lib/marble/MapWizard.cpp:407
-#, fuzzy, qt-format
-#| msgctxt "Marble::MapWizard|"
-#| msgid "The base tile could not be downloaded."
+#, qt-format
 msgctxt "Marble::MapWizard|"
 msgid "The %1 could not be downloaded."
-msgstr "La tuile de base n'a pas pu être téléchargée."
+msgstr "L'élément %1 n'a pas pu être téléchargé."
 
 #: src/lib/marble/MapWizard.cpp:415
-#, fuzzy, qt-format
-#| msgctxt "Marble::MapWizard|"
-#| msgid ""
-#| "The base tile could not be downloaded successfully. The server replied:\n"
-#| "\n"
-#| "%1"
+#, qt-format
 msgctxt "Marble::MapWizard|"
 msgid ""
 "The %1 could not be downloaded successfully. The server replied:\n"
 "\n"
 "%2"
 msgstr ""
-"La tuile de base n'a pas pu être téléchargée. Le serveur a répondu :\n"
+"L'élément %1  n'a pas pu être téléchargé. Le serveur a répondu :\n"
 "\n"
-"%1"
+"%2"
 
 #: src/lib/marble/MapWizard.cpp:466 src/lib/marble/MapWizard.cpp:467
 #: src/lib/marble/MapWizard.cpp:488
@@ -8810,7 +8801,7 @@ msgstr "Le thème de la carte."
 #: src/lib/marble/MapWizard.ui:964
 msgctxt "MapWizard|"
 msgid "Thumbnail"
-msgstr ""
+msgstr "Vignette"
 
 #: src/lib/marble/MapWizard.ui:974
 msgctxt "MapWizard|"
