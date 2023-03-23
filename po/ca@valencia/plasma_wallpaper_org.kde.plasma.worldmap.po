@@ -49,7 +49,7 @@ msgstr "Llum de dia"
 #: contents/ui/config.qml:40
 #, kde-format
 msgid "Longitude"
-msgstr "Llargària"
+msgstr "Longitud"
 
 #: contents/ui/config.qml:41
 #, kde-format
@@ -59,4 +59,4 @@ msgstr "Emplaçament"
 #: contents/ui/config.qml:53
 #, kde-format
 msgid "Longitude:"
-msgstr "Llargària:"
+msgstr "Longitud:"

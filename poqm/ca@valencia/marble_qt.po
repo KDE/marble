@@ -7774,7 +7774,7 @@ msgstr "&N"
 #: src/lib/marble/LatLonBoxWidget.ui:93
 msgctxt "LatLonBoxWidget|"
 msgid "Western Longitude"
-msgstr "Llargària Oest"
+msgstr "Longitud Oest"
 
 #: src/lib/marble/LatLonBoxWidget.ui:118
 msgctxt "LatLonBoxWidget|"
@@ -7784,7 +7784,7 @@ msgstr "&O"
 #: src/lib/marble/LatLonBoxWidget.ui:145
 msgctxt "LatLonBoxWidget|"
 msgid "Eastern Longitude"
-msgstr "Llargària Est"
+msgstr "Longitud Est"
 
 #: src/lib/marble/LatLonBoxWidget.ui:170
 msgctxt "LatLonBoxWidget|"
@@ -14883,7 +14883,7 @@ msgstr "Terreny:"
 #: src/plugins/render/opencaching/OpenCachingCacheDialog.ui:196
 msgctxt "OpenCachingCacheDialog|"
 msgid "Longitude:"
-msgstr "Llargària:"
+msgstr "Longitud:"
 
 #: src/plugins/render/opencaching/OpenCachingCacheDialog.ui:216
 msgctxt "OpenCachingCacheDialog|"

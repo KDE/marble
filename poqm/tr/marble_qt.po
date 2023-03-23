@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2023-03-18 12:54+0300\n"
+"PO-Revision-Date: 2023-03-22 11:53+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -3010,7 +3010,7 @@ msgstr "Derece (Onluk)"
 #: src/apps/marble-qt/QtMainWindow.cpp:434
 msgctxt "Marble::MainWindow|"
 msgid "Universal Transverse Mercator (UTM)"
-msgstr "Evrensel Çapraz Merkator (UTM)"
+msgstr "Evrensel Çapraz Mercator (UTM)"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:449
 msgctxt "Marble::MainWindow|"
@@ -7892,7 +7892,7 @@ msgstr "Küresel görünüm"
 #: src/lib/marble/MapViewWidget.cpp:124 src/lib/marble/MapViewWidget.cpp:132
 msgctxt "Marble::MapViewWidget|"
 msgid "Mercator View"
-msgstr "Merkator Görünümü"
+msgstr "Mercator Görünümü"
 
 #: src/lib/marble/MapViewWidget.cpp:138
 msgctxt "Marble::MapViewWidget|"
@@ -7978,7 +7978,7 @@ msgstr "Düz Harita"
 #: src/lib/marble/MapViewWidget.ui:59
 msgctxt "MapViewWidget|"
 msgid "Mercator"
-msgstr "Merkator"
+msgstr "Mercator"
 
 #: src/lib/marble/MapViewWidget.ui:68
 msgctxt "MapViewWidget|"
@@ -10809,7 +10809,7 @@ msgstr "Derece (Onluk)"
 #: src/lib/marble/MarbleViewSettingsWidget.ui:115
 msgctxt "MarbleViewSettingsWidget|"
 msgid "Universal Transverse Mercator (UTM)"
-msgstr "Evrensel Çapraz Merkatör (UTM)"
+msgstr "Evrensel Çapraz Mercator (UTM)"
 
 #: src/lib/marble/MarbleViewSettingsWidget.ui:126
 msgctxt "MarbleViewSettingsWidget|"
@@ -11595,7 +11595,7 @@ msgstr ""
 #: src/lib/marble/projections/MercatorProjection.cpp:40
 msgctxt "QObject|"
 msgid "Mercator"
-msgstr "Merkator"
+msgstr "Mercator"
 
 #: src/lib/marble/projections/MercatorProjection.cpp:45
 msgctxt "QObject|"
@@ -11603,8 +11603,8 @@ msgid ""
 "<p><b>Mercator Projection</b></p><p>Applications: popular standard map "
 "projection for navigation.</p>"
 msgstr ""
-"<p><b>Merkator Yansıması</b></p><p>Uygulamalar: gezinti için popüler, "
-"standar harita yansıması.</p>"
+"<p><b>Mercator Yansıması</b></p><p>Uygulamalar: Dolaşım için popüler, "
+"standart harita yansıması.</p>"
 
 #: src/lib/marble/projections/SphericalProjection.cpp:64
 msgctxt "QObject|"
