@@ -15,14 +15,14 @@ msgstr ""
 "Project-Id-Version: marble_qt\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2023-03-20 23:10+0100\n"
+"PO-Revision-Date: 2023-03-22 02:55+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: Lokalize 23.03.80\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Qt-Contexts: true\n"
 
@@ -8464,6 +8464,8 @@ msgstr "URL del servidor XYZ"
 msgctxt "MapWizard|"
 msgid "The XYZ server needs to provide map tiles in Mercator projection."
 msgstr ""
+"El servidor XYZ necesita proporcionar cuadrículas de mapas en la proyección "
+"Mercator."
 
 #: src/lib/marble/MapWizard.ui:469
 msgctxt "MapWizard|"
@@ -8476,12 +8478,9 @@ msgid "#87CEFA"
 msgstr "#87CEFA"
 
 #: src/lib/marble/MapWizard.ui:501
-#, fuzzy
-#| msgctxt "UiEditPlacemarkDialog|"
-#| msgid "Style, Color"
 msgctxt "MapWizard|"
 msgid "Select Color"
-msgstr "Estilo, color"
+msgstr "Seleccionar color"
 
 #: src/lib/marble/MapWizard.ui:544
 msgctxt "MapWizard|"

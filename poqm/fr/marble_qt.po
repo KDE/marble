@@ -19,7 +19,7 @@ msgstr ""
 "Project-Id-Version: marble_qt\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2023-03-20 19:33+0100\n"
+"PO-Revision-Date: 2023-03-21 11:21+0100\n"
 "Last-Translator: Xavier BESNARD <xavier.besnard]neuf.fr>\n"
 "Language-Team: fr\n"
 "Language: fr\n"
@@ -8383,14 +8383,9 @@ msgid "https://"
 msgstr "https://"
 
 #: src/lib/marble/MapWizard.ui:208
-#, fuzzy
-#| msgctxt ""
-#| "Marble::Placemark|A copy shop provides a service to send documents "
-#| "through fax"
-#| msgid "Fax service"
 msgctxt "MapWizard|"
 msgid "Wms-Service:"
-msgstr "Service de fax"
+msgstr "Service « WMS » :"
 
 #: src/lib/marble/MapWizard.ui:222
 msgctxt "MapWizard|"
@@ -8400,7 +8395,7 @@ msgstr "Sélection de calques"
 #: src/lib/marble/MapWizard.ui:233
 msgctxt "MapWizard|"
 msgid "Choose your Layer(s):"
-msgstr ""
+msgstr "Sélectionner vos calques :"
 
 #: src/lib/marble/MapWizard.ui:256
 msgctxt "MapWizard|"
@@ -8413,6 +8408,8 @@ msgid ""
 "The order in which multiple layers are selected directly affects their "
 "rendering order."
 msgstr ""
+"L’ordre dans lequel plusieurs calques sont sélectionnées affecte directement "
+"leur ordre de rendu."
 
 #: src/lib/marble/MapWizard.ui:287
 msgctxt "MapWizard|"
@@ -8420,6 +8417,8 @@ msgid ""
 "Enable this to select multiple layers without keyboard shortcuts (Shift, "
 "Strg, Strg+A, ...)"
 msgstr ""
+"Activer cette option pour sélectionner plusieurs calques sans raccourcis "
+"clavier (Maj, Strg, Strg + A, ...)"
 
 #: src/lib/marble/MapWizard.ui:290
 msgctxt "MapWizard|"
@@ -8429,7 +8428,7 @@ msgstr "Sélections multiples"
 #: src/lib/marble/MapWizard.ui:297
 msgctxt "MapWizard|"
 msgid "Custom Backdrop"
-msgstr ""
+msgstr "Arrière-plan personnalisé"
 
 #: src/lib/marble/MapWizard.ui:304
 msgctxt "MapWizard|"
@@ -8464,17 +8463,14 @@ msgstr "Informations sur le service"
 #: src/lib/marble/MapWizard.ui:396
 msgctxt "MapWizard|"
 msgid "Customize Backdrop"
-msgstr ""
+msgstr "Personnaliser l'arrière-plan"
 
 #: src/lib/marble/MapWizard.ui:407
 msgctxt "MapWizard|"
 msgid "Preset Layers"
-msgstr ""
+msgstr "Calques pré-définis"
 
 #: src/lib/marble/MapWizard.ui:427
-#, fuzzy
-#| msgctxt "DGML|"
-#| msgid "OpenStreetMap"
 msgctxt "MapWizard|"
 msgid "OpenStreetMap"
 msgstr "OpenStreetMap"
@@ -8482,7 +8478,7 @@ msgstr "OpenStreetMap"
 #: src/lib/marble/MapWizard.ui:442
 msgctxt "MapWizard|"
 msgid "XYZ Server Url"
-msgstr ""
+msgstr "URL du serveur XYZ"
 
 #: src/lib/marble/MapWizard.ui:452
 msgctxt "MapWizard|"
@@ -8490,9 +8486,6 @@ msgid "The XYZ server needs to provide map tiles in Mercator projection."
 msgstr ""
 
 #: src/lib/marble/MapWizard.ui:469
-#, fuzzy
-#| msgctxt "FormattedTextWidget|"
-#| msgid "Color"
 msgctxt "MapWizard|"
 msgid "Color"
 msgstr "Couleur"
@@ -8500,7 +8493,7 @@ msgstr "Couleur"
 #: src/lib/marble/MapWizard.ui:488
 msgctxt "MapWizard|"
 msgid "#87CEFA"
-msgstr ""
+msgstr "#87CEFA"
 
 #: src/lib/marble/MapWizard.ui:501
 #, fuzzy

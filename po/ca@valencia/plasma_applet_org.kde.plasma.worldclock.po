@@ -54,7 +54,7 @@ msgstr "Llum de dia"
 #: package/contents/ui/configMapDisplay.qml:63
 #, kde-format
 msgid "Longitude"
-msgstr "Llargària"
+msgstr "Longitud"
 
 #: package/contents/ui/configMapDisplay.qml:64
 #, kde-format
@@ -64,7 +64,7 @@ msgstr "Emplaçament"
 #: package/contents/ui/configMapDisplay.qml:82
 #, kde-format
 msgid "Longitude:"
-msgstr "Llargària:"
+msgstr "Longitud:"
 
 #: package/contents/ui/configMapDisplay.qml:99
 #, kde-format

@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2023-03-20 13:49+0000\n"
+"PO-Revision-Date: 2023-03-22 11:52+0000\n"
 "Last-Translator: José Nuno Coelho Pires <zepires@gmail.com>\n"
 "Language-Team: Portuguese <kde-i18n-doc@kde.org>\n"
 "Language: pt\n"
@@ -8442,7 +8442,7 @@ msgstr "https://"
 #: src/lib/marble/MapWizard.ui:208
 msgctxt "MapWizard|"
 msgid "Wms-Service:"
-msgstr "Serviço WMS"
+msgstr "Serviço WMS:"
 
 #: src/lib/marble/MapWizard.ui:222
 msgctxt "MapWizard|"
@@ -8495,7 +8495,7 @@ msgstr "Projecção dos Padrões:"
 #: src/lib/marble/MapWizard.ui:311
 msgctxt "MapWizard|"
 msgid "Indicates the projection in which the tiles are rendered."
-msgstr "Indica a projecção na qual são desenhados os blocos"
+msgstr "Indica a projecção na qual são desenhados os blocos."
 
 #: src/lib/marble/MapWizard.ui:334
 msgctxt "MapWizard|"
@@ -8541,6 +8541,8 @@ msgstr "URL do Servidor de XYZ"
 msgctxt "MapWizard|"
 msgid "The XYZ server needs to provide map tiles in Mercator projection."
 msgstr ""
+"O servidor de XYZ precisa de fornecer padrões dos mapas na projecção de "
+"Mercator."
 
 #: src/lib/marble/MapWizard.ui:469
 msgctxt "MapWizard|"
@@ -8553,12 +8555,9 @@ msgid "#87CEFA"
 msgstr "#87CEFA"
 
 #: src/lib/marble/MapWizard.ui:501
-#, fuzzy
-#| msgctxt "UiEditPlacemarkDialog|"
-#| msgid "Style, Color"
 msgctxt "MapWizard|"
 msgid "Select Color"
-msgstr "Estilo, Cor"
+msgstr "Seleccionar a Cor"
 
 #: src/lib/marble/MapWizard.ui:544
 msgctxt "MapWizard|"

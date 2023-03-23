@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: marble_qt\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2023-03-20 10:22+0100\n"
+"PO-Revision-Date: 2023-03-22 13:47+0100\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -8457,7 +8457,7 @@ msgstr "URL van XYZ-server"
 #: src/lib/marble/MapWizard.ui:452
 msgctxt "MapWizard|"
 msgid "The XYZ server needs to provide map tiles in Mercator projection."
-msgstr ""
+msgstr "De XYZ-server moet kaarttegels in Mercator projectie leveren."
 
 #: src/lib/marble/MapWizard.ui:469
 msgctxt "MapWizard|"
@@ -8470,12 +8470,9 @@ msgid "#87CEFA"
 msgstr "#87CEFA"
 
 #: src/lib/marble/MapWizard.ui:501
-#, fuzzy
-#| msgctxt "UiEditPlacemarkDialog|"
-#| msgid "Style, Color"
 msgctxt "MapWizard|"
 msgid "Select Color"
-msgstr "Stijl, kleur"
+msgstr "Kleur selecteren"
 
 #: src/lib/marble/MapWizard.ui:544
 msgctxt "MapWizard|"

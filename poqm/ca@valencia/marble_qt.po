@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2023-03-20 09:46+0100\n"
+"PO-Revision-Date: 2023-03-22 13:05+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
@@ -7774,7 +7774,7 @@ msgstr "&N"
 #: src/lib/marble/LatLonBoxWidget.ui:93
 msgctxt "LatLonBoxWidget|"
 msgid "Western Longitude"
-msgstr "Llargària Oest"
+msgstr "Longitud Oest"
 
 #: src/lib/marble/LatLonBoxWidget.ui:118
 msgctxt "LatLonBoxWidget|"
@@ -7784,7 +7784,7 @@ msgstr "&O"
 #: src/lib/marble/LatLonBoxWidget.ui:145
 msgctxt "LatLonBoxWidget|"
 msgid "Eastern Longitude"
-msgstr "Llargària Est"
+msgstr "Longitud Est"
 
 #: src/lib/marble/LatLonBoxWidget.ui:170
 msgctxt "LatLonBoxWidget|"
@@ -8472,6 +8472,8 @@ msgstr "URL del servidor XYZ"
 msgctxt "MapWizard|"
 msgid "The XYZ server needs to provide map tiles in Mercator projection."
 msgstr ""
+"El servidor XYZ necessita proporcionar les tessel·les del mapa en la "
+"projecció de Mercator."
 
 #: src/lib/marble/MapWizard.ui:469
 msgctxt "MapWizard|"
@@ -8484,12 +8486,9 @@ msgid "#87CEFA"
 msgstr "#87CEFA"
 
 #: src/lib/marble/MapWizard.ui:501
-#, fuzzy
-#| msgctxt "UiEditPlacemarkDialog|"
-#| msgid "Style, Color"
 msgctxt "MapWizard|"
 msgid "Select Color"
-msgstr "Estil, Color"
+msgstr "Seleccioneu el color"
 
 #: src/lib/marble/MapWizard.ui:544
 msgctxt "MapWizard|"
@@ -14967,7 +14966,7 @@ msgstr "Terreny:"
 #: src/plugins/render/opencaching/OpenCachingCacheDialog.ui:196
 msgctxt "OpenCachingCacheDialog|"
 msgid "Longitude:"
-msgstr "Llargària:"
+msgstr "Longitud:"
 
 #: src/plugins/render/opencaching/OpenCachingCacheDialog.ui:216
 msgctxt "OpenCachingCacheDialog|"

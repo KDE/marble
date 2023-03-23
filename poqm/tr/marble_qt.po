@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2023-03-20 12:49+0300\n"
+"PO-Revision-Date: 2023-03-22 11:53+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -3010,7 +3010,7 @@ msgstr "Derece (Onluk)"
 #: src/apps/marble-qt/QtMainWindow.cpp:434
 msgctxt "Marble::MainWindow|"
 msgid "Universal Transverse Mercator (UTM)"
-msgstr "Evrensel Çapraz Merkator (UTM)"
+msgstr "Evrensel Çapraz Mercator (UTM)"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:449
 msgctxt "Marble::MainWindow|"
@@ -7892,7 +7892,7 @@ msgstr "Küresel görünüm"
 #: src/lib/marble/MapViewWidget.cpp:124 src/lib/marble/MapViewWidget.cpp:132
 msgctxt "Marble::MapViewWidget|"
 msgid "Mercator View"
-msgstr "Merkator Görünümü"
+msgstr "Mercator Görünümü"
 
 #: src/lib/marble/MapViewWidget.cpp:138
 msgctxt "Marble::MapViewWidget|"
@@ -7978,7 +7978,7 @@ msgstr "Düz Harita"
 #: src/lib/marble/MapViewWidget.ui:59
 msgctxt "MapViewWidget|"
 msgid "Mercator"
-msgstr "Merkator"
+msgstr "Mercator"
 
 #: src/lib/marble/MapViewWidget.ui:68
 msgctxt "MapViewWidget|"
@@ -8044,7 +8044,7 @@ msgstr "Sunucu, bir Web Harita Sunucusu değil."
 #: src/lib/marble/MapWizard.cpp:1042
 msgctxt "Marble::MapWizard|"
 msgid "Web Mercator (epsg:3857)"
-msgstr "Web Merkatörü (epsg:3857)"
+msgstr "Web Mercator'u (epsg:3857)"
 
 #: src/lib/marble/MapWizard.cpp:353 src/lib/marble/MapWizard.cpp:770
 #: src/lib/marble/MapWizard.cpp:883
@@ -8446,6 +8446,8 @@ msgstr "XYZ Sunucu URL'si"
 msgctxt "MapWizard|"
 msgid "The XYZ server needs to provide map tiles in Mercator projection."
 msgstr ""
+"XYZ sunucusunun harita karolarını Mercator projeksiyonunda sağlaması "
+"gerekiyor."
 
 #: src/lib/marble/MapWizard.ui:469
 msgctxt "MapWizard|"
@@ -8458,12 +8460,9 @@ msgid "#87CEFA"
 msgstr "#87CEFA"
 
 #: src/lib/marble/MapWizard.ui:501
-#, fuzzy
-#| msgctxt "UiEditPlacemarkDialog|"
-#| msgid "Style, Color"
 msgctxt "MapWizard|"
 msgid "Select Color"
-msgstr "Biçim, Renk"
+msgstr "Renk Seç"
 
 #: src/lib/marble/MapWizard.ui:544
 msgctxt "MapWizard|"
@@ -10894,7 +10893,7 @@ msgstr "Derece (Onluk)"
 #: src/lib/marble/MarbleViewSettingsWidget.ui:115
 msgctxt "MarbleViewSettingsWidget|"
 msgid "Universal Transverse Mercator (UTM)"
-msgstr "Evrensel Çapraz Merkatör (UTM)"
+msgstr "Evrensel Çapraz Mercator (UTM)"
 
 #: src/lib/marble/MarbleViewSettingsWidget.ui:126
 msgctxt "MarbleViewSettingsWidget|"
@@ -11680,7 +11679,7 @@ msgstr ""
 #: src/lib/marble/projections/MercatorProjection.cpp:40
 msgctxt "QObject|"
 msgid "Mercator"
-msgstr "Merkator"
+msgstr "Mercator"
 
 #: src/lib/marble/projections/MercatorProjection.cpp:45
 msgctxt "QObject|"
@@ -11688,8 +11687,8 @@ msgid ""
 "<p><b>Mercator Projection</b></p><p>Applications: popular standard map "
 "projection for navigation.</p>"
 msgstr ""
-"<p><b>Merkator Yansıması</b></p><p>Uygulamalar: gezinti için popüler, "
-"standar harita yansıması.</p>"
+"<p><b>Mercator Yansıması</b></p><p>Uygulamalar: Dolaşım için popüler, "
+"standart harita yansıması.</p>"
 
 #: src/lib/marble/projections/SphericalProjection.cpp:64
 msgctxt "QObject|"
