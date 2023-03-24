@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2023-03-22 11:53+0300\n"
+"PO-Revision-Date: 2023-03-23 14:50+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -11753,7 +11753,7 @@ msgstr "Önbellek ve Vekil Sunucu"
 #: src/lib/marble/QtMarbleConfigDialog.cpp:131
 msgctxt "Marble::QtMarbleConfigDialog|"
 msgid "Date and Time"
-msgstr "Tarih ve Saat"
+msgstr "Tarih ve Zaman"
 
 #: src/lib/marble/QtMarbleConfigDialog.cpp:135
 msgctxt "Marble::QtMarbleConfigDialog|"
@@ -12566,7 +12566,7 @@ msgstr "Zaman"
 #: src/lib/marble/TimeControlWidget.ui:26
 msgctxt "TimeControlWidget|"
 msgid "&New date and time:"
-msgstr "&Yeni tarih ve saat:"
+msgstr "&Yeni tarih ve zaman:"
 
 #: src/lib/marble/TimeControlWidget.ui:36
 msgctxt "TimeControlWidget|"

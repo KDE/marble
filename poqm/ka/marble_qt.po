@@ -8296,12 +8296,9 @@ msgid "#87CEFA"
 msgstr ""
 
 #: src/lib/marble/MapWizard.ui:501
-#, fuzzy
-#| msgctxt "UiEditPlacemarkDialog|"
-#| msgid "Style, Color"
 msgctxt "MapWizard|"
 msgid "Select Color"
-msgstr "სტილი, ფერი"
+msgstr "აირჩიეთ ფერი"
 
 #: src/lib/marble/MapWizard.ui:544
 msgctxt "MapWizard|"
