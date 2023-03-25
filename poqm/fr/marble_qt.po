@@ -19,7 +19,7 @@ msgstr ""
 "Project-Id-Version: marble_qt\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2023-03-21 11:21+0100\n"
+"PO-Revision-Date: 2023-03-23 21:27+0100\n"
 "Last-Translator: Xavier BESNARD <xavier.besnard]neuf.fr>\n"
 "Language-Team: fr\n"
 "Language: fr\n"
@@ -8484,6 +8484,8 @@ msgstr "URL du serveur XYZ"
 msgctxt "MapWizard|"
 msgid "The XYZ server needs to provide map tiles in Mercator projection."
 msgstr ""
+"Le serveur XYZ a besoin de fournir des tuiles de cartographie dans une "
+"projection Mercator."
 
 #: src/lib/marble/MapWizard.ui:469
 msgctxt "MapWizard|"
@@ -8496,12 +8498,9 @@ msgid "#87CEFA"
 msgstr "#87CEFA"
 
 #: src/lib/marble/MapWizard.ui:501
-#, fuzzy
-#| msgctxt "UiEditPlacemarkDialog|"
-#| msgid "Style, Color"
 msgctxt "MapWizard|"
 msgid "Select Color"
-msgstr "Style, couleur"
+msgstr "Sélectionnez une couleur"
 
 #: src/lib/marble/MapWizard.ui:544
 msgctxt "MapWizard|"
