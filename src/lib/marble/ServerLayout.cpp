@@ -182,6 +182,42 @@ QString WmsServerLayout::epsgCode() const
     return QString();
 }
 
+WmtsServerLayout::WmtsServerLayout( GeoSceneTileDataset *texture )
+    : ServerLayout( texture )
+{
+}
+
+QUrl WmtsServerLayout::downloadUrl( const QUrl &prototypeUrl, const Marble::TileId &id ) const
+{
+//    const GeoDataLatLonBox bbox = m_textureLayer->tileProjection()->geoCoordinates(id);
+
+    QString urlStr = prototypeUrl.toString( QUrl::DecodeReserved );
+
+    urlStr.replace(urlStr.indexOf(QLatin1String("{TileMatrix}")), QLatin1String("{TileMatrix}").size(),  QString::number(id.zoomLevel()));
+    urlStr.replace(urlStr.indexOf(QLatin1String("{TileRow}")), QLatin1String("{TileRow}").size(),  QString::number(id.y()));
+    urlStr.replace(urlStr.indexOf(QLatin1String("{TileCol}")), QLatin1String("{TileCol}").size(),  QString::number(id.x()));
+    return QUrl( urlStr );
+}
+
+QString WmtsServerLayout::name() const
+{
+    return "WebMapTileService";
+}
+
+QString WmtsServerLayout::epsgCode() const
+{
+    switch (m_textureLayer->tileProjectionType()) {
+        case GeoSceneAbstractTileProjection::Equirectangular:
+            return "EPSG:4326";
+        case GeoSceneAbstractTileProjection::Mercator:
+            return "EPSG:3857";
+    }
+
+    Q_ASSERT( false ); // not reached
+    return QString();
+}
+
+
 QuadTreeServerLayout::QuadTreeServerLayout( GeoSceneTileDataset *textureLayer )
     : ServerLayout( textureLayer )
 {

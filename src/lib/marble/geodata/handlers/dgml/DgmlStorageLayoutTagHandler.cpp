@@ -71,6 +71,8 @@ GeoNode* DgmlStorageLayoutTagHandler::parse(GeoParser& parser) const
             serverLayout = new CustomServerLayout( texture );
         else if (modeStr == QLatin1String("WebMapService"))
             serverLayout = new WmsServerLayout( texture );
+        else if (modeStr == QLatin1String("WebMapTileService"))
+            serverLayout = new WmtsServerLayout( texture );
         else if (modeStr == QLatin1String("QuadTree"))
             serverLayout = new QuadTreeServerLayout( texture );
         else if (modeStr == QLatin1String("TileMapService"))

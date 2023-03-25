@@ -26,11 +26,8 @@
    <attribute name="pageId">
     <string notr="true">0</string>
    </attribute>
-   <layout class="QFormLayout" name="formLayout_3">
-    <property name="fieldGrowthPolicy">
-     <enum>QFormLayout::ExpandingFieldsGrow</enum>
-    </property>
-    <item row="0" column="0" colspan="2">
+   <layout class="QVBoxLayout" name="verticalLayout_14">
+    <item>
      <widget class="QLabel" name="labelIntroInfo">
       <property name="text">
        <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
@@ -51,7 +48,7 @@ p, li { white-space: pre-wrap; }
       </property>
      </widget>
     </item>
-    <item row="1" column="1">
+    <item>
      <widget class="QRadioButton" name="radioButtonWms">
       <property name="toolTip">
        <string>Connects to a server on the Internet. The map data is queried via the WMS protocol.</string>
@@ -64,7 +61,20 @@ p, li { white-space: pre-wrap; }
       </property>
      </widget>
     </item>
-    <item row="2" column="1">
+    <item>
+     <widget class="QRadioButton" name="radioButtonWmts">
+      <property name="toolTip">
+       <string>Connects to a server on the Internet. The map data is queried via the WMS protocol.</string>
+      </property>
+      <property name="text">
+       <string>Web Map Tile Service (WMTS)</string>
+      </property>
+      <property name="checked">
+       <bool>false</bool>
+      </property>
+     </widget>
+    </item>
+    <item>
      <widget class="QRadioButton" name="radioButtonBitmap">
       <property name="toolTip">
        <string>You need to provide a bitmap image of a world map that is stored on disk.</string>
@@ -74,7 +84,7 @@ p, li { white-space: pre-wrap; }
       </property>
      </widget>
     </item>
-    <item row="3" column="1">
+    <item>
      <widget class="QRadioButton" name="radioButtonStaticUrl">
       <property name="toolTip">
        <string>Connects to a server on the Internet. The map data is queried via a static URL.</string>
@@ -89,7 +99,7 @@ p, li { white-space: pre-wrap; }
   <widget class="QWizardPage" name="wizardPageWms">
    <layout class="QVBoxLayout" name="verticalLayout">
     <item>
-     <widget class="QLabel" name="label">
+     <widget class="QLabel" name="labelOwsServiceHeader">
       <property name="text">
        <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
@@ -212,7 +222,7 @@ p, li { white-space: pre-wrap; }
     <item>
      <widget class="QTabWidget" name="tabWidgetLayers">
       <property name="currentIndex">
-       <number>3</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="tabLayerSelection">
        <property name="enabled">

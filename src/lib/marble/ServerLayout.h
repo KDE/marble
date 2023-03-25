@@ -108,6 +108,21 @@ public:
     QString epsgCode() const;
 };
 
+class WmtsServerLayout : public ServerLayout
+{
+public:
+    explicit WmtsServerLayout( GeoSceneTileDataset *texture );
+
+    /**
+     * Adds WMTS query items to the @p prototypeUrl and returns the result.
+     */
+    QUrl downloadUrl( const QUrl &prototypeUrl, const Marble::TileId &tileId ) const override;
+
+    QString name() const override;
+
+    QString epsgCode() const;
+};
+
 class QuadTreeServerLayout : public ServerLayout
 {
 public:

@@ -69,6 +69,7 @@ public Q_SLOTS:
     void updateSearchFilter(const QString& text);
     void updateListViewSelection();
     void updateBackdropCheckBox();
+    void updateOwsServiceType();
     void chooseBackgroundColor();
 
 private:

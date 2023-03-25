@@ -9,29 +9,47 @@
 #include <QUrlQuery>
 #include <QNetworkReply>
 
-#include <QDomDocument>
 #include <QBuffer>
 #include <QImageReader>
 
 #include <MarbleDebug.h>
-
+#include <cmath>
 
 namespace Marble
 {
 
+OwsMappingCapabilities::OwsMappingCapabilities()
+{
+
+}
+
 WmsCapabilities::WmsCapabilities()
-    : m_capabilitiesStatus(WmsCapabilitiesNone)
 {
 }
 
-void WmsCapabilities::setCapabilitiesStatus(WmsCapabilitiesStatus capabilitiesStatus)
+WmtsCapabilities::WmtsCapabilities()
 {
-    m_capabilitiesStatus = capabilitiesStatus;
+
 }
 
-WmsCapabilitiesStatus WmsCapabilities::capabilitiesStatus() const
+void WmtsCapabilities::setWmtsTileMatrixSets(const QMap<QString, QStringList> &wmtsTileMatrixSets)
 {
-    return m_capabilitiesStatus;
+    m_wmtsTileMatrixSets = wmtsTileMatrixSets;
+}
+
+QMap<QString, QStringList> WmtsCapabilities::wmtsTileMatrixSets() const
+{
+    return m_wmtsTileMatrixSets;
+}
+
+void WmtsCapabilities::setWmtsTileResource(const QMap<QString, QMap<QString, QString> > &wmtsTileRessource)
+{
+    m_wmtsTileResource = wmtsTileRessource;
+}
+
+QMap<QString, QMap<QString, QString> > WmtsCapabilities::wmtsTileResource() const
+{
+    return m_wmtsTileResource;
 }
 
 ImageRequestResult::ImageRequestResult()
@@ -90,32 +108,32 @@ ImageResultType ImageRequestResult::resultType() const
     return m_resultType;
 }
 
-void WmsCapabilities::setVersion(const QString &version)
+void OwsMappingCapabilities::setVersion(const QString &version)
 {
     m_version = version;
 }
 
-QString WmsCapabilities::version() const
+QString OwsMappingCapabilities::version() const
 {
     return m_version;
 }
 
-void WmsCapabilities::setTitle(const QString &title)
+void OwsMappingCapabilities::setTitle(const QString &title)
 {
     m_title = title;
 }
 
-QString WmsCapabilities::title() const
+QString OwsMappingCapabilities::title() const
 {
     return m_title;
 }
 
-void WmsCapabilities::setAbstract(const QString &abstract)
+void OwsMappingCapabilities::setAbstract(const QString &abstract)
 {
     m_abstract = abstract;
 }
 
-QString WmsCapabilities::abstract() const
+QString OwsMappingCapabilities::abstract() const
 {
     return m_abstract;
 }
@@ -140,14 +158,15 @@ QString WmsCapabilities::fees() const
     return m_fees;
 }
 
-QStringList WmsCapabilities::layers() const
+QStringList OwsMappingCapabilities::layers() const
 {
-    return m_wmsLayerMetaInfo.keys();
+    return m_owsLayerMetaInfo.keys();
 }
 
 QStringList WmsCapabilities::projections(const QString &layer)
 {
-    QStringList result = m_wmsLayerCoordinateSystems.value(layer).keys() << m_coordinateSystems.keys();
+    QStringList result = m_wmsLayerCoordinateSystems.value(layer).keys()
+                        << m_wmsLayerCoordinateSystems.value(m_wmsLayerCoordinateSystems.firstKey()).keys();;
 
     result.removeDuplicates();
 
@@ -164,24 +183,24 @@ QString WmsCapabilities::boundingBox(const QString &layer, const QString &projec
     return result;
 }
 
-QString WmsCapabilities::title(const QString &layer)
+QString OwsMappingCapabilities::title(const QString &layer)
 {
-    return m_wmsLayerMetaInfo.value(layer).at(0);
+    return m_owsLayerMetaInfo.value(layer).at(0);
 }
 
-QString WmsCapabilities::abstract(const QString &layer)
+QString OwsMappingCapabilities::abstract(const QString &layer)
 {
-    return m_wmsLayerMetaInfo.value(layer).at(1);
+    return m_owsLayerMetaInfo.value(layer).at(1);
 }
 
 QString WmsCapabilities::legendUrl(const QString &layer)
 {
-    return m_wmsLayerMetaInfo.value(layer).at(2);
+    return m_owsLayerMetaInfo.value(layer).at(2);
 }
 
-QString WmsCapabilities::style(const QString &layer)
+QString OwsMappingCapabilities::style(const QString &layer)
 {
-    return m_wmsLayerMetaInfo.value(layer).at(3);
+    return m_owsLayerMetaInfo.value(layer).at(3);
 }
 
 QStringList WmsCapabilities::styles(const QStringList &layers)
@@ -203,14 +222,14 @@ QString WmsCapabilities::referenceSystemType() const
     return m_referenceSystemType;
 }
 
-void WmsCapabilities::setWmsLayerMetaInfo(const QMap<QString, QStringList> &wmsLayerMetaInfo)
+void OwsMappingCapabilities::setOwsLayerMetaInfo(const QMap<QString, QStringList> &wmsLayerMetaInfo)
 {
-    m_wmsLayerMetaInfo = wmsLayerMetaInfo;
+    m_owsLayerMetaInfo = wmsLayerMetaInfo;
 }
 
-QMap<QString, QStringList> WmsCapabilities::wmsLayerMetaInfo() const
+QMap<QString, QStringList> OwsMappingCapabilities::owsLayerMetaInfo() const
 {
-    return m_wmsLayerMetaInfo;
+    return m_owsLayerMetaInfo;
 }
 
 void WmsCapabilities::setWmsLayerCoordinateSystems(const QMap<QString, QMap<QString, QString> > &wmsLayerCoordinateSystems)
@@ -234,18 +253,22 @@ QStringList WmsCapabilities::formats()
 }
 
 
-OwsServiceManager::OwsServiceManager(QObject *parent) : QObject(parent)
+OwsServiceManager::OwsServiceManager(QObject *parent)
+    : QObject(parent),
+      m_capabilitiesStatus(OwsCapabilitiesNone)
 {
-    connect( &m_capabilitiesAccessManager, &QNetworkAccessManager::finished, this, &OwsServiceManager::parseWmsCapabilities );
+    connect( &m_capabilitiesAccessManager, &QNetworkAccessManager::finished, this, &OwsServiceManager::parseOwsCapabilities );
     connect( &m_imageAccessManager, &QNetworkAccessManager::finished, this, &OwsServiceManager::parseImageResult );
 }
 
-void OwsServiceManager::queryWmsCapabilities(const QUrl& queryUrl)
+// https://terramapas.icv.gva.es/sentinel2_20170506_rgb/wmts?
+
+void OwsServiceManager::queryOwsCapabilities(const QUrl& queryUrl, const QString& serviceString)
 {
     m_url = queryUrl;
     QUrl url(queryUrl);
     QUrlQuery urlQuery;
-    urlQuery.addQueryItem( "service", "WMS" );
+    urlQuery.addQueryItem( "service", serviceString );
     urlQuery.addQueryItem( "request", "GetCapabilities" );
     url.setQuery(urlQuery);
 
@@ -268,7 +291,9 @@ void OwsServiceManager::queryWmsMap(const QUrl &url, const QString &layers, cons
     QUrlQuery downloadQuery;
     downloadQuery.addQueryItem( "request", "GetMap" ); // Requests that the server generates a map.
     downloadQuery.addQueryItem( "service", "wms" ); // Service name. Value is WMS.
-    downloadQuery.addQueryItem( "version", wmsCapabilities().version() ); // Service version. Value is one of 1.0.0, 1.1.0, 1.1.1, 1.3.0.
+
+    QString versionkey = wmsCapabilities().version() == "1.0.0" ? "wmtver" : "version";
+    downloadQuery.addQueryItem( versionkey , wmsCapabilities().version() ); // Service version. Value is one of 1.0.0, 1.1.0, 1.1.1, 1.3.0.
     downloadQuery.addQueryItem( "layers", layers ); // Layers to display on map. Value is a comma-separated list of layer names.
 
     // Spatial Reference System for map output. Value is in the form EPSG:nnn. srs was used before WMS 1.3.0, crs has been used since then.
@@ -281,10 +306,10 @@ void OwsServiceManager::queryWmsMap(const QUrl &url, const QString &layers, cons
     QString boundingBox = bbox;
     if (boundingBox.isEmpty()) {
         if (projection == "epsg:3857") {
-            boundingBox = "-20048966.1,-20037508.34,20048966.1,20037508.34";
+            boundingBox = "-20037508.34,-20048966.1,20037508.34,20048966.1";
         }
         else if (projection == "epsg:4326") {
-            boundingBox = "-90,-180,90,180";
+            boundingBox = wmsCapabilities().version() == "1.3.0" ? "-90,-180,90,180" : "-180,-90,180,90";  // flipped axes for 1.3.0 in epsg:4326 according to spec
         }
     }
     downloadQuery.addQueryItem( "bbox", boundingBox );
@@ -315,10 +340,11 @@ void OwsServiceManager::queryWmsLevelZeroTile(const QUrl& url, const QString &la
 {
     QString bbox;
     if (projection == "epsg:3857") {
-        bbox = "-20048966.1,-20037508.34,20048966.1,20037508.34";
+        bbox = "-20037508.34,-20048966.1,20037508.34,20048966.1";
+
     }
     else if (projection == "epsg:4326") {
-        bbox = "-90,-180,90,180";
+        bbox = wmsCapabilities().version() == "1.3.0" ? "-90,-180,90,180" : "-180,-90,180,90"; // flipped axes for 1.3.0 in epsg:4326 according to spec
     }
 
     m_imageRequestResult.setResultType(LevelZeroTile);
@@ -353,6 +379,41 @@ void OwsServiceManager::queryWmsLegendImage(const QUrl &url)
     m_imageAccessManager.get( request );
 }
 
+void OwsServiceManager::queryWmtsLevelZeroTile(const QString &url, const QString &style, const QString &tileMatrixSet)
+{
+    m_imageRequestResult.setResultType(LevelZeroTile);
+    queryWmtsTile(url, style, tileMatrixSet, "0", "0", "0");
+}
+
+void OwsServiceManager::queryWmtsPreviewImage(const QString &url, const QString &style, const QString &tileMatrixSet)
+{
+    m_imageRequestResult.setResultType(PreviewImage);
+    queryWmtsTile(url, style, tileMatrixSet, "0", "0", "0");
+}
+
+void OwsServiceManager::queryWmtsTile(const QString &url, const QString &style, const QString &tileMatrixSet, const QString& tileMatrix, const QString &tileRow, const QString &tileCol)
+{
+    m_imageRequestResult.setResultImage(QImage());
+    m_imageRequestResult.setImageStatus(WmsImageNone);
+    m_imageRequestResult.setResultRaw("");
+    m_imageRequestResult.setResultFormat(QString());
+
+    QUrl downloadUrl;
+    QString baseUrl = url;
+    baseUrl.replace(baseUrl.indexOf(QLatin1String("{Time}")), 6, "current");
+    baseUrl.replace(baseUrl.indexOf(QLatin1String("{style}")), 7, style);
+    baseUrl.replace(baseUrl.indexOf(QLatin1String("{Style}")), 7, style);
+    baseUrl.replace(baseUrl.indexOf(QLatin1String("{TileMatrixSet}")), 15,  tileMatrixSet);
+    baseUrl.replace(baseUrl.indexOf(QLatin1String("{TileMatrix}")), 12,  tileMatrix);
+    baseUrl.replace(baseUrl.indexOf(QLatin1String("{TileRow}")), 9,  tileRow);
+    baseUrl.replace(baseUrl.indexOf(QLatin1String("{TileCol}")), 9,  tileCol);
+    downloadUrl.setUrl( baseUrl );
+
+    QNetworkRequest request( downloadUrl );
+    mDebug() << "requesting static map" << downloadUrl;
+    m_imageAccessManager.get( request );
+}
+
 void OwsServiceManager::queryXYZPreviewImage(const QString &urlString)
 {
     m_imageRequestResult.setResultType(PreviewImage);
@@ -372,6 +433,7 @@ void OwsServiceManager::queryXYZImage(const QString urlString)
     baseUrl.replace(baseUrl.indexOf(QLatin1String("{x}")), 3,  QString::number(0));
     baseUrl.replace(baseUrl.indexOf(QLatin1String("{y}")), 3,  QString::number(0));
     baseUrl.replace(baseUrl.indexOf(QLatin1String("{zoomLevel}")), 11,  QString::number(0));
+    baseUrl.replace(baseUrl.indexOf(QLatin1String("{z}")), 3,  QString::number(0));
     downloadUrl.setUrl( baseUrl );
 
     QNetworkRequest request( downloadUrl );
@@ -379,9 +441,29 @@ void OwsServiceManager::queryXYZImage(const QString urlString)
     m_imageAccessManager.get( request );
 }
 
+void OwsServiceManager::setCapabilitiesStatus(OwsCapabilitiesStatus capabilitiesStatus)
+{
+    m_capabilitiesStatus = capabilitiesStatus;
+}
+
+OwsCapabilitiesStatus OwsServiceManager::capabilitiesStatus() const
+{
+    return m_capabilitiesStatus;
+}
+
+OwsServiceType OwsServiceManager::owsServiceType()
+{
+    return m_owsServiceType;
+}
+
 WmsCapabilities Marble::OwsServiceManager::wmsCapabilities()
 {
-    return m_capabilities;
+    return m_wmsCapabilities;
+}
+
+WmtsCapabilities OwsServiceManager::wmtsCapabilities()
+{
+    return m_wmtsCapabilities;
 }
 
 ImageRequestResult OwsServiceManager::imageRequestResult()
@@ -409,45 +491,67 @@ QString OwsServiceManager::resultFormat()
     return m_imageRequestResult.resultFormat();
 }
 
-void OwsServiceManager::parseWmsCapabilities(QNetworkReply *reply)
+void OwsServiceManager::parseOwsCapabilities(QNetworkReply *reply)
 {
     mDebug() << "received reply from" << reply->url();
     QString result( reply->readAll() );
 
-    m_capabilities = WmsCapabilities(); // clear()
-    QDomDocument xml;
-    if( !xml.setContent( result ) )
+    m_wmsCapabilities = WmsCapabilities(); // clear()
+
+    if( !m_xml.setContent( result ) )
     {
-        m_capabilities.setCapabilitiesStatus(WmsCapabilitiesReplyUnreadable); // Wizard cannot parse server's response
+        setCapabilitiesStatus(OwsCapabilitiesReplyUnreadable); // Wizard cannot parse server's response
         emit wmsCapabilitiesReady();
         return;
     }
 
-    if( xml.documentElement().firstChildElement().tagName().isNull()
-        || xml.documentElement().firstChildElement( "Capability" ).isNull() )
+    if( m_xml.documentElement().firstChildElement().tagName().isNull()
+        || !m_xml.documentElement().tagName().contains("Capabilities"))
     {
-        m_capabilities.setCapabilitiesStatus(WmsCapabilitiesNoWmsServer); // Server is not a Web Map Server.
+        setCapabilitiesStatus(OwsCapabilitiesNoOwsServer); // Server is not a Ows Server.
         emit wmsCapabilitiesReady();
         return;
     }
 
-    m_capabilities.setVersion( xml.documentElement().attribute("version") );
-    m_capabilities.setReferenceSystemType( (m_capabilities.version() == "1.0.0"
-                                         || m_capabilities.version() == "1.1.0"
-                                         || m_capabilities.version() == "1.1.1")  ? "SRS" : "CRS" );
+    if (m_xml.documentElement().tagName() == "WMS_Capabilities"
+     || m_xml.documentElement().tagName() == "WMT_MS_Capabilities") { // WMTS server used for WMS?
+        m_owsServiceType = WmsType;
+        parseWmsCapabilities(reply);
+    }
+    else if (m_xml.documentElement().tagName() == "Capabilities") {
+        m_owsServiceType = WmtsType;
+        parseWmtsCapabilities(reply);
+    }
+    else if (m_xml.documentElement().tagName() == ("wfs:WFS_Capabilities")) {
+        m_owsServiceType = WfsType;
+    }
+    else if (m_xml.documentElement().tagName() == ("wcs:Capabilities")) {
+        m_owsServiceType = WcsType;
+    }
+    else {
+        m_owsServiceType = NoOwsType;
+    }
+}
 
-    QDomElement globalLayer = xml.documentElement().firstChildElement( "Capability" ).firstChildElement( "Layer" );
-    QDomElement service = xml.documentElement().firstChildElement( "Service" );
-//    QDomNodeList layers = globalLayer.elementsByTagName( "Layer" );
-    QDomNodeList layers = xml.documentElement().firstChildElement( "Capability" ).elementsByTagName("Layer");
+void OwsServiceManager::parseWmsCapabilities(QNetworkReply *reply)
+{
+    Q_UNUSED(reply)
 
-    m_capabilities.setTitle(service.firstChildElement( "Title" ).text());
-    m_capabilities.setAbstract(service.firstChildElement( "Abstract" ).text() );
+    m_wmsCapabilities.setVersion( m_xml.documentElement().attribute("version") );
+    m_wmsCapabilities.setReferenceSystemType( (m_wmsCapabilities.version() == "1.0.0"
+                                         || m_wmsCapabilities.version() == "1.1.0"
+                                         || m_wmsCapabilities.version() == "1.1.1")  ? "SRS" : "CRS" );
+
+    QDomElement service = m_xml.documentElement().firstChildElement( "Service" );
+    QDomNodeList layers = m_xml.documentElement().firstChildElement( "Capability" ).elementsByTagName("Layer");
+
+    m_wmsCapabilities.setTitle(service.firstChildElement( "Title" ).text());
+    m_wmsCapabilities.setAbstract(service.firstChildElement( "Abstract" ).text() );
 
     QString contactEmail = service.firstChildElement( "ContactInformation").firstChildElement("ContactElectronicMailAddress" ).text();
-    m_capabilities.setContactInformation(contactEmail);
+    m_wmsCapabilities.setContactInformation(contactEmail);
     QString fees = service.firstChildElement( "Fees" ).text();
-    m_capabilities.setFees(fees);
+    m_wmsCapabilities.setFees(fees);
 
     QMap<QString, QStringList> wmsLayerMetaInfo;
 
@@ -461,32 +565,53 @@ void OwsServiceManager::parseWmsCapabilities(QNetworkReply *reply)
         if (!legendElement.isNull()) legendUrl = legendElement.firstChildElement( "OnlineResource" ).attribute( "xlink:href" );
         QString style = layers.at(i).firstChildElement("Style").firstChildElement( "Name" ).text();
         if (style.isEmpty()) style = "default";
-
+/*      QDomElement gbboxElement = layers.at(i).firstChildElement("EX_GeographicBoundingBox");
+        QStringList bbox;
+        if (!gbboxElement.isNull()) {
+            bbox << gbboxElement.firstChildElement("westBoundLongitude").text() << gbboxElement.firstChildElement("southBoundLatitude").text()
+                 << gbboxElement.firstChildElement("eastBoundLongitude").text() << gbboxElement.firstChildElement("northBoundLatitude").text();
+        }
+        wmsLayerMetaInfo[ name ] << title << abstract << legendUrl << style << bbox.join(","); */
         wmsLayerMetaInfo[ name ] << title << abstract << legendUrl << style;
     }
 
-    m_capabilities.setWmsLayerMetaInfo(wmsLayerMetaInfo);
+    m_wmsCapabilities.setOwsLayerMetaInfo(wmsLayerMetaInfo);
 
     QMap<QString, QMap<QString, QString>> wmsLayerCoordinateSystems;
     for( int i = 0; i < layers.size(); ++i )
     {
         QString layerName = layers.at(i).firstChildElement( "Name" ).text();
-        QDomNodeList projectionList = layers.at(i).toElement().elementsByTagName(m_capabilities.referenceSystemType());
+        QDomNodeList projectionList = layers.at(i).toElement().elementsByTagName(m_wmsCapabilities.referenceSystemType());
         QDomNodeList layerPreviewBBox = layers.at(i).toElement().elementsByTagName("BoundingBox");
 
         for ( int s = 0; s < projectionList.size(); ++s ) {
             QString projection = projectionList.at(s).toElement().text().toLower();
             // SRS and CRS tags might contain a list of epsgs, so we need to use contains()
             if (projection.contains("epsg:3857")) {
-                wmsLayerCoordinateSystems[layerName]["epsg:3857"] = QString();
+/*              if (wmsLayerMetaInfo.value(layerName).at(4) != ",,,") {  // EX_GeographicBoundingBox
+                    QStringList coords = wmsLayerMetaInfo.value(layerName).at(4).split(",");
+                    double west = (coords.at(0).toDouble() * 20037508.34) / 180;
+                    double south = 20037508.34 / M_PI * log(tan(((90 + coords.at(1).toDouble()) * M_PI) / 360));
+                    double east = (coords.at(2).toDouble() * 20037508.34) / 180;
+                    double north = 20037508.34 / M_PI * log(tan(((90 + coords.at(3).toDouble()) * M_PI) / 360));
+                    QString bbox = QString("%1,%2,%3,%4").arg(QString::number( west, 'f', 6 )).arg(QString::number( south, 'f', 6 ))
+                                                         .arg(QString::number( east, 'f', 6 )).arg(QString::number( north, 'f', 6 ));
+                    wmsLayerCoordinateSystems[layerName]["epsg:3857"] = bbox;
+                }
+                else */
+                    wmsLayerCoordinateSystems[layerName]["epsg:3857"] = QString();
             }
             if (projection.contains("epsg:4326")) {
-                wmsLayerCoordinateSystems[layerName]["epsg:4326"] = QString();
+/*              if (wmsLayerMetaInfo.value(layerName).at(4) != ",,,") {
+                    wmsLayerCoordinateSystems[layerName]["epsg:4326"] = wmsLayerMetaInfo.value(layerName).at(4); // Ignores flip
+                }
+                else */
+                    wmsLayerCoordinateSystems[layerName]["epsg:4326"] = QString();
             }
         }
         for ( int b = 0; b < layerPreviewBBox.size(); ++b ) {
             QDomElement bboxElement = layerPreviewBBox.at(b).toElement();
-            QString bboxProjection = bboxElement.attribute(m_capabilities.referenceSystemType()).toLower();
+            QString bboxProjection = bboxElement.attribute(m_wmsCapabilities.referenceSystemType()).toLower();
             if (bboxProjection != "epsg:3857" && bboxProjection != "epsg:4326") continue;
             int precision = bboxProjection == "epsg:3857" ? 6 : 12;
             double west = bboxElement.attribute("minx").toDouble();
@@ -502,13 +627,11 @@ void OwsServiceManager::parseWmsCapabilities(QNetworkReply *reply)
             wmsLayerCoordinateSystems[layerName][bboxProjection] = bboxString;
         }
         // FIXME: parse EX_GeographicBoundingBox if wmsLayerCoordinateSystems[layerName]["epsg:4326"/"epsg:3857"] == QString()
-
     }
 
+    m_wmsCapabilities.setWmsLayerCoordinateSystems(wmsLayerCoordinateSystems);
 
-    m_capabilities.setWmsLayerCoordinateSystems(wmsLayerCoordinateSystems);
-
-    QDomNodeList formatList = xml.documentElement().firstChildElement( "Capability" ).firstChildElement( "Request" )
+    QDomNodeList formatList = m_xml.documentElement().firstChildElement( "Capability" ).firstChildElement( "Request" )
             .firstChildElement( "GetMap" ).elementsByTagName("Format");
 
     QStringList formats;
@@ -522,10 +645,73 @@ void OwsServiceManager::parseWmsCapabilities(QNetworkReply *reply)
         }
     }
 
-    m_capabilities.setFormats(formats);
+    m_wmsCapabilities.setFormats(formats);
 
-    m_capabilities.setCapabilitiesStatus(WmsCapabilitiesSuccess);
+    setCapabilitiesStatus(OwsCapabilitiesSuccess);
     emit wmsCapabilitiesReady();
+}
+
+void OwsServiceManager::parseWmtsCapabilities(QNetworkReply *reply)
+{
+    Q_UNUSED(reply)
+
+    m_wmsCapabilities.setVersion( m_xml.documentElement().firstChildElement("ows:ServiceIdentification").firstChildElement("ows:ServiceTypeVersion").text() );
+
+    QDomElement service = m_xml.documentElement().firstChildElement( "ows:ServiceIdentification" );
+    QDomNodeList layers = m_xml.documentElement().firstChildElement( "Contents" ).elementsByTagName("Layer");
+
+    m_wmtsCapabilities.setTitle(service.firstChildElement( "ows:Title" ).text());
+    m_wmtsCapabilities.setAbstract(service.firstChildElement( "ows:Abstract" ).text() );
+
+    QMap<QString, QStringList> wmtsLayerMetaInfo;
+    QMap<QString, QStringList> wmtsTileMatrixSets;
+    QMap<QString, QMap<QString, QString>> wmtsTileResource;
+
+    for( int i = 0; i < layers.size(); ++i )
+    {
+        QString name = layers.at(i).firstChildElement( "ows:Identifier" ).text();
+        QString title = layers.at(i).firstChildElement( "ows:Title" ).text();
+        QString abstract = layers.at(i ).firstChildElement( "ows:Abstract" ).text();
+        QDomElement legendElement = layers.at( i ).firstChildElement( "Style" ).firstChildElement( "LegendURL" );
+        QString legendUrl;
+        if (!legendElement.isNull()) legendUrl = legendElement.attribute( "xlink:href" );
+        QString style = layers.at(i).firstChildElement("Style").firstChildElement( "ows:Identifier" ).text();
+
+        wmtsLayerMetaInfo[ name ] << title << abstract << legendUrl << style;
+
+        QDomNodeList resourceList = layers.at(i).toElement().elementsByTagName("ResourceURL");
+        for (int r = 0; r < resourceList.size(); ++r) {
+            if (resourceList.at(r).toElement().attribute("resourceType") == "tile") {
+                QString format = resourceList.at(r).toElement().attribute("format");
+                QString resultFormat;
+                format = format.right(format.length() - format.indexOf(QLatin1Char('/')) - 1).toLower();
+                if (format == "jpeg" || format.contains("png")
+                    || format.contains("tif") || format.contains("gif")
+                    || format.contains("bmp") || format.contains("jpg") ) {
+                    resultFormat = format;
+                }
+                else {
+                    continue;
+                }
+                QString templ = resourceList.at(r).toElement().attribute("template");
+                wmtsTileResource[name][resultFormat] = templ;
+            }
+        }
+
+        QStringList tileMatrixSets;
+        QDomNodeList tileMatrixLinkList = layers.at(i).toElement().elementsByTagName("TileMatrixSetLink");
+        for (int t = 0; t < tileMatrixLinkList.size(); ++t) {
+            tileMatrixSets << tileMatrixLinkList.at(t).toElement().firstChildElement("TileMatrixSet").text();
+        }
+        wmtsTileMatrixSets[name] = tileMatrixSets;
+    }
+
+    m_wmtsCapabilities.setWmtsTileMatrixSets(wmtsTileMatrixSets);
+    m_wmtsCapabilities.setWmtsTileResource(wmtsTileResource);
+
+    m_wmtsCapabilities.setOwsLayerMetaInfo(wmtsLayerMetaInfo);
+    setCapabilitiesStatus(OwsCapabilitiesSuccess);
+    emit wmtsCapabilitiesReady();
 }
 
 void OwsServiceManager::parseImageResult(QNetworkReply *reply)
