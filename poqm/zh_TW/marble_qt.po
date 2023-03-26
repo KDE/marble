@@ -8621,56 +8621,72 @@ msgctxt "MapViewWidget|"
 msgid "Here you can choose the preferred map view from different topics."
 msgstr "您可以在此選擇想要使用的地圖檢視器。"
 
-#: src/lib/marble/MapWizard.cpp:165
+#: src/lib/marble/MapWizard.cpp:166
 msgctxt "Marble::PreviewDialog|"
 msgid "Preview Map"
 msgstr "預覽地圖"
 
-#: src/lib/marble/MapWizard.cpp:284 src/lib/marble/MapWizard.cpp:289
+#: src/lib/marble/MapWizard.cpp:288 src/lib/marble/MapWizard.cpp:293
 msgctxt "Marble::MapWizard|"
 msgid "Error while parsing"
 msgstr "剖析時發生錯誤"
 
-#: src/lib/marble/MapWizard.cpp:284
+#: src/lib/marble/MapWizard.cpp:288
 msgctxt "Marble::MapWizard|"
 msgid "Wizard cannot parse server's response"
 msgstr "精靈無法剖析伺服器的回應"
 
-#: src/lib/marble/MapWizard.cpp:289
+#: src/lib/marble/MapWizard.cpp:293
+#, fuzzy
+#| msgctxt "Marble::MapWizard|"
+#| msgid "Server is not a Web Map Server."
 msgctxt "Marble::MapWizard|"
-msgid "Server is not a Web Map Server."
+msgid "Server is not an OWS Server."
 msgstr "伺服器不是網頁地圖伺服器。"
 
-#: src/lib/marble/MapWizard.cpp:352 src/lib/marble/MapWizard.cpp:364
-#: src/lib/marble/MapWizard.cpp:1042
+#: src/lib/marble/MapWizard.cpp:376 src/lib/marble/MapWizard.cpp:392
+#: src/lib/marble/MapWizard.cpp:1112
 msgctxt "Marble::MapWizard|"
 msgid "Web Mercator (epsg:3857)"
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:353 src/lib/marble/MapWizard.cpp:770
-#: src/lib/marble/MapWizard.cpp:883
+#: src/lib/marble/MapWizard.cpp:377 src/lib/marble/MapWizard.cpp:819
+#: src/lib/marble/MapWizard.cpp:949
 msgctxt "Marble::MapWizard|"
 msgid "Equirectangular (epsg:4326)"
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:403 src/lib/marble/MapWizard.cpp:874
+#: src/lib/marble/MapWizard.cpp:388
+#, fuzzy
+#| msgctxt "MapViewWidget|"
+#| msgid "&Projection"
+msgctxt "Marble::MapWizard|"
+msgid "Tile Projection:"
+msgstr "投影(&P)"
+
+#: src/lib/marble/MapWizard.cpp:404
+msgctxt "Marble::MapWizard|"
+msgid "Tile Matrix Set:"
+msgstr ""
+
+#: src/lib/marble/MapWizard.cpp:446 src/lib/marble/MapWizard.cpp:940
 msgctxt "Marble::MapWizard|"
 msgid "Preview Image"
 msgstr "預覽影像"
 
-#: src/lib/marble/MapWizard.cpp:407
+#: src/lib/marble/MapWizard.cpp:450
 msgctxt "Marble::MapWizard|"
 msgid "Base Tile"
 msgstr "基底鋪排"
 
-#: src/lib/marble/MapWizard.cpp:411
+#: src/lib/marble/MapWizard.cpp:454
 #, fuzzy
 #| msgid "Legend"
 msgctxt "Marble::MapWizard|"
 msgid "Legend Image"
 msgstr "圖例"
 
-#: src/lib/marble/MapWizard.cpp:418 src/lib/marble/MapWizard.cpp:426
+#: src/lib/marble/MapWizard.cpp:461 src/lib/marble/MapWizard.cpp:469
 #, fuzzy, qt-format
 #| msgctxt "NavigationInfoBar|"
 #| msgid "%1 m"
@@ -8678,7 +8694,7 @@ msgctxt "Marble::MapWizard|"
 msgid "%1"
 msgstr "%1 公尺"
 
-#: src/lib/marble/MapWizard.cpp:419
+#: src/lib/marble/MapWizard.cpp:462
 #, fuzzy, qt-format
 #| msgctxt "Marble::MapWizard|"
 #| msgid "The base tile could not be downloaded."
@@ -8686,7 +8702,7 @@ msgctxt "Marble::MapWizard|"
 msgid "The %1 could not be downloaded."
 msgstr "基底鋪排將不會被下載。"
 
-#: src/lib/marble/MapWizard.cpp:427
+#: src/lib/marble/MapWizard.cpp:470
 #, fuzzy, qt-format
 #| msgctxt "Marble::MapWizard|"
 #| msgid ""
@@ -8703,100 +8719,124 @@ msgstr ""
 "\n"
 "%1"
 
-#: src/lib/marble/MapWizard.cpp:478 src/lib/marble/MapWizard.cpp:479
-#: src/lib/marble/MapWizard.cpp:500
+#: src/lib/marble/MapWizard.cpp:521 src/lib/marble/MapWizard.cpp:522
+#: src/lib/marble/MapWizard.cpp:543
 msgctxt "Marble::MapWizard|"
 msgid "Custom"
 msgstr "自訂"
 
-#: src/lib/marble/MapWizard.cpp:730 src/lib/marble/MapWizard.cpp:733
+#: src/lib/marble/MapWizard.cpp:773 src/lib/marble/MapWizard.cpp:776
 msgctxt "Marble::MapWizard|"
 msgid "Archiving failed"
 msgstr "封存失敗"
 
-#: src/lib/marble/MapWizard.cpp:730
+#: src/lib/marble/MapWizard.cpp:773
 msgctxt "Marble::MapWizard|"
 msgid "Archiving process cannot be started."
 msgstr "封存行程無法啟動。"
 
-#: src/lib/marble/MapWizard.cpp:733
+#: src/lib/marble/MapWizard.cpp:776
 msgctxt "Marble::MapWizard|"
 msgid "Archiving process crashed."
 msgstr "封存行程已崩潰。"
 
-#: src/lib/marble/MapWizard.cpp:803 src/lib/marble/MapWizard.cpp:811
-#: src/lib/marble/MapWizard.cpp:820
+#: src/lib/marble/MapWizard.cpp:869 src/lib/marble/MapWizard.cpp:877
+#: src/lib/marble/MapWizard.cpp:886
 msgctxt "Marble::MapWizard|"
 msgid "Source Image"
 msgstr "來源影像"
 
-#: src/lib/marble/MapWizard.cpp:804
+#: src/lib/marble/MapWizard.cpp:870
 msgctxt "Marble::MapWizard|"
 msgid "Please specify a source image."
 msgstr "請指定來源影像。"
 
-#: src/lib/marble/MapWizard.cpp:812
+#: src/lib/marble/MapWizard.cpp:878
 msgctxt "Marble::MapWizard|"
 msgid ""
 "The source image you specified does not exist. Please specify a different "
 "one."
 msgstr "您指定的來源影像不存在。請指定另外一個。"
 
-#: src/lib/marble/MapWizard.cpp:821
+#: src/lib/marble/MapWizard.cpp:887
 msgctxt "Marble::MapWizard|"
 msgid ""
 "The source image you specified does not seem to be an image. Please specify "
 "a different image file."
 msgstr "您指定的來源影像尋似乎不是影像檔。請指定另外的影像檔。"
 
-#: src/lib/marble/MapWizard.cpp:851
+#: src/lib/marble/MapWizard.cpp:917
 msgctxt "Marble::MapWizard|"
 msgid "Map Title"
 msgstr "地圖標題"
 
-#: src/lib/marble/MapWizard.cpp:851
+#: src/lib/marble/MapWizard.cpp:917
 msgctxt "Marble::MapWizard|"
 msgid "Please specify a map title."
 msgstr "請指定地圖標題。"
 
-#: src/lib/marble/MapWizard.cpp:858 src/lib/marble/MapWizard.cpp:866
+#: src/lib/marble/MapWizard.cpp:924 src/lib/marble/MapWizard.cpp:932
 msgctxt "Marble::MapWizard|"
 msgid "Map Name"
 msgstr "地圖名稱"
 
-#: src/lib/marble/MapWizard.cpp:858
+#: src/lib/marble/MapWizard.cpp:924
 msgctxt "Marble::MapWizard|"
 msgid "Please specify a map name."
 msgstr "請指定地圖名稱。"
 
-#: src/lib/marble/MapWizard.cpp:867
+#: src/lib/marble/MapWizard.cpp:933
 #, qt-format
 msgctxt "Marble::MapWizard|"
 msgid ""
 "Please specify another map name, since there is already a map named \"%1\"."
 msgstr "請指定其它名稱，因為您使用的名稱 %1 已經存在了。"
 
-#: src/lib/marble/MapWizard.cpp:874
+#: src/lib/marble/MapWizard.cpp:940
 msgctxt "Marble::MapWizard|"
 msgid "Please specify a preview image."
 msgstr "請指定預覽影像。"
 
-#: src/lib/marble/MapWizard.cpp:1351
+#: src/lib/marble/MapWizard.cpp:1447
 msgctxt "Marble::MapWizard|"
 msgid "Problem while creating files"
 msgstr "建立檔案時發生問題"
 
-#: src/lib/marble/MapWizard.cpp:1351
+#: src/lib/marble/MapWizard.cpp:1447
 msgctxt "Marble::MapWizard|"
 msgid "Check if a theme with the same name exists."
 msgstr "檢查是否有同名的主題已存在。"
+
+#: src/lib/marble/MapWizard.cpp:1504
+msgctxt "Marble::MapWizard|"
+msgid "WMS Server"
+msgstr ""
+
+#: src/lib/marble/MapWizard.cpp:1505
+msgctxt "Marble::MapWizard|"
+msgid ""
+"<h4>WMS Server</h4>Please choose a <a href=\"https://en.wikipedia.org/wiki/"
+"Web_Map_Service\">WMS</a> server or enter a custom server URL."
+msgstr ""
+
+#: src/lib/marble/MapWizard.cpp:1508
+msgctxt "Marble::MapWizard|"
+msgid "WMTS Server"
+msgstr ""
+
+#: src/lib/marble/MapWizard.cpp:1509
+msgctxt "Marble::MapWizard|"
+msgid ""
+"<h4>WMTS Server</h4>Please choose a <a href=\"https://de.wikipedia.org/wiki/"
+"Web_Map_Tile_Service\">WMTS</a> server or enter a custom server URL."
+msgstr ""
 
 #: src/lib/marble/MapWizard.ui:20
 msgctxt "MapWizard|"
 msgid "Map Theme Creation Wizard"
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:36
+#: src/lib/marble/MapWizard.ui:33
 #, fuzzy
 #| msgid ""
 #| "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
@@ -8860,42 +8900,47 @@ msgstr ""
 "right:0px; -qt-block-indent:0; text-indent:0px;\">http://edu.kde.org/marble</"
 "p></body></html>"
 
-#: src/lib/marble/MapWizard.ui:57
+#: src/lib/marble/MapWizard.ui:54 src/lib/marble/MapWizard.ui:67
 msgctxt "MapWizard|"
 msgid ""
 "Connects to a server on the Internet. The map data is queried via the WMS "
 "protocol."
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:60
+#: src/lib/marble/MapWizard.ui:57
 msgctxt "MapWizard|"
 msgid "Web Map Service (WMS)"
 msgstr ""
 
 #: src/lib/marble/MapWizard.ui:70
 msgctxt "MapWizard|"
+msgid "Web Map Tile Service (WMTS)"
+msgstr ""
+
+#: src/lib/marble/MapWizard.ui:80
+msgctxt "MapWizard|"
 msgid ""
 "You need to provide a bitmap image of a world map that is stored on disk."
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:73
+#: src/lib/marble/MapWizard.ui:83
 msgctxt "MapWizard|"
 msgid "A single image showing the whole world"
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:80
+#: src/lib/marble/MapWizard.ui:90
 msgctxt "MapWizard|"
 msgid ""
 "Connects to a server on the Internet. The map data is queried via a static "
 "URL."
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:83
+#: src/lib/marble/MapWizard.ui:93
 msgctxt "MapWizard|"
 msgid "Online map providing indexed tiles (e.g. Open Street Map)"
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:94
+#: src/lib/marble/MapWizard.ui:104
 #, fuzzy
 #| msgid ""
 #| "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
@@ -8937,29 +8982,29 @@ msgstr ""
 "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
 "weight:600;\">000,0 km/h</span></p></body></html>"
 
-#: src/lib/marble/MapWizard.ui:124
+#: src/lib/marble/MapWizard.ui:134
 msgctxt "MapWizard|"
 msgid "WMS Server:"
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:135 src/lib/marble/MapWizard.ui:159
+#: src/lib/marble/MapWizard.ui:145 src/lib/marble/MapWizard.ui:169
 msgctxt "MapWizard|"
 msgid "Custom"
 msgstr "自訂"
 
-#: src/lib/marble/MapWizard.ui:143
+#: src/lib/marble/MapWizard.ui:153
 msgctxt "MapWizard|"
 msgid "URL:"
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:153
+#: src/lib/marble/MapWizard.ui:163
 msgctxt "MapWizard|"
 msgid ""
 "Enter the base Url of the WMS service (e.g. <i>https://www.wms.nrw.de/"
 "geobasis/wms_nw_dop_overlay</i>)"
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:156 src/lib/marble/MapWizard.ui:455
+#: src/lib/marble/MapWizard.ui:166 src/lib/marble/MapWizard.ui:465
 #, fuzzy
 #| msgctxt "MapWizard|"
 #| msgid "http://"
@@ -8967,26 +9012,26 @@ msgctxt "MapWizard|"
 msgid "https://"
 msgstr "http://"
 
-#: src/lib/marble/MapWizard.ui:208
+#: src/lib/marble/MapWizard.ui:218
 #, fuzzy
 #| msgid "OpenRouteService"
 msgctxt "MapWizard|"
 msgid "Wms-Service:"
 msgstr "OpenRouteService"
 
-#: src/lib/marble/MapWizard.ui:222
+#: src/lib/marble/MapWizard.ui:232
 #, fuzzy
 #| msgid "View Properties"
 msgctxt "MapWizard|"
 msgid "Layer Selection"
 msgstr "檢視屬性"
 
-#: src/lib/marble/MapWizard.ui:233
+#: src/lib/marble/MapWizard.ui:243
 msgctxt "MapWizard|"
 msgid "Choose your Layer(s):"
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:256
+#: src/lib/marble/MapWizard.ui:266
 #, fuzzy
 #| msgctxt "SearchField|"
 #| msgid "Search"
@@ -8994,31 +9039,31 @@ msgctxt "MapWizard|"
 msgid "Search:"
 msgstr "搜尋"
 
-#: src/lib/marble/MapWizard.ui:278
+#: src/lib/marble/MapWizard.ui:288
 msgctxt "MapWizard|"
 msgid ""
 "The order in which multiple layers are selected directly affects their "
 "rendering order."
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:287
+#: src/lib/marble/MapWizard.ui:297
 msgctxt "MapWizard|"
 msgid ""
 "Enable this to select multiple layers without keyboard shortcuts (Shift, "
 "Strg, Strg+A, ...)"
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:290
+#: src/lib/marble/MapWizard.ui:300
 msgctxt "MapWizard|"
 msgid "Multiple Selections"
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:297
+#: src/lib/marble/MapWizard.ui:307
 msgctxt "MapWizard|"
 msgid "Custom Backdrop"
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:304
+#: src/lib/marble/MapWizard.ui:314
 #, fuzzy
 #| msgctxt "MapViewWidget|"
 #| msgid "&Projection"
@@ -9026,46 +9071,46 @@ msgctxt "MapWizard|"
 msgid "Tile Projection:"
 msgstr "投影(&P)"
 
-#: src/lib/marble/MapWizard.ui:311
+#: src/lib/marble/MapWizard.ui:321
 msgctxt "MapWizard|"
 msgid "Indicates the projection in which the tiles are rendered."
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:334
+#: src/lib/marble/MapWizard.ui:344
 msgctxt "MapWizard|"
 msgid "Tile Format:"
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:341
+#: src/lib/marble/MapWizard.ui:351
 msgctxt "MapWizard|"
 msgid "Indicates the file format of the tiles."
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:373
+#: src/lib/marble/MapWizard.ui:383
 #, fuzzy
 #| msgid "View Properties"
 msgctxt "MapWizard|"
 msgid "Layer Info"
 msgstr "檢視屬性"
 
-#: src/lib/marble/MapWizard.ui:386
+#: src/lib/marble/MapWizard.ui:396
 #, fuzzy
 #| msgid "Primary road"
 msgctxt "MapWizard|"
 msgid "Service Info"
 msgstr "主要道路"
 
-#: src/lib/marble/MapWizard.ui:396
+#: src/lib/marble/MapWizard.ui:406
 msgctxt "MapWizard|"
 msgid "Customize Backdrop"
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:407
+#: src/lib/marble/MapWizard.ui:417
 msgctxt "MapWizard|"
 msgid "Preset Layers"
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:427
+#: src/lib/marble/MapWizard.ui:437
 #, fuzzy
 #| msgctxt "DGML|"
 #| msgid "OpenStreetMap"
@@ -9073,27 +9118,27 @@ msgctxt "MapWizard|"
 msgid "OpenStreetMap"
 msgstr "OpenStreetMap"
 
-#: src/lib/marble/MapWizard.ui:442
+#: src/lib/marble/MapWizard.ui:452
 msgctxt "MapWizard|"
 msgid "XYZ Server Url"
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:452
+#: src/lib/marble/MapWizard.ui:462
 msgctxt "MapWizard|"
 msgid "The XYZ server needs to provide map tiles in Mercator projection."
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:469
+#: src/lib/marble/MapWizard.ui:479
 msgctxt "MapWizard|"
 msgid "Color"
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:488
+#: src/lib/marble/MapWizard.ui:498
 msgctxt "MapWizard|"
 msgid "#87CEFA"
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:501
+#: src/lib/marble/MapWizard.ui:511
 #, fuzzy
 #| msgctxt "Marble::AnnotatePlugin|"
 #| msgid "Select Node"
@@ -9101,7 +9146,7 @@ msgctxt "MapWizard|"
 msgid "Select Color"
 msgstr "選取節點"
 
-#: src/lib/marble/MapWizard.ui:544
+#: src/lib/marble/MapWizard.ui:554
 #, fuzzy
 #| msgid ""
 #| "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
@@ -9160,19 +9205,19 @@ msgstr ""
 "right:0px; -qt-block-indent:0; text-indent:0px; font-size:9pt;\">如果您有連線"
 "到網際網路，請點選「維基百科」分頁取得更多資訊。</p></body></html>"
 
-#: src/lib/marble/MapWizard.ui:563
+#: src/lib/marble/MapWizard.ui:573
 #, fuzzy
 #| msgid "Source Image"
 msgctxt "MapWizard|"
 msgid "Source Image:"
 msgstr "來源影像"
 
-#: src/lib/marble/MapWizard.ui:579 src/lib/marble/MapWizard.ui:864
+#: src/lib/marble/MapWizard.ui:589 src/lib/marble/MapWizard.ui:874
 msgctxt "MapWizard|"
 msgid "..."
 msgstr "..."
 
-#: src/lib/marble/MapWizard.ui:605
+#: src/lib/marble/MapWizard.ui:615
 #, fuzzy
 #| msgid ""
 #| "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
@@ -9224,12 +9269,12 @@ msgstr ""
 "right:0px; -qt-block-indent:0; text-indent:0px;\">在較慢的機器上建議使用「低"
 "品質」，速度會比較快一點。</p></body></html>"
 
-#: src/lib/marble/MapWizard.ui:641
+#: src/lib/marble/MapWizard.ui:651
 msgctxt "MapWizard|"
 msgid "URL Scheme:"
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:680
+#: src/lib/marble/MapWizard.ui:690
 #, fuzzy
 #| msgid ""
 #| "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
@@ -9271,43 +9316,43 @@ msgstr ""
 "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
 "weight:600;\">000,0 km/h</span></p></body></html>"
 
-#: src/lib/marble/MapWizard.ui:697
+#: src/lib/marble/MapWizard.ui:707
 #, fuzzy
 #| msgid "Map Title"
 msgctxt "MapWizard|"
 msgid "Map Title:"
 msgstr "地圖標題"
 
-#: src/lib/marble/MapWizard.ui:710
+#: src/lib/marble/MapWizard.ui:720
 msgctxt "MapWizard|"
 msgid "A short concise name for your map theme."
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:717 src/lib/marble/MapWizard.ui:940
+#: src/lib/marble/MapWizard.ui:727 src/lib/marble/MapWizard.ui:950
 #, fuzzy
 #| msgid "Map Name"
 msgctxt "MapWizard|"
 msgid "Map Name:"
 msgstr "地圖名稱"
 
-#: src/lib/marble/MapWizard.ui:727
+#: src/lib/marble/MapWizard.ui:737
 msgctxt "MapWizard|"
 msgid "The lowercase map theme id."
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:730
+#: src/lib/marble/MapWizard.ui:740
 msgctxt "MapWizard|"
 msgid "The folder name of your new theme."
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:743
+#: src/lib/marble/MapWizard.ui:753
 #, fuzzy
 #| msgid "Description"
 msgctxt "MapWizard|"
 msgid "Description:"
 msgstr "描述"
 
-#: src/lib/marble/MapWizard.ui:762
+#: src/lib/marble/MapWizard.ui:772
 msgctxt "MapWizard|"
 msgid ""
 "A short description of your map theme. Here you can provide information "
@@ -9315,45 +9360,45 @@ msgid ""
 "map theme."
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:765
+#: src/lib/marble/MapWizard.ui:775
 msgctxt "MapWizard|"
 msgid "It will appear in a tool tip and may contain HTML formatting."
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:778 src/lib/marble/MapWizard.ui:980
+#: src/lib/marble/MapWizard.ui:788 src/lib/marble/MapWizard.ui:990
 #, fuzzy
 #| msgid "Preview Image"
 msgctxt "MapWizard|"
 msgid "Preview Image:"
 msgstr "預覽影像"
 
-#: src/lib/marble/MapWizard.ui:793
+#: src/lib/marble/MapWizard.ui:803
 #, fuzzy
 #| msgid "Preview Image"
 msgctxt "MapWizard|"
 msgid "preview image"
 msgstr "預覽影像"
 
-#: src/lib/marble/MapWizard.ui:815
+#: src/lib/marble/MapWizard.ui:825
 #, fuzzy
 #| msgid "Changed"
 msgctxt "MapWizard|"
 msgid "Change..."
 msgstr "已變更"
 
-#: src/lib/marble/MapWizard.ui:845
+#: src/lib/marble/MapWizard.ui:855
 msgctxt "MapWizard|"
 msgid "<b>Optional: Addition of a Map Key</b>"
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:854
+#: src/lib/marble/MapWizard.ui:864
 #, fuzzy
 #| msgid "Legend"
 msgctxt "MapWizard|"
 msgid "Legend Image:"
 msgstr "圖例"
 
-#: src/lib/marble/MapWizard.ui:915
+#: src/lib/marble/MapWizard.ui:925
 #, fuzzy
 #| msgid ""
 #| "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
@@ -9416,29 +9461,29 @@ msgstr ""
 "right:0px; -qt-block-indent:0; text-indent:0px;\">http://edu.kde.org/marble</"
 "p></body></html>"
 
-#: src/lib/marble/MapWizard.ui:947
+#: src/lib/marble/MapWizard.ui:957
 msgctxt "MapWizard|"
 msgid "Map name goes here."
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:960
+#: src/lib/marble/MapWizard.ui:970
 #, fuzzy
 #| msgid "&Delete Map Theme"
 msgctxt "MapWizard|"
 msgid "Map Theme:"
 msgstr "刪除地圖主題(&D)"
 
-#: src/lib/marble/MapWizard.ui:967
+#: src/lib/marble/MapWizard.ui:977
 msgctxt "MapWizard|"
 msgid "Map theme goes here."
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:992
+#: src/lib/marble/MapWizard.ui:1002
 msgctxt "MapWizard|"
 msgid "Thumbnail"
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:1002
+#: src/lib/marble/MapWizard.ui:1012
 msgctxt "MapWizard|"
 msgid "Preview Map"
 msgstr "預覽地圖"

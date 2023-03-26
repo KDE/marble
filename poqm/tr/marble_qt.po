@@ -8020,66 +8020,82 @@ msgctxt "MapViewWidget|"
 msgid "Here you can choose the preferred map view from different topics."
 msgstr "Burada, farklı konuardan tercih edilmiş haritaları seçebilirsiniz."
 
-#: src/lib/marble/MapWizard.cpp:165
+#: src/lib/marble/MapWizard.cpp:166
 msgctxt "Marble::PreviewDialog|"
 msgid "Preview Map"
 msgstr "Harita Önizleme"
 
-#: src/lib/marble/MapWizard.cpp:284 src/lib/marble/MapWizard.cpp:289
+#: src/lib/marble/MapWizard.cpp:288 src/lib/marble/MapWizard.cpp:293
 msgctxt "Marble::MapWizard|"
 msgid "Error while parsing"
 msgstr "Ayrıştırılırken hata oluştu"
 
-#: src/lib/marble/MapWizard.cpp:284
+#: src/lib/marble/MapWizard.cpp:288
 msgctxt "Marble::MapWizard|"
 msgid "Wizard cannot parse server's response"
 msgstr "Sihirbaz, sunucudan gelen yanıtı ayrıştıramadı"
 
-#: src/lib/marble/MapWizard.cpp:289
+#: src/lib/marble/MapWizard.cpp:293
+#, fuzzy
+#| msgctxt "Marble::MapWizard|"
+#| msgid "Server is not a Web Map Server."
 msgctxt "Marble::MapWizard|"
-msgid "Server is not a Web Map Server."
+msgid "Server is not an OWS Server."
 msgstr "Sunucu, bir Web Harita Sunucusu değil."
 
-#: src/lib/marble/MapWizard.cpp:352 src/lib/marble/MapWizard.cpp:364
-#: src/lib/marble/MapWizard.cpp:1042
+#: src/lib/marble/MapWizard.cpp:376 src/lib/marble/MapWizard.cpp:392
+#: src/lib/marble/MapWizard.cpp:1112
 msgctxt "Marble::MapWizard|"
 msgid "Web Mercator (epsg:3857)"
 msgstr "Web Mercator'u (epsg:3857)"
 
-#: src/lib/marble/MapWizard.cpp:353 src/lib/marble/MapWizard.cpp:770
-#: src/lib/marble/MapWizard.cpp:883
+#: src/lib/marble/MapWizard.cpp:377 src/lib/marble/MapWizard.cpp:819
+#: src/lib/marble/MapWizard.cpp:949
 msgctxt "Marble::MapWizard|"
 msgid "Equirectangular (epsg:4326)"
 msgstr "Eşdikdörtgen (epsg:4326)"
 
-#: src/lib/marble/MapWizard.cpp:403 src/lib/marble/MapWizard.cpp:874
+#: src/lib/marble/MapWizard.cpp:388
+#, fuzzy
+#| msgctxt "MapWizard|"
+#| msgid "Tile Projection:"
+msgctxt "Marble::MapWizard|"
+msgid "Tile Projection:"
+msgstr "Karo Projeksiyonu:"
+
+#: src/lib/marble/MapWizard.cpp:404
+msgctxt "Marble::MapWizard|"
+msgid "Tile Matrix Set:"
+msgstr ""
+
+#: src/lib/marble/MapWizard.cpp:446 src/lib/marble/MapWizard.cpp:940
 msgctxt "Marble::MapWizard|"
 msgid "Preview Image"
 msgstr "Görseli Önizle"
 
-#: src/lib/marble/MapWizard.cpp:407
+#: src/lib/marble/MapWizard.cpp:450
 msgctxt "Marble::MapWizard|"
 msgid "Base Tile"
 msgstr "Taban Karosu"
 
-#: src/lib/marble/MapWizard.cpp:411
+#: src/lib/marble/MapWizard.cpp:454
 msgctxt "Marble::MapWizard|"
 msgid "Legend Image"
 msgstr "Gösterge Görseli"
 
-#: src/lib/marble/MapWizard.cpp:418 src/lib/marble/MapWizard.cpp:426
+#: src/lib/marble/MapWizard.cpp:461 src/lib/marble/MapWizard.cpp:469
 #, qt-format
 msgctxt "Marble::MapWizard|"
 msgid "%1"
 msgstr "%1"
 
-#: src/lib/marble/MapWizard.cpp:419
+#: src/lib/marble/MapWizard.cpp:462
 #, qt-format
 msgctxt "Marble::MapWizard|"
 msgid "The %1 could not be downloaded."
 msgstr "%1 indirilemedi."
 
-#: src/lib/marble/MapWizard.cpp:427
+#: src/lib/marble/MapWizard.cpp:470
 #, qt-format
 msgctxt "Marble::MapWizard|"
 msgid ""
@@ -8091,46 +8107,46 @@ msgstr ""
 "\n"
 "%2"
 
-#: src/lib/marble/MapWizard.cpp:478 src/lib/marble/MapWizard.cpp:479
-#: src/lib/marble/MapWizard.cpp:500
+#: src/lib/marble/MapWizard.cpp:521 src/lib/marble/MapWizard.cpp:522
+#: src/lib/marble/MapWizard.cpp:543
 msgctxt "Marble::MapWizard|"
 msgid "Custom"
 msgstr "Özel"
 
-#: src/lib/marble/MapWizard.cpp:730 src/lib/marble/MapWizard.cpp:733
+#: src/lib/marble/MapWizard.cpp:773 src/lib/marble/MapWizard.cpp:776
 msgctxt "Marble::MapWizard|"
 msgid "Archiving failed"
 msgstr "Arşivleme başarısız oldu"
 
-#: src/lib/marble/MapWizard.cpp:730
+#: src/lib/marble/MapWizard.cpp:773
 msgctxt "Marble::MapWizard|"
 msgid "Archiving process cannot be started."
 msgstr "Arşivleme süreci başlatılamadı."
 
-#: src/lib/marble/MapWizard.cpp:733
+#: src/lib/marble/MapWizard.cpp:776
 msgctxt "Marble::MapWizard|"
 msgid "Archiving process crashed."
 msgstr "Arşivleme süreci çöktü."
 
-#: src/lib/marble/MapWizard.cpp:803 src/lib/marble/MapWizard.cpp:811
-#: src/lib/marble/MapWizard.cpp:820
+#: src/lib/marble/MapWizard.cpp:869 src/lib/marble/MapWizard.cpp:877
+#: src/lib/marble/MapWizard.cpp:886
 msgctxt "Marble::MapWizard|"
 msgid "Source Image"
 msgstr "Kaynak Görsel"
 
-#: src/lib/marble/MapWizard.cpp:804
+#: src/lib/marble/MapWizard.cpp:870
 msgctxt "Marble::MapWizard|"
 msgid "Please specify a source image."
 msgstr "Lütfen bir kaynak görsel belirtin."
 
-#: src/lib/marble/MapWizard.cpp:812
+#: src/lib/marble/MapWizard.cpp:878
 msgctxt "Marble::MapWizard|"
 msgid ""
 "The source image you specified does not exist. Please specify a different "
 "one."
 msgstr "Belirttiğiniz kaynak görsel yok. Lütfen başka bir tane belirtin."
 
-#: src/lib/marble/MapWizard.cpp:821
+#: src/lib/marble/MapWizard.cpp:887
 msgctxt "Marble::MapWizard|"
 msgid ""
 "The source image you specified does not seem to be an image. Please specify "
@@ -8139,27 +8155,27 @@ msgstr ""
 "Belirttiğiniz kaynak görsel, bir görsel dosyası değil gibi görünüyor. Lütfen "
 "başka bir görsel dosyası belirtin."
 
-#: src/lib/marble/MapWizard.cpp:851
+#: src/lib/marble/MapWizard.cpp:917
 msgctxt "Marble::MapWizard|"
 msgid "Map Title"
 msgstr "Harita Başlığı"
 
-#: src/lib/marble/MapWizard.cpp:851
+#: src/lib/marble/MapWizard.cpp:917
 msgctxt "Marble::MapWizard|"
 msgid "Please specify a map title."
 msgstr "Lütfen bir harita başlığı belirtin."
 
-#: src/lib/marble/MapWizard.cpp:858 src/lib/marble/MapWizard.cpp:866
+#: src/lib/marble/MapWizard.cpp:924 src/lib/marble/MapWizard.cpp:932
 msgctxt "Marble::MapWizard|"
 msgid "Map Name"
 msgstr "Harita Adı"
 
-#: src/lib/marble/MapWizard.cpp:858
+#: src/lib/marble/MapWizard.cpp:924
 msgctxt "Marble::MapWizard|"
 msgid "Please specify a map name."
 msgstr "Lütfen bir harita adı belirtin."
 
-#: src/lib/marble/MapWizard.cpp:867
+#: src/lib/marble/MapWizard.cpp:933
 #, qt-format
 msgctxt "Marble::MapWizard|"
 msgid ""
@@ -8168,27 +8184,57 @@ msgstr ""
 "Lütfen başka bir harita adı belirtin, \"%1\" adında bir harita halihazırda "
 "var."
 
-#: src/lib/marble/MapWizard.cpp:874
+#: src/lib/marble/MapWizard.cpp:940
 msgctxt "Marble::MapWizard|"
 msgid "Please specify a preview image."
 msgstr "Lütfen bir önizleme görseli belirtin."
 
-#: src/lib/marble/MapWizard.cpp:1351
+#: src/lib/marble/MapWizard.cpp:1447
 msgctxt "Marble::MapWizard|"
 msgid "Problem while creating files"
 msgstr "Dosyalar oluşturulurken problem oluştu"
 
-#: src/lib/marble/MapWizard.cpp:1351
+#: src/lib/marble/MapWizard.cpp:1447
 msgctxt "Marble::MapWizard|"
 msgid "Check if a theme with the same name exists."
 msgstr "Aynı adda bir tema oldup olmadığını denetle."
+
+#: src/lib/marble/MapWizard.cpp:1504
+#, fuzzy
+#| msgctxt "MapWizard|"
+#| msgid "WMS Server:"
+msgctxt "Marble::MapWizard|"
+msgid "WMS Server"
+msgstr "WMS Sunucusu:"
+
+#: src/lib/marble/MapWizard.cpp:1505
+msgctxt "Marble::MapWizard|"
+msgid ""
+"<h4>WMS Server</h4>Please choose a <a href=\"https://en.wikipedia.org/wiki/"
+"Web_Map_Service\">WMS</a> server or enter a custom server URL."
+msgstr ""
+
+#: src/lib/marble/MapWizard.cpp:1508
+#, fuzzy
+#| msgctxt "MapWizard|"
+#| msgid "WMS Server:"
+msgctxt "Marble::MapWizard|"
+msgid "WMTS Server"
+msgstr "WMS Sunucusu:"
+
+#: src/lib/marble/MapWizard.cpp:1509
+msgctxt "Marble::MapWizard|"
+msgid ""
+"<h4>WMTS Server</h4>Please choose a <a href=\"https://de.wikipedia.org/wiki/"
+"Web_Map_Tile_Service\">WMTS</a> server or enter a custom server URL."
+msgstr ""
 
 #: src/lib/marble/MapWizard.ui:20
 msgctxt "MapWizard|"
 msgid "Map Theme Creation Wizard"
 msgstr "Harita Teması Oluşturma Sihirbazı"
 
-#: src/lib/marble/MapWizard.ui:36
+#: src/lib/marble/MapWizard.ui:33
 msgctxt "MapWizard|"
 msgid ""
 "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
@@ -8239,7 +8285,7 @@ msgstr ""
 "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"></"
 "p></body></html>"
 
-#: src/lib/marble/MapWizard.ui:57
+#: src/lib/marble/MapWizard.ui:54 src/lib/marble/MapWizard.ui:67
 msgctxt "MapWizard|"
 msgid ""
 "Connects to a server on the Internet. The map data is queried via the WMS "
@@ -8248,12 +8294,20 @@ msgstr ""
 "İnternet üzerinden bir sunucuya bağlanır. Harita, WMS protokolü üzerinden "
 "sorgulanır."
 
-#: src/lib/marble/MapWizard.ui:60
+#: src/lib/marble/MapWizard.ui:57
 msgctxt "MapWizard|"
 msgid "Web Map Service (WMS)"
 msgstr "Web Harita hizmeti (WMS)"
 
 #: src/lib/marble/MapWizard.ui:70
+#, fuzzy
+#| msgctxt "MapWizard|"
+#| msgid "Web Map Service (WMS)"
+msgctxt "MapWizard|"
+msgid "Web Map Tile Service (WMTS)"
+msgstr "Web Harita hizmeti (WMS)"
+
+#: src/lib/marble/MapWizard.ui:80
 msgctxt "MapWizard|"
 msgid ""
 "You need to provide a bitmap image of a world map that is stored on disk."
@@ -8261,12 +8315,12 @@ msgstr ""
 "Disk üzerinde saklanması için dünyanın bir biteşlem görselini temin "
 "etmelisiniz."
 
-#: src/lib/marble/MapWizard.ui:73
+#: src/lib/marble/MapWizard.ui:83
 msgctxt "MapWizard|"
 msgid "A single image showing the whole world"
 msgstr "Tüm dünyayı gösteren tek bir görsel"
 
-#: src/lib/marble/MapWizard.ui:80
+#: src/lib/marble/MapWizard.ui:90
 msgctxt "MapWizard|"
 msgid ""
 "Connects to a server on the Internet. The map data is queried via a static "
@@ -8275,12 +8329,12 @@ msgstr ""
 "İnternet üzerinden bir sunucuya bağlanır. Harita verisi, sabit bir URL "
 "üzerinden sorgulanır."
 
-#: src/lib/marble/MapWizard.ui:83
+#: src/lib/marble/MapWizard.ui:93
 msgctxt "MapWizard|"
 msgid "Online map providing indexed tiles (e.g. Open Street Map)"
 msgstr "İndekslenmiş karolar sağlayan çevrimiçi harita (örn. OpenStreetMap)"
 
-#: src/lib/marble/MapWizard.ui:94
+#: src/lib/marble/MapWizard.ui:104
 msgctxt "MapWizard|"
 msgid ""
 "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
@@ -8315,22 +8369,22 @@ msgstr ""
 "decoration: underline; color:#0057ae;\">WMS</span></a> sunucusu veya özel "
 "bir sunucu URL'si girin.</p></body></html>"
 
-#: src/lib/marble/MapWizard.ui:124
+#: src/lib/marble/MapWizard.ui:134
 msgctxt "MapWizard|"
 msgid "WMS Server:"
 msgstr "WMS Sunucusu:"
 
-#: src/lib/marble/MapWizard.ui:135 src/lib/marble/MapWizard.ui:159
+#: src/lib/marble/MapWizard.ui:145 src/lib/marble/MapWizard.ui:169
 msgctxt "MapWizard|"
 msgid "Custom"
 msgstr "Özel"
 
-#: src/lib/marble/MapWizard.ui:143
+#: src/lib/marble/MapWizard.ui:153
 msgctxt "MapWizard|"
 msgid "URL:"
 msgstr "URL:"
 
-#: src/lib/marble/MapWizard.ui:153
+#: src/lib/marble/MapWizard.ui:163
 msgctxt "MapWizard|"
 msgid ""
 "Enter the base Url of the WMS service (e.g. <i>https://www.wms.nrw.de/"
@@ -8339,32 +8393,32 @@ msgstr ""
 "WMS hizmetinin taban URL'sini girin (örn. <i>https://www.wms.nrw.de/geobasis/"
 "wms_nw_dop_overlay</i>)"
 
-#: src/lib/marble/MapWizard.ui:156 src/lib/marble/MapWizard.ui:455
+#: src/lib/marble/MapWizard.ui:166 src/lib/marble/MapWizard.ui:465
 msgctxt "MapWizard|"
 msgid "https://"
 msgstr "https://"
 
-#: src/lib/marble/MapWizard.ui:208
+#: src/lib/marble/MapWizard.ui:218
 msgctxt "MapWizard|"
 msgid "Wms-Service:"
 msgstr "Wms-Hizmeti:"
 
-#: src/lib/marble/MapWizard.ui:222
+#: src/lib/marble/MapWizard.ui:232
 msgctxt "MapWizard|"
 msgid "Layer Selection"
 msgstr "Katman Seçimi"
 
-#: src/lib/marble/MapWizard.ui:233
+#: src/lib/marble/MapWizard.ui:243
 msgctxt "MapWizard|"
 msgid "Choose your Layer(s):"
 msgstr "Katmanlarınızı seçin:"
 
-#: src/lib/marble/MapWizard.ui:256
+#: src/lib/marble/MapWizard.ui:266
 msgctxt "MapWizard|"
 msgid "Search:"
 msgstr "Ara:"
 
-#: src/lib/marble/MapWizard.ui:278
+#: src/lib/marble/MapWizard.ui:288
 msgctxt "MapWizard|"
 msgid ""
 "The order in which multiple layers are selected directly affects their "
@@ -8373,7 +8427,7 @@ msgstr ""
 "Birden çok katmanın seçilme sırası, onların görüntülenme sıralarını doğrudan "
 "etkiler."
 
-#: src/lib/marble/MapWizard.ui:287
+#: src/lib/marble/MapWizard.ui:297
 msgctxt "MapWizard|"
 msgid ""
 "Enable this to select multiple layers without keyboard shortcuts (Shift, "
@@ -8382,89 +8436,89 @@ msgstr ""
 "Klavye kısayolları olmadan birden çok katmanı seçmek için bunu etkinleştirin "
 "(Shift, Strg, Strg+A, ...)"
 
-#: src/lib/marble/MapWizard.ui:290
+#: src/lib/marble/MapWizard.ui:300
 msgctxt "MapWizard|"
 msgid "Multiple Selections"
 msgstr "Çoklu Seçimler"
 
-#: src/lib/marble/MapWizard.ui:297
+#: src/lib/marble/MapWizard.ui:307
 msgctxt "MapWizard|"
 msgid "Custom Backdrop"
 msgstr "Özel Fon"
 
-#: src/lib/marble/MapWizard.ui:304
+#: src/lib/marble/MapWizard.ui:314
 msgctxt "MapWizard|"
 msgid "Tile Projection:"
 msgstr "Karo Projeksiyonu:"
 
-#: src/lib/marble/MapWizard.ui:311
+#: src/lib/marble/MapWizard.ui:321
 msgctxt "MapWizard|"
 msgid "Indicates the projection in which the tiles are rendered."
 msgstr "Karoların sunulduğu projeksiyonu belirtir."
 
-#: src/lib/marble/MapWizard.ui:334
+#: src/lib/marble/MapWizard.ui:344
 msgctxt "MapWizard|"
 msgid "Tile Format:"
 msgstr "Karo Biçimi:"
 
-#: src/lib/marble/MapWizard.ui:341
+#: src/lib/marble/MapWizard.ui:351
 msgctxt "MapWizard|"
 msgid "Indicates the file format of the tiles."
 msgstr "Karoların dosya biçimini belirtir."
 
-#: src/lib/marble/MapWizard.ui:373
+#: src/lib/marble/MapWizard.ui:383
 msgctxt "MapWizard|"
 msgid "Layer Info"
 msgstr "Katman Bilgisi"
 
-#: src/lib/marble/MapWizard.ui:386
+#: src/lib/marble/MapWizard.ui:396
 msgctxt "MapWizard|"
 msgid "Service Info"
 msgstr "Hizmet Bilgisi"
 
-#: src/lib/marble/MapWizard.ui:396
+#: src/lib/marble/MapWizard.ui:406
 msgctxt "MapWizard|"
 msgid "Customize Backdrop"
 msgstr "Fonu Özelleştir"
 
-#: src/lib/marble/MapWizard.ui:407
+#: src/lib/marble/MapWizard.ui:417
 msgctxt "MapWizard|"
 msgid "Preset Layers"
 msgstr "Önayar Katmanları"
 
-#: src/lib/marble/MapWizard.ui:427
+#: src/lib/marble/MapWizard.ui:437
 msgctxt "MapWizard|"
 msgid "OpenStreetMap"
 msgstr "OpenStreetMap"
 
-#: src/lib/marble/MapWizard.ui:442
+#: src/lib/marble/MapWizard.ui:452
 msgctxt "MapWizard|"
 msgid "XYZ Server Url"
 msgstr "XYZ Sunucu URL'si"
 
-#: src/lib/marble/MapWizard.ui:452
+#: src/lib/marble/MapWizard.ui:462
 msgctxt "MapWizard|"
 msgid "The XYZ server needs to provide map tiles in Mercator projection."
 msgstr ""
 "XYZ sunucusunun harita karolarını Mercator projeksiyonunda sağlaması "
 "gerekiyor."
 
-#: src/lib/marble/MapWizard.ui:469
+#: src/lib/marble/MapWizard.ui:479
 msgctxt "MapWizard|"
 msgid "Color"
 msgstr "Renk"
 
-#: src/lib/marble/MapWizard.ui:488
+#: src/lib/marble/MapWizard.ui:498
 msgctxt "MapWizard|"
 msgid "#87CEFA"
 msgstr "#87CEFA"
 
-#: src/lib/marble/MapWizard.ui:501
+#: src/lib/marble/MapWizard.ui:511
 msgctxt "MapWizard|"
 msgid "Select Color"
 msgstr "Renk Seç"
 
-#: src/lib/marble/MapWizard.ui:544
+#: src/lib/marble/MapWizard.ui:554
 msgctxt "MapWizard|"
 msgid ""
 "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
@@ -8515,17 +8569,17 @@ msgstr ""
 "right:0px; -qt-block-indent:0; text-indent:0px;\"><img src=\":/data/svg/"
 "worldmap.svg\" width=\"150\" /></p></body></html>"
 
-#: src/lib/marble/MapWizard.ui:563
+#: src/lib/marble/MapWizard.ui:573
 msgctxt "MapWizard|"
 msgid "Source Image:"
 msgstr "Kaynak Görsel:"
 
-#: src/lib/marble/MapWizard.ui:579 src/lib/marble/MapWizard.ui:864
+#: src/lib/marble/MapWizard.ui:589 src/lib/marble/MapWizard.ui:874
 msgctxt "MapWizard|"
 msgid "..."
 msgstr "..."
 
-#: src/lib/marble/MapWizard.ui:605
+#: src/lib/marble/MapWizard.ui:615
 msgctxt "MapWizard|"
 msgid ""
 "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
@@ -8572,12 +8626,12 @@ msgstr ""
 "family:'Sans Serif';\"> indeks üzerinden bir karoyu örnek gösterin.</span></"
 "p></body></html>"
 
-#: src/lib/marble/MapWizard.ui:641
+#: src/lib/marble/MapWizard.ui:651
 msgctxt "MapWizard|"
 msgid "URL Scheme:"
 msgstr "URL Şeması:"
 
-#: src/lib/marble/MapWizard.ui:680
+#: src/lib/marble/MapWizard.ui:690
 msgctxt "MapWizard|"
 msgid ""
 "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
@@ -8612,37 +8666,37 @@ msgstr ""
 "simge belirtin. Kullanıcıların haritanızın ne hakkında olduğunu bildirmek "
 "için bir açıklama ekleyin. </span></p></body></html>"
 
-#: src/lib/marble/MapWizard.ui:697
+#: src/lib/marble/MapWizard.ui:707
 msgctxt "MapWizard|"
 msgid "Map Title:"
 msgstr "Harita Başlığı:"
 
-#: src/lib/marble/MapWizard.ui:710
+#: src/lib/marble/MapWizard.ui:720
 msgctxt "MapWizard|"
 msgid "A short concise name for your map theme."
 msgstr "Harita temanız için kısa özet bir ad."
 
-#: src/lib/marble/MapWizard.ui:717 src/lib/marble/MapWizard.ui:940
+#: src/lib/marble/MapWizard.ui:727 src/lib/marble/MapWizard.ui:950
 msgctxt "MapWizard|"
 msgid "Map Name:"
 msgstr "Harita Adı:"
 
-#: src/lib/marble/MapWizard.ui:727
+#: src/lib/marble/MapWizard.ui:737
 msgctxt "MapWizard|"
 msgid "The lowercase map theme id."
 msgstr "Küçük harfle harita tema kimliği."
 
-#: src/lib/marble/MapWizard.ui:730
+#: src/lib/marble/MapWizard.ui:740
 msgctxt "MapWizard|"
 msgid "The folder name of your new theme."
 msgstr "Yeni temanız için klasör adı."
 
-#: src/lib/marble/MapWizard.ui:743
+#: src/lib/marble/MapWizard.ui:753
 msgctxt "MapWizard|"
 msgid "Description:"
 msgstr "Açıklama:"
 
-#: src/lib/marble/MapWizard.ui:762
+#: src/lib/marble/MapWizard.ui:772
 msgctxt "MapWizard|"
 msgid ""
 "A short description of your map theme. Here you can provide information "
@@ -8652,37 +8706,37 @@ msgstr ""
 "Harita temanızın kısa bir açıklama. Burada, harita temanızdaki verilerin "
 "amacı, kökeni, telif hakkı ve lisansıyla ilgili bilgiler koyabilirsiniz."
 
-#: src/lib/marble/MapWizard.ui:765
+#: src/lib/marble/MapWizard.ui:775
 msgctxt "MapWizard|"
 msgid "It will appear in a tool tip and may contain HTML formatting."
 msgstr "Bir ipucu balonu, HTML biçimlendirilmiş metin içerebilir."
 
-#: src/lib/marble/MapWizard.ui:778 src/lib/marble/MapWizard.ui:980
+#: src/lib/marble/MapWizard.ui:788 src/lib/marble/MapWizard.ui:990
 msgctxt "MapWizard|"
 msgid "Preview Image:"
 msgstr "Görseli Önizle:"
 
-#: src/lib/marble/MapWizard.ui:793
+#: src/lib/marble/MapWizard.ui:803
 msgctxt "MapWizard|"
 msgid "preview image"
 msgstr "önizleme görseli"
 
-#: src/lib/marble/MapWizard.ui:815
+#: src/lib/marble/MapWizard.ui:825
 msgctxt "MapWizard|"
 msgid "Change..."
 msgstr "Değiştir..."
 
-#: src/lib/marble/MapWizard.ui:845
+#: src/lib/marble/MapWizard.ui:855
 msgctxt "MapWizard|"
 msgid "<b>Optional: Addition of a Map Key</b>"
 msgstr "<b>İsteğe bağlı: Harita Anahtarı Eklenmesi</b>"
 
-#: src/lib/marble/MapWizard.ui:854
+#: src/lib/marble/MapWizard.ui:864
 msgctxt "MapWizard|"
 msgid "Legend Image:"
 msgstr "Gösterge Görseli:"
 
-#: src/lib/marble/MapWizard.ui:915
+#: src/lib/marble/MapWizard.ui:925
 msgctxt "MapWizard|"
 msgid ""
 "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
@@ -8731,27 +8785,27 @@ msgstr ""
 "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"></"
 "p></body></html>"
 
-#: src/lib/marble/MapWizard.ui:947
+#: src/lib/marble/MapWizard.ui:957
 msgctxt "MapWizard|"
 msgid "Map name goes here."
 msgstr "Harita adı buraya."
 
-#: src/lib/marble/MapWizard.ui:960
+#: src/lib/marble/MapWizard.ui:970
 msgctxt "MapWizard|"
 msgid "Map Theme:"
 msgstr "Harita Teması:"
 
-#: src/lib/marble/MapWizard.ui:967
+#: src/lib/marble/MapWizard.ui:977
 msgctxt "MapWizard|"
 msgid "Map theme goes here."
 msgstr "Harita teması buraya."
 
-#: src/lib/marble/MapWizard.ui:992
+#: src/lib/marble/MapWizard.ui:1002
 msgctxt "MapWizard|"
 msgid "Thumbnail"
 msgstr "Küçük Görsel"
 
-#: src/lib/marble/MapWizard.ui:1002
+#: src/lib/marble/MapWizard.ui:1012
 msgctxt "MapWizard|"
 msgid "Preview Map"
 msgstr "Harita Önizleme"
