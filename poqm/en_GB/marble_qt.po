@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: marble_qt\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2023-03-14 20:55+0000\n"
+"PO-Revision-Date: 2023-03-26 14:41+0100\n"
 "Last-Translator: Steve Allewell <steve.allewell@gmail.com>\n"
 "Language-Team: British English\n"
 "Language: en_GB\n"
@@ -8023,12 +8023,9 @@ msgid "Wizard cannot parse server's response"
 msgstr "Wizard cannot parse server's response"
 
 #: src/lib/marble/MapWizard.cpp:293
-#, fuzzy
-#| msgctxt "Marble::MapWizard|"
-#| msgid "Server is not a Web Map Server."
 msgctxt "Marble::MapWizard|"
 msgid "Server is not an OWS Server."
-msgstr "Server is not a Web Map Server."
+msgstr "Server is not an OWS Server."
 
 #: src/lib/marble/MapWizard.cpp:376 src/lib/marble/MapWizard.cpp:392
 #: src/lib/marble/MapWizard.cpp:1112
@@ -8043,9 +8040,6 @@ msgid "Equirectangular (epsg:4326)"
 msgstr "Equirectangular (epsg:4326)"
 
 #: src/lib/marble/MapWizard.cpp:388
-#, fuzzy
-#| msgctxt "MapWizard|"
-#| msgid "Tile Projection:"
 msgctxt "Marble::MapWizard|"
 msgid "Tile Projection:"
 msgstr "Tile Projection:"
@@ -8053,7 +8047,7 @@ msgstr "Tile Projection:"
 #: src/lib/marble/MapWizard.cpp:404
 msgctxt "Marble::MapWizard|"
 msgid "Tile Matrix Set:"
-msgstr ""
+msgstr "Tile Matrix Set:"
 
 #: src/lib/marble/MapWizard.cpp:446 src/lib/marble/MapWizard.cpp:940
 msgctxt "Marble::MapWizard|"
@@ -8066,45 +8060,33 @@ msgid "Base Tile"
 msgstr "Base Tile"
 
 #: src/lib/marble/MapWizard.cpp:454
-#, fuzzy
-#| msgctxt "MapWizard|"
-#| msgid "Legend Image:"
 msgctxt "Marble::MapWizard|"
 msgid "Legend Image"
-msgstr "Legend Image:"
+msgstr "Legend Image"
 
 #: src/lib/marble/MapWizard.cpp:461 src/lib/marble/MapWizard.cpp:469
-#, fuzzy, qt-format
-#| msgctxt "NavigationInfoBar|"
-#| msgid "%1 m"
+#, qt-format
 msgctxt "Marble::MapWizard|"
 msgid "%1"
-msgstr "%1 m"
+msgstr "%1"
 
 #: src/lib/marble/MapWizard.cpp:462
-#, fuzzy, qt-format
-#| msgctxt "Marble::MapWizard|"
-#| msgid "The base tile could not be downloaded."
+#, qt-format
 msgctxt "Marble::MapWizard|"
 msgid "The %1 could not be downloaded."
-msgstr "The base tile could not be downloaded."
+msgstr "The %1 could not be downloaded."
 
 #: src/lib/marble/MapWizard.cpp:470
-#, fuzzy, qt-format
-#| msgctxt "Marble::MapWizard|"
-#| msgid ""
-#| "The base tile could not be downloaded successfully. The server replied:\n"
-#| "\n"
-#| "%1"
+#, qt-format
 msgctxt "Marble::MapWizard|"
 msgid ""
 "The %1 could not be downloaded successfully. The server replied:\n"
 "\n"
 "%2"
 msgstr ""
-"The base tile could not be downloaded successfully. The server replied:\n"
+"The %1 could not be downloaded successfully. The server replied:\n"
 "\n"
-"%1"
+"%2"
 
 #: src/lib/marble/MapWizard.cpp:521 src/lib/marble/MapWizard.cpp:522
 #: src/lib/marble/MapWizard.cpp:543
@@ -8200,12 +8182,9 @@ msgid "Check if a theme with the same name exists."
 msgstr "Check if a theme with the same name exists."
 
 #: src/lib/marble/MapWizard.cpp:1504
-#, fuzzy
-#| msgctxt "MapWizard|"
-#| msgid "WMS Server:"
 msgctxt "Marble::MapWizard|"
 msgid "WMS Server"
-msgstr "WMS Server:"
+msgstr "WMS Server"
 
 #: src/lib/marble/MapWizard.cpp:1505
 msgctxt "Marble::MapWizard|"
@@ -8213,14 +8192,13 @@ msgid ""
 "<h4>WMS Server</h4>Please choose a <a href=\"https://en.wikipedia.org/wiki/"
 "Web_Map_Service\">WMS</a> server or enter a custom server URL."
 msgstr ""
+"<h4>WMS Server</h4>Please choose a <a href=\"https://en.wikipedia.org/wiki/"
+"Web_Map_Service\">WMS</a> server or enter a custom server URL."
 
 #: src/lib/marble/MapWizard.cpp:1508
-#, fuzzy
-#| msgctxt "MapWizard|"
-#| msgid "WMS Server:"
 msgctxt "Marble::MapWizard|"
 msgid "WMTS Server"
-msgstr "WMS Server:"
+msgstr "WMTS Server"
 
 #: src/lib/marble/MapWizard.cpp:1509
 msgctxt "Marble::MapWizard|"
@@ -8228,6 +8206,8 @@ msgid ""
 "<h4>WMTS Server</h4>Please choose a <a href=\"https://de.wikipedia.org/wiki/"
 "Web_Map_Tile_Service\">WMTS</a> server or enter a custom server URL."
 msgstr ""
+"<h4>WMTS Server</h4>Please choose a <a href=\"https://de.wikipedia.org/wiki/"
+"Web_Map_Tile_Service\">WMTS</a> server or enter a custom server URL."
 
 #: src/lib/marble/MapWizard.ui:20
 msgctxt "MapWizard|"
@@ -8300,12 +8280,9 @@ msgid "Web Map Service (WMS)"
 msgstr "Web Map Service (WMS)"
 
 #: src/lib/marble/MapWizard.ui:70
-#, fuzzy
-#| msgctxt "MapWizard|"
-#| msgid "Web Map Service (WMS)"
 msgctxt "MapWizard|"
 msgid "Web Map Tile Service (WMTS)"
-msgstr "Web Map Service (WMS)"
+msgstr "Web Map Tile Service (WMTS)"
 
 #: src/lib/marble/MapWizard.ui:80
 msgctxt "MapWizard|"
@@ -8398,35 +8375,24 @@ msgid "https://"
 msgstr "https://"
 
 #: src/lib/marble/MapWizard.ui:218
-#, fuzzy
-#| msgctxt ""
-#| "Marble::Placemark|A copy shop provides a service to send documents "
-#| "through fax"
-#| msgid "Fax service"
 msgctxt "MapWizard|"
 msgid "Wms-Service:"
-msgstr "Fax service"
+msgstr "Wms-Service:"
 
 #: src/lib/marble/MapWizard.ui:232
-#, fuzzy
-#| msgctxt "MainScreen|"
-#| msgid "Layer Options"
 msgctxt "MapWizard|"
 msgid "Layer Selection"
-msgstr "Layer Options"
+msgstr "Layer Selection"
 
 #: src/lib/marble/MapWizard.ui:243
 msgctxt "MapWizard|"
 msgid "Choose your Layer(s):"
-msgstr ""
+msgstr "Choose your Layer(s):"
 
 #: src/lib/marble/MapWizard.ui:266
-#, fuzzy
-#| msgctxt "SearchField|"
-#| msgid "Search"
 msgctxt "MapWizard|"
 msgid "Search:"
-msgstr "Search"
+msgstr "Search:"
 
 #: src/lib/marble/MapWizard.ui:288
 msgctxt "MapWizard|"
@@ -8434,6 +8400,8 @@ msgid ""
 "The order in which multiple layers are selected directly affects their "
 "rendering order."
 msgstr ""
+"The order in which multiple layers are selected directly affects their "
+"rendering order."
 
 #: src/lib/marble/MapWizard.ui:297
 msgctxt "MapWizard|"
@@ -8441,16 +8409,18 @@ msgid ""
 "Enable this to select multiple layers without keyboard shortcuts (Shift, "
 "Strg, Strg+A, ...)"
 msgstr ""
+"Enable this to select multiple layers without keyboard shortcuts (Shift, "
+"Strg, Strg+A, ...)"
 
 #: src/lib/marble/MapWizard.ui:300
 msgctxt "MapWizard|"
 msgid "Multiple Selections"
-msgstr ""
+msgstr "Multiple Selections"
 
 #: src/lib/marble/MapWizard.ui:307
 msgctxt "MapWizard|"
 msgid "Custom Backdrop"
-msgstr ""
+msgstr "Custom Backdrop"
 
 #: src/lib/marble/MapWizard.ui:314
 msgctxt "MapWizard|"
@@ -8473,35 +8443,26 @@ msgid "Indicates the file format of the tiles."
 msgstr "Indicates the file format of the tiles."
 
 #: src/lib/marble/MapWizard.ui:383
-#, fuzzy
-#| msgctxt "MainScreen|"
-#| msgid "Layer Options"
 msgctxt "MapWizard|"
 msgid "Layer Info"
-msgstr "Layer Options"
+msgstr "Layer Info"
 
 #: src/lib/marble/MapWizard.ui:396
-#, fuzzy
-#| msgctxt "GeoDataPlacemark|"
-#| msgid "Service Road"
 msgctxt "MapWizard|"
 msgid "Service Info"
-msgstr "Service Road"
+msgstr "Service Info"
 
 #: src/lib/marble/MapWizard.ui:406
 msgctxt "MapWizard|"
 msgid "Customize Backdrop"
-msgstr ""
+msgstr "Customise Backdrop"
 
 #: src/lib/marble/MapWizard.ui:417
 msgctxt "MapWizard|"
 msgid "Preset Layers"
-msgstr ""
+msgstr "Preset Layers"
 
 #: src/lib/marble/MapWizard.ui:437
-#, fuzzy
-#| msgctxt "DGML|"
-#| msgid "OpenStreetMap"
 msgctxt "MapWizard|"
 msgid "OpenStreetMap"
 msgstr "OpenStreetMap"
@@ -8509,17 +8470,14 @@ msgstr "OpenStreetMap"
 #: src/lib/marble/MapWizard.ui:452
 msgctxt "MapWizard|"
 msgid "XYZ Server Url"
-msgstr ""
+msgstr "XYZ Server URL"
 
 #: src/lib/marble/MapWizard.ui:462
 msgctxt "MapWizard|"
 msgid "The XYZ server needs to provide map tiles in Mercator projection."
-msgstr ""
+msgstr "The XYZ server needs to provide map tiles in Mercator projection."
 
 #: src/lib/marble/MapWizard.ui:479
-#, fuzzy
-#| msgctxt "FormattedTextWidget|"
-#| msgid "Color"
 msgctxt "MapWizard|"
 msgid "Color"
 msgstr "Colour"
@@ -8527,15 +8485,12 @@ msgstr "Colour"
 #: src/lib/marble/MapWizard.ui:498
 msgctxt "MapWizard|"
 msgid "#87CEFA"
-msgstr ""
+msgstr "#87CEFA"
 
 #: src/lib/marble/MapWizard.ui:511
-#, fuzzy
-#| msgctxt "UiEditPlacemarkDialog|"
-#| msgid "Style, Color"
 msgctxt "MapWizard|"
 msgid "Select Color"
-msgstr "Style, Colour"
+msgstr "Select Colour"
 
 #: src/lib/marble/MapWizard.ui:554
 msgctxt "MapWizard|"
@@ -8823,7 +8778,7 @@ msgstr "Map theme goes here."
 #: src/lib/marble/MapWizard.ui:1002
 msgctxt "MapWizard|"
 msgid "Thumbnail"
-msgstr ""
+msgstr "Thumbnail"
 
 #: src/lib/marble/MapWizard.ui:1012
 msgctxt "MapWizard|"

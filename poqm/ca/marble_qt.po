@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2023-03-22 13:05+0100\n"
+"PO-Revision-Date: 2023-03-26 11:40+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
@@ -8062,12 +8062,9 @@ msgid "Wizard cannot parse server's response"
 msgstr "L'assistent no ha pogut interpretar la resposta del servidor"
 
 #: src/lib/marble/MapWizard.cpp:293
-#, fuzzy
-#| msgctxt "Marble::MapWizard|"
-#| msgid "Server is not a Web Map Server."
 msgctxt "Marble::MapWizard|"
 msgid "Server is not an OWS Server."
-msgstr "El servidor no és cap servidor web de mapes."
+msgstr "El servidor no és cap servidor OWS."
 
 #: src/lib/marble/MapWizard.cpp:376 src/lib/marble/MapWizard.cpp:392
 #: src/lib/marble/MapWizard.cpp:1112
@@ -8082,9 +8079,6 @@ msgid "Equirectangular (epsg:4326)"
 msgstr "Cilíndrica equidistant (epsg:4326)"
 
 #: src/lib/marble/MapWizard.cpp:388
-#, fuzzy
-#| msgctxt "MapWizard|"
-#| msgid "Tile Projection:"
 msgctxt "Marble::MapWizard|"
 msgid "Tile Projection:"
 msgstr "Projecció de les tessel·les:"
@@ -8092,7 +8086,7 @@ msgstr "Projecció de les tessel·les:"
 #: src/lib/marble/MapWizard.cpp:404
 msgctxt "Marble::MapWizard|"
 msgid "Tile Matrix Set:"
-msgstr ""
+msgstr "Conjunt de matrius de tessel·les:"
 
 #: src/lib/marble/MapWizard.cpp:446 src/lib/marble/MapWizard.cpp:940
 msgctxt "Marble::MapWizard|"
@@ -8228,12 +8222,9 @@ msgid "Check if a theme with the same name exists."
 msgstr "Comprova si existeix un tema amb el mateix nom."
 
 #: src/lib/marble/MapWizard.cpp:1504
-#, fuzzy
-#| msgctxt "MapWizard|"
-#| msgid "WMS Server:"
 msgctxt "Marble::MapWizard|"
 msgid "WMS Server"
-msgstr "Servidor WMS:"
+msgstr "Servidor WMS"
 
 #: src/lib/marble/MapWizard.cpp:1505
 msgctxt "Marble::MapWizard|"
@@ -8241,14 +8232,13 @@ msgid ""
 "<h4>WMS Server</h4>Please choose a <a href=\"https://en.wikipedia.org/wiki/"
 "Web_Map_Service\">WMS</a> server or enter a custom server URL."
 msgstr ""
+"<h4>Servidor WMS</h4>Trieu un servidor <a href=\"https://en.wikipedia.org/"
+"wiki/Web_Map_Service\">WMS</a> o introduïu l'URL d'un servidor personalitzat."
 
 #: src/lib/marble/MapWizard.cpp:1508
-#, fuzzy
-#| msgctxt "MapWizard|"
-#| msgid "WMS Server:"
 msgctxt "Marble::MapWizard|"
 msgid "WMTS Server"
-msgstr "Servidor WMS:"
+msgstr "Servidor WMTS"
 
 #: src/lib/marble/MapWizard.cpp:1509
 msgctxt "Marble::MapWizard|"
@@ -8256,6 +8246,9 @@ msgid ""
 "<h4>WMTS Server</h4>Please choose a <a href=\"https://de.wikipedia.org/wiki/"
 "Web_Map_Tile_Service\">WMTS</a> server or enter a custom server URL."
 msgstr ""
+"<h4>Servidor WMTS</h4>Trieu un servidor <a href=\"https://de.wikipedia.org/"
+"wiki/Web_Map_Tile_Service\">WMTS</a> o introduïu l'URL d'un servidor "
+"personalitzat."
 
 #: src/lib/marble/MapWizard.ui:20
 msgctxt "MapWizard|"
@@ -8329,12 +8322,9 @@ msgid "Web Map Service (WMS)"
 msgstr "Servei web de mapes (WMS)"
 
 #: src/lib/marble/MapWizard.ui:70
-#, fuzzy
-#| msgctxt "MapWizard|"
-#| msgid "Web Map Service (WMS)"
 msgctxt "MapWizard|"
 msgid "Web Map Tile Service (WMTS)"
-msgstr "Servei web de mapes (WMS)"
+msgstr "Servei web de tessel·les de mapes (WMTS)"
 
 #: src/lib/marble/MapWizard.ui:80
 msgctxt "MapWizard|"
