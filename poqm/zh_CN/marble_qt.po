@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
-"PO-Revision-Date: 2023-03-11 04:55\n"
+"PO-Revision-Date: 2023-03-26 02:20\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
 "MIME-Version: 1.0\n"
@@ -3521,7 +3521,7 @@ msgstr "无可用路线。"
 #: src/lib/marble/cloudsync/ConflictDialog.cpp:104
 msgctxt "Marble::ConflictDialog|"
 msgid "Use local"
-msgstr "使用本机书签"
+msgstr "使用本地书签"
 
 #: src/lib/marble/cloudsync/ConflictDialog.cpp:105
 msgctxt "Marble::ConflictDialog|"
@@ -3531,7 +3531,7 @@ msgstr "使用云端书签"
 #: src/lib/marble/cloudsync/ConflictDialog.cpp:106
 msgctxt "Marble::ConflictDialog|"
 msgid "Always use local"
-msgstr "总是使用本机书签"
+msgstr "总是使用本地书签"
 
 #: src/lib/marble/cloudsync/ConflictDialog.cpp:107
 msgctxt "Marble::ConflictDialog|"
@@ -3541,7 +3541,7 @@ msgstr "总是使用云端书签"
 #: src/lib/marble/cloudsync/ConflictDialog.cpp:121
 msgctxt "Marble::ConflictDialog|"
 msgid "Local placemark"
-msgstr "本机地点标记"
+msgstr "本地地点标记"
 
 #: src/lib/marble/cloudsync/ConflictDialog.cpp:122
 #: src/lib/marble/cloudsync/ConflictDialog.cpp:142
@@ -5193,30 +5193,24 @@ msgid "Download Region"
 msgstr "下载区域"
 
 #: src/lib/marble/DownloadRegionDialog.cpp:247
-#, fuzzy
-#| msgctxt "Marble::MapWizard|"
-#| msgid "The base tile could not be downloaded."
 msgctxt "Marble::DownloadRegionDialog|"
 msgid "Tile type to be downloaded:"
-msgstr "无法下载基本图块。"
+msgstr "要下载的图块类型："
 
 #: src/lib/marble/DownloadRegionDialog.cpp:249
 msgctxt "Marble::DownloadRegionDialog|"
 msgid "Texture tiles"
-msgstr ""
+msgstr "纹理图块"
 
 #: src/lib/marble/DownloadRegionDialog.cpp:250
-#, fuzzy
-#| msgctxt "Marble::MapViewWidget|"
-#| msgid "Mercator View"
 msgctxt "Marble::DownloadRegionDialog|"
 msgid "Vector tiles"
-msgstr "墨卡托投影视图"
+msgstr "矢量图块"
 
 #: src/lib/marble/DownloadRegionDialog.cpp:251
 msgctxt "Marble::DownloadRegionDialog|"
 msgid "Allows selection between layer types that are visibly being rendered."
-msgstr ""
+msgstr "允许选择可见的图层类型。"
 
 #: src/lib/marble/DownloadRegionDialog.cpp:520
 #, qt-format
@@ -9744,28 +9738,6 @@ msgid "&About"
 msgstr "关于(&A)"
 
 #: src/lib/marble/MarbleAboutDialog.ui:98
-#, fuzzy
-#| msgctxt "MarbleAboutDialog|"
-#| msgid ""
-#| "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
-#| "REC-html40/strict.dtd\">\n"
-#| "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
-#| "css\">\n"
-#| "p, li { white-space: pre-wrap; }\n"
-#| "</style></head><body style=\" font-family:'Sans Serif'; font-size:10pt; "
-#| "font-weight:400; font-style:normal;\">\n"
-#| "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
-#| "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
-#| "font-size:9pt;\"></p>\n"
-#| "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#| "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
-#| "size:9pt;\">(c) 2007, The Marble Project</span></p>\n"
-#| "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
-#| "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
-#| "font-size:9pt; font-style:italic;\"></p>\n"
-#| "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#| "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
-#| "size:9pt;\">https://edu.kde.org/marble</span></p></body></html>"
 msgctxt "MarbleAboutDialog|"
 msgid ""
 "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
@@ -9806,7 +9778,7 @@ msgstr ""
 "size:9pt; font-style:italic;\"></p>\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
 "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
-"size:9pt;\">https://edu.kde.org/marble</span></p></body></html>"
+"size:9pt;\">https://marble.kde.org/</span></p></body></html>"
 
 #: src/lib/marble/MarbleAboutDialog.ui:116
 msgctxt "MarbleAboutDialog|"
@@ -17243,7 +17215,7 @@ msgstr "纪念碑馆"
 #: src/plugins/runner/local-osm-search/LocalOsmSearchPlugin.cpp:40
 msgctxt "Marble::LocalOsmSearchPlugin|"
 msgid "Local OSM Search"
-msgstr "本机 OSM 搜索"
+msgstr "本地 OSM 搜索"
 
 #: src/plugins/runner/local-osm-search/LocalOsmSearchPlugin.cpp:45
 msgctxt "Marble::LocalOsmSearchPlugin|"
@@ -17299,12 +17271,12 @@ msgstr "东北"
 #: src/plugins/runner/localdatabase/LocalDatabasePlugin.cpp:19
 msgctxt "Marble::LocalDatabasePlugin|"
 msgid "Local Database Search"
-msgstr "本机数据库搜索"
+msgstr "本地数据库搜索"
 
 #: src/plugins/runner/localdatabase/LocalDatabasePlugin.cpp:24
 msgctxt "Marble::LocalDatabasePlugin|"
 msgid "Local Database"
-msgstr "本机数据库"
+msgstr "本地数据库"
 
 #: src/plugins/runner/localdatabase/LocalDatabasePlugin.cpp:39
 msgctxt "Marble::LocalDatabasePlugin|"
