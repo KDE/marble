@@ -7948,9 +7948,6 @@ msgid "Equirectangular (epsg:4326)"
 msgstr ""
 
 #: src/lib/marble/MapWizard.cpp:388
-#, fuzzy
-#| msgctxt "MapWizard|"
-#| msgid "Tile Projection:"
 msgctxt "Marble::MapWizard|"
 msgid "Tile Projection:"
 msgstr "ფილის პროექცია:"
@@ -8085,12 +8082,9 @@ msgid "Check if a theme with the same name exists."
 msgstr ""
 
 #: src/lib/marble/MapWizard.cpp:1504
-#, fuzzy
-#| msgctxt "MapWizard|"
-#| msgid "WMS Server:"
 msgctxt "Marble::MapWizard|"
 msgid "WMS Server"
-msgstr "WMS სერვერი:"
+msgstr "WMS სერვერი"
 
 #: src/lib/marble/MapWizard.cpp:1505
 msgctxt "Marble::MapWizard|"
@@ -8100,12 +8094,9 @@ msgid ""
 msgstr ""
 
 #: src/lib/marble/MapWizard.cpp:1508
-#, fuzzy
-#| msgctxt "MapWizard|"
-#| msgid "WMS Server:"
 msgctxt "Marble::MapWizard|"
 msgid "WMTS Server"
-msgstr "WMS სერვერი:"
+msgstr "WMS სერვერი"
 
 #: src/lib/marble/MapWizard.cpp:1509
 msgctxt "Marble::MapWizard|"

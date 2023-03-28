@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2023-03-22 11:52+0000\n"
+"PO-Revision-Date: 2023-03-27 23:14+0100\n"
 "Last-Translator: José Nuno Coelho Pires <zepires@gmail.com>\n"
 "Language-Team: Portuguese <kde-i18n-doc@kde.org>\n"
 "Language: pt\n"
@@ -101,7 +101,8 @@ msgstr ""
 "X-POFile-SpellExtra: Optometrista Psicoterapeuta Boutique Schuko CEE\n"
 "X-POFile-SpellExtra: CHAdeMO NEMA Tesla Charge Magne BS Roadster glúten\n"
 "X-POFile-SpellExtra: estratosférico tweets Fi Wi skate downhill Skate\n"
-"X-POFile-SpellExtra: Ferry Taoista ffmpeg avconv epsg XYZ CEFA\n"
+"X-POFile-SpellExtra: Ferry Taoista ffmpeg avconv epsg XYZ CEFA OWS ULR\n"
+"X-POFile-SpellExtra: WMTS WTMS\n"
 
 #. file data/maps/moon/clementine/clementine.dgml:5
 msgctxt "DGML|"
@@ -8130,12 +8131,9 @@ msgid "Wizard cannot parse server's response"
 msgstr "O assistente não consegue processar a resposta do servidor"
 
 #: src/lib/marble/MapWizard.cpp:293
-#, fuzzy
-#| msgctxt "Marble::MapWizard|"
-#| msgid "Server is not a Web Map Server."
 msgctxt "Marble::MapWizard|"
 msgid "Server is not an OWS Server."
-msgstr "O servidor não é um Servidor de Mapas na Web."
+msgstr "O servidor não é um Servidor de OWS."
 
 #: src/lib/marble/MapWizard.cpp:376 src/lib/marble/MapWizard.cpp:392
 #: src/lib/marble/MapWizard.cpp:1112
@@ -8150,9 +8148,6 @@ msgid "Equirectangular (epsg:4326)"
 msgstr "Equirectangular (epsg:4326)"
 
 #: src/lib/marble/MapWizard.cpp:388
-#, fuzzy
-#| msgctxt "MapWizard|"
-#| msgid "Tile Projection:"
 msgctxt "Marble::MapWizard|"
 msgid "Tile Projection:"
 msgstr "Projecção dos Padrões:"
@@ -8160,7 +8155,7 @@ msgstr "Projecção dos Padrões:"
 #: src/lib/marble/MapWizard.cpp:404
 msgctxt "Marble::MapWizard|"
 msgid "Tile Matrix Set:"
-msgstr ""
+msgstr "Conjunto da Matriz de Padrões:"
 
 #: src/lib/marble/MapWizard.cpp:446 src/lib/marble/MapWizard.cpp:940
 msgctxt "Marble::MapWizard|"
@@ -8295,9 +8290,6 @@ msgid "Check if a theme with the same name exists."
 msgstr "Verifique se já existe um tema com o mesmo nome."
 
 #: src/lib/marble/MapWizard.cpp:1504
-#, fuzzy
-#| msgctxt "MapWizard|"
-#| msgid "WMS Server:"
 msgctxt "Marble::MapWizard|"
 msgid "WMS Server"
 msgstr "Servidor de WMS:"
@@ -8308,14 +8300,14 @@ msgid ""
 "<h4>WMS Server</h4>Please choose a <a href=\"https://en.wikipedia.org/wiki/"
 "Web_Map_Service\">WMS</a> server or enter a custom server URL."
 msgstr ""
+"<h4>Servidor de WMS</h4>Escolha por favor um servidor de <a href=\"https://"
+"en.wikipedia.org/wiki/Web_Map_Service\">WMS</a> ou indique um ULR de "
+"servidor personalizado."
 
 #: src/lib/marble/MapWizard.cpp:1508
-#, fuzzy
-#| msgctxt "MapWizard|"
-#| msgid "WMS Server:"
 msgctxt "Marble::MapWizard|"
 msgid "WMTS Server"
-msgstr "Servidor de WMS:"
+msgstr "Servidor de WMTS"
 
 #: src/lib/marble/MapWizard.cpp:1509
 msgctxt "Marble::MapWizard|"
@@ -8323,6 +8315,9 @@ msgid ""
 "<h4>WMTS Server</h4>Please choose a <a href=\"https://de.wikipedia.org/wiki/"
 "Web_Map_Tile_Service\">WMTS</a> server or enter a custom server URL."
 msgstr ""
+"<h4>Servidor de WMTS</h4>Escolha por favor um servidor de <a href=\"https://"
+"de.wikipedia.org/wiki/Web_Map_Tile_Service\">WMTS</a> ou indique um URL de "
+"servidor personalizado."
 
 #: src/lib/marble/MapWizard.ui:20
 msgctxt "MapWizard|"
@@ -8395,12 +8390,9 @@ msgid "Web Map Service (WMS)"
 msgstr "Serviço de Mapas Web (WMS)"
 
 #: src/lib/marble/MapWizard.ui:70
-#, fuzzy
-#| msgctxt "MapWizard|"
-#| msgid "Web Map Service (WMS)"
 msgctxt "MapWizard|"
 msgid "Web Map Tile Service (WMTS)"
-msgstr "Serviço de Mapas Web (WMS)"
+msgstr "Serviço de Padrões de Mapas Web (WTMS)"
 
 #: src/lib/marble/MapWizard.ui:80
 msgctxt "MapWizard|"

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
-"PO-Revision-Date: 2023-03-26 02:18\n"
+"PO-Revision-Date: 2023-03-27 11:59\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
 "MIME-Version: 1.0\n"
@@ -7981,12 +7981,9 @@ msgid "Wizard cannot parse server's response"
 msgstr "向导程序无法解析服务器的响应信息"
 
 #: src/lib/marble/MapWizard.cpp:293
-#, fuzzy
-#| msgctxt "Marble::MapWizard|"
-#| msgid "Server is not a Web Map Server."
 msgctxt "Marble::MapWizard|"
 msgid "Server is not an OWS Server."
-msgstr "该服务器并非 Web Map 网络地图服务器。"
+msgstr "该服务器并非 OWS 服务器。"
 
 #: src/lib/marble/MapWizard.cpp:376 src/lib/marble/MapWizard.cpp:392
 #: src/lib/marble/MapWizard.cpp:1112
@@ -8001,9 +7998,6 @@ msgid "Equirectangular (epsg:4326)"
 msgstr "等距圆柱投影 (epsg:4326)"
 
 #: src/lib/marble/MapWizard.cpp:388
-#, fuzzy
-#| msgctxt "MapWizard|"
-#| msgid "Tile Projection:"
 msgctxt "Marble::MapWizard|"
 msgid "Tile Projection:"
 msgstr "图块投影方式："
@@ -8011,7 +8005,7 @@ msgstr "图块投影方式："
 #: src/lib/marble/MapWizard.cpp:404
 msgctxt "Marble::MapWizard|"
 msgid "Tile Matrix Set:"
-msgstr ""
+msgstr "图块矩阵集："
 
 #: src/lib/marble/MapWizard.cpp:446 src/lib/marble/MapWizard.cpp:940
 msgctxt "Marble::MapWizard|"
@@ -8141,12 +8135,9 @@ msgid "Check if a theme with the same name exists."
 msgstr "请检查是否存在具有相同名称的主题。"
 
 #: src/lib/marble/MapWizard.cpp:1504
-#, fuzzy
-#| msgctxt "MapWizard|"
-#| msgid "WMS Server:"
 msgctxt "Marble::MapWizard|"
 msgid "WMS Server"
-msgstr "WMS 服务器："
+msgstr "WMS 服务器"
 
 #: src/lib/marble/MapWizard.cpp:1505
 msgctxt "Marble::MapWizard|"
@@ -8154,14 +8145,13 @@ msgid ""
 "<h4>WMS Server</h4>Please choose a <a href=\"https://en.wikipedia.org/wiki/"
 "Web_Map_Service\">WMS</a> server or enter a custom server URL."
 msgstr ""
+"<h4>WMS 服务器</h4>请选择一个 <a href=\"https://en.wikipedia.org/wiki/"
+"Web_Map_Service\">WMS</a> 服务器，或者输入一个自定义服务器 URL。"
 
 #: src/lib/marble/MapWizard.cpp:1508
-#, fuzzy
-#| msgctxt "MapWizard|"
-#| msgid "WMS Server:"
 msgctxt "Marble::MapWizard|"
 msgid "WMTS Server"
-msgstr "WMS 服务器："
+msgstr "WMTS 服务器"
 
 #: src/lib/marble/MapWizard.cpp:1509
 msgctxt "Marble::MapWizard|"
@@ -8169,6 +8159,8 @@ msgid ""
 "<h4>WMTS Server</h4>Please choose a <a href=\"https://de.wikipedia.org/wiki/"
 "Web_Map_Tile_Service\">WMTS</a> server or enter a custom server URL."
 msgstr ""
+"<h4>WMTS 服务器</h4>请选择一个 <a href=\"https://de.wikipedia.org/wiki/"
+"Web_Map_Tile_Service\">WMTS</a> 服务器，或者输入一个自定义服务器 URL。"
 
 #: src/lib/marble/MapWizard.ui:20
 msgctxt "MapWizard|"
@@ -8236,15 +8228,12 @@ msgstr "连接到互联网上的服务器。地图数据通过 WMS 协议进行�
 #: src/lib/marble/MapWizard.ui:57
 msgctxt "MapWizard|"
 msgid "Web Map Service (WMS)"
-msgstr "网页地图服务 (WMS)"
+msgstr "网络地图服务 (WMS)"
 
 #: src/lib/marble/MapWizard.ui:70
-#, fuzzy
-#| msgctxt "MapWizard|"
-#| msgid "Web Map Service (WMS)"
 msgctxt "MapWizard|"
 msgid "Web Map Tile Service (WMTS)"
-msgstr "网页地图服务 (WMS)"
+msgstr "网络地图图块服务 (WMTS)"
 
 #: src/lib/marble/MapWizard.ui:80
 msgctxt "MapWizard|"
