@@ -19,7 +19,7 @@ msgstr ""
 "Project-Id-Version: marble_qt\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2023-03-23 21:27+0100\n"
+"PO-Revision-Date: 2023-03-28 15:22+0200\n"
 "Last-Translator: Xavier BESNARD <xavier.besnard]neuf.fr>\n"
 "Language-Team: fr\n"
 "Language: fr\n"
@@ -8071,14 +8071,9 @@ msgid "Wizard cannot parse server's response"
 msgstr "L'assistant n'a pas pu analyser la réponse du serveur"
 
 #: src/lib/marble/MapWizard.cpp:293
-#, fuzzy
-#| msgctxt "Marble::MapWizard|"
-#| msgid "Server is not a Web Map Server."
 msgctxt "Marble::MapWizard|"
 msgid "Server is not an OWS Server."
-msgstr ""
-"Le serveur n'est pas un serveur Internet « WMS » de cartographie (Web Map "
-"Server)."
+msgstr "Le serveur Internet n'est pas de type « OWS »."
 
 #: src/lib/marble/MapWizard.cpp:376 src/lib/marble/MapWizard.cpp:392
 #: src/lib/marble/MapWizard.cpp:1112
@@ -8093,9 +8088,6 @@ msgid "Equirectangular (epsg:4326)"
 msgstr "Équi-rectangulaire (epsg : 4326)"
 
 #: src/lib/marble/MapWizard.cpp:388
-#, fuzzy
-#| msgctxt "MapWizard|"
-#| msgid "Tile Projection:"
 msgctxt "Marble::MapWizard|"
 msgid "Tile Projection:"
 msgstr "Projection des tuiles :"
@@ -8103,7 +8095,7 @@ msgstr "Projection des tuiles :"
 #: src/lib/marble/MapWizard.cpp:404
 msgctxt "Marble::MapWizard|"
 msgid "Tile Matrix Set:"
-msgstr ""
+msgstr "Placement de la matrice de tuiles :"
 
 #: src/lib/marble/MapWizard.cpp:446 src/lib/marble/MapWizard.cpp:940
 msgctxt "Marble::MapWizard|"
@@ -8237,12 +8229,9 @@ msgid "Check if a theme with the same name exists."
 msgstr "Vérifier qu'il n'existe pas un thème portant le même nom."
 
 #: src/lib/marble/MapWizard.cpp:1504
-#, fuzzy
-#| msgctxt "MapWizard|"
-#| msgid "WMS Server:"
 msgctxt "Marble::MapWizard|"
 msgid "WMS Server"
-msgstr "Serveur WMS :"
+msgstr "Serveur WMS"
 
 #: src/lib/marble/MapWizard.cpp:1505
 msgctxt "Marble::MapWizard|"
@@ -8250,14 +8239,14 @@ msgid ""
 "<h4>WMS Server</h4>Please choose a <a href=\"https://en.wikipedia.org/wiki/"
 "Web_Map_Service\">WMS</a> server or enter a custom server URL."
 msgstr ""
+"<h4>Serveur WMS</h4>Veuillez sélectionner un serveur <a href=\"https://de."
+"wikipedia.org/wiki/Web_Map_Tile_Service\">WMS</a> ou saisir une URL "
+"personnalisée de serveur."
 
 #: src/lib/marble/MapWizard.cpp:1508
-#, fuzzy
-#| msgctxt "MapWizard|"
-#| msgid "WMS Server:"
 msgctxt "Marble::MapWizard|"
 msgid "WMTS Server"
-msgstr "Serveur WMS :"
+msgstr "Serveur WMTS"
 
 #: src/lib/marble/MapWizard.cpp:1509
 msgctxt "Marble::MapWizard|"
@@ -8265,6 +8254,9 @@ msgid ""
 "<h4>WMTS Server</h4>Please choose a <a href=\"https://de.wikipedia.org/wiki/"
 "Web_Map_Tile_Service\">WMTS</a> server or enter a custom server URL."
 msgstr ""
+"<h4>Serveur WMTS</h4>Veuillez sélectionner un serveur <a href=\"https://de."
+"wikipedia.org/wiki/Web_Map_Tile_Service\">WMTS</a> ou saisir une URL "
+"personnalisée de serveur."
 
 #: src/lib/marble/MapWizard.ui:20
 msgctxt "MapWizard|"
@@ -8338,12 +8330,9 @@ msgid "Web Map Service (WMS)"
 msgstr "Service de Cartes Web (WMS)"
 
 #: src/lib/marble/MapWizard.ui:70
-#, fuzzy
-#| msgctxt "MapWizard|"
-#| msgid "Web Map Service (WMS)"
 msgctxt "MapWizard|"
 msgid "Web Map Tile Service (WMTS)"
-msgstr "Service de Cartes Web (WMS)"
+msgstr "Web Map Tile Service (WMS)"
 
 #: src/lib/marble/MapWizard.ui:80
 msgctxt "MapWizard|"
