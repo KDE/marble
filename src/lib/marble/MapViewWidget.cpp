@@ -641,6 +641,7 @@ QString MapViewWidget::Private::favoriteKey(const QModelIndex &index) const
 
 void MapViewWidget::Private::showContextMenu( const QPoint& pos )
 {
+    qDebug() << Q_FUNC_INFO;
     Q_UNUSED(pos)
     QMenu menu;
 
@@ -656,6 +657,7 @@ void MapViewWidget::Private::showContextMenu( const QPoint& pos )
     if (QFileInfo(MarbleDirs::localPath() + QLatin1String("/maps/") + currentThemePath()).exists()) {
         menu.addAction( tr( "&Delete Map Theme" ), q, SLOT(deleteMap()) );
     }
+    menu.exec( m_mapViewUi.marbleThemeSelectView->mapToGlobal( pos ) );
 }
 
 void MapViewWidget::Private::deleteMap()
