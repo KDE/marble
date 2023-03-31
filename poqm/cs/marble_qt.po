@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: marble_qt\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2023-03-20 14:27+0100\n"
+"PO-Revision-Date: 2023-03-29 16:13+0200\n"
 "Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
 "Language: cs\n"
@@ -7972,7 +7972,7 @@ msgstr ""
 #: src/lib/marble/MapWizard.cpp:293
 msgctxt "Marble::MapWizard|"
 msgid "Server is not an OWS Server."
-msgstr ""
+msgstr "Server není server OWS."
 
 #: src/lib/marble/MapWizard.cpp:376 src/lib/marble/MapWizard.cpp:392
 #: src/lib/marble/MapWizard.cpp:1112
@@ -7987,17 +7987,14 @@ msgid "Equirectangular (epsg:4326)"
 msgstr ""
 
 #: src/lib/marble/MapWizard.cpp:388
-#, fuzzy
-#| msgctxt "MapViewWidget|"
-#| msgid "&Projection"
 msgctxt "Marble::MapWizard|"
 msgid "Tile Projection:"
-msgstr "&Promítání"
+msgstr "Promítání dlaždic:"
 
 #: src/lib/marble/MapWizard.cpp:404
 msgctxt "Marble::MapWizard|"
 msgid "Tile Matrix Set:"
-msgstr ""
+msgstr "Nastavena matice dlaždic:"
 
 #: src/lib/marble/MapWizard.cpp:446 src/lib/marble/MapWizard.cpp:940
 msgctxt "Marble::MapWizard|"
@@ -8124,9 +8121,6 @@ msgid "Check if a theme with the same name exists."
 msgstr ""
 
 #: src/lib/marble/MapWizard.cpp:1504
-#, fuzzy
-#| msgctxt "MapWizard|"
-#| msgid "WMS Server:"
 msgctxt "Marble::MapWizard|"
 msgid "WMS Server"
 msgstr "Server WMS:"
@@ -8139,12 +8133,9 @@ msgid ""
 msgstr ""
 
 #: src/lib/marble/MapWizard.cpp:1508
-#, fuzzy
-#| msgctxt "MapWizard|"
-#| msgid "WMS Server:"
 msgctxt "Marble::MapWizard|"
 msgid "WMTS Server"
-msgstr "Server WMS:"
+msgstr "Server WMTS"
 
 #: src/lib/marble/MapWizard.cpp:1509
 msgctxt "Marble::MapWizard|"
@@ -8201,12 +8192,9 @@ msgid "Web Map Service (WMS)"
 msgstr "Webová Mapová Služba (WMS)"
 
 #: src/lib/marble/MapWizard.ui:70
-#, fuzzy
-#| msgctxt "MapWizard|"
-#| msgid "Web Map Service (WMS)"
 msgctxt "MapWizard|"
 msgid "Web Map Tile Service (WMTS)"
-msgstr "Webová Mapová Služba (WMS)"
+msgstr "Webová Mapová Služba Dlaždic (WMTS)"
 
 #: src/lib/marble/MapWizard.ui:80
 msgctxt "MapWizard|"
@@ -8405,12 +8393,9 @@ msgid "#87CEFA"
 msgstr ""
 
 #: src/lib/marble/MapWizard.ui:511
-#, fuzzy
-#| msgctxt "UiEditPlacemarkDialog|"
-#| msgid "Style, Color"
 msgctxt "MapWizard|"
 msgid "Select Color"
-msgstr "Styl, barva"
+msgstr "Vyberte barvu"
 
 #: src/lib/marble/MapWizard.ui:554
 msgctxt "MapWizard|"
