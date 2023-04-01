@@ -9745,42 +9745,42 @@ msgctxt "Marble::MapViewWidget|"
 msgid "Perspective Globe view"
 msgstr "Perspektievsch Eerball"
 
-#: src/lib/marble/MapViewWidget.cpp:647
+#: src/lib/marble/MapViewWidget.cpp:648
 #, fuzzy
 #| msgid "&Show Large Icons"
 msgctxt "Marble::MapViewWidget|"
 msgid "&Show Large Icons"
 msgstr "&Groot Lüttbiller wiesen"
 
-#: src/lib/marble/MapViewWidget.cpp:650
+#: src/lib/marble/MapViewWidget.cpp:651
 #, fuzzy
 #| msgid "&Favorite"
 msgctxt "Marble::MapViewWidget|"
 msgid "&Favorite"
 msgstr "&Leesteken"
 
-#: src/lib/marble/MapViewWidget.cpp:655
+#: src/lib/marble/MapViewWidget.cpp:656
 #, fuzzy
 #| msgid "&Create a New Map..."
 msgctxt "Marble::MapViewWidget|"
 msgid "&Create a New Map..."
 msgstr "Nieg Koort &opstellen…"
 
-#: src/lib/marble/MapViewWidget.cpp:657
+#: src/lib/marble/MapViewWidget.cpp:658
 #, fuzzy
 #| msgid "&Delete Map Theme"
 msgctxt "Marble::MapViewWidget|"
 msgid "&Delete Map Theme"
 msgstr "Koortmuster weg&doon"
 
-#: src/lib/marble/MapViewWidget.cpp:664
+#: src/lib/marble/MapViewWidget.cpp:666
 #, fuzzy
 #| msgid "Marble"
 msgctxt "Marble::MapViewWidget|"
 msgid "Marble"
 msgstr "Marble"
 
-#: src/lib/marble/MapViewWidget.cpp:665
+#: src/lib/marble/MapViewWidget.cpp:667
 #, fuzzy, qt-format
 #| msgid "Are you sure that you want to delete \"%1\"?"
 msgctxt "Marble::MapViewWidget|"

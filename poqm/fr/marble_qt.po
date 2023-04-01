@@ -7957,32 +7957,32 @@ msgctxt "Marble::MapViewWidget|"
 msgid "Perspective Globe view"
 msgstr "Projection du globe en perspective"
 
-#: src/lib/marble/MapViewWidget.cpp:647
+#: src/lib/marble/MapViewWidget.cpp:648
 msgctxt "Marble::MapViewWidget|"
 msgid "&Show Large Icons"
 msgstr "&Afficher de grandes icônes"
 
-#: src/lib/marble/MapViewWidget.cpp:650
+#: src/lib/marble/MapViewWidget.cpp:651
 msgctxt "Marble::MapViewWidget|"
 msgid "&Favorite"
 msgstr "&Favoris"
 
-#: src/lib/marble/MapViewWidget.cpp:655
+#: src/lib/marble/MapViewWidget.cpp:656
 msgctxt "Marble::MapViewWidget|"
 msgid "&Create a New Map..."
 msgstr "&Créer une nouvelle carte…"
 
-#: src/lib/marble/MapViewWidget.cpp:657
+#: src/lib/marble/MapViewWidget.cpp:658
 msgctxt "Marble::MapViewWidget|"
 msgid "&Delete Map Theme"
 msgstr "&Supprimer le thème de la carte"
 
-#: src/lib/marble/MapViewWidget.cpp:664
+#: src/lib/marble/MapViewWidget.cpp:666
 msgctxt "Marble::MapViewWidget|"
 msgid "Marble"
 msgstr "Marble"
 
-#: src/lib/marble/MapViewWidget.cpp:665
+#: src/lib/marble/MapViewWidget.cpp:667
 #, qt-format
 msgctxt "Marble::MapViewWidget|"
 msgid "Are you sure that you want to delete \"%1\"?"

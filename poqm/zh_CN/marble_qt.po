@@ -7869,32 +7869,32 @@ msgctxt "Marble::MapViewWidget|"
 msgid "Perspective Globe view"
 msgstr "透视球体视图"
 
-#: src/lib/marble/MapViewWidget.cpp:647
+#: src/lib/marble/MapViewWidget.cpp:648
 msgctxt "Marble::MapViewWidget|"
 msgid "&Show Large Icons"
 msgstr "显示大图标(&S)"
 
-#: src/lib/marble/MapViewWidget.cpp:650
+#: src/lib/marble/MapViewWidget.cpp:651
 msgctxt "Marble::MapViewWidget|"
 msgid "&Favorite"
 msgstr "收藏(&F)"
 
-#: src/lib/marble/MapViewWidget.cpp:655
+#: src/lib/marble/MapViewWidget.cpp:656
 msgctxt "Marble::MapViewWidget|"
 msgid "&Create a New Map..."
 msgstr "新建地图(&C)..."
 
-#: src/lib/marble/MapViewWidget.cpp:657
+#: src/lib/marble/MapViewWidget.cpp:658
 msgctxt "Marble::MapViewWidget|"
 msgid "&Delete Map Theme"
 msgstr "删除地图主题(&D)"
 
-#: src/lib/marble/MapViewWidget.cpp:664
+#: src/lib/marble/MapViewWidget.cpp:666
 msgctxt "Marble::MapViewWidget|"
 msgid "Marble"
 msgstr "Marble"
 
-#: src/lib/marble/MapViewWidget.cpp:665
+#: src/lib/marble/MapViewWidget.cpp:667
 #, qt-format
 msgctxt "Marble::MapViewWidget|"
 msgid "Are you sure that you want to delete \"%1\"?"
