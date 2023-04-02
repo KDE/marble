@@ -819,9 +819,6 @@ bool MapWizard::validateCurrentPage()
             QString projection = d->uiWidget.comboBoxWmsMaps->currentText() == tr("Equirectangular (epsg:4326)")
                     ? "epsg:4326" : "epsg:3857";
             QString format = d->uiWidget.comboBoxWmsFormat->currentText();
-            if (format == QLatin1String("jpeg")) {
-                format = "jpg";
-            }
             QStringList styles = d->owsManager.wmsCapabilities().styles(d->selectedLayers);
             d->owsManager.queryWmsPreviewImage(QUrl(d->uiWidget.lineEditWmsUrl->text()),
                         d->selectedLayers.join(','), projection, format, styles.join(','));
@@ -949,9 +946,6 @@ bool MapWizard::validateCurrentPage()
             QString projection = d->uiWidget.comboBoxWmsMaps->currentText() == tr("Equirectangular (epsg:4326)")
                     ? "epsg:4326" : "epsg:3857";
             QString format = d->uiWidget.comboBoxWmsFormat->currentText();
-            if (format == QLatin1String("jpeg")) {
-                format = "jpg";
-            }
             QStringList styles = d->owsManager.wmsCapabilities().styles(d->selectedLayers);
             d->owsManager.queryWmsLevelZeroTile(QUrl(d->uiWidget.lineEditWmsUrl->text()),
                         d->selectedLayers.first(), projection, format, styles.first());
