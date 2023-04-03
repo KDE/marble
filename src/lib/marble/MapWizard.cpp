@@ -332,7 +332,11 @@ void MapWizard::processCapabilitiesResults()
     }
 
     QString serviceInfo;
+    serviceInfo += "<html>";
     serviceInfo += d->owsManager.wmsCapabilities().abstract();
+    serviceInfo += QString("<br><br><i>Contact:</i> %1").arg( d->owsManager.wmsCapabilities().contactInformation());
+    serviceInfo += QString("<br><br><i>Fees:</i> %1").arg( d->owsManager.wmsCapabilities().fees());
+    serviceInfo += "</html>";
 
     d->uiWidget.textEditWmsServiceInfo->setText(serviceInfo);
     d->uiWidget.tabServiceInfo->setEnabled(!serviceInfo.isEmpty());
@@ -424,11 +428,13 @@ void MapWizard::processSelectedLayerInformation()
     d->uiWidget.lineEditTheme->setValidator(validator);
 
     QString description;
+    description += "<html>";
     description += owsCapabilities.abstract(d->selectedLayers.first());
     if (d->owsManager.owsServiceType() == WmsType) {
         description += QString("<br><br><i>Contact:</i> %1").arg( d->owsManager.wmsCapabilities().contactInformation());
         description += QString("<br><br><i>Fees:</i> %1").arg( d->owsManager.wmsCapabilities().fees());
     }
+    description += "</html>";
     d->uiWidget.textEditDesc->setText(description);
 
     QString layerInfo;

@@ -8,6 +8,7 @@
 #include <QUrl>
 #include <QUrlQuery>
 #include <QNetworkReply>
+#include <QAuthenticator>
 
 #include <QBuffer>
 #include <QImageReader>
@@ -259,6 +260,9 @@ OwsServiceManager::OwsServiceManager(QObject *parent)
 {
     connect( &m_capabilitiesAccessManager, &QNetworkAccessManager::finished, this, &OwsServiceManager::parseOwsCapabilities );
     connect( &m_imageAccessManager, &QNetworkAccessManager::finished, this, &OwsServiceManager::parseImageResult );
+
+    connect( &m_capabilitiesAccessManager, &QNetworkAccessManager::authenticationRequired, this, &OwsServiceManager::handleAuthentication );
+    connect( &m_imageAccessManager, &QNetworkAccessManager::authenticationRequired, this, &OwsServiceManager::handleAuthentication );
 }
 
 // https://terramapas.icv.gva.es/sentinel2_20170506_rgb/wmts?
@@ -441,6 +445,14 @@ void OwsServiceManager::queryXYZImage(const QString urlString)
     m_imageAccessManager.get( request );
 }
 
+void OwsServiceManager::handleAuthentication(QNetworkReply *reply, QAuthenticator *authenticator)
+{
+    if (reply->url().host() == QString("api.tileserver.org")) {
+        authenticator->setUser("");
+        authenticator->setPassword("");
+    }
+}
+
 void OwsServiceManager::setCapabilitiesStatus(OwsCapabilitiesStatus capabilitiesStatus)
 {
     m_capabilitiesStatus = capabilitiesStatus;
@@ -548,8 +560,35 @@ void OwsServiceManager::parseWmsCapabilities(QNetworkReply *reply)
     m_wmsCapabilities.setTitle(service.firstChildElement( "Title" ).text());
     m_wmsCapabilities.setAbstract(service.firstChildElement( "Abstract" ).text() );
 
-    QString contactEmail = service.firstChildElement( "ContactInformation").firstChildElement("ContactElectronicMailAddress" ).text();
-    m_wmsCapabilities.setContactInformation(contactEmail);
+    QDomElement contactElement = service.firstChildElement( "ContactInformation");
+    QDomElement contactPersonPrimaryElement = contactElement.firstChildElement("ContactPersonPrimary");
+    QString contactPersonPrimary;
+    if (!contactPersonPrimaryElement.isNull()) {
+        QString contactPerson = contactPersonPrimaryElement.firstChildElement("ContactPerson").text();
+        QString contactOrganisation = contactPersonPrimaryElement.firstChildElement("ContactOrganization").text();
+        contactPersonPrimary = contactPerson + "<br>" + contactOrganisation + "<br>";
+    }
+    QString contactPosition = contactElement.firstChildElement("ContactPosition").text();
+    contactPersonPrimary += contactPosition;
+
+    QDomElement addressElement = contactElement.firstChildElement("ContactAddress");
+    QString postalAddress;
+    if (!addressElement.isNull() && addressElement.firstChildElement("AddressType").text() == "postal") {
+        QString address = addressElement.firstChildElement("Address").text();
+        QString city = addressElement.firstChildElement("City").text();
+        QString stateOrProvince = addressElement.firstChildElement("StateOrProvince").text();
+        QString postalCode = addressElement.firstChildElement("PostCode").text();
+        QString country = addressElement.firstChildElement("Country").text();
+        postalAddress = address + "<br>" + city + "<br>" + stateOrProvince + "<br>" + postalCode + "<br>" + country;
+    }
+    QString contactVoicePhone = contactElement.firstChildElement("ContactVoiceTelephone").text();
+    QString contactFacsimileTelephone = contactElement.firstChildElement("ContactFacsimileTelephone").text();
+    QString contactEmail = contactElement.firstChildElement("ContactElectronicMailAddress" ).text();
+    QString contactMedium = contactVoicePhone + "<br>" + contactFacsimileTelephone + "<br>" + contactEmail;
+
+    QString contactInformation = contactPersonPrimary + "<br><small><font color=\"darkgrey\">" + postalAddress + "<br>" + contactMedium + "</font></small>";
+
+    m_wmsCapabilities.setContactInformation(contactInformation);
     QString fees = service.firstChildElement( "Fees" ).text();
     m_wmsCapabilities.setFees(fees);
 

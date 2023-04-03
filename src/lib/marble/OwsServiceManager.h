@@ -181,6 +181,8 @@ public Q_SLOTS:
     void queryXYZLevelZeroTile(const QString& urlString);
     void queryXYZImage(const QString urlString);    
 
+    void handleAuthentication(QNetworkReply *reply, QAuthenticator *authenticator);
+
     void setCapabilitiesStatus(OwsCapabilitiesStatus capabilitiesStatus);
     OwsCapabilitiesStatus capabilitiesStatus() const;
 
