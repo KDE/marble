@@ -8067,13 +8067,13 @@ msgid "Server is not an OWS Server."
 msgstr "El servidor no és cap servidor OWS."
 
 #: src/lib/marble/MapWizard.cpp:376 src/lib/marble/MapWizard.cpp:392
-#: src/lib/marble/MapWizard.cpp:1112
+#: src/lib/marble/MapWizard.cpp:1106
 msgctxt "Marble::MapWizard|"
 msgid "Web Mercator (epsg:3857)"
 msgstr "Mercator de web (epsg:3857)"
 
 #: src/lib/marble/MapWizard.cpp:377 src/lib/marble/MapWizard.cpp:819
-#: src/lib/marble/MapWizard.cpp:949
+#: src/lib/marble/MapWizard.cpp:946
 msgctxt "Marble::MapWizard|"
 msgid "Equirectangular (epsg:4326)"
 msgstr "Cilíndrica equidistant (epsg:4326)"
@@ -8088,7 +8088,7 @@ msgctxt "Marble::MapWizard|"
 msgid "Tile Matrix Set:"
 msgstr "Conjunt de matrius de tessel·les:"
 
-#: src/lib/marble/MapWizard.cpp:446 src/lib/marble/MapWizard.cpp:940
+#: src/lib/marble/MapWizard.cpp:446 src/lib/marble/MapWizard.cpp:937
 msgctxt "Marble::MapWizard|"
 msgid "Preview Image"
 msgstr "Previsualitza la imatge"
@@ -8148,18 +8148,18 @@ msgctxt "Marble::MapWizard|"
 msgid "Archiving process crashed."
 msgstr "El procés d'arxivament s'ha interromput."
 
-#: src/lib/marble/MapWizard.cpp:869 src/lib/marble/MapWizard.cpp:877
-#: src/lib/marble/MapWizard.cpp:886
+#: src/lib/marble/MapWizard.cpp:866 src/lib/marble/MapWizard.cpp:874
+#: src/lib/marble/MapWizard.cpp:883
 msgctxt "Marble::MapWizard|"
 msgid "Source Image"
 msgstr "Imatge origen"
 
-#: src/lib/marble/MapWizard.cpp:870
+#: src/lib/marble/MapWizard.cpp:867
 msgctxt "Marble::MapWizard|"
 msgid "Please specify a source image."
 msgstr "Especifiqueu una imatge d'origen."
 
-#: src/lib/marble/MapWizard.cpp:878
+#: src/lib/marble/MapWizard.cpp:875
 msgctxt "Marble::MapWizard|"
 msgid ""
 "The source image you specified does not exist. Please specify a different "
@@ -8168,7 +8168,7 @@ msgstr ""
 "La imatge d'origen que heu especificat no existix. Especifiqueu-ne una de "
 "diferent."
 
-#: src/lib/marble/MapWizard.cpp:887
+#: src/lib/marble/MapWizard.cpp:884
 msgctxt "Marble::MapWizard|"
 msgid ""
 "The source image you specified does not seem to be an image. Please specify "
@@ -8177,27 +8177,27 @@ msgstr ""
 "La imatge d'origen que heu especificat no pareix que siga cap imatge. "
 "Especifiqueu un fitxer d'imatge diferent."
 
-#: src/lib/marble/MapWizard.cpp:917
+#: src/lib/marble/MapWizard.cpp:914
 msgctxt "Marble::MapWizard|"
 msgid "Map Title"
 msgstr "Títol del mapa"
 
-#: src/lib/marble/MapWizard.cpp:917
+#: src/lib/marble/MapWizard.cpp:914
 msgctxt "Marble::MapWizard|"
 msgid "Please specify a map title."
 msgstr "Especifiqueu un títol de mapa."
 
-#: src/lib/marble/MapWizard.cpp:924 src/lib/marble/MapWizard.cpp:932
+#: src/lib/marble/MapWizard.cpp:921 src/lib/marble/MapWizard.cpp:929
 msgctxt "Marble::MapWizard|"
 msgid "Map Name"
 msgstr "Nom del mapa"
 
-#: src/lib/marble/MapWizard.cpp:924
+#: src/lib/marble/MapWizard.cpp:921
 msgctxt "Marble::MapWizard|"
 msgid "Please specify a map name."
 msgstr "Especifiqueu un nom de mapa."
 
-#: src/lib/marble/MapWizard.cpp:933
+#: src/lib/marble/MapWizard.cpp:930
 #, qt-format
 msgctxt "Marble::MapWizard|"
 msgid ""
@@ -8205,27 +8205,27 @@ msgid ""
 msgstr ""
 "Especifiqueu un altre nom de mapa, perquè ja hi ha un mapa anomenat «%1»."
 
-#: src/lib/marble/MapWizard.cpp:940
+#: src/lib/marble/MapWizard.cpp:937
 msgctxt "Marble::MapWizard|"
 msgid "Please specify a preview image."
 msgstr "Especifiqueu una imatge de previsualització."
 
-#: src/lib/marble/MapWizard.cpp:1447
+#: src/lib/marble/MapWizard.cpp:1441
 msgctxt "Marble::MapWizard|"
 msgid "Problem while creating files"
 msgstr "S'ha detectat un problema tot creant els fitxers"
 
-#: src/lib/marble/MapWizard.cpp:1447
+#: src/lib/marble/MapWizard.cpp:1441
 msgctxt "Marble::MapWizard|"
 msgid "Check if a theme with the same name exists."
 msgstr "Comprova si existix un tema amb el mateix nom."
 
-#: src/lib/marble/MapWizard.cpp:1504
+#: src/lib/marble/MapWizard.cpp:1498
 msgctxt "Marble::MapWizard|"
 msgid "WMS Server"
 msgstr "Servidor WMS"
 
-#: src/lib/marble/MapWizard.cpp:1505
+#: src/lib/marble/MapWizard.cpp:1499
 msgctxt "Marble::MapWizard|"
 msgid ""
 "<h4>WMS Server</h4>Please choose a <a href=\"https://en.wikipedia.org/wiki/"
@@ -8235,12 +8235,12 @@ msgstr ""
 "org/wiki/Web_Map_Service\">WMS</a> o introduïu l'URL d'un servidor "
 "personalitzat."
 
-#: src/lib/marble/MapWizard.cpp:1508
+#: src/lib/marble/MapWizard.cpp:1502
 msgctxt "Marble::MapWizard|"
 msgid "WMTS Server"
 msgstr "Servidor WMTS"
 
-#: src/lib/marble/MapWizard.cpp:1509
+#: src/lib/marble/MapWizard.cpp:1503
 msgctxt "Marble::MapWizard|"
 msgid ""
 "<h4>WMTS Server</h4>Please choose a <a href=\"https://de.wikipedia.org/wiki/"

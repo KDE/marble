@@ -8425,13 +8425,13 @@ msgid "Server is not an OWS Server."
 msgstr ""
 
 #: src/lib/marble/MapWizard.cpp:376 src/lib/marble/MapWizard.cpp:392
-#: src/lib/marble/MapWizard.cpp:1112
+#: src/lib/marble/MapWizard.cpp:1106
 msgctxt "Marble::MapWizard|"
 msgid "Web Mercator (epsg:3857)"
 msgstr ""
 
 #: src/lib/marble/MapWizard.cpp:377 src/lib/marble/MapWizard.cpp:819
-#: src/lib/marble/MapWizard.cpp:949
+#: src/lib/marble/MapWizard.cpp:946
 msgctxt "Marble::MapWizard|"
 msgid "Equirectangular (epsg:4326)"
 msgstr ""
@@ -8447,7 +8447,7 @@ msgctxt "Marble::MapWizard|"
 msgid "Tile Matrix Set:"
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:446 src/lib/marble/MapWizard.cpp:940
+#: src/lib/marble/MapWizard.cpp:446 src/lib/marble/MapWizard.cpp:937
 #, fuzzy
 msgctxt "Marble::MapWizard|"
 msgid "Preview Image"
@@ -8507,97 +8507,97 @@ msgctxt "Marble::MapWizard|"
 msgid "Archiving process crashed."
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:869 src/lib/marble/MapWizard.cpp:877
-#: src/lib/marble/MapWizard.cpp:886
+#: src/lib/marble/MapWizard.cpp:866 src/lib/marble/MapWizard.cpp:874
+#: src/lib/marble/MapWizard.cpp:883
 msgctxt "Marble::MapWizard|"
 msgid "Source Image"
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:870
+#: src/lib/marble/MapWizard.cpp:867
 #, fuzzy
 msgctxt "Marble::MapWizard|"
 msgid "Please specify a source image."
 msgstr "שם חלופי עבור המיקום."
 
-#: src/lib/marble/MapWizard.cpp:878
+#: src/lib/marble/MapWizard.cpp:875
 msgctxt "Marble::MapWizard|"
 msgid ""
 "The source image you specified does not exist. Please specify a different "
 "one."
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:887
+#: src/lib/marble/MapWizard.cpp:884
 msgctxt "Marble::MapWizard|"
 msgid ""
 "The source image you specified does not seem to be an image. Please specify "
 "a different image file."
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:917
+#: src/lib/marble/MapWizard.cpp:914
 #, fuzzy
 msgctxt "Marble::MapWizard|"
 msgid "Map Title"
 msgstr "תצוגת מפה"
 
-#: src/lib/marble/MapWizard.cpp:917
+#: src/lib/marble/MapWizard.cpp:914
 #, fuzzy
 msgctxt "Marble::MapWizard|"
 msgid "Please specify a map title."
 msgstr "שם חלופי עבור המיקום."
 
-#: src/lib/marble/MapWizard.cpp:924 src/lib/marble/MapWizard.cpp:932
+#: src/lib/marble/MapWizard.cpp:921 src/lib/marble/MapWizard.cpp:929
 #, fuzzy
 msgctxt "Marble::MapWizard|"
 msgid "Map Name"
 msgstr "שם"
 
-#: src/lib/marble/MapWizard.cpp:924
+#: src/lib/marble/MapWizard.cpp:921
 #, fuzzy
 msgctxt "Marble::MapWizard|"
 msgid "Please specify a map name."
 msgstr "שם חלופי עבור המיקום."
 
-#: src/lib/marble/MapWizard.cpp:933
+#: src/lib/marble/MapWizard.cpp:930
 #, qt-format
 msgctxt "Marble::MapWizard|"
 msgid ""
 "Please specify another map name, since there is already a map named \"%1\"."
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:940
+#: src/lib/marble/MapWizard.cpp:937
 #, fuzzy
 msgctxt "Marble::MapWizard|"
 msgid "Please specify a preview image."
 msgstr "שם חלופי עבור המיקום."
 
-#: src/lib/marble/MapWizard.cpp:1447
+#: src/lib/marble/MapWizard.cpp:1441
 msgctxt "Marble::MapWizard|"
 msgid "Problem while creating files"
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:1447
+#: src/lib/marble/MapWizard.cpp:1441
 msgctxt "Marble::MapWizard|"
 msgid "Check if a theme with the same name exists."
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:1504
+#: src/lib/marble/MapWizard.cpp:1498
 msgctxt "Marble::MapWizard|"
 msgid "WMS Server"
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:1505
+#: src/lib/marble/MapWizard.cpp:1499
 msgctxt "Marble::MapWizard|"
 msgid ""
 "<h4>WMS Server</h4>Please choose a <a href=\"https://en.wikipedia.org/wiki/"
 "Web_Map_Service\">WMS</a> server or enter a custom server URL."
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:1508
+#: src/lib/marble/MapWizard.cpp:1502
 msgctxt "Marble::MapWizard|"
 msgid "WMTS Server"
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:1509
+#: src/lib/marble/MapWizard.cpp:1503
 msgctxt "Marble::MapWizard|"
 msgid ""
 "<h4>WMTS Server</h4>Please choose a <a href=\"https://de.wikipedia.org/wiki/"

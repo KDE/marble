@@ -8057,13 +8057,13 @@ msgid "Server is not an OWS Server."
 msgstr "Strežnik ni OWS Server."
 
 #: src/lib/marble/MapWizard.cpp:376 src/lib/marble/MapWizard.cpp:392
-#: src/lib/marble/MapWizard.cpp:1112
+#: src/lib/marble/MapWizard.cpp:1106
 msgctxt "Marble::MapWizard|"
 msgid "Web Mercator (epsg:3857)"
 msgstr "Spletna Mercatorjeva (epsg:3857)"
 
 #: src/lib/marble/MapWizard.cpp:377 src/lib/marble/MapWizard.cpp:819
-#: src/lib/marble/MapWizard.cpp:949
+#: src/lib/marble/MapWizard.cpp:946
 msgctxt "Marble::MapWizard|"
 msgid "Equirectangular (epsg:4326)"
 msgstr "Enakostranična (epsg:4326)"
@@ -8078,7 +8078,7 @@ msgctxt "Marble::MapWizard|"
 msgid "Tile Matrix Set:"
 msgstr "Nabor matrike ploščice:"
 
-#: src/lib/marble/MapWizard.cpp:446 src/lib/marble/MapWizard.cpp:940
+#: src/lib/marble/MapWizard.cpp:446 src/lib/marble/MapWizard.cpp:937
 msgctxt "Marble::MapWizard|"
 msgid "Preview Image"
 msgstr "Slika za predogled"
@@ -8138,25 +8138,25 @@ msgctxt "Marble::MapWizard|"
 msgid "Archiving process crashed."
 msgstr "Opravilo arhiviranja se je nepredvideno prekinilo."
 
-#: src/lib/marble/MapWizard.cpp:869 src/lib/marble/MapWizard.cpp:877
-#: src/lib/marble/MapWizard.cpp:886
+#: src/lib/marble/MapWizard.cpp:866 src/lib/marble/MapWizard.cpp:874
+#: src/lib/marble/MapWizard.cpp:883
 msgctxt "Marble::MapWizard|"
 msgid "Source Image"
 msgstr "Izvorna slika"
 
-#: src/lib/marble/MapWizard.cpp:870
+#: src/lib/marble/MapWizard.cpp:867
 msgctxt "Marble::MapWizard|"
 msgid "Please specify a source image."
 msgstr "Navedite izvorno sliko."
 
-#: src/lib/marble/MapWizard.cpp:878
+#: src/lib/marble/MapWizard.cpp:875
 msgctxt "Marble::MapWizard|"
 msgid ""
 "The source image you specified does not exist. Please specify a different "
 "one."
 msgstr "Navedena izvorna slika ne obstaja. Navedite drugo."
 
-#: src/lib/marble/MapWizard.cpp:887
+#: src/lib/marble/MapWizard.cpp:884
 msgctxt "Marble::MapWizard|"
 msgid ""
 "The source image you specified does not seem to be an image. Please specify "
@@ -8165,54 +8165,54 @@ msgstr ""
 "Videti je, da navedena izvorna slika ni slika. Navedite drugo slikovno "
 "datoteko."
 
-#: src/lib/marble/MapWizard.cpp:917
+#: src/lib/marble/MapWizard.cpp:914
 msgctxt "Marble::MapWizard|"
 msgid "Map Title"
 msgstr "Naslov karte"
 
-#: src/lib/marble/MapWizard.cpp:917
+#: src/lib/marble/MapWizard.cpp:914
 msgctxt "Marble::MapWizard|"
 msgid "Please specify a map title."
 msgstr "Navedite naslov karte."
 
-#: src/lib/marble/MapWizard.cpp:924 src/lib/marble/MapWizard.cpp:932
+#: src/lib/marble/MapWizard.cpp:921 src/lib/marble/MapWizard.cpp:929
 msgctxt "Marble::MapWizard|"
 msgid "Map Name"
 msgstr "Ime karte"
 
-#: src/lib/marble/MapWizard.cpp:924
+#: src/lib/marble/MapWizard.cpp:921
 msgctxt "Marble::MapWizard|"
 msgid "Please specify a map name."
 msgstr "Navedite ime karte."
 
-#: src/lib/marble/MapWizard.cpp:933
+#: src/lib/marble/MapWizard.cpp:930
 #, qt-format
 msgctxt "Marble::MapWizard|"
 msgid ""
 "Please specify another map name, since there is already a map named \"%1\"."
 msgstr "Karta z imenom »%1« že obstaja. Navedite drugo ime karte."
 
-#: src/lib/marble/MapWizard.cpp:940
+#: src/lib/marble/MapWizard.cpp:937
 msgctxt "Marble::MapWizard|"
 msgid "Please specify a preview image."
 msgstr "Navedite sliko za predogled."
 
-#: src/lib/marble/MapWizard.cpp:1447
+#: src/lib/marble/MapWizard.cpp:1441
 msgctxt "Marble::MapWizard|"
 msgid "Problem while creating files"
 msgstr "Težava med ustvarjanjem datotek"
 
-#: src/lib/marble/MapWizard.cpp:1447
+#: src/lib/marble/MapWizard.cpp:1441
 msgctxt "Marble::MapWizard|"
 msgid "Check if a theme with the same name exists."
 msgstr "Preverite, ali tema z enakim imenom že obstaja."
 
-#: src/lib/marble/MapWizard.cpp:1504
+#: src/lib/marble/MapWizard.cpp:1498
 msgctxt "Marble::MapWizard|"
 msgid "WMS Server"
 msgstr "Strežnik WMS"
 
-#: src/lib/marble/MapWizard.cpp:1505
+#: src/lib/marble/MapWizard.cpp:1499
 msgctxt "Marble::MapWizard|"
 msgid ""
 "<h4>WMS Server</h4>Please choose a <a href=\"https://en.wikipedia.org/wiki/"
@@ -8221,12 +8221,12 @@ msgstr ""
 "<h4>Strežnik WMS</h4>Izberite strežnik <a href=\"https://en.wikipedia.org/"
 "wiki/Web_Map_Service\">WMS</a> ali vnesite naslov strežnika po meri."
 
-#: src/lib/marble/MapWizard.cpp:1508
+#: src/lib/marble/MapWizard.cpp:1502
 msgctxt "Marble::MapWizard|"
 msgid "WMTS Server"
 msgstr "Strežnik WMS"
 
-#: src/lib/marble/MapWizard.cpp:1509
+#: src/lib/marble/MapWizard.cpp:1503
 msgctxt "Marble::MapWizard|"
 msgid ""
 "<h4>WMTS Server</h4>Please choose a <a href=\"https://de.wikipedia.org/wiki/"
