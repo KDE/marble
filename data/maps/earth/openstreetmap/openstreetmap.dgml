@@ -45,16 +45,6 @@
            <downloadUrl protocol="https" host="tile-b.openstreetmap.fr" path="/hot/"/>
           <blending name="AlphaBlending"/>
          </texture>
-        <texture name="hillshading" expire="31536000">
-          <sourcedir format="PNG"> earth/hillshading </sourcedir>
-          <tileSize width="256" height="256"/>
-          <storageLayout levelZeroColumns="1" levelZeroRows="1" maximumTileLevel="17" mode="OpenStreetMap"/>
-          <projection name="Mercator"/>
-          <downloadUrl protocol="http" host="a.tiles.wmflabs.org" path="/hillshading/"/>
-          <downloadUrl protocol="http" host="b.tiles.wmflabs.org" path="/hillshading/"/>
-          <downloadUrl protocol="http" host="c.tiles.wmflabs.org" path="/hillshading/"/>
-          <blending name="AlphaBlending"/>
-        </texture>
       </layer>
       <layer name="standardplaces" backend="geodata">
         <geodata name="cityplacemarks">
@@ -114,10 +104,6 @@
            <value>false</value>
            <available>true</available>
          </property>
-        <property name="hillshading">
-          <value>false</value>
-          <available>true</available>
-        </property>
       </group>
     </settings>
     <legend>
@@ -131,9 +117,6 @@
 
       <section name="coordinate-grid" checkable="true" connect="coordinate-grid" spacing="12">
         <heading>Coordinate Grid</heading>
-      </section>
-      <section name="hillshading" checkable="true" connect="hillshading" spacing="12">
-        <heading>Hillshading</heading>
       </section>
       <section name="humanitarian" checkable="true" connect="humanitarian" spacing="12">
          <heading>Humanitarian OSM Team</heading>
