@@ -7985,56 +7985,56 @@ msgctxt "Marble::MapWizard|"
 msgid "Server is not an OWS Server."
 msgstr "该服务器并非 OWS 服务器。"
 
-#: src/lib/marble/MapWizard.cpp:376 src/lib/marble/MapWizard.cpp:392
-#: src/lib/marble/MapWizard.cpp:1106
+#: src/lib/marble/MapWizard.cpp:380 src/lib/marble/MapWizard.cpp:396
+#: src/lib/marble/MapWizard.cpp:1112
 msgctxt "Marble::MapWizard|"
 msgid "Web Mercator (epsg:3857)"
 msgstr "网格墨卡托投影 (epsg:3857)"
 
-#: src/lib/marble/MapWizard.cpp:377 src/lib/marble/MapWizard.cpp:819
-#: src/lib/marble/MapWizard.cpp:946
+#: src/lib/marble/MapWizard.cpp:381 src/lib/marble/MapWizard.cpp:825
+#: src/lib/marble/MapWizard.cpp:952
 msgctxt "Marble::MapWizard|"
 msgid "Equirectangular (epsg:4326)"
 msgstr "等距圆柱投影 (epsg:4326)"
 
-#: src/lib/marble/MapWizard.cpp:388
+#: src/lib/marble/MapWizard.cpp:392
 msgctxt "Marble::MapWizard|"
 msgid "Tile Projection:"
 msgstr "图块投影方式："
 
-#: src/lib/marble/MapWizard.cpp:404
+#: src/lib/marble/MapWizard.cpp:408
 msgctxt "Marble::MapWizard|"
 msgid "Tile Matrix Set:"
 msgstr "图块矩阵集："
 
-#: src/lib/marble/MapWizard.cpp:446 src/lib/marble/MapWizard.cpp:937
+#: src/lib/marble/MapWizard.cpp:452 src/lib/marble/MapWizard.cpp:943
 msgctxt "Marble::MapWizard|"
 msgid "Preview Image"
 msgstr "预览图像"
 
-#: src/lib/marble/MapWizard.cpp:450
+#: src/lib/marble/MapWizard.cpp:456
 msgctxt "Marble::MapWizard|"
 msgid "Base Tile"
 msgstr "基本图块"
 
-#: src/lib/marble/MapWizard.cpp:454
+#: src/lib/marble/MapWizard.cpp:460
 msgctxt "Marble::MapWizard|"
 msgid "Legend Image"
 msgstr "图例图像"
 
-#: src/lib/marble/MapWizard.cpp:461 src/lib/marble/MapWizard.cpp:469
+#: src/lib/marble/MapWizard.cpp:467 src/lib/marble/MapWizard.cpp:475
 #, qt-format
 msgctxt "Marble::MapWizard|"
 msgid "%1"
 msgstr "%1"
 
-#: src/lib/marble/MapWizard.cpp:462
+#: src/lib/marble/MapWizard.cpp:468
 #, qt-format
 msgctxt "Marble::MapWizard|"
 msgid "The %1 could not be downloaded."
 msgstr "无法下载 %1。"
 
-#: src/lib/marble/MapWizard.cpp:470
+#: src/lib/marble/MapWizard.cpp:476
 #, qt-format
 msgctxt "Marble::MapWizard|"
 msgid ""
@@ -8046,100 +8046,100 @@ msgstr ""
 "\n"
 "%2"
 
-#: src/lib/marble/MapWizard.cpp:521 src/lib/marble/MapWizard.cpp:522
-#: src/lib/marble/MapWizard.cpp:543
+#: src/lib/marble/MapWizard.cpp:527 src/lib/marble/MapWizard.cpp:528
+#: src/lib/marble/MapWizard.cpp:549
 msgctxt "Marble::MapWizard|"
 msgid "Custom"
 msgstr "自定义"
 
-#: src/lib/marble/MapWizard.cpp:773 src/lib/marble/MapWizard.cpp:776
+#: src/lib/marble/MapWizard.cpp:779 src/lib/marble/MapWizard.cpp:782
 msgctxt "Marble::MapWizard|"
 msgid "Archiving failed"
 msgstr "打包失败"
 
-#: src/lib/marble/MapWizard.cpp:773
+#: src/lib/marble/MapWizard.cpp:779
 msgctxt "Marble::MapWizard|"
 msgid "Archiving process cannot be started."
 msgstr "打包进程无法启动。"
 
-#: src/lib/marble/MapWizard.cpp:776
+#: src/lib/marble/MapWizard.cpp:782
 msgctxt "Marble::MapWizard|"
 msgid "Archiving process crashed."
 msgstr "打包进程已崩溃。"
 
-#: src/lib/marble/MapWizard.cpp:866 src/lib/marble/MapWizard.cpp:874
-#: src/lib/marble/MapWizard.cpp:883
+#: src/lib/marble/MapWizard.cpp:872 src/lib/marble/MapWizard.cpp:880
+#: src/lib/marble/MapWizard.cpp:889
 msgctxt "Marble::MapWizard|"
 msgid "Source Image"
 msgstr "来源图像"
 
-#: src/lib/marble/MapWizard.cpp:867
+#: src/lib/marble/MapWizard.cpp:873
 msgctxt "Marble::MapWizard|"
 msgid "Please specify a source image."
 msgstr "请指定一张来源图片。"
 
-#: src/lib/marble/MapWizard.cpp:875
+#: src/lib/marble/MapWizard.cpp:881
 msgctxt "Marble::MapWizard|"
 msgid ""
 "The source image you specified does not exist. Please specify a different "
 "one."
 msgstr "您指定的来源图像不存在，请指定另一张图像。"
 
-#: src/lib/marble/MapWizard.cpp:884
+#: src/lib/marble/MapWizard.cpp:890
 msgctxt "Marble::MapWizard|"
 msgid ""
 "The source image you specified does not seem to be an image. Please specify "
 "a different image file."
 msgstr "您指定的来源图像并非图像文件，请指定另一个图像文件。"
 
-#: src/lib/marble/MapWizard.cpp:914
+#: src/lib/marble/MapWizard.cpp:920
 msgctxt "Marble::MapWizard|"
 msgid "Map Title"
 msgstr "地图标题"
 
-#: src/lib/marble/MapWizard.cpp:914
+#: src/lib/marble/MapWizard.cpp:920
 msgctxt "Marble::MapWizard|"
 msgid "Please specify a map title."
 msgstr "请指定一个地图标题。"
 
-#: src/lib/marble/MapWizard.cpp:921 src/lib/marble/MapWizard.cpp:929
+#: src/lib/marble/MapWizard.cpp:927 src/lib/marble/MapWizard.cpp:935
 msgctxt "Marble::MapWizard|"
 msgid "Map Name"
 msgstr "地图名称"
 
-#: src/lib/marble/MapWizard.cpp:921
+#: src/lib/marble/MapWizard.cpp:927
 msgctxt "Marble::MapWizard|"
 msgid "Please specify a map name."
 msgstr "请指定一个地图名称。"
 
-#: src/lib/marble/MapWizard.cpp:930
+#: src/lib/marble/MapWizard.cpp:936
 #, qt-format
 msgctxt "Marble::MapWizard|"
 msgid ""
 "Please specify another map name, since there is already a map named \"%1\"."
 msgstr "请指定另一个地图名称，因为已存在名为“%1”的地图。"
 
-#: src/lib/marble/MapWizard.cpp:937
+#: src/lib/marble/MapWizard.cpp:943
 msgctxt "Marble::MapWizard|"
 msgid "Please specify a preview image."
 msgstr "请指定一张预览图像。"
 
-#: src/lib/marble/MapWizard.cpp:1441
+#: src/lib/marble/MapWizard.cpp:1447
 msgctxt "Marble::MapWizard|"
 msgid "Problem while creating files"
 msgstr "创建文件时发生错误"
 
-#: src/lib/marble/MapWizard.cpp:1441
+#: src/lib/marble/MapWizard.cpp:1447
 msgctxt "Marble::MapWizard|"
 msgid "Check if a theme with the same name exists."
 msgstr "请检查是否存在具有相同名称的主题。"
 
-#: src/lib/marble/MapWizard.cpp:1498
+#: src/lib/marble/MapWizard.cpp:1504
 msgctxt "Marble::MapWizard|"
 msgid "WMS Server"
 msgstr "WMS 服务器"
 
-#: src/lib/marble/MapWizard.cpp:1499
+#: src/lib/marble/MapWizard.cpp:1505
 msgctxt "Marble::MapWizard|"
 msgid ""
 "<h4>WMS Server</h4>Please choose a <a href=\"https://en.wikipedia.org/wiki/"
@@ -8148,12 +8148,12 @@ msgstr ""
 "<h4>WMS 服务器</h4>请选择一个 <a href=\"https://en.wikipedia.org/wiki/"
 "Web_Map_Service\">WMS</a> 服务器，或者输入一个自定义服务器 URL。"
 
-#: src/lib/marble/MapWizard.cpp:1502
+#: src/lib/marble/MapWizard.cpp:1508
 msgctxt "Marble::MapWizard|"
 msgid "WMTS Server"
 msgstr "WMTS 服务器"
 
-#: src/lib/marble/MapWizard.cpp:1503
+#: src/lib/marble/MapWizard.cpp:1509
 msgctxt "Marble::MapWizard|"
 msgid ""
 "<h4>WMTS Server</h4>Please choose a <a href=\"https://de.wikipedia.org/wiki/"

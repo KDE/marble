@@ -8407,19 +8407,19 @@ msgctxt "Marble::MapWizard|"
 msgid "Server is not an OWS Server."
 msgstr "Tarnybinė stotis nėra žiniatinklio žemėlapio stotis."
 
-#: src/lib/marble/MapWizard.cpp:376 src/lib/marble/MapWizard.cpp:392
-#: src/lib/marble/MapWizard.cpp:1106
+#: src/lib/marble/MapWizard.cpp:380 src/lib/marble/MapWizard.cpp:396
+#: src/lib/marble/MapWizard.cpp:1112
 msgctxt "Marble::MapWizard|"
 msgid "Web Mercator (epsg:3857)"
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:377 src/lib/marble/MapWizard.cpp:819
-#: src/lib/marble/MapWizard.cpp:946
+#: src/lib/marble/MapWizard.cpp:381 src/lib/marble/MapWizard.cpp:825
+#: src/lib/marble/MapWizard.cpp:952
 msgctxt "Marble::MapWizard|"
 msgid "Equirectangular (epsg:4326)"
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:388
+#: src/lib/marble/MapWizard.cpp:392
 #, fuzzy
 #| msgctxt "MapViewWidget|"
 #| msgid "&Projection"
@@ -8427,24 +8427,24 @@ msgctxt "Marble::MapWizard|"
 msgid "Tile Projection:"
 msgstr "&Projekcija"
 
-#: src/lib/marble/MapWizard.cpp:404
+#: src/lib/marble/MapWizard.cpp:408
 msgctxt "Marble::MapWizard|"
 msgid "Tile Matrix Set:"
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:446 src/lib/marble/MapWizard.cpp:937
+#: src/lib/marble/MapWizard.cpp:452 src/lib/marble/MapWizard.cpp:943
 msgctxt "Marble::MapWizard|"
 msgid "Preview Image"
 msgstr "Peržiūros piešinys"
 
-#: src/lib/marble/MapWizard.cpp:450
+#: src/lib/marble/MapWizard.cpp:456
 #, fuzzy
 #| msgid "Base Tile"
 msgctxt "Marble::MapWizard|"
 msgid "Base Tile"
 msgstr "Pagrindo kaladėlė"
 
-#: src/lib/marble/MapWizard.cpp:454
+#: src/lib/marble/MapWizard.cpp:460
 #, fuzzy
 #| msgctxt "MapWizard|"
 #| msgid "Legend Image:"
@@ -8452,21 +8452,21 @@ msgctxt "Marble::MapWizard|"
 msgid "Legend Image"
 msgstr "Legendos paveiksliukas:"
 
-#: src/lib/marble/MapWizard.cpp:461 src/lib/marble/MapWizard.cpp:469
+#: src/lib/marble/MapWizard.cpp:467 src/lib/marble/MapWizard.cpp:475
 #, fuzzy, qt-format
 #| msgid "%1 m"
 msgctxt "Marble::MapWizard|"
 msgid "%1"
 msgstr "m"
 
-#: src/lib/marble/MapWizard.cpp:462
+#: src/lib/marble/MapWizard.cpp:468
 #, fuzzy, qt-format
 #| msgid "The base tile could not be downloaded."
 msgctxt "Marble::MapWizard|"
 msgid "The %1 could not be downloaded."
 msgstr "Nepavyko atsiųsti pagrindo kaladėlės."
 
-#: src/lib/marble/MapWizard.cpp:470
+#: src/lib/marble/MapWizard.cpp:476
 #, fuzzy, qt-format
 #| msgid ""
 #| "The base tile could not be downloaded successfully. The server replied:\n"
@@ -8482,47 +8482,47 @@ msgstr ""
 "\n"
 "%1"
 
-#: src/lib/marble/MapWizard.cpp:521 src/lib/marble/MapWizard.cpp:522
-#: src/lib/marble/MapWizard.cpp:543
+#: src/lib/marble/MapWizard.cpp:527 src/lib/marble/MapWizard.cpp:528
+#: src/lib/marble/MapWizard.cpp:549
 msgctxt "Marble::MapWizard|"
 msgid "Custom"
 msgstr "Savitas"
 
-#: src/lib/marble/MapWizard.cpp:773 src/lib/marble/MapWizard.cpp:776
+#: src/lib/marble/MapWizard.cpp:779 src/lib/marble/MapWizard.cpp:782
 msgctxt "Marble::MapWizard|"
 msgid "Archiving failed"
 msgstr "Nepavyko suarchyvuoti"
 
-#: src/lib/marble/MapWizard.cpp:773
+#: src/lib/marble/MapWizard.cpp:779
 #, fuzzy
 #| msgid "Archiving process cannot be started."
 msgctxt "Marble::MapWizard|"
 msgid "Archiving process cannot be started."
 msgstr "Nepavyko pradėti archyvavimo proceso."
 
-#: src/lib/marble/MapWizard.cpp:776
+#: src/lib/marble/MapWizard.cpp:782
 #, fuzzy
 #| msgid "Archiving process crashed."
 msgctxt "Marble::MapWizard|"
 msgid "Archiving process crashed."
 msgstr "Archyvavimo procesas nulūžo."
 
-#: src/lib/marble/MapWizard.cpp:866 src/lib/marble/MapWizard.cpp:874
-#: src/lib/marble/MapWizard.cpp:883
+#: src/lib/marble/MapWizard.cpp:872 src/lib/marble/MapWizard.cpp:880
+#: src/lib/marble/MapWizard.cpp:889
 #, fuzzy
 #| msgid "Source Image"
 msgctxt "Marble::MapWizard|"
 msgid "Source Image"
 msgstr "Pradinis piešinys"
 
-#: src/lib/marble/MapWizard.cpp:867
+#: src/lib/marble/MapWizard.cpp:873
 #, fuzzy
 #| msgid "Please specify a source image."
 msgctxt "Marble::MapWizard|"
 msgid "Please specify a source image."
 msgstr "Prašome nurodyti pradinį piešinį."
 
-#: src/lib/marble/MapWizard.cpp:875
+#: src/lib/marble/MapWizard.cpp:881
 #, fuzzy
 #| msgid ""
 #| "The source image you specified does not exist. Please specify a different "
@@ -8534,7 +8534,7 @@ msgid ""
 msgstr ""
 "Jūsų nurodytas pradinis piešinys neegzistuoja. Prašome nurodyti kitą piešinį."
 
-#: src/lib/marble/MapWizard.cpp:884
+#: src/lib/marble/MapWizard.cpp:890
 #, fuzzy
 #| msgid ""
 #| "The source image you specified does not seem to be an image. Please "
@@ -8547,33 +8547,33 @@ msgstr ""
 "Panašu, kad jūsų nurodytas pradinis piešinys nėra piešinys. Prašome nurodyti "
 "kitą piešinio failą."
 
-#: src/lib/marble/MapWizard.cpp:914
+#: src/lib/marble/MapWizard.cpp:920
 #, fuzzy
 #| msgid "Map Title"
 msgctxt "Marble::MapWizard|"
 msgid "Map Title"
 msgstr "Žemėlapio antraštė"
 
-#: src/lib/marble/MapWizard.cpp:914
+#: src/lib/marble/MapWizard.cpp:920
 #, fuzzy
 #| msgid "Please specify a map title."
 msgctxt "Marble::MapWizard|"
 msgid "Please specify a map title."
 msgstr "Prašome nurodyti žemėlapio antraštę."
 
-#: src/lib/marble/MapWizard.cpp:921 src/lib/marble/MapWizard.cpp:929
+#: src/lib/marble/MapWizard.cpp:927 src/lib/marble/MapWizard.cpp:935
 msgctxt "Marble::MapWizard|"
 msgid "Map Name"
 msgstr "Žemėlapio pavadinimas"
 
-#: src/lib/marble/MapWizard.cpp:921
+#: src/lib/marble/MapWizard.cpp:927
 #, fuzzy
 #| msgid "Please specify a map name."
 msgctxt "Marble::MapWizard|"
 msgid "Please specify a map name."
 msgstr "Prašome nurodyti žemėlapio pavadinimą."
 
-#: src/lib/marble/MapWizard.cpp:930
+#: src/lib/marble/MapWizard.cpp:936
 #, fuzzy, qt-format
 #| msgid ""
 #| "Please specify another map name, since there is already a map named "
@@ -8585,28 +8585,28 @@ msgstr ""
 "Prašome nurodyti kitą žemėlapio pavadinimą, nes jau yra žemėlapis pavadintas "
 "„%1“."
 
-#: src/lib/marble/MapWizard.cpp:937
+#: src/lib/marble/MapWizard.cpp:943
 #, fuzzy
 #| msgid "Please specify a preview image."
 msgctxt "Marble::MapWizard|"
 msgid "Please specify a preview image."
 msgstr "Prašome nurodyti peržiūros piešinį."
 
-#: src/lib/marble/MapWizard.cpp:1441
+#: src/lib/marble/MapWizard.cpp:1447
 #, fuzzy
 #| msgid "Problem while creating files"
 msgctxt "Marble::MapWizard|"
 msgid "Problem while creating files"
 msgstr "Problema kuriant failus"
 
-#: src/lib/marble/MapWizard.cpp:1441
+#: src/lib/marble/MapWizard.cpp:1447
 #, fuzzy
 #| msgid "Check if a theme with the same name exists."
 msgctxt "Marble::MapWizard|"
 msgid "Check if a theme with the same name exists."
 msgstr "Patikrinkite, ar jau yra tema su tokiu pačiu pavadinimu."
 
-#: src/lib/marble/MapWizard.cpp:1498
+#: src/lib/marble/MapWizard.cpp:1504
 #, fuzzy
 #| msgctxt "MapWizard|"
 #| msgid "WMS Server:"
@@ -8614,14 +8614,14 @@ msgctxt "Marble::MapWizard|"
 msgid "WMS Server"
 msgstr "WMS serveris:"
 
-#: src/lib/marble/MapWizard.cpp:1499
+#: src/lib/marble/MapWizard.cpp:1505
 msgctxt "Marble::MapWizard|"
 msgid ""
 "<h4>WMS Server</h4>Please choose a <a href=\"https://en.wikipedia.org/wiki/"
 "Web_Map_Service\">WMS</a> server or enter a custom server URL."
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:1502
+#: src/lib/marble/MapWizard.cpp:1508
 #, fuzzy
 #| msgctxt "MapWizard|"
 #| msgid "WMS Server:"
@@ -8629,7 +8629,7 @@ msgctxt "Marble::MapWizard|"
 msgid "WMTS Server"
 msgstr "WMS serveris:"
 
-#: src/lib/marble/MapWizard.cpp:1503
+#: src/lib/marble/MapWizard.cpp:1509
 msgctxt "Marble::MapWizard|"
 msgid ""
 "<h4>WMTS Server</h4>Please choose a <a href=\"https://de.wikipedia.org/wiki/"
