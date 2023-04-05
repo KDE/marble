@@ -87,7 +87,7 @@ msgstr "Anner Markmalen"
 #. ----------
 #. file data/maps/earth/vectorosm/vectorosm.dgml:285
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:308
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:291
 #. ----------
 #. file data/maps/earth/plain/plain.dgml:209
 #. ----------
@@ -122,7 +122,7 @@ msgstr "Besünner Öörd"
 #. ----------
 #. file data/maps/earth/empty/empty.dgml:43
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:133
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:119
 #. ----------
 #. file data/maps/earth/plain/plain.dgml:288
 #. ----------
@@ -949,7 +949,7 @@ msgstr ""
 #. ----------
 #. file data/maps/earth/vectorosm/vectorosm.dgml:109
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:126
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:112
 #, fuzzy
 #| msgid "The Earth"
 msgctxt "DGML|"
@@ -960,7 +960,7 @@ msgstr "De Eer"
 #. ----------
 #. file data/maps/earth/vectorosm/vectorosm.dgml:111
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:128
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:114
 msgctxt "DGML|"
 msgid ""
 "<a href=\"tour://earth/openstreetmap/tour.kml\">Play a tour of popular "
@@ -999,7 +999,7 @@ msgstr "Titel vun de Koort"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:119
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:142
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:125
 #, fuzzy
 #| msgid "Transport"
 msgctxt "DGML|"
@@ -1008,7 +1008,7 @@ msgstr "Transport"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:202
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:225
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:208
 #, fuzzy
 #| msgid "Areas"
 msgctxt "DGML|"
@@ -1017,7 +1017,7 @@ msgstr "Rebeden"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:300
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:323
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:306
 #, fuzzy
 #| msgctxt "Name of a satellite group"
 #| msgid "Education"
@@ -1027,21 +1027,21 @@ msgstr "Lehren"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:323
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:346
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:329
 msgctxt "DGML|"
 msgid "Financial"
 msgstr ""
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:338
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:361
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:344
 msgctxt "DGML|"
 msgid "Healthcare"
 msgstr ""
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:357
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:380
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:363
 #, fuzzy
 #| msgctxt "Name of a satellite group"
 #| msgid "Experimental"
@@ -1051,7 +1051,7 @@ msgstr "Testwies"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:368
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:391
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:374
 #, fuzzy
 #| msgid "Significant Building"
 msgctxt "DGML|"
@@ -1060,7 +1060,7 @@ msgstr "Wichtig Gebüüd"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:403
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:426
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:409
 #, fuzzy
 #| msgid "Annotation"
 msgctxt "DGML|"
@@ -1069,14 +1069,14 @@ msgstr "Anmarken"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:414
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:437
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:420
 msgctxt "DGML|"
 msgid "Emergency"
 msgstr ""
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:425
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:448
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:431
 #, fuzzy
 #| msgid "Historic site"
 msgctxt "DGML|"
@@ -1085,21 +1085,21 @@ msgstr "Geschichtlich Steed"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:436
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:459
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:442
 msgctxt "DGML|"
 msgid "Food and Drinks"
 msgstr ""
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:471
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:494
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:477
 msgctxt "DGML|"
 msgid "Shop"
 msgstr ""
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:122
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:145
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:128
 #, fuzzy
 #| msgid "Motorway"
 msgctxt "DGML|"
@@ -1108,7 +1108,7 @@ msgstr "Autobahn"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:126
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:149
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:132
 #, fuzzy
 #| msgid "unknown road"
 msgctxt "DGML|"
@@ -1117,7 +1117,7 @@ msgstr "Nich begäng Straat"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:130
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:153
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:136
 #, fuzzy
 #| msgid "Primary road"
 msgctxt "DGML|"
@@ -1126,7 +1126,7 @@ msgstr "Hööftstraat"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:134
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:157
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:140
 #, fuzzy
 #| msgid "Secondary road"
 msgctxt "DGML|"
@@ -1135,7 +1135,7 @@ msgstr "Nevenstraat"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:138
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:161
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:144
 #, fuzzy
 #| msgid "Unclassified road"
 msgctxt "DGML|"
@@ -1144,7 +1144,7 @@ msgstr "Nich inornt Straat"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:142
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:165
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:148
 #, fuzzy
 #| msgid "Unsurfaced road"
 msgctxt "DGML|"
@@ -1153,7 +1153,7 @@ msgstr "Schotterstraat"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:146
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:169
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:152
 #, fuzzy
 #| msgid "Track Gps"
 msgctxt "DGML|"
@@ -1162,7 +1162,7 @@ msgstr "GPS beluern"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:150
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:173
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:156
 #, fuzzy
 #| msgid "Byway"
 msgctxt "DGML|"
@@ -1171,7 +1171,7 @@ msgstr "Privaatpadd"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:154
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:177
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:160
 #, fuzzy
 #| msgid "Bridleway"
 msgctxt "DGML|"
@@ -1180,7 +1180,7 @@ msgstr "Riedpadd"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:158
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:181
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:164
 #, fuzzy
 #| msgid "Cycleway"
 msgctxt "DGML|"
@@ -1189,7 +1189,7 @@ msgstr "Radpadd"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:162
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:185
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:168
 #, fuzzy
 #| msgid "Footway"
 msgctxt "DGML|"
@@ -1198,7 +1198,7 @@ msgstr "Footpadd"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:166
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:189
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:172
 #, fuzzy
 #| msgid "train station"
 msgctxt "DGML|"
@@ -1207,7 +1207,7 @@ msgstr "Bahnhoff"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:170
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:193
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:176
 #, fuzzy
 #| msgid "Railway"
 msgctxt "DGML|"
@@ -1216,7 +1216,7 @@ msgstr "Iesenbahn"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:174
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:197
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:180
 #, fuzzy
 #| msgid "Subway"
 msgctxt "DGML|"
@@ -1225,7 +1225,7 @@ msgstr "U-Bahn"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:178
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:201
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:184
 #, fuzzy
 #| msgid "Lightrail, tram"
 msgctxt "DGML|"
@@ -1234,7 +1234,7 @@ msgstr "Stratenbahn"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:182
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:205
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:188
 #, fuzzy
 #| msgid "Airport runway, taxiway"
 msgctxt "DGML|"
@@ -1243,7 +1243,7 @@ msgstr "Flaaghaven-Lannbahn, Rullbahn"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:186
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:209
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:192
 #, fuzzy
 #| msgid "Airport apron, terminal"
 msgctxt "DGML|"
@@ -1252,7 +1252,7 @@ msgstr "Flaaghaven-Vörfeld, Gebüüd"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:190
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:213
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:196
 #, fuzzy
 #| msgid "Administrative boundary"
 msgctxt "DGML|"
@@ -1261,7 +1261,7 @@ msgstr "Verwaltengrenz"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:194
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:217
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:200
 #, fuzzy
 #| msgid "Bridge"
 msgctxt "DGML|"
@@ -1270,14 +1270,14 @@ msgstr "Brüch"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:198
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:221
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:204
 msgctxt "DGML|"
 msgid "Tunnel"
 msgstr ""
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:205
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:228
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:211
 #, fuzzy
 #| msgid "Forecasts"
 msgctxt "DGML|"
@@ -1286,7 +1286,7 @@ msgstr "Wederutsichten"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:209
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:232
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:215
 #, fuzzy
 #| msgid "Wood"
 msgctxt "DGML|"
@@ -1295,7 +1295,7 @@ msgstr "Holt"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:213
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:236
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:219
 #, fuzzy
 #| msgid "Golf course"
 msgctxt "DGML|"
@@ -1304,7 +1304,7 @@ msgstr "Golfplatz"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:217
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:240
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:223
 #, fuzzy
 #| msgid "Park"
 msgctxt "DGML|"
@@ -1313,7 +1313,7 @@ msgstr "Park"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:221
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:244
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:227
 #, fuzzy
 #| msgid "Residential Area"
 msgctxt "DGML|"
@@ -1322,7 +1322,7 @@ msgstr "Wahnrebeet"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:225
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:248
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:231
 #, fuzzy
 #| msgid "attraction"
 msgctxt "DGML|"
@@ -1331,7 +1331,7 @@ msgstr "Touristenattrakschoon"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:229
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:252
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:235
 #, fuzzy
 #| msgid "Common, meadow"
 msgctxt "DGML|"
@@ -1340,7 +1340,7 @@ msgstr "Weid, Wisch"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:233
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:256
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:239
 #, fuzzy
 #| msgid "Retail area"
 msgctxt "DGML|"
@@ -1349,7 +1349,7 @@ msgstr "Enkelhannelrebeet"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:237
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:260
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:243
 #, fuzzy
 #| msgid "Industrial Area"
 msgctxt "DGML|"
@@ -1358,7 +1358,7 @@ msgstr "Industrierebeet"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:241
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:264
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:247
 #, fuzzy
 #| msgid "Commercial Area"
 msgctxt "DGML|"
@@ -1367,7 +1367,7 @@ msgstr "Warfrebeet"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:245
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:268
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:251
 #, fuzzy
 #| msgid "Heathland"
 msgctxt "DGML|"
@@ -1376,7 +1376,7 @@ msgstr "Heid"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:249
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:272
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:255
 #, fuzzy
 #| msgid "Lake, reservoir"
 msgctxt "DGML|"
@@ -1385,7 +1385,7 @@ msgstr "See"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:253
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:276
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:259
 #, fuzzy
 #| msgid "Farm"
 msgctxt "DGML|"
@@ -1394,7 +1394,7 @@ msgstr "Bueree"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:257
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:280
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:263
 #, fuzzy
 #| msgid "Brownfield site"
 msgctxt "DGML|"
@@ -1403,7 +1403,7 @@ msgstr "Opgeven Industrierebeet"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:261
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:284
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:267
 #, fuzzy
 #| msgid "Speedometer"
 msgctxt "DGML|"
@@ -1412,7 +1412,7 @@ msgstr "Gauheitmeter"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:265
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:288
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:271
 #, fuzzy
 #| msgid "Allotments"
 msgctxt "DGML|"
@@ -1421,7 +1421,7 @@ msgstr "Goorns"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:269
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:292
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:275
 #, fuzzy
 #| msgid "Sports pitch"
 msgctxt "DGML|"
@@ -1430,7 +1430,7 @@ msgstr "Sportplatz"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:273
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:296
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:279
 #, fuzzy
 #| msgid "Sports centre"
 msgctxt "DGML|"
@@ -1439,7 +1439,7 @@ msgstr "Sportsteed"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:277
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:300
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:283
 #, fuzzy
 #| msgid "Nature reserve"
 msgctxt "DGML|"
@@ -1448,7 +1448,7 @@ msgstr "Natuurschuulrebeet"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:281
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:304
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:287
 #, fuzzy
 #| msgid "Military area"
 msgctxt "DGML|"
@@ -1457,7 +1457,7 @@ msgstr "Militeersch Rebeet"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:288
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:311
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:294
 #, fuzzy
 #| msgid "university"
 msgctxt "DGML|"
@@ -1466,7 +1466,7 @@ msgstr "Universiteet"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:292
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:315
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:298
 #, fuzzy
 #| msgid "Significant Building"
 msgctxt "DGML|"
@@ -1475,7 +1475,7 @@ msgstr "Wichtig Gebüüd"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:296
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:319
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:302
 #, fuzzy
 #| msgid "Summit, peak"
 msgctxt "DGML|"
@@ -1484,7 +1484,7 @@ msgstr "Tipp"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:303
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:326
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:309
 #, fuzzy
 #| msgid "college"
 msgctxt "DGML|"
@@ -1493,7 +1493,7 @@ msgstr "Hoochschool"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:307
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:330
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:313
 #, fuzzy
 #| msgid "biergarten"
 msgctxt "DGML|"
@@ -1502,7 +1502,7 @@ msgstr "Beergoorn"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:311
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:334
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:317
 #, fuzzy
 #| msgid "library"
 msgctxt "DGML|"
@@ -1511,7 +1511,7 @@ msgstr "Bökeree"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:315
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:338
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:321
 #, fuzzy
 #| msgid "school"
 msgctxt "DGML|"
@@ -1520,7 +1520,7 @@ msgstr "School"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:319
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:342
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:325
 #, fuzzy
 #| msgid "university"
 msgctxt "DGML|"
@@ -1529,35 +1529,35 @@ msgstr "Universiteet"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:326
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:349
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:332
 msgctxt "DGML|"
 msgid "ATM"
 msgstr ""
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:330
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:353
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:336
 msgctxt "DGML|"
 msgid "Bank"
 msgstr ""
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:334
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:357
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:340
 msgctxt "DGML|"
 msgid "Bureau de change"
 msgstr ""
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:341
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:364
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:347
 msgctxt "DGML|"
 msgid "Dentist"
 msgstr ""
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:345
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:368
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:351
 #, fuzzy
 #| msgid "doctor"
 msgctxt "DGML|"
@@ -1566,7 +1566,7 @@ msgstr "Dokter"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:349
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:372
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:355
 #, fuzzy
 #| msgid "pharmacy"
 msgctxt "DGML|"
@@ -1575,7 +1575,7 @@ msgstr "Aptheek"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:353
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:376
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:359
 #, fuzzy
 #| msgctxt "Name of a satellite group"
 #| msgid "Geostationary"
@@ -1585,7 +1585,7 @@ msgstr "Geostatschoneer"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:360
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:383
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:366
 #, fuzzy
 #| msgid "cinema"
 msgctxt "DGML|"
@@ -1594,7 +1594,7 @@ msgstr "Kino"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:364
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:387
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:370
 #, fuzzy
 #| msgid "theatre"
 msgctxt "DGML|"
@@ -1603,35 +1603,35 @@ msgstr "Theater"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:371
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:394
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:377
 msgctxt "DGML|"
 msgid "Court"
 msgstr ""
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:375
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:398
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:381
 msgctxt "DGML|"
 msgid "Embassy"
 msgstr ""
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:379
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:402
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:385
 msgctxt "DGML|"
 msgid "Church"
 msgstr ""
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:383
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:406
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:389
 msgctxt "DGML|"
 msgid "Playground"
 msgstr ""
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:387
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:410
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:393
 #, fuzzy
 #| msgid "Places of Interest"
 msgctxt "DGML|"
@@ -1640,7 +1640,7 @@ msgstr "Besünner Öörd"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:391
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:414
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:397
 #, fuzzy
 #| msgid "Postal Codes"
 msgctxt "DGML|"
@@ -1649,21 +1649,21 @@ msgstr "Postleddtallen"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:395
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:418
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:401
 msgctxt "DGML|"
 msgid "Public building"
 msgstr ""
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:399
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:422
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:405
 msgctxt "DGML|"
 msgid "Toilets"
 msgstr ""
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:406
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:429
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:412
 #, fuzzy
 #| msgid "hotel"
 msgctxt "DGML|"
@@ -1672,7 +1672,7 @@ msgstr "Hotel"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:410
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:433
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:416
 #, fuzzy
 #| msgid "hotel"
 msgctxt "DGML|"
@@ -1681,7 +1681,7 @@ msgstr "Hotel"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:417
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:440
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:423
 #, fuzzy
 #| msgid "hospital"
 msgctxt "DGML|"
@@ -1690,7 +1690,7 @@ msgstr "Krankenhuus"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:421
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:444
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:427
 #, fuzzy
 #| msgid "train station"
 msgctxt "DGML|"
@@ -1699,7 +1699,7 @@ msgstr "Bahnhoff"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:428
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:451
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:434
 #, fuzzy
 #| msgid "monument"
 msgctxt "DGML|"
@@ -1708,14 +1708,14 @@ msgstr "Munjement"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:432
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:455
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:438
 msgctxt "DGML|"
 msgid "Ruins"
 msgstr ""
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:439
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:462
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:445
 #, fuzzy
 #| msgid "Bar"
 msgctxt "DGML|"
@@ -1724,7 +1724,7 @@ msgstr "Bar"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:443
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:466
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:449
 #, fuzzy
 #| msgid "biergarten"
 msgctxt "DGML|"
@@ -1733,21 +1733,21 @@ msgstr "Beergoorn"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:447
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:470
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:453
 msgctxt "DGML|"
 msgid "Cafe"
 msgstr ""
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:451
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:474
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:457
 msgctxt "DGML|"
 msgid "Drinking water"
 msgstr ""
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:455
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:478
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:461
 #, fuzzy
 #| msgid "fast food"
 msgctxt "DGML|"
@@ -1756,14 +1756,14 @@ msgstr "Knackwustbood"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:459
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:482
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:465
 msgctxt "DGML|"
 msgid "Ice Cream"
 msgstr ""
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:463
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:486
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:469
 #, fuzzy
 #| msgid "pub"
 msgctxt "DGML|"
@@ -1772,7 +1772,7 @@ msgstr "Kroog"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:467
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:490
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:473
 #, fuzzy
 #| msgid "restaurant"
 msgctxt "DGML|"
@@ -1781,21 +1781,21 @@ msgstr "Eethuus"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:474
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:497
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:480
 msgctxt "DGML|"
 msgid "Alcohol"
 msgstr ""
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:478
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:501
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:484
 msgctxt "DGML|"
 msgid "Bakery"
 msgstr ""
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:482
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:505
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:488
 #, fuzzy
 #| msgid "Bookmarks"
 msgctxt "DGML|"
@@ -1804,7 +1804,7 @@ msgstr "Leestekens"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:486
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:509
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:492
 #, fuzzy
 #| msgid "Clear"
 msgctxt "DGML|"
@@ -1813,28 +1813,28 @@ msgstr "Leddig maken"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:490
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:513
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:496
 msgctxt "DGML|"
 msgid "Clothes"
 msgstr ""
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:494
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:517
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:500
 msgctxt "DGML|"
 msgid "Convenience"
 msgstr ""
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:498
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:521
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:504
 msgctxt "DGML|"
 msgid "Gas"
 msgstr ""
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:502
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:525
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:508
 msgctxt "DGML|"
 msgid "Gift"
 msgstr ""
@@ -1858,12 +1858,7 @@ msgctxt "DGML|"
 msgid "OpenStreetMap"
 msgstr "OpenStreetMap-Daten"
 
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:136
-msgctxt "DGML|"
-msgid "Hillshading"
-msgstr ""
-
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:139
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:122
 msgctxt "DGML|"
 msgid "Humanitarian OSM Team"
 msgstr ""

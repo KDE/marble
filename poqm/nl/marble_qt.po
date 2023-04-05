@@ -77,7 +77,7 @@ msgstr "Overige mogelijkheden"
 #. ----------
 #. file data/maps/earth/vectorosm/vectorosm.dgml:285
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:308
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:291
 #. ----------
 #. file data/maps/earth/plain/plain.dgml:209
 #. ----------
@@ -110,7 +110,7 @@ msgstr "Interessante plaatsen"
 #. ----------
 #. file data/maps/earth/empty/empty.dgml:43
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:133
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:119
 #. ----------
 #. file data/maps/earth/plain/plain.dgml:288
 #. ----------
@@ -792,7 +792,7 @@ msgstr ""
 #. ----------
 #. file data/maps/earth/vectorosm/vectorosm.dgml:109
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:126
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:112
 msgctxt "DGML|"
 msgid "Explore the Earth"
 msgstr "De aarde verkennen"
@@ -801,7 +801,7 @@ msgstr "De aarde verkennen"
 #. ----------
 #. file data/maps/earth/vectorosm/vectorosm.dgml:111
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:128
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:114
 msgctxt "DGML|"
 msgid ""
 "<a href=\"tour://earth/openstreetmap/tour.kml\">Play a tour of popular "
@@ -835,693 +835,693 @@ msgstr "Tegels voor OSM Bitmap"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:119
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:142
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:125
 msgctxt "DGML|"
 msgid "Transportation"
 msgstr "Vervoer"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:202
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:225
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:208
 msgctxt "DGML|"
 msgid "Areas"
 msgstr "Gebieden"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:300
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:323
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:306
 msgctxt "DGML|"
 msgid "Education"
 msgstr "Educatie"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:323
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:346
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:329
 msgctxt "DGML|"
 msgid "Financial"
 msgstr "Financieel"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:338
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:361
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:344
 msgctxt "DGML|"
 msgid "Healthcare"
 msgstr "Gezondheidszorg"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:357
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:380
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:363
 msgctxt "DGML|"
 msgid "Entertainment"
 msgstr "Ontspanning"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:368
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:391
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:374
 msgctxt "DGML|"
 msgid "Public Buildings"
 msgstr "Publieke gebouwen"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:403
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:426
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:409
 msgctxt "DGML|"
 msgid "Accommodation"
 msgstr "Accommodatie"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:414
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:437
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:420
 msgctxt "DGML|"
 msgid "Emergency"
 msgstr "Noodvoorzieningen"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:425
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:448
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:431
 msgctxt "DGML|"
 msgid "Historic"
 msgstr "Historisch"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:436
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:459
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:442
 msgctxt "DGML|"
 msgid "Food and Drinks"
 msgstr "Eten en drinken"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:471
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:494
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:477
 msgctxt "DGML|"
 msgid "Shop"
 msgstr "Winkel"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:122
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:145
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:128
 msgctxt "DGML|"
 msgid "Motorway"
 msgstr "Autosnelweg"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:126
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:149
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:132
 msgctxt "DGML|"
 msgid "Trunk road"
 msgstr "Hoofdweg"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:130
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:153
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:136
 msgctxt "DGML|"
 msgid "Primary road"
 msgstr "Primaire weg"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:134
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:157
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:140
 msgctxt "DGML|"
 msgid "Secondary road"
 msgstr "Secundaire weg"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:138
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:161
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:144
 msgctxt "DGML|"
 msgid "Unclassified road"
 msgstr "Niet-geclassificeerde weg"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:142
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:165
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:148
 msgctxt "DGML|"
 msgid "Unsurfaced road"
 msgstr "Niet-geasfalteerde weg"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:146
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:169
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:152
 msgctxt "DGML|"
 msgid "Track"
 msgstr "Route"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:150
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:173
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:156
 msgctxt "DGML|"
 msgid "Byway"
 msgstr "Bijweg"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:154
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:177
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:160
 msgctxt "DGML|"
 msgid "Bridleway"
 msgstr "Ruiterpad"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:158
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:181
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:164
 msgctxt "DGML|"
 msgid "Cycleway"
 msgstr "Fietspad"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:162
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:185
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:168
 msgctxt "DGML|"
 msgid "Footway"
 msgstr "Voetpad"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:166
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:189
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:172
 msgctxt "DGML|"
 msgid "Railway station"
 msgstr "Spoorwegstation"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:170
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:193
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:176
 msgctxt "DGML|"
 msgid "Railway"
 msgstr "Spoorweg"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:174
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:197
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:180
 msgctxt "DGML|"
 msgid "Subway"
 msgstr "Ondergrondse"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:178
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:201
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:184
 msgctxt "DGML|"
 msgid "Lightrail, tram"
 msgstr "Lightrail, tram"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:182
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:205
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:188
 msgctxt "DGML|"
 msgid "Airport runway, taxiway"
 msgstr "Luchthavenstartbaan, taxibaan"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:186
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:209
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:192
 msgctxt "DGML|"
 msgid "Airport apron, terminal"
 msgstr "Luchthaventarmac, terminal"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:190
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:213
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:196
 msgctxt "DGML|"
 msgid "Administrative boundary"
 msgstr "Administratieve grens"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:194
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:217
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:200
 msgctxt "DGML|"
 msgid "Bridge"
 msgstr "Brug"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:198
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:221
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:204
 msgctxt "DGML|"
 msgid "Tunnel"
 msgstr "Tunnel"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:205
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:228
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:211
 msgctxt "DGML|"
 msgid "Forest"
 msgstr "Bos"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:209
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:232
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:215
 msgctxt "DGML|"
 msgid "Wood"
 msgstr "Woud"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:213
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:236
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:219
 msgctxt "DGML|"
 msgid "Golf course"
 msgstr "Golfterrein"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:217
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:240
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:223
 msgctxt "DGML|"
 msgid "Park"
 msgstr "Park"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:221
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:244
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:227
 msgctxt "DGML|"
 msgid "Residential Area"
 msgstr "Woongebied"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:225
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:248
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:231
 msgctxt "DGML|"
 msgid "Tourist attraction"
 msgstr "Toeristische attractie"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:229
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:252
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:235
 msgctxt "DGML|"
 msgid "Common, meadow"
 msgstr "Meent, made"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:233
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:256
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:239
 msgctxt "DGML|"
 msgid "Retail area"
 msgstr "Handelsgebied"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:237
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:260
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:243
 msgctxt "DGML|"
 msgid "Industrial Area"
 msgstr "Industrieel gebied"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:241
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:264
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:247
 msgctxt "DGML|"
 msgid "Commercial Area"
 msgstr "Commercieel gebied"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:245
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:268
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:251
 msgctxt "DGML|"
 msgid "Heathland"
 msgstr "Heidegebied"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:249
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:272
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:255
 msgctxt "DGML|"
 msgid "Lake, reservoir"
 msgstr "Meer, reservoir"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:253
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:276
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:259
 msgctxt "DGML|"
 msgid "Farm"
 msgstr "Boerderij"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:257
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:280
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:263
 msgctxt "DGML|"
 msgid "Brownfield site"
 msgstr "Brownfield"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:261
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:284
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:267
 msgctxt "DGML|"
 msgid "Cemetery"
 msgstr "Begraafplaats"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:265
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:288
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:271
 msgctxt "DGML|"
 msgid "Allotments"
 msgstr "Volkstuinen"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:269
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:292
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:275
 msgctxt "DGML|"
 msgid "Sports pitch"
 msgstr "Sportveld"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:273
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:296
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:279
 msgctxt "DGML|"
 msgid "Sports centre"
 msgstr "Sportcentrum"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:277
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:300
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:283
 msgctxt "DGML|"
 msgid "Nature reserve"
 msgstr "Natuurreservaat"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:281
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:304
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:287
 msgctxt "DGML|"
 msgid "Military area"
 msgstr "Militair gebied"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:288
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:311
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:294
 msgctxt "DGML|"
 msgid "School, university"
 msgstr "School, universiteit"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:292
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:315
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:298
 msgctxt "DGML|"
 msgid "Significant Building"
 msgstr "Belangrijk gebouw"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:296
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:319
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:302
 msgctxt "DGML|"
 msgid "Summit, peak"
 msgstr "Top, piek"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:303
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:326
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:309
 msgctxt "DGML|"
 msgid "College"
 msgstr "Middelbare school"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:307
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:330
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:313
 msgctxt "DGML|"
 msgid "Kindergarten"
 msgstr "Kleuterschool"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:311
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:334
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:317
 msgctxt "DGML|"
 msgid "Library"
 msgstr "Bibliotheek"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:315
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:338
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:321
 msgctxt "DGML|"
 msgid "School"
 msgstr "School"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:319
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:342
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:325
 msgctxt "DGML|"
 msgid "University"
 msgstr "Universiteit"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:326
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:349
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:332
 msgctxt "DGML|"
 msgid "ATM"
 msgstr "Pinautomaat"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:330
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:353
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:336
 msgctxt "DGML|"
 msgid "Bank"
 msgstr "Bank"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:334
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:357
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:340
 msgctxt "DGML|"
 msgid "Bureau de change"
 msgstr "Wisselkantoor"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:341
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:364
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:347
 msgctxt "DGML|"
 msgid "Dentist"
 msgstr "Tandarts"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:345
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:368
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:351
 msgctxt "DGML|"
 msgid "Doctors"
 msgstr "Arts"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:349
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:372
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:355
 msgctxt "DGML|"
 msgid "Pharmacy"
 msgstr "Apotheek"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:353
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:376
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:359
 msgctxt "DGML|"
 msgid "Veterinary"
 msgstr "Dierenarts"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:360
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:383
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:366
 msgctxt "DGML|"
 msgid "Cinema"
 msgstr "Cinema"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:364
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:387
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:370
 msgctxt "DGML|"
 msgid "Theatre"
 msgstr "Theater"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:371
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:394
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:377
 msgctxt "DGML|"
 msgid "Court"
 msgstr "Rechtbank"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:375
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:398
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:381
 msgctxt "DGML|"
 msgid "Embassy"
 msgstr "Ambassade"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:379
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:402
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:385
 msgctxt "DGML|"
 msgid "Church"
 msgstr "Kerk"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:383
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:406
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:389
 msgctxt "DGML|"
 msgid "Playground"
 msgstr "Speeltuin"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:387
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:410
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:393
 msgctxt "DGML|"
 msgid "Place of worship"
 msgstr "Gebedsplaats"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:391
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:414
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:397
 msgctxt "DGML|"
 msgid "Post office"
 msgstr "Postkantoor"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:395
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:418
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:401
 msgctxt "DGML|"
 msgid "Public building"
 msgstr "Publiek gebouw"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:399
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:422
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:405
 msgctxt "DGML|"
 msgid "Toilets"
 msgstr "Toiletten"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:406
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:429
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:412
 msgctxt "DGML|"
 msgid "Hotel"
 msgstr "Hotel"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:410
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:433
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:416
 msgctxt "DGML|"
 msgid "Motel"
 msgstr "Motel"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:417
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:440
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:423
 msgctxt "DGML|"
 msgid "Hospital"
 msgstr "Hospitaal"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:421
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:444
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:427
 msgctxt "DGML|"
 msgid "Fire station"
 msgstr "Brandweer"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:428
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:451
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:434
 msgctxt "DGML|"
 msgid "Monument"
 msgstr "Monument"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:432
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:455
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:438
 msgctxt "DGML|"
 msgid "Ruins"
 msgstr "Ruïnes"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:439
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:462
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:445
 msgctxt "DGML|"
 msgid "Bar"
 msgstr "Balk"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:443
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:466
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:449
 msgctxt "DGML|"
 msgid "Biergarten"
 msgstr "Bierhal"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:447
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:470
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:453
 msgctxt "DGML|"
 msgid "Cafe"
 msgstr "Cafe"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:451
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:474
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:457
 msgctxt "DGML|"
 msgid "Drinking water"
 msgstr "Drinkwater"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:455
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:478
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:461
 msgctxt "DGML|"
 msgid "Fast Food"
 msgstr "Fast Food"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:459
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:482
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:465
 msgctxt "DGML|"
 msgid "Ice Cream"
 msgstr "Ice Cream"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:463
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:486
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:469
 msgctxt "DGML|"
 msgid "Pub"
 msgstr "Pub"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:467
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:490
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:473
 msgctxt "DGML|"
 msgid "Restaurant"
 msgstr "Restaurant"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:474
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:497
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:480
 msgctxt "DGML|"
 msgid "Alcohol"
 msgstr "Alcohol"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:478
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:501
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:484
 msgctxt "DGML|"
 msgid "Bakery"
 msgstr "Bakker"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:482
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:505
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:488
 msgctxt "DGML|"
 msgid "Books"
 msgstr "Boeken"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:486
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:509
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:492
 msgctxt "DGML|"
 msgid "Car"
 msgstr "Auto"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:490
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:513
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:496
 msgctxt "DGML|"
 msgid "Clothes"
 msgstr "Kleding"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:494
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:517
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:500
 msgctxt "DGML|"
 msgid "Convenience"
 msgstr "Toilet"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:498
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:521
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:504
 msgctxt "DGML|"
 msgid "Gas"
 msgstr "Gas"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:502
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:525
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:508
 msgctxt "DGML|"
 msgid "Gift"
 msgstr "Cadeaus"
@@ -1545,12 +1545,7 @@ msgctxt "DGML|"
 msgid "OpenStreetMap"
 msgstr "OpenStreetMap"
 
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:136
-msgctxt "DGML|"
-msgid "Hillshading"
-msgstr "Heuvelschaduw"
-
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:139
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:122
 msgctxt "DGML|"
 msgid "Humanitarian OSM Team"
 msgstr "Humanitarian OSM Team"
@@ -18265,6 +18260,10 @@ msgstr "&Sjabloon voor zwevend item"
 msgctxt "Marble::FITemplateFloatItem|"
 msgid "This is a template class for float items."
 msgstr "Dit is een sjabloonklasse voor zwevende items."
+
+#~ msgctxt "DGML|"
+#~ msgid "Hillshading"
+#~ msgstr "Heuvelschaduw"
 
 #~ msgctxt "MapWizard|"
 #~ msgid "Available Layers:"

@@ -66,7 +66,7 @@ msgstr "其他功能"
 #. ----------
 #. file data/maps/earth/vectorosm/vectorosm.dgml:285
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:308
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:291
 #. ----------
 #. file data/maps/earth/plain/plain.dgml:209
 #. ----------
@@ -99,7 +99,7 @@ msgstr "景点"
 #. ----------
 #. file data/maps/earth/empty/empty.dgml:43
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:133
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:119
 #. ----------
 #. file data/maps/earth/plain/plain.dgml:288
 #. ----------
@@ -775,7 +775,7 @@ msgstr ""
 #. ----------
 #. file data/maps/earth/vectorosm/vectorosm.dgml:109
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:126
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:112
 msgctxt "DGML|"
 msgid "Explore the Earth"
 msgstr "探索地球"
@@ -784,7 +784,7 @@ msgstr "探索地球"
 #. ----------
 #. file data/maps/earth/vectorosm/vectorosm.dgml:111
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:128
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:114
 msgctxt "DGML|"
 msgid ""
 "<a href=\"tour://earth/openstreetmap/tour.kml\">Play a tour of popular "
@@ -816,693 +816,693 @@ msgstr "OSM 位图图块"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:119
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:142
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:125
 msgctxt "DGML|"
 msgid "Transportation"
 msgstr "交通"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:202
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:225
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:208
 msgctxt "DGML|"
 msgid "Areas"
 msgstr "区划"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:300
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:323
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:306
 msgctxt "DGML|"
 msgid "Education"
 msgstr "教育"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:323
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:346
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:329
 msgctxt "DGML|"
 msgid "Financial"
 msgstr "金融"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:338
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:361
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:344
 msgctxt "DGML|"
 msgid "Healthcare"
 msgstr "卫生保健"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:357
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:380
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:363
 msgctxt "DGML|"
 msgid "Entertainment"
 msgstr "娱乐"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:368
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:391
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:374
 msgctxt "DGML|"
 msgid "Public Buildings"
 msgstr "公共建筑"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:403
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:426
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:409
 msgctxt "DGML|"
 msgid "Accommodation"
 msgstr "住宿"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:414
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:437
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:420
 msgctxt "DGML|"
 msgid "Emergency"
 msgstr "应急救难"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:425
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:448
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:431
 msgctxt "DGML|"
 msgid "Historic"
 msgstr "历史古迹"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:436
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:459
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:442
 msgctxt "DGML|"
 msgid "Food and Drinks"
 msgstr "餐饮"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:471
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:494
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:477
 msgctxt "DGML|"
 msgid "Shop"
 msgstr "商铺"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:122
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:145
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:128
 msgctxt "DGML|"
 msgid "Motorway"
 msgstr "高速公路"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:126
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:149
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:132
 msgctxt "DGML|"
 msgid "Trunk road"
 msgstr "主干公路"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:130
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:153
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:136
 msgctxt "DGML|"
 msgid "Primary road"
 msgstr "一级公路"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:134
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:157
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:140
 msgctxt "DGML|"
 msgid "Secondary road"
 msgstr "二级公路"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:138
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:161
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:144
 msgctxt "DGML|"
 msgid "Unclassified road"
 msgstr "未列等公路"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:142
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:165
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:148
 msgctxt "DGML|"
 msgid "Unsurfaced road"
 msgstr "无铺装公路"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:146
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:169
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:152
 msgctxt "DGML|"
 msgid "Track"
 msgstr "小道"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:150
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:173
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:156
 msgctxt "DGML|"
 msgid "Byway"
 msgstr "旁道"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:154
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:177
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:160
 msgctxt "DGML|"
 msgid "Bridleway"
 msgstr "马道"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:158
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:181
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:164
 msgctxt "DGML|"
 msgid "Cycleway"
 msgstr "自行车道"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:162
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:185
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:168
 msgctxt "DGML|"
 msgid "Footway"
 msgstr "人行道"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:166
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:189
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:172
 msgctxt "DGML|"
 msgid "Railway station"
 msgstr "火车站"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:170
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:193
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:176
 msgctxt "DGML|"
 msgid "Railway"
 msgstr "铁路"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:174
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:197
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:180
 msgctxt "DGML|"
 msgid "Subway"
 msgstr "地铁"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:178
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:201
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:184
 msgctxt "DGML|"
 msgid "Lightrail, tram"
 msgstr "轻轨和有轨电车"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:182
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:205
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:188
 msgctxt "DGML|"
 msgid "Airport runway, taxiway"
 msgstr "机场跑道和出租车道"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:186
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:209
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:192
 msgctxt "DGML|"
 msgid "Airport apron, terminal"
 msgstr "机场停机坪和登机口"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:190
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:213
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:196
 msgctxt "DGML|"
 msgid "Administrative boundary"
 msgstr "行政边界"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:194
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:217
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:200
 msgctxt "DGML|"
 msgid "Bridge"
 msgstr "桥梁"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:198
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:221
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:204
 msgctxt "DGML|"
 msgid "Tunnel"
 msgstr "隧道"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:205
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:228
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:211
 msgctxt "DGML|"
 msgid "Forest"
 msgstr "森林"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:209
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:232
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:215
 msgctxt "DGML|"
 msgid "Wood"
 msgstr "树林"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:213
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:236
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:219
 msgctxt "DGML|"
 msgid "Golf course"
 msgstr "高尔夫球场"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:217
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:240
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:223
 msgctxt "DGML|"
 msgid "Park"
 msgstr "公园"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:221
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:244
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:227
 msgctxt "DGML|"
 msgid "Residential Area"
 msgstr "住宅区"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:225
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:248
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:231
 msgctxt "DGML|"
 msgid "Tourist attraction"
 msgstr "旅游景点"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:229
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:252
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:235
 msgctxt "DGML|"
 msgid "Common, meadow"
 msgstr "公地和牧场"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:233
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:256
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:239
 msgctxt "DGML|"
 msgid "Retail area"
 msgstr "购物区"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:237
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:260
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:243
 msgctxt "DGML|"
 msgid "Industrial Area"
 msgstr "工业区"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:241
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:264
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:247
 msgctxt "DGML|"
 msgid "Commercial Area"
 msgstr "商业区"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:245
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:268
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:251
 msgctxt "DGML|"
 msgid "Heathland"
 msgstr "荒野"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:249
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:272
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:255
 msgctxt "DGML|"
 msgid "Lake, reservoir"
 msgstr "湖泊和水库"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:253
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:276
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:259
 msgctxt "DGML|"
 msgid "Farm"
 msgstr "农场"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:257
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:280
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:263
 msgctxt "DGML|"
 msgid "Brownfield site"
 msgstr "闲置产业区"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:261
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:284
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:267
 msgctxt "DGML|"
 msgid "Cemetery"
 msgstr "墓地"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:265
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:288
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:271
 msgctxt "DGML|"
 msgid "Allotments"
 msgstr "保留地"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:269
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:292
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:275
 msgctxt "DGML|"
 msgid "Sports pitch"
 msgstr "运动场地"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:273
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:296
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:279
 msgctxt "DGML|"
 msgid "Sports centre"
 msgstr "体育中心"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:277
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:300
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:283
 msgctxt "DGML|"
 msgid "Nature reserve"
 msgstr "自然保护区"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:281
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:304
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:287
 msgctxt "DGML|"
 msgid "Military area"
 msgstr "军区"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:288
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:311
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:294
 msgctxt "DGML|"
 msgid "School, university"
 msgstr "学校和大学"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:292
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:315
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:298
 msgctxt "DGML|"
 msgid "Significant Building"
 msgstr "重要建筑"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:296
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:319
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:302
 msgctxt "DGML|"
 msgid "Summit, peak"
 msgstr "山峰"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:303
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:326
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:309
 msgctxt "DGML|"
 msgid "College"
 msgstr "学院"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:307
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:330
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:313
 msgctxt "DGML|"
 msgid "Kindergarten"
 msgstr "幼儿园"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:311
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:334
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:317
 msgctxt "DGML|"
 msgid "Library"
 msgstr "图书馆"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:315
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:338
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:321
 msgctxt "DGML|"
 msgid "School"
 msgstr "学校"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:319
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:342
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:325
 msgctxt "DGML|"
 msgid "University"
 msgstr "大学"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:326
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:349
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:332
 msgctxt "DGML|"
 msgid "ATM"
 msgstr "自动柜员机"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:330
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:353
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:336
 msgctxt "DGML|"
 msgid "Bank"
 msgstr "银行"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:334
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:357
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:340
 msgctxt "DGML|"
 msgid "Bureau de change"
 msgstr "外币兑换所"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:341
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:364
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:347
 msgctxt "DGML|"
 msgid "Dentist"
 msgstr "牙医"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:345
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:368
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:351
 msgctxt "DGML|"
 msgid "Doctors"
 msgstr "诊所"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:349
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:372
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:355
 msgctxt "DGML|"
 msgid "Pharmacy"
 msgstr "药店"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:353
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:376
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:359
 msgctxt "DGML|"
 msgid "Veterinary"
 msgstr "兽医"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:360
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:383
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:366
 msgctxt "DGML|"
 msgid "Cinema"
 msgstr "影院"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:364
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:387
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:370
 msgctxt "DGML|"
 msgid "Theatre"
 msgstr "剧场"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:371
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:394
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:377
 msgctxt "DGML|"
 msgid "Court"
 msgstr "法院"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:375
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:398
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:381
 msgctxt "DGML|"
 msgid "Embassy"
 msgstr "使馆"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:379
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:402
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:385
 msgctxt "DGML|"
 msgid "Church"
 msgstr "教堂"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:383
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:406
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:389
 msgctxt "DGML|"
 msgid "Playground"
 msgstr "运动场"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:387
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:410
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:393
 msgctxt "DGML|"
 msgid "Place of worship"
 msgstr "宗教场所"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:391
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:414
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:397
 msgctxt "DGML|"
 msgid "Post office"
 msgstr "邮局"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:395
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:418
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:401
 msgctxt "DGML|"
 msgid "Public building"
 msgstr "公共建筑"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:399
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:422
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:405
 msgctxt "DGML|"
 msgid "Toilets"
 msgstr "洗手间"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:406
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:429
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:412
 msgctxt "DGML|"
 msgid "Hotel"
 msgstr "酒店"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:410
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:433
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:416
 msgctxt "DGML|"
 msgid "Motel"
 msgstr "汽车旅馆"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:417
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:440
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:423
 msgctxt "DGML|"
 msgid "Hospital"
 msgstr "医院"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:421
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:444
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:427
 msgctxt "DGML|"
 msgid "Fire station"
 msgstr "消防局"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:428
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:451
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:434
 msgctxt "DGML|"
 msgid "Monument"
 msgstr "古迹和纪念碑"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:432
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:455
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:438
 msgctxt "DGML|"
 msgid "Ruins"
 msgstr "遗迹"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:439
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:462
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:445
 msgctxt "DGML|"
 msgid "Bar"
 msgstr "酒吧"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:443
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:466
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:449
 msgctxt "DGML|"
 msgid "Biergarten"
 msgstr "露天啤酒店"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:447
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:470
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:453
 msgctxt "DGML|"
 msgid "Cafe"
 msgstr "咖啡馆"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:451
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:474
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:457
 msgctxt "DGML|"
 msgid "Drinking water"
 msgstr "直饮水"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:455
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:478
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:461
 msgctxt "DGML|"
 msgid "Fast Food"
 msgstr "快餐"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:459
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:482
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:465
 msgctxt "DGML|"
 msgid "Ice Cream"
 msgstr "冰淇淋店"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:463
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:486
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:469
 msgctxt "DGML|"
 msgid "Pub"
 msgstr "酒馆"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:467
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:490
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:473
 msgctxt "DGML|"
 msgid "Restaurant"
 msgstr "餐厅"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:474
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:497
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:480
 msgctxt "DGML|"
 msgid "Alcohol"
 msgstr "酒类"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:478
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:501
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:484
 msgctxt "DGML|"
 msgid "Bakery"
 msgstr "面包店"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:482
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:505
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:488
 msgctxt "DGML|"
 msgid "Books"
 msgstr "书刊"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:486
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:509
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:492
 msgctxt "DGML|"
 msgid "Car"
 msgstr "汽车"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:490
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:513
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:496
 msgctxt "DGML|"
 msgid "Clothes"
 msgstr "服饰"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:494
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:517
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:500
 msgctxt "DGML|"
 msgid "Convenience"
 msgstr "便利店"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:498
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:521
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:504
 msgctxt "DGML|"
 msgid "Gas"
 msgstr "加油站"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:502
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:525
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:508
 msgctxt "DGML|"
 msgid "Gift"
 msgstr "礼品店"
@@ -1524,12 +1524,7 @@ msgctxt "DGML|"
 msgid "OpenStreetMap"
 msgstr "开放街道地图 (OSM)"
 
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:136
-msgctxt "DGML|"
-msgid "Hillshading"
-msgstr "坡面阴影"
-
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:139
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:122
 msgctxt "DGML|"
 msgid "Humanitarian OSM Team"
 msgstr "人道主义 OSM 团队"
@@ -18064,3 +18059,7 @@ msgstr "浮动项目模板(&T)"
 msgctxt "Marble::FITemplateFloatItem|"
 msgid "This is a template class for float items."
 msgstr "这是浮动项目的模板类。"
+
+#~ msgctxt "DGML|"
+#~ msgid "Hillshading"
+#~ msgstr "坡面阴影"
