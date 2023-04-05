@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: LGPL-2.1-or-later
 //
-// SPDX-FileCopyrightText: 2006-2010 Torsten Rahn <tackat@kde.org>
+// SPDX-FileCopyrightText: 2006-2023 Torsten Rahn <tackat@kde.org>
 // SPDX-FileCopyrightText: 2007 Inge Wallin <ingwa@kde.org>
 // SPDX-FileCopyrightText: 2008-2010 Jens-Michael Hoffmann <jensmh@gmx.de>
 // SPDX-FileCopyrightText: 2010-2013 Bernhard Beschow <bbeschow@cs.tu-berlin.de>
@@ -50,6 +50,21 @@ static const uchar **jumpTableFromQImage8( const QImage &img )
     return jumpTable;
 }
 
+// return channelwise average of colors c1 and c2
+static inline uint colorMix50(uint c1, uint c2)
+{
+    return (((c1 ^ c2) & 0xfefefefeUL) >> 1) + (c1 & c2);
+}
+
+static inline uint colorMix75(uint c1, uint c2)
+{
+    return colorMix50(c1, colorMix50(c1, c2)); // 75% c1
+}
+
+static inline uint colorMix25(uint c1, uint c2)
+{
+    return colorMix50(colorMix50(c1, c2), c2 ); // 25% c1
+}
 
 StackedTile::StackedTile( const TileId &id, const QImage &resultImage, QVector<QSharedPointer<TextureTile> > const &tiles ) :
       Tile( id ),
@@ -77,20 +92,121 @@ StackedTile::~StackedTile()
 
 uint StackedTile::pixel( int x, int y ) const
 {
+    if ( m_depth == 32 && !m_isGrayscale )
+        return (jumpTable32)[y][x];
+
     if ( m_depth == 8 ) {
         if ( m_isGrayscale )
             return (jumpTable8)[y][x];
         else
             return m_resultImage.color( (jumpTable8)[y][x] );
     }
-    if ( m_depth == 32 && !m_isGrayscale )
-        return (jumpTable32)[y][x];
 
     if ( m_depth == 1 && !m_isGrayscale )
         return m_resultImage.color((jumpTable8)[y][x/8] >> 7);
 
     return m_resultImage.pixel( x, y );
 }
+
+#define CHEAPHIGH
+#ifdef CHEAPHIGH
+
+uint StackedTile::pixelF(qreal x, qreal y, const QRgb& topLeftValue) const
+{
+    // Bilinear interpolation to determine the color of a subpixel
+    int iX = (int)(x);
+    int iY = (int)(y);
+
+    qreal fY = 8 * (y - iY);
+
+    // Interpolation in y-direction
+    if ((iY + 1) < m_resultImage.height())
+    {
+        QRgb bottomLeftValue = pixel(iX, iY + 1);
+
+        QRgb leftValue;
+        if (fY < 1)
+            leftValue = topLeftValue;
+        else if (fY < 3)
+            leftValue = colorMix75( topLeftValue, bottomLeftValue);
+        else if (fY < 5)
+            leftValue = colorMix50( topLeftValue, bottomLeftValue);
+        else if (fY < 7)
+            leftValue = colorMix25( topLeftValue, bottomLeftValue);
+        else
+            leftValue = bottomLeftValue;
+
+        // Interpolation in x-direction
+        if (iX + 1 < m_resultImage.width())
+        {
+            qreal fX = 8 * (x - iX);
+
+            QRgb topRightValue    = pixel(iX + 1, iY);
+            QRgb bottomRightValue = pixel(iX + 1, iY + 1);
+
+            QRgb rightValue;
+            if (fY < 1)
+                rightValue = topRightValue;
+            else if (fY < 3)
+                rightValue = colorMix75( topRightValue, bottomRightValue);
+            else if (fY < 5)
+                rightValue = colorMix50( topRightValue, bottomRightValue);
+            else if (fY < 7)
+                rightValue = colorMix25( topRightValue, bottomRightValue);
+            else
+                rightValue = bottomRightValue;
+
+
+            QRgb averageValue;
+
+            if (fX < 1)
+                averageValue = leftValue;
+            else if (fX < 3)
+                averageValue = colorMix75( leftValue, rightValue);
+            else if (fX < 5)
+                averageValue = colorMix50( leftValue, rightValue);
+            else if (fX < 7)
+                averageValue = colorMix25( leftValue, rightValue);
+            else
+                averageValue = rightValue;
+
+            return averageValue;
+        }
+        else {
+            return leftValue;
+        }
+    }
+    else {
+        // Interpolation in x-direction
+        if ( iX + 1 < m_resultImage.width() ) {
+
+            qreal fX = 8 * (x - iX);
+
+            if ( fX == 0 )
+                return topLeftValue;
+
+            QRgb topRightValue = pixel( iX + 1, iY );
+
+            QRgb topValue;
+            if (fX < 1)
+                topValue = topLeftValue;
+            else if (fX < 3)
+                topValue = colorMix75( topLeftValue, topRightValue);
+            else if (fX < 5)
+                topValue = colorMix50( topLeftValue, topRightValue);
+            else if (fX < 7)
+                topValue = colorMix25( topLeftValue, topRightValue);
+            else
+                topValue = topRightValue;
+
+            return topValue;
+        }
+    }
+
+    return topLeftValue;
+}
+
+#else
 
 uint StackedTile::pixelF( qreal x, qreal y, const QRgb& topLeftValue ) const
 {
@@ -105,22 +221,11 @@ uint StackedTile::pixelF( qreal x, qreal y, const QRgb& topLeftValue ) const
     if ( ( iY + 1 ) < m_resultImage.height() ) {
 
         QRgb bottomLeftValue  =  pixel( iX, iY + 1 );
-// #define CHEAPHIGH
-#ifdef CHEAPHIGH
-        QRgb leftValue;
-        if ( fY < 0.33 )
-            leftValue = topLeftValue;
-        else if ( fY < 0.66 ) 
-            leftValue = (((bottomLeftValue ^ topLeftValue) & 0xfefefefeUL) >> 1)
-                            + (bottomLeftValue & topLeftValue);
-        else 
-            leftValue = bottomLeftValue;
-#else
         // blending the color values of the top left and bottom left point
         qreal ml_red   = ( 1.0 - fY ) * qRed  ( topLeftValue  ) + fY * qRed  ( bottomLeftValue  );
         qreal ml_green = ( 1.0 - fY ) * qGreen( topLeftValue  ) + fY * qGreen( bottomLeftValue  );
         qreal ml_blue  = ( 1.0 - fY ) * qBlue ( topLeftValue  ) + fY * qBlue ( bottomLeftValue  );
-#endif
+
         // Interpolation in x-direction
         if ( iX + 1 < m_resultImage.width() ) {
 
@@ -129,47 +234,21 @@ uint StackedTile::pixelF( qreal x, qreal y, const QRgb& topLeftValue ) const
             QRgb topRightValue    =  pixel( iX + 1, iY );
             QRgb bottomRightValue =  pixel( iX + 1, iY + 1 );
 
-#ifdef CHEAPHIGH
-            QRgb rightValue;
-            if ( fY < 0.33 )
-                rightValue = topRightValue;
-            else if ( fY < 0.66 )
-                rightValue = (((bottomRightValue ^ topRightValue) & 0xfefefefeUL) >> 1)
-                                + (bottomRightValue & topRightValue);
-            else
-                rightValue = bottomRightValue;
-
-            QRgb averageValue;
-            if ( fX < 0.33 )
-                averageValue = leftValue;
-            else if ( fX < 0.66 )
-                averageValue = (((leftValue ^ rightValue) & 0xfefefefeUL) >> 1)
-                                + (leftValue & rightValue);
-            else
-                averageValue = rightValue;
-
-            return averageValue;
-#else
             // blending the color values of the top right and bottom right point
             qreal mr_red   = ( 1.0 - fY ) * qRed  ( topRightValue ) + fY * qRed  ( bottomRightValue );
             qreal mr_green = ( 1.0 - fY ) * qGreen( topRightValue ) + fY * qGreen( bottomRightValue );
             qreal mr_blue  = ( 1.0 - fY ) * qBlue ( topRightValue ) + fY * qBlue ( bottomRightValue );
-    
-            // blending the color values of the resulting middle left 
+
+            // blending the color values of the resulting middle left
             // and middle right points
             int mm_red   = (int)( ( 1.0 - fX ) * ml_red   + fX * mr_red   );
             int mm_green = (int)( ( 1.0 - fX ) * ml_green + fX * mr_green );
             int mm_blue  = (int)( ( 1.0 - fX ) * ml_blue  + fX * mr_blue  );
-    
+
             return qRgb( mm_red, mm_green, mm_blue );
-#endif
         }
         else {
-#ifdef CHEAPHIGH
-            return leftValue;
-#else
             return qRgb( ml_red, ml_green, ml_blue );
-#endif
         }
     }
     else {
@@ -182,30 +261,19 @@ uint StackedTile::pixelF( qreal x, qreal y, const QRgb& topLeftValue ) const
                 return topLeftValue;
 
             QRgb topRightValue    =  pixel( iX + 1, iY );
-#ifdef CHEAPHIGH
-            QRgb topValue;
-            if ( fX < 0.33 )
-                topValue = topLeftValue;
-            else if ( fX < 0.66 )
-                topValue = (((topLeftValue ^ topRightValue) & 0xfefefefeUL) >> 1)
-                                + (topLeftValue & topRightValue);
-            else
-                topValue = topRightValue;
-
-            return topValue;
-#else
             // blending the color values of the top left and top right point
             int tm_red   = (int)( ( 1.0 - fX ) * qRed  ( topLeftValue ) + fX * qRed  ( topRightValue ) );
             int tm_green = (int)( ( 1.0 - fX ) * qGreen( topLeftValue ) + fX * qGreen( topRightValue ) );
             int tm_blue  = (int)( ( 1.0 - fX ) * qBlue ( topLeftValue ) + fX * qBlue ( topRightValue ) );
 
             return qRgb( tm_red, tm_green, tm_blue );
-#endif
         }
     }
 
     return topLeftValue;
 }
+
+#endif
 
 int StackedTile::calcByteCount( const QImage &resultImage, const QVector<QSharedPointer<TextureTile> > &tiles )
 {

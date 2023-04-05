@@ -91,7 +91,7 @@ class StackedTile : public Tile
 */    
     uint pixelF( qreal x, qreal y ) const;
     // This method passes the top left pixel (if known already) for better performance
-    uint pixelF( qreal x, qreal y, const QRgb& pixel ) const; 
+    uint pixelF( qreal x, qreal y, const QRgb& pixel ) const;
 
  private:
     Q_DISABLE_COPY( StackedTile )
