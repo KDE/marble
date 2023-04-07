@@ -163,6 +163,7 @@ void GeoLineStringGraphicsItem::paint(GeoPainter* painter, const ViewportParams*
         if (s_previousStyle != style().data()) {
             configurePainterForLine(painter, viewport, false);
         }
+        s_previousStyle = style().data();
         for(const QPolygonF* itPolygon: m_cachedPolygons) {
             painter->drawPolyline(*itPolygon);
         }
