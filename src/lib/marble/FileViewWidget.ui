@@ -16,15 +16,27 @@
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
     <widget class="QTreeView" name="m_treeView">
+     <property name="editTriggers">
+      <set>QAbstractItemView::EditKeyPressed</set>
+     </property>
      <property name="iconSize">
       <size>
-       <width>0</width>
-       <height>0</height>
+       <width>16</width>
+       <height>16</height>
       </size>
      </property>
      <property name="textElideMode">
       <enum>Qt::ElideLeft</enum>
      </property>
+     <attribute name="headerCascadingSectionResizes">
+      <bool>false</bool>
+     </attribute>
+     <attribute name="headerDefaultSectionSize">
+      <number>200</number>
+     </attribute>
+     <attribute name="headerStretchLastSection">
+      <bool>false</bool>
+     </attribute>
     </widget>
    </item>
    <item>

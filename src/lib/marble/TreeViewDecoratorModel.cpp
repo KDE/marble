@@ -10,6 +10,7 @@
 #include "GeoDataStyle.h"
 #include "GeoDataListStyle.h"
 #include "GeoDataItemIcon.h"
+#include "GeoDataGeometry.h"
 #include "MarblePlacemarkModel.h"
 
 #include <QImage>
@@ -41,7 +42,12 @@ bool TreeViewDecoratorModel::filterAcceptsRow( int sourceRow, const QModelIndex 
 QVariant TreeViewDecoratorModel::data( const QModelIndex &proxyIndex, int role) const
 {
     if ( role != Qt::DecorationRole || proxyIndex.column() != 0 ) {
-        return QSortFilterProxyModel::data(proxyIndex, role);
+        if (proxyIndex.column() == 1) {
+            return QSortFilterProxyModel::data(proxyIndex, role).toString().remove("GeoData");
+        }
+        else {
+            return QSortFilterProxyModel::data(proxyIndex, role);
+        }
     }
 
     GeoDataObject *object = qvariant_cast<GeoDataObject *>( QSortFilterProxyModel::data(proxyIndex, MarblePlacemarkModel::ObjectPointerRole));
@@ -49,22 +55,20 @@ QVariant TreeViewDecoratorModel::data( const QModelIndex &proxyIndex, int role) 
         return QSortFilterProxyModel::data(proxyIndex, role);
     }
 
-    if (geodata_cast<GeoDataFolder>(object)) {
-        return QSortFilterProxyModel::data(proxyIndex, role);
-    }
+    GeoDataFolder *folder = dynamic_cast<GeoDataFolder *>( object );
 
-    GeoDataFolder *folder = static_cast<GeoDataFolder *>( object );
+    if (folder) {
+        bool const expandedState = m_expandedRows.contains( QPersistentModelIndex( proxyIndex ) );
 
-    bool const expandedState = m_expandedRows.contains( QPersistentModelIndex( proxyIndex ) );
-
-    for (GeoDataItemIcon *icon: folder->style()->listStyle().itemIconList()) {
-        if ( ! expandedState ) {
-            if ( icon->state() == GeoDataItemIcon::Closed ) {
-                return icon->icon();
-            }
-        } else {
-            if ( icon->state() == GeoDataItemIcon::Open ) {
-                return icon->icon();
+        for (GeoDataItemIcon *icon: folder->style()->listStyle().itemIconList()) {
+            if ( ! expandedState ) {
+                if ( icon->state() == GeoDataItemIcon::Closed ) {
+                    return icon->icon();
+                }
+            } else {
+                if ( icon->state() == GeoDataItemIcon::Open ) {
+                    return icon->icon();
+                }
             }
         }
     }
