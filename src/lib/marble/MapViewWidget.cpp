@@ -305,6 +305,8 @@ MapViewWidget::MapViewWidget( QWidget *parent, Qt::WindowFlags f )
         d->m_mapViewUi.marbleThemeSelectView->setModel( &d->m_mapSortProxy );
         connect( d->m_mapViewUi.marbleThemeSelectView, SIGNAL(pressed(QModelIndex)),
                  this,                                 SLOT(mapThemeSelected(QModelIndex)) );
+        connect( d->m_mapViewUi.marbleThemeSelectView, SIGNAL(activated(QModelIndex)),
+                 this,                                 SLOT(mapThemeSelected(QModelIndex)) );
         connect( d->m_mapViewUi.marbleThemeSelectView, SIGNAL(customContextMenuRequested(QPoint)),
                  this,                                 SLOT(showContextMenu(QPoint)) );
 
