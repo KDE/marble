@@ -7557,87 +7557,87 @@ msgctxt "GeoDataCoordinates|Seconds symbol terms"
 msgid "*"
 msgstr "*"
 
-#: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:207
+#: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:211
 msgctxt "GeoLineStringGraphicsItem|"
 msgid "Detour"
 msgstr "Déviation"
 
-#: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:208
+#: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:212
 msgctxt "GeoLineStringGraphicsItem|"
 msgid "Ferry Route"
 msgstr "Ligne de ferry"
 
-#: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:209
+#: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:213
 msgctxt "GeoLineStringGraphicsItem|"
 msgid "Train"
 msgstr "Train"
 
-#: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:210
+#: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:214
 msgctxt "GeoLineStringGraphicsItem|"
 msgid "Subway"
 msgstr "Métro"
 
-#: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:211
+#: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:215
 msgctxt "GeoLineStringGraphicsItem|"
 msgid "Tram"
 msgstr "Tramway"
 
-#: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:212
+#: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:216
 msgctxt "GeoLineStringGraphicsItem|"
 msgid "Bus"
 msgstr "Bus"
 
-#: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:213
+#: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:217
 msgctxt "GeoLineStringGraphicsItem|"
 msgid "Trolley Bus"
 msgstr "Trolleybus"
 
-#: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:214
+#: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:218
 msgctxt "GeoLineStringGraphicsItem|"
 msgid "Bicycle Route"
 msgstr "Piste cyclable"
 
-#: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:215
+#: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:219
 msgctxt "GeoLineStringGraphicsItem|"
 msgid "Mountainbike Route"
 msgstr "Chemin de VTT"
 
-#: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:216
+#: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:220
 msgctxt "GeoLineStringGraphicsItem|"
 msgid "Walking Route"
 msgstr "Chemin piétonnier"
 
-#: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:217
+#: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:221
 msgctxt "GeoLineStringGraphicsItem|"
 msgid "Hiking Route"
 msgstr "Chemin de randonnée"
 
-#: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:218
+#: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:222
 msgctxt "GeoLineStringGraphicsItem|"
 msgid "Bridleway"
 msgstr "Piste cavalière"
 
-#: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:219
+#: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:223
 msgctxt "GeoLineStringGraphicsItem|"
 msgid "Inline Skates Route"
 msgstr "Routes intégrées de glisse"
 
-#: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:220
+#: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:224
 msgctxt "GeoLineStringGraphicsItem|"
 msgid "Downhill Piste"
 msgstr "Piste de ski alpin"
 
-#: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:221
+#: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:225
 msgctxt "GeoLineStringGraphicsItem|"
 msgid "Nordic Ski Trail"
 msgstr "Itinéraire de ski de fond"
 
-#: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:222
+#: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:226
 msgctxt "GeoLineStringGraphicsItem|"
 msgid "Skitour"
 msgstr "Randonnée à ski"
 
-#: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:223
+#: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:227
 msgctxt "GeoLineStringGraphicsItem|"
 msgid "Sled Trail"
 msgstr "Piste de luges"

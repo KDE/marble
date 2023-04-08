@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: marble_qt\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2023-03-23 21:50+0100\n"
+"PO-Revision-Date: 2023-04-07 10:09+0100\n"
 "Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: esperanto <kde-i18n-eo@kde.org>\n"
 "Language: eo\n"
@@ -1836,22 +1836,22 @@ msgstr "Populacio:"
 #. file data/legend.html
 msgctxt "Legends|"
 msgid "&gt; 1&nbsp;000&nbsp;000"
-msgstr "> 1 000 000"
+msgstr "&gt; 1&nbsp;000&nbsp;000"
 
 #. file data/legend.html
 msgctxt "Legends|"
 msgid "&ge; 100&nbsp;000"
-msgstr "≥ 100 000"
+msgstr "&ge; 100&nbsp;000"
 
 #. file data/legend.html
 msgctxt "Legends|"
 msgid "&ge; 10&nbsp;000"
-msgstr "≥ 10 000"
+msgstr "&ge; 10&nbsp;000"
 
 #. file data/legend.html
 msgctxt "Legends|"
 msgid "&lt; 10&nbsp;000"
-msgstr "< 10 000"
+msgstr "&lt; 10&nbsp;000"
 
 #. file data/legend.html
 msgctxt "Legends|"
@@ -7520,87 +7520,87 @@ msgctxt "GeoDataCoordinates|Seconds symbol terms"
 msgid "*"
 msgstr "*"
 
-#: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:207
+#: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:211
 msgctxt "GeoLineStringGraphicsItem|"
 msgid "Detour"
 msgstr "Deturniĝo"
 
-#: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:208
+#: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:212
 msgctxt "GeoLineStringGraphicsItem|"
 msgid "Ferry Route"
 msgstr "Pramvojo"
 
-#: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:209
+#: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:213
 msgctxt "GeoLineStringGraphicsItem|"
 msgid "Train"
 msgstr "Trajno"
 
-#: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:210
+#: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:214
 msgctxt "GeoLineStringGraphicsItem|"
 msgid "Subway"
 msgstr "Metroo"
 
-#: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:211
+#: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:215
 msgctxt "GeoLineStringGraphicsItem|"
 msgid "Tram"
 msgstr "Tramo"
 
-#: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:212
+#: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:216
 msgctxt "GeoLineStringGraphicsItem|"
 msgid "Bus"
 msgstr "Buso"
 
-#: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:213
+#: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:217
 msgctxt "GeoLineStringGraphicsItem|"
 msgid "Trolley Bus"
 msgstr "Trolebuso"
 
-#: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:214
+#: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:218
 msgctxt "GeoLineStringGraphicsItem|"
 msgid "Bicycle Route"
 msgstr "Bicikla vojo"
 
-#: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:215
+#: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:219
 msgctxt "GeoLineStringGraphicsItem|"
 msgid "Mountainbike Route"
 msgstr "Montbiciklo-Itinero"
 
-#: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:216
+#: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:220
 msgctxt "GeoLineStringGraphicsItem|"
 msgid "Walking Route"
 msgstr "Promenada Itinero"
 
-#: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:217
+#: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:221
 msgctxt "GeoLineStringGraphicsItem|"
 msgid "Hiking Route"
 msgstr "Migranta Itinero"
 
-#: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:218
+#: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:222
 msgctxt "GeoLineStringGraphicsItem|"
 msgid "Bridleway"
 msgstr "Bridlevojo"
 
-#: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:219
+#: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:223
 msgctxt "GeoLineStringGraphicsItem|"
 msgid "Inline Skates Route"
 msgstr "Inline Skates Route"
 
-#: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:220
+#: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:224
 msgctxt "GeoLineStringGraphicsItem|"
 msgid "Downhill Piste"
 msgstr "Dekliva Pisto"
 
-#: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:221
+#: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:225
 msgctxt "GeoLineStringGraphicsItem|"
 msgid "Nordic Ski Trail"
 msgstr "Nordia Skivojo"
 
-#: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:222
+#: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:226
 msgctxt "GeoLineStringGraphicsItem|"
 msgid "Skitour"
 msgstr "Skitour"
 
-#: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:223
+#: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:227
 msgctxt "GeoLineStringGraphicsItem|"
 msgid "Sled Trail"
 msgstr "Sledvojo"
@@ -8021,12 +8021,9 @@ msgid "Wizard cannot parse server's response"
 msgstr "Asistanto ne povas analizi la respondon de la servilo"
 
 #: src/lib/marble/MapWizard.cpp:293
-#, fuzzy
-#| msgctxt "Marble::MapWizard|"
-#| msgid "Server is not a Web Map Server."
 msgctxt "Marble::MapWizard|"
 msgid "Server is not an OWS Server."
-msgstr "Servilo ne estas reta Map-servilo."
+msgstr "Servilo ne estas OWS-servilo."
 
 #: src/lib/marble/MapWizard.cpp:380 src/lib/marble/MapWizard.cpp:396
 #: src/lib/marble/MapWizard.cpp:1112
@@ -8041,9 +8038,6 @@ msgid "Equirectangular (epsg:4326)"
 msgstr ""
 
 #: src/lib/marble/MapWizard.cpp:392
-#, fuzzy
-#| msgctxt "MapWizard|"
-#| msgid "Tile Projection:"
 msgctxt "Marble::MapWizard|"
 msgid "Tile Projection:"
 msgstr "Kahela Projekcio:"
@@ -8183,12 +8177,9 @@ msgid "Check if a theme with the same name exists."
 msgstr "Kontrolu se etoso jam ekzistas kun la sama nomo."
 
 #: src/lib/marble/MapWizard.cpp:1504
-#, fuzzy
-#| msgctxt "MapWizard|"
-#| msgid "WMS Server:"
 msgctxt "Marble::MapWizard|"
 msgid "WMS Server"
-msgstr "WMS-Servilo:"
+msgstr "WMS-Servilo"
 
 #: src/lib/marble/MapWizard.cpp:1505
 msgctxt "Marble::MapWizard|"
@@ -8198,12 +8189,9 @@ msgid ""
 msgstr ""
 
 #: src/lib/marble/MapWizard.cpp:1508
-#, fuzzy
-#| msgctxt "MapWizard|"
-#| msgid "WMS Server:"
 msgctxt "Marble::MapWizard|"
 msgid "WMTS Server"
-msgstr "WMS-Servilo:"
+msgstr "WMS-Servilo"
 
 #: src/lib/marble/MapWizard.cpp:1509
 msgctxt "Marble::MapWizard|"
@@ -8283,12 +8271,9 @@ msgid "Web Map Service (WMS)"
 msgstr "Retmapa Servo (WMS)"
 
 #: src/lib/marble/MapWizard.ui:70
-#, fuzzy
-#| msgctxt "MapWizard|"
-#| msgid "Web Map Service (WMS)"
 msgctxt "MapWizard|"
 msgid "Web Map Tile Service (WMTS)"
-msgstr "Retmapa Servo (WMS)"
+msgstr "Retmapkahela Servo (WMS)"
 
 #: src/lib/marble/MapWizard.ui:80
 msgctxt "MapWizard|"
@@ -8829,7 +8814,7 @@ msgid ""
 "\">kossebau@kde.org</a><br /><i>Plasma Integration, Bugfixes</i></p>"
 msgstr ""
 "<p>Friedrich W. H. Kossebau, <a href=\"mailto:kossebau@kde.org"
-"\">kossebau@kde.org</a><br /><i>Plasma Integriĝo, Eraroj</i></p> >"
+"\">kossebau@kde.org</a><br /><i>Plasma Integriĝo, Eraroj</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:87
 msgctxt "QObject|"
@@ -8855,8 +8840,8 @@ msgid ""
 "<p>Florian E&szlig;er <a href=\"mailto:f.esser@rwth-aachen.de\">f.esser@rwth-"
 "aachen.de</a><br /><i>Elevation Profile</i></p>"
 msgstr ""
-"<p>Florian Eßer <a href=\"mailto:f.esser@rwth-aachen.de\">f.esser@rwth-"
-"aachen.de</a><br /><i>Profilo de alteco</i ></p>"
+"<p>Florian E&szlig;er <a href=\"mailto:f.esser@rwth-aachen.de\">f.esser@rwth-"
+"aachen.de</a><br /><i>Profilo de alteco</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:93
 msgctxt "QObject|"
@@ -8874,7 +8859,7 @@ msgid ""
 "de</a><br /><i>Online Services Support</i></p>"
 msgstr ""
 "<p>Bastian Holst, <a href=\"mailto:bastian holst@gmx.de\">bastian holst@gmx."
-"de</a><br /><i>Subteno pri Interretaj Servoj</i></p >"
+"de</a><br /><i>Subteno pri Interretaj Servoj</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:97
 msgctxt "QObject|"
@@ -9094,7 +9079,7 @@ msgid ""
 msgstr ""
 "<p>Gábor Péterffy, <a href=\"mailto:peterffy95@gmail.com\"> peterffy95@gmail."
 "com </a><br /><i>Projekto: Panorama Bilda Subteno por ĉielaj korpoj en "
-"Marble </a><br /><i> i ></ p >"
+"Marble </i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:142
 #: src/lib/marble/MarbleAboutDialog.cpp:161
@@ -9344,7 +9329,7 @@ msgid ""
 msgstr ""
 "<p>Dávid Kolozsvári <a href=\"freedawson@gmail.com\">freedawson@gmail.com</"
 "a><br /><i>Projekto: Plibonigi la OSM-vektorbildigan subtenon de Marble</i></"
-"p >"
+"p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:193
 msgctxt "QObject|"
@@ -9364,7 +9349,7 @@ msgid ""
 msgstr ""
 "<p>Marius Valeriu Stanciu <a href=\"stanciumarius94@gmail.com"
 "\">stanciumarius94@gmail.com</a><br /><i>Projekto: Proponante OpenStreetMap-"
-"subtenon kaj plibonigante Redaktan Reĝimon por Marble</i ></p>"
+"subtenon kaj plibonigante Redaktan Reĝimon por Marble</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:198
 msgctxt "QObject|"
@@ -9402,7 +9387,7 @@ msgid ""
 "b@gmail.com</a><br /><i>Project: Marble KML Map Editor</i></p>"
 msgstr ""
 "<p>Adrian Draghici <a href=\"draghici.adrian.b@gmail.com\">draghici.adrian."
-"b@gmail.com</a><br /><i>Projekto: Marble KML Map Editor< /i></p>"
+"b@gmail.com</a><br /><i>Projekto: Marble KML Map Editor</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:207
 msgctxt "QObject|"
@@ -9411,7 +9396,7 @@ msgid ""
 "dorian@gmail.com</a><br /><i>Project: Marble meets ownCloud</i></p>"
 msgstr ""
 "<p>Andrei Duma <a href=\"andrei.duma.dorian@gmail.com\">andrei.duma."
-"dorian@gmail.com</a><br /><i>Projekto: Marble renkontas ownCloud</ i </ p >"
+"dorian@gmail.com</a><br /><i>Projekto: Marble renkontas ownCloud</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:209
 msgctxt "QObject|"
@@ -9420,7 +9405,7 @@ msgid ""
 "a><br /><i>Project: ownCloud storage and synchronization for Marble </i></p>"
 msgstr ""
 "<p>Utku Aydın <a href=\"utkuaydin34@gmail.com\">utkuaydin34@gmail.com</a><br/"
-"><i>Projekto: ownCloud-stokado kaj sinkronigado por Marble </i></p >"
+"><i>Projekto: ownCloud-stokado kaj sinkronigado por Marble </i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:211
 msgctxt "QObject|"
@@ -9456,7 +9441,7 @@ msgid ""
 "berlin.de</a><br /><i>Project: OpenGL Mode for Marble</i></p>"
 msgstr ""
 "<p>Bernhard Beschow <a href=\"bbeschow@cs.tu-berlin.de\">bbeschow@cs.tu-"
-"berlin.de</a><br /><i>Projekto: OpenGL-Reĝimo por Marble< /i></p>"
+"berlin.de</a><br /><i>Projekto: OpenGL-Reĝimo por Marble</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:221
 msgctxt "QObject|"
@@ -9499,7 +9484,7 @@ msgid ""
 "com</a><br /><i>Project: Time Support</i></p>"
 msgstr ""
 "<p>Harshit Jain <a href=\"mailto:hjain.itbhu@gmail.com\">hjain.itbhu@gmail."
-"com</a><br /><i>Projekto: Tempo Subteno</i>< /p>"
+"com</a><br /><i>Projekto: Tempo Subteno</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:230
 msgctxt "QObject|"
@@ -9508,7 +9493,7 @@ msgid ""
 "\">akssps011@gmail.com</a><br /><i>Project: Turn-by-turn Navigation</i></p>"
 msgstr ""
 "<p> Siddharth Srivastava <a href=\"mailto:akssps011@gmail.com"
-"\">akssps011@gmail.com</a><br /><i>Projekto: Navigado laŭpaŝa</i>< /p>"
+"\">akssps011@gmail.com</a><br /><i>Projekto: Navigado laŭpaŝa</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:232
 msgctxt "QObject|"
@@ -9522,7 +9507,7 @@ msgid ""
 "com</a><br /><i>Project: OSM Annotation</i></p>"
 msgstr ""
 "<p>Andrew Manson <a href=\"mailto:g.real.ate@gmail.com\">g.real.ate@gmail."
-"com</a><br /><i>Projekto: OSM Annotation< /i></p>"
+"com</a><br /><i>Projekto: OSM Annotation</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:235
 msgctxt "QObject|"
@@ -9531,7 +9516,7 @@ msgid ""
 "a><br /><i>Project: Online Services</i></p>"
 msgstr ""
 "<p>Bastian Holst <a href=\"mailto:bastian holst@gmx.de\">bastian holst@gmx."
-"de</a><br /><i>Projekto: Retaj Servoj</i></p >"
+"de</a><br /><i>Projekto: Retaj Servoj</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:237
 msgctxt "QObject|"
@@ -9590,7 +9575,7 @@ msgid ""
 "a><br /><i>Project: KML Support for Marble</i></p>"
 msgstr ""
 "<p>Murad Tagirov <a href=\"mailto:tmurad@gmail.com\">tmurad@gmail.com</"
-"a><br /><i>Projekto: KML-Subteno por Marble</i></p >"
+"a><br /><i>Projekto: KML-Subteno por Marble</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:249
 msgctxt "QObject|"
@@ -9736,7 +9721,7 @@ msgid ""
 "Universal</a> license.</p>"
 msgstr ""
 "<p><i>Piktogramoj</i><br />Kelkaj piktogramoj estas prenitaj de <a href="
-"\"https://www.sjjb.co.uk/mapicons\">SJJB-Administrado</a> kaj < a href="
+"\"https://www.sjjb.co.uk/mapicons\">SJJB-Administrado</a> kaj <a href="
 "\"https://thenounproject.com\">NounProject</a>. Ĉi tiuj piktogramoj povas "
 "esti uzataj libere laŭ la kondiĉoj de la permesilo <a href=\"https://"
 "creativecommons.org/publicdomain/zero/1.0/\">CC0 1.0 Universal</a>.</p>"
@@ -9766,7 +9751,7 @@ msgid ""
 msgstr ""
 "<p><i>OpenRouteService</i><br />Kelkaj el la itineroj uzataj en Marble per "
 "elŝuto estas provizitaj de la <a href=\"https://maps.openrouteservice.org"
-"\">OpenRouteService</a > Projekto (\"ORS\"). <br /><i>Licenco</i>: "
+"\">OpenRouteService</a> Projekto (\"ORS\"). <br /><i>Licenco</i>: "
 "OpenRouteService-datumoj povas esti uzataj libere laŭ la kondiĉoj de la <a "
 "href=\"https://wiki.openstreetmap.org/index.php/OpenStreetMap_License\">Krea "
 "Komunaĵo Licenco Atribuite-Samkondiĉe 2.0</a>.</p>"
@@ -9786,7 +9771,7 @@ msgstr ""
 "\">Malfermita Fonta Voja Maŝino</a> Projekto (\"OSRM\"). <br /><i>Licenco</"
 "i>: datumoj de Malfermfonta Voja Maŝino povas esti uzataj libere laŭ la "
 "kondiĉoj de la <a href=\"https://wiki.openstreetmap.org/index.php/"
-"OpenStreetMap_License\" >Licenco Creative Commons Atribuite-Samkondiĉe 2.0</"
+"OpenStreetMap_License\">Licenco Creative Commons Atribuite-Samkondiĉe 2.0</"
 "a>.</p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:316
@@ -9802,7 +9787,7 @@ msgid ""
 "com/terms-of-use/\">MapQuest terms of use</a>.</p>"
 msgstr ""
 "<p><i>MapQuest</i><br />Kelkaj el la itineroj uzataj en Marble per elŝuto "
-"estas provizitaj de <a href=\"https://www.mapquest.com/\">MapQuest</a > kaj "
+"estas provizitaj de <a href=\"https://www.mapquest.com/\">MapQuest</a> kaj "
 "iliaj Open Data Map API-oj kaj Retaj Servoj.<br />Instrukcioj ĝentile de "
 "MapQuest laboranta pri OpenStreetMap-datumoj kiuj povas esti libere uzataj "
 "laŭ la kondiĉoj de la <a href=\"https://wiki.openstreetmap.org/index. .php/"
@@ -9822,7 +9807,7 @@ msgid ""
 "gazetteer.com\">http://www.world-gazetteer.com</a></p>"
 msgstr ""
 "<p><i>Monda Gazetteer</i><br />Stefan Helders <a href=\"http://www.world-"
-"gazetteer.com\">http://www.world-gazetteer.com< /a></p>"
+"gazetteer.com\">http://www.world-gazetteer.com</a></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:326
 msgctxt "QObject|"
@@ -9844,7 +9829,7 @@ msgid ""
 "vdb.czso.cz/vdbvo2\">https://www.czso.cz</a></p>"
 msgstr ""
 "<p><i>Ĉeĥa Statistika Oficejo</i><br />Publika datumbazo <a href=\"https://"
-"vdb.czso.cz/vdbvo2\">https://www.czso.cz</ a ></ p >"
+"vdb.czso.cz/vdbvo2\">https://www.czso.cz</a></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:332
 msgctxt "QObject|"
@@ -9881,7 +9866,7 @@ msgid ""
 msgstr ""
 "<p><i>La Brila Stela Katalogo</i><br />5-a Reviziita Red. (Prepara Versio) "
 "Hoffleit D., Warren Jr W.H., Astronomical Data Center, NSSDC/ADC (1991)<a "
-"href=\"https://heasarc.gsfc.nasa.gov/W3Browse/star-catalog/bsc5p.html\\ \"> "
+"href=\"https://heasarc.gsfc.nasa.gov/W3Browse/star-catalog/bsc5p.html\"> "
 "https://heasarc.gsfc.nasa.gov</a></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:373
@@ -9922,7 +9907,7 @@ msgstr ""
 "p, li { white-space: pre-wrap; }\n"
 "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; font-"
 "weight:400; font-style:normal; text-decoration:none; \">\n"
-"<p stilo=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
 "right:0px; -qt-block-indent:0; text-indent:0px; \"><span style=\" font-"
 "weight:600;\">Marble Virtuala Globo</span></p></body></html>"
 
@@ -10067,7 +10052,7 @@ msgstr ""
 "p, li { white-space: pre-wrap; }\n"
 "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; font-"
 "weight:400; font-style:normal;\">\n"
-"< p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
 "right:0px; -qt-block-indent:0; text-indent:0px;\">Estas du kaŝmemoroj en uzo "
 "por Marble: La fizika memoro kiu estas necesa por konservi mapdatenojn en la "
 "memoro de la komputilo. Pliigi la valoron faros la aplikaĵon pli respondema. "
@@ -10333,7 +10318,7 @@ msgstr ""
 "p, li { white-space: pre-wrap; }\n"
 "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; font-"
 "weight:400; font-style:normal;\">\n"
-"< p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
 "right:0px; -qt-block-indent:0; text-indent:0px;\">Dumirante la muso estas du "
 "normaj kondutoj kiam oni traktas virtualan globon:</p>\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
