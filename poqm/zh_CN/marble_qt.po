@@ -5561,7 +5561,7 @@ msgctxt "QObject|"
 msgid "View Properties"
 msgstr "视图属性"
 
-#: src/lib/marble/FileViewWidget.cpp:144
+#: src/lib/marble/FileViewWidget.cpp:146
 msgctxt "QObject|"
 msgid "Select filename for KML document"
 msgstr "选择 KML 文档的文件名"
@@ -5571,12 +5571,12 @@ msgctxt "FileViewWidget|"
 msgid "File View"
 msgstr "文件视图"
 
-#: src/lib/marble/FileViewWidget.ui:66
+#: src/lib/marble/FileViewWidget.ui:78
 msgctxt "FileViewWidget|"
 msgid "&Save"
 msgstr "保存(&S)"
 
-#: src/lib/marble/FileViewWidget.ui:76
+#: src/lib/marble/FileViewWidget.ui:88
 msgctxt "FileViewWidget|"
 msgid "&Close"
 msgstr "关闭(&C)"
@@ -7864,32 +7864,32 @@ msgctxt "Marble::MapViewWidget|"
 msgid "Perspective Globe view"
 msgstr "透视球体视图"
 
-#: src/lib/marble/MapViewWidget.cpp:648
+#: src/lib/marble/MapViewWidget.cpp:650
 msgctxt "Marble::MapViewWidget|"
 msgid "&Show Large Icons"
 msgstr "显示大图标(&S)"
 
-#: src/lib/marble/MapViewWidget.cpp:651
+#: src/lib/marble/MapViewWidget.cpp:653
 msgctxt "Marble::MapViewWidget|"
 msgid "&Favorite"
 msgstr "收藏(&F)"
 
-#: src/lib/marble/MapViewWidget.cpp:656
+#: src/lib/marble/MapViewWidget.cpp:658
 msgctxt "Marble::MapViewWidget|"
 msgid "&Create a New Map..."
 msgstr "新建地图(&C)..."
 
-#: src/lib/marble/MapViewWidget.cpp:658
+#: src/lib/marble/MapViewWidget.cpp:660
 msgctxt "Marble::MapViewWidget|"
 msgid "&Delete Map Theme"
 msgstr "删除地图主题(&D)"
 
-#: src/lib/marble/MapViewWidget.cpp:666
+#: src/lib/marble/MapViewWidget.cpp:668
 msgctxt "Marble::MapViewWidget|"
 msgid "Marble"
 msgstr "Marble"
 
-#: src/lib/marble/MapViewWidget.cpp:667
+#: src/lib/marble/MapViewWidget.cpp:669
 #, qt-format
 msgctxt "Marble::MapViewWidget|"
 msgid "Are you sure that you want to delete \"%1\"?"

@@ -6460,7 +6460,7 @@ msgctxt "QObject|"
 msgid "View Properties"
 msgstr "Jauns profils"
 
-#: src/lib/marble/FileViewWidget.cpp:144
+#: src/lib/marble/FileViewWidget.cpp:146
 msgctxt "QObject|"
 msgid "Select filename for KML document"
 msgstr ""
@@ -6472,12 +6472,12 @@ msgctxt "FileViewWidget|"
 msgid "File View"
 msgstr "Faila skats"
 
-#: src/lib/marble/FileViewWidget.ui:66
+#: src/lib/marble/FileViewWidget.ui:78
 msgctxt "FileViewWidget|"
 msgid "&Save"
 msgstr ""
 
-#: src/lib/marble/FileViewWidget.ui:76
+#: src/lib/marble/FileViewWidget.ui:88
 #, fuzzy
 #| msgid "&Clouds"
 msgctxt "FileViewWidget|"
@@ -9223,42 +9223,42 @@ msgctxt "Marble::MapViewWidget|"
 msgid "Perspective Globe view"
 msgstr ""
 
-#: src/lib/marble/MapViewWidget.cpp:648
+#: src/lib/marble/MapViewWidget.cpp:650
 #, fuzzy
 #| msgid "&Show Large Icons"
 msgctxt "Marble::MapViewWidget|"
 msgid "&Show Large Icons"
 msgstr "Rā&dīt lielas ikonas"
 
-#: src/lib/marble/MapViewWidget.cpp:651
+#: src/lib/marble/MapViewWidget.cpp:653
 #, fuzzy
 #| msgid "&Favorite"
 msgctxt "Marble::MapViewWidget|"
 msgid "&Favorite"
 msgstr "Ie&cienītie"
 
-#: src/lib/marble/MapViewWidget.cpp:656
+#: src/lib/marble/MapViewWidget.cpp:658
 #, fuzzy
 #| msgid "&Create a New Map..."
 msgctxt "Marble::MapViewWidget|"
 msgid "&Create a New Map..."
 msgstr "I&zveidot jaunu karti..."
 
-#: src/lib/marble/MapViewWidget.cpp:658
+#: src/lib/marble/MapViewWidget.cpp:660
 #, fuzzy
 #| msgid "&Delete Map Theme"
 msgctxt "Marble::MapViewWidget|"
 msgid "&Delete Map Theme"
 msgstr "&Dzēst kartes tēmu"
 
-#: src/lib/marble/MapViewWidget.cpp:666
+#: src/lib/marble/MapViewWidget.cpp:668
 #, fuzzy
 #| msgid "Marble"
 msgctxt "Marble::MapViewWidget|"
 msgid "Marble"
 msgstr "Marble"
 
-#: src/lib/marble/MapViewWidget.cpp:667
+#: src/lib/marble/MapViewWidget.cpp:669
 #, fuzzy, qt-format
 #| msgid "Are you sure that you want to delete \"%1\"?"
 msgctxt "Marble::MapViewWidget|"
