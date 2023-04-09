@@ -165,16 +165,7 @@ QSet<qint64> GeoDataRelation::memberIds() const
 bool GeoDataRelation::containsAnyOf(const QSet<qint64> &memberIds) const
 {
     Q_D(const GeoDataRelation);
-#if QT_VERSION >= QT_VERSION_CHECK(5, 6, 0)
-        return d->m_memberIds.intersects(memberIds);
-#else
-    for (auto memberId: memberIds) {
-        if (d->m_memberIds.contains(memberId)) {
-            return true;
-        }
-    }
-    return false;
-#endif
+    return d->m_memberIds.intersects(memberIds);
 }
 
 Q_DECLARE_OPERATORS_FOR_FLAGS(GeoDataRelation::RelationTypes)

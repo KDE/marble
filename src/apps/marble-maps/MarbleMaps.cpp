@@ -69,7 +69,6 @@ void MarbleMaps::setKeepScreenOn(bool screenOn)
     m_keepScreenOn = screenOn;
     char const * const action = m_keepScreenOn ? "addFlags" : "clearFlags";
 #ifdef Q_OS_ANDROID
-  #if QT_VERSION >= QT_VERSION_CHECK(5, 7, 0)
     QtAndroid::runOnAndroidThread([action](){
     QAndroidJniObject activity = QtAndroid::androidActivity();
     if (activity.isValid()) {
@@ -79,9 +78,6 @@ void MarbleMaps::setKeepScreenOn(bool screenOn)
             window.callMethod<void>(action, "(I)V", FLAG_KEEP_SCREEN_ON);
         }
     }});
-  #else
-  #warning "Please upgrade to Qt for Android 5.7 or later to enable the keep-screen-on feature"
-  #endif
 #else
     Q_UNUSED(action);
 #endif
