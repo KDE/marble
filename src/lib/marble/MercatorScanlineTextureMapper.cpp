@@ -126,7 +126,7 @@ void MercatorScanlineTextureMapper::mapTexture( const ViewportParams *viewport, 
     const int yStep = ( yPaintedBottom - yPaintedTop ) / numThreads;
     for ( int i = 0; i < numThreads; ++i ) {
         const int yStart = yPaintedTop +  i      * yStep;
-        const int yEnd   = yPaintedTop + (i + 1) * yStep;
+        const int yEnd   = (i == numThreads - 1) ? yPaintedBottom : yPaintedTop + (i + 1) * yStep;
         QRunnable *const job = new RenderJob( m_tileLoader, tileZoomLevel, &m_canvasImage, viewport, mapQuality, yStart, yEnd );
         m_threadPool.start( job );
     }
