@@ -2805,7 +2805,7 @@ msgctxt "SidePanel|"
 msgid "About Marble Maps…"
 msgstr "मारबल के बारे में"
 
-#: src/apps/marble-qt/qtmain.cpp:94
+#: src/apps/marble-qt/qtmain.cpp:92
 #, fuzzy
 #| msgid "Marble - Desktop Globe"
 msgctxt "Marble::MainWindow|"

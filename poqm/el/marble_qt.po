@@ -2803,7 +2803,7 @@ msgctxt "SidePanel|"
 msgid "About Marble Maps…"
 msgstr "Σχετικά με Marble Maps…"
 
-#: src/apps/marble-qt/qtmain.cpp:94
+#: src/apps/marble-qt/qtmain.cpp:92
 msgctxt "Marble::MainWindow|"
 msgid "Marble - Virtual Globe"
 msgstr "Marble - Εικονική υδρόγειος"

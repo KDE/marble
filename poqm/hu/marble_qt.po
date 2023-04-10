@@ -2943,7 +2943,7 @@ msgctxt "SidePanel|"
 msgid "About Marble Maps…"
 msgstr "Útválasztás - Marble"
 
-#: src/apps/marble-qt/qtmain.cpp:94
+#: src/apps/marble-qt/qtmain.cpp:92
 #, fuzzy
 #| msgid "Marble - Virtual Globe"
 msgctxt "Marble::MainWindow|"

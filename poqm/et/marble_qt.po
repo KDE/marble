@@ -2611,7 +2611,7 @@ msgctxt "SidePanel|"
 msgid "About Marble Maps…"
 msgstr "Marble kaaartide teave ..."
 
-#: src/apps/marble-qt/qtmain.cpp:94
+#: src/apps/marble-qt/qtmain.cpp:92
 msgctxt "Marble::MainWindow|"
 msgid "Marble - Virtual Globe"
 msgstr "Marble virtuaalgloobus"

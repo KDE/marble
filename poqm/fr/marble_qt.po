@@ -2636,7 +2636,7 @@ msgctxt "SidePanel|"
 msgid "About Marble Maps…"
 msgstr "À propos des cartes Marble…"
 
-#: src/apps/marble-qt/qtmain.cpp:94
+#: src/apps/marble-qt/qtmain.cpp:92
 msgctxt "Marble::MainWindow|"
 msgid "Marble - Virtual Globe"
 msgstr "Marble – Globe virtuel"
