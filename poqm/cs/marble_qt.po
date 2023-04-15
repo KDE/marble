@@ -17770,7 +17770,3 @@ msgstr "Šablona &plovoucího nástroje"
 msgctxt "Marble::FITemplateFloatItem|"
 msgid "This is a template class for float items."
 msgstr "Toto je třída šablony pro plovoucí nástroje."
-
-#~ msgctxt "DGML|"
-#~ msgid "Hillshading"
-#~ msgstr "Stínování kopců"
