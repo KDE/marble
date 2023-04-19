@@ -4,7 +4,7 @@
 # Niklas Laxström <niklas.laxstrom+kdetrans@gmail.com>, 2007, 2012.
 # Lasse Liehu <lasse.liehu@gmail.com>, 2011, 2012, 2013, 2014, 2015, 2016.
 # Jiri Grönroos <jiri.gronroos+kde@iki.fi>, 2012, 2013.
-# Tommi Nieminen <translator@legisign.org>, 2012, 2015, 2016, 2018, 2020, 2021, 2022.
+# Tommi Nieminen <translator@legisign.org>, 2012, 2015, 2016, 2018, 2020, 2021, 2022, 2023.
 #
 # KDE Finnish translation sprint participants:
 # Author: Artnay
@@ -15,7 +15,7 @@ msgstr ""
 "Project-Id-Version: marble_qt\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2022-08-05 10:48+0300\n"
+"PO-Revision-Date: 2023-04-17 16:54+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
 "Language: fi\n"
@@ -24,7 +24,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-POT-Import-Date: 2012-12-01 22:23:50+0000\n"
-"X-Generator: Lokalize 20.12.0\n"
+"X-Generator: Lokalize 22.12.3\n"
 "X-Qt-Contexts: true\n"
 
 #. file data/maps/moon/clementine/clementine.dgml:5
@@ -3594,17 +3594,13 @@ msgid "Cloud placemark"
 msgstr "Pilvipaikkamerkki"
 
 #: src/lib/marble/cloudsync/ConflictDialog.cpp:164
-#, fuzzy
-#| msgid ""
-#| "A bookmark on this device conflicts with a cloud bookmark. Which one do "
-#| "you want to keep?"
 msgctxt "Marble::ConflictDialog|"
 msgid ""
 "A bookmark on this device conflicts with a cloud bookmark. Which one do you "
 "want to keep?"
 msgstr ""
-"Tällä laitteella oleva kirjanmerkki aiheuttaa ristiriidan pilvikirjanmerkin "
-"kanssa. Kumman haluat säilyttää?"
+"Laitteella ja pilvessä oleva kirjanmerkki ovat ristiriidassa. Kumpi "
+"säilytetään?"
 
 #: src/lib/marble/cloudsync/ConflictDialog.cpp:175
 msgctxt "Marble::ConflictDialog|"
@@ -6653,7 +6649,7 @@ msgstr "Moottoripyöräliike"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:497
 msgctxt "GeoDataPlacemark|"
 msgid "Outdoor Shop"
-msgstr ""
+msgstr "Ulkoilmamyymälä"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:498
 msgctxt "GeoDataPlacemark|"
@@ -7255,7 +7251,7 @@ msgstr "Köysirata"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:617
 msgctxt "GeoDataPlacemark|"
 msgid "Gondola"
-msgstr ""
+msgstr "Gondoli"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:618
 msgctxt "GeoDataPlacemark|"
@@ -8065,13 +8061,13 @@ msgstr "Palvelin ei ole Web Map -palvelin."
 #: src/lib/marble/MapWizard.cpp:1112
 msgctxt "Marble::MapWizard|"
 msgid "Web Mercator (epsg:3857)"
-msgstr ""
+msgstr "Verkon Mercator (epsg:3857)"
 
 #: src/lib/marble/MapWizard.cpp:381 src/lib/marble/MapWizard.cpp:825
 #: src/lib/marble/MapWizard.cpp:952
 msgctxt "Marble::MapWizard|"
 msgid "Equirectangular (epsg:4326)"
-msgstr ""
+msgstr "Tasavälinen lieriö (epsg:4326)"
 
 #: src/lib/marble/MapWizard.cpp:392
 #, fuzzy
@@ -8226,12 +8222,9 @@ msgid "Check if a theme with the same name exists."
 msgstr "Tarkista, onko samannimistä teemaa olemassa."
 
 #: src/lib/marble/MapWizard.cpp:1504
-#, fuzzy
-#| msgctxt "MapWizard|"
-#| msgid "WMS Server:"
 msgctxt "Marble::MapWizard|"
 msgid "WMS Server"
-msgstr "WMS-palvelin:"
+msgstr "WMS-palvelin"
 
 #: src/lib/marble/MapWizard.cpp:1505
 msgctxt "Marble::MapWizard|"
@@ -8239,14 +8232,13 @@ msgid ""
 "<h4>WMS Server</h4>Please choose a <a href=\"https://en.wikipedia.org/wiki/"
 "Web_Map_Service\">WMS</a> server or enter a custom server URL."
 msgstr ""
+"<h4>WMS-palvelin</h4>Valitse <a href=\"https://fi.wikipedia.org/wiki/"
+"Web_Map_Service\">WMS</a>-palvelin tai anna mukauta palvelinosoite."
 
 #: src/lib/marble/MapWizard.cpp:1508
-#, fuzzy
-#| msgctxt "MapWizard|"
-#| msgid "WMS Server:"
 msgctxt "Marble::MapWizard|"
 msgid "WMTS Server"
-msgstr "WMS-palvelin:"
+msgstr "WMTS-palvelin"
 
 #: src/lib/marble/MapWizard.cpp:1509
 msgctxt "Marble::MapWizard|"
@@ -8254,6 +8246,8 @@ msgid ""
 "<h4>WMTS Server</h4>Please choose a <a href=\"https://de.wikipedia.org/wiki/"
 "Web_Map_Tile_Service\">WMTS</a> server or enter a custom server URL."
 msgstr ""
+"<h4>WMTS-palvelin</h4>Valitse <a href=\"https://en.wikipedia.org/wiki/"
+"Web_Map_Tile_Service\">WMTS</a>-palvelin tai anna mukautettu palvelinosoite."
 
 #: src/lib/marble/MapWizard.ui:20
 msgctxt "MapWizard|"
@@ -8325,12 +8319,9 @@ msgid "Web Map Service (WMS)"
 msgstr "Verkkokarttapalvelu (WMS)"
 
 #: src/lib/marble/MapWizard.ui:70
-#, fuzzy
-#| msgctxt "MapWizard|"
-#| msgid "Web Map Service (WMS)"
 msgctxt "MapWizard|"
 msgid "Web Map Tile Service (WMTS)"
-msgstr "Verkkokarttapalvelu (WMS)"
+msgstr "WMTS (Web Map Tile Service)"
 
 #: src/lib/marble/MapWizard.ui:80
 msgctxt "MapWizard|"
@@ -8431,6 +8422,8 @@ msgid ""
 "Enter the base Url of the WMS service (e.g. <i>https://www.wms.nrw.de/"
 "geobasis/wms_nw_dop_overlay</i>)"
 msgstr ""
+"Anna WMS-palvelun pohjaverkko-osoite (esim. <i>https://www.wms.nrw.de/"
+"geobasis/wms_nw_dop_overlay</i>)"
 
 #: src/lib/marble/MapWizard.ui:166 src/lib/marble/MapWizard.ui:465
 msgctxt "MapWizard|"
@@ -8438,35 +8431,24 @@ msgid "https://"
 msgstr "https://"
 
 #: src/lib/marble/MapWizard.ui:218
-#, fuzzy
-#| msgctxt ""
-#| "Marble::Placemark|A copy shop provides a service to send documents "
-#| "through fax"
-#| msgid "Fax service"
 msgctxt "MapWizard|"
 msgid "Wms-Service:"
-msgstr "Faksipalvelu"
+msgstr "WMS-palvelu:"
 
 #: src/lib/marble/MapWizard.ui:232
-#, fuzzy
-#| msgctxt "MainScreen|"
-#| msgid "Layer Options"
 msgctxt "MapWizard|"
 msgid "Layer Selection"
-msgstr "Tasovalinnat"
+msgstr "Tason valinta"
 
 #: src/lib/marble/MapWizard.ui:243
 msgctxt "MapWizard|"
 msgid "Choose your Layer(s):"
-msgstr ""
+msgstr "Valitse taso(t):"
 
 #: src/lib/marble/MapWizard.ui:266
-#, fuzzy
-#| msgctxt "SearchField|"
-#| msgid "Search"
 msgctxt "MapWizard|"
 msgid "Search:"
-msgstr "Etsi"
+msgstr "Etsi:"
 
 #: src/lib/marble/MapWizard.ui:288
 msgctxt "MapWizard|"
@@ -8474,6 +8456,8 @@ msgid ""
 "The order in which multiple layers are selected directly affects their "
 "rendering order."
 msgstr ""
+"Järjestys, jossa tasot valitaan, vaikuttaa suoraan niiden "
+"hahmonnusjärjestykseen."
 
 #: src/lib/marble/MapWizard.ui:297
 msgctxt "MapWizard|"
@@ -8485,7 +8469,7 @@ msgstr ""
 #: src/lib/marble/MapWizard.ui:300
 msgctxt "MapWizard|"
 msgid "Multiple Selections"
-msgstr ""
+msgstr "Monivalinta"
 
 #: src/lib/marble/MapWizard.ui:307
 msgctxt "MapWizard|"
@@ -8516,20 +8500,14 @@ msgid "Indicates the file format of the tiles."
 msgstr ""
 
 #: src/lib/marble/MapWizard.ui:383
-#, fuzzy
-#| msgctxt "MainScreen|"
-#| msgid "Layer Options"
 msgctxt "MapWizard|"
 msgid "Layer Info"
-msgstr "Tasovalinnat"
+msgstr "Tason tiedot"
 
 #: src/lib/marble/MapWizard.ui:396
-#, fuzzy
-#| msgctxt "GeoDataPlacemark|"
-#| msgid "Service Road"
 msgctxt "MapWizard|"
 msgid "Service Info"
-msgstr "Huoltoväylä"
+msgstr "Palvelun tiedot"
 
 #: src/lib/marble/MapWizard.ui:406
 msgctxt "MapWizard|"
@@ -8539,12 +8517,9 @@ msgstr ""
 #: src/lib/marble/MapWizard.ui:417
 msgctxt "MapWizard|"
 msgid "Preset Layers"
-msgstr ""
+msgstr "Esiasetetut tasot"
 
 #: src/lib/marble/MapWizard.ui:437
-#, fuzzy
-#| msgctxt "DGML|"
-#| msgid "OpenStreetMap"
 msgctxt "MapWizard|"
 msgid "OpenStreetMap"
 msgstr "OpenStreetMap"
@@ -8560,9 +8535,6 @@ msgid "The XYZ server needs to provide map tiles in Mercator projection."
 msgstr ""
 
 #: src/lib/marble/MapWizard.ui:479
-#, fuzzy
-#| msgctxt "FormattedTextWidget|"
-#| msgid "Color"
 msgctxt "MapWizard|"
 msgid "Color"
 msgstr "Väri"
@@ -8570,15 +8542,12 @@ msgstr "Väri"
 #: src/lib/marble/MapWizard.ui:498
 msgctxt "MapWizard|"
 msgid "#87CEFA"
-msgstr ""
+msgstr "#87CEFA"
 
 #: src/lib/marble/MapWizard.ui:511
-#, fuzzy
-#| msgctxt "UiEditPlacemarkDialog|"
-#| msgid "Style, Color"
 msgctxt "MapWizard|"
 msgid "Select Color"
-msgstr "Tyyli, väri"
+msgstr "Valitse väri"
 
 #: src/lib/marble/MapWizard.ui:554
 #, fuzzy
@@ -8816,7 +8785,7 @@ msgstr "Muuta…"
 #: src/lib/marble/MapWizard.ui:855
 msgctxt "MapWizard|"
 msgid "<b>Optional: Addition of a Map Key</b>"
-msgstr ""
+msgstr "<b>Valinnainen: kartta-avaimen lisäys</b>"
 
 #: src/lib/marble/MapWizard.ui:864
 msgctxt "MapWizard|"
@@ -8889,7 +8858,7 @@ msgstr "Kartan teema tulee tähän."
 #: src/lib/marble/MapWizard.ui:1002
 msgctxt "MapWizard|"
 msgid "Thumbnail"
-msgstr ""
+msgstr "Pienoiskuva"
 
 #: src/lib/marble/MapWizard.ui:1012
 msgctxt "MapWizard|"
