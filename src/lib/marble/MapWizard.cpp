@@ -379,6 +379,7 @@ void MapWizard::processSelectedLayerInformation()
     QMap<QString, QString> epsgToText;
     epsgToText["epsg:3857"] = tr("Web Mercator (epsg:3857)");
     epsgToText["epsg:4326"] = tr("Equirectangular (epsg:4326)");
+    epsgToText["crs:84"] = tr("Equirectangular (crs:84)");
     QStringList projectionTextList;
     if (d->selectedLayers.isEmpty()) {
         return;
@@ -822,8 +823,13 @@ bool MapWizard::validateCurrentPage()
             }
             d->selectedLayers = selectedList;
 
-            QString projection = d->uiWidget.comboBoxWmsMaps->currentText() == tr("Equirectangular (epsg:4326)")
-                    ? "epsg:4326" : "epsg:3857";
+            QString projection;
+            if (d->uiWidget.comboBoxWmsMaps->currentText() == tr("Equirectangular (epsg:4326)"))
+                projection = "epsg:4326";
+            else if (d->uiWidget.comboBoxWmsMaps->currentText() == tr("Equirectangular (crs:84)"))
+                projection = "crs:84";
+            else
+                projection = "epsg:3857";
             QString format = d->uiWidget.comboBoxWmsFormat->currentText();
             QStringList styles = d->owsManager.wmsCapabilities().styles(d->selectedLayers);
             d->owsManager.queryWmsPreviewImage(QUrl(d->uiWidget.lineEditWmsUrl->text()),
@@ -949,8 +955,13 @@ bool MapWizard::validateCurrentPage()
         && d->mapProviderType != MapWizardPrivate::StaticImageMap ) {
         if( d->mapProviderType == MapWizardPrivate::WmsMap )
         {
-            QString projection = d->uiWidget.comboBoxWmsMaps->currentText() == tr("Equirectangular (epsg:4326)")
-                    ? "epsg:4326" : "epsg:3857";
+            QString projection;
+            if (d->uiWidget.comboBoxWmsMaps->currentText() == tr("Equirectangular (epsg:4326)"))
+                projection = "epsg:4326";
+            else if (d->uiWidget.comboBoxWmsMaps->currentText() == tr("Equirectangular (crs:84)"))
+                projection = "crs:84";
+            else
+                projection = "epsg:3857";
             QString format = d->uiWidget.comboBoxWmsFormat->currentText();
             QStringList styles = d->owsManager.wmsCapabilities().styles(d->selectedLayers);
             d->owsManager.queryWmsLevelZeroTile(QUrl(d->uiWidget.lineEditWmsUrl->text()),

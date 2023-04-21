@@ -166,9 +166,10 @@ QStringList OwsMappingCapabilities::layers() const
 
 QStringList WmsCapabilities::projections(const QString &layer)
 {
-    QStringList result = m_wmsLayerCoordinateSystems.value(layer).keys()
-                        << m_wmsLayerCoordinateSystems.value(m_wmsLayerCoordinateSystems.firstKey()).keys();;
-
+    QStringList result = m_wmsLayerCoordinateSystems.value(layer).keys();
+    if (!m_wmsLayerCoordinateSystems.isEmpty()) {
+        result << m_wmsLayerCoordinateSystems.value(m_wmsLayerCoordinateSystems.firstKey()).keys();
+    }
     result.removeDuplicates();
 
     return result;
@@ -315,6 +316,9 @@ void OwsServiceManager::queryWmsMap(const QUrl &url, const QString &layers, cons
         else if (projection == "epsg:4326") {
             boundingBox = wmsCapabilities().version() == "1.3.0" ? "-90,-180,90,180" : "-180,-90,180,90";  // flipped axes for 1.3.0 in epsg:4326 according to spec
         }
+        else if (projection == "crs:84") {
+            boundingBox = "-180,-90,180,90"; // order: WGS84 longitude-latitude
+        }
     }
     downloadQuery.addQueryItem( "bbox", boundingBox );
     downloadQuery.addQueryItem( "transparent", "true");
@@ -349,6 +353,9 @@ void OwsServiceManager::queryWmsLevelZeroTile(const QUrl& url, const QString &la
     }
     else if (projection == "epsg:4326") {
         bbox = wmsCapabilities().version() == "1.3.0" ? "-90,-180,90,180" : "-180,-90,180,90"; // flipped axes for 1.3.0 in epsg:4326 according to spec
+    }
+    else if (projection == "crs:84") {
+        bbox = "-180,-90,180,90"; // order: WGS84 longitude-latitude
     }
 
     m_imageRequestResult.setResultType(LevelZeroTile);
@@ -647,11 +654,14 @@ void OwsServiceManager::parseWmsCapabilities(QNetworkReply *reply)
                 else */
                     wmsLayerCoordinateSystems[layerName]["epsg:4326"] = QString();
             }
+            if (projection.contains("crs:84")) {
+                    wmsLayerCoordinateSystems[layerName]["crs:84"] = QString();
+            }
         }
         for ( int b = 0; b < layerPreviewBBox.size(); ++b ) {
             QDomElement bboxElement = layerPreviewBBox.at(b).toElement();
             QString bboxProjection = bboxElement.attribute(m_wmsCapabilities.referenceSystemType()).toLower();
-            if (bboxProjection != "epsg:3857" && bboxProjection != "epsg:4326") continue;
+            if (bboxProjection != "epsg:3857" && bboxProjection != "epsg:4326"  && bboxProjection != "crs:84") continue;
             int precision = bboxProjection == "epsg:3857" ? 6 : 12;
             double west = bboxElement.attribute("minx").toDouble();
             double south = bboxElement.attribute("miny").toDouble();
