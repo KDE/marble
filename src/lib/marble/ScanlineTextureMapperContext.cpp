@@ -317,6 +317,13 @@ void ScanlineTextureMapperContext::pixelValueApprox( const qreal lon, const qrea
                     itLat = (int)( ( m_prevPixelY + m_toTileCoordinatesLat ) * 128.0 );
                     iPosX = ( itLon + itStepLon * j ) >> 7;
                     iPosY = ( itLat + itStepLat * j ) >> 7;
+                    // Bug 453332: Crash on Panning with Equirectangular Projection:
+                    // https://bugs.kde.org/show_bug.cgi?id=453332
+                    // Apparently at the edge of the latitude range a rounding error can move
+                    // iPosY out of tile coords and nextTile will just reload the same tile.
+                    // So let's just ensure that we stay in the expected range:
+                    if (iPosY >= tileHeight) iPosY = tileHeight - 1;
+                    if (iPosY < 0) iPosY = 0;
                 }
 
                 *scanLine = m_tile->pixel( iPosX, iPosY );
