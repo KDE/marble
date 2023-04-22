@@ -8047,56 +8047,65 @@ msgctxt "Marble::MapWizard|"
 msgid "Server is not an OWS Server."
 msgstr "Server is geen OWS-server."
 
-#: src/lib/marble/MapWizard.cpp:380 src/lib/marble/MapWizard.cpp:396
-#: src/lib/marble/MapWizard.cpp:1112
+#: src/lib/marble/MapWizard.cpp:380 src/lib/marble/MapWizard.cpp:397
+#: src/lib/marble/MapWizard.cpp:1123
 msgctxt "Marble::MapWizard|"
 msgid "Web Mercator (epsg:3857)"
 msgstr "Web Mercator (epsg:3857)"
 
-#: src/lib/marble/MapWizard.cpp:381 src/lib/marble/MapWizard.cpp:825
-#: src/lib/marble/MapWizard.cpp:952
+#: src/lib/marble/MapWizard.cpp:381 src/lib/marble/MapWizard.cpp:827
+#: src/lib/marble/MapWizard.cpp:959
 msgctxt "Marble::MapWizard|"
 msgid "Equirectangular (epsg:4326)"
 msgstr "Gelijke rechthoeken (epsg:4326)"
 
-#: src/lib/marble/MapWizard.cpp:392
+#: src/lib/marble/MapWizard.cpp:382 src/lib/marble/MapWizard.cpp:829
+#: src/lib/marble/MapWizard.cpp:961
+#, fuzzy
+#| msgctxt "Marble::MapWizard|"
+#| msgid "Equirectangular (epsg:4326)"
+msgctxt "Marble::MapWizard|"
+msgid "Equirectangular (crs:84)"
+msgstr "Gelijke rechthoeken (epsg:4326)"
+
+#: src/lib/marble/MapWizard.cpp:393
 msgctxt "Marble::MapWizard|"
 msgid "Tile Projection:"
 msgstr "Tegelprojectie:"
 
-#: src/lib/marble/MapWizard.cpp:408
+#: src/lib/marble/MapWizard.cpp:409
 msgctxt "Marble::MapWizard|"
 msgid "Tile Matrix Set:"
 msgstr "Matrix-set in tegels tonen:"
 
-#: src/lib/marble/MapWizard.cpp:452 src/lib/marble/MapWizard.cpp:943
+#: src/lib/marble/MapWizard.cpp:453 src/lib/marble/MapWizard.cpp:949
 msgctxt "Marble::MapWizard|"
 msgid "Preview Image"
 msgstr "Voorbeeldweergave"
 
-#: src/lib/marble/MapWizard.cpp:456
+#: src/lib/marble/MapWizard.cpp:457
 msgctxt "Marble::MapWizard|"
 msgid "Base Tile"
 msgstr "Basistegel"
 
-#: src/lib/marble/MapWizard.cpp:460
+#: src/lib/marble/MapWizard.cpp:461
 msgctxt "Marble::MapWizard|"
 msgid "Legend Image"
 msgstr "Legenda afbeelding"
 
-#: src/lib/marble/MapWizard.cpp:467 src/lib/marble/MapWizard.cpp:475
+#: src/lib/marble/MapWizard.cpp:468 src/lib/marble/MapWizard.cpp:476
 #, qt-format
 msgctxt "Marble::MapWizard|"
 msgid "%1"
 msgstr "%1"
 
-#: src/lib/marble/MapWizard.cpp:468
+#: src/lib/marble/MapWizard.cpp:469
 #, qt-format
 msgctxt "Marble::MapWizard|"
 msgid "The %1 could not be downloaded."
 msgstr "De %1 kon niet worden gedownload."
 
-#: src/lib/marble/MapWizard.cpp:476
+#: src/lib/marble/MapWizard.cpp:477
 #, qt-format
 msgctxt "Marble::MapWizard|"
 msgid ""
@@ -8108,46 +8117,46 @@ msgstr ""
 "\n"
 "%2"
 
-#: src/lib/marble/MapWizard.cpp:527 src/lib/marble/MapWizard.cpp:528
-#: src/lib/marble/MapWizard.cpp:549
+#: src/lib/marble/MapWizard.cpp:528 src/lib/marble/MapWizard.cpp:529
+#: src/lib/marble/MapWizard.cpp:550
 msgctxt "Marble::MapWizard|"
 msgid "Custom"
 msgstr "Aangepast"
 
-#: src/lib/marble/MapWizard.cpp:779 src/lib/marble/MapWizard.cpp:782
+#: src/lib/marble/MapWizard.cpp:780 src/lib/marble/MapWizard.cpp:783
 msgctxt "Marble::MapWizard|"
 msgid "Archiving failed"
 msgstr "Archivering is mislukt"
 
-#: src/lib/marble/MapWizard.cpp:779
+#: src/lib/marble/MapWizard.cpp:780
 msgctxt "Marble::MapWizard|"
 msgid "Archiving process cannot be started."
 msgstr "Archiveren kan niet worden gestart."
 
-#: src/lib/marble/MapWizard.cpp:782
+#: src/lib/marble/MapWizard.cpp:783
 msgctxt "Marble::MapWizard|"
 msgid "Archiving process crashed."
 msgstr "Het archiveringsproces is vastgelopen."
 
-#: src/lib/marble/MapWizard.cpp:872 src/lib/marble/MapWizard.cpp:880
-#: src/lib/marble/MapWizard.cpp:889
+#: src/lib/marble/MapWizard.cpp:878 src/lib/marble/MapWizard.cpp:886
+#: src/lib/marble/MapWizard.cpp:895
 msgctxt "Marble::MapWizard|"
 msgid "Source Image"
 msgstr "Startafbeelding"
 
-#: src/lib/marble/MapWizard.cpp:873
+#: src/lib/marble/MapWizard.cpp:879
 msgctxt "Marble::MapWizard|"
 msgid "Please specify a source image."
 msgstr "Geef een startafbeelding op."
 
-#: src/lib/marble/MapWizard.cpp:881
+#: src/lib/marble/MapWizard.cpp:887
 msgctxt "Marble::MapWizard|"
 msgid ""
 "The source image you specified does not exist. Please specify a different "
 "one."
 msgstr "De door u opgegeven startafbeelding bestaat niet. Geef een andere op."
 
-#: src/lib/marble/MapWizard.cpp:890
+#: src/lib/marble/MapWizard.cpp:896
 msgctxt "Marble::MapWizard|"
 msgid ""
 "The source image you specified does not seem to be an image. Please specify "
@@ -8156,27 +8165,27 @@ msgstr ""
 "De door u opgegeven startafbeelding lijkt geen afbeelding te zijn. Geef een "
 "ander afbeeldingsbestand op."
 
-#: src/lib/marble/MapWizard.cpp:920
+#: src/lib/marble/MapWizard.cpp:926
 msgctxt "Marble::MapWizard|"
 msgid "Map Title"
 msgstr "Titel van de kaart"
 
-#: src/lib/marble/MapWizard.cpp:920
+#: src/lib/marble/MapWizard.cpp:926
 msgctxt "Marble::MapWizard|"
 msgid "Please specify a map title."
 msgstr "Geef een titel op voor de kaart."
 
-#: src/lib/marble/MapWizard.cpp:927 src/lib/marble/MapWizard.cpp:935
+#: src/lib/marble/MapWizard.cpp:933 src/lib/marble/MapWizard.cpp:941
 msgctxt "Marble::MapWizard|"
 msgid "Map Name"
 msgstr "Naam van de kaart"
 
-#: src/lib/marble/MapWizard.cpp:927
+#: src/lib/marble/MapWizard.cpp:933
 msgctxt "Marble::MapWizard|"
 msgid "Please specify a map name."
 msgstr "Geef een naam op voor de kaart."
 
-#: src/lib/marble/MapWizard.cpp:936
+#: src/lib/marble/MapWizard.cpp:942
 #, qt-format
 msgctxt "Marble::MapWizard|"
 msgid ""
@@ -8185,27 +8194,27 @@ msgstr ""
 "Geef een andere naam op voor de kaart, want er bestaat al een kaart met de "
 "naam \"%1\"."
 
-#: src/lib/marble/MapWizard.cpp:943
+#: src/lib/marble/MapWizard.cpp:949
 msgctxt "Marble::MapWizard|"
 msgid "Please specify a preview image."
 msgstr "Geef een voorbeeldweergave op."
 
-#: src/lib/marble/MapWizard.cpp:1447
+#: src/lib/marble/MapWizard.cpp:1458
 msgctxt "Marble::MapWizard|"
 msgid "Problem while creating files"
 msgstr "Probleem bij het aanmaken van bestanden"
 
-#: src/lib/marble/MapWizard.cpp:1447
+#: src/lib/marble/MapWizard.cpp:1458
 msgctxt "Marble::MapWizard|"
 msgid "Check if a theme with the same name exists."
 msgstr "Controleer of een thema met dezelfde naam al bestaat."
 
-#: src/lib/marble/MapWizard.cpp:1504
+#: src/lib/marble/MapWizard.cpp:1515
 msgctxt "Marble::MapWizard|"
 msgid "WMS Server"
 msgstr "WMS-server"
 
-#: src/lib/marble/MapWizard.cpp:1505
+#: src/lib/marble/MapWizard.cpp:1516
 msgctxt "Marble::MapWizard|"
 msgid ""
 "<h4>WMS Server</h4>Please choose a <a href=\"https://en.wikipedia.org/wiki/"
@@ -8214,12 +8223,12 @@ msgstr ""
 "<h4>WMS-server</h4>Kies een <a href=\"https://en.wikipedia.org/wiki/"
 "Web_Map_Service\">WMS</a>-server of voer een aangepaste server-URL in."
 
-#: src/lib/marble/MapWizard.cpp:1508
+#: src/lib/marble/MapWizard.cpp:1519
 msgctxt "Marble::MapWizard|"
 msgid "WMTS Server"
 msgstr "WMTS-server"
 
-#: src/lib/marble/MapWizard.cpp:1509
+#: src/lib/marble/MapWizard.cpp:1520
 msgctxt "Marble::MapWizard|"
 msgid ""
 "<h4>WMTS Server</h4>Please choose a <a href=\"https://de.wikipedia.org/wiki/"

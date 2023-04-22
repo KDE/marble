@@ -10,20 +10,20 @@
 # Julia Dronova <juliette.tux@gmail.com>, 2013.
 # Alexander Lakhin <exclusion@gmail.com>, 2013.
 # Alexander Yavorsky <kekcuha@gmail.com>, 2020.
-# Olesya Gerasimenko <translation-team@basealt.ru>, 2022.
+# Olesya Gerasimenko <translation-team@basealt.ru>, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2022-06-27 12:27+0300\n"
+"PO-Revision-Date: 2023-04-21 16:37+0300\n"
 "Last-Translator: Olesya Gerasimenko <translation-team@basealt.ru>\n"
-"Language-Team: Russian <kde-russian@lists.kde.ru>\n"
+"Language-Team: Basealt Translation Team\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 22.04.1\n"
+"X-Generator: Lokalize 22.12.3\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Environment: kde\n"
@@ -5252,30 +5252,25 @@ msgid "Download Region"
 msgstr "Загрузить область"
 
 #: src/lib/marble/DownloadRegionDialog.cpp:247
-#, fuzzy
-#| msgctxt "Marble::MapWizard|"
-#| msgid "The base tile could not be downloaded."
 msgctxt "Marble::DownloadRegionDialog|"
 msgid "Tile type to be downloaded:"
-msgstr "Базовая клетка не может быть загружена."
+msgstr "Тип клеток для загрузки:"
 
 #: src/lib/marble/DownloadRegionDialog.cpp:249
 msgctxt "Marble::DownloadRegionDialog|"
 msgid "Texture tiles"
-msgstr ""
+msgstr "Клетки текстуры"
 
 #: src/lib/marble/DownloadRegionDialog.cpp:250
-#, fuzzy
-#| msgctxt "Marble::MapViewWidget|"
-#| msgid "Mercator View"
 msgctxt "Marble::DownloadRegionDialog|"
 msgid "Vector tiles"
-msgstr "Проекция Меркатора"
+msgstr "Векторные клетки"
 
 #: src/lib/marble/DownloadRegionDialog.cpp:251
 msgctxt "Marble::DownloadRegionDialog|"
 msgid "Allows selection between layer types that are visibly being rendered."
 msgstr ""
+"Позволяет выбирать между типами слоёв, которые визуально отрисовываются."
 
 #: src/lib/marble/DownloadRegionDialog.cpp:520
 #, qt-format
@@ -8066,78 +8061,69 @@ msgstr "Программа не может разобрать ответ сер�
 
 #: src/lib/marble/MapWizard.cpp:293
 #, fuzzy
-#| msgctxt "Marble::MapWizard|"
-#| msgid "Server is not a Web Map Server."
 msgctxt "Marble::MapWizard|"
 msgid "Server is not an OWS Server."
 msgstr "Это сервер не предоставляет карты."
 
-#: src/lib/marble/MapWizard.cpp:380 src/lib/marble/MapWizard.cpp:396
-#: src/lib/marble/MapWizard.cpp:1112
+#: src/lib/marble/MapWizard.cpp:380 src/lib/marble/MapWizard.cpp:397
+#: src/lib/marble/MapWizard.cpp:1123
 msgctxt "Marble::MapWizard|"
 msgid "Web Mercator (epsg:3857)"
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:381 src/lib/marble/MapWizard.cpp:825
-#: src/lib/marble/MapWizard.cpp:952
+#: src/lib/marble/MapWizard.cpp:381 src/lib/marble/MapWizard.cpp:827
+#: src/lib/marble/MapWizard.cpp:959
 msgctxt "Marble::MapWizard|"
 msgid "Equirectangular (epsg:4326)"
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:392
+#: src/lib/marble/MapWizard.cpp:382 src/lib/marble/MapWizard.cpp:829
+#: src/lib/marble/MapWizard.cpp:961
+msgctxt "Marble::MapWizard|"
+msgid "Equirectangular (crs:84)"
+msgstr ""
+
+#: src/lib/marble/MapWizard.cpp:393
 #, fuzzy
-#| msgctxt "MapViewWidget|"
-#| msgid "&Projection"
 msgctxt "Marble::MapWizard|"
 msgid "Tile Projection:"
 msgstr "&Проекция"
 
-#: src/lib/marble/MapWizard.cpp:408
+#: src/lib/marble/MapWizard.cpp:409
 msgctxt "Marble::MapWizard|"
 msgid "Tile Matrix Set:"
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:452 src/lib/marble/MapWizard.cpp:943
+#: src/lib/marble/MapWizard.cpp:453 src/lib/marble/MapWizard.cpp:949
 msgctxt "Marble::MapWizard|"
 msgid "Preview Image"
 msgstr "Эскиз изображения"
 
-#: src/lib/marble/MapWizard.cpp:456
+#: src/lib/marble/MapWizard.cpp:457
 msgctxt "Marble::MapWizard|"
 msgid "Base Tile"
 msgstr "Базовая клетка"
 
-#: src/lib/marble/MapWizard.cpp:460
+#: src/lib/marble/MapWizard.cpp:461
 #, fuzzy
-#| msgctxt "MapWizard|"
-#| msgid "Legend Image:"
 msgctxt "Marble::MapWizard|"
 msgid "Legend Image"
 msgstr "Изображение легенды:"
 
-#: src/lib/marble/MapWizard.cpp:467 src/lib/marble/MapWizard.cpp:475
+#: src/lib/marble/MapWizard.cpp:468 src/lib/marble/MapWizard.cpp:476
 #, fuzzy, qt-format
-#| msgctxt "NavigationInfoBar|"
-#| msgid "%1 m"
 msgctxt "Marble::MapWizard|"
 msgid "%1"
 msgstr "%1 м"
 
-#: src/lib/marble/MapWizard.cpp:468
+#: src/lib/marble/MapWizard.cpp:469
 #, fuzzy, qt-format
-#| msgctxt "Marble::MapWizard|"
-#| msgid "The base tile could not be downloaded."
 msgctxt "Marble::MapWizard|"
 msgid "The %1 could not be downloaded."
 msgstr "Базовая клетка не может быть загружена."
 
-#: src/lib/marble/MapWizard.cpp:476
+#: src/lib/marble/MapWizard.cpp:477
 #, fuzzy, qt-format
-#| msgctxt "Marble::MapWizard|"
-#| msgid ""
-#| "The base tile could not be downloaded successfully. The server replied:\n"
-#| "\n"
-#| "%1"
 msgctxt "Marble::MapWizard|"
 msgid ""
 "The %1 could not be downloaded successfully. The server replied:\n"
@@ -8148,73 +8134,73 @@ msgstr ""
 "\n"
 "%1"
 
-#: src/lib/marble/MapWizard.cpp:527 src/lib/marble/MapWizard.cpp:528
-#: src/lib/marble/MapWizard.cpp:549
+#: src/lib/marble/MapWizard.cpp:528 src/lib/marble/MapWizard.cpp:529
+#: src/lib/marble/MapWizard.cpp:550
 msgctxt "Marble::MapWizard|"
 msgid "Custom"
 msgstr "Пользовательский"
 
-#: src/lib/marble/MapWizard.cpp:779 src/lib/marble/MapWizard.cpp:782
+#: src/lib/marble/MapWizard.cpp:780 src/lib/marble/MapWizard.cpp:783
 msgctxt "Marble::MapWizard|"
 msgid "Archiving failed"
 msgstr "Архивирование не удалось"
 
-#: src/lib/marble/MapWizard.cpp:779
+#: src/lib/marble/MapWizard.cpp:780
 msgctxt "Marble::MapWizard|"
 msgid "Archiving process cannot be started."
 msgstr "Архивирование не может быть начато."
 
-#: src/lib/marble/MapWizard.cpp:782
+#: src/lib/marble/MapWizard.cpp:783
 msgctxt "Marble::MapWizard|"
 msgid "Archiving process crashed."
 msgstr "Процесс архивирования завершился аварийно."
 
-#: src/lib/marble/MapWizard.cpp:872 src/lib/marble/MapWizard.cpp:880
-#: src/lib/marble/MapWizard.cpp:889
+#: src/lib/marble/MapWizard.cpp:878 src/lib/marble/MapWizard.cpp:886
+#: src/lib/marble/MapWizard.cpp:895
 msgctxt "Marble::MapWizard|"
 msgid "Source Image"
 msgstr "Исходное изображение"
 
-#: src/lib/marble/MapWizard.cpp:873
+#: src/lib/marble/MapWizard.cpp:879
 msgctxt "Marble::MapWizard|"
 msgid "Please specify a source image."
 msgstr "Укажите исходное изображение."
 
-#: src/lib/marble/MapWizard.cpp:881
+#: src/lib/marble/MapWizard.cpp:887
 msgctxt "Marble::MapWizard|"
 msgid ""
 "The source image you specified does not exist. Please specify a different "
 "one."
 msgstr "Указанное исходное изображение не существует. Следует указать другое."
 
-#: src/lib/marble/MapWizard.cpp:890
+#: src/lib/marble/MapWizard.cpp:896
 msgctxt "Marble::MapWizard|"
 msgid ""
 "The source image you specified does not seem to be an image. Please specify "
 "a different image file."
 msgstr "Выбранный файл не является изображением. Следует указать другой."
 
-#: src/lib/marble/MapWizard.cpp:920
+#: src/lib/marble/MapWizard.cpp:926
 msgctxt "Marble::MapWizard|"
 msgid "Map Title"
 msgstr "Заголовок карты"
 
-#: src/lib/marble/MapWizard.cpp:920
+#: src/lib/marble/MapWizard.cpp:926
 msgctxt "Marble::MapWizard|"
 msgid "Please specify a map title."
 msgstr "Укажите заголовок карты."
 
-#: src/lib/marble/MapWizard.cpp:927 src/lib/marble/MapWizard.cpp:935
+#: src/lib/marble/MapWizard.cpp:933 src/lib/marble/MapWizard.cpp:941
 msgctxt "Marble::MapWizard|"
 msgid "Map Name"
 msgstr "Название карты"
 
-#: src/lib/marble/MapWizard.cpp:927
+#: src/lib/marble/MapWizard.cpp:933
 msgctxt "Marble::MapWizard|"
 msgid "Please specify a map name."
 msgstr "Укажите название карты."
 
-#: src/lib/marble/MapWizard.cpp:936
+#: src/lib/marble/MapWizard.cpp:942
 #, qt-format
 msgctxt "Marble::MapWizard|"
 msgid ""
@@ -8222,45 +8208,41 @@ msgid ""
 msgstr ""
 "Карта с названием «%1» уже существует. Следует указать другое название."
 
-#: src/lib/marble/MapWizard.cpp:943
+#: src/lib/marble/MapWizard.cpp:949
 msgctxt "Marble::MapWizard|"
 msgid "Please specify a preview image."
 msgstr "Укажите эскиз изображения"
 
-#: src/lib/marble/MapWizard.cpp:1447
+#: src/lib/marble/MapWizard.cpp:1458
 msgctxt "Marble::MapWizard|"
 msgid "Problem while creating files"
 msgstr "Не удалось создать файлы"
 
-#: src/lib/marble/MapWizard.cpp:1447
+#: src/lib/marble/MapWizard.cpp:1458
 msgctxt "Marble::MapWizard|"
 msgid "Check if a theme with the same name exists."
 msgstr "Проверьте, существует ли тема с таким же названием."
 
-#: src/lib/marble/MapWizard.cpp:1504
+#: src/lib/marble/MapWizard.cpp:1515
 #, fuzzy
-#| msgctxt "MapWizard|"
-#| msgid "WMS Server:"
 msgctxt "Marble::MapWizard|"
 msgid "WMS Server"
 msgstr "Сервер WMS:"
 
-#: src/lib/marble/MapWizard.cpp:1505
+#: src/lib/marble/MapWizard.cpp:1516
 msgctxt "Marble::MapWizard|"
 msgid ""
 "<h4>WMS Server</h4>Please choose a <a href=\"https://en.wikipedia.org/wiki/"
 "Web_Map_Service\">WMS</a> server or enter a custom server URL."
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:1508
+#: src/lib/marble/MapWizard.cpp:1519
 #, fuzzy
-#| msgctxt "MapWizard|"
-#| msgid "WMS Server:"
 msgctxt "Marble::MapWizard|"
 msgid "WMTS Server"
 msgstr "Сервер WMS:"
 
-#: src/lib/marble/MapWizard.cpp:1509
+#: src/lib/marble/MapWizard.cpp:1520
 msgctxt "Marble::MapWizard|"
 msgid ""
 "<h4>WMTS Server</h4>Please choose a <a href=\"https://de.wikipedia.org/wiki/"
@@ -8339,8 +8321,6 @@ msgstr "Сервис веб-карт (WMS)"
 
 #: src/lib/marble/MapWizard.ui:70
 #, fuzzy
-#| msgctxt "MapWizard|"
-#| msgid "Web Map Service (WMS)"
 msgctxt "MapWizard|"
 msgid "Web Map Tile Service (WMTS)"
 msgstr "Сервис веб-карт (WMS)"
@@ -8434,18 +8414,12 @@ msgstr "https://"
 
 #: src/lib/marble/MapWizard.ui:218
 #, fuzzy
-#| msgctxt ""
-#| "Marble::Placemark|A copy shop provides a service to send documents "
-#| "through fax"
-#| msgid "Fax service"
 msgctxt "MapWizard|"
 msgid "Wms-Service:"
-msgstr "Услуга факсимильной связи"
+msgstr "Сервер:"
 
 #: src/lib/marble/MapWizard.ui:232
 #, fuzzy
-#| msgctxt "MainScreen|"
-#| msgid "Layer Options"
 msgctxt "MapWizard|"
 msgid "Layer Selection"
 msgstr "Параметры слоя"
@@ -8457,8 +8431,6 @@ msgstr ""
 
 #: src/lib/marble/MapWizard.ui:266
 #, fuzzy
-#| msgctxt "SearchField|"
-#| msgid "Search"
 msgctxt "MapWizard|"
 msgid "Search:"
 msgstr "Поиск"
@@ -8490,8 +8462,6 @@ msgstr "Назад"
 
 #: src/lib/marble/MapWizard.ui:314
 #, fuzzy
-#| msgctxt "MapViewWidget|"
-#| msgid "&Projection"
 msgctxt "MapWizard|"
 msgid "Tile Projection:"
 msgstr "&Проекция"
@@ -8513,16 +8483,12 @@ msgstr ""
 
 #: src/lib/marble/MapWizard.ui:383
 #, fuzzy
-#| msgctxt "MainScreen|"
-#| msgid "Layer Options"
 msgctxt "MapWizard|"
 msgid "Layer Info"
 msgstr "Параметры слоя"
 
 #: src/lib/marble/MapWizard.ui:396
 #, fuzzy
-#| msgctxt "GeoDataPlacemark|"
-#| msgid "Service Road"
 msgctxt "MapWizard|"
 msgid "Service Info"
 msgstr "Служебная дорога"
@@ -8539,8 +8505,6 @@ msgstr ""
 
 #: src/lib/marble/MapWizard.ui:437
 #, fuzzy
-#| msgctxt "DGML|"
-#| msgid "OpenStreetMap"
 msgctxt "MapWizard|"
 msgid "OpenStreetMap"
 msgstr "OpenStreetMap"
@@ -8557,8 +8521,6 @@ msgstr ""
 
 #: src/lib/marble/MapWizard.ui:479
 #, fuzzy
-#| msgctxt "FormattedTextWidget|"
-#| msgid "Color"
 msgctxt "MapWizard|"
 msgid "Color"
 msgstr "Цвет"
@@ -8570,8 +8532,6 @@ msgstr ""
 
 #: src/lib/marble/MapWizard.ui:511
 #, fuzzy
-#| msgctxt "UiEditPlacemarkDialog|"
-#| msgid "Style, Color"
 msgctxt "MapWizard|"
 msgid "Select Color"
 msgstr "Стиль и цвет"
@@ -10028,28 +9988,6 @@ msgid "&About"
 msgstr "&О компоненте"
 
 #: src/lib/marble/MarbleAboutDialog.ui:98
-#, fuzzy
-#| msgctxt "MarbleAboutDialog|"
-#| msgid ""
-#| "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
-#| "REC-html40/strict.dtd\">\n"
-#| "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
-#| "css\">\n"
-#| "p, li { white-space: pre-wrap; }\n"
-#| "</style></head><body style=\" font-family:'Sans Serif'; font-size:10pt; "
-#| "font-weight:400; font-style:normal;\">\n"
-#| "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
-#| "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
-#| "font-size:9pt;\"></p>\n"
-#| "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#| "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
-#| "size:9pt;\">(c) 2007, The Marble Project</span></p>\n"
-#| "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
-#| "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
-#| "font-size:9pt; font-style:italic;\"></p>\n"
-#| "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#| "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
-#| "size:9pt;\">https://edu.kde.org/marble</span></p></body></html>"
 msgctxt "MarbleAboutDialog|"
 msgid ""
 "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
@@ -10090,7 +10028,7 @@ msgstr ""
 "size:9pt; font-style:italic;\"></p>\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
 "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
-"size:9pt;\">https://edu.kde.org/marble</span></p></body></html>"
+"size:9pt;\">https://marble.kde.org/</span></p></body></html>"
 
 #: src/lib/marble/MarbleAboutDialog.ui:116
 msgctxt "MarbleAboutDialog|"
@@ -12755,6 +12693,8 @@ msgid ""
 "Supported codecs are not found. (ffmpeg/avconv needs to be installed and in "
 "PATH.)"
 msgstr ""
+"Поддерживаемые кодеки не найдены. (ffmpeg/avconv необходимо установить и "
+"указать в переменной среды PATH.)"
 
 #: src/lib/marble/TourCaptureDialog.cpp:77
 msgctxt "Marble::TourCaptureDialog|"
@@ -18351,8 +18291,6 @@ msgstr "Это шаблонный класс для плавающих элем�
 #~ msgstr "Отмывка рельефа"
 
 #, fuzzy
-#~| msgctxt "MapWizard|"
-#~| msgid "Available Maps:"
 #~ msgctxt "MapWizard|"
 #~ msgid "Available Layers:"
 #~ msgstr "Доступные карты:"
@@ -18414,18 +18352,11 @@ msgstr "Это шаблонный класс для плавающих элем�
 #~ msgstr "Линии границ"
 
 #, fuzzy
-#~| msgctxt "Marble::MapWizard|"
-#~| msgid "The base tile could not be downloaded."
 #~ msgctxt "Marble::MapWizard|"
 #~ msgid "The preview image could not be downloaded."
 #~ msgstr "Базовая клетка не может быть загружена."
 
 #, fuzzy
-#~| msgctxt "Marble::MapWizard|"
-#~| msgid ""
-#~| "The base tile could not be downloaded successfully. The server replied:\n"
-#~| "\n"
-#~| "%1"
 #~ msgctxt "Marble::MapWizard|"
 #~ msgid ""
 #~ "The preview image could not be downloaded successfully. The server "
@@ -19814,3 +19745,7 @@ msgstr "Это шаблонный класс для плавающих элем�
 
 #~ msgid "Populated places"
 #~ msgstr "Густонаселённые пункты"
+
+#, fuzzy
+#~ msgid "Back"
+#~ msgstr "Назад"
