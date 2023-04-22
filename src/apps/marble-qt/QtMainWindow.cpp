@@ -262,7 +262,7 @@ void MainWindow::initObject(const QVariantMap& cmdLineSettings)
 void MainWindow::createActions()
  {
      m_openAction = new QAction(QIcon(QStringLiteral(":/icons/document-open.png")), tr("&Open..."), this);
-     m_openAction->setShortcut( tr( "Ctrl+O" ) );
+     m_openAction->setShortcut( QKeySequence( "Ctrl+O" ) );
      m_openAction->setStatusTip( tr( "Open a file for viewing on Marble"));
      connect( m_openAction, SIGNAL(triggered()),
               this, SLOT(openFile()) );
@@ -271,7 +271,7 @@ void MainWindow::createActions()
      connect(m_downloadAction, SIGNAL(triggered()), this, SLOT(openMapDialog()));
 
      m_exportMapAction = new QAction(QIcon(QStringLiteral(":/icons/document-save-as.png")), tr("&Export Map..."), this);
-     m_exportMapAction->setShortcut(tr("Ctrl+S"));
+     m_exportMapAction->setShortcut(QKeySequence("Ctrl+S"));
      m_exportMapAction->setStatusTip(tr("Save a screenshot of the map"));
      connect(m_exportMapAction, SIGNAL(triggered()), this, SLOT(exportMapScreenShot()));
 
@@ -295,12 +295,12 @@ void MainWindow::createActions()
      connect(m_quitAction, SIGNAL(triggered()), this, SLOT(close()));
 
      m_copyMapAction = new QAction(QIcon(QStringLiteral(":/icons/edit-copy.png")), tr("&Copy Map"), this);
-     m_copyMapAction->setShortcut(tr("Ctrl+C"));
+     m_copyMapAction->setShortcut(QKeySequence("Ctrl+C"));
      m_copyMapAction->setStatusTip(tr("Copy a screenshot of the map"));
      connect(m_copyMapAction, SIGNAL(triggered()), this, SLOT(copyMap()));
 
      m_osmEditAction = new QAction(QIcon(QStringLiteral(":/icons/edit-map.png")), tr("&Edit Map..."), this );
-     m_osmEditAction->setShortcut(tr( "Ctrl+E" ) );
+     m_osmEditAction->setShortcut(QKeySequence( "Ctrl+E" ) );
      m_osmEditAction->setStatusTip(tr( "Edit the current map region in an external editor" ) );
      updateMapEditButtonVisibility( m_controlView->marbleWidget()->mapThemeId() );
      connect( m_osmEditAction, SIGNAL(triggered()), m_controlView, SLOT(launchExternalMapEditor()) );
@@ -328,7 +328,7 @@ void MainWindow::createActions()
      connect(m_copyCoordinatesAction, SIGNAL(triggered()), this, SLOT(copyCoordinates()));
 
      m_fullScreenAction = new QAction(QIcon(QStringLiteral(":/icons/view-fullscreen.png")), tr("&Full Screen Mode"), this);
-     m_fullScreenAction->setShortcut(tr("Ctrl+Shift+F"));
+     m_fullScreenAction->setShortcut(QKeySequence("Ctrl+Shift+F"));
      m_fullScreenAction->setCheckable( true );
      m_fullScreenAction->setStatusTip(tr("Full Screen Mode"));
      connect(m_fullScreenAction, SIGNAL(triggered(bool)), this, SLOT(showFullScreen(bool)));
@@ -362,17 +362,17 @@ void MainWindow::createActions()
      connect( m_controlSunAction, SIGNAL(triggered()), this, SLOT(controlSun()) );
 
      m_reloadAction = new QAction(QIcon(QStringLiteral(":/icons/view-refresh.png")), tr("&Redisplay"), this);
-     m_reloadAction->setShortcut(tr("F5"));
+     m_reloadAction->setShortcut(QKeySequence("F5"));
      m_reloadAction->setStatusTip(tr("Reload Current Map"));
      connect(m_reloadAction, SIGNAL(triggered()), this, SLOT(reload()));
 
      m_handbookAction = new QAction(QIcon(QStringLiteral(":/icons/help-contents.png")), tr("Marble Virtual Globe &Handbook"), this);
-     m_handbookAction->setShortcut(tr("F1"));
+     m_handbookAction->setShortcut(QKeySequence("F1"));
      m_handbookAction->setStatusTip(tr("Show the Handbook for Marble Virtual Globe"));
      connect(m_handbookAction, SIGNAL(triggered()), this, SLOT(handbook()));
 
      m_whatsThisAction = new QAction(QIcon(QStringLiteral(":/icons/help-whatsthis.png")), tr("What's &This"), this);
-     m_whatsThisAction->setShortcut(tr("Shift+F1"));
+     m_whatsThisAction->setShortcut(QKeySequence("Shift+F1"));
      m_whatsThisAction->setStatusTip(tr("Show a detailed explanation of the action."));
      connect(m_whatsThisAction, SIGNAL(triggered()), this, SLOT(enterWhatsThis()));
 
@@ -390,7 +390,7 @@ void MainWindow::createActions()
 
      //Bookmark Actions
      m_addBookmarkAction = new QAction(QIcon(QStringLiteral(":/icons/bookmark-new.png")), tr("Add &Bookmark..."), this);
-     m_addBookmarkAction->setShortcut(tr("Ctrl+B"));
+     m_addBookmarkAction->setShortcut(QKeySequence("Ctrl+B"));
      m_addBookmarkAction->setStatusTip(tr("Add Bookmark"));
      connect( m_addBookmarkAction, SIGNAL(triggered()), this, SLOT(openEditBookmarkDialog()) );
 
