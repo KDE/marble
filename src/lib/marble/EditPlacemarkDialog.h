@@ -87,6 +87,11 @@ public Q_SLOTS:
     void setIdFieldVisible( bool visible );
 
     /**
+     * @brief isReadOnly tells whether the data from input fields is protected
+     */
+    bool isReadOnly() const;
+
+    /**
      * @brief Protecting data from input fields changes
      */
     void setReadOnly( bool state );

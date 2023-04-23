@@ -60,7 +60,7 @@ public:
     OsmRelationManagerWidget *m_osmRelationManagerWidget;
     MarbleLocale::MeasureUnit m_elevationUnit;
     QString m_initialTargetId;
-
+    bool m_isReadOnly;
 };
 
 EditPlacemarkDialog::Private::Private( GeoDataPlacemark *placemark ) :
@@ -69,7 +69,8 @@ EditPlacemarkDialog::Private::Private( GeoDataPlacemark *placemark ) :
     m_iconColorDialog( nullptr ),
     m_labelColorDialog( nullptr ),
     m_osmTagEditorWidget( nullptr ),
-    m_osmRelationManagerWidget( nullptr )
+    m_osmRelationManagerWidget( nullptr ),
+    m_isReadOnly(false)
 {
     // nothing to do
 }
@@ -296,8 +297,14 @@ void EditPlacemarkDialog::setIdFieldVisible(bool visible)
     d->m_header->setIdVisible( visible );
 }
 
+bool EditPlacemarkDialog::isReadOnly() const
+{
+    return d->m_isReadOnly;
+}
+
 void EditPlacemarkDialog::setReadOnly(bool state)
 {
+    d->m_isReadOnly = state;
     d->m_header->setReadOnly(state);
     d->m_formattedTextWidget->setReadOnly(state);
     d->m_isBalloonVisible->setDisabled(state);
@@ -307,6 +314,8 @@ void EditPlacemarkDialog::setReadOnly(bool state)
 
 void EditPlacemarkDialog::updateTextAnnotation()
 {
+    if (isReadOnly()) return;
+
     d->m_placemark->setDescription( d->m_formattedTextWidget->text() );
     //allow for HTML in the description
     d->m_placemark->setDescriptionCDATA( true );
@@ -350,6 +359,11 @@ void EditPlacemarkDialog::updateTextAnnotation()
 
 void EditPlacemarkDialog::checkFields()
 {
+    if (isReadOnly()) {
+        accept();
+        return;
+    }
+
     if ( d->m_header->name().isEmpty() ) {
         QMessageBox::warning( this,
                               tr( "No name specified" ),
@@ -377,6 +391,8 @@ void EditPlacemarkDialog::checkFields()
 
 void EditPlacemarkDialog::updateLabelDialog( const QColor &color )
 {
+    if (isReadOnly()) return;
+
     QPixmap labelPixmap( d->m_labelButton->iconSize().width(),
                          d->m_labelButton->iconSize().height() );
     labelPixmap.fill( color );
@@ -385,6 +401,8 @@ void EditPlacemarkDialog::updateLabelDialog( const QColor &color )
 
 void EditPlacemarkDialog::updateIconDialog( const QColor &color )
 {
+    if (isReadOnly()) return;
+
     QPixmap iconPixmap( d->m_iconButton->iconSize().width(),
                         d->m_iconButton->iconSize().height() );
     iconPixmap.fill( color );
@@ -393,6 +411,8 @@ void EditPlacemarkDialog::updateIconDialog( const QColor &color )
 
 void EditPlacemarkDialog::updatePlacemarkAltitude()
 {
+    if (isReadOnly()) return;
+
     GeoDataCoordinates coord = d->m_placemark->coordinate();
     qreal altitude = d->m_elevationWidget->elevationSpinBox->value();
 
