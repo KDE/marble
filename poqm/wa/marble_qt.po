@@ -2728,13 +2728,6 @@ msgctxt "Marble::MainWindow|"
 msgid "&Open..."
 msgstr "&Drovi..."
 
-#: src/apps/marble-qt/QtMainWindow.cpp:265
-#, fuzzy
-#| msgid "Ctrl+O"
-msgctxt "Marble::MainWindow|"
-msgid "Ctrl+O"
-msgstr "Ctrl+O"
-
 #: src/apps/marble-qt/QtMainWindow.cpp:266
 #, fuzzy
 #| msgid "Open a file for viewing on Marble"
@@ -2755,13 +2748,6 @@ msgstr "&Aberweter mapes..."
 msgctxt "Marble::MainWindow|"
 msgid "&Export Map..."
 msgstr "&Ebaguer mape..."
-
-#: src/apps/marble-qt/QtMainWindow.cpp:274
-#, fuzzy
-#| msgid "Ctrl+S"
-msgctxt "Marble::MainWindow|"
-msgid "Ctrl+S"
-msgstr "Ctrl+S"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:275
 #, fuzzy
@@ -2839,13 +2825,6 @@ msgctxt "Marble::MainWindow|"
 msgid "&Copy Map"
 msgstr "&Copyî mape"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:298
-#, fuzzy
-#| msgid "Ctrl+C"
-msgctxt "Marble::MainWindow|"
-msgid "Ctrl+C"
-msgstr "Ctrl+C"
-
 #: src/apps/marble-qt/QtMainWindow.cpp:299
 #, fuzzy
 #| msgid "Copy a screenshot of the map"
@@ -2859,13 +2838,6 @@ msgstr "Copyî ene waitroûlêye del mape"
 msgctxt "Marble::MainWindow|"
 msgid "&Edit Map..."
 msgstr "&Candjî mape"
-
-#: src/apps/marble-qt/QtMainWindow.cpp:303
-#, fuzzy
-#| msgid "Ctrl+E"
-msgctxt "Marble::MainWindow|"
-msgid "Ctrl+E"
-msgstr "Ctrl+C"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:304
 msgctxt "Marble::MainWindow|"
@@ -2926,13 +2898,6 @@ msgstr "Copyî les cordinêyes do mitan come do tecse"
 msgctxt "Marble::MainWindow|"
 msgid "&Full Screen Mode"
 msgstr "Môde &tote li waitroûle"
-
-#: src/apps/marble-qt/QtMainWindow.cpp:331
-#, fuzzy
-#| msgid "Ctrl+Shift+F"
-msgctxt "Marble::MainWindow|"
-msgid "Ctrl+Shift+F"
-msgstr "Ctrl+Shift+F"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:333
 #, fuzzy
@@ -3025,13 +2990,6 @@ msgctxt "Marble::MainWindow|"
 msgid "&Redisplay"
 msgstr "&Rihåyner"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:365
-#, fuzzy
-#| msgid "F5"
-msgctxt "Marble::MainWindow|"
-msgid "F5"
-msgstr "F5"
-
 #: src/apps/marble-qt/QtMainWindow.cpp:366
 #, fuzzy
 #| msgid "Reload Current Map"
@@ -3046,13 +3004,6 @@ msgctxt "Marble::MainWindow|"
 msgid "Marble Virtual Globe &Handbook"
 msgstr "&Esplikêyes di Marble Forveyowe Bole daegnrece"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:370
-#, fuzzy
-#| msgid "F1"
-msgctxt "Marble::MainWindow|"
-msgid "F1"
-msgstr "F1"
-
 #: src/apps/marble-qt/QtMainWindow.cpp:371
 #, fuzzy
 #| msgid "Show the Handbook for Marble Virtual Globe"
@@ -3066,13 +3017,6 @@ msgstr "Mostrer ls esplikêyes po Marble Forveyowe Bole daegnrece"
 msgctxt "Marble::MainWindow|"
 msgid "What's &This"
 msgstr "&Cwè çki c' est d' ça?"
-
-#: src/apps/marble-qt/QtMainWindow.cpp:375
-#, fuzzy
-#| msgid "Shift+F1"
-msgctxt "Marble::MainWindow|"
-msgid "Shift+F1"
-msgstr "Shift+F1"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:376
 #, fuzzy
@@ -3124,13 +3068,6 @@ msgstr "Mostrer l' boesse Åd fwait dal livreye Qt"
 msgctxt "Marble::MainWindow|"
 msgid "Add &Bookmark..."
 msgstr "Tchôke-divins des Markes di plaeces"
-
-#: src/apps/marble-qt/QtMainWindow.cpp:393
-#, fuzzy
-#| msgid "Ctrl+B"
-msgctxt "Marble::MainWindow|"
-msgid "Ctrl+B"
-msgstr "Ctrl+R"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:394
 #, fuzzy
@@ -19334,6 +19271,60 @@ msgstr "&Modele po les cayets flotants"
 msgctxt "Marble::FITemplateFloatItem|"
 msgid "This is a template class for float items."
 msgstr "Çouchal est ene classe di modele po les cayets flotants."
+
+#, fuzzy
+#~| msgid "Ctrl+O"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Ctrl+O"
+#~ msgstr "Ctrl+O"
+
+#, fuzzy
+#~| msgid "Ctrl+S"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Ctrl+S"
+#~ msgstr "Ctrl+S"
+
+#, fuzzy
+#~| msgid "Ctrl+C"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Ctrl+C"
+#~ msgstr "Ctrl+C"
+
+#, fuzzy
+#~| msgid "Ctrl+E"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Ctrl+E"
+#~ msgstr "Ctrl+C"
+
+#, fuzzy
+#~| msgid "Ctrl+Shift+F"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Ctrl+Shift+F"
+#~ msgstr "Ctrl+Shift+F"
+
+#, fuzzy
+#~| msgid "F5"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "F5"
+#~ msgstr "F5"
+
+#, fuzzy
+#~| msgid "F1"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "F1"
+#~ msgstr "F1"
+
+#, fuzzy
+#~| msgid "Shift+F1"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Shift+F1"
+#~ msgstr "Shift+F1"
+
+#, fuzzy
+#~| msgid "Ctrl+B"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Ctrl+B"
+#~ msgstr "Ctrl+R"
 
 #, fuzzy
 #~| msgid "Copy Coordinates"

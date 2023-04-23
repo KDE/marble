@@ -2835,13 +2835,6 @@ msgctxt "Marble::MainWindow|"
 msgid "&Open..."
 msgstr "नक्शा खोलें...(&O)"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:265
-#, fuzzy
-#| msgid "Ctrl+O"
-msgctxt "Marble::MainWindow|"
-msgid "Ctrl+O"
-msgstr "कंट्रोल+O"
-
 #: src/apps/marble-qt/QtMainWindow.cpp:266
 #, fuzzy
 #| msgid "Open a file for viewing on Marble"
@@ -2862,13 +2855,6 @@ msgstr "डाटा डाउनलोड किया जा रहा है.
 msgctxt "Marble::MainWindow|"
 msgid "&Export Map..."
 msgstr "नक्शा निर्यात करें... (&E)"
-
-#: src/apps/marble-qt/QtMainWindow.cpp:274
-#, fuzzy
-#| msgid "Ctrl+S"
-msgctxt "Marble::MainWindow|"
-msgid "Ctrl+S"
-msgstr "कंट्रोल+S"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:275
 #, fuzzy
@@ -2944,13 +2930,6 @@ msgctxt "Marble::MainWindow|"
 msgid "&Copy Map"
 msgstr "नक्शा नक़ल करें (&C)"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:298
-#, fuzzy
-#| msgid "Ctrl+C"
-msgctxt "Marble::MainWindow|"
-msgid "Ctrl+C"
-msgstr "कंट्रोल+C"
-
 #: src/apps/marble-qt/QtMainWindow.cpp:299
 #, fuzzy
 #| msgid "Copy a screenshot of the map"
@@ -2964,13 +2943,6 @@ msgstr "नक्शे का स्क्रीनशॉट नक़ल क�
 msgctxt "Marble::MainWindow|"
 msgid "&Edit Map..."
 msgstr "संपादन (&E)"
-
-#: src/apps/marble-qt/QtMainWindow.cpp:303
-#, fuzzy
-#| msgid "Ctrl+O"
-msgctxt "Marble::MainWindow|"
-msgid "Ctrl+E"
-msgstr "कंट्रोल+O"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:304
 msgctxt "Marble::MainWindow|"
@@ -3029,13 +3001,6 @@ msgstr ""
 msgctxt "Marble::MainWindow|"
 msgid "&Full Screen Mode"
 msgstr "पूर्ण स्क्रीन मोड (&F)"
-
-#: src/apps/marble-qt/QtMainWindow.cpp:331
-#, fuzzy
-#| msgid "Ctrl+Shift+F"
-msgctxt "Marble::MainWindow|"
-msgid "Ctrl+Shift+F"
-msgstr "कंट्रोल+शिफ़्ट+F"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:333
 #, fuzzy
@@ -3120,11 +3085,6 @@ msgctxt "Marble::MainWindow|"
 msgid "&Redisplay"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:365
-msgctxt "Marble::MainWindow|"
-msgid "F5"
-msgstr ""
-
 #: src/apps/marble-qt/QtMainWindow.cpp:366
 #, fuzzy
 #| msgid "Flat Map"
@@ -3139,11 +3099,6 @@ msgctxt "Marble::MainWindow|"
 msgid "Marble Virtual Globe &Handbook"
 msgstr "मारबल डेस्कटॉप ग्लोब"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:370
-msgctxt "Marble::MainWindow|"
-msgid "F1"
-msgstr ""
-
 #: src/apps/marble-qt/QtMainWindow.cpp:371
 #, fuzzy
 #| msgid "&About Marble Desktop Globe"
@@ -3157,13 +3112,6 @@ msgstr "मारबल डेस्कटॉप ग्लोब के बा�
 msgctxt "Marble::MainWindow|"
 msgid "What's &This"
 msgstr "यह क्या है (&T)"
-
-#: src/apps/marble-qt/QtMainWindow.cpp:375
-#, fuzzy
-#| msgid "Shift+F1"
-msgctxt "Marble::MainWindow|"
-msgid "Shift+F1"
-msgstr "शिफ्ट+F1"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:376
 #, fuzzy
@@ -3216,13 +3164,6 @@ msgstr "क्यूटी लाइब्रेरी के बारे म�
 msgctxt "Marble::MainWindow|"
 msgid "Add &Bookmark..."
 msgstr "ढूंढें पंक्ति"
-
-#: src/apps/marble-qt/QtMainWindow.cpp:393
-#, fuzzy
-#| msgid "Ctrl+O"
-msgctxt "Marble::MainWindow|"
-msgid "Ctrl+B"
-msgstr "कंट्रोल+O"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:394
 #, fuzzy
@@ -20330,6 +20271,48 @@ msgstr ""
 msgctxt "Marble::FITemplateFloatItem|"
 msgid "This is a template class for float items."
 msgstr ""
+
+#, fuzzy
+#~| msgid "Ctrl+O"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Ctrl+O"
+#~ msgstr "कंट्रोल+O"
+
+#, fuzzy
+#~| msgid "Ctrl+S"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Ctrl+S"
+#~ msgstr "कंट्रोल+S"
+
+#, fuzzy
+#~| msgid "Ctrl+C"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Ctrl+C"
+#~ msgstr "कंट्रोल+C"
+
+#, fuzzy
+#~| msgid "Ctrl+O"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Ctrl+E"
+#~ msgstr "कंट्रोल+O"
+
+#, fuzzy
+#~| msgid "Ctrl+Shift+F"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Ctrl+Shift+F"
+#~ msgstr "कंट्रोल+शिफ़्ट+F"
+
+#, fuzzy
+#~| msgid "Shift+F1"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Shift+F1"
+#~ msgstr "शिफ्ट+F1"
+
+#, fuzzy
+#~| msgid "Ctrl+O"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Ctrl+B"
+#~ msgstr "कंट्रोल+O"
 
 #, fuzzy
 #~| msgid "Geographic Pole"

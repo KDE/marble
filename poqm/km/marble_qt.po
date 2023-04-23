@@ -2807,13 +2807,6 @@ msgctxt "Marble::MainWindow|"
 msgid "&Open..."
 msgstr "បើក..."
 
-#: src/apps/marble-qt/QtMainWindow.cpp:265
-#, fuzzy
-#| msgid "Ctrl+O"
-msgctxt "Marble::MainWindow|"
-msgid "Ctrl+O"
-msgstr "បញ្ជា+O (Ctrl+O)"
-
 #: src/apps/marble-qt/QtMainWindow.cpp:266
 #, fuzzy
 #| msgid "Open a file for viewing on Marble"
@@ -2834,13 +2827,6 @@ msgstr "ទាញ​យក​ផែនទី..."
 msgctxt "Marble::MainWindow|"
 msgid "&Export Map..."
 msgstr "នាំចេញ​ផែនទី..."
-
-#: src/apps/marble-qt/QtMainWindow.cpp:274
-#, fuzzy
-#| msgid "Ctrl+S"
-msgctxt "Marble::MainWindow|"
-msgid "Ctrl+S"
-msgstr "បញ្ជា+S (Ctrl+S)"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:275
 #, fuzzy
@@ -2920,13 +2906,6 @@ msgctxt "Marble::MainWindow|"
 msgid "&Copy Map"
 msgstr "ចម្លង​ផែនទី"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:298
-#, fuzzy
-#| msgid "Ctrl+C"
-msgctxt "Marble::MainWindow|"
-msgid "Ctrl+C"
-msgstr "បញ្ជា+C (Ctrl+C)"
-
 #: src/apps/marble-qt/QtMainWindow.cpp:299
 #, fuzzy
 #| msgid "Copy a screenshot of the map"
@@ -2940,13 +2919,6 @@ msgstr "ចម្លង​រូបថត​អេក្រង់​របស់
 msgctxt "Marble::MainWindow|"
 msgid "&Edit Map..."
 msgstr "កែសម្រួល​ផែនទី"
-
-#: src/apps/marble-qt/QtMainWindow.cpp:303
-#, fuzzy
-#| msgid "Ctrl+E"
-msgctxt "Marble::MainWindow|"
-msgid "Ctrl+E"
-msgstr "បញ្ជា+E (Ctrl+E)"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:304
 #, fuzzy
@@ -3009,13 +2981,6 @@ msgstr "ចម្លង​កូអរដោណេ​ចំណុច​កណ្
 msgctxt "Marble::MainWindow|"
 msgid "&Full Screen Mode"
 msgstr "របៀប​ពេញ​អេក្រង់"
-
-#: src/apps/marble-qt/QtMainWindow.cpp:331
-#, fuzzy
-#| msgid "Ctrl+Shift+F"
-msgctxt "Marble::MainWindow|"
-msgid "Ctrl+Shift+F"
-msgstr "បញ្ជា+ប្ដូរ+F (Ctrl+Shift+F)"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:333
 #, fuzzy
@@ -3108,13 +3073,6 @@ msgctxt "Marble::MainWindow|"
 msgid "&Redisplay"
 msgstr "បង្ហាញ​ឡើងវិញ"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:365
-#, fuzzy
-#| msgid "F5"
-msgctxt "Marble::MainWindow|"
-msgid "F5"
-msgstr "F5"
-
 #: src/apps/marble-qt/QtMainWindow.cpp:366
 #, fuzzy
 #| msgid "Reload Current Map"
@@ -3129,13 +3087,6 @@ msgctxt "Marble::MainWindow|"
 msgid "Marble Virtual Globe &Handbook"
 msgstr "សៀវភៅ​ដៃ​របស់ Marble Virtual Globe"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:370
-#, fuzzy
-#| msgid "F1"
-msgctxt "Marble::MainWindow|"
-msgid "F1"
-msgstr "F1"
-
 #: src/apps/marble-qt/QtMainWindow.cpp:371
 #, fuzzy
 #| msgid "Show the Handbook for Marble Virtual Globe"
@@ -3149,13 +3100,6 @@ msgstr "បង្ហាញ​សៀវភៅ​ដៃ​របស់ Marble Virt
 msgctxt "Marble::MainWindow|"
 msgid "What's &This"
 msgstr "នេះ​ជា​អ្វី"
-
-#: src/apps/marble-qt/QtMainWindow.cpp:375
-#, fuzzy
-#| msgid "Shift+F1"
-msgctxt "Marble::MainWindow|"
-msgid "Shift+F1"
-msgstr "ប្ដូរ+F1 (Shift+F1)"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:376
 #, fuzzy
@@ -3208,13 +3152,6 @@ msgstr "បង្ហាញ​អំពី​ប្រអប់​របស់​
 msgctxt "Marble::MainWindow|"
 msgid "Add &Bookmark..."
 msgstr "បន្ថែម​ចំណាំ"
-
-#: src/apps/marble-qt/QtMainWindow.cpp:393
-#, fuzzy
-#| msgid "Ctrl+B"
-msgctxt "Marble::MainWindow|"
-msgid "Ctrl+B"
-msgstr "បញ្ជា+B (Ctrl+B)"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:394
 #, fuzzy
@@ -21322,6 +21259,60 @@ msgstr "ពុម្ព​ធាតុ​អណ្ដែត"
 msgctxt "Marble::FITemplateFloatItem|"
 msgid "This is a template class for float items."
 msgstr "នេះ​ជា​ពុម្ព​សម្រាប់​ធាតុ​អណ្ដែត ។"
+
+#, fuzzy
+#~| msgid "Ctrl+O"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Ctrl+O"
+#~ msgstr "បញ្ជា+O (Ctrl+O)"
+
+#, fuzzy
+#~| msgid "Ctrl+S"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Ctrl+S"
+#~ msgstr "បញ្ជា+S (Ctrl+S)"
+
+#, fuzzy
+#~| msgid "Ctrl+C"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Ctrl+C"
+#~ msgstr "បញ្ជា+C (Ctrl+C)"
+
+#, fuzzy
+#~| msgid "Ctrl+E"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Ctrl+E"
+#~ msgstr "បញ្ជា+E (Ctrl+E)"
+
+#, fuzzy
+#~| msgid "Ctrl+Shift+F"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Ctrl+Shift+F"
+#~ msgstr "បញ្ជា+ប្ដូរ+F (Ctrl+Shift+F)"
+
+#, fuzzy
+#~| msgid "F5"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "F5"
+#~ msgstr "F5"
+
+#, fuzzy
+#~| msgid "F1"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "F1"
+#~ msgstr "F1"
+
+#, fuzzy
+#~| msgid "Shift+F1"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Shift+F1"
+#~ msgstr "ប្ដូរ+F1 (Shift+F1)"
+
+#, fuzzy
+#~| msgid "Ctrl+B"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Ctrl+B"
+#~ msgstr "បញ្ជា+B (Ctrl+B)"
 
 #, fuzzy
 #~| msgid "Geographic Pole"

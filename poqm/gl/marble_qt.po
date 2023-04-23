@@ -2657,11 +2657,6 @@ msgctxt "Marble::MainWindow|"
 msgid "&Open..."
 msgstr "&Abrir…"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:265
-msgctxt "Marble::MainWindow|"
-msgid "Ctrl+O"
-msgstr "Ctrl+A"
-
 #: src/apps/marble-qt/QtMainWindow.cpp:266
 msgctxt "Marble::MainWindow|"
 msgid "Open a file for viewing on Marble"
@@ -2676,11 +2671,6 @@ msgstr "&Descargar mapas…"
 msgctxt "Marble::MainWindow|"
 msgid "&Export Map..."
 msgstr "&Exportar o mapa…"
-
-#: src/apps/marble-qt/QtMainWindow.cpp:274
-msgctxt "Marble::MainWindow|"
-msgid "Ctrl+S"
-msgstr "Ctrl+S"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:275
 msgctxt "Marble::MainWindow|"
@@ -2740,11 +2730,6 @@ msgctxt "Marble::MainWindow|"
 msgid "&Copy Map"
 msgstr "&Copiar o mapa"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:298
-msgctxt "Marble::MainWindow|"
-msgid "Ctrl+C"
-msgstr "Ctrl+C"
-
 #: src/apps/marble-qt/QtMainWindow.cpp:299
 msgctxt "Marble::MainWindow|"
 msgid "Copy a screenshot of the map"
@@ -2757,11 +2742,6 @@ msgstr "Copiar unha imaxe do mapa"
 msgctxt "Marble::MainWindow|"
 msgid "&Edit Map..."
 msgstr "&Editar o mapa"
-
-#: src/apps/marble-qt/QtMainWindow.cpp:303
-msgctxt "Marble::MainWindow|"
-msgid "Ctrl+E"
-msgstr "Ctrl+E"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:304
 msgctxt "Marble::MainWindow|"
@@ -2812,11 +2792,6 @@ msgstr "Copiar as coordenadas do centro como texto"
 msgctxt "Marble::MainWindow|"
 msgid "&Full Screen Mode"
 msgstr "Modo a &pantalla completa"
-
-#: src/apps/marble-qt/QtMainWindow.cpp:331
-msgctxt "Marble::MainWindow|"
-msgid "Ctrl+Shift+F"
-msgstr "Ctrl+Maiús+F"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:333
 msgctxt "Marble::MainWindow|"
@@ -2883,11 +2858,6 @@ msgctxt "Marble::MainWindow|"
 msgid "&Redisplay"
 msgstr "&Redebuxar"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:365
-msgctxt "Marble::MainWindow|"
-msgid "F5"
-msgstr "F5"
-
 #: src/apps/marble-qt/QtMainWindow.cpp:366
 msgctxt "Marble::MainWindow|"
 msgid "Reload Current Map"
@@ -2898,11 +2868,6 @@ msgctxt "Marble::MainWindow|"
 msgid "Marble Virtual Globe &Handbook"
 msgstr "&Manual do Globo virtual Marble"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:370
-msgctxt "Marble::MainWindow|"
-msgid "F1"
-msgstr "F1"
-
 #: src/apps/marble-qt/QtMainWindow.cpp:371
 msgctxt "Marble::MainWindow|"
 msgid "Show the Handbook for Marble Virtual Globe"
@@ -2912,11 +2877,6 @@ msgstr "Mostrar o manual do Globo virtual Marble"
 msgctxt "Marble::MainWindow|"
 msgid "What's &This"
 msgstr "Que é &isto"
-
-#: src/apps/marble-qt/QtMainWindow.cpp:375
-msgctxt "Marble::MainWindow|"
-msgid "Shift+F1"
-msgstr "Maiús+F1"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:376
 msgctxt "Marble::MainWindow|"
@@ -2960,11 +2920,6 @@ msgstr "Mostrar o diálogo «Sobre» das bibliotecas de Qt"
 msgctxt "Marble::MainWindow|"
 msgid "Add &Bookmark..."
 msgstr "Engadir un &marcador"
-
-#: src/apps/marble-qt/QtMainWindow.cpp:393
-msgctxt "Marble::MainWindow|"
-msgid "Ctrl+B"
-msgstr "Ctrl+E"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:394
 msgctxt "Marble::MainWindow|"
@@ -18621,6 +18576,42 @@ msgstr "&Modelo de elemento flutuante"
 msgctxt "Marble::FITemplateFloatItem|"
 msgid "This is a template class for float items."
 msgstr "Este é unha clase modelo para os elementos flutuantes."
+
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Ctrl+O"
+#~ msgstr "Ctrl+A"
+
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Ctrl+S"
+#~ msgstr "Ctrl+S"
+
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Ctrl+C"
+#~ msgstr "Ctrl+C"
+
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Ctrl+E"
+#~ msgstr "Ctrl+E"
+
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Ctrl+Shift+F"
+#~ msgstr "Ctrl+Maiús+F"
+
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "F5"
+#~ msgstr "F5"
+
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "F1"
+#~ msgstr "F1"
+
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Shift+F1"
+#~ msgstr "Maiús+F1"
+
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Ctrl+B"
+#~ msgstr "Ctrl+E"
 
 #~ msgctxt "DGML|"
 #~ msgid "Hillshading"

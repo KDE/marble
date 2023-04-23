@@ -24,7 +24,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Lokalize 22.07.70\n"
 "X-Qt-Contexts: true\n"
 
@@ -2667,11 +2667,6 @@ msgctxt "Marble::MainWindow|"
 msgid "&Open..."
 msgstr "Öff&nen ..."
 
-#: src/apps/marble-qt/QtMainWindow.cpp:265
-msgctxt "Marble::MainWindow|"
-msgid "Ctrl+O"
-msgstr "Strg+O"
-
 #: src/apps/marble-qt/QtMainWindow.cpp:266
 msgctxt "Marble::MainWindow|"
 msgid "Open a file for viewing on Marble"
@@ -2686,11 +2681,6 @@ msgstr "&Karten herunterladen ..."
 msgctxt "Marble::MainWindow|"
 msgid "&Export Map..."
 msgstr "Karte &exportieren ..."
-
-#: src/apps/marble-qt/QtMainWindow.cpp:274
-msgctxt "Marble::MainWindow|"
-msgid "Ctrl+S"
-msgstr "Strg+S"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:275
 msgctxt "Marble::MainWindow|"
@@ -2750,11 +2740,6 @@ msgctxt "Marble::MainWindow|"
 msgid "&Copy Map"
 msgstr "Karte &kopieren"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:298
-msgctxt "Marble::MainWindow|"
-msgid "Ctrl+C"
-msgstr "Strg+C"
-
 #: src/apps/marble-qt/QtMainWindow.cpp:299
 msgctxt "Marble::MainWindow|"
 msgid "Copy a screenshot of the map"
@@ -2767,11 +2752,6 @@ msgstr "Ein Bildschirmfoto der Karte in die Zwischenablage kopieren."
 msgctxt "Marble::MainWindow|"
 msgid "&Edit Map..."
 msgstr "Karte &Bearbeiten"
-
-#: src/apps/marble-qt/QtMainWindow.cpp:303
-msgctxt "Marble::MainWindow|"
-msgid "Ctrl+E"
-msgstr "Strg+E"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:304
 msgctxt "Marble::MainWindow|"
@@ -2824,11 +2804,6 @@ msgstr ""
 msgctxt "Marble::MainWindow|"
 msgid "&Full Screen Mode"
 msgstr "&Vollbildansicht"
-
-#: src/apps/marble-qt/QtMainWindow.cpp:331
-msgctxt "Marble::MainWindow|"
-msgid "Ctrl+Shift+F"
-msgstr "Strg+Umschalt+F"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:333
 msgctxt "Marble::MainWindow|"
@@ -2895,11 +2870,6 @@ msgctxt "Marble::MainWindow|"
 msgid "&Redisplay"
 msgstr "Anzeige &auffrischen"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:365
-msgctxt "Marble::MainWindow|"
-msgid "F5"
-msgstr "F5"
-
 #: src/apps/marble-qt/QtMainWindow.cpp:366
 msgctxt "Marble::MainWindow|"
 msgid "Reload Current Map"
@@ -2910,11 +2880,6 @@ msgctxt "Marble::MainWindow|"
 msgid "Marble Virtual Globe &Handbook"
 msgstr "&Handbuch zu Marble - Virtueller Globus"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:370
-msgctxt "Marble::MainWindow|"
-msgid "F1"
-msgstr "F1"
-
 #: src/apps/marble-qt/QtMainWindow.cpp:371
 msgctxt "Marble::MainWindow|"
 msgid "Show the Handbook for Marble Virtual Globe"
@@ -2924,11 +2889,6 @@ msgstr "Das Handbuch zu Marble - Virtueller Globus anzeigen"
 msgctxt "Marble::MainWindow|"
 msgid "What's &This"
 msgstr "Was ist &das"
-
-#: src/apps/marble-qt/QtMainWindow.cpp:375
-msgctxt "Marble::MainWindow|"
-msgid "Shift+F1"
-msgstr "Umschalt+F1"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:376
 msgctxt "Marble::MainWindow|"
@@ -2972,11 +2932,6 @@ msgstr "Zeigt die Informationen zur Qt-Bibliothek"
 msgctxt "Marble::MainWindow|"
 msgid "Add &Bookmark..."
 msgstr "&Lesezeichen hinzufügen"
-
-#: src/apps/marble-qt/QtMainWindow.cpp:393
-msgctxt "Marble::MainWindow|"
-msgid "Ctrl+B"
-msgstr "Strg+B"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:394
 msgctxt "Marble::MainWindow|"
@@ -18424,6 +18379,42 @@ msgstr "&Vorlage für ein freischwebendes Objekt"
 msgctxt "Marble::FITemplateFloatItem|"
 msgid "This is a template class for float items."
 msgstr "Dies ist eine Vorlagenklasse für freischwebende Objekte."
+
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Ctrl+O"
+#~ msgstr "Strg+O"
+
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Ctrl+S"
+#~ msgstr "Strg+S"
+
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Ctrl+C"
+#~ msgstr "Strg+C"
+
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Ctrl+E"
+#~ msgstr "Strg+E"
+
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Ctrl+Shift+F"
+#~ msgstr "Strg+Umschalt+F"
+
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "F5"
+#~ msgstr "F5"
+
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "F1"
+#~ msgstr "F1"
+
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Shift+F1"
+#~ msgstr "Umschalt+F1"
+
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Ctrl+B"
+#~ msgstr "Strg+B"
 
 #~ msgctxt "DGML|"
 #~ msgid "Hillshading"

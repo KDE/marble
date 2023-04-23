@@ -2725,13 +2725,6 @@ msgctxt "Marble::MainWindow|"
 msgid "&Open..."
 msgstr "地図を開く(&O)..."
 
-#: src/apps/marble-qt/QtMainWindow.cpp:265
-#, fuzzy
-#| msgid "Ctrl+O"
-msgctxt "Marble::MainWindow|"
-msgid "Ctrl+O"
-msgstr "Ctrl+O"
-
 #: src/apps/marble-qt/QtMainWindow.cpp:266
 #, fuzzy
 #| msgid "Open a file for viewing on Marble"
@@ -2752,13 +2745,6 @@ msgstr "ファイルを保存"
 msgctxt "Marble::MainWindow|"
 msgid "&Export Map..."
 msgstr "地図をエクスポート(&E)..."
-
-#: src/apps/marble-qt/QtMainWindow.cpp:274
-#, fuzzy
-#| msgid "Ctrl+S"
-msgctxt "Marble::MainWindow|"
-msgid "Ctrl+S"
-msgstr "Ctrl+S"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:275
 #, fuzzy
@@ -2834,13 +2820,6 @@ msgctxt "Marble::MainWindow|"
 msgid "&Copy Map"
 msgstr "地図をコピー(&C)"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:298
-#, fuzzy
-#| msgid "Ctrl+C"
-msgctxt "Marble::MainWindow|"
-msgid "Ctrl+C"
-msgstr "Ctrl+C"
-
 #: src/apps/marble-qt/QtMainWindow.cpp:299
 #, fuzzy
 #| msgid "Copy a screenshot of the map"
@@ -2854,13 +2833,6 @@ msgstr "地図のスクリーンショットをコピーします"
 msgctxt "Marble::MainWindow|"
 msgid "&Edit Map..."
 msgstr "編集(&E)"
-
-#: src/apps/marble-qt/QtMainWindow.cpp:303
-#, fuzzy
-#| msgid "Ctrl+O"
-msgctxt "Marble::MainWindow|"
-msgid "Ctrl+E"
-msgstr "Ctrl+O"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:304
 msgctxt "Marble::MainWindow|"
@@ -2921,13 +2893,6 @@ msgstr "中心の経緯度をテキストとしてコピーします"
 msgctxt "Marble::MainWindow|"
 msgid "&Full Screen Mode"
 msgstr "フルスクリーンモード(&F)"
-
-#: src/apps/marble-qt/QtMainWindow.cpp:331
-#, fuzzy
-#| msgid "Ctrl+Shift+F"
-msgctxt "Marble::MainWindow|"
-msgid "Ctrl+Shift+F"
-msgstr "Ctrl+Shift+F"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:333
 #, fuzzy
@@ -3018,11 +2983,6 @@ msgctxt "Marble::MainWindow|"
 msgid "&Redisplay"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:365
-msgctxt "Marble::MainWindow|"
-msgid "F5"
-msgstr ""
-
 #: src/apps/marble-qt/QtMainWindow.cpp:366
 #, fuzzy
 #| msgid "&Copy Map"
@@ -3037,13 +2997,6 @@ msgctxt "Marble::MainWindow|"
 msgid "Marble Virtual Globe &Handbook"
 msgstr "Marble デスクトップ地球儀ハンドブック(&H)"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:370
-#, fuzzy
-#| msgid "F1"
-msgctxt "Marble::MainWindow|"
-msgid "F1"
-msgstr "F1"
-
 #: src/apps/marble-qt/QtMainWindow.cpp:371
 #, fuzzy
 #| msgid "Show the Handbook for Marble Desktop Globe"
@@ -3057,13 +3010,6 @@ msgstr "Marble デスクトップ地球儀のハンドブックを表示しま�
 msgctxt "Marble::MainWindow|"
 msgid "What's &This"
 msgstr "これは何？(&T)"
-
-#: src/apps/marble-qt/QtMainWindow.cpp:375
-#, fuzzy
-#| msgid "Shift+F1"
-msgctxt "Marble::MainWindow|"
-msgid "Shift+F1"
-msgstr "Shift+F1"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:376
 #, fuzzy
@@ -3116,13 +3062,6 @@ msgstr "Qt ライブラリに関する情報を表示します"
 msgctxt "Marble::MainWindow|"
 msgid "Add &Bookmark..."
 msgstr "プレースマークプラグイン"
-
-#: src/apps/marble-qt/QtMainWindow.cpp:393
-#, fuzzy
-#| msgid "Ctrl+O"
-msgctxt "Marble::MainWindow|"
-msgid "Ctrl+B"
-msgstr "Ctrl+O"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:394
 #, fuzzy
@@ -19319,6 +19258,54 @@ msgstr "フロート要素のテンプレート(&T)"
 msgctxt "Marble::FITemplateFloatItem|"
 msgid "This is a template class for float items."
 msgstr "フロート要素のテンプレートクラスです。"
+
+#, fuzzy
+#~| msgid "Ctrl+O"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Ctrl+O"
+#~ msgstr "Ctrl+O"
+
+#, fuzzy
+#~| msgid "Ctrl+S"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Ctrl+S"
+#~ msgstr "Ctrl+S"
+
+#, fuzzy
+#~| msgid "Ctrl+C"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Ctrl+C"
+#~ msgstr "Ctrl+C"
+
+#, fuzzy
+#~| msgid "Ctrl+O"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Ctrl+E"
+#~ msgstr "Ctrl+O"
+
+#, fuzzy
+#~| msgid "Ctrl+Shift+F"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Ctrl+Shift+F"
+#~ msgstr "Ctrl+Shift+F"
+
+#, fuzzy
+#~| msgid "F1"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "F1"
+#~ msgstr "F1"
+
+#, fuzzy
+#~| msgid "Shift+F1"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Shift+F1"
+#~ msgstr "Shift+F1"
+
+#, fuzzy
+#~| msgid "Ctrl+O"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Ctrl+B"
+#~ msgstr "Ctrl+O"
 
 #, fuzzy
 #~| msgid "Copy Coordinates"

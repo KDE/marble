@@ -2618,11 +2618,6 @@ msgctxt "Marble::MainWindow|"
 msgid "&Open..."
 msgstr "&Отваряне..."
 
-#: src/apps/marble-qt/QtMainWindow.cpp:265
-msgctxt "Marble::MainWindow|"
-msgid "Ctrl+O"
-msgstr "Ctrl-O"
-
 #: src/apps/marble-qt/QtMainWindow.cpp:266
 #, fuzzy
 msgctxt "Marble::MainWindow|"
@@ -2638,11 +2633,6 @@ msgstr "&Изтегляне на карти..."
 msgctxt "Marble::MainWindow|"
 msgid "&Export Map..."
 msgstr "И&знасяне на карта..."
-
-#: src/apps/marble-qt/QtMainWindow.cpp:274
-msgctxt "Marble::MainWindow|"
-msgid "Ctrl+S"
-msgstr "Ctrl+S"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:275
 #, fuzzy
@@ -2704,11 +2694,6 @@ msgctxt "Marble::MainWindow|"
 msgid "&Copy Map"
 msgstr "&Копиране на карта"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:298
-msgctxt "Marble::MainWindow|"
-msgid "Ctrl+C"
-msgstr "Ctrl+C"
-
 #: src/apps/marble-qt/QtMainWindow.cpp:299
 #, fuzzy
 msgctxt "Marble::MainWindow|"
@@ -2720,12 +2705,6 @@ msgstr "Копира прихванат екран на картата"
 msgctxt "Marble::MainWindow|"
 msgid "&Edit Map..."
 msgstr "&Редактиране"
-
-#: src/apps/marble-qt/QtMainWindow.cpp:303
-#, fuzzy
-msgctxt "Marble::MainWindow|"
-msgid "Ctrl+E"
-msgstr "Ctrl+O"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:304
 msgctxt "Marble::MainWindow|"
@@ -2780,11 +2759,6 @@ msgstr ""
 msgctxt "Marble::MainWindow|"
 msgid "&Full Screen Mode"
 msgstr "Режим на &цял екран"
-
-#: src/apps/marble-qt/QtMainWindow.cpp:331
-msgctxt "Marble::MainWindow|"
-msgid "Ctrl+Shift+F"
-msgstr "Ctrl+Shift+F"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:333
 msgctxt "Marble::MainWindow|"
@@ -2860,11 +2834,6 @@ msgctxt "Marble::MainWindow|"
 msgid "&Redisplay"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:365
-msgctxt "Marble::MainWindow|"
-msgid "F5"
-msgstr "F5"
-
 #: src/apps/marble-qt/QtMainWindow.cpp:366
 #, fuzzy
 msgctxt "Marble::MainWindow|"
@@ -2877,11 +2846,6 @@ msgctxt "Marble::MainWindow|"
 msgid "Marble Virtual Globe &Handbook"
 msgstr "Ръководство за глобус за работния плот M&arble"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:370
-msgctxt "Marble::MainWindow|"
-msgid "F1"
-msgstr "F1"
-
 #: src/apps/marble-qt/QtMainWindow.cpp:371
 #, fuzzy
 msgctxt "Marble::MainWindow|"
@@ -2893,11 +2857,6 @@ msgstr "Показва ръководството за глобус за раб�
 msgctxt "Marble::MainWindow|"
 msgid "What's &This"
 msgstr "&Какво е това?"
-
-#: src/apps/marble-qt/QtMainWindow.cpp:375
-msgctxt "Marble::MainWindow|"
-msgid "Shift+F1"
-msgstr "Shift+F1"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:376
 #, fuzzy
@@ -2944,12 +2903,6 @@ msgstr "Показва прозореца Относно за Qt библиот�
 msgctxt "Marble::MainWindow|"
 msgid "Add &Bookmark..."
 msgstr "Добавяне на показалец"
-
-#: src/apps/marble-qt/QtMainWindow.cpp:393
-#, fuzzy
-msgctxt "Marble::MainWindow|"
-msgid "Ctrl+B"
-msgstr "Ctrl+O"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:394
 #, fuzzy
@@ -18569,6 +18522,44 @@ msgstr ""
 msgctxt "Marble::FITemplateFloatItem|"
 msgid "This is a template class for float items."
 msgstr ""
+
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Ctrl+O"
+#~ msgstr "Ctrl-O"
+
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Ctrl+S"
+#~ msgstr "Ctrl+S"
+
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Ctrl+C"
+#~ msgstr "Ctrl+C"
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Ctrl+E"
+#~ msgstr "Ctrl+O"
+
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Ctrl+Shift+F"
+#~ msgstr "Ctrl+Shift+F"
+
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "F5"
+#~ msgstr "F5"
+
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "F1"
+#~ msgstr "F1"
+
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Shift+F1"
+#~ msgstr "Shift+F1"
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Ctrl+B"
+#~ msgstr "Ctrl+O"
 
 #, fuzzy
 #~ msgctxt "Marble::MapWizard|"

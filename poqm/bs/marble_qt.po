@@ -2975,13 +2975,6 @@ msgctxt "Marble::MainWindow|"
 msgid "&Open..."
 msgstr "&Otvori..."
 
-#: src/apps/marble-qt/QtMainWindow.cpp:265
-#, fuzzy
-#| msgid "Ctrl+O"
-msgctxt "Marble::MainWindow|"
-msgid "Ctrl+O"
-msgstr "Ctrl+O"
-
 #: src/apps/marble-qt/QtMainWindow.cpp:266
 #, fuzzy
 #| msgid "Open a file for viewing on Marble"
@@ -3002,13 +2995,6 @@ msgstr "&Preuzmi mape..."
 msgctxt "Marble::MainWindow|"
 msgid "&Export Map..."
 msgstr "&Izvezi kartu..."
-
-#: src/apps/marble-qt/QtMainWindow.cpp:274
-#, fuzzy
-#| msgid "Ctrl+S"
-msgctxt "Marble::MainWindow|"
-msgid "Ctrl+S"
-msgstr "Ctrl+S"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:275
 #, fuzzy
@@ -3089,13 +3075,6 @@ msgctxt "Marble::MainWindow|"
 msgid "&Copy Map"
 msgstr "&Kopiraj mapu"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:298
-#, fuzzy
-#| msgid "Ctrl+C"
-msgctxt "Marble::MainWindow|"
-msgid "Ctrl+C"
-msgstr "Ctrl+C"
-
 #: src/apps/marble-qt/QtMainWindow.cpp:299
 #, fuzzy
 #| msgid "Copy a screenshot of the map"
@@ -3109,13 +3088,6 @@ msgstr "Kopiraj sliku mape"
 msgctxt "Marble::MainWindow|"
 msgid "&Edit Map..."
 msgstr "&Izmijeni mapu"
-
-#: src/apps/marble-qt/QtMainWindow.cpp:303
-#, fuzzy
-#| msgid "Ctrl+E"
-msgctxt "Marble::MainWindow|"
-msgid "Ctrl+E"
-msgstr "Ctrl+E"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:304
 #, fuzzy
@@ -3186,13 +3158,6 @@ msgstr "Kopiraj centar koordinata kao tekst"
 msgctxt "Marble::MainWindow|"
 msgid "&Full Screen Mode"
 msgstr "&Režim punog ekrana"
-
-#: src/apps/marble-qt/QtMainWindow.cpp:331
-#, fuzzy
-#| msgid "Ctrl+Shift+F"
-msgctxt "Marble::MainWindow|"
-msgid "Ctrl+Shift+F"
-msgstr "Ctrl+Shift+F"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:333
 #, fuzzy
@@ -3285,13 +3250,6 @@ msgctxt "Marble::MainWindow|"
 msgid "&Redisplay"
 msgstr "&Prikaži ponovo"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:365
-#, fuzzy
-#| msgid "F5"
-msgctxt "Marble::MainWindow|"
-msgid "F5"
-msgstr "F5"
-
 #: src/apps/marble-qt/QtMainWindow.cpp:366
 #, fuzzy
 #| msgid "Reload Current Map"
@@ -3306,13 +3264,6 @@ msgctxt "Marble::MainWindow|"
 msgid "Marble Virtual Globe &Handbook"
 msgstr "&Priručnik za Marble virtualni globus"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:370
-#, fuzzy
-#| msgid "F1"
-msgctxt "Marble::MainWindow|"
-msgid "F1"
-msgstr "F1"
-
 #: src/apps/marble-qt/QtMainWindow.cpp:371
 #, fuzzy
 #| msgid "Show the Handbook for Marble Virtual Globe"
@@ -3326,13 +3277,6 @@ msgstr "Prikaži priručnik za Marble virtualni globus"
 msgctxt "Marble::MainWindow|"
 msgid "What's &This"
 msgstr "Šta je &ovo"
-
-#: src/apps/marble-qt/QtMainWindow.cpp:375
-#, fuzzy
-#| msgid "Shift+F1"
-msgctxt "Marble::MainWindow|"
-msgid "Shift+F1"
-msgstr "Shift+F1"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:376
 #, fuzzy
@@ -3385,13 +3329,6 @@ msgstr "Pokaži okvir O programu Qt biblioteke"
 msgctxt "Marble::MainWindow|"
 msgid "Add &Bookmark..."
 msgstr "Dodaj Za&bilješku"
-
-#: src/apps/marble-qt/QtMainWindow.cpp:393
-#, fuzzy
-#| msgid "Ctrl+B"
-msgctxt "Marble::MainWindow|"
-msgid "Ctrl+B"
-msgstr "Ctrl+B"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:394
 #, fuzzy
@@ -22142,6 +22079,60 @@ msgstr "&Šablon plutajućeg predmeta"
 msgctxt "Marble::FITemplateFloatItem|"
 msgid "This is a template class for float items."
 msgstr "Ovo je šablonska klasa za plutajuće predmete."
+
+#, fuzzy
+#~| msgid "Ctrl+O"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Ctrl+O"
+#~ msgstr "Ctrl+O"
+
+#, fuzzy
+#~| msgid "Ctrl+S"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Ctrl+S"
+#~ msgstr "Ctrl+S"
+
+#, fuzzy
+#~| msgid "Ctrl+C"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Ctrl+C"
+#~ msgstr "Ctrl+C"
+
+#, fuzzy
+#~| msgid "Ctrl+E"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Ctrl+E"
+#~ msgstr "Ctrl+E"
+
+#, fuzzy
+#~| msgid "Ctrl+Shift+F"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Ctrl+Shift+F"
+#~ msgstr "Ctrl+Shift+F"
+
+#, fuzzy
+#~| msgid "F5"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "F5"
+#~ msgstr "F5"
+
+#, fuzzy
+#~| msgid "F1"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "F1"
+#~ msgstr "F1"
+
+#, fuzzy
+#~| msgid "Shift+F1"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Shift+F1"
+#~ msgstr "Shift+F1"
+
+#, fuzzy
+#~| msgid "Ctrl+B"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Ctrl+B"
+#~ msgstr "Ctrl+B"
 
 #, fuzzy
 #~| msgid "Geographic Pole"

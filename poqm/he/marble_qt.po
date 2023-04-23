@@ -2714,12 +2714,6 @@ msgctxt "Marble::MainWindow|"
 msgid "&Open..."
 msgstr "&פתח..."
 
-#: src/apps/marble-qt/QtMainWindow.cpp:265
-#, fuzzy
-msgctxt "Marble::MainWindow|"
-msgid "Ctrl+O"
-msgstr "Ctrl+O"
-
 #: src/apps/marble-qt/QtMainWindow.cpp:266
 #, fuzzy
 msgctxt "Marble::MainWindow|"
@@ -2737,12 +2731,6 @@ msgstr "&הורד מפות..."
 msgctxt "Marble::MainWindow|"
 msgid "&Export Map..."
 msgstr "&ייצא מפה..."
-
-#: src/apps/marble-qt/QtMainWindow.cpp:274
-#, fuzzy
-msgctxt "Marble::MainWindow|"
-msgid "Ctrl+S"
-msgstr "Ctrl+S"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:275
 #, fuzzy
@@ -2809,12 +2797,6 @@ msgctxt "Marble::MainWindow|"
 msgid "&Copy Map"
 msgstr "הע&תק מפה"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:298
-#, fuzzy
-msgctxt "Marble::MainWindow|"
-msgid "Ctrl+C"
-msgstr "Ctrl+C"
-
 #: src/apps/marble-qt/QtMainWindow.cpp:299
 #, fuzzy
 msgctxt "Marble::MainWindow|"
@@ -2826,12 +2808,6 @@ msgstr "העתקת תצלום של המפה"
 msgctxt "Marble::MainWindow|"
 msgid "&Edit Map..."
 msgstr "&עריכה"
-
-#: src/apps/marble-qt/QtMainWindow.cpp:303
-#, fuzzy
-msgctxt "Marble::MainWindow|"
-msgid "Ctrl+E"
-msgstr "Ctrl+O"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:304
 msgctxt "Marble::MainWindow|"
@@ -2887,12 +2863,6 @@ msgstr "העתק קואורדינטות בתור טקסט"
 msgctxt "Marble::MainWindow|"
 msgid "&Full Screen Mode"
 msgstr "&מצב מסך מלא"
-
-#: src/apps/marble-qt/QtMainWindow.cpp:331
-#, fuzzy
-msgctxt "Marble::MainWindow|"
-msgid "Ctrl+Shift+F"
-msgstr "Ctrl+Shift+F"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:333
 #, fuzzy
@@ -2970,11 +2940,6 @@ msgctxt "Marble::MainWindow|"
 msgid "&Redisplay"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:365
-msgctxt "Marble::MainWindow|"
-msgid "F5"
-msgstr ""
-
 #: src/apps/marble-qt/QtMainWindow.cpp:366
 #, fuzzy
 msgctxt "Marble::MainWindow|"
@@ -2987,11 +2952,6 @@ msgctxt "Marble::MainWindow|"
 msgid "Marble Virtual Globe &Handbook"
 msgstr "הגלובוס השולחני Marble"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:370
-msgctxt "Marble::MainWindow|"
-msgid "F1"
-msgstr ""
-
 #: src/apps/marble-qt/QtMainWindow.cpp:371
 #, fuzzy
 msgctxt "Marble::MainWindow|"
@@ -3003,12 +2963,6 @@ msgstr "&אודות הגלובוס השולחני Marble"
 msgctxt "Marble::MainWindow|"
 msgid "What's &This"
 msgstr "מה &זה"
-
-#: src/apps/marble-qt/QtMainWindow.cpp:375
-#, fuzzy
-msgctxt "Marble::MainWindow|"
-msgid "Shift+F1"
-msgstr "Shift+F1"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:376
 #, fuzzy
@@ -3055,12 +3009,6 @@ msgstr "הצג את תיבת האודות של ספריית Qt"
 msgctxt "Marble::MainWindow|"
 msgid "Add &Bookmark..."
 msgstr "ייצא מפה"
-
-#: src/apps/marble-qt/QtMainWindow.cpp:393
-#, fuzzy
-msgctxt "Marble::MainWindow|"
-msgid "Ctrl+B"
-msgstr "Ctrl+O"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:394
 #, fuzzy
@@ -18843,6 +18791,41 @@ msgstr "&תבנית של פריט צף"
 msgctxt "Marble::FITemplateFloatItem|"
 msgid "This is a template class for float items."
 msgstr "זהו מחלקה של תבנית עבור פריטים צפים."
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Ctrl+O"
+#~ msgstr "Ctrl+O"
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Ctrl+S"
+#~ msgstr "Ctrl+S"
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Ctrl+C"
+#~ msgstr "Ctrl+C"
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Ctrl+E"
+#~ msgstr "Ctrl+O"
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Ctrl+Shift+F"
+#~ msgstr "Ctrl+Shift+F"
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Shift+F1"
+#~ msgstr "Shift+F1"
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Ctrl+B"
+#~ msgstr "Ctrl+O"
 
 #, fuzzy
 #~ msgctxt "Marble::MapWizard|"
