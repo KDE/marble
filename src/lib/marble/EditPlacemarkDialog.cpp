@@ -453,7 +453,7 @@ void EditPlacemarkDialog::updatePlacemarkAltitude()
 
 void EditPlacemarkDialog::restoreInitial( int result )
 {
-    if ( result ) {
+    if ( isReadOnly() || result ) {
         return;
     }
 
