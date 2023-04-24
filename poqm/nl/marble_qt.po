@@ -5308,73 +5308,73 @@ msgctxt "UiEditBookmarkDialog|"
 msgid "&Add Folder..."
 msgstr "Map &toevoegen..."
 
-#: src/lib/marble/EditPlacemarkDialog.cpp:108
+#: src/lib/marble/EditPlacemarkDialog.cpp:109
 msgctxt "Marble::EditPlacemarkDialog|"
 msgid "Untitled Placemark"
 msgstr "Naamloos plaatsmerkteken"
 
-#: src/lib/marble/EditPlacemarkDialog.cpp:150
+#: src/lib/marble/EditPlacemarkDialog.cpp:151
 msgctxt "Marble::EditPlacemarkDialog|"
 msgid "Tags"
 msgstr "Tags"
 
-#: src/lib/marble/EditPlacemarkDialog.cpp:156
+#: src/lib/marble/EditPlacemarkDialog.cpp:157
 msgctxt "Marble::EditPlacemarkDialog|"
 msgid "Relations"
 msgstr "Relaties"
 
-#: src/lib/marble/EditPlacemarkDialog.cpp:165
+#: src/lib/marble/EditPlacemarkDialog.cpp:166
 msgctxt "Marble::EditPlacemarkDialog|"
 msgid "Elevation"
 msgstr "Hoogte"
 
-#: src/lib/marble/EditPlacemarkDialog.cpp:355
+#: src/lib/marble/EditPlacemarkDialog.cpp:369
 msgctxt "Marble::EditPlacemarkDialog|"
 msgid "No name specified"
 msgstr "Geen naam opgegeven"
 
-#: src/lib/marble/EditPlacemarkDialog.cpp:356
+#: src/lib/marble/EditPlacemarkDialog.cpp:370
 msgctxt "Marble::EditPlacemarkDialog|"
 msgid "Please specify a name for this placemark."
 msgstr "Geef een naam op voor dit plaatsmerkteken."
 
-#: src/lib/marble/EditPlacemarkDialog.cpp:359
+#: src/lib/marble/EditPlacemarkDialog.cpp:373
 msgctxt "Marble::EditPlacemarkDialog|"
 msgid "No ID specified"
 msgstr "Geen ID opgegeven"
 
-#: src/lib/marble/EditPlacemarkDialog.cpp:360
+#: src/lib/marble/EditPlacemarkDialog.cpp:374
 msgctxt "Marble::EditPlacemarkDialog|"
 msgid "Please specify a ID for this placemark."
 msgstr "Geef een  ID op voor dit plaatsmerkteken."
 
-#: src/lib/marble/EditPlacemarkDialog.cpp:363
+#: src/lib/marble/EditPlacemarkDialog.cpp:377
 msgctxt "Marble::EditPlacemarkDialog|"
 msgid "ID is invalid"
 msgstr "ID is ongeldig"
 
-#: src/lib/marble/EditPlacemarkDialog.cpp:364
+#: src/lib/marble/EditPlacemarkDialog.cpp:378
 msgctxt "Marble::EditPlacemarkDialog|"
 msgid "Please specify a valid ID for this placemark."
 msgstr "Geef een  ID op voor dit plaatsmerkteken."
 
-#: src/lib/marble/EditPlacemarkDialog.cpp:367
+#: src/lib/marble/EditPlacemarkDialog.cpp:381
 msgctxt "Marble::EditPlacemarkDialog|"
 msgid "No image specified"
 msgstr "Geen afbeelding opgegeven"
 
-#: src/lib/marble/EditPlacemarkDialog.cpp:368
+#: src/lib/marble/EditPlacemarkDialog.cpp:382
 msgctxt "Marble::EditPlacemarkDialog|"
 msgid "Please specify an icon for this placemark or add a valid tag."
 msgstr ""
 "Geef een pictogram op voor dit plaatsmerkteken, of voeg een geldige tag toe."
 
-#: src/lib/marble/EditPlacemarkDialog.cpp:371
+#: src/lib/marble/EditPlacemarkDialog.cpp:385
 msgctxt "Marble::EditPlacemarkDialog|"
 msgid "Invalid icon path"
 msgstr "Ongeldig pad naar pictogram"
 
-#: src/lib/marble/EditPlacemarkDialog.cpp:372
+#: src/lib/marble/EditPlacemarkDialog.cpp:386
 msgctxt "Marble::EditPlacemarkDialog|"
 msgid "Please specify a valid path for the icon file."
 msgstr "Geef een geldig pad op voor bestand met het pictogram."

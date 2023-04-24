@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2023-03-26 11:40+0200\n"
+"PO-Revision-Date: 2023-04-22 11:42+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
@@ -5311,74 +5311,74 @@ msgctxt "UiEditBookmarkDialog|"
 msgid "&Add Folder..."
 msgstr "Afi&g una carpeta..."
 
-#: src/lib/marble/EditPlacemarkDialog.cpp:108
+#: src/lib/marble/EditPlacemarkDialog.cpp:109
 msgctxt "Marble::EditPlacemarkDialog|"
 msgid "Untitled Placemark"
 msgstr "Marca de posició sense nom"
 
-#: src/lib/marble/EditPlacemarkDialog.cpp:150
+#: src/lib/marble/EditPlacemarkDialog.cpp:151
 msgctxt "Marble::EditPlacemarkDialog|"
 msgid "Tags"
 msgstr "Etiquetes"
 
-#: src/lib/marble/EditPlacemarkDialog.cpp:156
+#: src/lib/marble/EditPlacemarkDialog.cpp:157
 msgctxt "Marble::EditPlacemarkDialog|"
 msgid "Relations"
 msgstr "Relacions"
 
-#: src/lib/marble/EditPlacemarkDialog.cpp:165
+#: src/lib/marble/EditPlacemarkDialog.cpp:166
 msgctxt "Marble::EditPlacemarkDialog|"
 msgid "Elevation"
 msgstr "Desnivell"
 
-#: src/lib/marble/EditPlacemarkDialog.cpp:355
+#: src/lib/marble/EditPlacemarkDialog.cpp:369
 msgctxt "Marble::EditPlacemarkDialog|"
 msgid "No name specified"
 msgstr "No s'ha especificat cap nom"
 
-#: src/lib/marble/EditPlacemarkDialog.cpp:356
+#: src/lib/marble/EditPlacemarkDialog.cpp:370
 msgctxt "Marble::EditPlacemarkDialog|"
 msgid "Please specify a name for this placemark."
 msgstr "Especifiqueu un nom per a esta marca de posició."
 
-#: src/lib/marble/EditPlacemarkDialog.cpp:359
+#: src/lib/marble/EditPlacemarkDialog.cpp:373
 msgctxt "Marble::EditPlacemarkDialog|"
 msgid "No ID specified"
 msgstr "No s'ha especificat cap ID"
 
-#: src/lib/marble/EditPlacemarkDialog.cpp:360
+#: src/lib/marble/EditPlacemarkDialog.cpp:374
 msgctxt "Marble::EditPlacemarkDialog|"
 msgid "Please specify a ID for this placemark."
 msgstr "Especifiqueu un ID per a esta marca de posició."
 
-#: src/lib/marble/EditPlacemarkDialog.cpp:363
+#: src/lib/marble/EditPlacemarkDialog.cpp:377
 msgctxt "Marble::EditPlacemarkDialog|"
 msgid "ID is invalid"
 msgstr "L'ID no és vàlid"
 
-#: src/lib/marble/EditPlacemarkDialog.cpp:364
+#: src/lib/marble/EditPlacemarkDialog.cpp:378
 msgctxt "Marble::EditPlacemarkDialog|"
 msgid "Please specify a valid ID for this placemark."
 msgstr "Especifiqueu un ID vàlid per a esta marca de posició."
 
-#: src/lib/marble/EditPlacemarkDialog.cpp:367
+#: src/lib/marble/EditPlacemarkDialog.cpp:381
 msgctxt "Marble::EditPlacemarkDialog|"
 msgid "No image specified"
 msgstr "No s'ha especificat cap imatge"
 
-#: src/lib/marble/EditPlacemarkDialog.cpp:368
+#: src/lib/marble/EditPlacemarkDialog.cpp:382
 msgctxt "Marble::EditPlacemarkDialog|"
 msgid "Please specify an icon for this placemark or add a valid tag."
 msgstr ""
 "Especifiqueu una icona per a esta marca de posició o afegiu una etiqueta "
 "vàlida."
 
-#: src/lib/marble/EditPlacemarkDialog.cpp:371
+#: src/lib/marble/EditPlacemarkDialog.cpp:385
 msgctxt "Marble::EditPlacemarkDialog|"
 msgid "Invalid icon path"
 msgstr "El camí del fitxer d'icona no és vàlid"
 
-#: src/lib/marble/EditPlacemarkDialog.cpp:372
+#: src/lib/marble/EditPlacemarkDialog.cpp:386
 msgctxt "Marble::EditPlacemarkDialog|"
 msgid "Please specify a valid path for the icon file."
 msgstr "Especifiqueu un camí vàlid per al fitxer d'icona."
@@ -8030,12 +8030,9 @@ msgstr "Cilíndrica equidistant (epsg:4326)"
 
 #: src/lib/marble/MapWizard.cpp:382 src/lib/marble/MapWizard.cpp:829
 #: src/lib/marble/MapWizard.cpp:961
-#, fuzzy
-#| msgctxt "Marble::MapWizard|"
-#| msgid "Equirectangular (epsg:4326)"
 msgctxt "Marble::MapWizard|"
 msgid "Equirectangular (crs:84)"
-msgstr "Cilíndrica equidistant (epsg:4326)"
+msgstr "Cilíndrica equidistant (crs:84)"
 
 #: src/lib/marble/MapWizard.cpp:393
 msgctxt "Marble::MapWizard|"
@@ -18270,43 +18267,3 @@ msgstr "Plan&tilla d'element flotant"
 msgctxt "Marble::FITemplateFloatItem|"
 msgid "This is a template class for float items."
 msgstr "Esta és una classe de plantilla per a elements flotants."
-
-#~ msgctxt "Marble::MainWindow|"
-#~ msgid "Ctrl+O"
-#~ msgstr "Ctrl+O"
-
-#~ msgctxt "Marble::MainWindow|"
-#~ msgid "Ctrl+S"
-#~ msgstr "Ctrl+S"
-
-#~ msgctxt "Marble::MainWindow|"
-#~ msgid "Ctrl+C"
-#~ msgstr "Ctrl+C"
-
-#~ msgctxt "Marble::MainWindow|"
-#~ msgid "Ctrl+E"
-#~ msgstr "Ctrl+E"
-
-#~ msgctxt "Marble::MainWindow|"
-#~ msgid "Ctrl+Shift+F"
-#~ msgstr "Ctrl+Maj+F"
-
-#~ msgctxt "Marble::MainWindow|"
-#~ msgid "F5"
-#~ msgstr "F5"
-
-#~ msgctxt "Marble::MainWindow|"
-#~ msgid "F1"
-#~ msgstr "F1"
-
-#~ msgctxt "Marble::MainWindow|"
-#~ msgid "Shift+F1"
-#~ msgstr "Maj+F1"
-
-#~ msgctxt "Marble::MainWindow|"
-#~ msgid "Ctrl+B"
-#~ msgstr "Ctrl+B"
-
-#~ msgctxt "DGML|"
-#~ msgid "Hillshading"
-#~ msgstr "Ombreig del relleu"

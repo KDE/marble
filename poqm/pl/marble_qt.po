@@ -16,7 +16,7 @@ msgstr ""
 "Project-Id-Version: marble_qt\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2023-04-15 11:26+0200\n"
+"PO-Revision-Date: 2023-04-23 11:52+0200\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
 "Language: pl\n"
@@ -5309,72 +5309,72 @@ msgctxt "UiEditBookmarkDialog|"
 msgid "&Add Folder..."
 msgstr "Dod&aj katalog..."
 
-#: src/lib/marble/EditPlacemarkDialog.cpp:108
+#: src/lib/marble/EditPlacemarkDialog.cpp:109
 msgctxt "Marble::EditPlacemarkDialog|"
 msgid "Untitled Placemark"
 msgstr "Nienazwany znacznik miejsca"
 
-#: src/lib/marble/EditPlacemarkDialog.cpp:150
+#: src/lib/marble/EditPlacemarkDialog.cpp:151
 msgctxt "Marble::EditPlacemarkDialog|"
 msgid "Tags"
 msgstr "Znaczniki"
 
-#: src/lib/marble/EditPlacemarkDialog.cpp:156
+#: src/lib/marble/EditPlacemarkDialog.cpp:157
 msgctxt "Marble::EditPlacemarkDialog|"
 msgid "Relations"
 msgstr "Zależności"
 
-#: src/lib/marble/EditPlacemarkDialog.cpp:165
+#: src/lib/marble/EditPlacemarkDialog.cpp:166
 msgctxt "Marble::EditPlacemarkDialog|"
 msgid "Elevation"
 msgstr "Wysokość"
 
-#: src/lib/marble/EditPlacemarkDialog.cpp:355
+#: src/lib/marble/EditPlacemarkDialog.cpp:369
 msgctxt "Marble::EditPlacemarkDialog|"
 msgid "No name specified"
 msgstr "Nie podano nazwy"
 
-#: src/lib/marble/EditPlacemarkDialog.cpp:356
+#: src/lib/marble/EditPlacemarkDialog.cpp:370
 msgctxt "Marble::EditPlacemarkDialog|"
 msgid "Please specify a name for this placemark."
 msgstr "Podaj nazwę dla tego znacznika miejsca."
 
-#: src/lib/marble/EditPlacemarkDialog.cpp:359
+#: src/lib/marble/EditPlacemarkDialog.cpp:373
 msgctxt "Marble::EditPlacemarkDialog|"
 msgid "No ID specified"
 msgstr "Nie podano ID"
 
-#: src/lib/marble/EditPlacemarkDialog.cpp:360
+#: src/lib/marble/EditPlacemarkDialog.cpp:374
 msgctxt "Marble::EditPlacemarkDialog|"
 msgid "Please specify a ID for this placemark."
 msgstr "Podaj identyfikator dla tego znacznika miejsca."
 
-#: src/lib/marble/EditPlacemarkDialog.cpp:363
+#: src/lib/marble/EditPlacemarkDialog.cpp:377
 msgctxt "Marble::EditPlacemarkDialog|"
 msgid "ID is invalid"
 msgstr "Identyfikator jest nieprawidłowy"
 
-#: src/lib/marble/EditPlacemarkDialog.cpp:364
+#: src/lib/marble/EditPlacemarkDialog.cpp:378
 msgctxt "Marble::EditPlacemarkDialog|"
 msgid "Please specify a valid ID for this placemark."
 msgstr "Podaj prawidłowy identyfikator dla tego znacznika miejsca."
 
-#: src/lib/marble/EditPlacemarkDialog.cpp:367
+#: src/lib/marble/EditPlacemarkDialog.cpp:381
 msgctxt "Marble::EditPlacemarkDialog|"
 msgid "No image specified"
 msgstr "Nie podano obrazu"
 
-#: src/lib/marble/EditPlacemarkDialog.cpp:368
+#: src/lib/marble/EditPlacemarkDialog.cpp:382
 msgctxt "Marble::EditPlacemarkDialog|"
 msgid "Please specify an icon for this placemark or add a valid tag."
 msgstr "Podaj ikonę dla tego znacznika miejsca lub dodaj właściwy znacznik."
 
-#: src/lib/marble/EditPlacemarkDialog.cpp:371
+#: src/lib/marble/EditPlacemarkDialog.cpp:385
 msgctxt "Marble::EditPlacemarkDialog|"
 msgid "Invalid icon path"
 msgstr "Nieprawidłowa ścieżka do ikony"
 
-#: src/lib/marble/EditPlacemarkDialog.cpp:372
+#: src/lib/marble/EditPlacemarkDialog.cpp:386
 msgctxt "Marble::EditPlacemarkDialog|"
 msgid "Please specify a valid path for the icon file."
 msgstr "Proszę podać prawidłową ścieżkę do pliku ikony."
@@ -8025,12 +8025,9 @@ msgstr "Wiernoodległościowe (epsg:4326)"
 
 #: src/lib/marble/MapWizard.cpp:382 src/lib/marble/MapWizard.cpp:829
 #: src/lib/marble/MapWizard.cpp:961
-#, fuzzy
-#| msgctxt "Marble::MapWizard|"
-#| msgid "Equirectangular (epsg:4326)"
 msgctxt "Marble::MapWizard|"
 msgid "Equirectangular (crs:84)"
-msgstr "Wiernoodległościowe (epsg:4326)"
+msgstr "Wiernoodległościowe (crs:84)"
 
 #: src/lib/marble/MapWizard.cpp:393
 msgctxt "Marble::MapWizard|"

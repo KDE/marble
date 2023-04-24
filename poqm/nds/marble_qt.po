@@ -6463,96 +6463,96 @@ msgctxt "UiEditBookmarkDialog|"
 msgid "&Add Folder..."
 msgstr "Knütten tofögen"
 
-#: src/lib/marble/EditPlacemarkDialog.cpp:108
+#: src/lib/marble/EditPlacemarkDialog.cpp:109
 #, fuzzy
 #| msgid "Untitled Placemark"
 msgctxt "Marble::EditPlacemarkDialog|"
 msgid "Untitled Placemark"
 msgstr "Steedmark ahn Naam"
 
-#: src/lib/marble/EditPlacemarkDialog.cpp:150
+#: src/lib/marble/EditPlacemarkDialog.cpp:151
 #, fuzzy
 #| msgid "Tags:"
 msgctxt "Marble::EditPlacemarkDialog|"
 msgid "Tags"
 msgstr "Slötelwöör:"
 
-#: src/lib/marble/EditPlacemarkDialog.cpp:156
+#: src/lib/marble/EditPlacemarkDialog.cpp:157
 #, fuzzy
 #| msgid "Elevation"
 msgctxt "Marble::EditPlacemarkDialog|"
 msgid "Relations"
 msgstr "Hööchd"
 
-#: src/lib/marble/EditPlacemarkDialog.cpp:165
+#: src/lib/marble/EditPlacemarkDialog.cpp:166
 #, fuzzy
 #| msgid "Elevation"
 msgctxt "Marble::EditPlacemarkDialog|"
 msgid "Elevation"
 msgstr "Hööchd"
 
-#: src/lib/marble/EditPlacemarkDialog.cpp:355
+#: src/lib/marble/EditPlacemarkDialog.cpp:369
 #, fuzzy
 #| msgid "No name specified"
 msgctxt "Marble::EditPlacemarkDialog|"
 msgid "No name specified"
 msgstr "Keen Naam angeven"
 
-#: src/lib/marble/EditPlacemarkDialog.cpp:356
+#: src/lib/marble/EditPlacemarkDialog.cpp:370
 #, fuzzy
 #| msgid "Please specify a name for this placemark."
 msgctxt "Marble::EditPlacemarkDialog|"
 msgid "Please specify a name for this placemark."
 msgstr "Bitte en Naam för disse Steedmark angeven"
 
-#: src/lib/marble/EditPlacemarkDialog.cpp:359
+#: src/lib/marble/EditPlacemarkDialog.cpp:373
 #, fuzzy
 #| msgid "No name specified"
 msgctxt "Marble::EditPlacemarkDialog|"
 msgid "No ID specified"
 msgstr "Keen Naam angeven"
 
-#: src/lib/marble/EditPlacemarkDialog.cpp:360
+#: src/lib/marble/EditPlacemarkDialog.cpp:374
 #, fuzzy
 #| msgid "Please specify a name for this placemark."
 msgctxt "Marble::EditPlacemarkDialog|"
 msgid "Please specify a ID for this placemark."
 msgstr "Bitte en Naam för disse Steedmark angeven"
 
-#: src/lib/marble/EditPlacemarkDialog.cpp:363
+#: src/lib/marble/EditPlacemarkDialog.cpp:377
 msgctxt "Marble::EditPlacemarkDialog|"
 msgid "ID is invalid"
 msgstr ""
 
-#: src/lib/marble/EditPlacemarkDialog.cpp:364
+#: src/lib/marble/EditPlacemarkDialog.cpp:378
 #, fuzzy
 #| msgid "Please specify a name for this placemark."
 msgctxt "Marble::EditPlacemarkDialog|"
 msgid "Please specify a valid ID for this placemark."
 msgstr "Bitte en Naam för disse Steedmark angeven"
 
-#: src/lib/marble/EditPlacemarkDialog.cpp:367
+#: src/lib/marble/EditPlacemarkDialog.cpp:381
 #, fuzzy
 #| msgid "No image specified"
 msgctxt "Marble::EditPlacemarkDialog|"
 msgid "No image specified"
 msgstr "Keen Bild angeven"
 
-#: src/lib/marble/EditPlacemarkDialog.cpp:368
+#: src/lib/marble/EditPlacemarkDialog.cpp:382
 #, fuzzy
 #| msgid "Please specify an icon for this placemark."
 msgctxt "Marble::EditPlacemarkDialog|"
 msgid "Please specify an icon for this placemark or add a valid tag."
 msgstr "Bitte en Lüttbild för disse Steedmark angeven"
 
-#: src/lib/marble/EditPlacemarkDialog.cpp:371
+#: src/lib/marble/EditPlacemarkDialog.cpp:385
 #, fuzzy
 #| msgid "Invalid icon path"
 msgctxt "Marble::EditPlacemarkDialog|"
 msgid "Invalid icon path"
 msgstr "Leeg Lüttbildpadd"
 
-#: src/lib/marble/EditPlacemarkDialog.cpp:372
+#: src/lib/marble/EditPlacemarkDialog.cpp:386
 #, fuzzy
 #| msgid "Please specify a valid path for the icon file."
 msgctxt "Marble::EditPlacemarkDialog|"

@@ -2727,11 +2727,6 @@ msgctxt "Marble::MainWindow|"
 msgid "&Open..."
 msgstr "&Abrir..."
 
-#: src/apps/marble-qt/QtMainWindow.cpp:265
-msgctxt "Marble::MainWindow|"
-msgid "Ctrl+O"
-msgstr "Ctrl+O"
-
 #: src/apps/marble-qt/QtMainWindow.cpp:266
 msgctxt "Marble::MainWindow|"
 msgid "Open a file for viewing on Marble"
@@ -2746,11 +2741,6 @@ msgstr "O&bter os Mapas..."
 msgctxt "Marble::MainWindow|"
 msgid "&Export Map..."
 msgstr "&Exportar o Mapa..."
-
-#: src/apps/marble-qt/QtMainWindow.cpp:274
-msgctxt "Marble::MainWindow|"
-msgid "Ctrl+S"
-msgstr "Ctrl+S"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:275
 msgctxt "Marble::MainWindow|"
@@ -2810,11 +2800,6 @@ msgctxt "Marble::MainWindow|"
 msgid "&Copy Map"
 msgstr "&Copiar o Mapa"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:298
-msgctxt "Marble::MainWindow|"
-msgid "Ctrl+C"
-msgstr "Ctrl+C"
-
 #: src/apps/marble-qt/QtMainWindow.cpp:299
 msgctxt "Marble::MainWindow|"
 msgid "Copy a screenshot of the map"
@@ -2824,11 +2809,6 @@ msgstr "Copia uma imagem do mapa"
 msgctxt "Marble::MainWindow|"
 msgid "&Edit Map..."
 msgstr "&Editar o Mapa..."
-
-#: src/apps/marble-qt/QtMainWindow.cpp:303
-msgctxt "Marble::MainWindow|"
-msgid "Ctrl+E"
-msgstr "Ctrl+E"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:304
 msgctxt "Marble::MainWindow|"
@@ -2879,11 +2859,6 @@ msgstr "Copiar as coordenadas do centro como texto"
 msgctxt "Marble::MainWindow|"
 msgid "&Full Screen Mode"
 msgstr "Modo de Ecrã &Completo"
-
-#: src/apps/marble-qt/QtMainWindow.cpp:331
-msgctxt "Marble::MainWindow|"
-msgid "Ctrl+Shift+F"
-msgstr "Ctrl+Shift+F"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:333
 msgctxt "Marble::MainWindow|"
@@ -2950,11 +2925,6 @@ msgctxt "Marble::MainWindow|"
 msgid "&Redisplay"
 msgstr "Mostra&r de Novo"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:365
-msgctxt "Marble::MainWindow|"
-msgid "F5"
-msgstr "F5"
-
 #: src/apps/marble-qt/QtMainWindow.cpp:366
 msgctxt "Marble::MainWindow|"
 msgid "Reload Current Map"
@@ -2965,11 +2935,6 @@ msgctxt "Marble::MainWindow|"
 msgid "Marble Virtual Globe &Handbook"
 msgstr "&Manual do Globo Virtual Marble"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:370
-msgctxt "Marble::MainWindow|"
-msgid "F1"
-msgstr "F1"
-
 #: src/apps/marble-qt/QtMainWindow.cpp:371
 msgctxt "Marble::MainWindow|"
 msgid "Show the Handbook for Marble Virtual Globe"
@@ -2979,11 +2944,6 @@ msgstr "Mostrar o Manual do Globo Virtual Marble"
 msgctxt "Marble::MainWindow|"
 msgid "What's &This"
 msgstr "O Que é Is&to?"
-
-#: src/apps/marble-qt/QtMainWindow.cpp:375
-msgctxt "Marble::MainWindow|"
-msgid "Shift+F1"
-msgstr "Shift+F1"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:376
 msgctxt "Marble::MainWindow|"
@@ -3024,11 +2984,6 @@ msgstr "Mostra a janela Acerca da biblioteca Qt"
 msgctxt "Marble::MainWindow|"
 msgid "Add &Bookmark..."
 msgstr "Adicionar aos &Favoritos..."
-
-#: src/apps/marble-qt/QtMainWindow.cpp:393
-msgctxt "Marble::MainWindow|"
-msgid "Ctrl+B"
-msgstr "Ctrl+B"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:394
 msgctxt "Marble::MainWindow|"
@@ -5427,73 +5382,73 @@ msgctxt "UiEditBookmarkDialog|"
 msgid "&Add Folder..."
 msgstr "&Adicionar uma Pasta..."
 
-#: src/lib/marble/EditPlacemarkDialog.cpp:108
+#: src/lib/marble/EditPlacemarkDialog.cpp:109
 msgctxt "Marble::EditPlacemarkDialog|"
 msgid "Untitled Placemark"
 msgstr "Marcador sem Nome"
 
-#: src/lib/marble/EditPlacemarkDialog.cpp:150
+#: src/lib/marble/EditPlacemarkDialog.cpp:151
 msgctxt "Marble::EditPlacemarkDialog|"
 msgid "Tags"
 msgstr "Marcas"
 
-#: src/lib/marble/EditPlacemarkDialog.cpp:156
+#: src/lib/marble/EditPlacemarkDialog.cpp:157
 msgctxt "Marble::EditPlacemarkDialog|"
 msgid "Relations"
 msgstr "Relações"
 
-#: src/lib/marble/EditPlacemarkDialog.cpp:165
+#: src/lib/marble/EditPlacemarkDialog.cpp:166
 msgctxt "Marble::EditPlacemarkDialog|"
 msgid "Elevation"
 msgstr "Elevação"
 
-#: src/lib/marble/EditPlacemarkDialog.cpp:355
+#: src/lib/marble/EditPlacemarkDialog.cpp:369
 msgctxt "Marble::EditPlacemarkDialog|"
 msgid "No name specified"
 msgstr "Não foi indicado qualquer nome"
 
-#: src/lib/marble/EditPlacemarkDialog.cpp:356
+#: src/lib/marble/EditPlacemarkDialog.cpp:370
 msgctxt "Marble::EditPlacemarkDialog|"
 msgid "Please specify a name for this placemark."
 msgstr "Indique por favor um nome para este marcador."
 
-#: src/lib/marble/EditPlacemarkDialog.cpp:359
+#: src/lib/marble/EditPlacemarkDialog.cpp:373
 msgctxt "Marble::EditPlacemarkDialog|"
 msgid "No ID specified"
 msgstr "Não foi indicado nenhum ID"
 
-#: src/lib/marble/EditPlacemarkDialog.cpp:360
+#: src/lib/marble/EditPlacemarkDialog.cpp:374
 msgctxt "Marble::EditPlacemarkDialog|"
 msgid "Please specify a ID for this placemark."
 msgstr "Indique por favor um ID para este marcador."
 
-#: src/lib/marble/EditPlacemarkDialog.cpp:363
+#: src/lib/marble/EditPlacemarkDialog.cpp:377
 msgctxt "Marble::EditPlacemarkDialog|"
 msgid "ID is invalid"
 msgstr "O ID é inválido"
 
-#: src/lib/marble/EditPlacemarkDialog.cpp:364
+#: src/lib/marble/EditPlacemarkDialog.cpp:378
 msgctxt "Marble::EditPlacemarkDialog|"
 msgid "Please specify a valid ID for this placemark."
 msgstr "Indique por favor um ID válido para este marcador."
 
-#: src/lib/marble/EditPlacemarkDialog.cpp:367
+#: src/lib/marble/EditPlacemarkDialog.cpp:381
 msgctxt "Marble::EditPlacemarkDialog|"
 msgid "No image specified"
 msgstr "Nenhuma imagem indicada"
 
-#: src/lib/marble/EditPlacemarkDialog.cpp:368
+#: src/lib/marble/EditPlacemarkDialog.cpp:382
 msgctxt "Marble::EditPlacemarkDialog|"
 msgid "Please specify an icon for this placemark or add a valid tag."
 msgstr ""
 "Indique por favor um ícone para este marcador ou adicione uma marca válida."
 
-#: src/lib/marble/EditPlacemarkDialog.cpp:371
+#: src/lib/marble/EditPlacemarkDialog.cpp:385
 msgctxt "Marble::EditPlacemarkDialog|"
 msgid "Invalid icon path"
 msgstr "A localização do ícone é inválida"
 
-#: src/lib/marble/EditPlacemarkDialog.cpp:372
+#: src/lib/marble/EditPlacemarkDialog.cpp:386
 msgctxt "Marble::EditPlacemarkDialog|"
 msgid "Please specify a valid path for the icon file."
 msgstr "Indique por favor uma localização válida para o ficheiro do ícone."
@@ -18371,6 +18326,42 @@ msgstr "Modelo de Item Flu&tuante"
 msgctxt "Marble::FITemplateFloatItem|"
 msgid "This is a template class for float items."
 msgstr "Esta é uma classe-modelo para os itens flutuantes."
+
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Ctrl+O"
+#~ msgstr "Ctrl+O"
+
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Ctrl+S"
+#~ msgstr "Ctrl+S"
+
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Ctrl+C"
+#~ msgstr "Ctrl+C"
+
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Ctrl+E"
+#~ msgstr "Ctrl+E"
+
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Ctrl+Shift+F"
+#~ msgstr "Ctrl+Shift+F"
+
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "F5"
+#~ msgstr "F5"
+
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "F1"
+#~ msgstr "F1"
+
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Shift+F1"
+#~ msgstr "Shift+F1"
+
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Ctrl+B"
+#~ msgstr "Ctrl+B"
 
 #~ msgctxt "DGML|"
 #~ msgid "Hillshading"
