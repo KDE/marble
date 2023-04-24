@@ -219,6 +219,10 @@ QString WmsCapabilities::boundingBoxNSEWDegrees(const QStringList &layers, const
     QString retVal;
     for (auto layer : layers) {
         QString layerBBox = boundingBox(layer, projection);
+        if (layerBBox.isEmpty()) {
+            retVal = QString("90,-90,180,-180");
+            break;
+        }
         QStringList layerBBoxList = layerBBox.split(",");
         qreal west, south, east, north;
         if (projection == "epsg:3857") {
@@ -301,8 +305,6 @@ OwsServiceManager::OwsServiceManager(QObject *parent)
     connect( &m_capabilitiesAccessManager, &QNetworkAccessManager::authenticationRequired, this, &OwsServiceManager::handleAuthentication );
     connect( &m_imageAccessManager, &QNetworkAccessManager::authenticationRequired, this, &OwsServiceManager::handleAuthentication );
 }
-
-// https://terramapas.icv.gva.es/sentinel2_20170506_rgb/wmts?
 
 void OwsServiceManager::queryOwsCapabilities(const QUrl& queryUrl, const QString& serviceString)
 {
