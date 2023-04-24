@@ -18,6 +18,7 @@ const char dgmlTag_nameSpace20[] = "http://edu.kde.org/marble/dgml/2.0";
 const char dgmlTag_Available[] = "available";
 const char dgmlTag_Blending[] = "blending";
 const char dgmlTag_Brush[] = "brush";
+const char dgmlTag_Center[] = "center";
 const char dgmlTag_Color[] = "color";
 const char dgmlTag_CustomPlugin[] = "customplugin";
 const char dgmlTag_Dem[] = "dem";

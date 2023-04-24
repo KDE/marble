@@ -36,6 +36,7 @@ class MainWindow : public KXmlGuiWindow
  public Q_SLOTS:
     void updateWindowTitle();
     void changeViewSize( QAction* );
+    void updateCenterFromTheme();
 
  protected:
     void closeEvent( QCloseEvent *event ) override;

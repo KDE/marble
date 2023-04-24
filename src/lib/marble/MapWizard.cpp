@@ -108,6 +108,7 @@ public:
         StaticUrlMap
     };
     QStringList selectedLayers;
+    QString selectedProjection;
 
     mapType mapProviderType;
     QByteArray levelZero;
@@ -830,6 +831,7 @@ bool MapWizard::validateCurrentPage()
                 projection = "crs:84";
             else
                 projection = "epsg:3857";
+            d->selectedProjection = projection;
             QString format = d->uiWidget.comboBoxWmsFormat->currentText();
             QStringList styles = d->owsManager.wmsCapabilities().styles(d->selectedLayers);
             d->owsManager.queryWmsPreviewImage(QUrl(d->uiWidget.lineEditWmsUrl->text()),
@@ -962,6 +964,7 @@ bool MapWizard::validateCurrentPage()
                 projection = "crs:84";
             else
                 projection = "epsg:3857";
+            d->selectedProjection = projection;
             QString format = d->uiWidget.comboBoxWmsFormat->currentText();
             QStringList styles = d->owsManager.wmsCapabilities().styles(d->selectedLayers);
             d->owsManager.queryWmsLevelZeroTile(QUrl(d->uiWidget.lineEditWmsUrl->text()),
@@ -1221,6 +1224,15 @@ GeoSceneDocument* MapWizard::createDocument()
     secondLayer->addDataset( boundaryplacemarks );
     
     GeoSceneMap *map = document->map();
+
+    QString bbox;
+    bbox = d->owsManager.wmsCapabilities().boundingBoxNSEWDegrees(d->selectedLayers, d->selectedProjection);
+    QStringList bboxList = bbox.split(',');
+    // Only center if the bbox does not cover roughly the whole earth
+    if (bboxList.at(0).toDouble() < 85 && bboxList.at(1).toDouble() > -85
+     && bboxList.at(2).toDouble() < 179 && bboxList.at(3).toDouble() > -179) {
+        map->setCenter(bbox);
+    }
     map->addLayer( layer );
     map->addLayer( secondLayer );
     

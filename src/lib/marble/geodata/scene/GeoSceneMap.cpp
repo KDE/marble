@@ -13,6 +13,8 @@
 
 #include <QColor>
 
+#include <GeoDataCoordinates.h>
+
 namespace Marble
 {
 
@@ -30,6 +32,8 @@ class GeoSceneMapPrivate
         qDeleteAll( m_layers );
         qDeleteAll( m_filters );
     }
+
+    QVariantList  m_center;
 
     /// The vector holding all the sections in the legend.
     /// (We want to preserve the order and don't care 
@@ -144,6 +148,33 @@ void GeoSceneMap::addFilter( GeoSceneFilter* filter )
 
     if ( filter ) {
         d->m_filters.append( filter );
+    }
+}
+
+QVariantList GeoSceneMap::center() const
+{
+  return d->m_center;
+}
+
+void GeoSceneMap::setCenter(const QString & coordinatesString)
+{
+    QStringList coordinatesList = coordinatesString.split(",");
+    if (coordinatesList.count() == 2) {
+        bool success = false;
+        const GeoDataCoordinates coordinates = GeoDataCoordinates::fromString(coordinatesString, success);
+
+        if ( success ) {
+            QVariantList lonLat;
+            lonLat << QVariant( coordinates.longitude(GeoDataCoordinates::Degree) )
+                   << QVariant( coordinates.latitude(GeoDataCoordinates::Degree) );
+            d->m_center = lonLat;
+        }
+    }
+    // LatLonBox
+    else if (coordinatesList.count() == 4) {
+        QVariantList northSouthEastWest;
+        d->m_center << QVariant(coordinatesList.at(0)) << QVariant(coordinatesList.at(1))
+                    << QVariant(coordinatesList.at(2)) << QVariant(coordinatesList.at(3));
     }
 }
 

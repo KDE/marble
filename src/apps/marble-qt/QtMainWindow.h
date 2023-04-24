@@ -78,6 +78,7 @@ private Q_SLOTS:
     void  changeRecordingState();
 
     void  updateWindowTitle();
+    void  updateCenterFromTheme();
 
     // File Menu
     void  openFile();

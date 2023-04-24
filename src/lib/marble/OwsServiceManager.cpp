@@ -214,6 +214,42 @@ QStringList WmsCapabilities::styles(const QStringList &layers)
     return retVal;
 }
 
+QString WmsCapabilities::boundingBoxNSEWDegrees(const QStringList &layers, const QString& projection)
+{
+    QString retVal;
+    for (auto layer : layers) {
+        QString layerBBox = boundingBox(layer, projection);
+        QStringList layerBBoxList = layerBBox.split(",");
+        qreal west, south, east, north;
+        if (projection == "epsg:3857") {
+            west = layerBBoxList.at(0).toDouble() * 180/20037508.34;
+            south = atan(pow(2.7182818284, (layerBBoxList.at(1).toDouble()/20037508.34 * M_PI))) * (360/M_PI) - 90;
+            east = layerBBoxList.at(2).toDouble() * 180/20037508.34;
+            north = atan(pow(2.7182818284, (layerBBoxList.at(3).toDouble()/20037508.34 * M_PI))) * (360/M_PI) - 90;
+        }
+        else {
+            if (projection == "crs:84" || (projection == "4326" && version() != "1.3.0")) {
+                // order: longitude-latitude
+                west = layerBBoxList.at(0).toDouble();
+                south = layerBBoxList.at(1).toDouble();
+                east = layerBBoxList.at(2).toDouble();
+                north = layerBBoxList.at(3).toDouble();
+            }
+            else {
+                // order: latitude-longitude
+                west = layerBBoxList.at(1).toDouble();
+                south = layerBBoxList.at(0).toDouble();
+                east = layerBBoxList.at(3).toDouble();
+                north = layerBBoxList.at(2).toDouble();
+            }
+        }
+        retVal = QString("%1,%2,%3,%4").arg(north).arg(south).arg(east).arg(west);
+        // TODO: merge possibly different layer bboxes
+        break;
+    }
+    return retVal;
+}
+
 void WmsCapabilities::setReferenceSystemType(const QString &refSystem)
 {
     m_referenceSystemType = refSystem;

@@ -21,6 +21,7 @@ namespace dgml
     extern  const char dgmlTag_Available[];
     extern  const char dgmlTag_Blending[];
     extern  const char dgmlTag_Brush[];
+    extern  const char dgmlTag_Center[];
     extern  const char dgmlTag_Color[];
     extern  const char dgmlTag_CustomPlugin[];
     extern  const char dgmlTag_Dem[];

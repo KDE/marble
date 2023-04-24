@@ -87,6 +87,7 @@ public:
     QString boundingBox(const QString& layer, const QString& projection);
     QString legendUrl(const QString& layer);
     QStringList styles(const QStringList& layers);
+    QString boundingBoxNSEWDegrees(const QStringList& layers, const QString& projection);
 
     void setReferenceSystemType(const QString& refSystem);
     QString referenceSystemType() const; // SRS (1.1.1) or CRS (1.3.0)

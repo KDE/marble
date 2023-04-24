@@ -8,6 +8,7 @@
 #define MARBLE_GEOSCENEMAP_H
 
 #include <QVector>
+#include <QVariant>
 
 #include <geodata_export.h>
 
@@ -50,7 +51,17 @@ class GEODATA_EXPORT GeoSceneMap : public GeoNode
      * @param  layer  The new layer
      */
     void addLayer( GeoSceneLayer* );
-
+    /**
+     * @ brief Set starting center with lon lat cooredinates
+     * used if a scene downloadUrl do not handle elements in other locations
+     */
+    void setCenter(const QString & coordinateString);
+    /**
+     * @breif Get starting center with cooredinates
+     * used if a scene downloadUrl do not handle elements in other locations
+     * return A QVariantList of lon lat as specified in the dgml
+     */
+    QVariantList center() const;
     /**
      * @brief  Return a layer by its name
      * @param  name  The name of the layer

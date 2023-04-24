@@ -33,7 +33,7 @@ class Quaternion;
  * for three dimensional objects. it comprises of a Quaternion for speed issues.
  * This class was introduced to reflect the difference between a simple 3d point
  * and the GeoDataGeometry object containing such a point. The latter is a 
- * GeoDataPoint and is simply derived from GeoDataCoordinates.
+ * GeoDataPoint and is simply derived from GeoDataGeometry.
  * @see GeoDataPoint
 */
 

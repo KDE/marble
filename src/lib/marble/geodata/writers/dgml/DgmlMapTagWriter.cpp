@@ -28,8 +28,23 @@ bool DgmlMapTagWriter::write(const GeoNode *node, GeoWriter& writer) const
     
     writer.writeStartElement( "canvas" );
     writer.writeEndElement();
+
+    if (!map->center().isEmpty()) {
+        if (map->center().count() == 2) {
+            writer.writeElement(dgml::dgmlTag_Center,
+                                  map->center().at(0).toString() + ","
+                                + map->center().at(1).toString());
+        }
+        else if (map->center().count() == 4) {
+            writer.writeElement(dgml::dgmlTag_Center,
+                                  map->center().at(0).toString() + ","
+                                + map->center().at(1).toString() + ","
+                                + map->center().at(2).toString() + ","
+                                + map->center().at(3).toString());
+        }
+    }
     
-    writer.writeStartElement( "target" );
+    writer.writeStartElement( dgml::dgmlTag_Target);
     writer.writeEndElement();
     
     for( int i = 0; i < map->layers().count(); ++i )

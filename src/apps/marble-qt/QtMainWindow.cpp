@@ -55,8 +55,10 @@
 #include "NewBookmarkFolderDialog.h"
 #include "GeoSceneDocument.h"
 #include "GeoSceneHead.h"
+#include "GeoSceneMap.h"
 #include "GeoDataLookAt.h"
 #include "GeoDataCoordinates.h"
+#include "GeoDataLatLonAltBox.h"
 #include "GeoDataDocument.h"
 #include "GeoDataFolder.h"
 #include "GeoDataPlacemark.h"
@@ -209,6 +211,9 @@ MainWindow::MainWindow(const QString& marbleDataPath, const QVariantMap& cmdLine
              this, SLOT(updateMapEditButtonVisibility(QString)) );
     connect(m_controlView->marbleModel(), SIGNAL(themeChanged(QString)),
             this, SLOT(updateWindowTitle()));
+    connect(m_controlView->marbleModel(), SIGNAL(themeChanged(QString)),
+            this, SLOT(updateCenterFromTheme()));
+
     connect( m_controlView, SIGNAL(showMapWizard()), this, SLOT(showMapWizard()) );
     connect( m_controlView, SIGNAL(mapThemeDeleted()), this, SLOT(fallBackToDefaultTheme()) );
 
@@ -1603,6 +1608,36 @@ void MainWindow::updateWindowTitle()
     setWindowTitle(theme ? theme->head()->name() : QString());
 }
 
+void MainWindow::updateCenterFromTheme()
+{
+   //A scene provider may provide only a subset of the globe, use scene properties read from a dgml as a starting point
+   GeoSceneDocument * theme = m_controlView->marbleModel()->mapTheme();
+   if (theme) {
+       const GeoSceneMap* map = theme->map();
+       if (map) {
+           const QVariantList coords = map->center();
+           if (! coords.empty()) {
+               if (coords.count() == 2) {
+                   m_controlView->marbleWidget()->centerOn( coords.at(0).toDouble(), coords.at(1).toDouble() );
+               }
+               else if (coords.count() == 4) {
+                   // If the  the map theme provides a bounding box that does not contain
+                   // the current view then we center on the bounding box of the map theme.
+                   GeoDataLatLonBox latLonBox(coords.at(0).toDouble(), coords.at(1).toDouble(),
+                                              coords.at(2).toDouble(), coords.at(3).toDouble(), GeoDataCoordinates::Degree);
+                   GeoDataLatLonAltBox viewBox = m_controlView->marbleWidget()->viewport()->viewLatLonAltBox();
+                   if (!latLonBox.contains(viewBox)) {
+                       m_controlView->marbleWidget()->centerOn( latLonBox );
+                   }
+               }
+               else {
+                   mDebug() << QString("DGML theme %1 has invalid number of coordinates").arg(theme->head()->name());
+               }
+           }
+      }
+   }
+}
+
 void MainWindow::showMapWizard()
 {
     QPointer<MapWizard> mapWizard = new MapWizard();
@@ -1663,5 +1698,4 @@ void MainWindow::changeViewSize( QAction* action )
         m_savedSize.setHeight( -1 );
     }
 }
-
 #include "moc_QtMainWindow.cpp"

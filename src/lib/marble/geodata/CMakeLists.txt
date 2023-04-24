@@ -150,6 +150,7 @@ SET ( geodata_handlers_dgml_SRCS
         geodata/handlers/dgml/DgmlThemeTagHandler.h
         geodata/handlers/dgml/DgmlSettingsTagHandler.h
         geodata/handlers/dgml/DgmlDescriptionTagHandler.h
+	geodata/handlers/dgml/DgmlCenterTagHandler.h
         geodata/handlers/dgml/DgmlBrushTagHandler.cpp
         geodata/handlers/dgml/DgmlSectionTagHandler.h
         geodata/handlers/dgml/DgmlTextureTagHandler.h
@@ -169,6 +170,7 @@ SET ( geodata_handlers_dgml_SRCS
         geodata/handlers/dgml/DgmlTileSizeTagHandler.cpp
         geodata/handlers/dgml/DgmlTextureTagHandler.cpp
         geodata/handlers/dgml/DgmlPenTagHandler.cpp
+        geodata/handlers/dgml/DgmlCenterTagHandler.cpp
         geodata/handlers/dgml/DgmlDescriptionTagHandler.cpp
         geodata/handlers/dgml/DgmlElementDictionary.h
         geodata/handlers/dgml/DgmlIconTagHandler.cpp
