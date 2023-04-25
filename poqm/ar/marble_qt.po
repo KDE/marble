@@ -2593,13 +2593,13 @@ msgctxt "Marble::MainWindow|"
 msgid "Marble - Virtual Globe"
 msgstr "ماربل - الكرة الأرضية"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:195
-#: src/apps/marble-qt/QtMainWindow.cpp:765
+#: src/apps/marble-qt/QtMainWindow.cpp:197
+#: src/apps/marble-qt/QtMainWindow.cpp:770
 msgctxt "Marble::MainWindow|"
 msgid "Marble"
 msgstr "ماربل"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:196
+#: src/apps/marble-qt/QtMainWindow.cpp:198
 #, qt-format
 msgctxt "Marble::MainWindow|"
 msgid ""
@@ -2609,458 +2609,458 @@ msgstr ""
 "تعذّر فتح الملفّ '%1':\n"
 "'%2'"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:264
+#: src/apps/marble-qt/QtMainWindow.cpp:269
 msgctxt "Marble::MainWindow|"
 msgid "&Open..."
 msgstr "ا&فتح..."
 
-#: src/apps/marble-qt/QtMainWindow.cpp:266
+#: src/apps/marble-qt/QtMainWindow.cpp:271
 msgctxt "Marble::MainWindow|"
 msgid "Open a file for viewing on Marble"
 msgstr "افتح ملف لتعرضه في ماربل"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:270
+#: src/apps/marble-qt/QtMainWindow.cpp:275
 msgctxt "Marble::MainWindow|"
 msgid "&Download Maps..."
 msgstr "&نزل الخرائط..."
 
-#: src/apps/marble-qt/QtMainWindow.cpp:273
+#: src/apps/marble-qt/QtMainWindow.cpp:278
 msgctxt "Marble::MainWindow|"
 msgid "&Export Map..."
 msgstr "&صدِّر الخريطة..."
 
-#: src/apps/marble-qt/QtMainWindow.cpp:275
+#: src/apps/marble-qt/QtMainWindow.cpp:280
 msgctxt "Marble::MainWindow|"
 msgid "Save a screenshot of the map"
 msgstr "احفظ لقطة من الخريطة"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:279
+#: src/apps/marble-qt/QtMainWindow.cpp:284
 msgctxt "Marble::MainWindow|"
 msgid "Download &Region..."
 msgstr "نزّل &منطقة…"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:280
+#: src/apps/marble-qt/QtMainWindow.cpp:285
 msgctxt "Marble::MainWindow|"
 msgid "Download a map region in different zoom levels for offline usage"
 msgstr "نزل خريطة للمنطقة في مستويات تكبير مختلفة لاستخدامها بدون اتصال"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:283
+#: src/apps/marble-qt/QtMainWindow.cpp:288
 msgctxt "Marble::MainWindow|"
 msgid "&Print..."
 msgstr "ا&طبع..."
 
-#: src/apps/marble-qt/QtMainWindow.cpp:284
+#: src/apps/marble-qt/QtMainWindow.cpp:289
 msgctxt "Marble::MainWindow|"
 msgid "Ctrl+P"
 msgstr "Ctrl+P"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:285
-#: src/apps/marble-qt/QtMainWindow.cpp:289
+#: src/apps/marble-qt/QtMainWindow.cpp:290
+#: src/apps/marble-qt/QtMainWindow.cpp:294
 msgctxt "Marble::MainWindow|"
 msgid "Print a screenshot of the map"
 msgstr "اطبع لقطة من الخريطة"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:288
+#: src/apps/marble-qt/QtMainWindow.cpp:293
 msgctxt "Marble::MainWindow|"
 msgid "Print Previe&w ..."
 msgstr "معاينة الطباعة"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:292
+#: src/apps/marble-qt/QtMainWindow.cpp:297
 msgctxt "Marble::MainWindow|"
 msgid "&Quit"
 msgstr "أ&نهِ"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:293
+#: src/apps/marble-qt/QtMainWindow.cpp:298
 msgctxt "Marble::MainWindow|"
 msgid "Ctrl+Q"
 msgstr "Ctrl+Q"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:294
+#: src/apps/marble-qt/QtMainWindow.cpp:299
 msgctxt "Marble::MainWindow|"
 msgid "Quit the Application"
 msgstr "أنهِ تطبيق"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:297
+#: src/apps/marble-qt/QtMainWindow.cpp:302
 msgctxt "Marble::MainWindow|"
 msgid "&Copy Map"
 msgstr "ا&نسخ الخريطة"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:299
+#: src/apps/marble-qt/QtMainWindow.cpp:304
 msgctxt "Marble::MainWindow|"
 msgid "Copy a screenshot of the map"
 msgstr "انسخ لقطة من الخريطة"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:302
+#: src/apps/marble-qt/QtMainWindow.cpp:307
 msgctxt "Marble::MainWindow|"
 msgid "&Edit Map..."
 msgstr "&حرّر الخريطة…"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:304
+#: src/apps/marble-qt/QtMainWindow.cpp:309
 msgctxt "Marble::MainWindow|"
 msgid "Edit the current map region in an external editor"
 msgstr "حرر منطقة الخريطة الحالية في محرر خارجي"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:308
+#: src/apps/marble-qt/QtMainWindow.cpp:313
 msgctxt "Marble::MainWindow|"
 msgid "&Record Movie"
 msgstr "&سجل فلم"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:309
+#: src/apps/marble-qt/QtMainWindow.cpp:314
 msgctxt "Marble::MainWindow|"
 msgid "Records a movie of the globe"
 msgstr "يسجل فلم الكرة الأرضية"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:315
+#: src/apps/marble-qt/QtMainWindow.cpp:320
 msgctxt "Marble::MainWindow|"
 msgid "&Stop Recording"
 msgstr "أ&وقف التسجيل"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:316
+#: src/apps/marble-qt/QtMainWindow.cpp:321
 msgctxt "Marble::MainWindow|"
 msgid "Stop recording a movie of the globe"
 msgstr "أوقف تسجيل فلم الكرة الأرضية"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:322
+#: src/apps/marble-qt/QtMainWindow.cpp:327
 msgctxt "Marble::MainWindow|"
 msgid "&Configure Marble"
 msgstr "ا&ضبط ماربل"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:323
+#: src/apps/marble-qt/QtMainWindow.cpp:328
 msgctxt "Marble::MainWindow|"
 msgid "Show the configuration dialog"
 msgstr "اعرض حواري الضبط"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:326
+#: src/apps/marble-qt/QtMainWindow.cpp:331
 msgctxt "Marble::MainWindow|"
 msgid "C&opy Coordinates"
 msgstr "انسخ الإ&حداثيّات"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:327
+#: src/apps/marble-qt/QtMainWindow.cpp:332
 msgctxt "Marble::MainWindow|"
 msgid "Copy the center coordinates as text"
 msgstr "انسخ إحداثيات المركز كنص"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:330
+#: src/apps/marble-qt/QtMainWindow.cpp:335
 msgctxt "Marble::MainWindow|"
 msgid "&Full Screen Mode"
 msgstr "وضع ملء ال&شاشة"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:333
+#: src/apps/marble-qt/QtMainWindow.cpp:338
 msgctxt "Marble::MainWindow|"
 msgid "Full Screen Mode"
 msgstr "وضع ملء الشاشة"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:336
+#: src/apps/marble-qt/QtMainWindow.cpp:341
 msgctxt "Marble::MainWindow|"
 msgid "&Show Status Bar"
 msgstr "اعرض &شريط الحالة"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:338
+#: src/apps/marble-qt/QtMainWindow.cpp:343
 msgctxt "Marble::MainWindow|"
 msgid "Show Status Bar"
 msgstr "اعرض &شريط الحالة"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:342
+#: src/apps/marble-qt/QtMainWindow.cpp:347
 msgctxt "Marble::MainWindow|"
 msgid "Lock Position"
 msgstr "اقفل الموقع"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:344
+#: src/apps/marble-qt/QtMainWindow.cpp:349
 msgctxt "Marble::MainWindow|"
 msgid "Lock Position of Floating Items"
 msgstr "اقفل موضع العناصر العائمة"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:347
+#: src/apps/marble-qt/QtMainWindow.cpp:352
 msgctxt "Marble::MainWindow|"
 msgid "&Clouds"
 msgstr "&غيوم"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:349
+#: src/apps/marble-qt/QtMainWindow.cpp:354
 msgctxt "Marble::MainWindow|"
 msgid "Show Real Time Cloud Cover"
 msgstr "اعرض الغطاء السحابي في الوقت الحقيقي"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:352
+#: src/apps/marble-qt/QtMainWindow.cpp:357
 msgctxt "Marble::MainWindow|"
 msgid "Work Off&line"
 msgstr "اعمل بلا اتّصال"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:356
+#: src/apps/marble-qt/QtMainWindow.cpp:361
 msgctxt "Marble::MainWindow|"
 msgid "&Time Control..."
 msgstr "&تحكم الوقت…"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:357
+#: src/apps/marble-qt/QtMainWindow.cpp:362
 msgctxt "Marble::MainWindow|"
 msgid "Configure Time Control "
 msgstr "اضبط تحكم الوقت "
 
-#: src/apps/marble-qt/QtMainWindow.cpp:360
+#: src/apps/marble-qt/QtMainWindow.cpp:365
 msgctxt "Marble::MainWindow|"
 msgid "S&un Control..."
 msgstr "تحكم ال&شمس…"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:361
+#: src/apps/marble-qt/QtMainWindow.cpp:366
 msgctxt "Marble::MainWindow|"
 msgid "Configure Sun Control"
 msgstr "اضبط تحكم الشمس"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:364
+#: src/apps/marble-qt/QtMainWindow.cpp:369
 msgctxt "Marble::MainWindow|"
 msgid "&Redisplay"
 msgstr "أ&عِد العرض"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:366
+#: src/apps/marble-qt/QtMainWindow.cpp:371
 msgctxt "Marble::MainWindow|"
 msgid "Reload Current Map"
 msgstr "أعد تحميل الخريطة الحالية"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:369
+#: src/apps/marble-qt/QtMainWindow.cpp:374
 msgctxt "Marble::MainWindow|"
 msgid "Marble Virtual Globe &Handbook"
 msgstr "&دليل ماربل الكرة الأرضية"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:371
+#: src/apps/marble-qt/QtMainWindow.cpp:376
 msgctxt "Marble::MainWindow|"
 msgid "Show the Handbook for Marble Virtual Globe"
 msgstr "اعرض دليل ماربل الكرة الأرضية"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:374
+#: src/apps/marble-qt/QtMainWindow.cpp:379
 msgctxt "Marble::MainWindow|"
 msgid "What's &This"
 msgstr "ما &هذا؟"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:376
+#: src/apps/marble-qt/QtMainWindow.cpp:381
 msgctxt "Marble::MainWindow|"
 msgid "Show a detailed explanation of the action."
 msgstr "اعرض شرح مفصل حول الإجراء"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:379
+#: src/apps/marble-qt/QtMainWindow.cpp:384
 msgctxt "Marble::MainWindow|"
 msgid "&Community Forum"
 msgstr "&منتدى المجتمع"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:380
+#: src/apps/marble-qt/QtMainWindow.cpp:385
 msgctxt "Marble::MainWindow|"
 msgid "Visit Marble's Community Forum"
 msgstr "زر منتدى مجتمع ماربل"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:383
+#: src/apps/marble-qt/QtMainWindow.cpp:388
 msgctxt "Marble::MainWindow|"
 msgid "&About Marble Virtual Globe"
 msgstr "&حول ماربل الكرة الأرضية"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:384
+#: src/apps/marble-qt/QtMainWindow.cpp:389
 msgctxt "Marble::MainWindow|"
 msgid "Show the application's About Box"
 msgstr "اعرض صندوق التعريف بالتطبيق"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:387
+#: src/apps/marble-qt/QtMainWindow.cpp:392
 msgctxt "Marble::MainWindow|"
 msgid "About &Qt"
 msgstr "عن &كيوت"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:388
+#: src/apps/marble-qt/QtMainWindow.cpp:393
 msgctxt "Marble::MainWindow|"
 msgid "Show the Qt library's About box"
 msgstr "اعرض صندوق التعريف بكيوت"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:392
+#: src/apps/marble-qt/QtMainWindow.cpp:397
 msgctxt "Marble::MainWindow|"
 msgid "Add &Bookmark..."
 msgstr "أضف &علامة…"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:394
+#: src/apps/marble-qt/QtMainWindow.cpp:399
 msgctxt "Marble::MainWindow|"
 msgid "Add Bookmark"
 msgstr "أضف علامة"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:397
-#: src/apps/marble-qt/QtMainWindow.cpp:398
+#: src/apps/marble-qt/QtMainWindow.cpp:402
+#: src/apps/marble-qt/QtMainWindow.cpp:403
 msgctxt "Marble::MainWindow|"
 msgid "&Set Home Location"
 msgstr "عين موقع ال&بيت"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:401
+#: src/apps/marble-qt/QtMainWindow.cpp:406
 msgctxt "Marble::MainWindow|"
 msgid "Show &Bookmarks"
 msgstr "أ&ظهر العلامات"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:402
+#: src/apps/marble-qt/QtMainWindow.cpp:407
 msgctxt "Marble::MainWindow|"
 msgid "Toggle display of Bookmarks"
 msgstr "تبدل عرض العلامات"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:406
+#: src/apps/marble-qt/QtMainWindow.cpp:411
 msgctxt "Marble::MainWindow|"
 msgid "&Manage Bookmarks..."
 msgstr "أ&در العلامات…"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:407
+#: src/apps/marble-qt/QtMainWindow.cpp:412
 msgctxt "Marble::MainWindow|"
 msgid "Manage Bookmarks"
 msgstr "أدر العلامات"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:411
+#: src/apps/marble-qt/QtMainWindow.cpp:416
 msgctxt "Marble::MainWindow|"
 msgid "&Create a New Map..."
 msgstr "أنشئ &خريطة جديدة…"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:412
+#: src/apps/marble-qt/QtMainWindow.cpp:417
 msgctxt "Marble::MainWindow|"
 msgid "A wizard guides you through the creation of your own map theme."
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:416
+#: src/apps/marble-qt/QtMainWindow.cpp:421
 msgctxt "Marble::MainWindow|"
 msgid "Show Tile Zoom Level"
 msgstr "اعرض مستوى تكبير القطعة"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:424
+#: src/apps/marble-qt/QtMainWindow.cpp:429
 msgctxt "Marble::MainWindow|"
 msgid "Degree (DMS)"
 msgstr "الدرجة (DMS)"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:429
+#: src/apps/marble-qt/QtMainWindow.cpp:434
 msgctxt "Marble::MainWindow|"
 msgid "Degree (Decimal)"
 msgstr "الدرجة (عشرية)"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:434
+#: src/apps/marble-qt/QtMainWindow.cpp:439
 msgctxt "Marble::MainWindow|"
 msgid "Universal Transverse Mercator (UTM)"
 msgstr "نظام إسقاط ميركاتور المستعرض العالمي(UTM)"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:449
+#: src/apps/marble-qt/QtMainWindow.cpp:454
 msgctxt "Marble::MainWindow|"
 msgid "&File"
 msgstr "&ملف"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:462
+#: src/apps/marble-qt/QtMainWindow.cpp:467
 msgctxt "Marble::MainWindow|"
 msgid "&Edit"
 msgstr "ت&حرير"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:470
+#: src/apps/marble-qt/QtMainWindow.cpp:475
 msgctxt "Marble::MainWindow|"
 msgid "&View"
 msgstr "من&ظور"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:471
+#: src/apps/marble-qt/QtMainWindow.cpp:476
 msgctxt "Marble::MainWindow|"
 msgid "&Info Boxes"
 msgstr "مربعات المعلومات"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:472
+#: src/apps/marble-qt/QtMainWindow.cpp:477
 msgctxt "Marble::MainWindow|"
 msgid "&Online Services"
 msgstr "الخدمات على ال&شابكة"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:475
+#: src/apps/marble-qt/QtMainWindow.cpp:480
 msgctxt "Marble::MainWindow|"
 msgid "&Bookmarks"
 msgstr "ال&علامات"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:479
+#: src/apps/marble-qt/QtMainWindow.cpp:484
 msgctxt "Marble::MainWindow|"
 msgid "&Panels"
 msgstr "ال&لوحات"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:484
+#: src/apps/marble-qt/QtMainWindow.cpp:489
 msgctxt "Marble::MainWindow|"
 msgid "&View Size"
 msgstr "&حجم العرض"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:487
+#: src/apps/marble-qt/QtMainWindow.cpp:492
 msgctxt "Marble::MainWindow|"
 msgid "&Settings"
 msgstr "إ&عدادات"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:496
+#: src/apps/marble-qt/QtMainWindow.cpp:501
 msgctxt "Marble::MainWindow|"
 msgid "&Help"
 msgstr "م&ساعدة"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:601
+#: src/apps/marble-qt/QtMainWindow.cpp:606
 msgctxt "Marble::MainWindow|"
 msgid "&Home"
 msgstr "الصفحة الأ&ولى"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:610
+#: src/apps/marble-qt/QtMainWindow.cpp:615
 msgctxt "Marble::MainWindow|"
 msgid "Default"
 msgstr "المبدئيّ"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:734
+#: src/apps/marble-qt/QtMainWindow.cpp:739
 msgctxt "Marble::MainWindow|"
 msgid "Ready"
 msgstr "جاهز"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:747
+#: src/apps/marble-qt/QtMainWindow.cpp:752
 msgctxt "Marble::MainWindow|"
 msgid "Export Map"
 msgstr "صدِّر الخريطة"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:749
+#: src/apps/marble-qt/QtMainWindow.cpp:754
 msgctxt "Marble::MainWindow|"
 msgid "Images (*.jpg *.png)"
 msgstr "الصور (*.png *.jpeg)"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:766
+#: src/apps/marble-qt/QtMainWindow.cpp:771
 msgctxt "Marble::MainWindow|"
 msgid "An error occurred while trying to save the file.\n"
 msgstr "حدث خطأ أثناء محاولة حفظ الملف.\n"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:897
+#: src/apps/marble-qt/QtMainWindow.cpp:902
 #, qt-format
 msgctxt "Marble::MainWindow|"
 msgid "Marble Virtual Globe %1"
 msgstr "ماربل - الكرة الأرضية %1"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:948
-#: src/apps/marble-qt/QtMainWindow.cpp:1025
+#: src/apps/marble-qt/QtMainWindow.cpp:953
+#: src/apps/marble-qt/QtMainWindow.cpp:1030
 #, qt-format
 msgctxt "Marble::MainWindow|"
 msgid "Position: %1"
 msgstr "الموقع: %1"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:951
-#: src/apps/marble-qt/QtMainWindow.cpp:1033
+#: src/apps/marble-qt/QtMainWindow.cpp:956
+#: src/apps/marble-qt/QtMainWindow.cpp:1038
 #, qt-format
 msgctxt "Marble::MainWindow|"
 msgid "Altitude: %1"
 msgstr "الارتفاع: %1"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:954
-#: src/apps/marble-qt/QtMainWindow.cpp:1041
+#: src/apps/marble-qt/QtMainWindow.cpp:959
+#: src/apps/marble-qt/QtMainWindow.cpp:1046
 #, qt-format
 msgctxt "Marble::MainWindow|"
 msgid "Zoom: %1"
 msgstr "التكبير: %1"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:957
-#: src/apps/marble-qt/QtMainWindow.cpp:1049
+#: src/apps/marble-qt/QtMainWindow.cpp:962
+#: src/apps/marble-qt/QtMainWindow.cpp:1054
 #, qt-format
 msgctxt "Marble::MainWindow|"
 msgid "Time: %1"
 msgstr "الوقت: %1"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:989
+#: src/apps/marble-qt/QtMainWindow.cpp:994
 msgctxt "Marble::MainWindow|"
 msgid "All Supported Files"
 msgstr "كلّ الملفّات المدعومة"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:995
+#: src/apps/marble-qt/QtMainWindow.cpp:1000
 msgctxt "Marble::MainWindow|"
 msgid "Open File"
 msgstr "افتح الملف"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:1016
+#: src/apps/marble-qt/QtMainWindow.cpp:1021
 msgctxt "Marble::MainWindow|"
 msgid "&Angle Display Unit"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:1265
+#: src/apps/marble-qt/QtMainWindow.cpp:1270
 msgctxt "Marble::MainWindow|"
 msgid "Unnamed"
 msgstr "غير مسمًّى"
@@ -7993,46 +7993,46 @@ msgctxt "MapViewWidget|"
 msgid "Here you can choose the preferred map view from different topics."
 msgstr "هنا اختيار مفضًل خريطة اعرض من مختلف."
 
-#: src/lib/marble/MapWizard.cpp:166
+#: src/lib/marble/MapWizard.cpp:167
 #, fuzzy
 msgctxt "Marble::PreviewDialog|"
 msgid "Preview Map"
 msgstr "اطبع صفحة"
 
-#: src/lib/marble/MapWizard.cpp:288 src/lib/marble/MapWizard.cpp:293
+#: src/lib/marble/MapWizard.cpp:289 src/lib/marble/MapWizard.cpp:294
 msgctxt "Marble::MapWizard|"
 msgid "Error while parsing"
 msgstr "خطأ أثناء تحليل"
 
-#: src/lib/marble/MapWizard.cpp:288
+#: src/lib/marble/MapWizard.cpp:289
 msgctxt "Marble::MapWizard|"
 msgid "Wizard cannot parse server's response"
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:293
+#: src/lib/marble/MapWizard.cpp:294
 msgctxt "Marble::MapWizard|"
 msgid "Server is not an OWS Server."
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:380 src/lib/marble/MapWizard.cpp:397
-#: src/lib/marble/MapWizard.cpp:1123
+#: src/lib/marble/MapWizard.cpp:381 src/lib/marble/MapWizard.cpp:398
+#: src/lib/marble/MapWizard.cpp:1126
 msgctxt "Marble::MapWizard|"
 msgid "Web Mercator (epsg:3857)"
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:381 src/lib/marble/MapWizard.cpp:827
-#: src/lib/marble/MapWizard.cpp:959
+#: src/lib/marble/MapWizard.cpp:382 src/lib/marble/MapWizard.cpp:828
+#: src/lib/marble/MapWizard.cpp:961
 msgctxt "Marble::MapWizard|"
 msgid "Equirectangular (epsg:4326)"
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:382 src/lib/marble/MapWizard.cpp:829
-#: src/lib/marble/MapWizard.cpp:961
+#: src/lib/marble/MapWizard.cpp:383 src/lib/marble/MapWizard.cpp:830
+#: src/lib/marble/MapWizard.cpp:963
 msgctxt "Marble::MapWizard|"
 msgid "Equirectangular (crs:84)"
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:393
+#: src/lib/marble/MapWizard.cpp:394
 #, fuzzy
 #| msgctxt "MapViewWidget|"
 #| msgid "&Projection"
@@ -8040,30 +8040,30 @@ msgctxt "Marble::MapWizard|"
 msgid "Tile Projection:"
 msgstr "الإسقاط"
 
-#: src/lib/marble/MapWizard.cpp:409
+#: src/lib/marble/MapWizard.cpp:410
 msgctxt "Marble::MapWizard|"
 msgid "Tile Matrix Set:"
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:453 src/lib/marble/MapWizard.cpp:949
+#: src/lib/marble/MapWizard.cpp:454 src/lib/marble/MapWizard.cpp:951
 #, fuzzy
 msgctxt "Marble::MapWizard|"
 msgid "Preview Image"
 msgstr "اطبع صفحة"
 
-#: src/lib/marble/MapWizard.cpp:457
+#: src/lib/marble/MapWizard.cpp:458
 #, fuzzy
 msgctxt "Marble::MapWizard|"
 msgid "Base Tile"
 msgstr "احفظ ملف"
 
-#: src/lib/marble/MapWizard.cpp:461
+#: src/lib/marble/MapWizard.cpp:462
 #, fuzzy
 msgctxt "Marble::MapWizard|"
 msgid "Legend Image"
 msgstr "مفتاح الرسم البياني"
 
-#: src/lib/marble/MapWizard.cpp:468 src/lib/marble/MapWizard.cpp:476
+#: src/lib/marble/MapWizard.cpp:469 src/lib/marble/MapWizard.cpp:477
 #, fuzzy, qt-format
 #| msgctxt "NavigationInfoBar|"
 #| msgid "%1 m"
@@ -8071,13 +8071,13 @@ msgctxt "Marble::MapWizard|"
 msgid "%1"
 msgstr "%1 م"
 
-#: src/lib/marble/MapWizard.cpp:469
+#: src/lib/marble/MapWizard.cpp:470
 #, qt-format
 msgctxt "Marble::MapWizard|"
 msgid "The %1 could not be downloaded."
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:477
+#: src/lib/marble/MapWizard.cpp:478
 #, qt-format
 msgctxt "Marble::MapWizard|"
 msgid ""
@@ -8086,101 +8086,101 @@ msgid ""
 "%2"
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:528 src/lib/marble/MapWizard.cpp:529
-#: src/lib/marble/MapWizard.cpp:550
+#: src/lib/marble/MapWizard.cpp:529 src/lib/marble/MapWizard.cpp:530
+#: src/lib/marble/MapWizard.cpp:551
 msgctxt "Marble::MapWizard|"
 msgid "Custom"
 msgstr "مخصّص"
 
-#: src/lib/marble/MapWizard.cpp:780 src/lib/marble/MapWizard.cpp:783
+#: src/lib/marble/MapWizard.cpp:781 src/lib/marble/MapWizard.cpp:784
 msgctxt "Marble::MapWizard|"
 msgid "Archiving failed"
 msgstr "فشلت الأرشفة"
 
-#: src/lib/marble/MapWizard.cpp:780
+#: src/lib/marble/MapWizard.cpp:781
 msgctxt "Marble::MapWizard|"
 msgid "Archiving process cannot be started."
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:783
+#: src/lib/marble/MapWizard.cpp:784
 msgctxt "Marble::MapWizard|"
 msgid "Archiving process crashed."
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:878 src/lib/marble/MapWizard.cpp:886
-#: src/lib/marble/MapWizard.cpp:895
+#: src/lib/marble/MapWizard.cpp:880 src/lib/marble/MapWizard.cpp:888
+#: src/lib/marble/MapWizard.cpp:897
 msgctxt "Marble::MapWizard|"
 msgid "Source Image"
 msgstr "صورة المصدر"
 
-#: src/lib/marble/MapWizard.cpp:879
+#: src/lib/marble/MapWizard.cpp:881
 #, fuzzy
 msgctxt "Marble::MapWizard|"
 msgid "Please specify a source image."
 msgstr "بديل الاسم من موقع."
 
-#: src/lib/marble/MapWizard.cpp:887
+#: src/lib/marble/MapWizard.cpp:889
 msgctxt "Marble::MapWizard|"
 msgid ""
 "The source image you specified does not exist. Please specify a different "
 "one."
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:896
+#: src/lib/marble/MapWizard.cpp:898
 msgctxt "Marble::MapWizard|"
 msgid ""
 "The source image you specified does not seem to be an image. Please specify "
 "a different image file."
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:926
+#: src/lib/marble/MapWizard.cpp:928
 #, fuzzy
 msgctxt "Marble::MapWizard|"
 msgid "Map Title"
 msgstr "الخريطة عرض"
 
-#: src/lib/marble/MapWizard.cpp:926
+#: src/lib/marble/MapWizard.cpp:928
 #, fuzzy
 msgctxt "Marble::MapWizard|"
 msgid "Please specify a map title."
 msgstr "بديل الاسم من موقع."
 
-#: src/lib/marble/MapWizard.cpp:933 src/lib/marble/MapWizard.cpp:941
+#: src/lib/marble/MapWizard.cpp:935 src/lib/marble/MapWizard.cpp:943
 #, fuzzy
 msgctxt "Marble::MapWizard|"
 msgid "Map Name"
 msgstr "الاسم"
 
-#: src/lib/marble/MapWizard.cpp:933
+#: src/lib/marble/MapWizard.cpp:935
 #, fuzzy
 msgctxt "Marble::MapWizard|"
 msgid "Please specify a map name."
 msgstr "بديل الاسم من موقع."
 
-#: src/lib/marble/MapWizard.cpp:942
+#: src/lib/marble/MapWizard.cpp:944
 #, qt-format
 msgctxt "Marble::MapWizard|"
 msgid ""
 "Please specify another map name, since there is already a map named \"%1\"."
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:949
+#: src/lib/marble/MapWizard.cpp:951
 #, fuzzy
 msgctxt "Marble::MapWizard|"
 msgid "Please specify a preview image."
 msgstr "بديل الاسم من موقع."
 
-#: src/lib/marble/MapWizard.cpp:1458
+#: src/lib/marble/MapWizard.cpp:1470
 msgctxt "Marble::MapWizard|"
 msgid "Problem while creating files"
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:1458
+#: src/lib/marble/MapWizard.cpp:1470
 msgctxt "Marble::MapWizard|"
 msgid "Check if a theme with the same name exists."
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:1515
+#: src/lib/marble/MapWizard.cpp:1527
 #, fuzzy
 #| msgctxt "AprsConfigWidget|"
 #| msgid "Server"
@@ -8188,14 +8188,14 @@ msgctxt "Marble::MapWizard|"
 msgid "WMS Server"
 msgstr "الخادوم"
 
-#: src/lib/marble/MapWizard.cpp:1516
+#: src/lib/marble/MapWizard.cpp:1528
 msgctxt "Marble::MapWizard|"
 msgid ""
 "<h4>WMS Server</h4>Please choose a <a href=\"https://en.wikipedia.org/wiki/"
 "Web_Map_Service\">WMS</a> server or enter a custom server URL."
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:1519
+#: src/lib/marble/MapWizard.cpp:1531
 #, fuzzy
 #| msgctxt "AprsConfigWidget|"
 #| msgid "Server"
@@ -8203,7 +8203,7 @@ msgctxt "Marble::MapWizard|"
 msgid "WMTS Server"
 msgstr "الخادوم"
 
-#: src/lib/marble/MapWizard.cpp:1520
+#: src/lib/marble/MapWizard.cpp:1532
 msgctxt "Marble::MapWizard|"
 msgid ""
 "<h4>WMTS Server</h4>Please choose a <a href=\"https://de.wikipedia.org/wiki/"

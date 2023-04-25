@@ -2784,15 +2784,15 @@ msgctxt "Marble::MainWindow|"
 msgid "Marble - Virtual Globe"
 msgstr "Marble - Virtual Globe"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:195
-#: src/apps/marble-qt/QtMainWindow.cpp:765
+#: src/apps/marble-qt/QtMainWindow.cpp:197
+#: src/apps/marble-qt/QtMainWindow.cpp:770
 #, fuzzy
 #| msgid "Marble"
 msgctxt "Marble::MainWindow|"
 msgid "Marble"
 msgstr "Marble"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:196
+#: src/apps/marble-qt/QtMainWindow.cpp:198
 #, qt-format
 msgctxt "Marble::MainWindow|"
 msgid ""
@@ -2800,608 +2800,608 @@ msgid ""
 "'%2'"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:264
+#: src/apps/marble-qt/QtMainWindow.cpp:269
 #, fuzzy
 #| msgid "&Open..."
 msgctxt "Marble::MainWindow|"
 msgid "&Open..."
 msgstr "បើក..."
 
-#: src/apps/marble-qt/QtMainWindow.cpp:266
+#: src/apps/marble-qt/QtMainWindow.cpp:271
 #, fuzzy
 #| msgid "Open a file for viewing on Marble"
 msgctxt "Marble::MainWindow|"
 msgid "Open a file for viewing on Marble"
 msgstr "បើក​ឯកសារ​សម្រាប់​មើល​នៅ​លើ Marble"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:270
+#: src/apps/marble-qt/QtMainWindow.cpp:275
 #, fuzzy
 #| msgid "&Download Maps..."
 msgctxt "Marble::MainWindow|"
 msgid "&Download Maps..."
 msgstr "ទាញ​យក​ផែនទី..."
 
-#: src/apps/marble-qt/QtMainWindow.cpp:273
+#: src/apps/marble-qt/QtMainWindow.cpp:278
 #, fuzzy
 #| msgid "&Export Map..."
 msgctxt "Marble::MainWindow|"
 msgid "&Export Map..."
 msgstr "នាំចេញ​ផែនទី..."
 
-#: src/apps/marble-qt/QtMainWindow.cpp:275
+#: src/apps/marble-qt/QtMainWindow.cpp:280
 #, fuzzy
 #| msgid "Save a screenshot of the map"
 msgctxt "Marble::MainWindow|"
 msgid "Save a screenshot of the map"
 msgstr "រក្សា​ទុក​រូបថត​អេក្រង់​របស់​ផែនទី"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:279
+#: src/apps/marble-qt/QtMainWindow.cpp:284
 #, fuzzy
 #| msgid "Download &Region..."
 msgctxt "Marble::MainWindow|"
 msgid "Download &Region..."
 msgstr "ទាញ​យក​តំបន់..."
 
-#: src/apps/marble-qt/QtMainWindow.cpp:280
+#: src/apps/marble-qt/QtMainWindow.cpp:285
 #, fuzzy
 #| msgid "Download a map region in different zoom levels for offline usage"
 msgctxt "Marble::MainWindow|"
 msgid "Download a map region in different zoom levels for offline usage"
 msgstr "ទាញ​យក​តំបន់​ផែនទី​នៅ​ក្នុង​កម្រិត​ពង្រីក​ផ្សេងគ្នា​សម្រាប់​ការ​ប្រើ​ក្រៅ​បណ្ដាញ"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:283
+#: src/apps/marble-qt/QtMainWindow.cpp:288
 #, fuzzy
 #| msgid "&Print..."
 msgctxt "Marble::MainWindow|"
 msgid "&Print..."
 msgstr "បោះពុម្ព..."
 
-#: src/apps/marble-qt/QtMainWindow.cpp:284
+#: src/apps/marble-qt/QtMainWindow.cpp:289
 #, fuzzy
 #| msgid "Ctrl+P"
 msgctxt "Marble::MainWindow|"
 msgid "Ctrl+P"
 msgstr "បញ្ជា+P (Ctrl+P)"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:285
-#: src/apps/marble-qt/QtMainWindow.cpp:289
+#: src/apps/marble-qt/QtMainWindow.cpp:290
+#: src/apps/marble-qt/QtMainWindow.cpp:294
 #, fuzzy
 #| msgid "Print a screenshot of the map"
 msgctxt "Marble::MainWindow|"
 msgid "Print a screenshot of the map"
 msgstr "បោះពុម្ព​រូបថត​អេក្រង់​សម្រាប់​ផែនទី"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:288
+#: src/apps/marble-qt/QtMainWindow.cpp:293
 #, fuzzy
 #| msgid "Print Previe&w ..."
 msgctxt "Marble::MainWindow|"
 msgid "Print Previe&w ..."
 msgstr "មើល​មុន​បោះពុម្ព..."
 
-#: src/apps/marble-qt/QtMainWindow.cpp:292
+#: src/apps/marble-qt/QtMainWindow.cpp:297
 #, fuzzy
 #| msgid "&Quit"
 msgctxt "Marble::MainWindow|"
 msgid "&Quit"
 msgstr "បិទ"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:293
+#: src/apps/marble-qt/QtMainWindow.cpp:298
 #, fuzzy
 #| msgid "Ctrl+Q"
 msgctxt "Marble::MainWindow|"
 msgid "Ctrl+Q"
 msgstr "បញ្ជា+Q (Ctrl+Q)"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:294
+#: src/apps/marble-qt/QtMainWindow.cpp:299
 #, fuzzy
 #| msgid "Quit the Application"
 msgctxt "Marble::MainWindow|"
 msgid "Quit the Application"
 msgstr "បិទ​កម្មវិធី"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:297
+#: src/apps/marble-qt/QtMainWindow.cpp:302
 #, fuzzy
 #| msgid "&Copy Map"
 msgctxt "Marble::MainWindow|"
 msgid "&Copy Map"
 msgstr "ចម្លង​ផែនទី"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:299
+#: src/apps/marble-qt/QtMainWindow.cpp:304
 #, fuzzy
 #| msgid "Copy a screenshot of the map"
 msgctxt "Marble::MainWindow|"
 msgid "Copy a screenshot of the map"
 msgstr "ចម្លង​រូបថត​អេក្រង់​របស់​ផែនទី"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:302
+#: src/apps/marble-qt/QtMainWindow.cpp:307
 #, fuzzy
 #| msgid "&Edit Map"
 msgctxt "Marble::MainWindow|"
 msgid "&Edit Map..."
 msgstr "កែសម្រួល​ផែនទី"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:304
+#: src/apps/marble-qt/QtMainWindow.cpp:309
 #, fuzzy
 #| msgid "Edit the current map region in an external editor"
 msgctxt "Marble::MainWindow|"
 msgid "Edit the current map region in an external editor"
 msgstr "កែសម្រួល​តំបន់​ផែនទី​បច្ចុប្បន្ន​នៅ​ក្នុង​កម្មវិធី​កែសម្រួល​ខាងក្រៅ"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:308
+#: src/apps/marble-qt/QtMainWindow.cpp:313
 msgctxt "Marble::MainWindow|"
 msgid "&Record Movie"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:309
+#: src/apps/marble-qt/QtMainWindow.cpp:314
 msgctxt "Marble::MainWindow|"
 msgid "Records a movie of the globe"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:315
+#: src/apps/marble-qt/QtMainWindow.cpp:320
 msgctxt "Marble::MainWindow|"
 msgid "&Stop Recording"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:316
+#: src/apps/marble-qt/QtMainWindow.cpp:321
 msgctxt "Marble::MainWindow|"
 msgid "Stop recording a movie of the globe"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:322
+#: src/apps/marble-qt/QtMainWindow.cpp:327
 #, fuzzy
 #| msgid "&Configure Marble"
 msgctxt "Marble::MainWindow|"
 msgid "&Configure Marble"
 msgstr "កំណត់​រចនាសម្ព័ន្ធ Marble"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:323
+#: src/apps/marble-qt/QtMainWindow.cpp:328
 #, fuzzy
 #| msgid "Show the configuration dialog"
 msgctxt "Marble::MainWindow|"
 msgid "Show the configuration dialog"
 msgstr "បង្ហាញ​ប្រអប់​កំណត់​រចនាសម្ព័ន្ធ"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:326
+#: src/apps/marble-qt/QtMainWindow.cpp:331
 #, fuzzy
 #| msgid "C&opy Coordinates"
 msgctxt "Marble::MainWindow|"
 msgid "C&opy Coordinates"
 msgstr "ចម្លង​កូអរដោណេ"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:327
+#: src/apps/marble-qt/QtMainWindow.cpp:332
 #, fuzzy
 #| msgid "Copy the center coordinates as text"
 msgctxt "Marble::MainWindow|"
 msgid "Copy the center coordinates as text"
 msgstr "ចម្លង​កូអរដោណេ​ចំណុច​កណ្ដាល​ជា​អត្ថបទ"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:330
+#: src/apps/marble-qt/QtMainWindow.cpp:335
 #, fuzzy
 #| msgid "&Full Screen Mode"
 msgctxt "Marble::MainWindow|"
 msgid "&Full Screen Mode"
 msgstr "របៀប​ពេញ​អេក្រង់"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:333
+#: src/apps/marble-qt/QtMainWindow.cpp:338
 #, fuzzy
 #| msgid "Full Screen Mode"
 msgctxt "Marble::MainWindow|"
 msgid "Full Screen Mode"
 msgstr "​របៀប​ពេញ​អេក្រង់"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:336
+#: src/apps/marble-qt/QtMainWindow.cpp:341
 #, fuzzy
 #| msgid "Show Status Bar"
 msgctxt "Marble::MainWindow|"
 msgid "&Show Status Bar"
 msgstr "បង្ហាញ​របារ​ស្ថានភាព"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:338
+#: src/apps/marble-qt/QtMainWindow.cpp:343
 #, fuzzy
 #| msgid "Show Status Bar"
 msgctxt "Marble::MainWindow|"
 msgid "Show Status Bar"
 msgstr "បង្ហាញ​របារ​ស្ថានភាព"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:342
+#: src/apps/marble-qt/QtMainWindow.cpp:347
 #, fuzzy
 #| msgid "Lock Position"
 msgctxt "Marble::MainWindow|"
 msgid "Lock Position"
 msgstr "ចាក់សោ​ទីតាំង"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:344
+#: src/apps/marble-qt/QtMainWindow.cpp:349
 #, fuzzy
 #| msgid "Lock Position of Floating Items"
 msgctxt "Marble::MainWindow|"
 msgid "Lock Position of Floating Items"
 msgstr "ចាក់សោ​ទីតាំង​សម្រាប់​ធាតុ​អណ្ដែត"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:347
+#: src/apps/marble-qt/QtMainWindow.cpp:352
 #, fuzzy
 #| msgid "&Clouds"
 msgctxt "Marble::MainWindow|"
 msgid "&Clouds"
 msgstr "ពពក"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:349
+#: src/apps/marble-qt/QtMainWindow.cpp:354
 #, fuzzy
 #| msgid "Show Real Time Cloud Cover"
 msgctxt "Marble::MainWindow|"
 msgid "Show Real Time Cloud Cover"
 msgstr "បង្ហាញ​គម្រប​ពពក​ពេលវេលា​ពិត"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:352
+#: src/apps/marble-qt/QtMainWindow.cpp:357
 #, fuzzy
 #| msgid "Work Off&line"
 msgctxt "Marble::MainWindow|"
 msgid "Work Off&line"
 msgstr "ធ្វើការ​ក្រៅ​បណ្ដាញ"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:356
+#: src/apps/marble-qt/QtMainWindow.cpp:361
 #, fuzzy
 #| msgid "&Time Control..."
 msgctxt "Marble::MainWindow|"
 msgid "&Time Control..."
 msgstr "ការ​គ្រប់គ្រង​ពេលវេលា..."
 
-#: src/apps/marble-qt/QtMainWindow.cpp:357
+#: src/apps/marble-qt/QtMainWindow.cpp:362
 #, fuzzy
 #| msgid "Configure Time Control "
 msgctxt "Marble::MainWindow|"
 msgid "Configure Time Control "
 msgstr "កំណត់​រចនាសម្ព័ន្ធ​ការ​គ្រប់គ្រង​ពេលវេលា"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:360
+#: src/apps/marble-qt/QtMainWindow.cpp:365
 #, fuzzy
 #| msgid "S&un Control..."
 msgctxt "Marble::MainWindow|"
 msgid "S&un Control..."
 msgstr "ការ​គ្រប់គ្រង​ព្រះអាទិត្យ..."
 
-#: src/apps/marble-qt/QtMainWindow.cpp:361
+#: src/apps/marble-qt/QtMainWindow.cpp:366
 #, fuzzy
 #| msgid "Configure Sun Control"
 msgctxt "Marble::MainWindow|"
 msgid "Configure Sun Control"
 msgstr "កំណត់​រចនាសម្ព័ន្ធ​ការ​គ្រប់គ្រង​ព្រះអាទិត្យ"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:364
+#: src/apps/marble-qt/QtMainWindow.cpp:369
 #, fuzzy
 #| msgid "&Redisplay"
 msgctxt "Marble::MainWindow|"
 msgid "&Redisplay"
 msgstr "បង្ហាញ​ឡើងវិញ"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:366
+#: src/apps/marble-qt/QtMainWindow.cpp:371
 #, fuzzy
 #| msgid "Reload Current Map"
 msgctxt "Marble::MainWindow|"
 msgid "Reload Current Map"
 msgstr "ផ្ទុក​ផែនទី​បច្ចុប្បន្ន​ឡើងវិញ"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:369
+#: src/apps/marble-qt/QtMainWindow.cpp:374
 #, fuzzy
 #| msgid "Marble Virtual Globe &Handbook"
 msgctxt "Marble::MainWindow|"
 msgid "Marble Virtual Globe &Handbook"
 msgstr "សៀវភៅ​ដៃ​របស់ Marble Virtual Globe"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:371
+#: src/apps/marble-qt/QtMainWindow.cpp:376
 #, fuzzy
 #| msgid "Show the Handbook for Marble Virtual Globe"
 msgctxt "Marble::MainWindow|"
 msgid "Show the Handbook for Marble Virtual Globe"
 msgstr "បង្ហាញ​សៀវភៅ​ដៃ​របស់ Marble Virtual Globe"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:374
+#: src/apps/marble-qt/QtMainWindow.cpp:379
 #, fuzzy
 #| msgid "What's &This"
 msgctxt "Marble::MainWindow|"
 msgid "What's &This"
 msgstr "នេះ​ជា​អ្វី"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:376
+#: src/apps/marble-qt/QtMainWindow.cpp:381
 #, fuzzy
 #| msgid "Show a detailed explanation of the action."
 msgctxt "Marble::MainWindow|"
 msgid "Show a detailed explanation of the action."
 msgstr "បង្ហាញ​ការ​ពន្យល់​លម្អិត​របស់​សកម្មភាព"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:379
+#: src/apps/marble-qt/QtMainWindow.cpp:384
 msgctxt "Marble::MainWindow|"
 msgid "&Community Forum"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:380
+#: src/apps/marble-qt/QtMainWindow.cpp:385
 msgctxt "Marble::MainWindow|"
 msgid "Visit Marble's Community Forum"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:383
+#: src/apps/marble-qt/QtMainWindow.cpp:388
 #, fuzzy
 #| msgid "&About Marble Virtual Globe"
 msgctxt "Marble::MainWindow|"
 msgid "&About Marble Virtual Globe"
 msgstr "អំពី Marble Virtual Globe"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:384
+#: src/apps/marble-qt/QtMainWindow.cpp:389
 #, fuzzy
 #| msgid "Show the application's About Box"
 msgctxt "Marble::MainWindow|"
 msgid "Show the application's About Box"
 msgstr "បង្ហាញ​អំពី​ប្រអប់​របស់​កម្មវិធី"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:387
+#: src/apps/marble-qt/QtMainWindow.cpp:392
 #, fuzzy
 #| msgid "About &Qt"
 msgctxt "Marble::MainWindow|"
 msgid "About &Qt"
 msgstr "អំពី Qt"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:388
+#: src/apps/marble-qt/QtMainWindow.cpp:393
 #, fuzzy
 #| msgid "Show the Qt library's About box"
 msgctxt "Marble::MainWindow|"
 msgid "Show the Qt library's About box"
 msgstr "បង្ហាញ​អំពី​ប្រអប់​របស់​បណ្ណាល័យ Qt"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:392
+#: src/apps/marble-qt/QtMainWindow.cpp:397
 #, fuzzy
 #| msgid "Add &Bookmark"
 msgctxt "Marble::MainWindow|"
 msgid "Add &Bookmark..."
 msgstr "បន្ថែម​ចំណាំ"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:394
+#: src/apps/marble-qt/QtMainWindow.cpp:399
 #, fuzzy
 #| msgid "Add Bookmark"
 msgctxt "Marble::MainWindow|"
 msgid "Add Bookmark"
 msgstr "បន្ថែម​ចំណាំ"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:397
-#: src/apps/marble-qt/QtMainWindow.cpp:398
+#: src/apps/marble-qt/QtMainWindow.cpp:402
+#: src/apps/marble-qt/QtMainWindow.cpp:403
 #, fuzzy
 #| msgid "&Set Home Location"
 msgctxt "Marble::MainWindow|"
 msgid "&Set Home Location"
 msgstr "កំណត់​ទីតាំង​ផ្ទះ"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:401
+#: src/apps/marble-qt/QtMainWindow.cpp:406
 #, fuzzy
 #| msgid "Show &Bookmarks"
 msgctxt "Marble::MainWindow|"
 msgid "Show &Bookmarks"
 msgstr "បង្ហាញ​ចំណាំ"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:402
+#: src/apps/marble-qt/QtMainWindow.cpp:407
 #, fuzzy
 #| msgid "Toggle display of Bookmarks"
 msgctxt "Marble::MainWindow|"
 msgid "Toggle display of Bookmarks"
 msgstr "បិទ/បើក​ការ​បង្ហាញ​ចំណាំ"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:406
+#: src/apps/marble-qt/QtMainWindow.cpp:411
 #, fuzzy
 #| msgid "&Manage Bookmarks"
 msgctxt "Marble::MainWindow|"
 msgid "&Manage Bookmarks..."
 msgstr "គ្រប់គ្រង​ចំណាំ"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:407
+#: src/apps/marble-qt/QtMainWindow.cpp:412
 #, fuzzy
 #| msgid "Manage Bookmarks"
 msgctxt "Marble::MainWindow|"
 msgid "Manage Bookmarks"
 msgstr "គ្រប់គ្រង​ចំណាំ"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:411
+#: src/apps/marble-qt/QtMainWindow.cpp:416
 #, fuzzy
 #| msgid "&Create a New Map..."
 msgctxt "Marble::MainWindow|"
 msgid "&Create a New Map..."
 msgstr "បង្កើត​ផែនទី​ថ្មី..."
 
-#: src/apps/marble-qt/QtMainWindow.cpp:412
+#: src/apps/marble-qt/QtMainWindow.cpp:417
 #, fuzzy
 #| msgid "A wizard guides you through the creation of your own map theme."
 msgctxt "Marble::MainWindow|"
 msgid "A wizard guides you through the creation of your own map theme."
 msgstr "អ្នកជំនួយការ​នឹង​ជួយ​អ្នក​ក្នុង​ការ​បង្កើត​រូបរាង​ផែនទី​ផ្ទាល់ខ្លួន​របស់​អ្នក ។"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:416
+#: src/apps/marble-qt/QtMainWindow.cpp:421
 msgctxt "Marble::MainWindow|"
 msgid "Show Tile Zoom Level"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:424
+#: src/apps/marble-qt/QtMainWindow.cpp:429
 msgctxt "Marble::MainWindow|"
 msgid "Degree (DMS)"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:429
+#: src/apps/marble-qt/QtMainWindow.cpp:434
 msgctxt "Marble::MainWindow|"
 msgid "Degree (Decimal)"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:434
+#: src/apps/marble-qt/QtMainWindow.cpp:439
 msgctxt "Marble::MainWindow|"
 msgid "Universal Transverse Mercator (UTM)"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:449
+#: src/apps/marble-qt/QtMainWindow.cpp:454
 #, fuzzy
 #| msgid "&File"
 msgctxt "Marble::MainWindow|"
 msgid "&File"
 msgstr "ឯកសារ"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:462
+#: src/apps/marble-qt/QtMainWindow.cpp:467
 #, fuzzy
 #| msgid "&Edit"
 msgctxt "Marble::MainWindow|"
 msgid "&Edit"
 msgstr "កែសម្រួល"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:470
+#: src/apps/marble-qt/QtMainWindow.cpp:475
 #, fuzzy
 #| msgid "&View"
 msgctxt "Marble::MainWindow|"
 msgid "&View"
 msgstr "មើល"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:471
+#: src/apps/marble-qt/QtMainWindow.cpp:476
 #, fuzzy
 #| msgid "&Info Boxes"
 msgctxt "Marble::MainWindow|"
 msgid "&Info Boxes"
 msgstr "ប្រអប់​ព័ត៌មាន"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:472
+#: src/apps/marble-qt/QtMainWindow.cpp:477
 #, fuzzy
 #| msgid "OpenRouteService"
 msgctxt "Marble::MainWindow|"
 msgid "&Online Services"
 msgstr "OpenRouteService"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:475
+#: src/apps/marble-qt/QtMainWindow.cpp:480
 #, fuzzy
 #| msgid "&Bookmarks"
 msgctxt "Marble::MainWindow|"
 msgid "&Bookmarks"
 msgstr "ចំណាំ"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:479
+#: src/apps/marble-qt/QtMainWindow.cpp:484
 #, fuzzy
 #| msgid "Show &Navigation Panel"
 msgctxt "Marble::MainWindow|"
 msgid "&Panels"
 msgstr "បង្ហាញ​បន្ទះ​រុករក"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:484
+#: src/apps/marble-qt/QtMainWindow.cpp:489
 #, fuzzy
 #| msgid "&View"
 msgctxt "Marble::MainWindow|"
 msgid "&View Size"
 msgstr "មើល"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:487
+#: src/apps/marble-qt/QtMainWindow.cpp:492
 #, fuzzy
 #| msgid "&Settings"
 msgctxt "Marble::MainWindow|"
 msgid "&Settings"
 msgstr "ការ​កំណត់"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:496
+#: src/apps/marble-qt/QtMainWindow.cpp:501
 #, fuzzy
 #| msgid "&Help"
 msgctxt "Marble::MainWindow|"
 msgid "&Help"
 msgstr "ជំនួយ"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:601
+#: src/apps/marble-qt/QtMainWindow.cpp:606
 #, fuzzy
 #| msgid "&Home"
 msgctxt "Marble::MainWindow|"
 msgid "&Home"
 msgstr "ផ្ទះ"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:610
+#: src/apps/marble-qt/QtMainWindow.cpp:615
 #, fuzzy
 #| msgid "Default"
 msgctxt "Marble::MainWindow|"
 msgid "Default"
 msgstr "លំនាំដើម"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:734
+#: src/apps/marble-qt/QtMainWindow.cpp:739
 #, fuzzy
 #| msgid "Ready"
 msgctxt "Marble::MainWindow|"
 msgid "Ready"
 msgstr "រួចរាល់"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:747
+#: src/apps/marble-qt/QtMainWindow.cpp:752
 #, fuzzy
 #| msgid "Export Map"
 msgctxt "Marble::MainWindow|"
 msgid "Export Map"
 msgstr "នាំចេញ​ផែនទី"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:749
+#: src/apps/marble-qt/QtMainWindow.cpp:754
 #, fuzzy
 #| msgid "Images (*.jpg *.png)"
 msgctxt "Marble::MainWindow|"
 msgid "Images (*.jpg *.png)"
 msgstr "រូបភាព (*.jpg *.png)"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:766
+#: src/apps/marble-qt/QtMainWindow.cpp:771
 #, fuzzy
 #| msgid "An error occurred while trying to save the file.\n"
 msgctxt "Marble::MainWindow|"
 msgid "An error occurred while trying to save the file.\n"
 msgstr "មាន​កំហុស​បាន​កើតឡើង​ពេល​រក្សាទុក​ឯកសារ ។\n"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:897
+#: src/apps/marble-qt/QtMainWindow.cpp:902
 #, fuzzy, qt-format
 #| msgid "Marble Virtual Globe %1"
 msgctxt "Marble::MainWindow|"
 msgid "Marble Virtual Globe %1"
 msgstr "Marble Virtual Globe %1"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:948
-#: src/apps/marble-qt/QtMainWindow.cpp:1025
+#: src/apps/marble-qt/QtMainWindow.cpp:953
+#: src/apps/marble-qt/QtMainWindow.cpp:1030
 #, fuzzy, qt-format
 #| msgid "Lock Position"
 msgctxt "Marble::MainWindow|"
 msgid "Position: %1"
 msgstr "ចាក់សោ​ទីតាំង"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:951
-#: src/apps/marble-qt/QtMainWindow.cpp:1033
+#: src/apps/marble-qt/QtMainWindow.cpp:956
+#: src/apps/marble-qt/QtMainWindow.cpp:1038
 #, fuzzy, qt-format
 #| msgid "Magnetic Pole"
 msgctxt "Marble::MainWindow|"
 msgid "Altitude: %1"
 msgstr "ប៉ូល​មេដែក"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:954
-#: src/apps/marble-qt/QtMainWindow.cpp:1041
+#: src/apps/marble-qt/QtMainWindow.cpp:959
+#: src/apps/marble-qt/QtMainWindow.cpp:1046
 #, fuzzy, qt-format
 #| msgid "Zoom &In"
 msgctxt "Marble::MainWindow|"
 msgid "Zoom: %1"
 msgstr "ពង្រីក"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:957
-#: src/apps/marble-qt/QtMainWindow.cpp:1049
+#: src/apps/marble-qt/QtMainWindow.cpp:962
+#: src/apps/marble-qt/QtMainWindow.cpp:1054
 #, qt-format
 msgctxt "Marble::MainWindow|"
 msgid "Time: %1"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:989
+#: src/apps/marble-qt/QtMainWindow.cpp:994
 #, fuzzy
 #| msgid "All Supported Files"
 msgctxt "Marble::MainWindow|"
 msgid "All Supported Files"
 msgstr "ឯកសារ​គាំទ្រ​ទាំងអស់"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:995
+#: src/apps/marble-qt/QtMainWindow.cpp:1000
 #, fuzzy
 #| msgid "Open File"
 msgctxt "Marble::MainWindow|"
 msgid "Open File"
 msgstr "បើក​ឯកសារ"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:1016
+#: src/apps/marble-qt/QtMainWindow.cpp:1021
 #, fuzzy
 #| msgid "Display orbit"
 msgctxt "Marble::MainWindow|"
 msgid "&Angle Display Unit"
 msgstr "បង្ហាញ​គន្លង"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:1265
+#: src/apps/marble-qt/QtMainWindow.cpp:1270
 #, fuzzy
 #| msgid "Unnamed"
 msgctxt "Marble::MainWindow|"
@@ -9031,99 +9031,99 @@ msgctxt "MapViewWidget|"
 msgid "Here you can choose the preferred map view from different topics."
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:166
+#: src/lib/marble/MapWizard.cpp:167
 #, fuzzy
 #| msgid "Preview Map"
 msgctxt "Marble::PreviewDialog|"
 msgid "Preview Map"
 msgstr "មើល​ផែនទី​ជាមុន"
 
-#: src/lib/marble/MapWizard.cpp:288 src/lib/marble/MapWizard.cpp:293
+#: src/lib/marble/MapWizard.cpp:289 src/lib/marble/MapWizard.cpp:294
 #, fuzzy
 #| msgid "Error while parsing"
 msgctxt "Marble::MapWizard|"
 msgid "Error while parsing"
 msgstr "កំហុស​ពេល​ញែក"
 
-#: src/lib/marble/MapWizard.cpp:288
+#: src/lib/marble/MapWizard.cpp:289
 #, fuzzy
 #| msgid "Wizard cannot parse server's response"
 msgctxt "Marble::MapWizard|"
 msgid "Wizard cannot parse server's response"
 msgstr "អ្នកជំនួយការ​មិន​អាច​ញែក​ចម្លើយ​តប​របស់​ម៉ាស៊ីន​បម្រើ​បាន​ទេ"
 
-#: src/lib/marble/MapWizard.cpp:293
+#: src/lib/marble/MapWizard.cpp:294
 #, fuzzy
 #| msgid "Server is not a Web Map Server."
 msgctxt "Marble::MapWizard|"
 msgid "Server is not an OWS Server."
 msgstr "ម៉ាស៊ីន​បម្រើ​មិនមែន​ជា​ម៉ាស៊ីន​បម្រើ​ផែនទី​បណ្ដាញ​ទេ ។"
 
-#: src/lib/marble/MapWizard.cpp:380 src/lib/marble/MapWizard.cpp:397
-#: src/lib/marble/MapWizard.cpp:1123
+#: src/lib/marble/MapWizard.cpp:381 src/lib/marble/MapWizard.cpp:398
+#: src/lib/marble/MapWizard.cpp:1126
 msgctxt "Marble::MapWizard|"
 msgid "Web Mercator (epsg:3857)"
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:381 src/lib/marble/MapWizard.cpp:827
-#: src/lib/marble/MapWizard.cpp:959
+#: src/lib/marble/MapWizard.cpp:382 src/lib/marble/MapWizard.cpp:828
+#: src/lib/marble/MapWizard.cpp:961
 msgctxt "Marble::MapWizard|"
 msgid "Equirectangular (epsg:4326)"
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:382 src/lib/marble/MapWizard.cpp:829
-#: src/lib/marble/MapWizard.cpp:961
+#: src/lib/marble/MapWizard.cpp:383 src/lib/marble/MapWizard.cpp:830
+#: src/lib/marble/MapWizard.cpp:963
 msgctxt "Marble::MapWizard|"
 msgid "Equirectangular (crs:84)"
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:393
+#: src/lib/marble/MapWizard.cpp:394
 #, fuzzy
 msgctxt "Marble::MapWizard|"
 msgid "Tile Projection:"
 msgstr "ការពិពណ៌នា"
 
-#: src/lib/marble/MapWizard.cpp:409
+#: src/lib/marble/MapWizard.cpp:410
 msgctxt "Marble::MapWizard|"
 msgid "Tile Matrix Set:"
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:453 src/lib/marble/MapWizard.cpp:949
+#: src/lib/marble/MapWizard.cpp:454 src/lib/marble/MapWizard.cpp:951
 #, fuzzy
 #| msgid "Preview Image"
 msgctxt "Marble::MapWizard|"
 msgid "Preview Image"
 msgstr "មើល​រួប​ភាព​ជាមុន"
 
-#: src/lib/marble/MapWizard.cpp:457
+#: src/lib/marble/MapWizard.cpp:458
 #, fuzzy
 #| msgid "Base Tile"
 msgctxt "Marble::MapWizard|"
 msgid "Base Tile"
 msgstr "ក្រឡា​ក្បឿង​គោល"
 
-#: src/lib/marble/MapWizard.cpp:461
+#: src/lib/marble/MapWizard.cpp:462
 #, fuzzy
 #| msgid "Legend"
 msgctxt "Marble::MapWizard|"
 msgid "Legend Image"
 msgstr "កំណត់​សម្គាល់"
 
-#: src/lib/marble/MapWizard.cpp:468 src/lib/marble/MapWizard.cpp:476
+#: src/lib/marble/MapWizard.cpp:469 src/lib/marble/MapWizard.cpp:477
 #, fuzzy, qt-format
 #| msgid "%1 m"
 msgctxt "Marble::MapWizard|"
 msgid "%1"
 msgstr "%1 ម."
 
-#: src/lib/marble/MapWizard.cpp:469
+#: src/lib/marble/MapWizard.cpp:470
 #, fuzzy, qt-format
 #| msgid "The base tile could not be downloaded."
 msgctxt "Marble::MapWizard|"
 msgid "The %1 could not be downloaded."
 msgstr "មិន​អាច​ទាញ​យក​ក្រឡា​ក្បឿង​គោល​បាន​ទេ ។"
 
-#: src/lib/marble/MapWizard.cpp:477
+#: src/lib/marble/MapWizard.cpp:478
 #, fuzzy, qt-format
 #| msgid ""
 #| "The base tile could not be downloaded successfully. The server replied:\n"
@@ -9139,51 +9139,51 @@ msgstr ""
 "\n"
 "%1"
 
-#: src/lib/marble/MapWizard.cpp:528 src/lib/marble/MapWizard.cpp:529
-#: src/lib/marble/MapWizard.cpp:550
+#: src/lib/marble/MapWizard.cpp:529 src/lib/marble/MapWizard.cpp:530
+#: src/lib/marble/MapWizard.cpp:551
 #, fuzzy
 #| msgid "Custom"
 msgctxt "Marble::MapWizard|"
 msgid "Custom"
 msgstr "ផ្ទាល់ខ្លួន"
 
-#: src/lib/marble/MapWizard.cpp:780 src/lib/marble/MapWizard.cpp:783
+#: src/lib/marble/MapWizard.cpp:781 src/lib/marble/MapWizard.cpp:784
 #, fuzzy
 #| msgid "Archiving failed"
 msgctxt "Marble::MapWizard|"
 msgid "Archiving failed"
 msgstr "ការ​ទុក​ក្នុង​ប័ណ្ណសារ​បាន​បរាជ័យ"
 
-#: src/lib/marble/MapWizard.cpp:780
+#: src/lib/marble/MapWizard.cpp:781
 #, fuzzy
 #| msgid "Archiving process cannot be started."
 msgctxt "Marble::MapWizard|"
 msgid "Archiving process cannot be started."
 msgstr "មិន​អាច​ចាប់ផ្ដើម​ដំណើរការ​ទុក​ក្នុង​ប័ណ្ណសារ​បាន​ទេ ។"
 
-#: src/lib/marble/MapWizard.cpp:783
+#: src/lib/marble/MapWizard.cpp:784
 #, fuzzy
 #| msgid "Archiving process crashed."
 msgctxt "Marble::MapWizard|"
 msgid "Archiving process crashed."
 msgstr "ដំណើរការ​ទុក​ក្នុង​ប័ណ្ណសារ​បាន​គាំង ។"
 
-#: src/lib/marble/MapWizard.cpp:878 src/lib/marble/MapWizard.cpp:886
-#: src/lib/marble/MapWizard.cpp:895
+#: src/lib/marble/MapWizard.cpp:880 src/lib/marble/MapWizard.cpp:888
+#: src/lib/marble/MapWizard.cpp:897
 #, fuzzy
 #| msgid "Source Image"
 msgctxt "Marble::MapWizard|"
 msgid "Source Image"
 msgstr "រូបភាព​ប្រភព"
 
-#: src/lib/marble/MapWizard.cpp:879
+#: src/lib/marble/MapWizard.cpp:881
 #, fuzzy
 #| msgid "Please specify a source image."
 msgctxt "Marble::MapWizard|"
 msgid "Please specify a source image."
 msgstr "សូម​បញ្ជាក់​រូបភាព​ប្រភព ។"
 
-#: src/lib/marble/MapWizard.cpp:887
+#: src/lib/marble/MapWizard.cpp:889
 #, fuzzy
 #| msgid ""
 #| "The source image you specified does not exist. Please specify a different "
@@ -9194,7 +9194,7 @@ msgid ""
 "one."
 msgstr "រូបភាព​ប្រភព​ដែល​អ្នក​បាន​បញ្ជាក់​មិន​មាន​ទេ ។ សូម​បញ្ជាក់​មួយ​ផ្សេង​ទៀត ។"
 
-#: src/lib/marble/MapWizard.cpp:896
+#: src/lib/marble/MapWizard.cpp:898
 #, fuzzy
 #| msgid ""
 #| "The source image you specified does not seem to be an image. Please "
@@ -9205,35 +9205,35 @@ msgid ""
 "a different image file."
 msgstr "រូបភាព​ប្រភព​ដែល​អ្នក​បាន​បញ្ជាក់​ហាក់​មិនមែន​ជា​រូបភាព​ទេ ។ សូម​បញ្ជាក់​ឯកសារ​រូបភាព​ផ្សេង​ទៀត ។"
 
-#: src/lib/marble/MapWizard.cpp:926
+#: src/lib/marble/MapWizard.cpp:928
 #, fuzzy
 #| msgid "Map Title"
 msgctxt "Marble::MapWizard|"
 msgid "Map Title"
 msgstr "ចំណងជើង​ផែនទី"
 
-#: src/lib/marble/MapWizard.cpp:926
+#: src/lib/marble/MapWizard.cpp:928
 #, fuzzy
 #| msgid "Please specify a map title."
 msgctxt "Marble::MapWizard|"
 msgid "Please specify a map title."
 msgstr "សូម​បញ្ជាក់​ចំណងជើង​ផែនទី ។"
 
-#: src/lib/marble/MapWizard.cpp:933 src/lib/marble/MapWizard.cpp:941
+#: src/lib/marble/MapWizard.cpp:935 src/lib/marble/MapWizard.cpp:943
 #, fuzzy
 #| msgid "Map Name"
 msgctxt "Marble::MapWizard|"
 msgid "Map Name"
 msgstr "ឈ្មោះ​ផែនទី"
 
-#: src/lib/marble/MapWizard.cpp:933
+#: src/lib/marble/MapWizard.cpp:935
 #, fuzzy
 #| msgid "Please specify a map name."
 msgctxt "Marble::MapWizard|"
 msgid "Please specify a map name."
 msgstr "សូម​បញ្ជាក់​ឈ្មោះ​ផែនទី ។"
 
-#: src/lib/marble/MapWizard.cpp:942
+#: src/lib/marble/MapWizard.cpp:944
 #, fuzzy, qt-format
 #| msgid ""
 #| "Please specify another map name, since there is already a map named "
@@ -9243,45 +9243,45 @@ msgid ""
 "Please specify another map name, since there is already a map named \"%1\"."
 msgstr "សូម​បញ្ជាក់​ឈ្មោះ​ផែនទី​ផ្សេងទៀត ព្រោះ​ផែនទី​ឈ្មោះ \"%1\" មាន​រួចហើយ ។"
 
-#: src/lib/marble/MapWizard.cpp:949
+#: src/lib/marble/MapWizard.cpp:951
 #, fuzzy
 #| msgid "Please specify a preview image."
 msgctxt "Marble::MapWizard|"
 msgid "Please specify a preview image."
 msgstr "សូម​បញ្ជាក់​រូបភាព​មើល​ជាមុន ។"
 
-#: src/lib/marble/MapWizard.cpp:1458
+#: src/lib/marble/MapWizard.cpp:1470
 #, fuzzy
 #| msgid "Problem while creating files"
 msgctxt "Marble::MapWizard|"
 msgid "Problem while creating files"
 msgstr "បញ្ហា​នៅ​ពេល​បង្កើត​ឯកសារ"
 
-#: src/lib/marble/MapWizard.cpp:1458
+#: src/lib/marble/MapWizard.cpp:1470
 #, fuzzy
 #| msgid "Check if a theme with the same name exists."
 msgctxt "Marble::MapWizard|"
 msgid "Check if a theme with the same name exists."
 msgstr "ពិនិត្យមើល​ក្រែងលោ​រូបរាង​មាន​ឈ្មោះ​ដូចគ្នា ។"
 
-#: src/lib/marble/MapWizard.cpp:1515
+#: src/lib/marble/MapWizard.cpp:1527
 msgctxt "Marble::MapWizard|"
 msgid "WMS Server"
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:1516
+#: src/lib/marble/MapWizard.cpp:1528
 msgctxt "Marble::MapWizard|"
 msgid ""
 "<h4>WMS Server</h4>Please choose a <a href=\"https://en.wikipedia.org/wiki/"
 "Web_Map_Service\">WMS</a> server or enter a custom server URL."
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:1519
+#: src/lib/marble/MapWizard.cpp:1531
 msgctxt "Marble::MapWizard|"
 msgid "WMTS Server"
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:1520
+#: src/lib/marble/MapWizard.cpp:1532
 msgctxt "Marble::MapWizard|"
 msgid ""
 "<h4>WMTS Server</h4>Please choose a <a href=\"https://de.wikipedia.org/wiki/"
