@@ -2,7 +2,7 @@
 # Copyright © 2007, 2011, 2012 This_file_is_part_of_KDE
 # This file is distributed under the same license as the marble package.
 # Niklas Laxström <niklas.laxstrom+kdetrans@gmail.com>, 2007, 2012.
-# Lasse Liehu <lasse.liehu@gmail.com>, 2011, 2012, 2013, 2014, 2015, 2016.
+# Lasse Liehu <lasse.liehu@gmail.com>, 2011, 2012, 2013, 2014, 2015, 2016, 2023.
 # Jiri Grönroos <jiri.gronroos+kde@iki.fi>, 2012, 2013.
 # Tommi Nieminen <translator@legisign.org>, 2012, 2015, 2016, 2018, 2020, 2021, 2022, 2023.
 #
@@ -15,8 +15,8 @@ msgstr ""
 "Project-Id-Version: marble_qt\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2023-04-17 16:54+0300\n"
-"Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
+"PO-Revision-Date: 2023-04-19 23:33+0300\n"
+"Last-Translator: Lasse Liehu <lasse.liehu@iki.fi>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
 "Language: fi\n"
 "MIME-Version: 1.0\n"
@@ -11531,7 +11531,7 @@ msgstr "Tuntematon planeetta "
 #, qt-format
 msgctxt "Marble::PluginAboutDialog|"
 msgid "About %1"
-msgstr "Tietoa %1|/|Tietoa $[elat %1]"
+msgstr "Tietoa %1"
 
 #: src/lib/marble/PluginAboutDialog.cpp:60
 #, qt-format
