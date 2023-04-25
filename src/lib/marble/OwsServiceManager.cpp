@@ -698,7 +698,7 @@ void OwsServiceManager::parseWmsCapabilities(QNetworkReply *reply)
         }
         for ( int b = 0; b < layerPreviewBBox.size(); ++b ) {
             QDomElement bboxElement = layerPreviewBBox.at(b).toElement();
-            QString bboxProjection = bboxElement.attribute(m_wmsCapabilities.referenceSystemType()).toLower();
+            QString bboxProjection = bboxElement.attribute(m_wmsCapabilities.referenceSystemType());
             if (bboxProjection != "epsg:3857" && bboxProjection != "epsg:4326"  && bboxProjection != "crs:84") continue;
             int precision = bboxProjection == "epsg:3857" ? 6 : 12;
             double west = bboxElement.attribute("minx").toDouble();

@@ -1645,6 +1645,7 @@ void MainWindow::showMapWizard()
 
     settings.beginGroup( "MapWizard" );
         mapWizard->setWmsServers( settings.value( "wmsServers" ).toStringList() );
+        mapWizard->setWmtsServers( settings.value( "wmtsServers" ).toStringList() );
         mapWizard->setStaticUrlServers( settings.value( "staticUrlServers" ).toStringList() );
     settings.endGroup();
 
@@ -1652,6 +1653,7 @@ void MainWindow::showMapWizard()
 
     settings.beginGroup( "MapWizard" );
         settings.setValue( "wmsServers", mapWizard->wmsServers() );
+        settings.setValue( "wmtsServers", mapWizard->wmtsServers() );
         settings.setValue( "staticUrlServers", mapWizard->staticUrlServers() );
     settings.endGroup();
 

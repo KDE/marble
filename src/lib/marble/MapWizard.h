@@ -35,6 +35,9 @@ public:
     QStringList wmsServers() const;
     void setWmsServers( const QStringList& uris );
 
+    QStringList wmtsServers() const;
+    void setWmtsServers( const QStringList& uris );
+
     QStringList staticUrlServers() const;
     void setStaticUrlServers( const QStringList& uris );
 

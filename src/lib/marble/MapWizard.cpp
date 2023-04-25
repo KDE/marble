@@ -93,6 +93,7 @@ public:
     OwsServiceManager owsManager;
 
     QStringList wmsServerList;
+    QStringList wmtsServerList;
     QStringList staticUrlServerList;
     bool m_serverCapabilitiesValid;
     bool m_levelZeroTileValid;
@@ -348,10 +349,18 @@ void MapWizard::processCapabilitiesResults()
 
     d->m_serverCapabilitiesValid = true;
 
-    if (!d->wmsServerList.contains(d->uiWidget.lineEditWmsUrl->text())) {
-        d->wmsServerList.append( d->uiWidget.lineEditWmsUrl->text() );
+    if (d->owsManager.owsServiceType() == WmsType) {
+        if (!d->wmsServerList.contains(d->uiWidget.lineEditWmsUrl->text())) {
+            d->wmsServerList.append( d->uiWidget.lineEditWmsUrl->text() );
+        }
+        setWmsServers( d->wmsServerList );
     }
-    setWmsServers( d->wmsServerList );
+    else if (d->owsManager.owsServiceType() == WmtsType) {
+        if (!d->wmtsServerList.contains(d->uiWidget.lineEditWmsUrl->text())) {
+            d->wmtsServerList.append( d->uiWidget.lineEditWmsUrl->text() );
+        }
+        setWmtsServers( d->wmtsServerList );
+    }
 
 
     next();
@@ -523,11 +532,16 @@ void MapWizard::createWmsLegend()
 void MapWizard::setWmsServers( const QStringList& uris )
 {
     d->wmsServerList = uris;
+}
 
-    d->uiWidget.comboBoxWmsServer->clear();
-    d->uiWidget.comboBoxWmsServer->addItems( d->wmsServerList );
-    d->uiWidget.comboBoxWmsServer->addItem( tr( "Custom" ), "http://" );
-    d->uiWidget.comboBoxWmsServer->setCurrentText( tr( "Custom" ) );
+QStringList MapWizard::wmtsServers() const
+{
+    return d->wmtsServerList;
+}
+
+void MapWizard::setWmtsServers(const QStringList &uris)
+{
+    d->wmtsServerList = uris;
 }
 
 QStringList MapWizard::wmsServers() const
@@ -1526,10 +1540,25 @@ void MapWizard::updateOwsServiceType()
     if (d->uiWidget.radioButtonWms->isChecked()) {
         d->uiWidget.labelWmsServer->setText(tr("WMS Server"));
         d->uiWidget.labelOwsServiceHeader->setText(tr("<h4>WMS Server</h4>Please choose a <a href=\"https://en.wikipedia.org/wiki/Web_Map_Service\">WMS</a> server or enter a custom server URL."));
+        d->uiWidget.comboBoxWmsServer->clear();
+        d->uiWidget.comboBoxWmsServer->addItems( d->wmsServerList );
+        d->uiWidget.comboBoxWmsServer->addItem( tr( "Custom" ), "http://" );
+        d->uiWidget.comboBoxWmsServer->setCurrentText( tr( "Custom" ) );
+
     }
     else if (d->uiWidget.radioButtonWmts->isChecked()) {
         d->uiWidget.labelWmsServer->setText(tr("WMTS Server"));
         d->uiWidget.labelOwsServiceHeader->setText(tr("<h4>WMTS Server</h4>Please choose a <a href=\"https://de.wikipedia.org/wiki/Web_Map_Tile_Service\">WMTS</a> server or enter a custom server URL."));
+        d->uiWidget.comboBoxWmsServer->clear();
+        d->uiWidget.comboBoxWmsServer->addItems( d->wmtsServerList );
+        d->uiWidget.comboBoxWmsServer->addItem( tr( "Custom" ), "http://" );
+        d->uiWidget.comboBoxWmsServer->setCurrentText( tr( "Custom" ) );
+    }
+    else if (d->uiWidget.radioButtonStaticUrl->isChecked()) {
+        d->uiWidget.comboBoxStaticUrlServer->clear();
+        d->uiWidget.comboBoxStaticUrlServer->addItems( d->staticUrlServerList );
+//        d->uiWidget.comboBoxWmsServer->addItem( tr( "Custom" ), "http://" );
+//        d->uiWidget.comboBoxWmsServer->setCurrentText( tr( "Custom" ) );
     }
 }
 

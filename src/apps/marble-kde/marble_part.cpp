@@ -1367,9 +1367,11 @@ void MarblePart::showMapWizard()
     // Map Wizard
     QPointer<MapWizard> mapWizard = new MapWizard( m_controlView );
     mapWizard->setWmsServers( MarbleSettings::wmsServers() );
+    mapWizard->setWmtsServers( MarbleSettings::wmtsServers() );
     mapWizard->setStaticUrlServers( MarbleSettings::staticUrlServers() );
     mapWizard->exec();
     MarbleSettings::setWmsServers( mapWizard->wmsServers() );
+    MarbleSettings::setWmtsServers( mapWizard->wmtsServers() );
     MarbleSettings::setStaticUrlServers( mapWizard->staticUrlServers() );
     mapWizard->deleteLater();
 }
