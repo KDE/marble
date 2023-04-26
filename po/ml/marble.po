@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2021-10-18 00:13+0000\n"
+"POT-Creation-Date: 2023-04-26 00:45+0000\n"
 "PO-Revision-Date: 2019-12-12 21:30+0000\n"
 "Last-Translator: Vivek KJ Pazhedath <vivekkj2004@gmail.com>\n"
 "Language-Team: Swathanthra|സ്വതന്ത്ര Malayalam|മലയാളം Computing|കമ്പ്യൂട്ടിങ്ങ് <smc-"
@@ -1132,37 +1132,37 @@ msgctxt "Action for toggling"
 msgid "Show Download Progress Bar"
 msgstr ""
 
-#: marble_part.cpp:1391
+#: marble_part.cpp:1393
 #, kde-format
 msgid "View"
 msgstr "കാഴ്ച"
 
-#: marble_part.cpp:1402
+#: marble_part.cpp:1404
 #, kde-format
 msgid "Navigation"
 msgstr ""
 
-#: marble_part.cpp:1413
+#: marble_part.cpp:1415
 #, kde-format
 msgid "Cache & Proxy"
 msgstr "കാഷും പ്രോക്സിയും"
 
-#: marble_part.cpp:1426
+#: marble_part.cpp:1428
 #, fuzzy, kde-format
 msgid "Date & Time"
 msgstr "&സമയം"
 
-#: marble_part.cpp:1434
+#: marble_part.cpp:1436
 #, kde-format
 msgid "Synchronization"
 msgstr ""
 
-#: marble_part.cpp:1447
+#: marble_part.cpp:1449
 #, fuzzy, kde-format
 msgid "Routing"
 msgstr "പാലം"
 
-#: marble_part.cpp:1455
+#: marble_part.cpp:1457
 #, kde-format
 msgid "Plugins"
 msgstr "പ്ലഗിനുകള്‍"

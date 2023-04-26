@@ -7976,22 +7976,22 @@ msgctxt "MapViewWidget|"
 msgid "Here you can choose the preferred map view from different topics."
 msgstr "Här kan du välja önskad karta från olika typer."
 
-#: src/lib/marble/MapWizard.cpp:167
+#: src/lib/marble/MapWizard.cpp:168
 msgctxt "Marble::PreviewDialog|"
 msgid "Preview Map"
 msgstr "Förhandsgranska karta"
 
-#: src/lib/marble/MapWizard.cpp:289 src/lib/marble/MapWizard.cpp:294
+#: src/lib/marble/MapWizard.cpp:290 src/lib/marble/MapWizard.cpp:295
 msgctxt "Marble::MapWizard|"
 msgid "Error while parsing"
 msgstr "Fel vid tolkning"
 
-#: src/lib/marble/MapWizard.cpp:289
+#: src/lib/marble/MapWizard.cpp:290
 msgctxt "Marble::MapWizard|"
 msgid "Wizard cannot parse server's response"
 msgstr "Guiden kan inte tolka serverns svar"
 
-#: src/lib/marble/MapWizard.cpp:294
+#: src/lib/marble/MapWizard.cpp:295
 #, fuzzy
 #| msgctxt "Marble::MapWizard|"
 #| msgid "Server is not a Web Map Server."
@@ -7999,25 +7999,25 @@ msgctxt "Marble::MapWizard|"
 msgid "Server is not an OWS Server."
 msgstr "Servern är inte en webbkartserver."
 
-#: src/lib/marble/MapWizard.cpp:381 src/lib/marble/MapWizard.cpp:398
-#: src/lib/marble/MapWizard.cpp:1126
+#: src/lib/marble/MapWizard.cpp:390 src/lib/marble/MapWizard.cpp:407
+#: src/lib/marble/MapWizard.cpp:1140
 msgctxt "Marble::MapWizard|"
 msgid "Web Mercator (epsg:3857)"
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:382 src/lib/marble/MapWizard.cpp:828
-#: src/lib/marble/MapWizard.cpp:961
+#: src/lib/marble/MapWizard.cpp:391 src/lib/marble/MapWizard.cpp:842
+#: src/lib/marble/MapWizard.cpp:975
 msgctxt "Marble::MapWizard|"
 msgid "Equirectangular (epsg:4326)"
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:383 src/lib/marble/MapWizard.cpp:830
-#: src/lib/marble/MapWizard.cpp:963
+#: src/lib/marble/MapWizard.cpp:392 src/lib/marble/MapWizard.cpp:844
+#: src/lib/marble/MapWizard.cpp:977
 msgctxt "Marble::MapWizard|"
 msgid "Equirectangular (crs:84)"
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:394
+#: src/lib/marble/MapWizard.cpp:403
 #, fuzzy
 #| msgctxt "MapViewWidget|"
 #| msgid "&Projection"
@@ -8025,22 +8025,22 @@ msgctxt "Marble::MapWizard|"
 msgid "Tile Projection:"
 msgstr "&Projektion"
 
-#: src/lib/marble/MapWizard.cpp:410
+#: src/lib/marble/MapWizard.cpp:419
 msgctxt "Marble::MapWizard|"
 msgid "Tile Matrix Set:"
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:454 src/lib/marble/MapWizard.cpp:951
+#: src/lib/marble/MapWizard.cpp:463 src/lib/marble/MapWizard.cpp:965
 msgctxt "Marble::MapWizard|"
 msgid "Preview Image"
 msgstr "Förhandsgranskningsbild"
 
-#: src/lib/marble/MapWizard.cpp:458
+#: src/lib/marble/MapWizard.cpp:467
 msgctxt "Marble::MapWizard|"
 msgid "Base Tile"
 msgstr "Grundruta"
 
-#: src/lib/marble/MapWizard.cpp:462
+#: src/lib/marble/MapWizard.cpp:471
 #, fuzzy
 #| msgctxt "MapWizard|"
 #| msgid "Legend Image:"
@@ -8048,7 +8048,7 @@ msgctxt "Marble::MapWizard|"
 msgid "Legend Image"
 msgstr "Förklaringsbild:"
 
-#: src/lib/marble/MapWizard.cpp:469 src/lib/marble/MapWizard.cpp:477
+#: src/lib/marble/MapWizard.cpp:478 src/lib/marble/MapWizard.cpp:486
 #, fuzzy, qt-format
 #| msgctxt "NavigationInfoBar|"
 #| msgid "%1 m"
@@ -8056,7 +8056,7 @@ msgctxt "Marble::MapWizard|"
 msgid "%1"
 msgstr "%1 m"
 
-#: src/lib/marble/MapWizard.cpp:470
+#: src/lib/marble/MapWizard.cpp:479
 #, fuzzy, qt-format
 #| msgctxt "Marble::MapWizard|"
 #| msgid "The base tile could not be downloaded."
@@ -8064,7 +8064,7 @@ msgctxt "Marble::MapWizard|"
 msgid "The %1 could not be downloaded."
 msgstr "Grundrutan kunde inte laddas ner."
 
-#: src/lib/marble/MapWizard.cpp:478
+#: src/lib/marble/MapWizard.cpp:487
 #, fuzzy, qt-format
 #| msgctxt "Marble::MapWizard|"
 #| msgid ""
@@ -8081,73 +8081,74 @@ msgstr ""
 "\n"
 "%1"
 
-#: src/lib/marble/MapWizard.cpp:529 src/lib/marble/MapWizard.cpp:530
-#: src/lib/marble/MapWizard.cpp:551
+#: src/lib/marble/MapWizard.cpp:565 src/lib/marble/MapWizard.cpp:1545
+#: src/lib/marble/MapWizard.cpp:1546 src/lib/marble/MapWizard.cpp:1554
+#: src/lib/marble/MapWizard.cpp:1555
 msgctxt "Marble::MapWizard|"
 msgid "Custom"
 msgstr "Egen"
 
-#: src/lib/marble/MapWizard.cpp:781 src/lib/marble/MapWizard.cpp:784
+#: src/lib/marble/MapWizard.cpp:795 src/lib/marble/MapWizard.cpp:798
 msgctxt "Marble::MapWizard|"
 msgid "Archiving failed"
 msgstr "Arkivering misslyckades"
 
-#: src/lib/marble/MapWizard.cpp:781
+#: src/lib/marble/MapWizard.cpp:795
 msgctxt "Marble::MapWizard|"
 msgid "Archiving process cannot be started."
 msgstr "Arkiveringsprocessen kan inte startas."
 
-#: src/lib/marble/MapWizard.cpp:784
+#: src/lib/marble/MapWizard.cpp:798
 msgctxt "Marble::MapWizard|"
 msgid "Archiving process crashed."
 msgstr "Arkiveringsprocessen kraschade."
 
-#: src/lib/marble/MapWizard.cpp:880 src/lib/marble/MapWizard.cpp:888
-#: src/lib/marble/MapWizard.cpp:897
+#: src/lib/marble/MapWizard.cpp:894 src/lib/marble/MapWizard.cpp:902
+#: src/lib/marble/MapWizard.cpp:911
 msgctxt "Marble::MapWizard|"
 msgid "Source Image"
 msgstr "Källbild"
 
-#: src/lib/marble/MapWizard.cpp:881
+#: src/lib/marble/MapWizard.cpp:895
 msgctxt "Marble::MapWizard|"
 msgid "Please specify a source image."
 msgstr "Ange en källbild."
 
-#: src/lib/marble/MapWizard.cpp:889
+#: src/lib/marble/MapWizard.cpp:903
 msgctxt "Marble::MapWizard|"
 msgid ""
 "The source image you specified does not exist. Please specify a different "
 "one."
 msgstr "Källbilden du angav finns inte. Ange en annan."
 
-#: src/lib/marble/MapWizard.cpp:898
+#: src/lib/marble/MapWizard.cpp:912
 msgctxt "Marble::MapWizard|"
 msgid ""
 "The source image you specified does not seem to be an image. Please specify "
 "a different image file."
 msgstr "Källbilden du angav verkar inte vara en bild. Ange en annan bildfil."
 
-#: src/lib/marble/MapWizard.cpp:928
+#: src/lib/marble/MapWizard.cpp:942
 msgctxt "Marble::MapWizard|"
 msgid "Map Title"
 msgstr "Kartrubrik"
 
-#: src/lib/marble/MapWizard.cpp:928
+#: src/lib/marble/MapWizard.cpp:942
 msgctxt "Marble::MapWizard|"
 msgid "Please specify a map title."
 msgstr "Ange en karttitel."
 
-#: src/lib/marble/MapWizard.cpp:935 src/lib/marble/MapWizard.cpp:943
+#: src/lib/marble/MapWizard.cpp:949 src/lib/marble/MapWizard.cpp:957
 msgctxt "Marble::MapWizard|"
 msgid "Map Name"
 msgstr "Kartnamn"
 
-#: src/lib/marble/MapWizard.cpp:935
+#: src/lib/marble/MapWizard.cpp:949
 msgctxt "Marble::MapWizard|"
 msgid "Please specify a map name."
 msgstr "Ange ett kartnamn."
 
-#: src/lib/marble/MapWizard.cpp:944
+#: src/lib/marble/MapWizard.cpp:958
 #, qt-format
 msgctxt "Marble::MapWizard|"
 msgid ""
@@ -8155,22 +8156,22 @@ msgid ""
 msgstr ""
 "Ange ett annat kartnamn, eftersom det redan finns en karta vid namn \"%1\"."
 
-#: src/lib/marble/MapWizard.cpp:951
+#: src/lib/marble/MapWizard.cpp:965
 msgctxt "Marble::MapWizard|"
 msgid "Please specify a preview image."
 msgstr "Ange en förhandsgranskningsbild."
 
-#: src/lib/marble/MapWizard.cpp:1470
+#: src/lib/marble/MapWizard.cpp:1484
 msgctxt "Marble::MapWizard|"
 msgid "Problem while creating files"
 msgstr "Problem när filer skulle skapas"
 
-#: src/lib/marble/MapWizard.cpp:1470
+#: src/lib/marble/MapWizard.cpp:1484
 msgctxt "Marble::MapWizard|"
 msgid "Check if a theme with the same name exists."
 msgstr "Kontrollera om ett tema med samma namn redan finns."
 
-#: src/lib/marble/MapWizard.cpp:1527
+#: src/lib/marble/MapWizard.cpp:1541
 #, fuzzy
 #| msgctxt "MapWizard|"
 #| msgid "WMS Server:"
@@ -8178,14 +8179,14 @@ msgctxt "Marble::MapWizard|"
 msgid "WMS Server"
 msgstr "WMS-server:"
 
-#: src/lib/marble/MapWizard.cpp:1528
+#: src/lib/marble/MapWizard.cpp:1542
 msgctxt "Marble::MapWizard|"
 msgid ""
 "<h4>WMS Server</h4>Please choose a <a href=\"https://en.wikipedia.org/wiki/"
 "Web_Map_Service\">WMS</a> server or enter a custom server URL."
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:1531
+#: src/lib/marble/MapWizard.cpp:1550
 #, fuzzy
 #| msgctxt "MapWizard|"
 #| msgid "WMS Server:"
@@ -8193,7 +8194,7 @@ msgctxt "Marble::MapWizard|"
 msgid "WMTS Server"
 msgstr "WMS-server:"
 
-#: src/lib/marble/MapWizard.cpp:1532
+#: src/lib/marble/MapWizard.cpp:1551
 msgctxt "Marble::MapWizard|"
 msgid ""
 "<h4>WMTS Server</h4>Please choose a <a href=\"https://de.wikipedia.org/wiki/"

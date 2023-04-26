@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2021-10-18 00:13+0000\n"
+"POT-Creation-Date: 2023-04-26 00:45+0000\n"
 "PO-Revision-Date: 2021-11-10 18:24+0200\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -1155,37 +1155,37 @@ msgctxt "Action for toggling"
 msgid "Show Download Progress Bar"
 msgstr "Näytä latauksen edistymispalkki"
 
-#: marble_part.cpp:1391
+#: marble_part.cpp:1393
 #, kde-format
 msgid "View"
 msgstr "Näkymä"
 
-#: marble_part.cpp:1402
+#: marble_part.cpp:1404
 #, kde-format
 msgid "Navigation"
 msgstr "Siirtyminen"
 
-#: marble_part.cpp:1413
+#: marble_part.cpp:1415
 #, kde-format
 msgid "Cache & Proxy"
 msgstr "Välimuisti & välityspalvelin"
 
-#: marble_part.cpp:1426
+#: marble_part.cpp:1428
 #, kde-format
 msgid "Date & Time"
 msgstr "Päivä ja aika"
 
-#: marble_part.cpp:1434
+#: marble_part.cpp:1436
 #, kde-format
 msgid "Synchronization"
 msgstr "Synkronointi"
 
-#: marble_part.cpp:1447
+#: marble_part.cpp:1449
 #, kde-format
 msgid "Routing"
 msgstr "Reittihaku"
 
-#: marble_part.cpp:1455
+#: marble_part.cpp:1457
 #, kde-format
 msgid "Plugins"
 msgstr "Liitännäiset"

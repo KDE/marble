@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeedu\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2021-10-18 00:13+0000\n"
+"POT-Creation-Date: 2023-04-26 00:45+0000\n"
 "PO-Revision-Date: 2015-02-25 20:28+0100\n"
 "Last-Translator: Samir Ribić <megaribi@epn.ba>\n"
 "Language-Team: Bosnian <bs@li.org>\n"
@@ -1157,37 +1157,37 @@ msgctxt "Action for toggling"
 msgid "Show Download Progress Bar"
 msgstr "Pokaži traku napretka preuzimanja"
 
-#: marble_part.cpp:1391
+#: marble_part.cpp:1393
 #, kde-format
 msgid "View"
 msgstr "Pregled"
 
-#: marble_part.cpp:1402
+#: marble_part.cpp:1404
 #, kde-format
 msgid "Navigation"
 msgstr "Navigacija"
 
-#: marble_part.cpp:1413
+#: marble_part.cpp:1415
 #, kde-format
 msgid "Cache & Proxy"
 msgstr "Priručna memorija i posrednik"
 
-#: marble_part.cpp:1426
+#: marble_part.cpp:1428
 #, kde-format
 msgid "Date & Time"
 msgstr "Datum i vrijeme"
 
-#: marble_part.cpp:1434
+#: marble_part.cpp:1436
 #, kde-format
 msgid "Synchronization"
 msgstr "Sinhronizacija"
 
-#: marble_part.cpp:1447
+#: marble_part.cpp:1449
 #, kde-format
 msgid "Routing"
 msgstr "Usmjeravanje"
 
-#: marble_part.cpp:1455
+#: marble_part.cpp:1457
 #, kde-format
 msgid "Plugins"
 msgstr "Dodaci"

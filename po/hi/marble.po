@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2021-10-18 00:13+0000\n"
+"POT-Creation-Date: 2023-04-26 00:45+0000\n"
 "PO-Revision-Date: 2007-12-21 17:53+0530\n"
 "Last-Translator: Ravishankar Shrivastava <raviratlami@yahoo.com>\n"
 "Language-Team: Hindi <indlinux-hindi@lists.sourceforge.net>\n"
@@ -1171,40 +1171,40 @@ msgctxt "Action for toggling"
 msgid "Show Download Progress Bar"
 msgstr ""
 
-#: marble_part.cpp:1391
+#: marble_part.cpp:1393
 #, fuzzy, kde-format
 #| msgid "&View"
 msgid "View"
 msgstr "देखें (&V)"
 
-#: marble_part.cpp:1402
+#: marble_part.cpp:1404
 #, kde-format
 msgid "Navigation"
 msgstr "नेविगेशन"
 
-#: marble_part.cpp:1413
+#: marble_part.cpp:1415
 #, kde-format
 msgid "Cache & Proxy"
 msgstr ""
 
-#: marble_part.cpp:1426
+#: marble_part.cpp:1428
 #, fuzzy, kde-format
 #| msgid "&Theme"
 msgid "Date & Time"
 msgstr "प्रसंग (&T)"
 
-#: marble_part.cpp:1434
+#: marble_part.cpp:1436
 #, kde-format
 msgid "Synchronization"
 msgstr ""
 
-#: marble_part.cpp:1447
+#: marble_part.cpp:1449
 #, fuzzy, kde-format
 #| msgid "Mountain"
 msgid "Routing"
 msgstr "पर्वत"
 
-#: marble_part.cpp:1455
+#: marble_part.cpp:1457
 #, kde-format
 msgid "Plugins"
 msgstr ""

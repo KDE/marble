@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2021-10-18 00:13+0000\n"
+"POT-Creation-Date: 2023-04-26 00:45+0000\n"
 "PO-Revision-Date: 2010-12-25 14:52+0700\n"
 "Last-Translator: Phuwanat Sakornsakolpat <narachai@gmail.com>\n"
 "Language-Team: Thai <thai-l10n@googlegroups.com>\n"
@@ -1143,37 +1143,37 @@ msgctxt "Action for toggling"
 msgid "Show Download Progress Bar"
 msgstr "แสดงแถบแสดงความคืบหน้าการดาวน์โหลด"
 
-#: marble_part.cpp:1391
+#: marble_part.cpp:1393
 #, kde-format
 msgid "View"
 msgstr "มุมมอง"
 
-#: marble_part.cpp:1402
+#: marble_part.cpp:1404
 #, kde-format
 msgid "Navigation"
 msgstr "การนำทาง"
 
-#: marble_part.cpp:1413
+#: marble_part.cpp:1415
 #, kde-format
 msgid "Cache & Proxy"
 msgstr ""
 
-#: marble_part.cpp:1426
+#: marble_part.cpp:1428
 #, kde-format
 msgid "Date & Time"
 msgstr "วันที่และเวลา"
 
-#: marble_part.cpp:1434
+#: marble_part.cpp:1436
 #, kde-format
 msgid "Synchronization"
 msgstr ""
 
-#: marble_part.cpp:1447
+#: marble_part.cpp:1449
 #, kde-format
 msgid "Routing"
 msgstr "เส้นทง"
 
-#: marble_part.cpp:1455
+#: marble_part.cpp:1457
 #, kde-format
 msgid "Plugins"
 msgstr "ปลั๊กอิน"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: marble-gu\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2021-10-18 00:13+0000\n"
+"POT-Creation-Date: 2023-04-26 00:45+0000\n"
 "PO-Revision-Date: 2009-10-20 20:58+0530\n"
 "Last-Translator: pragnesh radadiya <pg.radadia@gmail.com>\n"
 "Language-Team: Gujarati <kde-i18n-doc@kde.org>\n"
@@ -1156,38 +1156,38 @@ msgctxt "Action for toggling"
 msgid "Show Download Progress Bar"
 msgstr "ડાઉનલોડ પ્રગતિ પટ્ટી બતાવો"
 
-#: marble_part.cpp:1391
+#: marble_part.cpp:1393
 #, kde-format
 msgid "View"
 msgstr "દેખાવ"
 
-#: marble_part.cpp:1402
+#: marble_part.cpp:1404
 #, kde-format
 msgid "Navigation"
 msgstr "શોધખોળ"
 
-#: marble_part.cpp:1413
+#: marble_part.cpp:1415
 #, kde-format
 msgid "Cache & Proxy"
 msgstr "કૅશ અને પ્રોક્સી"
 
-#: marble_part.cpp:1426
+#: marble_part.cpp:1428
 #, fuzzy, kde-format
 #| msgid "&Time"
 msgid "Date & Time"
 msgstr "સમય (&T)"
 
-#: marble_part.cpp:1434
+#: marble_part.cpp:1436
 #, kde-format
 msgid "Synchronization"
 msgstr ""
 
-#: marble_part.cpp:1447
+#: marble_part.cpp:1449
 #, kde-format
 msgid "Routing"
 msgstr "રાઉટિંગ"
 
-#: marble_part.cpp:1455
+#: marble_part.cpp:1457
 #, kde-format
 msgid "Plugins"
 msgstr "પ્લગઇન્સ"
