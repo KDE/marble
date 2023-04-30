@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2021-10-18 00:13+0000\n"
+"POT-Creation-Date: 2023-04-26 00:45+0000\n"
 "PO-Revision-Date: 2018-07-15 14:46+0100\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
@@ -1140,37 +1140,37 @@ msgctxt "Action for toggling"
 msgid "Show Download Progress Bar"
 msgstr "Vis framdriftslinje for nedlasting"
 
-#: marble_part.cpp:1391
+#: marble_part.cpp:1393
 #, kde-format
 msgid "View"
 msgstr "Vis"
 
-#: marble_part.cpp:1402
+#: marble_part.cpp:1404
 #, kde-format
 msgid "Navigation"
 msgstr "Navigering"
 
-#: marble_part.cpp:1413
+#: marble_part.cpp:1415
 #, kde-format
 msgid "Cache & Proxy"
 msgstr "Mellomlager og mellomtenar"
 
-#: marble_part.cpp:1426
+#: marble_part.cpp:1428
 #, kde-format
 msgid "Date & Time"
 msgstr "Dato og klokkeslett"
 
-#: marble_part.cpp:1434
+#: marble_part.cpp:1436
 #, kde-format
 msgid "Synchronization"
 msgstr "Synkronisering"
 
-#: marble_part.cpp:1447
+#: marble_part.cpp:1449
 #, kde-format
 msgid "Routing"
 msgstr ""
 
-#: marble_part.cpp:1455
+#: marble_part.cpp:1457
 #, kde-format
 msgid "Plugins"
 msgstr "Programtillegg"
