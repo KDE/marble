@@ -68,7 +68,7 @@ msgstr ""
 #. ----------
 #. file data/maps/earth/vectorosm/vectorosm.dgml:285
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:308
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:291
 #. ----------
 #. file data/maps/earth/plain/plain.dgml:209
 #. ----------
@@ -101,7 +101,7 @@ msgstr ""
 #. ----------
 #. file data/maps/earth/empty/empty.dgml:43
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:133
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:119
 #. ----------
 #. file data/maps/earth/plain/plain.dgml:288
 #. ----------
@@ -772,7 +772,7 @@ msgstr ""
 #. ----------
 #. file data/maps/earth/vectorosm/vectorosm.dgml:109
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:126
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:112
 msgctxt "DGML|"
 msgid "Explore the Earth"
 msgstr ""
@@ -781,7 +781,7 @@ msgstr ""
 #. ----------
 #. file data/maps/earth/vectorosm/vectorosm.dgml:111
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:128
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:114
 msgctxt "DGML|"
 msgid ""
 "<a href=\"tour://earth/openstreetmap/tour.kml\">Play a tour of popular "
@@ -810,693 +810,693 @@ msgstr ""
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:119
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:142
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:125
 msgctxt "DGML|"
 msgid "Transportation"
 msgstr ""
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:202
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:225
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:208
 msgctxt "DGML|"
 msgid "Areas"
 msgstr ""
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:300
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:323
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:306
 msgctxt "DGML|"
 msgid "Education"
 msgstr ""
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:323
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:346
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:329
 msgctxt "DGML|"
 msgid "Financial"
 msgstr ""
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:338
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:361
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:344
 msgctxt "DGML|"
 msgid "Healthcare"
 msgstr ""
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:357
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:380
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:363
 msgctxt "DGML|"
 msgid "Entertainment"
 msgstr ""
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:368
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:391
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:374
 msgctxt "DGML|"
 msgid "Public Buildings"
 msgstr ""
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:403
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:426
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:409
 msgctxt "DGML|"
 msgid "Accommodation"
 msgstr ""
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:414
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:437
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:420
 msgctxt "DGML|"
 msgid "Emergency"
 msgstr ""
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:425
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:448
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:431
 msgctxt "DGML|"
 msgid "Historic"
 msgstr ""
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:436
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:459
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:442
 msgctxt "DGML|"
 msgid "Food and Drinks"
 msgstr ""
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:471
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:494
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:477
 msgctxt "DGML|"
 msgid "Shop"
 msgstr ""
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:122
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:145
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:128
 msgctxt "DGML|"
 msgid "Motorway"
 msgstr ""
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:126
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:149
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:132
 msgctxt "DGML|"
 msgid "Trunk road"
 msgstr ""
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:130
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:153
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:136
 msgctxt "DGML|"
 msgid "Primary road"
 msgstr ""
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:134
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:157
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:140
 msgctxt "DGML|"
 msgid "Secondary road"
 msgstr ""
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:138
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:161
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:144
 msgctxt "DGML|"
 msgid "Unclassified road"
 msgstr ""
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:142
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:165
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:148
 msgctxt "DGML|"
 msgid "Unsurfaced road"
 msgstr ""
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:146
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:169
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:152
 msgctxt "DGML|"
 msgid "Track"
 msgstr ""
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:150
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:173
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:156
 msgctxt "DGML|"
 msgid "Byway"
 msgstr ""
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:154
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:177
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:160
 msgctxt "DGML|"
 msgid "Bridleway"
 msgstr ""
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:158
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:181
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:164
 msgctxt "DGML|"
 msgid "Cycleway"
 msgstr ""
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:162
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:185
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:168
 msgctxt "DGML|"
 msgid "Footway"
 msgstr ""
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:166
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:189
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:172
 msgctxt "DGML|"
 msgid "Railway station"
 msgstr ""
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:170
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:193
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:176
 msgctxt "DGML|"
 msgid "Railway"
 msgstr ""
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:174
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:197
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:180
 msgctxt "DGML|"
 msgid "Subway"
 msgstr ""
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:178
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:201
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:184
 msgctxt "DGML|"
 msgid "Lightrail, tram"
 msgstr ""
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:182
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:205
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:188
 msgctxt "DGML|"
 msgid "Airport runway, taxiway"
 msgstr ""
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:186
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:209
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:192
 msgctxt "DGML|"
 msgid "Airport apron, terminal"
 msgstr ""
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:190
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:213
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:196
 msgctxt "DGML|"
 msgid "Administrative boundary"
 msgstr ""
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:194
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:217
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:200
 msgctxt "DGML|"
 msgid "Bridge"
 msgstr ""
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:198
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:221
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:204
 msgctxt "DGML|"
 msgid "Tunnel"
 msgstr ""
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:205
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:228
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:211
 msgctxt "DGML|"
 msgid "Forest"
 msgstr ""
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:209
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:232
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:215
 msgctxt "DGML|"
 msgid "Wood"
 msgstr ""
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:213
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:236
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:219
 msgctxt "DGML|"
 msgid "Golf course"
 msgstr ""
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:217
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:240
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:223
 msgctxt "DGML|"
 msgid "Park"
 msgstr ""
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:221
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:244
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:227
 msgctxt "DGML|"
 msgid "Residential Area"
 msgstr ""
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:225
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:248
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:231
 msgctxt "DGML|"
 msgid "Tourist attraction"
 msgstr ""
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:229
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:252
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:235
 msgctxt "DGML|"
 msgid "Common, meadow"
 msgstr ""
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:233
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:256
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:239
 msgctxt "DGML|"
 msgid "Retail area"
 msgstr ""
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:237
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:260
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:243
 msgctxt "DGML|"
 msgid "Industrial Area"
 msgstr ""
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:241
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:264
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:247
 msgctxt "DGML|"
 msgid "Commercial Area"
 msgstr ""
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:245
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:268
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:251
 msgctxt "DGML|"
 msgid "Heathland"
 msgstr ""
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:249
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:272
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:255
 msgctxt "DGML|"
 msgid "Lake, reservoir"
 msgstr ""
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:253
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:276
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:259
 msgctxt "DGML|"
 msgid "Farm"
 msgstr ""
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:257
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:280
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:263
 msgctxt "DGML|"
 msgid "Brownfield site"
 msgstr ""
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:261
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:284
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:267
 msgctxt "DGML|"
 msgid "Cemetery"
 msgstr ""
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:265
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:288
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:271
 msgctxt "DGML|"
 msgid "Allotments"
 msgstr ""
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:269
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:292
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:275
 msgctxt "DGML|"
 msgid "Sports pitch"
 msgstr ""
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:273
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:296
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:279
 msgctxt "DGML|"
 msgid "Sports centre"
 msgstr ""
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:277
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:300
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:283
 msgctxt "DGML|"
 msgid "Nature reserve"
 msgstr ""
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:281
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:304
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:287
 msgctxt "DGML|"
 msgid "Military area"
 msgstr ""
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:288
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:311
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:294
 msgctxt "DGML|"
 msgid "School, university"
 msgstr ""
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:292
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:315
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:298
 msgctxt "DGML|"
 msgid "Significant Building"
 msgstr ""
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:296
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:319
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:302
 msgctxt "DGML|"
 msgid "Summit, peak"
 msgstr ""
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:303
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:326
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:309
 msgctxt "DGML|"
 msgid "College"
 msgstr ""
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:307
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:330
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:313
 msgctxt "DGML|"
 msgid "Kindergarten"
 msgstr ""
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:311
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:334
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:317
 msgctxt "DGML|"
 msgid "Library"
 msgstr ""
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:315
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:338
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:321
 msgctxt "DGML|"
 msgid "School"
 msgstr ""
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:319
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:342
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:325
 msgctxt "DGML|"
 msgid "University"
 msgstr ""
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:326
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:349
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:332
 msgctxt "DGML|"
 msgid "ATM"
 msgstr ""
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:330
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:353
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:336
 msgctxt "DGML|"
 msgid "Bank"
 msgstr ""
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:334
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:357
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:340
 msgctxt "DGML|"
 msgid "Bureau de change"
 msgstr ""
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:341
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:364
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:347
 msgctxt "DGML|"
 msgid "Dentist"
 msgstr ""
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:345
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:368
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:351
 msgctxt "DGML|"
 msgid "Doctors"
 msgstr ""
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:349
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:372
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:355
 msgctxt "DGML|"
 msgid "Pharmacy"
 msgstr ""
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:353
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:376
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:359
 msgctxt "DGML|"
 msgid "Veterinary"
 msgstr ""
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:360
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:383
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:366
 msgctxt "DGML|"
 msgid "Cinema"
 msgstr ""
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:364
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:387
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:370
 msgctxt "DGML|"
 msgid "Theatre"
 msgstr ""
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:371
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:394
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:377
 msgctxt "DGML|"
 msgid "Court"
 msgstr ""
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:375
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:398
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:381
 msgctxt "DGML|"
 msgid "Embassy"
 msgstr ""
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:379
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:402
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:385
 msgctxt "DGML|"
 msgid "Church"
 msgstr ""
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:383
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:406
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:389
 msgctxt "DGML|"
 msgid "Playground"
 msgstr ""
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:387
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:410
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:393
 msgctxt "DGML|"
 msgid "Place of worship"
 msgstr ""
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:391
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:414
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:397
 msgctxt "DGML|"
 msgid "Post office"
 msgstr ""
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:395
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:418
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:401
 msgctxt "DGML|"
 msgid "Public building"
 msgstr ""
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:399
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:422
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:405
 msgctxt "DGML|"
 msgid "Toilets"
 msgstr ""
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:406
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:429
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:412
 msgctxt "DGML|"
 msgid "Hotel"
 msgstr ""
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:410
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:433
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:416
 msgctxt "DGML|"
 msgid "Motel"
 msgstr ""
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:417
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:440
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:423
 msgctxt "DGML|"
 msgid "Hospital"
 msgstr ""
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:421
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:444
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:427
 msgctxt "DGML|"
 msgid "Fire station"
 msgstr ""
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:428
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:451
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:434
 msgctxt "DGML|"
 msgid "Monument"
 msgstr ""
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:432
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:455
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:438
 msgctxt "DGML|"
 msgid "Ruins"
 msgstr ""
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:439
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:462
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:445
 msgctxt "DGML|"
 msgid "Bar"
 msgstr ""
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:443
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:466
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:449
 msgctxt "DGML|"
 msgid "Biergarten"
 msgstr ""
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:447
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:470
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:453
 msgctxt "DGML|"
 msgid "Cafe"
 msgstr ""
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:451
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:474
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:457
 msgctxt "DGML|"
 msgid "Drinking water"
 msgstr ""
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:455
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:478
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:461
 msgctxt "DGML|"
 msgid "Fast Food"
 msgstr ""
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:459
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:482
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:465
 msgctxt "DGML|"
 msgid "Ice Cream"
 msgstr ""
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:463
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:486
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:469
 msgctxt "DGML|"
 msgid "Pub"
 msgstr ""
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:467
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:490
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:473
 msgctxt "DGML|"
 msgid "Restaurant"
 msgstr ""
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:474
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:497
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:480
 msgctxt "DGML|"
 msgid "Alcohol"
 msgstr ""
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:478
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:501
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:484
 msgctxt "DGML|"
 msgid "Bakery"
 msgstr ""
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:482
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:505
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:488
 msgctxt "DGML|"
 msgid "Books"
 msgstr ""
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:486
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:509
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:492
 msgctxt "DGML|"
 msgid "Car"
 msgstr ""
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:490
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:513
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:496
 msgctxt "DGML|"
 msgid "Clothes"
 msgstr ""
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:494
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:517
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:500
 msgctxt "DGML|"
 msgid "Convenience"
 msgstr ""
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:498
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:521
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:504
 msgctxt "DGML|"
 msgid "Gas"
 msgstr ""
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:502
 #. ----------
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:525
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:508
 msgctxt "DGML|"
 msgid "Gift"
 msgstr ""
@@ -1518,12 +1518,7 @@ msgctxt "DGML|"
 msgid "OpenStreetMap"
 msgstr ""
 
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:136
-msgctxt "DGML|"
-msgid "Hillshading"
-msgstr ""
-
-#. file data/maps/earth/openstreetmap/openstreetmap.dgml:139
+#. file data/maps/earth/openstreetmap/openstreetmap.dgml:122
 msgctxt "DGML|"
 msgid "Humanitarian OSM Team"
 msgstr ""
@@ -2563,18 +2558,18 @@ msgctxt "SidePanel|"
 msgid "About Marble Maps…"
 msgstr ""
 
-#: src/apps/marble-qt/qtmain.cpp:94
+#: src/apps/marble-qt/qtmain.cpp:92
 msgctxt "Marble::MainWindow|"
 msgid "Marble - Virtual Globe"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:195
-#: src/apps/marble-qt/QtMainWindow.cpp:765
+#: src/apps/marble-qt/QtMainWindow.cpp:197
+#: src/apps/marble-qt/QtMainWindow.cpp:770
 msgctxt "Marble::MainWindow|"
 msgid "Marble"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:196
+#: src/apps/marble-qt/QtMainWindow.cpp:198
 #, qt-format
 msgctxt "Marble::MainWindow|"
 msgid ""
@@ -2582,503 +2577,458 @@ msgid ""
 "'%2'"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:264
+#: src/apps/marble-qt/QtMainWindow.cpp:269
 msgctxt "Marble::MainWindow|"
 msgid "&Open..."
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:265
-msgctxt "Marble::MainWindow|"
-msgid "Ctrl+O"
-msgstr ""
-
-#: src/apps/marble-qt/QtMainWindow.cpp:266
+#: src/apps/marble-qt/QtMainWindow.cpp:271
 msgctxt "Marble::MainWindow|"
 msgid "Open a file for viewing on Marble"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:270
+#: src/apps/marble-qt/QtMainWindow.cpp:275
 msgctxt "Marble::MainWindow|"
 msgid "&Download Maps..."
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:273
+#: src/apps/marble-qt/QtMainWindow.cpp:278
 msgctxt "Marble::MainWindow|"
 msgid "&Export Map..."
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:274
-msgctxt "Marble::MainWindow|"
-msgid "Ctrl+S"
-msgstr ""
-
-#: src/apps/marble-qt/QtMainWindow.cpp:275
+#: src/apps/marble-qt/QtMainWindow.cpp:280
 msgctxt "Marble::MainWindow|"
 msgid "Save a screenshot of the map"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:279
+#: src/apps/marble-qt/QtMainWindow.cpp:284
 msgctxt "Marble::MainWindow|"
 msgid "Download &Region..."
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:280
+#: src/apps/marble-qt/QtMainWindow.cpp:285
 msgctxt "Marble::MainWindow|"
 msgid "Download a map region in different zoom levels for offline usage"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:283
+#: src/apps/marble-qt/QtMainWindow.cpp:288
 msgctxt "Marble::MainWindow|"
 msgid "&Print..."
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:284
+#: src/apps/marble-qt/QtMainWindow.cpp:289
 msgctxt "Marble::MainWindow|"
 msgid "Ctrl+P"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:285
-#: src/apps/marble-qt/QtMainWindow.cpp:289
+#: src/apps/marble-qt/QtMainWindow.cpp:290
+#: src/apps/marble-qt/QtMainWindow.cpp:294
 msgctxt "Marble::MainWindow|"
 msgid "Print a screenshot of the map"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:288
+#: src/apps/marble-qt/QtMainWindow.cpp:293
 msgctxt "Marble::MainWindow|"
 msgid "Print Previe&w ..."
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:292
+#: src/apps/marble-qt/QtMainWindow.cpp:297
 msgctxt "Marble::MainWindow|"
 msgid "&Quit"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:293
+#: src/apps/marble-qt/QtMainWindow.cpp:298
 msgctxt "Marble::MainWindow|"
 msgid "Ctrl+Q"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:294
+#: src/apps/marble-qt/QtMainWindow.cpp:299
 msgctxt "Marble::MainWindow|"
 msgid "Quit the Application"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:297
+#: src/apps/marble-qt/QtMainWindow.cpp:302
 msgctxt "Marble::MainWindow|"
 msgid "&Copy Map"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:298
-msgctxt "Marble::MainWindow|"
-msgid "Ctrl+C"
-msgstr ""
-
-#: src/apps/marble-qt/QtMainWindow.cpp:299
+#: src/apps/marble-qt/QtMainWindow.cpp:304
 msgctxt "Marble::MainWindow|"
 msgid "Copy a screenshot of the map"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:302
+#: src/apps/marble-qt/QtMainWindow.cpp:307
 msgctxt "Marble::MainWindow|"
 msgid "&Edit Map..."
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:303
-msgctxt "Marble::MainWindow|"
-msgid "Ctrl+E"
-msgstr ""
-
-#: src/apps/marble-qt/QtMainWindow.cpp:304
+#: src/apps/marble-qt/QtMainWindow.cpp:309
 msgctxt "Marble::MainWindow|"
 msgid "Edit the current map region in an external editor"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:308
+#: src/apps/marble-qt/QtMainWindow.cpp:313
 msgctxt "Marble::MainWindow|"
 msgid "&Record Movie"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:309
+#: src/apps/marble-qt/QtMainWindow.cpp:314
 msgctxt "Marble::MainWindow|"
 msgid "Records a movie of the globe"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:315
+#: src/apps/marble-qt/QtMainWindow.cpp:320
 msgctxt "Marble::MainWindow|"
 msgid "&Stop Recording"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:316
+#: src/apps/marble-qt/QtMainWindow.cpp:321
 msgctxt "Marble::MainWindow|"
 msgid "Stop recording a movie of the globe"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:322
+#: src/apps/marble-qt/QtMainWindow.cpp:327
 msgctxt "Marble::MainWindow|"
 msgid "&Configure Marble"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:323
+#: src/apps/marble-qt/QtMainWindow.cpp:328
 msgctxt "Marble::MainWindow|"
 msgid "Show the configuration dialog"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:326
+#: src/apps/marble-qt/QtMainWindow.cpp:331
 msgctxt "Marble::MainWindow|"
 msgid "C&opy Coordinates"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:327
+#: src/apps/marble-qt/QtMainWindow.cpp:332
 msgctxt "Marble::MainWindow|"
 msgid "Copy the center coordinates as text"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:330
+#: src/apps/marble-qt/QtMainWindow.cpp:335
 msgctxt "Marble::MainWindow|"
 msgid "&Full Screen Mode"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:331
-msgctxt "Marble::MainWindow|"
-msgid "Ctrl+Shift+F"
-msgstr ""
-
-#: src/apps/marble-qt/QtMainWindow.cpp:333
+#: src/apps/marble-qt/QtMainWindow.cpp:338
 msgctxt "Marble::MainWindow|"
 msgid "Full Screen Mode"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:336
+#: src/apps/marble-qt/QtMainWindow.cpp:341
 msgctxt "Marble::MainWindow|"
 msgid "&Show Status Bar"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:338
+#: src/apps/marble-qt/QtMainWindow.cpp:343
 msgctxt "Marble::MainWindow|"
 msgid "Show Status Bar"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:342
+#: src/apps/marble-qt/QtMainWindow.cpp:347
 msgctxt "Marble::MainWindow|"
 msgid "Lock Position"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:344
+#: src/apps/marble-qt/QtMainWindow.cpp:349
 msgctxt "Marble::MainWindow|"
 msgid "Lock Position of Floating Items"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:347
+#: src/apps/marble-qt/QtMainWindow.cpp:352
 msgctxt "Marble::MainWindow|"
 msgid "&Clouds"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:349
+#: src/apps/marble-qt/QtMainWindow.cpp:354
 msgctxt "Marble::MainWindow|"
 msgid "Show Real Time Cloud Cover"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:352
+#: src/apps/marble-qt/QtMainWindow.cpp:357
 msgctxt "Marble::MainWindow|"
 msgid "Work Off&line"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:356
+#: src/apps/marble-qt/QtMainWindow.cpp:361
 msgctxt "Marble::MainWindow|"
 msgid "&Time Control..."
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:357
+#: src/apps/marble-qt/QtMainWindow.cpp:362
 msgctxt "Marble::MainWindow|"
 msgid "Configure Time Control "
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:360
+#: src/apps/marble-qt/QtMainWindow.cpp:365
 msgctxt "Marble::MainWindow|"
 msgid "S&un Control..."
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:361
+#: src/apps/marble-qt/QtMainWindow.cpp:366
 msgctxt "Marble::MainWindow|"
 msgid "Configure Sun Control"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:364
+#: src/apps/marble-qt/QtMainWindow.cpp:369
 msgctxt "Marble::MainWindow|"
 msgid "&Redisplay"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:365
-msgctxt "Marble::MainWindow|"
-msgid "F5"
-msgstr ""
-
-#: src/apps/marble-qt/QtMainWindow.cpp:366
+#: src/apps/marble-qt/QtMainWindow.cpp:371
 msgctxt "Marble::MainWindow|"
 msgid "Reload Current Map"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:369
+#: src/apps/marble-qt/QtMainWindow.cpp:374
 msgctxt "Marble::MainWindow|"
 msgid "Marble Virtual Globe &Handbook"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:370
-msgctxt "Marble::MainWindow|"
-msgid "F1"
-msgstr ""
-
-#: src/apps/marble-qt/QtMainWindow.cpp:371
+#: src/apps/marble-qt/QtMainWindow.cpp:376
 msgctxt "Marble::MainWindow|"
 msgid "Show the Handbook for Marble Virtual Globe"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:374
+#: src/apps/marble-qt/QtMainWindow.cpp:379
 msgctxt "Marble::MainWindow|"
 msgid "What's &This"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:375
-msgctxt "Marble::MainWindow|"
-msgid "Shift+F1"
-msgstr ""
-
-#: src/apps/marble-qt/QtMainWindow.cpp:376
+#: src/apps/marble-qt/QtMainWindow.cpp:381
 msgctxt "Marble::MainWindow|"
 msgid "Show a detailed explanation of the action."
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:379
+#: src/apps/marble-qt/QtMainWindow.cpp:384
 msgctxt "Marble::MainWindow|"
 msgid "&Community Forum"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:380
+#: src/apps/marble-qt/QtMainWindow.cpp:385
 msgctxt "Marble::MainWindow|"
 msgid "Visit Marble's Community Forum"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:383
+#: src/apps/marble-qt/QtMainWindow.cpp:388
 msgctxt "Marble::MainWindow|"
 msgid "&About Marble Virtual Globe"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:384
+#: src/apps/marble-qt/QtMainWindow.cpp:389
 msgctxt "Marble::MainWindow|"
 msgid "Show the application's About Box"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:387
+#: src/apps/marble-qt/QtMainWindow.cpp:392
 msgctxt "Marble::MainWindow|"
 msgid "About &Qt"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:388
+#: src/apps/marble-qt/QtMainWindow.cpp:393
 msgctxt "Marble::MainWindow|"
 msgid "Show the Qt library's About box"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:392
+#: src/apps/marble-qt/QtMainWindow.cpp:397
 msgctxt "Marble::MainWindow|"
 msgid "Add &Bookmark..."
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:393
-msgctxt "Marble::MainWindow|"
-msgid "Ctrl+B"
-msgstr ""
-
-#: src/apps/marble-qt/QtMainWindow.cpp:394
+#: src/apps/marble-qt/QtMainWindow.cpp:399
 msgctxt "Marble::MainWindow|"
 msgid "Add Bookmark"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:397
-#: src/apps/marble-qt/QtMainWindow.cpp:398
+#: src/apps/marble-qt/QtMainWindow.cpp:402
+#: src/apps/marble-qt/QtMainWindow.cpp:403
 msgctxt "Marble::MainWindow|"
 msgid "&Set Home Location"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:401
+#: src/apps/marble-qt/QtMainWindow.cpp:406
 msgctxt "Marble::MainWindow|"
 msgid "Show &Bookmarks"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:402
+#: src/apps/marble-qt/QtMainWindow.cpp:407
 msgctxt "Marble::MainWindow|"
 msgid "Toggle display of Bookmarks"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:406
+#: src/apps/marble-qt/QtMainWindow.cpp:411
 msgctxt "Marble::MainWindow|"
 msgid "&Manage Bookmarks..."
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:407
+#: src/apps/marble-qt/QtMainWindow.cpp:412
 msgctxt "Marble::MainWindow|"
 msgid "Manage Bookmarks"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:411
+#: src/apps/marble-qt/QtMainWindow.cpp:416
 msgctxt "Marble::MainWindow|"
 msgid "&Create a New Map..."
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:412
+#: src/apps/marble-qt/QtMainWindow.cpp:417
 msgctxt "Marble::MainWindow|"
 msgid "A wizard guides you through the creation of your own map theme."
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:416
+#: src/apps/marble-qt/QtMainWindow.cpp:421
 msgctxt "Marble::MainWindow|"
 msgid "Show Tile Zoom Level"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:424
+#: src/apps/marble-qt/QtMainWindow.cpp:429
 msgctxt "Marble::MainWindow|"
 msgid "Degree (DMS)"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:429
+#: src/apps/marble-qt/QtMainWindow.cpp:434
 msgctxt "Marble::MainWindow|"
 msgid "Degree (Decimal)"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:434
+#: src/apps/marble-qt/QtMainWindow.cpp:439
 msgctxt "Marble::MainWindow|"
 msgid "Universal Transverse Mercator (UTM)"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:449
+#: src/apps/marble-qt/QtMainWindow.cpp:454
 msgctxt "Marble::MainWindow|"
 msgid "&File"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:462
+#: src/apps/marble-qt/QtMainWindow.cpp:467
 msgctxt "Marble::MainWindow|"
 msgid "&Edit"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:470
+#: src/apps/marble-qt/QtMainWindow.cpp:475
 msgctxt "Marble::MainWindow|"
 msgid "&View"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:471
+#: src/apps/marble-qt/QtMainWindow.cpp:476
 msgctxt "Marble::MainWindow|"
 msgid "&Info Boxes"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:472
+#: src/apps/marble-qt/QtMainWindow.cpp:477
 msgctxt "Marble::MainWindow|"
 msgid "&Online Services"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:475
+#: src/apps/marble-qt/QtMainWindow.cpp:480
 msgctxt "Marble::MainWindow|"
 msgid "&Bookmarks"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:479
+#: src/apps/marble-qt/QtMainWindow.cpp:484
 msgctxt "Marble::MainWindow|"
 msgid "&Panels"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:484
+#: src/apps/marble-qt/QtMainWindow.cpp:489
 msgctxt "Marble::MainWindow|"
 msgid "&View Size"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:487
+#: src/apps/marble-qt/QtMainWindow.cpp:492
 msgctxt "Marble::MainWindow|"
 msgid "&Settings"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:496
+#: src/apps/marble-qt/QtMainWindow.cpp:501
 msgctxt "Marble::MainWindow|"
 msgid "&Help"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:601
+#: src/apps/marble-qt/QtMainWindow.cpp:606
 msgctxt "Marble::MainWindow|"
 msgid "&Home"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:610
+#: src/apps/marble-qt/QtMainWindow.cpp:615
 msgctxt "Marble::MainWindow|"
 msgid "Default"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:734
+#: src/apps/marble-qt/QtMainWindow.cpp:739
 msgctxt "Marble::MainWindow|"
 msgid "Ready"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:747
+#: src/apps/marble-qt/QtMainWindow.cpp:752
 msgctxt "Marble::MainWindow|"
 msgid "Export Map"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:749
+#: src/apps/marble-qt/QtMainWindow.cpp:754
 msgctxt "Marble::MainWindow|"
 msgid "Images (*.jpg *.png)"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:766
+#: src/apps/marble-qt/QtMainWindow.cpp:771
 msgctxt "Marble::MainWindow|"
 msgid "An error occurred while trying to save the file.\n"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:897
+#: src/apps/marble-qt/QtMainWindow.cpp:902
 #, qt-format
 msgctxt "Marble::MainWindow|"
 msgid "Marble Virtual Globe %1"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:948
-#: src/apps/marble-qt/QtMainWindow.cpp:1025
+#: src/apps/marble-qt/QtMainWindow.cpp:953
+#: src/apps/marble-qt/QtMainWindow.cpp:1030
 #, qt-format
 msgctxt "Marble::MainWindow|"
 msgid "Position: %1"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:951
-#: src/apps/marble-qt/QtMainWindow.cpp:1033
+#: src/apps/marble-qt/QtMainWindow.cpp:956
+#: src/apps/marble-qt/QtMainWindow.cpp:1038
 #, qt-format
 msgctxt "Marble::MainWindow|"
 msgid "Altitude: %1"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:954
-#: src/apps/marble-qt/QtMainWindow.cpp:1041
+#: src/apps/marble-qt/QtMainWindow.cpp:959
+#: src/apps/marble-qt/QtMainWindow.cpp:1046
 #, qt-format
 msgctxt "Marble::MainWindow|"
 msgid "Zoom: %1"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:957
-#: src/apps/marble-qt/QtMainWindow.cpp:1049
+#: src/apps/marble-qt/QtMainWindow.cpp:962
+#: src/apps/marble-qt/QtMainWindow.cpp:1054
 #, qt-format
 msgctxt "Marble::MainWindow|"
 msgid "Time: %1"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:989
+#: src/apps/marble-qt/QtMainWindow.cpp:994
 msgctxt "Marble::MainWindow|"
 msgid "All Supported Files"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:995
+#: src/apps/marble-qt/QtMainWindow.cpp:1000
 msgctxt "Marble::MainWindow|"
 msgid "Open File"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:1016
+#: src/apps/marble-qt/QtMainWindow.cpp:1021
 msgctxt "Marble::MainWindow|"
 msgid "&Angle Display Unit"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:1265
+#: src/apps/marble-qt/QtMainWindow.cpp:1270
 msgctxt "Marble::MainWindow|"
 msgid "Unnamed"
 msgstr ""
@@ -5246,72 +5196,72 @@ msgctxt "UiEditBookmarkDialog|"
 msgid "&Add Folder..."
 msgstr ""
 
-#: src/lib/marble/EditPlacemarkDialog.cpp:108
+#: src/lib/marble/EditPlacemarkDialog.cpp:109
 msgctxt "Marble::EditPlacemarkDialog|"
 msgid "Untitled Placemark"
 msgstr ""
 
-#: src/lib/marble/EditPlacemarkDialog.cpp:150
+#: src/lib/marble/EditPlacemarkDialog.cpp:151
 msgctxt "Marble::EditPlacemarkDialog|"
 msgid "Tags"
 msgstr ""
 
-#: src/lib/marble/EditPlacemarkDialog.cpp:156
+#: src/lib/marble/EditPlacemarkDialog.cpp:157
 msgctxt "Marble::EditPlacemarkDialog|"
 msgid "Relations"
 msgstr ""
 
-#: src/lib/marble/EditPlacemarkDialog.cpp:165
+#: src/lib/marble/EditPlacemarkDialog.cpp:166
 msgctxt "Marble::EditPlacemarkDialog|"
 msgid "Elevation"
 msgstr ""
 
-#: src/lib/marble/EditPlacemarkDialog.cpp:355
+#: src/lib/marble/EditPlacemarkDialog.cpp:369
 msgctxt "Marble::EditPlacemarkDialog|"
 msgid "No name specified"
 msgstr ""
 
-#: src/lib/marble/EditPlacemarkDialog.cpp:356
+#: src/lib/marble/EditPlacemarkDialog.cpp:370
 msgctxt "Marble::EditPlacemarkDialog|"
 msgid "Please specify a name for this placemark."
 msgstr ""
 
-#: src/lib/marble/EditPlacemarkDialog.cpp:359
+#: src/lib/marble/EditPlacemarkDialog.cpp:373
 msgctxt "Marble::EditPlacemarkDialog|"
 msgid "No ID specified"
 msgstr ""
 
-#: src/lib/marble/EditPlacemarkDialog.cpp:360
+#: src/lib/marble/EditPlacemarkDialog.cpp:374
 msgctxt "Marble::EditPlacemarkDialog|"
 msgid "Please specify a ID for this placemark."
 msgstr ""
 
-#: src/lib/marble/EditPlacemarkDialog.cpp:363
+#: src/lib/marble/EditPlacemarkDialog.cpp:377
 msgctxt "Marble::EditPlacemarkDialog|"
 msgid "ID is invalid"
 msgstr ""
 
-#: src/lib/marble/EditPlacemarkDialog.cpp:364
+#: src/lib/marble/EditPlacemarkDialog.cpp:378
 msgctxt "Marble::EditPlacemarkDialog|"
 msgid "Please specify a valid ID for this placemark."
 msgstr ""
 
-#: src/lib/marble/EditPlacemarkDialog.cpp:367
+#: src/lib/marble/EditPlacemarkDialog.cpp:381
 msgctxt "Marble::EditPlacemarkDialog|"
 msgid "No image specified"
 msgstr ""
 
-#: src/lib/marble/EditPlacemarkDialog.cpp:368
+#: src/lib/marble/EditPlacemarkDialog.cpp:382
 msgctxt "Marble::EditPlacemarkDialog|"
 msgid "Please specify an icon for this placemark or add a valid tag."
 msgstr ""
 
-#: src/lib/marble/EditPlacemarkDialog.cpp:371
+#: src/lib/marble/EditPlacemarkDialog.cpp:385
 msgctxt "Marble::EditPlacemarkDialog|"
 msgid "Invalid icon path"
 msgstr ""
 
-#: src/lib/marble/EditPlacemarkDialog.cpp:372
+#: src/lib/marble/EditPlacemarkDialog.cpp:386
 msgctxt "Marble::EditPlacemarkDialog|"
 msgid "Please specify a valid path for the icon file."
 msgstr ""
@@ -5499,7 +5449,7 @@ msgctxt "QObject|"
 msgid "View Properties"
 msgstr ""
 
-#: src/lib/marble/FileViewWidget.cpp:144
+#: src/lib/marble/FileViewWidget.cpp:146
 msgctxt "QObject|"
 msgid "Select filename for KML document"
 msgstr ""
@@ -5509,12 +5459,12 @@ msgctxt "FileViewWidget|"
 msgid "File View"
 msgstr ""
 
-#: src/lib/marble/FileViewWidget.ui:66
+#: src/lib/marble/FileViewWidget.ui:78
 msgctxt "FileViewWidget|"
 msgid "&Save"
 msgstr ""
 
-#: src/lib/marble/FileViewWidget.ui:76
+#: src/lib/marble/FileViewWidget.ui:88
 msgctxt "FileViewWidget|"
 msgid "&Close"
 msgstr ""
@@ -7415,87 +7365,87 @@ msgctxt "GeoDataCoordinates|Seconds symbol terms"
 msgid "*"
 msgstr ""
 
-#: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:207
+#: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:211
 msgctxt "GeoLineStringGraphicsItem|"
 msgid "Detour"
 msgstr ""
 
-#: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:208
+#: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:212
 msgctxt "GeoLineStringGraphicsItem|"
 msgid "Ferry Route"
 msgstr ""
 
-#: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:209
+#: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:213
 msgctxt "GeoLineStringGraphicsItem|"
 msgid "Train"
 msgstr ""
 
-#: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:210
+#: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:214
 msgctxt "GeoLineStringGraphicsItem|"
 msgid "Subway"
 msgstr ""
 
-#: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:211
+#: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:215
 msgctxt "GeoLineStringGraphicsItem|"
 msgid "Tram"
 msgstr ""
 
-#: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:212
+#: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:216
 msgctxt "GeoLineStringGraphicsItem|"
 msgid "Bus"
 msgstr ""
 
-#: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:213
+#: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:217
 msgctxt "GeoLineStringGraphicsItem|"
 msgid "Trolley Bus"
 msgstr ""
 
-#: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:214
+#: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:218
 msgctxt "GeoLineStringGraphicsItem|"
 msgid "Bicycle Route"
 msgstr ""
 
-#: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:215
+#: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:219
 msgctxt "GeoLineStringGraphicsItem|"
 msgid "Mountainbike Route"
 msgstr ""
 
-#: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:216
+#: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:220
 msgctxt "GeoLineStringGraphicsItem|"
 msgid "Walking Route"
 msgstr ""
 
-#: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:217
+#: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:221
 msgctxt "GeoLineStringGraphicsItem|"
 msgid "Hiking Route"
 msgstr ""
 
-#: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:218
+#: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:222
 msgctxt "GeoLineStringGraphicsItem|"
 msgid "Bridleway"
 msgstr ""
 
-#: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:219
+#: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:223
 msgctxt "GeoLineStringGraphicsItem|"
 msgid "Inline Skates Route"
 msgstr ""
 
-#: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:220
+#: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:224
 msgctxt "GeoLineStringGraphicsItem|"
 msgid "Downhill Piste"
 msgstr ""
 
-#: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:221
+#: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:225
 msgctxt "GeoLineStringGraphicsItem|"
 msgid "Nordic Ski Trail"
 msgstr ""
 
-#: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:222
+#: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:226
 msgctxt "GeoLineStringGraphicsItem|"
 msgid "Skitour"
 msgstr ""
 
-#: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:223
+#: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:227
 msgctxt "GeoLineStringGraphicsItem|"
 msgid "Sled Trail"
 msgstr ""
@@ -7802,32 +7752,32 @@ msgctxt "Marble::MapViewWidget|"
 msgid "Perspective Globe view"
 msgstr ""
 
-#: src/lib/marble/MapViewWidget.cpp:647
+#: src/lib/marble/MapViewWidget.cpp:650
 msgctxt "Marble::MapViewWidget|"
 msgid "&Show Large Icons"
 msgstr ""
 
-#: src/lib/marble/MapViewWidget.cpp:650
+#: src/lib/marble/MapViewWidget.cpp:653
 msgctxt "Marble::MapViewWidget|"
 msgid "&Favorite"
 msgstr ""
 
-#: src/lib/marble/MapViewWidget.cpp:655
+#: src/lib/marble/MapViewWidget.cpp:658
 msgctxt "Marble::MapViewWidget|"
 msgid "&Create a New Map..."
 msgstr ""
 
-#: src/lib/marble/MapViewWidget.cpp:657
+#: src/lib/marble/MapViewWidget.cpp:660
 msgctxt "Marble::MapViewWidget|"
 msgid "&Delete Map Theme"
 msgstr ""
 
-#: src/lib/marble/MapViewWidget.cpp:664
+#: src/lib/marble/MapViewWidget.cpp:668
 msgctxt "Marble::MapViewWidget|"
 msgid "Marble"
 msgstr ""
 
-#: src/lib/marble/MapViewWidget.cpp:665
+#: src/lib/marble/MapViewWidget.cpp:669
 #, qt-format
 msgctxt "Marble::MapViewWidget|"
 msgid "Are you sure that you want to delete \"%1\"?"
@@ -7898,180 +7848,201 @@ msgctxt "MapViewWidget|"
 msgid "Here you can choose the preferred map view from different topics."
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:130
+#: src/lib/marble/MapWizard.cpp:168
 msgctxt "Marble::PreviewDialog|"
 msgid "Preview Map"
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:239 src/lib/marble/MapWizard.cpp:245
+#: src/lib/marble/MapWizard.cpp:290 src/lib/marble/MapWizard.cpp:295
 msgctxt "Marble::MapWizard|"
 msgid "Error while parsing"
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:239
+#: src/lib/marble/MapWizard.cpp:290
 msgctxt "Marble::MapWizard|"
 msgid "Wizard cannot parse server's response"
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:245
+#: src/lib/marble/MapWizard.cpp:295
 msgctxt "Marble::MapWizard|"
-msgid "Server is not a Web Map Server."
+msgid "Server is not an OWS Server."
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:313
+#: src/lib/marble/MapWizard.cpp:390 src/lib/marble/MapWizard.cpp:407
+#: src/lib/marble/MapWizard.cpp:1140
 msgctxt "Marble::MapWizard|"
-msgid "Custom"
+msgid "Web Mercator (epsg:3857)"
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:496 src/lib/marble/MapWizard.cpp:503
+#: src/lib/marble/MapWizard.cpp:391 src/lib/marble/MapWizard.cpp:842
+#: src/lib/marble/MapWizard.cpp:975
+msgctxt "Marble::MapWizard|"
+msgid "Equirectangular (epsg:4326)"
+msgstr ""
+
+#: src/lib/marble/MapWizard.cpp:392 src/lib/marble/MapWizard.cpp:844
+#: src/lib/marble/MapWizard.cpp:977
+msgctxt "Marble::MapWizard|"
+msgid "Equirectangular (crs:84)"
+msgstr ""
+
+#: src/lib/marble/MapWizard.cpp:403
+msgctxt "Marble::MapWizard|"
+msgid "Tile Projection:"
+msgstr ""
+
+#: src/lib/marble/MapWizard.cpp:419
+msgctxt "Marble::MapWizard|"
+msgid "Tile Matrix Set:"
+msgstr ""
+
+#: src/lib/marble/MapWizard.cpp:463 src/lib/marble/MapWizard.cpp:965
+msgctxt "Marble::MapWizard|"
+msgid "Preview Image"
+msgstr ""
+
+#: src/lib/marble/MapWizard.cpp:467
 msgctxt "Marble::MapWizard|"
 msgid "Base Tile"
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:497
+#: src/lib/marble/MapWizard.cpp:471
 msgctxt "Marble::MapWizard|"
-msgid "The base tile could not be downloaded."
+msgid "Legend Image"
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:504
+#: src/lib/marble/MapWizard.cpp:478 src/lib/marble/MapWizard.cpp:486
+#, qt-format
+msgctxt "Marble::MapWizard|"
+msgid "%1"
+msgstr ""
+
+#: src/lib/marble/MapWizard.cpp:479
+#, qt-format
+msgctxt "Marble::MapWizard|"
+msgid "The %1 could not be downloaded."
+msgstr ""
+
+#: src/lib/marble/MapWizard.cpp:487
 #, qt-format
 msgctxt "Marble::MapWizard|"
 msgid ""
-"The base tile could not be downloaded successfully. The server replied:\n"
+"The %1 could not be downloaded successfully. The server replied:\n"
 "\n"
-"%1"
+"%2"
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:623 src/lib/marble/MapWizard.cpp:626
+#: src/lib/marble/MapWizard.cpp:565 src/lib/marble/MapWizard.cpp:1545
+#: src/lib/marble/MapWizard.cpp:1546 src/lib/marble/MapWizard.cpp:1554
+#: src/lib/marble/MapWizard.cpp:1555
+msgctxt "Marble::MapWizard|"
+msgid "Custom"
+msgstr ""
+
+#: src/lib/marble/MapWizard.cpp:795 src/lib/marble/MapWizard.cpp:798
 msgctxt "Marble::MapWizard|"
 msgid "Archiving failed"
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:623
+#: src/lib/marble/MapWizard.cpp:795
 msgctxt "Marble::MapWizard|"
 msgid "Archiving process cannot be started."
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:626
+#: src/lib/marble/MapWizard.cpp:798
 msgctxt "Marble::MapWizard|"
 msgid "Archiving process crashed."
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:661 src/lib/marble/MapWizard.cpp:669
-#: src/lib/marble/MapWizard.cpp:678
+#: src/lib/marble/MapWizard.cpp:894 src/lib/marble/MapWizard.cpp:902
+#: src/lib/marble/MapWizard.cpp:911
 msgctxt "Marble::MapWizard|"
 msgid "Source Image"
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:662
+#: src/lib/marble/MapWizard.cpp:895
 msgctxt "Marble::MapWizard|"
 msgid "Please specify a source image."
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:670
+#: src/lib/marble/MapWizard.cpp:903
 msgctxt "Marble::MapWizard|"
 msgid ""
 "The source image you specified does not exist. Please specify a different "
 "one."
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:679
+#: src/lib/marble/MapWizard.cpp:912
 msgctxt "Marble::MapWizard|"
 msgid ""
 "The source image you specified does not seem to be an image. Please specify "
 "a different image file."
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:688
+#: src/lib/marble/MapWizard.cpp:942
 msgctxt "Marble::MapWizard|"
 msgid "Map Title"
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:688
+#: src/lib/marble/MapWizard.cpp:942
 msgctxt "Marble::MapWizard|"
 msgid "Please specify a map title."
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:695 src/lib/marble/MapWizard.cpp:703
+#: src/lib/marble/MapWizard.cpp:949 src/lib/marble/MapWizard.cpp:957
 msgctxt "Marble::MapWizard|"
 msgid "Map Name"
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:695
+#: src/lib/marble/MapWizard.cpp:949
 msgctxt "Marble::MapWizard|"
 msgid "Please specify a map name."
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:704
+#: src/lib/marble/MapWizard.cpp:958
 #, qt-format
 msgctxt "Marble::MapWizard|"
 msgid ""
 "Please specify another map name, since there is already a map named \"%1\"."
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:711
-msgctxt "Marble::MapWizard|"
-msgid "Preview Image"
-msgstr ""
-
-#: src/lib/marble/MapWizard.cpp:711
+#: src/lib/marble/MapWizard.cpp:965
 msgctxt "Marble::MapWizard|"
 msgid "Please specify a preview image."
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:895
-msgctxt "Marble::MapWizard|"
-msgid "Geographic Pole"
-msgstr ""
-
-#: src/lib/marble/MapWizard.cpp:901
-msgctxt "Marble::MapWizard|"
-msgid "Magnetic Pole"
-msgstr ""
-
-#: src/lib/marble/MapWizard.cpp:907
-msgctxt "Marble::MapWizard|"
-msgid "Airport"
-msgstr ""
-
-#: src/lib/marble/MapWizard.cpp:913
-msgctxt "Marble::MapWizard|"
-msgid "Shipwreck"
-msgstr ""
-
-#: src/lib/marble/MapWizard.cpp:919
-msgctxt "Marble::MapWizard|"
-msgid "Observatory"
-msgstr ""
-
-#: src/lib/marble/MapWizard.cpp:941
-msgctxt "Marble::MapWizard|"
-msgid "Mountain"
-msgstr ""
-
-#: src/lib/marble/MapWizard.cpp:947
-msgctxt "Marble::MapWizard|"
-msgid "Volcano"
-msgstr ""
-
-#: src/lib/marble/MapWizard.cpp:978
-msgctxt "Marble::MapWizard|"
-msgid "International"
-msgstr ""
-
-#: src/lib/marble/MapWizard.cpp:984
-msgctxt "Marble::MapWizard|"
-msgid "State"
-msgstr ""
-
-#: src/lib/marble/MapWizard.cpp:1088
+#: src/lib/marble/MapWizard.cpp:1484
 msgctxt "Marble::MapWizard|"
 msgid "Problem while creating files"
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:1088
+#: src/lib/marble/MapWizard.cpp:1484
 msgctxt "Marble::MapWizard|"
 msgid "Check if a theme with the same name exists."
+msgstr ""
+
+#: src/lib/marble/MapWizard.cpp:1541
+msgctxt "Marble::MapWizard|"
+msgid "WMS Server"
+msgstr ""
+
+#: src/lib/marble/MapWizard.cpp:1542
+msgctxt "Marble::MapWizard|"
+msgid ""
+"<h4>WMS Server</h4>Please choose a <a href=\"https://en.wikipedia.org/wiki/"
+"Web_Map_Service\">WMS</a> server or enter a custom server URL."
+msgstr ""
+
+#: src/lib/marble/MapWizard.cpp:1550
+msgctxt "Marble::MapWizard|"
+msgid "WMTS Server"
+msgstr ""
+
+#: src/lib/marble/MapWizard.cpp:1551
+msgctxt "Marble::MapWizard|"
+msgid ""
+"<h4>WMTS Server</h4>Please choose a <a href=\"https://de.wikipedia.org/wiki/"
+"Web_Map_Tile_Service\">WMTS</a> server or enter a custom server URL."
 msgstr ""
 
 #: src/lib/marble/MapWizard.ui:20
@@ -8079,7 +8050,7 @@ msgctxt "MapWizard|"
 msgid "Map Theme Creation Wizard"
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:36
+#: src/lib/marble/MapWizard.ui:33
 msgctxt "MapWizard|"
 msgid ""
 "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
@@ -8107,42 +8078,47 @@ msgid ""
 "p></body></html>"
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:57
+#: src/lib/marble/MapWizard.ui:54 src/lib/marble/MapWizard.ui:67
 msgctxt "MapWizard|"
 msgid ""
 "Connects to a server on the Internet. The map data is queried via the WMS "
 "protocol."
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:60
+#: src/lib/marble/MapWizard.ui:57
 msgctxt "MapWizard|"
 msgid "Web Map Service (WMS)"
 msgstr ""
 
 #: src/lib/marble/MapWizard.ui:70
 msgctxt "MapWizard|"
+msgid "Web Map Tile Service (WMTS)"
+msgstr ""
+
+#: src/lib/marble/MapWizard.ui:80
+msgctxt "MapWizard|"
 msgid ""
 "You need to provide a bitmap image of a world map that is stored on disk."
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:73
+#: src/lib/marble/MapWizard.ui:83
 msgctxt "MapWizard|"
 msgid "A single image showing the whole world"
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:80
+#: src/lib/marble/MapWizard.ui:90
 msgctxt "MapWizard|"
 msgid ""
 "Connects to a server on the Internet. The map data is queried via a static "
 "URL."
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:83
+#: src/lib/marble/MapWizard.ui:93
 msgctxt "MapWizard|"
 msgid "Online map providing indexed tiles (e.g. Open Street Map)"
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:94
+#: src/lib/marble/MapWizard.ui:104
 msgctxt "MapWizard|"
 msgid ""
 "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
@@ -8162,32 +8138,148 @@ msgid ""
 "custom server URL.</p></body></html>"
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:124
+#: src/lib/marble/MapWizard.ui:134
 msgctxt "MapWizard|"
 msgid "WMS Server:"
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:135
+#: src/lib/marble/MapWizard.ui:145 src/lib/marble/MapWizard.ui:169
 msgctxt "MapWizard|"
 msgid "Custom"
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:143
+#: src/lib/marble/MapWizard.ui:153
 msgctxt "MapWizard|"
 msgid "URL:"
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:153
+#: src/lib/marble/MapWizard.ui:163
+msgctxt "MapWizard|"
+msgid ""
+"Enter the base Url of the WMS service (e.g. <i>https://www.wms.nrw.de/"
+"geobasis/wms_nw_dop_overlay</i>)"
+msgstr ""
+
+#: src/lib/marble/MapWizard.ui:166 src/lib/marble/MapWizard.ui:465
 msgctxt "MapWizard|"
 msgid "https://"
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:179
+#: src/lib/marble/MapWizard.ui:218
 msgctxt "MapWizard|"
-msgid "Available Maps:"
+msgid "Wms-Service:"
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:196
+#: src/lib/marble/MapWizard.ui:232
+msgctxt "MapWizard|"
+msgid "Layer Selection"
+msgstr ""
+
+#: src/lib/marble/MapWizard.ui:243
+msgctxt "MapWizard|"
+msgid "Choose your Layer(s):"
+msgstr ""
+
+#: src/lib/marble/MapWizard.ui:266
+msgctxt "MapWizard|"
+msgid "Search:"
+msgstr ""
+
+#: src/lib/marble/MapWizard.ui:288
+msgctxt "MapWizard|"
+msgid ""
+"The order in which multiple layers are selected directly affects their "
+"rendering order."
+msgstr ""
+
+#: src/lib/marble/MapWizard.ui:297
+msgctxt "MapWizard|"
+msgid ""
+"Enable this to select multiple layers without keyboard shortcuts (Shift, "
+"Strg, Strg+A, ...)"
+msgstr ""
+
+#: src/lib/marble/MapWizard.ui:300
+msgctxt "MapWizard|"
+msgid "Multiple Selections"
+msgstr ""
+
+#: src/lib/marble/MapWizard.ui:307
+msgctxt "MapWizard|"
+msgid "Custom Backdrop"
+msgstr ""
+
+#: src/lib/marble/MapWizard.ui:314
+msgctxt "MapWizard|"
+msgid "Tile Projection:"
+msgstr ""
+
+#: src/lib/marble/MapWizard.ui:321
+msgctxt "MapWizard|"
+msgid "Indicates the projection in which the tiles are rendered."
+msgstr ""
+
+#: src/lib/marble/MapWizard.ui:344
+msgctxt "MapWizard|"
+msgid "Tile Format:"
+msgstr ""
+
+#: src/lib/marble/MapWizard.ui:351
+msgctxt "MapWizard|"
+msgid "Indicates the file format of the tiles."
+msgstr ""
+
+#: src/lib/marble/MapWizard.ui:383
+msgctxt "MapWizard|"
+msgid "Layer Info"
+msgstr ""
+
+#: src/lib/marble/MapWizard.ui:396
+msgctxt "MapWizard|"
+msgid "Service Info"
+msgstr ""
+
+#: src/lib/marble/MapWizard.ui:406
+msgctxt "MapWizard|"
+msgid "Customize Backdrop"
+msgstr ""
+
+#: src/lib/marble/MapWizard.ui:417
+msgctxt "MapWizard|"
+msgid "Preset Layers"
+msgstr ""
+
+#: src/lib/marble/MapWizard.ui:437
+msgctxt "MapWizard|"
+msgid "OpenStreetMap"
+msgstr ""
+
+#: src/lib/marble/MapWizard.ui:452
+msgctxt "MapWizard|"
+msgid "XYZ Server Url"
+msgstr ""
+
+#: src/lib/marble/MapWizard.ui:462
+msgctxt "MapWizard|"
+msgid "The XYZ server needs to provide map tiles in Mercator projection."
+msgstr ""
+
+#: src/lib/marble/MapWizard.ui:479
+msgctxt "MapWizard|"
+msgid "Color"
+msgstr ""
+
+#: src/lib/marble/MapWizard.ui:498
+msgctxt "MapWizard|"
+msgid "#87CEFA"
+msgstr ""
+
+#: src/lib/marble/MapWizard.ui:511
+msgctxt "MapWizard|"
+msgid "Select Color"
+msgstr ""
+
+#: src/lib/marble/MapWizard.ui:554
 msgctxt "MapWizard|"
 msgid ""
 "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
@@ -8215,17 +8307,17 @@ msgid ""
 "worldmap.svg\" width=\"150\" /></p></body></html>"
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:215
+#: src/lib/marble/MapWizard.ui:573
 msgctxt "MapWizard|"
 msgid "Source Image:"
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:231 src/lib/marble/MapWizard.ui:481
+#: src/lib/marble/MapWizard.ui:589 src/lib/marble/MapWizard.ui:874
 msgctxt "MapWizard|"
 msgid "..."
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:257
+#: src/lib/marble/MapWizard.ui:615
 msgctxt "MapWizard|"
 msgid ""
 "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
@@ -8251,12 +8343,12 @@ msgid ""
 "span></p></body></html>"
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:293
+#: src/lib/marble/MapWizard.ui:651
 msgctxt "MapWizard|"
 msgid "URL Scheme:"
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:332
+#: src/lib/marble/MapWizard.ui:690
 msgctxt "MapWizard|"
 msgid ""
 "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
@@ -8276,37 +8368,37 @@ msgid ""
 "span></p></body></html>"
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:347
+#: src/lib/marble/MapWizard.ui:707
 msgctxt "MapWizard|"
 msgid "Map Title:"
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:360
+#: src/lib/marble/MapWizard.ui:720
 msgctxt "MapWizard|"
 msgid "A short concise name for your map theme."
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:367 src/lib/marble/MapWizard.ui:563
+#: src/lib/marble/MapWizard.ui:727 src/lib/marble/MapWizard.ui:950
 msgctxt "MapWizard|"
 msgid "Map Name:"
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:377
+#: src/lib/marble/MapWizard.ui:737
 msgctxt "MapWizard|"
 msgid "The lowercase map theme id."
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:380
+#: src/lib/marble/MapWizard.ui:740
 msgctxt "MapWizard|"
 msgid "The folder name of your new theme."
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:387
+#: src/lib/marble/MapWizard.ui:753
 msgctxt "MapWizard|"
 msgid "Description:"
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:400
+#: src/lib/marble/MapWizard.ui:772
 msgctxt "MapWizard|"
 msgid ""
 "A short description of your map theme. Here you can provide information "
@@ -8314,57 +8406,37 @@ msgid ""
 "map theme."
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:403
+#: src/lib/marble/MapWizard.ui:775
 msgctxt "MapWizard|"
 msgid "It will appear in a tool tip and may contain HTML formatting."
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:410 src/lib/marble/MapWizard.ui:603
+#: src/lib/marble/MapWizard.ui:788 src/lib/marble/MapWizard.ui:990
 msgctxt "MapWizard|"
 msgid "Preview Image:"
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:436
+#: src/lib/marble/MapWizard.ui:803
 msgctxt "MapWizard|"
 msgid "preview image"
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:443
+#: src/lib/marble/MapWizard.ui:825
 msgctxt "MapWizard|"
 msgid "Change..."
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:471
+#: src/lib/marble/MapWizard.ui:855
+msgctxt "MapWizard|"
+msgid "<b>Optional: Addition of a Map Key</b>"
+msgstr ""
+
+#: src/lib/marble/MapWizard.ui:864
 msgctxt "MapWizard|"
 msgid "Legend Image:"
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:495
-msgctxt "MapWizard|"
-msgid "Places of Interest"
-msgstr ""
-
-#: src/lib/marble/MapWizard.ui:502
-msgctxt "MapWizard|"
-msgid "Populated Places"
-msgstr ""
-
-#: src/lib/marble/MapWizard.ui:509
-msgctxt "MapWizard|"
-msgid "Terrain"
-msgstr ""
-
-#: src/lib/marble/MapWizard.ui:516
-msgctxt "MapWizard|"
-msgid "Coordinate Grid"
-msgstr ""
-
-#: src/lib/marble/MapWizard.ui:523
-msgctxt "MapWizard|"
-msgid "Border Lines"
-msgstr ""
-
-#: src/lib/marble/MapWizard.ui:538
+#: src/lib/marble/MapWizard.ui:925
 msgctxt "MapWizard|"
 msgid ""
 "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
@@ -8391,27 +8463,27 @@ msgid ""
 "p></body></html>"
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:570
+#: src/lib/marble/MapWizard.ui:957
 msgctxt "MapWizard|"
 msgid "Map name goes here."
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:583
+#: src/lib/marble/MapWizard.ui:970
 msgctxt "MapWizard|"
 msgid "Map Theme:"
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:590
+#: src/lib/marble/MapWizard.ui:977
 msgctxt "MapWizard|"
 msgid "Map theme goes here."
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:610
+#: src/lib/marble/MapWizard.ui:1002
 msgctxt "MapWizard|"
-msgid "Thumbnail image goes here."
+msgid "Thumbnail"
 msgstr ""
 
-#: src/lib/marble/MapWizard.ui:622
+#: src/lib/marble/MapWizard.ui:1012
 msgctxt "MapWizard|"
 msgid "Preview Map"
 msgstr ""
