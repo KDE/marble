@@ -1687,7 +1687,7 @@ msgstr "512 مم"
 #. file data/maps/earth/precip-dec/precip-dec.dgml:264
 msgctxt "DGML|"
 msgid "1024 mm or more"
-msgstr "١٠٢٤ مم أو أكثر"
+msgstr "1024 مم أو أكثر"
 
 #. file data/maps/earth/precip-dec/precip-dec.dgml:11
 msgctxt "DGML|"
@@ -4955,12 +4955,12 @@ msgstr "سرداب %1"
 #: src/lib/marble/declarative/Placemark.cpp:436
 msgctxt "Marble::Placemark|Floor level 2, two levels above ground level"
 msgid "Floor 2"
-msgstr "الطابق ٢"
+msgstr "الطابق 2"
 
 #: src/lib/marble/declarative/Placemark.cpp:437
 msgctxt "Marble::Placemark|Floor level 1, one level above ground level"
 msgid "Floor 1"
-msgstr "الطابق ١"
+msgstr "الطابق 1"
 
 #: src/lib/marble/declarative/Placemark.cpp:438
 msgctxt "Marble::Placemark|Floor level 0"
@@ -4970,12 +4970,12 @@ msgstr "الطابق الأرضي"
 #: src/lib/marble/declarative/Placemark.cpp:439
 msgctxt "Marble::Placemark|Floor level -1, one level below ground level"
 msgid "Basement 1"
-msgstr "سرداب ١"
+msgstr "سرداب 1"
 
 #: src/lib/marble/declarative/Placemark.cpp:440
 msgctxt "Marble::Placemark|Floor level -2, two levels below ground level"
 msgid "Basement 2"
-msgstr "سرداب ٢"
+msgstr "سرداب 2"
 
 #: src/lib/marble/declarative/Placemark.cpp:531
 msgctxt "Marble::Placemark|"
