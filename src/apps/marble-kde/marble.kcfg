@@ -281,6 +281,9 @@
   <entry key="wmsServers" type="StringList" >
     <default></default>
   </entry>
+  <entry key="wmtsServers" type="StringList" >
+    <default></default>
+  </entry>
   <entry key="staticUrlServers" type="StringList" >
     <default></default>
   </entry>
