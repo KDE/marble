@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: kdeedu-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-04-26 00:45+0000\n"
-"PO-Revision-Date: 2023-03-24 16:46+0300\n"
+"PO-Revision-Date: 2023-05-24 01:25+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -22,7 +22,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: Lokalize 23.07.70\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -341,7 +341,7 @@ msgstr "Google Summer of Code 2009 Projesi: OSM Açıklama Ekleme"
 #: kdemain.cpp:203
 #, kde-format
 msgid "Google Summer of Code 2009 Project: Online Services"
-msgstr "Google Summer of Code 2009 Projesi: Çevrimiçi Servisler"
+msgstr "Google Summer of Code 2009 Projesi: Çevrimiçi Hizmetler"
 
 #: kdemain.cpp:207
 #, kde-format
@@ -1214,7 +1214,7 @@ msgstr "&Bilgi Kutucukları"
 #: marble_part.rc:42
 #, kde-format
 msgid "&Online Services"
-msgstr "&Çevrimiçi Servisler"
+msgstr "&Çevrimiçi Hizmetler"
 
 #. i18n: ectx: Menu (settings)
 #: marble_part.rc:55 marbleui.rc:31

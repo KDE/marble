@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2023-04-22 12:09+0300\n"
+"PO-Revision-Date: 2023-05-24 01:41+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -21,7 +21,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 23.03.70\n"
+"X-Generator: Lokalize 23.07.70\n"
 "X-Qt-Contexts: true\n"
 
 #. file data/maps/moon/clementine/clementine.dgml:5
@@ -3918,7 +3918,7 @@ msgctxt ""
 "Marble::Placemark|A copy shop provides a professional service to print a "
 "large number of copies of a document"
 msgid "Press printing service"
-msgstr "Baskı hizmeti servisi"
+msgstr "Baskı hizmeti"
 
 #: src/lib/marble/declarative/Placemark.cpp:150
 msgctxt ""
@@ -9773,7 +9773,7 @@ msgid ""
 msgstr ""
 "<p><i>MapQuest</i><br />İndirilerek Marble içinde kullanılan rotaların "
 "bazıları, <a href=\"http://www.mapquest.com/\">MapQuest</a> ve onun Open "
-"Data Map API leri ve Web Servisleri tarafından sağlanmıştır.<br /"
+"Data Map API leri ve web hizmetleri tarafından sağlanmıştır.<br /"
 ">OpenStreetMap verisi üstünde çalışan MapQuest 'in yol tarifleri  <a href="
 "\"http://wiki.openstreetmap.org/index.php/OpenStreetMap_License\">Creative "
 "Commons Attribution-ShareAlike 2.0 license</a> altında özgürce "
@@ -17787,7 +17787,7 @@ msgstr "Henüz bir çevrimdışı harita kurulmamış."
 #: src/plugins/runner/monav/MonavPlugin.cpp:219
 msgctxt "Marble::MonavPlugin|"
 msgid "The monav routing daemon does not seem to be installed on your system."
-msgstr "Monav rotalama uygulaması, sisteminize kurulmuş olarak gözükmüyor."
+msgstr "Monav rotalama ardalan süreci, sisteminizde kurulu görünmüyor."
 
 #: src/plugins/runner/monav/MonavPlugin.cpp:232
 msgctxt "Marble::MonavPlugin|"
@@ -17802,7 +17802,7 @@ msgstr "Monav"
 #: src/plugins/runner/monav/MonavPlugin.cpp:252
 msgctxt "Marble::MonavPlugin|"
 msgid "Offline routing using the monav daemon"
-msgstr "Monav uygulamasını kullanarak çevrimdışı rotalama"
+msgstr "Monav ardalan sürecini kullanarak çevrimdışı rotalama"
 
 #: src/plugins/runner/nominatim-reversegeocoding/NominatimReverseGeocodingPlugin.cpp:22
 msgctxt "Marble::NominatimPlugin|"
