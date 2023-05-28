@@ -4,7 +4,7 @@
 # Niklas Laxström <niklas.laxstrom+kdetrans@gmail.com>, 2007.
 # Lasse Liehu <lasse.liehu@gmail.com>, 2011, 2012, 2013, 2014, 2015, 2016.
 # Jiri Grönroos <jiri.gronroos+kde@iki.fi>, 2010, 2012.
-# Tommi Nieminen <translator@legisign.org>, 2012, 2015, 2021.
+# Tommi Nieminen <translator@legisign.org>, 2012, 2015, 2021, 2023.
 #
 # KDE Finnish translation sprint participants:
 # Author: Artnay
@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2021-10-18 00:13+0000\n"
-"PO-Revision-Date: 2021-11-10 18:24+0200\n"
+"PO-Revision-Date: 2023-05-18 14:07+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
 "Language: fi\n"
@@ -23,7 +23,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-POT-Import-Date: 2012-12-01 22:23:49+0000\n"
-"X-Generator: Lokalize 20.04.2\n"
+"X-Generator: Lokalize 23.04.1\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -863,7 +863,7 @@ msgstr "Korkeus: %1"
 #: marble_part.cpp:104
 #, kde-format
 msgid "Tile Zoom Level: %1"
-msgstr "Tiilen mittakaavataso: %1"
+msgstr "Tiilten mittakaava: %1"
 
 #: marble_part.cpp:105
 #, kde-format
@@ -1147,7 +1147,7 @@ msgstr "Näytä korkeus"
 #, kde-format
 msgctxt "Action for toggling"
 msgid "Show Tile Zoom Level"
-msgstr "Näytä tiilen mittakaavan taso"
+msgstr "Näytä tiilten mittakaavan taso"
 
 #: marble_part.cpp:1296
 #, kde-format
