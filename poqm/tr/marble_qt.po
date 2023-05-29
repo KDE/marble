@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2023-05-24 01:41+0300\n"
+"PO-Revision-Date: 2023-05-28 11:38+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -21,7 +21,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 23.07.70\n"
+"X-Generator: Lokalize 23.04.1\n"
 "X-Qt-Contexts: true\n"
 
 #. file data/maps/moon/clementine/clementine.dgml:5
@@ -412,7 +412,7 @@ msgstr "Gemi Enkazı"
 #. file data/maps/sky/nightsky/nightsky.dgml:154
 msgctxt "DGML|"
 msgid "Astronomical Observatory"
-msgstr "Astronomik Gözlem Evi"
+msgstr "Gökbilimsel Gözlem Evi"
 
 #. file data/maps/earth/temp-july/temp-july.dgml:207
 #. ----------
