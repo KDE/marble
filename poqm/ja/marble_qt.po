@@ -14,7 +14,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: qtrich\n"
 "X-Qt-Contexts: true\n"
@@ -4127,7 +4127,6 @@ msgctxt "Marble::Placemark|"
 msgid "%n rooms"
 msgid_plural "%n rooms"
 msgstr[0] ""
-msgstr[1] ""
 
 #: src/lib/marble/declarative/Placemark.cpp:100
 #, qt-format
@@ -4135,7 +4134,6 @@ msgctxt "Marble::Placemark|"
 msgid "%n beds"
 msgid_plural "%n beds"
 msgstr[0] ""
-msgstr[1] ""
 
 #: src/lib/marble/declarative/Placemark.cpp:105
 #, fuzzy, qt-format
@@ -4613,7 +4611,6 @@ msgctxt "Marble::Placemark|number of seats a bench provides"
 msgid "%n seats"
 msgid_plural "%n seats"
 msgstr[0] ""
-msgstr[1] ""
 
 #: src/lib/marble/declarative/Placemark.cpp:257
 msgctxt "Marble::Placemark|A bench provides a backrest to lean against"
@@ -5576,7 +5573,6 @@ msgctxt "Marble::DownloadRegionDialog|"
 msgid "There is a limit of %n tile(s) to download."
 msgid_plural "There is a limit of %n tile(s) to download."
 msgstr[0] ""
-msgstr[1] ""
 
 #: src/lib/marble/DownloadRegionDialog.cpp:531
 msgctxt "Marble::DownloadRegionDialog|"
@@ -8174,7 +8170,6 @@ msgid "Parsing failed line %1. Still %n unclosed tag(s) after document end. "
 msgid_plural ""
 "Parsing failed line %1. Still %n unclosed tag(s) after document end. "
 msgstr[0] ""
-msgstr[1] ""
 
 #: src/lib/marble/geodata/parser/GeoParser.cpp:124
 #, qt-format
@@ -8241,7 +8236,6 @@ msgctxt "QObject|Number of search results"
 msgid "%n result(s) found."
 msgid_plural "%n result(s) found."
 msgstr[0] ""
-msgstr[1] ""
 
 #: src/lib/marble/GoToDialog.ui:14
 msgctxt "GoTo|"
