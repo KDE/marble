@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2023-05-29 12:58+0300\n"
+"PO-Revision-Date: 2023-06-04 02:02+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -21,7 +21,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 23.04.1\n"
+"X-Generator: Lokalize 23.07.70\n"
 "X-Qt-Contexts: true\n"
 
 #. file data/maps/moon/clementine/clementine.dgml:5
@@ -2683,7 +2683,7 @@ msgstr "&Yazdır..."
 #: src/apps/marble-qt/QtMainWindow.cpp:289
 msgctxt "Marble::MainWindow|"
 msgid "Ctrl+P"
-msgstr "Ctrl+P"
+msgstr "Kontrol+P"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:290
 #: src/apps/marble-qt/QtMainWindow.cpp:294
@@ -2704,7 +2704,7 @@ msgstr "&Çık"
 #: src/apps/marble-qt/QtMainWindow.cpp:298
 msgctxt "Marble::MainWindow|"
 msgid "Ctrl+Q"
-msgstr "Ctrl+Q"
+msgstr "Kontrol+Q"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:299
 msgctxt "Marble::MainWindow|"
@@ -7662,7 +7662,7 @@ msgid ""
 "Enter a search term and press Enter. <a href=\"https://userbase.kde.org/"
 "Marble/Search\">Details...</a>"
 msgstr ""
-"Arama ifadesi girin ve Enter düğmesine basın. <a href=\"https://userbase.kde."
+"Arama ifadesi girin ve Giriş düğmesine basın. <a href=\"https://userbase.kde."
 "org/Marble/Search\">Ayrıntılar...</a>"
 
 #: src/lib/marble/GoToDialog.ui:93
@@ -8381,7 +8381,7 @@ msgid ""
 "Strg, Strg+A, ...)"
 msgstr ""
 "Klavye kısayolları olmadan birden çok katmanı seçmek için bunu etkinleştirin "
-"(Shift, Strg, Strg+A, ...)"
+"(Üst Karakter, Strg, Strg+A, ...)"
 
 #: src/lib/marble/MapWizard.ui:300
 msgctxt "MapWizard|"
