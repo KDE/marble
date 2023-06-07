@@ -7949,9 +7949,9 @@ msgid ""
 "%2"
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:565 src/lib/marble/MapWizard.cpp:1545
-#: src/lib/marble/MapWizard.cpp:1546 src/lib/marble/MapWizard.cpp:1554
-#: src/lib/marble/MapWizard.cpp:1555
+#: src/lib/marble/MapWizard.cpp:565 src/lib/marble/MapWizard.cpp:1549
+#: src/lib/marble/MapWizard.cpp:1550 src/lib/marble/MapWizard.cpp:1558
+#: src/lib/marble/MapWizard.cpp:1559
 msgctxt "Marble::MapWizard|"
 msgid "Custom"
 msgstr "ხელით მითითებული"
@@ -8028,34 +8028,34 @@ msgctxt "Marble::MapWizard|"
 msgid "Please specify a preview image."
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:1484
+#: src/lib/marble/MapWizard.cpp:1488
 msgctxt "Marble::MapWizard|"
 msgid "Problem while creating files"
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:1484
+#: src/lib/marble/MapWizard.cpp:1488
 msgctxt "Marble::MapWizard|"
 msgid "Check if a theme with the same name exists."
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:1541
+#: src/lib/marble/MapWizard.cpp:1545
 msgctxt "Marble::MapWizard|"
 msgid "WMS Server"
 msgstr "WMS სერვერი"
 
-#: src/lib/marble/MapWizard.cpp:1542
+#: src/lib/marble/MapWizard.cpp:1546
 msgctxt "Marble::MapWizard|"
 msgid ""
 "<h4>WMS Server</h4>Please choose a <a href=\"https://en.wikipedia.org/wiki/"
 "Web_Map_Service\">WMS</a> server or enter a custom server URL."
 msgstr ""
 
-#: src/lib/marble/MapWizard.cpp:1550
+#: src/lib/marble/MapWizard.cpp:1554
 msgctxt "Marble::MapWizard|"
 msgid "WMTS Server"
 msgstr "WMS სერვერი"
 
-#: src/lib/marble/MapWizard.cpp:1551
+#: src/lib/marble/MapWizard.cpp:1555
 msgctxt "Marble::MapWizard|"
 msgid ""
 "<h4>WMTS Server</h4>Please choose a <a href=\"https://de.wikipedia.org/wiki/"

@@ -8069,9 +8069,9 @@ msgstr ""
 "\n"
 "%2"
 
-#: src/lib/marble/MapWizard.cpp:565 src/lib/marble/MapWizard.cpp:1545
-#: src/lib/marble/MapWizard.cpp:1546 src/lib/marble/MapWizard.cpp:1554
-#: src/lib/marble/MapWizard.cpp:1555
+#: src/lib/marble/MapWizard.cpp:565 src/lib/marble/MapWizard.cpp:1549
+#: src/lib/marble/MapWizard.cpp:1550 src/lib/marble/MapWizard.cpp:1558
+#: src/lib/marble/MapWizard.cpp:1559
 msgctxt "Marble::MapWizard|"
 msgid "Custom"
 msgstr "Aangepast"
@@ -8152,22 +8152,22 @@ msgctxt "Marble::MapWizard|"
 msgid "Please specify a preview image."
 msgstr "Geef een voorbeeldweergave op."
 
-#: src/lib/marble/MapWizard.cpp:1484
+#: src/lib/marble/MapWizard.cpp:1488
 msgctxt "Marble::MapWizard|"
 msgid "Problem while creating files"
 msgstr "Probleem bij het aanmaken van bestanden"
 
-#: src/lib/marble/MapWizard.cpp:1484
+#: src/lib/marble/MapWizard.cpp:1488
 msgctxt "Marble::MapWizard|"
 msgid "Check if a theme with the same name exists."
 msgstr "Controleer of een thema met dezelfde naam al bestaat."
 
-#: src/lib/marble/MapWizard.cpp:1541
+#: src/lib/marble/MapWizard.cpp:1545
 msgctxt "Marble::MapWizard|"
 msgid "WMS Server"
 msgstr "WMS-server"
 
-#: src/lib/marble/MapWizard.cpp:1542
+#: src/lib/marble/MapWizard.cpp:1546
 msgctxt "Marble::MapWizard|"
 msgid ""
 "<h4>WMS Server</h4>Please choose a <a href=\"https://en.wikipedia.org/wiki/"
@@ -8176,12 +8176,12 @@ msgstr ""
 "<h4>WMS-server</h4>Kies een <a href=\"https://en.wikipedia.org/wiki/"
 "Web_Map_Service\">WMS</a>-server of voer een aangepaste server-URL in."
 
-#: src/lib/marble/MapWizard.cpp:1550
+#: src/lib/marble/MapWizard.cpp:1554
 msgctxt "Marble::MapWizard|"
 msgid "WMTS Server"
 msgstr "WMTS-server"
 
-#: src/lib/marble/MapWizard.cpp:1551
+#: src/lib/marble/MapWizard.cpp:1555
 msgctxt "Marble::MapWizard|"
 msgid ""
 "<h4>WMTS Server</h4>Please choose a <a href=\"https://de.wikipedia.org/wiki/"
