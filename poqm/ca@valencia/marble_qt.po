@@ -12158,12 +12158,12 @@ msgstr "&Elimina"
 #: src/lib/marble/routing/RoutingSettingsWidget.ui:65
 msgctxt "RoutingSettingsWidget|"
 msgid "Move &Up"
-msgstr "Mou am&unt"
+msgstr "Mou cap am&unt"
 
 #: src/lib/marble/routing/RoutingSettingsWidget.ui:75
 msgctxt "RoutingSettingsWidget|"
 msgid "Move &Down"
-msgstr "Mou a&vall"
+msgstr "Mou cap a&vall"
 
 #: src/lib/marble/routing/RoutingWidget.cpp:190
 msgctxt "QObject|"
@@ -12821,12 +12821,12 @@ msgstr "--:--"
 #: src/lib/marble/TourWidget.ui:87 src/lib/marble/TourWidget.ui:90
 msgctxt "TourWidget|"
 msgid "Move up"
-msgstr "Mou amunt"
+msgstr "Mou cap amunt"
 
 #: src/lib/marble/TourWidget.ui:102
 msgctxt "TourWidget|"
 msgid "Move down"
-msgstr "Mou avall"
+msgstr "Mou cap avall"
 
 #: src/lib/marble/TourWidget.ui:114
 msgctxt "TourWidget|"
