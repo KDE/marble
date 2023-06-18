@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
-"PO-Revision-Date: 2023-05-22 14:01\n"
+"PO-Revision-Date: 2023-06-17 04:11\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
 "MIME-Version: 1.0\n"
@@ -13170,7 +13170,7 @@ msgstr "所选区域包含过多的数据。请选择一个较小的区域并重
 #: src/plugins/render/annotate/DownloadOsmDialog.cpp:134
 msgctxt "Marble::DownloadOsmDialog|"
 msgid "The bandwidth limit exceeded. Please try again later."
-msgstr "超出了带宽限制。请稍后再试。"
+msgstr "超出了带宽限制。请稍后重试。"
 
 #: src/plugins/render/annotate/DownloadOsmDialog.cpp:139
 msgctxt "Marble::DownloadOsmDialog|"
