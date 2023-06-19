@@ -1,19 +1,19 @@
 # translation of marble.po to Galician
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
-#
 # Miguel Branco <mgl.branco@gmail.com>, 2008, 2009.
 # mvillarino <mvillarino@users.sourceforge.net>, 2008.
 # Xosé <xosecalvo@gmail.com>, 2009, 2010, 2011, 2012.
 # Marce Villarino <mvillarino@kde-espana.es>, 2011, 2012, 2013, 2014.
 # Adrián Chaves Fernández <adriyetichaves@gmail.com>, 2015.
-# Adrián Chaves (Gallaecio) <adrian@chaves.io>, 2017, 2018, 2019.
+# Adrián Chaves (Gallaecio) <adrian@chaves.io>, 2017, 2018, 2019, 2023.
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-04-26 00:45+0000\n"
-"PO-Revision-Date: 2019-11-17 09:24+0100\n"
+"PO-Revision-Date: 2023-06-18 10:21+0200\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Galician <proxecto@trasno.gal>\n"
 "Language: gl\n"
@@ -21,7 +21,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 20.03.70\n"
+"X-Generator: Lokalize 23.04.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -881,12 +881,13 @@ msgid ""
 "Sorry, unable to open '%1':\n"
 "'%2'"
 msgstr ""
+"Non se pode abrir «%1»:\n"
+"«%2»"
 
 #: marble_part.cpp:168
-#, fuzzy, kde-format
-#| msgid "File not accessible"
+#, kde-format
 msgid "File not readable"
-msgstr "Non é posíbel acceder ao ficheiro"
+msgstr "O ficheiro non é lexíbel."
 
 #: marble_part.cpp:214
 #, kde-format
@@ -914,15 +915,13 @@ msgid "All Supported Files"
 msgstr "Todos os ficheiros admitidos"
 
 #: marble_part.cpp:259
-#, fuzzy, kde-format
-#| msgid "Open File"
+#, kde-format
 msgctxt "@title:window"
 msgid "Open File"
 msgstr "Abrir un ficheiro"
 
 #: marble_part.cpp:276
-#, fuzzy, kde-format
-#| msgid "Export Map"
+#, kde-format
 msgctxt "@title:window"
 msgid "Export Map"
 msgstr "Exportar o mapa"
@@ -1078,12 +1077,10 @@ msgid "Lock globe to the sub-solar point"
 msgstr "Bloquear o globo no punto sub-solar"
 
 #: marble_part.cpp:881
-#, fuzzy, kde-format
-#| msgctxt "Add Bookmark"
-#| msgid "&Add Bookmark"
+#, kde-format
 msgctxt "Add Bookmark"
 msgid "Add &Bookmark..."
-msgstr "Eng&adir un marcador"
+msgstr "Engadir un &marcador…"
 
 #: marble_part.cpp:889
 #, kde-format
@@ -1102,20 +1099,16 @@ msgid "&Set Home Location"
 msgstr "&Estabelecer o lar"
 
 #: marble_part.cpp:905
-#, fuzzy, kde-format
-#| msgctxt "Manage Bookmarks"
-#| msgid "&Manage Bookmarks"
+#, kde-format
 msgctxt "Manage Bookmarks"
 msgid "&Manage Bookmarks..."
-msgstr "Xestionar os &marcadores"
+msgstr "&Xestionar os marcadores…"
 
 #: marble_part.cpp:917
-#, fuzzy, kde-format
-#| msgctxt "Edit the map in an external application"
-#| msgid "&Edit Map"
+#, kde-format
 msgctxt "Edit the map in an external application"
 msgid "&Edit Map..."
-msgstr "&Editar o mapa"
+msgstr "&Editar o mapa…"
 
 #: marble_part.cpp:925
 #, kde-format
@@ -1128,10 +1121,9 @@ msgid "Records a movie of the globe"
 msgstr "Grava un filme do globo terráqueo."
 
 #: marble_part.cpp:933
-#, fuzzy, kde-format
-#| msgid "&Stop recording"
+#, kde-format
 msgid "&Stop Recording"
-msgstr "&Deter a gravación"
+msgstr "Deter a gra&vación"
 
 #: marble_part.cpp:935
 #, kde-format
