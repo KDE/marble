@@ -615,7 +615,7 @@ msgid ""
 "coastlines, country borders etc. and bitmap graphics to create the height "
 "relief.</p>"
 msgstr ""
-"<p>Un <i>mapa topográfico clásico</i>.</p><p>Emprega liñas vectoriais para "
+"<p>Un <i>mapa topográfico clásico</i>.</p><p>Usa liñas vectoriais para "
 "marcar as liñas da costa, as fronteiras dos países, etc. e un gráfico de "
 "mapa de bits para crear o relevo.</p>"
 
@@ -824,7 +824,7 @@ msgid ""
 msgstr ""
 "<p>Un<i>mapa de estradas global</i> creado polo proxecto OpenStreetMap (OSM)."
 "</p> <p>OSM é un proxecto comunitario aberto que crea mapas libres "
-"editábeis. A información OSM foi debuxada empregando Mapnik.</p>"
+"editábeis. A información OSM foi debuxada usando Mapnik.</p>"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:105
 msgctxt "DGML|"
@@ -1564,8 +1564,8 @@ msgid ""
 "<p>A <i>plain map</i>.</p><p>It uses vector lines to mark coastlines and "
 "country borders, etc...</p>"
 msgstr ""
-"<p>Un <i>mapa simple</i>.</p><p>Emprega liñas vectoriais para marcar as "
-"liñas da costa e as fronteiras dos países, etc.</p>"
+"<p>Un <i>mapa simple</i>.</p><p>Usa liñas vectoriais para marcar as liñas da "
+"costa e as fronteiras dos países, etc.</p>"
 
 #. file data/maps/earth/behaim1492/behaim1492.dgml:10
 msgctxt "DGML|"
@@ -2691,8 +2691,8 @@ msgstr "Descargar unha &rexión…"
 msgctxt "Marble::MainWindow|"
 msgid "Download a map region in different zoom levels for offline usage"
 msgstr ""
-"Descargar unha rexión de mapa en diferentes niveis de ampliación para "
-"empregar sen conexión"
+"Descargar unha rexión de mapa en diferentes niveis de ampliación para usar "
+"sen conexión"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:283
 msgctxt "Marble::MainWindow|"
@@ -2788,7 +2788,7 @@ msgstr "&Configurar Marble"
 #: src/apps/marble-qt/QtMainWindow.cpp:323
 msgctxt "Marble::MainWindow|"
 msgid "Show the configuration dialog"
-msgstr "Mostrar o diálogo de configuración"
+msgstr "Amosar o diálogo de configuración"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:326
 msgctxt "Marble::MainWindow|"
@@ -2823,7 +2823,7 @@ msgstr "Mo&strar a barra de estado"
 #: src/apps/marble-qt/QtMainWindow.cpp:338
 msgctxt "Marble::MainWindow|"
 msgid "Show Status Bar"
-msgstr "Mostrar a barra de estado"
+msgstr "Amosar a barra de estado"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:342
 msgctxt "Marble::MainWindow|"
@@ -2843,7 +2843,7 @@ msgstr "&Nubes"
 #: src/apps/marble-qt/QtMainWindow.cpp:349
 msgctxt "Marble::MainWindow|"
 msgid "Show Real Time Cloud Cover"
-msgstr "Mostrar a cobertura das nubes en tempo real"
+msgstr "Amosar a cobertura das nubes en tempo real"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:352
 msgctxt "Marble::MainWindow|"
@@ -2898,7 +2898,7 @@ msgstr "F1"
 #: src/apps/marble-qt/QtMainWindow.cpp:371
 msgctxt "Marble::MainWindow|"
 msgid "Show the Handbook for Marble Virtual Globe"
-msgstr "Mostrar o manual do Globo virtual Marble"
+msgstr "Amosar o manual do Globo virtual Marble"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:374
 msgctxt "Marble::MainWindow|"
@@ -2913,7 +2913,7 @@ msgstr "Maiús+F1"
 #: src/apps/marble-qt/QtMainWindow.cpp:376
 msgctxt "Marble::MainWindow|"
 msgid "Show a detailed explanation of the action."
-msgstr "Mostrar unha explicación detallada da acción."
+msgstr "Amosar unha explicación detallada da acción."
 
 #: src/apps/marble-qt/QtMainWindow.cpp:379
 msgctxt "Marble::MainWindow|"
@@ -2933,7 +2933,7 @@ msgstr "&Sobre o globo terráqueo virtual de Marble"
 #: src/apps/marble-qt/QtMainWindow.cpp:384
 msgctxt "Marble::MainWindow|"
 msgid "Show the application's About Box"
-msgstr "Mostrar o diálogo de «Sobre» desta aplicación"
+msgstr "Amosar o diálogo de «Sobre» desta aplicación"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:387
 msgctxt "Marble::MainWindow|"
@@ -2943,7 +2943,7 @@ msgstr "Sobre &Qt"
 #: src/apps/marble-qt/QtMainWindow.cpp:388
 msgctxt "Marble::MainWindow|"
 msgid "Show the Qt library's About box"
-msgstr "Mostrar o diálogo «Sobre» das bibliotecas de Qt"
+msgstr "Amosar o diálogo «Sobre» das bibliotecas de Qt"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:392
 msgctxt "Marble::MainWindow|"
@@ -2964,17 +2964,17 @@ msgstr "Engadir un marcador"
 #: src/apps/marble-qt/QtMainWindow.cpp:398
 msgctxt "Marble::MainWindow|"
 msgid "&Set Home Location"
-msgstr "&Estabelecer o lar"
+msgstr "&Definir o lar"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:401
 msgctxt "Marble::MainWindow|"
 msgid "Show &Bookmarks"
-msgstr "Mostrar os &marcadores"
+msgstr "Amosar os &marcadores"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:402
 msgctxt "Marble::MainWindow|"
 msgid "Toggle display of Bookmarks"
-msgstr "Conmutar que se mostren os marcadores"
+msgstr "Conmutar que se amosen os marcadores"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:406
 msgctxt "Marble::MainWindow|"
@@ -2999,7 +2999,7 @@ msgstr "Un asistente hache guiar na creación do teu propio tema de mapa."
 #: src/apps/marble-qt/QtMainWindow.cpp:416
 msgctxt "Marble::MainWindow|"
 msgid "Show Tile Zoom Level"
-msgstr "Mostrar o nivel de ampliación do mosaico"
+msgstr "Amosar o nivel de ampliación do mosaico"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:424
 msgctxt "Marble::MainWindow|"
@@ -3235,7 +3235,7 @@ msgstr ""
 #: src/apps/marble-ui/ControlView.cpp:489
 msgctxt "Marble::ControlView|"
 msgid "Please use common sense while navigating."
-msgstr "Por favor, empregue o sentido común cando conduza."
+msgstr "Por favor, use o sentido común cando conduza."
 
 #: src/apps/marble-ui/ControlView.cpp:576
 #, qt-format
@@ -3307,12 +3307,12 @@ msgstr "&Agochar todos os paneis"
 #: src/apps/marble-ui/ControlView.cpp:732
 msgctxt "Marble::ControlView|"
 msgid "Show or hide all panels."
-msgstr "Mostrar ou agochar todos os paneis."
+msgstr "Amosar ou agochar todos os paneis."
 
 #: src/apps/marble-ui/ControlView.cpp:857
 msgctxt "Marble::ControlView|"
 msgid "Show &All Panels"
-msgstr "Mostrar todos os p&aneis"
+msgstr "Amosar todos os p&aneis"
 
 #: src/lib/marble/AbstractFloatItem.cpp:235
 msgctxt "Marble::AbstractFloatItem|"
@@ -3779,7 +3779,7 @@ msgstr "Desactivado"
 #: src/lib/marble/CurrentLocationWidget.ui:53
 msgctxt "CurrentLocationWidget|"
 msgid "Show Track"
-msgstr "Mostrar o traxecto"
+msgstr "Amosar o traxecto"
 
 #: src/lib/marble/CurrentLocationWidget.ui:66
 msgctxt "CurrentLocationWidget|"
@@ -3859,7 +3859,7 @@ msgid ""
 "this data get converted so that it can be used by the current version?"
 msgstr ""
 "Marble atopou datos de mapas almacenados por unha versión anterior de Marble."
-"<br/>Desexa converter estes datos para podelos empregar coa versión actual?"
+"<br/>Desexa converter estes datos para podelos usar coa versión actual?"
 
 #: src/lib/marble/declarative/MarbleQuickItem.cpp:187
 #: src/lib/marble/routing/RoutingManager.cpp:560
@@ -5434,7 +5434,7 @@ msgstr "Descrición"
 #: src/lib/marble/EditPlacemarkDialog.ui:47
 msgctxt "UiEditPlacemarkDialog|"
 msgid "Show Balloon Popup"
-msgstr "Mostrar o globo emerxente"
+msgstr "Amosar o globo emerxente"
 
 #: src/lib/marble/EditPlacemarkDialog.ui:55
 msgctxt "UiEditPlacemarkDialog|"
@@ -5466,7 +5466,7 @@ msgstr "Icona"
 #: src/lib/marble/EditPlacemarkDialog.ui:285
 msgctxt "UiEditPlacemarkDialog|"
 msgid "Show placemark"
-msgstr "Mostrar a marca de lugar"
+msgstr "Amosar a marca de lugar"
 
 #: src/lib/marble/EditPlacemarkDialog.ui:326
 #: src/lib/marble/EditPlacemarkDialog.ui:329
@@ -8261,7 +8261,7 @@ msgstr ""
 "mapa, que poderá ver en Marble.</p>\n"
 "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
 "right:0px; -qt-block-indent:0; text-indent:0px;\">Escolla a fonte que desexe "
-"empregar para os datos do tema do mapa:</p>\n"
+"usar para os datos do tema do mapa:</p>\n"
 "<p style=\"-qt-paragraph-type:empty; margin-top:12px; margin-bottom:12px; "
 "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"></"
 "p></body></html>"
@@ -8467,7 +8467,7 @@ msgstr ""
 "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
 "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
 "family:'Sans Serif';\">Introduza o URL empregado para descargar teselas "
-"individuais. Empregue os substitutos </span><span style=\" font-family:'Sans "
+"individuais. Use os substitutos </span><span style=\" font-family:'Sans "
 "Serif'; font-style:italic;\">{x}</span><span style=\" font-family:'Sans "
 "Serif';\">, </span><span style=\" font-family:'Sans Serif'; font-style:"
 "italic;\">{y}</span><span style=\" font-family:'Sans Serif';\"> e </"
@@ -9008,7 +9008,7 @@ msgid ""
 "Marble </i></p>"
 msgstr ""
 "<p>Marek Hakala, <a href=\"mailto:hakala.marek@gmail.com\">hakala."
-"marek@gmail.com</a><br /> <i>Proxecto: Mostrar eclipses solares e lunares en "
+"marek@gmail.com</a><br /> <i>Proxecto: Amosar eclipses solares e lunares en "
 "Marble.</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:145
@@ -9625,8 +9625,8 @@ msgstr ""
 "<p><i>OpenStreetMap</i><br />Os mapas urbanos usados en Marble descárganse "
 "do Proxecto <a href=\"https://www.openstreetmap.org\">OpenStreetMap</a> "
 "(\"OSM\"). OSM é unha comunidade aberta que crea mapas libres modificábeis. "
-"<i>Licenza</i>: Os datos de OpenStreetMap pódense empregar libremente baixo "
-"os termos da <a href=\"https://wiki.openstreetmap.org/index.php/"
+"<i>Licenza</i>: Os datos de OpenStreetMap pódense usar libremente baixo os "
+"termos da <a href=\"https://wiki.openstreetmap.org/index.php/"
 "OpenStreetMap_License\">licenza Creative Commons Atribución-Compartir igual "
 "2.0</a>.</p>"
 
@@ -9641,9 +9641,9 @@ msgid ""
 msgstr ""
 "<p><i>Iconas</i><br />Algunhas iconas tomáronse de <a href=\"https://www."
 "sjjb.co.uk/mapicons\">SJJB Management</a> e <a href=\"https://thenounproject."
-"com\">NounProject</a>. Estas iconas pódense empregar libremente baixo o "
-"termos da licenza <a href=\"https://creativecommons.org/publicdomain/"
-"zero/1.0/\">CC0 1.0 Universal</a>.</p>"
+"com\">NounProject</a>. Estas iconas pódense usar libremente baixo o termos "
+"da licenza <a href=\"https://creativecommons.org/publicdomain/zero/1.0/"
+"\">CC0 1.0 Universal</a>.</p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:301
 msgctxt "QObject|"
@@ -9654,9 +9654,9 @@ msgid ""
 "a> license.</p>"
 msgstr ""
 "<p>Algunhas iconas tomáronse de <a href=\"https://fortawesome.github.com/"
-"Font-Awesome\">Font Awesome</a>. Estas iconas pódense empregar libremente "
-"baixo o termos da licenza <a href=\"https://creativecommons.org/licenses/"
-"by/3.0/\">CC BY 3.0</a> license.</p>"
+"Font-Awesome\">Font Awesome</a>. Estas iconas pódense usar libremente baixo "
+"o termos da licenza <a href=\"https://creativecommons.org/licenses/by/3.0/"
+"\">CC BY 3.0</a> license.</p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:304
 msgctxt "QObject|"
@@ -9737,9 +9737,9 @@ msgid ""
 "\">Creative Commons Attribution 3.0 license</a>.</p>"
 msgstr ""
 "<p><i>Geonames.org</i><br /><a href=\"https://www.geonames.org/\">https://"
-"www.geonames.org/</a><i>Licenza</i>: Os datos de Geonames.org pódense "
-"empregar libremente baixo os termos da <a href=\"https://creativecommons.org/"
-"licenses/by/3.0/\">licenza Creative Commons Atribución 3.0</a>.</p>"
+"www.geonames.org/</a><i>Licenza</i>: Os datos de Geonames.org pódense usar "
+"libremente baixo os termos da <a href=\"https://creativecommons.org/licenses/"
+"by/3.0/\">licenza Creative Commons Atribución 3.0</a>.</p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:330
 msgctxt "QObject|"
@@ -9976,11 +9976,11 @@ msgstr ""
 "right:0px; -qt-block-indent:0; text-indent:0px;\">Hai dous cachés en uso "
 "para Marble: o de memoria física, que se require para manter a información "
 "de mapas na memoria do computador. Aumentando este valor faise que a "
-"aplicación responda mellor. A memoria no disco duro, que se emprega para "
-"obter contidos de Internet (por exemplo, a información de Wikipedia ou os "
-"datos de mapa). Pode diminuír este valor se quere aforrar espazo no disco e "
-"se lle convén porque non use demasiado os recursos obtidos de Internet.</p></"
-"body></html>"
+"aplicación responda mellor. A memoria no disco duro, que se usa para obter "
+"contidos de Internet (por exemplo, a información de Wikipedia ou os datos de "
+"mapa). Pode diminuír este valor se quere aforrar espazo no disco e se lle "
+"convén porque non use demasiado os recursos obtidos de Internet.</p></body></"
+"html>"
 
 #: src/lib/marble/MarbleCacheSettingsWidget.ui:23
 msgctxt "MarbleCacheSettingsWidget|"
@@ -10263,7 +10263,7 @@ msgstr "Seguir o cursor"
 #: src/lib/marble/MarbleNavigationSettingsWidget.ui:73
 msgctxt "MarbleNavigationSettingsWidget|"
 msgid "Use kinetic spinning when dragging the map"
-msgstr "Empregar o xiro cinético ao arrastrar o mapa"
+msgstr "Usar o xiro cinético ao arrastrar o mapa"
 
 #: src/lib/marble/MarbleNavigationSettingsWidget.ui:76
 msgctxt "MarbleNavigationSettingsWidget|"
@@ -10291,8 +10291,8 @@ msgstr ""
 "weight:400; font-style:normal;\">\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
 "right:0px; -qt-block-indent:0; text-indent:0px;\">Ao buscar un lugar en "
-"Marble pode ou moverse instantaneamente ao lugar ou mostrar unha animación "
-"de viaxe desde un lugar anterior ao novo lugar.</p></body></html>"
+"Marble pode ou moverse instantaneamente ao lugar ou amosar unha animación de "
+"viaxe desde un lugar anterior ao novo lugar.</p></body></html>"
 
 #: src/lib/marble/MarbleNavigationSettingsWidget.ui:89
 msgctxt "MarbleNavigationSettingsWidget|"
@@ -10336,13 +10336,13 @@ msgstr ""
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
 "right:0px; -qt-block-indent:0; text-indent:0px;\">De maneira predeterminada, "
 "Marble mostra a localización do lar inmediatamente tras iniciar a "
-"aplicación. Unha alternativa é que pode mostrar a última posición activa "
+"aplicación. Unha alternativa é que pode amosar a última posición activa "
 "cando o usuario saíu da aplicación.</p></body></html>"
 
 #: src/lib/marble/MarbleNavigationSettingsWidget.ui:159
 msgctxt "MarbleNavigationSettingsWidget|"
 msgid "Show Home Location"
-msgstr "Mostrar a casa"
+msgstr "Amosar a casa"
 
 #: src/lib/marble/MarbleNavigationSettingsWidget.ui:164
 msgctxt "MarbleNavigationSettingsWidget|"
@@ -10769,8 +10769,8 @@ msgstr ""
 "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; font-"
 "weight:400; font-style:normal;\">\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-"right:0px; -qt-block-indent:0; text-indent:0px;\">A unidade que se emprega "
-"para medir altitudes, distancias e lonxitudes (p.ex. km, millas, pés).</p></"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">A unidade que se usa para "
+"medir altitudes, distancias e lonxitudes (p.ex. km, millas, pés).</p></"
 "body></html>"
 
 #: src/lib/marble/MarbleViewSettingsWidget.ui:61
@@ -10926,7 +10926,7 @@ msgstr ""
 "weight:400; font-style:normal;\">\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
 "right:0px; -qt-block-indent:0; text-indent:0px;\">Indica a calidade do mapa "
-"cando se mostran animacións (por exemplo, cando se desprace o globo).</p>\n"
+"cando se amosan animacións (por exemplo, cando se desprace o globo).</p>\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
 "right:0px; -qt-block-indent:0; text-indent:0px;\">Especialmente en "
 "ordenadores lentos, é recomendábel axustar esta opción a «calidade baixa», "
@@ -10963,8 +10963,8 @@ msgstr ""
 "weight:400; font-style:normal;\">\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
 "right:0px; -qt-block-indent:0; text-indent:0px;\">Lugares que habitualmente "
-"teñen nomes diferentes en distintos idiomas. A lenda do mapa pode mostrar o "
-"nome do lugar na lingua nativa do usuario. Tamén pode mostrar o nome no "
+"teñen nomes diferentes en distintos idiomas. A lenda do mapa pode amosar o "
+"nome do lugar na lingua nativa do usuario. Tamén pode amosar o nome no "
 "idioma oficial e co sistema de escrita do lugar.</p></body></html>"
 
 #: src/lib/marble/MarbleViewSettingsWidget.ui:306
@@ -11565,7 +11565,7 @@ msgid ""
 "planetariums.</p>"
 msgstr ""
 "<p><b>Proxección acimutal equidistante</b> (“vista de pez”)</p> "
-"<p>Aplicacións: mostrar datos sísmicos e de raio para usalos en planetarios "
+"<p>Aplicacións: amosar datos sísmicos e de raio para usalos en planetarios "
 "dixitais.</p>"
 
 #: src/lib/marble/projections/EquirectProjection.cpp:35
@@ -11598,7 +11598,7 @@ msgid ""
 "work.</p>"
 msgstr ""
 "<p><b>Proxección gnomónica</b> (\"rectilínea\")</p> <p>Aplicacións: úsase "
-"para mostrar fotografías panorámicas. Tamén se usa para navegación, e "
+"para amosar fotografías panorámicas. Tamén se usa para navegación, e "
 "traballo de raio e seísmico.</p>"
 
 #: src/lib/marble/projections/LambertAzimuthalProjection.cpp:62
@@ -11645,7 +11645,7 @@ msgid ""
 "it appears from outer space.</p>"
 msgstr ""
 "<p><b>Proxección ortográfica</b> (\"ortogonal\")</p> <p>Aplicacións: unha "
-"proxección de perspectiva que se usa para mostrar o hemisferio dun globo "
+"proxección de perspectiva que se usa para amosar o hemisferio dun globo "
 "terráqueo tal e como se vería desde o espazo.</p>"
 
 #: src/lib/marble/projections/StereographicProjection.cpp:62
@@ -12029,7 +12029,7 @@ msgstr ""
 #: src/lib/marble/routing/RoutingManager.cpp:515
 msgctxt "Marble::RoutingManager|"
 msgid "Please use common sense while navigating."
-msgstr "Por favor, empregue o sentido común cando conduza."
+msgstr "Por favor, use o sentido común cando conduza."
 
 #: src/lib/marble/routing/RoutingManager.cpp:516
 msgctxt "Marble::RoutingManager|"
@@ -12046,7 +12046,7 @@ msgstr "Modo de guía"
 #: src/lib/marble/routing/RoutingManager.cpp:518
 msgctxt "Marble::RoutingManager|"
 msgid "Show again"
-msgstr "Mostrar de novo"
+msgstr "Amosar de novo"
 
 #: src/lib/marble/routing/RoutingProfileSettingsDialog.ui:14
 msgctxt "RoutingProfileSettingsDialog|"
@@ -12290,7 +12290,7 @@ msgstr "Sen resultados."
 #: src/lib/marble/routing/RoutingWidget.ui:113
 msgctxt "RoutingWidget|"
 msgid "Show Details"
-msgstr "Mostrar os detalles"
+msgstr "Amosar os detalles"
 
 #: src/lib/marble/routing/RoutingWidget.ui:149
 msgctxt "RoutingWidget|"
@@ -12392,7 +12392,7 @@ msgid ""
 "Display <a href=\"https://en.wikipedia.org/wiki/Subsolar_point\">Subsolar "
 "Point</a> icon"
 msgstr ""
-"Mostrar a icona do <a href=\"https://en.wikipedia.org/wiki/Subsolar_point"
+"Amosar a icona do <a href=\"https://en.wikipedia.org/wiki/Subsolar_point"
 "\">punto subsolar</a>"
 
 #: src/lib/marble/SunControlWidget.ui:131
@@ -13550,7 +13550,7 @@ msgstr "10"
 #: src/plugins/render/aprs/AprsConfigWidget.ui:62
 msgctxt "AprsConfigWidget|"
 msgid "Do not show data older than (minutes)"
-msgstr "Non mostrar os datos que teñan máis de (minutos)"
+msgstr "Non amosar os datos que teñan máis de (minutos)"
 
 #: src/plugins/render/aprs/AprsConfigWidget.ui:79
 msgctxt "AprsConfigWidget|"
@@ -13876,7 +13876,7 @@ msgstr "Navegador de eclipses"
 #: src/plugins/render/eclipses/EclipsesBrowserDialog.ui:35
 msgctxt "EclipsesBrowserDialog|"
 msgid "Show eclipses for year:"
-msgstr "Mostrar os eclipses do ano:"
+msgstr "Amosar os eclipses do ano:"
 
 #: src/plugins/render/eclipses/EclipsesBrowserDialog.ui:104
 msgctxt "EclipsesBrowserDialog|"
@@ -13916,7 +13916,7 @@ msgstr "Activar os eclipses da &Lúa."
 #: src/plugins/render/eclipses/EclipsesConfigDialog.ui:55
 msgctxt "EclipsesConfigDialog|"
 msgid "Show Eclipse Control &Widget"
-msgstr "Mostrar o trebello de control de eclipses."
+msgstr "Amosar o trebello de control de eclipses."
 
 #: src/plugins/render/eclipses/EclipsesConfigDialog.ui:65
 msgctxt "EclipsesConfigDialog|"
@@ -14389,7 +14389,7 @@ msgstr "Lendas con &nome"
 #: src/plugins/render/graticule/GraticuleConfigWidget.ui:1408
 msgctxt "GraticuleConfigWidget|"
 msgid "Show Labels for Prime meridian, Equator, Tropics."
-msgstr "Mostrar as lendas de Meridiano primario, Ecuador, Trópicos."
+msgstr "Amosar as lendas de Meridiano primario, Ecuador, Trópicos."
 
 #: src/plugins/render/graticule/GraticuleConfigWidget.ui:1415
 msgctxt "GraticuleConfigWidget|"
@@ -14399,7 +14399,7 @@ msgstr "Lendas &numéricas"
 #: src/plugins/render/graticule/GraticuleConfigWidget.ui:1425
 msgctxt "GraticuleConfigWidget|"
 msgid "Show numerical Labels."
-msgstr "Mostrar lendas numéricas."
+msgstr "Amosar lendas numéricas."
 
 #: src/plugins/render/graticule/GraticulePlugin.cpp:71
 msgctxt "Marble::GraticulePlugin|"
@@ -14499,7 +14499,7 @@ msgstr "Configurar o complemento Barra de Escala"
 #: src/plugins/render/mapscale/MapScaleConfigWidget.ui:20
 msgctxt "MapScaleConfigWidget|"
 msgid "Show Ratio Scale"
-msgstr "Mostrar a escala de proporcións"
+msgstr "Amosar a escala de proporcións"
 
 #: src/plugins/render/mapscale/MapScaleConfigWidget.ui:30
 msgctxt "MapScaleConfigWidget|"
@@ -14775,7 +14775,7 @@ msgstr "Notas de cartógrafo de OSM"
 #: src/plugins/render/notes/NotesPlugin.cpp:65
 msgctxt "Marble::NotesPlugin|"
 msgid "Display OpenStreetMap Mapper Notes."
-msgstr "Mostrar as notas de cartógrafo de OpenStreetMap."
+msgstr "Amosar as notas de cartógrafo de OpenStreetMap."
 
 #: src/plugins/render/opencaching/OpenCachingCacheDialog.ui:14
 msgctxt "OpenCachingCacheDialog|"
@@ -15675,7 +15675,7 @@ msgstr "Non hai información dispoñíbel."
 #: src/plugins/render/satellites/SatellitesPlugin.cpp:43
 msgctxt "Marble::SatellitesPlugin|"
 msgid "Display orbit"
-msgstr "Mostrar a órbita"
+msgstr "Amosar a órbita"
 
 #: src/plugins/render/satellites/SatellitesPlugin.cpp:47
 msgctxt "Marble::SatellitesPlugin|"
@@ -16170,22 +16170,22 @@ msgstr "Sol"
 #: src/plugins/render/stars/StarsPlugin.cpp:1442
 msgctxt "Marble::StarsPlugin|"
 msgid "Show &Constellations"
-msgstr "Mostrar as &constelacións"
+msgstr "Amosar as &constelacións"
 
 #: src/plugins/render/stars/StarsPlugin.cpp:1446
 msgctxt "Marble::StarsPlugin|"
 msgid "Show &Sun and Moon"
-msgstr "Mostrar o &Sol e a Lúa"
+msgstr "Amosar o &Sol e a Lúa"
 
 #: src/plugins/render/stars/StarsPlugin.cpp:1450
 msgctxt "Marble::StarsPlugin|"
 msgid "Show &Planets"
-msgstr "Mostrar os &planetas"
+msgstr "Amosar os &planetas"
 
 #: src/plugins/render/stars/StarsPlugin.cpp:1454
 msgctxt "Marble::StarsPlugin|"
 msgid "Show &Deep Sky Objects"
-msgstr "Mostrar os obxectos afasta&dos"
+msgstr "Amosar os obxectos afasta&dos"
 
 #: src/plugins/render/stars/StarsPlugin.cpp:1459
 msgctxt "Marble::StarsPlugin|"
@@ -16216,7 +16216,7 @@ msgstr "&twitter"
 #: src/plugins/render/twitter/twitterPlugin.cpp:55
 msgctxt "Marble::twitterPlugin|"
 msgid "show public twitts in their places"
-msgstr "mostrar chíos públicos nos seus lugares"
+msgstr "amosar chíos públicos nos seus lugares"
 
 #: src/plugins/render/weather/BBCParser.cpp:243
 msgctxt "QObject|"
@@ -16275,7 +16275,7 @@ msgstr ""
 "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; font-"
 "weight:400; font-style:normal;\"><p style=\" margin-top:0px; margin-"
 "bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-"
-"indent:0px;\">Aquí pódese escoller se se quere que se mostren as condicións "
+"indent:0px;\">Aquí pódese escoller se se quere que se amosen as condicións "
 "atmosféricas (por exemplo, nubes ou ceo despexado). Marble só mostra a "
 "condición cando esta información estiver dispoñíbel.</p></body></html>\n"
 
@@ -16301,7 +16301,7 @@ msgstr ""
 "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; font-"
 "weight:400; font-style:normal;\"><p style=\" margin-top:0px; margin-"
 "bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-"
-"indent:0px;\">Selecciona se se quere que se mostre a temperatura. A "
+"indent:0px;\">Selecciona se se quere que se amose a temperatura. A "
 "temperatura só se mostra para as estacións para as que estiver dispoñíbel.</"
 "p></body></html>\n"
 
@@ -16328,7 +16328,7 @@ msgstr ""
 "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; font-"
 "weight:400; font-style:normal;\"><p style=\" margin-top:0px; margin-"
 "bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-"
-"indent:0px;\">Seleccione se quere que se mostre a dirección do vento. A "
+"indent:0px;\">Seleccione se quere que se amose a dirección do vento. A "
 "dirección do vento só se mostra se estiver dispoñíbel para a estación "
 "concreta.</p></body></html>\n"
 
@@ -16354,7 +16354,7 @@ msgstr ""
 "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; font-"
 "weight:400; font-style:normal;\"><p style=\" margin-top:0px; margin-"
 "bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-"
-"indent:0px;\">Seleccione se quere que se mostre a velocidade do vento. A "
+"indent:0px;\">Seleccione se quere que se amose a velocidade do vento. A "
 "velocidade do vento só se mostra se estiver dispoñíbel para a estación "
 "concreta</p></body></html>\n"
 
@@ -16499,7 +16499,7 @@ msgstr "Diversos"
 #: src/plugins/render/weather/WeatherConfigWidget.ui:208
 msgctxt "WeatherConfigWidget|"
 msgid "Show only favorite items"
-msgstr "Mostrar só os elementos favoritos"
+msgstr "Amosar só os elementos favoritos"
 
 #: src/plugins/render/weather/WeatherConfigWidget.ui:217
 msgctxt "WeatherConfigWidget|"
@@ -16934,7 +16934,7 @@ msgid ""
 "Automatically downloads Wikipedia articles and shows them on the right "
 "position on the map"
 msgstr ""
-"Descarga automaticamente artigos de Wikipedia e móstraos na posición dereita "
+"Descarga automaticamente artigos de Wikipedia e amósaos na posición dereita "
 "do mapa"
 
 #: src/plugins/render/wikipedia/WikipediaPlugin.cpp:103
@@ -17570,7 +17570,7 @@ msgstr "MapQuest"
 #: src/plugins/runner/mapquest/MapQuestPlugin.cpp:44
 msgctxt "Marble::MapQuestPlugin|"
 msgid "Worldwide routing using mapquest.org"
-msgstr "Indicacións por todo o mundo empregando mapquest.org"
+msgstr "Indicacións por todo o mundo usando mapquest.org"
 
 #: src/plugins/runner/mapquest/MapQuestPlugin.cpp:75
 msgctxt "Marble::MapQuestConfigWidget|"
@@ -17822,7 +17822,7 @@ msgstr "OSRM"
 #: src/plugins/runner/open-source-routing-machine/OSRMPlugin.cpp:42
 msgctxt "Marble::OSRMPlugin|"
 msgid "Worldwide routing using project-osrm.org"
-msgstr "Indicacións por todo o mundo empregando project-osrm.org."
+msgstr "Indicacións por todo o mundo usando project-osrm.org."
 
 #: src/plugins/runner/openlocation-code-search/OpenLocationCodeSearchPlugin.cpp:19
 msgctxt "Marble::OpenLocationCodeSearchPlugin|"
@@ -17881,7 +17881,7 @@ msgstr "OpenRouteService"
 #: src/plugins/runner/openrouteservice/OpenRouteServicePlugin.cpp:44
 msgctxt "Marble::OpenRouteServicePlugin|"
 msgid "Routing in Europe using openrouteservice.org"
-msgstr "Obter indicacións en Europa empregando openrouteservice.org."
+msgstr "Obter indicacións en Europa usando openrouteservice.org."
 
 #: src/plugins/runner/openrouteservice/OpenRouteServicePlugin.cpp:75
 msgctxt "Marble::OpenRouteServiceConfigWidget|"
@@ -18126,7 +18126,7 @@ msgstr "Yours"
 #: src/plugins/runner/yours/YoursPlugin.cpp:45
 msgctxt "Marble::YoursPlugin|"
 msgid "Worldwide routing using a YOURS server"
-msgstr "Indicacións por todo o mundo empregando un servidor YOURS."
+msgstr "Indicacións por todo o mundo usando un servidor YOURS."
 
 #: src/plugins/runner/yours/YoursPlugin.cpp:75
 msgctxt "Marble::YoursConfigWidget|"

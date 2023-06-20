@@ -30,9 +30,9 @@ msgstr ""
 #: plasmarunner.cpp:58
 #, kde-format
 msgid "Show the coordinates %1 in OpenStreetMap with Marble"
-msgstr "Mostrar as coordenadas %1 en OpenStreetMap con Marble."
+msgstr "Amosar as coordenadas %1 en OpenStreetMap con Marble."
 
 #: plasmarunner.cpp:124
 #, kde-format
 msgid "Show in OpenStreetMap with Marble"
-msgstr "Mostrar en OpenStreetMap con Marble."
+msgstr "Amosar en OpenStreetMap con Marble."
