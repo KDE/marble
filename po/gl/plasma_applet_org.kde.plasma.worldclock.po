@@ -64,7 +64,7 @@ msgstr "Lonxitude:"
 #: package/contents/ui/configMapDisplay.qml:99
 #, kde-format
 msgid "Show date:"
-msgstr "Mostrar a data:"
+msgstr "Amosar a data:"
 
 #: package/contents/ui/configTimeZones.qml:17
 #, kde-format

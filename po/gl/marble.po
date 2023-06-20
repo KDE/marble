@@ -639,7 +639,7 @@ msgstr "Activar a saída para depuración"
 #: kdemain.cpp:329
 #, kde-format
 msgid "Display OSM placemarks according to the level selected"
-msgstr "Mostrar marcas de lugar de OSM de acordo co nivel seleccionado"
+msgstr "Amosar marcas de lugar de OSM de acordo co nivel seleccionado"
 
 #: kdemain.cpp:331
 #, kde-format
@@ -649,53 +649,52 @@ msgstr "Facer unha comprobación de tempo para comprobar o rendemento"
 #: kdemain.cpp:333
 #, kde-format
 msgid "Show frame rate"
-msgstr "Mostrar a taxa de fotogramas"
+msgstr "Amosar a taxa de fotogramas"
 
 #: kdemain.cpp:335
 #, kde-format
 msgid "Show tile IDs"
-msgstr "Mostrar os identificadores dos mosaicos"
+msgstr "Amosar os identificadores dos mosaicos"
 
 #: kdemain.cpp:337
 #, kde-format
 msgid "Show time spent in each layer"
-msgstr "Mostrar o tempo botado en cada capa"
+msgstr "Amosar o tempo botado en cada capa"
 
 #: kdemain.cpp:339
 #, kde-format
 msgid "Use a different directory <directory> which contains map data."
-msgstr ""
-"Empregar un directorio distinto (<directory>) que conteña datos de mapas."
+msgstr "Usar un directorio distinto (<directory>) que conteña datos de mapas."
 
 #: kdemain.cpp:341
 #, kde-format
 msgid "Do not use the interface optimized for small screens"
-msgstr "Non empregar a interface optimizada para pantallas pequenas"
+msgstr "Non usar a interface optimizada para pantallas pequenas"
 
 #: kdemain.cpp:342
 #, kde-format
 msgid "Use the interface optimized for small screens"
-msgstr "Empregar a interface optimizada para pantallas pequenas"
+msgstr "Usar a interface optimizada para pantallas pequenas"
 
 #: kdemain.cpp:344
 #, kde-format
 msgid "Do not use the interface optimized for high resolutions"
-msgstr "Non empregar a interface optimizada para resolucións altas"
+msgstr "Non usar a interface optimizada para resolucións altas"
 
 #: kdemain.cpp:345
 #, kde-format
 msgid "Use the interface optimized for high resolutions"
-msgstr "Empregar a interface optimizada para resolucións altas"
+msgstr "Usar a interface optimizada para resolucións altas"
 
 #: kdemain.cpp:347
 #, kde-format
 msgid "Show map at given lat lon <coordinates>"
-msgstr "Mostrar o mapa nas coordenadas de latitude e lonxitude <coordinates>."
+msgstr "Amosar o mapa nas coordenadas de latitude e lonxitude <coordinates>."
 
 #: kdemain.cpp:349
 #, kde-format
 msgid "Show map at given geo <uri>"
-msgstr "Mostrar o mapa no xeo-URI indicado (<uri>)."
+msgstr "Amosar o mapa no xeo-URI indicado (<uri>)."
 
 #: kdemain.cpp:351
 #, kde-format
@@ -706,7 +705,7 @@ msgstr "Indicar a distancia do observador ao globo (en km)"
 #, kde-format
 msgid "Use map <id> (e.g. \"earth/openstreetmap/openstreetmap.dgml\")"
 msgstr ""
-"Empregar o identificador (<id>) do mapa (p.ex. «earth/openstreetmap/"
+"Usar o identificador (<id>) do mapa (p.ex. «earth/openstreetmap/"
 "openstreetmap.dgml»)."
 
 #: kdemain.cpp:355
@@ -802,8 +801,7 @@ msgstr "Memoria física reservada en caché para os mosaicos."
 #: marble.kcfg:217
 #, kde-format
 msgid "Maximum space on the hard disk that can be used to store tiles."
-msgstr ""
-"Espazo máximo no disco duro que pode empregarse para almacenar mosaicos."
+msgstr "Espazo máximo no disco duro que pode usarse para almacenar mosaicos."
 
 #. i18n: ectx: label, entry (proxyUrl), group (Cache)
 #: marble.kcfg:223
@@ -1034,7 +1032,7 @@ msgstr "Bloquear a posición"
 #: marble_part.cpp:847
 #, kde-format
 msgid "Show Shadow"
-msgstr "Mostrar a sombra"
+msgstr "Amosar a sombra"
 
 #: marble_part.cpp:850
 #, kde-format
@@ -1049,7 +1047,7 @@ msgstr "Mostra e agocha a sombra do sol"
 #: marble_part.cpp:855
 #, kde-format
 msgid "Show sun icon on the Sub-Solar Point"
-msgstr "Mostrar a icona do sol no punto sub-solar"
+msgstr "Amosar a icona do sol no punto sub-solar"
 
 #: marble_part.cpp:857
 #, kde-format
@@ -1059,7 +1057,7 @@ msgstr "Agochar a icona do sol no punto sub-solar"
 #: marble_part.cpp:858
 #, kde-format
 msgid "Show sun icon on the sub-solar point"
-msgstr "Mostrar a icona do sol no punto sub-solar"
+msgstr "Amosar a icona do sol no punto sub-solar"
 
 #: marble_part.cpp:863
 #, kde-format
@@ -1086,17 +1084,17 @@ msgstr "Engadir un &marcador…"
 #, kde-format
 msgctxt "Show Bookmarks"
 msgid "Show &Bookmarks"
-msgstr "Mostrar os &marcadores"
+msgstr "Amosar os &marcadores"
 
 #: marble_part.cpp:890
 #, kde-format
 msgid "Show or hide bookmarks in the map"
-msgstr "Mostrar ou agochar marcadores no mapa."
+msgstr "Amosar ou agochar marcadores no mapa."
 
 #: marble_part.cpp:898
 #, kde-format
 msgid "&Set Home Location"
-msgstr "&Estabelecer o lar"
+msgstr "&Definir o lar"
 
 #: marble_part.cpp:905
 #, kde-format
@@ -1134,31 +1132,31 @@ msgstr "Detén a gravación do filme do globo terráqueo."
 #, kde-format
 msgctxt "Action for toggling"
 msgid "Show Position"
-msgstr "Mostrar a posición"
+msgstr "Amosar a posición"
 
 #: marble_part.cpp:1289
 #, kde-format
 msgctxt "Action for toggling"
 msgid "Show Date and Time"
-msgstr "Mostrar o día e a hora"
+msgstr "Amosar o día e a hora"
 
 #: marble_part.cpp:1291
 #, kde-format
 msgctxt "Action for toggling"
 msgid "Show Altitude"
-msgstr "Mostrar a altitude"
+msgstr "Amosar a altitude"
 
 #: marble_part.cpp:1294
 #, kde-format
 msgctxt "Action for toggling"
 msgid "Show Tile Zoom Level"
-msgstr "Mostrar o nivel de ampliación do mosaico"
+msgstr "Amosar o nivel de ampliación do mosaico"
 
 #: marble_part.cpp:1296
 #, kde-format
 msgctxt "Action for toggling"
 msgid "Show Download Progress Bar"
-msgstr "Mostrar a barra da evolución da descarga"
+msgstr "Amosar a barra da evolución da descarga"
 
 #: marble_part.cpp:1393
 #, kde-format
