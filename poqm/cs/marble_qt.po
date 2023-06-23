@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: marble_qt\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2023-04-26 11:27+0200\n"
+"PO-Revision-Date: 2023-06-22 14:54+0200\n"
 "Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
 "Language: cs\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Lokalize 23.04.0\n"
+"X-Generator: Lokalize 23.04.2\n"
 "X-Qt-Contexts: true\n"
 
 #. file data/maps/moon/clementine/clementine.dgml:5
@@ -814,7 +814,7 @@ msgid ""
 msgstr ""
 "<p><i>Celosvětová mapa cest</i> vytvořená v rámci projektu OpenStreetMap "
 "(OSM).</p><p>OSM je otevřená komunita vytvářející bezplatné, dále "
-"upravovatelné mapy. Data OSM byla vykreslena s využitím aplikace Mapnik.</p>"
+"upravitelné mapy. Data OSM byla vykreslena s využitím aplikace Mapnik.</p>"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:105
 msgctxt "DGML|"
@@ -2526,7 +2526,7 @@ msgstr "Tramvaj"
 #: src/apps/marble-maps/PublicTransport.qml:36
 msgctxt "PublicTransport|"
 msgid "Bus"
-msgstr "Autombus"
+msgstr "Autobus"
 
 #: src/apps/marble-maps/PublicTransport.qml:41
 msgctxt "PublicTransport|"
@@ -6640,7 +6640,7 @@ msgstr "Obchod"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:516
 msgctxt "GeoDataPlacemark|"
 msgid "Bridge"
-msgstr "Bridge"
+msgstr "Most"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:517
 msgctxt "GeoDataPlacemark|"
