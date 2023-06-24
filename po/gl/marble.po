@@ -807,13 +807,13 @@ msgstr "Espazo máximo no disco duro que pode usarse para almacenar mosaicos."
 #: marble.kcfg:223
 #, kde-format
 msgid "URL for the proxy server."
-msgstr "URL do servidor de proxy."
+msgstr "URL do servidor de mandatario."
 
 #. i18n: ectx: label, entry, group (Cache)
 #: marble.kcfg:227
 #, kde-format
 msgid "Port for the proxy server."
-msgstr "Porto do servidor de proxy."
+msgstr "Porto do servidor de mandatario."
 
 #. i18n: ectx: label, entry (proxyUser), group (Cache)
 #: marble.kcfg:233
@@ -831,19 +831,19 @@ msgstr "Contrasinal para a autorización."
 #: marble.kcfg:239
 #, kde-format
 msgid "Proxy type is HTTP"
-msgstr "O tipo de proxy é HTTP"
+msgstr "O tipo de mandatario é HTTP"
 
 #. i18n: ectx: label, entry (proxySocks5), group (Cache)
 #: marble.kcfg:250
 #, kde-format
 msgid "Proxy type is Socks5"
-msgstr "O tipo de proxy é Socks5"
+msgstr "O tipo de mandatario é Socks5"
 
 #. i18n: ectx: label, entry (proxyAuth), group (Cache)
 #: marble.kcfg:254
 #, kde-format
 msgid "Proxy requires Authentication"
-msgstr "O proxy require autenticación"
+msgstr "O mandatario require autenticación"
 
 #. i18n: ectx: label, entry (activePositionTrackingPlugin), group (Plugins)
 #: marble.kcfg:260
@@ -1042,7 +1042,7 @@ msgstr "Agochar a sombra"
 #: marble_part.cpp:851
 #, kde-format
 msgid "Shows and hides the shadow of the sun"
-msgstr "Mostra e agocha a sombra do sol"
+msgstr "Amosa e agocha a sombra do sol"
 
 #: marble_part.cpp:855
 #, kde-format

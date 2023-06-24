@@ -10141,7 +10141,7 @@ msgstr "P&orto:"
 #: src/lib/marble/MarbleCacheSettingsWidget.ui:256
 msgctxt "MarbleCacheSettingsWidget|"
 msgid "Proxy type:"
-msgstr "Tipo de proxy:"
+msgstr "Tipo de mandatario:"
 
 #: src/lib/marble/MarbleCacheSettingsWidget.ui:264
 msgctxt "MarbleCacheSettingsWidget|"
@@ -13769,7 +13769,7 @@ msgstr "&Atmosfera"
 #: src/plugins/render/atmosphere/AtmospherePlugin.cpp:80
 msgctxt "Marble::AtmospherePlugin|"
 msgid "Shows the atmosphere around the earth."
-msgstr "Mostra a atmosfera arredor da Terra."
+msgstr "Amosa a atmosfera arredor da Terra."
 
 #: src/plugins/render/compass/CompassConfigWidget.ui:14
 msgctxt "CompassConfigWidget|"
@@ -13949,7 +13949,7 @@ msgstr "T&erremotos"
 #: src/plugins/render/earthquake/EarthquakePlugin.cpp:74
 msgctxt "Marble::EarthquakePlugin|"
 msgid "Shows earthquakes on the map."
-msgstr "Mostra os terremotos no mapa."
+msgstr "Amosa os terremotos no mapa."
 
 #: src/plugins/render/eclipses/EclipsesBrowserDialog.ui:14
 msgctxt "EclipsesBrowserDialog|"
@@ -14352,7 +14352,7 @@ msgstr "&Lugares"
 #: src/plugins/render/foursquare/FoursquarePlugin.cpp:55
 msgctxt "Marble::FoursquarePlugin|"
 msgid "Displays trending Foursquare places"
-msgstr "Mostra lugares de moda do Foursquare"
+msgstr "Amosa lugares de moda do Foursquare"
 
 #: src/plugins/render/gpsinfo/GpsInfo.cpp:49
 msgctxt "Marble::GpsInfo|"
@@ -15060,7 +15060,7 @@ msgstr "&OpenCaching"
 #: src/plugins/render/opencaching/OpenCachingPlugin.cpp:56
 msgctxt "Marble::OpenCachingPlugin|"
 msgid "Shows caches from OpenCaching.de on the screen."
-msgstr "Mostra cachés de OpenCaching.de na pantalla."
+msgstr "Amosa cachés de OpenCaching.de na pantalla."
 
 #: src/plugins/render/opendesktop/OpenDesktopConfigWidget.ui:14
 msgctxt "OpenDesktopConfigWidget|"
@@ -15088,7 +15088,7 @@ msgid ""
 "Shows OpenDesktop users' avatars and some extra information about them on "
 "the map."
 msgstr ""
-"Mostra os avatares dos usuarios de OpenDesktop no mapa e algunha información "
+"Amosa os avatares dos usuarios de OpenDesktop no mapa e algunha información "
 "adicional sobre eles."
 
 #: src/plugins/render/overviewmap/OverviewMap.cpp:74
@@ -15364,7 +15364,7 @@ msgstr "Códigos postais"
 #: src/plugins/render/postalcode/PostalCodePlugin.cpp:64
 msgctxt "Marble::PostalCodePlugin|"
 msgid "Shows postal codes of the area on the map."
-msgstr "Mostra os códigos postais da zona no mapa."
+msgstr "Amosa os códigos postais da zona no mapa."
 
 #: src/plugins/render/progress/ProgressFloatItem.cpp:72
 msgctxt "Marble::ProgressFloatItem|"
@@ -15380,7 +15380,7 @@ msgstr "Progreso da &descarga"
 msgctxt "Marble::ProgressFloatItem|"
 msgid "Shows a pie chart download progress indicator"
 msgstr ""
-"Mostra un indicador da evolución da descarga con forma de gráfica de sectores"
+"Amosa un indicador da evolución da descarga con forma de gráfica de sectores"
 
 #: src/plugins/render/routing/RoutingConfigDialog.ui:14
 msgctxt "RoutingConfigDialog|"
