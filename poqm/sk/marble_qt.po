@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: marble_qt\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2021-11-15 17:29+0100\n"
+"PO-Revision-Date: 2023-07-04 23:33+0200\n"
 "Last-Translator: Roman Paholik <wizzardsk@gmail.com>\n"
 "Language-Team: Slovak <kde-sk@linux.sk>\n"
 "Language: sk\n"
@@ -11033,7 +11033,7 @@ msgstr "Skopírovať súradnice"
 #: src/lib/marble/MarbleWidgetPopupMenu.cpp:112
 msgctxt "Marble::MarbleWidgetPopupMenu|"
 msgid "Copy geo: URL"
-msgstr "Kopárovať geo: URL"
+msgstr "Kopírovať geo: URL"
 
 #: src/lib/marble/MarbleWidgetPopupMenu.cpp:121
 msgctxt "Marble::MarbleWidgetPopupMenu|"
