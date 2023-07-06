@@ -5,6 +5,8 @@
 
 
 #include <MarbleQuickItem.h>
+#include <QGuiApplication>
+#include <QScreen>
 #include <QPainter>
 #include <QPaintDevice>
 #include <QtMath>
@@ -271,7 +273,9 @@ namespace Marble
 
     void MarbleQuickItem::resizeMap()
     {
-        d->m_map.setSize(qMax(100, int(width())), qMax(100, int(height())));
+        QScreen * screen = QGuiApplication::screenAt(mapToGlobal(QPointF(width()/2, 0)).toPoint());
+        double scale = screen != nullptr ? screen->devicePixelRatio() : 1.0;
+        d->m_map.setSize(qMax(100, int(scale * width())), qMax(100, int(scale * height())));
         update();
         updatePositionVisibility();
     }
