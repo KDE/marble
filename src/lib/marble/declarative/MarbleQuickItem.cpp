@@ -5,7 +5,7 @@
 
 
 #include <MarbleQuickItem.h>
-#include <QGuiApplication>
+#include <QQuickWindow>
 #include <QScreen>
 #include <QPainter>
 #include <QPaintDevice>
@@ -273,9 +273,8 @@ namespace Marble
 
     void MarbleQuickItem::resizeMap()
     {
-        QScreen * screen = QGuiApplication::screenAt(mapToGlobal(QPointF(width()/2, 0)).toPoint());
-        double scale = screen != nullptr ? screen->devicePixelRatio() : 1.0;
-        d->m_map.setSize(qMax(100, int(scale * width())), qMax(100, int(scale * height())));
+
+        d->m_map.setSize(qMax(100, int(width())), qMax(100, int(height())));
         update();
         updatePositionVisibility();
     }
@@ -372,6 +371,18 @@ namespace Marble
         painter->end();
         {
             GeoPainter geoPainter(paintDevice, d->m_map.viewport(), d->m_map.mapQuality());
+
+            double scale = 1.0;
+            // For HighDPI displays take QT_SCALE_FACTOR into account:
+            QQuickWindow * window = this->window();
+            if (window) {
+                QScreen * screen = window->screen();
+                scale = screen != nullptr ? screen->devicePixelRatio() : 1.0;
+                if (scale != 1) {
+                    geoPainter.scale(scale, scale);
+                }
+            }
+
             d->m_map.paint(geoPainter, rect);
         }
         painter->begin(paintDevice);
