@@ -3875,7 +3875,7 @@ msgstr ""
 "Marble-k aurreko bertsio batekin gordetako datuak aurkitu ditu.<br/>Datu "
 "horiek uneko bertsioan erabiltzeko bihurtu behar al dira?"
 
-#: src/lib/marble/declarative/MarbleQuickItem.cpp:187
+#: src/lib/marble/declarative/MarbleQuickItem.cpp:189
 #: src/lib/marble/routing/RoutingManager.cpp:560
 #: src/lib/marble/routing/RoutingManager.cpp:563
 msgctxt "QObject|"

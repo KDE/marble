@@ -3798,7 +3798,7 @@ msgstr ""
 "Marble has found map data stored by a previous Marble version.<br/>Should "
 "this data get converted so that it can be used by the current version?"
 
-#: src/lib/marble/declarative/MarbleQuickItem.cpp:187
+#: src/lib/marble/declarative/MarbleQuickItem.cpp:189
 #: src/lib/marble/routing/RoutingManager.cpp:560
 #: src/lib/marble/routing/RoutingManager.cpp:563
 msgctxt "QObject|"

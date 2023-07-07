@@ -3800,7 +3800,7 @@ msgstr ""
 "Marble löysi aiemman Marblen version tallentaman kartan.<br/>Muunnetaanko "
 "tiedot niin, että karttaa voi käyttää nykyisessä versiossa?"
 
-#: src/lib/marble/declarative/MarbleQuickItem.cpp:187
+#: src/lib/marble/declarative/MarbleQuickItem.cpp:189
 #: src/lib/marble/routing/RoutingManager.cpp:560
 #: src/lib/marble/routing/RoutingManager.cpp:563
 msgctxt "QObject|"

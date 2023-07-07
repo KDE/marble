@@ -3848,7 +3848,7 @@ msgstr ""
 "angelegt wurden.<br/>Sollen die Daten umgewandelt werden, um von der "
 "aktuellen Version benutzt werden zu können?"
 
-#: src/lib/marble/declarative/MarbleQuickItem.cpp:187
+#: src/lib/marble/declarative/MarbleQuickItem.cpp:189
 #: src/lib/marble/routing/RoutingManager.cpp:560
 #: src/lib/marble/routing/RoutingManager.cpp:563
 msgctxt "QObject|"

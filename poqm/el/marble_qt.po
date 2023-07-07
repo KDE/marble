@@ -4010,7 +4010,7 @@ msgstr ""
 "Το Marble έχει βρει δεδομένα χαρτών από προηγούμενη έκδοση.<br/>Να "
 "μετατραπούν έτσι ώστε να χρησιμεύσουν στην τρέχουσα έκδοση;"
 
-#: src/lib/marble/declarative/MarbleQuickItem.cpp:187
+#: src/lib/marble/declarative/MarbleQuickItem.cpp:189
 #: src/lib/marble/routing/RoutingManager.cpp:560
 #: src/lib/marble/routing/RoutingManager.cpp:563
 msgctxt "QObject|"
