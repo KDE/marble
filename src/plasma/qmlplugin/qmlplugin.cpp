@@ -4,3 +4,5 @@
 */
 
 #include "qmlplugin.h"
+
+#include "moc_qmlplugin.cpp"

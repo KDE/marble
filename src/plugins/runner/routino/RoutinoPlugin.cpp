@@ -172,3 +172,5 @@ bool RoutinoPlugin::canWork() const
 }
 
 #include "RoutinoPlugin.moc"
+
+#include "moc_RoutinoPlugin.cpp"

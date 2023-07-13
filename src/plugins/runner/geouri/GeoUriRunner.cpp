@@ -50,3 +50,5 @@ void GeoUriRunner::search(const QString &searchTerm, const GeoDataLatLonBox &)
 }
 
 }
+
+#include "moc_GeoUriRunner.cpp"

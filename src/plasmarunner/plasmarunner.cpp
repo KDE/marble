@@ -155,3 +155,5 @@ void PlasmaRunner::run(const Plasma::RunnerContext &context, const Plasma::Query
 }
 
 }
+
+#include "moc_plasmarunner.cpp"

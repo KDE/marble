@@ -195,3 +195,5 @@ bool OpenLocationCodeSearchRunner::isValidOLC( const QString& olc ) const
 }
 
 }
+
+#include "moc_OpenLocationCodeSearchRunner.cpp"

@@ -46,3 +46,5 @@ namespace Marble
         emit licenseChanged();
     }
 }
+
+#include "moc_MapTheme.cpp"

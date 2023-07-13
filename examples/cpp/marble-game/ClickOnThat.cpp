@@ -367,3 +367,5 @@ void ClickOnThat::highlightCorrectAnswer()
 
 
 }   // namespace Marble
+
+#include "moc_ClickOnThat.cpp"

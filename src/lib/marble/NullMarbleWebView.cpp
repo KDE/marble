@@ -14,3 +14,5 @@ void MarbleWebView::setUrl(const QUrl &url)
 {
 
 }
+
+#include "moc_NullMarbleWebView.cpp"

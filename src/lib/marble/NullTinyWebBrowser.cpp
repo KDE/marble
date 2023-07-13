@@ -27,3 +27,5 @@ void TinyWebBrowser::print()
 }
 
 }
+
+#include "moc_NullTinyWebBrowser.cpp"

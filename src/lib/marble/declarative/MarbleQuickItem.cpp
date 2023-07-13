@@ -1390,3 +1390,5 @@ namespace Marble
         }
     }
 }
+
+#include "moc_MarbleQuickItem.cpp"

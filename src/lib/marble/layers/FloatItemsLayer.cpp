@@ -79,3 +79,5 @@ void FloatItemsLayer::updateVisibility(bool visible, const QString &nameId)
 }
 
 }
+
+#include "moc_FloatItemsLayer.cpp"

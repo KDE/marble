@@ -131,3 +131,5 @@ void TileProcessor::colorForFile(const QString& filePath){
 //        qDebug() << maskValue;
     }
 }
+
+#include "moc_tileprocessor.cpp"

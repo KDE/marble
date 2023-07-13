@@ -160,3 +160,5 @@ QHash< QString, QVariant > YoursPlugin::templateSettings(RoutingProfilesModel::P
 }
 
 #include "YoursPlugin.moc"
+
+#include "moc_YoursPlugin.cpp"

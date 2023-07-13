@@ -155,3 +155,5 @@ QHash< QString, QVariant > OpenRouteServicePlugin::templateSettings( RoutingProf
 }
 
 #include "OpenRouteServicePlugin.moc" // needed for Q_OBJECT here in source
+
+#include "moc_OpenRouteServicePlugin.cpp"

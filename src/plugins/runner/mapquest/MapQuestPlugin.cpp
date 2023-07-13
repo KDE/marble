@@ -178,3 +178,5 @@ QHash< QString, QVariant > MapQuestPlugin::templateSettings( RoutingProfilesMode
 }
 
 #include "MapQuestPlugin.moc" // needed for Q_OBJECT here in source
+
+#include "moc_MapQuestPlugin.cpp"

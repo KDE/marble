@@ -128,3 +128,5 @@ void GeoDataThumbnailer::onGeoDataObjectAdded( GeoDataObject* object )
 }
 
 }
+
+#include "moc_thumbnailer.cpp"

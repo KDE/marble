@@ -226,3 +226,5 @@ void TirexBackend::writeMetatileEntry(QIODevice *io, int entryIdx, int offset, i
 
     io->seek(seekPos);
 }
+
+#include "moc_TirexBackend.cpp"

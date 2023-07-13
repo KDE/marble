@@ -136,3 +136,5 @@ bool CycleStreetsPlugin::supportsTemplate( RoutingProfilesModel::ProfileTemplate
 }
 
 #include "CycleStreetsPlugin.moc" // needed for Q_OBJECT here in source
+
+#include "moc_CycleStreetsPlugin.cpp"

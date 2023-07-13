@@ -167,3 +167,5 @@ QString RouteRelationModel::svgFile(const QString &path)
 }
 
 }
+
+#include "moc_RouteRelationModel.cpp"

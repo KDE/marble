@@ -361,3 +361,5 @@ QString MapItemDelegate::text( const QModelIndex &index )
 }
 
 #include "MapThemeDownloadDialog.moc" // needed for Q_OBJECT here in source
+
+#include "moc_MapThemeDownloadDialog.cpp"

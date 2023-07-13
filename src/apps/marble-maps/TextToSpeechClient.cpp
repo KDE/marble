@@ -39,3 +39,5 @@ void TextToSpeechClient::setLocale(const QString & locale)
     Q_UNUSED(locale)
 #endif
 }
+
+#include "moc_TextToSpeechClient.cpp"
