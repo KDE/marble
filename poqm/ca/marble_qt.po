@@ -18262,39 +18262,3 @@ msgstr "Plan&tilla d'element flotant"
 msgctxt "Marble::FITemplateFloatItem|"
 msgid "This is a template class for float items."
 msgstr "Aquesta és una classe de plantilla per a elements flotants."
-
-#~ msgctxt "Marble::MainWindow|"
-#~ msgid "Ctrl+O"
-#~ msgstr "Ctrl+O"
-
-#~ msgctxt "Marble::MainWindow|"
-#~ msgid "Ctrl+S"
-#~ msgstr "Ctrl+S"
-
-#~ msgctxt "Marble::MainWindow|"
-#~ msgid "Ctrl+C"
-#~ msgstr "Ctrl+C"
-
-#~ msgctxt "Marble::MainWindow|"
-#~ msgid "Ctrl+E"
-#~ msgstr "Ctrl+E"
-
-#~ msgctxt "Marble::MainWindow|"
-#~ msgid "Ctrl+Shift+F"
-#~ msgstr "Ctrl+Maj+F"
-
-#~ msgctxt "Marble::MainWindow|"
-#~ msgid "F5"
-#~ msgstr "F5"
-
-#~ msgctxt "Marble::MainWindow|"
-#~ msgid "F1"
-#~ msgstr "F1"
-
-#~ msgctxt "Marble::MainWindow|"
-#~ msgid "Shift+F1"
-#~ msgstr "Maj+F1"
-
-#~ msgctxt "Marble::MainWindow|"
-#~ msgid "Ctrl+B"
-#~ msgstr "Ctrl+B"
