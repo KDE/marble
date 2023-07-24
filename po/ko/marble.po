@@ -753,7 +753,7 @@ msgstr "마우스를 드래그할 때 행성 축 행동입니다."
 #: marble.kcfg:187
 #, kde-format
 msgid "The location shown on application startup."
-msgstr "프로그램을 시작할 때 표시할 위치입니다."
+msgstr "앱을 시작할 때 표시할 위치입니다."
 
 #. i18n: ectx: label, entry, group (Navigation)
 #: marble.kcfg:201
@@ -765,7 +765,7 @@ msgstr "대상으로 이동할 때 애니메이션을 표시합니다."
 #: marble.kcfg:205
 #, kde-format
 msgid "The external OpenStreetMap editor application"
-msgstr "외부 OpenStreetMap 편집기 프로그램"
+msgstr "외부 OpenStreetMap 편집기 앱"
 
 #. i18n: ectx: label, entry, group (Cache)
 #: marble.kcfg:211
