@@ -3,14 +3,14 @@
 # This file is distributed under the same license as the PACKAGE package.
 #
 # Stefan Asserhäll <stefan.asserhall@bredband.net>, 2007, 2008, 2009, 2010.
-# Stefan Asserhall <stefan.asserhall@bredband.net>, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021.
+# Stefan Asserhall <stefan.asserhall@bredband.net>, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2023.
 # Arve Eriksson <031299870@telia.com>, 2011.
 msgid ""
 msgstr ""
 "Project-Id-Version: marble_qt\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2021-10-18 22:18+0200\n"
+"PO-Revision-Date: 2023-07-25 20:37+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@bredband.net>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
 "Language: sv\n"
@@ -5183,30 +5183,24 @@ msgid "Download Region"
 msgstr "Ladda ner område"
 
 #: src/lib/marble/DownloadRegionDialog.cpp:247
-#, fuzzy
-#| msgctxt "Marble::MapWizard|"
-#| msgid "The base tile could not be downloaded."
 msgctxt "Marble::DownloadRegionDialog|"
 msgid "Tile type to be downloaded:"
-msgstr "Grundrutan kunde inte laddas ner."
+msgstr "Typ av ruta att ladda ner:"
 
 #: src/lib/marble/DownloadRegionDialog.cpp:249
 msgctxt "Marble::DownloadRegionDialog|"
 msgid "Texture tiles"
-msgstr ""
+msgstr "Strukturrutor"
 
 #: src/lib/marble/DownloadRegionDialog.cpp:250
-#, fuzzy
-#| msgctxt "Marble::MapViewWidget|"
-#| msgid "Mercator View"
 msgctxt "Marble::DownloadRegionDialog|"
 msgid "Vector tiles"
-msgstr "Mercatorvy"
+msgstr "Vektorrutor"
 
 #: src/lib/marble/DownloadRegionDialog.cpp:251
 msgctxt "Marble::DownloadRegionDialog|"
 msgid "Allows selection between layer types that are visibly being rendered."
-msgstr ""
+msgstr "Möjliggör val mellan lagertyper som synligt återges."
 
 #: src/lib/marble/DownloadRegionDialog.cpp:520
 #, qt-format
@@ -7992,43 +7986,37 @@ msgid "Wizard cannot parse server's response"
 msgstr "Guiden kan inte tolka serverns svar"
 
 #: src/lib/marble/MapWizard.cpp:295
-#, fuzzy
-#| msgctxt "Marble::MapWizard|"
-#| msgid "Server is not a Web Map Server."
 msgctxt "Marble::MapWizard|"
 msgid "Server is not an OWS Server."
-msgstr "Servern är inte en webbkartserver."
+msgstr "Servern är inte en OWS-server."
 
 #: src/lib/marble/MapWizard.cpp:390 src/lib/marble/MapWizard.cpp:407
 #: src/lib/marble/MapWizard.cpp:1140
 msgctxt "Marble::MapWizard|"
 msgid "Web Mercator (epsg:3857)"
-msgstr ""
+msgstr "Webb Mercator (epsg:3857)"
 
 #: src/lib/marble/MapWizard.cpp:391 src/lib/marble/MapWizard.cpp:842
 #: src/lib/marble/MapWizard.cpp:975
 msgctxt "Marble::MapWizard|"
 msgid "Equirectangular (epsg:4326)"
-msgstr ""
+msgstr "Likformigt rektangulär (epsg:4326)"
 
 #: src/lib/marble/MapWizard.cpp:392 src/lib/marble/MapWizard.cpp:844
 #: src/lib/marble/MapWizard.cpp:977
 msgctxt "Marble::MapWizard|"
 msgid "Equirectangular (crs:84)"
-msgstr ""
+msgstr "Likformigt rektangulär (crs:84)"
 
 #: src/lib/marble/MapWizard.cpp:403
-#, fuzzy
-#| msgctxt "MapViewWidget|"
-#| msgid "&Projection"
 msgctxt "Marble::MapWizard|"
 msgid "Tile Projection:"
-msgstr "&Projektion"
+msgstr "Rutprojektion:"
 
 #: src/lib/marble/MapWizard.cpp:419
 msgctxt "Marble::MapWizard|"
 msgid "Tile Matrix Set:"
-msgstr ""
+msgstr "Rutmatrismängd:"
 
 #: src/lib/marble/MapWizard.cpp:463 src/lib/marble/MapWizard.cpp:965
 msgctxt "Marble::MapWizard|"
@@ -8041,45 +8029,33 @@ msgid "Base Tile"
 msgstr "Grundruta"
 
 #: src/lib/marble/MapWizard.cpp:471
-#, fuzzy
-#| msgctxt "MapWizard|"
-#| msgid "Legend Image:"
 msgctxt "Marble::MapWizard|"
 msgid "Legend Image"
-msgstr "Förklaringsbild:"
+msgstr "Förklaringsbild"
 
 #: src/lib/marble/MapWizard.cpp:478 src/lib/marble/MapWizard.cpp:486
-#, fuzzy, qt-format
-#| msgctxt "NavigationInfoBar|"
-#| msgid "%1 m"
+#, qt-format
 msgctxt "Marble::MapWizard|"
 msgid "%1"
-msgstr "%1 m"
+msgstr "%1"
 
 #: src/lib/marble/MapWizard.cpp:479
-#, fuzzy, qt-format
-#| msgctxt "Marble::MapWizard|"
-#| msgid "The base tile could not be downloaded."
+#, qt-format
 msgctxt "Marble::MapWizard|"
 msgid "The %1 could not be downloaded."
-msgstr "Grundrutan kunde inte laddas ner."
+msgstr "%1 kunde inte laddas ner."
 
 #: src/lib/marble/MapWizard.cpp:487
-#, fuzzy, qt-format
-#| msgctxt "Marble::MapWizard|"
-#| msgid ""
-#| "The base tile could not be downloaded successfully. The server replied:\n"
-#| "\n"
-#| "%1"
+#, qt-format
 msgctxt "Marble::MapWizard|"
 msgid ""
 "The %1 could not be downloaded successfully. The server replied:\n"
 "\n"
 "%2"
 msgstr ""
-"Grundrutan kunde inte laddas ner på ett riktigt sätt. Servern svarade:\n"
+"%1 kunde inte laddas ner på ett riktigt sätt. Servern svarade:\n"
 "\n"
-"%1"
+"%2"
 
 #: src/lib/marble/MapWizard.cpp:565 src/lib/marble/MapWizard.cpp:1549
 #: src/lib/marble/MapWizard.cpp:1550 src/lib/marble/MapWizard.cpp:1558
@@ -8172,12 +8148,9 @@ msgid "Check if a theme with the same name exists."
 msgstr "Kontrollera om ett tema med samma namn redan finns."
 
 #: src/lib/marble/MapWizard.cpp:1545
-#, fuzzy
-#| msgctxt "MapWizard|"
-#| msgid "WMS Server:"
 msgctxt "Marble::MapWizard|"
 msgid "WMS Server"
-msgstr "WMS-server:"
+msgstr "WMS-server"
 
 #: src/lib/marble/MapWizard.cpp:1546
 msgctxt "Marble::MapWizard|"
@@ -8185,14 +8158,13 @@ msgid ""
 "<h4>WMS Server</h4>Please choose a <a href=\"https://en.wikipedia.org/wiki/"
 "Web_Map_Service\">WMS</a> server or enter a custom server URL."
 msgstr ""
+"<h4>WMS-server</h4>Välj en <a href=\"https://en.wikipedia.org/wiki/"
+"Web_Map_Service\">WMS</a>-server eller ange en egen serverwebbadress."
 
 #: src/lib/marble/MapWizard.cpp:1554
-#, fuzzy
-#| msgctxt "MapWizard|"
-#| msgid "WMS Server:"
 msgctxt "Marble::MapWizard|"
 msgid "WMTS Server"
-msgstr "WMS-server:"
+msgstr "WMTS-server"
 
 #: src/lib/marble/MapWizard.cpp:1555
 msgctxt "Marble::MapWizard|"
@@ -8200,6 +8172,8 @@ msgid ""
 "<h4>WMTS Server</h4>Please choose a <a href=\"https://de.wikipedia.org/wiki/"
 "Web_Map_Tile_Service\">WMTS</a> server or enter a custom server URL."
 msgstr ""
+"<h4>WMTS-server</h4>Välj en <a href=\"https://de.wikipedia.org/wiki/"
+"Web_Map_Tile_Service\">WMTS-server eller ange en egen serverwebbadress."
 
 #: src/lib/marble/MapWizard.ui:20
 msgctxt "MapWizard|"
@@ -8271,12 +8245,9 @@ msgid "Web Map Service (WMS)"
 msgstr "Webbkarttjänst (WMS)"
 
 #: src/lib/marble/MapWizard.ui:70
-#, fuzzy
-#| msgctxt "MapWizard|"
-#| msgid "Web Map Service (WMS)"
 msgctxt "MapWizard|"
 msgid "Web Map Tile Service (WMTS)"
-msgstr "Webbkarttjänst (WMS)"
+msgstr "Webbkartruttjänst (WMTS)"
 
 #: src/lib/marble/MapWizard.ui:80
 msgctxt "MapWizard|"
@@ -8362,6 +8333,8 @@ msgid ""
 "Enter the base Url of the WMS service (e.g. <i>https://www.wms.nrw.de/"
 "geobasis/wms_nw_dop_overlay</i>)"
 msgstr ""
+"Ange WMS-tjänstens baswebbadress (t.ex. <i>https://www.wms.nrw.de/geobasis/"
+"wms_nw_dop_overlay</i>)"
 
 #: src/lib/marble/MapWizard.ui:166 src/lib/marble/MapWizard.ui:465
 msgctxt "MapWizard|"
@@ -8369,35 +8342,24 @@ msgid "https://"
 msgstr "https://"
 
 #: src/lib/marble/MapWizard.ui:218
-#, fuzzy
-#| msgctxt ""
-#| "Marble::Placemark|A copy shop provides a service to send documents "
-#| "through fax"
-#| msgid "Fax service"
 msgctxt "MapWizard|"
 msgid "Wms-Service:"
-msgstr "Telefaxtjänst"
+msgstr "Wms-tjänst:"
 
 #: src/lib/marble/MapWizard.ui:232
-#, fuzzy
-#| msgctxt "MainScreen|"
-#| msgid "Layer Options"
 msgctxt "MapWizard|"
 msgid "Layer Selection"
-msgstr "Lagerinställningar"
+msgstr "Lagerval"
 
 #: src/lib/marble/MapWizard.ui:243
 msgctxt "MapWizard|"
 msgid "Choose your Layer(s):"
-msgstr ""
+msgstr "Välj lager:"
 
 #: src/lib/marble/MapWizard.ui:266
-#, fuzzy
-#| msgctxt "SearchField|"
-#| msgid "Search"
 msgctxt "MapWizard|"
 msgid "Search:"
-msgstr "Sök"
+msgstr "Sök:"
 
 #: src/lib/marble/MapWizard.ui:288
 msgctxt "MapWizard|"
@@ -8405,6 +8367,7 @@ msgid ""
 "The order in which multiple layers are selected directly affects their "
 "rendering order."
 msgstr ""
+"Ordningen som flera lager väljes påverkar direkt deras återgivningsordning."
 
 #: src/lib/marble/MapWizard.ui:297
 msgctxt "MapWizard|"
@@ -8412,70 +8375,60 @@ msgid ""
 "Enable this to select multiple layers without keyboard shortcuts (Shift, "
 "Strg, Strg+A, ...)"
 msgstr ""
+"Aktivera för att välja flera lager utan snabbtangenter (Skift, Strg, Strg"
+"+A, ...)"
 
 #: src/lib/marble/MapWizard.ui:300
 msgctxt "MapWizard|"
 msgid "Multiple Selections"
-msgstr ""
+msgstr "Flera val"
 
 #: src/lib/marble/MapWizard.ui:307
 msgctxt "MapWizard|"
 msgid "Custom Backdrop"
-msgstr ""
+msgstr "Egen fonddekoration"
 
 #: src/lib/marble/MapWizard.ui:314
-#, fuzzy
-#| msgctxt "MapViewWidget|"
-#| msgid "&Projection"
 msgctxt "MapWizard|"
 msgid "Tile Projection:"
-msgstr "&Projektion"
+msgstr "Rutprojektion:"
 
 #: src/lib/marble/MapWizard.ui:321
 msgctxt "MapWizard|"
 msgid "Indicates the projection in which the tiles are rendered."
-msgstr ""
+msgstr "Anger projektion som rutorna återges med."
 
 #: src/lib/marble/MapWizard.ui:344
 msgctxt "MapWizard|"
 msgid "Tile Format:"
-msgstr ""
+msgstr "Rutformat:"
 
 #: src/lib/marble/MapWizard.ui:351
 msgctxt "MapWizard|"
 msgid "Indicates the file format of the tiles."
-msgstr ""
+msgstr "Anger rutornas filformat."
 
 #: src/lib/marble/MapWizard.ui:383
-#, fuzzy
-#| msgctxt "MainScreen|"
-#| msgid "Layer Options"
 msgctxt "MapWizard|"
 msgid "Layer Info"
-msgstr "Lagerinställningar"
+msgstr "Lagerinformation"
 
 #: src/lib/marble/MapWizard.ui:396
-#, fuzzy
-#| msgctxt "GeoDataPlacemark|"
-#| msgid "Service Road"
 msgctxt "MapWizard|"
 msgid "Service Info"
-msgstr "Underhållsväg"
+msgstr "Tjänstinformation"
 
 #: src/lib/marble/MapWizard.ui:406
 msgctxt "MapWizard|"
 msgid "Customize Backdrop"
-msgstr ""
+msgstr "Anpassa fonddekoration"
 
 #: src/lib/marble/MapWizard.ui:417
 msgctxt "MapWizard|"
 msgid "Preset Layers"
-msgstr ""
+msgstr "Nollställ lager"
 
 #: src/lib/marble/MapWizard.ui:437
-#, fuzzy
-#| msgctxt "DGML|"
-#| msgid "OpenStreetMap"
 msgctxt "MapWizard|"
 msgid "OpenStreetMap"
 msgstr "OpenStreetMap"
@@ -8483,17 +8436,15 @@ msgstr "OpenStreetMap"
 #: src/lib/marble/MapWizard.ui:452
 msgctxt "MapWizard|"
 msgid "XYZ Server Url"
-msgstr ""
+msgstr "XYZ-server webbadress"
 
 #: src/lib/marble/MapWizard.ui:462
 msgctxt "MapWizard|"
 msgid "The XYZ server needs to provide map tiles in Mercator projection."
 msgstr ""
+"XYZ-servern behövs för att tillhandahållna kartrutor med Mercator-projektion."
 
 #: src/lib/marble/MapWizard.ui:479
-#, fuzzy
-#| msgctxt "FormattedTextWidget|"
-#| msgid "Color"
 msgctxt "MapWizard|"
 msgid "Color"
 msgstr "Färg"
@@ -8501,15 +8452,12 @@ msgstr "Färg"
 #: src/lib/marble/MapWizard.ui:498
 msgctxt "MapWizard|"
 msgid "#87CEFA"
-msgstr ""
+msgstr "#87CEFA"
 
 #: src/lib/marble/MapWizard.ui:511
-#, fuzzy
-#| msgctxt "UiEditPlacemarkDialog|"
-#| msgid "Style, Color"
 msgctxt "MapWizard|"
 msgid "Select Color"
-msgstr "Stil, färg"
+msgstr "Välj färg"
 
 #: src/lib/marble/MapWizard.ui:554
 msgctxt "MapWizard|"
@@ -8723,7 +8671,7 @@ msgstr "Ändra..."
 #: src/lib/marble/MapWizard.ui:855
 msgctxt "MapWizard|"
 msgid "<b>Optional: Addition of a Map Key</b>"
-msgstr ""
+msgstr "<b>Valfritt tillägg av en kartförklaring</b>"
 
 #: src/lib/marble/MapWizard.ui:864
 msgctxt "MapWizard|"
@@ -8797,7 +8745,7 @@ msgstr "Kartans tema ska anges här."
 #: src/lib/marble/MapWizard.ui:1002
 msgctxt "MapWizard|"
 msgid "Thumbnail"
-msgstr ""
+msgstr "Miniatyrbild"
 
 #: src/lib/marble/MapWizard.ui:1012
 msgctxt "MapWizard|"
@@ -12676,6 +12624,8 @@ msgid ""
 "Supported codecs are not found. (ffmpeg/avconv needs to be installed and in "
 "PATH.)"
 msgstr ""
+"Någon kodare som stöds hittades inte (ffmpeg/avconv måste vara installerade "
+"och i PATH)."
 
 #: src/lib/marble/TourCaptureDialog.cpp:77
 msgctxt "Marble::TourCaptureDialog|"
