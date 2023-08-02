@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2023-06-11 21:37+0300\n"
+"PO-Revision-Date: 2023-08-02 00:39+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -21,7 +21,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 23.07.70\n"
+"X-Generator: Lokalize 23.11.70\n"
 "X-Qt-Contexts: true\n"
 
 #. file data/maps/moon/clementine/clementine.dgml:5
@@ -3186,13 +3186,13 @@ msgid ""
 "Unable to start the external editor. Check that %1 is installed or choose a "
 "different external editor in the settings dialog."
 msgstr ""
-"Harici düzenleyici başlatılamadı. %1 kurulumunu denetleyin veya ayarlar "
+"Dış düzenleyici başlatılamadı. %1 kurulumunu denetleyin veya ayarlar "
 "penceresinden başka bir düzenleyici seçin."
 
 #: src/apps/marble-ui/ControlView.cpp:578
 msgctxt "Marble::ControlView|"
 msgid "Cannot start external editor"
-msgstr "Harici düzenleyici başlatılamıyor"
+msgstr "Dış düzenleyici başlatılamıyor"
 
 #: src/apps/marble-ui/ControlView.cpp:595
 msgctxt "Marble::ControlView|"
@@ -5460,12 +5460,12 @@ msgstr "deniz düzeyinden yukarıda"
 #: src/lib/marble/ExternalEditor.ui:14
 msgctxt "ExternalEditor|"
 msgid "External Map Editor Selection"
-msgstr "Harici Harita Düzenleyici Seçimi"
+msgstr "Dış Harita Düzenleyicisi Seçimi"
 
 #: src/lib/marble/ExternalEditor.ui:22
 msgctxt "ExternalEditor|"
 msgid "External Map Editor"
-msgstr "Harici Harita Düzenleyici"
+msgstr "Dış Harita Düzenleyicisi"
 
 #: src/lib/marble/ExternalEditor.ui:30
 msgctxt "ExternalEditor|"
@@ -10415,7 +10415,7 @@ msgstr "Son Ziyaret Edilen Konuma Dön"
 #: src/lib/marble/MarbleNavigationSettingsWidget.ui:184
 msgctxt "MarbleNavigationSettingsWidget|"
 msgid "&External editor:"
-msgstr "&Harici düzenleyici:"
+msgstr "&Dış düzenleyici:"
 
 #: src/lib/marble/MarbleNavigationSettingsWidget.ui:194
 msgctxt "MarbleNavigationSettingsWidget|"
