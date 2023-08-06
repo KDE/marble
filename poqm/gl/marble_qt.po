@@ -2344,7 +2344,7 @@ msgstr ""
 "detallado OpenStreetMap aos teus dispositivos móbiles. Inclúe un mapa "
 "moderno e bonito cunha interface de usuario intuitiva. É de código aberto, "
 "completamente baseado en datos libres e estándares abertos e respecta a súa "
-"intimidade.</p>"
+"privacidade.</p>"
 
 #: src/apps/marble-maps/AboutDialog.qml:64
 msgctxt "AboutDialog|"
