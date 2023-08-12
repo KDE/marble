@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2023-08-02 00:39+0300\n"
+"PO-Revision-Date: 2023-08-11 13:54+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -1782,7 +1782,7 @@ msgid ""
 "\"Blue Marble Next Generation\" pictures. Credits: NASA's Earth Observatory</"
 "p>"
 msgstr ""
-"<p>Dünya'nın Uzay'dan görünümü.</p><p>Harita NASA'nın güzel \"Blue Marble "
+"<p>Dünya'nın Uzay'dan görünümü.</p><p>Harita NASA'nın güzel \"Blue Bilye "
 "Next Generation\" görsellerine dayanmaktadır. Emeği Geçenler: NASA'nın Dünya "
 "Gözlemevi</p>"
 
@@ -1818,7 +1818,7 @@ msgstr ""
 #. file data/legend.html
 msgctxt "Legends|"
 msgid "Marble: Legend"
-msgstr "Marble: Gösterge"
+msgstr "Bilye: Gösterge"
 
 #. file data/legend.html
 msgctxt "Legends|"
@@ -2338,10 +2338,10 @@ msgid ""
 "with an intuitive user interface. It's open source, entirely based on free "
 "data and open standards and respects your privacy.</p>"
 msgstr ""
-"<h3>Marble Haritaları</h3><p>Yolunu bul! Marble Haritaları, çok ayrıntılı "
-"olan OpenStreetMap'ı taşınabilir aygıtlarınıza getirir. Sezgisel bir "
-"kullanıcı arayüzü ile net, güzel bir haritaya sahiptir. Açık kaynak, tamamen "
-"özgür verilere ve açık standartlara dayanır ve gizliliğinize saygı duyar.</p>"
+"<h3>Bilye Haritalar</h3><p>Yolunu bul! Bilye Haritalar, çok ayrıntılı olan "
+"OpenStreetMap'ı taşınabilir aygıtlarınıza getirir. Sezgisel bir kullanıcı "
+"arayüzü ile net, güzel bir haritaya sahiptir. Açık kaynak, tamamen özgür "
+"verilere ve açık standartlara dayanır ve gizliliğinize saygı duyar.</p>"
 
 #: src/apps/marble-maps/AboutDialog.qml:64
 msgctxt "AboutDialog|"
@@ -2354,8 +2354,8 @@ msgid ""
 "feedback!</p>"
 msgstr ""
 "<h3>Destek</h3><p>Sorunuz mu var? Bir dosyada iyileştirme öneriniz mi var? "
-"Lütfen Marble kullanıcılarının ve geliştiricilerinin bulunduğu, <a href="
-"\"https://forum.kde.org/viewforum.php?f=217\">Marble forum</a>'u kullanın. "
+"Lütfen Bilye kullanıcılarının ve geliştiricilerinin bulunduğu, <a href="
+"\"https://forum.kde.org/viewforum.php?f=217\">Bilye forum</a>'u kullanın. "
 "Diğer destek kanalları <a href=\"https://marble.kde.oro/support.php\">marble."
 "kde.org</a> üzerinde listelenmişir. Geri bildirimlerinizi bekliyoruz!</p>"
 
@@ -2371,7 +2371,7 @@ msgid ""
 msgstr ""
 "<h3>Geliştirici Ekibi</h3><p>Bu uygulamanın ana geliştiricileri Dennis "
 "Nienhüser, Torsten Rahn, Sanjiban Bairagya, Friedrich W. H. Kossebau, Gábor "
-"Péterffy ve Mikhail Ivchenko. Onlar, hali hazırda Marble projesine katkıda "
+"Péterffy ve Mikhail Ivchenko. Onlar, hali hazırda Bilye projesine katkıda "
 "bulunan 200'den fazla geliştiricinin bir parçasıdır. <br> Bizimle <a href="
 "\"https://mail.kde.org/mailman/listinfo/marble-devel\">marble-devel@kde.org</"
 "a> üzerinden iletişime geçebilirsiniz.</p>"
@@ -2416,7 +2416,7 @@ msgstr "Geçerli Konumu İzle"
 #: src/apps/marble-maps/MainScreen.qml:205
 msgctxt "MainScreen|"
 msgid "Marble Maps"
-msgstr "Marble Haritaları"
+msgstr "Bilye Haritaları"
 
 #: src/apps/marble-maps/MainScreen.qml:96
 msgctxt "MainScreen|"
@@ -2615,18 +2615,18 @@ msgstr "Erişilebilirlik"
 #: src/apps/marble-maps/SidePanel.qml:101
 msgctxt "SidePanel|"
 msgid "About Marble Maps…"
-msgstr "Marble Haritaları Hakkında…"
+msgstr "Bilye Haritaları Hakkında…"
 
 #: src/apps/marble-qt/qtmain.cpp:92
 msgctxt "Marble::MainWindow|"
 msgid "Marble - Virtual Globe"
-msgstr "Marble - Masaüstünde Dünya"
+msgstr "Bilye - Masaüstünde Dünya"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:197
 #: src/apps/marble-qt/QtMainWindow.cpp:770
 msgctxt "Marble::MainWindow|"
 msgid "Marble"
-msgstr "Marble"
+msgstr "Bilye"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:198
 #, qt-format
@@ -2754,7 +2754,7 @@ msgstr "Dünyanın videosunu kaydetmeyi durdur"
 #: src/apps/marble-qt/QtMainWindow.cpp:327
 msgctxt "Marble::MainWindow|"
 msgid "&Configure Marble"
-msgstr "Marble'ı &Yapılandır"
+msgstr "Bilye'yi &Yapılandır"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:328
 msgctxt "Marble::MainWindow|"
@@ -2849,12 +2849,12 @@ msgstr "Geçerli Haritayı Yeniden Yükle"
 #: src/apps/marble-qt/QtMainWindow.cpp:374
 msgctxt "Marble::MainWindow|"
 msgid "Marble Virtual Globe &Handbook"
-msgstr "Marble Masaüstünde Dünya &El Kitabı"
+msgstr "Bilye Masaüstünde Dünya &El Kitabı"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:376
 msgctxt "Marble::MainWindow|"
 msgid "Show the Handbook for Marble Virtual Globe"
-msgstr "Marble Masaüstünde Dünya El Kitabını Göster"
+msgstr "Bilye Masaüstünde Dünya El Kitabını Göster"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:379
 msgctxt "Marble::MainWindow|"
@@ -2874,12 +2874,12 @@ msgstr "&Topluluk Forumu"
 #: src/apps/marble-qt/QtMainWindow.cpp:385
 msgctxt "Marble::MainWindow|"
 msgid "Visit Marble's Community Forum"
-msgstr "Marble Topluluk Forumunu Ziyaret Et"
+msgstr "Bilye Topluluk Forumunu Ziyaret Et"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:388
 msgctxt "Marble::MainWindow|"
 msgid "&About Marble Virtual Globe"
-msgstr "Marble Masaüstünde Dünya &Hakkında"
+msgstr "Bilye Masaüstünde Dünya &Hakkında"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:389
 msgctxt "Marble::MainWindow|"
@@ -3046,7 +3046,7 @@ msgstr "Dosya kaydedilmeye çalışılırken bir hata oluştu.\n"
 #, qt-format
 msgctxt "Marble::MainWindow|"
 msgid "Marble Virtual Globe %1"
-msgstr "Marble Masaüstünde Dünya %1"
+msgstr "Bilye Masaüstünde Dünya %1"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:953
 #: src/apps/marble-qt/QtMainWindow.cpp:1030
@@ -3099,7 +3099,7 @@ msgstr "Adsız"
 #: src/apps/marble-ui/ControlView.cpp:85
 msgctxt "Marble::ControlView|"
 msgid "Marble - Virtual Globe"
-msgstr "Marble - Masaüstünde Dünya"
+msgstr "Bilye - Masaüstünde Dünya"
 
 #: src/apps/marble-ui/ControlView.cpp:276
 msgctxt "Marble::ControlView|"
@@ -3157,7 +3157,7 @@ msgstr "Sayısal Sinema (%1x%2)"
 #: src/apps/marble-ui/ControlView.cpp:486
 msgctxt "Marble::ControlView|"
 msgid "The Marble development team wishes you a pleasant and safe journey."
-msgstr "Marble geliştirme ekibi, size keyifli ve güvende bir yolculuk diler."
+msgstr "Bilye geliştirme ekibi, size keyifli ve güvende bir yolculuk diler."
 
 #: src/apps/marble-ui/ControlView.cpp:487
 msgctxt "Marble::ControlView|"
@@ -3572,7 +3572,7 @@ msgstr "'%1' sunucusuna ulaşılamadı"
 #: src/lib/marble/cloudsync/OwncloudSyncBackend.cpp:316
 msgctxt "Marble::OwncloudSyncBackend|"
 msgid "The Marble app is not installed on the ownCloud server"
-msgstr "Marble uygulaması, ownCloud sunucusunda kurulu değil"
+msgstr "Bilye uygulaması, ownCloud sunucusunda kurulu değil"
 
 #: src/lib/marble/cloudsync/OwncloudSyncBackend.cpp:318
 msgctxt "Marble::OwncloudSyncBackend|"
@@ -3780,7 +3780,7 @@ msgstr "Otomatik Yakınlaştırma"
 #: src/lib/marble/DataMigration.cpp:92
 msgctxt "Marble::DataMigration|"
 msgid "Marble data conversion"
-msgstr "Marble veri dönüştürme"
+msgstr "Bilye veri dönüştürme"
 
 #: src/lib/marble/DataMigration.cpp:93
 msgctxt "Marble::DataMigration|"
@@ -3798,9 +3798,8 @@ msgid ""
 "Marble has found map data stored by a previous Marble version.<br/>Should "
 "this data get converted so that it can be used by the current version?"
 msgstr ""
-"Marble, önceki Marble sürümü ile depolanmış bir harita verisine sahip.<br/"
-">Bu veriler, geçerli sürüm tarafından kullanılabilecek şekilde dönüştürülsün "
-"mü?"
+"Bilye, önceki Bilye sürümü ile depolanmış bir harita verisine sahip.<br/>Bu "
+"veriler, geçerli sürüm tarafından kullanılabilecek şekilde dönüştürülsün mü?"
 
 #: src/lib/marble/declarative/MarbleQuickItem.cpp:189
 #: src/lib/marble/routing/RoutingManager.cpp:560
@@ -5492,7 +5491,7 @@ msgid ""
 msgstr ""
 "Bir dahakine harita düzenleyici seçimini tekrar devre dışı bırakın. Aksi "
 "takdirde seçiminiz anımsanır ve ileride otomatik olarak kullanılacaktır. "
-"Öntanımlı harita düzenleyicisini daha sonra değiştirmek isterseniz Marble "
+"Öntanımlı harita düzenleyicisini daha sonra değiştirmek isterseniz Bilye "
 "Ayarları'nda bunu yapabilirsiniz."
 
 #: src/lib/marble/ExternalEditor.ui:51
@@ -7663,7 +7662,7 @@ msgid ""
 "Marble/Search\">Details...</a>"
 msgstr ""
 "Arama ifadesi girin ve Giriş düğmesine basın. <a href=\"https://userbase.kde."
-"org/Marble/Search\">Ayrıntılar...</a>"
+"org/Bilye/Search\">Ayrıntılar...</a>"
 
 #: src/lib/marble/GoToDialog.ui:93
 msgctxt "GoTo|"
@@ -7897,7 +7896,7 @@ msgstr "Harita Temasını &Sil"
 #: src/lib/marble/MapViewWidget.cpp:668
 msgctxt "Marble::MapViewWidget|"
 msgid "Marble"
-msgstr "Marble"
+msgstr "Bilye"
 
 #: src/lib/marble/MapViewWidget.cpp:669
 #, qt-format
@@ -8225,9 +8224,9 @@ msgstr ""
 "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"></"
 "p>\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-"right:0px; -qt-block-indent:0; text-indent:0px;\">Size, Marble için harita "
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Size, Bilye için harita "
 "oluşturma sürecinde yardım edeceğiz. Sonunda kendi oluşturduğunuz haritayı "
-"Marble üzerinde görebileceksiniz.</p>\n"
+"Bilye üzerinde görebileceksiniz.</p>\n"
 "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
 "right:0px; -qt-block-indent:0; text-indent:0px;\">Harita temanızın verisi "
 "için kullanmak istediğiniz kaynağı seçin:</p>\n"
@@ -8726,7 +8725,7 @@ msgstr ""
 "p>\n"
 "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
 "right:0px; -qt-block-indent:0; text-indent:0px;\">Lütfen lisans ve kullanım "
-"şartları buna izin veriyorsa harita temasını Marble topluluğuna katkıda "
+"şartları buna izin veriyorsa harita temasını Bilye topluluğuna katkıda "
 "bulunmayı düşünün.</p>\n"
 "<p style=\"-qt-paragraph-type:empty; margin-top:12px; margin-bottom:12px; "
 "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"></"
@@ -8760,12 +8759,12 @@ msgstr "Harita Önizleme"
 #: src/lib/marble/MarbleAboutDialog.cpp:60
 msgctxt "QObject|"
 msgid "Marble Virtual Globe"
-msgstr "Marble Masaüstünde Dünya"
+msgstr "Bilye Masaüstünde Dünya"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:78
 msgctxt "QObject|"
 msgid "<b>Active Development Team of Marble</b>"
-msgstr "<b>Marble Etkin Geliştirme Ekibi</b>"
+msgstr "<b>Bilye Etkin Geliştirme Ekibi</b>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:79
 msgctxt "QObject|"
@@ -8941,7 +8940,7 @@ msgid ""
 "com</a><br /><i>Marble Runners, World-Clock Plasmoid</i></p>"
 msgstr ""
 "<p>Henry de Valence <a href=\"mailto:hdevalence@gmail.com\">hdevalence@gmail."
-"com</a><br /><i>Marble Çalıştırıcıları, Dünya Saati Plasmoid</i></p>"
+"com</a><br /><i>Bilye Çalıştırıcıları, Dünya Saati Plasmoid</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:118
 msgctxt "QObject|"
@@ -8999,7 +8998,7 @@ msgid ""
 "<p>You can reach the developers of the Marble Project at <a href=\"mailto:"
 "marble-devel@kde.org\">marble-devel@kde.org</a></p>"
 msgstr ""
-"<p>Marble Projesinin geliştiricilerine <a href=\"mailto:marble-devel@kde.org"
+"<p>Bilye Projesinin geliştiricilerine <a href=\"mailto:marble-devel@kde.org"
 "\">marble-devel@kde.org</a> adresinden ulaşabilirsiniz.</p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:130
@@ -9013,7 +9012,7 @@ msgid ""
 "<p> The Marble Team would like to thank its members who participated in ESA "
 "SoCiS for their successful work on Marble:</p>"
 msgstr ""
-"<p> The Marble Ekibi ESA SoCiS içinde gösterdikleri başarıdan dolayı "
+"<p> The Bilye Ekibi ESA SoCiS içinde gösterdikleri başarıdan dolayı "
 "katılımcı üyelerine teşekkür eder:</p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:133
@@ -9031,7 +9030,7 @@ msgid ""
 msgstr ""
 "<p>Judit Bartha, <a href=\"mailto:bartha.m.judit@gmail.com\"> bartha.m."
 "judit@gmail.com </a><br /><i>Proje: Sentinel-2 görev verisini kullanarak "
-"Marble Uydu haritalarını geliştirme</i></p>"
+"Bilye Uydu haritalarını geliştirme</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:136
 #: src/lib/marble/MarbleAboutDialog.cpp:190
@@ -9065,8 +9064,8 @@ msgid ""
 "celestial bodies in Marble   </i></p>"
 msgstr ""
 "<p>G&#xE1;bor P&#xE9;terffy, <a href=\"mailto:peterffy95@gmail.com\"> "
-"peterffy95@gmail.com </a><br /><i>Project: Marble içindeki Gök Cisimleri "
-"için Panoramik Görsel Desteği   </i></p>"
+"peterffy95@gmail.com </a><br /><i>Project: Bilye içindeki Gök Cisimleri için "
+"Panoramik Görsel Desteği   </i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:142
 #: src/lib/marble/MarbleAboutDialog.cpp:161
@@ -9083,7 +9082,7 @@ msgid ""
 "Marble </i></p>"
 msgstr ""
 "<p>Marek Hakala, <a href=\"mailto:hakala.marek@gmail.com\">hakala."
-"marek@gmail.com</a><br /><i>Proje: Marble içindeki Güneş/Ay Tutulmalarını "
+"marek@gmail.com</a><br /><i>Proje: Bilye içindeki Güneş/Ay Tutulmalarını "
 "Görüntüleme </i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:145
@@ -9131,7 +9130,7 @@ msgid ""
 "<p> The Marble Team would like to thank its members who participated in the "
 "Google Code-in for their successful work on Marble:</p>"
 msgstr ""
-"<p> The Marble Ekibi Google Code-in'de gösterdikleri başarıdan dolayı "
+"<p> The Bilye Ekibi Google Code-in'de gösterdikleri başarıdan dolayı "
 "katılımcı üyelerine teşekkür eder:</p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:156
@@ -9261,7 +9260,7 @@ msgid ""
 "<p> The Marble Team would like to thank its members who participated in the "
 "Google Summer of Code for their successful work on Marble:</p>"
 msgstr ""
-"<p> The Marble Ekibi Google Summer of Code'da gösterdikleri başarıdan dolayı "
+"<p> The Bilye Ekibi Google Summer of Code'da gösterdikleri başarıdan dolayı "
 "katılımcı üyelerine teşekkür eder:</p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:180
@@ -9276,7 +9275,7 @@ msgid ""
 "technocool@gmail.com</a><br /><i>Project: Marble Indoor Maps</i></p>"
 msgstr ""
 "<p>Mohammed Nafees <a href=\"mailto:nafees.technocool@gmail.com\">nafees."
-"technocool@gmail.com</a><br /><i>Proje: Marble İç Haritalar</i></p>"
+"technocool@gmail.com</a><br /><i>Proje: Bilye İç Haritalar</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:183
 msgctxt "QObject|"
@@ -9285,7 +9284,7 @@ msgid ""
 "judit@gmail.com</a><br /><i>Project: Marble Material Maps</i></p>"
 msgstr ""
 "<p>Judit Bartha <a href=\"mailto:bartha.m.judit@gmail.com\">bartha.m."
-"judit@gmail.com</a><br /><i>Proje: Marble Materyal Haritalar</i></p>"
+"judit@gmail.com</a><br /><i>Proje: Bilye Materyal Haritalar</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:186
 msgctxt "QObject|"
@@ -9295,7 +9294,7 @@ msgid ""
 "vector map</i></p>"
 msgstr ""
 "<p>Dávid Kolozsvári <a href=\"freedawson@gmail.com\">freedawson@gmail.com</"
-"a><br /><i>Proje: Marble OSM vektör haritasındaki her karo düzeyinde akıcı "
+"a><br /><i>Proje: Bilye OSM vektör haritasındaki her karo düzeyinde akıcı "
 "grafik sağlama</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:188
@@ -9306,7 +9305,7 @@ msgid ""
 "tile levels in the OSM Vector Map of Marble</i></p>"
 msgstr ""
 "<p>Akshat Tandon <a href=\"akshat.tandon@research.iiit.ac.in\">akshat."
-"tandon@research.iiit.ac.in</a><br /><i>Proje: Marble OSM Vektör Haritası'nda "
+"tandon@research.iiit.ac.in</a><br /><i>Proje: Bilye OSM Vektör Haritası'nda "
 "orta ve düşük karo düzeyleri için destek</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:191
@@ -9316,7 +9315,7 @@ msgid ""
 "a><br /><i>Project: Improve Marble's OSM vector rendering support</i></p>"
 msgstr ""
 "<p>Dávid Kolozsvári <a href=\"freedawson@gmail.com\">freedawson@gmail.com</"
-"a><br /><i>Proje: Marble'ın OSM vektör sunum desteğini geliştirme</i></p>"
+"a><br /><i>Proje: Bilye'nin OSM vektör sunum desteğini geliştirme</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:193
 msgctxt "QObject|"
@@ -9325,7 +9324,7 @@ msgid ""
 "com</a><br /><i>Project: Porting Marble to Android platform</i></p>"
 msgstr ""
 "<p>Gábor Péterffy <a href=\"gabor.peterffy@gmail.com\">gabor.peterffy@gmail."
-"com</a><br /><i>Proje: Marble'ı Android platformuna taşımak</i></p>"
+"com</a><br /><i>Proje: Bilye'yi Android platformuna taşımak</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:195
 msgctxt "QObject|"
@@ -9336,7 +9335,7 @@ msgid ""
 msgstr ""
 "<p>Marius Valeriu Stanciu <a href=\"stanciumarius94@gmail.com"
 "\">stanciumarius94@gmail.com</a><br /><i>Proje: OpenStreetMap desteği ve "
-"Marble için Düzenleme Kipi'ni geliştirme</i></p>"
+"Bilye için Düzenleme Kipi'ni geliştirme</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:198
 msgctxt "QObject|"
@@ -9345,7 +9344,7 @@ msgid ""
 "><i>Project: Marble Game</i></p>"
 msgstr ""
 "<p>Abhinav Gangwar <a href=\"abhgang@gmail.com\">abhgang@gmail.com</a><br /"
-"><i>Proje: Marble Oyunu</i></p>"
+"><i>Proje: Bilye Oyunu</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:200
 msgctxt "QObject|"
@@ -9374,7 +9373,7 @@ msgid ""
 "b@gmail.com</a><br /><i>Project: Marble KML Map Editor</i></p>"
 msgstr ""
 "<p>Adrian Draghici <a href=\"draghici.adrian.b@gmail.com\">draghici.adrian."
-"b@gmail.com</a><br /><i>Proje: Marble KML Harita Düzenleyici</i></p>"
+"b@gmail.com</a><br /><i>Proje: Bilye KML Harita Düzenleyici</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:207
 msgctxt "QObject|"
@@ -9383,7 +9382,7 @@ msgid ""
 "dorian@gmail.com</a><br /><i>Project: Marble meets ownCloud</i></p>"
 msgstr ""
 "<p>Andrei Duma <a href=\"andrei.duma.dorian@gmail.com\">andrei.duma."
-"dorian@gmail.com</a><br /><i>Proje: Marble ownCloud ile tanışıyor</i></p>"
+"dorian@gmail.com</a><br /><i>Proje: Bilye ownCloud ile tanışıyor</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:209
 msgctxt "QObject|"
@@ -9392,7 +9391,7 @@ msgid ""
 "a><br /><i>Project: ownCloud storage and synchronization for Marble </i></p>"
 msgstr ""
 "<p>Utku Ayd&#x131;n <a href=\"utkuaydin34@gmail.com\">utkuaydin34@gmail.com</"
-"a><br /><i>Proje: Marble için ownCloud depolama ve eşzamanlama </i></p>"
+"a><br /><i>Proje: Bilye için ownCloud depolama ve eşzamanlama </i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:211
 msgctxt "QObject|"
@@ -9428,7 +9427,7 @@ msgid ""
 "berlin.de</a><br /><i>Project: OpenGL Mode for Marble</i></p>"
 msgstr ""
 "<p>Bernhard Beschow <a href=\"bbeschow@cs.tu-berlin.de\">bbeschow@cs.tu-"
-"berlin.de</a><br /><i>Proje: Marble için OpenGL Kipi</i></p>"
+"berlin.de</a><br /><i>Proje: Bilye için OpenGL Kipi</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:221
 msgctxt "QObject|"
@@ -9447,7 +9446,7 @@ msgid ""
 "><i>Project: Marble Touch on MeeGo</i></p>"
 msgstr ""
 "<p>Daniel Marth <a href=\"danielmarth@gmx.at\">danielmarth@gmx.at</a><br /"
-"><i>Proje: Meego üstünde Marble Touch</i></p>"
+"><i>Proje: Meego üstünde Bilye Touch</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:225
 msgctxt "QObject|"
@@ -9516,7 +9515,7 @@ msgid ""
 "a><br /><i>Project: Vector Tiles for Marble</i></p>"
 msgstr ""
 "<p>Patrick Spendrin <a href=\"pspendrin@gmail.com\">pspendrin@gmail.com</"
-"a><br /><i>Proje: Marble için Vektör Karoları</i></p>"
+"a><br /><i>Proje: Bilye için Vektör Karoları</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:240
 msgctxt "QObject|"
@@ -9526,7 +9525,7 @@ msgid ""
 "for Marble</i></p>"
 msgstr ""
 "<p>Shashank Singh <a href=\"mailto:shashank.personal@gmail.com\">shashank."
-"personal@gmail.com</a><br /><i>Proje: Panoramio / Marble için Vikipedi -"
+"personal@gmail.com</a><br /><i>Proje: Panoramio / Bilye için Vikipedi -"
 "fotograf desteği</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:242
@@ -9552,7 +9551,7 @@ msgid ""
 "com</a><br /><i>Project: GPS Support for Marble</i></p>"
 msgstr ""
 "<p>Andrew Manson <a href=\"mailto:g.real.ate@gmail.com\">g.real.ate@gmail."
-"com</a><br /><i>Proje: Marble için GPS Desteği</i></p>"
+"com</a><br /><i>Proje: Bilye için GPS Desteği</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:247
 msgctxt "QObject|"
@@ -9561,7 +9560,7 @@ msgid ""
 "a><br /><i>Project: KML Support for Marble</i></p>"
 msgstr ""
 "<p>Murad Tagirov <a href=\"mailto:tmurad@gmail.com\">tmurad@gmail.com</"
-"a><br /><i>Proje: Marble için KML Desteği</i></p>"
+"a><br /><i>Proje: Bilye için KML Desteği</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:249
 msgctxt "QObject|"
@@ -9594,7 +9593,7 @@ msgid ""
 "<p> We'd especially like to thank John Layt who provided an important source "
 "of inspiration by creating Marble's predecessor \"Kartographer\".</p>"
 msgstr ""
-"<p> Özellikle John Layt'a, Marble'ın atası olan \"Kartographer\"ı yaratarak "
+"<p> Özellikle John Layt'a, Bilye'nin atası olan \"Kartographer\"ı yaratarak "
 "önemli bir ilham kaynağı olmasından dolayı teşekkür ederiz.</p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:264
@@ -9610,10 +9609,10 @@ msgid ""
 "gov/Newsroom/BlueMarble/\">http://earthobservatory.nasa.gov/Newsroom/"
 "BlueMarble/</a></p>"
 msgstr ""
-"<p><i>Sonraki Nesil Mavi Marble (500 m / pixel)</i><br />NASA Goddard Uzay "
+"<p><i>Sonraki Nesil Mavi Bilye (500 m / pixel)</i><br />NASA Goddard Uzay "
 "Uçuş Merkezi ve Dünya Gözlemevi <a href=\"http://earthobservatory.nasa.gov/"
-"Newsroom/BlueMarble/\">http://earthobservatory.nasa.gov/Newsroom/BlueMarble/"
-"</a></p>"
+"Newsroom/BlueBilye/\">http://earthobservatory.nasa.gov/Newsroom/BlueBilye/</"
+"a></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:269
 msgctxt "QObject|"
@@ -9690,7 +9689,7 @@ msgid ""
 "a>.</p>"
 msgstr ""
 "<p><i>OpenStreetMap</i><br /><a href=\"http://www.openstreetmap.org"
-"\">OpenStreetMap</a> Projesi (\"OSM\") üzerinden indirilen ve Marble ile "
+"\">OpenStreetMap</a> Projesi (\"OSM\") üzerinden indirilen ve Bilye ile "
 "kullanılan sokak haritaları. OSM, düzenlenebilir haritalar oluşturan bir "
 "açık topluluktur.<br /><i>Lisans</i>: OpenStreetMap verisi <a href=\"https://"
 "wiki.openstreetmap.org/index.php/OpenStreetMap_License\">Creative Commons "
@@ -9735,7 +9734,7 @@ msgid ""
 "\"https://wiki.openstreetmap.org/index.php/OpenStreetMap_License\">Creative "
 "Commons Attribution-ShareAlike 2.0 license</a>.</p>"
 msgstr ""
-"<p><i>OpenRouteService</i><br />İndirilerek Marble içinde kullanılan "
+"<p><i>OpenRouteService</i><br />İndirilerek Bilye içinde kullanılan "
 "rotaların bazıları, <a href=\"http://www.openrouteservice.org"
 "\">OpenRouteService</a> Projesi (\"ORS\") tarafından sağlanmıştır. <br /"
 "><i>Lisans</i>: OpenRouteService verisi, <a href=\"https://wiki."
@@ -9752,7 +9751,7 @@ msgid ""
 "href=\"https://wiki.openstreetmap.org/index.php/OpenStreetMap_License"
 "\">Creative Commons Attribution-ShareAlike 2.0 license</a>.</p>"
 msgstr ""
-"<p><i>Open Source Routing Machine</i><br />İndirilerek Marble içinde "
+"<p><i>Open Source Routing Machine</i><br />İndirilerek Bilye içinde "
 "kullanılan rotaların bazıları, <a href=\"http://project-osrm.org\">Open "
 "Source Routing Machine</a> Projesi (\"OSRM\") tarafından sağlanmıştır. <br /"
 "><i>Lisans</i>: Open Source Routing Machine verisi, <a href=\"https://wiki."
@@ -9771,7 +9770,7 @@ msgid ""
 "MapQuest routing service is subject to the <a href=\"https://info.mapquest."
 "com/terms-of-use/\">MapQuest terms of use</a>.</p>"
 msgstr ""
-"<p><i>MapQuest</i><br />İndirilerek Marble içinde kullanılan rotaların "
+"<p><i>MapQuest</i><br />İndirilerek Bilye içinde kullanılan rotaların "
 "bazıları, <a href=\"http://www.mapquest.com/\">MapQuest</a> ve onun Open "
 "Data Map API leri ve web hizmetleri tarafından sağlanmıştır.<br /"
 ">OpenStreetMap verisi üstünde çalışan MapQuest 'in yol tarifleri  <a href="
@@ -9858,7 +9857,7 @@ msgstr ""
 #, qt-format
 msgctxt "Marble::MarbleAboutDialog|"
 msgid "Using Marble Library version %1"
-msgstr "Marble kitaplığının %1 sürümü kullanılıyor"
+msgstr "Bilye kitaplığının %1 sürümü kullanılıyor"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:380
 #, qt-format
@@ -9867,13 +9866,13 @@ msgid ""
 "<br />(c) 2007-%1 by the authors of Marble Virtual Globe<br /><br /><a href="
 "\"https://edu.kde.org/marble\">https://edu.kde.org/marble</a>"
 msgstr ""
-"<br />(c) 2007-%1 Marble Masaüstünde Dünya'nın yazarları<br /><br /><a href="
+"<br />(c) 2007-%1 Bilye Masaüstünde Dünya'nın yazarları<br /><br /><a href="
 "\"https://edu.kde.org/marble\">https://edu.kde.org/marble</a>"
 
 #: src/lib/marble/MarbleAboutDialog.ui:14
 msgctxt "MarbleAboutDialog|"
 msgid "About Marble"
-msgstr "Marble Hakkında"
+msgstr "Bilye Hakkında"
 
 #: src/lib/marble/MarbleAboutDialog.ui:49
 msgctxt "MarbleAboutDialog|"
@@ -9894,7 +9893,7 @@ msgstr ""
 "weight:400; font-style:normal; text-decoration:none;\">\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
 "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
-"weight:600;\">Marble Masaüstünde Dünya</span></p></body></html>"
+"weight:600;\">Bilye Masaüstünde Dünya</span></p></body></html>"
 
 #: src/lib/marble/MarbleAboutDialog.ui:59
 msgctxt "MarbleAboutDialog|"
@@ -9941,7 +9940,7 @@ msgstr ""
 "size:9pt;\"></p>\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
 "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
-"size:9pt;\">(c) 2007, Marble Projesi</span></p>\n"
+"size:9pt;\">(c) 2007, Bilye Projesi</span></p>\n"
 "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
 "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-"
 "size:9pt; font-style:italic;\"></p>\n"
@@ -10038,7 +10037,7 @@ msgstr ""
 "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; font-"
 "weight:400; font-style:normal;\">\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-"right:0px; -qt-block-indent:0; text-indent:0px;\">Marble için kullanılan iki "
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Bilye için kullanılan iki "
 "önbellek vardır: Harita verilerini bilgisayarın belleğinde tutmak için "
 "gereken fiziksel bellek. Değeri artırmak, uygulamanın daha hızlı tepki "
 "verecektir. Sabit disk önbellekleri, İnternet'ten içeriği indirerek "
@@ -10308,7 +10307,7 @@ msgstr ""
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
 "right:0px; -qt-block-indent:0; text-indent:0px;\">Fare işaretçisinin "
 "altındaki konum tam olarak imleci takip edecektir: Sonuç olarak; Kuzey kutbu "
-"üstte kalmayacaktır. Bu karışıklığa neden olabilir. Öntanımlı olarak Marble, "
+"üstte kalmayacaktır. Bu karışıklığa neden olabilir. Öntanımlı olarak Bilye, "
 "kuzeyin daima yukarıya gelmesini sağlar ve bunun sonucunda fare "
 "işaretçisinin altındaki konumun imlecin hafifçe \"ayrıldığı\" bir "
 "sürükleyici davranış ortaya çıkar. </p></body></html>"
@@ -10353,7 +10352,7 @@ msgstr ""
 "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; font-"
 "weight:400; font-style:normal;\">\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-"right:0px; -qt-block-indent:0; text-indent:0px;\">Bir yer ararken Marble "
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Bir yer ararken Bilye "
 "anında yeni konuma taşınabilir veya bir önceki yerden yeni yerine seyahat "
 "animasyonu gösterebilir.</p></body></html>"
 
@@ -10397,7 +10396,7 @@ msgstr ""
 "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; font-"
 "weight:400; font-style:normal;\">\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-"right:0px; -qt-block-indent:0; text-indent:0px;\">Öntanımlı olarak Marble, "
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Öntanımlı olarak Bilye, "
 "uygulama başladıktan hemen sonra ev konumunu görüntüler. Alternatif olarak, "
 "kullanıcı uygulamadan çıktığında etkin olan son konumu da gösterebilir. </"
 "p></body></html>"
@@ -10562,7 +10561,7 @@ msgid ""
 "<br/>(c) %1 The Marble Project<br /><br/><a href=\"https://edu.kde.org/marble"
 "\">https://edu.kde.org/marble</a>"
 msgstr ""
-"<br/>(c) %1 Marble Projesi<br /><br/><a href=\"https://edu.kde.org/marble"
+"<br/>(c) %1 Bilye Projesi<br /><br/><a href=\"https://edu.kde.org/marble"
 "\">https://edu.kde.org/marble</a>"
 
 #: src/lib/marble/MarblePluginSettingsWidget.ui:17
@@ -10598,7 +10597,7 @@ msgstr ""
 "weight:400; font-style:normal;\">\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
 "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
-"family:'Sans Serif';\">Marble'ın ileri düzey kullanıcılar için makine "
+"family:'Sans Serif';\">Bilye'nin ileri düzey kullanıcılar için makine "
 "odasıdır. Burada, eklentilerle sağlanan işlevselliği seçebilir veya seçimini "
 "kaldırabilirsiniz. </span></p>\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
@@ -10793,7 +10792,7 @@ msgstr "Orta Afrika Zamanı"
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:231
 msgctxt "MarbleTimeSettingsWidget|"
 msgid "When Marble starts"
-msgstr "Marble başladığında"
+msgstr "Bilye başladığında"
 
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:237
 msgctxt "MarbleTimeSettingsWidget|"
@@ -11177,8 +11176,8 @@ msgctxt "QObject|"
 msgid ""
 "Marble requires additional software in order to create movies. Please get %1 "
 msgstr ""
-"Marble, videolar oluşturmak amacıyla ek yazılımlara gereksinim duyuor. "
-"Lütfen %1 kurun "
+"Bilye, videolar oluşturmak amacıyla ek yazılımlara gereksinim duyuor. Lütfen "
+"%1 kurun "
 
 #: src/lib/marble/MovieCapture.cpp:59
 msgctxt "Marble::MovieCapture|"
@@ -11574,7 +11573,7 @@ msgstr "Bilinmeyen hata"
 #: src/lib/marble/PrintOptions.ui:14
 msgctxt "PrintOptions|"
 msgid "Marble"
-msgstr "Marble"
+msgstr "Bilye"
 
 #: src/lib/marble/PrintOptions.ui:20
 msgctxt "PrintOptions|"
@@ -12090,7 +12089,7 @@ msgstr "Lütfen gezinme sırasında genel kurallara uyun."
 #: src/lib/marble/routing/RoutingManager.cpp:516
 msgctxt "Marble::RoutingManager|"
 msgid "The Marble development team wishes you a pleasant and safe journey."
-msgstr "Marble geliştirme ekibi, size keyifli ve güvende bir yolculuk diler."
+msgstr "Bilye geliştirme ekibi, size keyifli ve güvende bir yolculuk diler."
 
 #: src/lib/marble/routing/RoutingManager.cpp:517
 msgctxt "Marble::RoutingManager|"
@@ -12516,7 +12515,7 @@ msgstr ""
 "indent:0; text-indent:0px;\"><span style=\" font-weight:600;\">Uydu Görnümü</"
 "span></p><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
 "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Uzaydan görüldüğü "
-"gibi Dünya. Harita, NASA'nın güzel \"Blue Marble Next Generation\" "
+"gibi Dünya. Harita, NASA'nın güzel \"Blue Bilye Next Generation\" "
 "resimlerine dayanmaktadır. Emeği Geçenler: NASA'nın Dünya Gözlemevi</p></"
 "body></html>"
 
@@ -12526,7 +12525,7 @@ msgid ""
 "Marble needs to create this map. This only needs to be done once and may "
 "take a few seconds."
 msgstr ""
-"Marble'ın bu haritayı oluşturması gerekiyor. Bu işlem yalnızca bir defa "
+"Bilye'nin bu haritayı oluşturması gerekiyor. Bu işlem yalnızca bir defa "
 "gerçekleştirilir ve yalnızca birkaç saniye sürer."
 
 #: src/lib/marble/TileLevelRangeWidget.ui:29
@@ -14134,7 +14133,7 @@ msgid ""
 "you want more information on a specific event, select it and click OK.</p></"
 "body></html>"
 msgstr ""
-"<html><head/><body><p>Marble, yakın gelecekte aşağıdaki <span style=\" font-"
+"<html><head/><body><p>Bilye, yakın gelecekte aşağıdaki <span style=\" font-"
 "weight:600;\">tutulma olayları</span> bulunduğunu tespit etti. Belli bir "
 "olay hakkında daha fazla bilgi istiyorsanız, seçin ve Tamam'ı tıklayın.</p></"
 "body></html>"
@@ -15374,7 +15373,7 @@ msgid ""
 "<a href=\"https://userbase.kde.org/Marble/CustomSpeakers\">Get more "
 "speakers</a>"
 msgstr ""
-"<a href=\"http://userbase.kde.org/Marble/CustomSpeakers\">Daha fazla "
+"<a href=\"http://userbase.kde.org/Bilye/CustomSpeakers\">Daha fazla "
 "konuşmacı indir</a>"
 
 #: src/plugins/render/routing/RoutingPlugin.cpp:240
@@ -15577,7 +15576,7 @@ msgstr "Tüm Desteklenen Dosyalar (*.txt *.msc)"
 #: src/plugins/render/satellites/SatellitesConfigDialog.cpp:290
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Marble Satellite Catalog (*.msc)"
-msgstr "Marble Uydu Kataloğu (*.msc)"
+msgstr "Bilye Uydu Kataloğu (*.msc)"
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.cpp:291
 msgctxt "Marble::SatellitesConfigDialog|"
@@ -15685,8 +15684,8 @@ msgid ""
 "body></html>"
 msgstr ""
 "<html><head/><body><p>Supported formats: <a href=\"http://techbase.kde.org/"
-"Projects/Marble/SatelliteCatalogFormat\"><span style=\" text-decoration: "
-"underline; color:#0000ff;\">Marble Uydu Kataloğu</span></a>, <a href="
+"Projects/Bilye/SatelliteCatalogFormat\"><span style=\" text-decoration: "
+"underline; color:#0000ff;\">Bilye Uydu Kataloğu</span></a>, <a href="
 "\"https://en.wikipedia.org/wiki/Two-line_element_set\"><span style=\" text-"
 "decoration: underline; color:#0000ff;\">Two-Line-Element Kümesi</span></a></"
 "p></body></html>"
@@ -16322,8 +16321,8 @@ msgstr ""
 "style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
 "right:0px; -qt-block-indent:0; text-indent:0px;\">Burada hava koşullarının "
 "gösterilmesini isteyip istemediğinizi seçebilirsiniz (örneğin, bulutlar veya "
-"açık gökyüzü.) Marble yalnızca bu bilgi kullanılabilirse durumu "
-"gösterecektir.</p></body></html>\n"
+"açık gökyüzü.) Bilye yalnızca bu bilgi kullanılabilirse durumu gösterecektir."
+"</p></body></html>\n"
 
 #: src/plugins/render/weather/WeatherConfigWidget.ui:33
 msgctxt "WeatherConfigWidget|"
@@ -16992,7 +16991,7 @@ msgstr "Önbellek Dosyasından GeoDataDocument Oluştur"
 #: src/plugins/runner/cache/CachePlugin.cpp:49
 msgctxt "Marble::CachePlugin|"
 msgid "Marble Cache Files"
-msgstr "Marble Önbellek Dosyaları"
+msgstr "Bilye Önbellek Dosyaları"
 
 #: src/plugins/runner/cyclestreets/CycleStreetsConfigWidget.ui:20
 msgctxt "CycleStreetsConfigWidget|"
@@ -17521,7 +17520,7 @@ msgstr "Yerel Veritabanı"
 #: src/plugins/runner/localdatabase/LocalDatabasePlugin.cpp:39
 msgctxt "Marble::LocalDatabasePlugin|"
 msgid "Searches the internal Marble database for placemarks"
-msgstr "Yer işaretleri için dahili Marble veritabanı aramaları"
+msgstr "Yer işaretleri için dahili Bilye veritabanı aramaları"
 
 #: src/plugins/runner/log/LogPlugin.cpp:18
 msgctxt "Marble::LogfilePlugin|"

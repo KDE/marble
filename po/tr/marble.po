@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: kdeedu-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-04-26 00:45+0000\n"
-"PO-Revision-Date: 2023-05-28 11:38+0300\n"
+"PO-Revision-Date: 2023-08-11 13:54+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -22,7 +22,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 23.04.1\n"
+"X-Generator: Lokalize 23.11.70\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -39,7 +39,7 @@ msgstr ""
 #: kdemain.cpp:91
 #, kde-format
 msgid "Marble Virtual Globe"
-msgstr "Marble Masaüstünde Dünya"
+msgstr "Marble Sanal Küre"
 
 #: kdemain.cpp:93
 #, kde-format
@@ -209,7 +209,7 @@ msgstr "Henry de Valence"
 #: kdemain.cpp:149
 #, kde-format
 msgid "Core Developer: Marble Runners, World-Clock Plasmoid"
-msgstr "Çekirdek Geliştirici: Marble Runners, Dünya Saatleri Plasmoid'i"
+msgstr "Çekirdek Geliştirici: Bilye Runners, Dünya Saatleri Plasmoid'i"
 
 #: kdemain.cpp:151
 #, kde-format
@@ -239,7 +239,7 @@ msgstr "Simon Edwards"
 #: kdemain.cpp:158
 #, kde-format
 msgid "Marble Python Bindings"
-msgstr "Marble Python Bağıntıları"
+msgstr "Bilye Python Bağıntıları"
 
 #: kdemain.cpp:160
 #, kde-format
@@ -296,7 +296,7 @@ msgstr "Daniel Marth"
 #: kdemain.cpp:183
 #, kde-format
 msgid "Google Summer of Code 2011 Project: Marble Touch on MeeGo"
-msgstr "Google Summer of Code 2011 Project: Meego üzerinde Marble Touch"
+msgstr "Google Summer of Code 2011 Project: Meego üzerinde Bilye Touch"
 
 #: kdemain.cpp:186
 #, kde-format
@@ -346,7 +346,7 @@ msgstr "Google Summer of Code 2009 Projesi: Çevrimiçi Hizmetler"
 #: kdemain.cpp:207
 #, kde-format
 msgid "Google Summer of Code 2008 Project: Vector Tiles for Marble"
-msgstr "Google Summer of Code 2008 Projesi: Marble için Vektör Döşemeleri"
+msgstr "Google Summer of Code 2008 Projesi: Bilye için Vektör Döşemeleri"
 
 #: kdemain.cpp:210
 #, kde-format
@@ -359,7 +359,7 @@ msgid ""
 "Google Summer of Code 2008 Project: Panoramio / Wikipedia -photo support for "
 "Marble"
 msgstr ""
-"Google Summer of Code 2008 Projesi: Panoramio / Wikipedia - Marble için "
+"Google Summer of Code 2008 Projesi: Panoramio / Wikipedia - Bilye için "
 "fotoğraf desteği"
 
 #: kdemain.cpp:214
@@ -378,7 +378,7 @@ msgstr ""
 #: kdemain.cpp:219
 #, kde-format
 msgid "Google Summer of Code 2007 Project: GPS Support for Marble"
-msgstr "Google Summer of Code 2007 Projesi: Marble için GPS Desteği"
+msgstr "Google Summer of Code 2007 Projesi: Bilye için GPS Desteği"
 
 #: kdemain.cpp:222
 #, kde-format
@@ -388,7 +388,7 @@ msgstr "Murad Tagirov"
 #: kdemain.cpp:223
 #, kde-format
 msgid "Google Summer of Code 2007 Project: KML Support for Marble"
-msgstr "Google Summer of Code 2007 Projesi: Marble için KML Desteği"
+msgstr "Google Summer of Code 2007 Projesi: Bilye için KML Desteği"
 
 #: kdemain.cpp:228
 #, kde-format
@@ -624,7 +624,7 @@ msgid ""
 "Special thanks for providing an important source of inspiration by creating "
 "Marble's predecessor \"Kartographer\"."
 msgstr ""
-"Marble'ın öncülü \"Kartographer\" uygulamasını yaratarak önemli bir ilham "
+"Bilye'nin öncülü \"Kartographer\" uygulamasını yaratarak önemli bir ilham "
 "kaynağı olmasından dolayı özel teşekkürler."
 
 #: kdemain.cpp:327
@@ -712,13 +712,13 @@ msgstr "Açılacak bir veya birden fazla yer işareti dosyası"
 #: marble.kcfg:58
 #, kde-format
 msgid "The date and time of marble clock"
-msgstr "Marble saatinin tarih ve zamanı"
+msgstr "Bilye saatinin tarih ve zamanı"
 
 #. i18n: ectx: label, entry, group (Time)
 #: marble.kcfg:61
 #, kde-format
 msgid "The speed of marble clock"
-msgstr "Marble saatinin hızı"
+msgstr "Bilye saatinin hızı"
 
 #. i18n: ectx: label, entry, group (View)
 #: marble.kcfg:107
@@ -926,7 +926,7 @@ msgstr "Görseller *.jpg *.png"
 #, kde-format
 msgctxt "Application name"
 msgid "Marble"
-msgstr "Marble"
+msgstr "Bilye"
 
 #: marble_part.cpp:292
 #, kde-format
