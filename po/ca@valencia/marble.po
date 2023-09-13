@@ -697,7 +697,7 @@ msgstr "Establix la distància de l'observador al globus (en km)"
 #, kde-format
 msgid "Use map <id> (e.g. \"earth/openstreetmap/openstreetmap.dgml\")"
 msgstr ""
-"Utilitza l'<ID> del mapa (p. ex. «earth/openstreetmap/openstreetmap.dgml»)"
+"Utilitza l'<ID> del mapa (p. ex., «earth/openstreetmap/openstreetmap.dgml»)"
 
 #: kdemain.cpp:355
 #, kde-format
