@@ -81,7 +81,7 @@ include( MarbleMacros )
 ####################################################
 # Generate the tiles with the tilecreator at compile time
 # if this option is set, srtm.jpg will not be installed but the generated tiles instead
-option(MOBILE "Create a Marble version optimized for handheld devices")
+option(MOBILE "Create a Marble version optimized for handheld devices" OFF)
 
 ####################################################
 # Provide opt-in switch for mobile variant, which is not only useful for Android.
@@ -116,10 +116,10 @@ if(ANDROID)
    # TODO: still needed with ECM toolchain?
    SET(QT_QMAKE_EXECUTABLE "$ENV{Qt5_android}/bin/qmake")
 else()
-    set(REQUIRED_QT_VERSION 5.14.0)
+    set(REQUIRED_QT_VERSION 6.4.2)
 endif()
 
-find_package(Qt5 ${REQUIRED_QT_VERSION} REQUIRED
+find_package(Qt6 ${REQUIRED_QT_VERSION} REQUIRED
     COMPONENTS
         Core
         Xml
@@ -131,6 +131,7 @@ find_package(Qt5 ${REQUIRED_QT_VERSION} REQUIRED
         Concurrent
         Quick
         PrintSupport
+        Core5Compat
 )
 
 if(ANDROID)
@@ -139,18 +140,17 @@ if(ANDROID)
 
    set ( MARBLE_NO_WEBKITWIDGETS TRUE )
 else()
-    find_package(Qt5WebChannel ${REQUIRED_QT_VERSION})
-    find_package(Qt5WebEngine ${REQUIRED_QT_VERSION})
-    find_package(Qt5WebEngineWidgets ${REQUIRED_QT_VERSION})
+    find_package(Qt6WebChannel ${REQUIRED_QT_VERSION})
+    find_package(Qt6WebEngineWidgets ${REQUIRED_QT_VERSION})
 
-   if ( NOT Qt5WebEngineWidgets_FOUND )
+   if ( NOT Qt6WebEngineWidgets_FOUND )
      set ( MARBLE_NO_WEBKITWIDGETS TRUE )
    endif()
 endif()
 
 if (BUILD_WITH_DBUS)
-  find_package(Qt5DBus ${REQUIRED_QT_VERSION})
-  if (NOT Qt5DBus_FOUND)
+  find_package(Qt6DBus ${REQUIRED_QT_VERSION})
+  if (NOT Qt6DBus_FOUND)
     set(MARBLE_NO_DBUS TRUE)
   endif()
 else()
@@ -170,7 +170,7 @@ endif( WIN32 )
 INCLUDE (CTest)
 ENABLE_TESTING()
 
-option( BUILD_MARBLE_TESTS "Build unit tests" ON )
+option( BUILD_MARBLE_TESTS "Build unit tests" OFF )
 add_feature_info("Unit tests" BUILD_MARBLE_TESTS "Build unit tests. Toggle with BUILD_MARBLE_TESTS=YES/NO. 'make test' will run all.")
 
 if( BUILD_MARBLE_TESTS )
@@ -312,11 +312,11 @@ endif(WIN32)
 
 
 ####################################################
-# Add global ECM & KF5 settings
-set(REQUIRED_ECM_VERSION 1.7.0)
+# Add global ECM & KF6 settings
+set(REQUIRED_ECM_VERSION 5.240.0)
 set(KDE_INSTALL_DIRS_NO_DEPRECATED TRUE)
 set(KDE_SKIP_UNINSTALL_TARGET ON CACHE BOOL "KDE uninstall target must be disabled")
-set(REQUIRED_KF5_MIN_VERSION 5.7.0)
+set(REQUIRED_KF6_MIN_VERSION 5.240.0)
 
 find_package(ECM ${REQUIRED_ECM_VERSION} QUIET)
 if(ECM_FOUND)

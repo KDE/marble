@@ -714,7 +714,7 @@ QT.Marble.depends = ${PRI_DEPS}
 )
 
 # detect which folder the pri file should be installed into
-get_target_property(QMAKE_EXECUTABLE Qt5::qmake LOCATION)
+get_target_property(QMAKE_EXECUTABLE Qt6::qmake LOCATION)
 
 function(query_qmake result_variable qt_variable)
     execute_process(
