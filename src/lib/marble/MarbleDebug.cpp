@@ -5,6 +5,8 @@
 
 #include "MarbleDebug.h"
 
+#include <QIODevice>
+
 namespace Marble
 {
 bool MarbleDebug::m_enabled = false;

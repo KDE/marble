@@ -14,6 +14,7 @@
 #include "MarbleDebug.h"
 
 #include <QDataStream>
+#include <QVariant>
 
 
 namespace Marble
@@ -883,17 +884,17 @@ QVariantList GeoDataLineString::toVariantList() const
     QVariantList variantList;
     for( const GeoDataCoordinates & itCoords : qAsConst(d->m_vector) ) {
         QVariantMap map;
-        map.insert("lon", itCoords.longitude(GeoDataCoordinates::Degree));
-        map.insert("lat", itCoords.latitude(GeoDataCoordinates::Degree));
-        map.insert("alt", itCoords.altitude());
+        map.insert(QLatin1String("lon"), itCoords.longitude(GeoDataCoordinates::Degree));
+        map.insert(QLatin1String("lat"), itCoords.latitude(GeoDataCoordinates::Degree));
+        map.insert(QLatin1String("alt"), itCoords.altitude());
         variantList << map;
     }
 
     if (isClosed()) {
         QVariantMap map;
-        map.insert("lon", d->m_vector.first().longitude(GeoDataCoordinates::Degree));
-        map.insert("lat", d->m_vector.first().latitude(GeoDataCoordinates::Degree));
-        map.insert("alt", d->m_vector.first().altitude());
+        map.insert(QLatin1String("lon"), d->m_vector.first().longitude(GeoDataCoordinates::Degree));
+        map.insert(QLatin1String("lat"), d->m_vector.first().latitude(GeoDataCoordinates::Degree));
+        map.insert(QLatin1String("alt"), d->m_vector.first().altitude());
         variantList << map;
     }
 

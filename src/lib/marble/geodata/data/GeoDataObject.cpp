@@ -100,7 +100,7 @@ QString GeoDataObject::resolvePath( const QString &relativePath ) const
         GeoDataDocument const * document = dynamic_cast<GeoDataDocument const*>( this );
         if ( document ) {
             QString const baseUri = document->baseUri();
-            QFileInfo const documentRoot = baseUri.isEmpty() ? document->fileName() : baseUri;
+            QFileInfo const documentRoot = QFileInfo(baseUri.isEmpty() ? document->fileName() : baseUri);
             QFileInfo const absoluteImage(documentRoot.absolutePath() + QLatin1Char('/') + url.path());
             return absoluteImage.absoluteFilePath();
         } else if ( d->m_parent ) {

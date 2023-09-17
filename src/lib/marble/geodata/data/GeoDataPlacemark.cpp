@@ -23,6 +23,7 @@
 #include "GeoDataTrack.h"
 #include "GeoDataModel.h"
 #include <QString>
+#include <QStringRef>
 #include <QXmlStreamWriter>
 
 namespace Marble
@@ -293,7 +294,7 @@ QString GeoDataPlacemark::displayName() const
         for (const QString &uiLanguage: uiLanguages) {
             for (auto tagIter = data.tagsBegin(), end = data.tagsEnd(); tagIter != end; ++tagIter) {
                 if (tagIter.key().startsWith(QLatin1String("name:"))) {
-                    QStringRef const tagLanguage = tagIter.key().midRef(5);
+                    QString const tagLanguage = tagIter.key().mid(5);
                     if (tagLanguage == uiLanguage) {
                         return tagIter.value();
                     }

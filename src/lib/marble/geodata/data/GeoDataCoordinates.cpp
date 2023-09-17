@@ -90,7 +90,7 @@ void GeoDataCoordinates::detach()
     delete d->m_q;
     d->m_q = nullptr;
 
-    if(d->ref.load() == 1) {
+    if(d->ref.fetchAndAddRelaxed(0) == 1) {
         return;
     }
 

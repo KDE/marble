@@ -114,7 +114,10 @@ HttpDownloadManager::~HttpDownloadManager()
 
 void HttpDownloadManager::setDownloadEnabled( const bool enable )
 {
+/*
+    PORT_QT6
     d->m_networkAccessManager.setNetworkAccessible( enable ? QNetworkAccessManager::Accessible : QNetworkAccessManager::NotAccessible );
+*/
     d->m_acceptJobs = enable;
     QList<QPair<DownloadPolicyKey, DownloadQueueSet *> >::iterator pos = d->m_queueSets.begin();
     QList<QPair<DownloadPolicyKey, DownloadQueueSet *> >::iterator const end = d->m_queueSets.end();
