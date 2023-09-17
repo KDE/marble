@@ -332,9 +332,9 @@ double LonLatParser::parseDouble(const QString& input)
 
 QString LonLatParser::createDecimalPointExp()
 {
-    const QChar decimalPoint = QLocale::system().decimalPoint();
+    const QString decimalPoint = QLocale::system().decimalPoint();
 
-    return (decimalPoint == QLatin1Char('.')) ? QStringLiteral("\\.") :
+    return (decimalPoint == QLatin1String(".")) ? QStringLiteral("\\.") :
         QLatin1String("[.") + decimalPoint + QLatin1Char(']');
 }
 
@@ -343,7 +343,7 @@ void LonLatParser::getLocaleList(QStringList& localeList, const QString& localeL
 {
     const QString lowerLocaleListString = localeListString.toLower();
     if (lowerLocaleListString != placeholder) {
-        localeList = lowerLocaleListString.split(separator, QString::SkipEmptyParts);
+        localeList = lowerLocaleListString.split(separator, Qt::SkipEmptyParts);
     }
 }
 

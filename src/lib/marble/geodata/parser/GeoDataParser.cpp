@@ -8,6 +8,8 @@
 // Own
 #include "GeoDataParser.h"
 
+#include <QStringView>
+
 // Marble
 #include "MarbleDebug.h"
 
@@ -15,7 +17,6 @@
 #include "GeoDataDocument.h"
 #include "GeoDocument.h"
 #include "GeoTagHandler.h"
-
 
 // TODO: GeoRSS support
 // #include "GeoRSSElementDictionary.h"
@@ -67,7 +68,7 @@ bool GeoDataParser::isValidElement(const QString& tagName) const
     switch ((GeoDataSourceType) m_source) {
     // TODO: case GeoData_GeoRSS:
     case GeoData_KML: {
-        const QStringRef namespaceUri = this->namespaceUri();
+        const QStringView namespaceUri = this->namespaceUri();
         return (namespaceUri == QLatin1String(kml::kmlTag_nameSpace20) ||
                 namespaceUri == QLatin1String(kml::kmlTag_nameSpace21) ||
                 namespaceUri == QLatin1String(kml::kmlTag_nameSpace22) ||

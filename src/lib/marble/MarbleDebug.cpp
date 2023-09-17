@@ -4,6 +4,7 @@
 //
 
 #include "MarbleDebug.h"
+#include <QIODevice>
 
 
 /**
@@ -15,7 +16,6 @@
 MARBLE_EXPORT Q_LOGGING_CATEGORY(MARBLE_DEFAULT, "marble_default")
 MARBLE_EXPORT Q_LOGGING_CATEGORY(MARBLE_LIB, "marble_lib")
 MARBLE_EXPORT Q_LOGGING_CATEGORY(MARBLE_PLUGINS, "marble_plugins")
-
 
 namespace Marble
 {

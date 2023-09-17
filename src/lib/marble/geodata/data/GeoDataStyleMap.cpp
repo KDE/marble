@@ -60,8 +60,12 @@ GeoDataStyleMap& GeoDataStyleMap::operator=( const GeoDataStyleMap& other )
 
 bool GeoDataStyleMap::operator==( const GeoDataStyleMap &other ) const
 {
-    if ( GeoDataStyleSelector::operator!=( other ) ||
-         QMap<QString, QString>::operator!=( other ) )
+    if ( GeoDataStyleSelector::operator!=( other )
+/*
+         PORT_QT6
+         || QMap<QString, QString>::operator!=( other )
+*/
+       )
     {
         return false;
     }
