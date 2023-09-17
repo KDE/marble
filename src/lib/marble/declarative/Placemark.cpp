@@ -5,10 +5,10 @@
 
 #include "Placemark.h"
 
-#ifdef HAVE_QT5_POSITIONING
+#ifdef HAVE_QT6_POSITIONING
 #include <GeoDataExtendedData.h>
 #include <QGeoAddress>
-#endif // HAVE_QT5_POSITIONING
+#endif // HAVE_QT6_POSITIONING
 
 #include <osm/OsmPlacemarkData.h>
 #include "GeoDataStyle.h"
@@ -661,7 +661,7 @@ void Placemark::append(QString &target, const QString &value)
 
 QString Placemark::addressFromOsmData() const
 {
-#ifdef HAVE_QT5_POSITIONING
+#ifdef HAVE_QT6_POSITIONING
     QGeoAddress address;
     OsmPlacemarkData const data = m_placemark.osmData();
     address.setCountry(data.tagValue("addr:country"));

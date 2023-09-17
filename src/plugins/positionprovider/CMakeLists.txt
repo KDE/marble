@@ -8,14 +8,14 @@ IF(LIBGPS_FOUND)
      ADD_SUBDIRECTORY( gpsd )
 ENDIF(LIBGPS_FOUND)
 
-find_package(Qt5 ${REQUIRED_QT_VERSION}
+find_package(Qt6 ${REQUIRED_QT_VERSION}
     OPTIONAL_COMPONENTS
         Positioning
 )
 marble_set_package_properties( Qt5Positioning PROPERTIES DESCRIPTION "a collection of APIs and frameworks" )
 marble_set_package_properties( Qt5Positioning PROPERTIES URL "https://www.qt.io/developers/" )
 marble_set_package_properties( Qt5Positioning PROPERTIES TYPE OPTIONAL PURPOSE "position information via Qt5Positioning" )
-if(Qt5Positioning_FOUND)
+if(Qt6Positioning_FOUND)
    ADD_SUBDIRECTORY( qtpositioning )
 endif()
 

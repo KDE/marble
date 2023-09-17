@@ -1,9 +1,9 @@
 PROJECT( MarbleDeclarativePlugin )
 
-find_package(Qt5 ${REQUIRED_QT_VERSION} OPTIONAL_COMPONENTS Positioning)
-if(Qt5Positioning_FOUND)
-    add_definitions(-DHAVE_QT5_POSITIONING)
-endif(Qt5Positioning_FOUND)
+find_package(Qt6 ${REQUIRED_QT_VERSION} OPTIONAL_COMPONENTS Positioning)
+if(Qt6Positioning_FOUND)
+    add_definitions(-DHAVE_QT6_POSITIONING)     # PORT_QT6
+endif(Qt6Positioning_FOUND)
 
 INCLUDE_DIRECTORIES(
     ${CMAKE_CURRENT_SOURCE_DIR}
