@@ -12,9 +12,9 @@ find_package(Qt6 ${REQUIRED_QT_VERSION}
     OPTIONAL_COMPONENTS
         Positioning
 )
-marble_set_package_properties( Qt5Positioning PROPERTIES DESCRIPTION "a collection of APIs and frameworks" )
-marble_set_package_properties( Qt5Positioning PROPERTIES URL "https://www.qt.io/developers/" )
-marble_set_package_properties( Qt5Positioning PROPERTIES TYPE OPTIONAL PURPOSE "position information via Qt5Positioning" )
+marble_set_package_properties( Qt6Positioning PROPERTIES DESCRIPTION "a collection of APIs and frameworks" )
+marble_set_package_properties( Qt6Positioning PROPERTIES URL "https://www.qt.io/developers/" )
+marble_set_package_properties( Qt6Positioning PROPERTIES TYPE OPTIONAL PURPOSE "position information via Qt6Positioning" )
 if(Qt6Positioning_FOUND)
    ADD_SUBDIRECTORY( qtpositioning )
 endif()

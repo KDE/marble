@@ -2,8 +2,8 @@ cmake_minimum_required(VERSION 2.8.12)
 
 project(map-properties)
 
-find_package(Qt5Widgets REQUIRED)
+find_package(Qt6Widgets REQUIRED)
 find_package(Marble REQUIRED)
 
 add_executable(map-properties  main.cpp)
-target_link_libraries(map-properties  Marble Qt5::Widgets)
+target_link_libraries(map-properties  Marble Qt6::Widgets)

@@ -10,6 +10,6 @@ set( overviewmap_UI OverviewMapConfigWidget.ui )
 
 qt_wrap_ui(overviewmap_SRCS ${overviewmap_UI})
 
-set( OverviewMap_LIBS Qt5::Svg )
+set( OverviewMap_LIBS Qt6::Svg )
 
 marble_add_plugin( OverviewMap ${overviewmap_SRCS} )

@@ -14,4 +14,4 @@ DatabaseQuery.cpp
  )
 
 marble_add_plugin( LocalOsmSearchPlugin ${localOsmSearch_SRCS} )
-target_link_libraries( LocalOsmSearchPlugin Qt5::Sql )
+target_link_libraries( LocalOsmSearchPlugin Qt6::Sql )

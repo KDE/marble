@@ -18,4 +18,4 @@ main.cpp
 )
 add_executable( ${TARGET} ${${TARGET}_SRC} )
 
-target_link_libraries(${TARGET} marblewidget Qt5::Sql)
+target_link_libraries(${TARGET} marblewidget Qt6::Sql)

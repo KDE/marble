@@ -2,8 +2,8 @@ cmake_minimum_required(VERSION 2.8.12)
 
 project(reverse-geocoding)
 
-find_package(Qt5Widgets REQUIRED)
+find_package(Qt6Widgets REQUIRED)
 find_package(Marble REQUIRED)
 
 add_executable(reverse-geocoding  main.cpp)
-target_link_libraries(reverse-geocoding  Marble Qt5::Widgets)
+target_link_libraries(reverse-geocoding  Marble Qt6::Widgets)

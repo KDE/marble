@@ -132,7 +132,7 @@ MarblePart::MarblePart( QWidget *parentWidget, QObject *parent, const QVariantLi
     // This has to happen before any initialization so plugins (for example) can
     // use it during initialization.
     MarbleLocale *marbleLocale = MarbleGlobal::getInstance()->locale();
-    // KF5 TODO: Read Connecting Calls to Catalogs" in ki18n programmer's guide
+    // KF6 TODO: Read Connecting Calls to Catalogs" in ki18n programmer's guide
     //           and enable translations
     //     KLocale *kLocale = KGlobal::locale();
 //     if ( kLocale->measureSystem() == KLocale::Metric ) {

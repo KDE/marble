@@ -12,9 +12,9 @@ include(KDEInstallDirs)
 set(LIB_INSTALL_DIR ${KDE_INSTALL_LIBDIR})
 include(KDECMakeSettings)
 
-macro_optional_find_package(KF5 ${REQUIRED_KF5_MIN_VERSION} QUIET COMPONENTS Runner I18n)
+macro_optional_find_package(KF6 ${REQUIRED_KF6_MIN_VERSION} QUIET COMPONENTS Runner I18n)
 
-if(NOT KF5_FOUND)
+if(NOT KF6_FOUND)
   return()
 endif()
 
@@ -26,12 +26,12 @@ set(plasmaRunner_SRCS
 add_library(plasma_runner_marble MODULE ${plasmaRunner_SRCS})
 target_link_libraries(plasma_runner_marble
   marblewidget
-  KF5::Runner
-  KF5::I18n
+  KF6::Runner
+  KF6::I18n
 )
 
 install(TARGETS plasma_runner_marble DESTINATION ${KDE_INSTALL_PLUGINDIR}/kf5/krunner)
-if(KF5Runner_VERSION VERSION_LESS 5.72.0)
+if(KF6Runner_VERSION VERSION_LESS 5.72.0)
   install(FILES plasma-runner-marble.desktop DESTINATION ${KDE_INSTALL_KSERVICES5DIR})
 else()
   kcoreaddons_desktop_to_json(plasma_runner_marble plasma-runner-marble.desktop)

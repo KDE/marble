@@ -66,9 +66,9 @@ class Filter(object):
 
         return []
 
-qtDir = os.environ.get('Qt5_android')
+qtDir = os.environ.get('Qt6_android')
 if qtDir is None:
-    print ('Please setup the Qt5_android environment variable point to your Qt installation')
+    print ('Please setup the Qt6_android environment variable point to your Qt installation')
     sys.exit(1)
 
 parser = argparse.ArgumentParser(description='Create an Android application package (APK) for Marble Maps')

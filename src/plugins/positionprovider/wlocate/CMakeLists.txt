@@ -6,7 +6,7 @@ INCLUDE_DIRECTORIES(
  ${LIBWLOCATE_INCLUDE_DIR}
 )
 
-INCLUDE_DIRECTORIES(${Qt5Concurrent_INCLUDE_DIRS})
+INCLUDE_DIRECTORIES(${Qt6Concurrent_INCLUDE_DIRS})
 
 set( wlocate_SRCS
  WlocatePositionProviderPlugin.cpp

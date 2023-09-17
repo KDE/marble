@@ -9,6 +9,6 @@ SET( qtpositioning_SRCS
  QtPositioningPositionProviderPlugin.cpp
 )
 
-SET( QtPositioningPositionProviderPlugin_LIBS Qt5::Positioning )
+SET( QtPositioningPositionProviderPlugin_LIBS Qt6::Positioning )
 
 MARBLE_ADD_PLUGIN( QtPositioningPositionProviderPlugin ${qtpositioning_SRCS} )

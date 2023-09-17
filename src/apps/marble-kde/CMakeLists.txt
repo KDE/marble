@@ -2,9 +2,9 @@ if(NOT ECM_FOUND)
     return()
 endif()
 
-macro_optional_find_package(KF5 ${REQUIRED_KF5_MIN_VERSION} QUIET COMPONENTS Crash Parts CoreAddons I18n)
+macro_optional_find_package(KF6 ${REQUIRED_KF6_MIN_VERSION} QUIET COMPONENTS Crash Parts CoreAddons I18n)
 
-if(NOT KF5_FOUND)
+if(NOT KF6_FOUND)
     return()
 endif()
 
@@ -22,9 +22,9 @@ set_target_properties(marble_part PROPERTIES PREFIX "${CMAKE_SHARED_LIBRARY_PREF
 target_link_libraries(marble_part
     marbleui
     marblewidget
-    KF5::Parts
-    KF5::CoreAddons
-    KF5::I18n
+    KF6::Parts
+    KF6::CoreAddons
+    KF6::I18n
 )
 
 install(TARGETS marble_part DESTINATION ${KDE_INSTALL_PLUGINDIR})
@@ -49,10 +49,10 @@ target_link_libraries (
     marbleui
     marblewidget
     astro
-    KF5::Parts
-    KF5::Crash
-    KF5::CoreAddons
-    KF5::I18n
+    KF6::Parts
+    KF6::Crash
+    KF6::CoreAddons
+    KF6::I18n
     )
 
 ## this works for win32 only because FindQt does not handle this correct
@@ -74,8 +74,8 @@ install(FILES marble_worldwind.desktop DESTINATION ${KDE_INSTALL_APPDIR})
 # See toplevel CMakeLists.txt for further explanation why it is done here
 ki18n_install(${CMAKE_SOURCE_DIR}/po)
 
-macro_optional_find_package(KF5 ${REQUIRED_KF5_MIN_VERSION} QUIET COMPONENTS DocTools)
+macro_optional_find_package(KF6 ${REQUIRED_KF6_MIN_VERSION} QUIET COMPONENTS DocTools)
 
-if (KF5DocTools_FOUND)
+if (KF6DocTools_FOUND)
     kdoctools_install(${CMAKE_SOURCE_DIR}/po)
 endif()

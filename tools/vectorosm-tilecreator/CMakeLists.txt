@@ -31,7 +31,7 @@ VectorClipper.cpp
 WayConcatenator.cpp
 WayChunk.cpp
 )
-target_link_libraries(${TARGET} marblewidget Qt5::Sql)
+target_link_libraries(${TARGET} marblewidget Qt6::Sql)
 
 add_executable(marble-vectorosm-tilecreator vectorosm-tilecreator.cpp)
 target_link_libraries(marble-vectorosm-tilecreator ${TARGET})

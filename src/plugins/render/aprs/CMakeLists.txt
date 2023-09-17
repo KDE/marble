@@ -1,18 +1,18 @@
 PROJECT(AprsPlugin)
 
-find_package(Qt5 ${REQUIRED_QT_VERSION} COMPONENTS SerialPort QUIET)
-marble_set_package_properties( Qt5SerialPort PROPERTIES DESCRIPTION "Provides access to hardware and virtual serial ports." )
-marble_set_package_properties( Qt5SerialPort PROPERTIES TYPE OPTIONAL PURPOSE "Reading from serial port in APRS plugin" )
+find_package(Qt6 ${REQUIRED_QT_VERSION} COMPONENTS SerialPort QUIET)
+marble_set_package_properties( Qt6SerialPort PROPERTIES DESCRIPTION "Provides access to hardware and virtual serial ports." )
+marble_set_package_properties( Qt6SerialPort PROPERTIES TYPE OPTIONAL PURPOSE "Reading from serial port in APRS plugin" )
 
 INCLUDE_DIRECTORIES(
  ${CMAKE_CURRENT_SOURCE_DIR}
  ${CMAKE_CURRENT_BINARY_DIR}
 )
 
-if (Qt5SerialPort_FOUND)
-  include_directories (${Qt5SerialPort_INCLUDE_DIR})
+if (Qt6SerialPort_FOUND)
+  include_directories (${Qt6SerialPort_INCLUDE_DIR})
   set (serial_src AprsTTY.cpp)
-  list (APPEND AprsPlugin_LIBS ${Qt5SerialPort_LIBRARIES})
+  list (APPEND AprsPlugin_LIBS ${Qt6SerialPort_LIBRARIES})
   set (HAVE_QTSERIALPORT TRUE)
 endif ()
 

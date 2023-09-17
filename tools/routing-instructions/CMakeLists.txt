@@ -15,4 +15,4 @@ set( routing-instructions_SRC
 
 add_executable( routing-instructions ${routing-instructions_SRC} )
 
-target_link_libraries( routing-instructions Qt5::Core )
+target_link_libraries( routing-instructions Qt6::Core )

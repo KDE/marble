@@ -2,8 +2,8 @@ cmake_minimum_required(VERSION 2.8.12)
 
 project(marble-game)
 
-find_package(Qt5Widgets REQUIRED)
-find_package(Qt5Quick REQUIRED)
+find_package(Qt6Widgets REQUIRED)
+find_package(Qt6Quick REQUIRED)
 find_package(Marble REQUIRED)
 
 set(CMAKE_AUTOMOC TRUE)
@@ -25,6 +25,6 @@ add_executable(marble-game ${marble-game_SRCS})
 
 target_link_libraries(marble-game
     Marble
-    Qt5::Widgets
-    Qt5::Quick
+    Qt6::Widgets
+    Qt6::Quick
 )

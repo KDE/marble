@@ -8,9 +8,9 @@ endif()
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ECM_MODULE_PATH})
 include(KDEInstallDirs)
 
-macro_optional_find_package(KF5 ${REQUIRED_KF5_MIN_VERSION} QUIET COMPONENTS KIO)
+macro_optional_find_package(KF6 ${REQUIRED_KF6_MIN_VERSION} QUIET COMPONENTS KIO)
 
-if (NOT KF5_FOUND)
+if (NOT KF6_FOUND)
   return()
 endif()
 
@@ -21,6 +21,6 @@ set(marblethumbnail_SRCS
 add_library(marblethumbnail MODULE ${marblethumbnail_SRCS})
 target_link_libraries(marblethumbnail
   marblewidget
-  KF5::KIOWidgets
+  KF6::KIOWidgets
 )
 install(TARGETS marblethumbnail  DESTINATION ${KDE_INSTALL_PLUGINDIR})

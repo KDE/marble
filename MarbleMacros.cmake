@@ -82,7 +82,7 @@ macro( marble_add_test TEST_NAME )
         add_executable( ${TEST_NAME} ${${TEST_NAME}_SRCS} )
         target_link_libraries(${TEST_NAME}
             marblewidget
-            Qt5::Test
+            Qt6::Test
         )
 
         set_target_properties( ${TEST_NAME} PROPERTIES
@@ -153,9 +153,9 @@ endif()
 
 
 # Find Qt translation tools
-find_package(Qt5LinguistTools CONFIG)
+#find_package(Qt6LinguistTools CONFIG)
 
-if(NOT Qt5LinguistTools_FOUND)
+if(NOT Qt6LinguistTools_FOUND)
 
 # dummy implementation
 function(marble_install_po_files_as_qm podir)
@@ -179,11 +179,11 @@ endfunction()
 
 else()
 
-if(TARGET Qt5::lconvert)
-    set(lconvert_executable Qt5::lconvert)
+if(TARGET Qt6::lconvert)
+    set(lconvert_executable Qt6::lconvert)
 else()
-    # Qt < 5.3.1 does not define Qt5::lconvert
-    get_target_property(lrelease_location Qt5::lrelease LOCATION)
+    # Qt < 5.3.1 does not define Qt6::lconvert
+    get_target_property(lrelease_location Qt6::lrelease LOCATION)
     get_filename_component(lrelease_path ${lrelease_location} PATH)
     find_program(lconvert_executable
         NAMES lconvert-qt5 lconvert
@@ -219,7 +219,7 @@ function(marble_process_po_files_as_qm lang po_file)
     add_custom_command(OUTPUT ${qm_file}
         COMMAND ${lconvert_executable}
             ARGS -i ${po_file} -o ${ts_file} -target-language ${lang}
-        COMMAND Qt5::lrelease
+        COMMAND Qt6::lrelease
             ARGS -removeidentical -nounfinished -silent ${ts_file} -qm ${qm_file}
         DEPENDS ${po_file}
     )

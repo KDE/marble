@@ -83,7 +83,7 @@ int main ( int argc, char *argv[] )
 
     // Load Qt translation system catalog for the plugins and libmarblewidget
     loadLibAndPluginTranslations(app);
-    // Init KF5 translation system
+    // Init KF6 translation system
     KLocalizedString::setApplicationDomain("marble");
 
 

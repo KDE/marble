@@ -9,4 +9,4 @@ include_directories(
 set( ${TARGET}_SRC pnt2svg.cpp )
 add_executable( ${TARGET} ${${TARGET}_SRC} )
 
-target_link_libraries( ${TARGET} Qt5::Core )
+target_link_libraries( ${TARGET} Qt6::Core )

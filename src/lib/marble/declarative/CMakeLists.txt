@@ -41,12 +41,12 @@ marble_add_project_resources(qmldir)
 target_link_libraries( marbledeclarative
     PUBLIC
         marblewidget
-        Qt5::Quick
+        Qt6::Quick
 )
-if(Qt5Positioning_FOUND)
+if(Qt6Positioning_FOUND)
     target_link_libraries( marbledeclarative
         PRIVATE
-            Qt5::Positioning
+            Qt6::Positioning
     )
 endif()
 
