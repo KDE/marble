@@ -25,7 +25,7 @@ TileDirectory.cpp
 VectorClipper.cpp
 )
 target_compile_definitions(vectorosm-toolchain PUBLIC USINGZ=1)
-target_link_libraries(vectorosm-toolchain marblewidget Qt5::Sql)
+target_link_libraries(vectorosm-toolchain marblewidget Qt6::Sql)
 
 add_executable(marble-vectorosm-tilecreator
     SpellChecker.cpp

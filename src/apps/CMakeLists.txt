@@ -7,7 +7,7 @@ if(BUILD_MARBLE_APPS)
     endif()
 
     add_subdirectory(behaim)
-    if (NOT Qt5_VERSION VERSION_LESS 5.7.0)
+    if (NOT Qt6_VERSION VERSION_LESS 5.7.0)
         add_subdirectory(marble-maps)
     endif()
 endif()

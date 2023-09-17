@@ -33,7 +33,7 @@ target_link_libraries(
     ${TARGET}
     marblewidget
     marbleui
-    Qt5::Quick
+    Qt6::Quick
 )
 
 install( TARGETS ${TARGET} RUNTIME DESTINATION ${MARBLE_EXAMPLES_INSTALL_DIR}/${TARGET} )

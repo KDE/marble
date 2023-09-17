@@ -110,7 +110,7 @@ set_package_properties(Protobuf PROPERTIES TYPE OPTIONAL PURPOSE "Parsing of OSM
 if(ANDROID)
     set(REQUIRED_QT_VERSION 5.14.0)
    # TODO: still needed with ECM toolchain?
-   SET(QT_QMAKE_EXECUTABLE "$ENV{Qt5_android}/bin/qmake")
+   SET(QT_QMAKE_EXECUTABLE "$ENV{Qt6_android}/bin/qmake")
 else()
     set(REQUIRED_QT_VERSION 6.4.2)
 endif()
@@ -131,8 +131,8 @@ find_package(Qt6 ${REQUIRED_QT_VERSION} REQUIRED
 )
 
 if(ANDROID)
-    find_package(Qt5Positioning ${REQUIRED_QT_VERSION} REQUIRED)
-    find_package(Qt5Multimedia ${REQUIRED_QT_VERSION} REQUIRED)
+    find_package(Qt6Positioning ${REQUIRED_QT_VERSION} REQUIRED)
+    find_package(Qt6Multimedia ${REQUIRED_QT_VERSION} REQUIRED)
 
    set ( MARBLE_NO_WEBKITWIDGETS TRUE )
 else()
@@ -314,7 +314,7 @@ set(KDE_INSTALL_DIRS_NO_DEPRECATED TRUE)
 set(KDE_SKIP_UNINSTALL_TARGET ON CACHE BOOL "KDE uninstall target must be disabled")
 set(REQUIRED_KF6_MIN_VERSION 5.240.0)
 
-find_package(ECM ${REQUIRED_ECM_VERSION} QUIET)
+find_package(ECM ${REQUIRED_ECM_VERSION})
 if(ECM_FOUND)
   set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ECM_MODULE_PATH})
 
@@ -385,7 +385,7 @@ marble_install_po_files_as_qm(poqm)
 # As a temporary hack (your task to improve it, dear reader :) ) the macros
 # are called only from src/apps/marble-kde/CMakeLists.txt.
 # That should catch 99.9 % cases of builds from released tarball, where all the
-# KF5-dependent apps and plugins will be built and installed together.
+# KF6-dependent apps and plugins will be built and installed together.
 # Currently these are:
 # src/apps/marble-kde
 # src/plasmarunner

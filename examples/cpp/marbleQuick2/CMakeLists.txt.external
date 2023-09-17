@@ -2,9 +2,9 @@ cmake_minimum_required(VERSION 2.8.12)
 
 project(marbleQuick)
 
-find_package(Qt5Widgets REQUIRED)
-find_package(Qt5Quick REQUIRED)
+find_package(Qt6Widgets REQUIRED)
+find_package(Qt6Quick REQUIRED)
 find_package(Marble REQUIRED)
 
 add_executable(marbleQuick  main.cpp)
-target_link_libraries(marbleQuick  Marble Qt5::Widgets Qt5::Quick)
+target_link_libraries(marbleQuick  Marble Qt6::Widgets Qt6::Quick)

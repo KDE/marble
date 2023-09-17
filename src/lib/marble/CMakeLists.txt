@@ -1,14 +1,14 @@
 PROJECT(marblewidget VERSION ${RELEASE_SERVICE_VERSION})
 set(MARBLE_CMAKECONFIGNAME Marble)
 
-macro_optional_find_package(Phonon4Qt5 QUIET)
-marble_set_package_properties( Phonon4Qt5 PROPERTIES
+macro_optional_find_package(Phonon4Qt6 QUIET)
+marble_set_package_properties( Phonon4Qt6 PROPERTIES
     DESCRIPTION "Qt-based audio library"
     URL "https://phonon.kde.org/"
     PURPOSE "Support for playback of soundcue elements"
     TYPE OPTIONAL
 )
-if(Phonon4Qt5_FOUND)
+if(Phonon4Qt6_FOUND)
     set(HAVE_PHONON TRUE)
 endif()
 CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/config-phonon.h.cmake
@@ -395,31 +395,31 @@ target_link_libraries(marblewidget PRIVATE ${ZLIB_LIBRARIES})
 # link with release version of Qt libs
 target_link_libraries(marblewidget
     PUBLIC
-        Qt5::Xml
-        Qt5::Gui
-        Qt5::Widgets
-        Qt5::Network
+        Qt6::Xml
+        Qt6::Gui
+        Qt6::Widgets
+        Qt6::Network
     PRIVATE
-        Qt5::Core
-        Qt5::Svg
-        Qt5::PrintSupport
-        Qt5::Concurrent
+        Qt6::Core
+        Qt6::Svg
+        Qt6::PrintSupport
+        Qt6::Concurrent
 )
 if (NOT MARBLE_NO_WEBKITWIDGETS)
     target_link_libraries(marblewidget
         PUBLIC
-            Qt5::WebChannel
-            Qt5::WebEngineWidgets
-            Qt5::WebEngine
+            Qt6::WebChannel
+            Qt6::WebEngineWidgets
+            Qt6::WebEngine
     )
 endif ()
 if (NOT MARBLE_NO_DBUS)
     target_link_libraries(marblewidget
         PRIVATE
-            Qt5::DBus
+            Qt6::DBus
     )
 endif ()
-if (Phonon4Qt5_FOUND)
+if (Phonon4Qt6_FOUND)
     target_link_libraries(marblewidget
         PRIVATE
             Phonon::phonon4qt5

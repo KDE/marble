@@ -11,7 +11,7 @@
 
 #include "marble_export.h"
 
-// namespace added to avoid symbol clashes with KF5::ItemModels
+// namespace added to avoid symbol clashes with KF6::ItemModels
 namespace Marble
 {
 

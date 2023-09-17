@@ -2,8 +2,8 @@ cmake_minimum_required(VERSION 2.8.12)
 
 project(basic-routing)
 
-find_package(Qt5Widgets REQUIRED)
+find_package(Qt6Widgets REQUIRED)
 find_package(Marble REQUIRED)
 
 add_executable(basic-routing  main.cpp)
-target_link_libraries(basic-routing  Marble Qt5::Widgets)
+target_link_libraries(basic-routing  Marble Qt6::Widgets)

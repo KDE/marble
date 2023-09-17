@@ -10,7 +10,7 @@ endif()
 # disabled for now:
 # no public Marble QML plugins are installed, libmarbledeclarative is only a shared lib
 if (FALSE)
-if( Qt5Quick_FOUND )
+if( Qt6Quick_FOUND )
   OPTION(IGNORE_CMAKE_INSTALL_PREFIX_FOR_DECLARATIVE_PLUGINS "Install Marble Qt Declarative plugins to QT_IMPORTS_DIR even if that is out of the CMAKE_INSTALL_PREFIX")
   IF(QT_IMPORTS_DIR)
     SET(MARBLE_QT_IMPORTS_DIR ${QT_IMPORTS_DIR})

@@ -25,9 +25,9 @@ endif (WIN32)
 
 target_link_libraries (
 marble-qt
-Qt5::Widgets
-Qt5::PrintSupport
-Qt5::Network
+Qt6::Widgets
+Qt6::PrintSupport
+Qt6::Network
 marbleui
 marblewidget
 astro)

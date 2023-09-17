@@ -2,8 +2,8 @@ cmake_minimum_required(VERSION 2.8.12)
 
 project(drawing-places)
 
-find_package(Qt5Widgets REQUIRED)
+find_package(Qt6Widgets REQUIRED)
 find_package(Marble REQUIRED)
 
 add_executable(drawing-places main.cpp)
-target_link_libraries(drawing-places  Marble Qt5::Widgets)
+target_link_libraries(drawing-places  Marble Qt6::Widgets)

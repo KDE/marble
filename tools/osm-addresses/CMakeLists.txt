@@ -29,7 +29,7 @@ add_executable( ${TARGET} ${${TARGET}_SRC} ${PROTO_SRCS} ${PROTO_HDRS} )
 
 target_link_libraries( ${TARGET}
     marblewidget
-    Qt5::Sql
+    Qt6::Sql
     ${PROTOBUF_LIBRARIES}
     ${ZLIB_LIBRARIES}
 )

@@ -9,4 +9,4 @@ include_directories(
 set( ${TARGET}_SRC svg2pnt.cpp svgxmlhandler.cpp )
 add_executable( ${TARGET} ${${TARGET}_SRC} )
 
-target_link_libraries( ${TARGET}  Qt5::Core Qt5::Xml )
+target_link_libraries( ${TARGET}  Qt6::Core Qt6::Xml )

@@ -16,7 +16,7 @@ NOTE: This file describes how to build Marble as a stand-alone
 Prerequisites for building Marble are:
  - Qt 5.3 or newer
  - Cmake version 2.8.12 or newer
- - (optional): KDE Frameworks 5.7 or newer (KF5) from the KDE repositories.
+ - (optional): KDE Frameworks 5.7 or newer (KF6) from the KDE repositories.
  - other dependencies are optional
 
 A checkout of Marble. You can check out Marble using GIT via the command:
@@ -27,7 +27,7 @@ git clone git://anongit.kde.org/marble ~/marble/sources
 You can build and install Marble in two different ways:
 
 1. As a Qt-only application.
-2. As a KF5-based application, using KDE Frameworks 5 classes.
+2. As a KF6-based application, using KDE Frameworks 5 classes.
 
 Choose one of them and read below for how to do it.
 
@@ -47,19 +47,19 @@ directory called 'marble-build'.
 
 Go into the build directory and type
 
-  cmake -DWITH_KF5=FALSE ../marble
+  cmake -DWITH_KF6=FALSE ../marble
 
 By default, marble is installed into /usr/local.  If you want to
 install it into any other directory, add
 -DCMAKE_INSTALL_PREFIX=/path/to/install/into like in this example:
 
-  cmake -DWITH_KF5=FALSE -DCMAKE_INSTALL_PREFIX=~/apps ../marble
+  cmake -DWITH_KF6=FALSE -DCMAKE_INSTALL_PREFIX=~/apps ../marble
 
 If you have no write permission to the installation directory of cmake
 (because you have a system installed cmake) you need to add another
 parameter -DPACKAGE_ROOT_PREFIX=~/apps to the cmake command:
 
-  cmake -DWITH_KF5=FALSE -DCMAKE_INSTALL_PREFIX=~/apps \
+  cmake -DWITH_KF6=FALSE -DCMAKE_INSTALL_PREFIX=~/apps \
         -DPACKAGE_ROOT_PREFIX=~/apps ../marble
 
 To modify the position of the data directory at compile time, see the notes
@@ -84,7 +84,7 @@ and start Marble either from the menu or via the command line:
   marble-qt
 
 
-2. Build Marble as a KF5-based application.
+2. Build Marble as a KF6-based application.
 
 2.1 Create a build directory
 
@@ -126,7 +126,7 @@ Use the cmake option -DMARBLE_DATA_PATH to specify the
 built-in system path that Marble gathers its data from:
 
 Example:
-  cmake -DWITH_KF5=FALSE -DMARBLE_DATA_PATH /mnt1/marble/data ~/marble
+  cmake -DWITH_KF6=FALSE -DMARBLE_DATA_PATH /mnt1/marble/data ~/marble
 
 3.2 "At Runtime"
 

@@ -15,15 +15,15 @@ target_link_libraries (
     marbleui
     PUBLIC
         marblewidget
-        Qt5::Widgets
-        Qt5::PrintSupport
+        Qt6::Widgets
+        Qt6::PrintSupport
     PRIVATE
-        Qt5::Network
+        Qt6::Network
 )
 if (NOT MARBLE_NO_DBUS)
     target_link_libraries( marbleui
         PRIVATE
-            Qt5::DBus
+            Qt6::DBus
     )
 endif ()
 

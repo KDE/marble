@@ -6,7 +6,7 @@ include_directories(${CMAKE_CURRENT_BINARY_DIR})
 add_executable(marble-maps ${marble_SRCS} ${marble_QRCS})
 
 if (ANDROID)
-    find_package(Qt5 ${REQUIRED_QT_VERSION} REQUIRED
+    find_package(Qt6 ${REQUIRED_QT_VERSION} REQUIRED
         COMPONENTS
             AndroidExtras
             QuickControls2
@@ -17,21 +17,21 @@ if (ANDROID)
         marble-maps
         marblewidget
         astro
-        Qt5::Concurrent
-        Qt5::Xml
-        Qt5::Widgets
-        Qt5::PrintSupport
-        Qt5::Network
-        Qt5::Sql
-        Qt5::Svg
-        Qt5::Positioning
-        Qt5::AndroidExtras
-        Qt5::Multimedia
-        Qt5::QuickControls2
+        Qt6::Concurrent
+        Qt6::Xml
+        Qt6::Widgets
+        Qt6::PrintSupport
+        Qt6::Network
+        Qt6::Sql
+        Qt6::Svg
+        Qt6::Positioning
+        Qt6::AndroidExtras
+        Qt6::Multimedia
+        Qt6::QuickControls2
     )
 
-    if (TARGET Qt5::WebEngineWidgets)
-        target_link_libraries(${TARGET} Qt5::WebEngineWidgets Qt5::WebEngine)
+    if (TARGET Qt6::WebEngineWidgets)
+        target_link_libraries(${TARGET} Qt6::WebEngineWidgets Qt6::WebEngine)
     endif()
 endif()
 

@@ -6,7 +6,7 @@ include_directories(${CMAKE_CURRENT_BINARY_DIR})
 if (ANDROID)
     set(TARGET MarbleBehaim)
 
-    find_package(Qt5 ${REQUIRED_QT_VERSION} REQUIRED COMPONENTS AndroidExtras)
+    find_package(Qt6 ${REQUIRED_QT_VERSION} REQUIRED COMPONENTS AndroidExtras)
 
     add_library (${TARGET} SHARED ${marble_SRCS} ${marble_QRCS})
 
@@ -15,20 +15,20 @@ if (ANDROID)
         ${TARGET}
         marblewidget
         astro
-        Qt5::Concurrent
-        Qt5::Xml
-        Qt5::Widgets
-        Qt5::PrintSupport
-        Qt5::Network
-        Qt5::Sql
-        Qt5::Svg
-        Qt5::Positioning
-        Qt5::AndroidExtras
-        Qt5::Multimedia
+        Qt6::Concurrent
+        Qt6::Xml
+        Qt6::Widgets
+        Qt6::PrintSupport
+        Qt6::Network
+        Qt6::Sql
+        Qt6::Svg
+        Qt6::Positioning
+        Qt6::AndroidExtras
+        Qt6::Multimedia
     )
 
-    if (TARGET Qt5::WebEngineWidgets)
-        target_link_libraries(${TARGET} Qt5::WebEngineWidgets Qt5::WebEngine)
+    if (TARGET Qt6::WebEngineWidgets)
+        target_link_libraries(${TARGET} Qt6::WebEngineWidgets Qt6::WebEngine)
     endif()
 else()
     set(TARGET marble-behaim)
@@ -50,7 +50,7 @@ if (ANDROID)
         set(ABSOLUTE_INSTALL_PATH "${CMAKE_BINARY_DIR}/${CMAKE_INSTALL_PREFIX}")
     endif()
     get_filename_component(ABSOLUTE_INSTALL_PATH "${ABSOLUTE_INSTALL_PATH}" ABSOLUTE)
-    get_filename_component(QT_ANDROID_QT_ROOT "${Qt5Core_DIR}/../../.." ABSOLUTE)
+    get_filename_component(QT_ANDROID_QT_ROOT "${Qt6Core_DIR}/../../.." ABSOLUTE)
     set(ANDROID_SDK_ROOT $ENV{ANDROID_SDK_ROOT})
     set(ANDROID_NDK_ROOT $ENV{ANDROID_NDK_ROOT})
     set(QT_ANDROID_APP_PATH "${ABSOLUTE_INSTALL_PATH}/libs/${ANDROID_ABI}/libMarbleBehaim.so")
