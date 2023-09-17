@@ -17,16 +17,18 @@ fi
 
 cd build
 
-export MarbleOptions='-DWITH_DESIGNER_PLUGIN=OFF \
-                      -DBUILD_MARBLE_TESTS=OFF \
-                      -DBUILD_MARBLE_TOOLS=OFF \
-                      -DBUILD_MARBLE_EXAMPLES=OFF \
-                      -DBUILD_MARBLE_APPS=OFF \
-                      -DBUILD_WITH_DBUS=OFF \
-                      -DQTONLY=ON \
-                      -DBUILD_TESTING=OFF'
+export MarbleOptions=" \
+-DWITH_DESIGNER_PLUGIN=OFF \
+-DBUILD_MARBLE_TESTS=OFF \
+-DBUILD_MARBLE_TOOLS=OFF \
+-DBUILD_MARBLE_EXAMPLES=OFF \
+-DBUILD_MARBLE_APPS=OFF \
+-DBUILD_WITH_DBUS=OFF \
+-DQTONLY=ON \
+-DBUILD_TESTING=OFF \
+"
 
-cmake -G "$MAKEFILES_TYPE" . \
+cmake -G "$MAKEFILES_TYPE" \
       -DCMAKE_INSTALL_PREFIX=/usr \
       -Wno-dev \
       $MarbleOptions \
