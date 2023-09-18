@@ -75,7 +75,7 @@ DIRECTORIES                                         STATUS
 │   │   │   ├── compass
 │   │   │   ├── crosshairs
 │   │   │   ├── earthquake
-│   │   │   ├── eclipses
+│   │   │   ├── eclipses                            DONE
 │   │   │   ├── elevationprofilefloatitem
 │   │   │   ├── elevationprofilemarker
 │   │   │   ├── fileview
@@ -92,7 +92,7 @@ DIRECTORIES                                         STATUS
 │   │   │   ├── overviewmap                         DONE
 │   │   │   ├── panoramio
 │   │   │   ├── photo
-│   │   │   ├── positionmarker
+│   │   │   ├── positionmarker                      DONE
 │   │   │   ├── postalcode
 │   │   │   ├── progress
 │   │   │   ├── routing
