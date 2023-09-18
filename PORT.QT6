@@ -1,3 +1,11 @@
+GOAL: compile and run digiKam geolocation features with Qt6
+
+Only pure Qt codes are ported.
+Only shared libraries are ported, not target applications.
+KDE API based codes are disabled.
+Test codes not ported.
+Example codes not ported.
+
 DIRECTORIES                                         STATUS
 .
 ├── cmake                                           -
@@ -73,11 +81,11 @@ DIRECTORIES                                         STATUS
 │   │   └── marble-ui
 │   ├── bindings
 │   ├── lib
-│   │   ├── astro
+│   │   ├── astro                                   -       (not Qt based code)
 │   │   └── marble                                  DONE
 │   │       ├── blendings                           DONE
 │   │       ├── cloudsync                           DONE
-│   │       ├── declarative
+│   │       ├── declarative                         DONE
 │   │       ├── geodata                             DONE
 │   │       │   ├── data                            DONE
 │   │       │   │   └── tests                       -
@@ -92,13 +100,13 @@ DIRECTORIES                                         STATUS
 │   │       │       ├── dgml                        DONE
 │   │       │       └── kml                         DONE
 │   │       ├── graphicsview                        DONE
-│   │       ├── htmlfeatures
+│   │       ├── htmlfeatures                        -
 │   │       ├── layers                              DONE
 │   │       ├── osm                                 DONE
 │   │       ├── projections                         DONE
 │   │       ├── routing                             DONE
 │   │       │   └── instructions                    DONE
-│   │       └── webpopup
+│   │       └── webpopup                            -
 │   ├── mac                                         -
 │   ├── plasma
 │   │   ├── applets
