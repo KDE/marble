@@ -7,7 +7,7 @@
 #include "KmlCoordinatesTagHandler.h"
 
 #include <QStringList>
-#include <QRegExp>
+#include <QRegularExpression>
 
 #include "MarbleDebug.h"
 #include "KmlElementDictionary.h"
@@ -159,7 +159,7 @@ GeoNode* KmlcoordinatesTagHandler::parse( GeoParser& parser ) const
     if( parentItem.represents( kmlTag_Track ) ) {
         QString input = parser.readElementText().trimmed();
         if ( !kmlStrictSpecs ) {
-            input.replace(QRegExp(QStringLiteral("\\s*,\\s*")), QStringLiteral(","));
+            input.replace(QRegularExpression(QStringLiteral("\\s*,\\s*")), QStringLiteral(","));
         }
         const QStringList coordinates = input.split(QLatin1Char(' '));
 

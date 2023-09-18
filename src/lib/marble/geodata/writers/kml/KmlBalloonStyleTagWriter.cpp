@@ -6,6 +6,8 @@
 
 #include "KmlBalloonStyleTagWriter.h"
 
+#include <QRegularExpression>
+
 #include "GeoDataBalloonStyle.h"
 #include "GeoDataTypes.h"
 #include "GeoWriter.h"
@@ -41,7 +43,7 @@ bool KmlBalloonStyleTagWriter::write( const GeoNode *node,
     writer.writeOptionalElement( kml::kmlTag_textColor, textColor, "ff000000" );
 
     QString const textString = balloonStyle->text();
-    if ( textString.contains( QRegExp( "[<>&]" ) ) ) {
+    if ( textString.contains( QRegularExpression( "[<>&]" ) ) ) {
         writer.writeStartElement( kml::kmlTag_text );
         writer.writeCDATA( textString );
         writer.writeEndElement();

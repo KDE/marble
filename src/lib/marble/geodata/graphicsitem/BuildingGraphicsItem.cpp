@@ -106,7 +106,7 @@ QPointF BuildingGraphicsItem::centroid(const QPolygonF &polygon, double &area)
 {
     auto centroid = QPointF(0.0, 0.0);
     area = 0.0;
-    for (auto i=0, n=polygon.size(); i<n; ++i) {
+    for (qsizetype i=0, n=polygon.size(); i<n; ++i) {
         auto const x0 = polygon[i].x();
         auto const y0 = polygon[i].y();
         auto const j = i == n-1 ? 0 : i+1;
