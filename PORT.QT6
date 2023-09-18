@@ -75,26 +75,26 @@ DIRECTORIES                                         STATUS
 │   ├── lib
 │   │   ├── astro
 │   │   └── marble
-│   │       ├── blendings
+│   │       ├── blendings                           DONE
 │   │       ├── cloudsync
 │   │       ├── declarative
 │   │       ├── geodata
 │   │       │   ├── data                            DONE
 │   │       │   │   └── tests
-│   │       │   ├── graphicsitem
-│   │       │   ├── handlers
+│   │       │   ├── graphicsitem                    DONE
+│   │       │   ├── handlers                        DONE
 │   │       │   │   ├── dgml                        DONE
 │   │       │   │   └── kml                         DONE
-│   │       │   ├── parser
-│   │       │   ├── scene
-│   │       │   ├── writer
+│   │       │   ├── parser                          DONE
+│   │       │   ├── scene                           DONE
+│   │       │   ├── writer                          DONE
 │   │       │   └── writers
 │   │       │       ├── dgml                        DONE
 │   │       │       └── kml                         DONE
-│   │       ├── graphicsview
+│   │       ├── graphicsview                        DONE
 │   │       ├── htmlfeatures
 │   │       ├── layers                              DONE
-│   │       ├── osm
+│   │       ├── osm                                 DONE
 │   │       ├── projections
 │   │       ├── routing
 │   │       │   └── instructions
