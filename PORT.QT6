@@ -1,6 +1,9 @@
 GOAL: compile and run digiKam geolocation features with Qt6
 
 Only pure Qt codes are ported.
+Qt5 support is dropped.
+Qt6Core5Compat still used.
+"PORT_QT6" annotation is used in source code when port to Qt6 needs to be double checked.
 Only shared libraries are ported, not target applications.
 KDE API based codes are disabled.
 Test codes not ported.
