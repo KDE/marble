@@ -12,9 +12,9 @@
 
 #include "marble_export.h"
 
-class QStandardItemModel;
-class QString;
-class QStringList;
+#include <QStandardItemModel>
+#include <QString>
+#include <QStringList>
 
 namespace Marble
 {

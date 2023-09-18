@@ -11,9 +11,9 @@
 
 #include <QtGlobal>
 
-class QDateTime;
-class QStringList;
-class QColor;
+#include <QDateTime>
+#include <QStringList>
+#include <QColor>
 
 namespace Marble
 {

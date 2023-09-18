@@ -572,7 +572,7 @@ namespace Marble
         QPoint tl = region.topLeft();
         QPoint br = region.bottomRight();
         mDebug() << "Selection region: (" << tl.x() << ", " <<  tl.y() << ") ("
-            << br.x() << ", " << br.y() << ")" << endl;
+            << br.x() << ", " << br.y() << ")" << Qt::endl;
 
         const GeoDataLatLonAltBox box = viewport()->latLonAltBox(region);
 
