@@ -76,7 +76,7 @@ DIRECTORIES                                         STATUS
 │   │   ├── astro
 │   │   └── marble
 │   │       ├── blendings                           DONE
-│   │       ├── cloudsync
+│   │       ├── cloudsync                           DONE
 │   │       ├── declarative
 │   │       ├── geodata
 │   │       │   ├── data                            DONE

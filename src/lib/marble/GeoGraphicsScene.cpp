@@ -37,7 +37,7 @@ public:
     }
 
     typedef QHash<const GeoDataFeature*,GeoGraphicsItem*> FeatureItemMap;
-    QHash<TileId, FeatureItemMap> m_tiledItems;
+    QMultiHash<TileId, FeatureItemMap> m_tiledItems;
     QMultiHash<const GeoDataFeature*, TileId> m_features; // multi hash because multi track and multi geometry insert multiple items
 
     // Stores the items which have been clicked;
@@ -268,7 +268,7 @@ void GeoGraphicsScene::addItem( GeoGraphicsItem* item )
 
     auto & tileList = d->m_tiledItems[key];
     auto feature = item->feature();
-    tileList.insertMulti(feature, item);
+    tileList.insert(feature, item);
     d->m_features.insert(feature, key );
 }
 
