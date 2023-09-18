@@ -9,12 +9,13 @@
 #include <QObject>
 #include <QStringList>
 
+#include "AbstractDataPluginItem.h"
+
 class QUrl;
 
 namespace Marble
 {
 
-class AbstractDataPluginItem;
 class GeoDataLatLonAltBox;
 class MarbleModel;
 class MarbleWidget;

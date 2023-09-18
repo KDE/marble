@@ -180,10 +180,10 @@ void SatellitesModel::parseCatalog( const QString &id,
 
         QDateTime missionStart, missionEnd;
         if( elms[3].toUInt() > 0 ) {
-            missionStart = QDateTime::fromTime_t( elms[3].toUInt() );
+            missionStart = QDateTime::fromSecsSinceEpoch( elms[3].toUInt() );
         }
         if( elms[4].toUInt() > 0 ) {
-            missionEnd = QDateTime::fromTime_t( elms[4].toUInt() );
+            missionEnd = QDateTime::fromSecsSinceEpoch( elms[4].toUInt() );
         }
 
         SatellitesMSCItem *item = new SatellitesMSCItem( name, category, body, id,

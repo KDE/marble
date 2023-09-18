@@ -88,21 +88,21 @@ void SatellitesTLEItem::update()
     // time interval between each point in the track, in seconds
     double step = period() / 100.0;
 
-    for ( double i = startTime.toTime_t(); i < endTime.toTime_t(); i += step ) {
+    for ( double i = startTime.toSecsSinceEpoch(); i < endTime.toSecsSinceEpoch(); i += step ) {
         // No need to add points in this interval
-        if ( i >= m_track->firstWhen().toTime_t() ) {
-            i = m_track->lastWhen().toTime_t() + step;
+        if ( i >= m_track->firstWhen().toSecsSinceEpoch() ) {
+            i = m_track->lastWhen().toSecsSinceEpoch() + step;
         }
 
-        addPointAt( QDateTime::fromTime_t( i ) );
+        addPointAt( QDateTime::fromSecsSinceEpoch( i ) );
     }
 }
 
 void SatellitesTLEItem::addPointAt( const QDateTime &dateTime )
 {
     // in minutes
-    double timeSinceEpoch = (double)( dateTime.toTime_t() -
-        timeAtEpoch().toTime_t() ) / 60.0;
+    double timeSinceEpoch = (double)( dateTime.toSecsSinceEpoch() -
+        timeAtEpoch().toSecsSinceEpoch() ) / 60.0;
 
     double r[3], v[3];
     sgp4( wgs84, m_satrec, timeSinceEpoch, r, v );
