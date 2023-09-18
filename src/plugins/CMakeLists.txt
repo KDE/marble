@@ -11,7 +11,7 @@ add_definitions("-DLOGGING_IDENTIFIER=MARBLE_PLUGINS")
 
 if(NOT ANDROID)
 #    add_subdirectory( designer )
-#    add_subdirectory( templates )
+    add_subdirectory( templates )
 endif()
 
 add_subdirectory( render )

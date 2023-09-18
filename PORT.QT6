@@ -133,7 +133,7 @@ DIRECTORIES                                         STATUS
 │   │   │   ├── shp                                 DISABLED: KDE BASED
 │   │   │   ├── traveling-salesman                  - Originally commented in CMakeLists.txt
 │   │   │   └── yours                               DONE
-│   │   └── templates                               DISABLED: NOT USED IN DIGIKAM
-│   └── thumbnailer                                 -
+│   │   └── templates                               - Originally commented in CMakeLists.txt
+│   └── thumbnailer                                 DISABLED: KDE BASED
 ├── tests                                           -
 └── tools                                           -
