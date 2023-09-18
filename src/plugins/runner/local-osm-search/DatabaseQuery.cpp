@@ -10,6 +10,7 @@
 #include "MarbleModel.h"
 #include "PositionTracking.h"
 
+#include <QRegExp>
 #include <QMap>
 
 namespace Marble

@@ -16,6 +16,7 @@
 //Qt
 #include <QColor>
 #include <QVector>
+#include <QRegularExpression>
 
 namespace Marble
 {
@@ -91,7 +92,7 @@ GeoDataLatLonBox OpenLocationCodeSearchRunner::decodeOLC( const QString &olc ) c
 
     // remove padding
     QString decoded = olc;
-    decoded = decoded.remove( QRegExp("[0+]") );
+    decoded = decoded.remove( QRegularExpression("[0+]") );
     qreal southLatitude = 0;
     qreal westLongitude = 0;
 
