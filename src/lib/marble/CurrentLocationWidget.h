@@ -60,16 +60,19 @@ class MARBLE_EXPORT CurrentLocationWidget : public QWidget
     void setLastSavePath( const QString &path );
 
  private:
+
+    void changePositionProvider( const QString& provider );
+
+    Q_SLOT void changePositionProvider( int index );
+    Q_SLOT void trackPlacemark();
+
     Q_DISABLE_COPY( CurrentLocationWidget )
 
     CurrentLocationWidgetPrivate * const d;
 
     Q_PRIVATE_SLOT( d, void receiveGpsCoordinates( const GeoDataCoordinates &in, qreal speed ) )
     Q_PRIVATE_SLOT( d, void adjustPositionTrackingStatus( PositionProviderStatus status ) )
-    Q_PRIVATE_SLOT( d, void changePositionProvider( const QString &provider ) )
     Q_PRIVATE_SLOT( d, void centerOnCurrentLocation() )
-
-    Q_PRIVATE_SLOT( d, void trackPlacemark() )
 
     /**
      * @brief Slot for setting re-center combobox if re-centering is enabled other than from CurrentLocationWidget
