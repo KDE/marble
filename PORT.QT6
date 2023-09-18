@@ -74,13 +74,13 @@ DIRECTORIES                                         STATUS
 │   ├── bindings
 │   ├── lib
 │   │   ├── astro
-│   │   └── marble
+│   │   └── marble                                  DONE
 │   │       ├── blendings                           DONE
 │   │       ├── cloudsync                           DONE
 │   │       ├── declarative
-│   │       ├── geodata
+│   │       ├── geodata                             DONE
 │   │       │   ├── data                            DONE
-│   │       │   │   └── tests
+│   │       │   │   └── tests                       -
 │   │       │   ├── graphicsitem                    DONE
 │   │       │   ├── handlers                        DONE
 │   │       │   │   ├── dgml                        DONE
@@ -88,7 +88,7 @@ DIRECTORIES                                         STATUS
 │   │       │   ├── parser                          DONE
 │   │       │   ├── scene                           DONE
 │   │       │   ├── writer                          DONE
-│   │       │   └── writers
+│   │       │   └── writers                         DONE
 │   │       │       ├── dgml                        DONE
 │   │       │       └── kml                         DONE
 │   │       ├── graphicsview                        DONE
