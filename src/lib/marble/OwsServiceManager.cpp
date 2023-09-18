@@ -317,7 +317,7 @@ void OwsServiceManager::queryOwsCapabilities(const QUrl& queryUrl, const QString
 
     QNetworkRequest request;
     request.setUrl( url );
-    request.setAttribute(QNetworkRequest::FollowRedirectsAttribute, true);
+    request.setAttribute(QNetworkRequest::RedirectPolicyAttribute, QNetworkRequest::NoLessSafeRedirectPolicy);
 
     mDebug() << "for url" << url;
     m_capabilitiesAccessManager.get( request );

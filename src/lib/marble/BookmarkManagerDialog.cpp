@@ -334,7 +334,7 @@ void BookmarkManagerDialogPrivate::initializeFoldersView( GeoDataTreeModel* tree
 {
     m_folderFilterModel.setFilterKeyColumn( 1 );
     const QString regexp = QLatin1String(GeoDataTypes::GeoDataFolderType) + QLatin1Char('|') + QLatin1String(GeoDataTypes::GeoDataDocumentType);
-    m_folderFilterModel.setFilterRegExp( regexp );
+    m_folderFilterModel.setFilterRegularExpression( regexp );
     m_folderFilterModel.setSourceModel( treeModel );
 
     m_parent->foldersTreeView->setModel( &m_folderFilterModel );
