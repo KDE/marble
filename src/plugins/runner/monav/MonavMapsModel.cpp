@@ -5,6 +5,7 @@
 
 #include "MonavMapsModel.h"
 
+#include <QLocale>
 #include <QDate>
 
 namespace Marble
@@ -87,7 +88,7 @@ QVariant MonavMapsModel::data ( const QModelIndex & index, int role ) const
                         // Qt interprets 11 as 1911
                         date.setDate( date.year() + 100, date.month(), date.day() );
                     }
-                    return date.toString( Qt::SystemLocaleShortDate );
+                    return QLocale().toString(date, QLocale::ShortFormat);
                 }
             }
     }

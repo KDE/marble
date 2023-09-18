@@ -125,7 +125,6 @@ QVector<GeoDataPlacemark*> GosmoreRunnerPrivate::parseGosmoreInstructions( const
 
     QVector<GeoDataPlacemark*> result;
     QTextStream stream( content );
-    stream.setCodec("UTF8");
     stream.setAutoDetectUnicode( true );
 
     RoutingInstructions directions = InstructionTransformation::process( m_parser.parse( stream ) );

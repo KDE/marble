@@ -20,6 +20,7 @@
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
 #include <QDomDocument>
+#include <QRegExp>
 
 namespace Marble
 {

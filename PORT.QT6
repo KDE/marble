@@ -71,35 +71,35 @@ DIRECTORIES                                         STATUS
 │   │   ├── render
 │   │   │   ├── annotate                            DONE
 │   │   │   ├── aprs                                DONE
-│   │   │   ├── atmosphere
-│   │   │   ├── compass
-│   │   │   ├── crosshairs
-│   │   │   ├── earthquake
+│   │   │   ├── atmosphere                          DONE
+│   │   │   ├── compass                             DONE
+│   │   │   ├── crosshairs                          DONE
+│   │   │   ├── earthquake                          DONE
 │   │   │   ├── eclipses                            DONE
-│   │   │   ├── elevationprofilefloatitem
-│   │   │   ├── elevationprofilemarker
+│   │   │   ├── elevationprofilefloatitem           DONE
+│   │   │   ├── elevationprofilemarker              DONE
 │   │   │   ├── fileview
 │   │   │   ├── foursquare                          DONE
-│   │   │   ├── gpsinfo
-│   │   │   ├── graticule
-│   │   │   ├── license
-│   │   │   ├── mapscale
-│   │   │   ├── measure
+│   │   │   ├── gpsinfo                             DONE
+│   │   │   ├── graticule                           DONE
+│   │   │   ├── license                             DONE
+│   │   │   ├── mapscale                            DONE
+│   │   │   ├── measure                             DONE
 │   │   │   ├── navigation                          DONE
-│   │   │   ├── notes
+│   │   │   ├── notes                               DONE
 │   │   │   ├── opencaching
-│   │   │   ├── opendesktop
+│   │   │   ├── opendesktop                         DONE
 │   │   │   ├── overviewmap                         DONE
 │   │   │   ├── panoramio
-│   │   │   ├── photo
+│   │   │   ├── photo                               DONE
 │   │   │   ├── positionmarker                      DONE
-│   │   │   ├── postalcode
-│   │   │   ├── progress
-│   │   │   ├── routing
+│   │   │   ├── postalcode                          DONE
+│   │   │   ├── progress                            DONE
+│   │   │   ├── routing                             DONE
 │   │   │   ├── satellites                          DONE
-│   │   │   ├── speedometer
-│   │   │   ├── stars
-│   │   │   ├── sun
+│   │   │   ├── speedometer                         DONE
+│   │   │   ├── stars                               DONE
+│   │   │   ├── sun                                 DONE
 │   │   │   ├── test
 │   │   │   ├── twitter
 │   │   │   ├── weather                             DONE
@@ -108,8 +108,8 @@ DIRECTORIES                                         STATUS
 │   │   │   ├── cache
 │   │   │   ├── cyclestreets
 │   │   │   ├── geouri                              DONE
-│   │   │   ├── gosmore-reversegeocoding
-│   │   │   ├── gosmore-routing
+│   │   │   ├── gosmore-reversegeocoding            DONE
+│   │   │   ├── gosmore-routing                     DONE
 │   │   │   ├── gpsbabel
 │   │   │   ├── gpx                                 DISABLED: KDE BASED
 │   │   │   ├── hostip                              DONE
@@ -119,9 +119,9 @@ DIRECTORIES                                         STATUS
 │   │   │   ├── localdatabase                       DONE
 │   │   │   ├── local-osm-search                    DONE
 │   │   │   ├── log
-│   │   │   ├── mapquest
-│   │   │   ├── monav
-│   │   │   ├── nominatim-reversegeocoding
+│   │   │   ├── mapquest                            DONE
+│   │   │   ├── monav                               DONE
+│   │   │   ├── nominatim-reversegeocoding          DONE
 │   │   │   ├── nominatim-search                    DONE
 │   │   │   ├── openlocation-code-search            DONE
 │   │   │   ├── openrouteservice
