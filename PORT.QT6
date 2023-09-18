@@ -60,7 +60,10 @@ DIRECTORIES                                         STATUS
 │   ├── plasma                                      -
 │   ├── plasmarunner                                -
 │   ├── plugins
-│   │   ├── designer                                DISABLED: NOT USED IN DIGIKAM
+│   │   ├── designer                                DONE
+│   │   │   ├── latloneditwidget                    DONE
+│   │   │   ├── marblewidget                        DONE
+│   │   │   └── navigator                           DONE
 │   │   ├── positionprovider                        DONE
 │   │   │   ├── flightgear                          DONE
 │   │   │   ├── geoclue                             - Originally annotated experimental and commented in CMakeLists.txt
