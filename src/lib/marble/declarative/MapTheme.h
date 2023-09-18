@@ -9,7 +9,7 @@
 #include <QObject>
 #include <QQuickItem>
 
-#include "MarbleQuickItem.h"
+Q_MOC_INCLUDE("MarbleQuickItem.h")
 
 /**
   * Represents the maptheme with its most important properties
@@ -18,6 +18,7 @@
   */
 namespace Marble
 {
+    class MarbleQuickItem;
 
     class MapTheme : public QObject
     {

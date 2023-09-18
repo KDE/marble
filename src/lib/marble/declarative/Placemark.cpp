@@ -540,7 +540,7 @@ QString Placemark::wheelchairInfo() const
     for (const QString &uiLanguage: uiLanguages) {
         for (auto tagIter = osmData.tagsBegin(), end = osmData.tagsEnd(); tagIter != end; ++tagIter) {
             if (tagIter.key().startsWith(tag)) {
-                QStringRef const tagLanguage = tagIter.key().midRef(tag.length());
+                QString const tagLanguage = tagIter.key().mid(tag.length());
                 if (tagLanguage == uiLanguage) {
                     append(m_wheelchairInfo, tagIter.value());
                     return m_wheelchairInfo;
