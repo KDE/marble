@@ -399,6 +399,7 @@ target_link_libraries(marblewidget
         Qt6::Gui
         Qt6::Widgets
         Qt6::Network
+        Qt6::Core5Compat
     PRIVATE
         Qt6::Core
         Qt6::Svg
