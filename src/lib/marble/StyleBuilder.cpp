@@ -437,7 +437,7 @@ GeoDataStyle::ConstPtr StyleBuilder::Private::createPlacemarkStyle(const StylePa
                 accessValue == QLatin1String("delivery") ||
                 accessValue == QLatin1String("forestry")) {
                 QColor polyColor = polyStyle.color();
-                qreal hue, sat, val;
+                float hue, sat, val;
                 polyColor.getHsvF(&hue, &sat, &val);
                 polyColor.setHsvF(0.98, qMin(1.0, 0.2 + sat), val);
                 polyStyle.setColor(effectColor(polyColor));
@@ -446,7 +446,7 @@ GeoDataStyle::ConstPtr StyleBuilder::Private::createPlacemarkStyle(const StylePa
 
             if (osmData.containsTag("tunnel", "yes")) {
                 QColor polyColor = polyStyle.color();
-                qreal hue, sat, val;
+                float hue, sat, val;
                 polyColor.getHsvF(&hue, &sat, &val);
                 polyColor.setHsvF(hue, 0.25 * sat, 0.95 * val);
                 polyStyle.setColor(effectColor(polyColor));

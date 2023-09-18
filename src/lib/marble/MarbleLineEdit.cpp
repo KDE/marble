@@ -17,6 +17,7 @@
 #include <QMouseEvent>
 #include <QPainter>
 #include <QTimer>
+#include <QPixmap>
 
 namespace Marble
 {
@@ -137,7 +138,7 @@ void MarbleLineEdit::setBusy(bool busy)
 void MarbleLineEdit::updateClearButtonIcon( const QString& text )
 {
     d->m_clearButton->setVisible( text.length() > 0 );
-    if ( d->m_clearButton->pixmap() && !d->m_clearButton->pixmap()->isNull() ) {
+    if ( !d->m_clearButton->pixmap().isNull() ) {
         return;
     }
 
@@ -151,7 +152,7 @@ void MarbleLineEdit::updateClearButton()
 {
     const QSize geom = size();
     const int frameWidth = style()->pixelMetric( QStyle::PM_DefaultFrameWidth, nullptr, this );
-    const int pixmapSize = d->m_clearButton->pixmap()->width() + 1;
+    const int pixmapSize = d->m_clearButton->pixmap().width() + 1;
     const int decoratorSize = d->m_decoratorPixmap.width() + 1;
 
     int y = ( geom.height() - pixmapSize ) / 2;

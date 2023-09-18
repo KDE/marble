@@ -897,7 +897,7 @@ void NewstuffModelPrivate::processQueue()
     }
     if ( m_currentAction.second == Install ) {
         if ( !m_currentFile ) {
-            QFileInfo const file = m_items.at( m_currentAction.first ).m_payloadUrl.path();
+            QFileInfo const file = QFileInfo(m_items.at( m_currentAction.first ).m_payloadUrl.path());
             m_currentFile = new QTemporaryFile(QDir::tempPath() + QLatin1String("/marble-XXXXXX-") + file.fileName());
         }
 
@@ -918,7 +918,7 @@ void NewstuffModelPrivate::processQueue()
         QObject::connect( watcher, SIGNAL(finished()), m_parent, SLOT(mapUninstalled()) );
         QObject::connect( watcher, SIGNAL(finished()), watcher, SLOT(deleteLater()) );
 
-        QFuture<void> future = QtConcurrent::run( this, &NewstuffModelPrivate::uninstall, m_currentAction.first );
+        QFuture<void> future = QtConcurrent::run( &NewstuffModelPrivate::uninstall, this, m_currentAction.first );
         watcher->setFuture( future );
     }
 }
