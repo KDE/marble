@@ -79,7 +79,7 @@ DIRECTORIES                                         STATUS
 │   │   │   ├── elevationprofilefloatitem
 │   │   │   ├── elevationprofilemarker
 │   │   │   ├── fileview
-│   │   │   ├── foursquare
+│   │   │   ├── foursquare                          DONE
 │   │   │   ├── gpsinfo
 │   │   │   ├── graticule
 │   │   │   ├── license
@@ -96,13 +96,13 @@ DIRECTORIES                                         STATUS
 │   │   │   ├── postalcode
 │   │   │   ├── progress
 │   │   │   ├── routing
-│   │   │   ├── satellites
+│   │   │   ├── satellites                          DONE
 │   │   │   ├── speedometer
 │   │   │   ├── stars
 │   │   │   ├── sun
 │   │   │   ├── test
 │   │   │   ├── twitter
-│   │   │   ├── weather
+│   │   │   ├── weather                             DONE
 │   │   │   └── wikipedia
 │   │   ├── runner
 │   │   │   ├── cache
