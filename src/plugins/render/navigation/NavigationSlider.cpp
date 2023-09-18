@@ -41,7 +41,7 @@ QPixmap NavigationSlider::pixmap( const QString &id )
     return result;
 }
 
-void NavigationSlider::enterEvent( QEvent * )
+void NavigationSlider::enterEvent( QEnterEvent * )
 {
     setSliderDown( false );
     if (m_handleImagePath != QLatin1String("marble/navigation/navigational_slider_handle_hover")) {

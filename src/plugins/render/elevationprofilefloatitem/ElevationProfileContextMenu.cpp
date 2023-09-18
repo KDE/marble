@@ -6,6 +6,8 @@
 //
 #include "ElevationProfileContextMenu.h"
 
+#include <QActionGroup>
+
 #include "ElevationProfileDataSource.h"
 #include "ElevationProfileFloatItem.h"
 #include "MarbleDebug.h"

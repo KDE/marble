@@ -145,7 +145,6 @@ DIRECTORIES                                         STATUS
 │   │   │   ├── crosshairs
 │   │   │   ├── earthquake
 │   │   │   ├── eclipses
-│   │   │   │   └── res
 │   │   │   ├── elevationprofilefloatitem
 │   │   │   ├── elevationprofilemarker
 │   │   │   ├── fileview
@@ -155,8 +154,7 @@ DIRECTORIES                                         STATUS
 │   │   │   ├── license
 │   │   │   ├── mapscale
 │   │   │   ├── measure
-│   │   │   ├── navigation
-│   │   │   │   └── data
+│   │   │   ├── navigation                          DONE
 │   │   │   ├── notes
 │   │   │   ├── opencaching
 │   │   │   ├── opendesktop
@@ -168,15 +166,12 @@ DIRECTORIES                                         STATUS
 │   │   │   ├── progress
 │   │   │   ├── routing
 │   │   │   ├── satellites
-│   │   │   │   ├── data
-│   │   │   │   └── icons
 │   │   │   ├── speedometer
 │   │   │   ├── stars
 │   │   │   ├── sun
 │   │   │   ├── test
 │   │   │   ├── twitter
 │   │   │   ├── weather
-│   │   │   │   └── data
 │   │   │   └── wikipedia
 │   │   ├── runner
 │   │   │   ├── cache
