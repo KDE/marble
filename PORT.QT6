@@ -95,7 +95,7 @@ DIRECTORIES                                         STATUS
 │   │       ├── htmlfeatures
 │   │       ├── layers                              DONE
 │   │       ├── osm                                 DONE
-│   │       ├── projections
+│   │       ├── projections                         DONE
 │   │       ├── routing
 │   │       │   └── instructions
 │   │       └── webpopup
