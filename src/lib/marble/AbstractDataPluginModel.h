@@ -12,10 +12,10 @@
 
 #include "marble_export.h"
 
-class QPoint;
-class QUrl;
-class QString;
-class QStringList;
+#include <QPoint>
+#include <QUrl>
+#include <QString>
+#include <QStringList>
 
 namespace Marble
 {

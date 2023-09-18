@@ -8,6 +8,7 @@
 #include <QString>
 #include <QUrl>
 #include <QUrlQuery>
+#include <QRegExp>
 
 #include "PlanetFactory.h"
 #include "MarbleDebug.h"

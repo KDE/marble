@@ -192,7 +192,7 @@ void PhotoPlugin::setSettings( const QHash<QString,QVariant> &settings )
     AbstractDataPlugin::setSettings( settings );
 
     setNumberOfItems(qMin<int>(maximumNumberOfItems, settings.value(QStringLiteral("numberOfItems"), 15).toInt()));
-    m_checkStateList = settings.value(QStringLiteral("checkState"), QStringLiteral("1,2,3,4,5,6,7")).toString().split(QLatin1Char(','), QString::SkipEmptyParts);
+    m_checkStateList = settings.value(QStringLiteral("checkState"), QStringLiteral("1,2,3,4,5,6,7")).toString().split(QLatin1Char(','), Qt::SkipEmptyParts);
 
     updateSettings();
     readSettings();

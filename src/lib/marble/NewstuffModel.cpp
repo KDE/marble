@@ -816,7 +816,7 @@ void NewstuffModel::mapUninstalled()
 void NewstuffModel::contentsListed( int exitStatus )
 {
     if ( exitStatus == 0 ) {
-        QStringList const files = QString(d->m_unpackProcess->readAllStandardOutput()).split(QLatin1Char('\n'), QString::SkipEmptyParts);
+        QStringList const files = QString(d->m_unpackProcess->readAllStandardOutput()).split(QLatin1Char('\n'), Qt::SkipEmptyParts);
         d->updateRegistry(files);
 
         QObject::disconnect( d->m_unpackProcess, SIGNAL(finished(int)),

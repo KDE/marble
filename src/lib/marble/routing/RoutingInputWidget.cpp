@@ -257,7 +257,7 @@ RoutingInputWidget::RoutingInputWidget( MarbleModel* model, int index, QWidget *
     QHBoxLayout *layout = new QHBoxLayout( this );
     layout->setSizeConstraint( QLayout::SetMinimumSize );
     layout->setSpacing( 0 );
-    layout->setMargin( 0 );
+    layout->setContentsMargins( 0, 0, 0, 0 );
     layout->addWidget( d->m_lineEdit );
     layout->addWidget( d->m_removeButton );
 

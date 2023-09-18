@@ -79,7 +79,7 @@ FileViewWidget::FileViewWidget( QWidget *parent, Qt::WindowFlags f )
       d( new FileViewWidgetPrivate( this ) )
 {
     d->m_fileViewUi.setupUi( this );
-    layout()->setMargin( 0 );
+    layout()->setContentsMargins( 0, 0, 0, 0 );
 }
 
 FileViewWidget::~FileViewWidget()

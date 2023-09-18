@@ -14,6 +14,7 @@
 #include "GeoDataAccuracy.h"
 
 #include <QPixmap>
+#include <QIODevice>
 
 namespace Marble
 {

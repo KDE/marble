@@ -29,7 +29,7 @@ DatabaseQuery::DatabaseQuery( const MarbleModel* model, const QString &searchTer
         m_resultFormat = AddressFormat;
     }
 
-    QStringList terms = m_searchTerm.split(QLatin1Char(','), QString::SkipEmptyParts );
+    QStringList terms = m_searchTerm.split(QLatin1Char(','), Qt::SkipEmptyParts );
 
     QRegExp streetAndHouse( "^(.*)\\s+(\\d+\\D?)$" );
     if ( streetAndHouse.indexIn( terms.first() ) != -1 ) {

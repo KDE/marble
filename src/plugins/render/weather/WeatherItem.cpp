@@ -208,7 +208,7 @@ class WeatherItemPrivate
     void updateFavorite()
     {
         QStringList items = m_settings.value(QStringLiteral("favoriteItems")).toString()
-                                        .split(QLatin1Char(','), QString::SkipEmptyParts);
+                                        .split(QLatin1Char(','), Qt::SkipEmptyParts);
         bool favorite = items.contains( m_parent->id() );
 
         m_favoriteButton.setVisible( favorite );

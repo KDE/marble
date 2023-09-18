@@ -200,7 +200,7 @@ void VisiblePlacemark::drawLabelPixmap()
 
     int textWidth;
     if ( m_style->labelStyle().glow() ) {
-        labelFont.setWeight( 75 ); // Needed to calculate the correct pixmap size;
+        labelFont.setWeight( QFont::Bold ); // Needed to calculate the correct pixmap size;
         textWidth = ( QFontMetrics( labelFont ).horizontalAdvance( labelName )
             + qRound( 2 * s_labelOutlineWidth ) );
     } else {
@@ -233,7 +233,7 @@ void VisiblePlacemark::drawLabelText(QPainter &labelPainter, const QString &text
         break;
     }
     case Glow: {
-        font.setWeight( 75 );
+        font.setWeight( QFont::Bold );
         fontAscent = QFontMetrics( font ).ascent();
 
         QPen outlinepen( (color.red() + color.green() + color.blue())/3 < 160 ? Qt::white : Qt::black);

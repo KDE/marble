@@ -13,6 +13,7 @@
 #include "routing/RoutingModel.h"
 #include "GeoDataAccuracy.h"
 
+#include <QRandomGenerator>
 #include <QIcon>
 
 namespace Marble
@@ -259,15 +260,15 @@ void RouteSimulationPositionProviderPlugin::update()
 
 GeoDataCoordinates RouteSimulationPositionProviderPlugin::addNoise(const Marble::GeoDataCoordinates &position, const Marble::GeoDataAccuracy &accuracy ) const
 {
-    qreal randomBearing = static_cast<qreal>(qrand()) / (static_cast<qreal>(RAND_MAX/M_PI));
-    qreal randomDistance = static_cast<qreal>(qrand()) / (static_cast<qreal>(RAND_MAX/(accuracy.horizontal / 2.0 / m_marbleModel->planetRadius())));
+    qreal randomBearing = static_cast<qreal>(QRandomGenerator::global()->generate()) / (static_cast<qreal>(RAND_MAX/M_PI));
+    qreal randomDistance = static_cast<qreal>(QRandomGenerator::global()->generate()) / (static_cast<qreal>(RAND_MAX/(accuracy.horizontal / 2.0 / m_marbleModel->planetRadius())));
     return position.moveByBearing(randomBearing, randomDistance);
 }
 
 qreal RouteSimulationPositionProviderPlugin::addNoise(qreal bearing)
 {
     qreal const maxBearingError = 30.0;
-    return bearing + static_cast<qreal>(qrand()) / (static_cast<qreal>(RAND_MAX/maxBearingError/2.0)) - maxBearingError / 2.0;
+    return bearing + static_cast<qreal>(QRandomGenerator::global()->generate()) / (static_cast<qreal>(RAND_MAX/maxBearingError/2.0)) - maxBearingError / 2.0;
 }
 
 void RouteSimulationPositionProviderPlugin::changeStatus(PositionProviderStatus status)

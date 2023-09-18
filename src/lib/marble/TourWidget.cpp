@@ -193,7 +193,7 @@ TourWidget::TourWidget( QWidget *parent, Qt::WindowFlags flags )
     : QWidget( parent, flags ),
       d( new TourWidgetPrivate( this ) )
 {
-    layout()->setMargin( 0 );
+    layout()->setContentsMargins( 0, 0, 0, 0 );
 
     connect( d->m_tourUi.actionPlay, SIGNAL(triggered()),
             this, SLOT(togglePlaying()) );

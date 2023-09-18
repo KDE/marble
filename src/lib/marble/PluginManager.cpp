@@ -263,7 +263,7 @@ void PluginManagerPrivate::loadPlugins()
                 foundPlugin = true;
             }
         } else {
-            qWarning() << "Ignoring to load the following file since it doesn't look like a valid Marble plugin:" << path << endl
+            qWarning() << "Ignoring to load the following file since it doesn't look like a valid Marble plugin:" << path << Qt::endl
                        << "Reason:" << loader->errorString();
             delete loader;
         }

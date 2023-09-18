@@ -324,7 +324,7 @@ RoutingWidget::RoutingWidget( MarbleWidget *marbleWidget, QWidget *parent ) :
     d->setupToolBar();
     d->m_ui.routeComboBox->setVisible( false );
     d->m_ui.routeComboBox->setModel( d->m_routingManager->alternativeRoutesModel() );
-    layout()->setMargin( 0 );
+    layout()->setContentsMargins( 0, 0, 0, 0 );
 
     d->m_ui.routingProfileComboBox->setModel( d->m_routingManager->profilesModel() );
 
@@ -895,7 +895,7 @@ void RoutingWidget::initializeTour()
     double totalDistance = 0.0;
     for( int i=0; i<route.size(); ++i ){
         // TODO: QString( i )?
-        waypoints << WaypointInfo(i, totalDistance, route.at(i).path().first(), route.at(i).maneuver(), QLatin1String("start ") + QString(i));
+        waypoints << WaypointInfo(i, totalDistance, route.at(i).path().first(), route.at(i).maneuver(), QLatin1String("start ") + QString::number(i));
         totalDistance += route.at( i ).distance();
     }
 

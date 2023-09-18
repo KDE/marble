@@ -14,7 +14,7 @@
 #include <QFile>
 #include <QMouseEvent>
 #include <QPainter>
-#include <QRegExp>
+#include <QRegularExpression>
 
 #ifndef MARBLE_NO_WEBKITWIDGETS
 #include <QWebEnginePage>
@@ -210,11 +210,14 @@ void MarbleLegendBrowser::translateHtml( QString & html )
 {
     // must match string extraction in Messages.sh
     QString s = html;
-    QRegExp rx( "</?\\w+((\\s+\\w+(\\s*=\\s*(?:\".*\"|'.*'|[^'\">\\s]+))?)+\\s*|\\s*)/?>" );
+    QRegularExpression rx( "</?\\w+((\\s+\\w+(\\s*=\\s*(?:\".*\"|'.*'|[^'\">\\s]+))?)+\\s*|\\s*)/?>", QRegularExpression::InvertedGreedinessOption );   // PORT_QT6: double check
+/*
+    QRegExp rx( "</?\\w+((\\s+\\w+(\\s*=\\s*(?:\".*\"|'.*'|[^'\">\\s]+))?)+\\s*|\\s*)/?>");
     rx.setMinimal( true );
-    s.replace( rx, "\n" );
-    s.replace( QRegExp( "\\s*\n\\s*" ), "\n" );
-    const QStringList words = s.split(QLatin1Char('\n'), QString::SkipEmptyParts);
+*/
+    s.replace( rx, QLatin1String("\n") );
+    s.replace( QRegularExpression( "\\s*\n\\s*" ), "\n" );
+    const QStringList words = s.split(QLatin1Char('\n'), Qt::SkipEmptyParts);
 
     QStringList::const_iterator i = words.constBegin();
     QStringList::const_iterator const end = words.constEnd();

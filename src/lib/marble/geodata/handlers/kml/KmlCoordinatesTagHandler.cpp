@@ -48,7 +48,7 @@ GeoNode* KmlcoordinatesTagHandler::parse( GeoParser& parser ) const
      || parentItem.represents( kmlTag_MultiGeometry )
      || parentItem.represents( kmlTag_LinearRing )
      || parentItem.represents( kmlTag_LatLonQuad ) ) {
-        QStringList  coordinatesLines;// = parser.readElementText().trimmed().split( QRegExp("\\s"), QString::SkipEmptyParts );
+        QStringList  coordinatesLines;// = parser.readElementText().trimmed().split( QRegExp("\\s"), Qt::SkipEmptyParts );
         // Splitting using the "\\s" regexp is slow, split manually instead.
         QString text = parser.readElementText().trimmed();
 

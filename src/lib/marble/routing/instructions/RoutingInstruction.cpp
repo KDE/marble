@@ -8,6 +8,7 @@
 #include <QCoreApplication>
 #include <QStringList>
 #include <QTextStream>
+#include <QLocale>
 
 #include <cmath>
 
