@@ -23,9 +23,9 @@ DIRECTORIES                                         STATUS
 ├── src
 │   ├── 3rdparty                                    -       (not Qt based code)
 │   ├── apps                                        -
-│   │   ├── behaim                                  -
-│   │   ├── marble-kde                              -
-│   │   ├── marble-maps                             -
+│   │   ├── behaim                                  DONE
+│   │   ├── marble-kde                              DISABLED: KDE BASED
+│   │   ├── marble-maps                             DONE
 │   │   ├── marble-qt                               DONE
 │   │   └── marble-ui                               DONE
 │   ├── bindings                                    -
