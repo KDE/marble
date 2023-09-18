@@ -432,7 +432,7 @@ void MapWizard::processSelectedLayerInformation()
     // Remove all invalid characters from the theme-String
     // that will make the TileLoader malfunction.
     QString themeString = d->selectedLayers.first();
-    themeString.remove(QRegExp("[:\"\\\\/]"));
+    themeString.remove(QRegularExpression("[:\"\\\\/]"));
     d->uiWidget.lineEditTheme->setText( themeString );
     QRegularExpression rx("^[^:\"\\\\/]*$");
     QValidator *validator = new QRegularExpressionValidator(rx, this);
@@ -477,17 +477,17 @@ void MapWizard::processImageResults()
         QMessageBox::information( this,
                                     tr( "%1" ).arg(imageType),
                                     tr( "The %1 could not be downloaded." ).arg(imageType) );
-        if (imageType == PreviewImage) d->m_previewImageValid = false;
-        if (imageType == LevelZeroTile) d->m_levelZeroTileValid = false;
-        if (imageType == LegendImage) d->m_legendImageValid = false;
+        if (imageType == QChar(PreviewImage)) d->m_previewImageValid = false;                   // PORT_QT6 : comparison between enum and QString???
+        if (imageType == QChar(LevelZeroTile)) d->m_levelZeroTileValid = false;
+        if (imageType == QChar(LegendImage)) d->m_legendImageValid = false;
     }
     else if  (d->owsManager.imageRequestResult().imageStatus() == WmsImageFailedServerMessage ) {
         QMessageBox::information( this,
                                     tr( "%1" ).arg(imageType),
                                     tr( "The %1 could not be downloaded successfully. The server replied:\n\n%2" ).arg( imageType, QString( d->owsManager.resultRaw() ) ) );
-        if (imageType == PreviewImage) d->m_previewImageValid = false;
-        if (imageType == LevelZeroTile) d->m_levelZeroTileValid = false;
-        if (imageType == LegendImage) d->m_legendImageValid = false;
+        if (imageType == QChar(PreviewImage)) d->m_previewImageValid = false;
+        if (imageType == QChar(LevelZeroTile)) d->m_levelZeroTileValid = false;
+        if (imageType == QChar(LegendImage)) d->m_legendImageValid = false;
     }
     else {
         if (d->owsManager.imageRequestResult().resultType() == PreviewImage) {
