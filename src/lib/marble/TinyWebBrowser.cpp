@@ -76,7 +76,7 @@ void TinyWebBrowser::print()
 
     QPointer<QPrintDialog> dlg = new QPrintDialog( &printer, this );
     if ( dlg->exec() )
-        page()->print( &printer,  [=](bool){} );
+        QWebEngineView::print( &printer );
     delete dlg;
 #endif
 }
