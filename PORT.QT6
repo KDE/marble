@@ -63,7 +63,7 @@ DIRECTORIES                                         STATUS
 │   │   ├── designer                                DISABLED: NOT USED IN DIGIKAM
 │   │   ├── positionprovider
 │   │   │   ├── flightgear                          DONE
-│   │   │   ├── geoclue                             - Annotated experimental and commented in CMakeLists.txt
+│   │   │   ├── geoclue                             - Originally annotated experimental and commented in CMakeLists.txt
 │   │   │   │   └── GeoCute                         -
 │   │   │   ├── gpsd                                DONE
 │   │   │   ├── qtpositioning                       DONE
@@ -78,7 +78,7 @@ DIRECTORIES                                         STATUS
 │   │   │   ├── eclipses                            DONE
 │   │   │   ├── elevationprofilefloatitem           DONE
 │   │   │   ├── elevationprofilemarker              DONE
-│   │   │   ├── fileview
+│   │   │   ├── fileview                            - Originally commented in CMakeLists.txt
 │   │   │   ├── foursquare                          DONE
 │   │   │   ├── gpsinfo                             DONE
 │   │   │   ├── graticule                           DONE
@@ -87,10 +87,10 @@ DIRECTORIES                                         STATUS
 │   │   │   ├── measure                             DONE
 │   │   │   ├── navigation                          DONE
 │   │   │   ├── notes                               DONE
-│   │   │   ├── opencaching
+│   │   │   ├── opencaching                         - Originally commented in CMakeLists.txt
 │   │   │   ├── opendesktop                         DONE
 │   │   │   ├── overviewmap                         DONE
-│   │   │   ├── panoramio
+│   │   │   ├── panoramio                           - Originally commented in CMakeLists.txt
 │   │   │   ├── photo                               DONE
 │   │   │   ├── positionmarker                      DONE
 │   │   │   ├── postalcode                          DONE
@@ -100,8 +100,8 @@ DIRECTORIES                                         STATUS
 │   │   │   ├── speedometer                         DONE
 │   │   │   ├── stars                               DONE
 │   │   │   ├── sun                                 DONE
-│   │   │   ├── test
-│   │   │   ├── twitter
+│   │   │   ├── test                                - Originally commented in CMakeLists.txt
+│   │   │   ├── twitter                             - Originally commented in CMakeLists.txt
 │   │   │   ├── weather                             DONE
 │   │   │   └── wikipedia                           DONE
 │   │   ├── runner
