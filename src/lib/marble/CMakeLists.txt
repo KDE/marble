@@ -434,7 +434,7 @@ endif(WIN32)
 
 set_target_properties(marblewidget  PROPERTIES
     EXPORT_NAME "Marble"
-    OUTPUT_NAME marblewidget-qt5
+    OUTPUT_NAME marblewidget-qt6
     COMPILE_FLAGS "-DKML_LAZY_IMP"
 )
 
