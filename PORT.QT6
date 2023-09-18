@@ -96,8 +96,8 @@ DIRECTORIES                                         STATUS
 │   │       ├── layers                              DONE
 │   │       ├── osm                                 DONE
 │   │       ├── projections                         DONE
-│   │       ├── routing
-│   │       │   └── instructions
+│   │       ├── routing                             DONE
+│   │       │   └── instructions                    DONE
 │   │       └── webpopup
 │   ├── mac                                         -
 │   ├── plasma
