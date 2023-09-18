@@ -51,8 +51,6 @@ class CurrentLocationWidgetPrivate
 
     void receiveGpsCoordinates( const GeoDataCoordinates &position, qreal speed );
     void adjustPositionTrackingStatus( PositionProviderStatus status );
-    void changePositionProvider( const QString &provider );
-    void trackPlacemark();
     void centerOnCurrentLocation();
     void updateRecenterComboBox( AutoNavigation::CenterMode centerMode );
     void updateAutoZoomCheckBox( bool autoZoom );
@@ -126,8 +124,8 @@ void CurrentLocationWidget::setMarbleWidget( MarbleWidget *widget )
     disconnect( d->m_widget->model()->positionTracking(),
              SIGNAL(positionProviderPluginChanged(PositionProviderPlugin*)),
              this, SLOT(updateActivePositionProvider(PositionProviderPlugin*)) );
-    disconnect( d->m_currentLocationUi.positionTrackingComboBox, SIGNAL(currentIndexChanged(QString)),
-             this, SLOT(changePositionProvider(QString)) );
+    disconnect( d->m_currentLocationUi.positionTrackingComboBox, SIGNAL(currentIndexChanged(int)),
+             this, SLOT(changePositionProvider(int)) );
     disconnect( d->m_currentLocationUi.locationLabel, SIGNAL(linkActivated(QString)),
              this, SLOT(centerOnCurrentLocation()) );
     disconnect( d->m_widget->model()->positionTracking(),
@@ -145,8 +143,8 @@ void CurrentLocationWidget::setMarbleWidget( MarbleWidget *widget )
              SIGNAL(positionProviderPluginChanged(PositionProviderPlugin*)),
              this, SLOT(updateActivePositionProvider(PositionProviderPlugin*)) );
     d->updateActivePositionProvider( d->m_widget->model()->positionTracking()->positionProviderPlugin() );
-    connect( d->m_currentLocationUi.positionTrackingComboBox, SIGNAL(currentIndexChanged(QString)),
-             this, SLOT(changePositionProvider(QString)) );
+    connect( d->m_currentLocationUi.positionTrackingComboBox, SIGNAL(currentIndexChanged(int)),
+             this, SLOT(changePositionProvider(int)) );
     connect( d->m_currentLocationUi.locationLabel, SIGNAL(linkActivated(QString)),
              this, SLOT(centerOnCurrentLocation()) );
     connect( d->m_widget->model()->positionTracking(),
@@ -310,29 +308,40 @@ void CurrentLocationWidgetPrivate::receiveGpsCoordinates( const GeoDataCoordinat
     m_currentLocationUi.clearTrackButton->setEnabled( true );
 }
 
-void CurrentLocationWidgetPrivate::changePositionProvider( const QString &provider )
+void CurrentLocationWidget::changePositionProvider( int index )
 {
-    for( const PositionProviderPlugin* plugin: m_positionProviderPlugins ) {
+    QComboBox* const combo = dynamic_cast<QComboBox*>(sender());
+
+    if (!combo) return;
+
+    QString provider = combo->itemText(index);
+
+    changePositionProvider(provider);
+}
+
+void CurrentLocationWidget::changePositionProvider( const QString& provider )
+{
+    for( const PositionProviderPlugin* plugin: d->m_positionProviderPlugins ) {
         if ( plugin->guiString() == provider ) {
-            m_currentLocationUi.locationLabel->setEnabled( true );
+            d->m_currentLocationUi.locationLabel->setEnabled( true );
             PositionProviderPlugin* instance = plugin->newInstance();
-            PositionTracking *tracking = m_widget->model()->positionTracking();
+            PositionTracking *tracking = d->m_widget->model()->positionTracking();
             tracking->setPositionProviderPlugin( instance );
-            m_widget->update();
+            d->m_widget->update();
             return;
         }
     }
 
     // requested provider not found -> disable position tracking
-    m_currentLocationUi.locationLabel->setEnabled( false );
-    m_widget->model()->positionTracking()->setPositionProviderPlugin( nullptr );
-    m_widget->update();
+    d->m_currentLocationUi.locationLabel->setEnabled( false );
+    d->m_widget->model()->positionTracking()->setPositionProviderPlugin( nullptr );
+    d->m_widget->update();
 }
 
-void CurrentLocationWidgetPrivate::trackPlacemark()
+void CurrentLocationWidget::trackPlacemark()
 {
     changePositionProvider( QObject::tr( "Placemark" ) );
-    m_adjustNavigation->setRecenter( AutoNavigation::AlwaysRecenter );
+    d->m_adjustNavigation->setRecenter( AutoNavigation::AlwaysRecenter );
 }
 
 void CurrentLocationWidget::setRecenterMode( int mode )
