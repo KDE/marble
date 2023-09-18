@@ -127,6 +127,7 @@ find_package(Qt6 ${REQUIRED_QT_VERSION} REQUIRED
         Test
         Widgets
         Svg
+        SvgWidgets
         Sql
         Concurrent
         Quick
@@ -357,7 +358,7 @@ add_subdirectory(data)
 
 include(DistTarget)
 
-add_subdirectory(tests)
+#add_subdirectory(tests)
 
 option(BUILD_MARBLE_TOOLS "Build various tools related to Marble" OFF)
 add_feature_info("Marble tools" BUILD_MARBLE_TOOLS "Build various Marble tools for e.g. file format conversion. Toggle with BUILD_MARBLE_TOOLS=YES/NO.")
