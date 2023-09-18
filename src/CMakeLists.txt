@@ -65,7 +65,7 @@ if(BUILD_MARBLE_APPS)
   add_subdirectory( apps )
 endif()
 
-add_subdirectory( bindings )
+#add_subdirectory( bindings )
 
 configure_file(
   ${CMAKE_CURRENT_SOURCE_DIR}/config-marble.h.cmake
@@ -92,3 +92,7 @@ if(ECM_FOUND)
     EXPORT marble
     DESTINATION "${KDE_INSTALL_LOGGINGCATEGORIESDIR}")
 endif()
+
+#add_subdirectory( plasma )
+#add_subdirectory( plasmarunner )
+#add_subdirectory( thumbnailer )

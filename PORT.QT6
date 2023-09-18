@@ -15,74 +15,20 @@ DIRECTORIES                                         STATUS
 ├── data                                            -
 ├── doc                                             -
 ├── docs                                            -
-├── examples                                        TODO
-│   ├── cpp
-│   │   ├── animation-video
-│   │   ├── basic-routing
-│   │   ├── drawing-places
-│   │   ├── geopainter
-│   │   ├── hello-marble
-│   │   ├── kml-inspector
-│   │   ├── kml-screenshot
-│   │   ├── map-controls
-│   │   ├── map-properties
-│   │   ├── marble-game
-│   │   ├── marbleQuick2
-│   │   ├── overlay-rendering
-│   │   ├── pie-charts
-│   │   ├── reverse-geocoding
-│   │   ├── route-image
-│   │   ├── search
-│   │   ├── squad-interpolation
-│   │   ├── tour-preview
-│   │   └── vehicletracking
-│   ├── gpx
-│   ├── json
-│   ├── kml
-│   ├── osm
-│   ├── python
-│   └── qml
-│       ├── cloud-sync
-│       ├── data-layers
-│       ├── explore
-│       ├── google-search
-│       ├── position-tracking
-│       └── where-is-that
+├── examples                                        -
 ├── install                                         -
 ├── LICENSES                                        -
 ├── po                                              -
 ├── poqm                                            -
 ├── src
-│   ├── 3rdparty
-│   │   ├── o5mreader
-│   │   ├── sgp4
-│   │   └── zlib
-│   ├── apps
-│   │   ├── behaim
-│   │   │   └── package
-│   │   ├── marble-kde
-│   │   ├── marble-maps
-│   │   │   ├── icons
-│   │   │   ├── konqi
-│   │   │   ├── material-icons
-│   │   │   └── package
-│   │   │       ├── res
-│   │   │       │   ├── drawable
-│   │   │       │   ├── drawable-hdpi
-│   │   │       │   ├── drawable-ldpi
-│   │   │       │   ├── drawable-mdpi
-│   │   │       │   ├── drawable-xhdpi
-│   │   │       │   ├── drawable-xxhdpi
-│   │   │       │   ├── drawable-xxxhdpi
-│   │   │       │   └── values
-│   │   │       └── src
-│   │   │           └── org
-│   │   │               └── kde
-│   │   │                   └── marble
-│   │   │                       └── maps
-│   │   ├── marble-qt
-│   │   └── marble-ui
-│   ├── bindings
+│   ├── 3rdparty                                    -       (not Qt based code)
+│   ├── apps                                        -
+│   │   ├── behaim                                  -
+│   │   ├── marble-kde                              -
+│   │   ├── marble-maps                             -
+│   │   ├── marble-qt                               -
+│   │   └── marble-ui                               -
+│   ├── bindings                                    -
 │   ├── lib
 │   │   ├── astro                                   -       (not Qt based code)
 │   │   └── marble                                  DONE
@@ -111,20 +57,8 @@ DIRECTORIES                                         STATUS
 │   │       │   └── instructions                    DONE
 │   │       └── webpopup                            -
 │   ├── mac                                         -
-│   ├── plasma
-│   │   ├── applets
-│   │   │   └── worldclock
-│   │   │       └── package
-│   │   │           └── contents
-│   │   │               ├── config
-│   │   │               └── ui
-│   │   ├── qmlplugin
-│   │   └── wallpapers
-│   │       └── worldmap
-│   │           └── contents
-│   │               ├── config
-│   │               └── ui
-│   ├── plasmarunner
+│   ├── plasma                                      -
+│   ├── plasmarunner                                -
 │   ├── plugins
 │   │   ├── designer                                DISABLED: NOT USED IN DIGIKAM
 │   │   ├── positionprovider
@@ -204,6 +138,6 @@ DIRECTORIES                                         STATUS
 │   │   │   ├── traveling-salesman
 │   │   │   └── yours
 │   │   └── templates                               DISABLED: NOT USED IN DIGIKAM
-│   └── thumbnailer
+│   └── thumbnailer                                 -
 ├── tests                                           -
 └── tools                                           -
