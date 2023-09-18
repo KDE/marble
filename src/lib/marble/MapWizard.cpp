@@ -160,7 +160,7 @@ PreviewDialog::PreviewDialog( QWidget* parent, const QString& mapThemeId ) : QDi
     
     layout->addWidget( navigator, 1, 1 );
     layout->addWidget( widget, 1, 2 );
-    layout->setMargin( 0 );
+    layout->setContentsMargins( 0, 0, 0, 0 );
     layout->setSpacing( 0 );
     
     this->setLayout( layout );

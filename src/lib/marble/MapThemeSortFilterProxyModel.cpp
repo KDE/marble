@@ -39,7 +39,7 @@ bool MapThemeSortFilterProxyModel::lessThan ( const QModelIndex & left, const QM
 bool MapThemeSortFilterProxyModel::filterAcceptsRow( int sourceRow, const QModelIndex &sourceParent ) const
  {
      QModelIndex index = sourceModel()->index(sourceRow, 0, sourceParent);
-     return (sourceModel()->data( index, Qt::UserRole + 1 ).toString().contains( filterRegExp() ) );
+     return (sourceModel()->data( index, Qt::UserRole + 1 ).toString().contains( filterRegularExpression() ) );
  }
  
 bool MapThemeSortFilterProxyModel::isFavorite( const QModelIndex& index )

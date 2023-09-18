@@ -77,7 +77,7 @@ void TestTrack::simpleParseTest()
     QByteArray array( content.toUtf8() );
     QBuffer buffer( &array );
     buffer.open( QIODevice::ReadOnly );
-    qDebug() << "Buffer content:" << endl << buffer.buffer();
+    qDebug() << "Buffer content:" << Qt::endl << buffer.buffer();
     if ( !parser.read( &buffer ) ) {
         QFAIL( "Could not parse data!" );
         return;
@@ -154,7 +154,7 @@ void TestTrack::withoutTimeTest()
     QByteArray array( content.toUtf8() );
     QBuffer buffer( &array );
     buffer.open( QIODevice::ReadOnly );
-    qDebug() << "Buffer content:" << endl << buffer.buffer();
+    qDebug() << "Buffer content:" << Qt::endl << buffer.buffer();
     if ( !parser.read( &buffer ) ) {
         QFAIL( "Could not parse data!" );
         return;
@@ -225,7 +225,7 @@ void TestTrack::partialTimeTest()
     QByteArray array( content.toUtf8() );
     QBuffer buffer( &array );
     buffer.open( QIODevice::ReadOnly );
-    qDebug() << "Buffer content:" << endl << buffer.buffer();
+    qDebug() << "Buffer content:" << Qt::endl << buffer.buffer();
     if ( !parser.read( &buffer ) ) {
         QFAIL( "Could not parse data!" );
         return;
@@ -351,7 +351,7 @@ void TestTrack::extendedDataHeartRateTest()
     QByteArray array( content.toUtf8() );
     QBuffer buffer( &array );
     buffer.open( QIODevice::ReadOnly );
-    qDebug() << "Buffer content:" << endl << buffer.buffer();
+    qDebug() << "Buffer content:" << Qt::endl << buffer.buffer();
     if ( !parser.read( &buffer ) ) {
         QFAIL( "Could not parse data!" );
         return;

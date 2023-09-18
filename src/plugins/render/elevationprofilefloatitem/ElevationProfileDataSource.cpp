@@ -151,7 +151,7 @@ void ElevationProfileTrackDataSource::handleObjectAdded(GeoDataObject *object)
     QHashIterator<QString, QList<const GeoDataTrack *> > i(m_trackHash);
     while (i.hasNext()) {
         i.next();
-        mDebug() << i.key() << ": " << i.value() << endl;
+        mDebug() << i.key() << ": " << i.value() << Qt::endl;
         QFileInfo info(i.key());
         QString filename = info.fileName();
         QList<const GeoDataTrack *> list = i.value();

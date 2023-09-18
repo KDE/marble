@@ -330,21 +330,21 @@ bool MarbleDefaultInputHandler::handleWheel(QWheelEvent *wheelevt)
     MarbleAbstractPresenter *marblePresenter = MarbleInputHandler::d->m_marblePresenter;
     marblePresenter->setViewContext(Animation);
 
-    if( (MarbleInputHandler::d->m_steps > 0 && wheelevt->delta() < 0) ||
-        (MarbleInputHandler::d->m_steps < 0 && wheelevt->delta() > 0) )
+    if( (MarbleInputHandler::d->m_steps > 0 && wheelevt->angleDelta().y() < 0) ||
+        (MarbleInputHandler::d->m_steps < 0 && wheelevt->angleDelta().y() > 0) )
     {
-        MarbleInputHandler::d->m_steps = wheelevt->delta();
+        MarbleInputHandler::d->m_steps = wheelevt->angleDelta().y();
     }
     else
     {
-        MarbleInputHandler::d->m_steps += wheelevt->delta();
+        MarbleInputHandler::d->m_steps += wheelevt->angleDelta().y();
     }
 
     if (marblePresenter->map()->discreteZoom())
     {
         if(qAbs(MarbleInputHandler::d->m_steps) >= MarbleInputHandler::d->m_discreteZoomSteps)
         {
-            marblePresenter->zoomAtBy(wheelevt->pos(), MarbleInputHandler::d->m_steps);
+            marblePresenter->zoomAtBy(wheelevt->position().toPoint(), MarbleInputHandler::d->m_steps);
             MarbleInputHandler::d->m_steps = 0;
         }
     }
@@ -359,7 +359,7 @@ bool MarbleDefaultInputHandler::handleWheel(QWheelEvent *wheelevt)
         }
         qreal newDistance = marblePresenter->distanceFromZoom(zoom + MarbleInputHandler::d->m_steps);
         MarbleInputHandler::d->m_wheelZoomTargetDistance = newDistance;
-        marblePresenter->zoomAt(wheelevt->pos(), newDistance);
+        marblePresenter->zoomAt(wheelevt->position().toPoint(), newDistance);
         if (MarbleInputHandler::d->m_inertialEarthRotation)
         {
             d->m_kineticSpinning.jumpToPosition(MarbleInputHandler::d->m_marblePresenter->centerLongitude(),

@@ -35,6 +35,7 @@
 #include <QToolBar>
 #include <QToolButton>
 #include <QDateTime>
+#include <QRegularExpression>
 
 using namespace Marble;
 // Ui
@@ -217,7 +218,8 @@ class Q_DECL_HIDDEN MapViewWidget::Private {
         const QString selectedId = m_celestialListProxy.data( m_celestialListProxy.index( currentIndex, 1 ) ).toString();
 
         if ( !selectedId.isEmpty() ) {
-            m_mapSortProxy.setFilterRegExp( QRegExp( selectedId, Qt::CaseInsensitive,QRegExp::FixedString ) );
+            m_mapSortProxy.setFilterRegularExpression( QRegularExpression( selectedId ) );     // TODO_QT6: double check
+//            m_mapSortProxy.setFilterRegExp( QRegExp( selectedId, Qt::CaseInsensitive,QRegExp::FixedString ) );
         }
     }
 
@@ -268,7 +270,7 @@ MapViewWidget::MapViewWidget( QWidget *parent, Qt::WindowFlags f )
       d( new Private( this ) )
 {
     d->m_mapViewUi.setupUi( this );
-    layout()->setMargin( 0 );
+    layout()->setContentsMargins( 0, 0, 0, 0 );
 
     if ( MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen ) {
         QGridLayout* layout = new QGridLayout;

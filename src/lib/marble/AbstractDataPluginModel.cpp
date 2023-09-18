@@ -280,8 +280,8 @@ QList<AbstractDataPluginItem*> AbstractDataPluginModel::items( const ViewportPar
     GeoDataLatLonAltBox currentBox = viewport->viewLatLonAltBox();
     QList<AbstractDataPluginItem*> list;
     
-    Q_ASSERT( !d->m_displayedItems.contains( 0 ) && "Null item in m_displayedItems. Please report a bug to marble-devel@kde.org" );
-    Q_ASSERT( !d->m_itemSet.contains( 0 ) && "Null item in m_itemSet. Please report a bug to marble-devel@kde.org" );
+    Q_ASSERT( !d->m_displayedItems.contains( nullptr ) && "Null item in m_displayedItems. Please report a bug to marble-devel@kde.org" );
+    Q_ASSERT( !d->m_itemSet.contains( nullptr ) && "Null item in m_itemSet. Please report a bug to marble-devel@kde.org" );
 
     QList<AbstractDataPluginItem*> candidates = d->m_displayedItems + d->m_itemSet;
 

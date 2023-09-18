@@ -12,11 +12,12 @@
 #include <QObject>
 #include <QVector>
 
+#include "GeoDataPlacemark.h"
+
 namespace Marble
 {
 
 class GeoDataLatLonBox;
-class GeoDataPlacemark;
 class MarbleModel;
 
 class MARBLE_EXPORT SearchRunner : public QObject

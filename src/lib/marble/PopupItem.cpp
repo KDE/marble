@@ -278,12 +278,12 @@ bool PopupItem::eventFilter( QObject *object, QEvent *e )
     } else if ( e->type() == QEvent::Wheel ) {
         // Wheel events are forwarded to the underlying widget
         QWheelEvent *event = static_cast<QWheelEvent*> ( e );
-        QPoint shiftedPos = event->pos();
+        QPoint shiftedPos = event->position().toPoint();
         QWidget* child = transform( shiftedPos );
         if ( child ) {
-            QWheelEvent shiftedEvent = QWheelEvent( shiftedPos,
-                                                    event->globalPos(), event->delta(), event->buttons(),
-                                                    event->modifiers() );
+            QWheelEvent shiftedEvent = QWheelEvent( QPointF(shiftedPos),
+                                                    event->globalPosition(), QPoint(), event->angleDelta(), event->buttons(),
+                                                    event->modifiers(), Qt::NoScrollPhase, false );
             if ( QApplication::sendEvent( child, &shiftedEvent ) ) {
                 widget->setCursor( child->cursor() );
                 emit repaintNeeded();
@@ -355,7 +355,7 @@ void PopupItem::printContent() const
     QPrinter printer;
     QPointer<QPrintDialog> dialog = new QPrintDialog(&printer);
     if (dialog->exec() == QPrintDialog::Accepted) {
-        m_ui.webView->page()->print(&printer, [=](bool){});
+        m_ui.webView->print(&printer);
     }
     delete dialog;
 #endif
