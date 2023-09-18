@@ -21,7 +21,7 @@ class FoursquareItem : public AbstractDataPluginItem
     Q_PROPERTY( QString address READ address NOTIFY addressChanged )
     Q_PROPERTY( QString city READ city NOTIFY cityChanged )
     Q_PROPERTY( QString country READ country NOTIFY countryChanged )
-    Q_PROPERTY( QString usersCount READ usersCount NOTIFY usersCountChanged )
+    Q_PROPERTY( int usersCount READ usersCount NOTIFY usersCountChanged )
     Q_PROPERTY( QString categoryIconUrl READ categoryIconUrl NOTIFY categoryIconUrlChanged )
     Q_PROPERTY( QString categoryLargeIconUrl READ categoryLargeIconUrl NOTIFY categoryLargeIconUrlChanged )
     
