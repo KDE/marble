@@ -61,14 +61,14 @@ DIRECTORIES                                         STATUS
 │   ├── plasmarunner                                -
 │   ├── plugins
 │   │   ├── designer                                DISABLED: NOT USED IN DIGIKAM
-│   │   ├── positionprovider
+│   │   ├── positionprovider                        DONE
 │   │   │   ├── flightgear                          DONE
 │   │   │   ├── geoclue                             - Originally annotated experimental and commented in CMakeLists.txt
 │   │   │   │   └── GeoCute                         -
 │   │   │   ├── gpsd                                DONE
 │   │   │   ├── qtpositioning                       DONE
 │   │   │   └── wlocate                             DONE
-│   │   ├── render
+│   │   ├── render                                  DONE
 │   │   │   ├── annotate                            DONE
 │   │   │   ├── aprs                                DONE
 │   │   │   ├── atmosphere                          DONE
@@ -104,7 +104,7 @@ DIRECTORIES                                         STATUS
 │   │   │   ├── twitter                             - Originally commented in CMakeLists.txt
 │   │   │   ├── weather                             DONE
 │   │   │   └── wikipedia                           DONE
-│   │   ├── runner
+│   │   ├── runner                                  DONE
 │   │   │   ├── cache                               DONE
 │   │   │   ├── cyclestreets                        DONE
 │   │   │   ├── geouri                              DONE
@@ -130,8 +130,8 @@ DIRECTORIES                                         STATUS
 │   │   │   ├── pn2                                 DONE
 │   │   │   ├── pnt                                 DONE
 │   │   │   ├── routino                             DONE
-│   │   │   ├── shp
-│   │   │   ├── traveling-salesman
+│   │   │   ├── shp                                 DISABLED: KDE BASED
+│   │   │   ├── traveling-salesman                  - Originally commented in CMakeLists.txt
 │   │   │   └── yours                               DONE
 │   │   └── templates                               DISABLED: NOT USED IN DIGIKAM
 │   └── thumbnailer                                 -
