@@ -95,7 +95,7 @@ void NotesItem::addComment(const Comment& comment)
 
     QStringList toolTip;
     for (auto const &entry: m_commentsList) {
-        QString const date = entry.date().toString(Qt::SystemLocaleShortDate);
+        QString const date = QLocale((entry.date()).toString(QLocale::ShortFormat);
         QString const user = entry.user().isEmpty() ? tr("anonymous", "The author name is not known") : entry.user();
         toolTip << QStringLiteral("%1\n--%2, %3").arg(entry.text().trimmed()).arg(user).arg(date);
     }

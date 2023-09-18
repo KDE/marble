@@ -10,6 +10,7 @@
 #include "DialogConfigurationInterface.h"
 
 #include <QHash>
+#include <QActionGroup>
 
 class QMenu;
 

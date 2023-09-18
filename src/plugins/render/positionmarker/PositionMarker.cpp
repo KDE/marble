@@ -209,7 +209,7 @@ bool PositionMarker::render( GeoPainter *painter,
             m_arrow = QPolygonF() << QPointF( 0.0, 0.0 ) << relativeLeft << relativeTip << relativeRight;
 
             // Rotate the shape according to the current direction and move it to the screen center
-            QMatrix transformation;
+            QTransform transformation;
             transformation.translate( screenPositionX, screenPositionY );
             transformation.rotate( rotation );
             m_arrow = m_arrow * transformation;
