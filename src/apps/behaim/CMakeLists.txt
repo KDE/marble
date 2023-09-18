@@ -1,5 +1,5 @@
 set(marble_SRCS main.cpp)
-qt5_add_resources(marble_QRCS MarbleBehaim.qrc)
+qt6_add_resources(marble_QRCS MarbleBehaim.qrc)
 
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
 

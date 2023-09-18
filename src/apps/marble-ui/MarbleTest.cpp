@@ -30,12 +30,12 @@ void MarbleTest::timeDemo()
 
         for ( int k = 0; k < 10; ++k ) {
             m_marbleWidget->moveRight( Instant );
-            QCoreApplication::flush();
+            QCoreApplication::sendPostedEvents();
             m_marbleWidget->repaint();
         }
         for ( int k = 0; k < 10; ++k ) {
             m_marbleWidget->moveLeft( Instant );
-            QCoreApplication::flush();
+            QCoreApplication::sendPostedEvents();
             m_marbleWidget->repaint();
         }
 
@@ -47,12 +47,12 @@ void MarbleTest::timeDemo()
     for ( int j = 0; j < 10; ++j ) {
         for ( int k = 0; k < 10; ++k ) {
             m_marbleWidget->moveRight( Instant );
-            QCoreApplication::flush();
+            QCoreApplication::sendPostedEvents();
             m_marbleWidget->repaint();
         }
         for ( int k = 0; k < 10; ++k ) {
             m_marbleWidget->moveLeft( Instant );
-            QCoreApplication::flush();
+            QCoreApplication::sendPostedEvents();
             m_marbleWidget->repaint();
         }
     }
