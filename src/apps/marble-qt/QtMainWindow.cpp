@@ -33,6 +33,8 @@
 #include <QDialogButtonBox>
 #include <QClipboard>
 #include <QNetworkProxy>
+#include <QActionGroup>
+#include <QRegularExpression>
 
 #include "EditBookmarkDialog.h"
 #include "BookmarkManagerDialog.h"
@@ -984,7 +986,7 @@ void MainWindow::openFile()
         if (plugin->nameId() == QLatin1String("Cache"))
             continue;
 
-        const QStringList fileExtensions = plugin->fileExtensions().replaceInStrings( QRegExp( "^" ), "*." );
+        const QStringList fileExtensions = plugin->fileExtensions().replaceInStrings( QRegularExpression( "^" ), "*." );
         const QString filter = plugin->fileFormatDescription() + QLatin1String(" (") + fileExtensions.join(QLatin1Char(' ')) + QLatin1Char(')');
         filters << filter;
         allFileExtensions << fileExtensions;

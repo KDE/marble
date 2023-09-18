@@ -1,5 +1,5 @@
 set(marble_SRCS main.cpp MarbleMaps.cpp TextToSpeechClient.cpp)
-qt5_add_resources(marble_QRCS MarbleMaps.qrc)
+qt6_add_resources(marble_QRCS MarbleMaps.qrc)
 
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
 

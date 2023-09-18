@@ -29,6 +29,7 @@
 #include <QToolBar>
 #include <QMimeData>
 #include <QPixmap>
+#include <QActionGroup>
 
 #ifdef MARBLE_DBUS
 #include <QDBusConnection>
@@ -305,8 +306,8 @@ void ControlView::printPixmap( QPrinter * printer, const QPixmap& pixmap  )
 {
 #ifndef QT_NO_PRINTER
     QSize printSize = pixmap.size();
-    QRect mapPageRect = printer->pageRect();
-    printSize.scale( printer->pageRect().size(), Qt::KeepAspectRatio );
+    QRect mapPageRect = printer->pageLayout().paintRectPixels(printer->resolution());
+    printSize.scale( printer->pageLayout().paintRectPixels(printer->resolution()).size(), Qt::KeepAspectRatio );
     QPoint printTopLeft( ( mapPageRect.width() - printSize.width() ) / 2 ,
                          ( mapPageRect.height() - printSize.height() ) / 2 );
     QRect mapPrintRect( printTopLeft, printSize );

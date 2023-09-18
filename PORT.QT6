@@ -26,8 +26,8 @@ DIRECTORIES                                         STATUS
 │   │   ├── behaim                                  -
 │   │   ├── marble-kde                              -
 │   │   ├── marble-maps                             -
-│   │   ├── marble-qt                               -
-│   │   └── marble-ui                               -
+│   │   ├── marble-qt                               DONE
+│   │   └── marble-ui                               DONE
 │   ├── bindings                                    -
 │   ├── lib
 │   │   ├── astro                                   -       (not Qt based code)
