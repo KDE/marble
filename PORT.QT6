@@ -126,10 +126,7 @@ DIRECTORIES                                         STATUS
 │   │               └── ui
 │   ├── plasmarunner
 │   ├── plugins
-│   │   ├── designer
-│   │   │   ├── latloneditwidget
-│   │   │   ├── marblewidget
-│   │   │   └── navigator
+│   │   ├── designer                                DISABLED: NOT USED IN DIGIKAM
 │   │   ├── positionprovider
 │   │   │   ├── flightgear
 │   │   │   ├── geoclue
@@ -206,57 +203,7 @@ DIRECTORIES                                         STATUS
 │   │   │   ├── shp
 │   │   │   ├── traveling-salesman
 │   │   │   └── yours
-│   │   └── templates
-│   │       └── floatitem
+│   │   └── templates                               DISABLED: NOT USED IN DIGIKAM
 │   └── thumbnailer
-├── tests
-└── tools
-    ├── add_kml
-    ├── asc2kml
-    ├── cloudtiles
-    ├── constellations2kml
-    ├── dateline
-    ├── dso2kml
-    ├── gen-sat-catalog
-    │   └── lib
-    ├── iau2kml
-    ├── kml2cache
-    ├── kml2kml
-    ├── mapreproject
-    ├── maptheme-previewimage
-    ├── mbtile-import
-    ├── natural-earth-vector-tiling
-    ├── osm-addresses
-    │   ├── pbf
-    │   └── xml
-    ├── osm-sisyphus
-    ├── packaging
-    ├── pnt2svg
-    ├── pntdel
-    ├── pntreplace
-    ├── poly2kml
-    ├── qt-components
-    ├── routing-instructions
-    ├── sentineltile
-    ├── shp2osm
-    ├── shp2pn2
-    ├── speaker-files
-    ├── stars
-    ├── svg2pnt
-    ├── tilecreator
-    ├── tilecreator-srtm2
-    ├── vectorosm-tilecreator
-    │   ├── clipper
-    │   ├── setup
-    │   │   ├── build
-    │   │   └── etc
-    │   │       ├── apache2
-    │   │       └── tirex
-    │   │           └── renderer
-    │   │               ├── marble
-    │   │               └── marble-dev
-    │   └── tools
-    ├── vectortilecreator
-    │   ├── levels
-    │   └── regions
-    └── version
+├── tests                                           -
+└── tools                                           -
