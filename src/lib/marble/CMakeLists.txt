@@ -410,7 +410,6 @@ if (NOT MARBLE_NO_WEBKITWIDGETS)
         PUBLIC
             Qt6::WebChannel
             Qt6::WebEngineWidgets
-            Qt6::WebEngine
     )
 endif ()
 if (NOT MARBLE_NO_DBUS)

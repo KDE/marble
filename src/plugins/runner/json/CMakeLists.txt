@@ -28,10 +28,10 @@ endif()
 # install(FILES marble_part_geojson.desktop DESTINATION ${KDE_INSTALL_KSERVICES5DIR})
 
 # register thumbnail plugin as handler
-install(FILES marble_thumbnail_geojson.desktop DESTINATION ${KDE_INSTALL_KSERVICES5DIR})
+install(FILES marble_thumbnail_geojson.desktop DESTINATION ${KDE_INSTALL_FULL_KSERVICESDIR})
 
 if(NOT WIN32 AND NOT APPLE)
     # register marble app as handler
-    install(FILES marble_geojson.desktop DESTINATION ${KDE_INSTALL_APPDIR})
+    install(FILES marble_geojson.desktop DESTINATION ${KDE_INSTALL_FULL_APPDIR})
 endif()
 

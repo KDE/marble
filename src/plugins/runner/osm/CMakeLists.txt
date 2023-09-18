@@ -68,8 +68,8 @@ endif()
 
 # register marble part as handler
 # install again once part is fixed to load and show the passed file
-# install(FILES marble_part_osm.desktop DESTINATION ${KDE_INSTALL_KSERVICES5DIR})
+# install(FILES marble_part_osm.desktop DESTINATION ${KDE_INSTALL_FULL_KSERVICE5DIR})
 
 # register thumbnail plugin as handler
-install(FILES marble_thumbnail_osm.desktop DESTINATION ${KDE_INSTALL_KSERVICES5DIR})
+install(FILES marble_thumbnail_osm.desktop DESTINATION ${KDE_INSTALL_FULL_KSERVICESDIR})
 
