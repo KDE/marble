@@ -59,19 +59,19 @@ foreach my $c ('P'..'Y') {
 print "\n\n";
 
 foreach my $c (118..127) {
-    print "    m_infoFieldByte1[$c] = $c-1128;\n";
+    print "    m_infoFieldByte1[QChar($c)] = $c-1128;\n";
 }
 
 foreach my $c (38..127) {
-    print "    m_infoFieldByte1[$c] = $c-28;\n";
+    print "    m_infoFieldByte1[QChar($c)] = $c-28;\n";
 }
 
 foreach my $c (108..117) {
-    print "    m_infoFieldByte1[$c] = $c-8;\n";
+    print "    m_infoFieldByte1[QChar($c)] = $c-8;\n";
 }
 
 foreach my $c (110..179) {
-    print "    m_infoFieldByte1[$c] = $c-8;\n";
+    print "    m_infoFieldByte1[QChar($c)] = $c-8;\n";
 }
 
 print "\n\n";

@@ -62,15 +62,15 @@ DIRECTORIES                                         STATUS
 │   ├── plugins
 │   │   ├── designer                                DISABLED: NOT USED IN DIGIKAM
 │   │   ├── positionprovider
-│   │   │   ├── flightgear
+│   │   │   ├── flightgear                          DONE
 │   │   │   ├── geoclue
 │   │   │   │   └── GeoCute
 │   │   │   ├── gpsd
-│   │   │   ├── qtpositioning
+│   │   │   ├── qtpositioning                       DONE
 │   │   │   └── wlocate
 │   │   ├── render
 │   │   │   ├── annotate                            DONE
-│   │   │   ├── aprs
+│   │   │   ├── aprs                                DONE
 │   │   │   ├── atmosphere
 │   │   │   ├── compass
 │   │   │   ├── crosshairs
@@ -103,34 +103,30 @@ DIRECTORIES                                         STATUS
 │   │   │   ├── test
 │   │   │   ├── twitter
 │   │   │   ├── weather                             DONE
-│   │   │   └── wikipedia
+│   │   │   └── wikipedia                           DONE
 │   │   ├── runner
 │   │   │   ├── cache
 │   │   │   ├── cyclestreets
-│   │   │   ├── geouri
+│   │   │   ├── geouri                              DONE
 │   │   │   ├── gosmore-reversegeocoding
 │   │   │   ├── gosmore-routing
 │   │   │   ├── gpsbabel
 │   │   │   ├── gpx                                 DISABLED: KDE BASED
-│   │   │   │   ├── handlers
-│   │   │   │   └── tests
-│   │   │   ├── hostip
+│   │   │   ├── hostip                              DONE
 │   │   │   ├── json                                DISABLED: KDE BASED
 │   │   │   ├── kml                                 DISABLED: KDE BASED
-│   │   │   ├── latlon
-│   │   │   ├── localdatabase
-│   │   │   ├── local-osm-search
+│   │   │   ├── latlon                              DONE
+│   │   │   ├── localdatabase                       DONE
+│   │   │   ├── local-osm-search                    DONE
 │   │   │   ├── log
 │   │   │   ├── mapquest
 │   │   │   ├── monav
 │   │   │   ├── nominatim-reversegeocoding
-│   │   │   ├── nominatim-search
-│   │   │   ├── openlocation-code-search
+│   │   │   ├── nominatim-search                    DONE
+│   │   │   ├── openlocation-code-search            DONE
 │   │   │   ├── openrouteservice
 │   │   │   ├── open-source-routing-machine
 │   │   │   ├── osm                                 DISABLED: KDE BASED
-│   │   │   │   ├── translators
-│   │   │   │   └── writers
 │   │   │   ├── pn2
 │   │   │   ├── pnt
 │   │   │   ├── routino

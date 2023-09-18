@@ -8,6 +8,7 @@
 #include "MarbleDirs.h"
 #include "MarbleDebug.h"
 
+#include <QRegExp>
 #include <QMutex>
 
 using namespace Marble;
