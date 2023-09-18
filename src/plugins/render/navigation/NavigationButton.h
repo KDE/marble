@@ -23,7 +23,7 @@ Q_SIGNALS:
 protected:
     void mousePressEvent ( QMouseEvent *mouseEvent ) override;
     void mouseReleaseEvent ( QMouseEvent *mouseEvent ) override;
-    void enterEvent( QEvent * e) override;
+    void enterEvent( QEnterEvent * e) override;
     void leaveEvent( QEvent * e) override;
     void changeEvent( QEvent *e ) override;
     void paintEvent( QPaintEvent * ) override;

@@ -143,7 +143,7 @@ void ElevationProfileFloatItem::initialize ()
     switchDataSource(&m_routeDataSource);
 
     m_fontHeight = QFontMetricsF( font() ).ascent() + 1;
-    m_leftGraphMargin = QFontMetricsF( font() ).width( "0000 m" ); /// TODO make this dynamic according to actual need
+    m_leftGraphMargin = QFontMetricsF( font() ).horizontalAdvance( "0000 m" ); /// TODO make this dynamic according to actual need
 
     m_isInitialized = true;
 }
@@ -262,7 +262,7 @@ void ElevationProfileFloatItem::paintContent( QPainter *painter )
         if ( tick.position == m_axisX.ticks().last().position ) {
             intervalStr += QLatin1Char(' ') + m_axisX.unit();
         }
-        labelRect.setWidth( QFontMetricsF( font() ).width( intervalStr ) * 1.5 );
+        labelRect.setWidth( QFontMetricsF( font() ).horizontalAdvance( intervalStr ) * 1.5 );
         labelRect.moveCenter( QPoint( posX, labelRect.center().y() ) );
         if ( labelRect.right() > m_leftGraphMargin + m_eleGraphWidth ) {
             // don't cut off rightmost label
@@ -364,17 +364,17 @@ void ElevationProfileFloatItem::paintContent( QPainter *painter )
         intervalStr.setNum( xpos * m_axisX.scale(), 'f', 2 );
         intervalStr += QLatin1Char(' ') + m_axisX.unit();
         int currentStringBegin = m_leftGraphMargin + m_cursorPositionX
-                             - QFontMetricsF( font() ).width( intervalStr ) / 2;
+                             - QFontMetricsF( font() ).horizontalAdvance( intervalStr ) / 2;
         painter->drawText( currentStringBegin, contentSize().height() - 1.5 * m_fontHeight, intervalStr );
 
         intervalStr.setNum( currentPoint.altitude(), 'f', 1 );
         intervalStr += QLatin1Char(' ') + m_axisY.unit();
-        if ( m_cursorPositionX + QFontMetricsF( font() ).width( intervalStr ) + m_leftGraphMargin
+        if ( m_cursorPositionX + QFontMetricsF( font() ).horizontalAdvance( intervalStr ) + m_leftGraphMargin
                 < m_eleGraphWidth ) {
             currentStringBegin = ( m_leftGraphMargin + m_cursorPositionX + 5 + 2 );
         } else {
             currentStringBegin = m_leftGraphMargin + m_cursorPositionX - 5
-                                 - QFontMetricsF( font() ).width( intervalStr ) * 1.5;
+                                 - QFontMetricsF( font() ).horizontalAdvance( intervalStr ) * 1.5;
         }
         // Make sure the text still fits into the window
         while ( ypos < m_fontHeight ) {

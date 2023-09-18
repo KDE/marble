@@ -23,7 +23,7 @@ Q_SIGNALS:
     void repaintNeeded();
 
 protected:
-    void enterEvent( QEvent * ) override;
+    void enterEvent( QEnterEvent * ) override;
     void mouseMoveEvent( QMouseEvent * mouseEvent) override;
     void mousePressEvent( QMouseEvent * ) override;
     void mouseReleaseEvent( QMouseEvent * ) override;
