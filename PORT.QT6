@@ -8,6 +8,7 @@ Only shared libraries are ported, not target applications.
 KDE API based codes are disabled.
 Test codes not ported.
 Example codes not ported.
+PhononQt6 feature not compiled.
 
 DIRECTORIES                                         STATUS
 .
