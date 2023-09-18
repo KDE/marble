@@ -71,16 +71,9 @@ DIRECTORIES                                         STATUS
 │   │   │                       └── maps
 │   │   ├── marble-qt
 │   │   └── marble-ui
-│   │       └── icons
-│   │           ├── 16x16
-│   │           ├── 22x22
-│   │           └── 32x32
 │   ├── bindings
-│   │   └── python
-│   │       └── sip
 │   ├── lib
 │   │   ├── astro
-│   │   │   └── docs
 │   │   └── marble
 │   │       ├── blendings
 │   │       ├── cloudsync
@@ -181,12 +174,12 @@ DIRECTORIES                                         STATUS
 │   │   │   ├── gosmore-reversegeocoding
 │   │   │   ├── gosmore-routing
 │   │   │   ├── gpsbabel
-│   │   │   ├── gpx
+│   │   │   ├── gpx                                 DISABLED: KDE BASED
 │   │   │   │   ├── handlers
 │   │   │   │   └── tests
 │   │   │   ├── hostip
-│   │   │   ├── json
-│   │   │   ├── kml
+│   │   │   ├── json                                DISABLED: KDE BASED
+│   │   │   ├── kml                                 DISABLED: KDE BASED
 │   │   │   ├── latlon
 │   │   │   ├── localdatabase
 │   │   │   ├── local-osm-search
@@ -198,7 +191,7 @@ DIRECTORIES                                         STATUS
 │   │   │   ├── openlocation-code-search
 │   │   │   ├── openrouteservice
 │   │   │   ├── open-source-routing-machine
-│   │   │   ├── osm
+│   │   │   ├── osm                                 DISABLED: KDE BASED
 │   │   │   │   ├── translators
 │   │   │   │   └── writers
 │   │   │   ├── pn2
