@@ -10,7 +10,7 @@
 #include "PluginInterface.h"
 #include "LayerInterface.h"
 
-class QStringList;
+#include <QStringList>
 
 namespace Marble
 {

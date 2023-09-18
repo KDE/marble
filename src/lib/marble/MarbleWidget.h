@@ -20,6 +20,7 @@
 #include "GeoDataCoordinates.h"
 #include "MarbleGlobal.h"             // types needed in all of marble.
 #include "marble_export.h"
+#include "TileCoordsPyramid.h"
 
 // Qt
 class QSettings;
@@ -47,7 +48,6 @@ class RenderState;
 class RoutingLayer;
 class TextureLayer;
 class VectorTileLayer;
-class TileCoordsPyramid;
 class TileCreator;
 class ViewportParams;
 class PopupLayer;

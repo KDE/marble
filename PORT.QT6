@@ -93,7 +93,7 @@ DIRECTORIES                                         STATUS
 │   │       │       └── kml                         DONE
 │   │       ├── graphicsview
 │   │       ├── htmlfeatures
-│   │       ├── layers
+│   │       ├── layers                              DONE
 │   │       ├── osm
 │   │       ├── projections
 │   │       ├── routing
