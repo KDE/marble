@@ -10,9 +10,8 @@
 #include "marble_export.h"
 
 #include <QtGlobal>
-
-class QStringList;
-class QString;
+#include <QStringList>
+#include <QString>
 
 namespace Marble {
 

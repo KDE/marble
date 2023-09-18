@@ -833,4 +833,4 @@ void OwsServiceManager::parseImageResult(QNetworkReply *reply)
 }
 
 #include "moc_OwsServiceManager.cpp"
-#include "OwsServiceManager.moc" // needed for Q_OBJECT here in source
+//#include "OwsServiceManager.moc" // needed for Q_OBJECT here in source
