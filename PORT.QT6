@@ -67,7 +67,7 @@ DIRECTORIES                                         STATUS
 │   │   │   │   └── GeoCute                         -
 │   │   │   ├── gpsd                                DONE
 │   │   │   ├── qtpositioning                       DONE
-│   │   │   └── wlocate
+│   │   │   └── wlocate                             DONE
 │   │   ├── render
 │   │   │   ├── annotate                            DONE
 │   │   │   ├── aprs                                DONE
