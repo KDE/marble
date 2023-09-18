@@ -37,5 +37,5 @@ marble_set_package_properties( libshp PROPERTIES DESCRIPTION "reading and writin
 marble_set_package_properties( libshp PROPERTIES URL "http://shapelib.maptools.org/" )
 marble_set_package_properties( libshp PROPERTIES TYPE OPTIONAL PURPOSE "reading and displaying .shp files" )
 if( LIBSHP_FOUND )
-  add_subdirectory( shp )
+  #add_subdirectory( shp )
 endif( LIBSHP_FOUND )
