@@ -7687,8 +7687,8 @@ msgid ""
 "Enter a search term and press Enter. <a href=\"https://userbase.kde.org/"
 "Marble/Search\">Details...</a>"
 msgstr ""
-"Introduïu un terme de busca i premeu Retorn. <a href=\"https://userbase.kde."
-"org/ Marble/Search\">Detalls...</a>"
+"Introduïu un terme de busca i premeu «Retorn». <a href=\"https://userbase."
+"kde.org/ Marble/Search\">Detalls...</a>"
 
 #: src/lib/marble/GoToDialog.ui:93
 msgctxt "GoTo|"
@@ -8409,7 +8409,7 @@ msgid ""
 "Strg, Strg+A, ...)"
 msgstr ""
 "Activeu-la per a seleccionar múltiples capes sense dreceres de teclat "
-"(Majúscules, Ctrl, Ctrl+A...)"
+"(«Majúscules», «Ctrl», «Ctrl+A»...)"
 
 #: src/lib/marble/MapWizard.ui:300
 msgctxt "MapWizard|"
