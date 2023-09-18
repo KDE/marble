@@ -12,14 +12,13 @@
 #include <QList>
 #include <QVector>
 #include <QSize>
+#include <QStringList>
+#include <QUrl>
 
 #include "GeoSceneAbstractDataset.h"
 #include "GeoSceneAbstractTileProjection.h"
 #include "MarbleGlobal.h"
 #include "GeoDataLatLonBox.h"
-
-class QStringList;
-class QUrl;
 
 /**
  * @short Tiled dataset stored in a layer. TextureTile and VectorTile layes inherit from this class.
