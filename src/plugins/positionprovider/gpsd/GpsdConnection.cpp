@@ -9,6 +9,7 @@
 #include "MarbleDebug.h"
 
 #include <QTime>
+#include <QElapsedTimer>
 
 #include <cerrno>
 #include <clocale>
@@ -111,7 +112,7 @@ void GpsdConnection::update()
 #if defined( GPSD_API_MAJOR_VERSION ) && ( GPSD_API_MAJOR_VERSION >= 4 ) && defined( PACKET_SET )
     gps_data_t *data = nullptr;
 
-    QTime watchdog;
+    QElapsedTimer watchdog;
     watchdog.start();
 
 #if defined( GPSD_API_MAJOR_VERSION ) && ( GPSD_API_MAJOR_VERSION >= 5 )

@@ -63,9 +63,9 @@ DIRECTORIES                                         STATUS
 │   │   ├── designer                                DISABLED: NOT USED IN DIGIKAM
 │   │   ├── positionprovider
 │   │   │   ├── flightgear                          DONE
-│   │   │   ├── geoclue
-│   │   │   │   └── GeoCute
-│   │   │   ├── gpsd
+│   │   │   ├── geoclue                             - Annotated experimental and commented in CMakeLists.txt
+│   │   │   │   └── GeoCute                         -
+│   │   │   ├── gpsd                                DONE
 │   │   │   ├── qtpositioning                       DONE
 │   │   │   └── wlocate
 │   │   ├── render
