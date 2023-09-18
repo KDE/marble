@@ -15,6 +15,7 @@
 #include <QtAlgorithms>
 #include <QColor>
 #include <QApplication>
+#include <QActionGroup>
 
 // Marble
 #include "MarbleDebug.h"

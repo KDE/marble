@@ -69,7 +69,7 @@ DIRECTORIES                                         STATUS
 │   │   │   ├── qtpositioning
 │   │   │   └── wlocate
 │   │   ├── render
-│   │   │   ├── annotate
+│   │   │   ├── annotate                            DONE
 │   │   │   ├── aprs
 │   │   │   ├── atmosphere
 │   │   │   ├── compass
@@ -89,7 +89,7 @@ DIRECTORIES                                         STATUS
 │   │   │   ├── notes
 │   │   │   ├── opencaching
 │   │   │   ├── opendesktop
-│   │   │   ├── overviewmap
+│   │   │   ├── overviewmap                         DONE
 │   │   │   ├── panoramio
 │   │   │   ├── photo
 │   │   │   ├── positionmarker
