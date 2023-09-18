@@ -18,6 +18,8 @@
 #include <QTime>
 #include <QTimer>
 #include <QDomDocument>
+#include <QRegularExpression>
+#include <QRegExp>
 
 namespace Marble
 {
@@ -267,7 +269,7 @@ GeoDataDocument* OpenRouteServiceRunner::parse( const QByteArray &content ) cons
 
                     GeoDataPlacemark* instruction = new GeoDataPlacemark;
 
-                    QString const text = textNodes.item( 0 ).toElement().text().remove(QRegExp("<[^>]*>"));
+                    QString const text = textNodes.item( 0 ).toElement().text().remove(QRegularExpression("<[^>]*>"));
                     GeoDataExtendedData extendedData;
                     GeoDataData turnTypeData;
                     turnTypeData.setName(QStringLiteral("turnType"));

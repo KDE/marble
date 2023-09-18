@@ -105,12 +105,12 @@ DIRECTORIES                                         STATUS
 │   │   │   ├── weather                             DONE
 │   │   │   └── wikipedia                           DONE
 │   │   ├── runner
-│   │   │   ├── cache
-│   │   │   ├── cyclestreets
+│   │   │   ├── cache                               DONE
+│   │   │   ├── cyclestreets                        DONE
 │   │   │   ├── geouri                              DONE
 │   │   │   ├── gosmore-reversegeocoding            DONE
 │   │   │   ├── gosmore-routing                     DONE
-│   │   │   ├── gpsbabel
+│   │   │   ├── gpsbabel                            DONE
 │   │   │   ├── gpx                                 DISABLED: KDE BASED
 │   │   │   ├── hostip                              DONE
 │   │   │   ├── json                                DISABLED: KDE BASED
@@ -118,21 +118,21 @@ DIRECTORIES                                         STATUS
 │   │   │   ├── latlon                              DONE
 │   │   │   ├── localdatabase                       DONE
 │   │   │   ├── local-osm-search                    DONE
-│   │   │   ├── log
+│   │   │   ├── log                                 DONE
 │   │   │   ├── mapquest                            DONE
 │   │   │   ├── monav                               DONE
 │   │   │   ├── nominatim-reversegeocoding          DONE
 │   │   │   ├── nominatim-search                    DONE
 │   │   │   ├── openlocation-code-search            DONE
-│   │   │   ├── openrouteservice
-│   │   │   ├── open-source-routing-machine
+│   │   │   ├── openrouteservice                    DONE
+│   │   │   ├── open-source-routing-machine         DONE
 │   │   │   ├── osm                                 DISABLED: KDE BASED
-│   │   │   ├── pn2
-│   │   │   ├── pnt
-│   │   │   ├── routino
+│   │   │   ├── pn2                                 DONE
+│   │   │   ├── pnt                                 DONE
+│   │   │   ├── routino                             DONE
 │   │   │   ├── shp
 │   │   │   ├── traveling-salesman
-│   │   │   └── yours
+│   │   │   └── yours                               DONE
 │   │   └── templates                               DISABLED: NOT USED IN DIGIKAM
 │   └── thumbnailer                                 -
 ├── tests                                           -
