@@ -89,6 +89,6 @@ if(ECM_FOUND)
     DESTINATION "${KDE_INSTALL_LOGGINGCATEGORIESDIR}")
 endif()
 
-add_subdirectory( plasma )
-add_subdirectory( plasmarunner )
+#add_subdirectory( plasma )
+#add_subdirectory( plasmarunner )
 add_subdirectory( thumbnailer )
