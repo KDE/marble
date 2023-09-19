@@ -10,10 +10,9 @@ Port Details:
 
 Only pure Qt codes are ported.
 Qt5 support is dropped.
-Qt6Core5Compat still used.
+Qt6Core5Compat still used (Xml and RegExp).
 "PORT_QT6" annotation is used in source code when port to Qt6 needs to be double checked.
 KDE API based codes are disabled.
-Examples codes not ported.
 
 Screenshots:
 ------------
@@ -35,7 +34,7 @@ DIRECTORIES                                         STATUS
 ├── data                                            -
 ├── doc                                             -
 ├── docs                                            -
-├── examples                                        -
+├── examples                                        DONE
 ├── install                                         -
 ├── LICENSES                                        -
 ├── po                                              -
