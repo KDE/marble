@@ -148,11 +148,11 @@ DIRECTORIES                                         STATUS
 │   │   │   ├── openlocation-code-search            DONE
 │   │   │   ├── openrouteservice                    DONE
 │   │   │   ├── open-source-routing-machine         DONE
-│   │   │   ├── osm                                 DISABLED: KDE BASED
+│   │   │   ├── osm                                 DONE
 │   │   │   ├── pn2                                 DONE
 │   │   │   ├── pnt                                 DONE
 │   │   │   ├── routino                             DONE
-│   │   │   ├── shp                                 DISABLED: KDE BASED
+│   │   │   ├── shp                                 DONE
 │   │   │   ├── traveling-salesman                  - Originally commented in CMakeLists.txt
 │   │   │   └── yours                               DONE
 │   │   └── templates                               - Originally commented in CMakeLists.txt

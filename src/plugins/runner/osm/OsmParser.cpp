@@ -161,31 +161,34 @@ GeoDataDocument* OsmParser::parseXml(const QString &filename, QString &error)
             continue;
         }
 
-        QStringRef const tagName = parser.name();
-        if (tagName == osm::osmTag_node || tagName == osm::osmTag_way || tagName == osm::osmTag_relation) {
+        QStringView const tagName = parser.name();
+        if (tagName == QStringView(QString::fromUtf8(osm::osmTag_node)) ||
+            tagName == QStringView(QString::fromUtf8(osm::osmTag_way))  ||
+            tagName == QStringView(QString::fromUtf8(osm::osmTag_relation)))
+        {
             parentTag = parser.name().toString();
             parentId = parser.attributes().value(QLatin1String("id")).toLongLong();
 
-            if (tagName == osm::osmTag_node) {
+            if (tagName == QStringView(QString::fromUtf8(osm::osmTag_node))) {
                 m_nodes[parentId].osmData() = OsmPlacemarkData::fromParserAttributes(parser.attributes());
                 m_nodes[parentId].parseCoordinates(parser.attributes());
                 osmData = &m_nodes[parentId].osmData();
-            } else if (tagName == osm::osmTag_way) {
+            } else if (tagName == QStringView(QString::fromUtf8(osm::osmTag_way))) {
                 m_ways[parentId].osmData() = OsmPlacemarkData::fromParserAttributes(parser.attributes());
                 osmData = &m_ways[parentId].osmData();
             } else {
-                Q_ASSERT(tagName == osm::osmTag_relation);
+                Q_ASSERT(tagName == QStringView(QString::fromUtf8(osm::osmTag_relation)));
                 m_relations[parentId].osmData() = OsmPlacemarkData::fromParserAttributes(parser.attributes());
                 osmData = &m_relations[parentId].osmData();
             }
-        } else if (osmData && tagName == osm::osmTag_tag) {
+        } else if (osmData && tagName == QStringView(QString::fromUtf8(osm::osmTag_tag))) {
             const QXmlStreamAttributes &attributes = parser.attributes();
             const QString keyString = *stringPool.insert(attributes.value(QLatin1String("k")).toString());
             const QString valueString = *stringPool.insert(attributes.value(QLatin1String("v")).toString());
             osmData->addTag(keyString, valueString);
-        } else if (tagName == osm::osmTag_nd && parentTag == osm::osmTag_way) {
+        } else if (tagName == QStringView(QString::fromUtf8(osm::osmTag_nd)) && parentTag == QStringView(QString::fromUtf8(osm::osmTag_way))) {
             m_ways[parentId].addReference(parser.attributes().value(QLatin1String("ref")).toLongLong());
-        } else if (tagName == osm::osmTag_member && parentTag == osm::osmTag_relation) {
+        } else if (tagName == QStringView(QString::fromUtf8(osm::osmTag_member)) && parentTag == QStringView(QString::fromUtf8(osm::osmTag_relation))) {
             m_relations[parentId].parseMember(parser.attributes());
         } // other tags like osm, bounds ignored
     }
