@@ -21,6 +21,6 @@ set(marblethumbnail_SRCS
 add_library(marblethumbnail MODULE ${marblethumbnail_SRCS})
 target_link_libraries(marblethumbnail
   marblewidget
-  KF6::KIOWidgets
+  KF6::KIOGui
 )
 install(TARGETS marblethumbnail  DESTINATION ${KDE_INSTALL_PLUGINDIR})

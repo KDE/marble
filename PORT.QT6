@@ -156,6 +156,6 @@ DIRECTORIES                                         STATUS
 │   │   │   ├── traveling-salesman                  - Originally commented in CMakeLists.txt
 │   │   │   └── yours                               DONE
 │   │   └── templates                               - Originally commented in CMakeLists.txt
-│   └── thumbnailer                                 DISABLED: KDE BASED
+│   └── thumbnailer                                 DONE
 ├── tests                                           DONE
 └── tools                                           DONE

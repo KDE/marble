@@ -9,11 +9,13 @@
 #include "MarbleMap.h"
 
 // KF
-#include <KIOWidgets/kio/thumbcreator.h>
+#include <kio/thumbnailcreator.h>
 
 // Qt
 #include <QEventLoop>
 #include <QTimer>
+
+using namespace KIO;
 
 namespace Marble
 {
@@ -21,7 +23,7 @@ namespace Marble
 class GeoDataObject;
 
 
-class GeoDataThumbnailer : public QObject, public ThumbCreator
+class GeoDataThumbnailer : public ThumbnailCreator
 {
     Q_OBJECT
 
@@ -29,8 +31,8 @@ public:
     GeoDataThumbnailer();
     ~GeoDataThumbnailer() override;
 
-public: // ThumbCreator API
-    bool create(const QString &path, int width, int height, QImage &image) override;
+public: // ThumbnailCreator API
+    ThumbnailResult create(const ThumbnailRequest& request) override;
 
 private:
     void onGeoDataObjectAdded(GeoDataObject *object);

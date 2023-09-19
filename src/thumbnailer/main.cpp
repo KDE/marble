@@ -7,7 +7,7 @@
 extern "C"
 {
 
-Q_DECL_EXPORT ThumbCreator *new_creator()
+Q_DECL_EXPORT ThumbnailCreator *new_creator()
 {
     return new Marble::GeoDataThumbnailer;
 }
