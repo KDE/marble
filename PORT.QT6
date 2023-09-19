@@ -1,6 +1,12 @@
-GOAL: compile and run digiKam geolocation features with Qt6
+Context:
+--------
+
+Compile and run digiKam geolocation features with Qt6
 Port to Qt6 done by Gilles Caulier on September 2023
-Envirronement: Kubuntu 23.04 + Qt 6.4.2 + KF6 from master.
+Environment: Kubuntu 23.04 + Qt 6.4.2 + KF6 from master (https://invent.kde.org/graphics/digikam/-/tree/master/project/install-kf6?ref_type=heads).
+
+Port Details:
+-------------
 
 Only pure Qt codes are ported.
 Qt5 support is dropped.
@@ -9,6 +15,20 @@ Qt6Core5Compat still used.
 KDE API based codes are disabled.
 Test codes not ported.
 Example codes not ported.
+
+Screenshots:
+------------
+
+Marble Qt6:
+    https://i.imgur.com/YJNp7H1.png
+    https://i.imgur.com/HVZBT3O.png
+
+digiKam Qt6 with Marble:
+    https://i.imgur.com/mBM7bqq.png
+    https://i.imgur.com/Y553qAG.png
+
+Directories Status:
+-------------------
 
 DIRECTORIES                                         STATUS
 .
