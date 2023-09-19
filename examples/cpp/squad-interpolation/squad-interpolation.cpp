@@ -17,6 +17,7 @@
 #include <marble/ViewportParams.h>
 
 #include <QTimer>
+#include <QRandomGenerator>
 
 namespace Marble
 {
@@ -109,7 +110,7 @@ bool MyPaintLayer::render ( GeoPainter *painter, ViewportParams *viewport, const
     for ( int i = 0; i < m_cities.size(); ++i ) {
         qreal x, y;
         QString const text = QString::number ( m_index + i );
-        int const w = painter->fontMetrics().width( text );
+        int const w = painter->fontMetrics().horizontalAdvance( text );
         painter->setPen ( Qt::NoPen );
         painter->drawEllipse ( m_cities[i], 1.5*w, 1.5*h );
         painter->setPen ( QColor ( Marble::Oxygen::aluminumGray4 ) );
@@ -148,7 +149,7 @@ void MyPaintLayer::addRandomCity ( double minDistance, double maxDistance )
         if (const auto document = geodata_cast<GeoDataDocument>(object)) {
             if (document->name() == QLatin1String("cityplacemarks")) {
                 QVector<GeoDataPlacemark*> placemarks = document->placemarkList();
-                for ( int i = qrand() % placemarks.size(); i < placemarks.size(); ++i ) {
+                for ( int i = QRandomGenerator::global()->generate() % placemarks.size(); i < placemarks.size(); ++i ) {
                     const double distance = EARTH_RADIUS * m_cities.last().sphericalDistanceTo(placemarks[i]->coordinate());
                     if ( distance >= minDistance && distance <= maxDistance ) {
                         m_cities << placemarks[i]->coordinate();

@@ -136,8 +136,8 @@ void Private::setupGameSignals()
     }
 }
 
-MainWindow::MainWindow( const QString &marbleDataPath, QWidget *parent, Qt::WindowFlags flags ) :
-    QMainWindow( parent, flags ),
+MainWindow::MainWindow( const QString &marbleDataPath, QWidget *parent) :
+    QMainWindow( parent),
     d( new Private( this ) )
 {
     d->setupUi( this );

@@ -12,6 +12,7 @@
 #include <QVariant>
 #include <QStringList>
 #include <QDir>
+#include <QRandomGenerator>
 
 // Marble
 #include <marble/MarbleWidget.h>
@@ -220,13 +221,13 @@ void ClickOnThat::postQuestion( QObject *gameObject )
     QVector<GeoDataPlacemark*> countryPlacemarks = d->m_countryNames->placemarkList();
 
     uint randomSeed = uint(QTime::currentTime().msec());
-    qsrand( randomSeed );
+    QRandomGenerator::global()->seed(randomSeed);
 
     GeoDataPlacemark *placemark = nullptr;
     GeoDataPoint *point = nullptr;
     bool found = false;
     while( !found ) {
-        placemark = countryPlacemarks[qrand()%countryPlacemarks.size()];
+        placemark = countryPlacemarks[QRandomGenerator::global()->generate()%countryPlacemarks.size()];
         if ( !d->m_continentsAndOceans.contains(placemark->name(), Qt::CaseSensitive) ) {
             found = true;
             point = dynamic_cast<GeoDataPoint*>( placemark->geometry() );
