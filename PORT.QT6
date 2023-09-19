@@ -76,8 +76,8 @@ DIRECTORIES                                         STATUS
 │   │       │   └── instructions                    DONE
 │   │       └── webpopup                            -
 │   ├── mac                                         -
-│   ├── plasma                                      -
-│   ├── plasmarunner                                -
+│   ├── plasma                                      DISABLED: KDE based codes.
+│   ├── plasmarunner                                DISABLED: KDE based codes.
 │   ├── plugins
 │   │   ├── designer                                DONE
 │   │   │   ├── latloneditwidget                    DONE

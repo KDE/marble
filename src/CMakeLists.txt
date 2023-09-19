@@ -76,6 +76,6 @@ if(APPLE)
   add_subdirectory( mac )
 endif(APPLE)
 
-add_subdirectory( plasma )
-add_subdirectory( plasmarunner )
+#add_subdirectory( plasma )
+#add_subdirectory( plasmarunner )
 add_subdirectory( thumbnailer )
