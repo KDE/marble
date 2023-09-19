@@ -77,7 +77,7 @@ void animatedFlight( MarbleWidget *mapWidget )
     VideoWriter videoWriter( videoFile, cv::VideoWriter::fourcc('D','I','V','X'), fps, frameSize );
     Mat buffer;
     buffer.create(frameSize, CV_8UC3);
-    timeLine.setCurveShape( QTimeLine::EaseInOutCurve );
+    timeLine.setEasingCurve( QEasingCurve::InOutSine );
     int const frameTime = qRound( 1000.0 / fps );
     for ( int i=1; i<=timeLine.duration(); i+=frameTime ) {
         printf("[%i%% done]\r", cvRound( (100.0*i)/timeLine.duration() ) );
