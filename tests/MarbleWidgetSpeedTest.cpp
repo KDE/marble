@@ -64,11 +64,11 @@ void MarbleWidgetSpeedTest::timeTest()
     for ( int j = 0; j < 10; ++j ) {
         for ( int k = 0; k < 10; ++k ) {
             m_marbleWidget->moveRight();
-            QCoreApplication::flush();
+            QCoreApplication::sendPostedEvents();
         }
         for ( int k = 0; k < 10; ++k ) {
             m_marbleWidget->moveLeft();
-            QCoreApplication::flush();
+            QCoreApplication::sendPostedEvents();
         }
     }
 
