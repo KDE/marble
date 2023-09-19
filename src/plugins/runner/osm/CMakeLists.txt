@@ -71,5 +71,5 @@ endif()
 # install(FILES marble_part_osm.desktop DESTINATION ${KDE_INSTALL_FULL_KSERVICE5DIR})
 
 # register thumbnail plugin as handler
-install(FILES marble_thumbnail_osm.desktop DESTINATION ${KDE_INSTALL_FULL_KSERVICESDIR})
+install(FILES marble_thumbnail_osm.desktop DESTINATION ${KDE_INSTALL_FULL_APPDIR})
 

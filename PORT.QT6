@@ -10,7 +10,7 @@ Port Details:
 
 Only pure Qt codes are ported.
 Qt5 support is dropped.
-Qt6Core5Compat still used (Xml and RegExp).
+Qt6Core5Compat still used (Xml, StringRef, and RegExp).
 "PORT_QT6" annotation is used in source code when port to Qt6 needs to be double checked.
 KDE API based codes are disabled.
 
@@ -133,7 +133,7 @@ DIRECTORIES                                         STATUS
 │   │   │   ├── gosmore-reversegeocoding            DONE
 │   │   │   ├── gosmore-routing                     DONE
 │   │   │   ├── gpsbabel                            DONE
-│   │   │   ├── gpx                                 DISABLED: KDE BASED
+│   │   │   ├── gpx                                 DONE
 │   │   │   ├── hostip                              DONE
 │   │   │   ├── json                                DISABLED: KDE BASED
 │   │   │   ├── kml                                 DISABLED: KDE BASED
