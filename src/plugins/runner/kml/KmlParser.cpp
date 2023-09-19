@@ -27,12 +27,12 @@ bool KmlParser::isValidElement(const QString& tagName) const
     if (!GeoParser::isValidElement(tagName))
         return false;
 
-    return (namespaceUri() == kml::kmlTag_nameSpace20   ||
-            namespaceUri() == kml::kmlTag_nameSpace21   ||
-            namespaceUri() == kml::kmlTag_nameSpace22   ||
-            namespaceUri() == kml::kmlTag_nameSpaceGx22 ||
-            namespaceUri() == kml::kmlTag_nameSpaceOgc22||
-            namespaceUri() == kml::kmlTag_nameSpaceMx );
+    return (namespaceUri() == QStringView(QString::fromUtf8(kml::kmlTag_nameSpace20))   ||
+            namespaceUri() == QStringView(QString::fromUtf8(kml::kmlTag_nameSpace21))   ||
+            namespaceUri() == QStringView(QString::fromUtf8(kml::kmlTag_nameSpace22))   ||
+            namespaceUri() == QStringView(QString::fromUtf8(kml::kmlTag_nameSpaceGx22)) ||
+            namespaceUri() == QStringView(QString::fromUtf8(kml::kmlTag_nameSpaceOgc22))||
+            namespaceUri() == QStringView(QString::fromUtf8(kml::kmlTag_nameSpaceMx)) );
 }
 
 GeoDocument* KmlParser::createDocument() const

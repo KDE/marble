@@ -136,7 +136,7 @@ DIRECTORIES                                         STATUS
 │   │   │   ├── gpx                                 DONE
 │   │   │   ├── hostip                              DONE
 │   │   │   ├── json                                DISABLED: KDE BASED
-│   │   │   ├── kml                                 DISABLED: KDE BASED
+│   │   │   ├── kml                                 DONE
 │   │   │   ├── latlon                              DONE
 │   │   │   ├── localdatabase                       DONE
 │   │   │   ├── local-osm-search                    DONE
