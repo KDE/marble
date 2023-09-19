@@ -23,15 +23,15 @@ else()
 endif()
 
 macro(qt_add_resources)
-  qt5_add_resources(${ARGN})
+  qt6_add_resources(${ARGN})
 endmacro()
 
 macro(qt_wrap_ui)
-  qt5_wrap_ui(${ARGN})
+  qt6_wrap_ui(${ARGN})
 endmacro()
 
 macro(qt_generate_moc)
-  qt5_generate_moc(${ARGN})
+  qt6_generate_moc(${ARGN})
 endmacro()
 
 # the place to put in common cmake macros
@@ -182,8 +182,8 @@ else()
 if(TARGET Qt6::lconvert)
     set(lconvert_executable Qt6::lconvert)
 else()
-    # Qt < 5.3.1 does not define Qt6::lconvert
-    get_target_property(lrelease_location Qt6::lrelease LOCATION)
+    # Qt < 5.3.1 does not define Qt5::lconvert
+    get_target_property(lrelease_location Qt5::lrelease LOCATION)
     get_filename_component(lrelease_path ${lrelease_location} PATH)
     find_program(lconvert_executable
         NAMES lconvert-qt5 lconvert
