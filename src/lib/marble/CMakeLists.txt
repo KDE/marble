@@ -412,7 +412,7 @@ endif ()
 if (Phonon4Qt6_FOUND)
     target_link_libraries(marblewidget
         PRIVATE
-            Phonon::phonon4qt5
+            Phonon::phonon4qt6
     )
 endif()
 

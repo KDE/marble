@@ -9,7 +9,6 @@ Qt6Core5Compat still used.
 KDE API based codes are disabled.
 Test codes not ported.
 Example codes not ported.
-PhononQt6 feature not compiled.
 
 DIRECTORIES                                         STATUS
 .
