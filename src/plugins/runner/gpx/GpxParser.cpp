@@ -27,9 +27,9 @@ bool GpxParser::isValidElement(const QString& tagName) const
     if (!GeoParser::isValidElement(tagName))
         return false;
 
-    return (   namespaceUri() == gpx::gpxTag_nameSpace10
-            || namespaceUri() == gpx::gpxTag_nameSpace11
-            || namespaceUri() == gpx::gpxTag_nameSpaceGarminTrackPointExt1);
+    return (   namespaceUri() == QStringView(QString::fromUtf8(gpx::gpxTag_nameSpace10))
+            || namespaceUri() == QStringView(QString::fromUtf8(gpx::gpxTag_nameSpace11))
+            || namespaceUri() == QStringView(QString::fromUtf8(gpx::gpxTag_nameSpaceGarminTrackPointExt1)));
 }
 
 GeoDocument* GpxParser::createDocument() const

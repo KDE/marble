@@ -5,6 +5,8 @@
 
 #include "GPXhrTagHandler.h"
 
+#include <QVariant>
+
 #include "MarbleDebug.h"
 
 #include "GPXElementDictionary.h"

@@ -5,6 +5,8 @@
 
 #include "GPXrteptTagHandler.h"
 
+#include <QStringView>
+
 #include "MarbleDebug.h"
 
 #include "GPXElementDictionary.h"
@@ -32,7 +34,7 @@ GeoNode* GPXrteptTagHandler::parse(GeoParser& parser) const
         GeoDataCoordinates coord;
 
         QXmlStreamAttributes attributes = parser.attributes();
-        QStringRef tmp;
+        QStringView tmp;
         qreal lat = 0;
         qreal lon = 0;
         tmp = attributes.value(QLatin1String(gpxTag_lat));

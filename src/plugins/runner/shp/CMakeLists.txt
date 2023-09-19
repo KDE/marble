@@ -32,7 +32,7 @@ endif()
 # install(FILES marble_part_shp.desktop DESTINATION ${KDE_INSTALL_KSERVICES5DIR})
 
 # register thumbnail plugin as handler
-install(FILES marble_thumbnail_shp.desktop DESTINATION ${KDE_INSTALL_KSERVICES5DIR})
+install(FILES marble_thumbnail_shp.desktop DESTINATION ${KDE_INSTALL_APPDIR})
 
 if(NOT WIN32 AND NOT APPLE)
     # register marble app as handler
