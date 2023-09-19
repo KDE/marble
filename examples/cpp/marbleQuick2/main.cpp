@@ -73,7 +73,6 @@ public:
         QSurfaceFormat format;
         format.setAlphaBufferSize(8);
         setFormat(format);
-        setClearBeforeRendering(true);
         setColor(QColor(Qt::transparent));
         setTitle(QStringLiteral("Marble in QML 2.0 demo"));
 
