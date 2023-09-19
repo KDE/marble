@@ -19,6 +19,7 @@
 #include <QSignalSpy>
 #include <QMetaType>
 #include <QThreadPool>
+#include <QElapsedTimer>
 
 Q_DECLARE_METATYPE( QList<Marble::GeoDataCoordinates> )
 
@@ -63,7 +64,7 @@ public:
     GeoDataCoordinates m_coords;
     GeoDataCoordinates m_coords2;
     RouteRequest m_request;
-    QTime t;
+    QElapsedTimer t;
 };
 
 void MarbleRunnerManagerTest::initTestCase()
@@ -102,7 +103,7 @@ void MarbleRunnerManagerTest::testSyncPlacemarks()
     QCOMPARE( finishSpy.count(), 0 );
     QCOMPARE( resultSpy.count(), 0 );
 
-    QTime timer;
+    QElapsedTimer timer;
     timer.start();
     QVector<GeoDataPlacemark*> placemarks = m_runnerManager.searchPlacemarks(m_name);
 
@@ -166,7 +167,7 @@ void MarbleRunnerManagerTest::testSyncReverse()
     QCOMPARE( finishSpy.count(), 0 );
     QCOMPARE( resultSpy.count(), 0 );
 
-    QTime timer;
+    QElapsedTimer timer;
     timer.start();
     QString placemark = m_runnerManager.searchReverseGeocoding( m_coords );
 
