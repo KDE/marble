@@ -8,6 +8,8 @@
 
 #include <QSet>
 
+#include "GeoDataLinearRing.h"
+
 namespace Marble
 {
 
