@@ -124,7 +124,7 @@ void TileDirectory::setInputFile(const QString &filename)
             m_boundingBox = boundingBox(m_inputFile);
         } else {
             // remote file: check if already downloaded
-            QFileInfo cacheFile = QString("%1/%2").arg(m_cacheDir).arg(url.fileName());
+            QFileInfo cacheFile = QFileInfo(QString("%1/%2").arg(m_cacheDir).arg(url.fileName()));
             if (!cacheFile.exists()) {
                 download(filename, cacheFile.absoluteFilePath());
             }
@@ -264,7 +264,7 @@ void TileDirectory::setBoundingPolygon(const QString &file)
         while ( !stream.atEnd() ) {
             bool inside = true;
             QString line = stream.readLine().trimmed();
-            QStringList entries = line.split( QLatin1Char( ' ' ), QString::SkipEmptyParts );
+            QStringList entries = line.split( QLatin1Char( ' ' ), Qt::SkipEmptyParts );
             if ( entries.size() == 1 ) {
                 if (entries.first() == QLatin1String("END") && inside) {
                     inside = false;

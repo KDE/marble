@@ -73,7 +73,7 @@ int main(int argc, char** argv)
         Cheeeeze::msleep( 25 );
         app.processEvents();
     }
-    QPixmap const globe = QPixmap::grabWidget( mapWidget );
+    QPixmap const globe = mapWidget->grab();
     globePainter.drawPixmap( QPoint( 2, 2 ), resize( globe ) );
     globePainter.end();
     canvas.save( argc > 2 ? argv[2] : "preview.png" );

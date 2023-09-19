@@ -48,13 +48,11 @@ int main(int argc, char *argv[])
 
         // Read the data serialized from the file.
         QTextStream  sourcestream( &sourcefile );
-        sourcestream.setCodec("UTF-8");
 
         QFile  targetfile( targetfilename );
         targetfile.open( QIODevice::ReadWrite );
 
         QTextStream  targetstream( &targetfile );
-        targetstream.setCodec("UTF-8");
 
         // gzFile gzDoc = gzopen( targetfilename.toLatin1(), "w");
         // QTextStream targetstream( new QString() );

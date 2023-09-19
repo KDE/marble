@@ -136,11 +136,11 @@ int main(int argc, char *argv[])
     if (data.open(QFile::WriteOnly | QFile::Truncate)) {
         QTextStream out(&data);
 
-        out << "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>" << endl;
-        out << "<svg width=\"432.00000px\" height=\"216.00000px\">" << endl;
+        out << "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>" << Qt::endl;
+        out << "<svg width=\"432.00000px\" height=\"216.00000px\">" << Qt::endl;
         for ( const QString & path: pathList)
-            out << path << endl;
-        out << "</svg>" << endl;
+            out << path << Qt::endl;
+        out << "</svg>" << Qt::endl;
         qDebug() << "Done!";
         data.close();
     }

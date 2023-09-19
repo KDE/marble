@@ -130,7 +130,6 @@ int main( int argc, char* argv[] )
     else
     {
         QTextStream console( stdin );
-        console.setCodec( "UTF-8" );
         console.setAutoDetectUnicode( true );
         QString content = adjustGosmoreVersion( console, parser );
         QTextStream stream( &content );
@@ -138,7 +137,7 @@ int main( int argc, char* argv[] )
     }
 
     QTextStream console( stdout );
-    console.setCodec( "UTF-8" );
+
     if ( arguments.contains( "--dense" ) )
     {
         console << "Content-Type: text/plain\n\n";

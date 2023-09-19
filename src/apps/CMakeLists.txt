@@ -3,7 +3,7 @@ if(BUILD_MARBLE_APPS)
     if (NOT ANDROID)
         add_subdirectory(marble-ui)
         add_subdirectory(marble-qt)
-        add_subdirectory(marble-kde)
+#        add_subdirectory(marble-kde)
     endif()
 
     add_subdirectory(behaim)
