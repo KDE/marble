@@ -135,7 +135,7 @@ DIRECTORIES                                         STATUS
 │   │   │   ├── gpsbabel                            DONE
 │   │   │   ├── gpx                                 DONE
 │   │   │   ├── hostip                              DONE
-│   │   │   ├── json                                DISABLED: KDE BASED
+│   │   │   ├── json                                DONE
 │   │   │   ├── kml                                 DONE
 │   │   │   ├── latlon                              DONE
 │   │   │   ├── localdatabase                       DONE
