@@ -229,7 +229,7 @@ void MarbleRunnerManagerTest::testSyncRouting()
     QCOMPARE( finishSpy.count(), 0 );
     QCOMPARE( resultSpy.count(), 0 );
 
-    QTime timer;
+    QElapsedTimer timer;
     timer.start();
     QVector<GeoDataDocument*> routes = m_runnerManager.searchRoute( &m_request );
 

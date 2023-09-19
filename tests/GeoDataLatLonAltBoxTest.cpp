@@ -4,6 +4,7 @@
 //
 
 #include <QObject>
+#include <QRandomGenerator>
 
 #include "GeoDataCoordinates.h"
 #include "GeoDataLinearRing.h"
@@ -56,7 +57,7 @@ void GeoDataLatLonAltBoxTest::fromLineStringTest()
 
 qreal GeoDataLatLonAltBoxTest::randomLon()
 {
-    qreal lon = qrand();
+    qreal lon = QRandomGenerator::global()->generate();
     while ( lon < -180 ) {
         lon += 360;
     }
@@ -69,7 +70,7 @@ qreal GeoDataLatLonAltBoxTest::randomLon()
 
 qreal GeoDataLatLonAltBoxTest::randomLat()
 {
-    qreal lat = qrand();
+    qreal lat = QRandomGenerator::global()->generate();
     while ( lat < -90 ) {
         lat += 180;
     }

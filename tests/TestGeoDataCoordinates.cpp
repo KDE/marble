@@ -13,6 +13,7 @@
 #include <QDebug>
 #include <QTranslator>
 #include <QTemporaryFile>
+#include <QRandomGenerator>
 
 using namespace Marble;
 
@@ -70,7 +71,7 @@ void TestGeoDataCoordinates::initTestCase()
     QLocale::setDefault( QLocale::c() ); // needed for testing toString* conversions
 
     QTime time = QTime::currentTime();
-    qsrand((uint)time.msec());
+    QRandomGenerator::global()->seed((uint)time.msec());
 }
 
 /*
@@ -728,7 +729,7 @@ void TestGeoDataCoordinates::testFromStringDMS_data()
 void TestGeoDataCoordinates::testFromStringDMS()
 {
     // only run random 5% of all possible permutations
-    if ((qreal(qrand()) / RAND_MAX) > 0.05) {
+    if ((qreal( QRandomGenerator::global()->generate()) / RAND_MAX) > 0.05) {
         QSKIP("Not picked for this run.");
     }
 
@@ -857,7 +858,7 @@ void TestGeoDataCoordinates::testFromStringDM_data()
 void TestGeoDataCoordinates::testFromStringDM()
 {
     // only run random 5% of all possible permutations
-    if ((qreal(qrand()) / RAND_MAX) > 0.05) {
+    if ((qreal( QRandomGenerator::global()->generate()) / RAND_MAX) > 0.05) {
         QSKIP("Not picked for this run.");
     }
 

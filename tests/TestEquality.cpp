@@ -346,7 +346,7 @@ void TestEquality::cameraTest()
 
 
     GeoDataTimeStamp timeStampBegin, timeStampEnd;
-    QDateTime date1( QDate(2014, 4, 7) );
+    QDateTime date1( QDate(2014, 4, 7), QTime() );
 
     timeStampBegin.setWhen( date1 );
     timeStampEnd.setWhen( date1 );
@@ -360,7 +360,7 @@ void TestEquality::cameraTest()
     timeSpan2.setEnd( timeStampEnd );
 
     GeoDataTimeStamp timeStamp1, timeStamp2;
-    QDateTime date2( QDate(2014, 4, 8) );
+    QDateTime date2( QDate(2014, 4, 8), QTime() );
     timeStamp1.setWhen( date2 );
     timeStamp2.setWhen( date2 );
     timeStamp1.setResolution( GeoDataTimeStamp::SecondResolution );
@@ -668,7 +668,7 @@ void TestEquality::tourTest()
 
 
     GeoDataTimeStamp timeStamp1, timeStamp2;
-    QDateTime date1( QDate(1994, 10, 4) );
+    QDateTime date1( QDate(1994, 10, 4), QTime() );
 
     timeStamp1.setWhen( date1 );
     timeStamp1.setResolution( GeoDataTimeStamp::YearResolution );
@@ -1105,7 +1105,7 @@ void TestEquality::timeSpanTest()
     GeoDataTimeSpan timeSpan1, timeSpan2;
     GeoDataTimeStamp timeStampBegin, timeStampEnd;
 
-    QDateTime date1( QDate(2014, 1, 10) ), date2( QDate(2014, 4, 21) );
+    QDateTime date1( QDate(2014, 1, 10), QTime() ), date2( QDate(2014, 4, 21), QTime() );
 
     timeStampBegin.setWhen( date1 );
     timeStampEnd.setWhen( date2 );
@@ -1135,7 +1135,7 @@ void TestEquality::timeSpanTest()
 void TestEquality::timeStampTest()
 {
     GeoDataTimeStamp timeStamp1, timeStamp2;
-    QDateTime date1( QDate(1994, 10, 4) ), date2( QDate(2070, 10, 4) );
+    QDateTime date1( QDate(1994, 10, 4), QTime() ), date2( QDate(2070, 10, 4), QTime() );
 
     timeStamp1.setWhen( date1 );
     timeStamp2.setWhen( date2 );
@@ -1916,8 +1916,8 @@ void TestEquality::modelTest()
 void TestEquality::trackTest()
 {
     GeoDataTrack track1, track2;
-    QDateTime date11( QDate(2000, 10, 4) ), date12( QDate(2001, 10, 4) );
-    QDateTime date21( QDate(2002, 10, 4) ), date22( QDate(2003, 10, 4) );
+    QDateTime date11( QDate(2000, 10, 4), QTime()), date12( QDate(2001, 10, 4), QTime() );
+    QDateTime date21( QDate(2002, 10, 4), QTime() ), date22( QDate(2003, 10, 4), QTime() );
     GeoDataCoordinates coord1(100, 100), coord2(200, 300), coord3(300, 300), coord4(400, 400);
     GeoDataExtendedData extendedData1, extendedData2;
     GeoDataData data1, data2;
@@ -1960,8 +1960,8 @@ void TestEquality::multiTrackTest()
 {
     GeoDataMultiTrack multiTrack1, multiTrack2;
     GeoDataTrack *track1, *track2, *track3, *track4;
-    QDateTime date11( QDate(2000, 10, 4) ), date12( QDate(2001, 10, 4) );
-    QDateTime date21( QDate(2002, 10, 4) ), date22( QDate(2003, 10, 4) );
+    QDateTime date11( QDate(2000, 10, 4), QTime() ), date12( QDate(2001, 10, 4), QTime() );
+    QDateTime date21( QDate(2002, 10, 4), QTime() ), date22( QDate(2003, 10, 4), QTime() );
     GeoDataCoordinates coord1(100, 100), coord2(200, 300), coord3(300, 300), coord4(400, 400);
     GeoDataExtendedData extendedData1, extendedData2;
     GeoDataData data1, data2;
@@ -2043,7 +2043,7 @@ void TestEquality::lookAtTest()
     lookAt2 = lookAt1;
 
     GeoDataTimeStamp timeStampBegin, timeStampEnd;
-    QDateTime date1( QDate(2014, 4, 7) );
+    QDateTime date1( QDate(2014, 4, 7), QTime() );
 
     timeStampBegin.setWhen( date1 );
     timeStampEnd.setWhen( date1 );
@@ -2056,7 +2056,7 @@ void TestEquality::lookAtTest()
     timeSpan2 = timeSpan1;
 
     GeoDataTimeStamp timeStamp1, timeStamp2;
-    QDateTime date2( QDate(2014, 4, 8) );
+    QDateTime date2( QDate(2014, 4, 8), QTime() );
     timeStamp1.setWhen( date2 );
     timeStamp2.setWhen( date2 );
     timeStamp1.setResolution( GeoDataTimeStamp::SecondResolution );
@@ -2168,7 +2168,7 @@ void TestEquality::networkLinkControlTest()
     netLC1.setLinkDescription( QString("Some link description here") );
     netLC1.setLinkSnippet( QString("Link snippet") );
     netLC1.setMaxLines( 100 );
-    netLC1.setExpires( QDateTime(QDate(2014, 5, 4)) );
+    netLC1.setExpires( QDateTime(QDate(2014, 5, 4), QTime() ));
     netLC2.setMinRefreshPeriod( 25 );
     netLC2.setMaxSessionLength( 100 );
     netLC2.setCookie( QString("Coookiiee") );
@@ -2177,7 +2177,7 @@ void TestEquality::networkLinkControlTest()
     netLC2.setLinkDescription( QString("Some link description here") );
     netLC2.setLinkSnippet( QString("Link snippet") );
     netLC2.setMaxLines( 100 );
-    netLC2.setExpires( QDateTime(QDate(2014, 5, 4)) );
+    netLC2.setExpires( QDateTime(QDate(2014, 5, 4), QTime() ));
 
     GeoDataUpdate update;
     update.setTargetHref( QString("Target href") );

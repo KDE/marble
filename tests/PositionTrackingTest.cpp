@@ -173,7 +173,7 @@ void PositionTrackingTest::setPositionProviderPlugin()
     const GeoDataAccuracy accuracy( GeoDataAccuracy::Detailed, 10.0, 22.0 );
     const qreal speed = 32.8;
     const qreal direction = 49.7;
-    const QDateTime timestamp( QDate( 1, 3, 1994 ) );
+    const QDateTime timestamp( QDate( 1, 3, 1994 ), QTime() );
 
     GeoDataTreeModel treeModel;
     PositionTracking tracking( &treeModel );
@@ -204,7 +204,7 @@ void PositionTrackingTest::clearTrack()
     const GeoDataAccuracy accuracy( GeoDataAccuracy::Detailed, 10.0, 22.0 );
     const qreal speed = 32.8;
     const qreal direction = 49.7;
-    const QDateTime timestamp( QDate( 1, 3, 1994 ) );
+    const QDateTime timestamp( QDate( 1, 3, 1994 ), QTime() );
 
     GeoDataTreeModel treeModel;
     PositionTracking tracking( &treeModel );
