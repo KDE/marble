@@ -4,6 +4,7 @@
 
 #include <QDebug>
 #include <QTime>
+#include <QElapsedTimer>
 
 #include <cmath>
 
@@ -78,7 +79,7 @@ void OsmTileClusterRenderer::renderOsmTileCluster( int const clusterX, int const
 {
     qDebug() << objectName() << "rendering clusterX:" << clusterX << ", clusterY:" << clusterY;
     int tilesRenderedCount = 0;
-    QTime t;
+    QElapsedTimer t;
     t.start();
     int const tileX1 = clusterX * m_clusterEdgeLengthTiles;
     int const tileX2 = tileX1 + m_clusterEdgeLengthTiles;

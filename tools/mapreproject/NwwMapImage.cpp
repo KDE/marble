@@ -101,7 +101,7 @@ QPair<QImage, bool> NwwMapImage::tile( int const tileX, int const tileY )
         m_tileMissing.insert( tileKey );
         //qDebug() << "Tile" << filename << "not found";
     } else {
-        m_tileCache.insert( tileKey, new QImage( tile ), tile.byteCount() );
+        m_tileCache.insert( tileKey, new QImage( tile ), tile.sizeInBytes() );
         //qDebug() << "Tile" << filename << "loaded and inserted in cache";
     }
     return QPair<QImage, bool>( tile, loaded );

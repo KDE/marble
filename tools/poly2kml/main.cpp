@@ -9,6 +9,7 @@
 #include <QTextStream>
 #include <QTime>
 #include <QDebug>
+#include <QRandomGenerator>
 
 #include "geodata/data/GeoDataLineString.h"
 #include "geodata/data/GeoDataLinearRing.h"
@@ -42,7 +43,7 @@ QColor randomColor()
     QVector<QColor> colors = QVector<QColor>() << Oxygen::aluminumGray4 << Oxygen::brickRed4;
     colors << Oxygen::hotOrange4 << Oxygen::forestGreen4 << Oxygen::hotOrange4;
     colors << Oxygen::seaBlue2 << Oxygen::skyBlue4 << Oxygen::sunYellow6;
-    return colors.at( qrand() % colors.size() );
+    return colors.at( QRandomGenerator::global()->generate() % colors.size() );
 }
 
 void parseBoundingBox( const QFileInfo &file, const QString &name,
@@ -62,7 +63,7 @@ void parseBoundingBox( const QFileInfo &file, const QString &name,
         while ( !stream.atEnd() ) {
             bool inside = true;
             QString line = stream.readLine().trimmed();
-            QStringList entries = line.split( QLatin1Char( ' ' ), QString::SkipEmptyParts );
+            QStringList entries = line.split( QLatin1Char( ' ' ), Qt::SkipEmptyParts );
             if ( entries.size() == 1 ) {
                 if (entries.first() == QLatin1String("END") && inside) {
                     inside = false;
@@ -176,7 +177,7 @@ int main( int argc, char* argv[] )
         }
     }
 
-    qsrand( QTime::currentTime().msec() );
+    QRandomGenerator::global()->seed( QTime::currentTime().msec());
     QFileInfo input( inputFile );
     if ( !input.exists() || !input.isFile() ) {
         qDebug() << "Invalid input file";

@@ -23,6 +23,7 @@
 
 #include <QDebug>
 #include <QTime>
+#include <QRandomGenerator>
 
 namespace Marble
 {
@@ -692,7 +693,7 @@ QColor OsmParser::randomColor() const
     QVector<QColor> colors = QVector<QColor>() << aluminumGray4 << brickRed4;
     colors << woodBrown4 << forestGreen4 << hotOrange4;
     colors << seaBlue2 << skyBlue4 << sunYellow6;
-    return colors.at( qrand() % colors.size() );
+    return colors.at( QRandomGenerator::global()->generate() % colors.size() );
 }
 
 void OsmParser::writeKml( const QString &area, const QString &version, const QString &date, const QString &transport, const QString &payload, const QString &filename ) const

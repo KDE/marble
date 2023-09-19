@@ -25,6 +25,7 @@
 #include <QDebug>
 #include <QFileInfo>
 #include <QRect>
+#include <QElapsedTimer>
 
 #include <iostream>
 
@@ -49,7 +50,7 @@ GeoDataDocument* mergeDocuments(GeoDataDocument* map1, GeoDataDocument* map2)
 
 int main(int argc, char *argv[])
 {
-    QTime timer;
+    QElapsedTimer timer;
     timer.start();
 
     QCoreApplication app(argc, argv);

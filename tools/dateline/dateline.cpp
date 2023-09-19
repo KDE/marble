@@ -75,7 +75,6 @@ int main(int argc, char *argv[])
 
     // Read the data serialized from the file.
     QTextStream  sourcestream( &sourcefile );
-    sourcestream.setCodec("UTF-8");
 
     QString  rawline;
     QString  lonstring;

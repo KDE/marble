@@ -48,25 +48,21 @@ int main(int argc, char *argv[])
 
         // Read the data serialized from the file.
         QTextStream  sourcestream( &sourcefile );
-        sourcestream.setCodec("UTF-8");
 
         QFile  targetfile( targetfilename );
         targetfile.open( QIODevice::WriteOnly );
 
         QTextStream  targetstream( &targetfile );
-        targetstream.setCodec("UTF-8");
 
         QFile  supportfile( supportfilename );
         supportfile.open( QIODevice::ReadOnly );
 
         QTextStream  supportstream( &supportfile );
-        supportstream.setCodec("UTF-8");
 
         QFile  timezonefile( timezonefilename );
         timezonefile.open( QIODevice::ReadOnly );
 
         QTextStream  timezonestream( &timezonefile );
-        timezonestream.setCodec("UTF-8");
 
         // gzFile gzDoc = gzopen( targetfilename.toLatin1(), "w");
         // QTextStream targetstream( new QString() );
