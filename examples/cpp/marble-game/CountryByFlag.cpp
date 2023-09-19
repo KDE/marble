@@ -13,6 +13,7 @@
 #include <QVector>
 #include <QVariant>
 #include <QVariantList>
+#include <QRandomGenerator>
 
 // Marble
 #include <marble/MarbleWidget.h>
@@ -122,7 +123,7 @@ void CountryByFlag::postQuestion( QObject *gameObject )
     QVector<GeoDataPlacemark*> countryPlacemarks = d->m_countryNames->placemarkList();
 
     uint randomSeed = uint(QTime::currentTime().msec());
-    qsrand( randomSeed );
+    QRandomGenerator::global()->seed(randomSeed);
 
     bool found = false;
     GeoDataPlacemark *placemark = nullptr;
@@ -130,7 +131,7 @@ void CountryByFlag::postQuestion( QObject *gameObject )
     QString flagPath;
 
     while ( !found ) {
-        int randomIndex = qrand()%countryPlacemarks.size();
+        int randomIndex = QRandomGenerator::global()->generate()%countryPlacemarks.size();
         placemark = countryPlacemarks[randomIndex];
 
         if ( !d->m_continentsAndOceans.contains(placemark->name(), Qt::CaseSensitive) ) {
@@ -145,13 +146,13 @@ void CountryByFlag::postQuestion( QObject *gameObject )
     }
 
     answerOptions << placemark->name()
-    << countryPlacemarks[qrand()%countryPlacemarks.size()]->name()
-    << countryPlacemarks[qrand()%countryPlacemarks.size()]->name()
-    << countryPlacemarks[qrand()%countryPlacemarks.size()]->name();
+    << countryPlacemarks[QRandomGenerator::global()->generate()%countryPlacemarks.size()]->name()
+    << countryPlacemarks[QRandomGenerator::global()->generate()%countryPlacemarks.size()]->name()
+    << countryPlacemarks[QRandomGenerator::global()->generate()%countryPlacemarks.size()]->name();
 
     // Randomize the options in the list answerOptions
     for ( int i = 0; i < answerOptions.size(); ++i ) {
-        QVariant option = answerOptions.takeAt( qrand()%answerOptions.size() );
+        QVariant option = answerOptions.takeAt( QRandomGenerator::global()->generate()%answerOptions.size() );
         answerOptions.append( option );
     }
     if ( gameObject ) {

@@ -83,7 +83,7 @@ void animatedFlight( MarbleWidget *mapWidget )
         printf("[%i%% done]\r", cvRound( (100.0*i)/timeLine.duration() ) );
         fflush(stdout);
         interpolate( mapWidget, timeLine.valueForTime( i ) );
-        QImage screenshot = QPixmap::grabWidget( mapWidget ).toImage().convertToFormat( QImage::Format_RGB888 );
+        QImage screenshot = mapWidget->grab().toImage().convertToFormat( QImage::Format_RGB888 );
         Mat converter( frameSize, CV_8UC3 );
         converter.data = screenshot.bits();
         cvtColor( converter, buffer, COLOR_RGB2BGR );

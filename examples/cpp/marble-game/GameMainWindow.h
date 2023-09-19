@@ -21,7 +21,7 @@ class MainWindow: public QMainWindow
 {
     Q_OBJECT
 public:
-    explicit MainWindow( const QString &marbleDataPath, QWidget *parent = nullptr, Qt::WindowFlags flags = nullptr );
+    explicit MainWindow( const QString &marbleDataPath, QWidget *parent = nullptr);
     ~MainWindow() override;
     MarbleWidget *marbleWidget();
 
