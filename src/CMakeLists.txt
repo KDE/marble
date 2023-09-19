@@ -76,10 +76,6 @@ if(APPLE)
   add_subdirectory( mac )
 endif(APPLE)
 
-add_subdirectory( plasma )
-add_subdirectory( plasmarunner )
-add_subdirectory( thumbnailer )
-
 if(ECM_FOUND)
   # Default logging for where no specific category is set
   ecm_qt_export_logging_category(
@@ -93,6 +89,6 @@ if(ECM_FOUND)
     DESTINATION "${KDE_INSTALL_LOGGINGCATEGORIESDIR}")
 endif()
 
-#add_subdirectory( plasma )
-#add_subdirectory( plasmarunner )
-#add_subdirectory( thumbnailer )
+add_subdirectory( plasma )
+add_subdirectory( plasmarunner )
+add_subdirectory( thumbnailer )

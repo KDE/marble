@@ -18,7 +18,7 @@ static const int timeoutTime = 5000; // in msec
 namespace Marble {
 
 GeoDataThumbnailer::GeoDataThumbnailer()
-  : ThumbCreator()
+  : ThumbnailCreator(nullptr, QVariantList())
   , m_marbleMap()
 {
     m_marbleMap.setMapThemeId(QStringLiteral("earth/openstreetmap/openstreetmap.dgml"));
@@ -36,7 +36,7 @@ GeoDataThumbnailer::GeoDataThumbnailer()
     MarbleModel *const model = m_marbleMap.model();
     connect(model->treeModel(), &GeoDataTreeModel::added, this, &GeoDataThumbnailer::onGeoDataObjectAdded);
     connect(model->fileManager(), &FileManager::fileError, this,
-        [this](const QString& path, const QString& error) {
+        [this](const QString& /*path*/, const QString& /*error*/) {
            m_hadErrors = true;
            m_outtimer.stop();
            m_eventLoop.quit();
@@ -48,15 +48,17 @@ GeoDataThumbnailer::~GeoDataThumbnailer()
 {
 }
 
-bool GeoDataThumbnailer::create(const QString &path, int width, int height, QImage &image)
+ThumbnailResult GeoDataThumbnailer::create(const ThumbnailRequest& request)
 {
-    m_marbleMap.setSize(width, height);
+    m_marbleMap.setSize(request.targetSize());
 
     MarbleModel *const model = m_marbleMap.model();
 
     // load the document content
     m_loadingCompleted = false;
     m_hadErrors = false;
+
+    QString path = request.url().toLocalFile();
 
     m_currentFilename = path;
     model->addGeoDataFile(path);
@@ -69,9 +71,11 @@ bool GeoDataThumbnailer::create(const QString &path, int width, int height, QIma
         m_eventLoop.exec(QEventLoop::ExcludeUserInputEvents);
     }
 
+    QImage image;
+
     if (m_loadingCompleted) {
         // TODO: limit to shown map, if full earth is used
-        image = QImage(width, height, QImage::Format_ARGB32);
+        image = QImage(request.targetSize(), QImage::Format_ARGB32);
         image.fill(qRgba(0, 0, 0, 0));
 
         // Create a painter that will do the painting.
@@ -81,10 +85,12 @@ bool GeoDataThumbnailer::create(const QString &path, int width, int height, QIma
         m_marbleMap.paint( geoPainter, QRect() ); // TODO: dirtyRect seems currently unused, make sure it is
     }
 
+    ThumbnailResult result = ThumbnailResult::pass(image);
+
     model->removeGeoData(path);
     m_currentFilename.clear();
 
-    return m_loadingCompleted;
+    return result;
 }
 
 static qreal radius(qreal zoom)
