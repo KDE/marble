@@ -24,5 +24,5 @@ qt_add_resources(routing_SRCS routing.qrc)
 
 marble_add_plugin( RoutingPlugin ${routing_SRCS} )
 if(Phonon4Qt6_FOUND)
-    target_link_libraries(RoutingPlugin Phonon::phonon4qt5)
+    target_link_libraries(RoutingPlugin Phonon::phonon4qt6)
 endif()
