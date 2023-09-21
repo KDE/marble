@@ -24,12 +24,12 @@ namespace Marble
 void OsmRelationTagWriter::writeMultipolygon( const GeoDataPolygon& polygon,
                                               const OsmPlacemarkData& osmData, GeoWriter& writer )
 {
-    writer.writeStartElement( osm::osmTag_relation );
+    writer.writeStartElement( QString::fromUtf8(osm::osmTag_relation) );
 
     OsmObjectAttributeWriter::writeAttributes( osmData, writer );
     OsmTagTagWriter::writeTags( osmData, writer );
 
-    writer.writeStartElement( osm::osmTag_member );
+    writer.writeStartElement( QString::fromUtf8(osm::osmTag_member) );
     QString memberId = QString::number( osmData.memberReference( -1 ).id() );
     writer.writeAttribute( "type", "way" );
     writer.writeAttribute( "ref", memberId );
@@ -37,7 +37,7 @@ void OsmRelationTagWriter::writeMultipolygon( const GeoDataPolygon& polygon,
     writer.writeEndElement();
 
     for ( int index = 0; index < polygon.innerBoundaries().size(); ++index ) {
-        writer.writeStartElement( osm::osmTag_member );
+        writer.writeStartElement( QString::fromUtf8(osm::osmTag_member) );
         QString memberId = QString::number( osmData.memberReference( index ).id() );
         writer.writeAttribute( "type", "way" );
         writer.writeAttribute( "ref", memberId );

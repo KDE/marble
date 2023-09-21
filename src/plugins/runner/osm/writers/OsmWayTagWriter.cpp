@@ -24,7 +24,7 @@ void OsmWayTagWriter::writeWay( const GeoDataLineString& lineString,
                                 const OsmPlacemarkData& osmData, GeoWriter& writer )
 {
 
-    writer.writeStartElement( osm::osmTag_way );
+    writer.writeStartElement( QString::fromUtf8(osm::osmTag_way) );
 
     OsmObjectAttributeWriter::writeAttributes( osmData, writer );
     OsmTagTagWriter::writeTags( osmData, writer );
@@ -35,7 +35,7 @@ void OsmWayTagWriter::writeWay( const GeoDataLineString& lineString,
 
     for ( ; it != end; ++it ) {
         QString ndId = QString::number( osmData.nodeReference( *it ).id() );
-        writer.writeStartElement( osm::osmTag_nd );
+        writer.writeStartElement( QString::fromUtf8(osm::osmTag_nd) );
         writer.writeAttribute( "ref", ndId );
         writer.writeEndElement();
     }
@@ -44,7 +44,7 @@ void OsmWayTagWriter::writeWay( const GeoDataLineString& lineString,
         auto const startId = osmData.nodeReference(lineString.first()).id();
         auto const endId = osmData.nodeReference(lineString.last()).id();
         if (startId != endId) {
-            writer.writeStartElement( osm::osmTag_nd );
+            writer.writeStartElement( QString::fromUtf8(osm::osmTag_nd) );
             writer.writeAttribute( "ref", QString::number(startId));
             writer.writeEndElement();
         }
