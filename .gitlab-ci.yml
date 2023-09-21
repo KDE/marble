@@ -4,9 +4,9 @@
 include:
   - project: sysadmin/ci-utilities
     file:
-    - /gitlab-templates/linux.yml
-    - /gitlab-templates/freebsd.yml
-    - /gitlab-templates/windows.yml
+    - /gitlab-templates/linux-qt6.yml
+    - /gitlab-templates/freebsd-qt6.yml
+    - /gitlab-templates/windows-qt6.yml
     - /gitlab-templates/flatpak.yml
 
 # Manual job for building of maps.kde.org binaries
@@ -28,7 +28,7 @@ maps-kde-org-binaries:
         libprotobuf-dev
         libshp-dev
         protobuf-compiler
-        qtbase5-dev
+        qtbase6-dev
     - tools/vectorosm-tilecreator/setup/build/build-tilegenerator.sh
   artifacts:
     expire_in: 1 week
