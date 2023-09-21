@@ -22,7 +22,7 @@ bool OsmTagWriter::write( const GeoNode *node, GeoWriter& writer ) const
     Q_UNUSED( node );
 
     writer.writeStartElement( "osm" );
-    writer.writeAttribute( "version", osm::osmTag_version06 );
+    writer.writeAttribute( "version", QString::fromUtf8(osm::osmTag_version06) );
     writer.writeAttribute("generator", QLatin1String("Marble ") + Marble::MARBLE_VERSION_STRING);
 
     return true;

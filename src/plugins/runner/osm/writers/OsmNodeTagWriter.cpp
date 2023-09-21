@@ -28,7 +28,7 @@ void OsmNodeTagWriter::writeNode( const OsmConverter::Node &node, GeoWriter& wri
     QString lat = QString::number( node.first.latitude( GeoDataCoordinates::Degree ), 'f', 7 );
     QString lon = QString::number( node.first.longitude( GeoDataCoordinates::Degree ), 'f', 7 );
 
-    writer.writeStartElement( osm::osmTag_node );
+    writer.writeStartElement( QString::fromUtf8(osm::osmTag_node) );
 
     writer.writeAttribute( "lat", lat );
     writer.writeAttribute( "lon", lon );
