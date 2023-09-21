@@ -30,7 +30,7 @@ bool KmlPointTagWriter::write( const GeoNode *node,
         return true;
     }
 
-    writer.writeStartElement( kml::kmlTag_Point );
+    writer.writeStartElement( QString::fromUtf8(kml::kmlTag_Point) );
     KmlObjectTagWriter::writeIdentifiers( writer, point );
     writer.writeOptionalElement( kml::kmlTag_extrude, QString::number( point->extrude() ), "0" );
     writer.writeStartElement("coordinates");

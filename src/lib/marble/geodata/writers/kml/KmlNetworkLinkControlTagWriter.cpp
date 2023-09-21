@@ -25,7 +25,7 @@ bool KmlNetworkLinkControlTagWriter::write( const GeoNode *node, GeoWriter& writ
 {
     const GeoDataNetworkLinkControl *networkLinkControl = static_cast<const GeoDataNetworkLinkControl*>( node );
 
-    writer.writeStartElement( kml::kmlTag_NetworkLinkControl );
+    writer.writeStartElement( QString::fromUtf8(kml::kmlTag_NetworkLinkControl) );
     writer.writeOptionalElement( kml::kmlTag_minRefreshPeriod, QString::number( networkLinkControl->minRefreshPeriod() ), "1" );
     writer.writeOptionalElement( kml::kmlTag_maxSessionLength, QString::number( networkLinkControl->maxSessionLength() ), "2" );
     writer.writeOptionalElement( kml::kmlTag_cookie, networkLinkControl->cookie() );
@@ -33,7 +33,7 @@ bool KmlNetworkLinkControlTagWriter::write( const GeoNode *node, GeoWriter& writ
     writer.writeOptionalElement( kml::kmlTag_linkName, networkLinkControl->linkName() );
     writer.writeOptionalElement( kml::kmlTag_linkDescription, networkLinkControl->linkDescription() );
 
-    writer.writeStartElement( kml::kmlTag_linkSnippet );
+    writer.writeStartElement( QString::fromUtf8(kml::kmlTag_linkSnippet) );
 
     if( networkLinkControl->maxLines() > 0 ) {
         writer.writeAttribute( "maxLines", QString::number( networkLinkControl->maxLines() ) );

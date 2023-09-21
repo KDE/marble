@@ -23,7 +23,7 @@ bool DgmlDocumentTagWriter::write( const GeoNode *node, GeoWriter& writer ) cons
 {
     const GeoSceneDocument *document = static_cast<const GeoSceneDocument*>( node );
     
-    writer.writeStartElement( dgml::dgmlTag_Document );
+    writer.writeStartElement( QString::fromUtf8(dgml::dgmlTag_Document) );
     
     const GeoSceneHead *head = document->head();
     writeElement( head, writer );

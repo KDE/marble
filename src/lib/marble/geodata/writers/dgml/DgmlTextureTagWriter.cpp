@@ -23,25 +23,25 @@ static GeoTagWriterRegistrar s_writerTexture( GeoTagWriter::QualifiedName( GeoSc
 bool DgmlTextureTagWriter::write(const GeoNode *node, GeoWriter& writer) const
 {
     const GeoSceneTileDataset *texture = static_cast<const GeoSceneTileDataset*>( node );
-    writer.writeStartElement( dgml::dgmlTag_Texture );
+    writer.writeStartElement( QString::fromUtf8(dgml::dgmlTag_Texture) );
     writer.writeAttribute( "name", texture->name() );
     writer.writeAttribute( "expire", QString::number( texture->expire() ) );
     
-    writer.writeStartElement( dgml::dgmlTag_SourceDir );
+    writer.writeStartElement( QString::fromUtf8(dgml::dgmlTag_SourceDir) );
     writer.writeAttribute( "format", texture->fileFormat() );
     if( texture->expire() ) {
         writer.writeAttribute( "expire", QString::number( texture->expire() ) );
     }
     writer.writeCharacters( texture->sourceDir() );
     writer.writeEndElement();
-    writer.writeStartElement( dgml::dgmlTag_TileSize );
+    writer.writeStartElement( QString::fromUtf8(dgml::dgmlTag_TileSize) );
     writer.writeAttribute( "width", QString::number( texture->tileSize().width() ) );
     writer.writeAttribute( "height", QString::number( texture->tileSize().height() ) );
     writer.writeEndElement();
 
     writer.writeOptionalElement( dgml::dgmlTag_InstallMap, texture->installMap() );
     
-    writer.writeStartElement( dgml::dgmlTag_StorageLayout );
+    writer.writeStartElement( QString::fromUtf8(dgml::dgmlTag_StorageLayout) );
     if( texture->hasMaximumTileLevel() )
     {
         writer.writeAttribute( "maximumTileLevel", QString::number( texture->maximumTileLevel() ) );
@@ -61,7 +61,7 @@ bool DgmlTextureTagWriter::write(const GeoNode *node, GeoWriter& writer) const
             QString path =  QString( texture->downloadUrls().at(i).path() );
             QString query = texture->downloadUrls().at(i).query(QUrl::FullyEncoded);
 
-            writer.writeStartElement( dgml::dgmlTag_DownloadUrl );
+            writer.writeStartElement( QString::fromUtf8(dgml::dgmlTag_DownloadUrl) );
             writer.writeAttribute( "protocol", protocol );
             writer.writeAttribute( "host", host );
             if( port != -1 )
@@ -76,7 +76,7 @@ bool DgmlTextureTagWriter::write(const GeoNode *node, GeoWriter& writer) const
     
     for( const DownloadPolicy *policy: texture->downloadPolicies() )
     {
-        writer.writeStartElement( dgml::dgmlTag_DownloadPolicy );
+        writer.writeStartElement( QString::fromUtf8(dgml::dgmlTag_DownloadPolicy) );
         
         if( policy->key().usage() == DownloadBrowse )
         {
@@ -93,7 +93,7 @@ bool DgmlTextureTagWriter::write(const GeoNode *node, GeoWriter& writer) const
         writer.writeEndElement();    
     }
     
-    writer.writeStartElement( dgml::dgmlTag_Projection );
+    writer.writeStartElement( QString::fromUtf8(dgml::dgmlTag_Projection) );
     const GeoSceneAbstractTileProjection::Type tileProjectionType = texture->tileProjectionType();
     if (tileProjectionType == GeoSceneAbstractTileProjection::Mercator) {
         writer.writeAttribute( "name", "Mercator" );
@@ -102,7 +102,7 @@ bool DgmlTextureTagWriter::write(const GeoNode *node, GeoWriter& writer) const
     }
     writer.writeEndElement();
 
-    writer.writeStartElement( dgml::dgmlTag_Blending );
+    writer.writeStartElement( QString::fromUtf8(dgml::dgmlTag_Blending) );
     if (!texture->blending().isEmpty()) {
         writer.writeAttribute( "name", texture->blending() );
     }

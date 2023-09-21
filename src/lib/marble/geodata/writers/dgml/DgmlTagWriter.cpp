@@ -18,7 +18,7 @@ bool DgmlTagWriter::write( const GeoNode *node, GeoWriter& writer ) const
 {
     Q_UNUSED(node);
     writer.writeStartElement( "dgml" );
-    writer.writeAttribute( "xmlns", dgml::dgmlTag_nameSpace20 );
+    writer.writeAttribute( "xmlns", QString::fromUtf8(dgml::dgmlTag_nameSpace20) );
 
     // Do not write an end element for document handlers
     return true;

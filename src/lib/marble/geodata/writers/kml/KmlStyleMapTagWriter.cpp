@@ -23,13 +23,13 @@ bool KmlStyleMapTagWriter::write( const GeoNode *node, GeoWriter& writer ) const
 {
     const GeoDataStyleMap *map = static_cast<const GeoDataStyleMap*>( node );
 
-    writer.writeStartElement( kml::kmlTag_StyleMap );
+    writer.writeStartElement( QString::fromUtf8(kml::kmlTag_StyleMap) );
     KmlObjectTagWriter::writeIdentifiers( writer, map );
 
     QMapIterator<QString, QString> iter( *map );
     while ( iter.hasNext() ) {
         iter.next();
-        writer.writeStartElement( kml::kmlTag_Pair );
+        writer.writeStartElement( QString::fromUtf8(kml::kmlTag_Pair) );
         writer.writeElement( kml::kmlTag_key, iter.key() );
         writer.writeElement( kml::kmlTag_styleUrl, iter.value() );
         writer.writeEndElement();

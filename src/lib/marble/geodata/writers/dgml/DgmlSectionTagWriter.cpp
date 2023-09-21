@@ -22,7 +22,7 @@ bool DgmlSectionTagWriter::write(const GeoNode *node, GeoWriter& writer) const
 {
     const GeoSceneSection *section = static_cast<const GeoSceneSection*>( node );
     
-    writer.writeStartElement( dgml::dgmlTag_Section );
+    writer.writeStartElement( QString::fromUtf8(dgml::dgmlTag_Section) );
     writer.writeAttribute( "name", section->name() );
     writer.writeAttribute( "checkable", section->checkable() ? "true" : "false" );
     writer.writeAttribute( "connect", section->connectTo() );

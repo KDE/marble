@@ -28,7 +28,7 @@ bool KmlExtendedDataTagWriter::write( const GeoNode *node,
 {
     const GeoDataExtendedData *extended = static_cast<const GeoDataExtendedData*>( node );
 
-    writer.writeStartElement( kml::kmlTag_ExtendedData );
+    writer.writeStartElement( QString::fromUtf8(kml::kmlTag_ExtendedData) );
     
     QHash< QString, GeoDataData >::const_iterator begin = extended->constBegin();
     QHash< QString, GeoDataData >::const_iterator end = extended->constEnd();

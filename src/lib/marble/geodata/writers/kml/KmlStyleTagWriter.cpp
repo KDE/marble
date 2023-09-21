@@ -29,7 +29,7 @@ bool KmlStyleTagWriter::write( const GeoNode *node, GeoWriter& writer ) const
 {
     const GeoDataStyle *style = static_cast<const GeoDataStyle*>( node );
 
-    writer.writeStartElement( kml::kmlTag_Style );
+    writer.writeStartElement( QString::fromUtf8(kml::kmlTag_Style) );
     KmlObjectTagWriter::writeIdentifiers( writer, style );
 
     writeElement( &style->iconStyle(), writer );

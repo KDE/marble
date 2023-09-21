@@ -28,7 +28,7 @@ bool KmlListStyleTagWriter::write( const GeoNode *node,
     if ( isEmpty ) {
         return true;
     }
-    writer.writeStartElement( kml::kmlTag_ListStyle );
+    writer.writeStartElement( QString::fromUtf8(kml::kmlTag_ListStyle) );
 
     QString const itemType = itemTypeToString( listStyle->listItemType() );
     writer.writeOptionalElement( kml::kmlTag_listItemType, itemType, "check" );
@@ -36,7 +36,7 @@ bool KmlListStyleTagWriter::write( const GeoNode *node,
     writer.writeOptionalElement( kml::kmlTag_bgColor, color, "ffffffff" );
 
     for( GeoDataItemIcon* icon: listStyle->itemIconList() ) {
-        writer.writeStartElement(kml::kmlTag_ItemIcon);
+        writer.writeStartElement(QString::fromUtf8(kml::kmlTag_ItemIcon));
         QString const state = iconStateToString( icon->state() );
         writer.writeOptionalElement( kml::kmlTag_state, state, "open" );
         writer.writeOptionalElement( kml::kmlTag_href, icon->iconPath() );

@@ -27,7 +27,7 @@ bool KmlPlaylistTagWriter::write( const GeoNode *node, GeoWriter& writer ) const
 {
     const GeoDataPlaylist *playlist = static_cast<const GeoDataPlaylist*>( node );
 
-    writer.writeStartElement( kml::kmlTag_nameSpaceGx22, kml::kmlTag_Playlist );
+    writer.writeStartElement( QString::fromUtf8(kml::kmlTag_nameSpaceGx22), QString::fromUtf8(kml::kmlTag_Playlist) );
 
     for ( int i = 0; i < playlist->size(); i++ ) {
         writeTourPrimitive( playlist->primitive( i ), writer );
@@ -60,7 +60,7 @@ void KmlPlaylistTagWriter::writeTourPrimitive(const GeoDataTourPrimitive *primit
 
 void KmlPlaylistTagWriter::writeTourControl(const GeoDataTourControl &tourControl, GeoWriter &writer)
 {
-    writer.writeStartElement( kml::kmlTag_nameSpaceGx22, kml::kmlTag_TourControl );
+    writer.writeStartElement( QString::fromUtf8(kml::kmlTag_nameSpaceGx22), QString::fromUtf8(kml::kmlTag_TourControl) );
     KmlObjectTagWriter::writeIdentifiers(writer, &tourControl);
 
     writer.writeElement(kml::kmlTag_nameSpaceGx22, kml::kmlTag_playMode, playModeToString(tourControl.playMode()));
@@ -70,7 +70,7 @@ void KmlPlaylistTagWriter::writeTourControl(const GeoDataTourControl &tourContro
 
 void KmlPlaylistTagWriter::writeWait(const GeoDataWait &wait, GeoWriter &writer)
 {
-    writer.writeStartElement( kml::kmlTag_nameSpaceGx22, kml::kmlTag_Wait );
+    writer.writeStartElement( QString::fromUtf8(kml::kmlTag_nameSpaceGx22), QString::fromUtf8(kml::kmlTag_Wait) );
     KmlObjectTagWriter::writeIdentifiers(writer, &wait);
 
     writer.writeElement(kml::kmlTag_nameSpaceGx22, kml::kmlTag_duration, QString::number(wait.duration()));
@@ -80,7 +80,7 @@ void KmlPlaylistTagWriter::writeWait(const GeoDataWait &wait, GeoWriter &writer)
 
 void KmlPlaylistTagWriter::writeSoundCue(const GeoDataSoundCue &cue, GeoWriter &writer)
 {
-    writer.writeStartElement( kml::kmlTag_nameSpaceGx22, kml::kmlTag_SoundCue );
+    writer.writeStartElement( QString::fromUtf8(kml::kmlTag_nameSpaceGx22), QString::fromUtf8(kml::kmlTag_SoundCue) );
     KmlObjectTagWriter::writeIdentifiers(writer, &cue);
 
     writer.writeElement(kml::kmlTag_href, cue.href());

@@ -23,7 +23,7 @@ bool KmlMultiGeometryTagWriter::write( const GeoNode *node, GeoWriter& writer ) 
 {
     const GeoDataMultiGeometry *geometry = static_cast<const GeoDataMultiGeometry*>( node );
 
-    writer.writeStartElement( kml::kmlTag_MultiGeometry );
+    writer.writeStartElement( QString::fromUtf8(kml::kmlTag_MultiGeometry) );
     KmlObjectTagWriter::writeIdentifiers( writer, geometry );
 
     for ( int i = 0; i < geometry->size(); ++i )

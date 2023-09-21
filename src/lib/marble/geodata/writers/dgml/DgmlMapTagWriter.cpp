@@ -22,7 +22,7 @@ static GeoTagWriterRegistrar s_writerMap( GeoTagWriter::QualifiedName( GeoSceneT
 bool DgmlMapTagWriter::write(const GeoNode *node, GeoWriter& writer) const
 {
     const GeoSceneMap *map = static_cast<const GeoSceneMap*>( node );
-    writer.writeStartElement( dgml::dgmlTag_Map );
+    writer.writeStartElement( QString::fromUtf8(dgml::dgmlTag_Map) );
     writer.writeAttribute( "bgcolor", map->backgroundColor().name() );
     writer.writeAttribute( "labelColor", map->labelColor().name() );    
     
@@ -44,7 +44,7 @@ bool DgmlMapTagWriter::write(const GeoNode *node, GeoWriter& writer) const
         }
     }
     
-    writer.writeStartElement( dgml::dgmlTag_Target);
+    writer.writeStartElement( QString::fromUtf8(dgml::dgmlTag_Target));
     writer.writeEndElement();
     
     for( int i = 0; i < map->layers().count(); ++i )

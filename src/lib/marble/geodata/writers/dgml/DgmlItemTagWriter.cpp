@@ -22,10 +22,10 @@ bool DgmlItemTagWriter::write(const GeoNode *node, GeoWriter& writer) const
 {
     const GeoSceneItem *item = static_cast<const GeoSceneItem*>( node );
     
-    writer.writeStartElement( dgml::dgmlTag_Item );
+    writer.writeStartElement( QString::fromUtf8(dgml::dgmlTag_Item) );
     writer.writeAttribute( "name", item->name() );
     
-    writer.writeStartElement( dgml::dgmlTag_Icon );
+    writer.writeStartElement( QString::fromUtf8(dgml::dgmlTag_Icon) );
     if( !item->icon()->pixmap().isEmpty() ) {
         writer.writeAttribute( "pixmap", item->icon()->pixmap() );
     } else if (item->icon()->color().isValid()) {

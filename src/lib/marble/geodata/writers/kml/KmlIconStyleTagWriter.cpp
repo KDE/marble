@@ -32,16 +32,16 @@ bool KmlIconStyleTagWriter::writeMid( const GeoNode *node, GeoWriter& writer ) c
     }
 
     if (!style->size().isEmpty()) {
-        writer.writeNamespace(kml::kmlTag_nameSpaceMx, QStringLiteral("mx"));
-        writer.writeStartElement(kml::kmlTag_nameSpaceMx, kml::kmlTag_size);
-        writer.writeAttribute(kml::kmlTag_width, QString::number(style->size().width()));
-        writer.writeAttribute(kml::kmlTag_height, QString::number(style->size().height()));
+        writer.writeNamespace(QString::fromUtf8(kml::kmlTag_nameSpaceMx), QStringLiteral("mx"));
+        writer.writeStartElement(QString::fromUtf8(kml::kmlTag_nameSpaceMx), QString::fromUtf8(kml::kmlTag_size));
+        writer.writeAttribute(QString::fromUtf8(kml::kmlTag_width), QString::number(style->size().width()));
+        writer.writeAttribute(QString::fromUtf8(kml::kmlTag_height), QString::number(style->size().height()));
         writer.writeEndElement();
     }
 
     if ( !style->iconPath().isEmpty() ) {
-        writer.writeStartElement( kml::kmlTag_Icon );
-        writer.writeStartElement( kml::kmlTag_href );
+        writer.writeStartElement( QString::fromUtf8(kml::kmlTag_Icon) );
+        writer.writeStartElement( QString::fromUtf8(kml::kmlTag_href) );
         writer.writeCharacters( style->iconPath() );
         writer.writeEndElement();
         writer.writeEndElement();
@@ -52,7 +52,7 @@ bool KmlIconStyleTagWriter::writeMid( const GeoNode *node, GeoWriter& writer ) c
     bool const emptyHotSpot = hotSpot.x() == 0.5 && hotSpot.y() == 0.5 &&
         xunits == GeoDataHotSpot::Fraction && yunits == GeoDataHotSpot::Fraction;
     if ( !emptyHotSpot ) {
-        writer.writeStartElement( kml::kmlTag_hotSpot );
+        writer.writeStartElement( QString::fromUtf8(kml::kmlTag_hotSpot) );
         if ( hotSpot.x() != 0.5 || xunits != GeoDataHotSpot::Fraction ) {
             writer.writeAttribute( "x", QString::number( hotSpot.x(), 'f' ) );
         }

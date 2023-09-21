@@ -26,7 +26,7 @@ bool KmlTimeSpanWriter::write( const GeoNode *node,
     Q_ASSERT(dynamic_cast<const GeoDataTimeSpan *>(node));
     const GeoDataTimeSpan *timespan = static_cast<const GeoDataTimeSpan *>(node);
 
-    writer.writeStartElement( kml::kmlTag_TimeSpan );
+    writer.writeStartElement( QString::fromUtf8(kml::kmlTag_TimeSpan) );
     KmlObjectTagWriter::writeIdentifiers( writer, timespan );
 
     writer.writeTextElement( "begin", KmlTimeStampTagWriter::toString( timespan->begin() ) );

@@ -25,7 +25,7 @@ bool KmlPolygonTagWriter::write( const GeoNode *node, GeoWriter& writer ) const
 {
     const GeoDataPolygon *polygon = static_cast<const GeoDataPolygon*>( node );
 
-    writer.writeStartElement( kml::kmlTag_Polygon );
+    writer.writeStartElement( QString::fromUtf8(kml::kmlTag_Polygon) );
     KmlObjectTagWriter::writeIdentifiers( writer, polygon );
     writer.writeOptionalElement( kml::kmlTag_extrude, QString::number( polygon->extrude() ), "0" );
 

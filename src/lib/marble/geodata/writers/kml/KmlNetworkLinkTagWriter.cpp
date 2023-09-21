@@ -24,7 +24,7 @@ bool KmlNetworkLinkTagWriter::write( const GeoNode *node, GeoWriter& writer ) co
 
     const GeoDataNetworkLink *networkLink = static_cast<const GeoDataNetworkLink*>( node );
 
-    writer.writeStartElement( kml::kmlTag_NetworkLink );
+    writer.writeStartElement( QString::fromUtf8(kml::kmlTag_NetworkLink) );
 
     writer.writeOptionalElement( kml::kmlTag_name, networkLink->name() );
 

@@ -18,16 +18,16 @@ static GeoTagWriterRegistrar s_writerVector( GeoTagWriter::QualifiedName( GeoSce
 bool DgmlVectorTagWriter::write( const GeoNode *node, GeoWriter& writer ) const
 {
     const GeoSceneVector *vector = static_cast<const GeoSceneVector*>( node );
-    writer.writeStartElement( dgml::dgmlTag_Vector );
+    writer.writeStartElement( QString::fromUtf8(dgml::dgmlTag_Vector) );
     writer.writeAttribute( "name", vector->name() );
     writer.writeAttribute( "feature", vector->feature() );
     
-    writer.writeStartElement( dgml::dgmlTag_SourceFile );
+    writer.writeStartElement( QString::fromUtf8(dgml::dgmlTag_SourceFile) );
     writer.writeAttribute( "format", vector->fileFormat() );
     writer.writeCharacters( vector->sourceFile() );
     writer.writeEndElement();
     
-    writer.writeStartElement( dgml::dgmlTag_Pen );
+    writer.writeStartElement( QString::fromUtf8(dgml::dgmlTag_Pen) );
     writer.writeAttribute( "color", vector->pen().color().name() );
     writer.writeEndElement();
         

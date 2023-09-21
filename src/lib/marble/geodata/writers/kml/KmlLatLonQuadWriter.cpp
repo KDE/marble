@@ -25,10 +25,10 @@ bool KmlLatLonQuadWriter::write( const GeoNode *node,
     const GeoDataLatLonQuad *latLonQuad = static_cast<const GeoDataLatLonQuad*>( node );
 
     if ( latLonQuad->isValid() ) {
-        writer.writeStartElement( kml::kmlTag_nameSpaceGx22, kml::kmlTag_LatLonQuad );
+        writer.writeStartElement( QString::fromUtf8(kml::kmlTag_nameSpaceGx22), QString::fromUtf8(kml::kmlTag_LatLonQuad) );
         KmlObjectTagWriter::writeIdentifiers( writer, latLonQuad );
 
-        writer.writeStartElement( kml::kmlTag_coordinates );
+        writer.writeStartElement( QString::fromUtf8(kml::kmlTag_coordinates) );
 
         writer.writeCharacters( QString::number( latLonQuad->bottomLeftLongitude( GeoDataCoordinates::Degree ) ) );
         writer.writeCharacters( QString( ',' ) );
