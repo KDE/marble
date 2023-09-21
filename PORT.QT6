@@ -2,8 +2,8 @@ Context:
 --------
 
 Compile and run digiKam geolocation features with Qt6
-Port to Qt6 done by Gilles Caulier on September 2023
-Environment: Kubuntu 23.04 + Qt 6.4.2 + KF6 from master (https://invent.kde.org/graphics/digikam/-/tree/master/project/install-kf6?ref_type=heads).
+Port to Qt6 done by cgilles on September 2023 (https://invent.kde.org/cgilles)
+Environment: Kubuntu 23.04 + Qt 6.5.3 + KF6 from master (https://invent.kde.org/graphics/digikam/-/tree/master/project/install-kf6?ref_type=heads).
 
 Port Details:
 -------------
