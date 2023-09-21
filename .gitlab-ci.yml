@@ -2,10 +2,10 @@
 # SPDX-License-Identifier: CC0-1.0
 
 include:
-  - https://invent.kde.org/sysadmin/ci-utilities/raw/master/gitlab-templates/linux.yml
-  - https://invent.kde.org/sysadmin/ci-utilities/raw/master/gitlab-templates/freebsd.yml
-  - https://invent.kde.org/sysadmin/ci-utilities/raw/master/gitlab-templates/windows.yml
-  - https://invent.kde.org/sysadmin/ci-utilities/raw/master/gitlab-templates/flatpak.yml
+  - https://invent.kde.org/sysadmin/ci-utilities/raw/master/gitlab-templates/linux-qt6.yml
+  - https://invent.kde.org/sysadmin/ci-utilities/raw/master/gitlab-templates/freebsd-qt6.yml
+  - https://invent.kde.org/sysadmin/ci-utilities/raw/master/gitlab-templates/windows-qt6.yml
+#  - https://invent.kde.org/sysadmin/ci-utilities/raw/master/gitlab-templates/flatpak.yml
 
 # Manual job for building of maps.kde.org binaries
 maps-kde-org-binaries:
@@ -26,7 +26,7 @@ maps-kde-org-binaries:
         libprotobuf-dev
         libshp-dev
         protobuf-compiler
-        qtbase5-dev
+        qtbase6-dev
     - tools/vectorosm-tilecreator/setup/build/build-tilegenerator.sh
   artifacts:
     expire_in: 1 week
