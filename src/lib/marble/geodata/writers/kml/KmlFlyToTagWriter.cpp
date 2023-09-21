@@ -25,7 +25,7 @@ static GeoTagWriterRegistrar s_writerFlyTo(
 bool KmlFlyToTagWriter::write( const GeoNode *node, GeoWriter& writer ) const
 {
     const GeoDataFlyTo *flyTo = static_cast<const GeoDataFlyTo*>( node );
-    writer.writeStartElement( kml::kmlTag_nameSpaceGx22, kml::kmlTag_FlyTo );
+    writer.writeStartElement( QString::fromUtf8(kml::kmlTag_nameSpaceGx22), QString::fromUtf8(kml::kmlTag_FlyTo) );
     writer.writeElement( kml::kmlTag_nameSpaceGx22, kml::kmlTag_duration, QString::number( flyTo->duration()) );
     if ( flyTo->flyToMode() == GeoDataFlyTo::Smooth ) {
         // two values, smooth and bounce, bounce is default and can hence be omitted

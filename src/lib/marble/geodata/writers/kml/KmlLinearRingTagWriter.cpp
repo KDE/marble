@@ -27,7 +27,7 @@ bool KmlLinearRingTagWriter::write( const GeoNode *node, GeoWriter& writer ) con
 
     if ( ring->size() > 1 )
     {
-        writer.writeStartElement( kml::kmlTag_LinearRing );
+        writer.writeStartElement( QString::fromUtf8(kml::kmlTag_LinearRing) );
         KmlObjectTagWriter::writeIdentifiers( writer, ring );
         writer.writeOptionalElement( kml::kmlTag_extrude, QString::number( ring->extrude() ), "0" );
         writer.writeOptionalElement( kml::kmlTag_tessellate, QString::number( ring->tessellate() ), "0" );

@@ -30,8 +30,8 @@ bool KmlOverlayTagWriter::writeMid( const Marble::GeoNode *node, GeoWriter &writ
     writer.writeOptionalElement( kml::kmlTag_drawOrder, drawOrder, "0" );
 
     if ( !overlay->iconFile().isEmpty() ) {
-        writer.writeStartElement( kml::kmlTag_Icon );
-        writer.writeStartElement( kml::kmlTag_href );
+        writer.writeStartElement( QString::fromUtf8(kml::kmlTag_Icon) );
+        writer.writeStartElement( QString::fromUtf8(kml::kmlTag_href) );
         writer.writeCharacters( overlay->iconFile() );
         writer.writeEndElement();
         writer.writeEndElement();

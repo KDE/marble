@@ -30,7 +30,7 @@ bool KmlCameraTagWriter::write( const GeoNode *node, GeoWriter& writer ) const
 {
     const GeoDataCamera *camera = static_cast<const GeoDataCamera*>(node);
 
-    writer.writeStartElement( kml::kmlTag_Camera );
+    writer.writeStartElement( QString::fromUtf8(kml::kmlTag_Camera) );
     KmlObjectTagWriter::writeIdentifiers( writer, camera );
 
     if (camera->timeStamp().when().isValid()) {

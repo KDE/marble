@@ -28,10 +28,10 @@ bool KmlTimeStampTagWriter::write( const GeoNode *node,
 
     if( timestamp->when().isValid() )
     {
-        writer.writeStartElement( kml::kmlTag_TimeStamp );
+        writer.writeStartElement( QString::fromUtf8(kml::kmlTag_TimeStamp) );
         KmlObjectTagWriter::writeIdentifiers( writer, timestamp );
 
-        writer.writeStartElement( kml::kmlTag_when);
+        writer.writeStartElement( QString::fromUtf8(kml::kmlTag_when));
         writer.writeCharacters( toString( *timestamp ) );
         writer.writeEndElement();
 

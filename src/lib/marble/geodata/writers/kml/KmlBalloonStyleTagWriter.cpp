@@ -34,7 +34,7 @@ bool KmlBalloonStyleTagWriter::write( const GeoNode *node,
             return true;
     }
 
-    writer.writeStartElement( kml::kmlTag_BalloonStyle );
+    writer.writeStartElement( QString::fromUtf8(kml::kmlTag_BalloonStyle) );
     KmlObjectTagWriter::writeIdentifiers( writer, balloonStyle );
 
     QString const backgroundColor = KmlColorStyleTagWriter::formatColor( balloonStyle->backgroundColor() );
@@ -44,7 +44,7 @@ bool KmlBalloonStyleTagWriter::write( const GeoNode *node,
 
     QString const textString = balloonStyle->text();
     if ( textString.contains( QRegularExpression( "[<>&]" ) ) ) {
-        writer.writeStartElement( kml::kmlTag_text );
+        writer.writeStartElement( QString::fromUtf8(kml::kmlTag_text) );
         writer.writeCDATA( textString );
         writer.writeEndElement();
     } else {

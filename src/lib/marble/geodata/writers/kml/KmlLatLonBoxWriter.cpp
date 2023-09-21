@@ -25,7 +25,7 @@ bool KmlLatLonBoxWriter::write( const GeoNode *node,
     const GeoDataLatLonBox *lat_lon_box =
 	static_cast<const GeoDataLatLonBox*>( node );
 
-    writer.writeStartElement( kml::kmlTag_LatLonBox );
+    writer.writeStartElement( QString::fromUtf8(kml::kmlTag_LatLonBox) );
     KmlObjectTagWriter::writeIdentifiers( writer, lat_lon_box );
 
     writer.writeTextElement( "north",

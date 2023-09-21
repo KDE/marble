@@ -24,11 +24,11 @@ bool KmlUpdateTagWriter::write( const GeoNode *node, GeoWriter& writer ) const
 {
     const GeoDataUpdate *update = static_cast<const GeoDataUpdate*>( node );
     KmlObjectTagWriter::writeIdentifiers( writer, update );
-    writer.writeStartElement( kml::kmlTag_Update );
+    writer.writeStartElement( QString::fromUtf8(kml::kmlTag_Update) );
     writer.writeElement( kml::kmlTag_targetHref, update->targetHref() );
 
     if( update->change() && update->change()->size() > 0 ){
-        writer.writeStartElement( kml::kmlTag_Change );
+        writer.writeStartElement( QString::fromUtf8(kml::kmlTag_Change) );
         QVector<GeoDataFeature*>::ConstIterator it =  update->change()->constBegin();
         QVector<GeoDataFeature*>::ConstIterator const end = update->change()->constEnd();
 
@@ -37,7 +37,7 @@ bool KmlUpdateTagWriter::write( const GeoNode *node, GeoWriter& writer ) const
         }
         writer.writeEndElement();
     } else if( update->create() && update->create()->size() > 0 ){
-        writer.writeStartElement( kml::kmlTag_Create );
+        writer.writeStartElement( QString::fromUtf8(kml::kmlTag_Create) );
         QVector<GeoDataFeature*>::ConstIterator it =  update->create()->constBegin();
         QVector<GeoDataFeature*>::ConstIterator const end = update->create()->constEnd();
 
@@ -46,7 +46,7 @@ bool KmlUpdateTagWriter::write( const GeoNode *node, GeoWriter& writer ) const
         }
         writer.writeEndElement();
     } else if( update->getDelete() && update->getDelete()->size() > 0 ){
-        writer.writeStartElement( kml::kmlTag_Delete );
+        writer.writeStartElement( QString::fromUtf8(kml::kmlTag_Delete) );
         QVector<GeoDataFeature*>::ConstIterator it =  update->getDelete()->constBegin();
         QVector<GeoDataFeature*>::ConstIterator const end = update->getDelete()->constEnd();
 

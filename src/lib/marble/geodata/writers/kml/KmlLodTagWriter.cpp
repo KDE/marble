@@ -23,12 +23,12 @@ bool KmlLodTagWriter::write( const GeoNode *node,
 				 GeoWriter& writer ) const
 {
     const GeoDataLod *lod = static_cast<const GeoDataLod*>( node );
-    writer.writeStartElement(kml::kmlTag_Lod);
+    writer.writeStartElement(QString::fromUtf8(kml::kmlTag_Lod));
     KmlObjectTagWriter::writeIdentifiers( writer, lod );
-    writer.writeTextElement( kml::kmlTag_minLodPixels,  QString::number(lod->minLodPixels()) );
-    writer.writeTextElement( kml::kmlTag_maxLodPixels,  QString::number(lod->maxLodPixels()) );
-    writer.writeTextElement( kml::kmlTag_minFadeExtent, QString::number(lod->minFadeExtent()) );
-    writer.writeTextElement( kml::kmlTag_maxFadeExtent, QString::number(lod->maxFadeExtent()) );
+    writer.writeTextElement( QString::fromUtf8(kml::kmlTag_minLodPixels),  QString::number(lod->minLodPixels()) );
+    writer.writeTextElement( QString::fromUtf8(kml::kmlTag_maxLodPixels),  QString::number(lod->maxLodPixels()) );
+    writer.writeTextElement( QString::fromUtf8(kml::kmlTag_minFadeExtent), QString::number(lod->minFadeExtent()) );
+    writer.writeTextElement( QString::fromUtf8(kml::kmlTag_maxFadeExtent), QString::number(lod->maxFadeExtent()) );
     writer.writeEndElement();
     return true;
 }

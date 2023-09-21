@@ -33,10 +33,10 @@ bool KmlOsmPlacemarkDataTagWriter::write( const GeoDataFeature *feature,
         return true;
     }
 
-    writer.writeStartElement( kml::kmlTag_ExtendedData );
+    writer.writeStartElement( QString::fromUtf8(kml::kmlTag_ExtendedData) );
 
     // We declare the "mx" namespace for the custom osmPlacemarkData XML schema
-    writer.writeNamespace( kml::kmlTag_nameSpaceMx, "mx" );
+    writer.writeNamespace( QString::fromUtf8(kml::kmlTag_nameSpaceMx), "mx" );
 
     KmlOsmPlacemarkDataTagWriter::writeOsmData( placemark->geometry(), osmData, writer );
 
@@ -48,7 +48,7 @@ bool KmlOsmPlacemarkDataTagWriter::writeOsmData( const GeoDataGeometry *geometry
                                                  const OsmPlacemarkData &osmData,
                                                  GeoWriter& writer )
 {
-    writer.writeStartElement( kml::kmlTag_nameSpaceMx, kml::kmlTag_OsmPlacemarkData );
+    writer.writeStartElement( QString::fromUtf8(kml::kmlTag_nameSpaceMx), QString::fromUtf8(kml::kmlTag_OsmPlacemarkData) );
 
     // Writing the attributes
     writer.writeAttribute( "id", QString::number( osmData.id() ) );
@@ -64,7 +64,7 @@ bool KmlOsmPlacemarkDataTagWriter::writeOsmData( const GeoDataGeometry *geometry
     QHash<QString, QString>::const_iterator tagsIt = osmData.tagsBegin();
     QHash<QString, QString>::const_iterator tagsEnd = osmData.tagsEnd();
     for ( ; tagsIt != tagsEnd; ++tagsIt ) {
-        writer.writeStartElement( kml::kmlTag_nameSpaceMx, "tag" );
+        writer.writeStartElement( QString::fromUtf8(kml::kmlTag_nameSpaceMx), "tag" );
         writer.writeAttribute( "k", tagsIt.key() );
         writer.writeAttribute( "v", tagsIt.value() );
         writer.writeEndElement();
@@ -80,7 +80,7 @@ bool KmlOsmPlacemarkDataTagWriter::writeOsmData( const GeoDataGeometry *geometry
             QVector<GeoDataCoordinates>::const_iterator nodeEnd = lineString->end();
             for ( ; nodeIt != nodeEnd; ++nodeIt ) {
                 const OsmPlacemarkData &nodeOsmData = osmData.nodeReference( *nodeIt );
-                writer.writeStartElement( kml::kmlTag_nameSpaceMx, "nd" );
+                writer.writeStartElement( QString::fromUtf8(kml::kmlTag_nameSpaceMx), "nd" );
                 writer.writeAttribute( "index", QString::number( ndIndex++ ) );
                 writeOsmData( nullptr, nodeOsmData, writer );
                 writer.writeEndElement();
@@ -93,7 +93,7 @@ bool KmlOsmPlacemarkDataTagWriter::writeOsmData( const GeoDataGeometry *geometry
             // Writing the outerBoundary osmData
             const GeoDataLinearRing &outerRing = polygon->outerBoundary();
             const OsmPlacemarkData &outerRingOsmData = osmData.memberReference( memberIndex );
-            writer.writeStartElement( kml::kmlTag_nameSpaceMx, kml::kmlTag_member );
+            writer.writeStartElement( QString::fromUtf8(kml::kmlTag_nameSpaceMx), QString::fromUtf8(kml::kmlTag_member) );
             writer.writeAttribute( "index", QString::number( memberIndex ) );
             writeOsmData( &outerRing, outerRingOsmData, writer );
             writer.writeEndElement();
@@ -101,7 +101,7 @@ bool KmlOsmPlacemarkDataTagWriter::writeOsmData( const GeoDataGeometry *geometry
             // Writing the innerBoundaries
             for ( const GeoDataLinearRing &innerRing: polygon->innerBoundaries() ) {
                 const OsmPlacemarkData &innerRingOsmData = osmData.memberReference( ++memberIndex );
-                writer.writeStartElement( kml::kmlTag_nameSpaceMx, kml::kmlTag_member );
+                writer.writeStartElement( QString::fromUtf8(kml::kmlTag_nameSpaceMx), QString::fromUtf8(kml::kmlTag_member) );
                 writer.writeAttribute( "index", QString::number( memberIndex ) );
                 writeOsmData( &innerRing, innerRingOsmData, writer );
                 writer.writeEndElement();

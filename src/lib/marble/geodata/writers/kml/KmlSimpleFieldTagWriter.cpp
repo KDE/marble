@@ -22,7 +22,7 @@ static GeoTagWriterRegistrar s_writerSimpleField(
 bool KmlSimpleFieldTagWriter::write( const GeoNode *node, GeoWriter& writer ) const
 {
     const GeoDataSimpleField *simpleField = static_cast<const GeoDataSimpleField*>( node );
-    writer.writeStartElement( kml::kmlTag_SimpleField );
+    writer.writeStartElement( QString::fromUtf8(kml::kmlTag_SimpleField) );
     writer.writeAttribute( "name", simpleField->name() );
     GeoDataSimpleField::SimpleFieldType simpleFieldType = simpleField->type();
     QString type = resolveType( simpleFieldType );

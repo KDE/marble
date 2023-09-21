@@ -31,7 +31,7 @@ bool KmlLookAtTagWriter::write( const GeoNode *node,
 {
     const GeoDataLookAt *lookAt = static_cast<const GeoDataLookAt*>(node);
 
-    writer.writeStartElement( kml::kmlTag_LookAt );
+    writer.writeStartElement( QString::fromUtf8(kml::kmlTag_LookAt) );
     KmlObjectTagWriter::writeIdentifiers( writer, lookAt );
 
     if (lookAt->timeStamp().when().isValid()) {

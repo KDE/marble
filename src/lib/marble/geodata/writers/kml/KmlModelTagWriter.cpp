@@ -30,14 +30,14 @@ bool KmlModelTagWriter::write( const GeoNode *node, GeoWriter& writer ) const
 {
     const GeoDataModel *model = static_cast<const GeoDataModel*>( node );
 
-    writer.writeStartElement( kml::kmlTag_Model );
+    writer.writeStartElement( QString::fromUtf8(kml::kmlTag_Model) );
     KmlObjectTagWriter::writeIdentifiers( writer, model );
 
     KmlGroundOverlayWriter::writeAltitudeMode( writer, model->altitudeMode());
 
     const GeoDataLocation location = model->location() ;
 
-    writer.writeStartElement( kml::kmlTag_Location );
+    writer.writeStartElement( QString::fromUtf8(kml::kmlTag_Location) );
 
     writer.writeOptionalElement( kml::kmlTag_longitude, QString::number( location.longitude( GeoDataCoordinates::Degree ) ), "0" );
     writer.writeOptionalElement( kml::kmlTag_latitude, QString::number( location.latitude( GeoDataCoordinates::Degree ) ), "0" );
@@ -47,7 +47,7 @@ bool KmlModelTagWriter::write( const GeoNode *node, GeoWriter& writer ) const
 
     const GeoDataOrientation orientation = model->orientation();
 
-    writer.writeStartElement( kml::kmlTag_Orientation );
+    writer.writeStartElement( QString::fromUtf8(kml::kmlTag_Orientation) );
 
     writer.writeOptionalElement( kml::kmlTag_heading, QString::number( orientation.heading() ), "0" );
     writer.writeOptionalElement( kml::kmlTag_tilt, QString::number( orientation.tilt() ), "0" );
@@ -57,7 +57,7 @@ bool KmlModelTagWriter::write( const GeoNode *node, GeoWriter& writer ) const
 
     const GeoDataScale scale = model->scale() ;
 
-    writer.writeStartElement( kml::kmlTag_Scale );
+    writer.writeStartElement( QString::fromUtf8(kml::kmlTag_Scale) );
 
     writer.writeOptionalElement( kml::kmlTag_x, QString::number( scale.x() ), "1" );
     writer.writeOptionalElement( kml::kmlTag_y, QString::number( scale.y() ), "1" );
@@ -69,13 +69,13 @@ bool KmlModelTagWriter::write( const GeoNode *node, GeoWriter& writer ) const
 
     const GeoDataResourceMap map = model->resourceMap() ;
 
-    writer.writeStartElement( kml::kmlTag_ResourceMap );
+    writer.writeStartElement( QString::fromUtf8(kml::kmlTag_ResourceMap) );
 
     const GeoDataAlias alias = map.alias() ;
-    writer.writeStartElement( kml::kmlTag_Alias );
+    writer.writeStartElement( QString::fromUtf8(kml::kmlTag_Alias) );
 
-    writer.writeTextElement( kml::kmlTag_targetHref, alias.targetHref() );
-    writer.writeTextElement( kml::kmlTag_sourceHref, alias.sourceHref() );
+    writer.writeTextElement( QString::fromUtf8(kml::kmlTag_targetHref), alias.targetHref() );
+    writer.writeTextElement( QString::fromUtf8(kml::kmlTag_sourceHref), alias.sourceHref() );
 
     writer.writeEndElement();
 

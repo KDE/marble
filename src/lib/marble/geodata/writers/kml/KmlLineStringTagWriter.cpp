@@ -27,7 +27,7 @@ bool KmlLineStringTagWriter::write( const GeoNode *node, GeoWriter& writer ) con
 
     if ( lineString->size() > 1 )
     {
-        writer.writeStartElement( kml::kmlTag_LineString );
+        writer.writeStartElement( QString::fromUtf8(kml::kmlTag_LineString) );
         KmlObjectTagWriter::writeIdentifiers( writer, lineString );
         writer.writeOptionalElement( kml::kmlTag_extrude, QString::number( lineString->extrude() ), "0" );
         writer.writeOptionalElement( kml::kmlTag_tessellate, QString::number( lineString->tessellate() ), "0" );

@@ -18,7 +18,7 @@ fi
 cd build
 
 cmake -G "$MAKEFILES_TYPE" \
-      -DCMAKE_INSTALL_PREFIX=/usr \
+      -DCMAKE_INSTALL_PREFIX=/opt/qt6 \
       -DWITH_DESIGNER_PLUGIN=ON \
       -DBUILD_MARBLE_TESTS=ON \
       -DBUILD_MARBLE_TOOLS=ON \

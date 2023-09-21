@@ -23,7 +23,7 @@ bool KmlAnimatedUpdateTagWriter::write( const GeoNode *node, GeoWriter& writer )
 {
     Q_ASSERT(dynamic_cast<const GeoDataAnimatedUpdate *>(node));
     const GeoDataAnimatedUpdate *animUpdate = static_cast<const GeoDataAnimatedUpdate*>( node );
-    writer.writeStartElement( kml::kmlTag_nameSpaceGx22, kml::kmlTag_AnimatedUpdate );
+    writer.writeStartElement( QString::fromUtf8(kml::kmlTag_nameSpaceGx22), QString::fromUtf8(kml::kmlTag_AnimatedUpdate) );
     KmlObjectTagWriter::writeIdentifiers( writer, animUpdate );
     writer.writeOptionalElement( "gx:duration", animUpdate->duration(), 0.0 );
     if ( animUpdate->update() ){

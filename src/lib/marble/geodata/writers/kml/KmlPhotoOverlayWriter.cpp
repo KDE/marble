@@ -39,7 +39,7 @@ bool KmlPhotoOverlayWriter::writeMid( const GeoNode *node, GeoWriter &writer ) c
     writer.writeOptionalElement( kml::kmlTag_rotation, rotation, "0.000" );
 
     // ViewVolume
-    writer.writeStartElement( kml::kmlTag_ViewVolume );
+    writer.writeStartElement( QString::fromUtf8(kml::kmlTag_ViewVolume) );
     writer.writeOptionalElement<qreal>( kml::kmlTag_leftFov, photo_overlay->viewVolume().leftFov(), 0 );
     writer.writeOptionalElement<qreal>( kml::kmlTag_rightFov, photo_overlay->viewVolume().rightFov(), 0 );
     writer.writeOptionalElement<qreal>( kml::kmlTag_bottomFov, photo_overlay->viewVolume().bottomFov(), 0 );
@@ -48,7 +48,7 @@ bool KmlPhotoOverlayWriter::writeMid( const GeoNode *node, GeoWriter &writer ) c
     writer.writeEndElement();
 
     // ImagePyramid
-    writer.writeStartElement( kml::kmlTag_ImagePyramid );
+    writer.writeStartElement( QString::fromUtf8(kml::kmlTag_ImagePyramid) );
     writer.writeOptionalElement<int>( kml::kmlTag_tileSize, photo_overlay->imagePyramid().tileSize(), 256 );
     writer.writeOptionalElement<int>( kml::kmlTag_maxWidth, photo_overlay->imagePyramid().maxWidth() );
     writer.writeOptionalElement<int>( kml::kmlTag_maxHeight, photo_overlay->imagePyramid().maxHeight() );
