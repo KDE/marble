@@ -282,7 +282,8 @@ msgstr "Konstantin Oblaukhov"
 #, kde-format
 msgid "Google Summer of Code 2011 Project: OpenStreetMap Vector Rendering"
 msgstr ""
-"Projecte Google Summer of Code 2011: Renderització vectorial d'OpenStreetMap"
+"Projecte Google Summer of Code de 2011: Renderització vectorial "
+"d'OpenStreetMap"
 
 #: kdemain.cpp:182
 #, kde-format
@@ -292,7 +293,7 @@ msgstr "Daniel Marth"
 #: kdemain.cpp:183
 #, kde-format
 msgid "Google Summer of Code 2011 Project: Marble Touch on MeeGo"
-msgstr "Projecte Google Summer of Code 2011: Marble Touch al MeeGo"
+msgstr "Projecte Google Summer of Code de 2011: Marble Touch a MeeGo"
 
 #: kdemain.cpp:186
 #, kde-format
@@ -302,7 +303,7 @@ msgstr "Gaurav Gupta"
 #: kdemain.cpp:187
 #, kde-format
 msgid "Google Summer of Code 2010 Project: Bookmarks"
-msgstr "Projecte Google Summer of Code 2010: Adreces d'interés"
+msgstr "Projecte Google Summer of Code de 2010: Adreces d'interés"
 
 #: kdemain.cpp:190
 #, kde-format
@@ -312,7 +313,7 @@ msgstr "Harshit Jain "
 #: kdemain.cpp:191
 #, kde-format
 msgid "Google Summer of Code 2010 Project: Time Support"
-msgstr "Projecte Google Summer of Code 2010: Implementació del temps"
+msgstr "Projecte Google Summer of Code de 2010: Implementació del temps"
 
 #: kdemain.cpp:194
 #, kde-format
@@ -322,7 +323,7 @@ msgstr "Siddharth Srivastava"
 #: kdemain.cpp:195
 #, kde-format
 msgid "Google Summer of Code 2010 Project: Turn-by-turn Navigation"
-msgstr "Projecte Google Summer of Code 2010: Navegació guiada"
+msgstr "Projecte Google Summer of Code de 2010: Navegació guiada"
 
 #: kdemain.cpp:198 kdemain.cpp:218
 #, kde-format
@@ -332,17 +333,17 @@ msgstr "Andrew Manson"
 #: kdemain.cpp:199
 #, kde-format
 msgid "Google Summer of Code 2009 Project: OSM Annotation"
-msgstr "Projecte Google Summer of Code 2009: Anotació d'OSM"
+msgstr "Projecte Google Summer of Code de 2009: Anotació d'OSM"
 
 #: kdemain.cpp:203
 #, kde-format
 msgid "Google Summer of Code 2009 Project: Online Services"
-msgstr "Projecte Google Summer of Code 2009: Serveis en línia"
+msgstr "Projecte Google Summer of Code de 2009: Serveis en línia"
 
 #: kdemain.cpp:207
 #, kde-format
 msgid "Google Summer of Code 2008 Project: Vector Tiles for Marble"
-msgstr "Projecte Google Summer of Code 2008: Mosaic vectorial per a Marble"
+msgstr "Projecte Google Summer of Code de 2008: Mosaic vectorial per a Marble"
 
 #: kdemain.cpp:210
 #, kde-format
@@ -355,7 +356,7 @@ msgid ""
 "Google Summer of Code 2008 Project: Panoramio / Wikipedia -photo support for "
 "Marble"
 msgstr ""
-"Projecte Google Summer of Code 2008: Implementació de les fotografies de "
+"Projecte Google Summer of Code de 2008: Implementació de les fotografies de "
 "Panoramio / Viquipèdia en Marble"
 
 #: kdemain.cpp:214
@@ -368,13 +369,13 @@ msgstr "Carlos Licea"
 msgid ""
 "Google Summer of Code 2007 Project: Equirectangular Projection (\"Flat Map\")"
 msgstr ""
-"Projecte Google Summer of Code 2007: Projecció cilíndrica equidistant («Mapa "
-"pla»)"
+"Projecte Google Summer of Code de 2007: Projecció cilíndrica equidistant "
+"(«Mapa pla»)"
 
 #: kdemain.cpp:219
 #, kde-format
 msgid "Google Summer of Code 2007 Project: GPS Support for Marble"
-msgstr "Projecte Google Summer of Code 2007: Implementació GPS en Marble"
+msgstr "Projecte Google Summer of Code de 2007: Implementació GPS en Marble"
 
 #: kdemain.cpp:222
 #, kde-format
@@ -384,7 +385,7 @@ msgstr "Murad Tagirov"
 #: kdemain.cpp:223
 #, kde-format
 msgid "Google Summer of Code 2007 Project: KML Support for Marble"
-msgstr "Projecte Google Summer of Code 2007: Implementació del KML en Marble"
+msgstr "Projecte Google Summer of Code de 2007: Implementació de KML en Marble"
 
 #: kdemain.cpp:228
 #, kde-format

@@ -4313,12 +4313,12 @@ msgstr[1] "%n seients"
 #: src/lib/marble/declarative/Placemark.cpp:257
 msgctxt "Marble::Placemark|A bench provides a backrest to lean against"
 msgid "Has backrest"
-msgstr "Té respatller"
+msgstr "Té respatler"
 
 #: src/lib/marble/declarative/Placemark.cpp:258
 msgctxt "Marble::Placemark|A bench provides no backrest to lean against"
 msgid "No backrest"
-msgstr "Sense respatller"
+msgstr "Sense respatler"
 
 #: src/lib/marble/declarative/Placemark.cpp:262
 #, qt-format
@@ -9483,7 +9483,7 @@ msgid ""
 "><i>Project: Marble Touch on MeeGo</i></p>"
 msgstr ""
 "<p>Daniel Marth <a href=\"danielmarth@gmx.at\">danielmarth@gmx.at</a><br /"
-"><i>Projecte: Marble Touch sobre MeeGo</i></p>"
+"><i>Projecte: Marble Touch a MeeGo</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:225
 msgctxt "QObject|"
@@ -9597,7 +9597,7 @@ msgid ""
 "a><br /><i>Project: KML Support for Marble</i></p>"
 msgstr ""
 "<p>Murad Tagirov <a href=\"mailto:tmurad@gmail.com\">tmurad@gmail.com</"
-"a><br /><i>Projecte: Implementació del KML per a Marble</i></p>"
+"a><br /><i>Projecte: Implementació de KML per a Marble</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:249
 msgctxt "QObject|"
