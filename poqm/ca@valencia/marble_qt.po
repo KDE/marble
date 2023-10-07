@@ -9597,7 +9597,7 @@ msgid ""
 "a><br /><i>Project: KML Support for Marble</i></p>"
 msgstr ""
 "<p>Murad Tagirov <a href=\"mailto:tmurad@gmail.com\">tmurad@gmail.com</"
-"a><br /><i>Projecte: Implementació del KML per a Marble</i></p>"
+"a><br /><i>Projecte: Implementació de KML per a Marble</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:249
 msgctxt "QObject|"

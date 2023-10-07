@@ -385,8 +385,7 @@ msgstr "Murad Tagirov"
 #: kdemain.cpp:223
 #, kde-format
 msgid "Google Summer of Code 2007 Project: KML Support for Marble"
-msgstr ""
-"Projecte Google Summer of Code de 2007: Implementació del KML en Marble"
+msgstr "Projecte Google Summer of Code de 2007: Implementació de KML en Marble"
 
 #: kdemain.cpp:228
 #, kde-format
