@@ -8004,7 +8004,7 @@ msgstr "Vista prèvia del mapa"
 #: src/lib/marble/MapWizard.cpp:290 src/lib/marble/MapWizard.cpp:295
 msgctxt "Marble::MapWizard|"
 msgid "Error while parsing"
-msgstr "S'ha produït un error en analitzar"
+msgstr "S'ha produït un error en l'anàlisi sintàctica de"
 
 #: src/lib/marble/MapWizard.cpp:290
 msgctxt "Marble::MapWizard|"
@@ -8491,7 +8491,7 @@ msgstr "#87CEFA"
 #: src/lib/marble/MapWizard.ui:511
 msgctxt "MapWizard|"
 msgid "Select Color"
-msgstr "Seleccioneu el color"
+msgstr "Seleccioneu un color"
 
 #: src/lib/marble/MapWizard.ui:554
 msgctxt "MapWizard|"
@@ -17907,7 +17907,7 @@ msgstr ""
 #: src/plugins/runner/nominatim-search/NominatimSearchPlugin.cpp:22
 msgctxt "Marble::NominatimPlugin|"
 msgid "OpenStreetMap Nominatim Search"
-msgstr "Busca al Nominatim d'OpenStreetMap"
+msgstr "Busca en el Nominatim d'OpenStreetMap"
 
 #: src/plugins/runner/nominatim-search/NominatimSearchPlugin.cpp:42
 msgctxt "Marble::NominatimPlugin|"
