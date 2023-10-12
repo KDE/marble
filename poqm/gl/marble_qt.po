@@ -3591,7 +3591,7 @@ msgstr "O servidor non é un servidor de ownCloud."
 #: src/lib/marble/cloudsync/OwncloudSyncBackend.cpp:322
 msgctxt "Marble::OwncloudSyncBackend|"
 msgid "Username or password are incorrect"
-msgstr "O nome de usuario ou contrasinal son incorrectos."
+msgstr "O nome de usuaria ou contrasinal son incorrectos."
 
 #: src/lib/marble/cloudsync/OwncloudSyncBackend.cpp:325
 msgctxt "Marble::OwncloudSyncBackend|"
@@ -10222,7 +10222,7 @@ msgstr "URL do servidor remoto, p.ex. omeuservidor.gal/owncloud"
 #: src/lib/marble/MarbleCloudSyncSettingsWidget.ui:167
 msgctxt "MarbleCloudSyncSettingsWidget|"
 msgid "Username:"
-msgstr "Nome de usuario:"
+msgstr "Nome de usuaria:"
 
 #: src/lib/marble/MarbleCloudSyncSettingsWidget.ui:181
 msgctxt "MarbleCloudSyncSettingsWidget|"
@@ -14897,7 +14897,7 @@ msgstr "Etiqueta de texto"
 #: src/plugins/render/opencaching/OpenCachingCacheDialog.ui:56
 msgctxt "OpenCachingCacheDialog|"
 msgid "User name:"
-msgstr "Nome de usuario:"
+msgstr "Nome de usuaria:"
 
 #: src/plugins/render/opencaching/OpenCachingCacheDialog.ui:76
 msgctxt "OpenCachingCacheDialog|"
@@ -15027,7 +15027,7 @@ msgstr "<tr><td align=\"right\">Nome da caché</td>"
 #: src/plugins/render/opencaching/OpenCachingItem.cpp:178
 msgctxt "Marble::OpenCachingItem|"
 msgid "<tr><td align=\"right\">User name</td><td>"
-msgstr "<tr><td align=\"right\">Nome de usuario</td><td>"
+msgstr "<tr><td align=\"right\">Nome de usuaria</td><td>"
 
 #: src/plugins/render/opencaching/OpenCachingItem.cpp:180
 msgctxt "Marble::OpenCachingItem|"
