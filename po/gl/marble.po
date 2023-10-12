@@ -819,7 +819,7 @@ msgstr "Porto do servidor de mandatario."
 #: marble.kcfg:233
 #, kde-format
 msgid "Username for authorization."
-msgstr "Nome de usuario para a autorización."
+msgstr "Nome de usuaria para a autorización."
 
 #. i18n: ectx: label, entry (proxyPass), group (Cache)
 #: marble.kcfg:236
