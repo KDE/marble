@@ -7679,7 +7679,7 @@ msgstr[1] "S'han trobat %n resultats."
 #: src/lib/marble/GoToDialog.ui:14
 msgctxt "GoTo|"
 msgid "Go To..."
-msgstr "Ves a..."
+msgstr "Ves fins a..."
 
 #: src/lib/marble/GoToDialog.ui:78
 msgctxt "GoTo|"
@@ -10455,7 +10455,7 @@ msgstr "Mostra l'emplaçament de casa"
 #: src/lib/marble/MarbleNavigationSettingsWidget.ui:164
 msgctxt "MarbleNavigationSettingsWidget|"
 msgid "Return to Last Location Visited"
-msgstr "Retorna al últim emplaçament visitat"
+msgstr "Retorna a l'últim emplaçament visitat"
 
 #: src/lib/marble/MarbleNavigationSettingsWidget.ui:184
 msgctxt "MarbleNavigationSettingsWidget|"
@@ -14010,7 +14010,7 @@ msgstr "&Tanca"
 #: src/plugins/render/eclipses/EclipsesBrowserDialog.ui:171
 msgctxt "EclipsesBrowserDialog|"
 msgid "&Go To Selected Eclipse"
-msgstr "&Ves a l'eclipsi seleccionat"
+msgstr "&Ves fins a l'eclipsi seleccionat"
 
 #: src/plugins/render/eclipses/EclipsesConfigDialog.ui:17
 msgctxt "EclipsesConfigDialog|"
@@ -15363,7 +15363,7 @@ msgctxt "PositionMarkerConfigWidget|"
 msgid ""
 "Position marker images indicating the direction should point north (top)."
 msgstr ""
-"Imatges del marcador de posició indicant la direcció que ha d'apuntar al "
+"Imatges del marcador de posició indicant la direcció que ha d'apuntar cap al "
 "nord (dalt)."
 
 #: src/plugins/render/positionmarker/PositionMarkerConfigWidget.ui:150

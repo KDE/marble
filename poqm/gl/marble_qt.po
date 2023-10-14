@@ -16387,7 +16387,7 @@ msgstr ""
 "weight:400; font-style:normal;\"><p style=\" margin-top:0px; margin-"
 "bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-"
 "indent:0px;\">Selecciona se se quere que se amose a temperatura. A "
-"temperatura só se mostra para as estacións para as que estiver dispoñíbel.</"
+"temperatura só se amosa para as estacións para as que estiver dispoñíbel.</"
 "p></body></html>\n"
 
 #: src/plugins/render/weather/WeatherConfigWidget.ui:44
@@ -16414,7 +16414,7 @@ msgstr ""
 "weight:400; font-style:normal;\"><p style=\" margin-top:0px; margin-"
 "bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-"
 "indent:0px;\">Seleccione se quere que se amose a dirección do vento. A "
-"dirección do vento só se mostra se estiver dispoñíbel para a estación "
+"dirección do vento só se amosa se estiver dispoñíbel para a estación "
 "concreta.</p></body></html>\n"
 
 #: src/plugins/render/weather/WeatherConfigWidget.ui:55
@@ -16440,7 +16440,7 @@ msgstr ""
 "weight:400; font-style:normal;\"><p style=\" margin-top:0px; margin-"
 "bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-"
 "indent:0px;\">Seleccione se quere que se amose a velocidade do vento. A "
-"velocidade do vento só se mostra se estiver dispoñíbel para a estación "
+"velocidade do vento só se amosa se estiver dispoñíbel para a estación "
 "concreta</p></body></html>\n"
 
 #: src/plugins/render/weather/WeatherConfigWidget.ui:66
