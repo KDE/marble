@@ -133,7 +133,8 @@ private:
         }
     }
 
-    void clipPolygon(const GeoDataPlacemark *placemark, const Clipper2Lib::Rect64 &tileBoundary, qreal minArea,
+    void clipPolygon(const GeoDataPlacemark *placemark, const GeoDataLatLonBox &tileBoundary,
+                     const Clipper2Lib::Rect64 &clip, qreal minArea,
                      GeoDataDocument* document, QSet<qint64> &osmIds);
 
     void copyTags(const GeoDataPlacemark &source, GeoDataPlacemark &target) const;

@@ -7,7 +7,7 @@
     <tag k="entrance" v="yes" />
     <tag k="level" v="0" />
   </node>
-  <way id="-2">
+  <way id="89970073">
     <nd ref="1042870960" />
     <nd ref="1042870961" />
     <nd ref="3633376974" />
@@ -28,7 +28,6 @@
     <tag k="information" v="office" />
     <tag k="information:kvv" v="office" />
     <tag k="level" v="0" />
-    <tag k="mx:oid" v="89970073" />
     <tag k="name" v="KVV Kundenzentrum Hauptbahnhof" />
     <tag k="opening_hours" v="Mo-Fr 09:00-19:00; Sa 09:30-17:15" />
     <tag k="opening_hours:url" v="https://www.kvv.de/service/kundenzentren.html" />

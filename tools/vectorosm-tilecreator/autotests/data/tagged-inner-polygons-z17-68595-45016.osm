@@ -80,16 +80,45 @@
     <tag k="level" v="1" />
   </node>
   <node id="3384577601" lat="48.9936618" lon="8.4021131" />
-  <way id="-11">
-    <nd ref="3334634499" />
-    <nd ref="3334634496" />
-    <nd ref="2460601413" />
-    <nd ref="601492060" />
-    <nd ref="2460601420" />
-    <nd ref="3334634499" />
-    <tag k="mx:oid" v="326817037" />
+  <way id="-3">
+    <nd ref="-4" />
+    <nd ref="-5" />
+    <nd ref="1832753953" />
+    <nd ref="1832753952" />
+    <nd ref="534105878" />
+    <nd ref="3321341115" />
+    <nd ref="3321341113" />
+    <nd ref="1727955757" />
+    <nd ref="3305744409" />
+    <nd ref="-6" />
+    <nd ref="-7" />
+    <nd ref="3305744395" />
+    <nd ref="1727955747" />
+    <nd ref="3321341111" />
+    <nd ref="3321341114" />
+    <nd ref="534105902" />
+    <nd ref="1832753944" />
+    <nd ref="-4" />
+    <tag k="mx:oid" v="47199441" />
   </way>
-  <way id="-10">
+  <way id="238212007">
+    <nd ref="2460601400" />
+    <nd ref="1727955751" />
+    <nd ref="2460601393" />
+    <nd ref="2460601401" />
+    <nd ref="2460601408" />
+    <nd ref="2460601400" />
+  </way>
+  <way id="260467791">
+    <nd ref="2659518303" />
+    <nd ref="2659518302" />
+    <nd ref="2659518304" />
+    <nd ref="2659518305" />
+    <nd ref="2659518303" />
+    <tag k="level" v="1" />
+    <tag k="natural" v="scrub" />
+  </way>
+  <way id="323799274">
     <nd ref="3305744406" />
     <nd ref="3305744404" />
     <nd ref="3305744401" />
@@ -115,59 +144,26 @@
     <tag k="indoor" v="area" />
     <tag k="level" v="1" />
     <tag k="lit" v="yes" />
-    <tag k="mx:oid" v="323799274" />
     <tag k="public_transport" v="waiting_hall" />
     <tag k="ref" v="R43" />
     <tag k="roof:shape" v="flat" />
     <tag k="room" v="waiting" />
     <tag k="seats" v="6" />
   </way>
-  <way id="-9">
-    <nd ref="2659518303" />
-    <nd ref="2659518302" />
-    <nd ref="2659518304" />
-    <nd ref="2659518305" />
-    <nd ref="2659518303" />
-    <tag k="level" v="1" />
-    <tag k="mx:oid" v="260467791" />
-    <tag k="natural" v="scrub" />
-  </way>
-  <way id="-8">
-    <nd ref="2460601400" />
-    <nd ref="1727955751" />
-    <nd ref="2460601393" />
-    <nd ref="2460601401" />
-    <nd ref="2460601408" />
-    <nd ref="2460601400" />
-    <tag k="mx:oid" v="238212007" />
-  </way>
-  <way id="-3">
-    <nd ref="-4" />
-    <nd ref="-5" />
-    <nd ref="1832753953" />
-    <nd ref="1832753952" />
-    <nd ref="534105878" />
-    <nd ref="3321341115" />
-    <nd ref="3321341113" />
-    <nd ref="1727955757" />
-    <nd ref="3305744409" />
-    <nd ref="-6" />
-    <nd ref="-7" />
-    <nd ref="3305744395" />
-    <nd ref="1727955747" />
-    <nd ref="3321341111" />
-    <nd ref="3321341114" />
-    <nd ref="534105902" />
-    <nd ref="1832753944" />
-    <nd ref="-4" />
-    <tag k="mx:oid" v="47199441" />
+  <way id="326817037">
+    <nd ref="3334634499" />
+    <nd ref="3334634496" />
+    <nd ref="2460601413" />
+    <nd ref="601492060" />
+    <nd ref="2460601420" />
+    <nd ref="3334634499" />
   </way>
   <relation id="-2">
     <member type="way" ref="-3" role="outer" />
-    <member type="way" ref="-8" role="inner" />
-    <member type="way" ref="-9" role="inner" />
-    <member type="way" ref="-10" role="inner" />
-    <member type="way" ref="-11" role="inner" />
+    <member type="way" ref="238212007" role="inner" />
+    <member type="way" ref="260467791" role="inner" />
+    <member type="way" ref="323799274" role="inner" />
+    <member type="way" ref="326817037" role="inner" />
     <tag k="bench" v="yes" />
     <tag k="bin" v="yes" />
     <tag k="covered" v="yes" />

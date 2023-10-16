@@ -1,6 +1,6 @@
 <osm>
-  <node id="-11" lat="47.3781625" lon="8.5391235" />
-  <node id="-10" lat="47.3781963" lon="8.5391235" />
+  <node id="-10" lat="47.3781625" lon="8.5391235" />
+  <node id="-9" lat="47.3781963" lon="8.5391235" />
   <node id="-7" lat="47.3789649" lon="8.536377" />
   <node id="-6" lat="47.3788799" lon="8.536377" />
   <node id="-5" lat="47.3781353" lon="8.5391235" />
@@ -22,30 +22,13 @@
   <node id="4448824204" lat="47.3783522" lon="8.5385317" />
   <node id="6044110600" lat="47.3787783" lon="8.5367524" />
   <node id="6044110601" lat="47.3788513" lon="8.5367961" />
-  <way id="-12">
-    <nd ref="4448824204" />
-    <nd ref="4448824202" />
-    <nd ref="4448824200" />
-    <nd ref="4448824201" />
-    <nd ref="4448824203" />
-    <nd ref="4448824204" />
-    <tag k="mx:oid" v="447820381" />
-  </way>
-  <way id="-9">
+  <way id="-8">
+    <nd ref="-9" />
     <nd ref="-10" />
-    <nd ref="-11" />
     <nd ref="4424600959" />
     <nd ref="4424600960" />
-    <nd ref="-10" />
+    <nd ref="-9" />
     <tag k="mx:oid" v="445003243" />
-  </way>
-  <way id="-8">
-    <nd ref="3930468582" />
-    <nd ref="3930468577" />
-    <nd ref="3930468571" />
-    <nd ref="3930468578" />
-    <nd ref="3930468582" />
-    <tag k="mx:oid" v="389887043" />
   </way>
   <way id="-3">
     <nd ref="-4" />
@@ -59,11 +42,26 @@
     <nd ref="-4" />
     <tag k="mx:oid" v="30612523" />
   </way>
+  <way id="389887043">
+    <nd ref="3930468582" />
+    <nd ref="3930468577" />
+    <nd ref="3930468571" />
+    <nd ref="3930468578" />
+    <nd ref="3930468582" />
+  </way>
+  <way id="447820381">
+    <nd ref="4448824204" />
+    <nd ref="4448824202" />
+    <nd ref="4448824200" />
+    <nd ref="4448824201" />
+    <nd ref="4448824203" />
+    <nd ref="4448824204" />
+  </way>
   <relation id="-2">
     <member type="way" ref="-3" role="outer" />
+    <member type="way" ref="389887043" role="inner" />
     <member type="way" ref="-8" role="inner" />
-    <member type="way" ref="-9" role="inner" />
-    <member type="way" ref="-12" role="inner" />
+    <member type="way" ref="447820381" role="inner" />
     <tag k="area" v="yes" />
     <tag k="bench" v="yes" />
     <tag k="bin" v="yes" />

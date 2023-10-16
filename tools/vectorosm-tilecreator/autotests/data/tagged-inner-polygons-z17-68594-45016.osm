@@ -115,94 +115,6 @@
   </node>
   <node id="4688575434" lat="48.9933406" lon="8.4010277" />
   <node id="4688575435" lat="48.9933792" lon="8.4010049" />
-  <way id="-13">
-    <nd ref="3226381455" />
-    <nd ref="3226381451" />
-    <nd ref="3226381450" />
-    <nd ref="3226381454" />
-    <nd ref="3226381455" />
-    <tag k="building" v="vending_machines" />
-    <tag k="building:material" v="metal" />
-    <tag k="level" v="1" />
-    <tag k="mx:oid" v="316513886" />
-    <tag k="roof:material" v="metal" />
-  </way>
-  <way id="-12">
-    <nd ref="2794692496" />
-    <nd ref="2794692499" />
-    <nd ref="2794692497" />
-    <nd ref="2794692495" />
-    <nd ref="2794692493" />
-    <nd ref="2794692490" />
-    <nd ref="2794692491" />
-    <nd ref="2794692494" />
-    <nd ref="2794692496" />
-    <tag k="building" v="hut" />
-    <tag k="building:colour" v="#888888" />
-    <tag k="building:levels" v="1" />
-    <tag k="building:material" v="glass" />
-    <tag k="height" v="3" />
-    <tag k="level" v="1" />
-    <tag k="mx:oid" v="272837663" />
-    <tag k="roof:shape" v="flat" />
-  </way>
-  <way id="-11">
-    <nd ref="2794692503" />
-    <nd ref="2794692506" />
-    <nd ref="2794692509" />
-    <nd ref="2794692507" />
-    <nd ref="2794692504" />
-    <nd ref="2794692502" />
-    <nd ref="2794692500" />
-    <nd ref="2794692501" />
-    <nd ref="2794692503" />
-    <tag k="access" v="private" />
-    <tag k="building" v="yes" />
-    <tag k="building:levels" v="1" />
-    <tag k="description" v="DB Service Personal" />
-    <tag k="height" v="3" />
-    <tag k="level" v="1" />
-    <tag k="mx:oid" v="274801746" />
-    <tag k="roof:shape" v="flat" />
-  </way>
-  <way id="-10">
-    <nd ref="2460601348" />
-    <nd ref="3384576946" />
-    <nd ref="2460601340" />
-    <nd ref="4688575434" />
-    <nd ref="4688575435" />
-    <nd ref="2460601348" />
-    <tag k="mx:oid" v="238212008" />
-  </way>
-  <way id="-9">
-    <nd ref="2889922896" />
-    <nd ref="3243178055" />
-    <nd ref="2889922898" />
-    <nd ref="2889922897" />
-    <nd ref="3650233032" />
-    <nd ref="3611324610" />
-    <nd ref="2889922894" />
-    <nd ref="2889922893" />
-    <nd ref="3243178054" />
-    <nd ref="2889922891" />
-    <nd ref="2889922892" />
-    <nd ref="2889922895" />
-    <nd ref="2889922896" />
-    <tag k="building:colour" v="#808080" />
-    <tag k="building:levels" v="1" />
-    <tag k="building:material" v="glass" />
-    <tag k="building:part" v="elevator" />
-    <tag k="height" v="4" />
-    <tag k="indoor" v="room" />
-    <tag k="level" v="0;1" />
-    <tag k="levelpart" v="elevator_platform" />
-    <tag k="mx:oid" v="270880469" />
-    <tag k="ref" v="A05" />
-    <tag k="roof:colour" v="#808080" />
-    <tag k="roof:material" v="metal" />
-    <tag k="roof:shape" v="flat" />
-    <tag k="room" v="elevator" />
-  </way>
   <way id="-3">
     <nd ref="-4" />
     <nd ref="-5" />
@@ -232,13 +144,96 @@
     <nd ref="-4" />
     <tag k="mx:oid" v="47199441" />
   </way>
+  <way id="238212008">
+    <nd ref="2460601348" />
+    <nd ref="3384576946" />
+    <nd ref="2460601340" />
+    <nd ref="4688575434" />
+    <nd ref="4688575435" />
+    <nd ref="2460601348" />
+  </way>
+  <way id="270880469">
+    <nd ref="2889922896" />
+    <nd ref="3243178055" />
+    <nd ref="2889922898" />
+    <nd ref="2889922897" />
+    <nd ref="3650233032" />
+    <nd ref="3611324610" />
+    <nd ref="2889922894" />
+    <nd ref="2889922893" />
+    <nd ref="3243178054" />
+    <nd ref="2889922891" />
+    <nd ref="2889922892" />
+    <nd ref="2889922895" />
+    <nd ref="2889922896" />
+    <tag k="building:colour" v="#808080" />
+    <tag k="building:levels" v="1" />
+    <tag k="building:material" v="glass" />
+    <tag k="building:part" v="elevator" />
+    <tag k="height" v="4" />
+    <tag k="indoor" v="room" />
+    <tag k="level" v="0;1" />
+    <tag k="levelpart" v="elevator_platform" />
+    <tag k="ref" v="A05" />
+    <tag k="roof:colour" v="#808080" />
+    <tag k="roof:material" v="metal" />
+    <tag k="roof:shape" v="flat" />
+    <tag k="room" v="elevator" />
+  </way>
+  <way id="272837663">
+    <nd ref="2794692496" />
+    <nd ref="2794692499" />
+    <nd ref="2794692497" />
+    <nd ref="2794692495" />
+    <nd ref="2794692493" />
+    <nd ref="2794692490" />
+    <nd ref="2794692491" />
+    <nd ref="2794692494" />
+    <nd ref="2794692496" />
+    <tag k="building" v="hut" />
+    <tag k="building:colour" v="#888888" />
+    <tag k="building:levels" v="1" />
+    <tag k="building:material" v="glass" />
+    <tag k="height" v="3" />
+    <tag k="level" v="1" />
+    <tag k="roof:shape" v="flat" />
+  </way>
+  <way id="274801746">
+    <nd ref="2794692503" />
+    <nd ref="2794692506" />
+    <nd ref="2794692509" />
+    <nd ref="2794692507" />
+    <nd ref="2794692504" />
+    <nd ref="2794692502" />
+    <nd ref="2794692500" />
+    <nd ref="2794692501" />
+    <nd ref="2794692503" />
+    <tag k="access" v="private" />
+    <tag k="building" v="yes" />
+    <tag k="building:levels" v="1" />
+    <tag k="description" v="DB Service Personal" />
+    <tag k="height" v="3" />
+    <tag k="level" v="1" />
+    <tag k="roof:shape" v="flat" />
+  </way>
+  <way id="316513886">
+    <nd ref="3226381455" />
+    <nd ref="3226381451" />
+    <nd ref="3226381450" />
+    <nd ref="3226381454" />
+    <nd ref="3226381455" />
+    <tag k="building" v="vending_machines" />
+    <tag k="building:material" v="metal" />
+    <tag k="level" v="1" />
+    <tag k="roof:material" v="metal" />
+  </way>
   <relation id="-2">
     <member type="way" ref="-3" role="outer" />
-    <member type="way" ref="-9" role="inner" />
-    <member type="way" ref="-10" role="inner" />
-    <member type="way" ref="-11" role="inner" />
-    <member type="way" ref="-12" role="inner" />
-    <member type="way" ref="-13" role="inner" />
+    <member type="way" ref="270880469" role="inner" />
+    <member type="way" ref="238212008" role="inner" />
+    <member type="way" ref="274801746" role="inner" />
+    <member type="way" ref="272837663" role="inner" />
+    <member type="way" ref="316513886" role="inner" />
     <tag k="bench" v="yes" />
     <tag k="bin" v="yes" />
     <tag k="covered" v="yes" />

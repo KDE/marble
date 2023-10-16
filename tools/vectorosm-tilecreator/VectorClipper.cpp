@@ -62,15 +62,18 @@ GeoDataDocument *VectorClipper::clipTo(const GeoDataLatLonBox &tileBoundary, int
     for (GeoDataPlacemark const * placemark: potentialIntersections(tileBoundary)) {
         GeoDataGeometry const * const geometry = placemark ? placemark->geometry() : nullptr;
         if (geometry && tileBoundary.intersects(geometry->latLonAltBox())) {
-            if (geodata_cast<GeoDataPolygon>(geometry)) {
-                clipPolygon(placemark, clip, minArea, tile, osmIds);
+            if (!filterSmallAreas && tileBoundary.contains(geometry->latLonAltBox())) {
+                tile->append(placemark->clone());
+                osmIds <<placemark->osmData().id();
+            } else if (geodata_cast<GeoDataPolygon>(geometry)) {
+                clipPolygon(placemark, tileBoundary, clip, minArea, tile, osmIds);
             } else if (geodata_cast<GeoDataLineString>(geometry)) {
                 clipString<GeoDataLineString>(placemark, clip, minArea, tile, osmIds);
             } else if (geodata_cast<GeoDataLinearRing>(geometry)) {
                 clipString<GeoDataLinearRing>(placemark, clip, minArea, tile, osmIds);
             } else if (const auto building = geodata_cast<GeoDataBuilding>(geometry)) {
                 if (geodata_cast<GeoDataPolygon>(&static_cast<const GeoDataMultiGeometry*>(building->multiGeometry())->at(0))) {
-                    clipPolygon(placemark, clip, minArea, tile, osmIds);
+                    clipPolygon(placemark, tileBoundary, clip, minArea, tile, osmIds);
                 } else if (geodata_cast<GeoDataLinearRing>(&static_cast<const GeoDataMultiGeometry*>(building->multiGeometry())->at(0))) {
                     clipString<GeoDataLinearRing>(placemark, clip, minArea, tile, osmIds);
                 }
@@ -166,7 +169,8 @@ qreal VectorClipper::area(const GeoDataLinearRing &ring)
     return result;
 }
 
-void VectorClipper::clipPolygon(const GeoDataPlacemark *placemark, const Clipper2Lib::Rect64 &tileBoundary, qreal minArea,
+void VectorClipper::clipPolygon(const GeoDataPlacemark *placemark, const GeoDataLatLonBox &tileBoundary,
+                                const Clipper2Lib::Rect64 &clip, qreal minArea,
                                 GeoDataDocument *document, QSet<qint64> &osmIds)
 {
     bool isBuilding = false;
@@ -190,7 +194,7 @@ void VectorClipper::clipPolygon(const GeoDataPlacemark *placemark, const Clipper
         path.push_back(coordinateToPoint(node));
     }
 
-    Paths64 paths = Clipper2Lib::RectClip(tileBoundary, path);
+    Paths64 paths = Clipper2Lib::RectClip(clip, path);
     for(const auto &path: paths) {
         GeoDataPlacemark* newPlacemark = new GeoDataPlacemark;
         newPlacemark->setVisible(placemark->isVisible());
@@ -232,12 +236,25 @@ void VectorClipper::clipPolygon(const GeoDataPlacemark *placemark, const Clipper
             }
 
             auto const & innerRingOsmData = placemarkOsmData.memberReference(index);
+            // entirely contained in the tile, no need to attempt any clipping
+            if (minArea == 0.0 && tileBoundary.contains(innerBoundary.latLonAltBox())) {
+                auto & newInnerRingOsmData = newPlacemarkOsmData.memberReference(newPolygon->innerBoundaries().size());
+                newPolygon->appendInnerBoundary(innerBoundary);
+                newInnerRingOsmData.setId(innerRingOsmData.id());
+                copyTags(innerRingOsmData, newInnerRingOsmData);
+                for(const auto &node: innerBoundary) {
+                    newInnerRingOsmData.addNodeReference(node, innerRingOsmData.nodeReference(node));
+                }
+                osmIds.insert(innerRingOsmData.id());
+                continue;
+            }
+
             Path64 innerPath;
             innerPath.reserve(innerBoundary.size());
             for(auto const & node: innerBoundary) {
                 innerPath.push_back(coordinateToPoint(node));
             }
-            Paths64 innerPaths = Clipper2Lib::RectClip(tileBoundary, innerPath);
+            Paths64 innerPaths = Clipper2Lib::RectClip(clip, innerPath);
             for(auto const &innerPath: innerPaths) {
                 int const newIndex = newPolygon->innerBoundaries().size();
                 auto & newInnerRingOsmData = newPlacemarkOsmData.memberReference(newIndex);
