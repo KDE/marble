@@ -1,0 +1,93 @@
+<osm>
+  <node id="338493232" lat="47.3781094" lon="8.539219" />
+  <node id="338493233" lat="47.3792831" lon="8.5348773" />
+  <node id="338493235" lat="47.3796094" lon="8.5339786" />
+  <node id="338493236" lat="47.3781831" lon="8.5392621" />
+  <node id="338494837" lat="47.379592" lon="8.5339664" />
+  <node id="1236102510" lat="47.3795356" lon="8.5342717" />
+  <node id="1236102515" lat="47.3793495" lon="8.534648" />
+  <node id="3930468571" lat="47.3784072" lon="8.5382136" />
+  <node id="3930468574" lat="47.3784194" lon="8.5380774" />
+  <node id="3930468577" lat="47.3784303" lon="8.5381268" />
+  <node id="3930468578" lat="47.3784379" lon="8.5382313" />
+  <node id="3930468582" lat="47.3784609" lon="8.5381446" />
+  <node id="3930468584" lat="47.3784919" lon="8.5381218" />
+  <node id="4424600957" lat="47.3781478" lon="8.5391791" />
+  <node id="4424600958" lat="47.3781771" lon="8.539196" />
+  <node id="4424600959" lat="47.3781931" lon="8.5390081" />
+  <node id="4424600960" lat="47.3782224" lon="8.5390251" />
+  <node id="4448824200" lat="47.3782958" lon="8.5386202" />
+  <node id="4448824201" lat="47.3783103" lon="8.5386285">
+    <tag k="level" v="0" />
+  </node>
+  <node id="4448824202" lat="47.3783232" lon="8.5385152" />
+  <node id="4448824203" lat="47.3783248" lon="8.5386367" />
+  <node id="4448824204" lat="47.3783522" lon="8.5385317" />
+  <node id="6044110600" lat="47.3787783" lon="8.5367524" />
+  <node id="6044110601" lat="47.3788513" lon="8.5367961" />
+  <node id="6044110614" lat="47.3790574" lon="8.5360358" />
+  <node id="6044110615" lat="47.3789843" lon="8.535992" />
+  <node id="10618757787" lat="47.37942" lon="8.5344469" />
+  <way id="30612523">
+    <nd ref="338493236" />
+    <nd ref="338493232" />
+    <nd ref="3930468574" />
+    <nd ref="6044110600" />
+    <nd ref="6044110615" />
+    <nd ref="338493233" />
+    <nd ref="1236102515" />
+    <nd ref="10618757787" />
+    <nd ref="338494837" />
+    <nd ref="338493235" />
+    <nd ref="1236102510" />
+    <nd ref="6044110614" />
+    <nd ref="6044110601" />
+    <nd ref="3930468584" />
+    <nd ref="338493236" />
+  </way>
+  <way id="389887043">
+    <nd ref="3930468582" />
+    <nd ref="3930468577" />
+    <nd ref="3930468571" />
+    <nd ref="3930468578" />
+    <nd ref="3930468582" />
+  </way>
+  <way id="445003243">
+    <nd ref="4424600957" />
+    <nd ref="4424600959" />
+    <nd ref="4424600960" />
+    <nd ref="4424600958" />
+    <nd ref="4424600957" />
+  </way>
+  <way id="447820381">
+    <nd ref="4448824204" />
+    <nd ref="4448824202" />
+    <nd ref="4448824200" />
+    <nd ref="4448824201" />
+    <nd ref="4448824203" />
+    <nd ref="4448824204" />
+  </way>
+  <relation id="5832475">
+    <member type="way" ref="389887043" role="inner" />
+    <member type="way" ref="30612523" role="outer" />
+    <member type="way" ref="445003243" role="inner" />
+    <member type="way" ref="447820381" role="inner" />
+    <tag k="area" v="yes" />
+    <tag k="bench" v="yes" />
+    <tag k="bin" v="yes" />
+    <tag k="level" v="0" />
+    <tag k="lit" v="yes" />
+    <tag k="local_ref" v="10;11" />
+    <tag k="network" v="ZVV" />
+    <tag k="operator" v="SBB" />
+    <tag k="public_transport" v="platform" />
+    <tag k="railway" v="platform" />
+    <tag k="ref" v="10/11" />
+    <tag k="shelter" v="yes" />
+    <tag k="surface" v="asphalt" />
+    <tag k="tactile_paving" v="yes" />
+    <tag k="train" v="yes" />
+    <tag k="type" v="multipolygon" />
+    <tag k="wheelchair" v="yes" />
+  </relation>
+</osm>

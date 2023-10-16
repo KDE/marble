@@ -1,0 +1,34 @@
+<osm>
+  <node id="-6" lat="48.9928338" lon="8.3990478" />
+  <node id="-5" lat="48.9928338" lon="8.3989462" />
+  <node id="-4" lat="48.9928673" lon="8.3990478" />
+  <way id="-3">
+    <nd ref="-4" />
+    <nd ref="-5" />
+    <nd ref="-6" />
+    <nd ref="-4" />
+    <tag k="mx:oid" v="47199441" />
+  </way>
+  <relation id="-2">
+    <member type="way" ref="-3" role="outer" />
+    <tag k="bench" v="yes" />
+    <tag k="bin" v="yes" />
+    <tag k="covered" v="yes" />
+    <tag k="description" v="Karlsruhe Hauptbahnhof, Bahnsteig 5+6" />
+    <tag k="height" v="0.76" />
+    <tag k="level" v="1" />
+    <tag k="lit" v="yes" />
+    <tag k="local_ref" v="5;6" />
+    <tag k="mx:oid" v="3210511" />
+    <tag k="public_transport" v="platform" />
+    <tag k="railway" v="platform" />
+    <tag k="ref" v="5;6" />
+    <tag k="ref:IFOPT" v="de:08212:90:4:5;de:08212:90:4:6" />
+    <tag k="ref:IFOPT:description" v="Gleis 5;Gleis 6" />
+    <tag k="tactile_paving" v="no" />
+    <tag k="train" v="yes" />
+    <tag k="type" v="multipolygon" />
+    <tag k="wheelchair" v="yes" />
+    <tag k="wheelchair:description" v="Aufzug vorhanden. Kein barrierefreier Zugang vom Eingang Ost" />
+  </relation>
+</osm>

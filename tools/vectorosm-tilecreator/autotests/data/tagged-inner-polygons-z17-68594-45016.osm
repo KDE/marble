@@ -1,0 +1,262 @@
+<osm>
+  <node id="-8" lat="48.9928338" lon="8.3990545" />
+  <node id="-7" lat="48.9928338" lon="8.3990478" />
+  <node id="-6" lat="48.9928673" lon="8.3990478" />
+  <node id="-5" lat="48.9936033" lon="8.4017944" />
+  <node id="-4" lat="48.9935113" lon="8.4017944" />
+  <node id="534104954" lat="48.9934417" lon="8.4011487" />
+  <node id="534105882" lat="48.9932252" lon="8.4003102" />
+  <node id="534105892" lat="48.9931382" lon="8.4003538" />
+  <node id="1210425381" lat="48.9932334" lon="8.4007352">
+    <tag k="platform_section_sign_value" v="E" />
+    <tag k="public_transport" v="platform_section_sign" />
+    <tag k="railway:platform:section" v="E" />
+    <tag k="ref" v="E" />
+  </node>
+  <node id="1210425410" lat="48.9933217" lon="8.4006873">
+    <tag k="platform_section_sign_value" v="E" />
+    <tag k="public_transport" v="platform_section_sign" />
+    <tag k="railway:platform:section" v="E" />
+    <tag k="ref" v="E" />
+  </node>
+  <node id="1832753943" lat="48.9928842" lon="8.3993658" />
+  <node id="1832753947" lat="48.9930878" lon="8.3998759" />
+  <node id="1832753948" lat="48.992947" lon="8.3992893" />
+  <node id="1832753950" lat="48.993083" lon="8.4001396" />
+  <node id="1832753955" lat="48.9930607" lon="8.3998939" />
+  <node id="1832753956" lat="48.9928941" lon="8.3993583" />
+  <node id="1832753957" lat="48.9933574" lon="8.401199" />
+  <node id="1832753958" lat="48.9931712" lon="8.4000899" />
+  <node id="2460601340" lat="48.9933743" lon="8.4011588" />
+  <node id="2460601348" lat="48.993413" lon="8.4011357" />
+  <node id="2758430532" lat="48.9932947" lon="8.4009648" />
+  <node id="2758430543" lat="48.9933814" lon="8.4009121" />
+  <node id="2777511219" lat="48.9930662" lon="8.3996994" />
+  <node id="2794692490" lat="48.9932288" lon="8.4005831" />
+  <node id="2794692491" lat="48.9932315" lon="8.4005738" />
+  <node id="2794692493" lat="48.9932492" lon="8.4006621" />
+  <node id="2794692494" lat="48.9932502" lon="8.4005626" />
+  <node id="2794692495" lat="48.9932553" lon="8.4006662" />
+  <node id="2794692496" lat="48.9932563" lon="8.4005666" />
+  <node id="2794692497" lat="48.993274" lon="8.400655" />
+  <node id="2794692499" lat="48.9932767" lon="8.4006457" />
+  <node id="2794692500" lat="48.993288" lon="8.4008084" />
+  <node id="2794692501" lat="48.9932934" lon="8.4007937" />
+  <node id="2794692502" lat="48.9933027" lon="8.4008631" />
+  <node id="2794692503" lat="48.9933096" lon="8.400784" />
+  <node id="2794692504" lat="48.993313" lon="8.4008693" />
+  <node id="2794692506" lat="48.9933197" lon="8.4007904" />
+  <node id="2794692507" lat="48.993329" lon="8.40086" />
+  <node id="2794692509" lat="48.9933337" lon="8.4008439" />
+  <node id="2889922891" lat="48.9933182" lon="8.4008977" />
+  <node id="2889922892" lat="48.9933198" lon="8.4008923" />
+  <node id="2889922893" lat="48.9933276" lon="8.4009353" />
+  <node id="2889922894" lat="48.9933312" lon="8.4009376" />
+  <node id="2889922895" lat="48.993336" lon="8.4008829" />
+  <node id="2889922896" lat="48.9933395" lon="8.4008852" />
+  <node id="2889922897" lat="48.9933474" lon="8.4009281" />
+  <node id="2889922898" lat="48.993349" lon="8.4009228" />
+  <node id="3226381450" lat="48.9935349" lon="8.401725" />
+  <node id="3226381451" lat="48.9935408" lon="8.4017482" />
+  <node id="3226381454" lat="48.9935518" lon="8.4017149" />
+  <node id="3226381455" lat="48.9935578" lon="8.401738" />
+  <node id="3243178054" lat="48.9933228" lon="8.4009164">
+    <tag k="advertising" v="screen" />
+    <tag k="animated" v="yes" />
+    <tag k="direction" v="159" />
+    <tag k="faces" v="1" />
+    <tag k="indoor" v="yes" />
+    <tag k="level" v="0" />
+    <tag k="luminous" v="yes" />
+    <tag k="model" v="Infoscreen Station Video" />
+    <tag k="operator" v="Str&#246;er" />
+    <tag k="visibility" v="house" />
+  </node>
+  <node id="3243178055" lat="48.9933443" lon="8.400904">
+    <tag k="advertising" v="screen" />
+    <tag k="animated" v="yes" />
+    <tag k="direction" v="339" />
+    <tag k="faces" v="1" />
+    <tag k="indoor" v="yes" />
+    <tag k="level" v="0" />
+    <tag k="luminous" v="yes" />
+    <tag k="model" v="Infoscreen Station Video" />
+    <tag k="operator" v="Str&#246;er" />
+    <tag k="visibility" v="house" />
+  </node>
+  <node id="3305744388" lat="48.9934508" lon="8.4015603">
+    <tag k="platform_section_sign_value" v="D" />
+    <tag k="public_transport" v="platform_section_sign" />
+    <tag k="railway:platform:section" v="D" />
+    <tag k="ref" v="D" />
+  </node>
+  <node id="3305744394" lat="48.9935321" lon="8.4015091">
+    <tag k="platform_section_sign_value" v="D" />
+    <tag k="public_transport" v="platform_section_sign" />
+    <tag k="railway:platform:section" v="D" />
+    <tag k="ref" v="D" />
+  </node>
+  <node id="3348386654" lat="48.9931352" lon="8.4003423" />
+  <node id="3348386659" lat="48.9932207" lon="8.400292" />
+  <node id="3384576946" lat="48.9933937" lon="8.4011473" />
+  <node id="3611324610" lat="48.9933388" lon="8.4009331">
+    <tag k="automatic_door" v="yes" />
+    <tag k="door" v="sliding" />
+    <tag k="entrance" v="yes" />
+    <tag k="level" v="0" />
+    <tag k="ref" v="D08" />
+  </node>
+  <node id="3650233032" lat="48.9933393" lon="8.4009328">
+    <tag k="automatic_door" v="yes" />
+    <tag k="door" v="sliding" />
+    <tag k="entrance" v="yes" />
+    <tag k="level" v="1" />
+    <tag k="ref" v="D09" />
+  </node>
+  <node id="4688575434" lat="48.9933406" lon="8.4010277" />
+  <node id="4688575435" lat="48.9933792" lon="8.4010049" />
+  <way id="-13">
+    <nd ref="3226381451" />
+    <nd ref="3226381455" />
+    <nd ref="3226381454" />
+    <nd ref="3226381450" />
+    <nd ref="3226381451" />
+    <tag k="building" v="vending_machines" />
+    <tag k="building:material" v="metal" />
+    <tag k="level" v="1" />
+    <tag k="mx:oid" v="316513886" />
+    <tag k="roof:material" v="metal" />
+  </way>
+  <way id="-12">
+    <nd ref="2794692493" />
+    <nd ref="2794692495" />
+    <nd ref="2794692497" />
+    <nd ref="2794692499" />
+    <nd ref="2794692496" />
+    <nd ref="2794692494" />
+    <nd ref="2794692491" />
+    <nd ref="2794692490" />
+    <nd ref="2794692493" />
+    <tag k="building" v="hut" />
+    <tag k="building:colour" v="#888888" />
+    <tag k="building:levels" v="1" />
+    <tag k="building:material" v="glass" />
+    <tag k="height" v="3" />
+    <tag k="level" v="1" />
+    <tag k="mx:oid" v="272837663" />
+    <tag k="roof:shape" v="flat" />
+  </way>
+  <way id="-11">
+    <nd ref="2794692502" />
+    <nd ref="2794692504" />
+    <nd ref="2794692507" />
+    <nd ref="2794692509" />
+    <nd ref="2794692506" />
+    <nd ref="2794692503" />
+    <nd ref="2794692501" />
+    <nd ref="2794692500" />
+    <nd ref="2794692502" />
+    <tag k="access" v="private" />
+    <tag k="building" v="yes" />
+    <tag k="building:levels" v="1" />
+    <tag k="description" v="DB Service Personal" />
+    <tag k="height" v="3" />
+    <tag k="level" v="1" />
+    <tag k="mx:oid" v="274801746" />
+    <tag k="roof:shape" v="flat" />
+  </way>
+  <way id="-10">
+    <nd ref="2460601340" />
+    <nd ref="3384576946" />
+    <nd ref="2460601348" />
+    <nd ref="4688575435" />
+    <nd ref="4688575434" />
+    <nd ref="2460601340" />
+    <tag k="mx:oid" v="238212008" />
+  </way>
+  <way id="-9">
+    <nd ref="3243178054" />
+    <nd ref="2889922893" />
+    <nd ref="2889922894" />
+    <nd ref="3611324610" />
+    <nd ref="3650233032" />
+    <nd ref="2889922897" />
+    <nd ref="2889922898" />
+    <nd ref="3243178055" />
+    <nd ref="2889922896" />
+    <nd ref="2889922895" />
+    <nd ref="2889922892" />
+    <nd ref="2889922891" />
+    <nd ref="3243178054" />
+    <tag k="building:colour" v="#808080" />
+    <tag k="building:levels" v="1" />
+    <tag k="building:material" v="glass" />
+    <tag k="building:part" v="elevator" />
+    <tag k="height" v="4" />
+    <tag k="indoor" v="room" />
+    <tag k="level" v="0;1" />
+    <tag k="levelpart" v="elevator_platform" />
+    <tag k="mx:oid" v="270880469" />
+    <tag k="ref" v="A05" />
+    <tag k="roof:colour" v="#808080" />
+    <tag k="roof:material" v="metal" />
+    <tag k="roof:shape" v="flat" />
+    <tag k="room" v="elevator" />
+  </way>
+  <way id="-3">
+    <nd ref="1832753947" />
+    <nd ref="1832753955" />
+    <nd ref="1832753956" />
+    <nd ref="1832753943" />
+    <nd ref="1832753950" />
+    <nd ref="3348386654" />
+    <nd ref="534105892" />
+    <nd ref="1210425381" />
+    <nd ref="2758430532" />
+    <nd ref="1832753957" />
+    <nd ref="3305744388" />
+    <nd ref="-4" />
+    <nd ref="-5" />
+    <nd ref="3305744394" />
+    <nd ref="534104954" />
+    <nd ref="2758430543" />
+    <nd ref="1210425410" />
+    <nd ref="534105882" />
+    <nd ref="3348386659" />
+    <nd ref="1832753958" />
+    <nd ref="2777511219" />
+    <nd ref="1832753948" />
+    <nd ref="-6" />
+    <nd ref="-7" />
+    <nd ref="-8" />
+    <nd ref="1832753947" />
+    <tag k="mx:oid" v="47199441" />
+  </way>
+  <relation id="-2">
+    <member type="way" ref="-3" role="outer" />
+    <member type="way" ref="-9" role="inner" />
+    <member type="way" ref="-10" role="inner" />
+    <member type="way" ref="-11" role="inner" />
+    <member type="way" ref="-12" role="inner" />
+    <member type="way" ref="-13" role="inner" />
+    <tag k="bench" v="yes" />
+    <tag k="bin" v="yes" />
+    <tag k="covered" v="yes" />
+    <tag k="description" v="Karlsruhe Hauptbahnhof, Bahnsteig 5+6" />
+    <tag k="height" v="0.76" />
+    <tag k="level" v="1" />
+    <tag k="lit" v="yes" />
+    <tag k="local_ref" v="5;6" />
+    <tag k="mx:oid" v="3210511" />
+    <tag k="public_transport" v="platform" />
+    <tag k="railway" v="platform" />
+    <tag k="ref" v="5;6" />
+    <tag k="ref:IFOPT" v="de:08212:90:4:5;de:08212:90:4:6" />
+    <tag k="ref:IFOPT:description" v="Gleis 5;Gleis 6" />
+    <tag k="tactile_paving" v="no" />
+    <tag k="train" v="yes" />
+    <tag k="type" v="multipolygon" />
+    <tag k="wheelchair" v="yes" />
+    <tag k="wheelchair:description" v="Aufzug vorhanden. Kein barrierefreier Zugang vom Eingang Ost" />
+  </relation>
+</osm>

@@ -1,0 +1,49 @@
+<osm>
+  <node id="1042870956" lat="48.9942561" lon="8.4001201" />
+  <node id="1042870960" lat="48.994288" lon="8.4000047" />
+  <node id="1042870961" lat="48.9943095" lon="8.4000883" />
+  <node id="1042870964" lat="48.9942346" lon="8.4000365" />
+  <node id="3633376974" lat="48.9942697" lon="8.400112">
+    <tag k="entrance" v="yes" />
+    <tag k="level" v="0" />
+  </node>
+  <way id="-2">
+    <nd ref="1042870956" />
+    <nd ref="3633376974" />
+    <nd ref="1042870961" />
+    <nd ref="1042870960" />
+    <nd ref="1042870964" />
+    <nd ref="1042870956" />
+    <tag k="addr:city" v="Karlsruhe" />
+    <tag k="addr:housenumber" v="1" />
+    <tag k="addr:postcode" v="76137" />
+    <tag k="addr:street" v="Bahnhofplatz" />
+    <tag k="building" v="retail" />
+    <tag k="building:colour" v="grey" />
+    <tag k="building:levels" v="1" />
+    <tag k="building:material" v="glass" />
+    <tag k="contact:phone" v="+49 721 61075885" />
+    <tag k="contact:website" v="https://www.kvv.de/service/kundenzentren.html" />
+    <tag k="height" v="4" />
+    <tag k="information" v="office" />
+    <tag k="information:kvv" v="office" />
+    <tag k="level" v="0" />
+    <tag k="mx:oid" v="89970073" />
+    <tag k="name" v="KVV Kundenzentrum Hauptbahnhof" />
+    <tag k="opening_hours" v="Mo-Fr 09:00-19:00; Sa 09:30-17:15" />
+    <tag k="opening_hours:url" v="https://www.kvv.de/service/kundenzentren.html" />
+    <tag k="operator" v="Karlsruher Verkehrsverbund" />
+    <tag k="payment:cash" v="yes" />
+    <tag k="payment:credit_cards" v="yes" />
+    <tag k="payment:debit_cards" v="yes" />
+    <tag k="payment:visa" v="yes" />
+    <tag k="public_transport" v="service_centre" />
+    <tag k="ref" v="R29" />
+    <tag k="roof:colour" v="grey" />
+    <tag k="roof:shape" v="flat" />
+    <tag k="shop" v="ticket" />
+    <tag k="surveillance" v="indoor" />
+    <tag k="tourism" v="information" />
+    <tag k="wheelchair" v="yes" />
+  </way>
+</osm>

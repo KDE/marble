@@ -1,0 +1,24 @@
+<osm>
+  <node id="-5" lat="52.4727431" lon="13.4417725" />
+  <node id="-4" lat="52.4727431" lon="13.4415628" />
+  <node id="-3" lat="52.4727432" lon="13.4417725" />
+  <node id="6147069425" lat="52.472884" lon="13.4416853" />
+  <node id="6147069428" lat="52.4728476" lon="13.4415445" />
+  <way id="-2">
+    <nd ref="-3" />
+    <nd ref="6147069425" />
+    <nd ref="6147069428" />
+    <nd ref="-4" />
+    <nd ref="-5" />
+    <nd ref="-3" />
+    <tag k="amenity" v="kindergarten" />
+    <tag k="contact:email" v="ev-kita.magdalenen@kk-neukoelln.de" />
+    <tag k="contact:phone" v="+49 30 56825759" />
+    <tag k="contact:website" v="http://www.ev-kitas-neukoelln.de/kita/kindertagesstaetten/kita-magdalenen.html" />
+    <tag k="denomination" v="protestant" />
+    <tag k="mx:oid" v="656180437" />
+    <tag k="name" v="Kita Magdalenen" />
+    <tag k="operator" v="Kirchenkreis Neuk&#246;lln" />
+    <tag k="religion" v="christian" />
+  </way>
+</osm>

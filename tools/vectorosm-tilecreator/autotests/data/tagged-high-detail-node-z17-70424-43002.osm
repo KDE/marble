@@ -1,0 +1,5 @@
+<osm>
+  <node id="9961881074" lat="52.4914035" lon="13.4261044">
+    <tag k="highway" v="street_lamp" />
+  </node>
+</osm>

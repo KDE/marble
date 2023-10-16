@@ -1,0 +1,26 @@
+<osm>
+  <node id="-8" lat="53.595765" lon="9.9369827" />
+  <node id="-7" lat="53.595765" lon="9.9369666" />
+  <node id="-5" lat="53.595765" lon="9.9371338" />
+  <node id="-4" lat="53.595765" lon="9.937106" />
+  <node id="-3" lat="53.5957788" lon="9.9371338" />
+  <node id="9851343487" lat="53.595769" lon="9.9371166" />
+  <node id="9851343490" lat="53.5957672" lon="9.9369668" />
+  <way id="-6">
+    <nd ref="9851343490" />
+    <nd ref="-7" />
+    <nd ref="-8" />
+    <nd ref="9851343490" />
+    <tag k="mx:oid" v="1075816449" />
+    <tag k="natural" v="grassland" />
+  </way>
+  <way id="-2">
+    <nd ref="-3" />
+    <nd ref="9851343487" />
+    <nd ref="-4" />
+    <nd ref="-5" />
+    <nd ref="-3" />
+    <tag k="mx:oid" v="1075816449" />
+    <tag k="natural" v="grassland" />
+  </way>
+</osm>

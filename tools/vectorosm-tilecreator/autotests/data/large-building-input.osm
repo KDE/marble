@@ -1,0 +1,82 @@
+<osm>
+  <node id="52105512" lat="53.5622748" lon="9.9863727" />
+  <node id="205097615" lat="53.5614648" lon="9.984776" />
+  <node id="345576518" lat="53.5631953" lon="9.9846597" />
+  <node id="424083069" lat="53.5616282" lon="9.9851899" />
+  <node id="424083077" lat="53.5626568" lon="9.9842969" />
+  <node id="674455166" lat="53.56122" lon="9.9858548" />
+  <node id="674455202" lat="53.5615737" lon="9.9846541" />
+  <node id="674455213" lat="53.5627694" lon="9.9841695" />
+  <node id="674455215" lat="53.561545" lon="9.9845813" />
+  <node id="674455279" lat="53.5625279" lon="9.9835575" />
+  <node id="674455300" lat="53.5616988" lon="9.9853688" />
+  <node id="674455304" lat="53.5622077" lon="9.9839157" />
+  <node id="674455347" lat="53.5621869" lon="9.9838631" />
+  <node id="674697986" lat="53.5627643" lon="9.984317">
+    <tag k="entrance" v="yes" />
+  </node>
+  <node id="674725389" lat="53.562693" lon="9.9843879" />
+  <node id="1997879679" lat="53.5623079" lon="9.9863139" />
+  <node id="1997879681" lat="53.562329" lon="9.9863301" />
+  <node id="1997879698" lat="53.5626667" lon="9.985641" />
+  <node id="1997879699" lat="53.5626791" lon="9.9856723" />
+  <node id="2587233847" lat="53.5628748" lon="9.984201" />
+  <node id="5256183555" lat="53.561768" lon="9.9843317" />
+  <node id="5256183556" lat="53.5619785" lon="9.9840963" />
+  <node id="5304661290" lat="53.5619742" lon="9.9866886" />
+  <node id="5304661292" lat="53.5616796" lon="9.9865055" />
+  <node id="6373555860" lat="53.56206" lon="9.9867832" />
+  <node id="7562991591" lat="53.5619035" lon="9.9868257" />
+  <node id="9330210289" lat="53.561271" lon="9.9859261">
+    <tag k="entrance" v="yes" />
+  </node>
+  <node id="9429195609" lat="53.5615164" lon="9.986274">
+    <tag k="addr:housenumber" v="1" />
+    <tag k="addr:street" v="Congressplatz" />
+    <tag k="entrance" v="main" />
+  </node>
+  <way id="6236975">
+    <nd ref="5304661292" />
+    <nd ref="9429195609" />
+    <nd ref="9330210289" />
+    <nd ref="674455166" />
+    <nd ref="674455300" />
+    <nd ref="424083069" />
+    <nd ref="205097615" />
+    <nd ref="674455202" />
+    <nd ref="674455215" />
+    <nd ref="5256183555" />
+    <nd ref="5256183556" />
+    <nd ref="674455347" />
+    <nd ref="674455304" />
+    <nd ref="674455279" />
+    <nd ref="674455213" />
+    <nd ref="424083077" />
+    <nd ref="674725389" />
+    <nd ref="674697986" />
+    <nd ref="2587233847" />
+    <nd ref="345576518" />
+    <nd ref="1997879698" />
+    <nd ref="1997879699" />
+    <nd ref="1997879681" />
+    <nd ref="1997879679" />
+    <nd ref="52105512" />
+    <nd ref="6373555860" />
+    <nd ref="5304661290" />
+    <nd ref="7562991591" />
+    <nd ref="5304661292" />
+    <tag k="addr:city" v="Hamburg" />
+    <tag k="addr:country" v="DE" />
+    <tag k="addr:housenumber" v="2" />
+    <tag k="addr:postcode" v="20355" />
+    <tag k="addr:street" v="Congressplatz" />
+    <tag k="building" v="public" />
+    <tag k="description" v="congress and conference center" />
+    <tag k="name" v="Congress Center Hamburg" />
+    <tag k="short_name" v="CCH" />
+    <tag k="surveillance" v="indoor" />
+    <tag k="website" v="http://www.cch.de/" />
+    <tag k="wikidata" v="Q896114" />
+    <tag k="wikipedia" v="de:Congress Center Hamburg" />
+  </way>
+</osm>

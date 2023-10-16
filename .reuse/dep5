@@ -19,3 +19,6 @@ Files: data/svg/osmc-symbols/*
 Copyright: OpenStreetMap contributors <data@osmfoundation.org>
 License: CC0-1.0
 
+Files: tools/vectorosm-tilecreator/autotests/data/*.osm
+Copyright: © OpenStreetMap contributors
+License: ODbL-1.0

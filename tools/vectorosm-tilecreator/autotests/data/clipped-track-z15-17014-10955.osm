@@ -1,0 +1,16 @@
+<osm>
+  <node id="-3" lat="51.1035219" lon="6.9281213" />
+  <node id="68833502" lat="51.1032965" lon="6.9269255" />
+  <node id="3819756093" lat="51.1033332" lon="6.9273242" />
+  <way id="-2">
+    <nd ref="68833502" />
+    <nd ref="3819756093" />
+    <nd ref="-3" />
+    <tag k="highway" v="track" />
+    <tag k="lit" v="no" />
+    <tag k="motor_vehicle" v="no" />
+    <tag k="mx:bp" v="2+3" />
+    <tag k="mx:oid" v="9218626" />
+    <tag k="surface" v="asphalt" />
+  </way>
+</osm>
