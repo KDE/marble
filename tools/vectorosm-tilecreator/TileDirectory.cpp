@@ -48,12 +48,13 @@ TileDirectory::TileDirectory(TileType tileType, const QString &cacheDir, Parsing
     QDir().mkpath(m_baseDir);
 }
 
-TileDirectory::TileDirectory(const QString &cacheDir, const QString &osmxFile, ParsingRunnerManager &manager, int maxZoomLevel, int loadZoomLevel) :
+TileDirectory::TileDirectory(const QString &cacheDir, const QString &osmxFile, ParsingRunnerManager &manager, int maxZoomLevel, int loadZoomLevel, InputType inputType) :
     m_cacheDir(cacheDir),
     m_osmxFile(osmxFile),
     m_manager(manager),
     m_zoomLevel(loadZoomLevel),
     m_tileType(OpenStreetMap),
+    m_inputType(inputType),
     m_maxZoomLevel(maxZoomLevel)
 {
 }
@@ -75,7 +76,7 @@ QSharedPointer<GeoDataDocument> TileDirectory::load(int zoomLevel, int tileX, in
     m_tileX = tile.x();
     m_tileY = tile.y();
 
-    if (!m_osmxFile.isEmpty()) {
+    if (!m_osmxFile.isEmpty() && m_inputType == OsmxInput) {
         const auto tileBox = m_tileProjection.geoCoordinates(tile);
         const QString bbox = QString::number(tileBox.south(GeoDataCoordinates::Degree))
             + QLatin1Char(',') + QString::number(tileBox.west(GeoDataCoordinates::Degree))
@@ -99,6 +100,8 @@ QSharedPointer<GeoDataDocument> TileDirectory::load(int zoomLevel, int tileX, in
         }
 
         m_landmass = open(tempPbfFile.fileName(), m_manager);
+    } else if (!m_osmxFile.isEmpty() && m_inputType == RawInput) {
+        m_landmass = open(m_osmxFile, m_manager);
     } else {
         QString const filename = QString("%1/%2/%3.%4").arg(m_baseDir).arg(tile.x()).arg(tile.y()).arg("o5m");
         m_landmass = open(filename, m_manager);

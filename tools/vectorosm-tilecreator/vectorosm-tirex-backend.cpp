@@ -64,6 +64,7 @@ int main(int argc, char **argv)
     QCommandLineParser parser;
     parser.addOptions({
                       {{"c", "cache-directory"}, "Directory for temporary data.", "cache"},
+                      {"source", "source file to load instead of doing an osmx query.", "source"},
                       {"x", "x coordinate of the requested tile", "x"},
                       {"y", "y coordinate of the requested tile", "y"},
                       {"z", "zoom level of the requested tile", "z"},
@@ -84,6 +85,8 @@ int main(int argc, char **argv)
         cacheDirectory = parser.value("cache-directory");
     }
 
+    const QString sourceFile = parser.value("source");
+
     QObject::connect(&backend, &TirexBackend::tileRequested, &app, [&](const TirexMetatileRequest &req) {
         // assuming the requested meta tile is a square power of two, we break that down into square power-of-two blocks
         // for high zoom levels using few (or even just one block is most efficient), for lower zoom levels we need to use
@@ -99,7 +102,7 @@ int main(int argc, char **argv)
         const int blockColumns = backend.metatileColumns() / blockSize;
         const int blockRows = backend.metatileRows() / blockSize;
 
-        TileDirectory mapTiles(cacheDirectory, QStringLiteral("planet.osmx"), manager, req.tile.z, loadZ);
+        TileDirectory mapTiles(cacheDirectory, sourceFile.isEmpty() ? QStringLiteral("planet.osmx") :sourceFile, manager, req.tile.z, loadZ, sourceFile.isEmpty() ? TileDirectory::OsmxInput : TileDirectory::RawInput);
         TileDirectory landTiles(TileDirectory::Landmass, cacheDirectory, manager, req.tile.z);
 
         QSaveFile f(backend.metatileFileName(req));

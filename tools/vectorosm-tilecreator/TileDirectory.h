@@ -51,6 +51,12 @@ public:
         OpenStreetMap
     };
 
+    enum InputType
+    {
+        OsmxInput,
+        RawInput
+    };
+
     TileDirectory(TileType tileType, const QString &cacheDir, ParsingRunnerManager &manager, int maxZoomLevel);
     /** Create a tile directory for loading data from an OSMX file.
      *  @param maxZoomLevel The output zoom level.
@@ -58,8 +64,10 @@ public:
      *  This must be smaller or equal to maxZoomLevel. Using a smaller value can be more efficient when
      *  generating a larger batch of tiles that fall within a lower zoom level tile, but comes at a greater
      *  cost for memory and clipping operations.
+     *  @param inputType specifies whether to query from an OSMX file or whether to load the input file entirely.
+     *  The latter is used for automated testing.
      */
-    TileDirectory(const QString &cacheDir, const QString &osmxFile, ParsingRunnerManager &manager, int maxZoomLevel, int loadZoomLevel);
+    TileDirectory(const QString &cacheDir, const QString &osmxFile, ParsingRunnerManager &manager, int maxZoomLevel, int loadZoomLevel, InputType inputType);
 
     QSharedPointer<GeoDataDocument> load(int zoomLevel, int tileX, int tileY);
     void setInputFile(const QString &filename);
@@ -101,6 +109,7 @@ private:
     QSharedPointer<VectorClipper> m_clipper;
     QSharedPointer<TagsFilter> m_tagsFilter;
     TileType m_tileType;
+    InputType m_inputType = OsmxInput;
     QString m_inputFile;
     GeoDataLatLonBox m_boundingBox;
     QVector<GeoDataLinearRing> m_boundingPolygon;
