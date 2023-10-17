@@ -43,7 +43,6 @@ private:
     QVector<GeoDataPlacemark*> potentialIntersections(const GeoDataLatLonBox &box) const;
     ClipperLib::Path clipPath(const GeoDataLatLonBox &box, int zoomLevel) const;
     qreal area(const GeoDataLinearRing &ring);
-    void getBounds(const ClipperLib::Path &path, ClipperLib::cInt &minX, ClipperLib::cInt &maxX, ClipperLib::cInt &minY, ClipperLib::cInt &maxY) const;
 
     // convert radian-based coordinates to 10^-7 degree (100 nanodegree) integer coordinates used by the clipper library
     constexpr static qint64 const s_pointScale = 10000000 / M_PI * 180;
@@ -59,7 +58,6 @@ private:
     template<class T>
     static void pathToRing(const ClipperLib::Path &path, T *ring, const OsmPlacemarkData &originalOsmData, OsmPlacemarkData &newOsmData, const QHash<std::pair<ClipperLib::cInt, ClipperLib::cInt>, const GeoDataCoordinates*> &coordMap)
     {
-        int index = 0;
         for(const auto &point: path) {
             const auto it = coordMap.find(std::make_pair(point.X, point.Y));
             if (it != coordMap.end()) {
@@ -71,7 +69,6 @@ private:
             } else {
                 *ring << pointToCoordinate(point);
             }
-            ++index;
         }
     }
 
@@ -105,8 +102,6 @@ private:
             coordMap.insert(std::make_pair(p.X, p.Y), &node);
             subject.push_back(std::move(p));
         }
-        cInt minX, maxX, minY, maxY;
-        getBounds(tileBoundary, minX, maxX, minY, maxY);
 
         Clipper clipper;
         clipper.PreserveCollinear(true);

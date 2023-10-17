@@ -192,27 +192,6 @@ qreal VectorClipper::area(const GeoDataLinearRing &ring)
     return result;
 }
 
-void VectorClipper::getBounds(const ClipperLib::Path &path, ClipperLib::cInt &minX, ClipperLib::cInt &maxX, ClipperLib::cInt &minY, ClipperLib::cInt &maxY) const
-{
-    Q_ASSERT(!path.empty());
-    minX = path[0].X;
-    maxX = minX;
-    minY = path[0].Y;
-    maxY = minY;
-    for (auto const & point: path) {
-        if (point.X < minX) {
-            minX = point.X;
-        } else if (point.X > maxX) {
-            maxX = point.X;
-        }
-        if (point.Y < minY) {
-            minY = point.Y;
-        } else if (point.Y > maxY) {
-            maxY = point.Y;
-        }
-    }
-}
-
 void VectorClipper::clipPolygon(const GeoDataPlacemark *placemark, const ClipperLib::Path &tileBoundary, qreal minArea,
                                 GeoDataDocument *document, QSet<qint64> &osmIds)
 {
@@ -239,8 +218,6 @@ void VectorClipper::clipPolygon(const GeoDataPlacemark *placemark, const Clipper
         path.push_back(std::move(p));
     }
 
-    cInt minX, maxX, minY, maxY;
-    getBounds(tileBoundary, minX, maxX, minY, maxY);
     Clipper clipper;
     clipper.PreserveCollinear(true);
     clipper.AddPath(tileBoundary, ptClip, true);
