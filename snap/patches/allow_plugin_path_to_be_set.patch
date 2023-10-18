@@ -1,0 +1,17 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index b77950104..2d24baf04 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -216,9 +216,9 @@ elseif(ANDROID)
+       set(data_dir "${CMAKE_INSTALL_PREFIX}/assets/data")
+       set(locale_dir "${data_dir}/locale")
+ else() # Linux / bsd etc...
+-      set(data_dir ${CMAKE_INSTALL_FULL_DATAROOTDIR}/marble/data)
+-      set(locale_dir "${CMAKE_INSTALL_FULL_DATAROOTDIR}/locale")
+-      set(plugin_dir ${CMAKE_INSTALL_FULL_LIBDIR}/marble/plugins)
++      set(data_dir "${CMAKE_INSTALL_PREFIX}/share/marble/data")
++      set(locale_dir "${CMAKE_INSTALL_PREFIX}/share/locale")
++      set(plugin_dir "${CMAKE_INSTALL_LIBDIR}/marble/plugins")
+ endif()
+
+ if(NOT ICON_INSTALL_DIR)
