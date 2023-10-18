@@ -19,7 +19,7 @@
 #include <OsmObjectManager.h>
 #include "GeoDataDocument.h"
 
-#include "clipper/clipper.hpp"
+#include "clipper2/clipper.h"
 #include <QMap>
 #include <QSet>
 
@@ -41,25 +41,25 @@ public:
 private:
     GeoDataDocument* clipTo(const GeoDataLatLonBox &box, int zoomLevel);
     QVector<GeoDataPlacemark*> potentialIntersections(const GeoDataLatLonBox &box) const;
-    ClipperLib::Path clipPath(const GeoDataLatLonBox &box, int zoomLevel) const;
+    Clipper2Lib::Path64 clipPath(const GeoDataLatLonBox &box, int zoomLevel) const;
     qreal area(const GeoDataLinearRing &ring);
 
     // convert radian-based coordinates to 10^-7 degree (100 nanodegree) integer coordinates used by the clipper library
     constexpr static qint64 const s_pointScale = 10000000 / M_PI * 180;
-    static inline ClipperLib::IntPoint coordinateToPoint(const GeoDataCoordinates &c)
+    static inline Clipper2Lib::Point64 coordinateToPoint(const GeoDataCoordinates &c)
     {
-        return ClipperLib::IntPoint(qRound64(c.longitude() * s_pointScale), qRound64(c.latitude() * s_pointScale));
+        return Clipper2Lib::Point64(qRound64(c.longitude() * s_pointScale), qRound64(c.latitude() * s_pointScale));
     }
-    static inline GeoDataCoordinates pointToCoordinate(ClipperLib::IntPoint p)
+    static inline GeoDataCoordinates pointToCoordinate(Clipper2Lib::Point64 p)
     {
-        return GeoDataCoordinates((double)p.X / s_pointScale, (double)p.Y / s_pointScale);
+        return GeoDataCoordinates((double)p.x / s_pointScale, (double)p.y / s_pointScale);
     }
 
     template<class T>
-    static void pathToRing(const ClipperLib::Path &path, T *ring, const OsmPlacemarkData &originalOsmData, OsmPlacemarkData &newOsmData, const QHash<std::pair<ClipperLib::cInt, ClipperLib::cInt>, const GeoDataCoordinates*> &coordMap)
+    static void pathToRing(const Clipper2Lib::Path64 &path, T *ring, const OsmPlacemarkData &originalOsmData, OsmPlacemarkData &newOsmData, const QHash<std::pair<int64_t, int64_t>, const GeoDataCoordinates*> &coordMap)
     {
         for(const auto &point: path) {
-            const auto it = coordMap.find(std::make_pair(point.X, point.Y));
+            const auto it = coordMap.find(std::make_pair(point.x, point.y));
             if (it != coordMap.end()) {
                 *ring << *it.value();
                 auto const data = originalOsmData.nodeReference(*it.value());
@@ -73,7 +73,7 @@ private:
     }
 
     template<class T>
-    void clipString(const GeoDataPlacemark *placemark, const ClipperLib::Path &tileBoundary, qreal minArea,
+    void clipString(const GeoDataPlacemark *placemark, const Clipper2Lib::Path64 &tileBoundary, qreal minArea,
                     GeoDataDocument* document, QSet<qint64> &osmIds)
     {
         if (osmIds.contains(placemark->osmData().id())) {
@@ -94,26 +94,29 @@ private:
         if (isClosed && minArea > 0.0 && area(*static_cast<const GeoDataLinearRing*>(ring)) < minArea) {
             return;
         }
-        using namespace ClipperLib;
-        Path subject;
-        QHash<std::pair<cInt, cInt>, const GeoDataCoordinates*> coordMap;
+        using namespace Clipper2Lib;
+        Path64 subject;
+        QHash<std::pair<int64_t, int64_t>, const GeoDataCoordinates*> coordMap;
         for(auto const & node: *ring) {
             auto p = coordinateToPoint(node);
-            coordMap.insert(std::make_pair(p.X, p.Y), &node);
+            coordMap.insert(std::make_pair(p.x, p.y), &node);
             subject.push_back(std::move(p));
         }
 
-        Clipper clipper;
-        clipper.PreserveCollinear(true);
-        clipper.AddPath(tileBoundary, ptClip, true);
-        clipper.AddPath(subject, ptSubject, isClosed);
-        PolyTree tree;
-        clipper.Execute(ctIntersection, tree);
-        Paths paths;
+        Clipper64 clipper;
+        clipper.PreserveCollinear = true;
+        clipper.AddClip({tileBoundary});
         if (isClosed) {
-            ClosedPathsFromPolyTree(tree, paths);
+            clipper.AddSubject({subject});
         } else {
-            OpenPathsFromPolyTree(tree, paths);
+            clipper.AddOpenSubject({subject});
+        }
+        Paths64 paths;
+        if (isClosed) {
+            clipper.Execute(ClipType::Intersection, FillRule::EvenOdd, paths);
+        } else {
+            Paths64 closedPaths;
+            clipper.Execute(ClipType::Intersection, FillRule::EvenOdd, closedPaths, paths);
         }
         for(const auto &path: paths) {
             GeoDataPlacemark* newPlacemark = new GeoDataPlacemark;
@@ -141,7 +144,7 @@ private:
         }
     }
 
-    void clipPolygon(const GeoDataPlacemark *placemark, const ClipperLib::Path &tileBoundary, qreal minArea,
+    void clipPolygon(const GeoDataPlacemark *placemark, const Clipper2Lib::Path64 &tileBoundary, qreal minArea,
                      GeoDataDocument* document, QSet<qint64> &osmIds);
 
     void copyTags(const GeoDataPlacemark &source, GeoDataPlacemark &target) const;

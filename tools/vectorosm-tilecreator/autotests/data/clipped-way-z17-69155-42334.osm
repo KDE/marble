@@ -4,12 +4,12 @@
   <node id="9860327307" lat="53.5957389" lon="9.9403406" />
   <node id="9860327308" lat="53.5957143" lon="9.940284" />
   <way id="-2">
-    <nd ref="-3" />
-    <nd ref="9860327306" />
-    <nd ref="9860327307" />
     <nd ref="9860327308" />
+    <nd ref="9860327307" />
+    <nd ref="9860327306" />
+    <nd ref="-3" />
     <tag k="man_made" v="embankment" />
-    <tag k="mx:bp" v="0+4" />
+    <tag k="mx:bp" v="3+4" />
     <tag k="mx:oid" v="1075097433" />
   </way>
 </osm>
