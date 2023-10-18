@@ -20,6 +20,9 @@ include_directories(
 add_library(${TARGET} STATIC
 ../mbtile-import/MbTileWriter.cpp
 clipper/clipper.cpp
+clipper2/clipper.engine.cpp
+clipper2/clipper.offset.cpp
+clipper2/clipper.rectclip.cpp
 NodeReducer.cpp
 PeakAnalyzer.cpp
 SpellChecker.cpp
