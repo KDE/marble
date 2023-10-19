@@ -12843,7 +12843,7 @@ msgstr "Retirar os elementos seleccionados"
 #: src/lib/marble/TourWidget.cpp:548
 msgctxt "QObject|"
 msgid "Are you sure want to remove selected items?"
-msgstr "Está seguro de que quere eliminar os elementos seleccionados?"
+msgstr "Seguro que quere eliminar os elementos seleccionados?"
 
 #: src/lib/marble/TourWidget.cpp:829
 msgctxt "QObject|"
@@ -12860,8 +12860,8 @@ msgctxt "QObject|"
 msgid ""
 "Are you sure want to discard all unsaved changes and close current document?"
 msgstr ""
-"Está seguro de que quere esquecer todos os cambios que non gardase "
-"previamente e pechar o documento actual?"
+"Seguro que quere esquecer todos os cambios que non gardase previamente e "
+"pechar o documento actual?"
 
 #: src/lib/marble/TourWidget.ui:14
 msgctxt "TourWidget|"
