@@ -41,7 +41,7 @@ public:
 private:
     GeoDataDocument* clipTo(const GeoDataLatLonBox &box, int zoomLevel);
     QVector<GeoDataPlacemark*> potentialIntersections(const GeoDataLatLonBox &box) const;
-    Clipper2Lib::Path64 clipPath(const GeoDataLatLonBox &box, int zoomLevel) const;
+    static Clipper2Lib::Rect64 clipRect(const GeoDataLatLonBox &box);
     qreal area(const GeoDataLinearRing &ring);
 
     // convert radian-based coordinates to 10^-7 degree (100 nanodegree) integer coordinates used by the clipper library
@@ -73,7 +73,7 @@ private:
     }
 
     template<class T>
-    void clipString(const GeoDataPlacemark *placemark, const Clipper2Lib::Path64 &tileBoundary, qreal minArea,
+    void clipString(const GeoDataPlacemark *placemark, const Clipper2Lib::Rect64 &tileBoundary, qreal minArea,
                     GeoDataDocument* document, QSet<qint64> &osmIds)
     {
         if (osmIds.contains(placemark->osmData().id())) {
@@ -103,20 +103,11 @@ private:
             subject.push_back(std::move(p));
         }
 
-        Clipper64 clipper;
-        clipper.PreserveCollinear = true;
-        clipper.AddClip({tileBoundary});
-        if (isClosed) {
-            clipper.AddSubject({subject});
-        } else {
-            clipper.AddOpenSubject({subject});
-        }
         Paths64 paths;
         if (isClosed) {
-            clipper.Execute(ClipType::Intersection, FillRule::EvenOdd, paths);
+            paths = Clipper2Lib::RectClip(tileBoundary, subject);
         } else {
-            Paths64 closedPaths;
-            clipper.Execute(ClipType::Intersection, FillRule::EvenOdd, closedPaths, paths);
+            paths = Clipper2Lib::RectClipLines(tileBoundary, {subject});
         }
         for(const auto &path: paths) {
             GeoDataPlacemark* newPlacemark = new GeoDataPlacemark;
@@ -144,7 +135,7 @@ private:
         }
     }
 
-    void clipPolygon(const GeoDataPlacemark *placemark, const Clipper2Lib::Path64 &tileBoundary, qreal minArea,
+    void clipPolygon(const GeoDataPlacemark *placemark, const Clipper2Lib::Rect64 &tileBoundary, qreal minArea,
                      GeoDataDocument* document, QSet<qint64> &osmIds);
 
     void copyTags(const GeoDataPlacemark &source, GeoDataPlacemark &target) const;

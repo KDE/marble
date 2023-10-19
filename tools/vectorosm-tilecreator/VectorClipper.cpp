@@ -51,7 +51,7 @@ GeoDataDocument *VectorClipper::clipTo(const GeoDataLatLonBox &tileBoundary, int
 {
     bool const filterSmallAreas = zoomLevel > 10 && zoomLevel < 17;
     GeoDataDocument* tile = new GeoDataDocument();
-    auto const clip = clipPath(tileBoundary, zoomLevel);
+    auto const clip = clipRect(tileBoundary);
     GeoDataLinearRing ring;
     ring << GeoDataCoordinates(tileBoundary.west(), tileBoundary.north());
     ring << GeoDataCoordinates(tileBoundary.east(), tileBoundary.north());
@@ -126,36 +126,10 @@ GeoDataDocument *VectorClipper::clipTo(unsigned int zoomLevel, unsigned int tile
     return tile;
 }
 
-Clipper2Lib::Path64 VectorClipper::clipPath(const GeoDataLatLonBox &box, int zoomLevel) const
+Clipper2Lib::Rect64 VectorClipper::clipRect(const GeoDataLatLonBox &box)
 {
-    using namespace Clipper2Lib;
-    Path64 path;
-    int const steps = qMax(1, 22 - 2 * zoomLevel);
-    double x = box.west() * s_pointScale;
-    double const horizontalStep = (box.east() * s_pointScale - x) / steps;
-    double y = box.north() * s_pointScale;
-    double const verticalStep = (box.south() * s_pointScale - y) / steps;
-    for (int i=0; i<steps; ++i) {
-        path.push_back(Point64(qRound64(x), qRound64(y)));
-        x += horizontalStep;
-    }
-    path.push_back(Point64(qRound64(box.east() * s_pointScale), qRound64(box.north() * s_pointScale)));
-    for (int i=0; i<steps; ++i) {
-        path.push_back(Point64(qRound64(x), qRound64(y)));
-        y += verticalStep;
-    }
-    path.push_back(Point64(qRound64(box.east() * s_pointScale), qRound64(box.south() * s_pointScale)));
-    for (int i=0; i<steps; ++i) {
-        path.push_back(Point64(qRound64(x), qRound64(y)));
-        x -= horizontalStep;
-    }
-    path.push_back(Point64(qRound64(box.west() * s_pointScale), qRound64(box.south() * s_pointScale)));
-    for (int i=0; i<steps; ++i) {
-        path.push_back(Point64(qRound64(x), qRound64(y)));
-        y -= verticalStep;
-    }
-    path.push_back(Point64(qRound64(box.west() * s_pointScale), qRound64(box.north() * s_pointScale)));
-    return path;
+    return { qRound64(box.west() * s_pointScale), qRound64(box.south() * s_pointScale),
+             qRound64(box.east() * s_pointScale), qRound64(box.north() * s_pointScale) };
 }
 
 bool VectorClipper::canBeArea(GeoDataPlacemark::GeoDataVisualCategory visualCategory)
@@ -192,7 +166,7 @@ qreal VectorClipper::area(const GeoDataLinearRing &ring)
     return result;
 }
 
-void VectorClipper::clipPolygon(const GeoDataPlacemark *placemark, const Clipper2Lib::Path64 &tileBoundary, qreal minArea,
+void VectorClipper::clipPolygon(const GeoDataPlacemark *placemark, const Clipper2Lib::Rect64 &tileBoundary, qreal minArea,
                                 GeoDataDocument *document, QSet<qint64> &osmIds)
 {
     bool isBuilding = false;
@@ -218,12 +192,7 @@ void VectorClipper::clipPolygon(const GeoDataPlacemark *placemark, const Clipper
         path.push_back(std::move(p));
     }
 
-    Clipper64 clipper;
-    clipper.PreserveCollinear = true;
-    clipper.AddClip({tileBoundary});
-    clipper.AddSubject({path});
-    Paths64 paths;
-    clipper.Execute(ClipType::Intersection, FillRule::EvenOdd, paths);
+    Paths64 paths = Clipper2Lib::RectClip(tileBoundary, path);
     for(const auto &path: paths) {
         GeoDataPlacemark* newPlacemark = new GeoDataPlacemark;
         newPlacemark->setVisible(placemark->isVisible());
@@ -265,8 +234,6 @@ void VectorClipper::clipPolygon(const GeoDataPlacemark *placemark, const Clipper
             }
 
             auto const & innerRingOsmData = placemarkOsmData.memberReference(index);
-            clipper.Clear();
-            clipper.AddClip({path});
             Path64 innerPath;
             coordMap.clear();
             for(auto const & node: innerBoundary) {
@@ -274,9 +241,7 @@ void VectorClipper::clipPolygon(const GeoDataPlacemark *placemark, const Clipper
                 coordMap.insert(std::make_pair(p.x, p.y), &node);
                 innerPath.push_back(std::move(p));
             }
-            clipper.AddSubject({innerPath});
-            Paths64 innerPaths;
-            clipper.Execute(ClipType::Intersection, FillRule::EvenOdd, innerPaths);
+            Paths64 innerPaths = Clipper2Lib::RectClip(tileBoundary, innerPath);
             for(auto const &innerPath: innerPaths) {
                 int const newIndex = newPolygon->innerBoundaries().size();
                 auto & newInnerRingOsmData = newPlacemarkOsmData.memberReference(newIndex);

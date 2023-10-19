@@ -3,30 +3,32 @@
   <node id="-3" lat="53.6002393" lon="10.0195312" />
   <node id="25559939" lat="53.5917926" lon="10.0203764" />
   <node id="25559942" lat="53.5909785" lon="10.0280769" />
+  <node id="25559944" lat="53.5912154" lon="10.0296707" />
   <node id="25559948" lat="53.5934979" lon="10.0317822" />
-  <node id="420625970" lat="53.5994166" lon="10.0308603" />
-  <node id="1744170680" lat="53.5914517" lon="10.0300929" />
-  <node id="3770915108" lat="53.5959926" lon="10.0311674" />
+  <node id="1743560711" lat="53.5912798" lon="10.0241691" />
+  <node id="1743560715" lat="53.5912598" lon="10.0246746" />
+  <node id="3770915111" lat="53.5962494" lon="10.0311279" />
   <node id="6208554304" lat="53.6000265" lon="10.029463" />
-  <node id="9692302707" lat="53.591" lon="10.0285517" />
+  <node id="6208554307" lat="53.5992837" lon="10.0309802" />
   <way id="-2">
-    <nd ref="9692302707" />
-    <nd ref="1744170680" />
+    <nd ref="1743560715" />
+    <nd ref="25559942" />
+    <nd ref="25559944" />
     <nd ref="25559948" />
-    <nd ref="3770915108" />
-    <nd ref="420625970" />
+    <nd ref="3770915111" />
+    <nd ref="6208554307" />
     <nd ref="6208554304" />
     <nd ref="-3" />
     <nd ref="-4" />
     <nd ref="25559939" />
-    <nd ref="25559942" />
-    <nd ref="9692302707" />
+    <nd ref="1743560711" />
+    <nd ref="1743560715" />
     <tag k="TMC:cid_58:tabcd_1:Class" v="Area" />
     <tag k="TMC:cid_58:tabcd_1:LCLversion" v="8.00" />
     <tag k="TMC:cid_58:tabcd_1:LocationCode" v="46430" />
     <tag k="leisure" v="park" />
     <tag k="loc_name" v="Stadtpark" />
-    <tag k="mx:bp" v="6+1" />
+    <tag k="mx:bp" v="7+1" />
     <tag k="mx:oid" v="23734712" />
     <tag k="name" v="Hamburger Stadtpark" />
     <tag k="wikidata" v="Q2472" />

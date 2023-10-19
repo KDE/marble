@@ -1,17 +1,17 @@
 <osm>
-  <node id="-5" lat="52.4727431" lon="13.4415628" />
-  <node id="-4" lat="52.4727431" lon="13.4417725" />
-  <node id="-3" lat="52.4722678" lon="13.4417725" />
+  <node id="-5" lat="52.4722678" lon="13.4417725" />
+  <node id="-4" lat="52.4727431" lon="13.4415627" />
+  <node id="-3" lat="52.4727431" lon="13.4417725" />
   <node id="6147069420" lat="52.4726013" lon="13.4416102" />
   <node id="6147069422" lat="52.4726218" lon="13.441584" />
   <node id="6147069427" lat="52.4722652" lon="13.4416746" />
   <way id="-2">
     <nd ref="-3" />
     <nd ref="-4" />
-    <nd ref="-5" />
     <nd ref="6147069422" />
     <nd ref="6147069420" />
     <nd ref="6147069427" />
+    <nd ref="-5" />
     <nd ref="-3" />
     <tag k="amenity" v="kindergarten" />
     <tag k="contact:email" v="ev-kita.magdalenen@kk-neukoelln.de" />

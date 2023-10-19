@@ -8,12 +8,12 @@
     <tag k="level" v="0" />
   </node>
   <way id="-2">
-    <nd ref="1042870956" />
-    <nd ref="3633376974" />
-    <nd ref="1042870961" />
     <nd ref="1042870960" />
-    <nd ref="1042870964" />
+    <nd ref="1042870961" />
+    <nd ref="3633376974" />
     <nd ref="1042870956" />
+    <nd ref="1042870964" />
+    <nd ref="1042870960" />
     <tag k="addr:city" v="Karlsruhe" />
     <tag k="addr:housenumber" v="1" />
     <tag k="addr:postcode" v="76137" />

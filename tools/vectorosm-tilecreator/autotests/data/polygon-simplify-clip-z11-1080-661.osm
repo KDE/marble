@@ -1,6 +1,6 @@
 <osm>
-  <node id="-4" lat="53.5918205" lon="10.0195312" />
-  <node id="-3" lat="53.6002393" lon="10.0195312" />
+  <node id="-4" lat="53.6002393" lon="10.0195312" />
+  <node id="-3" lat="53.5918205" lon="10.0195312" />
   <node id="25559924" lat="53.5992244" lon="10.0069874" />
   <node id="25559925" lat="53.5984737" lon="10.0049448" />
   <node id="25559927" lat="53.597125" lon="10.0032713" />
@@ -10,6 +10,7 @@
     <tag k="barrier" v="gate" />
   </node>
   <node id="369648267" lat="53.5936165" lon="10.0113493" />
+  <node id="705990358" lat="53.5918617" lon="10.0182846" />
   <node id="732991024" lat="53.5938097" lon="10.0045948" />
   <node id="6365959487" lat="53.5922518" lon="10.0139492" />
   <node id="6365959489" lat="53.5932267" lon="10.0057565" />
@@ -21,6 +22,7 @@
   <node id="11180759479" lat="53.5983531" lon="10.0053336" />
   <way id="-2">
     <nd ref="-3" />
+    <nd ref="-4" />
     <nd ref="9739303830" />
     <nd ref="25559924" />
     <nd ref="11180759478" />
@@ -37,14 +39,14 @@
     <nd ref="6365959489" />
     <nd ref="369648267" />
     <nd ref="6365959487" />
-    <nd ref="-4" />
+    <nd ref="705990358" />
     <nd ref="-3" />
     <tag k="TMC:cid_58:tabcd_1:Class" v="Area" />
     <tag k="TMC:cid_58:tabcd_1:LCLversion" v="8.00" />
     <tag k="TMC:cid_58:tabcd_1:LocationCode" v="46430" />
     <tag k="leisure" v="park" />
     <tag k="loc_name" v="Stadtpark" />
-    <tag k="mx:bp" v="17+1" />
+    <tag k="mx:bp" v="0+1" />
     <tag k="mx:oid" v="23734712" />
     <tag k="name" v="Hamburger Stadtpark" />
     <tag k="wikidata" v="Q2472" />
