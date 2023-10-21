@@ -1,1 +1,0 @@
-http://download.geofabrik.de/europe/germany/bremen-latest.osm.pbf;Bremerhaven;8.4808;53.4921;8.6789;53.6119

@@ -1,7 +1,0 @@
-http://download.geofabrik.de/north-america/us/california-latest.osm.pbf;Palo Alto;-122.20214;37.42038;-122.11276;37.47172
-http://download.geofabrik.de/north-america/us/california-latest.osm.pbf;Mountain View;-122.13435;37.36149;-122.03610;37.42396
-http://download.geofabrik.de/north-america/us/california-latest.osm.pbf;Sunnyvale;-122.08173;37.34423;-121.98917;37.41816
-http://download.geofabrik.de/north-america/us/california-latest.osm.pbf;Santa Clara;-122.0665;37.3456;-121.8519;37.4437
-http://download.geofabrik.de/north-america/us/new-york-latest.osm.pbf;New York;-74.03463;40.69531;-73.91447;40.81180
-http://download.geofabrik.de/north-america/us/nevada-latest.osm.pbf;Las Vegas Strip;-115.18493;36.09692;-115.14912;36.13970
-http://download.geofabrik.de/north-america/us/california-latest.osm.pbf;San Francisco;-122.51740;37.73753;-122.36156;37.84586
