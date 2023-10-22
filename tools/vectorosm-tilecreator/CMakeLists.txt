@@ -28,7 +28,6 @@ SpellChecker.cpp
 TagsFilter.cpp
 TileIterator.cpp
 TileDirectory.cpp
-TileQueue.cpp
 VectorClipper.cpp
 WayConcatenator.cpp
 WayChunk.cpp
@@ -40,9 +39,6 @@ target_link_libraries(marble-vectorosm-tilecreator ${TARGET})
 if (STATIC_BUILD)
     target_link_libraries(marble-vectorosm-tilecreator OsmPlugin ShpPlugin)
 endif()
-
-add_executable(marble-vectorosm-cachetiles vectorosm-cachetiles.cpp)
-target_link_libraries(marble-vectorosm-cachetiles ${TARGET})
 
 add_executable(marble-vectorosm-process-land-polygons
     vectorosm-process-land-polygons.cpp
