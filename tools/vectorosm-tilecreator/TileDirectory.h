@@ -73,7 +73,7 @@ public:
     GeoDataLatLonBox boundingBox() const;
     void setBoundingBox(const GeoDataLatLonBox &boundingBox);
     void setBoundingPolygon(const QString &filename);
-    void createTiles() const;
+    void createTiles();
     void createOsmTiles() const;
     int innerNodes(const TileId &tile) const;
 

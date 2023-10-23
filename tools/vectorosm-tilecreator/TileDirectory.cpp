@@ -41,20 +41,6 @@ TileDirectory::TileDirectory(TileType tileType, const QString &cacheDir, Parsing
     if (m_tileType == Landmass) {
         m_zoomLevel = 7;
         m_baseDir = QString("%1/landmass/%2").arg(cacheDir).arg(m_zoomLevel);
-        QString const landmassDir = QString("%1/land-polygons-split-4326").arg(cacheDir);
-        m_inputFile = QString("%1/land_polygons.shp").arg(landmassDir);
-        auto const landmassZip = QString("%1/%2").arg(m_cacheDir).arg(m_landmassFile);
-        if (!QFileInfo(landmassZip).exists()) {
-            QString const url = QString("https://osmdata.openstreetmap.de/download/%1").arg(m_landmassFile);
-            download(url, landmassZip);
-        }
-
-        if (!QFileInfo(landmassDir).exists()) {
-            MarbleZipReader unzip(landmassZip);
-            if (!unzip.extractAll(m_cacheDir)) {
-                qWarning() << "Failed to extract" << landmassZip << "to" << m_cacheDir;
-            }
-        }
     } else {
         m_zoomLevel = 10;
         m_baseDir = QString("%1/osm/%2").arg(cacheDir).arg(m_zoomLevel);
@@ -313,11 +299,26 @@ void TileDirectory::setBoundingPolygon(const QString &file)
     }
 }
 
-void TileDirectory::createTiles() const
+void TileDirectory::createTiles()
 {
     if (m_tileType == OpenStreetMap) {
         createOsmTiles();
         return;
+    }
+
+    QString const landmassDir = QString("%1/land-polygons-split-4326").arg(m_cacheDir);
+    m_inputFile = QString("%1/land_polygons.shp").arg(landmassDir);
+    auto const landmassZip = QString("%1/%2").arg(m_cacheDir).arg(m_landmassFile);
+    if (!QFileInfo(landmassZip).exists()) {
+        QString const url = QString("https://osmdata.openstreetmap.de/download/%1").arg(m_landmassFile);
+        download(url, landmassZip);
+    }
+
+    if (!QFileInfo(landmassDir).exists()) {
+        MarbleZipReader unzip(landmassZip);
+        if (!unzip.extractAll(m_cacheDir)) {
+            qWarning() << "Failed to extract" << landmassZip << "to" << m_cacheDir;
+        }
     }
 
     QSharedPointer<GeoDataDocument> map;
