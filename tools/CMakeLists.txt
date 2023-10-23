@@ -1,3 +1,5 @@
+find_package(ZLIB)
+
 add_subdirectory( tilecreator )
 add_subdirectory( tilecreator-srtm2 )
 add_subdirectory( dateline )
@@ -28,7 +30,6 @@ if (LINUX)
   add_subdirectory( vectorosm-tilecreator )
 endif()
 
-find_package(ZLIB)
 if(PROTOBUF_FOUND AND ZLIB_FOUND)
   # add_subdirectory( osm-addresses )
   # osm-sisyphus does not depend on zlib and protobuf, but osm-addresses

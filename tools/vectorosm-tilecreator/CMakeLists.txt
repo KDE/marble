@@ -58,3 +58,7 @@ target_link_libraries(marble-vectorosm-tirex-backend vectorosm-toolchain)
 if (STATIC_BUILD)
     target_link_libraries(marble-vectorosm-tirex-backend OsmPlugin ShpPlugin)
 endif()
+
+if (BUILD_TESTING)
+    add_subdirectory(autotests)
+endif()
