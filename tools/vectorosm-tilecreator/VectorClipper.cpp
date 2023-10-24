@@ -231,7 +231,7 @@ void VectorClipper::clipPolygon(const GeoDataPlacemark *placemark, const GeoData
         auto const & innerBoundaries = qAsConst(polygon)->innerBoundaries();
         for (index = 0; index < innerBoundaries.size(); ++index) {
             auto const & innerBoundary = innerBoundaries.at(index);
-            if (minArea > 0.0 && area(innerBoundary) < minArea) {
+            if ((minArea > 0.0 && area(innerBoundary) < minArea) || !tileBoundary.intersects(innerBoundary.latLonAltBox())) {
                 continue;
             }
 
