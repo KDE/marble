@@ -1544,7 +1544,7 @@ msgstr "OpenStreetMap"
 #. file data/maps/earth/openstreetmap/openstreetmap.dgml:122
 msgctxt "DGML|"
 msgid "Humanitarian OSM Team"
-msgstr "Equip humanitari de l'OSM"
+msgstr "Equip humanitari d'OSM"
 
 #. file data/maps/earth/plain/plain.dgml:11
 msgctxt "DGML|"
@@ -3570,7 +3570,7 @@ msgid ""
 "want to keep?"
 msgstr ""
 "Una adreça d'interés en este dispositiu entra en conflicte amb una adreça "
-"d'interés al núvol. Quina voleu mantindre?"
+"d'interés en el núvol. Quina voleu mantindre?"
 
 #: src/lib/marble/cloudsync/ConflictDialog.cpp:175
 msgctxt "Marble::ConflictDialog|"
@@ -14892,7 +14892,7 @@ msgstr "anònim"
 #: src/plugins/render/notes/NotesPlugin.cpp:34
 msgctxt "Marble::NotesPlugin|"
 msgid "OSM Mapper Notes"
-msgstr "Notes de l'OSM Mapper"
+msgstr "Notes d'OSM Mapper"
 
 #: src/plugins/render/notes/NotesPlugin.cpp:65
 msgctxt "Marble::NotesPlugin|"
@@ -17535,7 +17535,7 @@ msgstr "monument commemoratiu"
 #: src/plugins/runner/local-osm-search/LocalOsmSearchPlugin.cpp:40
 msgctxt "Marble::LocalOsmSearchPlugin|"
 msgid "Local OSM Search"
-msgstr "Busca a l'OSM local"
+msgstr "Busca a OSM local"
 
 #: src/plugins/runner/local-osm-search/LocalOsmSearchPlugin.cpp:45
 msgctxt "Marble::LocalOsmSearchPlugin|"

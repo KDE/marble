@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2023-08-11 13:54+0300\n"
+"PO-Revision-Date: 2023-10-24 12:39+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -3945,14 +3945,14 @@ msgctxt ""
 "Marble::Placemark|A copy shop provides individual copy machines for self-"
 "service"
 msgid "Self service"
-msgstr "Self servis"
+msgstr "Self Servis"
 
 #: src/lib/marble/declarative/Placemark.cpp:154
 msgctxt ""
 "Marble::Placemark|A copy shop does not provide individual machines for self-"
 "service"
 msgid " No self service"
-msgstr " Self servis yok"
+msgstr "Self Servis yok"
 
 #: src/lib/marble/declarative/Placemark.cpp:156
 msgctxt "Marble::Placemark|A deli that sells organic food"
@@ -4589,12 +4589,12 @@ msgstr "Azami araç yüksekliği: %1"
 #: src/lib/marble/declarative/Placemark.cpp:335
 msgctxt "Marble::Placemark|"
 msgid "Self-service"
-msgstr "Self servis"
+msgstr "Self Servis"
 
 #: src/lib/marble/declarative/Placemark.cpp:336
 msgctxt "Marble::Placemark|"
 msgid "No self-service"
-msgstr "Self servis değil"
+msgstr "Self Servis yok"
 
 #: src/lib/marble/declarative/Placemark.cpp:337
 msgctxt "Marble::Placemark|"
