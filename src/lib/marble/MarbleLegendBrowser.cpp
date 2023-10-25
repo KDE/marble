@@ -184,9 +184,7 @@ bool MarbleLegendBrowser::event( QEvent * event )
 {
     // "Delayed initialization": legend gets created only 
     if ( event->type() == QEvent::Show ) {
-        setVisible(true);
         loadLegend();
-        return true;
     }
 
     return MarbleWebView::event( event );
