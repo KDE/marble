@@ -125,8 +125,8 @@ int main(int argc, char **argv)
                         TagsFilter::removeAnnotationTags(tile1.data());
                         if (tileId.zoomLevel() < 17) {
                             WayConcatenator concatenator(tile1.data());
+                            NodeReducer nodeReducer(tile1.data(), tileId);
                         }
-                        NodeReducer nodeReducer(tile1.data(), tileId);
                         GeoDocPtr tile2 = GeoDocPtr(landTiles.clip(tileId.zoomLevel(), tileId.x(), tileId.y()));
                         GeoDocPtr combined = GeoDocPtr(mergeDocuments(tile1.data(), tile2.data()));
 

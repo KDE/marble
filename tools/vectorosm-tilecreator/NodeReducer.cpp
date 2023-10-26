@@ -34,25 +34,23 @@ NodeReducer::NodeReducer(GeoDataDocument* document, const TileId &tileId) :
             GeoDataLineString* reducedLine = new GeoDataLineString;
             reduce(*prevLine, placemark->osmData(), visualCategory, reducedLine);
             placemark->setGeometry(reducedLine);
-        } else if (m_zoomLevel < 17) {
-            if (const auto prevRing = geodata_cast<GeoDataLinearRing>(geometry)) {
-                placemark->setGeometry(reducedRing(*prevRing, placemark, visualCategory));
-            } else if (const auto prevPolygon = geodata_cast<GeoDataPolygon>(geometry)) {
-                placemark->setGeometry(reducedPolygon(*prevPolygon, placemark, visualCategory));
-            } else if (const auto building = geodata_cast<GeoDataBuilding>(geometry)) {
-                if (const auto prevRing = geodata_cast<GeoDataLinearRing>(&building->multiGeometry()->at(0))) {
-                    GeoDataLinearRing* ring = reducedRing(*prevRing, placemark, visualCategory);
-                    GeoDataBuilding* newBuilding = new GeoDataBuilding(*building);
-                    newBuilding->multiGeometry()->clear();
-                    newBuilding->multiGeometry()->append(ring);
-                    placemark->setGeometry(newBuilding);
-                } else if (const auto prevPolygon = geodata_cast<GeoDataPolygon>(&building->multiGeometry()->at(0))) {
-                    GeoDataPolygon* poly = reducedPolygon(*prevPolygon, placemark, visualCategory);
-                    GeoDataBuilding* newBuilding = new GeoDataBuilding(*building);
-                    newBuilding->multiGeometry()->clear();
-                    newBuilding->multiGeometry()->append(poly);
-                    placemark->setGeometry(newBuilding);
-                }
+        } else if (const auto prevRing = geodata_cast<GeoDataLinearRing>(geometry)) {
+            placemark->setGeometry(reducedRing(*prevRing, placemark, visualCategory));
+        } else if (const auto prevPolygon = geodata_cast<GeoDataPolygon>(geometry)) {
+            placemark->setGeometry(reducedPolygon(*prevPolygon, placemark, visualCategory));
+        } else if (const auto building = geodata_cast<GeoDataBuilding>(geometry)) {
+            if (const auto prevRing = geodata_cast<GeoDataLinearRing>(&building->multiGeometry()->at(0))) {
+                GeoDataLinearRing* ring = reducedRing(*prevRing, placemark, visualCategory);
+                GeoDataBuilding* newBuilding = new GeoDataBuilding(*building);
+                newBuilding->multiGeometry()->clear();
+                newBuilding->multiGeometry()->append(ring);
+                placemark->setGeometry(newBuilding);
+            } else if (const auto prevPolygon = geodata_cast<GeoDataPolygon>(&building->multiGeometry()->at(0))) {
+                GeoDataPolygon* poly = reducedPolygon(*prevPolygon, placemark, visualCategory);
+                GeoDataBuilding* newBuilding = new GeoDataBuilding(*building);
+                newBuilding->multiGeometry()->clear();
+                newBuilding->multiGeometry()->append(poly);
+                placemark->setGeometry(newBuilding);
             }
         }
     }
