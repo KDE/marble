@@ -2,14 +2,6 @@
 # SPDX-License-Identifier: BSD-3-Clause
 # SPDX-FileCopyrightText: 2022 Volker Krause <vkrause@kde.org>
 
-# get osmx
-cd
-mkdir osmx
-cd osmx
-wget https://github.com/protomaps/OSMExpress/releases/download/0.2.0/osmexpress-0.2.0-Linux.tgz
-tar -xf osmexpress-0.2.0-Linux.tgz
-export PATH=$PATH:`pwd`
-
 # just needs to be set to something in order to be able to use standalone test mode
 export TIREX_BACKEND_SOCKET_FILENO=42
 
