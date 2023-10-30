@@ -48,7 +48,7 @@ private:
     constexpr static qint64 const s_pointScale = 10000000 / M_PI * 180;
     static inline Clipper2Lib::Point64 coordinateToPoint(const GeoDataCoordinates &c)
     {
-        return Clipper2Lib::Point64(qRound64(c.longitude() * s_pointScale), qRound64(c.latitude() * s_pointScale));
+        return Clipper2Lib::Point64(qRound64(c.longitude() * s_pointScale), qRound64(c.latitude() * s_pointScale), reinterpret_cast<int64_t>(&c));
     }
     static inline GeoDataCoordinates pointToCoordinate(Clipper2Lib::Point64 p)
     {
@@ -56,15 +56,15 @@ private:
     }
 
     template<class T>
-    static void pathToRing(const Clipper2Lib::Path64 &path, T *ring, const OsmPlacemarkData &originalOsmData, OsmPlacemarkData &newOsmData, const QHash<std::pair<int64_t, int64_t>, const GeoDataCoordinates*> &coordMap)
+    static void pathToRing(const Clipper2Lib::Path64 &path, T *ring, const OsmPlacemarkData &originalOsmData, OsmPlacemarkData &newOsmData)
     {
         for(const auto &point: path) {
-            const auto it = coordMap.find(std::make_pair(point.x, point.y));
-            if (it != coordMap.end()) {
-                *ring << *it.value();
-                auto const data = originalOsmData.nodeReference(*it.value());
+            if (point.z) {
+                const auto *node = reinterpret_cast<const GeoDataCoordinates*>(point.z);
+                *ring << *node;
+                auto const data = originalOsmData.nodeReference(*node);
                 if (data.id() > 0) {
-                    newOsmData.addNodeReference(*it.value(), data);
+                    newOsmData.addNodeReference(*node, data);
                 }
             } else {
                 *ring << pointToCoordinate(point);
@@ -96,11 +96,9 @@ private:
         }
         using namespace Clipper2Lib;
         Path64 subject;
-        QHash<std::pair<int64_t, int64_t>, const GeoDataCoordinates*> coordMap;
+        subject.reserve(ring->size());
         for(auto const & node: *ring) {
-            auto p = coordinateToPoint(node);
-            coordMap.insert(std::make_pair(p.x, p.y), &node);
-            subject.push_back(std::move(p));
+            subject.push_back(coordinateToPoint(node));
         }
 
         Paths64 paths;
@@ -114,7 +112,7 @@ private:
             newPlacemark->setVisible(placemark->isVisible());
             newPlacemark->setVisualCategory(placemark->visualCategory());
             T* newRing = new T;
-            pathToRing(path, newRing, osmData, newPlacemark->osmData(), coordMap);
+            pathToRing(path, newRing, osmData, newPlacemark->osmData());
 
             if (isBuilding) {
                 const auto building = geodata_cast<GeoDataBuilding>(placemark->geometry());

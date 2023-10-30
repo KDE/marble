@@ -27,6 +27,7 @@ VectorClipper.cpp
 WayConcatenator.cpp
 WayChunk.cpp
 )
+target_compile_definitions(vectorosm-toolchain PUBLIC USINGZ=1)
 target_link_libraries(vectorosm-toolchain marblewidget Qt5::Sql)
 
 add_executable(marble-vectorosm-tilecreator

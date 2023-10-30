@@ -185,11 +185,9 @@ void VectorClipper::clipPolygon(const GeoDataPlacemark *placemark, const Clipper
     }
     using namespace Clipper2Lib;
     Path64 path;
-    QHash<std::pair<int64_t, int64_t>, const GeoDataCoordinates*> coordMap;
+    path.reserve(qAsConst(polygon)->outerBoundary().size());
     for(auto const & node: qAsConst(polygon)->outerBoundary()) {
-        auto p = coordinateToPoint(node);
-        coordMap.insert(std::make_pair(p.x, p.y), &node);
-        path.push_back(std::move(p));
+        path.push_back(coordinateToPoint(node));
     }
 
     Paths64 paths = Clipper2Lib::RectClip(tileBoundary, path);
@@ -203,7 +201,7 @@ void VectorClipper::clipPolygon(const GeoDataPlacemark *placemark, const Clipper
         int index = -1;
         OsmPlacemarkData const & outerRingOsmData = placemarkOsmData.memberReference(index);
         OsmPlacemarkData & newOuterRingOsmData = newPlacemarkOsmData.memberReference(index);
-        pathToRing(path, &outerRing, outerRingOsmData, newOuterRingOsmData, coordMap);
+        pathToRing(path, &outerRing, outerRingOsmData, newOuterRingOsmData);
 
         GeoDataPolygon* newPolygon = new GeoDataPolygon;
         newPolygon->setOuterBoundary(outerRing);
@@ -235,18 +233,16 @@ void VectorClipper::clipPolygon(const GeoDataPlacemark *placemark, const Clipper
 
             auto const & innerRingOsmData = placemarkOsmData.memberReference(index);
             Path64 innerPath;
-            coordMap.clear();
+            innerPath.reserve(innerBoundary.size());
             for(auto const & node: innerBoundary) {
-                auto p = coordinateToPoint(node);
-                coordMap.insert(std::make_pair(p.x, p.y), &node);
-                innerPath.push_back(std::move(p));
+                innerPath.push_back(coordinateToPoint(node));
             }
             Paths64 innerPaths = Clipper2Lib::RectClip(tileBoundary, innerPath);
             for(auto const &innerPath: innerPaths) {
                 int const newIndex = newPolygon->innerBoundaries().size();
                 auto & newInnerRingOsmData = newPlacemarkOsmData.memberReference(newIndex);
                 GeoDataLinearRing innerRing;
-                pathToRing(innerPath, &innerRing, innerRingOsmData, newInnerRingOsmData, coordMap);
+                pathToRing(innerPath, &innerRing, innerRingOsmData, newInnerRingOsmData);
                 newPolygon->appendInnerBoundary(innerRing);
                 if (innerRingOsmData.id() > 0) {
                     newInnerRingOsmData.addTag(QStringLiteral("mx:oid"), QString::number(innerRingOsmData.id()));
