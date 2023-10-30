@@ -76,7 +76,7 @@ def download(filename, in_dir):
 def parse_file(filename, in_dir):
 	level_info = {}
 	path = os.path.join(in_dir, filename)
-	f = open(path, 'rU')
+	f = open(path, 'r', newline=None)
 	for line in f:
 		line = line.rstrip()
 		if len(line) == 0:
