@@ -11,7 +11,6 @@ include_directories(
 ../../src/lib/marble/geodata/data
 ../../src/lib/marble/geodata
 ../../src/lib/marble/
-../mbtile-import
 )
 
 add_library(vectorosm-toolchain STATIC
@@ -24,14 +23,11 @@ TagsFilter.cpp
 TileIterator.cpp
 TileDirectory.cpp
 VectorClipper.cpp
-WayConcatenator.cpp
-WayChunk.cpp
 )
 target_compile_definitions(vectorosm-toolchain PUBLIC USINGZ=1)
 target_link_libraries(vectorosm-toolchain marblewidget Qt5::Sql)
 
 add_executable(marble-vectorosm-tilecreator
-    ../mbtile-import/MbTileWriter.cpp
     SpellChecker.cpp
     vectorosm-tilecreator.cpp
 )
@@ -51,6 +47,8 @@ endif()
 add_executable(marble-vectorosm-tirex-backend
     vectorosm-tirex-backend.cpp
     TirexBackend.cpp
+    WayChunk.cpp
+    WayConcatenator.cpp
 )
 target_link_libraries(marble-vectorosm-tirex-backend vectorosm-toolchain)
 if (STATIC_BUILD)
