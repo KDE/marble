@@ -1180,7 +1180,7 @@ qreal GeoDataCoordinatesPrivate::lonLatToNorthing( qreal lon, qreal lat ){
     return northing;
 }
 
-uint qHash(const GeoDataCoordinates &coordinates)
+size_t qHash(const GeoDataCoordinates &coordinates)
 {
     uint seed = ::qHash(coordinates.altitude());
     seed = ::qHash(coordinates.latitude(), seed);
