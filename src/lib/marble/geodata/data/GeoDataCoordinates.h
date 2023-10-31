@@ -431,7 +431,7 @@ class GEODATA_EXPORT GeoDataCoordinates
     static const GeoDataCoordinates null;
 };
 
-GEODATA_EXPORT uint qHash(const GeoDataCoordinates& coordinates );
+GEODATA_EXPORT size_t qHash(const GeoDataCoordinates& coordinates );
 
 
 }
