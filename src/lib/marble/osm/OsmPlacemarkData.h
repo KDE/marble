@@ -13,8 +13,8 @@
 
 // Marble
 #include "GeoDataCoordinates.h"
-#include <marble_export.h>
 #include "GeoDocument.h"
+#include <marble_export.h>
 
 class QXmlStreamAttributes;
 
@@ -42,6 +42,9 @@ struct OsmIdentifier {
     inline bool operator==(OsmIdentifier other) const { return id == other.id && type == other.type; }
 };
 
+/** Forward declaration */
+class OsmPlacemarkDataHashRef;
+
 /**
  * This class is used to encapsulate the osm data fields kept within a placemark's extendedData.
  * It stores OSM server generated data: id, version, changeset, uid, visible, user, timestamp;
@@ -67,7 +70,9 @@ class MARBLE_EXPORT OsmPlacemarkData: public GeoNode
 {
 
 public:
+
     OsmPlacemarkData();
+	virtual ~OsmPlacemarkData();
 
     qint64 id() const;
     qint64 oid() const;
@@ -88,7 +93,6 @@ public:
     void setUser( const QString& user );
     void setTimestamp( const QString& timestamp );
     void setAction( const QString& action );
-
 
     /**
      * @brief tagValue returns the value of the tag that has @p key as key
@@ -132,7 +136,6 @@ public:
     QHash< QString, QString >::const_iterator tagsBegin() const;
     QHash< QString, QString >::const_iterator tagsEnd() const;
 
-
     /**
      * @brief this function returns the osmData associated with a nd
      */
@@ -156,15 +159,6 @@ public:
     void changeNodeReference( const GeoDataCoordinates& oldKey, const GeoDataCoordinates &newKey );
 
     /**
-     * @brief iterators for the reference hashes.
-     */
-    QHash< GeoDataCoordinates, OsmPlacemarkData > & nodeReferences();
-    QHash< GeoDataCoordinates, OsmPlacemarkData >::const_iterator nodeReferencesBegin() const;
-    QHash< GeoDataCoordinates, OsmPlacemarkData >::const_iterator nodeReferencesEnd() const;
-
-
-
-    /**
      * @brief this function returns the osmData associated with a member boundary's index
      * -1 represents the outer boundary of a polygon, and 0,1,2... the inner boundaries,
      * in the order provided by polygon->innerBoundaries();
@@ -181,10 +175,6 @@ public:
     void addMemberReference( int key, const OsmPlacemarkData &value );
     void removeMemberReference( int key );
     bool containsMemberReference( int key ) const;
-
-    QHash< int, OsmPlacemarkData > & memberReferences();
-    QHash< int, OsmPlacemarkData >::const_iterator memberReferencesBegin() const;
-    QHash< int, OsmPlacemarkData >::const_iterator memberReferencesEnd() const;
 
     /**
      * @brief addRelation calling this makes the osm placemark a member of the relation
@@ -215,9 +205,65 @@ public:
      */
     static OsmPlacemarkData fromParserAttributes( const QXmlStreamAttributes &attributes );
 
+	/**
+	 * Return the insternal instance of the hash-table functions container.
+	 */
+	OsmPlacemarkDataHashRef* hRef() const;
+
 private:
+
     qint64 m_id;
     QHash<QString, QString> m_tags;
+
+    /**
+     * @brief m_relationReferences is used to store the relations the placemark is part of
+     * and the role it has within them.
+     * Eg. an entry ( "123", "stop" ) means that the parent placemark is a member of
+     * the relation with id "123", while having the "stop" role
+     */
+    QHash<OsmIdentifier, QString> m_relationReferences;
+
+	/**
+	 * Store the insternal instance of the hash-table functions container.
+	 */
+	OsmPlacemarkDataHashRef* m_href = nullptr;
+};
+
+/**
+ * Container to host hash-table functions with OsmPlacemarkData as values.
+ * This container is necessary with Qt 6.6 under MSVC 2022 as compiler refuse to build 
+ * a QHash of a not fully defined class as value.
+ *
+ * E:\dk\x64-windows\include\Qt6\QtCore/qhash.h(76,7): error C2079: 'QHashPrivate::Node<Key,T>::value' uses undefined class 'Marble::OsmPlacemarkData' [C:\Users\gilles\Documents\marble\build.vcpkg\src\lib\marble\marblewidget.vcxproj]
+ *          with
+ *         [
+ *             Key=Marble::GeoDataCoordinates,
+ *             T=Marble::OsmPlacemarkData
+ *         ]
+ * E:\dk\x64-windows\include\Qt6\QtCore/qhash.h(858,1): message : see reference to class template instantiation 'QHashPrivate::Node<Key,T>' being compiled [C:\Users\gilles\Documents\marble\build.vcpkg\src\lib\marble\marblewidget.vcxproj]
+ *         with
+ *         [
+ *             Key=Marble::GeoDataCoordinates,
+ *             T=Marble::OsmPlacemarkData
+ *         ]
+ *
+ */
+class MARBLE_EXPORT OsmPlacemarkDataHashRef
+{
+public:
+
+    OsmPlacemarkDataHashRef();
+	
+    /**
+     * @brief iterators for the reference hashes.
+     */
+    QHash< GeoDataCoordinates, OsmPlacemarkData > & nodeReferences();
+    QHash< GeoDataCoordinates, OsmPlacemarkData >::const_iterator nodeReferencesBegin() const;
+    QHash< GeoDataCoordinates, OsmPlacemarkData >::const_iterator nodeReferencesEnd() const;
+
+    QHash< int, OsmPlacemarkData > & memberReferences();
+    QHash< int, OsmPlacemarkData >::const_iterator memberReferencesBegin() const;
+    QHash< int, OsmPlacemarkData >::const_iterator memberReferencesEnd() const;
 
     /**
      * @brief m_ndRefs is used to store a way's component nodes
@@ -232,15 +278,6 @@ private:
      *  order provided by polygon->innerBoundaries()
      */
     QHash<int, OsmPlacemarkData> m_memberReferences;
-
-    /**
-     * @brief m_relationReferences is used to store the relations the placemark is part of
-     * and the role it has within them.
-     * Eg. an entry ( "123", "stop" ) means that the parent placemark is a member of
-     * the relation with id "123", while having the "stop" role
-     */
-    QHash<OsmIdentifier, QString> m_relationReferences;
-
 };
 
 }
