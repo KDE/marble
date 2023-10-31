@@ -254,8 +254,8 @@ QVector<GeoDataBuilding::NamedEntry> OsmWay::extractNamedEntries() const
 {
     QVector<GeoDataBuilding::NamedEntry> entries;
 
-    const auto end = m_osmData.nodeReferencesEnd();
-    for (auto iter = m_osmData.nodeReferencesBegin(); iter != end; ++iter) {
+    const auto end = m_osmData.hRef()->nodeReferencesEnd();
+    for (auto iter = m_osmData.hRef()->nodeReferencesBegin(); iter != end; ++iter) {
         const auto tagIter = iter.value().findTag(QStringLiteral("addr:housenumber"));
         if (tagIter != iter.value().tagsEnd()) {
             GeoDataBuilding::NamedEntry entry;
