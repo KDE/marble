@@ -6,7 +6,7 @@
 # Jean-Jacques FINAZZI <mrjay01@users.sourceforge.net>, 2008.
 # Mickael Sibelle <kimael@gmail.com>, 2008, 2009, 2010, 2011, 2012.
 # Sébastien Renard <Sebastien.Renard@digitalfox.org>, 2008.
-# xavier <xavier.besnard@neuf.fr>, 2012, 2020, 2021, 2022.
+# SPDX-FileCopyrightText: 2012, 2020, 2021, 2022, 2023 xavier <xavier.besnard@neuf.fr>
 # Pierre Buard <pierre.buard@gmail.com>, 2013, 2014, 2015.
 # Sebastien Renard <renard@kde.org>, 2013.
 # Simon Depiets <sdepiets@gmail.com>, 2018.
@@ -19,7 +19,7 @@ msgstr ""
 "Project-Id-Version: marble_qt\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2023-04-23 20:48+0200\n"
+"PO-Revision-Date: 2023-10-31 10:05+0100\n"
 "Last-Translator: Xavier BESNARD <xavier.besnard@neuf.fr>\n"
 "Language-Team: fr\n"
 "Language: fr\n"
@@ -30,7 +30,7 @@ msgstr ""
 "X-Environment: kde\n"
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: qtrich\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: Lokalize 23.08.2\n"
 "X-Qt-Contexts: true\n"
 
 #. file data/maps/moon/clementine/clementine.dgml:5
@@ -577,7 +577,7 @@ msgid ""
 "(OLS)."
 msgstr ""
 "Cette image des <i>lumières des villes terrestres</i> a été crée à partir de "
-"donnée de l'Operational Linescan System (OLS) du programme de satellite "
+"données « OLS »  (Operational Linescan System) du programme de satellite "
 "météorologique de la Défense (DMSP)."
 
 #. file data/maps/earth/citylights/citylights.dgml:154
@@ -1584,9 +1584,9 @@ msgid ""
 "Earth. <i>Credits: Germanisches Nationalmuseum, Nuremberg, License: CC BY-SA "
 "3.0.</i></p>"
 msgstr ""
-"<p>L'<i>Erdapfel</i> de Martin Behaim est le plus ancien globe terrestre "
-"existant. <i>Crédits : Germanisches Nationalmuseum, Nuremberg, Licence : CC "
-"BY-SA 3.0.</i></p>"
+"<p>Le globe <i>Erdapfel</i> de Martin Behaim est le plus ancien globe "
+"terrestre existant. <i>Crédits : Germanisches National Museum, Nuremberg, "
+"Licence : CC BY-SA 3.0.</i></p>"
 
 #. file data/maps/earth/behaim1492/behaim1492.dgml:181
 msgctxt "DGML|"
@@ -1606,7 +1606,7 @@ msgstr "Textes et illustrations"
 #. file data/maps/earth/behaim1492/behaim1492.dgml:190
 msgctxt "DGML|"
 msgid "Facsimile drawings"
-msgstr "Dessins en fac-simile"
+msgstr "Dessins en fac-similé"
 
 #. file data/maps/earth/behaim1492/behaim1492.dgml:193
 msgctxt "DGML|"
@@ -2390,9 +2390,9 @@ msgstr ""
 "<h3>Équipe de développement</h3><p>Les principaux développeurs de cette "
 "application sont Dennis Nienhüser, Torsten Rahn, Sanjiban Bairagya, "
 "Friedrich W. H. Kossebau, Gábor Péterffy et Mikhail Ivchenko. Ils font "
-"partie des plus de 200 développeurs qui ont déjà contribué au projet Marble. "
-"<br> Contactez-nous via <a href=\"https://mail.kde.org/mailman/listinfo/"
-"marble-devel\">marble-devel@kde.org</a>.</p>"
+"partie des plus de 200 développeurs ayant déjà contribué au projet Marble. "
+"<br> Contactez-nous grâce à la liste de diffusion <a href=\"https://mail.kde."
+"org/mailman/listinfo/marble-devel\">marble-devel@kde.org</a>.</p>"
 
 #: src/apps/marble-maps/AboutDialog.qml:116
 msgctxt "AboutDialog|"
@@ -4513,7 +4513,7 @@ msgstr "%1 prises CEE rouges (125 A)"
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "%1 NEMA-5-15P plugs"
-msgstr "%1 branchements NEMA-5-15P"
+msgstr "%1 branchements « NEMA-5-15P »"
 
 #: src/lib/marble/declarative/Placemark.cpp:316
 #, qt-format
@@ -4543,7 +4543,7 @@ msgstr "%1 prises Schuko"
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "%1 BS 1363 sockets"
-msgstr "%1 prises BS 1363"
+msgstr "%1 prises « BS 1363 »"
 
 #: src/lib/marble/declarative/Placemark.cpp:321
 #, qt-format
@@ -4579,7 +4579,7 @@ msgstr "%1 branchements Type 3"
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "%1 CHAdeMO plugs"
-msgstr "%1 branchements CHAdeMO"
+msgstr "%1 branchements « CHAdeMO »"
 
 #: src/lib/marble/declarative/Placemark.cpp:327
 #, qt-format
@@ -4597,7 +4597,7 @@ msgstr "%1 branchements Tesla standard"
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "%1 Tesla standard plugs (Supercharger)"
-msgstr "%1 branchements Tesla standard (superchargeur)"
+msgstr "%1 branchements Tesla standard (Super-chargeur)"
 
 #: src/lib/marble/declarative/Placemark.cpp:330
 #, qt-format
@@ -5502,7 +5502,7 @@ msgstr "Éditeur de carte externe"
 #: src/lib/marble/ExternalEditor.ui:30
 msgctxt "ExternalEditor|"
 msgid "Web browser (iD)"
-msgstr "Navigateur web (iD)"
+msgstr "Navigateur Internet (ID)"
 
 #: src/lib/marble/ExternalEditor.ui:35
 msgctxt "ExternalEditor|"
@@ -6965,7 +6965,7 @@ msgstr "Lieu de culte"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:562
 msgctxt "GeoDataPlacemark|"
 msgid "Bahai"
-msgstr "Bahai"
+msgstr "Bahaï"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:563
 msgctxt "GeoDataPlacemark|"
@@ -7326,7 +7326,7 @@ msgstr "Patinoire"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:635
 msgctxt "GeoDataPlacemark|"
 msgid "Snow Park"
-msgstr "Snow park"
+msgstr "Snow parc"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:636
 msgctxt "GeoDataPlacemark|"
@@ -8289,7 +8289,7 @@ msgstr "Service de Cartes Web (WMS)"
 #: src/lib/marble/MapWizard.ui:70
 msgctxt "MapWizard|"
 msgid "Web Map Tile Service (WMTS)"
-msgstr "Web Map Tile Service (WMS)"
+msgstr "Service « Web Map Tile Service » (WMS)"
 
 #: src/lib/marble/MapWizard.ui:80
 msgctxt "MapWizard|"
@@ -8418,7 +8418,7 @@ msgid ""
 "Strg, Strg+A, ...)"
 msgstr ""
 "Activer cette option pour sélectionner plusieurs calques sans raccourcis "
-"clavier (Maj, Strg, Strg + A, ...)"
+"clavier (MAJ, Strg, Strg + A, ...)"
 
 #: src/lib/marble/MapWizard.ui:300
 msgctxt "MapWizard|"
@@ -13015,7 +13015,7 @@ msgstr "FlightGear"
 #: src/plugins/positionprovider/flightgear/FlightGearPositionProviderPlugin.cpp:51
 msgctxt "Marble::FlightGearPositionProviderPlugin|"
 msgid "Reports the position of running flightgear application."
-msgstr "Rapporte la position d'une application flightgear en cours."
+msgstr "Rapporte la position d'une application « flightgear » en cours."
 
 #: src/plugins/positionprovider/geoclue/GeoCluePositionProviderPlugin.cpp:16
 msgctxt "Marble::GeoCluePositionProviderPlugin|"
@@ -13070,7 +13070,7 @@ msgstr "Erreur inconnue à l'ouverture de la connexion gpsd"
 #: src/plugins/positionprovider/gpsd/GpsdPositionProviderPlugin.cpp:20
 msgctxt "Marble::GpsdPositionProviderPlugin|"
 msgid "Gpsd position provider Plugin"
-msgstr "Module fournissant la position par Gpsd"
+msgstr "Module externe fournissant la position par le processus « gpsd »"
 
 #: src/plugins/positionprovider/gpsd/GpsdPositionProviderPlugin.cpp:30
 msgctxt "Marble::GpsdPositionProviderPlugin|"
@@ -13085,22 +13085,25 @@ msgstr "Rapporte la position depuis un périphérique GPS."
 #: src/plugins/positionprovider/qtpositioning/QtPositioningPositionProviderPlugin.cpp:46
 msgctxt "Marble::QtPositioningPositionProviderPlugin|"
 msgid "Qt Positioning Position Provider Plugin"
-msgstr "Module fournissant la position depuis Qt Positioning."
+msgstr ""
+"Module externe fournissant la position depuis le module « Qt Positioning »."
 
 #: src/plugins/positionprovider/qtpositioning/QtPositioningPositionProviderPlugin.cpp:56
 msgctxt "Marble::QtPositioningPositionProviderPlugin|"
 msgid "Qt Positioning Location"
-msgstr "Localisation Qt Positioning"
+msgstr "Localisation avec « Qt Positioning »"
 
 #: src/plugins/positionprovider/qtpositioning/QtPositioningPositionProviderPlugin.cpp:66
 msgctxt "Marble::QtPositioningPositionProviderPlugin|"
 msgid "Reports the GPS position of a QtPositioning compatible device."
-msgstr "Rapporte la position GPS d'un périphérique Qt Positioning compatible."
+msgstr ""
+"Rapporte la position GPS d'un périphérique compatible avec « Qt "
+"Positioning »."
 
 #: src/plugins/positionprovider/wlocate/WlocatePositionProviderPlugin.cpp:63
 msgctxt "Marble::WlocatePositionProviderPlugin|"
 msgid "Wlocate Position Provider Plugin"
-msgstr "Module fournissant la position par Wlocate"
+msgstr "Module fournissant la position par le processus « wlocate »"
 
 #: src/plugins/positionprovider/wlocate/WlocatePositionProviderPlugin.cpp:73
 msgctxt "Marble::WlocatePositionProviderPlugin|"
@@ -15475,7 +15478,7 @@ msgid ""
 "<a href=\"https://userbase.kde.org/Marble/CustomSpeakers\">Get more "
 "speakers</a>"
 msgstr ""
-"<a href=\"https://userbase.kde.org/Marble/CustomSpeakers\">Obtenor plus de "
+"<a href=\"https://userbase.kde.org/Marble/CustomSpeakers\">Obtenir plus de "
 "locuteurs</a>"
 
 #: src/plugins/render/routing/RoutingPlugin.cpp:240
@@ -17238,12 +17241,14 @@ msgstr "Fichiers GPSBabel"
 #: src/plugins/runner/gpx/GpxPlugin.cpp:18
 msgctxt "Marble::GpxPlugin|"
 msgid "Gpx File Parser"
-msgstr "Analyseur de fichier Gpx"
+msgstr "Analyseur de fichier au format « gpx »"
 
 #: src/plugins/runner/gpx/GpxPlugin.cpp:33
 msgctxt "Marble::GpxPlugin|"
 msgid "Create GeoDataDocument from Gpx Files"
-msgstr "Créer un document de données géographiques à partir de fichiers Gpx"
+msgstr ""
+"Créer un document de données géographiques à partir de fichiers au format "
+"« gpsx »"
 
 #: src/plugins/runner/gpx/GpxPlugin.cpp:49
 msgctxt "Marble::GpxPlugin|"
@@ -17290,12 +17295,13 @@ msgstr "Analyseur de fichier KML"
 msgctxt "Marble::KmlPlugin|"
 msgid "Create GeoDataDocument from KML and KMZ Files"
 msgstr ""
-"Créer un document de données géographiques à partir de fichiers KML et KMZ"
+"Créer un document de données géographiques à partir de fichiers aux format "
+"« kml » et « kmz »"
 
 #: src/plugins/runner/kml/KmlPlugin.cpp:51
 msgctxt "Marble::KmlPlugin|"
 msgid "Google Earth KML"
-msgstr "KML de Google Earth"
+msgstr "Format « kml » de Google Earth"
 
 #: src/plugins/runner/latlon/LatLonPlugin.cpp:19
 msgctxt "Marble::LatLonPlugin|"
@@ -17315,7 +17321,7 @@ msgstr "Saisie directe des coordonnées géographiques"
 #: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:62
 msgctxt "QObject|"
 msgid "pois"
-msgstr "poi"
+msgstr "pois"
 
 #: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:64
 msgctxt "QObject|"
@@ -17855,7 +17861,7 @@ msgstr "Rien à faire."
 #: src/plugins/runner/monav/MonavConfigWidget.ui:244
 msgctxt "MonavConfigWidget|"
 msgid "%v/%m MB"
-msgstr "%v/%m MB"
+msgstr "%v / %m Mo"
 
 #: src/plugins/runner/monav/MonavConfigWidget.ui:251
 msgctxt "MonavConfigWidget|"
@@ -18072,12 +18078,14 @@ msgstr "Vélo (préférer les bandes et pistes cyclables)"
 #: src/plugins/runner/osm/OsmPlugin.cpp:18
 msgctxt "Marble::OsmPlugin|"
 msgid "Osm File Parser"
-msgstr "Analyseur de fichier Osm"
+msgstr "Analyseur de fichier au format « osm »"
 
 #: src/plugins/runner/osm/OsmPlugin.cpp:33
 msgctxt "Marble::OsmPlugin|"
 msgid "Create GeoDataDocument from Osm Files"
-msgstr "Créer un document de données géographiques à partir de fichiers Osm"
+msgstr ""
+"Créer un document de données géographiques à partir de fichiers au format "
+"« osm »"
 
 #: src/plugins/runner/osm/OsmPlugin.cpp:50
 msgctxt "Marble::OsmPlugin|"
@@ -18087,7 +18095,7 @@ msgstr "Données OpenStreetMap"
 #: src/plugins/runner/pn2/Pn2Plugin.cpp:18
 msgctxt "Marble::Pn2Plugin|"
 msgid "Pn2 File Parser"
-msgstr "Analyseur de fichier Pn2"
+msgstr "Analyseur de fichier au format « pn2 »"
 
 #: src/plugins/runner/pn2/Pn2Plugin.cpp:33
 msgctxt "Marble::Pn2Plugin|"
@@ -18202,7 +18210,7 @@ msgstr "Véhicule de service public"
 #: src/plugins/runner/shp/ShpPlugin.cpp:18
 msgctxt "Marble::ShpPlugin|"
 msgid "Shp File Parser"
-msgstr "Analyseur de fichier Shp"
+msgstr "Analyseur de fichier au format « shp »"
 
 #: src/plugins/runner/shp/ShpPlugin.cpp:33
 msgctxt "Marble::ShpPlugin|"
@@ -18267,7 +18275,7 @@ msgstr "Yours"
 #: src/plugins/runner/yours/YoursPlugin.cpp:45
 msgctxt "Marble::YoursPlugin|"
 msgid "Worldwide routing using a YOURS server"
-msgstr "Itinéraires à travers le monde via un serveur YOURS"
+msgstr "Itinéraires à travers le monde via un serveur « YOURS »"
 
 #: src/plugins/runner/yours/YoursPlugin.cpp:75
 msgctxt "Marble::YoursConfigWidget|"
