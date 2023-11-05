@@ -43,7 +43,6 @@
   <name xml:lang="sv">Marble</name>
   <name xml:lang="tr">Bilye</name>
   <name xml:lang="uk">Marble</name>
-  <name xml:lang="x-test">xxMarblexx</name>
   <name xml:lang="zh-CN">Marble 虚拟地球仪</name>
   <name xml:lang="zh-TW">地球儀_Marble</name>
   <summary>Virtual Globe</summary>
@@ -82,7 +81,6 @@
   <summary xml:lang="sv">Virtuell glob</summary>
   <summary xml:lang="tr">Sanal Küre</summary>
   <summary xml:lang="uk">Віртуальний глобус</summary>
-  <summary xml:lang="x-test">xxVirtual Globexx</summary>
   <summary xml:lang="zh-CN">虚拟地球仪</summary>
   <summary xml:lang="zh-TW">虛擬地球儀</summary>
   <description>
@@ -114,7 +112,6 @@
     <p xml:lang="sv">Marble är en virtuell jordglob och världsatlas - det generella kartverktyget som kan användas för att lära sig mer om jorden och andra planeter.</p>
     <p xml:lang="tr">Bilye bir sanal küre ve dünya atlasıdır — haritaların İsviçre çakısıdır. Dünya ve diğer gezegenler hakkında bir sürü yeni şey öğrenebilirsiniz.</p>
     <p xml:lang="uk">Marble — віртуальний глобус та атлас світу, — ваш універсальний інструмент для роботи з картами, яким ви можете скористатися для вивчення Землі та інших планет.</p>
-    <p xml:lang="x-test">xxMarble is a virtual globe and world atlas — your swiss army knife for maps that you can use to learn more about the Earth and other planets.xx</p>
     <p xml:lang="zh-CN">Marble 是一款虚拟地球仪和世界地图应用程序。它具备与地图相关的各种功能，为用户了解地球以及其他行星提供了有力工具。</p>
     <p xml:lang="zh-TW">Marble 是一套虛擬地球儀與世界地圖集 — 如同您的地圖瑞士軍刀，能學習關於地球和其他星球的更多資訊。</p>
     <p>Explore the neighborhood with Marble's rich set of city and street level maps. Search for addresses and places of interest. Marble takes care of querying various search backends and presents their results in a unified view. Calculate pedestrian, bike and motorcar routes with ease — online and offline, with an arbitrary number of via points.</p>
@@ -147,7 +144,6 @@
     <p xml:lang="sv">Utforska grannskapet med den omfattande mängden stads- och vägkartor i Marble. Sök efter adresser och intressanta platser. Marble tar hand om att fråga diverse söktjänster och presentera resultaten i en gemensam vy. Beräkna gång-, cykel- och bilvägar med lätthet — uppkopplad och nedkopplad, med godtyckligt antal vägpunkter.</p>
     <p xml:lang="tr">Bilye'nin zengin şehir ve cadde düzeyindeki haritaları ile çevreyi inceleyin. Adresleri ve ilginizi çeken yerleri arayın. Bilye, çeşitli arama arka uçlarıyla sorgulamaları ve birleşik bir görünüm ile kendi sonuçlarını göstermektedir. Çevrimiçi ve çevrimdışı şekilde, yaya, bisiklet ve motorlu taşıt rotalarını kolayca hesaplar.</p>
     <p xml:lang="uk">Вивчайте околиці за допомогою широкого набору карт Marble. Шукайте цікаві адреси і місця. Marble може виконувати обробку запитів до декількох модулів пошуку одночасно і показувати єдиний список результатів пошуку. Ви можете без проблем складати пішохідні, велосипедні та автомобільні маршрути за допомогою інтернет-служб та без них, визначаючи довільну кількість проміжних пунктів маршруту.</p>
-    <p xml:lang="x-test">xxExplore the neighborhood with Marble's rich set of city and street level maps. Search for addresses and places of interest. Marble takes care of querying various search backends and presents their results in a unified view. Calculate pedestrian, bike and motorcar routes with ease — online and offline, with an arbitrary number of via points.xx</p>
     <p xml:lang="zh-CN">Marble 提供了丰富多彩的城市和街道地图来帮助您探索周边区域，搜索地址和名胜。Marble 可以管理多种不同后端程序的查询请求，并在统一的视图中显示结果。它还能够简便地计算步行、骑行和驾驶路线，支持在线和离线使用，并可设置途径点。</p>
     <p xml:lang="zh-TW">透過 Marble 豐富的城市與街道地圖來探索您的鄰近地區。可以搜尋地址與有趣的地方。Marble 有多個不同的搜尋後端介面，並將它們的搜尋結果在統一的檢視介面中顯示。您也可以輕鬆計算走路、騎車或開車的路徑，設定經過點，甚至可以離線作業。</p>
     <p>Start exploring the world. View clouds and sun shadow, follow satellites and space stations and display their orbits, all updated in real-time. Travel back in time and learn about historic views of our planet using maps from past centuries. Earth is not enough? Marble also offers maps of the moon and other planets.</p>
@@ -180,7 +176,6 @@
     <p xml:lang="sv">Börja utforska världen. Titta på moln och solskuggor, följ satelliter och rymdstationer och visa deras banor, allt uppdaterat i realtid. Res tillbaka i tiden och lär dig om historiska vyer av planeten genom att använda kartor från gångna århundraden. Räcker det inte med jorden? Marble erbjuder också kartor över månen och andra planeter.</p>
     <p xml:lang="tr">Dünyayı incelemeye başlayın. Bulutları ve güneş gölgelerini görün, uyduları ve uzay istasyonlarını takip edin, ayrıca yörüngelerini de gerçek zamanlı takip edebilirsiniz. Geçmişe dönük yolculuk yapın ve geçmiş yüzyıllardan kullanılan haritalar ile gezegenimizin tarihsel görünümleri hakkında bilgi sahibi olun. Dünya yeterli değil mi? Bilye ayrıca, ayın ve diğer gezegenlerin haritalarını da önerir.</p>
     <p xml:lang="uk">Почніть вивчення світу. Спостерігайте за хмарами та зміною дня і ночі, стежте за супутниками та космічними станціями: програма здатна показувати орбіти штучних супутників та оновлює дані у режимі реального часу. Подорожуйте у часі і вивчайте давні карти нашої планети. Землі вже замало? За допомогою ви можете переглядати карти Місяця та інших планет.</p>
-    <p xml:lang="x-test">xxStart exploring the world. View clouds and sun shadow, follow satellites and space stations and display their orbits, all updated in real-time. Travel back in time and learn about historic views of our planet using maps from past centuries. Earth is not enough? Marble also offers maps of the moon and other planets.xx</p>
     <p xml:lang="zh-CN">Marble 能够让您尽情探索世界。它能显示云层和太阳阴影，实时跟踪卫星和空间站并显示它们的轨道。您还可以使用旧世纪的历史地图来领略先人对地球的认知。如果地球已经无法满足您的好奇心，Marble 还提供了月球和其他行星的地图。</p>
     <p xml:lang="zh-TW">開始探索世界吧！檢視雲與太陽的陰影，跟著衛星與太空站顯示的軌道，所有的一切都是即時更新。時光旅行回到過去，看看過去的地圖上的旅程。地球不夠看嗎？Marble 也提供了月球與其他星球的地圖喔！</p>
   </description>
@@ -222,7 +217,6 @@
       <caption xml:lang="sv">Jordgloben i Marble</caption>
       <caption xml:lang="tr">Bilye'de Yerküre</caption>
       <caption xml:lang="uk">Глобус Землі у вікні Marble</caption>
-      <caption xml:lang="x-test">xxEarth globe in Marblexx</caption>
       <caption xml:lang="zh-CN">Marble 的地球仪</caption>
       <caption xml:lang="zh-TW">Marble 中的球狀地球</caption>
       <image>https://cdn.kde.org/screenshots/marble/marble.png</image>
