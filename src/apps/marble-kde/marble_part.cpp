@@ -427,7 +427,7 @@ void MarblePart::copyCoordinates()
 
 void MarblePart::readSettings()
 {
-    qDebug() << "Start: MarblePart::readSettings()";
+    qDebug() << "start";
 
     // Set home position
     m_controlView->marbleModel()->setHome( MarbleSettings::homeLongitude(),

@@ -527,7 +527,7 @@ void StarsPlugin::celestialPoleGetColor()
 
 void StarsPlugin::loadStars()
 {
-    //mDebug() << Q_FUNC_INFO;
+    //mDebug();
     // Load star data
     m_stars.clear();
 

@@ -453,7 +453,7 @@ void CylindricalProjectionPrivate::repeatPolygons( const ViewportParams *viewpor
 
     polygons = repeatedPolygons;
 
-    // mDebug() << Q_FUNC_INFO << "Coordinates: " << xWest << xEast
+    // mDebug() << "Coordinates: " << xWest << xEast
     //          << "Repeats: " << repeatsLeft << repeatsRight;
 }
 

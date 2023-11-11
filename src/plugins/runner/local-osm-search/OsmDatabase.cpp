@@ -106,7 +106,7 @@ QVector<OsmPlacemark> OsmDatabase::find( const DatabaseQuery &userQuery )
             }
             regionRestriction += QLatin1Char(')');
 
-            mDebug() << Q_FUNC_INFO << "region query in" << databaseFile << "with query" << regionsQueryString
+            mDebug() << "region query in" << databaseFile << "with query" << regionsQueryString
                      << "took" << regionTimer.elapsed() << "ms for" << regionCount << "results";
 
             if ( regionCount == 0 ) {
@@ -186,7 +186,7 @@ QVector<OsmPlacemark> OsmDatabase::find( const DatabaseQuery &userQuery )
             resultCount++;
         }
 
-        mDebug() << Q_FUNC_INFO << "query in" << databaseFile << "with query" << queryString
+        mDebug() << "query in" << databaseFile << "with query" << queryString
                  << "took" << queryTimer.elapsed() << "ms for" << resultCount << "results";
     }
 

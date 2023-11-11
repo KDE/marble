@@ -44,7 +44,7 @@ void PanoramioItem::addDownloadedFile( const QString &url, const QString &type )
         update();
     }
     else {
-        mDebug() << Q_FUNC_INFO << "can't handle type" << type;
+        mDebug() << "can't handle type" << type;
     }
 }
 

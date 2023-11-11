@@ -72,7 +72,7 @@ bool GeoSceneSettings::propertyAvailable( const QString& name, bool& available )
 
 bool GeoSceneSettings::setPropertyValue( const QString& name, bool value )
 {
-    mDebug() << "GeoSceneSettings: Property " << name << "to" << value; 
+    mDebug() << name << "to" << value;
     
     QVector<GeoSceneProperty*>::const_iterator it = d->m_properties.constBegin();
     QVector<GeoSceneProperty*>::const_iterator propEnd = d->m_properties.constEnd();

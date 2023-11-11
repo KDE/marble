@@ -66,7 +66,7 @@ void GeoDataLineStringPrivate::interpolateDateLine( const GeoDataCoordinates & p
 {
     GeoDataCoordinates dateLineCoords;
 
-//    mDebug() << Q_FUNC_INFO;
+//    mDebug();
 
     if ( f.testFlag( RespectLatitudeCircle ) && previousCoords.latitude() == currentCoords.latitude() ) {
         dateLineCoords = currentCoords;

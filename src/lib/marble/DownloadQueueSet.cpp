@@ -113,7 +113,7 @@ void DownloadQueueSet::purgeJobs()
 
 void DownloadQueueSet::finishJob( HttpJob * job, const QByteArray& data )
 {
-    mDebug() << "finishJob: " << job->sourceUrl() << job->destinationFileName();
+    mDebug() << job->sourceUrl() << job->destinationFileName();
 
     deactivateJob( job );
     emit jobRemoved();
@@ -124,7 +124,7 @@ void DownloadQueueSet::finishJob( HttpJob * job, const QByteArray& data )
 
 void DownloadQueueSet::redirectJob( HttpJob * job, const QUrl& newSourceUrl )
 {
-    mDebug() << "jobRedirected:" << job->sourceUrl() << " -> " << newSourceUrl;
+    mDebug() << job->sourceUrl() << " -> " << newSourceUrl;
 
     deactivateJob( job );
     emit jobRemoved();

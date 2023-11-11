@@ -296,7 +296,7 @@ void PluginManagerPrivate::loadPlugins()
 
     m_pluginsLoaded = true;
 
-    mDebug() << Q_FUNC_INFO << "Time elapsed:" << t.elapsed() << "ms";
+    mDebug() << "Time elapsed:" << t.elapsed() << "ms";
 }
 
 #ifdef Q_OS_ANDROID

@@ -80,7 +80,7 @@ bool FileStoragePolicy::updateFile( const QString &fileName, const QByteArray &d
 
 void FileStoragePolicy::clearCache()
 {
-    mDebug() << Q_FUNC_INFO;
+    mDebug();
     if ( m_dataDirectory.isEmpty()
     || !(m_dataDirectory.endsWith(QLatin1String( "data" ))   // on Windows
     ||   m_dataDirectory.endsWith(QLatin1String( "marble" )) // on all other OSes

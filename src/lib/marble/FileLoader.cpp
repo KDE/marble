@@ -508,7 +508,7 @@ void FileLoaderPrivate::createFilterProperties( GeoDataContainer *container )
                 placemark->setZoomLevel( 0 );
             }
         } else {
-            qWarning() << Q_FUNC_INFO << "Unknown feature" << (*i)->nodeType() << ". Skipping.";
+            qWarning() << "Unknown feature" << (*i)->nodeType() << ". Skipping.";
         }
     }
 }

@@ -1160,7 +1160,7 @@ void MainWindow::readSettings(const QVariantMap& overrideSettings)
          } else {
             mapThemeId = settings.value("mapTheme", m_controlView->defaultMapThemeId() ).toString();
          }
-         mDebug() << Q_FUNC_INFO << "mapThemeId:" << mapThemeId;
+         mDebug() << "mapThemeId:" << mapThemeId;
          m_controlView->marbleWidget()->setMapThemeId( mapThemeId );
          m_controlView->marbleWidget()->setProjection(
             (Projection)(settings.value("projection", Spherical ).toInt())
@@ -1483,7 +1483,7 @@ void MainWindow::editSettings()
 
 void MainWindow::updateSettings()
 {
-    mDebug() << Q_FUNC_INFO << "Updating Settings ...";
+    mDebug() << "Updating Settings ...";
 
     // FIXME: Font doesn't get updated instantly.
     m_controlView->marbleWidget()->setDefaultFont( m_configDialog->mapFont() );

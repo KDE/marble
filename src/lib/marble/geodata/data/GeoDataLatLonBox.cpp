@@ -324,7 +324,7 @@ bool GeoDataLatLonBox::containsPole( Pole pole ) const
                  || 2 * south() == -M_PI );
     }
 
-    mDebug() << Q_FUNC_INFO << "Invalid pole";
+    mDebug() << "Invalid pole";
     return false;
 }
 

@@ -1276,7 +1276,7 @@ bool MarbleMap::showDebugPolygons() const
 
 void MarbleMap::setShowDebugBatchRender( bool visible)
 {
-    qDebug() << Q_FUNC_INFO << visible;
+    qDebug() << visible;
     if (visible != d->m_showDebugBatchRender) {
         d->m_showDebugBatchRender = visible;
         emit repaintNeeded();

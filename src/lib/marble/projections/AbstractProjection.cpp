@@ -85,7 +85,7 @@ qreal AbstractProjection::maxLat() const
 void AbstractProjection::setMaxLat( qreal maxLat )
 {
     if ( maxLat < maxValidLat() ) {
-        mDebug() << Q_FUNC_INFO << "Trying to set maxLat to a value that is out of the valid range.";
+        mDebug() << "Trying to set maxLat to a value that is out of the valid range.";
         return;
     }
 
@@ -107,7 +107,7 @@ qreal AbstractProjection::minLat() const
 void AbstractProjection::setMinLat( qreal minLat )
 {
     if ( minLat < minValidLat() ) {
-        mDebug() << Q_FUNC_INFO << "Trying to set minLat to a value that is out of the valid range.";
+        mDebug() << "Trying to set minLat to a value that is out of the valid range.";
         return;
     }
 

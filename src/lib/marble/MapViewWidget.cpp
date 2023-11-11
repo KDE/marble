@@ -615,7 +615,7 @@ void MapViewWidget::Private::mapThemeSelected( int index )
     const QModelIndex columnIndex = m_mapSortProxy.index( index, 0 );
     const QString currentmaptheme = m_mapSortProxy.data( columnIndex, Qt::UserRole + 1 ).toString();
 
-    mDebug() << Q_FUNC_INFO << currentmaptheme;
+    mDebug() << currentmaptheme;
 
     emit q->mapThemeIdChanged( currentmaptheme );
 }
@@ -643,7 +643,7 @@ QString MapViewWidget::Private::favoriteKey(const QModelIndex &index) const
 
 void MapViewWidget::Private::showContextMenu( const QPoint& pos )
 {
-    qDebug() << Q_FUNC_INFO;
+    qDebug();
     Q_UNUSED(pos)
     QMenu menu;
 

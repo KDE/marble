@@ -294,21 +294,21 @@ void ClipPainter::labelPosition(const QPolygonF &polygon, QVector<QPointF> &labe
 
 void ClipPainter::setPen(const QColor &color) {
     if (d->m_debugBatchRender) {
-        qDebug() << Q_FUNC_INFO;
+        qDebug();
     }
     setPen(QPen(color));
 }
 
 void ClipPainter::setPen(Qt::PenStyle style) {
     if (d->m_debugBatchRender) {
-        qDebug() << Q_FUNC_INFO;
+        qDebug();
     }
     setPen(QPen(style));
 }
 
 void ClipPainter::setPen(const QPen & pen) {
     if (d->m_debugBatchRender) {
-        qDebug() << Q_FUNC_INFO;
+        qDebug();
         if (pen != QPainter::pen()) {
             qDebug() << "--" << pen.color()  << QPainter::pen().color() ;
             QPen newPen = pen;
@@ -329,7 +329,7 @@ void ClipPainter::setPen(const QPen & pen) {
 
 void ClipPainter::setBrush(const QBrush & brush) {
     if (d->m_debugBatchRender) {
-        qDebug() << Q_FUNC_INFO;
+        qDebug();
         if (brush != QPainter::brush()) {
             qDebug() << "--" << brush.color()  << QPainter::brush().color() ;
             QBrush batchColor(QColor((Qt::GlobalColor)(d->m_debugBrushBatchColor)));
@@ -443,7 +443,7 @@ QPointF ClipPainterPrivate::interpolateLabelPoint(const QPointF &previousPoint,
                           q->viewport().height() - m_labelAreaMargin );        
     }
 
-//    mDebug() << Q_FUNC_INFO << "Previous and current node position are allowed!";
+//    mDebug() << "Previous and current node position are allowed!";
 
     return QPointF( -1.0, -1.0 );
 }

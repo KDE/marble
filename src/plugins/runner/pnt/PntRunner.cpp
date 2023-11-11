@@ -67,20 +67,20 @@ GeoDataDocument *PntRunner::parseFile(const QString &fileName, DocumentRole role
 
         // make sure iLat is within valid range
         if ( !( -5400 <= iLat && iLat <= 5400 ) ) {
-            mDebug() << Q_FUNC_INFO << "invalid iLat =" << iLat << "(" << ( iLat * INT2RAD ) * RAD2DEG << ") in dataset" << count << "of file" << fileName;
+            mDebug() << "invalid iLat =" << iLat << "(" << ( iLat * INT2RAD ) * RAD2DEG << ") in dataset" << count << "of file" << fileName;
             error = true;
         }
 
         // make sure iLon is within valid range
         if ( !( -10800 <= iLon && iLon <= 10800 ) ) {
-            mDebug() << Q_FUNC_INFO << "invalid iLon =" << iLon << "(" << ( iLon * INT2RAD ) * RAD2DEG << ") in dataset" << count << "of file" << fileName;
+            mDebug() << "invalid iLon =" << iLon << "(" << ( iLon * INT2RAD ) * RAD2DEG << ") in dataset" << count << "of file" << fileName;
             error = true;
         }
 
         if (header >= 1000 && !document->isEmpty()) {
             GeoDataLineString *const polyline = static_cast<GeoDataLineString*>( placemark->geometry() );
             if ( polyline->size() == 1 ) {
-                mDebug() << Q_FUNC_INFO << fileName << "contains single-point polygon at" << count << ". Aborting.";
+                mDebug() << fileName << "contains single-point polygon at" << count << ". Aborting.";
                 error = true;
                 break;
             }
@@ -88,7 +88,7 @@ GeoDataDocument *PntRunner::parseFile(const QString &fileName, DocumentRole role
 
         if ( header < 1 ) {
             /* invalid header */
-            mDebug() << Q_FUNC_INFO << "invalid header:" << header << "in" << fileName << "at" << count;
+            mDebug() << "invalid header:" << header << "in" << fileName << "at" << count;
             error = true;
             break;
         }
@@ -98,7 +98,7 @@ GeoDataDocument *PntRunner::parseFile(const QString &fileName, DocumentRole role
         }
         else if ( header < 1000 ) {
             /* invalid header */
-            mDebug() << Q_FUNC_INFO << "invalid header:" << header << "in" << fileName << "at" << count;
+            mDebug() << "invalid header:" << header << "in" << fileName << "at" << count;
             error = true;
             break;
         }
@@ -152,7 +152,7 @@ GeoDataDocument *PntRunner::parseFile(const QString &fileName, DocumentRole role
         }
         else if ( header < 14000 ) {
             /* invalid header */
-            mDebug() << Q_FUNC_INFO << "invalid header:" << header << "in" << fileName << "at" << count;
+            mDebug() << "invalid header:" << header << "in" << fileName << "at" << count;
             error = true;
             break;
         }
@@ -164,7 +164,7 @@ GeoDataDocument *PntRunner::parseFile(const QString &fileName, DocumentRole role
         }
         else if ( header < 19000 ) {
             /* invalid header */
-            mDebug() << Q_FUNC_INFO << "invalid header:" << header << "in" << fileName << "at" << count;
+            mDebug() << "invalid header:" << header << "in" << fileName << "at" << count;
             error = true;
             break;
         }
@@ -176,7 +176,7 @@ GeoDataDocument *PntRunner::parseFile(const QString &fileName, DocumentRole role
         }
         else {
             /* invalid header */
-            mDebug() << Q_FUNC_INFO << "invalid header:" << header << "in" << fileName << "at" << count;
+            mDebug() << "invalid header:" << header << "in" << fileName << "at" << count;
             error = true;
             break;
         }

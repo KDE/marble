@@ -63,7 +63,7 @@ void saveFile( const QString& filename, GeoDataDocument* document )
 {
     QFile file( filename );
     if ( !file.open( QIODevice::WriteOnly ) ) {
-        qDebug() << Q_FUNC_INFO << "Can't open" << filename << "for writing";
+        qDebug() << "Can't open" << filename << "for writing";
         return;
     }
     QDataStream out( &file );

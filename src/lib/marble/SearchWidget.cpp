@@ -80,7 +80,7 @@ void SearchWidgetPrivate::setSearchResult( const QVector<GeoDataPlacemark *>& lo
                 m_sortproxy.mapFromSource(
                     m_branchfilter.mapFromSource( treeModel->index( m_document ) ) ) );
     m_widget->centerOn( m_document->latLonAltBox() );
-    mDebug() << Q_FUNC_INFO << " Time elapsed:"<< timer.elapsed() << " ms";
+    mDebug() << " Time elapsed:"<< timer.elapsed() << " ms";
 }
 
 SearchWidget::SearchWidget( QWidget *parent, Qt::WindowFlags flags ) :

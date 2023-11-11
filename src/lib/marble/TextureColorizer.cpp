@@ -133,7 +133,7 @@ TextureColorizer::TextureColorizer( const QString &seafile,
     shadingPainter.end();  // Need to explicitly tell painter lifetime to avoid crash
     gradientPainter.end(); // on some systems. 
 
-    mDebug() << Q_FUNC_INFO << "Time elapsed:" << t.elapsed() << "ms";
+    mDebug() << "Time elapsed:" << t.elapsed() << "ms";
 }
 
 void TextureColorizer::addSeaDocument( const GeoDataDocument *seaDocument )

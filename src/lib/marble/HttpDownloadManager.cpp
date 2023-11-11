@@ -138,7 +138,7 @@ void HttpDownloadManager::addJob( const QUrl& sourceUrl, const QString& destFile
                                   const QString &id, const DownloadUsage usage )
 {
     if ( !d->m_acceptJobs ) {
-        mDebug() << Q_FUNC_INFO << "Working offline, not adding job";
+        mDebug() << "Working offline, not adding job";
         return;
     }
 

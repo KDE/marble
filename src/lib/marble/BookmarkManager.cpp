@@ -91,7 +91,7 @@ bool BookmarkManager::loadFile( const QString &relativeFilePath )
     d->m_bookmarkFileRelativePath = relativeFilePath;
     QString absoluteFilePath = bookmarkFile();
 
-    mDebug() << Q_FUNC_INFO << "Loading Bookmark File:" << absoluteFilePath;
+    mDebug() << "Loading Bookmark File:" << absoluteFilePath;
 
     if (absoluteFilePath.isEmpty())
         return false;

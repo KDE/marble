@@ -396,7 +396,7 @@ QList<QStandardItem *> MapThemeManager::Private::createMapThemeRow( QString cons
 
 void MapThemeManager::Private::updateMapThemeModel()
 {
-    mDebug() << "updateMapThemeModel";
+    mDebug();
     m_mapThemeModel.clear();
 
     m_mapThemeModel.setHeaderData(0, Qt::Horizontal, QObject::tr("Name"));

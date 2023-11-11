@@ -205,7 +205,7 @@ FileStorageWatcher::FileStorageWatcher( const QString &dataDirectory, QObject * 
 
 FileStorageWatcher::~FileStorageWatcher()
 {
-    mDebug() << "Deleting FileStorageWatcher";
+    mDebug();
     
     // Making sure that Thread is stopped.
     m_quitting = true;
