@@ -1,6 +1,6 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# Vít Pelčák <vit@pelcak.org>, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2019, 2020.
+# SPDX-FileCopyrightText: 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2019, 2020, 2023 Vít Pelčák <vit@pelcak.org>
 # Vit Pelcak <vit@pelcak.org>, 2021, 2023.
 #
 msgid ""
@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: marble_qt\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2023-06-22 14:54+0200\n"
+"PO-Revision-Date: 2023-11-10 16:31+0100\n"
 "Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
 "Language: cs\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Lokalize 23.04.2\n"
+"X-Generator: Lokalize 23.08.2\n"
 "X-Qt-Contexts: true\n"
 
 #. file data/maps/moon/clementine/clementine.dgml:5
@@ -10654,7 +10654,7 @@ msgstr ""
 #: src/lib/marble/MarbleViewSettingsWidget.ui:266
 msgctxt "MarbleViewSettingsWidget|"
 msgid "&Text Labels"
-msgstr "Te&xtové štítky"
+msgstr "Te&xtové popisky"
 
 #: src/lib/marble/MarbleViewSettingsWidget.ui:286
 msgctxt "MarbleViewSettingsWidget|"
@@ -14017,7 +14017,7 @@ msgstr "Popisky"
 #: src/plugins/render/graticule/GraticuleConfigWidget.ui:1398
 msgctxt "GraticuleConfigWidget|"
 msgid "&Named Labels"
-msgstr "Pojme&nované štítky"
+msgstr "Pojme&nované popisky"
 
 #: src/plugins/render/graticule/GraticuleConfigWidget.ui:1408
 msgctxt "GraticuleConfigWidget|"
@@ -14027,12 +14027,12 @@ msgstr ""
 #: src/plugins/render/graticule/GraticuleConfigWidget.ui:1415
 msgctxt "GraticuleConfigWidget|"
 msgid "&Numerical Labels"
-msgstr "Čísel&né štítky"
+msgstr "Čísel&né popisky"
 
 #: src/plugins/render/graticule/GraticuleConfigWidget.ui:1425
 msgctxt "GraticuleConfigWidget|"
 msgid "Show numerical Labels."
-msgstr "Zobrazit číselné štítky."
+msgstr "Zobrazit číselné popisky."
 
 #: src/plugins/render/graticule/GraticulePlugin.cpp:71
 msgctxt "Marble::GraticulePlugin|"
@@ -14438,7 +14438,7 @@ msgstr ""
 #: src/plugins/render/opencaching/OpenCachingCacheDialog.ui:283
 msgctxt "OpenCachingCacheDialog|KDE::DoNotExtract"
 msgid "TextLabel"
-msgstr "Textový štítek"
+msgstr "Textový popisek"
 
 #: src/plugins/render/opencaching/OpenCachingCacheDialog.ui:56
 msgctxt "OpenCachingCacheDialog|"
