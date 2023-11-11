@@ -376,6 +376,15 @@ add_library(marblewidget ${marblewidget_SRCS} ${SOURCES_UI_HDRS})
 
 generate_export_header(marblewidget BASE_NAME marble)
 
+# Logging for the Marble library
+ecm_qt_export_logging_category(
+  IDENTIFIER "MARBLE_LIB"
+  CATEGORY_NAME "marble_lib"
+  EXPORT marble
+  DESCRIPTION "Marble (library)")
+
+add_definitions("-DLOGGING_IDENTIFIER=MARBLE_LIB")
+
 # link with libastro
 target_link_libraries(marblewidget PRIVATE astro)
 

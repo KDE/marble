@@ -5,39 +5,21 @@
 
 #include "MarbleDebug.h"
 
+
+/**
+ * All of the logging categories supported by Marble.
+ *
+ * Add any new logging categories as required here.
+ * See @c MarbleDebug.h for more information.
+ */
+MARBLE_EXPORT Q_LOGGING_CATEGORY(MARBLE_DEFAULT, "marble_default")
+MARBLE_EXPORT Q_LOGGING_CATEGORY(MARBLE_LIB, "marble_lib")
+MARBLE_EXPORT Q_LOGGING_CATEGORY(MARBLE_PLUGINS, "marble_plugins")
+
+
 namespace Marble
 {
 bool MarbleDebug::m_enabled = false;
-
-class NullDevice : public QIODevice
-{
-public:
-    NullDevice()
-    {
-        open( QIODevice::WriteOnly );
-    }
-
-    qint64 readData( char * /*data*/, qint64 /*maxSize*/ ) override
-    {
-        return -1;
-    }
-
-    qint64 writeData( const char * /*data*/, qint64 maxSize ) override
-    {
-        return maxSize;
-    }
-};
-
-QDebug mDebug()
-{
-    if ( MarbleDebug::isEnabled() ) {
-        return QDebug( QtDebugMsg );
-    }
-    else {
-        static QIODevice *device = new NullDevice;
-        return QDebug( device );
-    }
-}
 
 bool MarbleDebug::isEnabled()
 {
@@ -46,6 +28,7 @@ bool MarbleDebug::isEnabled()
 
 void MarbleDebug::setEnabled(bool enabled)
 {
+    qCWarning(MARBLE_DEFAULT) << "Control of debug output using this function is no longer implemented, use the Qt logging settings";
     MarbleDebug::m_enabled = enabled;
 }
 

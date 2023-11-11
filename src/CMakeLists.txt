@@ -79,3 +79,14 @@ endif(APPLE)
 add_subdirectory( plasma )
 add_subdirectory( plasmarunner )
 add_subdirectory( thumbnailer )
+
+# Default logging for where no specific category is set
+ecm_qt_export_logging_category(
+  IDENTIFIER "MARBLE_DEFAULT"
+  CATEGORY_NAME "marble_default"
+  EXPORT marble
+  DESCRIPTION "Marble (default)")
+
+ecm_qt_install_logging_categories(
+  EXPORT marble
+  DESTINATION "${KDE_INSTALL_LOGGINGCATEGORIESDIR}")

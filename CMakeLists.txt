@@ -325,6 +325,7 @@ if(ECM_FOUND)
   include(ECMInstallIcons)
   include(ECMEnableSanitizers)
   include(ECMCoverageOption)
+  include(ECMQtDeclareLoggingCategory)
 endif()
 
 ####################################################
