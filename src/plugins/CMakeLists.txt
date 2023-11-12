@@ -1,11 +1,12 @@
 
-# Logging for Marble plugins
-ecm_qt_export_logging_category(
-  IDENTIFIER "MARBLE_PLUGINS"
-  CATEGORY_NAME "marble_plugins"
-  EXPORT marble
-  DESCRIPTION "Marble (plugins)")
-
+if(ECM_FOUND)
+  # Logging for Marble plugins
+  ecm_qt_export_logging_category(
+    IDENTIFIER "MARBLE_PLUGINS"
+    CATEGORY_NAME "marble_plugins"
+    EXPORT marble
+    DESCRIPTION "Marble (plugins)")
+endif()
 add_definitions("-DLOGGING_IDENTIFIER=MARBLE_PLUGINS")
 
 if(NOT ANDROID)
