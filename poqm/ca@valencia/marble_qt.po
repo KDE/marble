@@ -3581,7 +3581,7 @@ msgstr "Conflicte de sincronització"
 #, qt-format
 msgctxt "Marble::OwncloudSyncBackend|"
 msgid "Server '%1' could not be reached"
-msgstr "No s'ha pogut accedir al servidor «%1»"
+msgstr "No s'ha pogut accedir a l'amfitrió «%1»"
 
 #: src/lib/marble/cloudsync/OwncloudSyncBackend.cpp:316
 msgctxt "Marble::OwncloudSyncBackend|"
@@ -13021,7 +13021,7 @@ msgstr "S'ha produït un error intern de «gpsd» (no es pot accedir al servei)"
 msgctxt "Marble::GpsdConnection|"
 msgid "Internal gpsd error (cannot get host entry)"
 msgstr ""
-"S'ha produït un error intern de «gpsd» (no es pot accedir a la màquina)"
+"S'ha produït un error intern de «gpsd» (no es pot accedir a l'amfitrió)"
 
 #: src/plugins/positionprovider/gpsd/GpsdConnection.cpp:70
 msgctxt "Marble::GpsdConnection|"
@@ -17233,7 +17233,7 @@ msgstr "Hostip.info"
 msgctxt "Marble::HostipPlugin|"
 msgid "Host name and IP geolocation search using the hostip.info service"
 msgstr ""
-"Busca de nom de màquina i la geolocalització IP utilitzant el servei hostip."
+"Busca de nom d'amfitrió i la geolocalització IP utilitzant el servei hostip."
 "info"
 
 #: src/plugins/runner/json/JsonPlugin.cpp:21
