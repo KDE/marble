@@ -632,7 +632,7 @@ msgstr "Activa l'eixida de depuració"
 #: kdemain.cpp:329
 #, kde-format
 msgid "Display OSM placemarks according to the level selected"
-msgstr "Mostra les marques de lloc de l'OSM segons el nivell seleccionat"
+msgstr "Mostra les marques de lloc d'OSM segons el nivell seleccionat"
 
 #: kdemain.cpp:331
 #, kde-format
