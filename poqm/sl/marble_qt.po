@@ -4,14 +4,14 @@
 #
 # Jure Repinc <jlp@holodeck1.com>, 2007, 2008, 2012.
 # Andrej Mernik <andrejm@ubuntu.si>, 2013, 2014, 2015, 2016, 2017, 2018.
-# Matjaž Jeran <matjaz.jeran@amis.net>, 2019, 2020, 2021, 2022, 2023.
+# SPDX-FileCopyrightText: 2019, 2020, 2021, 2022, 2023 Matjaž Jeran <matjaz.jeran@amis.net>
 # Martin Srebotnjak <miles@filmsi.net>, 2020, 2021, 2022.
 msgid ""
 msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2023-04-22 08:43+0200\n"
+"PO-Revision-Date: 2023-11-20 17:13+0100\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
@@ -21,7 +21,7 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100>=3 && n"
 "%100<=4 ? 2 : 3);\n"
 "Translator: Andrej Mernik <andrejm@ubuntu.si>\n"
-"X-Generator: Poedit 3.2.2\n"
+"X-Generator: Lokalize 23.08.3\n"
 "X-Qt-Contexts: true\n"
 
 #. file data/maps/moon/clementine/clementine.dgml:5
@@ -13732,17 +13732,17 @@ msgstr ""
 #: src/plugins/render/atmosphere/AtmospherePlugin.cpp:60
 msgctxt "Marble::AtmospherePlugin|"
 msgid "Atmosphere"
-msgstr "Ozračje"
+msgstr "Atmosfera"
 
 #: src/plugins/render/atmosphere/AtmospherePlugin.cpp:65
 msgctxt "Marble::AtmospherePlugin|"
 msgid "&Atmosphere"
-msgstr "&Ozračje"
+msgstr "&Atmosfera"
 
 #: src/plugins/render/atmosphere/AtmospherePlugin.cpp:80
 msgctxt "Marble::AtmospherePlugin|"
 msgid "Shows the atmosphere around the earth."
-msgstr "Okoli Zemlje pokaže ozračje."
+msgstr "Pokaže atmosfero okrog Zemlje."
 
 #: src/plugins/render/compass/CompassConfigWidget.ui:14
 msgctxt "CompassConfigWidget|"
@@ -13842,7 +13842,7 @@ msgstr "Nitni križ"
 #: src/plugins/render/crosshairs/CrosshairsPlugin.cpp:77
 msgctxt "Marble::CrosshairsPlugin|"
 msgid "Cross&hairs"
-msgstr "&Nitni križ"
+msgstr "Nitni križ"
 
 #: src/plugins/render/crosshairs/CrosshairsPlugin.cpp:92
 msgctxt "Marble::CrosshairsPlugin|"
