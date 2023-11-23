@@ -153,7 +153,7 @@ endif()
 
 
 # Find Qt translation tools
-#find_package(Qt6LinguistTools CONFIG)
+find_package(Qt6LinguistTools CONFIG)
 
 if(NOT Qt6LinguistTools_FOUND)
 
