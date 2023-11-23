@@ -72,7 +72,6 @@ set ( CMAKE_MODULE_PATH
 
 # add cmake macros
 include(GenerateExportHeader)
-include( MarbleMacros )
 
 ####################################################
 # Generate the tiles with the tilecreator at compile time
@@ -100,12 +99,8 @@ if(ANDROID)
    add_definitions(-DANDROID)
 endif()
 
-
 #######################################################
 # Find Qt dependencies
-
-find_package(Protobuf)
-set_package_properties(Protobuf PROPERTIES TYPE OPTIONAL PURPOSE "Parsing of OSM PBF files.")
 
 if(ANDROID)
     set(REQUIRED_QT_VERSION 5.14.0)
@@ -130,6 +125,11 @@ find_package(Qt6 ${REQUIRED_QT_VERSION} REQUIRED
         PrintSupport
         Core5Compat
 )
+
+include( MarbleMacros )
+
+find_package(Protobuf)
+set_package_properties(Protobuf PROPERTIES TYPE OPTIONAL PURPOSE "Parsing of OSM PBF files.")
 
 if(ANDROID)
     find_package(Qt6Positioning ${REQUIRED_QT_VERSION} REQUIRED)
