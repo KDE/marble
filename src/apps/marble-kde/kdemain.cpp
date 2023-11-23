@@ -325,6 +325,7 @@ int main ( int argc, char *argv[] )
     MarbleGlobal::Profiles profiles = MarbleGlobal::getInstance()->profiles();
 
     QCommandLineOption debugOption( "debug-info", i18n( "Enable debug output" ) );
+    debugOption.setFlags( QCommandLineOption::HiddenFromHelp );
     parser.addOption( debugOption );
     QCommandLineOption levelOption( "debug-levels", i18n( "Display OSM placemarks according to the level selected" ) );
     parser.addOption( levelOption );
@@ -360,7 +361,9 @@ int main ( int argc, char *argv[] )
     // use ecm_create_qm_loader(marblewidget_SRCS marble_qt)
     // in the library src/lib/marble/CMakeList.txt to load the second catalog
 
-    MarbleDebug::setEnabled( parser.isSet( debugOption ) );
+    if ( parser.isSet( debugOption ) ) {
+        qCWarning(MARBLE_DEFAULT) << "The '--debug-info' option is no longer supported, use the Qt logging settings.";
+    }
 
     if ( parser.isSet( smallScreenOption ) ) {
         profiles |= MarbleGlobal::SmallScreen;
