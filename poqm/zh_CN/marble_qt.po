@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
-"PO-Revision-Date: 2023-11-19 03:44\n"
+"PO-Revision-Date: 2023-11-25 02:33\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
 "MIME-Version: 1.0\n"
@@ -8838,7 +8838,7 @@ msgid ""
 "itbhu@googlemail.com</a><br /><i>Planet Filter, Bugfixes</i></p>"
 msgstr ""
 "<p>Harshit Jain <a href=\"mailto:sonu.itbhu@googlemail.com\">sonu."
-"itbhu@googlemail.com</a><br />行星筛选器、程序缺陷修复</p>"
+"itbhu@googlemail.com</a><br />行星过滤器、程序缺陷修复</p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:112
 msgctxt "QObject|"
@@ -13715,7 +13715,7 @@ msgstr "配置地震插件"
 #: src/plugins/render/earthquake/EarthquakeConfigWidget.ui:20
 msgctxt "EarthquakeConfigWidget|"
 msgid "Filter"
-msgstr "筛选"
+msgstr "过滤"
 
 #: src/plugins/render/earthquake/EarthquakeConfigWidget.ui:29
 msgctxt "EarthquakeConfigWidget|"
@@ -14806,7 +14806,7 @@ msgstr "对话框"
 #: src/plugins/render/opencaching/OpenCachingConfigWidget.ui:20
 msgctxt "OpenCachingConfigWidget|"
 msgid "Filter"
-msgstr "筛选"
+msgstr "过滤"
 
 #: src/plugins/render/opencaching/OpenCachingConfigWidget.ui:26
 msgctxt "OpenCachingConfigWidget|"
