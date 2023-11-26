@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2023-10-24 12:39+0300\n"
+"PO-Revision-Date: 2023-11-26 01:30+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -3110,49 +3110,49 @@ msgstr "Öntanımlı (Yeniden Boyutlandırılabilir)"
 #, qt-format
 msgctxt "Marble::ControlView|"
 msgid "NTSC (%1x%2)"
-msgstr "NTSC (%1x%2)"
+msgstr "NTSC (%1 × %2)"
 
 #: src/apps/marble-ui/ControlView.cpp:286
 #, qt-format
 msgctxt "Marble::ControlView|"
 msgid "PAL (%1x%2)"
-msgstr "PAL (%1x%2)"
+msgstr "PAL (%1 × %2)"
 
 #: src/apps/marble-ui/ControlView.cpp:287
 #, qt-format
 msgctxt "Marble::ControlView|"
 msgid "NTSC 16:9 (%1x%2)"
-msgstr "NTSC 16:9 (%1x%2)"
+msgstr "NTSC 16:9 (%1 × %2)"
 
 #: src/apps/marble-ui/ControlView.cpp:288
 #, qt-format
 msgctxt "Marble::ControlView|"
 msgid "PAL 16:9 (%1x%2)"
-msgstr "PAL 16:9 (%1x%2)"
+msgstr "PAL 16:9 (%1 × %2)"
 
 #: src/apps/marble-ui/ControlView.cpp:290
 #, qt-format
 msgctxt "Marble::ControlView|"
 msgid "DVD (%1x%2p)"
-msgstr "DVD (%1x%2p)"
+msgstr "DVD (%1 × %2p)"
 
 #: src/apps/marble-ui/ControlView.cpp:292
 #, qt-format
 msgctxt "Marble::ControlView|"
 msgid "HD (%1x%2p)"
-msgstr "HD (%1x%2p)"
+msgstr "HD (%1 × %2p)"
 
 #: src/apps/marble-ui/ControlView.cpp:294
 #, qt-format
 msgctxt "Marble::ControlView|"
 msgid "Full HD (%1x%2p)"
-msgstr "Full HD (%1x%2p)"
+msgstr "Full HD (%1 × %2p)"
 
 #: src/apps/marble-ui/ControlView.cpp:295
 #, qt-format
 msgctxt "Marble::ControlView|"
 msgid "Digital Cinema (%1x%2)"
-msgstr "Sayısal Sinema (%1x%2)"
+msgstr "Sayısal Sinema (%1 × %2)"
 
 #: src/apps/marble-ui/ControlView.cpp:486
 msgctxt "Marble::ControlView|"
@@ -9663,14 +9663,14 @@ msgstr ""
 "<p>İki veri kümesinin birleştirilmesiyle oluşturulan <i>Sıcaklık ve Yağış "
 "Haritaları(Temmuz ve Aralık)</i><br />:<ul><li>Legates, D.R. and Willmott, C."
 "J. 1989. Aylık ortalama yüzey sıcaklık ve yağış miktarı. 0.5 derecelik "
-"Coğrafik (enlem/boylam) 361x721'lik ızgarada sayısal tarama örüntüsü verisi. "
-"Boulder CO: National Center for Atmospheric Research. <a href=\"https://www."
-"ngdc.noaa.gov/ecosys/cdroms/ged_iia/datasets/a04/lw.htm\">http://www.ngdc."
-"noaa.gov/ecosys/cdroms/ged_iia/datasets/a04/lw.htm</a></li><li>CRU CL 2.0: "
-"New, M., Lister, D., Hulme, M. and Makin, I., 2002:  Küresel yer alanları "
-"üzerinde yüzey ikliminin yüksek çözünürlüklü veri kümesi. İklim Araştırması "
-"21.<a href=\"https://www.cru.uea.ac.uk/cru/data/hrg\">https://crudata.uea.ac."
-"uk/cru/data/hrg</a></li></ul></p>"
+"Coğrafik (enlem/boylam) 361 × 721'lik ızgarada sayısal tarama örüntüsü "
+"verisi. Boulder CO: National Center for Atmospheric Research. <a href="
+"\"https://www.ngdc.noaa.gov/ecosys/cdroms/ged_iia/datasets/a04/lw.htm"
+"\">http://www.ngdc.noaa.gov/ecosys/cdroms/ged_iia/datasets/a04/lw.htm</a></"
+"li><li>CRU CL 2.0: New, M., Lister, D., Hulme, M. and Makin, I., 2002:  "
+"Küresel yer alanları üzerinde yüzey ikliminin yüksek çözünürlüklü veri "
+"kümesi. İklim Araştırması 21.<a href=\"https://www.cru.uea.ac.uk/cru/data/hrg"
+"\">https://crudata.uea.ac.uk/cru/data/hrg</a></li></ul></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:289
 msgctxt "QObject|"

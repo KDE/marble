@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-11-05 12:24+0000\n"
-"PO-Revision-Date: 2023-11-19 03:41\n"
+"PO-Revision-Date: 2023-11-25 02:29\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
@@ -25,7 +25,7 @@ msgstr "Tyson Tan (谭代山/钛山), Guo Yunhe"
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr "tysontan@tysontan.com, i@guoyunhe.me"
+msgstr "tds00@qq.com, i@guoyunhe.me"
 
 #: kdemain.cpp:91
 #, kde-format
@@ -220,7 +220,7 @@ msgstr "Harshit Jain"
 #: kdemain.cpp:155
 #, kde-format
 msgid "Planet filter"
-msgstr "行星筛选器"
+msgstr "行星过滤器"
 
 #: kdemain.cpp:157
 #, kde-format
