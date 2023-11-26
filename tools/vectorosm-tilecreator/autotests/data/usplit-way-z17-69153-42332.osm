@@ -28,7 +28,6 @@
     <nd ref="8723351773" />
     <nd ref="8723351774" />
     <tag k="highway" v="service" />
-    <tag k="mx:bp" v="0+10" />
     <tag k="mx:oid" v="942010474" />
     <tag k="service" v="driveway" />
   </way>
@@ -38,7 +37,6 @@
     <nd ref="8723351755" />
     <nd ref="-3" />
     <tag k="highway" v="service" />
-    <tag k="mx:bp" v="3+4" />
     <tag k="mx:oid" v="942010474" />
     <tag k="service" v="driveway" />
   </way>

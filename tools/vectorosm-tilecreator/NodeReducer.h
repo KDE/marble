@@ -22,7 +22,6 @@ private:
     qreal epsilonFor(qreal multiplier) const;
     qreal perpendicularDistance(const GeoDataCoordinates &a, const GeoDataCoordinates &b, const GeoDataCoordinates &c) const;
     bool touchesTileBorder(const GeoDataCoordinates &coordinates) const;
-    void setBorderPoints(OsmPlacemarkData &osmData, const QVector<int> &borderPoints, int length) const;
 
     GeoDataLinearRing* reducedRing(const GeoDataLinearRing& prevRing,
                                    GeoDataPlacemark* placemark,
@@ -42,16 +41,6 @@ private:
         qint64 reducedSize = reducedLine->size();
         m_removedNodes += (prevSize - reducedSize);
         m_remainingNodes += reducedSize;
-
-        QVector<int> borderPoints;
-        int index = 0;
-        for (auto const &coordinate: *reducedLine) {
-            if (touchesTileBorder(coordinate)) {
-                borderPoints << index;
-            }
-            ++index;
-        }
-        setBorderPoints(osmData, borderPoints, reducedLine->size());
     }
 
     template<class T>
