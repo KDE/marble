@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-05 12:24+0000\n"
+"POT-Creation-Date: 2023-11-27 00:39+0000\n"
 "PO-Revision-Date: 2017-09-15 17:30+0200\n"
 "Last-Translator: Stelios <sstavra@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-el@kde.org>\n"
@@ -634,79 +634,79 @@ msgstr ""
 msgid "Enable debug output"
 msgstr "Ενεργοποίηση εξόδου αποσφαλμάτωσης"
 
-#: kdemain.cpp:329
+#: kdemain.cpp:330
 #, kde-format
 msgid "Display OSM placemarks according to the level selected"
 msgstr ""
 "Να εμφανίζονται OSM σημεία επισήμανσης θέσης σύμφωνα με το επιλεγμένο επίπεδο"
 
-#: kdemain.cpp:331
+#: kdemain.cpp:332
 #, kde-format
 msgid "Make a time measurement to check performance"
 msgstr "Εκτελέστε μια μέτρηση χρόνου για τον έλεγχο της απόδοσης"
 
-#: kdemain.cpp:333
+#: kdemain.cpp:334
 #, kde-format
 msgid "Show frame rate"
 msgstr "Εμφάνιση ρυθμού πλαισίου"
 
-#: kdemain.cpp:335
+#: kdemain.cpp:336
 #, kde-format
 msgid "Show tile IDs"
 msgstr "Εμφάνιση ID πλακιδίων"
 
-#: kdemain.cpp:337
+#: kdemain.cpp:338
 #, kde-format
 msgid "Show time spent in each layer"
 msgstr "Εμφάνιση του χρόνου που ξοδεύτηκε σε κάθε επίπεδο"
 
-#: kdemain.cpp:339
+#: kdemain.cpp:340
 #, kde-format
 msgid "Use a different directory <directory> which contains map data."
 msgstr ""
 "Χρήση ενός διαφορετικού κατάλογου <directory> που περιέχει δεδομένα χαρτών."
 
-#: kdemain.cpp:341
+#: kdemain.cpp:342
 #, kde-format
 msgid "Do not use the interface optimized for small screens"
 msgstr "Να μη γίνει χρήση της βελτιστοποιημένης διεπαφής για μικρές οθόνες"
 
-#: kdemain.cpp:342
+#: kdemain.cpp:343
 #, kde-format
 msgid "Use the interface optimized for small screens"
 msgstr "Χρήση της βελτιστοποιημένης διεπαφής για μικρές οθόνες"
 
-#: kdemain.cpp:344
+#: kdemain.cpp:345
 #, kde-format
 msgid "Do not use the interface optimized for high resolutions"
 msgstr "Να μη γίνει χρήση της βελτιστοποιημένης διεπαφής για υψηλές αναλύσεις"
 
-#: kdemain.cpp:345
+#: kdemain.cpp:346
 #, kde-format
 msgid "Use the interface optimized for high resolutions"
 msgstr "Χρήση της βελτιστοποιημένης διεπαφής για υψηλές αναλύσεις"
 
-#: kdemain.cpp:347
+#: kdemain.cpp:348
 #, kde-format
 msgid "Show map at given lat lon <coordinates>"
 msgstr "Εμφάνιση χάρτη στις δοσμένες πλατ μηκ <coordinates>"
 
-#: kdemain.cpp:349
+#: kdemain.cpp:350
 #, kde-format
 msgid "Show map at given geo <uri>"
 msgstr "Εμφάνιση χάρτη στο δοσμένο <uri>"
 
-#: kdemain.cpp:351
+#: kdemain.cpp:352
 #, kde-format
 msgid "Set the distance of the observer to the globe (in km)"
 msgstr "Ρύθμιση της απόστασης του παρατηρητή από την υδρόγειο (σε χμ)"
 
-#: kdemain.cpp:353
+#: kdemain.cpp:354
 #, kde-format
 msgid "Use map <id> (e.g. \"earth/openstreetmap/openstreetmap.dgml\")"
 msgstr "Χρήση <id> χάρτη (π.χ. \"earth/openstreetmap/openstreetmap.dgml\")"
 
-#: kdemain.cpp:355
+#: kdemain.cpp:356
 #, kde-format
 msgid "One or more placemark files to be opened"
 msgstr "Άνοιγμα ενός ή περισσοτέρων αρχείων επισήμανσης θέσης"

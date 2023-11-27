@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-05 12:24+0000\n"
+"POT-Creation-Date: 2023-11-27 00:39+0000\n"
 "PO-Revision-Date: 2021-10-18 16:48+0200\n"
 "Last-Translator: J.J.H. Woldringh <jjhwoldringh@kde.nl>\n"
 "Language-Team: Dutch <kde-i18n-nl@kde.org>\n"
@@ -631,78 +631,78 @@ msgstr ""
 msgid "Enable debug output"
 msgstr "Debug-uitvoer inschakelen"
 
-#: kdemain.cpp:329
+#: kdemain.cpp:330
 #, kde-format
 msgid "Display OSM placemarks according to the level selected"
 msgstr "Toon OSM plaatsmarkeringen volgens geselecteerd niveau"
 
-#: kdemain.cpp:331
+#: kdemain.cpp:332
 #, kde-format
 msgid "Make a time measurement to check performance"
 msgstr "Een tijdmeting starten om de prestatie te meten"
 
-#: kdemain.cpp:333
+#: kdemain.cpp:334
 #, kde-format
 msgid "Show frame rate"
 msgstr "\"Frame rate\" tonen"
 
-#: kdemain.cpp:335
+#: kdemain.cpp:336
 #, kde-format
 msgid "Show tile IDs"
 msgstr "ID's van tegels tonen"
 
-#: kdemain.cpp:337
+#: kdemain.cpp:338
 #, kde-format
 msgid "Show time spent in each layer"
 msgstr "Toon de besteedde tijd in elke laag"
 
-#: kdemain.cpp:339
+#: kdemain.cpp:340
 #, kde-format
 msgid "Use a different directory <directory> which contains map data."
 msgstr "Gebruik een andere map <directory> die kaartgegevens bevat"
 
-#: kdemain.cpp:341
+#: kdemain.cpp:342
 #, kde-format
 msgid "Do not use the interface optimized for small screens"
 msgstr "Gebruik niet de interface voor kleine schermen"
 
-#: kdemain.cpp:342
+#: kdemain.cpp:343
 #, kde-format
 msgid "Use the interface optimized for small screens"
 msgstr "Gebruik de interface voor kleine schermen"
 
-#: kdemain.cpp:344
+#: kdemain.cpp:345
 #, kde-format
 msgid "Do not use the interface optimized for high resolutions"
 msgstr "Gebruik niet de interface voor hoge resolutie"
 
-#: kdemain.cpp:345
+#: kdemain.cpp:346
 #, kde-format
 msgid "Use the interface optimized for high resolutions"
 msgstr "Gebruik de interface voor hoge resolutie"
 
-#: kdemain.cpp:347
+#: kdemain.cpp:348
 #, kde-format
 msgid "Show map at given lat lon <coordinates>"
 msgstr "Toon kaart voor opgegeven breedte lengte <coordinates>"
 
-#: kdemain.cpp:349
+#: kdemain.cpp:350
 #, kde-format
 msgid "Show map at given geo <uri>"
 msgstr "Toon kaart voor opgegeven geo  <uri>"
 
-#: kdemain.cpp:351
+#: kdemain.cpp:352
 #, kde-format
 msgid "Set the distance of the observer to the globe (in km)"
 msgstr "Stel hoogte boven de globe in van de waarnemer (in km)"
 
-#: kdemain.cpp:353
+#: kdemain.cpp:354
 #, kde-format
 msgid "Use map <id> (e.g. \"earth/openstreetmap/openstreetmap.dgml\")"
 msgstr ""
 "Gebruik <id> van de kaart (bv. \"earth/openstreetmap/openstreetmap.dgml\")"
 
-#: kdemain.cpp:355
+#: kdemain.cpp:356
 #, kde-format
 msgid "One or more placemark files to be opened"
 msgstr "Een of meer te openen bestanden met plaatsmarkeringen"
