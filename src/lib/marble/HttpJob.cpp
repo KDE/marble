@@ -135,7 +135,7 @@ void HttpJob::execute()
 
     connect( d->m_networkReply, SIGNAL(downloadProgress(qint64,qint64)),
              SLOT(downloadProgress(qint64,qint64)));
-    connect( d->m_networkReply, SIGNAL(error(QNetworkReply::NetworkError)),
+    connect( d->m_networkReply, SIGNAL(errorOccurred(QNetworkReply::NetworkError)),
              SLOT(error(QNetworkReply::NetworkError)));
     connect( d->m_networkReply, SIGNAL(finished()),
              SLOT(finished()));
