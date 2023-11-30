@@ -3739,11 +3739,6 @@ msgid "No position available."
 msgstr "Neniu pozicio disponeblas"
 
 #: src/lib/marble/CurrentLocationWidget.ui:151
-#, fuzzy
-#| msgctxt ""
-#| "CurrentLocationWidget|Select the method to use to recenter your GPS "
-#| "location ¦on map."
-#| msgid "Select the method to use to re-center your GPS location on map."
 msgctxt ""
 "CurrentLocationWidget|Select the method to use to recenter your GPS location "
 "on map."
@@ -3862,11 +3857,6 @@ msgid "No photocopying service"
 msgstr "Neniu fotokopia servo"
 
 #: src/lib/marble/declarative/Placemark.cpp:141
-#, fuzzy
-#| msgctxt ""
-#| "Marble::Placemark|A copy shop provides a service for scanning documents "
-#| "into ¦digital files"
-#| msgid "Digital scanning"
 msgctxt ""
 "Marble::Placemark|A copy shop provides a service for scanning documents into "
 "digital files"
@@ -3874,11 +3864,6 @@ msgid "Digital scanning"
 msgstr "Cifereca skanado"
 
 #: src/lib/marble/declarative/Placemark.cpp:142
-#, fuzzy
-#| msgctxt ""
-#| "Marble::Placemark|A copy shop does not provide a service for scanning "
-#| "¦documents into digital files"
-#| msgid "No digital scanning"
 msgctxt ""
 "Marble::Placemark|A copy shop does not provide a service for scanning "
 "documents into digital files"
@@ -3886,11 +3871,6 @@ msgid "No digital scanning"
 msgstr "Neniu cifereca skanado"
 
 #: src/lib/marble/declarative/Placemark.cpp:143
-#, fuzzy
-#| msgctxt ""
-#| "Marble::Placemark|A copy shop provides a service to send documents "
-#| "through ¦fax"
-#| msgid "Fax service"
 msgctxt ""
 "Marble::Placemark|A copy shop provides a service to send documents through "
 "fax"
@@ -3898,11 +3878,6 @@ msgid "Fax service"
 msgstr "Faksa servo"
 
 #: src/lib/marble/declarative/Placemark.cpp:144
-#, fuzzy
-#| msgctxt ""
-#| "Marble::Placemark|A copy shop does not provide a service to send "
-#| "documents ¦through fax"
-#| msgid "No fax service"
 msgctxt ""
 "Marble::Placemark|A copy shop does not provide a service to send documents "
 "through fax"
@@ -3916,11 +3891,6 @@ msgid "Phone service"
 msgstr "Telefona servo"
 
 #: src/lib/marble/declarative/Placemark.cpp:146
-#, fuzzy
-#| msgctxt ""
-#| "Marble::Placemark|A copy shop does not provide a paid service to make "
-#| "phone ¦calls"
-#| msgid "No phone service"
 msgctxt ""
 "Marble::Placemark|A copy shop does not provide a paid service to make phone "
 "calls"
@@ -3928,11 +3898,6 @@ msgid "No phone service"
 msgstr "Neniu telefona servo"
 
 #: src/lib/marble/declarative/Placemark.cpp:147
-#, fuzzy
-#| msgctxt ""
-#| "Marble::Placemark|A copy shop provides services to print paper documents "
-#| "¦from digital files"
-#| msgid "Digital printing"
 msgctxt ""
 "Marble::Placemark|A copy shop provides services to print paper documents "
 "from digital files"
@@ -3940,11 +3905,6 @@ msgid "Digital printing"
 msgstr "Cifereca presado"
 
 #: src/lib/marble/declarative/Placemark.cpp:148
-#, fuzzy
-#| msgctxt ""
-#| "Marble::Placemark|A copy shop does not provide services to print paper "
-#| "¦documents from digital files"
-#| msgid "No digital printing"
 msgctxt ""
 "Marble::Placemark|A copy shop does not provide services to print paper "
 "documents from digital files"
@@ -3952,11 +3912,6 @@ msgid "No digital printing"
 msgstr "Neniu cifereca presado"
 
 #: src/lib/marble/declarative/Placemark.cpp:149
-#, fuzzy
-#| msgctxt ""
-#| "Marble::Placemark|A copy shop provides a professional service to print a "
-#| "¦large number of copies of a document"
-#| msgid "Press printing service"
 msgctxt ""
 "Marble::Placemark|A copy shop provides a professional service to print a "
 "large number of copies of a document"
@@ -3964,11 +3919,6 @@ msgid "Press printing service"
 msgstr "Gazetara presa servo"
 
 #: src/lib/marble/declarative/Placemark.cpp:150
-#, fuzzy
-#| msgctxt ""
-#| "Marble::Placemark|A copy shop does not provide a professional service to "
-#| "¦print a large number of copies of a document"
-#| msgid "No press printing service"
 msgctxt ""
 "Marble::Placemark|A copy shop does not provide a professional service to "
 "print a large number of copies of a document"
@@ -3976,11 +3926,6 @@ msgid "No press printing service"
 msgstr "Neniu gazetara presa servo"
 
 #: src/lib/marble/declarative/Placemark.cpp:151
-#, fuzzy
-#| msgctxt ""
-#| "Marble::Placemark|A copy shop provides help with preparing special "
-#| "printing ¦techniques"
-#| msgid "Press printing assistance"
 msgctxt ""
 "Marble::Placemark|A copy shop provides help with preparing special printing "
 "techniques"
@@ -3988,11 +3933,6 @@ msgid "Press printing assistance"
 msgstr "Presa helpo"
 
 #: src/lib/marble/declarative/Placemark.cpp:152
-#, fuzzy
-#| msgctxt ""
-#| "Marble::Placemark|A copy shop does not provide help with preparing "
-#| "special ¦printing techniques"
-#| msgid "No press printing assistance"
 msgctxt ""
 "Marble::Placemark|A copy shop does not provide help with preparing special "
 "printing techniques"
@@ -4000,11 +3940,6 @@ msgid "No press printing assistance"
 msgstr "Neniu gazetara presado helpo"
 
 #: src/lib/marble/declarative/Placemark.cpp:153
-#, fuzzy
-#| msgctxt ""
-#| "Marble::Placemark|A copy shop provides individual copy machines for self-"
-#| "¦service"
-#| msgid "Self service"
 msgctxt ""
 "Marble::Placemark|A copy shop provides individual copy machines for self-"
 "service"
@@ -4012,11 +3947,6 @@ msgid "Self service"
 msgstr "Memserva"
 
 #: src/lib/marble/declarative/Placemark.cpp:154
-#, fuzzy
-#| msgctxt ""
-#| "Marble::Placemark|A copy shop does not provide individual machines for "
-#| "self-¦service"
-#| msgid " No self service"
 msgctxt ""
 "Marble::Placemark|A copy shop does not provide individual machines for self-"
 "service"
@@ -4244,11 +4174,6 @@ msgid "Active"
 msgstr "Aktiva"
 
 #: src/lib/marble/declarative/Placemark.cpp:226
-#, fuzzy
-#| msgctxt ""
-#| "Marble::Placemark|A dormant volcano that will erupt at some point in the "
-#| "¦future."
-#| msgid "Dormant"
 msgctxt ""
 "Marble::Placemark|A dormant volcano that will erupt at some point in the "
 "future."
@@ -4256,11 +4181,6 @@ msgid "Dormant"
 msgstr "Dormante"
 
 #: src/lib/marble/declarative/Placemark.cpp:227
-#, fuzzy
-#| msgctxt ""
-#| "Marble::Placemark|A volcano considered extinct, it has not erupted within "
-#| "¦the last 10000 years and likely never will again."
-#| msgid "Extinct"
 msgctxt ""
 "Marble::Placemark|A volcano considered extinct, it has not erupted within "
 "the last 10000 years and likely never will again."
@@ -4496,11 +4416,6 @@ msgid "Reservation is recommended"
 msgstr "Rezervado estas rekomendita"
 
 #: src/lib/marble/declarative/Placemark.cpp:301
-#, fuzzy
-#| msgctxt ""
-#| "Marble::Placemark|Reservation is only possible for members of the "
-#| "¦organisation running the hut"
-#| msgid "Only for members"
 msgctxt ""
 "Marble::Placemark|Reservation is only possible for members of the "
 "organisation running the hut"
@@ -4701,11 +4616,6 @@ msgid "Nursing home"
 msgstr "Flegejo"
 
 #: src/lib/marble/declarative/Placemark.cpp:342
-#, fuzzy
-#| msgctxt ""
-#| "Marble::Placemark|Like group home but for more independent people, e.g. "
-#| "who ¦have flats"
-#| msgid "Assisted living"
 msgctxt ""
 "Marble::Placemark|Like group home but for more independent people, e.g. who "
 "have flats"
@@ -5001,11 +4911,6 @@ msgid "Customers only"
 msgstr "Nur klientoj"
 
 #: src/lib/marble/declarative/Placemark.cpp:420
-#, fuzzy
-#| msgctxt ""
-#| "Marble::Placemark|The public has an official, legally-enshrined right of "
-#| "¦access; i.e., it's a right of way"
-#| msgid "Accessible by anyone"
 msgctxt ""
 "Marble::Placemark|The public has an official, legally-enshrined right of "
 "access; i.e., it's a right of way"
@@ -5019,11 +4924,6 @@ msgid "Private"
 msgstr "Privata"
 
 #: src/lib/marble/declarative/Placemark.cpp:422
-#, fuzzy
-#| msgctxt ""
-#| "Marble::Placemark|Open to general traffic but permission can be revoked "
-#| "by ¦the owner"
-#| msgid "Open to general traffic"
 msgctxt ""
 "Marble::Placemark|Open to general traffic but permission can be revoked by "
 "the owner"
@@ -5110,11 +5010,6 @@ msgid "No public Internet access"
 msgstr "Neniu publika interreta aliro"
 
 #: src/lib/marble/declarative/Placemark.cpp:565
-#, fuzzy
-#| msgctxt ""
-#| "Marble::Placemark|This location provides an unknown type of public "
-#| "Internet ¦access."
-#| msgid "Public Internet access available"
 msgctxt ""
 "Marble::Placemark|This location provides an unknown type of public Internet "
 "access."
@@ -5122,11 +5017,6 @@ msgid "Public Internet access available"
 msgstr "Publika Interreta aliro havebla"
 
 #: src/lib/marble/declarative/Placemark.cpp:568
-#, fuzzy
-#| msgctxt ""
-#| "Marble::Placemark|Public wireless Internet access is available here for a "
-#| "¦fee."
-#| msgid "Charged public wifi available"
 msgctxt ""
 "Marble::Placemark|Public wireless Internet access is available here for a "
 "fee."
@@ -5134,11 +5024,6 @@ msgid "Charged public wifi available"
 msgstr "Ŝargita publika wifi disponebla"
 
 #: src/lib/marble/declarative/Placemark.cpp:570
-#, fuzzy
-#| msgctxt ""
-#| "Marble::Placemark|Public wireless Internet access is available here for "
-#| "no ¦cost."
-#| msgid "Free public wifi available"
 msgctxt ""
 "Marble::Placemark|Public wireless Internet access is available here for no "
 "cost."
@@ -5167,11 +5052,7 @@ msgid "Free public wifi available"
 msgstr "Senpaga publika wifi disponebla"
 
 #: src/lib/marble/declarative/Placemark.cpp:683
-#, fuzzy, qt-format
-#| msgctxt ""
-#| "Marble::Placemark|House number (first argument) and street name (second "
-#| "¦argument) in an address"
-#| msgid "%1 %2"
+#, qt-format
 msgctxt ""
 "Marble::Placemark|House number (first argument) and street name (second "
 "argument) in an address"
@@ -17026,11 +16907,7 @@ msgid "Number of items on the screen"
 msgstr "Nombro da eroj sur la ekrano"
 
 #: src/plugins/render/wikipedia/WikipediaItem.cpp:233
-#, fuzzy, qt-format
-#| msgctxt ""
-#| "Marble::WikipediaItem|Title:\n"
-#| "¦Summary"
-#| msgid "<b>%1</b><br>%2"
+#, qt-format
 msgctxt ""
 "Marble::WikipediaItem|Title:\n"
 "Summary"
