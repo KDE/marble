@@ -7,21 +7,21 @@
 # Jaap Woldringh <jjhwoldringh@kde.nl>, 2007, 2011, 2012.
 # Kristof Bal <kristof.bal@gmail.com>, 2008, 2009.
 # Jaap Woldringh <jjhwoldringh@kde.nl>, 2008, 2009, 2010, 2011.
-# Freek de Kruijf <freekdekruijf@kde.nl>, 2009, 2010, 2011, 2016, 2018, 2020, 2021, 2022, 2023.
+# SPDX-FileCopyrightText: 2009, 2010, 2011, 2016, 2018, 2020, 2021, 2022, 2023 Freek de Kruijf <freekdekruijf@kde.nl>
 # Jaap Woldringh <jjhwoldringh@kde.nl>, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021.
 msgid ""
 msgstr ""
 "Project-Id-Version: marble_qt\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2023-04-22 10:51+0200\n"
+"PO-Revision-Date: 2023-12-08 12:06+0100\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: Lokalize 23.08.3\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Qt-Contexts: true\n"
 
@@ -1398,7 +1398,7 @@ msgstr "Hospitaal"
 #. file data/maps/earth/openstreetmap/openstreetmap.dgml:427
 msgctxt "DGML|"
 msgid "Fire station"
-msgstr "Brandweer"
+msgstr "Brandweerkazerne"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:428
 #. ----------
@@ -1482,7 +1482,7 @@ msgstr "Alcohol"
 #. file data/maps/earth/openstreetmap/openstreetmap.dgml:484
 msgctxt "DGML|"
 msgid "Bakery"
-msgstr "Bakker"
+msgstr "Bakkerij"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:482
 #. ----------
@@ -2039,7 +2039,7 @@ msgstr "Corvus"
 #. file data/stars/names.csv
 msgctxt "StarNames|"
 msgid "Crater"
-msgstr "Crater"
+msgstr "Krater"
 
 #. file data/stars/names.csv
 msgctxt "StarNames|"
@@ -5436,7 +5436,7 @@ msgstr "Vet"
 #: src/lib/marble/EditPlacemarkDialog.ui:344
 msgctxt "UiEditPlacemarkDialog|"
 msgid "Italics"
-msgstr "Schuin"
+msgstr "Cursief"
 
 #: src/lib/marble/EditPlacemarkDialog.ui:356
 #: src/lib/marble/EditPlacemarkDialog.ui:359
@@ -5621,7 +5621,7 @@ msgstr "Glad"
 #: src/lib/marble/FlyToEditWidget.cpp:63
 msgctxt "Marble::FlyToEditWidget|"
 msgid "Bounce"
-msgstr "Stuit"
+msgstr "Stuiteren"
 
 #: src/lib/marble/FlyToEditWidget.cpp:80
 msgctxt "Marble::FlyToEditWidget|"
@@ -5733,7 +5733,7 @@ msgstr "Vet"
 #: src/lib/marble/FormattedTextWidget.ui:208
 msgctxt "FormattedTextWidget|"
 msgid "Italics"
-msgstr "Schuin"
+msgstr "Cursief"
 
 #: src/lib/marble/FormattedTextWidget.ui:220
 #: src/lib/marble/FormattedTextWidget.ui:223
@@ -6280,7 +6280,7 @@ msgstr "Bank"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:427
 msgctxt "GeoDataPlacemark|"
 msgid "Archaeological Site"
-msgstr "Archeologisch gebied"
+msgstr "Archeologische site"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:428
 msgctxt "GeoDataPlacemark|"
@@ -6405,7 +6405,7 @@ msgstr "Oplaadstation"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:452
 msgctxt "GeoDataPlacemark|"
 msgid "Car Wash"
-msgstr "Car Wash"
+msgstr "Autowasplaats"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:453
 msgctxt "GeoDataPlacemark|"
@@ -6471,7 +6471,7 @@ msgstr "Slijterij"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:466
 msgctxt "GeoDataPlacemark|"
 msgid "Bakery"
-msgstr "Bakker"
+msgstr "Bakkerij"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:467
 msgctxt "GeoDataPlacemark|"
@@ -7879,7 +7879,7 @@ msgstr "Beeld Lambert azimutaal gelijke oppervlakten"
 #: src/lib/marble/MapViewWidget.cpp:162
 msgctxt "Marble::MapViewWidget|"
 msgid "Azimuthal Equidistant view"
-msgstr "Beeld azimutaal gelijke afstanden"
+msgstr "Beeld azimutaal afstandsgetrouw"
 
 #: src/lib/marble/MapViewWidget.cpp:168
 msgctxt "Marble::MapViewWidget|"
@@ -7960,7 +7960,7 @@ msgstr "Lambert azimutaal gelijke oppervlakten"
 #: src/lib/marble/MapViewWidget.ui:95
 msgctxt "MapViewWidget|"
 msgid "Azimuthal Equidistant"
-msgstr "Azimutaal gelijke afstanden"
+msgstr "Azimutaal afstandsgetrouw)"
 
 #: src/lib/marble/MapViewWidget.ui:104
 msgctxt "MapViewWidget|"
@@ -11646,7 +11646,7 @@ msgstr "Voettekst"
 #: src/lib/marble/projections/AzimuthalEquidistantProjection.cpp:56
 msgctxt "QObject|"
 msgid "Azimuthal Equidistant"
-msgstr "Azimutaal gelijke afstanden"
+msgstr "Azimutaal afstandsgetrouw"
 
 #: src/lib/marble/projections/AzimuthalEquidistantProjection.cpp:61
 msgctxt "QObject|"

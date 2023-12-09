@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2023-09-21 13:06+0200\n"
+"PO-Revision-Date: 2023-12-08 13:51+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
@@ -1783,7 +1783,7 @@ msgid ""
 "\"Blue Marble Next Generation\" pictures. Credits: NASA's Earth Observatory</"
 "p>"
 msgstr ""
-"<p>La terra vista des de l'espai.</p><p>El mapa està basat en les belles "
+"<p>La Terra vista des de l'espai.</p><p>El mapa està basat en les belles "
 "imatges de la NASA «Blue Marble Next Generation» (nova generació de la bala "
 "blava). Crèdits: Observatori de la terra, NASA.</p>"
 
@@ -2569,7 +2569,7 @@ msgstr "Tramvia"
 #: src/apps/marble-maps/PublicTransport.qml:36
 msgctxt "PublicTransport|"
 msgid "Bus"
-msgstr "Bus"
+msgstr "Autobús"
 
 #: src/apps/marble-maps/PublicTransport.qml:41
 msgctxt "PublicTransport|"
@@ -6552,7 +6552,7 @@ msgstr "Serveis de bellesa"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:481
 msgctxt "GeoDataPlacemark|"
 msgid "Chemist"
-msgstr "Química"
+msgstr "Farmàcia"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:482
 msgctxt "GeoDataPlacemark|"
@@ -6759,7 +6759,7 @@ msgstr "Atracció turística"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:523
 msgctxt "GeoDataPlacemark|"
 msgid "Artwork"
-msgstr "Grafisme"
+msgstr "Il·lustracions"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:524
 msgctxt "GeoDataPlacemark|"
@@ -7529,7 +7529,7 @@ msgstr "Tramvia"
 #: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:216
 msgctxt "GeoLineStringGraphicsItem|"
 msgid "Bus"
-msgstr "Bus"
+msgstr "Autobús"
 
 #: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:217
 msgctxt "GeoLineStringGraphicsItem|"
@@ -7858,7 +7858,7 @@ msgstr "Nom"
 #: src/lib/marble/MapViewWidget.cpp:112
 msgctxt "Marble::MapViewWidget|"
 msgid "Globe View"
-msgstr "Vista del Globus"
+msgstr "Vista del globus"
 
 #: src/lib/marble/MapViewWidget.cpp:117
 msgctxt "Marble::MapViewWidget|"
@@ -12463,7 +12463,7 @@ msgstr "Busca «%1»"
 #: src/lib/marble/SoundCueEditWidget.cpp:68
 msgctxt "Marble::SoundCueEditWidget|"
 msgid "Select sound files..."
-msgstr "Seleccioneu els fitxers de so..."
+msgstr "Selecciona els fitxers de so..."
 
 #: src/lib/marble/SoundCueEditWidget.cpp:68
 msgctxt "Marble::SoundCueEditWidget|"
@@ -12571,7 +12571,7 @@ msgstr ""
 "top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-"
 "indent:0; text-indent:0px;\"><span style=\" font-weight:600;\">Vista de "
 "satèl·lit</span></p><p style=\" margin-top:0px; margin-bottom:0px; margin-"
-"left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">La terra "
+"left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">La Terra "
 "vista des de l'espai. El mapa està basat en les boniques imatges «Blue "
 "Marble Next Generation» de la NASA. Crèdits: Observatori de la terra (NASA)</"
 "p></body></html>"
@@ -12662,7 +12662,7 @@ msgid ""
 "PATH.)"
 msgstr ""
 "No s'ha trobat cap còdec compatible. (Cal que «ffmpeg/avconv» estiga "
-"instal·lat i en la PATH)"
+"instal·lat i que es troben a la PATH)"
 
 #: src/lib/marble/TourCaptureDialog.cpp:77
 msgctxt "Marble::TourCaptureDialog|"
@@ -12874,7 +12874,7 @@ msgstr "Segur que voleu eliminar els elements seleccionats?"
 #: src/lib/marble/TourWidget.cpp:829
 msgctxt "QObject|"
 msgid "Save Tour as"
-msgstr "Guarda el recorregut com a"
+msgstr "Anomena i guarda el recorregut"
 
 #: src/lib/marble/TourWidget.cpp:889
 msgctxt "QObject|"
@@ -12932,7 +12932,7 @@ msgstr "Guarda el recorregut"
 #: src/lib/marble/TourWidget.ui:147
 msgctxt "TourWidget|"
 msgid "Save Tour As"
-msgstr "Guarda el recorregut com a"
+msgstr "Anomena i guarda el recorregut"
 
 #: src/lib/marble/TourWidget.ui:156
 msgctxt "TourWidget|"
@@ -12958,7 +12958,7 @@ msgstr "Para"
 msgctxt "TourWidget|"
 msgid "Stops touring (playing again will start tour from the start)"
 msgstr ""
-"Para el recorregut (la nova reproducció iniciarà el recorregut des de "
+"Para el recorregut (la reproducció nova començarà el recorregut des de "
 "l'inici)"
 
 #: src/lib/marble/TourWidget.ui:192
