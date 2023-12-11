@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: marble_qt\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2023-12-08 12:06+0100\n"
+"PO-Revision-Date: 2023-12-10 16:39+0100\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -14613,7 +14613,7 @@ msgstr "&Schaalbalk"
 #: src/plugins/render/mapscale/MapScaleFloatItem.cpp:88
 msgctxt "Marble::MapScaleFloatItem|"
 msgid "This is a float item that provides a map scale."
-msgstr "Dit getal geeft de schaal van de kaart."
+msgstr "Dit is een zwevend item dat een schaal van de kaart levert."
 
 #: src/plugins/render/mapscale/MapScaleFloatItem.cpp:99
 msgctxt "Marble::MapScaleFloatItem|"
@@ -15110,7 +15110,7 @@ msgstr "&Overzichtskaart"
 #: src/plugins/render/overviewmap/OverviewMap.cpp:94
 msgctxt "Marble::OverviewMap|"
 msgid "This is a float item that provides an overview map."
-msgstr "Dit is een getal bij een overzichtskaart."
+msgstr "Dit is een zwevend item dat een overzichtskaart levert."
 
 #: src/plugins/render/overviewmap/OverviewMap.cpp:480
 msgctxt "Marble::OverviewMap|"
