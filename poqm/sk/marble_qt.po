@@ -2,21 +2,21 @@
 # Richard Fric <Richard.Fric@kdemail.net>, 2007, 2009.
 # Lubos Balazovic <balazovic@fns.uniba.sk>, 2009.
 # Lubos Balazovic <lubos.balazovic@gmail.com>, 2009, 2011, 2012.
-# Roman Paholík <wizzardsk@gmail.com>, 2012, 2013, 2014, 2015, 2016, 2017, 2021.
+# SPDX-FileCopyrightText: 2012, 2013, 2014, 2015, 2016, 2017, 2021, 2023 Roman Paholík <wizzardsk@gmail.com>
 # Matej Mrenica <matejm98mthw@gmail.com>, 2019, 2020.
 msgid ""
 msgstr ""
 "Project-Id-Version: marble_qt\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2021-11-15 17:29+0100\n"
+"PO-Revision-Date: 2023-12-11 18:00+0100\n"
 "Last-Translator: Roman Paholik <wizzardsk@gmail.com>\n"
 "Language-Team: Slovak <kde-sk@linux.sk>\n"
 "Language: sk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 21.08.3\n"
+"X-Generator: Lokalize 23.08.3\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 "X-Qt-Contexts: true\n"
 
@@ -8042,12 +8042,9 @@ msgid "Base Tile"
 msgstr "Základná dlaždica"
 
 #: src/lib/marble/MapWizard.cpp:471
-#, fuzzy
-#| msgctxt "MapWizard|"
-#| msgid "Legend Image:"
 msgctxt "Marble::MapWizard|"
 msgid "Legend Image"
-msgstr "Obrázok s vysvetlivkami:"
+msgstr "Obrázok s vysvetlivkami"
 
 #: src/lib/marble/MapWizard.cpp:478 src/lib/marble/MapWizard.cpp:486
 #, fuzzy, qt-format
@@ -8174,12 +8171,9 @@ msgid "Check if a theme with the same name exists."
 msgstr "Skontrolujte, či súbor s rovnakým menom už neexistuje."
 
 #: src/lib/marble/MapWizard.cpp:1545
-#, fuzzy
-#| msgctxt "MapWizard|"
-#| msgid "WMS Server:"
 msgctxt "Marble::MapWizard|"
 msgid "WMS Server"
-msgstr "WMS Server:"
+msgstr "WMS Server"
 
 #: src/lib/marble/MapWizard.cpp:1546
 msgctxt "Marble::MapWizard|"
@@ -8381,12 +8375,9 @@ msgid "Wms-Service:"
 msgstr "Faxová služba"
 
 #: src/lib/marble/MapWizard.ui:232
-#, fuzzy
-#| msgctxt "MainScreen|"
-#| msgid "Layer Options"
 msgctxt "MapWizard|"
 msgid "Layer Selection"
-msgstr "Možnosti vrstiev"
+msgstr "Výber vrstvy"
 
 #: src/lib/marble/MapWizard.ui:243
 msgctxt "MapWizard|"
@@ -8394,12 +8385,9 @@ msgid "Choose your Layer(s):"
 msgstr ""
 
 #: src/lib/marble/MapWizard.ui:266
-#, fuzzy
-#| msgctxt "SearchField|"
-#| msgid "Search"
 msgctxt "MapWizard|"
 msgid "Search:"
-msgstr "Hľadať"
+msgstr "Hľadať:"
 
 #: src/lib/marble/MapWizard.ui:288
 msgctxt "MapWizard|"
@@ -8475,9 +8463,6 @@ msgid "Preset Layers"
 msgstr ""
 
 #: src/lib/marble/MapWizard.ui:437
-#, fuzzy
-#| msgctxt "DGML|"
-#| msgid "OpenStreetMap"
 msgctxt "MapWizard|"
 msgid "OpenStreetMap"
 msgstr "OpenStreetMap"
@@ -8493,9 +8478,6 @@ msgid "The XYZ server needs to provide map tiles in Mercator projection."
 msgstr ""
 
 #: src/lib/marble/MapWizard.ui:479
-#, fuzzy
-#| msgctxt "FormattedTextWidget|"
-#| msgid "Color"
 msgctxt "MapWizard|"
 msgid "Color"
 msgstr "Farba"
@@ -8503,15 +8485,12 @@ msgstr "Farba"
 #: src/lib/marble/MapWizard.ui:498
 msgctxt "MapWizard|"
 msgid "#87CEFA"
-msgstr ""
+msgstr "#87CEFA"
 
 #: src/lib/marble/MapWizard.ui:511
-#, fuzzy
-#| msgctxt "UiEditPlacemarkDialog|"
-#| msgid "Style, Color"
 msgctxt "MapWizard|"
 msgid "Select Color"
-msgstr "Štýl, farba"
+msgstr "Vybrať farbu"
 
 #: src/lib/marble/MapWizard.ui:554
 msgctxt "MapWizard|"
@@ -8798,7 +8777,7 @@ msgstr "Sem ide mapová téma."
 #: src/lib/marble/MapWizard.ui:1002
 msgctxt "MapWizard|"
 msgid "Thumbnail"
-msgstr ""
+msgstr "Náhľad"
 
 #: src/lib/marble/MapWizard.ui:1012
 msgctxt "MapWizard|"
