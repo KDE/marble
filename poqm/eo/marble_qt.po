@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: marble_qt\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2023-05-10 20:14+0100\n"
+"PO-Revision-Date: 2023-12-16 23:54+0100\n"
 "Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: esperanto <kde-i18n-eo@kde.org>\n"
 "Language: eo\n"
@@ -3268,7 +3268,7 @@ msgstr "&Kaŝi"
 #: src/lib/marble/AbstractFloatItem.cpp:250
 msgctxt "Marble::AbstractFloatItem|"
 msgid "&Configure..."
-msgstr "A&gordi"
+msgstr "A&gordi..."
 
 #: src/lib/marble/AddLinkDialog.cpp:64
 msgctxt "Marble::AddLinkDialog|"
@@ -10494,7 +10494,7 @@ msgstr "Klinas la globan akson for de la uzanto."
 #: src/lib/marble/MarbleNavigator.ui:151
 msgctxt "MarbleNavigator|"
 msgid "Zoom In"
-msgstr "Zoom En"
+msgstr "Zomi"
 
 #: src/lib/marble/MarbleNavigator.ui:154
 msgctxt "MarbleNavigator|"
@@ -12152,7 +12152,7 @@ msgstr "&Aldoni..."
 #: src/lib/marble/routing/RoutingSettingsWidget.ui:32
 msgctxt "RoutingSettingsWidget|"
 msgid "&Configure..."
-msgstr "&Agordi"
+msgstr "A&gordi"
 
 #: src/lib/marble/routing/RoutingSettingsWidget.ui:42
 msgctxt "RoutingSettingsWidget|"
@@ -12192,12 +12192,12 @@ msgstr "Trovi lokojn kiuj kongruas kun la serĉvortoj"
 #: src/lib/marble/routing/RoutingWidget.cpp:225
 msgctxt "QObject|"
 msgid "Open Route"
-msgstr "Malfermita Vojo"
+msgstr "Malfermi Vojon"
 
 #: src/lib/marble/routing/RoutingWidget.cpp:230
 msgctxt "QObject|"
 msgid "Save Route"
-msgstr "Registri Vojon"
+msgstr "Konservi Vojon"
 
 #: src/lib/marble/routing/RoutingWidget.cpp:235
 msgctxt "QObject|"
@@ -12601,7 +12601,7 @@ msgstr "Tiu dosierformo ne estas subtenata. Bonvolu uzi %1 anstataŭ"
 #: src/lib/marble/TourCaptureDialog.cpp:165
 msgctxt "Marble::TourCaptureDialog|"
 msgid "Start"
-msgstr "Starto"
+msgstr "Komenci"
 
 #: src/lib/marble/TourCaptureDialog.cpp:111
 msgctxt "Marble::TourCaptureDialog|"
@@ -12655,7 +12655,7 @@ msgstr "FPS (kadroj por sekundo)"
 #: src/lib/marble/TourCaptureDialog.ui:189
 msgctxt "TourCaptureDialog|"
 msgid "Start"
-msgstr "Starti"
+msgstr "Komenci"
 
 #: src/lib/marble/TourCaptureDialog.ui:196
 msgctxt "TourCaptureDialog|"
@@ -14127,7 +14127,7 @@ msgstr "Zomi al vidfenestro"
 #: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:30
 msgctxt "Marble::ElevationProfileContextMenu|"
 msgid "&Configure..."
-msgstr "&Agordi"
+msgstr "A&gordi"
 
 #: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:36
 msgctxt "Marble::ElevationProfileContextMenu|"
@@ -14512,7 +14512,7 @@ msgstr "Montri detalojn (&S)"
 #: src/plugins/render/mapscale/MapScaleConfigWidget.ui:14
 msgctxt "MapScaleConfigWidget|"
 msgid "Configure Scale Bar Plugin"
-msgstr "Agordi Scale Bar Kromaĵo"
+msgstr "Agordi Skalobretan Kromaĵon"
 
 #: src/plugins/render/mapscale/MapScaleConfigWidget.ui:20
 msgctxt "MapScaleConfigWidget|"
@@ -14573,7 +14573,7 @@ msgstr "nm"
 #: src/plugins/render/mapscale/MapScaleFloatItem.cpp:377
 msgctxt "Marble::MapScaleFloatItem|"
 msgid "&Configure..."
-msgstr "&Agordi..."
+msgstr "A&gordi..."
 
 #: src/plugins/render/mapscale/MapScaleFloatItem.cpp:383
 msgctxt "Marble::MapScaleFloatItem|"
@@ -15411,7 +15411,7 @@ msgstr "-"
 #: src/plugins/render/routing/RoutingPlugin.ui:219
 msgctxt "RoutingPlugin|"
 msgid "Zoom In"
-msgstr "Zomi Enen"
+msgstr "Zomi"
 
 #: src/plugins/render/routing/RoutingPlugin.ui:222
 msgctxt "RoutingPlugin|"
