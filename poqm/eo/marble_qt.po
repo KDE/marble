@@ -3268,7 +3268,7 @@ msgstr "&Kaŝi"
 #: src/lib/marble/AbstractFloatItem.cpp:250
 msgctxt "Marble::AbstractFloatItem|"
 msgid "&Configure..."
-msgstr "A&gordi"
+msgstr "&Agordi..."
 
 #: src/lib/marble/AddLinkDialog.cpp:64
 msgctxt "Marble::AddLinkDialog|"
@@ -3293,7 +3293,7 @@ msgstr "Bonvolu difini nomon por tiu ligilo"
 #: src/lib/marble/AddLinkDialog.ui:14
 msgctxt "UiAddLinkDialog|"
 msgid "Add link"
-msgstr "Aldonu ligilon"
+msgstr "Aldoni ligilon"
 
 #: src/lib/marble/AddLinkDialog.ui:22
 msgctxt "UiAddLinkDialog|"
@@ -3705,7 +3705,7 @@ msgstr "Ĉu vi certas ke vi deziras forviŝi la aktualan trakon ?"
 #: src/lib/marble/CurrentLocationWidget.ui:14
 msgctxt "CurrentLocationWidget|"
 msgid "Current Location"
-msgstr "Aktuala Loko"
+msgstr "Aktuala Logiko"
 
 #: src/lib/marble/CurrentLocationWidget.ui:26
 msgctxt "CurrentLocationWidget|"
@@ -3805,7 +3805,7 @@ msgstr ""
 #: src/lib/marble/routing/RoutingManager.cpp:563
 msgctxt "QObject|"
 msgid "Current Location"
-msgstr "Aktuala Loko"
+msgstr "Aktuala Logiko"
 
 #: src/lib/marble/declarative/Placemark.cpp:94
 #, qt-format
@@ -5435,7 +5435,7 @@ msgstr "Aldoni bildon"
 #: src/lib/marble/EditPlacemarkDialog.ui:383
 msgctxt "UiEditPlacemarkDialog|"
 msgid "Add link"
-msgstr "Aldonu ligilon"
+msgstr "Aldoni ligilon"
 
 #: src/lib/marble/ElevationWidget.ui:19
 msgctxt "ElevationWidget|"
@@ -5732,7 +5732,7 @@ msgstr "Aldoni bildon"
 #: src/lib/marble/FormattedTextWidget.ui:247
 msgctxt "FormattedTextWidget|"
 msgid "Add link"
-msgstr "Aldonu ligilon"
+msgstr "Aldoni ligilon"
 
 #: src/lib/marble/FormattedTextWidget.ui:252
 msgctxt "FormattedTextWidget|"
@@ -6196,7 +6196,7 @@ msgstr "Universitato"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:414
 msgctxt "GeoDataPlacemark|"
 msgid "Bar"
-msgstr "Trinkejo"
+msgstr "Baro"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:415
 msgctxt "GeoDataPlacemark|"
@@ -7963,7 +7963,7 @@ msgstr "Ĉi tie vi povas elekti la preferatan mapon el diversaj temoj."
 #: src/lib/marble/MapWizard.cpp:168
 msgctxt "Marble::PreviewDialog|"
 msgid "Preview Map"
-msgstr "Antaŭvida Mapo"
+msgstr "Antaŭrigarda Mapo"
 
 #: src/lib/marble/MapWizard.cpp:290 src/lib/marble/MapWizard.cpp:295
 msgctxt "Marble::MapWizard|"
@@ -8730,7 +8730,7 @@ msgstr "Bildeto"
 #: src/lib/marble/MapWizard.ui:1012
 msgctxt "MapWizard|"
 msgid "Preview Map"
-msgstr "Antaŭvida Mapo"
+msgstr "Antaŭrigarda Mapo"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:60
 msgctxt "QObject|"
@@ -10494,7 +10494,7 @@ msgstr "Klinas la globan akson for de la uzanto."
 #: src/lib/marble/MarbleNavigator.ui:151
 msgctxt "MarbleNavigator|"
 msgid "Zoom In"
-msgstr "Zoom En"
+msgstr "Zomi"
 
 #: src/lib/marble/MarbleNavigator.ui:154
 msgctxt "MarbleNavigator|"
@@ -12011,7 +12011,7 @@ msgstr "&Hejmo"
 #: src/lib/marble/routing/RoutingInputWidget.cpp:309
 msgctxt "Marble::RoutingInputWidget|"
 msgid "Current Location"
-msgstr "Aktuala Loko"
+msgstr "Aktuala Logiko"
 
 #: src/lib/marble/routing/RoutingInputWidget.cpp:483
 msgctxt "Marble::RoutingInputWidget|"
@@ -12152,7 +12152,7 @@ msgstr "&Aldoni..."
 #: src/lib/marble/routing/RoutingSettingsWidget.ui:32
 msgctxt "RoutingSettingsWidget|"
 msgid "&Configure..."
-msgstr "A&gordi"
+msgstr "&Agordi..."
 
 #: src/lib/marble/routing/RoutingSettingsWidget.ui:42
 msgctxt "RoutingSettingsWidget|"
@@ -12192,12 +12192,12 @@ msgstr "Trovi lokojn kiuj kongruas kun la serĉvortoj"
 #: src/lib/marble/routing/RoutingWidget.cpp:225
 msgctxt "QObject|"
 msgid "Open Route"
-msgstr "Malfermita Vojo"
+msgstr "Malfermi Vojon"
 
 #: src/lib/marble/routing/RoutingWidget.cpp:230
 msgctxt "QObject|"
 msgid "Save Route"
-msgstr "Registri Vojon"
+msgstr "Konservi Vojon"
 
 #: src/lib/marble/routing/RoutingWidget.cpp:235
 msgctxt "QObject|"
@@ -12261,7 +12261,7 @@ msgstr "Vojoj trovitaj: %1"
 #: src/lib/marble/routing/RoutingWidget.cpp:693
 msgctxt "Marble::RoutingWidget|"
 msgid "Open Route"
-msgstr "Malfermita Vojo"
+msgstr "Malfermi Vojon"
 
 #: src/lib/marble/routing/RoutingWidget.cpp:694
 msgctxt "Marble::RoutingWidget|"
@@ -12271,7 +12271,7 @@ msgstr "KML Dosieroj (*.kml)"
 #: src/lib/marble/routing/RoutingWidget.cpp:726
 msgctxt "Marble::RoutingWidget|"
 msgid "Save Route"
-msgstr "Registri Vojon"
+msgstr "Konservi Vojon"
 
 #: src/lib/marble/routing/RoutingWidget.cpp:728
 msgctxt "Marble::RoutingWidget|"
@@ -14127,7 +14127,7 @@ msgstr "Zomi al vidfenestro"
 #: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:30
 msgctxt "Marble::ElevationProfileContextMenu|"
 msgid "&Configure..."
-msgstr "A&gordi"
+msgstr "&Agordi..."
 
 #: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:36
 msgctxt "Marble::ElevationProfileContextMenu|"
@@ -14512,7 +14512,7 @@ msgstr "Montri detalojn (&S)"
 #: src/plugins/render/mapscale/MapScaleConfigWidget.ui:14
 msgctxt "MapScaleConfigWidget|"
 msgid "Configure Scale Bar Plugin"
-msgstr "Agordi Scale Bar Kromaĵo"
+msgstr "Agordi Skalobretan Kromaĵon"
 
 #: src/plugins/render/mapscale/MapScaleConfigWidget.ui:20
 msgctxt "MapScaleConfigWidget|"
@@ -14573,7 +14573,7 @@ msgstr "nm"
 #: src/plugins/render/mapscale/MapScaleFloatItem.cpp:377
 msgctxt "Marble::MapScaleFloatItem|"
 msgid "&Configure..."
-msgstr "A&gordi"
+msgstr "&Agordi..."
 
 #: src/plugins/render/mapscale/MapScaleFloatItem.cpp:383
 msgctxt "Marble::MapScaleFloatItem|"
@@ -15411,7 +15411,7 @@ msgstr "-"
 #: src/plugins/render/routing/RoutingPlugin.ui:219
 msgctxt "RoutingPlugin|"
 msgid "Zoom In"
-msgstr "Zoom En"
+msgstr "Zomi"
 
 #: src/plugins/render/routing/RoutingPlugin.ui:222
 msgctxt "RoutingPlugin|"
@@ -16201,7 +16201,7 @@ msgstr "Montri Profun&dĉielajn objektojn"
 #: src/plugins/render/stars/StarsPlugin.cpp:1459
 msgctxt "Marble::StarsPlugin|"
 msgid "&Configure..."
-msgstr "A&gordi"
+msgstr "&Agordi..."
 
 #: src/plugins/render/sun/SunPlugin.cpp:48
 #: src/plugins/render/sun/SunPlugin.cpp:53
@@ -16711,7 +16711,7 @@ msgstr "kPa"
 #: src/plugins/render/weather/WeatherData.cpp:755
 msgctxt "WeatherData|"
 msgid "Bar"
-msgstr "Trinkejo"
+msgstr "Baro"
 
 #: src/plugins/render/weather/WeatherData.cpp:758
 msgctxt "WeatherData|"
