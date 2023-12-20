@@ -2,13 +2,13 @@
 # This file is distributed under the same license as the PACKAGE package.
 #
 # Yasen Pramatarov <yasen@lindeas.com>, 2009, 2011.
-# Mincho Kondarev <mkondarev@yahoo.de>, 2022.
+# SPDX-FileCopyrightText: 2022, 2023 Mincho Kondarev <mkondarev@yahoo.de>
 msgid ""
 msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-11-27 00:39+0000\n"
-"PO-Revision-Date: 2022-07-08 11:24+0200\n"
+"PO-Revision-Date: 2023-12-19 22:27+0100\n"
 "Last-Translator: Mincho Kondarev <mkondarev@yahoo.de>\n"
 "Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
 "Language: bg\n"
@@ -18,13 +18,13 @@ msgstr ""
 "X-Poedit-Language: Bulgarian\n"
 "X-Poedit-Country: BULGARIA\n"
 "X-Poedit-SourceCharset: utf-8\n"
-"X-Generator: Lokalize 22.04.2\n"
+"X-Generator: Lokalize 23.08.4\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr "Светослав Стефанов"
+msgstr "Светослав Стефанов, Минчо Кондареж"
 
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
@@ -42,9 +42,9 @@ msgid "A World Atlas."
 msgstr "Атлас на света."
 
 #: kdemain.cpp:95
-#, fuzzy, kde-format
+#, kde-format
 msgid "(c) 2007-%1"
-msgstr "(c) 2007-2011"
+msgstr "(c) 2007-%1"
 
 #: kdemain.cpp:100 kdemain.cpp:286
 #, kde-format
@@ -91,7 +91,7 @@ msgstr ""
 #: kdemain.cpp:112
 #, kde-format
 msgid "Florian E&szlig;er"
-msgstr ""
+msgstr "Florian E&szlig;er"
 
 #: kdemain.cpp:113
 #, fuzzy, kde-format
@@ -121,32 +121,32 @@ msgstr "Поддръжка на онлайн услуги"
 #: kdemain.cpp:121 kdemain.cpp:172
 #, kde-format
 msgid "Guillaume Martres"
-msgstr ""
+msgstr "Guillaume Martres"
 
 #: kdemain.cpp:122
-#, fuzzy, kde-format
+#, kde-format
 msgid "Satellites"
-msgstr "Сателитен изглед"
+msgstr "Спътници"
 
 #: kdemain.cpp:124 kdemain.cpp:168
 #, kde-format
 msgid "Rene Kuettner"
-msgstr ""
+msgstr "Rene Kuettner"
 
 #: kdemain.cpp:125
-#, fuzzy, kde-format
+#, kde-format
 msgid "Satellites, Eclipses"
-msgstr "Сателитен изглед"
+msgstr "Сателити, еклипси"
 
 #: kdemain.cpp:127
 #, kde-format
 msgid "Friedrich W. H. Kossebau"
-msgstr ""
+msgstr "Friedrich W. H. Kossebau"
 
 #: kdemain.cpp:128
 #, kde-format
 msgid "Plasma Integration, Bugfixes"
-msgstr ""
+msgstr "Интеграция в Plasma, поправка на грешки"
 
 #: kdemain.cpp:130
 #, kde-format
@@ -161,12 +161,12 @@ msgstr "Навигация"
 #: kdemain.cpp:133
 #, kde-format
 msgid "Niko Sams"
-msgstr ""
+msgstr "Niko Sams"
 
 #: kdemain.cpp:134
-#, fuzzy, kde-format
+#, kde-format
 msgid "Routing, Elevation Profile"
-msgstr "Настройки на приставката за времето"
+msgstr ""
 
 #: kdemain.cpp:136 kdemain.cpp:206
 #, kde-format
@@ -196,7 +196,7 @@ msgstr "Inge Wallin"
 #: kdemain.cpp:146
 #, kde-format
 msgid "Core Developer and Co-Maintainer"
-msgstr ""
+msgstr "Разработка и поддръжка"
 
 #: kdemain.cpp:148
 #, kde-format
@@ -206,7 +206,7 @@ msgstr "Henry de Valence"
 #: kdemain.cpp:149
 #, kde-format
 msgid "Core Developer: Marble Runners, World-Clock Plasmoid"
-msgstr ""
+msgstr "Основен разработчик: Marble Runners, World-Clock Plasmoid"
 
 #: kdemain.cpp:151
 #, kde-format
@@ -236,7 +236,7 @@ msgstr "Simon Edwards"
 #: kdemain.cpp:158
 #, kde-format
 msgid "Marble Python Bindings"
-msgstr ""
+msgstr "Marble Python Bindings"
 
 #: kdemain.cpp:160
 #, kde-format
@@ -264,17 +264,20 @@ msgid ""
 "ESA Summer of Code in Space 2012 Project: Visualization of planetary "
 "satellites"
 msgstr ""
+"ESA Summer of Code in Space 2012 Project: Visualization of planetary "
+"satellites"
 
 #: kdemain.cpp:173
 #, kde-format
 msgid ""
 "ESA Summer of Code in Space 2011 Project: Visualization of Satellite Orbits"
 msgstr ""
+"ESA Summer of Code in Space 2011 Project: Visualization of Satellite Orbits"
 
 #: kdemain.cpp:178
 #, kde-format
 msgid "Konstantin Oblaukhov"
-msgstr ""
+msgstr "Konstantin Oblaukhov"
 
 #: kdemain.cpp:179
 #, fuzzy, kde-format
@@ -339,7 +342,7 @@ msgstr "Проект на Google Summer of Code 2009: Онлайн услуги"
 #: kdemain.cpp:207
 #, kde-format
 msgid "Google Summer of Code 2008 Project: Vector Tiles for Marble"
-msgstr ""
+msgstr "Google Summer of Code 2008 Project: Vector Tiles for Marble"
 
 #: kdemain.cpp:210
 #, kde-format
@@ -429,7 +432,7 @@ msgstr "Laurent Montel"
 #: kdemain.cpp:242
 #, kde-format
 msgid "Mayank Madan"
-msgstr ""
+msgstr "Mayank Madan"
 
 #: kdemain.cpp:244
 #, kde-format
@@ -489,7 +492,7 @@ msgstr "Daniel Molkentin"
 #: kdemain.cpp:266
 #, kde-format
 msgid "Christophe Leske"
-msgstr ""
+msgstr "Christophe Leske"
 
 #: kdemain.cpp:267 kdemain.cpp:269 kdemain.cpp:271 kdemain.cpp:273
 #: kdemain.cpp:275 kdemain.cpp:277 kdemain.cpp:279 kdemain.cpp:281
@@ -501,7 +504,7 @@ msgstr "Платформи и дистрибуции"
 #: kdemain.cpp:268
 #, kde-format
 msgid "Sebastian Wiedenroth"
-msgstr ""
+msgstr "Sebastian Wiedenroth"
 
 #: kdemain.cpp:270
 #, kde-format
@@ -869,12 +872,12 @@ msgstr ""
 #: marble_part.cpp:168
 #, kde-format
 msgid "File not readable"
-msgstr ""
+msgstr "Файлът не е четим"
 
 #: marble_part.cpp:214
 #, kde-format
 msgid "marble_part"
-msgstr ""
+msgstr "marble_part"
 
 #: marble_part.cpp:217
 #, kde-format
@@ -894,19 +897,19 @@ msgstr ""
 #: marble_part.cpp:253
 #, kde-format
 msgid "All Supported Files"
-msgstr ""
+msgstr "Всички поддържани файлове"
 
 #: marble_part.cpp:259
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@title:window"
 msgid "Open File"
-msgstr "Отваряне на файл"
+msgstr "Отворете файла"
 
 #: marble_part.cpp:276
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@title:window"
 msgid "Export Map"
-msgstr "Изнасяне на карта"
+msgstr "Експортиране на карта"
 
 #: marble_part.cpp:277
 #, kde-format
@@ -1059,16 +1062,16 @@ msgid "Lock globe to the sub-solar point"
 msgstr ""
 
 #: marble_part.cpp:881
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "Add Bookmark"
 msgid "Add &Bookmark..."
-msgstr "&Добавяне на отметка"
+msgstr "&Добавяне на отметка..."
 
 #: marble_part.cpp:889
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "Show Bookmarks"
 msgid "Show &Bookmarks"
-msgstr "&Отметки"
+msgstr "&Показване на отметки"
 
 #: marble_part.cpp:890
 #, kde-format
@@ -1081,16 +1084,16 @@ msgid "&Set Home Location"
 msgstr "Показване на домашното местоположение"
 
 #: marble_part.cpp:905
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "Manage Bookmarks"
 msgid "&Manage Bookmarks..."
-msgstr "&Управление на отметките"
+msgstr "&Управление на отметките..."
 
 #: marble_part.cpp:917
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "Edit the map in an external application"
 msgid "&Edit Map..."
-msgstr "&Редактиране"
+msgstr "&Редактиране на карта..."
 
 #: marble_part.cpp:925
 #, kde-format
@@ -1165,7 +1168,7 @@ msgstr "Дата и час"
 #: marble_part.cpp:1436
 #, kde-format
 msgid "Synchronization"
-msgstr ""
+msgstr "Синхронизация"
 
 #: marble_part.cpp:1449
 #, kde-format
@@ -1217,7 +1220,7 @@ msgstr "&Настройки"
 #: marble_part.rc:59
 #, kde-format
 msgid "&Panels"
-msgstr ""
+msgstr "&Панели"
 
 #. i18n: ectx: Menu (viewSize)
 #: marble_part.rc:65
