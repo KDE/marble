@@ -3,14 +3,14 @@
 # This file is distributed under the same license as the PACKAGE package.
 # Pino Toscano <toscano.pino@tiscali.it>, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020.
 # Paolo Zamponi <feus73@gmail.com>, 2022.
-# Vincenzo Reale <smart2128vr@gmail.com>, 2022, 2023.
+# SPDX-FileCopyrightText: 2022, 2023 Vincenzo Reale <smart2128vr@gmail.com>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: marble_qt\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2023-04-25 11:06+0200\n"
+"PO-Revision-Date: 2023-12-10 22:04+0100\n"
 "Last-Translator: Vincenzo Reale <smart2128vr@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "Language: it\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Qt-Contexts: true\n"
-"X-Generator: Lokalize 23.04.0\n"
+"X-Generator: Lokalize 23.08.4\n"
 
 #. file data/maps/moon/clementine/clementine.dgml:5
 msgctxt "DGML|"
@@ -10176,7 +10176,7 @@ msgstr "Richiede autenticazione"
 #: src/lib/marble/MarbleCacheSettingsWidget.ui:326
 msgctxt "MarbleCacheSettingsWidget|"
 msgid "U&sername:"
-msgstr "&Note utente:"
+msgstr "&Nome utente:"
 
 #: src/lib/marble/MarbleCacheSettingsWidget.ui:336
 msgctxt "MarbleCacheSettingsWidget|"
@@ -10235,7 +10235,7 @@ msgstr "URL del server remoto, ad es. mioserver.com/owncloud"
 #: src/lib/marble/MarbleCloudSyncSettingsWidget.ui:167
 msgctxt "MarbleCloudSyncSettingsWidget|"
 msgid "Username:"
-msgstr "Note utente:"
+msgstr "Nome utente:"
 
 #: src/lib/marble/MarbleCloudSyncSettingsWidget.ui:181
 msgctxt "MarbleCloudSyncSettingsWidget|"
@@ -12648,7 +12648,7 @@ msgid ""
 "PATH.)"
 msgstr ""
 "I codificatori supportati non sono stati trovati. (ffmpeg/avconv deve essere "
-"installato e presenti nel PATH.)"
+"installato e presente nel PATH.)"
 
 #: src/lib/marble/TourCaptureDialog.cpp:77
 msgctxt "Marble::TourCaptureDialog|"
