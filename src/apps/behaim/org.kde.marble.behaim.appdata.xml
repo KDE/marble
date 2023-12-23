@@ -8,6 +8,7 @@
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>LGPL-2.1-or-later</project_license>
   <name>Behaim Globe</name>
+  <name xml:lang="bg">Глобус на Бехайм</name>
   <name xml:lang="ca">Globus terraqüi de Behaim</name>
   <name xml:lang="ca-valencia">Globus terraqüi de Behaim</name>
   <name xml:lang="cs">Behaimův globus</name>
@@ -37,6 +38,7 @@
   <name xml:lang="x-test">xxBehaim Globexx</name>
   <name xml:lang="zh-CN">贝海姆地球仪</name>
   <summary>Martin Behaim's Erdapfel</summary>
+  <summary xml:lang="bg">Земната ябълка на Мартин Бехайм</summary>
   <summary xml:lang="ca">Erdapfel de Martin Behaim</summary>
   <summary xml:lang="ca-valencia">Erdapfel de Martin Behaim</summary>
   <summary xml:lang="de">Martin Behaim's Erdapfel</summary>
@@ -66,6 +68,7 @@
   <summary xml:lang="zh-CN">马丁·贝海姆地球仪</summary>
   <description>
     <p>The oldest existent globe of the Earth. Martin Behaim and collaborators created the globe around 1492 at the time of Columbus' first sea travel to the west.</p>
+    <p xml:lang="bg">Най-старият съществуващ глобус на Земята. Мартин Бехайм и сътрудници създават глобуса около 1492 г. по време на първото пътуване на Колумб по море на запад.</p>
     <p xml:lang="ca">El globus més antic existent de la Terra. Martin Behaim i els col·laboradors van crear el globus al voltant de 1492 en el moment del primer viatge marítim de Colom a l'oest.</p>
     <p xml:lang="ca-valencia">El globus més antic existent de la Terra. Martin Behaim i els col·laboradors van crear el globus al voltant de 1492 en el moment del primer viatge marítim de Colom a l'oest.</p>
     <p xml:lang="de">Der älteste existierende Globus der Erde. Der Globus wurde von Martin Behaim und anderen etwa 1492 erstellt, zu dieser Zeit begann Columbus seine erste Reise nach Westen.</p>

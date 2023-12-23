@@ -9,6 +9,7 @@ Notes:
     <sub-class-of type="application/xml"/>
     <comment>OSM Data</comment>
     <comment xml:lang="ar">بيانات OSM</comment>
+    <comment xml:lang="bg">Данни OSM</comment>
     <comment xml:lang="ca">Dades OSM</comment>
     <comment xml:lang="ca@valencia">Dades OSM</comment>
     <comment xml:lang="cs">Data OSM</comment>
@@ -53,6 +54,7 @@ Notes:
     <generic-icon name="application-vnd-google-earth-kml"/>
     <comment>ESRI Shapefile</comment>
     <comment xml:lang="ar">شيب فايل ESRI</comment>
+    <comment xml:lang="bg">Файл с форми ESRI</comment>
     <comment xml:lang="ca">Fitxers de formes ESRI</comment>
     <comment xml:lang="ca@valencia">Fitxers de formes ESRI</comment>
     <comment xml:lang="cs">Soubor tvaru ESRI</comment>
@@ -91,6 +93,7 @@ Notes:
   <mime-type type="application/x-esri-shape-index">
     <comment>ESRI Shapefile Index</comment>
     <comment xml:lang="ar">فهرس شيب فايل ESRI</comment>
+    <comment xml:lang="bg">Индекс на файл с форми ESRI</comment>
     <comment xml:lang="ca">Índex del fitxer de formes ESRI</comment>
     <comment xml:lang="ca@valencia">Índex del fitxer de formes ESRI</comment>
     <comment xml:lang="cs">Index souboru tvaru ESRI</comment>

@@ -9,6 +9,7 @@
   <project_license>LGPL-2.1-or-later</project_license>
   <name>Marble Maps</name>
   <name xml:lang="ar">خرائط ماربل</name>
+  <name xml:lang="bg">Карти Marble</name>
   <name xml:lang="ca">Mapes del Marble</name>
   <name xml:lang="ca-valencia">Mapes de Marble</name>
   <name xml:lang="cs">Mapy Marble</name>
@@ -39,6 +40,7 @@
   <name xml:lang="zh-CN">Marble 地图</name>
   <summary>Find your way</summary>
   <summary xml:lang="ar">اعثر على طريقك</summary>
+  <summary xml:lang="bg">Намерете вашия път</summary>
   <summary xml:lang="ca">Trobeu el camí</summary>
   <summary xml:lang="ca-valencia">Trobeu el camí</summary>
   <summary xml:lang="cs">Najděte si cestu</summary>
@@ -70,6 +72,7 @@
   <description>
     <p>OpenStreetMap Navigation.</p>
     <p xml:lang="ar">تنقل خريطة الشّوارع المفتوحة.</p>
+    <p xml:lang="bg">Навигация с OpenStreetMap.</p>
     <p xml:lang="ca">Navegació de l'OpenStreetMap.</p>
     <p xml:lang="ca-valencia">Navegació d'OpenStreetMap.</p>
     <p xml:lang="cs">Navigace OpenStreetMap.</p>
