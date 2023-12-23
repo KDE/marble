@@ -6,7 +6,7 @@
 # Jean-Jacques FINAZZI <mrjay01@users.sourceforge.net>, 2008.
 # Mickael Sibelle <kimael@gmail.com>, 2008, 2009, 2010, 2011, 2012.
 # Sébastien Renard <Sebastien.Renard@digitalfox.org>, 2008.
-# SPDX-FileCopyrightText: 2012, 2020, 2021, 2023 xavier <xavier.besnard@neuf.fr>
+# SPDX-FileCopyrightText: 2012, 2020, 2021, 2023 Xavier Besnard <xavier.besnard@kde.org>
 # Pierre Buard <pierre.buard@gmail.com>, 2013, 2014, 2015.
 # Simon Depiets <sdepiets@gmail.com>, 2018.
 # Thomas Vergnaud <thomas.vergnaud@gmx.fr>, 2018, 2022.
@@ -17,7 +17,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-04-26 00:45+0000\n"
 "PO-Revision-Date: 2023-10-26 16:13+0200\n"
-"Last-Translator: Xavier BESNARD <xavier.besnard@neuf.fr>\n"
+"Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: fr\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
@@ -39,7 +39,7 @@ msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr ""
 "mrjay01@users.sourceforge.net, pierre.buard@gmail.com, thomas.vergnaud@mailo."
-"eu, xavier.besnard@neuf.fr"
+"eu, xavier.besnard@kde.org"
 
 #: kdemain.cpp:91
 #, kde-format
