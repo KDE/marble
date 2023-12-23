@@ -3,36 +3,38 @@
 # This file is distributed under the same license as the marble package.
 # Automatically generated, 2022.
 #
+# SPDX-FileCopyrightText: 2023 Mincho Kondarev <mkondarev@yahoo.de>
 msgid ""
 msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-11-05 12:24+0000\n"
-"PO-Revision-Date: 2021-09-28 00:13+0000\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2023-12-21 18:24+0100\n"
+"Last-Translator: Mincho Kondarev <mkondarev@yahoo.de>\n"
+"Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
 "Language: bg\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 23.08.4\n"
 
 #: plasmarunner.cpp:36
 #, kde-format
 msgid "Shows the coordinates :q: in OpenStreetMap with Marble."
-msgstr ""
+msgstr "Показва координатите :q: в OpenStreetMap с Marble."
 
 #: plasmarunner.cpp:37
 #, kde-format
 msgid "Shows the geo bookmark containing :q: in OpenStreetMap with Marble."
-msgstr ""
+msgstr "Показва географската отметка, съдържаща :q:, в OpenStreetMap с Marble."
 
 #: plasmarunner.cpp:58
 #, kde-format
 msgid "Show the coordinates %1 in OpenStreetMap with Marble"
-msgstr ""
+msgstr "Показване на координатите на %1 в OpenStreetMap с Marble"
 
 #: plasmarunner.cpp:124
 #, kde-format
 msgid "Show in OpenStreetMap with Marble"
-msgstr ""
+msgstr "Показване в  OpenStreetMap с Marble"

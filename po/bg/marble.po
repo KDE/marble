@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-11-27 00:39+0000\n"
-"PO-Revision-Date: 2023-12-19 22:27+0100\n"
+"PO-Revision-Date: 2023-12-22 22:55+0100\n"
 "Last-Translator: Mincho Kondarev <mkondarev@yahoo.de>\n"
 "Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
 "Language: bg\n"
@@ -24,12 +24,12 @@ msgstr ""
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr "Светослав Стефанов, Минчо Кондареж"
+msgstr "Светослав Стефанов, Минчо Кондарев"
 
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr "lfu.project@gmail.com"
+msgstr "lfu.project@gmail.com, mkondarev@yahoo.de"
 
 #: kdemain.cpp:91
 #, kde-format
@@ -52,7 +52,7 @@ msgid "Torsten Rahn"
 msgstr "Torsten Rahn"
 
 #: kdemain.cpp:101
-#, fuzzy, kde-format
+#, kde-format
 msgid "Developer and Original Author"
 msgstr "Основен разработчик и оригинален автор"
 
@@ -64,7 +64,7 @@ msgstr "Bernhard Beschow"
 #: kdemain.cpp:104
 #, kde-format
 msgid "WMS Support, Mobile, Performance"
-msgstr ""
+msgstr "Поддръжка WMS, производителност, мобилна версия"
 
 #: kdemain.cpp:106
 #, kde-format
@@ -94,9 +94,9 @@ msgid "Florian E&szlig;er"
 msgstr "Florian E&szlig;er"
 
 #: kdemain.cpp:113
-#, fuzzy, kde-format
+#, kde-format
 msgid "Elevation Profile"
-msgstr "Височина"
+msgstr "Височинен профил"
 
 #: kdemain.cpp:115
 #, kde-format
@@ -154,9 +154,9 @@ msgid "Dennis Nienhüser"
 msgstr "Dennis Nienhüser"
 
 #: kdemain.cpp:131
-#, fuzzy, kde-format
+#, kde-format
 msgid "Routing, Navigation, Mobile"
-msgstr "Навигация"
+msgstr "Маршрути, навигация, мобилни устройства"
 
 #: kdemain.cpp:133
 #, kde-format
@@ -166,7 +166,7 @@ msgstr "Niko Sams"
 #: kdemain.cpp:134
 #, kde-format
 msgid "Routing, Elevation Profile"
-msgstr ""
+msgstr "Маршрути, височинен профил"
 
 #: kdemain.cpp:136 kdemain.cpp:206
 #, kde-format
@@ -280,19 +280,19 @@ msgid "Konstantin Oblaukhov"
 msgstr "Konstantin Oblaukhov"
 
 #: kdemain.cpp:179
-#, fuzzy, kde-format
+#, kde-format
 msgid "Google Summer of Code 2011 Project: OpenStreetMap Vector Rendering"
-msgstr "Проект на Google Summer of Code 2009: Анотация OSM"
+msgstr "Google Summer of Code 2011 Project: OpenStreetMap Vector Rendering"
 
 #: kdemain.cpp:182
-#, fuzzy, kde-format
+#, kde-format
 msgid "Daniel Marth"
-msgstr "Daniel Molkentin"
+msgstr "Daniel Marth"
 
 #: kdemain.cpp:183
-#, fuzzy, kde-format
+#, kde-format
 msgid "Google Summer of Code 2011 Project: Marble Touch on MeeGo"
-msgstr "Проект на Google Summer of Code 2010: Поддръжка на време"
+msgstr "Google Summer of Code 2011 Project: Marble Touch on MeeGo"
 
 #: kdemain.cpp:186
 #, kde-format
@@ -630,7 +630,7 @@ msgstr "Включване на преглед на грешки"
 #: kdemain.cpp:330
 #, kde-format
 msgid "Display OSM placemarks according to the level selected"
-msgstr ""
+msgstr "Показване на маркировките на OSM в зависимост от избраното ниво"
 
 #: kdemain.cpp:332
 #, kde-format
@@ -643,76 +643,78 @@ msgid "Show frame rate"
 msgstr "Показване на честота на кадрите"
 
 #: kdemain.cpp:336
-#, fuzzy, kde-format
+#, kde-format
 msgid "Show tile IDs"
-msgstr "Показване на места"
+msgstr "Показване на идентификационен номер"
 
 #: kdemain.cpp:338
 #, kde-format
 msgid "Show time spent in each layer"
-msgstr ""
+msgstr "Показване на изминалото време във всяко ниво"
 
 #: kdemain.cpp:340
 #, kde-format
 msgid "Use a different directory <directory> which contains map data."
-msgstr ""
+msgstr "Използване на друга директория <directory>, съдържаща данни за карти."
 
 #: kdemain.cpp:342
 #, kde-format
 msgid "Do not use the interface optimized for small screens"
-msgstr ""
+msgstr "Не използвайте интерфейса, оптимизиран за малки екрани"
 
 #: kdemain.cpp:343
 #, kde-format
 msgid "Use the interface optimized for small screens"
-msgstr ""
+msgstr "Използване на интерфейс, оптимизиран за малки екрани"
 
 #: kdemain.cpp:345
 #, kde-format
 msgid "Do not use the interface optimized for high resolutions"
-msgstr ""
+msgstr "Не използвайте интерфейса, оптимизиран за високи резолюции"
 
 #: kdemain.cpp:346
 #, kde-format
 msgid "Use the interface optimized for high resolutions"
-msgstr ""
+msgstr "Използване на интерфейс, оптимизиран за високи резолюции"
 
 #: kdemain.cpp:348
 #, kde-format
 msgid "Show map at given lat lon <coordinates>"
-msgstr ""
+msgstr "Показване на карта в даден географска дължина и ширина <coordinates>"
 
 #: kdemain.cpp:350
 #, kde-format
 msgid "Show map at given geo <uri>"
-msgstr ""
+msgstr "Показване на карта в даден географски район <uri>"
 
 #: kdemain.cpp:352
 #, kde-format
 msgid "Set the distance of the observer to the globe (in km)"
-msgstr ""
+msgstr "Задайте разстоянието от наблюдателя до глобуса (в км)"
 
 #: kdemain.cpp:354
 #, kde-format
 msgid "Use map <id> (e.g. \"earth/openstreetmap/openstreetmap.dgml\")"
 msgstr ""
+"Използване на карта <id> (напр. \"earth/openstreetmap/openstreetmap.dgml\")"
 
 #: kdemain.cpp:356
 #, kde-format
 msgid "One or more placemark files to be opened"
 msgstr ""
+"Един или повече файлове с маркери за местоположение трябва да се отворят"
 
 #. i18n: ectx: label, entry, group (Time)
 #: marble.kcfg:58
 #, kde-format
 msgid "The date and time of marble clock"
-msgstr ""
+msgstr "Дата и час на часовника в Marble"
 
 #. i18n: ectx: label, entry, group (Time)
 #: marble.kcfg:61
 #, kde-format
 msgid "The speed of marble clock"
-msgstr ""
+msgstr "Скоростта на часовника в Marble"
 
 #. i18n: ectx: label, entry, group (View)
 #: marble.kcfg:107
@@ -754,7 +756,7 @@ msgstr "Общият шрифт, използван на картата. "
 #: marble.kcfg:159
 #, kde-format
 msgid "The last directory that was opened by File->Open."
-msgstr ""
+msgstr "Последната директория, която е била отворена с Файл->Отваряне."
 
 #. i18n: ectx: label, entry, group (Navigation)
 #: marble.kcfg:179
@@ -778,7 +780,7 @@ msgstr "Показване на анимирано пътуване до цел�
 #: marble.kcfg:205
 #, kde-format
 msgid "The external OpenStreetMap editor application"
-msgstr ""
+msgstr "Външната програма за редактиране на OpenStreetMap"
 
 #. i18n: ectx: label, entry, group (Cache)
 #: marble.kcfg:211
@@ -841,6 +843,8 @@ msgstr "Сървърът-посредник изисква упълномоща�
 #, kde-format
 msgid "The position tracking plugin used to determine the current location"
 msgstr ""
+"Приставката за проследяване на позицията, използвана за определяне на "
+"текущото местоположение"
 
 #: marble_part.cpp:102
 #, kde-format
@@ -868,6 +872,8 @@ msgid ""
 "Sorry, unable to open '%1':\n"
 "'%2'"
 msgstr ""
+"Съжалявам, не успях да отворя '%1':\n"
+"'%2'"
 
 #: marble_part.cpp:168
 #, kde-format
@@ -887,12 +893,12 @@ msgstr "Настолен глобус"
 #: marble_part.cpp:231
 #, kde-format
 msgid "Sorry, unable to open '%1'. The file is not accessible."
-msgstr ""
+msgstr "Съжалявам, не успях да отворя '%1'. Файлът не е достъпен."
 
 #: marble_part.cpp:232
 #, kde-format
 msgid "File not accessible"
-msgstr ""
+msgstr "Файлът не е достъпен"
 
 #: marble_part.cpp:253
 #, kde-format
@@ -984,13 +990,13 @@ msgstr "Изтегляне на нови карти"
 #, kde-format
 msgctxt "Action for creating new maps"
 msgid "&Create a New Map..."
-msgstr ""
+msgstr "&Създаване нова карта…"
 
 #: marble_part.cpp:783
 #, kde-format
 msgctxt "Status tip"
 msgid "A wizard guides you through the creation of your own map theme."
-msgstr ""
+msgstr "Съветник ви води при създаването на собствена тема на картата."
 
 #: marble_part.cpp:810
 #, kde-format
@@ -1005,10 +1011,10 @@ msgid "S&un Control..."
 msgstr "Контрол на &слънцето..."
 
 #: marble_part.cpp:827
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "Action for time control dialog"
 msgid "&Time Control..."
-msgstr "Контрол на &слънцето..."
+msgstr "Настройване на &час и дата..."
 
 #: marble_part.cpp:836
 #, kde-format
@@ -1029,37 +1035,37 @@ msgstr "Скриване на сенките"
 #: marble_part.cpp:851
 #, kde-format
 msgid "Shows and hides the shadow of the sun"
-msgstr ""
+msgstr "Показване/скриване на сянката на Слънцето"
 
 #: marble_part.cpp:855
 #, kde-format
 msgid "Show sun icon on the Sub-Solar Point"
-msgstr ""
+msgstr "Показване на икона на слънцето в субсоларната точка"
 
 #: marble_part.cpp:857
 #, kde-format
 msgid "Hide sun icon on the Sub-Solar Point"
-msgstr ""
+msgstr "Скриване на слънцето  в субсоларната точка"
 
 #: marble_part.cpp:858
 #, kde-format
 msgid "Show sun icon on the sub-solar point"
-msgstr ""
+msgstr "Показване на икона на слънцето в субсоларната точка"
 
 #: marble_part.cpp:863
 #, kde-format
 msgid "Lock Globe to the Sub-Solar Point"
-msgstr ""
+msgstr "Заключване на глобуса към субсоларната точка"
 
 #: marble_part.cpp:865
 #, kde-format
 msgid "Unlock Globe to the Sub-Solar Point"
-msgstr ""
+msgstr "Отключване на глобуса от субсоларната точка"
 
 #: marble_part.cpp:866
 #, kde-format
 msgid "Lock globe to the sub-solar point"
-msgstr ""
+msgstr "Заключване на глобуса към субсоларната точка"
 
 #: marble_part.cpp:881
 #, kde-format
@@ -1076,12 +1082,12 @@ msgstr "&Показване на отметки"
 #: marble_part.cpp:890
 #, kde-format
 msgid "Show or hide bookmarks in the map"
-msgstr ""
+msgstr "Скриване/показване на отметките в картата"
 
 #: marble_part.cpp:898
-#, fuzzy, kde-format
+#, kde-format
 msgid "&Set Home Location"
-msgstr "Показване на домашното местоположение"
+msgstr "&Задаване като домашно местоположение"
 
 #: marble_part.cpp:905
 #, kde-format
@@ -1098,22 +1104,22 @@ msgstr "&Редактиране на карта..."
 #: marble_part.cpp:925
 #, kde-format
 msgid "&Record Movie"
-msgstr ""
+msgstr "З&апис на видео"
 
 #: marble_part.cpp:927
 #, kde-format
 msgid "Records a movie of the globe"
-msgstr ""
+msgstr "Запис на видео при разглеждане на глобуса"
 
 #: marble_part.cpp:933
 #, kde-format
 msgid "&Stop Recording"
-msgstr ""
+msgstr "&Спиране на записа"
 
 #: marble_part.cpp:935
 #, kde-format
 msgid "Stop recording a movie of the globe"
-msgstr ""
+msgstr "Прекратяване на видеозаписа на глобуса"
 
 #: marble_part.cpp:1287
 #, kde-format
@@ -1173,7 +1179,7 @@ msgstr "Синхронизация"
 #: marble_part.cpp:1449
 #, kde-format
 msgid "Routing"
-msgstr "Рутиране"
+msgstr "Маршрути"
 
 #: marble_part.cpp:1457
 #, kde-format
@@ -1202,7 +1208,7 @@ msgstr "&Изглед"
 #: marble_part.rc:36
 #, kde-format
 msgid "&Info Boxes"
-msgstr "&Информационни кутии"
+msgstr "&Допълнителни инструменти"
 
 #. i18n: ectx: Menu (onlineservices)
 #: marble_part.rc:42
@@ -1224,9 +1230,9 @@ msgstr "&Панели"
 
 #. i18n: ectx: Menu (viewSize)
 #: marble_part.rc:65
-#, fuzzy, kde-format
+#, kde-format
 msgid "&View Size"
-msgstr "&Изглед"
+msgstr "Размер на &изглед"
 
 #. i18n: ectx: Menu (bookmarks)
 #: marble_part.rc:73 marbleui.rc:29
