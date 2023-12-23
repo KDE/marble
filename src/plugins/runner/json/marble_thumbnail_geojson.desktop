@@ -2,6 +2,7 @@
 Type=Service
 Name=GeoJSON Geographic Data
 Name[ar]=بيانات جغرافية GeoJSON
+Name[bg]=Географски данни – GeoJSON
 Name[ca]=Dades geogràfiques GeoJSON
 Name[ca@valencia]=Dades geogràfiques GeoJSON
 Name[cs]=Zeměpisná data GeoJSON
