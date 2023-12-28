@@ -10,20 +10,20 @@
 # Michał Lachowski <michal@lachowski.info>, 2010.
 # Jan Stożek <jasio@stozek.waw.pl>, 2010.
 # Artur Chłond <eugenewolfe@o2.pl>, 2011.
-# Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023.
+# SPDX-FileCopyrightText: 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: marble_qt\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2023-04-23 11:52+0200\n"
-"Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
+"PO-Revision-Date: 2023-12-27 19:40+0100\n"
+"Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmai.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: Lokalize 23.08.3\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
 "X-Qt-Contexts: true\n"
@@ -6080,7 +6080,7 @@ msgstr "Droga"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:387
 msgctxt "GeoDataPlacemark|"
 msgid "Residential Road"
-msgstr "Droga mieszkalna"
+msgstr "Droga osiedlowa"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:388
 msgctxt "GeoDataPlacemark|"
@@ -6812,7 +6812,7 @@ msgstr "Chata alpejska"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:535
 msgctxt "GeoDataPlacemark|"
 msgid "Wilderness Hut"
-msgstr "Hata w dziczy"
+msgstr "Chata w dziczy"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:536
 msgctxt "GeoDataPlacemark|"
@@ -7223,12 +7223,12 @@ msgstr "Gondola"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:618
 msgctxt "GeoDataPlacemark|"
 msgid "Chair Lift"
-msgstr "Siodełkowa"
+msgstr "Wyciąg siodełkowy"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:619
 msgctxt "GeoDataPlacemark|"
 msgid "Mixed Lift"
-msgstr "Mieszana"
+msgstr "Mieszany wyciąg"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:620
 msgctxt "GeoDataPlacemark|"
