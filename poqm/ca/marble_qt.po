@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2023-12-10 10:52+0100\n"
+"PO-Revision-Date: 2023-12-27 11:15+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
@@ -13860,7 +13860,7 @@ msgstr "S"
 #: src/plugins/render/crosshairs/CrosshairsConfigWidget.ui:14
 msgctxt "CrosshairsConfigWidget|"
 msgid "Configure Crosshairs Plugin"
-msgstr "Configura el connector del punt de mira"
+msgstr "Configuració del connector de punts de mira"
 
 #: src/plugins/render/crosshairs/CrosshairsConfigWidget.ui:20
 msgctxt "CrosshairsConfigWidget|"
@@ -13895,7 +13895,7 @@ msgstr "Alemany"
 #: src/plugins/render/crosshairs/CrosshairsPlugin.cpp:72
 msgctxt "Marble::CrosshairsPlugin|"
 msgid "Crosshairs"
-msgstr "Punt de mira"
+msgstr "Punts de mira"
 
 #: src/plugins/render/crosshairs/CrosshairsPlugin.cpp:77
 msgctxt "Marble::CrosshairsPlugin|"
@@ -13905,7 +13905,7 @@ msgstr "Punt de &mira"
 #: src/plugins/render/crosshairs/CrosshairsPlugin.cpp:92
 msgctxt "Marble::CrosshairsPlugin|"
 msgid "A plugin that shows crosshairs."
-msgstr "Un connector que mostra un punt de mira."
+msgstr "Un connector que mostra punts de mira."
 
 #: src/plugins/render/earthquake/EarthquakeConfigWidget.ui:14
 msgctxt "EarthquakeConfigWidget|"
@@ -14455,7 +14455,7 @@ msgstr "Precisió"
 #: src/plugins/render/graticule/GraticuleConfigWidget.ui:14
 msgctxt "GraticuleConfigWidget|"
 msgid "Coordinate Grid Plugin"
-msgstr "Connector de la quadrícula de coordenades"
+msgstr "Connector de quadrícula de coordenades"
 
 #: src/plugins/render/graticule/GraticuleConfigWidget.ui:20
 msgctxt "GraticuleConfigWidget|"
@@ -14470,7 +14470,7 @@ msgstr "&Quadrícula:"
 #: src/plugins/render/graticule/GraticuleConfigWidget.ui:497
 msgctxt "GraticuleConfigWidget|"
 msgid "Color of the coordinate grid."
-msgstr "Si us plau, escolliu el color de la quadrícula de coordenades."
+msgstr "Color de la quadrícula de coordenades."
 
 #: src/plugins/render/graticule/GraticuleConfigWidget.ui:922
 msgctxt "GraticuleConfigWidget|"
@@ -14531,12 +14531,12 @@ msgstr "&Quadrícula de coordenades"
 #: src/plugins/render/graticule/GraticulePlugin.cpp:91
 msgctxt "Marble::GraticulePlugin|"
 msgid "A plugin that shows a coordinate grid."
-msgstr "Un connector que mostra la quadrícula de coordenades."
+msgstr "Un connector que mostra una quadrícula de coordenades."
 
 #: src/plugins/render/graticule/GraticulePlugin.cpp:211
 msgctxt "Marble::GraticulePlugin|"
 msgid "Please choose the color for the coordinate grid."
-msgstr "Si us plau, escolliu el color de la quadrícula de coordenades."
+msgstr "Escolliu el color de la quadrícula de coordenades."
 
 #: src/plugins/render/graticule/GraticulePlugin.cpp:222
 msgctxt "Marble::GraticulePlugin|"
@@ -15405,7 +15405,7 @@ msgstr "Mostra els codis postals de la zona al mapa."
 #: src/plugins/render/progress/ProgressFloatItem.cpp:72
 msgctxt "Marble::ProgressFloatItem|"
 msgid "Download Progress Indicator"
-msgstr "Indicador del progrés de la baixada"
+msgstr "Indicador de progrés de la baixada"
 
 #: src/plugins/render/progress/ProgressFloatItem.cpp:77
 msgctxt "Marble::ProgressFloatItem|"
@@ -15415,7 +15415,7 @@ msgstr "Progrés de la &baixada"
 #: src/plugins/render/progress/ProgressFloatItem.cpp:92
 msgctxt "Marble::ProgressFloatItem|"
 msgid "Shows a pie chart download progress indicator"
-msgstr "Mostra un diagrama de sectors indicant del progrés de la baixada"
+msgstr "Mostra un diagrama de sectors indicant el progrés de la baixada"
 
 #: src/plugins/render/routing/RoutingConfigDialog.ui:14
 msgctxt "RoutingConfigDialog|"
