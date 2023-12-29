@@ -7,19 +7,20 @@
 # Franklin Weng <franklin at goodhorse dot idv dot tw>, 2007, 2008.
 # Frank Weng (a.k.a. Franklin) <franklin at goodhorse dot idv dot tw>, 2008, 2009, 2010.
 # pan93412 <pan93412@gmail.com>, 2019.
+# SPDX-FileCopyrightText: 2023 Kisaragi Hiu <mail@kisaragi-hiu.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2019-05-14 22:35+0800\n"
-"Last-Translator: pan93412 <pan93412@gmail.com>\n"
-"Language-Team: Chinese <zh-l10n@lists.linux.org.tw>\n"
+"PO-Revision-Date: 2023-12-29 05:25+0900\n"
+"Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
+"Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
 "Language: zh_TW\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 19.04.1\n"
+"X-Generator: Lokalize 23.08.4\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Qt-Contexts: true\n"
 
@@ -2576,7 +2577,7 @@ msgstr "電車站"
 #: src/apps/marble-maps/PublicTransport.qml:36
 msgctxt "PublicTransport|"
 msgid "Bus"
-msgstr ""
+msgstr "公車"
 
 #: src/apps/marble-maps/PublicTransport.qml:41
 msgctxt "PublicTransport|"
@@ -2889,12 +2890,12 @@ msgstr "顯示此動作的詳細解釋。"
 #: src/apps/marble-qt/QtMainWindow.cpp:384
 msgctxt "Marble::MainWindow|"
 msgid "&Community Forum"
-msgstr ""
+msgstr "社群論壇(&C)"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:385
 msgctxt "Marble::MainWindow|"
 msgid "Visit Marble's Community Forum"
-msgstr ""
+msgstr "造訪 Marble 的社群論壇"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:388
 msgctxt "Marble::MainWindow|"
@@ -3346,7 +3347,7 @@ msgstr "新增途徑"
 #: src/lib/marble/AddLinkDialog.ui:22
 msgctxt "UiAddLinkDialog|"
 msgid "URL:"
-msgstr ""
+msgstr "網址："
 
 #: src/lib/marble/AddLinkDialog.ui:32
 #, fuzzy
@@ -3498,12 +3499,12 @@ msgstr "匯出書籤"
 #: src/lib/marble/BookmarkManagerDialog.ui:64
 msgctxt "UiBookmarkManagerDialog|"
 msgid "Folders"
-msgstr ""
+msgstr "資料夾"
 
 #: src/lib/marble/BookmarkManagerDialog.ui:74
 msgctxt "UiBookmarkManagerDialog|"
 msgid "New..."
-msgstr ""
+msgstr "新增..."
 
 #: src/lib/marble/BookmarkManagerDialog.ui:81
 #, fuzzy
@@ -3823,7 +3824,7 @@ msgstr ""
 #: src/lib/marble/CurrentLocationWidget.ui:154
 msgctxt "CurrentLocationWidget|"
 msgid "Map Adjustment"
-msgstr ""
+msgstr "地圖調整"
 
 #: src/lib/marble/CurrentLocationWidget.ui:165
 msgctxt "CurrentLocationWidget|Disable Auto Recenter"
@@ -3878,6 +3879,8 @@ msgid ""
 "Marble has found map data stored by a previous Marble version.<br/>Should "
 "this data get converted so that it can be used by the current version?"
 msgstr ""
+"Marble 找到了一個舊版 Marble 所儲存的地圖資料。<br/>是否要轉換這個資料讓它可"
+"以在這個版本中使用？"
 
 #: src/lib/marble/declarative/MarbleQuickItem.cpp:189
 #: src/lib/marble/routing/RoutingManager.cpp:560
@@ -3891,14 +3894,14 @@ msgstr "目前位置"
 msgctxt "Marble::Placemark|"
 msgid "%n rooms"
 msgid_plural "%n rooms"
-msgstr[0] ""
+msgstr[0] "%n 個房間"
 
 #: src/lib/marble/declarative/Placemark.cpp:100
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "%n beds"
 msgid_plural "%n beds"
-msgstr[0] ""
+msgstr[0] "%n 張床"
 
 #: src/lib/marble/declarative/Placemark.cpp:105
 #, fuzzy, qt-format
@@ -3911,7 +3914,7 @@ msgstr "停車處"
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "Maximum parking time %1"
-msgstr ""
+msgstr "最大停車時間 %1"
 
 #: src/lib/marble/declarative/Placemark.cpp:137
 #, fuzzy
@@ -3931,40 +3934,40 @@ msgstr "沒有可用的資訊"
 #: src/lib/marble/declarative/Placemark.cpp:139
 msgctxt "Marble::Placemark|A copy shop provides photocopying service"
 msgid "Photocopying service"
-msgstr ""
+msgstr "影印服務"
 
 #: src/lib/marble/declarative/Placemark.cpp:140
 msgctxt "Marble::Placemark|A copy shop does not provide photocopying service"
 msgid "No photocopying service"
-msgstr ""
+msgstr "沒有影印服務"
 
 #: src/lib/marble/declarative/Placemark.cpp:141
 msgctxt ""
 "Marble::Placemark|A copy shop provides a service for scanning documents into "
 "digital files"
 msgid "Digital scanning"
-msgstr ""
+msgstr "數位掃描"
 
 #: src/lib/marble/declarative/Placemark.cpp:142
 msgctxt ""
 "Marble::Placemark|A copy shop does not provide a service for scanning "
 "documents into digital files"
 msgid "No digital scanning"
-msgstr ""
+msgstr "沒有數位掃描"
 
 #: src/lib/marble/declarative/Placemark.cpp:143
 msgctxt ""
 "Marble::Placemark|A copy shop provides a service to send documents through "
 "fax"
 msgid "Fax service"
-msgstr ""
+msgstr "傳真服務"
 
 #: src/lib/marble/declarative/Placemark.cpp:144
 msgctxt ""
 "Marble::Placemark|A copy shop does not provide a service to send documents "
 "through fax"
 msgid "No fax service"
-msgstr ""
+msgstr "沒有傳真服務"
 
 #: src/lib/marble/declarative/Placemark.cpp:145
 #, fuzzy
@@ -3979,21 +3982,21 @@ msgctxt ""
 "Marble::Placemark|A copy shop does not provide a paid service to make phone "
 "calls"
 msgid "No phone service"
-msgstr ""
+msgstr "沒有電話服務"
 
 #: src/lib/marble/declarative/Placemark.cpp:147
 msgctxt ""
 "Marble::Placemark|A copy shop provides services to print paper documents "
 "from digital files"
 msgid "Digital printing"
-msgstr ""
+msgstr "數位列印"
 
 #: src/lib/marble/declarative/Placemark.cpp:148
 msgctxt ""
 "Marble::Placemark|A copy shop does not provide services to print paper "
 "documents from digital files"
 msgid "No digital printing"
-msgstr ""
+msgstr "沒有數位列印"
 
 #: src/lib/marble/declarative/Placemark.cpp:149
 msgctxt ""
@@ -4195,7 +4198,7 @@ msgstr ""
 #: src/lib/marble/declarative/Placemark.cpp:210
 msgctxt "Marble::Placemark|"
 msgid "Newspaper"
-msgstr ""
+msgstr "報紙"
 
 #: src/lib/marble/declarative/Placemark.cpp:211
 msgctxt "Marble::Placemark|"
@@ -5976,7 +5979,7 @@ msgstr "新增途徑"
 #: src/lib/marble/FormattedTextWidget.ui:252
 msgctxt "FormattedTextWidget|"
 msgid "Color"
-msgstr ""
+msgstr "色彩"
 
 #: src/lib/marble/geodata/data/GeoDataCoordinates.cpp:449
 msgctxt "GeoDataCoordinates|"
@@ -6132,7 +6135,7 @@ msgstr "海難船"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:345
 msgctxt "GeoDataPlacemark|"
 msgid "Air Port"
-msgstr ""
+msgstr "機場"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:346
 msgctxt "GeoDataPlacemark|"
@@ -6189,7 +6192,7 @@ msgstr "國家首都"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:357
 msgctxt "GeoDataPlacemark|"
 msgid "Suburb"
-msgstr ""
+msgstr "郊區"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:358
 msgctxt "GeoDataPlacemark|"
@@ -6247,7 +6250,7 @@ msgstr "樹木"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:369
 msgctxt "GeoDataPlacemark|"
 msgid "Beach"
-msgstr ""
+msgstr "海灘"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:370
 #, fuzzy
@@ -6543,7 +6546,7 @@ msgstr "啤酒花園"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:416
 msgctxt "GeoDataPlacemark|"
 msgid "Cafe"
-msgstr ""
+msgstr "咖啡廳"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:417
 #, fuzzy
@@ -6569,7 +6572,7 @@ msgstr "餐廳"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:420
 msgctxt "GeoDataPlacemark|"
 msgid "Dentist"
-msgstr ""
+msgstr "牙醫"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:421
 #, fuzzy
@@ -6603,12 +6606,12 @@ msgstr "人造衛星"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:425
 msgctxt "GeoDataPlacemark|"
 msgid "ATM"
-msgstr ""
+msgstr "提款機"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:426
 msgctxt "GeoDataPlacemark|"
 msgid "Bank"
-msgstr ""
+msgstr "銀行"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:427
 msgctxt "GeoDataPlacemark|"
@@ -6685,7 +6688,7 @@ msgstr ""
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:439
 msgctxt "GeoDataPlacemark|"
 msgid "Police"
-msgstr ""
+msgstr "警察"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:440
 #, fuzzy
@@ -6709,7 +6712,7 @@ msgstr ""
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:443
 msgctxt "GeoDataPlacemark|"
 msgid "Recycling"
-msgstr ""
+msgstr "回收"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:444
 msgctxt "GeoDataPlacemark|"
@@ -6719,7 +6722,7 @@ msgstr ""
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:445
 msgctxt "GeoDataPlacemark|"
 msgid "Telephone"
-msgstr ""
+msgstr "電話"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:446
 msgctxt "GeoDataPlacemark|"
@@ -6743,12 +6746,12 @@ msgstr "最快"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:449
 msgctxt "GeoDataPlacemark|"
 msgid "Drinking Water"
-msgstr ""
+msgstr "飲用水"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:450
 msgctxt "GeoDataPlacemark|"
 msgid "Graveyard"
-msgstr ""
+msgstr "墓地"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:451
 #, fuzzy
@@ -8247,7 +8250,7 @@ msgstr ""
 #: src/lib/marble/GoToDialog.ui:93
 msgctxt "GoTo|"
 msgid "Browse"
-msgstr ""
+msgstr "瀏覽"
 
 #: src/lib/marble/GoToDialog.ui:103
 msgctxt "GoTo|"
@@ -8257,7 +8260,7 @@ msgstr "搜尋"
 #: src/lib/marble/LatLonBoxWidget.ui:17
 msgctxt "LatLonBoxWidget|"
 msgid "Select a geographic region"
-msgstr ""
+msgstr "選擇一個地理區域"
 
 #: src/lib/marble/LatLonBoxWidget.ui:41
 #, fuzzy
@@ -8270,7 +8273,7 @@ msgstr "緯度"
 #: src/lib/marble/LatLonBoxWidget.ui:151 src/lib/marble/LatLonBoxWidget.ui:203
 msgctxt "LatLonBoxWidget|"
 msgid "°"
-msgstr ""
+msgstr "°"
 
 #: src/lib/marble/LatLonBoxWidget.ui:66
 #, fuzzy
@@ -8324,7 +8327,7 @@ msgstr "S"
 #: src/lib/marble/LatLonEdit.cpp:129
 msgctxt "Marble::LatLonEdit|"
 msgid "°"
-msgstr ""
+msgstr "°"
 
 #: src/lib/marble/LatLonEdit.cpp:179 src/lib/marble/LatLonEdit.cpp:338
 msgctxt "Marble::LatLonEdit|"
@@ -8359,17 +8362,17 @@ msgstr "S"
 #: src/lib/marble/LatLonEdit.ui:28
 msgctxt "LatLonEditPrivate|"
 msgid "°"
-msgstr ""
+msgstr "°"
 
 #: src/lib/marble/LatLonEdit.ui:38
 msgctxt "LatLonEditPrivate|"
 msgid "′"
-msgstr ""
+msgstr "′"
 
 #: src/lib/marble/LatLonEdit.ui:54
 msgctxt "LatLonEditPrivate|"
 msgid "″"
-msgstr ""
+msgstr "″"
 
 #: src/lib/marble/LegendWidget.ui:14 src/lib/marble/NullLegendWidget.ui:14
 msgctxt "LegendWidget|"
@@ -8379,7 +8382,7 @@ msgstr "圖例"
 #: src/lib/marble/LegendWidget.ui:21 src/lib/marble/NullLegendWidget.ui:21
 msgctxt "LegendWidget|"
 msgid "about:blank"
-msgstr ""
+msgstr "about:blank"
 
 #: src/lib/marble/MapThemeDownloadDialog.cpp:252
 #: src/lib/marble/MapThemeDownloadDialog.cpp:274
@@ -10687,11 +10690,9 @@ msgstr ""
 "edu.kde.org/marble\">http://edu.kde.org/marble</a>"
 
 #: src/lib/marble/MarbleAboutDialog.ui:14
-#, fuzzy
-#| msgid "Routing - Marble"
 msgctxt "MarbleAboutDialog|"
 msgid "About Marble"
-msgstr "路徑 - Marble"
+msgstr "關於 Marble"
 
 #: src/lib/marble/MarbleAboutDialog.ui:49
 #, fuzzy
@@ -10838,32 +10839,16 @@ msgstr ""
 "weight:600;\">000,0 km/h</span></p></body></html>"
 
 #: src/lib/marble/MarbleAboutDialog.ui:143
-#, fuzzy
-#| msgid "Data"
 msgctxt "MarbleAboutDialog|"
 msgid "&Data"
-msgstr "資料"
+msgstr "資料(&D)"
 
 #: src/lib/marble/MarbleAboutDialog.ui:170
-#, fuzzy
-#| msgid "&License"
 msgctxt "MarbleAboutDialog|"
 msgid "&License Agreement"
-msgstr "版權(&L)"
+msgstr "授權協議(&L)"
 
 #: src/lib/marble/MarbleAboutDialog.ui:182
-#, fuzzy
-#| msgid ""
-#| "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
-#| "REC-html40/strict.dtd\">\n"
-#| "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
-#| "css\">\n"
-#| "p, li { white-space: pre-wrap; }\n"
-#| "</style></head><body style=\" font-family:'DejaVu Sans'; font-size:10pt; "
-#| "font-weight:400; font-style:normal;\">\n"
-#| "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#| "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
-#| "weight:600;\">000,0 km/h</span></p></body></html>"
 msgctxt "MarbleAboutDialog|"
 msgid ""
 "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
@@ -10882,28 +10867,13 @@ msgstr ""
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
 "\">\n"
 "p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:'DejaVu Sans'; font-size:10pt; "
-"font-weight:400; font-style:normal;\">\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-"right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
-"weight:600;\">000,0 km/h</span></p></body></html>"
+"</style></head><body style=\" font-family:'Sans Serif'; font-size:10pt; font-"
+"weight:400; font-style:normal;\">\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+"margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-"
+"family:'MS Shell Dlg 2'; font-size:8pt;\"></p></body></html>"
 
 #: src/lib/marble/MarbleCacheSettingsWidget.ui:17
-#, fuzzy
-#| msgid ""
-#| "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
-#| "css\">\n"
-#| "p, li { white-space: pre-wrap; }\n"
-#| "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
-#| "font-weight:400; font-style:normal;\">\n"
-#| "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#| "right:0px; -qt-block-indent:0; text-indent:0px;\">There are two caches "
-#| "being used for Marble: The physical memory which is needed to keep map "
-#| "data in the computer's memory. Increasing the value will make the "
-#| "application more responsive. The hard disc memory cache is used by "
-#| "download contents from the internet (e.g. Wikipedia data or map data). "
-#| "Decrease this value if you want to save space on the hard disc and if "
-#| "high usage of the internet is not an issue. </p></body></html>"
 msgctxt "MarbleCacheSettingsWidget|"
 msgid ""
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
@@ -10943,18 +10913,14 @@ msgstr "實體記憶體(&P)："
 
 #: src/lib/marble/MarbleCacheSettingsWidget.ui:54
 #: src/lib/marble/MarbleCacheSettingsWidget.ui:127
-#, fuzzy
-#| msgid "MB"
 msgctxt "MarbleCacheSettingsWidget|"
 msgid " MB"
-msgstr "MB"
+msgstr " MB"
 
 #: src/lib/marble/MarbleCacheSettingsWidget.ui:73
-#, fuzzy
-#| msgid "Clear"
 msgctxt "MarbleCacheSettingsWidget|"
 msgid "C&lear"
-msgstr "清除"
+msgstr "清除(&L)"
 
 #: src/lib/marble/MarbleCacheSettingsWidget.ui:105
 msgctxt "MarbleCacheSettingsWidget|"
@@ -10998,11 +10964,9 @@ msgid "&Proxy"
 msgstr "快取伺服器(&P)"
 
 #: src/lib/marble/MarbleCacheSettingsWidget.ui:183
-#, fuzzy
-#| msgid "&Proxy"
 msgctxt "MarbleCacheSettingsWidget|"
 msgid "&Proxy:"
-msgstr "快取伺服器(&P)"
+msgstr "代理伺服器(&P)："
 
 #: src/lib/marble/MarbleCacheSettingsWidget.ui:200
 msgctxt "MarbleCacheSettingsWidget|"
@@ -11026,11 +10990,9 @@ msgstr ""
 
 #: src/lib/marble/MarbleCacheSettingsWidget.ui:308
 #: src/lib/marble/MarbleCacheSettingsWidget.ui:320
-#, fuzzy
-#| msgid "Quit the Application"
 msgctxt "MarbleCacheSettingsWidget|"
 msgid "Requires authentication"
-msgstr "離開應用程式"
+msgstr "需要認證"
 
 #: src/lib/marble/MarbleCacheSettingsWidget.ui:326
 msgctxt "MarbleCacheSettingsWidget|"
@@ -11043,11 +11005,9 @@ msgid "&Password:"
 msgstr ""
 
 #: src/lib/marble/MarbleCloudSyncSettingsWidget.ui:17
-#, fuzzy
-#| msgid "Synchronization"
 msgctxt "MarbleCloudSyncSettingsWidget|"
 msgid "Enable synchronization"
-msgstr "同步化"
+msgstr "啟用同步"
 
 #: src/lib/marble/MarbleCloudSyncSettingsWidget.ui:48
 msgctxt "MarbleCloudSyncSettingsWidget|"
@@ -11057,11 +11017,9 @@ msgid ""
 msgstr ""
 
 #: src/lib/marble/MarbleCloudSyncSettingsWidget.ui:51
-#, fuzzy
-#| msgid "Last synchronization: %1"
 msgctxt "MarbleCloudSyncSettingsWidget|"
 msgid "Enable route synchronization"
-msgstr "上次同步：%1"
+msgstr "啟用路徑同步"
 
 #: src/lib/marble/MarbleCloudSyncSettingsWidget.ui:84
 msgctxt "MarbleCloudSyncSettingsWidget|"
@@ -11069,11 +11027,9 @@ msgid "Automatically sync all bookmarks to the server."
 msgstr ""
 
 #: src/lib/marble/MarbleCloudSyncSettingsWidget.ui:87
-#, fuzzy
-#| msgid "Last synchronization: %1"
 msgctxt "MarbleCloudSyncSettingsWidget|"
 msgid "Enable bookmark synchronization"
-msgstr "上次同步：%1"
+msgstr "啟用書籤同步"
 
 #: src/lib/marble/MarbleCloudSyncSettingsWidget.ui:119
 msgctxt "MarbleCloudSyncSettingsWidget|"
@@ -11096,11 +11052,9 @@ msgid "Remote server URL, e.g. myserver.com/owncloud"
 msgstr ""
 
 #: src/lib/marble/MarbleCloudSyncSettingsWidget.ui:167
-#, fuzzy
-#| msgid "User: "
 msgctxt "MarbleCloudSyncSettingsWidget|"
 msgid "Username:"
-msgstr "使用者："
+msgstr "使用者名稱："
 
 #: src/lib/marble/MarbleCloudSyncSettingsWidget.ui:181
 msgctxt "MarbleCloudSyncSettingsWidget|"
@@ -11108,11 +11062,9 @@ msgid "Password:"
 msgstr ""
 
 #: src/lib/marble/MarbleCloudSyncSettingsWidget.ui:197
-#, fuzzy
-#| msgid "Test Plugin"
 msgctxt "MarbleCloudSyncSettingsWidget|"
 msgid "Test Login"
-msgstr "測試外掛程式"
+msgstr "測試登入"
 
 #: src/lib/marble/MarbleGlobal.h:254
 msgctxt "Marble|"
@@ -11170,11 +11122,9 @@ msgid "nm"
 msgstr "海浬"
 
 #: src/lib/marble/MarbleNavigationSettingsWidget.ui:17
-#, fuzzy
-#| msgid "During &animations:"
 msgctxt "MarbleNavigationSettingsWidget|"
 msgid "Dragging and Animation"
-msgstr "畫面移動時(&A)："
+msgstr "拖曳與動畫"
 
 #: src/lib/marble/MarbleNavigationSettingsWidget.ui:37
 msgctxt "MarbleNavigationSettingsWidget|"
@@ -11215,18 +11165,14 @@ msgstr ""
 "p></body></html>"
 
 #: src/lib/marble/MarbleNavigationSettingsWidget.ui:58
-#, fuzzy
-#| msgid "Keep planet axis vertically"
 msgctxt "MarbleNavigationSettingsWidget|"
 msgid "Keep Planet Axis Vertically"
 msgstr "極點軸保持垂直"
 
 #: src/lib/marble/MarbleNavigationSettingsWidget.ui:63
-#, fuzzy
-#| msgid "Follow mouse pointer"
 msgctxt "MarbleNavigationSettingsWidget|"
 msgid "Follow Mouse Pointer"
-msgstr "完全跟著滑鼠"
+msgstr "跟隨滑鼠指標"
 
 #: src/lib/marble/MarbleNavigationSettingsWidget.ui:73
 msgctxt "MarbleNavigationSettingsWidget|"
@@ -11234,11 +11180,9 @@ msgid "Use kinetic spinning when dragging the map"
 msgstr ""
 
 #: src/lib/marble/MarbleNavigationSettingsWidget.ui:76
-#, fuzzy
-#| msgid "&Set Home Location"
 msgctxt "MarbleNavigationSettingsWidget|"
 msgid "&Inertial globe rotation"
-msgstr "設定家位置(&S)"
+msgstr "地球旋轉慣性(&I)"
 
 #: src/lib/marble/MarbleNavigationSettingsWidget.ui:83
 msgctxt "MarbleNavigationSettingsWidget|"
@@ -11279,8 +11223,6 @@ msgid "&Mouse view rotation"
 msgstr ""
 
 #: src/lib/marble/MarbleNavigationSettingsWidget.ui:142
-#, fuzzy
-#| msgid "&On Startup:"
 msgctxt "MarbleNavigationSettingsWidget|"
 msgid "&On startup:"
 msgstr "啟動時(&O)："
@@ -11314,19 +11256,14 @@ msgid "Show Home Location"
 msgstr "顯示家位置"
 
 #: src/lib/marble/MarbleNavigationSettingsWidget.ui:164
-#, fuzzy
-#| msgid "Return to last location visited"
 msgctxt "MarbleNavigationSettingsWidget|"
 msgid "Return to Last Location Visited"
 msgstr "回到上次的位置"
 
 #: src/lib/marble/MarbleNavigationSettingsWidget.ui:184
-#, fuzzy
-#| msgctxt "Marble::ControlView|"
-#| msgid "Cannot start external editor"
 msgctxt "MarbleNavigationSettingsWidget|"
 msgid "&External editor:"
-msgstr "無法啟動外部編輯器"
+msgstr "外部編輯器(&E)："
 
 #: src/lib/marble/MarbleNavigationSettingsWidget.ui:194
 msgctxt "MarbleNavigationSettingsWidget|"
@@ -11338,11 +11275,9 @@ msgid ""
 msgstr ""
 
 #: src/lib/marble/MarbleNavigationSettingsWidget.ui:198
-#, fuzzy
-#| msgid "Always use local"
 msgctxt "MarbleNavigationSettingsWidget|"
 msgid "Always ask"
-msgstr "總是使用本地端"
+msgstr "總是詢問"
 
 #: src/lib/marble/MarbleNavigationSettingsWidget.ui:203
 msgctxt "MarbleNavigationSettingsWidget|"
@@ -11365,8 +11300,6 @@ msgid "Up"
 msgstr "上"
 
 #: src/lib/marble/MarbleNavigator.ui:65
-#, fuzzy
-#| msgid "Tilts the earth's axis towards the user."
 msgctxt "MarbleNavigator|"
 msgid "Tilts the globe's axis towards the user."
 msgstr "將地球的軸轉向使用者。"
@@ -15816,11 +15749,9 @@ msgstr "繪製多邊形"
 
 #: src/plugins/render/measure/MeasureConfigDialog.ui:33
 #: src/plugins/render/measure/MeasureConfigDialog.ui:127
-#, fuzzy
-#| msgid "Circle Ruler"
 msgctxt "MeasureConfigDialog|"
 msgid "Circle"
-msgstr "圓形尺規"
+msgstr "圓形"
 
 #: src/plugins/render/measure/MeasureConfigDialog.ui:51
 #, fuzzy
@@ -15830,11 +15761,9 @@ msgid "Segment labels"
 msgstr "文字標籤(&T)"
 
 #: src/plugins/render/measure/MeasureConfigDialog.ui:60
-#, fuzzy
-#| msgid "Distance:"
 msgctxt "MeasureConfigDialog|"
 msgid "Distance "
-msgstr "距離："
+msgstr "距離 "
 
 #: src/plugins/render/measure/MeasureConfigDialog.ui:70
 #, fuzzy
