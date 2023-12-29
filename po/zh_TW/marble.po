@@ -7,19 +7,20 @@
 #
 # Franklin Weng <franklin at goodhorse dot idv dot tw>, 2007, 2008.
 # Frank Weng (a.k.a. Franklin) <franklin at goodhorse dot idv dot tw>, 2008, 2009, 2010.
+# SPDX-FileCopyrightText: 2023 Kisaragi Hiu <mail@kisaragi-hiu.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-04-26 00:45+0000\n"
-"PO-Revision-Date: 2018-03-24 22:04+0800\n"
-"Last-Translator: pan93412 <pan93412@gmail.com>\n"
-"Language-Team: Chinese <zh-l10n@lists.linux.org.tw>\n"
+"PO-Revision-Date: 2023-12-29 05:15+0900\n"
+"Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
+"Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
 "Language: zh_TW\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 2.0\n"
+"X-Generator: Lokalize 23.08.4\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #, kde-format
@@ -863,12 +864,13 @@ msgid ""
 "Sorry, unable to open '%1':\n"
 "'%2'"
 msgstr ""
+"抱歉，無法開啟 '%1'：\n"
+"'%2'"
 
 #: marble_part.cpp:168
-#, fuzzy, kde-format
-#| msgid "File not accessible"
+#, kde-format
 msgid "File not readable"
-msgstr "檔案無法存取"
+msgstr "檔案無法讀取"
 
 #: marble_part.cpp:214
 #, kde-format
@@ -896,15 +898,13 @@ msgid "All Supported Files"
 msgstr "所有支援的檔案"
 
 #: marble_part.cpp:259
-#, fuzzy, kde-format
-#| msgid "Open File"
+#, kde-format
 msgctxt "@title:window"
 msgid "Open File"
 msgstr "開啟檔案"
 
 #: marble_part.cpp:276
-#, fuzzy, kde-format
-#| msgid "Export Map"
+#, kde-format
 msgctxt "@title:window"
 msgid "Export Map"
 msgstr "匯出地圖"
@@ -1060,12 +1060,10 @@ msgid "Lock globe to the sub-solar point"
 msgstr "將球體鎖定在日下點"
 
 #: marble_part.cpp:881
-#, fuzzy, kde-format
-#| msgctxt "Add Bookmark"
-#| msgid "&Add Bookmark"
+#, kde-format
 msgctxt "Add Bookmark"
 msgid "Add &Bookmark..."
-msgstr "加入書籤(&A)"
+msgstr "加入書籤(&A)..."
 
 #: marble_part.cpp:889
 #, kde-format
@@ -1084,20 +1082,16 @@ msgid "&Set Home Location"
 msgstr "設定家位置(&S)"
 
 #: marble_part.cpp:905
-#, fuzzy, kde-format
-#| msgctxt "Manage Bookmarks"
-#| msgid "&Manage Bookmarks"
+#, kde-format
 msgctxt "Manage Bookmarks"
 msgid "&Manage Bookmarks..."
-msgstr "管理書籤(&M)"
+msgstr "管理書籤(&M)..."
 
 #: marble_part.cpp:917
-#, fuzzy, kde-format
-#| msgctxt "Edit the map in an external application"
-#| msgid "&Edit Map"
+#, kde-format
 msgctxt "Edit the map in an external application"
 msgid "&Edit Map..."
-msgstr "編輯地圖(&E)"
+msgstr "編輯地圖(&E)..."
 
 #: marble_part.cpp:925
 #, kde-format
@@ -1110,8 +1104,7 @@ msgid "Records a movie of the globe"
 msgstr "錄製地球的影片"
 
 #: marble_part.cpp:933
-#, fuzzy, kde-format
-#| msgid "&Stop recording"
+#, kde-format
 msgid "&Stop Recording"
 msgstr "停止錄影(&S)"
 
