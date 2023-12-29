@@ -37,6 +37,7 @@
   <name xml:lang="uk">Глобус Бегайма</name>
   <name xml:lang="x-test">xxBehaim Globexx</name>
   <name xml:lang="zh-CN">贝海姆地球仪</name>
+  <name xml:lang="zh-TW">倍海姆地球儀</name>
   <summary>Martin Behaim's Erdapfel</summary>
   <summary xml:lang="bg">Земната ябълка на Мартин Бехайм</summary>
   <summary xml:lang="ca">Erdapfel de Martin Behaim</summary>
@@ -66,6 +67,7 @@
   <summary xml:lang="uk">Ердапфель Мартіна Бегайма</summary>
   <summary xml:lang="x-test">xxMartin Behaim's Erdapfelxx</summary>
   <summary xml:lang="zh-CN">马丁·贝海姆地球仪</summary>
+  <summary xml:lang="zh-TW">馬丁·倍海姆的倍海姆地球儀 (Erdapfel)</summary>
   <description>
     <p>The oldest existent globe of the Earth. Martin Behaim and collaborators created the globe around 1492 at the time of Columbus' first sea travel to the west.</p>
     <p xml:lang="bg">Най-старият съществуващ глобус на Земята. Мартин Бехайм и сътрудници създават глобуса около 1492 г. по време на първото пътуване на Колумб по море на запад.</p>
@@ -95,6 +97,7 @@
     <p xml:lang="uk">Найдавніший глобус Землі, який зберігся до наших часів. Мартін Бегайм та його помічники створили глобус близько 1492 року, у часи першої подорожі Колумба на захід.</p>
     <p xml:lang="x-test">xxThe oldest existent globe of the Earth. Martin Behaim and collaborators created the globe around 1492 at the time of Columbus' first sea travel to the west.xx</p>
     <p xml:lang="zh-CN">已知最早的地球仪，由马丁·贝海姆以及他的同事制作，时间为 1492 年前后——这是哥伦布首次西向航海的时代。</p>
+    <p xml:lang="zh-TW">現存最古老的地球儀。馬丁·倍海姆與合作者在 1492 年哥倫布首次往西出海的時候左右做出了這個地球儀。</p>
   </description>
   <url type="homepage">https://marble.kde.org/</url>
   <url type="bugtracker">https://bugs.kde.org/enter_bug.cgi?format=guided&amp;product=marble</url>
