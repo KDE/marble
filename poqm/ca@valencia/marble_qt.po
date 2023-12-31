@@ -17868,7 +17868,7 @@ msgstr "Encara no s'ha instal·lat cap mapa fora de línia."
 msgctxt "Marble::MonavPlugin|"
 msgid "The monav routing daemon does not seem to be installed on your system."
 msgstr ""
-"Pareix que no teniu instal·lat al vostre sistema el dimoni d'itineraris "
+"Pareix que no teniu instal·lat en el vostre sistema el dimoni d'itineraris "
 "MoNav."
 
 #: src/plugins/runner/monav/MonavPlugin.cpp:232
