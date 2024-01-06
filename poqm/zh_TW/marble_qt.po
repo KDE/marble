@@ -7,13 +7,13 @@
 # Franklin Weng <franklin at goodhorse dot idv dot tw>, 2007, 2008.
 # Frank Weng (a.k.a. Franklin) <franklin at goodhorse dot idv dot tw>, 2008, 2009, 2010.
 # pan93412 <pan93412@gmail.com>, 2019.
-# SPDX-FileCopyrightText: 2023 Kisaragi Hiu <mail@kisaragi-hiu.com>
+# SPDX-FileCopyrightText: 2023, 2024 Kisaragi Hiu <mail@kisaragi-hiu.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2023-12-29 05:25+0900\n"
+"PO-Revision-Date: 2024-01-05 20:59+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
 "Language: zh_TW\n"
@@ -6534,7 +6534,7 @@ msgstr "大學"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:414
 msgctxt "GeoDataPlacemark|"
 msgid "Bar"
-msgstr "巴（bar）"
+msgstr "酒吧"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:415
 #, fuzzy
@@ -18782,7 +18782,7 @@ msgstr "提款機"
 #: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:150
 msgctxt "QObject|"
 msgid "tram stop"
-msgstr "電車站"
+msgstr "輕軌站"
 
 #: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:152
 msgctxt "QObject|"
@@ -18797,7 +18797,7 @@ msgstr "汽車租借處"
 #: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:156
 msgctxt "QObject|"
 msgid "speed camera"
-msgstr "超速照相機"
+msgstr "測速照相機"
 
 #: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:158
 msgctxt "QObject|"
