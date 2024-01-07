@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
-"PO-Revision-Date: 2023-12-30 13:41\n"
+"PO-Revision-Date: 2024-01-06 03:35\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
 "MIME-Version: 1.0\n"
@@ -17835,7 +17835,7 @@ msgstr "从 PNT 文件创建地理数据文档"
 #: src/plugins/runner/pnt/PntPlugin.cpp:49
 msgctxt "Marble::PntPlugin|"
 msgid "Micro World Database II"
-msgstr "微型世界数据库二代"
+msgstr "Micro World Database II"
 
 #: src/plugins/runner/routino/RoutinoConfigWidget.ui:17
 msgctxt "RoutinoConfigWidget|"
