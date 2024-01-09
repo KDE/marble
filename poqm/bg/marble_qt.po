@@ -8393,10 +8393,15 @@ msgstr ""
 "изобразяване."
 
 #: src/lib/marble/MapWizard.ui:297
+#, fuzzy
+#| msgctxt "MapWizard|"
+#| msgid ""
+#| "Enable this to select multiple layers without keyboard shortcuts (Shift, "
+#| "Strg, Strg+A, ...)"
 msgctxt "MapWizard|"
 msgid ""
 "Enable this to select multiple layers without keyboard shortcuts (Shift, "
-"Strg, Strg+A, ...)"
+"Ctrl, Ctrl+A, ...)"
 msgstr ""
 "Активирайте тази опция, за да можете да избирате няколко слоя без клавишни "
 "комбинации (Shift, Ctrl, Ctrl+A, ...)"

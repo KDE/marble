@@ -8307,10 +8307,15 @@ msgid ""
 msgstr "图层的选择顺序直接影响它们在渲染时的顺序。"
 
 #: src/lib/marble/MapWizard.ui:297
+#, fuzzy
+#| msgctxt "MapWizard|"
+#| msgid ""
+#| "Enable this to select multiple layers without keyboard shortcuts (Shift, "
+#| "Strg, Strg+A, ...)"
 msgctxt "MapWizard|"
 msgid ""
 "Enable this to select multiple layers without keyboard shortcuts (Shift, "
-"Strg, Strg+A, ...)"
+"Ctrl, Ctrl+A, ...)"
 msgstr ""
 "启用此选项即可在不使用键盘快捷键 (Shift、Strg、Strg+A 等) 的情况下选中多个图"
 "层"

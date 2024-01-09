@@ -8396,10 +8396,15 @@ msgid ""
 msgstr "Порядок выбора слоёв напрямую влияет на порядок их обработки."
 
 #: src/lib/marble/MapWizard.ui:297
+#, fuzzy
+#| msgctxt "MapWizard|"
+#| msgid ""
+#| "Enable this to select multiple layers without keyboard shortcuts (Shift, "
+#| "Strg, Strg+A, ...)"
 msgctxt "MapWizard|"
 msgid ""
 "Enable this to select multiple layers without keyboard shortcuts (Shift, "
-"Strg, Strg+A, ...)"
+"Ctrl, Ctrl+A, ...)"
 msgstr ""
 "Включите этот параметр, чтобы выбирать несколько слоёв без комбинаций клавиш "
 "(Shift, Strg, Strg+A, ...)"

@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: marble_qt\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2024-01-07 21:49+0100\n"
+"PO-Revision-Date: 2024-01-08 22:51+0100\n"
 "Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: esperanto <kde-i18n-eo@kde.org>\n"
 "Language: eo\n"
@@ -7579,7 +7579,11 @@ msgid "Parsing failed line %1. Still %n unclosed tag(s) after document end. "
 msgid_plural ""
 "Parsing failed line %1. Still %n unclosed tag(s) after document end. "
 msgstr[0] ""
+"Analizo fiaskis ĉe linio %1. Ankoraŭ %n nefermita(j) etikedo(j) post "
+"dokumentfino."
 msgstr[1] ""
+"Analizo fiaskis ĉe linio %1. Ankoraŭ %n nefermita(j) etikedo(j) post "
+"dokumentfino."
 
 #: src/lib/marble/geodata/parser/GeoParser.cpp:124
 #, qt-format
@@ -7984,19 +7988,19 @@ msgstr "Servilo ne estas OWS-servilo."
 #: src/lib/marble/MapWizard.cpp:1140
 msgctxt "Marble::MapWizard|"
 msgid "Web Mercator (epsg:3857)"
-msgstr ""
+msgstr "Retejo Mercator (epsg:3857)"
 
 #: src/lib/marble/MapWizard.cpp:391 src/lib/marble/MapWizard.cpp:842
 #: src/lib/marble/MapWizard.cpp:975
 msgctxt "Marble::MapWizard|"
 msgid "Equirectangular (epsg:4326)"
-msgstr ""
+msgstr "Ekvirektangula (epsg:4326)"
 
 #: src/lib/marble/MapWizard.cpp:392 src/lib/marble/MapWizard.cpp:844
 #: src/lib/marble/MapWizard.cpp:977
 msgctxt "Marble::MapWizard|"
 msgid "Equirectangular (crs:84)"
-msgstr ""
+msgstr "Ekvirektangula (crs:84)"
 
 #: src/lib/marble/MapWizard.cpp:403
 msgctxt "Marble::MapWizard|"
@@ -8006,7 +8010,7 @@ msgstr "Kahela Projekcio:"
 #: src/lib/marble/MapWizard.cpp:419
 msgctxt "Marble::MapWizard|"
 msgid "Tile Matrix Set:"
-msgstr ""
+msgstr "Kahela Matrica Aro:"
 
 #: src/lib/marble/MapWizard.cpp:463 src/lib/marble/MapWizard.cpp:965
 msgctxt "Marble::MapWizard|"
@@ -8149,6 +8153,8 @@ msgid ""
 "<h4>WMS Server</h4>Please choose a <a href=\"https://en.wikipedia.org/wiki/"
 "Web_Map_Service\">WMS</a> server or enter a custom server URL."
 msgstr ""
+"<h4>WMS-Servilo</h4>Bonvolu elekti <a href=\"https://en.wikipedia.org/wiki/"
+"Web_Map_Service\">WMS</a>-servilon aŭ enigi propran servilan URL."
 
 #: src/lib/marble/MapWizard.cpp:1554
 msgctxt "Marble::MapWizard|"
@@ -8161,6 +8167,8 @@ msgid ""
 "<h4>WMTS Server</h4>Please choose a <a href=\"https://de.wikipedia.org/wiki/"
 "Web_Map_Tile_Service\">WMTS</a> server or enter a custom server URL."
 msgstr ""
+"<h4>WMTS-Servilo</h4>Bonvolu elekti <a href=\"https://de.wikipedia.org/wiki/"
+"Web_Map_Tile_Service\">WMTS</a>-servilon aŭ enigi propran servilan URL."
 
 #: src/lib/marble/MapWizard.ui:20
 msgctxt "MapWizard|"
@@ -8320,6 +8328,8 @@ msgid ""
 "Enter the base Url of the WMS service (e.g. <i>https://www.wms.nrw.de/"
 "geobasis/wms_nw_dop_overlay</i>)"
 msgstr ""
+"Enigu la bazan URL de la WMS-servo (ekz. <i>https://www.wms.nrw.de/geobasis/"
+"wms_nw_dop_overlay</i>)"
 
 #: src/lib/marble/MapWizard.ui:166 src/lib/marble/MapWizard.ui:465
 msgctxt "MapWizard|"
@@ -8339,7 +8349,7 @@ msgstr "Tavola Elekto"
 #: src/lib/marble/MapWizard.ui:243
 msgctxt "MapWizard|"
 msgid "Choose your Layer(s):"
-msgstr ""
+msgstr "Elektu vian(j)n Tavolo(j)n:"
 
 #: src/lib/marble/MapWizard.ui:266
 msgctxt "MapWizard|"
@@ -8352,13 +8362,22 @@ msgid ""
 "The order in which multiple layers are selected directly affects their "
 "rendering order."
 msgstr ""
+"La ordo en kiu pluraj tavoloj estas elektitaj rekte influas ilian bildigan "
+"ordon."
 
 #: src/lib/marble/MapWizard.ui:297
+#, fuzzy
+#| msgctxt "MapWizard|"
+#| msgid ""
+#| "Enable this to select multiple layers without keyboard shortcuts (Shift, "
+#| "Strg, Strg+A, ...)"
 msgctxt "MapWizard|"
 msgid ""
 "Enable this to select multiple layers without keyboard shortcuts (Shift, "
-"Strg, Strg+A, ...)"
+"Ctrl, Ctrl+A, ...)"
 msgstr ""
+"Ebligu tion por elekti plurajn tavolojn sen klavaraj ŝparvojoj (Shift, Ctrl, "
+"Ctrl+A, ...)"
 
 #: src/lib/marble/MapWizard.ui:300
 msgctxt "MapWizard|"
@@ -8368,7 +8387,7 @@ msgstr "Multoblaj Elektoj"
 #: src/lib/marble/MapWizard.ui:307
 msgctxt "MapWizard|"
 msgid "Custom Backdrop"
-msgstr ""
+msgstr "Propra Fono"
 
 #: src/lib/marble/MapWizard.ui:314
 msgctxt "MapWizard|"
@@ -18145,43 +18164,3 @@ msgstr "Gli&tera Ŝablono"
 msgctxt "Marble::FITemplateFloatItem|"
 msgid "This is a template class for float items."
 msgstr "tio estas ŝablono por gliteroj."
-
-#~ msgctxt "Marble::MainWindow|"
-#~ msgid "Ctrl+O"
-#~ msgstr "Ctrl+O"
-
-#~ msgctxt "Marble::MainWindow|"
-#~ msgid "Ctrl+S"
-#~ msgstr "Ktrl+S"
-
-#~ msgctxt "Marble::MainWindow|"
-#~ msgid "Ctrl+C"
-#~ msgstr "Ctrl+C"
-
-#~ msgctxt "Marble::MainWindow|"
-#~ msgid "Ctrl+E"
-#~ msgstr "Ctrl+E"
-
-#~ msgctxt "Marble::MainWindow|"
-#~ msgid "Ctrl+Shift+F"
-#~ msgstr "Ctrl+Shift+F"
-
-#~ msgctxt "Marble::MainWindow|"
-#~ msgid "F5"
-#~ msgstr "F5"
-
-#~ msgctxt "Marble::MainWindow|"
-#~ msgid "F1"
-#~ msgstr "F1"
-
-#~ msgctxt "Marble::MainWindow|"
-#~ msgid "Shift+F1"
-#~ msgstr "MAJUSKL+F1"
-
-#~ msgctxt "Marble::MainWindow|"
-#~ msgid "Ctrl+B"
-#~ msgstr "Ktrl+B"
-
-#~ msgctxt "DGML|"
-#~ msgid "Hillshading"
-#~ msgstr "Hillshading"

@@ -8576,7 +8576,7 @@ msgstr ""
 msgctxt "MapWizard|"
 msgid ""
 "Enable this to select multiple layers without keyboard shortcuts (Shift, "
-"Strg, Strg+A, ...)"
+"Ctrl, Ctrl+A, ...)"
 msgstr ""
 
 #: src/lib/marble/MapWizard.ui:300

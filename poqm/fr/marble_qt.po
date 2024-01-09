@@ -8412,10 +8412,15 @@ msgstr ""
 "leur ordre de rendu."
 
 #: src/lib/marble/MapWizard.ui:297
+#, fuzzy
+#| msgctxt "MapWizard|"
+#| msgid ""
+#| "Enable this to select multiple layers without keyboard shortcuts (Shift, "
+#| "Strg, Strg+A, ...)"
 msgctxt "MapWizard|"
 msgid ""
 "Enable this to select multiple layers without keyboard shortcuts (Shift, "
-"Strg, Strg+A, ...)"
+"Ctrl, Ctrl+A, ...)"
 msgstr ""
 "Activer cette option pour sélectionner plusieurs calques sans raccourcis "
 "clavier (MAJ, Strg, Strg + A, etc.)"

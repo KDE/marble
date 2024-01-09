@@ -8370,10 +8370,15 @@ msgstr ""
 "Ordningen som flera lager väljes påverkar direkt deras återgivningsordning."
 
 #: src/lib/marble/MapWizard.ui:297
+#, fuzzy
+#| msgctxt "MapWizard|"
+#| msgid ""
+#| "Enable this to select multiple layers without keyboard shortcuts (Shift, "
+#| "Strg, Strg+A, ...)"
 msgctxt "MapWizard|"
 msgid ""
 "Enable this to select multiple layers without keyboard shortcuts (Shift, "
-"Strg, Strg+A, ...)"
+"Ctrl, Ctrl+A, ...)"
 msgstr ""
 "Aktivera för att välja flera lager utan snabbtangenter (Skift, Strg, Strg"
 "+A, ...)"

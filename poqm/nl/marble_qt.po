@@ -8386,10 +8386,15 @@ msgstr ""
 "de volgorde van weergeven."
 
 #: src/lib/marble/MapWizard.ui:297
+#, fuzzy
+#| msgctxt "MapWizard|"
+#| msgid ""
+#| "Enable this to select multiple layers without keyboard shortcuts (Shift, "
+#| "Strg, Strg+A, ...)"
 msgctxt "MapWizard|"
 msgid ""
 "Enable this to select multiple layers without keyboard shortcuts (Shift, "
-"Strg, Strg+A, ...)"
+"Ctrl, Ctrl+A, ...)"
 msgstr ""
 "Dit inschakelen om meerdere lagen te selecteren zonder sneltoetsen (Shift, "
 "Strg, Strg+A, ...)"
