@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: marble_qt\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2023-12-17 20:35+0100\n"
+"PO-Revision-Date: 2024-01-09 20:15+0100\n"
 "Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: esperanto <kde-i18n-eo@kde.org>\n"
 "Language: eo\n"
@@ -1413,7 +1413,7 @@ msgstr "Ruinoj"
 #. file data/maps/earth/openstreetmap/openstreetmap.dgml:445
 msgctxt "DGML|"
 msgid "Bar"
-msgstr "Trinkejo"
+msgstr "Baro"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:443
 #. ----------
@@ -7579,7 +7579,11 @@ msgid "Parsing failed line %1. Still %n unclosed tag(s) after document end. "
 msgid_plural ""
 "Parsing failed line %1. Still %n unclosed tag(s) after document end. "
 msgstr[0] ""
+"Analizo fiaskis ĉe linio %1. Ankoraŭ %n nefermita(j) etikedo(j) post "
+"dokumentfino."
 msgstr[1] ""
+"Analizo fiaskis ĉe linio %1. Ankoraŭ %n nefermita(j) etikedo(j) post "
+"dokumentfino."
 
 #: src/lib/marble/geodata/parser/GeoParser.cpp:124
 #, qt-format
@@ -7984,19 +7988,19 @@ msgstr "Servilo ne estas OWS-servilo."
 #: src/lib/marble/MapWizard.cpp:1140
 msgctxt "Marble::MapWizard|"
 msgid "Web Mercator (epsg:3857)"
-msgstr ""
+msgstr "Retejo Mercator (epsg:3857)"
 
 #: src/lib/marble/MapWizard.cpp:391 src/lib/marble/MapWizard.cpp:842
 #: src/lib/marble/MapWizard.cpp:975
 msgctxt "Marble::MapWizard|"
 msgid "Equirectangular (epsg:4326)"
-msgstr ""
+msgstr "Ekvirektangula (epsg:4326)"
 
 #: src/lib/marble/MapWizard.cpp:392 src/lib/marble/MapWizard.cpp:844
 #: src/lib/marble/MapWizard.cpp:977
 msgctxt "Marble::MapWizard|"
 msgid "Equirectangular (crs:84)"
-msgstr ""
+msgstr "Ekvirektangula (crs:84)"
 
 #: src/lib/marble/MapWizard.cpp:403
 msgctxt "Marble::MapWizard|"
@@ -8006,7 +8010,7 @@ msgstr "Kahela Projekcio:"
 #: src/lib/marble/MapWizard.cpp:419
 msgctxt "Marble::MapWizard|"
 msgid "Tile Matrix Set:"
-msgstr ""
+msgstr "Kahela Matrica Aro:"
 
 #: src/lib/marble/MapWizard.cpp:463 src/lib/marble/MapWizard.cpp:965
 msgctxt "Marble::MapWizard|"
@@ -8149,6 +8153,8 @@ msgid ""
 "<h4>WMS Server</h4>Please choose a <a href=\"https://en.wikipedia.org/wiki/"
 "Web_Map_Service\">WMS</a> server or enter a custom server URL."
 msgstr ""
+"<h4>WMS-Servilo</h4>Bonvolu elekti <a href=\"https://en.wikipedia.org/wiki/"
+"Web_Map_Service\">WMS</a>-servilon aŭ enigi propran servilan URL."
 
 #: src/lib/marble/MapWizard.cpp:1554
 msgctxt "Marble::MapWizard|"
@@ -8161,6 +8167,8 @@ msgid ""
 "<h4>WMTS Server</h4>Please choose a <a href=\"https://de.wikipedia.org/wiki/"
 "Web_Map_Tile_Service\">WMTS</a> server or enter a custom server URL."
 msgstr ""
+"<h4>WMTS-Servilo</h4>Bonvolu elekti <a href=\"https://de.wikipedia.org/wiki/"
+"Web_Map_Tile_Service\">WMTS</a>-servilon aŭ enigi propran servilan URL."
 
 #: src/lib/marble/MapWizard.ui:20
 msgctxt "MapWizard|"
@@ -8320,6 +8328,8 @@ msgid ""
 "Enter the base Url of the WMS service (e.g. <i>https://www.wms.nrw.de/"
 "geobasis/wms_nw_dop_overlay</i>)"
 msgstr ""
+"Enigu la bazan URL de la WMS-servo (ekz. <i>https://www.wms.nrw.de/geobasis/"
+"wms_nw_dop_overlay</i>)"
 
 #: src/lib/marble/MapWizard.ui:166 src/lib/marble/MapWizard.ui:465
 msgctxt "MapWizard|"
@@ -8339,7 +8349,7 @@ msgstr "Tavola Elekto"
 #: src/lib/marble/MapWizard.ui:243
 msgctxt "MapWizard|"
 msgid "Choose your Layer(s):"
-msgstr ""
+msgstr "Elektu vian(j)n Tavolo(j)n:"
 
 #: src/lib/marble/MapWizard.ui:266
 msgctxt "MapWizard|"
@@ -8352,6 +8362,8 @@ msgid ""
 "The order in which multiple layers are selected directly affects their "
 "rendering order."
 msgstr ""
+"La ordo en kiu pluraj tavoloj estas elektitaj rekte influas ilian bildigan "
+"ordon."
 
 #: src/lib/marble/MapWizard.ui:297
 msgctxt "MapWizard|"
@@ -8368,7 +8380,7 @@ msgstr "Multoblaj Elektoj"
 #: src/lib/marble/MapWizard.ui:307
 msgctxt "MapWizard|"
 msgid "Custom Backdrop"
-msgstr ""
+msgstr "Propra Fono"
 
 #: src/lib/marble/MapWizard.ui:314
 msgctxt "MapWizard|"
@@ -8537,7 +8549,7 @@ msgstr ""
 "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
 "family:'Sans Serif'; font-weight:600;\">URL-Skemo por Indeksitaj Kaheloj</"
 "span></p>\n"
-"<p style=\" margin-top:12px; margin -bottom:12px; margin-left:0px; margin-"
+"<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
 "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
 "family:'Sans Serif'; \">Bonvolu enigi la URL uzatan por elŝuti individuajn "
 "kahelojn. Uzu la anstataŭaĵojn </span><span style=\" font-family:'Sans "
@@ -10284,7 +10296,7 @@ msgstr ""
 "right:0px; -qt-block-indent:0; text-indent:0px;\">Dumirante la muso estas du "
 "normaj kondutoj kiam oni traktas virtualan globon:</p>\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-"right:0px; - qt-block-indent:0; text-indent:0px;\">La loko sub musmontrilo "
+"right:0px; -qt-block-indent:0; text-indent:0px;\">La loko sub musmontrilo "
 "sekvos ĝuste la kursoron: Rezulte ekz. la norda poluso ne restos ĉe la supro "
 "kio povas konduki al konfuzo. Defaŭlte Marble certigas, ke nordo ĉiam estas "
 "supre, kio rezultigas trenan konduton kie la loko sub la musmontrilo iomete "
@@ -10578,11 +10590,11 @@ msgstr ""
 "uzantoj. Ĉi tie vi povas elekti kaj malelekti la funkciojn, kiuj estas "
 "provizitaj per kromaĵoj. </span></p>\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-"right:0px; -qt-block-indent:0; teksto -indent:0px;\"><span style=\" font-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
 "family:'Sans Serif';\">Malelekto de kromaĵo forigos la funkciojn de la mapo, "
 "menuoj kaj ilobretoj. </span></p>\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-"right:0px; -qt-block-indent:0; teksto -indent:0px;\"><span style=\" font-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
 "family:'Sans Serif';\">Ankaŭ kelkaj el la kromprogramoj povus ebligi iom "
 "ĝustigi ilian agordon. </span></p></body></html>"
 
