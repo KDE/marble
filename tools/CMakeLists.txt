@@ -25,7 +25,7 @@ endif()
 add_subdirectory( speaker-files )
 add_subdirectory( stars )
 add_subdirectory( sentineltile )
-if (LINUX)
+if (CMAKE_SYSTEM_NAME STREQUAL "Linux")
   # Tirex backend contains highly Linux-specific code
   add_subdirectory( vectorosm-tilecreator )
 endif()
