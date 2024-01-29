@@ -143,7 +143,7 @@ ssh mapsadmin@rhei.kde.org
 screen
 
 # Check the scratch space has at least 1TB of free space
-cd /mnt/scratch-space/
+cd /srv/scratch/maps/
 
 # Download the latest OSM data dump (~15min)
 wget https://ftp5.gwdg.de/pub/misc/openstreetmap/planet.openstreetmap.org/pbf/planet-latest.osm.pbf
@@ -153,14 +153,14 @@ wget https://ftp5.gwdg.de/pub/misc/openstreetmap/planet.openstreetmap.org/pbf/pl
 
 # Replace the previous OSMX database with the new one (1-2h)
 # The server is not able to generate new tiles during this period
-cd /var/lib/tirex/cache/
+cd /var/cache/tirex/cache/
 rm planet.osmx planet.osmx-lock
-cp /mnt/scratch-space/planet.osmx .
+cp /srv/scratch/maps/planet.osmx .
 
 # Check that both the tirex and mapsadmin user can access the OSMX db ("osmx query planet.osmx" must not fail)
 chmod 664 planet.osmx-lock
-chown mapsadmin:tirex planet.osmx-lock
+chown mapsadmin:_tirex planet.osmx-lock
 
 # Clean up scratch space again
-rm /mnt/scratch-space/planet.osmx /mnt/scratch-space/planet.osmx-lock /mnt/scratch-space/planet-latest.osm.pbf
+rm /srv/scratch/maps/planet.osmx /srv/scratch/maps/planet.osmx-lock /srv/scratch/maps/planet-latest.osm.pbf
 ```
