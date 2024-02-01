@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2024-01-09 15:37+0100\n"
+"PO-Revision-Date: 2024-01-30 10:33+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
@@ -8429,7 +8429,7 @@ msgstr "Projecció de les tessel·les:"
 #: src/lib/marble/MapWizard.ui:321
 msgctxt "MapWizard|"
 msgid "Indicates the projection in which the tiles are rendered."
-msgstr "Indica la projecció en que es renderitzaran les tessel·les."
+msgstr "Indica la projecció en què es renderitzaran les tessel·les."
 
 #: src/lib/marble/MapWizard.ui:344
 msgctxt "MapWizard|"
@@ -9339,7 +9339,7 @@ msgid ""
 msgstr ""
 "<p>Akshat Tandon <a href=\"akshat.tandon@research.iiit.ac.in\">akshat."
 "tandon@research.iiit.ac.in</a><br /><i>Projecte: Implementar els nivells "
-"mitjà i baix de tessel·la en el mapa vectorial OSM de Marble</i></p>"
+"mitjans i baixos de tessel·les en el mapa vectorial OSM de Marble</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:191
 msgctxt "QObject|"
@@ -13728,7 +13728,7 @@ msgstr "Port del terminal TNC"
 #: src/plugins/render/aprs/AprsConfigWidget.ui:184
 msgctxt "AprsConfigWidget|"
 msgid "Should information be gathered from a serial port?"
-msgstr "S'ha d'arreplegar informació del port en sèrie?"
+msgstr "S'ha d'arreplegar informació del port sèrie?"
 
 #: src/plugins/render/aprs/AprsConfigWidget.ui:187
 msgctxt "AprsConfigWidget|"
