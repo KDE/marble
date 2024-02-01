@@ -63,6 +63,18 @@ void BuildingGraphicsItem::initializeBuildingPainting(const GeoPainter* painter,
     drawAccurate3D = painter->mapQuality() == HighQuality ? maxOffset > pixelSize : maxOffset > 1.5 * pixelSize;
 }
 
+// backface culling for the perspective drawing below assumes all polygons in clockwise order
+static void normalizeWindingOrder(QPolygonF *polygon)
+{
+    double c = 0;
+    for (int i = 0; i <polygon->size(); ++i) {
+        c += (polygon->at((i + 1) % polygon->size()).x() - polygon->at(i).x()) * (polygon->at(i).y() + polygon->at((i + 1) % polygon->size()).y());
+    }
+    if (c < 0) {
+        std::reverse(polygon->begin(), polygon->end());
+    }
+}
+
 void BuildingGraphicsItem::updatePolygons(const ViewportParams &viewport,
                                           QVector<QPolygonF*>& outerPolygons,
                                           QVector<QPolygonF*>& innerPolygons,
@@ -81,6 +93,12 @@ void BuildingGraphicsItem::updatePolygons(const ViewportParams &viewport,
         }
     } else if (ring()) {
         viewport.screenCoordinates(*ring(), outerPolygons);
+    }
+    for (auto *polygon : outerPolygons) {
+        normalizeWindingOrder(polygon);
+    }
+    for (auto *polygon : innerPolygons) {
+        normalizeWindingOrder(polygon);
     }
 }
 
