@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
-"PO-Revision-Date: 2024-01-06 03:35\n"
+"PO-Revision-Date: 2024-02-05 11:41\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
 "MIME-Version: 1.0\n"
@@ -8307,17 +8307,12 @@ msgid ""
 msgstr "图层的选择顺序直接影响它们在渲染时的顺序。"
 
 #: src/lib/marble/MapWizard.ui:297
-#, fuzzy
-#| msgctxt "MapWizard|"
-#| msgid ""
-#| "Enable this to select multiple layers without keyboard shortcuts (Shift, "
-#| "Strg, Strg+A, ...)"
 msgctxt "MapWizard|"
 msgid ""
 "Enable this to select multiple layers without keyboard shortcuts (Shift, "
 "Ctrl, Ctrl+A, ...)"
 msgstr ""
-"启用此选项即可在不使用键盘快捷键 (Shift、Strg、Strg+A 等) 的情况下选中多个图"
+"启用此选项即可在不使用键盘快捷键 (Shift、Ctrl、Ctrl+A 等) 的情况下选中多个图"
 "层"
 
 #: src/lib/marble/MapWizard.ui:300

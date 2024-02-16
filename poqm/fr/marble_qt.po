@@ -6,7 +6,7 @@
 # Jean-Jacques FINAZZI <mrjay01@users.sourceforge.net>, 2008.
 # Mickael Sibelle <kimael@gmail.com>, 2008, 2009, 2010, 2011, 2012.
 # Sébastien Renard <Sebastien.Renard@digitalfox.org>, 2008.
-# SPDX-FileCopyrightText: 2012, 2020, 2021, 2022, 2023 Xavier Besnard <xavier.besnard@kde.org>
+# SPDX-FileCopyrightText: 2012, 2020, 2021, 2022, 2023, 2024 Xavier Besnard <xavier.besnard@kde.org>
 # Pierre Buard <pierre.buard@gmail.com>, 2013, 2014, 2015.
 # Sebastien Renard <renard@kde.org>, 2013.
 # Simon Depiets <sdepiets@gmail.com>, 2018.
@@ -19,9 +19,9 @@ msgstr ""
 "Project-Id-Version: marble_qt\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2023-11-01 16:08+0100\n"
-"Last-Translator: Xavier BESNARD <xavier.besnard@neuf.fr>\n"
-"Language-Team: fr\n"
+"PO-Revision-Date: 2024-01-11 10:39+0100\n"
+"Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
+"Language-Team: French <kde-francophone@kde.org>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -30,7 +30,7 @@ msgstr ""
 "X-Environment: kde\n"
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: qtrich\n"
-"X-Generator: Lokalize 23.08.2\n"
+"X-Generator: Lokalize 23.08.4\n"
 "X-Qt-Contexts: true\n"
 
 #. file data/maps/moon/clementine/clementine.dgml:5
@@ -8412,18 +8412,13 @@ msgstr ""
 "leur ordre de rendu."
 
 #: src/lib/marble/MapWizard.ui:297
-#, fuzzy
-#| msgctxt "MapWizard|"
-#| msgid ""
-#| "Enable this to select multiple layers without keyboard shortcuts (Shift, "
-#| "Strg, Strg+A, ...)"
 msgctxt "MapWizard|"
 msgid ""
 "Enable this to select multiple layers without keyboard shortcuts (Shift, "
 "Ctrl, Ctrl+A, ...)"
 msgstr ""
 "Activer cette option pour sélectionner plusieurs calques sans raccourcis "
-"clavier (MAJ, Strg, Strg + A, etc.)"
+"clavier (MAJ, CTRL, CTRL + A, etc.)"
 
 #: src/lib/marble/MapWizard.ui:300
 msgctxt "MapWizard|"

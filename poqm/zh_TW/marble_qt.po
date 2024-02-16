@@ -13,14 +13,14 @@ msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2024-01-05 20:59+0900\n"
+"PO-Revision-Date: 2024-01-27 19:50+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
 "Language: zh_TW\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 23.08.4\n"
+"X-Generator: Lokalize 24.01.95\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Qt-Contexts: true\n"
 
@@ -1616,7 +1616,7 @@ msgstr ""
 #. file data/maps/earth/behaim1492/behaim1492.dgml:199
 msgctxt "DGML|"
 msgid "Reference lines"
-msgstr ""
+msgstr "參考線"
 
 #. file data/maps/earth/behaim1492/behaim1492.dgml:202
 #. ----------
@@ -2628,7 +2628,7 @@ msgstr ""
 #: src/apps/marble-maps/SidePanel.qml:89
 msgctxt "SidePanel|"
 msgid "Accessibility"
-msgstr ""
+msgstr "無障礙輔助"
 
 #: src/apps/marble-maps/SidePanel.qml:101
 #, fuzzy
@@ -4043,17 +4043,17 @@ msgstr ""
 #: src/lib/marble/declarative/Placemark.cpp:156
 msgctxt "Marble::Placemark|A deli that sells organic food"
 msgid "Sells organic food"
-msgstr ""
+msgstr "販售有機食品"
 
 #: src/lib/marble/declarative/Placemark.cpp:157
 msgctxt "Marble::Placemark|A deli that does not sell organic food"
 msgid "Does not sell organic food"
-msgstr ""
+msgstr "不販售有機食品"
 
 #: src/lib/marble/declarative/Placemark.cpp:158
 msgctxt "Marble::Placemark|A deli that only sells organic food"
 msgid "Only sells organic food"
-msgstr ""
+msgstr "只販售有機食品"
 
 #: src/lib/marble/declarative/Placemark.cpp:160
 msgctxt "Marble::Placemark|A deli that sells gluten free food"
@@ -4098,7 +4098,7 @@ msgstr ""
 #: src/lib/marble/declarative/Placemark.cpp:170
 msgctxt "Marble::Placemark|A tobacco shop that also sells salt"
 msgid "Sells salt"
-msgstr ""
+msgstr "販售鹽"
 
 #: src/lib/marble/declarative/Placemark.cpp:186
 msgctxt "Marble::Placemark|"
@@ -4366,7 +4366,7 @@ msgstr ""
 #: src/lib/marble/declarative/Placemark.cpp:242
 msgctxt "Marble::Placemark|"
 msgid "Optometrist"
-msgstr ""
+msgstr "眼科"
 
 #: src/lib/marble/declarative/Placemark.cpp:243
 msgctxt "Marble::Placemark|"
@@ -4506,17 +4506,17 @@ msgstr ""
 #: src/lib/marble/declarative/Placemark.cpp:295
 msgctxt "Marble::Placemark|A hut provides toilets"
 msgid "Has toilets"
-msgstr ""
+msgstr "有廁所"
 
 #: src/lib/marble/declarative/Placemark.cpp:296
 msgctxt "Marble::Placemark|A hut does not provide toilets"
 msgid "Has no toilets"
-msgstr ""
+msgstr "沒有廁所"
 
 #: src/lib/marble/declarative/Placemark.cpp:297
 msgctxt "Marble::Placemark|"
 msgid "Reservation is possible"
-msgstr ""
+msgstr "可以預約"
 
 #: src/lib/marble/declarative/Placemark.cpp:298
 #, fuzzy
@@ -4535,14 +4535,14 @@ msgstr "需要船"
 #: src/lib/marble/declarative/Placemark.cpp:300
 msgctxt "Marble::Placemark|You should make reservation"
 msgid "Reservation is recommended"
-msgstr ""
+msgstr "建議預約"
 
 #: src/lib/marble/declarative/Placemark.cpp:301
 msgctxt ""
 "Marble::Placemark|Reservation is only possible for members of the "
 "organisation running the hut"
 msgid "Only for members"
-msgstr ""
+msgstr "僅會員"
 
 #: src/lib/marble/declarative/Placemark.cpp:303
 #, qt-format
@@ -5534,7 +5534,7 @@ msgstr "請指定此地標的代碼。"
 #: src/lib/marble/EditPlacemarkDialog.cpp:377
 msgctxt "Marble::EditPlacemarkDialog|"
 msgid "ID is invalid"
-msgstr "代碼不合法"
+msgstr "代碼無效"
 
 #: src/lib/marble/EditPlacemarkDialog.cpp:378
 msgctxt "Marble::EditPlacemarkDialog|"
@@ -5556,12 +5556,12 @@ msgstr "請指定地標的圖示。"
 #: src/lib/marble/EditPlacemarkDialog.cpp:385
 msgctxt "Marble::EditPlacemarkDialog|"
 msgid "Invalid icon path"
-msgstr "不合法的圖示路徑"
+msgstr "無效的圖示路徑"
 
 #: src/lib/marble/EditPlacemarkDialog.cpp:386
 msgctxt "Marble::EditPlacemarkDialog|"
 msgid "Please specify a valid path for the icon file."
-msgstr "請指定圖示檔的合法路徑。"
+msgstr "請指定圖示檔的有效路徑。"
 
 #: src/lib/marble/EditPlacemarkDialog.ui:20
 #, fuzzy
@@ -6671,7 +6671,7 @@ msgstr ""
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:436
 msgctxt "GeoDataPlacemark|"
 msgid "Court House"
-msgstr ""
+msgstr "法院"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:437
 #, fuzzy
@@ -6707,7 +6707,7 @@ msgstr "郵遞區號"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:442
 msgctxt "GeoDataPlacemark|"
 msgid "Prison"
-msgstr ""
+msgstr "監獄"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:443
 msgctxt "GeoDataPlacemark|"
@@ -6727,7 +6727,7 @@ msgstr "電話"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:446
 msgctxt "GeoDataPlacemark|"
 msgid "Toilets"
-msgstr ""
+msgstr "廁所"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:447
 #, fuzzy
@@ -7070,7 +7070,7 @@ msgstr "人造衛星"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:506
 msgctxt "GeoDataPlacemark|"
 msgid "Laundry"
-msgstr ""
+msgstr "洗衣店"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:507
 msgctxt "GeoDataPlacemark|"
@@ -7407,7 +7407,7 @@ msgstr "腳踏車（競賽）"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:559
 msgctxt "GeoDataPlacemark|"
 msgid "Subway Entrance"
-msgstr ""
+msgstr "地下鐵入口"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:560
 #, fuzzy
@@ -7431,22 +7431,22 @@ msgstr ""
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:563
 msgctxt "GeoDataPlacemark|"
 msgid "Buddhist"
-msgstr ""
+msgstr "佛教"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:564
 msgctxt "GeoDataPlacemark|"
 msgid "Christian"
-msgstr ""
+msgstr "基督教"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:565
 msgctxt "GeoDataPlacemark|"
 msgid "Muslim"
-msgstr ""
+msgstr "穆斯林"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:566
 msgctxt "GeoDataPlacemark|"
 msgid "Hindu"
-msgstr ""
+msgstr "印度教"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:567
 msgctxt "GeoDataPlacemark|"
@@ -7456,12 +7456,12 @@ msgstr ""
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:568
 msgctxt "GeoDataPlacemark|"
 msgid "Jewish"
-msgstr ""
+msgstr "猶太教"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:569
 msgctxt "GeoDataPlacemark|"
 msgid "Shinto"
-msgstr ""
+msgstr "神道教"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:570
 msgctxt "GeoDataPlacemark|"
@@ -7471,7 +7471,7 @@ msgstr ""
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:571
 msgctxt "GeoDataPlacemark|"
 msgid "Taoist"
-msgstr ""
+msgstr "道教"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:572
 #, fuzzy
@@ -7519,7 +7519,7 @@ msgstr ""
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:580
 msgctxt "GeoDataPlacemark|"
 msgid "Swimming Pool"
-msgstr ""
+msgstr "游泳池"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:581
 #, fuzzy
@@ -7683,7 +7683,7 @@ msgstr "小雨（light rain）"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:606
 msgctxt "GeoDataPlacemark|"
 msgid "Abandoned Railway"
-msgstr ""
+msgstr "廢棄鐵路"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:607
 msgctxt "GeoDataPlacemark|"
@@ -8182,7 +8182,7 @@ msgstr "剖析錯誤於第 %1 行第 %2 欄。"
 #: src/lib/marble/geodata/parser/GeoParser.cpp:126
 msgctxt "QObject|"
 msgid "This is an Invalid File"
-msgstr "這不是合法的檔案"
+msgstr "這不是有效的檔案"
 
 #: src/lib/marble/GeoDataTreeModel.cpp:181
 msgctxt "Marble::GeoDataTreeModel|"
@@ -12155,7 +12155,7 @@ msgstr "儲存影片檔"
 #: src/lib/marble/MovieCaptureDialog.cpp:87
 msgctxt "Marble::MovieCaptureDialog|"
 msgid "Filename is not valid"
-msgstr "檔案名稱不合法"
+msgstr "檔案名稱無效"
 
 #: src/lib/marble/MovieCaptureDialog.cpp:88
 #, qt-format
@@ -13612,7 +13612,7 @@ msgstr "儲存影片檔"
 #: src/lib/marble/TourCaptureDialog.cpp:98
 msgctxt "Marble::TourCaptureDialog|"
 msgid "Filename is not valid"
-msgstr "檔案名稱不合法"
+msgstr "檔案名稱無效"
 
 #: src/lib/marble/TourCaptureDialog.cpp:99
 #, qt-format
@@ -13855,12 +13855,12 @@ msgstr ""
 #: src/lib/marble/TourWidget.ui:87 src/lib/marble/TourWidget.ui:90
 msgctxt "TourWidget|"
 msgid "Move up"
-msgstr ""
+msgstr "往上移動"
 
 #: src/lib/marble/TourWidget.ui:102
 msgctxt "TourWidget|"
 msgid "Move down"
-msgstr ""
+msgstr "往下移動"
 
 #: src/lib/marble/TourWidget.ui:114
 msgctxt "TourWidget|"
@@ -14030,11 +14030,9 @@ msgid "Qt Positioning Location"
 msgstr "Qt Mobility 位置"
 
 #: src/plugins/positionprovider/qtpositioning/QtPositioningPositionProviderPlugin.cpp:66
-#, fuzzy
-#| msgid "Reports the GPS position of a QtMobility compatible device."
 msgctxt "Marble::QtPositioningPositionProviderPlugin|"
 msgid "Reports the GPS position of a QtPositioning compatible device."
-msgstr "報告 QtMobility 相容裝置的 GPS 位置。"
+msgstr "報告 QtPositioning 相容裝置的 GPS 位置。"
 
 #: src/plugins/positionprovider/wlocate/WlocatePositionProviderPlugin.cpp:63
 msgctxt "Marble::WlocatePositionProviderPlugin|"
@@ -14210,7 +14208,7 @@ msgstr "OpenStreetMap 資料"
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:960
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Download OpenStreetMap data of the visible region"
-msgstr ""
+msgstr "下載可見區域的 OpenStreetMap 資料"
 
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:1041
 #, fuzzy
@@ -14306,19 +14304,19 @@ msgstr "下載路徑"
 #: src/plugins/render/annotate/DownloadOsmDialog.cpp:139
 msgctxt "Marble::DownloadOsmDialog|"
 msgid "ERROR"
-msgstr ""
+msgstr "錯誤"
 
 #: src/plugins/render/annotate/DownloadOsmDialog.cpp:80
 msgctxt "Marble::DownloadOsmDialog|"
 msgid "Unable to create temporary file to download OSM data to."
-msgstr ""
+msgstr "無法建立暫存檔案來儲存下載的 OSM 資料。"
 
 #: src/plugins/render/annotate/DownloadOsmDialog.cpp:128
 msgctxt "Marble::DownloadOsmDialog|"
 msgid ""
 "The selected region contains too much data. Please select a smaller region "
 "and try again."
-msgstr ""
+msgstr "選取的區域包含太多資料。請選取一個較小的區域然後再試一次。"
 
 #: src/plugins/render/annotate/DownloadOsmDialog.cpp:134
 msgctxt "Marble::DownloadOsmDialog|"
@@ -14330,12 +14328,12 @@ msgctxt "Marble::DownloadOsmDialog|"
 msgid ""
 "Sorry, a network error occurred. Please check your internet connection or "
 "try again later."
-msgstr ""
+msgstr "抱歉，發生了網路錯誤。請檢查您的網路連線，或是稍後再試。"
 
 #: src/plugins/render/annotate/DownloadOsmDialog.ui:14
 msgctxt "DownloadOsmDialog|"
 msgid "Dialog"
-msgstr ""
+msgstr "對話框"
 
 #: src/plugins/render/annotate/EditGroundOverlayDialog.cpp:107
 msgctxt "Marble::EditGroundOverlayDialog|"
@@ -14360,12 +14358,12 @@ msgstr "請指定影像檔。"
 #: src/plugins/render/annotate/EditGroundOverlayDialog.cpp:115
 msgctxt "Marble::EditGroundOverlayDialog|"
 msgid "Invalid image path"
-msgstr "不合法的影像路徑"
+msgstr "無效的影像路徑"
 
 #: src/plugins/render/annotate/EditGroundOverlayDialog.cpp:116
 msgctxt "Marble::EditGroundOverlayDialog|"
 msgid "Please specify a valid path for the image file."
-msgstr "請指定影像檔的合法路徑。"
+msgstr "請指定影像檔的有效路徑。"
 
 #: src/plugins/render/annotate/EditGroundOverlayDialog.ui:14
 #, fuzzy
@@ -14483,12 +14481,12 @@ msgstr ""
 #: src/plugins/render/annotate/EditPolygonDialog.ui:163
 msgctxt "UiEditPolygonDialog|"
 msgid "Color:"
-msgstr ""
+msgstr "顏色："
 
 #: src/plugins/render/annotate/EditPolygonDialog.ui:118
 msgctxt "UiEditPolygonDialog|"
 msgid "Width:"
-msgstr ""
+msgstr "寬度："
 
 #: src/plugins/render/annotate/EditPolygonDialog.ui:157
 #, fuzzy
@@ -14500,12 +14498,12 @@ msgstr "面積"
 #: src/plugins/render/annotate/EditPolygonDialog.ui:206
 msgctxt "UiEditPolygonDialog|"
 msgid "Filled"
-msgstr ""
+msgstr "填滿"
 
 #: src/plugins/render/annotate/EditPolygonDialog.ui:211
 msgctxt "UiEditPolygonDialog|"
 msgid "Not Filled"
-msgstr ""
+msgstr "無填充"
 
 #: src/plugins/render/annotate/EditPolygonDialog.ui:252
 #, fuzzy
@@ -14583,12 +14581,12 @@ msgstr ""
 #: src/plugins/render/annotate/EditPolylineDialog.ui:67
 msgctxt "UiEditPolylineDialog|"
 msgid "Color:"
-msgstr ""
+msgstr "顏色："
 
 #: src/plugins/render/annotate/EditPolylineDialog.ui:118
 msgctxt "UiEditPolylineDialog|"
 msgid "Width:"
-msgstr ""
+msgstr "寬度："
 
 #: src/plugins/render/annotate/EditPolylineDialog.ui:171
 #, fuzzy
@@ -14634,18 +14632,18 @@ msgstr "地圖顯示"
 #: src/plugins/render/aprs/AprsConfigWidget.ui:38
 msgctxt "AprsConfigWidget|"
 msgid "Fade data older than (minutes)"
-msgstr ""
+msgstr "淡化比這更舊的資料（分鐘）"
 
 #: src/plugins/render/aprs/AprsConfigWidget.ui:45
 #: src/plugins/render/aprs/AprsConfigWidget.ui:69
 msgctxt "AprsConfigWidget|"
 msgid "10"
-msgstr ""
+msgstr "10"
 
 #: src/plugins/render/aprs/AprsConfigWidget.ui:62
 msgctxt "AprsConfigWidget|"
 msgid "Do not show data older than (minutes)"
-msgstr ""
+msgstr "不要顯示這更舊的資料（分鐘）"
 
 #: src/plugins/render/aprs/AprsConfigWidget.ui:79
 #, fuzzy
@@ -14664,47 +14662,47 @@ msgstr "新增資料來源"
 #: src/plugins/render/aprs/AprsConfigWidget.ui:94
 msgctxt "AprsConfigWidget|"
 msgid "Should information be gathered from the Internet APRS data source?"
-msgstr ""
+msgstr "是否要從網路 ARPS 資料來源取得資料？"
 
 #: src/plugins/render/aprs/AprsConfigWidget.ui:97
 msgctxt "AprsConfigWidget|"
 msgid "Collect data from an APRS Internet server"
-msgstr ""
+msgstr "從一個 ARPS 網際網路伺服器取得資料"
 
 #: src/plugins/render/aprs/AprsConfigWidget.ui:115
 msgctxt "AprsConfigWidget|"
 msgid "Server"
-msgstr ""
+msgstr "伺服器"
 
 #: src/plugins/render/aprs/AprsConfigWidget.ui:122
 msgctxt "AprsConfigWidget|"
 msgid "rotate.aprs.net"
-msgstr ""
+msgstr "rotate.aprs.net"
 
 #: src/plugins/render/aprs/AprsConfigWidget.ui:139
 msgctxt "AprsConfigWidget|"
 msgid "Port"
-msgstr ""
+msgstr "連接埠"
 
 #: src/plugins/render/aprs/AprsConfigWidget.ui:146
 msgctxt "AprsConfigWidget|"
 msgid "10253"
-msgstr ""
+msgstr "10253"
 
 #: src/plugins/render/aprs/AprsConfigWidget.ui:155
 msgctxt "AprsConfigWidget|"
 msgid "Dump TCP/IP records to the debug stream"
-msgstr ""
+msgstr "傾印 TCP/IP 紀錄到除錯串流"
 
 #: src/plugins/render/aprs/AprsConfigWidget.ui:166
 msgctxt "AprsConfigWidget|"
 msgid "Device"
-msgstr ""
+msgstr "裝置"
 
 #: src/plugins/render/aprs/AprsConfigWidget.ui:178
 msgctxt "AprsConfigWidget|"
 msgid "TNC Terminal Port"
-msgstr ""
+msgstr "TNS 終端連接埠"
 
 #: src/plugins/render/aprs/AprsConfigWidget.ui:184
 msgctxt "AprsConfigWidget|"
@@ -16344,7 +16342,7 @@ msgstr "查詢失敗"
 #: src/plugins/render/photo/FlickrParser.cpp:41
 msgctxt "QObject|"
 msgid "The file is not a valid Flickr answer."
-msgstr "檔案不是合法的 Flickr 回答。"
+msgstr "檔案不是有效的 Flickr 回答。"
 
 #: src/plugins/render/photo/PhotoConfigWidget.ui:14
 #, fuzzy
@@ -16628,7 +16626,7 @@ msgstr ""
 #: src/plugins/render/routing/RoutingPlugin.ui:158
 msgctxt "RoutingPlugin|"
 msgid "Toggle GPS"
-msgstr ""
+msgstr "切換 GPS"
 
 #: src/plugins/render/routing/RoutingPlugin.ui:187
 #, fuzzy
@@ -16657,7 +16655,7 @@ msgstr "+"
 #: src/plugins/render/routing/RoutingPlugin.ui:260
 msgctxt "RoutingPlugin|"
 msgid "total time remaining"
-msgstr ""
+msgstr "總共剩餘時間"
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.cpp:31
 msgctxt "Marble::SatellitesConfigDialog|"
@@ -16762,12 +16760,12 @@ msgstr "網址或檔案的路徑："
 #: src/plugins/render/satellites/SatellitesConfigDialog.cpp:264
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Invalid data source input"
-msgstr "不合法的資料來源輸入"
+msgstr "無效的資料來源輸入"
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.cpp:265
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Please enter a valid URL or file path!"
-msgstr "請輸入合法的網址或檔案路徑！"
+msgstr "請輸入有效的網址或檔案路徑！"
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.cpp:289
 msgctxt "Marble::SatellitesConfigDialog|"
@@ -17503,7 +17501,7 @@ msgstr "在該處顯示 twitts"
 #: src/plugins/render/weather/BBCParser.cpp:243
 msgctxt "QObject|"
 msgid "The file is not a valid BBC answer."
-msgstr "檔案不是合法的 BBC 回答。"
+msgstr "檔案不是有效的 BBC 回答。"
 
 #: src/plugins/render/weather/BBCWeatherItem.cpp:85
 #, fuzzy
@@ -17536,7 +17534,7 @@ msgstr ""
 #: src/plugins/render/weather/StationListParser.cpp:43
 msgctxt "QObject|"
 msgid "The file is not a valid file."
-msgstr "檔案不合法。"
+msgstr "檔案無效。"
 
 #: src/plugins/render/weather/WeatherConfigWidget.ui:14
 #, fuzzy
@@ -18271,7 +18269,7 @@ msgstr "由 backstage.bbc.co.uk 支援 / 天氣資料由 UK MET Office 提供"
 #: src/plugins/render/wikipedia/GeonamesParser.cpp:39
 msgctxt "QObject|"
 msgid "The file is not a valid Geonames answer."
-msgstr "檔案不是合法的 Geonames 回答。"
+msgstr "檔案不是有效的 Geonames 回答。"
 
 #: src/plugins/render/wikipedia/WikipediaConfigWidget.ui:14
 #, fuzzy
@@ -18621,7 +18619,7 @@ msgstr "咖啡廳"
 #: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:88
 msgctxt "QObject|"
 msgid "fast food"
-msgstr "快餐店"
+msgstr "速食"
 
 #: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:90
 msgctxt "QObject|"

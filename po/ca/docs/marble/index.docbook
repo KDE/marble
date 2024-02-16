@@ -1490,7 +1490,7 @@
 ><para
 ><action
 >Mostra</action
-> el mapa estel·lar com es veu des del Sistema Solar.</para
+> el mapa estel·lar com es veu des del sistema solar.</para
 ></listitem>
           </varlistentry>
 
@@ -2662,7 +2662,7 @@
         </question>
         <answer>
           <para
->Tot i que representa a la terra com un globus, el &marble; no utilitza cap acceleració 3D per maquinari. Això té l'avantatge de córrer a una velocitat decent sobre qualsevol plataforma i el maquinari admès per les &Qt;. No obstant això, té el desavantatge que no funciona tan bé com podria fer-ho si s'utilitza acceleració OpenGL per maquinari. El &marble; només utilitza gràfics en 2D i per tant requereix un adaptador de gràfics que sigui ràpid en el dibuix de gràfics en 2D. Hem planejat afegir un dorsal OpenGL opcional en el futur.</para>
+>Tot i que representa a la terra com un globus, el &marble; no utilitza cap acceleració 3D per maquinari. Això té l'avantatge de córrer a una velocitat decent sobre qualsevol plataforma i el maquinari admès per les &Qt;. No obstant això, té el desavantatge que no funciona tan bé com podria fer-ho si s'utilitza acceleració OpenGL per maquinari. El &marble; només utilitza gràfics en 2D i, per tant, requereix un adaptador de gràfics que sigui ràpid en el dibuix de gràfics en 2D. Hem planejat afegir un dorsal OpenGL opcional en el futur.</para>
         </answer>
       </qandaentry>
 
