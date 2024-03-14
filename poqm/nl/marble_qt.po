@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: marble_qt\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2024-01-09 12:17+0100\n"
+"PO-Revision-Date: 2024-03-13 11:33+0100\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -13835,7 +13835,7 @@ msgstr "Z"
 #: src/plugins/render/crosshairs/CrosshairsConfigWidget.ui:14
 msgctxt "CrosshairsConfigWidget|"
 msgid "Configure Crosshairs Plugin"
-msgstr "Plugin kruisdraden instellen"
+msgstr "Plug-in kruisdraden configureren"
 
 #: src/plugins/render/crosshairs/CrosshairsConfigWidget.ui:20
 msgctxt "CrosshairsConfigWidget|"
@@ -13885,7 +13885,7 @@ msgstr "Een plugin die een kruisdraad toont."
 #: src/plugins/render/earthquake/EarthquakeConfigWidget.ui:14
 msgctxt "EarthquakeConfigWidget|"
 msgid "Configure Earthquakes Plugin"
-msgstr "Plgin voor aardbevingen instellen"
+msgstr "Plug-in voor aardbevingen configureren"
 
 #: src/plugins/render/earthquake/EarthquakeConfigWidget.ui:20
 msgctxt "EarthquakeConfigWidget|"
@@ -14183,7 +14183,7 @@ msgstr "Herinner me niet langer aan verduisteringen"
 #: src/plugins/render/elevationprofilefloatitem/ElevationProfileConfigWidget.ui:14
 msgctxt "ElevationProfileConfigWidget|"
 msgid "Configure Elevation Profile Plugin"
-msgstr "Plugin voor hoogteprofiel instellen"
+msgstr "Plug-in voor hoogteprofiel configureren"
 
 #: src/plugins/render/elevationprofilefloatitem/ElevationProfileConfigWidget.ui:20
 msgctxt "ElevationProfileConfigWidget|"
@@ -14583,7 +14583,7 @@ msgstr "&Details tonen"
 #: src/plugins/render/mapscale/MapScaleConfigWidget.ui:14
 msgctxt "MapScaleConfigWidget|"
 msgid "Configure Scale Bar Plugin"
-msgstr "Plugin voor schaalschuifbalk instellen"
+msgstr "Plug-in voor schaalschuifbalk configureren"
 
 #: src/plugins/render/mapscale/MapScaleConfigWidget.ui:20
 msgctxt "MapScaleConfigWidget|"
@@ -15201,7 +15201,7 @@ msgstr "Dit is geen geldig antwoord voor Flickr."
 #: src/plugins/render/photo/PhotoConfigWidget.ui:14
 msgctxt "PhotoConfigWidget|"
 msgid "Configure Photo Plugin"
-msgstr "Plugin voor foto instellen"
+msgstr "Plug-in voor foto configureren"
 
 #: src/plugins/render/photo/PhotoConfigWidget.ui:42
 msgctxt "PhotoConfigWidget|"
@@ -15302,7 +15302,7 @@ msgstr "Kies een kleur"
 #: src/plugins/render/positionmarker/PositionMarkerConfigWidget.ui:14
 msgctxt "PositionMarkerConfigWidget|"
 msgid "Configure Position Marker Plugin"
-msgstr "Plugin voor positiemarkering instellen"
+msgstr "Plug-in voor positiemarkering configureren"
 
 #: src/plugins/render/positionmarker/PositionMarkerConfigWidget.ui:20
 msgctxt "PositionMarkerConfigWidget|"
@@ -16053,7 +16053,7 @@ msgstr "km/u"
 #: src/plugins/render/stars/StarsConfigWidget.ui:14
 msgctxt "StarsConfigWidget|"
 msgid "Configure Stars Plugin"
-msgstr "Plugin voor sterren instellen"
+msgstr "Plug-in voor sterren configureren"
 
 #: src/plugins/render/stars/StarsConfigWidget.ui:24
 msgctxt "StarsConfigWidget|"
@@ -16338,7 +16338,7 @@ msgstr "Dit is geen geldig bestand."
 #: src/plugins/render/weather/WeatherConfigWidget.ui:14
 msgctxt "WeatherConfigWidget|"
 msgid "Configure Weather Plugin"
-msgstr "Weer-plugin instellen"
+msgstr "Weerplug-in configureren"
 
 #: src/plugins/render/weather/WeatherConfigWidget.ui:23
 msgctxt "WeatherConfigWidget|"
@@ -16971,7 +16971,7 @@ msgstr "Dit is geen geldig antwoord voor Geonames."
 #: src/plugins/render/wikipedia/WikipediaConfigWidget.ui:14
 msgctxt "WikipediaConfigWidget|"
 msgid "Configure Wikipedia Plugin"
-msgstr "De Wikipedia-plugin instellen"
+msgstr "Wikipedia-plug-in configureren"
 
 #: src/plugins/render/wikipedia/WikipediaConfigWidget.ui:20
 msgctxt "WikipediaConfigWidget|"
