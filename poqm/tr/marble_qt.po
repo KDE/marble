@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2024-01-09 16:09+0300\n"
+"PO-Revision-Date: 2024-03-22 16:18+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -21,7 +21,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 24.01.85\n"
+"X-Generator: Lokalize 24.02.1\n"
 "X-Qt-Contexts: true\n"
 
 #. file data/maps/moon/clementine/clementine.dgml:5
@@ -3701,7 +3701,7 @@ msgstr "Geçerli yolu temizle"
 #: src/lib/marble/CurrentLocationWidget.cpp:399
 msgctxt "QObject|"
 msgid "Are you sure you want to clear the current track?"
-msgstr "Geçerli yolu silmek istediğinize emin misiniz?"
+msgstr "Geçerli yolu silmek istediğinizden emin misiniz?"
 
 #: src/lib/marble/CurrentLocationWidget.ui:14
 msgctxt "CurrentLocationWidget|"
@@ -17671,7 +17671,7 @@ msgstr "Kullanılabilir güncelleme yok. En son sürümü kullanıyorsunuz."
 #: src/plugins/runner/monav/MonavConfigWidget.cpp:647
 msgctxt "Marble::MonavConfigWidget|"
 msgid "Are you sure you want to delete this map from the system?"
-msgstr "Bu haritayı, sisteminizden silmek istediğinize emin misiniz?"
+msgstr "Bu haritayı, sisteminizden silmek istediğinizden emin misiniz?"
 
 #: src/plugins/runner/monav/MonavConfigWidget.cpp:648
 msgctxt "Marble::MonavConfigWidget|"
