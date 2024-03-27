@@ -191,7 +191,7 @@ msgstr "Temperatura (juliol)"
 #. file data/maps/earth/temp-july/temp-july.dgml:21
 msgctxt "DGML|"
 msgid "A map which shows the average temperature in July."
-msgstr "Un mapa que mostra la temperatura mitjana al juliol."
+msgstr "Un mapa que mostra la temperatura mitjana en juliol."
 
 #. file data/maps/earth/temp-july/temp-july.dgml:165
 #. ----------
@@ -1628,7 +1628,7 @@ msgctxt "DGML|"
 msgid ""
 "A map which shows the average precipitation (rain/snow/hail/etc) in July."
 msgstr ""
-"Un mapa que mostra la precipitació mitjana (pluja/neu/pedra/etc.) al juliol."
+"Un mapa que mostra la precipitació mitjana (pluja/neu/pedra/etc.) en juliol."
 
 #. file data/maps/earth/precip-july/precip-july.dgml:229
 #. ----------
@@ -1708,7 +1708,7 @@ msgstr "Precipitació (desembre)"
 #. file data/maps/earth/precip-dec/precip-dec.dgml:21
 msgctxt "DGML|"
 msgid "A map which shows the average precipitation in December."
-msgstr "Un mapa que mostra la precipitació mitjana al desembre."
+msgstr "Un mapa que mostra la precipitació mitjana en desembre."
 
 #. file data/maps/earth/schagen1689/schagen1689.dgml:11
 msgctxt "DGML|"
@@ -1769,7 +1769,7 @@ msgstr "Temperatura (desembre)"
 #. file data/maps/earth/temp-dec/temp-dec.dgml:21
 msgctxt "DGML|"
 msgid "A map which shows the average temperature in December."
-msgstr "Un mapa que mostra la temperatura mitjana al desembre."
+msgstr "Un mapa que mostra la temperatura mitjana en desembre."
 
 #. file data/maps/earth/bluemarble/bluemarble.dgml:11
 msgctxt "DGML|"
