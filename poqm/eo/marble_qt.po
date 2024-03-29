@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: marble_qt\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2024-02-04 17:21+0100\n"
+"PO-Revision-Date: 2024-03-28 08:18+0100\n"
 "Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: esperanto <kde-i18n-eo@kde.org>\n"
 "Language: eo\n"
@@ -5210,7 +5210,7 @@ msgstr[1] "Estas limo de %n kaheloj por elŝuti."
 #: src/lib/marble/DownloadRegionDialog.cpp:531
 msgctxt "Marble::DownloadRegionDialog|"
 msgid "Approximate size of the tiles to be downloaded"
-msgstr "Aproksima grandeco de la kaheloj por elŝuti"
+msgstr "Proksimuma grandeco de la kaheloj por elŝuti"
 
 #: src/lib/marble/DownloadRegionDialog.cpp:535
 #, qt-format
