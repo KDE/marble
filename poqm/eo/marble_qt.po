@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: marble_qt\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2024-03-28 08:18+0100\n"
+"PO-Revision-Date: 2024-04-23 21:12+0100\n"
 "Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: esperanto <kde-i18n-eo@kde.org>\n"
 "Language: eo\n"
@@ -13952,7 +13952,7 @@ msgstr "Ebligi &Lunajn Eklipsojn"
 #: src/plugins/render/eclipses/EclipsesConfigDialog.ui:55
 msgctxt "EclipsesConfigDialog|"
 msgid "Show Eclipse Control &Widget"
-msgstr "Montri Eklips-Regilan &Fenestaĵon"
+msgstr "Montri Eklips-Regilan &Fenestraĵon"
 
 #: src/plugins/render/eclipses/EclipsesConfigDialog.ui:65
 msgctxt "EclipsesConfigDialog|"
