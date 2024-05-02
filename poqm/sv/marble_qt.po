@@ -2,7 +2,7 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
 #
-# Stefan Asserhäll <stefan.asserhall@bredband.net>, 2007, 2008, 2009, 2010.
+# SPDX-FileCopyrightText: 2007, 2008, 2009, 2010, 2024 Stefan Asserhäll <stefan.asserhall@bredband.net>
 # Stefan Asserhall <stefan.asserhall@bredband.net>, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2023.
 # Arve Eriksson <031299870@telia.com>, 2011.
 msgid ""
@@ -10,14 +10,14 @@ msgstr ""
 "Project-Id-Version: marble_qt\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2023-07-26 11:05+0200\n"
+"PO-Revision-Date: 2024-05-01 07:39+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@bredband.net>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 20.08.1\n"
+"X-Generator: Lokalize 23.08.3\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Qt-Contexts: true\n"
 
@@ -8370,17 +8370,12 @@ msgstr ""
 "Ordningen som flera lager väljes påverkar direkt deras återgivningsordning."
 
 #: src/lib/marble/MapWizard.ui:297
-#, fuzzy
-#| msgctxt "MapWizard|"
-#| msgid ""
-#| "Enable this to select multiple layers without keyboard shortcuts (Shift, "
-#| "Strg, Strg+A, ...)"
 msgctxt "MapWizard|"
 msgid ""
 "Enable this to select multiple layers without keyboard shortcuts (Shift, "
 "Ctrl, Ctrl+A, ...)"
 msgstr ""
-"Aktivera för att välja flera lager utan snabbtangenter (Skift, Strg, Strg"
+"Aktivera för att välja flera lager utan snabbtangenter (Skift, Ctrl, Ctrl"
 "+A, ...)"
 
 #: src/lib/marble/MapWizard.ui:300
