@@ -19,7 +19,7 @@ msgstr ""
 "Project-Id-Version: marble_qt\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2024-05-02 16:29+0200\n"
+"PO-Revision-Date: 2024-05-07 11:48+0200\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: French <French <kde-francophone@kde.org>>\n"
 "Language: fr\n"
@@ -965,7 +965,7 @@ msgstr "Route non répertoriée"
 #. file data/maps/earth/openstreetmap/openstreetmap.dgml:148
 msgctxt "DGML|"
 msgid "Unsurfaced road"
-msgstr "Chemin"
+msgstr "Sentier"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:146
 #. ----------
@@ -1000,7 +1000,7 @@ msgstr "Piste cyclable"
 #. file data/maps/earth/openstreetmap/openstreetmap.dgml:168
 msgctxt "DGML|"
 msgid "Footway"
-msgstr "Chemin pédestre"
+msgstr "Sentier pédestre"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:166
 #. ----------
@@ -3729,7 +3729,7 @@ msgstr "Effacer la piste actuelle"
 #: src/lib/marble/CurrentLocationWidget.cpp:399
 msgctxt "QObject|"
 msgid "Are you sure you want to clear the current track?"
-msgstr "Voulez-vous vraiment effacer le chemin actuel ?"
+msgstr "Voulez-vous vraiment effacer le tracé actuel ?"
 
 #: src/lib/marble/CurrentLocationWidget.ui:14
 msgctxt "CurrentLocationWidget|"
@@ -3754,7 +3754,7 @@ msgstr "Afficher le chemin"
 #: src/lib/marble/CurrentLocationWidget.ui:66
 msgctxt "CurrentLocationWidget|"
 msgid "Clear Track"
-msgstr "Effacer le chemin actuel"
+msgstr "Effacer le tracé actuel"
 
 #: src/lib/marble/CurrentLocationWidget.ui:80
 #: src/lib/marble/CurrentLocationWidget.ui:91
@@ -5097,22 +5097,22 @@ msgstr "%1 %2"
 #: src/lib/marble/declarative/RouteRelationModel.cpp:19
 msgctxt "Marble::RouteRelationModel|"
 msgid "International walking route"
-msgstr "Chemin pédestre international"
+msgstr "Sentier pédestre international"
 
 #: src/lib/marble/declarative/RouteRelationModel.cpp:20
 msgctxt "Marble::RouteRelationModel|"
 msgid "National walking route"
-msgstr "Chemin pédestre national"
+msgstr "Sentier pédestre national"
 
 #: src/lib/marble/declarative/RouteRelationModel.cpp:21
 msgctxt "Marble::RouteRelationModel|"
 msgid "Regional walking route"
-msgstr "Chemin pédestre régional"
+msgstr "Sentier pédestre régional"
 
 #: src/lib/marble/declarative/RouteRelationModel.cpp:22
 msgctxt "Marble::RouteRelationModel|"
 msgid "Local walking route"
-msgstr "Chemin pédestre local"
+msgstr "Sentier pédestre local"
 
 #: src/lib/marble/declarative/RouteRelationModel.cpp:23
 msgctxt "Marble::RouteRelationModel|"
@@ -7555,12 +7555,12 @@ msgstr "Piste cyclable"
 #: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:219
 msgctxt "GeoLineStringGraphicsItem|"
 msgid "Mountainbike Route"
-msgstr "Chemin de VTT"
+msgstr "Parcours de VTT"
 
 #: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:220
 msgctxt "GeoLineStringGraphicsItem|"
 msgid "Walking Route"
-msgstr "Chemin piétonnier"
+msgstr "Parcours piétonnier"
 
 #: src/lib/marble/geodata/graphicsitem/GeoLineStringGraphicsItem.cpp:221
 msgctxt "GeoLineStringGraphicsItem|"
@@ -8418,7 +8418,7 @@ msgid ""
 "Ctrl, Ctrl+A, ...)"
 msgstr ""
 "Activer cette option pour sélectionner plusieurs calques sans raccourcis "
-"clavier (MAJ, CTRL, CTRL + A, etc.)"
+"clavier (Maj, CTRL, CTRL + A, etc.)"
 
 #: src/lib/marble/MapWizard.ui:300
 msgctxt "MapWizard|"
@@ -10219,7 +10219,7 @@ msgid ""
 "Allows you to store routes in owncloud. Each route must be uploaded/"
 "downloaded manually."
 msgstr ""
-"Permet d'enregistrer les trajets dans « Owncloud ». Chaque trajet doit être "
+"Permet d'enregistrer les trajets dans « OwnCloud ». Chaque trajet doit être "
 "téléchargé / téléversé manuellement."
 
 #: src/lib/marble/MarbleCloudSyncSettingsWidget.ui:51
@@ -14266,13 +14266,13 @@ msgstr "Trajet"
 #: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:79
 msgctxt "Marble::ElevationProfileContextMenu|"
 msgid "Track: "
-msgstr "Chemin :"
+msgstr "Tracé :"
 
 #: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:92
 msgctxt "Marble::ElevationProfileContextMenu|"
 msgid "Create a route or load a track from file to view its elevation profile."
 msgstr ""
-"Créer un itinéraire ou charger un chemin à partir d'un fichier pour afficher "
+"Créer un itinéraire ou charger un tracé à partir d'un fichier pour afficher "
 "son profil d'élévation."
 
 #: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:97
@@ -14295,7 +14295,7 @@ msgstr ""
 msgctxt "Marble::ElevationProfileFloatItem|"
 msgid "Create a route or load a track from file to view its elevation profile."
 msgstr ""
-"Créer un itinéraire ou charger un chemin à partir d'un fichier pour afficher "
+"Créer un itinéraire ou charger un tracé à partir d'un fichier pour afficher "
 "son profil d'élévation."
 
 #: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:199
@@ -15424,7 +15424,7 @@ msgstr "Sentier :"
 #: src/plugins/render/positionmarker/PositionMarkerConfigWidget.ui:220
 msgctxt "PositionMarkerConfigWidget|"
 msgid "Color of the position marker's trail."
-msgstr "Couleur du chemin du marqueur de position."
+msgstr "Couleur du tracé du marqueur de position."
 
 #: src/plugins/render/postalcode/PostalCodePlugin.cpp:33
 #: src/plugins/render/postalcode/PostalCodePlugin.cpp:38
