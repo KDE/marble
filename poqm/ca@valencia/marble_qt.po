@@ -2645,7 +2645,7 @@ msgstr ""
 #: src/apps/marble-qt/QtMainWindow.cpp:269
 msgctxt "Marble::MainWindow|"
 msgid "&Open..."
-msgstr "O&bri..."
+msgstr "O&bri…"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:271
 msgctxt "Marble::MainWindow|"
@@ -2655,12 +2655,12 @@ msgstr "Obri un fitxer per a veure'l a Marble"
 #: src/apps/marble-qt/QtMainWindow.cpp:275
 msgctxt "Marble::MainWindow|"
 msgid "&Download Maps..."
-msgstr "&Descarrega els mapes..."
+msgstr "&Descarrega els mapes…"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:278
 msgctxt "Marble::MainWindow|"
 msgid "&Export Map..."
-msgstr "&Exporta el mapa..."
+msgstr "&Exporta el mapa…"
 
 # skip-rule: kct-screenshoot
 #: src/apps/marble-qt/QtMainWindow.cpp:280
@@ -2671,7 +2671,7 @@ msgstr "Guarda una captura del mapa"
 #: src/apps/marble-qt/QtMainWindow.cpp:284
 msgctxt "Marble::MainWindow|"
 msgid "Download &Region..."
-msgstr "Descarrega una &regió..."
+msgstr "Descarrega una &regió…"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:285
 msgctxt "Marble::MainWindow|"
@@ -2683,7 +2683,7 @@ msgstr ""
 #: src/apps/marble-qt/QtMainWindow.cpp:288
 msgctxt "Marble::MainWindow|"
 msgid "&Print..."
-msgstr "Im&primix..."
+msgstr "Im&primix…"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:289
 msgctxt "Marble::MainWindow|"
@@ -2700,7 +2700,7 @@ msgstr "Imprimix una captura del mapa"
 #: src/apps/marble-qt/QtMainWindow.cpp:293
 msgctxt "Marble::MainWindow|"
 msgid "Print Previe&w ..."
-msgstr "Vista &prèvia d'impressió..."
+msgstr "Vista &prèvia d'impressió…"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:297
 msgctxt "Marble::MainWindow|"
@@ -2731,7 +2731,7 @@ msgstr "Copia una captura del mapa"
 #: src/apps/marble-qt/QtMainWindow.cpp:307
 msgctxt "Marble::MainWindow|"
 msgid "&Edit Map..."
-msgstr "&Edita el mapa..."
+msgstr "&Edita el mapa…"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:309
 msgctxt "Marble::MainWindow|"
@@ -2826,7 +2826,7 @@ msgstr "Treballa &desconnectat"
 #: src/apps/marble-qt/QtMainWindow.cpp:361
 msgctxt "Marble::MainWindow|"
 msgid "&Time Control..."
-msgstr "Control del &temps..."
+msgstr "Control del &temps…"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:362
 msgctxt "Marble::MainWindow|"
@@ -2836,7 +2836,7 @@ msgstr "Configura el control del temps "
 #: src/apps/marble-qt/QtMainWindow.cpp:365
 msgctxt "Marble::MainWindow|"
 msgid "S&un Control..."
-msgstr "Control del &Sol..."
+msgstr "Control del &Sol…"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:366
 msgctxt "Marble::MainWindow|"
@@ -2906,7 +2906,7 @@ msgstr "Mostra el quadro de crèdits de les biblioteques Qt"
 #: src/apps/marble-qt/QtMainWindow.cpp:397
 msgctxt "Marble::MainWindow|"
 msgid "Add &Bookmark..."
-msgstr "Afi&g una adreça d'interés..."
+msgstr "Afi&g una adreça d'interés…"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:399
 msgctxt "Marble::MainWindow|"
@@ -2932,7 +2932,7 @@ msgstr "Canvia la visualització de les adreces d'interés"
 #: src/apps/marble-qt/QtMainWindow.cpp:411
 msgctxt "Marble::MainWindow|"
 msgid "&Manage Bookmarks..."
-msgstr "&Gestiona les adreces d'interés..."
+msgstr "&Gestiona les adreces d'interés…"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:412
 msgctxt "Marble::MainWindow|"
@@ -2942,7 +2942,7 @@ msgstr "Gestiona les adreces d'interés"
 #: src/apps/marble-qt/QtMainWindow.cpp:416
 msgctxt "Marble::MainWindow|"
 msgid "&Create a New Map..."
-msgstr "&Crea un mapa nou..."
+msgstr "&Crea un mapa nou…"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:417
 msgctxt "Marble::MainWindow|"
@@ -3281,7 +3281,7 @@ msgstr "&Oculta"
 #: src/lib/marble/AbstractFloatItem.cpp:250
 msgctxt "Marble::AbstractFloatItem|"
 msgid "&Configure..."
-msgstr "&Configura..."
+msgstr "&Configura…"
 
 #: src/lib/marble/AddLinkDialog.cpp:64
 msgctxt "Marble::AddLinkDialog|"
@@ -3440,12 +3440,12 @@ msgstr "Gestor d'adreces d'interés"
 #: src/lib/marble/BookmarkManagerDialog.ui:25
 msgctxt "UiBookmarkManagerDialog|"
 msgid "Import Bookmarks..."
-msgstr "Importa les adreces d'interés..."
+msgstr "Importa les adreces d'interés…"
 
 #: src/lib/marble/BookmarkManagerDialog.ui:35
 msgctxt "UiBookmarkManagerDialog|"
 msgid "Export Bookmarks..."
-msgstr "Exporta les adreces d'interés..."
+msgstr "Exporta les adreces d'interés…"
 
 #: src/lib/marble/BookmarkManagerDialog.ui:64
 msgctxt "UiBookmarkManagerDialog|"
@@ -3455,12 +3455,12 @@ msgstr "Carpetes"
 #: src/lib/marble/BookmarkManagerDialog.ui:74
 msgctxt "UiBookmarkManagerDialog|"
 msgid "New..."
-msgstr "Nova..."
+msgstr "Nova…"
 
 #: src/lib/marble/BookmarkManagerDialog.ui:81
 msgctxt "UiBookmarkManagerDialog|"
 msgid "Rename..."
-msgstr "Canvia el nom..."
+msgstr "Canvia el nom…"
 
 #: src/lib/marble/BookmarkManagerDialog.ui:91
 #: src/lib/marble/BookmarkManagerDialog.ui:151
@@ -3640,7 +3640,7 @@ msgstr "No hi ha cap posició disponible."
 #: src/lib/marble/CurrentLocationWidget.cpp:202
 msgctxt "QObject|"
 msgid "Waiting for current location information..."
-msgstr "S'està esperant la informació de l'emplaçament actual..."
+msgstr "S'està esperant la informació de l'emplaçament actual…"
 
 #: src/lib/marble/CurrentLocationWidget.cpp:208
 msgctxt "QObject|"
@@ -3746,7 +3746,7 @@ msgstr "Neteja el camí"
 #: src/lib/marble/CurrentLocationWidget.ui:91
 msgctxt "CurrentLocationWidget|"
 msgid "..."
-msgstr "..."
+msgstr "…"
 
 #: src/lib/marble/CurrentLocationWidget.ui:116
 msgctxt "CurrentLocationWidget|"
@@ -3801,7 +3801,7 @@ msgstr "Conversió de dades de Marble"
 #: src/lib/marble/DataMigration.cpp:93
 msgctxt "Marble::DataMigration|"
 msgid "Converting data ..."
-msgstr "S'estan convertint les dades..."
+msgstr "S'estan convertint les dades…"
 
 #: src/lib/marble/DataMigrationWidget.ui:20
 msgctxt "DataMigrationWidget|"
@@ -5309,7 +5309,7 @@ msgstr "&Carpeta:"
 #: src/lib/marble/EditBookmarkDialog.ui:79
 msgctxt "UiEditBookmarkDialog|"
 msgid "&Add Folder..."
-msgstr "Afi&g una carpeta..."
+msgstr "Afi&g una carpeta…"
 
 #: src/lib/marble/EditPlacemarkDialog.cpp:109
 msgctxt "Marble::EditPlacemarkDialog|"
@@ -6874,7 +6874,7 @@ msgstr "Parada d'autobús"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:546
 msgctxt "GeoDataPlacemark|"
 msgid "Car Sharing"
-msgstr "Compartició de cotxes"
+msgstr "Compartiu cotxes"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:547
 msgctxt "GeoDataPlacemark|"
@@ -7679,7 +7679,7 @@ msgstr[1] "S'han trobat %n resultats."
 #: src/lib/marble/GoToDialog.ui:14
 msgctxt "GoTo|"
 msgid "Go To..."
-msgstr "Ves fins a..."
+msgstr "Ves fins a…"
 
 #: src/lib/marble/GoToDialog.ui:78
 msgctxt "GoTo|"
@@ -7688,7 +7688,7 @@ msgid ""
 "Marble/Search\">Details...</a>"
 msgstr ""
 "Introduïu un terme de busca i premeu «Retorn». <a href=\"https://userbase."
-"kde.org/ Marble/Search\">Detalls...</a>"
+"kde.org/ Marble/Search\">Detalls…</a>"
 
 #: src/lib/marble/GoToDialog.ui:93
 msgctxt "GoTo|"
@@ -7913,7 +7913,7 @@ msgstr "&Preferida"
 #: src/lib/marble/MapViewWidget.cpp:658
 msgctxt "Marble::MapViewWidget|"
 msgid "&Create a New Map..."
-msgstr "&Crea un mapa nou..."
+msgstr "&Crea un mapa nou…"
 
 #: src/lib/marble/MapViewWidget.cpp:660
 msgctxt "Marble::MapViewWidget|"
@@ -8409,7 +8409,7 @@ msgid ""
 "Ctrl, Ctrl+A, ...)"
 msgstr ""
 "Activeu-la per a seleccionar múltiples capes sense dreceres de teclat "
-"(«Majúscules», «Ctrl», «Ctrl+A»...)"
+"(«Majúscules», «Ctrl», Ctrl+A…)"
 
 #: src/lib/marble/MapWizard.ui:300
 msgctxt "MapWizard|"
@@ -8552,7 +8552,7 @@ msgstr "Imatge origen:"
 #: src/lib/marble/MapWizard.ui:589 src/lib/marble/MapWizard.ui:874
 msgctxt "MapWizard|"
 msgid "..."
-msgstr "..."
+msgstr "…"
 
 #: src/lib/marble/MapWizard.ui:615
 msgctxt "MapWizard|"
@@ -8701,7 +8701,7 @@ msgstr "previsualitza la imatge"
 #: src/lib/marble/MapWizard.ui:825
 msgctxt "MapWizard|"
 msgid "Change..."
-msgstr "Canvia..."
+msgstr "Canvia…"
 
 #: src/lib/marble/MapWizard.ui:855
 msgctxt "MapWizard|"
@@ -8831,8 +8831,8 @@ msgid ""
 "\">kossebau@kde.org</a><br /><i>Plasma Integration, Bugfixes</i></p>"
 msgstr ""
 "<p>Friedrich W. H. Kossebau, <a href=\"mailto:kossebau@kde.org"
-"\">kossebau@kde.org</a><br /><i>Integració amb Plasma, correcció d'errors</"
-"i></p>"
+"\">kossebau@kde.org</a><br /><i>Integració amb Plasma, esmena d'errors</i></"
+"p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:87
 msgctxt "QObject|"
@@ -8922,7 +8922,7 @@ msgid ""
 "de</a><br /><i>Bugfixes</i></p>"
 msgstr ""
 "<p>Eckhart W&ouml;rner <a href=\"mailto:kde@ewsoftware.de\">kde@ewsoftware."
-"de</a><br /><i>Correcció d'errors</i></p>"
+"de</a><br /><i>Esmena d'errors</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:107
 msgctxt "QObject|"
@@ -8945,8 +8945,7 @@ msgid ""
 "itbhu@googlemail.com</a><br /><i>Planet Filter, Bugfixes</i></p>"
 msgstr ""
 "<p>Harshit Jain <a href=\"mailto:sonu.itbhu@googlemail.com\">sonu."
-"itbhu@googlemail.com</a><br /><i>Filtre de planetes, correcció d'errors</i></"
-"p>"
+"itbhu@googlemail.com</a><br /><i>Filtre de planetes, esmena d'errors</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:112
 msgctxt "QObject|"
@@ -9605,8 +9604,8 @@ msgid ""
 "<p>... and of course we'd like to thank the people at Google Inc. for making "
 "these projects possible.</p>"
 msgstr ""
-"<p>... i evidentment, volem agrair a la gent de Google Inc. per fer "
-"possibles estos projectes.</p>"
+"<p>… i evidentment, volem agrair a la gent de Google Inc. per fer possibles "
+"estos projectes.</p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:250
 msgctxt "QObject|"
@@ -10511,7 +10510,7 @@ msgstr "Inclina l'eix del globus envers l'usuari."
 #: src/lib/marble/MarbleNavigator.ui:215
 msgctxt "MarbleNavigator|"
 msgid "..."
-msgstr "..."
+msgstr "…"
 
 #: src/lib/marble/MarbleNavigator.ui:78 src/lib/marble/MarbleNavigator.ui:90
 msgctxt "MarbleNavigator|"
@@ -11321,7 +11320,7 @@ msgstr "Vídeo del destí:"
 #: src/lib/marble/MovieCaptureDialog.ui:36
 msgctxt "MovieCaptureDialog|"
 msgid "Open..."
-msgstr "Obri..."
+msgstr "Obri…"
 
 #: src/lib/marble/MovieCaptureDialog.ui:45
 msgctxt "MovieCaptureDialog|"
@@ -11455,7 +11454,7 @@ msgstr "Etiquetes relacionades"
 #: src/lib/marble/osm/OsmTagEditorWidget_p.cpp:30
 msgctxt "QObject|"
 msgid "Add custom tag..."
-msgstr "Afig etiqueta personalitzada..."
+msgstr "Afig etiqueta personalitzada…"
 
 #: src/lib/marble/osm/OsmTagEditorWidget_p.cpp:102
 msgctxt "QObject|"
@@ -11475,7 +11474,7 @@ msgstr "Tots els fitxers admesos (*.png)"
 #: src/lib/marble/PlacemarkEditHeader.ui:46
 msgctxt "PlacemarkEditHeaderPrivate|"
 msgid "Browse..."
-msgstr "Explora..."
+msgstr "Explora…"
 
 #: src/lib/marble/PlacemarkEditHeader.ui:64
 msgctxt "PlacemarkEditHeaderPrivate|"
@@ -11794,7 +11793,7 @@ msgstr "Vista"
 #: src/lib/marble/QtMarbleConfigDialog.cpp:115
 msgctxt "Marble::QtMarbleConfigDialog|"
 msgid "Navigation"
-msgstr "Navegació"
+msgstr "Navegueu"
 
 #: src/lib/marble/QtMarbleConfigDialog.cpp:123
 msgctxt "Marble::QtMarbleConfigDialog|"
@@ -11819,7 +11818,7 @@ msgstr "Connectors"
 #: src/lib/marble/QtMarbleConfigDialog.cpp:153
 msgctxt "Marble::QtMarbleConfigDialog|"
 msgid "Synchronization"
-msgstr "Sincronització"
+msgstr "Sincronitzeu"
 
 #: src/lib/marble/QtMarbleConfigDialog.cpp:269
 msgctxt "Marble::QtMarbleConfigDialog|"
@@ -12055,7 +12054,7 @@ msgstr "%2, %3"
 #: src/lib/marble/routing/RoutingInputWidget.cpp:140
 msgctxt "QObject|"
 msgid "Address or search term..."
-msgstr "Adreça o terme que s'ha de buscar..."
+msgstr "Adreça o terme que s'ha de buscar…"
 
 #: src/lib/marble/routing/RoutingInputWidget.cpp:167
 msgctxt "QObject|"
@@ -12075,7 +12074,7 @@ msgstr "&Emplaçament actual"
 #: src/lib/marble/routing/RoutingInputWidget.cpp:192
 msgctxt "QObject|"
 msgid "From &Map..."
-msgstr "Des del &mapa..."
+msgstr "Des del &mapa…"
 
 #: src/lib/marble/routing/RoutingInputWidget.cpp:196
 msgctxt "QObject|"
@@ -12105,7 +12104,7 @@ msgstr "&Elimina esta destinació"
 #: src/lib/marble/routing/RoutingLayer.cpp:188
 msgctxt "QObject|"
 msgid "&Export Route..."
-msgstr "&Exporta itinerari..."
+msgstr "&Exporta itinerari…"
 
 #: src/lib/marble/routing/RoutingLayer.cpp:760
 msgctxt "Marble::RoutingLayer|"
@@ -12229,12 +12228,12 @@ msgstr "Perfil nou"
 #: src/lib/marble/routing/RoutingSettingsWidget.ui:22
 msgctxt "RoutingSettingsWidget|"
 msgid "&Add..."
-msgstr "Afi&g..."
+msgstr "Afi&g…"
 
 #: src/lib/marble/routing/RoutingSettingsWidget.ui:32
 msgctxt "RoutingSettingsWidget|"
 msgid "&Configure..."
-msgstr "&Configura..."
+msgstr "&Configura…"
 
 #: src/lib/marble/routing/RoutingSettingsWidget.ui:42
 msgctxt "RoutingSettingsWidget|"
@@ -12364,7 +12363,7 @@ msgstr "Fitxers KML (*.kml)"
 #: src/lib/marble/routing/RoutingWidget.cpp:746
 msgctxt "Marble::RoutingWidget|"
 msgid "Uploading route..."
-msgstr "S'està publicant l'itinerari..."
+msgstr "S'està publicant l'itinerari…"
 
 #: src/lib/marble/routing/RoutingWidget.ui:46
 msgctxt "RoutingWidget|"
@@ -12463,7 +12462,7 @@ msgstr "Busca «%1»"
 #: src/lib/marble/SoundCueEditWidget.cpp:68
 msgctxt "Marble::SoundCueEditWidget|"
 msgid "Select sound files..."
-msgstr "Selecciona els fitxers de so..."
+msgstr "Selecciona els fitxers de so…"
 
 #: src/lib/marble/SoundCueEditWidget.cpp:68
 msgctxt "Marble::SoundCueEditWidget|"
@@ -12730,7 +12729,7 @@ msgstr "Vídeo del destí"
 #: src/lib/marble/TourCaptureDialog.ui:81
 msgctxt "TourCaptureDialog|"
 msgid "Open..."
-msgstr "Obri..."
+msgstr "Obri…"
 
 #: src/lib/marble/TourCaptureDialog.ui:97
 msgctxt "TourCaptureDialog|"
@@ -14000,7 +13999,7 @@ msgstr "Mostra els eclipsis per a l'any:"
 #: src/plugins/render/eclipses/EclipsesBrowserDialog.ui:104
 msgctxt "EclipsesBrowserDialog|"
 msgid "&Settings..."
-msgstr "Con&figuració..."
+msgstr "Con&figuració…"
 
 #: src/plugins/render/eclipses/EclipsesBrowserDialog.ui:145
 msgctxt "EclipsesBrowserDialog|"
@@ -14175,7 +14174,7 @@ msgstr "Este connector visualitza eclipsis solars."
 #: src/plugins/render/eclipses/EclipsesPlugin.cpp:199
 msgctxt "Marble::EclipsesPlugin|"
 msgid "Browse Ecli&pses..."
-msgstr "Mostra ecli&psis..."
+msgstr "Mostra ecli&psis…"
 
 #: src/plugins/render/eclipses/EclipsesPlugin.cpp:348
 msgctxt "Marble::EclipsesPlugin|"
@@ -14224,7 +14223,7 @@ msgstr "Zoom a l'àrea de visualització"
 #: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:30
 msgctxt "Marble::ElevationProfileContextMenu|"
 msgid "&Configure..."
-msgstr "&Configura..."
+msgstr "&Configura…"
 
 #: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:36
 msgctxt "Marble::ElevationProfileContextMenu|"
@@ -14356,7 +14355,7 @@ msgstr "Una llista dels fitxers actualment oberts"
 #: src/plugins/render/fileview/FileViewFloatItem.cpp:212
 msgctxt "Marble::FileViewFloatItem|"
 msgid "Open file..."
-msgstr "Obri un fitxer..."
+msgstr "Obri un fitxer…"
 
 #: src/plugins/render/fileview/FileViewFloatItem.cpp:214
 msgctxt "Marble::FileViewFloatItem|"
@@ -14677,7 +14676,7 @@ msgstr "nm"
 #: src/plugins/render/mapscale/MapScaleFloatItem.cpp:377
 msgctxt "Marble::MapScaleFloatItem|"
 msgid "&Configure..."
-msgstr "&Configura..."
+msgstr "&Configura…"
 
 #: src/plugins/render/mapscale/MapScaleFloatItem.cpp:383
 msgctxt "Marble::MapScaleFloatItem|"
@@ -14857,17 +14856,17 @@ msgstr "&Elimina els punts de mesura"
 #: src/plugins/render/navigation/navigation.ui:14
 msgctxt "Navigation|"
 msgid "Navigation"
-msgstr "Navegació"
+msgstr "Navegueu"
 
 #: src/plugins/render/navigation/NavigationFloatItem.cpp:61
 msgctxt "Marble::NavigationFloatItem|"
 msgid "Navigation"
-msgstr "Navegació"
+msgstr "Navegueu"
 
 #: src/plugins/render/navigation/NavigationFloatItem.cpp:66
 msgctxt "Marble::NavigationFloatItem|"
 msgid "&Navigation"
-msgstr "&Navegació"
+msgstr "&Navegueu"
 
 #: src/plugins/render/navigation/NavigationFloatItem.cpp:81
 msgctxt "Marble::NavigationFloatItem|"
@@ -15454,7 +15453,7 @@ msgstr ""
 #: src/plugins/render/routing/RoutingPlugin.cpp:240
 msgctxt "QObject|"
 msgid "Starting guidance mode, please wait..."
-msgstr "S'està iniciant el mode de guiatge, espereu per favor..."
+msgstr "S'està iniciant el mode de guiatge, espereu per favor…"
 
 #: src/plugins/render/routing/RoutingPlugin.cpp:294
 msgctxt "QObject|"
@@ -15742,7 +15741,7 @@ msgstr "Elimina la font de dades seleccionada."
 #: src/plugins/render/satellites/SatellitesConfigDialog.ui:181
 msgctxt "SatellitesConfigDialog|"
 msgid "..."
-msgstr "..."
+msgstr "…"
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.ui:204
 msgctxt "SatellitesConfigDialog|"
@@ -16315,7 +16314,7 @@ msgstr "Mostra els &objectes del cel profund"
 #: src/plugins/render/stars/StarsPlugin.cpp:1459
 msgctxt "Marble::StarsPlugin|"
 msgid "&Configure..."
-msgstr "&Configura..."
+msgstr "&Configura…"
 
 #: src/plugins/render/sun/SunPlugin.cpp:48
 #: src/plugins/render/sun/SunPlugin.cpp:53

@@ -144,7 +144,7 @@ msgstr "Friedrich W. H. Kossebau"
 #: kdemain.cpp:128
 #, kde-format
 msgid "Plasma Integration, Bugfixes"
-msgstr "Integració amb Plasma, correcció d'errors"
+msgstr "Integració amb Plasma, esmena d'errors"
 
 #: kdemain.cpp:130
 #, kde-format
@@ -942,13 +942,13 @@ msgstr "Sense nom"
 #, kde-format
 msgctxt "Action for downloading an entire region of a map"
 msgid "Download Region..."
-msgstr "Descarrega una regió..."
+msgstr "Descarrega una regió…"
 
 #: marble_part.cpp:728
 #, kde-format
 msgctxt "Action for saving the map to a file"
 msgid "&Export Map..."
-msgstr "&Exporta el mapa..."
+msgstr "&Exporta el mapa…"
 
 #: marble_part.cpp:737
 #, kde-format
@@ -972,13 +972,13 @@ msgstr "C&opia les coordenades"
 #, kde-format
 msgctxt "Action for opening a file"
 msgid "&Open..."
-msgstr "O&bri..."
+msgstr "O&bri…"
 
 #: marble_part.cpp:769
 #, kde-format
 msgctxt "Action for downloading maps (GHNS)"
 msgid "Download Maps..."
-msgstr "Descarrega els mapes..."
+msgstr "Descarrega els mapes…"
 
 #: marble_part.cpp:772
 #, kde-format
@@ -990,7 +990,7 @@ msgstr "Descarrega mapes nous"
 #, kde-format
 msgctxt "Action for creating new maps"
 msgid "&Create a New Map..."
-msgstr "&Crea un mapa nou..."
+msgstr "&Crea un mapa nou…"
 
 #: marble_part.cpp:783
 #, kde-format
@@ -1009,13 +1009,13 @@ msgstr "&Núvols"
 #, kde-format
 msgctxt "Action for sun control dialog"
 msgid "S&un Control..."
-msgstr "Control del &sol..."
+msgstr "Control del &sol…"
 
 #: marble_part.cpp:827
 #, kde-format
 msgctxt "Action for time control dialog"
 msgid "&Time Control..."
-msgstr "Control del &temps..."
+msgstr "Control del &temps…"
 
 #: marble_part.cpp:836
 #, kde-format
@@ -1072,7 +1072,7 @@ msgstr "Bloqueja el globus en el punt subsolar"
 #, kde-format
 msgctxt "Add Bookmark"
 msgid "Add &Bookmark..."
-msgstr "Afi&g una adreça d'interés..."
+msgstr "Afi&g una adreça d'interés…"
 
 #: marble_part.cpp:889
 #, kde-format
@@ -1094,13 +1094,13 @@ msgstr "E&stablix l'emplaçament de casa"
 #, kde-format
 msgctxt "Manage Bookmarks"
 msgid "&Manage Bookmarks..."
-msgstr "&Gestiona les adreces d'interés..."
+msgstr "&Gestiona les adreces d'interés…"
 
 #: marble_part.cpp:917
 #, kde-format
 msgctxt "Edit the map in an external application"
 msgid "&Edit Map..."
-msgstr "&Edita el mapa..."
+msgstr "&Edita el mapa…"
 
 #: marble_part.cpp:925
 #, kde-format
@@ -1160,7 +1160,7 @@ msgstr "Visualitza"
 #: marble_part.cpp:1404
 #, kde-format
 msgid "Navigation"
-msgstr "Navegació"
+msgstr "Navegueu"
 
 #: marble_part.cpp:1415
 #, kde-format
@@ -1175,7 +1175,7 @@ msgstr "Data i hora"
 #: marble_part.cpp:1436
 #, kde-format
 msgid "Synchronization"
-msgstr "Sincronització"
+msgstr "Sincronitzeu"
 
 #: marble_part.cpp:1449
 #, kde-format
