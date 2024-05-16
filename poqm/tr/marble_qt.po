@@ -14842,23 +14842,6 @@ msgctxt "OpenCachingCacheDialog|"
 msgid "Cache name:"
 msgstr "Önbellek adı:"
 
-#: src/plugins/render/opencaching/OpenCachingCacheDialog.ui:43
-#: src/plugins/render/opencaching/OpenCachingCacheDialog.ui:63
-#: src/plugins/render/opencaching/OpenCachingCacheDialog.ui:83
-#: src/plugins/render/opencaching/OpenCachingCacheDialog.ui:103
-#: src/plugins/render/opencaching/OpenCachingCacheDialog.ui:123
-#: src/plugins/render/opencaching/OpenCachingCacheDialog.ui:143
-#: src/plugins/render/opencaching/OpenCachingCacheDialog.ui:163
-#: src/plugins/render/opencaching/OpenCachingCacheDialog.ui:183
-#: src/plugins/render/opencaching/OpenCachingCacheDialog.ui:203
-#: src/plugins/render/opencaching/OpenCachingCacheDialog.ui:223
-#: src/plugins/render/opencaching/OpenCachingCacheDialog.ui:243
-#: src/plugins/render/opencaching/OpenCachingCacheDialog.ui:263
-#: src/plugins/render/opencaching/OpenCachingCacheDialog.ui:283
-msgctxt "OpenCachingCacheDialog|KDE::DoNotExtract"
-msgid "TextLabel"
-msgstr "&MetinEtiketi"
-
 #: src/plugins/render/opencaching/OpenCachingCacheDialog.ui:56
 msgctxt "OpenCachingCacheDialog|"
 msgid "User name:"
@@ -18182,6 +18165,10 @@ msgstr "Yüzen nesne ve Şablon"
 msgctxt "Marble::FITemplateFloatItem|"
 msgid "This is a template class for float items."
 msgstr "Bu, yüzen nesneler için bir şablon sınıftır."
+
+#~ msgctxt "OpenCachingCacheDialog|KDE::DoNotExtract"
+#~ msgid "TextLabel"
+#~ msgstr "&MetinEtiketi"
 
 #~ msgctxt "Marble::MainWindow|"
 #~ msgid "Ctrl+O"

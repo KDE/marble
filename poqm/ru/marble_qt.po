@@ -14882,23 +14882,6 @@ msgctxt "OpenCachingCacheDialog|"
 msgid "Cache name:"
 msgstr "Имя кэша:"
 
-#: src/plugins/render/opencaching/OpenCachingCacheDialog.ui:43
-#: src/plugins/render/opencaching/OpenCachingCacheDialog.ui:63
-#: src/plugins/render/opencaching/OpenCachingCacheDialog.ui:83
-#: src/plugins/render/opencaching/OpenCachingCacheDialog.ui:103
-#: src/plugins/render/opencaching/OpenCachingCacheDialog.ui:123
-#: src/plugins/render/opencaching/OpenCachingCacheDialog.ui:143
-#: src/plugins/render/opencaching/OpenCachingCacheDialog.ui:163
-#: src/plugins/render/opencaching/OpenCachingCacheDialog.ui:183
-#: src/plugins/render/opencaching/OpenCachingCacheDialog.ui:203
-#: src/plugins/render/opencaching/OpenCachingCacheDialog.ui:223
-#: src/plugins/render/opencaching/OpenCachingCacheDialog.ui:243
-#: src/plugins/render/opencaching/OpenCachingCacheDialog.ui:263
-#: src/plugins/render/opencaching/OpenCachingCacheDialog.ui:283
-msgctxt "OpenCachingCacheDialog|KDE::DoNotExtract"
-msgid "TextLabel"
-msgstr "ТекстоваяМетка"
-
 #: src/plugins/render/opencaching/OpenCachingCacheDialog.ui:56
 msgctxt "OpenCachingCacheDialog|"
 msgid "User name:"
@@ -18233,6 +18216,10 @@ msgstr "&Шаблон для плавающих элементов"
 msgctxt "Marble::FITemplateFloatItem|"
 msgid "This is a template class for float items."
 msgstr "Это шаблонный класс для плавающих элементов."
+
+#~ msgctxt "OpenCachingCacheDialog|KDE::DoNotExtract"
+#~ msgid "TextLabel"
+#~ msgstr "ТекстоваяМетка"
 
 #~ msgctxt "Marble::MainWindow|"
 #~ msgid "Ctrl+O"
