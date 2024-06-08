@@ -4,7 +4,7 @@
 # Niklas Laxström <niklas.laxstrom+kdetrans@gmail.com>, 2007, 2012.
 # Lasse Liehu <lasse.liehu@gmail.com>, 2011, 2012, 2013, 2014, 2015, 2016, 2023.
 # Jiri Grönroos <jiri.gronroos+kde@iki.fi>, 2012, 2013.
-# Tommi Nieminen <translator@legisign.org>, 2012, 2015, 2016, 2018, 2020, 2021, 2022, 2023.
+# Tommi Nieminen <translator@legisign.org>, 2012, 2015, 2016, 2018, 2020, 2021, 2022, 2023, 2024.
 #
 # KDE Finnish translation sprint participants:
 # Author: Artnay
@@ -15,8 +15,8 @@ msgstr ""
 "Project-Id-Version: marble_qt\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2023-04-19 23:33+0300\n"
-"Last-Translator: Lasse Liehu <lasse.liehu@iki.fi>\n"
+"PO-Revision-Date: 2024-04-18 18:09+0300\n"
+"Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
 "Language: fi\n"
 "MIME-Version: 1.0\n"
@@ -1272,7 +1272,7 @@ msgstr "Pankki"
 #. file data/maps/earth/openstreetmap/openstreetmap.dgml:340
 msgctxt "DGML|"
 msgid "Bureau de change"
-msgstr ""
+msgstr "Valuutanvaihto"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:341
 #. ----------
@@ -1510,7 +1510,7 @@ msgstr "Vaatteet"
 #. file data/maps/earth/openstreetmap/openstreetmap.dgml:500
 msgctxt "DGML|"
 msgid "Convenience"
-msgstr ""
+msgstr "Lähikauppa"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:498
 #. ----------
@@ -4429,7 +4429,7 @@ msgstr "Vain jäsenille"
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "By %1"
-msgstr ""
+msgstr "Tekijä: %1"
 
 #: src/lib/marble/declarative/Placemark.cpp:305
 #, qt-format
@@ -7211,17 +7211,18 @@ msgstr "Gondoli"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:618
 msgctxt "GeoDataPlacemark|"
 msgid "Chair Lift"
-msgstr ""
+msgstr "Tuolihissi"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:619
 msgctxt "GeoDataPlacemark|"
 msgid "Mixed Lift"
 msgstr ""
 
+# *** TARKISTA: Tälle voi olla laskettelupiireissä vakiintunut nimi?
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:620
 msgctxt "GeoDataPlacemark|"
 msgid "Drag Lift"
-msgstr ""
+msgstr "Vetohissi"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:621
 msgctxt "GeoDataPlacemark|"
@@ -8057,20 +8058,15 @@ msgid "Base Tile"
 msgstr "Perustiili"
 
 #: src/lib/marble/MapWizard.cpp:471
-#, fuzzy
-#| msgctxt "MapWizard|"
-#| msgid "Legend Image:"
 msgctxt "Marble::MapWizard|"
 msgid "Legend Image"
-msgstr "Selitekuva:"
+msgstr "Selitekuva"
 
 #: src/lib/marble/MapWizard.cpp:478 src/lib/marble/MapWizard.cpp:486
-#, fuzzy, qt-format
-#| msgctxt "NavigationInfoBar|"
-#| msgid "%1 m"
+#, qt-format
 msgctxt "Marble::MapWizard|"
 msgid "%1"
-msgstr "%1 m"
+msgstr "%1"
 
 #: src/lib/marble/MapWizard.cpp:479
 #, fuzzy, qt-format
@@ -8429,7 +8425,7 @@ msgctxt "MapWizard|"
 msgid ""
 "Enable this to select multiple layers without keyboard shortcuts (Shift, "
 "Ctrl, Ctrl+A, ...)"
-msgstr ""
+msgstr "Tällä voi valita useita tasoja pikanäppäimittä (Vaihto, Ctrl, Ctrl+A…)"
 
 #: src/lib/marble/MapWizard.ui:300
 msgctxt "MapWizard|"
@@ -8439,7 +8435,7 @@ msgstr "Monivalinta"
 #: src/lib/marble/MapWizard.ui:307
 msgctxt "MapWizard|"
 msgid "Custom Backdrop"
-msgstr ""
+msgstr "Taustakuva"
 
 #: src/lib/marble/MapWizard.ui:314
 #, fuzzy
@@ -14115,7 +14111,7 @@ msgstr ""
 #: src/plugins/render/eclipses/EclipsesConfigDialog.ui:94
 msgctxt "EclipsesConfigDialog|"
 msgid "Position of Eclipse &Maximum"
-msgstr ""
+msgstr "&Pimennysmaksimin sijainti"
 
 #: src/plugins/render/eclipses/EclipsesConfigDialog.ui:104
 msgctxt "EclipsesConfigDialog|"
