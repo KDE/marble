@@ -3466,7 +3466,7 @@ msgstr "云端路线"
 #: src/lib/marble/cloudsync/CloudRoutesDialog.ui:20
 msgctxt "CloudRoutesDialog|"
 msgid "No route available."
-msgstr "无可用路线。"
+msgstr "没有可用的路线。"
 
 #: src/lib/marble/cloudsync/ConflictDialog.cpp:104
 msgctxt "Marble::ConflictDialog|"
@@ -3587,7 +3587,7 @@ msgstr "上传到云端"
 #: src/lib/marble/CurrentLocationWidget.cpp:199
 msgctxt "QObject|"
 msgid "No position available."
-msgstr "无可用位置。"
+msgstr "没有可用的位置。"
 
 #: src/lib/marble/CurrentLocationWidget.cpp:202
 msgctxt "QObject|"
@@ -3703,7 +3703,7 @@ msgstr "..."
 #: src/lib/marble/CurrentLocationWidget.ui:116
 msgctxt "CurrentLocationWidget|"
 msgid "No position available."
-msgstr "无可用位置。"
+msgstr "没有可用的位置。"
 
 #: src/lib/marble/CurrentLocationWidget.ui:151
 msgctxt ""
@@ -11017,7 +11017,7 @@ msgstr "地址详情(&A)"
 #: src/lib/marble/MarbleWidgetPopupMenu.cpp:179
 msgctxt "Marble::MarbleWidgetPopupMenu|"
 msgid "No description available."
-msgstr "无可用描述。"
+msgstr "没有可用的描述。"
 
 #: src/lib/marble/MarbleWidgetPopupMenu.cpp:381
 msgctxt "Marble::MarbleWidgetPopupMenu|"
@@ -12007,7 +12007,7 @@ msgstr "服务设置"
 #: src/lib/marble/routing/RoutingProfileSettingsDialog.ui:117
 msgctxt "RoutingProfileSettingsDialog|"
 msgid "No configuration available"
-msgstr "无可用配置"
+msgstr "没有可用的配置"
 
 #: src/lib/marble/routing/RoutingProfileSettingsDialog.ui:128
 msgctxt "RoutingProfileSettingsDialog|"
@@ -15551,7 +15551,7 @@ msgstr "卫星目录"
 #: src/plugins/render/satellites/SatellitesTLEItem.cpp:54
 msgctxt "QObject|"
 msgid "No info available."
-msgstr "无可用信息。"
+msgstr "没有可用的信息。"
 
 #: src/plugins/render/satellites/SatellitesPlugin.cpp:43
 msgctxt "Marble::SatellitesPlugin|"
@@ -17490,7 +17490,7 @@ msgstr "有可用的更新。点击安装。"
 #: src/plugins/runner/monav/MonavConfigWidget.cpp:619
 msgctxt "QObject|"
 msgid "No update available. You are running the latest version."
-msgstr "无可用的更新。您正在运行最新版本。"
+msgstr "没有可用的更新。您正在运行最新版本。"
 
 #: src/plugins/runner/monav/MonavConfigWidget.cpp:647
 msgctxt "Marble::MonavConfigWidget|"
