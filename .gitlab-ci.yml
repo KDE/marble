@@ -58,7 +58,9 @@ maps-kde-org-osmx:
         libssl-dev
     - git clone --recursive https://github.com/protomaps/OSMExpress.git
     - cd OSMExpress
-    - cmake -DCMAKE_BUILD_TYPE=Release .
+    # NOTE: by default this optimizes aggressively for the build host architecture
+    # this can result in the use of AVX instructions not available on the target system!
+    - cmake -DCMAKE_BUILD_TYPE=Release -DROARING_DISABLE_NATIVE=ON -DROARING_ARCH=znver2 .
     - make
   artifacts:
     expire_in: 1 week
