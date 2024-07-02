@@ -13,14 +13,14 @@ msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2024-01-27 19:50+0900\n"
+"PO-Revision-Date: 2024-07-01 13:23+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
 "Language: zh_TW\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 24.01.95\n"
+"X-Generator: Lokalize 24.04.70\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Qt-Contexts: true\n"
 
@@ -1027,14 +1027,14 @@ msgstr "輕軌電車"
 #. file data/maps/earth/openstreetmap/openstreetmap.dgml:188
 msgctxt "DGML|"
 msgid "Airport runway, taxiway"
-msgstr "機場跑道，計程車道"
+msgstr "機場跑道，滑行道"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:186
 #. ----------
 #. file data/maps/earth/openstreetmap/openstreetmap.dgml:192
 msgctxt "DGML|"
 msgid "Airport apron, terminal"
-msgstr "停機坪、登機口"
+msgstr "機場停機坪、航廈"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:190
 #. ----------
@@ -7269,39 +7269,29 @@ msgid "Helipad"
 msgstr ""
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:539
-#, fuzzy
-#| msgid "Airport"
 msgctxt "GeoDataPlacemark|"
 msgid "Airport Gate"
-msgstr "機場"
+msgstr "機場登機口"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:540
-#, fuzzy
-#| msgid "Airport runway, taxiway"
 msgctxt "GeoDataPlacemark|"
 msgid "Airport Runway"
-msgstr "機場跑道，計程車道"
+msgstr "機場跑道"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:541
-#, fuzzy
-#| msgid "Airport"
 msgctxt "GeoDataPlacemark|"
 msgid "Airport Apron"
-msgstr "機場"
+msgstr "機場停機坪"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:542
-#, fuzzy
-#| msgid "Airport runway, taxiway"
 msgctxt "GeoDataPlacemark|"
 msgid "Airport Taxiway"
-msgstr "機場跑道，計程車道"
+msgstr "機場滑行道"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:543
-#, fuzzy
-#| msgid "Airport apron, terminal"
 msgctxt "GeoDataPlacemark|"
 msgid "Airport Terminal"
-msgstr "停機坪、登機口"
+msgstr "機場航廈"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:544
 #, fuzzy
@@ -15726,11 +15716,9 @@ msgid "&Ratio Scale"
 msgstr "比例刻度(&R)"
 
 #: src/plugins/render/measure/MeasureConfigDialog.ui:14
-#, fuzzy
-#| msgid "Monav Routing"
 msgctxt "MeasureConfigDialog|"
 msgid "Measure Tool Configuration"
-msgstr "Monav 路徑"
+msgstr "測量工具設定"
 
 #: src/plugins/render/measure/MeasureConfigDialog.ui:20
 msgctxt "MeasureConfigDialog|"
@@ -15739,11 +15727,9 @@ msgstr ""
 
 #: src/plugins/render/measure/MeasureConfigDialog.ui:28
 #: src/plugins/render/measure/MeasureConfigDialog.ui:45
-#, fuzzy
-#| msgid "Add Polygon"
 msgctxt "MeasureConfigDialog|"
 msgid "Polygon"
-msgstr "繪製多邊形"
+msgstr "多邊形"
 
 #: src/plugins/render/measure/MeasureConfigDialog.ui:33
 #: src/plugins/render/measure/MeasureConfigDialog.ui:127
@@ -15752,11 +15738,9 @@ msgid "Circle"
 msgstr "圓形"
 
 #: src/plugins/render/measure/MeasureConfigDialog.ui:51
-#, fuzzy
-#| msgid "&Text Labels"
 msgctxt "MeasureConfigDialog|"
 msgid "Segment labels"
-msgstr "文字標籤(&T)"
+msgstr "區段旗標"
 
 #: src/plugins/render/measure/MeasureConfigDialog.ui:60
 msgctxt "MeasureConfigDialog|"
@@ -15764,60 +15748,40 @@ msgid "Distance "
 msgstr "距離 "
 
 #: src/plugins/render/measure/MeasureConfigDialog.ui:70
-#, fuzzy
-#| msgid "Carina"
 msgctxt "MeasureConfigDialog|"
 msgid "Bearing"
-msgstr "船底座"
+msgstr ""
 
 #: src/plugins/render/measure/MeasureConfigDialog.ui:80
-#, fuzzy
-#| msgid "Discard Changes"
 msgctxt "MeasureConfigDialog|"
 msgid "Bearing Change"
-msgstr "放棄修改"
+msgstr ""
 
 #: src/plugins/render/measure/MeasureConfigDialog.ui:90
-#, fuzzy
-#| msgid ""
-#| "Perimeter:\n"
-#| "%1"
 msgctxt "MeasureConfigDialog|"
 msgid "Perimeter"
 msgstr ""
-"週長：\n"
-"%1"
 
 #: src/plugins/render/measure/MeasureConfigDialog.ui:100
 #: src/plugins/render/measure/MeasureConfigDialog.ui:159
-#, fuzzy
-#| msgid "Areas"
 msgctxt "MeasureConfigDialog|"
 msgid "Area"
 msgstr "面積"
 
 #: src/plugins/render/measure/MeasureConfigDialog.ui:133
-#, fuzzy
-#| msgid "&Text Labels"
 msgctxt "MeasureConfigDialog|"
 msgid "Labels"
-msgstr "文字標籤(&T)"
+msgstr "旗標"
 
 #: src/plugins/render/measure/MeasureConfigDialog.ui:142
 msgctxt "MeasureConfigDialog|"
 msgid "Radius"
-msgstr ""
+msgstr "半徑"
 
 #: src/plugins/render/measure/MeasureConfigDialog.ui:152
-#, fuzzy
-#| msgid ""
-#| "Circumference:\n"
-#| "%1"
 msgctxt "MeasureConfigDialog|"
 msgid "Circumference"
-msgstr ""
-"圓週長：\n"
-"%1"
+msgstr "圓周長"
 
 #: src/plugins/render/measure/MeasureToolPlugin.cpp:84
 msgctxt "Marble::MeasureToolPlugin|"
@@ -15852,7 +15816,7 @@ msgid ""
 "Circumference:\n"
 "%1"
 msgstr ""
-"圓週長：\n"
+"圓周長：\n"
 "%1"
 
 #: src/plugins/render/measure/MeasureToolPlugin.cpp:497
@@ -15954,7 +15918,7 @@ msgstr "家按鍵"
 #: src/plugins/render/notes/NotesItem.cpp:99
 msgctxt "Marble::NotesItem|The author name is not known"
 msgid "anonymous"
-msgstr ""
+msgstr "匿名"
 
 #: src/plugins/render/notes/NotesPlugin.cpp:34
 msgctxt "Marble::NotesPlugin|"
@@ -15971,19 +15935,17 @@ msgstr "OpenStreetMap Nominatim"
 #: src/plugins/render/opencaching/OpenCachingCacheDialog.ui:14
 msgctxt "OpenCachingCacheDialog|"
 msgid "Dialog"
-msgstr ""
+msgstr "對話框"
 
 #: src/plugins/render/opencaching/OpenCachingCacheDialog.ui:24
 msgctxt "OpenCachingCacheDialog|"
 msgid "General"
-msgstr ""
+msgstr "一般"
 
 #: src/plugins/render/opencaching/OpenCachingCacheDialog.ui:36
-#, fuzzy
-#| msgid "Cache Parser"
 msgctxt "OpenCachingCacheDialog|"
 msgid "Cache name:"
-msgstr "快取剖析器"
+msgstr "快取名稱："
 
 #: src/plugins/render/opencaching/OpenCachingCacheDialog.ui:43
 #: src/plugins/render/opencaching/OpenCachingCacheDialog.ui:63
@@ -16005,25 +15967,19 @@ msgid "TextLabel"
 msgstr "文字標籤(&T)"
 
 #: src/plugins/render/opencaching/OpenCachingCacheDialog.ui:56
-#, fuzzy
-#| msgid "User: "
 msgctxt "OpenCachingCacheDialog|"
 msgid "User name:"
-msgstr "使用者："
+msgstr "使用者名稱："
 
 #: src/plugins/render/opencaching/OpenCachingCacheDialog.ui:76
-#, fuzzy
-#| msgid "Type: "
 msgctxt "OpenCachingCacheDialog|"
 msgid "Type:"
-msgstr "型態："
+msgstr "類型："
 
 #: src/plugins/render/opencaching/OpenCachingCacheDialog.ui:96
-#, fuzzy
-#| msgid "&Status Bar"
 msgctxt "OpenCachingCacheDialog|"
 msgid "Status:"
-msgstr "狀態列(&S)"
+msgstr "狀態："
 
 #: src/plugins/render/opencaching/OpenCachingCacheDialog.ui:116
 msgctxt "OpenCachingCacheDialog|"
@@ -16046,35 +16002,29 @@ msgid "Terrain:"
 msgstr "地域："
 
 #: src/plugins/render/opencaching/OpenCachingCacheDialog.ui:196
-#, fuzzy
-#| msgid "Longitude"
 msgctxt "OpenCachingCacheDialog|"
 msgid "Longitude:"
-msgstr "經度"
+msgstr "經度："
 
 #: src/plugins/render/opencaching/OpenCachingCacheDialog.ui:216
-#, fuzzy
-#| msgid "Latitude"
 msgctxt "OpenCachingCacheDialog|"
 msgid "Latitude:"
-msgstr "緯度"
+msgstr "緯度："
 
 #: src/plugins/render/opencaching/OpenCachingCacheDialog.ui:236
-#, fuzzy
-#| msgid "Hidden:"
 msgctxt "OpenCachingCacheDialog|"
 msgid "Date hidden:"
-msgstr "隱藏："
+msgstr "隱藏日期："
 
 #: src/plugins/render/opencaching/OpenCachingCacheDialog.ui:256
 msgctxt "OpenCachingCacheDialog|"
 msgid "Date created:"
-msgstr ""
+msgstr "建立日期："
 
 #: src/plugins/render/opencaching/OpenCachingCacheDialog.ui:276
 msgctxt "OpenCachingCacheDialog|"
 msgid "Date last modified:"
-msgstr ""
+msgstr "上次修改日期："
 
 #: src/plugins/render/opencaching/OpenCachingCacheDialog.ui:291
 msgctxt "OpenCachingCacheDialog|"
@@ -16089,71 +16039,59 @@ msgid "Log"
 msgstr "獅子座"
 
 #: src/plugins/render/opencaching/OpenCachingCacheDialog.ui:346
-#, fuzzy
-#| msgid "Preview Route"
 msgctxt "OpenCachingCacheDialog|"
 msgid "Previous"
-msgstr "預覽路徑"
+msgstr "上一個"
 
 #: src/plugins/render/opencaching/OpenCachingCacheDialog.ui:356
 msgctxt "OpenCachingCacheDialog|"
 msgid "Next"
-msgstr ""
+msgstr "下一個"
 
 #: src/plugins/render/opencaching/OpenCachingConfigWidget.ui:14
 msgctxt "OpenCachingConfigWidget|"
 msgid "Dialog"
-msgstr ""
+msgstr "對話框"
 
 #: src/plugins/render/opencaching/OpenCachingConfigWidget.ui:20
 msgctxt "OpenCachingConfigWidget|"
 msgid "Filter"
-msgstr ""
+msgstr "過濾器"
 
 #: src/plugins/render/opencaching/OpenCachingConfigWidget.ui:26
 msgctxt "OpenCachingConfigWidget|"
 msgid "Maximum number of results:"
-msgstr ""
+msgstr "最大結果數量："
 
 #: src/plugins/render/opencaching/OpenCachingConfigWidget.ui:36
-#, fuzzy
-#| msgid "Difficulty:"
 msgctxt "OpenCachingConfigWidget|"
 msgid "Minimum difficulty:"
-msgstr "困難度："
+msgstr "最低困難度："
 
 #: src/plugins/render/opencaching/OpenCachingConfigWidget.ui:53
-#, fuzzy
-#| msgid "Difficulty:"
 msgctxt "OpenCachingConfigWidget|"
 msgid "Maximum difficulty:"
-msgstr "困難度："
+msgstr "最高困難度："
 
 #: src/plugins/render/opencaching/OpenCachingConfigWidget.ui:70
-#, fuzzy
-#| msgid "Distance:"
 msgctxt "OpenCachingConfigWidget|"
 msgid "Maximum Distance:"
-msgstr "距離："
+msgstr "最大距離："
 
 #: src/plugins/render/opencaching/OpenCachingConfigWidget.ui:87
-#, fuzzy
-#| msgid "Time Zones"
 msgctxt "OpenCachingConfigWidget|"
 msgid "Time Range"
-msgstr "時區"
+msgstr "時間範圍"
 
 #: src/plugins/render/opencaching/OpenCachingConfigWidget.ui:93
-#, fuzzy
-#| msgid "Start"
 msgctxt "OpenCachingConfigWidget|"
 msgid "Start:"
-msgstr "開始"
+msgstr "開始："
 
 #: src/plugins/render/opencaching/OpenCachingConfigWidget.ui:104
 msgctxt "OpenCachingConfigWidget|"
 msgid "End:"
-msgstr ""
+msgstr "結束："
 
 #: src/plugins/render/opencaching/OpenCachingItem.cpp:176
 msgctxt "Marble::OpenCachingItem|"
@@ -16201,16 +16139,14 @@ msgid "Shows caches from OpenCaching.de on the screen."
 msgstr "在螢幕上顯示從 OpenCaching.de 裡取得的快取。"
 
 #: src/plugins/render/opendesktop/OpenDesktopConfigWidget.ui:14
-#, fuzzy
-#| msgid "Routing Profile - Marble"
 msgctxt "OpenDesktopConfigWidget|"
 msgid "OpenDesktop plugin configuration"
-msgstr "路徑設定檔 - Marble"
+msgstr "OpenDesktop 外掛程式設定"
 
 #: src/plugins/render/opendesktop/OpenDesktopConfigWidget.ui:22
 msgctxt "OpenDesktopConfigWidget|"
 msgid "Number of displayed items on the screen:"
-msgstr ""
+msgstr "螢幕上顯示的項目數量："
 
 #: src/plugins/render/opendesktop/OpenDesktopPlugin.cpp:41
 msgctxt "Marble::OpenDesktopPlugin|"
@@ -16255,65 +16191,49 @@ msgid "Please choose the color for the position indicator"
 msgstr "請選擇位置指示器的顏色"
 
 #: src/plugins/render/overviewmap/OverviewMapConfigWidget.ui:14
-#, fuzzy
-#| msgid "Choose Overview Map"
 msgctxt "OverviewMapConfigWidget|"
 msgid "Configure Overview Map"
-msgstr "選擇概觀地圖"
+msgstr "設定概觀地圖"
 
 #: src/plugins/render/overviewmap/OverviewMapConfigWidget.ui:20
-#, fuzzy
-#| msgid "Map Name"
 msgctxt "OverviewMapConfigWidget|"
 msgid "Map &Image"
-msgstr "地圖名稱"
+msgstr "地圖影像(&I)"
 
 #: src/plugins/render/overviewmap/OverviewMapConfigWidget.ui:28
-#, fuzzy
-#| msgid "Show &Planets"
 msgctxt "OverviewMapConfigWidget|"
 msgid "&Planet:"
-msgstr "顯示星球(&P)"
+msgstr "星球(&P)："
 
 #: src/plugins/render/overviewmap/OverviewMapConfigWidget.ui:71
-#, fuzzy
-#| msgid "Size:"
 msgctxt "OverviewMapConfigWidget|"
 msgid "&Size:"
-msgstr "大小："
+msgstr "大小(&S)："
 
 #: src/plugins/render/overviewmap/OverviewMapConfigWidget.ui:97
-#, fuzzy
-#| msgid "1x"
 msgctxt "OverviewMapConfigWidget|"
 msgid "x"
-msgstr "1x"
+msgstr "×"
 
 #: src/plugins/render/overviewmap/OverviewMapConfigWidget.ui:178
-#, fuzzy
-#| msgid "Preview Map"
 msgctxt "OverviewMapConfigWidget|"
 msgid "Preview"
-msgstr "預覽地圖"
+msgstr "預覽"
 
 #: src/plugins/render/overviewmap/OverviewMapConfigWidget.ui:183
-#, fuzzy
-#| msgid "&File"
 msgctxt "OverviewMapConfigWidget|"
 msgid "Filename"
-msgstr "檔案(&F)"
+msgstr "檔案名稱"
 
 #: src/plugins/render/overviewmap/OverviewMapConfigWidget.ui:194
 msgctxt "OverviewMapConfigWidget|"
 msgid "C&olors"
-msgstr ""
+msgstr "色彩(&O)"
 
 #: src/plugins/render/overviewmap/OverviewMapConfigWidget.ui:200
-#, fuzzy
-#| msgid "Position Marker"
 msgctxt "OverviewMapConfigWidget|"
 msgid "Position I&ndicator:"
-msgstr "定位標記"
+msgstr "位置指示器(&N)："
 
 #: src/plugins/render/panoramio/PanoramioPlugin.cpp:33
 msgctxt "Marble::PanoramioPlugin|"
@@ -16345,11 +16265,9 @@ msgid "The file is not a valid Flickr answer."
 msgstr "檔案不是有效的 Flickr 回答。"
 
 #: src/plugins/render/photo/PhotoConfigWidget.ui:14
-#, fuzzy
-#| msgid "Configuration Plugin"
 msgctxt "PhotoConfigWidget|"
 msgid "Configure Photo Plugin"
-msgstr "設定外掛程式"
+msgstr "設定相片外掛程式"
 
 #: src/plugins/render/photo/PhotoConfigWidget.ui:42
 msgctxt "PhotoConfigWidget|"
@@ -16359,7 +16277,7 @@ msgstr "版權"
 #: src/plugins/render/photo/PhotoConfigWidget.ui:71
 msgctxt "PhotoConfigWidget|"
 msgid "Number of items on the screen"
-msgstr ""
+msgstr "螢幕上的項目數量"
 
 #: src/plugins/render/photo/PhotoPlugin.cpp:68
 msgctxt "Marble::PhotoPlugin|"
@@ -16446,23 +16364,19 @@ msgid "Please choose a color"
 msgstr "請選擇顏色"
 
 #: src/plugins/render/positionmarker/PositionMarkerConfigWidget.ui:14
-#, fuzzy
-#| msgid "Position Marker Plugin"
 msgctxt "PositionMarkerConfigWidget|"
 msgid "Configure Position Marker Plugin"
-msgstr "位置標記器外掛程式"
+msgstr "設定定位標記外掛程式"
 
 #: src/plugins/render/positionmarker/PositionMarkerConfigWidget.ui:20
-#, fuzzy
-#| msgid "Cursor Size: %1"
 msgctxt "PositionMarkerConfigWidget|"
 msgid "Cursor Shape"
-msgstr "游標大小：%1"
+msgstr "游標形狀"
 
 #: src/plugins/render/positionmarker/PositionMarkerConfigWidget.ui:28
 msgctxt "PositionMarkerConfigWidget|"
 msgid "&Arrow"
-msgstr ""
+msgstr "箭頭(&A)"
 
 #: src/plugins/render/positionmarker/PositionMarkerConfigWidget.ui:34
 #: src/plugins/render/positionmarker/PositionMarkerConfigWidget.ui:44
@@ -16471,11 +16385,9 @@ msgid "m_buttonGroup"
 msgstr ""
 
 #: src/plugins/render/positionmarker/PositionMarkerConfigWidget.ui:41
-#, fuzzy
-#| msgid "Custom"
 msgctxt "PositionMarkerConfigWidget|"
 msgid "&Custom:"
-msgstr "自訂"
+msgstr "自訂(&C)："
 
 #: src/plugins/render/positionmarker/PositionMarkerConfigWidget.ui:95
 msgctxt "PositionMarkerConfigWidget|"
@@ -16629,11 +16541,9 @@ msgid "Toggle GPS"
 msgstr "切換 GPS"
 
 #: src/plugins/render/routing/RoutingPlugin.ui:187
-#, fuzzy
-#| msgid "Zoom &Out"
 msgctxt "RoutingPlugin|"
 msgid "Zoom Out"
-msgstr "縮小(&O)"
+msgstr "縮小"
 
 #: src/plugins/render/routing/RoutingPlugin.ui:190
 msgctxt "RoutingPlugin|"
@@ -16641,11 +16551,9 @@ msgid "-"
 msgstr "-"
 
 #: src/plugins/render/routing/RoutingPlugin.ui:219
-#, fuzzy
-#| msgid "Zoom &In"
 msgctxt "RoutingPlugin|"
 msgid "Zoom In"
-msgstr "放大(&I)"
+msgstr "放大"
 
 #: src/plugins/render/routing/RoutingPlugin.ui:222
 msgctxt "RoutingPlugin|"
@@ -16803,11 +16711,9 @@ msgid "Do you really want to delete the selected data source?"
 msgstr "您確定要刪除選取的資料來源嗎？"
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.ui:14
-#, fuzzy
-#| msgid "Satellite information"
 msgctxt "SatellitesConfigDialog|"
 msgid "Satellites Configuration"
-msgstr "衛星資訊"
+msgstr "衛星設定"
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.ui:27
 msgctxt "SatellitesConfigDialog|"
@@ -18722,25 +18628,19 @@ msgid "airport"
 msgstr "機場"
 
 #: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:130
-#, fuzzy
-#| msgid "Airport runway, taxiway"
 msgctxt "QObject|"
 msgid "airport runway"
-msgstr "機場跑道，計程車道"
+msgstr "機場跑道"
 
 #: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:132
-#, fuzzy
-#| msgid "Airport runway, taxiway"
 msgctxt "QObject|"
 msgid "airport apron"
-msgstr "機場跑道，計程車道"
+msgstr "機場停機坪"
 
 #: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:134
-#, fuzzy
-#| msgid "Airport runway, taxiway"
 msgctxt "QObject|"
 msgid "airport taxiway"
-msgstr "機場跑道，計程車道"
+msgstr "機場滑行道"
 
 #: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:136
 msgctxt "QObject|"
@@ -18805,7 +18705,7 @@ msgstr "計程車"
 #: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:160
 msgctxt "QObject|"
 msgid "memorial"
-msgstr ""
+msgstr "紀念碑"
 
 #: src/plugins/runner/local-osm-search/LocalOsmSearchPlugin.cpp:40
 msgctxt "Marble::LocalOsmSearchPlugin|"
@@ -18899,32 +18799,24 @@ msgid "AppKey"
 msgstr ""
 
 #: src/plugins/runner/mapquest/MapQuestConfigWidget.ui:30
-#, fuzzy
-#| msgid ""
-#| "Circumference:\n"
-#| "%1"
 msgctxt "MapQuestConfigWidget|"
 msgid "Preference:"
-msgstr ""
-"圓週長：\n"
-"%1"
+msgstr "偏好設定："
 
 #: src/plugins/runner/mapquest/MapQuestConfigWidget.ui:43
-#, fuzzy
-#| msgid "Motorway"
 msgctxt "MapQuestConfigWidget|"
 msgid "Avoid motorways"
-msgstr "高速公路"
+msgstr "避開高速公路"
 
 #: src/plugins/runner/mapquest/MapQuestConfigWidget.ui:50
 msgctxt "MapQuestConfigWidget|"
 msgid "Avoid tollways"
-msgstr ""
+msgstr "避開付費道路"
 
 #: src/plugins/runner/mapquest/MapQuestConfigWidget.ui:57
 msgctxt "MapQuestConfigWidget|"
 msgid "Avoid ferries"
-msgstr ""
+msgstr "避開渡輪"
 
 #: src/plugins/runner/mapquest/MapQuestConfigWidget.ui:64
 msgctxt "MapQuestConfigWidget|"
