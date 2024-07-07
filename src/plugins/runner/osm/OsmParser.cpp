@@ -23,6 +23,8 @@
 #include <QBuffer>
 #include <QSet>
 
+#include <MarbleDebug.h>
+
 namespace Marble {
 
 GeoDataDocument *OsmParser::parse(const QString &filename, QString &error)
@@ -60,61 +62,66 @@ GeoDataDocument* OsmParser::parseO5m(const QString &filename, QString &error)
     relationTypes[O5MREADER_DS_REL] = QStringLiteral("relation");
 
     auto file = fopen(filename.toStdString().c_str(), "rb");
-    o5mreader_open(&reader, file);
+    auto success = o5mreader_open(&reader, file);
 
-    while( (outerState = o5mreader_iterateDataSet(reader, &data)) == O5MREADER_ITERATE_RET_NEXT) {
-        switch (data.type) {
-        case O5MREADER_DS_NODE:
-        {
-            OsmNode& node = nodes[data.id];
-            node.osmData().setId(data.id);
-            node.setCoordinates(GeoDataCoordinates(data.lon*1.0e-7, data.lat*1.0e-7,
-                                                   0.0, GeoDataCoordinates::Degree));
-            while ((innerState = o5mreader_iterateTags(reader, &key, &value)) == O5MREADER_ITERATE_RET_NEXT) {
-                const QString keyString = *stringPool.insert(QString::fromUtf8(key));
-                const QString valueString = *stringPool.insert(QString::fromUtf8(value));
-                node.osmData().addTag(keyString, valueString);
+    // Only executed if the opened file is not truncated, starts correctly, and
+    // if memory for the reader and its O5M StringPairTable was fully allocated.
+    if (success != O5MREADER_ERR_CODE_OK) {
+        while( (outerState = o5mreader_iterateDataSet(reader, &data)) == O5MREADER_ITERATE_RET_NEXT) {
+            switch (data.type) {
+            case O5MREADER_DS_NODE:
+            {
+                OsmNode& node = nodes[data.id];
+                node.osmData().setId(data.id);
+                node.setCoordinates(GeoDataCoordinates(data.lon*1.0e-7, data.lat*1.0e-7,
+                                                       0.0, GeoDataCoordinates::Degree));
+                while ((innerState = o5mreader_iterateTags(reader, &key, &value)) == O5MREADER_ITERATE_RET_NEXT) {
+                    const QString keyString = *stringPool.insert(QString::fromUtf8(key));
+                    const QString valueString = *stringPool.insert(QString::fromUtf8(value));
+                    node.osmData().addTag(keyString, valueString);
+                }
             }
-        }
-            break;
-        case O5MREADER_DS_WAY:
-        {
-            OsmWay &way = ways[data.id];
-            way.osmData().setId(data.id);
-            uint64_t nodeId;
-            while ((innerState = o5mreader_iterateNds(reader, &nodeId)) == O5MREADER_ITERATE_RET_NEXT) {
-                way.addReference(nodeId);
+                break;
+            case O5MREADER_DS_WAY:
+            {
+                OsmWay &way = ways[data.id];
+                way.osmData().setId(data.id);
+                uint64_t nodeId;
+                while ((innerState = o5mreader_iterateNds(reader, &nodeId)) == O5MREADER_ITERATE_RET_NEXT) {
+                    way.addReference(nodeId);
+                }
+                while ((innerState = o5mreader_iterateTags(reader, &key, &value)) == O5MREADER_ITERATE_RET_NEXT) {
+                    const QString keyString = *stringPool.insert(QString::fromUtf8(key));
+                    const QString valueString = *stringPool.insert(QString::fromUtf8(value));
+                    way.osmData().addTag(keyString, valueString);
+                }
             }
-            while ((innerState = o5mreader_iterateTags(reader, &key, &value)) == O5MREADER_ITERATE_RET_NEXT) {
-                const QString keyString = *stringPool.insert(QString::fromUtf8(key));
-                const QString valueString = *stringPool.insert(QString::fromUtf8(value));
-                way.osmData().addTag(keyString, valueString);
+                break;
+            case O5MREADER_DS_REL:
+            {
+                OsmRelation &relation = relations[data.id];
+                relation.osmData().setId(data.id);
+                char *role;
+                uint8_t type;
+                uint64_t refId;
+                while ((innerState = o5mreader_iterateRefs(reader, &refId, &type, &role)) == O5MREADER_ITERATE_RET_NEXT) {
+                    const QString roleString = *stringPool.insert(QString::fromUtf8(role));
+                    relation.addMember(refId, roleString, relationTypes[type]);
+                }
+                while ((innerState = o5mreader_iterateTags(reader, &key, &value)) == O5MREADER_ITERATE_RET_NEXT) {
+                    const QString keyString = *stringPool.insert(QString::fromUtf8(key));
+                    const QString valueString = *stringPool.insert(QString::fromUtf8(value));
+                    relation.osmData().addTag(keyString, valueString);
+                }
             }
-        }
-            break;
-        case O5MREADER_DS_REL:
-        {
-            OsmRelation &relation = relations[data.id];
-            relation.osmData().setId(data.id);
-            char *role;
-            uint8_t type;
-            uint64_t refId;
-            while ((innerState = o5mreader_iterateRefs(reader, &refId, &type, &role)) == O5MREADER_ITERATE_RET_NEXT) {
-                const QString roleString = *stringPool.insert(QString::fromUtf8(role));
-                relation.addMember(refId, roleString, relationTypes[type]);
+                break;
             }
-            while ((innerState = o5mreader_iterateTags(reader, &key, &value)) == O5MREADER_ITERATE_RET_NEXT) {
-                const QString keyString = *stringPool.insert(QString::fromUtf8(key));
-                const QString valueString = *stringPool.insert(QString::fromUtf8(value));
-                relation.osmData().addTag(keyString, valueString);
-            }
-        }
-            break;
         }
     }
 
     fclose(file);
     error = reader->errMsg;
+    if (!error.isEmpty()) mDebug() << error;
     o5mreader_close(reader);
     return createDocument(nodes, ways, relations);
 }

@@ -57,6 +57,14 @@ O5mreaderRet o5mreader_readStrPair(O5mreader *pReader, char **tagpair, int singl
 	}
 	
     if ( key ) {
+        // This shouldn't occur (unless
+        if (pReader->strPairTable == NULL) {
+            o5mreader_setError(pReader,
+                O5MREADER_ERR_CODE_MEMORY_ERROR,
+                NULL
+            );
+            return O5MREADER_RET_ERR;
+        }
         *tagpair = pReader->strPairTable[(pointer+15000-key)%15000];
         return key;
 	}
