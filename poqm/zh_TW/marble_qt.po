@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2024-07-01 13:23+0900\n"
+"PO-Revision-Date: 2024-07-18 03:10+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
 "Language: zh_TW\n"
@@ -652,23 +652,21 @@ msgstr "海拔高度"
 #. file data/maps/earth/political/political.dgml:106
 msgctxt "DGML|"
 msgid "Disputed Areas"
-msgstr ""
+msgstr "有爭議的區域"
 
 #. file data/maps/earth/srtm/srtm.dgml:264
 #. ----------
 #. file data/maps/earth/plain/plain.dgml:250
 msgctxt "DGML|"
 msgid "Maritime Borders"
-msgstr ""
+msgstr "海洋邊界"
 
 #. file data/maps/earth/srtm/srtm.dgml:277
 #. ----------
 #. file data/maps/earth/plain/plain.dgml:263
-#, fuzzy
-#| msgid "Historic site"
 msgctxt "DGML|"
 msgid "Historic Lake"
-msgstr "歷史站台"
+msgstr "歷史上的湖"
 
 #. file data/maps/earth/srtm/srtm.dgml:281
 #. ----------
@@ -682,11 +680,9 @@ msgstr "播放"
 #. file data/maps/earth/srtm/srtm.dgml:293
 #. ----------
 #. file data/maps/earth/plain/plain.dgml:279
-#, fuzzy
-#| msgid "Ice and Glaciers"
 msgctxt "DGML|"
 msgid "Glaciers"
-msgstr "冰原與冰河"
+msgstr "冰河"
 
 #. file data/maps/earth/srtm/srtm.dgml:297
 #. ----------
@@ -964,7 +960,7 @@ msgstr "未鋪面道路"
 #. file data/maps/earth/openstreetmap/openstreetmap.dgml:152
 msgctxt "DGML|"
 msgid "Track"
-msgstr "軌道"
+msgstr "軌跡"
 
 #. file data/maps/earth/vectorosm/vectorosm.dgml:150
 #. ----------
@@ -1838,11 +1834,9 @@ msgid "Populated Places"
 msgstr "居住地"
 
 #. file data/legend.html
-#, fuzzy
-#| msgid "Wait duration:"
 msgctxt "Legends|"
 msgid "Population:"
-msgstr "等待期間："
+msgstr "人口："
 
 #. file data/legend.html
 msgctxt "Legends|"
@@ -2384,16 +2378,14 @@ msgid ""
 msgstr ""
 
 #: src/apps/marble-maps/Bookmarks.qml:133
-#, fuzzy
-#| msgid "Remove"
 msgctxt "Bookmarks|"
 msgid "Removed"
-msgstr "移除"
+msgstr "已移除"
 
 #: src/apps/marble-maps/Bookmarks.qml:219
 msgctxt "Bookmarks|"
 msgid "Your bookmarks will appear here."
-msgstr ""
+msgstr "您的書籤會出現於此。"
 
 #: src/apps/marble-maps/CurrentPosition.qml:65
 #, fuzzy
@@ -2538,7 +2530,7 @@ msgstr "馬道"
 #: src/apps/marble-maps/PlacemarkDialog.qml:168
 msgctxt "PlacemarkDialog|"
 msgid "<h2>Routes</h2>"
-msgstr ""
+msgstr "<h2>路徑</h2>"
 
 #: src/apps/marble-maps/ProfileSelectorMenu.qml:43
 msgctxt "ProfileSelectorMenu|"
@@ -2592,7 +2584,7 @@ msgstr ""
 #: src/apps/marble-maps/Search.qml:161
 msgctxt "Search|"
 msgid "Your bookmarks will appear here."
-msgstr ""
+msgstr "您的書籤會出現於此。"
 
 #: src/apps/marble-maps/SearchField.qml:71
 msgctxt "SearchField|"
@@ -2785,7 +2777,7 @@ msgstr "顯示設定對話框"
 #: src/apps/marble-qt/QtMainWindow.cpp:331
 msgctxt "Marble::MainWindow|"
 msgid "C&opy Coordinates"
-msgstr "複製座標(&O)："
+msgstr "複製座標(&O)"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:332
 msgctxt "Marble::MainWindow|"
@@ -2918,12 +2910,9 @@ msgid "Show the Qt library's About box"
 msgstr "顯示 Qt 函式庫的「關於」資訊盒"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:397
-#, fuzzy
-#| msgctxt "Marble::MarbleWidgetPopupMenu|"
-#| msgid "Add &Bookmark"
 msgctxt "Marble::MainWindow|"
 msgid "Add &Bookmark..."
-msgstr "加入書籤(&B)"
+msgstr "加入書籤(&B)…"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:399
 msgctxt "Marble::MainWindow|"
@@ -2947,12 +2936,9 @@ msgid "Toggle display of Bookmarks"
 msgstr "切換書籤顯示"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:411
-#, fuzzy
-#| msgctxt "Marble::MainWindow|"
-#| msgid "&Manage Bookmarks"
 msgctxt "Marble::MainWindow|"
 msgid "&Manage Bookmarks..."
-msgstr "管理書籤(&M)"
+msgstr "管理書籤(&M)…"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:412
 msgctxt "Marble::MainWindow|"
@@ -3010,11 +2996,9 @@ msgid "&Info Boxes"
 msgstr "資訊盒(&I)"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:477
-#, fuzzy
-#| msgid "OpenRouteService"
 msgctxt "Marble::MainWindow|"
 msgid "&Online Services"
-msgstr "OpenRouteService"
+msgstr "線上服務(&O)"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:480
 msgctxt "Marble::MainWindow|"
@@ -3022,18 +3006,14 @@ msgid "&Bookmarks"
 msgstr "書籤(&B)"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:484
-#, fuzzy
-#| msgid "Hide &All Panels"
 msgctxt "Marble::MainWindow|"
 msgid "&Panels"
-msgstr "隱藏所有面板(&A)"
+msgstr "面板(&P)"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:489
-#, fuzzy
-#| msgid "&View"
 msgctxt "Marble::MainWindow|"
 msgid "&View Size"
-msgstr "檢視(&V)"
+msgstr "檢視大小(&V)"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:492
 msgctxt "Marble::MainWindow|"
@@ -3065,10 +3045,12 @@ msgctxt "Marble::MainWindow|"
 msgid "Export Map"
 msgstr "匯出地圖"
 
+# 括號副檔名的括號必須沿用半形掛號
+# --Kisaragi
 #: src/apps/marble-qt/QtMainWindow.cpp:754
 msgctxt "Marble::MainWindow|"
 msgid "Images (*.jpg *.png)"
-msgstr "影像（*.jpg *.png）"
+msgstr "影像 (*.jpg *.png)"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:771
 msgctxt "Marble::MainWindow|"
@@ -3083,11 +3065,10 @@ msgstr "Marble - 虛擬地球儀 %1"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:953
 #: src/apps/marble-qt/QtMainWindow.cpp:1030
-#, fuzzy, qt-format
-#| msgid "Lock Position"
+#, qt-format
 msgctxt "Marble::MainWindow|"
 msgid "Position: %1"
-msgstr "鎖定位置"
+msgstr "位置：%1"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:956
 #: src/apps/marble-qt/QtMainWindow.cpp:1038
@@ -3098,19 +3079,17 @@ msgstr "高度：%1"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:959
 #: src/apps/marble-qt/QtMainWindow.cpp:1046
-#, fuzzy, qt-format
-#| msgid "Zoom &In"
+#, qt-format
 msgctxt "Marble::MainWindow|"
 msgid "Zoom: %1"
-msgstr "放大(&I)"
+msgstr "縮放：%1"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:962
 #: src/apps/marble-qt/QtMainWindow.cpp:1054
-#, fuzzy, qt-format
-#| msgid "&Time"
+#, qt-format
 msgctxt "Marble::MainWindow|"
 msgid "Time: %1"
-msgstr "時間(&T)"
+msgstr "時間：%1"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:994
 msgctxt "Marble::MainWindow|"
@@ -3123,11 +3102,9 @@ msgid "Open File"
 msgstr "開啟檔案"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:1021
-#, fuzzy
-#| msgid "Display orbit"
 msgctxt "Marble::MainWindow|"
 msgid "&Angle Display Unit"
-msgstr "顯示軌道"
+msgstr "角度顯示單位(&A)"
 
 #: src/apps/marble-qt/QtMainWindow.cpp:1270
 msgctxt "Marble::MainWindow|"
@@ -3142,63 +3119,55 @@ msgstr "Marble - 虛擬地球儀"
 #: src/apps/marble-ui/ControlView.cpp:276
 msgctxt "Marble::ControlView|"
 msgid "Default (Resizable)"
-msgstr "預設（可調大小）"
+msgstr "預設 (可調大小)"
 
 #: src/apps/marble-ui/ControlView.cpp:285
-#, fuzzy, qt-format
-#| msgid "NTSC (720x486)"
+#, qt-format
 msgctxt "Marble::ControlView|"
 msgid "NTSC (%1x%2)"
-msgstr "NTSC (720x486)"
+msgstr "NTSC (%1x%2)"
 
 #: src/apps/marble-ui/ControlView.cpp:286
-#, fuzzy, qt-format
-#| msgid "PAL 16:9 (1024x576)"
+#, qt-format
 msgctxt "Marble::ControlView|"
 msgid "PAL (%1x%2)"
-msgstr "PAL 16:9 (1024x576)"
+msgstr "PAL (%1x%2)"
 
 #: src/apps/marble-ui/ControlView.cpp:287
-#, fuzzy, qt-format
-#| msgid "NTSC 16:9 (864x486)"
+#, qt-format
 msgctxt "Marble::ControlView|"
 msgid "NTSC 16:9 (%1x%2)"
-msgstr "NTSC 16:9 (864x486)"
+msgstr "NTSC 16:9 (%1x%2)"
 
 #: src/apps/marble-ui/ControlView.cpp:288
-#, fuzzy, qt-format
-#| msgid "PAL 16:9 (1024x576)"
+#, qt-format
 msgctxt "Marble::ControlView|"
 msgid "PAL 16:9 (%1x%2)"
-msgstr "PAL 16:9 (1024x576)"
+msgstr "PAL 16:9 (%1x%2)"
 
 #: src/apps/marble-ui/ControlView.cpp:290
-#, fuzzy, qt-format
-#| msgid "DVD (852x480p)"
+#, qt-format
 msgctxt "Marble::ControlView|"
 msgid "DVD (%1x%2p)"
-msgstr "DVD (852x480p)"
+msgstr "DVD (%1x%2p)"
 
 #: src/apps/marble-ui/ControlView.cpp:292
-#, fuzzy, qt-format
-#| msgid "HD (1280x720p)"
+#, qt-format
 msgctxt "Marble::ControlView|"
 msgid "HD (%1x%2p)"
-msgstr "HD (1280x720p)"
+msgstr "HD (%1x%2p)"
 
 #: src/apps/marble-ui/ControlView.cpp:294
-#, fuzzy, qt-format
-#| msgid "Full HD (1920x1080p)"
+#, qt-format
 msgctxt "Marble::ControlView|"
 msgid "Full HD (%1x%2p)"
-msgstr "Full HD (1920x1080p)"
+msgstr ""
 
 #: src/apps/marble-ui/ControlView.cpp:295
-#, fuzzy, qt-format
-#| msgid "Digital Cinema (2048x1536)"
+#, qt-format
 msgctxt "Marble::ControlView|"
 msgid "Digital Cinema (%1x%2)"
-msgstr "數位電影（2048x1536）"
+msgstr "數位電影 (%1x%2)"
 
 #: src/apps/marble-ui/ControlView.cpp:486
 msgctxt "Marble::ControlView|"
@@ -3338,11 +3307,9 @@ msgid "Please specify a name for this link."
 msgstr "請指定此連結的名稱。"
 
 #: src/lib/marble/AddLinkDialog.ui:14
-#, fuzzy
-#| msgid "Add Via"
 msgctxt "UiAddLinkDialog|"
 msgid "Add link"
-msgstr "新增途徑"
+msgstr "新增連結"
 
 #: src/lib/marble/AddLinkDialog.ui:22
 msgctxt "UiAddLinkDialog|"
@@ -3350,11 +3317,9 @@ msgid "URL:"
 msgstr "網址："
 
 #: src/lib/marble/AddLinkDialog.ui:32
-#, fuzzy
-#| msgid "Name"
 msgctxt "UiAddLinkDialog|"
 msgid "Name:"
-msgstr "名稱"
+msgstr "名稱："
 
 #: src/lib/marble/BookmarkManager.cpp:53
 msgctxt "QObject|"
@@ -3382,11 +3347,9 @@ msgstr ""
 "料夾嗎？"
 
 #: src/lib/marble/BookmarkManagerDialog.cpp:180
-#, fuzzy
-#| msgid "Remove Folder - Marble"
 msgctxt "BookmarkManagerDialogPrivate|"
 msgid "Remove Folder"
-msgstr "移除資料夾 - Marble"
+msgstr "移除資料夾"
 
 #: src/lib/marble/BookmarkManagerDialog.cpp:414
 msgctxt "Marble::BookmarkManagerDialog|"
@@ -3404,18 +3367,14 @@ msgid "Unable to save bookmarks. Please check that the file is writable."
 msgstr "無法儲存書籤。請檢查檔案是否可寫入。"
 
 #: src/lib/marble/BookmarkManagerDialog.cpp:421
-#, fuzzy
-#| msgid "Bookmark Export - Marble"
 msgctxt "Marble::BookmarkManagerDialog|"
 msgid "Bookmark Export"
-msgstr "書籤匯出 - Marble"
+msgstr "書籤匯出"
 
 #: src/lib/marble/BookmarkManagerDialog.cpp:428
-#, fuzzy
-#| msgid "Export Bookmarks"
 msgctxt "Marble::BookmarkManagerDialog|"
 msgid "Import Bookmarks"
-msgstr "匯出書籤"
+msgstr "匯入書籤"
 
 #: src/lib/marble/BookmarkManagerDialog.cpp:429
 msgctxt "Marble::BookmarkManagerDialog|"
@@ -3429,11 +3388,9 @@ msgid "The file %1 cannot be opened as a KML file."
 msgstr "檔案 %1 無法以 KML 檔開啟。"
 
 #: src/lib/marble/BookmarkManagerDialog.cpp:437
-#, fuzzy
-#| msgid "Bookmark Import - Marble"
 msgctxt "Marble::BookmarkManagerDialog|"
 msgid "Bookmark Import"
-msgstr "書籤匯入 - Marble"
+msgstr "書籤匯入"
 
 #: src/lib/marble/BookmarkManagerDialog.cpp:471
 msgctxt "BookmarkManagerDialogPrivate|"
@@ -3476,25 +3433,19 @@ msgid "Skip All"
 msgstr "全部略過"
 
 #: src/lib/marble/BookmarkManagerDialog.ui:14
-#, fuzzy
-#| msgid "Bookmark Export - Marble"
 msgctxt "UiBookmarkManagerDialog|"
 msgid "Bookmark Manager"
-msgstr "書籤匯出 - Marble"
+msgstr "書籤管理員"
 
 #: src/lib/marble/BookmarkManagerDialog.ui:25
-#, fuzzy
-#| msgid "Export Bookmarks"
 msgctxt "UiBookmarkManagerDialog|"
 msgid "Import Bookmarks..."
-msgstr "匯出書籤"
+msgstr "匯入書籤…"
 
 #: src/lib/marble/BookmarkManagerDialog.ui:35
-#, fuzzy
-#| msgid "Export Bookmarks"
 msgctxt "UiBookmarkManagerDialog|"
 msgid "Export Bookmarks..."
-msgstr "匯出書籤"
+msgstr "匯出書籤…"
 
 #: src/lib/marble/BookmarkManagerDialog.ui:64
 msgctxt "UiBookmarkManagerDialog|"
@@ -3507,11 +3458,9 @@ msgid "New..."
 msgstr "新增..."
 
 #: src/lib/marble/BookmarkManagerDialog.ui:81
-#, fuzzy
-#| msgid "Unnamed"
 msgctxt "UiBookmarkManagerDialog|"
 msgid "Rename..."
-msgstr "未命名"
+msgstr "重新命名…"
 
 #: src/lib/marble/BookmarkManagerDialog.ui:91
 #: src/lib/marble/BookmarkManagerDialog.ui:151
@@ -3525,11 +3474,9 @@ msgid "Bookmarks"
 msgstr "書籤"
 
 #: src/lib/marble/BookmarkManagerDialog.ui:141
-#, fuzzy
-#| msgid "&Edit"
 msgctxt "UiBookmarkManagerDialog|"
 msgid "Edit"
-msgstr "編輯(&E)"
+msgstr "編輯"
 
 #: src/lib/marble/CacheStoragePolicy.cpp:34
 msgctxt "QObject|"
@@ -3558,18 +3505,14 @@ msgid "Bookmarks"
 msgstr "書籤"
 
 #: src/lib/marble/cloudsync/CloudRoutesDialog.ui:14
-#, fuzzy
-#| msgid "Manage Cloud Routes"
 msgctxt "CloudRoutesDialog|"
 msgid "Cloud Routes"
-msgstr "管理雲端路徑"
+msgstr "雲端路徑"
 
 #: src/lib/marble/cloudsync/CloudRoutesDialog.ui:20
-#, fuzzy
-#| msgid "No info available."
 msgctxt "CloudRoutesDialog|"
 msgid "No route available."
-msgstr "沒有可用的資訊"
+msgstr "沒有可用的路徑。"
 
 #: src/lib/marble/cloudsync/ConflictDialog.cpp:104
 msgctxt "Marble::ConflictDialog|"
@@ -3778,11 +3721,9 @@ msgid "Current Location"
 msgstr "目前位置"
 
 #: src/lib/marble/CurrentLocationWidget.ui:26
-#, fuzzy
-#| msgid "Position Marker"
 msgctxt "CurrentLocationWidget|"
 msgid "Position Tracking"
-msgstr "定位標記"
+msgstr "位置追蹤"
 
 #: src/lib/marble/CurrentLocationWidget.ui:37
 msgctxt "CurrentLocationWidget|"
@@ -3790,18 +3731,14 @@ msgid "Disabled"
 msgstr "已關閉"
 
 #: src/lib/marble/CurrentLocationWidget.ui:53
-#, fuzzy
-#| msgid "Save Track"
 msgctxt "CurrentLocationWidget|"
 msgid "Show Track"
-msgstr "儲存軌跡"
+msgstr "顯示軌跡"
 
 #: src/lib/marble/CurrentLocationWidget.ui:66
-#, fuzzy
-#| msgid "Clear current track"
 msgctxt "CurrentLocationWidget|"
 msgid "Clear Track"
-msgstr "清除目前的軌跡"
+msgstr "清除軌跡"
 
 #: src/lib/marble/CurrentLocationWidget.ui:80
 #: src/lib/marble/CurrentLocationWidget.ui:91
@@ -3832,19 +3769,15 @@ msgid "Disabled"
 msgstr "已關閉"
 
 #: src/lib/marble/CurrentLocationWidget.ui:170
-#, fuzzy
-#| msgid "Keep centered"
 msgctxt ""
 "CurrentLocationWidget|Always keep gps location at the center of the map"
 msgid "Keep at Center"
 msgstr "保持在中央"
 
 #: src/lib/marble/CurrentLocationWidget.ui:175
-#, fuzzy
-#| msgid "Boat required"
 msgctxt "CurrentLocationWidget|Auto center when required"
 msgid "When required"
-msgstr "需要船"
+msgstr "需要時"
 
 #: src/lib/marble/CurrentLocationWidget.ui:186
 msgctxt "CurrentLocationWidget|Auto Zoom to appropriate zoom level"
@@ -3904,11 +3837,10 @@ msgid_plural "%n beds"
 msgstr[0] "%n 張床"
 
 #: src/lib/marble/declarative/Placemark.cpp:105
-#, fuzzy, qt-format
-#| msgid "parking"
+#, qt-format
 msgctxt "Marble::Placemark|"
 msgid "%1 parking spaces"
-msgstr "停車處"
+msgstr "%1 個停車位"
 
 #: src/lib/marble/declarative/Placemark.cpp:106
 #, qt-format
@@ -3917,19 +3849,15 @@ msgid "Maximum parking time %1"
 msgstr "最大停車時間 %1"
 
 #: src/lib/marble/declarative/Placemark.cpp:137
-#, fuzzy
-#| msgid "not available"
 msgctxt "Marble::Placemark|A copy shop provides computers for customer use"
 msgid "Computers available"
-msgstr "無法使用"
+msgstr "提供電腦"
 
 #: src/lib/marble/declarative/Placemark.cpp:138
-#, fuzzy
-#| msgid "No info available."
 msgctxt ""
 "Marble::Placemark|A copy shop does not provide computers for customer use"
 msgid "No computers available"
-msgstr "沒有可用的資訊"
+msgstr "不提供電腦"
 
 #: src/lib/marble/declarative/Placemark.cpp:139
 msgctxt "Marble::Placemark|A copy shop provides photocopying service"
@@ -3970,12 +3898,10 @@ msgid "No fax service"
 msgstr "沒有傳真服務"
 
 #: src/lib/marble/declarative/Placemark.cpp:145
-#, fuzzy
-#| msgid "OpenRouteService"
 msgctxt ""
 "Marble::Placemark|A copy shop provides a paid service to make phone calls"
 msgid "Phone service"
-msgstr "OpenRouteService"
+msgstr "電話服務"
 
 #: src/lib/marble/declarative/Placemark.cpp:146
 msgctxt ""
@@ -4031,14 +3957,14 @@ msgctxt ""
 "Marble::Placemark|A copy shop provides individual copy machines for self-"
 "service"
 msgid "Self service"
-msgstr ""
+msgstr "自主服務"
 
 #: src/lib/marble/declarative/Placemark.cpp:154
 msgctxt ""
 "Marble::Placemark|A copy shop does not provide individual machines for self-"
 "service"
 msgid " No self service"
-msgstr ""
+msgstr " 沒有自主服務"
 
 #: src/lib/marble/declarative/Placemark.cpp:156
 msgctxt "Marble::Placemark|A deli that sells organic food"
@@ -4149,26 +4075,24 @@ msgid "LPG"
 msgstr ""
 
 #: src/lib/marble/declarative/Placemark.cpp:201
-#, fuzzy
-#| msgid "Boundaries"
 msgctxt "Marble::Placemark|"
 msgid "Batteries"
-msgstr "邊界"
+msgstr "電池"
 
 #: src/lib/marble/declarative/Placemark.cpp:202
 msgctxt "Marble::Placemark|"
 msgid "Clothes"
-msgstr ""
+msgstr "衣服"
 
 #: src/lib/marble/declarative/Placemark.cpp:203
 msgctxt "Marble::Placemark|"
 msgid "Glass"
-msgstr ""
+msgstr "玻璃"
 
 #: src/lib/marble/declarative/Placemark.cpp:204
 msgctxt "Marble::Placemark|"
 msgid "Glass bottles"
-msgstr ""
+msgstr "玻璃杯"
 
 #: src/lib/marble/declarative/Placemark.cpp:205
 msgctxt "Marble::Placemark|"
@@ -4268,11 +4192,9 @@ msgid "Wood"
 msgstr "樹木"
 
 #: src/lib/marble/declarative/Placemark.cpp:225
-#, fuzzy
-#| msgid "Native"
 msgctxt "Marble::Placemark|An active volcano"
 msgid "Active"
-msgstr "原始"
+msgstr "活火山"
 
 #: src/lib/marble/declarative/Placemark.cpp:226
 #, fuzzy
@@ -4519,18 +4441,14 @@ msgid "Reservation is possible"
 msgstr "可以預約"
 
 #: src/lib/marble/declarative/Placemark.cpp:298
-#, fuzzy
-#| msgid "No description available."
 msgctxt "Marble::Placemark|"
 msgid "No reservation possible"
-msgstr "沒有可用的描述。"
+msgstr "不能預約"
 
 #: src/lib/marble/declarative/Placemark.cpp:299
-#, fuzzy
-#| msgid "Boat required"
 msgctxt "Marble::Placemark|"
 msgid "Reservation is required"
-msgstr "需要船"
+msgstr "必須預約"
 
 #: src/lib/marble/declarative/Placemark.cpp:300
 msgctxt "Marble::Placemark|You should make reservation"
@@ -5002,11 +4920,9 @@ msgid "Collection times %1"
 msgstr ""
 
 #: src/lib/marble/declarative/Placemark.cpp:405
-#, fuzzy
-#| msgid "Country"
 msgctxt "Marble::Placemark|Entry station of an aerialway"
 msgid "Entry"
-msgstr "國家"
+msgstr ""
 
 #: src/lib/marble/declarative/Placemark.cpp:406
 msgctxt "Marble::Placemark|Exit station of an aerialway"
@@ -5045,11 +4961,10 @@ msgid "No entry or exit during summer"
 msgstr ""
 
 #: src/lib/marble/declarative/Placemark.cpp:416
-#, fuzzy, qt-format
-#| msgid "Elevation:"
+#, qt-format
 msgctxt "Marble::Placemark|"
 msgid "Elevation: %1 m"
-msgstr "高度："
+msgstr "海拔高度：%1 公尺"
 
 #: src/lib/marble/declarative/Placemark.cpp:419
 msgctxt "Marble::Placemark|"
@@ -5090,7 +5005,7 @@ msgstr ""
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "formerly <i>%1</i>"
-msgstr ""
+msgstr "舊稱 <i>%1</i>"
 
 #: src/lib/marble/declarative/Placemark.cpp:432
 #, qt-format
@@ -5399,18 +5314,14 @@ msgid "Estimated download size: %1 kB"
 msgstr "估計的下載大小：%1 kB"
 
 #: src/lib/marble/EditBookmarkDialog.ui:14
-#, fuzzy
-#| msgid "Add Bookmark"
 msgctxt "UiEditBookmarkDialog|"
 msgid "Edit Bookmark"
-msgstr "加入書籤"
+msgstr "編輯書籤"
 
 #: src/lib/marble/EditBookmarkDialog.ui:25
-#, fuzzy
-#| msgid "Description"
 msgctxt "UiEditBookmarkDialog|"
 msgid "&Description:"
-msgstr "描述"
+msgstr "描述(&D)："
 
 #: src/lib/marble/EditBookmarkDialog.ui:41
 #, fuzzy
@@ -5474,18 +5385,14 @@ msgstr ""
 "p></body></html>"
 
 #: src/lib/marble/EditBookmarkDialog.ui:57
-#, fuzzy
-#| msgid "Add Nodes"
 msgctxt "UiEditBookmarkDialog|"
 msgid "&Folder:"
-msgstr "新增節點"
+msgstr "資料夾(&F)："
 
 #: src/lib/marble/EditBookmarkDialog.ui:79
-#, fuzzy
-#| msgid "Add Nodes"
 msgctxt "UiEditBookmarkDialog|"
 msgid "&Add Folder..."
-msgstr "新增節點"
+msgstr "新增資料夾(&A)…"
 
 #: src/lib/marble/EditPlacemarkDialog.cpp:109
 msgctxt "Marble::EditPlacemarkDialog|"
@@ -5493,18 +5400,14 @@ msgid "Untitled Placemark"
 msgstr "未命名地標"
 
 #: src/lib/marble/EditPlacemarkDialog.cpp:151
-#, fuzzy
-#| msgid "Tags:"
 msgctxt "Marble::EditPlacemarkDialog|"
 msgid "Tags"
-msgstr "標籤："
+msgstr "標籤"
 
 #: src/lib/marble/EditPlacemarkDialog.cpp:157
-#, fuzzy
-#| msgid "Elevation"
 msgctxt "Marble::EditPlacemarkDialog|"
 msgid "Relations"
-msgstr "高度"
+msgstr "關係"
 
 #: src/lib/marble/EditPlacemarkDialog.cpp:166
 msgctxt "Marble::EditPlacemarkDialog|"
@@ -5519,7 +5422,7 @@ msgstr "沒有指定名稱"
 #: src/lib/marble/EditPlacemarkDialog.cpp:370
 msgctxt "Marble::EditPlacemarkDialog|"
 msgid "Please specify a name for this placemark."
-msgstr "請指定地標的名稱。"
+msgstr "請指定此地標的名稱。"
 
 #: src/lib/marble/EditPlacemarkDialog.cpp:373
 msgctxt "Marble::EditPlacemarkDialog|"
@@ -5539,7 +5442,7 @@ msgstr "代碼無效"
 #: src/lib/marble/EditPlacemarkDialog.cpp:378
 msgctxt "Marble::EditPlacemarkDialog|"
 msgid "Please specify a valid ID for this placemark."
-msgstr "請指定地標的代碼。"
+msgstr "請指定此地標的代碼。"
 
 #: src/lib/marble/EditPlacemarkDialog.cpp:381
 msgctxt "Marble::EditPlacemarkDialog|"
@@ -5547,11 +5450,9 @@ msgid "No image specified"
 msgstr "沒有指定影像"
 
 #: src/lib/marble/EditPlacemarkDialog.cpp:382
-#, fuzzy
-#| msgid "Please specify an icon for this placemark."
 msgctxt "Marble::EditPlacemarkDialog|"
 msgid "Please specify an icon for this placemark or add a valid tag."
-msgstr "請指定地標的圖示。"
+msgstr "請指定此地標的圖示或是添加有效的標籤。"
 
 #: src/lib/marble/EditPlacemarkDialog.cpp:385
 msgctxt "Marble::EditPlacemarkDialog|"
@@ -5564,11 +5465,9 @@ msgid "Please specify a valid path for the icon file."
 msgstr "請指定圖示檔的有效路徑。"
 
 #: src/lib/marble/EditPlacemarkDialog.ui:20
-#, fuzzy
-#| msgid "Cloud placemark"
 msgctxt "UiEditPlacemarkDialog|"
 msgid "Edit placemark"
-msgstr "雲端地標"
+msgstr "編輯地標"
 
 #: src/lib/marble/EditPlacemarkDialog.ui:38
 msgctxt "UiEditPlacemarkDialog|"
@@ -5607,14 +5506,12 @@ msgstr "刻度列"
 #: src/lib/marble/EditPlacemarkDialog.ui:170
 msgctxt "UiEditPlacemarkDialog|"
 msgid "Icon"
-msgstr ""
+msgstr "圖示"
 
 #: src/lib/marble/EditPlacemarkDialog.ui:285
-#, fuzzy
-#| msgid "Local placemark"
 msgctxt "UiEditPlacemarkDialog|"
 msgid "Show placemark"
-msgstr "本地地標"
+msgstr "顯示地標"
 
 #: src/lib/marble/EditPlacemarkDialog.ui:326
 #: src/lib/marble/EditPlacemarkDialog.ui:329
@@ -5640,19 +5537,15 @@ msgstr "底線"
 
 #: src/lib/marble/EditPlacemarkDialog.ui:368
 #: src/lib/marble/EditPlacemarkDialog.ui:371
-#, fuzzy
-#| msgid "Add Via"
 msgctxt "UiEditPlacemarkDialog|"
 msgid "Add image"
-msgstr "新增途徑"
+msgstr "新增影像"
 
 #: src/lib/marble/EditPlacemarkDialog.ui:380
 #: src/lib/marble/EditPlacemarkDialog.ui:383
-#, fuzzy
-#| msgid "Add Via"
 msgctxt "UiEditPlacemarkDialog|"
 msgid "Add link"
-msgstr "新增途徑"
+msgstr "新增連結"
 
 #: src/lib/marble/ElevationWidget.ui:19
 msgctxt "ElevationWidget|"
@@ -5660,11 +5553,9 @@ msgid "Elevation:"
 msgstr "高度："
 
 #: src/lib/marble/ElevationWidget.ui:26
-#, fuzzy
-#| msgid "0 m"
 msgctxt "ElevationWidget|"
 msgid " m"
-msgstr "0 公尺"
+msgstr " 公尺"
 
 #: src/lib/marble/ElevationWidget.ui:36
 msgctxt "ElevationWidget|"
@@ -5708,34 +5599,26 @@ msgstr ""
 #: src/lib/marble/ExternalEditor.ui:51
 msgctxt "ExternalEditor|"
 msgid "Make my selection the default map editor"
-msgstr ""
+msgstr "將我的選擇設為預設的地圖編輯器"
 
 #: src/lib/marble/ExternalEditor.ui:69
-#, fuzzy
-#| msgid "Address Details"
 msgctxt "ExternalEditor|"
 msgid "Editor Details"
-msgstr "地址詳情"
+msgstr "編輯器詳情"
 
 #: src/lib/marble/ExternalEditor.ui:81
-#, fuzzy
-#| msgid "Print Previe&w ..."
 msgctxt "ExternalEditor|"
 msgid "Editor Preview"
-msgstr "預覽列印(&W)..."
+msgstr "編輯器預覽"
 
 #: src/lib/marble/ExternalEditor.ui:103
-#, fuzzy
-#| msgid ""
-#| "Potlatch is an OpenStreetMap editor for quick editing tasks targeted at "
-#| "beginners. It requires a web browser with flash support."
 msgctxt "ExternalEditor|"
 msgid ""
 "iD is an OpenStreetMap editor for quick editing tasks and beginners. It "
 "requires a web browser."
 msgstr ""
-"Potlatch 是一個 OpenStreetMap 的編輯器，為初學者與快速編輯工作而設計的。它需"
-"要一套支援 flash 的網頁瀏覽器。"
+"iD 是一個 OpenStreetMap 編輯器，提供初心者的快速編輯工作使用。它需要網路瀏覽"
+"器。"
 
 #: src/lib/marble/ExternalEditorDialog.cpp:87
 msgctxt "Marble::ExternalEditorDialog|"
@@ -5765,20 +5648,13 @@ msgstr ""
 "Java 的系統都能使用。需要 Java SE-compatible runtime。"
 
 #: src/lib/marble/ExternalEditorDialog.cpp:101
-#, fuzzy
-#| msgid ""
-#| "Potlatch is a very easy to use OpenStreetMap editor, though lacks the "
-#| "power of Merkaartor and JOSM. It runs on all platforms for which web "
-#| "browsers with Flash support are available. Performance of Potlatch is "
-#| "depending on the quality of the installed Flash version."
 msgctxt "Marble::ExternalEditorDialog|"
 msgid ""
 "iD is a very easy to use OpenStreetMap editor, though lacks the power of "
 "Merkaartor and JOSM. It runs on all platforms with a web browser."
 msgstr ""
-"Potlatch 是一套簡易的 OpenStreetMap 編輯器，不如 Merkaartor 與 JOSM 強大。它"
-"只需要瀏覽器上支援 Flash 即可。依據安裝的 Flash 版本，Potlatch 的效能也會有所"
-"不同。"
+"iD 是一個非常容易使用的 OpenStreetMap 編輯器，但比起 Merkaartor 與 JOSM 功能"
+"沒有那麼充足。它支援任何有提供網路瀏覽器的平台。"
 
 #: src/lib/marble/FileViewWidget.cpp:71
 msgctxt "QObject|"
@@ -5788,7 +5664,7 @@ msgstr "檢視屬性"
 #: src/lib/marble/FileViewWidget.cpp:146
 msgctxt "QObject|"
 msgid "Select filename for KML document"
-msgstr ""
+msgstr "選擇 KML 文件的檔案名稱"
 
 #: src/lib/marble/FileViewWidget.ui:14
 msgctxt "FileViewWidget|"
@@ -5806,11 +5682,9 @@ msgid "&Close"
 msgstr "關閉(&C)"
 
 #: src/lib/marble/FlyToEditWidget.cpp:45
-#, fuzzy
-#| msgid "Wait duration:"
 msgctxt "Marble::FlyToEditWidget|"
 msgid "Duration:"
-msgstr "等待期間："
+msgstr "時長："
 
 #: src/lib/marble/FlyToEditWidget.cpp:51
 msgctxt "Marble::FlyToEditWidget|seconds"
@@ -5820,19 +5694,17 @@ msgstr " 秒"
 #: src/lib/marble/FlyToEditWidget.cpp:57
 msgctxt "Marble::FlyToEditWidget|"
 msgid "Mode:"
-msgstr ""
+msgstr "模式："
 
 #: src/lib/marble/FlyToEditWidget.cpp:62
 msgctxt "Marble::FlyToEditWidget|"
 msgid "Smooth"
-msgstr ""
+msgstr "平滑"
 
 #: src/lib/marble/FlyToEditWidget.cpp:63
-#, fuzzy
-#| msgid "Boundaries"
 msgctxt "Marble::FlyToEditWidget|"
 msgid "Bounce"
-msgstr "邊界"
+msgstr "彈跳"
 
 #: src/lib/marble/FlyToEditWidget.cpp:80
 msgctxt "Marble::FlyToEditWidget|"
@@ -5932,11 +5804,9 @@ msgid "96"
 msgstr ""
 
 #: src/lib/marble/FormattedTextWidget.ui:148
-#, fuzzy
-#| msgid "Main ToolBar"
 msgctxt "FormattedTextWidget|"
 msgid "toolBar"
-msgstr "主工具列"
+msgstr "工具列"
 
 #: src/lib/marble/FormattedTextWidget.ui:190
 #: src/lib/marble/FormattedTextWidget.ui:193
@@ -5962,11 +5832,9 @@ msgstr "底線"
 
 #: src/lib/marble/FormattedTextWidget.ui:232
 #: src/lib/marble/FormattedTextWidget.ui:235
-#, fuzzy
-#| msgid "Add Via"
 msgctxt "FormattedTextWidget|"
 msgid "Add image"
-msgstr "新增途徑"
+msgstr "新增影像"
 
 #: src/lib/marble/FormattedTextWidget.ui:244
 #: src/lib/marble/FormattedTextWidget.ui:247
@@ -6155,15 +6023,11 @@ msgid "OSM Site"
 msgstr ""
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:349
-#, fuzzy
-#| msgid "Coordinates:"
 msgctxt "GeoDataPlacemark|"
 msgid "Coordinate"
-msgstr "座標："
+msgstr "座標"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:350
-#, fuzzy
-#| msgid "Bookmarks"
 msgctxt "GeoDataPlacemark|"
 msgid "Bookmark"
 msgstr "書籤"
@@ -6253,18 +6117,14 @@ msgid "Beach"
 msgstr "海灘"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:370
-#, fuzzy
-#| msgid "Heathland"
 msgctxt "GeoDataPlacemark|"
 msgid "Wetland"
-msgstr "荒地"
+msgstr "溼地"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:371
-#, fuzzy
-#| msgid "Ice and Glaciers"
 msgctxt "GeoDataPlacemark|"
 msgid "Glacier"
-msgstr "冰原與冰河"
+msgstr "冰河"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:372
 msgctxt "GeoDataPlacemark|"
@@ -6294,11 +6154,9 @@ msgid "Traffic Signals"
 msgstr ""
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:377
-#, fuzzy
-#| msgid "Elevation"
 msgctxt "GeoDataPlacemark|"
 msgid "Elevator"
-msgstr "高度"
+msgstr "電梯"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:378
 msgctxt "GeoDataPlacemark|"
@@ -6325,11 +6183,9 @@ msgstr "人行步道"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:382
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:579
-#, fuzzy
-#| msgid "Track: "
 msgctxt "GeoDataPlacemark|"
 msgid "Track"
-msgstr "追蹤："
+msgstr "軌跡"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:384
 msgctxt "GeoDataPlacemark|"
@@ -6511,8 +6367,6 @@ msgid "Kindergarten"
 msgstr "啤酒花園"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:411
-#, fuzzy
-#| msgid "college"
 msgctxt "GeoDataPlacemark|"
 msgid "College"
 msgstr "學院"
@@ -6596,12 +6450,9 @@ msgid "Pharmacy"
 msgstr "藥房"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:424
-#, fuzzy
-#| msgctxt "Name of a satellite group"
-#| msgid "Geostationary"
 msgctxt "GeoDataPlacemark|"
 msgid "Veterinary"
-msgstr "人造衛星"
+msgstr "獸醫"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:425
 msgctxt "GeoDataPlacemark|"
@@ -6621,7 +6472,7 @@ msgstr ""
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:428
 msgctxt "GeoDataPlacemark|"
 msgid "Embassy"
-msgstr ""
+msgstr "大使館"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:429
 msgctxt "GeoDataPlacemark|"
@@ -6862,7 +6713,7 @@ msgstr "投影"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:469
 msgctxt "GeoDataPlacemark|"
 msgid "Convenience Shop"
-msgstr ""
+msgstr "便利商店"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:470
 msgctxt "GeoDataPlacemark|"
@@ -7005,11 +6856,9 @@ msgid "Car Parts"
 msgstr "車（最快）"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:496
-#, fuzzy
-#| msgid "Motorway"
 msgctxt "GeoDataPlacemark|"
 msgid "Motorcycle Shop"
-msgstr "高速公路"
+msgstr "機車行"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:497
 msgctxt "GeoDataPlacemark|"
@@ -7057,7 +6906,7 @@ msgstr "書籤"
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:504
 msgctxt "GeoDataPlacemark|"
 msgid "Gift Shop"
-msgstr ""
+msgstr "禮品店"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:505
 #, fuzzy
@@ -7188,11 +7037,9 @@ msgid "Cinema"
 msgstr "電影院"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:526
-#, fuzzy
-#| msgid "International"
 msgctxt "GeoDataPlacemark|"
 msgid "Information"
-msgstr "國際"
+msgstr "資訊"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:527
 #, fuzzy
@@ -7228,18 +7075,14 @@ msgid "Theme Park"
 msgstr "主題公園"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:532
-#, fuzzy
-#| msgid "view point"
 msgctxt "GeoDataPlacemark|"
 msgid "View Point"
 msgstr "景點"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:533
-#, fuzzy
-#| msgid "Zoom &In"
 msgctxt "GeoDataPlacemark|"
 msgid "Zoo"
-msgstr "放大(&I)"
+msgstr "動物園"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:534
 msgctxt "GeoDataPlacemark|"
@@ -7315,11 +7158,9 @@ msgid "Car Sharing"
 msgstr "太陽陰影(&A)："
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:547
-#, fuzzy
-#| msgid "bus station"
 msgctxt "GeoDataPlacemark|"
 msgid "Gas Station"
-msgstr "公車站"
+msgstr "加油站"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:548
 #, fuzzy
@@ -7388,11 +7229,9 @@ msgid "Bicycle Parking"
 msgstr "腳踏車（競賽）"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:558
-#, fuzzy
-#| msgid "Bicycle (Racer)"
 msgctxt "GeoDataPlacemark|"
 msgid "Motorcycle Parking"
-msgstr "腳踏車（競賽）"
+msgstr "機車停車處"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:559
 msgctxt "GeoDataPlacemark|"
@@ -7400,18 +7239,14 @@ msgid "Subway Entrance"
 msgstr "地下鐵入口"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:560
-#, fuzzy
-#| msgid "speed camera"
 msgctxt "GeoDataPlacemark|"
 msgid "Speed Camera"
-msgstr "超速照相機"
+msgstr "測速照相機"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:561
-#, fuzzy
-#| msgid "Places of Interest"
 msgctxt "GeoDataPlacemark|"
 msgid "Place Of Worship"
-msgstr "重要地標"
+msgstr "宗教"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:562
 msgctxt "GeoDataPlacemark|"
@@ -7464,8 +7299,6 @@ msgid "Taoist"
 msgstr "道教"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:572
-#, fuzzy
-#| msgid "Golf course"
 msgctxt "GeoDataPlacemark|"
 msgid "Golf Course"
 msgstr "高爾夫球場"
@@ -7529,18 +7362,14 @@ msgid "Basin"
 msgstr ""
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:584
-#, fuzzy
-#| msgid "Speedometer"
 msgctxt "GeoDataPlacemark|"
 msgid "Cemetery"
-msgstr "Speedometer"
+msgstr "公墓"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:585
-#, fuzzy
-#| msgid "Commercial Area"
 msgctxt "GeoDataPlacemark|"
 msgid "Commercial"
-msgstr "商業區"
+msgstr "商業"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:586
 #, fuzzy
@@ -7735,7 +7564,7 @@ msgstr ""
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:617
 msgctxt "GeoDataPlacemark|"
 msgid "Gondola"
-msgstr ""
+msgstr "纜車"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:618
 msgctxt "GeoDataPlacemark|"
@@ -7905,11 +7734,9 @@ msgid "Admin Boundary (Level 11)"
 msgstr ""
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:649
-#, fuzzy
-#| msgid "Boundaries"
 msgctxt "GeoDataPlacemark|"
 msgid "Boundary (Maritime)"
-msgstr "邊界"
+msgstr "邊界（海洋）"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:650
 #, fuzzy
@@ -8155,13 +7982,12 @@ msgid "Could not convert <minimum> child text content to integer. Was: '%1'"
 msgstr "無法轉換 <minimum> 子文字內容到整數：%1"
 
 #: src/lib/marble/geodata/parser/GeoParser.cpp:87
-#, fuzzy, qt-format
-#| msgid "Parsing failed. Still %1 unclosed tags after document end."
+#, qt-format
 msgctxt "QObject|"
 msgid "Parsing failed line %1. Still %n unclosed tag(s) after document end. "
 msgid_plural ""
 "Parsing failed line %1. Still %n unclosed tag(s) after document end. "
-msgstr[0] "剖析失敗。在文件結束後仍然有 %1 個未關閉的標籤。"
+msgstr[0] "剖析失敗，行數為 %1。文件結束了但卻還有 %n 個未關閉的標籤。"
 
 #: src/lib/marble/geodata/parser/GeoParser.cpp:124
 #, qt-format
@@ -8224,11 +8050,9 @@ msgid_plural "%n result(s) found."
 msgstr[0] "找不到路徑"
 
 #: src/lib/marble/GoToDialog.ui:14
-#, fuzzy
-#| msgid "&Go To..."
 msgctxt "GoTo|"
 msgid "Go To..."
-msgstr "移至(&G)..."
+msgstr "前往…"
 
 #: src/lib/marble/GoToDialog.ui:78
 msgctxt "GoTo|"
@@ -8253,11 +8077,9 @@ msgid "Select a geographic region"
 msgstr "選擇一個地理區域"
 
 #: src/lib/marble/LatLonBoxWidget.ui:41
-#, fuzzy
-#| msgid "Latitude"
 msgctxt "LatLonBoxWidget|"
 msgid "Northern Latitude"
-msgstr "緯度"
+msgstr "北緯"
 
 #: src/lib/marble/LatLonBoxWidget.ui:47 src/lib/marble/LatLonBoxWidget.ui:99
 #: src/lib/marble/LatLonBoxWidget.ui:151 src/lib/marble/LatLonBoxWidget.ui:203
@@ -8266,53 +8088,39 @@ msgid "°"
 msgstr "°"
 
 #: src/lib/marble/LatLonBoxWidget.ui:66
-#, fuzzy
-#| msgid "N"
 msgctxt "LatLonBoxWidget|"
 msgid "&N"
-msgstr "N"
+msgstr "北(&N)"
 
 #: src/lib/marble/LatLonBoxWidget.ui:93
-#, fuzzy
-#| msgid "Center map on longitude"
 msgctxt "LatLonBoxWidget|"
 msgid "Western Longitude"
-msgstr "將地圖置中於經度"
+msgstr "西經"
 
 #: src/lib/marble/LatLonBoxWidget.ui:118
-#, fuzzy
-#| msgid "W"
 msgctxt "LatLonBoxWidget|"
 msgid "&W"
-msgstr "西"
+msgstr "西(&W)"
 
 #: src/lib/marble/LatLonBoxWidget.ui:145
-#, fuzzy
-#| msgid "Longitude"
 msgctxt "LatLonBoxWidget|"
 msgid "Eastern Longitude"
-msgstr "經度"
+msgstr "東經"
 
 #: src/lib/marble/LatLonBoxWidget.ui:170
-#, fuzzy
-#| msgid "E"
 msgctxt "LatLonBoxWidget|"
 msgid "&E"
-msgstr "東"
+msgstr "東(&E)"
 
 #: src/lib/marble/LatLonBoxWidget.ui:197
-#, fuzzy
-#| msgid "Latitude"
 msgctxt "LatLonBoxWidget|"
 msgid "Southern Latitude"
-msgstr "緯度"
+msgstr "南緯"
 
 #: src/lib/marble/LatLonBoxWidget.ui:222
-#, fuzzy
-#| msgid "S"
 msgctxt "LatLonBoxWidget|"
 msgid "&S"
-msgstr "S"
+msgstr "南(&S)"
 
 #: src/lib/marble/LatLonEdit.cpp:129
 msgctxt "Marble::LatLonEdit|"
@@ -8342,12 +8150,12 @@ msgstr "西"
 #: src/lib/marble/LatLonEdit.cpp:530
 msgctxt "Marble::LatLonEdit|North, the direction"
 msgid "N"
-msgstr "N"
+msgstr "北"
 
 #: src/lib/marble/LatLonEdit.cpp:531
 msgctxt "Marble::LatLonEdit|South, the direction"
 msgid "S"
-msgstr "S"
+msgstr "南"
 
 #: src/lib/marble/LatLonEdit.ui:28
 msgctxt "LatLonEditPrivate|"
@@ -8629,11 +8437,9 @@ msgid "Base Tile"
 msgstr "基底鋪排"
 
 #: src/lib/marble/MapWizard.cpp:471
-#, fuzzy
-#| msgid "Legend"
 msgctxt "Marble::MapWizard|"
 msgid "Legend Image"
-msgstr "圖例"
+msgstr "圖例影像"
 
 #: src/lib/marble/MapWizard.cpp:478 src/lib/marble/MapWizard.cpp:486
 #, fuzzy, qt-format
@@ -8876,7 +8682,7 @@ msgstr ""
 #: src/lib/marble/MapWizard.ui:83
 msgctxt "MapWizard|"
 msgid "A single image showing the whole world"
-msgstr ""
+msgstr "顯示全世界的單一影像"
 
 #: src/lib/marble/MapWizard.ui:90
 msgctxt "MapWizard|"
@@ -8955,12 +8761,9 @@ msgid ""
 msgstr ""
 
 #: src/lib/marble/MapWizard.ui:166 src/lib/marble/MapWizard.ui:465
-#, fuzzy
-#| msgctxt "MapWizard|"
-#| msgid "http://"
 msgctxt "MapWizard|"
 msgid "https://"
-msgstr "http://"
+msgstr "https://"
 
 #: src/lib/marble/MapWizard.ui:218
 #, fuzzy
@@ -9081,7 +8884,7 @@ msgstr ""
 #: src/lib/marble/MapWizard.ui:479
 msgctxt "MapWizard|"
 msgid "Color"
-msgstr ""
+msgstr "色彩"
 
 #: src/lib/marble/MapWizard.ui:498
 msgctxt "MapWizard|"
@@ -9156,11 +8959,9 @@ msgstr ""
 "到網際網路，請點選「維基百科」分頁取得更多資訊。</p></body></html>"
 
 #: src/lib/marble/MapWizard.ui:573
-#, fuzzy
-#| msgid "Source Image"
 msgctxt "MapWizard|"
 msgid "Source Image:"
-msgstr "來源影像"
+msgstr "來源影像："
 
 #: src/lib/marble/MapWizard.ui:589 src/lib/marble/MapWizard.ui:874
 msgctxt "MapWizard|"
@@ -9225,18 +9026,6 @@ msgid "URL Scheme:"
 msgstr ""
 
 #: src/lib/marble/MapWizard.ui:690
-#, fuzzy
-#| msgid ""
-#| "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
-#| "REC-html40/strict.dtd\">\n"
-#| "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
-#| "css\">\n"
-#| "p, li { white-space: pre-wrap; }\n"
-#| "</style></head><body style=\" font-family:'DejaVu Sans'; font-size:10pt; "
-#| "font-weight:400; font-style:normal;\">\n"
-#| "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#| "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
-#| "weight:600;\">000,0 km/h</span></p></body></html>"
 msgctxt "MapWizard|"
 msgid ""
 "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
@@ -9260,11 +9049,15 @@ msgstr ""
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
 "\">\n"
 "p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:'DejaVu Sans'; font-size:10pt; "
-"font-weight:400; font-style:normal;\">\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"</style></head><body style=\" font-family:'Bitstream Vera Sans'; font-"
+"size:9pt; font-weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
 "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
-"weight:600;\">000,0 km/h</span></p></body></html>"
+"family:'Sans Serif'; font-weight:600;\">一般資訊</span></p>\n"
+"<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+"family:'Sans Serif';\">請為您的新地圖指定標題、名稱與圖示。也可以提供描述來讓"
+"其他使用者知道您的地圖是做什麼的。</span></p></body></html>"
 
 #: src/lib/marble/MapWizard.ui:707
 #, fuzzy
@@ -9296,11 +9089,9 @@ msgid "The folder name of your new theme."
 msgstr ""
 
 #: src/lib/marble/MapWizard.ui:753
-#, fuzzy
-#| msgid "Description"
 msgctxt "MapWizard|"
 msgid "Description:"
-msgstr "描述"
+msgstr "描述："
 
 #: src/lib/marble/MapWizard.ui:772
 msgctxt "MapWizard|"
@@ -9309,6 +9100,8 @@ msgid ""
 "about the purpose, origin, copyright and license of the data used in your "
 "map theme."
 msgstr ""
+"您的地圖主題的簡短描述。在此您可以提供您的地圖主題及其資料相關的資訊，例如用"
+"意、來源、著作權資訊與資料的授權條款。"
 
 #: src/lib/marble/MapWizard.ui:775
 msgctxt "MapWizard|"
@@ -9316,15 +9109,11 @@ msgid "It will appear in a tool tip and may contain HTML formatting."
 msgstr ""
 
 #: src/lib/marble/MapWizard.ui:788 src/lib/marble/MapWizard.ui:990
-#, fuzzy
-#| msgid "Preview Image"
 msgctxt "MapWizard|"
 msgid "Preview Image:"
-msgstr "預覽影像"
+msgstr "預覽影像："
 
 #: src/lib/marble/MapWizard.ui:803
-#, fuzzy
-#| msgid "Preview Image"
 msgctxt "MapWizard|"
 msgid "preview image"
 msgstr "預覽影像"
@@ -9342,11 +9131,9 @@ msgid "<b>Optional: Addition of a Map Key</b>"
 msgstr ""
 
 #: src/lib/marble/MapWizard.ui:864
-#, fuzzy
-#| msgid "Legend"
 msgctxt "MapWizard|"
 msgid "Legend Image:"
-msgstr "圖例"
+msgstr "圖例影像："
 
 #: src/lib/marble/MapWizard.ui:925
 #, fuzzy
@@ -10331,9 +10118,9 @@ msgid ""
 "and Christopher Elvidge of NOAA NGDC. Image by Craig Mayhew and Robert "
 "Simmon, NASA GSFC.</p>"
 msgstr ""
-"<p><i>Earth's City Lights</i><br />Data courtesy Marc Imhoff of NASA GSFC "
-"and Christopher Elvidge of NOAA NGDC. Image by Craig Mayhew and Robert "
-"Simmon, NASA GSFC.</p>"
+"<p><i>地球的城市燈光</i><br />資料鳴謝 Marc Imhoff (NASA GSFC) 與 "
+"Christopher Elvidge (NOAA NGDC)。影像來自 Craig Mayhew 與 Robert Simmon "
+"(NASA GSFC)。</p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:272
 #, fuzzy
@@ -10920,12 +10707,12 @@ msgstr "硬碟快取(&H)："
 #: src/lib/marble/MarbleCacheSettingsWidget.ui:124
 msgctxt "MarbleCacheSettingsWidget|"
 msgid "Unlimited"
-msgstr ""
+msgstr "無限制"
 
 #: src/lib/marble/MarbleCacheSettingsWidget.ui:146
 msgctxt "MarbleCacheSettingsWidget|"
 msgid "Cl&ear"
-msgstr ""
+msgstr "清除(&E)"
 
 #: src/lib/marble/MarbleCacheSettingsWidget.ui:169
 msgctxt "MarbleCacheSettingsWidget|"
@@ -10966,7 +10753,7 @@ msgstr "連接埠(&O)："
 #: src/lib/marble/MarbleCacheSettingsWidget.ui:256
 msgctxt "MarbleCacheSettingsWidget|"
 msgid "Proxy type:"
-msgstr ""
+msgstr "代理伺服器型態："
 
 #: src/lib/marble/MarbleCacheSettingsWidget.ui:264
 msgctxt "MarbleCacheSettingsWidget|"
@@ -10987,7 +10774,7 @@ msgstr "需要認證"
 #: src/lib/marble/MarbleCacheSettingsWidget.ui:326
 msgctxt "MarbleCacheSettingsWidget|"
 msgid "U&sername:"
-msgstr ""
+msgstr "使用者名稱(&S)："
 
 #: src/lib/marble/MarbleCacheSettingsWidget.ui:336
 msgctxt "MarbleCacheSettingsWidget|"
@@ -11014,7 +10801,7 @@ msgstr "啟用路徑同步"
 #: src/lib/marble/MarbleCloudSyncSettingsWidget.ui:84
 msgctxt "MarbleCloudSyncSettingsWidget|"
 msgid "Automatically sync all bookmarks to the server."
-msgstr ""
+msgstr "自動將書籤與伺服器同步。"
 
 #: src/lib/marble/MarbleCloudSyncSettingsWidget.ui:87
 msgctxt "MarbleCloudSyncSettingsWidget|"
@@ -11024,22 +10811,22 @@ msgstr "啟用書籤同步"
 #: src/lib/marble/MarbleCloudSyncSettingsWidget.ui:119
 msgctxt "MarbleCloudSyncSettingsWidget|"
 msgid "Sync now"
-msgstr ""
+msgstr "現在同步"
 
 #: src/lib/marble/MarbleCloudSyncSettingsWidget.ui:147
 msgctxt "MarbleCloudSyncSettingsWidget|"
 msgid "Credentials"
-msgstr ""
+msgstr "認證資訊"
 
 #: src/lib/marble/MarbleCloudSyncSettingsWidget.ui:153
 msgctxt "MarbleCloudSyncSettingsWidget|"
 msgid "Server:"
-msgstr ""
+msgstr "伺服器："
 
 #: src/lib/marble/MarbleCloudSyncSettingsWidget.ui:160
 msgctxt "MarbleCloudSyncSettingsWidget|"
 msgid "Remote server URL, e.g. myserver.com/owncloud"
-msgstr ""
+msgstr "遠端伺服器網址，例如 example.com/owncloud"
 
 #: src/lib/marble/MarbleCloudSyncSettingsWidget.ui:167
 msgctxt "MarbleCloudSyncSettingsWidget|"
@@ -11049,7 +10836,7 @@ msgstr "使用者名稱："
 #: src/lib/marble/MarbleCloudSyncSettingsWidget.ui:181
 msgctxt "MarbleCloudSyncSettingsWidget|"
 msgid "Password:"
-msgstr ""
+msgstr "密碼："
 
 #: src/lib/marble/MarbleCloudSyncSettingsWidget.ui:197
 msgctxt "MarbleCloudSyncSettingsWidget|"
@@ -11167,7 +10954,7 @@ msgstr "跟隨滑鼠指標"
 #: src/lib/marble/MarbleNavigationSettingsWidget.ui:73
 msgctxt "MarbleNavigationSettingsWidget|"
 msgid "Use kinetic spinning when dragging the map"
-msgstr ""
+msgstr "拖曳地圖時利用慣性旋轉"
 
 #: src/lib/marble/MarbleNavigationSettingsWidget.ui:76
 msgctxt "MarbleNavigationSettingsWidget|"
@@ -11205,7 +10992,7 @@ msgstr "動畫顯示移動位置(&A)"
 #: src/lib/marble/MarbleNavigationSettingsWidget.ui:96
 msgctxt "MarbleNavigationSettingsWidget|"
 msgid "Use right mouse button to rotate the camera around"
-msgstr ""
+msgstr "使用滑鼠右鍵來旋轉相機"
 
 #: src/lib/marble/MarbleNavigationSettingsWidget.ui:99
 msgctxt "MarbleNavigationSettingsWidget|"
@@ -11263,6 +11050,8 @@ msgid ""
 "josm or merkaartor, make sure that the respective application is installed.</"
 "p>"
 msgstr ""
+"<p>啟動來編輯地圖用的應用程式。Potlatch（預設）需要有安裝支援 Flash 的瀏覽"
+"器。選擇 josm 或 merkaartor 時請確保已安裝對應的應用程式。</p>"
 
 #: src/lib/marble/MarbleNavigationSettingsWidget.ui:198
 msgctxt "MarbleNavigationSettingsWidget|"
@@ -11356,11 +11145,9 @@ msgid "Tilts the globe's axis away from the user."
 msgstr "將地球的軸遠離使用者。"
 
 #: src/lib/marble/MarbleNavigator.ui:151
-#, fuzzy
-#| msgid "Zoom &In"
 msgctxt "MarbleNavigator|"
 msgid "Zoom In"
-msgstr "放大(&I)"
+msgstr "放大"
 
 #: src/lib/marble/MarbleNavigator.ui:154
 #, fuzzy
@@ -11385,11 +11172,9 @@ msgid "Use this slider to adjust the zoom level of the map."
 msgstr "使用此滑動器來調整縮放等級。"
 
 #: src/lib/marble/MarbleNavigator.ui:209
-#, fuzzy
-#| msgid "Zoom &Out"
 msgctxt "MarbleNavigator|"
 msgid "Zoom Out"
-msgstr "縮小(&O)"
+msgstr "縮小"
 
 #: src/lib/marble/MarbleNavigator.ui:212
 #, fuzzy
@@ -11484,8 +11269,6 @@ msgid "P&lugins"
 msgstr "外掛程式(&L)"
 
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:23
-#, fuzzy
-#| msgid "Time Zones"
 msgctxt "MarbleTimeSettingsWidget|"
 msgid "Time Zone"
 msgstr "時區"
@@ -11498,14 +11281,12 @@ msgstr ""
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:39
 msgctxt "MarbleTimeSettingsWidget|"
 msgid "System time zone"
-msgstr ""
+msgstr "系統時區"
 
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:51
-#, fuzzy
-#| msgid "Choose image"
 msgctxt "MarbleTimeSettingsWidget|"
 msgid "Choose Time zone"
-msgstr "選擇影像"
+msgstr "選擇時區"
 
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:68
 #, fuzzy
@@ -11527,11 +11308,9 @@ msgid "Eastern European Time"
 msgstr "日期與時間"
 
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:83
-#, fuzzy
-#| msgid "Date and Time"
 msgctxt "MarbleTimeSettingsWidget|"
 msgid "Egypt Standard Time"
-msgstr "日期與時間"
+msgstr "埃及標準時間"
 
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:88
 #, fuzzy
@@ -11556,21 +11335,19 @@ msgid "Pakistan Lahore Time"
 msgstr ""
 
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:108
-#, fuzzy
-#| msgid "Date and Time"
 msgctxt "MarbleTimeSettingsWidget|"
 msgid "India Standard Time"
-msgstr "日期與時間"
+msgstr "印度標準時間"
 
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:113
 msgctxt "MarbleTimeSettingsWidget|"
 msgid "Bangladesh Standard Time"
-msgstr ""
+msgstr "孟加拉標準時間"
 
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:118
 msgctxt "MarbleTimeSettingsWidget|"
 msgid "Vietnam Standard Time"
-msgstr ""
+msgstr "越南標準時間"
 
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:123
 #, fuzzy
@@ -11580,11 +11357,9 @@ msgid "China Taiwan Time"
 msgstr "日期與時間"
 
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:128
-#, fuzzy
-#| msgid "Date and Time"
 msgctxt "MarbleTimeSettingsWidget|"
 msgid "Japan Standard Time"
-msgstr "日期與時間"
+msgstr "日本標準時間"
 
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:133
 msgctxt "MarbleTimeSettingsWidget|"
@@ -11599,12 +11374,12 @@ msgstr ""
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:143
 msgctxt "MarbleTimeSettingsWidget|"
 msgid "Solomon Standard Time"
-msgstr ""
+msgstr "索羅門標準時間"
 
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:148
 msgctxt "MarbleTimeSettingsWidget|"
 msgid "New Zealand Standard Time"
-msgstr ""
+msgstr "紐西蘭標準時間"
 
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:153
 #, fuzzy
@@ -11614,23 +11389,19 @@ msgid "Midway Islands Time"
 msgstr "日期與時間"
 
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:158
-#, fuzzy
-#| msgid "Date and Time"
 msgctxt "MarbleTimeSettingsWidget|"
 msgid "Hawaii Standard Time"
-msgstr "日期與時間"
+msgstr "夏威夷標準時間"
 
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:163
-#, fuzzy
-#| msgid "Date and Time"
 msgctxt "MarbleTimeSettingsWidget|"
 msgid "Alaska Standard Time"
-msgstr "日期與時間"
+msgstr "阿拉斯加標準時間"
 
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:168
 msgctxt "MarbleTimeSettingsWidget|"
 msgid "Pacific Standard Time"
-msgstr ""
+msgstr "太平洋標準時間"
 
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:173
 msgctxt "MarbleTimeSettingsWidget|"
@@ -11640,24 +11411,22 @@ msgstr ""
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:178
 msgctxt "MarbleTimeSettingsWidget|"
 msgid "Mountain Standard Time"
-msgstr ""
+msgstr "山脈標準時間"
 
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:183
 msgctxt "MarbleTimeSettingsWidget|"
 msgid "Central Standard Time"
-msgstr ""
+msgstr "中部標準時間"
 
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:188
-#, fuzzy
-#| msgid "Date and Time"
 msgctxt "MarbleTimeSettingsWidget|"
 msgid "Eastern Standard Time"
-msgstr "日期與時間"
+msgstr "東部標準時間"
 
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:193
 msgctxt "MarbleTimeSettingsWidget|"
 msgid "Indiana Eastern Standard Time"
-msgstr ""
+msgstr "印第安納標準時間"
 
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:198
 msgctxt "MarbleTimeSettingsWidget|"
@@ -11672,7 +11441,7 @@ msgstr ""
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:208
 msgctxt "MarbleTimeSettingsWidget|"
 msgid "Argentina Standard Time"
-msgstr ""
+msgstr "阿根廷標準時間"
 
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:213
 msgctxt "MarbleTimeSettingsWidget|"
@@ -11687,21 +11456,17 @@ msgstr ""
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:231
 msgctxt "MarbleTimeSettingsWidget|"
 msgid "When Marble starts"
-msgstr ""
+msgstr "Marble 啟動時"
 
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:237
-#, fuzzy
-#| msgid "Load Osm File"
 msgctxt "MarbleTimeSettingsWidget|"
 msgid "Load system time"
-msgstr "載入 Osm 檔"
+msgstr "載入系統時間"
 
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:247
-#, fuzzy
-#| msgid "Load Annotation File"
 msgctxt "MarbleTimeSettingsWidget|"
 msgid "Load last session time"
-msgstr "載入註記檔"
+msgstr "載入上次使用的時間"
 
 #: src/lib/marble/MarbleViewSettingsWidget.ui:17
 msgctxt "MarbleViewSettingsWidget|"
@@ -11709,11 +11474,9 @@ msgid "&Units"
 msgstr "單位(&U)"
 
 #: src/lib/marble/MarbleViewSettingsWidget.ui:35
-#, fuzzy
-#| msgid "Distance:"
 msgctxt "MarbleViewSettingsWidget|"
 msgid "&Distance:"
-msgstr "距離："
+msgstr "距離(&D)："
 
 #: src/lib/marble/MarbleViewSettingsWidget.ui:54
 msgctxt "MarbleViewSettingsWidget|"
@@ -11749,7 +11512,7 @@ msgstr "英哩、英呎"
 #: src/lib/marble/MarbleViewSettingsWidget.ui:71
 msgctxt "MarbleViewSettingsWidget|"
 msgid "Nautical miles, Knots"
-msgstr ""
+msgstr "海哩、節"
 
 #: src/lib/marble/MarbleViewSettingsWidget.ui:85
 msgctxt "MarbleViewSettingsWidget|"
@@ -11803,7 +11566,7 @@ msgstr "地圖品質(&Q)"
 #: src/lib/marble/MarbleViewSettingsWidget.ui:144
 msgctxt "MarbleViewSettingsWidget|"
 msgid "&Still image:"
-msgstr ""
+msgstr "固定影像(&S)："
 
 #: src/lib/marble/MarbleViewSettingsWidget.ui:154
 msgctxt "MarbleViewSettingsWidget|"
@@ -11841,11 +11604,9 @@ msgstr "低品質"
 
 #: src/lib/marble/MarbleViewSettingsWidget.ui:174
 #: src/lib/marble/MarbleViewSettingsWidget.ui:229
-#, fuzzy
-#| msgid "Norma"
 msgctxt "MarbleViewSettingsWidget|"
 msgid "Normal"
-msgstr "矩尺座"
+msgstr "一般"
 
 #: src/lib/marble/MarbleViewSettingsWidget.ui:179
 #: src/lib/marble/MarbleViewSettingsWidget.ui:234
@@ -11930,15 +11691,11 @@ msgstr ""
 "示它的正式官方名稱。</p></body></html>"
 
 #: src/lib/marble/MarbleViewSettingsWidget.ui:306
-#, fuzzy
-#| msgid "Custom and native language"
 msgctxt "MarbleViewSettingsWidget|"
 msgid "Custom & Native Language"
 msgstr "自訂語言與母語"
 
 #: src/lib/marble/MarbleViewSettingsWidget.ui:311
-#, fuzzy
-#| msgid "Custom language"
 msgctxt "MarbleViewSettingsWidget|"
 msgid "Custom Language"
 msgstr "自訂語言"
@@ -11951,8 +11708,6 @@ msgid "Native Language"
 msgstr "母語"
 
 #: src/lib/marble/MarbleViewSettingsWidget.ui:340
-#, fuzzy
-#| msgid "Default Map &Font:"
 msgctxt "MarbleViewSettingsWidget|"
 msgid "Default map &font:"
 msgstr "預設地圖字型(&F)："
@@ -12174,11 +11929,9 @@ msgid "Movie Recording"
 msgstr "路徑 - Marble"
 
 #: src/lib/marble/MovieCaptureDialog.ui:20
-#, fuzzy
-#| msgid "Destination ahead."
 msgctxt "MovieCaptureDialog|"
 msgid "Destination video:"
-msgstr "目的地在前面。"
+msgstr "目標影片："
 
 #: src/lib/marble/MovieCaptureDialog.ui:36
 #, fuzzy
@@ -12193,18 +11946,14 @@ msgid "FPS (frames per second)"
 msgstr ""
 
 #: src/lib/marble/NewBookmarkFolderDialog.ui:14
-#, fuzzy
-#| msgid "&New Bookmark Folder"
 msgctxt "UiNewBookmarkFolderDialog|"
 msgid "New Bookmark Folder"
-msgstr "新書籤資料夾(&N)"
+msgstr "新書籤資料夾"
 
 #: src/lib/marble/NewBookmarkFolderDialog.ui:22
-#, fuzzy
-#| msgid "New Folder Name"
 msgctxt "UiNewBookmarkFolderDialog|"
 msgid "&Folder name:"
-msgstr "新資料夾名稱"
+msgstr "資料夾名稱(&F)："
 
 #: src/lib/marble/NewstuffModel.cpp:715 src/lib/marble/NewstuffModel.cpp:724
 msgctxt "Marble::NewstuffModel|"
@@ -12257,18 +12006,14 @@ msgstr "移除"
 
 #: src/lib/marble/osm/OsmRelationManagerWidget.cpp:141
 #: src/lib/marble/osm/OsmRelationManagerWidget.cpp:152
-#, fuzzy
-#| msgid "&Edit"
 msgctxt "Marble::OsmRelationManagerWidget|"
 msgid "Edit"
-msgstr "編輯(&E)"
+msgstr "編輯"
 
 #: src/lib/marble/osm/OsmRelationManagerWidget.ui:23
-#, fuzzy
-#| msgid "Current Location"
 msgctxt "OsmRelationManagerWidgetPrivate|"
 msgid "Current Relations"
-msgstr "目前位置"
+msgstr "目前的關聯"
 
 #: src/lib/marble/osm/OsmRelationManagerWidget.ui:34
 msgctxt "OsmRelationManagerWidgetPrivate|"
@@ -12302,14 +12047,12 @@ msgstr "國家"
 #: src/lib/marble/osm/OsmTagEditorWidget.cpp:92
 msgctxt "Marble::OsmTagEditorWidget|"
 msgid "value"
-msgstr ""
+msgstr "數值"
 
 #: src/lib/marble/osm/OsmTagEditorWidget.ui:25
-#, fuzzy
-#| msgid "Current Location"
 msgctxt "OsmTagEditorWidgetPrivate|"
 msgid "Current Tags"
-msgstr "目前位置"
+msgstr "目前標籤"
 
 #: src/lib/marble/osm/OsmTagEditorWidget.ui:33
 #: src/lib/marble/osm/OsmTagEditorWidget.ui:88
@@ -12346,7 +12089,7 @@ msgstr ""
 #: src/lib/marble/osm/OsmTagEditorWidget_p.cpp:102
 msgctxt "QObject|"
 msgid "value"
-msgstr ""
+msgstr "數值"
 
 #: src/lib/marble/PlacemarkEditHeader.cpp:210
 msgctxt "QObject|"
@@ -12359,18 +12102,14 @@ msgid "All Supported Files (*.png)"
 msgstr "所有支援的檔案 (*.png)"
 
 #: src/lib/marble/PlacemarkEditHeader.ui:46
-#, fuzzy
-#| msgid "Browse Ecli&pses..."
 msgctxt "PlacemarkEditHeaderPrivate|"
 msgid "Browse..."
-msgstr "瀏覽天蝕(&P)"
+msgstr "瀏覽…"
 
 #: src/lib/marble/PlacemarkEditHeader.ui:64
-#, fuzzy
-#| msgid "Name"
 msgctxt "PlacemarkEditHeaderPrivate|"
 msgid "Name:"
-msgstr "名稱"
+msgstr "名稱："
 
 #: src/lib/marble/PlacemarkEditHeader.ui:81
 msgctxt "PlacemarkEditHeaderPrivate|"
@@ -12388,11 +12127,9 @@ msgid "Target ID:"
 msgstr ""
 
 #: src/lib/marble/PlacemarkEditHeader.ui:115
-#, fuzzy
-#| msgid "Lock Position"
 msgctxt "PlacemarkEditHeaderPrivate|"
 msgid "Position:"
-msgstr "鎖定位置"
+msgstr "位置："
 
 #: src/lib/marble/PlacemarkPositionProviderPlugin.cpp:32
 msgctxt "Marble::PlacemarkPositionProviderPlugin|"
@@ -12711,7 +12448,7 @@ msgstr "外掛程式"
 #: src/lib/marble/QtMarbleConfigDialog.cpp:153
 msgctxt "Marble::QtMarbleConfigDialog|"
 msgid "Synchronization"
-msgstr "同步化"
+msgstr "同步"
 
 #: src/lib/marble/QtMarbleConfigDialog.cpp:269
 msgctxt "Marble::QtMarbleConfigDialog|"
@@ -12732,17 +12469,17 @@ msgstr "選擇項目："
 #: src/lib/marble/RouteSimulationPositionProviderPlugin.cpp:27
 msgctxt "Marble::RouteSimulationPositionProviderPlugin|"
 msgid "Current Route Position Provider Plugin"
-msgstr "Current Route 位置提供者外掛程式"
+msgstr "目前路徑位置提供者外掛程式"
 
 #: src/lib/marble/RouteSimulationPositionProviderPlugin.cpp:37
 msgctxt "Marble::RouteSimulationPositionProviderPlugin|"
 msgid "Current Route"
-msgstr "Current Route"
+msgstr "目前路徑"
 
 #: src/lib/marble/RouteSimulationPositionProviderPlugin.cpp:47
 msgctxt "Marble::RouteSimulationPositionProviderPlugin|"
 msgid "Simulates traveling along the current route."
-msgstr "用 Current Route 模擬旅遊路徑。"
+msgstr "模擬在目前路徑上移動。"
 
 #: src/lib/marble/routing/instructions/RoutingInstruction.cpp:249
 msgctxt "QObject|"
@@ -12990,20 +12727,14 @@ msgid "Choose Placemark"
 msgstr "選擇地標"
 
 #: src/lib/marble/routing/RoutingLayer.cpp:185
-#, fuzzy
-#| msgctxt "QObject|"
-#| msgid "&Remove this destination"
 msgctxt "QObject|"
 msgid "&Remove this Destination"
-msgstr "移除此目的(&R)"
+msgstr "移除此目的地(&R)"
 
 #: src/lib/marble/routing/RoutingLayer.cpp:188
-#, fuzzy
-#| msgctxt "QObject|"
-#| msgid "&Export route..."
 msgctxt "QObject|"
 msgid "&Export Route..."
-msgstr "匯出路徑(&E)..."
+msgstr "匯出路徑(&E)…"
 
 #: src/lib/marble/routing/RoutingLayer.cpp:760
 msgctxt "Marble::RoutingLayer|"
@@ -13100,17 +12831,17 @@ msgstr "設定"
 #: src/lib/marble/routing/RoutingProfilesModel.cpp:110
 msgctxt "Marble::RoutingProfilesModel|"
 msgid "Car (fastest)"
-msgstr "車（最快）"
+msgstr "汽車（最快）"
 
 #: src/lib/marble/routing/RoutingProfilesModel.cpp:112
 msgctxt "Marble::RoutingProfilesModel|"
 msgid "Car (shortest)"
-msgstr "車（最短）"
+msgstr "汽車（最短）"
 
 #: src/lib/marble/routing/RoutingProfilesModel.cpp:114
 msgctxt "Marble::RoutingProfilesModel|"
 msgid "Car (ecological)"
-msgstr "車道（環保）"
+msgstr "汽車（環保）"
 
 #: src/lib/marble/routing/RoutingProfilesModel.cpp:116
 msgctxt "Marble::RoutingProfilesModel|"
@@ -13135,32 +12866,27 @@ msgstr "新增設定檔"
 #: src/lib/marble/routing/RoutingSettingsWidget.ui:22
 msgctxt "RoutingSettingsWidget|"
 msgid "&Add..."
-msgstr ""
+msgstr "新增(&A)…"
 
 #: src/lib/marble/routing/RoutingSettingsWidget.ui:32
-#, fuzzy
-#| msgctxt "Marble::AbstractFloatItem|"
-#| msgid "&Configure..."
 msgctxt "RoutingSettingsWidget|"
 msgid "&Configure..."
-msgstr "設定(&C)..."
+msgstr "設定(&C)…"
 
 #: src/lib/marble/routing/RoutingSettingsWidget.ui:42
-#, fuzzy
-#| msgid "Remove"
 msgctxt "RoutingSettingsWidget|"
 msgid "&Remove"
-msgstr "移除"
+msgstr "移除(&R)"
 
 #: src/lib/marble/routing/RoutingSettingsWidget.ui:65
 msgctxt "RoutingSettingsWidget|"
 msgid "Move &Up"
-msgstr ""
+msgstr "上移(&U)"
 
 #: src/lib/marble/routing/RoutingSettingsWidget.ui:75
 msgctxt "RoutingSettingsWidget|"
 msgid "Move &Down"
-msgstr ""
+msgstr "下移(&D)"
 
 #: src/lib/marble/routing/RoutingWidget.cpp:190
 msgctxt "QObject|"
@@ -13279,12 +13005,12 @@ msgstr "上傳路徑中..."
 #: src/lib/marble/routing/RoutingWidget.ui:46
 msgctxt "RoutingWidget|"
 msgid "Car (fastest)"
-msgstr "車（最快）"
+msgstr "汽車（最快）"
 
 #: src/lib/marble/routing/RoutingWidget.ui:51
 msgctxt "RoutingWidget|"
 msgid "Car (shortest)"
-msgstr "車（最短）"
+msgstr "汽車（最短）"
 
 #: src/lib/marble/routing/RoutingWidget.ui:56
 msgctxt "RoutingWidget|"
@@ -13502,11 +13228,9 @@ msgid ""
 msgstr "Marble 需要建立此地圖。這只需要做一次，可能會花一些時間。"
 
 #: src/lib/marble/TileLevelRangeWidget.ui:29
-#, fuzzy
-#| msgid "Zoom &In"
 msgctxt "TileLevelRangeWidget|"
 msgid "Zoom"
-msgstr "放大(&I)"
+msgstr "縮放"
 
 #: src/lib/marble/TileLevelRangeWidget.ui:37
 msgctxt "TileLevelRangeWidget|"
@@ -13519,11 +13243,9 @@ msgid "Minimum Tile Level"
 msgstr ""
 
 #: src/lib/marble/TileLevelRangeWidget.ui:63
-#, fuzzy
-#| msgid "Stop"
 msgctxt "TileLevelRangeWidget|"
 msgid "to"
-msgstr "停止"
+msgstr "到"
 
 #: src/lib/marble/TileLevelRangeWidget.ui:70
 msgctxt "TileLevelRangeWidget|"
@@ -13559,7 +13281,7 @@ msgstr ""
 #: src/lib/marble/TimeControlWidget.ui:46
 msgctxt "TimeControlWidget|"
 msgid " seconds"
-msgstr ""
+msgstr " 秒"
 
 #: src/lib/marble/TimeControlWidget.ui:65
 #, fuzzy
@@ -13569,11 +13291,9 @@ msgid "Now"
 msgstr "編號"
 
 #: src/lib/marble/TimeControlWidget.ui:123
-#, fuzzy
-#| msgid "Current Location"
 msgctxt "TimeControlWidget|"
 msgid "Current &date and time:"
-msgstr "目前位置"
+msgstr "目前日期與時間(&D)："
 
 #: src/lib/marble/TimeControlWidget.ui:136
 #, fuzzy
@@ -13653,11 +13373,9 @@ msgid "Movie Recording"
 msgstr "路徑 - Marble"
 
 #: src/lib/marble/TourCaptureDialog.ui:65
-#, fuzzy
-#| msgid "Destination ahead."
 msgctxt "TourCaptureDialog|"
 msgid "Destination video"
-msgstr "目的地在前面。"
+msgstr "目標影片"
 
 #: src/lib/marble/TourCaptureDialog.ui:81
 #, fuzzy
@@ -13831,11 +13549,9 @@ msgid "Tour"
 msgstr "旅程"
 
 #: src/lib/marble/TourWidget.ui:20 src/lib/marble/TourWidget.ui:45
-#, fuzzy
-#| msgid "Main ToolBar"
 msgctxt "TourWidget|"
 msgid "toolBar"
-msgstr "主工具列"
+msgstr "工具列"
 
 #: src/lib/marble/TourWidget.ui:57 src/lib/marble/TourWidget.ui:71
 msgctxt "TourWidget|"
@@ -14006,18 +13722,14 @@ msgid "Reports the position of a GPS device."
 msgstr "報告 GPS 裝置的位置。"
 
 #: src/plugins/positionprovider/qtpositioning/QtPositioningPositionProviderPlugin.cpp:46
-#, fuzzy
-#| msgid "Qt Mobility Position Provider Plugin"
 msgctxt "Marble::QtPositioningPositionProviderPlugin|"
 msgid "Qt Positioning Position Provider Plugin"
-msgstr "Qt Mobility 位置提供者外掛程式"
+msgstr "Qt Positioning 位置提供者外掛程式"
 
 #: src/plugins/positionprovider/qtpositioning/QtPositioningPositionProviderPlugin.cpp:56
-#, fuzzy
-#| msgid "Qt Mobility Location"
 msgctxt "Marble::QtPositioningPositionProviderPlugin|"
 msgid "Qt Positioning Location"
-msgstr "Qt Mobility 位置"
+msgstr "Qt Positioning 位置"
 
 #: src/plugins/positionprovider/qtpositioning/QtPositioningPositionProviderPlugin.cpp:66
 msgctxt "Marble::QtPositioningPositionProviderPlugin|"
@@ -14146,7 +13858,7 @@ msgstr "選擇項目"
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:904
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Add Polygon"
-msgstr "繪製多邊形"
+msgstr "新增多邊形"
 
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:909
 msgctxt "Marble::AnnotatePlugin|"
@@ -14189,11 +13901,9 @@ msgid "Clear all Annotations"
 msgstr "清除所有註記"
 
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:957
-#, fuzzy
-#| msgid "OpenStreetMap Data"
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Download OpenStreetMap Data"
-msgstr "OpenStreetMap 資料"
+msgstr "下載 OpenStreetMap 資料"
 
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:960
 msgctxt "Marble::AnnotatePlugin|"
@@ -14282,11 +13992,9 @@ msgstr "取消選擇節點"
 
 #: src/plugins/render/annotate/DownloadOsmDialog.cpp:32
 #: src/plugins/render/annotate/DownloadOsmDialog.cpp:39
-#, fuzzy
-#| msgid "Download Route"
 msgctxt "Marble::DownloadOsmDialog|"
 msgid "Download"
-msgstr "下載路徑"
+msgstr "下載"
 
 #: src/plugins/render/annotate/DownloadOsmDialog.cpp:79
 #: src/plugins/render/annotate/DownloadOsmDialog.cpp:127
@@ -14368,11 +14076,9 @@ msgid "Description"
 msgstr "描述"
 
 #: src/plugins/render/annotate/EditGroundOverlayDialog.ui:37
-#, fuzzy
-#| msgid "Coordinates:"
 msgctxt "UiEditGroundOverlayDialog|"
 msgid "Coordinates"
-msgstr "座標："
+msgstr "座標"
 
 #: src/plugins/render/annotate/EditGroundOverlayDialog.ui:94
 msgctxt "UiEditGroundOverlayDialog|"
@@ -14395,25 +14101,19 @@ msgid "S"
 msgstr "S"
 
 #: src/plugins/render/annotate/EditGroundOverlayDialog.ui:457
-#, fuzzy
-#| msgid "Annotation"
 msgctxt "UiEditGroundOverlayDialog|"
 msgid "Rotation"
-msgstr "註記"
+msgstr "旋轉"
 
 #: src/plugins/render/annotate/EditPolygonDialog.cpp:89
-#, fuzzy
-#| msgid "Tags:"
 msgctxt "Marble::EditPolygonDialog|"
 msgid "Tags"
-msgstr "標籤："
+msgstr "標籤"
 
 #: src/plugins/render/annotate/EditPolygonDialog.cpp:95
-#, fuzzy
-#| msgid "Elevation"
 msgctxt "Marble::EditPolygonDialog|"
 msgid "Relations"
-msgstr "高度"
+msgstr "關係"
 
 #: src/plugins/render/annotate/EditPolygonDialog.cpp:113
 msgctxt "Marble::EditPolygonDialog|"
@@ -14441,11 +14141,9 @@ msgid "Please specify at least 3 nodes for the polygon by clicking on the map."
 msgstr "請點擊地圖，指定至少三個節點。"
 
 #: src/plugins/render/annotate/EditPolygonDialog.ui:14
-#, fuzzy
-#| msgid "Add Polygon"
 msgctxt "UiEditPolygonDialog|"
 msgid "Add polygon"
-msgstr "繪製多邊形"
+msgstr "新增多邊形"
 
 #: src/plugins/render/annotate/EditPolygonDialog.ui:25
 msgctxt "UiEditPolygonDialog|"
@@ -14613,11 +14311,9 @@ msgid "APRS Plugin"
 msgstr "星空外掛程式"
 
 #: src/plugins/render/aprs/AprsConfigWidget.ui:24
-#, fuzzy
-#| msgid "Map Display"
 msgctxt "AprsConfigWidget|"
 msgid "Display"
-msgstr "地圖顯示"
+msgstr "顯示"
 
 #: src/plugins/render/aprs/AprsConfigWidget.ui:38
 msgctxt "AprsConfigWidget|"
@@ -14736,7 +14432,7 @@ msgstr ""
 #: src/plugins/render/aprs/AprsConfigWidget.ui:244
 msgctxt "AprsConfigWidget|"
 msgid "Collect data from a file"
-msgstr ""
+msgstr "從檔案取得資料"
 
 #: src/plugins/render/aprs/AprsConfigWidget.ui:275
 msgctxt "AprsConfigWidget|"
@@ -14778,11 +14474,9 @@ msgid "Shows the atmosphere around the earth."
 msgstr "在地球週圍顯示大氣層。"
 
 #: src/plugins/render/compass/CompassConfigWidget.ui:14
-#, fuzzy
-#| msgid "Configuration Plugin"
 msgctxt "CompassConfigWidget|"
 msgid "Configure Compass Plugin"
-msgstr "設定外掛程式"
+msgstr "設定羅盤外掛程式"
 
 #: src/plugins/render/compass/CompassConfigWidget.ui:20
 #, fuzzy
@@ -14846,11 +14540,9 @@ msgid "Configure Crosshairs Plugin"
 msgstr "設定外掛程式"
 
 #: src/plugins/render/crosshairs/CrosshairsConfigWidget.ui:20
-#, fuzzy
-#| msgid "&Theme"
 msgctxt "CrosshairsConfigWidget|"
 msgid "Theme"
-msgstr "主題(&T)"
+msgstr "主題"
 
 #: src/plugins/render/crosshairs/CrosshairsConfigWidget.ui:43
 msgctxt "CrosshairsConfigWidget|"
@@ -14912,61 +14604,49 @@ msgid "Maximum number of results:"
 msgstr ""
 
 #: src/plugins/render/earthquake/EarthquakeConfigWidget.ui:39
-#, fuzzy
-#| msgid "Magnitude"
 msgctxt "EarthquakeConfigWidget|"
 msgid "Minimum magnitude:"
-msgstr "星等"
+msgstr "最低震度："
 
 #: src/plugins/render/earthquake/EarthquakeConfigWidget.ui:59
-#, fuzzy
-#| msgid "Time Zones"
 msgctxt "EarthquakeConfigWidget|"
 msgid "Time Range"
-msgstr "時區"
+msgstr "時間範圍"
 
 #: src/plugins/render/earthquake/EarthquakeConfigWidget.ui:65
-#, fuzzy
-#| msgid "fastest"
 msgctxt "EarthquakeConfigWidget|"
 msgid "Past"
-msgstr "最快"
+msgstr "過去"
 
 #: src/plugins/render/earthquake/EarthquakeConfigWidget.ui:78
 msgctxt "EarthquakeConfigWidget|"
 msgid "From"
-msgstr ""
+msgstr "從"
 
 #: src/plugins/render/earthquake/EarthquakeConfigWidget.ui:107
 msgctxt "EarthquakeConfigWidget|"
 msgid "days"
-msgstr ""
+msgstr "天"
 
 #: src/plugins/render/earthquake/EarthquakeConfigWidget.ui:150
-#, fuzzy
-#| msgid "Stop"
 msgctxt "EarthquakeConfigWidget|"
 msgid "to"
-msgstr "停止"
+msgstr "到"
 
 #: src/plugins/render/earthquake/EarthquakeItem.cpp:126
-#, fuzzy
-#| msgid "Date: "
 msgctxt "Marble::EarthquakeItem|"
 msgid "Date:"
-msgstr "日期： "
+msgstr "日期："
 
 #: src/plugins/render/earthquake/EarthquakeItem.cpp:129
-#, fuzzy
-#| msgid "Magnitude"
 msgctxt "Marble::EarthquakeItem|"
 msgid "Magnitude:"
-msgstr "星等"
+msgstr "震度："
 
 #: src/plugins/render/earthquake/EarthquakeItem.cpp:129
 msgctxt "Marble::EarthquakeItem|"
 msgid "Depth:"
-msgstr ""
+msgstr "深度："
 
 #: src/plugins/render/earthquake/EarthquakePlugin.cpp:54
 msgctxt "Marble::EarthquakePlugin|"
@@ -14984,23 +14664,19 @@ msgid "Shows earthquakes on the map."
 msgstr "在地圖上顯示地震。"
 
 #: src/plugins/render/eclipses/EclipsesBrowserDialog.ui:14
-#, fuzzy
-#| msgid "Eclipses"
 msgctxt "EclipsesBrowserDialog|"
 msgid "Eclipse Browser"
-msgstr "天蝕"
+msgstr "天蝕瀏覽器"
 
 #: src/plugins/render/eclipses/EclipsesBrowserDialog.ui:35
 msgctxt "EclipsesBrowserDialog|"
 msgid "Show eclipses for year:"
-msgstr ""
+msgstr "顯示年份的天蝕："
 
 #: src/plugins/render/eclipses/EclipsesBrowserDialog.ui:104
-#, fuzzy
-#| msgid "&Settings"
 msgctxt "EclipsesBrowserDialog|"
 msgid "&Settings..."
-msgstr "設定(&S)"
+msgstr "設定(&S)…"
 
 #: src/plugins/render/eclipses/EclipsesBrowserDialog.ui:145
 msgctxt "EclipsesBrowserDialog|"
@@ -15010,14 +14686,12 @@ msgstr "關閉(&C)"
 #: src/plugins/render/eclipses/EclipsesBrowserDialog.ui:171
 msgctxt "EclipsesBrowserDialog|"
 msgid "&Go To Selected Eclipse"
-msgstr ""
+msgstr "前往所選的天蝕(&G)"
 
 #: src/plugins/render/eclipses/EclipsesConfigDialog.ui:17
-#, fuzzy
-#| msgid "Worldclock Applet Configuration"
 msgctxt "EclipsesConfigDialog|"
 msgid "Eclipses Configuration"
-msgstr "世界時鐘小程式設定"
+msgstr "天蝕設定"
 
 #: src/plugins/render/eclipses/EclipsesConfigDialog.ui:30
 msgctxt "EclipsesConfigDialog|"
@@ -15025,28 +14699,24 @@ msgid "&View"
 msgstr "檢視(&V)"
 
 #: src/plugins/render/eclipses/EclipsesConfigDialog.ui:36
-#, fuzzy
-#| msgid "View Properties"
 msgctxt "EclipsesConfigDialog|"
 msgid "View &Options"
-msgstr "檢視屬性"
+msgstr "檢視選項(&O)"
 
 #: src/plugins/render/eclipses/EclipsesConfigDialog.ui:45
 msgctxt "EclipsesConfigDialog|"
 msgid "Enable &Lunar Eclipses"
-msgstr ""
+msgstr "啟用月蝕(&L)"
 
 #: src/plugins/render/eclipses/EclipsesConfigDialog.ui:55
 msgctxt "EclipsesConfigDialog|"
 msgid "Show Eclipse Control &Widget"
-msgstr ""
+msgstr "顯示天蝕控制元件(&W)"
 
 #: src/plugins/render/eclipses/EclipsesConfigDialog.ui:65
-#, fuzzy
-#| msgid "Eclipses"
 msgctxt "EclipsesConfigDialog|"
 msgid "&Eclipse Elements"
-msgstr "天蝕"
+msgstr "天蝕元素(&E)"
 
 #: src/plugins/render/eclipses/EclipsesConfigDialog.ui:74
 #, fuzzy
@@ -15097,12 +14767,12 @@ msgstr ""
 #: src/plugins/render/eclipses/EclipsesConfigDialog.ui:171
 msgctxt "EclipsesConfigDialog|"
 msgid "&Reminder"
-msgstr ""
+msgstr "提醒(&R)"
 
 #: src/plugins/render/eclipses/EclipsesConfigDialog.ui:177
 msgctxt "EclipsesConfigDialog|"
 msgid "Remind about eclipse events"
-msgstr ""
+msgstr "為天蝕事件提供提醒"
 
 #: src/plugins/render/eclipses/EclipsesItem.cpp:80
 msgctxt "Marble::EclipsesItem|"
@@ -15198,14 +14868,12 @@ msgstr "最大天蝕"
 #, qt-format
 msgctxt "Marble::EclipsesPlugin|"
 msgid "Eclipses in %1"
-msgstr "天蝕於 %1"
+msgstr "%1 的天蝕"
 
 #: src/plugins/render/eclipses/EclipsesReminderDialog.ui:14
-#, fuzzy
-#| msgid "Eclipses"
 msgctxt "EclipsesReminderDialog|"
 msgid "Eclipse Event"
-msgstr "天蝕"
+msgstr "天蝕事件"
 
 #: src/plugins/render/eclipses/EclipsesReminderDialog.ui:20
 msgctxt "EclipsesReminderDialog|"
@@ -15222,18 +14890,14 @@ msgid "Do not remind me about eclipse events again"
 msgstr ""
 
 #: src/plugins/render/elevationprofilefloatitem/ElevationProfileConfigWidget.ui:14
-#, fuzzy
-#| msgid "Configuration Plugin"
 msgctxt "ElevationProfileConfigWidget|"
 msgid "Configure Elevation Profile Plugin"
-msgstr "設定外掛程式"
+msgstr "設定高度外掛程式"
 
 #: src/plugins/render/elevationprofilefloatitem/ElevationProfileConfigWidget.ui:20
-#, fuzzy
-#| msgid "&Zoom to viewport"
 msgctxt "ElevationProfileConfigWidget|"
 msgid "Zoom to viewport"
-msgstr "縮放到檢視埠(&Z)"
+msgstr "縮放到檢視埠"
 
 #: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:30
 msgctxt "Marble::ElevationProfileContextMenu|"
@@ -15451,11 +15115,9 @@ msgid "Speed"
 msgstr "速度"
 
 #: src/plugins/render/gpsinfo/GpsInfoPlugin.ui:43
-#, fuzzy
-#| msgid "Get Directions"
 msgctxt "GpsInfoPlugin|"
 msgid "Direction"
-msgstr "取得方向"
+msgstr "方向"
 
 #: src/plugins/render/gpsinfo/GpsInfoPlugin.ui:57
 msgctxt "GpsInfoPlugin|"
@@ -15465,31 +15127,27 @@ msgstr "高度"
 #: src/plugins/render/gpsinfo/GpsInfoPlugin.ui:71
 msgctxt "GpsInfoPlugin|"
 msgid "Precision"
-msgstr ""
+msgstr "精確度"
 
 #: src/plugins/render/graticule/GraticuleConfigWidget.ui:14
-#, fuzzy
-#| msgid "Coordinate Grid"
 msgctxt "GraticuleConfigWidget|"
 msgid "Coordinate Grid Plugin"
-msgstr "座標格"
+msgstr "座標格線外掛程式"
 
 #: src/plugins/render/graticule/GraticuleConfigWidget.ui:20
 msgctxt "GraticuleConfigWidget|"
 msgid "C&olors"
-msgstr ""
+msgstr "色彩(&O)"
 
 #: src/plugins/render/graticule/GraticuleConfigWidget.ui:444
 msgctxt "GraticuleConfigWidget|"
 msgid "&Grid:"
-msgstr ""
+msgstr "格線(&G)："
 
 #: src/plugins/render/graticule/GraticuleConfigWidget.ui:497
-#, fuzzy
-#| msgid "Please choose the color for the coordinate grid."
 msgctxt "GraticuleConfigWidget|"
 msgid "Color of the coordinate grid."
-msgstr "請選擇座標格線顏色。"
+msgstr "座標格線的顏色。"
 
 #: src/plugins/render/graticule/GraticuleConfigWidget.ui:922
 msgctxt "GraticuleConfigWidget|"
@@ -15504,11 +15162,9 @@ msgid "Color of the tropical circles."
 msgstr "請選擇熱帶圈顏色。"
 
 #: src/plugins/render/graticule/GraticuleConfigWidget.ui:1363
-#, fuzzy
-#| msgid "Equator"
 msgctxt "GraticuleConfigWidget|"
 msgid "&Equator:"
-msgstr "赤道"
+msgstr "赤道(&E)："
 
 #: src/plugins/render/graticule/GraticuleConfigWidget.ui:1379
 #, fuzzy
@@ -15641,18 +15297,14 @@ msgid "&Show Details"
 msgstr "顯示詳情(&S)"
 
 #: src/plugins/render/mapscale/MapScaleConfigWidget.ui:14
-#, fuzzy
-#| msgid "Configuration Plugin"
 msgctxt "MapScaleConfigWidget|"
 msgid "Configure Scale Bar Plugin"
-msgstr "設定外掛程式"
+msgstr "設定刻度列外掛程式"
 
 #: src/plugins/render/mapscale/MapScaleConfigWidget.ui:20
-#, fuzzy
-#| msgid "&Ratio Scale"
 msgctxt "MapScaleConfigWidget|"
 msgid "Show Ratio Scale"
-msgstr "比例刻度(&R)"
+msgstr "顯示比例刻度"
 
 #: src/plugins/render/mapscale/MapScaleConfigWidget.ui:30
 msgctxt "MapScaleConfigWidget|"
@@ -15723,7 +15375,7 @@ msgstr "測量工具設定"
 #: src/plugins/render/measure/MeasureConfigDialog.ui:20
 msgctxt "MeasureConfigDialog|"
 msgid "Ruler Type"
-msgstr ""
+msgstr "尺規類型"
 
 #: src/plugins/render/measure/MeasureConfigDialog.ui:28
 #: src/plugins/render/measure/MeasureConfigDialog.ui:45
@@ -15760,7 +15412,7 @@ msgstr ""
 #: src/plugins/render/measure/MeasureConfigDialog.ui:90
 msgctxt "MeasureConfigDialog|"
 msgid "Perimeter"
-msgstr ""
+msgstr "週長"
 
 #: src/plugins/render/measure/MeasureConfigDialog.ui:100
 #: src/plugins/render/measure/MeasureConfigDialog.ui:159
@@ -16751,11 +16403,9 @@ msgid "Open a new data source from disk."
 msgstr ""
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.ui:178
-#, fuzzy
-#| msgid "Delete selected data source"
 msgctxt "SatellitesConfigDialog|"
 msgid "Remove selected data source."
-msgstr "刪除選取的資料來源"
+msgstr "移除所選的資料來源。"
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.ui:181
 msgctxt "SatellitesConfigDialog|"
@@ -17072,12 +16722,12 @@ msgstr "CubeSats"
 #: src/plugins/render/speedometer/Speedometer.cpp:53
 msgctxt "Marble::Speedometer|"
 msgid "Speedometer"
-msgstr "Speedometer"
+msgstr ""
 
 #: src/plugins/render/speedometer/Speedometer.cpp:58
 msgctxt "Marble::Speedometer|"
 msgid "&Speedometer"
-msgstr "Speedometer(&S)"
+msgstr ""
 
 #: src/plugins/render/speedometer/Speedometer.cpp:73
 msgctxt "Marble::Speedometer|"
@@ -17131,7 +16781,7 @@ msgstr ""
 #: src/plugins/render/stars/StarsConfigWidget.ui:74
 msgctxt "StarsConfigWidget|"
 msgid "Solar System"
-msgstr ""
+msgstr "太陽系"
 
 #: src/plugins/render/stars/StarsConfigWidget.ui:81
 msgctxt "StarsConfigWidget|"
@@ -17220,11 +16870,9 @@ msgid "Lines and Orientation"
 msgstr ""
 
 #: src/plugins/render/stars/StarsConfigWidget.ui:284
-#, fuzzy
-#| msgid "Show &Constellations"
 msgctxt "StarsConfigWidget|"
 msgid "Constellations"
-msgstr "顯示星座(&C)"
+msgstr "星座"
 
 #: src/plugins/render/stars/StarsConfigWidget.ui:290
 msgctxt "StarsConfigWidget|"
@@ -17282,11 +16930,9 @@ msgid "Celestial Poles"
 msgstr ""
 
 #: src/plugins/render/stars/StarsConfigWidget.ui:525
-#, fuzzy
-#| msgid "Eclipses"
 msgctxt "StarsConfigWidget|"
 msgid "Ecliptic"
-msgstr "天蝕"
+msgstr ""
 
 #: src/plugins/render/stars/StarsPlugin.cpp:107
 msgctxt "Marble::StarsPlugin|"
@@ -17405,17 +17051,12 @@ msgstr ""
 "uk</a> 支援。<br/>天氣資料由 UK MET Office 提供。"
 
 #: src/plugins/render/weather/GeoNamesWeatherItem.cpp:32
-#, fuzzy
-#| msgctxt "Marble::GeoNamesWeatherItem|"
-#| msgid ""
-#| "Supported by <a href=\"http://www.geonames.org/export/JSON-webservices."
-#| "html\" target=\"_BLANK\">geonames.org</a>"
 msgctxt "Marble::GeoNamesWeatherItem|"
 msgid ""
 "Supported by <a href=\"https://www.geonames.org/export/JSON-webservices.html"
 "\" target=\"_BLANK\">geonames.org</a>"
 msgstr ""
-"由 <a href=\"http://www.geonames.org/export/JSON-webservices.html\" target="
+"由 <a href=\"https://www.geonames.org/export/JSON-webservices.html\" target="
 "\"_BLANK\">geonames.org</a> 所支援"
 
 #: src/plugins/render/weather/StationListParser.cpp:43
@@ -17431,23 +17072,11 @@ msgid "Configure Weather Plugin"
 msgstr "設定外掛程式"
 
 #: src/plugins/render/weather/WeatherConfigWidget.ui:23
-#, fuzzy
-#| msgid "International"
 msgctxt "WeatherConfigWidget|"
 msgid "Information"
-msgstr "國際"
+msgstr "資訊"
 
 #: src/plugins/render/weather/WeatherConfigWidget.ui:29
-#, fuzzy
-#| msgid ""
-#| "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
-#| "css\">\n"
-#| "p, li { white-space: pre-wrap; }\n"
-#| "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
-#| "font-weight:400; font-style:normal;\">\n"
-#| "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#| "right:0px; -qt-block-indent:0; text-indent:0px;\">The default font that "
-#| "gets used on the map.</p></body></html>"
 msgctxt "WeatherConfigWidget|"
 msgid ""
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
@@ -17459,14 +17088,6 @@ msgid ""
 "Marble will only show the condition if this information is available.</p></"
 "body></html>\n"
 msgstr ""
-"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
-"\">\n"
-"p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; font-"
-"weight:400; font-style:normal;\">\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-"right:0px; -qt-block-indent:0; text-indent:0px;\">在地圖上使用的預設語言。</"
-"p></body></html>"
 
 #: src/plugins/render/weather/WeatherConfigWidget.ui:33
 msgctxt "WeatherConfigWidget|"
@@ -17542,11 +17163,9 @@ msgstr ""
 "p></body></html>"
 
 #: src/plugins/render/weather/WeatherConfigWidget.ui:55
-#, fuzzy
-#| msgid "Wind direction: %1<br>"
 msgctxt "WeatherConfigWidget|"
 msgid "Wind direction"
-msgstr "風向：%1<br/>"
+msgstr "風向"
 
 #: src/plugins/render/weather/WeatherConfigWidget.ui:62
 #, fuzzy
@@ -17580,18 +17199,14 @@ msgstr ""
 
 #: src/plugins/render/weather/WeatherConfigWidget.ui:66
 #: src/plugins/render/weather/WeatherConfigWidget.ui:113
-#, fuzzy
-#| msgid "Wind speed: %1<br>"
 msgctxt "WeatherConfigWidget|"
 msgid "Wind speed"
-msgstr "風速：%1<br/>"
+msgstr "風速"
 
 #: src/plugins/render/weather/WeatherConfigWidget.ui:76
-#, fuzzy
-#| msgid "&Units"
 msgctxt "WeatherConfigWidget|"
 msgid "Units"
-msgstr "單位(&U)"
+msgstr "單位"
 
 #: src/plugins/render/weather/WeatherConfigWidget.ui:91
 #, fuzzy
@@ -17625,12 +17240,12 @@ msgstr ""
 #: src/plugins/render/weather/WeatherConfigWidget.ui:96
 msgctxt "WeatherConfigWidget|"
 msgid "Celsius"
-msgstr ""
+msgstr "攝氏"
 
 #: src/plugins/render/weather/WeatherConfigWidget.ui:101
 msgctxt "WeatherConfigWidget|"
 msgid "Fahrenheit"
-msgstr ""
+msgstr "華氏"
 
 #: src/plugins/render/weather/WeatherConfigWidget.ui:120
 #, fuzzy
@@ -17662,25 +17277,21 @@ msgstr ""
 "html>"
 
 #: src/plugins/render/weather/WeatherConfigWidget.ui:125
-#, fuzzy
-#| msgid "Kilometer, Meter"
 msgctxt "WeatherConfigWidget|"
 msgid "Kilometers per hour"
-msgstr "公里、公尺"
+msgstr "公里/小時"
 
 #: src/plugins/render/weather/WeatherConfigWidget.ui:130
 msgctxt "WeatherConfigWidget|"
 msgid "Miles per hour"
-msgstr ""
+msgstr "英哩/小時"
 
 #: src/plugins/render/weather/WeatherConfigWidget.ui:135
 msgctxt "WeatherConfigWidget|"
 msgid "Meters per second"
-msgstr ""
+msgstr "公尺/秒"
 
 #: src/plugins/render/weather/WeatherConfigWidget.ui:140
-#, fuzzy
-#| msgid "knots"
 msgctxt "WeatherConfigWidget|"
 msgid "Knots"
 msgstr "節"
@@ -17691,12 +17302,9 @@ msgid "Beaufort"
 msgstr "薄福（beaufort）"
 
 #: src/plugins/render/weather/WeatherConfigWidget.ui:157
-#, fuzzy
-#| msgctxt "Pressure Development"
-#| msgid "Pressure %7"
 msgctxt "WeatherConfigWidget|"
 msgid "Pressure"
-msgstr "壓力 %7"
+msgstr "壓力"
 
 #: src/plugins/render/weather/WeatherConfigWidget.ui:164
 #, fuzzy
@@ -17728,14 +17336,16 @@ msgstr ""
 "html>"
 
 #: src/plugins/render/weather/WeatherConfigWidget.ui:169
+#, fuzzy
 msgctxt "WeatherConfigWidget|"
 msgid "Hecto Pascals"
-msgstr ""
+msgstr "百帕"
 
 #: src/plugins/render/weather/WeatherConfigWidget.ui:174
+#, fuzzy
 msgctxt "WeatherConfigWidget|"
 msgid "Kilo Pascals"
-msgstr ""
+msgstr "千帕"
 
 #: src/plugins/render/weather/WeatherConfigWidget.ui:179
 msgctxt "WeatherConfigWidget|"
@@ -17753,12 +17363,9 @@ msgid "Inches of Mercury"
 msgstr ""
 
 #: src/plugins/render/weather/WeatherConfigWidget.ui:202
-#, fuzzy
-#| msgctxt "Name of a satellite group"
-#| msgid "Miscellaneous Military"
 msgctxt "WeatherConfigWidget|"
 msgid "Miscellaneous"
-msgstr "軍用衛星"
+msgstr "其他"
 
 #: src/plugins/render/weather/WeatherConfigWidget.ui:208
 msgctxt "WeatherConfigWidget|"
@@ -17771,11 +17378,9 @@ msgid "Weather update interval"
 msgstr ""
 
 #: src/plugins/render/weather/WeatherConfigWidget.ui:224
-#, fuzzy
-#| msgid "Yours"
 msgctxt "WeatherConfigWidget|"
 msgid " hours"
-msgstr "Yours"
+msgstr " 小時"
 
 #: src/plugins/render/weather/WeatherData.cpp:355
 msgctxt "WeatherData|"
@@ -17785,7 +17390,7 @@ msgstr "晴天（sunny）"
 #: src/plugins/render/weather/WeatherData.cpp:357
 msgctxt "WeatherData|"
 msgid "clear"
-msgstr "晴朗（clear）"
+msgstr "晴朗"
 
 #: src/plugins/render/weather/WeatherData.cpp:360
 msgctxt "WeatherData|"
@@ -18159,16 +17764,14 @@ msgid "The file is not a valid Geonames answer."
 msgstr "檔案不是有效的 Geonames 回答。"
 
 #: src/plugins/render/wikipedia/WikipediaConfigWidget.ui:14
-#, fuzzy
-#| msgid "Configuration Plugin"
 msgctxt "WikipediaConfigWidget|"
 msgid "Configure Wikipedia Plugin"
-msgstr "設定外掛程式"
+msgstr "設定維基百科外掛程式"
 
 #: src/plugins/render/wikipedia/WikipediaConfigWidget.ui:20
 msgctxt "WikipediaConfigWidget|"
 msgid "Show thumbnail images"
-msgstr ""
+msgstr "顯示縮圖影像"
 
 #: src/plugins/render/wikipedia/WikipediaConfigWidget.ui:32
 msgctxt "WikipediaConfigWidget|"
@@ -18456,7 +18059,7 @@ msgstr "招待所"
 #: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:68
 msgctxt "QObject|"
 msgid "hotel"
-msgstr "旅館"
+msgstr "飯店"
 
 #: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:70
 msgctxt "QObject|"
@@ -18466,7 +18069,7 @@ msgstr "汽車旅館"
 #: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:72
 msgctxt "QObject|"
 msgid "youth hostel"
-msgstr "青年活動中心"
+msgstr "青年旅館"
 
 #: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:74
 msgctxt "QObject|"
@@ -18840,12 +18443,12 @@ msgstr "使用 mapquest.org 進行世界路徑規劃"
 #: src/plugins/runner/mapquest/MapQuestPlugin.cpp:75
 msgctxt "Marble::MapQuestConfigWidget|"
 msgid "Car (fastest way)"
-msgstr "車行（最快路徑）"
+msgstr "汽車（最快路徑）"
 
 #: src/plugins/runner/mapquest/MapQuestPlugin.cpp:76
 msgctxt "Marble::MapQuestConfigWidget|"
 msgid "Car (shortest way)"
-msgstr "車行（最短路徑）"
+msgstr "汽車（最短路徑）"
 
 #: src/plugins/runner/mapquest/MapQuestPlugin.cpp:77
 msgctxt "Marble::MapQuestConfigWidget|"
@@ -18918,11 +18521,9 @@ msgid "Nothing to do."
 msgstr "沒有事可做。"
 
 #: src/plugins/runner/monav/MonavConfigWidget.ui:20
-#, fuzzy
-#| msgid "Monav Routing"
 msgctxt "MonavConfigWidget|"
 msgid "Monav Configuration"
-msgstr "Monav 路徑"
+msgstr "Monav 設定"
 
 #: src/plugins/runner/monav/MonavConfigWidget.ui:43
 msgctxt "MonavConfigWidget|"
@@ -18930,11 +18531,9 @@ msgid "Configure"
 msgstr "設定"
 
 #: src/plugins/runner/monav/MonavConfigWidget.ui:51
-#, fuzzy
-#| msgid "Transport"
 msgctxt "MonavConfigWidget|"
 msgid "Transport Type:"
-msgstr "傳輸"
+msgstr "傳輸型態："
 
 #: src/plugins/runner/monav/MonavConfigWidget.ui:62
 msgctxt "MonavConfigWidget|"
@@ -18942,18 +18541,14 @@ msgid "Any"
 msgstr "任何"
 
 #: src/plugins/runner/monav/MonavConfigWidget.ui:107
-#, fuzzy
-#| msgid "Manage Bookmarks"
 msgctxt "MonavConfigWidget|"
 msgid "Manage Maps"
-msgstr "管理書籤"
+msgstr "管理地圖"
 
 #: src/plugins/runner/monav/MonavConfigWidget.ui:142
-#, fuzzy
-#| msgid "Install"
 msgctxt "MonavConfigWidget|"
 msgid "Install New"
-msgstr "安裝"
+msgstr "安裝新的"
 
 #: src/plugins/runner/monav/MonavConfigWidget.ui:151
 msgctxt "MonavConfigWidget|"
@@ -18985,12 +18580,12 @@ msgstr "沒有事可做。"
 #: src/plugins/runner/monav/MonavConfigWidget.ui:244
 msgctxt "MonavConfigWidget|"
 msgid "%v/%m MB"
-msgstr ""
+msgstr "%v/%m MB"
 
 #: src/plugins/runner/monav/MonavConfigWidget.ui:251
 msgctxt "MonavConfigWidget|"
 msgid "Abort"
-msgstr ""
+msgstr "中止"
 
 #: src/plugins/runner/monav/MonavMapsModel.cpp:41
 msgctxt "Marble::MonavMapsModel|"
@@ -19115,32 +18710,24 @@ msgid ""
 msgstr ""
 
 #: src/plugins/runner/openrouteservice/OpenRouteServiceConfigWidget.ui:17
-#, fuzzy
-#| msgid ""
-#| "Circumference:\n"
-#| "%1"
 msgctxt "OpenRouteServiceConfigWidget|"
 msgid "Preference:"
-msgstr ""
-"圓週長：\n"
-"%1"
+msgstr "偏好設定："
 
 #: src/plugins/runner/openrouteservice/OpenRouteServiceConfigWidget.ui:27
-#, fuzzy
-#| msgid "Motorway"
 msgctxt "OpenRouteServiceConfigWidget|"
 msgid "Avoid motorways"
-msgstr "高速公路"
+msgstr "避開高速公路"
 
 #: src/plugins/runner/openrouteservice/OpenRouteServiceConfigWidget.ui:34
 msgctxt "OpenRouteServiceConfigWidget|"
 msgid "Avoid tollways"
-msgstr ""
+msgstr "避開付費道路"
 
 #: src/plugins/runner/openrouteservice/OpenRouteServiceConfigWidget.ui:41
 msgctxt "OpenRouteServiceConfigWidget|"
 msgid "Avoid ferries"
-msgstr ""
+msgstr "避開渡輪"
 
 #: src/plugins/runner/openrouteservice/OpenRouteServicePlugin.cpp:19
 msgctxt "Marble::OpenRouteServicePlugin|"
@@ -19163,21 +18750,19 @@ msgid "Routing in Europe using openrouteservice.org"
 msgstr "從 openrouteservice.org 取得歐洲的路徑"
 
 #: src/plugins/runner/openrouteservice/OpenRouteServicePlugin.cpp:75
-#, fuzzy
-#| msgid "Car (shortest way)"
 msgctxt "Marble::OpenRouteServiceConfigWidget|"
 msgid "Car (recommended way)"
-msgstr "車行（最短路徑）"
+msgstr "汽車（建議路徑）"
 
 #: src/plugins/runner/openrouteservice/OpenRouteServicePlugin.cpp:76
 msgctxt "Marble::OpenRouteServiceConfigWidget|"
 msgid "Car (fastest way)"
-msgstr "車行（最快路徑）"
+msgstr "汽車（最快路徑）"
 
 #: src/plugins/runner/openrouteservice/OpenRouteServicePlugin.cpp:77
 msgctxt "Marble::OpenRouteServiceConfigWidget|"
 msgid "Car (shortest way)"
-msgstr "車行（最短路徑）"
+msgstr "汽車（最短路徑）"
 
 #: src/plugins/runner/openrouteservice/OpenRouteServicePlugin.cpp:78
 msgctxt "Marble::OpenRouteServiceConfigWidget|"
@@ -19255,27 +18840,21 @@ msgid "Micro World Database II"
 msgstr "Micro World 資料庫 II"
 
 #: src/plugins/runner/routino/RoutinoConfigWidget.ui:17
-#, fuzzy
-#| msgid "Transport"
 msgctxt "RoutinoConfigWidget|"
 msgid "Transport:"
-msgstr "傳輸"
+msgstr "運輸："
 
 #: src/plugins/runner/routino/RoutinoConfigWidget.ui:27
 msgctxt "RoutinoConfigWidget|"
 msgid "Method"
-msgstr ""
+msgstr "方法"
 
 #: src/plugins/runner/routino/RoutinoConfigWidget.ui:33
-#, fuzzy
-#| msgid "fastest"
 msgctxt "RoutinoConfigWidget|"
 msgid "Fastest"
 msgstr "最快"
 
 #: src/plugins/runner/routino/RoutinoConfigWidget.ui:40
-#, fuzzy
-#| msgid "shortest"
 msgctxt "RoutinoConfigWidget|"
 msgid "Shortest"
 msgstr "最短"
@@ -19303,12 +18882,12 @@ msgstr "人行道"
 #: src/plugins/runner/routino/RoutinoPlugin.cpp:75
 msgctxt "Marble::RoutinoConfigWidget|"
 msgid "Horse"
-msgstr ""
+msgstr "馬"
 
 #: src/plugins/runner/routino/RoutinoPlugin.cpp:76
 msgctxt "Marble::RoutinoConfigWidget|"
 msgid "Wheelchair"
-msgstr ""
+msgstr "輪椅"
 
 #: src/plugins/runner/routino/RoutinoPlugin.cpp:77
 msgctxt "Marble::RoutinoConfigWidget|"
@@ -19321,18 +18900,14 @@ msgid "Moped"
 msgstr ""
 
 #: src/plugins/runner/routino/RoutinoPlugin.cpp:79
-#, fuzzy
-#| msgid "Motorway"
 msgctxt "Marble::RoutinoConfigWidget|"
 msgid "Motorbike"
-msgstr "高速公路"
+msgstr "摩托車"
 
 #: src/plugins/runner/routino/RoutinoPlugin.cpp:80
-#, fuzzy
-#| msgid "Motorway"
 msgctxt "Marble::RoutinoConfigWidget|"
 msgid "Motorcar"
-msgstr "高速公路"
+msgstr "汽車"
 
 #: src/plugins/runner/routino/RoutinoPlugin.cpp:81
 msgctxt "Marble::RoutinoConfigWidget|"
@@ -19380,27 +18955,21 @@ msgid "Traveling Salesman Routing"
 msgstr "Traveling Salesman 路徑"
 
 #: src/plugins/runner/yours/YoursConfigWidget.ui:17
-#, fuzzy
-#| msgid "Transport"
 msgctxt "YoursConfigWidget|"
 msgid "Transport:"
-msgstr "傳輸"
+msgstr "運輸："
 
 #: src/plugins/runner/yours/YoursConfigWidget.ui:27
 msgctxt "YoursConfigWidget|"
 msgid "Method"
-msgstr ""
+msgstr "方法"
 
 #: src/plugins/runner/yours/YoursConfigWidget.ui:33
-#, fuzzy
-#| msgid "fastest"
 msgctxt "YoursConfigWidget|"
 msgid "Fastest"
 msgstr "最快"
 
 #: src/plugins/runner/yours/YoursConfigWidget.ui:40
-#, fuzzy
-#| msgid "shortest"
 msgctxt "YoursConfigWidget|"
 msgid "Shortest"
 msgstr "最短"
@@ -19436,11 +19005,9 @@ msgid "Bicycle"
 msgstr "腳踏車"
 
 #: src/plugins/runner/yours/YoursPlugin.cpp:77
-#, fuzzy
-#| msgid "Motorway"
 msgctxt "Marble::YoursConfigWidget|"
 msgid "Motorcar"
-msgstr "高速公路"
+msgstr "汽車"
 
 #: src/plugins/templates/floatitem/FITemplateFloatItem.cpp:47
 msgctxt "Marble::FITemplateFloatItem|"
