@@ -9368,7 +9368,7 @@ msgid ""
 msgstr ""
 "<p>Marius Valeriu Stanciu <a href=\"stanciumarius94@gmail.com"
 "\">stanciumarius94@gmail.com</a><br /><i>Projecte: Oferir la implementació "
-"d'OpenStreetMap i millorar el mode d'edició de Marble</i></p>"
+"d'OpenStreetMap i millorar el mode edició de Marble</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:198
 msgctxt "QObject|"
@@ -9387,7 +9387,7 @@ msgid ""
 "Polygons</i></p>"
 msgstr ""
 "<p>Calin Cruceru <a href=\"crucerucalincristian@gmail.com"
-"\">crucerucalincristian@gmail.com</a><br /><i>Projecte: Mode d'edició per "
+"\">crucerucalincristian@gmail.com</a><br /><i>Projecte: Mode edició per "
 "polígons</i></p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:202
@@ -13371,7 +13371,7 @@ msgstr ""
 msgctxt "Marble::DownloadOsmDialog|"
 msgid "The bandwidth limit exceeded. Please try again later."
 msgstr ""
-"S'ha excedit el límit de l'amplada de banda. Torneu-ho a intentar més tard."
+"S'ha excedit el límit de l'amplada de banda. Torneu-ho a provar més tard."
 
 #: src/plugins/render/annotate/DownloadOsmDialog.cpp:139
 msgctxt "Marble::DownloadOsmDialog|"
@@ -18252,7 +18252,3 @@ msgstr "Plan&tilla d'element flotant"
 msgctxt "Marble::FITemplateFloatItem|"
 msgid "This is a template class for float items."
 msgstr "Esta és una classe de plantilla per a elements flotants."
-
-#~ msgctxt "OpenCachingCacheDialog|KDE::DoNotExtract"
-#~ msgid "TextLabel"
-#~ msgstr "Etiqueta de text"

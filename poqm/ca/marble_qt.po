@@ -18246,7 +18246,3 @@ msgstr "Plan&tilla d'element flotant"
 msgctxt "Marble::FITemplateFloatItem|"
 msgid "This is a template class for float items."
 msgstr "Aquesta és una classe de plantilla per a elements flotants."
-
-#~ msgctxt "OpenCachingCacheDialog|KDE::DoNotExtract"
-#~ msgid "TextLabel"
-#~ msgstr "Etiqueta de text"
