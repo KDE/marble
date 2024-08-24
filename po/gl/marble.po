@@ -87,7 +87,7 @@ msgstr "Jens-Michael Hoffmann"
 #, kde-format
 msgid "OpenStreetMap Integration, OSM Namefinder, Download Management"
 msgstr ""
-"Integración de OpenStreetMap, Atopador de nomes OSM, xestor de descargas"
+"Integración de OpenStreetMap, Buscador de nomes OSM, xestor de descargas"
 
 #: kdemain.cpp:112
 #, kde-format
