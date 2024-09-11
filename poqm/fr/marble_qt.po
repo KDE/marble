@@ -19,7 +19,7 @@ msgstr ""
 "Project-Id-Version: marble_qt\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-14 08:01+0000\n"
-"PO-Revision-Date: 2024-05-07 11:48+0200\n"
+"PO-Revision-Date: 2024-09-09 19:27+0200\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: French <French <kde-francophone@kde.org>>\n"
 "Language: fr\n"
@@ -46,9 +46,9 @@ msgid ""
 "astrogeology.usgs.gov\">USGS Astrogeology Research Program</a></p>"
 msgstr ""
 "<p>La Lune.</p><p>La carte est produite à partir des données de la mission "
-"lunaire « Clémentine » (fond de carte « UVVIS Mosaic »). Crédits : NASA/"
+"lunaire « Clémentine » (fond de carte « UVVIS Mosaic »). Crédits : NASA / "
 "SDIO, Avec l'aimable autorisation du <a href=\"http://astrogeology.usgs.gov"
-"\">programme de recherche en astrogéologie de l'USGS</a></p>"
+"\">programme de recherche en astrogéologie de USGS</a></p>"
 
 #. file data/maps/moon/clementine/clementine.dgml:111
 msgctxt "DGML|"
@@ -3693,7 +3693,7 @@ msgstr "ft"
 #: src/lib/marble/CurrentLocationWidget.cpp:291
 msgctxt "QObject|"
 msgid "kt"
-msgstr "nd"
+msgstr "kt"
 
 #: src/lib/marble/CurrentLocationWidget.cpp:294
 msgctxt "QObject|"
@@ -9711,11 +9711,11 @@ msgid ""
 "Climate Research 21.<a href=\"https://crudata.uea.ac.uk/cru/data/hrg"
 "\">https://crudata.uea.ac.uk/cru/data/hrg</a></li></ul></p>"
 msgstr ""
-"<p><i>Cartes des températures et précipitations (juillet et décembre)</"
+"<p><i>Cartes des températures et précipitations (Juillet et Décembre)</"
 "i><br /> Une combinaison de deux jeux de données : <ul> <li>Legates, D.R. et "
 "Willmott, C.J 1989. Moyennes mensuelles des températures de l'air en surface "
 "et précipitations. Matrice de données numériques sur une grille géographique "
-"de 361x721 de 0,5 degré (lat / long) (enregistrement centré sur les "
+"de 361 x 721 de 0,5 degré (lat / long) (enregistrement centré sur les "
 "méridiens à 0.5 degrés). Boulder CO : centre national pour la recherche "
 "atmosphérique. <a href=\"http://www.ngdc.noaa.gov/ecosys/cdroms/ged_iia/"
 "datasets/a04/lw.htm\"> http://www.ngdc.noaa.gov/ecosys/cdroms/ged_iia/"
@@ -9812,7 +9812,7 @@ msgstr ""
 "><i>Licence</i> : les données Open Source Routing Machine sont librement "
 "utilisables sous les termes de la <a href=\"https://wiki.openstreetmap.org/"
 "index.php/OpenStreetMap_License\">licence Creative Commons Attribution - "
-"Partage dans les Mêmes Conditions 2.0</a>.</p>"
+"Partage dans les mêmes conditions 2.0</a>.</p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:316
 msgctxt "QObject|"
@@ -9828,13 +9828,13 @@ msgid ""
 msgstr ""
 "<p><i>MapQuest</i><br />Certains itinéraires proposés par Marble via le "
 "téléchargement sont fournis par <a href=\"https://www.mapquest.com/"
-"\">MapQuest</a> et leurs API Open Data Map et service web.<br /> Les trajets "
-"fournis par MapQuest applicable aux données OpenStreetMap sont librement "
-"utilisables sous les termes de la <a href=\"https://wiki.openstreetmap.org/"
-"index.php/OpenStreetMap_License\">licence Creative Commons Attribution - "
-"Partage dans les Mêmes Conditions 2.0</a>. L'emploi du service d'itinéraire "
-"de MapQuest est soumis aux <a href=\"https://info.mapquest.com/terms-of-use/"
-"\">conditions d'utilisation de MapQuest</a>.</p>"
+"\">MapQuest</a> et leurs API Open Data Map et service Internet.<br /> Les "
+"trajets fournis par MapQuest applicable aux données OpenStreetMap sont "
+"librement utilisables sous les termes de la <a href=\"https://wiki."
+"openstreetmap.org/index.php/OpenStreetMap_License\">licence Creative Commons "
+"Attribution - Partage dans les Mêmes Conditions 2.0</a>. L'emploi du service "
+"d'itinéraire de MapQuest est soumis aux <a href=\"https://info.mapquest.com/"
+"terms-of-use/\">conditions d'utilisation de MapQuest</a>.</p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:323
 msgctxt "QObject|"
@@ -11277,7 +11277,7 @@ msgstr "OGG"
 #: src/lib/marble/MovieCapture.cpp:65
 msgctxt "Marble::MovieCapture|"
 msgid "SWF"
-msgstr "SWF"
+msgstr "swf"
 
 #: src/lib/marble/MovieCaptureDialog.cpp:24
 msgctxt "Marble::MovieCaptureDialog|Start recording a movie"
@@ -12501,7 +12501,7 @@ msgstr "Ombrage d&u soleil"
 #: src/lib/marble/SunControlWidget.ui:41
 msgctxt "SunControlWidget|"
 msgid "Sha&dow"
-msgstr "Ombre"
+msgstr "Om&bre"
 
 #: src/lib/marble/SunControlWidget.ui:54
 msgctxt "SunControlWidget|"
@@ -13015,7 +13015,7 @@ msgstr "FlightGear"
 #: src/plugins/positionprovider/flightgear/FlightGearPositionProviderPlugin.cpp:51
 msgctxt "Marble::FlightGearPositionProviderPlugin|"
 msgid "Reports the position of running flightgear application."
-msgstr "Rapporte la position d'une application « flightgear » en cours."
+msgstr "Rapporte la position d'une application « Flightgear » en cours."
 
 #: src/plugins/positionprovider/geoclue/GeoCluePositionProviderPlugin.cpp:16
 msgctxt "Marble::GeoCluePositionProviderPlugin|"
@@ -13168,8 +13168,8 @@ msgid ""
 "All Supported Files (*.kml *.osm);;KML file (*.kml);;Open Street Map file (*."
 "osm)"
 msgstr ""
-"Tous les fichiers pris en charge (*.kml *.osm);;Fichier KML (*.kml);;Fichier "
-"Open Street Map (*.osm)"
+"Tous les fichiers pris en charge (*.kml *.osm) ; ; Fichier KML (*.kml) ; ; "
+"Fichier Open Street Map (*.osm)"
 
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:395
 msgctxt "Marble::AnnotatePlugin|"
@@ -13182,8 +13182,8 @@ msgid ""
 "All Supported Files (*.kml *.osm);;Kml Annotation file (*.kml);;Open Street "
 "Map file (*.osm)"
 msgstr ""
-"Tous les fichiers pris en charge (*.kml *.osm);;Fichier KML d'annotation (*."
-"kml);;Fichier Open Street Map (*.osm)"
+"Tous les fichiers pris en charge (*.kml *.osm) ; ; Fichier « kml » "
+"d'annotation (*.kml) ; ; Fichier Open Street Map (*.osm)"
 
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:780
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:785
@@ -14400,8 +14400,8 @@ msgid ""
 "All Supported Files (*.gpx *.kml *.pnt);;GPS Data (*.gpx);;Google Earth KML "
 "(*.kml);PNT Data (*.pnt)"
 msgstr ""
-"Tous les fichiers pris en charge (*.gpx *.kml *.pnt);;Données GPS (*.gpx);;"
-"KML de Google Earth (*.kml);Données PNT (*.pnt)"
+"Tous les fichiers pris en charge (*.gpx *.kml *.pnt) ; ; Données GPS (*."
+"gpx) ; ; KML de Google Earth (*.kml) ; Données « pnt » (*.pnt)"
 
 #: src/plugins/render/foursquare/FoursquarePlugin.cpp:35
 msgctxt "Marble::FoursquarePlugin|"
@@ -14456,7 +14456,7 @@ msgstr "m"
 #: src/plugins/render/gpsinfo/GpsInfo.cpp:142
 msgctxt "Marble::GpsInfo|"
 msgid "kt"
-msgstr "nd"
+msgstr "kt"
 
 #: src/plugins/render/gpsinfo/GpsInfo.cpp:144
 msgctxt "Marble::GpsInfo|"
@@ -15665,7 +15665,7 @@ msgstr "Tous les fichiers pris en charge (*.txt *.msc)"
 #: src/plugins/render/satellites/SatellitesConfigDialog.cpp:290
 msgctxt "Marble::SatellitesConfigDialog|"
 msgid "Marble Satellite Catalog (*.msc)"
-msgstr "Catalogue Marble de satellites (*.msc)"
+msgstr "Catalogue de Marble de satellites (*.msc)"
 
 #: src/plugins/render/satellites/SatellitesConfigDialog.cpp:291
 msgctxt "Marble::SatellitesConfigDialog|"
@@ -15996,7 +15996,7 @@ msgstr "GPS Opérationnel"
 #: src/plugins/render/satellites/SatellitesPlugin.cpp:475
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
 msgid "Glonass Operational"
-msgstr "Glonass Opérationnel"
+msgstr "GLONASS opérationnel"
 
 #: src/plugins/render/satellites/SatellitesPlugin.cpp:476
 msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
@@ -16092,7 +16092,7 @@ msgstr "km/h"
 #: src/plugins/render/speedometer/Speedometer.cpp:137
 msgctxt "Marble::Speedometer|"
 msgid "kt"
-msgstr "nd"
+msgstr "kt"
 
 #: src/plugins/render/speedometer/Speedometer.ui:45
 msgctxt "Speedometer|"
@@ -17246,12 +17246,12 @@ msgstr "Recherche de « hostip.info »"
 #: src/plugins/runner/hostip/HostipPlugin.cpp:27
 msgctxt "Marble::HostipPlugin|"
 msgid "Hostip.info"
-msgstr "Hostip.info"
+msgstr "hostip.info"
 
 #: src/plugins/runner/hostip/HostipPlugin.cpp:42
 msgctxt "Marble::HostipPlugin|"
 msgid "Host name and IP geolocation search using the hostip.info service"
-msgstr "Localisation par nom d'hôte et IP via le service hostip.info"
+msgstr "Localisation par nom d'hôte et IP via le service « hostip.info »"
 
 #: src/plugins/runner/json/JsonPlugin.cpp:21
 msgctxt "Marble::JsonPlugin|"
@@ -17906,7 +17906,7 @@ msgstr "Monav"
 #: src/plugins/runner/monav/MonavPlugin.cpp:252
 msgctxt "Marble::MonavPlugin|"
 msgid "Offline routing using the monav daemon"
-msgstr "Itinéraire hors connexion via le démon monav"
+msgstr "Itinéraire hors connexion via le démon « monav »"
 
 #: src/plugins/runner/nominatim-reversegeocoding/NominatimReverseGeocodingPlugin.cpp:22
 msgctxt "Marble::NominatimPlugin|"
@@ -17942,7 +17942,7 @@ msgstr "Ce service requiert une connexion à Internet."
 #: src/plugins/runner/open-source-routing-machine/OSRMPlugin.cpp:22
 msgctxt "Marble::OSRMPlugin|"
 msgid "Open Source Routing Machine (OSRM) Routing"
-msgstr "Itinéraire Open Source Routing Machine (OSRM)"
+msgstr "Itinéraire « Open Source Routing Machine » (OSRM)"
 
 #: src/plugins/runner/open-source-routing-machine/OSRMPlugin.cpp:27
 msgctxt "Marble::OSRMPlugin|"
@@ -18083,22 +18083,24 @@ msgstr "Analyseur de fichier au format « pn2 »"
 #: src/plugins/runner/pn2/Pn2Plugin.cpp:33
 msgctxt "Marble::Pn2Plugin|"
 msgid "Create GeoDataDocument from Pn2 Files"
-msgstr "Créer un document de données géographiques à partir de fichiers Pn2"
+msgstr ""
+"Créer un document de données géographiques à partir de fichiers « pn2 »"
 
 #: src/plugins/runner/pn2/Pn2Plugin.cpp:49
 msgctxt "Marble::Pn2Plugin|"
 msgid "Compressed Pnt"
-msgstr "Pnt compressé"
+msgstr "Format « pnt » compressé"
 
 #: src/plugins/runner/pnt/PntPlugin.cpp:18
 msgctxt "Marble::PntPlugin|"
 msgid "Pnt File Parser"
-msgstr "Analyseur de fichier Pnt"
+msgstr "Analyseur de fichier « pnt »"
 
 #: src/plugins/runner/pnt/PntPlugin.cpp:33
 msgctxt "Marble::PntPlugin|"
 msgid "Create GeoDataDocument from Pnt Files"
-msgstr "Créer un document de données géographiques à partir de fichiers Pnt"
+msgstr ""
+"Créer un document de données géographiques à partir de fichiers « pnt »"
 
 #: src/plugins/runner/pnt/PntPlugin.cpp:49
 msgctxt "Marble::PntPlugin|"
@@ -18198,7 +18200,8 @@ msgstr "Analyseur de fichier au format « shp »"
 #: src/plugins/runner/shp/ShpPlugin.cpp:33
 msgctxt "Marble::ShpPlugin|"
 msgid "Create GeoDataDocument from Shp Files"
-msgstr "Créer un document de données géographiques à partir de fichiers Shp"
+msgstr ""
+"Créer un document de données géographiques à partir de fichiers « shp »"
 
 #: src/plugins/runner/shp/ShpPlugin.cpp:49
 msgctxt "Marble::ShpPlugin|"
