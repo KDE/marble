@@ -4,7 +4,7 @@
 Dependencies:
 - 'on': ['@all']
   'require':
-    'frameworks/extra-cmake-modules': '@stable'
+    'frameworks/extra-cmake-modules': '@stable-kf6'
 
 Options:
  cmake-options: "-DBUILD_MARBLE_TOOLS=ON"
