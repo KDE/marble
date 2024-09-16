@@ -3,12 +3,11 @@
 // SPDX-FileCopyrightText: 2017 Dennis Nienhüser <nienhueser@kde.org>
 //
 
-import QtQuick 2.3
-import QtQuick.Window 2.2
-import QtQuick.Controls 2.0
-import QtQuick.Layouts 1.3
-import QtGraphicalEffects 1.0
-
+import QtQuick
+import QtQuick.Window
+import QtQuick.Controls
+import QtQuick.Layouts
+import Qt5Compat.GraphicalEffects
 
 Item {
     id: root

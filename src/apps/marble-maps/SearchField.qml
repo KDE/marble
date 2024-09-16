@@ -5,9 +5,8 @@
 // SPDX-FileCopyrightText: 2015 Mikhail Ivchenko <ematirov@gmail.com>
 //
 
-import QtQuick 2.3
-import QtQuick.Controls 1.3
-import QtQuick.Controls.Styles 1.3
+import QtQuick
+import QtQuick.Controls
 
 Item {
     id: root
@@ -48,14 +47,14 @@ Item {
         border.width: 1
     }
 
-    FlatButton {
+    ToolButton {
         id: menuButton
         anchors.verticalCenter: parent.verticalCenter
         anchors.left: parent.left
         anchors.leftMargin: 10
         height: 0.7 * field.height
         width: height
-        imageSource: "qrc:///menu.png"
+        icon.name: 'application-menu-symbolic'
 
         MouseArea {
             anchors.fill: parent
@@ -70,7 +69,6 @@ Item {
 
         placeholderText: qsTr("Search")
         font.pointSize: 16
-        textColor: palette.text
         inputMethodHints: Qt.ImhNoPredictiveText
         onAccepted: root.search(text)
         onTextChanged: root.completionRequested(text)
@@ -84,22 +82,9 @@ Item {
             height: 0.7 * field.height
             width: height
             running: root.busy
-
-            style: BusyIndicatorStyle {
-                indicator: Image {
-                    visible: control.running
-                    source: "busy_indicator.png"
-                    RotationAnimator on rotation {
-                        running: control.running
-                        loops: Animation.Infinite
-                        duration: 1500
-                        from: 0 ; to: 360
-                    }
-                }
-            }
         }
 
-        FlatButton {
+        ToolButton {
             id: clearButton
             anchors.verticalCenter: parent.verticalCenter
             anchors.right: searchButton.visible ? searchButton.left : parent.right
@@ -107,7 +92,7 @@ Item {
             height: 0.7 * field.height
             width: height
             visible: field.text !== ""
-            imageSource: "qrc:///clear.png"
+            icon.name: 'edit-clear-list-symbolic'
 
             MouseArea {
                 anchors.fill: parent
@@ -122,7 +107,7 @@ Item {
             }
         }
 
-        FlatButton {
+        ToolButton {
             id: searchButton
             anchors.verticalCenter: parent.verticalCenter
             anchors.right: parent.right
@@ -131,7 +116,7 @@ Item {
             width: height
             visible: !root.busy
             enabled: field.text !== ""
-            imageSource: "qrc:///search.png"
+            icon.name: 'search-symbolic'
             onClicked: root.search(field.text)
         }
     }

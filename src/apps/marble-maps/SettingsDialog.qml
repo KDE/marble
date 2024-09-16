@@ -3,12 +3,12 @@
 // SPDX-FileCopyrightText: 2016 Dennis Nienhüser <nienhueser@kde.org>
 //
 
-import QtQuick 2.3
-import QtQuick.Controls 1.3
-import QtQuick.Window 2.2
-import QtQuick.Layouts 1.1
+import QtQuick
+import QtQuick.Controls
+import QtQuick.Window
+import QtQuick.Layouts
 
-import org.kde.marble 0.20
+import org.kde.marble
 
 Item {
     id: root

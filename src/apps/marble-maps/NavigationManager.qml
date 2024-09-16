@@ -4,11 +4,11 @@
 //
 
 
-import QtQuick 2.3
-import QtQuick.Controls 1.3
-import QtQuick.Window 2.2
+import QtQuick
+import QtQuick.Controls
+import QtQuick.Window
 
-import org.kde.marble 0.20
+import org.kde.marble
 
 Item {
     id: root
@@ -57,7 +57,7 @@ Item {
         destinationDistance: navigation.destinationDistance
     }
 
-    CircularButton {
+    RoundButton {
         id: muteButton
         visible: root.hasRoute
 
@@ -67,7 +67,7 @@ Item {
         anchors.rightMargin: Screen.pixelDensity * 3
         anchors.top: infoBar.bottom
         anchors.topMargin: Screen.pixelDensity * 5
-        iconSource: muted ? "qrc:///material/volume-off.svg" : "qrc:///material/volume-on.svg"
+        icon.source: muted ? "qrc:///material/volume-off.svg" : "qrc:///material/volume-on.svg"
         onClicked: muted = !muted
     }
 

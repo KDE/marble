@@ -3,17 +3,17 @@
 // SPDX-FileCopyrightText: 2016 Dennis Nienhüser <nienhueser@kde.org>
 //
 
-import QtQuick 2.8
-import QtQuick.Controls 2.2
-import QtQuick.Window 2.2
-import QtQuick.Layouts 1.3
-import QtQml.Models 2.1
-import QtQuick.Controls.Material 2.1
-import QtGraphicalEffects 1.0
+import QtQuick
+import QtQuick.Controls
+import QtQuick.Window
+import QtQuick.Layouts
+import QtQml.Models
+import QtQuick.Controls.Material
+import Qt5Compat.GraphicalEffects
 
-import org.kde.kirigami 2.0 as Kirigami
+import org.kde.kirigami as Kirigami
 
-import org.kde.marble 0.20
+import org.kde.marble
 
 Kirigami.Page {
     id: bookmarkPage

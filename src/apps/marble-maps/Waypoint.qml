@@ -3,11 +3,10 @@
 // SPDX-FileCopyrightText: 2015 Gábor Péterffy <peterffy95@gmail.com>
 //
 
-import QtQuick 2.3
-import QtGraphicalEffects 1.0
-import QtQuick.Window 2.2
+import QtQuick
+import QtQuick.Window
 
-import org.kde.marble 0.20
+import org.kde.marble
 
 Item {
     id: root

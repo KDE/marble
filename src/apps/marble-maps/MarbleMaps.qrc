@@ -1,13 +1,11 @@
 <RCC>
     <qresource prefix="/">
         <file>AboutDialog.qml</file>
-        <file>FlatButton.qml</file>
         <file>Completion.qml</file>
         <file>MainScreen.qml</file>
         <file>SearchResults.qml</file>
         <file>SearchField.qml</file>
         <file>Search.qml</file>
-        <file>CircularButton.qml</file>
         <file>IconText.qml</file>
         <file>PositionButton.qml</file>
         <file>BoxedText.qml</file>

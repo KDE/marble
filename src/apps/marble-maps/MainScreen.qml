@@ -5,14 +5,12 @@
 // SPDX-FileCopyrightText: 2015 Mikhail Ivchenko <ematirov@gmail.com>
 //
 
-import QtQuick 2.7
-import QtQuick.Controls 2.2
-import QtQuick.Window 2.2
-import QtQuick.Controls.Material 2.0
+import QtQuick
+import QtQuick.Controls
+import QtQuick.Window
 
-
-import org.kde.marble 0.20
-import org.kde.kirigami 2.0 as Kirigami
+import org.kde.marble
+import org.kde.kirigami as Kirigami
 
 Kirigami.AbstractApplicationWindow {
     id: app
@@ -21,11 +19,6 @@ Kirigami.AbstractApplicationWindow {
 
     width: 600
     height: 400
-
-    Material.theme: Material.Light
-    Material.accent: Material.Blue
-
-    color: "#f9f9f9" // Keep the background white while no dialog is loaded
 
     property alias state: stateTracker.state
 
@@ -112,7 +105,7 @@ Kirigami.AbstractApplicationWindow {
                 text: qsTr("Public Transport")
                 checkable: true
                 checked: marbleMaps.showPublicTransport
-                iconName: "qrc:///material/directions-bus.svg"
+                icon.source: "qrc:///material/directions-bus.svg"
                 visible: true
                 onTriggered: {
                     sidePanel.close()
@@ -126,7 +119,7 @@ Kirigami.AbstractApplicationWindow {
                 checked: marbleMaps.showOutdoorActivities
                 text: qsTr("Outdoor Activities")
                 visible: true
-                iconName: "qrc:///material/directions-run.svg"
+                icon.source: "qrc:///material/directions-run.svg"
                 onTriggered: {
                     sidePanel.close()
                     marbleMaps.showOutdoorActivities = checked
@@ -138,7 +131,7 @@ Kirigami.AbstractApplicationWindow {
                 checked: settings.value("MarbleMaps", "showAccessibility", "false") === "true"
                 text: qsTr("Accessibility")
                 visible: true
-                iconName: "qrc:///material/wheelchair.svg"
+                icon.source: "qrc:///material/wheelchair.svg"
                 onTriggered: {
                     sidePanelSettings.value("MarbleMaps", "showAccessibility", "false") === "true"
                 }
@@ -146,7 +139,7 @@ Kirigami.AbstractApplicationWindow {
             Kirigami.Action{ enabled: false},
             Kirigami.Action {
                 text: qsTr("About")
-                iconName: "qrc:///marble.svg"
+                icon.source: "qrc:///marble.svg"
                 visible: true
                 onTriggered: {
                     app.state = "about"
@@ -157,7 +150,7 @@ Kirigami.AbstractApplicationWindow {
             },
             Kirigami.Action {
                 text: qsTr("Bookmarks")
-                iconName: "qrc:///material/star.svg"
+                icon.source: "qrc:///material/star.svg"
                 onTriggered: {
                     app.state = "bookmarks"
                     sidePanel.close()
@@ -166,7 +159,7 @@ Kirigami.AbstractApplicationWindow {
             },
             Kirigami.Action {
                 text: qsTr("Layer Options")
-                iconName: "qrc:///settings.png"
+                icon.source: "qrc:///settings.png"
                 onTriggered: {
                     app.state = "options"
                     sidePanel.close()
@@ -175,7 +168,7 @@ Kirigami.AbstractApplicationWindow {
             },
             Kirigami.Action {
                 text: qsTr("Routing")
-                iconName: "qrc:///material/directions.svg"
+                icon.source: "qrc:///material/directions.svg"
                 onTriggered: {
                     app.state = "route"
                 }
@@ -475,13 +468,13 @@ Kirigami.AbstractApplicationWindow {
                 anchors.centerIn: parent
                 spacing: Kirigami.Units.gridUnit * 2
 
-                FlatButton {
+                ToolButton {
                     id: routeEditorButton
                     property string currentProfileIcon: "qrc:///material/directions-car.svg"
                     height: Screen.pixelDensity * 6
                     width: height
                     enabled: app.state !== "route" || routingManager.hasRoute
-                    imageSource: "qrc:///material/directions.svg"
+                    icon.source: "qrc:///material/directions.svg"
 
                     onClicked: {
                         if (app.state === "route") {
@@ -498,22 +491,22 @@ Kirigami.AbstractApplicationWindow {
                     states: [
                         State {
                             name: ""
-                            PropertyChanges { target: routeEditorButton; imageSource: "qrc:///material/directions.svg"; }
+                            PropertyChanges { target: routeEditorButton; icon.source: "qrc:///material/directions.svg"; }
                         },
                         State {
                             name: "routingAction"
                             when: app.state === "route"
-                            PropertyChanges { target: routeEditorButton; imageSource: "qrc:///material/navigation.svg"; }
+                            PropertyChanges { target: routeEditorButton; icon.source: "qrc:///material/navigation.svg"; }
                         },
                         State {
                             name: "placeAction"
                             when: app.state === "place"
-                            PropertyChanges { target: routeEditorButton; imageSource: "qrc:///material/directions.svg" }
+                            PropertyChanges { target: routeEditorButton; icon.source: "qrc:///material/directions.svg" }
                         }
                     ]
                 }
 
-                FlatButton {
+                ToolButton {
                     id: bookmarkButton
                     anchors.verticalCenter: parent.verticalCenter
                     height: Screen.pixelDensity * 6
@@ -521,7 +514,7 @@ Kirigami.AbstractApplicationWindow {
                     property bool bookmark: bookmarks.isBookmark(app.selectedPlacemark.longitude, app.selectedPlacemark.latitude)
                     enabled: app.state === "place"
                     visible: app.state === "place"
-                    imageSource: bookmark ? "qrc:///material/star.svg" : "qrc:///material/star_border.svg"
+                    icon.source: bookmark ? "qrc:///material/star.svg" : "qrc:///material/star_border.svg"
                     onClicked: {
                         if (bookmarkButton.bookmark) {
                             bookmarks.removeBookmark(app.selectedPlacemark.longitude, app.selectedPlacemark.latitude)

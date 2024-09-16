@@ -4,14 +4,15 @@
 //
 
 
-import QtQuick 2.3
-import QtQuick.Window 2.2
+import QtQuick
+import QtQuick.Controls
+import QtQuick.Window
 
 Item {
     id: root
 
-    property alias diameter: button.diameter
-    property alias iconSource: button.iconSource
+    property alias diameter: button.radius
+    property alias iconSource: button.icon.source
     property real angle: 0
     property alias showDirection: indicator.visible
 
@@ -40,7 +41,7 @@ Item {
         }
     }
 
-    CircularButton {
+    RoundButton {
         id: button
         onClicked: root.clicked()
         anchors {

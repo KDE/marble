@@ -4,12 +4,12 @@
 // SPDX-FileCopyrightText: 2015 Dennis Nienhüser <nienhueser@kde.org>
 //
 
-import QtQuick 2.3
-import QtQuick.Controls 1.3
-import QtQuick.Window 2.2
-import QtQuick.Layouts 1.1
+import QtQuick
+import QtQuick.Controls
+import QtQuick.Window
+import QtQuick.Layouts
 
-import org.kde.marble 0.20
+import org.kde.marble
 
 Item {
     id: root
@@ -122,33 +122,33 @@ Item {
                     anchors.right: parent.right
                     anchors.verticalCenter: parent.verticalCenter
 
-                    ImageButton {
+                    Button {
                         id: upButton
                         anchors.verticalCenter: parent.verticalCenter
                         visible: index > 0 && index === root.currentIndex
-                        imageSource: "qrc:///up.png"
+                        icon.name: 'arrow-up-symbolic'
                         onClicked: {
                             routingManager.swapVias(index, index-1);
                             root.currentIndex--;
                         }
                     }
 
-                    ImageButton {
+                    Button {
                         id: downButton
                         anchors.verticalCenter: parent.verticalCenter
                         visible: index+1 < routingManager.routeRequestModel.count && index === root.currentIndex
-                        imageSource: "qrc:///down.png"
+                        icon.name: 'arrow-down-symbolic'
                         onClicked: {
                             routingManager.swapVias(index, index+1);
                             root.currentIndex++;
                         }
                     }
 
-                    ImageButton {
+                    Button {
                         id: deleteButton
                         anchors.verticalCenter: parent.verticalCenter
                         visible: index === root.currentIndex
-                        imageSource: "qrc:///delete.png"
+                        icon.name: 'delete-symbolic'
                         onClicked: {
                             routingManager.removeVia(index);
                             root.currentIndex = Math.max(0, root.currentIndex-1);
