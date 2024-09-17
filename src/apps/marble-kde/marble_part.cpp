@@ -26,12 +26,14 @@
 #include <QFileDialog>
 #include <QMenu>
 #include <QStatusBar>
+#include <QActionGroup>
 
 // KF
 #include <KAboutData>
 #include <KActionCollection>
 #include <KConfigDialog>
 #include <KLocalizedString>
+#include <KLazyLocalizedString>
 #include <KMessageBox>
 #include <KPluginFactory>
 #include <kparts/statusbarextension.h>
@@ -99,17 +101,16 @@ namespace Marble
 
 namespace
 {
-    const char POSITION_STRING[] = I18N_NOOP( "Position: %1" );
-    const char DISTANCE_STRING[] = I18N_NOOP( "Altitude: %1" );
-    const char TILEZOOMLEVEL_STRING[] = I18N_NOOP( "Tile Zoom Level: %1" );
-    const char DATETIME_STRING[] = I18N_NOOP( "Time: %1" );
+    const KLazyLocalizedString POSITION_STRING = kli18n( "Position: %1" );
+    const KLazyLocalizedString DISTANCE_STRING = kli18n( "Altitude: %1" );
+    const KLazyLocalizedString TILEZOOMLEVEL_STRING = kli18n( "Tile Zoom Level: %1" );
+    const KLazyLocalizedString DATETIME_STRING = kli18n( "Time: %1" );
 }
 
-K_PLUGIN_FACTORY(MarblePartFactory, registerPlugin<MarblePart>();)
-K_EXPORT_PLUGIN(MarblePartFactory("marble"))
+K_PLUGIN_FACTORY_WITH_JSON(MarblePartFactory, "marble_part.json", registerPlugin<MarblePart>();)
 
-MarblePart::MarblePart( QWidget *parentWidget, QObject *parent, const QVariantList &arguments )
-  : KParts::ReadOnlyPart( parent ),
+MarblePart::MarblePart( QWidget *parentWidget, QObject *parent, const KPluginMetaData &metaData, const QVariantList &arguments )
+  : KParts::ReadOnlyPart( parent, metaData ),
     m_sunControlDialog( nullptr ),
     m_timeControlDialog( nullptr ),
     m_downloadRegionDialog( nullptr ),
@@ -211,7 +212,7 @@ ControlView* MarblePart::controlView() const
 
 KAboutData *MarblePart::createAboutData()
 {
-    return new KAboutData( QString( I18N_NOOP( "marble_part" ) ),
+    return new KAboutData( QString("marble_part" ),
                            QString( "Marble" ),
                            ControlView::applicationVersion(),
                            i18n( "A Virtual Globe" ),
@@ -243,7 +244,7 @@ bool MarblePart::openFile()
         if (plugin->nameId() == QLatin1String("Cache"))
             continue;
 
-        const QStringList fileExtensions = plugin->fileExtensions().replaceInStrings( QRegExp( "^" ), "*." );
+        const QStringList fileExtensions = plugin->fileExtensions().replaceInStrings( QRegularExpression( "^" ), "*." );
         const QString filter = plugin->fileFormatDescription() + QLatin1String(" (") + fileExtensions.join(QLatin1Char(' ')) + QLatin1Char(')');
         filters << filter;
         allFileExtensions << fileExtensions;
@@ -1193,17 +1194,16 @@ void MarblePart::updateCloudSyncCredentials()
 void MarblePart::updateStatusBar()
 {
     if ( m_positionLabel )
-        m_positionLabel->setText( i18n( POSITION_STRING, m_position ) );
+        m_positionLabel->setText( POSITION_STRING.subs(m_position).toString() );
 
     if ( m_distanceLabel )
-        m_distanceLabel->setText( i18n( DISTANCE_STRING, m_controlView->marbleWidget()->distanceString() ) );
+        m_distanceLabel->setText( DISTANCE_STRING.subs(m_controlView->marbleWidget()->distanceString()).toString() );
 
     if ( m_tileZoomLevelLabel )
-        m_tileZoomLevelLabel->setText( i18n( TILEZOOMLEVEL_STRING,
-                                             m_tileZoomLevel ) );
+        m_tileZoomLevelLabel->setText( TILEZOOMLEVEL_STRING.subs(m_tileZoomLevel).toString());
 
     if ( m_clockLabel )
-        m_clockLabel->setText( i18n( DATETIME_STRING, m_clock ) );
+        m_clockLabel->setText(DATETIME_STRING.subs(m_clock).toString());
 }
 
 void MarblePart::setupStatusBar()
@@ -1212,18 +1212,18 @@ void MarblePart::setupStatusBar()
 
     // UTM syntax is used in the template string, as it is longer than the lon/lat one
     QString templatePositionString =
-        QString( "%1 00Z 000000.00 m E, 00000000.00 m N_" ).arg(POSITION_STRING);
+        QString( "%1 00Z 000000.00 m E, 00000000.00 m N_" ).arg(POSITION_STRING.toString());
     m_positionLabel = setupStatusBarLabel( templatePositionString );
 
     QString templateDistanceString =
-        QString( "%1 00.000,0 mu" ).arg(DISTANCE_STRING);
+        QString( "%1 00.000,0 mu" ).arg(DISTANCE_STRING.toString());
     m_distanceLabel = setupStatusBarLabel( templateDistanceString );
 
-    QString templateDateTimeString = QString( "%1 %2" ).arg( DATETIME_STRING , QLocale().toString( QDateTime::fromString ( "01:01:1000", "dd:mm:yyyy"), QLocale::ShortFormat ) );
+    QString templateDateTimeString = QString( "%1 %2" ).arg( DATETIME_STRING.toString() , QLocale().toString( QDateTime::fromString ( "01:01:1000", "dd:mm:yyyy"), QLocale::ShortFormat ) );
 
     m_clockLabel = setupStatusBarLabel( templateDateTimeString );
 
-    const QString templateTileZoomLevelString = i18n( TILEZOOMLEVEL_STRING, m_tileZoomLevel );
+    const QString templateTileZoomLevelString = TILEZOOMLEVEL_STRING.subs(m_tileZoomLevel).toString();
     m_tileZoomLevelLabel = setupStatusBarLabel( templateTileZoomLevelString );
 
     connect( m_controlView->marbleWidget(), SIGNAL(mouseMoveGeoPosition(QString)),

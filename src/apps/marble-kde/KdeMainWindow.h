@@ -9,7 +9,7 @@
 #define MARBLE_KDEMAINWINDOW_H
  
 
-#include <KXmlGui/KXmlGuiWindow>
+#include <KXmlGuiWindow>
 
 class QActionGroup;
 class QAction;

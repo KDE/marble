@@ -38,7 +38,7 @@ MainWindow::MainWindow( const QString& marbleDataPath, QWidget *parent )
     : KXmlGuiWindow( parent ),
       m_savedSize( QSize( -1, -1 ) )
 {
-    m_part = new MarblePart( this, this, QVariantList() << marbleDataPath );
+    m_part = new MarblePart( this, this, {}, { marbleDataPath });
 
     setCentralWidget( m_part->widget() );
 

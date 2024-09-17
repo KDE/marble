@@ -28,8 +28,7 @@ target_link_libraries(marble_part
 )
 
 install(TARGETS marble_part DESTINATION ${KDE_INSTALL_PLUGINDIR})
-install(FILES marble_part.desktop DESTINATION ${KDE_INSTALL_KSERVICES5DIR})
-install(FILES marble_part.rc marbleui.rc DESTINATION ${KDE_INSTALL_KXMLGUI5DIR}/marble)
+install(FILES marble_part.rc marbleui.rc DESTINATION ${KDE_INSTALL_KXMLGUIDIR}/marble)
 
 ki18n_wrap_ui(marble_kde_SRCS ${marble_UI})
 kconfig_add_kcfg_files(marble_kde_SRCS settings.kcfgc)
@@ -77,5 +76,6 @@ ki18n_install(${CMAKE_SOURCE_DIR}/po)
 macro_optional_find_package(KF6 ${REQUIRED_KF6_MIN_VERSION} QUIET COMPONENTS DocTools)
 
 if (KF6DocTools_FOUND)
-    kdoctools_install(${CMAKE_SOURCE_DIR}/po)
+    # Disabled for now
+    #kdoctools_install(${CMAKE_SOURCE_DIR}/po)
 endif()

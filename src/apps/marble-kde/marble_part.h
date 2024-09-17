@@ -9,7 +9,7 @@
 #ifndef MARBLE_MARBLEPART_H
 #define MARBLE_MARBLEPART_H
 
-#include <kparts/readonlypart.h>
+#include <KParts/ReadOnlyPart>
 #include <QHash>
 #include "MarbleGlobal.h"
 #include <KRecentFilesAction>
@@ -46,7 +46,7 @@ class MarblePart: public KParts::ReadOnlyPart
   Q_OBJECT
 
   public:
-    MarblePart( QWidget *parentWidget, QObject *parent, const QVariantList& );
+    MarblePart( QWidget *parentWidget, QObject *parent, const KPluginMetaData &metaData, const QVariantList& );
     ~MarblePart() override;
 
     ControlView *controlView() const;
