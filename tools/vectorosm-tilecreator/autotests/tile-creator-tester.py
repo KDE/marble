@@ -12,6 +12,7 @@ import tempfile
 
 parser = argparse.ArgumentParser(description='Test driver for raw data tile creator tirex backend')
 parser.add_argument('--tirex-backend', help='Path to the tile creator binary', type=str)
+parser.add_argument('--osmconvert', help='Path to the osmconvert binary', type=str)
 parser.add_argument('--data', help='Path to the test data files', type=str)
 arguments = parser.parse_args()
 
@@ -72,7 +73,7 @@ for refFile in glob.iglob('*-z*-*-*.osm', root_dir=arguments.data):
 
         # convert to OSM format
         osmOutFile = os.path.join(tmpdir, f"{m.group(1)}-z{z}-{x}-{y}.out.osm")
-        subprocess.run(['osmconvert', f"-o={osmOutFile}", o5mOutFile])
+        subprocess.run([arguments.osmconvert, f"-o={osmOutFile}", o5mOutFile])
 
         # normalize result for easier comparison
         subprocess.run(['python3', os.path.join(os.path.dirname(os.path.abspath(__file__)), 'osm-normalize.py'), osmOutFile])

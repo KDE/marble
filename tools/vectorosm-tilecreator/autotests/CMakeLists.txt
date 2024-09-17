@@ -17,6 +17,7 @@ endif()
 add_test(NAME tirex-backend-test
     COMMAND python3 ${CMAKE_CURRENT_SOURCE_DIR}/tile-creator-tester.py
         --tirex-backend $<TARGET_FILE:marble-vectorosm-tirex-backend>
+        --osmconvert $<TARGET_FILE:osmconvert>
         --data ${CMAKE_CURRENT_SOURCE_DIR}/data
 )
 set_tests_properties(tirex-backend-test PROPERTIES
