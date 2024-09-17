@@ -171,7 +171,7 @@ void convertToNewStuffFormat( const QString &input, const QString &output )
     files << "AUTHORS.txt" << "INSTALL.txt" << "LICENSE.txt";
     QStringList arguments;
     arguments << "-czf" << output;
-    for( const QString &file: files ) {
+    for( const QString &file: std::as_const(files) ) {
         arguments << inputDirectory.filePath( file );
     }
     arguments << "/usr/share/common-licenses/CC-BY-SA-3.0";
@@ -187,7 +187,7 @@ void convertToMarbleFormat( const QString &input, const QString &output )
     files << "AUTHORS.txt" << "INSTALL.txt" << "LICENSE.txt";
     QStringList arguments;
     arguments << "-q" << "-j" << output;
-    for( const QString &file: files ) {
+    for( const QString &file: std::as_const(files) ) {
         arguments << inputDirectory.filePath( file );
     }
     arguments << "/usr/share/common-licenses/CC-BY-SA-3.0";
@@ -224,7 +224,7 @@ void convertToTomTomFormat( const QString &input, const QString &output, const Q
     files << "AUTHORS.txt" << "LICENSE.txt";
     QStringList zipArguments;
     zipArguments << "-q" << "-j" << ( output + QLatin1Char('/') + lang + QLatin1Char('-') + simpleNick + QLatin1String("-TomTom.zip") );
-    for( const QString &file: files ) {
+    for( const QString &file: std::as_const(files) ) {
         QString const filePath = inputDirectory.filePath( file );
         zipArguments <<  filePath;
     }

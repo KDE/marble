@@ -85,7 +85,7 @@ void RoutingInstruction::calculateAngle()
     int hisSize = m_predecessor->points().size();
     int mySize = m_points.size();
     Q_ASSERT( mySize > 0 && hisSize > 0 );
-    RoutingPoint one = points().first().point();
+    RoutingPoint one = points().constFirst().point();
     RoutingPoint two = m_predecessor->points().at( hisSize - 1 ).point();
     qreal distance = 0;
     for ( int i = 2; i <= qMin<int>( hisSize, 20 ) && distance < 50.0; ++i ) {
@@ -96,12 +96,12 @@ void RoutingInstruction::calculateAngle()
     qreal before = two.bearing( one );
     m_intersectionPoints.push_back( one );
 
-    one = points().first().point();
+    one = points().constFirst().point();
     if ( mySize == 1 && !m_successor ) {
         return;
     } else if ( mySize == 1 ) {
         Q_ASSERT( !m_successor->points().isEmpty() );
-        two = m_successor->points().first().point();
+        two = m_successor->points().constFirst().point();
     } else {
         two = points().at( 1 ).point();
     }
@@ -484,8 +484,8 @@ QTextStream& operator<<( QTextStream& stream, const RoutingInstruction &i )
     }
 
     if (QCoreApplication::instance()->arguments().contains(QStringLiteral("--csv"))) {
-        stream << i.points().first().point().lat() << ',';
-        stream << i.points().first().point().lon() << ',';
+        stream << i.points().constFirst().point().lat() << ',';
+        stream << i.points().constFirst().point().lon() << ',';
     } else {
         QString distanceUnit = "m ";
         int precision = 0;
@@ -504,7 +504,8 @@ QTextStream& operator<<( QTextStream& stream, const RoutingInstruction &i )
 
     if (QCoreApplication::instance()->arguments().contains(QStringLiteral("--csv")) &&
         QCoreApplication::instance()->arguments().contains(QStringLiteral("--intersection-points"))) {
-        for ( const RoutingPoint &point: i.intersectionPoints() ) {
+        const auto points = i.intersectionPoints();
+        for ( const RoutingPoint &point: points ) {
             stream << ',' << point.lat() << ',' << point.lon();
         }
     }

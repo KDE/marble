@@ -42,7 +42,7 @@ void exportToDat()
             QString idString = line.mid(0,4);
             int idValue = idString.toInt();
 
-            QString recString = line.mid( 75, 6 );
+            QStringView recString = line.mid( 75, 6 );
 
             double raHH = recString.mid( 0, 2 ).toDouble();
             double raMM = recString.mid( 2, 2 ).toDouble();
@@ -50,7 +50,7 @@ void exportToDat()
 
             double raValue = 15 * ( raHH + raMM / 60.0 + raSS / 3600.0 ) / 180.0 * M_PI;
 
-            QString decString = line.mid( 83, 7 );
+            QStringView decString = line.mid( 83, 7 );
 
             double deSign = decString.startsWith(QLatin1Char('-')) ? -1.0 : 1.0;
             double deHH = decString.mid( 1, 2 ).toDouble();
@@ -59,10 +59,10 @@ void exportToDat()
 
             double deValue = deSign * ( deHH + deMM / 60.0 + deSS / 3600.0 ) / 180.0 * M_PI;
 
-            QString magString = line.mid( 102, 5 );
+            QStringView magString = line.mid( 102, 5 );
             double magValue = magString.toDouble();
 
-            QString bvString = line.mid( 108, 6);
+            QStringView bvString = line.mid( 108, 6);
             int     colorIdx = 2; // Default White
 
             // Find Index of Table Entry with Closest B-V value (Smallest Difference)
@@ -555,14 +555,14 @@ void exportToKml()
         do {
             line = stream.readLine();
 
-            QString recString = line.mid( 75, 6 );
+            QStringView recString = line.mid( 75, 6 );
             double raHH = recString.mid( 0, 2 ).toDouble();
             double raMM = recString.mid( 2, 2 ).toDouble();
             double raSS = recString.mid( 4, 2 ).toDouble();
 
             qreal longitude = ( raHH + raMM / 60.0 + raSS / 3600.0 ) * 15.0 - 180.0;
 
-            QString decString = line.mid( 83, 7 );
+            QStringView decString = line.mid( 83, 7 );
             double deSign = decString.startsWith(QLatin1Char('-')) ? -1.0 : 1.0;
             double deHH = decString.mid( 1, 2 ).toDouble();
             double deMM = decString.mid( 3, 2 ).toDouble();
@@ -572,10 +572,10 @@ void exportToKml()
 
             qreal latitude = deValue;
 
-            QString magString = line.mid( 102, 5 );
+            QStringView magString = line.mid( 102, 5 );
             double magValue = magString.toDouble();
 
-            QString bvString = line.mid( 108, 6);
+            QStringView bvString = line.mid( 108, 6);
             int     colorIdx = 2; // Default White
 
             // Find Index of Table Entry with Closest B-V value (Smallest Difference)
@@ -671,7 +671,7 @@ int main(int argc, char *argv[])
 {
     QCoreApplication  app(argc, argv);
 
-    if (!QFileInfo("catalog.dat").exists())
+    if (!QFileInfo::exists("catalog.dat"))
     {
         std::cerr << "Missing stars.dat in current directory. Exiting." << std::endl;
         return 1;
