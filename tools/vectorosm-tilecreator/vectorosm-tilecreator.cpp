@@ -17,7 +17,7 @@
 #include "src/plugins/runner/osm/translators/O5mWriter.h"
 #endif
 
-#include <QApplication>
+#include <QGuiApplication>
 #include <QCommandLineParser>
 #include <QDebug>
 #include <QFileInfo>
@@ -62,7 +62,7 @@ bool writeTile(GeoDataDocument* tile, const QString &outputFile)
 
 int main(int argc, char *argv[])
 {
-    QCoreApplication app(argc, argv);
+    QGuiApplication app(argc, argv);
 
     QCoreApplication::setApplicationName("marble-vectorosm-tilecreator");
     QCoreApplication::setApplicationVersion("0.1");

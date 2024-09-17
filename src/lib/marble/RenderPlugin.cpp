@@ -29,7 +29,6 @@ class Q_DECL_HIDDEN RenderPlugin::Private
   public:
     Private( const MarbleModel *marbleModel )
         : m_marbleModel( marbleModel ),
-          m_action(nullptr),
           m_item(),
           m_enabled(true),
           m_visible(true),
