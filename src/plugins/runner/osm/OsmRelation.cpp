@@ -69,7 +69,7 @@ void OsmRelation::createMultipolygon(GeoDataDocument *document, OsmWays &ways, c
                 StyleBuilder::determineVisualCategory(ways[*outerWays.begin()].osmData());
 
         bool categoriesAreSame = true;
-        for (auto wayId: outerWays) {
+        for (auto wayId: std::as_const(outerWays)) {
             GeoDataPlacemark::GeoDataVisualCategory const category =
                     StyleBuilder::determineVisualCategory(ways[wayId].osmData());
             if( category != firstCategory ) {
@@ -83,7 +83,7 @@ void OsmRelation::createMultipolygon(GeoDataDocument *document, OsmWays &ways, c
         }
     }
 
-    for (auto wayId: outerWays) {
+    for (auto wayId: std::as_const(outerWays)) {
         Q_ASSERT(ways.contains(wayId));
         const auto &osmData = ways[wayId].osmData();
         GeoDataPlacemark::GeoDataVisualCategory const category = StyleBuilder::determineVisualCategory(osmData);
@@ -111,7 +111,7 @@ void OsmRelation::createMultipolygon(GeoDataDocument *document, OsmWays &ways, c
         osmData.addMemberReference(-1, outerRing.second);
 
         int index = 0;
-        for (auto const &innerRing: inner) {
+        for (auto const &innerRing: std::as_const(inner)) {
             if (innerRing.first.isEmpty() || !outerRing.first.contains(innerRing.first.first())) {
                 // Simple check to see if this inner ring is inside the outer ring
                 continue;
@@ -218,7 +218,7 @@ OsmRelation::OsmRings OsmRelation::rings(const QStringList &roles, const OsmWays
 
     OsmRings result;
     QList<OsmWay> unclosedWays;
-    for(auto wayId: roleMembers) {
+    for(auto wayId: std::as_const(roleMembers)) {
         GeoDataLinearRing ring;
         OsmWay const & way = ways[wayId];
         if (way.references().isEmpty()) {

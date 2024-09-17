@@ -10,6 +10,7 @@
 #include "GeoDataObject.h"
 #include "GeoDataDocument.h"
 #include "GeoDataPlacemark.h"
+#include "OsmPlacemarkData.h"
 
 namespace Marble {
 
@@ -76,7 +77,7 @@ GeoDataDocument *TagsFilter::accepted()
 void TagsFilter::removeAnnotationTags(GeoDataDocument *document)
 {
     for (auto placemark: document->placemarkList()) {
-        auto & osmData = placemark->osmData();
+        OsmPlacemarkData & osmData = placemark->osmData();
         removeAnnotationTags(osmData);
         for (auto & reference: osmData.nodeReferences()) {
             removeAnnotationTags(reference);

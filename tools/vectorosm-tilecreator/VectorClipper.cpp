@@ -189,8 +189,8 @@ void VectorClipper::clipPolygon(const GeoDataPlacemark *placemark, const GeoData
     }
     using namespace Clipper2Lib;
     Path64 path;
-    path.reserve(qAsConst(polygon)->outerBoundary().size());
-    for(auto const & node: qAsConst(polygon)->outerBoundary()) {
+    path.reserve(std::as_const(polygon)->outerBoundary().size());
+    for(auto const & node: std::as_const(polygon)->outerBoundary()) {
         path.push_back(coordinateToPoint(node));
     }
 
@@ -228,7 +228,7 @@ void VectorClipper::clipPolygon(const GeoDataPlacemark *placemark, const GeoData
             osmIds.insert(outerRingOsmData.id());
         }
 
-        auto const & innerBoundaries = qAsConst(polygon)->innerBoundaries();
+        auto const & innerBoundaries = std::as_const(polygon)->innerBoundaries();
         for (index = 0; index < innerBoundaries.size(); ++index) {
             auto const & innerBoundary = innerBoundaries.at(index);
             if ((minArea > 0.0 && area(innerBoundary) < minArea) || !tileBoundary.intersects(innerBoundary.latLonAltBox())) {

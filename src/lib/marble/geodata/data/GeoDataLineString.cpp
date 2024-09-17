@@ -882,7 +882,7 @@ QVariantList GeoDataLineString::toVariantList() const
     Q_D(const GeoDataLineString);
 
     QVariantList variantList;
-    for( const GeoDataCoordinates & itCoords : qAsConst(d->m_vector) ) {
+    for( const GeoDataCoordinates & itCoords : std::as_const(d->m_vector) ) {
         QVariantMap map;
         map.insert(QLatin1String("lon"), itCoords.longitude(GeoDataCoordinates::Degree));
         map.insert(QLatin1String("lat"), itCoords.latitude(GeoDataCoordinates::Degree));

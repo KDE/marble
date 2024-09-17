@@ -61,12 +61,12 @@ namespace Marble
             QVector<QPolygonF*> fullScreenPolygons;
             bool success = m_map->screenCoordinatesFromGeoDataLineString(lineString, fullScreenPolygons);
             if (m_clipScreenCoordinates) {
-                for (auto reducedPolygon : qAsConst(fullScreenPolygons)) {
+                for (auto reducedPolygon : std::as_const(fullScreenPolygons)) {
                     m_screenPolygons << reducedPolygon->intersected(displayPolygon);
                 }
             }
             else {
-                for (auto eachPolygon : qAsConst(fullScreenPolygons)) {
+                for (auto eachPolygon : std::as_const(fullScreenPolygons)) {
                     m_screenPolygons << *eachPolygon;
                 }
             }
@@ -78,7 +78,7 @@ namespace Marble
             m_screenCoordinates.clear();
             if (success) {
                 int i = 0;
-                for (auto screenPolygon : qAsConst(m_screenPolygons)) {
+                for (auto screenPolygon : std::as_const(m_screenPolygons)) {
                     QVariantList polyline;
                     for (auto node : screenPolygon) {
                         QVariantMap vmap;
@@ -97,7 +97,7 @@ namespace Marble
             }
             else {
                 QPolygonF polygons;
-                for (auto polygon : qAsConst(m_screenPolygons)) {
+                for (auto polygon : std::as_const(m_screenPolygons)) {
                     polygons << polygon;
                 }
                 polygonBoundingRect = polygons.boundingRect();
