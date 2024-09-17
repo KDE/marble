@@ -79,10 +79,10 @@ void TagsFilter::removeAnnotationTags(GeoDataDocument *document)
     for (auto placemark: document->placemarkList()) {
         OsmPlacemarkData & osmData = placemark->osmData();
         removeAnnotationTags(osmData);
-        for (auto & reference: osmData.nodeReferences()) {
+        for (auto & reference: osmData.hRef()->nodeReferences()) {
             removeAnnotationTags(reference);
         }
-        for (auto & reference: osmData.memberReferences()) {
+        for (auto & reference: osmData.hRef()->memberReferences()) {
             removeAnnotationTags(reference);
         }
     }
