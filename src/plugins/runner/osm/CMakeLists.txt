@@ -6,16 +6,15 @@ INCLUDE_DIRECTORIES(
  ${CMAKE_CURRENT_SOURCE_DIR}/writers
  ${CMAKE_CURRENT_SOURCE_DIR}/translators
  ${CMAKE_CURRENT_BINARY_DIR}
- ${Protobuf_INCLUDE_DIRS}
  ${ZLIB_INCLUDE_DIRS}
 )
 
 if (Protobuf_FOUND AND Protobuf_PROTOC_EXECUTABLE)
-    PROTOBUF_GENERATE_CPP(pbf_srcs pbf_hdrs
+    protobuf_generate_cpp(pbf_srcs pbf_hdrs
         ${CMAKE_SOURCE_DIR}/tools/osm-addresses/pbf/fileformat.proto
         ${CMAKE_SOURCE_DIR}/tools/osm-addresses/pbf/osmformat.proto
     )
-    set(EXTRA_LIBS ${Protobuf_LIBRARIES} ${ZLIB_LIBRARIES})
+    set(EXTRA_LIBS protobuf::libprotobuf protobuf::libprotoc ${ZLIB_LIBRARIES})
     add_definitions(-DHAVE_PROTOBUF)
 
 	if(MSVC)
