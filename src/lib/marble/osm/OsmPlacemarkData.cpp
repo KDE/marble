@@ -21,19 +21,18 @@ inline uint qHash(Marble::OsmIdentifier ident, uint seed)
 
 OsmPlacemarkData::OsmPlacemarkData():
     m_id( 0 ),
-	m_href(new OsmPlacemarkDataHashRef)
+	m_href(std::make_shared<OsmPlacemarkDataHashRef>())
 {
     // nothing to do
 }
 
 OsmPlacemarkData::~OsmPlacemarkData()
 {
-	delete m_href;
 }
 
-OsmPlacemarkDataHashRef* OsmPlacemarkData::hRef() const
+OsmPlacemarkDataHashRef * OsmPlacemarkData::hRef() const
 {
-	return m_href;
+	return m_href.get();
 }
 
 qint64 OsmPlacemarkData::id() const

@@ -208,7 +208,7 @@ public:
 	/**
 	 * Return the insternal instance of the hash-table functions container.
 	 */
-	OsmPlacemarkDataHashRef* hRef() const;
+	OsmPlacemarkDataHashRef * hRef() const;
 
 private:
 
@@ -226,7 +226,7 @@ private:
 	/**
 	 * Store the insternal instance of the hash-table functions container.
 	 */
-	OsmPlacemarkDataHashRef* m_href = nullptr;
+    std::shared_ptr<OsmPlacemarkDataHashRef> m_href;
 };
 
 /**
