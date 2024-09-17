@@ -126,6 +126,8 @@ find_package(Qt6 ${REQUIRED_QT_VERSION} REQUIRED
         Core5Compat
 )
 
+qt_policy(SET QTP0001 NEW)
+
 include( MarbleMacros )
 
 find_package(Protobuf)

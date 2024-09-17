@@ -2,83 +2,151 @@
 //
 // SPDX-FileCopyrightText: 2015 Dennis Nienhüser <nienhueser@kde.org>
 //
-import QtQuick 2.3
-import QtQuick.Controls 1.3
-import QtQuick.Window 2.2
-import QtQuick.Layouts 1.1
+import QtQuick
+import QtQuick.Controls
+import QtQuick.Window
+import QtQuick.Layouts
 
-import org.kde.kirigami 2.0 as Kirigami
-import org.kde.marble 0.20
+import org.kde.kirigami as Kirigami
+import org.kde.kirigamiaddons.formcard as FormCard
+import org.kde.marble
 
 Kirigami.ApplicationWindow {
     id: root
-    Layout.fillWidth: true
 
+    Kirigami.Theme.colorSet: Kirigami.Theme.View
+    Kirigami.Theme.inherit: false
 
-    SystemPalette {
-        id: palette
-        colorGroup: SystemPalette.Active
+    globalDrawer: Kirigami.OverlayDrawer {
+        id: drawer
+
+        edge: Qt.application.layoutDirection === Qt.RightToLeft ? Qt.RightEdge : Qt.LeftEdge
+        modal: Kirigami.Settings.isMobile || (applicationWindow().width < Kirigami.Units.gridUnit * 50 && !collapsed) // Only modal when not collapsed, otherwise collapsed won't show.
+        z: modal ? Math.round(position * 10000000) : 100
+        drawerOpen: !Kirigami.Settings.isMobile && enabled
+        enabled: pageStack.currentItem
+        onEnabledChanged: drawerOpen = !Kirigami.Settings.isMobile && enabled
+        width: Kirigami.Units.gridUnit * 16
+        Behavior on width {
+            NumberAnimation {
+                duration: Kirigami.Units.longDuration
+                easing.type: Easing.InOutQuad
+            }
+        }
+
+        handleClosedIcon.source: modal ? null : "sidebar-expand-left"
+        handleOpenIcon.source: modal ? null : "sidebar-collapse-left"
+        handleVisible: modal
+        onModalChanged: if (!modal) {
+            drawerOpen = true;
+        }
+
+        leftPadding: 0
+        rightPadding: 0
+        topPadding: 0
+        bottomPadding: 0
+
+        contentItem: ColumnLayout {
+            spacing: 0
+
+            ToolBar {
+                Layout.fillWidth: true
+                Layout.preferredHeight: root.pageStack.globalToolBar.preferredHeight
+
+                leftPadding: Kirigami.Units.largeSpacing
+                rightPadding: Kirigami.Units.largeSpacing
+                topPadding: Kirigami.Units.smallSpacing
+                bottomPadding: Kirigami.Units.smallSpacing
+
+                contentItem: Kirigami.Heading {
+                    text: qsTr("Settings")
+                }
+            }
+
+            Kirigami.ScrollablePage {
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+
+                leftPadding: 0
+                rightPadding: 0
+                topPadding: 0
+                bottomPadding: 0
+
+                ColumnLayout {
+                    spacing: 0
+
+                    FormCard.FormCheckDelegate {
+                        text: qsTr("Show Behaim places")
+                        onCheckedChanged: marbleMaps.setPropertyEnabled("cities", checked)
+                    }
+
+                    FormCard.FormDelegateSeparator {}
+
+                    FormCard.FormCheckDelegate {
+                        text: qsTr("Show texts and illustrations")
+                        onCheckedChanged: marbleMaps.setPropertyEnabled("otherplaces", checked)
+                    }
+
+                    FormCard.FormDelegateSeparator {}
+
+                    FormCard.FormCheckDelegate {
+                        text: qsTr("Show the accurate coastline")
+                        onCheckedChanged: marbleMaps.setPropertyEnabled("coastlines", checked)
+                    }
+
+                    FormCard.FormHeader {
+                        title: qsTr("Globe Variant")
+                        Layout.fillWidth: true
+                    }
+
+                    FormCard.FormRadioDelegate {
+                        text: qsTr("Original (1492)")
+                        checked: true
+                        description: checked ? qsTr("Digital imagery taken directly from the original Behaim globe.") : ''
+
+                        onToggled: if (checked) {
+                            marbleMaps.setPropertyEnabled("ravenstein", false)
+                            marbleMaps.setPropertyEnabled("ghillany", false)
+                        }
+                    }
+
+                    FormCard.FormRadioDelegate {
+                        text: qsTr("Ghillany (1853)")
+                        description: checked ? qsTr("A (rough) facsimile created by Friedrich Wilhelm Ghillany in 1853.") : ''
+
+                        onToggled: if (checked) {
+                            marbleMaps.setPropertyEnabled("ravenstein", false)
+                            marbleMaps.setPropertyEnabled("ghillany", true)
+                        }
+                    }
+
+                    FormCard.FormRadioDelegate {
+                        text: qsTr("Ravenstein (1908)")
+                        description: checked ? qsTr("A (rough) facsimile created by Ernest George Ravenstein in 1908.") : ''
+
+                        onToggled: if (checked) {
+                            marbleMaps.setPropertyEnabled("ghillany", false)
+                            marbleMaps.setPropertyEnabled("ravenstein", true)
+                        }
+                    }
+                }
+            }
+        }
     }
 
-    globalDrawer: Kirigami.GlobalDrawer {
-        id: drawer
-        title: "Settings"
-        handleVisible: !aboutDrawer.drawerOpen && !infoDrawer.drawerOpen
-        topContent: [
-            CheckBox {
-                text: qsTr("Show Behaim places")
-                onCheckedChanged: marbleMaps.setPropertyEnabled("cities", checked)
-            },
-            CheckBox {
-                text: qsTr("Show texts and illustrations")
-                onCheckedChanged: marbleMaps.setPropertyEnabled("otherplaces", checked)
-            },
-            CheckBox {
-                text: qsTr("Show the accurate coastline")
-                onCheckedChanged: marbleMaps.setPropertyEnabled("coastlines", checked)
-            },
-            Label {
-                wrapMode: Text.WordWrap
-                text: qsTr("<h4>Globe Variant</h4>")
-                Layout.fillWidth: true
-            },
-            ExclusiveGroup {
-                id: layerGroup
-                onCurrentChanged: current.apply()
-            },
-            RadioButton {
-                text: qsTr("Original (1492)")
-                checked: true
-                exclusiveGroup: layerGroup
-                property string description: qsTr("Digital imagery taken directly from the original Behaim globe.")
-                function apply() {
-                    marbleMaps.setPropertyEnabled("ravenstein", false)
-                    marbleMaps.setPropertyEnabled("ghillany", false)
-                }
-            },
+    pageStack.initialPage: Kirigami.Page {
+        id: page
 
-            RadioButton {
-                text: qsTr("Ghillany (1853)")
-                property string description: qsTr("A (rough) facsimile created by Friedrich Wilhelm Ghillany in 1853.")
-                exclusiveGroup: layerGroup
+        property alias marbleMaps: mainLayout.marbleMaps
+        property bool landscape: root.width > root.height
 
-                function apply() {
-                    marbleMaps.setPropertyEnabled("ravenstein", false)
-                    marbleMaps.setPropertyEnabled("ghillany", true)
-                }
-            },
+        title: qsTr("Behaim Globe")
 
-            RadioButton {
-                text: qsTr("Ravenstein (1908)")
-                property string description: qsTr("A (rough) facsimile created by Ernest George Ravenstein in 1908.")
-                exclusiveGroup: layerGroup
-                function apply() {
-                    marbleMaps.setPropertyEnabled("ghillany", false)
-                    marbleMaps.setPropertyEnabled("ravenstein", true)
-                }
-            },
-            Item { width: 1; height: Screen.pixelDensity * 2; }
-        ]
+        leftPadding: 0
+        rightPadding: 0
+        topPadding: 0
+        bottomPadding: 0
+
         actions: [
             Kirigami.Action {
                 text: qsTr("Information")
@@ -91,7 +159,7 @@ Kirigami.ApplicationWindow {
             },
             Kirigami.Action {
                 text: qsTr("About")
-                iconSource: "menu.png"
+                icon.name: 'menu'
                 onTriggered: {
                     aboutDrawer.open()
                     if(infoDrawer.drawerOpen){
@@ -100,29 +168,17 @@ Kirigami.ApplicationWindow {
                 }
             }
         ]
-    }
-
-    Kirigami.Page {
-        id: page
-        property alias marbleMaps: mainLayout.marbleMaps
-        anchors.fill: parent
-        title: qsTr("Behaim Globe")
-        visible: true
-
-        property bool landscape: root.width > root.height
-
-        Rectangle {
-            id: background
-            anchors.fill: parent
-            color: palette.base
-        }
 
         Grid {
-            anchors.horizontalCenter: parent.horizontalCenter
-            anchors.verticalCenter: parent.verticalCenter
-
             id: mainLayout
+
             property alias marbleMaps: mapItem.marbleMaps
+
+            anchors {
+                horizontalCenter: parent.horizontalCenter
+                verticalCenter: parent.verticalCenter
+            }
+
             columns: root.landscape ? 2 : 1
             columnSpacing: 0
             rows: root.landscape ? 1 : 2
@@ -131,9 +187,10 @@ Kirigami.ApplicationWindow {
 
             Item {
                 id: mapItem
+
                 property alias marbleMaps: pinchArea.marbleItem
-                width: root.width
-                height: root.height
+                width: page.availableWidth
+                height: page.availableHeight
 
                 Rectangle {
                     color: "black"
@@ -142,6 +199,7 @@ Kirigami.ApplicationWindow {
 
                 PinchArea {
                     id: pinchArea
+
                     anchors.fill: parent
                     enabled: true
                     property alias marbleItem: marbleMaps
@@ -151,6 +209,7 @@ Kirigami.ApplicationWindow {
 
                     MarbleItem {
                         id: marbleMaps
+
                         anchors.fill: parent
 
                         focus: true
@@ -185,7 +244,6 @@ Kirigami.ApplicationWindow {
                             setPluginSetting("stars", "renderCelestialPole", "false");
                             marbleMaps.forceActiveFocus()
                         }
-
                     }
                 }
             }
@@ -205,7 +263,8 @@ Kirigami.ApplicationWindow {
                     Flickable {
                         id: flickableInfo
                         property alias text: infoText
-                        anchors.fill: parent
+                        Layout.fillWidth: true
+                        Layout.fillHeight: true
                         contentWidth: infoText.width
                         contentHeight: infoText.height
                         flickableDirection: Flickable.VerticalFlick
@@ -247,7 +306,8 @@ Kirigami.ApplicationWindow {
                     Flickable {
                         id: flickableAbout
                         property alias text: aboutText
-                        anchors.fill: parent
+                        Layout.fillWidth: true
+                        Layout.fillHeight: true
                         contentWidth: aboutText.width
                         contentHeight: aboutText.height
                         flickableDirection: Flickable.VerticalFlick
@@ -281,5 +341,3 @@ Kirigami.ApplicationWindow {
         }
     }
 }
-
-

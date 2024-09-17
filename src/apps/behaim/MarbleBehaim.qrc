@@ -1,7 +1,0 @@
-<RCC>
-    <qresource prefix="/">
-        <file>MainScreen.qml</file>
-        <file>Legend.qml</file>
-        <file alias="menu.png">../../../data/android/drawable-xxxhdpi/ic_toc_black_18dp.png</file>
-    </qresource>
-</RCC>

@@ -32,7 +32,7 @@ int main(int argc, char ** argv)
     declarativePlugin.registerTypes(uri);
 
     QQmlApplicationEngine engine;
-    engine.load(QUrl("qrc:/MainScreen.qml"));
+    engine.loadFromModule("org.kde.marble.behaim", "MainScreen");
 
     return app.exec();
 }
