@@ -503,12 +503,12 @@ void MergedLayerDecorator::Private::paintTileId( QImage *tileImage, const TileId
          || ( (qreal)(id.x())/2 != id.x()/2 && (qreal)(id.y())/2 != id.y()/2 )
          )
     {
-        foreground.setNamedColor( "#FFFFFF" );
-        background.setNamedColor( "#000000" );
+        foreground = Qt::white;
+        background = Qt::black;
     }
     else {
-        foreground.setNamedColor( "#000000" );
-        background.setNamedColor( "#FFFFFF" );
+        foreground = Qt::black;
+        background = Qt::white;
     }
 
     int   strokeWidth = 10;

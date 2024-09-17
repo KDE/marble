@@ -63,8 +63,8 @@ bool OsmcSymbol::parseTag(const QString &tag)
     }
 
     // Determine way color
-    if (QColor::isValidColor(parts.at(0))) {
-        m_wayColor.setNamedColor(parts.at(0));
+    if (QColor::isValidColorName(parts.at(0))) {
+        m_wayColor.fromString(parts.at(0));
     } else {
         return false;
     }
@@ -76,7 +76,7 @@ bool OsmcSymbol::parseTag(const QString &tag)
     if (parts.size() == 3) {
         m_foreground = parseForeground(parts.at(2));
     } else if (parts.size() == 4) {
-        if (QColor::isValidColor(parts.at(3))) {
+        if (QColor::isValidColorName(parts.at(3))) {
             m_text = parts.at(2);
             m_textColor = parts.at(3);
         } else {
@@ -85,7 +85,7 @@ bool OsmcSymbol::parseTag(const QString &tag)
         }
     } else if (parts.size() == 5) {
         m_foreground = parseForeground(parts.at(2));
-        if (QColor::isValidColor(parts.at(4))) {
+        if (QColor::isValidColorName(parts.at(4))) {
             m_text = parts.at(3);
             m_textColor = parts.at(4);
         } else {
@@ -94,9 +94,9 @@ bool OsmcSymbol::parseTag(const QString &tag)
     } else if (parts.size() == 6) {
         m_foreground = parseForeground(parts.at(2));
         m_foreground2 = parseForeground(parts.at(3));
-        if (QColor::isValidColor(parts.at(5))) {
+        if (QColor::isValidColorName(parts.at(5))) {
             m_text = parts.at(4);
-            m_textColor.setNamedColor(parts.at(5));
+            m_textColor.fromString(parts.at(5));
         } else {
             return false;
         }
@@ -112,16 +112,16 @@ bool OsmcSymbol::parseBackground(const QString &bg)
     QString color = bg.section("_", 0, 0);
     QString type = bg.section("_", 1, -1);
 
-    if (!QColor::isValidColor(color)) {
+    if (!QColor::isValidColorName(color)) {
         return false;
     }
 
     // Plain color was provided
     if (type.isEmpty()) {
-        m_backgroundColor.setNamedColor(color);
+        m_backgroundColor.fromString(color);
         m_backgroundType = type;
     } else if (m_backgroundTypes.contains(type)) {
-        m_backgroundColor.setNamedColor(color);
+        m_backgroundColor.fromString(color);
         m_backgroundType = type;
     } else {
         return false;
@@ -140,7 +140,7 @@ QSvgRenderer* OsmcSymbol::parseForeground(const QString &fg)
 
     QString color = fg.section('_', 0, 0);
     QString type = fg.section('_', 1, -1);
-    if (QColor::isValidColor(color) && m_foregroundTypes.contains(type)) {
+    if (QColor::isValidColorName(color) && m_foregroundTypes.contains(type)) {
         // Open svg resource and load contents to QByteArray
         QFile file(QString(":/osmc-symbols/%1.svg").arg(type));
         file.open(QIODevice::ReadOnly);

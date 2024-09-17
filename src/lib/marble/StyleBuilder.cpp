@@ -241,7 +241,7 @@ GeoDataStyle::ConstPtr StyleBuilder::Private::createRelationStyle(const StylePar
             parameters.relation->relationType() <= GeoDataRelation::RouteInlineSkates) {
             auto const colorValue = parameters.relation->osmData().tagValue(QStringLiteral("colour"));
             QString color = colorValue;
-            if (!QColor::isValidColor(colorValue)) {
+            if (!QColor::isValidColorName(colorValue)) {
                 switch (parameters.relation->relationType()) {
                 case GeoDataRelation::RouteTrain:
                     color = QStringLiteral("navy"); break;

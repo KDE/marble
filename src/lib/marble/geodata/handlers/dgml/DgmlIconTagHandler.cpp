@@ -31,8 +31,7 @@ GeoNode* DgmlIconTagHandler::parse(GeoParser& parser) const
 
     QString pixmapRelativePath  = parser.attribute(dgmlAttr_pixmap).trimmed();
 
-    QColor color;
-    color.setNamedColor(parser.attribute(dgmlAttr_color).trimmed());
+    QColor color(parser.attribute(dgmlAttr_color).trimmed());
 
     GeoSceneIcon *icon = nullptr;
 
