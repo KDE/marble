@@ -9,7 +9,7 @@ INCLUDE_DIRECTORIES(
  ${ZLIB_INCLUDE_DIRS}
 )
 
-if (Protobuf_FOUND AND Protobuf_PROTOC_EXECUTABLE)
+if (Protobuf_FOUND AND Protobuf_PROTOC_EXECUTABLE AND NOT MSVC) # FIXME linking issue on Windows
     protobuf_generate_cpp(pbf_srcs pbf_hdrs
         ${CMAKE_SOURCE_DIR}/tools/osm-addresses/pbf/fileformat.proto
         ${CMAKE_SOURCE_DIR}/tools/osm-addresses/pbf/osmformat.proto
