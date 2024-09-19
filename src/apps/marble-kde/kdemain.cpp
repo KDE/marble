@@ -77,8 +77,6 @@ static void loadLibAndPluginTranslations(QApplication &app)
 
 int main ( int argc, char *argv[] )
 {
-    QApplication::setAttribute(Qt::AA_UseHighDpiPixmaps, true);
-
     QApplication app( argc, argv );
 
     // Load Qt translation system catalog for the plugins and libmarblewidget

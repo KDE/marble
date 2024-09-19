@@ -78,8 +78,6 @@ static void loadTranslations(QApplication &app)
 
 int main(int argc, char *argv[])
 {
-    QApplication::setAttribute(Qt::AA_UseHighDpiPixmaps, true);
-
     QApplication app(argc, argv);
     app.setApplicationName( "Marble Virtual Globe" );
     app.setOrganizationName( "KDE" );
