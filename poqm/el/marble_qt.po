@@ -2581,42 +2581,42 @@ msgctxt "CurrentPosition|"
 msgid "Follow Current Position"
 msgstr "Ακολουθήστε την τρέχουσα θέση"
 
-#: src/apps/marble-maps/MainScreen.qml:19
-#: src/apps/marble-maps/MainScreen.qml:205
+#: src/apps/marble-maps/MainScreen.qml:17
+#: src/apps/marble-maps/MainScreen.qml:198
 msgctxt "MainScreen|"
 msgid "Marble Maps"
 msgstr "Marble Maps"
 
-#: src/apps/marble-maps/MainScreen.qml:96
+#: src/apps/marble-maps/MainScreen.qml:89
 #, fuzzy
 #| msgid "Settings"
 msgctxt "MainScreen|"
 msgid "Settings"
 msgstr "Ρυθμίσεις"
 
-#: src/apps/marble-maps/MainScreen.qml:112
+#: src/apps/marble-maps/MainScreen.qml:105
 msgctxt "MainScreen|"
 msgid "Public Transport"
 msgstr "Δημόσια συγκοινωνία"
 
-#: src/apps/marble-maps/MainScreen.qml:127
+#: src/apps/marble-maps/MainScreen.qml:120
 msgctxt "MainScreen|"
 msgid "Outdoor Activities"
 msgstr "Εξωτερικές δραστηριότητες"
 
-#: src/apps/marble-maps/MainScreen.qml:139
+#: src/apps/marble-maps/MainScreen.qml:132
 msgctxt "MainScreen|"
 msgid "Accessibility"
 msgstr "Προσβασιμότητα"
 
-#: src/apps/marble-maps/MainScreen.qml:148
+#: src/apps/marble-maps/MainScreen.qml:141
 #, fuzzy
 #| msgid "About"
 msgctxt "MainScreen|"
 msgid "About"
 msgstr "Σχετικά"
 
-#: src/apps/marble-maps/MainScreen.qml:159
+#: src/apps/marble-maps/MainScreen.qml:152
 #, fuzzy
 #| msgctxt "QObject|"
 #| msgid "Bookmarks"
@@ -2624,7 +2624,7 @@ msgctxt "MainScreen|"
 msgid "Bookmarks"
 msgstr "Σελιδοδείκτες"
 
-#: src/apps/marble-maps/MainScreen.qml:168
+#: src/apps/marble-maps/MainScreen.qml:161
 #, fuzzy
 #| msgctxt "Options|"
 #| msgid "<h3>Layer Options</h3>"
@@ -2632,7 +2632,7 @@ msgctxt "MainScreen|"
 msgid "Layer Options"
 msgstr "<h3>Επιλογές επιπέδων</h3>"
 
-#: src/apps/marble-maps/MainScreen.qml:177
+#: src/apps/marble-maps/MainScreen.qml:170
 #, fuzzy
 #| msgctxt "Marble::ControlView|"
 #| msgid "Routing"
@@ -2640,13 +2640,13 @@ msgctxt "MainScreen|"
 msgid "Routing"
 msgstr "Δρομολόγηση"
 
-#: src/apps/marble-maps/MainScreen.qml:406
+#: src/apps/marble-maps/MainScreen.qml:399
 #, qt-format
 msgctxt "MainScreen|"
 msgid "%1 km"
 msgstr "%1 km"
 
-#: src/apps/marble-maps/MainScreen.qml:670
+#: src/apps/marble-maps/MainScreen.qml:663
 msgctxt "MainScreen|"
 msgid "Press again to close."
 msgstr "Πατήστε ξανά για κλείσιμο"
@@ -2764,7 +2764,7 @@ msgctxt "Search|"
 msgid "Your bookmarks will appear here."
 msgstr "Οι σελιδοδείκτες σας θα εμφανιστούν εδώ."
 
-#: src/apps/marble-maps/SearchField.qml:71
+#: src/apps/marble-maps/SearchField.qml:70
 msgctxt "SearchField|"
 msgid "Search"
 msgstr "Αναζήτηση"
@@ -2808,13 +2808,13 @@ msgctxt "Marble::MainWindow|"
 msgid "Marble - Virtual Globe"
 msgstr "Marble - Εικονική υδρόγειος"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:197
-#: src/apps/marble-qt/QtMainWindow.cpp:770
+#: src/apps/marble-qt/QtMainWindow.cpp:199
+#: src/apps/marble-qt/QtMainWindow.cpp:772
 msgctxt "Marble::MainWindow|"
 msgid "Marble"
 msgstr "Marble"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:198
+#: src/apps/marble-qt/QtMainWindow.cpp:200
 #, qt-format
 msgctxt "Marble::MainWindow|"
 msgid ""
@@ -2822,90 +2822,90 @@ msgid ""
 "'%2'"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:269
+#: src/apps/marble-qt/QtMainWindow.cpp:271
 msgctxt "Marble::MainWindow|"
 msgid "&Open..."
 msgstr "&Άνοιγμα..."
 
-#: src/apps/marble-qt/QtMainWindow.cpp:271
+#: src/apps/marble-qt/QtMainWindow.cpp:273
 msgctxt "Marble::MainWindow|"
 msgid "Open a file for viewing on Marble"
 msgstr "Άνοιγμα ενός αρχείου για προβολή στο Marble"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:275
+#: src/apps/marble-qt/QtMainWindow.cpp:277
 msgctxt "Marble::MainWindow|"
 msgid "&Download Maps..."
 msgstr "&Λήψη χαρτών..."
 
-#: src/apps/marble-qt/QtMainWindow.cpp:278
+#: src/apps/marble-qt/QtMainWindow.cpp:280
 msgctxt "Marble::MainWindow|"
 msgid "&Export Map..."
 msgstr "&Εξαγωγή χάρτη..."
 
-#: src/apps/marble-qt/QtMainWindow.cpp:280
+#: src/apps/marble-qt/QtMainWindow.cpp:282
 msgctxt "Marble::MainWindow|"
 msgid "Save a screenshot of the map"
 msgstr "Αποθήκευση ενός στιγμιότυπου του χάρτη"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:284
+#: src/apps/marble-qt/QtMainWindow.cpp:286
 msgctxt "Marble::MainWindow|"
 msgid "Download &Region..."
 msgstr "Λήψη &περιοχής..."
 
-#: src/apps/marble-qt/QtMainWindow.cpp:285
+#: src/apps/marble-qt/QtMainWindow.cpp:287
 msgctxt "Marble::MainWindow|"
 msgid "Download a map region in different zoom levels for offline usage"
 msgstr ""
 "Λήψη μιας περιοχής του χάρτη με διαφορετικό επίπεδο εστίασης για χρήση χωρίς "
 "σύνδεση"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:288
+#: src/apps/marble-qt/QtMainWindow.cpp:290
 msgctxt "Marble::MainWindow|"
 msgid "&Print..."
 msgstr "&Εκτύπωση..."
 
-#: src/apps/marble-qt/QtMainWindow.cpp:289
+#: src/apps/marble-qt/QtMainWindow.cpp:291
 msgctxt "Marble::MainWindow|"
 msgid "Ctrl+P"
 msgstr "Ctrl+P"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:290
-#: src/apps/marble-qt/QtMainWindow.cpp:294
+#: src/apps/marble-qt/QtMainWindow.cpp:292
+#: src/apps/marble-qt/QtMainWindow.cpp:296
 msgctxt "Marble::MainWindow|"
 msgid "Print a screenshot of the map"
 msgstr "Εκτύπωση ενός στιγμιότυπου του χάρτη"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:293
+#: src/apps/marble-qt/QtMainWindow.cpp:295
 msgctxt "Marble::MainWindow|"
 msgid "Print Previe&w ..."
 msgstr "Προεπισκόπηση &εκτύπωσης ..."
 
-#: src/apps/marble-qt/QtMainWindow.cpp:297
+#: src/apps/marble-qt/QtMainWindow.cpp:299
 msgctxt "Marble::MainWindow|"
 msgid "&Quit"
 msgstr "Έ&ξοδος"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:298
+#: src/apps/marble-qt/QtMainWindow.cpp:300
 msgctxt "Marble::MainWindow|"
 msgid "Ctrl+Q"
 msgstr "Ctrl+Q"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:299
+#: src/apps/marble-qt/QtMainWindow.cpp:301
 msgctxt "Marble::MainWindow|"
 msgid "Quit the Application"
 msgstr "Έξοδος από την εφαρμογή"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:302
+#: src/apps/marble-qt/QtMainWindow.cpp:304
 msgctxt "Marble::MainWindow|"
 msgid "&Copy Map"
 msgstr "&Αντιγραφή χάρτη"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:304
+#: src/apps/marble-qt/QtMainWindow.cpp:306
 msgctxt "Marble::MainWindow|"
 msgid "Copy a screenshot of the map"
 msgstr "Αντιγραφή ενός στιγμιότυπου του χάρτη"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:307
+#: src/apps/marble-qt/QtMainWindow.cpp:309
 #, fuzzy
 #| msgctxt "Marble::MainWindow|"
 #| msgid "&Edit Map"
@@ -2913,178 +2913,178 @@ msgctxt "Marble::MainWindow|"
 msgid "&Edit Map..."
 msgstr "&Επεξεργασία χάρτη"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:309
+#: src/apps/marble-qt/QtMainWindow.cpp:311
 msgctxt "Marble::MainWindow|"
 msgid "Edit the current map region in an external editor"
 msgstr ""
 "Επεξεργασία της τρέχουσας περιοχής του χάρτη σε έναν εξωτερικό επεξεργαστή"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:313
+#: src/apps/marble-qt/QtMainWindow.cpp:315
 msgctxt "Marble::MainWindow|"
 msgid "&Record Movie"
 msgstr "&Εγγραφή βίντεο"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:314
+#: src/apps/marble-qt/QtMainWindow.cpp:316
 msgctxt "Marble::MainWindow|"
 msgid "Records a movie of the globe"
 msgstr "Έγγραφή βίντεο με την υδρόγειο"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:320
+#: src/apps/marble-qt/QtMainWindow.cpp:322
 msgctxt "Marble::MainWindow|"
 msgid "&Stop Recording"
 msgstr "&Σταμάτημα εγγραφής"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:321
+#: src/apps/marble-qt/QtMainWindow.cpp:323
 msgctxt "Marble::MainWindow|"
 msgid "Stop recording a movie of the globe"
 msgstr "Σταμάτημα εγγραφής βίντεο με την υδρόγειο"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:327
+#: src/apps/marble-qt/QtMainWindow.cpp:329
 msgctxt "Marble::MainWindow|"
 msgid "&Configure Marble"
 msgstr "&Διαμόρφωση του Marble"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:328
+#: src/apps/marble-qt/QtMainWindow.cpp:330
 msgctxt "Marble::MainWindow|"
 msgid "Show the configuration dialog"
 msgstr "Εμφάνιση του διαλόγου διαμόρφωσης"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:331
+#: src/apps/marble-qt/QtMainWindow.cpp:333
 msgctxt "Marble::MainWindow|"
 msgid "C&opy Coordinates"
 msgstr "Α&ντιγραφή συντεταγμένων"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:332
+#: src/apps/marble-qt/QtMainWindow.cpp:334
 msgctxt "Marble::MainWindow|"
 msgid "Copy the center coordinates as text"
 msgstr "Αντιγραφή συντεταγμένων του κέντρου ως κείμενο"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:335
+#: src/apps/marble-qt/QtMainWindow.cpp:337
 msgctxt "Marble::MainWindow|"
 msgid "&Full Screen Mode"
 msgstr "&Λειτουργία πλήρους οθόνης"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:338
+#: src/apps/marble-qt/QtMainWindow.cpp:340
 msgctxt "Marble::MainWindow|"
 msgid "Full Screen Mode"
 msgstr "Λειτουργία πλήρους οθόνης"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:341
+#: src/apps/marble-qt/QtMainWindow.cpp:343
 msgctxt "Marble::MainWindow|"
 msgid "&Show Status Bar"
 msgstr "&Εμφάνιση γραμμής κατάστασης"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:343
+#: src/apps/marble-qt/QtMainWindow.cpp:345
 msgctxt "Marble::MainWindow|"
 msgid "Show Status Bar"
 msgstr "Εμφάνιση γραμμής κατάστασης"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:347
+#: src/apps/marble-qt/QtMainWindow.cpp:349
 msgctxt "Marble::MainWindow|"
 msgid "Lock Position"
 msgstr "Κλείδωμα θέσης"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:349
+#: src/apps/marble-qt/QtMainWindow.cpp:351
 msgctxt "Marble::MainWindow|"
 msgid "Lock Position of Floating Items"
 msgstr "Κλείδωμα θέσης των κινητών αντικειμένων"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:352
+#: src/apps/marble-qt/QtMainWindow.cpp:354
 msgctxt "Marble::MainWindow|"
 msgid "&Clouds"
 msgstr "&Σύννεφα"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:354
+#: src/apps/marble-qt/QtMainWindow.cpp:356
 msgctxt "Marble::MainWindow|"
 msgid "Show Real Time Cloud Cover"
 msgstr "Εμφάνιση σύννεφων σε πραγματικό χρόνο"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:357
+#: src/apps/marble-qt/QtMainWindow.cpp:359
 msgctxt "Marble::MainWindow|"
 msgid "Work Off&line"
 msgstr "Εργασία &χωρίς σύνδεση"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:361
+#: src/apps/marble-qt/QtMainWindow.cpp:363
 msgctxt "Marble::MainWindow|"
 msgid "&Time Control..."
 msgstr "Έλεγχος &χρόνου..."
 
-#: src/apps/marble-qt/QtMainWindow.cpp:362
+#: src/apps/marble-qt/QtMainWindow.cpp:364
 msgctxt "Marble::MainWindow|"
 msgid "Configure Time Control "
 msgstr "Διαμόρφωση του συστατικού ελέγχου του χρόνου"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:365
+#: src/apps/marble-qt/QtMainWindow.cpp:367
 msgctxt "Marble::MainWindow|"
 msgid "S&un Control..."
 msgstr "Έλεγχος ή&λιου..."
 
-#: src/apps/marble-qt/QtMainWindow.cpp:366
+#: src/apps/marble-qt/QtMainWindow.cpp:368
 msgctxt "Marble::MainWindow|"
 msgid "Configure Sun Control"
 msgstr "Διαμόρφωση του συστατικού ελέγχου του ήλιου"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:369
+#: src/apps/marble-qt/QtMainWindow.cpp:371
 msgctxt "Marble::MainWindow|"
 msgid "&Redisplay"
 msgstr "&Επανεμφάνιση"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:371
+#: src/apps/marble-qt/QtMainWindow.cpp:373
 msgctxt "Marble::MainWindow|"
 msgid "Reload Current Map"
 msgstr "Επαναφόρτωση του τρέχοντος χάρτη"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:374
+#: src/apps/marble-qt/QtMainWindow.cpp:376
 msgctxt "Marble::MainWindow|"
 msgid "Marble Virtual Globe &Handbook"
 msgstr "&Εγχειρίδιο χρήσης της εικονικής υδρογείου Marble"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:376
+#: src/apps/marble-qt/QtMainWindow.cpp:378
 msgctxt "Marble::MainWindow|"
 msgid "Show the Handbook for Marble Virtual Globe"
 msgstr "Εμφάνιση του εγχειριδίου χρήσης της εικονικής υδρογείου Marble"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:379
+#: src/apps/marble-qt/QtMainWindow.cpp:381
 msgctxt "Marble::MainWindow|"
 msgid "What's &This"
 msgstr "Τι &είναι αυτό"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:381
+#: src/apps/marble-qt/QtMainWindow.cpp:383
 msgctxt "Marble::MainWindow|"
 msgid "Show a detailed explanation of the action."
 msgstr "Εμφάνιση μιας λεπτομερούς εξήγησης της ενέργειας."
 
-#: src/apps/marble-qt/QtMainWindow.cpp:384
+#: src/apps/marble-qt/QtMainWindow.cpp:386
 msgctxt "Marble::MainWindow|"
 msgid "&Community Forum"
 msgstr "&Φόρουμ κοινότητας"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:385
+#: src/apps/marble-qt/QtMainWindow.cpp:387
 msgctxt "Marble::MainWindow|"
 msgid "Visit Marble's Community Forum"
 msgstr "Επισκεφθείτε το φόρουμ της κοινότητας του Marble"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:388
+#: src/apps/marble-qt/QtMainWindow.cpp:390
 msgctxt "Marble::MainWindow|"
 msgid "&About Marble Virtual Globe"
 msgstr "&Σχετικά με την εικονική υδρόγειο Marble"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:389
+#: src/apps/marble-qt/QtMainWindow.cpp:391
 msgctxt "Marble::MainWindow|"
 msgid "Show the application's About Box"
 msgstr "Εμφάνιση των σχετικών πληροφοριών της εφαρμογής"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:392
+#: src/apps/marble-qt/QtMainWindow.cpp:394
 msgctxt "Marble::MainWindow|"
 msgid "About &Qt"
 msgstr "Σχετικά με την &Qt"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:393
+#: src/apps/marble-qt/QtMainWindow.cpp:395
 msgctxt "Marble::MainWindow|"
 msgid "Show the Qt library's About box"
 msgstr "Εμφάνιση πληροφοριών σχετικά με τη βιβλιοθήκη Qt"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:397
+#: src/apps/marble-qt/QtMainWindow.cpp:399
 #, fuzzy
 #| msgctxt "Marble::MarbleWidgetPopupMenu|"
 #| msgid "Add &Bookmark"
@@ -3092,28 +3092,28 @@ msgctxt "Marble::MainWindow|"
 msgid "Add &Bookmark..."
 msgstr "Προσθήκη &σελιδοδείκτη"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:399
+#: src/apps/marble-qt/QtMainWindow.cpp:401
 msgctxt "Marble::MainWindow|"
 msgid "Add Bookmark"
 msgstr "Προσθήκη σελιδοδείκτη"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:402
-#: src/apps/marble-qt/QtMainWindow.cpp:403
+#: src/apps/marble-qt/QtMainWindow.cpp:404
+#: src/apps/marble-qt/QtMainWindow.cpp:405
 msgctxt "Marble::MainWindow|"
 msgid "&Set Home Location"
 msgstr "&Ορισμός αρχικής τοποθεσίας"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:406
+#: src/apps/marble-qt/QtMainWindow.cpp:408
 msgctxt "Marble::MainWindow|"
 msgid "Show &Bookmarks"
 msgstr "Εμφάνιση &σελιδοδεικτών"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:407
+#: src/apps/marble-qt/QtMainWindow.cpp:409
 msgctxt "Marble::MainWindow|"
 msgid "Toggle display of Bookmarks"
 msgstr "Εναλλαγή εμφάνισης σελιδοδεικτών"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:411
+#: src/apps/marble-qt/QtMainWindow.cpp:413
 #, fuzzy
 #| msgctxt "Marble::MainWindow|"
 #| msgid "&Manage Bookmarks"
@@ -3121,246 +3121,246 @@ msgctxt "Marble::MainWindow|"
 msgid "&Manage Bookmarks..."
 msgstr "&Διαχείριση σελιδοδεικτών"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:412
+#: src/apps/marble-qt/QtMainWindow.cpp:414
 msgctxt "Marble::MainWindow|"
 msgid "Manage Bookmarks"
 msgstr "Διαχείριση σελιδοδεικτών"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:416
+#: src/apps/marble-qt/QtMainWindow.cpp:418
 msgctxt "Marble::MainWindow|"
 msgid "&Create a New Map..."
 msgstr "&Δημιουργία νέου χάρτη..."
 
-#: src/apps/marble-qt/QtMainWindow.cpp:417
+#: src/apps/marble-qt/QtMainWindow.cpp:419
 msgctxt "Marble::MainWindow|"
 msgid "A wizard guides you through the creation of your own map theme."
 msgstr ""
 "Οδηγός που σας καθοδηγεί κατά τη δημιουργία του δικού σας θέματος χάρτη."
 
-#: src/apps/marble-qt/QtMainWindow.cpp:421
+#: src/apps/marble-qt/QtMainWindow.cpp:423
 msgctxt "Marble::MainWindow|"
 msgid "Show Tile Zoom Level"
 msgstr "Εμφάνιση επιπέδου εστίασης πλακιδίων"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:429
+#: src/apps/marble-qt/QtMainWindow.cpp:431
 msgctxt "Marble::MainWindow|"
 msgid "Degree (DMS)"
 msgstr "Μοίρες (Εξηνταδικό)"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:434
+#: src/apps/marble-qt/QtMainWindow.cpp:436
 msgctxt "Marble::MainWindow|"
 msgid "Degree (Decimal)"
 msgstr "Μοίρες (Δεκαδικό)"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:439
+#: src/apps/marble-qt/QtMainWindow.cpp:441
 msgctxt "Marble::MainWindow|"
 msgid "Universal Transverse Mercator (UTM)"
 msgstr "Παγκόσμια εγκάρσια προβολή Μερκάτορ (UTM)"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:454
+#: src/apps/marble-qt/QtMainWindow.cpp:456
 msgctxt "Marble::MainWindow|"
 msgid "&File"
 msgstr "&Αρχείο"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:467
+#: src/apps/marble-qt/QtMainWindow.cpp:469
 msgctxt "Marble::MainWindow|"
 msgid "&Edit"
 msgstr "&Επεξεργασία"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:475
+#: src/apps/marble-qt/QtMainWindow.cpp:477
 msgctxt "Marble::MainWindow|"
 msgid "&View"
 msgstr "Π&ροβολή"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:476
+#: src/apps/marble-qt/QtMainWindow.cpp:478
 msgctxt "Marble::MainWindow|"
 msgid "&Info Boxes"
 msgstr "Πλαίσια &πληροφοριών"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:477
+#: src/apps/marble-qt/QtMainWindow.cpp:479
 msgctxt "Marble::MainWindow|"
 msgid "&Online Services"
 msgstr "&Διαδικτυακές υπηρεσίες"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:480
+#: src/apps/marble-qt/QtMainWindow.cpp:482
 msgctxt "Marble::MainWindow|"
 msgid "&Bookmarks"
 msgstr "&Σελιδοδείκτες"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:484
+#: src/apps/marble-qt/QtMainWindow.cpp:486
 msgctxt "Marble::MainWindow|"
 msgid "&Panels"
 msgstr "&Πίνακες"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:489
+#: src/apps/marble-qt/QtMainWindow.cpp:491
 msgctxt "Marble::MainWindow|"
 msgid "&View Size"
 msgstr "&Μέγεθος προβολής"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:492
+#: src/apps/marble-qt/QtMainWindow.cpp:494
 msgctxt "Marble::MainWindow|"
 msgid "&Settings"
 msgstr "&Ρυθμίσεις"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:501
+#: src/apps/marble-qt/QtMainWindow.cpp:503
 msgctxt "Marble::MainWindow|"
 msgid "&Help"
 msgstr "&Βοήθεια"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:606
+#: src/apps/marble-qt/QtMainWindow.cpp:608
 msgctxt "Marble::MainWindow|"
 msgid "&Home"
 msgstr "&Αρχική τοποθεσία"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:615
+#: src/apps/marble-qt/QtMainWindow.cpp:617
 msgctxt "Marble::MainWindow|"
 msgid "Default"
 msgstr "Προκαθορισμένος"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:739
+#: src/apps/marble-qt/QtMainWindow.cpp:741
 msgctxt "Marble::MainWindow|"
 msgid "Ready"
 msgstr "Έτοιμο"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:752
+#: src/apps/marble-qt/QtMainWindow.cpp:754
 msgctxt "Marble::MainWindow|"
 msgid "Export Map"
 msgstr "Εξαγωγή χάρτη"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:754
+#: src/apps/marble-qt/QtMainWindow.cpp:756
 msgctxt "Marble::MainWindow|"
 msgid "Images (*.jpg *.png)"
 msgstr "Εικόνες (*.jpg *.png)"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:771
+#: src/apps/marble-qt/QtMainWindow.cpp:773
 msgctxt "Marble::MainWindow|"
 msgid "An error occurred while trying to save the file.\n"
 msgstr "Παρουσιάστηκε σφάλμα κατά την προσπάθεια αποθήκευσης του αρχείου.\n"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:902
+#: src/apps/marble-qt/QtMainWindow.cpp:904
 #, qt-format
 msgctxt "Marble::MainWindow|"
 msgid "Marble Virtual Globe %1"
 msgstr "Marble - Εικονική υδρόγειος %1"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:953
-#: src/apps/marble-qt/QtMainWindow.cpp:1030
+#: src/apps/marble-qt/QtMainWindow.cpp:955
+#: src/apps/marble-qt/QtMainWindow.cpp:1032
 #, qt-format
 msgctxt "Marble::MainWindow|"
 msgid "Position: %1"
 msgstr "Θέση: %1 "
 
-#: src/apps/marble-qt/QtMainWindow.cpp:956
-#: src/apps/marble-qt/QtMainWindow.cpp:1038
+#: src/apps/marble-qt/QtMainWindow.cpp:958
+#: src/apps/marble-qt/QtMainWindow.cpp:1040
 #, qt-format
 msgctxt "Marble::MainWindow|"
 msgid "Altitude: %1"
 msgstr "Υψόμετρο: %1"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:959
-#: src/apps/marble-qt/QtMainWindow.cpp:1046
+#: src/apps/marble-qt/QtMainWindow.cpp:961
+#: src/apps/marble-qt/QtMainWindow.cpp:1048
 #, qt-format
 msgctxt "Marble::MainWindow|"
 msgid "Zoom: %1"
 msgstr "Εστίαση: %1"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:962
-#: src/apps/marble-qt/QtMainWindow.cpp:1054
+#: src/apps/marble-qt/QtMainWindow.cpp:964
+#: src/apps/marble-qt/QtMainWindow.cpp:1056
 #, qt-format
 msgctxt "Marble::MainWindow|"
 msgid "Time: %1"
 msgstr "Ώρα: %1"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:994
+#: src/apps/marble-qt/QtMainWindow.cpp:996
 msgctxt "Marble::MainWindow|"
 msgid "All Supported Files"
 msgstr "Όλα τα υποστηριζόμενα αρχεία"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:1000
+#: src/apps/marble-qt/QtMainWindow.cpp:1002
 msgctxt "Marble::MainWindow|"
 msgid "Open File"
 msgstr "Άνοιγμα αρχείου"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:1021
+#: src/apps/marble-qt/QtMainWindow.cpp:1023
 msgctxt "Marble::MainWindow|"
 msgid "&Angle Display Unit"
 msgstr "&Μονάδα εμφάνισης γωνίας"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:1270
+#: src/apps/marble-qt/QtMainWindow.cpp:1272
 msgctxt "Marble::MainWindow|"
 msgid "Unnamed"
 msgstr "Χωρίς όνομα"
 
-#: src/apps/marble-ui/ControlView.cpp:85
+#: src/apps/marble-ui/ControlView.cpp:86
 msgctxt "Marble::ControlView|"
 msgid "Marble - Virtual Globe"
 msgstr "Marble - Εικονική υδρόγειος"
 
-#: src/apps/marble-ui/ControlView.cpp:276
+#: src/apps/marble-ui/ControlView.cpp:277
 msgctxt "Marble::ControlView|"
 msgid "Default (Resizable)"
 msgstr "Προκαθορισμένο (με αλλαγή μεγέθους)"
 
-#: src/apps/marble-ui/ControlView.cpp:285
+#: src/apps/marble-ui/ControlView.cpp:286
 #, qt-format
 msgctxt "Marble::ControlView|"
 msgid "NTSC (%1x%2)"
 msgstr "NTSC (%1x%2)"
 
-#: src/apps/marble-ui/ControlView.cpp:286
+#: src/apps/marble-ui/ControlView.cpp:287
 #, qt-format
 msgctxt "Marble::ControlView|"
 msgid "PAL (%1x%2)"
 msgstr "PAL (%1x%2)"
 
-#: src/apps/marble-ui/ControlView.cpp:287
+#: src/apps/marble-ui/ControlView.cpp:288
 #, qt-format
 msgctxt "Marble::ControlView|"
 msgid "NTSC 16:9 (%1x%2)"
 msgstr "NTSC 16:9 (%1x%2)"
 
-#: src/apps/marble-ui/ControlView.cpp:288
+#: src/apps/marble-ui/ControlView.cpp:289
 #, qt-format
 msgctxt "Marble::ControlView|"
 msgid "PAL 16:9 (%1x%2)"
 msgstr "PAL 16:9 (%1x%2)"
 
-#: src/apps/marble-ui/ControlView.cpp:290
+#: src/apps/marble-ui/ControlView.cpp:291
 #, qt-format
 msgctxt "Marble::ControlView|"
 msgid "DVD (%1x%2p)"
 msgstr "DVD (%1x%2p)"
 
-#: src/apps/marble-ui/ControlView.cpp:292
+#: src/apps/marble-ui/ControlView.cpp:293
 #, qt-format
 msgctxt "Marble::ControlView|"
 msgid "HD (%1x%2p)"
 msgstr "HD (%1x%2p)"
 
-#: src/apps/marble-ui/ControlView.cpp:294
+#: src/apps/marble-ui/ControlView.cpp:295
 #, qt-format
 msgctxt "Marble::ControlView|"
 msgid "Full HD (%1x%2p)"
 msgstr "Full HD (%1x%2p)"
 
-#: src/apps/marble-ui/ControlView.cpp:295
+#: src/apps/marble-ui/ControlView.cpp:296
 #, qt-format
 msgctxt "Marble::ControlView|"
 msgid "Digital Cinema (%1x%2)"
 msgstr "Ψηφιακός κινηματογράφος (%1x%2)"
 
-#: src/apps/marble-ui/ControlView.cpp:486
+#: src/apps/marble-ui/ControlView.cpp:487
 msgctxt "Marble::ControlView|"
 msgid "The Marble development team wishes you a pleasant and safe journey."
 msgstr ""
 "Η ομάδα ανάπτυξης του Marble σάς εύχεται ένα ευχάριστο και ασφαλές ταξίδι."
 
-#: src/apps/marble-ui/ControlView.cpp:487
+#: src/apps/marble-ui/ControlView.cpp:488
 msgctxt "Marble::ControlView|"
 msgid "Caution: Driving instructions may be incomplete or inaccurate."
 msgstr "Προσοχή: Οι οδηγίες ενδέχεται να είναι ελλείπείς ή ανακριβείς."
 
-#: src/apps/marble-ui/ControlView.cpp:488
+#: src/apps/marble-ui/ControlView.cpp:489
 msgctxt "Marble::ControlView|"
 msgid ""
 "Road construction, weather and other unforeseen variables can result in this "
@@ -3371,12 +3371,12 @@ msgstr ""
 "αποτέλεσμα η προτεινόμενη διαδρομή να μην είναι η πιο αποτελεσματική ή η "
 "ασφαλέστερη προς τον προορισμό σας."
 
-#: src/apps/marble-ui/ControlView.cpp:489
+#: src/apps/marble-ui/ControlView.cpp:490
 msgctxt "Marble::ControlView|"
 msgid "Please use common sense while navigating."
 msgstr "Παρακαλούμε να χρησιμοποιείτε την κοινή λογική κατά την πλοήγηση."
 
-#: src/apps/marble-ui/ControlView.cpp:576
+#: src/apps/marble-ui/ControlView.cpp:577
 #, qt-format
 msgctxt "Marble::ControlView|"
 msgid ""
@@ -3387,69 +3387,69 @@ msgstr ""
 "εγκατασταθεί ή επιλέξτε έναν διαφορετικό εξωτερικό επεξεργαστή στον διάλογο "
 "ρυθμίσεων."
 
-#: src/apps/marble-ui/ControlView.cpp:578
+#: src/apps/marble-ui/ControlView.cpp:579
 msgctxt "Marble::ControlView|"
 msgid "Cannot start external editor"
 msgstr "Αδυναμία εκκίνησης του εξωτερικού επεξεργαστή"
 
-#: src/apps/marble-ui/ControlView.cpp:595
+#: src/apps/marble-ui/ControlView.cpp:596
 msgctxt "Marble::ControlView|"
 msgid "Legend"
 msgstr "Υπόμνημα"
 
-#: src/apps/marble-ui/ControlView.cpp:613
+#: src/apps/marble-ui/ControlView.cpp:614
 msgctxt "Marble::ControlView|"
 msgid "Routing"
 msgstr "Δρομολόγηση"
 
-#: src/apps/marble-ui/ControlView.cpp:621
+#: src/apps/marble-ui/ControlView.cpp:622
 msgctxt "Marble::ControlView|"
 msgid "Location"
 msgstr "Τοποθεσία"
 
-#: src/apps/marble-ui/ControlView.cpp:629
+#: src/apps/marble-ui/ControlView.cpp:630
 msgctxt "Marble::ControlView|"
 msgid "Search"
 msgstr "Αναζήτηση"
 
-#: src/apps/marble-ui/ControlView.cpp:642
+#: src/apps/marble-ui/ControlView.cpp:643
 #, qt-format
 msgctxt "Marble::ControlView|"
 msgid "Search for cities, addresses, points of interest and more (%1)"
 msgstr "Αναζήτηση πόλεων, διευθύνσεων, σημείων ενδιαφέροντος και άλλων (%1)"
 
-#: src/apps/marble-ui/ControlView.cpp:646
+#: src/apps/marble-ui/ControlView.cpp:647
 msgctxt "Marble::ControlView|"
 msgid "Map View"
 msgstr "Προβολή χάρτη"
 
-#: src/apps/marble-ui/ControlView.cpp:656
+#: src/apps/marble-ui/ControlView.cpp:657
 msgctxt "Marble::ControlView|"
 msgid "Files"
 msgstr "Αρχεία"
 
-#: src/apps/marble-ui/ControlView.cpp:665
+#: src/apps/marble-ui/ControlView.cpp:666
 msgctxt "Marble::ControlView|"
 msgid "Tour"
 msgstr "Περιήγηση"
 
-#: src/apps/marble-ui/ControlView.cpp:678
+#: src/apps/marble-ui/ControlView.cpp:679
 msgctxt "QObject|"
 msgid "Edit Maps"
 msgstr "Επεξεργασία χαρτών"
 
-#: src/apps/marble-ui/ControlView.cpp:730
-#: src/apps/marble-ui/ControlView.cpp:868
+#: src/apps/marble-ui/ControlView.cpp:731
+#: src/apps/marble-ui/ControlView.cpp:869
 msgctxt "Marble::ControlView|"
 msgid "Hide &All Panels"
 msgstr "Απόκρυψη ό&λων των πινάκων"
 
-#: src/apps/marble-ui/ControlView.cpp:732
+#: src/apps/marble-ui/ControlView.cpp:733
 msgctxt "Marble::ControlView|"
 msgid "Show or hide all panels."
 msgstr "Εμφάνιση ή απόκρυψη όλων των πινάκων."
 
-#: src/apps/marble-ui/ControlView.cpp:857
+#: src/apps/marble-ui/ControlView.cpp:858
 msgctxt "Marble::ControlView|"
 msgid "Show &All Panels"
 msgstr "Εμφάνιση ό&λων των πινάκων"
@@ -3827,87 +3827,87 @@ msgctxt "Marble::RouteItemDelegate|"
 msgid "Upload to cloud"
 msgstr "Αποστολή στο νέφος"
 
-#: src/lib/marble/CurrentLocationWidget.cpp:199
+#: src/lib/marble/CurrentLocationWidget.cpp:197
 msgctxt "QObject|"
 msgid "No position available."
 msgstr "Μη διαθέσιμη τοποθεσία."
 
-#: src/lib/marble/CurrentLocationWidget.cpp:202
+#: src/lib/marble/CurrentLocationWidget.cpp:200
 msgctxt "QObject|"
 msgid "Waiting for current location information..."
 msgstr "Αναμονή για πληροφορίες σχετικά με την τρέχουσα τοποθεσία..."
 
-#: src/lib/marble/CurrentLocationWidget.cpp:208
+#: src/lib/marble/CurrentLocationWidget.cpp:206
 msgctxt "QObject|"
 msgid "Error when determining current location: "
 msgstr "Σφάλμα κατά τον προσδιορισμό της τρέχουσας τοποθεσίας: "
 
-#: src/lib/marble/CurrentLocationWidget.cpp:269
+#: src/lib/marble/CurrentLocationWidget.cpp:267
 #: src/plugins/render/weather/WeatherData.cpp:590
 msgctxt "QObject|"
 msgid "km/h"
 msgstr "χλμ/ω"
 
-#: src/lib/marble/CurrentLocationWidget.cpp:271
-#: src/lib/marble/CurrentLocationWidget.cpp:272
-#: src/lib/marble/CurrentLocationWidget.cpp:293
+#: src/lib/marble/CurrentLocationWidget.cpp:269
+#: src/lib/marble/CurrentLocationWidget.cpp:270
+#: src/lib/marble/CurrentLocationWidget.cpp:291
 msgctxt "QObject|"
 msgid "m"
 msgstr "μ"
 
-#: src/lib/marble/CurrentLocationWidget.cpp:275
+#: src/lib/marble/CurrentLocationWidget.cpp:273
 msgctxt "QObject|"
 msgid "km"
 msgstr "χλμ"
 
-#: src/lib/marble/CurrentLocationWidget.cpp:281
+#: src/lib/marble/CurrentLocationWidget.cpp:279
 msgctxt "QObject|"
 msgid "m/h"
 msgstr "μ/ω"
 
-#: src/lib/marble/CurrentLocationWidget.cpp:283
-#: src/lib/marble/CurrentLocationWidget.cpp:284
+#: src/lib/marble/CurrentLocationWidget.cpp:281
+#: src/lib/marble/CurrentLocationWidget.cpp:282
 msgctxt "QObject|"
 msgid "ft"
 msgstr "πόδια"
 
-#: src/lib/marble/CurrentLocationWidget.cpp:291
+#: src/lib/marble/CurrentLocationWidget.cpp:289
 msgctxt "QObject|"
 msgid "kt"
 msgstr "kt"
 
-#: src/lib/marble/CurrentLocationWidget.cpp:294
+#: src/lib/marble/CurrentLocationWidget.cpp:292
 msgctxt "QObject|"
 msgid "nm"
 msgstr "nm"
 
-#: src/lib/marble/CurrentLocationWidget.cpp:334
+#: src/lib/marble/CurrentLocationWidget.cpp:343
 msgctxt "QObject|"
 msgid "Placemark"
 msgstr "Σήμανση τοποθεσίας"
 
-#: src/lib/marble/CurrentLocationWidget.cpp:369
+#: src/lib/marble/CurrentLocationWidget.cpp:378
 msgctxt "QObject|"
 msgid "Save Track"
 msgstr "Αποθήκευση πορείας"
 
-#: src/lib/marble/CurrentLocationWidget.cpp:371
-#: src/lib/marble/CurrentLocationWidget.cpp:387
+#: src/lib/marble/CurrentLocationWidget.cpp:380
+#: src/lib/marble/CurrentLocationWidget.cpp:396
 msgctxt "QObject|"
 msgid "KML File (*.kml)"
 msgstr "Αρχείο KML (*kml)"
 
-#: src/lib/marble/CurrentLocationWidget.cpp:386
+#: src/lib/marble/CurrentLocationWidget.cpp:395
 msgctxt "QObject|"
 msgid "Open Track"
 msgstr "Άνοιγμα πορείας"
 
-#: src/lib/marble/CurrentLocationWidget.cpp:398
+#: src/lib/marble/CurrentLocationWidget.cpp:407
 msgctxt "QObject|"
 msgid "Clear current track"
 msgstr "Καθαρισμός τρέχουσας πορείας"
 
-#: src/lib/marble/CurrentLocationWidget.cpp:399
+#: src/lib/marble/CurrentLocationWidget.cpp:408
 msgctxt "QObject|"
 msgid "Are you sure you want to clear the current track?"
 msgstr "Επιθυμείτε πραγματικά τον καθαρισμό της τρέχουσας πορείας;"
@@ -5987,1690 +5987,1690 @@ msgctxt "GeoDataCoordinates|"
 msgid "S"
 msgstr "Ν"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:312
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:313
 msgctxt "GeoDataPlacemark|"
 msgid "Valley"
 msgstr "Κοιλάδα"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:313
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:314
 msgctxt "GeoDataPlacemark|"
 msgid "Terrain"
 msgstr "Έδαφος"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:314
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:315
 msgctxt "GeoDataPlacemark|"
 msgid "Crater"
 msgstr "Κρατήρ"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:315
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:316
 msgctxt "GeoDataPlacemark|"
 msgid "Sea"
 msgstr "Θάλασσα"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:316
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:317
 msgctxt "GeoDataPlacemark|"
 msgid "Manned Landing Site"
 msgstr "Επανδρωμένη τοποθεσία προσγείωσης"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:317
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:318
 msgctxt "GeoDataPlacemark|"
 msgid "Robotic Rover"
 msgstr "Πλανόδιο ρομπότ"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:318
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:319
 msgctxt "GeoDataPlacemark|"
 msgid "Unmanned Soft Landing Site"
 msgstr "Μη επανδρωμένη ομαλή προσγείωση"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:319
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:320
 msgctxt "GeoDataPlacemark|"
 msgid "Unmanned Hard Landing Site"
 msgstr "Μη επανδρωμένη ανώμαλη προσγείωση"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:320
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:338
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:321
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:339
 msgctxt "GeoDataPlacemark|"
 msgid "Mountain"
 msgstr "Βουνό"
-
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:321
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:325
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:329
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:333
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:354
-msgctxt "GeoDataPlacemark|"
-msgid "City"
-msgstr "Πόλη"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:322
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:326
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:330
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:334
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:355
 msgctxt "GeoDataPlacemark|"
-msgid "County Capital"
-msgstr "Πρωτεύουσα επαρχίας"
+msgid "City"
+msgstr "Πόλη"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:323
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:327
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:331
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:335
 msgctxt "GeoDataPlacemark|"
-msgid "State Capital"
-msgstr "Πρωτεύουσα πολιτείας"
+msgid "County Capital"
+msgstr "Πρωτεύουσα επαρχίας"
 
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:324
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:328
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:332
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:336
 msgctxt "GeoDataPlacemark|"
+msgid "State Capital"
+msgstr "Πρωτεύουσα πολιτείας"
+
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:325
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:329
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:333
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:337
+msgctxt "GeoDataPlacemark|"
 msgid "Nation Capital"
 msgstr "Εθνική πρωτεύουσα"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:337
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:338
 msgctxt "GeoDataPlacemark|"
 msgid "Nation"
 msgstr "Έθνος"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:339
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:458
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:340
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:459
 msgctxt "GeoDataPlacemark|"
 msgid "Volcano"
 msgstr "Ηφαίστειο"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:340
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:341
 msgctxt "GeoDataPlacemark|"
 msgid "Continent"
 msgstr "Ήπειρος"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:341
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:342
 msgctxt "GeoDataPlacemark|"
 msgid "Ocean"
 msgstr "Ωκεανός"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:342
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:343
 msgctxt "GeoDataPlacemark|"
 msgid "Geographic Pole"
 msgstr "Γεωγραφικός πόλος"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:343
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:344
 msgctxt "GeoDataPlacemark|"
 msgid "Magnetic Pole"
 msgstr "Μαγνητικός πόλος"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:344
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:345
 msgctxt "GeoDataPlacemark|"
 msgid "Ship Wreck"
 msgstr "Ναυάγιο"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:345
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:346
 msgctxt "GeoDataPlacemark|"
 msgid "Air Port"
 msgstr "Αεροδρόμιο"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:346
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:347
 msgctxt "GeoDataPlacemark|"
 msgid "Observatory"
 msgstr "Παρατηρητήριο"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:347
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:348
 msgctxt "GeoDataPlacemark|"
 msgid "Military Danger Area"
 msgstr "Επικίνδυνη στρατιωτική περιοχή"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:348
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:349
 msgctxt "GeoDataPlacemark|"
 msgid "OSM Site"
 msgstr "OSM Site"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:349
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:350
 msgctxt "GeoDataPlacemark|"
 msgid "Coordinate"
 msgstr "Συντεταγμένη"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:350
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:351
 msgctxt "GeoDataPlacemark|"
 msgid "Bookmark"
 msgstr "Σελιδοδείκτης"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:351
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:352
 msgctxt "GeoDataPlacemark|"
 msgid "Satellite"
 msgstr "Δορυφόρος"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:355
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:356
 msgctxt "GeoDataPlacemark|"
 msgid "City Capital"
 msgstr "Πρωτεύουσα πόλης"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:356
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:362
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:365
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:357
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:363
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:366
 msgctxt "GeoDataPlacemark|"
 msgid "National Capital"
 msgstr "Εθνική πρωτεύουσα"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:357
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:358
 msgctxt "GeoDataPlacemark|"
 msgid "Suburb"
 msgstr "Προάστιο"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:358
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:359
 msgctxt "GeoDataPlacemark|"
 msgid "Hamlet"
 msgstr "Οικισμός"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:359
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:360
 msgctxt "GeoDataPlacemark|"
 msgid "Locality"
 msgstr "Τοπικότητα"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:360
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:361
 msgctxt "GeoDataPlacemark|"
 msgid "Town"
 msgstr "Κωμόπολη"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:361
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:362
 #, fuzzy
 #| msgid "National Capital"
 msgctxt "GeoDataPlacemark|"
 msgid "Town Capital"
 msgstr "Εθνική πρωτεύουσα"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:363
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:364
 msgctxt "GeoDataPlacemark|"
 msgid "Village"
 msgstr "Χωριό"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:364
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:365
 #, fuzzy
 #| msgid "State Capital"
 msgctxt "GeoDataPlacemark|"
 msgid "Village Capital"
 msgstr "Πρωτεύουσα πολιτείας"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:366
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:367
 msgctxt "GeoDataPlacemark|"
 msgid "Water"
 msgstr "Νερό"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:367
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:368
 msgctxt "GeoDataPlacemark|"
 msgid "Reef"
 msgstr "Ύφαλος"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:368
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:369
 msgctxt "GeoDataPlacemark|"
 msgid "Wood"
 msgstr "Μικρό δάσος"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:369
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:370
 msgctxt "GeoDataPlacemark|"
 msgid "Beach"
 msgstr "Παραλία"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:370
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:371
 #, fuzzy
 #| msgid "Heathland"
 msgctxt "GeoDataPlacemark|"
 msgid "Wetland"
 msgstr "Περιοχή προνοίας"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:371
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:372
 msgctxt "GeoDataPlacemark|"
 msgid "Glacier"
 msgstr "Παγετώνας"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:372
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:373
 msgctxt "GeoDataPlacemark|"
 msgid "Ice Shelf"
 msgstr "Παγονησίδα"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:373
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:374
 msgctxt "GeoDataPlacemark|"
 msgid "Scrub"
 msgstr "Θαμνώνας"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:374
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:375
 msgctxt "GeoDataPlacemark|"
 msgid "Cliff"
 msgstr "Γκρεμός"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:375
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:376
 msgctxt "GeoDataPlacemark|"
 msgid "Heath"
 msgstr "Θάμνοι"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:376
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:377
 msgctxt "GeoDataPlacemark|"
 msgid "Traffic Signals"
 msgstr "Σήματα κυκλοφορίας"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:377
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:378
 msgctxt "GeoDataPlacemark|"
 msgid "Elevator"
 msgstr "Ανελκυστήρας"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:378
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:379
 msgctxt "GeoDataPlacemark|"
 msgid "Steps"
 msgstr "Βήματα"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:379
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:380
 msgctxt "GeoDataPlacemark|"
 msgid "Unknown Road"
 msgstr "Άγνωστος δρόμος"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:380
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:381
 msgctxt "GeoDataPlacemark|"
 msgid "Path"
 msgstr "Διαδρομή"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:381
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:383
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:382
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:384
 msgctxt "GeoDataPlacemark|"
 msgid "Footway"
 msgstr "Πεζόδρομος"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:382
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:579
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:383
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:580
 msgctxt "GeoDataPlacemark|"
 msgid "Track"
 msgstr "Ανίχνευση"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:384
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:385
 msgctxt "GeoDataPlacemark|"
 msgid "Cycleway"
 msgstr "Ποδηλατόδρομος"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:385
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:386
 msgctxt "GeoDataPlacemark|"
 msgid "Service Road"
 msgstr "Παράδρομος"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:386
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:387
 msgctxt "GeoDataPlacemark|"
 msgid "Road"
 msgstr "Δρόμος"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:387
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:388
 msgctxt "GeoDataPlacemark|"
 msgid "Residential Road"
 msgstr "Κατοικημένη περιοχή"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:388
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:389
 msgctxt "GeoDataPlacemark|"
 msgid "Living Street"
 msgstr "Δρόμος μειωμένης ταχύτητας"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:389
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:390
 msgctxt "GeoDataPlacemark|"
 msgid "Unclassified Road"
 msgstr "Μη κατηγοριοποιημένος δρόμος"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:390
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:391
 msgctxt "GeoDataPlacemark|"
 msgid "Tertiary Link Road"
 msgstr "Τριτεύων συνδεδεμένος δρόμος"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:391
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:392
 msgctxt "GeoDataPlacemark|"
 msgid "Tertiary Road"
 msgstr "Τριτεύων δρόμος"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:392
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:393
 msgctxt "GeoDataPlacemark|"
 msgid "Secondary Link Road"
 msgstr "Δευτερεύων συνδεδεμένος δρόμος"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:393
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:394
 msgctxt "GeoDataPlacemark|"
 msgid "Secondary Road"
 msgstr "Δευτερεύων δρόμος"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:394
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:395
 msgctxt "GeoDataPlacemark|"
 msgid "Primary Link Road"
 msgstr "Κύριος συνδεδεμένος δρόμος"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:395
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:396
 msgctxt "GeoDataPlacemark|"
 msgid "Primary Road"
 msgstr "Κύριος δρόμος"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:396
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:397
 msgctxt "GeoDataPlacemark|"
 msgid "Raceway"
 msgstr "Δρόμος αγώνων"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:397
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:398
 #, fuzzy
 #| msgid "Trunk road"
 msgctxt "GeoDataPlacemark|"
 msgid "Trunk Link Road"
 msgstr "Οδός φορτηγών"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:398
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:399
 msgctxt "GeoDataPlacemark|"
 msgid "Trunk Road"
 msgstr "Οδός φορτηγών"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:399
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:400
 #, fuzzy
 #| msgid "Motorway"
 msgctxt "GeoDataPlacemark|"
 msgid "Motorway Link Road"
 msgstr "Αυτοκινητόδρομος"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:400
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:401
 msgctxt "GeoDataPlacemark|"
 msgid "Motorway"
 msgstr "Αυτοκινητόδρομος"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:401
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:402
 msgctxt "GeoDataPlacemark|"
 msgid "Corridor"
 msgstr "Διάδρομος"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:402
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:403
 msgctxt "GeoDataPlacemark|"
 msgid "Building"
 msgstr "Κτήριο"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:403
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:404
 msgctxt "GeoDataPlacemark|"
 msgid "Camping"
 msgstr "Κάμπινγκ"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:404
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:405
 msgctxt "GeoDataPlacemark|"
 msgid "Hostel"
 msgstr "Ξενώνας"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:405
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:406
 msgctxt "GeoDataPlacemark|"
 msgid "Hotel"
 msgstr "Ξενοδοχείο"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:406
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:407
 msgctxt "GeoDataPlacemark|"
 msgid "Motel"
 msgstr "Μοτέλ"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:407
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:408
 msgctxt "GeoDataPlacemark|"
 msgid "Youth Hostel"
 msgstr "νεολαιίστικος ξενώνας"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:408
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:409
 msgctxt "GeoDataPlacemark|"
 msgid "Guest House"
 msgstr "Ξενώνας"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:409
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:410
 msgctxt "GeoDataPlacemark|"
 msgid "Library"
 msgstr "Βιβλιοθήκη"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:410
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:411
 msgctxt "GeoDataPlacemark|"
 msgid "Kindergarten"
 msgstr "Νηπιαγωγείο"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:411
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:412
 msgctxt "GeoDataPlacemark|"
 msgid "College"
 msgstr "Κολλέγιο"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:412
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:413
 msgctxt "GeoDataPlacemark|"
 msgid "School"
 msgstr "Σχολείο"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:413
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:414
 msgctxt "GeoDataPlacemark|"
 msgid "University"
 msgstr "Πανεπιστήμιο"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:414
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:415
 msgctxt "GeoDataPlacemark|"
 msgid "Bar"
 msgstr "Μπαρ"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:415
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:416
 msgctxt "GeoDataPlacemark|"
 msgid "Biergarten"
 msgstr "Μπυραρία"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:416
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:417
 msgctxt "GeoDataPlacemark|"
 msgid "Cafe"
 msgstr "Καφέ"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:417
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:418
 msgctxt "GeoDataPlacemark|"
 msgid "Fast Food"
 msgstr "Γρήγορο φαγητό"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:418
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:419
 msgctxt "GeoDataPlacemark|"
 msgid "Pub"
 msgstr "Παμπ"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:419
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:420
 msgctxt "GeoDataPlacemark|"
 msgid "Restaurant"
 msgstr "Εστιατόριο"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:420
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:421
 msgctxt "GeoDataPlacemark|"
 msgid "Dentist"
 msgstr "Οδοντίατρος"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:421
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:422
 msgctxt "GeoDataPlacemark|"
 msgid "Doctors"
 msgstr "Γιατροί"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:422
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:423
 msgctxt "GeoDataPlacemark|"
 msgid "Hospital"
 msgstr "Νοσοκομείο"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:423
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:424
 msgctxt "GeoDataPlacemark|"
 msgid "Pharmacy"
 msgstr "Φαρμακείο"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:424
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:425
 msgctxt "GeoDataPlacemark|"
 msgid "Veterinary"
 msgstr "Κτηνίατρος"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:425
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:426
 msgctxt "GeoDataPlacemark|"
 msgid "ATM"
 msgstr "ATM"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:426
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:427
 msgctxt "GeoDataPlacemark|"
 msgid "Bank"
 msgstr "Τράπεζα"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:427
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:428
 msgctxt "GeoDataPlacemark|"
 msgid "Archaeological Site"
 msgstr "Αρχαιολογικός χώρος"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:428
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:429
 msgctxt "GeoDataPlacemark|"
 msgid "Embassy"
 msgstr "Πρεσβεία"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:429
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:430
 msgctxt "GeoDataPlacemark|"
 msgid "Emergency Phone"
 msgstr "Επείγουσες κλήσεις"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:430
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:431
 msgctxt "GeoDataPlacemark|"
 msgid "Mountain Rescue"
 msgstr "Διάσωση ορειβατών"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:431
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:432
 msgctxt "GeoDataPlacemark|"
 msgid "Water Park"
 msgstr "Θαλάσσιο πάρκο"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:432
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:433
 msgctxt "GeoDataPlacemark|"
 msgid "Community Centre"
 msgstr "Κέντρο κοινότητας"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:433
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:434
 msgctxt "GeoDataPlacemark|"
 msgid "Fountain"
 msgstr "Πηγή"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:434
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:435
 msgctxt "GeoDataPlacemark|"
 msgid "Night Club"
 msgstr "Νύχτερινό κέντρο"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:435
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:436
 msgctxt "GeoDataPlacemark|"
 msgid "Bench"
 msgstr "Παγκάκι"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:436
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:437
 msgctxt "GeoDataPlacemark|"
 msgid "Court House"
 msgstr "Δικαστήριο"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:437
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:438
 msgctxt "GeoDataPlacemark|"
 msgid "Fire Station"
 msgstr "Πυροσβεστική"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:438
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:439
 msgctxt "GeoDataPlacemark|"
 msgid "Hunting Stand"
 msgstr "Κυνηγετική πλατφόρμα"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:439
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:440
 msgctxt "GeoDataPlacemark|"
 msgid "Police"
 msgstr "Αστυνομία"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:440
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:441
 msgctxt "GeoDataPlacemark|"
 msgid "Post Box"
 msgstr "Ταχυδρομικό κουτί"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:441
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:442
 msgctxt "GeoDataPlacemark|"
 msgid "Post Office"
 msgstr "Ταχυδρομείο"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:442
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:443
 msgctxt "GeoDataPlacemark|"
 msgid "Prison"
 msgstr "Φυλακή"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:443
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:444
 msgctxt "GeoDataPlacemark|"
 msgid "Recycling"
 msgstr "Ανακύκλωση"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:444
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:445
 msgctxt "GeoDataPlacemark|"
 msgid "Shelter"
 msgstr "Καταφύγιο"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:445
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:446
 msgctxt "GeoDataPlacemark|"
 msgid "Telephone"
 msgstr "Τηλέφωνο"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:446
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:447
 msgctxt "GeoDataPlacemark|"
 msgid "Toilets"
 msgstr "Τουαλέτες"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:447
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:448
 msgctxt "GeoDataPlacemark|"
 msgid "Town Hall"
 msgstr "Δημαρχείο"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:448
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:449
 msgctxt "GeoDataPlacemark|"
 msgid "Waste Basket"
 msgstr "Κάλαθος αχρήστων"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:449
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:450
 msgctxt "GeoDataPlacemark|"
 msgid "Drinking Water"
 msgstr "Πόσιμο νερό"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:450
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:451
 msgctxt "GeoDataPlacemark|"
 msgid "Graveyard"
 msgstr "Νεκροταφείο"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:451
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:452
 msgctxt "GeoDataPlacemark|"
 msgid "Charging Station"
 msgstr "Σταθμός φόρτισης"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:452
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:453
 msgctxt "GeoDataPlacemark|"
 msgid "Car Wash"
 msgstr "Πλυντήριο αυτοκίνητων"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:453
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:454
 msgctxt "GeoDataPlacemark|"
 msgid "Social Facility"
 msgstr "Κοινωνική υπηρεσία"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:454
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:455
 msgctxt "GeoDataPlacemark|"
 msgid "City Wall"
 msgstr "Δημαρχείο"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:455
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:456
 msgctxt "GeoDataPlacemark|"
 msgid "Gate"
 msgstr "Πύλη"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:456
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:457
 msgctxt "GeoDataPlacemark|"
 msgid "Lift Gate"
 msgstr "Πύλη ανέλκυσης"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:457
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:665
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:458
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:666
 msgctxt "GeoDataPlacemark|"
 msgid "Wall"
 msgstr "Τοίχος"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:459
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:460
 msgctxt "GeoDataPlacemark|"
 msgid "Peak"
 msgstr "Κορυφή"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:460
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:461
 msgctxt "GeoDataPlacemark|"
 msgid "Tree"
 msgstr "Δέντρο"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:461
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:462
 msgctxt "GeoDataPlacemark|"
 msgid "Cave Entrance"
 msgstr "Είσοδος σπηλαίου"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:462
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:463
 msgctxt "GeoDataPlacemark|"
 msgid "Beverages"
 msgstr "Ποτά"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:463
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:464
 msgctxt "GeoDataPlacemark|"
 msgid "Hifi"
 msgstr "Σύστημα ήχου"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:464
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:465
 msgctxt "GeoDataPlacemark|"
 msgid "Supermarket"
 msgstr "Σουπερμάρκετ"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:465
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:466
 msgctxt "GeoDataPlacemark|"
 msgid "Liquor Store"
 msgstr "Κάβα"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:466
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:467
 msgctxt "GeoDataPlacemark|"
 msgid "Bakery"
 msgstr "Αρτοποιείο"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:467
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:468
 msgctxt "GeoDataPlacemark|"
 msgid "Butcher"
 msgstr "Κρεοπώλης"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:468
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:469
 msgctxt "GeoDataPlacemark|"
 msgid "Confectionery"
 msgstr "Ζαχαροπλαστική"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:469
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:470
 msgctxt "GeoDataPlacemark|"
 msgid "Convenience Shop"
 msgstr "Παντοπωλείο"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:470
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:471
 msgctxt "GeoDataPlacemark|"
 msgid "Greengrocer"
 msgstr "Μανάβης"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:471
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:472
 msgctxt "GeoDataPlacemark|"
 msgid "Seafood Shop"
 msgstr "Ιχθυοπωλείο"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:472
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:473
 msgctxt "GeoDataPlacemark|"
 msgid "Department Store"
 msgstr "Πολυκατάστημα"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:473
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:474
 msgctxt "GeoDataPlacemark|"
 msgid "Kiosk"
 msgstr "Περίπτερο"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:474
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:475
 msgctxt "GeoDataPlacemark|"
 msgid "Bag Shop"
 msgstr "Κατάστημα με τσάντες"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:475
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:476
 msgctxt "GeoDataPlacemark|"
 msgid "Clothes Shop"
 msgstr "Κατάστημα ρούχων"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:476
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:477
 msgctxt "GeoDataPlacemark|"
 msgid "Fashion Shop"
 msgstr "Κατάστημα μόδας"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:477
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:478
 msgctxt "GeoDataPlacemark|"
 msgid "Jewelry Shop"
 msgstr "Κοσμηματοπωλείο"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:478
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:479
 msgctxt "GeoDataPlacemark|"
 msgid "Shoe Shop"
 msgstr "Κατάστημα υποδημάτων"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:479
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:480
 msgctxt "GeoDataPlacemark|"
 msgid "Variety Store"
 msgstr "Κατάστημα ποικίλων ειδών"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:480
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:481
 msgctxt "GeoDataPlacemark|"
 msgid "Beauty Services"
 msgstr "Υπηρεσίες ομορφιάς"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:481
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:482
 msgctxt "GeoDataPlacemark|"
 msgid "Chemist"
 msgstr "Χημικός"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:482
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:483
 msgctxt "GeoDataPlacemark|"
 msgid "Cosmetics"
 msgstr "Καλλυντικά"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:483
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:484
 msgctxt "GeoDataPlacemark|"
 msgid "Hairdresser"
 msgstr "Κομμωτήριο"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:484
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:485
 msgctxt "GeoDataPlacemark|"
 msgid "Optician"
 msgstr "Οπτικός"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:485
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:486
 msgctxt "GeoDataPlacemark|"
 msgid "Perfumery"
 msgstr "Αρώματα"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:486
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:488
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:487
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:489
 msgctxt "GeoDataPlacemark|"
 msgid "Hardware Store"
 msgstr "Εξοπλισμός"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:487
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:488
 msgctxt "GeoDataPlacemark|"
 msgid "Florist"
 msgstr "Ανθοπωλείο"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:489
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:490
 msgctxt "GeoDataPlacemark|"
 msgid "Furniture Store"
 msgstr "Κατάστημα επίπλων"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:490
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:491
 msgctxt "GeoDataPlacemark|"
 msgid "Electronics Shop"
 msgstr "Κατάστημα ηλεκτρονικών"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:491
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:492
 msgctxt "GeoDataPlacemark|"
 msgid "Mobile Phone Shop"
 msgstr "Κατάστημα κινητών τηλεφώνων"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:492
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:493
 msgctxt "GeoDataPlacemark|"
 msgid "Bicycle Shop"
 msgstr "Ποδήλατα"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:493
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:494
 msgctxt "GeoDataPlacemark|"
 msgid "Car Dealer"
 msgstr "Πωλήσεις αυτοκινήτων"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:494
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:495
 msgctxt "GeoDataPlacemark|"
 msgid "Car Repair Shop"
 msgstr "Συνεργείο αυτοκινήτων"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:495
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:496
 msgctxt "GeoDataPlacemark|"
 msgid "Car Parts"
 msgstr "Ανταλλακτικά αυτοκινήτων"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:496
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:497
 msgctxt "GeoDataPlacemark|"
 msgid "Motorcycle Shop"
 msgstr "Κατάστημα μοτοποδηλάτων"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:497
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:498
 msgctxt "GeoDataPlacemark|"
 msgid "Outdoor Shop"
 msgstr "Κατάστημα ειδών εξωτερικής χρήσης"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:498
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:499
 msgctxt "GeoDataPlacemark|"
 msgid "Sports Shop"
 msgstr "Αθλητικά είδη"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:499
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:500
 msgctxt "GeoDataPlacemark|"
 msgid "Printing Services"
 msgstr "Υπηρεσίες εκτυπώσεων"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:500
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:501
 msgctxt "GeoDataPlacemark|"
 msgid "Art Shop"
 msgstr "Γκαλερί"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:501
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:502
 msgctxt "GeoDataPlacemark|"
 msgid "Musical Instrument Shop"
 msgstr "Κατάστημα μουσικών οργάνων"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:502
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:503
 msgctxt "GeoDataPlacemark|"
 msgid "Photo Shop"
 msgstr "Φωτογραφίες"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:503
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:504
 msgctxt "GeoDataPlacemark|"
 msgid "Bookshop"
 msgstr "Βιβλιοπωλείο"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:504
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:505
 msgctxt "GeoDataPlacemark|"
 msgid "Gift Shop"
 msgstr "Είδη δώρων"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:505
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:506
 msgctxt "GeoDataPlacemark|"
 msgid "Stationery"
 msgstr "Γραφική ύλη"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:506
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:507
 msgctxt "GeoDataPlacemark|"
 msgid "Laundry"
 msgstr "Πλυντήριο"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:507
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:508
 msgctxt "GeoDataPlacemark|"
 msgid "Pet Shop"
 msgstr "Κατάστημα κατοικιδίων"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:508
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:509
 msgctxt "GeoDataPlacemark|"
 msgid "Toy Store"
 msgstr "Κατάστημα παιχνιδιών"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:509
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:510
 msgctxt "GeoDataPlacemark|"
 msgid "Travel Agency"
 msgstr "Ταξιδιωτικό πρακτορείο"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:510
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:511
 msgctxt "GeoDataPlacemark|"
 msgid "Deli"
 msgstr "Deli"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:511
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:512
 msgctxt "GeoDataPlacemark|"
 msgid "Tobacco Shop"
 msgstr "Καπνοπωλείο"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:512
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:513
 msgctxt "GeoDataPlacemark|"
 msgid "Tea Shop"
 msgstr "Κατάστημα τσαγιού"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:513
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:514
 msgctxt "GeoDataPlacemark|"
 msgid "Computer Shop"
 msgstr "Ηλεκτρονικοί υπολογιστές"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:514
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:515
 msgctxt "GeoDataPlacemark|"
 msgid "Garden Centre"
 msgstr "Κέντρο κήπου"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:515
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:516
 msgctxt "GeoDataPlacemark|"
 msgid "Shop"
 msgstr "Κατάστημα"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:516
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:517
 msgctxt "GeoDataPlacemark|"
 msgid "Bridge"
 msgstr "Γέφυρα"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:517
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:518
 msgctxt "GeoDataPlacemark|"
 msgid "Lighthouse"
 msgstr "Φάρος"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:518
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:519
 msgctxt "GeoDataPlacemark|"
 msgid "Pier"
 msgstr "Προβλήτα"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:519
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:520
 msgctxt "GeoDataPlacemark|"
 msgid "Water Tower"
 msgstr "Πύργος νερού"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:520
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:521
 msgctxt "GeoDataPlacemark|"
 msgid "Wind Mill"
 msgstr "Ανεμόμυλος"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:521
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:522
 msgctxt "GeoDataPlacemark|"
 msgid "Communications Tower"
 msgstr "Πύργος τηλεπικοινωνιών"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:522
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:523
 msgctxt "GeoDataPlacemark|"
 msgid "Tourist Attraction"
 msgstr "Τουριστικό αξιοθέατο"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:523
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:524
 msgctxt "GeoDataPlacemark|"
 msgid "Artwork"
 msgstr "Καλλιτεχνήματα"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:524
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:525
 msgctxt "GeoDataPlacemark|"
 msgid "Castle"
 msgstr "κάστρο"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:525
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:526
 msgctxt "GeoDataPlacemark|"
 msgid "Cinema"
 msgstr "Κινηματογράφος"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:526
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:527
 msgctxt "GeoDataPlacemark|"
 msgid "Information"
 msgstr "Πληροφορίες"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:527
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:528
 msgctxt "GeoDataPlacemark|"
 msgid "Monument"
 msgstr "Μνημείο"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:528
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:529
 msgctxt "GeoDataPlacemark|"
 msgid "Museum"
 msgstr "Μουσείο"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:529
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:530
 msgctxt "GeoDataPlacemark|"
 msgid "Ruin"
 msgstr "Ερείπια"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:530
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:531
 msgctxt "GeoDataPlacemark|"
 msgid "Theatre"
 msgstr "Θέατρο"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:531
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:532
 msgctxt "GeoDataPlacemark|"
 msgid "Theme Park"
 msgstr "Θεματικό πάρκο"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:532
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:533
 msgctxt "GeoDataPlacemark|"
 msgid "View Point"
 msgstr "Άποψη"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:533
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:534
 msgctxt "GeoDataPlacemark|"
 msgid "Zoo"
 msgstr "Ζωολογικός κήπος"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:534
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:535
 msgctxt "GeoDataPlacemark|"
 msgid "Alpine Hut"
 msgstr "Αλπική καλύβα"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:535
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:536
 msgctxt "GeoDataPlacemark|"
 msgid "Wilderness Hut"
 msgstr "Ερημική καλύβα"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:536
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:537
 msgctxt "GeoDataPlacemark|"
 msgid "Memorial"
 msgstr "Μνημείο"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:537
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:538
 msgctxt "GeoDataPlacemark|"
 msgid "Aerodrome"
 msgstr "Αεροδρόμιο"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:538
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:539
 msgctxt "GeoDataPlacemark|"
 msgid "Helipad"
 msgstr "Ελικοδρόμιο"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:539
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:540
 msgctxt "GeoDataPlacemark|"
 msgid "Airport Gate"
 msgstr "Πύλη αεροδρομίου"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:540
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:541
 msgctxt "GeoDataPlacemark|"
 msgid "Airport Runway"
 msgstr "Αεροδιάδρομος"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:541
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:542
 msgctxt "GeoDataPlacemark|"
 msgid "Airport Apron"
 msgstr "Πίστα στάθμευσης αεροδρομίου"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:542
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:543
 msgctxt "GeoDataPlacemark|"
 msgid "Airport Taxiway"
 msgstr "Διάδρομος ταξί αεροδρομίου"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:543
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:544
 msgctxt "GeoDataPlacemark|"
 msgid "Airport Terminal"
 msgstr "Τερματικός σταθμός"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:544
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:545
 msgctxt "GeoDataPlacemark|"
 msgid "Bus Station"
 msgstr "Σταθμός λεωφορείων"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:545
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:546
 msgctxt "GeoDataPlacemark|"
 msgid "Bus Stop"
 msgstr "Στάση λεωφορείων"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:546
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:547
 msgctxt "GeoDataPlacemark|"
 msgid "Car Sharing"
 msgstr "Διαμοιρασμός αυτοκινήτων"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:547
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:548
 msgctxt "GeoDataPlacemark|"
 msgid "Gas Station"
 msgstr "Βενζινάδικο"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:548
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:549
 msgctxt "GeoDataPlacemark|"
 msgid "Parking"
 msgstr "Στάθμευση"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:549
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:550
 msgctxt "GeoDataPlacemark|"
 msgid "Parking Space"
 msgstr "Χώρος στάθμευσης"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:550
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:551
 msgctxt "GeoDataPlacemark|"
 msgid "Platform"
 msgstr "Πλατφόρμα"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:551
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:552
 msgctxt "GeoDataPlacemark|"
 msgid "Bicycle Rental"
 msgstr "Ενοικίαση ποδηλάτου"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:552
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:553
 msgctxt "GeoDataPlacemark|"
 msgid "Car Rental"
 msgstr "Ενοικίαση αυτοκινήτου"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:553
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:554
 msgctxt "GeoDataPlacemark|"
 msgid "Ski Rental"
 msgstr "Ενοικίαση χιονοπέδιλων"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:554
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:555
 msgctxt "GeoDataPlacemark|"
 msgid "Taxi Rank"
 msgstr "Πιάτσα ταξί"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:555
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:556
 msgctxt "GeoDataPlacemark|"
 msgid "Train Station"
 msgstr "Σιδηροδρομικός σταθμός"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:556
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:557
 msgctxt "GeoDataPlacemark|"
 msgid "Tram Stop"
 msgstr "Στάση τραμ"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:557
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:558
 msgctxt "GeoDataPlacemark|"
 msgid "Bicycle Parking"
 msgstr "Στάθμευση ποδηλάτων"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:558
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:559
 msgctxt "GeoDataPlacemark|"
 msgid "Motorcycle Parking"
 msgstr "Στάθμευση δικύκλων"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:559
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:560
 msgctxt "GeoDataPlacemark|"
 msgid "Subway Entrance"
 msgstr "Είσοδος υπόγειου"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:560
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:561
 msgctxt "GeoDataPlacemark|"
 msgid "Speed Camera"
 msgstr "Κάμερα ελέγχου ταχύτητας"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:561
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:562
 msgctxt "GeoDataPlacemark|"
 msgid "Place Of Worship"
 msgstr "Περιοχές λατρείας"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:562
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:563
 msgctxt "GeoDataPlacemark|"
 msgid "Bahai"
 msgstr "Μπαχάι"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:563
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:564
 msgctxt "GeoDataPlacemark|"
 msgid "Buddhist"
 msgstr "Βουδιστική"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:564
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:565
 msgctxt "GeoDataPlacemark|"
 msgid "Christian"
 msgstr "Χριστιανική"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:565
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:566
 msgctxt "GeoDataPlacemark|"
 msgid "Muslim"
 msgstr "Μωαμεθανική"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:566
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:567
 msgctxt "GeoDataPlacemark|"
 msgid "Hindu"
 msgstr "Ινδουιστική"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:567
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:568
 msgctxt "GeoDataPlacemark|"
 msgid "Jain"
 msgstr "Ζαϊνιστική"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:568
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:569
 msgctxt "GeoDataPlacemark|"
 msgid "Jewish"
 msgstr "Ιουδαϊκή"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:569
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:570
 msgctxt "GeoDataPlacemark|"
 msgid "Shinto"
 msgstr "Σίντο"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:570
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:571
 msgctxt "GeoDataPlacemark|"
 msgid "Sikh"
 msgstr "Σιχ"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:571
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:572
 msgctxt "GeoDataPlacemark|"
 msgid "Taoist"
 msgstr "Τάο"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:572
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:573
 msgctxt "GeoDataPlacemark|"
 msgid "Golf Course"
 msgstr "Γήπεδο γκολφ"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:573
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:574
 msgctxt "GeoDataPlacemark|"
 msgid "Marina"
 msgstr "Μαρίνα"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:574
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:575
 msgctxt "GeoDataPlacemark|"
 msgid "Park"
 msgstr "Πάρκο"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:575
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:576
 msgctxt "GeoDataPlacemark|"
 msgid "Playground"
 msgstr "Παιδική χαρά"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:576
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:577
 msgctxt "GeoDataPlacemark|"
 msgid "Pitch"
 msgstr "Γήπεδο"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:577
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:578
 msgctxt "GeoDataPlacemark|"
 msgid "Sports Centre"
 msgstr "Αθλητικό κέντρο"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:578
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:579
 msgctxt "GeoDataPlacemark|"
 msgid "Stadium"
 msgstr "Στάδιο"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:580
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:581
 msgctxt "GeoDataPlacemark|"
 msgid "Swimming Pool"
 msgstr "Πισίνα"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:581
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:582
 msgctxt "GeoDataPlacemark|"
 msgid "Miniature Golf Course"
 msgstr "Μίνι γκολφ"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:582
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:583
 msgctxt "GeoDataPlacemark|"
 msgid "Allotments"
 msgstr "Κλήροι"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:583
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:584
 msgctxt "GeoDataPlacemark|"
 msgid "Basin"
 msgstr "Υπόγειο"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:584
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:585
 msgctxt "GeoDataPlacemark|"
 msgid "Cemetery"
 msgstr "Κοιμητήριο"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:585
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:586
 msgctxt "GeoDataPlacemark|"
 msgid "Commercial"
 msgstr "Εμπορική"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:586
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:587
 msgctxt "GeoDataPlacemark|"
 msgid "Construction"
 msgstr "Οικοδομική"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:587
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:588
 msgctxt "GeoDataPlacemark|"
 msgid "Farmland"
 msgstr "Χωράφι"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:588
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:589
 msgctxt "GeoDataPlacemark|"
 msgid "Farmyard"
 msgstr "Χωράφι σε αγρόκτημα"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:589
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:590
 msgctxt "GeoDataPlacemark|"
 msgid "Garages"
 msgstr "Γκαράζ"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:590
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:591
 msgctxt "GeoDataPlacemark|"
 msgid "Grass"
 msgstr "Γρασίδι"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:591
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:592
 msgctxt "GeoDataPlacemark|"
 msgid "Industrial"
 msgstr "Βιομηχανική"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:592
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:593
 msgctxt "GeoDataPlacemark|"
 msgid "Landfill"
 msgstr "Χωματερή"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:593
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:594
 msgctxt "GeoDataPlacemark|"
 msgid "Meadow"
 msgstr "Λιβάδι"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:594
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:595
 msgctxt "GeoDataPlacemark|"
 msgid "Military"
 msgstr "Στρατός"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:595
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:596
 msgctxt "GeoDataPlacemark|"
 msgid "Quarry"
 msgstr "Λατομείο"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:596
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:597
 msgctxt "GeoDataPlacemark|"
 msgid "Railway"
 msgstr "Σιδηρόδρομος"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:597
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:598
 msgctxt "GeoDataPlacemark|"
 msgid "Reservoir"
 msgstr "Δεξαμενή"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:598
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:599
 msgctxt "GeoDataPlacemark|"
 msgid "Residential"
 msgstr "Κατοικημένη"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:599
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:600
 msgctxt "GeoDataPlacemark|"
 msgid "Retail"
 msgstr "Λιανεμπόριο"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:600
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:601
 msgctxt "GeoDataPlacemark|"
 msgid "Orchard"
 msgstr "Περιβόλι"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:601
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:602
 msgctxt "GeoDataPlacemark|"
 msgid "Vineyard"
 msgstr "Αμπέλι"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:602
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:603
 msgctxt "GeoDataPlacemark|"
 msgid "Rail"
 msgstr "Σιδηροτροχιά"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:603
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:604
 msgctxt "GeoDataPlacemark|"
 msgid "Narrow Gauge"
 msgstr "Σιδηροτροχιά μικρού εύρους"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:604
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:605
 msgctxt "GeoDataPlacemark|"
 msgid "Tram"
 msgstr "Τραμ"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:605
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:606
 msgctxt "GeoDataPlacemark|"
 msgid "Light Rail"
 msgstr "Ελαφρά σιδηροτροχιά"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:606
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:607
 msgctxt "GeoDataPlacemark|"
 msgid "Abandoned Railway"
 msgstr "Εγκαταλελειμμένος σιδηρόδρομος"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:607
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:608
 msgctxt "GeoDataPlacemark|"
 msgid "Subway"
 msgstr "Υπόγειος"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:608
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:609
 msgctxt "GeoDataPlacemark|"
 msgid "Preserved Railway"
 msgstr "Διατηρημένος σιδηρόδρομος"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:609
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:610
 msgctxt "GeoDataPlacemark|"
 msgid "Miniature Railway"
 msgstr "Μικροσκοπικός σιδηρόδρομος"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:610
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:611
 msgctxt "GeoDataPlacemark|"
 msgid "Railway Construction"
 msgstr "Κατασκευή σιδηροδρόμου"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:611
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:612
 msgctxt "GeoDataPlacemark|"
 msgid "Monorail"
 msgstr "Μονής τροχιάς"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:612
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:613
 msgctxt "GeoDataPlacemark|"
 msgid "Funicular Railway"
 msgstr "Τελεφερίκ"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:613
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:614
 msgctxt "GeoDataPlacemark|"
 msgid "Power Tower"
 msgstr "Πύργος υψηλής ισχύος"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:614
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:615
 msgctxt "GeoDataPlacemark|"
 msgid "Aerialway Station"
 msgstr "Σταθμός τελεφερίκ"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:615
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:616
 msgctxt ""
 "GeoDataPlacemark|A pylon supporting the aerialway cable e.g. on a ski lift"
 msgid "Pylon"
 msgstr "Πυλώνας"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:616
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:617
 msgctxt "GeoDataPlacemark|"
 msgid "Cable Car"
 msgstr "Τελεφερίκ"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:617
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:618
 msgctxt "GeoDataPlacemark|"
 msgid "Gondola"
 msgstr "Γόνδολα"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:618
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:619
 msgctxt "GeoDataPlacemark|"
 msgid "Chair Lift"
 msgstr "Εναέρια διαδρομή με καρέκλα"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:619
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:620
 msgctxt "GeoDataPlacemark|"
 msgid "Mixed Lift"
 msgstr "Εναέρια διαδρομή με διάφορα μέσα"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:620
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:621
 msgctxt "GeoDataPlacemark|"
 msgid "Drag Lift"
 msgstr "Ανυψωτική έλξη"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:621
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:622
 msgctxt "GeoDataPlacemark|"
 msgid "T-Bar"
 msgstr "T-Bar"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:622
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:623
 msgctxt "GeoDataPlacemark|"
 msgid "J-Bar"
 msgstr "J-Bar"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:623
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:624
 msgctxt "GeoDataPlacemark|"
 msgid "Platter"
 msgstr "Δίσκος"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:624
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:625
 msgctxt "GeoDataPlacemark|"
 msgid "Rope Tow"
 msgstr "Σκοινί ρυμούλκησης"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:625
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:626
 msgctxt "GeoDataPlacemark|"
 msgid "Magic Carpet"
 msgstr "Μαγικό χαλί"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:626
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:627
 msgctxt "GeoDataPlacemark|"
 msgid "Zip Line"
 msgstr "Εναέρια διαδρομή με σχοινί"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:627
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:628
 msgctxt "GeoDataPlacemark|"
 msgid "Goods"
 msgstr "Αγαθά"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:628
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:629
 msgctxt "GeoDataPlacemark|"
 msgid "Downhill Piste"
 msgstr "Πίστα κατάβασης"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:629
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:630
 msgctxt "GeoDataPlacemark|"
 msgid "Nordic Piste"
 msgstr "Σκανδιναβική πίστα"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:630
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:631
 msgctxt "GeoDataPlacemark|"
 msgid "Skitour"
 msgstr "Περιήγηση με χιονοπέδιλα"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:631
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:632
 msgctxt "GeoDataPlacemark|"
 msgid "Sled Piste"
 msgstr "Πίστα για μικρό έλκηθρο"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:632
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:633
 msgctxt "GeoDataPlacemark|"
 msgid "Winter Hike"
 msgstr "Πεζοπορία το χειμώνα"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:633
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:634
 msgctxt "GeoDataPlacemark|"
 msgid "Sleigh Piste"
 msgstr "Πίστα για έλκηθρο με ζώα"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:634
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:635
 msgctxt "GeoDataPlacemark|"
 msgid "Ice Skate"
 msgstr "Παγοδρομία"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:635
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:636
 msgctxt "GeoDataPlacemark|"
 msgid "Snow Park"
 msgstr "Χιονοδρομικό πάρκο"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:636
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:637
 msgctxt "GeoDataPlacemark|"
 msgid "Ski Playground"
 msgstr "Γήπεδο χιονοδρομιών"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:637
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:638
 msgctxt "GeoDataPlacemark|"
 msgid "Ski Jump"
 msgstr "Άλμα με χιονοπέδιλα"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:638
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:639
 msgctxt "GeoDataPlacemark|"
 msgid "Admin Boundary (Level 1)"
 msgstr "Όριο δικαιοδοσίας (Επίπεδο 1)"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:639
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:640
 msgctxt "GeoDataPlacemark|"
 msgid "Admin Boundary (Level 2)"
 msgstr "Όριο δικαιοδοσίας (Επίπεδο 2)"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:640
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:641
 msgctxt "GeoDataPlacemark|"
 msgid "Admin Boundary (Level 3)"
 msgstr "Όριο δικαιοδοσίας (Επίπεδο 3)"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:641
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:642
 msgctxt "GeoDataPlacemark|"
 msgid "Admin Boundary (Level 4)"
 msgstr "Όριο δικαιοδοσίας (Επίπεδο 4)"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:642
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:643
 msgctxt "GeoDataPlacemark|"
 msgid "Admin Boundary (Level 5)"
 msgstr "Όριο δικαιοδοσίας (Επίπεδο 5)"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:643
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:644
 msgctxt "GeoDataPlacemark|"
 msgid "Admin Boundary (Level 6)"
 msgstr "Όριο δικαιοδοσίας (Επίπεδο 6)"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:644
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:645
 msgctxt "GeoDataPlacemark|"
 msgid "Admin Boundary (Level 7)"
 msgstr "Όριο δικαιοδοσίας (Επίπεδο 7)"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:645
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:646
 msgctxt "GeoDataPlacemark|"
 msgid "Admin Boundary (Level 8)"
 msgstr "Όριο δικαιοδοσίας (Επίπεδο 8)"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:646
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:647
 msgctxt "GeoDataPlacemark|"
 msgid "Admin Boundary (Level 9)"
 msgstr "Όριο δικαιοδοσίας (Επίπεδο 9)"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:647
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:648
 msgctxt "GeoDataPlacemark|"
 msgid "Admin Boundary (Level 10)"
 msgstr "Όριο δικαιοδοσίας (Επίπεδο 10)"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:648
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:649
 msgctxt "GeoDataPlacemark|"
 msgid "Admin Boundary (Level 11)"
 msgstr "Όριο δικαιοδοσίας (Επίπεδο 11)"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:649
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:650
 msgctxt "GeoDataPlacemark|"
 msgid "Boundary (Maritime)"
 msgstr "Όριο (Ναυτικό)"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:650
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:651
 #, fuzzy
 #| msgid "Land"
 msgctxt "GeoDataPlacemark|"
 msgid "Land Mass"
 msgstr "Ξηρά"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:651
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:652
 msgctxt "GeoDataPlacemark|"
 msgid "Urban Area"
 msgstr "Αστική περιοχή"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:652
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:653
 msgctxt "GeoDataPlacemark|"
 msgid "International Date Line"
 msgstr "Γραμμή διεθνούς ημερομηνίας"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:653
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:654
 msgctxt "GeoDataPlacemark|"
 msgid "Bathymetry"
 msgstr "Βαθύμετρο"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:654
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:655
 msgctxt "GeoDataPlacemark|"
 msgid "Canal"
 msgstr "Κανάλι"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:655
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:656
 #, fuzzy
 #| msgid "rain"
 msgctxt "GeoDataPlacemark|"
 msgid "Drain"
 msgstr "βροχόπτωση"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:656
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:657
 msgctxt "GeoDataPlacemark|"
 msgid "Ditch"
 msgstr "Χαντάκι"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:657
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:658
 msgctxt "GeoDataPlacemark|"
 msgid "Stream"
 msgstr "Ρεύμα"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:658
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:659
 msgctxt "GeoDataPlacemark|"
 msgid "River"
 msgstr "Ποταμός"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:659
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:660
 msgctxt "GeoDataPlacemark|"
 msgid "Weir"
 msgstr "Φράγμα"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:660
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:661
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:662
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:663
 msgctxt "GeoDataPlacemark|"
 msgid "Crosswalk"
 msgstr "Σταυροδρόμι"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:663
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:664
 msgctxt "GeoDataPlacemark|"
 msgid "Railway Crossing"
 msgstr "Διέλευση σιδηροδρόμου"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:664
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:665
 msgctxt "GeoDataPlacemark|"
 msgid "Door"
 msgstr "Θύρα"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:666
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:667
 msgctxt "GeoDataPlacemark|"
 msgid "Room"
 msgstr "Δωμάτιο"
@@ -8083,77 +8083,77 @@ msgctxt "QObject|"
 msgid "Name"
 msgstr "Όνομα"
 
-#: src/lib/marble/MapViewWidget.cpp:112
+#: src/lib/marble/MapViewWidget.cpp:113
 msgctxt "Marble::MapViewWidget|"
 msgid "Globe View"
 msgstr "Προβολή υδρογείου"
 
-#: src/lib/marble/MapViewWidget.cpp:117
+#: src/lib/marble/MapViewWidget.cpp:118
 msgctxt "Marble::MapViewWidget|"
 msgid "Spherical view"
 msgstr "Σφαιρική προβολή"
 
-#: src/lib/marble/MapViewWidget.cpp:124 src/lib/marble/MapViewWidget.cpp:132
+#: src/lib/marble/MapViewWidget.cpp:125 src/lib/marble/MapViewWidget.cpp:133
 msgctxt "Marble::MapViewWidget|"
 msgid "Mercator View"
 msgstr "Μερκατορική προβολή"
 
-#: src/lib/marble/MapViewWidget.cpp:138
+#: src/lib/marble/MapViewWidget.cpp:139
 msgctxt "Marble::MapViewWidget|"
 msgid "Flat View"
 msgstr "Επίπεδη προβολή"
 
-#: src/lib/marble/MapViewWidget.cpp:144
+#: src/lib/marble/MapViewWidget.cpp:145
 msgctxt "Marble::MapViewWidget|"
 msgid "Gnomonic view"
 msgstr "Γνωμονική προβολή"
 
-#: src/lib/marble/MapViewWidget.cpp:150
+#: src/lib/marble/MapViewWidget.cpp:151
 msgctxt "Marble::MapViewWidget|"
 msgid "Stereographic view"
 msgstr "Στερεογραφική προβολή"
 
-#: src/lib/marble/MapViewWidget.cpp:156
+#: src/lib/marble/MapViewWidget.cpp:157
 msgctxt "Marble::MapViewWidget|"
 msgid "Lambert Azimuthal Equal-Area view"
 msgstr "Lambert αζιμουθιακή ισο-εδαφική προβολή"
 
-#: src/lib/marble/MapViewWidget.cpp:162
+#: src/lib/marble/MapViewWidget.cpp:163
 msgctxt "Marble::MapViewWidget|"
 msgid "Azimuthal Equidistant view"
 msgstr "Αζιμουθιακή ισαπέχουσα προβολή"
 
-#: src/lib/marble/MapViewWidget.cpp:168
+#: src/lib/marble/MapViewWidget.cpp:169
 msgctxt "Marble::MapViewWidget|"
 msgid "Perspective Globe view"
 msgstr "Προοπτική προβολή υδρογείου σφαίρας"
 
-#: src/lib/marble/MapViewWidget.cpp:650
+#: src/lib/marble/MapViewWidget.cpp:652
 msgctxt "Marble::MapViewWidget|"
 msgid "&Show Large Icons"
 msgstr "&Εμφάνιση μεγάλων εικονιδίων"
 
-#: src/lib/marble/MapViewWidget.cpp:653
+#: src/lib/marble/MapViewWidget.cpp:655
 msgctxt "Marble::MapViewWidget|"
 msgid "&Favorite"
 msgstr "&Αγαπημένο"
 
-#: src/lib/marble/MapViewWidget.cpp:658
+#: src/lib/marble/MapViewWidget.cpp:660
 msgctxt "Marble::MapViewWidget|"
 msgid "&Create a New Map..."
 msgstr "&Δημιουργία νέου χάρτη..."
 
-#: src/lib/marble/MapViewWidget.cpp:660
+#: src/lib/marble/MapViewWidget.cpp:662
 msgctxt "Marble::MapViewWidget|"
 msgid "&Delete Map Theme"
 msgstr "Δια&γραφή θέματος χάρτη"
 
-#: src/lib/marble/MapViewWidget.cpp:668
+#: src/lib/marble/MapViewWidget.cpp:670
 msgctxt "Marble::MapViewWidget|"
 msgid "Marble"
 msgstr "Marble"
 
-#: src/lib/marble/MapViewWidget.cpp:669
+#: src/lib/marble/MapViewWidget.cpp:671
 #, qt-format
 msgctxt "Marble::MapViewWidget|"
 msgid "Are you sure that you want to delete \"%1\"?"
@@ -10849,7 +10849,7 @@ msgctxt "Marble|"
 msgid "not available"
 msgstr "μη διαθέσιμο"
 
-#: src/lib/marble/MarbleLineEdit.cpp:53
+#: src/lib/marble/MarbleLineEdit.cpp:54
 msgctxt "QObject|"
 msgid "Clear"
 msgstr "Καθαρισμός"
@@ -12601,259 +12601,259 @@ msgctxt "Marble::RemoveItemEditWidget|"
 msgid "Choose item:"
 msgstr "Επιλογή επισήμανσης τοποθεσίας"
 
-#: src/lib/marble/RouteSimulationPositionProviderPlugin.cpp:27
+#: src/lib/marble/RouteSimulationPositionProviderPlugin.cpp:28
 #, fuzzy
 #| msgid "Current Route Position Provider Plugin"
 msgctxt "Marble::RouteSimulationPositionProviderPlugin|"
 msgid "Current Route Position Provider Plugin"
 msgstr "Πρόσθετο παροχής θέσης τρέχουσας διαδρομής"
 
-#: src/lib/marble/RouteSimulationPositionProviderPlugin.cpp:37
+#: src/lib/marble/RouteSimulationPositionProviderPlugin.cpp:38
 #, fuzzy
 #| msgid "Current Route"
 msgctxt "Marble::RouteSimulationPositionProviderPlugin|"
 msgid "Current Route"
 msgstr "Τρέχουσα διαδρομή"
 
-#: src/lib/marble/RouteSimulationPositionProviderPlugin.cpp:47
+#: src/lib/marble/RouteSimulationPositionProviderPlugin.cpp:48
 #, fuzzy
 #| msgid "Simulates traveling along the current route."
 msgctxt "Marble::RouteSimulationPositionProviderPlugin|"
 msgid "Simulates traveling along the current route."
 msgstr "Προσομοίωση κίνησης κατά μήκος της τρέχουσας διαδρομής"
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:249
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:250
 #, fuzzy
 #| msgid "Enter the roundabout."
 msgctxt "QObject|"
 msgid "Enter the roundabout."
 msgstr "Μπείτε στον κυκλικό κόμβο."
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:257
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:258
 #, fuzzy
 #| msgid "Take the exit."
 msgctxt "QObject|"
 msgid "Take the exit."
 msgstr "Πάρτε την έξοδο."
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:259
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:260
 #, fuzzy, qt-format
 #| msgid "Take the exit towards %1."
 msgctxt "QObject|"
 msgid "Take the exit towards %1."
 msgstr "Πάρτε την έξοδο προς τη(ν) %1."
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:263
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:264
 #, fuzzy
 #| msgid "Take the ramp."
 msgctxt "QObject|"
 msgid "Take the ramp."
 msgstr "Περάστε από τη ράμπα."
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:265
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:266
 #, fuzzy, qt-format
 #| msgid "Take the ramp towards %1."
 msgctxt "QObject|"
 msgid "Take the ramp towards %1."
 msgstr "Περάστε από τη ράμπα προς τη(ν) %1."
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:321
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:322
 #, fuzzy, qt-format
 #| msgid "Follow the road for %1 %2."
 msgctxt "QObject|"
 msgid "Follow the road for %1 %2."
 msgstr "Ακολουθήστε το δρόμο προς %1 %2."
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:375
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:376
 #, fuzzy, qt-format
 #| msgid "Take the %1. exit in the roundabout."
 msgctxt "QObject|"
 msgid "Take the %1. exit in the roundabout."
 msgstr "Πάρτε τη(ν) έξοδο %1 στον κυκλικό κόμβο."
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:377
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:378
 #, fuzzy, qt-format
 #| msgid "Take the %1. exit in the roundabout into %2."
 msgctxt "QObject|"
 msgid "Take the %1. exit in the roundabout into %2."
 msgstr "Πάρτε την έξοδο %1 στον κυκλικό κόμβο προς τη(ν) %2."
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:385
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:386
 #, fuzzy
 #| msgid "Continue."
 msgctxt "QObject|"
 msgid "Continue."
 msgstr "Συνεχίστε."
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:387
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:388
 #, fuzzy
 #| msgid "Merge."
 msgctxt "QObject|"
 msgid "Merge."
 msgstr "Ενωθείτε."
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:389
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:390
 #, fuzzy
 #| msgid "Turn around."
 msgctxt "QObject|"
 msgid "Turn around."
 msgstr "Γυρίστε."
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:391
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:392
 #, fuzzy
 #| msgid "Turn sharp left."
 msgctxt "QObject|"
 msgid "Turn sharp left."
 msgstr "Στρίψτε κάθετα αριστερά."
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:393
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:394
 #, fuzzy
 #| msgid "Turn left."
 msgctxt "QObject|"
 msgid "Turn left."
 msgstr "Στρίψτε αριστερά."
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:395
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:396
 #, fuzzy
 #| msgid "Keep slightly left."
 msgctxt "QObject|"
 msgid "Keep slightly left."
 msgstr "Μείνετε ελαφρώς αριστερά."
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:397
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:398
 #, fuzzy
 #| msgid "Go straight ahead."
 msgctxt "QObject|"
 msgid "Go straight ahead."
 msgstr "Προχωρήστε ευθεία."
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:399
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:400
 #, fuzzy
 #| msgid "Keep slightly right."
 msgctxt "QObject|"
 msgid "Keep slightly right."
 msgstr "Μείνετε ελαφρώς δεξιά."
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:401
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:402
 #, fuzzy
 #| msgid "Turn right."
 msgctxt "QObject|"
 msgid "Turn right."
 msgstr "Στρίψτε δεξιά."
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:403
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:404
 #, fuzzy
 #| msgid "Turn sharp right."
 msgctxt "QObject|"
 msgid "Turn sharp right."
 msgstr "Στρίψτε κάθετα δεξιά."
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:405
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:406
 #, fuzzy
 #| msgid "Exit the roundabout."
 msgctxt "QObject|"
 msgid "Exit the roundabout."
 msgstr "Βγείτε από τον κυκλικό κόμβο."
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:413
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:414
 #, fuzzy
 #| msgid "Take the exit to the left."
 msgctxt "QObject|"
 msgid "Take the exit to the left."
 msgstr "Πάρτε την αριστερή έξοδο."
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:415
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:416
 #, fuzzy
 #| msgid "Take the exit to the right."
 msgctxt "QObject|"
 msgid "Take the exit to the right."
 msgstr "Πάρτε τη δεξιά έξοδο."
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:420
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:421
 #, fuzzy, qt-format
 #| msgid "Continue onto %1."
 msgctxt "QObject|"
 msgid "Continue onto %1."
 msgstr "Συνεχίστε στη(ν) %1."
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:422
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:423
 #, fuzzy, qt-format
 #| msgid "Merge onto %1."
 msgctxt "QObject|"
 msgid "Merge onto %1."
 msgstr "Ενωθείτε με την %1."
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:424
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:425
 #, fuzzy, qt-format
 #| msgid "Turn around onto %1."
 msgctxt "QObject|"
 msgid "Turn around onto %1."
 msgstr "Γυρίστε στη(ν) %1."
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:426
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:427
 #, fuzzy, qt-format
 #| msgid "Turn sharp left on %1."
 msgctxt "QObject|"
 msgid "Turn sharp left on %1."
 msgstr "Στρίψτε κάθετα αριστερά στη(ν) %1."
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:428
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:429
 #, fuzzy, qt-format
 #| msgid "Turn left into %1."
 msgctxt "QObject|"
 msgid "Turn left into %1."
 msgstr "Στρίψτε αριστερά στη(ν) %1."
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:430
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:431
 #, fuzzy, qt-format
 #| msgid "Keep slightly left on %1."
 msgctxt "QObject|"
 msgid "Keep slightly left on %1."
 msgstr "Κρατηθείτε ελαφρώς αριστερά στη(ν) %1."
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:432
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:433
 #, fuzzy, qt-format
 #| msgid "Continue on %1."
 msgctxt "QObject|"
 msgid "Continue on %1."
 msgstr "Συνεχίστε στη(ν) %1."
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:434
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:435
 #, fuzzy, qt-format
 #| msgid "Keep slightly right on %1."
 msgctxt "QObject|"
 msgid "Keep slightly right on %1."
 msgstr "Κρατηθείτε ελαφρώς δεξιά στη(ν) %1."
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:436
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:437
 #, fuzzy, qt-format
 #| msgid "Turn right into %1."
 msgctxt "QObject|"
 msgid "Turn right into %1."
 msgstr "Στρίψτε δεξιά στη(ν) %1."
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:438
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:439
 #, fuzzy, qt-format
 #| msgid "Turn sharp right into %1."
 msgctxt "QObject|"
 msgid "Turn sharp right into %1."
 msgstr "Στρίψτε κάθετα δεξιά στη(ν) %1."
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:440
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:441
 #, fuzzy, qt-format
 #| msgid "Exit the roundabout into %2."
 msgctxt "QObject|"
 msgid "Exit the roundabout into %2."
 msgstr "Βγείτε από τον κυκλικό κόμβο στη(ν) %2."
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:448
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:449
 #, fuzzy, qt-format
 #| msgid "Take the exit to the left onto %1."
 msgctxt "QObject|"
 msgid "Take the exit to the left onto %1."
 msgstr "Πάρτε την αριστερή έξοδο προς τη(ν) %1."
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:450
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:451
 #, fuzzy, qt-format
 #| msgid "Take the exit to the right onto %1."
 msgctxt "QObject|"
@@ -14102,49 +14102,49 @@ msgctxt "Marble::GeoCluePositionProviderPlugin|"
 msgid "Reports the position via the GeoClue Location Framework."
 msgstr "Αναφέρει τη θέση μέσω του πλαισίου εργασίας τοποθεσιών GeoClue."
 
-#: src/plugins/positionprovider/gpsd/GpsdConnection.cpp:64
+#: src/plugins/positionprovider/gpsd/GpsdConnection.cpp:65
 #, fuzzy
 #| msgid "Internal gpsd error (cannot get service entry)"
 msgctxt "Marble::GpsdConnection|"
 msgid "Internal gpsd error (cannot get service entry)"
 msgstr "Εσωτερικό σφάλμα gpsd (αδυναμία ανάκτησης καταχώρησης υπηρεσίας)"
 
-#: src/plugins/positionprovider/gpsd/GpsdConnection.cpp:67
+#: src/plugins/positionprovider/gpsd/GpsdConnection.cpp:68
 #, fuzzy
 #| msgid "Internal gpsd error (cannot get host entry)"
 msgctxt "Marble::GpsdConnection|"
 msgid "Internal gpsd error (cannot get host entry)"
 msgstr "Εσωτερικό σφάλμα gpsd (αδυναμία ανάκτησης καταχώρησης υπολογιστή)"
 
-#: src/plugins/positionprovider/gpsd/GpsdConnection.cpp:70
+#: src/plugins/positionprovider/gpsd/GpsdConnection.cpp:71
 #, fuzzy
 #| msgid "Internal gpsd error (cannot get protocol entry)"
 msgctxt "Marble::GpsdConnection|"
 msgid "Internal gpsd error (cannot get protocol entry)"
 msgstr "Εσωτερικό σφάλμα gpsd (αδυναμία ανάκτησης καταχώρησης πρωτοκόλλου)"
 
-#: src/plugins/positionprovider/gpsd/GpsdConnection.cpp:73
+#: src/plugins/positionprovider/gpsd/GpsdConnection.cpp:74
 #, fuzzy
 #| msgid "Internal gpsd error (unable to create socket)"
 msgctxt "Marble::GpsdConnection|"
 msgid "Internal gpsd error (unable to create socket)"
 msgstr "Εσωτερικό σφάλμα (αδυναμία δημιουργίας υποδοχής)"
 
-#: src/plugins/positionprovider/gpsd/GpsdConnection.cpp:76
+#: src/plugins/positionprovider/gpsd/GpsdConnection.cpp:77
 #, fuzzy
 #| msgid "Internal gpsd error (unable to set socket option)"
 msgctxt "Marble::GpsdConnection|"
 msgid "Internal gpsd error (unable to set socket option)"
 msgstr "Εσωτερικό σφάλμα (αδυναμία καθορισμού επιλογής υποδοχής)"
 
-#: src/plugins/positionprovider/gpsd/GpsdConnection.cpp:79
+#: src/plugins/positionprovider/gpsd/GpsdConnection.cpp:80
 #, fuzzy
 #| msgid "No GPS device found by gpsd."
 msgctxt "Marble::GpsdConnection|"
 msgid "No GPS device found by gpsd."
 msgstr "Δε βρέθηκε συσκευή GPS από το gspd."
 
-#: src/plugins/positionprovider/gpsd/GpsdConnection.cpp:82
+#: src/plugins/positionprovider/gpsd/GpsdConnection.cpp:83
 #, fuzzy
 #| msgid "Unknown error when opening gpsd connection"
 msgctxt "Marble::GpsdConnection|"
@@ -14216,21 +14216,21 @@ msgstr ""
 "Αναφέρει την τρέχουσα θέση βασιζόμενο στα κοντινότερα σημεία ασύρματης "
 "δικτυακής πρόσβασης (WLAN)"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:125
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:126
 #, fuzzy
 #| msgid "Annotation"
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Annotation"
 msgstr "Σημείωση"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:130
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:131
 #, fuzzy
 #| msgid "&Annotation"
 msgctxt "Marble::AnnotatePlugin|"
 msgid "&Annotation"
 msgstr "&Σημείωση"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:140
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:141
 #, fuzzy
 #| msgid "Draws annotations on maps with placemarks or polygons."
 msgctxt "Marble::AnnotatePlugin|"
@@ -14239,50 +14239,50 @@ msgstr ""
 "Σχεδιασμός σημειώσεων στους χάρτες με πινέζες (επισήμανση τοποθεσίας) ή "
 "πολύγωνα."
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:184
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:185
 #, fuzzy
 #| msgid "Annotations"
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Annotations"
 msgstr "Σημειώσεις"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:307
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:308
 #, fuzzy
 #| msgid "Remove current item"
 msgctxt "QObject|"
 msgid "Remove current item"
 msgstr "Αφαίρεση τρέχοντος αντικειμένου"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:308
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:309
 #, fuzzy
 #| msgid "Are you sure you want to remove the current item?"
 msgctxt "QObject|"
 msgid "Are you sure you want to remove the current item?"
 msgstr "Επιθυμείτε πραγματικά την αφαίρεση του τρέχοντος αντικειμένου;"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:345
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:346
 #, fuzzy
 #| msgid "Clear all annotations"
 msgctxt "QObject|"
 msgid "Clear all annotations"
 msgstr "Καθαρισμός όλων των σημειώσεων"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:346
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:347
 #, fuzzy
 #| msgid "Are you sure you want to clear all annotations?"
 msgctxt "QObject|"
 msgid "Are you sure you want to clear all annotations?"
 msgstr "Επιθυμείτε πραγματικά τον καθαρισμό όλων των σημειώσεων;"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:366
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:949
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:367
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:950
 #, fuzzy
 #| msgid "Save Annotation File"
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Save Annotation File"
 msgstr "Αποθήκευση αρχείου σημειώσεων"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:368
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:369
 #, fuzzy
 #| msgid "All Supported Files (*.kml);;Kml Annotation file (*.kml)"
 msgctxt "Marble::AnnotatePlugin|"
@@ -14291,14 +14291,14 @@ msgid ""
 "osm)"
 msgstr " Όλα τα υποστηριζόμενα αρχεία (*.kml);;Αρχείο σημειώσεων Kml (*.kml)"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:395
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:396
 #, fuzzy
 #| msgid "Open Annotation File"
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Open Annotation File"
 msgstr "Άνοιγμα αρχείου σημειώσεων"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:397
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:398
 #, fuzzy
 #| msgid "All Supported Files (*.kml);;Kml Annotation file (*.kml)"
 msgctxt "Marble::AnnotatePlugin|"
@@ -14307,209 +14307,209 @@ msgid ""
 "Map file (*.osm)"
 msgstr " Όλα τα υποστηριζόμενα αρχεία (*.kml);;Αρχείο σημειώσεων Kml (*.kml)"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:780
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:785
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:790
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1459
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1548
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:781
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:786
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:791
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1460
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1549
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Operation not permitted"
 msgstr ""
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:781
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:782
 msgctxt "Marble::AnnotatePlugin|"
 msgid ""
 "Cannot merge a node from polygon's outer boundary with a node from one of "
 "its inner boundaries."
 msgstr ""
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:786
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:787
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Cannot merge two nodes from two different inner boundaries."
 msgstr ""
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:791
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:792
 msgctxt "Marble::AnnotatePlugin|"
 msgid ""
 "Cannot merge the selected nodes. Most probably this would make the polygon's "
 "outer boundary not contain all its inner boundary nodes."
 msgstr ""
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:898
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1001
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:899
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1002
 #, fuzzy
 #| msgid "Selection Method"
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Select Item"
 msgstr "Μέθοδος επιλογής"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:904
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:905
 #, fuzzy
 #| msgid "Add Polygon"
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Add Polygon"
 msgstr "Προσθήκη πολυγώνου"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:909
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:910
 #, fuzzy
 #| msgid "Add Polygon"
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Add Polygon Hole"
 msgstr "Προσθήκη πολυγώνου"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:916
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:917
 #, fuzzy
 #| msgid "Delete"
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Add Nodes"
 msgstr "Διαγραφή"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:923
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:924
 #, fuzzy
 #| msgid "Add Placemark"
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Add Placemark"
 msgstr "Επισήμανση τοποθεσίας"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:928
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:929
 #, fuzzy
 #| msgid "Add Via"
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Add Path"
 msgstr "Προσθήκη ενδιάμεσου"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:933
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:934
 #, fuzzy
 #| msgid "Remove from Favorites"
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Add Ground Overlay"
 msgstr "Αφαίρεση από τα αγαπημένα"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:938
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:939
 #, fuzzy
 #| msgid "Remove Item"
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Remove Item"
 msgstr "Αφαίρεση αντικειμένου"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:944
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:945
 #, fuzzy
 #| msgid "Load Annotation File"
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Load Annotation File"
 msgstr "Φόρτωση αρχείου σημειώσεων"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:954
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:955
 #, fuzzy
 #| msgid "Clear all Annotations"
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Clear all Annotations"
 msgstr "Καθαρισμός όλων των σημειώσεων"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:957
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:958
 #, fuzzy
 #| msgid "OpenStreetMap Data"
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Download OpenStreetMap Data"
 msgstr "Δεδομένα OpenStreetMap"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:960
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:961
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Download OpenStreetMap data of the visible region"
 msgstr ""
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1041
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1042
 #, fuzzy
 #| msgid "Car (fastest)"
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Paste"
 msgstr "Αυτοκίνητο (ταχύτερη)"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1060
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1319
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1570
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1061
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1320
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1571
 #, fuzzy
 #| msgid "Custom"
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Cut"
 msgstr "Προσαρμοσμένος"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1064
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1323
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1574
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1065
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1324
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1575
 #, fuzzy
 #| msgid "Copy"
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Copy"
 msgstr "Αντιγραφή"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1068
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1190
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1327
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1578
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1069
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1191
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1328
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1579
 #, fuzzy
 #| msgid "Remove"
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Remove"
 msgstr "Αφαίρεση"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1074
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1184
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1333
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1584
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1075
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1185
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1334
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1585
 #, fuzzy
 #| msgid "New Profile"
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Properties"
 msgstr "Νέο προφίλ"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1209
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1210
 #, fuzzy
 #| msgid "Remove from Favorites"
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Untitled Ground Overlay"
 msgstr "Αφαίρεση από τα αγαπημένα"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1309
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1560
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1310
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1561
 #, fuzzy
 #| msgid "Delete selected data source"
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Deselect All Nodes"
 msgstr "Διαγραφή της επιλεγμένης πηγής δεδομένων"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1313
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1564
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1314
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1565
 #, fuzzy
 #| msgid "Delete selected data source"
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Delete All Selected Nodes"
 msgstr "Διαγραφή της επιλεγμένης πηγής δεδομένων"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1460
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1549
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1461
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1550
 msgctxt "Marble::AnnotatePlugin|"
 msgid ""
 "Cannot delete one of the selected nodes. Most probably this would make the "
 "polygon's outer boundary not contain all its inner boundary nodes."
 msgstr ""
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1491
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1512
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1492
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1513
 #, fuzzy
 #| msgid "Selection Method"
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Select Node"
 msgstr "Μέθοδος επιλογής"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1495
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1496
 #, fuzzy
 #| msgid "Delete"
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Delete Node"
 msgstr "Διαγραφή"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1512
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1513
 #, fuzzy
 #| msgid "Selection Method"
 msgctxt "Marble::AnnotatePlugin|"
@@ -15556,35 +15556,35 @@ msgctxt "ElevationProfileConfigWidget|"
 msgid "Zoom to viewport"
 msgstr "&Εστίαση στην προβαλλόμενη περιοχή"
 
-#: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:30
+#: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:32
 #, fuzzy
 #| msgid "&Configure..."
 msgctxt "Marble::ElevationProfileContextMenu|"
 msgid "&Configure..."
 msgstr "&Διαμόρφωση..."
 
-#: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:36
+#: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:38
 #, fuzzy
 #| msgid "&Zoom to viewport"
 msgctxt "Marble::ElevationProfileContextMenu|"
 msgid "&Zoom to viewport"
 msgstr "&Εστίαση στην προβαλλόμενη περιοχή"
 
-#: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:67
+#: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:69
 #, fuzzy
 #| msgid "Open Route"
 msgctxt "Marble::ElevationProfileContextMenu|"
 msgid "Route"
 msgstr "Άνοιγμα διαδρομής"
 
-#: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:79
+#: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:81
 #, fuzzy
 #| msgid "Track Gps"
 msgctxt "Marble::ElevationProfileContextMenu|"
 msgid "Track: "
 msgstr "Ανίχνευση Gps"
 
-#: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:92
+#: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:94
 #, fuzzy
 #| msgid "Create a route to view its elevation profile."
 msgctxt "Marble::ElevationProfileContextMenu|"
@@ -19616,350 +19616,350 @@ msgctxt "Marble::LatLonPlugin|"
 msgid "Direct input of geographic coordinates"
 msgstr "Απευθείας καταχώρηση γεωγραφικών συντεταγμένων"
 
-#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:62
+#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:63
 #, fuzzy
 #| msgid "pois"
 msgctxt "QObject|"
 msgid "pois"
 msgstr "σημεία ενδιαφέροντος"
 
-#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:64
+#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:65
 #, fuzzy
 #| msgid "camping"
 msgctxt "QObject|"
 msgid "camping"
 msgstr "κάμπινγκ"
 
-#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:66
+#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:67
 #, fuzzy
 #| msgid "hostel"
 msgctxt "QObject|"
 msgid "hostel"
 msgstr "ξενώνας (χόστελ)"
 
-#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:68
+#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:69
 #, fuzzy
 #| msgid "hotel"
 msgctxt "QObject|"
 msgid "hotel"
 msgstr "ξενοδοχείο"
 
-#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:70
+#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:71
 #, fuzzy
 #| msgid "motel"
 msgctxt "QObject|"
 msgid "motel"
 msgstr "μοτέλ"
 
-#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:72
+#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:73
 #, fuzzy
 #| msgid "youth hostel"
 msgctxt "QObject|"
 msgid "youth hostel"
 msgstr "νεολαιίστικος ξενώνας (χόστελ)"
 
-#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:74
+#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:75
 #, fuzzy
 #| msgid "library"
 msgctxt "QObject|"
 msgid "library"
 msgstr "βιβλιοθήκη"
 
-#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:76
+#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:77
 #, fuzzy
 #| msgid "college"
 msgctxt "QObject|"
 msgid "college"
 msgstr "κολλέγιο"
 
-#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:78
+#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:79
 #, fuzzy
 #| msgid "school"
 msgctxt "QObject|"
 msgid "school"
 msgstr "σχολείο"
 
-#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:80
+#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:81
 #, fuzzy
 #| msgid "university"
 msgctxt "QObject|"
 msgid "university"
 msgstr "πανεπιστήμιο"
 
-#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:82
+#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:83
 #, fuzzy
 #| msgid "bar"
 msgctxt "QObject|"
 msgid "bar"
 msgstr "μπαρ"
 
-#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:84
+#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:85
 #, fuzzy
 #| msgid "biergarten"
 msgctxt "QObject|"
 msgid "biergarten"
 msgstr "μπυραρία"
 
-#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:86
+#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:87
 #, fuzzy
 #| msgid "cafe"
 msgctxt "QObject|"
 msgid "cafe"
 msgstr "καφέ"
 
-#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:88
+#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:89
 #, fuzzy
 #| msgid "fast food"
 msgctxt "QObject|"
 msgid "fast food"
 msgstr "γρήγορο φαγητό"
 
-#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:90
+#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:91
 #, fuzzy
 #| msgid "pub"
 msgctxt "QObject|"
 msgid "pub"
 msgstr "παμπ"
 
-#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:92
+#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:93
 #, fuzzy
 #| msgid "restaurant"
 msgctxt "QObject|"
 msgid "restaurant"
 msgstr "εστιατόριο"
 
-#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:94
+#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:95
 #, fuzzy
 #| msgid "doctor"
 msgctxt "QObject|"
 msgid "doctor"
 msgstr "ιατρός"
 
-#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:96
+#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:97
 #, fuzzy
 #| msgid "hospital"
 msgctxt "QObject|"
 msgid "hospital"
 msgstr "νοσοκομείο"
 
-#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:98
+#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:99
 #, fuzzy
 #| msgid "pharmacy"
 msgctxt "QObject|"
 msgid "pharmacy"
 msgstr "φαρμακείο"
 
-#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:100
+#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:101
 #, fuzzy
 #| msgid "bank"
 msgctxt "QObject|"
 msgid "bank"
 msgstr "τράπεζα"
 
-#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:102
+#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:103
 #, fuzzy
 #| msgid "beverages"
 msgctxt "QObject|"
 msgid "beverages"
 msgstr "ροφήματα/ποτά"
 
-#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:104
+#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:105
 #, fuzzy
 #| msgid "hifi"
 msgctxt "QObject|"
 msgid "hifi"
 msgstr "hifi"
 
-#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:106
+#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:107
 #, fuzzy
 #| msgid "supermarket"
 msgctxt "QObject|"
 msgid "supermarket"
 msgstr "σουπερμάρκετ"
 
-#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:108
+#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:109
 #, fuzzy
 #| msgid "attraction"
 msgctxt "QObject|"
 msgid "attraction"
 msgstr "αξιοθέατο"
 
-#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:110
+#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:111
 #, fuzzy
 #| msgid "castle"
 msgctxt "QObject|"
 msgid "castle"
 msgstr "κάστρο"
 
-#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:112
+#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:113
 #, fuzzy
 #| msgid "cinema"
 msgctxt "QObject|"
 msgid "cinema"
 msgstr "κινηματογράφος"
 
-#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:114
+#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:115
 #, fuzzy
 #| msgid "monument"
 msgctxt "QObject|"
 msgid "monument"
 msgstr "μνημείο"
 
-#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:116
+#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:117
 #, fuzzy
 #| msgid "museum"
 msgctxt "QObject|"
 msgid "museum"
 msgstr "μουσείο"
 
-#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:118
+#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:119
 #, fuzzy
 #| msgid "ruin"
 msgctxt "QObject|"
 msgid "ruin"
 msgstr "ερείπια"
 
-#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:120
+#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:121
 #, fuzzy
 #| msgid "theatre"
 msgctxt "QObject|"
 msgid "theatre"
 msgstr "θέατρο"
 
-#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:122
+#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:123
 #, fuzzy
 #| msgid "theme park"
 msgctxt "QObject|"
 msgid "theme park"
 msgstr "θεματικό πάρκο"
 
-#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:124
+#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:125
 #, fuzzy
 #| msgid "view point"
 msgctxt "QObject|"
 msgid "view point"
 msgstr "θέα"
 
-#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:126
+#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:127
 #, fuzzy
 #| msgid "zoo"
 msgctxt "QObject|"
 msgid "zoo"
 msgstr "ζωολογικός κήπος"
 
-#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:128
+#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:129
 #, fuzzy
 #| msgid "airport"
 msgctxt "QObject|"
 msgid "airport"
 msgstr "αεροδρόμιο"
 
-#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:130
+#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:131
 #, fuzzy
 #| msgid "Airport runway, taxiway"
 msgctxt "QObject|"
 msgid "airport runway"
 msgstr "Αεροδιάδρομος"
 
-#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:132
+#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:133
 #, fuzzy
 #| msgid "Airport runway, taxiway"
 msgctxt "QObject|"
 msgid "airport apron"
 msgstr "Αεροδιάδρομος"
 
-#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:134
+#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:135
 #, fuzzy
 #| msgid "Airport runway, taxiway"
 msgctxt "QObject|"
 msgid "airport taxiway"
 msgstr "Αεροδιάδρομος"
 
-#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:136
+#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:137
 #, fuzzy
 #| msgid "bus station"
 msgctxt "QObject|"
 msgid "bus station"
 msgstr "σταθμός λεωφορείων"
 
-#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:138
+#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:139
 #, fuzzy
 #| msgid "bus stop"
 msgctxt "QObject|"
 msgid "bus stop"
 msgstr "στάση λεωφορείων"
 
-#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:140
+#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:141
 #, fuzzy
 #| msgid "car share"
 msgctxt "QObject|"
 msgid "car share"
 msgstr "σύντομη ενοικίαση αυτοκινήτου"
 
-#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:142
+#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:143
 #, fuzzy
 #| msgid "fuel"
 msgctxt "QObject|"
 msgid "fuel"
 msgstr "καύσιμα"
 
-#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:144
+#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:145
 #, fuzzy
 #| msgid "parking"
 msgctxt "QObject|"
 msgid "parking"
 msgstr "πάρκινγκ"
 
-#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:146
+#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:147
 #, fuzzy
 #| msgid "train station"
 msgctxt "QObject|"
 msgid "train station"
 msgstr "σιδηροδρομικός σταθμός"
 
-#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:148
+#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:149
 #, fuzzy
 #| msgid "atm"
 msgctxt "QObject|"
 msgid "atm"
 msgstr "ΑΤΜ"
 
-#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:150
+#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:151
 #, fuzzy
 #| msgid "tram stop"
 msgctxt "QObject|"
 msgid "tram stop"
 msgstr "στάση τραμ"
 
-#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:152
+#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:153
 #, fuzzy
 #| msgid "bicycle rental"
 msgctxt "QObject|"
 msgid "bicycle rental"
 msgstr "ενοικίαση ποδηλάτου"
 
-#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:154
+#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:155
 #, fuzzy
 #| msgid "car rental"
 msgctxt "QObject|"
 msgid "car rental"
 msgstr "ενοικίαση αυτοκινήτου"
 
-#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:156
+#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:157
 #, fuzzy
 #| msgid "speed camera"
 msgctxt "QObject|"
 msgid "speed camera"
 msgstr "κάμερα ελέγχου ταχύτητας"
 
-#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:158
+#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:159
 #, fuzzy
 #| msgid "taxi"
 msgctxt "QObject|"
 msgid "taxi"
 msgstr "ταξί"
 
-#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:160
+#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:161
 msgctxt "QObject|"
 msgid "memorial"
 msgstr ""
@@ -20217,35 +20217,35 @@ msgctxt "Marble::MapQuestConfigWidget|"
 msgid "Favor"
 msgstr "&Αγαπημένο"
 
-#: src/plugins/runner/monav/MonavConfigWidget.cpp:489
+#: src/plugins/runner/monav/MonavConfigWidget.cpp:490
 #, fuzzy, qt-format
 #| msgid "Downloading %1"
 msgctxt "QObject|"
 msgid "Downloading %1"
 msgstr "Λήψη του '%1'"
 
-#: src/plugins/runner/monav/MonavConfigWidget.cpp:513
+#: src/plugins/runner/monav/MonavConfigWidget.cpp:514
 #, fuzzy, qt-format
 #| msgid "Installing %1"
 msgctxt "QObject|"
 msgid "Installing %1"
 msgstr "Εγκατάσταση του '%1'"
 
-#: src/plugins/runner/monav/MonavConfigWidget.cpp:618
+#: src/plugins/runner/monav/MonavConfigWidget.cpp:619
 #, fuzzy
 #| msgid "An update is available. Click to install it."
 msgctxt "QObject|"
 msgid "An update is available. Click to install it."
 msgstr "Υπάρχει διαθέσιμη ενημέρωση. Κάντε κλικ για εγκατάσταση."
 
-#: src/plugins/runner/monav/MonavConfigWidget.cpp:619
+#: src/plugins/runner/monav/MonavConfigWidget.cpp:620
 #, fuzzy
 #| msgid "No update available. You are running the latest version."
 msgctxt "QObject|"
 msgid "No update available. You are running the latest version."
 msgstr "Δεν υπάρχει διαθέσιμη ενημέρωση. Εκτελείτε την τελευταία έκδοση."
 
-#: src/plugins/runner/monav/MonavConfigWidget.cpp:647
+#: src/plugins/runner/monav/MonavConfigWidget.cpp:648
 #, fuzzy
 #| msgid "Are you sure you want to delete this map from the system?"
 msgctxt "Marble::MonavConfigWidget|"
@@ -20253,14 +20253,14 @@ msgid "Are you sure you want to delete this map from the system?"
 msgstr ""
 "Επιθυμείτε πραγματικά τη διαγραφή του συγκεκριμένου χάρτη από το σύστημα;"
 
-#: src/plugins/runner/monav/MonavConfigWidget.cpp:648
+#: src/plugins/runner/monav/MonavConfigWidget.cpp:649
 #, fuzzy
 #| msgid "Remove Map"
 msgctxt "Marble::MonavConfigWidget|"
 msgid "Remove Map"
 msgstr "Αφαίρεση χάρτη"
 
-#: src/plugins/runner/monav/MonavConfigWidget.cpp:679
+#: src/plugins/runner/monav/MonavConfigWidget.cpp:680
 #, fuzzy
 #| msgid "Nothing to do."
 msgctxt "QObject|"
@@ -20352,42 +20352,42 @@ msgctxt "MonavConfigWidget|"
 msgid "Abort"
 msgstr ""
 
-#: src/plugins/runner/monav/MonavMapsModel.cpp:41
+#: src/plugins/runner/monav/MonavMapsModel.cpp:42
 #, fuzzy
 #| msgid "Name"
 msgctxt "Marble::MonavMapsModel|"
 msgid "Name"
 msgstr "Όνομα"
 
-#: src/plugins/runner/monav/MonavMapsModel.cpp:43
+#: src/plugins/runner/monav/MonavMapsModel.cpp:44
 #, fuzzy
 #| msgid "Transport"
 msgctxt "Marble::MonavMapsModel|"
 msgid "Transport"
 msgstr "Μεταφορά"
 
-#: src/plugins/runner/monav/MonavMapsModel.cpp:45
+#: src/plugins/runner/monav/MonavMapsModel.cpp:46
 #, fuzzy
 #| msgid "Size"
 msgctxt "Marble::MonavMapsModel|"
 msgid "Size"
 msgstr "Μέγεθος"
 
-#: src/plugins/runner/monav/MonavMapsModel.cpp:47
+#: src/plugins/runner/monav/MonavMapsModel.cpp:48
 #, fuzzy
 #| msgid "Update"
 msgctxt "Marble::MonavMapsModel|"
 msgid "Update"
 msgstr "Ενημέρωση"
 
-#: src/plugins/runner/monav/MonavMapsModel.cpp:49
+#: src/plugins/runner/monav/MonavMapsModel.cpp:50
 #, fuzzy
 #| msgid "Delete"
 msgctxt "Marble::MonavMapsModel|"
 msgid "Delete"
 msgstr "Διαγραφή"
 
-#: src/plugins/runner/monav/MonavMapsModel.cpp:51
+#: src/plugins/runner/monav/MonavMapsModel.cpp:52
 #, fuzzy
 #| msgid "Date: "
 msgctxt "Marble::MonavMapsModel|"

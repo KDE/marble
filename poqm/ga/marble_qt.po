@@ -2644,74 +2644,74 @@ msgctxt "CurrentPosition|"
 msgid "Follow Current Position"
 msgstr "Suíomh Reatha"
 
-#: src/apps/marble-maps/MainScreen.qml:19
-#: src/apps/marble-maps/MainScreen.qml:205
+#: src/apps/marble-maps/MainScreen.qml:17
+#: src/apps/marble-maps/MainScreen.qml:198
 #, fuzzy
 #| msgid "Manage Bookmarks"
 msgctxt "MainScreen|"
 msgid "Marble Maps"
 msgstr "Bainistigh Leabharmharcanna"
 
-#: src/apps/marble-maps/MainScreen.qml:96
+#: src/apps/marble-maps/MainScreen.qml:89
 #, fuzzy
 #| msgid "Settings"
 msgctxt "MainScreen|"
 msgid "Settings"
 msgstr "Socruithe"
 
-#: src/apps/marble-maps/MainScreen.qml:112
+#: src/apps/marble-maps/MainScreen.qml:105
 #, fuzzy
 #| msgid "Transport"
 msgctxt "MainScreen|"
 msgid "Public Transport"
 msgstr "Iompar"
 
-#: src/apps/marble-maps/MainScreen.qml:127
+#: src/apps/marble-maps/MainScreen.qml:120
 msgctxt "MainScreen|"
 msgid "Outdoor Activities"
 msgstr ""
 
-#: src/apps/marble-maps/MainScreen.qml:139
+#: src/apps/marble-maps/MainScreen.qml:132
 msgctxt "MainScreen|"
 msgid "Accessibility"
 msgstr ""
 
-#: src/apps/marble-maps/MainScreen.qml:148
+#: src/apps/marble-maps/MainScreen.qml:141
 #, fuzzy
 #| msgid "About"
 msgctxt "MainScreen|"
 msgid "About"
 msgstr "Maidir Leis"
 
-#: src/apps/marble-maps/MainScreen.qml:159
+#: src/apps/marble-maps/MainScreen.qml:152
 #, fuzzy
 #| msgid "Bookmarks"
 msgctxt "MainScreen|"
 msgid "Bookmarks"
 msgstr "Leabharmharcanna"
 
-#: src/apps/marble-maps/MainScreen.qml:168
+#: src/apps/marble-maps/MainScreen.qml:161
 #, fuzzy
 #| msgid "New Profile"
 msgctxt "MainScreen|"
 msgid "Layer Options"
 msgstr "Próifíl Nua"
 
-#: src/apps/marble-maps/MainScreen.qml:177
+#: src/apps/marble-maps/MainScreen.qml:170
 #, fuzzy
 #| msgid "Routing"
 msgctxt "MainScreen|"
 msgid "Routing"
 msgstr "Ródú"
 
-#: src/apps/marble-maps/MainScreen.qml:406
+#: src/apps/marble-maps/MainScreen.qml:399
 #, fuzzy, qt-format
 #| msgid "%1 km"
 msgctxt "MainScreen|"
 msgid "%1 km"
 msgstr "%1 km"
 
-#: src/apps/marble-maps/MainScreen.qml:670
+#: src/apps/marble-maps/MainScreen.qml:663
 msgctxt "MainScreen|"
 msgid "Press again to close."
 msgstr ""
@@ -2851,7 +2851,7 @@ msgctxt "Search|"
 msgid "Your bookmarks will appear here."
 msgstr ""
 
-#: src/apps/marble-maps/SearchField.qml:71
+#: src/apps/marble-maps/SearchField.qml:70
 #, fuzzy
 #| msgid "Search"
 msgctxt "SearchField|"
@@ -2905,15 +2905,15 @@ msgid "Marble - Virtual Globe"
 msgstr "Marble - Cruinneog Fhíorúil"
 
 # program name
-#: src/apps/marble-qt/QtMainWindow.cpp:197
-#: src/apps/marble-qt/QtMainWindow.cpp:770
+#: src/apps/marble-qt/QtMainWindow.cpp:199
+#: src/apps/marble-qt/QtMainWindow.cpp:772
 #, fuzzy
 #| msgid "Marble"
 msgctxt "Marble::MainWindow|"
 msgid "Marble"
 msgstr "Marble"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:198
+#: src/apps/marble-qt/QtMainWindow.cpp:200
 #, qt-format
 msgctxt "Marble::MainWindow|"
 msgid ""
@@ -2921,676 +2921,676 @@ msgid ""
 "'%2'"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:269
+#: src/apps/marble-qt/QtMainWindow.cpp:271
 #, fuzzy
 #| msgid "&Open..."
 msgctxt "Marble::MainWindow|"
 msgid "&Open..."
 msgstr "&Oscail..."
 
-#: src/apps/marble-qt/QtMainWindow.cpp:271
+#: src/apps/marble-qt/QtMainWindow.cpp:273
 #, fuzzy
 #| msgid "Open a file for viewing on Marble"
 msgctxt "Marble::MainWindow|"
 msgid "Open a file for viewing on Marble"
 msgstr "Oscail comhad chun é a thaispeáint i Marble"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:275
+#: src/apps/marble-qt/QtMainWindow.cpp:277
 #, fuzzy
 #| msgid "&Download Maps..."
 msgctxt "Marble::MainWindow|"
 msgid "&Download Maps..."
 msgstr "Íos&luchtaigh Mapaí..."
 
-#: src/apps/marble-qt/QtMainWindow.cpp:278
+#: src/apps/marble-qt/QtMainWindow.cpp:280
 #, fuzzy
 #| msgid "&Export Map..."
 msgctxt "Marble::MainWindow|"
 msgid "&Export Map..."
 msgstr "&Easpórtáil Mapa..."
 
-#: src/apps/marble-qt/QtMainWindow.cpp:280
+#: src/apps/marble-qt/QtMainWindow.cpp:282
 #, fuzzy
 #| msgid "Save a screenshot of the map"
 msgctxt "Marble::MainWindow|"
 msgid "Save a screenshot of the map"
 msgstr "Sábháil seat den íomhá"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:284
+#: src/apps/marble-qt/QtMainWindow.cpp:286
 #, fuzzy
 #| msgid "Download &Region..."
 msgctxt "Marble::MainWindow|"
 msgid "Download &Region..."
 msgstr "Íosluchtaigh &Réigiún..."
 
-#: src/apps/marble-qt/QtMainWindow.cpp:285
+#: src/apps/marble-qt/QtMainWindow.cpp:287
 msgctxt "Marble::MainWindow|"
 msgid "Download a map region in different zoom levels for offline usage"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:288
+#: src/apps/marble-qt/QtMainWindow.cpp:290
 #, fuzzy
 #| msgid "&Print..."
 msgctxt "Marble::MainWindow|"
 msgid "&Print..."
 msgstr "&Priontáil..."
 
-#: src/apps/marble-qt/QtMainWindow.cpp:289
+#: src/apps/marble-qt/QtMainWindow.cpp:291
 #, fuzzy
 #| msgid "Ctrl+P"
 msgctxt "Marble::MainWindow|"
 msgid "Ctrl+P"
 msgstr "Ctrl+P"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:290
-#: src/apps/marble-qt/QtMainWindow.cpp:294
+#: src/apps/marble-qt/QtMainWindow.cpp:292
+#: src/apps/marble-qt/QtMainWindow.cpp:296
 #, fuzzy
 #| msgid "Print a screenshot of the map"
 msgctxt "Marble::MainWindow|"
 msgid "Print a screenshot of the map"
 msgstr "Priontáil seat den íomhá"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:293
+#: src/apps/marble-qt/QtMainWindow.cpp:295
 msgctxt "Marble::MainWindow|"
 msgid "Print Previe&w ..."
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:297
+#: src/apps/marble-qt/QtMainWindow.cpp:299
 #, fuzzy
 #| msgid "&Quit"
 msgctxt "Marble::MainWindow|"
 msgid "&Quit"
 msgstr "&Scoir"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:298
+#: src/apps/marble-qt/QtMainWindow.cpp:300
 #, fuzzy
 #| msgid "Ctrl+Q"
 msgctxt "Marble::MainWindow|"
 msgid "Ctrl+Q"
 msgstr "Ctrl+S"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:299
+#: src/apps/marble-qt/QtMainWindow.cpp:301
 #, fuzzy
 #| msgid "Quit the Application"
 msgctxt "Marble::MainWindow|"
 msgid "Quit the Application"
 msgstr "Scoir den Fheidhmchlár"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:302
+#: src/apps/marble-qt/QtMainWindow.cpp:304
 #, fuzzy
 #| msgid "&Copy Map"
 msgctxt "Marble::MainWindow|"
 msgid "&Copy Map"
 msgstr "&Cóipeáil mapa"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:304
+#: src/apps/marble-qt/QtMainWindow.cpp:306
 #, fuzzy
 #| msgid "Copy a screenshot of the map"
 msgctxt "Marble::MainWindow|"
 msgid "Copy a screenshot of the map"
 msgstr "Cóipeáil seat den íomhá"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:307
+#: src/apps/marble-qt/QtMainWindow.cpp:309
 #, fuzzy
 #| msgid "&Edit Map"
 msgctxt "Marble::MainWindow|"
 msgid "&Edit Map..."
 msgstr "Cuir Mapa in &Eagar"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:309
+#: src/apps/marble-qt/QtMainWindow.cpp:311
 msgctxt "Marble::MainWindow|"
 msgid "Edit the current map region in an external editor"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:313
+#: src/apps/marble-qt/QtMainWindow.cpp:315
 msgctxt "Marble::MainWindow|"
 msgid "&Record Movie"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:314
+#: src/apps/marble-qt/QtMainWindow.cpp:316
 msgctxt "Marble::MainWindow|"
 msgid "Records a movie of the globe"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:320
+#: src/apps/marble-qt/QtMainWindow.cpp:322
 msgctxt "Marble::MainWindow|"
 msgid "&Stop Recording"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:321
+#: src/apps/marble-qt/QtMainWindow.cpp:323
 msgctxt "Marble::MainWindow|"
 msgid "Stop recording a movie of the globe"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:327
+#: src/apps/marble-qt/QtMainWindow.cpp:329
 #, fuzzy
 #| msgid "&Configure Marble"
 msgctxt "Marble::MainWindow|"
 msgid "&Configure Marble"
 msgstr "&Cumraigh Marble"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:328
+#: src/apps/marble-qt/QtMainWindow.cpp:330
 #, fuzzy
 #| msgid "Show the configuration dialog"
 msgctxt "Marble::MainWindow|"
 msgid "Show the configuration dialog"
 msgstr "Taispeáin an dialóg chumraíochta"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:331
+#: src/apps/marble-qt/QtMainWindow.cpp:333
 #, fuzzy
 #| msgid "C&opy Coordinates"
 msgctxt "Marble::MainWindow|"
 msgid "C&opy Coordinates"
 msgstr "Cóipeáil &Comhordanáidí"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:332
+#: src/apps/marble-qt/QtMainWindow.cpp:334
 #, fuzzy
 #| msgid "Copy the center coordinates as text"
 msgctxt "Marble::MainWindow|"
 msgid "Copy the center coordinates as text"
 msgstr "Cóipeáil comhordanáidí an láir mar théacs"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:335
+#: src/apps/marble-qt/QtMainWindow.cpp:337
 #, fuzzy
 #| msgid "&Full Screen Mode"
 msgctxt "Marble::MainWindow|"
 msgid "&Full Screen Mode"
 msgstr "Mód &Lánscáileáin"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:338
+#: src/apps/marble-qt/QtMainWindow.cpp:340
 #, fuzzy
 #| msgid "Full Screen Mode"
 msgctxt "Marble::MainWindow|"
 msgid "Full Screen Mode"
 msgstr "Mód Lánscáileáin"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:341
+#: src/apps/marble-qt/QtMainWindow.cpp:343
 #, fuzzy
 #| msgid "&Show Status Bar"
 msgctxt "Marble::MainWindow|"
 msgid "&Show Status Bar"
 msgstr "&Taispeáin an Barra Stádais"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:343
+#: src/apps/marble-qt/QtMainWindow.cpp:345
 #, fuzzy
 #| msgid "Show Status Bar"
 msgctxt "Marble::MainWindow|"
 msgid "Show Status Bar"
 msgstr "Taispeáin an Barra Stádais"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:347
+#: src/apps/marble-qt/QtMainWindow.cpp:349
 #, fuzzy
 #| msgid "Lock Position"
 msgctxt "Marble::MainWindow|"
 msgid "Lock Position"
 msgstr "Cuir Ionad Faoi Ghlas"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:349
+#: src/apps/marble-qt/QtMainWindow.cpp:351
 #, fuzzy
 #| msgid "Lock Position of Floating Items"
 msgctxt "Marble::MainWindow|"
 msgid "Lock Position of Floating Items"
 msgstr "Cuir Ionad na Míreanna Inaistrithe Faoi Ghlas"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:352
+#: src/apps/marble-qt/QtMainWindow.cpp:354
 #, fuzzy
 #| msgid "&Clouds"
 msgctxt "Marble::MainWindow|"
 msgid "&Clouds"
 msgstr "S&camaill"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:354
+#: src/apps/marble-qt/QtMainWindow.cpp:356
 #, fuzzy
 #| msgid "Show Real Time Cloud Cover"
 msgctxt "Marble::MainWindow|"
 msgid "Show Real Time Cloud Cover"
 msgstr "Taispeáin Brat Scamall Fíor-Ama"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:357
+#: src/apps/marble-qt/QtMainWindow.cpp:359
 #, fuzzy
 #| msgid "Work Off&line"
 msgctxt "Marble::MainWindow|"
 msgid "Work Off&line"
 msgstr "&Oibrigh As Líne"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:361
+#: src/apps/marble-qt/QtMainWindow.cpp:363
 #, fuzzy
 #| msgid "S&un Control..."
 msgctxt "Marble::MainWindow|"
 msgid "&Time Control..."
 msgstr "Rialtán na &Gréine..."
 
-#: src/apps/marble-qt/QtMainWindow.cpp:362
+#: src/apps/marble-qt/QtMainWindow.cpp:364
 #, fuzzy
 #| msgid "Configure Sun Control"
 msgctxt "Marble::MainWindow|"
 msgid "Configure Time Control "
 msgstr "Cumraigh Rialtán na Gréine"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:365
+#: src/apps/marble-qt/QtMainWindow.cpp:367
 #, fuzzy
 #| msgid "S&un Control..."
 msgctxt "Marble::MainWindow|"
 msgid "S&un Control..."
 msgstr "Rialtán na &Gréine..."
 
-#: src/apps/marble-qt/QtMainWindow.cpp:366
+#: src/apps/marble-qt/QtMainWindow.cpp:368
 #, fuzzy
 #| msgid "Configure Sun Control"
 msgctxt "Marble::MainWindow|"
 msgid "Configure Sun Control"
 msgstr "Cumraigh Rialtán na Gréine"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:369
+#: src/apps/marble-qt/QtMainWindow.cpp:371
 #, fuzzy
 #| msgid "&Redisplay"
 msgctxt "Marble::MainWindow|"
 msgid "&Redisplay"
 msgstr "A&taispeáin"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:371
+#: src/apps/marble-qt/QtMainWindow.cpp:373
 #, fuzzy
 #| msgid "Rel&oad Map"
 msgctxt "Marble::MainWindow|"
 msgid "Reload Current Map"
 msgstr "Ath&luchtaigh an Mapa"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:374
+#: src/apps/marble-qt/QtMainWindow.cpp:376
 #, fuzzy
 #| msgid "Marble Virtual Globe &Handbook"
 msgctxt "Marble::MainWindow|"
 msgid "Marble Virtual Globe &Handbook"
 msgstr "Lám&hleabhar: Cruinneog Fhíorúil Marble"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:376
+#: src/apps/marble-qt/QtMainWindow.cpp:378
 #, fuzzy
 #| msgid "Show the Handbook for Marble Virtual Globe"
 msgctxt "Marble::MainWindow|"
 msgid "Show the Handbook for Marble Virtual Globe"
 msgstr "Taispeáin an Lámhleabhar le haghaidh Chruinneog Fhíorúil Marble"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:379
+#: src/apps/marble-qt/QtMainWindow.cpp:381
 #, fuzzy
 #| msgid "What's &This"
 msgctxt "Marble::MainWindow|"
 msgid "What's &This"
 msgstr "Cad É &Seo"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:381
+#: src/apps/marble-qt/QtMainWindow.cpp:383
 #, fuzzy
 #| msgid "Show a detailed explanation of the action."
 msgctxt "Marble::MainWindow|"
 msgid "Show a detailed explanation of the action."
 msgstr "Taispeáin míniú mionsonraithe ar an ngníomh."
 
-#: src/apps/marble-qt/QtMainWindow.cpp:384
+#: src/apps/marble-qt/QtMainWindow.cpp:386
 msgctxt "Marble::MainWindow|"
 msgid "&Community Forum"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:385
+#: src/apps/marble-qt/QtMainWindow.cpp:387
 msgctxt "Marble::MainWindow|"
 msgid "Visit Marble's Community Forum"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:388
+#: src/apps/marble-qt/QtMainWindow.cpp:390
 #, fuzzy
 #| msgid "&About Marble Virtual Globe"
 msgctxt "Marble::MainWindow|"
 msgid "&About Marble Virtual Globe"
 msgstr "M&aidir le Cruinneog Fhíorúil Marble"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:389
+#: src/apps/marble-qt/QtMainWindow.cpp:391
 #, fuzzy
 #| msgid "Show the application's About Box"
 msgctxt "Marble::MainWindow|"
 msgid "Show the application's About Box"
 msgstr "Taispeáin Bosca Eolais an fheidhmchláir"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:392
+#: src/apps/marble-qt/QtMainWindow.cpp:394
 #, fuzzy
 #| msgid "About &Qt"
 msgctxt "Marble::MainWindow|"
 msgid "About &Qt"
 msgstr "Maidir le &Qt"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:393
+#: src/apps/marble-qt/QtMainWindow.cpp:395
 #, fuzzy
 #| msgid "Show the Qt library's About box"
 msgctxt "Marble::MainWindow|"
 msgid "Show the Qt library's About box"
 msgstr "Taispeáin Bosca Eolais faoi leabharlann Qt"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:397
+#: src/apps/marble-qt/QtMainWindow.cpp:399
 #, fuzzy
 #| msgid "Add &Bookmark"
 msgctxt "Marble::MainWindow|"
 msgid "Add &Bookmark..."
 msgstr "Cuir &Leabharmharc Leis"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:399
+#: src/apps/marble-qt/QtMainWindow.cpp:401
 #, fuzzy
 #| msgid "Add Bookmark"
 msgctxt "Marble::MainWindow|"
 msgid "Add Bookmark"
 msgstr "Cuir Leabharmharc Leis"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:402
-#: src/apps/marble-qt/QtMainWindow.cpp:403
+#: src/apps/marble-qt/QtMainWindow.cpp:404
+#: src/apps/marble-qt/QtMainWindow.cpp:405
 #, fuzzy
 #| msgid "&Set Home Location"
 msgctxt "Marble::MainWindow|"
 msgid "&Set Home Location"
 msgstr "&Socraigh Baile"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:406
+#: src/apps/marble-qt/QtMainWindow.cpp:408
 #, fuzzy
 #| msgid "Show &Bookmarks"
 msgctxt "Marble::MainWindow|"
 msgid "Show &Bookmarks"
 msgstr "Taispeáin &Leabharmharcanna"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:407
+#: src/apps/marble-qt/QtMainWindow.cpp:409
 msgctxt "Marble::MainWindow|"
 msgid "Toggle display of Bookmarks"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:411
+#: src/apps/marble-qt/QtMainWindow.cpp:413
 #, fuzzy
 #| msgid "&Manage Bookmarks"
 msgctxt "Marble::MainWindow|"
 msgid "&Manage Bookmarks..."
 msgstr "&Bainistigh Leabharmharcanna"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:412
+#: src/apps/marble-qt/QtMainWindow.cpp:414
 #, fuzzy
 #| msgid "Manage Bookmarks"
 msgctxt "Marble::MainWindow|"
 msgid "Manage Bookmarks"
 msgstr "Bainistigh Leabharmharcanna"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:416
+#: src/apps/marble-qt/QtMainWindow.cpp:418
 #, fuzzy
 #| msgid "&Create a New Map..."
 msgctxt "Marble::MainWindow|"
 msgid "&Create a New Map..."
 msgstr "&Cruthaigh Mapa Nua..."
 
-#: src/apps/marble-qt/QtMainWindow.cpp:417
+#: src/apps/marble-qt/QtMainWindow.cpp:419
 msgctxt "Marble::MainWindow|"
 msgid "A wizard guides you through the creation of your own map theme."
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:421
+#: src/apps/marble-qt/QtMainWindow.cpp:423
 msgctxt "Marble::MainWindow|"
 msgid "Show Tile Zoom Level"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:429
+#: src/apps/marble-qt/QtMainWindow.cpp:431
 #, fuzzy
 #| msgid "Degree (Decimal)"
 msgctxt "Marble::MainWindow|"
 msgid "Degree (DMS)"
 msgstr "Céim (Deachúlach)"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:434
+#: src/apps/marble-qt/QtMainWindow.cpp:436
 #, fuzzy
 #| msgid "Degree (Decimal)"
 msgctxt "Marble::MainWindow|"
 msgid "Degree (Decimal)"
 msgstr "Céim (Deachúlach)"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:439
+#: src/apps/marble-qt/QtMainWindow.cpp:441
 msgctxt "Marble::MainWindow|"
 msgid "Universal Transverse Mercator (UTM)"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:454
+#: src/apps/marble-qt/QtMainWindow.cpp:456
 #, fuzzy
 #| msgid "&File"
 msgctxt "Marble::MainWindow|"
 msgid "&File"
 msgstr "&Comhad"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:467
+#: src/apps/marble-qt/QtMainWindow.cpp:469
 #, fuzzy
 #| msgid "&Edit"
 msgctxt "Marble::MainWindow|"
 msgid "&Edit"
 msgstr "&Eagar"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:475
+#: src/apps/marble-qt/QtMainWindow.cpp:477
 #, fuzzy
 #| msgid "&View"
 msgctxt "Marble::MainWindow|"
 msgid "&View"
 msgstr "&Amharc"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:476
+#: src/apps/marble-qt/QtMainWindow.cpp:478
 #, fuzzy
 #| msgid "&Info Boxes"
 msgctxt "Marble::MainWindow|"
 msgid "&Info Boxes"
 msgstr "Boscaí Eola&is"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:477
+#: src/apps/marble-qt/QtMainWindow.cpp:479
 msgctxt "Marble::MainWindow|"
 msgid "&Online Services"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:480
+#: src/apps/marble-qt/QtMainWindow.cpp:482
 #, fuzzy
 #| msgid "&Bookmarks"
 msgctxt "Marble::MainWindow|"
 msgid "&Bookmarks"
 msgstr "&Leabharmharcanna"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:484
+#: src/apps/marble-qt/QtMainWindow.cpp:486
 #, fuzzy
 #| msgid "Show places"
 msgctxt "Marble::MainWindow|"
 msgid "&Panels"
 msgstr "Taispeáin áiteanna"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:489
+#: src/apps/marble-qt/QtMainWindow.cpp:491
 #, fuzzy
 #| msgid "&View"
 msgctxt "Marble::MainWindow|"
 msgid "&View Size"
 msgstr "&Amharc"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:492
+#: src/apps/marble-qt/QtMainWindow.cpp:494
 #, fuzzy
 #| msgid "&Settings"
 msgctxt "Marble::MainWindow|"
 msgid "&Settings"
 msgstr "&Socruithe"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:501
+#: src/apps/marble-qt/QtMainWindow.cpp:503
 #, fuzzy
 #| msgid "&Help"
 msgctxt "Marble::MainWindow|"
 msgid "&Help"
 msgstr "Cab&hair"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:606
+#: src/apps/marble-qt/QtMainWindow.cpp:608
 #, fuzzy
 #| msgid "&Home"
 msgctxt "Marble::MainWindow|"
 msgid "&Home"
 msgstr "&Baile"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:615
+#: src/apps/marble-qt/QtMainWindow.cpp:617
 #, fuzzy
 #| msgid "Default"
 msgctxt "Marble::MainWindow|"
 msgid "Default"
 msgstr "Réamhshocrú"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:739
+#: src/apps/marble-qt/QtMainWindow.cpp:741
 #, fuzzy
 #| msgid "Ready"
 msgctxt "Marble::MainWindow|"
 msgid "Ready"
 msgstr "Réidh"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:752
+#: src/apps/marble-qt/QtMainWindow.cpp:754
 #, fuzzy
 #| msgid "Export Map"
 msgctxt "Marble::MainWindow|"
 msgid "Export Map"
 msgstr "Easpórtáil mapa"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:754
+#: src/apps/marble-qt/QtMainWindow.cpp:756
 #, fuzzy
 #| msgid "Images (*.jpg *.png)"
 msgctxt "Marble::MainWindow|"
 msgid "Images (*.jpg *.png)"
 msgstr "Íomhánna (*.jpg *.png)"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:771
+#: src/apps/marble-qt/QtMainWindow.cpp:773
 #, fuzzy
 #| msgid "An error occurred while trying to save the file.\n"
 msgctxt "Marble::MainWindow|"
 msgid "An error occurred while trying to save the file.\n"
 msgstr "Tharla earráid agus an comhad á shábháil.\n"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:902
+#: src/apps/marble-qt/QtMainWindow.cpp:904
 #, fuzzy, qt-format
 #| msgid "Marble Virtual Globe %1"
 msgctxt "Marble::MainWindow|"
 msgid "Marble Virtual Globe %1"
 msgstr "Cruinneog Fhíorúil Marble %1"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:953
-#: src/apps/marble-qt/QtMainWindow.cpp:1030
+#: src/apps/marble-qt/QtMainWindow.cpp:955
+#: src/apps/marble-qt/QtMainWindow.cpp:1032
 #, fuzzy, qt-format
 #| msgid "Lock Position"
 msgctxt "Marble::MainWindow|"
 msgid "Position: %1"
 msgstr "Cuir Ionad Faoi Ghlas"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:956
-#: src/apps/marble-qt/QtMainWindow.cpp:1038
+#: src/apps/marble-qt/QtMainWindow.cpp:958
+#: src/apps/marble-qt/QtMainWindow.cpp:1040
 #, fuzzy, qt-format
 #| msgid "Altitude: %1"
 msgctxt "Marble::MainWindow|"
 msgid "Altitude: %1"
 msgstr "Airde: %1"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:959
-#: src/apps/marble-qt/QtMainWindow.cpp:1046
+#: src/apps/marble-qt/QtMainWindow.cpp:961
+#: src/apps/marble-qt/QtMainWindow.cpp:1048
 #, fuzzy, qt-format
 #| msgid "Zoom &In"
 msgctxt "Marble::MainWindow|"
 msgid "Zoom: %1"
 msgstr "Súmáil &Isteach"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:962
-#: src/apps/marble-qt/QtMainWindow.cpp:1054
+#: src/apps/marble-qt/QtMainWindow.cpp:964
+#: src/apps/marble-qt/QtMainWindow.cpp:1056
 #, fuzzy, qt-format
 #| msgid "&Time"
 msgctxt "Marble::MainWindow|"
 msgid "Time: %1"
 msgstr "&Am"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:994
+#: src/apps/marble-qt/QtMainWindow.cpp:996
 #, fuzzy
 #| msgid "All Supported Files"
 msgctxt "Marble::MainWindow|"
 msgid "All Supported Files"
 msgstr "Gach Comhad a dTacaítear Leis"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:1000
+#: src/apps/marble-qt/QtMainWindow.cpp:1002
 #, fuzzy
 #| msgid "Open File"
 msgctxt "Marble::MainWindow|"
 msgid "Open File"
 msgstr "Oscail Comhad"
 
-#: src/apps/marble-qt/QtMainWindow.cpp:1021
+#: src/apps/marble-qt/QtMainWindow.cpp:1023
 msgctxt "Marble::MainWindow|"
 msgid "&Angle Display Unit"
 msgstr ""
 
-#: src/apps/marble-qt/QtMainWindow.cpp:1270
+#: src/apps/marble-qt/QtMainWindow.cpp:1272
 #, fuzzy
 #| msgid "Unnamed"
 msgctxt "Marble::MainWindow|"
 msgid "Unnamed"
 msgstr "Gan Ainm"
 
-#: src/apps/marble-ui/ControlView.cpp:85
+#: src/apps/marble-ui/ControlView.cpp:86
 #, fuzzy
 #| msgid "Marble - Virtual Globe"
 msgctxt "Marble::ControlView|"
 msgid "Marble - Virtual Globe"
 msgstr "Marble - Cruinneog Fhíorúil"
 
-#: src/apps/marble-ui/ControlView.cpp:276
+#: src/apps/marble-ui/ControlView.cpp:277
 msgctxt "Marble::ControlView|"
 msgid "Default (Resizable)"
-msgstr ""
-
-#: src/apps/marble-ui/ControlView.cpp:285
-#, qt-format
-msgctxt "Marble::ControlView|"
-msgid "NTSC (%1x%2)"
 msgstr ""
 
 #: src/apps/marble-ui/ControlView.cpp:286
 #, qt-format
 msgctxt "Marble::ControlView|"
-msgid "PAL (%1x%2)"
+msgid "NTSC (%1x%2)"
 msgstr ""
 
 #: src/apps/marble-ui/ControlView.cpp:287
 #, qt-format
 msgctxt "Marble::ControlView|"
-msgid "NTSC 16:9 (%1x%2)"
+msgid "PAL (%1x%2)"
 msgstr ""
 
 #: src/apps/marble-ui/ControlView.cpp:288
 #, qt-format
 msgctxt "Marble::ControlView|"
+msgid "NTSC 16:9 (%1x%2)"
+msgstr ""
+
+#: src/apps/marble-ui/ControlView.cpp:289
+#, qt-format
+msgctxt "Marble::ControlView|"
 msgid "PAL 16:9 (%1x%2)"
 msgstr ""
 
-#: src/apps/marble-ui/ControlView.cpp:290
+#: src/apps/marble-ui/ControlView.cpp:291
 #, qt-format
 msgctxt "Marble::ControlView|"
 msgid "DVD (%1x%2p)"
 msgstr ""
 
-#: src/apps/marble-ui/ControlView.cpp:292
+#: src/apps/marble-ui/ControlView.cpp:293
 #, qt-format
 msgctxt "Marble::ControlView|"
 msgid "HD (%1x%2p)"
 msgstr ""
 
-#: src/apps/marble-ui/ControlView.cpp:294
+#: src/apps/marble-ui/ControlView.cpp:295
 #, qt-format
 msgctxt "Marble::ControlView|"
 msgid "Full HD (%1x%2p)"
 msgstr ""
 
-#: src/apps/marble-ui/ControlView.cpp:295
+#: src/apps/marble-ui/ControlView.cpp:296
 #, qt-format
 msgctxt "Marble::ControlView|"
 msgid "Digital Cinema (%1x%2)"
 msgstr ""
 
-#: src/apps/marble-ui/ControlView.cpp:486
+#: src/apps/marble-ui/ControlView.cpp:487
 msgctxt "Marble::ControlView|"
 msgid "The Marble development team wishes you a pleasant and safe journey."
 msgstr ""
 
-#: src/apps/marble-ui/ControlView.cpp:487
+#: src/apps/marble-ui/ControlView.cpp:488
 msgctxt "Marble::ControlView|"
 msgid "Caution: Driving instructions may be incomplete or inaccurate."
 msgstr ""
 
-#: src/apps/marble-ui/ControlView.cpp:488
+#: src/apps/marble-ui/ControlView.cpp:489
 msgctxt "Marble::ControlView|"
 msgid ""
 "Road construction, weather and other unforeseen variables can result in this "
@@ -3598,12 +3598,12 @@ msgid ""
 "destination."
 msgstr ""
 
-#: src/apps/marble-ui/ControlView.cpp:489
+#: src/apps/marble-ui/ControlView.cpp:490
 msgctxt "Marble::ControlView|"
 msgid "Please use common sense while navigating."
 msgstr ""
 
-#: src/apps/marble-ui/ControlView.cpp:576
+#: src/apps/marble-ui/ControlView.cpp:577
 #, qt-format
 msgctxt "Marble::ControlView|"
 msgid ""
@@ -3611,89 +3611,89 @@ msgid ""
 "different external editor in the settings dialog."
 msgstr ""
 
-#: src/apps/marble-ui/ControlView.cpp:578
+#: src/apps/marble-ui/ControlView.cpp:579
 msgctxt "Marble::ControlView|"
 msgid "Cannot start external editor"
 msgstr ""
 
-#: src/apps/marble-ui/ControlView.cpp:595
+#: src/apps/marble-ui/ControlView.cpp:596
 #, fuzzy
 #| msgid "Legend"
 msgctxt "Marble::ControlView|"
 msgid "Legend"
 msgstr "Eochair eolais"
 
-#: src/apps/marble-ui/ControlView.cpp:613
+#: src/apps/marble-ui/ControlView.cpp:614
 #, fuzzy
 #| msgid "Routing"
 msgctxt "Marble::ControlView|"
 msgid "Routing"
 msgstr "Ródú"
 
-#: src/apps/marble-ui/ControlView.cpp:621
+#: src/apps/marble-ui/ControlView.cpp:622
 #, fuzzy
 #| msgid "Location"
 msgctxt "Marble::ControlView|"
 msgid "Location"
 msgstr "Suíomh"
 
-#: src/apps/marble-ui/ControlView.cpp:629
+#: src/apps/marble-ui/ControlView.cpp:630
 #, fuzzy
 #| msgid "Search"
 msgctxt "Marble::ControlView|"
 msgid "Search"
 msgstr "Cuardaigh"
 
-#: src/apps/marble-ui/ControlView.cpp:642
+#: src/apps/marble-ui/ControlView.cpp:643
 #, qt-format
 msgctxt "Marble::ControlView|"
 msgid "Search for cities, addresses, points of interest and more (%1)"
 msgstr ""
 
-#: src/apps/marble-ui/ControlView.cpp:646
+#: src/apps/marble-ui/ControlView.cpp:647
 #, fuzzy
 #| msgid "Map View"
 msgctxt "Marble::ControlView|"
 msgid "Map View"
 msgstr "Amharc Mapa"
 
-#: src/apps/marble-ui/ControlView.cpp:656
+#: src/apps/marble-ui/ControlView.cpp:657
 #, fuzzy
 #| msgid "Files"
 msgctxt "Marble::ControlView|"
 msgid "Files"
 msgstr "Comhaid"
 
-#: src/apps/marble-ui/ControlView.cpp:665
+#: src/apps/marble-ui/ControlView.cpp:666
 #, fuzzy
 #| msgid "&Open..."
 msgctxt "Marble::ControlView|"
 msgid "Tour"
 msgstr "&Oscail..."
 
-#: src/apps/marble-ui/ControlView.cpp:678
+#: src/apps/marble-ui/ControlView.cpp:679
 #, fuzzy
 #| msgid "&Edit Map"
 msgctxt "QObject|"
 msgid "Edit Maps"
 msgstr "Cuir Mapa in &Eagar"
 
-#: src/apps/marble-ui/ControlView.cpp:730
-#: src/apps/marble-ui/ControlView.cpp:868
+#: src/apps/marble-ui/ControlView.cpp:731
+#: src/apps/marble-ui/ControlView.cpp:869
 #, fuzzy
 #| msgid "Show places"
 msgctxt "Marble::ControlView|"
 msgid "Hide &All Panels"
 msgstr "Taispeáin áiteanna"
 
-#: src/apps/marble-ui/ControlView.cpp:732
+#: src/apps/marble-ui/ControlView.cpp:733
 #, fuzzy
 #| msgid "Show rivers / lakes"
 msgctxt "Marble::ControlView|"
 msgid "Show or hide all panels."
 msgstr "Taispeáin aibhneacha/lochanna"
 
-#: src/apps/marble-ui/ControlView.cpp:857
+#: src/apps/marble-ui/ControlView.cpp:858
 #, fuzzy
 #| msgid "Show places"
 msgctxt "Marble::ControlView|"
@@ -4133,24 +4133,24 @@ msgctxt "Marble::RouteItemDelegate|"
 msgid "Upload to cloud"
 msgstr ""
 
-#: src/lib/marble/CurrentLocationWidget.cpp:199
+#: src/lib/marble/CurrentLocationWidget.cpp:197
 #, fuzzy
 #| msgid "No description available."
 msgctxt "QObject|"
 msgid "No position available."
 msgstr "Níl cur síos ar fáil."
 
-#: src/lib/marble/CurrentLocationWidget.cpp:202
+#: src/lib/marble/CurrentLocationWidget.cpp:200
 msgctxt "QObject|"
 msgid "Waiting for current location information..."
 msgstr ""
 
-#: src/lib/marble/CurrentLocationWidget.cpp:208
+#: src/lib/marble/CurrentLocationWidget.cpp:206
 msgctxt "QObject|"
 msgid "Error when determining current location: "
 msgstr ""
 
-#: src/lib/marble/CurrentLocationWidget.cpp:269
+#: src/lib/marble/CurrentLocationWidget.cpp:267
 #: src/plugins/render/weather/WeatherData.cpp:590
 #, fuzzy
 #| msgid "km/h"
@@ -4158,82 +4158,82 @@ msgctxt "QObject|"
 msgid "km/h"
 msgstr "km/u"
 
-#: src/lib/marble/CurrentLocationWidget.cpp:271
-#: src/lib/marble/CurrentLocationWidget.cpp:272
-#: src/lib/marble/CurrentLocationWidget.cpp:293
+#: src/lib/marble/CurrentLocationWidget.cpp:269
+#: src/lib/marble/CurrentLocationWidget.cpp:270
+#: src/lib/marble/CurrentLocationWidget.cpp:291
 #, fuzzy
 #| msgid "m"
 msgctxt "QObject|"
 msgid "m"
 msgstr "m"
 
-#: src/lib/marble/CurrentLocationWidget.cpp:275
+#: src/lib/marble/CurrentLocationWidget.cpp:273
 #, fuzzy
 #| msgid "km"
 msgctxt "QObject|"
 msgid "km"
 msgstr "km"
 
-#: src/lib/marble/CurrentLocationWidget.cpp:281
+#: src/lib/marble/CurrentLocationWidget.cpp:279
 #, fuzzy
 #| msgid "m/h"
 msgctxt "QObject|"
 msgid "m/h"
 msgstr "m/u"
 
-#: src/lib/marble/CurrentLocationWidget.cpp:283
-#: src/lib/marble/CurrentLocationWidget.cpp:284
+#: src/lib/marble/CurrentLocationWidget.cpp:281
+#: src/lib/marble/CurrentLocationWidget.cpp:282
 #, fuzzy
 #| msgid "ft"
 msgctxt "QObject|"
 msgid "ft"
 msgstr "tr"
 
-#: src/lib/marble/CurrentLocationWidget.cpp:291
+#: src/lib/marble/CurrentLocationWidget.cpp:289
 msgctxt "QObject|"
 msgid "kt"
 msgstr ""
 
-#: src/lib/marble/CurrentLocationWidget.cpp:294
+#: src/lib/marble/CurrentLocationWidget.cpp:292
 #, fuzzy
 #| msgid "m"
 msgctxt "QObject|"
 msgid "nm"
 msgstr "m"
 
-#: src/lib/marble/CurrentLocationWidget.cpp:334
+#: src/lib/marble/CurrentLocationWidget.cpp:343
 #, fuzzy
 #| msgid "&Remove Measure Points"
 msgctxt "QObject|"
 msgid "Placemark"
 msgstr "&Bain Pointí Tomhais"
 
-#: src/lib/marble/CurrentLocationWidget.cpp:369
+#: src/lib/marble/CurrentLocationWidget.cpp:378
 msgctxt "QObject|"
 msgid "Save Track"
 msgstr ""
 
-#: src/lib/marble/CurrentLocationWidget.cpp:371
-#: src/lib/marble/CurrentLocationWidget.cpp:387
+#: src/lib/marble/CurrentLocationWidget.cpp:380
+#: src/lib/marble/CurrentLocationWidget.cpp:396
 #, fuzzy
 #| msgid "KML File (*.kml)"
 msgctxt "QObject|"
 msgid "KML File (*.kml)"
 msgstr "Comhad KML (*.kml)"
 
-#: src/lib/marble/CurrentLocationWidget.cpp:386
+#: src/lib/marble/CurrentLocationWidget.cpp:395
 #, fuzzy
 #| msgid "&Open..."
 msgctxt "QObject|"
 msgid "Open Track"
 msgstr "&Oscail..."
 
-#: src/lib/marble/CurrentLocationWidget.cpp:398
+#: src/lib/marble/CurrentLocationWidget.cpp:407
 msgctxt "QObject|"
 msgid "Clear current track"
 msgstr ""
 
-#: src/lib/marble/CurrentLocationWidget.cpp:399
+#: src/lib/marble/CurrentLocationWidget.cpp:408
 msgctxt "QObject|"
 msgid "Are you sure you want to clear the current track?"
 msgstr ""
@@ -6464,163 +6464,163 @@ msgctxt "GeoDataCoordinates|"
 msgid "S"
 msgstr "D"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:312
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:313
 msgctxt "GeoDataPlacemark|"
 msgid "Valley"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:313
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:314
 #, fuzzy
 #| msgid "Terrain"
 msgctxt "GeoDataPlacemark|"
 msgid "Terrain"
 msgstr "Tír-raon"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:314
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:315
 #, fuzzy
 #| msgid "Crater"
 msgctxt "GeoDataPlacemark|"
 msgid "Crater"
 msgstr "Cráitéar"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:315
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:316
 #, fuzzy
 #| msgid "Search"
 msgctxt "GeoDataPlacemark|"
 msgid "Sea"
 msgstr "Cuardaigh"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:316
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:317
 #, fuzzy
 #| msgid "Landing Site"
 msgctxt "GeoDataPlacemark|"
 msgid "Manned Landing Site"
 msgstr "Suíomh Tuirlingthe"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:317
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:318
 msgctxt "GeoDataPlacemark|"
 msgid "Robotic Rover"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:318
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:319
 #, fuzzy
 #| msgid "Landing Site"
 msgctxt "GeoDataPlacemark|"
 msgid "Unmanned Soft Landing Site"
 msgstr "Suíomh Tuirlingthe"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:319
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:320
 #, fuzzy
 #| msgid "Landing Site"
 msgctxt "GeoDataPlacemark|"
 msgid "Unmanned Hard Landing Site"
 msgstr "Suíomh Tuirlingthe"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:320
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:338
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:321
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:339
 #, fuzzy
 #| msgid "Mountain"
 msgctxt "GeoDataPlacemark|"
 msgid "Mountain"
 msgstr "Sliabh"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:321
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:325
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:329
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:333
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:354
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:322
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:326
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:330
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:334
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:355
 #, fuzzy
 #| msgid "City"
 msgctxt "GeoDataPlacemark|"
 msgid "City"
 msgstr "Cathair"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:322
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:326
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:330
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:334
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:323
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:327
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:331
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:335
 #, fuzzy
 #| msgid "National Capital"
 msgctxt "GeoDataPlacemark|"
 msgid "County Capital"
 msgstr "Príomhchathair Náisiúnta"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:323
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:327
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:331
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:335
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:324
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:328
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:332
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:336
 #, fuzzy
 #| msgid "State Capital"
 msgctxt "GeoDataPlacemark|"
 msgid "State Capital"
 msgstr "Príomhchathair Stáit"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:324
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:328
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:332
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:336
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:325
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:329
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:333
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:337
 #, fuzzy
 #| msgid "National Capital"
 msgctxt "GeoDataPlacemark|"
 msgid "Nation Capital"
 msgstr "Príomhchathair Náisiúnta"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:337
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:338
 #, fuzzy
 #| msgid "Navigation"
 msgctxt "GeoDataPlacemark|"
 msgid "Nation"
 msgstr "Loingseoireacht"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:339
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:458
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:340
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:459
 #, fuzzy
 #| msgid "Volcano"
 msgctxt "GeoDataPlacemark|"
 msgid "Volcano"
 msgstr "Bolcán"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:340
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:341
 #, fuzzy
 #| msgid "Continent"
 msgctxt "GeoDataPlacemark|"
 msgid "Continent"
 msgstr "Mór-Roinn"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:341
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:342
 #, fuzzy
 #| msgid "Ocean"
 msgctxt "GeoDataPlacemark|"
 msgid "Ocean"
 msgstr "Aigéan"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:342
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:343
 #, fuzzy
 #| msgid "Geographic Pole"
 msgctxt "GeoDataPlacemark|"
 msgid "Geographic Pole"
 msgstr "Mol Geografach"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:343
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:344
 #, fuzzy
 #| msgid "Magnetic Pole"
 msgctxt "GeoDataPlacemark|"
 msgid "Magnetic Pole"
 msgstr "Pol Maighnéadach"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:344
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:345
 #, fuzzy
 #| msgid "Shipwreck"
 msgctxt "GeoDataPlacemark|"
 msgid "Ship Wreck"
 msgstr "Long Bhriste"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:345
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:346
 msgctxt "GeoDataPlacemark|"
 msgid "Air Port"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:346
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:347
 #, fuzzy
 #| msgctxt "the planet"
 #| msgid "Mercury"
@@ -6628,385 +6628,385 @@ msgctxt "GeoDataPlacemark|"
 msgid "Observatory"
 msgstr "Mearcair"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:347
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:348
 #, fuzzy
 #| msgid "Military area"
 msgctxt "GeoDataPlacemark|"
 msgid "Military Danger Area"
 msgstr "Limistéar míleata"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:348
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:349
 msgctxt "GeoDataPlacemark|"
 msgid "OSM Site"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:349
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:350
 #, fuzzy
 #| msgid "Coordinates:"
 msgctxt "GeoDataPlacemark|"
 msgid "Coordinate"
 msgstr "Comhordanáidí:"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:350
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:351
 #, fuzzy
 #| msgid "Bookmarks"
 msgctxt "GeoDataPlacemark|"
 msgid "Bookmark"
 msgstr "Leabharmharcanna"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:351
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:352
 #, fuzzy
 #| msgid "Satellites"
 msgctxt "GeoDataPlacemark|"
 msgid "Satellite"
 msgstr "Satailítí"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:355
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:356
 #, fuzzy
 #| msgid "National Capital"
 msgctxt "GeoDataPlacemark|"
 msgid "City Capital"
 msgstr "Príomhchathair Náisiúnta"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:356
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:362
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:365
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:357
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:363
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:366
 #, fuzzy
 #| msgid "National Capital"
 msgctxt "GeoDataPlacemark|"
 msgid "National Capital"
 msgstr "Príomhchathair Náisiúnta"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:357
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:358
 msgctxt "GeoDataPlacemark|"
 msgid "Suburb"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:358
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:359
 msgctxt "GeoDataPlacemark|"
 msgid "Hamlet"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:359
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:360
 #, fuzzy
 #| msgid "Low Quality"
 msgctxt "GeoDataPlacemark|"
 msgid "Locality"
 msgstr "Cáilíocht Íseal"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:360
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:361
 msgctxt "GeoDataPlacemark|"
 msgid "Town"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:361
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:362
 #, fuzzy
 #| msgid "National Capital"
 msgctxt "GeoDataPlacemark|"
 msgid "Town Capital"
 msgstr "Príomhchathair Náisiúnta"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:363
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:364
 #, fuzzy
 #| msgid "State Capital"
 msgctxt "GeoDataPlacemark|"
 msgid "Village"
 msgstr "Príomhchathair Stáit"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:364
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:365
 #, fuzzy
 #| msgid "State Capital"
 msgctxt "GeoDataPlacemark|"
 msgid "Village Capital"
 msgstr "Príomhchathair Stáit"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:366
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:367
 #, fuzzy
 #| msgid "Crater"
 msgctxt "GeoDataPlacemark|"
 msgid "Water"
 msgstr "Cráitéar"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:367
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:368
 msgctxt "GeoDataPlacemark|"
 msgid "Reef"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:368
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:369
 #, fuzzy
 #| msgid "Wood"
 msgctxt "GeoDataPlacemark|"
 msgid "Wood"
 msgstr "Coill"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:369
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:370
 msgctxt "GeoDataPlacemark|"
 msgid "Beach"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:370
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:371
 msgctxt "GeoDataPlacemark|"
 msgid "Wetland"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:371
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:372
 #, fuzzy
 #| msgid "Ice and Glaciers"
 msgctxt "GeoDataPlacemark|"
 msgid "Glacier"
 msgstr "Oighear agus Oighearshruthanna"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:372
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:373
 msgctxt "GeoDataPlacemark|"
 msgid "Ice Shelf"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:373
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:374
 msgctxt "GeoDataPlacemark|"
 msgid "Scrub"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:374
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:375
 msgctxt "GeoDataPlacemark|"
 msgid "Cliff"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:375
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:376
 #, fuzzy
 #| msgid "Weather"
 msgctxt "GeoDataPlacemark|"
 msgid "Heath"
 msgstr "Aimsir"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:376
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:377
 msgctxt "GeoDataPlacemark|"
 msgid "Traffic Signals"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:377
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:378
 #, fuzzy
 #| msgid "Elevation"
 msgctxt "GeoDataPlacemark|"
 msgid "Elevator"
 msgstr "Airde"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:378
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:379
 msgctxt "GeoDataPlacemark|"
 msgid "Steps"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:379
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:380
 #, fuzzy
 #| msgid "Unknown"
 msgctxt "GeoDataPlacemark|"
 msgid "Unknown Road"
 msgstr "Anaithnid"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:380
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:381
 #, fuzzy
 #| msgid "Path"
 msgctxt "GeoDataPlacemark|"
 msgid "Path"
 msgstr "Conair"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:381
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:383
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:382
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:384
 #, fuzzy
 #| msgid "Footway"
 msgctxt "GeoDataPlacemark|"
 msgid "Footway"
 msgstr "Cosán"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:382
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:579
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:383
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:580
 #, fuzzy
 #| msgid "Tracking"
 msgctxt "GeoDataPlacemark|"
 msgid "Track"
 msgstr "Rianú"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:384
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:385
 #, fuzzy
 #| msgid "Cycleway"
 msgctxt "GeoDataPlacemark|"
 msgid "Cycleway"
 msgstr "Slí Rothar"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:385
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:386
 #, fuzzy
 #| msgid "Primary road"
 msgctxt "GeoDataPlacemark|"
 msgid "Service Road"
 msgstr "Príomhbhóthar"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:386
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:387
 msgctxt "GeoDataPlacemark|"
 msgid "Road"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:387
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:388
 #, fuzzy
 #| msgid "Residential Area"
 msgctxt "GeoDataPlacemark|"
 msgid "Residential Road"
 msgstr "Limistéar Cónaithe"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:388
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:389
 #, fuzzy
 #| msgid "Landing Site"
 msgctxt "GeoDataPlacemark|"
 msgid "Living Street"
 msgstr "Suíomh Tuirlingthe"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:389
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:390
 #, fuzzy
 #| msgid "Unclassified road"
 msgctxt "GeoDataPlacemark|"
 msgid "Unclassified Road"
 msgstr "Bóthar neamhrangaithe"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:390
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:391
 #, fuzzy
 #| msgid "Primary road"
 msgctxt "GeoDataPlacemark|"
 msgid "Tertiary Link Road"
 msgstr "Príomhbhóthar"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:391
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:392
 #, fuzzy
 #| msgid "Primary road"
 msgctxt "GeoDataPlacemark|"
 msgid "Tertiary Road"
 msgstr "Príomhbhóthar"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:392
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:393
 #, fuzzy
 #| msgid "Secondary road"
 msgctxt "GeoDataPlacemark|"
 msgid "Secondary Link Road"
 msgstr "Fobhóthar"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:393
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:394
 #, fuzzy
 #| msgid "Secondary road"
 msgctxt "GeoDataPlacemark|"
 msgid "Secondary Road"
 msgstr "Fobhóthar"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:394
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:395
 #, fuzzy
 #| msgid "Primary road"
 msgctxt "GeoDataPlacemark|"
 msgid "Primary Link Road"
 msgstr "Príomhbhóthar"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:395
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:396
 #, fuzzy
 #| msgid "Primary road"
 msgctxt "GeoDataPlacemark|"
 msgid "Primary Road"
 msgstr "Príomhbhóthar"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:396
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:397
 #, fuzzy
 #| msgid "Cycleway"
 msgctxt "GeoDataPlacemark|"
 msgid "Raceway"
 msgstr "Slí Rothar"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:397
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:398
 #, fuzzy
 #| msgid "Primary road"
 msgctxt "GeoDataPlacemark|"
 msgid "Trunk Link Road"
 msgstr "Príomhbhóthar"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:398
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:399
 #, fuzzy
 #| msgid "Unknown"
 msgctxt "GeoDataPlacemark|"
 msgid "Trunk Road"
 msgstr "Anaithnid"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:399
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:400
 #, fuzzy
 #| msgid "Motorway"
 msgctxt "GeoDataPlacemark|"
 msgid "Motorway Link Road"
 msgstr "Mótarbhealach"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:400
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:401
 #, fuzzy
 #| msgid "Motorway"
 msgctxt "GeoDataPlacemark|"
 msgid "Motorway"
 msgstr "Mótarbhealach"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:401
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:402
 msgctxt "GeoDataPlacemark|"
 msgid "Corridor"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:402
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:403
 #, fuzzy
 #| msgid "Significant Building"
 msgctxt "GeoDataPlacemark|"
 msgid "Building"
 msgstr "Foirgneamh Tábhachtach"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:403
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:404
 msgctxt "GeoDataPlacemark|"
 msgid "Camping"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:404
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:405
 msgctxt "GeoDataPlacemark|"
 msgid "Hostel"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:405
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:406
 msgctxt "GeoDataPlacemark|"
 msgid "Hotel"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:406
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:407
 msgctxt "GeoDataPlacemark|"
 msgid "Motel"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:407
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:408
 msgctxt "GeoDataPlacemark|"
 msgid "Youth Hostel"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:408
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:409
 msgctxt "GeoDataPlacemark|"
 msgid "Guest House"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:409
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:410
 msgctxt "GeoDataPlacemark|"
 msgid "Library"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:410
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:411
 msgctxt "GeoDataPlacemark|"
 msgid "Kindergarten"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:411
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:412
 msgctxt "GeoDataPlacemark|"
 msgid "College"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:412
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:413
 #, fuzzy
 #| msgid "school"
 msgctxt "GeoDataPlacemark|"
 msgid "School"
 msgstr "scoil"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:413
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:414
 #, fuzzy
 #| msgid "university"
 msgctxt "GeoDataPlacemark|"
@@ -7014,903 +7014,903 @@ msgid "University"
 msgstr "ollscoil"
 
 # pressure
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:414
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:415
 #, fuzzy
 #| msgid "Bar"
 msgctxt "GeoDataPlacemark|"
 msgid "Bar"
 msgstr "Bar"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:415
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:416
 msgctxt "GeoDataPlacemark|"
 msgid "Biergarten"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:416
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:417
 msgctxt "GeoDataPlacemark|"
 msgid "Cafe"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:417
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:418
 msgctxt "GeoDataPlacemark|"
 msgid "Fast Food"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:418
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:419
 msgctxt "GeoDataPlacemark|"
 msgid "Pub"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:419
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:420
 msgctxt "GeoDataPlacemark|"
 msgid "Restaurant"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:420
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:421
 msgctxt "GeoDataPlacemark|"
 msgid "Dentist"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:421
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:422
 msgctxt "GeoDataPlacemark|"
 msgid "Doctors"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:422
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:423
 #, fuzzy
 #| msgid "Capital"
 msgctxt "GeoDataPlacemark|"
 msgid "Hospital"
 msgstr "Príomhchathair"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:423
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:424
 msgctxt "GeoDataPlacemark|"
 msgid "Pharmacy"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:424
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:425
 #, fuzzy
 #| msgid "Location"
 msgctxt "GeoDataPlacemark|"
 msgid "Veterinary"
 msgstr "Suíomh"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:425
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:426
 msgctxt "GeoDataPlacemark|"
 msgid "ATM"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:426
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:427
 msgctxt "GeoDataPlacemark|"
 msgid "Bank"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:427
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:428
 msgctxt "GeoDataPlacemark|"
 msgid "Archaeological Site"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:428
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:429
 msgctxt "GeoDataPlacemark|"
 msgid "Embassy"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:429
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:430
 msgctxt "GeoDataPlacemark|"
 msgid "Emergency Phone"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:430
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:431
 #, fuzzy
 #| msgid "Mountain"
 msgctxt "GeoDataPlacemark|"
 msgid "Mountain Rescue"
 msgstr "Sliabh"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:431
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:432
 #, fuzzy
 #| msgid "Crater"
 msgctxt "GeoDataPlacemark|"
 msgid "Water Park"
 msgstr "Cráitéar"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:432
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:433
 #, fuzzy
 #| msgid "Sports pitch"
 msgctxt "GeoDataPlacemark|"
 msgid "Community Centre"
 msgstr "Páirc spóirt"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:433
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:434
 #, fuzzy
 #| msgid "Mountain"
 msgctxt "GeoDataPlacemark|"
 msgid "Fountain"
 msgstr "Sliabh"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:434
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:435
 #, fuzzy
 #| msgid "Night"
 msgctxt "GeoDataPlacemark|"
 msgid "Night Club"
 msgstr "Oíche"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:435
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:436
 msgctxt "GeoDataPlacemark|"
 msgid "Bench"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:436
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:437
 msgctxt "GeoDataPlacemark|"
 msgid "Court House"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:437
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:438
 #, fuzzy
 #| msgid "train station"
 msgctxt "GeoDataPlacemark|"
 msgid "Fire Station"
 msgstr "stáisiún traenach"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:438
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:439
 msgctxt "GeoDataPlacemark|"
 msgid "Hunting Stand"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:439
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:440
 msgctxt "GeoDataPlacemark|"
 msgid "Police"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:440
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:441
 msgctxt "GeoDataPlacemark|"
 msgid "Post Box"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:441
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:442
 msgctxt "GeoDataPlacemark|"
 msgid "Post Office"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:442
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:443
 msgctxt "GeoDataPlacemark|"
 msgid "Prison"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:443
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:444
 msgctxt "GeoDataPlacemark|"
 msgid "Recycling"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:444
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:445
 msgctxt "GeoDataPlacemark|"
 msgid "Shelter"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:445
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:446
 msgctxt "GeoDataPlacemark|"
 msgid "Telephone"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:446
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:447
 msgctxt "GeoDataPlacemark|"
 msgid "Toilets"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:447
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:448
 #, fuzzy
 #| msgid "National Capital"
 msgctxt "GeoDataPlacemark|"
 msgid "Town Hall"
 msgstr "Príomhchathair Náisiúnta"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:448
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:449
 #, fuzzy
 #| msgid "Car (fastest)"
 msgctxt "GeoDataPlacemark|"
 msgid "Waste Basket"
 msgstr "Carr (is tapúla)"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:449
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:450
 msgctxt "GeoDataPlacemark|"
 msgid "Drinking Water"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:450
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:451
 msgctxt "GeoDataPlacemark|"
 msgid "Graveyard"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:451
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:452
 #, fuzzy
 #| msgid "train station"
 msgctxt "GeoDataPlacemark|"
 msgid "Charging Station"
 msgstr "stáisiún traenach"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:452
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:453
 #, fuzzy
 #| msgid "Car (fastest)"
 msgctxt "GeoDataPlacemark|"
 msgid "Car Wash"
 msgstr "Carr (is tapúla)"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:453
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:454
 #, fuzzy
 #| msgid "Low Quality"
 msgctxt "GeoDataPlacemark|"
 msgid "Social Facility"
 msgstr "Cáilíocht Íseal"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:454
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:455
 #, fuzzy
 #| msgid "City"
 msgctxt "GeoDataPlacemark|"
 msgid "City Wall"
 msgstr "Cathair"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:455
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:456
 msgctxt "GeoDataPlacemark|"
 msgid "Gate"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:456
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:457
 #, fuzzy
 #| msgid "Airport"
 msgctxt "GeoDataPlacemark|"
 msgid "Lift Gate"
 msgstr "Aerfort"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:457
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:665
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:458
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:666
 #, fuzzy
 #| msgid "City"
 msgctxt "GeoDataPlacemark|"
 msgid "Wall"
 msgstr "Cathair"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:459
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:460
 msgctxt "GeoDataPlacemark|"
 msgid "Peak"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:460
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:461
 msgctxt "GeoDataPlacemark|"
 msgid "Tree"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:461
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:462
 msgctxt "GeoDataPlacemark|"
 msgid "Cave Entrance"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:462
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:463
 msgctxt "GeoDataPlacemark|"
 msgid "Beverages"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:463
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:464
 msgctxt "GeoDataPlacemark|"
 msgid "Hifi"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:464
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:465
 msgctxt "GeoDataPlacemark|"
 msgid "Supermarket"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:465
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:466
 msgctxt "GeoDataPlacemark|"
 msgid "Liquor Store"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:466
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:467
 msgctxt "GeoDataPlacemark|"
 msgid "Bakery"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:467
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:468
 msgctxt "GeoDataPlacemark|"
 msgid "Butcher"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:468
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:469
 #, fuzzy
 #| msgid "Show Home Location"
 msgctxt "GeoDataPlacemark|"
 msgid "Confectionery"
 msgstr "Taispeáin Ionad Baile"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:469
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:470
 msgctxt "GeoDataPlacemark|"
 msgid "Convenience Shop"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:470
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:471
 msgctxt "GeoDataPlacemark|"
 msgid "Greengrocer"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:471
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:472
 msgctxt "GeoDataPlacemark|"
 msgid "Seafood Shop"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:472
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:473
 msgctxt "GeoDataPlacemark|"
 msgid "Department Store"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:473
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:474
 msgctxt "GeoDataPlacemark|"
 msgid "Kiosk"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:474
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:475
 msgctxt "GeoDataPlacemark|"
 msgid "Bag Shop"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:475
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:476
 msgctxt "GeoDataPlacemark|"
 msgid "Clothes Shop"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:476
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:477
 msgctxt "GeoDataPlacemark|"
 msgid "Fashion Shop"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:477
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:478
 msgctxt "GeoDataPlacemark|"
 msgid "Jewelry Shop"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:478
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:479
 msgctxt "GeoDataPlacemark|"
 msgid "Shoe Shop"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:479
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:480
 msgctxt "GeoDataPlacemark|"
 msgid "Variety Store"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:480
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:481
 msgctxt "GeoDataPlacemark|"
 msgid "Beauty Services"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:481
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:482
 msgctxt "GeoDataPlacemark|"
 msgid "Chemist"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:482
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:483
 msgctxt "GeoDataPlacemark|"
 msgid "Cosmetics"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:483
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:484
 msgctxt "GeoDataPlacemark|"
 msgid "Hairdresser"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:484
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:485
 msgctxt "GeoDataPlacemark|"
 msgid "Optician"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:485
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:486
 msgctxt "GeoDataPlacemark|"
 msgid "Perfumery"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:486
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:488
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:487
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:489
 msgctxt "GeoDataPlacemark|"
 msgid "Hardware Store"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:487
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:488
 msgctxt "GeoDataPlacemark|"
 msgid "Florist"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:489
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:490
 msgctxt "GeoDataPlacemark|"
 msgid "Furniture Store"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:490
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:491
 msgctxt "GeoDataPlacemark|"
 msgid "Electronics Shop"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:491
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:492
 msgctxt "GeoDataPlacemark|"
 msgid "Mobile Phone Shop"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:492
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:493
 #, fuzzy
 #| msgid "Bicycle"
 msgctxt "GeoDataPlacemark|"
 msgid "Bicycle Shop"
 msgstr "Rothar"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:493
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:494
 #, fuzzy
 #| msgid "Car (fastest)"
 msgctxt "GeoDataPlacemark|"
 msgid "Car Dealer"
 msgstr "Carr (is tapúla)"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:494
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:495
 #, fuzzy
 #| msgid "Car (fastest)"
 msgctxt "GeoDataPlacemark|"
 msgid "Car Repair Shop"
 msgstr "Carr (is tapúla)"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:495
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:496
 #, fuzzy
 #| msgid "Car (fastest)"
 msgctxt "GeoDataPlacemark|"
 msgid "Car Parts"
 msgstr "Carr (is tapúla)"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:496
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:497
 #, fuzzy
 #| msgid "Motorway"
 msgctxt "GeoDataPlacemark|"
 msgid "Motorcycle Shop"
 msgstr "Mótarbhealach"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:497
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:498
 msgctxt "GeoDataPlacemark|"
 msgid "Outdoor Shop"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:498
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:499
 #, fuzzy
 #| msgid "Sports pitch"
 msgctxt "GeoDataPlacemark|"
 msgid "Sports Shop"
 msgstr "Páirc spóirt"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:499
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:500
 #, fuzzy
 #| msgid "Park"
 msgctxt "GeoDataPlacemark|"
 msgid "Printing Services"
 msgstr "Páirc"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:500
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:501
 msgctxt "GeoDataPlacemark|"
 msgid "Art Shop"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:501
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:502
 msgctxt "GeoDataPlacemark|"
 msgid "Musical Instrument Shop"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:502
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:503
 #, fuzzy
 #| msgid "Photos"
 msgctxt "GeoDataPlacemark|"
 msgid "Photo Shop"
 msgstr "Grianghraif"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:503
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:504
 #, fuzzy
 #| msgid "Bookmarks"
 msgctxt "GeoDataPlacemark|"
 msgid "Bookshop"
 msgstr "Leabharmharcanna"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:504
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:505
 msgctxt "GeoDataPlacemark|"
 msgid "Gift Shop"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:505
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:506
 #, fuzzy
 #| msgid "Location"
 msgctxt "GeoDataPlacemark|"
 msgid "Stationery"
 msgstr "Suíomh"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:506
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:507
 msgctxt "GeoDataPlacemark|"
 msgid "Laundry"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:507
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:508
 msgctxt "GeoDataPlacemark|"
 msgid "Pet Shop"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:508
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:509
 msgctxt "GeoDataPlacemark|"
 msgid "Toy Store"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:509
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:510
 msgctxt "GeoDataPlacemark|"
 msgid "Travel Agency"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:510
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:511
 msgctxt "GeoDataPlacemark|"
 msgid "Deli"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:511
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:512
 #, fuzzy
 #| msgid "Photos"
 msgctxt "GeoDataPlacemark|"
 msgid "Tobacco Shop"
 msgstr "Grianghraif"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:512
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:513
 #, fuzzy
 #| msgid "Car (fastest)"
 msgctxt "GeoDataPlacemark|"
 msgid "Tea Shop"
 msgstr "Carr (is tapúla)"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:513
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:514
 #, fuzzy
 #| msgid "Photos"
 msgctxt "GeoDataPlacemark|"
 msgid "Computer Shop"
 msgstr "Grianghraif"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:514
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:515
 #, fuzzy
 #| msgid "Sports pitch"
 msgctxt "GeoDataPlacemark|"
 msgid "Garden Centre"
 msgstr "Páirc spóirt"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:515
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:516
 msgctxt "GeoDataPlacemark|"
 msgid "Shop"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:516
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:517
 #, fuzzy
 #| msgid "Bridge"
 msgctxt "GeoDataPlacemark|"
 msgid "Bridge"
 msgstr "Droichead"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:517
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:518
 msgctxt "GeoDataPlacemark|"
 msgid "Lighthouse"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:518
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:519
 msgctxt "GeoDataPlacemark|"
 msgid "Pier"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:519
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:520
 #, fuzzy
 #| msgid "Crater"
 msgctxt "GeoDataPlacemark|"
 msgid "Water Tower"
 msgstr "Cráitéar"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:520
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:521
 msgctxt "GeoDataPlacemark|"
 msgid "Wind Mill"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:521
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:522
 #, fuzzy
 #| msgid "Communications Satellites"
 msgctxt "GeoDataPlacemark|"
 msgid "Communications Tower"
 msgstr "Satailítí Cumarsáide"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:522
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:523
 #, fuzzy
 #| msgid "Location"
 msgctxt "GeoDataPlacemark|"
 msgid "Tourist Attraction"
 msgstr "Suíomh"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:523
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:524
 msgctxt "GeoDataPlacemark|"
 msgid "Artwork"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:524
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:525
 msgctxt "GeoDataPlacemark|"
 msgid "Castle"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:525
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:526
 msgctxt "GeoDataPlacemark|"
 msgid "Cinema"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:526
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:527
 #, fuzzy
 #| msgid "International"
 msgctxt "GeoDataPlacemark|"
 msgid "Information"
 msgstr "Idirnáisiúnta"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:527
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:528
 msgctxt "GeoDataPlacemark|"
 msgid "Monument"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:528
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:529
 msgctxt "GeoDataPlacemark|"
 msgid "Museum"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:529
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:530
 msgctxt "GeoDataPlacemark|"
 msgid "Ruin"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:530
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:531
 #, fuzzy
 #| msgid "theatre"
 msgctxt "GeoDataPlacemark|"
 msgid "Theatre"
 msgstr "amharclann"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:531
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:532
 #, fuzzy
 #| msgid "&Theme"
 msgctxt "GeoDataPlacemark|"
 msgid "Theme Park"
 msgstr "&Téama"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:532
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:533
 #, fuzzy
 #| msgid "&Remove Measure Points"
 msgctxt "GeoDataPlacemark|"
 msgid "View Point"
 msgstr "&Bain Pointí Tomhais"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:533
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:534
 #, fuzzy
 #| msgid "Zoom &In"
 msgctxt "GeoDataPlacemark|"
 msgid "Zoo"
 msgstr "Súmáil &Isteach"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:534
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:535
 msgctxt "GeoDataPlacemark|"
 msgid "Alpine Hut"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:535
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:536
 msgctxt "GeoDataPlacemark|"
 msgid "Wilderness Hut"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:536
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:537
 msgctxt "GeoDataPlacemark|"
 msgid "Memorial"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:537
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:538
 msgctxt "GeoDataPlacemark|"
 msgid "Aerodrome"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:538
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:539
 msgctxt "GeoDataPlacemark|"
 msgid "Helipad"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:539
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:540
 #, fuzzy
 #| msgid "Airport"
 msgctxt "GeoDataPlacemark|"
 msgid "Airport Gate"
 msgstr "Aerfort"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:540
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:541
 #, fuzzy
 #| msgid "Airport runway, taxiway"
 msgctxt "GeoDataPlacemark|"
 msgid "Airport Runway"
 msgstr "Rúidbhealach aerfoirt"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:541
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:542
 #, fuzzy
 #| msgid "Airport"
 msgctxt "GeoDataPlacemark|"
 msgid "Airport Apron"
 msgstr "Aerfort"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:542
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:543
 #, fuzzy
 #| msgid "Airport runway, taxiway"
 msgctxt "GeoDataPlacemark|"
 msgid "Airport Taxiway"
 msgstr "Rúidbhealach aerfoirt"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:543
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:544
 #, fuzzy
 #| msgid "Airport apron, terminal"
 msgctxt "GeoDataPlacemark|"
 msgid "Airport Terminal"
 msgstr "Naprún aerfoirt, teirminéal"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:544
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:545
 #, fuzzy
 #| msgid "train station"
 msgctxt "GeoDataPlacemark|"
 msgid "Bus Station"
 msgstr "stáisiún traenach"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:545
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:546
 #, fuzzy
 #| msgid "train station"
 msgctxt "GeoDataPlacemark|"
 msgid "Bus Stop"
 msgstr "stáisiún traenach"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:546
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:547
 msgctxt "GeoDataPlacemark|"
 msgid "Car Sharing"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:547
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:548
 #, fuzzy
 #| msgid "train station"
 msgctxt "GeoDataPlacemark|"
 msgid "Gas Station"
 msgstr "stáisiún traenach"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:548
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:549
 #, fuzzy
 #| msgid "Park"
 msgctxt "GeoDataPlacemark|"
 msgid "Parking"
 msgstr "Páirc"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:549
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:550
 #, fuzzy
 #| msgid "Park"
 msgctxt "GeoDataPlacemark|"
 msgid "Parking Space"
 msgstr "Páirc"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:550
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:551
 msgctxt "GeoDataPlacemark|"
 msgid "Platform"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:551
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:552
 #, fuzzy
 #| msgid "Bicycle"
 msgctxt "GeoDataPlacemark|"
 msgid "Bicycle Rental"
 msgstr "Rothar"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:552
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:553
 #, fuzzy
 #| msgid "Car (fastest)"
 msgctxt "GeoDataPlacemark|"
 msgid "Car Rental"
 msgstr "Carr (is tapúla)"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:553
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:554
 msgctxt "GeoDataPlacemark|"
 msgid "Ski Rental"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:554
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:555
 msgctxt "GeoDataPlacemark|"
 msgid "Taxi Rank"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:555
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:556
 #, fuzzy
 #| msgid "train station"
 msgctxt "GeoDataPlacemark|"
 msgid "Train Station"
 msgstr "stáisiún traenach"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:556
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:557
 msgctxt "GeoDataPlacemark|"
 msgid "Tram Stop"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:557
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:558
 #, fuzzy
 #| msgid "Bicycle"
 msgctxt "GeoDataPlacemark|"
 msgid "Bicycle Parking"
 msgstr "Rothar"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:558
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:559
 #, fuzzy
 #| msgid "Bicycle"
 msgctxt "GeoDataPlacemark|"
 msgid "Motorcycle Parking"
 msgstr "Rothar"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:559
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:560
 msgctxt "GeoDataPlacemark|"
 msgid "Subway Entrance"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:560
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:561
 #, fuzzy
 #| msgid "Speedometer"
 msgctxt "GeoDataPlacemark|"
 msgid "Speed Camera"
 msgstr "Luasmhéadar"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:561
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:562
 msgctxt "GeoDataPlacemark|"
 msgid "Place Of Worship"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:562
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:563
 msgctxt "GeoDataPlacemark|"
 msgid "Bahai"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:563
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:564
 msgctxt "GeoDataPlacemark|"
 msgid "Buddhist"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:564
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:565
 msgctxt "GeoDataPlacemark|"
 msgid "Christian"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:565
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:566
 msgctxt "GeoDataPlacemark|"
 msgid "Muslim"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:566
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:567
 msgctxt "GeoDataPlacemark|"
 msgid "Hindu"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:567
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:568
 msgctxt "GeoDataPlacemark|"
 msgid "Jain"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:568
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:569
 msgctxt "GeoDataPlacemark|"
 msgid "Jewish"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:569
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:570
 msgctxt "GeoDataPlacemark|"
 msgid "Shinto"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:570
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:571
 msgctxt "GeoDataPlacemark|"
 msgid "Sikh"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:571
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:572
 msgctxt "GeoDataPlacemark|"
 msgid "Taoist"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:572
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:573
 #, fuzzy
 #| msgid "Golf course"
 msgctxt "GeoDataPlacemark|"
@@ -7918,521 +7918,521 @@ msgid "Golf Course"
 msgstr "Machaire gailf"
 
 # "maria" is plural "mare".   Here use plural "muir", so "mara" is correct!
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:573
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:574
 #, fuzzy
 #| msgid "Maria"
 msgctxt "GeoDataPlacemark|"
 msgid "Marina"
 msgstr "Mara"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:574
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:575
 #, fuzzy
 #| msgid "Park"
 msgctxt "GeoDataPlacemark|"
 msgid "Park"
 msgstr "Páirc"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:575
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:576
 msgctxt "GeoDataPlacemark|"
 msgid "Playground"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:576
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:577
 msgctxt "GeoDataPlacemark|"
 msgid "Pitch"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:577
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:578
 #, fuzzy
 #| msgid "Sports pitch"
 msgctxt "GeoDataPlacemark|"
 msgid "Sports Centre"
 msgstr "Páirc spóirt"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:578
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:579
 msgctxt "GeoDataPlacemark|"
 msgid "Stadium"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:580
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:581
 msgctxt "GeoDataPlacemark|"
 msgid "Swimming Pool"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:581
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:582
 #, fuzzy
 #| msgid "Golf course"
 msgctxt "GeoDataPlacemark|"
 msgid "Miniature Golf Course"
 msgstr "Machaire gailf"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:582
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:583
 msgctxt "GeoDataPlacemark|"
 msgid "Allotments"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:583
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:584
 msgctxt "GeoDataPlacemark|"
 msgid "Basin"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:584
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:585
 #, fuzzy
 #| msgid "Speedometer"
 msgctxt "GeoDataPlacemark|"
 msgid "Cemetery"
 msgstr "Luasmhéadar"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:585
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:586
 #, fuzzy
 #| msgid "Commercial Area"
 msgctxt "GeoDataPlacemark|"
 msgid "Commercial"
 msgstr "Limistéar Tráchtála"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:586
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:587
 #, fuzzy
 #| msgid "Show Home Location"
 msgctxt "GeoDataPlacemark|"
 msgid "Construction"
 msgstr "Taispeáin Ionad Baile"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:587
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:588
 #, fuzzy
 #| msgid "Farm"
 msgctxt "GeoDataPlacemark|"
 msgid "Farmland"
 msgstr "Feirm"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:588
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:589
 #, fuzzy
 #| msgid "Farm"
 msgctxt "GeoDataPlacemark|"
 msgid "Farmyard"
 msgstr "Feirm"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:589
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:590
 msgctxt "GeoDataPlacemark|"
 msgid "Garages"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:590
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:591
 msgctxt "GeoDataPlacemark|"
 msgid "Grass"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:591
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:592
 #, fuzzy
 #| msgid "Industrial Area"
 msgctxt "GeoDataPlacemark|"
 msgid "Industrial"
 msgstr "Limistéar Tionsclaíoch"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:592
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:593
 #, fuzzy
 #| msgid "Land"
 msgctxt "GeoDataPlacemark|"
 msgid "Landfill"
 msgstr "Talamh"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:593
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:594
 #, fuzzy
 #| msgid "Shadow"
 msgctxt "GeoDataPlacemark|"
 msgid "Meadow"
 msgstr "Scáth"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:594
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:595
 #, fuzzy
 #| msgid "Military area"
 msgctxt "GeoDataPlacemark|"
 msgid "Military"
 msgstr "Limistéar míleata"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:595
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:596
 msgctxt "GeoDataPlacemark|"
 msgid "Quarry"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:596
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:597
 #, fuzzy
 #| msgid "Railway"
 msgctxt "GeoDataPlacemark|"
 msgid "Railway"
 msgstr "Bóthar Iarainn"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:597
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:598
 #, fuzzy
 #| msgid "Lake, reservoir"
 msgctxt "GeoDataPlacemark|"
 msgid "Reservoir"
 msgstr "Loch, taiscumar"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:598
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:599
 #, fuzzy
 #| msgid "Residential Area"
 msgctxt "GeoDataPlacemark|"
 msgid "Residential"
 msgstr "Limistéar Cónaithe"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:599
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:600
 #, fuzzy
 #| msgid "Retail area"
 msgctxt "GeoDataPlacemark|"
 msgid "Retail"
 msgstr "Limistéar miondíola"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:600
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:601
 msgctxt "GeoDataPlacemark|"
 msgid "Orchard"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:601
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:602
 msgctxt "GeoDataPlacemark|"
 msgid "Vineyard"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:602
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:603
 #, fuzzy
 #| msgid "Railway"
 msgctxt "GeoDataPlacemark|"
 msgid "Rail"
 msgstr "Bóthar Iarainn"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:603
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:604
 msgctxt "GeoDataPlacemark|"
 msgid "Narrow Gauge"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:604
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:605
 msgctxt "GeoDataPlacemark|"
 msgid "Tram"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:605
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:606
 #, fuzzy
 #| msgid "Night map"
 msgctxt "GeoDataPlacemark|"
 msgid "Light Rail"
 msgstr "Mapa oíche"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:606
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:607
 msgctxt "GeoDataPlacemark|"
 msgid "Abandoned Railway"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:607
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:608
 #, fuzzy
 #| msgid "Subway"
 msgctxt "GeoDataPlacemark|"
 msgid "Subway"
 msgstr "Fobhealach"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:608
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:609
 msgctxt "GeoDataPlacemark|"
 msgid "Preserved Railway"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:609
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:610
 msgctxt "GeoDataPlacemark|"
 msgid "Miniature Railway"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:610
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:611
 #, fuzzy
 #| msgid "train station"
 msgctxt "GeoDataPlacemark|"
 msgid "Railway Construction"
 msgstr "stáisiún traenach"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:611
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:612
 msgctxt "GeoDataPlacemark|"
 msgid "Monorail"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:612
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:613
 msgctxt "GeoDataPlacemark|"
 msgid "Funicular Railway"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:613
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:614
 #, fuzzy
 #| msgid "Crater"
 msgctxt "GeoDataPlacemark|"
 msgid "Power Tower"
 msgstr "Cráitéar"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:614
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:615
 #, fuzzy
 #| msgid "train station"
 msgctxt "GeoDataPlacemark|"
 msgid "Aerialway Station"
 msgstr "stáisiún traenach"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:615
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:616
 msgctxt ""
 "GeoDataPlacemark|A pylon supporting the aerialway cable e.g. on a ski lift"
 msgid "Pylon"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:616
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:617
 msgctxt "GeoDataPlacemark|"
 msgid "Cable Car"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:617
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:618
 msgctxt "GeoDataPlacemark|"
 msgid "Gondola"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:618
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:619
 msgctxt "GeoDataPlacemark|"
 msgid "Chair Lift"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:619
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:620
 msgctxt "GeoDataPlacemark|"
 msgid "Mixed Lift"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:620
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:621
 msgctxt "GeoDataPlacemark|"
 msgid "Drag Lift"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:621
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:622
 msgctxt "GeoDataPlacemark|"
 msgid "T-Bar"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:622
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:623
 msgctxt "GeoDataPlacemark|"
 msgid "J-Bar"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:623
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:624
 #, fuzzy
 #| msgid "Boundaries"
 msgctxt "GeoDataPlacemark|"
 msgid "Platter"
 msgstr "Teorainneacha"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:624
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:625
 #, fuzzy
 #| msgid "Crater"
 msgctxt "GeoDataPlacemark|"
 msgid "Rope Tow"
 msgstr "Cráitéar"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:625
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:626
 msgctxt "GeoDataPlacemark|"
 msgid "Magic Carpet"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:626
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:627
 msgctxt "GeoDataPlacemark|"
 msgid "Zip Line"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:627
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:628
 msgctxt "GeoDataPlacemark|"
 msgid "Goods"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:628
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:629
 msgctxt "GeoDataPlacemark|"
 msgid "Downhill Piste"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:629
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:630
 msgctxt "GeoDataPlacemark|"
 msgid "Nordic Piste"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:630
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:631
 msgctxt "GeoDataPlacemark|"
 msgid "Skitour"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:631
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:632
 msgctxt "GeoDataPlacemark|"
 msgid "Sled Piste"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:632
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:633
 msgctxt "GeoDataPlacemark|"
 msgid "Winter Hike"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:633
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:634
 msgctxt "GeoDataPlacemark|"
 msgid "Sleigh Piste"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:634
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:635
 msgctxt "GeoDataPlacemark|"
 msgid "Ice Skate"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:635
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:636
 #, fuzzy
 #| msgid "Park"
 msgctxt "GeoDataPlacemark|"
 msgid "Snow Park"
 msgstr "Páirc"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:636
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:637
 msgctxt "GeoDataPlacemark|"
 msgid "Ski Playground"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:637
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:638
 msgctxt "GeoDataPlacemark|"
 msgid "Ski Jump"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:638
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:639
 msgctxt "GeoDataPlacemark|"
 msgid "Admin Boundary (Level 1)"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:639
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:640
 msgctxt "GeoDataPlacemark|"
 msgid "Admin Boundary (Level 2)"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:640
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:641
 msgctxt "GeoDataPlacemark|"
 msgid "Admin Boundary (Level 3)"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:641
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:642
 msgctxt "GeoDataPlacemark|"
 msgid "Admin Boundary (Level 4)"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:642
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:643
 msgctxt "GeoDataPlacemark|"
 msgid "Admin Boundary (Level 5)"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:643
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:644
 msgctxt "GeoDataPlacemark|"
 msgid "Admin Boundary (Level 6)"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:644
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:645
 msgctxt "GeoDataPlacemark|"
 msgid "Admin Boundary (Level 7)"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:645
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:646
 msgctxt "GeoDataPlacemark|"
 msgid "Admin Boundary (Level 8)"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:646
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:647
 msgctxt "GeoDataPlacemark|"
 msgid "Admin Boundary (Level 9)"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:647
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:648
 msgctxt "GeoDataPlacemark|"
 msgid "Admin Boundary (Level 10)"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:648
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:649
 msgctxt "GeoDataPlacemark|"
 msgid "Admin Boundary (Level 11)"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:649
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:650
 #, fuzzy
 #| msgid "Boundaries"
 msgctxt "GeoDataPlacemark|"
 msgid "Boundary (Maritime)"
 msgstr "Teorainneacha"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:650
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:651
 #, fuzzy
 #| msgid "Land"
 msgctxt "GeoDataPlacemark|"
 msgid "Land Mass"
 msgstr "Talamh"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:651
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:652
 msgctxt "GeoDataPlacemark|"
 msgid "Urban Area"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:652
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:653
 #, fuzzy
 #| msgid "International"
 msgctxt "GeoDataPlacemark|"
 msgid "International Date Line"
 msgstr "Idirnáisiúnta"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:653
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:654
 msgctxt "GeoDataPlacemark|"
 msgid "Bathymetry"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:654
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:655
 msgctxt "GeoDataPlacemark|"
 msgid "Canal"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:655
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:656
 #, fuzzy
 #| msgid "Terrain"
 msgctxt "GeoDataPlacemark|"
 msgid "Drain"
 msgstr "Tír-raon"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:656
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:657
 msgctxt "GeoDataPlacemark|"
 msgid "Ditch"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:657
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:658
 msgctxt "GeoDataPlacemark|"
 msgid "Stream"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:658
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:659
 #, fuzzy
 #| msgid "River"
 msgctxt "GeoDataPlacemark|"
 msgid "River"
 msgstr "Abhainn"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:659
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:660
 msgctxt "GeoDataPlacemark|"
 msgid "Weir"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:660
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:661
 #: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:662
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:663
 #, fuzzy
 #| msgid "Crosshairs"
 msgctxt "GeoDataPlacemark|"
 msgid "Crosswalk"
 msgstr "Crosribí"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:663
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:664
 #, fuzzy
 #| msgid "train station"
 msgctxt "GeoDataPlacemark|"
 msgid "Railway Crossing"
 msgstr "stáisiún traenach"
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:664
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:665
 msgctxt "GeoDataPlacemark|"
 msgid "Door"
 msgstr ""
 
-#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:666
+#: src/lib/marble/geodata/data/GeoDataPlacemark.cpp:667
 msgctxt "GeoDataPlacemark|"
 msgid "Room"
 msgstr ""
@@ -8911,21 +8911,21 @@ msgctxt "QObject|"
 msgid "Name"
 msgstr "Ainm"
 
-#: src/lib/marble/MapViewWidget.cpp:112
+#: src/lib/marble/MapViewWidget.cpp:113
 #, fuzzy
 #| msgid "File View"
 msgctxt "Marble::MapViewWidget|"
 msgid "Globe View"
 msgstr "Amharc Comhaid"
 
-#: src/lib/marble/MapViewWidget.cpp:117
+#: src/lib/marble/MapViewWidget.cpp:118
 #, fuzzy
 #| msgid "Geographic Pole"
 msgctxt "Marble::MapViewWidget|"
 msgid "Spherical view"
 msgstr "Mol Geografach"
 
-#: src/lib/marble/MapViewWidget.cpp:124 src/lib/marble/MapViewWidget.cpp:132
+#: src/lib/marble/MapViewWidget.cpp:125 src/lib/marble/MapViewWidget.cpp:133
 #, fuzzy
 #| msgctxt "the planet"
 #| msgid "Mercury"
@@ -8933,73 +8933,73 @@ msgctxt "Marble::MapViewWidget|"
 msgid "Mercator View"
 msgstr "Mearcair"
 
-#: src/lib/marble/MapViewWidget.cpp:138
+#: src/lib/marble/MapViewWidget.cpp:139
 #, fuzzy
 #| msgid "File View"
 msgctxt "Marble::MapViewWidget|"
 msgid "Flat View"
 msgstr "Amharc Comhaid"
 
-#: src/lib/marble/MapViewWidget.cpp:144
+#: src/lib/marble/MapViewWidget.cpp:145
 msgctxt "Marble::MapViewWidget|"
 msgid "Gnomonic view"
 msgstr ""
 
-#: src/lib/marble/MapViewWidget.cpp:150
+#: src/lib/marble/MapViewWidget.cpp:151
 #, fuzzy
 #| msgid "Geographic Pole"
 msgctxt "Marble::MapViewWidget|"
 msgid "Stereographic view"
 msgstr "Mol Geografach"
 
-#: src/lib/marble/MapViewWidget.cpp:156
+#: src/lib/marble/MapViewWidget.cpp:157
 msgctxt "Marble::MapViewWidget|"
 msgid "Lambert Azimuthal Equal-Area view"
 msgstr ""
 
-#: src/lib/marble/MapViewWidget.cpp:162
+#: src/lib/marble/MapViewWidget.cpp:163
 msgctxt "Marble::MapViewWidget|"
 msgid "Azimuthal Equidistant view"
 msgstr ""
 
-#: src/lib/marble/MapViewWidget.cpp:168
+#: src/lib/marble/MapViewWidget.cpp:169
 msgctxt "Marble::MapViewWidget|"
 msgid "Perspective Globe view"
 msgstr ""
 
-#: src/lib/marble/MapViewWidget.cpp:650
+#: src/lib/marble/MapViewWidget.cpp:652
 msgctxt "Marble::MapViewWidget|"
 msgid "&Show Large Icons"
 msgstr ""
 
-#: src/lib/marble/MapViewWidget.cpp:653
+#: src/lib/marble/MapViewWidget.cpp:655
 #, fuzzy
 #| msgid "&Favorite"
 msgctxt "Marble::MapViewWidget|"
 msgid "&Favorite"
 msgstr "Mo Rogha &Fillteán"
 
-#: src/lib/marble/MapViewWidget.cpp:658
+#: src/lib/marble/MapViewWidget.cpp:660
 #, fuzzy
 #| msgid "&Create a New Map..."
 msgctxt "Marble::MapViewWidget|"
 msgid "&Create a New Map..."
 msgstr "&Cruthaigh Mapa Nua..."
 
-#: src/lib/marble/MapViewWidget.cpp:660
+#: src/lib/marble/MapViewWidget.cpp:662
 msgctxt "Marble::MapViewWidget|"
 msgid "&Delete Map Theme"
 msgstr ""
 
 # program name
-#: src/lib/marble/MapViewWidget.cpp:668
+#: src/lib/marble/MapViewWidget.cpp:670
 #, fuzzy
 #| msgid "Marble"
 msgctxt "Marble::MapViewWidget|"
 msgid "Marble"
 msgstr "Marble"
 
-#: src/lib/marble/MapViewWidget.cpp:669
+#: src/lib/marble/MapViewWidget.cpp:671
 #, qt-format
 msgctxt "Marble::MapViewWidget|"
 msgid "Are you sure that you want to delete \"%1\"?"
@@ -11289,7 +11289,7 @@ msgctxt "Marble|"
 msgid "not available"
 msgstr "Níl cur síos ar fáil."
 
-#: src/lib/marble/MarbleLineEdit.cpp:53
+#: src/lib/marble/MarbleLineEdit.cpp:54
 #, fuzzy
 #| msgid "Clear"
 msgctxt "QObject|"
@@ -13214,210 +13214,210 @@ msgctxt "Marble::RemoveItemEditWidget|"
 msgid "Choose item:"
 msgstr "Nuashonraigh"
 
-#: src/lib/marble/RouteSimulationPositionProviderPlugin.cpp:27
+#: src/lib/marble/RouteSimulationPositionProviderPlugin.cpp:28
 msgctxt "Marble::RouteSimulationPositionProviderPlugin|"
 msgid "Current Route Position Provider Plugin"
 msgstr ""
 
-#: src/lib/marble/RouteSimulationPositionProviderPlugin.cpp:37
+#: src/lib/marble/RouteSimulationPositionProviderPlugin.cpp:38
 #, fuzzy
 #| msgid "Current Location"
 msgctxt "Marble::RouteSimulationPositionProviderPlugin|"
 msgid "Current Route"
 msgstr "Suíomh Reatha"
 
-#: src/lib/marble/RouteSimulationPositionProviderPlugin.cpp:47
+#: src/lib/marble/RouteSimulationPositionProviderPlugin.cpp:48
 msgctxt "Marble::RouteSimulationPositionProviderPlugin|"
 msgid "Simulates traveling along the current route."
 msgstr ""
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:249
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:250
 msgctxt "QObject|"
 msgid "Enter the roundabout."
 msgstr ""
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:257
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:258
 msgctxt "QObject|"
 msgid "Take the exit."
 msgstr ""
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:259
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:260
 #, qt-format
 msgctxt "QObject|"
 msgid "Take the exit towards %1."
 msgstr ""
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:263
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:264
 msgctxt "QObject|"
 msgid "Take the ramp."
 msgstr ""
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:265
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:266
 #, qt-format
 msgctxt "QObject|"
 msgid "Take the ramp towards %1."
 msgstr ""
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:321
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:322
 #, qt-format
 msgctxt "QObject|"
 msgid "Follow the road for %1 %2."
 msgstr ""
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:375
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:376
 #, qt-format
 msgctxt "QObject|"
 msgid "Take the %1. exit in the roundabout."
 msgstr ""
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:377
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:378
 #, qt-format
 msgctxt "QObject|"
 msgid "Take the %1. exit in the roundabout into %2."
 msgstr ""
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:385
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:386
 #, fuzzy
 #| msgid "Continent"
 msgctxt "QObject|"
 msgid "Continue."
 msgstr "Mór-Roinn"
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:387
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:388
 msgctxt "QObject|"
 msgid "Merge."
 msgstr ""
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:389
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:390
 msgctxt "QObject|"
 msgid "Turn around."
 msgstr ""
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:391
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:392
 msgctxt "QObject|"
 msgid "Turn sharp left."
 msgstr ""
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:393
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:394
 msgctxt "QObject|"
 msgid "Turn left."
 msgstr ""
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:395
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:396
 msgctxt "QObject|"
 msgid "Keep slightly left."
 msgstr ""
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:397
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:398
 msgctxt "QObject|"
 msgid "Go straight ahead."
 msgstr ""
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:399
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:400
 msgctxt "QObject|"
 msgid "Keep slightly right."
 msgstr ""
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:401
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:402
 msgctxt "QObject|"
 msgid "Turn right."
 msgstr ""
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:403
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:404
 msgctxt "QObject|"
 msgid "Turn sharp right."
 msgstr ""
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:405
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:406
 msgctxt "QObject|"
 msgid "Exit the roundabout."
 msgstr ""
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:413
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:414
 msgctxt "QObject|"
 msgid "Take the exit to the left."
 msgstr ""
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:415
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:416
 msgctxt "QObject|"
 msgid "Take the exit to the right."
 msgstr ""
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:420
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:421
 #, fuzzy, qt-format
 #| msgid "Continent"
 msgctxt "QObject|"
 msgid "Continue onto %1."
 msgstr "Mór-Roinn"
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:422
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:423
 #, qt-format
 msgctxt "QObject|"
 msgid "Merge onto %1."
 msgstr ""
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:424
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:425
 #, qt-format
 msgctxt "QObject|"
 msgid "Turn around onto %1."
 msgstr ""
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:426
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:427
 #, qt-format
 msgctxt "QObject|"
 msgid "Turn sharp left on %1."
 msgstr ""
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:428
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:429
 #, qt-format
 msgctxt "QObject|"
 msgid "Turn left into %1."
 msgstr ""
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:430
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:431
 #, qt-format
 msgctxt "QObject|"
 msgid "Keep slightly left on %1."
 msgstr ""
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:432
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:433
 #, fuzzy, qt-format
 #| msgid "Continent"
 msgctxt "QObject|"
 msgid "Continue on %1."
 msgstr "Mór-Roinn"
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:434
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:435
 #, qt-format
 msgctxt "QObject|"
 msgid "Keep slightly right on %1."
 msgstr ""
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:436
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:437
 #, qt-format
 msgctxt "QObject|"
 msgid "Turn right into %1."
 msgstr ""
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:438
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:439
 #, qt-format
 msgctxt "QObject|"
 msgid "Turn sharp right into %1."
 msgstr ""
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:440
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:441
 #, qt-format
 msgctxt "QObject|"
 msgid "Exit the roundabout into %2."
 msgstr ""
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:448
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:449
 #, qt-format
 msgctxt "QObject|"
 msgid "Take the exit to the left onto %1."
 msgstr ""
 
-#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:450
+#: src/lib/marble/routing/instructions/RoutingInstruction.cpp:451
 #, qt-format
 msgctxt "QObject|"
 msgid "Take the exit to the right onto %1."
@@ -14592,37 +14592,37 @@ msgctxt "Marble::GeoCluePositionProviderPlugin|"
 msgid "Reports the position via the GeoClue Location Framework."
 msgstr ""
 
-#: src/plugins/positionprovider/gpsd/GpsdConnection.cpp:64
+#: src/plugins/positionprovider/gpsd/GpsdConnection.cpp:65
 msgctxt "Marble::GpsdConnection|"
 msgid "Internal gpsd error (cannot get service entry)"
 msgstr ""
 
-#: src/plugins/positionprovider/gpsd/GpsdConnection.cpp:67
+#: src/plugins/positionprovider/gpsd/GpsdConnection.cpp:68
 msgctxt "Marble::GpsdConnection|"
 msgid "Internal gpsd error (cannot get host entry)"
 msgstr ""
 
-#: src/plugins/positionprovider/gpsd/GpsdConnection.cpp:70
+#: src/plugins/positionprovider/gpsd/GpsdConnection.cpp:71
 msgctxt "Marble::GpsdConnection|"
 msgid "Internal gpsd error (cannot get protocol entry)"
 msgstr ""
 
-#: src/plugins/positionprovider/gpsd/GpsdConnection.cpp:73
+#: src/plugins/positionprovider/gpsd/GpsdConnection.cpp:74
 msgctxt "Marble::GpsdConnection|"
 msgid "Internal gpsd error (unable to create socket)"
 msgstr ""
 
-#: src/plugins/positionprovider/gpsd/GpsdConnection.cpp:76
+#: src/plugins/positionprovider/gpsd/GpsdConnection.cpp:77
 msgctxt "Marble::GpsdConnection|"
 msgid "Internal gpsd error (unable to set socket option)"
 msgstr ""
 
-#: src/plugins/positionprovider/gpsd/GpsdConnection.cpp:79
+#: src/plugins/positionprovider/gpsd/GpsdConnection.cpp:80
 msgctxt "Marble::GpsdConnection|"
 msgid "No GPS device found by gpsd."
 msgstr ""
 
-#: src/plugins/positionprovider/gpsd/GpsdConnection.cpp:82
+#: src/plugins/positionprovider/gpsd/GpsdConnection.cpp:83
 msgctxt "Marble::GpsdConnection|"
 msgid "Unknown error when opening gpsd connection"
 msgstr ""
@@ -14672,65 +14672,65 @@ msgctxt "Marble::WlocatePositionProviderPlugin|"
 msgid "Reports the current position based on nearby WLAN access points"
 msgstr ""
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:125
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:126
 #, fuzzy
 #| msgid "Location"
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Annotation"
 msgstr "Suíomh"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:130
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:131
 #, fuzzy
 #| msgid "Location"
 msgctxt "Marble::AnnotatePlugin|"
 msgid "&Annotation"
 msgstr "Suíomh"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:140
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:141
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Draws annotations on maps with placemarks or polygons."
 msgstr ""
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:184
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:185
 #, fuzzy
 #| msgid "Location"
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Annotations"
 msgstr "Suíomh"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:307
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:308
 #, fuzzy
 #| msgid "&Remove Measure Points"
 msgctxt "QObject|"
 msgid "Remove current item"
 msgstr "&Bain Pointí Tomhais"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:308
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:309
 msgctxt "QObject|"
 msgid "Are you sure you want to remove the current item?"
 msgstr ""
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:345
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:346
 #, fuzzy
 #| msgid "Location"
 msgctxt "QObject|"
 msgid "Clear all annotations"
 msgstr "Suíomh"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:346
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:347
 msgctxt "QObject|"
 msgid "Are you sure you want to clear all annotations?"
 msgstr ""
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:366
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:949
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:367
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:950
 #, fuzzy
 #| msgid "Location"
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Save Annotation File"
 msgstr "Suíomh"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:368
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:369
 #, fuzzy
 #| msgid "All Supported Files (*.kml);;KML file (*.kml)"
 msgctxt "Marble::AnnotatePlugin|"
@@ -14739,14 +14739,14 @@ msgid ""
 "osm)"
 msgstr "Gach Comhad a dTacaítear Leis (*.kml);;Comhad KML (*.kml)"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:395
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:396
 #, fuzzy
 #| msgid "Current Location"
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Open Annotation File"
 msgstr "Suíomh Reatha"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:397
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:398
 #, fuzzy
 #| msgid "All Supported Files (*.kml);;KML file (*.kml)"
 msgctxt "Marble::AnnotatePlugin|"
@@ -14755,207 +14755,207 @@ msgid ""
 "Map file (*.osm)"
 msgstr "Gach Comhad a dTacaítear Leis (*.kml);;Comhad KML (*.kml)"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:780
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:785
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:790
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1459
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1548
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:781
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:786
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:791
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1460
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1549
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Operation not permitted"
 msgstr ""
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:781
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:782
 msgctxt "Marble::AnnotatePlugin|"
 msgid ""
 "Cannot merge a node from polygon's outer boundary with a node from one of "
 "its inner boundaries."
 msgstr ""
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:786
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:787
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Cannot merge two nodes from two different inner boundaries."
 msgstr ""
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:791
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:792
 msgctxt "Marble::AnnotatePlugin|"
 msgid ""
 "Cannot merge the selected nodes. Most probably this would make the polygon's "
 "outer boundary not contain all its inner boundary nodes."
 msgstr ""
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:898
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1001
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:899
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1002
 #, fuzzy
 #| msgid "&Remove Measure Points"
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Select Item"
 msgstr "&Bain Pointí Tomhais"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:904
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:905
 #, fuzzy
 #| msgid "&Remove Measure Points"
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Add Polygon"
 msgstr "&Bain Pointí Tomhais"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:909
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:910
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Add Polygon Hole"
 msgstr ""
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:916
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:917
 #, fuzzy
 #| msgid "Delete"
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Add Nodes"
 msgstr "Scrios"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:923
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:924
 #, fuzzy
 #| msgid "&Remove Measure Points"
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Add Placemark"
 msgstr "&Bain Pointí Tomhais"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:928
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:929
 #, fuzzy
 #| msgid "Path"
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Add Path"
 msgstr "Conair"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:933
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:934
 #, fuzzy
 #| msgid "&Remove Measure Points"
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Add Ground Overlay"
 msgstr "&Bain Pointí Tomhais"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:938
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:939
 #, fuzzy
 #| msgid "&Remove Measure Points"
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Remove Item"
 msgstr "&Bain Pointí Tomhais"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:944
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:945
 #, fuzzy
 #| msgid "Location"
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Load Annotation File"
 msgstr "Suíomh"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:954
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:955
 #, fuzzy
 #| msgid "Location"
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Clear all Annotations"
 msgstr "Suíomh"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:957
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:958
 #, fuzzy
 #| msgid "OpenStreetMap Data"
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Download OpenStreetMap Data"
 msgstr "Sonraí OpenStreetMap"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:960
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:961
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Download OpenStreetMap data of the visible region"
 msgstr ""
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1041
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1042
 #, fuzzy
 #| msgid "Car (fastest)"
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Paste"
 msgstr "Carr (is tapúla)"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1060
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1319
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1570
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1061
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1320
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1571
 #, fuzzy
 #| msgid "Custom"
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Cut"
 msgstr "Saincheaptha"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1064
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1323
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1574
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1065
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1324
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1575
 #, fuzzy
 #| msgid "&Copy Map"
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Copy"
 msgstr "&Cóipeáil mapa"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1068
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1190
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1327
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1578
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1069
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1191
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1328
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1579
 #, fuzzy
 #| msgid "&Remove Measure Points"
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Remove"
 msgstr "&Bain Pointí Tomhais"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1074
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1184
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1333
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1584
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1075
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1185
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1334
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1585
 #, fuzzy
 #| msgid "New Profile"
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Properties"
 msgstr "Próifíl Nua"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1209
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1210
 #, fuzzy
 #| msgid "&Remove Measure Points"
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Untitled Ground Overlay"
 msgstr "&Bain Pointí Tomhais"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1309
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1560
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1310
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1561
 #, fuzzy
 #| msgid "&Remove Measure Points"
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Deselect All Nodes"
 msgstr "&Bain Pointí Tomhais"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1313
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1564
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1314
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1565
 #, fuzzy
 #| msgid "&Remove Measure Points"
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Delete All Selected Nodes"
 msgstr "&Bain Pointí Tomhais"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1460
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1549
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1461
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1550
 msgctxt "Marble::AnnotatePlugin|"
 msgid ""
 "Cannot delete one of the selected nodes. Most probably this would make the "
 "polygon's outer boundary not contain all its inner boundary nodes."
 msgstr ""
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1491
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1512
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1492
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1513
 #, fuzzy
 #| msgid "Delete"
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Select Node"
 msgstr "Scrios"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1495
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1496
 #, fuzzy
 #| msgid "Delete"
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Delete Node"
 msgstr "Scrios"
 
-#: src/plugins/render/annotate/AnnotatePlugin.cpp:1512
+#: src/plugins/render/annotate/AnnotatePlugin.cpp:1513
 #, fuzzy
 #| msgid "Delete"
 msgctxt "Marble::AnnotatePlugin|"
@@ -15945,33 +15945,33 @@ msgctxt "ElevationProfileConfigWidget|"
 msgid "Zoom to viewport"
 msgstr ""
 
-#: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:30
+#: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:32
 #, fuzzy
 #| msgid "&Configure..."
 msgctxt "Marble::ElevationProfileContextMenu|"
 msgid "&Configure..."
 msgstr "&Cumraigh..."
 
-#: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:36
+#: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:38
 msgctxt "Marble::ElevationProfileContextMenu|"
 msgid "&Zoom to viewport"
 msgstr ""
 
-#: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:67
+#: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:69
 #, fuzzy
 #| msgid "Routing"
 msgctxt "Marble::ElevationProfileContextMenu|"
 msgid "Route"
 msgstr "Ródú"
 
-#: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:79
+#: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:81
 #, fuzzy
 #| msgid "Tracking"
 msgctxt "Marble::ElevationProfileContextMenu|"
 msgid "Track: "
 msgstr "Rianú"
 
-#: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:92
+#: src/plugins/render/elevationprofilefloatitem/ElevationProfileContextMenu.cpp:94
 msgctxt "Marble::ElevationProfileContextMenu|"
 msgid "Create a route or load a track from file to view its elevation profile."
 msgstr ""
@@ -19618,282 +19618,282 @@ msgctxt "Marble::LatLonPlugin|"
 msgid "Direct input of geographic coordinates"
 msgstr "Comhordanáidí Geografacha"
 
-#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:62
+#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:63
 msgctxt "QObject|"
 msgid "pois"
 msgstr ""
 
-#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:64
+#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:65
 msgctxt "QObject|"
 msgid "camping"
 msgstr ""
 
-#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:66
+#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:67
 msgctxt "QObject|"
 msgid "hostel"
 msgstr ""
 
-#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:68
+#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:69
 msgctxt "QObject|"
 msgid "hotel"
 msgstr ""
 
-#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:70
+#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:71
 msgctxt "QObject|"
 msgid "motel"
 msgstr ""
 
-#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:72
+#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:73
 msgctxt "QObject|"
 msgid "youth hostel"
 msgstr ""
 
-#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:74
+#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:75
 msgctxt "QObject|"
 msgid "library"
 msgstr ""
 
-#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:76
+#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:77
 msgctxt "QObject|"
 msgid "college"
 msgstr ""
 
-#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:78
+#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:79
 #, fuzzy
 #| msgid "school"
 msgctxt "QObject|"
 msgid "school"
 msgstr "scoil"
 
-#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:80
+#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:81
 #, fuzzy
 #| msgid "university"
 msgctxt "QObject|"
 msgid "university"
 msgstr "ollscoil"
 
-#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:82
+#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:83
 #, fuzzy
 #| msgid "bar"
 msgctxt "QObject|"
 msgid "bar"
 msgstr "beár"
 
-#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:84
+#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:85
 msgctxt "QObject|"
 msgid "biergarten"
 msgstr ""
 
-#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:86
+#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:87
 msgctxt "QObject|"
 msgid "cafe"
 msgstr ""
 
-#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:88
+#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:89
 msgctxt "QObject|"
 msgid "fast food"
 msgstr ""
 
-#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:90
+#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:91
 msgctxt "QObject|"
 msgid "pub"
 msgstr ""
 
-#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:92
+#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:93
 msgctxt "QObject|"
 msgid "restaurant"
 msgstr ""
 
-#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:94
+#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:95
 msgctxt "QObject|"
 msgid "doctor"
 msgstr ""
 
-#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:96
+#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:97
 #, fuzzy
 #| msgid "Capital"
 msgctxt "QObject|"
 msgid "hospital"
 msgstr "Príomhchathair"
 
-#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:98
+#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:99
 msgctxt "QObject|"
 msgid "pharmacy"
 msgstr ""
 
-#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:100
+#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:101
 msgctxt "QObject|"
 msgid "bank"
 msgstr ""
 
-#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:102
+#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:103
 msgctxt "QObject|"
 msgid "beverages"
 msgstr ""
 
-#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:104
+#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:105
 msgctxt "QObject|"
 msgid "hifi"
 msgstr ""
 
-#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:106
+#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:107
 msgctxt "QObject|"
 msgid "supermarket"
 msgstr ""
 
-#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:108
+#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:109
 #, fuzzy
 #| msgid "Location"
 msgctxt "QObject|"
 msgid "attraction"
 msgstr "Suíomh"
 
-#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:110
+#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:111
 msgctxt "QObject|"
 msgid "castle"
 msgstr ""
 
-#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:112
+#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:113
 msgctxt "QObject|"
 msgid "cinema"
 msgstr ""
 
-#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:114
+#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:115
 msgctxt "QObject|"
 msgid "monument"
 msgstr ""
 
-#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:116
+#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:117
 msgctxt "QObject|"
 msgid "museum"
 msgstr ""
 
-#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:118
+#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:119
 msgctxt "QObject|"
 msgid "ruin"
 msgstr ""
 
-#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:120
+#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:121
 #, fuzzy
 #| msgid "theatre"
 msgctxt "QObject|"
 msgid "theatre"
 msgstr "amharclann"
 
-#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:122
+#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:123
 msgctxt "QObject|"
 msgid "theme park"
 msgstr ""
 
-#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:124
+#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:125
 #, fuzzy
 #| msgid "&Remove Measure Points"
 msgctxt "QObject|"
 msgid "view point"
 msgstr "&Bain Pointí Tomhais"
 
-#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:126
+#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:127
 msgctxt "QObject|"
 msgid "zoo"
 msgstr ""
 
-#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:128
+#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:129
 #, fuzzy
 #| msgid "airport"
 msgctxt "QObject|"
 msgid "airport"
 msgstr "aerfort"
 
-#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:130
+#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:131
 #, fuzzy
 #| msgid "Airport runway, taxiway"
 msgctxt "QObject|"
 msgid "airport runway"
 msgstr "Rúidbhealach aerfoirt"
 
-#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:132
+#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:133
 #, fuzzy
 #| msgid "Airport runway, taxiway"
 msgctxt "QObject|"
 msgid "airport apron"
 msgstr "Rúidbhealach aerfoirt"
 
-#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:134
+#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:135
 #, fuzzy
 #| msgid "Airport runway, taxiway"
 msgctxt "QObject|"
 msgid "airport taxiway"
 msgstr "Rúidbhealach aerfoirt"
 
-#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:136
+#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:137
 #, fuzzy
 #| msgid "train station"
 msgctxt "QObject|"
 msgid "bus station"
 msgstr "stáisiún traenach"
 
-#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:138
+#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:139
 msgctxt "QObject|"
 msgid "bus stop"
 msgstr ""
 
-#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:140
+#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:141
 msgctxt "QObject|"
 msgid "car share"
 msgstr ""
 
-#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:142
+#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:143
 msgctxt "QObject|"
 msgid "fuel"
 msgstr ""
 
-#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:144
+#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:145
 msgctxt "QObject|"
 msgid "parking"
 msgstr ""
 
-#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:146
+#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:147
 #, fuzzy
 #| msgid "train station"
 msgctxt "QObject|"
 msgid "train station"
 msgstr "stáisiún traenach"
 
-#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:148
+#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:149
 msgctxt "QObject|"
 msgid "atm"
 msgstr ""
 
-#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:150
+#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:151
 msgctxt "QObject|"
 msgid "tram stop"
 msgstr ""
 
-#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:152
+#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:153
 msgctxt "QObject|"
 msgid "bicycle rental"
 msgstr ""
 
-#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:154
+#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:155
 msgctxt "QObject|"
 msgid "car rental"
 msgstr ""
 
-#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:156
+#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:157
 #, fuzzy
 #| msgid "Speedometer"
 msgctxt "QObject|"
 msgid "speed camera"
 msgstr "Luasmhéadar"
 
-#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:158
+#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:159
 #, fuzzy
 #| msgid "taxi"
 msgctxt "QObject|"
 msgid "taxi"
 msgstr "tacsaí"
 
-#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:160
+#: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:161
 msgctxt "QObject|"
 msgid "memorial"
 msgstr ""
@@ -20128,43 +20128,43 @@ msgctxt "Marble::MapQuestConfigWidget|"
 msgid "Favor"
 msgstr "Mo Rogha &Fillteán"
 
-#: src/plugins/runner/monav/MonavConfigWidget.cpp:489
+#: src/plugins/runner/monav/MonavConfigWidget.cpp:490
 #, fuzzy, qt-format
 #| msgid "Downloading %1"
 msgctxt "QObject|"
 msgid "Downloading %1"
 msgstr "%1 á íosluchtú"
 
-#: src/plugins/runner/monav/MonavConfigWidget.cpp:513
+#: src/plugins/runner/monav/MonavConfigWidget.cpp:514
 #, fuzzy, qt-format
 #| msgid "Installing %1"
 msgctxt "QObject|"
 msgid "Installing %1"
 msgstr "%1 á shuiteáil"
 
-#: src/plugins/runner/monav/MonavConfigWidget.cpp:618
+#: src/plugins/runner/monav/MonavConfigWidget.cpp:619
 msgctxt "QObject|"
 msgid "An update is available. Click to install it."
 msgstr ""
 
-#: src/plugins/runner/monav/MonavConfigWidget.cpp:619
+#: src/plugins/runner/monav/MonavConfigWidget.cpp:620
 msgctxt "QObject|"
 msgid "No update available. You are running the latest version."
 msgstr ""
 
-#: src/plugins/runner/monav/MonavConfigWidget.cpp:647
+#: src/plugins/runner/monav/MonavConfigWidget.cpp:648
 msgctxt "Marble::MonavConfigWidget|"
 msgid "Are you sure you want to delete this map from the system?"
 msgstr ""
 
-#: src/plugins/runner/monav/MonavConfigWidget.cpp:648
+#: src/plugins/runner/monav/MonavConfigWidget.cpp:649
 #, fuzzy
 #| msgid "&Remove Measure Points"
 msgctxt "Marble::MonavConfigWidget|"
 msgid "Remove Map"
 msgstr "&Bain Pointí Tomhais"
 
-#: src/plugins/runner/monav/MonavConfigWidget.cpp:679
+#: src/plugins/runner/monav/MonavConfigWidget.cpp:680
 #, fuzzy
 #| msgid "Nothing to do."
 msgctxt "QObject|"
@@ -20256,42 +20256,42 @@ msgctxt "MonavConfigWidget|"
 msgid "Abort"
 msgstr ""
 
-#: src/plugins/runner/monav/MonavMapsModel.cpp:41
+#: src/plugins/runner/monav/MonavMapsModel.cpp:42
 #, fuzzy
 #| msgid "Name"
 msgctxt "Marble::MonavMapsModel|"
 msgid "Name"
 msgstr "Ainm"
 
-#: src/plugins/runner/monav/MonavMapsModel.cpp:43
+#: src/plugins/runner/monav/MonavMapsModel.cpp:44
 #, fuzzy
 #| msgid "Transport"
 msgctxt "Marble::MonavMapsModel|"
 msgid "Transport"
 msgstr "Iompar"
 
-#: src/plugins/runner/monav/MonavMapsModel.cpp:45
+#: src/plugins/runner/monav/MonavMapsModel.cpp:46
 #, fuzzy
 #| msgid "Size"
 msgctxt "Marble::MonavMapsModel|"
 msgid "Size"
 msgstr "Méid"
 
-#: src/plugins/runner/monav/MonavMapsModel.cpp:47
+#: src/plugins/runner/monav/MonavMapsModel.cpp:48
 #, fuzzy
 #| msgid "Update"
 msgctxt "Marble::MonavMapsModel|"
 msgid "Update"
 msgstr "Nuashonraigh"
 
-#: src/plugins/runner/monav/MonavMapsModel.cpp:49
+#: src/plugins/runner/monav/MonavMapsModel.cpp:50
 #, fuzzy
 #| msgid "Delete"
 msgctxt "Marble::MonavMapsModel|"
 msgid "Delete"
 msgstr "Scrios"
 
-#: src/plugins/runner/monav/MonavMapsModel.cpp:51
+#: src/plugins/runner/monav/MonavMapsModel.cpp:52
 #, fuzzy
 #| msgid "Date: "
 msgctxt "Marble::MonavMapsModel|"

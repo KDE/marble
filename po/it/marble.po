@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-27 00:39+0000\n"
+"POT-Creation-Date: 2024-09-19 00:37+0000\n"
 "PO-Revision-Date: 2022-07-11 15:42+0200\n"
 "Last-Translator: Paolo Zamponi <zapaolo@email.it>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
@@ -848,27 +848,27 @@ msgstr ""
 "L'estensione di tracciamento della posizione usata per determinare la "
 "località corrente."
 
-#: marble_part.cpp:102
+#: marble_part.cpp:104
 #, kde-format
 msgid "Position: %1"
 msgstr "Posizione: %1"
 
-#: marble_part.cpp:103
+#: marble_part.cpp:105
 #, kde-format
 msgid "Altitude: %1"
 msgstr "Altitudine: %1"
 
-#: marble_part.cpp:104
+#: marble_part.cpp:106
 #, kde-format
 msgid "Tile Zoom Level: %1"
 msgstr "Livello di ingrandimento delle tessere: %1"
 
-#: marble_part.cpp:105
+#: marble_part.cpp:107
 #, kde-format
 msgid "Time: %1"
 msgstr "Tempo: %1"
 
-#: marble_part.cpp:167
+#: marble_part.cpp:168
 #, kde-format
 msgid ""
 "Sorry, unable to open '%1':\n"
@@ -877,248 +877,243 @@ msgstr ""
 "Spiacente, impossibile aprire «%1»:\n"
 "«%2»"
 
-#: marble_part.cpp:168
+#: marble_part.cpp:169
 #, kde-format
 msgid "File not readable"
 msgstr "Non è possibile leggere il file"
 
-#: marble_part.cpp:214
-#, kde-format
-msgid "marble_part"
-msgstr "marble_part"
-
-#: marble_part.cpp:217
+#: marble_part.cpp:218
 #, kde-format
 msgid "A Virtual Globe"
 msgstr "Un globo virtuale"
 
-#: marble_part.cpp:231
+#: marble_part.cpp:232
 #, kde-format
 msgid "Sorry, unable to open '%1'. The file is not accessible."
 msgstr "Non è stato possibile aprire «%1». Non è possibile accedere al file."
 
-#: marble_part.cpp:232
+#: marble_part.cpp:233
 #, kde-format
 msgid "File not accessible"
 msgstr "Non è possibile accedere al file"
 
-#: marble_part.cpp:253
+#: marble_part.cpp:254
 #, kde-format
 msgid "All Supported Files"
 msgstr "Tutti i file supportati"
 
-#: marble_part.cpp:259
+#: marble_part.cpp:260
 #, kde-format
 msgctxt "@title:window"
 msgid "Open File"
 msgstr "Apri file"
 
-#: marble_part.cpp:276
+#: marble_part.cpp:277
 #, kde-format
 msgctxt "@title:window"
 msgid "Export Map"
 msgstr "Esporta mappa"
 
-#: marble_part.cpp:277
+#: marble_part.cpp:278
 #, kde-format
 msgid "Images *.jpg *.png"
 msgstr "Immagini *.jpg *.png"
 
-#: marble_part.cpp:291
+#: marble_part.cpp:292
 #, kde-format
 msgctxt "Application name"
 msgid "Marble"
 msgstr "Marble"
 
-#: marble_part.cpp:292
+#: marble_part.cpp:293
 #, kde-format
 msgid "An error occurred while trying to save the file.\n"
 msgstr "Si è verificato un errore durante il salvataggio del file.\n"
 
-#: marble_part.cpp:483
+#: marble_part.cpp:484
 #, kde-format
 msgid "Unnamed"
 msgstr "Senza nome"
 
-#: marble_part.cpp:714
+#: marble_part.cpp:715
 #, kde-format
 msgctxt "Action for downloading an entire region of a map"
 msgid "Download Region..."
 msgstr "Scarica regione..."
 
-#: marble_part.cpp:728
+#: marble_part.cpp:729
 #, kde-format
 msgctxt "Action for saving the map to a file"
 msgid "&Export Map..."
 msgstr "&Esporta mappa..."
 
-#: marble_part.cpp:737
+#: marble_part.cpp:738
 #, kde-format
 msgctxt "Action for toggling offline mode"
 msgid "&Work Offline"
 msgstr "Lavora &non in linea"
 
-#: marble_part.cpp:747
+#: marble_part.cpp:748
 #, kde-format
 msgctxt "Action for copying the map to the clipboard"
 msgid "&Copy Map"
 msgstr "&Copia mappa"
 
-#: marble_part.cpp:754
+#: marble_part.cpp:755
 #, kde-format
 msgctxt "Action for copying the coordinates to the clipboard"
 msgid "C&opy Coordinates"
 msgstr "C&opia coordinate"
 
-#: marble_part.cpp:762
+#: marble_part.cpp:763
 #, kde-format
 msgctxt "Action for opening a file"
 msgid "&Open..."
 msgstr "&Apri..."
 
-#: marble_part.cpp:769
+#: marble_part.cpp:770
 #, kde-format
 msgctxt "Action for downloading maps (GHNS)"
 msgid "Download Maps..."
 msgstr "Scarica mappe..."
 
-#: marble_part.cpp:772
+#: marble_part.cpp:773
 #, kde-format
 msgctxt "Status tip"
 msgid "Download new maps"
 msgstr "Scarica nuove mappe"
 
-#: marble_part.cpp:778
+#: marble_part.cpp:779
 #, kde-format
 msgctxt "Action for creating new maps"
 msgid "&Create a New Map..."
 msgstr "&Crea una nuova mappa..."
 
-#: marble_part.cpp:783
+#: marble_part.cpp:784
 #, kde-format
 msgctxt "Status tip"
 msgid "A wizard guides you through the creation of your own map theme."
 msgstr "Una procedura ti guiderà nella creazione della tua mappa."
 
-#: marble_part.cpp:810
+#: marble_part.cpp:811
 #, kde-format
 msgctxt "Action for toggling clouds"
 msgid "&Clouds"
 msgstr "&Nuvole"
 
-#: marble_part.cpp:817
+#: marble_part.cpp:818
 #, kde-format
 msgctxt "Action for sun control dialog"
 msgid "S&un Control..."
 msgstr "Controllo del &Sole..."
 
-#: marble_part.cpp:827
+#: marble_part.cpp:828
 #, kde-format
 msgctxt "Action for time control dialog"
 msgid "&Time Control..."
 msgstr "Controllo del &tempo..."
 
-#: marble_part.cpp:836
+#: marble_part.cpp:837
 #, kde-format
 msgctxt "Action for locking float items on the map"
 msgid "Lock Position"
 msgstr "Blocca posizione"
 
-#: marble_part.cpp:847
+#: marble_part.cpp:848
 #, kde-format
 msgid "Show Shadow"
 msgstr "Mostra l'ombra"
 
-#: marble_part.cpp:850
+#: marble_part.cpp:851
 #, kde-format
 msgid "Hide Shadow"
 msgstr "Nascondi l'ombra"
 
-#: marble_part.cpp:851
+#: marble_part.cpp:852
 #, kde-format
 msgid "Shows and hides the shadow of the sun"
 msgstr "Mostra e nasconde l'ombra del Sole"
 
-#: marble_part.cpp:855
+#: marble_part.cpp:856
 #, kde-format
 msgid "Show sun icon on the Sub-Solar Point"
 msgstr "Mostra icona del Sole sul punto subsolare"
 
-#: marble_part.cpp:857
+#: marble_part.cpp:858
 #, kde-format
 msgid "Hide sun icon on the Sub-Solar Point"
 msgstr "Nascondi icona del Sole sul punto subsolare"
 
-#: marble_part.cpp:858
+#: marble_part.cpp:859
 #, kde-format
 msgid "Show sun icon on the sub-solar point"
 msgstr "Mostra icona del Sole sul punto subsolare"
 
-#: marble_part.cpp:863
+#: marble_part.cpp:864
 #, kde-format
 msgid "Lock Globe to the Sub-Solar Point"
 msgstr "Blocca globo sul punto subsolare"
 
-#: marble_part.cpp:865
+#: marble_part.cpp:866
 #, kde-format
 msgid "Unlock Globe to the Sub-Solar Point"
 msgstr "Sblocca globo sul punto subsolare"
 
-#: marble_part.cpp:866
+#: marble_part.cpp:867
 #, kde-format
 msgid "Lock globe to the sub-solar point"
 msgstr "Blocca globo sul punto subsolare"
 
-#: marble_part.cpp:881
+#: marble_part.cpp:882
 #, kde-format
 msgctxt "Add Bookmark"
 msgid "Add &Bookmark..."
 msgstr "Aggiungi segnali&bro..."
 
-#: marble_part.cpp:889
+#: marble_part.cpp:890
 #, kde-format
 msgctxt "Show Bookmarks"
 msgid "Show &Bookmarks"
 msgstr "Mostra segnali&bri"
 
-#: marble_part.cpp:890
+#: marble_part.cpp:891
 #, kde-format
 msgid "Show or hide bookmarks in the map"
 msgstr "Mostra o nasconde i segnalibri nella mappa"
 
-#: marble_part.cpp:898
+#: marble_part.cpp:899
 #, kde-format
 msgid "&Set Home Location"
 msgstr "Impo&sta località di riferimento"
 
-#: marble_part.cpp:905
+#: marble_part.cpp:906
 #, kde-format
 msgctxt "Manage Bookmarks"
 msgid "&Manage Bookmarks..."
 msgstr "&Gestisci segnalibri..."
 
-#: marble_part.cpp:917
+#: marble_part.cpp:918
 #, kde-format
 msgctxt "Edit the map in an external application"
 msgid "&Edit Map..."
 msgstr "&Modifica mappa..."
 
-#: marble_part.cpp:925
+#: marble_part.cpp:926
 #, kde-format
 msgid "&Record Movie"
 msgstr "&Registra filmato"
 
-#: marble_part.cpp:927
+#: marble_part.cpp:928
 #, kde-format
 msgid "Records a movie of the globe"
 msgstr "Registra un filmato del globo"
 
-#: marble_part.cpp:933
+#: marble_part.cpp:934
 #, kde-format
 msgid "&Stop Recording"
 msgstr "Ferma regi&strazione"
 
-#: marble_part.cpp:935
+#: marble_part.cpp:936
 #, kde-format
 msgid "Stop recording a movie of the globe"
 msgstr "Ferma la registrazione di un filmato del globo"
@@ -1253,6 +1248,9 @@ msgstr "Barra principale"
 #, kde-format
 msgid "Edit Toolbar"
 msgstr "Barra di modifica"
+
+#~ msgid "marble_part"
+#~ msgstr "marble_part"
 
 #~ msgid "The graphics system that is used by Qt to render the graphics."
 #~ msgstr "Il sistema grafico usato da Qt per visualizzare la grafica."
