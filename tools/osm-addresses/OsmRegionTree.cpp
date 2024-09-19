@@ -8,8 +8,8 @@
 namespace Marble
 {
 
-OsmRegionTree::OsmRegionTree( const OsmRegion & node ) :
-    m_node( node )
+OsmRegionTree::OsmRegionTree(const OsmRegion &node)
+    : m_node(node)
 {
     // nothing to do
 }
@@ -19,76 +19,76 @@ const OsmRegion &OsmRegionTree::node() const
     return m_node;
 }
 
-void OsmRegionTree::setChildren( const QVector<OsmRegionTree>& children )
+void OsmRegionTree::setChildren(const QVector<OsmRegionTree> &children)
 {
     m_children = children;
 }
 
-const QVector<OsmRegionTree> & OsmRegionTree::children() const
+const QVector<OsmRegionTree> &OsmRegionTree::children() const
 {
     return m_children;
 }
 
-void OsmRegionTree::append( QList<OsmRegion> &regions )
+void OsmRegionTree::append(QList<OsmRegion> &regions)
 {
-    for( const OsmRegion &candidate: regions ) {
-        if ( candidate.parentIdentifier() == m_node.identifier() ) {
-            m_children << OsmRegionTree( candidate );
+    for (const OsmRegion &candidate : regions) {
+        if (candidate.parentIdentifier() == m_node.identifier()) {
+            m_children << OsmRegionTree(candidate);
         }
     }
 
-    for( const OsmRegionTree & child: m_children ) {
-        regions.removeAll( child.node() );
+    for (const OsmRegionTree &child : m_children) {
+        regions.removeAll(child.node());
     }
 
-    for ( int i = 0; i < m_children.size(); ++i ) {
-        m_children[i].append( regions );
+    for (int i = 0; i < m_children.size(); ++i) {
+        m_children[i].append(regions);
     }
 }
 
-void OsmRegionTree::traverse( int &counter )
+void OsmRegionTree::traverse(int &counter)
 {
     ++counter;
-    m_node.setLeft( counter );
+    m_node.setLeft(counter);
 
-    for( int i = 0; i < m_children.size(); ++i ) {
-        m_children[i].traverse( counter );
+    for (int i = 0; i < m_children.size(); ++i) {
+        m_children[i].traverse(counter);
     }
 
     ++counter;
-    m_node.setRight( counter );
+    m_node.setRight(counter);
 }
 
 OsmRegionTree::operator QList<OsmRegion>() const
 {
     QList<OsmRegion> result;
-    enumerate( result );
+    enumerate(result);
     return result;
 }
 
-void OsmRegionTree::enumerate( QList<OsmRegion> &list ) const
+void OsmRegionTree::enumerate(QList<OsmRegion> &list) const
 {
     list << m_node;
-    for( const OsmRegionTree & child: m_children ) {
-        child.enumerate( list );
+    for (const OsmRegionTree &child : m_children) {
+        child.enumerate(list);
     }
 }
 
-int OsmRegionTree::smallestRegionId( const GeoDataCoordinates &coordinates ) const
+int OsmRegionTree::smallestRegionId(const GeoDataCoordinates &coordinates) const
 {
     int rootLevel = m_node.adminLevel();
-    return smallestRegionId( coordinates, rootLevel );
+    return smallestRegionId(coordinates, rootLevel);
 }
 
-int OsmRegionTree::smallestRegionId( const GeoDataCoordinates &coordinates, int &level ) const
+int OsmRegionTree::smallestRegionId(const GeoDataCoordinates &coordinates, int &level) const
 {
     int maxLevel = m_node.adminLevel();
     int minId = m_node.identifier();
-    for( const OsmRegionTree & child: m_children ) {
-        if ( child.node().geometry().contains( coordinates ) ) {
+    for (const OsmRegionTree &child : m_children) {
+        if (child.node().geometry().contains(coordinates)) {
             int childLevel = level;
-            int id = child.smallestRegionId( coordinates, childLevel );
-            if ( childLevel >= maxLevel ) {
+            int id = child.smallestRegionId(coordinates, childLevel);
+            if (childLevel >= maxLevel) {
                 maxLevel = childLevel;
                 minId = id;
             }

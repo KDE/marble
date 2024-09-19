@@ -1,8 +1,8 @@
 #ifndef NASAWORLDWINDTOOPENSTREETMAPCONVERTER_H
 #define NASAWORLDWINDTOOPENSTREETMAPCONVERTER_H
 
-#include "mapreproject.h"
 #include "ReadOnlyMapDefinition.h"
+#include "mapreproject.h"
 
 #include <QDir>
 #include <QObject>
@@ -19,20 +19,20 @@ class Thread;
 //   Lat, lat: Latitude
 //   Rad, rad: Radiant
 
-class NasaWorldWindToOpenStreetMapConverter: public QObject
+class NasaWorldWindToOpenStreetMapConverter : public QObject
 {
     Q_OBJECT
 
 public:
-    explicit NasaWorldWindToOpenStreetMapConverter( QObject * const parent = nullptr );
+    explicit NasaWorldWindToOpenStreetMapConverter(QObject *const parent = nullptr);
 
-    void setMapSources( QVector<ReadOnlyMapDefinition> const & mapSources );
-    void setOsmBaseDirectory( QDir const & nwwBaseDirectory );
-    void setOsmTileClusterEdgeLengthTiles( int const clusterEdgeLengthTiles );
-    void setOsmTileLevel( int const level );
-    void setThreadCount( int const threadCount );
+    void setMapSources(QVector<ReadOnlyMapDefinition> const &mapSources);
+    void setOsmBaseDirectory(QDir const &nwwBaseDirectory);
+    void setOsmTileClusterEdgeLengthTiles(int const clusterEdgeLengthTiles);
+    void setOsmTileLevel(int const level);
+    void setThreadCount(int const threadCount);
 
-    QVector<QPair<Thread*, OsmTileClusterRenderer*> > start();
+    QVector<QPair<Thread *, OsmTileClusterRenderer *>> start();
 
     void testReprojection();
 
@@ -40,7 +40,7 @@ Q_SIGNALS:
     void finished();
 
 public Q_SLOTS:
-    void assignNextCluster( OsmTileClusterRenderer * );
+    void assignNextCluster(OsmTileClusterRenderer *);
 
 private:
     void checkAndCreateLevelDirectory() const;

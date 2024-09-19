@@ -3,7 +3,6 @@
 // SPDX-FileCopyrightText: 2016 Akshat Tandon <akshat.tandon@research.iiit.ac.in>
 //
 
-
 #ifndef MARBLE_TAGSFILTER_H
 #define MARBLE_TAGSFILTER_H
 
@@ -12,7 +11,8 @@
 #include <QMap>
 #include <QString>
 
-namespace Marble {
+namespace Marble
+{
 
 class GeoDataDocument;
 class GeoDataFeature;
@@ -23,27 +23,24 @@ public:
     typedef QPair<QString, QString> Tag;
     using Tags = QVector<Tag>;
 
-    enum FilterFlag {
-        NoFlag = 0,
-        FilterRailwayService
-    };
+    enum FilterFlag { NoFlag = 0, FilterRailwayService };
 
-    //Filters placemarks which have tags in the hash
-    TagsFilter(GeoDataDocument* document, const Tags& tagsList, FilterFlag filterFlag = NoFlag);
+    // Filters placemarks which have tags in the hash
+    TagsFilter(GeoDataDocument *document, const Tags &tagsList, FilterFlag filterFlag = NoFlag);
     ~TagsFilter();
 
-    QVector<GeoDataFeature*>::const_iterator rejectedObjectsBegin() const;
-    QVector<GeoDataFeature*>::const_iterator rejectedObjectsEnd() const;
+    QVector<GeoDataFeature *>::const_iterator rejectedObjectsBegin() const;
+    QVector<GeoDataFeature *>::const_iterator rejectedObjectsEnd() const;
 
-    GeoDataDocument* accepted();
+    GeoDataDocument *accepted();
 
-    static void removeAnnotationTags(GeoDataDocument* document);
+    static void removeAnnotationTags(GeoDataDocument *document);
 
 private:
     static void removeAnnotationTags(OsmPlacemarkData &osmData);
 
-    GeoDataDocument* m_accepted;
-    QVector<GeoDataFeature*> m_rejectedObjects;
+    GeoDataDocument *m_accepted;
+    QVector<GeoDataFeature *> m_rejectedObjects;
 };
 
 }

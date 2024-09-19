@@ -4,41 +4,41 @@
 //
 
 /**
-  * Takes an .sqlite database with metadata about voice guidance speakers
-  * and associated .zip files containing 64.ogg files and produces four files
-  * for each speaker:
-  * - a .tar.gz to be used by KDE Marble via a GHNS dialog
-  * - a .zip to be downloaded by Marble users via edu.kde.org
-  * - a .zip to be downloaded by TomTom users via edu.kde.org
-  * - an .ogg speaker preview file
-  * The archives contain the speaker files and some additional stuff (license, authors, ...)
-  *
-  * The structure of the .sqlite database is expected as follows:
-  * One table called speakers with the following layout:
-  * - id PRIMARY KEY
-  * - name, email, nickname, gender, language, description, token VARCHAR
-  * - created DATETIME
-  * Additionally, the field gender is expected to be either "male" or "female" and language
-  * to have the format "NAME (langcode)"
-  *
-  * Also creates a knewstuff .xml file with the metadata.
-  *
-  * Some processing is done by calling other tools, namely tar, unzip, zip, vorbisgain, viftool.
-  * Make sure they're found in $PATH
-  *
-  */
+ * Takes an .sqlite database with metadata about voice guidance speakers
+ * and associated .zip files containing 64.ogg files and produces four files
+ * for each speaker:
+ * - a .tar.gz to be used by KDE Marble via a GHNS dialog
+ * - a .zip to be downloaded by Marble users via edu.kde.org
+ * - a .zip to be downloaded by TomTom users via edu.kde.org
+ * - an .ogg speaker preview file
+ * The archives contain the speaker files and some additional stuff (license, authors, ...)
+ *
+ * The structure of the .sqlite database is expected as follows:
+ * One table called speakers with the following layout:
+ * - id PRIMARY KEY
+ * - name, email, nickname, gender, language, description, token VARCHAR
+ * - created DATETIME
+ * Additionally, the field gender is expected to be either "male" or "female" and language
+ * to have the format "NAME (langcode)"
+ *
+ * Also creates a knewstuff .xml file with the metadata.
+ *
+ * Some processing is done by calling other tools, namely tar, unzip, zip, vorbisgain, viftool.
+ * Make sure they're found in $PATH
+ *
+ */
 
 #include <QCoreApplication>
-#include <QString>
 #include <QDebug>
-#include <QFileInfo>
 #include <QDir>
-#include <QTemporaryFile>
+#include <QFileInfo>
 #include <QProcess>
+#include <QString>
+#include <QTemporaryFile>
 
 #include <QSqlDatabase>
-#include <QSqlQuery>
 #include <QSqlError>
+#include <QSqlQuery>
 
 QStringList tomTomFiles()
 {
@@ -116,101 +116,109 @@ QStringList marbleFiles()
     return result;
 }
 
-void usage( const QString &application )
+void usage(const QString &application)
 {
     qDebug() << "Usage: " << application << " /path/to/input/directory /path/to/output/directory /path/to/newstuff.xml";
 }
 
-void extract( const QString &zip, const QString &output )
+void extract(const QString &zip, const QString &output)
 {
-    QProcess::execute( "unzip", QStringList() << "-q" << "-j" << "-d" << output << zip );
+    QProcess::execute("unzip", QStringList() << "-q" << "-j" << "-d" << output << zip);
 }
 
-void normalize( const QString &output )
+void normalize(const QString &output)
 {
     QProcess vorbisgain;
-    vorbisgain.setWorkingDirectory( output );
-    vorbisgain.start( "vorbisgain", QStringList() << "-a" << tomTomFiles() << marbleFiles() );
+    vorbisgain.setWorkingDirectory(output);
+    vorbisgain.start("vorbisgain", QStringList() << "-a" << tomTomFiles() << marbleFiles());
     vorbisgain.waitForFinished();
 }
 
-void createLegalFiles( const QString &directory, const QString &name, const QString &email )
+void createLegalFiles(const QString &directory, const QString &name, const QString &email)
 {
-    QDir input( directory );
-    QFile authorsFile( input.filePath( "AUTHORS.txt" ) );
-    if ( authorsFile.open( QFile::WriteOnly | QFile::Truncate ) ) {
-        QTextStream stream( &authorsFile );
+    QDir input(directory);
+    QFile authorsFile(input.filePath("AUTHORS.txt"));
+    if (authorsFile.open(QFile::WriteOnly | QFile::Truncate)) {
+        QTextStream stream(&authorsFile);
         stream << name << " <" << email << ">";
     }
     authorsFile.close();
 
-    QFile licenseFile( input.filePath( "LICENSE.txt" ) );
-    if ( licenseFile.open( QFile::WriteOnly | QFile::Truncate ) ) {
-        QTextStream stream( &licenseFile );
+    QFile licenseFile(input.filePath("LICENSE.txt"));
+    if (licenseFile.open(QFile::WriteOnly | QFile::Truncate)) {
+        QTextStream stream(&licenseFile);
         stream << "The ogg files in this directory are licensed under the creative commons Attribution-ShareAlike 3.0 Unported (CC BY-SA 3.0) license. ";
         stream << "See https://creativecommons.org/licenses/by-sa/3.0/ and the file CC-BY-SA-3.0 in this directory.";
     }
     licenseFile.close();
 
-    QFile installFile( input.filePath( "INSTALL.txt" ) );
-    if ( installFile.open( QFile::WriteOnly | QFile::Truncate ) ) {
-        QTextStream stream( &installFile );
+    QFile installFile(input.filePath("INSTALL.txt"));
+    if (installFile.open(QFile::WriteOnly | QFile::Truncate)) {
+        QTextStream stream(&installFile);
         stream << "To install this voice guidance speaker in Marble, copy the entire directory to the audio/speakers/ directory in Marble's data path.\n\n";
-        stream << "For example, if this directory is called 'MySpeaker' and you want to use it on the Nokia N900, copy the directory with all files to /home/user/MyDocs/.local/share/marble/audio/speakers/MySpeaker\n\n";
-        stream << "Afterwards start Marble on the N900 and press the routing info box (four icons on the bottom) for two seconds with the pen. Enter the configuration dialog and choose the 'MySpeaker' speaker.\n\n";
+        stream << "For example, if this directory is called 'MySpeaker' and you want to use it on the Nokia N900, copy the directory with all files to "
+                  "/home/user/MyDocs/.local/share/marble/audio/speakers/MySpeaker\n\n";
+        stream << "Afterwards start Marble on the N900 and press the routing info box (four icons on the bottom) for two seconds with the pen. Enter the "
+                  "configuration dialog and choose the 'MySpeaker' speaker.\n\n";
         stream << "Check https://edu.kde.org/marble/speakers.php for updates and more speakers.";
     }
     installFile.close();
 }
 
-void convertToNewStuffFormat( const QString &input, const QString &output )
+void convertToNewStuffFormat(const QString &input, const QString &output)
 {
-    QDir inputDirectory( input );
+    QDir inputDirectory(input);
     QStringList files;
     files << tomTomFiles() << marbleFiles();
     files << "AUTHORS.txt" << "INSTALL.txt" << "LICENSE.txt";
     QStringList arguments;
     arguments << "-czf" << output;
-    for( const QString &file: std::as_const(files) ) {
-        arguments << inputDirectory.filePath( file );
+    for (const QString &file : std::as_const(files)) {
+        arguments << inputDirectory.filePath(file);
     }
     arguments << "/usr/share/common-licenses/CC-BY-SA-3.0";
 
-    QProcess::execute( "tar", arguments );
+    QProcess::execute("tar", arguments);
 }
 
-void convertToMarbleFormat( const QString &input, const QString &output )
+void convertToMarbleFormat(const QString &input, const QString &output)
 {
-    QDir inputDirectory( input );
+    QDir inputDirectory(input);
     QStringList files;
     files << tomTomFiles() << marbleFiles();
     files << "AUTHORS.txt" << "INSTALL.txt" << "LICENSE.txt";
     QStringList arguments;
     arguments << "-q" << "-j" << output;
-    for( const QString &file: std::as_const(files) ) {
-        arguments << inputDirectory.filePath( file );
+    for (const QString &file : std::as_const(files)) {
+        arguments << inputDirectory.filePath(file);
     }
     arguments << "/usr/share/common-licenses/CC-BY-SA-3.0";
 
-    QProcess::execute( "zip", arguments );
+    QProcess::execute("zip", arguments);
 }
 
-void convertToTomTomFormat( const QString &input, const QString &output, const QString &nick, const QString &simpleNick, int index, bool male, const QString &lang )
+void convertToTomTomFormat(const QString &input,
+                           const QString &output,
+                           const QString &nick,
+                           const QString &simpleNick,
+                           int index,
+                           bool male,
+                           const QString &lang)
 {
     QStringList arguments;
-    QString const prefix = input + QLatin1String("/data") + QString::number( index );
+    QString const prefix = input + QLatin1String("/data") + QString::number(index);
     QString const vif = prefix + QLatin1String(".vif");
     QString const chk = prefix + QLatin1String(".chk");
-    arguments << "join" << QString::number( index ) << nick << vif;
+    arguments << "join" << QString::number(index) << nick << vif;
     QProcess viftool;
-    viftool.setWorkingDirectory( input );
-    viftool.execute( "viftool", arguments );
+    viftool.setWorkingDirectory(input);
+    viftool.execute("viftool", arguments);
 
-    QFile vifFile( vif );
-    if ( vifFile.open( QFile::WriteOnly | QFile::Truncate ) ) {
-        QTextStream stream( &vifFile );
+    QFile vifFile(vif);
+    if (vifFile.open(QFile::WriteOnly | QFile::Truncate)) {
+        QTextStream stream(&vifFile);
         stream << nick << "\n"; // Name
-        stream << ( male ? 2 : 1 ) << "\n"; // gender index
+        stream << (male ? 2 : 1) << "\n"; // gender index
         /** @todo: flag, language index */
         stream << 2 << "\n"; // Language index
         stream << 114 << "\n"; // Flag index
@@ -218,40 +226,40 @@ void convertToTomTomFormat( const QString &input, const QString &output, const Q
     }
     vifFile.close();
 
-    QDir inputDirectory( input );
+    QDir inputDirectory(input);
     QStringList files;
     files << vif << chk;
     files << "AUTHORS.txt" << "LICENSE.txt";
     QStringList zipArguments;
-    zipArguments << "-q" << "-j" << ( output + QLatin1Char('/') + lang + QLatin1Char('-') + simpleNick + QLatin1String("-TomTom.zip") );
-    for( const QString &file: std::as_const(files) ) {
-        QString const filePath = inputDirectory.filePath( file );
-        zipArguments <<  filePath;
+    zipArguments << "-q" << "-j" << (output + QLatin1Char('/') + lang + QLatin1Char('-') + simpleNick + QLatin1String("-TomTom.zip"));
+    for (const QString &file : std::as_const(files)) {
+        QString const filePath = inputDirectory.filePath(file);
+        zipArguments << filePath;
     }
     zipArguments << "/usr/share/common-licenses/CC-BY-SA-3.0";
 
-    QProcess::execute( "zip", zipArguments );
+    QProcess::execute("zip", zipArguments);
 }
 
-int process( const QDir &input, const QDir &output, const QString &xml )
+int process(const QDir &input, const QDir &output, const QString &xml)
 {
-    QSqlDatabase database = QSqlDatabase::addDatabase( "QSQLITE" );
-    database.setDatabaseName( input.filePath( "speakers.db" ) );
-    if ( !database.open() ) {
-        qDebug() << "Failed to connect to database " << input.filePath( "speakers.db" );
+    QSqlDatabase database = QSqlDatabase::addDatabase("QSQLITE");
+    database.setDatabaseName(input.filePath("speakers.db"));
+    if (!database.open()) {
+        qDebug() << "Failed to connect to database " << input.filePath("speakers.db");
         return 3;
     }
 
-    output.mkdir( "files.kde.org" );
-    QSqlQuery query( "SELECT * FROM speakers ORDER BY Id" );
+    output.mkdir("files.kde.org");
+    QSqlQuery query("SELECT * FROM speakers ORDER BY Id");
 
-    QFile xmlFile( xml );
-    if ( !xmlFile.open( QFile::WriteOnly | QFile::Truncate ) ) {
+    QFile xmlFile(xml);
+    if (!xmlFile.open(QFile::WriteOnly | QFile::Truncate)) {
         qDebug() << "Failed to write to " << xmlFile.fileName();
         return 3;
     }
 
-    QTextStream xmlOut( &xmlFile );
+    QTextStream xmlOut(&xmlFile);
     xmlOut << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
     xmlOut << "<!DOCTYPE knewstuff SYSTEM \"knewstuff.dtd\">\n";
     xmlOut << "<?xml-stylesheet type=\"text/xsl\" href=\"speakers.xsl\" ?>\n";
@@ -268,37 +276,41 @@ int process( const QDir &input, const QDir &output, const QString &xml )
         QString const description = query.value(6).toString();
         QString const token = query.value(7).toString();
         QString const date = query.value(8).toString();
-        QString const zip = input.filePath( token );
+        QString const zip = input.filePath(token);
         QTemporaryFile tmpFile;
         tmpFile.open();
         QString const extracted = tmpFile.fileName();
         tmpFile.remove();
-        QDir::root().mkdir( extracted );
+        QDir::root().mkdir(extracted);
         qDebug() << "Name: " << name;
 
-        QString const simpleNick = QString( nick ).replace( QLatin1Char(' '), QLatin1Char('-') );
+        QString const simpleNick = QString(nick).replace(QLatin1Char(' '), QLatin1Char('-'));
         QString const nickDir = output.filePath("files.kde.org") + QLatin1Char('/') + simpleNick;
-        QDir::root().mkdir( nickDir );
-        extract( zip, extracted );
-        normalize( extracted );
-        createLegalFiles( extracted, name, email );
+        QDir::root().mkdir(nickDir);
+        extract(zip, extracted);
+        normalize(extracted);
+        createLegalFiles(extracted, name, email);
         QFile::copy(extracted + QLatin1String("/Marble.ogg"), nickDir + QLatin1Char('/') + lang + QLatin1Char('-') + simpleNick + QLatin1String(".ogg"));
         convertToMarbleFormat(extracted, nickDir + QLatin1Char('/') + lang + QLatin1Char('-') + simpleNick + QLatin1String(".zip"));
         convertToTomTomFormat(extracted, nickDir, nick, simpleNick, index, gender == QLatin1String("male"), lang);
         convertToNewStuffFormat(extracted, nickDir + QLatin1Char('/') + lang + QLatin1Char('-') + simpleNick + QLatin1String(".tar.gz"));
 
         xmlOut << "  <stuff category=\"marble/data/audio\">\n";
-        xmlOut << "    <name lang=\"en\">" << language << " - " << nick << " (" <<  gender << ")" << "</name>\n";
+        xmlOut << "    <name lang=\"en\">" << language << " - " << nick << " (" << gender << ")" << "</name>\n";
         xmlOut << "    <author>" << name << "</author>\n";
         xmlOut << "    <licence>CC-By-SA 3.0</licence>\n";
         xmlOut << "    <summary lang=\"en\">" << description << "</summary>\n";
         xmlOut << "    <version>0.1</version>\n";
         xmlOut << "    <releasedate>" << date << "</releasedate>\n";
         xmlOut << "    <preview lang=\"en\">http://edu.kde.org/marble/speaker-" << gender << ".png</preview>\n";
-        xmlOut << "    <payload lang=\"en\">http://files.kde.org/marble/audio/speakers/" << simpleNick << "/" << lang << "-" << simpleNick << ".tar.gz</payload>\n";
-        xmlOut << "    <payload lang=\"ogg\">http://files.kde.org/marble/audio/speakers/" << simpleNick << "/" << lang << "-" << simpleNick << ".ogg</payload>\n";
-        xmlOut << "    <payload lang=\"zip\">http://files.kde.org/marble/audio/speakers/" << simpleNick << "/" << lang << "-" << simpleNick << ".zip</payload>\n";
-        xmlOut << "    <payload lang=\"tomtom\">http://files.kde.org/marble/audio/speakers/" << simpleNick << "/" << lang << "-" << simpleNick << "-TomTom.zip</payload>\n";
+        xmlOut << "    <payload lang=\"en\">http://files.kde.org/marble/audio/speakers/" << simpleNick << "/" << lang << "-" << simpleNick
+               << ".tar.gz</payload>\n";
+        xmlOut << "    <payload lang=\"ogg\">http://files.kde.org/marble/audio/speakers/" << simpleNick << "/" << lang << "-" << simpleNick
+               << ".ogg</payload>\n";
+        xmlOut << "    <payload lang=\"zip\">http://files.kde.org/marble/audio/speakers/" << simpleNick << "/" << lang << "-" << simpleNick
+               << ".zip</payload>\n";
+        xmlOut << "    <payload lang=\"tomtom\">http://files.kde.org/marble/audio/speakers/" << simpleNick << "/" << lang << "-" << simpleNick
+               << "-TomTom.zip</payload>\n";
         xmlOut << "  </stuff>\n";
 
         ++index;
@@ -313,25 +325,25 @@ int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
 
-    if ( argc < 4 ) {
-        usage( argv[0] );
+    if (argc < 4) {
+        usage(argv[0]);
         return 1;
     }
 
-    QFileInfo input( argv[1] );
-    if ( !input.exists() || !input.isDir() ) {
+    QFileInfo input(argv[1]);
+    if (!input.exists() || !input.isDir()) {
         qDebug() << "Incorrect input directory " << argv[1];
-        usage( argv[0] );
+        usage(argv[0]);
         return 1;
     }
 
-    QFileInfo output( argv[2] );
-    if ( !output.exists() || !output.isWritable() ) {
+    QFileInfo output(argv[2]);
+    if (!output.exists() || !output.isWritable()) {
         qDebug() << "Incorrect output directory " << argv[1];
-        usage( argv[0] );
+        usage(argv[0]);
         return 1;
     }
 
-    QFileInfo xmlFile( argv[3] );
-    return process( QDir( input.absoluteFilePath() ), QDir( output.absoluteFilePath() ), xmlFile.absoluteFilePath() );
+    QFileInfo xmlFile(argv[3]);
+    return process(QDir(input.absoluteFilePath()), QDir(output.absoluteFilePath()), xmlFile.absoluteFilePath());
 }

@@ -7,8 +7,8 @@
 
 #include <QDebug>
 #include <QSqlDatabase>
-#include <QSqlQuery>
 #include <QSqlError>
+#include <QSqlQuery>
 
 class LoggerPrivate
 {
@@ -22,20 +22,23 @@ public:
 
 LoggerPrivate::LoggerPrivate()
 {
-    m_database = QSqlDatabase::addDatabase( "QSQLITE" );
+    m_database = QSqlDatabase::addDatabase("QSQLITE");
 }
 
 void LoggerPrivate::initializeDatabase()
 {
-    QSqlQuery createJobsTable( "CREATE TABLE IF NOT EXISTS jobs (id VARCHAR(255) PRIMARY KEY, name TEXT, status TEXT, description TEXT, timestamp DATETIME DEFAULT CURRENT_TIMESTAMP);" );
-    if ( createJobsTable.lastError().isValid() ) {
+    QSqlQuery createJobsTable(
+        "CREATE TABLE IF NOT EXISTS jobs (id VARCHAR(255) PRIMARY KEY, name TEXT, status TEXT, description TEXT, timestamp DATETIME DEFAULT "
+        "CURRENT_TIMESTAMP);");
+    if (createJobsTable.lastError().isValid()) {
         qDebug() << "Error when executing query" << createJobsTable.lastQuery();
         qDebug() << "Sql reports" << createJobsTable.lastError();
     }
 }
 
-Logger::Logger(QObject *parent) :
-    QObject(parent), d(new LoggerPrivate)
+Logger::Logger(QObject *parent)
+    : QObject(parent)
+    , d(new LoggerPrivate)
 {
 }
 
@@ -52,8 +55,8 @@ Logger &Logger::instance()
 
 void Logger::setFilename(const QString &filename)
 {
-    d->m_database.setDatabaseName( filename );
-    if ( !d->m_database.open() ) {
+    d->m_database.setDatabaseName(filename);
+    if (!d->m_database.open()) {
         qDebug() << "Failed to connect to database " << filename;
     }
 
@@ -62,8 +65,8 @@ void Logger::setFilename(const QString &filename)
 
 void Logger::setStatus(const QString &id, const QString &name, const QString &status, const QString &message)
 {
-    QSqlQuery deleteJob( QString("DELETE FROM jobs WHERE id='%1';").arg(id) );
-    if ( deleteJob.lastError().isValid() ) {
+    QSqlQuery deleteJob(QString("DELETE FROM jobs WHERE id='%1';").arg(id));
+    if (deleteJob.lastError().isValid()) {
         qDebug() << "Error when executing query" << deleteJob.lastQuery();
         qDebug() << "Sql reports" << deleteJob.lastError();
     } else {
@@ -73,7 +76,7 @@ void Logger::setStatus(const QString &id, const QString &name, const QString &st
         createStatus.bindValue(":name", name);
         createStatus.bindValue(":status", status);
         createStatus.bindValue(":message", message);
-        if ( !createStatus.exec() ) {
+        if (!createStatus.exec()) {
             qDebug() << "Error when executing query" << createStatus.lastQuery();
             qDebug() << "Sql reports" << createStatus.lastError();
         }

@@ -26,7 +26,7 @@ int main(int argc, char *argv[])
     QStringList arguments;
     bool cacheData(false);
     bool uploadFiles(true);
-    for (int i=1; i<argc; ++i) {
+    for (int i = 1; i < argc; ++i) {
         QString const arg = argv[i];
         if (arg == QLatin1String("-h") || arg == QLatin1String("--help")) {
             usage(argv[0]);
@@ -62,6 +62,6 @@ int main(int argc, char *argv[])
         manager.setResumeId(arguments.at(2));
     }
     manager.run();
-    
+
     return app.exec();
 }

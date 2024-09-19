@@ -8,7 +8,8 @@
 namespace Marble
 {
 
-Writer::Writer( QObject* parent ) : QObject( parent )
+Writer::Writer(QObject *parent)
+    : QObject(parent)
 {
     // nothing to do
 }

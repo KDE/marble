@@ -9,7 +9,8 @@
 #include "TagsFilter.h"
 #include "WayChunk.h"
 
-namespace Marble {
+namespace Marble
+{
 
 class WayConcatenator
 {
@@ -26,14 +27,14 @@ private:
     void createWayChunk(const PlacemarkPtr &placemark, qint64 firstId, qint64 lastId);
     WayChunk::Ptr wayChunk(const GeoDataPlacemark &placemark, qint64 matchId) const;
     void concatFirst(const PlacemarkPtr &placemark, const WayChunk::Ptr &chunk);
-    void concatLast(const PlacemarkPtr & placemark, const WayChunk::Ptr &chunk);
+    void concatLast(const PlacemarkPtr &placemark, const WayChunk::Ptr &chunk);
     void concatBoth(const PlacemarkPtr &placemark, const WayChunk::Ptr &chunk, const WayChunk::Ptr &otherChunk);
     void addWayChunks(GeoDataDocument *document);
 
     QMultiHash<qint64, WayChunk::Ptr> m_hash;
     QVector<WayChunk::Ptr> m_chunks;
     QVector<PlacemarkPtr> m_wayPlacemarks;
-    QVector<GeoDataFeature*> m_otherPlacemarks;
+    QVector<GeoDataFeature *> m_otherPlacemarks;
 
     int m_originalWays;
     int m_mergedWays;

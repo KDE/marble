@@ -9,7 +9,8 @@
 
 #include <QDebug>
 
-namespace Marble {
+namespace Marble
+{
 
 TileIterator::const_iterator const TileIterator::s_end = TileIterator();
 
@@ -72,8 +73,8 @@ int TileIterator::total() const
     return m_bounds.width() * m_bounds.height();
 }
 
-TileIterator::TileIterator() :
-    m_state(-1, -1)
+TileIterator::TileIterator()
+    : m_state(-1, -1)
 {
     // nothing to do
 }

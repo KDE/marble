@@ -4,31 +4,26 @@
 // SPDX-FileCopyrightText: 2007 Inge Wallin <ingwa@kde.org>
 //
 
-
 #ifndef SVGXMLHANDLER_H
 #define SVGXMLHANDLER_H
 
-
-#include <QString>
 #include <QDataStream>
+#include <QString>
 #include <QXmlDefaultHandler>
-
 
 class SVGXmlHandler : public QXmlDefaultHandler
 {
- public:
-    SVGXmlHandler( QDataStream * out, const QString & path, int header );
+public:
+    SVGXmlHandler(QDataStream *out, const QString &path, int header);
     // virtual bool startDocument();
     // virtual bool endDocument();
-    bool  startElement(const QString&, const QString&, const QString&,
-                               const QXmlAttributes&) override;
+    bool startElement(const QString &, const QString &, const QString &, const QXmlAttributes &) override;
     // virtual bool endElement();
 
- private:
-    QDataStream * m_stream;
-    int      m_header;
-    QString  m_path;
+private:
+    QDataStream *m_stream;
+    int m_header;
+    QString m_path;
 };
-
 
 #endif // SVGXMLHANDLER_H

@@ -5,31 +5,31 @@
 //
 
 #include "GeoDataDocumentWriter.h"
-#include "MarbleModel.h"
-#include "ParsingRunnerManager.h"
 #include "GeoDataGeometry.h"
+#include "GeoDataLatLonAltBox.h"
 #include "GeoDataPlacemark.h"
 #include "GeoDataPolygon.h"
-#include "GeoDataLatLonAltBox.h"
-#include "TileId.h"
 #include "MarbleDirs.h"
+#include "MarbleModel.h"
+#include "ParsingRunnerManager.h"
+#include "TileId.h"
 #ifdef STATIC_BUILD
 #include "src/plugins/runner/osm/translators/O5mWriter.h"
 #endif
 
-#include <QGuiApplication>
 #include <QCommandLineParser>
 #include <QDebug>
-#include <QFileInfo>
 #include <QDir>
+#include <QFileInfo>
+#include <QGuiApplication>
 #include <QString>
 #include <QUrl>
 
-#include "VectorClipper.h"
 #include "NodeReducer.h"
-#include "TileIterator.h"
-#include "TileDirectory.h"
 #include "SpellChecker.h"
+#include "TileDirectory.h"
+#include "TileIterator.h"
+#include "VectorClipper.h"
 
 #ifdef STATIC_BUILD
 #include <QtPlugin>
@@ -50,7 +50,7 @@ static QString tileFileName(const QCommandLineParser &parser, int x, int y, int 
     return outputFile;
 }
 
-bool writeTile(GeoDataDocument* tile, const QString &outputFile)
+bool writeTile(GeoDataDocument *tile, const QString &outputFile)
 {
     QDir().mkpath(QFileInfo(outputFile).path());
     if (!GeoDataDocumentWriter::write(outputFile, *tile)) {
@@ -73,17 +73,15 @@ int main(int argc, char *argv[])
     parser.addVersionOption();
     parser.addPositionalArgument("input", "The input .osm or .shp file.");
 
-    parser.addOptions({
-                          {{"t", "osmconvert"}, "Tile data using osmconvert."},
-                          {"conflict-resolution", "How to deal with existing tiles: overwrite, skip or merge", "mode", "overwrite"},
-                          {{"c", "cache-directory"}, "Directory for temporary data.", "cache", "cache"},
-                          {{"s", "spellcheck"}, "Use this geonames.org cities file for spell-checking city names", "spellcheck"},
-                          {"verbose", "Increase amount of shell output information"},
-                          {{"d", "development"}, "Use local development vector osm map theme as output storage"},
-                          {{"z", "zoom-level"}, "Zoom level according to which OSM information has to be processed.", "levels", "11,13,15,17"},
-                          {{"o", "output"}, "Output file or directory", "output", QString("%1/maps/earth/vectorosm").arg(MarbleDirs::localPath())},
-                          {{"e", "extension"}, "Output file type: o5m (default), osm or kml", "file extension", "o5m"}
-                      });
+    parser.addOptions({{{"t", "osmconvert"}, "Tile data using osmconvert."},
+                       {"conflict-resolution", "How to deal with existing tiles: overwrite, skip or merge", "mode", "overwrite"},
+                       {{"c", "cache-directory"}, "Directory for temporary data.", "cache", "cache"},
+                       {{"s", "spellcheck"}, "Use this geonames.org cities file for spell-checking city names", "spellcheck"},
+                       {"verbose", "Increase amount of shell output information"},
+                       {{"d", "development"}, "Use local development vector osm map theme as output storage"},
+                       {{"z", "zoom-level"}, "Zoom level according to which OSM information has to be processed.", "levels", "11,13,15,17"},
+                       {{"o", "output"}, "Output file or directory", "output", QString("%1/maps/earth/vectorosm").arg(MarbleDirs::localPath())},
+                       {{"e", "extension"}, "Output file type: o5m (default), osm or kml", "file extension", "o5m"}});
 
     // Process the actual command line arguments given by the user
     parser.process(app);
@@ -100,7 +98,7 @@ int main(int argc, char *argv[])
     auto const levels = parser.value("zoom-level").split(',');
     QVector<unsigned int> zoomLevels;
     int maxZoomLevel = 0;
-    for(auto const &level: levels) {
+    for (auto const &level : levels) {
         int const zoomLevel = level.toInt();
         maxZoomLevel = qMax(zoomLevel, maxZoomLevel);
         zoomLevels << zoomLevel;
@@ -136,17 +134,17 @@ int main(int argc, char *argv[])
             spellChecker.setVerbose(parser.isSet("verbose"));
             spellChecker.correctPlaceLabels(map.data()->placemarkList());
         }
-        for(auto zoomLevel: zoomLevels) {
+        for (auto zoomLevel : zoomLevels) {
             TileIterator iter(world, zoomLevel);
             qint64 count = 0;
             qint64 const total = iter.total();
-            for(auto const &tileId: iter) {
+            for (auto const &tileId : iter) {
                 ++count;
                 QString const filename = tileFileName(parser, tileId.x(), tileId.y(), zoomLevel);
                 if (!overwriteTiles && QFileInfo::exists(filename)) {
                     continue;
                 }
-                GeoDataDocument* tile = processor.clipTo(zoomLevel, tileId.x(), tileId.y());
+                GeoDataDocument *tile = processor.clipTo(zoomLevel, tileId.x(), tileId.y());
                 if (!tile->isEmpty()) {
                     NodeReducer nodeReducer(tile, TileId(0, zoomLevel, tileId.x(), tileId.y()));
                     if (!writeTile(tile, filename)) {

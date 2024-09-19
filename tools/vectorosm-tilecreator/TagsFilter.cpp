@@ -7,26 +7,25 @@
 
 #include <QStringList>
 
-#include "GeoDataObject.h"
 #include "GeoDataDocument.h"
+#include "GeoDataObject.h"
 #include "GeoDataPlacemark.h"
 
-namespace Marble {
+namespace Marble
+{
 
 TagsFilter::TagsFilter(GeoDataDocument *document, const Tags &tagsList, FilterFlag filterFlag)
     : m_accepted(new GeoDataDocument)
 {
-    for (GeoDataFeature *feature: document->featureList()) {
+    for (GeoDataFeature *feature : document->featureList()) {
         if (const auto placemark = geodata_cast<GeoDataPlacemark>(feature)) {
             bool acceptPlacemark = false;
-            auto const & osmData = placemark->osmData();
+            auto const &osmData = placemark->osmData();
 
-            if (filterFlag == FilterRailwayService &&
-                    osmData.containsTagKey(QStringLiteral("railway")) &&
-                    osmData.containsTagKey(QStringLiteral("service"))) {
+            if (filterFlag == FilterRailwayService && osmData.containsTagKey(QStringLiteral("railway")) && osmData.containsTagKey(QStringLiteral("service"))) {
                 acceptPlacemark = false;
             } else {
-                for (auto const &tag: tagsList) {
+                for (auto const &tag : tagsList) {
                     bool contains;
                     if (tag.second == QLatin1String("*")) {
                         contains = osmData.containsTagKey(tag.first);
@@ -45,8 +44,7 @@ TagsFilter::TagsFilter(GeoDataDocument *document, const Tags &tagsList, FilterFl
             } else {
                 m_rejectedObjects.append(placemark->clone());
             }
-        }
-        else {
+        } else {
             m_accepted->append(feature->clone());
         }
     }
@@ -58,12 +56,12 @@ TagsFilter::~TagsFilter()
     qDeleteAll(m_rejectedObjects);
 }
 
-QVector<GeoDataFeature*>::const_iterator TagsFilter::rejectedObjectsBegin() const
+QVector<GeoDataFeature *>::const_iterator TagsFilter::rejectedObjectsBegin() const
 {
     return m_rejectedObjects.begin();
 }
 
-QVector<GeoDataFeature*>::const_iterator TagsFilter::rejectedObjectsEnd() const
+QVector<GeoDataFeature *>::const_iterator TagsFilter::rejectedObjectsEnd() const
 {
     return m_rejectedObjects.end();
 }
@@ -75,13 +73,13 @@ GeoDataDocument *TagsFilter::accepted()
 
 void TagsFilter::removeAnnotationTags(GeoDataDocument *document)
 {
-    for (auto placemark: document->placemarkList()) {
-        OsmPlacemarkData & osmData = placemark->osmData();
+    for (auto placemark : document->placemarkList()) {
+        OsmPlacemarkData &osmData = placemark->osmData();
         removeAnnotationTags(osmData);
-        for (auto & reference: osmData.hRef()->nodeReferences()) {
+        for (auto &reference : osmData.hRef()->nodeReferences()) {
             removeAnnotationTags(reference);
         }
-        for (auto & reference: osmData.hRef()->memberReferences()) {
+        for (auto &reference : osmData.hRef()->memberReferences()) {
             removeAnnotationTags(reference);
         }
     }

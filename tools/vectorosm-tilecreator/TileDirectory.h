@@ -6,21 +6,22 @@
 #ifndef MARBLE_TILEDIRECTORY_H
 #define MARBLE_TILEDIRECTORY_H
 
-#include "VectorClipper.h"
 #include "TagsFilter.h"
-#include <TileId.h>
+#include "VectorClipper.h"
 #include <GeoDataLinearRing.h>
-#include <ParsingRunnerManager.h>
 #include <GeoSceneMercatorTileProjection.h>
+#include <ParsingRunnerManager.h>
+#include <TileId.h>
 
-#include <QNetworkAccessManager>
-#include <QSharedPointer>
-#include <QObject>
 #include <QFile>
+#include <QNetworkAccessManager>
+#include <QObject>
+#include <QSharedPointer>
 
 class QNetworkReply;
 
-namespace Marble {
+namespace Marble
+{
 
 class Download : public QObject
 {
@@ -28,7 +29,7 @@ class Download : public QObject
 
 public:
     QString target;
-    QNetworkReply* reply;
+    QNetworkReply *reply;
     qint64 received;
     qint64 total;
 
@@ -44,18 +45,9 @@ class TileDirectory : public QObject
     Q_OBJECT
 
 public:
+    enum TileType { Landmass, OpenStreetMap };
 
-    enum TileType
-    {
-        Landmass,
-        OpenStreetMap
-    };
-
-    enum InputType
-    {
-        OsmxInput,
-        RawInput
-    };
+    enum InputType { OsmxInput, RawInput };
 
     TileDirectory(TileType tileType, const QString &cacheDir, ParsingRunnerManager &manager, int maxZoomLevel);
     /** Create a tile directory for loading data from an OSMX file.
@@ -85,7 +77,7 @@ public:
     void createOsmTiles() const;
     int innerNodes(const TileId &tile) const;
 
-    static void printProgress(double progress, int barWidth=40);
+    static void printProgress(double progress, int barWidth = 40);
 
 private Q_SLOTS:
     void updateProgress();

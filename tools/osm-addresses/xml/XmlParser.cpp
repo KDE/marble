@@ -10,24 +10,24 @@
 namespace Marble
 {
 
-XmlParser::XmlParser( QObject *parent ) :
-    OsmParser( parent )
+XmlParser::XmlParser(QObject *parent)
+    : OsmParser(parent)
 {
     // nothing to do
 }
 
-bool XmlParser::parse( const QFileInfo &content, int, bool &needAnotherPass )
+bool XmlParser::parse(const QFileInfo &content, int, bool &needAnotherPass)
 {
     needAnotherPass = false;
 
     QXmlSimpleReader xmlReader;
-    xmlReader.setContentHandler( this );
-    xmlReader.setErrorHandler( this );
+    xmlReader.setContentHandler(this);
+    xmlReader.setErrorHandler(this);
 
-    QFile file( content.absoluteFilePath() );
-    QXmlInputSource *source = new QXmlInputSource( &file );
+    QFile file(content.absoluteFilePath());
+    QXmlInputSource *source = new QXmlInputSource(&file);
 
-    if ( !xmlReader.parse( source ) ) {
+    if (!xmlReader.parse(source)) {
         qCritical() << "Failed to parse " << content.absoluteFilePath();
         return false;
     }
@@ -35,51 +35,53 @@ bool XmlParser::parse( const QFileInfo &content, int, bool &needAnotherPass )
     return true;
 }
 
-bool XmlParser::startElement ( const QString & /*namespaceURI*/, const QString & /*localName*/, const QString & qName, const QXmlAttributes & atts )
+bool XmlParser::startElement(const QString & /*namespaceURI*/, const QString & /*localName*/, const QString &qName, const QXmlAttributes &atts)
 {
     if (qName == QLatin1String("node")) {
         m_node = Node();
-        m_id = atts.value( "id" ).toInt();
-        m_node.lon = atts.value( "lon" ).toFloat();
-        m_node.lat = atts.value( "lat" ).toFloat();
+        m_id = atts.value("id").toInt();
+        m_node.lon = atts.value("lon").toFloat();
+        m_node.lat = atts.value("lat").toFloat();
         m_element = NodeType;
     } else if (qName == QLatin1String("way")) {
-        m_id = atts.value( "id" ).toInt();
+        m_id = atts.value("id").toInt();
         m_way = Way();
         m_element = WayType;
     } else if (qName == QLatin1String("nd")) {
-        m_way.nodes.push_back( atts.value( "ref" ).toInt() );
+        m_way.nodes.push_back(atts.value("ref").toInt());
     } else if (qName == QLatin1String("relation")) {
-        m_id = atts.value( "id" ).toInt();
+        m_id = atts.value("id").toInt();
         m_relation = Relation();
         m_relation.nodes.clear();
         m_element = RelationType;
     } else if (qName == QLatin1String("member")) {
         if (atts.value("type") == QLatin1String("node")) {
-            m_relation.nodes.push_back( atts.value( "ref" ).toInt() );
+            m_relation.nodes.push_back(atts.value("ref").toInt());
         } else if (atts.value("type") == QLatin1String("way")) {
             RelationRole role = None;
-            if (atts.value("role") == QLatin1String("outer")) role = Outer;
-            if (atts.value("role") == QLatin1String("inner")) role = Inner;
-            m_relation.ways.push_back( QPair<int, RelationRole>( atts.value( "ref" ).toInt(), role ) );
+            if (atts.value("role") == QLatin1String("outer"))
+                role = Outer;
+            if (atts.value("role") == QLatin1String("inner"))
+                role = Inner;
+            m_relation.ways.push_back(QPair<int, RelationRole>(atts.value("ref").toInt(), role));
         } else if (atts.value("type") == QLatin1String("relation")) {
-            m_relation.relations.push_back( atts.value( "ref" ).toInt() );
+            m_relation.relations.push_back(atts.value("ref").toInt());
         } else {
-            qDebug() << "Unknown relation member type " << atts.value( "type" );
+            qDebug() << "Unknown relation member type " << atts.value("type");
         }
     } else if (qName == QLatin1String("tag") && m_element == RelationType) {
         if (atts.value("k") == QLatin1String("boundary") && atts.value("v") == QLatin1String("administrative")) {
             m_relation.isAdministrativeBoundary = true;
         } else if (atts.value("k") == QLatin1String("admin_level")) {
-            m_relation.adminLevel = atts.value( "v" ).toInt();
+            m_relation.adminLevel = atts.value("v").toInt();
         } else if (atts.value("k") == QLatin1String("name")) {
-            m_relation.name = atts.value( "v" );
+            m_relation.name = atts.value("v");
         } else if (atts.value("k") == QLatin1String("type") && atts.value("v") == QLatin1String("multipolygon")) {
             m_relation.isMultipolygon = true;
         }
     } else if (qName == QLatin1String("tag") && m_element == WayType) {
-        QString const key = atts.value( "k" );
-        QString const value = atts.value( "v" );
+        QString const key = atts.value("k");
+        QString const value = atts.value("v");
         if (key == QLatin1String("name")) {
             m_way.name = value;
         } else if (key == QLatin1String("addr:street")) {
@@ -93,15 +95,15 @@ bool XmlParser::startElement ( const QString & /*namespaceURI*/, const QString &
             m_way.save = true;
         } else if (key == QLatin1String("building") && value == QLatin1String("yes")) {
             m_way.isBuilding = true;
-        } else  {
-            if ( shouldSave( WayType, key, value ) ) {
+        } else {
+            if (shouldSave(WayType, key, value)) {
                 m_way.save = true;
             }
-            setCategory( m_way, key, value );
+            setCategory(m_way, key, value);
         }
     } else if (qName == QLatin1String("tag") && m_element == NodeType) {
-        QString const key = atts.value( "k" );
-        QString const value = atts.value( "v" );
+        QString const key = atts.value("k");
+        QString const value = atts.value("v");
         if (key == QLatin1String("name")) {
             m_node.name = value;
         } else if (key == QLatin1String("addr:street")) {
@@ -114,17 +116,17 @@ bool XmlParser::startElement ( const QString & /*namespaceURI*/, const QString &
             m_node.city = value;
             m_node.save = true;
         } else {
-            if ( shouldSave( NodeType, key, value ) ) {
+            if (shouldSave(NodeType, key, value)) {
                 m_node.save = true;
             }
-            setCategory( m_node, key, value );
+            setCategory(m_node, key, value);
         }
     }
 
     return true;
 }
 
-bool XmlParser::endElement ( const QString & /*namespaceURI*/, const QString & /*localName*/, const QString & qName )
+bool XmlParser::endElement(const QString & /*namespaceURI*/, const QString & /*localName*/, const QString &qName)
 {
     if (qName == QLatin1String("node")) {
         m_nodes[m_id] = m_node;

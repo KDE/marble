@@ -6,12 +6,13 @@
 #ifndef TOOLS_SPELLCHECKER_H
 #define TOOLS_SPELLCHECKER_H
 
-#include <TileId.h>
 #include "GeoDataPlacemark.h"
+#include <TileId.h>
 
 #include <QVector>
 
-namespace Marble {
+namespace Marble
+{
 
 class GeoDataPlacemark;
 
@@ -21,16 +22,16 @@ public:
     explicit SpellChecker(const QString &citiesFile);
     void setVerbose(bool verbose);
 
-    void correctPlaceLabels(const QVector<GeoDataPlacemark*> &placemarks);
+    void correctPlaceLabels(const QVector<GeoDataPlacemark *> &placemarks);
 
 private:
-    typedef QHash<TileId, QVector<GeoDataPlacemark*> > TileHash;
+    typedef QHash<TileId, QVector<GeoDataPlacemark *>> TileHash;
 
     static int levenshteinDistance(const QString &a, const QString &b);
 
-    QVector<GeoDataPlacemark*> cityPlaces(const QVector<GeoDataPlacemark*> &placemarks) const;
+    QVector<GeoDataPlacemark *> cityPlaces(const QVector<GeoDataPlacemark *> &placemarks) const;
     TileHash parseCities(const QString &filename) const;
-    QVector<GeoDataPlacemark*> candidatesFor(GeoDataPlacemark* placemark) const;
+    QVector<GeoDataPlacemark *> candidatesFor(GeoDataPlacemark *placemark) const;
 
     int const m_tileLevel;
     TileHash m_tileHash;

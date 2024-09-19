@@ -5,12 +5,11 @@
 // SPDX-FileCopyrightText: 2013 Mohammed Nafees <nafees.technocool@gmail.com>
 //
 
-
-#include <QFile>
-#include <QDebug>
 #include <QCoreApplication>
-#include <QFileInfo>
 #include <QDataStream>
+#include <QDebug>
+#include <QFile>
+#include <QFileInfo>
 
 #include <cmath>
 #include <iostream>
@@ -18,7 +17,7 @@
 #define ENABLEGUI
 
 // Set up Color Table Per B-V Color indices from some Reference Stars
-QVector<double> colorTable( 0 );
+QVector<double> colorTable(0);
 
 void exportToDat()
 {
@@ -33,44 +32,44 @@ void exportToDat()
     out.setVersion(QDataStream::Qt_4_3);
 
     QFile data("catalog.dat");
-    if ( data.open( QFile::ReadOnly ) ) {
+    if (data.open(QFile::ReadOnly)) {
         QTextStream stream(&data);
         QString line;
         do {
             line = stream.readLine();
 
-            QString idString = line.mid(0,4);
+            QString idString = line.mid(0, 4);
             int idValue = idString.toInt();
 
-            QStringView recString = line.mid( 75, 6 );
+            QStringView recString = line.mid(75, 6);
 
-            double raHH = recString.mid( 0, 2 ).toDouble();
-            double raMM = recString.mid( 2, 2 ).toDouble();
-            double raSS = recString.mid( 4, 2 ).toDouble();
+            double raHH = recString.mid(0, 2).toDouble();
+            double raMM = recString.mid(2, 2).toDouble();
+            double raSS = recString.mid(4, 2).toDouble();
 
-            double raValue = 15 * ( raHH + raMM / 60.0 + raSS / 3600.0 ) / 180.0 * M_PI;
+            double raValue = 15 * (raHH + raMM / 60.0 + raSS / 3600.0) / 180.0 * M_PI;
 
-            QStringView decString = line.mid( 83, 7 );
+            QStringView decString = line.mid(83, 7);
 
             double deSign = decString.startsWith(QLatin1Char('-')) ? -1.0 : 1.0;
-            double deHH = decString.mid( 1, 2 ).toDouble();
-            double deMM = decString.mid( 3, 2 ).toDouble();
-            double deSS = decString.mid( 5, 2 ).toDouble();
+            double deHH = decString.mid(1, 2).toDouble();
+            double deMM = decString.mid(3, 2).toDouble();
+            double deSS = decString.mid(5, 2).toDouble();
 
-            double deValue = deSign * ( deHH + deMM / 60.0 + deSS / 3600.0 ) / 180.0 * M_PI;
+            double deValue = deSign * (deHH + deMM / 60.0 + deSS / 3600.0) / 180.0 * M_PI;
 
-            QStringView magString = line.mid( 102, 5 );
+            QStringView magString = line.mid(102, 5);
             double magValue = magString.toDouble();
 
-            QStringView bvString = line.mid( 108, 6);
-            int     colorIdx = 2; // Default White
+            QStringView bvString = line.mid(108, 6);
+            int colorIdx = 2; // Default White
 
             // Find Index of Table Entry with Closest B-V value (Smallest Difference)
             if (bvString != QLatin1String("      ")) {
                 double bvValue = bvString.toDouble();
-                double bvMinDifference = fabs(colorTable.at(0)-bvValue);
+                double bvMinDifference = fabs(colorTable.at(0) - bvValue);
                 for (int i = 1; i < colorTable.size(); ++i) {
-                    double bvDifference = fabs(colorTable.at(i)-bvValue);
+                    double bvDifference = fabs(colorTable.at(i) - bvValue);
                     if (bvDifference < bvMinDifference) {
                         colorIdx = i;
                         bvMinDifference = bvDifference;
@@ -78,21 +77,20 @@ void exportToDat()
                 }
             }
 
-
-//            qDebug() << "Rec:" << recString << "Dec.:" << decString << "Mag.:" << magString;
-            if ( !line.isNull() && magValue < 6.0 ) {
-            if (raValue != 0 && deValue != 0) { // Filter out Novae and DSOs
-            if (idValue != 5958) { // Filter out special cases, like novae ( T CrB, ... )
-            qDebug() << "ID:" << idValue << "RA:" << raValue << "DE:" << deValue << "mag:" << magValue << "B-V:" << bvString << "idx:" << colorIdx;
-            out << idValue;
-            out << raValue;
-            out << deValue;
-            out << magValue;
-            out << colorIdx;
+            //            qDebug() << "Rec:" << recString << "Dec.:" << decString << "Mag.:" << magString;
+            if (!line.isNull() && magValue < 6.0) {
+                if (raValue != 0 && deValue != 0) { // Filter out Novae and DSOs
+                    if (idValue != 5958) { // Filter out special cases, like novae ( T CrB, ... )
+                        qDebug() << "ID:" << idValue << "RA:" << raValue << "DE:" << deValue << "mag:" << magValue << "B-V:" << bvString << "idx:" << colorIdx;
+                        out << idValue;
+                        out << raValue;
+                        out << deValue;
+                        out << magValue;
+                        out << colorIdx;
+                    }
+                }
             }
-        }
-            }
-        } while ( !line.isNull() );
+        } while (!line.isNull());
     }
     file.flush();
 }
@@ -549,41 +547,41 @@ void exportToKml()
         << "   </Style> \n";
 
     QFile data("catalog.dat");
-    if ( data.open( QFile::ReadOnly ) ) {
+    if (data.open(QFile::ReadOnly)) {
         QTextStream stream(&data);
         QString line;
         do {
             line = stream.readLine();
 
-            QStringView recString = line.mid( 75, 6 );
-            double raHH = recString.mid( 0, 2 ).toDouble();
-            double raMM = recString.mid( 2, 2 ).toDouble();
-            double raSS = recString.mid( 4, 2 ).toDouble();
+            QStringView recString = line.mid(75, 6);
+            double raHH = recString.mid(0, 2).toDouble();
+            double raMM = recString.mid(2, 2).toDouble();
+            double raSS = recString.mid(4, 2).toDouble();
 
-            qreal longitude = ( raHH + raMM / 60.0 + raSS / 3600.0 ) * 15.0 - 180.0;
+            qreal longitude = (raHH + raMM / 60.0 + raSS / 3600.0) * 15.0 - 180.0;
 
-            QStringView decString = line.mid( 83, 7 );
+            QStringView decString = line.mid(83, 7);
             double deSign = decString.startsWith(QLatin1Char('-')) ? -1.0 : 1.0;
-            double deHH = decString.mid( 1, 2 ).toDouble();
-            double deMM = decString.mid( 3, 2 ).toDouble();
-            double deSS = decString.mid( 5, 2 ).toDouble();
+            double deHH = decString.mid(1, 2).toDouble();
+            double deMM = decString.mid(3, 2).toDouble();
+            double deSS = decString.mid(5, 2).toDouble();
 
-            double deValue = deSign * ( deHH + deMM / 60.0 + deSS / 3600.0 );
+            double deValue = deSign * (deHH + deMM / 60.0 + deSS / 3600.0);
 
             qreal latitude = deValue;
 
-            QStringView magString = line.mid( 102, 5 );
+            QStringView magString = line.mid(102, 5);
             double magValue = magString.toDouble();
 
-            QStringView bvString = line.mid( 108, 6);
-            int     colorIdx = 2; // Default White
+            QStringView bvString = line.mid(108, 6);
+            int colorIdx = 2; // Default White
 
             // Find Index of Table Entry with Closest B-V value (Smallest Difference)
             if (bvString != QLatin1String("      ")) {
                 double bvValue = bvString.toDouble();
-                double bvMinDifference = fabs(colorTable.at(0)-bvValue);
+                double bvMinDifference = fabs(colorTable.at(0) - bvValue);
                 for (int i = 1; i < colorTable.size(); ++i) {
-                    double bvDifference = fabs(colorTable.at(i)-bvValue);
+                    double bvDifference = fabs(colorTable.at(i) - bvValue);
                     if (bvDifference < bvMinDifference) {
                         colorIdx = i;
                         bvMinDifference = bvDifference;
@@ -592,45 +590,37 @@ void exportToKml()
             }
 
             QString styleId;
-            if ( magValue < -1 ) {
+            if (magValue < -1) {
                 styleId = "mag-1";
-            }
-            else if ( magValue < 0 && magValue > -1 ) {
+            } else if (magValue < 0 && magValue > -1) {
                 styleId = "mag0";
-            }
-            else if ( magValue < 1 && magValue > 0 ) {
+            } else if (magValue < 1 && magValue > 0) {
                 styleId = "mag1";
-            }
-            else if ( magValue < 2 && magValue > 1 ) {
+            } else if (magValue < 2 && magValue > 1) {
                 styleId = "mag2";
-            }
-            else if ( magValue < 3 && magValue > 2 ) {
+            } else if (magValue < 3 && magValue > 2) {
                 styleId = "mag3";
-            }
-            else if ( magValue < 4 && magValue > 3 ) {
+            } else if (magValue < 4 && magValue > 3) {
                 styleId = "mag4";
-            }
-            else if ( magValue < 5 && magValue > 4 ) {
+            } else if (magValue < 5 && magValue > 4) {
                 styleId = "mag5";
-            }
-            else if ( magValue < 6 && magValue > 5 ) {
+            } else if (magValue < 6 && magValue > 5) {
                 styleId = "mag6";
-            }
-            else {
+            } else {
                 styleId = "mag7";
             }
 
-            if ( colorIdx == 0 ) {
+            if (colorIdx == 0) {
                 styleId += QLatin1String(" blue");
-            } else if ( colorIdx == 1 ) {
+            } else if (colorIdx == 1) {
                 styleId += QLatin1String(" bluewhite");
-            } else if ( colorIdx == 3 ) {
+            } else if (colorIdx == 3) {
                 styleId += QLatin1String(" yellow");
-            } else if ( colorIdx == 4 ) {
+            } else if (colorIdx == 4) {
                 styleId += QLatin1String(" orange");
-            } else if ( colorIdx == 5 ) {
+            } else if (colorIdx == 5) {
                 styleId += QLatin1String(" red");
-            } else if ( colorIdx == 6 ) {
+            } else if (colorIdx == 6) {
                 styleId += QLatin1String(" garnetred");
             } else {
                 // white and no color ID
@@ -639,17 +629,17 @@ void exportToKml()
 
             out << "   <Placemark> \n";
 
-            QString name = line.mid( 7, 3 );
+            QString name = line.mid(7, 3);
             if (name == QLatin1String("Alp")) {
-                out << "        <name>" << QString::fromUtf8( "α" ) << "</name> \n";
+                out << "        <name>" << QString::fromUtf8("α") << "</name> \n";
             } else if (name == QLatin1String("Bet")) {
-                out << "        <name>" << QString::fromUtf8( "β" ) << "</name> \n";
+                out << "        <name>" << QString::fromUtf8("β") << "</name> \n";
             } else if (name == QLatin1String("Gam")) {
-                out << "        <name>" << QString::fromUtf8( "γ" ) << "</name> \n";
+                out << "        <name>" << QString::fromUtf8("γ") << "</name> \n";
             } else if (name == QLatin1String("Del")) {
-                out << "        <name>" << QString::fromUtf8( "δ" ) << "</name> \n";
+                out << "        <name>" << QString::fromUtf8("δ") << "</name> \n";
             } else if (name == QLatin1String("Eps")) {
-                out << "        <name>" << QString::fromUtf8( "ε" ) << "</name> \n";
+                out << "        <name>" << QString::fromUtf8("ε") << "</name> \n";
             }
 
             out << "       <styleUrl>#" << styleId << "</styleUrl> \n"
@@ -658,7 +648,7 @@ void exportToKml()
                 << "       </Point> \n"
                 << "   </Placemark> \n";
 
-        } while ( !line.isNull() );
+        } while (!line.isNull());
     }
 
     out << "</Document> \n"
@@ -669,29 +659,28 @@ void exportToKml()
 
 int main(int argc, char *argv[])
 {
-    QCoreApplication  app(argc, argv);
+    QCoreApplication app(argc, argv);
 
-    if (!QFileInfo::exists("catalog.dat"))
-    {
+    if (!QFileInfo::exists("catalog.dat")) {
         std::cerr << "Missing stars.dat in current directory. Exiting." << std::endl;
         return 1;
     }
 
     colorTable.append(double(-0.23)); // Spica blue
-    colorTable.append(double(0.0)); //Rigel blue-white
-    colorTable.append(double(0.09)); //Deneb white
-    colorTable.append(double(0.80)); //Capella yellow
-    colorTable.append(double(1.23)); //Arcturus orange
-    colorTable.append(double(1.85)); //Betelgeuse red
-    colorTable.append(double(2.35)); //Mu Cep garnet red
+    colorTable.append(double(0.0)); // Rigel blue-white
+    colorTable.append(double(0.09)); // Deneb white
+    colorTable.append(double(0.80)); // Capella yellow
+    colorTable.append(double(1.23)); // Arcturus orange
+    colorTable.append(double(1.85)); // Betelgeuse red
+    colorTable.append(double(2.35)); // Mu Cep garnet red
 
     exportToDat();
     exportToKml();
 
     QFile starFile("stars.dat");
     starFile.open(QIODevice::ReadOnly);
-    QDataStream in(&starFile);    // read the data serialized from the file
- // Read and check the header
+    QDataStream in(&starFile); // read the data serialized from the file
+    // Read and check the header
     quint32 magic;
     in >> magic;
     if (magic != 0x73746172)
@@ -702,7 +691,7 @@ int main(int argc, char *argv[])
     in >> version;
     if (version > 004) {
         qDebug() << "stars.dat: file too new.";
-     return -1;
+        return -1;
     }
     int id;
     double ra;
@@ -710,7 +699,7 @@ int main(int argc, char *argv[])
     double mag;
     int colorIdx;
 
-    while ( !in.atEnd() ) {
+    while (!in.atEnd()) {
         in >> id;
         in >> ra;
         in >> de;

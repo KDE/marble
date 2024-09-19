@@ -10,15 +10,17 @@
 
 #include <QRect>
 
-namespace Marble {
+namespace Marble
+{
 
-class TileIterator {
+class TileIterator
+{
 public:
     using const_iterator = TileIterator;
 
-    const const_iterator& operator*();
-    bool operator!=( const const_iterator& ) const;
-    const_iterator& operator++();
+    const const_iterator &operator*();
+    bool operator!=(const const_iterator &) const;
+    const_iterator &operator++();
     const_iterator begin() const;
     const_iterator end() const;
 

@@ -6,10 +6,9 @@
 #ifndef TILEPROCESSOR_H
 #define TILEPROCESSOR_H
 
-#include <QObject>
 #include <QColor>
 #include <QImage>
-
+#include <QObject>
 
 class TileProcessor : public QObject
 {
@@ -18,15 +17,14 @@ public:
     explicit TileProcessor(QObject *parent = nullptr);
 
 public:
+    void parseFileList(const QString &fileListUrl);
 
-    void parseFileList(const QString& fileListUrl);
-
-    void loadReferenceImages(const QString& maskPath, const QString& bathymetryPath);
+    void loadReferenceImages(const QString &maskPath, const QString &bathymetryPath);
 
     void process();
 
 private:
-    void colorForFile(const QString& filePath);
+    void colorForFile(const QString &filePath);
 
     QStringList m_fileList;
 
@@ -35,7 +33,6 @@ private:
 
     int m_tileLevel;
     static int progress;
-
 };
 
 #endif // TILEPROCESSOR_H

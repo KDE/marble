@@ -3,10 +3,8 @@
 // SPDX-FileCopyrightText: 2008 Patrick Spendrin <ps_ml@gmx.de>
 //
 
-
 #ifndef TCCORE_H
 #define TCCORE_H
-
 
 #include <QCoreApplication>
 #include <QDebug>
@@ -18,11 +16,11 @@ namespace Marble
 
 class TCCoreApplication : public QCoreApplication
 {
-    public:
-        TCCoreApplication( int argc, char ** argv );
+public:
+    TCCoreApplication(int argc, char **argv);
 
-    private:
-        TileCreator *m_tilecreator;
+private:
+    TileCreator *m_tilecreator;
 };
 
 }

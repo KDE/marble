@@ -65,7 +65,7 @@ void TirexBackend::commandReadyRead()
         req.addrSize = sizeof(req.addr);
         bzero(&req.addr, req.addrSize);
         QByteArray data(0xffff, 0);
-        auto n = recvfrom(m_commandSocketFd, data.data(), 0xffff, MSG_DONTWAIT, reinterpret_cast<sockaddr*>(&req.addr), &req.addrSize);
+        auto n = recvfrom(m_commandSocketFd, data.data(), 0xffff, MSG_DONTWAIT, reinterpret_cast<sockaddr *>(&req.addr), &req.addrSize);
         if (n <= 0) {
             break;
         }
@@ -113,7 +113,7 @@ void TirexBackend::commandReadyRead()
             errorMsg += "id=" + req.id + "\n";
             errorMsg += "type=" + QByteArray(type, typeLen) + "\n";
             errorMsg += "result=error\nerrormsg=unsupported requested\n";
-            sendto(m_commandSocketFd, errorMsg.constData(), errorMsg.size(), 0, reinterpret_cast<const sockaddr*>(&req.addr), req.addrSize);
+            sendto(m_commandSocketFd, errorMsg.constData(), errorMsg.size(), 0, reinterpret_cast<const sockaddr *>(&req.addr), req.addrSize);
             continue;
         }
 
@@ -123,19 +123,16 @@ void TirexBackend::commandReadyRead()
 
 void TirexBackend::tileDone(const TirexMetatileRequest &req)
 {
-    QByteArray msg = "id=" + req.id
-        + "\ntype=metatile_render_request\nresult=ok\nx=" + QByteArray::number(req.tile.x)
-        + "\ny=" + QByteArray::number(req.tile.y)
-        + "\nz=" + QByteArray::number(req.tile.z)
-        + "\nmetatile=" + metatileFileName(req).toUtf8()
+    QByteArray msg = "id=" + req.id + "\ntype=metatile_render_request\nresult=ok\nx=" + QByteArray::number(req.tile.x) + "\ny=" + QByteArray::number(req.tile.y)
+        + "\nz=" + QByteArray::number(req.tile.z) + "\nmetatile=" + metatileFileName(req).toUtf8()
         + "\nrender_time=" + QByteArray::number(m_renderTime.elapsed()) + "\n";
-    sendto(m_commandSocketFd, msg.constData(), msg.size(), 0, reinterpret_cast<const sockaddr*>(&req.addr), req.addrSize);
+    sendto(m_commandSocketFd, msg.constData(), msg.size(), 0, reinterpret_cast<const sockaddr *>(&req.addr), req.addrSize);
 }
 
 void TirexBackend::tileError(const TirexMetatileRequest &req, const QString &errMsg)
 {
     QByteArray msg = "id=" + req.id + "\ntype=metatile_render_request\nresult=error\nerrmsg=" + errMsg.toUtf8() + "\n";
-    sendto(m_commandSocketFd, msg.constData(), msg.size(), 0, reinterpret_cast<const sockaddr*>(&req.addr), req.addrSize);
+    sendto(m_commandSocketFd, msg.constData(), msg.size(), 0, reinterpret_cast<const sockaddr *>(&req.addr), req.addrSize);
 }
 
 QVariant TirexBackend::configValue(const QString &key) const
@@ -159,12 +156,8 @@ QString TirexBackend::metatileFileName(const TirexMetatileRequest &req)
         y >>= 4;
     }
 
-    QString path = m_tileDir + QLatin1Char('/') +
-        QString::number(req.tile.z) + QLatin1Char('/') +
-        QString::number(hash[4]) + QLatin1Char('/') +
-        QString::number(hash[3]) + QLatin1Char('/') +
-        QString::number(hash[2]) + QLatin1Char('/') +
-        QString::number(hash[1]) + QLatin1Char('/');
+    QString path = m_tileDir + QLatin1Char('/') + QString::number(req.tile.z) + QLatin1Char('/') + QString::number(hash[4]) + QLatin1Char('/')
+        + QString::number(hash[3]) + QLatin1Char('/') + QString::number(hash[2]) + QLatin1Char('/') + QString::number(hash[1]) + QLatin1Char('/');
     QDir().mkpath(path);
     path += QString::number(hash[0]) + QLatin1String(".meta");
     return path;
@@ -204,13 +197,13 @@ void TirexBackend::writeMetatileHeader(QIODevice *io, const TirexMetatile &tile)
     header.x = tile.x;
     header.y = tile.y;
     header.z = tile.z;
-    io->write(reinterpret_cast<const char*>(&header), sizeof(header));
+    io->write(reinterpret_cast<const char *>(&header), sizeof(header));
 
     TirexMetatileEntry entry;
     entry.offset = 0;
     entry.size = 0;
     for (int i = 0; i < header.count; ++i) {
-        io->write(reinterpret_cast<const char*>(&entry), sizeof(entry));
+        io->write(reinterpret_cast<const char *>(&entry), sizeof(entry));
     }
 }
 
@@ -222,7 +215,7 @@ void TirexBackend::writeMetatileEntry(QIODevice *io, int entryIdx, int offset, i
     TirexMetatileEntry entry;
     entry.offset = offset;
     entry.size = size;
-    io->write(reinterpret_cast<const char*>(&entry), sizeof(TirexMetatileEntry));
+    io->write(reinterpret_cast<const char *>(&entry), sizeof(TirexMetatileEntry));
 
     io->seek(seekPos);
 }

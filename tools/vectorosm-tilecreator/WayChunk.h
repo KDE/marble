@@ -11,7 +11,8 @@
 #include <QList>
 #include <QSharedPointer>
 
-namespace Marble {
+namespace Marble
+{
 
 class GeoDataPlacemark;
 
@@ -23,11 +24,11 @@ private:
 public:
     using Ptr = QSharedPointer<WayChunk>;
 
-    WayChunk(const PlacemarkPtr &placemark, qint64 first, qint64 last );
+    WayChunk(const PlacemarkPtr &placemark, qint64 first, qint64 last);
     ~WayChunk();
     void append(const PlacemarkPtr &placemark, qint64 last);
     void append(const Ptr &chunk);
-    void prepend(const PlacemarkPtr & placemark, qint64 first);
+    void prepend(const PlacemarkPtr &placemark, qint64 first);
 
     /*
      * Creates a new placemark object by concatenating all the linsetrings which exist in the WayChunk

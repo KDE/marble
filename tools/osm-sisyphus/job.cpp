@@ -7,12 +7,15 @@
 #include "logger.h"
 #include "upload.h"
 
-#include <QDebug>
 #include <QDateTime>
+#include <QDebug>
 #include <QProcess>
 
-Job::Job(const Region &region, const JobParameters &parameters, QObject *parent) :
-    QObject(parent), m_status(Waiting), m_region(region), m_parameters(parameters)
+Job::Job(const Region &region, const JobParameters &parameters, QObject *parent)
+    : QObject(parent)
+    , m_status(Waiting)
+    , m_region(region)
+    , m_parameters(parameters)
 {
     // nothing to do
 }
@@ -52,7 +55,7 @@ void Job::setMonavSettings(const QString &filename)
     m_monavSettings = filename;
 }
 
-bool Job::operator ==(const Job &other) const
+bool Job::operator==(const Job &other) const
 {
     return m_transport == other.m_transport && m_region == other.m_region;
 }
@@ -71,18 +74,36 @@ void Job::changeStatus(Job::Status status, const QString &message)
 {
     QString statusType;
     switch (status) {
-    case Waiting: statusType = "waiting"; break;
-    case Downloading: statusType = "downloading"; break;
-    case Routing: statusType = "routing"; break;
-    case Search: statusType = "search"; break;
-    case Packaging: statusType = "packaging"; break;
-    case Uploading: statusType = "uploading"; break;
-    case Finished: statusType = "finished"; break;
-    case Error: statusType = "error"; break;
+    case Waiting:
+        statusType = "waiting";
+        break;
+    case Downloading:
+        statusType = "downloading";
+        break;
+    case Routing:
+        statusType = "routing";
+        break;
+    case Search:
+        statusType = "search";
+        break;
+    case Packaging:
+        statusType = "packaging";
+        break;
+    case Uploading:
+        statusType = "uploading";
+        break;
+    case Finished:
+        statusType = "finished";
+        break;
+    case Error:
+        statusType = "error";
+        break;
     }
 
     Logger::instance().setStatus(m_region.id() + QLatin1Char('_') + m_transport,
-                                 m_region.name() + QLatin1String(" (") + m_transport + QLatin1Char(')'), statusType, message);
+                                 m_region.name() + QLatin1String(" (") + m_transport + QLatin1Char(')'),
+                                 statusType,
+                                 message);
     m_statusMessage = message;
     m_status = status;
 }
@@ -119,29 +140,29 @@ bool Job::download()
     }
 }
 
-//bool Job::marble()
+// bool Job::marble()
 //{
-//    changeStatus(Routing, "Extracting bounding box.");
-//    QStringList arguments;
-//    arguments << "--name" << m_region.name();
-//    arguments << "--version" << "0.2";
-//    arguments << "--date" << QDateTime::currentDateTime().toString("yyyy/dd/MM");
-//    arguments << "--transport" << m_transport;
-//    arguments << "--payload" << targetFile().fileName();
-//    arguments << m_parameters.base().absoluteFilePath("poly/" + m_region.polyFile());
-//    arguments << monavDir().absoluteFilePath() + QLatin1String("/marble.kml");
-//    QProcess poly2kml;
-//    poly2kml.start("poly2kml", arguments);
-//    poly2kml.waitForFinished(1000 * 60 * 30); // wait up to half an hour for poly2kml to convert the data
-//    if (poly2kml.exitStatus() == QProcess::NormalExit && poly2kml.exitCode() == 0) {
-//        qDebug() << "Processed kml file for marble";
-//        return true;
-//    } else {
-//        qDebug() << "poly2kml exiting with status " << poly2kml.exitCode();
-//        changeStatus(Error, "Error creating marble.kml: " + poly2kml.readAllStandardError());
-//        return false;
-//    }
-//}
+//     changeStatus(Routing, "Extracting bounding box.");
+//     QStringList arguments;
+//     arguments << "--name" << m_region.name();
+//     arguments << "--version" << "0.2";
+//     arguments << "--date" << QDateTime::currentDateTime().toString("yyyy/dd/MM");
+//     arguments << "--transport" << m_transport;
+//     arguments << "--payload" << targetFile().fileName();
+//     arguments << m_parameters.base().absoluteFilePath("poly/" + m_region.polyFile());
+//     arguments << monavDir().absoluteFilePath() + QLatin1String("/marble.kml");
+//     QProcess poly2kml;
+//     poly2kml.start("poly2kml", arguments);
+//     poly2kml.waitForFinished(1000 * 60 * 30); // wait up to half an hour for poly2kml to convert the data
+//     if (poly2kml.exitStatus() == QProcess::NormalExit && poly2kml.exitCode() == 0) {
+//         qDebug() << "Processed kml file for marble";
+//         return true;
+//     } else {
+//         qDebug() << "poly2kml exiting with status " << poly2kml.exitCode();
+//         changeStatus(Error, "Error creating marble.kml: " + poly2kml.readAllStandardError());
+//         return false;
+//     }
+// }
 
 bool Job::monav()
 {
@@ -176,7 +197,7 @@ bool Job::monav()
     QFileInfo subdir = QFileInfo(monavDir().absoluteFilePath() + QLatin1String("/routing_") + m_transport.toLower());
     if (subdir.exists() && subdir.isDir()) {
         QFileInfoList files = QDir(subdir.absoluteFilePath()).entryInfoList(QDir::Files);
-        for(const QFileInfo &file: files) {
+        for (const QFileInfo &file : files) {
             if (!QFile::rename(file.absoluteFilePath(), monavDir().absoluteFilePath() + QLatin1Char('/') + file.fileName())) {
                 changeStatus(Error, "Unable to move monav files to target directory.");
                 return false;
@@ -274,7 +295,7 @@ bool Job::cleanup()
     QFileInfo subdir = QFileInfo(monavDir().absoluteFilePath());
     if (subdir.exists() && subdir.isDir()) {
         QFileInfoList files = QDir(subdir.absoluteFilePath()).entryInfoList(QDir::Files);
-        for(const QFileInfo &file: files) {
+        for (const QFileInfo &file : files) {
             QFile::remove(file.absoluteFilePath());
         }
     }

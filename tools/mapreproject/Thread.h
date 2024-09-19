@@ -15,27 +15,27 @@
 
 class QSignalMapper;
 
-class Thread: public QThread
+class Thread : public QThread
 {
     Q_OBJECT
 
 public:
-    explicit Thread( QObject * const parent = nullptr );
+    explicit Thread(QObject *const parent = nullptr);
     ~Thread() override;
 
-    void launchWorker( QObject * const worker );
+    void launchWorker(QObject *const worker);
     void stop();
 
 Q_SIGNALS:
     void aboutToStop();
-    
+
 private Q_SLOTS:
     void stopExecutor();
     void setReadyStatus();
 
 private:
-    QObject * m_worker;
-    QSignalMapper * m_shutDownHelper;
+    QObject *m_worker;
+    QSignalMapper *m_shutDownHelper;
     QWaitCondition m_waitCondition;
     QMutex m_mutex;
 };

@@ -5,17 +5,17 @@
 
 #include "MbTileWriter.h"
 
-#include <QCoreApplication>
 #include <QApplication>
 #include <QCommandLineParser>
-#include <QFileInfo>
-#include <QFile>
+#include <QCoreApplication>
+#include <QDebug>
 #include <QDir>
 #include <QDirIterator>
+#include <QFile>
+#include <QFileInfo>
 #include <QSqlDatabase>
-#include <QSqlQuery>
 #include <QSqlError>
-#include <QDebug>
+#include <QSqlQuery>
 
 using namespace std;
 using namespace Marble;
@@ -24,8 +24,8 @@ void importTiles(const QString &tileDirectory, MbTileWriter &tileWriter, const Q
 {
     QString const extension = "o5m";
     QDir tileDir(tileDirectory);
-    auto const strip = 1+tileDir.absolutePath().size();
-    for(const auto &entryInfo: tileDir.entryInfoList(QDir::Dirs | QDir::NoDotAndDotDot)) {
+    auto const strip = 1 + tileDir.absolutePath().size();
+    for (const auto &entryInfo : tileDir.entryInfoList(QDir::Dirs | QDir::NoDotAndDotDot)) {
         bool isNumber;
         int const z = entryInfo.baseName().toInt(&isNumber);
         if (isNumber && tileLevels.first <= z && z <= tileLevels.second) {
@@ -52,7 +52,7 @@ void importTiles(const QString &tileDirectory, MbTileWriter &tileWriter, const Q
     }
 }
 
-int main(int argc, char** argv)
+int main(int argc, char **argv)
 {
     QCoreApplication app(argc, argv);
     QCoreApplication::setApplicationName("mbtile-import");
@@ -66,11 +66,11 @@ int main(int argc, char** argv)
     parser.addPositionalArgument("output", "Destination MBTile database");
 
     parser.addOptions({
-                          {{"o", "overwrite"}, "Overwrite existing tiles in the database"},
-                          {{"q", "quiet"}, "No progress report to stdout"},
-                          {{"t", "tilelevels"}, "Restrict tile levels to <tilelevels>", "tilelevels", "0-20"},
-                          {{"i", "interval"}, "Commit each <interval> tiles (0: single transaction)", "interval", "10000"},
-                      });
+        {{"o", "overwrite"}, "Overwrite existing tiles in the database"},
+        {{"q", "quiet"}, "No progress report to stdout"},
+        {{"t", "tilelevels"}, "Restrict tile levels to <tilelevels>", "tilelevels", "0-20"},
+        {{"i", "interval"}, "Commit each <interval> tiles (0: single transaction)", "interval", "10000"},
+    });
 
     if (!parser.parse(QCoreApplication::arguments())) {
         qDebug() << parser.errorText();

@@ -14,18 +14,18 @@ class Logger : public QObject
 {
     Q_OBJECT
 public:
-    static Logger& instance();
+    static Logger &instance();
 
     void setFilename(const QString &filename);
 
     void setStatus(const QString &id, const QString &name, const QString &status, const QString &message);
-    
+
 private:
     explicit Logger(QObject *parent = nullptr);
 
     ~Logger() override;
 
-    LoggerPrivate* const d;
+    LoggerPrivate *const d;
 };
 
 #endif // LOGGER_H

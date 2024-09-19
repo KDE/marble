@@ -12,13 +12,13 @@ using namespace Marble;
 
 int main(int argc, char *argv[])
 {
-    TCCoreApplication app( argc, argv );
-    MarbleDebug::setEnabled( true );
-    if( argc < 2 ) {
-    /*
-            PREFIX: this is the prefix of the source directory
-            TARGETDIR: the directory where the output should go to
-            */
+    TCCoreApplication app(argc, argv);
+    MarbleDebug::setEnabled(true);
+    if (argc < 2) {
+        /*
+                PREFIX: this is the prefix of the source directory
+                TARGETDIR: the directory where the output should go to
+                */
         qDebug() << "Syntax: tilecreator PREFIX TARGETDIR";
         return -1;
     } else {

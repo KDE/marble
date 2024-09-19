@@ -23,7 +23,7 @@ class JobManager : public QObject
     Q_OBJECT
 public:
     explicit JobManager(QObject *parent = nullptr);
-    
+
     void run();
 
     void setRegionsFile(const QString &filename);

@@ -3,59 +3,58 @@
 #include "ReadOnlyMapImage.h"
 
 #include <QDebug>
-#include <QTime>
 #include <QElapsedTimer>
+#include <QTime>
 
 #include <cmath>
 
-OsmTileClusterRenderer::OsmTileClusterRenderer( QObject * const parent )
-    : QObject( parent ),
-      m_osmTileEdgeLengthPixel( 256 ),
-      m_emptyPixel( qRgba( 0, 0, 0, 255 )),
-      m_osmBaseDirectory(),
-      m_osmTileLevel(),
-      m_osmMapEdgeLengthPixel(),
-      m_clusterEdgeLengthTiles(),
-      m_mapSourceDefinitions(),
-      m_mapSources(),
-      m_mapSourceCount()
+OsmTileClusterRenderer::OsmTileClusterRenderer(QObject *const parent)
+    : QObject(parent)
+    , m_osmTileEdgeLengthPixel(256)
+    , m_emptyPixel(qRgba(0, 0, 0, 255))
+    , m_osmBaseDirectory()
+    , m_osmTileLevel()
+    , m_osmMapEdgeLengthPixel()
+    , m_clusterEdgeLengthTiles()
+    , m_mapSourceDefinitions()
+    , m_mapSources()
+    , m_mapSourceCount()
 {
 }
 
-void OsmTileClusterRenderer::setClusterEdgeLengthTiles( int const clusterEdgeLengthTiles )
+void OsmTileClusterRenderer::setClusterEdgeLengthTiles(int const clusterEdgeLengthTiles)
 {
     m_clusterEdgeLengthTiles = clusterEdgeLengthTiles;
 }
 
-void OsmTileClusterRenderer::setMapSources( QVector<ReadOnlyMapDefinition> const & mapSourceDefinitions )
+void OsmTileClusterRenderer::setMapSources(QVector<ReadOnlyMapDefinition> const &mapSourceDefinitions)
 {
     m_mapSourceDefinitions = mapSourceDefinitions;
 }
 
-void OsmTileClusterRenderer::setOsmBaseDirectory( QDir const & osmBaseDirectory )
+void OsmTileClusterRenderer::setOsmBaseDirectory(QDir const &osmBaseDirectory)
 {
     m_osmBaseDirectory = osmBaseDirectory;
 }
 
-void OsmTileClusterRenderer::setOsmTileLevel( int const level )
+void OsmTileClusterRenderer::setOsmTileLevel(int const level)
 {
     m_osmTileLevel = level;
-    int const osmMapEdgeLengthTiles = pow( 2, m_osmTileLevel );
+    int const osmMapEdgeLengthTiles = pow(2, m_osmTileLevel);
     m_osmMapEdgeLengthPixel = osmMapEdgeLengthTiles * m_osmTileEdgeLengthPixel;
-    qDebug() << "osmTileLevel:" << m_osmTileLevel
-             << "\nosmMapEdgeLengthTiles:" << osmMapEdgeLengthTiles
+    qDebug() << "osmTileLevel:" << m_osmTileLevel << "\nosmMapEdgeLengthTiles:" << osmMapEdgeLengthTiles
              << "\nosmMapEdgeLengthPixel:" << m_osmMapEdgeLengthPixel;
 }
 
-QDir OsmTileClusterRenderer::checkAndCreateDirectory( int const tileX ) const
+QDir OsmTileClusterRenderer::checkAndCreateDirectory(int const tileX) const
 {
-    QDir const tileDirectory( m_osmBaseDirectory.path() + QString("/%1/%2").arg( m_osmTileLevel ).arg( tileX ));
-    if ( !tileDirectory.exists() ) {
-        bool const created = tileDirectory.mkpath( tileDirectory.path() );
-        if ( !created ) {
+    QDir const tileDirectory(m_osmBaseDirectory.path() + QString("/%1/%2").arg(m_osmTileLevel).arg(tileX));
+    if (!tileDirectory.exists()) {
+        bool const created = tileDirectory.mkpath(tileDirectory.path());
+        if (!created) {
             // maybe it was created in the meantime by a different thread, then it should be there now
-            if ( !tileDirectory.exists() )
-                qFatal("Unable to create directory '%s'.", tileDirectory.path().toStdString().c_str() );
+            if (!tileDirectory.exists())
+                qFatal("Unable to create directory '%s'.", tileDirectory.path().toStdString().c_str());
         }
     }
     return tileDirectory;
@@ -65,17 +64,16 @@ void OsmTileClusterRenderer::initMapSources()
 {
     QVector<ReadOnlyMapDefinition>::const_iterator pos = m_mapSourceDefinitions.constBegin();
     QVector<ReadOnlyMapDefinition>::const_iterator const end = m_mapSourceDefinitions.constEnd();
-    for (; pos != end; ++pos )
-    {
-        ReadOnlyMapImage * const mapImage = (*pos).createReadOnlyMap();
-        if ( !mapImage )
+    for (; pos != end; ++pos) {
+        ReadOnlyMapImage *const mapImage = (*pos).createReadOnlyMap();
+        if (!mapImage)
             qFatal("Invalid map source definition.");
-        m_mapSources.push_back( mapImage );
+        m_mapSources.push_back(mapImage);
     }
     m_mapSourceCount = m_mapSources.count();
 }
 
-void OsmTileClusterRenderer::renderOsmTileCluster( int const clusterX, int const clusterY )
+void OsmTileClusterRenderer::renderOsmTileCluster(int const clusterX, int const clusterY)
 {
     qDebug() << objectName() << "rendering clusterX:" << clusterX << ", clusterY:" << clusterY;
     int tilesRenderedCount = 0;
@@ -86,76 +84,74 @@ void OsmTileClusterRenderer::renderOsmTileCluster( int const clusterX, int const
     int const tileY1 = clusterY * m_clusterEdgeLengthTiles;
     int const tileY2 = tileY1 + m_clusterEdgeLengthTiles;
 
-    for ( int tileX = tileX1; tileX < tileX2; ++tileX ) {
-        QDir const tileDirectory = checkAndCreateDirectory( tileX );
-        for ( int tileY = tileY1; tileY < tileY2; ++tileY ) {
-            QImage const osmTile = renderOsmTile( tileX, tileY );
+    for (int tileX = tileX1; tileX < tileX2; ++tileX) {
+        QDir const tileDirectory = checkAndCreateDirectory(tileX);
+        for (int tileY = tileY1; tileY < tileY2; ++tileY) {
+            QImage const osmTile = renderOsmTile(tileX, tileY);
 
             // hack
-            if ( osmTile.isNull() )
+            if (osmTile.isNull())
                 continue;
 
-            QString const filename = tileDirectory.path() + QString( "/%1.png" ).arg( tileY );
-            bool const saved = osmTile.save( filename );
-            if ( saved )
+            QString const filename = tileDirectory.path() + QString("/%1.png").arg(tileY);
+            bool const saved = osmTile.save(filename);
+            if (saved)
                 ++tilesRenderedCount;
             else
-                qFatal("Unable to save tile '%s'.", filename.toStdString().c_str() );
+                qFatal("Unable to save tile '%s'.", filename.toStdString().c_str());
         }
     }
     int const durationMs = t.elapsed();
-    qDebug() << objectName() << "clusterX:" <<clusterX << ", clusterY:" << clusterY
-             << "rendered:" << tilesRenderedCount << "tiles in" << durationMs << "ms =>"
-             << static_cast<double>( tilesRenderedCount ) * 1000.0 / static_cast<double>( durationMs ) << "tiles/s";
-    emit clusterRendered( this );
+    qDebug() << objectName() << "clusterX:" << clusterX << ", clusterY:" << clusterY << "rendered:" << tilesRenderedCount << "tiles in" << durationMs << "ms =>"
+             << static_cast<double>(tilesRenderedCount) * 1000.0 / static_cast<double>(durationMs) << "tiles/s";
+    emit clusterRendered(this);
 }
 
-QImage OsmTileClusterRenderer::renderOsmTile( int const tileX, int const tileY )
+QImage OsmTileClusterRenderer::renderOsmTile(int const tileX, int const tileY)
 {
-    //qDebug() << objectName() << "renderOsmTile tileX:" << tileX << ", tileY:" << tileY;
+    // qDebug() << objectName() << "renderOsmTile tileX:" << tileX << ", tileY:" << tileY;
     int const basePixelX = tileX * m_osmTileEdgeLengthPixel;
     int const basePixelY = tileY * m_osmTileEdgeLengthPixel;
 
-    QSize const tileSize( m_osmTileEdgeLengthPixel, m_osmTileEdgeLengthPixel );
-    QImage tile( tileSize, QImage::Format_ARGB32 );
+    QSize const tileSize(m_osmTileEdgeLengthPixel, m_osmTileEdgeLengthPixel);
+    QImage tile(tileSize, QImage::Format_ARGB32);
     bool tileEmpty = true;
 
-    for ( int y = 0; y < m_osmTileEdgeLengthPixel; ++y ) {
+    for (int y = 0; y < m_osmTileEdgeLengthPixel; ++y) {
         int const pixelY = basePixelY + y;
-        double const latRad = osmPixelYtoLatRad( pixelY );
+        double const latRad = osmPixelYtoLatRad(pixelY);
 
-        for ( int x = 0; x < m_osmTileEdgeLengthPixel; ++x ) {
+        for (int x = 0; x < m_osmTileEdgeLengthPixel; ++x) {
             int const pixelX = basePixelX + x;
-            double const lonRad = osmPixelXtoLonRad( pixelX );
+            double const lonRad = osmPixelXtoLonRad(pixelX);
 
             QRgb color = m_emptyPixel;
-            for (int i = 0; i < m_mapSourceCount; ++i)
-            {
-               color = m_mapSources[i]->pixel( lonRad, latRad );
-               if ( color != m_emptyPixel ) {
-                   tileEmpty = false;
-                   break;
-               }
+            for (int i = 0; i < m_mapSourceCount; ++i) {
+                color = m_mapSources[i]->pixel(lonRad, latRad);
+                if (color != m_emptyPixel) {
+                    tileEmpty = false;
+                    break;
+                }
             }
 
-            tile.setPixel( x, y, color );
+            tile.setPixel(x, y, color);
         }
     }
     return tileEmpty ? QImage() : tile;
 }
 
-inline double OsmTileClusterRenderer::osmPixelXtoLonRad( int const pixelX ) const
+inline double OsmTileClusterRenderer::osmPixelXtoLonRad(int const pixelX) const
 {
-    double const pixelXd = static_cast<double>( pixelX );
-    double const osmMapEdgeLengthPixeld = static_cast<double>( m_osmMapEdgeLengthPixel );
+    double const pixelXd = static_cast<double>(pixelX);
+    double const osmMapEdgeLengthPixeld = static_cast<double>(m_osmMapEdgeLengthPixel);
     return pixelXd * 2.0 * M_PI / osmMapEdgeLengthPixeld - M_PI;
 }
 
-inline double OsmTileClusterRenderer::osmPixelYtoLatRad( int const pixelY ) const
+inline double OsmTileClusterRenderer::osmPixelYtoLatRad(int const pixelY) const
 {
-    double const pixelYd = static_cast<double>( pixelY );
-    double const osmMapEdgeLengthPixeld = static_cast<double>( m_osmMapEdgeLengthPixel );
-    return -atan( sinh(( pixelYd - 0.5 * osmMapEdgeLengthPixeld ) * 2.0 * M_PI / osmMapEdgeLengthPixeld ));
+    double const pixelYd = static_cast<double>(pixelY);
+    double const osmMapEdgeLengthPixeld = static_cast<double>(m_osmMapEdgeLengthPixel);
+    return -atan(sinh((pixelYd - 0.5 * osmMapEdgeLengthPixeld) * 2.0 * M_PI / osmMapEdgeLengthPixeld));
 }
 
 #include "moc_OsmTileClusterRenderer.cpp"

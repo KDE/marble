@@ -4,34 +4,35 @@
 //
 
 #include "NodeReducer.h"
-#include "GeoDataPlacemark.h"
-#include "GeoDataLineString.h"
-#include "GeoDataPolygon.h"
 #include "GeoDataBuilding.h"
-#include "GeoDataMultiGeometry.h"
 #include "GeoDataCoordinates.h"
+#include "GeoDataLineString.h"
+#include "GeoDataMultiGeometry.h"
+#include "GeoDataPlacemark.h"
+#include "GeoDataPolygon.h"
 #include "MarbleMath.h"
 
 #include <QDebug>
 #include <QVector>
 
-namespace Marble {
+namespace Marble
+{
 
-NodeReducer::NodeReducer(GeoDataDocument* document, const TileId &tileId) :
-    m_removedNodes(0),
-    m_remainingNodes(0),
-    m_zoomLevel(tileId.zoomLevel())
+NodeReducer::NodeReducer(GeoDataDocument *document, const TileId &tileId)
+    : m_removedNodes(0)
+    , m_remainingNodes(0)
+    , m_zoomLevel(tileId.zoomLevel())
 {
     const GeoSceneMercatorTileProjection tileProjection;
     GeoDataLatLonBox tileBoundary = tileProjection.geoCoordinates(m_zoomLevel, tileId.x(), tileId.y());
-    tileBoundary.scale(1.0-1e-4, 1.0-1e-4);
+    tileBoundary.scale(1.0 - 1e-4, 1.0 - 1e-4);
     tileBoundary.boundaries(m_tileBoundary[North], m_tileBoundary[South], m_tileBoundary[East], m_tileBoundary[West]);
 
-    for (GeoDataPlacemark* placemark: document->placemarkList()) {
-        GeoDataGeometry const * const geometry = placemark->geometry();
+    for (GeoDataPlacemark *placemark : document->placemarkList()) {
+        GeoDataGeometry const *const geometry = placemark->geometry();
         auto const visualCategory = placemark->visualCategory();
         if (const auto prevLine = geodata_cast<GeoDataLineString>(geometry)) {
-            GeoDataLineString* reducedLine = new GeoDataLineString;
+            GeoDataLineString *reducedLine = new GeoDataLineString;
             reduce(*prevLine, placemark->osmData(), visualCategory, reducedLine);
             placemark->setGeometry(reducedLine);
         } else if (const auto prevRing = geodata_cast<GeoDataLinearRing>(geometry)) {
@@ -40,14 +41,14 @@ NodeReducer::NodeReducer(GeoDataDocument* document, const TileId &tileId) :
             placemark->setGeometry(reducedPolygon(*prevPolygon, placemark, visualCategory));
         } else if (const auto building = geodata_cast<GeoDataBuilding>(geometry)) {
             if (const auto prevRing = geodata_cast<GeoDataLinearRing>(&building->multiGeometry()->at(0))) {
-                GeoDataLinearRing* ring = reducedRing(*prevRing, placemark, visualCategory);
-                GeoDataBuilding* newBuilding = new GeoDataBuilding(*building);
+                GeoDataLinearRing *ring = reducedRing(*prevRing, placemark, visualCategory);
+                GeoDataBuilding *newBuilding = new GeoDataBuilding(*building);
                 newBuilding->multiGeometry()->clear();
                 newBuilding->multiGeometry()->append(ring);
                 placemark->setGeometry(newBuilding);
             } else if (const auto prevPolygon = geodata_cast<GeoDataPolygon>(&building->multiGeometry()->at(0))) {
-                GeoDataPolygon* poly = reducedPolygon(*prevPolygon, placemark, visualCategory);
-                GeoDataBuilding* newBuilding = new GeoDataBuilding(*building);
+                GeoDataPolygon *poly = reducedPolygon(*prevPolygon, placemark, visualCategory);
+                GeoDataBuilding *newBuilding = new GeoDataBuilding(*building);
                 newBuilding->multiGeometry()->clear();
                 newBuilding->multiGeometry()->append(poly);
                 placemark->setGeometry(newBuilding);
@@ -66,10 +67,10 @@ qreal NodeReducer::epsilonFor(qreal multiplier) const
     if (m_zoomLevel >= 17) {
         return 0.25;
     } else if (m_zoomLevel >= 10) {
-        int const factor = 1 << (qAbs(m_zoomLevel-12));
+        int const factor = 1 << (qAbs(m_zoomLevel - 12));
         return multiplier / factor;
     } else {
-        int const factor = 1 << (qAbs(m_zoomLevel-10));
+        int const factor = 1 << (qAbs(m_zoomLevel - 10));
         return multiplier * factor;
     }
 }
@@ -91,13 +92,13 @@ qreal NodeReducer::perpendicularDistance(const GeoDataCoordinates &a, const GeoD
     qreal const x21 = y2 - y1;
     qreal const len = (x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2);
     qreal const t = len == 0.0 ? -1.0 : (x01 * x21 + y01 * y21) / len;
-    if ( t < 0.0 ) {
+    if (t < 0.0) {
         ret = EARTH_RADIUS * a.sphericalDistanceTo(b);
-    } else if ( t > 1.0 ) {
+    } else if (t > 1.0) {
         ret = EARTH_RADIUS * a.sphericalDistanceTo(c);
     } else {
-        qreal const nom = qAbs( x21 * y10 - x10 * y21 );
-        qreal const den = sqrt( x21 * x21 + y21 * y21 );
+        qreal const nom = qAbs(x21 * y10 - x10 * y21);
+        qreal const den = sqrt(x21 * x21 + y21 * y21);
         ret = EARTH_RADIUS * nom / den;
     }
 
@@ -106,10 +107,8 @@ qreal NodeReducer::perpendicularDistance(const GeoDataCoordinates &a, const GeoD
 
 bool NodeReducer::touchesTileBorder(const GeoDataCoordinates &coordinates) const
 {
-    return  coordinates.latitude() >= m_tileBoundary[North] ||
-            coordinates.latitude() <= m_tileBoundary[South] ||
-            coordinates.longitude() <= m_tileBoundary[West] ||
-            coordinates.longitude() >= m_tileBoundary[East];
+    return coordinates.latitude() >= m_tileBoundary[North] || coordinates.latitude() <= m_tileBoundary[South] || coordinates.longitude() <= m_tileBoundary[West]
+        || coordinates.longitude() >= m_tileBoundary[East];
 }
 
 qint64 NodeReducer::removedNodes() const
@@ -117,26 +116,24 @@ qint64 NodeReducer::removedNodes() const
     return m_removedNodes;
 }
 
-GeoDataLinearRing *NodeReducer::reducedRing(const GeoDataLinearRing& prevRing,
-                                            GeoDataPlacemark* placemark,
-                                            const GeoDataPlacemark::GeoDataVisualCategory& visualCategory)
+GeoDataLinearRing *
+NodeReducer::reducedRing(const GeoDataLinearRing &prevRing, GeoDataPlacemark *placemark, const GeoDataPlacemark::GeoDataVisualCategory &visualCategory)
 {
-    GeoDataLinearRing* reducedRing = new GeoDataLinearRing;
+    GeoDataLinearRing *reducedRing = new GeoDataLinearRing;
     reduce(prevRing, placemark->osmData(), visualCategory, reducedRing);
     return reducedRing;
 }
 
-GeoDataPolygon *NodeReducer::reducedPolygon(const GeoDataPolygon& prevPolygon,
-                                            GeoDataPlacemark* placemark,
-                                            const GeoDataPlacemark::GeoDataVisualCategory& visualCategory)
+GeoDataPolygon *
+NodeReducer::reducedPolygon(const GeoDataPolygon &prevPolygon, GeoDataPlacemark *placemark, const GeoDataPlacemark::GeoDataVisualCategory &visualCategory)
 {
-    GeoDataPolygon* reducedPolygon = new GeoDataPolygon;
-    GeoDataLinearRing const * prevRing = &(prevPolygon.outerBoundary());
+    GeoDataPolygon *reducedPolygon = new GeoDataPolygon;
+    GeoDataLinearRing const *prevRing = &(prevPolygon.outerBoundary());
     GeoDataLinearRing reducedRing;
     reduce(*prevRing, placemark->osmData().memberReference(-1), visualCategory, &reducedRing);
     reducedPolygon->setOuterBoundary(reducedRing);
-    QVector<GeoDataLinearRing> const & innerBoundaries = prevPolygon.innerBoundaries();
-    for(int i = 0; i < innerBoundaries.size(); i++) {
+    QVector<GeoDataLinearRing> const &innerBoundaries = prevPolygon.innerBoundaries();
+    for (int i = 0; i < innerBoundaries.size(); i++) {
         prevRing = &innerBoundaries[i];
         GeoDataLinearRing reducedInnerRing;
         reduce(*prevRing, placemark->osmData().memberReference(i), visualCategory, &reducedInnerRing);

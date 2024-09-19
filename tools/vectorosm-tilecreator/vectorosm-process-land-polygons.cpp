@@ -6,16 +6,16 @@
 
 #include "TileDirectory.h"
 
-#include "GeoDataLatLonAltBox.h"
 #include "GeoDataDocumentWriter.h"
+#include "GeoDataLatLonAltBox.h"
 #include "MarbleModel.h"
 #include "ParsingRunnerManager.h"
 #ifdef STATIC_BUILD
 #include "src/plugins/runner/osm/translators/O5mWriter.h"
 #endif
 
-#include <QCoreApplication>
 #include <QCommandLineParser>
+#include <QCoreApplication>
 #include <QDebug>
 #include <QDir>
 #include <QFileInfo>

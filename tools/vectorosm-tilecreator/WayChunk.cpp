@@ -5,27 +5,27 @@
 
 #include "WayChunk.h"
 
-#include <QVector>
 #include <QDebug>
+#include <QVector>
 
 #include "GeoDataCoordinates.h"
 #include "GeoDataLineString.h"
 #include "OsmPlacemarkData.h"
 
-namespace Marble {
+namespace Marble
+{
 
-WayChunk::WayChunk(const PlacemarkPtr &placemark, qint64 first, qint64 last) :
-    m_first(first),
-    m_last(last),
-    m_visualCategory(placemark->visualCategory()),
-    m_isTunnel(isTunnel(placemark->osmData()))
+WayChunk::WayChunk(const PlacemarkPtr &placemark, qint64 first, qint64 last)
+    : m_first(first)
+    , m_last(last)
+    , m_visualCategory(placemark->visualCategory())
+    , m_isTunnel(isTunnel(placemark->osmData()))
 {
     m_wayList.append(placemark);
 }
 
 WayChunk::~WayChunk()
 {
-
 }
 
 qint64 WayChunk::first() const
@@ -42,14 +42,12 @@ void WayChunk::append(const PlacemarkPtr &placemark, qint64 last)
 {
     m_wayList.append(placemark);
     m_last = last;
-
 }
 
 void WayChunk::prepend(const PlacemarkPtr &placemark, qint64 first)
 {
     m_wayList.prepend(placemark);
     m_first = first;
-
 }
 
 void WayChunk::append(const WayChunk::Ptr &chunk)
@@ -63,12 +61,12 @@ WayChunk::PlacemarkPtr WayChunk::merge()
     Q_ASSERT(!m_wayList.isEmpty());
 
     PlacemarkPtr placemark = PlacemarkPtr(new GeoDataPlacemark(*(m_wayList.first())));
-    GeoDataLineString *line = static_cast<GeoDataLineString*>(placemark->geometry());
+    GeoDataLineString *line = static_cast<GeoDataLineString *>(placemark->geometry());
     QVector<PlacemarkPtr>::iterator itr = m_wayList.begin();
     QVector<PlacemarkPtr>::iterator itrEnd = m_wayList.end();
     ++itr;
     for (; itr != itrEnd; ++itr) {
-        GeoDataLineString *currentLine = static_cast<GeoDataLineString*>( (*itr)->geometry() );
+        GeoDataLineString *currentLine = static_cast<GeoDataLineString *>((*itr)->geometry());
         currentLine->remove(0);
         (*line) << *currentLine;
     }
@@ -80,7 +78,7 @@ void WayChunk::reverse()
     std::reverse(m_wayList.begin(), m_wayList.end());
     QVector<PlacemarkPtr>::iterator itr = m_wayList.begin();
     for (; itr != m_wayList.end(); ++itr) {
-        GeoDataLineString *line = static_cast<GeoDataLineString*>((*itr)->geometry());
+        GeoDataLineString *line = static_cast<GeoDataLineString *>((*itr)->geometry());
         line->reverse();
     }
     qSwap(m_first, m_last);
@@ -99,8 +97,7 @@ bool WayChunk::concatPossible(const GeoDataPlacemark &placemark) const
 
 bool WayChunk::isTunnel(const OsmPlacemarkData &osmData) const
 {
-    if (osmData.containsTagKey(QStringLiteral("tunnel")) &&
-            !osmData.containsTag(QStringLiteral("tunnel"), QStringLiteral("no"))) {
+    if (osmData.containsTagKey(QStringLiteral("tunnel")) && !osmData.containsTag(QStringLiteral("tunnel"), QStringLiteral("no"))) {
         return true;
     }
 

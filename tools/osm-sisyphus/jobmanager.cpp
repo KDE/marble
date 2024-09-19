@@ -5,15 +5,15 @@
 
 #include "jobmanager.h"
 
-#include <QTimer>
-#include <QFile>
-#include <QTextStream>
 #include <QDebug>
 #include <QDomDocument>
+#include <QFile>
+#include <QTextStream>
+#include <QTimer>
 
-JobManager::JobManager(QObject *parent) :
-    QObject(parent)
-{   
+JobManager::JobManager(QObject *parent)
+    : QObject(parent)
+{
     QDir temp = QDir(QDir::tempPath());
 
     m_monavSettings = QFileInfo(temp, "monav_settings.ini");
@@ -40,16 +40,16 @@ void JobManager::setRegionsFile(const QString &filename)
     file.open(QFile::ReadOnly);
 
     QDomDocument xml;
-    if ( !xml.setContent( &file ) ) {
+    if (!xml.setContent(&file)) {
         qDebug() << "Cannot parse xml file with regions.";
         return;
     }
 
     QDomElement root = xml.documentElement();
-    QDomNodeList regions = root.elementsByTagName( "region" );
-    for ( int i = 0; i < int(regions.length()); ++i ) {
+    QDomNodeList regions = root.elementsByTagName("region");
+    for (int i = 0; i < int(regions.length()); ++i) {
         Region region;
-        QDomNode node = regions.item( i );
+        QDomNode node = regions.item(i);
         if (!node.namedItem("continent").isNull()) {
             region.setContinent(node.namedItem("continent").toElement().text());
         }
@@ -70,7 +70,7 @@ void JobManager::setRegionsFile(const QString &filename)
         }
         if (!node.namedItem("transport").isNull()) {
             QStringList input = node.namedItem("transport").toElement().text().split(QLatin1Char(','), Qt::SkipEmptyParts);
-            for( const QString &value: input ) {
+            for (const QString &value : input) {
                 if (!region.continent().isEmpty() && !region.name().isEmpty()) {
                     PendingJob job;
                     job.m_region = region;
@@ -107,19 +107,19 @@ void JobManager::setJobParameters(const JobParameters &parameters)
 void JobManager::update()
 {
     bool resume = m_resumeId.isEmpty();
-    for(const PendingJob &job: m_pendingJobs) {
+    for (const PendingJob &job : m_pendingJobs) {
         resume = resume || job.m_region.id() == m_resumeId;
         if (resume) {
             addJob(job);
         }
     }
 
-    QTimer::singleShot(1000*60*60*24, this, SLOT(update()));
+    QTimer::singleShot(1000 * 60 * 60 * 24, this, SLOT(update()));
 }
 
 void JobManager::addJob(const PendingJob &job)
 {
-    Job* countryJob = new Job(job.m_region, m_jobParameters);
+    Job *countryJob = new Job(job.m_region, m_jobParameters);
     /** @todo: Support other transport types */
     countryJob->setTransport(job.m_transport);
     countryJob->setProfile(job.m_profile);

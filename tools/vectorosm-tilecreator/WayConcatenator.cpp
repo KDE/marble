@@ -5,38 +5,36 @@
 
 #include "WayConcatenator.h"
 
-#include <QList>
 #include <QHash>
+#include <QList>
 #include <QSet>
 
-#include "GeoDataPlacemark.h"
 #include "GeoDataDocument.h"
-#include "GeoDataObject.h"
 #include "GeoDataLineString.h"
+#include "GeoDataObject.h"
+#include "GeoDataPlacemark.h"
+#include "OsmObjectManager.h"
 #include "OsmPlacemarkData.h"
 #include "StyleBuilder.h"
-#include "OsmObjectManager.h"
 
+namespace Marble
+{
 
-namespace Marble {
-
-WayConcatenator::WayConcatenator(GeoDataDocument *document) :
-    m_originalWays(0),
-    m_mergedWays(0)
+WayConcatenator::WayConcatenator(GeoDataDocument *document)
+    : m_originalWays(0)
+    , m_mergedWays(0)
 {
     using PlacemarkPtr = QSharedPointer<GeoDataPlacemark>;
-    for (GeoDataFeature *feature: document->featureList()) {
+    for (GeoDataFeature *feature : document->featureList()) {
         if (const auto original = geodata_cast<GeoDataPlacemark>(feature)) {
             bool isWay = false;
             if (geodata_cast<GeoDataLineString>(original->geometry())) {
                 PlacemarkPtr placemark = PlacemarkPtr(new GeoDataPlacemark(*original));
                 OsmObjectManager::initializeOsmData(placemark.data());
-                OsmPlacemarkData const & osmData = placemark->osmData();
-                isWay = osmData.containsTagKey("highway") ||
-                        osmData.containsTagKey("railway") ||
-                        osmData.containsTagKey("waterway");
+                OsmPlacemarkData const &osmData = placemark->osmData();
+                isWay = osmData.containsTagKey("highway") || osmData.containsTagKey("railway") || osmData.containsTagKey("waterway");
                 if (isWay) {
-                    GeoDataLineString *line = static_cast<GeoDataLineString*>(placemark->geometry());
+                    GeoDataLineString *line = static_cast<GeoDataLineString *>(placemark->geometry());
                     qint64 firstId = osmData.nodeReference(line->first()).oid();
                     qint64 lastId = osmData.nodeReference(line->last()).oid();
                     if (firstId > 0 && lastId > 0) {
@@ -65,14 +63,14 @@ WayConcatenator::WayConcatenator(GeoDataDocument *document) :
                             auto otherChunk = wayChunk(*placemark, lastId);
 
                             if (chunk != nullptr && otherChunk != nullptr) {
-                                if(chunk == otherChunk) {
+                                if (chunk == otherChunk) {
                                     m_wayPlacemarks.append(placemark);
                                 } else {
                                     concatBoth(placemark, chunk, otherChunk);
                                 }
-                            } else if(chunk != nullptr && otherChunk == nullptr) {
+                            } else if (chunk != nullptr && otherChunk == nullptr) {
                                 concatFirst(placemark, chunk);
-                            } else if(chunk == nullptr && otherChunk != nullptr) {
+                            } else if (chunk == nullptr && otherChunk != nullptr) {
                                 concatLast(placemark, otherChunk);
                             } else {
                                 createWayChunk(placemark, firstId, lastId);
@@ -93,7 +91,7 @@ WayConcatenator::WayConcatenator(GeoDataDocument *document) :
     }
 
     document->clear();
-    for (auto placemark: m_otherPlacemarks) {
+    for (auto placemark : m_otherPlacemarks) {
         document->append(placemark);
     }
     addWayChunks(document);
@@ -111,7 +109,7 @@ int WayConcatenator::mergedWays() const
 
 void WayConcatenator::addWayChunks(GeoDataDocument *document)
 {
-    for (auto const &placemark: m_wayPlacemarks) {
+    for (auto const &placemark : m_wayPlacemarks) {
         document->append(placemark->clone());
     }
 
@@ -146,7 +144,7 @@ WayChunk::Ptr WayConcatenator::wayChunk(const GeoDataPlacemark &placemark, qint6
     QMultiHash<qint64, WayChunk::Ptr>::const_iterator matchItr = m_hash.find(matchId);
 
     while (matchItr != m_hash.constEnd() && matchItr.key() == matchId) {
-        auto const & chunk = matchItr.value();
+        auto const &chunk = matchItr.value();
         if (chunk->concatPossible(placemark)) {
             return chunk;
         }
@@ -157,7 +155,7 @@ WayChunk::Ptr WayConcatenator::wayChunk(const GeoDataPlacemark &placemark, qint6
 
 void WayConcatenator::concatFirst(const PlacemarkPtr &placemark, const WayChunk::Ptr &chunk)
 {
-    GeoDataLineString *line = static_cast<GeoDataLineString*>(placemark->geometry());
+    GeoDataLineString *line = static_cast<GeoDataLineString *>(placemark->geometry());
     qint64 firstId = placemark->osmData().nodeReference(line->first()).oid();
     qint64 lastId = placemark->osmData().nodeReference(line->last()).oid();
 
@@ -168,11 +166,11 @@ void WayConcatenator::concatFirst(const PlacemarkPtr &placemark, const WayChunk:
     m_hash.insert(lastId, chunk);
 
     if (firstId == chunk->last()) {
-        //First node matches with an existing last node
+        // First node matches with an existing last node
         chunk->append(placemark, lastId);
     } else {
-        //First node matches with an existing first node
-        //Reverse the GeoDataLineString of the placemark
+        // First node matches with an existing first node
+        // Reverse the GeoDataLineString of the placemark
         line->reverse();
         chunk->prepend(placemark, lastId);
     }
@@ -180,7 +178,7 @@ void WayConcatenator::concatFirst(const PlacemarkPtr &placemark, const WayChunk:
 
 void WayConcatenator::concatLast(const PlacemarkPtr &placemark, const WayChunk::Ptr &chunk)
 {
-    GeoDataLineString *line = static_cast<GeoDataLineString*>(placemark->geometry());
+    GeoDataLineString *line = static_cast<GeoDataLineString *>(placemark->geometry());
     qint64 firstId = placemark->osmData().nodeReference(line->first()).oid();
     qint64 lastId = placemark->osmData().nodeReference(line->last()).oid();
 
@@ -200,7 +198,7 @@ void WayConcatenator::concatLast(const PlacemarkPtr &placemark, const WayChunk::
 
 void WayConcatenator::concatBoth(const PlacemarkPtr &placemark, const WayChunk::Ptr &chunk, const WayChunk::Ptr &otherChunk)
 {
-    GeoDataLineString *line = static_cast<GeoDataLineString*>(placemark->geometry());
+    GeoDataLineString *line = static_cast<GeoDataLineString *>(placemark->geometry());
     qint64 firstId = placemark->osmData().nodeReference(line->first()).oid();
     qint64 lastId = placemark->osmData().nodeReference(line->last()).oid();
 

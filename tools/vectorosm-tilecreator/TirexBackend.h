@@ -33,9 +33,8 @@ public:
     QByteArray id;
     QByteArray map;
     sockaddr_in addr;
-    socklen_t  addrSize;
+    socklen_t addrSize;
 };
-
 
 /** Interface to Tirex.
  *  @see https://wiki.openstreetmap.org/wiki/Tirex/Backends

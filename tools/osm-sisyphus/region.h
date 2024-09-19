@@ -6,9 +6,9 @@
 #ifndef REGION_H
 #define REGION_H
 
-#include <QString>
-#include <QObject>
 #include <QFileInfo>
+#include <QObject>
+#include <QString>
 
 class Region
 {
@@ -28,11 +28,11 @@ public:
 
     QString country() const;
 
-    void setName(const QString& arg);
+    void setName(const QString &arg);
 
-    void setContinent(const QString& arg);
+    void setContinent(const QString &arg);
 
-    void setCountry(const QString& arg);
+    void setCountry(const QString &arg);
 
     QString id() const;
 

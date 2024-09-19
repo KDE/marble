@@ -9,23 +9,23 @@
 #include <QSqlDatabase>
 #include <QSqlError>
 
-#include <iostream>
 #include <iomanip>
+#include <iostream>
 
 namespace Marble
 {
 
-MbTileWriter::MbTileWriter(const QString &filename, const QString &extension) :
-    m_overwriteTiles(true),
-    m_reportProgress(true),
-    m_tileCounter(0),
-    m_commitInterval(10000)
+MbTileWriter::MbTileWriter(const QString &filename, const QString &extension)
+    : m_overwriteTiles(true)
+    , m_reportProgress(true)
+    , m_tileCounter(0)
+    , m_commitInterval(10000)
 {
     bool const exists = QFileInfo::exists(filename);
 
-    QSqlDatabase database = QSqlDatabase::addDatabase( "QSQLITE" );
-    database.setDatabaseName( filename );
-    if ( !database.open() ) {
+    QSqlDatabase database = QSqlDatabase::addDatabase("QSQLITE");
+    database.setDatabaseName(filename);
+    if (!database.open()) {
         qCritical() << "Failed to connect to database";
         return;
     }
@@ -41,7 +41,9 @@ MbTileWriter::MbTileWriter(const QString &filename, const QString &extension) :
         setMetaData("version", "1.0");
         setMetaData("description", "A global roadmap created by the OpenStreetMap (OSM) project");
         setMetaData("format", extension);
-        setMetaData("attribution", "Data from <a href=\"https://openstreetmap.org/\">OpenStreetMap</a> and <a href=\"https://www.naturalearthdata.com/\">Natural Earth</a> contributors");
+        setMetaData("attribution",
+                    "Data from <a href=\"https://openstreetmap.org/\">OpenStreetMap</a> and <a href=\"https://www.naturalearthdata.com/\">Natural Earth</a> "
+                    "contributors");
     }
     execQuery("BEGIN TRANSACTION");
 }
@@ -99,9 +101,10 @@ void MbTileWriter::addTile(QIODevice *device, qint32 x, qint32 y, qint32 z)
     }
 
     QSqlQuery query;
-    query.prepare( "INSERT OR REPLACE INTO tiles"
-                   " (zoom_level, tile_column, tile_row, tile_data)"
-                   " VALUES (?, ?, ?, ?)" );
+    query.prepare(
+        "INSERT OR REPLACE INTO tiles"
+        " (zoom_level, tile_column, tile_row, tile_data)"
+        " VALUES (?, ?, ?, ?)");
     query.addBindValue(z);
     query.addBindValue(x);
     query.addBindValue(y);
@@ -112,8 +115,9 @@ void MbTileWriter::addTile(QIODevice *device, qint32 x, qint32 y, qint32 z)
 bool MbTileWriter::hasTile(qint32 x, qint32 y, qint32 z) const
 {
     QSqlQuery query;
-    query.prepare( "SELECT EXISTS(SELECT 1 FROM tiles"
-                   " WHERE zoom_level=? AND tile_column=? AND tile_row=?);");
+    query.prepare(
+        "SELECT EXISTS(SELECT 1 FROM tiles"
+        " WHERE zoom_level=? AND tile_column=? AND tile_row=?);");
     query.addBindValue(z);
     query.addBindValue(x);
     query.addBindValue(y);
@@ -129,19 +133,19 @@ bool MbTileWriter::hasTile(qint32 x, qint32 y, qint32 z) const
     return false;
 }
 
-void MbTileWriter::execQuery( const QString &query ) const
+void MbTileWriter::execQuery(const QString &query) const
 {
-    QSqlQuery sqlQuery( query );
-    if ( sqlQuery.lastError().isValid() ) {
+    QSqlQuery sqlQuery(query);
+    if (sqlQuery.lastError().isValid()) {
         qCritical() << "Problems occurred when executing the query" << query;
         qCritical() << "SQL error: " << sqlQuery.lastError();
     }
 }
 
-void MbTileWriter::execQuery( QSqlQuery &query ) const
+void MbTileWriter::execQuery(QSqlQuery &query) const
 {
     query.exec();
-    if ( query.lastError().isValid() ) {
+    if (query.lastError().isValid()) {
         qCritical() << "Problems occurred when executing the query" << query.executedQuery();
         qCritical() << "SQL error: " << query.lastError();
     }

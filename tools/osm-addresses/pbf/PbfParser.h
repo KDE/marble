@@ -9,29 +9,24 @@
 #ifndef PBFPARSER_H
 #define PBFPARSER_H
 
+#include "../OsmParser.h"
 #include "fileformat.pb.h"
 #include "osmformat.pb.h"
-#include "../OsmParser.h"
 
-#include <QString>
-#include <QSet>
-#include <QFile>
 #include <QDataStream>
+#include <QFile>
+#include <QSet>
+#include <QString>
 
 class PbfParser : public Marble::OsmParser
 {
 public:
     PbfParser();
 
-    bool parse( const QFileInfo &file, int pass, bool &needAnotherPass ) override;
+    bool parse(const QFileInfo &file, int pass, bool &needAnotherPass) override;
 
 private:
-    enum Mode {
-        ModeNode,
-        ModeWay,
-        ModeRelation,
-        ModeDense
-    };
+    enum Mode { ModeNode, ModeWay, ModeRelation, ModeDense };
 
     bool parseBlobHeader();
 

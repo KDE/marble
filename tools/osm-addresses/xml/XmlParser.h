@@ -8,10 +8,10 @@
 
 #include "../OsmParser.h"
 
-#include "Writer.h"
-#include "OsmRegion.h"
 #include "OsmPlacemark.h"
+#include "OsmRegion.h"
 #include "OsmRegionTree.h"
+#include "Writer.h"
 
 #include <QFileInfo>
 #include <QXmlDefaultHandler>
@@ -23,15 +23,15 @@ class XmlParser : public OsmParser, private QXmlDefaultHandler
 {
     Q_OBJECT
 public:
-    explicit XmlParser( QObject *parent = nullptr );
+    explicit XmlParser(QObject *parent = nullptr);
 
 protected:
-    bool parse( const QFileInfo &file, int pass, bool &needAnotherPass ) override;
+    bool parse(const QFileInfo &file, int pass, bool &needAnotherPass) override;
 
 private:
-    bool startElement ( const QString & namespaceURI, const QString & localName, const QString & qName, const QXmlAttributes & atts ) override;
+    bool startElement(const QString &namespaceURI, const QString &localName, const QString &qName, const QXmlAttributes &atts) override;
 
-    bool endElement ( const QString & namespaceURI, const QString & localName, const QString & qName ) override;
+    bool endElement(const QString &namespaceURI, const QString &localName, const QString &qName) override;
 
     Node m_node;
 
@@ -42,7 +42,6 @@ private:
     int m_id;
 
     ElementType m_element;
-
 };
 
 }

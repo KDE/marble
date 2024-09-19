@@ -5,14 +5,12 @@
 // SPDX-FileCopyrightText: 2010 Harshit Jain <hjain.itbhu@gmail.com>
 //
 
-
 #include <QCoreApplication>
 #include <QDebug>
 #include <QFile>
 #include <QStringList>
 
-
-QString escapeXml( const QString &str )
+QString escapeXml(const QString &str)
 {
     QString xml = str;
     xml.replace(QLatin1Char('&'), QStringLiteral("&amp;"));
@@ -24,45 +22,44 @@ QString escapeXml( const QString &str )
     return xml;
 }
 
-
 int main(int argc, char *argv[])
 {
-    QCoreApplication  app( argc, argv );
+    QCoreApplication app(argc, argv);
 
-    for ( int i = 1; i < argc; ++i ) {
-        if ( strcmp( argv[ i ], "-o" ) != 0 )
+    for (int i = 1; i < argc; ++i) {
+        if (strcmp(argv[i], "-o") != 0)
             continue;
 
-        const QString targetfilename   = QString( argv[i+1] );
-        const QString sourcefilename   = QString( argv[i+2] );
-        const QString supportfilename  = QString( argv[i+3] );
-        const QString timezonefilename = QString( argv[i+4] );
+        const QString targetfilename = QString(argv[i + 1]);
+        const QString sourcefilename = QString(argv[i + 2]);
+        const QString supportfilename = QString(argv[i + 3]);
+        const QString timezonefilename = QString(argv[i + 4]);
 
         qDebug() << "Source: " << sourcefilename;
         qDebug() << "Support: " << supportfilename;
         qDebug() << "Target: " << targetfilename;
         qDebug() << "Timezone: " << timezonefilename;
 
-        QFile  sourcefile( sourcefilename );
-        sourcefile.open( QIODevice::ReadOnly );
+        QFile sourcefile(sourcefilename);
+        sourcefile.open(QIODevice::ReadOnly);
 
         // Read the data serialized from the file.
-        QTextStream  sourcestream( &sourcefile );
+        QTextStream sourcestream(&sourcefile);
 
-        QFile  targetfile( targetfilename );
-        targetfile.open( QIODevice::WriteOnly );
+        QFile targetfile(targetfilename);
+        targetfile.open(QIODevice::WriteOnly);
 
-        QTextStream  targetstream( &targetfile );
+        QTextStream targetstream(&targetfile);
 
-        QFile  supportfile( supportfilename );
-        supportfile.open( QIODevice::ReadOnly );
+        QFile supportfile(supportfilename);
+        supportfile.open(QIODevice::ReadOnly);
 
-        QTextStream  supportstream( &supportfile );
+        QTextStream supportstream(&supportfile);
 
-        QFile  timezonefile( timezonefilename );
-        timezonefile.open( QIODevice::ReadOnly );
+        QFile timezonefile(timezonefilename);
+        timezonefile.open(QIODevice::ReadOnly);
 
-        QTextStream  timezonestream( &timezonefile );
+        QTextStream timezonestream(&timezonefile);
 
         // gzFile gzDoc = gzopen( targetfilename.toLatin1(), "w");
         // QTextStream targetstream( new QString() );
@@ -70,81 +67,72 @@ int main(int argc, char *argv[])
         targetstream << "<?xml version=\"1.0\" encoding=\"UTF-8\"?> \n"
                      << "<kml xmlns=\"http://www.opengis.net/kml/2.2\"> \n"
                      << "<Document> \n";
-        QString  state;
-        QString  gmt;
-        QString	 dst;
+        QString state;
+        QString gmt;
+        QString dst;
 
-        while ( !sourcestream.atEnd() ) {
-
+        while (!sourcestream.atEnd()) {
             const QString rawline = sourcestream.readLine();
             const QStringList splitline = rawline.split(QLatin1Char('\t'));
 
-            const QString name       = splitline[1];
-            const QString latstring  = splitline[4];
-            const QString lngstring  = splitline[5];
-            const QString role       = splitline[7];
-            const QString country    = splitline[8];
-            const QString statecode  = splitline[10];
-            const QString popstring  = splitline[14];
-            const QString elestring  = splitline[16];
-            const QString timezone   = splitline[17];
-	
+            const QString name = splitline[1];
+            const QString latstring = splitline[4];
+            const QString lngstring = splitline[5];
+            const QString role = splitline[7];
+            const QString country = splitline[8];
+            const QString statecode = splitline[10];
+            const QString popstring = splitline[14];
+            const QString elestring = splitline[16];
+            const QString timezone = splitline[17];
+
             supportstream.seek(0);
-            while ( !supportstream.atEnd() ) {
+            while (!supportstream.atEnd()) {
                 const QString supportrawline = supportstream.readLine();
                 const QStringList supportsplitline = supportrawline.split(QLatin1Char('\t'));
-                if (supportsplitline[0] == (country + QLatin1Char('.') +statecode)) {
+                if (supportsplitline[0] == (country + QLatin1Char('.') + statecode)) {
                     state = supportsplitline[1];
                     break;
                 }
-            }   
+            }
 
             timezonestream.seek(0);
             timezonestream.readLine();
-            while ( !timezonestream.atEnd() ) {
-                    const QString timezonerawline = timezonestream.readLine();
-                    const QStringList timezonesplitline = timezonerawline.split(QLatin1Char('\t'));
+            while (!timezonestream.atEnd()) {
+                const QString timezonerawline = timezonestream.readLine();
+                const QStringList timezonesplitline = timezonerawline.split(QLatin1Char('\t'));
 
-                    if( timezonesplitline[1] == timezone )
-                    {
-                        gmt = timezonesplitline[2];
-                        dst = timezonesplitline[3];
-                        break;
-                    }
+                if (timezonesplitline[1] == timezone) {
+                    gmt = timezonesplitline[2];
+                    dst = timezonesplitline[3];
+                    break;
+                }
             }
 
-            const int gmtoffset = ( int ) ( gmt.toFloat() * 100 );
-            const int dstoffset = ( int ) ( dst.toFloat() * 100 ) - gmtoffset;
-	
+            const int gmtoffset = (int)(gmt.toFloat() * 100);
+            const int dstoffset = (int)(dst.toFloat() * 100) - gmtoffset;
+
             if (role != QLatin1String("PPLX")) {
-	            targetstream << "    <Placemark> \n";
-         	    targetstream << "        <name>" << escapeXml( name ) << "</name> \n";
-                targetstream << "        <state>" << escapeXml( state ) << "</state> \n";
-      	        targetstream << "        <CountryNameCode>" << escapeXml( country.toUpper() ) << "</CountryNameCode>\n";
-        	    targetstream << "        <role>" << escapeXml( role ) << "</role> \n";
-        	    targetstream << "        <pop>"
-                             << escapeXml( popstring ) << "</pop> \n";
-           	    targetstream << "        <Point>\n"
-                        	 << "            <coordinates>"
-                      		 << escapeXml( lngstring )
-                        	 << ","
-                        	 << escapeXml( latstring )
-				<< ","
-                             << escapeXml( elestring )
-	                         << "</coordinates> \n"
-	                         << "        </Point> \n";
-		        targetstream << "        <ExtendedData>\n"
-                                 << "            <Data name=\"gmt\">\n"
-                                 << "                <value>" << escapeXml( QString::number( gmtoffset ) ) << "</value>\n"
+                targetstream << "    <Placemark> \n";
+                targetstream << "        <name>" << escapeXml(name) << "</name> \n";
+                targetstream << "        <state>" << escapeXml(state) << "</state> \n";
+                targetstream << "        <CountryNameCode>" << escapeXml(country.toUpper()) << "</CountryNameCode>\n";
+                targetstream << "        <role>" << escapeXml(role) << "</role> \n";
+                targetstream << "        <pop>" << escapeXml(popstring) << "</pop> \n";
+                targetstream << "        <Point>\n"
+                             << "            <coordinates>" << escapeXml(lngstring) << "," << escapeXml(latstring) << "," << escapeXml(elestring)
+                             << "</coordinates> \n"
+                             << "        </Point> \n";
+                targetstream << "        <ExtendedData>\n"
+                             << "            <Data name=\"gmt\">\n"
+                             << "                <value>" << escapeXml(QString::number(gmtoffset)) << "</value>\n"
+                             << "            </Data>\n";
+                if (dstoffset) {
+                    targetstream << "            <Data name=\"dst\">\n"
+                                 << "                <value>" << escapeXml(QString::number(dstoffset)) << "</value>\n"
                                  << "            </Data>\n";
-                    if( dstoffset )
-                    {
-                        targetstream << "            <Data name=\"dst\">\n"
-                                 << "                <value>" << escapeXml( QString::number( dstoffset) ) << "</value>\n"
-                                 << "            </Data>\n";
-                    }
-                    targetstream << "        </ExtendedData>\n";  
-	            targetstream << "    </Placemark> \n";
+                }
+                targetstream << "        </ExtendedData>\n";
+                targetstream << "    </Placemark> \n";
             }
         }
 

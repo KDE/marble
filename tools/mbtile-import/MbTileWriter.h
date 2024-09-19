@@ -6,8 +6,8 @@
 #ifndef MARBLE_MBTILEWRITER_H
 #define MARBLE_MBTILEWRITER_H
 
-#include <QSqlQuery>
 #include <QFileInfo>
+#include <QSqlQuery>
 
 namespace Marble
 {
@@ -15,7 +15,7 @@ namespace Marble
 class MbTileWriter
 {
 public:
-    explicit MbTileWriter(const QString &filename, const QString &extension="o5m");
+    explicit MbTileWriter(const QString &filename, const QString &extension = "o5m");
     ~MbTileWriter();
 
     void setOverwriteTiles(bool overwrite);
@@ -23,7 +23,7 @@ public:
     void setCommitInterval(int interval);
 
     void addTile(const QFileInfo &file, qint32 x, qint32 y, qint32 z);
-    void addTile(QIODevice* device, qint32 x, qint32 y, qint32 z);
+    void addTile(QIODevice *device, qint32 x, qint32 y, qint32 z);
     bool hasTile(qint32 x, qint32 y, qint32 z) const;
 
 private:

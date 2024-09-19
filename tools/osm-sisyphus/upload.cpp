@@ -7,15 +7,16 @@
 
 #include "logger.h"
 
-#include <QDebug>
-#include <QProcess>
 #include <QDateTime>
+#include <QDebug>
 #include <QDir>
+#include <QProcess>
 #include <QTemporaryFile>
 #include <QUrl>
 
-Upload::Upload(QObject *parent) :
-    QObject(parent), m_uploadFiles(true)
+Upload::Upload(QObject *parent)
+    : QObject(parent)
+    , m_uploadFiles(true)
 {
     // nothing to do
 }
@@ -23,7 +24,9 @@ Upload::Upload(QObject *parent) :
 void Upload::changeStatus(const Package &package, const QString &status, const QString &message)
 {
     Logger::instance().setStatus(package.region.id() + QLatin1Char('_') + package.transport,
-                                 package.region.name() + QLatin1String(" (") + package.transport + QLatin1Char(')'), status, message);
+                                 package.region.name() + QLatin1String(" (") + package.transport + QLatin1Char(')'),
+                                 status,
+                                 message);
 }
 
 void Upload::processQueue()
@@ -36,7 +39,7 @@ void Upload::processQueue()
 
     if (upload(package)) {
         QString const message = QString("File %1 (%2) successfully created and uploaded").arg(package.file.fileName()).arg(Region::fileSize(package.file));
-        changeStatus( package, "finished", message);
+        changeStatus(package, "finished", message);
     }
     deleteFile(package.file);
     processQueue();
@@ -100,20 +103,20 @@ bool Upload::adjustNewstuffFile(const Package &package)
         wget.waitForFinished(1000 * 60 * 60 * 12); // wait up to 12 hours for download to complete
         if (wget.exitStatus() != QProcess::NormalExit || wget.exitCode() != 0) {
             qDebug() << "Failed to download newstuff file from filesmaster.kde.org";
-            changeStatus( package, "error", QLatin1String("Failed to sync newstuff file: ") + wget.readAllStandardError());
+            changeStatus(package, "error", QLatin1String("Failed to sync newstuff file: ") + wget.readAllStandardError());
             return false;
         }
 
         QFile file(monavFilename);
         if (!file.open(QFile::ReadOnly)) {
             qDebug() << "Failed to open newstuff file" << monavFilename;
-            changeStatus( package, "error", "Failed to open newstuff file.");
+            changeStatus(package, "error", "Failed to open newstuff file.");
             return false;
         }
 
-        if ( !m_xml.setContent( &file ) ) {
+        if (!m_xml.setContent(&file)) {
             qDebug() << "Cannot parse newstuff xml file.";
-            changeStatus( package, "error", "Failed to parse newstuff .xml file.");
+            changeStatus(package, "error", "Failed to parse newstuff .xml file.");
             return false;
         }
 
@@ -121,9 +124,9 @@ bool Upload::adjustNewstuffFile(const Package &package)
     }
 
     QDomElement root = m_xml.documentElement();
-    QDomNodeList regions = root.elementsByTagName( "stuff" );
-    for ( int i = 0; i < int(regions.length()); ++i ) {
-        QDomNode node = regions.item( i );
+    QDomNodeList regions = root.elementsByTagName("stuff");
+    for (int i = 0; i < int(regions.length()); ++i) {
+        QDomNode node = regions.item(i);
         if (!node.namedItem("payload").isNull()) {
             QUrl url(node.namedItem("payload").toElement().text());
             QFileInfo fileInfo(url.path());
@@ -138,7 +141,7 @@ bool Upload::adjustNewstuffFile(const Package &package)
                 if (!versionNode.isNull()) {
                     double version = versionNode.toElement().text().toDouble();
                     versionNode.removeChild(versionNode.firstChild());
-                    versionNode.appendChild(m_xml.createTextNode(QString::number(version+0.1, 'f', 1)));
+                    versionNode.appendChild(m_xml.createTextNode(QString::number(version + 0.1, 'f', 1)));
                 }
                 QDomNode payloadNode = node.namedItem("payload");
                 payloadNode.removeChild(payloadNode.firstChild());
@@ -228,7 +231,7 @@ bool Upload::deleteRemoteFile(const QString &filename)
         return true;
     }
 
-    if (!filename.startsWith(QLatin1String( "/home/marble/" ))) {
+    if (!filename.startsWith(QLatin1String("/home/marble/"))) {
         return false;
     }
 
@@ -257,7 +260,7 @@ void Upload::uploadAndDelete(const Region &region, const QFileInfo &file, const 
     processQueue();
 }
 
-bool Upload::Package::operator ==(const Upload::Package &other) const
+bool Upload::Package::operator==(const Upload::Package &other) const
 {
     return region == other.region;
 }

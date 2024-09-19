@@ -9,24 +9,15 @@
 #include "jobparameters.h"
 #include "region.h"
 
+#include <QFileInfo>
 #include <QObject>
 #include <QRunnable>
-#include <QFileInfo>
 
 class Job : public QObject, public QRunnable
 {
     Q_OBJECT
 public:
-    enum Status {
-        Waiting,
-        Downloading,
-        Routing,
-        Search,
-        Packaging,
-        Uploading,
-        Finished,
-        Error
-    };
+    enum Status { Waiting, Downloading, Routing, Search, Packaging, Uploading, Finished, Error };
 
     explicit Job(const Region &region, const JobParameters &parameters, QObject *parent = nullptr);
 
@@ -49,8 +40,8 @@ public:
     void run() override;
 
 Q_SIGNALS:
-    void finished(Job* job);
-    
+    void finished(Job *job);
+
 private:
     void changeStatus(Status status, const QString &message);
 

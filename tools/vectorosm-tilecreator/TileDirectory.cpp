@@ -4,39 +4,40 @@
 //
 
 #include "TileDirectory.h"
+#include "MarbleZipReader.h"
+#include "PeakAnalyzer.h"
+#include "StyleBuilder.h"
+#include "TileCoordsPyramid.h"
 #include "TileIterator.h"
 #include <GeoDataDocumentWriter.h>
-#include "MarbleZipReader.h"
 #include <GeoDataLatLonAltBox.h>
-#include "PeakAnalyzer.h"
-#include "TileCoordsPyramid.h"
-#include "StyleBuilder.h"
 
-#include <QFileInfo>
 #include <QDebug>
-#include <QProcess>
 #include <QDir>
-#include <QUrl>
-#include <QNetworkRequest>
+#include <QFileInfo>
 #include <QNetworkReply>
+#include <QNetworkRequest>
+#include <QProcess>
 #include <QTemporaryFile>
 #include <QThread>
+#include <QUrl>
 
-#include <iostream>
 #include <iomanip>
+#include <iostream>
 
 using namespace std;
 
-namespace Marble {
+namespace Marble
+{
 
 QMap<int, TagsFilter::Tags> TileDirectory::m_tags;
 
-TileDirectory::TileDirectory(TileType tileType, const QString &cacheDir, ParsingRunnerManager &manager, int maxZoomLevel) :
-    m_cacheDir(cacheDir),
-    m_manager(manager),
-    m_tileType(tileType),
-    m_landmassFile("land-polygons-split-4326.zip"),
-    m_maxZoomLevel(maxZoomLevel)
+TileDirectory::TileDirectory(TileType tileType, const QString &cacheDir, ParsingRunnerManager &manager, int maxZoomLevel)
+    : m_cacheDir(cacheDir)
+    , m_manager(manager)
+    , m_tileType(tileType)
+    , m_landmassFile("land-polygons-split-4326.zip")
+    , m_maxZoomLevel(maxZoomLevel)
 {
     if (m_tileType == Landmass) {
         m_zoomLevel = 7;
@@ -48,14 +49,19 @@ TileDirectory::TileDirectory(TileType tileType, const QString &cacheDir, Parsing
     QDir().mkpath(m_baseDir);
 }
 
-TileDirectory::TileDirectory(const QString &cacheDir, const QString &osmxFile, ParsingRunnerManager &manager, int maxZoomLevel, int loadZoomLevel, InputType inputType) :
-    m_cacheDir(cacheDir),
-    m_osmxFile(osmxFile),
-    m_manager(manager),
-    m_zoomLevel(loadZoomLevel),
-    m_tileType(OpenStreetMap),
-    m_inputType(inputType),
-    m_maxZoomLevel(maxZoomLevel)
+TileDirectory::TileDirectory(const QString &cacheDir,
+                             const QString &osmxFile,
+                             ParsingRunnerManager &manager,
+                             int maxZoomLevel,
+                             int loadZoomLevel,
+                             InputType inputType)
+    : m_cacheDir(cacheDir)
+    , m_osmxFile(osmxFile)
+    , m_manager(manager)
+    , m_zoomLevel(loadZoomLevel)
+    , m_tileType(OpenStreetMap)
+    , m_inputType(inputType)
+    , m_maxZoomLevel(maxZoomLevel)
 {
 }
 
@@ -78,9 +84,8 @@ QSharedPointer<GeoDataDocument> TileDirectory::load(int zoomLevel, int tileX, in
 
     if (!m_osmxFile.isEmpty() && m_inputType == OsmxInput) {
         const auto tileBox = m_tileProjection.geoCoordinates(tile);
-        const QString bbox = QString::number(tileBox.south(GeoDataCoordinates::Degree))
-            + QLatin1Char(',') + QString::number(tileBox.west(GeoDataCoordinates::Degree))
-            + QLatin1Char(',') + QString::number(tileBox.north(GeoDataCoordinates::Degree))
+        const QString bbox = QString::number(tileBox.south(GeoDataCoordinates::Degree)) + QLatin1Char(',')
+            + QString::number(tileBox.west(GeoDataCoordinates::Degree)) + QLatin1Char(',') + QString::number(tileBox.north(GeoDataCoordinates::Degree))
             + QLatin1Char(',') + QString::number(tileBox.east(GeoDataCoordinates::Degree));
 
         // TODO the following could be optimized by directly reading via OSMX API
@@ -91,8 +96,8 @@ QSharedPointer<GeoDataDocument> TileDirectory::load(int zoomLevel, int tileX, in
         }
 
         QProcess osmx;
-        osmx.start("osmx", QStringList({ "extract" , (m_cacheDir + QLatin1Char('/') + m_osmxFile), tempPbfFile.fileName(), "--noUserData", "--bbox", bbox }));
-        osmx.waitForFinished(5*60*1000);
+        osmx.start("osmx", QStringList({"extract", (m_cacheDir + QLatin1Char('/') + m_osmxFile), tempPbfFile.fileName(), "--noUserData", "--bbox", bbox}));
+        osmx.waitForFinished(5 * 60 * 1000);
         if (osmx.exitCode() != 0) {
             qWarning() << osmx.readAllStandardError();
             qWarning() << "osmx failed: " << osmx.errorString() << osmx.exitStatus() << osmx.exitCode();
@@ -144,13 +149,13 @@ void TileDirectory::setInputFile(const QString &filename)
     }
 }
 
-GeoDataDocument* TileDirectory::clip(int zoomLevel, int tileX, int tileY)
+GeoDataDocument *TileDirectory::clip(int zoomLevel, int tileX, int tileY)
 {
     QSharedPointer<GeoDataDocument> oldMap = m_landmass;
     load(zoomLevel, tileX, tileY);
     if (!m_clipper || oldMap != m_landmass || m_tagZoomLevel != zoomLevel) {
         setTagZoomLevel(zoomLevel);
-        GeoDataDocument* input = m_tagsFilter ? m_tagsFilter->accepted() : m_landmass.data();
+        GeoDataDocument *input = m_tagsFilter ? m_tagsFilter->accepted() : m_landmass.data();
         if (input) {
             m_clipper = QSharedPointer<VectorClipper>(new VectorClipper(input, m_maxZoomLevel));
         }
@@ -166,8 +171,8 @@ QString TileDirectory::name() const
 QSharedPointer<GeoDataDocument> TileDirectory::open(const QString &filename, ParsingRunnerManager &manager)
 {
     // Timeout is set to 10 min. If the file is reaaally huge, set it to something bigger.
-    GeoDataDocument* map = manager.openFile(filename, DocumentRole::MapDocument, 600000);
-    if(map == nullptr) {
+    GeoDataDocument *map = manager.openFile(filename, DocumentRole::MapDocument, 600000);
+    if (map == nullptr) {
         qWarning() << "File" << filename << "couldn't be loaded.";
     }
     QSharedPointer<GeoDataDocument> result = QSharedPointer<GeoDataDocument>(map);
@@ -178,13 +183,13 @@ TagsFilter::Tags TileDirectory::tagsFilteredIn(int zoomLevel) const
 {
     if (m_tags.isEmpty()) {
         QSet<GeoDataPlacemark::GeoDataVisualCategory> categories;
-        for (int i=GeoDataPlacemark::PlaceCity; i<GeoDataPlacemark::LastIndex; ++i) {
+        for (int i = GeoDataPlacemark::PlaceCity; i < GeoDataPlacemark::LastIndex; ++i) {
             categories << GeoDataPlacemark::GeoDataVisualCategory(i);
         }
 
         auto const tagMap = StyleBuilder::osmTagMapping();
-        for (auto category: categories) {
-            for (auto iter=tagMap.begin(), end=tagMap.end(); iter != end; ++iter) {
+        for (auto category : categories) {
+            for (auto iter = tagMap.begin(), end = tagMap.end(); iter != end; ++iter) {
                 if (iter.value() == category) {
                     int zoomLevel = StyleBuilder::minimumZoomLevel(category);
                     if (zoomLevel < 17) {
@@ -196,7 +201,7 @@ TagsFilter::Tags TileDirectory::tagsFilteredIn(int zoomLevel) const
     }
 
     TagsFilter::Tags result;
-    for (auto iter = m_tags.begin(), end = m_tags.end(); iter != end && iter.key() <= zoomLevel+1; ++iter) {
+    for (auto iter = m_tags.begin(), end = m_tags.end(); iter != end && iter.key() <= zoomLevel + 1; ++iter) {
         result << iter.value();
     }
     return result;
@@ -220,8 +225,8 @@ void TileDirectory::download(const QString &url, const QString &target)
     m_download = QSharedPointer<Download>(new Download);
     m_download->target = target;
     m_download->reply = m_downloadManager.get(QNetworkRequest(QUrl(url)));
-    connect(m_download->reply, SIGNAL(downloadProgress(qint64,qint64)), m_download.data(), SLOT(updateProgress(qint64,qint64)));
-    connect(m_download->reply, SIGNAL(downloadProgress(qint64,qint64)), this, SLOT(updateProgress()));
+    connect(m_download->reply, SIGNAL(downloadProgress(qint64, qint64)), m_download.data(), SLOT(updateProgress(qint64, qint64)));
+    connect(m_download->reply, SIGNAL(downloadProgress(qint64, qint64)), this, SLOT(updateProgress()));
     QEventLoop loop;
     connect(m_download->reply, SIGNAL(finished()), &loop, SLOT(quit()));
     loop.exec();
@@ -238,7 +243,7 @@ void TileDirectory::printProgress(double progress, int barWidth)
 {
     int const position = barWidth * progress;
     cout << " [" << string(position, '=') << ">";
-    cout << string(barWidth-position, ' ') << "]  " << std::right << setw(3) << int(progress * 100.0) << "%";
+    cout << string(barWidth - position, ' ') << "]  " << std::right << setw(3) << int(progress * 100.0) << "%";
 }
 
 GeoDataLatLonBox TileDirectory::boundingBox() const
@@ -256,16 +261,16 @@ void TileDirectory::setBoundingPolygon(const QString &file)
     m_boundingPolygon.clear();
     QFile input(file);
     QString country = "Unknown";
-    if ( input.open( QFile::ReadOnly ) ) {
-        QTextStream stream( &input );
+    if (input.open(QFile::ReadOnly)) {
+        QTextStream stream(&input);
         country = stream.readLine();
-        double lat( 0.0 ), lon( 0.0 );
+        double lat(0.0), lon(0.0);
         GeoDataLinearRing box;
-        while ( !stream.atEnd() ) {
+        while (!stream.atEnd()) {
             bool inside = true;
             QString line = stream.readLine().trimmed();
-            QStringList entries = line.split( QLatin1Char( ' ' ), Qt::SkipEmptyParts );
-            if ( entries.size() == 1 ) {
+            QStringList entries = line.split(QLatin1Char(' '), Qt::SkipEmptyParts);
+            if (entries.size() == 1) {
                 if (entries.first() == QLatin1String("END") && inside) {
                     inside = false;
                     if (!box.isEmpty()) {
@@ -274,27 +279,26 @@ void TileDirectory::setBoundingPolygon(const QString &file)
                     }
                 } else if (entries.first() == QLatin1String("END") && !inside) {
                     qDebug() << "END not expected here";
-                } else if ( entries.first().startsWith( QLatin1String( "!" ) ) ) {
+                } else if (entries.first().startsWith(QLatin1String("!"))) {
                     qDebug() << "Warning: Negative polygons not supported, skipping";
                 } else {
-                    //int number = entries.first().toInt();
+                    // int number = entries.first().toInt();
                     inside = true;
                 }
-            } else if ( entries.size() == 2 ) {
+            } else if (entries.size() == 2) {
                 lon = entries.first().toDouble();
                 lat = entries.last().toDouble();
-                GeoDataCoordinates point( lon, lat, 0.0, GeoDataCoordinates::Degree );
+                GeoDataCoordinates point(lon, lat, 0.0, GeoDataCoordinates::Degree);
                 box << point;
             } else {
-                qDebug() << "Warning: Ignoring line in" << file
-                         <<  "with" << entries.size() << "fields:" << line;
+                qDebug() << "Warning: Ignoring line in" << file << "with" << entries.size() << "fields:" << line;
             }
         }
     }
 
     if (!m_boundingPolygon.isEmpty()) {
         m_boundingBox = GeoDataLatLonBox::fromLineString(m_boundingPolygon.first());
-        for (int i=1, n=m_boundingPolygon.size(); i<n; ++i) {
+        for (int i = 1, n = m_boundingPolygon.size(); i < n; ++i) {
             m_boundingBox |= GeoDataLatLonBox::fromLineString(m_boundingPolygon[i]);
         }
     } else {
@@ -328,7 +332,7 @@ void TileDirectory::createTiles()
     QSharedPointer<VectorClipper> clipper;
     TileIterator iter(m_boundingBox, m_zoomLevel);
     qint64 count = 0;
-    for(auto const &tileId: iter) {
+    for (auto const &tileId : iter) {
         ++count;
         QString const outputDir = QString("%1/%2").arg(m_baseDir).arg(tileId.x());
         QString const outputFile = QString("%1/%2.o5m").arg(outputDir).arg(tileId.y());
@@ -345,7 +349,9 @@ void TileDirectory::createTiles()
         if (!clipper) {
             map = open(m_inputFile, m_manager);
             if (!map) {
-                qCritical() << "Failed to open " << m_inputFile << ". This can happen when Marble was compiled without shapelib (libshp), when the system has too little memory (RAM + swap need to be at least 8G), or when the download of the landmass data file failed.";
+                qCritical() << "Failed to open " << m_inputFile
+                            << ". This can happen when Marble was compiled without shapelib (libshp), when the system has too little memory (RAM + swap need "
+                               "to be at least 8G), or when the download of the landmass data file failed.";
             }
             clipper = QSharedPointer<VectorClipper>(new VectorClipper(map.data(), m_zoomLevel));
         }
@@ -366,21 +372,21 @@ void TileDirectory::createOsmTiles() const
     pyramid.setBottomLevelCoords(rect);
 
     qint64 const maxCount = pyramid.tilesCount();
-    QMap<int,QVector<TileId> > tileLevels;
-    for (int zoomLevel=0; zoomLevel <= m_zoomLevel; ++zoomLevel) {
+    QMap<int, QVector<TileId>> tileLevels;
+    for (int zoomLevel = 0; zoomLevel <= m_zoomLevel; ++zoomLevel) {
         QRect const rect = pyramid.coords(zoomLevel);
-        if (zoomLevel < m_zoomLevel && rect.width()*rect.height() < 2) {
+        if (zoomLevel < m_zoomLevel && rect.width() * rect.height() < 2) {
             continue;
         }
 
         TileIterator iter(m_boundingBox, zoomLevel);
-        for(auto const &tileId: iter) {
+        for (auto const &tileId : iter) {
             tileLevels[zoomLevel] << TileId(0, zoomLevel, tileId.x(), tileId.y());
         }
     }
 
     bool hasAllTiles = true;
-    for (auto const &tileId: tileLevels[m_zoomLevel]) {
+    for (auto const &tileId : tileLevels[m_zoomLevel]) {
         auto const outputFile = osmFileFor(tileId);
         if (!QFileInfo::exists(outputFile)) {
             hasAllTiles = false;
@@ -391,11 +397,11 @@ void TileDirectory::createOsmTiles() const
     bool first = true;
     if (!hasAllTiles) {
         qint64 count = 0;
-        for (auto const &tiles: tileLevels) {
-            for (auto const &tileId: tiles) {
+        for (auto const &tiles : tileLevels) {
+            for (auto const &tileId : tiles) {
                 ++count;
-                QString const inputFile = first ? m_inputFile : QString("%1/osm/%2/%3/%4.o5m").
-                                                  arg(m_cacheDir).arg(tileId.zoomLevel()-1).arg(tileId.x()>>1).arg(tileId.y()>>1);
+                QString const inputFile =
+                    first ? m_inputFile : QString("%1/osm/%2/%3/%4.o5m").arg(m_cacheDir).arg(tileId.zoomLevel() - 1).arg(tileId.x() >> 1).arg(tileId.y() >> 1);
                 QString const outputFile = osmFileFor(tileId);
                 if (QFileInfo::exists(outputFile)) {
                     continue;
@@ -417,9 +423,10 @@ void TileDirectory::createOsmTiles() const
                 double const minLat = tileBoundary.south(GeoDataCoordinates::Degree);
                 QString const bbox = QString("-b=%1,%2,%3,%4").arg(minLon).arg(minLat).arg(maxLon).arg(maxLat);
                 QProcess osmconvert;
-                osmconvert.start("osmconvert", QStringList() << "--drop-author" << "--drop-version"
-                                 << "--complete-ways" << "--complex-ways" << bbox << output << inputFile);
-                osmconvert.waitForFinished(10*60*1000);
+                osmconvert.start("osmconvert",
+                                 QStringList() << "--drop-author" << "--drop-version"
+                                               << "--complete-ways" << "--complex-ways" << bbox << output << inputFile);
+                osmconvert.waitForFinished(10 * 60 * 1000);
                 if (osmconvert.exitCode() != 0) {
                     qWarning() << osmconvert.readAllStandardError();
                     qWarning() << "osmconvert failed: " << osmconvert.errorString();
@@ -430,15 +437,14 @@ void TileDirectory::createOsmTiles() const
     }
 
     tileLevels.remove(m_zoomLevel);
-    for (auto const &tiles: tileLevels) {
-        for (auto const &tileId: tiles) {
+    for (auto const &tiles : tileLevels) {
+        for (auto const &tileId : tiles) {
             QFile::remove(osmFileFor(tileId));
         }
     }
 
     printProgress(1.0);
     cout << "  osm cache tiles complete." << string(20, ' ') << endl;
-
 }
 
 int TileDirectory::innerNodes(const TileId &tile) const
@@ -457,7 +463,7 @@ int TileDirectory::innerNodes(const TileId &tile) const
 
     int innerNodes = 0;
     if (m_boundingPolygon.isEmpty()) {
-        for(auto const &coordinate: bounds) {
+        for (auto const &coordinate : bounds) {
             if (m_boundingBox.contains(coordinate)) {
                 ++innerNodes;
             }
@@ -465,8 +471,8 @@ int TileDirectory::innerNodes(const TileId &tile) const
         return innerNodes;
     }
 
-    for(auto const &coordinate: bounds) {
-        for(auto const &ring: m_boundingPolygon) {
+    for (auto const &coordinate : bounds) {
+        for (auto const &ring : m_boundingPolygon) {
             if (ring.contains(coordinate)) {
                 ++innerNodes;
             }
@@ -499,10 +505,10 @@ GeoDataLatLonBox TileDirectory::boundingBox(const QString &filename) const
 {
     QProcess osmconvert;
     osmconvert.start("osmconvert", QStringList() << "--out-statistics" << filename);
-    osmconvert.waitForFinished(10*60*1000);
+    osmconvert.waitForFinished(10 * 60 * 1000);
     QStringList const output = QString(osmconvert.readAllStandardOutput()).split('\n');
     GeoDataLatLonBox boundingBox;
-    for(QString const &line: output) {
+    for (QString const &line : output) {
         if (line.startsWith("lon min:")) {
             boundingBox.setWest(line.mid(8).toDouble(), GeoDataCoordinates::Degree);
         } else if (line.startsWith("lon max")) {

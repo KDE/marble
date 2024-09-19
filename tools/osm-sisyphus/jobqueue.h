@@ -8,8 +8,8 @@
 
 #include "job.h"
 
-#include <QObject>
 #include <QList>
+#include <QObject>
 
 class JobQueue : public QObject
 {
@@ -17,19 +17,19 @@ class JobQueue : public QObject
 public:
     explicit JobQueue(QObject *parent = nullptr);
 
-    void addJob(Job* job);
+    void addJob(Job *job);
 
     void setMaxConcurrentJobs(int size);
 
 private Q_SLOTS:
-    void removeJob(Job* job);
+    void removeJob(Job *job);
 
 private:
     void startJob(Job *job);
 
-    QList<Job*> m_jobs;
+    QList<Job *> m_jobs;
 
-    QList<Job*> m_runningJobs;
+    QList<Job *> m_runningJobs;
 
     int m_maxConcurrentJobs;
 };

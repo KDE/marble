@@ -14,26 +14,26 @@
 #include "OsmObjectManager.h"
 #include "TileCoordsPyramid.h"
 
-
 #include <QDebug>
-#include <QPolygonF>
 #include <QPair>
+#include <QPolygonF>
 #include <QStringBuilder>
 
-namespace Marble {
-
-VectorClipper::VectorClipper(GeoDataDocument* document, int maxZoomLevel) :
-    m_maxZoomLevel(maxZoomLevel)
+namespace Marble
 {
-    for (auto feature: document->featureList()) {
+
+VectorClipper::VectorClipper(GeoDataDocument *document, int maxZoomLevel)
+    : m_maxZoomLevel(maxZoomLevel)
+{
+    for (auto feature : document->featureList()) {
         if (const auto placemark = geodata_cast<GeoDataPlacemark>(feature)) {
             // Select zoom level such that the placemark fits in a single tile
             int zoomLevel;
             qreal north, south, east, west;
             placemark->geometry()->latLonAltBox().boundaries(north, south, east, west);
             for (zoomLevel = maxZoomLevel; zoomLevel >= 0; --zoomLevel) {
-                if (TileId::fromCoordinates(GeoDataCoordinates(west, north), zoomLevel) ==
-                        TileId::fromCoordinates(GeoDataCoordinates(east, south), zoomLevel)) {
+                if (TileId::fromCoordinates(GeoDataCoordinates(west, north), zoomLevel)
+                    == TileId::fromCoordinates(GeoDataCoordinates(east, south), zoomLevel)) {
                     break;
                 }
             }
@@ -50,7 +50,7 @@ VectorClipper::VectorClipper(GeoDataDocument* document, int maxZoomLevel) :
 GeoDataDocument *VectorClipper::clipTo(const GeoDataLatLonBox &tileBoundary, int zoomLevel)
 {
     bool const filterSmallAreas = zoomLevel > 10 && zoomLevel < 17;
-    GeoDataDocument* tile = new GeoDataDocument();
+    GeoDataDocument *tile = new GeoDataDocument();
     auto const clip = clipRect(tileBoundary);
     GeoDataLinearRing ring;
     ring << GeoDataCoordinates(tileBoundary.west(), tileBoundary.north());
@@ -59,12 +59,12 @@ GeoDataDocument *VectorClipper::clipTo(const GeoDataLatLonBox &tileBoundary, int
     ring << GeoDataCoordinates(tileBoundary.west(), tileBoundary.south());
     qreal const minArea = filterSmallAreas ? 0.01 * area(ring) : 0.0;
     QSet<qint64> osmIds;
-    for (GeoDataPlacemark const * placemark: potentialIntersections(tileBoundary)) {
-        GeoDataGeometry const * const geometry = placemark ? placemark->geometry() : nullptr;
+    for (GeoDataPlacemark const *placemark : potentialIntersections(tileBoundary)) {
+        GeoDataGeometry const *const geometry = placemark ? placemark->geometry() : nullptr;
         if (geometry && tileBoundary.intersects(geometry->latLonAltBox())) {
             if (!filterSmallAreas && tileBoundary.contains(geometry->latLonAltBox())) {
                 tile->append(placemark->clone());
-                osmIds <<placemark->osmData().id();
+                osmIds << placemark->osmData().id();
             } else if (geodata_cast<GeoDataPolygon>(geometry)) {
                 clipPolygon(placemark, tileBoundary, clip, minArea, tile, osmIds);
             } else if (geodata_cast<GeoDataLineString>(geometry)) {
@@ -72,9 +72,9 @@ GeoDataDocument *VectorClipper::clipTo(const GeoDataLatLonBox &tileBoundary, int
             } else if (geodata_cast<GeoDataLinearRing>(geometry)) {
                 clipString<GeoDataLinearRing>(placemark, clip, minArea, tile, osmIds);
             } else if (const auto building = geodata_cast<GeoDataBuilding>(geometry)) {
-                if (geodata_cast<GeoDataPolygon>(&static_cast<const GeoDataMultiGeometry*>(building->multiGeometry())->at(0))) {
+                if (geodata_cast<GeoDataPolygon>(&static_cast<const GeoDataMultiGeometry *>(building->multiGeometry())->at(0))) {
                     clipPolygon(placemark, tileBoundary, clip, minArea, tile, osmIds);
-                } else if (geodata_cast<GeoDataLinearRing>(&static_cast<const GeoDataMultiGeometry*>(building->multiGeometry())->at(0))) {
+                } else if (geodata_cast<GeoDataLinearRing>(&static_cast<const GeoDataMultiGeometry *>(building->multiGeometry())->at(0))) {
                     clipString<GeoDataLinearRing>(placemark, clip, minArea, tile, osmIds);
                 }
             } else {
@@ -84,9 +84,9 @@ GeoDataDocument *VectorClipper::clipTo(const GeoDataLatLonBox &tileBoundary, int
         }
     }
 
-    for (auto relation: m_relations) {
+    for (auto relation : m_relations) {
         if (relation->containsAnyOf(osmIds)) {
-            GeoDataRelation* multi = new GeoDataRelation;
+            GeoDataRelation *multi = new GeoDataRelation;
             multi->osmData() = relation->osmData();
             tile->append(multi);
         }
@@ -131,8 +131,10 @@ GeoDataDocument *VectorClipper::clipTo(unsigned int zoomLevel, unsigned int tile
 
 Clipper2Lib::Rect64 VectorClipper::clipRect(const GeoDataLatLonBox &box)
 {
-    return { qRound64(box.west() * s_pointScale), qRound64(box.south() * s_pointScale),
-             qRound64(box.east() * s_pointScale), qRound64(box.north() * s_pointScale) };
+    return {qRound64(box.west() * s_pointScale),
+            qRound64(box.south() * s_pointScale),
+            qRound64(box.east() * s_pointScale),
+            qRound64(box.north() * s_pointScale)};
 }
 
 bool VectorClipper::canBeArea(GeoDataPlacemark::GeoDataVisualCategory visualCategory)
@@ -158,26 +160,29 @@ qreal VectorClipper::area(const GeoDataLinearRing &ring)
 {
     int const n = ring.size();
     qreal area = 0;
-    if (n<3) {
+    if (n < 3) {
         return area;
     }
-    for (int i = 1; i < n; ++i ){
-        area += (ring[i].longitude() - ring[i-1].longitude() ) * ( ring[i].latitude() + ring[i-1].latitude());
+    for (int i = 1; i < n; ++i) {
+        area += (ring[i].longitude() - ring[i - 1].longitude()) * (ring[i].latitude() + ring[i - 1].latitude());
     }
-    area += (ring[0].longitude() - ring[n-1].longitude() ) * (ring[0].latitude() + ring[n-1].latitude());
+    area += (ring[0].longitude() - ring[n - 1].longitude()) * (ring[0].latitude() + ring[n - 1].latitude());
     qreal const result = EARTH_RADIUS * EARTH_RADIUS * qAbs(area * 0.5);
     return result;
 }
 
-void VectorClipper::clipPolygon(const GeoDataPlacemark *placemark, const GeoDataLatLonBox &tileBoundary,
-                                const Clipper2Lib::Rect64 &clip, qreal minArea,
-                                GeoDataDocument *document, QSet<qint64> &osmIds)
+void VectorClipper::clipPolygon(const GeoDataPlacemark *placemark,
+                                const GeoDataLatLonBox &tileBoundary,
+                                const Clipper2Lib::Rect64 &clip,
+                                qreal minArea,
+                                GeoDataDocument *document,
+                                QSet<qint64> &osmIds)
 {
     bool isBuilding = false;
-    GeoDataPolygon* polygon;
+    GeoDataPolygon *polygon;
     std::unique_ptr<GeoDataPlacemark> copyPlacemark;
     if (const auto building = geodata_cast<GeoDataBuilding>(placemark->geometry())) {
-        polygon = geodata_cast<GeoDataPolygon>(&static_cast<GeoDataMultiGeometry*>(building->multiGeometry())->at(0));
+        polygon = geodata_cast<GeoDataPolygon>(&static_cast<GeoDataMultiGeometry *>(building->multiGeometry())->at(0));
         isBuilding = true;
     } else {
         copyPlacemark.reset(new GeoDataPlacemark(*placemark));
@@ -190,28 +195,28 @@ void VectorClipper::clipPolygon(const GeoDataPlacemark *placemark, const GeoData
     using namespace Clipper2Lib;
     Path64 path;
     path.reserve(std::as_const(polygon)->outerBoundary().size());
-    for(auto const & node: std::as_const(polygon)->outerBoundary()) {
+    for (auto const &node : std::as_const(polygon)->outerBoundary()) {
         path.push_back(coordinateToPoint(node));
     }
 
     Paths64 paths = Clipper2Lib::RectClip(clip, path);
-    for(const auto &path: paths) {
-        GeoDataPlacemark* newPlacemark = new GeoDataPlacemark;
+    for (const auto &path : paths) {
+        GeoDataPlacemark *newPlacemark = new GeoDataPlacemark;
         newPlacemark->setVisible(placemark->isVisible());
         newPlacemark->setVisualCategory(placemark->visualCategory());
         GeoDataLinearRing outerRing;
-        OsmPlacemarkData const & placemarkOsmData = placemark->osmData();
-        OsmPlacemarkData & newPlacemarkOsmData = newPlacemark->osmData();
+        OsmPlacemarkData const &placemarkOsmData = placemark->osmData();
+        OsmPlacemarkData &newPlacemarkOsmData = newPlacemark->osmData();
         int index = -1;
-        OsmPlacemarkData const & outerRingOsmData = placemarkOsmData.memberReference(index);
-        OsmPlacemarkData & newOuterRingOsmData = newPlacemarkOsmData.memberReference(index);
+        OsmPlacemarkData const &outerRingOsmData = placemarkOsmData.memberReference(index);
+        OsmPlacemarkData &newOuterRingOsmData = newPlacemarkOsmData.memberReference(index);
         pathToRing(path, &outerRing, outerRingOsmData, newOuterRingOsmData);
 
-        GeoDataPolygon* newPolygon = new GeoDataPolygon;
+        GeoDataPolygon *newPolygon = new GeoDataPolygon;
         newPolygon->setOuterBoundary(outerRing);
         if (isBuilding) {
             const auto building = geodata_cast<GeoDataBuilding>(placemark->geometry());
-            GeoDataBuilding* newBuilding = new GeoDataBuilding(*building);
+            GeoDataBuilding *newBuilding = new GeoDataBuilding(*building);
             newBuilding->multiGeometry()->clear();
             newBuilding->multiGeometry()->append(newPolygon);
             newPlacemark->setGeometry(newBuilding);
@@ -228,21 +233,21 @@ void VectorClipper::clipPolygon(const GeoDataPlacemark *placemark, const GeoData
             osmIds.insert(outerRingOsmData.id());
         }
 
-        auto const & innerBoundaries = std::as_const(polygon)->innerBoundaries();
+        auto const &innerBoundaries = std::as_const(polygon)->innerBoundaries();
         for (index = 0; index < innerBoundaries.size(); ++index) {
-            auto const & innerBoundary = innerBoundaries.at(index);
+            auto const &innerBoundary = innerBoundaries.at(index);
             if ((minArea > 0.0 && area(innerBoundary) < minArea) || !tileBoundary.intersects(innerBoundary.latLonAltBox())) {
                 continue;
             }
 
-            auto const & innerRingOsmData = placemarkOsmData.memberReference(index);
+            auto const &innerRingOsmData = placemarkOsmData.memberReference(index);
             // entirely contained in the tile, no need to attempt any clipping
             if (minArea == 0.0 && tileBoundary.contains(innerBoundary.latLonAltBox())) {
-                auto & newInnerRingOsmData = newPlacemarkOsmData.memberReference(newPolygon->innerBoundaries().size());
+                auto &newInnerRingOsmData = newPlacemarkOsmData.memberReference(newPolygon->innerBoundaries().size());
                 newPolygon->appendInnerBoundary(innerBoundary);
                 newInnerRingOsmData.setId(innerRingOsmData.id());
                 copyTags(innerRingOsmData, newInnerRingOsmData);
-                for(const auto &node: innerBoundary) {
+                for (const auto &node : innerBoundary) {
                     newInnerRingOsmData.addNodeReference(node, innerRingOsmData.nodeReference(node));
                 }
                 osmIds.insert(innerRingOsmData.id());
@@ -251,13 +256,13 @@ void VectorClipper::clipPolygon(const GeoDataPlacemark *placemark, const GeoData
 
             Path64 innerPath;
             innerPath.reserve(innerBoundary.size());
-            for(auto const & node: innerBoundary) {
+            for (auto const &node : innerBoundary) {
                 innerPath.push_back(coordinateToPoint(node));
             }
             Paths64 innerPaths = Clipper2Lib::RectClip(clip, innerPath);
-            for(auto const &innerPath: innerPaths) {
+            for (auto const &innerPath : innerPaths) {
                 int const newIndex = newPolygon->innerBoundaries().size();
-                auto & newInnerRingOsmData = newPlacemarkOsmData.memberReference(newIndex);
+                auto &newInnerRingOsmData = newPlacemarkOsmData.memberReference(newIndex);
                 GeoDataLinearRing innerRing;
                 pathToRing(innerPath, &innerRing, innerRingOsmData, newInnerRingOsmData);
                 newPolygon->appendInnerBoundary(innerRing);
@@ -282,7 +287,7 @@ void VectorClipper::copyTags(const GeoDataPlacemark &source, GeoDataPlacemark &t
 
 void VectorClipper::copyTags(const OsmPlacemarkData &originalPlacemarkData, OsmPlacemarkData &targetOsmData) const
 {
-    for (auto iter=originalPlacemarkData.tagsBegin(), end=originalPlacemarkData.tagsEnd(); iter != end; ++iter) {
+    for (auto iter = originalPlacemarkData.tagsBegin(), end = originalPlacemarkData.tagsEnd(); iter != end; ++iter) {
         targetOsmData.addTag(iter.key(), iter.value());
     }
 }

@@ -16,26 +16,26 @@ namespace Marble
 class OsmRegionTree
 {
 public:
-    explicit OsmRegionTree( const OsmRegion & node = OsmRegion() );
+    explicit OsmRegionTree(const OsmRegion &node = OsmRegion());
 
     const OsmRegion &node() const;
 
-    void setChildren( const QVector<OsmRegionTree>& children );
+    void setChildren(const QVector<OsmRegionTree> &children);
 
-    const QVector<OsmRegionTree> & children() const;
+    const QVector<OsmRegionTree> &children() const;
 
-    void append( QList<OsmRegion> &regions );
+    void append(QList<OsmRegion> &regions);
 
-    void traverse( int &counter );
+    void traverse(int &counter);
 
     operator QList<OsmRegion>() const;
 
-    int smallestRegionId( const GeoDataCoordinates &coordinates ) const;
+    int smallestRegionId(const GeoDataCoordinates &coordinates) const;
 
 private:
-    int smallestRegionId( const GeoDataCoordinates &coordinates, int &level ) const;
+    int smallestRegionId(const GeoDataCoordinates &coordinates, int &level) const;
 
-    void enumerate( QList<OsmRegion> &list ) const;
+    void enumerate(QList<OsmRegion> &list) const;
 
     OsmRegion m_node;
 
@@ -45,4 +45,3 @@ private:
 }
 
 #endif // OSMREGIONTREE_H
-

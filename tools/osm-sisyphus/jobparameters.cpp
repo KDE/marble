@@ -5,7 +5,8 @@
 
 #include "jobparameters.h"
 
-JobParameters::JobParameters() : m_cacheData(false)
+JobParameters::JobParameters()
+    : m_cacheData(false)
 {
     // nothing to do
 }

@@ -44,74 +44,65 @@ void printUsage()
                  "          interpolation-method  one of \"integer\", \"nearest-neighbor\" (default), \"average\" or \"bilinear\"\n";
 }
 
-MapSourceType parseType( char const * const value )
+MapSourceType parseType(char const *const value)
 {
     MapSourceType result = UnknownMapSource;
-    if ( !value )
+    if (!value)
         qFatal("Suboption 'type' does not have a value.");
-    if ( strcmp( value, "NasaWW") == 0 )
+    if (strcmp(value, "NasaWW") == 0)
         result = NasaWorldWindMap;
-    else if ( strcmp( value, "Bathymetry" ) == 0 )
+    else if (strcmp(value, "Bathymetry") == 0)
         result = BathymetryMap;
     else
-        qFatal("Suboption 'type': Unrecognized value '%s'.", value );
+        qFatal("Suboption 'type': Unrecognized value '%s'.", value);
     return result;
 }
 
-QString parseString( char const * const value )
+QString parseString(char const *const value)
 {
     QString result;
-    if ( !value )
+    if (!value)
         qFatal("Suboption does not have a value.");
     result = value;
     return result;
 }
 
-int parseInt( char const * const value )
+int parseInt(char const *const value)
 {
-    if ( !value )
+    if (!value)
         qFatal("Suboption does not have a value.");
-    QString str( value );
+    QString str(value);
     bool ok;
-    int const result = str.toInt( &ok );
-    if ( !ok )
+    int const result = str.toInt(&ok);
+    if (!ok)
         qFatal("Suboption does not have an integer value.");
     return result;
 }
 
-EInterpolationMethod parseInterpolationMethod( char const * const value )
+EInterpolationMethod parseInterpolationMethod(char const *const value)
 {
     EInterpolationMethod result = UnknownInterpolationMethod;
-    if ( !value )
+    if (!value)
         qFatal("Suboption 'interpolation-method' does not have a value.");
-    if ( strcmp( value, "integer") == 0 )
+    if (strcmp(value, "integer") == 0)
         result = IntegerInterpolationMethod;
-    if ( strcmp( value, "nearest-neighbor") == 0 )
+    if (strcmp(value, "nearest-neighbor") == 0)
         result = NearestNeighborInterpolationMethod;
-    if ( strcmp( value, "average") == 0 )
+    if (strcmp(value, "average") == 0)
         result = AverageInterpolationMethod;
-    else if ( strcmp( value, "bilinear" ) == 0 )
-        result =  BilinearInterpolationMethod;
+    else if (strcmp(value, "bilinear") == 0)
+        result = BilinearInterpolationMethod;
     else
-        qFatal("Suboption 'interpolation-method': Unrecognized value '%s'.", value );
+        qFatal("Suboption 'interpolation-method': Unrecognized value '%s'.", value);
     return result;
 }
 
-ReadOnlyMapDefinition parseInput( char * subopts )
+ReadOnlyMapDefinition parseInput(char *subopts)
 {
-    if ( !subopts )
+    if (!subopts)
         qFatal("Missing argument for '--input'");
 
-    enum
-    {
-        TypeOption = 0,
-        BaseDirectoryOption,
-        FileOption,
-        TileLevelOption,
-        InterpolationOption,
-        CacheSizeOption,
-        TheEnd
-    };
+    enum { TypeOption = 0, BaseDirectoryOption, FileOption, TileLevelOption, InterpolationOption, CacheSizeOption, TheEnd };
 
     char optionType[] = "type";
     char optionBaseDirectory[] = "base-directory";
@@ -119,45 +110,35 @@ ReadOnlyMapDefinition parseInput( char * subopts )
     char optionTileLevel[] = "tile-level";
     char optionInterpolationMethod[] = "interpolation-method";
     char optionCacheSize[] = "cache-size";
-    char * const input_opts[] =
-    {
-        optionType,
-        optionBaseDirectory,
-        optionFile,
-        optionTileLevel,
-        optionInterpolationMethod,
-        optionCacheSize,
-        nullptr
-    };
+    char *const input_opts[] = {optionType, optionBaseDirectory, optionFile, optionTileLevel, optionInterpolationMethod, optionCacheSize, nullptr};
 
     ReadOnlyMapDefinition mapDefinition;
 
-    char * value;
-    while ( *subopts != '\0' ) {
-        switch ( getsubopt( &subopts, input_opts, &value )) {
-
+    char *value;
+    while (*subopts != '\0') {
+        switch (getsubopt(&subopts, input_opts, &value)) {
         case TypeOption:
-            mapDefinition.setMapType( parseType( value ));
+            mapDefinition.setMapType(parseType(value));
             break;
 
         case BaseDirectoryOption:
-            mapDefinition.setBaseDirectory( parseString( value ));
+            mapDefinition.setBaseDirectory(parseString(value));
             break;
 
         case FileOption:
-            mapDefinition.setFileName( parseString( value ));
+            mapDefinition.setFileName(parseString(value));
             break;
 
         case TileLevelOption:
-            mapDefinition.setTileLevel( parseInt( value ));
+            mapDefinition.setTileLevel(parseInt(value));
             break;
 
         case InterpolationOption:
-            mapDefinition.setInterpolationMethod( parseInterpolationMethod( value ));
+            mapDefinition.setInterpolationMethod(parseInterpolationMethod(value));
             break;
 
         case CacheSizeOption:
-            mapDefinition.setCacheSizeBytes( parseInt( value ));
+            mapDefinition.setCacheSizeBytes(parseInt(value));
             break;
 
         default:
@@ -167,10 +148,9 @@ ReadOnlyMapDefinition parseInput( char * subopts )
     return mapDefinition;
 }
 
-
-int main( int argc, char *argv[] )
+int main(int argc, char *argv[])
 {
-    QCoreApplication app( argc, argv );
+    QCoreApplication app(argc, argv);
 
     // --interpolation-method=NearestNeighbor|Bilinear
 
@@ -187,56 +167,47 @@ int main( int argc, char *argv[] )
     // --input,type=NasaWW,tile-level=8,base-directory=<dir>,interpolation-method=Bilinear
     // --input,type=Image,file=<file>
 
-    enum { HelpOption = 1,
-           InputOption,
-           OutputDirectoryOption,
-           OutputTileLevelOption,
-           JobsOption,
-           ClusterSizeOption,
-           SimulateOption };
+    enum { HelpOption = 1, InputOption, OutputDirectoryOption, OutputTileLevelOption, JobsOption, ClusterSizeOption, SimulateOption };
 
-    static struct option long_options[] = {
-        {"help",              no_argument,       nullptr, HelpOption },
-        {"input",             required_argument, nullptr, InputOption },
-        {"output-directory",  required_argument, nullptr, OutputDirectoryOption },
-        {"output-tile-level", required_argument, nullptr, OutputTileLevelOption },
-        {"jobs",              required_argument, nullptr, JobsOption },
-        {"cluster-size",      required_argument, nullptr, ClusterSizeOption },
-        {"simulate",          no_argument,       nullptr, SimulateOption },
-        {nullptr, 0, nullptr, 0 }
-    };
+    static struct option long_options[] = {{"help", no_argument, nullptr, HelpOption},
+                                           {"input", required_argument, nullptr, InputOption},
+                                           {"output-directory", required_argument, nullptr, OutputDirectoryOption},
+                                           {"output-tile-level", required_argument, nullptr, OutputTileLevelOption},
+                                           {"jobs", required_argument, nullptr, JobsOption},
+                                           {"cluster-size", required_argument, nullptr, ClusterSizeOption},
+                                           {"simulate", no_argument, nullptr, SimulateOption},
+                                           {nullptr, 0, nullptr, 0}};
 
-    while ( true ) {
+    while (true) {
         int option_index = 0;
 
-        int const opt = getopt_long( argc, argv, "", long_options, &option_index );
-        if ( opt == -1 )
+        int const opt = getopt_long(argc, argv, "", long_options, &option_index);
+        if (opt == -1)
             break;
 
-        switch ( opt ) {
-
+        switch (opt) {
         case HelpOption:
             printUsage();
-            exit( EXIT_SUCCESS );
+            exit(EXIT_SUCCESS);
 
         case InputOption:
-            mapSources.push_back( parseInput( optarg ));
+            mapSources.push_back(parseInput(optarg));
             break;
 
         case OutputDirectoryOption:
-            outputDirectory = parseString( optarg );
+            outputDirectory = parseString(optarg);
             break;
 
         case OutputTileLevelOption:
-            outputTileLevel = parseInt( optarg );
+            outputTileLevel = parseInt(optarg);
             break;
 
         case JobsOption:
-            threadCount = parseInt( optarg );
+            threadCount = parseInt(optarg);
             break;
 
         case ClusterSizeOption:
-            clusterSize = parseInt( optarg );
+            clusterSize = parseInt(optarg);
             break;
 
         case SimulateOption:
@@ -248,30 +219,27 @@ int main( int argc, char *argv[] )
         }
     }
 
-    qDebug() << "\noutput directory:" << outputDirectory
-             << "\noutput tile level:" << outputTileLevel
-             << "\ncluster size:" << clusterSize
-             << "\nthreads:" << threadCount
-             << "\ninputs:" << mapSources;
+    qDebug() << "\noutput directory:" << outputDirectory << "\noutput tile level:" << outputTileLevel << "\ncluster size:" << clusterSize
+             << "\nthreads:" << threadCount << "\ninputs:" << mapSources;
 
     if (onlySimulate)
-        exit( EXIT_SUCCESS );
+        exit(EXIT_SUCCESS);
 
     NasaWorldWindToOpenStreetMapConverter converter;
-    converter.setMapSources( mapSources );
-    converter.setOsmBaseDirectory( QDir( outputDirectory ));
-    converter.setOsmTileLevel( outputTileLevel );
-    converter.setOsmTileClusterEdgeLengthTiles( clusterSize );
-    converter.setThreadCount( threadCount );
+    converter.setMapSources(mapSources);
+    converter.setOsmBaseDirectory(QDir(outputDirectory));
+    converter.setOsmTileLevel(outputTileLevel);
+    converter.setOsmTileClusterEdgeLengthTiles(clusterSize);
+    converter.setThreadCount(threadCount);
 
-    QObject::connect( &converter, SIGNAL(finished()), &app, SLOT(quit()));
+    QObject::connect(&converter, SIGNAL(finished()), &app, SLOT(quit()));
 
-    QVector<QPair<Thread*, OsmTileClusterRenderer*> > renderThreads = converter.start();
+    QVector<QPair<Thread *, OsmTileClusterRenderer *>> renderThreads = converter.start();
     app.exec();
 
-    QVector<QPair<Thread*, OsmTileClusterRenderer*> >::iterator pos = renderThreads.begin();
-    QVector<QPair<Thread*, OsmTileClusterRenderer*> >::iterator const end = renderThreads.end();
-    for (; pos != end; ++pos ) {
+    QVector<QPair<Thread *, OsmTileClusterRenderer *>>::iterator pos = renderThreads.begin();
+    QVector<QPair<Thread *, OsmTileClusterRenderer *>>::iterator const end = renderThreads.end();
+    for (; pos != end; ++pos) {
         (*pos).first->stop();
         (*pos).first->wait();
         delete (*pos).second;

@@ -8,21 +8,22 @@
 
 #include <QVector>
 
-namespace Marble {
+namespace Marble
+{
 
 class GeoDataPlacemark;
 
 class PeakAnalyzer
 {
 public:
-    static void determineZoomLevel(const QVector<GeoDataPlacemark*> &placemarks);
+    static void determineZoomLevel(const QVector<GeoDataPlacemark *> &placemarks);
 
 private:
     using Peaks = QVector<GeoDataPlacemark *>;
     using PeakCluster = QVector<GeoDataPlacemark *>;
     using PeakClusters = QVector<PeakCluster>;
 
-    static Peaks peaksNear(const GeoDataPlacemark* placemark, const Peaks &peaks, double maxDistance);
+    static Peaks peaksNear(const GeoDataPlacemark *placemark, const Peaks &peaks, double maxDistance);
     static void dbScan(const Peaks &peaks, double maxDistance, int minPoints);
 };
 

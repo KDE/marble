@@ -6,8 +6,8 @@
 #ifndef MARBLE_WRITER_H
 #define MARBLE_WRITER_H
 
-#include "OsmRegion.h"
 #include "OsmPlacemark.h"
+#include "OsmRegion.h"
 
 #include <QObject>
 
@@ -19,11 +19,11 @@ class Writer : public QObject
     Q_OBJECT
 
 public:
-    explicit Writer( QObject* parent = nullptr );
+    explicit Writer(QObject *parent = nullptr);
 
-    virtual void addOsmRegion( const OsmRegion &region ) = 0;
+    virtual void addOsmRegion(const OsmRegion &region) = 0;
 
-    virtual void addOsmPlacemark( const OsmPlacemark &placemark ) = 0;
+    virtual void addOsmPlacemark(const OsmPlacemark &placemark) = 0;
 };
 
 }

@@ -21,9 +21,9 @@
 #endif
 
 #include <QCommandLineParser>
-#include <QGuiApplication>
 #include <QDebug>
 #include <QFile>
+#include <QGuiApplication>
 #include <QSaveFile>
 #include <QtPlugin>
 
@@ -34,17 +34,17 @@ Q_IMPORT_PLUGIN(ShpPlugin)
 
 using namespace Marble;
 
-GeoDataDocument* mergeDocuments(GeoDataDocument* map1, GeoDataDocument* map2)
+GeoDataDocument *mergeDocuments(GeoDataDocument *map1, GeoDataDocument *map2)
 {
-    GeoDataDocument* mergedMap = new GeoDataDocument(*map1);
+    GeoDataDocument *mergedMap = new GeoDataDocument(*map1);
     if (!map2) {
         return mergedMap;
     }
 
     OsmPlacemarkData marbleLand;
-    marbleLand.addTag("marble_land","landmass");
-    for (auto placemark: map2->placemarkList()) {
-        GeoDataPlacemark* land = new GeoDataPlacemark(*placemark);
+    marbleLand.addTag("marble_land", "landmass");
+    for (auto placemark : map2->placemarkList()) {
+        GeoDataPlacemark *land = new GeoDataPlacemark(*placemark);
         if (geodata_cast<GeoDataPolygon>(land->geometry())) {
             land->setOsmData(marbleLand);
         }
@@ -63,12 +63,12 @@ int main(int argc, char **argv)
     // for stand-alone testing only, in normal operation this is entirely controlled via the Tirex command socket
     QCommandLineParser parser;
     parser.addOptions({
-                      {{"c", "cache-directory"}, "Directory for temporary data.", "cache"},
-                      {"source", "source file to load instead of doing an osmx query.", "source"},
-                      {"x", "x coordinate of the requested tile", "x"},
-                      {"y", "y coordinate of the requested tile", "y"},
-                      {"z", "zoom level of the requested tile", "z"},
-                      });
+        {{"c", "cache-directory"}, "Directory for temporary data.", "cache"},
+        {"source", "source file to load instead of doing an osmx query.", "source"},
+        {"x", "x coordinate of the requested tile", "x"},
+        {"y", "y coordinate of the requested tile", "y"},
+        {"z", "zoom level of the requested tile", "z"},
+    });
     parser.process(app);
 
     // work around MARBLE_ADD_WRITER not working for static builds
@@ -102,7 +102,12 @@ int main(int argc, char **argv)
         const int blockColumns = backend.metatileColumns() / blockSize;
         const int blockRows = backend.metatileRows() / blockSize;
 
-        TileDirectory mapTiles(cacheDirectory, sourceFile.isEmpty() ? QStringLiteral("planet.osmx") :sourceFile, manager, req.tile.z, loadZ, sourceFile.isEmpty() ? TileDirectory::OsmxInput : TileDirectory::RawInput);
+        TileDirectory mapTiles(cacheDirectory,
+                               sourceFile.isEmpty() ? QStringLiteral("planet.osmx") : sourceFile,
+                               manager,
+                               req.tile.z,
+                               loadZ,
+                               sourceFile.isEmpty() ? TileDirectory::OsmxInput : TileDirectory::RawInput);
         TileDirectory landTiles(TileDirectory::Landmass, cacheDirectory, manager, req.tile.z);
 
         QSaveFile f(backend.metatileFileName(req));
@@ -119,7 +124,7 @@ int main(int argc, char **argv)
                         const auto x = blockX * blockSize + tileX;
                         const auto y = blockY * blockSize + tileY;
 
-                        auto const tileId = TileId (0, req.tile.z, x + req.tile.x, y + req.tile.y);
+                        auto const tileId = TileId(0, req.tile.z, x + req.tile.x, y + req.tile.y);
                         using GeoDocPtr = QSharedPointer<GeoDataDocument>;
                         GeoDocPtr tile1 = GeoDocPtr(mapTiles.clip(tileId.zoomLevel(), tileId.x(), tileId.y()));
                         TagsFilter::removeAnnotationTags(tile1.data());

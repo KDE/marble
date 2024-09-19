@@ -8,8 +8,8 @@
 
 #include "Writer.h"
 
-#include <QPair>
 #include <QHash>
+#include <QPair>
 #include <QSqlQuery>
 
 namespace Marble
@@ -18,20 +18,20 @@ namespace Marble
 class SqlWriter : public Writer
 {
 public:
-    explicit SqlWriter( const QString &filename, QObject* parent = nullptr );
+    explicit SqlWriter(const QString &filename, QObject *parent = nullptr);
 
     ~SqlWriter() override;
 
-    void addOsmRegion( const OsmRegion &region ) override;
+    void addOsmRegion(const OsmRegion &region) override;
 
-    void addOsmPlacemark( const OsmPlacemark &placemark ) override;
+    void addOsmPlacemark(const OsmPlacemark &placemark) override;
 
-    void saveDatabase( const QString &filename ) const;
+    void saveDatabase(const QString &filename) const;
 
 private:
-    void execQuery( QSqlQuery &query ) const;
+    void execQuery(QSqlQuery &query) const;
 
-    void execQuery( const QString &query ) const;
+    void execQuery(const QString &query) const;
 
     QHash<QString, int> m_placemarks;
 

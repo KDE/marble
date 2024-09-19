@@ -6,13 +6,13 @@
 #ifndef UPLOAD_H
 #define UPLOAD_H
 
-#include "region.h"
 #include "jobparameters.h"
+#include "region.h"
 
-#include <QObject>
-#include <QList>
-#include <QFileInfo>
 #include <QDomDocument>
+#include <QFileInfo>
+#include <QList>
+#include <QObject>
 
 class Upload : public QObject
 {
@@ -21,7 +21,7 @@ class Upload : public QObject
     Q_PROPERTY(bool uploadFiles READ uploadFiles WRITE setUploadFiles)
 
 public:
-    static Upload& instance();
+    static Upload &instance();
 
     void uploadAndDelete(const Region &region, const QFileInfo &file, const QString &transport);
 
@@ -42,7 +42,7 @@ private:
 
     explicit Upload(QObject *parent = nullptr);
 
-    void changeStatus( const Package &package, const QString &status, const QString &message );
+    void changeStatus(const Package &package, const QString &status, const QString &message);
 
     void processQueue();
 

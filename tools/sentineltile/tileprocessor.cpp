@@ -5,25 +5,25 @@
 
 #include "tileprocessor.h"
 
-#include <QFile>
-#include <QTextStream>
-#include <QPainter>
 #include <QDebug>
-#include <QFileInfo>
 #include <QDir>
+#include <QFile>
+#include <QFileInfo>
+#include <QPainter>
+#include <QTextStream>
 
 #include <cmath>
 
 int TileProcessor::progress = 0;
 
-TileProcessor::TileProcessor(QObject *parent) : QObject(parent),
-    m_tileLevel(14)
+TileProcessor::TileProcessor(QObject *parent)
+    : QObject(parent)
+    , m_tileLevel(14)
 {
-
 }
 
-void TileProcessor::parseFileList(const QString& fileListUrl) {
-
+void TileProcessor::parseFileList(const QString &fileListUrl)
+{
     m_fileList.clear();
 
     QDir rootDir(fileListUrl);
@@ -42,13 +42,16 @@ void TileProcessor::parseFileList(const QString& fileListUrl) {
     qDebug() << "Total file count: " << m_fileList.length();
 }
 
-void TileProcessor::loadReferenceImages(const QString& maskPath, const QString& bathymetryPath) {
+void TileProcessor::loadReferenceImages(const QString &maskPath, const QString &bathymetryPath)
+{
     qDebug() << "Loading mask from" << maskPath;
     bool success = m_mask.load(maskPath);
-    if (!success) qDebug() << "Loading mask failed: " << maskPath;
+    if (!success)
+        qDebug() << "Loading mask failed: " << maskPath;
     qDebug() << "Loading bathymetry from" << bathymetryPath;
     success = m_bathymetry.load(bathymetryPath);
-    if (!success) qDebug() << "Loading bathymetry failed: " << bathymetryPath;
+    if (!success)
+        qDebug() << "Loading bathymetry failed: " << bathymetryPath;
     qDebug() << "Reference images loaded.";
 
     if (m_mask.width() != m_bathymetry.width() || m_mask.height() != m_bathymetry.height()) {
@@ -58,7 +61,8 @@ void TileProcessor::loadReferenceImages(const QString& maskPath, const QString& 
     }
 }
 
-void TileProcessor::process() {
+void TileProcessor::process()
+{
     for (int i = 0; i < m_fileList.length(); ++i) {
         QFileInfo fileInfo(m_fileList.at(i));
         if (fileInfo.isFile()) {
@@ -67,10 +71,11 @@ void TileProcessor::process() {
     }
 }
 
-void TileProcessor::colorForFile(const QString& filePath){
+void TileProcessor::colorForFile(const QString &filePath)
+{
     ++progress;
 
-//    int tileCountBathymetry = pow(2, m_tileLevel);
+    //    int tileCountBathymetry = pow(2, m_tileLevel);
     int tileCount = pow(2, m_tileLevel);
 
     int xTile = filePath.section(QLatin1Char('/'), -2, -2).toUInt();
@@ -78,15 +83,14 @@ void TileProcessor::colorForFile(const QString& filePath){
     int x = m_bathymetry.width() * xTile / (double)tileCount;
 
     qreal lat_rad = atan(sinh(M_PI * (1 - 2 * yTile / (double)tileCount)));
-    int y = (int)(m_bathymetry.height() * (-lat_rad + M_PI/2) / M_PI);
+    int y = (int)(m_bathymetry.height() * (-lat_rad + M_PI / 2) / M_PI);
 
-    int maskValueTopLeft = qRed(m_mask.pixel(2*x, 2*y));
-    int maskValueTopRight = qRed(m_mask.pixel(2*x + 1, 2*y));
-    int maskValueBottomLeft = qRed(m_mask.pixel(2*x, 2*y + 1));
-    int maskValueBottomRight = qRed(m_mask.pixel(2*x + 1, 2*y + 1));
+    int maskValueTopLeft = qRed(m_mask.pixel(2 * x, 2 * y));
+    int maskValueTopRight = qRed(m_mask.pixel(2 * x + 1, 2 * y));
+    int maskValueBottomLeft = qRed(m_mask.pixel(2 * x, 2 * y + 1));
+    int maskValueBottomRight = qRed(m_mask.pixel(2 * x + 1, 2 * y + 1));
 
-    if (maskValueTopLeft != 0 || maskValueTopRight != 0
-            || maskValueBottomLeft != 0 || maskValueBottomRight != 0 ) { // for all areas which are not black
+    if (maskValueTopLeft != 0 || maskValueTopRight != 0 || maskValueBottomLeft != 0 || maskValueBottomRight != 0) { // for all areas which are not black
         QColor bathymetryColor = QColor(m_bathymetry.pixel(x, y));
 
         QImage tile(256, 256, QImage::Format_RGB32);
@@ -95,40 +99,36 @@ void TileProcessor::colorForFile(const QString& filePath){
         QImage origTile;
         bool success = origTile.load(filePath);
 
-        if (!success) qDebug() << "Loading tile failed: " << filePath;
+        if (!success)
+            qDebug() << "Loading tile failed: " << filePath;
 
         QPainter painter;
         painter.begin(&tile);
         qreal opacity;
-        opacity = 1.0 - (double)(maskValueTopLeft)/255.0;
+        opacity = 1.0 - (double)(maskValueTopLeft) / 255.0;
         painter.setOpacity(opacity);
-        painter.drawImage(QRect(0, 0, 128, 128), origTile,
-                          QRect(0, 0, 128, 128));
-        opacity = 1.0 - (double)(maskValueTopRight)/255.0;
+        painter.drawImage(QRect(0, 0, 128, 128), origTile, QRect(0, 0, 128, 128));
+        opacity = 1.0 - (double)(maskValueTopRight) / 255.0;
         painter.setOpacity(opacity);
-        painter.drawImage(QRect(128, 0, 128, 128), origTile,
-                          QRect(128, 0, 128, 128));
-        opacity = 1.0 - (double)(maskValueBottomLeft)/255.0;
+        painter.drawImage(QRect(128, 0, 128, 128), origTile, QRect(128, 0, 128, 128));
+        opacity = 1.0 - (double)(maskValueBottomLeft) / 255.0;
         painter.setOpacity(opacity);
-        painter.drawImage(QRect(0, 128, 128, 128), origTile,
-                          QRect(0, 128, 128, 128));
-        opacity = 1.0 - (double)(maskValueBottomRight)/255.0;
+        painter.drawImage(QRect(0, 128, 128, 128), origTile, QRect(0, 128, 128, 128));
+        opacity = 1.0 - (double)(maskValueBottomRight) / 255.0;
         painter.setOpacity(opacity);
-        painter.drawImage(QRect(128, 128, 128, 128), origTile,
-                          QRect(128, 128, 128, 128));
+        painter.drawImage(QRect(128, 128, 128, 128), origTile, QRect(128, 128, 128, 128));
         painter.end();
 
         QString modFilePath = filePath;
-//        modFilePath = modFilePath.replace(".", "_mod.");
+        //        modFilePath = modFilePath.replace(".", "_mod.");
 
         tile.save(modFilePath, "JPG", 85);
         if (opacity > 0.0) {
             qDebug() << progress << filePath.section(QLatin1Char('/'), -2, -2) << filePath.section(QLatin1Char('/'), -1).section(QLatin1Char('.'), 0, 0);
             qDebug() << maskValueTopLeft << modFilePath;
         }
-    }
-    else {
-//        qDebug() << maskValue;
+    } else {
+        //        qDebug() << maskValue;
     }
 }
 

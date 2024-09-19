@@ -4,14 +4,14 @@
 
 #include <cmath>
 
-NearestNeighborInterpolation::NearestNeighborInterpolation( ReadOnlyMapImage * const mapImage )
-    : InterpolationMethod( mapImage )
+NearestNeighborInterpolation::NearestNeighborInterpolation(ReadOnlyMapImage *const mapImage)
+    : InterpolationMethod(mapImage)
 {
 }
 
-QRgb NearestNeighborInterpolation::interpolate( double const x, double const y )
+QRgb NearestNeighborInterpolation::interpolate(double const x, double const y)
 {
-    int const xr = round( x );
-    int const yr = round( y );
-    return m_mapImage->pixel( xr, yr );
+    int const xr = round(x);
+    int const yr = round(y);
+    return m_mapImage->pixel(xr, yr);
 }
