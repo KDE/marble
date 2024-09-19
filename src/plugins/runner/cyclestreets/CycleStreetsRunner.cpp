@@ -153,13 +153,13 @@ GeoDataDocument *CycleStreetsRunner::parse( const QByteArray &content ) const
 
     if ( json.isEmpty() ) {
         mDebug() << "Cannot parse json file with routing instructions: " << error.errorString();
-        return Q_NULLPTR;
+        return nullptr;
     }
 
     // Check if CycleStreets has found any error
     if ( !json.object()["error"].isNull() ) {
         mDebug() << "CycleStreets reported an error: " << json.object()["error"].toString();
-        return Q_NULLPTR;
+        return nullptr;
     }
 
     GeoDataDocument *result = new GeoDataDocument();
@@ -171,7 +171,7 @@ GeoDataDocument *CycleStreetsRunner::parse( const QByteArray &content ) const
     QJsonArray features = json.object()["marker"].toArray();
 
     if ( features.isEmpty() ) {
-        return Q_NULLPTR ;
+        return nullptr ;
     }
     QJsonObject route = features.first().toObject()["@attributes"].toObject();
     QJsonValue coordinates = route["coordinates"];

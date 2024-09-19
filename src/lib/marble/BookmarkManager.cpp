@@ -169,7 +169,7 @@ GeoDataPlacemark* BookmarkManager::bookmarkAt(GeoDataContainer *container, const
             return placemark;
     }
 
-    return Q_NULLPTR;
+    return nullptr;
 }
 
 GeoDataDocument * BookmarkManager::document()
@@ -203,7 +203,7 @@ GeoDataFolder* BookmarkManager::addNewBookmarkFolder( GeoDataContainer *containe
     //If name is empty string
     if ( name.isEmpty() ) {
         mDebug() << "Folder with empty name is not acceptable, please give it another name" ;
-        return Q_NULLPTR;
+        return nullptr;
     }
 
     //If folder with same name already exist
