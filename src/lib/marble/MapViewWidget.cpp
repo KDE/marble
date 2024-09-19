@@ -658,7 +658,7 @@ void MapViewWidget::Private::showContextMenu( const QPoint& pos )
     menu.addSeparator();
 
     menu.addAction(QIcon(QStringLiteral(":/icons/create-new-map.png")), tr("&Create a New Map..."), q, SIGNAL(showMapWizard()));
-    if (QFileInfo(MarbleDirs::localPath() + QLatin1String("/maps/") + currentThemePath()).exists()) {
+    if (QFileInfo::exists(MarbleDirs::localPath() + QLatin1String("/maps/") + currentThemePath())) {
         menu.addAction( tr( "&Delete Map Theme" ), q, SLOT(deleteMap()) );
     }
     menu.exec( m_mapViewUi.marbleThemeSelectView->mapToGlobal( pos ) );

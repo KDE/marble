@@ -21,7 +21,7 @@ MbTileWriter::MbTileWriter(const QString &filename, const QString &extension) :
     m_tileCounter(0),
     m_commitInterval(10000)
 {
-    bool const exists = QFileInfo(filename).exists();
+    bool const exists = QFileInfo::exists(filename);
 
     QSqlDatabase database = QSqlDatabase::addDatabase( "QSQLITE" );
     database.setDatabaseName( filename );

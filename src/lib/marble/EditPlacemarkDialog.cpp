@@ -332,10 +332,8 @@ void EditPlacemarkDialog::updateTextAnnotation()
 
 
     if ( !d->m_header->iconLink().isEmpty() ) {
-        QFileInfo fileInfo( d->m_header->iconLink() );
-
         GeoDataStyle::Ptr newStyle(new GeoDataStyle( *d->m_placemark->style() ));
-        if ( fileInfo.exists() ) {
+        if (QFileInfo::exists(d->m_header->iconLink())) {
             newStyle->iconStyle().setIconPath( d->m_header->iconLink() );
         }
 
@@ -380,7 +378,7 @@ void EditPlacemarkDialog::checkFields()
         QMessageBox::warning( this,
                               tr( "No image specified" ),
                               tr( "Please specify an icon for this placemark or add a valid tag." ) );
-    } else if( !d->m_header->iconLink().isEmpty() && !QFileInfo( d->m_header->iconLink() ).exists() ) {
+    } else if (!d->m_header->iconLink().isEmpty() && !QFileInfo::exists( d->m_header->iconLink())) {
         QMessageBox::warning( this,
                               tr( "Invalid icon path" ),
                               tr( "Please specify a valid path for the icon file." ) );

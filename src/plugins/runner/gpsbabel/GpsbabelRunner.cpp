@@ -26,7 +26,7 @@ GpsbabelRunner::GpsbabelRunner( QObject *parent ) :
 GeoDataDocument *GpsbabelRunner::parseFile(const QString &fileName, DocumentRole role, QString &error)
 {
     // Check and see if the file exists
-    if ( !QFileInfo( fileName ).exists() ) {
+    if ( !QFileInfo::exists( fileName ) ) {
         error = QStringLiteral("File %1 does not exist").arg(fileName);
         mDebug() << error;
         return nullptr;

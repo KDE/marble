@@ -110,7 +110,7 @@ void EditGroundOverlayDialog::checkFields()
         QMessageBox::warning( this,
                               tr( "No image specified" ),
                               tr( "Please specify an image file." ) );
-    } else if( !QFileInfo( d->m_header->iconLink() ).exists() ) {
+    } else if (!QFileInfo::exists(d->m_header->iconLink())) {
         QMessageBox::warning( this,
                               tr( "Invalid image path" ),
                               tr( "Please specify a valid path for the image file." ) );

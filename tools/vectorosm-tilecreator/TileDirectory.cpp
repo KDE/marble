@@ -136,7 +136,7 @@ void TileDirectory::setInputFile(const QString &filename)
             polyFile.replace(".pbf", ".poly");
             QString poly = QString("%1/%2").arg(url.adjusted(QUrl::RemoveFilename).toString()).arg(polyFile);
             QString const polyTarget = QString("%1/%2").arg(m_cacheDir).arg(polyFile);
-            if (!QFileInfo(polyTarget).exists()) {
+            if (!QFileInfo::exists(polyTarget)) {
                 download(poly, polyTarget);
             }
             setBoundingPolygon(polyTarget);
@@ -312,12 +312,12 @@ void TileDirectory::createTiles()
     QString const landmassDir = QString("%1/land-polygons-split-4326").arg(m_cacheDir);
     m_inputFile = QString("%1/land_polygons.shp").arg(landmassDir);
     auto const landmassZip = QString("%1/%2").arg(m_cacheDir).arg(m_landmassFile);
-    if (!QFileInfo(landmassZip).exists()) {
+    if (!QFileInfo::exists(landmassZip)) {
         QString const url = QString("https://osmdata.openstreetmap.de/download/%1").arg(m_landmassFile);
         download(url, landmassZip);
     }
 
-    if (!QFileInfo(landmassDir).exists()) {
+    if (!QFileInfo::exists(landmassDir)) {
         MarbleZipReader unzip(landmassZip);
         if (!unzip.extractAll(m_cacheDir)) {
             qWarning() << "Failed to extract" << landmassZip << "to" << m_cacheDir;
@@ -332,7 +332,7 @@ void TileDirectory::createTiles()
         ++count;
         QString const outputDir = QString("%1/%2").arg(m_baseDir).arg(tileId.x());
         QString const outputFile = QString("%1/%2.o5m").arg(outputDir).arg(tileId.y());
-        if (QFileInfo(outputFile).exists()) {
+        if (QFileInfo::exists(outputFile)) {
             continue;
         }
 
@@ -382,7 +382,7 @@ void TileDirectory::createOsmTiles() const
     bool hasAllTiles = true;
     for (auto const &tileId: tileLevels[m_zoomLevel]) {
         auto const outputFile = osmFileFor(tileId);
-        if (!QFileInfo(outputFile).exists()) {
+        if (!QFileInfo::exists(outputFile)) {
             hasAllTiles = false;
             break;
         }
@@ -397,7 +397,7 @@ void TileDirectory::createOsmTiles() const
                 QString const inputFile = first ? m_inputFile : QString("%1/osm/%2/%3/%4.o5m").
                                                   arg(m_cacheDir).arg(tileId.zoomLevel()-1).arg(tileId.x()>>1).arg(tileId.y()>>1);
                 QString const outputFile = osmFileFor(tileId);
-                if (QFileInfo(outputFile).exists()) {
+                if (QFileInfo::exists(outputFile)) {
                     continue;
                 }
 

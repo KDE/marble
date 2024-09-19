@@ -143,7 +143,7 @@ int main(int argc, char *argv[])
             for(auto const &tileId: iter) {
                 ++count;
                 QString const filename = tileFileName(parser, tileId.x(), tileId.y(), zoomLevel);
-                if (!overwriteTiles && QFileInfo(filename).exists()) {
+                if (!overwriteTiles && QFileInfo::exists(filename)) {
                     continue;
                 }
                 GeoDataDocument* tile = processor.clipTo(zoomLevel, tileId.x(), tileId.y());
