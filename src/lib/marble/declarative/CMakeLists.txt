@@ -31,6 +31,27 @@ add_library( marbledeclarative SHARED
     RouteRequestModel.cpp
     Settings.cpp
     RouteRelationModel.cpp
+
+    Bookmarks.h
+    Coordinate.h
+    GeoItem.h
+    GeoPolyline.h
+    DeclarativeMapThemeManager.h
+    MapTheme.h
+    MapThemeModel.h
+    MarbleDeclarativeObject.h
+    MarbleDeclarativePlugin.h
+    MarbleQuickItem.h
+    Placemark.h
+    PositionSource.h
+    SearchBackend.h
+    Tracking.h
+    Routing.h
+    Navigation.h
+    OfflineDataModel.h
+    RouteRequestModel.h
+    Settings.h
+    RouteRelationModel.h
 )
 
 generate_export_header(marbledeclarative BASE_NAME marble_declarative)
