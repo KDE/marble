@@ -424,7 +424,8 @@ void AnnotatePlugin::openAnnotationFile(const QString& filename)
 
     // FIXME: The same problem as in the case of copying/cutting graphic items applies here:
     // the files do not load properly because the geometry copy is not a deep copy.
-    foreach ( GeoDataFeature *feature, document->featureList() ) {
+    const auto features = document->featureList();
+    for (GeoDataFeature *feature : features) {
 
         if (const GeoDataPlacemark *placemark = geodata_cast<GeoDataPlacemark>(feature)) {
             GeoDataPlacemark *newPlacemark = new GeoDataPlacemark( *placemark );

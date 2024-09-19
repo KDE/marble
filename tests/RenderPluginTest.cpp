@@ -53,9 +53,9 @@ void RenderPluginTest::newInstance_data()
 {
     QTest::addColumn<const RenderPlugin *>( "factory" );
 
-    foreach ( const RenderPlugin *factory, m_model.pluginManager()->renderPlugins() ) {
-        QTest::newRow(factory->nameId().toLatin1().constData())
-            << factory;
+    const auto plugins = m_model.pluginManager()->renderPlugins();
+    for (const RenderPlugin *plugin : plugins) {
+        QTest::newRow(plugin->nameId().toLatin1().constData()) << plugin;
     }
 }
 
@@ -79,8 +79,8 @@ void RenderPluginTest::newInstance()
 void RenderPluginTest::initialize_data()
 {
     QTest::addColumn<const RenderPlugin *>( "factory" );
-
-    foreach ( const RenderPlugin *plugin, m_model.pluginManager()->renderPlugins() ) {
+    const auto plugins = m_model.pluginManager()->renderPlugins();
+    for (const RenderPlugin *plugin: plugins) {
         QTest::newRow(plugin->nameId().toLatin1().constData())
             << plugin;
     }
@@ -102,7 +102,8 @@ void RenderPluginTest::setVisible_data()
 {
     QTest::addColumn<const RenderPlugin *>( "factory" );
 
-    foreach ( const RenderPlugin *factory, m_model.pluginManager()->renderPlugins() ) {
+    const auto plugins = m_model.pluginManager()->renderPlugins();
+    for (const RenderPlugin *factory : plugins) {
         QTest::newRow(factory->nameId().toLatin1().constData())
             << factory;
     }
@@ -137,7 +138,8 @@ void RenderPluginTest::setEnabled_data()
 {
     QTest::addColumn<const RenderPlugin *>( "factory" );
 
-    foreach ( const RenderPlugin *factory, m_model.pluginManager()->renderPlugins() ) {
+    const auto plugins = m_model.pluginManager()->renderPlugins();
+    for (const RenderPlugin *factory : plugins) {
         QTest::newRow(factory->nameId().toLatin1().constData())
             << factory;
     }
@@ -172,7 +174,8 @@ void RenderPluginTest::setSettingsVisible_data()
 {
     QTest::addColumn<const RenderPlugin *>( "factory" );
 
-    foreach ( const RenderPlugin *factory, m_model.pluginManager()->renderPlugins() ) {
+    const auto plugins = m_model.pluginManager()->renderPlugins();
+    for (const RenderPlugin *factory : plugins) {
         QTest::newRow(factory->nameId().toLatin1().constData())
             << factory;
     }
@@ -214,7 +217,8 @@ void RenderPluginTest::setSettingsEnabled_data()
 {
     QTest::addColumn<const RenderPlugin *>( "factory" );
 
-    foreach ( const RenderPlugin *factory, m_model.pluginManager()->renderPlugins() ) {
+    const auto plugins = m_model.pluginManager()->renderPlugins();
+    for (const RenderPlugin *factory : plugins) {
         QTest::newRow(factory->nameId().toLatin1().constData())
             << factory;
     }
@@ -257,7 +261,8 @@ void RenderPluginTest::setSettingsAllEqual_data()
     QTest::addColumn<QVariant>( "result" );
     QTest::addColumn<QVariant>( "expected" );
 
-    foreach ( const RenderPlugin *plugin, m_model.pluginManager()->renderPlugins() ) {
+    const auto plugins = m_model.pluginManager()->renderPlugins();
+    for ( const RenderPlugin *plugin : plugins) {
         const RenderPlugin *const expected = plugin->newInstance( &m_model );
 
         RenderPlugin *const result = plugin->newInstance( &m_model );
@@ -288,7 +293,8 @@ void RenderPluginTest::restoreDefaultSettings_data()
     QTest::addColumn<QVariant>( "result" );
     QTest::addColumn<QVariant>( "expected" );
 
-    foreach ( const RenderPlugin *plugin, m_model.pluginManager()->renderPlugins() ) {
+    const auto plugins = m_model.pluginManager()->renderPlugins();
+    for (const RenderPlugin *plugin : plugins) {
         RenderPlugin *const result = plugin->newInstance( &m_model );
         result->initialize();
 

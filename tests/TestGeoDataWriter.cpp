@@ -50,7 +50,8 @@ void TestGeoDataWriter::initTestCase()
     QVERIFY( dataDir.count() > 0 );
 
     //test the loading of each file in the data dir
-    foreach( const QString &filename, dataDir.entryList(QStringList() << "*.kml", QDir::Files) ){
+    const auto fileNames = dataDir.entryList(QStringList() << "*.kml", QDir::Files);
+    for( const QString &filename: fileNames){
         QFile file( dataDir.filePath(filename));
         QVERIFY( file.exists() );
 
@@ -71,7 +72,7 @@ void TestGeoDataWriter::initTestCase()
 void TestGeoDataWriter::countFeatures_data()
 {
     QTest::addColumn<QSharedPointer<GeoDataParser> >("parser");
-    foreach( const QString &file, m_testFiles ) {
+    for (const QString &file: std::as_const(m_testFiles)) {
         QTest::newRow(file.toStdString().c_str()) << parsers.value(file);
     }
 }
@@ -79,7 +80,7 @@ void TestGeoDataWriter::countFeatures_data()
 void TestGeoDataWriter::saveFile_data()
 {
     QTest::addColumn<QSharedPointer<GeoDataParser> >( "parser" );
-    foreach( const QString &file, m_testFiles ) {
+    for (const QString &file: std::as_const(m_testFiles)) {
         QTest::newRow(file.toStdString().c_str()) << parsers.value(file);
     }
 }
@@ -106,7 +107,7 @@ void TestGeoDataWriter::saveFile()
 void TestGeoDataWriter::saveAndLoad_data()
 {
     QTest::addColumn<QSharedPointer<GeoDataParser> >("parser");
-    foreach( const QString &file, m_testFiles ) {
+    for (const QString &file: std::as_const(m_testFiles)) {
         QTest::newRow(file.toStdString().c_str()) << parsers.value(file);
     }
 }
@@ -139,7 +140,7 @@ void TestGeoDataWriter::saveAndCompare_data()
     QTest::addColumn<QSharedPointer<GeoDataParser> >("parser");
     QTest::addColumn<QString>("original");
 
-    foreach( const QString &file, m_testFiles ) {
+    for (const QString &file: std::as_const(m_testFiles)) {
         QTest::newRow(file.toStdString().c_str()) << parsers.value(file) << file;
     }
 }
@@ -176,7 +177,7 @@ void TestGeoDataWriter::saveAndCompareEquality_data()
     QTest::addColumn<QSharedPointer<GeoDataParser> >("parser");
     QTest::addColumn<QString>("original");
 
-    foreach( const QString &file, m_testFiles ) {
+    for (const QString &file: std::as_const(m_testFiles)) {
         QTest::newRow(file.toStdString().c_str()) << parsers.value(file) << file;
     }
 }

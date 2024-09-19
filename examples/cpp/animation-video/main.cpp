@@ -100,7 +100,8 @@ int main(int argc, char** argv)
     QApplication app(argc,argv);
     MarbleWidget *mapWidget = new MarbleWidget;
     mapWidget->setMapThemeId(mapTheme);
-    foreach( RenderPlugin* plugin, mapWidget->renderPlugins() ) {
+    const auto plugins = mapWidget->renderPlugins();
+    for (RenderPlugin* plugin : plugins) {
         if ( !features.contains( plugin->nameId() ) ) {
             plugin->setEnabled( false );
         }

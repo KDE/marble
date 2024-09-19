@@ -260,7 +260,7 @@ void MarbleRunnerManagerTest::testAsyncRouting()
 
     QFETCH( QVector<GeoDataCoordinates>, coordinatesList );
     RouteRequest request;
-    foreach( const GeoDataCoordinates &coordinates, coordinatesList ) {
+    for (const GeoDataCoordinates &coordinates: std::as_const(coordinatesList)) {
         request.append( coordinates );
     }
 

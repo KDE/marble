@@ -83,7 +83,8 @@ void Private::setupMarbleWidget()
 {
     m_marbleWidget->setMapThemeId(QStringLiteral( "earth/political/political.dgml"));
 
-    foreach ( RenderPlugin *renderPlugin, m_marbleWidget->renderPlugins() ) {
+    const auto plugins = m_marbleWidget->renderPlugins();
+    for (RenderPlugin *renderPlugin : plugins) {
         if (renderPlugin->nameId() == QLatin1String("stars")
             || renderPlugin->nameId() == QLatin1String("overviewmap")
             || renderPlugin->nameId() == QLatin1String("compass")

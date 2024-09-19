@@ -31,7 +31,8 @@ int main(int argc, char** argv)
     mapWidget->setShowOverviewMap(false);
     mapWidget->setShowScaleBar(false);
 
-    foreach ( AbstractFloatItem * floatItem, mapWidget->floatItems() )
+    const auto floatItems = mapWidget->floatItems();
+    for (AbstractFloatItem * floatItem : floatItems) {
         if (floatItem && floatItem->nameId() == QLatin1String("compass")) {
 
             // Put the compass onto the left hand side
@@ -39,6 +40,7 @@ int main(int argc, char** argv)
             // Make the content size of the compass smaller
             floatItem->setContentSize( QSize( 50, 50 ) );
         }
+    }
 
     mapWidget->resize( 400, 300 );
     mapWidget->show();

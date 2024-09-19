@@ -59,7 +59,8 @@ void TestGeoSceneWriter::initTestCase()
     dgmlPath = QDir( DGML_PATH );
     dgmlPath.setFilter(QDir::AllDirs | QDir::NoDotAndDotDot);
 
-    foreach( const QString &dgmlDirname, dgmlPath.entryList() ) {
+    const auto dirNames = dgmlPath.entryList();
+    for (const QString &dgmlDirname: dirNames) {
         qDebug() << dgmlDirname;
         QDir dataDir(dgmlPath.absoluteFilePath(dgmlDirname));
         dataDir.setNameFilters( dgmlFilters );
@@ -70,7 +71,8 @@ void TestGeoSceneWriter::initTestCase()
         }
 
         //test the loading of each file in the data dir
-        foreach( const QString &filename, dataDir.entryList(dgmlFilters, QDir::Files) ){
+        const auto fileNames = dataDir.entryList(dgmlFilters, QDir::Files);
+        for (const QString &filename: fileNames) {
 
             //Add example files
             QFile file( dataDir.filePath(filename));

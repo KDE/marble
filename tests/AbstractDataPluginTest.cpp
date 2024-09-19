@@ -32,7 +32,8 @@ void AbstractDataPluginTest::initialize_data()
 {
     QTest::addColumn<const AbstractDataPlugin *>( "factory" );
 
-    foreach ( const RenderPlugin *plugin, m_model.pluginManager()->renderPlugins() ) {
+    const auto plugins = m_model.pluginManager()->renderPlugins();
+    for (const RenderPlugin *plugin: plugins) {
         const AbstractDataPlugin *const dataPlugin = qobject_cast<const AbstractDataPlugin *>( plugin );
         if ( !dataPlugin )
             continue;

@@ -125,7 +125,7 @@ bool MyPaintLayer::render ( GeoPainter *painter, ViewportParams *viewport, const
 GeoDataLatLonBox MyPaintLayer::center() const
 {
     GeoDataLinearRing ring;
-    foreach( const GeoDataCoordinates &city, m_cities ) {
+    for (const GeoDataCoordinates &city : m_cities) {
         ring << city;
     }
     return ring.latLonAltBox();

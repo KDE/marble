@@ -258,13 +258,13 @@ void ViewportParamsTest::screenCoordinates_GeoDataLineString()
     QVector<QPolygonF*> polys;
     viewport.screenCoordinates(line, polys);
 
-    foreach (QPolygonF* poly, polys) {
+    for (QPolygonF* poly : std::as_const(polys)) {
         // at least 2 points in one poly
         QVERIFY( poly->size() > 1 );
         QPointF oldCoord = poly->first();
         poly->pop_front();
 
-        foreach(const QPointF &coord, *poly) {
+        for (const QPointF &coord : std::as_const(*poly)) {
             // no 2 same points
             QVERIFY( (coord-oldCoord) != QPointF() );
 
@@ -483,7 +483,7 @@ void ViewportParamsTest::geoDataLinearRing()
     QVector<QPolygonF*> polys;
     viewport.screenCoordinates(ring, polys);
 
-    foreach (QPolygonF* poly, polys) {
+    for (QPolygonF* poly: std::as_const(polys)) {
         // at least 3 points in one poly
         QVERIFY( poly->size() > 2 );
         QPointF oldCoord = poly->first();
@@ -491,7 +491,7 @@ void ViewportParamsTest::geoDataLinearRing()
         QVERIFY( poly->isClosed() );
         poly->pop_front();
 
-        foreach(const QPointF &coord, *poly) {
+        for (const QPointF &coord: std::as_const(*poly)) {
             // no 2 same points
             QVERIFY( (coord-oldCoord) != QPointF() );
 

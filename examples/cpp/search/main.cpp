@@ -20,8 +20,8 @@ int main(int argc, char** argv)
     MarbleModel model;
     SearchRunnerManager manager( &model );
 
-    QVector<GeoDataPlacemark*> searchResult = manager.searchPlacemarks(QStringLiteral("Karlsruhe"));
-    foreach( const GeoDataPlacemark* placemark, searchResult ) {
+    const QList<GeoDataPlacemark*> searchResult = manager.searchPlacemarks(QStringLiteral("Karlsruhe"));
+    for (const GeoDataPlacemark* placemark: searchResult) {
         qDebug() << "Found" << placemark->name() << "at" << placemark->coordinate().toString();
     }
 

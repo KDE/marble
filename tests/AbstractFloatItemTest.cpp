@@ -68,7 +68,8 @@ class AbstractFloatItemTest : public QObject
 
 AbstractFloatItemTest::AbstractFloatItemTest()
 {
-    foreach ( const RenderPlugin *plugin, m_model.pluginManager()->renderPlugins() ) {
+    const auto plugins = m_model.pluginManager()->renderPlugins();
+    for (const RenderPlugin *plugin: plugins) {
         const AbstractFloatItem *const factory = qobject_cast<const AbstractFloatItem *>( plugin );
         if ( !factory )
             continue;
@@ -97,7 +98,7 @@ void AbstractFloatItemTest::newInstance_data()
 {
     QTest::addColumn<const AbstractFloatItem *>( "factory" );
 
-    foreach ( const AbstractFloatItem *factory, m_factories ) {
+    for (const AbstractFloatItem *factory: std::as_const(m_factories)) {
         QTest::newRow(factory->nameId().toLatin1().constData())
             << factory;
     }
@@ -109,7 +110,7 @@ void AbstractFloatItemTest::newInstance()
 
     RenderPlugin *const instance = factory->newInstance( &m_model );
 
-    QVERIFY( qobject_cast<AbstractFloatItem *>( instance ) != 0 );
+    QVERIFY( qobject_cast<AbstractFloatItem *>( instance ) != nullptr );
     QVERIFY( instance->settings().contains( "position" ) );
 
     delete instance;
@@ -119,7 +120,7 @@ void AbstractFloatItemTest::setSettings_data()
 {
     QTest::addColumn<const AbstractFloatItem *>( "factory" );
 
-    foreach ( const AbstractFloatItem *factory, m_factories ) {
+    for (const AbstractFloatItem *factory: std::as_const(m_factories)) {
         QTest::newRow(factory->nameId().toLatin1().constData())
             << factory;
     }
@@ -155,7 +156,7 @@ void AbstractFloatItemTest::setPosition_data()
 {
     QTest::addColumn<const AbstractFloatItem *>( "factory" );
 
-    foreach ( const AbstractFloatItem *factory, m_factories ) {
+    for (const AbstractFloatItem *factory: std::as_const(m_factories)) {
         QTest::newRow(factory->nameId().toLatin1().constData())
             << factory;
     }
