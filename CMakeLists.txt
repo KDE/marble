@@ -312,10 +312,10 @@ endif(WIN32)
 
 ####################################################
 # Add global ECM & KF6 settings
-set(REQUIRED_ECM_VERSION 5.240.0)
+set(REQUIRED_ECM_VERSION 6.4.0)
 set(KDE_INSTALL_DIRS_NO_DEPRECATED TRUE)
 set(KDE_SKIP_UNINSTALL_TARGET ON CACHE BOOL "KDE uninstall target must be disabled")
-set(REQUIRED_KF6_MIN_VERSION 5.240.0)
+set(REQUIRED_KF6_MIN_VERSION 6.4.0)
 
 find_package(ECM ${REQUIRED_ECM_VERSION})
 if(ECM_FOUND)
