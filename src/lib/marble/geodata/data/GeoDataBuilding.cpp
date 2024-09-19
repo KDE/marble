@@ -137,14 +137,14 @@ double GeoDataBuilding::parseBuildingHeight(const QString& buildingHeight)
         return extractedHeight;
     }
 
-    if (buildingHeight.endsWith(QChar('m')) ||
+    if (buildingHeight.endsWith(QLatin1Char('m')) ||
         buildingHeight.endsWith(QLatin1String("meter")) ||
         buildingHeight.endsWith(QLatin1String("meters")) ||
         buildingHeight.endsWith(QLatin1String("metre")) ||
         buildingHeight.endsWith(QLatin1String("metres"))) {
         QString const heightValue = QString(buildingHeight).remove(QStringLiteral("meters"))
                 .remove(QStringLiteral("meter")).remove(QStringLiteral("metres"))
-                .remove(QStringLiteral("metre")).remove(QChar('m')).trimmed();
+                .remove(QStringLiteral("metre")).remove(QLatin1Char('m')).trimmed();
         bool extracted;
         double extractedHeight = heightValue.toDouble(&extracted);
         if (extracted) {
@@ -152,9 +152,9 @@ double GeoDataBuilding::parseBuildingHeight(const QString& buildingHeight)
         }
     } else { // feet and inches
         double extractedHeight = 0.0; // in inches, converted to meters in the end
-        if (buildingHeight.contains(QChar('\''))) {
+        if (buildingHeight.contains(QLatin1Char('\''))) {
             double heightInches = 0.0;
-            QStringList const feetInches = buildingHeight.split(QChar('\''));
+            QStringList const feetInches = buildingHeight.split(QLatin1Char('\''));
             bool okFeet;
             double feet = feetInches[0].trimmed().toDouble(&okFeet);
             if (okFeet) {
@@ -162,7 +162,7 @@ double GeoDataBuilding::parseBuildingHeight(const QString& buildingHeight)
             }
             if (!feetInches[1].isEmpty()) { // has inches as unit as well
                 bool okInches;
-                double inches = QString(feetInches[1]).remove(QChar('\"')).trimmed().toDouble(&okInches);
+                double inches = QString(feetInches[1]).remove(QLatin1Char('\"')).trimmed().toDouble(&okInches);
                 if (okInches) {
                     heightInches += inches;
                 }

@@ -296,8 +296,8 @@ void CurrentLocationWidgetPrivate::receiveGpsCoordinates( const GeoDataCoordinat
     }
     // TODO read this value from the incoming signal
     const QString speedString = QLocale::system().toString( unitSpeed, 'f', 1);
-    const QString altitudeString = QStringLiteral( "%1 %2" ).arg( altitude, 0, 'f', 1, QChar(' ') ).arg( altitudeUnitString );
-    const QString distanceString = QStringLiteral( "%1 %2" ).arg( length, 0, 'f', 1, QChar(' ') ).arg( distanceUnitString );
+    const QString altitudeString = QStringLiteral( "%1 %2" ).arg( altitude, 0, 'f', 1, QLatin1Char(' ') ).arg( altitudeUnitString );
+    const QString distanceString = QStringLiteral( "%1 %2" ).arg( length, 0, 'f', 1, QLatin1Char(' ') ).arg( distanceUnitString );
 
     html = html.arg( position.lonToString(), position.latToString() );
     html = html.arg(altitudeString, speedString + QLatin1Char(' ') + unitString);
