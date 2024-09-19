@@ -9,3 +9,4 @@ enpo
 .cache
 .idea
 /cmake-build*
+/build*/
