@@ -9,15 +9,6 @@ set( json_SRCS JsonRunner.cpp JsonPlugin.cpp JsonParser.cpp JsonRunner.h JsonPlu
 
 marble_add_plugin( JsonPlugin ${json_SRCS} )
 
-find_package(ECM ${REQUIRED_ECM_VERSION} QUIET)
-if(NOT ECM_FOUND)
-    return()
-endif()
-
-set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ECM_MODULE_PATH})
-
-include(KDEInstallDirs)
-
 macro_optional_find_package(KF6 ${REQUIRED_KF6_MIN_VERSION} QUIET COMPONENTS KIO)
 if(NOT KF6_FOUND)
     return()

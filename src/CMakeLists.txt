@@ -74,18 +74,18 @@ if(APPLE)
   add_subdirectory( mac )
 endif(APPLE)
 
-if(ECM_FOUND)
-  # Default logging for where no specific category is set
-  ecm_qt_export_logging_category(
+# Default logging for where no specific category is set
+ecm_qt_export_logging_category(
     IDENTIFIER "MARBLE_DEFAULT"
     CATEGORY_NAME "marble_default"
     EXPORT marble
-    DESCRIPTION "Marble (default)")
+    DESCRIPTION "Marble (default)"
+)
 
-  ecm_qt_install_logging_categories(
+ecm_qt_install_logging_categories(
     EXPORT marble
-    DESTINATION "${KDE_INSTALL_LOGGINGCATEGORIESDIR}")
-endif()
+    DESTINATION "${KDE_INSTALL_LOGGINGCATEGORIESDIR}"
+)
 
 #add_subdirectory( plasma )
 #add_subdirectory( plasmarunner )

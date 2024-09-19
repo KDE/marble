@@ -1,7 +1,4 @@
-cmake_minimum_required(VERSION 3.10)
-
-# Set minimum OS X target
-set(CMAKE_OSX_DEPLOYMENT_TARGET 10.9)
+cmake_minimum_required(VERSION 3.20)
 
 # KDE Application Version, managed by release script
 set (RELEASE_SERVICE_VERSION_MAJOR "24")
@@ -11,67 +8,39 @@ set (RELEASE_SERVICE_VERSION "${RELEASE_SERVICE_VERSION_MAJOR}.${RELEASE_SERVICE
 
 project(marble VERSION ${RELEASE_SERVICE_VERSION})
 
-####################################################
-# CMake Settings
-SET(CMAKE_COLOR_MAKEFILE ON)
-# SET(CMAKE_SKIP_RPATH ON)
+set(KF_MIN_VERSION "6.5.0")
+set(QT_MIN_VERSION "6.6")
+
+find_package(ECM ${KF_MIN_VERSION} REQUIRED NO_MODULE)
+set(CMAKE_MODULE_PATH
+    ${ECM_MODULE_PATH}
+    ${CMAKE_SOURCE_DIR}/cmake/modules
+    ${CMAKE_CURRENT_SOURCE_DIR}
+    ${CMAKE_CURRENT_SOURCE_DIR}/src
+    ${CMAKE_CURRENT_SOURCE_DIR}/cmake_find_rules
+    ${CMAKE_CURRENT_SOURCE_DIR}/cmake_scripts
+    ${CMAKE_MODULE_PATH}
+)
+
+include(FeatureSummary)
+include(GNUInstallDirs)
+include(GenerateExportHeader)
+
+include(KDEInstallDirs)
+include(KDECMakeSettings)
+include(KDECompilerSettings NO_POLICY_SCOPE)
+
+include(ECMSetupVersion)
+include(ECMInstallIcons)
+include(ECMEnableSanitizers)
+include(ECMCoverageOption)
+include(ECMQtDeclareLoggingCategory)
+
+include(MarbleMacros)
 
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
-# Let CMake find the correct library dir instead of
-# relying on the obsolete LIB_SUFFIX parameter
-include(GNUInstallDirs)
-
-# Taken from KDECompilerSettings.cmake:
-# Pick sensible versions of the C and C++ standards.
-# Note that MSVC does not have equivalent flags; the features are either
-# supported or they are not.
-if ("${CMAKE_C_COMPILER_ID}" STREQUAL "GNU" OR "${CMAKE_C_COMPILER_ID}" STREQUAL "Clang")
-    # We use the C89 standard because that is what is common to all our
-    # compilers (in particular, MSVC 2010 does not support C99)
-    set(CMAKE_C_FLAGS   "${CMAKE_C_FLAGS} -std=iso9899:1990")
-endif()
-set(CMAKE_CXX_STANDARD 17)
-# Default to hidden visibility for symbols
-set(CMAKE_C_VISIBILITY_PRESET hidden)
-set(CMAKE_CXX_VISIBILITY_PRESET hidden)
-set(CMAKE_VISIBILITY_INLINES_HIDDEN 1)
-if (POLICY CMP0063)
-    cmake_policy(SET CMP0063 NEW)
-endif()
-
-# RPATH/RUNPATH settings
-if (UNIX)
-    # Add CMAKE_INSTALL_FULL_LIBDIR to the RPATH to be used when installing,
-    # but only if it isn't a standard system directory.
-    list(FIND CMAKE_PLATFORM_IMPLICIT_LINK_DIRECTORIES "${CMAKE_INSTALL_FULL_LIBDIR}" isSystemLibDir)
-    list(FIND CMAKE_CXX_IMPLICIT_LINK_DIRECTORIES      "${CMAKE_INSTALL_FULL_LIBDIR}" isSystemCxxLibDir)
-    list(FIND CMAKE_C_IMPLICIT_LINK_DIRECTORIES        "${CMAKE_INSTALL_FULL_LIBDIR}" isSystemCLibDir)
-    if("${isSystemLibDir}" STREQUAL "-1"  AND  "${isSystemCxxLibDir}" STREQUAL "-1"  AND  "${isSystemCLibDir}" STREQUAL "-1")
-        set(CMAKE_INSTALL_RPATH "${CMAKE_INSTALL_FULL_LIBDIR}")
-    endif()
-
-    # Add directories which are in the linker search path (but outside the project)
-    # to the RPATH to be used when installing
-    set(CMAKE_INSTALL_RPATH_USE_LINK_PATH TRUE)
-    # no libs or plugins are designed to be used from the build dir, so directly link with install rpath
-    set(CMAKE_BUILD_WITH_INSTALL_RPATH TRUE)
-endif (UNIX)
-
-####################################################
-# Where to look first for cmake modules,
-# before ${CMAKE_ROOT}/Modules/ is checked
-set ( CMAKE_MODULE_PATH
-     ${CMAKE_SOURCE_DIR}/cmake/modules
-     ${CMAKE_CURRENT_SOURCE_DIR}
-     ${CMAKE_CURRENT_SOURCE_DIR}/src
-     ${CMAKE_CURRENT_SOURCE_DIR}/cmake_find_rules
-     ${CMAKE_CURRENT_SOURCE_DIR}/cmake_scripts
-     ${CMAKE_MODULE_PATH}
-     )
-
-# add cmake macros
-include(GenerateExportHeader)
+remove_definitions(-DQT_NO_CAST_FROM_ASCII -DQT_NO_KEYWORDS)
 
 ####################################################
 # Generate the tiles with the tilecreator at compile time
@@ -92,25 +61,7 @@ else()
 endif()
 
 
-#######################################################
-# Specific options for building for different platforms
-
-if(ANDROID)
-   add_definitions(-DANDROID)
-endif()
-
-#######################################################
-# Find Qt dependencies
-
-if(ANDROID)
-    set(REQUIRED_QT_VERSION 5.14.0)
-   # TODO: still needed with ECM toolchain?
-   SET(QT_QMAKE_EXECUTABLE "$ENV{Qt6_android}/bin/qmake")
-else()
-    set(REQUIRED_QT_VERSION 6.4.2)
-endif()
-
-find_package(Qt6 ${REQUIRED_QT_VERSION} REQUIRED
+find_package(Qt6 ${QT_MIN_VERSION} REQUIRED
     COMPONENTS
         Core
         Xml
@@ -127,8 +78,6 @@ find_package(Qt6 ${REQUIRED_QT_VERSION} REQUIRED
 )
 
 qt_policy(SET QTP0001 NEW)
-
-include( MarbleMacros )
 
 find_package(Protobuf)
 set_package_properties(Protobuf PROPERTIES TYPE OPTIONAL PURPOSE "Parsing of OSM PBF files.")
@@ -312,24 +261,9 @@ endif(WIN32)
 
 ####################################################
 # Add global ECM & KF6 settings
-set(REQUIRED_ECM_VERSION 6.4.0)
 set(KDE_INSTALL_DIRS_NO_DEPRECATED TRUE)
 set(KDE_SKIP_UNINSTALL_TARGET ON CACHE BOOL "KDE uninstall target must be disabled")
 set(REQUIRED_KF6_MIN_VERSION 6.4.0)
-
-find_package(ECM ${REQUIRED_ECM_VERSION})
-if(ECM_FOUND)
-  set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ECM_MODULE_PATH})
-
-  include(KDEInstallDirs)
-  # KDECMakeSettings expects LIB_INSTALL_DIR set
-  set(LIB_INSTALL_DIR ${KDE_INSTALL_LIBDIR})
-  include(KDECMakeSettings)
-  include(ECMInstallIcons)
-  include(ECMEnableSanitizers)
-  include(ECMCoverageOption)
-  include(ECMQtDeclareLoggingCategory)
-endif()
 
 ####################################################
 # Add the include directories
@@ -397,23 +331,6 @@ marble_install_po_files_as_qm(poqm)
 #
 # Let releaseme know about this:
 # SKIP_PO_INSTALL
-
-
-####################################################
-# Install extra files
-install(FILES LICENSES/LGPL-2.1-or-later.txt
-        DESTINATION ${MARBLE_DATA_INSTALL_PATH}
-        RENAME LICENSE.txt)
-
-############################################################
-# Uninstall stuff
-CONFIGURE_FILE(
-    "${CMAKE_CURRENT_SOURCE_DIR}/cmake/templates/cmake_uninstall.cmake.in"
-    "${CMAKE_CURRENT_BINARY_DIR}/cmake_uninstall.cmake"
-    IMMEDIATE @ONLY)
-
-ADD_CUSTOM_TARGET(uninstall
-    "${CMAKE_COMMAND}" -P "${CMAKE_CURRENT_BINARY_DIR}/cmake_uninstall.cmake")
 
 include(MarbleCPackOptions)
 

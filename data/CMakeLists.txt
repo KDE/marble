@@ -287,13 +287,6 @@ DESTINATION ${MARBLE_DATA_INSTALL_PATH}/audio)
 
 add_subdirectory(lang)
 
-find_package(ECM ${REQUIRED_ECM_VERSION} QUIET) # for FindSharedMimeInfo
-if(NOT ECM_FOUND)
-    return()
-endif()
-
-set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ECM_MODULE_PATH})
-include(KDEInstallDirs) # for KDE_INSTALL_MIMEDIR
 set( SHARED_MIME_INFO_MINIMUM_VERSION "1.8" )
 find_package( SharedMimeInfo QUIET )
 if(SharedMimeInfo_FOUND)

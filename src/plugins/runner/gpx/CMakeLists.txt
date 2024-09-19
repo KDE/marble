@@ -69,16 +69,6 @@ if( BUILD_MARBLE_TESTS )
 		    add_test( NAME TestTrack COMMAND TestTrack )
 endif( BUILD_MARBLE_TESTS )
 
-
-find_package(ECM ${REQUIRED_ECM_VERSION} QUIET)
-if(NOT ECM_FOUND)
-    return()
-endif()
-
-set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ECM_MODULE_PATH})
-
-include(KDEInstallDirs)
-
 macro_optional_find_package(KF6 ${REQUIRED_KF6_MIN_VERSION} QUIET COMPONENTS KIO)
 if(NOT KF6_FOUND)
     return()

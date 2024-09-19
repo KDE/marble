@@ -10,16 +10,6 @@ set( kml_SRCS KmlParser.cpp KmlPlugin.cpp KmlRunner.cpp KmlParser.h KmlPlugin.h 
 
 marble_add_plugin( KmlPlugin ${kml_SRCS} )
 
-
-find_package(ECM ${REQUIRED_ECM_VERSION} QUIET)
-if(NOT ECM_FOUND)
-    return()
-endif()
-
-set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ECM_MODULE_PATH})
-
-include(KDEInstallDirs)
-
 macro_optional_find_package(KF6 ${REQUIRED_KF6_MIN_VERSION} QUIET COMPONENTS KIO)
 if(NOT KF6_FOUND)
     return()

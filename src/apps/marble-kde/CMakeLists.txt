@@ -1,7 +1,3 @@
-if(NOT ECM_FOUND)
-    return()
-endif()
-
 macro_optional_find_package(KF6 ${REQUIRED_KF6_MIN_VERSION} QUIET COMPONENTS Crash Parts CoreAddons I18n)
 
 if(NOT KF6_FOUND)

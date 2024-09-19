@@ -1,17 +1,5 @@
 project(MarblePlasmaRunner)
 
-find_package(ECM ${REQUIRED_ECM_VERSION} QUIET)
-if(NOT ECM_FOUND)
-    return()
-endif()
-
-set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ECM_MODULE_PATH})
-
-include(KDEInstallDirs)
-# KDECMakeSettings expexts LIB_INSTALL_DIR set
-set(LIB_INSTALL_DIR ${KDE_INSTALL_LIBDIR})
-include(KDECMakeSettings)
-
 macro_optional_find_package(KF6 ${REQUIRED_KF6_MIN_VERSION} QUIET COMPONENTS Runner I18n)
 
 if(NOT KF6_FOUND)
