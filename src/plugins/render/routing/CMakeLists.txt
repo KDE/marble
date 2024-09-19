@@ -16,7 +16,7 @@ INCLUDE_DIRECTORIES(
 if(Phonon4Qt6_FOUND)
   set( routing_SRCS RoutingPlugin.cpp AudioOutput.cpp RoutingPlugin.h AudioOutput.h)
 ELSE()
-  set( routing_SRCS RoutingPlugin.cpp NullAudioOutput.cpp RoutingPlugin.h NullAudioOutput.h)
+  set( routing_SRCS RoutingPlugin.cpp NullAudioOutput.cpp RoutingPlugin.h)
 ENDIF()
 set( routing_UI RoutingPlugin.ui RoutingConfigDialog.ui )
 qt_wrap_ui( routing_SRCS ${routing_UI} )
