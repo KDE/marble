@@ -10,7 +10,11 @@ set( eclipses_SRCS
     EclipsesModel.cpp
     EclipsesItem.cpp
     EclipsesPlugin.cpp
-    EclipsesBrowserDialog.cpp )
+    EclipsesBrowserDialog.cpp
+    EclipsesModel.h
+    EclipsesItem.h
+    EclipsesPlugin.h
+    EclipsesBrowserDialog.h)
 
 qt_wrap_ui( eclipses_SRCS
     EclipsesConfigDialog.ui

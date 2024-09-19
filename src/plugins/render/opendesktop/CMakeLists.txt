@@ -9,6 +9,9 @@ set( my_SRCS
   OpenDesktopPlugin.cpp
   OpenDesktopItem.cpp
   OpenDesktopModel.cpp
+  OpenDesktopPlugin.h
+  OpenDesktopItem.h
+  OpenDesktopModel.h
 )
 
 set( opendesktop_UI OpenDesktopConfigWidget.ui )

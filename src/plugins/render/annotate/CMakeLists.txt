@@ -31,6 +31,23 @@ set( annotate_SRCS
   SceneGraphicsItem.cpp
   SceneGraphicsTypes.cpp
   NodeModel.cpp
+
+  AnnotatePlugin.h
+  AreaAnnotation.h
+  DownloadOsmDialog.h
+  EditGroundOverlayDialog.h
+  EditPolygonDialog.h
+  NodeItemDelegate.h
+  EditPolylineDialog.h
+  GroundOverlayFrame.h
+  MergingPolygonNodesAnimation.h
+  MergingPolylineNodesAnimation.h
+  PlacemarkTextAnnotation.h
+  PolylineAnnotation.h
+  PolylineNode.h
+  SceneGraphicsItem.h
+  SceneGraphicsTypes.h
+  NodeModel.h
 )
 
 qt_wrap_ui(annotate_SRCS ${annotate_UI})

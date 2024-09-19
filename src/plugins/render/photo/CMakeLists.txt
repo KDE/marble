@@ -9,7 +9,13 @@ set( photo_SRCS PhotoPlugin.cpp
                 PhotoPluginModel.cpp
                 PhotoPluginItem.cpp
                 FlickrParser.cpp
-                CoordinatesParser.cpp )
+                CoordinatesParser.cpp
+                PhotoPlugin.h
+                                PhotoPluginModel.h
+                                PhotoPluginItem.h
+                                FlickrParser.h
+                                CoordinatesParser.h
+            )
 set( photo_UI PhotoConfigWidget.ui )
 
 qt_wrap_ui(photo_SRCS ${photo_UI})

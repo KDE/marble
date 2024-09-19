@@ -5,7 +5,7 @@ INCLUDE_DIRECTORIES(
  ${CMAKE_CURRENT_BINARY_DIR}
 )
 
-set( cyclestreets_SRCS CycleStreetsRunner.cpp CycleStreetsPlugin.cpp )
+set( cyclestreets_SRCS CycleStreetsRunner.cpp CycleStreetsPlugin.cpp CycleStreetsRunner.h CycleStreetsPlugin.h)
 
 set( cyclestreets_UI CycleStreetsConfigWidget.ui )
 

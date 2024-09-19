@@ -6,9 +6,14 @@ INCLUDE_DIRECTORIES(
 )
 
 set( wikipedia_SRCS WikipediaPlugin.cpp
-                    WikipediaModel.cpp
-                    WikipediaItem.cpp
-                    GeonamesParser.cpp )
+    WikipediaModel.cpp
+    WikipediaItem.cpp
+    GeonamesParser.cpp
+    WikipediaPlugin.h
+    WikipediaModel.h
+    WikipediaItem.h
+    GeonamesParser.h
+)
 set( wikipedia_UI WikipediaConfigWidget.ui )
 
 qt_wrap_ui(wikipedia_SRCS ${wikipedia_UI})

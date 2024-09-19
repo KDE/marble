@@ -5,6 +5,6 @@ INCLUDE_DIRECTORIES(
  ${CMAKE_CURRENT_BINARY_DIR}
 )
 
-set( hostip_SRCS HostipRunner.cpp HostipPlugin.cpp )
+set( hostip_SRCS HostipRunner.cpp HostipPlugin.cpp HostipRunner.h HostipPlugin.h)
 
 marble_add_plugin( HostipPlugin ${hostip_SRCS} )

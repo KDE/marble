@@ -5,7 +5,7 @@ INCLUDE_DIRECTORIES(
  ${CMAKE_CURRENT_BINARY_DIR}
 )
 
-set( mapquest_SRCS MapQuestRunner.cpp MapQuestPlugin.cpp )
+set( mapquest_SRCS MapQuestRunner.cpp MapQuestPlugin.cpp MapQuestRunner.h MapQuestPlugin.h)
 
 set( mapquest_UI MapQuestConfigWidget.ui )
 

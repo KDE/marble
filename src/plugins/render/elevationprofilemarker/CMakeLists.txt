@@ -7,6 +7,7 @@ INCLUDE_DIRECTORIES(
 
 set( my_SRCS
   ElevationProfileMarker.cpp
+  ElevationProfileMarker.h
  )
 
 qt_add_resources( my_SRCS elevationprofile.qrc)

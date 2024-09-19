@@ -10,6 +10,10 @@ set( my_SRCS
   ElevationProfilePlotAxis.cpp
   ElevationProfileDataSource.cpp
   ElevationProfileContextMenu.cpp
+  ElevationProfileFloatItem.h
+  ElevationProfilePlotAxis.h
+  ElevationProfileDataSource.h
+  ElevationProfileContextMenu.h
  )
 set( elevationprofile_UI ElevationProfileConfigWidget.ui )
 

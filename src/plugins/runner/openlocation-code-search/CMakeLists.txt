@@ -8,6 +8,8 @@ INCLUDE_DIRECTORIES(
 set( openLocationCodeSearch_SRCS
 OpenLocationCodeSearchPlugin.cpp
 OpenLocationCodeSearchRunner.cpp
+OpenLocationCodeSearchPlugin.h
+OpenLocationCodeSearchRunner.h
  )
 
 marble_add_plugin( OpenLocationCodeSearchPlugin ${openLocationCodeSearch_SRCS} )

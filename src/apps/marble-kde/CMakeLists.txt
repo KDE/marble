@@ -12,6 +12,8 @@ set(marble_kde_SRCS
   kdemain.cpp 
   KdeMainWindow.cpp 
   marble_part.cpp
+  KdeMainWindow.h
+  marble_part.h
 )
 
 set(marblepart_SRCS marble_part.cpp)

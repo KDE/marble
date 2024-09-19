@@ -6,20 +6,36 @@ INCLUDE_DIRECTORIES(
 )
 
 set( weather_SRCS WeatherData.cpp
-                  WeatherItem.cpp
-                  WeatherModel.cpp 
-                  WeatherPlugin.cpp
-                  AbstractWeatherService.cpp
-                  BBCItemGetter.cpp
-                  BBCParser.cpp
-                  BBCStation.cpp
-                  BBCWeatherService.cpp
-                  BBCWeatherItem.cpp
-                  FakeWeatherService.cpp 
-                  FakeWeatherItem.cpp
-                  StationListParser.cpp
-                  GeoNamesWeatherService.cpp
-                  GeoNamesWeatherItem.cpp )
+    WeatherItem.cpp
+    WeatherModel.cpp
+    WeatherPlugin.cpp
+    AbstractWeatherService.cpp
+    BBCItemGetter.cpp
+    BBCParser.cpp
+    BBCStation.cpp
+    BBCWeatherService.cpp
+    BBCWeatherItem.cpp
+    FakeWeatherService.cpp
+    FakeWeatherItem.cpp
+    StationListParser.cpp
+    GeoNamesWeatherService.cpp
+    GeoNamesWeatherItem.cpp
+    WeatherData.h
+    WeatherItem.h
+    WeatherModel.h
+    WeatherPlugin.h
+    AbstractWeatherService.h
+    BBCItemGetter.h
+    BBCParser.h
+    BBCStation.h
+    BBCWeatherService.h
+    BBCWeatherItem.h
+    FakeWeatherService.h
+    FakeWeatherItem.h
+    StationListParser.h
+    GeoNamesWeatherService.h
+    GeoNamesWeatherItem.h
+)
 set( weather_UI WeatherConfigWidget.ui )
 
 qt_wrap_ui( weather_SRCS ${weather_UI} )

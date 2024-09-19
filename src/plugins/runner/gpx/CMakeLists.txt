@@ -27,9 +27,31 @@ set( gpx_handlers_SRCS
         handlers/GPXlinkTagHandler.cpp
         handlers/GPXurlTagHandler.cpp
         handlers/GPXurlnameTagHandler.cpp
-   )
 
-set( gpx_SRCS GpxParser.cpp GpxPlugin.cpp GpxRunner.cpp )
+        handlers/GPXElementDictionary.h
+        handlers/GPXgpxTagHandler.h
+        handlers/GPXnameTagHandler.h
+        handlers/GPXdescTagHandler.h
+        handlers/GPXtypeTagHandler.h
+        handlers/GPXtrkTagHandler.h
+        handlers/GPXtrkptTagHandler.h
+        handlers/GPXtrksegTagHandler.h
+        handlers/GPXwptTagHandler.h
+        handlers/GPXtimeTagHandler.h
+        handlers/GPXeleTagHandler.h
+        handlers/GPXextensionsTagHandler.h
+        handlers/GPXTrackPointExtensionTagHandler.h
+        handlers/GPXhrTagHandler.h
+        handlers/GPXrteTagHandler.h
+        handlers/GPXrteptTagHandler.h
+        handlers/GPXcmtTagHandler.h
+        handlers/GPXlinkTagHandler.h
+        handlers/GPXurlTagHandler.h
+        handlers/GPXurlnameTagHandler.h
+
+    )
+
+set( gpx_SRCS GpxParser.cpp GpxPlugin.cpp GpxRunner.cpp GpxPlugin.h GpxRunner.h)
 
 marble_add_plugin( GpxPlugin ${gpx_SRCS}  ${gpx_handlers_SRCS} )
 

@@ -5,7 +5,7 @@ INCLUDE_DIRECTORIES(
  ${CMAKE_CURRENT_BINARY_DIR}
 )
 
-set( speedometer_SRCS Speedometer.cpp )
+set( speedometer_SRCS Speedometer.cpp Speedometer.h)
 set( speedometer_UI Speedometer.ui )
 
 qt_wrap_ui(speedometer_SRCS ${speedometer_UI} )

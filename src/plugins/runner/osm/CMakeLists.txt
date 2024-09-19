@@ -29,11 +29,22 @@ set( osm_writers_SRCS
         writers/OsmRelationTagWriter.cpp
         writers/OsmTagWriter.cpp
         writers/OsmTagTagWriter.cpp
+
+        writers/OsmObjectAttributeWriter.h
+        writers/OsmNodeTagWriter.h
+        writers/OsmWayTagWriter.h
+        writers/OsmRelationTagWriter.h
+        writers/OsmTagWriter.h
+        writers/OsmTagTagWriter.h
    )
 set( osm_translators_SRCS
         translators/OsmDocumentTagTranslator.cpp
         translators/O5mWriter.cpp
         translators/OsmConverter.cpp
+
+        translators/OsmDocumentTagTranslator.h
+        translators/O5mWriter.h
+        translators/OsmConverter.h
    )
 
 set( osm_SRCS
@@ -45,6 +56,16 @@ set( osm_SRCS
   OsmRelation.cpp
   OsmElementDictionary.cpp
   OsmPbfParser.cpp
+
+  OsmParser.h
+  OsmPlugin.h
+  OsmRunner.h
+  OsmNode.h
+  OsmWay.h
+  OsmRelation.h
+  OsmElementDictionary.h
+  OsmPbfParser.h
+
   ${pbf_srcs}
 )
 

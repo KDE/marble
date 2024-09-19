@@ -5,7 +5,7 @@ INCLUDE_DIRECTORIES(
  ${CMAKE_CURRENT_BINARY_DIR}
 )
 
-set( graticule_SRCS GraticulePlugin.cpp )
+set( graticule_SRCS GraticulePlugin.cpp GraticulePlugin.h)
 set( graticule_UI GraticuleConfigWidget.ui )
 qt_wrap_ui( graticule_SRCS ${graticule_UI} )
 

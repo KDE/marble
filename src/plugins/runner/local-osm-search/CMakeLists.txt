@@ -11,6 +11,11 @@ LocalOsmSearchPlugin.cpp
 OsmPlacemark.cpp
 OsmDatabase.cpp
 DatabaseQuery.cpp
+LocalOsmSearchRunner.h
+LocalOsmSearchPlugin.h
+OsmPlacemark.h
+OsmDatabase.h
+DatabaseQuery.h
  )
 
 marble_add_plugin( LocalOsmSearchPlugin ${localOsmSearch_SRCS} )

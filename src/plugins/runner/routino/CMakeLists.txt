@@ -5,7 +5,7 @@ INCLUDE_DIRECTORIES(
  ${CMAKE_CURRENT_BINARY_DIR}
 )
 
-set( routino_SRCS RoutinoRunner.cpp RoutinoPlugin.cpp )
+set( routino_SRCS RoutinoRunner.cpp RoutinoPlugin.cpp RoutinoRunner.h RoutinoPlugin.h)
 
 set( routino_UI RoutinoConfigWidget.ui )
 

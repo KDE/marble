@@ -5,7 +5,7 @@ INCLUDE_DIRECTORIES(
  ${CMAKE_CURRENT_BINARY_DIR}
 )
 
-set( yours_SRCS YoursRunner.cpp YoursPlugin.cpp )
+set( yours_SRCS YoursRunner.cpp YoursPlugin.cpp YoursRunner.h YoursPlugin.h)
 
 set( yours_UI YoursConfigWidget.ui )
 

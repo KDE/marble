@@ -1,4 +1,4 @@
-set(marble_SRCS ControlView.cpp MarbleTest.cpp)
+set(marble_SRCS ControlView.cpp MarbleTest.cpp ControlView.h MarbleTest.h)
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
 
 if(MSVC)

@@ -5,7 +5,7 @@ INCLUDE_DIRECTORIES(
  ${CMAKE_CURRENT_BINARY_DIR}
 )
 
-set( openrouteservice_SRCS OpenRouteServiceRunner.cpp OpenRouteServicePlugin.cpp )
+set( openrouteservice_SRCS OpenRouteServiceRunner.cpp OpenRouteServicePlugin.cpp OpenRouteServiceRunner.h OpenRouteServicePlugin.h)
 
 set( openrouteservice_UI OpenRouteServiceConfigWidget.ui )
 

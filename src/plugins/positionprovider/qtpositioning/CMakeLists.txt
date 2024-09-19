@@ -7,6 +7,7 @@ INCLUDE_DIRECTORIES(
 
 SET( qtpositioning_SRCS
  QtPositioningPositionProviderPlugin.cpp
+ QtPositioningPositionProviderPlugin.h
 )
 
 SET( QtPositioningPositionProviderPlugin_LIBS Qt6::Positioning )

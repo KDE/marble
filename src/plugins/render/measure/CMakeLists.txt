@@ -5,7 +5,7 @@ INCLUDE_DIRECTORIES(
  ${CMAKE_CURRENT_BINARY_DIR}
 )
 
-set( measuretool_SRCS MeasureToolPlugin.cpp MeasureConfigDialog.cpp  )
+set( measuretool_SRCS MeasureToolPlugin.cpp MeasureConfigDialog.cpp MeasureToolPlugin.h MeasureConfigDialog.h )
 set( measuretool_UI MeasureConfigDialog.ui )
 
 qt_wrap_ui(measuretool_SRCS ${measuretool_UI} )

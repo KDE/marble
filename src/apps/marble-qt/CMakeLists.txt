@@ -1,4 +1,4 @@
-set(marble_SRCS qtmain.cpp QtMainWindow.cpp)
+set(marble_SRCS qtmain.cpp QtMainWindow.cpp QtMainWindow.h)
 include_directories(${CMAKE_CURRENT_BINARY_DIR}
                     ${CMAKE_CURRENT_SOURCE_DIR}/../marble-ui)
 

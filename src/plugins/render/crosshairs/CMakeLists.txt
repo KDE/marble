@@ -5,7 +5,7 @@ INCLUDE_DIRECTORIES(
  ${CMAKE_CURRENT_BINARY_DIR}
 )
 
-set( crosshairs_SRCS CrosshairsPlugin.cpp )
+set( crosshairs_SRCS CrosshairsPlugin.cpp CrosshairsPlugin.h)
 set( crosshairs_UI CrosshairsConfigWidget.ui )
 qt_wrap_ui( crosshairs_SRCS ${crosshairs_UI} )
 qt_add_resources( crosshairs_SRCS crosshairs.qrc )

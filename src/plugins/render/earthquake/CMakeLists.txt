@@ -9,6 +9,9 @@ set( my_SRCS
   EarthquakePlugin.cpp
   EarthquakeModel.cpp
   EarthquakeItem.cpp
+  EarthquakePlugin.h
+  EarthquakeModel.h
+  EarthquakeItem.h
  )
 set( earthquake_UI EarthquakeConfigWidget.ui )
 

@@ -5,7 +5,7 @@ INCLUDE_DIRECTORIES(
  ${CMAKE_CURRENT_BINARY_DIR}
 )
 
-set( json_SRCS JsonRunner.cpp JsonPlugin.cpp JsonParser.cpp )
+set( json_SRCS JsonRunner.cpp JsonPlugin.cpp JsonParser.cpp JsonRunner.h JsonPlugin.h JsonParser.h)
 
 marble_add_plugin( JsonPlugin ${json_SRCS} )
 

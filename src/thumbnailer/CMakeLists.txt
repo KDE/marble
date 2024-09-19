@@ -16,6 +16,7 @@ endif()
 
 set(marblethumbnail_SRCS
   thumbnailer.cpp
+  thumbnailer.h
   main.cpp
 )
 add_library(marblethumbnail MODULE ${marblethumbnail_SRCS})

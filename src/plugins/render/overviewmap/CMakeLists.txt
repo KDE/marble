@@ -5,7 +5,7 @@ INCLUDE_DIRECTORIES(
  ${CMAKE_CURRENT_BINARY_DIR}
 )
 
-set( overviewmap_SRCS OverviewMap.cpp )
+set( overviewmap_SRCS OverviewMap.cpp OverviewMap.h)
 set( overviewmap_UI OverviewMapConfigWidget.ui )
 
 qt_wrap_ui(overviewmap_SRCS ${overviewmap_UI})

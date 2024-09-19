@@ -10,7 +10,13 @@ set( monav_SRCS
   MonavPlugin.cpp
   MonavMap.cpp
   MonavMapsModel.cpp
-  MonavConfigWidget.cpp )
+  MonavConfigWidget.cpp
+  MonavRunner.h
+  MonavPlugin.h
+  MonavMap.h
+  MonavMapsModel.h
+  MonavConfigWidget.h
+)
 
 set( monav_UI MonavConfigWidget.ui )
 qt_wrap_ui( monav_SRCS ${monav_UI} )

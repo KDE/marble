@@ -19,7 +19,21 @@ set( satellites_SRCS
  SatellitesConfigDialog.cpp
  SatellitesConfigAbstractItem.cpp
  SatellitesConfigNodeItem.cpp
- SatellitesConfigLeafItem.cpp)
+ SatellitesConfigLeafItem.cpp
+
+ TrackerPluginModel.h
+ TrackerPluginItem.h
+
+ SatellitesPlugin.h
+ SatellitesModel.h
+ SatellitesMSCItem.h
+ SatellitesTLEItem.h
+ SatellitesConfigModel.h
+ SatellitesConfigDialog.h
+ SatellitesConfigAbstractItem.h
+ SatellitesConfigNodeItem.h
+ SatellitesConfigLeafItem.h
+)
 
 qt_wrap_ui( satellites_SRCS SatellitesConfigDialog.ui )
 

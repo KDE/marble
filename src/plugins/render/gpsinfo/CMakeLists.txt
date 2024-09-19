@@ -5,7 +5,7 @@ INCLUDE_DIRECTORIES(
  ${CMAKE_CURRENT_BINARY_DIR}
 )
 
-set( gpsinfo_SRCS GpsInfo.cpp )
+set( gpsinfo_SRCS GpsInfo.cpp GpsInfo.h)
 set( gpsinfo_UI GpsInfoPlugin.ui )
 
 qt_wrap_ui(gpsinfo_SRCS ${gpsinfo_UI} )
