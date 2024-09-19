@@ -10,11 +10,12 @@ INCLUDE_DIRECTORIES(
 )
 
 if (Protobuf_FOUND AND Protobuf_PROTOC_EXECUTABLE AND NOT MSVC) # FIXME linking issue on Windows
+    find_package( absl REQUIRED )
     protobuf_generate_cpp(pbf_srcs pbf_hdrs
         ${CMAKE_SOURCE_DIR}/tools/osm-addresses/pbf/fileformat.proto
         ${CMAKE_SOURCE_DIR}/tools/osm-addresses/pbf/osmformat.proto
     )
-    set(EXTRA_LIBS protobuf::libprotobuf protobuf::libprotoc ${ZLIB_LIBRARIES})
+    set(EXTRA_LIBS protobuf::libprotobuf protobuf::libprotoc ${ZLIB_LIBRARIES} absl::log_internal_message absl::log_internal_check_op)
     add_definitions(-DHAVE_PROTOBUF)
 
 	if(MSVC)
