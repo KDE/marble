@@ -9,8 +9,6 @@
 #include "MarbleDebug.h"
 
 #include <QFile>
-#include <QString>
-#include <QStringList>
 #include <QCoreApplication>
 
 #include <cstdlib>

@@ -10,7 +10,6 @@
 #include "GeoDataObject.h"
 #include "GeoDataDocument.h"
 #include "GeoDataPlacemark.h"
-#include "OsmPlacemarkData.h"
 
 namespace Marble {
 

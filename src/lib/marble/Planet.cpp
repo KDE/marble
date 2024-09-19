@@ -12,7 +12,6 @@
 
 #include "src/lib/astro/solarsystem.h"
 
-#include <QDateTime>
 #include <QString>
 
 namespace Marble

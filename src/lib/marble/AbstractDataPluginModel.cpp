@@ -7,7 +7,6 @@
 #include "AbstractDataPluginModel.h"
 
 // Qt
-#include <QUrl>
 #include <QTimer>
 #include <QPointF>
 #include <QRectF>

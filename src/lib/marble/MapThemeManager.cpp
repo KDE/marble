@@ -14,9 +14,6 @@
 #include <QFileInfo>
 #include <QFileSystemWatcher>
 #include <QScopedPointer>
-#include <QString>
-#include <QStringList>
-#include <QStandardItemModel>
 
 // Local dir
 #include "GeoDataPhotoOverlay.h"
