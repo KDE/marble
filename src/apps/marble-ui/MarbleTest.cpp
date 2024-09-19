@@ -24,7 +24,7 @@ MarbleTest::MarbleTest( MarbleWidget* marbleWidget )
 
 void MarbleTest::timeDemo()
 {
-    QMessageBox::information(m_marbleWidget, QString( "Marble Speed Test" ), QString( "Press Ok to start test" ) );
+    QMessageBox::information(m_marbleWidget, QStringLiteral( "Marble Speed Test" ), QStringLiteral( "Press Ok to start test" ) );
 
     m_marbleWidget->setViewContext( Marble::Animation );
 
@@ -58,6 +58,6 @@ void MarbleTest::timeDemo()
     }
 
     qDebug( "Timedemo finished in %ims", static_cast<int>(t.elapsed()));
-    qDebug() <<  QString("= %1 fps").arg(200*1000/(qreal)(t.elapsed()));
+    qDebug() <<  QStringLiteral("= %1 fps").arg(200*1000/(qreal)(t.elapsed()));
 
 }

@@ -47,7 +47,7 @@ bool KmlColorStyleTagWriter::write( const Marble::GeoNode *node, GeoWriter &writ
 QString KmlColorStyleTagWriter::formatColor( const QColor &color )
 {
     QChar const fill = QLatin1Char('0');
-    return QString( "%1%2%3%4" )
+    return QStringLiteral( "%1%2%3%4" )
                  .arg( color.alpha(), 2, 16, fill )
                  .arg( color.blue(), 2, 16, fill )
                  .arg( color.green(), 2, 16, fill )

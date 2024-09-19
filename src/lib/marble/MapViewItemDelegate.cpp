@@ -99,7 +99,7 @@ QString MapViewItemDelegate::text( const QModelIndex &index )
 {
     QString const title = index.data().toString();
     QString const description = index.data( Qt::UserRole+2 ).toString();
-    return QString("<p><b>%1</b></p>%2").arg( title, description );
+    return QStringLiteral("<p><b>%1</b></p>%2").arg( title, description );
 }
 
 }

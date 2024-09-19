@@ -19,7 +19,7 @@ FakeWeatherItem::~FakeWeatherItem()
 
 QString FakeWeatherItem::service() const
 {
-    return QString( "fake" );
+    return QStringLiteral( "fake" );
 }
 
 void FakeWeatherItem::addDownloadedFile( const QString& url, const QString& type )

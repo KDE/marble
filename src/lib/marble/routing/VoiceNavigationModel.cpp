@@ -161,49 +161,49 @@ QString VoiceNavigationModelPrivate::turnTypeAudioFile( Maneuver::Direction turn
 
 QString VoiceNavigationModelPrivate::announcementText( Maneuver::Direction turnType, qreal distance )
 {
-    QString announcementText = QString("");
+    QString announcementText;
     if (distance >= 75) {
         announcementText = QString("In "+distanceAudioFile(distance)+" meters, ");
     }
     switch (turnType) {
     case Maneuver::Continue:
     case Maneuver::Straight:
-        announcementText += QString("Continue straight");
+        announcementText += QStringLiteral("Continue straight");
         break;
     case Maneuver::SlightRight:
-        announcementText += QString("Turn slight right");
+        announcementText += QStringLiteral("Turn slight right");
         break;
     case Maneuver::SlightLeft:
-        announcementText += QString("Turn slight left");
+        announcementText += QStringLiteral("Turn slight left");
         break;
     case Maneuver::Right:
     case Maneuver::SharpRight:
-        announcementText += QString("Turn right");
+        announcementText += QStringLiteral("Turn right");
         break;
     case Maneuver::Left:
     case Maneuver::SharpLeft:
-        announcementText += QString("Turn left");
+        announcementText += QStringLiteral("Turn left");
         break;
     case Maneuver::TurnAround:
-        announcementText += QString("Take a U-turn");
+        announcementText += QStringLiteral("Take a U-turn");
         break;
     case Maneuver::ExitLeft:
-        announcementText += QString("Exit left");
+        announcementText += QStringLiteral("Exit left");
         break;
     case Maneuver::ExitRight:
-        announcementText += QString("Exit right");
+        announcementText += QStringLiteral("Exit right");
         break;
     case Maneuver::RoundaboutFirstExit:
-        announcementText += QString("Take the first exit");
+        announcementText += QStringLiteral("Take the first exit");
         break;
     case Maneuver::RoundaboutSecondExit:
-        announcementText += QString("Take the second exit");
+        announcementText += QStringLiteral("Take the second exit");
         break;
     case Maneuver::RoundaboutThirdExit:
-        announcementText += QString("Take the third exit");
+        announcementText += QStringLiteral("Take the third exit");
         break;
     default:
-        announcementText = QString("");
+        announcementText = QStringLiteral("");
         break;
     }
     return announcementText;

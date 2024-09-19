@@ -142,7 +142,7 @@ void DownloadQueueSet::retryOrBlacklistJob( HttpJob * job, const int errorCode )
     emit jobRemoved();
 
     if ( job->tryAgain() ) {
-        mDebug() << QString( "Download of %1 to %2 failed, but trying again soon" )
+        mDebug() << QStringLiteral( "Download of %1 to %2 failed, but trying again soon" )
             .arg( job->sourceUrl().toString(), job->destinationFileName() );
         m_retryQueue.enqueue( job );
         emit jobRetry();
@@ -152,7 +152,7 @@ void DownloadQueueSet::retryOrBlacklistJob( HttpJob * job, const int errorCode )
                  << "Blacklist-size:" << m_jobBlackList.size()
                  << "err:" << errorCode;
         m_jobBlackList.insert( job->sourceUrl().toString() );
-        mDebug() << QString( "Download of %1 Blacklisted. "
+        mDebug() << QStringLiteral( "Download of %1 Blacklisted. "
                              "Number of blacklist items: %2" )
             .arg( job->destinationFileName() )
             .arg( m_jobBlackList.size() );

@@ -176,14 +176,14 @@ void LayerManager::renderLayers( GeoPainter *painter, ViewportParams *viewport )
             timer.start();
             layer->render( painter, viewport, renderPosition, nullptr );
             d->m_renderState.addChild( layer->renderState() );
-            traceList.append( QString("%2 ms %3").arg( timer.elapsed(),3 ).arg( layer->runtimeTrace() ) );
+            traceList.append( QStringLiteral("%2 ms %3").arg( timer.elapsed(),3 ).arg( layer->runtimeTrace() ) );
         }
     }
 
     if ( d->m_showRuntimeTrace ) {
         const int totalElapsed = totalTime.elapsed();
         const int fps = 1000.0/totalElapsed;
-        traceList.append( QString( "Total: %1 ms (%2 fps)" ).arg( totalElapsed, 3 ).arg( fps ) );
+        traceList.append( QStringLiteral( "Total: %1 ms (%2 fps)" ).arg( totalElapsed, 3 ).arg( fps ) );
 
         painter->save();
         painter->setBackgroundMode( Qt::OpaqueMode );

@@ -51,12 +51,12 @@ QString LatLonEditPlugin::group() const
 
 QString LatLonEditPlugin::includeFile() const
 {
-    return QString( "LatLonEdit.h" );
+    return QStringLiteral( "LatLonEdit.h" );
 }
 
 QString LatLonEditPlugin::name() const
 {
-    return QString( "Marble::LatLonEdit" );
+    return QStringLiteral( "Marble::LatLonEdit" );
 }
 
 QString LatLonEditPlugin::toolTip() const

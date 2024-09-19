@@ -76,7 +76,7 @@ QString Placemark::description() const
                 bool hasStars;
                 int const numStars = stars.mid(0, 1).toInt(&hasStars);
                 if (hasStars) {
-                    m_description += QString(' ') + QString("★").repeated(numStars) + stars.mid(1);
+                    m_description += QString(' ') + QStringLiteral("★").repeated(numStars) + stars.mid(1);
                 } else {
                     addTagValue(m_description, QStringLiteral("stars"));
                 }

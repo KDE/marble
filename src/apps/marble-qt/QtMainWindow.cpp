@@ -1268,7 +1268,7 @@ void MainWindow::readSettings(const QVariantMap& overrideSettings)
         QList<RoutingProfile> profiles;
         int numProfiles = settings.value( "Num", 0 ).toInt();
         for ( int i = 0; i < numProfiles; ++i ) {
-            settings.beginGroup( QString( "Profile %0" ).arg(i) );
+            settings.beginGroup( QStringLiteral( "Profile %0" ).arg(i) );
             QString name = settings.value( "Name", tr( "Unnamed" ) ).toString();
             RoutingProfile profile( name );
             for ( const QString& pluginName: settings.childGroups() ) {
@@ -1405,7 +1405,7 @@ void MainWindow::writeSettings()
                          ->model()->routingManager()->profilesModel()->profiles();
      settings.setValue( "Num", profiles.count() );
      for ( int i = 0; i < profiles.count(); ++i ) {
-         settings.beginGroup( QString( "Profile %0" ).arg(i) );
+         settings.beginGroup( QStringLiteral( "Profile %0" ).arg(i) );
          const RoutingProfile& profile = profiles.at( i );
          settings.setValue( "Name", profile.name() );
          for ( const QString& pluginName: settings.childGroups() ) {
@@ -1633,7 +1633,7 @@ void MainWindow::updateCenterFromTheme()
                    }
                }
                else {
-                   mDebug() << QString("DGML theme %1 has invalid number of coordinates").arg(theme->head()->name());
+                   mDebug() << QStringLiteral("DGML theme %1 has invalid number of coordinates").arg(theme->head()->name());
                }
            }
       }

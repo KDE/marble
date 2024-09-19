@@ -447,7 +447,7 @@ void MarbleWidgetPopupMenu::Private::setupDialogNation( PopupLayer *popup, const
     doc["population"] = QString::number(index->population());
     doc["area"] = QString::number(index->area(), 'f', 2);
 
-    const QString flagPath = MarbleDirs::path(QString("flags/flag_%1.svg").arg(index->countryCode().toLower()) );
+    const QString flagPath = MarbleDirs::path(QStringLiteral("flags/flag_%1.svg").arg(index->countryCode().toLower()) );
     doc["flag"] = flagPath;
 
     popup->setContent(doc.finalText());
@@ -799,7 +799,7 @@ void MarbleWidgetPopupMenu::slotCopyGeo()
         const qreal longitude_degrees = coordinates.longitude(GeoDataCoordinates::Degree);
 
         QMimeData * const myMimeData = new QMimeData();
-        QList<QUrl> urls = { QUrl(QString("geo:%1,%2").arg(latitude_degrees, 0, 'f', 10).arg(longitude_degrees, 0, 'f', 10)) };
+        QList<QUrl> urls = { QUrl(QStringLiteral("geo:%1,%2").arg(latitude_degrees, 0, 'f', 10).arg(longitude_degrees, 0, 'f', 10)) };
         myMimeData->setUrls(urls);
         QClipboard * const clipboard = QApplication::clipboard();
         clipboard->setMimeData(myMimeData);

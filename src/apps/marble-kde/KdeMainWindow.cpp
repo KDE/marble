@@ -119,7 +119,7 @@ void MainWindow::updateCenterFromTheme()
                        m_part->controlView()->marbleWidget()->centerOn( latLonBox );
                    }
                    else {
-                       mDebug() << QString("DGML theme %1 has invalid number of coordinates").arg(theme->head()->name());
+                       mDebug() << QStringLiteral("DGML theme %1 has invalid number of coordinates").arg(theme->head()->name());
                    }
                }
            }

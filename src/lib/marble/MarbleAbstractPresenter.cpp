@@ -100,7 +100,7 @@ namespace Marble
                                   convertedDistance, unit);
         QString unitString = locale->unitAbbreviation(unit);
 
-        return QString("%L1 %2").arg(convertedDistance, 8, 'f', 1, QLatin1Char(' '))
+        return QStringLiteral("%L1 %2").arg(convertedDistance, 8, 'f', 1, QLatin1Char(' '))
                                 .arg(unitString);
     }
 

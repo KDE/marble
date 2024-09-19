@@ -144,7 +144,7 @@ QString RoutingPluginPrivate::fuzzyDistance( qreal length )
         length *= KM2NM;
     }
 
-    return QString( "%1 %2" ).arg( length, 0, 'f', precision ).arg( distanceUnit );
+    return QStringLiteral( "%1 %2" ).arg( length, 0, 'f', precision ).arg( distanceUnit );
 }
 
 void RoutingPluginPrivate::updateZoomButtons( int zoomValue )
@@ -283,7 +283,7 @@ void RoutingPluginPrivate::updateDestinationInformation()
         updateButtonVisibility();
 
         QString pixmap = MarbleDirs::path(QStringLiteral("bitmaps/routing_step.png"));
-        pixmapHtml = QString( "<img src=\"%1\" />" ).arg( pixmap );
+        pixmapHtml = QStringLiteral( "<img src=\"%1\" />" ).arg( pixmap );
 
         qreal planetRadius = m_marbleWidget->model()->planet()->radius();
         GeoDataCoordinates const onRoute = m_routingModel->route().positionOnRoute();
@@ -303,7 +303,7 @@ void RoutingPluginPrivate::updateDestinationInformation()
             pixmap = m_routingModel->route().currentSegment().nextRouteSegment().maneuver().directionPixmap();
             QString const instructionText = m_routingModel->route().currentSegment().nextRouteSegment().maneuver().instructionText();
             m_widget.instructionLabel->setText( richText( "%1" ).arg( instructionText ) );
-            pixmapHtml = QString( "<p align=\"center\"><img src=\"%1\" /><br />%2</p>" ).arg( pixmap );
+            pixmapHtml = QStringLiteral( "<p align=\"center\"><img src=\"%1\" /><br />%2</p>" ).arg( pixmap );
             m_widget.instructionIconLabel->setText( pixmapHtml.arg( richText( fuzzyDistance( distanceLeft ) ) ) );
 
             if( remaining > 50 ) {

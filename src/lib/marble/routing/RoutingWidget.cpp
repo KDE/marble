@@ -946,7 +946,7 @@ void RoutingWidget::initializeTour()
             updateCreate->setUpdate( new GeoDataUpdate );
             updateCreate->update()->setCreate( new GeoDataCreate );
             GeoDataPlacemark *placemarkCreate = new GeoDataPlacemark;
-            QString const waypointId = QString( "waypoint-%1" ).arg( i, 0, 10 );
+            QString const waypointId = QStringLiteral( "waypoint-%1" ).arg( i, 0, 10 );
             placemarkCreate->setId( waypointId );
             placemarkCreate->setTargetId( d->m_document->id() );
             placemarkCreate->setCoordinate( waypoint.coordinates );

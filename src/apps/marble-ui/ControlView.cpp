@@ -94,7 +94,7 @@ ControlView::ControlView( QWidget *parent )
     new MarbleDBusInterface( m_marbleWidget );
     QDBusConnection::sessionBus().registerObject( "/Marble", m_marbleWidget );
     if (!QDBusConnection::sessionBus().registerService( "org.kde.marble" )) {
-        QString const urlWithPid = QString("org.kde.marble-%1").arg( QCoreApplication::applicationPid() );
+        QString const urlWithPid = QStringLiteral("org.kde.marble-%1").arg( QCoreApplication::applicationPid() );
         if ( !QDBusConnection::sessionBus().registerService( urlWithPid ) ) {
             mDebug() << "Failed to register service org.kde.marble and " << urlWithPid << " with the DBus session bus.";
         }
@@ -469,9 +469,9 @@ void ControlView::printDrivingInstructions( QTextDocument &document, QString &te
 
         QPixmap instructionIcon = index.data( Qt::DecorationRole ).value<QPixmap>();
         if ( !instructionIcon.isNull() ) {
-            QString uri = QString("marble://turnIcon%1.png").arg(i);
+            QString uri = QStringLiteral("marble://turnIcon%1.png").arg(i);
             document.addResource( QTextDocument::ImageResource, QUrl( uri ), QVariant( instructionIcon ) );
-            text += QString("<img src=\"%1\">").arg(uri);
+            text += QStringLiteral("<img src=\"%1\">").arg(uri);
         }
 
         text += routingModel->data( index ).toString() +

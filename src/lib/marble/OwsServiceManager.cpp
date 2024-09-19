@@ -220,7 +220,7 @@ QString WmsCapabilities::boundingBoxNSEWDegrees(const QStringList &layers, const
     for (auto layer : layers) {
         QString layerBBox = boundingBox(layer, projection);
         if (layerBBox.isEmpty()) {
-            retVal = QString("90,-90,180,-180");
+            retVal = QStringLiteral("90,-90,180,-180");
             break;
         }
         QStringList layerBBoxList = layerBBox.split(",");
@@ -247,7 +247,7 @@ QString WmsCapabilities::boundingBoxNSEWDegrees(const QStringList &layers, const
                 north = layerBBoxList.at(2).toDouble();
             }
         }
-        retVal = QString("%1,%2,%3,%4").arg(north).arg(south).arg(east).arg(west);
+        retVal = QStringLiteral("%1,%2,%3,%4").arg(north).arg(south).arg(east).arg(west);
         // TODO: merge possibly different layer bboxes
         break;
     }
@@ -364,7 +364,7 @@ void OwsServiceManager::queryWmsMap(const QUrl &url, const QString &layers, cons
     // Format for the map output. In addition to common bitmap formats WMS servers
     // sometimes support "vector" formats (PDF, SVG, KML, etc.)
     // Currently Marble only supports JPEG, PNG, TIFF, GIF, BMP and their variants.
-    downloadQuery.addQueryItem( "format", QString("image/%1").arg(format) );
+    downloadQuery.addQueryItem( "format", QStringLiteral("image/%1").arg(format) );
 
     // Styles in which layers are to be rendered. Value is a comma-separated list of style names,
     // or empty if default styling is required. Style names may be empty in the list,
@@ -492,7 +492,7 @@ void OwsServiceManager::queryXYZImage(const QString urlString)
 
 void OwsServiceManager::handleAuthentication(QNetworkReply *reply, QAuthenticator *authenticator)
 {
-    if (reply->url().host() == QString("api.tileserver.org")) {
+    if (reply->url().host() == QStringLiteral("api.tileserver.org")) {
         authenticator->setUser("");
         authenticator->setPassword("");
     }
@@ -678,7 +678,7 @@ void OwsServiceManager::parseWmsCapabilities(QNetworkReply *reply)
                     double south = 20037508.34 / M_PI * log(tan(((90 + coords.at(1).toDouble()) * M_PI) / 360));
                     double east = (coords.at(2).toDouble() * 20037508.34) / 180;
                     double north = 20037508.34 / M_PI * log(tan(((90 + coords.at(3).toDouble()) * M_PI) / 360));
-                    QString bbox = QString("%1,%2,%3,%4").arg(QString::number( west, 'f', 6 )).arg(QString::number( south, 'f', 6 ))
+                    QString bbox = QStringLiteral("%1,%2,%3,%4").arg(QString::number( west, 'f', 6 )).arg(QString::number( south, 'f', 6 ))
                                                          .arg(QString::number( east, 'f', 6 )).arg(QString::number( north, 'f', 6 ));
                     wmsLayerCoordinateSystems[layerName]["epsg:3857"] = bbox;
                 }
@@ -705,7 +705,7 @@ void OwsServiceManager::parseWmsCapabilities(QNetworkReply *reply)
             double south = bboxElement.attribute("miny").toDouble();
             double east = bboxElement.attribute("maxx").toDouble();
             double north = bboxElement.attribute("maxy").toDouble();
-            QString bboxString = QString("%1,%2,%3,%4")
+            QString bboxString = QStringLiteral("%1,%2,%3,%4")
             .arg(QString::number(west, 'f', precision),
                  QString::number(south, 'f', precision),
                  QString::number(east, 'f', precision),

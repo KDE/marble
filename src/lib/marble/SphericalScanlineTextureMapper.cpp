@@ -220,7 +220,7 @@ void SphericalScanlineTextureMapper::RenderJob::run()
             if ( x >= xIpLeft && x <= xIpRight ) {
 
                 // Decrease pole distortion due to linear approximation ( x-axis )
-//                mDebug() << QString("NorthPole X: %1, LeftInterval: %2").arg( northPoleX ).arg( leftInterval );
+//                mDebug() << QStringLiteral("NorthPole X: %1, LeftInterval: %2").arg( northPoleX ).arg( leftInterval );
                 if ( crossingPoleArea
                      && northPoleX >= leftInterval + n
                      && northPoleX < leftInterval + 2 * n
@@ -249,7 +249,7 @@ void SphericalScanlineTextureMapper::RenderJob::run()
             qpos.rotateAroundAxis( planetAxisMatrix );
 
             qpos.getSpherical( lon, lat );
-//            mDebug() << QString("lon: %1 lat: %2").arg(lon).arg(lat);
+//            mDebug() << QStringLiteral("lon: %1 lat: %2").arg(lon).arg(lat);
             // Approx for n-1 out of n pixels within the boundary of
             // xIpLeft to xIpRight
 

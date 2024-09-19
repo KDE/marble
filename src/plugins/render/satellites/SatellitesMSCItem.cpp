@@ -82,7 +82,7 @@ int SatellitesMSCItem::catalogIndex() const
 
 QString SatellitesMSCItem::id() const
 {
-    return QString( "%1:%2" ).arg( catalog() ).arg( catalogIndex() );
+    return QStringLiteral( "%1:%2" ).arg( catalog() ).arg( catalogIndex() );
 }
 
 const QDateTime& SatellitesMSCItem::missionStart() const

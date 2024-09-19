@@ -147,7 +147,7 @@ void MarbleLegendBrowser::loadLegend()
     const QString sectionsHtml = generateSectionsHtml();
 
     // And then create the final html from these two parts.
-    finalHtml.replace( QString( "<!-- ##customLegendEntries:all## -->" ), sectionsHtml );
+    finalHtml.replace( QStringLiteral( "<!-- ##customLegendEntries:all## -->" ), sectionsHtml );
 
     translateHtml( finalHtml );
 

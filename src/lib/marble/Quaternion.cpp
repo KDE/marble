@@ -134,7 +134,7 @@ qreal Quaternion::roll() const // "bank", psi
 #ifndef QT_NO_DEBUG_STREAM
 QDebug operator<<(QDebug debug, const Quaternion &q)
 {
-    QString quatdisplay = QString("Quaternion: w= %1, x= %2, y= %3, z= %4, |q|= %5" )
+    QString quatdisplay = QStringLiteral("Quaternion: w= %1, x= %2, y= %3, z= %4, |q|= %5" )
         .arg(q.v[Q_W]).arg(q.v[Q_X]).arg(q.v[Q_Y]).arg(q.v[Q_Z]).arg(q.length());
 
     debug << quatdisplay;

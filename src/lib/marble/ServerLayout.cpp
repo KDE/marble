@@ -34,7 +34,7 @@ MarbleServerLayout::MarbleServerLayout( GeoSceneTileDataset *textureLayer )
 
 QUrl MarbleServerLayout::downloadUrl( const QUrl &prototypeUrl, const TileId &id ) const
 {
-    const QString path = QString( "%1/%2/%3/%3_%4.%5" )
+    const QString path = QStringLiteral( "%1/%2/%3/%3_%4.%5" )
         .arg( prototypeUrl.path() )
         .arg( id.zoomLevel() )
         .arg(id.y(), tileDigits, 10, QLatin1Char('0'))
@@ -66,7 +66,7 @@ OsmServerLayout::OsmServerLayout( GeoSceneTileDataset *textureLayer )
 QUrl OsmServerLayout::downloadUrl( const QUrl &prototypeUrl, const TileId &id ) const
 {
     const QString suffix = m_textureLayer->fileFormat().toLower();
-    const QString path = QString( "%1/%2/%3.%4" ).arg( id.zoomLevel() )
+    const QString path = QStringLiteral( "%1/%2/%3.%4" ).arg( id.zoomLevel() )
                                                  .arg( id.x() )
                                                  .arg( id.y() )
                                                  .arg( suffix );
@@ -152,7 +152,7 @@ QUrl WmsServerLayout::downloadUrl( const QUrl &prototypeUrl, const Marble::TileI
         north = box.north( GeoDataCoordinates::Degree );
     }
 
-    url.addQueryItem( "bbox", QString( "%1,%2,%3,%4" ).arg( QString::number( west, 'f', 12 ),
+    url.addQueryItem( "bbox", QStringLiteral( "%1,%2,%3,%4" ).arg( QString::number( west, 'f', 12 ),
                                                             QString::number( south, 'f', 12 ),
                                                             QString::number( east, 'f', 12 ),
                                                             QString::number( north, 'f', 12 ) ) );
@@ -263,7 +263,7 @@ QUrl TmsServerLayout::downloadUrl( const QUrl &prototypeUrl, const TileId &id ) 
     // https://wiki.osgeo.org/wiki/Tile_Map_Service_Specification
     int y_frombottom = ( 1<<id.zoomLevel() ) - id.y() - 1 ;
 
-    const QString path = QString( "%1/%2/%3.%4" ).arg( id.zoomLevel() )
+    const QString path = QStringLiteral( "%1/%2/%3.%4" ).arg( id.zoomLevel() )
                                                  .arg( id.x() )
                                                  .arg( y_frombottom )
                                                  .arg( suffix );

@@ -305,8 +305,8 @@ void MapWizard::processCapabilitiesResults()
         owsCapabilities = d->owsManager.wmtsCapabilities();
     }
 
-    d->uiWidget.labelWmsTitle->setText(QString("Web Service: <b>%1</b>").arg(owsCapabilities.title() ) );
-    d->uiWidget.labelWmsTitle->setToolTip(QString("<small>%1</small>").arg(owsCapabilities.abstract() ) );
+    d->uiWidget.labelWmsTitle->setText(QStringLiteral("Web Service: <b>%1</b>").arg(owsCapabilities.title() ) );
+    d->uiWidget.labelWmsTitle->setToolTip(QStringLiteral("<small>%1</small>").arg(owsCapabilities.abstract() ) );
 
     for (auto layer : owsCapabilities.layers()) {
         if (!layer.isEmpty()) {
@@ -336,8 +336,8 @@ void MapWizard::processCapabilitiesResults()
     QString serviceInfo;
     serviceInfo += "<html>";
     serviceInfo += d->owsManager.wmsCapabilities().abstract();
-    serviceInfo += QString("<br><br><i>Contact:</i> %1").arg( d->owsManager.wmsCapabilities().contactInformation());
-    serviceInfo += QString("<br><br><i>Fees:</i> %1").arg( d->owsManager.wmsCapabilities().fees());
+    serviceInfo += QStringLiteral("<br><br><i>Contact:</i> %1").arg( d->owsManager.wmsCapabilities().contactInformation());
+    serviceInfo += QStringLiteral("<br><br><i>Fees:</i> %1").arg( d->owsManager.wmsCapabilities().fees());
     serviceInfo += "</html>";
 
     d->uiWidget.textEditWmsServiceInfo->setText(serviceInfo);
@@ -442,8 +442,8 @@ void MapWizard::processSelectedLayerInformation()
     description += "<html>";
     description += owsCapabilities.abstract(d->selectedLayers.first());
     if (d->owsManager.owsServiceType() == WmsType) {
-        description += QString("<br><br><i>Contact:</i> %1").arg( d->owsManager.wmsCapabilities().contactInformation());
-        description += QString("<br><br><i>Fees:</i> %1").arg( d->owsManager.wmsCapabilities().fees());
+        description += QStringLiteral("<br><br><i>Contact:</i> %1").arg( d->owsManager.wmsCapabilities().contactInformation());
+        description += QStringLiteral("<br><br><i>Fees:</i> %1").arg( d->owsManager.wmsCapabilities().fees());
     }
     description += "</html>";
     d->uiWidget.textEditDesc->setText(description);
@@ -602,16 +602,16 @@ bool MapWizard::createFiles( const GeoSceneDocument* document )
             // Source image
             QFile sourceImage( d->sourceImage );
             d->format = d->sourceImage.right(d->sourceImage.length() - d->sourceImage.lastIndexOf(QLatin1Char('.')) - 1).toLower();
-            sourceImage.copy( QString( "%1/%2/%2.%3" ).arg( maps.absolutePath(),
+            sourceImage.copy( QStringLiteral( "%1/%2/%2.%3" ).arg( maps.absolutePath(),
                                                             document->head()->theme(),
                                                             d->format ) );
         }
 
         else if( d->mapProviderType == MapWizardPrivate::WmsMap || d->mapProviderType == MapWizardPrivate::WmtsMap )
         {
-            maps.mkdir( QString( "%1/0/" ).arg( document->head()->theme() ) );
-            maps.mkdir( QString( "%1/0/0" ).arg( document->head()->theme() ) );
-            const QString path = QString( "%1/%2/0/0/0.%3" ).arg( maps.absolutePath(),
+            maps.mkdir( QStringLiteral( "%1/0/" ).arg( document->head()->theme() ) );
+            maps.mkdir( QStringLiteral( "%1/0/0" ).arg( document->head()->theme() ) );
+            const QString path = QStringLiteral( "%1/%2/0/0/0.%3" ).arg( maps.absolutePath(),
                                                                   document->head()->theme(),
                                                                   d->owsManager.resultFormat() );
             QFile baseTile( path );
@@ -621,9 +621,9 @@ bool MapWizard::createFiles( const GeoSceneDocument* document )
 
         else if( d->mapProviderType == MapWizardPrivate::StaticUrlMap )
         {
-            maps.mkdir( QString( "%1/0/" ).arg( document->head()->theme() ) );
-            maps.mkdir( QString( "%1/0/0" ).arg( document->head()->theme() ) );
-            const QString path = QString( "%1/%2/0/0/0.%3" ).arg( maps.absolutePath(),
+            maps.mkdir( QStringLiteral( "%1/0/" ).arg( document->head()->theme() ) );
+            maps.mkdir( QStringLiteral( "%1/0/0" ).arg( document->head()->theme() ) );
+            const QString path = QStringLiteral( "%1/%2/0/0/0.%3" ).arg( maps.absolutePath(),
                                                                   document->head()->theme(),
                                                                   d->format );
             QFile baseTile( path );
@@ -632,13 +632,13 @@ bool MapWizard::createFiles( const GeoSceneDocument* document )
         }
 
         // Preview image
-        QString pixmapPath = QString( "%1/%2/%3" ).arg( maps.absolutePath(),
+        QString pixmapPath = QStringLiteral( "%1/%2/%3" ).arg( maps.absolutePath(),
                                                         document->head()->theme(),
                                                         document->head()->icon()->pixmap() );
         d->previewImage.save( pixmapPath );
 
         // DGML
-        QFile file( QString( "%1/%2/%2.dgml" ).arg( maps.absolutePath(),
+        QFile file( QStringLiteral( "%1/%2/%2.dgml" ).arg( maps.absolutePath(),
                                                     document->head()->theme() ) );
         file.open( QIODevice::ReadWrite );
         GeoWriter geoWriter;
@@ -739,53 +739,53 @@ QString MapWizard::createArchive( QWidget *parent, const QString& mapId )
     tarArgs.append( "--create" );
     tarArgs.append( "--gzip" );
     tarArgs.append( "--file" );
-    tarArgs.append( QString( "%1/%2.tar.gz" ).arg( QDir::tempPath(), theme ) );
+    tarArgs.append( QStringLiteral( "%1/%2.tar.gz" ).arg( QDir::tempPath(), theme ) );
     tarArgs.append( "--directory" );
 
-    if( QFile::exists( QString( "%1/maps/%2" ).arg( MarbleDirs::localPath(), mapId ) ) )
+    if( QFile::exists( QStringLiteral( "%1/maps/%2" ).arg( MarbleDirs::localPath(), mapId ) ) )
     {
-        tarArgs.append( QString( "%1/maps/" ).arg( MarbleDirs::localPath() ) );
-        themeDir.cd( QString( "%1/maps/%2/%3" ).arg( MarbleDirs::localPath(), body, theme ) );
+        tarArgs.append( QStringLiteral( "%1/maps/" ).arg( MarbleDirs::localPath() ) );
+        themeDir.cd( QStringLiteral( "%1/maps/%2/%3" ).arg( MarbleDirs::localPath(), body, theme ) );
     }
     
-    else if( QFile::exists( QString( "%1/maps/%2" ).arg( MarbleDirs::systemPath(), mapId ) ) )
+    else if( QFile::exists( QStringLiteral( "%1/maps/%2" ).arg( MarbleDirs::systemPath(), mapId ) ) )
     {
-        tarArgs.append( QString( "%1/maps/" ).arg( MarbleDirs::systemPath() ) );
-        themeDir.cd( QString( "%1/maps/%2/%3" ).arg( MarbleDirs::systemPath(), body, theme ) );
+        tarArgs.append( QStringLiteral( "%1/maps/" ).arg( MarbleDirs::systemPath() ) );
+        themeDir.cd( QStringLiteral( "%1/maps/%2/%3" ).arg( MarbleDirs::systemPath(), body, theme ) );
     }
     
-    if( QFile::exists( QString( "%1/%2.dgml" ).arg( themeDir.absolutePath(), theme ) ) )
+    if( QFile::exists( QStringLiteral( "%1/%2.dgml" ).arg( themeDir.absolutePath(), theme ) ) )
     {
-        tarArgs.append( QString( "%1/%2/%2.dgml" ).arg( body, theme ) );
+        tarArgs.append( QStringLiteral( "%1/%2/%2.dgml" ).arg( body, theme ) );
     }
     
-    if( QFile::exists( QString( "%1/legend.html" ).arg( themeDir.absolutePath() ) ) )
+    if( QFile::exists( QStringLiteral( "%1/legend.html" ).arg( themeDir.absolutePath() ) ) )
     {
-        tarArgs.append( QString( "%1/%2/legend.html" ).arg( body, theme ) );
+        tarArgs.append( QStringLiteral( "%1/%2/legend.html" ).arg( body, theme ) );
     }
     
-    if( QFile::exists( QString( "%1/legend" ).arg( themeDir.absolutePath() ) ) )
+    if( QFile::exists( QStringLiteral( "%1/legend" ).arg( themeDir.absolutePath() ) ) )
     {
-        tarArgs.append( QString( "%1/%2/legend" ).arg( body, theme ) );
+        tarArgs.append( QStringLiteral( "%1/%2/legend" ).arg( body, theme ) );
     }
     
-    if( QFile::exists( QString( "%1/0/000000" ).arg( themeDir.absolutePath() ) ) )
+    if( QFile::exists( QStringLiteral( "%1/0/000000" ).arg( themeDir.absolutePath() ) ) )
     {
-        tarArgs.append( QString( "%1/%2/0/000000" ).arg( body, theme ) );
+        tarArgs.append( QStringLiteral( "%1/%2/0/000000" ).arg( body, theme ) );
     }
     
     QStringList previewFilters;
     previewFilters << "preview.*";
     QStringList preview = themeDir.entryList( previewFilters );
     if( !preview.isEmpty() ) {
-        tarArgs.append( QString( "%1/%2/%3" ).arg( body ).arg( theme, preview[0] ) );
+        tarArgs.append( QStringLiteral( "%1/%2/%3" ).arg( body ).arg( theme, preview[0] ) );
     }
     
     QStringList sourceImgFilters;
     sourceImgFilters << theme + QLatin1String(".jpg") << theme + QLatin1String(".png") << theme + QLatin1String(".jpeg");
     QStringList sourceImg = themeDir.entryList( sourceImgFilters );
     if( !sourceImg.isEmpty() ) {
-        tarArgs.append( QString( "%1/%2/%3" ).arg( body ).arg( theme, sourceImg[0] ) );
+        tarArgs.append( QStringLiteral( "%1/%2/%3" ).arg( body ).arg( theme, sourceImg[0] ) );
     }
     
     QProcess archiver;
@@ -802,14 +802,14 @@ QString MapWizard::createArchive( QWidget *parent, const QString& mapId )
         break;
     }
     archiver.waitForFinished();
-    return QString( "%1/%2.tar.gz" ).arg( QDir::tempPath(), theme );
+    return QStringLiteral( "%1/%2.tar.gz" ).arg( QDir::tempPath(), theme );
 }
 
 void MapWizard::deleteArchive( const QString& mapId )
 {
     QStringList splitMapId( mapId.split(QLatin1Char('/')) );
     QString theme = splitMapId[1];
-    QFile::remove( QString( "%1/%2.tar.gz" ).arg( QDir::tempPath(), theme ) );
+    QFile::remove( QStringLiteral( "%1/%2.tar.gz" ).arg( QDir::tempPath(), theme ) );
 }
 
 bool MapWizard::validateCurrentPage()
@@ -951,7 +951,7 @@ bool MapWizard::validateCurrentPage()
             return false;
         }
 
-        const QDir destinationDir( QString( "%1/maps/earth/%2" ).arg( MarbleDirs::localPath(), d->mapTheme ) );
+        const QDir destinationDir( QStringLiteral( "%1/maps/earth/%2" ).arg( MarbleDirs::localPath(), d->mapTheme ) );
         if ( destinationDir.exists() ) {
             QMessageBox::information( this,
                                     tr( "Map Name" ),
@@ -1080,7 +1080,7 @@ GeoSceneDocument* MapWizard::createDocument()
     head->setVisible( true );
         
     GeoSceneIcon *icon = head->icon();
-    icon->setPixmap( QString("%1-preview.png").arg(document->head()->theme()) );
+    icon->setPixmap( QStringLiteral("%1-preview.png").arg(document->head()->theme()) );
     
     GeoSceneZoom *zoom = head->zoom();
     zoom->setMinimum( 900 );

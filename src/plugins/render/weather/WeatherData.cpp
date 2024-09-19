@@ -812,7 +812,7 @@ bool WeatherData::hasValidHumidity() const
 
 QString WeatherData::humidityString() const
 {
-    return QString( "%1 %" ).arg( humidity() );
+    return QStringLiteral( "%1 %" ).arg( humidity() );
 }
 
 QString WeatherData::toHtml( WeatherData::TemperatureUnit temperatureUnit,

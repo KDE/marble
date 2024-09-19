@@ -103,7 +103,7 @@ public:
         int  stdImageHeight  = nmax * c_defaultTileSize;
         if ( stdImageWidth != imageWidth ) {
             mDebug() <<
-            QString( "TileCreator::createTiles() The size of the final image will measure  %1 x %2 pixels").arg(stdImageWidth).arg(stdImageHeight);
+            QStringLiteral( "TileCreator::createTiles() The size of the final image will measure  %1 x %2 pixels").arg(stdImageWidth).arg(stdImageHeight);
         }
 
         QImage row;
@@ -223,7 +223,7 @@ void TileCreator::run()
     int  imageWidth  = fullImageSize.width();
     int  imageHeight = fullImageSize.height();
 
-    mDebug() << QString( "TileCreator::createTiles() image dimensions %1 x %2").arg(imageWidth).arg(imageHeight);
+    mDebug() << QStringLiteral( "TileCreator::createTiles() image dimensions %1 x %2").arg(imageWidth).arg(imageHeight);
 
     if ( imageWidth < 1 || imageHeight < 1 ) {
         qDebug("Invalid imagemap!");
@@ -241,7 +241,7 @@ void TileCreator::run()
 
     if ( maxTileLevel < 0 ) {
         mDebug() 
-        << QString( "TileCreator::createTiles(): Invalid Maximum Tile Level: %1" )
+        << QStringLiteral( "TileCreator::createTiles(): Invalid Maximum Tile Level: %1" )
         .arg( maxTileLevel );
     }
     mDebug() << "Maximum Tile Level: " << maxTileLevel;
@@ -274,13 +274,13 @@ void TileCreator::run()
 
     // Creating directory structure for the highest level
     QString  dirName( d->m_targetDir
-                      + QString("%1").arg(maxTileLevel) );
+                      + QStringLiteral("%1").arg(maxTileLevel) );
     if ( !QDir( dirName ).exists() ) 
         ( QDir::root() ).mkpath( dirName );
 
     for ( int n = 0; n < nmax; ++n ) {
         QString dirName( d->m_targetDir
-                         + QString("%1/%2").arg(maxTileLevel).arg(n, tileDigits, 10, QLatin1Char('0')));
+                         + QStringLiteral("%1/%2").arg(maxTileLevel).arg(n, tileDigits, 10, QLatin1Char('0')));
         if ( !QDir( dirName ).exists() ) 
             ( QDir::root() ).mkpath( dirName );
     }
@@ -294,7 +294,7 @@ void TileCreator::run()
             if ( d->m_cancelled ) 
                 return;
 
-            tileName = d->m_targetDir + QString("%1/%2/%2_%3.%4")
+            tileName = d->m_targetDir + QStringLiteral("%1/%2/%2_%3.%4")
                                        .arg( maxTileLevel )
                                        .arg(n, tileDigits, 10, QLatin1Char('0'))
                                        .arg(m, tileDigits, 10, QLatin1Char('0'))
@@ -369,7 +369,7 @@ void TileCreator::run()
 
         for ( int n = 0; n < nmaxit; ++n ) {
             QString  dirName( d->m_targetDir
-                              + QString("%1/%2")
+                              + QStringLiteral("%1/%2")
                                   .arg(tileLevel)
                                   .arg(n, tileDigits, 10, QLatin1Char('0')));
 
@@ -383,7 +383,7 @@ void TileCreator::run()
                 if ( d->m_cancelled )
                     return;
 
-                QString newTileName = d->m_targetDir + QString("%1/%2/%2_%3.%4")
+                QString newTileName = d->m_targetDir + QStringLiteral("%1/%2/%2_%3.%4")
                                            .arg( tileLevel )
                                            .arg(n, tileDigits, 10, QLatin1Char('0'))
                                            .arg(m, tileDigits, 10, QLatin1Char('0'))
@@ -392,28 +392,28 @@ void TileCreator::run()
                 if ( QFile::exists( newTileName ) && d->m_resume ) {
                     //mDebug() << newTileName << "exists already";
                 } else {
-                    tileName = d->m_targetDir + QString("%1/%2/%2_%3.%4")
+                    tileName = d->m_targetDir + QStringLiteral("%1/%2/%2_%3.%4")
                                             .arg( tileLevel + 1 )
                                             .arg(2*n, tileDigits, 10, QLatin1Char('0'))
                                             .arg(2*m, tileDigits, 10, QLatin1Char('0'))
                                             .arg( d->m_tileFormat );
                     QImage  img_topleft( tileName );
 
-                    tileName = d->m_targetDir + QString("%1/%2/%2_%3.%4")
+                    tileName = d->m_targetDir + QStringLiteral("%1/%2/%2_%3.%4")
                                             .arg( tileLevel + 1 )
                                             .arg(2*n, tileDigits, 10, QLatin1Char('0'))
                                             .arg(2*m+1, tileDigits, 10, QLatin1Char('0'))
                                             .arg( d->m_tileFormat );
                     QImage  img_topright( tileName );
 
-                    tileName = d->m_targetDir + QString("%1/%2/%2_%3.%4")
+                    tileName = d->m_targetDir + QStringLiteral("%1/%2/%2_%3.%4")
                                             .arg( tileLevel + 1 )
                                             .arg(2*n+1, tileDigits, 10, QLatin1Char('0'))
                                             .arg(2*m, tileDigits, 10, QLatin1Char('0'))
                                             .arg( d->m_tileFormat );
                     QImage  img_bottomleft( tileName );
 
-                    tileName = d->m_targetDir + QString("%1/%2/%2_%3.%4")
+                    tileName = d->m_targetDir + QStringLiteral("%1/%2/%2_%3.%4")
                                             .arg( tileLevel + 1 )
                                             .arg(2*n+1, tileDigits, 10, QLatin1Char('0'))
                                             .arg(2*m+1, tileDigits, 10, QLatin1Char('0'))
@@ -537,7 +537,7 @@ void TileCreator::run()
 
                     savedTilesCount++;
 
-                    tileName = d->m_targetDir + QString("%1/%2/%2_%3.%4")
+                    tileName = d->m_targetDir + QStringLiteral("%1/%2/%2_%3.%4")
                                             .arg( tileLevel )
                                             .arg(n, tileDigits, 10, QLatin1Char('0'))
                                             .arg(m, tileDigits, 10, QLatin1Char('0'))

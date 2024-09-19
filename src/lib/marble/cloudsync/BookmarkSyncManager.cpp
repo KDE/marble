@@ -281,9 +281,9 @@ void BookmarkSyncManager::Private::uploadBookmarks()
     QByteArray data;
     QByteArray lineBreak = "\r\n";
     QString word = "----MarbleCloudBoundary";
-    QString boundary = QString( "--%0" ).arg( word );
+    QString boundary = QStringLiteral( "--%0" ).arg( word );
     QNetworkRequest request( endpointUrl( m_uploadEndpoint ) );
-    request.setHeader( QNetworkRequest::ContentTypeHeader, QString( "multipart/form-data; boundary=%0" ).arg( word ) );
+    request.setHeader( QNetworkRequest::ContentTypeHeader, QStringLiteral( "multipart/form-data; boundary=%0" ).arg( word ) );
 
     data.append( QString( boundary + lineBreak ).toUtf8() );
     data.append( "Content-Disposition: form-data; name=\"bookmarks\"; filename=\"bookmarks.kml\"" + lineBreak );
@@ -377,7 +377,7 @@ QList<DiffItem> BookmarkSyncManager::Private::getPlacemarks( GeoDataDocument *do
 {
     QList<DiffItem> diffItems;
     for ( GeoDataFolder *folder: document->folderList() ) {
-        QString path = QString( "/%0" ).arg( folder->name() );
+        QString path = QStringLiteral( "/%0" ).arg( folder->name() );
         diffItems.append( getPlacemarks( folder, path, other, diffDirection ) );
     }
 
@@ -388,7 +388,7 @@ QList<DiffItem> BookmarkSyncManager::Private::getPlacemarks( GeoDataFolder *fold
 {
     QList<DiffItem> diffItems;
     for ( GeoDataFolder *subFolder: folder->folderList() ) {
-        QString newPath = QString( "%0/%1" ).arg( path, subFolder->name() );
+        QString newPath = QStringLiteral( "%0/%1" ).arg( path, subFolder->name() );
         diffItems.append( getPlacemarks( subFolder, newPath, other, diffDirection ) );
     }
 
@@ -716,7 +716,7 @@ void BookmarkSyncManager::Private::copyLocalToCache()
     clearCache();
 
     QFile bookmarksFile( m_localBookmarksPath );
-    bookmarksFile.copy( QString( "%0/%1.kml" ).arg( m_cachePath, m_cloudTimestamp ) );
+    bookmarksFile.copy( QStringLiteral( "%0/%1.kml" ).arg( m_cachePath, m_cloudTimestamp ) );
 }
 
 // Bookmark synchronization steps

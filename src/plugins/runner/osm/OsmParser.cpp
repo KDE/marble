@@ -31,7 +31,7 @@ GeoDataDocument *OsmParser::parse(const QString &filename, QString &error)
 {
     QFileInfo const fileInfo(filename);
     if (!fileInfo.exists() || !fileInfo.isReadable()) {
-        error = QString("Cannot read file %1").arg(filename);
+        error = QStringLiteral("Cannot read file %1").arg(filename);
         return nullptr;
     }
 

@@ -158,7 +158,7 @@ QVector<RouteItem> RouteSyncManager::cachedRouteList() const
         QString distance(QLatin1Char('0'));
         QString duration(QLatin1Char('0'));
 
-        QString previewPath = QString( "%0/preview/%1.jpg" ).arg( d->m_cacheDir.absolutePath(), timestamp );
+        QString previewPath = QStringLiteral( "%0/preview/%1.jpg" ).arg( d->m_cacheDir.absolutePath(), timestamp );
         QIcon preview;
 
         if( QFile( previewPath ).exists() ) {
@@ -166,7 +166,7 @@ QVector<RouteItem> RouteSyncManager::cachedRouteList() const
         }
 
         // Would that work on Windows?
-        QUrl previewUrl( QString( "file://%0" ).arg( previewPath ) );
+        QUrl previewUrl( QStringLiteral( "file://%0" ).arg( previewPath ) );
 
         RouteItem item;
         item.setIdentifier( timestamp );
@@ -219,7 +219,7 @@ void RouteSyncManager::openRoute(const QString &timestamp )
         return;
     }
 
-    d->m_routingManager->loadRoute( QString( "%0/%1.kml" )
+    d->m_routingManager->loadRoute( QStringLiteral( "%0/%1.kml" )
                                     .arg( d->m_cacheDir.absolutePath() )
                                     .arg( timestamp ) );
 }

@@ -212,8 +212,8 @@ ControlView* MarblePart::controlView() const
 
 KAboutData *MarblePart::createAboutData()
 {
-    return new KAboutData( QString("marble_part" ),
-                           QString( "Marble" ),
+    return new KAboutData( QStringLiteral("marble_part" ),
+                           QStringLiteral( "Marble" ),
                            ControlView::applicationVersion(),
                            i18n( "A Virtual Globe" ),
                            KAboutLicense::LGPL_V2 );
@@ -480,7 +480,7 @@ void MarblePart::readSettings()
         KConfigGroup profilesGroup = sharedConfig->group( "Routing Profiles" );
         int numProfiles = profilesGroup.readEntry( "Num", 0 );
         for ( int i = 0; i < numProfiles; ++i ) {
-            KConfigGroup profileGroup = profilesGroup.group( QString( "Profile %0" ).arg(i) );
+            KConfigGroup profileGroup = profilesGroup.group( QStringLiteral( "Profile %0" ).arg(i) );
             QString name = profileGroup.readEntry( "Name", i18n( "Unnamed" ) );
             RoutingProfile profile( name );
             for ( const QString& pluginName: profileGroup.groupList() ) {
@@ -1212,14 +1212,14 @@ void MarblePart::setupStatusBar()
 
     // UTM syntax is used in the template string, as it is longer than the lon/lat one
     QString templatePositionString =
-        QString( "%1 00Z 000000.00 m E, 00000000.00 m N_" ).arg(POSITION_STRING.toString());
+        QStringLiteral( "%1 00Z 000000.00 m E, 00000000.00 m N_" ).arg(POSITION_STRING.toString());
     m_positionLabel = setupStatusBarLabel( templatePositionString );
 
     QString templateDistanceString =
-        QString( "%1 00.000,0 mu" ).arg(DISTANCE_STRING.toString());
+        QStringLiteral( "%1 00.000,0 mu" ).arg(DISTANCE_STRING.toString());
     m_distanceLabel = setupStatusBarLabel( templateDistanceString );
 
-    QString templateDateTimeString = QString( "%1 %2" ).arg( DATETIME_STRING.toString() , QLocale().toString( QDateTime::fromString ( "01:01:1000", "dd:mm:yyyy"), QLocale::ShortFormat ) );
+    QString templateDateTimeString = QStringLiteral( "%1 %2" ).arg( DATETIME_STRING.toString() , QLocale().toString( QDateTime::fromString ( "01:01:1000", "dd:mm:yyyy"), QLocale::ShortFormat ) );
 
     m_clockLabel = setupStatusBarLabel( templateDateTimeString );
 
@@ -1487,7 +1487,7 @@ void MarblePart::applyPluginState()
     KConfigGroup profilesGroup = sharedConfig->group( "Routing Profiles" );
     profilesGroup.writeEntry( "Num", profiles.count() );
     for ( int i = 0; i < profiles.count(); ++i ) {
-        KConfigGroup profileGroup = profilesGroup.group( QString( "Profile %0" ).arg(i) );
+        KConfigGroup profileGroup = profilesGroup.group( QStringLiteral( "Profile %0" ).arg(i) );
         RoutingProfile profile = profiles.at( i );
         profileGroup.writeEntry( "Name", profile.name() );
         for ( const QString &pluginName: profileGroup.groupList() ) {
@@ -1613,7 +1613,7 @@ void MarblePart::writePluginSettings()
     KSharedConfig::Ptr sharedConfig = KSharedConfig::openConfig();
 
     for( RenderPlugin *plugin: m_controlView->marbleWidget()->renderPlugins() ) {
-        KConfigGroup group = sharedConfig->group( QString( "plugin_" ) + plugin->nameId() );
+        KConfigGroup group = sharedConfig->group( QStringLiteral( "plugin_" ) + plugin->nameId() );
 
         const QHash<QString,QVariant> hash = plugin->settings();
 
@@ -1634,7 +1634,7 @@ void MarblePart::readPluginSettings()
     KSharedConfig::Ptr sharedConfig = KSharedConfig::openConfig();
 
     for( RenderPlugin *plugin: m_controlView->marbleWidget()->renderPlugins() ) {
-        KConfigGroup group = sharedConfig->group( QString( "plugin_" ) + plugin->nameId() );
+        KConfigGroup group = sharedConfig->group( QStringLiteral( "plugin_" ) + plugin->nameId() );
 
         QHash<QString,QVariant> hash;
 

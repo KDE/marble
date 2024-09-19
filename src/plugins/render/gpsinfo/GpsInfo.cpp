@@ -145,16 +145,16 @@ void GpsInfo::updateLocation( const GeoDataCoordinates& coordinates, qreal)
         break;
     }
 
-    m_widget.SpeedValue->setText( QString( " %1 %2" )
+    m_widget.SpeedValue->setText( QStringLiteral( " %1 %2" )
                                  .arg( QLocale().toString(speed, 'f', 1 ) )
                                  .arg( speedString ) );
-    m_widget.AltitudeValue->setText( QString( " %1 %2" )
+    m_widget.AltitudeValue->setText( QStringLiteral( " %1 %2" )
                                     .arg( QLocale().toString(altitude, 'f', 1 ) )
                                     .arg( distanceString ) );
-    m_widget.DirectionValue->setText( QString( " %1 %2" )
+    m_widget.DirectionValue->setText( QStringLiteral( " %1 %2" )
                                      .arg( QLocale().toString(direction, 'f', 1 ) )
                                      .arg( "d" ) );
-    m_widget.PrecisionValue->setText( QString( " %1 %2" )
+    m_widget.PrecisionValue->setText( QStringLiteral( " %1 %2" )
                                      .arg( QLocale().toString(precision, 'f', 1 ) )
                                      .arg( distanceString ) );
 

@@ -47,7 +47,7 @@ bool BBCWeatherItem::request( const QString& type )
 
 QString BBCWeatherItem::service() const
 {
-    return QString( "BBC" );
+    return QStringLiteral( "BBC" );
 }
 
 void BBCWeatherItem::addDownloadedFile( const QString& url, const QString& type )
@@ -70,13 +70,13 @@ void BBCWeatherItem::setBbcId( quint32 id )
 
 QUrl BBCWeatherItem::observationUrl() const
 {
-    return QUrl( QString( "http://newsrss.bbc.co.uk/weather/forecast/%1/ObservationsRSS.xml" )
+    return QUrl( QStringLiteral( "http://newsrss.bbc.co.uk/weather/forecast/%1/ObservationsRSS.xml" )
                     .arg( QString::number( bbcId() ) ) );
 }
 
 QUrl BBCWeatherItem::forecastUrl() const
 {
-    return QUrl( QString( "http://newsrss.bbc.co.uk/weather/forecast/%1/Next3DaysRSS.xml" )
+    return QUrl( QStringLiteral( "http://newsrss.bbc.co.uk/weather/forecast/%1/Next3DaysRSS.xml" )
                     .arg( QString::number( bbcId() ) ) );
 }
 

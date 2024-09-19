@@ -96,7 +96,7 @@ void OpenDesktopItem::openBrowser()
 
 QUrl OpenDesktopItem::profileUrl() const
 {
-   return QUrl( QString( "http://opendesktop.org/usermanager/search.php?username=%1" ).arg( id() ) );
+   return QUrl( QStringLiteral( "http://opendesktop.org/usermanager/search.php?username=%1" ).arg( id() ) );
 }
 
 QUrl OpenDesktopItem::avatarUrl() const

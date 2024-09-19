@@ -64,7 +64,7 @@ void HostipRunner::slotLookupFinished(const QHostInfo &info)
     if ( !info.addresses().isEmpty() ) {
         m_hostInfo = info;
         QString hostAddress = info.addresses().first().toString();
-        QString query = QString( "http://api.hostip.info/get_html.php?ip=%1&position=true" ).arg( hostAddress );
+        QString query = QStringLiteral( "http://api.hostip.info/get_html.php?ip=%1&position=true" ).arg( hostAddress );
         m_request.setUrl( QUrl( query ) );
 
         // @todo FIXME Must currently be done in the main thread, see bug 257376

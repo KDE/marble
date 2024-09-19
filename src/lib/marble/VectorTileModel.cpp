@@ -178,7 +178,7 @@ void VectorTileModel::updateTile(const TileId &idWithMapThemeHash, GeoDataDocume
         return;
     }
 
-    document->setName(QString("%1/%2/%3").arg(id.zoomLevel()).arg(id.x()).arg(id.y()));
+    document->setName(QStringLiteral("%1/%2/%3").arg(id.zoomLevel()).arg(id.x()).arg(id.y()));
     m_garbageQueue << document;
     if (m_documents.contains(id)) {
         m_documents.remove(id);

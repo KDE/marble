@@ -119,7 +119,7 @@ QString RenderState::Private::toString( const RenderState &state, int level ) co
     case Marble::Incomplete:       status = "Incomplete"; break;
     }
     QString const name = ( state.name().isEmpty() ? "Anonymous renderer" : state.name() );
-    QString result = QString("%1%2%3: %4").arg( prefix, indent, name, status );
+    QString result = QStringLiteral("%1%2%3: %4").arg( prefix, indent, name, status );
 
     for( const RenderState &child: state.d->m_children ) {
         result += toString( child, level+1 );

@@ -165,7 +165,7 @@ void MovieCapture::recordFrame()
                 << "-r" << QString::number(fps())
                 << "-f" << "rawvideo"
                 << "-pix_fmt" << "rgb24"
-                << "-s" << QString("%1x%2").arg( screenshot.width() ).arg( screenshot.height() )
+                << "-s" << QStringLiteral("%1x%2").arg( screenshot.width() ).arg( screenshot.height() )
                 << "-i" << "pipe:"
                 << "-b" << "2000k"
                 << d->destinationFile;

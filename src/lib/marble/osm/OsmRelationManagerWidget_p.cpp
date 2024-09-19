@@ -47,7 +47,7 @@ void OsmRelationManagerWidgetPrivate::populateRelationsList()
         for ( ; it != end; ++it ) {
 
             if ( !m_allRelations->contains( it.key().id ) ) {
-                mDebug()<< QString( "Relation %1 is not loaded in the Annotate Plugin" ).arg( it.key().id );
+                mDebug()<< QStringLiteral( "Relation %1 is not loaded in the Annotate Plugin" ).arg( it.key().id );
                 continue;
             }
 

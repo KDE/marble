@@ -135,14 +135,14 @@ void setXMLAttribute(QDomElement &elem, const QString& tag, const QString& attr,
 QSvgRenderer* OsmcSymbol::parseForeground(const QString &fg)
 {
     if (m_precoloredForegroundTypes.contains(fg)) {
-        return new QSvgRenderer(QString(":/osmc-symbols/%1.svg").arg(fg));
+        return new QSvgRenderer(QStringLiteral(":/osmc-symbols/%1.svg").arg(fg));
     }
 
     QString color = fg.section('_', 0, 0);
     QString type = fg.section('_', 1, -1);
     if (QColor::isValidColorName(color) && m_foregroundTypes.contains(type)) {
         // Open svg resource and load contents to QByteArray
-        QFile file(QString(":/osmc-symbols/%1.svg").arg(type));
+        QFile file(QStringLiteral(":/osmc-symbols/%1.svg").arg(type));
         file.open(QIODevice::ReadOnly);
         QByteArray baData = file.readAll();
 

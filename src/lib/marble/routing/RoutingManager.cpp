@@ -84,7 +84,7 @@ public:
 
     static GeoDataFolder *createFolderFromRequest(const RouteRequest &request);
 
-    static QString stateFile( const QString &name = QString( "route.kml" ) );
+    static QString stateFile( const QString &name = QStringLiteral( "route.kml" ) );
 
     void saveRoute( const QString &filename );
 

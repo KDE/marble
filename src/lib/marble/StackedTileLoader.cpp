@@ -166,7 +166,7 @@ int StackedTileLoader::tileCount() const
 
 void StackedTileLoader::setVolatileCacheLimit( quint64 kiloBytes )
 {
-    mDebug() << QString("Setting tile cache to %1 kilobytes.").arg( kiloBytes );
+    mDebug() << QStringLiteral("Setting tile cache to %1 kilobytes.").arg( kiloBytes );
     d->m_tileCache.setMaxCost( kiloBytes * 1024 );
 }
 

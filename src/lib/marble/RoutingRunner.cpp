@@ -60,7 +60,7 @@ const QString RoutingRunner::lengthString(qreal length) const
         break;
     }
 
-    return QString( "%1 %2" ).arg( length, 0, 'f', precision ).arg( distanceUnit );
+    return QStringLiteral( "%1 %2" ).arg( length, 0, 'f', precision ).arg( distanceUnit );
 }
 
 const QString RoutingRunner::durationString(const QTime& duration) const

@@ -788,7 +788,7 @@ void NewstuffModel::mapInstalled( int exitStatus )
         emit installationFinished( d->m_currentAction.first );
     } else {
         mDebug() << "Process exit status " << exitStatus << " indicates an error.";
-        emit installationFailed( d->m_currentAction.first , QString( "Unable to unpack file. Process exited with status code %1." ).arg( exitStatus ) );
+        emit installationFailed( d->m_currentAction.first , QStringLiteral( "Unable to unpack file. Process exited with status code %1." ).arg( exitStatus ) );
     }
     QModelIndex const affected = index( d->m_currentAction.first );
 
@@ -827,7 +827,7 @@ void NewstuffModel::contentsListed( int exitStatus )
         d->m_unpackProcess->start( "tar", arguments );
     } else {
         mDebug() << "Process exit status " << exitStatus << " indicates an error.";
-        emit installationFailed( d->m_currentAction.first , QString( "Unable to list file contents. Process exited with status code %1." ).arg( exitStatus ) );
+        emit installationFailed( d->m_currentAction.first , QStringLiteral( "Unable to list file contents. Process exited with status code %1." ).arg( exitStatus ) );
 
         { // <-- do not remove, mutex locker scope
             QMutexLocker locker( &d->m_mutex );

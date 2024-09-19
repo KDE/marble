@@ -24,7 +24,7 @@ void GeoNamesWeatherItem::addDownloadedFile( const QString& url, const QString& 
 
 QString GeoNamesWeatherItem::service() const
 {
-    return QString( "GeoNames" );
+    return QStringLiteral( "GeoNames" );
 }
 
 QString GeoNamesWeatherItem::creditHtml() const

@@ -490,7 +490,7 @@ void MergedLayerDecorator::Private::paintSunShading( QImage *tileImage, const Ti
 
 void MergedLayerDecorator::Private::paintTileId( QImage *tileImage, const TileId &id ) const
 {
-    QString filename = QString( "%1_%2.jpg" )
+    QString filename = QStringLiteral( "%1_%2.jpg" )
             .arg(id.x(), tileDigits, 10, QLatin1Char('0'))
             .arg(id.y(), tileDigits, 10, QLatin1Char('0'));
 
@@ -534,7 +534,7 @@ void MergedLayerDecorator::Private::paintTileId( QImage *tileImage, const TileId
 
     QPointF  baseline1( ( tileImage->width() - testFm.boundingRect(filename).width() ) / 2,
                         ( tileImage->height() * 0.25) );
-    outlinepath.addText( baseline1, testFont, QString( "level: %1" ).arg(id.zoomLevel()) );
+    outlinepath.addText( baseline1, testFont, QStringLiteral( "level: %1" ).arg(id.zoomLevel()) );
 
     QPointF  baseline2( ( tileImage->width() - testFm.boundingRect(filename).width() ) / 2,
                         tileImage->height() * 0.50 );

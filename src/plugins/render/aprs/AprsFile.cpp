@@ -26,7 +26,7 @@ AprsFile::~AprsFile()
 QString
 AprsFile::sourceName() const
 {
-    return QString( "File" );
+    return QStringLiteral( "File" );
 }
 
 bool

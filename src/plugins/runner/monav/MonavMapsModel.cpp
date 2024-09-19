@@ -67,7 +67,7 @@ QVariant MonavMapsModel::data ( const QModelIndex & index, int role ) const
             case 1:
                 return m_data.at( row ).transport();
             case 2:
-                return QString( "%1 MB" ).arg( 1 + m_data.at( row ).size() / 1024 / 1024 );
+                return QStringLiteral( "%1 MB" ).arg( 1 + m_data.at( row ).size() / 1024 / 1024 );
             case 3: {
                 QString payload = m_data.at( row ).payload();
                 payload = payload.mid(payload.lastIndexOf(QLatin1Char('/')) + 1);

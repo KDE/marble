@@ -46,7 +46,7 @@ TimeControlWidget::~TimeControlWidget()
 
 void TimeControlWidget::updateSpeedLabel( int speed )
 {
-    m_uiWidget->speedLabel->setText( QString( "%1x" ).arg( speed ) );
+    m_uiWidget->speedLabel->setText( QStringLiteral( "%1x" ).arg( speed ) );
 }
 
 void TimeControlWidget::updateRefreshRate( int seconds )
@@ -82,7 +82,7 @@ void TimeControlWidget::showEvent(QShowEvent* event)
         // Loading all options
         m_uiWidget->refreshIntervalSpinBox->setValue( m_clock->updateInterval() );
         m_uiWidget->speedSlider->setValue( m_clock->speed() );
-        m_uiWidget->speedLabel->setText( QString( "%1x" ).arg( m_clock->speed() ) );
+        m_uiWidget->speedLabel->setText( QStringLiteral( "%1x" ).arg( m_clock->speed() ) );
         updateDateTime();
         m_lastDateTime = m_clock->dateTime();
         m_uiWidget->newDateTimeEdit->setDateTime( m_lastDateTime.addSecs( m_clock->timezone() ) );

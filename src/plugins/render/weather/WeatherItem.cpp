@@ -101,12 +101,12 @@ class WeatherItemPrivate
         QString toolTip;
         toolTip += tr( "Station: %1\n" ).arg( m_parent->stationName() );
         if ( m_currentWeather.hasValidCondition() && m_currentWeather.hasValidTemperature() )
-            toolTip += QString( "%2, %3\n" ).arg( m_currentWeather.conditionString() )
+            toolTip += QStringLiteral( "%2, %3\n" ).arg( m_currentWeather.conditionString() )
                                            .arg( temperatureString() );
         else if ( m_currentWeather.hasValidCondition() )
-            toolTip += QString( "%2\n" ).arg( m_currentWeather.conditionString() );
+            toolTip += QStringLiteral( "%2\n" ).arg( m_currentWeather.conditionString() );
         else if ( m_currentWeather.hasValidTemperature() )
-            toolTip += QString( "%2\n" ).arg( temperatureString() );
+            toolTip += QStringLiteral( "%2\n" ).arg( temperatureString() );
 
         if ( m_currentWeather.hasValidWindSpeed() && m_currentWeather.hasValidWindDirection() )
             toolTip += tr( "Wind: %4, %5\n", "Wind: WindSpeed, WindDirection" )

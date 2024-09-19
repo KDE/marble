@@ -283,7 +283,7 @@ QString GeoSceneTileDataset::relativeTileFileName( const TileId &id ) const
 
     switch ( m_storageLayoutMode ) {
     case GeoSceneTileDataset::Marble:
-        relFileName = QString( "%1/%2/%3/%3_%4.%5" )
+        relFileName = QStringLiteral( "%1/%2/%3/%3_%4.%5" )
             .arg( themeStr() )
             .arg( id.zoomLevel() )
             .arg(id.y(), tileDigits, 10, QLatin1Char('0'))
@@ -291,7 +291,7 @@ QString GeoSceneTileDataset::relativeTileFileName( const TileId &id ) const
             .arg( suffix );
         break;
     case GeoSceneTileDataset::OpenStreetMap:
-        relFileName = QString( "%1/%2/%3/%4.%5" )
+        relFileName = QStringLiteral( "%1/%2/%3/%4.%5" )
             .arg( themeStr() )
             .arg( id.zoomLevel() )
             .arg( id.x() )
@@ -299,7 +299,7 @@ QString GeoSceneTileDataset::relativeTileFileName( const TileId &id ) const
             .arg( suffix );
         break;
     case GeoSceneTileDataset::TileMapService:
-        relFileName = QString( "%1/%2/%3/%4.%5" )
+        relFileName = QStringLiteral( "%1/%2/%3/%4.%5" )
             .arg( themeStr() )
             .arg( id.zoomLevel() )
             .arg( id.x() )

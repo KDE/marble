@@ -113,11 +113,11 @@ void MarbleLineEdit::setDecorator(const QPixmap &decorator)
     QString const prefixDirection = layoutDirection() == Qt::LeftToRight ? "left" : "right";
     QString decoratorStyleSheet;
     if ( !d->m_decoratorPixmap.isNull() ) {
-        decoratorStyleSheet = QString( "; padding-%1: %2" ).arg( prefixDirection ).arg( padding );
+        decoratorStyleSheet = QStringLiteral( "; padding-%1: %2" ).arg( prefixDirection ).arg( padding );
     }
     // Padding for clear button to avoid text underflow
     QString const postfixDirection  = layoutDirection() == Qt::LeftToRight ? "right" : "left";
-    QString styleSheet = QString( ":enabled { padding-%1: %2; %3}").arg( postfixDirection ).arg( padding ).arg( decoratorStyleSheet );
+    QString styleSheet = QStringLiteral( ":enabled { padding-%1: %2; %3}").arg( postfixDirection ).arg( padding ).arg( decoratorStyleSheet );
 
     bool const smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
     if ( !smallScreen ) {

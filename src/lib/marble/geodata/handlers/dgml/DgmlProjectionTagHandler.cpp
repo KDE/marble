@@ -38,7 +38,7 @@ GeoNode* DgmlProjectionTagHandler::parse( GeoParser& parser ) const
         } else if (nameStr == QLatin1String("Mercator")) {
             tileProjectionType = GeoSceneAbstractTileProjection::Mercator;
         } else {
-            parser.raiseWarning( QString( "Value not allowed for attribute name: %1" ).arg( nameStr ));
+            parser.raiseWarning( QStringLiteral( "Value not allowed for attribute name: %1" ).arg( nameStr ));
         }
 
         parentItem.nodeAs<GeoSceneTileDataset>()->setTileProjection(tileProjectionType);

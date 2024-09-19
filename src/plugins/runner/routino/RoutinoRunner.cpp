@@ -233,13 +233,13 @@ void RoutinoRunner::retrieveRoute( const RouteRequest *route )
     {
         double fLon = route->at(i).longitude( GeoDataCoordinates::Degree );
         double fLat = route->at(i).latitude( GeoDataCoordinates::Degree );
-        params << QString("--lat%1=%2").arg(i+1).arg(fLat, 0, 'f', 8);
-        params << QString("--lon%1=%2").arg(i+1).arg(fLon, 0, 'f', 8);
+        params << QStringLiteral("--lat%1=%2").arg(i+1).arg(fLat, 0, 'f', 8);
+        params << QStringLiteral("--lon%1=%2").arg(i+1).arg(fLon, 0, 'f', 8);
     }
 
     QHash<QString, QVariant> settings = route->routingProfile().pluginSettings()[QStringLiteral("routino")];
     QString transport = settings[QStringLiteral("transport")].toString();
-    params << QString( "--transport=%0" ).arg( transport );
+    params << QStringLiteral( "--transport=%0" ).arg( transport );
 
     if (settings[QStringLiteral("method")] == QLatin1String("shortest")) {
         params << "--shortest";

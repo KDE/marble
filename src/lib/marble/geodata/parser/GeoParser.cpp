@@ -131,7 +131,7 @@ void GeoParser::parseDocument()
     QualifiedName qName( name().toString(), namespaceUri().toString() );
 
     if( tokenType() == QXmlStreamReader::Invalid )
-        raiseWarning( QString( "%1: %2" ).arg( error() ).arg( errorString() ) );
+        raiseWarning( QStringLiteral( "%1: %2" ).arg( error() ).arg( errorString() ) );
 
     GeoStackItem stackItem( qName, nullptr );
 

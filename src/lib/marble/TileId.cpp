@@ -61,7 +61,7 @@ TileId TileId::fromCoordinates(const GeoDataCoordinates &coords, int zoomLevel)
 #ifndef QT_NO_DEBUG_STREAM
 QDebug operator<<( QDebug dbg, const Marble::TileId &id )
 {
-    return dbg << QString( "Marble::TileId(%1, %2, %3, %4)" ).arg( id.mapThemeIdHash() )
+    return dbg << QStringLiteral( "Marble::TileId(%1, %2, %3, %4)" ).arg( id.mapThemeIdHash() )
                                                              .arg( id.zoomLevel() )
                                                              .arg( id.x() )
                                                              .arg( id.y() );

@@ -73,7 +73,7 @@ QVector<OsmPlacemark> OsmDatabase::find( const DatabaseQuery &userQuery )
         return QVector<OsmPlacemark>();
     }
 
-    QSqlDatabase database = QSqlDatabase::addDatabase( "QSQLITE", QString( "marble/local-osm-search-%1" ).arg( reinterpret_cast<size_t>( this ) ) );
+    QSqlDatabase database = QSqlDatabase::addDatabase( "QSQLITE", QStringLiteral( "marble/local-osm-search-%1" ).arg( reinterpret_cast<size_t>( this ) ) );
 
     QVector<OsmPlacemark> result;
     QElapsedTimer timer;
@@ -253,7 +253,7 @@ QString OsmDatabase::formatDistance( const GeoDataCoordinates &a, const GeoDataC
         distance *= KM2NM;
     }
 
-    QString const fuzzyDistance = QString( "%1 %2" ).arg( distance, 0, 'f', precision ).arg( distanceUnit );
+    QString const fuzzyDistance = QStringLiteral( "%1 %2" ).arg( distance, 0, 'f', precision ).arg( distanceUnit );
 
     int direction = 180 + bearing( a, b ) * RAD2DEG;
 

@@ -89,7 +89,7 @@ void OpenDesktopModel::parseFile( const QByteArray& file )
                 item->setCoordinate( coor );
                 item->setFullName(firstName + QLatin1Char(' ') + lastName);
                 item->setLocation(city + QLatin1String(", ") + country);
-                item->setRole( !role.isEmpty() ? role : QString( "nothing" ) );
+                item->setRole( !role.isEmpty() ? role : QStringLiteral( "nothing" ) );
                 downloadItem( avatarUrl, "avatar", item );
                 items << item;
             }

@@ -184,7 +184,7 @@ QString CloudSyncManager::apiPath() const
 
 QUrl CloudSyncManager::apiUrl() const
 {
-    return QUrl( QString( "%0%1:%2@%3/%4" )
+    return QUrl( QStringLiteral( "%0%1:%2@%3/%4" )
                  .arg( d->m_owncloudProtocol )
                  .arg( d->m_owncloudUsername ).arg( d->m_owncloudPassword )
                  .arg( d->m_ownloudServer ).arg( apiPath() ) );

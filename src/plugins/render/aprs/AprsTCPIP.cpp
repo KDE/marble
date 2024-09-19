@@ -27,7 +27,7 @@ AprsTCPIP::~AprsTCPIP()
 QString
 AprsTCPIP::sourceName() const
 {
-    return QString( "TCP" );
+    return QStringLiteral( "TCP" );
 }
 
 bool

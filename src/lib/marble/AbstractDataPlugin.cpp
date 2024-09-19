@@ -65,7 +65,7 @@ QStringList AbstractDataPlugin::backendTypes() const
 
 QString AbstractDataPlugin::renderPolicy() const
 {
-    return QString( "ALWAYS" );
+    return QStringLiteral( "ALWAYS" );
 }
 
 QStringList AbstractDataPlugin::renderPosition() const

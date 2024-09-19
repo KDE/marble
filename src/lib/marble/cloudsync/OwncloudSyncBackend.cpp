@@ -94,9 +94,9 @@ OwncloudSyncBackend::~OwncloudSyncBackend()
 void OwncloudSyncBackend::uploadRoute( const QString &timestamp )
 {
     QString word = "----MarbleCloudBoundary";
-    QString boundary = QString( "--%0" ).arg( word );
+    QString boundary = QStringLiteral( "--%0" ).arg( word );
     QNetworkRequest request( endpointUrl( d->m_routeUploadEndpoint ) );
-    request.setHeader( QNetworkRequest::ContentTypeHeader, QString( "multipart/form-data; boundary=%0" ).arg( word ) );
+    request.setHeader( QNetworkRequest::ContentTypeHeader, QStringLiteral( "multipart/form-data; boundary=%0" ).arg( word ) );
 
     QByteArray data;
     data.append( QString( boundary + "\r\n" ).toUtf8() );
@@ -114,7 +114,7 @@ void OwncloudSyncBackend::uploadRoute( const QString &timestamp )
     data.append( "\r\n" );
     data.append( QString( boundary + "\r\n" ).toUtf8() );
 
-    QFile kmlFile( d->m_cacheDir.absolutePath() + QString( "/%0.kml" ).arg( timestamp ) );
+    QFile kmlFile( d->m_cacheDir.absolutePath() + QStringLiteral( "/%0.kml" ).arg( timestamp ) );
 
     if( !kmlFile.open( QFile::ReadOnly ) ) {
         mDebug() << "Could not open " << timestamp << ".kml. Either it has not been saved" <<
@@ -168,7 +168,7 @@ void OwncloudSyncBackend::uploadRoute( const QString &timestamp )
     data.append( QString( boundary + "\r\n" ).toUtf8() );
 
     // KML part
-    data.append( QString( "Content-Disposition: form-data; name=\"kml\"; filename=\"%0.kml\"" ).arg( timestamp ).toUtf8() );
+    data.append( QStringLiteral( "Content-Disposition: form-data; name=\"kml\"; filename=\"%0.kml\"" ).arg( timestamp ).toUtf8() );
     data.append( "\r\n" );
     data.append( "Content-Type: application/vnd.google-earth.kml+xml" );
     data.append( "\r\n\r\n" );
@@ -181,7 +181,7 @@ void OwncloudSyncBackend::uploadRoute( const QString &timestamp )
     kmlFile.close();
 
     // Preview part
-    data.append( QString( "Content-Disposition: form-data; name=\"preview\"; filename=\"%0.jpg\"" ).arg( timestamp ).toUtf8() );
+    data.append( QStringLiteral( "Content-Disposition: form-data; name=\"preview\"; filename=\"%0.jpg\"" ).arg( timestamp ).toUtf8() );
     data.append( "\r\n" );
     data.append( "Content-Type: image/jpg" );
     data.append( "\r\n\r\n" );
@@ -235,7 +235,7 @@ QPixmap OwncloudSyncBackend::createPreview( const QString &timestamp ) const
     mapWidget.resize( 512, 512 );
 
     RoutingManager* manager = mapWidget.model()->routingManager();
-    manager->loadRoute( d->m_cacheDir.absolutePath() + QString( "/%0.kml" ).arg( timestamp ) );
+    manager->loadRoute( d->m_cacheDir.absolutePath() + QStringLiteral( "/%0.kml" ).arg( timestamp ) );
     GeoDataLatLonBox const bbox = manager->routingModel()->route().bounds();
 
     if ( !bbox.isEmpty() ) {
@@ -251,7 +251,7 @@ QPixmap OwncloudSyncBackend::createPreview( const QString &timestamp ) const
 
 QString OwncloudSyncBackend::routeName( const QString &timestamp ) const
 {
-    QFile file( d->m_cacheDir.absolutePath() + QString( "/%0.kml" ).arg( timestamp ) );
+    QFile file( d->m_cacheDir.absolutePath() + QStringLiteral( "/%0.kml" ).arg( timestamp ) );
     file.open( QFile::ReadOnly );
 
     GeoDataParser parser( GeoData_KML );
@@ -373,7 +373,7 @@ void OwncloudSyncBackend::saveDownloadedRoute()
                     ". Check if your user has sufficient permissions for this operation.";
     }
     
-    QString kmlFilePath = QString( "%0/%1.kml").arg( d->m_cacheDir.absolutePath(), timestamp );
+    QString kmlFilePath = QStringLiteral( "%0/%1.kml").arg( d->m_cacheDir.absolutePath(), timestamp );
     QFile kmlFile( kmlFilePath );
     bool fileOpened = kmlFile.open( QFile::ReadWrite );
 
@@ -386,14 +386,14 @@ void OwncloudSyncBackend::saveDownloadedRoute()
     kmlFile.write( d->m_routeDownloadReply->readAll() );
     kmlFile.close();
 
-    QString previewPath = QString( "%0/preview/" ).arg( d->m_cacheDir.absolutePath() );
+    QString previewPath = QStringLiteral( "%0/preview/" ).arg( d->m_cacheDir.absolutePath() );
     bool previewPathCreated = d->m_cacheDir.mkpath( previewPath );
     if ( !previewPathCreated ) {
         mDebug() << "Couldn't create the path " << previewPath <<
                     ". Check if your user has sufficient permissions for this operation.";
     }
 
-    QString previewFilePath = QString( "%0/preview/%1.jpg").arg( d->m_cacheDir.absolutePath(), timestamp );
+    QString previewFilePath = QStringLiteral( "%0/preview/%1.jpg").arg( d->m_cacheDir.absolutePath(), timestamp );
     QFile previewFile( previewFilePath );
     bool previewFileOpened = previewFile.open( QFile::ReadWrite );
 
@@ -424,8 +424,8 @@ QUrl OwncloudSyncBackend::endpointUrl( const QString &endpoint, const QString &p
 
 void OwncloudSyncBackend::removeFromCache( const QDir &cacheDir, const QString &timestamp )
 {
-    bool fileRemoved = QFile( QString( "%0/%1.kml" ).arg( cacheDir.absolutePath(), timestamp ) ).remove();
-    bool previewRemoved = QFile( QString( "%0/preview/%1.jpg" ).arg( cacheDir.absolutePath(), timestamp ) ).remove();
+    bool fileRemoved = QFile( QStringLiteral( "%0/%1.kml" ).arg( cacheDir.absolutePath(), timestamp ) ).remove();
+    bool previewRemoved = QFile( QStringLiteral( "%0/preview/%1.jpg" ).arg( cacheDir.absolutePath(), timestamp ) ).remove();
     if ( !fileRemoved || !previewRemoved ) {
         mDebug() << "Failed to remove locally cached route " << timestamp << ". It might "
                     "have been removed already, or its directory is missing / not writable.";
