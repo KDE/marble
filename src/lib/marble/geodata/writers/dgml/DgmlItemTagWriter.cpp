@@ -5,35 +5,34 @@
 
 #include "DgmlItemTagWriter.h"
 
+#include "DgmlElementDictionary.h"
+#include "GeoSceneIcon.h"
+#include "GeoSceneItem.h"
+#include "GeoSceneSection.h"
 #include "GeoSceneTypes.h"
 #include "GeoWriter.h"
-#include "GeoSceneSection.h"
-#include "GeoSceneItem.h"
-#include "GeoSceneIcon.h"
-#include "DgmlElementDictionary.h"
 
 namespace Marble
 {
 
-static GeoTagWriterRegistrar s_writerItem( GeoTagWriter::QualifiedName( GeoSceneTypes::GeoSceneItemType, dgml::dgmlTag_nameSpace20 ),
-                                                                            new DgmlItemTagWriter() );
+static GeoTagWriterRegistrar s_writerItem(GeoTagWriter::QualifiedName(GeoSceneTypes::GeoSceneItemType, dgml::dgmlTag_nameSpace20), new DgmlItemTagWriter());
 
-bool DgmlItemTagWriter::write(const GeoNode *node, GeoWriter& writer) const
+bool DgmlItemTagWriter::write(const GeoNode *node, GeoWriter &writer) const
 {
-    const GeoSceneItem *item = static_cast<const GeoSceneItem*>( node );
-    
-    writer.writeStartElement( QString::fromUtf8(dgml::dgmlTag_Item) );
-    writer.writeAttribute( "name", item->name() );
-    
-    writer.writeStartElement( QString::fromUtf8(dgml::dgmlTag_Icon) );
-    if( !item->icon()->pixmap().isEmpty() ) {
-        writer.writeAttribute( "pixmap", item->icon()->pixmap() );
+    const GeoSceneItem *item = static_cast<const GeoSceneItem *>(node);
+
+    writer.writeStartElement(QString::fromUtf8(dgml::dgmlTag_Item));
+    writer.writeAttribute("name", item->name());
+
+    writer.writeStartElement(QString::fromUtf8(dgml::dgmlTag_Icon));
+    if (!item->icon()->pixmap().isEmpty()) {
+        writer.writeAttribute("pixmap", item->icon()->pixmap());
     } else if (item->icon()->color().isValid()) {
-        writer.writeAttribute( "color", item->icon()->color().name() );
+        writer.writeAttribute("color", item->icon()->color().name());
     }
     writer.writeEndElement();
-    writer.writeElement( "text", item->text() );
-    
+    writer.writeElement("text", item->text());
+
     writer.writeEndElement();
     return true;
 }

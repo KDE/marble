@@ -6,22 +6,22 @@
 #include "OpenLocationCodeSearchPlugin.h"
 #include "OpenLocationCodeSearchRunner.h"
 
-namespace Marble {
-
-OpenLocationCodeSearchPlugin::OpenLocationCodeSearchPlugin( QObject *parent ):
-    SearchRunnerPlugin( parent )
+namespace Marble
 {
 
+OpenLocationCodeSearchPlugin::OpenLocationCodeSearchPlugin(QObject *parent)
+    : SearchRunnerPlugin(parent)
+{
 }
 
 QString OpenLocationCodeSearchPlugin::name() const
 {
-    return tr( "Open Location Code Search" );
+    return tr("Open Location Code Search");
 }
 
 QString OpenLocationCodeSearchPlugin::guiString() const
 {
-    return tr( "Open Location Code" );
+    return tr("Open Location Code");
 }
 
 QString OpenLocationCodeSearchPlugin::nameId() const
@@ -36,7 +36,7 @@ QString OpenLocationCodeSearchPlugin::version() const
 
 QString OpenLocationCodeSearchPlugin::description() const
 {
-    return tr( "Decodes an Open Location Code and creates a placemark with the respective coordinates" );
+    return tr("Decodes an Open Location Code and creates a placemark with the respective coordinates");
 }
 
 QString OpenLocationCodeSearchPlugin::copyrightYears() const
@@ -46,11 +46,10 @@ QString OpenLocationCodeSearchPlugin::copyrightYears() const
 
 QVector<PluginAuthor> OpenLocationCodeSearchPlugin::pluginAuthors() const
 {
-    return QVector<PluginAuthor>()
-            << PluginAuthor(QStringLiteral("Constantin Mihalache"), QStringLiteral("mihalache.c94@gmail.com"));
+    return QVector<PluginAuthor>() << PluginAuthor(QStringLiteral("Constantin Mihalache"), QStringLiteral("mihalache.c94@gmail.com"));
 }
 
-SearchRunner* OpenLocationCodeSearchPlugin::newRunner() const
+SearchRunner *OpenLocationCodeSearchPlugin::newRunner() const
 {
     return new OpenLocationCodeSearchRunner;
 }

@@ -14,21 +14,21 @@
 namespace Marble
 {
 
-GosmorePlugin::GosmorePlugin( QObject *parent ) :
-    ReverseGeocodingRunnerPlugin( parent )
+GosmorePlugin::GosmorePlugin(QObject *parent)
+    : ReverseGeocodingRunnerPlugin(parent)
 {
     setSupportedCelestialBodies(QStringList(QStringLiteral("earth")));
-    setCanWorkOffline( true );
+    setCanWorkOffline(true);
 }
 
 QString GosmorePlugin::name() const
 {
-    return tr( "Gosmore Reverse Geocoding" );
+    return tr("Gosmore Reverse Geocoding");
 }
 
 QString GosmorePlugin::guiString() const
 {
-    return tr( "Gosmore" );
+    return tr("Gosmore");
 }
 
 QString GosmorePlugin::nameId() const
@@ -43,7 +43,7 @@ QString GosmorePlugin::version() const
 
 QString GosmorePlugin::description() const
 {
-    return tr( "Offline reverse geocoding using Gosmore." );
+    return tr("Offline reverse geocoding using Gosmore.");
 }
 
 QString GosmorePlugin::copyrightYears() const
@@ -53,12 +53,11 @@ QString GosmorePlugin::copyrightYears() const
 
 QVector<PluginAuthor> GosmorePlugin::pluginAuthors() const
 {
-    return QVector<PluginAuthor>()
-            << PluginAuthor(QStringLiteral("Dennis Nienhüser"), QStringLiteral("nienhueser@kde.org"))
-            << PluginAuthor(QStringLiteral("Bernhard Beschow"), QStringLiteral("bbeschow@cs.tu-berlin.de"));
+    return QVector<PluginAuthor>() << PluginAuthor(QStringLiteral("Dennis Nienhüser"), QStringLiteral("nienhueser@kde.org"))
+                                   << PluginAuthor(QStringLiteral("Bernhard Beschow"), QStringLiteral("bbeschow@cs.tu-berlin.de"));
 }
 
-ReverseGeocodingRunner* GosmorePlugin::newRunner() const
+ReverseGeocodingRunner *GosmorePlugin::newRunner() const
 {
     return new GosmoreRunner;
 }
@@ -66,7 +65,7 @@ ReverseGeocodingRunner* GosmorePlugin::newRunner() const
 bool GosmorePlugin::canWork() const
 {
     QDir mapDir(MarbleDirs::localPath() + QLatin1String("/maps/earth/gosmore/"));
-    QFileInfo mapFile = QFileInfo ( mapDir, "gosmore.pak" );
+    QFileInfo mapFile = QFileInfo(mapDir, "gosmore.pak");
     return mapFile.exists();
 }
 

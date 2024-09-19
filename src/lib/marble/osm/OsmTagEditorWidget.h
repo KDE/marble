@@ -6,8 +6,8 @@
 #ifndef MARBLE_OSMTAGEDITORWIDGET_H
 #define MARBLE_OSMTAGEDITORWIDGET_H
 
-#include <QWidget>
 #include "marble_export.h"
+#include <QWidget>
 
 #include "MarbleGlobal.h"
 
@@ -26,7 +26,7 @@ class MARBLE_EXPORT OsmTagEditorWidget : public QWidget
     Q_OBJECT
 
 public:
-    explicit OsmTagEditorWidget( GeoDataPlacemark *placemark, QWidget *parent = nullptr );
+    explicit OsmTagEditorWidget(GeoDataPlacemark *placemark, QWidget *parent = nullptr);
     ~OsmTagEditorWidget() override;
 
     /**
@@ -38,18 +38,17 @@ public Q_SLOTS:
     void update();
     void addSelectedTag();
     void removeSelectedTag();
-    void handleDoubleClick( QTreeWidgetItem *item, int column );
-    void handleItemChanged( QTreeWidgetItem *item, int column );
+    void handleDoubleClick(QTreeWidgetItem *item, int column);
+    void handleItemChanged(QTreeWidgetItem *item, int column);
 
 Q_SIGNALS:
-    void placemarkChanged( GeoDataFeature *);
+    void placemarkChanged(GeoDataFeature *);
 
 private:
     friend class OsmTagEditorWidgetPrivate;
-    OsmTagEditorWidgetPrivate* const d;
+    OsmTagEditorWidgetPrivate *const d;
 };
 
 }
 
 #endif
- 

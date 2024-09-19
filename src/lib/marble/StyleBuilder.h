@@ -9,8 +9,8 @@
 #include "marble_export.h"
 
 #include <GeoDataPlacemark.h>
-#include <GeoDataStyle.h>
 #include <GeoDataRelation.h>
+#include <GeoDataStyle.h>
 
 #include <QHash>
 #include <QPair>
@@ -18,7 +18,8 @@
 class QFont;
 class QColor;
 
-namespace Marble {
+namespace Marble
+{
 class OsmPlacemarkData;
 
 class MARBLE_EXPORT StyleParameters
@@ -31,12 +32,7 @@ public:
     const GeoDataRelation *relation;
 };
 
-enum StyleEffect {
-    NoEffect,
-    InvertedEffect,
-    GrayscaleEffect,
-    RedModeEffect
-};
+enum StyleEffect { NoEffect, InvertedEffect, GrayscaleEffect, RedModeEffect };
 
 class MARBLE_EXPORT StyleBuilder
 {
@@ -50,10 +46,10 @@ public:
      * Return the label font of the placemark.
      */
     QFont defaultFont() const;
-    void setDefaultFont( const QFont& font );
+    void setDefaultFont(const QFont &font);
 
     QColor defaultLabelColor() const;
-    void setDefaultLabelColor( const QColor& color );
+    void setDefaultLabelColor(const QColor &color);
 
     GeoDataStyle::ConstPtr createStyle(const StyleParameters &parameters) const;
 
@@ -74,7 +70,7 @@ public:
 
     static int minimumZoomLevel(const GeoDataPlacemark::GeoDataVisualCategory &visualCategory);
 
-    static qint64 popularity(const GeoDataPlacemark* placemark);
+    static qint64 popularity(const GeoDataPlacemark *placemark);
 
     /**
      * @brief Returns the maximum zoom level in the theme.
@@ -84,7 +80,7 @@ public:
 
     static QString visualCategoryName(GeoDataPlacemark::GeoDataVisualCategory category);
 
-    static QColor effectColor(const QColor& color);
+    static QColor effectColor(const QColor &color);
     static StyleEffect styleEffect();
     static void setStyleEffect(StyleEffect effect);
 
@@ -102,7 +98,7 @@ private:
     Q_DISABLE_COPY(StyleBuilder)
 
     class Private;
-    Private * const d;
+    Private *const d;
 };
 
 }

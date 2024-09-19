@@ -15,11 +15,10 @@ class GeoWriter;
 class KmlObjectTagWriter
 {
 public:
-
     /**
      * Parses the id and targetId attributes and assign their values to the given object
      */
-    static void writeIdentifiers( GeoWriter &writer, const GeoDataObject* object );
+    static void writeIdentifiers(GeoWriter &writer, const GeoDataObject *object);
 
 private:
     KmlObjectTagWriter() = delete; // not implemented

@@ -17,19 +17,19 @@ namespace Marble
 class MonavMap
 {
 public:
-    void setDirectory( const QDir &dir );
+    void setDirectory(const QDir &dir);
 
     QDir directory() const;
 
-    bool containsPoint( const GeoDataCoordinates &point ) const;
+    bool containsPoint(const GeoDataCoordinates &point) const;
 
     qint64 size() const;
 
     void remove() const;
 
-    static bool areaLessThan( const MonavMap &first, const MonavMap &second );
+    static bool areaLessThan(const MonavMap &first, const MonavMap &second);
 
-    static bool nameLessThan( const MonavMap &first, const MonavMap &second );
+    static bool nameLessThan(const MonavMap &first, const MonavMap &second);
 
     QString transport() const;
 
@@ -44,7 +44,7 @@ public:
 private:
     QList<QFileInfo> files() const;
 
-    void parseBoundingBox( const QFileInfo &file );
+    void parseBoundingBox(const QFileInfo &file);
 
     QDir m_directory;
 

@@ -15,7 +15,7 @@ namespace Marble
 class GeoDataRelationPrivate;
 enum class OsmType;
 
-class GEODATA_EXPORT GeoDataRelation: public GeoDataFeature
+class GEODATA_EXPORT GeoDataRelation : public GeoDataFeature
 {
 public:
     enum RelationType {
@@ -45,14 +45,14 @@ public:
     GeoDataRelation();
     ~GeoDataRelation() override;
     GeoDataRelation(const GeoDataRelation &other);
-    GeoDataRelation & operator=(GeoDataRelation other);
+    GeoDataRelation &operator=(GeoDataRelation other);
     bool operator<(const GeoDataRelation &other) const;
 
-    const char* nodeType() const override;
-    GeoDataFeature * clone() const override;
+    const char *nodeType() const override;
+    GeoDataFeature *clone() const override;
 
-    void addMember(const GeoDataFeature* feature, qint64 id, OsmType type, const QString &role);
-    QSet<const GeoDataFeature*> members() const;
+    void addMember(const GeoDataFeature *feature, qint64 id, OsmType type, const QString &role);
+    QSet<const GeoDataFeature *> members() const;
 
     OsmPlacemarkData &osmData();
     const OsmPlacemarkData &osmData() const;
@@ -62,9 +62,8 @@ public:
     bool containsAnyOf(const QSet<qint64> &memberIds) const;
 
 private:
-    GeoDataRelationPrivate* d_ptr;
+    GeoDataRelationPrivate *d_ptr;
     Q_DECLARE_PRIVATE(GeoDataRelation)
-
 };
 
 }

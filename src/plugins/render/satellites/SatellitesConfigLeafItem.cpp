@@ -7,15 +7,16 @@
 
 #include <QVariant>
 
-namespace Marble {
+namespace Marble
+{
 
-SatellitesConfigLeafItem::SatellitesConfigLeafItem( const QString &name, const QString &id )
-    : SatellitesConfigAbstractItem( name ),
-      m_id( id ),
-      m_url( QString() ),
-      m_isChecked( false ),
-      m_isOrbitDisplayed( false )
-{ 
+SatellitesConfigLeafItem::SatellitesConfigLeafItem(const QString &name, const QString &id)
+    : SatellitesConfigAbstractItem(name)
+    , m_id(id)
+    , m_url(QString())
+    , m_isChecked(false)
+    , m_isOrbitDisplayed(false)
+{
 }
 
 SatellitesConfigLeafItem::~SatellitesConfigLeafItem()
@@ -25,45 +26,45 @@ SatellitesConfigLeafItem::~SatellitesConfigLeafItem()
 void SatellitesConfigLeafItem::loadSettings(const QHash<QString, QVariant> &settings)
 {
     const QStringList idList = settings.value(QStringLiteral("idList")).toStringList();
-    m_isChecked = idList.contains( m_id );
+    m_isChecked = idList.contains(m_id);
 }
 
-QVariant SatellitesConfigLeafItem::data( int column, int role ) const
+QVariant SatellitesConfigLeafItem::data(int column, int role) const
 {
-    QVariant base = SatellitesConfigAbstractItem::data( column, role );
-    if ( base.isValid() ) {
+    QVariant base = SatellitesConfigAbstractItem::data(column, role);
+    if (base.isValid()) {
         return base;
     }
 
-    switch ( role ) {
+    switch (role) {
     case UrlListRole:
-        if( !m_url.isNull() && !m_url.isEmpty() ) {
-            return QVariant( QStringList() << m_url );
+        if (!m_url.isNull() && !m_url.isEmpty()) {
+            return QVariant(QStringList() << m_url);
         }
         break;
     case IdListRole:
     case FullIdListRole:
-        return QVariant( QStringList() << m_id );
+        return QVariant(QStringList() << m_id);
     case Qt::CheckStateRole:
-        switch ( column ) {
+        switch (column) {
         case 0:
-            return QVariant( m_isChecked ? Qt::Checked : Qt::Unchecked );
+            return QVariant(m_isChecked ? Qt::Checked : Qt::Unchecked);
         case 1:
-            return QVariant( m_isOrbitDisplayed ? Qt::Checked : Qt::Unchecked );
+            return QVariant(m_isOrbitDisplayed ? Qt::Checked : Qt::Unchecked);
         }
     }
 
     return QVariant();
 }
 
-bool SatellitesConfigLeafItem::setData( int column, int role, const QVariant& data )
+bool SatellitesConfigLeafItem::setData(int column, int role, const QVariant &data)
 {
-    switch( role ) {
+    switch (role) {
     case UrlListRole:
         m_url = data.toString();
         return true;
     case Qt::CheckStateRole:
-        switch ( column ) {
+        switch (column) {
         case 0:
             m_isChecked = data.toBool();
             return true;
@@ -81,15 +82,15 @@ bool SatellitesConfigLeafItem::isLeaf() const
     return true;
 }
 
-SatellitesConfigAbstractItem *SatellitesConfigLeafItem::childAt( int row ) const
+SatellitesConfigAbstractItem *SatellitesConfigLeafItem::childAt(int row) const
 {
-    Q_UNUSED( row )
+    Q_UNUSED(row)
     return nullptr;
 }
 
-int SatellitesConfigLeafItem::indexOf( const SatellitesConfigAbstractItem *child ) const
+int SatellitesConfigLeafItem::indexOf(const SatellitesConfigAbstractItem *child) const
 {
-    Q_UNUSED( child )
+    Q_UNUSED(child)
     return -1;
 }
 
@@ -109,4 +110,3 @@ QString SatellitesConfigLeafItem::url() const
 }
 
 } // namespace Marble
-

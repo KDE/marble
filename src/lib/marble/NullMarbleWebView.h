@@ -6,19 +6,17 @@
 #ifndef NULLMARBLEWEBVIEW_H
 #define NULLMARBLEWEBVIEW_H
 
-#include <QWidget>
 #include <QUrl>
+#include <QWidget>
 
 #include "marble_export.h"
-
 
 class MARBLE_EXPORT MarbleWebView : public QWidget
 {
     Q_OBJECT
 public:
     explicit MarbleWebView(QWidget *parent = 0);
-    void setUrl(const QUrl & url);
+    void setUrl(const QUrl &url);
 };
 
 #endif // NULLMARBLEWEBVIEW_H
- 

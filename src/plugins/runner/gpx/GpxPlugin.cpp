@@ -8,14 +8,14 @@
 namespace Marble
 {
 
-GpxPlugin::GpxPlugin( QObject *parent ) :
-    ParseRunnerPlugin( parent )
+GpxPlugin::GpxPlugin(QObject *parent)
+    : ParseRunnerPlugin(parent)
 {
 }
 
 QString GpxPlugin::name() const
 {
-    return tr( "Gpx File Parser" );
+    return tr("Gpx File Parser");
 }
 
 QString GpxPlugin::nameId() const
@@ -30,7 +30,7 @@ QString GpxPlugin::version() const
 
 QString GpxPlugin::description() const
 {
-    return tr( "Create GeoDataDocument from Gpx Files" );
+    return tr("Create GeoDataDocument from Gpx Files");
 }
 
 QString GpxPlugin::copyrightYears() const
@@ -40,13 +40,12 @@ QString GpxPlugin::copyrightYears() const
 
 QVector<PluginAuthor> GpxPlugin::pluginAuthors() const
 {
-    return QVector<PluginAuthor>()
-            << PluginAuthor(QStringLiteral("Thibaut Gridel"), QStringLiteral("tgridel@free.fr"));
+    return QVector<PluginAuthor>() << PluginAuthor(QStringLiteral("Thibaut Gridel"), QStringLiteral("tgridel@free.fr"));
 }
 
 QString GpxPlugin::fileFormatDescription() const
 {
-    return tr( "GPS Data" );
+    return tr("GPS Data");
 }
 
 QStringList GpxPlugin::fileExtensions() const
@@ -54,7 +53,7 @@ QStringList GpxPlugin::fileExtensions() const
     return QStringList(QStringLiteral("gpx"));
 }
 
-ParsingRunner* GpxPlugin::newRunner() const
+ParsingRunner *GpxPlugin::newRunner() const
 {
     return new GpxRunner;
 }

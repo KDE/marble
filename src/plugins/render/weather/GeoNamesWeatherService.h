@@ -18,18 +18,17 @@ class GeoNamesWeatherService : public AbstractWeatherService
 {
     Q_OBJECT
 
- public:
-    explicit GeoNamesWeatherService( const MarbleModel *model, QObject *parent );
+public:
+    explicit GeoNamesWeatherService(const MarbleModel *model, QObject *parent);
     ~GeoNamesWeatherService() override;
 
- public Q_SLOTS:
-    void getAdditionalItems( const GeoDataLatLonAltBox& box,
-                             qint32 number = 10 ) override;
-    void getItem( const QString &id ) override;
-    void parseFile( const QByteArray& file ) override;
+public Q_SLOTS:
+    void getAdditionalItems(const GeoDataLatLonAltBox &box, qint32 number = 10) override;
+    void getItem(const QString &id) override;
+    void parseFile(const QByteArray &file) override;
 
- private:
-    AbstractDataPluginItem* parse(const QJsonObject &weatherObservationObject);
+private:
+    AbstractDataPluginItem *parse(const QJsonObject &weatherObservationObject);
     static void setupHashes();
 
     static QHash<QString, WeatherData::WeatherCondition> dayConditions;

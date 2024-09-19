@@ -18,25 +18,24 @@
 using namespace Marble;
 /* TRANSLATOR Marble::TimeControlWidget */
 
-TimeControlWidget::TimeControlWidget( MarbleClock* clock, QWidget* parent )
-    : QDialog( parent ),
-      m_uiWidget( new Ui::TimeControlWidget ),
-      m_clock( clock ),
-      m_lastDateTime()
+TimeControlWidget::TimeControlWidget(MarbleClock *clock, QWidget *parent)
+    : QDialog(parent)
+    , m_uiWidget(new Ui::TimeControlWidget)
+    , m_clock(clock)
+    , m_lastDateTime()
 {
-    m_uiWidget->setupUi( this );
+    m_uiWidget->setupUi(this);
 
-    connect( m_uiWidget->speedSlider, SIGNAL(valueChanged(int)), this, SLOT(updateSpeedLabel(int)) );
-    connect( m_uiWidget->nowToolButton, SIGNAL(clicked()), this, SLOT(nowClicked()) );
-    connect( m_uiWidget->buttonBox->button(QDialogButtonBox::Apply), SIGNAL(clicked()), this, SLOT(apply()) );
-    connect( m_uiWidget->buttonBox, SIGNAL(rejected()), this, SLOT(reject()) );
-    connect( m_uiWidget->buttonBox->button(QDialogButtonBox::Ok), SIGNAL(clicked()), this, SLOT(apply()) );
-    connect( m_uiWidget->buttonBox->button(QDialogButtonBox::Ok), SIGNAL(clicked()), this, SLOT(accept()) );
-    connect( m_clock, SIGNAL(timeChanged()), this, SLOT(updateDateTime()) );
-    connect( m_clock, SIGNAL(updateIntervalChanged(int)), this, SLOT(updateRefreshRate(int)) );
+    connect(m_uiWidget->speedSlider, SIGNAL(valueChanged(int)), this, SLOT(updateSpeedLabel(int)));
+    connect(m_uiWidget->nowToolButton, SIGNAL(clicked()), this, SLOT(nowClicked()));
+    connect(m_uiWidget->buttonBox->button(QDialogButtonBox::Apply), SIGNAL(clicked()), this, SLOT(apply()));
+    connect(m_uiWidget->buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
+    connect(m_uiWidget->buttonBox->button(QDialogButtonBox::Ok), SIGNAL(clicked()), this, SLOT(apply()));
+    connect(m_uiWidget->buttonBox->button(QDialogButtonBox::Ok), SIGNAL(clicked()), this, SLOT(accept()));
+    connect(m_clock, SIGNAL(timeChanged()), this, SLOT(updateDateTime()));
+    connect(m_clock, SIGNAL(updateIntervalChanged(int)), this, SLOT(updateRefreshRate(int)));
 
-    setModal( false );
-
+    setModal(false);
 }
 
 TimeControlWidget::~TimeControlWidget()
@@ -44,48 +43,46 @@ TimeControlWidget::~TimeControlWidget()
     delete m_uiWidget;
 }
 
-void TimeControlWidget::updateSpeedLabel( int speed )
+void TimeControlWidget::updateSpeedLabel(int speed)
 {
-    m_uiWidget->speedLabel->setText( QStringLiteral( "%1x" ).arg( speed ) );
+    m_uiWidget->speedLabel->setText(QStringLiteral("%1x").arg(speed));
 }
 
-void TimeControlWidget::updateRefreshRate( int seconds )
+void TimeControlWidget::updateRefreshRate(int seconds)
 {
-    m_uiWidget->refreshIntervalSpinBox->setValue( seconds );
+    m_uiWidget->refreshIntervalSpinBox->setValue(seconds);
 }
 
 void TimeControlWidget::updateDateTime()
 {
-    m_uiWidget->currentDateTimeEdit->setDateTime( m_clock->dateTime().addSecs( m_clock->timezone() ) );
+    m_uiWidget->currentDateTimeEdit->setDateTime(m_clock->dateTime().addSecs(m_clock->timezone()));
 }
 
 void TimeControlWidget::nowClicked()
 {
-    m_uiWidget->newDateTimeEdit->setDateTime( QDateTime::currentDateTime().toUTC().addSecs( m_clock->timezone() ) );
+    m_uiWidget->newDateTimeEdit->setDateTime(QDateTime::currentDateTime().toUTC().addSecs(m_clock->timezone()));
 }
 
 void TimeControlWidget::apply()
 {
-    if( m_lastDateTime !=  m_uiWidget->newDateTimeEdit->dateTime() )
-    {
+    if (m_lastDateTime != m_uiWidget->newDateTimeEdit->dateTime()) {
         m_lastDateTime = m_uiWidget->newDateTimeEdit->dateTime();
-        m_clock->setDateTime( m_lastDateTime.toUTC() );
+        m_clock->setDateTime(m_lastDateTime.toUTC());
     }
-    m_clock->setUpdateInterval( m_uiWidget->refreshIntervalSpinBox->value() );
-    m_clock->setSpeed( m_uiWidget->speedSlider->value() );
+    m_clock->setUpdateInterval(m_uiWidget->refreshIntervalSpinBox->value());
+    m_clock->setSpeed(m_uiWidget->speedSlider->value());
 }
 
-void TimeControlWidget::showEvent(QShowEvent* event)
+void TimeControlWidget::showEvent(QShowEvent *event)
 {
-    if( !event->spontaneous() ) 
-    {
+    if (!event->spontaneous()) {
         // Loading all options
-        m_uiWidget->refreshIntervalSpinBox->setValue( m_clock->updateInterval() );
-        m_uiWidget->speedSlider->setValue( m_clock->speed() );
-        m_uiWidget->speedLabel->setText( QStringLiteral( "%1x" ).arg( m_clock->speed() ) );
+        m_uiWidget->refreshIntervalSpinBox->setValue(m_clock->updateInterval());
+        m_uiWidget->speedSlider->setValue(m_clock->speed());
+        m_uiWidget->speedLabel->setText(QStringLiteral("%1x").arg(m_clock->speed()));
         updateDateTime();
         m_lastDateTime = m_clock->dateTime();
-        m_uiWidget->newDateTimeEdit->setDateTime( m_lastDateTime.addSecs( m_clock->timezone() ) );
+        m_uiWidget->newDateTimeEdit->setDateTime(m_lastDateTime.addSecs(m_clock->timezone()));
     }
 }
 

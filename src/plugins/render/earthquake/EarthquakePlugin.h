@@ -13,7 +13,7 @@
 
 namespace Ui
 {
-    class EarthquakeConfigWidget;
+class EarthquakeConfigWidget;
 }
 
 namespace Marble
@@ -24,15 +24,15 @@ class EarthquakePlugin : public AbstractDataPlugin, public DialogConfigurationIn
     Q_OBJECT
     Q_PLUGIN_METADATA(IID "org.kde.marble.EarthquakePlugin")
 
-    Q_INTERFACES( Marble::RenderPluginInterface )
-    Q_INTERFACES( Marble::DialogConfigurationInterface )
+    Q_INTERFACES(Marble::RenderPluginInterface)
+    Q_INTERFACES(Marble::DialogConfigurationInterface)
 
-    MARBLE_PLUGIN( EarthquakePlugin )
+    MARBLE_PLUGIN(EarthquakePlugin)
 
 public:
     EarthquakePlugin();
 
-    explicit EarthquakePlugin( const MarbleModel *marbleModel );
+    explicit EarthquakePlugin(const MarbleModel *marbleModel);
 
     void initialize() override;
 
@@ -57,12 +57,12 @@ public:
     /**
      * @return: The settings of the item.
      */
-    QHash<QString,QVariant> settings() const override;
+    QHash<QString, QVariant> settings() const override;
 
     /**
      * Set the settings of the item.
      */
-    void setSettings( const QHash<QString,QVariant> &settings ) override;
+    void setSettings(const QHash<QString, QVariant> &settings) override;
 
 public Q_SLOTS:
     void readSettings();
@@ -79,7 +79,7 @@ private:
     bool m_timeRangeNPastDays;
     int m_numResults;
     int m_maximumNumberOfItems;
-    
+
 private Q_SLOTS:
     void validateDateRange();
 };

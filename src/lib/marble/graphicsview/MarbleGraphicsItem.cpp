@@ -13,9 +13,9 @@
 
 // Qt
 #include <QList>
+#include <QMouseEvent>
 #include <QPainter>
 #include <QPixmap>
-#include <QMouseEvent>
 
 using namespace Marble;
 
@@ -29,7 +29,7 @@ MarbleGraphicsItem::~MarbleGraphicsItem()
     delete d_ptr;
 }
 
-bool MarbleGraphicsItem::paintEvent( QPainter *painter, const ViewportParams *viewport )
+bool MarbleGraphicsItem::paintEvent(QPainter *painter, const ViewportParams *viewport)
 {
     Q_D(MarbleGraphicsItem);
 
@@ -43,7 +43,7 @@ bool MarbleGraphicsItem::paintEvent( QPainter *painter, const ViewportParams *vi
         d->m_repaintNeeded = false;
     }
 
-    setProjection( viewport );
+    setProjection(viewport);
 
     if (d->positions().size() == 0) {
         return true;
@@ -51,53 +51,46 @@ bool MarbleGraphicsItem::paintEvent( QPainter *painter, const ViewportParams *vi
 
     // At the moment, as GraphicsItems can't be zoomed or rotated ItemCoordinateCache
     // and DeviceCoordianteCache is exactly the same
-    if ( ItemCoordinateCache == cacheMode()
-         || DeviceCoordinateCache == cacheMode() )
-    {
+    if (ItemCoordinateCache == cacheMode() || DeviceCoordinateCache == cacheMode()) {
         const qreal scale = painter->device()->devicePixelRatio();
 
-        const QSize neededPixmapSize = scale * size().toSize() + QSize( 1, 1 ); // adding a pixel for rounding errors
+        const QSize neededPixmapSize = scale * size().toSize() + QSize(1, 1); // adding a pixel for rounding errors
 
-        if (d->m_pixmap.size() != neededPixmapSize ||
-            d->m_pixmap.devicePixelRatio() != scale) {
-
-
-            if ( size().isValid() && !size().isNull() ) {
+        if (d->m_pixmap.size() != neededPixmapSize || d->m_pixmap.devicePixelRatio() != scale) {
+            if (size().isValid() && !size().isNull()) {
                 d->m_pixmap = QPixmap(neededPixmapSize);
                 d->m_pixmap.setDevicePixelRatio(scale);
-            }
-            else {
+            } else {
                 mDebug() << "Warning: Invalid pixmap size suggested: " << d->m_size;
             }
 
             d->m_pixmap.fill(Qt::transparent);
             QPainter pixmapPainter(&d->m_pixmap);
             // We paint in best quality here, as we only have to paint once.
-            pixmapPainter.setRenderHint( QPainter::Antialiasing, true );
+            pixmapPainter.setRenderHint(QPainter::Antialiasing, true);
             // The cache image will get a 0.5 pixel bounding to save antialiasing effects.
-            pixmapPainter.translate( 0.5, 0.5 );
-            paint( &pixmapPainter );
+            pixmapPainter.translate(0.5, 0.5);
+            paint(&pixmapPainter);
 
             // Paint children
-            for (MarbleGraphicsItem *item: d->m_children) {
-                item->paintEvent( &pixmapPainter, viewport );
+            for (MarbleGraphicsItem *item : d->m_children) {
+                item->paintEvent(&pixmapPainter, viewport);
             }
         }
 
-        for (const QPointF& position: d->positions()) {
+        for (const QPointF &position : d->positions()) {
             painter->drawPixmap(position, d->m_pixmap);
         }
-    }
-    else {
-        for (const QPointF& position: d->positions()) {
+    } else {
+        for (const QPointF &position : d->positions()) {
             painter->save();
 
-            painter->translate( position );
-            paint( painter );
+            painter->translate(position);
+            paint(painter);
 
             // Paint children
-            for (MarbleGraphicsItem *item: d->m_children) {
-                item->paintEvent( painter, viewport );
+            for (MarbleGraphicsItem *item : d->m_children) {
+                item->paintEvent(painter, viewport);
             }
 
             painter->restore();
@@ -107,11 +100,11 @@ bool MarbleGraphicsItem::paintEvent( QPainter *painter, const ViewportParams *vi
     return true;
 }
 
-bool MarbleGraphicsItem::contains( const QPointF& point ) const
+bool MarbleGraphicsItem::contains(const QPointF &point) const
 {
     Q_D(const MarbleGraphicsItem);
-    for (const QRectF& rect: d->boundingRects()) {
-        if( rect.contains( point ) )
+    for (const QRectF &rect : d->boundingRects()) {
+        if (rect.contains(point))
             return true;
     }
     return false;
@@ -124,14 +117,14 @@ QVector<QRectF> MarbleGraphicsItemPrivate::boundingRects() const
     QVector<QRectF> list;
     list.reserve(positions.count());
 
-    for (const QPointF &point: positions) {
-        QRectF rect( point, m_size );
-        if( rect.x() < 0 )
-            rect.setLeft( 0 );
-        if( rect.y() < 0 )
-            rect.setTop( 0 );
+    for (const QPointF &point : positions) {
+        QRectF rect(point, m_size);
+        if (rect.x() < 0)
+            rect.setLeft(0);
+        if (rect.y() < 0)
+            rect.setTop(0);
 
-        list.append( rect );
+        list.append(rect);
     }
 
     return list;
@@ -149,7 +142,7 @@ AbstractMarbleGraphicsLayout *MarbleGraphicsItem::layout() const
     return d->m_layout;
 }
 
-void MarbleGraphicsItem::setLayout( AbstractMarbleGraphicsLayout *layout )
+void MarbleGraphicsItem::setLayout(AbstractMarbleGraphicsLayout *layout)
 {
     Q_D(MarbleGraphicsItem);
     // Deleting the old layout
@@ -164,7 +157,7 @@ MarbleGraphicsItem::CacheMode MarbleGraphicsItem::cacheMode() const
     return d->m_cacheMode;
 }
 
-void MarbleGraphicsItem::setCacheMode( CacheMode mode )
+void MarbleGraphicsItem::setCacheMode(CacheMode mode)
 {
     Q_D(MarbleGraphicsItem);
     d->m_cacheMode = mode;
@@ -190,7 +183,7 @@ bool MarbleGraphicsItem::visible() const
     return d->m_visibility;
 }
 
-void MarbleGraphicsItem::setVisible( bool visible )
+void MarbleGraphicsItem::setVisible(bool visible)
 {
     Q_D(MarbleGraphicsItem);
     d->m_visibility = visible;
@@ -198,15 +191,15 @@ void MarbleGraphicsItem::setVisible( bool visible )
 
 void MarbleGraphicsItem::hide()
 {
-    setVisible( false );
+    setVisible(false);
 }
 
 void MarbleGraphicsItem::show()
 {
-    setVisible( true );
+    setVisible(true);
 }
 
-void MarbleGraphicsItem::setSize( const QSizeF& size )
+void MarbleGraphicsItem::setSize(const QSizeF &size)
 {
     Q_D(MarbleGraphicsItem);
     if (d->m_size != size) {
@@ -220,47 +213,44 @@ QSizeF MarbleGraphicsItem::contentSize() const
     return size();
 }
 
-void MarbleGraphicsItem::setContentSize( const QSizeF& size )
+void MarbleGraphicsItem::setContentSize(const QSizeF &size)
 {
-    setSize( size );
+    setSize(size);
 }
 
 QRectF MarbleGraphicsItem::contentRect() const
 {
-    return QRectF( QPointF( 0, 0 ), contentSize() );
+    return QRectF(QPointF(0, 0), contentSize());
 }
 
-void MarbleGraphicsItem::paint( QPainter *painter )
+void MarbleGraphicsItem::paint(QPainter *painter)
 {
-    Q_UNUSED( painter );
+    Q_UNUSED(painter);
 }
 
-bool MarbleGraphicsItem::eventFilter( QObject *object, QEvent *e )
+bool MarbleGraphicsItem::eventFilter(QObject *object, QEvent *e)
 {
-    if ( ! ( e->type() == QEvent::MouseButtonDblClick
-             || e->type() == QEvent::MouseMove
-             || e->type() == QEvent::MouseButtonPress
-             || e->type() == QEvent::MouseButtonRelease ) )
-    {
+    if (!(e->type() == QEvent::MouseButtonDblClick || e->type() == QEvent::MouseMove || e->type() == QEvent::MouseButtonPress
+          || e->type() == QEvent::MouseButtonRelease)) {
         return false;
     }
 
     Q_D(const MarbleGraphicsItem);
-    QMouseEvent *event = static_cast<QMouseEvent*> (e);
+    QMouseEvent *event = static_cast<QMouseEvent *>(e);
 
     if (!d->m_children.isEmpty()) {
         const QVector<QPointF> absolutePositions = d->absolutePositions();
 
-        for( const QPointF& absolutePosition: absolutePositions ) {
+        for (const QPointF &absolutePosition : absolutePositions) {
             QPoint shiftedPos = event->pos() - absolutePosition.toPoint();
-            
-            if ( QRect( QPoint( 0, 0 ), size().toSize() ).contains( shiftedPos ) ) {
-                for (MarbleGraphicsItem *child: d->m_children) {
+
+            if (QRect(QPoint(0, 0), size().toSize()).contains(shiftedPos)) {
+                for (MarbleGraphicsItem *child : d->m_children) {
                     const QVector<QRectF> childRects = child->d_func()->boundingRects();
-                    
-                    for( const QRectF& childRect: childRects ) {
-                        if( childRect.toRect().contains( shiftedPos ) ) {
-                            if( child->eventFilter( object, e ) ) {
+
+                    for (const QRectF &childRect : childRects) {
+                        if (childRect.toRect().contains(shiftedPos)) {
+                            if (child->eventFilter(object, e)) {
                                 return true;
                             }
                         }
@@ -273,7 +263,7 @@ bool MarbleGraphicsItem::eventFilter( QObject *object, QEvent *e )
     return false;
 }
 
-void MarbleGraphicsItem::setProjection( const ViewportParams *viewport )
+void MarbleGraphicsItem::setProjection(const ViewportParams *viewport)
 {
     Q_D(MarbleGraphicsItem);
     d->setProjection(viewport);

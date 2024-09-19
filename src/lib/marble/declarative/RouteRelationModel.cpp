@@ -5,16 +5,16 @@
 
 #include "RouteRelationModel.h"
 
+#include "GeoDataColorStyle.h"
 #include "MarbleColors.h"
 #include "MarbleDirs.h"
 #include "osm/OsmPlacemarkData.h"
-#include "GeoDataColorStyle.h"
 
 namespace Marble
 {
 
-RouteRelationModel::RouteRelationModel(QObject *parent) :
-    QAbstractListModel(parent)
+RouteRelationModel::RouteRelationModel(QObject *parent)
+    : QAbstractListModel(parent)
 {
     m_networks[QStringLiteral("iwn")] = tr("International walking route");
     m_networks[QStringLiteral("nwn")] = tr("National walking route");
@@ -34,7 +34,7 @@ RouteRelationModel::RouteRelationModel(QObject *parent) :
     m_networks[QStringLiteral("US")] = tr("United States route");
 }
 
-void RouteRelationModel::setRelations(const QSet<const GeoDataRelation*> &relations)
+void RouteRelationModel::setRelations(const QSet<const GeoDataRelation *> &relations)
 {
     if (!m_relations.isEmpty()) {
         beginRemoveRows(QModelIndex(), 0, m_relations.count() - 1);
@@ -45,25 +45,24 @@ void RouteRelationModel::setRelations(const QSet<const GeoDataRelation*> &relati
     if (!relations.isEmpty()) {
         beginInsertRows(QModelIndex(), 0, relations.count() - 1);
         m_relations.reserve(relations.size());
-        for (auto relation: relations) {
+        for (auto relation : relations) {
             if (relation->relationType() >= GeoDataRelation::RouteRoad && relation->relationType() <= GeoDataRelation::RouteSled) {
                 m_relations << new GeoDataRelation(*relation);
             }
         }
-        std::sort(m_relations.begin(), m_relations.end(),
-        [](const GeoDataRelation * a, const GeoDataRelation * b) {
+        std::sort(m_relations.begin(), m_relations.end(), [](const GeoDataRelation *a, const GeoDataRelation *b) {
             return *a < *b;
         });
         endInsertRows();
     }
 }
 
-int RouteRelationModel::rowCount(const QModelIndex & parent) const
+int RouteRelationModel::rowCount(const QModelIndex &parent) const
 {
     return parent.isValid() ? 0 : m_relations.count();
 }
 
-QVariant RouteRelationModel::data(const QModelIndex & index, int role) const
+QVariant RouteRelationModel::data(const QModelIndex &index, int role) const
 {
     if (!index.isValid() || index.row() < 0 || index.row() >= m_relations.count()) {
         return QVariant();
@@ -73,25 +72,44 @@ QVariant RouteRelationModel::data(const QModelIndex & index, int role) const
         return m_relations.at(index.row())->name();
     } else if (role == IconSource) {
         switch (m_relations.at(index.row())->relationType()) {
-        case GeoDataRelation::RouteRoad:         return QStringLiteral("material/directions-car.svg");
-        case GeoDataRelation::RouteDetour:       return QStringLiteral("material/directions-car.svg");
-        case GeoDataRelation::RouteFerry:        return QStringLiteral("material/directions-boat.svg");
-        case GeoDataRelation::RouteTrain:        return QStringLiteral("material/directions-railway.svg");
-        case GeoDataRelation::RouteSubway:       return QStringLiteral("material/directions-subway.svg");
-        case GeoDataRelation::RouteTram:         return QStringLiteral("material/directions-tram.svg");
-        case GeoDataRelation::RouteBus:          return QStringLiteral("material/directions-bus.svg");
-        case GeoDataRelation::RouteTrolleyBus:   return QStringLiteral("material/directions-bus.svg");
-        case GeoDataRelation::RouteBicycle:      return QStringLiteral("material/directions-bike.svg");
-        case GeoDataRelation::RouteMountainbike: return QStringLiteral("material/directions-bike.svg");
-        case GeoDataRelation::RouteFoot:         return QStringLiteral("material/directions-walk.svg");
-        case GeoDataRelation::RouteHiking:       return QStringLiteral("thenounproject/204712-hiker.svg");
-        case GeoDataRelation::RouteHorse:        return QStringLiteral("thenounproject/78374-horse-riding.svg");
-        case GeoDataRelation::RouteInlineSkates: return QStringLiteral("thenounproject/101965-inline-skater.svg");
-        case GeoDataRelation::RouteSkiDownhill:  return QStringLiteral("thenounproject/2412-skiing-downhill.svg");
-        case GeoDataRelation::RouteSkiNordic:    return QStringLiteral("thenounproject/30231-skiing-cross-country.svg");
-        case GeoDataRelation::RouteSkitour:      return QStringLiteral("thenounproject/29366-skitour.svg");
-        case GeoDataRelation::RouteSled:         return QStringLiteral("thenounproject/365217-sled.svg");
-        case GeoDataRelation::UnknownType:       return QVariant(QString());
+        case GeoDataRelation::RouteRoad:
+            return QStringLiteral("material/directions-car.svg");
+        case GeoDataRelation::RouteDetour:
+            return QStringLiteral("material/directions-car.svg");
+        case GeoDataRelation::RouteFerry:
+            return QStringLiteral("material/directions-boat.svg");
+        case GeoDataRelation::RouteTrain:
+            return QStringLiteral("material/directions-railway.svg");
+        case GeoDataRelation::RouteSubway:
+            return QStringLiteral("material/directions-subway.svg");
+        case GeoDataRelation::RouteTram:
+            return QStringLiteral("material/directions-tram.svg");
+        case GeoDataRelation::RouteBus:
+            return QStringLiteral("material/directions-bus.svg");
+        case GeoDataRelation::RouteTrolleyBus:
+            return QStringLiteral("material/directions-bus.svg");
+        case GeoDataRelation::RouteBicycle:
+            return QStringLiteral("material/directions-bike.svg");
+        case GeoDataRelation::RouteMountainbike:
+            return QStringLiteral("material/directions-bike.svg");
+        case GeoDataRelation::RouteFoot:
+            return QStringLiteral("material/directions-walk.svg");
+        case GeoDataRelation::RouteHiking:
+            return QStringLiteral("thenounproject/204712-hiker.svg");
+        case GeoDataRelation::RouteHorse:
+            return QStringLiteral("thenounproject/78374-horse-riding.svg");
+        case GeoDataRelation::RouteInlineSkates:
+            return QStringLiteral("thenounproject/101965-inline-skater.svg");
+        case GeoDataRelation::RouteSkiDownhill:
+            return QStringLiteral("thenounproject/2412-skiing-downhill.svg");
+        case GeoDataRelation::RouteSkiNordic:
+            return QStringLiteral("thenounproject/30231-skiing-cross-country.svg");
+        case GeoDataRelation::RouteSkitour:
+            return QStringLiteral("thenounproject/29366-skitour.svg");
+        case GeoDataRelation::RouteSled:
+            return QStringLiteral("thenounproject/365217-sled.svg");
+        case GeoDataRelation::UnknownType:
+            return QVariant(QString());
         }
     } else if (role == Description) {
         return m_relations.at(index.row())->osmData().tagValue(QStringLiteral("description"));
@@ -102,7 +120,7 @@ QVariant RouteRelationModel::data(const QModelIndex & index, int role) const
             return *iter;
         }
         auto const fields = network.split(':', Qt::SkipEmptyParts);
-        for (auto const &field: fields) {
+        for (auto const &field : fields) {
             auto iter = m_networks.find(field);
             if (iter != m_networks.end()) {
                 return *iter;
@@ -126,7 +144,7 @@ QVariant RouteRelationModel::data(const QModelIndex & index, int role) const
     } else if (role == RouteVia) {
         auto const viaValue = m_relations.at(index.row())->osmData().tagValue(QStringLiteral("via"));
         auto viaList = viaValue.split(';', Qt::SkipEmptyParts);
-        for (auto &via: viaList) {
+        for (auto &via : viaList) {
             via = via.trimmed();
         }
         return viaList;

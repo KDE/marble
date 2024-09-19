@@ -10,21 +10,21 @@
 namespace Marble
 {
 
-HostipPlugin::HostipPlugin( QObject *parent ) :
-    SearchRunnerPlugin( parent )
+HostipPlugin::HostipPlugin(QObject *parent)
+    : SearchRunnerPlugin(parent)
 {
     setSupportedCelestialBodies(QStringList(QStringLiteral("earth")));
-    setCanWorkOffline( false );
+    setCanWorkOffline(false);
 }
 
 QString HostipPlugin::name() const
 {
-    return tr( "Hostip.info Search" );
+    return tr("Hostip.info Search");
 }
 
 QString HostipPlugin::guiString() const
 {
-    return tr( "Hostip.info" );
+    return tr("Hostip.info");
 }
 
 QString HostipPlugin::nameId() const
@@ -39,7 +39,7 @@ QString HostipPlugin::version() const
 
 QString HostipPlugin::description() const
 {
-    return tr( "Host name and IP geolocation search using the hostip.info service" );
+    return tr("Host name and IP geolocation search using the hostip.info service");
 }
 
 QString HostipPlugin::copyrightYears() const
@@ -49,11 +49,10 @@ QString HostipPlugin::copyrightYears() const
 
 QVector<PluginAuthor> HostipPlugin::pluginAuthors() const
 {
-    return QVector<PluginAuthor>()
-            << PluginAuthor(QStringLiteral("Dennis Nienhüser"), QStringLiteral("nienhueser@kde.org"));
+    return QVector<PluginAuthor>() << PluginAuthor(QStringLiteral("Dennis Nienhüser"), QStringLiteral("nienhueser@kde.org"));
 }
 
-SearchRunner* HostipPlugin::newRunner() const
+SearchRunner *HostipPlugin::newRunner() const
 {
     return new HostipRunner;
 }

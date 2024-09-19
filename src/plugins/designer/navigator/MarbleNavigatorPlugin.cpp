@@ -9,12 +9,11 @@
 
 #include "MarbleNavigator.h"
 
-
 MarbleNavigatorPlugin::MarbleNavigatorPlugin(QObject *parent)
-    : QObject(parent),
-      m_initialized(false)
+    : QObject(parent)
+    , m_initialized(false)
 {
-    //nothing to do
+    // nothing to do
 }
 
 void MarbleNavigatorPlugin::initialize(QDesignerFormEditorInterface * /* core */)
@@ -29,7 +28,7 @@ bool MarbleNavigatorPlugin::isInitialized() const
 
 QWidget *MarbleNavigatorPlugin::createWidget(QWidget *parent)
 {
-    return new Marble::MarbleNavigator( parent );
+    return new Marble::MarbleNavigator(parent);
 }
 
 QString MarbleNavigatorPlugin::name() const

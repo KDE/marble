@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: LGPL-2.1-or-later
 //
 // SPDX-FileCopyrightText: 2013 Mayank Madan <maddiemadan@gmail.com>
-// 
+//
 
 #ifndef KMLROLLTAGHANDLER_H
 #define KMLROLLTAGHANDLER_H
@@ -16,7 +16,7 @@ namespace kml
 class KmlrollTagHandler : public GeoTagHandler
 {
 public:
-    GeoNode* parse(GeoParser&) const override;
+    GeoNode *parse(GeoParser &) const override;
 };
 
 }

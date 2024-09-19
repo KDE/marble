@@ -10,8 +10,8 @@
 namespace Marble
 {
 
-GeoDataTourControl::GeoDataTourControl() :
-    m_playMode(Play)
+GeoDataTourControl::GeoDataTourControl()
+    : m_playMode(Play)
 {
 }
 
@@ -19,12 +19,12 @@ GeoDataTourControl::~GeoDataTourControl()
 {
 }
 
-bool GeoDataTourControl::operator==(const GeoDataTourControl& other) const
+bool GeoDataTourControl::operator==(const GeoDataTourControl &other) const
 {
     return this->m_playMode == other.m_playMode;
 }
 
-bool GeoDataTourControl::operator!=(const GeoDataTourControl& other) const
+bool GeoDataTourControl::operator!=(const GeoDataTourControl &other) const
 {
     return !this->operator==(other);
 }

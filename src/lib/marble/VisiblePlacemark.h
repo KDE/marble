@@ -16,8 +16,8 @@
 #include <QPoint>
 #include <QRectF>
 
-#include <GeoDataStyle.h>
 #include <GeoDataCoordinates.h>
+#include <GeoDataStyle.h>
 
 namespace Marble
 {
@@ -34,26 +34,26 @@ static const qreal s_labelOutlineWidth = 2.5;
  */
 class VisiblePlacemark : public QObject
 {
- Q_OBJECT
+    Q_OBJECT
 
- public:
+public:
     explicit VisiblePlacemark(const GeoDataPlacemark *placemark, const GeoDataCoordinates &coordinates, const GeoDataStyle::ConstPtr &style);
 
     /**
      * Returns the index of the place mark model which
      * is associated with this visible place mark.
      */
-    const GeoDataPlacemark* placemark() const;
+    const GeoDataPlacemark *placemark() const;
 
     /**
      * Returns the pixmap of the place mark symbol.
      */
-    const QPixmap& symbolPixmap() const;
+    const QPixmap &symbolPixmap() const;
 
     /**
      * Returns the id for the place mark symbol.
      */
-    const QString& symbolId() const;
+    const QString &symbolId() const;
 
     /**
      * Returns the state of the place mark.
@@ -63,12 +63,12 @@ class VisiblePlacemark : public QObject
     /**
      * Sets the state of the place mark.
      */
-    void setSelected( bool selected );
+    void setSelected(bool selected);
 
     /**
      * Returns the position of the place mark symbol on the map.
      */
-    const QPointF& symbolPosition() const;
+    const QPointF &symbolPosition() const;
 
     /**
      * Returns the top left corner of the place mark symbol's hot spot
@@ -78,28 +78,24 @@ class VisiblePlacemark : public QObject
     /**
      * Sets the @p position of the place mark symbol on the map.
      */
-    void setSymbolPosition(const QPointF &position );
+    void setSymbolPosition(const QPointF &position);
 
     /**
      * Returns the pixmap of the place mark name label.
      */
-    const QPixmap& labelPixmap();
+    const QPixmap &labelPixmap();
 
     /**
      * Returns the area covered by the place mark name label on the map.
      */
-    const QRectF& labelRect() const;
+    const QRectF &labelRect() const;
 
     /**
      * Sets the @p area covered by the place mark name label on the map.
      */
-    void setLabelRect( const QRectF& area );
+    void setLabelRect(const QRectF &area);
 
-    enum LabelStyle {
-        Normal = 0,
-        Glow,
-        Selected
-    };
+    enum LabelStyle { Normal = 0, Glow, Selected };
 
     void setStyle(const GeoDataStyle::ConstPtr &style);
 
@@ -109,7 +105,7 @@ class VisiblePlacemark : public QObject
 
     QRectF boundingBox() const;
 
-    const GeoDataCoordinates & coordinates() const;
+    const GeoDataCoordinates &coordinates() const;
 
 Q_SIGNALS:
     void updateNeeded();
@@ -117,24 +113,24 @@ Q_SIGNALS:
 private Q_SLOTS:
     void setSymbolPixmap();
 
- private:
-    static void drawLabelText( QPainter &labelPainter, const QString &text, const QFont &labelFont, LabelStyle labelStyle, const QColor &color );
+private:
+    static void drawLabelText(QPainter &labelPainter, const QString &text, const QFont &labelFont, LabelStyle labelStyle, const QColor &color);
     void drawLabelPixmap();
 
     const GeoDataPlacemark *m_placemark;
 
     // View stuff
-    QPointF     m_symbolPosition; // position of the placemark's symbol
-    bool        m_selected;       // state of the placemark
-    QPixmap     m_labelPixmap;    // the text label (most often name)
-    bool        m_labelDirty;
-    QRectF      m_labelRect;      // bounding box of label
+    QPointF m_symbolPosition; // position of the placemark's symbol
+    bool m_selected; // state of the placemark
+    QPixmap m_labelPixmap; // the text label (most often name)
+    bool m_labelDirty;
+    QRectF m_labelRect; // bounding box of label
 
     GeoDataStyle::ConstPtr m_style;
     GeoDataCoordinates m_coordinates;
 
-    mutable QPixmap     m_symbolPixmap;   // cached value
-    QString     m_symbolId;
+    mutable QPixmap m_symbolPixmap; // cached value
+    QString m_symbolId;
 };
 
 }

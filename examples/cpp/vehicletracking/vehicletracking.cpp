@@ -6,30 +6,30 @@
 #include "vehicletracking.h"
 
 #include <QApplication>
+#include <QDebug>
 #include <QThread>
 #include <QTimer>
-#include <qmath.h>
-#include <QDebug>
 #include <QVBoxLayout>
+#include <qmath.h>
 
-#include <marble/MarbleWidget.h>
-#include <marble/MarbleGlobal.h>
 #include <marble/GeoDataDocument.h>
 #include <marble/GeoDataLineString.h>
 #include <marble/GeoDataTreeModel.h>
+#include <marble/MarbleGlobal.h>
 #include <marble/MarbleModel.h>
-
+#include <marble/MarbleWidget.h>
 
 using namespace Marble;
 
-CarWorker::CarWorker(const GeoDataCoordinates &city, qreal radius, qreal speed) :
-    QObject(),
-    m_timer(new QTimer(this)),
-    m_city(city),
-    m_radius(radius),
-    m_speed(speed),
-    m_alpha(0.0)
-{}
+CarWorker::CarWorker(const GeoDataCoordinates &city, qreal radius, qreal speed)
+    : QObject()
+    , m_timer(new QTimer(this))
+    , m_city(city)
+    , m_radius(radius)
+    , m_speed(speed)
+    , m_alpha(0.0)
+{
+}
 
 void CarWorker::startWork()
 {
@@ -54,9 +54,9 @@ void CarWorker::finishWork()
     m_timer->stop();
 }
 
-Window::Window(QWidget *parent) :
-    QWidget(parent),
-    m_marbleWidget(new MarbleWidget)
+Window::Window(QWidget *parent)
+    : QWidget(parent)
+    , m_marbleWidget(new MarbleWidget)
 {
     QVBoxLayout *layout = new QVBoxLayout(this);
     layout->addWidget(m_marbleWidget);
@@ -64,7 +64,7 @@ Window::Window(QWidget *parent) :
 
     // Load the OpenStreetMap map
     m_marbleWidget->setMapThemeId(QStringLiteral("earth/openstreetmap/openstreetmap.dgml"));
-    m_marbleWidget->setProjection( Mercator );
+    m_marbleWidget->setProjection(Mercator);
     setGeometry(80, 60, 1000, 800);
     GeoDataCoordinates Kiev(30.523333, 50.45, 0.0, GeoDataCoordinates::Degree);
     m_marbleWidget->centerOn(Kiev);
@@ -91,15 +91,13 @@ void Window::startCars()
     m_firstWorker = new CarWorker(Kiev, (qreal)0.1, (qreal)0.7);
     m_firstWorker->moveToThread(m_threadFirst);
 
-    connect(m_firstWorker, SIGNAL(coordinatesChanged(GeoDataCoordinates)),
-            this, SLOT(setCarCoordinates(GeoDataCoordinates)), Qt::BlockingQueuedConnection);
+    connect(m_firstWorker, SIGNAL(coordinatesChanged(GeoDataCoordinates)), this, SLOT(setCarCoordinates(GeoDataCoordinates)), Qt::BlockingQueuedConnection);
 
     m_threadSecond = new QThread;
     m_secondWorker = new CarWorker(Kiev, (qreal)0.2, (qreal)-0.5);
     m_secondWorker->moveToThread(m_threadSecond);
 
-    connect(m_secondWorker, SIGNAL(coordinatesChanged(GeoDataCoordinates)),
-            this, SLOT(setCarCoordinates(GeoDataCoordinates)), Qt::BlockingQueuedConnection);
+    connect(m_secondWorker, SIGNAL(coordinatesChanged(GeoDataCoordinates)), this, SLOT(setCarCoordinates(GeoDataCoordinates)), Qt::BlockingQueuedConnection);
 
     connect(m_threadFirst, SIGNAL(started()), m_firstWorker, SLOT(startWork()));
     connect(m_threadFirst, SIGNAL(finished()), m_firstWorker, SLOT(finishWork()));
@@ -113,7 +111,7 @@ void Window::startCars()
 
 void Window::setCarCoordinates(const GeoDataCoordinates &coord)
 {
-    CarWorker *worker = qobject_cast<CarWorker*>(sender());
+    CarWorker *worker = qobject_cast<CarWorker *>(sender());
     if (worker == m_firstWorker) {
         m_carFirst->setCoordinate(coord);
         m_marbleWidget->model()->treeModel()->updateFeature(m_carFirst);
@@ -124,9 +122,9 @@ void Window::setCarCoordinates(const GeoDataCoordinates &coord)
 }
 
 // Main (start point)
-int main(int argc, char** argv)
+int main(int argc, char **argv)
 {
-    QApplication app(argc,argv);
+    QApplication app(argc, argv);
 
     Window window;
     window.startCars();

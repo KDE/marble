@@ -12,15 +12,12 @@
 #ifndef MARBLE_MARBLEMODEL_H
 #define MARBLE_MARBLEMODEL_H
 
-
 /** @file
  * This file contains the headers for MarbleModel
  *
  * @author Torsten Rahn <tackat@kde.org>
  * @author Inge Wallin  <inge@lysator.liu.se>
  */
-
-
 
 #include "marble_export.h"
 
@@ -89,15 +86,15 @@ class MARBLE_EXPORT MarbleModel : public QObject
 
     Q_OBJECT
 
-    Q_PROPERTY( QString mapThemeId READ mapThemeId WRITE setMapThemeId NOTIFY themeChanged )
-    Q_PROPERTY( bool workOffline READ workOffline WRITE setWorkOffline NOTIFY workOfflineChanged )
+    Q_PROPERTY(QString mapThemeId READ mapThemeId WRITE setMapThemeId NOTIFY themeChanged)
+    Q_PROPERTY(bool workOffline READ workOffline WRITE setWorkOffline NOTIFY workOfflineChanged)
 
- public:
+public:
     /**
      * @brief  Construct a new MarbleModel.
      * @param parent the parent widget
      */
-    explicit MarbleModel( QObject *parent = nullptr );
+    explicit MarbleModel(QObject *parent = nullptr);
     ~MarbleModel() override;
 
     /**
@@ -129,7 +126,7 @@ class MARBLE_EXPORT MarbleModel : public QObject
 
     GeoSceneDocument *mapTheme();
     const GeoSceneDocument *mapTheme() const;
-    void setMapTheme( GeoSceneDocument * document );
+    void setMapTheme(GeoSceneDocument *document);
 
     /**
      * @brief Set a new map theme to use.
@@ -147,7 +144,7 @@ class MARBLE_EXPORT MarbleModel : public QObject
      * Example:
      *    maptheme = "earth/bluemarble/bluemarble.dgml"
      */
-    void setMapThemeId( const QString &mapThemeId );
+    void setMapThemeId(const QString &mapThemeId);
 
     /**
      * @brief  get the home point
@@ -155,20 +152,20 @@ class MARBLE_EXPORT MarbleModel : public QObject
      * @param  lat  the latitude of the home point.
      * @param  zoom the default zoom level of the home point.
      */
-    void home( qreal &lon, qreal &lat, int& zoom ) const;
+    void home(qreal &lon, qreal &lat, int &zoom) const;
     /**
      * @brief  Set the home point
      * @param  lon  the longitude of the new home point.
      * @param  lat  the latitude of the new home point.
      * @param  zoom the default zoom level for the new home point.
      */
-    void setHome( qreal lon, qreal lat, int zoom = 1050 );
+    void setHome(qreal lon, qreal lat, int zoom = 1050);
     /**
      * @brief  Set the home point
      * @param  homePoint  the new home point.
      * @param  zoom       the default zoom level for the new home point.
      */
-    void setHome( const GeoDataCoordinates& homePoint, int zoom = 1050 );
+    void setHome(const GeoDataCoordinates &homePoint, int zoom = 1050);
 
     /**
      * @brief Return the downloadmanager to load missing tiles
@@ -177,33 +174,32 @@ class MARBLE_EXPORT MarbleModel : public QObject
     HttpDownloadManager *downloadManager();
     const HttpDownloadManager *downloadManager() const;
 
-
     /**
      * @brief Handle file loading into the treeModel
      * @param filename the file to load
      */
-    void addGeoDataFile( const QString& filename );
+    void addGeoDataFile(const QString &filename);
 
     /**
      * @brief Handle raw data loading into the treeModel
      * @param data the raw data to load
      * @param key the name to remove this raw data later
      */
-    void addGeoDataString( const QString& data, const QString& key = QLatin1String("data") );
+    void addGeoDataString(const QString &data, const QString &key = QLatin1String("data"));
 
     /**
      * @brief Remove the file or raw data from the treeModel
      * @param key either the file name or the key for raw data
      */
-    void removeGeoData( const QString& key );
+    void removeGeoData(const QString &key);
 
-    FileManager       *fileManager();
+    FileManager *fileManager();
 
-    PositionTracking   *positionTracking() const;
+    PositionTracking *positionTracking() const;
 
-    qreal                 planetRadius()   const;
-    QString               planetName()     const;
-    QString               planetId()       const;
+    qreal planetRadius() const;
+    QString planetName() const;
+    QString planetId() const;
 
     MarbleClock *clock();
     const MarbleClock *clock() const;
@@ -223,9 +219,9 @@ class MARBLE_EXPORT MarbleModel : public QObject
      */
     quint64 volatileTileCacheLimit() const;
 
-    const PluginManager* pluginManager() const;
+    const PluginManager *pluginManager() const;
 
-    PluginManager* pluginManager();
+    PluginManager *pluginManager();
 
     /**
      * @brief Returns the planet object for the current map.
@@ -233,41 +229,41 @@ class MARBLE_EXPORT MarbleModel : public QObject
      */
     const Planet *planet() const;
 
-    RoutingManager* routingManager();
-    const RoutingManager* routingManager() const;
+    RoutingManager *routingManager();
+    const RoutingManager *routingManager() const;
 
-    void setClockDateTime( const QDateTime& datetime );
+    void setClockDateTime(const QDateTime &datetime);
 
     QDateTime clockDateTime() const;
 
     int clockSpeed() const;
 
-    void setClockSpeed( int speed );
+    void setClockSpeed(int speed);
 
-    void setClockTimezone( int timeInSec );
+    void setClockTimezone(int timeInSec);
 
     int clockTimezone() const;
 
     /**
      * return instance of BookmarkManager
-    */
+     */
     BookmarkManager *bookmarkManager();
 
-    QTextDocument * legend();
+    QTextDocument *legend();
 
     /**
      * @brief Uses the given text document as the new content of the legend
      * Any previous legend content is overwritten. MarbleModel takes ownership
      * of the passed document.
      */
-    void setLegend( QTextDocument * document );
+    void setLegend(QTextDocument *document);
 
     bool workOffline() const;
 
-    void setWorkOffline( bool workOffline );
+    void setWorkOffline(bool workOffline);
 
-    ElevationModel* elevationModel();
-    const ElevationModel* elevationModel() const;
+    ElevationModel *elevationModel();
+    const ElevationModel *elevationModel() const;
 
     /**
      * Returns the placemark being tracked by this model or 0 if no
@@ -276,31 +272,31 @@ class MARBLE_EXPORT MarbleModel : public QObject
      */
     const GeoDataPlacemark *trackedPlacemark() const;
 
- public Q_SLOTS:
+public Q_SLOTS:
     void clearPersistentTileCache();
 
     /**
      * @brief  Set the limit of the persistent (on hard disc) tile cache.
      * @param  kiloBytes The limit in kilobytes, 0 means no limit.
      */
-    void setPersistentTileCacheLimit( quint64 kiloBytes );
+    void setPersistentTileCacheLimit(quint64 kiloBytes);
 
     /**
      * @brief Change the placemark tracked by this model
      * @see trackedPlacemark(), trackedPlacemarkChanged()
      */
-    void setTrackedPlacemark( const GeoDataPlacemark *placemark );
+    void setTrackedPlacemark(const GeoDataPlacemark *placemark);
 
-    void updateProperty( const QString &property, bool value );
+    void updateProperty(const QString &property, bool value);
 
- Q_SIGNALS:
+Q_SIGNALS:
 
     /**
      * @brief Signal that the MarbleModel has started to create a new set of tiles.
      * @param name name of the set
      * @param description the set description
      */
-    void creatingTilesStart( TileCreator*, const QString& name, const QString& description );
+    void creatingTilesStart(TileCreator *, const QString &name, const QString &description);
 
     /**
      * @brief Signal that the map theme has changed, and to which theme.
@@ -308,7 +304,7 @@ class MARBLE_EXPORT MarbleModel : public QObject
      * @see  mapTheme
      * @see  setMapTheme
      */
-    void themeChanged( const QString &mapTheme );
+    void themeChanged(const QString &mapTheme);
 
     void workOfflineChanged();
 
@@ -316,20 +312,20 @@ class MARBLE_EXPORT MarbleModel : public QObject
      * @brief Emitted when the placemark tracked by this model has changed
      * @see setTrackedPlacemark(), trackedPlacemark()
      */
-    void trackedPlacemarkChanged( const GeoDataPlacemark *placemark );
- 
+    void trackedPlacemarkChanged(const GeoDataPlacemark *placemark);
+
     /** @brief Emitted when the home location is changed
      * @see home(), setHome()
      */
-    void homeChanged( const GeoDataCoordinates &newHomePoint );
+    void homeChanged(const GeoDataCoordinates &newHomePoint);
 
- private:
-    Q_DISABLE_COPY( MarbleModel )
+private:
+    Q_DISABLE_COPY(MarbleModel)
 
-    Q_PRIVATE_SLOT( d, void assignFillColors( const QString &filePath ) )
+    Q_PRIVATE_SLOT(d, void assignFillColors(const QString &filePath))
 
-    void addDownloadPolicies( const GeoSceneDocument *mapTheme );
-    MarbleModelPrivate  * const d;
+    void addDownloadPolicies(const GeoSceneDocument *mapTheme);
+    MarbleModelPrivate *const d;
 };
 
 }

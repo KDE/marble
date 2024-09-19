@@ -12,25 +12,20 @@
 
 #include "SimpleDBusInterface.h"
 
-
-
 static const QString interfaceName = "org.freedesktop.Geoclue";
 
 class GeoCute::Provider::Private
 {
-    public:
-        Private(Provider& parent, const QString& service,
-            const QString& path);
-        ~Private();
-        void statusChangedCall(int status);
-        
-        Status currentStatus;
-        SimpleDBusInterface interface;
-        
-    private:
-        Provider& parent;
+public:
+    Private(Provider &parent, const QString &service, const QString &path);
+    ~Private();
+    void statusChangedCall(int status);
+
+    Status currentStatus;
+    SimpleDBusInterface interface;
+
+private:
+    Provider &parent;
 };
-
-
 
 #endif

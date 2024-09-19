@@ -5,14 +5,13 @@
 
 #include "NullMarbleWebView.h"
 
-MarbleWebView::MarbleWebView(QWidget *parent):
-    QWidget(parent)
+MarbleWebView::MarbleWebView(QWidget *parent)
+    : QWidget(parent)
 {
 }
 
 void MarbleWebView::setUrl(const QUrl &url)
 {
-
 }
 
 #include "moc_NullMarbleWebView.cpp"

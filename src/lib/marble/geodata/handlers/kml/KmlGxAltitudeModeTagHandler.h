@@ -17,7 +17,7 @@ namespace gx
 class KmlaltitudeModeTagHandler : public GeoTagHandler
 {
 public:
-    GeoNode* parse(GeoParser&) const override;
+    GeoNode *parse(GeoParser &) const override;
 };
 
 }

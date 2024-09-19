@@ -11,7 +11,6 @@
 #ifndef MARBLE_MARBLEPLACEMARKMODEL_H
 #define MARBLE_MARBLEPLACEMARKMODEL_H
 
-
 #include <QAbstractListModel>
 #include <QModelIndex>
 
@@ -33,32 +32,31 @@ class MARBLE_EXPORT MarblePlacemarkModel : public QAbstractListModel
 
     Q_OBJECT
 
-    Q_PROPERTY( int count READ rowCount NOTIFY countChanged )
+    Q_PROPERTY(int count READ rowCount NOTIFY countChanged)
 
- public:
+public:
     /**
      * The roles of the place marks.
      */
-    enum Roles
-    {
-      GeoTypeRole = Qt::UserRole + 1,  ///< The geo type (e.g. city or mountain)
-      DescriptionRole,                 ///< The description
-      CoordinateRole,                  ///< The GeoDataCoordinates coordinate
-      PopulationRole,                  ///< The population
-      AreaRole,                        ///< The area size
-      CountryCodeRole,                 ///< The country code
-      StateRole,                       ///< The state
-      VisualCategoryRole,              ///< The category
-      StyleRole,                       ///< The style
-      PopularityIndexRole,             ///< The popularity index
-      PopularityRole,                  ///< The popularity
-      ObjectPointerRole,               ///< The pointer to a specific object
-      GmtRole,                         ///< The Greenwich Mean Time
-      DstRole,                         ///< The Daylight Saving Time
-      GeometryRole,                    ///< The GeoDataGeometry geometry
-      LongitudeRole,                   ///< The longitude in degree (for use in QML)
-      LatitudeRole,                    ///< The latitude in degree (for use in QML)
-      IconPathRole                     ///< Path to the image, if known
+    enum Roles {
+        GeoTypeRole = Qt::UserRole + 1, ///< The geo type (e.g. city or mountain)
+        DescriptionRole, ///< The description
+        CoordinateRole, ///< The GeoDataCoordinates coordinate
+        PopulationRole, ///< The population
+        AreaRole, ///< The area size
+        CountryCodeRole, ///< The country code
+        StateRole, ///< The state
+        VisualCategoryRole, ///< The category
+        StyleRole, ///< The style
+        PopularityIndexRole, ///< The popularity index
+        PopularityRole, ///< The popularity
+        ObjectPointerRole, ///< The pointer to a specific object
+        GmtRole, ///< The Greenwich Mean Time
+        DstRole, ///< The Daylight Saving Time
+        GeometryRole, ///< The GeoDataGeometry geometry
+        LongitudeRole, ///< The longitude in degree (for use in QML)
+        LatitudeRole, ///< The latitude in degree (for use in QML)
+        IconPathRole ///< Path to the image, if known
     };
 
     /**
@@ -66,20 +64,20 @@ class MARBLE_EXPORT MarblePlacemarkModel : public QAbstractListModel
      *
      * @param parent The parent object.
      */
-    explicit MarblePlacemarkModel( QObject *parent = nullptr );
+    explicit MarblePlacemarkModel(QObject *parent = nullptr);
 
     /**
      * Destroys the place mark model.
      */
     ~MarblePlacemarkModel() override;
 
-    void setPlacemarkContainer( QVector<GeoDataPlacemark*> *container );
+    void setPlacemarkContainer(QVector<GeoDataPlacemark *> *container);
 
     /**
      * Return the number of Placemarks in the Model.
      */
-    int rowCount( const QModelIndex &parent = QModelIndex() ) const override;
-    int columnCount( const QModelIndex &parent = QModelIndex() ) const override;
+    int rowCount(const QModelIndex &parent = QModelIndex()) const override;
+    int columnCount(const QModelIndex &parent = QModelIndex()) const override;
 
     /**
      * Return the supported role names
@@ -92,35 +90,33 @@ class MARBLE_EXPORT MarblePlacemarkModel : public QAbstractListModel
      * @param index  the index of the data
      * @param role   which part of the data to return.  @see Roles
      */
-    QVariant data( const QModelIndex &index, int role ) const override;
+    QVariant data(const QModelIndex &index, int role) const override;
 
-    QModelIndexList approxMatch( const QModelIndex &start, int role, 
-                                   const QVariant &value, int hits = 1,
-                                   Qt::MatchFlags flags = Qt::MatchFlags( Qt::MatchStartsWith | Qt::MatchWrap ) ) const;
+    QModelIndexList approxMatch(const QModelIndex &start,
+                                int role,
+                                const QVariant &value,
+                                int hits = 1,
+                                Qt::MatchFlags flags = Qt::MatchFlags(Qt::MatchStartsWith | Qt::MatchWrap)) const;
 
     /**
      * This method is used by the PlacemarkManager to add new
      * place marks to the model.
      */
-    void addPlacemarks( int start,
-                        int length );
+    void addPlacemarks(int start, int length);
 
     /**
      * This method is used by the PlacemarkManager to remove
      * place marks from the model.
      */
-    void removePlacemarks( const QString &containerName,
-                           int start,
-                           int length );
+    void removePlacemarks(const QString &containerName, int start, int length);
 
 Q_SIGNALS:
     void countChanged();
 
- private:
-
-    Q_DISABLE_COPY( MarblePlacemarkModel )
+private:
+    Q_DISABLE_COPY(MarblePlacemarkModel)
     class Private;
-    Private* const d;
+    Private *const d;
     QHash<int, QByteArray> m_roleNames;
 };
 

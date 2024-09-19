@@ -7,8 +7,8 @@
 
 using namespace Marble;
 
-AprsSource::AprsSource( QIODevice *insocket )
-    : m_socket( insocket )
+AprsSource::AprsSource(QIODevice *insocket)
+    : m_socket(insocket)
 {
 }
 
@@ -16,15 +16,12 @@ AprsSource::~AprsSource()
 {
 }
 
-QIODevice *
-AprsSource::socket() 
+QIODevice *AprsSource::socket()
 {
     return m_socket;
 }
 
-void
-AprsSource::setSocket( QIODevice *setto ) 
+void AprsSource::setSocket(QIODevice *setto)
 {
     m_socket = setto;
 }
-

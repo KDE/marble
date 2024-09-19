@@ -6,11 +6,10 @@
 
 #include "TestUtils.h"
 
+#include <GeoDataLatLonBox.h>
 #include <GeoSceneEquirectTileProjection.h>
 #include <GeoSceneMercatorTileProjection.h>
-#include <GeoDataLatLonBox.h>
 #include <TileId.h>
-
 
 namespace Marble
 {
@@ -37,11 +36,10 @@ private Q_SLOTS:
     void testGeoCoordinatesMercator();
 
 private:
-    void testLevelZeroColumnsRows(GeoSceneAbstractTileProjection& projection);
+    void testLevelZeroColumnsRows(GeoSceneAbstractTileProjection &projection);
 };
 
-
-void TileProjectionTest::testLevelZeroColumnsRows(GeoSceneAbstractTileProjection& projection)
+void TileProjectionTest::testLevelZeroColumnsRows(GeoSceneAbstractTileProjection &projection)
 {
     // test default
     QCOMPARE(projection.levelZeroColumns(), 1);
@@ -82,7 +80,6 @@ void TileProjectionTest::testTypeMercator()
     QCOMPARE(projection.type(), GeoSceneAbstractTileProjection::Mercator);
 }
 
-
 void TileProjectionTest::testTileIndexesEquirect_data()
 {
     QTest::addColumn<qreal>("westLon");
@@ -97,91 +94,43 @@ void TileProjectionTest::testTileIndexesEquirect_data()
 
     // zoomlevel zero: 1 tile
     // bounds matching the tile map
-    addRow() << qreal(-M_PI) << qreal(+M_PI * 0.5)
-             << qreal(+M_PI) << qreal(-M_PI * 0.5)
-             << 0
-             << 0 << 0 << 0 << 0;
+    addRow() << qreal(-M_PI) << qreal(+M_PI * 0.5) << qreal(+M_PI) << qreal(-M_PI * 0.5) << 0 << 0 << 0 << 0 << 0;
     // bounds inside the 1 tile
-    addRow() << qreal(-M_PI*0.5) << qreal(+M_PI * 0.25)
-             << qreal(+M_PI*0.5) << qreal(-M_PI * 0.25)
-             << 0
-             << 0 << 0 << 0 << 0;
+    addRow() << qreal(-M_PI * 0.5) << qreal(+M_PI * 0.25) << qreal(+M_PI * 0.5) << qreal(-M_PI * 0.25) << 0 << 0 << 0 << 0 << 0;
     // bounds west and north on tile map borders, with normal border values
-    addRow() << qreal(-M_PI)     << qreal(+M_PI * 0.5)
-             << qreal(+M_PI*0.5) << qreal(-M_PI * 0.25)
-             << 0
-             << 0 << 0 << 0 << 0;
+    addRow() << qreal(-M_PI) << qreal(+M_PI * 0.5) << qreal(+M_PI * 0.5) << qreal(-M_PI * 0.25) << 0 << 0 << 0 << 0 << 0;
     // bounds west and north on tile map borders, with border values from other map border sides
-    addRow() << qreal(+M_PI)     << qreal(-M_PI * 0.5)
-             << qreal(+M_PI*0.5) << qreal(-M_PI * 0.25)
-             << 0
-             << 0 << 0 << 0 << 0;
+    addRow() << qreal(+M_PI) << qreal(-M_PI * 0.5) << qreal(+M_PI * 0.5) << qreal(-M_PI * 0.25) << 0 << 0 << 0 << 0 << 0;
 
     // zoomlevel 1: 2 tiles per dimension
     // bounds matching the tile map
-    addRow() << qreal(-M_PI) << qreal(+M_PI * 0.5)
-             << qreal(+M_PI) << qreal(-M_PI * 0.5)
-             << 1
-             << 0 << 0 << 1 << 1;
+    addRow() << qreal(-M_PI) << qreal(+M_PI * 0.5) << qreal(+M_PI) << qreal(-M_PI * 0.5) << 1 << 0 << 0 << 1 << 1;
     // bounds inside the 4 tiles
-    addRow() << qreal(-M_PI*0.5) << qreal(+M_PI * 0.25)
-             << qreal(+M_PI*0.5) << qreal(-M_PI * 0.25)
-             << 1
-             << 0 << 0 << 1 << 1;
+    addRow() << qreal(-M_PI * 0.5) << qreal(+M_PI * 0.25) << qreal(+M_PI * 0.5) << qreal(-M_PI * 0.25) << 1 << 0 << 0 << 1 << 1;
     // bounds matching the most north-west tile, with normal border values
-    addRow() << qreal(-M_PI)     << qreal(+M_PI * 0.5)
-             << qreal(0)         << qreal(0)
-             << 1
-             << 0 << 0 << 0 << 0;
+    addRow() << qreal(-M_PI) << qreal(+M_PI * 0.5) << qreal(0) << qreal(0) << 1 << 0 << 0 << 0 << 0;
     // bounds matching the most north-west tile, with border values from other map border sides
-    addRow() << qreal(+M_PI)     << qreal(-M_PI * 0.5)
-             << qreal(0)         << qreal(0)
-             << 1
-             << 0 << 0 << 0 << 0;
+    addRow() << qreal(+M_PI) << qreal(-M_PI * 0.5) << qreal(0) << qreal(0) << 1 << 0 << 0 << 0 << 0;
     // bounds matching the most south-east tile, with normal border values
-    addRow() << qreal(0) << qreal(0)
-             << qreal(+M_PI) << qreal(-M_PI * 0.5)
-             << 1
-             << 1 << 1 << 1 << 1;
+    addRow() << qreal(0) << qreal(0) << qreal(+M_PI) << qreal(-M_PI * 0.5) << 1 << 1 << 1 << 1 << 1;
     // bounds matching the most south-east tile, with border values from other map border sides
-    addRow() << qreal(0) << qreal(0)
-             << qreal(-M_PI) << qreal(+M_PI * 0.5)
-             << 1
-             << 1 << 1 << 1 << 1;
+    addRow() << qreal(0) << qreal(0) << qreal(-M_PI) << qreal(+M_PI * 0.5) << 1 << 1 << 1 << 1 << 1;
 
     // zoomlevel 9: 2^8==512 tiles per dimension
     // bounds matching the tile map
-    addRow() << qreal(-M_PI) << qreal(+M_PI * 0.5)
-             << qreal(+M_PI) << qreal(-M_PI * 0.5)
-             << 9
-             << 0 << 0 << 511 << 511;
+    addRow() << qreal(-M_PI) << qreal(+M_PI * 0.5) << qreal(+M_PI) << qreal(-M_PI * 0.5) << 9 << 0 << 0 << 511 << 511;
     // bounds inside the outer tiles
-    addRow() << qreal(-M_PI*(511/512.0)) << qreal(+M_PI * 0.5 * (511/512.0))
-             << qreal(+M_PI*(511/512.0)) << qreal(-M_PI * 0.5 * (511/512.0))
-             << 9
+    addRow() << qreal(-M_PI * (511 / 512.0)) << qreal(+M_PI * 0.5 * (511 / 512.0)) << qreal(+M_PI * (511 / 512.0)) << qreal(-M_PI * 0.5 * (511 / 512.0)) << 9
              << 0 << 0 << 511 << 511;
     // bounds matching the most north-west tile, with normal border values
-    addRow() << qreal(-M_PI)             << qreal(+M_PI * 0.5)
-             << qreal(-M_PI*(255/256.0)) << qreal(+M_PI * 0.5 *(255/256.0))
-             << 9
-             << 0 << 0 << 0 << 0;
+    addRow() << qreal(-M_PI) << qreal(+M_PI * 0.5) << qreal(-M_PI * (255 / 256.0)) << qreal(+M_PI * 0.5 * (255 / 256.0)) << 9 << 0 << 0 << 0 << 0;
     // bounds matching the most north-west tile, with border values from other map border sides
-    addRow() << qreal(+M_PI)             << qreal(-M_PI * 0.5)
-             << qreal(-M_PI*(255/256.0)) << qreal(+M_PI * 0.5 *(255/256.0))
-             << 9
-             << 0 << 0 << 0 << 0;
+    addRow() << qreal(+M_PI) << qreal(-M_PI * 0.5) << qreal(-M_PI * (255 / 256.0)) << qreal(+M_PI * 0.5 * (255 / 256.0)) << 9 << 0 << 0 << 0 << 0;
     // bounds matching the most south-east tile, with normal border values
-    addRow() << qreal(+M_PI*(255/256.0)) << qreal(-M_PI * 0.5 *(255/256.0))
-             << qreal(+M_PI)             << qreal(-M_PI * 0.5)
-             << 9
-             << 511 << 511 << 511 << 511;
+    addRow() << qreal(+M_PI * (255 / 256.0)) << qreal(-M_PI * 0.5 * (255 / 256.0)) << qreal(+M_PI) << qreal(-M_PI * 0.5) << 9 << 511 << 511 << 511 << 511;
     // bounds matching the most south-east tile, with border values from other map border sides
-    addRow() << qreal(+M_PI*(255/256.0)) << qreal(-M_PI * 0.5 *(255/256.0))
-             << qreal(-M_PI)             << qreal(+M_PI * 0.5)
-             << 9
-             << 511 << 511 << 511 << 511;
+    addRow() << qreal(+M_PI * (255 / 256.0)) << qreal(-M_PI * 0.5 * (255 / 256.0)) << qreal(-M_PI) << qreal(+M_PI * 0.5) << 9 << 511 << 511 << 511 << 511;
 }
-
 
 void TileProjectionTest::testTileIndexesEquirect()
 {
@@ -207,7 +156,6 @@ void TileProjectionTest::testTileIndexesEquirect()
     QCOMPARE(rect.bottom(), expectedTileYSouth);
 }
 
-
 void TileProjectionTest::testTileIndexesMercator_data()
 {
     QTest::addColumn<qreal>("westLon");
@@ -222,108 +170,51 @@ void TileProjectionTest::testTileIndexesMercator_data()
 
     // zoomlevel zero: 1 tile
     // bounds matching the tile map up to 90 degree latitude
-    addRow() << qreal(-M_PI) << qreal(+M_PI * 0.5)
-             << qreal(+M_PI) << qreal(-M_PI * 0.5)
-             << 0
-             << 0 << 0 << 0 << 0;
+    addRow() << qreal(-M_PI) << qreal(+M_PI * 0.5) << qreal(+M_PI) << qreal(-M_PI * 0.5) << 0 << 0 << 0 << 0 << 0;
     // bounds matching the tile map with 85 degree latitude limit
-    addRow() << qreal(-M_PI) << qreal(85.0 * DEG2RAD)
-             << qreal(+M_PI) << qreal(-85.0 * DEG2RAD)
-             << 0
-             << 0 << 0 << 0 << 0;
+    addRow() << qreal(-M_PI) << qreal(85.0 * DEG2RAD) << qreal(+M_PI) << qreal(-85.0 * DEG2RAD) << 0 << 0 << 0 << 0 << 0;
     // bounds inside the 1 tile
-    addRow() << qreal(-M_PI*0.5) << qreal(+M_PI * 0.25)
-             << qreal(+M_PI*0.5) << qreal(-M_PI * 0.25)
-             << 0
-             << 0 << 0 << 0 << 0;
+    addRow() << qreal(-M_PI * 0.5) << qreal(+M_PI * 0.25) << qreal(+M_PI * 0.5) << qreal(-M_PI * 0.25) << 0 << 0 << 0 << 0 << 0;
     // bounds west and north on tile map borders, with normal border values
-    addRow() << qreal(-M_PI)     << qreal(+M_PI * 0.5)
-             << qreal(+M_PI*0.5) << qreal(-M_PI * 0.25)
-             << 0
-             << 0 << 0 << 0 << 0;
+    addRow() << qreal(-M_PI) << qreal(+M_PI * 0.5) << qreal(+M_PI * 0.5) << qreal(-M_PI * 0.25) << 0 << 0 << 0 << 0 << 0;
     // bounds west and north on tile map borders, with border values from other map border sides
-    addRow() << qreal(+M_PI)     << qreal(-M_PI * 0.5)
-             << qreal(+M_PI*0.5) << qreal(-M_PI * 0.25)
-             << 0
-             << 0 << 0 << 0 << 0;
+    addRow() << qreal(+M_PI) << qreal(-M_PI * 0.5) << qreal(+M_PI * 0.5) << qreal(-M_PI * 0.25) << 0 << 0 << 0 << 0 << 0;
 
     // zoomlevel 1: 2 tiles per dimension
     // bounds matching the tile map up to 90 degree latitude
-    addRow() << qreal(-M_PI) << qreal(+M_PI * 0.5)
-             << qreal(+M_PI) << qreal(-M_PI * 0.5)
-             << 1
-             << 0 << 0 << 1 << 1;
+    addRow() << qreal(-M_PI) << qreal(+M_PI * 0.5) << qreal(+M_PI) << qreal(-M_PI * 0.5) << 1 << 0 << 0 << 1 << 1;
     // bounds matching the tile map with 85 degree latitude limit
-    addRow() << qreal(-M_PI) << qreal(85.0 * DEG2RAD)
-             << qreal(+M_PI) << qreal(-85.0 * DEG2RAD)
-             << 1
-             << 0 << 0 << 1 << 1;
+    addRow() << qreal(-M_PI) << qreal(85.0 * DEG2RAD) << qreal(+M_PI) << qreal(-85.0 * DEG2RAD) << 1 << 0 << 0 << 1 << 1;
     // bounds inside the 4 tiles
-    addRow() << qreal(-M_PI*0.5) << qreal(+M_PI * 0.25)
-             << qreal(+M_PI*0.5) << qreal(-M_PI * 0.25)
-             << 1
-             << 0 << 0 << 1 << 1;
+    addRow() << qreal(-M_PI * 0.5) << qreal(+M_PI * 0.25) << qreal(+M_PI * 0.5) << qreal(-M_PI * 0.25) << 1 << 0 << 0 << 1 << 1;
     // bounds matching the most north-west tile, with normal border values
-    addRow() << qreal(-M_PI)     << qreal(+M_PI * 0.5)
-             << qreal(0)         << qreal(0)
-             << 1
-             << 0 << 0 << 0 << 0;
+    addRow() << qreal(-M_PI) << qreal(+M_PI * 0.5) << qreal(0) << qreal(0) << 1 << 0 << 0 << 0 << 0;
     // bounds matching the most north-west tile, with border values from other map border sides
-    addRow() << qreal(+M_PI)     << qreal(-M_PI * 0.5)
-             << qreal(0)         << qreal(0)
-             << 1
-             << 0 << 0 << 0 << 0;
+    addRow() << qreal(+M_PI) << qreal(-M_PI * 0.5) << qreal(0) << qreal(0) << 1 << 0 << 0 << 0 << 0;
     // bounds matching the most south-east tile, with normal border values
-    addRow() << qreal(0) << qreal(0)
-             << qreal(+M_PI) << qreal(-M_PI * 0.5)
-             << 1
-             << 1 << 1 << 1 << 1;
+    addRow() << qreal(0) << qreal(0) << qreal(+M_PI) << qreal(-M_PI * 0.5) << 1 << 1 << 1 << 1 << 1;
     // bounds matching the most south-east tile, with border values from other map border sides
-    addRow() << qreal(0) << qreal(0)
-             << qreal(-M_PI) << qreal(+M_PI * 0.5)
-             << 1
-             << 1 << 1 << 1 << 1;
+    addRow() << qreal(0) << qreal(0) << qreal(-M_PI) << qreal(+M_PI * 0.5) << 1 << 1 << 1 << 1 << 1;
 
     // zoomlevel 9: 2^8==512 tiles per dimension
     // GeoSceneMercatorTileProjection bounds latitude value at +/- 85.0 degree (so not at 85.05113),
     // which results in some tiles missed at the outer sides.
     // bounds matching the tile map up to 90 degree latitude
-    addRow() << qreal(-M_PI) << qreal(+M_PI * 0.5)
-             << qreal(+M_PI) << qreal(-M_PI * 0.5)
-             << 9
-             << 0 << 5 << 511 << 506;
+    addRow() << qreal(-M_PI) << qreal(+M_PI * 0.5) << qreal(+M_PI) << qreal(-M_PI * 0.5) << 9 << 0 << 5 << 511 << 506;
     // bounds matching the tile map with 85 degree latitude limit
-    addRow() << qreal(-M_PI) << qreal(85.0 * DEG2RAD)
-             << qreal(+M_PI) << qreal(-85.0 * DEG2RAD)
-             << 9
-             << 0 << 5 << 511 << 506;
+    addRow() << qreal(-M_PI) << qreal(85.0 * DEG2RAD) << qreal(+M_PI) << qreal(-85.0 * DEG2RAD) << 9 << 0 << 5 << 511 << 506;
     // bounds inside the outer tiles
-    addRow() << qreal(-M_PI*(511/512.0)) << qreal(+M_PI * 0.5 * (511/512.0))
-             << qreal(+M_PI*(511/512.0)) << qreal(-M_PI * 0.5 * (511/512.0))
-             << 9
+    addRow() << qreal(-M_PI * (511 / 512.0)) << qreal(+M_PI * 0.5 * (511 / 512.0)) << qreal(+M_PI * (511 / 512.0)) << qreal(-M_PI * 0.5 * (511 / 512.0)) << 9
              << 0 << 5 << 511 << 506;
     // bounds matching the most north-west tile, with normal border values
-    addRow() << qreal(-M_PI)             << qreal(+M_PI * 0.5)
-             << qreal(-M_PI*(255/256.0)) << qreal(+M_PI * 0.5 *(255/256.0))
-             << 9
-             << 0 << 5 << 0 << 5;
+    addRow() << qreal(-M_PI) << qreal(+M_PI * 0.5) << qreal(-M_PI * (255 / 256.0)) << qreal(+M_PI * 0.5 * (255 / 256.0)) << 9 << 0 << 5 << 0 << 5;
     // bounds matching the most north-west tile, with border values from other map border sides
-    addRow() << qreal(+M_PI)             << qreal(-M_PI * 0.5)
-             << qreal(-M_PI*(255/256.0)) << qreal(+M_PI * 0.5 *(255/256.0))
-             << 9
-             << 0 << 5 << 0 << 5;
+    addRow() << qreal(+M_PI) << qreal(-M_PI * 0.5) << qreal(-M_PI * (255 / 256.0)) << qreal(+M_PI * 0.5 * (255 / 256.0)) << 9 << 0 << 5 << 0 << 5;
     // bounds matching the most south-east tile, with normal border values
-    addRow() << qreal(+M_PI*(255/256.0)) << qreal(-M_PI * 0.5 *(255/256.0))
-             << qreal(+M_PI)             << qreal(-M_PI * 0.5)
-             << 9
-             << 511 << 506 << 511 << 506;
+    addRow() << qreal(+M_PI * (255 / 256.0)) << qreal(-M_PI * 0.5 * (255 / 256.0)) << qreal(+M_PI) << qreal(-M_PI * 0.5) << 9 << 511 << 506 << 511 << 506;
     // bounds matching the most south-east tile, with border values from other map border sides
-    addRow() << qreal(+M_PI*(255/256.0)) << qreal(-M_PI * 0.5 *(255/256.0))
-             << qreal(-M_PI)             << qreal(+M_PI * 0.5)
-             << 9
-             << 511 << 506 << 511 << 506;
+    addRow() << qreal(+M_PI * (255 / 256.0)) << qreal(-M_PI * 0.5 * (255 / 256.0)) << qreal(-M_PI) << qreal(+M_PI * 0.5) << 9 << 511 << 506 << 511 << 506;
 }
-
 
 void TileProjectionTest::testTileIndexesMercator()
 {
@@ -349,7 +240,6 @@ void TileProjectionTest::testTileIndexesMercator()
     QCOMPARE(rect.bottom(), expectedTileYSouth);
 }
 
-
 void TileProjectionTest::testGeoCoordinatesEquirect_data()
 {
     QTest::addColumn<int>("tileX");
@@ -361,30 +251,20 @@ void TileProjectionTest::testGeoCoordinatesEquirect_data()
     QTest::addColumn<qreal>("expectedSouthernTileEdgeLat");
 
     // zoomlevel zero: 1 tile
-    addRow() << 0 << 0 << 0 << qreal(-M_PI) << qreal(+M_PI * 0.5)
-                            << qreal(+M_PI) << qreal(-M_PI * 0.5);
+    addRow() << 0 << 0 << 0 << qreal(-M_PI) << qreal(+M_PI * 0.5) << qreal(+M_PI) << qreal(-M_PI * 0.5);
 
     // zoomlevel 1: 2 tiles per dimension
-    addRow() << 0 << 0 << 1 << qreal(-M_PI) << qreal(+M_PI * 0.5)
-                            << qreal(0)     << qreal(0);
-    addRow() << 0 << 1 << 1 << qreal(-M_PI) << qreal(0)
-                            << qreal(0)     << qreal(-M_PI * 0.5);
-    addRow() << 1 << 0 << 1 << qreal(0)     << qreal(+M_PI * 0.5)
-                            << qreal(+M_PI) << qreal(0);
-    addRow() << 1 << 1 << 1 << qreal(0)     << qreal(0)
-                            << qreal(+M_PI) << qreal(-M_PI * 0.5);
+    addRow() << 0 << 0 << 1 << qreal(-M_PI) << qreal(+M_PI * 0.5) << qreal(0) << qreal(0);
+    addRow() << 0 << 1 << 1 << qreal(-M_PI) << qreal(0) << qreal(0) << qreal(-M_PI * 0.5);
+    addRow() << 1 << 0 << 1 << qreal(0) << qreal(+M_PI * 0.5) << qreal(+M_PI) << qreal(0);
+    addRow() << 1 << 1 << 1 << qreal(0) << qreal(0) << qreal(+M_PI) << qreal(-M_PI * 0.5);
 
     // zoomlevel 9: 2^8==512 tiles per dimension
-    addRow() <<   0 <<   0 << 9 << qreal(-M_PI)               << qreal(+M_PI * 0.5)
-                                << qreal(-M_PI * (255/256.0)) << qreal(+M_PI * 0.5 * (255/256.0));
-    addRow() <<   0 << 256 << 9 << qreal(-M_PI)               << qreal(0)
-                                << qreal(-M_PI * (255/256.0)) << qreal(-M_PI * 0.5 * (1/256.0));
-    addRow() << 256 <<   0 << 9 << qreal(0)                   << qreal(+M_PI * 0.5)
-                                << qreal(M_PI * (1/256.0))    << qreal(+M_PI * 0.5 * (255/256.0));
-    addRow() << 511 << 511 << 9 << qreal(M_PI * (255/256.0))  << qreal(-M_PI * 0.5 * (255/256.0))
-                                << qreal(+M_PI)               << qreal(-M_PI * 0.5);
+    addRow() << 0 << 0 << 9 << qreal(-M_PI) << qreal(+M_PI * 0.5) << qreal(-M_PI * (255 / 256.0)) << qreal(+M_PI * 0.5 * (255 / 256.0));
+    addRow() << 0 << 256 << 9 << qreal(-M_PI) << qreal(0) << qreal(-M_PI * (255 / 256.0)) << qreal(-M_PI * 0.5 * (1 / 256.0));
+    addRow() << 256 << 0 << 9 << qreal(0) << qreal(+M_PI * 0.5) << qreal(M_PI * (1 / 256.0)) << qreal(+M_PI * 0.5 * (255 / 256.0));
+    addRow() << 511 << 511 << 9 << qreal(M_PI * (255 / 256.0)) << qreal(-M_PI * 0.5 * (255 / 256.0)) << qreal(+M_PI) << qreal(-M_PI * 0.5);
 }
-
 
 void TileProjectionTest::testGeoCoordinatesEquirect()
 {
@@ -428,30 +308,20 @@ void TileProjectionTest::testGeoCoordinatesMercator_data()
     const qreal absMaxLat = DEG2RAD * 85.05113;
 
     // zoomlevel zero: 1 tile
-    addRow() << 0 << 0 << 0 << qreal(-M_PI) << qreal(+absMaxLat)
-                            << qreal(+M_PI) << qreal(-absMaxLat);
+    addRow() << 0 << 0 << 0 << qreal(-M_PI) << qreal(+absMaxLat) << qreal(+M_PI) << qreal(-absMaxLat);
 
     // zoomlevel 1: 2 tiles per dimension
-    addRow() << 0 << 0 << 1 << qreal(-M_PI) << qreal(+absMaxLat)
-                            << qreal(0)     << qreal(0);
-    addRow() << 0 << 1 << 1 << qreal(-M_PI) << qreal(0)
-                            << qreal(0)     << qreal(-absMaxLat);
-    addRow() << 1 << 0 << 1 << qreal(0)     << qreal(+absMaxLat)
-                            << qreal(+M_PI) << qreal(0);
-    addRow() << 1 << 1 << 1 << qreal(0)     << qreal(0)
-                            << qreal(+M_PI) << qreal(-absMaxLat);
+    addRow() << 0 << 0 << 1 << qreal(-M_PI) << qreal(+absMaxLat) << qreal(0) << qreal(0);
+    addRow() << 0 << 1 << 1 << qreal(-M_PI) << qreal(0) << qreal(0) << qreal(-absMaxLat);
+    addRow() << 1 << 0 << 1 << qreal(0) << qreal(+absMaxLat) << qreal(+M_PI) << qreal(0);
+    addRow() << 1 << 1 << 1 << qreal(0) << qreal(0) << qreal(+M_PI) << qreal(-absMaxLat);
 
     // zoomlevel 9: 2^8==512 tiles per dimension
-    addRow() <<   0 <<   0 << 9 << qreal(-M_PI)               << qreal(+absMaxLat)
-                                << qreal(-M_PI * (255/256.0)) << qreal(+1.48336);
-    addRow() <<   0 << 256 << 9 << qreal(-M_PI)               << qreal(0)
-                                << qreal(-M_PI * (255/256.0)) << qreal(-0.0122715);
-    addRow() << 256 <<   0 << 9 << qreal(0)                   << qreal(+absMaxLat)
-                                << qreal(M_PI * (1/256.0))    << qreal(+1.48336);
-    addRow() << 511 << 511 << 9 << qreal(M_PI * (255/256.0))  << qreal(-1.48336)
-                                << qreal(+M_PI)               << qreal(-absMaxLat);
+    addRow() << 0 << 0 << 9 << qreal(-M_PI) << qreal(+absMaxLat) << qreal(-M_PI * (255 / 256.0)) << qreal(+1.48336);
+    addRow() << 0 << 256 << 9 << qreal(-M_PI) << qreal(0) << qreal(-M_PI * (255 / 256.0)) << qreal(-0.0122715);
+    addRow() << 256 << 0 << 9 << qreal(0) << qreal(+absMaxLat) << qreal(M_PI * (1 / 256.0)) << qreal(+1.48336);
+    addRow() << 511 << 511 << 9 << qreal(M_PI * (255 / 256.0)) << qreal(-1.48336) << qreal(+M_PI) << qreal(-absMaxLat);
 }
-
 
 void TileProjectionTest::testGeoCoordinatesMercator()
 {

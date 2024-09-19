@@ -18,23 +18,24 @@ class BBCWeatherItem : public WeatherItem
 {
     Q_OBJECT
 
- public:
-    explicit BBCWeatherItem( QObject *parent = nullptr );
+public:
+    explicit BBCWeatherItem(QObject *parent = nullptr);
     ~BBCWeatherItem() override;
-    
-    bool request( const QString& type ) override;
+
+    bool request(const QString &type) override;
 
     QString service() const override;
-    void addDownloadedFile( const QString& url, const QString& type ) override;
-    
+    void addDownloadedFile(const QString &url, const QString &type) override;
+
     QUrl observationUrl() const;
     QUrl forecastUrl() const;
-   
+
     quint32 bbcId() const;
-    void setBbcId( quint32 id );
+    void setBbcId(quint32 id);
 
     QString creditHtml() const;
- private:    
+
+private:
     quint32 m_bbcId;
     bool m_observationRequested;
     bool m_forecastRequested;

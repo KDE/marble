@@ -3,7 +3,6 @@
 // SPDX-FileCopyrightText: 2012 Dennis Nienhüser <nienhueser@kde.org>
 //
 
-
 #ifndef MARBLE_OSMMAPQUESTRUNNER_H
 #define MARBLE_OSMMAPQUESTRUNNER_H
 
@@ -25,23 +24,23 @@ public:
     ~MapQuestRunner() override;
 
     // Overriding MarbleAbstractRunner
-    void retrieveRoute( const RouteRequest *request ) override;
+    void retrieveRoute(const RouteRequest *request) override;
 
 private Q_SLOTS:
     void get();
 
     /** Route data was retrieved via http */
-    void retrieveData( QNetworkReply *reply );
+    void retrieveData(QNetworkReply *reply);
 
     /** A network error occurred */
-    void handleError( QNetworkReply::NetworkError );
+    void handleError(QNetworkReply::NetworkError);
 
 private:
-    static void append( QString* input, const QString &key, const QString &value );
+    static void append(QString *input, const QString &key, const QString &value);
 
-    static int maneuverType( int mapQuestId );
+    static int maneuverType(int mapQuestId);
 
-    GeoDataDocument* parse( const QByteArray &input ) const;
+    GeoDataDocument *parse(const QByteArray &input) const;
 
     QNetworkAccessManager m_networkAccessManager;
 

@@ -13,35 +13,34 @@
 namespace Marble
 {
 
-static GeoTagWriterRegistrar s_writerLineStyle(
-        GeoTagWriter::QualifiedName( GeoDataTypes::GeoDataLabelStyleType,
-                                     kml::kmlTag_nameSpaceOgc22),
-        new KmlLabelStyleTagWriter );
+static GeoTagWriterRegistrar s_writerLineStyle(GeoTagWriter::QualifiedName(GeoDataTypes::GeoDataLabelStyleType, kml::kmlTag_nameSpaceOgc22),
+                                               new KmlLabelStyleTagWriter);
 
-KmlLabelStyleTagWriter::KmlLabelStyleTagWriter() : KmlColorStyleTagWriter( kml::kmlTag_LabelStyle )
+KmlLabelStyleTagWriter::KmlLabelStyleTagWriter()
+    : KmlColorStyleTagWriter(kml::kmlTag_LabelStyle)
 {
-    //nothing to do here
+    // nothing to do here
 }
 
-bool KmlLabelStyleTagWriter::writeMid( const GeoNode *node, GeoWriter &writer ) const
+bool KmlLabelStyleTagWriter::writeMid(const GeoNode *node, GeoWriter &writer) const
 {
-    const GeoDataLabelStyle *style = static_cast<const GeoDataLabelStyle*>( node );
+    const GeoDataLabelStyle *style = static_cast<const GeoDataLabelStyle *>(node);
 
-    writer.writeElement( kml::kmlTag_scale, QString::number(style->scale()));
+    writer.writeElement(kml::kmlTag_scale, QString::number(style->scale()));
 
     return true;
 }
 
 bool KmlLabelStyleTagWriter::isEmpty(const GeoNode *node) const
 {
-    const GeoDataLabelStyle *style = static_cast<const GeoDataLabelStyle*>( node );
+    const GeoDataLabelStyle *style = static_cast<const GeoDataLabelStyle *>(node);
 
     return style->scale() == 1.0;
 }
 
 QColor KmlLabelStyleTagWriter::defaultColor() const
 {
-    return QColor( Qt::black );
+    return QColor(Qt::black);
 }
 
 }

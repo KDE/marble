@@ -10,33 +10,33 @@
 #include "KmlElementDictionary.h"
 
 #include "GeoDataExtendedData.h"
-#include "GeoDataSimpleArrayData.h"
 #include "GeoDataSchemaData.h"
+#include "GeoDataSimpleArrayData.h"
 #include "GeoDataTypes.h"
 
-#include "GeoParser.h"
 #include "GeoDocument.h"
+#include "GeoParser.h"
 
 namespace Marble
 {
 namespace kml
 {
-KML_DEFINE_TAG_HANDLER_GX22( SimpleArrayData )
+KML_DEFINE_TAG_HANDLER_GX22(SimpleArrayData)
 
-GeoNode* KmlSimpleArrayDataTagHandler::parse( GeoParser& parser ) const
+GeoNode *KmlSimpleArrayDataTagHandler::parse(GeoParser &parser) const
 {
     Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1String(kmlTag_SimpleArrayData)));
 
     GeoStackItem parentItem = parser.parentElement();
 
-    if ( parentItem.is<GeoDataExtendedData>() ) {
+    if (parentItem.is<GeoDataExtendedData>()) {
         GeoDataSimpleArrayData *arrayData = new GeoDataSimpleArrayData();
-        QString name = parser.attribute( "name" ).trimmed();
-        parentItem.nodeAs<GeoDataExtendedData>()->setSimpleArrayData( name, arrayData );
+        QString name = parser.attribute("name").trimmed();
+        parentItem.nodeAs<GeoDataExtendedData>()->setSimpleArrayData(name, arrayData);
         return arrayData;
     }
 
-    if ( parentItem.is<GeoDataSchemaData>() ) {
+    if (parentItem.is<GeoDataSchemaData>()) {
         GeoDataExtendedData *extendedData = parentItem.nodeAs<GeoDataSchemaData>()->parent();
         GeoDataSimpleArrayData *arrayData = new GeoDataSimpleArrayData;
         const QString name = parser.attribute("name").trimmed();

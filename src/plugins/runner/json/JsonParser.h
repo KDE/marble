@@ -13,7 +13,8 @@ class QJsonObject;
 
 #include <QVector>
 
-namespace Marble {
+namespace Marble
+{
 
 class GeoDataDocument;
 class GeoDataGeometry;
@@ -32,40 +33,39 @@ public:
      * @brief parse the GeoJSON file
      * @return true if parsing of the file was successful
      */
-    bool read(QIODevice*);
+    bool read(QIODevice *);
 
     /**
      * @brief retrieve the parsed document and reset the parser
      * If parsing was successful, retrieve the resulting document
      * and set the contained m_document pointer to 0.
      */
-    GeoDataDocument* releaseDocument();
+    GeoDataDocument *releaseDocument();
 
 private:
+    GeoDataDocument *m_document;
 
-    GeoDataDocument* m_document;
-
-    GeoDataIconStyle*  m_iconStylePoints;
-    GeoDataIconStyle*  m_iconStyleOther;
-    GeoDataLineStyle*  m_lineStyle;
-    GeoDataPolyStyle*  m_polyStyle;
-    GeoDataLabelStyle* m_labelStyle;
+    GeoDataIconStyle *m_iconStylePoints;
+    GeoDataIconStyle *m_iconStyleOther;
+    GeoDataLineStyle *m_lineStyle;
+    GeoDataPolyStyle *m_polyStyle;
+    GeoDataLabelStyle *m_labelStyle;
 
     /**
      * @brief parse a top-level GeoJSON object (FeatureCollection or Feature)
      * @param jsonObject  the object to parse
      * @return true if parsing of the top-level object was successful
      */
-    bool parseGeoJsonTopLevel(const QJsonObject&);
+    bool parseGeoJsonTopLevel(const QJsonObject &);
 
     /**
-      * @brief parse a sub-level GeoJSON object
-      * @param jsonObject    the object to parse
-      * @param geometryList  a list of geometries pass back to the caller
-      * @param hasPoints     a boolean passed back to the caller: true if Points exist in geometry
-      * @return true if parsing of the object was successful
-      */
-    bool parseGeoJsonSubLevel(const QJsonObject&, QVector<GeoDataGeometry*>&, bool&);
+     * @brief parse a sub-level GeoJSON object
+     * @param jsonObject    the object to parse
+     * @param geometryList  a list of geometries pass back to the caller
+     * @param hasPoints     a boolean passed back to the caller: true if Points exist in geometry
+     * @return true if parsing of the object was successful
+     */
+    bool parseGeoJsonSubLevel(const QJsonObject &, QVector<GeoDataGeometry *> &, bool &);
 };
 
 }

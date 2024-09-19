@@ -6,17 +6,17 @@
 #include "NotesModel.h"
 #include "NotesItem.h"
 
-#include "MarbleGlobal.h"
-#include "MarbleModel.h"
 #include "GeoDataCoordinates.h"
 #include "GeoDataLatLonAltBox.h"
+#include "MarbleGlobal.h"
+#include "MarbleModel.h"
 #include "Planet.h"
 
+#include <QJsonArray>
+#include <QJsonDocument>
+#include <QJsonObject>
 #include <QString>
 #include <QUrl>
-#include <QJsonDocument>
-#include <QJsonArray>
-#include <QJsonObject>
 
 #include <QUrlQuery>
 
@@ -27,7 +27,7 @@ NotesModel::NotesModel(const MarbleModel *marbleModel, QObject *parent)
 {
 }
 
-void NotesModel::getAdditionalItems(const GeoDataLatLonAltBox& box, qint32 number)
+void NotesModel::getAdditionalItems(const GeoDataLatLonAltBox &box, qint32 number)
 {
     double left = box.west(GeoDataCoordinates::Degree);
     double bottom = box.south(GeoDataCoordinates::Degree);
@@ -35,7 +35,13 @@ void NotesModel::getAdditionalItems(const GeoDataLatLonAltBox& box, qint32 numbe
     double top = box.north(GeoDataCoordinates::Degree);
 
     QString bboxValue;
-    bboxValue.append(QString::number(left)).append(",").append(QString::number(bottom)).append(",").append(QString::number(right)).append(",").append(QString::number(top));
+    bboxValue.append(QString::number(left))
+        .append(",")
+        .append(QString::number(bottom))
+        .append(",")
+        .append(QString::number(right))
+        .append(",")
+        .append(QString::number(top));
 
     QUrl osmNotesApiUrl("https://api.openstreetmap.org/api/0.6/notes.json");
     QUrlQuery urlQuery;
@@ -46,13 +52,13 @@ void NotesModel::getAdditionalItems(const GeoDataLatLonAltBox& box, qint32 numbe
     downloadDescriptionFile(osmNotesApiUrl);
 }
 
-void NotesModel::parseFile(const QByteArray& file)
+void NotesModel::parseFile(const QByteArray &file)
 {
     QJsonDocument jsonDoc = QJsonDocument::fromJson(file);
     QJsonValue features = jsonDoc.object().value(QStringLiteral("features"));
 
     if (features.isArray()) {
-        QList<AbstractDataPluginItem*> items;
+        QList<AbstractDataPluginItem *> items;
 
         QJsonArray jsonArray = features.toArray();
         for (auto const jsonRef : jsonArray) {

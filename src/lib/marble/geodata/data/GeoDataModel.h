@@ -8,10 +8,11 @@
 #define GEODATAMODEL_H
 
 #include "GeoDataGeometry.h"
-#include "MarbleGlobal.h"
 #include "GeoDataLink.h"
+#include "MarbleGlobal.h"
 
-namespace Marble {
+namespace Marble
+{
 
 class GeoDataCoordinates;
 class GeoDataLink;
@@ -23,14 +24,14 @@ class GeoDataModelPrivate;
 
 /**
  */
-class GEODATA_EXPORT GeoDataModel: public GeoDataGeometry
+class GEODATA_EXPORT GeoDataModel : public GeoDataGeometry
 {
 public:
     GeoDataModel();
 
-    GeoDataModel( const GeoDataModel &other );
+    GeoDataModel(const GeoDataModel &other);
 
-    GeoDataModel& operator=( const GeoDataModel &other );
+    GeoDataModel &operator=(const GeoDataModel &other);
 
     const char *nodeType() const override;
 
@@ -38,34 +39,34 @@ public:
 
     GeoDataGeometry *copy() const override;
 
-    bool operator==( const GeoDataModel &other ) const;
-    bool operator!=( const GeoDataModel &other ) const;
+    bool operator==(const GeoDataModel &other) const;
+    bool operator!=(const GeoDataModel &other) const;
 
     ~GeoDataModel() override;
 
-    const GeoDataLink& link() const;
-    GeoDataLink& link();
-    void setLink( const GeoDataLink &link );
+    const GeoDataLink &link() const;
+    GeoDataLink &link();
+    void setLink(const GeoDataLink &link);
 
-    const GeoDataCoordinates& coordinates() const;
-    GeoDataCoordinates& coordinates();
+    const GeoDataCoordinates &coordinates() const;
+    GeoDataCoordinates &coordinates();
     void setCoordinates(const GeoDataCoordinates &coordinates);
 
-    const GeoDataScale& scale() const;
-    GeoDataScale& scale();
+    const GeoDataScale &scale() const;
+    GeoDataScale &scale();
     void setScale(const GeoDataScale &scale);
 
-    const GeoDataOrientation& orientation() const;
-    GeoDataOrientation& orientation();
-    void setOrientation( const GeoDataOrientation &orientation);
+    const GeoDataOrientation &orientation() const;
+    GeoDataOrientation &orientation();
+    void setOrientation(const GeoDataOrientation &orientation);
 
-    const GeoDataLocation& location() const;
-    GeoDataLocation& location();
-    void setLocation( const GeoDataLocation &location);
+    const GeoDataLocation &location() const;
+    GeoDataLocation &location();
+    void setLocation(const GeoDataLocation &location);
 
-    const GeoDataResourceMap& resourceMap() const;
-    GeoDataResourceMap& resourceMap();
-    void setResourceMap( const GeoDataResourceMap &map);
+    const GeoDataResourceMap &resourceMap() const;
+    GeoDataResourceMap &resourceMap();
+    void setResourceMap(const GeoDataResourceMap &map);
 
     QString sourceHref() const;
     QString targetHref() const;
@@ -77,6 +78,5 @@ private:
 };
 
 }
-
 
 #endif // GEODATAMODEL_H

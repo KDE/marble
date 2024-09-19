@@ -15,12 +15,12 @@ namespace Marble
 
 class FakeWeatherItem : public WeatherItem
 {
- public:
-    explicit FakeWeatherItem( QObject *parent = nullptr );
+public:
+    explicit FakeWeatherItem(QObject *parent = nullptr);
     ~FakeWeatherItem() override;
-    
+
     QString service() const override;
-    void addDownloadedFile( const QString& url, const QString& type ) override;
+    void addDownloadedFile(const QString &url, const QString &type) override;
 };
 
 } // namespace Marble

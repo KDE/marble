@@ -6,38 +6,39 @@
 #include "FoursquarePlugin.h"
 #include "FoursquareModel.h"
 
-#include <QSettings>
 #include <QIcon>
+#include <QSettings>
 
-namespace Marble {
+namespace Marble
+{
 
 FoursquarePlugin::FoursquarePlugin()
-    : AbstractDataPlugin( nullptr )
+    : AbstractDataPlugin(nullptr)
 {
 }
 
-FoursquarePlugin::FoursquarePlugin(const MarbleModel* marbleModel)
+FoursquarePlugin::FoursquarePlugin(const MarbleModel *marbleModel)
     : AbstractDataPlugin(marbleModel)
 {
-    setEnabled( true ); // Plugin is enabled by default
-    setVisible( false ); // Plugin is invisible by default
+    setEnabled(true); // Plugin is enabled by default
+    setVisible(false); // Plugin is invisible by default
 }
 
 void FoursquarePlugin::initialize()
 {
-    FoursquareModel *model = new FoursquareModel( marbleModel(), this );
-    setModel( model );
-    setNumberOfItems( 20 ); // Do we hardcode that?
+    FoursquareModel *model = new FoursquareModel(marbleModel(), this);
+    setModel(model);
+    setNumberOfItems(20); // Do we hardcode that?
 }
 
 QString FoursquarePlugin::name() const
 {
-    return tr( "Places" );
+    return tr("Places");
 }
 
 QString FoursquarePlugin::guiString() const
 {
-    return tr( "&Places" ); // TODO: Check if that ampersand conflicts with another
+    return tr("&Places"); // TODO: Check if that ampersand conflicts with another
 }
 
 QString FoursquarePlugin::nameId() const
@@ -52,7 +53,7 @@ QString FoursquarePlugin::version() const
 
 QString FoursquarePlugin::description() const
 {
-    return tr( "Displays trending Foursquare places" );
+    return tr("Displays trending Foursquare places");
 }
 
 QString FoursquarePlugin::copyrightYears() const
@@ -62,9 +63,8 @@ QString FoursquarePlugin::copyrightYears() const
 
 QVector<PluginAuthor> FoursquarePlugin::pluginAuthors() const
 {
-    return QVector<PluginAuthor>()
-            << PluginAuthor(QStringLiteral("Dennis Nienhüser"), QStringLiteral("nienhueser@kde.org"))
-            << PluginAuthor(QStringLiteral("Utku Aydın"), QStringLiteral("utkuaydin34@gmail.com"));
+    return QVector<PluginAuthor>() << PluginAuthor(QStringLiteral("Dennis Nienhüser"), QStringLiteral("nienhueser@kde.org"))
+                                   << PluginAuthor(QStringLiteral("Utku Aydın"), QStringLiteral("utkuaydin34@gmail.com"));
 }
 
 QIcon FoursquarePlugin::icon() const
@@ -79,10 +79,10 @@ bool FoursquarePlugin::isAuthenticated()
     return !settings.value(QStringLiteral("access_token")).isNull();
 }
 
-bool FoursquarePlugin::storeAccessToken(const QString& tokenUrl)
+bool FoursquarePlugin::storeAccessToken(const QString &tokenUrl)
 {
     QString expected = "http://edu.kde.org/marble/dummy#access_token=";
-    if( tokenUrl.startsWith( expected ) ) {
+    if (tokenUrl.startsWith(expected)) {
         QSettings settings;
         QString url = tokenUrl;
         settings.setValue(QStringLiteral("access_token"), url.remove(expected));
@@ -95,4 +95,3 @@ bool FoursquarePlugin::storeAccessToken(const QString& tokenUrl)
 }
 
 #include "moc_FoursquarePlugin.cpp"
-

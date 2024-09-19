@@ -5,9 +5,9 @@
 
 #include "KmlMxSizeTagHandler.h"
 
-#include "KmlElementDictionary.h"
 #include "GeoDataIconStyle.h"
 #include "GeoParser.h"
+#include "KmlElementDictionary.h"
 #include "MarbleDebug.h"
 
 namespace Marble
@@ -16,11 +16,11 @@ namespace kml
 {
 namespace mx
 {
-KML_DEFINE_TAG_HANDLER_MX( size )
+KML_DEFINE_TAG_HANDLER_MX(size)
 
-GeoNode* KmlsizeTagHandler::parse( GeoParser& parser ) const
+GeoNode *KmlsizeTagHandler::parse(GeoParser &parser) const
 {
-    if ( parser.parentElement().is<GeoDataIconStyle>() ) {
+    if (parser.parentElement().is<GeoDataIconStyle>()) {
         auto const width = parser.attribute(kmlTag_width).toInt();
         auto const height = parser.attribute(kmlTag_height).toInt();
         auto const size = QSize(width, height);

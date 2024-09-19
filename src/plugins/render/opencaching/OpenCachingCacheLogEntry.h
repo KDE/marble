@@ -6,9 +6,9 @@
 #ifndef OPENCACHINGCACHELOGENTRY_H
 #define OPENCACHINGCACHELOGENTRY_H
 
-#include <QString>
 #include <QDateTime>
 #include <QHash>
+#include <QString>
 
 class QVariant;
 
@@ -21,50 +21,50 @@ namespace Marble
 class OpenCachingCacheLogEntry
 {
 public:
-    OpenCachingCacheLogEntry( const QHash<QString, QVariant>& properties );
+    OpenCachingCacheLogEntry(const QHash<QString, QVariant> &properties);
 
-    void setCacheId( int cacheId );
+    void setCacheId(int cacheId);
 
     int cacheId() const;
 
-    void setUserName( const QString& userName );
+    void setUserName(const QString &userName);
 
-    const QString& userName() const;
+    const QString &userName() const;
 
-    void setLogType( const QString& logType );
+    void setLogType(const QString &logType);
 
-    const QString& logType() const;
+    const QString &logType() const;
 
-    void setText( const QString& text );
+    void setText(const QString &text);
 
-    const QString& text() const;
+    const QString &text() const;
 
-    void setLogDate( const QDateTime& logDate );
+    void setLogDate(const QDateTime &logDate);
 
-    const QDateTime& logDate() const;
+    const QDateTime &logDate() const;
 
-    void setCreatedDate( const QDateTime& createdDate );
+    void setCreatedDate(const QDateTime &createdDate);
 
-    const QDateTime& createdDate() const;
+    const QDateTime &createdDate() const;
 
-    void setLastModifiedDate( const QDateTime& lastModifiedDate );
+    void setLastModifiedDate(const QDateTime &lastModifiedDate);
 
-    const QDateTime& lastModifiedDate() const;
+    const QDateTime &lastModifiedDate() const;
 
 private:
-    long m_cacheId;                      ///< Unique ID of the cache.
+    long m_cacheId; ///< Unique ID of the cache.
 
-    QString m_userName;                  ///< Name of the user that created the log entry.
+    QString m_userName; ///< Name of the user that created the log entry.
 
-    QString m_logType;                   ///< Type of the log. @todo ?
+    QString m_logType; ///< Type of the log. @todo ?
 
-    QString m_text;                      ///< Actual text of the log.
+    QString m_text; ///< Actual text of the log.
 
-    QDateTime m_logDate;                 ///< Date the cache was found.
+    QDateTime m_logDate; ///< Date the cache was found.
 
-    QDateTime m_createdDate;             ///< Date the log was created.
+    QDateTime m_createdDate; ///< Date the log was created.
 
-    QDateTime m_lastModifiedDate;        ///< Date the log was last modified.
+    QDateTime m_lastModifiedDate; ///< Date the log was last modified.
 };
 
 }

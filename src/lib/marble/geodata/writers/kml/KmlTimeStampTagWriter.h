@@ -15,9 +15,9 @@ class GeoDataTimeStamp;
 class KmlTimeStampTagWriter : public GeoTagWriter
 {
 public:
-    bool write( const GeoNode *node, GeoWriter& writer ) const override;
+    bool write(const GeoNode *node, GeoWriter &writer) const override;
 
-    static QString toString( const GeoDataTimeStamp &timestamp );
+    static QString toString(const GeoDataTimeStamp &timestamp);
 };
 
 }

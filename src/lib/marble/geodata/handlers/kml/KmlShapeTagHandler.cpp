@@ -7,24 +7,23 @@
 
 #include "MarbleDebug.h"
 
-#include "KmlElementDictionary.h"
-#include "GeoDataPhotoOverlay.h"
 #include "GeoDataParser.h"
+#include "GeoDataPhotoOverlay.h"
+#include "KmlElementDictionary.h"
 
 namespace Marble
 {
 namespace kml
 {
-KML_DEFINE_TAG_HANDLER( shape )
+KML_DEFINE_TAG_HANDLER(shape)
 
-GeoNode* KmlshapeTagHandler::parse( GeoParser& parser ) const
+GeoNode *KmlshapeTagHandler::parse(GeoParser &parser) const
 {
     Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1String(kmlTag_shape)));
 
     GeoStackItem parentItem = parser.parentElement();
 
-    if (parentItem.represents( kmlTag_PhotoOverlay ))
-    {
+    if (parentItem.represents(kmlTag_PhotoOverlay)) {
         GeoDataPhotoOverlay::Shape shape;
         QString shapeText = parser.readElementText();
 
@@ -39,7 +38,7 @@ GeoNode* KmlshapeTagHandler::parse( GeoParser& parser ) const
             shape = GeoDataPhotoOverlay::Rectangle;
         }
 
-        parentItem.nodeAs<GeoDataPhotoOverlay>()->setShape( shape );
+        parentItem.nodeAs<GeoDataPhotoOverlay>()->setShape(shape);
     }
     return nullptr;
 }

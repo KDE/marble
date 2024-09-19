@@ -18,25 +18,24 @@ namespace Marble
 {
 namespace kml
 {
-KML_DEFINE_TAG_HANDLER( SchemaData )
+KML_DEFINE_TAG_HANDLER(SchemaData)
 
-GeoNode* KmlSchemaDataTagHandler::parse( GeoParser& parser ) const
+GeoNode *KmlSchemaDataTagHandler::parse(GeoParser &parser) const
 {
     Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1String(kmlTag_SchemaData)));
 
     GeoStackItem parentItem = parser.parentElement();
 
-    if( parentItem.represents( kmlTag_ExtendedData ) ) {
-
+    if (parentItem.represents(kmlTag_ExtendedData)) {
         GeoDataSchemaData schemaData;
-        QString schemaUrl = parser.attribute( "schemaUrl" ).trimmed();
-        schemaData.setSchemaUrl( schemaUrl );
-        parentItem.nodeAs<GeoDataExtendedData>()->addSchemaData( schemaData );
-        return &parentItem.nodeAs<GeoDataExtendedData>()->schemaData( schemaUrl );
+        QString schemaUrl = parser.attribute("schemaUrl").trimmed();
+        schemaData.setSchemaUrl(schemaUrl);
+        parentItem.nodeAs<GeoDataExtendedData>()->addSchemaData(schemaData);
+        return &parentItem.nodeAs<GeoDataExtendedData>()->schemaData(schemaUrl);
     }
     return nullptr;
 }
 
-} //namespace kml
+} // namespace kml
 
 } // namespace Marble

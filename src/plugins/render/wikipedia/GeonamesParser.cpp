@@ -7,36 +7,34 @@
 #include "GeonamesParser.h"
 
 // Marble
+#include "MarbleDebug.h"
 #include "MarbleGlobal.h"
 #include "WikipediaItem.h"
-#include "MarbleDebug.h"
 
 // Qt
 #include <QByteArray>
 
 using namespace Marble;
 
-GeonamesParser::GeonamesParser( MarbleWidget * widget,
-                                QList<WikipediaItem *> *list,
-                                QObject *parent )
-    : m_marbleWidget( widget ),
-      m_list( list ),
-      m_parent( parent )
+GeonamesParser::GeonamesParser(MarbleWidget *widget, QList<WikipediaItem *> *list, QObject *parent)
+    : m_marbleWidget(widget)
+    , m_list(list)
+    , m_parent(parent)
 {
 }
 
-bool GeonamesParser::read( const QByteArray& data )
+bool GeonamesParser::read(const QByteArray &data)
 {
-    addData( data );
+    addData(data);
 
     while (!atEnd()) {
         readNext();
 
-        if ( isStartElement() ) {
+        if (isStartElement()) {
             if (name() == QLatin1String("geonames"))
                 readGeonames();
             else
-                raiseError( QObject::tr("The file is not a valid Geonames answer.") );
+                raiseError(QObject::tr("The file is not a valid Geonames answer."));
         }
     }
 
@@ -45,31 +43,30 @@ bool GeonamesParser::read( const QByteArray& data )
 
 void GeonamesParser::readUnknownElement()
 {
-    Q_ASSERT( isStartElement() );
+    Q_ASSERT(isStartElement());
 
-    while ( !atEnd() ) {
+    while (!atEnd()) {
         readNext();
 
-        if ( isEndElement() )
+        if (isEndElement())
             break;
 
-        if ( isStartElement() )
+        if (isStartElement())
             readUnknownElement();
     }
 }
 
 void GeonamesParser::readGeonames()
 {
-    Q_ASSERT( isStartElement()
-              && name() == QLatin1String("geonames"));
-    
-    while ( !atEnd() ) {
+    Q_ASSERT(isStartElement() && name() == QLatin1String("geonames"));
+
+    while (!atEnd()) {
         readNext();
-        
-        if ( isEndElement() )
+
+        if (isEndElement())
             break;
-        
-        if ( isStartElement() ) {
+
+        if (isStartElement()) {
             if (name() == QLatin1String("entry"))
                 readEntry();
             else
@@ -80,160 +77,152 @@ void GeonamesParser::readGeonames()
 
 void GeonamesParser::readEntry()
 {
-    Q_ASSERT( isStartElement()
-              && name() == QLatin1String("entry"));
-              
-    WikipediaItem *item = new WikipediaItem( m_marbleWidget, m_parent );
-    m_list->append( item );
-    
-    while ( !atEnd() ) {
+    Q_ASSERT(isStartElement() && name() == QLatin1String("entry"));
+
+    WikipediaItem *item = new WikipediaItem(m_marbleWidget, m_parent);
+    m_list->append(item);
+
+    while (!atEnd()) {
         readNext();
-        
-        if ( isEndElement() )
+
+        if (isEndElement())
             break;
-            
-        if ( isStartElement() ) {
-            if ( name() == QLatin1String("title" ))
-                readTitle( item );
+
+        if (isStartElement()) {
+            if (name() == QLatin1String("title"))
+                readTitle(item);
             else if (name() == QLatin1String("lng"))
-                readLongitude( item );
+                readLongitude(item);
             else if (name() == QLatin1String("lat"))
-                readLatitude( item );
+                readLatitude(item);
             else if (name() == QLatin1String("wikipediaUrl"))
-                readUrl( item );
+                readUrl(item);
             else if (name() == QLatin1String("summary"))
-                readSummary( item );
+                readSummary(item);
             else if (name() == QLatin1String("thumbnailImg"))
-                readThumbnailImage( item );
+                readThumbnailImage(item);
             else if (name() == QLatin1String("rank"))
-                readRank( item );
+                readRank(item);
             else
                 readUnknownElement();
         }
     }
 }
 
-void GeonamesParser::readTitle( WikipediaItem *item )
+void GeonamesParser::readTitle(WikipediaItem *item)
 {
-    Q_ASSERT( isStartElement()
-              && name() == QLatin1String("title"));
-              
-    while ( !atEnd() ) {
+    Q_ASSERT(isStartElement() && name() == QLatin1String("title"));
+
+    while (!atEnd()) {
         readNext();
-        
-        if ( isEndElement() )
+
+        if (isEndElement())
             break;
-        
-        if ( isCharacters() ) {
-            item->setName( text().toString() );
+
+        if (isCharacters()) {
+            item->setName(text().toString());
         }
     }
 }
 
-void GeonamesParser::readLongitude( WikipediaItem *item )
+void GeonamesParser::readLongitude(WikipediaItem *item)
 {
-    Q_ASSERT( isStartElement()
-              && name() == QLatin1String("lng"));
-              
-    while ( !atEnd() ) {
+    Q_ASSERT(isStartElement() && name() == QLatin1String("lng"));
+
+    while (!atEnd()) {
         readNext();
-        
-        if ( isEndElement() )
+
+        if (isEndElement())
             break;
-        
-        if ( isCharacters() ) {
-            item->setLongitude( text().toString().toDouble() * DEG2RAD );
+
+        if (isCharacters()) {
+            item->setLongitude(text().toString().toDouble() * DEG2RAD);
         }
     }
 }
 
-void GeonamesParser::readLatitude( WikipediaItem *item )
+void GeonamesParser::readLatitude(WikipediaItem *item)
 {
-    Q_ASSERT( isStartElement()
-              && name() == QLatin1String("lat"));
-              
-    while ( !atEnd() ) {
+    Q_ASSERT(isStartElement() && name() == QLatin1String("lat"));
+
+    while (!atEnd()) {
         readNext();
-        
-        if ( isEndElement() )
+
+        if (isEndElement())
             break;
-        
-        if ( isCharacters() ) {
-            item->setLatitude( text().toString().toDouble() * DEG2RAD );
+
+        if (isCharacters()) {
+            item->setLatitude(text().toString().toDouble() * DEG2RAD);
         }
     }
 }
 
-void GeonamesParser::readUrl( WikipediaItem *item )
+void GeonamesParser::readUrl(WikipediaItem *item)
 {
-    Q_ASSERT( isStartElement()
-              && name() == QLatin1String("wikipediaUrl"));
-              
-    while ( !atEnd() ) {
+    Q_ASSERT(isStartElement() && name() == QLatin1String("wikipediaUrl"));
+
+    while (!atEnd()) {
         readNext();
-        
-        if ( isEndElement() )
+
+        if (isEndElement())
             break;
-        
-        if ( isCharacters() ) {
+
+        if (isCharacters()) {
             // Try to switch to the mobile version, geonames
             // lacks API for that unfortunately
             QString url = text().toString();
             if (!url.contains(QLatin1String("m.wikipedia.org"))) {
-                url.replace( "wikipedia.org", "m.wikipedia.org" );
+                url.replace("wikipedia.org", "m.wikipedia.org");
             }
-            item->setUrl( QUrl::fromEncoded( url.toUtf8() ) );
+            item->setUrl(QUrl::fromEncoded(url.toUtf8()));
         }
     }
 }
 
-void GeonamesParser::readSummary( WikipediaItem *item )
+void GeonamesParser::readSummary(WikipediaItem *item)
 {
-    Q_ASSERT( isStartElement()
-              && name() == QLatin1String("summary"));
+    Q_ASSERT(isStartElement() && name() == QLatin1String("summary"));
 
-    while ( !atEnd() ) {
+    while (!atEnd()) {
         readNext();
 
-        if ( isEndElement() )
+        if (isEndElement())
             break;
 
-        if ( isCharacters() ) {
-            item->setSummary( text().toString() );
+        if (isCharacters()) {
+            item->setSummary(text().toString());
         }
     }
 }
 
-void GeonamesParser::readThumbnailImage( WikipediaItem *item )
+void GeonamesParser::readThumbnailImage(WikipediaItem *item)
 {
-    Q_ASSERT( isStartElement()
-              && name() == QLatin1String("thumbnailImg"));
-             
-    while ( !atEnd() ) {
+    Q_ASSERT(isStartElement() && name() == QLatin1String("thumbnailImg"));
+
+    while (!atEnd()) {
         readNext();
-        
-        if ( isEndElement() )
+
+        if (isEndElement())
             break;
-        
-        if ( isCharacters() ) {
-            item->setThumbnailImageUrl( QUrl( text().toString() ) );
+
+        if (isCharacters()) {
+            item->setThumbnailImageUrl(QUrl(text().toString()));
         }
     }
 }
 
-void GeonamesParser::readRank( WikipediaItem *item )
+void GeonamesParser::readRank(WikipediaItem *item)
 {
-    Q_ASSERT( isStartElement()
-              && name() == QLatin1String("rank"));
+    Q_ASSERT(isStartElement() && name() == QLatin1String("rank"));
 
-    while ( !atEnd() ) {
+    while (!atEnd()) {
         readNext();
 
-        if ( isEndElement() )
+        if (isEndElement())
             break;
 
-        if ( isCharacters() ) {
-            item->setRank( text().toString().toDouble() );
+        if (isCharacters()) {
+            item->setRank(text().toString().toDouble());
         }
     }
 }

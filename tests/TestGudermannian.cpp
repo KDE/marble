@@ -3,7 +3,6 @@
 // SPDX-FileCopyrightText: 2013 Adrian Draghici <draghici.adrian.b@gmail.com>
 //
 
-
 #include "MarbleGlobal.h"
 #include "MarbleMath.h"
 #include "TestUtils.h"
@@ -22,7 +21,7 @@ private Q_SLOTS:
 
 void TestGudermannian::testGudermannian_data()
 {
-    QTest::addColumn<qreal>( "angle" );
+    QTest::addColumn<qreal>("angle");
 
     addRow() << 1.0;
     addRow() << 5.0;
@@ -37,13 +36,13 @@ void TestGudermannian::testGudermannian_data()
 
 void TestGudermannian::testGudermannian()
 {
-    QFETCH( qreal, angle );
+    QFETCH(qreal, angle);
 
-    QFUZZYCOMPARE( atan( sinh ( angle * DEG2RAD ) ) * RAD2DEG, gd( angle * DEG2RAD ) * RAD2DEG, 0.1 );
+    QFUZZYCOMPARE(atan(sinh(angle * DEG2RAD)) * RAD2DEG, gd(angle * DEG2RAD) * RAD2DEG, 0.1);
 }
 
 }
 
-QTEST_MAIN( Marble::TestGudermannian )
+QTEST_MAIN(Marble::TestGudermannian)
 
 #include "TestGudermannian.moc"

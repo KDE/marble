@@ -30,7 +30,7 @@ public:
      * @param documentIdentifier XML document identifier or file extension that determines
      * @return True if writing is successful, false otherwise
      */
-    static bool write(QIODevice* device, const GeoDataDocument &document, const QString &documentIdentifier);
+    static bool write(QIODevice *device, const GeoDataDocument &document, const QString &documentIdentifier);
 
     /**
      * Convenience method that uses a QFile as QIODevice and determines the document type from the filename extension
@@ -47,12 +47,12 @@ public:
      * @param writer Backend to register
      * @param fileExtension File extension to associate the backend with
      */
-    static void registerWriter(GeoWriterBackend* writer, const QString &fileExtension);
-    static void unregisterWriter(GeoWriterBackend* writer, const QString &fileExtension);
+    static void registerWriter(GeoWriterBackend *writer, const QString &fileExtension);
+    static void unregisterWriter(GeoWriterBackend *writer, const QString &fileExtension);
 
 private:
     static QString determineDocumentIdentifier(const QString &filename);
-    static QSet<QPair<QString, GeoWriterBackend*> > s_backends;
+    static QSet<QPair<QString, GeoWriterBackend *>> s_backends;
 };
 
 }

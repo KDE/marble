@@ -11,15 +11,13 @@
 #ifndef MARBLE_MARBLENAVIGATOR_H
 #define MARBLE_MARBLENAVIGATOR_H
 
-
 #include <QWidget>
 
 #include "marble_export.h"
 
-
 /** @file
  * This file contains the header for MarbleNavigator
- * 
+ *
  * @author Torsten Rahn <tackat@kde.org>
  * @author Inge Wallin  <inge@lysator.liu.se>
  */
@@ -29,7 +27,7 @@ namespace Marble
 
 class MarbleNavigatorPrivate;
 
-/** 
+/**
  * @short A widget class that contains simple controls for a
  * MarbleWidget.
  *
@@ -45,21 +43,21 @@ class MARBLE_EXPORT MarbleNavigator : public QWidget
 {
     Q_OBJECT
 
- public:
+public:
     /**
      * @brief Construct a new MarbleNavigator
      * @param parent the parent widget
      */
     explicit MarbleNavigator(QWidget *parent = nullptr);
     ~MarbleNavigator() override;
- 
+
     /**
      * @brief Return the minimum zoom level set in the widget.
      * @return the minimum zoom level set in the widget.
      */
-    int  minimumZoom() const;
-	
- Q_SIGNALS:
+    int minimumZoom() const;
+
+Q_SIGNALS:
     /**
      * @brief Signal emitted when the Home button has been pressed.
      */
@@ -94,9 +92,9 @@ class MARBLE_EXPORT MarbleNavigator : public QWidget
      * @brief Signal emitted when the Move Down button has been pressed.
      */
     void moveDown();
-    //void centerOn(const QModelIndex&);
+    // void centerOn(const QModelIndex&);
 
- public Q_SLOTS:
+public Q_SLOTS:
     /**
      * @brief Sets the value of the slider.
      * @param zoom The new zoom value.
@@ -108,18 +106,18 @@ class MARBLE_EXPORT MarbleNavigator : public QWidget
      */
     void changeZoom(int zoom);
 
- protected:
+protected:
     /**
-     * @brief Reimplementation of the resizeEvent() of the widget.  
+     * @brief Reimplementation of the resizeEvent() of the widget.
      *
      * If the MarbleNavigator gets shrunk enough, the slider will be
      * hidden, leaving only the Zoom Up and Zoom Down buttons.
      */
-    void resizeEvent ( QResizeEvent * ) override;
+    void resizeEvent(QResizeEvent *) override;
 
- private:
-    Q_DISABLE_COPY( MarbleNavigator )
-    MarbleNavigatorPrivate  * const d;
+private:
+    Q_DISABLE_COPY(MarbleNavigator)
+    MarbleNavigatorPrivate *const d;
 };
 
 }

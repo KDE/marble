@@ -18,7 +18,7 @@ public:
     explicit LocalDatabaseRunner(QObject *parent = nullptr);
     ~LocalDatabaseRunner() override;
 
-    void search( const QString &searchTerm, const GeoDataLatLonBox &preferred ) override;
+    void search(const QString &searchTerm, const GeoDataLatLonBox &preferred) override;
 };
 
 }

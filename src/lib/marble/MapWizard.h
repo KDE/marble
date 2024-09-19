@@ -18,7 +18,8 @@
 
 class QNetworkReply;
 
-namespace Marble {
+namespace Marble
+{
 
 class GeoSceneDocument;
 
@@ -33,16 +34,16 @@ public:
     ~MapWizard() override;
 
     QStringList wmsServers() const;
-    void setWmsServers( const QStringList& uris );
+    void setWmsServers(const QStringList &uris);
 
     QStringList wmtsServers() const;
-    void setWmtsServers( const QStringList& uris );
+    void setWmtsServers(const QStringList &uris);
 
     QStringList staticUrlServers() const;
-    void setStaticUrlServers( const QStringList& uris );
+    void setStaticUrlServers(const QStringList &uris);
 
-    static QString createArchive( QWidget *parent, const QString& mapId );
-    static void deleteArchive( const QString& mapId );
+    static QString createArchive(QWidget *parent, const QString &mapId);
+    static void deleteArchive(const QString &mapId);
 
     // QWizard's functions
     void accept() override;
@@ -64,29 +65,29 @@ public Q_SLOTS:
     void queryLegendImage();
 
     // Other
-    void setLineEditWms(const QString& text);
-    void setLayerButtonsVisible( bool visible );
-    void setSearchFieldVisible( bool visible );
+    void setLineEditWms(const QString &text);
+    void setLayerButtonsVisible(bool visible);
+    void setSearchFieldVisible(bool visible);
     void showPreview();
 
-    void updateSearchFilter(const QString& text);
+    void updateSearchFilter(const QString &text);
     void updateListViewSelection();
     void updateBackdropCheckBox();
     void updateOwsServiceType();
     void chooseBackgroundColor();
 
 private:
-    Q_PRIVATE_SLOT( d, void pageEntered( int ) )
+    Q_PRIVATE_SLOT(d, void pageEntered(int))
 
-    GeoSceneDocument* createDocument();
-    bool createFiles( const GeoSceneDocument* head );
-    static QString createLegendHtml( const QString& image = QLatin1String("./legend/legend.png") );
-    void createLegendFile( const QString& legendHtml );
+    GeoSceneDocument *createDocument();
+    bool createFiles(const GeoSceneDocument *head);
+    static QString createLegendHtml(const QString &image = QLatin1String("./legend/legend.png"));
+    void createLegendFile(const QString &legendHtml);
     void createLegend();
-    void downloadLegend( const QString& url );
+    void downloadLegend(const QString &url);
 
-    Q_DISABLE_COPY( MapWizard )
-    MapWizardPrivate * const d;
+    Q_DISABLE_COPY(MapWizard)
+    MapWizardPrivate *const d;
 };
 
 }

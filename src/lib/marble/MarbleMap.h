@@ -8,7 +8,6 @@
 #ifndef MARBLE_MARBLEMAP_H
 #define MARBLE_MARBLEMAP_H
 
-
 /** @file
  * This file contains the headers for MarbleMap.
  *
@@ -16,10 +15,9 @@
  * @author Inge Wallin  <inge@lysator.liu.se>
  */
 
-
-#include "marble_export.h"
-#include "GeoDataCoordinates.h"       // In geodata/data/
+#include "GeoDataCoordinates.h" // In geodata/data/
 #include "GeoDataRelation.h"
+#include "marble_export.h"
 
 // Qt
 #include <QObject>
@@ -31,7 +29,7 @@ class QString;
 namespace Marble
 {
 
-// MarbleMap 
+// MarbleMap
 class MarbleMapPrivate;
 
 // Marble
@@ -87,8 +85,7 @@ class MARBLE_EXPORT MarbleMap : public QObject
     Q_OBJECT
     Q_CLASSINFO("D-Bus Interface", "org.kde.MarbleMap")
 
- public:
-
+public:
     friend class MarbleWidget;
 
     /**
@@ -108,7 +105,7 @@ class MARBLE_EXPORT MarbleMap : public QObject
      * one MarbleMap for the same MarbleModel (not yet supported,
      * but will be soon).
      */
-    explicit MarbleMap( MarbleModel *model );
+    explicit MarbleMap(MarbleModel *model);
 
     ~MarbleMap() override;
 
@@ -140,19 +137,19 @@ class MARBLE_EXPORT MarbleMap : public QObject
      */
     QString mapThemeId() const;
 
-    void setMapQualityForViewContext( MapQuality qualityForViewContext, ViewContext viewContext );
-    MapQuality mapQuality( ViewContext viewContext ) const;
+    void setMapQualityForViewContext(MapQuality qualityForViewContext, ViewContext viewContext);
+    MapQuality mapQuality(ViewContext viewContext) const;
 
     /**
      * @brief Return the current map quality.
      */
     MapQuality mapQuality() const;
 
-    void setViewContext( ViewContext viewContext );
+    void setViewContext(ViewContext viewContext);
     ViewContext viewContext() const;
 
-    void setSize( int width, int height );
-    void setSize( const QSize& size );
+    void setSize(int width, int height);
+    void setSize(const QSize &size);
     QSize size() const;
     int width() const;
     int height() const;
@@ -188,8 +185,7 @@ class MARBLE_EXPORT MarbleMap : public QObject
      * @return @c true  if the geographical coordinates are visible on the screen
      *         @c false if the geographical coordinates are not visible on the screen
      */
-    bool screenCoordinates( qreal lon, qreal lat,
-                            qreal& x, qreal& y ) const;
+    bool screenCoordinates(qreal lon, qreal lat, qreal &x, qreal &y) const;
 
     /**
      * @brief Get the earth coordinates corresponding to a pixel in the map.
@@ -201,9 +197,7 @@ class MARBLE_EXPORT MarbleMap : public QObject
      * @return @c true  if the pixel (x, y) is within the globe
      *         @c false if the pixel (x, y) is outside the globe, i.e. in space.
      */
-    bool geoCoordinates( int x, int y,
-                         qreal& lon, qreal& lat,
-                         GeoDataCoordinates::Unit = GeoDataCoordinates::Degree ) const;
+    bool geoCoordinates(int x, int y, qreal &lon, qreal &lat, GeoDataCoordinates::Unit = GeoDataCoordinates::Degree) const;
 
     /**
      * @brief Return the longitude of the center point.
@@ -222,15 +216,15 @@ class MARBLE_EXPORT MarbleMap : public QObject
     /**
      * @since 0.26.0
      */
-    bool hasFeatureAt(const QPoint&) const;
+    bool hasFeatureAt(const QPoint &) const;
 
-    QVector<const GeoDataFeature *> whichFeatureAt( const QPoint& ) const;
+    QVector<const GeoDataFeature *> whichFeatureAt(const QPoint &) const;
 
     /**
      * @brief  Return the property value by name.
      * @return The property value (usually: visibility).
      */
-    bool propertyValue( const QString& name ) const;
+    bool propertyValue(const QString &name) const;
 
     /**
      * @brief  Return whether the overview map is visible.
@@ -379,30 +373,30 @@ class MARBLE_EXPORT MarbleMap : public QObject
      * @brief Returns a list of all FloatItems in the model
      * @return the list of the floatItems
      */
-    AbstractFloatItem * floatItem( const QString &nameId ) const;
+    AbstractFloatItem *floatItem(const QString &nameId) const;
 
     /**
      * @brief Returns a list of all DataPlugins on the layer
      * @return the list of DataPlugins
      */
-    QList<AbstractDataPlugin *> dataPlugins()  const;
+    QList<AbstractDataPlugin *> dataPlugins() const;
 
     /**
      * @brief Returns all widgets of dataPlugins on the position curpos
      */
-    QList<AbstractDataPluginItem *> whichItemAt( const QPoint& curpos ) const;
+    QList<AbstractDataPluginItem *> whichItemAt(const QPoint &curpos) const;
 
     AngleUnit defaultAngleUnit() const;
 
     QFont defaultFont() const;
 
     TextureLayer *textureLayer() const;
-    VectorTileLayer * vectorTileLayer() const;
+    VectorTileLayer *vectorTileLayer() const;
 
     /**
      * @brief Add a layer to be included in rendering.
      */
-    void addLayer( LayerInterface *layer );
+    void addLayer(LayerInterface *layer);
 
     /**
      * @brief Adds a texture sublayer
@@ -419,7 +413,7 @@ class MARBLE_EXPORT MarbleMap : public QObject
     /**
      * @brief Remove a layer from being included in rendering.
      */
-    void removeLayer( LayerInterface *layer );
+    void removeLayer(LayerInterface *layer);
 
     RenderStatus renderStatus() const;
 
@@ -428,24 +422,24 @@ class MARBLE_EXPORT MarbleMap : public QObject
     /**
      * @since 0.26.0
      */
-    const StyleBuilder* styleBuilder() const;
+    const StyleBuilder *styleBuilder() const;
 
- public Q_SLOTS:
+public Q_SLOTS:
 
     /**
      * @brief Paint the map using a give painter.
      * @param painter  The painter to use.
      * @param dirtyRect the rectangle that actually needs repainting.
      */
-    void paint( GeoPainter &painter, const QRect &dirtyRect );
+    void paint(GeoPainter &painter, const QRect &dirtyRect);
 
     /**
      * @brief  Set the radius of the globe in pixels.
      * @param  radius  The new globe radius value in pixels.
      */
-    void setRadius( int radius );
+    void setRadius(int radius);
 
-    void setHeading( qreal heading );
+    void setHeading(qreal heading);
 
     /**
      * @brief  Rotate the view by the two angles phi and theta.
@@ -467,182 +461,182 @@ class MARBLE_EXPORT MarbleMap : public QObject
      * @param  lon  an angle parallel to the longitude lines
      *              +180(W) - -180(E)
      */
-    void centerOn( const qreal lon, const qreal lat );
+    void centerOn(const qreal lon, const qreal lat);
 
     /**
      * @brief  Set the latitude for the center point
      * @param  lat  the new value for the latitude in degree
      */
-    void setCenterLatitude( qreal lat );
+    void setCenterLatitude(qreal lat);
 
     /**
      * @brief  Set the longitude for the center point
      * @param  lon  the new value for the longitude in degree
      */
-    void setCenterLongitude( qreal lon );
+    void setCenterLongitude(qreal lon);
 
     /**
      * @brief  Set the Projection used for the map
      * @param  projection projection type (e.g. Spherical, Equirectangular, Mercator)
      */
-    void setProjection( Projection projection );
+    void setProjection(Projection projection);
 
     /**
      * @brief Set a new map theme
-     * @param maptheme  The ID of the new maptheme. To ensure that a unique 
-     * identifier is being used the theme does NOT get represented by its 
+     * @param maptheme  The ID of the new maptheme. To ensure that a unique
+     * identifier is being used the theme does NOT get represented by its
      * name but the by relative location of the file that specifies the theme:
      *
-     * Example: 
-     *    maptheme = "earth/bluemarble/bluemarble.dgml" 
+     * Example:
+     *    maptheme = "earth/bluemarble/bluemarble.dgml"
      */
-    void setMapThemeId( const QString& maptheme );
+    void setMapThemeId(const QString &maptheme);
 
     /**
      * @brief  Sets the value of a map theme property
      * @param  name   name of the property
      * @param  value  value of the property (usually: visibility)
-     * 
+     *
      * Later on we might add a "setPropertyType and a QVariant
      * if needed.
      */
-    void setPropertyValue( const QString& name, bool value );
+    void setPropertyValue(const QString &name, bool value);
 
     /**
      * @brief  Set whether the overview map overlay is visible
      * @param  visible  visibility of the overview map
      */
-    void setShowOverviewMap( bool visible );
+    void setShowOverviewMap(bool visible);
 
     /**
      * @brief  Set whether the scale bar overlay is visible
      * @param  visible  visibility of the scale bar
      */
-    void setShowScaleBar( bool visible );
+    void setShowScaleBar(bool visible);
 
     /**
      * @brief  Set whether the compass overlay is visible
      * @param  visible  visibility of the compass
      */
-    void setShowCompass( bool visible );
+    void setShowCompass(bool visible);
 
     /**
      * @brief  Set whether the cloud cover is visible
      * @param  visible  visibility of the cloud cover
      */
-    void setShowClouds( bool visible );
+    void setShowClouds(bool visible);
 
     /**
      * @brief  Set whether the night shadow is visible.
      * @param  visible visibility of shadow
      */
-    void setShowSunShading( bool visible );
+    void setShowSunShading(bool visible);
 
     /**
      * @brief  Set whether city lights instead of night shadow are visible.
      * @param  visible visibility of city lights
      */
-    void setShowCityLights( bool visible );
+    void setShowCityLights(bool visible);
 
     /**
      * @brief  Set the globe locked to the sub solar point
      * @param  visible if globe is locked to the sub solar point
      */
-    void setLockToSubSolarPoint( bool visible );
+    void setLockToSubSolarPoint(bool visible);
 
     /**
      * @brief  Set whether the sun icon is shown in the sub solar point
      * @param  visible if the sun icon is shown in the sub solar point
      */
-    void setSubSolarPointIconVisible( bool visible );
+    void setSubSolarPointIconVisible(bool visible);
 
     /**
      * @brief Set whether the is tile is visible
      * NOTE: This is part of the transitional debug API
      *       and might be subject to changes until Marble 0.8
      * @param visible visibility of the tile
-     */ 
-    void setShowTileId( bool visible );
+     */
+    void setShowTileId(bool visible);
 
     /**
      * @brief  Set whether the atmospheric glow is visible
      * @param  visible  visibility of the atmospheric glow
      */
-    void setShowAtmosphere( bool visible );
+    void setShowAtmosphere(bool visible);
 
     /**
      * @brief  Set whether the crosshairs are visible
      * @param  visible  visibility of the crosshairs
      */
-    void setShowCrosshairs( bool visible );
+    void setShowCrosshairs(bool visible);
 
     /**
      * @brief  Set whether the coordinate grid overlay is visible
      * @param  visible  visibility of the coordinate grid
      */
-    void setShowGrid( bool visible );
+    void setShowGrid(bool visible);
 
     /**
      * @brief  Set whether the place mark overlay is visible
      * @param  visible  visibility of the place marks
      */
-    void setShowPlaces( bool visible );
+    void setShowPlaces(bool visible);
 
     /**
      * @brief  Set whether the city place mark overlay is visible
      * @param  visible  visibility of the city place marks
      */
-    void setShowCities( bool visible );
+    void setShowCities(bool visible);
 
     /**
      * @brief  Set whether the terrain place mark overlay is visible
      * @param  visible  visibility of the terrain place marks
      */
-    void setShowTerrain( bool visible );
+    void setShowTerrain(bool visible);
 
     /**
      * @brief  Set whether the other places overlay is visible
      * @param  visible  visibility of other places
      */
-    void setShowOtherPlaces( bool visible );
+    void setShowOtherPlaces(bool visible);
 
     /**
      * @brief  Set whether the relief is visible
      * @param  visible  visibility of the relief
      */
-    void setShowRelief( bool visible );
+    void setShowRelief(bool visible);
 
     /**
      * @brief  Set whether the ice layer is visible
      * @param  visible  visibility of the ice layer
      */
-    void setShowIceLayer( bool visible );
+    void setShowIceLayer(bool visible);
 
     /**
      * @brief  Set whether the borders visible
      * @param  visible  visibility of the borders
      */
-    void setShowBorders( bool visible );
+    void setShowBorders(bool visible);
 
     /**
      * @brief  Set whether the rivers are visible
      * @param  visible  visibility of the rivers
      */
-    void setShowRivers( bool visible );
+    void setShowRivers(bool visible);
 
     /**
      * @brief  Set whether the lakes are visible
      * @param  visible  visibility of the lakes
      */
-    void setShowLakes( bool visible );
+    void setShowLakes(bool visible);
 
     /**
      * @brief Set whether the frame rate gets shown
      * @param visible  visibility of the frame rate
      */
-    void setShowFrameRate( bool visible );
+    void setShowFrameRate(bool visible);
 
-    void setShowRuntimeTrace( bool visible );
+    void setShowRuntimeTrace(bool visible);
 
     bool showRuntimeTrace() const;
 
@@ -651,7 +645,7 @@ class MARBLE_EXPORT MarbleMap : public QObject
      * polygon node drawing
      * @param visible visibility of the node debug mode
      */
-    void setShowDebugPolygons( bool visible);
+    void setShowDebugPolygons(bool visible);
 
     bool showDebugPolygons() const;
 
@@ -660,10 +654,9 @@ class MARBLE_EXPORT MarbleMap : public QObject
      * visualizing batch rendering
      * @param visible visibility of the batch rendering
      */
-    void setShowDebugBatchRender( bool visible);
+    void setShowDebugBatchRender(bool visible);
 
     bool showDebugBatchRender() const;
-
 
     /**
      * @brief Set whether to enter the debug mode for
@@ -673,7 +666,6 @@ class MARBLE_EXPORT MarbleMap : public QObject
     void setShowDebugPlacemarks(bool visible);
 
     bool showDebugPlacemarks() const;
-
 
     /**
      * @brief Set whether to enter the debug mode for
@@ -688,26 +680,25 @@ class MARBLE_EXPORT MarbleMap : public QObject
 
     int debugLevelTag() const;
 
-
-    void setShowBackground( bool visible );
+    void setShowBackground(bool visible);
 
     void setVisibleRelationTypes(GeoDataRelation::RelationTypes relationTypes);
 
-     /**
+    /**
      * @brief used to notify about the position of the mouse click
-      */
-    void notifyMouseClick( int x, int y );
+     */
+    void notifyMouseClick(int x, int y);
 
     void clearVolatileTileCache();
     /**
      * @brief  Set the limit of the volatile (in RAM) tile cache.
      * @param  kiloBytes The limit in kilobytes.
      */
-    void setVolatileTileCacheLimit( quint64 kiloBytes );
+    void setVolatileTileCacheLimit(quint64 kiloBytes);
 
-    void setDefaultAngleUnit( AngleUnit angleUnit );
+    void setDefaultAngleUnit(AngleUnit angleUnit);
 
-    void setDefaultFont( const QFont& font );
+    void setDefaultFont(const QFont &font);
 
     /**
      * @brief Reload the currently displayed map by reloading texture tiles
@@ -716,41 +707,41 @@ class MARBLE_EXPORT MarbleMap : public QObject
      */
     void reload();
 
-    void downloadRegion( QVector<TileCoordsPyramid> const & );
+    void downloadRegion(QVector<TileCoordsPyramid> const &);
 
     void highlightRouteRelation(qint64 osmId, bool enabled);
 
- Q_SIGNALS:
-    void tileLevelChanged( int level );
+Q_SIGNALS:
+    void tileLevelChanged(int level);
 
     /**
      * @brief Signal that the theme has changed
      * @param theme  Name of the new theme.
      */
-    void themeChanged( const QString& theme );
+    void themeChanged(const QString &theme);
 
-    void projectionChanged( Projection );
+    void projectionChanged(Projection);
 
-    void radiusChanged( int radius );
+    void radiusChanged(int radius);
 
-    void mouseMoveGeoPosition( const QString& geoPositionString);
+    void mouseMoveGeoPosition(const QString &geoPositionString);
 
-    void mouseClickGeoPosition( qreal lon, qreal lat, GeoDataCoordinates::Unit );
+    void mouseClickGeoPosition(qreal lon, qreal lat, GeoDataCoordinates::Unit);
 
-    void framesPerSecond( qreal fps );
+    void framesPerSecond(qreal fps);
 
     /**
      * This signal is emitted when the repaint of the view was requested.
      * If available with the @p dirtyRegion which is the region the view will change in.
      * If dirtyRegion.isEmpty() returns true, the whole viewport has to be repainted.
      */
-    void repaintNeeded( const QRegion& dirtyRegion = QRegion() );
+    void repaintNeeded(const QRegion &dirtyRegion = QRegion());
 
     /**
      * This signal is emitted when the visible region of the map changes. This typically happens
      * when the user moves the map around or zooms.
      */
-    void visibleLatLonAltBoxChanged( const GeoDataLatLonAltBox& visibleLatLonAltBox );
+    void visibleLatLonAltBoxChanged(const GeoDataLatLonAltBox &visibleLatLonAltBox);
 
     /**
      * @brief This signal is emit when the settings of a plugin changed.
@@ -760,26 +751,25 @@ class MARBLE_EXPORT MarbleMap : public QObject
     /**
      * @brief Signal that a render item has been initialized
      */
-    void renderPluginInitialized( RenderPlugin *renderPlugin );
+    void renderPluginInitialized(RenderPlugin *renderPlugin);
 
     /**
      * @brief Emitted when the layer rendering status has changed
      * @param status New render status
      */
-    void renderStatusChanged( RenderStatus status );
+    void renderStatusChanged(RenderStatus status);
 
-    void renderStateChanged( const RenderState &state );
+    void renderStateChanged(const RenderState &state);
 
-    void highlightedPlacemarksChanged( qreal, qreal, GeoDataCoordinates::Unit );
+    void highlightedPlacemarksChanged(qreal, qreal, GeoDataCoordinates::Unit);
 
     void viewContextChanged(ViewContext viewContext);
 
     void visibleRelationTypesChanged(GeoDataRelation::RelationTypes relationTypes);
 
-    void propertyValueChanged( const QString& name, bool value );
+    void propertyValueChanged(const QString &name, bool value);
 
- protected:
-
+protected:
     /**
      * @brief Enables custom drawing onto the MarbleMap straight after
      * @brief the globe and before all other layers have been rendered.
@@ -787,18 +777,18 @@ class MARBLE_EXPORT MarbleMap : public QObject
      *
      * @deprecated implement LayerInterface and add it using @p addLayer()
      */
-    virtual void customPaint( GeoPainter *painter );
+    virtual void customPaint(GeoPainter *painter);
 
- private:
-    Q_PRIVATE_SLOT( d, void updateMapTheme() )
-    Q_PRIVATE_SLOT( d, void updateProperty( const QString &, bool ) )
-    Q_PRIVATE_SLOT( d, void setDocument(QString) )
-    Q_PRIVATE_SLOT( d, void updateTileLevel() )
+private:
+    Q_PRIVATE_SLOT(d, void updateMapTheme())
+    Q_PRIVATE_SLOT(d, void updateProperty(const QString &, bool))
+    Q_PRIVATE_SLOT(d, void setDocument(QString))
+    Q_PRIVATE_SLOT(d, void updateTileLevel())
     Q_PRIVATE_SLOT(d, void addPlugins())
 
- private:
-    Q_DISABLE_COPY( MarbleMap )
-    MarbleMapPrivate * const d;
+private:
+    Q_DISABLE_COPY(MarbleMap)
+    MarbleMapPrivate *const d;
     friend class MarbleMapPrivate;
 
     class CustomPaintLayer;

@@ -7,13 +7,14 @@
 #define OPENLOCATIONCODESEARCHPLUGIN_H
 
 #include "SearchRunnerPlugin.h"
-namespace Marble {
+namespace Marble
+{
 
 class OpenLocationCodeSearchPlugin : public SearchRunnerPlugin
 {
     Q_OBJECT
     Q_PLUGIN_METADATA(IID "org.kde.marble.OpenLocationCodeSearchPlugin")
-    Q_INTERFACES( Marble::SearchRunnerPlugin )
+    Q_INTERFACES(Marble::SearchRunnerPlugin)
 
 public:
     explicit OpenLocationCodeSearchPlugin(QObject *parent = nullptr);
@@ -32,8 +33,7 @@ public:
 
     QVector<PluginAuthor> pluginAuthors() const override;
 
-    SearchRunner* newRunner() const override;
-
+    SearchRunner *newRunner() const override;
 };
 
 }

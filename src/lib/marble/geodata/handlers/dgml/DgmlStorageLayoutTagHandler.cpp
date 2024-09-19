@@ -20,7 +20,7 @@ namespace dgml
 {
 DGML_DEFINE_TAG_HANDLER(StorageLayout)
 
-GeoNode* DgmlStorageLayoutTagHandler::parse(GeoParser& parser) const
+GeoNode *DgmlStorageLayoutTagHandler::parse(GeoParser &parser) const
 {
     // Check whether the tag is valid
     Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1String(dgmlTag_StorageLayout)));
@@ -28,33 +28,33 @@ GeoNode* DgmlStorageLayoutTagHandler::parse(GeoParser& parser) const
     // Attribute levelZeroColumns, default to value of the oldest tile themes
     int levelZeroColumns = 2;
     const QString levelZeroColumnsStr = parser.attribute(dgmlAttr_levelZeroColumns).trimmed();
-    if ( !levelZeroColumnsStr.isEmpty() ) {
+    if (!levelZeroColumnsStr.isEmpty()) {
         levelZeroColumns = levelZeroColumnsStr.toInt();
     }
 
     // Attribute levelZeroRows, default to value of the oldest tile themes
     int levelZeroRows = 1;
     const QString levelZeroRowsStr = parser.attribute(dgmlAttr_levelZeroRows).trimmed();
-    if ( !levelZeroRowsStr.isEmpty() ) {
+    if (!levelZeroRowsStr.isEmpty()) {
         levelZeroRows = levelZeroRowsStr.toInt();
     }
 
     // Attribute minimumTileLevel
     int minimumTileLevel = 0;
-    const QString minimumTileLevelStr = parser.attribute( dgmlAttr_minimumTileLevel ).trimmed();
-    if ( !minimumTileLevelStr.isEmpty() ) {
+    const QString minimumTileLevelStr = parser.attribute(dgmlAttr_minimumTileLevel).trimmed();
+    if (!minimumTileLevelStr.isEmpty()) {
         minimumTileLevel = minimumTileLevelStr.toInt();
     }
 
     // Attribute maximumTileLevel
     int maximumTileLevel = -1;
-    const QString maximumTileLevelStr = parser.attribute( dgmlAttr_maximumTileLevel ).trimmed();
-    if ( !maximumTileLevelStr.isEmpty() ) {
+    const QString maximumTileLevelStr = parser.attribute(dgmlAttr_maximumTileLevel).trimmed();
+    if (!maximumTileLevelStr.isEmpty()) {
         maximumTileLevel = maximumTileLevelStr.toInt();
     }
 
     // Attribute maximumTileLevel
-    const QString tileLevels = parser.attribute( dgmlAttr_tileLevels ).trimmed();
+    const QString tileLevels = parser.attribute(dgmlAttr_tileLevels).trimmed();
 
     // Checking for parent item
     GeoStackItem parentItem = parser.parentElement();
@@ -66,35 +66,34 @@ GeoNode* DgmlStorageLayoutTagHandler::parse(GeoParser& parser) const
         ServerLayout *serverLayout = nullptr;
         const QString modeStr = parser.attribute(dgmlAttr_mode).trimmed();
         if (modeStr == QLatin1String("OpenStreetMap"))
-            serverLayout = new OsmServerLayout( texture );
+            serverLayout = new OsmServerLayout(texture);
         else if (modeStr == QLatin1String("Custom"))
-            serverLayout = new CustomServerLayout( texture );
+            serverLayout = new CustomServerLayout(texture);
         else if (modeStr == QLatin1String("WebMapService"))
-            serverLayout = new WmsServerLayout( texture );
+            serverLayout = new WmsServerLayout(texture);
         else if (modeStr == QLatin1String("WebMapTileService"))
-            serverLayout = new WmtsServerLayout( texture );
+            serverLayout = new WmtsServerLayout(texture);
         else if (modeStr == QLatin1String("QuadTree"))
-            serverLayout = new QuadTreeServerLayout( texture );
-        else if (modeStr == QLatin1String("TileMapService"))
-        {
+            serverLayout = new QuadTreeServerLayout(texture);
+        else if (modeStr == QLatin1String("TileMapService")) {
             storageLayout = GeoSceneTileDataset::TileMapService;
-            serverLayout = new TmsServerLayout( texture );
+            serverLayout = new TmsServerLayout(texture);
         } else {
             storageLayout = GeoSceneTileDataset::Marble;
-            serverLayout = new MarbleServerLayout( texture );
+            serverLayout = new MarbleServerLayout(texture);
 
-            if ( !modeStr.isEmpty() ) {
+            if (!modeStr.isEmpty()) {
                 mDebug() << "Unknown storage layout mode " << modeStr << ", falling back to default.";
             }
         }
 
-        texture->setLevelZeroColumns( levelZeroColumns );
-        texture->setLevelZeroRows( levelZeroRows );
-        texture->setMinimumTileLevel( minimumTileLevel );
-        texture->setMaximumTileLevel( maximumTileLevel );
-        texture->setTileLevels( tileLevels );
-        texture->setStorageLayout( storageLayout );
-        texture->setServerLayout( serverLayout );
+        texture->setLevelZeroColumns(levelZeroColumns);
+        texture->setLevelZeroRows(levelZeroRows);
+        texture->setMinimumTileLevel(minimumTileLevel);
+        texture->setMaximumTileLevel(maximumTileLevel);
+        texture->setTileLevels(tileLevels);
+        texture->setStorageLayout(storageLayout);
+        texture->setServerLayout(serverLayout);
     }
 
     return nullptr;

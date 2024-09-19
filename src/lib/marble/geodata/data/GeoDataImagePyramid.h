@@ -21,21 +21,18 @@ class GEODATA_EXPORT GeoDataImagePyramid : public GeoDataObject
 public:
     GeoDataImagePyramid();
 
-    GeoDataImagePyramid( const GeoDataImagePyramid &other );
+    GeoDataImagePyramid(const GeoDataImagePyramid &other);
 
-    GeoDataImagePyramid& operator=( const GeoDataImagePyramid &other );
-    bool operator==( const GeoDataImagePyramid &other ) const;
-    bool operator!=( const GeoDataImagePyramid &other ) const;
+    GeoDataImagePyramid &operator=(const GeoDataImagePyramid &other);
+    bool operator==(const GeoDataImagePyramid &other) const;
+    bool operator!=(const GeoDataImagePyramid &other) const;
 
     ~GeoDataImagePyramid() override;
 
     /** Provides type information for downcasting a GeoNode */
-    const char* nodeType() const override;
+    const char *nodeType() const override;
 
-    enum GridOrigin {
-        LowerLeft,
-        UpperLeft
-    };
+    enum GridOrigin { LowerLeft, UpperLeft };
 
     int tileSize() const;
     void setTileSize(int tileSize);
@@ -50,7 +47,7 @@ public:
     void setGridOrigin(GridOrigin gridOrigin);
 
 private:
-    GeoDataImagePyramidPrivate* const d;
+    GeoDataImagePyramidPrivate *const d;
 };
 
 }

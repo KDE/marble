@@ -8,34 +8,34 @@
 
 #include "OsmNode.h"
 #include "OsmWay.h"
-#include <osm/OsmPlacemarkData.h>
 #include <GeoDataLinearRing.h>
+#include <osm/OsmPlacemarkData.h>
 
+#include <QSet>
 #include <QString>
 #include <QXmlStreamAttributes>
-#include <QSet>
 
-namespace Marble {
+namespace Marble
+{
 
 class GeoDataDocument;
 
 class OsmRelation
 {
 public:
-    OsmPlacemarkData & osmData();
+    OsmPlacemarkData &osmData();
     void parseMember(const QXmlStreamAttributes &attributes);
     void addMember(qint64 reference, const QString &role, const QString &type);
-    void createMultipolygon(GeoDataDocument* document, OsmWays &ways, const OsmNodes &nodes, QSet<qint64> &usedNodes, QSet<qint64> &usedWays) const;
-    void createRelation(GeoDataDocument* document, const QHash<qint64, GeoDataPlacemark*>& wayPlacemarks) const;
+    void createMultipolygon(GeoDataDocument *document, OsmWays &ways, const OsmNodes &nodes, QSet<qint64> &usedNodes, QSet<qint64> &usedWays) const;
+    void createRelation(GeoDataDocument *document, const QHash<qint64, GeoDataPlacemark *> &wayPlacemarks) const;
 
-    const OsmPlacemarkData & osmData() const;
+    const OsmPlacemarkData &osmData() const;
 
 private:
     typedef QPair<GeoDataLinearRing, OsmPlacemarkData> OsmRing;
     using OsmRings = QVector<OsmRing>;
 
-    struct OsmMember
-    {
+    struct OsmMember {
         QString type;
         QString role;
         qint64 reference;
@@ -49,7 +49,7 @@ private:
     QVector<OsmMember> m_members;
 };
 
-typedef QHash<qint64,OsmRelation> OsmRelations;
+typedef QHash<qint64, OsmRelation> OsmRelations;
 
 }
 

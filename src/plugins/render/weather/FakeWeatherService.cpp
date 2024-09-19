@@ -15,38 +15,37 @@
 
 using namespace Marble;
 
-FakeWeatherService::FakeWeatherService( const MarbleModel *model, QObject *parent )
-    : AbstractWeatherService( model, parent )
+FakeWeatherService::FakeWeatherService(const MarbleModel *model, QObject *parent)
+    : AbstractWeatherService(model, parent)
 {
 }
 
 FakeWeatherService::~FakeWeatherService()
 {
 }
-    
-void FakeWeatherService::getAdditionalItems( const GeoDataLatLonAltBox& box,
-                         qint32 number )
-{
-    Q_UNUSED( box );
-    Q_UNUSED( number );
 
-    FakeWeatherItem *item = new FakeWeatherItem( this );
-    item->setStationName( "Fake" );
-    item->setPriority( 0 );
-    item->setCoordinate( GeoDataCoordinates( 1, 1 ) );
-    item->setId( "fake1" );
-    
+void FakeWeatherService::getAdditionalItems(const GeoDataLatLonAltBox &box, qint32 number)
+{
+    Q_UNUSED(box);
+    Q_UNUSED(number);
+
+    FakeWeatherItem *item = new FakeWeatherItem(this);
+    item->setStationName("Fake");
+    item->setPriority(0);
+    item->setCoordinate(GeoDataCoordinates(1, 1));
+    item->setId("fake1");
+
     WeatherData data;
-    data.setCondition( WeatherData::ClearDay );
-    data.setTemperature( 14.0, WeatherData::Celsius );
-    item->setCurrentWeather( data );
-        
-    emit createdItems( QList<AbstractDataPluginItem*>() << item );
+    data.setCondition(WeatherData::ClearDay);
+    data.setTemperature(14.0, WeatherData::Celsius);
+    item->setCurrentWeather(data);
+
+    emit createdItems(QList<AbstractDataPluginItem *>() << item);
 }
 
-void FakeWeatherService::getItem( const QString & )
+void FakeWeatherService::getItem(const QString &)
 {
-    getAdditionalItems( GeoDataLatLonAltBox(), 1 );
+    getAdditionalItems(GeoDataLatLonAltBox(), 1);
 }
 
 #include "moc_FakeWeatherService.cpp"

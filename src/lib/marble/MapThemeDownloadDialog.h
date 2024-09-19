@@ -11,7 +11,8 @@
 
 #include "marble_export.h"
 
-namespace Marble {
+namespace Marble
+{
 
 class MarbleWidget;
 
@@ -20,11 +21,11 @@ class MARBLE_EXPORT MapThemeDownloadDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit MapThemeDownloadDialog( MarbleWidget *marbleWidget );
+    explicit MapThemeDownloadDialog(MarbleWidget *marbleWidget);
     ~MapThemeDownloadDialog() override;
 
 private:
-    Q_DISABLE_COPY( MapThemeDownloadDialog )
+    Q_DISABLE_COPY(MapThemeDownloadDialog)
     class Private;
     Private *const d;
 };

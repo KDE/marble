@@ -6,8 +6,8 @@
 
 #include "DgmlSourceDirTagHandler.h"
 
-#include "DgmlElementDictionary.h"
 #include "DgmlAttributeDictionary.h"
+#include "DgmlElementDictionary.h"
 #include "GeoParser.h"
 #include "GeoSceneTileDataset.h"
 
@@ -17,7 +17,7 @@ namespace dgml
 {
 DGML_DEFINE_TAG_HANDLER(SourceDir)
 
-GeoNode* DgmlSourceDirTagHandler::parse(GeoParser& parser) const
+GeoNode *DgmlSourceDirTagHandler::parse(GeoParser &parser) const
 {
     // Check whether the tag is valid
     Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1String(dgmlTag_SourceDir)));
@@ -26,9 +26,9 @@ GeoNode* DgmlSourceDirTagHandler::parse(GeoParser& parser) const
 
     // Checking for parent item
     GeoStackItem parentItem = parser.parentElement();
-    if (parentItem.represents(dgmlTag_Texture) || parentItem.represents(dgmlTag_Vectortile) ) {
+    if (parentItem.represents(dgmlTag_Texture) || parentItem.represents(dgmlTag_Vectortile)) {
         GeoSceneTileDataset *texture = parentItem.nodeAs<GeoSceneTileDataset>();
-        texture->setSourceDir( parser.readElementText().trimmed() );
+        texture->setSourceDir(parser.readElementText().trimmed());
         texture->setFileFormat(format);
     }
 

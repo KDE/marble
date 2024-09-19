@@ -21,16 +21,15 @@ class MarbleWidget;
  * @short Provides a float item with a list of opened files
  *
  */
-class FileViewFloatItem: public AbstractFloatItem
+class FileViewFloatItem : public AbstractFloatItem
 {
     Q_OBJECT
     Q_PLUGIN_METADATA(IID "org.kde.marble.FileViewFloatItem")
-    Q_INTERFACES( Marble::RenderPluginInterface )
+    Q_INTERFACES(Marble::RenderPluginInterface)
     MARBLE_PLUGIN(FileViewFloatItem)
 
- public:
-    explicit FileViewFloatItem( const QPointF &point = QPointF( -1, 10 ),
-                            const QSizeF &size = QSizeF( 110.0, 250.0 ) );
+public:
+    explicit FileViewFloatItem(const QPointF &point = QPointF(-1, 10), const QSizeF &size = QSizeF(110.0, 250.0));
     ~FileViewFloatItem();
 
     QStringList backendTypes() const;
@@ -43,36 +42,35 @@ class FileViewFloatItem: public AbstractFloatItem
 
     QString description() const;
 
-    QIcon icon () const;
+    QIcon icon() const;
 
-    void initialize ();
+    void initialize();
 
-    bool isInitialized () const;
+    bool isInitialized() const;
 
-    void changeViewport( ViewportParams *viewport );
+    void changeViewport(ViewportParams *viewport);
 
     virtual QPainterPath backgroundShape() const;
 
-    void paintContent( GeoPainter *painter, ViewportParams *viewport,
-                       const QString& renderPos, GeoSceneLayer *layer = 0 );
+    void paintContent(GeoPainter *painter, ViewportParams *viewport, const QString &renderPos, GeoSceneLayer *layer = 0);
 
- protected:
-    bool eventFilter( QObject *object, QEvent *e );
+protected:
+    bool eventFilter(QObject *object, QEvent *e);
 
- private Q_SLOTS:
+private Q_SLOTS:
     /** Map theme was changed, adjust controls */
-    void selectTheme( const QString& theme );
+    void selectTheme(const QString &theme);
 
     /** Enable/disable zoom in/out buttons */
     void updateFileView();
 
-    void contextMenu(const QPoint& pos);
+    void contextMenu(const QPoint &pos);
 
     void addFile();
 
     void removeFile();
 
- private:
+private:
     /** MarbleWidget this float item is installed as event filter for */
     MarbleWidget *m_marbleWidget;
 
@@ -92,7 +90,7 @@ class FileViewFloatItem: public AbstractFloatItem
     bool m_repaintScheduled;
 
     /** the last clicked ModelIndex */
-    QPersistentModelIndex* m_persIndex;
+    QPersistentModelIndex *m_persIndex;
 };
 
 }

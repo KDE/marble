@@ -20,18 +20,18 @@ class MARBLE_EXPORT RoutingProfilesWidget : public QWidget
 {
     Q_OBJECT
 
- public:
-    explicit RoutingProfilesWidget( MarbleModel *marbleModel );
+public:
+    explicit RoutingProfilesWidget(MarbleModel *marbleModel);
     ~RoutingProfilesWidget() override;
 
-    Q_PRIVATE_SLOT( d, void add() )
-    Q_PRIVATE_SLOT( d, void configure() )
-    Q_PRIVATE_SLOT( d, void remove() )
-    Q_PRIVATE_SLOT( d, void moveUp() )
-    Q_PRIVATE_SLOT( d, void moveDown() )
-    Q_PRIVATE_SLOT( d, void updateButtons() )
+    Q_PRIVATE_SLOT(d, void add())
+    Q_PRIVATE_SLOT(d, void configure())
+    Q_PRIVATE_SLOT(d, void remove())
+    Q_PRIVATE_SLOT(d, void moveUp())
+    Q_PRIVATE_SLOT(d, void moveDown())
+    Q_PRIVATE_SLOT(d, void updateButtons())
 
- private:
+private:
     class Private;
     Private *const d;
 };

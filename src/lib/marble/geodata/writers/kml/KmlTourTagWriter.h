@@ -16,7 +16,7 @@ class KmlTourTagWriter : public KmlFeatureTagWriter
 public:
     KmlTourTagWriter();
 
-    bool writeMid( const GeoNode *node, GeoWriter& writer ) const override;
+    bool writeMid(const GeoNode *node, GeoWriter &writer) const override;
 };
 
 }

@@ -3,7 +3,6 @@
 // SPDX-FileCopyrightText: 2010 Dennis Nienhüser <nienhueser@kde.org>
 //
 
-
 #ifndef MARBLE_ROUTINOPLUGIN_H
 #define MARBLE_ROUTINOPLUGIN_H
 
@@ -16,10 +15,10 @@ class RoutinoPlugin : public RoutingRunnerPlugin
 {
     Q_OBJECT
     Q_PLUGIN_METADATA(IID "org.kde.marble.RoutinoPlugin")
-    Q_INTERFACES( Marble::RoutingRunnerPlugin )
+    Q_INTERFACES(Marble::RoutingRunnerPlugin)
 
 public:
-    explicit RoutinoPlugin( QObject *parent = nullptr );
+    explicit RoutinoPlugin(QObject *parent = nullptr);
 
     QString name() const override;
 
@@ -37,11 +36,11 @@ public:
 
     RoutingRunner *newRunner() const override;
 
-    ConfigWidget* configWidget() override;
+    ConfigWidget *configWidget() override;
 
     bool supportsTemplate(RoutingProfilesModel::ProfileTemplate profileTemplate) const override;
 
-    QHash< QString, QVariant > templateSettings(RoutingProfilesModel::ProfileTemplate profileTemplate) const override;
+    QHash<QString, QVariant> templateSettings(RoutingProfilesModel::ProfileTemplate profileTemplate) const override;
 
     bool canWork() const override;
 };

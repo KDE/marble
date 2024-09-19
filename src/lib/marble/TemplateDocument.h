@@ -62,7 +62,7 @@ public:
      * @param key template value's index
      * @return reference for the item
      */
-    QString& operator[](const QString &key);
+    QString &operator[](const QString &key);
 
     /**
      * @brief Final proceed text

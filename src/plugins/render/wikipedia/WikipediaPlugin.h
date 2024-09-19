@@ -14,7 +14,7 @@
 
 namespace Ui
 {
-    class WikipediaConfigWidget;
+class WikipediaConfigWidget;
 }
 
 namespace Marble
@@ -24,23 +24,23 @@ class WikipediaPlugin : public AbstractDataPlugin, public DialogConfigurationInt
 {
     Q_OBJECT
     Q_PLUGIN_METADATA(IID "org.kde.marble.WikipediaPlugin")
-    Q_INTERFACES( Marble::RenderPluginInterface )
-    Q_INTERFACES( Marble::DialogConfigurationInterface )
-    MARBLE_PLUGIN( WikipediaPlugin )
-    
- public:
+    Q_INTERFACES(Marble::RenderPluginInterface)
+    Q_INTERFACES(Marble::DialogConfigurationInterface)
+    MARBLE_PLUGIN(WikipediaPlugin)
+
+public:
     WikipediaPlugin();
-    explicit WikipediaPlugin( const MarbleModel *marbleModel );
+    explicit WikipediaPlugin(const MarbleModel *marbleModel);
     ~WikipediaPlugin() override;
-     
+
     void initialize() override;
 
     QString name() const override;
-    
+
     QString guiString() const override;
 
     QString nameId() const override;
-    
+
     QString version() const override;
 
     QString copyrightYears() const override;
@@ -58,24 +58,24 @@ class WikipediaPlugin : public AbstractDataPlugin, public DialogConfigurationInt
     /**
      * @return: The settings of the item.
      */
-    QHash<QString,QVariant> settings() const override;
+    QHash<QString, QVariant> settings() const override;
 
     /**
      * Set the settings of the item.
      */
-    void setSettings( const QHash<QString,QVariant> &settings ) override;
+    void setSettings(const QHash<QString, QVariant> &settings) override;
 
- protected:
-    bool eventFilter( QObject *object, QEvent *event ) override;
+protected:
+    bool eventFilter(QObject *object, QEvent *event) override;
 
- private Q_SLOTS:
+private Q_SLOTS:
     void readSettings();
     void writeSettings();
 
     void updateSettings();
-    void checkNumberOfItems( quint32 number );
+    void checkNumberOfItems(quint32 number);
 
- private:
+private:
     const QIcon m_icon;
     Ui::WikipediaConfigWidget *ui_configWidget;
     QDialog *m_configDialog;

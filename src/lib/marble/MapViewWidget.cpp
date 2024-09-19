@@ -12,30 +12,30 @@
 #include "MapViewWidget.h"
 
 // Marble
-#include "MarbleDebug.h"
-#include "MarbleDirs.h"
-#include "MarbleWidget.h"
-#include "MarbleModel.h"
-#include "MapThemeManager.h"
-#include "MapThemeSortFilterProxyModel.h"
+#include "CelestialSortFilterProxyModel.h"
 #include "GeoSceneDocument.h"
 #include "GeoSceneHead.h"
+#include "MapThemeManager.h"
+#include "MapThemeSortFilterProxyModel.h"
 #include "MapViewItemDelegate.h"
-#include "CelestialSortFilterProxyModel.h"
+#include "MarbleDebug.h"
+#include "MarbleDirs.h"
+#include "MarbleModel.h"
+#include "MarbleWidget.h"
 
 // Qt
-#include <QResizeEvent>
+#include <QDateTime>
 #include <QFileInfo>
-#include <QSettings>
+#include <QGridLayout>
 #include <QMenu>
 #include <QMessageBox>
-#include <QStandardItemModel>
-#include <QGridLayout>
 #include <QPainter>
+#include <QRegularExpression>
+#include <QResizeEvent>
+#include <QSettings>
+#include <QStandardItemModel>
 #include <QToolBar>
 #include <QToolButton>
-#include <QDateTime>
-#include <QRegularExpression>
 
 using namespace Marble;
 // Ui
@@ -44,30 +44,31 @@ using namespace Marble;
 namespace Marble
 {
 
-class Q_DECL_HIDDEN MapViewWidget::Private {
- public:
-    Private( MapViewWidget *parent )
-        : q( parent ),
-          m_marbleModel( nullptr ),
-          m_mapSortProxy(),
-          m_celestialListProxy(),
-          m_toolBar( nullptr ),
-          m_globeViewButton( nullptr ),
-          m_mercatorViewButton( nullptr ),
-          m_popupMenuFlat( nullptr ),
-          m_flatViewAction( nullptr ),
-          m_mercatorViewAction( nullptr ),
-          m_celestialBodyAction( nullptr ),
-          m_gnomonicViewAction( nullptr ),
-          m_stereographicViewAction( nullptr ),
-          m_lambertAzimuthalViewAction( nullptr ),
-          m_azimuthalEquidistantViewAction( nullptr ),
-          m_verticalPerspectiveViewAction( nullptr ),
-          m_globeViewAction( nullptr ),
-          m_mapViewDelegate(nullptr)
+class Q_DECL_HIDDEN MapViewWidget::Private
+{
+public:
+    Private(MapViewWidget *parent)
+        : q(parent)
+        , m_marbleModel(nullptr)
+        , m_mapSortProxy()
+        , m_celestialListProxy()
+        , m_toolBar(nullptr)
+        , m_globeViewButton(nullptr)
+        , m_mercatorViewButton(nullptr)
+        , m_popupMenuFlat(nullptr)
+        , m_flatViewAction(nullptr)
+        , m_mercatorViewAction(nullptr)
+        , m_celestialBodyAction(nullptr)
+        , m_gnomonicViewAction(nullptr)
+        , m_stereographicViewAction(nullptr)
+        , m_lambertAzimuthalViewAction(nullptr)
+        , m_azimuthalEquidistantViewAction(nullptr)
+        , m_verticalPerspectiveViewAction(nullptr)
+        , m_globeViewAction(nullptr)
+        , m_mapViewDelegate(nullptr)
     {
-        m_mapSortProxy.setDynamicSortFilter( true );
-        m_celestialListProxy.setDynamicSortFilter( true );
+        m_mapSortProxy.setDynamicSortFilter(true);
+        m_celestialListProxy.setDynamicSortFilter(true);
     }
 
     ~Private()
@@ -85,7 +86,7 @@ class Q_DECL_HIDDEN MapViewWidget::Private {
 
         m_toolBar->setVisible(false);
         const int labelId = m_mapViewUi.verticalLayout->indexOf(m_mapViewUi.celestialBodyLabel);
-        m_mapViewUi.verticalLayout->insertWidget(labelId+1, m_mapViewUi.celestialBodyComboBox);
+        m_mapViewUi.verticalLayout->insertWidget(labelId + 1, m_mapViewUi.celestialBodyComboBox);
         m_toolBar->removeAction(m_celestialBodyAction);
         m_mapViewUi.celestialBodyComboBox->show();
     }
@@ -110,67 +111,50 @@ class Q_DECL_HIDDEN MapViewWidget::Private {
 
         m_globeViewButton = new QToolButton;
         m_globeViewButton->setIcon(QIcon(QStringLiteral(":/icons/map-globe.png")));
-        m_globeViewButton->setToolTip( tr("Globe View") );
+        m_globeViewButton->setToolTip(tr("Globe View"));
         m_globeViewButton->setCheckable(true);
         m_globeViewButton->setChecked(false);
 
-        m_globeViewAction = new QAction(QIcon(QStringLiteral(":/icons/map-globe.png")),
-                                             tr( "Spherical view" ),
-                                             m_globeViewButton );
-        m_globeViewAction->setCheckable( true );
-        m_globeViewAction->setChecked( false );
+        m_globeViewAction = new QAction(QIcon(QStringLiteral(":/icons/map-globe.png")), tr("Spherical view"), m_globeViewButton);
+        m_globeViewAction->setCheckable(true);
+        m_globeViewAction->setChecked(false);
 
         m_mercatorViewButton = new QToolButton;
         m_mercatorViewButton->setIcon(QIcon(QStringLiteral(":/icons/map-mercator.png")));
-        m_mercatorViewButton->setToolTip( tr("Mercator View") );
+        m_mercatorViewButton->setToolTip(tr("Mercator View"));
         m_mercatorViewButton->setCheckable(true);
         m_mercatorViewButton->setChecked(false);
         m_mercatorViewButton->setPopupMode(QToolButton::MenuButtonPopup);
 
         m_popupMenuFlat = new QMenu(q);
 
-        m_mercatorViewAction = new QAction(QIcon(QStringLiteral(":/icons/map-mercator.png")),
-                                              tr("Mercator View"),
-                                              m_popupMenuFlat );
+        m_mercatorViewAction = new QAction(QIcon(QStringLiteral(":/icons/map-mercator.png")), tr("Mercator View"), m_popupMenuFlat);
         m_mercatorViewAction->setCheckable(true);
         m_mercatorViewAction->setChecked(false);
 
-        m_flatViewAction = new QAction( QIcon(QStringLiteral(":/icons/map-flat.png")),
-                                        tr("Flat View"),
-                                        m_popupMenuFlat );
+        m_flatViewAction = new QAction(QIcon(QStringLiteral(":/icons/map-flat.png")), tr("Flat View"), m_popupMenuFlat);
         m_flatViewAction->setCheckable(true);
         m_flatViewAction->setChecked(false);
 
-        m_gnomonicViewAction = new QAction( QIcon(QStringLiteral(":/icons/map-gnomonic.png")),
-                                            tr( "Gnomonic view" ),
-                                            m_popupMenuFlat);
-        m_gnomonicViewAction->setCheckable( true );
-        m_gnomonicViewAction->setChecked( false );
+        m_gnomonicViewAction = new QAction(QIcon(QStringLiteral(":/icons/map-gnomonic.png")), tr("Gnomonic view"), m_popupMenuFlat);
+        m_gnomonicViewAction->setCheckable(true);
+        m_gnomonicViewAction->setChecked(false);
 
-        m_stereographicViewAction = new QAction(QIcon(QStringLiteral(":/icons/map-globe.png")),
-                                            tr( "Stereographic view" ),
-                                            m_popupMenuFlat);
-        m_stereographicViewAction->setCheckable( true );
-        m_stereographicViewAction->setChecked( false );
+        m_stereographicViewAction = new QAction(QIcon(QStringLiteral(":/icons/map-globe.png")), tr("Stereographic view"), m_popupMenuFlat);
+        m_stereographicViewAction->setCheckable(true);
+        m_stereographicViewAction->setChecked(false);
 
-        m_lambertAzimuthalViewAction = new QAction(QIcon(QStringLiteral(":/icons/map-globe.png")),
-                                            tr( "Lambert Azimuthal Equal-Area view" ),
-                                            m_popupMenuFlat);
-        m_lambertAzimuthalViewAction->setCheckable( true );
-        m_lambertAzimuthalViewAction->setChecked( false );
+        m_lambertAzimuthalViewAction = new QAction(QIcon(QStringLiteral(":/icons/map-globe.png")), tr("Lambert Azimuthal Equal-Area view"), m_popupMenuFlat);
+        m_lambertAzimuthalViewAction->setCheckable(true);
+        m_lambertAzimuthalViewAction->setChecked(false);
 
-        m_azimuthalEquidistantViewAction = new QAction(QIcon(QStringLiteral(":/icons/map-globe.png")),
-                                            tr( "Azimuthal Equidistant view" ),
-                                            m_popupMenuFlat);
-        m_azimuthalEquidistantViewAction->setCheckable( true );
-        m_azimuthalEquidistantViewAction->setChecked( false );
+        m_azimuthalEquidistantViewAction = new QAction(QIcon(QStringLiteral(":/icons/map-globe.png")), tr("Azimuthal Equidistant view"), m_popupMenuFlat);
+        m_azimuthalEquidistantViewAction->setCheckable(true);
+        m_azimuthalEquidistantViewAction->setChecked(false);
 
-        m_verticalPerspectiveViewAction = new QAction(QIcon(QStringLiteral(":/icons/map-globe.png")),
-                                            tr( "Perspective Globe view" ),
-                                            m_popupMenuFlat);
-        m_verticalPerspectiveViewAction->setCheckable( true );
-        m_verticalPerspectiveViewAction->setChecked( false );
-
+        m_verticalPerspectiveViewAction = new QAction(QIcon(QStringLiteral(":/icons/map-globe.png")), tr("Perspective Globe view"), m_popupMenuFlat);
+        m_verticalPerspectiveViewAction->setCheckable(true);
+        m_verticalPerspectiveViewAction->setChecked(false);
 
         m_popupMenuFlat->addAction(m_mercatorViewAction);
         m_popupMenuFlat->addAction(m_flatViewAction);
@@ -184,30 +168,20 @@ class Q_DECL_HIDDEN MapViewWidget::Private {
         m_toolBar->addWidget(m_globeViewButton);
         m_toolBar->addWidget(m_mercatorViewButton);
         m_toolBar->addSeparator();
-        m_toolBar->setContentsMargins(0,0,0,0);
+        m_toolBar->setContentsMargins(0, 0, 0, 0);
         m_toolBar->setIconSize(QSize(16, 16));
         m_mapViewUi.toolBarLayout->insertWidget(0, m_toolBar);
 
-        QObject::connect(m_globeViewButton, SIGNAL(clicked()),
-                         q, SLOT(globeViewRequested()));
-        QObject::connect(m_mercatorViewButton, SIGNAL(clicked()),
-                         q, SLOT(mercatorViewRequested()));
-        QObject::connect(m_mercatorViewAction, SIGNAL(triggered()),
-                         q, SLOT(mercatorViewRequested()));
-        QObject::connect(m_flatViewAction, SIGNAL(triggered()),
-                         q, SLOT(flatViewRequested()));
-        QObject::connect(m_gnomonicViewAction, SIGNAL(triggered()),
-                         q, SLOT(gnomonicViewRequested()));
-        QObject::connect(m_stereographicViewAction, SIGNAL(triggered()),
-                         q, SLOT(stereographicViewRequested()));
-        QObject::connect(m_lambertAzimuthalViewAction, SIGNAL(triggered()),
-                         q, SLOT(lambertAzimuthalViewRequested()));
-        QObject::connect(m_azimuthalEquidistantViewAction, SIGNAL(triggered()),
-                         q, SLOT(azimuthalEquidistantViewRequested()));
-        QObject::connect(m_verticalPerspectiveViewAction, SIGNAL(triggered()),
-                         q, SLOT(verticalPerspectiveViewRequested()));
-        QObject::connect(m_globeViewAction, SIGNAL(triggered()),
-                         q, SLOT(globeViewRequested()));
+        QObject::connect(m_globeViewButton, SIGNAL(clicked()), q, SLOT(globeViewRequested()));
+        QObject::connect(m_mercatorViewButton, SIGNAL(clicked()), q, SLOT(mercatorViewRequested()));
+        QObject::connect(m_mercatorViewAction, SIGNAL(triggered()), q, SLOT(mercatorViewRequested()));
+        QObject::connect(m_flatViewAction, SIGNAL(triggered()), q, SLOT(flatViewRequested()));
+        QObject::connect(m_gnomonicViewAction, SIGNAL(triggered()), q, SLOT(gnomonicViewRequested()));
+        QObject::connect(m_stereographicViewAction, SIGNAL(triggered()), q, SLOT(stereographicViewRequested()));
+        QObject::connect(m_lambertAzimuthalViewAction, SIGNAL(triggered()), q, SLOT(lambertAzimuthalViewRequested()));
+        QObject::connect(m_azimuthalEquidistantViewAction, SIGNAL(triggered()), q, SLOT(azimuthalEquidistantViewRequested()));
+        QObject::connect(m_verticalPerspectiveViewAction, SIGNAL(triggered()), q, SLOT(verticalPerspectiveViewRequested()));
+        QObject::connect(m_globeViewAction, SIGNAL(triggered()), q, SLOT(globeViewRequested()));
 
         applyReducedLayout();
     }
@@ -215,22 +189,22 @@ class Q_DECL_HIDDEN MapViewWidget::Private {
     void updateMapFilter()
     {
         int currentIndex = m_mapViewUi.celestialBodyComboBox->currentIndex();
-        const QString selectedId = m_celestialListProxy.data( m_celestialListProxy.index( currentIndex, 1 ) ).toString();
+        const QString selectedId = m_celestialListProxy.data(m_celestialListProxy.index(currentIndex, 1)).toString();
 
-        if ( !selectedId.isEmpty() ) {
-            m_mapSortProxy.setFilterRegularExpression( QRegularExpression( selectedId ) );     // TODO_QT6: double check
-//            m_mapSortProxy.setFilterRegExp( QRegExp( selectedId, Qt::CaseInsensitive,QRegExp::FixedString ) );
+        if (!selectedId.isEmpty()) {
+            m_mapSortProxy.setFilterRegularExpression(QRegularExpression(selectedId)); // TODO_QT6: double check
+            //            m_mapSortProxy.setFilterRegExp( QRegExp( selectedId, Qt::CaseInsensitive,QRegExp::FixedString ) );
         }
     }
 
-    void celestialBodySelected( int comboIndex );
+    void celestialBodySelected(int comboIndex);
 
-    void projectionSelected( int projectionIndex );
+    void projectionSelected(int projectionIndex);
 
-    void mapThemeSelected( QModelIndex index );
-    void mapThemeSelected( int index );
+    void mapThemeSelected(QModelIndex index);
+    void mapThemeSelected(int index);
 
-    void showContextMenu( const QPoint& pos );
+    void showContextMenu(const QPoint &pos);
     void deleteMap();
     void toggleFavorite();
     void toggleIconSize();
@@ -242,8 +216,8 @@ class Q_DECL_HIDDEN MapViewWidget::Private {
 
     MapViewWidget *const q;
 
-    Ui::MapViewWidget  m_mapViewUi;
-    MarbleModel      *m_marbleModel;
+    Ui::MapViewWidget m_mapViewUi;
+    MarbleModel *m_marbleModel;
 
     MapThemeSortFilterProxyModel m_mapSortProxy;
 
@@ -262,68 +236,61 @@ class Q_DECL_HIDDEN MapViewWidget::Private {
     QAction *m_azimuthalEquidistantViewAction;
     QAction *m_verticalPerspectiveViewAction;
     QAction *m_globeViewAction;
-    MapViewItemDelegate* m_mapViewDelegate;
+    MapViewItemDelegate *m_mapViewDelegate;
 };
 
-MapViewWidget::MapViewWidget( QWidget *parent, Qt::WindowFlags f )
-    : QWidget( parent, f ),
-      d( new Private( this ) )
+MapViewWidget::MapViewWidget(QWidget *parent, Qt::WindowFlags f)
+    : QWidget(parent, f)
+    , d(new Private(this))
 {
-    d->m_mapViewUi.setupUi( this );
-    layout()->setContentsMargins( 0, 0, 0, 0 );
+    d->m_mapViewUi.setupUi(this);
+    layout()->setContentsMargins(0, 0, 0, 0);
 
-    if ( MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen ) {
-        QGridLayout* layout = new QGridLayout;
-        layout->addItem( d->m_mapViewUi.verticalLayout->takeAt( 1 ), 0, 0 );
-        layout->addItem( d->m_mapViewUi.verticalLayout->takeAt( 1 ), 0, 1 );
-        d->m_mapViewUi.line->setVisible( false );
-        layout->addItem( d->m_mapViewUi.verticalLayout->takeAt( 2 ), 1, 0 );
-        layout->addItem( d->m_mapViewUi.verticalLayout->takeAt( 2 ), 1, 1 );
-        layout->addItem( d->m_mapViewUi.verticalLayout->takeAt( 3 ), 2, 0 );
-        layout->addItem( d->m_mapViewUi.verticalLayout->takeAt( 4 ), 2, 1 );
-        d->m_mapViewUi.verticalLayout->insertLayout( 0, layout );
-        d->m_mapViewUi.mapThemeComboBox->setModel( &d->m_mapSortProxy );
-        d->m_mapViewUi.mapThemeComboBox->setIconSize( QSize( 48, 48 ) );
-        connect( d->m_mapViewUi.mapThemeComboBox, SIGNAL(activated(int)),
-                 this,                            SLOT(mapThemeSelected(int)) );
-        d->m_mapViewUi.marbleThemeSelectView->setVisible( false );
-    }
-    else {
-        d->m_mapViewUi.marbleThemeSelectView->setViewMode( QListView::IconMode );
+    if (MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen) {
+        QGridLayout *layout = new QGridLayout;
+        layout->addItem(d->m_mapViewUi.verticalLayout->takeAt(1), 0, 0);
+        layout->addItem(d->m_mapViewUi.verticalLayout->takeAt(1), 0, 1);
+        d->m_mapViewUi.line->setVisible(false);
+        layout->addItem(d->m_mapViewUi.verticalLayout->takeAt(2), 1, 0);
+        layout->addItem(d->m_mapViewUi.verticalLayout->takeAt(2), 1, 1);
+        layout->addItem(d->m_mapViewUi.verticalLayout->takeAt(3), 2, 0);
+        layout->addItem(d->m_mapViewUi.verticalLayout->takeAt(4), 2, 1);
+        d->m_mapViewUi.verticalLayout->insertLayout(0, layout);
+        d->m_mapViewUi.mapThemeComboBox->setModel(&d->m_mapSortProxy);
+        d->m_mapViewUi.mapThemeComboBox->setIconSize(QSize(48, 48));
+        connect(d->m_mapViewUi.mapThemeComboBox, SIGNAL(activated(int)), this, SLOT(mapThemeSelected(int)));
+        d->m_mapViewUi.marbleThemeSelectView->setVisible(false);
+    } else {
+        d->m_mapViewUi.marbleThemeSelectView->setViewMode(QListView::IconMode);
         QSize const iconSize = d->m_settings.value(QStringLiteral("MapView/iconSize"), QSize(90, 90)).toSize();
-        d->m_mapViewUi.marbleThemeSelectView->setIconSize( iconSize );
+        d->m_mapViewUi.marbleThemeSelectView->setIconSize(iconSize);
         delete d->m_mapViewDelegate;
         d->m_mapViewDelegate = new MapViewItemDelegate(d->m_mapViewUi.marbleThemeSelectView);
         d->m_mapViewUi.marbleThemeSelectView->setItemDelegate(d->m_mapViewDelegate);
-        d->m_mapViewUi.marbleThemeSelectView->setAlternatingRowColors( true );
-        d->m_mapViewUi.marbleThemeSelectView->setFlow( QListView::LeftToRight );
-        d->m_mapViewUi.marbleThemeSelectView->setWrapping( true );
-        d->m_mapViewUi.marbleThemeSelectView->setResizeMode( QListView::Adjust );
-        d->m_mapViewUi.marbleThemeSelectView->setUniformItemSizes( true );
-        d->m_mapViewUi.marbleThemeSelectView->setMovement( QListView::Static );
-        d->m_mapViewUi.marbleThemeSelectView->setHorizontalScrollBarPolicy( Qt::ScrollBarAlwaysOff );
-        d->m_mapViewUi.marbleThemeSelectView->setEditTriggers( QListView::NoEditTriggers );
-        d->m_mapViewUi.marbleThemeSelectView->setSelectionMode( QListView::SingleSelection );
-        d->m_mapViewUi.marbleThemeSelectView->setModel( &d->m_mapSortProxy );
-        connect( d->m_mapViewUi.marbleThemeSelectView, SIGNAL(pressed(QModelIndex)),
-                 this,                                 SLOT(mapThemeSelected(QModelIndex)) );
-        connect( d->m_mapViewUi.marbleThemeSelectView, SIGNAL(activated(QModelIndex)),
-                 this,                                 SLOT(mapThemeSelected(QModelIndex)) );
-        connect( d->m_mapViewUi.marbleThemeSelectView, SIGNAL(customContextMenuRequested(QPoint)),
-                 this,                                 SLOT(showContextMenu(QPoint)) );
+        d->m_mapViewUi.marbleThemeSelectView->setAlternatingRowColors(true);
+        d->m_mapViewUi.marbleThemeSelectView->setFlow(QListView::LeftToRight);
+        d->m_mapViewUi.marbleThemeSelectView->setWrapping(true);
+        d->m_mapViewUi.marbleThemeSelectView->setResizeMode(QListView::Adjust);
+        d->m_mapViewUi.marbleThemeSelectView->setUniformItemSizes(true);
+        d->m_mapViewUi.marbleThemeSelectView->setMovement(QListView::Static);
+        d->m_mapViewUi.marbleThemeSelectView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+        d->m_mapViewUi.marbleThemeSelectView->setEditTriggers(QListView::NoEditTriggers);
+        d->m_mapViewUi.marbleThemeSelectView->setSelectionMode(QListView::SingleSelection);
+        d->m_mapViewUi.marbleThemeSelectView->setModel(&d->m_mapSortProxy);
+        connect(d->m_mapViewUi.marbleThemeSelectView, SIGNAL(pressed(QModelIndex)), this, SLOT(mapThemeSelected(QModelIndex)));
+        connect(d->m_mapViewUi.marbleThemeSelectView, SIGNAL(activated(QModelIndex)), this, SLOT(mapThemeSelected(QModelIndex)));
+        connect(d->m_mapViewUi.marbleThemeSelectView, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(showContextMenu(QPoint)));
 
-        d->m_mapViewUi.mapThemeComboBox->setVisible( false );
+        d->m_mapViewUi.mapThemeComboBox->setVisible(false);
         d->setupToolBar();
     }
 
-    connect( d->m_mapViewUi.projectionComboBox,    SIGNAL(activated(int)),
-             this,                                 SLOT(projectionSelected(int)) );
+    connect(d->m_mapViewUi.projectionComboBox, SIGNAL(activated(int)), this, SLOT(projectionSelected(int)));
 
-    d->m_mapViewUi.projectionComboBox->setEnabled( true );
-    d->m_mapViewUi.celestialBodyComboBox->setModel( &d->m_celestialListProxy );
+    d->m_mapViewUi.projectionComboBox->setEnabled(true);
+    d->m_mapViewUi.celestialBodyComboBox->setModel(&d->m_celestialListProxy);
 
-    connect( d->m_mapViewUi.celestialBodyComboBox, SIGNAL(activated(int)),
-             this,                                 SLOT(celestialBodySelected(int)) );
+    connect(d->m_mapViewUi.celestialBodyComboBox, SIGNAL(activated(int)), this, SLOT(celestialBodySelected(int)));
 
     d->m_settings.beginGroup(QStringLiteral("Favorites"));
     if (!d->m_settings.contains(QStringLiteral("initialized"))) {
@@ -341,25 +308,21 @@ MapViewWidget::~MapViewWidget()
     delete d;
 }
 
-void MapViewWidget::setMarbleWidget( MarbleWidget *widget, MapThemeManager *mapThemeManager )
+void MapViewWidget::setMarbleWidget(MarbleWidget *widget, MapThemeManager *mapThemeManager)
 {
     d->m_marbleModel = widget->model();
-    d->m_mapSortProxy.setSourceModel( mapThemeManager->mapThemeModel() );
-    d->m_mapSortProxy.sort( 0 );
-    d->m_celestialListProxy.setSourceModel( mapThemeManager->celestialBodiesModel() );
-    d->m_celestialListProxy.sort( 0 );
+    d->m_mapSortProxy.setSourceModel(mapThemeManager->mapThemeModel());
+    d->m_mapSortProxy.sort(0);
+    d->m_celestialListProxy.setSourceModel(mapThemeManager->celestialBodiesModel());
+    d->m_celestialListProxy.sort(0);
 
-    connect( this, SIGNAL(projectionChanged(Projection)),
-             widget, SLOT(setProjection(Projection)) );
+    connect(this, SIGNAL(projectionChanged(Projection)), widget, SLOT(setProjection(Projection)));
 
-    connect( widget, SIGNAL(themeChanged(QString)),
-             this, SLOT(setMapThemeId(QString)) );
+    connect(widget, SIGNAL(themeChanged(QString)), this, SLOT(setMapThemeId(QString)));
 
-    connect( widget, SIGNAL(projectionChanged(Projection)),
-             this, SLOT(setProjection(Projection)) );
+    connect(widget, SIGNAL(projectionChanged(Projection)), this, SLOT(setProjection(Projection)));
 
-    connect( this, SIGNAL(mapThemeIdChanged(QString)),
-             widget, SLOT(setMapThemeId(QString)) );
+    connect(this, SIGNAL(mapThemeIdChanged(QString)), widget, SLOT(setMapThemeId(QString)));
 
     setProjection(widget->projection());
     setMapThemeId(widget->mapThemeId());
@@ -377,26 +340,25 @@ void MapViewWidget::resizeEvent(QResizeEvent *event)
     }
 }
 
-void MapViewWidget::setMapThemeId( const QString &themeId )
+void MapViewWidget::setMapThemeId(const QString &themeId)
 {
     const bool smallscreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
 
-    const int currentRow = smallscreen ? d->m_mapViewUi.mapThemeComboBox->currentIndex() :
-                                         d->m_mapViewUi.marbleThemeSelectView->currentIndex().row();
-    const QString oldThemeId = d->m_mapSortProxy.data( d->m_mapSortProxy.index( currentRow, 0 ), Qt::UserRole + 1 ).toString();
+    const int currentRow = smallscreen ? d->m_mapViewUi.mapThemeComboBox->currentIndex() : d->m_mapViewUi.marbleThemeSelectView->currentIndex().row();
+    const QString oldThemeId = d->m_mapSortProxy.data(d->m_mapSortProxy.index(currentRow, 0), Qt::UserRole + 1).toString();
 
     // Check if the new selected theme is different from the current one
-    if ( themeId == oldThemeId )
+    if (themeId == oldThemeId)
         return;
 
     const QString oldCelestialBodyId = oldThemeId.section(QLatin1Char('/'), 0, 0);
     const QString celestialBodyId = themeId.section(QLatin1Char('/'), 0, 0);
 
     // select celestialBodyId in GUI
-    if ( celestialBodyId != oldCelestialBodyId ) {
-        for ( int row = 0; row < d->m_celestialListProxy.rowCount(); ++row ) {
-            if ( d->m_celestialListProxy.data( d->m_celestialListProxy.index( row, 1 ) ).toString() == celestialBodyId ) {
-                d->m_mapViewUi.celestialBodyComboBox->setCurrentIndex( row );
+    if (celestialBodyId != oldCelestialBodyId) {
+        for (int row = 0; row < d->m_celestialListProxy.rowCount(); ++row) {
+            if (d->m_celestialListProxy.data(d->m_celestialListProxy.index(row, 1)).toString() == celestialBodyId) {
+                d->m_mapViewUi.celestialBodyComboBox->setCurrentIndex(row);
                 break;
             }
         }
@@ -405,15 +367,14 @@ void MapViewWidget::setMapThemeId( const QString &themeId )
     }
 
     // select themeId in GUI
-    for ( int row = 0; row < d->m_mapSortProxy.rowCount(); ++row ) {
-        if( d->m_mapSortProxy.data( d->m_mapSortProxy.index( row, 0 ), Qt::UserRole + 1 ).toString() == themeId ) {
-            if ( smallscreen ) {
-                d->m_mapViewUi.mapThemeComboBox->setCurrentIndex( row );
-            }
-            else {
-                const QModelIndex index = d->m_mapSortProxy.index( row, 0 );
-                d->m_mapViewUi.marbleThemeSelectView->setCurrentIndex( index );
-                d->m_mapViewUi.marbleThemeSelectView->scrollTo( index );
+    for (int row = 0; row < d->m_mapSortProxy.rowCount(); ++row) {
+        if (d->m_mapSortProxy.data(d->m_mapSortProxy.index(row, 0), Qt::UserRole + 1).toString() == themeId) {
+            if (smallscreen) {
+                d->m_mapViewUi.mapThemeComboBox->setCurrentIndex(row);
+            } else {
+                const QModelIndex index = d->m_mapSortProxy.index(row, 0);
+                d->m_mapViewUi.marbleThemeSelectView->setCurrentIndex(index);
+                d->m_mapViewUi.marbleThemeSelectView->scrollTo(index);
             }
 
             break;
@@ -421,10 +382,10 @@ void MapViewWidget::setMapThemeId( const QString &themeId )
     }
 }
 
-void MapViewWidget::setProjection( Projection projection )
+void MapViewWidget::setProjection(Projection projection)
 {
-    if ( (int)projection != d->m_mapViewUi.projectionComboBox->currentIndex() )
-        d->m_mapViewUi.projectionComboBox->setCurrentIndex( (int) projection );
+    if ((int)projection != d->m_mapViewUi.projectionComboBox->currentIndex())
+        d->m_mapViewUi.projectionComboBox->setCurrentIndex((int)projection);
 
     if (d->m_toolBar) {
         switch (projection) {
@@ -568,9 +529,9 @@ void MapViewWidget::verticalPerspectiveViewRequested()
     emit projectionChanged(Marble::VerticalPerspective);
 }
 
-void MapViewWidget::Private::celestialBodySelected( int comboIndex )
+void MapViewWidget::Private::celestialBodySelected(int comboIndex)
 {
-    Q_UNUSED( comboIndex )
+    Q_UNUSED(comboIndex)
 
     updateMapFilter();
 
@@ -581,61 +542,59 @@ void MapViewWidget::Private::celestialBodySelected( int comboIndex )
 
     int row = m_mapSortProxy.rowCount();
 
-    for ( int i = 0; i < row; ++i )
-    {
-        QModelIndex index = m_mapSortProxy.index(i,0);
+    for (int i = 0; i < row; ++i) {
+        QModelIndex index = m_mapSortProxy.index(i, 0);
         QString itMapThemeId = m_mapSortProxy.data(index, Qt::UserRole + 1).toString();
-        if ( currentMapThemeId == itMapThemeId )
-        {
+        if (currentMapThemeId == itMapThemeId) {
             foundMapTheme = true;
             break;
         }
     }
-    if ( !foundMapTheme ) {
-        QModelIndex index = m_mapSortProxy.index(0,0);
-        emit q->mapThemeIdChanged( m_mapSortProxy.data( index, Qt::UserRole + 1 ).toString() );
+    if (!foundMapTheme) {
+        QModelIndex index = m_mapSortProxy.index(0, 0);
+        emit q->mapThemeIdChanged(m_mapSortProxy.data(index, Qt::UserRole + 1).toString());
     }
 
-    if( oldPlanetId != m_marbleModel->planetId() ) {
-        emit q->celestialBodyChanged( m_marbleModel->planetId() );
+    if (oldPlanetId != m_marbleModel->planetId()) {
+        emit q->celestialBodyChanged(m_marbleModel->planetId());
     }
 }
 
 // Relay a signal and convert the parameter from an int to a Projection.
-void MapViewWidget::Private::projectionSelected( int projectionIndex )
+void MapViewWidget::Private::projectionSelected(int projectionIndex)
 {
-    emit q->projectionChanged( (Projection) projectionIndex );
+    emit q->projectionChanged((Projection)projectionIndex);
 }
 
-void MapViewWidget::Private::mapThemeSelected( QModelIndex index )
+void MapViewWidget::Private::mapThemeSelected(QModelIndex index)
 {
-    mapThemeSelected( index.row() );
+    mapThemeSelected(index.row());
 }
 
-void MapViewWidget::Private::mapThemeSelected( int index )
+void MapViewWidget::Private::mapThemeSelected(int index)
 {
-    const QModelIndex columnIndex = m_mapSortProxy.index( index, 0 );
-    const QString currentmaptheme = m_mapSortProxy.data( columnIndex, Qt::UserRole + 1 ).toString();
+    const QModelIndex columnIndex = m_mapSortProxy.index(index, 0);
+    const QString currentmaptheme = m_mapSortProxy.data(columnIndex, Qt::UserRole + 1).toString();
 
     mDebug() << currentmaptheme;
 
-    emit q->mapThemeIdChanged( currentmaptheme );
+    emit q->mapThemeIdChanged(currentmaptheme);
 }
 
 QString MapViewWidget::Private::currentThemeName() const
 {
     const QModelIndex index = m_mapViewUi.marbleThemeSelectView->currentIndex();
-    const QModelIndex columnIndex = m_mapSortProxy.index( index.row(), 0, QModelIndex() );
+    const QModelIndex columnIndex = m_mapSortProxy.index(index.row(), 0, QModelIndex());
 
-    return m_mapSortProxy.data( columnIndex ).toString();
+    return m_mapSortProxy.data(columnIndex).toString();
 }
 
 QString MapViewWidget::Private::currentThemePath() const
 {
     const QModelIndex index = m_mapViewUi.marbleThemeSelectView->currentIndex();
-    const QModelIndex columnIndex = m_mapSortProxy.index( index.row(), 0 );
+    const QModelIndex columnIndex = m_mapSortProxy.index(index.row(), 0);
 
-    return m_mapSortProxy.data( columnIndex, Qt::UserRole + 1 ).toString();
+    return m_mapSortProxy.data(columnIndex, Qt::UserRole + 1).toString();
 }
 
 QString MapViewWidget::Private::favoriteKey(const QModelIndex &index) const
@@ -643,35 +602,32 @@ QString MapViewWidget::Private::favoriteKey(const QModelIndex &index) const
     return QLatin1String("Favorites/") + m_mapSortProxy.data(index).toString();
 }
 
-void MapViewWidget::Private::showContextMenu( const QPoint& pos )
+void MapViewWidget::Private::showContextMenu(const QPoint &pos)
 {
     qDebug();
     Q_UNUSED(pos)
     QMenu menu;
 
-    QAction* iconSizeAction = menu.addAction( tr( "&Show Large Icons" ), q, SLOT(toggleIconSize()) );
-    iconSizeAction->setCheckable( true );
-    iconSizeAction->setChecked( m_mapViewUi.marbleThemeSelectView->iconSize() == QSize( 96, 96 ) );
+    QAction *iconSizeAction = menu.addAction(tr("&Show Large Icons"), q, SLOT(toggleIconSize()));
+    iconSizeAction->setCheckable(true);
+    iconSizeAction->setChecked(m_mapViewUi.marbleThemeSelectView->iconSize() == QSize(96, 96));
     QAction *favAction = menu.addAction(QIcon(QStringLiteral(":/icons/bookmarks.png")), tr("&Favorite"), q, SLOT(toggleFavorite()));
-    favAction->setCheckable( true );
-    favAction->setChecked( isCurrentFavorite() );
+    favAction->setCheckable(true);
+    favAction->setChecked(isCurrentFavorite());
     menu.addSeparator();
 
     menu.addAction(QIcon(QStringLiteral(":/icons/create-new-map.png")), tr("&Create a New Map..."), q, SIGNAL(showMapWizard()));
     if (QFileInfo::exists(MarbleDirs::localPath() + QLatin1String("/maps/") + currentThemePath())) {
-        menu.addAction( tr( "&Delete Map Theme" ), q, SLOT(deleteMap()) );
+        menu.addAction(tr("&Delete Map Theme"), q, SLOT(deleteMap()));
     }
-    menu.exec( m_mapViewUi.marbleThemeSelectView->mapToGlobal( pos ) );
+    menu.exec(m_mapViewUi.marbleThemeSelectView->mapToGlobal(pos));
 }
 
 void MapViewWidget::Private::deleteMap()
 {
-    if(QMessageBox::warning( q,
-                             tr( "Marble" ),
-                             tr( "Are you sure that you want to delete \"%1\"?" ).arg( currentThemeName() ),
-                             QMessageBox::Yes | QMessageBox::No) == QMessageBox::Yes )
-    {
-        MapThemeManager::deleteMapTheme( currentThemePath() );
+    if (QMessageBox::warning(q, tr("Marble"), tr("Are you sure that you want to delete \"%1\"?").arg(currentThemeName()), QMessageBox::Yes | QMessageBox::No)
+        == QMessageBox::Yes) {
+        MapThemeManager::deleteMapTheme(currentThemePath());
         emit q->mapThemeDeleted();
     }
 }
@@ -679,24 +635,24 @@ void MapViewWidget::Private::deleteMap()
 void MapViewWidget::Private::toggleFavorite()
 {
     QModelIndex index = m_mapViewUi.marbleThemeSelectView->currentIndex();
-    if( isCurrentFavorite() ) {
+    if (isCurrentFavorite()) {
         m_settings.remove(favoriteKey(index));
     } else {
-        m_settings.setValue(favoriteKey(index), QDateTime::currentDateTime() );
+        m_settings.setValue(favoriteKey(index), QDateTime::currentDateTime());
     }
-    QStandardItemModel* sourceModel = qobject_cast<QStandardItemModel*>(m_mapSortProxy.sourceModel());
+    QStandardItemModel *sourceModel = qobject_cast<QStandardItemModel *>(m_mapSortProxy.sourceModel());
     const QModelIndex sourceIndex = m_mapSortProxy.mapToSource(index);
-    emit sourceModel->dataChanged( sourceIndex, sourceIndex );
+    emit sourceModel->dataChanged(sourceIndex, sourceIndex);
     index = m_mapViewUi.marbleThemeSelectView->currentIndex();
     m_mapViewUi.marbleThemeSelectView->scrollTo(index);
 }
 
 void MapViewWidget::Private::toggleIconSize()
 {
-    bool const isLarge = m_mapViewUi.marbleThemeSelectView->iconSize() == QSize( 96, 96 );
+    bool const isLarge = m_mapViewUi.marbleThemeSelectView->iconSize() == QSize(96, 96);
     int const size = isLarge ? 52 : 96;
-    m_mapViewUi.marbleThemeSelectView->setIconSize( QSize( size, size ) );
-    m_settings.setValue(QStringLiteral("MapView/iconSize"), m_mapViewUi.marbleThemeSelectView->iconSize() );
+    m_mapViewUi.marbleThemeSelectView->setIconSize(QSize(size, size));
+    m_settings.setValue(QStringLiteral("MapView/iconSize"), m_mapViewUi.marbleThemeSelectView->iconSize());
 }
 
 bool MapViewWidget::Private::isCurrentFavorite() const

@@ -3,7 +3,6 @@
 // SPDX-FileCopyrightText: 2007 Tobias Koenig <tokoe@kde.org>
 //
 
-
 // Own
 #include "CacheStoragePolicy.h"
 
@@ -12,25 +11,25 @@
 
 using namespace Marble;
 
-CacheStoragePolicy::CacheStoragePolicy( const QString &cacheDirectory )
-    : m_cache( cacheDirectory )
+CacheStoragePolicy::CacheStoragePolicy(const QString &cacheDirectory)
+    : m_cache(cacheDirectory)
 {
-    if ( ! QDir( cacheDirectory ).exists() ) 
-        QDir::root().mkpath( cacheDirectory );
+    if (!QDir(cacheDirectory).exists())
+        QDir::root().mkpath(cacheDirectory);
 }
 
 CacheStoragePolicy::~CacheStoragePolicy()
 {
 }
 
-bool CacheStoragePolicy::fileExists( const QString &fileName ) const
+bool CacheStoragePolicy::fileExists(const QString &fileName) const
 {
-    return m_cache.exists( fileName );
+    return m_cache.exists(fileName);
 }
 
-bool CacheStoragePolicy::updateFile( const QString &fileName, const QByteArray &data )
+bool CacheStoragePolicy::updateFile(const QString &fileName, const QByteArray &data)
 {
-    if ( !m_cache.insert( fileName, data ) ) {
+    if (!m_cache.insert(fileName, data)) {
         m_errorMsg = QObject::tr("Unable to insert data into cache");
         return false;
     }
@@ -48,17 +47,17 @@ QString CacheStoragePolicy::lastErrorMessage() const
     return m_errorMsg;
 }
 
-QByteArray CacheStoragePolicy::data( const QString &fileName )
+QByteArray CacheStoragePolicy::data(const QString &fileName)
 {
     QByteArray data;
-    m_cache.find( fileName, data );
+    m_cache.find(fileName, data);
 
     return data;
 }
 
-void CacheStoragePolicy::setCacheLimit( quint64 bytes )
+void CacheStoragePolicy::setCacheLimit(quint64 bytes)
 {
-    m_cache.setCacheLimit( bytes );
+    m_cache.setCacheLimit(bytes);
 }
 
 quint64 CacheStoragePolicy::cacheLimit() const

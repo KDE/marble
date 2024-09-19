@@ -8,7 +8,7 @@
 namespace Marble
 {
 
-OpenCachingCacheDescription::OpenCachingCacheDescription( const QHash<QString, QVariant>& properties  )
+OpenCachingCacheDescription::OpenCachingCacheDescription(const QHash<QString, QVariant> &properties)
 {
     m_cacheId = properties["cacheid"].toULongLong();
     m_language = properties["language"].toString();
@@ -18,7 +18,7 @@ OpenCachingCacheDescription::OpenCachingCacheDescription( const QHash<QString, Q
     m_lastModifiedDate = properties["lastmodified"].toDateTime();
 }
 
-void OpenCachingCacheDescription::setCacheId( unsigned long long cacheId )
+void OpenCachingCacheDescription::setCacheId(unsigned long long cacheId)
 {
     m_cacheId = cacheId;
 }
@@ -28,52 +28,52 @@ unsigned long long OpenCachingCacheDescription::cacheId() const
     return m_cacheId;
 }
 
-void OpenCachingCacheDescription::setLanguage( const QString& language )
+void OpenCachingCacheDescription::setLanguage(const QString &language)
 {
     m_language = language;
 }
 
-const QString& OpenCachingCacheDescription::language() const
+const QString &OpenCachingCacheDescription::language() const
 {
     return m_language;
 }
 
-void OpenCachingCacheDescription::setShortDescription( const QString& shortDescription )
+void OpenCachingCacheDescription::setShortDescription(const QString &shortDescription)
 {
     m_shortDescription = shortDescription;
 }
 
-const QString& OpenCachingCacheDescription::shortDescription() const
+const QString &OpenCachingCacheDescription::shortDescription() const
 {
     return m_shortDescription;
 }
 
-void OpenCachingCacheDescription::setDescription( const QString& description )
+void OpenCachingCacheDescription::setDescription(const QString &description)
 {
     m_description = description;
 }
 
-const QString& OpenCachingCacheDescription::description() const
+const QString &OpenCachingCacheDescription::description() const
 {
     return m_description;
 }
 
-void OpenCachingCacheDescription::setHint( const QString& hint )
+void OpenCachingCacheDescription::setHint(const QString &hint)
 {
     m_hint = hint;
 }
 
-const QString& OpenCachingCacheDescription::hint() const
+const QString &OpenCachingCacheDescription::hint() const
 {
     return m_hint;
 }
 
-void OpenCachingCacheDescription::setLastModifiedDate( const QDateTime& lastModifiedDate )
+void OpenCachingCacheDescription::setLastModifiedDate(const QDateTime &lastModifiedDate)
 {
     m_lastModifiedDate = lastModifiedDate;
 }
 
-const QDateTime& OpenCachingCacheDescription::lastModifiedDate() const
+const QDateTime &OpenCachingCacheDescription::lastModifiedDate() const
 {
     return m_lastModifiedDate;
 }

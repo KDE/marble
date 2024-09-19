@@ -1,22 +1,22 @@
+#include <QApplication>
 #include <QDebug>
 #include <QFileInfo>
-#include <QApplication>
 #include <QImage>
 
-#include <marble/MarbleWidget.h>
 #include <marble/GeoDataDocument.h>
 #include <marble/GeoDataGroundOverlay.h>
 #include <marble/GeoDataTreeModel.h>
 #include <marble/MarbleModel.h>
+#include <marble/MarbleWidget.h>
 
 using namespace Marble;
 
-int main(int argc, char** argv) {
+int main(int argc, char **argv)
+{
+    QApplication app(argc, argv);
 
-    QApplication app(argc,argv);
-
-    QFileInfo inputFile( app.arguments().last() );
-    if ( app.arguments().size() < 2 || !inputFile.exists() ) {
+    QFileInfo inputFile(app.arguments().last());
+    if (app.arguments().size() < 2 || !inputFile.exists()) {
         qWarning() << "Usage: " << app.arguments().first() << "file.png";
         return 1;
     }
@@ -28,20 +28,20 @@ int main(int argc, char** argv) {
     mapWidget->setMapThemeId(QStringLiteral("earth/bluemarble/bluemarble.dgml"));
 
     // Create a bounding box from the given corner points
-    GeoDataLatLonBox box( 55, 48, 14.5, 6, GeoDataCoordinates::Degree );
-    box.setRotation( 0, GeoDataCoordinates::Degree );
+    GeoDataLatLonBox box(55, 48, 14.5, 6, GeoDataCoordinates::Degree);
+    box.setRotation(0, GeoDataCoordinates::Degree);
 
     // Create an overlay and assign the image to render and its bounding box to it
     GeoDataGroundOverlay *overlay = new GeoDataGroundOverlay;
-    overlay->setLatLonBox( box );
-    overlay->setIcon( QImage( inputFile.absoluteFilePath() ) );
+    overlay->setLatLonBox(box);
+    overlay->setIcon(QImage(inputFile.absoluteFilePath()));
 
     // Create a document as a container for the overlay
     GeoDataDocument *document = new GeoDataDocument();
-    document->append( overlay );
+    document->append(overlay);
 
     // Add the document to MarbleWidget's tree model
-    mapWidget->model()->treeModel()->addDocument( document );
+    mapWidget->model()->treeModel()->addDocument(document);
 
     // Ensure we see our the image on start
     mapWidget->model()->setHome(box.center(), 1500);
@@ -52,4 +52,3 @@ int main(int argc, char** argv) {
 
     return app.exec();
 }
-

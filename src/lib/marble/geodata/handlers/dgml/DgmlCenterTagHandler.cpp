@@ -31,7 +31,7 @@ namespace dgml
 {
 DGML_DEFINE_TAG_HANDLER(Center)
 
-GeoNode* DgmlCenterTagHandler::parse(GeoParser& parser) const
+GeoNode *DgmlCenterTagHandler::parse(GeoParser &parser) const
 {
     // Check whether the tag is valid
     Q_ASSERT(parser.isStartElement() && parser.isValidElement(dgmlTag_Center));
@@ -39,7 +39,7 @@ GeoNode* DgmlCenterTagHandler::parse(GeoParser& parser) const
     // Checking for parent item
     GeoStackItem parentItem = parser.parentElement();
     if (parentItem.represents(dgmlTag_Map))
-        parentItem.nodeAs<GeoSceneMap>()->setCenter( parser.readElementText().trimmed() );
+        parentItem.nodeAs<GeoSceneMap>()->setCenter(parser.readElementText().trimmed());
 
     return 0;
 }

@@ -3,9 +3,7 @@
 // SPDX-FileCopyrightText: 2014 Calin Cruceru <crucerucalincristian@gmail.com>
 //
 
-
 #include "SceneGraphicsTypes.h"
-
 
 namespace Marble
 {

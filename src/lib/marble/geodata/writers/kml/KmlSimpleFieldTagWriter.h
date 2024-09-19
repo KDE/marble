@@ -6,8 +6,8 @@
 #ifndef MARBLE_KMLSIMPLEFIELDTAGWRITER_H
 #define MARBLE_KMLSIMPLEFIELDTAGWRITER_H
 
-#include "GeoTagWriter.h"
 #include "GeoDataSimpleField.h"
+#include "GeoTagWriter.h"
 
 class QString;
 
@@ -17,10 +17,10 @@ namespace Marble
 class KmlSimpleFieldTagWriter : public GeoTagWriter
 {
 public:
-    bool write( const GeoNode *node, GeoWriter& writer ) const override;
+    bool write(const GeoNode *node, GeoWriter &writer) const override;
 
 private:
-    static QString resolveType( GeoDataSimpleField::SimpleFieldType type );
+    static QString resolveType(GeoDataSimpleField::SimpleFieldType type);
 };
 
 }

@@ -7,9 +7,9 @@
 #include "SunPlugin.h"
 
 #include "GeoDataCoordinates.h"
+#include "GeoPainter.h"
 #include "MarbleDirs.h"
 #include "MarbleModel.h"
-#include "GeoPainter.h"
 #include "SunLocator.h"
 
 #include <QIcon>
@@ -18,14 +18,14 @@ namespace Marble
 {
 
 SunPlugin::SunPlugin()
-    : RenderPlugin( nullptr )
+    : RenderPlugin(nullptr)
 {
 }
 
-SunPlugin::SunPlugin( const MarbleModel *marbleModel )
-    : RenderPlugin( marbleModel )
+SunPlugin::SunPlugin(const MarbleModel *marbleModel)
+    : RenderPlugin(marbleModel)
 {
-    setVisible( false );
+    setVisible(false);
 }
 
 QStringList SunPlugin::backendTypes() const
@@ -45,12 +45,12 @@ QStringList SunPlugin::renderPosition() const
 
 QString SunPlugin::name() const
 {
-    return tr( "Sun" );
+    return tr("Sun");
 }
 
 QString SunPlugin::guiString() const
 {
-    return tr( "Sun" );
+    return tr("Sun");
 }
 
 QString SunPlugin::nameId() const
@@ -65,7 +65,7 @@ QString SunPlugin::version() const
 
 QString SunPlugin::description() const
 {
-    return tr( "A plugin that shows the Sun." );
+    return tr("A plugin that shows the Sun.");
 }
 
 QString SunPlugin::copyrightYears() const
@@ -75,41 +75,37 @@ QString SunPlugin::copyrightYears() const
 
 QVector<PluginAuthor> SunPlugin::pluginAuthors() const
 {
-    return QVector<PluginAuthor>()
-            << PluginAuthor(QStringLiteral("Torsten Rahn"), QStringLiteral("tackat@kde.org"))
-            << PluginAuthor(QStringLiteral("Bernhard Beschow"), QStringLiteral("bbeschow@cs.tu-berlin.de"))
-            << PluginAuthor(QStringLiteral("Harshit Jain"), QStringLiteral("hjain.itbhu@gmail.com"));
+    return QVector<PluginAuthor>() << PluginAuthor(QStringLiteral("Torsten Rahn"), QStringLiteral("tackat@kde.org"))
+                                   << PluginAuthor(QStringLiteral("Bernhard Beschow"), QStringLiteral("bbeschow@cs.tu-berlin.de"))
+                                   << PluginAuthor(QStringLiteral("Harshit Jain"), QStringLiteral("hjain.itbhu@gmail.com"));
 }
 
-QIcon SunPlugin::icon () const
+QIcon SunPlugin::icon() const
 {
     return QIcon(MarbleDirs::path(QStringLiteral("svg/sunshine.png")));
 }
 
-
-void SunPlugin::initialize ()
+void SunPlugin::initialize()
 {
-    m_pixmap = QPixmap(MarbleDirs::path(QStringLiteral("svg/sunshine.png"))).scaled(QSize(22,22));
+    m_pixmap = QPixmap(MarbleDirs::path(QStringLiteral("svg/sunshine.png"))).scaled(QSize(22, 22));
 }
 
-bool SunPlugin::isInitialized () const
+bool SunPlugin::isInitialized() const
 {
     return !m_pixmap.isNull();
 }
 
-bool SunPlugin::render( GeoPainter *painter, ViewportParams *viewport,
-                        const QString& renderPos, GeoSceneLayer * layer )
+bool SunPlugin::render(GeoPainter *painter, ViewportParams *viewport, const QString &renderPos, GeoSceneLayer *layer)
 {
-    Q_UNUSED( viewport )
-    Q_UNUSED( renderPos )
-    Q_UNUSED( layer )
+    Q_UNUSED(viewport)
+    Q_UNUSED(renderPos)
+    Q_UNUSED(layer)
 
-    if( visible() )
-    {
+    if (visible()) {
         const qreal lon = marbleModel()->sunLocator()->getLon();
         const qreal lat = marbleModel()->sunLocator()->getLat();
-        const GeoDataCoordinates coordinates( lon, lat, 0, GeoDataCoordinates::Degree );
-        painter->drawPixmap( coordinates, m_pixmap );
+        const GeoDataCoordinates coordinates(lon, lat, 0, GeoDataCoordinates::Degree);
+        painter->drawPixmap(coordinates, m_pixmap);
     }
 
     return true;

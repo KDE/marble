@@ -7,24 +7,24 @@
 
 #include "SearchRunnerManager.h"
 
-#include "MarblePlacemarkModel.h"
+#include "GeoDataPlacemark.h"
 #include "MarbleDebug.h"
 #include "MarbleModel.h"
-#include "Planet.h"
-#include "GeoDataPlacemark.h"
-#include "PluginManager.h"
+#include "MarblePlacemarkModel.h"
 #include "ParseRunnerPlugin.h"
+#include "Planet.h"
+#include "PluginManager.h"
 #include "ReverseGeocodingRunnerPlugin.h"
 #include "RoutingRunnerPlugin.h"
-#include "SearchRunnerPlugin.h"
 #include "RunnerTask.h"
+#include "SearchRunnerPlugin.h"
 #include "routing/RouteRequest.h"
 #include "routing/RoutingProfilesModel.h"
 
+#include <QMutex>
 #include <QString>
 #include <QThreadPool>
 #include <QTimer>
-#include <QMutex>
 
 namespace Marble
 {
@@ -34,19 +34,19 @@ class MarbleModel;
 class Q_DECL_HIDDEN SearchRunnerManager::Private
 {
 public:
-    Private( SearchRunnerManager *parent, const MarbleModel *marbleModel );
+    Private(SearchRunnerManager *parent, const MarbleModel *marbleModel);
 
     template<typename T>
-    QList<T*> plugins( const QList<T*> &plugins ) const;
+    QList<T *> plugins(const QList<T *> &plugins) const;
 
-    void addSearchResult( const QVector<GeoDataPlacemark *> &result );
-    void cleanupSearchTask( SearchTask *task );
+    void addSearchResult(const QVector<GeoDataPlacemark *> &result);
+    void cleanupSearchTask(SearchTask *task);
     void notifySearchResultChange();
     void notifySearchFinished();
 
     SearchRunnerManager *const q;
     const MarbleModel *const m_marbleModel;
-    const PluginManager* m_pluginManager;
+    const PluginManager *m_pluginManager;
     QString m_lastSearchTerm;
     GeoDataLatLonBox m_lastPreferredBox;
     QMutex m_modelMutex;
@@ -55,31 +55,30 @@ public:
     QVector<GeoDataPlacemark *> m_placemarkContainer;
 };
 
-SearchRunnerManager::Private::Private( SearchRunnerManager *parent, const MarbleModel *marbleModel ) :
-    q( parent ),
-    m_marbleModel( marbleModel ),
-    m_pluginManager( marbleModel->pluginManager() ),
-    m_model( new MarblePlacemarkModel( parent ) )
+SearchRunnerManager::Private::Private(SearchRunnerManager *parent, const MarbleModel *marbleModel)
+    : q(parent)
+    , m_marbleModel(marbleModel)
+    , m_pluginManager(marbleModel->pluginManager())
+    , m_model(new MarblePlacemarkModel(parent))
 {
-    m_model.setPlacemarkContainer( &m_placemarkContainer );
-    qRegisterMetaType<QVector<GeoDataPlacemark *> >( "QVector<GeoDataPlacemark*>" );
+    m_model.setPlacemarkContainer(&m_placemarkContainer);
+    qRegisterMetaType<QVector<GeoDataPlacemark *>>("QVector<GeoDataPlacemark*>");
 }
 
 template<typename T>
-QList<T*> SearchRunnerManager::Private::plugins( const QList<T*> &plugins ) const
+QList<T *> SearchRunnerManager::Private::plugins(const QList<T *> &plugins) const
 {
-    QList<T*> result;
-    for( T* plugin: plugins ) {
-        if ( ( m_marbleModel && m_marbleModel->workOffline() && !plugin->canWorkOffline() ) ) {
+    QList<T *> result;
+    for (T *plugin : plugins) {
+        if ((m_marbleModel && m_marbleModel->workOffline() && !plugin->canWorkOffline())) {
             continue;
         }
 
-        if ( !plugin->canWork() ) {
+        if (!plugin->canWork()) {
             continue;
         }
 
-        if ( m_marbleModel && !plugin->supportsCelestialBody( m_marbleModel->planet()->id() ) )
-        {
+        if (m_marbleModel && !plugin->supportsCelestialBody(m_marbleModel->planet()->id())) {
             continue;
         }
 
@@ -89,41 +88,40 @@ QList<T*> SearchRunnerManager::Private::plugins( const QList<T*> &plugins ) cons
     return result;
 }
 
-void SearchRunnerManager::Private::addSearchResult( const QVector<GeoDataPlacemark *> &result )
+void SearchRunnerManager::Private::addSearchResult(const QVector<GeoDataPlacemark *> &result)
 {
     mDebug() << "Runner reports" << result.size() << " search results";
-    if( result.isEmpty() )
+    if (result.isEmpty())
         return;
 
     m_modelMutex.lock();
     int start = m_placemarkContainer.size();
     int count = 0;
     bool distanceCompare = m_marbleModel->planet() != nullptr;
-    for( int i=0; i<result.size(); ++i ) {
+    for (int i = 0; i < result.size(); ++i) {
         bool same = false;
-        for ( int j=0; j<m_placemarkContainer.size(); ++j ) {
-            if ( distanceCompare &&
-                 (result[i]->coordinate().sphericalDistanceTo(m_placemarkContainer[j]->coordinate())
-                   * m_marbleModel->planet()->radius() < 1 ) ) {
+        for (int j = 0; j < m_placemarkContainer.size(); ++j) {
+            if (distanceCompare
+                && (result[i]->coordinate().sphericalDistanceTo(m_placemarkContainer[j]->coordinate()) * m_marbleModel->planet()->radius() < 1)) {
                 same = true;
             }
         }
-        if ( !same ) {
-            m_placemarkContainer.append( result[i] );
+        if (!same) {
+            m_placemarkContainer.append(result[i]);
             ++count;
         }
     }
-    m_model.addPlacemarks( start, count );
+    m_model.addPlacemarks(start, count);
     m_modelMutex.unlock();
     notifySearchResultChange();
 }
 
-void SearchRunnerManager::Private::cleanupSearchTask( SearchTask *task )
+void SearchRunnerManager::Private::cleanupSearchTask(SearchTask *task)
 {
-    m_searchTasks.removeAll( task );
+    m_searchTasks.removeAll(task);
     mDebug() << "removing search task" << m_searchTasks.size() << (quintptr)task;
-    if ( m_searchTasks.isEmpty() ) {
-        if( m_placemarkContainer.isEmpty() ) {
+    if (m_searchTasks.isEmpty()) {
+        if (m_placemarkContainer.isEmpty()) {
             notifySearchResultChange();
         }
         notifySearchFinished();
@@ -142,12 +140,12 @@ void SearchRunnerManager::Private::notifySearchFinished()
     emit q->placemarkSearchFinished();
 }
 
-SearchRunnerManager::SearchRunnerManager( const MarbleModel *marbleModel, QObject *parent ) :
-    QObject( parent ),
-    d( new Private( this, marbleModel ) )
+SearchRunnerManager::SearchRunnerManager(const MarbleModel *marbleModel, QObject *parent)
+    : QObject(parent)
+    , d(new Private(this, marbleModel))
 {
-    if ( QThreadPool::globalInstance()->maxThreadCount() < 4 ) {
-        QThreadPool::globalInstance()->setMaxThreadCount( 4 );
+    if (QThreadPool::globalInstance()->maxThreadCount() < 4) {
+        QThreadPool::globalInstance()->setMaxThreadCount(4);
     }
 }
 
@@ -156,12 +154,12 @@ SearchRunnerManager::~SearchRunnerManager()
     delete d;
 }
 
-void SearchRunnerManager::findPlacemarks( const QString &searchTerm, const GeoDataLatLonBox &preferred )
+void SearchRunnerManager::findPlacemarks(const QString &searchTerm, const GeoDataLatLonBox &preferred)
 {
-    if ( searchTerm == d->m_lastSearchTerm && preferred == d->m_lastPreferredBox ) {
-      d->notifySearchResultChange();
-      d->notifySearchFinished();
-      return;
+    if (searchTerm == d->m_lastSearchTerm && preferred == d->m_lastPreferredBox) {
+        d->notifySearchResultChange();
+        d->notifySearchFinished();
+        return;
     }
 
     d->m_lastSearchTerm = searchTerm;
@@ -172,8 +170,8 @@ void SearchRunnerManager::findPlacemarks( const QString &searchTerm, const GeoDa
     d->m_modelMutex.lock();
     bool placemarkContainerChanged = false;
     if (!d->m_placemarkContainer.isEmpty()) {
-        d->m_model.removePlacemarks( "PlacemarkRunnerManager", 0, d->m_placemarkContainer.size() );
-        qDeleteAll( d->m_placemarkContainer );
+        d->m_model.removePlacemarks("PlacemarkRunnerManager", 0, d->m_placemarkContainer.size());
+        qDeleteAll(d->m_placemarkContainer);
         d->m_placemarkContainer.clear();
         placemarkContainerChanged = true;
     }
@@ -182,40 +180,38 @@ void SearchRunnerManager::findPlacemarks( const QString &searchTerm, const GeoDa
         d->notifySearchResultChange();
     }
 
-    if ( searchTerm.trimmed().isEmpty() ) {
+    if (searchTerm.trimmed().isEmpty()) {
         d->notifySearchFinished();
         return;
     }
 
-    QList<const SearchRunnerPlugin *> plugins = d->plugins( d->m_pluginManager->searchRunnerPlugins() );
-    for( const SearchRunnerPlugin *plugin: plugins ) {
-        SearchTask *task = new SearchTask( plugin->newRunner(), this, d->m_marbleModel, searchTerm, preferred );
-        connect( task, SIGNAL(finished(SearchTask*)), this, SLOT(cleanupSearchTask(SearchTask*)) );
+    QList<const SearchRunnerPlugin *> plugins = d->plugins(d->m_pluginManager->searchRunnerPlugins());
+    for (const SearchRunnerPlugin *plugin : plugins) {
+        SearchTask *task = new SearchTask(plugin->newRunner(), this, d->m_marbleModel, searchTerm, preferred);
+        connect(task, SIGNAL(finished(SearchTask *)), this, SLOT(cleanupSearchTask(SearchTask *)));
         d->m_searchTasks << task;
         mDebug() << "search task " << plugin->nameId() << " " << (quintptr)task;
     }
 
-    for( SearchTask *task: d->m_searchTasks ) {
-        QThreadPool::globalInstance()->start( task );
+    for (SearchTask *task : d->m_searchTasks) {
+        QThreadPool::globalInstance()->start(task);
     }
 
-    if ( plugins.isEmpty() ) {
-        d->cleanupSearchTask( nullptr );
+    if (plugins.isEmpty()) {
+        d->cleanupSearchTask(nullptr);
     }
 }
 
-QVector<GeoDataPlacemark *> SearchRunnerManager::searchPlacemarks( const QString &searchTerm, const GeoDataLatLonBox &preferred, int timeout )
+QVector<GeoDataPlacemark *> SearchRunnerManager::searchPlacemarks(const QString &searchTerm, const GeoDataLatLonBox &preferred, int timeout)
 {
     QEventLoop localEventLoop;
     QTimer watchdog;
     watchdog.setSingleShot(true);
-    connect( &watchdog, SIGNAL(timeout()),
-             &localEventLoop, SLOT(quit()));
-    connect(this, SIGNAL(placemarkSearchFinished()),
-            &localEventLoop, SLOT(quit()), Qt::QueuedConnection );
+    connect(&watchdog, SIGNAL(timeout()), &localEventLoop, SLOT(quit()));
+    connect(this, SIGNAL(placemarkSearchFinished()), &localEventLoop, SLOT(quit()), Qt::QueuedConnection);
 
-    watchdog.start( timeout );
-    findPlacemarks( searchTerm, preferred );
+    watchdog.start(timeout);
+    findPlacemarks(searchTerm, preferred);
     localEventLoop.exec();
     return d->m_placemarkContainer;
 }

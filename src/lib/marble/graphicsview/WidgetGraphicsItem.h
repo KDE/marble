@@ -19,24 +19,24 @@ class WidgetGraphicsItemPrivate;
 
 class MARBLE_EXPORT WidgetGraphicsItem : public ScreenGraphicsItem
 {
- public:
-    explicit WidgetGraphicsItem( MarbleGraphicsItem *parent = nullptr );
+public:
+    explicit WidgetGraphicsItem(MarbleGraphicsItem *parent = nullptr);
 
     ~WidgetGraphicsItem() override;
 
-    void setWidget( QWidget *widget );
+    void setWidget(QWidget *widget);
     QWidget *widget() const;
 
- protected:
+protected:
     /**
      * Paints the item in item coordinates.
      */
-    void paint( QPainter *painter ) override;
+    void paint(QPainter *painter) override;
 
-    bool eventFilter( QObject *, QEvent * ) override;
+    bool eventFilter(QObject *, QEvent *) override;
 
- private:
-    Q_DISABLE_COPY( WidgetGraphicsItem )
+private:
+    Q_DISABLE_COPY(WidgetGraphicsItem)
     Q_DECLARE_PRIVATE(WidgetGraphicsItem)
 };
 

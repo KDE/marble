@@ -8,14 +8,14 @@
 namespace Marble
 {
 
-CachePlugin::CachePlugin( QObject *parent ) :
-    ParseRunnerPlugin( parent )
+CachePlugin::CachePlugin(QObject *parent)
+    : ParseRunnerPlugin(parent)
 {
 }
 
 QString CachePlugin::name() const
 {
-    return tr( "Cache File Parser" );
+    return tr("Cache File Parser");
 }
 
 QString CachePlugin::nameId() const
@@ -30,7 +30,7 @@ QString CachePlugin::version() const
 
 QString CachePlugin::description() const
 {
-    return tr( "Create GeoDataDocument from Cache Files" );
+    return tr("Create GeoDataDocument from Cache Files");
 }
 
 QString CachePlugin::copyrightYears() const
@@ -40,13 +40,12 @@ QString CachePlugin::copyrightYears() const
 
 QVector<PluginAuthor> CachePlugin::pluginAuthors() const
 {
-    return QVector<PluginAuthor>()
-            << PluginAuthor(QStringLiteral("Thibaut Gridel"), QStringLiteral("tgridel@free.fr"));
+    return QVector<PluginAuthor>() << PluginAuthor(QStringLiteral("Thibaut Gridel"), QStringLiteral("tgridel@free.fr"));
 }
 
 QString CachePlugin::fileFormatDescription() const
 {
-    return tr( "Marble Cache Files" );
+    return tr("Marble Cache Files");
 }
 
 QStringList CachePlugin::fileExtensions() const
@@ -54,7 +53,7 @@ QStringList CachePlugin::fileExtensions() const
     return QStringList(QStringLiteral("cache"));
 }
 
-ParsingRunner* CachePlugin::newRunner() const
+ParsingRunner *CachePlugin::newRunner() const
 {
     return new CacheRunner;
 }

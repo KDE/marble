@@ -5,11 +5,12 @@
 #ifndef MEASURECONFIGDIALOG_H
 #define MEASURECONFIGDIALOG_H
 
-#include <QDialog>
-#include "ui_MeasureConfigDialog.h"
 #include "MeasureToolPlugin.h"
+#include "ui_MeasureConfigDialog.h"
+#include <QDialog>
 
-namespace Marble {
+namespace Marble
+{
 
 class MeasureConfigDialog : public QDialog
 {

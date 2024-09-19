@@ -6,8 +6,8 @@
 #ifndef GEODATABALLOONSTYLE_H
 #define GEODATABALLOONSTYLE_H
 
-#include "MarbleGlobal.h"
 #include "GeoDataColorStyle.h"
+#include "MarbleGlobal.h"
 #include "geodata_export.h"
 
 #include <QColor>
@@ -24,41 +24,37 @@ class GEODATA_EXPORT GeoDataBalloonStyle : public GeoDataColorStyle
 public:
     GeoDataBalloonStyle();
 
-    GeoDataBalloonStyle( const GeoDataBalloonStyle &other );
+    GeoDataBalloonStyle(const GeoDataBalloonStyle &other);
 
-    GeoDataBalloonStyle& operator=( const GeoDataBalloonStyle &other );
-    bool operator==( const GeoDataBalloonStyle &other ) const;
-    bool operator!=( const GeoDataBalloonStyle &other ) const;
-
+    GeoDataBalloonStyle &operator=(const GeoDataBalloonStyle &other);
+    bool operator==(const GeoDataBalloonStyle &other) const;
+    bool operator!=(const GeoDataBalloonStyle &other) const;
 
     ~GeoDataBalloonStyle() override;
 
     /** Provides type information for downcasting a GeoNode */
-    const char* nodeType() const override;
+    const char *nodeType() const override;
 
-    enum DisplayMode {
-        Default,
-        Hide
-    };
+    enum DisplayMode { Default, Hide };
 
     QColor backgroundColor() const;
-    void setBackgroundColor( const QColor &color );
+    void setBackgroundColor(const QColor &color);
 
     QColor textColor() const;
-    void setTextColor( const QColor &color );
+    void setTextColor(const QColor &color);
 
     QString text() const;
-    void setText( const QString &text );
+    void setText(const QString &text);
 
     DisplayMode displayMode() const;
-    void setDisplayMode(DisplayMode mode );
+    void setDisplayMode(DisplayMode mode);
 
-    void pack( QDataStream& stream ) const override;
+    void pack(QDataStream &stream) const override;
 
-    void unpack( QDataStream& stream ) override;
+    void unpack(QDataStream &stream) override;
 
 private:
-    GeoDataBalloonStylePrivate* const d;
+    GeoDataBalloonStylePrivate *const d;
 };
 
 }

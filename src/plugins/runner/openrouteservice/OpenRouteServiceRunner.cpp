@@ -5,36 +5,35 @@
 
 #include "OpenRouteServiceRunner.h"
 
-#include "MarbleDebug.h"
-#include "GeoDataDocument.h"
-#include "GeoDataPlacemark.h"
 #include "GeoDataData.h"
+#include "GeoDataDocument.h"
 #include "GeoDataExtendedData.h"
 #include "GeoDataLineString.h"
+#include "GeoDataPlacemark.h"
+#include "MarbleDebug.h"
 #include "routing/RouteRequest.h"
 
-#include <QUrl>
-#include <QUrlQuery>
+#include <QDomDocument>
+#include <QRegExp>
+#include <QRegularExpression>
 #include <QTime>
 #include <QTimer>
-#include <QDomDocument>
-#include <QRegularExpression>
-#include <QRegExp>
+#include <QUrl>
+#include <QUrlQuery>
 
 namespace Marble
 {
 
-OpenRouteServiceRunner::OpenRouteServiceRunner( QObject *parent ) :
-        RoutingRunner( parent ),
-        m_networkAccessManager()
+OpenRouteServiceRunner::OpenRouteServiceRunner(QObject *parent)
+    : RoutingRunner(parent)
+    , m_networkAccessManager()
 {
-    connect( &m_networkAccessManager, SIGNAL(finished(QNetworkReply*)),
-             this, SLOT(retrieveData(QNetworkReply*)));
+    connect(&m_networkAccessManager, SIGNAL(finished(QNetworkReply *)), this, SLOT(retrieveData(QNetworkReply *)));
 }
 
-void OpenRouteServiceRunner::retrieveRoute( const RouteRequest *route )
+void OpenRouteServiceRunner::retrieveRoute(const RouteRequest *route)
 {
-    if ( route->size() < 2 ) {
+    if (route->size() < 2) {
         return;
     }
 
@@ -56,7 +55,7 @@ void OpenRouteServiceRunner::retrieveRoute( const RouteRequest *route )
 
     queries.addQueryItem("start", formatCoordinates(source));
     QStringList via;
-    for (int i = 1; i < route->size()-1; ++i) {
+    for (int i = 1; i < route->size() - 1; ++i) {
         via << formatCoordinates(route->at(i));
     }
     queries.addQueryItem("via", via.join(' '));
@@ -82,25 +81,23 @@ void OpenRouteServiceRunner::retrieveRoute( const RouteRequest *route )
     queries.addQueryItem("instructions", "true");
     queries.addQueryItem("lang", "en");
 
-    QUrl url = QUrl( "http://openls.geog.uni-heidelberg.de/route" );
+    QUrl url = QUrl("http://openls.geog.uni-heidelberg.de/route");
     // QUrlQuery strips empty value pairs, but OpenRouteService does not work without
     QString const trailer = route->size() == 2 ? "&via=" : QString();
     url.setQuery(queries.toString() + trailer);
 
-    m_request = QNetworkRequest( url );
+    m_request = QNetworkRequest(url);
 
     QEventLoop eventLoop;
     QTimer timer;
-    timer.setSingleShot( true );
-    timer.setInterval( 15000 );
+    timer.setSingleShot(true);
+    timer.setInterval(15000);
 
-    connect( &timer, SIGNAL(timeout()),
-             &eventLoop, SLOT(quit()));
-    connect( this, SIGNAL(routeCalculated(GeoDataDocument*)),
-             &eventLoop, SLOT(quit()));
+    connect(&timer, SIGNAL(timeout()), &eventLoop, SLOT(quit()));
+    connect(this, SIGNAL(routeCalculated(GeoDataDocument *)), &eventLoop, SLOT(quit()));
 
     // @todo FIXME Must currently be done in the main thread, see bug 257376
-    QTimer::singleShot( 0, this, SLOT(get()));
+    QTimer::singleShot(0, this, SLOT(get()));
     timer.start();
 
     eventLoop.exec();
@@ -109,186 +106,186 @@ void OpenRouteServiceRunner::retrieveRoute( const RouteRequest *route )
 void OpenRouteServiceRunner::get()
 {
     QNetworkReply *reply = m_networkAccessManager.get(m_request);
-    connect( reply, SIGNAL(error(QNetworkReply::NetworkError)),
-             this, SLOT(handleError(QNetworkReply::NetworkError)), Qt::DirectConnection);
+    connect(reply, SIGNAL(error(QNetworkReply::NetworkError)), this, SLOT(handleError(QNetworkReply::NetworkError)), Qt::DirectConnection);
 }
 
 QString OpenRouteServiceRunner::formatCoordinates(const GeoDataCoordinates &coordinates)
 {
     return QStringLiteral("%1,%2")
-            .arg(coordinates.longitude(GeoDataCoordinates::Degree ), 0, 'f', 8)
-            .arg(coordinates.latitude(GeoDataCoordinates::Degree ), 0, 'f', 8);
+        .arg(coordinates.longitude(GeoDataCoordinates::Degree), 0, 'f', 8)
+        .arg(coordinates.latitude(GeoDataCoordinates::Degree), 0, 'f', 8);
 }
 
-void OpenRouteServiceRunner::retrieveData( QNetworkReply *reply )
+void OpenRouteServiceRunner::retrieveData(QNetworkReply *reply)
 {
-    if ( reply->isFinished() ) {
+    if (reply->isFinished()) {
         QByteArray data = reply->readAll();
         reply->deleteLater();
-        //mDebug() << "Download completed: " << data;
-        GeoDataDocument* document = parse( data );
+        // mDebug() << "Download completed: " << data;
+        GeoDataDocument *document = parse(data);
 
-        if ( !document ) {
+        if (!document) {
             mDebug() << "Failed to parse the downloaded route data" << data;
         }
 
-        emit routeCalculated( document );
+        emit routeCalculated(document);
     }
 }
 
-void OpenRouteServiceRunner::handleError( QNetworkReply::NetworkError error )
+void OpenRouteServiceRunner::handleError(QNetworkReply::NetworkError error)
 {
     mDebug() << " Error when retrieving openrouteservice.org route: " << error;
 }
 
-GeoDataDocument* OpenRouteServiceRunner::parse( const QByteArray &content ) const
+GeoDataDocument *OpenRouteServiceRunner::parse(const QByteArray &content) const
 {
     QDomDocument xml;
-    if ( !xml.setContent( content ) ) {
+    if (!xml.setContent(content)) {
         mDebug() << "Cannot parse xml file with routing instructions.";
         return nullptr;
     }
 
     QDomElement root = xml.documentElement();
 
-    GeoDataDocument* result = new GeoDataDocument();
+    GeoDataDocument *result = new GeoDataDocument();
     result->setName(QStringLiteral("OpenRouteService"));
 
     QDomNodeList errors = root.elementsByTagName(QStringLiteral("xls:Error"));
-    if ( errors.size() > 0 ) {
+    if (errors.size() > 0) {
         return nullptr;
         // Returning early because fallback routing providers are used now
         // The code below can be used to parse OpenGis errors reported by ORS
         // and may be useful in the future
 
-        for (int i=0 ; i < errors.length(); ++i ) {
-            QDomNode node = errors.item( i );
+        for (int i = 0; i < errors.length(); ++i) {
+            QDomNode node = errors.item(i);
             QString errorMessage = node.attributes().namedItem(QStringLiteral("message")).nodeValue();
-            QRegExp regexp = QRegExp( "^(.*) Please Check your Position: (-?[0-9]+.[0-9]+) (-?[0-9]+.[0-9]+) !" );
-            if ( regexp.indexIn( errorMessage ) == 0 ) {
-                if ( regexp.capturedTexts().size() == 4 ) {
-                    GeoDataPlacemark* placemark = new GeoDataPlacemark;
-                    placemark->setName( regexp.capturedTexts().at( 1 ) );
+            QRegExp regexp = QRegExp("^(.*) Please Check your Position: (-?[0-9]+.[0-9]+) (-?[0-9]+.[0-9]+) !");
+            if (regexp.indexIn(errorMessage) == 0) {
+                if (regexp.capturedTexts().size() == 4) {
+                    GeoDataPlacemark *placemark = new GeoDataPlacemark;
+                    placemark->setName(regexp.capturedTexts().at(1));
                     GeoDataCoordinates position;
-                    position.setLongitude( regexp.capturedTexts().at( 2 ).toDouble(), GeoDataCoordinates::Degree );
-                    position.setLatitude( regexp.capturedTexts().at( 3 ).toDouble(), GeoDataCoordinates::Degree );
-                    placemark->setCoordinate( position );
-                    result->append( placemark );
+                    position.setLongitude(regexp.capturedTexts().at(2).toDouble(), GeoDataCoordinates::Degree);
+                    position.setLatitude(regexp.capturedTexts().at(3).toDouble(), GeoDataCoordinates::Degree);
+                    placemark->setCoordinate(position);
+                    result->append(placemark);
                 }
             } else {
                 mDebug() << "Error message " << errorMessage << " not parsable.";
                 /** @todo: How to handle this now with plugins? */
-//                QString message = tr( "Sorry, a problem occurred when calculating the route. Try adjusting start and destination points." );
-//                QPointer<QMessageBox> messageBox = new QMessageBox( QMessageBox::Warning, "Route Error", message );
-//                messageBox->setDetailedText( errorMessage );
-//                messageBox->exec();
-//                delete messageBox;
+                //                QString message = tr( "Sorry, a problem occurred when calculating the route. Try adjusting start and destination points." );
+                //                QPointer<QMessageBox> messageBox = new QMessageBox( QMessageBox::Warning, "Route Error", message );
+                //                messageBox->setDetailedText( errorMessage );
+                //                messageBox->exec();
+                //                delete messageBox;
             }
         }
     }
 
-    GeoDataPlacemark* routePlacemark = new GeoDataPlacemark;
+    GeoDataPlacemark *routePlacemark = new GeoDataPlacemark;
     routePlacemark->setName(QStringLiteral("Route"));
     QTime time;
     QDomNodeList summary = root.elementsByTagName(QStringLiteral("xls:RouteSummary"));
-    if ( summary.size() > 0 ) {
+    if (summary.size() > 0) {
         QDomNodeList timeNodeList = summary.item(0).toElement().elementsByTagName(QStringLiteral("xls:TotalTime"));
-        if ( timeNodeList.size() == 1 ) {
-            QRegExp regexp = QRegExp( "^P(?:(\\d+)D)?T(?:(\\d+)H)?(?:(\\d+)M)?(\\d+)S" );
-            if ( regexp.indexIn( timeNodeList.item( 0 ).toElement().text() ) == 0 ) {
+        if (timeNodeList.size() == 1) {
+            QRegExp regexp = QRegExp("^P(?:(\\d+)D)?T(?:(\\d+)H)?(?:(\\d+)M)?(\\d+)S");
+            if (regexp.indexIn(timeNodeList.item(0).toElement().text()) == 0) {
                 QStringList matches = regexp.capturedTexts();
-                unsigned int hours( 0 ), minutes( 0 ), seconds( 0 );
-                switch ( matches.size() ) {
+                unsigned int hours(0), minutes(0), seconds(0);
+                switch (matches.size()) {
                 case 5:
                     // days    = regexp.cap( matches.size() - 4 ).toInt();
                     Q_FALLTHROUGH();
                 case 4:
-                    hours   = regexp.cap( matches.size() - 3 ).toInt();
+                    hours = regexp.cap(matches.size() - 3).toInt();
                     Q_FALLTHROUGH();
                 case 3:
-                    minutes = regexp.cap( matches.size() - 2 ).toInt();
+                    minutes = regexp.cap(matches.size() - 2).toInt();
                     Q_FALLTHROUGH();
                 case 2:
-                    seconds = regexp.cap( matches.size() - 1 ).toInt();
+                    seconds = regexp.cap(matches.size() - 1).toInt();
                     break;
                 default:
-                    mDebug() << "Unable to parse time string " << timeNodeList.item( 0 ).toElement().text();
+                    mDebug() << "Unable to parse time string " << timeNodeList.item(0).toElement().text();
                 }
 
-                time = QTime( hours, minutes, seconds, 0 );
+                time = QTime(hours, minutes, seconds, 0);
             }
         }
     }
 
-    GeoDataLineString* routeWaypoints = new GeoDataLineString;
+    GeoDataLineString *routeWaypoints = new GeoDataLineString;
     QDomNodeList geometry = root.elementsByTagName(QStringLiteral("xls:RouteGeometry"));
-    if ( geometry.size() > 0 ) {
-        QDomNodeList waypoints = geometry.item( 0 ).toElement().elementsByTagName( "gml:pos" );
-        for (int i=0 ; i < waypoints.length(); ++i ) {
-            QDomNode node = waypoints.item( i );
+    if (geometry.size() > 0) {
+        QDomNodeList waypoints = geometry.item(0).toElement().elementsByTagName("gml:pos");
+        for (int i = 0; i < waypoints.length(); ++i) {
+            QDomNode node = waypoints.item(i);
             const QStringList content = node.toElement().text().split(QLatin1Char(' '));
-            if ( content.length() == 2 ) {
+            if (content.length() == 2) {
                 GeoDataCoordinates position;
-                position.setLongitude( content.at( 0 ).toDouble(), GeoDataCoordinates::Degree );
-                position.setLatitude( content.at( 1 ).toDouble(), GeoDataCoordinates::Degree );
-                routeWaypoints->append( position );
+                position.setLongitude(content.at(0).toDouble(), GeoDataCoordinates::Degree);
+                position.setLatitude(content.at(1).toDouble(), GeoDataCoordinates::Degree);
+                routeWaypoints->append(position);
             }
         }
     }
-    routePlacemark->setGeometry( routeWaypoints );
+    routePlacemark->setGeometry(routeWaypoints);
 
-    qreal length = routeWaypoints->length( EARTH_RADIUS );
-    const QString name = nameString( "ORS", length, time );
-    const GeoDataExtendedData data = routeData( length, time );
-    routePlacemark->setExtendedData( data );
-    result->setName( name );
+    qreal length = routeWaypoints->length(EARTH_RADIUS);
+    const QString name = nameString("ORS", length, time);
+    const GeoDataExtendedData data = routeData(length, time);
+    routePlacemark->setExtendedData(data);
+    result->setName(name);
 
-    result->append( routePlacemark );
+    result->append(routePlacemark);
 
     QDomNodeList instructionList = root.elementsByTagName(QStringLiteral("xls:RouteInstructionsList"));
-    if ( instructionList.size() > 0 ) {
+    if (instructionList.size() > 0) {
         QDomNodeList instructions = instructionList.item(0).toElement().elementsByTagName(QStringLiteral("xls:RouteInstruction"));
-        for (int i=0 ; i < instructions.length(); ++i ) {
-            QDomElement node = instructions.item( i ).toElement();
+        for (int i = 0; i < instructions.length(); ++i) {
+            QDomElement node = instructions.item(i).toElement();
 
             QDomNodeList textNodes = node.elementsByTagName(QStringLiteral("xls:Instruction"));
             QDomNodeList positions = node.elementsByTagName(QStringLiteral("gml:pos"));
 
-            if ( textNodes.size() > 0 && positions.size() > 0 ) {
+            if (textNodes.size() > 0 && positions.size() > 0) {
                 const QStringList content = positions.at(0).toElement().text().split(QLatin1Char(' '));
-                if ( content.length() == 2 ) {
+                if (content.length() == 2) {
                     GeoDataLineString *lineString = new GeoDataLineString;
 
-                    for( int i = 0; i < positions.count(); ++i ) {
-                         const QStringList pointList = positions.at(i).toElement().text().split(QLatin1Char(' '));
-                         GeoDataCoordinates position;
-                         position.setLongitude( pointList.at( 0 ).toDouble(), GeoDataCoordinates::Degree );
-                         position.setLatitude( pointList.at( 1 ).toDouble(), GeoDataCoordinates::Degree );
-                         lineString->append( position );
+                    for (int i = 0; i < positions.count(); ++i) {
+                        const QStringList pointList = positions.at(i).toElement().text().split(QLatin1Char(' '));
+                        GeoDataCoordinates position;
+                        position.setLongitude(pointList.at(0).toDouble(), GeoDataCoordinates::Degree);
+                        position.setLatitude(pointList.at(1).toDouble(), GeoDataCoordinates::Degree);
+                        lineString->append(position);
                     }
 
-                    GeoDataPlacemark* instruction = new GeoDataPlacemark;
+                    GeoDataPlacemark *instruction = new GeoDataPlacemark;
 
-                    QString const text = textNodes.item( 0 ).toElement().text().remove(QRegularExpression("<[^>]*>"));
+                    QString const text = textNodes.item(0).toElement().text().remove(QRegularExpression("<[^>]*>"));
                     GeoDataExtendedData extendedData;
                     GeoDataData turnTypeData;
                     turnTypeData.setName(QStringLiteral("turnType"));
                     QString road;
-                    RoutingInstruction::TurnType turnType = parseTurnType( text, &road );
-                    turnTypeData.setValue( turnType );
-                    extendedData.addValue( turnTypeData );
-                    if ( !road.isEmpty() ) {
+                    RoutingInstruction::TurnType turnType = parseTurnType(text, &road);
+                    turnTypeData.setValue(turnType);
+                    extendedData.addValue(turnTypeData);
+                    if (!road.isEmpty()) {
                         GeoDataData roadName;
                         roadName.setName(QStringLiteral("roadName"));
-                        roadName.setValue( road );
-                        extendedData.addValue( roadName );
+                        roadName.setValue(road);
+                        extendedData.addValue(roadName);
                     }
 
-                    QString const instructionText = turnType == RoutingInstruction::Unknown ? text : RoutingInstruction::generateRoadInstruction( turnType, road );
-                    instruction->setName( instructionText );
-                    instruction->setExtendedData( extendedData );
-                    instruction->setGeometry( lineString );
-                    result->append( instruction );
+                    QString const instructionText =
+                        turnType == RoutingInstruction::Unknown ? text : RoutingInstruction::generateRoadInstruction(turnType, road);
+                    instruction->setName(instructionText);
+                    instruction->setExtendedData(extendedData);
+                    instruction->setGeometry(lineString);
+                    result->append(instruction);
                 }
             }
         }
@@ -297,15 +294,17 @@ GeoDataDocument* OpenRouteServiceRunner::parse( const QByteArray &content ) cons
     return result;
 }
 
-RoutingInstruction::TurnType OpenRouteServiceRunner::parseTurnType( const QString &text, QString *road )
+RoutingInstruction::TurnType OpenRouteServiceRunner::parseTurnType(const QString &text, QString *road)
 {
-    QRegExp syntax( "^(Go|Drive|Turn) (half left|left|sharp left|straight forward|half right|right|sharp right)( on )?(.*)?$", Qt::CaseSensitive, QRegExp::RegExp2 );
+    QRegExp syntax("^(Go|Drive|Turn) (half left|left|sharp left|straight forward|half right|right|sharp right)( on )?(.*)?$",
+                   Qt::CaseSensitive,
+                   QRegExp::RegExp2);
     QString instruction;
-    if ( syntax.indexIn( text ) == 0 ) {
-        if ( syntax.captureCount() > 1 ) {
-            instruction = syntax.cap( 2 );
-            if ( syntax.captureCount() == 4 ) {
-                *road = syntax.cap( 4 ).remove(QLatin1String( " - Arrived at destination!"));
+    if (syntax.indexIn(text) == 0) {
+        if (syntax.captureCount() > 1) {
+            instruction = syntax.cap(2);
+            if (syntax.captureCount() == 4) {
+                *road = syntax.cap(4).remove(QLatin1String(" - Arrived at destination!"));
             }
         }
     }

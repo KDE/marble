@@ -15,7 +15,7 @@
 
 #include "AbstractProjection.h"
 
-namespace Marble 
+namespace Marble
 {
 
 class CylindricalProjectionPrivate;
@@ -27,37 +27,45 @@ class AbstractProjectionPrivate;
 
 class CylindricalProjection : public AbstractProjection
 {
-    // Not a QObject so far because we don't need to send signals.	
-  public:
-	
+    // Not a QObject so far because we don't need to send signals.
+public:
     CylindricalProjection();
 
     ~CylindricalProjection() override;
 
-    bool repeatableX() const override { return true; };
+    bool repeatableX() const override
+    {
+        return true;
+    };
 
-    bool traversablePoles()  const override { return false; }
-    bool traversableDateLine()  const override { return false; }
+    bool traversablePoles() const override
+    {
+        return false;
+    }
+    bool traversableDateLine() const override
+    {
+        return false;
+    }
 
-    SurfaceType surfaceType() const override { return Cylindrical; }
+    SurfaceType surfaceType() const override
+    {
+        return Cylindrical;
+    }
 
-    bool screenCoordinates( const GeoDataLineString &lineString,
-                            const ViewportParams *viewport,
-                            QVector<QPolygonF*> &polygons ) const override;
+    bool screenCoordinates(const GeoDataLineString &lineString, const ViewportParams *viewport, QVector<QPolygonF *> &polygons) const override;
 
     using AbstractProjection::screenCoordinates;
 
-    QPainterPath mapShape( const ViewportParams *viewport ) const override;
+    QPainterPath mapShape(const ViewportParams *viewport) const override;
 
- protected: 
-    explicit CylindricalProjection( CylindricalProjectionPrivate* dd );
+protected:
+    explicit CylindricalProjection(CylindricalProjectionPrivate *dd);
 
- private:
-    Q_DECLARE_PRIVATE( CylindricalProjection )
-    Q_DISABLE_COPY( CylindricalProjection )
+private:
+    Q_DECLARE_PRIVATE(CylindricalProjection)
+    Q_DISABLE_COPY(CylindricalProjection)
 };
 
 }
 
 #endif
-

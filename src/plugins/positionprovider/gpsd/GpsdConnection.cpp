@@ -8,8 +8,8 @@
 
 #include "MarbleDebug.h"
 
-#include <QTime>
 #include <QElapsedTimer>
+#include <QTime>
 
 #include <cerrno>
 #include <clocale>
@@ -20,72 +20,73 @@ using namespace Marble;
 const int gpsUpdateInterval = 1000; // ms
 const int gpsWaitTimeout = 200; // ms
 
-GpsdConnection::GpsdConnection( QObject* parent )
-    : QObject( parent ),
-#if defined( GPSD_API_MAJOR_VERSION ) && ( GPSD_API_MAJOR_VERSION >= 5 )
-      m_gpsd( "localhost", DEFAULT_GPSD_PORT ),
+GpsdConnection::GpsdConnection(QObject *parent)
+    : QObject(parent)
+    ,
+#if defined(GPSD_API_MAJOR_VERSION) && (GPSD_API_MAJOR_VERSION >= 5)
+    m_gpsd("localhost", DEFAULT_GPSD_PORT)
+    ,
 #endif
-      m_timer( nullptr )
+    m_timer(nullptr)
 {
-    m_oldLocale = setlocale( LC_NUMERIC, nullptr );
-    setlocale( LC_NUMERIC, "C" );
-    connect( &m_timer, SIGNAL(timeout()), this, SLOT(update()) );
+    m_oldLocale = setlocale(LC_NUMERIC, nullptr);
+    setlocale(LC_NUMERIC, "C");
+    connect(&m_timer, SIGNAL(timeout()), this, SLOT(update()));
 }
 
 GpsdConnection::~GpsdConnection()
 {
-    setlocale( LC_NUMERIC, m_oldLocale );
+    setlocale(LC_NUMERIC, m_oldLocale);
 }
 
 void GpsdConnection::initialize()
 {
     m_timer.stop();
     bool success = false;
-#if defined( GPSD_API_MAJOR_VERSION ) && ( GPSD_API_MAJOR_VERSION >= 5 )
+#if defined(GPSD_API_MAJOR_VERSION) && (GPSD_API_MAJOR_VERSION >= 5)
     success = true;
 #else
-    gps_data_t* data = m_gpsd.open();
-    success = ( data != 0 );
+    gps_data_t *data = m_gpsd.open();
+    success = (data != 0);
 #endif
-#if defined( GPSD_API_MAJOR_VERSION ) && ( GPSD_API_MAJOR_VERSION >= 3 ) && defined( WATCH_ENABLE )
-    if ( success ) {
-        success = (m_gpsd.stream( WATCH_ENABLE ) != nullptr);
+#if defined(GPSD_API_MAJOR_VERSION) && (GPSD_API_MAJOR_VERSION >= 3) && defined(WATCH_ENABLE)
+    if (success) {
+        success = (m_gpsd.stream(WATCH_ENABLE) != nullptr);
     }
 #endif
-    if ( success ) {
+    if (success) {
         m_status = PositionProviderStatusAcquiring;
-        emit statusChanged( m_status );
-        m_timer.start( gpsUpdateInterval );
-    }
-    else {
+        emit statusChanged(m_status);
+        m_timer.start(gpsUpdateInterval);
+    } else {
         // There is also gps_errstr() for libgps version >= 2.90,
         // but it doesn't return a sensible error description
-        switch ( errno ) {
-            case NL_NOSERVICE:
-                m_error = tr("Internal gpsd error (cannot get service entry)");
-                break;
-            case NL_NOHOST:
-                m_error = tr("Internal gpsd error (cannot get host entry)");
-                break;
-            case NL_NOPROTO:
-                m_error = tr("Internal gpsd error (cannot get protocol entry)");
-                break;
-            case NL_NOSOCK:
-                m_error = tr("Internal gpsd error (unable to create socket)");
-                break;
-            case NL_NOSOCKOPT:
-                m_error = tr("Internal gpsd error (unable to set socket option)");
-                break;
-            case NL_NOCONNECT:
-                m_error = tr("No GPS device found by gpsd.");
-                break;
-            default:
-                m_error = tr("Unknown error when opening gpsd connection");
-                break;
+        switch (errno) {
+        case NL_NOSERVICE:
+            m_error = tr("Internal gpsd error (cannot get service entry)");
+            break;
+        case NL_NOHOST:
+            m_error = tr("Internal gpsd error (cannot get host entry)");
+            break;
+        case NL_NOPROTO:
+            m_error = tr("Internal gpsd error (cannot get protocol entry)");
+            break;
+        case NL_NOSOCK:
+            m_error = tr("Internal gpsd error (unable to create socket)");
+            break;
+        case NL_NOSOCKOPT:
+            m_error = tr("Internal gpsd error (unable to set socket option)");
+            break;
+        case NL_NOCONNECT:
+            m_error = tr("No GPS device found by gpsd.");
+            break;
+        default:
+            m_error = tr("Unknown error when opening gpsd connection");
+            break;
         }
 
         m_status = PositionProviderStatusError;
-        emit statusChanged( m_status );
+        emit statusChanged(m_status);
 
         mDebug() << "Connection to gpsd failed, no position info available: " << m_error;
     }
@@ -93,55 +94,53 @@ void GpsdConnection::initialize()
 
 void GpsdConnection::update()
 {
-#if defined( GPSD_API_MAJOR_VERSION ) && ( GPSD_API_MAJOR_VERSION >= 12 ) && defined( PACKET_SET )
-    gps_data_t* data = nullptr;
+#if defined(GPSD_API_MAJOR_VERSION) && (GPSD_API_MAJOR_VERSION >= 12) && defined(PACKET_SET)
+    gps_data_t *data = nullptr;
 
-    if ( m_gpsd.waiting(gpsUpdateInterval * 1000) )
-    {
+    if (m_gpsd.waiting(gpsUpdateInterval * 1000)) {
         gps_data_t *currentData = m_gpsd.read();
 
-        if( currentData && currentData->set & PACKET_SET ) {
+        if (currentData && currentData->set & PACKET_SET) {
             data = currentData;
         }
     }
 
-    if ( data ) {
-        emit gpsdInfo( *data );
+    if (data) {
+        emit gpsdInfo(*data);
     }
 #else
-#if defined( GPSD_API_MAJOR_VERSION ) && ( GPSD_API_MAJOR_VERSION >= 4 ) && defined( PACKET_SET )
+#if defined(GPSD_API_MAJOR_VERSION) && (GPSD_API_MAJOR_VERSION >= 4) && defined(PACKET_SET)
     gps_data_t *data = nullptr;
 
     QElapsedTimer watchdog;
     watchdog.start();
 
-#if defined( GPSD_API_MAJOR_VERSION ) && ( GPSD_API_MAJOR_VERSION >= 5 )
-    while ( m_gpsd.waiting( 0 ) && watchdog.elapsed() < gpsWaitTimeout ) {
+#if defined(GPSD_API_MAJOR_VERSION) && (GPSD_API_MAJOR_VERSION >= 5)
+    while (m_gpsd.waiting(0) && watchdog.elapsed() < gpsWaitTimeout) {
         gps_data_t *currentData = m_gpsd.read();
 #else
-    while ( m_gpsd.waiting() && watchdog.elapsed() < gpsWaitTimeout ) {
+    while (m_gpsd.waiting() && watchdog.elapsed() < gpsWaitTimeout) {
         gps_data_t *currentData = m_gpsd.poll();
 #endif
 
-        if( currentData && currentData->set & PACKET_SET ) {
+        if (currentData && currentData->set & PACKET_SET) {
             data = currentData;
         }
     }
 
-    if ( data ) {
-        emit gpsdInfo( *data );
+    if (data) {
+        emit gpsdInfo(*data);
     }
 #else
-#if defined( GPSD_API_MAJOR_VERSION ) && ( GPSD_API_MAJOR_VERSION == 3 ) && defined( PACKET_SET )
+#if defined(GPSD_API_MAJOR_VERSION) && (GPSD_API_MAJOR_VERSION == 3) && defined(PACKET_SET)
     gps_data_t *data = m_gpsd.poll();
 #else
-    gps_data_t* data = m_gpsd.query( "o" );
+    gps_data_t *data = m_gpsd.query("o");
 #endif
 
-    if ( data ) {
-        emit gpsdInfo( *data );
-    }
-    else if ( m_status != PositionProviderStatusAcquiring ) {
+    if (data) {
+        emit gpsdInfo(*data);
+    } else if (m_status != PositionProviderStatusAcquiring) {
         mDebug() << "Lost connection to gpsd, trying to re-open.";
         initialize();
     }

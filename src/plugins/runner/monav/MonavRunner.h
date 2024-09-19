@@ -18,12 +18,12 @@ class MonavRunner : public RoutingRunner
 {
     Q_OBJECT
 public:
-    explicit MonavRunner( const MonavPlugin* plugin, QObject *parent = nullptr );
+    explicit MonavRunner(const MonavPlugin *plugin, QObject *parent = nullptr);
 
     ~MonavRunner() override;
 
     // Overriding MarbleAbstractRunner
-    void retrieveRoute( const RouteRequest *request ) override;
+    void retrieveRoute(const RouteRequest *request) override;
 
 #if 0
     // Overriding MarbleAbstractRunner
@@ -31,7 +31,7 @@ public:
 #endif
 
 private:
-    MonavRunnerPrivate* const d;
+    MonavRunnerPrivate *const d;
 };
 
 }

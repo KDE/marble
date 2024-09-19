@@ -7,16 +7,17 @@
 #include "GeoDataPlacemark.h"
 #include "MarbleDebug.h"
 
-namespace Marble {
+namespace Marble
+{
 
 class TrackerPluginItemPrivate
 {
 public:
-    TrackerPluginItemPrivate( const QString &name, GeoDataPlacemark *placemark )
-        : m_name( name ),
-          m_placemark( placemark ),
-          m_enabled( false ),
-          m_trackVisible( false )
+    TrackerPluginItemPrivate(const QString &name, GeoDataPlacemark *placemark)
+        : m_name(name)
+        , m_placemark(placemark)
+        , m_enabled(false)
+        , m_trackVisible(false)
     {
     }
 
@@ -26,8 +27,8 @@ public:
     bool m_trackVisible;
 };
 
-TrackerPluginItem::TrackerPluginItem( const QString &name )
-    : d( new TrackerPluginItemPrivate( name, new GeoDataPlacemark( name ) ) )
+TrackerPluginItem::TrackerPluginItem(const QString &name)
+    : d(new TrackerPluginItemPrivate(name, new GeoDataPlacemark(name)))
 {
 }
 
@@ -41,7 +42,7 @@ QString TrackerPluginItem::name() const
     return d->m_name;
 }
 
-GeoDataPlacemark* TrackerPluginItem::placemark()
+GeoDataPlacemark *TrackerPluginItem::placemark()
 {
     return d->m_placemark;
 }
@@ -51,7 +52,7 @@ bool TrackerPluginItem::isEnabled() const
     return d->m_enabled;
 }
 
-void TrackerPluginItem::setEnabled( bool enabled )
+void TrackerPluginItem::setEnabled(bool enabled)
 {
     d->m_enabled = enabled;
 }
@@ -61,9 +62,9 @@ bool TrackerPluginItem::isVisible() const
     return d->m_placemark->isVisible();
 }
 
-void TrackerPluginItem::setVisible( bool visible )
+void TrackerPluginItem::setVisible(bool visible)
 {
-    d->m_placemark->setVisible( visible );
+    d->m_placemark->setVisible(visible);
 }
 
 bool TrackerPluginItem::isTrackVisible() const
@@ -71,7 +72,7 @@ bool TrackerPluginItem::isTrackVisible() const
     return d->m_trackVisible;
 }
 
-void TrackerPluginItem::setTrackVisible( bool visible )
+void TrackerPluginItem::setTrackVisible(bool visible)
 {
     d->m_trackVisible = visible;
 }

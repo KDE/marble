@@ -8,9 +8,9 @@
 namespace Marble
 {
 
-PolylineNode::PolylineNode( const QRegion& region ) :
-    m_region( region  ),
-    m_flags( PolyNodeFlags() )
+PolylineNode::PolylineNode(const QRegion &region)
+    : m_region(region)
+    , m_flags(PolyNodeFlags())
 {
     // nothing to do
 }
@@ -40,7 +40,7 @@ bool PolylineNode::isMergingHighlighted() const
     return m_flags & NodeIsMergingHighlighted;
 }
 
-void PolylineNode::setRegion( const QRegion& newRegion )
+void PolylineNode::setRegion(const QRegion &newRegion)
 {
     m_region = newRegion;
 }
@@ -50,23 +50,23 @@ PolylineNode::PolyNodeFlags PolylineNode::flags() const
     return m_flags;
 }
 
-void PolylineNode::setFlag( PolyNodeFlag flag, bool enabled )
+void PolylineNode::setFlag(PolyNodeFlag flag, bool enabled)
 {
-    if ( enabled ) {
+    if (enabled) {
         m_flags |= flag;
     } else {
         m_flags &= ~flag;
     }
 }
 
-void PolylineNode::setFlags( PolyNodeFlags flags )
+void PolylineNode::setFlags(PolyNodeFlags flags)
 {
     m_flags = flags;
 }
 
-bool PolylineNode::containsPoint( const QPoint &eventPos ) const
+bool PolylineNode::containsPoint(const QPoint &eventPos) const
 {
-    return m_region.contains( eventPos );
+    return m_region.contains(eventPos);
 }
 
 }

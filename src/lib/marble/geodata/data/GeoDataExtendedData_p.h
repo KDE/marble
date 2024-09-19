@@ -6,12 +6,12 @@
 #ifndef GEODATAEXTENDEDDATAPRIVATE_H
 #define GEODATAEXTENDEDDATAPRIVATE_H
 
-#include <QString>
 #include <QHash>
+#include <QString>
 
 #include "GeoDataData.h"
-#include "GeoDataSimpleArrayData.h"
 #include "GeoDataSchemaData.h"
+#include "GeoDataSimpleArrayData.h"
 
 #include "GeoDataTypes.h"
 
@@ -20,13 +20,12 @@ namespace Marble
 
 class GeoDataExtendedDataPrivate
 {
-  public:
-    QHash< QString, GeoDataData > hash;
-    QHash< QString, GeoDataSimpleArrayData* > arrayHash;
-    QHash< QString, GeoDataSchemaData> schemaDataHash;
-
+public:
+    QHash<QString, GeoDataData> hash;
+    QHash<QString, GeoDataSimpleArrayData *> arrayHash;
+    QHash<QString, GeoDataSchemaData> schemaDataHash;
 };
 
 } // namespace Marble
 
-#endif //GEODATAEXTENDEDDATAPRIVATE_H
+#endif // GEODATAEXTENDEDDATAPRIVATE_H

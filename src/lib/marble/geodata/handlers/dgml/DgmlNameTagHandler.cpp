@@ -16,7 +16,7 @@ namespace dgml
 {
 DGML_DEFINE_TAG_HANDLER(Name)
 
-GeoNode* DgmlNameTagHandler::parse(GeoParser& parser) const
+GeoNode *DgmlNameTagHandler::parse(GeoParser &parser) const
 {
     // Check whether the tag is valid
     Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1String(dgmlTag_Name)));
@@ -24,7 +24,7 @@ GeoNode* DgmlNameTagHandler::parse(GeoParser& parser) const
     // Checking for parent item
     GeoStackItem parentItem = parser.parentElement();
     if (parentItem.represents(dgmlTag_Head))
-        parentItem.nodeAs<GeoSceneHead>()->setName( parser.readElementText().trimmed() );
+        parentItem.nodeAs<GeoSceneHead>()->setName(parser.readElementText().trimmed());
 
     return nullptr;
 }

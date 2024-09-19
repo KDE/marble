@@ -29,10 +29,10 @@ public:
     static QList<QString> planetList();
 
     /** Creates the planet with the given ID, or one with default values if ID is not among planetList() */
-    static Planet construct( const QString &id );
+    static Planet construct(const QString &id);
 
     /** Returns a localized name of the planet with the given ID */
-    static QString localizedName( const QString &id );
+    static QString localizedName(const QString &id);
 };
 
 }

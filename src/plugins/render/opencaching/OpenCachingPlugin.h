@@ -12,7 +12,7 @@
 
 namespace Ui
 {
-    class OpenCachingConfigWidget;
+class OpenCachingConfigWidget;
 }
 
 namespace Marble
@@ -26,9 +26,9 @@ class OpenCachingPlugin : public AbstractDataPlugin
     Q_OBJECT
     Q_PLUGIN_METADATA(IID "org.kde.marble.OpenCachingPlugin")
 
-    Q_INTERFACES( Marble::RenderPluginInterface )
+    Q_INTERFACES(Marble::RenderPluginInterface)
 
-    MARBLE_PLUGIN( OpenCachingPlugin )
+    MARBLE_PLUGIN(OpenCachingPlugin)
 
 public:
     OpenCachingPlugin();
@@ -50,12 +50,12 @@ public:
     /**
      * @return: The settings of the item.
      */
-    virtual QHash<QString,QVariant> settings() const;
+    virtual QHash<QString, QVariant> settings() const;
 
     /**
      * Set the settings of the item.
      */
-    virtual void setSettings( const QHash<QString,QVariant> &settings );
+    virtual void setSettings(const QHash<QString, QVariant> &settings);
 
 public Q_SLOTS:
     void readSettings();
@@ -66,7 +66,7 @@ private:
     bool m_isInitialized;
     Ui::OpenCachingConfigWidget *m_ui;
     QDialog *m_configDialog;
-    QHash<QString,QVariant> m_settings;
+    QHash<QString, QVariant> m_settings;
 
 private Q_SLOTS:
     void validateDateRange();

@@ -6,20 +6,19 @@
 #ifndef GEODATATIMESPANPRIVATE_H
 #define GEODATATIMESPANPRIVATE_H
 
-#include "GeoDataTypes.h"
 #include "GeoDataTimeStamp.h"
+#include "GeoDataTypes.h"
 
 namespace Marble
 {
 
 class GeoDataTimeSpanPrivate
 {
-  public:
+public:
     GeoDataTimeStamp m_begin;
     GeoDataTimeStamp m_end;
 };
 
 } // namespace Marble
 
-#endif //GEODATATIMESPANPRIVATE_H
-
+#endif // GEODATATIMESPANPRIVATE_H

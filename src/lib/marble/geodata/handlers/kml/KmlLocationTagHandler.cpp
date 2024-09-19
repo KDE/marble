@@ -8,32 +8,31 @@
 
 #include "MarbleDebug.h"
 
-#include "KmlElementDictionary.h"
-#include "KmlObjectTagHandler.h"
-#include "GeoDataLocation.h"
 #include "GeoDataGeometry.h"
+#include "GeoDataLocation.h"
 #include "GeoDataModel.h"
 #include "GeoDataParser.h"
+#include "KmlElementDictionary.h"
+#include "KmlObjectTagHandler.h"
 
 namespace Marble
 {
 namespace kml
 {
-KML_DEFINE_TAG_HANDLER( Location )
+KML_DEFINE_TAG_HANDLER(Location)
 
-GeoNode* KmlLocationTagHandler::parse( GeoParser& parser ) const
+GeoNode *KmlLocationTagHandler::parse(GeoParser &parser) const
 {
     Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1String(kmlTag_Location)));
 
     GeoDataLocation location;
-    KmlObjectTagHandler::parseIdentifiers( parser, &location );
+    KmlObjectTagHandler::parseIdentifiers(parser, &location);
     GeoStackItem parentItem = parser.parentElement();
 
-    if( parentItem.represents( kmlTag_Model ) ) {
+    if (parentItem.represents(kmlTag_Model)) {
         parentItem.nodeAs<GeoDataModel>()->setLocation(location);
-	return &parentItem.nodeAs<GeoDataModel>()->location();
-    }
-    else{
+        return &parentItem.nodeAs<GeoDataModel>()->location();
+    } else {
         return nullptr;
     }
 }

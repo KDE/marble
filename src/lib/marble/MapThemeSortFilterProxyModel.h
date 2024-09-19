@@ -22,12 +22,12 @@ public:
     explicit MapThemeSortFilterProxyModel(QObject *parent = nullptr);
 
 protected:
-    bool lessThan( const QModelIndex &left, const QModelIndex &right ) const override;
-    bool filterAcceptsRow( int sourceRow, const QModelIndex &sourceParent ) const override;
+    bool lessThan(const QModelIndex &left, const QModelIndex &right) const override;
+    bool filterAcceptsRow(int sourceRow, const QModelIndex &sourceParent) const override;
 
 private:
-    static bool isFavorite( const QModelIndex& index );
-    static QDateTime favoriteDateTime( const QModelIndex& index );
+    static bool isFavorite(const QModelIndex &index);
+    static QDateTime favoriteDateTime(const QModelIndex &index);
 };
 
 }

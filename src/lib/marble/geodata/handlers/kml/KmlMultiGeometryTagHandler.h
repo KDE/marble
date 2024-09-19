@@ -9,15 +9,15 @@
 
 #include "GeoTagHandler.h"
 
-namespace Marble 
+namespace Marble
 {
 namespace kml
 {
 
-class KmlMultiGeometryTagHandler : public GeoTagHandler 
+class KmlMultiGeometryTagHandler : public GeoTagHandler
 {
 public:
-    GeoNode* parse(GeoParser&) const override;
+    GeoNode *parse(GeoParser &) const override;
 };
 
 }

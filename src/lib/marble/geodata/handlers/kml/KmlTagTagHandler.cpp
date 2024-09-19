@@ -14,15 +14,15 @@ namespace Marble
 {
 namespace kml
 {
-KML_DEFINE_TAG_HANDLER_MX( tag )
+KML_DEFINE_TAG_HANDLER_MX(tag)
 
-GeoNode* KmltagTagHandler::parse( GeoParser& parser ) const
+GeoNode *KmltagTagHandler::parse(GeoParser &parser) const
 {
-    if ( parser.parentElement().is<OsmPlacemarkData>() ) {
-        QString key = parser.attribute( "k" );
-        QString value = parser.attribute( "v" );
+    if (parser.parentElement().is<OsmPlacemarkData>()) {
+        QString key = parser.attribute("k");
+        QString value = parser.attribute("v");
         OsmPlacemarkData *osmData = parser.parentElement().nodeAs<OsmPlacemarkData>();
-        osmData->addTag( key, value );
+        osmData->addTag(key, value);
     }
 
     return nullptr;
@@ -30,4 +30,3 @@ GeoNode* KmltagTagHandler::parse( GeoParser& parser ) const
 
 }
 }
-

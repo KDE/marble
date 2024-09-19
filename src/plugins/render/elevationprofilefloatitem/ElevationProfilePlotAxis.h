@@ -7,8 +7,8 @@
 #define ELEVATIONPROFILEPLOTAXIS_H
 
 #include <QObject>
-#include <QVector>
 #include <QString>
+#include <QVector>
 
 namespace Marble
 {
@@ -16,28 +16,28 @@ namespace Marble
 struct AxisTick {
     int position;
     qreal value;
-    AxisTick() :
-        position(0),
-        value(0.0)
+    AxisTick()
+        : position(0)
+        , value(0.0)
     {
     }
-    AxisTick(int position_, qreal value_) :
-        position( position_ ),
-        value( value_ )
+    AxisTick(int position_, qreal value_)
+        : position(position_)
+        , value(value_)
     {
         // nothing to do
     }
 };
 using AxisTickList = QVector<AxisTick>;
 
- /**
+/**
  * @short A helper class handling a plot axis for the Elevation Profile
  *
  */
 class ElevationProfilePlotAxis : public QObject
 {
     Q_OBJECT
-  private:
+private:
     qreal m_minValue;
     qreal m_maxValue;
     qreal m_displayScale;
@@ -50,11 +50,11 @@ class ElevationProfilePlotAxis : public QObject
     void updateTicks();
     void updateScale();
 
-  public:
-    explicit ElevationProfilePlotAxis( );
+public:
+    explicit ElevationProfilePlotAxis();
     void setRange(qreal minValue, qreal maxValue);
     void setLength(int length);
-    void setTickCount( const int min, const int max );
+    void setTickCount(const int min, const int max);
     void update();
     qreal minValue() const;
     qreal maxValue() const;

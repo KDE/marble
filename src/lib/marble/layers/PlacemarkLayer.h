@@ -12,12 +12,11 @@
 #ifndef MARBLE_PLACEMARKLAYER_H
 #define MARBLE_PLACEMARKLAYER_H
 
-
-#include <QObject>
 #include "LayerInterface.h"
+#include <QObject>
 
-#include <QVector>
 #include <QPainter>
+#include <QVector>
 
 #include "PlacemarkLayout.h"
 
@@ -34,9 +33,7 @@ class MarbleClock;
 class ViewportParams;
 class StyleBuilder;
 
-
-struct Fragment
-{
+struct Fragment {
     QVarLengthArray<QPainter::PixmapFragment, 16> fragments;
     QPixmap pixmap;
 };
@@ -45,12 +42,12 @@ class PlacemarkLayer : public QObject, public LayerInterface
 {
     Q_OBJECT
 
- public:
-    PlacemarkLayer( QAbstractItemModel *placemarkModel,
-                    QItemSelectionModel *selectionModel,
-                    MarbleClock *clock,
-                    const StyleBuilder *styleBuilder,
-                    QObject *parent = nullptr );
+public:
+    PlacemarkLayer(QAbstractItemModel *placemarkModel,
+                   QItemSelectionModel *selectionModel,
+                   MarbleClock *clock,
+                   const StyleBuilder *styleBuilder,
+                   QObject *parent = nullptr);
     ~PlacemarkLayer() override;
 
     /**
@@ -66,9 +63,7 @@ class PlacemarkLayer : public QObject, public LayerInterface
     /**
      * @reimp
      */
-    bool render( GeoPainter *painter, ViewportParams *viewport,
-                 const QString &renderPos = QLatin1String("NONE"),
-                 GeoSceneLayer *layer = nullptr ) override;
+    bool render(GeoPainter *painter, ViewportParams *viewport, const QString &renderPos = QLatin1String("NONE"), GeoSceneLayer *layer = nullptr) override;
 
     RenderState renderState() const override;
 
@@ -77,7 +72,7 @@ class PlacemarkLayer : public QObject, public LayerInterface
     /**
      * Returns a list of model indexes that are at position @p pos.
      */
-    QVector<const GeoDataFeature *> whichPlacemarkAt( const QPoint &pos );
+    QVector<const GeoDataFeature *> whichPlacemarkAt(const QPoint &pos);
 
     bool hasPlacemarkAt(const QPoint &pos);
 
@@ -88,26 +83,26 @@ class PlacemarkLayer : public QObject, public LayerInterface
     bool levelTagDebugModeEnabled() const;
     void setDebugLevelTag(int level);
 
- public Q_SLOTS:
-   // earth
-   void setShowPlaces( bool show );
-   void setShowCities( bool show );
-   void setShowTerrain( bool show );
-   void setShowOtherPlaces( bool show );
+public Q_SLOTS:
+    // earth
+    void setShowPlaces(bool show);
+    void setShowCities(bool show);
+    void setShowTerrain(bool show);
+    void setShowOtherPlaces(bool show);
 
-   // other planets
-   void setShowLandingSites( bool show );
-   void setShowCraters( bool show );
-   void setShowMaria( bool show );
+    // other planets
+    void setShowLandingSites(bool show);
+    void setShowCraters(bool show);
+    void setShowMaria(bool show);
 
-   void requestStyleReset();
-   void setTileLevel(int tileLevel);
+    void requestStyleReset();
+    void setTileLevel(int tileLevel);
 
- Q_SIGNALS:
-   void repaintNeeded();
+Q_SIGNALS:
+    void repaintNeeded();
 
- private:
-    void renderDebug(GeoPainter *painter, ViewportParams *viewport, const QVector<VisiblePlacemark*> & placemarks) const;
+private:
+    void renderDebug(GeoPainter *painter, ViewportParams *viewport, const QVector<VisiblePlacemark *> &placemarks) const;
 
     PlacemarkLayout m_layout;
     bool m_debugModeEnabled;

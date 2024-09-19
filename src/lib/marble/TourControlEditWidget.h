@@ -8,8 +8,8 @@
 #ifndef TOURCONTROLEDITWIDGET_H
 #define TOURCONTROLEDITWIDGET_H
 
-#include <QWidget>
 #include <QPersistentModelIndex>
+#include <QWidget>
 
 class QRadioButton;
 class QToolButton;
@@ -19,25 +19,25 @@ namespace Marble
 
 class GeoDataTourControl;
 
-class TourControlEditWidget: public QWidget
+class TourControlEditWidget : public QWidget
 {
     Q_OBJECT
 
 public:
-    explicit TourControlEditWidget( const QModelIndex& index, QWidget* parent=nullptr );
+    explicit TourControlEditWidget(const QModelIndex &index, QWidget *parent = nullptr);
     bool editable() const;
 
 Q_SIGNALS:
-    void editingDone( const QModelIndex& index );
+    void editingDone(const QModelIndex &index);
 
 public Q_SLOTS:
-    void setEditable( bool editable );
+    void setEditable(bool editable);
 
 private Q_SLOTS:
     void save();
 
 private:
-    GeoDataTourControl* tourControlElement();
+    GeoDataTourControl *tourControlElement();
     QPersistentModelIndex m_index;
     QRadioButton *m_radio_play;
     QRadioButton *m_radio_pause;

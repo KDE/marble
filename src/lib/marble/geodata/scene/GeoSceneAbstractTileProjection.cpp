@@ -27,7 +27,7 @@ GeoSceneAbstractTileProjectionPrivate::GeoSceneAbstractTileProjectionPrivate()
     , levelZeroRows(1)
 {
 }
-    
+
 GeoSceneAbstractTileProjection::GeoSceneAbstractTileProjection()
     : d_ptr(new GeoSceneAbstractTileProjectionPrivate())
 {

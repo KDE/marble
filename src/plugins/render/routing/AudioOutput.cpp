@@ -5,15 +5,15 @@
 
 #include "AudioOutput.h"
 
-#include "MarbleDirs.h"
 #include "MarbleDebug.h"
-#include "routing/VoiceNavigationModel.h"
+#include "MarbleDirs.h"
 #include "routing/Route.h"
+#include "routing/VoiceNavigationModel.h"
 
 #include <QUrl>
+#include <phonon/AudioOutput>
 #include <phonon/MediaObject>
 #include <phonon/MediaSource>
-#include <phonon/AudioOutput>
 
 namespace Marble
 {
@@ -29,7 +29,7 @@ public:
 
     VoiceNavigationModel m_voiceNavigation;
 
-    AudioOutputPrivate( AudioOutput* parent );
+    AudioOutputPrivate(AudioOutput *parent);
 
     void audioOutputFinished();
 
@@ -40,35 +40,36 @@ public:
     void playInstructions();
 };
 
-AudioOutputPrivate::AudioOutputPrivate( AudioOutput* parent ) :
-    q( parent ), m_output( nullptr ), m_muted( false )
+AudioOutputPrivate::AudioOutputPrivate(AudioOutput *parent)
+    : q(parent)
+    , m_output(nullptr)
+    , m_muted(false)
 {
-    QObject::connect( &m_voiceNavigation, SIGNAL(instructionChanged()),
-                      q, SLOT(playInstructions()) );
+    QObject::connect(&m_voiceNavigation, SIGNAL(instructionChanged()), q, SLOT(playInstructions()));
 }
 
 void AudioOutputPrivate::audioOutputFinished()
 {
-    m_output->setCurrentSource( Phonon::MediaSource() );
+    m_output->setCurrentSource(Phonon::MediaSource());
     m_output->clearQueue();
 }
 
 void AudioOutputPrivate::setupAudio()
 {
-    if ( !m_output ) {
-        m_output = new Phonon::MediaObject( q );
-        Phonon::AudioOutput *audioOutput = new Phonon::AudioOutput( Phonon::VideoCategory, q );
-        Phonon::createPath( m_output, audioOutput );
+    if (!m_output) {
+        m_output = new Phonon::MediaObject(q);
+        Phonon::AudioOutput *audioOutput = new Phonon::AudioOutput(Phonon::VideoCategory, q);
+        Phonon::createPath(m_output, audioOutput);
 
-        q->connect( m_output, SIGNAL(finished()), q, SLOT(audioOutputFinished()) );
+        q->connect(m_output, SIGNAL(finished()), q, SLOT(audioOutputFinished()));
     }
 }
 
 void AudioOutputPrivate::reset()
 {
-    if ( m_output ) {
+    if (m_output) {
         m_output->stop();
-        m_output->setCurrentSource( Phonon::MediaSource() );
+        m_output->setCurrentSource(Phonon::MediaSource());
         m_output->clearQueue();
     }
 
@@ -78,16 +79,17 @@ void AudioOutputPrivate::reset()
 void AudioOutputPrivate::playInstructions()
 {
     setupAudio();
-    if ( m_output ) {
-        m_output->enqueue( QUrl::fromLocalFile( m_voiceNavigation.instruction() ) );
+    if (m_output) {
+        m_output->enqueue(QUrl::fromLocalFile(m_voiceNavigation.instruction()));
         m_output->play();
     }
 }
 
-AudioOutput::AudioOutput( QObject* parent ) : QObject( parent ),
-    d( new AudioOutputPrivate( this ) )
+AudioOutput::AudioOutput(QObject *parent)
+    : QObject(parent)
+    , d(new AudioOutputPrivate(this))
 {
-    setSoundEnabled( false );
+    setSoundEnabled(false);
 }
 
 AudioOutput::~AudioOutput()
@@ -95,12 +97,12 @@ AudioOutput::~AudioOutput()
     delete d;
 }
 
-void AudioOutput::update(const Route &route, qreal distanceManeuver, qreal distanceTarget, bool deviated )
+void AudioOutput::update(const Route &route, qreal distanceManeuver, qreal distanceTarget, bool deviated)
 {
-    d->m_voiceNavigation.update( route, distanceManeuver, distanceTarget, deviated );
+    d->m_voiceNavigation.update(route, distanceManeuver, distanceTarget, deviated);
 }
 
-void AudioOutput::setMuted( bool muted )
+void AudioOutput::setMuted(bool muted)
 {
     d->m_muted = muted;
 }
@@ -110,9 +112,9 @@ bool AudioOutput::isMuted() const
     return d->m_muted;
 }
 
-void AudioOutput::setSpeaker( const QString &speaker )
+void AudioOutput::setSpeaker(const QString &speaker)
 {
-    d->m_voiceNavigation.setSpeaker( speaker );
+    d->m_voiceNavigation.setSpeaker(speaker);
 }
 
 QString AudioOutput::speaker() const
@@ -120,9 +122,9 @@ QString AudioOutput::speaker() const
     return d->m_voiceNavigation.speaker();
 }
 
-void AudioOutput::setSoundEnabled( bool enabled )
+void AudioOutput::setSoundEnabled(bool enabled)
 {
-    d->m_voiceNavigation.setSpeakerEnabled( !enabled );
+    d->m_voiceNavigation.setSpeakerEnabled(!enabled);
 }
 
 bool AudioOutput::isSoundEnabled() const

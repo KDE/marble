@@ -19,8 +19,8 @@ public:
     explicit NotesModel(const MarbleModel *marbleModel, QObject *parent = nullptr);
 
 protected:
-    void getAdditionalItems(const GeoDataLatLonAltBox& box, qint32 number = 10) override;
-    void parseFile(const QByteArray& file) override;
+    void getAdditionalItems(const GeoDataLatLonAltBox &box, qint32 number = 10) override;
+    void parseFile(const QByteArray &file) override;
 };
 }
 

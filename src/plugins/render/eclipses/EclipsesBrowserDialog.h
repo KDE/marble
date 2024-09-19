@@ -8,11 +8,13 @@
 
 #include <QDialog>
 
-namespace Ui {
-    class EclipsesBrowserDialog;
+namespace Ui
+{
+class EclipsesBrowserDialog;
 }
 
-namespace Marble {
+namespace Marble
+{
 
 class EclipsesModel;
 class MarbleModel;
@@ -27,8 +29,7 @@ class EclipsesBrowserDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit EclipsesBrowserDialog( const MarbleModel *model,
-                                    QWidget *parent = nullptr );
+    explicit EclipsesBrowserDialog(const MarbleModel *model, QWidget *parent = nullptr);
 
     ~EclipsesBrowserDialog() override;
 
@@ -39,7 +40,7 @@ public:
      *
      * @see year
      */
-    void setYear( int year );
+    void setYear(int year);
 
     /**
      * @brief Return the year the browser is set to
@@ -55,7 +56,7 @@ public:
      *
      * @see withLunarEclipses
      */
-    void setWithLunarEclipses( const bool enable );
+    void setWithLunarEclipses(const bool enable);
 
     /**
      * @brief Returns whether or not lunar eclipses are listed
@@ -71,7 +72,7 @@ Q_SIGNALS:
      * @param year the year of the selected eclipse event
      * @param index the index of the selected eclipse item
      */
-    void buttonShowClicked( int year, int index );
+    void buttonShowClicked(int year, int index);
 
     /**
      * @brief This signal is emitted when the 'Settings' button is clicked
@@ -92,7 +93,7 @@ protected Q_SLOTS:
      * @brief Update the list of eclipses for the given year
      * @param year The year to list eclipses for
      */
-    void updateEclipsesForYear( int year );
+    void updateEclipsesForYear(int year);
 
     /**
      * @brief Update the dialog's button states
@@ -116,4 +117,3 @@ private:
 } // namespace Marble
 
 #endif // MARBLE_ECLIPSESBROWSERDIALOG_H
-

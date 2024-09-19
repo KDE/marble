@@ -16,8 +16,8 @@
 namespace Marble
 {
 
-KmlRunner::KmlRunner(QObject *parent) :
-    ParsingRunner(parent)
+KmlRunner::KmlRunner(QObject *parent)
+    : ParsingRunner(parent)
 {
 }
 
@@ -35,13 +35,13 @@ GeoDataDocument *KmlRunner::parseFile(const QString &fileName, DocumentRole role
     }
 
     QBuffer buffer;
-    QIODevice* device = nullptr;
+    QIODevice *device = nullptr;
 
     if (fileName.toLower().endsWith(QLatin1String(".kmz"))) {
         MarbleZipReader zipReader(&file);
 
         QStringList kmlFiles;
-        for(const MarbleZipReader::FileInfo &zipFileInfo : zipReader.fileInfoList()) {
+        for (const MarbleZipReader::FileInfo &zipFileInfo : zipReader.fileInfoList()) {
             if (zipFileInfo.filePath.toLower().endsWith(QLatin1String(".kml"))) {
                 kmlFiles.append(zipFileInfo.filePath);
             }
@@ -69,10 +69,10 @@ GeoDataDocument *KmlRunner::parseFile(const QString &fileName, DocumentRole role
         return nullptr;
     }
 
-    GeoDocument* document = parser.releaseDocument();
-    Q_ASSERT( document );
-    GeoDataDocument* doc = static_cast<GeoDataDocument*>(document);
-    doc->setDocumentRole( role );
+    GeoDocument *document = parser.releaseDocument();
+    Q_ASSERT(document);
+    GeoDataDocument *doc = static_cast<GeoDataDocument *>(document);
+    doc->setDocumentRole(role);
     doc->setFileName(fileName);
 
     file.close();

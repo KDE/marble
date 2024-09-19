@@ -11,7 +11,8 @@
 
 #include "marble_export.h"
 
-namespace Marble {
+namespace Marble
+{
 
 class BookmarkSyncManager;
 class RouteSyncManager;
@@ -20,19 +21,19 @@ class MARBLE_EXPORT CloudSyncManager : public QObject
 {
     Q_OBJECT
 
-    Q_PROPERTY( bool workOffline READ workOffline WRITE setWorkOffline NOTIFY workOfflineChanged )
-    Q_PROPERTY( bool syncEnabled READ isSyncEnabled WRITE setSyncEnabled NOTIFY syncEnabledChanged )
+    Q_PROPERTY(bool workOffline READ workOffline WRITE setWorkOffline NOTIFY workOfflineChanged)
+    Q_PROPERTY(bool syncEnabled READ isSyncEnabled WRITE setSyncEnabled NOTIFY syncEnabledChanged)
 
-    Q_PROPERTY( QString owncloudUsername READ owncloudUsername WRITE setOwncloudUsername NOTIFY owncloudUsernameChanged )
-    Q_PROPERTY( QString owncloudPassword READ owncloudPassword WRITE setOwncloudPassword NOTIFY owncloudPasswordChanged )
-    Q_PROPERTY( QString owncloudServer READ owncloudServer WRITE setOwncloudServer NOTIFY owncloudServerChanged )
-    Q_PROPERTY( QUrl apiUrl READ apiUrl NOTIFY apiUrlChanged )
+    Q_PROPERTY(QString owncloudUsername READ owncloudUsername WRITE setOwncloudUsername NOTIFY owncloudUsernameChanged)
+    Q_PROPERTY(QString owncloudPassword READ owncloudPassword WRITE setOwncloudPassword NOTIFY owncloudPasswordChanged)
+    Q_PROPERTY(QString owncloudServer READ owncloudServer WRITE setOwncloudServer NOTIFY owncloudServerChanged)
+    Q_PROPERTY(QUrl apiUrl READ apiUrl NOTIFY apiUrlChanged)
 
-    Q_PROPERTY( BookmarkSyncManager* bookmarkSyncManager READ bookmarkSyncManager NOTIFY bookmarkSyncManagerChanged )
-    Q_PROPERTY( RouteSyncManager* routeSyncManager READ routeSyncManager NOTIFY routeSyncManagerChanged )
+    Q_PROPERTY(BookmarkSyncManager *bookmarkSyncManager READ bookmarkSyncManager NOTIFY bookmarkSyncManagerChanged)
+    Q_PROPERTY(RouteSyncManager *routeSyncManager READ routeSyncManager NOTIFY routeSyncManagerChanged)
 
 public:
-    explicit CloudSyncManager( QObject *parent = nullptr );
+    explicit CloudSyncManager(QObject *parent = nullptr);
     ~CloudSyncManager() override;
 
     /**
@@ -50,7 +51,7 @@ public:
      * Setter for offline mode.
      * @param offline Status of offline mode
      */
-    void setWorkOffline( bool offline );
+    void setWorkOffline(bool offline);
 
     /**
      * Checks if the user enabled synchronization.
@@ -80,7 +81,7 @@ public:
      * Setter for enabling/disabling synchronization.
      * @param enabled Status of synchronization.
      */
-    void setSyncEnabled( bool enabled );
+    void setSyncEnabled(bool enabled);
 
     /**
      * Change owncloud server URL, username and password at once without emitting change
@@ -91,31 +92,31 @@ public:
      * @param user
      * @param password
      */
-    void setOwncloudCredentials( const QString &server, const QString &user, const QString &password );
+    void setOwncloudCredentials(const QString &server, const QString &user, const QString &password);
 
     /**
      * Setter for ownCloud server.
      * @param server ownCloud server
      */
-    void setOwncloudServer( const QString &owncloudServer );
+    void setOwncloudServer(const QString &owncloudServer);
 
     /**
      * Setter for ownCloud username.
      * @param username ownCloud username
      */
-    void setOwncloudUsername( const QString &owncloudUsername );
+    void setOwncloudUsername(const QString &owncloudUsername);
 
     /**
      * Setter for ownCloud password.
      * @param password ownCloud password
      */
-    void setOwncloudPassword( const QString &owncloudPassword );
+    void setOwncloudPassword(const QString &owncloudPassword);
 
     /**
      * Setter for authentication error.
      * @param error authentication error
      */
-    void setStatus( const QString &status, CloudSyncManager::Status status_type );
+    void setStatus(const QString &status, CloudSyncManager::Status status_type);
 
     /**
      * @return Last synchronization status
@@ -142,12 +143,12 @@ public:
     /**
      * @return A ready to use BookmarkSyncManager instance
      */
-    RouteSyncManager* routeSyncManager();
+    RouteSyncManager *routeSyncManager();
 
     /**
      * @return A ready to use BookmarkSyncManager instance
      */
-    BookmarkSyncManager* bookmarkSyncManager();
+    BookmarkSyncManager *bookmarkSyncManager();
 
 Q_SIGNALS:
     void workOfflineChanged(bool workOffline);

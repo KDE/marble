@@ -3,7 +3,6 @@
 // SPDX-FileCopyrightText: 2008 Patrick Spendrin <ps_ml@gmx.de>
 //
 
-
 #include "GeoDataLineStyle.h"
 
 #include "GeoDataTypes.h"
@@ -15,39 +14,43 @@ namespace Marble
 
 class GeoDataLineStylePrivate
 {
-  public:
-    GeoDataLineStylePrivate() 
-        : m_width( 1.0 ), m_physicalWidth( 0.0 ),
-          m_capStyle( Qt::FlatCap ), m_penStyle( Qt::SolidLine ),
-          m_cosmeticOutline( false ), m_background( false )
+public:
+    GeoDataLineStylePrivate()
+        : m_width(1.0)
+        , m_physicalWidth(0.0)
+        , m_capStyle(Qt::FlatCap)
+        , m_penStyle(Qt::SolidLine)
+        , m_cosmeticOutline(false)
+        , m_background(false)
     {
     }
 
     /// The current width of the line
-    float  m_width;
+    float m_width;
     /// The current real width of the line
-    float  m_physicalWidth;
+    float m_physicalWidth;
     Qt::PenCapStyle m_capStyle;
     Qt::PenStyle m_penStyle;
     bool m_cosmeticOutline;
     bool m_background;
-    QVector< qreal > m_pattern;
+    QVector<qreal> m_pattern;
 };
 
 GeoDataLineStyle::GeoDataLineStyle()
-    : d (new GeoDataLineStylePrivate )
+    : d(new GeoDataLineStylePrivate)
 {
 }
 
-GeoDataLineStyle::GeoDataLineStyle( const GeoDataLineStyle& other )
-    : GeoDataColorStyle( other ), d (new GeoDataLineStylePrivate( *other.d ) )
+GeoDataLineStyle::GeoDataLineStyle(const GeoDataLineStyle &other)
+    : GeoDataColorStyle(other)
+    , d(new GeoDataLineStylePrivate(*other.d))
 {
 }
 
-GeoDataLineStyle::GeoDataLineStyle( const QColor &color )
-    : d ( new GeoDataLineStylePrivate )
+GeoDataLineStyle::GeoDataLineStyle(const QColor &color)
+    : d(new GeoDataLineStylePrivate)
 {
-    setColor( color );
+    setColor(color);
 }
 
 GeoDataLineStyle::~GeoDataLineStyle()
@@ -55,33 +58,29 @@ GeoDataLineStyle::~GeoDataLineStyle()
     delete d;
 }
 
-GeoDataLineStyle& GeoDataLineStyle::operator=( const GeoDataLineStyle& other )
+GeoDataLineStyle &GeoDataLineStyle::operator=(const GeoDataLineStyle &other)
 {
-    GeoDataColorStyle::operator=( other );
+    GeoDataColorStyle::operator=(other);
     *d = *other.d;
     return *this;
 }
 
-bool GeoDataLineStyle::operator==( const GeoDataLineStyle &other ) const
+bool GeoDataLineStyle::operator==(const GeoDataLineStyle &other) const
 {
-    if ( GeoDataColorStyle::operator!=( other ) ) {
+    if (GeoDataColorStyle::operator!=(other)) {
         return false;
     }
 
-    return d->m_width == other.d->m_width &&
-           d->m_physicalWidth == other.d->m_physicalWidth &&
-           d->m_capStyle == other.d->m_capStyle &&
-           d->m_penStyle == other.d->m_penStyle &&
-           d->m_background == other.d->m_background &&
-           d->m_pattern == other.d->m_pattern;
+    return d->m_width == other.d->m_width && d->m_physicalWidth == other.d->m_physicalWidth && d->m_capStyle == other.d->m_capStyle
+        && d->m_penStyle == other.d->m_penStyle && d->m_background == other.d->m_background && d->m_pattern == other.d->m_pattern;
 }
 
-bool GeoDataLineStyle::operator!=( const GeoDataLineStyle &other ) const
+bool GeoDataLineStyle::operator!=(const GeoDataLineStyle &other) const
 {
-    return !this->operator==( other );
+    return !this->operator==(other);
 }
 
-const char* GeoDataLineStyle::nodeType() const
+const char *GeoDataLineStyle::nodeType() const
 {
     return GeoDataTypes::GeoDataLineStyleType;
 }
@@ -121,7 +120,7 @@ Qt::PenCapStyle GeoDataLineStyle::capStyle() const
     return d->m_capStyle;
 }
 
-void GeoDataLineStyle::setCapStyle( Qt::PenCapStyle style )
+void GeoDataLineStyle::setCapStyle(Qt::PenCapStyle style)
 {
     d->m_capStyle = style;
 }
@@ -131,9 +130,9 @@ Qt::PenStyle GeoDataLineStyle::penStyle() const
     return d->m_penStyle;
 }
 
-void GeoDataLineStyle::setPenStyle( Qt::PenStyle style )
+void GeoDataLineStyle::setPenStyle(Qt::PenStyle style)
 {
-   d->m_penStyle = style;
+    d->m_penStyle = style;
 }
 
 bool GeoDataLineStyle::background() const
@@ -141,25 +140,25 @@ bool GeoDataLineStyle::background() const
     return d->m_background;
 }
 
-void GeoDataLineStyle::setBackground( bool background )
+void GeoDataLineStyle::setBackground(bool background)
 {
     d->m_background = background;
 }
 
-QVector< qreal > GeoDataLineStyle::dashPattern() const
+QVector<qreal> GeoDataLineStyle::dashPattern() const
 {
     return d->m_pattern;
 }
 
-void GeoDataLineStyle::setDashPattern( const QVector< qreal >& pattern )
+void GeoDataLineStyle::setDashPattern(const QVector<qreal> &pattern)
 {
     d->m_pattern = pattern;
 }
 
-void GeoDataLineStyle::pack( QDataStream& stream ) const
+void GeoDataLineStyle::pack(QDataStream &stream) const
 {
-    GeoDataColorStyle::pack( stream );
-    
+    GeoDataColorStyle::pack(stream);
+
     stream << d->m_width;
     stream << d->m_physicalWidth;
     stream << (int)d->m_penStyle;
@@ -167,17 +166,17 @@ void GeoDataLineStyle::pack( QDataStream& stream ) const
     stream << d->m_background;
 }
 
-void GeoDataLineStyle::unpack( QDataStream& stream )
+void GeoDataLineStyle::unpack(QDataStream &stream)
 {
-    GeoDataColorStyle::unpack( stream );
-    
+    GeoDataColorStyle::unpack(stream);
+
     stream >> d->m_width;
     stream >> d->m_physicalWidth;
     int style;
     stream >> style;
-    d->m_penStyle = ( Qt::PenStyle ) style;
+    d->m_penStyle = (Qt::PenStyle)style;
     stream >> style;
-    d->m_capStyle = ( Qt::PenCapStyle ) style;
+    d->m_capStyle = (Qt::PenCapStyle)style;
     stream >> d->m_background;
 }
 

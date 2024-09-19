@@ -16,7 +16,7 @@ class KmlRunner : public ParsingRunner
 public:
     explicit KmlRunner(QObject *parent = nullptr);
     ~KmlRunner() override;
-    GeoDataDocument* parseFile( const QString &fileName, DocumentRole role, QString& error ) override;
+    GeoDataDocument *parseFile(const QString &fileName, DocumentRole role, QString &error) override;
 };
 
 }

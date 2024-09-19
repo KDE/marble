@@ -6,14 +6,15 @@
 #ifndef OWNCLOUDSYNCBACKEND_H
 #define OWNCLOUDSYNCBACKEND_H
 
+#include <QNetworkReply>
 #include <QObject>
 #include <QVector>
-#include <QNetworkReply>
 
 class QUrl;
 class QDir;
 
-namespace Marble {
+namespace Marble
+{
 
 class CloudSyncManager;
 class RouteItem;
@@ -21,9 +22,9 @@ class RouteItem;
 class OwncloudSyncBackend : public QObject
 {
     Q_OBJECT
-    
+
 public:
-    explicit OwncloudSyncBackend( CloudSyncManager* cloudSyncManager );
+    explicit OwncloudSyncBackend(CloudSyncManager *cloudSyncManager);
     ~OwncloudSyncBackend() override;
 
     /**
@@ -31,7 +32,7 @@ public:
      * @param endpoint Endpoint name which will be appended to API URL
      * @return QUrl which can be used for interactions with API
      */
-    QUrl endpointUrl( const QString &endpoint ) const;
+    QUrl endpointUrl(const QString &endpoint) const;
 
     /**
      * Generates an endpoint URL by appending endpoint name and parameter to API URL
@@ -39,21 +40,21 @@ public:
      * @param parameter Parameter which will be appended to API URL right after endpoint
      * @return QUrl which can be used for interactions with API
      */
-    QUrl endpointUrl( const QString &endpoint, const QString &parameter ) const;
+    QUrl endpointUrl(const QString &endpoint, const QString &parameter) const;
 
     /**
      * Removes route with given timestamp from cache
      * @param cacheDir Local synchronization cache directory
      * @param timestamp Timestamp of the route which will be deleted
      */
-    void removeFromCache( const QDir &cacheDir, const QString &timestamp );
+    void removeFromCache(const QDir &cacheDir, const QString &timestamp);
 
-    void uploadRoute( const QString &timestamp );
+    void uploadRoute(const QString &timestamp);
     void downloadRouteList();
-    void downloadRoute( const QString &timestamp );
-    void deleteRoute( const QString &timestamp );
-    QPixmap createPreview( const QString &timestamp ) const;
-    QString routeName( const QString &timestamp ) const;
+    void downloadRoute(const QString &timestamp);
+    void deleteRoute(const QString &timestamp);
+    QPixmap createPreview(const QString &timestamp) const;
+    QString routeName(const QString &timestamp) const;
 
 public Q_SLOTS:
     void cancelUpload();
@@ -66,14 +67,14 @@ private Q_SLOTS:
     void validateSettings();
 
 Q_SIGNALS:
-    void routeListDownloaded( const QVector<RouteItem> &routeList );
+    void routeListDownloaded(const QVector<RouteItem> &routeList);
     void routeDownloaded();
     void routeDeleted();
-    void routeUploadProgress( qint64 sent, qint64 total );
-    void routeDownloadProgress( qint64 received, qint64 total );
-    void routeListDownloadProgress( qint64 received, qint64 total );
-    void removedFromCache( const QString &timestamp );
-    
+    void routeUploadProgress(qint64 sent, qint64 total);
+    void routeDownloadProgress(qint64 received, qint64 total);
+    void routeListDownloadProgress(qint64 received, qint64 total);
+    void removedFromCache(const QString &timestamp);
+
 private:
     class Private;
     Private *d;

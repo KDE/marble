@@ -18,9 +18,8 @@ QString PositionProviderPluginInterface::error() const
     // Subclasses are expected to override this, but we provide
     // a default implementation
 
-    if ( status() == PositionProviderStatusError )
-    {
-        return QObject::tr( "Unknown error" );
+    if (status() == PositionProviderStatusError) {
+        return QObject::tr("Unknown error");
     }
 
     return QString();

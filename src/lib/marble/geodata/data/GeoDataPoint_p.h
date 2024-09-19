@@ -21,8 +21,8 @@ public:
     }
 
     GeoDataGeometryPrivate *copy() const override
-    { 
-        GeoDataPointPrivate* copy = new  GeoDataPointPrivate;
+    {
+        GeoDataPointPrivate *copy = new GeoDataPointPrivate;
         *copy = *this;
         return copy;
     }

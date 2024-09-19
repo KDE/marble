@@ -10,21 +10,21 @@
 namespace Marble
 {
 
-NominatimPlugin::NominatimPlugin( QObject *parent ) :
-    ReverseGeocodingRunnerPlugin( parent )
+NominatimPlugin::NominatimPlugin(QObject *parent)
+    : ReverseGeocodingRunnerPlugin(parent)
 {
     setSupportedCelestialBodies(QStringList(QStringLiteral("earth")));
-    setCanWorkOffline( false );
+    setCanWorkOffline(false);
 }
 
 QString NominatimPlugin::name() const
 {
-    return tr( "OpenStreetMap Nominatim Reverse Geocoding" );
+    return tr("OpenStreetMap Nominatim Reverse Geocoding");
 }
 
 QString NominatimPlugin::guiString() const
 {
-    return tr( "OpenStreetMap Nominatim" );
+    return tr("OpenStreetMap Nominatim");
 }
 
 QString NominatimPlugin::nameId() const
@@ -39,7 +39,7 @@ QString NominatimPlugin::version() const
 
 QString NominatimPlugin::description() const
 {
-    return tr( "Online reverse geocoding using the OpenStreetMap Nominatim service" );
+    return tr("Online reverse geocoding using the OpenStreetMap Nominatim service");
 }
 
 QString NominatimPlugin::copyrightYears() const
@@ -49,12 +49,11 @@ QString NominatimPlugin::copyrightYears() const
 
 QVector<PluginAuthor> NominatimPlugin::pluginAuthors() const
 {
-    return QVector<PluginAuthor>()
-            << PluginAuthor(QStringLiteral("Dennis Nienhüser"), QStringLiteral("nienhueser@kde.org"))
-            << PluginAuthor(QStringLiteral("Bernhard Beschow"), QStringLiteral("bbeschow@cs.tu-berlin.de"));
+    return QVector<PluginAuthor>() << PluginAuthor(QStringLiteral("Dennis Nienhüser"), QStringLiteral("nienhueser@kde.org"))
+                                   << PluginAuthor(QStringLiteral("Bernhard Beschow"), QStringLiteral("bbeschow@cs.tu-berlin.de"));
 }
 
-ReverseGeocodingRunner* NominatimPlugin::newRunner() const
+ReverseGeocodingRunner *NominatimPlugin::newRunner() const
 {
     return new OsmNominatimRunner;
 }

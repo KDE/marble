@@ -11,22 +11,22 @@
 namespace Marble
 {
 
-MapQuestPlugin::MapQuestPlugin( QObject *parent ) :
-    RoutingRunnerPlugin( parent )
+MapQuestPlugin::MapQuestPlugin(QObject *parent)
+    : RoutingRunnerPlugin(parent)
 {
     setSupportedCelestialBodies(QStringList(QStringLiteral("earth")));
-    setCanWorkOffline( false );
-    setStatusMessage( tr ( "This service requires an Internet connection." ) );
+    setCanWorkOffline(false);
+    setStatusMessage(tr("This service requires an Internet connection."));
 }
 
 QString MapQuestPlugin::name() const
 {
-    return tr( "MapQuest Routing" );
+    return tr("MapQuest Routing");
 }
 
 QString MapQuestPlugin::guiString() const
 {
-    return tr( "MapQuest" );
+    return tr("MapQuest");
 }
 
 QString MapQuestPlugin::nameId() const
@@ -41,7 +41,7 @@ QString MapQuestPlugin::version() const
 
 QString MapQuestPlugin::description() const
 {
-    return tr( "Worldwide routing using mapquest.org" );
+    return tr("Worldwide routing using mapquest.org");
 }
 
 QString MapQuestPlugin::copyrightYears() const
@@ -51,8 +51,7 @@ QString MapQuestPlugin::copyrightYears() const
 
 QVector<PluginAuthor> MapQuestPlugin::pluginAuthors() const
 {
-    return QVector<PluginAuthor>()
-            << PluginAuthor(QStringLiteral("Dennis Nienhüser"), QStringLiteral("nienhueser@kde.org"));
+    return QVector<PluginAuthor>() << PluginAuthor(QStringLiteral("Dennis Nienhüser"), QStringLiteral("nienhueser@kde.org"));
 }
 
 RoutingRunner *MapQuestPlugin::newRunner() const
@@ -65,29 +64,28 @@ class MapQuestConfigWidget : public RoutingRunnerPlugin::ConfigWidget
     Q_OBJECT
 
 public:
-
     MapQuestConfigWidget()
         : RoutingRunnerPlugin::ConfigWidget()
     {
         ui_configWidget = new Ui::MapQuestConfigWidget;
-        ui_configWidget->setupUi( this );
+        ui_configWidget->setupUi(this);
 
-        ui_configWidget->preference->addItem( tr( "Car (fastest way)" ), "fastest" );
-        ui_configWidget->preference->addItem( tr( "Car (shortest way)" ), "shortest" );
-        ui_configWidget->preference->addItem( tr( "Pedestrian" ), "pedestrian" );
-        ui_configWidget->preference->addItem( tr( "Bicycle" ), "bicycle" );
-        ui_configWidget->preference->addItem( tr( "Transit (Public Transport)" ), "multimodal" );
+        ui_configWidget->preference->addItem(tr("Car (fastest way)"), "fastest");
+        ui_configWidget->preference->addItem(tr("Car (shortest way)"), "shortest");
+        ui_configWidget->preference->addItem(tr("Pedestrian"), "pedestrian");
+        ui_configWidget->preference->addItem(tr("Bicycle"), "bicycle");
+        ui_configWidget->preference->addItem(tr("Transit (Public Transport)"), "multimodal");
 
-        ui_configWidget->ascending->addItem( tr( "Ignore" ), "DEFAULT_STRATEGY" );
-        ui_configWidget->ascending->addItem( tr( "Avoid" ), "AVOID_UP_HILL" );
-        ui_configWidget->ascending->addItem( tr( "Favor" ), "FAVOR_UP_HILL" );
+        ui_configWidget->ascending->addItem(tr("Ignore"), "DEFAULT_STRATEGY");
+        ui_configWidget->ascending->addItem(tr("Avoid"), "AVOID_UP_HILL");
+        ui_configWidget->ascending->addItem(tr("Favor"), "FAVOR_UP_HILL");
 
-        ui_configWidget->descending->addItem( tr( "Ignore" ), "DEFAULT_STRATEGY" );
-        ui_configWidget->descending->addItem( tr( "Avoid" ), "AVOID_DOWN_HILL" );
-        ui_configWidget->descending->addItem( tr( "Favor" ), "FAVOR_DOWN_HILL" );
+        ui_configWidget->descending->addItem(tr("Ignore"), "DEFAULT_STRATEGY");
+        ui_configWidget->descending->addItem(tr("Avoid"), "AVOID_DOWN_HILL");
+        ui_configWidget->descending->addItem(tr("Favor"), "FAVOR_DOWN_HILL");
     }
 
-    void loadSettings( const QHash<QString, QVariant> &settings_ ) override
+    void loadSettings(const QHash<QString, QVariant> &settings_) override
     {
         QHash<QString, QVariant> settings = settings_;
 
@@ -104,33 +102,28 @@ public:
         if (!settings.contains(QStringLiteral("appKey"))) {
             settings.insert(QStringLiteral("appKey"), QString());
         }
-        ui_configWidget->appKey->setText(settings.value(QStringLiteral("appKey")).toString() );
-        ui_configWidget->preference->setCurrentIndex(
-                    ui_configWidget->preference->findData(settings.value(QStringLiteral("preference")).toString()));
-        ui_configWidget->noMotorways->setCheckState( static_cast<Qt::CheckState>(settings.value(QStringLiteral("noMotorways")).toInt()));
-        ui_configWidget->noTollways->setCheckState( static_cast<Qt::CheckState>(settings.value(QStringLiteral("noTollways")).toInt()));
-        ui_configWidget->noFerries->setCheckState( static_cast<Qt::CheckState>(settings.value(QStringLiteral("noFerries")).toInt()));
-        ui_configWidget->ascending->setCurrentIndex(
-                    ui_configWidget->ascending->findData(settings.value(QStringLiteral("ascending")).toString()));
-        ui_configWidget->descending->setCurrentIndex(
-                    ui_configWidget->descending->findData(settings.value(QStringLiteral("descending")).toString()));
+        ui_configWidget->appKey->setText(settings.value(QStringLiteral("appKey")).toString());
+        ui_configWidget->preference->setCurrentIndex(ui_configWidget->preference->findData(settings.value(QStringLiteral("preference")).toString()));
+        ui_configWidget->noMotorways->setCheckState(static_cast<Qt::CheckState>(settings.value(QStringLiteral("noMotorways")).toInt()));
+        ui_configWidget->noTollways->setCheckState(static_cast<Qt::CheckState>(settings.value(QStringLiteral("noTollways")).toInt()));
+        ui_configWidget->noFerries->setCheckState(static_cast<Qt::CheckState>(settings.value(QStringLiteral("noFerries")).toInt()));
+        ui_configWidget->ascending->setCurrentIndex(ui_configWidget->ascending->findData(settings.value(QStringLiteral("ascending")).toString()));
+        ui_configWidget->descending->setCurrentIndex(ui_configWidget->descending->findData(settings.value(QStringLiteral("descending")).toString()));
     }
 
     QHash<QString, QVariant> settings() const override
     {
-        QHash<QString,QVariant> settings;
+        QHash<QString, QVariant> settings;
         settings.insert(QStringLiteral("appKey"), ui_configWidget->appKey->text());
-        settings.insert(QStringLiteral("preference"),
-                         ui_configWidget->preference->itemData( ui_configWidget->preference->currentIndex() ) );
+        settings.insert(QStringLiteral("preference"), ui_configWidget->preference->itemData(ui_configWidget->preference->currentIndex()));
         settings.insert(QStringLiteral("noMotorways"), ui_configWidget->noMotorways->checkState());
         settings.insert(QStringLiteral("noTollways"), ui_configWidget->noTollways->checkState());
         settings.insert(QStringLiteral("noFerries"), ui_configWidget->noFerries->checkState());
-        settings.insert(QStringLiteral("ascending"),
-                         ui_configWidget->ascending->itemData( ui_configWidget->ascending->currentIndex() ) );
-        settings.insert(QStringLiteral("descending"),
-                         ui_configWidget->descending->itemData( ui_configWidget->descending->currentIndex() ) );
+        settings.insert(QStringLiteral("ascending"), ui_configWidget->ascending->itemData(ui_configWidget->ascending->currentIndex()));
+        settings.insert(QStringLiteral("descending"), ui_configWidget->descending->itemData(ui_configWidget->descending->currentIndex()));
         return settings;
     }
+
 private:
     Ui::MapQuestConfigWidget *ui_configWidget;
 };
@@ -140,20 +133,16 @@ RoutingRunnerPlugin::ConfigWidget *MapQuestPlugin::configWidget()
     return new MapQuestConfigWidget();
 }
 
-
-bool MapQuestPlugin::supportsTemplate( RoutingProfilesModel::ProfileTemplate profileTemplate ) const
+bool MapQuestPlugin::supportsTemplate(RoutingProfilesModel::ProfileTemplate profileTemplate) const
 {
-    return
-        (profileTemplate == RoutingProfilesModel::CarFastestTemplate)  ||
-        (profileTemplate == RoutingProfilesModel::CarShortestTemplate) ||
-        (profileTemplate == RoutingProfilesModel::BicycleTemplate)     ||
-        (profileTemplate == RoutingProfilesModel::PedestrianTemplate);
+    return (profileTemplate == RoutingProfilesModel::CarFastestTemplate) || (profileTemplate == RoutingProfilesModel::CarShortestTemplate)
+        || (profileTemplate == RoutingProfilesModel::BicycleTemplate) || (profileTemplate == RoutingProfilesModel::PedestrianTemplate);
 }
 
-QHash< QString, QVariant > MapQuestPlugin::templateSettings( RoutingProfilesModel::ProfileTemplate profileTemplate ) const
+QHash<QString, QVariant> MapQuestPlugin::templateSettings(RoutingProfilesModel::ProfileTemplate profileTemplate) const
 {
     QHash<QString, QVariant> result;
-    switch ( profileTemplate ) {
+    switch (profileTemplate) {
     case RoutingProfilesModel::CarFastestTemplate:
         result.insert(QStringLiteral("preference"), QStringLiteral("fastest"));
         break;
@@ -169,7 +158,7 @@ QHash< QString, QVariant > MapQuestPlugin::templateSettings( RoutingProfilesMode
         result.insert(QStringLiteral("preference"), QStringLiteral("pedestrian"));
         break;
     case RoutingProfilesModel::LastTemplate:
-        Q_ASSERT( false );
+        Q_ASSERT(false);
         break;
     }
     return result;

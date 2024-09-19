@@ -6,28 +6,29 @@
 #ifndef MARBLE_OSMWAY
 #define MARBLE_OSMWAY
 
-#include "OsmNode.h"
 #include "GeoDataBuilding.h"
-#include <osm/OsmPlacemarkData.h>
+#include "OsmNode.h"
 #include <StyleBuilder.h>
+#include <osm/OsmPlacemarkData.h>
 
 #include <QSet>
 #include <QString>
 
-namespace Marble {
+namespace Marble
+{
 
 class GeoDataDocument;
 
 class OsmWay
 {
 public:
-    OsmPlacemarkData & osmData();
+    OsmPlacemarkData &osmData();
     void addReference(qint64 id);
 
-    const OsmPlacemarkData & osmData() const;
+    const OsmPlacemarkData &osmData() const;
     const QVector<qint64> &references() const;
 
-    GeoDataPlacemark* create(const OsmNodes &nodes, QSet<qint64> &usedNodes) const;
+    GeoDataPlacemark *create(const OsmNodes &nodes, QSet<qint64> &usedNodes) const;
 
 private:
     bool isArea() const;
@@ -49,7 +50,7 @@ private:
     QVector<GeoDataBuilding::NamedEntry> extractNamedEntries() const;
 };
 
-typedef QHash<qint64,OsmWay> OsmWays;
+typedef QHash<qint64, OsmWay> OsmWays;
 
 }
 

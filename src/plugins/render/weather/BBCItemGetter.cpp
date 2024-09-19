@@ -14,10 +14,10 @@
 
 using namespace Marble;
 
-BBCItemGetter::BBCItemGetter( QObject *parent )
-        : AbstractWorkerThread( parent ),
-          m_scheduleMutex(),
-          m_scheduledNumber( 0 )
+BBCItemGetter::BBCItemGetter(QObject *parent)
+    : AbstractWorkerThread(parent)
+    , m_scheduleMutex()
+    , m_scheduledNumber(0)
 {
 }
 
@@ -25,8 +25,7 @@ BBCItemGetter::~BBCItemGetter()
 {
 }
 
-void BBCItemGetter::setSchedule( const GeoDataLatLonBox& box,
-                                 qint32 number )
+void BBCItemGetter::setSchedule(const GeoDataLatLonBox &box, qint32 number)
 {
     m_scheduleMutex.lock();
     m_scheduledBox = box;
@@ -35,17 +34,17 @@ void BBCItemGetter::setSchedule( const GeoDataLatLonBox& box,
     ensureRunning();
 }
 
-void BBCItemGetter::setStationList( const QList<BBCStation>& items )
+void BBCItemGetter::setStationList(const QList<BBCStation> &items)
 {
     m_items = items;
     ensureRunning();
 }
 
-BBCStation BBCItemGetter::station( const QString &id )
+BBCStation BBCItemGetter::station(const QString &id)
 {
-    QString const bbcIdTemplate = QStringLiteral( "bbc%1" );
-    for( const BBCStation &station: m_items ) {
-        if ( bbcIdTemplate.arg( station.bbcId() ) == id ) {
+    QString const bbcIdTemplate = QStringLiteral("bbc%1");
+    for (const BBCStation &station : m_items) {
+        if (bbcIdTemplate.arg(station.bbcId()) == id) {
             return station;
         }
     }
@@ -55,15 +54,13 @@ BBCStation BBCItemGetter::station( const QString &id )
 
 bool BBCItemGetter::workAvailable()
 {
-    return !m_scheduledBox.isNull()
-           && m_scheduledNumber;
-
+    return !m_scheduledBox.isNull() && m_scheduledNumber;
 }
 
 void BBCItemGetter::work()
 {
-    if ( m_items.isEmpty() ) {
-        sleep( 1 );
+    if (m_items.isEmpty()) {
+        sleep(1);
         return;
     }
 
@@ -78,9 +75,9 @@ void BBCItemGetter::work()
     QList<BBCStation>::ConstIterator it = m_items.constBegin();
     QList<BBCStation>::ConstIterator end = m_items.constEnd();
 
-    while ( fetched < number && it != end ) {
-        if ( box.contains( it->coordinate() ) ) {
-            emit foundStation( (*it) );
+    while (fetched < number && it != end) {
+        if (box.contains(it->coordinate())) {
+            emit foundStation((*it));
             fetched++;
         }
         ++it;

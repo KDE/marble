@@ -6,8 +6,8 @@
 #ifndef POLYLINENODE_H
 #define POLYLINENODE_H
 
-#include <QRegion>
 #include <QPoint>
+#include <QRegion>
 
 namespace Marble
 {
@@ -15,16 +15,10 @@ namespace Marble
 class PolylineNode
 {
 public:
-    enum PolyNodeFlag {
-        NoOption = 0x0,
-        NodeIsSelected = 0x1,
-        NodeIsMerged = 0x2,
-        NodeIsEditingHighlighted = 0x4,
-        NodeIsMergingHighlighted = 0x8
-    };
+    enum PolyNodeFlag { NoOption = 0x0, NodeIsSelected = 0x1, NodeIsMerged = 0x2, NodeIsEditingHighlighted = 0x4, NodeIsMergingHighlighted = 0x8 };
     Q_DECLARE_FLAGS(PolyNodeFlags, PolyNodeFlag)
 
-    explicit PolylineNode( const QRegion& region = QRegion() );
+    explicit PolylineNode(const QRegion &region = QRegion());
     ~PolylineNode();
 
     bool isSelected() const;
@@ -34,11 +28,11 @@ public:
 
     PolyNodeFlags flags() const;
 
-    void setFlag( PolyNodeFlag flag, bool enabled = true );
-    void setFlags( PolyNodeFlags flags );
-    void setRegion( const QRegion& newRegion );
+    void setFlag(PolyNodeFlag flag, bool enabled = true);
+    void setFlags(PolyNodeFlags flags);
+    void setRegion(const QRegion &newRegion);
 
-    bool containsPoint( const QPoint &eventPos ) const;
+    bool containsPoint(const QPoint &eventPos) const;
 
 private:
     QRegion m_region;

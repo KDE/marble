@@ -43,7 +43,7 @@ class MARBLE_EXPORT MapThemeManager : public QObject
 {
     Q_OBJECT
 
- public:
+public:
     explicit MapThemeManager(QObject *parent = nullptr);
     ~MapThemeManager() override;
 
@@ -58,7 +58,7 @@ class MARBLE_EXPORT MapThemeManager : public QObject
      * This method provides a QStandardItemModel of all themes
      * that are available via MarbleDirs.
      */
-    QStandardItemModel* mapThemeModel();
+    QStandardItemModel *mapThemeModel();
 
     /**
      * @brief Provides a model of all installed planets.
@@ -72,12 +72,12 @@ class MARBLE_EXPORT MapThemeManager : public QObject
      * This helper method should only get used by MarbleModel to load the
      * current theme into memory or by the MapThemeManager.
      */
-    static GeoSceneDocument* loadMapTheme( const QString& mapThemeStringID );
+    static GeoSceneDocument *loadMapTheme(const QString &mapThemeStringID);
 
     /**
      * @brief Returns a map as a GeoSceneDocument object created from a GeoDataPhotoOverlay
      */
-    static GeoSceneDocument* createMapThemeFromOverlay( const GeoDataPhotoOverlay *overlayData );
+    static GeoSceneDocument *createMapThemeFromOverlay(const GeoDataPhotoOverlay *overlayData);
 
     /**
      * @brief Deletes the map theme with the specified map theme ID.
@@ -86,23 +86,23 @@ class MARBLE_EXPORT MapThemeManager : public QObject
      * Deletion will only succeed for local map themes, that is, if the map
      * theme's directory structure resides in the user's home directory.
      */
-    static void deleteMapTheme( const QString &mapThemeId );
+    static void deleteMapTheme(const QString &mapThemeId);
 
- Q_SIGNALS:
+Q_SIGNALS:
     /**
      * @brief This signal will be emitted, when the themes change.
      */
     void themesChanged();
 
- private:
-    Q_PRIVATE_SLOT( d, void directoryChanged( const QString& path ) )
-    Q_PRIVATE_SLOT( d, void fileChanged( const QString & path ) )
+private:
+    Q_PRIVATE_SLOT(d, void directoryChanged(const QString &path))
+    Q_PRIVATE_SLOT(d, void fileChanged(const QString &path))
 
-    Q_DISABLE_COPY( MapThemeManager )
+    Q_DISABLE_COPY(MapThemeManager)
 
     class Private;
     friend class Private;
-    Private * const d;
+    Private *const d;
 };
 
 }

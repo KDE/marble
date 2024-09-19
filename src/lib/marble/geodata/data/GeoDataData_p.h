@@ -16,12 +16,12 @@ namespace Marble
 
 class GeoDataDataPrivate
 {
-  public:
+public:
     QVariant m_value;
-    QString  m_name;
-    QString  m_displayName;
+    QString m_name;
+    QString m_displayName;
 };
 
 } // namespace Marble
 
-#endif //GEODATADATAPRIVATE_H
+#endif // GEODATADATAPRIVATE_H

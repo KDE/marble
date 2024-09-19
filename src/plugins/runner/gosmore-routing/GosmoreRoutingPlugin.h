@@ -3,7 +3,6 @@
 // SPDX-FileCopyrightText: 2010 Dennis Nienhüser <nienhueser@kde.org>
 //
 
-
 #ifndef MARBLE_GOSMOREROUTINGPLUGIN_H
 #define MARBLE_GOSMOREROUTINGPLUGIN_H
 
@@ -16,10 +15,10 @@ class GosmorePlugin : public RoutingRunnerPlugin
 {
     Q_OBJECT
     Q_PLUGIN_METADATA(IID "org.kde.marble.GosmoreRoutingPlugin")
-    Q_INTERFACES( Marble::RoutingRunnerPlugin )
+    Q_INTERFACES(Marble::RoutingRunnerPlugin)
 
 public:
-    explicit GosmorePlugin( QObject *parent = nullptr );
+    explicit GosmorePlugin(QObject *parent = nullptr);
 
     QString name() const override;
 

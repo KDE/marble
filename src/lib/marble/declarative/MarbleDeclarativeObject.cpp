@@ -16,9 +16,9 @@ public:
     // Yet empty
 };
 
-MarbleDeclarativeObject::MarbleDeclarativeObject( QObject *parent ) :
-    QObject( parent ),
-    d( new MarbleDeclarativeObjectPrivate )
+MarbleDeclarativeObject::MarbleDeclarativeObject(QObject *parent)
+    : QObject(parent)
+    , d(new MarbleDeclarativeObjectPrivate)
 {
     // nothing to do
 }
@@ -35,15 +35,15 @@ QString MarbleDeclarativeObject::version() const
 
 QString MarbleDeclarativeObject::resolvePath(const QString &path) const
 {
-    return Marble::MarbleDirs::path( path );
+    return Marble::MarbleDirs::path(path);
 }
 
 bool MarbleDeclarativeObject::canExecute(const QString &program) const
 {
     QString path = QProcessEnvironment::systemEnvironment().value(QStringLiteral("PATH"), QStringLiteral("/usr/local/bin:/usr/bin:/bin"));
-    for( const QString &dir: path.split( QLatin1Char( ':' ) ) ) {
-        QFileInfo const executable( QDir( dir ), program );
-        if ( executable.exists() && executable.isExecutable() ) {
+    for (const QString &dir : path.split(QLatin1Char(':'))) {
+        QFileInfo const executable(QDir(dir), program);
+        if (executable.exists() && executable.isExecutable()) {
             return true;
         }
     }

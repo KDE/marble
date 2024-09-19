@@ -26,7 +26,8 @@ void OsmPbfParser::parse(const uint8_t *data, std::size_t len)
 #ifdef HAVE_PROTOBUF
     const uint8_t *it = data;
     const uint8_t *end = data + len;
-    while (parseBlob(it, end));
+    while (parseBlob(it, end))
+        ;
 #endif
 }
 
@@ -58,13 +59,13 @@ bool OsmPbfParser::parseBlob(const uint8_t *&it, const uint8_t *end)
 
     const uint8_t *dataBegin = nullptr;
     if (blob.has_raw()) {
-        dataBegin = reinterpret_cast<const uint8_t*>(blob.raw().data());
+        dataBegin = reinterpret_cast<const uint8_t *>(blob.raw().data());
     } else if (blob.has_zlib_data()) {
         m_zlibBuffer.resize(blob.raw_size());
         z_stream zStream;
-        zStream.next_in = (uint8_t*)blob.zlib_data().data();
+        zStream.next_in = (uint8_t *)blob.zlib_data().data();
         zStream.avail_in = blob.zlib_data().size();
-        zStream.next_out = (uint8_t*)m_zlibBuffer.data();
+        zStream.next_out = (uint8_t *)m_zlibBuffer.data();
         zStream.avail_out = blob.raw_size();
         zStream.zalloc = nullptr;
         zStream.zfree = nullptr;
@@ -77,8 +78,8 @@ bool OsmPbfParser::parseBlob(const uint8_t *&it, const uint8_t *end)
         if (result != Z_STREAM_END) {
             return false;
         }
-        result = inflateEnd( &zStream );
-        dataBegin = reinterpret_cast<const uint8_t*>(m_zlibBuffer.constData());
+        result = inflateEnd(&zStream);
+        dataBegin = reinterpret_cast<const uint8_t *>(m_zlibBuffer.constData());
     } else {
         return false;
     }
@@ -179,9 +180,15 @@ void OsmPbfParser::parseRelations(const OSMPBF::PrimitiveBlock &block, const OSM
             QString typeName;
             const auto type = r.types(j);
             switch (type) {
-                case OSMPBF::Relation_MemberType_NODE: typeName = QStringLiteral("node"); break;
-                case OSMPBF::Relation_MemberType_WAY:  typeName = QStringLiteral("way"); break;
-                case OSMPBF::Relation_MemberType_RELATION: typeName = QStringLiteral("relation"); break;
+            case OSMPBF::Relation_MemberType_NODE:
+                typeName = QStringLiteral("node");
+                break;
+            case OSMPBF::Relation_MemberType_WAY:
+                typeName = QStringLiteral("way");
+                break;
+            case OSMPBF::Relation_MemberType_RELATION:
+                typeName = QStringLiteral("relation");
+                break;
             }
             rel.addMember(idDelta, role, typeName);
         }

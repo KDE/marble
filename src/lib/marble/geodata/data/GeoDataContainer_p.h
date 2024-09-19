@@ -15,33 +15,32 @@ namespace Marble
 
 class GeoDataContainerPrivate : public GeoDataFeaturePrivate
 {
-  public:
+public:
     GeoDataContainerPrivate()
     {
     }
 
-    GeoDataContainerPrivate(const GeoDataContainerPrivate& other)
-      : GeoDataFeaturePrivate(other)
+    GeoDataContainerPrivate(const GeoDataContainerPrivate &other)
+        : GeoDataFeaturePrivate(other)
     {
         m_vector.reserve(other.m_vector.size());
-        for (GeoDataFeature *feature: other.m_vector) {
+        for (GeoDataFeature *feature : other.m_vector) {
             m_vector.append(feature->clone());
         }
     }
 
     ~GeoDataContainerPrivate() override
     {
-        qDeleteAll( m_vector );
+        qDeleteAll(m_vector);
     }
 
-    GeoDataContainerPrivate& operator=( const GeoDataContainerPrivate &other)
+    GeoDataContainerPrivate &operator=(const GeoDataContainerPrivate &other)
     {
-        GeoDataFeaturePrivate::operator=( other );
-        qDeleteAll( m_vector );
+        GeoDataFeaturePrivate::operator=(other);
+        qDeleteAll(m_vector);
         m_vector.clear();
         m_vector.reserve(other.m_vector.size());
-        for( GeoDataFeature *feature: other.m_vector )
-        {
+        for (GeoDataFeature *feature : other.m_vector) {
             m_vector.append(feature->clone());
         }
         return *this;
@@ -54,12 +53,12 @@ class GeoDataContainerPrivate : public GeoDataFeaturePrivate
 
     void setParent(GeoDataObject *parent)
     {
-        for (GeoDataFeature *feature: m_vector) {
+        for (GeoDataFeature *feature : m_vector) {
             feature->setParent(parent);
         }
     }
 
-    QVector<GeoDataFeature*> m_vector;
+    QVector<GeoDataFeature *> m_vector;
 };
 
 } // namespace Marble

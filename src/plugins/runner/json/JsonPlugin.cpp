@@ -11,14 +11,14 @@
 namespace Marble
 {
 
-JsonPlugin::JsonPlugin( QObject *parent ) :
-    ParseRunnerPlugin( parent )
+JsonPlugin::JsonPlugin(QObject *parent)
+    : ParseRunnerPlugin(parent)
 {
 }
 
 QString JsonPlugin::name() const
 {
-    return tr( "GeoJSON File Parser" );
+    return tr("GeoJSON File Parser");
 }
 
 QString JsonPlugin::nameId() const
@@ -33,7 +33,7 @@ QString JsonPlugin::version() const
 
 QString JsonPlugin::description() const
 {
-    return tr( "Create GeoDataDocument from GeoJSON Files" );
+    return tr("Create GeoDataDocument from GeoJSON Files");
 }
 
 QString JsonPlugin::copyrightYears() const
@@ -43,14 +43,13 @@ QString JsonPlugin::copyrightYears() const
 
 QVector<PluginAuthor> JsonPlugin::pluginAuthors() const
 {
-    return QVector<PluginAuthor>()
-            << PluginAuthor(QStringLiteral("Ander Pijoan"), QStringLiteral("ander.pijoan@deusto.es"))
-	    << PluginAuthor(QStringLiteral("John Zaitseff"), QStringLiteral("J.Zaitseff@zap.org.au"));
+    return QVector<PluginAuthor>() << PluginAuthor(QStringLiteral("Ander Pijoan"), QStringLiteral("ander.pijoan@deusto.es"))
+                                   << PluginAuthor(QStringLiteral("John Zaitseff"), QStringLiteral("J.Zaitseff@zap.org.au"));
 }
 
 QString JsonPlugin::fileFormatDescription() const
 {
-    return tr( "GeoJSON" );
+    return tr("GeoJSON");
 }
 
 QStringList JsonPlugin::fileExtensions() const
@@ -58,7 +57,7 @@ QStringList JsonPlugin::fileExtensions() const
     return QStringList() << QStringLiteral("json") << QStringLiteral("geojson");
 }
 
-ParsingRunner* JsonPlugin::newRunner() const
+ParsingRunner *JsonPlugin::newRunner() const
 {
     return new JsonRunner;
 }

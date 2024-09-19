@@ -24,10 +24,10 @@ class TestPlugin : public RenderPlugin
 {
     Q_OBJECT
     Q_PLUGIN_METADATA(IID "org.kde.marble.TestPlugin")
-    Q_INTERFACES( Marble::RenderPluginInterface )
-    MARBLE_PLUGIN( TestPlugin )
+    Q_INTERFACES(Marble::RenderPluginInterface)
+    MARBLE_PLUGIN(TestPlugin)
 
- public:
+public:
     TestPlugin();
     explicit TestPlugin(const MarbleModel *marbleModel);
 
@@ -47,18 +47,17 @@ class TestPlugin : public RenderPlugin
 
     QString description() const;
 
-    QIcon icon () const;
+    QIcon icon() const;
 
     QString copyrightYears() const override;
 
     QVector<PluginAuthor> pluginAuthors() const override;
 
-    void initialize ();
+    void initialize();
 
-    bool isInitialized () const;
+    bool isInitialized() const;
 
-
-    bool render( GeoPainter *painter, ViewportParams *viewport, const QString& renderPos, GeoSceneLayer * layer = 0 );
+    bool render(GeoPainter *painter, ViewportParams *viewport, const QString &renderPos, GeoSceneLayer *layer = 0);
 };
 
 }

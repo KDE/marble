@@ -23,14 +23,14 @@ public:
 };
 
 ReverseGeocodingRunnerPlugin::Private::Private()
-    : m_canWorkOffline( true )
+    : m_canWorkOffline(true)
 {
     // nothing to do
 }
 
-ReverseGeocodingRunnerPlugin::ReverseGeocodingRunnerPlugin( QObject* parent ) :
-    QObject( parent ),
-    d( new Private )
+ReverseGeocodingRunnerPlugin::ReverseGeocodingRunnerPlugin(QObject *parent)
+    : QObject(parent)
+    , d(new Private)
 {
 }
 
@@ -44,21 +44,21 @@ QIcon ReverseGeocodingRunnerPlugin::icon() const
     return QIcon();
 }
 
-bool ReverseGeocodingRunnerPlugin::supportsCelestialBody( const QString &celestialBodyId ) const
+bool ReverseGeocodingRunnerPlugin::supportsCelestialBody(const QString &celestialBodyId) const
 {
-    if ( d->m_supportedCelestialBodies.isEmpty() ) {
+    if (d->m_supportedCelestialBodies.isEmpty()) {
         return true;
     }
 
-    return d->m_supportedCelestialBodies.contains( celestialBodyId );
+    return d->m_supportedCelestialBodies.contains(celestialBodyId);
 }
 
-void ReverseGeocodingRunnerPlugin::setSupportedCelestialBodies( const QStringList &celestialBodies )
+void ReverseGeocodingRunnerPlugin::setSupportedCelestialBodies(const QStringList &celestialBodies)
 {
     d->m_supportedCelestialBodies = celestialBodies;
 }
 
-void ReverseGeocodingRunnerPlugin::setCanWorkOffline( bool canWorkOffline )
+void ReverseGeocodingRunnerPlugin::setCanWorkOffline(bool canWorkOffline)
 {
     d->m_canWorkOffline = canWorkOffline;
 }

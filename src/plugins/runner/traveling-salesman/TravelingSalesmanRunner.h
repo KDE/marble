@@ -3,7 +3,6 @@
 // SPDX-FileCopyrightText: 2010 Dennis Nienhüser <nienhueser@kde.org>
 //
 
-
 #ifndef MARBLE_TRAVELINGSALESMANRUNNER_H
 #define MARBLE_TRAVELINGSALESMANRUNNER_H
 
@@ -18,7 +17,7 @@ class TravelingSalesmanRunnerPrivate;
 class TravelingSalesmanRunner : public MarbleAbstractRunner
 {
 public:
-    explicit TravelingSalesmanRunner( QObject *parent = 0 );
+    explicit TravelingSalesmanRunner(QObject *parent = 0);
 
     ~TravelingSalesmanRunner();
 
@@ -26,10 +25,10 @@ public:
     GeoDataFeature::GeoDataVisualCategory category() const;
 
     // Overriding MarbleAbstractRunner
-    virtual void retrieveRoute( RouteRequest *request );
+    virtual void retrieveRoute(RouteRequest *request);
 
 private:
-    TravelingSalesmanRunnerPrivate* const d;
+    TravelingSalesmanRunnerPrivate *const d;
 };
 
 }

@@ -10,11 +10,13 @@
 
 #include "marble_export.h"
 
-namespace Ui {
+namespace Ui
+{
 class MovieCaptureDialog;
 }
 
-namespace Marble {
+namespace Marble
+{
 
 class MarbleWidget;
 

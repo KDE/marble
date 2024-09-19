@@ -5,18 +5,18 @@
 
 #include "KmldelayedStartTagHandler.h"
 
-#include "KmlElementDictionary.h"
-#include "GeoParser.h"
-#include "GeoDataSoundCue.h"
 #include "GeoDataAnimatedUpdate.h"
+#include "GeoDataSoundCue.h"
+#include "GeoParser.h"
+#include "KmlElementDictionary.h"
 
 namespace Marble
 {
 namespace kml
 {
-KML_DEFINE_TAG_HANDLER_GX22( delayedStart )
+KML_DEFINE_TAG_HANDLER_GX22(delayedStart)
 
-GeoNode* KmldelayedStartTagHandler::parse(GeoParser &parser) const
+GeoNode *KmldelayedStartTagHandler::parse(GeoParser &parser) const
 {
     Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1String(kmlTag_delayedStart)));
 

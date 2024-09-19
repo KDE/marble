@@ -3,15 +3,14 @@
 // SPDX-FileCopyrightText: 2012 Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 //
 
-
+#include "AbstractDataPlugin.h"
 #include "MarbleModel.h"
 #include "PluginManager.h"
-#include "AbstractDataPlugin.h"
 
 #include <QMetaType>
 #include <QTest>
 
-Q_DECLARE_METATYPE( const Marble::AbstractDataPlugin * )
+Q_DECLARE_METATYPE(const Marble::AbstractDataPlugin *)
 
 namespace Marble
 {
@@ -24,18 +23,18 @@ private Q_SLOTS:
     void initialize_data();
     void initialize();
 
- private:
+private:
     MarbleModel m_model;
 };
 
 void AbstractDataPluginTest::initialize_data()
 {
-    QTest::addColumn<const AbstractDataPlugin *>( "factory" );
+    QTest::addColumn<const AbstractDataPlugin *>("factory");
 
     const auto plugins = m_model.pluginManager()->renderPlugins();
-    for (const RenderPlugin *plugin: plugins) {
-        const AbstractDataPlugin *const dataPlugin = qobject_cast<const AbstractDataPlugin *>( plugin );
-        if ( !dataPlugin )
+    for (const RenderPlugin *plugin : plugins) {
+        const AbstractDataPlugin *const dataPlugin = qobject_cast<const AbstractDataPlugin *>(plugin);
+        if (!dataPlugin)
             continue;
 
         QTest::newRow(plugin->nameId().toLatin1().constData()) << dataPlugin;
@@ -44,21 +43,21 @@ void AbstractDataPluginTest::initialize_data()
 
 void AbstractDataPluginTest::initialize()
 {
-    QFETCH( const AbstractDataPlugin *, factory );
+    QFETCH(const AbstractDataPlugin *, factory);
 
-    RenderPlugin *const instance = factory->newInstance( &m_model );
-    AbstractDataPlugin *const dataInstance = qobject_cast<AbstractDataPlugin *>( instance );
+    RenderPlugin *const instance = factory->newInstance(&m_model);
+    AbstractDataPlugin *const dataInstance = qobject_cast<AbstractDataPlugin *>(instance);
 
-    QVERIFY( dataInstance != nullptr );
-    QVERIFY( dataInstance->model() == nullptr );
+    QVERIFY(dataInstance != nullptr);
+    QVERIFY(dataInstance->model() == nullptr);
 
     dataInstance->initialize();
 
-    QVERIFY( dataInstance->model() != nullptr );
+    QVERIFY(dataInstance->model() != nullptr);
 }
 
 }
 
-QTEST_MAIN( Marble::AbstractDataPluginTest )
+QTEST_MAIN(Marble::AbstractDataPluginTest)
 
 #include "AbstractDataPluginTest.moc"

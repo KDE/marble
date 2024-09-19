@@ -5,27 +5,27 @@
 
 #include "KmlAliasTagHandler.h"
 
-#include "KmlElementDictionary.h"
 #include "GeoDataAlias.h"
-#include "GeoDataResourceMap.h"
 #include "GeoDataParser.h"
+#include "GeoDataResourceMap.h"
+#include "KmlElementDictionary.h"
 
 namespace Marble
 {
 namespace kml
 {
-KML_DEFINE_TAG_HANDLER( Alias )
+KML_DEFINE_TAG_HANDLER(Alias)
 
-GeoNode* KmlAliasTagHandler::parse( GeoParser& parser ) const
+GeoNode *KmlAliasTagHandler::parse(GeoParser &parser) const
 {
     Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1String(kmlTag_Alias)));
 
     GeoDataAlias alias;
     GeoStackItem parentItem = parser.parentElement();
 
-    if( parentItem.represents( kmlTag_ResourceMap ) ) {
+    if (parentItem.represents(kmlTag_ResourceMap)) {
         parentItem.nodeAs<GeoDataResourceMap>()->setAlias(alias);
-	    return &parentItem.nodeAs<GeoDataResourceMap>()->alias();
+        return &parentItem.nodeAs<GeoDataResourceMap>()->alias();
     } else {
         return nullptr;
     }

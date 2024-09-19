@@ -6,21 +6,21 @@
 
 #include "GeoSceneProperty.h"
 
-#include "MarbleDebug.h"
 #include "GeoSceneTypes.h"
+#include "MarbleDebug.h"
 
 namespace Marble
 {
 
-GeoSceneProperty::GeoSceneProperty( const QString& name )
-    : m_name( name ),
-      m_available( false ),
-      m_defaultValue( false ),
-      m_value( false )
+GeoSceneProperty::GeoSceneProperty(const QString &name)
+    : m_name(name)
+    , m_available(false)
+    , m_defaultValue(false)
+    , m_value(false)
 {
 }
- 
-const char* GeoSceneProperty::nodeType() const
+
+const char *GeoSceneProperty::nodeType() const
 {
     return GeoSceneTypes::GeoScenePropertyType;
 }
@@ -35,7 +35,7 @@ bool GeoSceneProperty::available() const
     return m_available;
 }
 
-void GeoSceneProperty::setAvailable( bool available )
+void GeoSceneProperty::setAvailable(bool available)
 {
     m_available = available;
 }
@@ -45,10 +45,10 @@ bool GeoSceneProperty::defaultValue() const
     return m_defaultValue;
 }
 
-void GeoSceneProperty::setDefaultValue( bool defaultValue )
+void GeoSceneProperty::setDefaultValue(bool defaultValue)
 {
     m_defaultValue = defaultValue;
-    setValue( defaultValue );
+    setValue(defaultValue);
 }
 
 bool GeoSceneProperty::value() const
@@ -56,14 +56,14 @@ bool GeoSceneProperty::value() const
     return m_value;
 }
 
-void GeoSceneProperty::setValue( bool value )
+void GeoSceneProperty::setValue(bool value)
 {
-    if ( m_value == value ) 
+    if (m_value == value)
         return;
 
     m_value = value;
-//    mDebug() << "GeoSceneProperty: Setting " << m_name << "to" << m_value; 
-    emit valueChanged( m_name, m_value );
+    //    mDebug() << "GeoSceneProperty: Setting " << m_name << "to" << m_value;
+    emit valueChanged(m_name, m_value);
 }
 
 }

@@ -16,8 +16,8 @@ public:
     KmlPolyStyleTagWriter();
 
 protected:
-    bool writeMid( const GeoNode *node, GeoWriter& writer ) const override;
-    bool isEmpty( const GeoNode *node ) const override;
+    bool writeMid(const GeoNode *node, GeoWriter &writer) const override;
+    bool isEmpty(const GeoNode *node) const override;
 };
 
 }

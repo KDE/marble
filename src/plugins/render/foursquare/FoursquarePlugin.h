@@ -8,19 +8,20 @@
 
 #include "AbstractDataPlugin.h"
 
-namespace Marble {
+namespace Marble
+{
 
 class FoursquarePlugin : public AbstractDataPlugin
 {
     Q_OBJECT
-    Q_PLUGIN_METADATA(IID "org.kde.marble.FoursquarePlugin" )
-    Q_INTERFACES( Marble::RenderPluginInterface )
-    MARBLE_PLUGIN( FoursquarePlugin )
+    Q_PLUGIN_METADATA(IID "org.kde.marble.FoursquarePlugin")
+    Q_INTERFACES(Marble::RenderPluginInterface)
+    MARBLE_PLUGIN(FoursquarePlugin)
 
 public:
     FoursquarePlugin();
 
-    explicit FoursquarePlugin( const MarbleModel *marbleModel );
+    explicit FoursquarePlugin(const MarbleModel *marbleModel);
 
     void initialize() override;
 

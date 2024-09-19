@@ -3,10 +3,8 @@
 // SPDX-FileCopyrightText: 2013 Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 //
 
-
 #ifndef MARBLE_STEREOGRAPHICPROJECTION_H
 #define MARBLE_STEREOGRAPHICPROJECTION_H
-
 
 #include "AbstractProjection.h"
 #include "AzimuthalProjection.h"
@@ -23,8 +21,7 @@ class StereographicProjectionPrivate;
 class StereographicProjection : public AzimuthalProjection
 {
     // Not a QObject so far because we don't need to send signals.
- public:
-
+public:
     /**
      * @brief Construct a new StereographicProjection.
      */
@@ -60,15 +57,15 @@ class StereographicProjection : public AzimuthalProjection
      * @return @c true  if the geographical coordinates are visible on the screen
      *         @c false if the geographical coordinates are not visible on the screen
      */
-    bool screenCoordinates( const GeoDataCoordinates &coordinates,
-                            const ViewportParams *params,
-                            qreal &x, qreal &y, bool &globeHidesPoint ) const override;
+    bool screenCoordinates(const GeoDataCoordinates &coordinates, const ViewportParams *params, qreal &x, qreal &y, bool &globeHidesPoint) const override;
 
-    bool screenCoordinates( const GeoDataCoordinates &coordinates,
-                            const ViewportParams * viewport,
-                            qreal *x, qreal &y, int &pointRepeatNum,
-                            const QSizeF& size,
-                            bool &globeHidesPoint ) const override;
+    bool screenCoordinates(const GeoDataCoordinates &coordinates,
+                           const ViewportParams *viewport,
+                           qreal *x,
+                           qreal &y,
+                           int &pointRepeatNum,
+                           const QSizeF &size,
+                           bool &globeHidesPoint) const override;
 
     using AbstractProjection::screenCoordinates;
 
@@ -83,17 +80,19 @@ class StereographicProjection : public AzimuthalProjection
      * @return @c true  if the pixel (x, y) is within the globe
      *         @c false if the pixel (x, y) is outside the globe, i.e. in space.
      */
-    bool geoCoordinates( const int x, const int y,
-                         const ViewportParams *params,
-                         qreal& lon, qreal& lat,
-                         GeoDataCoordinates::Unit unit = GeoDataCoordinates::Degree ) const override;
+    bool geoCoordinates(const int x,
+                        const int y,
+                        const ViewportParams *params,
+                        qreal &lon,
+                        qreal &lat,
+                        GeoDataCoordinates::Unit unit = GeoDataCoordinates::Degree) const override;
 
- protected:
-    explicit StereographicProjection(StereographicProjectionPrivate *dd );
+protected:
+    explicit StereographicProjection(StereographicProjectionPrivate *dd);
 
- private:
+private:
     Q_DECLARE_PRIVATE(StereographicProjection)
-    Q_DISABLE_COPY( StereographicProjection )
+    Q_DISABLE_COPY(StereographicProjection)
 };
 
 }

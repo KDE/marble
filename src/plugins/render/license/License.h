@@ -25,10 +25,10 @@ class License : public AbstractFloatItem
 {
     Q_OBJECT
     Q_PLUGIN_METADATA(IID "org.kde.marble.License")
-    Q_INTERFACES( Marble::RenderPluginInterface )
-    MARBLE_PLUGIN( License )
+    Q_INTERFACES(Marble::RenderPluginInterface)
+    MARBLE_PLUGIN(License)
 public:
-    explicit License( const MarbleModel *marbleModel=nullptr );
+    explicit License(const MarbleModel *marbleModel = nullptr);
     ~License() override;
 
     QStringList backendTypes() const override;
@@ -39,9 +39,9 @@ public:
     QString description() const override;
     QString copyrightYears() const override;
     QVector<PluginAuthor> pluginAuthors() const override;
-    QIcon icon () const override;
-    void initialize () override;
-    bool isInitialized () const override;
+    QIcon icon() const override;
+    void initialize() override;
+    bool isInitialized() const override;
 
 private Q_SLOTS:
     void updateLicenseText();
@@ -50,13 +50,13 @@ private Q_SLOTS:
 
 protected:
     bool eventFilter(QObject *, QEvent *e) override;
-    void contextMenuEvent( QWidget *w, QContextMenuEvent *e ) override;
+    void contextMenuEvent(QWidget *w, QContextMenuEvent *e) override;
 
 private:
-    WidgetGraphicsItem* m_widgetItem;
-    QLabel* m_label;
+    WidgetGraphicsItem *m_widgetItem;
+    QLabel *m_label;
     bool m_showFullLicense;
-    QMenu* m_contextMenu;
+    QMenu *m_contextMenu;
 };
 
 }

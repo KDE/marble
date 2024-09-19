@@ -8,8 +8,8 @@
 
 #include "AbstractWeatherService.h"
 
-#include <QStringList>
 #include <QList>
+#include <QStringList>
 
 namespace Marble
 {
@@ -22,23 +22,22 @@ class StationListParser;
 class BBCWeatherService : public AbstractWeatherService
 {
     Q_OBJECT
- 
- public:
-    explicit BBCWeatherService( const MarbleModel *model, QObject *parent );
+
+public:
+    explicit BBCWeatherService(const MarbleModel *model, QObject *parent);
     ~BBCWeatherService() override;
 
-    void setFavoriteItems( const QStringList& favorite ) override;
-    
- public Q_SLOTS:
-    void getAdditionalItems( const GeoDataLatLonAltBox& box,
-                             qint32 number = 10 ) override;
-    void getItem( const QString &id ) override;
+    void setFavoriteItems(const QStringList &favorite) override;
 
- private Q_SLOTS:
+public Q_SLOTS:
+    void getAdditionalItems(const GeoDataLatLonAltBox &box, qint32 number = 10) override;
+    void getItem(const QString &id) override;
+
+private Q_SLOTS:
     void fetchStationList();
-    void createItem( const BBCStation& station );
+    void createItem(const BBCStation &station);
 
- private:
+private:
     QList<BBCStation> m_stationList;
     bool m_parsingStarted;
     StationListParser *m_parser;

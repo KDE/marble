@@ -6,31 +6,32 @@
 #ifndef MARBLE_DECLARATIVE_BOOKMARKS_H
 #define MARBLE_DECLARATIVE_BOOKMARKS_H
 
+#include "Placemark.h"
+#include <GeoDataTreeModel.h>
 #include <QObject>
 #include <QSortFilterProxyModel>
-#include <GeoDataTreeModel.h>
-#include "Placemark.h"
 
-namespace Marble {
+namespace Marble
+{
 
 class MarbleQuickItem;
 
-class BookmarksModel: public QSortFilterProxyModel
+class BookmarksModel : public QSortFilterProxyModel
 {
     Q_OBJECT
-    Q_PROPERTY( int count READ count NOTIFY countChanged )
+    Q_PROPERTY(int count READ count NOTIFY countChanged)
 
 public:
-    explicit BookmarksModel( QObject *parent = nullptr );
+    explicit BookmarksModel(QObject *parent = nullptr);
 
     int count() const;
 
 public Q_SLOTS:
-    qreal longitude( int index ) const;
+    qreal longitude(int index) const;
 
-    qreal latitude( int index ) const;
+    qreal latitude(int index) const;
 
-    QString name( int index ) const;
+    QString name(int index) const;
 
 Q_SIGNALS:
     void countChanged();
@@ -40,25 +41,25 @@ class Bookmarks : public QObject
 {
     Q_OBJECT
 
-    Q_PROPERTY( Marble::MarbleQuickItem* map READ map WRITE setMap NOTIFY mapChanged)
-    Q_PROPERTY( BookmarksModel* model READ model NOTIFY modelChanged )
+    Q_PROPERTY(Marble::MarbleQuickItem *map READ map WRITE setMap NOTIFY mapChanged)
+    Q_PROPERTY(BookmarksModel *model READ model NOTIFY modelChanged)
 
 public:
-    explicit Bookmarks( QObject* parent = nullptr );
+    explicit Bookmarks(QObject *parent = nullptr);
 
-    MarbleQuickItem* map();
+    MarbleQuickItem *map();
 
-    void setMap(MarbleQuickItem *widget );
+    void setMap(MarbleQuickItem *widget);
 
-    BookmarksModel* model();
+    BookmarksModel *model();
 
-    Q_INVOKABLE bool isBookmark( qreal longitude, qreal latitude ) const;
+    Q_INVOKABLE bool isBookmark(qreal longitude, qreal latitude) const;
 
-    Q_INVOKABLE Placemark* placemark(int index);
+    Q_INVOKABLE Placemark *placemark(int index);
 
 public Q_SLOTS:
-    void addBookmark(Placemark *placemark, const QString &folder );
-    void removeBookmark( qreal longitude, qreal latitude );
+    void addBookmark(Placemark *placemark, const QString &folder);
+    void removeBookmark(qreal longitude, qreal latitude);
     void updateBookmarkDocument();
 
 Q_SIGNALS:
@@ -67,8 +68,8 @@ Q_SIGNALS:
     void modelChanged();
 
 private:
-    MarbleQuickItem* m_marbleQuickItem;
-    BookmarksModel* m_proxyModel;
+    MarbleQuickItem *m_marbleQuickItem;
+    BookmarksModel *m_proxyModel;
     GeoDataTreeModel m_treeModel;
 };
 

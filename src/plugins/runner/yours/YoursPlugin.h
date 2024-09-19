@@ -4,7 +4,6 @@
 // SPDX-FileCopyrightText: 2016 Piotr Wójcik <chocimier@tlen.pl>
 //
 
-
 #ifndef MARBLE_YOURSPLUGIN_H
 #define MARBLE_YOURSPLUGIN_H
 
@@ -17,10 +16,10 @@ class YoursPlugin : public RoutingRunnerPlugin
 {
     Q_OBJECT
     Q_PLUGIN_METADATA(IID "org.kde.marble.YoursPlugin")
-    Q_INTERFACES( Marble::RoutingRunnerPlugin )
+    Q_INTERFACES(Marble::RoutingRunnerPlugin)
 
 public:
-    explicit YoursPlugin( QObject *parent = nullptr );
+    explicit YoursPlugin(QObject *parent = nullptr);
 
     QString name() const override;
 
@@ -38,11 +37,11 @@ public:
 
     RoutingRunner *newRunner() const override;
 
-    ConfigWidget* configWidget() override;
+    ConfigWidget *configWidget() override;
 
     bool supportsTemplate(RoutingProfilesModel::ProfileTemplate profileTemplate) const override;
 
-    QHash< QString, QVariant > templateSettings(RoutingProfilesModel::ProfileTemplate profileTemplate) const override;
+    QHash<QString, QVariant> templateSettings(RoutingProfilesModel::ProfileTemplate profileTemplate) const override;
 };
 
 }

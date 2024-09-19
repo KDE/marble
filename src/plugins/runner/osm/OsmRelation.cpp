@@ -3,20 +3,21 @@
 // SPDX-FileCopyrightText: 2015 Dennis Nienhüser <nienhueser@kde.org>
 //
 
-#include <OsmRelation.h>
-#include <MarbleDebug.h>
-#include <GeoDataPlacemark.h>
-#include <GeoDataRelation.h>
 #include <GeoDataDocument.h>
-#include <GeoDataPolygon.h>
 #include <GeoDataLatLonAltBox.h>
+#include <GeoDataPlacemark.h>
+#include <GeoDataPolygon.h>
+#include <GeoDataRelation.h>
+#include <MarbleDebug.h>
+#include <OsmRelation.h>
 #include <StyleBuilder.h>
 #include <osm/OsmObjectManager.h>
 
-namespace Marble {
+namespace Marble
+{
 
-OsmRelation::OsmMember::OsmMember() :
-    reference(0)
+OsmRelation::OsmMember::OsmMember()
+    : reference(0)
 {
     // nothing to do
 }
@@ -65,25 +66,23 @@ void OsmRelation::createMultipolygon(GeoDataDocument *document, OsmWays &ways, c
     GeoDataPlacemark::GeoDataVisualCategory outerCategory = StyleBuilder::determineVisualCategory(m_osmData);
     if (outerCategory == GeoDataPlacemark::None) {
         // Try to determine the visual category from the relation members
-        GeoDataPlacemark::GeoDataVisualCategory const firstCategory =
-                StyleBuilder::determineVisualCategory(ways[*outerWays.begin()].osmData());
+        GeoDataPlacemark::GeoDataVisualCategory const firstCategory = StyleBuilder::determineVisualCategory(ways[*outerWays.begin()].osmData());
 
         bool categoriesAreSame = true;
-        for (auto wayId: std::as_const(outerWays)) {
-            GeoDataPlacemark::GeoDataVisualCategory const category =
-                    StyleBuilder::determineVisualCategory(ways[wayId].osmData());
-            if( category != firstCategory ) {
+        for (auto wayId : std::as_const(outerWays)) {
+            GeoDataPlacemark::GeoDataVisualCategory const category = StyleBuilder::determineVisualCategory(ways[wayId].osmData());
+            if (category != firstCategory) {
                 categoriesAreSame = false;
                 break;
             }
         }
 
-        if( categoriesAreSame ) {
+        if (categoriesAreSame) {
             outerCategory = firstCategory;
         }
     }
 
-    for (auto wayId: std::as_const(outerWays)) {
+    for (auto wayId : std::as_const(outerWays)) {
         Q_ASSERT(ways.contains(wayId));
         const auto &osmData = ways[wayId].osmData();
         GeoDataPlacemark::GeoDataVisualCategory const category = StyleBuilder::determineVisualCategory(osmData);
@@ -92,7 +91,7 @@ void OsmRelation::createMultipolygon(GeoDataDocument *document, OsmWays &ways, c
             usedWays << wayId;
         } // else we keep it
 
-        for(auto nodeId: ways[wayId].references()) {
+        for (auto nodeId : ways[wayId].references()) {
             ways[wayId].osmData().addNodeReference(nodes[nodeId].coordinates(), nodes[nodeId].osmData());
         }
     }
@@ -102,8 +101,8 @@ void OsmRelation::createMultipolygon(GeoDataDocument *document, OsmWays &ways, c
     OsmRings const inner = rings(innerRoles, ways, nodes, usedNodes, innerWays);
 
     bool const hasMultipleOuterRings = outer.size() > 1;
-    for (int i=0, n=outer.size(); i<n; ++i) {
-        auto const & outerRing = outer[i];
+    for (int i = 0, n = outer.size(); i < n; ++i) {
+        auto const &outerRing = outer[i];
 
         GeoDataPolygon *polygon = new GeoDataPolygon;
         polygon->setOuterBoundary(outerRing.first);
@@ -111,7 +110,7 @@ void OsmRelation::createMultipolygon(GeoDataDocument *document, OsmWays &ways, c
         osmData.addMemberReference(-1, outerRing.second);
 
         int index = 0;
-        for (auto const &innerRing: std::as_const(inner)) {
+        for (auto const &innerRing : std::as_const(inner)) {
             if (innerRing.first.isEmpty() || !outerRing.first.contains(innerRing.first.first())) {
                 // Simple check to see if this inner ring is inside the outer ring
                 continue;
@@ -169,7 +168,7 @@ static OsmType stringToType(const QString &str)
     return OsmType::Way;
 }
 
-void OsmRelation::createRelation(GeoDataDocument *document, const QHash<qint64, GeoDataPlacemark*>& placemarks) const
+void OsmRelation::createRelation(GeoDataDocument *document, const QHash<qint64, GeoDataPlacemark *> &placemarks) const
 {
     if (m_osmData.containsTag(QStringLiteral("type"), QStringLiteral("multipolygon"))) {
         return;
@@ -184,7 +183,7 @@ void OsmRelation::createRelation(GeoDataDocument *document, const QHash<qint64, 
     }
     relation->osmData() = osmData;
 
-    for (auto const &member: m_members) {
+    for (auto const &member : m_members) {
         auto const iter = placemarks.find(member.reference);
         if (iter != placemarks.constEnd()) {
             relation->addMember(*iter, member.reference, stringToType(member.type), member.role);
@@ -201,12 +200,13 @@ void OsmRelation::createRelation(GeoDataDocument *document, const QHash<qint64, 
     document->append(relation);
 }
 
-OsmRelation::OsmRings OsmRelation::rings(const QStringList &roles, const OsmWays &ways, const OsmNodes &nodes, QSet<qint64> &usedNodes, QSet<qint64> &usedWays) const
+OsmRelation::OsmRings
+OsmRelation::rings(const QStringList &roles, const OsmWays &ways, const OsmNodes &nodes, QSet<qint64> &usedNodes, QSet<qint64> &usedWays) const
 {
     QSet<qint64> currentWays;
     QSet<qint64> currentNodes;
     QList<qint64> roleMembers;
-    for (auto const &member: m_members) {
+    for (auto const &member : m_members) {
         if (roles.contains(member.role)) {
             if (!ways.contains(member.reference)) {
                 // A way is missing. Return nothing.
@@ -218,9 +218,9 @@ OsmRelation::OsmRings OsmRelation::rings(const QStringList &roles, const OsmWays
 
     OsmRings result;
     QList<OsmWay> unclosedWays;
-    for(auto wayId: std::as_const(roleMembers)) {
+    for (auto wayId : std::as_const(roleMembers)) {
         GeoDataLinearRing ring;
-        OsmWay const & way = ways[wayId];
+        OsmWay const &way = ways[wayId];
         if (way.references().isEmpty()) {
             continue;
         }
@@ -230,7 +230,7 @@ OsmRelation::OsmRings OsmRelation::rings(const QStringList &roles, const OsmWays
         }
 
         OsmPlacemarkData placemarkData = way.osmData();
-        for(auto id: way.references()) {
+        for (auto id : way.references()) {
             if (!nodes.contains(id)) {
                 // A node is missing. Return nothing.
                 return OsmRings();
@@ -244,38 +244,35 @@ OsmRelation::OsmRings OsmRelation::rings(const QStringList &roles, const OsmWays
         result << OsmRing(GeoDataLinearRing(ring.optimized()), placemarkData);
     }
 
-    if( !unclosedWays.isEmpty() ) {
-        //mDebug() << "Trying to merge non-trivial polygon boundary in relation " << m_osmData.id();
-        while( unclosedWays.length() > 0 ) {
+    if (!unclosedWays.isEmpty()) {
+        // mDebug() << "Trying to merge non-trivial polygon boundary in relation " << m_osmData.id();
+        while (unclosedWays.length() > 0) {
             GeoDataLinearRing ring;
             qint64 firstReference = unclosedWays.first().references().first();
             qint64 lastReference = firstReference;
             OsmPlacemarkData placemarkData;
             bool ok = true;
-            while( ok ) {
+            while (ok) {
                 ok = false;
-                for(int i = 0; i<unclosedWays.length(); ) {
+                for (int i = 0; i < unclosedWays.length();) {
                     const OsmWay &nextWay = unclosedWays.at(i);
-                    if( nextWay.references().first() == lastReference
-                            || nextWay.references().last() == lastReference ) {
-
+                    if (nextWay.references().first() == lastReference || nextWay.references().last() == lastReference) {
                         bool isReversed = nextWay.references().last() == lastReference;
                         QVector<qint64> v = nextWay.references();
-                        while( !v.isEmpty() ) {
+                        while (!v.isEmpty()) {
                             qint64 id = isReversed ? v.takeLast() : v.takeFirst();
                             if (!nodes.contains(id)) {
                                 // A node is missing. Return nothing.
                                 return OsmRings();
                             }
-                            if ( id != lastReference ) {
+                            if (id != lastReference) {
                                 const auto &node = nodes[id];
                                 ring << node.coordinates();
                                 placemarkData.addNodeReference(node.coordinates(), node.osmData());
                                 currentNodes << id;
                             }
                         }
-                        lastReference = isReversed ? nextWay.references().first()
-                                                   : nextWay.references().last();
+                        lastReference = isReversed ? nextWay.references().first() : nextWay.references().last();
                         Q_ASSERT(ways.contains(nextWay.osmData().id()));
                         currentWays << nextWay.osmData().id();
                         unclosedWays.removeAt(i);
@@ -287,7 +284,7 @@ OsmRelation::OsmRings OsmRelation::rings(const QStringList &roles, const OsmWays
                 }
             }
 
-            if(lastReference != firstReference) {
+            if (lastReference != firstReference) {
                 return OsmRings();
             } else {
                 /** @todo Merge tags common to all rings into the new osm data? */

@@ -8,10 +8,10 @@
 #include "MarbleDebug.h"
 
 #include "GPXElementDictionary.h"
-#include "GeoParser.h"
+#include "GeoDataExtendedData.h"
 #include "GeoDataPoint.h"
 #include "GeoDataTrack.h"
-#include "GeoDataExtendedData.h"
+#include "GeoParser.h"
 
 namespace Marble
 {
@@ -19,15 +19,14 @@ namespace gpx
 {
 GPX_DEFINE_TAG_HANDLER(extensions)
 
-GeoNode* GPXextensionsTagHandler::parse( GeoParser& parser ) const
+GeoNode *GPXextensionsTagHandler::parse(GeoParser &parser) const
 {
     Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1String(gpxTag_extensions)));
 
     GeoStackItem parentItem = parser.parentElement();
 
-    if ( parentItem.represents( gpxTag_trkpt ) )
-    {
-        GeoDataTrack* track = parentItem.nodeAs<GeoDataTrack>();
+    if (parentItem.represents(gpxTag_trkpt)) {
+        GeoDataTrack *track = parentItem.nodeAs<GeoDataTrack>();
         return track;
     }
 

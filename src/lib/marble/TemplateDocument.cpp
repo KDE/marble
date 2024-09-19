@@ -4,10 +4,10 @@
 
 #include "TemplateDocument.h"
 
-#include <QMap>
-#include <QString>
 #include <QFile>
+#include <QMap>
 #include <QRegExp>
+#include <QString>
 
 #include "MarbleDebug.h"
 
@@ -37,7 +37,7 @@ void TemplateDocumentPrivate::processTemplateIncludes(QString &input)
         pos += rx.matchedLength();
     }
 
-    for (const QString &include: includes) {
+    for (const QString &include : includes) {
         QFile includeFile(QLatin1String(":/htmlfeatures/includes/") + include + QLatin1String(".inc"));
         if (includeFile.open(QIODevice::ReadOnly)) {
             input.replace(QLatin1String("%!{") + include + QLatin1String("}%"), includeFile.readAll());
@@ -47,13 +47,13 @@ void TemplateDocumentPrivate::processTemplateIncludes(QString &input)
     }
 }
 
-TemplateDocument::TemplateDocument() :
-    d(new TemplateDocumentPrivate)
+TemplateDocument::TemplateDocument()
+    : d(new TemplateDocumentPrivate)
 {
 }
 
-TemplateDocument::TemplateDocument(const QString &templateText) :
-    d(new TemplateDocumentPrivate)
+TemplateDocument::TemplateDocument(const QString &templateText)
+    : d(new TemplateDocumentPrivate)
 {
     setTemplate(templateText);
 }
@@ -78,7 +78,7 @@ void TemplateDocument::setValue(const QString &key, const QString &value)
     d->templateEntries[key] = value;
 }
 
-QString& TemplateDocument::operator[](const QString &key)
+QString &TemplateDocument::operator[](const QString &key)
 {
     return d->templateEntries[key];
 }

@@ -21,33 +21,32 @@ namespace Marble
  * @short Settings property within a GeoScene document.
  */
 
-class GEODATA_EXPORT GeoSceneProperty : public QObject, 
-                                        public GeoNode
+class GEODATA_EXPORT GeoSceneProperty : public QObject, public GeoNode
 {
     Q_OBJECT
 
- public:
-    explicit GeoSceneProperty( const QString& name );
-    const char* nodeType() const override;
-    
+public:
+    explicit GeoSceneProperty(const QString &name);
+    const char *nodeType() const override;
+
     QString name() const;
     bool available() const;
-    void setAvailable( bool available );
+    void setAvailable(bool available);
     bool defaultValue() const;
-    void setDefaultValue( bool defaultValue );
+    void setDefaultValue(bool defaultValue);
     bool value() const;
-    void setValue( bool value );
+    void setValue(bool value);
 
- Q_SIGNALS:
-    void valueChanged( const QString&, bool );
+Q_SIGNALS:
+    void valueChanged(const QString &, bool);
 
- private:
+private:
     // FIXME: d-pointerfy
 
-    QString  m_name;
-    bool     m_available;
-    bool     m_defaultValue;
-    bool     m_value;
+    QString m_name;
+    bool m_available;
+    bool m_defaultValue;
+    bool m_value;
 };
 
 }

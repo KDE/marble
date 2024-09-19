@@ -4,14 +4,13 @@
 
 #include "GeoUriRunner.h"
 
-#include "GeoDataPlacemark.h"
 #include "GeoDataCoordinates.h"
+#include "GeoDataPlacemark.h"
 #include "GeoUriParser.h"
 #include "MarbleModel.h"
 
 #include "MarbleDebug.h"
 #include <QVector>
-
 
 namespace Marble
 {
@@ -21,19 +20,17 @@ GeoUriRunner::GeoUriRunner(QObject *parent)
 {
 }
 
-
 GeoUriRunner::~GeoUriRunner()
 {
 }
 
 void GeoUriRunner::search(const QString &searchTerm, const GeoDataLatLonBox &)
 {
-    QVector<GeoDataPlacemark*> vector;
+    QVector<GeoDataPlacemark *> vector;
 
     GeoUriParser uriParser(searchTerm);
     const bool success = uriParser.parse();
-    if (success &&
-        (uriParser.planet().id() == model()->planet()->id())) {
+    if (success && (uriParser.planet().id() == model()->planet()->id())) {
         const GeoDataCoordinates coordinates = uriParser.coordinates();
 
         GeoDataPlacemark *placemark = new GeoDataPlacemark;

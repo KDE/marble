@@ -18,24 +18,24 @@ namespace Marble
 
 class BBCStationPrivate
 {
- public:
+public:
     BBCStationPrivate()
-            : m_bbcId( 0 ),
-              m_priority( 0 ),
-              ref( 1 )
+        : m_bbcId(0)
+        , m_priority(0)
+        , ref(1)
     {
     }
 
-    BBCStationPrivate( const BBCStationPrivate &other )
-            : m_name( other.m_name ),
-              m_coordinate( other.m_coordinate ),
-              m_bbcId( other.m_bbcId ),
-              m_priority( other.m_priority ),
-              ref( other.ref )
+    BBCStationPrivate(const BBCStationPrivate &other)
+        : m_name(other.m_name)
+        , m_coordinate(other.m_coordinate)
+        , m_bbcId(other.m_bbcId)
+        , m_priority(other.m_priority)
+        , ref(other.ref)
     {
     }
 
-    BBCStationPrivate& operator=( const BBCStationPrivate &other )
+    BBCStationPrivate &operator=(const BBCStationPrivate &other)
     {
         m_name = other.m_name;
         m_coordinate = other.m_coordinate;
@@ -45,43 +45,43 @@ class BBCStationPrivate
         return *this;
     }
 
-    QString            m_name;
+    QString m_name;
     GeoDataCoordinates m_coordinate;
-    quint32            m_bbcId;
-    quint8             m_priority;
+    quint32 m_bbcId;
+    quint8 m_priority;
 
     QAtomicInt ref;
 };
 
 BBCStation::BBCStation()
-        : d ( new BBCStationPrivate() )
+    : d(new BBCStationPrivate())
 {
 }
 
-BBCStation::BBCStation( const BBCStation& other )
-        : d( other.d )
+BBCStation::BBCStation(const BBCStation &other)
+    : d(other.d)
 {
     d->ref.ref();
 }
 
 BBCStation::~BBCStation()
 {
-    if ( !d->ref.deref() )
+    if (!d->ref.deref())
         delete d;
 }
 
 void BBCStation::detach()
 {
-    qAtomicDetach( d );
+    qAtomicDetach(d);
 }
 
-BBCStation& BBCStation::operator=( const BBCStation &other )
+BBCStation &BBCStation::operator=(const BBCStation &other)
 {
-    qAtomicAssign( d, other.d );
+    qAtomicAssign(d, other.d);
     return *this;
 }
 
-bool BBCStation::operator<( const BBCStation& other ) const
+bool BBCStation::operator<(const BBCStation &other) const
 {
     return priority() > other.priority();
 }
@@ -91,7 +91,7 @@ QString BBCStation::name() const
     return d->m_name;
 }
 
-void BBCStation::setName( const QString& name )
+void BBCStation::setName(const QString &name)
 {
     detach();
     d->m_name = name;
@@ -102,7 +102,7 @@ GeoDataCoordinates BBCStation::coordinate() const
     return d->m_coordinate;
 }
 
-void BBCStation::setCoordinate( const GeoDataCoordinates& coordinate )
+void BBCStation::setCoordinate(const GeoDataCoordinates &coordinate)
 {
     detach();
     d->m_coordinate = coordinate;
@@ -113,7 +113,7 @@ quint32 BBCStation::bbcId() const
     return d->m_bbcId;
 }
 
-void BBCStation::setBbcId( quint32 id )
+void BBCStation::setBbcId(quint32 id)
 {
     detach();
     d->m_bbcId = id;
@@ -124,7 +124,7 @@ quint8 BBCStation::priority() const
     return d->m_priority;
 }
 
-void BBCStation::setPriority( quint8 priority )
+void BBCStation::setPriority(quint8 priority)
 {
     detach();
     d->m_priority = priority;

@@ -19,26 +19,26 @@ class PlaybackFlyToItem : public PlaybackItem
 {
     Q_OBJECT
 public:
-    explicit PlaybackFlyToItem( const GeoDataFlyTo* flyTo );
-    const GeoDataFlyTo* flyTo() const;
+    explicit PlaybackFlyToItem(const GeoDataFlyTo *flyTo);
+    const GeoDataFlyTo *flyTo() const;
     double duration() const override;
     void play() override;
     void pause() override;
-    void seek( double position ) override;
+    void seek(double position) override;
     void stop() override;
-    void center( double t );
-    void setBefore(PlaybackFlyToItem* before);
-    void setNext(PlaybackFlyToItem* next);
-    void setStartCoordinates( const GeoDataCoordinates &coordinates );
-    void setFirst( bool isFirst );
+    void center(double t);
+    void setBefore(PlaybackFlyToItem *before);
+    void setNext(PlaybackFlyToItem *next);
+    void setStartCoordinates(const GeoDataCoordinates &coordinates);
+    void setFirst(bool isFirst);
 
 private Q_SLOTS:
     void playNext();
 
 private:
-    const GeoDataFlyTo* m_flyTo;
-    PlaybackFlyToItem* m_before;
-    PlaybackFlyToItem* m_next;
+    const GeoDataFlyTo *m_flyTo;
+    PlaybackFlyToItem *m_before;
+    PlaybackFlyToItem *m_next;
     QDateTime m_start;
     QDateTime m_pause;
     bool m_isPlaying;

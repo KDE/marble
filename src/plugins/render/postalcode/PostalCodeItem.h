@@ -17,22 +17,22 @@ class PostalCodeItem : public AbstractDataPluginItem
 {
     Q_OBJECT
 
- public:
-    explicit PostalCodeItem( QObject *parent );
+public:
+    explicit PostalCodeItem(QObject *parent);
 
     ~PostalCodeItem() override;
 
     bool initialized() const override;
 
-    void paint( QPainter *painter ) override;
+    void paint(QPainter *painter) override;
 
-    bool operator<( const AbstractDataPluginItem *other ) const override;
+    bool operator<(const AbstractDataPluginItem *other) const override;
 
     QString text() const;
 
-    void setText( const QString& text );
+    void setText(const QString &text);
 
- private:
+private:
     QString m_text;
 
     static const QFont s_font;

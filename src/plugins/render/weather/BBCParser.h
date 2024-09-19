@@ -25,8 +25,7 @@ namespace Marble
 
 class BBCWeatherItem;
 
-struct ScheduleEntry
-{
+struct ScheduleEntry {
     QString path;
     QPointer<BBCWeatherItem> item;
     QString type;
@@ -39,7 +38,7 @@ public:
     ~BBCParser() override;
 
     static BBCParser *instance();
-    void scheduleRead( const QString& path, BBCWeatherItem *item, const QString& type );
+    void scheduleRead(const QString &path, BBCWeatherItem *item, const QString &type);
 
 protected:
     bool workAvailable() override;
@@ -49,16 +48,16 @@ Q_SIGNALS:
     void parsedFile();
 
 private:
-    explicit BBCParser( QObject *parent = nullptr );
-    QList<WeatherData> read( QIODevice *device );
+    explicit BBCParser(QObject *parent = nullptr);
+    QList<WeatherData> read(QIODevice *device);
 
     void readUnknownElement();
     void readBBC();
     void readChannel();
     void readItem();
-    void readDescription( WeatherData *data );
-    void readTitle( WeatherData *data );
-    void readPubDate( WeatherData *data );
+    void readDescription(WeatherData *data);
+    void readTitle(WeatherData *data);
+    void readPubDate(WeatherData *data);
 
     QList<WeatherData> m_list;
     QStack<ScheduleEntry> m_schedule;

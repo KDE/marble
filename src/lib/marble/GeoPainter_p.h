@@ -7,7 +7,7 @@
 #define MARBLE_GEOPAINTERPRIVATE_H
 
 #include "MarbleGlobal.h"
-//#include "GeoPainter.h"
+// #include "GeoPainter.h"
 
 class QPolygonF;
 class QSizeF;
@@ -23,33 +23,35 @@ class GeoPainter;
 
 class GeoPainterPrivate
 {
- public:
-    GeoPainterPrivate( GeoPainter* q, const ViewportParams *viewport, MapQuality mapQuality );
+public:
+    GeoPainterPrivate(GeoPainter *q, const ViewportParams *viewport, MapQuality mapQuality);
 
     ~GeoPainterPrivate();
 
+    static void createAnnotationLayout(qreal x,
+                                       qreal y,
+                                       const QSizeF &bubbleSize,
+                                       qreal bubbleOffsetX,
+                                       qreal bubbleOffsetY,
+                                       qreal xRnd,
+                                       qreal yRnd,
+                                       QPainterPath &path,
+                                       QRectF &rect);
 
-    static void createAnnotationLayout ( qreal x, qreal y,
-                                         const QSizeF& bubbleSize,
-                                         qreal bubbleOffsetX, qreal bubbleOffsetY,
-                                         qreal xRnd, qreal yRnd,
-                                         QPainterPath& path, QRectF& rect );
+    static GeoDataLinearRing createLinearRingFromGeoRect(const GeoDataCoordinates &centerCoordinates, qreal width, qreal height);
 
-    static GeoDataLinearRing createLinearRingFromGeoRect( const GeoDataCoordinates & centerCoordinates,
-                                                          qreal width, qreal height );
-
-    static bool doClip( const ViewportParams *viewport );
+    static bool doClip(const ViewportParams *viewport);
 
     static qreal normalizeAngle(qreal angle);
 
-    void drawTextRotated( const QPointF &startPoint, qreal angle, const QString &text );
+    void drawTextRotated(const QPointF &startPoint, qreal angle, const QString &text);
 
     const ViewportParams *const m_viewport;
-    const MapQuality       m_mapQuality;
-    qreal             *const m_x;
+    const MapQuality m_mapQuality;
+    qreal *const m_x;
 
 private:
-    GeoPainter* m_parent;
+    GeoPainter *m_parent;
 };
 
 } // namespace Marble

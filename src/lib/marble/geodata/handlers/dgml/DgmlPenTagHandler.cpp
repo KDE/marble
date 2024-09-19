@@ -6,12 +6,12 @@
 
 #include "DgmlPenTagHandler.h"
 
-#include <QPen>
 #include <QColor>
+#include <QPen>
 #include <QString>
 
-#include "DgmlElementDictionary.h"
 #include "DgmlAttributeDictionary.h"
+#include "DgmlElementDictionary.h"
 #include "GeoParser.h"
 #include "GeoSceneGeodata.h"
 
@@ -21,7 +21,7 @@ namespace dgml
 {
 DGML_DEFINE_TAG_HANDLER(Pen)
 
-GeoNode* DgmlPenTagHandler::parse(GeoParser& parser) const
+GeoNode *DgmlPenTagHandler::parse(GeoParser &parser) const
 {
     // Check whether the tag is valid
     Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1String(dgmlTag_Pen)));
@@ -29,15 +29,15 @@ GeoNode* DgmlPenTagHandler::parse(GeoParser& parser) const
     QString color = parser.attribute(dgmlAttr_color).trimmed();
     QString style = parser.attribute(dgmlAttr_style).toLower().trimmed();
     QString widthString = parser.attribute(dgmlAttr_width);
-    qreal  width = widthString.isEmpty() ? 1.0 : widthString.toDouble();
+    qreal width = widthString.isEmpty() ? 1.0 : widthString.toDouble();
 
     QPen pen;
 
-    if ( !color.isEmpty() && QColor( color ).isValid() ) {
-        pen.setColor( QColor( color ) );
+    if (!color.isEmpty() && QColor(color).isValid()) {
+        pen.setColor(QColor(color));
     }
 
-    if ( !style.isEmpty() ) {
+    if (!style.isEmpty()) {
         if (style == QLatin1String("nopen")) {
             pen.setStyle(Qt::NoPen);
         } else if (style == QLatin1String("solidline")) {
@@ -53,16 +53,15 @@ GeoNode* DgmlPenTagHandler::parse(GeoParser& parser) const
         }
     }
 
-    if ( width != 0.0 ) {
-        pen.setWidthF( width );
+    if (width != 0.0) {
+        pen.setWidthF(width);
     }
 
     // Checking for parent item
     GeoStackItem parentItem = parser.parentElement();
-    if ( parentItem.represents( dgmlTag_Vector )
-         || parentItem.represents( dgmlTag_Geodata ) ) {
+    if (parentItem.represents(dgmlTag_Vector) || parentItem.represents(dgmlTag_Geodata)) {
         GeoSceneGeodata *geodata = parentItem.nodeAs<GeoSceneGeodata>();
-        geodata->setPen( pen );
+        geodata->setPen(pen);
     }
 
     return nullptr;

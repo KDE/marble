@@ -15,17 +15,17 @@
 
 namespace Marble
 {
-PlaybackSoundCueItem::PlaybackSoundCueItem( const GeoDataSoundCue* soundCue ) :
-    m_soundCue( soundCue ),
-    m_href( soundCue->href() )
+PlaybackSoundCueItem::PlaybackSoundCueItem(const GeoDataSoundCue *soundCue)
+    : m_soundCue(soundCue)
+    , m_href(soundCue->href())
 {
 #if HAVE_PHONON
-    Phonon::createPath( &m_mediaObject, new Phonon::AudioOutput( Phonon::MusicCategory, this ) );
-    m_mediaObject.setCurrentSource( QUrl( m_href ) );
+    Phonon::createPath(&m_mediaObject, new Phonon::AudioOutput(Phonon::MusicCategory, this));
+    m_mediaObject.setCurrentSource(QUrl(m_href));
 #endif
 }
 
-const GeoDataSoundCue* PlaybackSoundCueItem::soundCue() const
+const GeoDataSoundCue *PlaybackSoundCueItem::soundCue() const
 {
     return m_soundCue;
 }
@@ -42,10 +42,10 @@ double PlaybackSoundCueItem::duration() const
 void PlaybackSoundCueItem::play()
 {
 #if HAVE_PHONON
-    if( m_href != m_soundCue->href() ) {
-        m_mediaObject.setCurrentSource( QUrl( soundCue()->href() ) );
+    if (m_href != m_soundCue->href()) {
+        m_mediaObject.setCurrentSource(QUrl(soundCue()->href()));
     }
-    if( m_mediaObject.isValid() ) {
+    if (m_mediaObject.isValid()) {
         m_mediaObject.play();
     }
 #endif
@@ -58,12 +58,12 @@ void PlaybackSoundCueItem::pause()
 #endif
 }
 
-void PlaybackSoundCueItem::seek( double progress )
+void PlaybackSoundCueItem::seek(double progress)
 {
 #if HAVE_PHONON
-    m_mediaObject.seek( progress * 1000 );
+    m_mediaObject.seek(progress * 1000);
 #else
-    Q_UNUSED( progress )
+    Q_UNUSED(progress)
 #endif
 }
 

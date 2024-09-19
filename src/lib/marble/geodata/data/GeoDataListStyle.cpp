@@ -4,8 +4,8 @@
 //
 
 #include "GeoDataListStyle.h"
-#include "GeoDataTypes.h"
 #include "GeoDataItemIcon.h"
+#include "GeoDataTypes.h"
 #include "MarbleDirs.h"
 
 #include <QDataStream>
@@ -21,48 +21,46 @@ public:
     GeoDataListStyle::ListItemType m_listItemType;
     QColor m_bgColor;
 
-    QVector<GeoDataItemIcon*> m_vector;
+    QVector<GeoDataItemIcon *> m_vector;
 };
 
-GeoDataListStylePrivate::GeoDataListStylePrivate() :
-    m_listItemType( GeoDataListStyle::Check ),
-    m_bgColor( Qt::white )
+GeoDataListStylePrivate::GeoDataListStylePrivate()
+    : m_listItemType(GeoDataListStyle::Check)
+    , m_bgColor(Qt::white)
 {
 }
 
-GeoDataListStyle::GeoDataListStyle() :
-    d( new GeoDataListStylePrivate )
+GeoDataListStyle::GeoDataListStyle()
+    : d(new GeoDataListStylePrivate)
 {
 }
 
-GeoDataListStyle::GeoDataListStyle( const Marble::GeoDataListStyle &other ) :
-    GeoDataObject( other ), d( new GeoDataListStylePrivate( *other.d ) )
+GeoDataListStyle::GeoDataListStyle(const Marble::GeoDataListStyle &other)
+    : GeoDataObject(other)
+    , d(new GeoDataListStylePrivate(*other.d))
 {
 }
 
-GeoDataListStyle &GeoDataListStyle::operator=( const GeoDataListStyle &other )
+GeoDataListStyle &GeoDataListStyle::operator=(const GeoDataListStyle &other)
 {
     GeoDataObject::operator=(other);
     *d = *other.d;
     return *this;
 }
 
-bool GeoDataListStyle::operator==( const GeoDataListStyle &other ) const
+bool GeoDataListStyle::operator==(const GeoDataListStyle &other) const
 {
-    if ( !GeoDataObject::equals( other ) ||
-         d->m_bgColor != other.d->m_bgColor ||
-         d->m_listItemType != other.d->m_listItemType ||
-         d->m_vector.size() != other.d->m_vector.size() )
-    {
+    if (!GeoDataObject::equals(other) || d->m_bgColor != other.d->m_bgColor || d->m_listItemType != other.d->m_listItemType
+        || d->m_vector.size() != other.d->m_vector.size()) {
         return false;
     }
 
-    QVector<GeoDataItemIcon*>::const_iterator begin = d->m_vector.constBegin();
-    QVector<GeoDataItemIcon*>::const_iterator end = d->m_vector.constEnd();
-    QVector<GeoDataItemIcon*>::const_iterator otherBegin = other.d->m_vector.constBegin();
+    QVector<GeoDataItemIcon *>::const_iterator begin = d->m_vector.constBegin();
+    QVector<GeoDataItemIcon *>::const_iterator end = d->m_vector.constEnd();
+    QVector<GeoDataItemIcon *>::const_iterator otherBegin = other.d->m_vector.constBegin();
 
-    for( ; begin != end; ++begin, ++otherBegin ) {
-        if ( **begin != **otherBegin ) {
+    for (; begin != end; ++begin, ++otherBegin) {
+        if (**begin != **otherBegin) {
             return false;
         }
     }
@@ -70,9 +68,9 @@ bool GeoDataListStyle::operator==( const GeoDataListStyle &other ) const
     return true;
 }
 
-bool GeoDataListStyle::operator!=( const GeoDataListStyle &other ) const
+bool GeoDataListStyle::operator!=(const GeoDataListStyle &other) const
 {
-    return !this->operator==( other );
+    return !this->operator==(other);
 }
 
 GeoDataListStyle::~GeoDataListStyle()
@@ -100,41 +98,40 @@ QColor GeoDataListStyle::backgroundColor() const
     return d->m_bgColor;
 }
 
-void GeoDataListStyle::setBackgroundColor( const QColor &color )
+void GeoDataListStyle::setBackgroundColor(const QColor &color)
 {
     d->m_bgColor = color;
 }
 
-QVector<GeoDataItemIcon*> GeoDataListStyle::itemIconList() const
+QVector<GeoDataItemIcon *> GeoDataListStyle::itemIconList() const
 {
     return d->m_vector;
 }
 
-GeoDataItemIcon* GeoDataListStyle::child( int i )
+GeoDataItemIcon *GeoDataListStyle::child(int i)
 {
     return d->m_vector.at(i);
 }
 
-const GeoDataItemIcon* GeoDataListStyle::child( int i ) const
+const GeoDataItemIcon *GeoDataListStyle::child(int i) const
 {
     return d->m_vector.at(i);
 }
 
-int GeoDataListStyle::childPosition( const GeoDataItemIcon* object ) const
+int GeoDataListStyle::childPosition(const GeoDataItemIcon *object) const
 {
-    return d->m_vector.indexOf( const_cast<GeoDataItemIcon *>( object ) );
+    return d->m_vector.indexOf(const_cast<GeoDataItemIcon *>(object));
 }
 
-void GeoDataListStyle::append( GeoDataItemIcon *other )
+void GeoDataListStyle::append(GeoDataItemIcon *other)
 {
-    other->setParent( this );
-    d->m_vector.append( other );
+    other->setParent(this);
+    d->m_vector.append(other);
 }
 
-
-void GeoDataListStyle::remove( int index )
+void GeoDataListStyle::remove(int index)
 {
-    d->m_vector.remove( index );
+    d->m_vector.remove(index);
 }
 
 int GeoDataListStyle::size() const
@@ -142,32 +139,32 @@ int GeoDataListStyle::size() const
     return d->m_vector.size();
 }
 
-GeoDataItemIcon& GeoDataListStyle::at( int pos )
+GeoDataItemIcon &GeoDataListStyle::at(int pos)
 {
-    return *(d->m_vector[ pos ]);
+    return *(d->m_vector[pos]);
 }
 
-const GeoDataItemIcon& GeoDataListStyle::at( int pos ) const
+const GeoDataItemIcon &GeoDataListStyle::at(int pos) const
 {
-    return *(d->m_vector.at( pos ));
+    return *(d->m_vector.at(pos));
 }
 
-GeoDataItemIcon& GeoDataListStyle::last()
-{
-    return *(d->m_vector.last());
-}
-
-const GeoDataItemIcon& GeoDataListStyle::last() const
+GeoDataItemIcon &GeoDataListStyle::last()
 {
     return *(d->m_vector.last());
 }
 
-GeoDataItemIcon& GeoDataListStyle::first()
+const GeoDataItemIcon &GeoDataListStyle::last() const
+{
+    return *(d->m_vector.last());
+}
+
+GeoDataItemIcon &GeoDataListStyle::first()
 {
     return *(d->m_vector.first());
 }
 
-const GeoDataItemIcon& GeoDataListStyle::first() const
+const GeoDataItemIcon &GeoDataListStyle::first() const
 {
     return *(d->m_vector.first());
 }
@@ -178,43 +175,40 @@ void GeoDataListStyle::clear()
     d->m_vector.clear();
 }
 
-QVector<GeoDataItemIcon*>::Iterator GeoDataListStyle::begin()
+QVector<GeoDataItemIcon *>::Iterator GeoDataListStyle::begin()
 {
     return d->m_vector.begin();
 }
 
-QVector<GeoDataItemIcon*>::Iterator GeoDataListStyle::end()
+QVector<GeoDataItemIcon *>::Iterator GeoDataListStyle::end()
 {
     return d->m_vector.end();
 }
 
-QVector<GeoDataItemIcon*>::ConstIterator GeoDataListStyle::constBegin() const
+QVector<GeoDataItemIcon *>::ConstIterator GeoDataListStyle::constBegin() const
 {
     return d->m_vector.constBegin();
 }
 
-QVector<GeoDataItemIcon*>::ConstIterator GeoDataListStyle::constEnd() const
+QVector<GeoDataItemIcon *>::ConstIterator GeoDataListStyle::constEnd() const
 {
     return d->m_vector.constEnd();
 }
 
-void GeoDataListStyle::pack( QDataStream& stream ) const
+void GeoDataListStyle::pack(QDataStream &stream) const
 {
-    GeoDataObject::pack( stream );
+    GeoDataObject::pack(stream);
     stream << d->m_vector.count();
 
-    for ( QVector <GeoDataItemIcon*>::const_iterator iterator = d->m_vector.constBegin();
-          iterator != d->m_vector.constEnd();
-          ++iterator )
-    {
+    for (QVector<GeoDataItemIcon *>::const_iterator iterator = d->m_vector.constBegin(); iterator != d->m_vector.constEnd(); ++iterator) {
         const GeoDataItemIcon *itemIcon = *iterator;
-        itemIcon->pack( stream );
+        itemIcon->pack(stream);
     }
 }
 
-void GeoDataListStyle::unpack( QDataStream& stream )
+void GeoDataListStyle::unpack(QDataStream &stream)
 {
-    GeoDataObject::unpack( stream );
+    GeoDataObject::unpack(stream);
 
     int count;
     stream >> count;
@@ -223,8 +217,8 @@ void GeoDataListStyle::unpack( QDataStream& stream )
     stream >> featureId;
 
     GeoDataItemIcon *itemIcon = new GeoDataItemIcon;
-    itemIcon->unpack( stream );
-    d->m_vector.append( itemIcon );
+    itemIcon->unpack(stream);
+    d->m_vector.append(itemIcon);
 }
 
 }

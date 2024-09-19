@@ -10,10 +10,10 @@
 #include <QStringView>
 
 #include "GPXElementDictionary.h"
-#include "GeoParser.h"
-#include "GeoDataLineString.h"
 #include "GeoDataCoordinates.h"
+#include "GeoDataLineString.h"
 #include "GeoDataTrack.h"
+#include "GeoParser.h"
 
 namespace Marble
 {
@@ -21,14 +21,13 @@ namespace gpx
 {
 GPX_DEFINE_TAG_HANDLER(trkpt)
 
-GeoNode* GPXtrkptTagHandler::parse(GeoParser& parser) const
+GeoNode *GPXtrkptTagHandler::parse(GeoParser &parser) const
 {
     Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1String(gpxTag_trkpt)));
 
     GeoStackItem parentItem = parser.parentElement();
-    if (parentItem.represents(gpxTag_trkseg))
-    {
-        GeoDataTrack* track = parentItem.nodeAs<GeoDataTrack>();
+    if (parentItem.represents(gpxTag_trkseg)) {
+        GeoDataTrack *track = parentItem.nodeAs<GeoDataTrack>();
         GeoDataCoordinates coord;
 
         QXmlStreamAttributes attributes = parser.attributes();
@@ -36,17 +35,15 @@ GeoNode* GPXtrkptTagHandler::parse(GeoParser& parser) const
         qreal lat = 0;
         qreal lon = 0;
         tmp = attributes.value(QLatin1String(gpxTag_lat));
-        if ( !tmp.isEmpty() )
-        {
+        if (!tmp.isEmpty()) {
             lat = tmp.toString().toDouble();
         }
         tmp = attributes.value(QLatin1String(gpxTag_lon));
-        if ( !tmp.isEmpty() )
-        {
+        if (!tmp.isEmpty()) {
             lon = tmp.toString().toDouble();
         }
         coord.set(lon, lat, 0, GeoDataCoordinates::Degree);
-        track->appendCoordinates( coord );
+        track->appendCoordinates(coord);
 
         return track;
     }

@@ -6,11 +6,11 @@
 
 #include "LocalDatabaseRunner.h"
 
-#include "MarbleModel.h"
-#include "MarblePlacemarkModel.h"
-#include "GeoDataPlacemark.h"
 #include "GeoDataCoordinates.h"
 #include "GeoDataLatLonAltBox.h"
+#include "GeoDataPlacemark.h"
+#include "MarbleModel.h"
+#include "MarblePlacemarkModel.h"
 
 #include "MarbleDebug.h"
 #include <QString>
@@ -21,46 +21,43 @@
 namespace Marble
 {
 
-LocalDatabaseRunner::LocalDatabaseRunner(QObject *parent) :
-    SearchRunner(parent)
+LocalDatabaseRunner::LocalDatabaseRunner(QObject *parent)
+    : SearchRunner(parent)
 {
 }
 
 LocalDatabaseRunner::~LocalDatabaseRunner()
 {
-
 }
 
-void LocalDatabaseRunner::search( const QString &searchTerm, const GeoDataLatLonBox &preferred )
+void LocalDatabaseRunner::search(const QString &searchTerm, const GeoDataLatLonBox &preferred)
 {
-    QVector<GeoDataPlacemark*> vector;
+    QVector<GeoDataPlacemark *> vector;
 
     if (model()) {
-        const QAbstractItemModel * placemarkModel = model()->placemarkModel();
+        const QAbstractItemModel *placemarkModel = model()->placemarkModel();
 
         if (placemarkModel) {
             QModelIndexList resultList;
-            QModelIndex firstIndex = placemarkModel->index( 0, 0 );
-            resultList = placemarkModel->match( firstIndex,
-                                    Qt::DisplayRole, searchTerm, -1,
-                                    Qt::MatchStartsWith );
+            QModelIndex firstIndex = placemarkModel->index(0, 0);
+            resultList = placemarkModel->match(firstIndex, Qt::DisplayRole, searchTerm, -1, Qt::MatchStartsWith);
 
             bool const searchEverywhere = preferred.isEmpty();
-            for ( const QModelIndex& index: resultList ) {
-                if( !index.isValid() ) {
+            for (const QModelIndex &index : resultList) {
+                if (!index.isValid()) {
                     mDebug() << "invalid index!!!";
                     continue;
                 }
-                GeoDataPlacemark *placemark = dynamic_cast<GeoDataPlacemark*>(qvariant_cast<GeoDataObject*>( index.data( MarblePlacemarkModel::ObjectPointerRole )));
-                if ( placemark &&
-                     ( searchEverywhere || preferred.contains( placemark->coordinate() ) ) ) {
-                    vector.append( new GeoDataPlacemark( *placemark ));
+                GeoDataPlacemark *placemark =
+                    dynamic_cast<GeoDataPlacemark *>(qvariant_cast<GeoDataObject *>(index.data(MarblePlacemarkModel::ObjectPointerRole)));
+                if (placemark && (searchEverywhere || preferred.contains(placemark->coordinate()))) {
+                    vector.append(new GeoDataPlacemark(*placemark));
                 }
             }
         }
     }
 
-    emit searchFinished( vector );
+    emit searchFinished(vector);
 }
 
 }

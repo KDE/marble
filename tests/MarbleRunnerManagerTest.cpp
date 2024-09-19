@@ -4,6 +4,7 @@
 // SPDX-FileCopyrightText: 2012 Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 //
 
+#include "GeoDataPlacemark.h"
 #include "MarbleDebug.h"
 #include "MarbleDirs.h"
 #include "MarbleModel.h"
@@ -12,16 +13,15 @@
 #include "ReverseGeocodingRunnerManager.h"
 #include "RoutingRunnerManager.h"
 #include "SearchRunnerManager.h"
-#include "GeoDataPlacemark.h"
-#include "routing/RouteRequest.h"
 #include "TestUtils.h"
+#include "routing/RouteRequest.h"
 
-#include <QSignalSpy>
-#include <QMetaType>
-#include <QThreadPool>
 #include <QElapsedTimer>
+#include <QMetaType>
+#include <QSignalSpy>
+#include <QThreadPool>
 
-Q_DECLARE_METATYPE( QList<Marble::GeoDataCoordinates> )
+Q_DECLARE_METATYPE(QList<Marble::GeoDataCoordinates>)
 
 namespace Marble
 {
@@ -31,10 +31,16 @@ class MarbleRunnerManagerTest : public QObject
     Q_OBJECT
 
 private Q_SLOTS:
-    void initTestCase();// will be called before the first testfunction is executed.
-    void cleanupTestCase();// will be called after the last testfunction was executed.
-    void init(){ qDebug() << "start: " << t.elapsed();}// will be called before each testfunction is executed.
-    void cleanup(){ qDebug() << "end: " << t.elapsed();}// will be called after every testfunction.
+    void initTestCase(); // will be called before the first testfunction is executed.
+    void cleanupTestCase(); // will be called after the last testfunction was executed.
+    void init()
+    {
+        qDebug() << "start: " << t.elapsed();
+    } // will be called before each testfunction is executed.
+    void cleanup()
+    {
+        qDebug() << "end: " << t.elapsed();
+    } // will be called after every testfunction.
 
     void testSyncPlacemarks();
 
@@ -69,22 +75,22 @@ public:
 
 void MarbleRunnerManagerTest::initTestCase()
 {
-     MarbleDebug::setEnabled( true );
-    MarbleDirs::setMarbleDataPath( DATA_PATH );
-    MarbleDirs::setMarblePluginPath( PLUGIN_PATH );
+    MarbleDebug::setEnabled(true);
+    MarbleDirs::setMarbleDataPath(DATA_PATH);
+    MarbleDirs::setMarblePluginPath(PLUGIN_PATH);
     m_time = 30000;
     m_name = "Berlin";
 
-    qRegisterMetaType<QVector<GeoDataCoordinates> >( "QVector<GeoDataCoordinates>" );
+    qRegisterMetaType<QVector<GeoDataCoordinates>>("QVector<GeoDataCoordinates>");
 
-    m_coords.setLatitude(52.50160, GeoDataCoordinates::Degree );
-    m_coords.setLongitude(13.40233, GeoDataCoordinates::Degree );
+    m_coords.setLatitude(52.50160, GeoDataCoordinates::Degree);
+    m_coords.setLongitude(13.40233, GeoDataCoordinates::Degree);
 
-    m_coords2.setLatitude(52.52665, GeoDataCoordinates::Degree );
-    m_coords2.setLongitude(13.39032, GeoDataCoordinates::Degree );
+    m_coords2.setLatitude(52.52665, GeoDataCoordinates::Degree);
+    m_coords2.setLongitude(13.39032, GeoDataCoordinates::Degree);
 
-    m_request.append( m_coords );
-    m_request.append( m_coords2 );
+    m_request.append(m_coords);
+    m_request.append(m_coords2);
     t.start();
 }
 
@@ -97,20 +103,20 @@ void MarbleRunnerManagerTest::testSyncPlacemarks()
     MarbleModel model;
     SearchRunnerManager m_runnerManager(&model, this);
 
-    QSignalSpy finishSpy( &m_runnerManager, SIGNAL(placemarkSearchFinished()) );
-    QSignalSpy resultSpy( &m_runnerManager, SIGNAL(searchResultChanged(QVector<GeoDataPlacemark*>)) );
+    QSignalSpy finishSpy(&m_runnerManager, SIGNAL(placemarkSearchFinished()));
+    QSignalSpy resultSpy(&m_runnerManager, SIGNAL(searchResultChanged(QVector<GeoDataPlacemark *>)));
 
-    QCOMPARE( finishSpy.count(), 0 );
-    QCOMPARE( resultSpy.count(), 0 );
+    QCOMPARE(finishSpy.count(), 0);
+    QCOMPARE(resultSpy.count(), 0);
 
     QElapsedTimer timer;
     timer.start();
-    QVector<GeoDataPlacemark*> placemarks = m_runnerManager.searchPlacemarks(m_name);
+    QVector<GeoDataPlacemark *> placemarks = m_runnerManager.searchPlacemarks(m_name);
 
-    QVERIFY( timer.elapsed() < m_time );
-    QCOMPARE( resultSpy.count(), 1 );
-    QVERIFY( placemarks.size() > 0 );
-    QCOMPARE( finishSpy.count(), 1 );
+    QVERIFY(timer.elapsed() < m_time);
+    QCOMPARE(resultSpy.count(), 1);
+    QVERIFY(placemarks.size() > 0);
+    QCOMPARE(finishSpy.count(), 1);
 
     // second search is optimised
     placemarks.clear();
@@ -119,18 +125,18 @@ void MarbleRunnerManagerTest::testSyncPlacemarks()
     timer.start();
     placemarks = m_runnerManager.searchPlacemarks(m_name);
 
-    QVERIFY( timer.elapsed() < m_time );
-    QCOMPARE( resultSpy.count(), 1 );
-    QVERIFY( placemarks.size() > 0 );
-    QCOMPARE( finishSpy.count(), 1 );
+    QVERIFY(timer.elapsed() < m_time);
+    QCOMPARE(resultSpy.count(), 1);
+    QVERIFY(placemarks.size() > 0);
+    QCOMPARE(finishSpy.count(), 1);
 }
 
 void MarbleRunnerManagerTest::testAsyncPlacemarks_data()
 {
-    QTest::addColumn<QString>( "name" );
+    QTest::addColumn<QString>("name");
 
-    addRow() << QString( "Berlin" );
-    addRow() << QString( "www.heise.de" );
+    addRow() << QString("Berlin");
+    addRow() << QString("www.heise.de");
 }
 
 void MarbleRunnerManagerTest::testAsyncPlacemarks()
@@ -138,20 +144,19 @@ void MarbleRunnerManagerTest::testAsyncPlacemarks()
     MarbleModel model;
     SearchRunnerManager m_runnerManager(&model, this);
 
-    QSignalSpy finishSpy( &m_runnerManager, SIGNAL(searchFinished(QString)) );
-    QSignalSpy resultSpy( &m_runnerManager, SIGNAL(searchResultChanged(QVector<GeoDataPlacemark*>)) );
+    QSignalSpy finishSpy(&m_runnerManager, SIGNAL(searchFinished(QString)));
+    QSignalSpy resultSpy(&m_runnerManager, SIGNAL(searchResultChanged(QVector<GeoDataPlacemark *>)));
 
     QEventLoop loop;
-    connect( &m_runnerManager, SIGNAL(searchFinished(QString)),
-             &loop, SLOT(quit()), Qt::QueuedConnection );
+    connect(&m_runnerManager, SIGNAL(searchFinished(QString)), &loop, SLOT(quit()), Qt::QueuedConnection);
 
-    QFETCH( QString, name );
-    m_runnerManager.findPlacemarks( name );
+    QFETCH(QString, name);
+    m_runnerManager.findPlacemarks(name);
 
     loop.exec();
 
-    QCOMPARE( resultSpy.count(), 1 );
-    QCOMPARE( finishSpy.count(), 1 );
+    QCOMPARE(resultSpy.count(), 1);
+    QCOMPARE(finishSpy.count(), 1);
 
     QThreadPool::globalInstance()->waitForDone();
 }
@@ -161,36 +166,36 @@ void MarbleRunnerManagerTest::testSyncReverse()
     MarbleModel model;
     ReverseGeocodingRunnerManager m_runnerManager(&model, this);
 
-    QSignalSpy finishSpy( &m_runnerManager, SIGNAL(reverseGeocodingFinished()) );
-    QSignalSpy resultSpy( &m_runnerManager, SIGNAL(reverseGeocodingFinished(GeoDataCoordinates,GeoDataPlacemark)) );
+    QSignalSpy finishSpy(&m_runnerManager, SIGNAL(reverseGeocodingFinished()));
+    QSignalSpy resultSpy(&m_runnerManager, SIGNAL(reverseGeocodingFinished(GeoDataCoordinates, GeoDataPlacemark)));
 
-    QCOMPARE( finishSpy.count(), 0 );
-    QCOMPARE( resultSpy.count(), 0 );
+    QCOMPARE(finishSpy.count(), 0);
+    QCOMPARE(resultSpy.count(), 0);
 
     QElapsedTimer timer;
     timer.start();
-    QString placemark = m_runnerManager.searchReverseGeocoding( m_coords );
+    QString placemark = m_runnerManager.searchReverseGeocoding(m_coords);
 
-    QVERIFY( timer.elapsed() < m_time );
-    QCOMPARE( resultSpy.count(), 1 );
-    QVERIFY( !placemark.isEmpty() );
-    QCOMPARE( finishSpy.count(), 1 );
+    QVERIFY(timer.elapsed() < m_time);
+    QCOMPARE(resultSpy.count(), 1);
+    QVERIFY(!placemark.isEmpty());
+    QCOMPARE(finishSpy.count(), 1);
 
     // second search is optimised
     finishSpy.clear();
     resultSpy.clear();
     timer.start();
-    placemark = m_runnerManager.searchReverseGeocoding( m_coords );
+    placemark = m_runnerManager.searchReverseGeocoding(m_coords);
 
-    QVERIFY( timer.elapsed() < m_time );
-    QCOMPARE( resultSpy.count(), 1 );
-    QVERIFY( !placemark.isEmpty() );
-    QCOMPARE( finishSpy.count(), 1 );
+    QVERIFY(timer.elapsed() < m_time);
+    QCOMPARE(resultSpy.count(), 1);
+    QVERIFY(!placemark.isEmpty());
+    QCOMPARE(finishSpy.count(), 1);
 }
 
 void MarbleRunnerManagerTest::testAsyncReverse_data()
 {
-    QTest::addColumn<GeoDataCoordinates>( "coordinates" );
+    QTest::addColumn<GeoDataCoordinates>("coordinates");
 
     addRow() << m_coords;
 }
@@ -200,20 +205,19 @@ void MarbleRunnerManagerTest::testAsyncReverse()
     MarbleModel model;
     ReverseGeocodingRunnerManager m_runnerManager(&model, this);
 
-    QSignalSpy finishSpy( &m_runnerManager, SIGNAL(reverseGeocodingFinished()) );
-    QSignalSpy resultSpy( &m_runnerManager, SIGNAL(reverseGeocodingFinished(GeoDataCoordinates,GeoDataPlacemark)) );
+    QSignalSpy finishSpy(&m_runnerManager, SIGNAL(reverseGeocodingFinished()));
+    QSignalSpy resultSpy(&m_runnerManager, SIGNAL(reverseGeocodingFinished(GeoDataCoordinates, GeoDataPlacemark)));
 
     QEventLoop loop;
-    connect( &m_runnerManager, SIGNAL(reverseGeocodingFinished()),
-             &loop, SLOT(quit()), Qt::QueuedConnection );
+    connect(&m_runnerManager, SIGNAL(reverseGeocodingFinished()), &loop, SLOT(quit()), Qt::QueuedConnection);
 
-    QFETCH( GeoDataCoordinates, coordinates );
-    m_runnerManager.reverseGeocoding( coordinates );
+    QFETCH(GeoDataCoordinates, coordinates);
+    m_runnerManager.reverseGeocoding(coordinates);
 
     loop.exec();
 
-    QCOMPARE( resultSpy.count(), 1 );
-    QCOMPARE( finishSpy.count(), 1 );
+    QCOMPARE(resultSpy.count(), 1);
+    QCOMPARE(finishSpy.count(), 1);
 
     QThreadPool::globalInstance()->waitForDone();
 }
@@ -223,27 +227,27 @@ void MarbleRunnerManagerTest::testSyncRouting()
     MarbleModel model;
     RoutingRunnerManager m_runnerManager(&model, this);
 
-    QSignalSpy finishSpy( &m_runnerManager, SIGNAL(routingFinished()) );
-    QSignalSpy resultSpy( &m_runnerManager, SIGNAL(routeRetrieved(GeoDataDocument*)) );
+    QSignalSpy finishSpy(&m_runnerManager, SIGNAL(routingFinished()));
+    QSignalSpy resultSpy(&m_runnerManager, SIGNAL(routeRetrieved(GeoDataDocument *)));
 
-    QCOMPARE( finishSpy.count(), 0 );
-    QCOMPARE( resultSpy.count(), 0 );
+    QCOMPARE(finishSpy.count(), 0);
+    QCOMPARE(resultSpy.count(), 0);
 
     QElapsedTimer timer;
     timer.start();
-    QVector<GeoDataDocument*> routes = m_runnerManager.searchRoute( &m_request );
+    QVector<GeoDataDocument *> routes = m_runnerManager.searchRoute(&m_request);
 
-    QVERIFY( timer.elapsed() < m_time );
-    QVERIFY( resultSpy.count() > 0 );
-    QVERIFY( !routes.isEmpty() );
-    QCOMPARE( finishSpy.count(), 1 );
+    QVERIFY(timer.elapsed() < m_time);
+    QVERIFY(resultSpy.count() > 0);
+    QVERIFY(!routes.isEmpty());
+    QCOMPARE(finishSpy.count(), 1);
 }
 
 void MarbleRunnerManagerTest::testAsyncRouting_data()
 {
-    QTest::addColumn<QVector<GeoDataCoordinates> >( "coordinatesList" );
+    QTest::addColumn<QVector<GeoDataCoordinates>>("coordinatesList");
 
-    addRow() << ( QVector<GeoDataCoordinates>() << m_coords << m_coords2 );
+    addRow() << (QVector<GeoDataCoordinates>() << m_coords << m_coords2);
 }
 
 void MarbleRunnerManagerTest::testAsyncRouting()
@@ -251,121 +255,117 @@ void MarbleRunnerManagerTest::testAsyncRouting()
     MarbleModel model;
     RoutingRunnerManager m_runnerManager(&model, this);
 
-    QSignalSpy finishSpy( &m_runnerManager, SIGNAL(routingFinished()) );
-    QSignalSpy resultSpy( &m_runnerManager, SIGNAL(routeRetrieved(GeoDataDocument*)) );
+    QSignalSpy finishSpy(&m_runnerManager, SIGNAL(routingFinished()));
+    QSignalSpy resultSpy(&m_runnerManager, SIGNAL(routeRetrieved(GeoDataDocument *)));
 
     QEventLoop loop;
-    connect( &m_runnerManager, SIGNAL(routingFinished()),
-             &loop, SLOT(quit()), Qt::QueuedConnection );
+    connect(&m_runnerManager, SIGNAL(routingFinished()), &loop, SLOT(quit()), Qt::QueuedConnection);
 
-    QFETCH( QVector<GeoDataCoordinates>, coordinatesList );
+    QFETCH(QVector<GeoDataCoordinates>, coordinatesList);
     RouteRequest request;
-    for (const GeoDataCoordinates &coordinates: std::as_const(coordinatesList)) {
-        request.append( coordinates );
+    for (const GeoDataCoordinates &coordinates : std::as_const(coordinatesList)) {
+        request.append(coordinates);
     }
 
-    m_runnerManager.retrieveRoute( &request );
+    m_runnerManager.retrieveRoute(&request);
 
     loop.exec();
 
-    QVERIFY( resultSpy.count() > 0 );
-    QCOMPARE( finishSpy.count(), 1 );
+    QVERIFY(resultSpy.count() > 0);
+    QCOMPARE(finishSpy.count(), 1);
 
     QThreadPool::globalInstance()->waitForDone();
 }
 
 void MarbleRunnerManagerTest::testSyncParsing_data()
 {
-    QTest::addColumn<QString>( "fileName" );
-    QTest::addColumn<int>( "resultCount" );
+    QTest::addColumn<QString>("fileName");
+    QTest::addColumn<int>("resultCount");
 
+    addRow() << MarbleDirs::path("mwdbii/DATELINE.PNT") << 1;
+    addRow() << MarbleDirs::path("mwdbii/PCOAST.PNT") << 1;
+    addRow() << MarbleDirs::path("mwdbii/PLAKEISLAND.PNT") << 1;
+    addRow() << MarbleDirs::path("mwdbii/PDIFFBORDER.PNT") << 1;
+    addRow() << MarbleDirs::path("mwdbii/PISLAND.PNT") << 1;
+    addRow() << MarbleDirs::path("mwdbii/PLAKE.PNT") << 1;
+    addRow() << MarbleDirs::path("mwdbii/PUSA48.DIFF.PNT") << 1;
+    addRow() << MarbleDirs::path("mwdbii/RIVER.PNT") << 1;
 
-    addRow() << MarbleDirs::path( "mwdbii/DATELINE.PNT" )    << 1;
-    addRow() << MarbleDirs::path( "mwdbii/PCOAST.PNT" )      << 1;
-    addRow() << MarbleDirs::path( "mwdbii/PLAKEISLAND.PNT" ) << 1;
-    addRow() << MarbleDirs::path( "mwdbii/PDIFFBORDER.PNT" ) << 1;
-    addRow() << MarbleDirs::path( "mwdbii/PISLAND.PNT" )     << 1;
-    addRow() << MarbleDirs::path( "mwdbii/PLAKE.PNT" )       << 1;
-    addRow() << MarbleDirs::path( "mwdbii/PUSA48.DIFF.PNT" ) << 1;
-    addRow() << MarbleDirs::path( "mwdbii/RIVER.PNT" )       << 1;
+    addNamedRow("cache") << QString(MARBLE_SRC_DIR).append("/data/placemarks/otherplacemarks.cache") << 1;
+    addNamedRow("gpx") << QString(MARBLE_SRC_DIR).append("/examples/gpx/mjolby.gpx") << 1;
+    addNamedRow("json") << QString(MARBLE_SRC_DIR).append("/examples/json/rfc7946-example.geojson") << 1;
+    addNamedRow("kml") << QString(MARBLE_SRC_DIR).append("/examples/kml/NewYork.kml") << 1;
+    // log
+    addNamedRow("osm") << QString(MARBLE_SRC_DIR).append("/examples/osm/map.osm") << 1;
+    addNamedRow("pn2") << QString(MARBLE_SRC_DIR).append("/data/naturalearth/ne_50m_lakes.pn2") << 1;
+    addNamedRow("pnt") << QString(MARBLE_SRC_DIR).append("/data/mwdbii/PGLACIER.PNT") << 1;
+    // shp
 
-    addNamedRow("cache") << QString( MARBLE_SRC_DIR ).append( "/data/placemarks/otherplacemarks.cache" ) << 1;
-    addNamedRow("gpx") << QString( MARBLE_SRC_DIR ).append( "/examples/gpx/mjolby.gpx") << 1;
-    addNamedRow("json") << QString( MARBLE_SRC_DIR ).append( "/examples/json/rfc7946-example.geojson") << 1;
-    addNamedRow("kml") << QString( MARBLE_SRC_DIR ).append( "/examples/kml/NewYork.kml") << 1;
-    //log
-    addNamedRow("osm") << QString( MARBLE_SRC_DIR ).append( "/examples/osm/map.osm") << 1;
-    addNamedRow("pn2") << QString( MARBLE_SRC_DIR ).append( "/data/naturalearth/ne_50m_lakes.pn2") << 1;
-    addNamedRow("pnt") << QString( MARBLE_SRC_DIR ).append( "/data/mwdbii/PGLACIER.PNT" )    << 1;
-    //shp
-
-    addNamedRow("svg") << MarbleDirs::path( "flags/flag_tv.svg" ) << 0;
+    addNamedRow("svg") << MarbleDirs::path("flags/flag_tv.svg") << 0;
 }
 
 void MarbleRunnerManagerTest::testSyncParsing()
 {
     ParsingRunnerManager m_runnerManager(&m_pluginManager, this);
 
-    QSignalSpy finishSpy( &m_runnerManager, SIGNAL(parsingFinished()) );
-    QSignalSpy resultSpy( &m_runnerManager, SIGNAL(parsingFinished(GeoDataDocument*,QString)) );
+    QSignalSpy finishSpy(&m_runnerManager, SIGNAL(parsingFinished()));
+    QSignalSpy resultSpy(&m_runnerManager, SIGNAL(parsingFinished(GeoDataDocument *, QString)));
 
-    QFETCH( QString, fileName );
-    QFETCH( int, resultCount );
+    QFETCH(QString, fileName);
+    QFETCH(int, resultCount);
 
-    GeoDataDocument* file = m_runnerManager.openFile( fileName );
+    GeoDataDocument *file = m_runnerManager.openFile(fileName);
 
-    QCOMPARE( resultSpy.count(), resultCount );
-    QCOMPARE( file != nullptr, resultCount > 0 );
-    QCOMPARE( finishSpy.count(), 1 );
+    QCOMPARE(resultSpy.count(), resultCount);
+    QCOMPARE(file != nullptr, resultCount > 0);
+    QCOMPARE(finishSpy.count(), 1);
 }
 
 void MarbleRunnerManagerTest::testAsyncParsing_data()
 {
-    QTest::addColumn<QString>( "fileName" );
-    QTest::addColumn<int>( "resultCount" );
+    QTest::addColumn<QString>("fileName");
+    QTest::addColumn<int>("resultCount");
 
-    addRow() << MarbleDirs::path( "placemarks/otherplacemarks.cache" ) << 1;
+    addRow() << MarbleDirs::path("placemarks/otherplacemarks.cache") << 1;
 
-    addRow() << MarbleDirs::path( "mwdbii/DATELINE.PNT" )    << 1;
-    addRow() << MarbleDirs::path( "mwdbii/PCOAST.PNT" )      << 1;
-    addRow() << MarbleDirs::path( "mwdbii/PGLACIER.PNT" )    << 1;
-    addRow() << MarbleDirs::path( "mwdbii/PLAKEISLAND.PNT" ) << 1;
-    addRow() << MarbleDirs::path( "mwdbii/PDIFFBORDER.PNT" ) << 1;
-    addRow() << MarbleDirs::path( "mwdbii/PISLAND.PNT" )     << 1;
-    addRow() << MarbleDirs::path( "mwdbii/PLAKE.PNT" )       << 1;
-    addRow() << MarbleDirs::path( "mwdbii/PUSA48.DIFF.PNT" ) << 1;
-    addRow() << MarbleDirs::path( "mwdbii/RIVER.PNT" )       << 1;
+    addRow() << MarbleDirs::path("mwdbii/DATELINE.PNT") << 1;
+    addRow() << MarbleDirs::path("mwdbii/PCOAST.PNT") << 1;
+    addRow() << MarbleDirs::path("mwdbii/PGLACIER.PNT") << 1;
+    addRow() << MarbleDirs::path("mwdbii/PLAKEISLAND.PNT") << 1;
+    addRow() << MarbleDirs::path("mwdbii/PDIFFBORDER.PNT") << 1;
+    addRow() << MarbleDirs::path("mwdbii/PISLAND.PNT") << 1;
+    addRow() << MarbleDirs::path("mwdbii/PLAKE.PNT") << 1;
+    addRow() << MarbleDirs::path("mwdbii/PUSA48.DIFF.PNT") << 1;
+    addRow() << MarbleDirs::path("mwdbii/RIVER.PNT") << 1;
 
-    addRow() << MarbleDirs::path( "flags/flag_tv.svg" ) << 0;
+    addRow() << MarbleDirs::path("flags/flag_tv.svg") << 0;
 }
 
 void MarbleRunnerManagerTest::testAsyncParsing()
 {
     ParsingRunnerManager m_runnerManager(&m_pluginManager, this);
 
-    QSignalSpy finishSpy( &m_runnerManager, SIGNAL(parsingFinished()) );
-    QSignalSpy resultSpy( &m_runnerManager, SIGNAL(parsingFinished(GeoDataDocument*,QString)) );
+    QSignalSpy finishSpy(&m_runnerManager, SIGNAL(parsingFinished()));
+    QSignalSpy resultSpy(&m_runnerManager, SIGNAL(parsingFinished(GeoDataDocument *, QString)));
 
     QEventLoop loop;
-    connect( &m_runnerManager, SIGNAL(parsingFinished()),
-             &loop, SLOT(quit()), Qt::QueuedConnection );
+    connect(&m_runnerManager, SIGNAL(parsingFinished()), &loop, SLOT(quit()), Qt::QueuedConnection);
 
-    QFETCH( QString, fileName );
-    QFETCH( int, resultCount );
+    QFETCH(QString, fileName);
+    QFETCH(int, resultCount);
 
-    m_runnerManager.parseFile( fileName );
+    m_runnerManager.parseFile(fileName);
 
     loop.exec();
 
-
-    QCOMPARE( resultSpy.count(), resultCount );
-    QCOMPARE( finishSpy.count(), 1 );
+    QCOMPARE(resultSpy.count(), resultCount);
+    QCOMPARE(finishSpy.count(), 1);
 
     QThreadPool::globalInstance()->waitForDone();
 }
 
 }
 
-QTEST_MAIN( Marble::MarbleRunnerManagerTest )
+QTEST_MAIN(Marble::MarbleRunnerManagerTest)
 
 #include "MarbleRunnerManagerTest.moc"

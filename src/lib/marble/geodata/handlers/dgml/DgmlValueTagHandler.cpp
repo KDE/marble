@@ -8,8 +8,8 @@
 
 #include "MarbleDebug.h"
 
-#include "DgmlElementDictionary.h"
 #include "DgmlAuxillaryDictionary.h"
+#include "DgmlElementDictionary.h"
 #include "GeoParser.h"
 #include "GeoSceneProperty.h"
 
@@ -19,7 +19,7 @@ namespace dgml
 {
 DGML_DEFINE_TAG_HANDLER(Value)
 
-GeoNode* DgmlValueTagHandler::parse(GeoParser& parser) const
+GeoNode *DgmlValueTagHandler::parse(GeoParser &parser) const
 {
     // Check whether the tag is valid
     Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1String(dgmlTag_Value)));

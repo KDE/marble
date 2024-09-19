@@ -16,34 +16,32 @@
 namespace Marble
 {
 
-static GeoTagWriterRegistrar s_writerNetworkLinkControl(
-        GeoTagWriter::QualifiedName( GeoDataTypes::GeoDataNetworkLinkControlType,
-                                     kml::kmlTag_nameSpaceOgc22 ),
-        new KmlNetworkLinkControlTagWriter );
+static GeoTagWriterRegistrar s_writerNetworkLinkControl(GeoTagWriter::QualifiedName(GeoDataTypes::GeoDataNetworkLinkControlType, kml::kmlTag_nameSpaceOgc22),
+                                                        new KmlNetworkLinkControlTagWriter);
 
-bool KmlNetworkLinkControlTagWriter::write( const GeoNode *node, GeoWriter& writer ) const
+bool KmlNetworkLinkControlTagWriter::write(const GeoNode *node, GeoWriter &writer) const
 {
-    const GeoDataNetworkLinkControl *networkLinkControl = static_cast<const GeoDataNetworkLinkControl*>( node );
+    const GeoDataNetworkLinkControl *networkLinkControl = static_cast<const GeoDataNetworkLinkControl *>(node);
 
-    writer.writeStartElement( QString::fromUtf8(kml::kmlTag_NetworkLinkControl) );
-    writer.writeOptionalElement( kml::kmlTag_minRefreshPeriod, QString::number( networkLinkControl->minRefreshPeriod() ), "1" );
-    writer.writeOptionalElement( kml::kmlTag_maxSessionLength, QString::number( networkLinkControl->maxSessionLength() ), "2" );
-    writer.writeOptionalElement( kml::kmlTag_cookie, networkLinkControl->cookie() );
-    writer.writeOptionalElement( kml::kmlTag_message, networkLinkControl->message() );
-    writer.writeOptionalElement( kml::kmlTag_linkName, networkLinkControl->linkName() );
-    writer.writeOptionalElement( kml::kmlTag_linkDescription, networkLinkControl->linkDescription() );
+    writer.writeStartElement(QString::fromUtf8(kml::kmlTag_NetworkLinkControl));
+    writer.writeOptionalElement(kml::kmlTag_minRefreshPeriod, QString::number(networkLinkControl->minRefreshPeriod()), "1");
+    writer.writeOptionalElement(kml::kmlTag_maxSessionLength, QString::number(networkLinkControl->maxSessionLength()), "2");
+    writer.writeOptionalElement(kml::kmlTag_cookie, networkLinkControl->cookie());
+    writer.writeOptionalElement(kml::kmlTag_message, networkLinkControl->message());
+    writer.writeOptionalElement(kml::kmlTag_linkName, networkLinkControl->linkName());
+    writer.writeOptionalElement(kml::kmlTag_linkDescription, networkLinkControl->linkDescription());
 
-    writer.writeStartElement( QString::fromUtf8(kml::kmlTag_linkSnippet) );
+    writer.writeStartElement(QString::fromUtf8(kml::kmlTag_linkSnippet));
 
-    if( networkLinkControl->maxLines() > 0 ) {
-        writer.writeAttribute( "maxLines", QString::number( networkLinkControl->maxLines() ) );
+    if (networkLinkControl->maxLines() > 0) {
+        writer.writeAttribute("maxLines", QString::number(networkLinkControl->maxLines()));
     }
 
-    writer.writeCharacters( networkLinkControl->linkSnippet() );
+    writer.writeCharacters(networkLinkControl->linkSnippet());
     writer.writeEndElement();
 
-    writer.writeOptionalElement( kml::kmlTag_expires, networkLinkControl->expires().toString( Qt::ISODate ) );
-    writeElement( &networkLinkControl->update(), writer );
+    writer.writeOptionalElement(kml::kmlTag_expires, networkLinkControl->expires().toString(Qt::ISODate));
+    writeElement(&networkLinkControl->update(), writer);
     writer.writeEndElement();
 
     return true;

@@ -15,7 +15,7 @@ namespace Marble
 class GeoDataRelationPrivate
 {
 public:
-    QSet<const GeoDataFeature*> m_features;
+    QSet<const GeoDataFeature *> m_features;
     OsmPlacemarkData m_osmData;
     QSet<qint64> m_memberIds;
 
@@ -26,9 +26,9 @@ public:
 
 QHash<QString, GeoDataRelation::RelationType> GeoDataRelationPrivate::s_relationTypes;
 
-GeoDataRelation::GeoDataRelation() :
-    GeoDataFeature(),
-    d_ptr(new GeoDataRelationPrivate)
+GeoDataRelation::GeoDataRelation()
+    : GeoDataFeature()
+    , d_ptr(new GeoDataRelationPrivate)
 {
     // nothing to do
 }
@@ -38,9 +38,9 @@ GeoDataRelation::~GeoDataRelation()
     delete d_ptr;
 }
 
-GeoDataRelation::GeoDataRelation(const GeoDataRelation &other) :
-    GeoDataFeature(other),
-    d_ptr(new GeoDataRelationPrivate)
+GeoDataRelation::GeoDataRelation(const GeoDataRelation &other)
+    : GeoDataFeature(other)
+    , d_ptr(new GeoDataRelationPrivate)
 {
     Q_D(GeoDataRelation);
     d->m_features = other.d_func()->m_features;

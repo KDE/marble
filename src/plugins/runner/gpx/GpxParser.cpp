@@ -6,10 +6,11 @@
 #include "GPXElementDictionary.h"
 #include "GeoDataDocument.h"
 
-namespace Marble {
+namespace Marble
+{
 
 GpxParser::GpxParser()
-    : GeoParser( 0 )
+    : GeoParser(0)
 {
 }
 
@@ -22,17 +23,17 @@ bool GpxParser::isValidRootElement()
     return isValidElement(gpx::gpxTag_gpx);
 }
 
-bool GpxParser::isValidElement(const QString& tagName) const
+bool GpxParser::isValidElement(const QString &tagName) const
 {
     if (!GeoParser::isValidElement(tagName))
         return false;
 
-    return (   namespaceUri() == QStringView(QString::fromUtf8(gpx::gpxTag_nameSpace10))
+    return (namespaceUri() == QStringView(QString::fromUtf8(gpx::gpxTag_nameSpace10))
             || namespaceUri() == QStringView(QString::fromUtf8(gpx::gpxTag_nameSpace11))
             || namespaceUri() == QStringView(QString::fromUtf8(gpx::gpxTag_nameSpaceGarminTrackPointExt1)));
 }
 
-GeoDocument* GpxParser::createDocument() const
+GeoDocument *GpxParser::createDocument() const
 {
     return new GeoDataDocument;
 }

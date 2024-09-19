@@ -5,20 +5,19 @@
 #include "MeasureConfigDialog.h"
 #include <QPushButton>
 
-namespace Marble {
+namespace Marble
+{
 
-MeasureConfigDialog::MeasureConfigDialog(QDialog *parent) :
-    QDialog(parent),
-    ui(new Ui::MeasureConfigDialog)
+MeasureConfigDialog::MeasureConfigDialog(QDialog *parent)
+    : QDialog(parent)
+    , ui(new Ui::MeasureConfigDialog)
 {
     ui->setupUi(this);
 
     QPushButton *apply = ui->m_buttonBox->button(QDialogButtonBox::Apply);
     connect(apply, SIGNAL(clicked()), this, SIGNAL(applied()));
-    connect(ui->m_modeCombo, SIGNAL(currentIndexChanged(int)),
-            this, SLOT(updateTabs()));
-    connect(ui->m_modeCombo, SIGNAL(currentIndexChanged(int)),
-            ui->tabWidget, SLOT(setCurrentIndex(int)));
+    connect(ui->m_modeCombo, SIGNAL(currentIndexChanged(int)), this, SLOT(updateTabs()));
+    connect(ui->m_modeCombo, SIGNAL(currentIndexChanged(int)), ui->tabWidget, SLOT(setCurrentIndex(int)));
 }
 
 MeasureConfigDialog::~MeasureConfigDialog()

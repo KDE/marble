@@ -17,5 +17,4 @@ class GeoDataTimePrimitivePrivate
 
 } // namespace Marble
 
-#endif //GEODATATIMEPRIMITIVEPRIVATE_H
-
+#endif // GEODATATIMEPRIMITIVEPRIVATE_H

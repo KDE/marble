@@ -11,7 +11,8 @@
 
 #include "GeoDataRelation.h"
 
-namespace Marble {
+namespace Marble
+{
 
 class RouteRelationModel : public QAbstractListModel
 {
@@ -32,13 +33,13 @@ public:
         RouteVisible
     };
 
-    explicit RouteRelationModel(QObject* parent = nullptr);
-    
+    explicit RouteRelationModel(QObject *parent = nullptr);
+
     void setRelations(const QSet<const GeoDataRelation *> &relations);
-    
-    int rowCount(const QModelIndex & parent = QModelIndex()) const override;
-    
-    QVariant data(const QModelIndex & index, int role = Qt::DisplayRole) const override;
+
+    int rowCount(const QModelIndex &parent = QModelIndex()) const override;
+
+    QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
 
 protected:
     QHash<int, QByteArray> roleNames() const override;
@@ -46,7 +47,7 @@ protected:
 private:
     static QString svgFile(const QString &path);
 
-    QVector<const Marble::GeoDataRelation*> m_relations;
+    QVector<const Marble::GeoDataRelation *> m_relations;
     QMap<QString, QString> m_networks;
 };
 

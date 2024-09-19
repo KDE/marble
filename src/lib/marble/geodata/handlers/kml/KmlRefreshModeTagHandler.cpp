@@ -1,16 +1,16 @@
 #include "KmlRefreshModeTagHandler.h"
-#include "MarbleDebug.h"
-#include "KmlElementDictionary.h"
 #include "GeoDataLink.h"
 #include "GeoParser.h"
+#include "KmlElementDictionary.h"
+#include "MarbleDebug.h"
 
 namespace Marble
 {
 namespace kml
 {
-KML_DEFINE_TAG_HANDLER( refreshMode )
+KML_DEFINE_TAG_HANDLER(refreshMode)
 
-GeoNode* KmlrefreshModeTagHandler::parse( GeoParser& parser ) const
+GeoNode *KmlrefreshModeTagHandler::parse(GeoParser &parser) const
 {
     Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1String(kmlTag_refreshMode)));
 
@@ -18,7 +18,7 @@ GeoNode* KmlrefreshModeTagHandler::parse( GeoParser& parser ) const
     QString content = parser.readElementText().trimmed();
     GeoDataLink::RefreshMode mode;
 
-    if ( parentItem.is<GeoDataLink>()) {
+    if (parentItem.is<GeoDataLink>()) {
         if (content == QLatin1String("onChange")) {
             mode = GeoDataLink::OnChange;
         } else if (content == QLatin1String("onExpire")) {
@@ -28,9 +28,9 @@ GeoNode* KmlrefreshModeTagHandler::parse( GeoParser& parser ) const
         } else {
             mode = GeoDataLink::OnChange;
             mDebug() << "Value " << content << "set in kml file is invalid."
-            << "Value of <refreshMode> has been reset to onChange" ;
+                     << "Value of <refreshMode> has been reset to onChange";
         }
-        parentItem.nodeAs<GeoDataLink>()->setRefreshMode( mode );
+        parentItem.nodeAs<GeoDataLink>()->setRefreshMode(mode);
     }
 
     return nullptr;
@@ -38,4 +38,3 @@ GeoNode* KmlrefreshModeTagHandler::parse( GeoParser& parser ) const
 
 }
 }
-

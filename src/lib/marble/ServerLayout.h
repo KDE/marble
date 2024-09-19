@@ -17,7 +17,7 @@ class TileId;
 class ServerLayout
 {
 public:
-    explicit ServerLayout( GeoSceneTileDataset *textureLayer );
+    explicit ServerLayout(GeoSceneTileDataset *textureLayer);
     virtual ~ServerLayout();
 
     /**
@@ -28,7 +28,7 @@ public:
      * @param id Marble-specific ID of requested tile
      * @return completed URL for requested tile id
      */
-    virtual QUrl downloadUrl( const QUrl &prototypeUrl, const TileId &id ) const = 0;
+    virtual QUrl downloadUrl(const QUrl &prototypeUrl, const TileId &id) const = 0;
 
     /**
      * Returns the name of the server layout to be used as the value in the
@@ -48,12 +48,12 @@ protected:
 class MarbleServerLayout : public ServerLayout
 {
 public:
-    explicit MarbleServerLayout( GeoSceneTileDataset *textureLayer );
+    explicit MarbleServerLayout(GeoSceneTileDataset *textureLayer);
 
     /**
      * Completes the path of the @p prototypeUrl and returns it.
      */
-    QUrl downloadUrl( const QUrl &prototypeUrl, const TileId & ) const override;
+    QUrl downloadUrl(const QUrl &prototypeUrl, const TileId &) const override;
 
     QString name() const override;
 };
@@ -61,13 +61,13 @@ public:
 class OsmServerLayout : public ServerLayout
 {
 public:
-    explicit OsmServerLayout( GeoSceneTileDataset *textureLayer );
+    explicit OsmServerLayout(GeoSceneTileDataset *textureLayer);
 
     /**
      * Appends %zoomLevel/%x/%y.%suffix to the path of the @p prototypeUrl and returns
      * the result.
      */
-    QUrl downloadUrl( const QUrl &prototypeUrl, const TileId & ) const override;
+    QUrl downloadUrl(const QUrl &prototypeUrl, const TileId &) const override;
 
     QString name() const override;
 };
@@ -75,7 +75,7 @@ public:
 class CustomServerLayout : public ServerLayout
 {
 public:
-    explicit CustomServerLayout( GeoSceneTileDataset *texture );
+    explicit CustomServerLayout(GeoSceneTileDataset *texture);
 
     /**
      * Replaces escape sequences in the @p prototypeUrl by the values in @p id
@@ -83,7 +83,7 @@ public:
      *
      * Escape sequences are: {zoomLevel}, {x}, and {y}.
      */
-    QUrl downloadUrl( const QUrl &prototypeUrl, const TileId &id ) const override;
+    QUrl downloadUrl(const QUrl &prototypeUrl, const TileId &id) const override;
 
     QString name() const override;
 };
@@ -91,7 +91,7 @@ public:
 class WmsServerLayout : public ServerLayout
 {
 public:
-    explicit WmsServerLayout( GeoSceneTileDataset *texture );
+    explicit WmsServerLayout(GeoSceneTileDataset *texture);
 
     /**
      * Adds WMS query items to the @p prototypeUrl and returns the result.
@@ -101,7 +101,7 @@ public:
      * The following items are only added if they are not already specified in the dgml file:
      * styles, format, srs, layers.
      */
-    QUrl downloadUrl( const QUrl &prototypeUrl, const Marble::TileId &tileId ) const override;
+    QUrl downloadUrl(const QUrl &prototypeUrl, const Marble::TileId &tileId) const override;
 
     QString name() const override;
 
@@ -111,12 +111,12 @@ public:
 class WmtsServerLayout : public ServerLayout
 {
 public:
-    explicit WmtsServerLayout( GeoSceneTileDataset *texture );
+    explicit WmtsServerLayout(GeoSceneTileDataset *texture);
 
     /**
      * Adds WMTS query items to the @p prototypeUrl and returns the result.
      */
-    QUrl downloadUrl( const QUrl &prototypeUrl, const Marble::TileId &tileId ) const override;
+    QUrl downloadUrl(const QUrl &prototypeUrl, const Marble::TileId &tileId) const override;
 
     QString name() const override;
 
@@ -126,19 +126,19 @@ public:
 class QuadTreeServerLayout : public ServerLayout
 {
 public:
-    explicit QuadTreeServerLayout( GeoSceneTileDataset* textureLayer );
-    QUrl downloadUrl( const QUrl &, const Marble::TileId & ) const override;
+    explicit QuadTreeServerLayout(GeoSceneTileDataset *textureLayer);
+    QUrl downloadUrl(const QUrl &, const Marble::TileId &) const override;
 
     QString name() const override;
 
 private:
-    static QString encodeQuadTree( const Marble::TileId & );
+    static QString encodeQuadTree(const Marble::TileId &);
 };
 
 class TmsServerLayout : public ServerLayout
 {
 public:
-    explicit TmsServerLayout( GeoSceneTileDataset *textureLayer );
+    explicit TmsServerLayout(GeoSceneTileDataset *textureLayer);
 
     /**
      * Appends %zoomLevel/%x/2^%zoomLevel-%y-1.%suffix to the path of the @p prototypeUrl and returns
@@ -146,7 +146,7 @@ public:
      * TMS (TileMapService) maps take the origin for y coordinate at the bottom of the map,
      * as opposed to what Marble and OpenStreepMap (SlippyTiles) do.
      */
-    QUrl downloadUrl( const QUrl &prototypeUrl, const TileId & ) const override;
+    QUrl downloadUrl(const QUrl &prototypeUrl, const TileId &) const override;
 
     QString name() const override;
 };

@@ -5,15 +5,15 @@
 
 #include "TestPlugin.h"
 
-#include <QColor>
-#include <QPixmap>
-#include <QIcon>
-#include <QRadialGradient>
-#include "MarbleDirs.h"
-#include "GeoPainter.h"
 #include "GeoDataCoordinates.h"
 #include "GeoDataLineString.h"
 #include "GeoDataLinearRing.h"
+#include "GeoPainter.h"
+#include "MarbleDirs.h"
+#include <QColor>
+#include <QIcon>
+#include <QPixmap>
+#include <QRadialGradient>
 
 namespace Marble
 {
@@ -32,7 +32,6 @@ TestPlugin::TestPlugin(const MarbleModel *marbleModel)
     setVisible(true);
 }
 
-
 QStringList TestPlugin::backendTypes() const
 {
     return QStringList(QStringLiteral("test"));
@@ -50,12 +49,12 @@ QStringList TestPlugin::renderPosition() const
 
 QString TestPlugin::name() const
 {
-    return tr( "Test Plugin" );
+    return tr("Test Plugin");
 }
 
 QString TestPlugin::guiString() const
 {
-    return tr( "&Test Plugin" );
+    return tr("&Test Plugin");
 }
 
 QString TestPlugin::nameId() const
@@ -70,7 +69,7 @@ QString TestPlugin::version() const
 
 QString TestPlugin::description() const
 {
-    return tr( "This is a simple test plugin." );
+    return tr("This is a simple test plugin.");
 }
 
 QString TestPlugin::copyrightYears() const
@@ -80,26 +79,24 @@ QString TestPlugin::copyrightYears() const
 
 QVector<PluginAuthor> TestPlugin::pluginAuthors() const
 {
-    return QVector<PluginAuthor>()
-            << PluginAuthor(QStringLiteral("Torsten Rahn"), QStringLiteral("tackat@kde.org"));
+    return QVector<PluginAuthor>() << PluginAuthor(QStringLiteral("Torsten Rahn"), QStringLiteral("tackat@kde.org"));
 }
 
-QIcon TestPlugin::icon () const
+QIcon TestPlugin::icon() const
 {
     return QIcon();
 }
 
-
-void TestPlugin::initialize ()
+void TestPlugin::initialize()
 {
 }
 
-bool TestPlugin::isInitialized () const
+bool TestPlugin::isInitialized() const
 {
     return true;
 }
 
-bool TestPlugin::render( GeoPainter *painter, ViewportParams *viewport, const QString& renderPos, GeoSceneLayer * layer )
+bool TestPlugin::render(GeoPainter *painter, ViewportParams *viewport, const QString &renderPos, GeoSceneLayer *layer)
 {
     Q_UNUSED(viewport);
     Q_UNUSED(renderPos);
@@ -107,10 +104,10 @@ bool TestPlugin::render( GeoPainter *painter, ViewportParams *viewport, const QS
 
     // Example: draw a straight line
 
-    GeoDataCoordinates northpole1( 0.0, 90.0, 0.0, GeoDataCoordinates::Degree );
-    GeoDataCoordinates northpole2( 0.0, 90.0, 3000000.0, GeoDataCoordinates::Degree );
+    GeoDataCoordinates northpole1(0.0, 90.0, 0.0, GeoDataCoordinates::Degree);
+    GeoDataCoordinates northpole2(0.0, 90.0, 3000000.0, GeoDataCoordinates::Degree);
 
-    painter->setPen( QColor( 255, 255, 255, 255 ) );
+    painter->setPen(QColor(255, 255, 255, 255));
 
     GeoDataLineString poleLineString;
     poleLineString << northpole1 << northpole2;
@@ -118,49 +115,48 @@ bool TestPlugin::render( GeoPainter *painter, ViewportParams *viewport, const QS
 
     // Example: draw a straight line string ("polyline")
 
-    GeoDataCoordinates madrid( -3.7, 40.4, 0.0, GeoDataCoordinates::Degree );
-    GeoDataCoordinates flensburg( 9.4, 54.8, 0.0, GeoDataCoordinates::Degree );
-    GeoDataCoordinates linkoeping( 15.6, 58.4, 0.0, GeoDataCoordinates::Degree );
-    GeoDataCoordinates istanbul( 28.0, 41.0, 0.0, GeoDataCoordinates::Degree );
-    GeoDataCoordinates moscow( 37.6, 55.75, 0.0, GeoDataCoordinates::Degree );
-    GeoDataCoordinates brasilia( -47.9, -15.75, 0.0, GeoDataCoordinates::Degree );
-    GeoDataCoordinates orbit( 105.6, 0.0, 3000000.0, GeoDataCoordinates::Degree );
-    GeoDataCoordinates easteregg( 10.0, 70.0, 0.0, GeoDataCoordinates::Degree );
-    GeoDataCoordinates easteregg2( 179.0, -40.0, 0.0, GeoDataCoordinates::Degree );
+    GeoDataCoordinates madrid(-3.7, 40.4, 0.0, GeoDataCoordinates::Degree);
+    GeoDataCoordinates flensburg(9.4, 54.8, 0.0, GeoDataCoordinates::Degree);
+    GeoDataCoordinates linkoeping(15.6, 58.4, 0.0, GeoDataCoordinates::Degree);
+    GeoDataCoordinates istanbul(28.0, 41.0, 0.0, GeoDataCoordinates::Degree);
+    GeoDataCoordinates moscow(37.6, 55.75, 0.0, GeoDataCoordinates::Degree);
+    GeoDataCoordinates brasilia(-47.9, -15.75, 0.0, GeoDataCoordinates::Degree);
+    GeoDataCoordinates orbit(105.6, 0.0, 3000000.0, GeoDataCoordinates::Degree);
+    GeoDataCoordinates easteregg(10.0, 70.0, 0.0, GeoDataCoordinates::Degree);
+    GeoDataCoordinates easteregg2(179.0, -40.0, 0.0, GeoDataCoordinates::Degree);
 
-    painter->setPen( QColor( 200, 200, 200, 255 ) );
+    painter->setPen(QColor(200, 200, 200, 255));
 
     GeoDataLineString lineString;
     lineString << madrid << flensburg << linkoeping << istanbul << moscow;
 
-    painter->drawPolyline( lineString ); 
+    painter->drawPolyline(lineString);
 
     // Example: draw plain filled circles with text on earth and in earth orbit
 
-    painter->setPen( QColor( 99, 198, 99, 255 ) );
-    painter->setBrush( QColor( 99, 198, 99, 80 ) );
-    painter->drawEllipse( flensburg, 30, 30 ); 
+    painter->setPen(QColor(99, 198, 99, 255));
+    painter->setBrush(QColor(99, 198, 99, 80));
+    painter->drawEllipse(flensburg, 30, 30);
 
-    painter->drawText( flensburg, "Torsten" );
+    painter->drawText(flensburg, "Torsten");
 
-    painter->setPen( QColor( 198, 99, 99, 255 ) );
-    painter->setBrush( QColor( 198, 99, 99, 80 ) );
-    painter->drawEllipse( linkoeping, 30, 30 ); 
+    painter->setPen(QColor(198, 99, 99, 255));
+    painter->setBrush(QColor(198, 99, 99, 80));
+    painter->drawEllipse(linkoeping, 30, 30);
 
-    painter->drawText( linkoeping, "Inge" );
+    painter->drawText(linkoeping, "Inge");
 
-    painter->drawEllipse( easteregg, 20, 10, true ); 
+    painter->drawEllipse(easteregg, 20, 10, true);
 
-    painter->drawText( easteregg, "Easter Egg" );
+    painter->drawText(easteregg, "Easter Egg");
 
-    painter->drawEllipse( easteregg2, 20, 20, true );
+    painter->drawEllipse(easteregg2, 20, 20, true);
 
+    painter->setPen(QColor(99, 99, 198, 255));
+    painter->setBrush(QColor(99, 99, 198, 80));
+    painter->drawEllipse(orbit, 20, 20);
 
-    painter->setPen( QColor( 99, 99, 198, 255 ) );
-    painter->setBrush( QColor( 99, 99, 198, 80 ) );
-    painter->drawEllipse( orbit, 20, 20 ); 
-
-    painter->drawText( orbit, "Claudiu" );
+    painter->drawText(orbit, "Claudiu");
 
     // Example: draw plain pixmaps
 

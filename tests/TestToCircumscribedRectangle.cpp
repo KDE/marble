@@ -4,9 +4,8 @@
 // SPDX-FileCopyrightText: 2013 Adrian Draghici <draghici.adrian.b@gmail.com>
 //
 
-
-#include "MarbleGlobal.h"
 #include "GeoDataLatLonBox.h"
+#include "MarbleGlobal.h"
 #include "TestUtils.h"
 
 namespace Marble
@@ -23,16 +22,16 @@ private Q_SLOTS:
 
 void TestToCircumscribedRectangle::testToCircumscribedRectangle_data()
 {
-    QTest::addColumn<qreal>( "north" );
-    QTest::addColumn<qreal>( "south" );
-    QTest::addColumn<qreal>( "east" );
-    QTest::addColumn<qreal>( "west" );
-    QTest::addColumn<qreal>( "rotation" );
+    QTest::addColumn<qreal>("north");
+    QTest::addColumn<qreal>("south");
+    QTest::addColumn<qreal>("east");
+    QTest::addColumn<qreal>("west");
+    QTest::addColumn<qreal>("rotation");
 
-    QTest::addColumn<qreal>( "expectedNorth" );
-    QTest::addColumn<qreal>( "expectedSouth" );
-    QTest::addColumn<qreal>( "expectedEast" );
-    QTest::addColumn<qreal>( "expectedWest" );
+    QTest::addColumn<qreal>("expectedNorth");
+    QTest::addColumn<qreal>("expectedSouth");
+    QTest::addColumn<qreal>("expectedEast");
+    QTest::addColumn<qreal>("expectedWest");
 
     addRow() << 5.0 << -5.0 << 5.0 << -5.0 << 45.0 << 7.07107 << -7.07107 << 7.07107 << -7.07107;
     addRow() << 50.0 << 30.0 << 170.0 << 160.0 << 90.0 << 45.0 << 35.0 << 175.0 << 155.0;
@@ -43,30 +42,30 @@ void TestToCircumscribedRectangle::testToCircumscribedRectangle_data()
 
 void TestToCircumscribedRectangle::testToCircumscribedRectangle()
 {
-    QFETCH( qreal, north );
-    QFETCH( qreal, south );
-    QFETCH( qreal, east );
-    QFETCH( qreal, west );
-    QFETCH( qreal, rotation );
+    QFETCH(qreal, north);
+    QFETCH(qreal, south);
+    QFETCH(qreal, east);
+    QFETCH(qreal, west);
+    QFETCH(qreal, rotation);
 
-    QFETCH( qreal, expectedNorth );
-    QFETCH( qreal, expectedSouth );
-    QFETCH( qreal, expectedEast );
-    QFETCH( qreal, expectedWest );
+    QFETCH(qreal, expectedNorth);
+    QFETCH(qreal, expectedSouth);
+    QFETCH(qreal, expectedEast);
+    QFETCH(qreal, expectedWest);
 
-    GeoDataLatLonBox box = GeoDataLatLonBox( north, south, east, west, GeoDataCoordinates::Degree );
-    box.setRotation( rotation, GeoDataCoordinates::Degree );
+    GeoDataLatLonBox box = GeoDataLatLonBox(north, south, east, west, GeoDataCoordinates::Degree);
+    box.setRotation(rotation, GeoDataCoordinates::Degree);
 
     GeoDataLatLonBox circumscribedRectangle = box.toCircumscribedRectangle();
 
-    QFUZZYCOMPARE( circumscribedRectangle.north()  * RAD2DEG, expectedNorth, 0.00001 );
-    QFUZZYCOMPARE( circumscribedRectangle.south() * RAD2DEG, expectedSouth, 0.00001  );
-    QFUZZYCOMPARE( circumscribedRectangle.east() * RAD2DEG, expectedEast, 0.00001  );
-    QFUZZYCOMPARE( circumscribedRectangle.west() * RAD2DEG, expectedWest, 0.00001  );
+    QFUZZYCOMPARE(circumscribedRectangle.north() * RAD2DEG, expectedNorth, 0.00001);
+    QFUZZYCOMPARE(circumscribedRectangle.south() * RAD2DEG, expectedSouth, 0.00001);
+    QFUZZYCOMPARE(circumscribedRectangle.east() * RAD2DEG, expectedEast, 0.00001);
+    QFUZZYCOMPARE(circumscribedRectangle.west() * RAD2DEG, expectedWest, 0.00001);
 }
 
 }
 
-QTEST_MAIN( Marble::TestToCircumscribedRectangle )
+QTEST_MAIN(Marble::TestToCircumscribedRectangle)
 
 #include "TestToCircumscribedRectangle.moc"

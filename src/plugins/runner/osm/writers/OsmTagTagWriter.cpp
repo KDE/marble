@@ -3,10 +3,10 @@
 // SPDX-FileCopyrightText: 2015 Stanciu Marius-Valeriu <stanciumarius94@gmail.com>
 //
 
-//Self
+// Self
 #include "OsmTagTagWriter.h"
 
-//Marble
+// Marble
 #include "GeoWriter.h"
 #include "OsmElementDictionary.h"
 #include "osm/OsmPlacemarkData.h"
@@ -16,7 +16,7 @@ namespace Marble
 
 QSet<QString> OsmTagTagWriter::m_blacklist;
 
-void OsmTagTagWriter::writeTags( const OsmPlacemarkData& osmData, GeoWriter &writer )
+void OsmTagTagWriter::writeTags(const OsmPlacemarkData &osmData, GeoWriter &writer)
 {
     if (m_blacklist.isEmpty()) {
         m_blacklist << QStringLiteral("mx:version");
@@ -31,11 +31,11 @@ void OsmTagTagWriter::writeTags( const OsmPlacemarkData& osmData, GeoWriter &wri
     auto it = osmData.tagsBegin();
     auto end = osmData.tagsEnd();
 
-    for ( ; it != end; ++it ) {
+    for (; it != end; ++it) {
         if (!m_blacklist.contains(it.key())) {
-            writer.writeStartElement( QString::fromUtf8(osm::osmTag_tag) );
-            writer.writeAttribute( "k", it.key() );
-            writer.writeAttribute( "v", it.value() );
+            writer.writeStartElement(QString::fromUtf8(osm::osmTag_tag));
+            writer.writeAttribute("k", it.key());
+            writer.writeAttribute("v", it.value());
             writer.writeEndElement();
         }
     }

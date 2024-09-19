@@ -30,12 +30,12 @@ class Speedometer : public AbstractFloatItem
 {
     Q_OBJECT
     Q_PLUGIN_METADATA(IID "org.kde.marble.Speedometer")
-    Q_INTERFACES( Marble::RenderPluginInterface )
-    MARBLE_PLUGIN( Speedometer )
-    
- public:
+    Q_INTERFACES(Marble::RenderPluginInterface)
+    MARBLE_PLUGIN(Speedometer)
+
+public:
     Speedometer();
-    explicit Speedometer( const MarbleModel *marbleModel );
+    explicit Speedometer(const MarbleModel *marbleModel);
     ~Speedometer() override;
 
     QStringList backendTypes() const override;
@@ -54,19 +54,19 @@ class Speedometer : public AbstractFloatItem
 
     QString copyrightYears() const override;
 
-    QIcon icon () const override;
+    QIcon icon() const override;
 
-    void initialize () override;
+    void initialize() override;
 
-    bool isInitialized () const override;
+    bool isInitialized() const override;
 
- private Q_SLOTS:
-    void updateLocation( const GeoDataCoordinates& coordinates, qreal speed );
+private Q_SLOTS:
+    void updateLocation(const GeoDataCoordinates &coordinates, qreal speed);
 
- private:
-    MarbleLocale* m_locale;
+private:
+    MarbleLocale *m_locale;
     Ui::Speedometer m_widget;
-    WidgetGraphicsItem* m_widgetItem;
+    WidgetGraphicsItem *m_widgetItem;
 };
 
 }

@@ -11,8 +11,8 @@
 #include <QList>
 #include <QString>
 
-#include "DgmlElementDictionary.h"
 #include "DgmlAttributeDictionary.h"
+#include "DgmlElementDictionary.h"
 #include "GeoParser.h"
 #include "GeoSceneGeodata.h"
 
@@ -22,7 +22,7 @@ namespace dgml
 {
 DGML_DEFINE_TAG_HANDLER(Brush)
 
-GeoNode* DgmlBrushTagHandler::parse(GeoParser& parser) const
+GeoNode *DgmlBrushTagHandler::parse(GeoParser &parser) const
 {
     // Check whether the tag is valid
     Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1String(dgmlTag_Brush)));
@@ -33,34 +33,32 @@ GeoNode* DgmlBrushTagHandler::parse(GeoParser& parser) const
 
     QBrush brush;
 
-    if ( !color.isEmpty() && QColor( color ).isValid() ) {
-        QColor brushColor( color );
+    if (!color.isEmpty() && QColor(color).isValid()) {
+        QColor brushColor(color);
         if (color.contains(QLatin1String("transparent"))) {
-            brushColor.setAlphaF( 0.0 );
+            brushColor.setAlphaF(0.0);
+        } else {
+            brushColor.setAlphaF(alpha);
         }
-        else {
-            brushColor.setAlphaF( alpha );
-        }
-        brush.setColor( brushColor );
+        brush.setColor(brushColor);
     }
 
     // Checking for parent item
     GeoStackItem parentItem = parser.parentElement();
-    if ( parentItem.represents( dgmlTag_Vector )
-         || parentItem.represents( dgmlTag_Geodata ) ) {
+    if (parentItem.represents(dgmlTag_Vector) || parentItem.represents(dgmlTag_Geodata)) {
         GeoSceneGeodata *geodata = parentItem.nodeAs<GeoSceneGeodata>();
-        geodata->setBrush( brush );
-        if ( !colorMap.isEmpty() ) {
+        geodata->setBrush(brush);
+        if (!colorMap.isEmpty()) {
             const QStringList colorString = colorMap.split(QLatin1Char(','));
 
             QVector<QColor> colorList;
             colorList.reserve(colorString.size());
-            for(const QString& colorName: colorString) {
+            for (const QString &colorName : colorString) {
                 colorList.append(QColor(colorName));
             }
-            geodata->setColors( colorList );
+            geodata->setColors(colorList);
         }
-        geodata->setAlpha( alpha );
+        geodata->setAlpha(alpha);
     }
 
     return nullptr;

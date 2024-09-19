@@ -10,9 +10,8 @@
 
 #include <QPointer>
 
-#include "SceneGraphicsItem.h"
 #include "GeoDataCoordinates.h"
-
+#include "SceneGraphicsItem.h"
 
 namespace Marble
 {
@@ -30,7 +29,7 @@ class AreaAnnotation : public SceneGraphicsItem
     friend class MergingPolygonNodesAnimation;
 
 public:
-    explicit AreaAnnotation( GeoDataPlacemark *placemark );
+    explicit AreaAnnotation(GeoDataPlacemark *placemark);
 
     ~AreaAnnotation() override;
 
@@ -38,7 +37,7 @@ public:
      * @brief Paints the nodes on the screen and updates the regions which correspond
      * to each node using the given GeoPainter.
      */
-    void paint( GeoPainter *painter, const ViewportParams *viewport, const QString &layer, int tileZoomLevel ) override;
+    void paint(GeoPainter *painter, const ViewportParams *viewport, const QString &layer, int tileZoomLevel) override;
 
     /**
      * @brief Returns true if the given QPoint is contained by the current polygon. Note
@@ -48,18 +47,18 @@ public:
      * polygon if either polygon's interior, the outer nodes or the inner nodes contain
      * it).
      */
-    bool containsPoint( const QPoint &point ) const override;
+    bool containsPoint(const QPoint &point) const override;
 
     /**
      * @brief It is used so far to remove the hover effect while being in the
      * AddingPolylineNodes state (@see SceneGraphicsItem::dealWithItemChange documentation).
      */
-    void dealWithItemChange( const SceneGraphicsItem *other ) override;
+    void dealWithItemChange(const SceneGraphicsItem *other) override;
 
     /**
      * @brief Moves the whole polygon to the destination coordinates.
      */
-    void move( const GeoDataCoordinates &source, const GeoDataCoordinates &destination ) override;
+    void move(const GeoDataCoordinates &source, const GeoDataCoordinates &destination) override;
 
     /**
      * @brief Changes the busy state of the object according to @p enabled. It is mostly
@@ -69,7 +68,7 @@ public:
      *
      * @param enabled the busy state of the object
      */
-    void setBusy( bool enabled );
+    void setBusy(bool enabled);
 
     /**
      * @brief Returns whether the annotation is 'busy' or not - this usually means that something
@@ -127,15 +126,15 @@ protected:
      * SceneGraphicsItem::sceneEvent() (@see Template Method pattern). Each of these
      * event handlers are structured according to the state.
      */
-    bool mousePressEvent( QMouseEvent *event ) override;
-    bool mouseMoveEvent( QMouseEvent *event ) override;
-    bool mouseReleaseEvent( QMouseEvent *event ) override;
+    bool mousePressEvent(QMouseEvent *event) override;
+    bool mouseMoveEvent(QMouseEvent *event) override;
+    bool mouseReleaseEvent(QMouseEvent *event) override;
 
     /**
      * @brief Protected method which applies the Polygons modifications when changing
      * states.
      */
-    void dealWithStateChange( SceneGraphicsItem::ActionState previousState ) override;
+    void dealWithStateChange(SceneGraphicsItem::ActionState previousState) override;
 
 private:
     /**
@@ -151,7 +150,7 @@ private:
      * initializes the m_outerNodesList by creating the PolylineNodes.
      * @see updateRegions() method for more detailed explanation.
      */
-    void setupRegionsLists( GeoPainter *painter );
+    void setupRegionsLists(GeoPainter *painter);
 
     /**
      * @brief As briefly mentioned above, the PolylineNodes instances are not created at
@@ -160,13 +159,13 @@ private:
      * method called. We need the GeoPainter for doing this because we have to get the
      * ellipse around the GeoDataCoordinates.
      */
-    void updateRegions( GeoPainter *painter );
+    void updateRegions(GeoPainter *painter);
 
     /**
      * @brief It iterates through all nodes and paints them on the map. It takes into
      * consideration the active flags of each PolylineNode.
      */
-    void drawNodes( GeoPainter *painter );
+    void drawNodes(GeoPainter *painter);
 
     /**
      * @brief The following functions test whether the given @p point is contained by
@@ -175,46 +174,46 @@ private:
      * within the implementation and has the following interpretation: the node which
      * contains the given point is the '.second'h node from the '.first'h inner boundary.
      */
-    int outerNodeContains( const QPoint &point ) const;
-    QPair<int, int> innerNodeContains( const QPoint &point ) const;
-    QPair<int, int> virtualNodeContains( const QPoint &point ) const;
-    int innerBoundsContain( const QPoint &point ) const;
-    bool polygonContains( const QPoint &point ) const;
+    int outerNodeContains(const QPoint &point) const;
+    QPair<int, int> innerNodeContains(const QPoint &point) const;
+    QPair<int, int> virtualNodeContains(const QPoint &point) const;
+    int innerBoundsContain(const QPoint &point) const;
+    bool polygonContains(const QPoint &point) const;
 
     /**
      * @brief It is called from processOnMove functions and deals with polygons
      * hovering.
      */
-    bool dealWithHovering( QMouseEvent *mouseEvent );
+    bool dealWithHovering(QMouseEvent *mouseEvent);
 
     /**
      * @brief Each state has its corresponding event handler, since in each state the
      * item may behave differently. These are the event handlers for the Editing state.
      */
-    bool processEditingOnPress( QMouseEvent *mouseEvent );
-    bool processEditingOnMove( QMouseEvent *mouseEvent );
-    bool processEditingOnRelease( QMouseEvent *mouseEvent );
+    bool processEditingOnPress(QMouseEvent *mouseEvent);
+    bool processEditingOnMove(QMouseEvent *mouseEvent);
+    bool processEditingOnRelease(QMouseEvent *mouseEvent);
 
     /**
      * @brief These are the event handlers for the AddingPolygonHole state.
      */
-    bool processAddingHoleOnPress( QMouseEvent *mouseEvent );
+    bool processAddingHoleOnPress(QMouseEvent *mouseEvent);
     static bool processAddingHoleOnMove(QMouseEvent *mouseEvent);
     static bool processAddingHoleOnRelease(QMouseEvent *mouseEvent);
 
     /**
      * @brief These are the event handlers for the MergingPolylineNodes state.
      */
-    bool processMergingOnPress( QMouseEvent *mouseEvent );
-    bool processMergingOnMove( QMouseEvent *mouseEvent );
+    bool processMergingOnPress(QMouseEvent *mouseEvent);
+    bool processMergingOnMove(QMouseEvent *mouseEvent);
     static bool processMergingOnRelease(QMouseEvent *mouseEvent);
 
     /**
      * @brief These are the event handlers for the AddingPolylineNodes state.
      */
-    bool processAddingNodesOnPress( QMouseEvent *mouseEvent );
-    bool processAddingNodesOnMove( QMouseEvent *mouseEvent );
-    bool processAddingNodesOnRelease( QMouseEvent *mouseEvent );
+    bool processAddingNodesOnPress(QMouseEvent *mouseEvent);
+    bool processAddingNodesOnMove(QMouseEvent *mouseEvent);
+    bool processAddingNodesOnRelease(QMouseEvent *mouseEvent);
 
     /**
      * @brief Since they are used in many functions, the size and color of nodes for each
@@ -231,11 +230,11 @@ private:
     bool m_regionsInitialized;
     bool m_busy;
 
-    QVector<PolylineNode>            m_outerNodesList;
-    QVector<PolylineNode>            m_outerVirtualNodes;
-    QVector< QVector<PolylineNode> > m_innerNodesList;
-    QVector< QVector<PolylineNode> > m_innerVirtualNodes;
-    QVector<QRegion>                 m_boundariesList;
+    QVector<PolylineNode> m_outerNodesList;
+    QVector<PolylineNode> m_outerVirtualNodes;
+    QVector<QVector<PolylineNode>> m_innerNodesList;
+    QVector<QVector<PolylineNode>> m_innerVirtualNodes;
+    QVector<QRegion> m_boundariesList;
 
     // Used in the Editing state
     enum EditingInteractingObject {
@@ -243,14 +242,14 @@ private:
         InteractingNode,
         InteractingPolygon
     };
-    GeoDataCoordinates       m_movedPointCoords;
-    QPair<int, int>          m_clickedNodeIndexes;
-    QPair<int, int>          m_hoveredNode;
+    GeoDataCoordinates m_movedPointCoords;
+    QPair<int, int> m_clickedNodeIndexes;
+    QPair<int, int> m_hoveredNode;
     EditingInteractingObject m_interactingObj;
 
     // Used in Merging Nodes state
-    QPair<int, int>    m_firstMergedNode;
-    QPair<int, int>    m_secondMergedNode;
+    QPair<int, int> m_firstMergedNode;
+    QPair<int, int> m_secondMergedNode;
     QPointer<MergingPolygonNodesAnimation> m_animation;
 
     // Used in Adding Nodes state
@@ -265,7 +264,7 @@ private:
     // Due to the way the node appending is done (by rotating the vector which
     // contains the coordinates), we can be sure that the node we want to adjust
     // is every time the last one.
-    int             m_adjustedNode;
+    int m_adjustedNode;
 };
 
 }

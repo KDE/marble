@@ -10,7 +10,8 @@
 
 #include <QWidget>
 
-namespace Marble {
+namespace Marble
+{
 
 class GeoDataPlacemark;
 class MarbleWidget;
@@ -20,20 +21,19 @@ class MARBLE_EXPORT SearchWidget : public QWidget
 {
     Q_OBJECT
 public:
-    explicit SearchWidget( QWidget * parent = nullptr, Qt::WindowFlags flags = Qt::WindowFlags() );
+    explicit SearchWidget(QWidget *parent = nullptr, Qt::WindowFlags flags = Qt::WindowFlags());
 
-    void setMarbleWidget( MarbleWidget* widget );
+    void setMarbleWidget(MarbleWidget *widget);
 
     ~SearchWidget() override;
 
 private:
-    Q_PRIVATE_SLOT( d, void setSearchResult( const QVector<GeoDataPlacemark*>& ) )
-    Q_PRIVATE_SLOT( d, void search( const QString &searchTerm, SearchMode searchMode ) )
-    Q_PRIVATE_SLOT( d, void centerMapOn( const QModelIndex &index ) )
-    Q_PRIVATE_SLOT( d, void handlePlanetChange() )
+    Q_PRIVATE_SLOT(d, void setSearchResult(const QVector<GeoDataPlacemark *> &))
+    Q_PRIVATE_SLOT(d, void search(const QString &searchTerm, SearchMode searchMode))
+    Q_PRIVATE_SLOT(d, void centerMapOn(const QModelIndex &index))
+    Q_PRIVATE_SLOT(d, void handlePlanetChange())
 
-    SearchWidgetPrivate* const d;
-
+    SearchWidgetPrivate *const d;
 };
 
 }

@@ -5,18 +5,18 @@
 
 #include <QApplication>
 
-#include <marble/MarbleWidget.h>
 #include <marble/GeoPainter.h>
+#include <marble/MarbleWidget.h>
 
 using namespace Marble;
 
 class MyMarbleWidget : public MarbleWidget
 {
 public:
-    void customPaint(GeoPainter* painter) override;
+    void customPaint(GeoPainter *painter) override;
 };
 
-void MyMarbleWidget::customPaint(GeoPainter* painter)
+void MyMarbleWidget::customPaint(GeoPainter *painter)
 {
     GeoDataCoordinates home(8.4, 49.0, 0.0, GeoDataCoordinates::Degree);
     painter->setPen(Qt::green);
@@ -25,9 +25,9 @@ void MyMarbleWidget::customPaint(GeoPainter* painter)
     painter->drawText(home, QStringLiteral("Hello Marble!"));
 }
 
-int main(int argc, char** argv)
+int main(int argc, char **argv)
 {
-    QApplication app(argc,argv);
+    QApplication app(argc, argv);
     MyMarbleWidget *mapWidget = new MyMarbleWidget;
     mapWidget->setMapThemeId(QStringLiteral("earth/openstreetmap/openstreetmap.dgml"));
     mapWidget->centerOn(8.4, 49.0);

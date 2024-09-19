@@ -5,17 +5,16 @@
 
 #include <QObject>
 
+#include "TestUtils.h"
 #include <GeoDataDocument.h>
-#include <MarbleDebug.h>
 #include <GeoDataFolder.h>
+#include <GeoDataItemIcon.h>
+#include <GeoDataListStyle.h>
 #include <GeoDataPlacemark.h>
 #include <GeoDataStyle.h>
-#include <GeoDataListStyle.h>
-#include <GeoDataItemIcon.h>
-#include "TestUtils.h"
+#include <MarbleDebug.h>
 
 using namespace Marble;
-
 
 class TestListStyle : public QObject
 {
@@ -27,12 +26,12 @@ private Q_SLOTS:
 
 void TestListStyle::initTestCase()
 {
-    MarbleDebug::setEnabled( true );
+    MarbleDebug::setEnabled(true);
 }
 
 void TestListStyle::simpleParseTest()
 {
-  QString const content (
+    QString const content(
         "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
         "<kml xmlns=\"http://www.opengis.net/kml/2.2\""
         " xmlns:gx=\"http://www.google.com/kml/ext/2.2\">"
@@ -60,27 +59,28 @@ void TestListStyle::simpleParseTest()
         "  </Placemark>"
         "  </Folder>"
         "</Document>"
-        "</kml>" );
+        "</kml>");
 
-    GeoDataDocument* dataDocument = parseKml( content  );
-    QCOMPARE( dataDocument->folderList().size(), 1 );
-    GeoDataFolder *folder = dataDocument->folderList().at( 0 );
-    QCOMPARE( folder->size(), 1 );
-    GeoDataPlacemark *placemark1 = dynamic_cast<GeoDataPlacemark*>( folder->child( 0 ) );
-    QVERIFY( placemark1 != nullptr );
+    GeoDataDocument *dataDocument = parseKml(content);
+    QCOMPARE(dataDocument->folderList().size(), 1);
+    GeoDataFolder *folder = dataDocument->folderList().at(0);
+    QCOMPARE(folder->size(), 1);
+    GeoDataPlacemark *placemark1 = dynamic_cast<GeoDataPlacemark *>(folder->child(0));
+    QVERIFY(placemark1 != nullptr);
 
-    QCOMPARE( placemark1->name(), QString( "The first placemark" ) );
-    QCOMPARE( placemark1->style()->listStyle().listItemType(), GeoDataListStyle::CheckOffOnly );
-    QCOMPARE( placemark1->style()->listStyle().backgroundColor().red(), 51 );
-    QCOMPARE( placemark1->style()->listStyle().itemIconList().at(0)->state(), GeoDataItemIcon::Open | GeoDataItemIcon::Error );
-    QCOMPARE( placemark1->style()->listStyle().itemIconList().at(0)->iconPath(), QString( "https://developers.google.com/kml/documentation/images/itemicons.jpg" ) );
-    QCOMPARE( placemark1->style()->listStyle().itemIconList().at(1)->state(), GeoDataItemIcon::Closed );
-    QCOMPARE( placemark1->style()->listStyle().itemIconList().at(1)->iconPath(), QString( "https://developers.google.com/kml/documentation/images/itemicons1.jpg" ) );
+    QCOMPARE(placemark1->name(), QString("The first placemark"));
+    QCOMPARE(placemark1->style()->listStyle().listItemType(), GeoDataListStyle::CheckOffOnly);
+    QCOMPARE(placemark1->style()->listStyle().backgroundColor().red(), 51);
+    QCOMPARE(placemark1->style()->listStyle().itemIconList().at(0)->state(), GeoDataItemIcon::Open | GeoDataItemIcon::Error);
+    QCOMPARE(placemark1->style()->listStyle().itemIconList().at(0)->iconPath(),
+             QString("https://developers.google.com/kml/documentation/images/itemicons.jpg"));
+    QCOMPARE(placemark1->style()->listStyle().itemIconList().at(1)->state(), GeoDataItemIcon::Closed);
+    QCOMPARE(placemark1->style()->listStyle().itemIconList().at(1)->iconPath(),
+             QString("https://developers.google.com/kml/documentation/images/itemicons1.jpg"));
 
     delete dataDocument;
 }
 
-QTEST_MAIN( TestListStyle )
+QTEST_MAIN(TestListStyle)
 
 #include "TestListStyle.moc"
-

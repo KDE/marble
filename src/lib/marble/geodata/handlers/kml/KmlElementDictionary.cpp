@@ -202,7 +202,7 @@ const char kmlTag_Track[] = "Track";
 const char kmlTag_coord[] = "coord";
 const char kmlTag_delayedStart[] = "delayedStart";
 const char kmlTag_SoundCue[] = "SoundCue";
-const char kmlTag_Tour [] = "Tour";
+const char kmlTag_Tour[] = "Tour";
 const char kmlTag_TourControl[] = "TourControl";
 const char kmlTag_Wait[] = "Wait";
 const char kmlTag_Playlist[] = "Playlist";
@@ -210,12 +210,12 @@ const char kmlTag_playMode[] = "playMode";
 const char kmlTag_balloonVisibility[] = "balloonVisibility";
 
 #ifdef KML_LAZY_IMP
- const char kmlTag_MarblePlacemark[] = "MarblePlacemark";
- const char kmlTag_area[] = "area";
- const char kmlTag_pop[] = "pop";
- const char kmlTag_role[] = "role";
- const char kmlTag_CountryNameCode[] = "CountryNameCode";
- const char kmlTag_countrycode[] = "countrycode";
+const char kmlTag_MarblePlacemark[] = "MarblePlacemark";
+const char kmlTag_area[] = "area";
+const char kmlTag_pop[] = "pop";
+const char kmlTag_role[] = "role";
+const char kmlTag_CountryNameCode[] = "CountryNameCode";
+const char kmlTag_countrycode[] = "countrycode";
 #endif // KML_LAZY_IMP
 }
 

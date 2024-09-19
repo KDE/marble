@@ -17,11 +17,7 @@ namespace Marble
 class SatellitesConfigAbstractItem
 {
 public:
-    enum {
-        IdListRole      = Qt::UserRole + 0,
-        FullIdListRole  = Qt::UserRole + 1,
-        UrlListRole     = Qt::UserRole + 2
-    };
+    enum { IdListRole = Qt::UserRole + 0, FullIdListRole = Qt::UserRole + 1, UrlListRole = Qt::UserRole + 2 };
 
     virtual ~SatellitesConfigAbstractItem();
 
@@ -30,25 +26,25 @@ public:
     int row() const;
 
     SatellitesConfigAbstractItem *parent() const;
-    void setParent( SatellitesConfigAbstractItem *parent );
+    void setParent(SatellitesConfigAbstractItem *parent);
 
     virtual void loadSettings(const QHash<QString, QVariant> &settings);
 
-    virtual QVariant data( int column, int role ) const;
-    virtual bool setData( int column, int role, const QVariant &data );
-    
+    virtual QVariant data(int column, int role) const;
+    virtual bool setData(int column, int role, const QVariant &data);
+
     virtual bool isLeaf() const = 0;
-    virtual SatellitesConfigAbstractItem *childAt( int row ) const = 0;
-    virtual int indexOf( const SatellitesConfigAbstractItem *child ) const = 0;
+    virtual SatellitesConfigAbstractItem *childAt(int row) const = 0;
+    virtual int indexOf(const SatellitesConfigAbstractItem *child) const = 0;
     virtual int childrenCount() const = 0;
 
     virtual Qt::ItemFlags flags() const;
-    virtual void setFlags( Qt::ItemFlags flags );
+    virtual void setFlags(Qt::ItemFlags flags);
 
     virtual void clear();
 
 protected:
-    explicit SatellitesConfigAbstractItem( const QString &name );
+    explicit SatellitesConfigAbstractItem(const QString &name);
 
 private:
     QString m_name;

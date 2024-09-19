@@ -20,20 +20,20 @@ namespace Marble
 
 class GeoScenePalette : public GeoNode
 {
- public:
-    GeoScenePalette( const QString& type, const QString& file );
+public:
+    GeoScenePalette(const QString &type, const QString &file);
 
     QString type() const;
-    void    setType( const QString& type );
+    void setType(const QString &type);
 
     QString file() const;
-    void    setFile( const QString& file );
+    void setFile(const QString &file);
 
-    bool operator==( const GeoScenePalette& rhs ) const;
+    bool operator==(const GeoScenePalette &rhs) const;
 
     const char *nodeType() const override;
 
- private:
+private:
     QString m_type;
     QString m_file;
 };

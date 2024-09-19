@@ -3,10 +3,8 @@
 // SPDX-FileCopyrightText: 2013 Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 //
 
-
 #ifndef MARBLE_AZIMUTHALEQUIDISTANTPROJECTION_H
 #define MARBLE_AZIMUTHALEQUIDISTANTPROJECTION_H
-
 
 #include "AbstractProjection.h"
 #include "AzimuthalProjection.h"
@@ -23,8 +21,7 @@ class AzimuthalEquidistantProjectionPrivate;
 class AzimuthalEquidistantProjection : public AzimuthalProjection
 {
     // Not a QObject so far because we don't need to send signals.
- public:
-
+public:
     /**
      * @brief Construct a new AzimuthalEquidistantProjection.
      */
@@ -48,7 +45,6 @@ class AzimuthalEquidistantProjection : public AzimuthalProjection
      */
     QIcon icon() const override;
 
-
     qreal clippingRadius() const override;
 
     /**
@@ -61,15 +57,15 @@ class AzimuthalEquidistantProjection : public AzimuthalProjection
      * @return @c true  if the geographical coordinates are visible on the screen
      *         @c false if the geographical coordinates are not visible on the screen
      */
-    bool screenCoordinates( const GeoDataCoordinates &coordinates,
-                            const ViewportParams *params,
-                            qreal &x, qreal &y, bool &globeHidesPoint ) const override;
+    bool screenCoordinates(const GeoDataCoordinates &coordinates, const ViewportParams *params, qreal &x, qreal &y, bool &globeHidesPoint) const override;
 
-    bool screenCoordinates( const GeoDataCoordinates &coordinates,
-                            const ViewportParams * viewport,
-                            qreal *x, qreal &y, int &pointRepeatNum,
-                            const QSizeF& size,
-                            bool &globeHidesPoint ) const override;
+    bool screenCoordinates(const GeoDataCoordinates &coordinates,
+                           const ViewportParams *viewport,
+                           qreal *x,
+                           qreal &y,
+                           int &pointRepeatNum,
+                           const QSizeF &size,
+                           bool &globeHidesPoint) const override;
 
     using AbstractProjection::screenCoordinates;
 
@@ -84,17 +80,19 @@ class AzimuthalEquidistantProjection : public AzimuthalProjection
      * @return @c true  if the pixel (x, y) is within the globe
      *         @c false if the pixel (x, y) is outside the globe, i.e. in space.
      */
-    bool geoCoordinates( const int x, const int y,
-                         const ViewportParams *params,
-                         qreal& lon, qreal& lat,
-                         GeoDataCoordinates::Unit unit = GeoDataCoordinates::Degree ) const override;
+    bool geoCoordinates(const int x,
+                        const int y,
+                        const ViewportParams *params,
+                        qreal &lon,
+                        qreal &lat,
+                        GeoDataCoordinates::Unit unit = GeoDataCoordinates::Degree) const override;
 
- protected:
-    explicit AzimuthalEquidistantProjection(AzimuthalEquidistantProjectionPrivate *dd );
+protected:
+    explicit AzimuthalEquidistantProjection(AzimuthalEquidistantProjectionPrivate *dd);
 
- private:
+private:
     Q_DECLARE_PRIVATE(AzimuthalEquidistantProjection)
-    Q_DISABLE_COPY( AzimuthalEquidistantProjection )
+    Q_DISABLE_COPY(AzimuthalEquidistantProjection)
 };
 
 }

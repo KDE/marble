@@ -6,32 +6,33 @@
 
 #include "MarbleDebug.h"
 
-#include "KmlElementDictionary.h"
-#include "GeoDataLookAt.h"
-#include "GeoParser.h"
 #include "GeoDataFeature.h"
 #include "GeoDataFlyTo.h"
+#include "GeoDataLookAt.h"
+#include "GeoParser.h"
+#include "KmlElementDictionary.h"
 
 namespace Marble
 {
 namespace kml
 {
 
-KML_DEFINE_TAG_HANDLER( LookAt )
+KML_DEFINE_TAG_HANDLER(LookAt)
 
-GeoNode *KmlLookAtTagHandler::parse( GeoParser & parser ) const
+GeoNode *KmlLookAtTagHandler::parse(GeoParser &parser) const
 {
     Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1String(kmlTag_LookAt)));
 
     GeoDataLookAt *lookAt = new GeoDataLookAt();
     GeoStackItem parentItem = parser.parentElement();
-    if ( parentItem.is<GeoDataFeature>() ) {
+    if (parentItem.is<GeoDataFeature>()) {
         GeoDataFeature *feature = parentItem.nodeAs<GeoDataFeature>();
-        feature->setAbstractView( lookAt );
+        feature->setAbstractView(lookAt);
         return lookAt;
-    } if ( parentItem.is<GeoDataFlyTo>() ) {
+    }
+    if (parentItem.is<GeoDataFlyTo>()) {
         GeoDataFlyTo *feature = parentItem.nodeAs<GeoDataFlyTo>();
-        feature->setView( lookAt );
+        feature->setView(lookAt);
         return lookAt;
     } else {
         delete lookAt;

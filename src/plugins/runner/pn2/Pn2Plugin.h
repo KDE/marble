@@ -14,10 +14,10 @@ class Pn2Plugin : public ParseRunnerPlugin
 {
     Q_OBJECT
     Q_PLUGIN_METADATA(IID "org.kde.marble.Pn2Plugin")
-    Q_INTERFACES( Marble::ParseRunnerPlugin )
+    Q_INTERFACES(Marble::ParseRunnerPlugin)
 
 public:
-    explicit Pn2Plugin( QObject *parent = nullptr );
+    explicit Pn2Plugin(QObject *parent = nullptr);
 
     QString name() const override;
 
@@ -35,7 +35,7 @@ public:
 
     QStringList fileExtensions() const override;
 
-    ParsingRunner* newRunner() const override;
+    ParsingRunner *newRunner() const override;
 };
 
 }

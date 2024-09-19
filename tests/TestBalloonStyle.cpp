@@ -5,16 +5,15 @@
 
 #include <QObject>
 
+#include "TestUtils.h"
+#include <GeoDataBalloonStyle.h>
 #include <GeoDataDocument.h>
-#include <MarbleDebug.h>
 #include <GeoDataFolder.h>
 #include <GeoDataPlacemark.h>
 #include <GeoDataStyle.h>
-#include <GeoDataBalloonStyle.h>
-#include "TestUtils.h"
+#include <MarbleDebug.h>
 
 using namespace Marble;
-
 
 class TestBalloonStyle : public QObject
 {
@@ -26,12 +25,12 @@ private Q_SLOTS:
 
 void TestBalloonStyle::initTestCase()
 {
-    MarbleDebug::setEnabled( true );
+    MarbleDebug::setEnabled(true);
 }
 
 void TestBalloonStyle::simpleParseTest()
 {
-  QString const content (
+    QString const content(
         "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
         "<kml xmlns=\"http://www.opengis.net/kml/2.2\""
         " xmlns:gx=\"http://www.google.com/kml/ext/2.2\">"
@@ -53,25 +52,25 @@ void TestBalloonStyle::simpleParseTest()
         "  </Placemark>"
         "  </Folder>"
         "</Document>"
-        "</kml>" );
+        "</kml>");
 
-    GeoDataDocument* dataDocument = parseKml( content  );
-    QCOMPARE( dataDocument->folderList().size(), 1 );
-    GeoDataFolder *folder = dataDocument->folderList().at( 0 );
-    QCOMPARE( folder->size(), 1 );
-    GeoDataPlacemark *placemark1 = dynamic_cast<GeoDataPlacemark*>( folder->child( 0 ) );
-    QVERIFY( placemark1 != nullptr );
+    GeoDataDocument *dataDocument = parseKml(content);
+    QCOMPARE(dataDocument->folderList().size(), 1);
+    GeoDataFolder *folder = dataDocument->folderList().at(0);
+    QCOMPARE(folder->size(), 1);
+    GeoDataPlacemark *placemark1 = dynamic_cast<GeoDataPlacemark *>(folder->child(0));
+    QVERIFY(placemark1 != nullptr);
 
-    QCOMPARE( placemark1->name(), QString( "The first placemark" ) );
-    QCOMPARE( placemark1->style()->balloonStyle().backgroundColor().red(), 51 );
-    QCOMPARE( placemark1->style()->balloonStyle().textColor().blue(), 68 );
-    QCOMPARE( placemark1->style()->balloonStyle().displayMode(), GeoDataBalloonStyle::Hide );
+    QCOMPARE(placemark1->name(), QString("The first placemark"));
+    QCOMPARE(placemark1->style()->balloonStyle().backgroundColor().red(), 51);
+    QCOMPARE(placemark1->style()->balloonStyle().textColor().blue(), 68);
+    QCOMPARE(placemark1->style()->balloonStyle().displayMode(), GeoDataBalloonStyle::Hide);
     QString const text = "This is my balloon style. There are many like it, but this is mine.";
-    QCOMPARE( placemark1->style()->balloonStyle().text(), text );
+    QCOMPARE(placemark1->style()->balloonStyle().text(), text);
 
     delete dataDocument;
 }
 
-QTEST_MAIN( TestBalloonStyle )
+QTEST_MAIN(TestBalloonStyle)
 
 #include "TestBalloonStyle.moc"

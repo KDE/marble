@@ -7,10 +7,9 @@
 #ifndef MARBLE_PLUGINMANAGER_H
 #define MARBLE_PLUGINMANAGER_H
 
-#include <QObject>
-#include <QList>
 #include "marble_export.h"
-
+#include <QList>
+#include <QObject>
 
 namespace Marble
 {
@@ -40,8 +39,8 @@ class MARBLE_EXPORT PluginManager : public QObject
 {
     Q_OBJECT
 
- public:
-    explicit PluginManager( QObject* parent = nullptr );
+public:
+    explicit PluginManager(QObject *parent = nullptr);
 
     ~PluginManager() override;
 
@@ -59,7 +58,7 @@ class MARBLE_EXPORT PluginManager : public QObject
      * don't need to call this method since all plugins are loaded automatically.
      * @param plugin The plugin to add. Ownership retains with the caller.
      */
-    void addRenderPlugin( const RenderPlugin *plugin );
+    void addRenderPlugin(const RenderPlugin *plugin);
 
     /**
      * @brief Returns all available PositionProviderPlugins.
@@ -75,7 +74,7 @@ class MARBLE_EXPORT PluginManager : public QObject
      * don't need to call this method since all plugins are loaded automatically.
      * @param plugin The plugin to add. Ownership retains with the caller.
      */
-    void addPositionProviderPlugin( const PositionProviderPlugin *plugin );
+    void addPositionProviderPlugin(const PositionProviderPlugin *plugin);
 
     /**
      * Returns all search runner plugins.
@@ -88,7 +87,7 @@ class MARBLE_EXPORT PluginManager : public QObject
      * don't need to call this method since all plugins are loaded automatically.
      * @param plugin The plugin to add. Ownership retains with the caller.
      */
-    void addSearchRunnerPlugin( const SearchRunnerPlugin *plugin );
+    void addSearchRunnerPlugin(const SearchRunnerPlugin *plugin);
 
     /**
      * Returns all reverse geocoding runner plugins.
@@ -101,7 +100,7 @@ class MARBLE_EXPORT PluginManager : public QObject
      * don't need to call this method since all plugins are loaded automatically.
      * @param plugin The plugin to add. Ownership retains with the caller.
      */
-    void addReverseGeocodingRunnerPlugin( const ReverseGeocodingRunnerPlugin *plugin );
+    void addReverseGeocodingRunnerPlugin(const ReverseGeocodingRunnerPlugin *plugin);
 
     /**
      * Returns all routing runner plugins.
@@ -114,7 +113,7 @@ class MARBLE_EXPORT PluginManager : public QObject
      * don't need to call this method since all plugins are loaded automatically.
      * @param plugin The plugin to add. Ownership retains with the caller.
      */
-    void addRoutingRunnerPlugin( RoutingRunnerPlugin * plugin );
+    void addRoutingRunnerPlugin(RoutingRunnerPlugin *plugin);
 
     /**
      * Returns all parse runner plugins.
@@ -127,7 +126,7 @@ class MARBLE_EXPORT PluginManager : public QObject
      * don't need to call this method since all plugins are loaded automatically.
      * @param plugin The plugin to add. Ownership retains with the caller.
      */
-    void addParseRunnerPlugin( const ParseRunnerPlugin *plugin );
+    void addParseRunnerPlugin(const ParseRunnerPlugin *plugin);
 
     /**
      * @brief blacklistPlugin Prevent that a plugin is loaded from the given filename
@@ -158,14 +157,14 @@ Q_SIGNALS:
 
     void parseRunnerPluginsChanged();
 
- private:
-    Q_DISABLE_COPY( PluginManager )
+private:
+    Q_DISABLE_COPY(PluginManager)
 
 #ifdef Q_OS_ANDROID
     void installPluginsFromAssets() const;
 #endif
 
-    PluginManagerPrivate  * const d;
+    PluginManagerPrivate *const d;
 };
 
 }

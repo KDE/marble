@@ -3,7 +3,6 @@
 // SPDX-FileCopyrightText: 2010 Dennis Nienhüser <nienhueser@kde.org>
 //
 
-
 #ifndef MARBLE_ROUTINORUNNER_H
 #define MARBLE_ROUTINORUNNER_H
 
@@ -23,10 +22,10 @@ public:
     ~RoutinoRunner() override;
 
     // Overriding MarbleAbstractRunner
-    void retrieveRoute( const RouteRequest *request ) override;
+    void retrieveRoute(const RouteRequest *request) override;
 
 private:
-    RoutinoRunnerPrivate* const d;
+    RoutinoRunnerPrivate *const d;
 };
 
 }

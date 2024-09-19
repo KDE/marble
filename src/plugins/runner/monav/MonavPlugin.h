@@ -19,16 +19,12 @@ class MonavPlugin : public RoutingRunnerPlugin
 {
     Q_OBJECT
     Q_PLUGIN_METADATA(IID "org.kde.marble.MonavPlugin")
-    Q_INTERFACES( Marble::RoutingRunnerPlugin )
+    Q_INTERFACES(Marble::RoutingRunnerPlugin)
 
 public:
-    enum MonavRoutingDaemonVersion
-    {
-        Monav_0_2,
-        Monav_0_3
-    };
+    enum MonavRoutingDaemonVersion { Monav_0_2, Monav_0_3 };
 
-    explicit MonavPlugin( QObject *parent = nullptr );
+    explicit MonavPlugin(QObject *parent = nullptr);
 
     QString name() const override;
 
@@ -50,26 +46,26 @@ public:
 
     bool supportsTemplate(RoutingProfilesModel::ProfileTemplate profileTemplate) const override;
 
-    QHash< QString, QVariant > templateSettings( RoutingProfilesModel::ProfileTemplate profileTemplate ) const override;
+    QHash<QString, QVariant> templateSettings(RoutingProfilesModel::ProfileTemplate profileTemplate) const override;
 
     ConfigWidget *configWidget() override;
 
     bool canWork() const override;
 
-    QString mapDirectoryForRequest( const RouteRequest* request ) const;
+    QString mapDirectoryForRequest(const RouteRequest *request) const;
 
-    QStringList mapDirectoriesForRequest( const RouteRequest* request ) const;
+    QStringList mapDirectoriesForRequest(const RouteRequest *request) const;
 
-    MonavMapsModel* installedMapsModel();
+    MonavMapsModel *installedMapsModel();
 
     void reloadMaps();
 
     MonavRoutingDaemonVersion monavVersion() const;
 
 private:
-    MonavPluginPrivate* const d;
+    MonavPluginPrivate *const d;
 
-    Q_PRIVATE_SLOT( d, void stopDaemon() )
+    Q_PRIVATE_SLOT(d, void stopDaemon())
 };
 
 }

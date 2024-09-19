@@ -19,14 +19,13 @@ class KmlGroundOverlayWriter : public KmlOverlayTagWriter
 public:
     KmlGroundOverlayWriter();
 
-    bool writeMid( const GeoNode *node, GeoWriter &writer ) const override;
+    bool writeMid(const GeoNode *node, GeoWriter &writer) const override;
 
     static QString altitudeModeToString(AltitudeMode mode);
 
-    static void writeAltitudeMode( GeoWriter &writer, AltitudeMode altitudeMode );
+    static void writeAltitudeMode(GeoWriter &writer, AltitudeMode altitudeMode);
 };
 
 }
 
 #endif
-

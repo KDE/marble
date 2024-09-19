@@ -17,17 +17,17 @@ namespace Marble
 class Private;
 class MarbleWidget;
 
-class MainWindow: public QMainWindow
+class MainWindow : public QMainWindow
 {
     Q_OBJECT
 public:
-    explicit MainWindow( const QString &marbleDataPath, QWidget *parent = nullptr);
+    explicit MainWindow(const QString &marbleDataPath, QWidget *parent = nullptr);
     ~MainWindow() override;
     MarbleWidget *marbleWidget();
 
 Q_SIGNALS:
-    void announceHighlight(qreal, qreal, GeoDataCoordinates::Unit );
-    void postQuestion( QObject* );
+    void announceHighlight(qreal, qreal, GeoDataCoordinates::Unit);
+    void postQuestion(QObject *);
 
 private Q_SLOTS:
     void createQuestion();
@@ -36,15 +36,15 @@ private Q_SLOTS:
     void enableCountryShapeGame();
     void enableCountryFlagGame();
     void enableClickOnThatGame();
-    void displayResult( bool );
+    void displayResult(bool);
 
 protected:
-    void resizeEvent( QResizeEvent *event ) override;
+    void resizeEvent(QResizeEvent *event) override;
 
 private:
-    Private * const d;
+    Private *const d;
 };
 
-}   // namespace Marble
+} // namespace Marble
 
-#endif  // MARBLE_GAMEMAINWINDOW_H
+#endif // MARBLE_GAMEMAINWINDOW_H

@@ -7,8 +7,8 @@
 #ifndef MARBLE_GEOSCENEPARSER_H
 #define MARBLE_GEOSCENEPARSER_H
 
-#include <geodata_export.h>
 #include "GeoParser.h"
+#include <geodata_export.h>
 
 namespace Marble
 {
@@ -16,9 +16,7 @@ namespace Marble
 class GeoDocument;
 class GeoSceneDocument;
 
-enum GeoSceneSourceType {
-    GeoScene_DGML   = 0
-};
+enum GeoSceneSourceType { GeoScene_DGML = 0 };
 
 class GEODATA_EXPORT GeoSceneParser : public GeoParser
 {
@@ -27,14 +25,14 @@ public:
     ~GeoSceneParser() override;
 
 private:
-    bool isValidElement(const QString& tagName) const override;
+    bool isValidElement(const QString &tagName) const override;
     bool isValidRootElement() override;
 
-    GeoDocument* createDocument() const override;
+    GeoDocument *createDocument() const override;
 };
 
 // Global helper function for the tag handlers
-GeoSceneDocument* geoSceneDoc(GeoParser& parser);
+GeoSceneDocument *geoSceneDoc(GeoParser &parser);
 
 }
 

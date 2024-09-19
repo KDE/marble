@@ -17,24 +17,25 @@ class MarbleWidget;
 class CountryByFlag : public QObject
 {
     Q_OBJECT;
+
 public:
-    explicit CountryByFlag( MarbleWidget *marbleWidget );
+    explicit CountryByFlag(MarbleWidget *marbleWidget);
     ~CountryByFlag() override;
 
 public Q_SLOTS:
     void initiateGame();
-    void postQuestion( QObject* );
+    void postQuestion(QObject *);
 
 Q_SIGNALS:
     void gameInitialized();
-    
+
 private Q_SLOTS:
-    //void displayResult( bool );
+    // void displayResult( bool );
 
 private:
-    CountryByFlagPrivate * const d;
+    CountryByFlagPrivate *const d;
 };
 
-}   // namespace Marble
+} // namespace Marble
 
-#endif   // MARBLE_COUNTRY_BY_FLAG
+#endif // MARBLE_COUNTRY_BY_FLAG

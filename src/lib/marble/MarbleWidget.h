@@ -7,7 +7,6 @@
 #ifndef MARBLE_MARBLEWIDGET_H
 #define MARBLE_MARBLEWIDGET_H
 
-
 /** @file
  * This file contains the headers for MarbleWidget.
  *
@@ -18,9 +17,9 @@
 #include <QWidget>
 
 #include "GeoDataCoordinates.h"
-#include "MarbleGlobal.h"             // types needed in all of marble.
-#include "marble_export.h"
+#include "MarbleGlobal.h" // types needed in all of marble.
 #include "TileCoordsPyramid.h"
+#include "marble_export.h"
 
 // Qt
 class QSettings;
@@ -102,20 +101,20 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     Q_CLASSINFO("D-Bus Interface", "org.kde.MarbleWidget")
 #endif
 
-    Q_PROPERTY(int zoom          READ zoom            WRITE setZoom)
+    Q_PROPERTY(int zoom READ zoom WRITE setZoom)
 
-    Q_PROPERTY(QString mapThemeId  READ mapThemeId    WRITE setMapThemeId)
-    Q_PROPERTY(int projection    READ projection      WRITE setProjection)
+    Q_PROPERTY(QString mapThemeId READ mapThemeId WRITE setMapThemeId)
+    Q_PROPERTY(int projection READ projection WRITE setProjection)
 
-    Q_PROPERTY(qreal longitude  READ centerLongitude WRITE setCenterLongitude)
-    Q_PROPERTY(qreal latitude   READ centerLatitude  WRITE setCenterLatitude)
+    Q_PROPERTY(qreal longitude READ centerLongitude WRITE setCenterLongitude)
+    Q_PROPERTY(qreal latitude READ centerLatitude WRITE setCenterLatitude)
 
-    Q_PROPERTY(bool showOverviewMap READ showOverviewMap    WRITE setShowOverviewMap)
-    Q_PROPERTY(bool showScaleBar READ showScaleBar    WRITE setShowScaleBar)
-    Q_PROPERTY(bool showCompass  READ showCompass     WRITE setShowCompass)
-    Q_PROPERTY(bool showGrid     READ showGrid        WRITE setShowGrid)
+    Q_PROPERTY(bool showOverviewMap READ showOverviewMap WRITE setShowOverviewMap)
+    Q_PROPERTY(bool showScaleBar READ showScaleBar WRITE setShowScaleBar)
+    Q_PROPERTY(bool showCompass READ showCompass WRITE setShowCompass)
+    Q_PROPERTY(bool showGrid READ showGrid WRITE setShowGrid)
 
-    Q_PROPERTY(bool showClouds   READ showClouds      WRITE setShowClouds)
+    Q_PROPERTY(bool showClouds READ showClouds WRITE setShowClouds)
     Q_PROPERTY(bool showSunShading READ showSunShading WRITE setShowSunShading)
     Q_PROPERTY(bool showCityLights READ showCityLights WRITE setShowCityLights)
     Q_PROPERTY(bool isLockedToSubSolarPoint READ isLockedToSubSolarPoint WRITE setLockToSubSolarPoint)
@@ -123,26 +122,25 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     Q_PROPERTY(bool showAtmosphere READ showAtmosphere WRITE setShowAtmosphere)
     Q_PROPERTY(bool showCrosshairs READ showCrosshairs WRITE setShowCrosshairs)
 
-    Q_PROPERTY(bool showPlaces   READ showPlaces      WRITE setShowPlaces)
-    Q_PROPERTY(bool showCities   READ showCities      WRITE setShowCities)
-    Q_PROPERTY(bool showTerrain  READ showTerrain     WRITE setShowTerrain)
+    Q_PROPERTY(bool showPlaces READ showPlaces WRITE setShowPlaces)
+    Q_PROPERTY(bool showCities READ showCities WRITE setShowCities)
+    Q_PROPERTY(bool showTerrain READ showTerrain WRITE setShowTerrain)
     Q_PROPERTY(bool showOtherPlaces READ showOtherPlaces WRITE setShowOtherPlaces)
 
-    Q_PROPERTY(bool showRelief   READ showRelief      WRITE setShowRelief)
+    Q_PROPERTY(bool showRelief READ showRelief WRITE setShowRelief)
 
-    Q_PROPERTY(bool showIceLayer READ showIceLayer    WRITE setShowIceLayer)
-    Q_PROPERTY(bool showBorders  READ showBorders     WRITE setShowBorders)
-    Q_PROPERTY(bool showRivers   READ showRivers      WRITE setShowRivers)
-    Q_PROPERTY(bool showLakes    READ showLakes       WRITE setShowLakes)
+    Q_PROPERTY(bool showIceLayer READ showIceLayer WRITE setShowIceLayer)
+    Q_PROPERTY(bool showBorders READ showBorders WRITE setShowBorders)
+    Q_PROPERTY(bool showRivers READ showRivers WRITE setShowRivers)
+    Q_PROPERTY(bool showLakes READ showLakes WRITE setShowLakes)
 
     Q_PROPERTY(ViewContext viewContext READ viewContext WRITE setViewContext NOTIFY viewContextChanged)
 
-    Q_PROPERTY( RenderStatus renderStatus READ renderStatus NOTIFY renderStatusChanged )
+    Q_PROPERTY(RenderStatus renderStatus READ renderStatus NOTIFY renderStatusChanged)
 
-    Q_PROPERTY(quint64 volatileTileCacheLimit    READ volatileTileCacheLimit    WRITE setVolatileTileCacheLimit)
+    Q_PROPERTY(quint64 volatileTileCacheLimit READ volatileTileCacheLimit WRITE setVolatileTileCacheLimit)
 
- public:
-
+public:
     /**
      * @brief Construct a new MarbleWidget.
      * @param parent the parent widget
@@ -151,7 +149,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * MarbleWidget.  The widget will create its own MarbleModel when
      * created.
      */
-    explicit MarbleWidget( QWidget *parent = nullptr );
+    explicit MarbleWidget(QWidget *parent = nullptr);
 
     ~MarbleWidget() override;
 
@@ -177,7 +175,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     /**
      * @brief Set the input handler
      */
-    void setInputHandler( MarbleWidgetInputHandler *handler );
+    void setInputHandler(MarbleWidgetInputHandler *handler);
 
     /**
      * @brief Returns a list of all RenderPlugins on the widget, this includes float items
@@ -197,7 +195,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      *
      * If no item is found the null pointer is returned.
      */
-    AbstractFloatItem * floatItem( const QString &nameId ) const;
+    AbstractFloatItem *floatItem(const QString &nameId) const;
 
     /**
      * Reads the plugin settings from the passed QSettings.
@@ -205,7 +203,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * use MarblePart which is handling this automatically.
      * @param settings The QSettings object to be used.
      */
-    void readPluginSettings( QSettings& settings );
+    void readPluginSettings(QSettings &settings);
 
     /**
      * Writes the plugin settings in the passed QSettings.
@@ -213,7 +211,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * use MarblePart which is handling this automatically.
      * @param settings The QSettings object to be used.
      */
-    void writePluginSettings( QSettings& settings ) const;
+    void writePluginSettings(QSettings &settings) const;
 
     /**
      * @brief Retrieve the view context (i.e. still or animated map)
@@ -223,31 +221,31 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     /**
      * @brief Get the GeoSceneDocument object of the current map theme
      */
-    GeoSceneDocument * mapTheme() const;
+    GeoSceneDocument *mapTheme() const;
 
     /**
      * @brief Returns all widgets of dataPlugins on the position curpos
      */
-    QList<AbstractDataPluginItem *> whichItemAt( const QPoint& curpos ) const;
+    QList<AbstractDataPluginItem *> whichItemAt(const QPoint &curpos) const;
 
     /**
      * @brief Add a layer to be included in rendering.
      */
-    void addLayer( LayerInterface *layer );
+    void addLayer(LayerInterface *layer);
 
     /**
      * @brief Remove a layer from being included in rendering.
      */
-    void removeLayer( LayerInterface *layer );
+    void removeLayer(LayerInterface *layer);
 
-    RoutingLayer* routingLayer();
+    RoutingLayer *routingLayer();
 
-    PopupLayer* popupLayer();
+    PopupLayer *popupLayer();
 
     /**
      * @since 0.26.0
      */
-    const StyleBuilder* styleBuilder() const;
+    const StyleBuilder *styleBuilder() const;
 
     /**
      * @brief  Get the Projection used for the map
@@ -256,7 +254,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * @return @c Mercator          another flat map
      */
     Projection projection() const;
-//    int projection() const;
+    //    int projection() const;
 
     //@}
 
@@ -325,8 +323,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * @return @c true  if the geographical coordinates are visible on the screen
      *         @c false if the geographical coordinates are not visible on the screen
      */
-    bool screenCoordinates( qreal lon, qreal lat,
-                            qreal& x, qreal& y ) const;
+    bool screenCoordinates(qreal lon, qreal lat, qreal &x, qreal &y) const;
 
     /**
      * @brief Get the earth coordinates corresponding to a pixel in the widget.
@@ -338,9 +335,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * @return @c true  if the pixel (x, y) is within the globe
      *         @c false if the pixel (x, y) is outside the globe, i.e. in space.
      */
-    bool geoCoordinates( int x, int y,
-                         qreal& lon, qreal& lat,
-                         GeoDataCoordinates::Unit = GeoDataCoordinates::Degree ) const;
+    bool geoCoordinates(int x, int y, qreal &lon, qreal &lat, GeoDataCoordinates::Unit = GeoDataCoordinates::Degree) const;
 
     /**
      * @brief Return the longitude of the center point.
@@ -363,8 +358,8 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     qreal moveStep() const;
 
     /**
-    * @brief Return the lookAt
-    */
+     * @brief Return the lookAt
+     */
     GeoDataLookAt lookAt() const;
 
     /**
@@ -380,7 +375,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * @param focusPoint New focus point
      * @see focusPoint resetFocusPoint
      */
-    void setFocusPoint( const GeoDataCoordinates &focusPoint );
+    void setFocusPoint(const GeoDataCoordinates &focusPoint);
 
     /**
      * @brief Invalidate any focus point set with @ref setFocusPoint.
@@ -389,31 +384,31 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     void resetFocusPoint();
 
     /**
-      * @brief Return the globe radius (pixel) for the given distance (km)
-      */
-    qreal radiusFromDistance( qreal distance ) const;
+     * @brief Return the globe radius (pixel) for the given distance (km)
+     */
+    qreal radiusFromDistance(qreal distance) const;
 
     /**
-      * @brief Return the distance (km) at the given globe radius (pixel)
-      */
-    qreal distanceFromRadius( qreal radius ) const;
+     * @brief Return the distance (km) at the given globe radius (pixel)
+     */
+    qreal distanceFromRadius(qreal radius) const;
 
     /**
-      * Returns the zoom value (no unit) corresponding to the given camera distance (km)
-      */
-    qreal zoomFromDistance( qreal distance ) const;
+     * Returns the zoom value (no unit) corresponding to the given camera distance (km)
+     */
+    qreal zoomFromDistance(qreal distance) const;
 
     /**
-      * Returns the distance (km) corresponding to the given zoom value
-      */
-    qreal distanceFromZoom( qreal zoom ) const;
+     * Returns the distance (km) corresponding to the given zoom value
+     */
+    qreal distanceFromZoom(qreal zoom) const;
 
     //@}
 
     /// @name Placemark management
     //@{
 
-    QVector<const GeoDataFeature *> whichFeatureAt( const QPoint& ) const;
+    QVector<const GeoDataFeature *> whichFeatureAt(const QPoint &) const;
 
     //@}
 
@@ -551,7 +546,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     /**
      * @brief Retrieve the map quality depending on the view context
      */
-    MapQuality mapQuality( ViewContext = Still ) const;
+    MapQuality mapQuality(ViewContext = Still) const;
 
     /**
      * @brief Retrieve whether travels to a point should get animated
@@ -559,10 +554,10 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     bool animationsEnabled() const;
 
     AngleUnit defaultAngleUnit() const;
-    void setDefaultAngleUnit( AngleUnit angleUnit );
+    void setDefaultAngleUnit(AngleUnit angleUnit);
 
     QFont defaultFont() const;
-    void setDefaultFont( const QFont& font );
+    void setDefaultFont(const QFont &font);
 
     //@}
 
@@ -590,7 +585,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     /// @todo Enable this instead of the zoomView slot below for proper deprecation warnings
     /// around Marble 1.8
     // @deprecated Please use setZoom
-    //MARBLE_DEPRECATED( void zoomView( int zoom, FlyToMode mode = Instant ) );
+    // MARBLE_DEPRECATED( void zoomView( int zoom, FlyToMode mode = Instant ) );
 
     /**
      * Summarized render status of the current map view
@@ -606,9 +601,9 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     /**
      * Toggle whether regions are highlighted when user selects them
      */
-    void setHighlightEnabled( bool enabled );
+    void setHighlightEnabled(bool enabled);
 
- public Q_SLOTS:
+public Q_SLOTS:
 
     /// @name Position management slots
     //@{
@@ -617,7 +612,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * @brief  Set the radius of the globe in pixels.
      * @param  radius  The new globe radius value in pixels.
      */
-    void setRadius( int radius );
+    void setRadius(int radius);
 
     /**
      * @brief  Zoom the view to a certain zoomlevel
@@ -628,34 +623,34 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * interpretation.  A zoom value around 1000 lets the viewer see
      * all of the earth in the default window.
      */
-    void setZoom( int zoom, FlyToMode mode = Instant );
+    void setZoom(int zoom, FlyToMode mode = Instant);
 
     /**
      * @deprecated To be removed soon. Please use setZoom instead. Same parameters.
      */
-    void zoomView( int zoom, FlyToMode mode = Instant );
+    void zoomView(int zoom, FlyToMode mode = Instant);
 
     /**
      * @brief  Zoom the view by a certain step
      * @param  zoomStep  the difference between the old zoom and the new
      * @param  mode  the FlyToMode that will be used.
      */
-    void zoomViewBy( int zoomStep, FlyToMode mode = Instant );
+    void zoomViewBy(int zoomStep, FlyToMode mode = Instant);
 
-        /**
+    /**
      * @brief  Zoom in by the amount zoomStep.
      */
-    void zoomIn( FlyToMode mode = Automatic );
+    void zoomIn(FlyToMode mode = Automatic);
     /**
      * @brief  Zoom out by the amount zoomStep.
      */
-    void zoomOut( FlyToMode mode = Automatic );
+    void zoomOut(FlyToMode mode = Automatic);
 
     /**
      * @brief  Set the distance of the observer to the globe in km.
      * @param  distance  The new distance in km.
      */
-    void setDistance( qreal distance );
+    void setDistance(qreal distance);
 
     /**
      * @brief  Rotate the view by the two angles phi and theta.
@@ -669,7 +664,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * of (lon, lat), otherwise the resulting angle will be the sum of
      * the previous position and the two offsets.
      */
-    void rotateBy( const qreal deltaLon, const qreal deltaLat, FlyToMode mode = Instant );
+    void rotateBy(const qreal deltaLon, const qreal deltaLat, FlyToMode mode = Instant);
 
     /**
      * @brief  Center the view on a geographical point
@@ -679,7 +674,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      *              +180(W) - -180(E)
      * @param  animated whether to use animation
      */
-    void centerOn( const qreal lon, const qreal lat, bool animated = false );
+    void centerOn(const qreal lon, const qreal lat, bool animated = false);
 
     /**
      * @brief  Center the view on a point
@@ -692,7 +687,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      *              to. It will always be looking vertically down.
      * @param  animated whether to use animation
      */
-    void centerOn( const GeoDataCoordinates &point, bool animated = false );
+    void centerOn(const GeoDataCoordinates &point, bool animated = false);
 
     /**
      * @brief Center the view on a bounding box so that it completely fills the viewport
@@ -702,7 +697,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * @param box The GeoDataLatLonBox to zoom and move the MarbleWidget to.
      * @param  animated whether to use animation.
      */
-    void centerOn( const GeoDataLatLonBox& box, bool animated = false );
+    void centerOn(const GeoDataLatLonBox &box, bool animated = false);
 
     /**
      * @brief Center the view on a placemark according to the following logic:
@@ -711,64 +706,64 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * @param placemark The GeoDataPlacemark to zoom and move the MarbleWidget to.
      * @param animated Whether the centering is animated.
      */
-    void centerOn( const GeoDataPlacemark& placemark, bool animated = false );
+    void centerOn(const GeoDataPlacemark &placemark, bool animated = false);
 
     /**
      * @brief  Set the latitude for the center point
      * @param  lat  the new value for the latitude in degree.
      * @param  mode the FlyToMode that will be used.
      */
-    void setCenterLatitude( qreal lat, FlyToMode mode = Instant );
+    void setCenterLatitude(qreal lat, FlyToMode mode = Instant);
 
     /**
      * @brief  Set the longitude for the center point
      * @param  lon  the new value for the longitude in degree.
      * @param  mode the FlyToMode that will be used.
      */
-    void setCenterLongitude( qreal lon, FlyToMode mode = Instant );
+    void setCenterLongitude(qreal lon, FlyToMode mode = Instant);
 
-    void setHeading( qreal heading );
+    void setHeading(qreal heading);
 
     /**
      * @brief  Move left by the moveStep.
      */
-    void moveLeft( FlyToMode mode = Automatic );
+    void moveLeft(FlyToMode mode = Automatic);
 
     /**
      * @brief  Move right by the moveStep.
      */
-    void moveRight( FlyToMode mode = Automatic );
+    void moveRight(FlyToMode mode = Automatic);
 
     /**
      * @brief  Move up by the moveStep.
      */
-    void moveUp( FlyToMode mode = Automatic );
+    void moveUp(FlyToMode mode = Automatic);
 
     /**
      * @brief  Move down by the moveStep.
      */
-    void moveDown( FlyToMode mode = Automatic );
+    void moveDown(FlyToMode mode = Automatic);
 
     /**
      * @brief Center the view on the default start point with the default zoom.
      */
-    void goHome( FlyToMode mode = Automatic );
+    void goHome(FlyToMode mode = Automatic);
 
     /**
-      * @brief Change the camera position to the given position.
-      * @param lookAt New camera position. Changing the camera position means
-      * that both the current center position as well as the zoom value may change
-      * @param mode Interpolation type for intermediate camera positions. Automatic
-      * (default) chooses a suitable interpolation among Instant, Lenar and Jump.
-      * Instant will directly set the new zoom and position values, while
-      * Linear results in a linear interpolation of intermediate center coordinates
-      * along the sphere and a linear interpolation of changes in the camera distance
-      * to the ground. Finally, Jump will behave the same as Linear with regard to
-      * the center position interpolation, but use a parabolic height increase
-      * towards the middle point of the intermediate positions. This appears
-      * like a jump of the camera.
-      */
-    void flyTo( const GeoDataLookAt &lookAt, FlyToMode mode = Automatic );
+     * @brief Change the camera position to the given position.
+     * @param lookAt New camera position. Changing the camera position means
+     * that both the current center position as well as the zoom value may change
+     * @param mode Interpolation type for intermediate camera positions. Automatic
+     * (default) chooses a suitable interpolation among Instant, Lenar and Jump.
+     * Instant will directly set the new zoom and position values, while
+     * Linear results in a linear interpolation of intermediate center coordinates
+     * along the sphere and a linear interpolation of changes in the camera distance
+     * to the ground. Finally, Jump will behave the same as Linear with regard to
+     * the center position interpolation, but use a parabolic height increase
+     * towards the middle point of the intermediate positions. This appears
+     * like a jump of the camera.
+     */
+    void flyTo(const GeoDataLookAt &lookAt, FlyToMode mode = Automatic);
 
     //@}
 
@@ -779,8 +774,8 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * @brief  Set the Projection used for the map
      * @param  projection projection type (e.g. Spherical, Equirectangular, Mercator)
      */
-    void setProjection( int        projection );
-    void setProjection( Projection projection );
+    void setProjection(int projection);
+    void setProjection(Projection projection);
 
     /**
      * @brief Set a new map theme
@@ -790,146 +785,146 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      *
      * Example:
      *    maptheme = "earth/bluemarble/bluemarble.dgml"
-     */	
-    void setMapThemeId( const QString& maptheme );
+     */
+    void setMapThemeId(const QString &maptheme);
 
     /**
      * @brief  Sets the value of a map theme property
      * @param  name   name of the property
      * @param  value  value of the property (usually: visibility)
-     * 
+     *
      * Later on we might add a setPropertyType and a QVariant
      * if needed.
      */
-    void setPropertyValue( const QString& name, bool value );
+    void setPropertyValue(const QString &name, bool value);
 
     /**
      * @brief  Set whether the overview map overlay is visible
      * @param  visible  visibility of the overview map
      */
-    void setShowOverviewMap( bool visible );
+    void setShowOverviewMap(bool visible);
 
     /**
      * @brief  Set whether the scale bar overlay is visible
      * @param  visible  visibility of the scale bar
      */
-    void setShowScaleBar( bool visible );
+    void setShowScaleBar(bool visible);
 
     /**
      * @brief  Set whether the compass overlay is visible
      * @param  visible  visibility of the compass
      */
-    void setShowCompass( bool visible );
+    void setShowCompass(bool visible);
 
     /**
      * @brief  Set whether the cloud cover is visible
      * @param  visible  visibility of the cloud cover
      */
-    void setShowClouds( bool visible );
+    void setShowClouds(bool visible);
 
     /**
      * @brief  Set whether the night shadow is visible.
      * @param  visible visibility of shadow
      */
-    void setShowSunShading( bool visible );
+    void setShowSunShading(bool visible);
 
     /**
      * @brief  Set whether city lights instead of night shadow are visible.
      * @param  visible visibility of city lights
      */
-    void setShowCityLights( bool visible );
+    void setShowCityLights(bool visible);
 
     /**
      * @brief  Set the globe locked to the sub solar point
      * @param  visible if globe is locked to the sub solar point
      */
-    void setLockToSubSolarPoint( bool visible );
+    void setLockToSubSolarPoint(bool visible);
 
     /**
      * @brief  Set whether the sun icon is shown in the sub solar point
      * @param  visible if the sun icon is shown in the sub solar point
      */
-    void setSubSolarPointIconVisible( bool visible );
+    void setSubSolarPointIconVisible(bool visible);
 
     /**
      * @brief  Set whether the atmospheric glow is visible
      * @param  visible  visibility of the atmospheric glow
      */
-    void setShowAtmosphere( bool visible );
+    void setShowAtmosphere(bool visible);
 
     /**
      * @brief  Set whether the crosshairs are visible
      * @param  visible  visibility of the crosshairs
      */
-    void setShowCrosshairs( bool visible );
+    void setShowCrosshairs(bool visible);
 
     /**
      * @brief  Set whether the coordinate grid overlay is visible
      * @param  visible  visibility of the coordinate grid
      */
-    void setShowGrid( bool visible );
+    void setShowGrid(bool visible);
 
     /**
      * @brief  Set whether the place mark overlay is visible
      * @param  visible  visibility of the place marks
      */
-    void setShowPlaces( bool visible );
+    void setShowPlaces(bool visible);
 
     /**
      * @brief  Set whether the city place mark overlay is visible
      * @param  visible  visibility of the city place marks
      */
-    void setShowCities( bool visible );
+    void setShowCities(bool visible);
 
     /**
      * @brief  Set whether the terrain place mark overlay is visible
      * @param  visible  visibility of the terrain place marks
      */
-    void setShowTerrain( bool visible );
+    void setShowTerrain(bool visible);
 
     /**
      * @brief  Set whether the other places overlay is visible
      * @param  visible  visibility of other places
      */
-    void setShowOtherPlaces( bool visible );
+    void setShowOtherPlaces(bool visible);
 
     /**
      * @brief  Set whether the relief is visible
      * @param  visible  visibility of the relief
      */
-    void setShowRelief( bool visible );
+    void setShowRelief(bool visible);
 
     /**
      * @brief  Set whether the ice layer is visible
      * @param  visible  visibility of the ice layer
      */
-    void setShowIceLayer( bool visible );
+    void setShowIceLayer(bool visible);
 
     /**
      * @brief  Set whether the borders visible
      * @param  visible  visibility of the borders
      */
-    void setShowBorders( bool visible );
+    void setShowBorders(bool visible);
 
     /**
      * @brief  Set whether the rivers are visible
      * @param  visible  visibility of the rivers
      */
-    void setShowRivers( bool visible );
+    void setShowRivers(bool visible);
 
     /**
      * @brief  Set whether the lakes are visible
      * @param  visible  visibility of the lakes
      */
-    void setShowLakes( bool visible );
+    void setShowLakes(bool visible);
 
     /**
      * @brief Set whether the frame rate gets shown
      * @param visible  visibility of the frame rate
      */
-    void setShowFrameRate( bool visible );
+    void setShowFrameRate(bool visible);
 
-    void setShowBackground( bool visible );
+    void setShowBackground(bool visible);
 
     /**
      * @brief Set whether the is tile is visible
@@ -937,13 +932,13 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      *       and might be subject to changes until Marble 0.8
      * @param visible visibility of the tile
      */
-    void setShowTileId( bool visible );
+    void setShowTileId(bool visible);
 
     /**
      * @brief Set whether the runtime tracing for layers gets shown
      * @param visible visibility of the runtime tracing
      */
-    void setShowRuntimeTrace( bool visible );
+    void setShowRuntimeTrace(bool visible);
 
     bool showRuntimeTrace() const;
 
@@ -952,7 +947,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * polygon node drawing
      * @param visible visibility of the node debug mode
      */
-    void setShowDebugPolygons( bool visible);
+    void setShowDebugPolygons(bool visible);
 
     bool showDebugPolygons() const;
 
@@ -961,7 +956,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * batch rendering
      * @param visible visibility of the batch rendering
      */
-    void setShowDebugBatchRender( bool visible);
+    void setShowDebugBatchRender(bool visible);
 
     bool showDebugBatchRender() const;
 
@@ -990,23 +985,23 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
 
     int levelToDebug() const;
 
-        /**
+    /**
      * @brief Set the map quality for the specified view context.
      *
      * @param quality map quality for the specified view context
      * @param viewContext view context whose map quality should be set
      */
-    void setMapQualityForViewContext( MapQuality quality, ViewContext viewContext );
+    void setMapQualityForViewContext(MapQuality quality, ViewContext viewContext);
 
     /**
      * @brief Set the view context (i.e. still or animated map)
      */
-    void setViewContext( ViewContext viewContext );
+    void setViewContext(ViewContext viewContext);
 
     /**
      * @brief Set whether travels to a point should get animated
      */
-    void setAnimationsEnabled( bool enabled );
+    void setAnimationsEnabled(bool enabled);
 
     //@}
 
@@ -1018,7 +1013,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * @brief  Set the limit of the volatile (in RAM) tile cache.
      * @param  kiloBytes The limit in kilobytes.
      */
-    void setVolatileTileCacheLimit( quint64 kiloBytes );
+    void setVolatileTileCacheLimit(quint64 kiloBytes);
 
     /**
      * @brief A slot that is called when the model starts to create new tiles.
@@ -1038,14 +1033,14 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * calls to creatingTilesProgress, and the poup dialog can then be
      * closed.
      */
-    void creatingTilesStart( TileCreator *creator, const QString& name, const QString& description );
+    void creatingTilesStart(TileCreator *creator, const QString &name, const QString &description);
 
     /**
      * @brief Re-download all visible tiles.
      */
     void reloadMap();
 
-    void downloadRegion( QVector<TileCoordsPyramid> const & );
+    void downloadRegion(QVector<TileCoordsPyramid> const &);
 
     //@}
 
@@ -1054,12 +1049,12 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
 
     /**
      * @brief Used to notify about the position of the mouse click
-      */
-    void notifyMouseClick( int x, int y );
+     */
+    void notifyMouseClick(int x, int y);
 
-    void setSelection( const QRect& region );
+    void setSelection(const QRect &region);
 
-    void setInputEnabled( bool );
+    void setInputEnabled(bool);
 
     TextureLayer *textureLayer() const;
 
@@ -1067,16 +1062,16 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
 
     //@}
 
- Q_SIGNALS:
+Q_SIGNALS:
     /**
      * @brief Signal that the zoom has changed, and to what.
      * @param zoom  The new zoom value.
      * @see  setZoom()
      */
-    void zoomChanged( int zoom );
-    void distanceChanged( const QString& distanceString );
+    void zoomChanged(int zoom);
+    void distanceChanged(const QString &distanceString);
 
-    void tileLevelChanged( int level );
+    void tileLevelChanged(int level);
 
     void viewContextChanged(ViewContext newViewContext);
 
@@ -1084,15 +1079,15 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * @brief Signal that the theme has changed
      * @param theme  Name of the new theme.
      */
-    void themeChanged( const QString& theme );
+    void themeChanged(const QString &theme);
 
-    void projectionChanged( Projection );
+    void projectionChanged(Projection);
 
-    void mouseMoveGeoPosition( const QString& );
+    void mouseMoveGeoPosition(const QString &);
 
-    void mouseClickGeoPosition( qreal lon, qreal lat, GeoDataCoordinates::Unit );
+    void mouseClickGeoPosition(qreal lon, qreal lat, GeoDataCoordinates::Unit);
 
-    void framesPerSecond( qreal fps );
+    void framesPerSecond(qreal fps);
 
     /**
      * This signal is emit when a new rectangle region is selected over the map.
@@ -1105,54 +1100,54 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * This signal is emit when the settings of a plugin changed.
      */
     void pluginSettingsChanged();
-    
+
     /**
      * @brief Signal that a render item has been initialized
      */
-    void renderPluginInitialized( RenderPlugin *renderPlugin );
+    void renderPluginInitialized(RenderPlugin *renderPlugin);
 
     /**
      * This signal is emitted when the visible region of the map changes. This typically happens
      * when the user moves the map around or zooms.
      */
-    void visibleLatLonAltBoxChanged( const GeoDataLatLonAltBox& visibleLatLonAltBox );
+    void visibleLatLonAltBoxChanged(const GeoDataLatLonAltBox &visibleLatLonAltBox);
 
     /**
      * @brief Emitted when the layer rendering status has changed
      * @param status New render status
      */
-    void renderStatusChanged( RenderStatus status );
+    void renderStatusChanged(RenderStatus status);
 
-    void renderStateChanged( const RenderState &state );
+    void renderStateChanged(const RenderState &state);
 
-    void highlightedPlacemarksChanged( qreal lon, qreal lat, GeoDataCoordinates::Unit unit );
+    void highlightedPlacemarksChanged(qreal lon, qreal lat, GeoDataCoordinates::Unit unit);
 
-    void propertyValueChanged( const QString& name, bool value );
+    void propertyValueChanged(const QString &name, bool value);
 
- protected:
+protected:
     /**
      * @brief Reimplementation of the leaveEvent() function in QWidget.
      */
-    void leaveEvent( QEvent *event ) override;
+    void leaveEvent(QEvent *event) override;
 
     /**
      * @brief Reimplementation of the paintEvent() function in QWidget.
      */
-    void paintEvent( QPaintEvent *event ) override;
+    void paintEvent(QPaintEvent *event) override;
 
     /**
      * @brief Reimplementation of the resizeEvent() function in QWidget.
      */
-    void resizeEvent( QResizeEvent *event ) override;
+    void resizeEvent(QResizeEvent *event) override;
 
     void connectNotify(const QMetaMethod &signal) override;
     void disconnectNotify(const QMetaMethod &signal) override;
 
     /**
-      * @brief Reimplementation of the changeEvent() function in QWidget to
-      * react to changes of the enabled state
-      */
-    void changeEvent( QEvent * event ) override;
+     * @brief Reimplementation of the changeEvent() function in QWidget to
+     * react to changes of the enabled state
+     */
+    void changeEvent(QEvent *event) override;
 
     /**
      * @brief Enables custom drawing onto the MarbleWidget straight after
@@ -1161,22 +1156,22 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      *
      * @deprecated implement LayerInterface and add it using @p addLayer()
      */
-    virtual void customPaint( GeoPainter *painter );
+    virtual void customPaint(GeoPainter *painter);
 
- private:
-    Q_PRIVATE_SLOT( d, void updateMapTheme() )
-    Q_PRIVATE_SLOT( d, void updateSystemBackgroundAttribute() )
+private:
+    Q_PRIVATE_SLOT(d, void updateMapTheme())
+    Q_PRIVATE_SLOT(d, void updateSystemBackgroundAttribute())
 
- private:
-    Q_DISABLE_COPY( MarbleWidget )
-    MarbleWidgetPrivate  * const d;
+private:
+    Q_DISABLE_COPY(MarbleWidget)
+    MarbleWidgetPrivate *const d;
     friend class MarbleWidgetPrivate;
 
     class CustomPaintLayer;
     friend class CustomPaintLayer;
 
     friend class MarbleWidgetDefaultInputHandler;
-    };
+};
 
 }
 

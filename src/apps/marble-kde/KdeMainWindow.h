@@ -4,10 +4,8 @@
 // SPDX-FileCopyrightText: 2007 Inge Wallin <ingwa@kde.org>
 //
 
-
 #ifndef MARBLE_KDEMAINWINDOW_H
 #define MARBLE_KDEMAINWINDOW_H
- 
 
 #include <KXmlGuiWindow>
 
@@ -23,25 +21,24 @@ class MarbleWidget;
 
 class MainWindow : public KXmlGuiWindow
 {
-  Q_OBJECT
+    Q_OBJECT
 
- public:
-    explicit MainWindow( const QString& marbleDataPath = QString(), 
-                         QWidget *parent = nullptr );
+public:
+    explicit MainWindow(const QString &marbleDataPath = QString(), QWidget *parent = nullptr);
     ~MainWindow() override;
 
-    ControlView* marbleControl() const;
-    MarbleWidget* marbleWidget() const;
+    ControlView *marbleControl() const;
+    MarbleWidget *marbleWidget() const;
 
- public Q_SLOTS:
+public Q_SLOTS:
     void updateWindowTitle();
-    void changeViewSize( QAction* );
+    void changeViewSize(QAction *);
     void updateCenterFromTheme();
 
- protected:
-    void closeEvent( QCloseEvent *event ) override;
+protected:
+    void closeEvent(QCloseEvent *event) override;
 
- private:
+private:
     QSize m_savedSize;
     MarblePart *m_part;
     QActionGroup *m_viewSizeActsGroup;

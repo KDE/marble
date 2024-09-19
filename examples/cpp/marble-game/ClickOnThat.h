@@ -3,7 +3,6 @@
 // SPDX-FileCopyrightText: 2014 Abhinav Gangwar <abhgang@gmail.com>
 //
 
-
 #ifndef MARBLE_CLICK_ON_THAT
 #define MARBLE_CLICK_ON_THAT
 
@@ -22,7 +21,7 @@ class ClickOnThat : public QObject
 {
     Q_OBJECT
 public:
-    explicit ClickOnThat( MarbleWidget *marbleWidget );
+    explicit ClickOnThat(MarbleWidget *marbleWidget);
     ~ClickOnThat() override;
 
     /**
@@ -34,20 +33,20 @@ public:
 
 public Q_SLOTS:
     void initiateGame();
-    void postQuestion( QObject* );
-    void updateSelectPin( bool, const GeoDataCoordinates& );
-    void determineResult( qreal, qreal, GeoDataCoordinates::Unit );
+    void postQuestion(QObject *);
+    void updateSelectPin(bool, const GeoDataCoordinates &);
+    void determineResult(qreal, qreal, GeoDataCoordinates::Unit);
     void highlightCorrectAnswer();
 
 Q_SIGNALS:
     void gameInitialized();
-    void updateResult( bool );
-    void announceHighlight(qreal, qreal, GeoDataCoordinates::Unit );
+    void updateResult(bool);
+    void announceHighlight(qreal, qreal, GeoDataCoordinates::Unit);
 
 private:
-    ClickOnThatPrivate * const d;
+    ClickOnThatPrivate *const d;
 };
 
-}   // namespace Marble
+} // namespace Marble
 
-#endif  // MARBLE_CLICK_ON_THAT
+#endif // MARBLE_CLICK_ON_THAT

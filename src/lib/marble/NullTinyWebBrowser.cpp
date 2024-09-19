@@ -6,10 +6,11 @@
 #include "NullTinyWebBrowser.h"
 #include <QByteArray>
 
-namespace Marble {
+namespace Marble
+{
 
-TinyWebBrowser::TinyWebBrowser(QWidget *parent):
-    QWidget(parent)
+TinyWebBrowser::TinyWebBrowser(QWidget *parent)
+    : QWidget(parent)
 {
 }
 

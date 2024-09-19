@@ -7,10 +7,10 @@
 
 #include "SearchRunner.h"
 
-#include <QString>
 #include <QHostInfo>
 #include <QNetworkAccessManager>
 #include <QNetworkRequest>
+#include <QString>
 
 class QNetworkReply;
 
@@ -29,7 +29,7 @@ private Q_SLOTS:
     void get();
 
     // Http request with hostip.info done
-    void slotRequestFinished( QNetworkReply* );
+    void slotRequestFinished(QNetworkReply *);
 
     // IP address lookup finished
     void slotLookupFinished(const QHostInfo &host);
@@ -37,7 +37,7 @@ private Q_SLOTS:
     // No results (or an error)
     void slotNoResults();
 
-    void search( const QString &searchTerm, const GeoDataLatLonBox &preferred ) override;
+    void search(const QString &searchTerm, const GeoDataLatLonBox &preferred) override;
 
 private:
     QHostInfo m_hostInfo;

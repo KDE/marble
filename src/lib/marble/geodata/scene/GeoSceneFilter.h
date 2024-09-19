@@ -7,8 +7,8 @@
 #ifndef MARBLE_GEOSCENEFILTER_H
 #define MARBLE_GEOSCENEFILTER_H
 
-#include <QString>
 #include <QList>
+#include <QString>
 
 #include "GeoDocument.h"
 
@@ -23,27 +23,26 @@ class GeoScenePalette;
 
 class GeoSceneFilter : public GeoNode
 {
- public:
-    explicit GeoSceneFilter( const QString& name );
+public:
+    explicit GeoSceneFilter(const QString &name);
     ~GeoSceneFilter() override;
 
     QString name() const;
-    void setName( const QString& name );
+    void setName(const QString &name);
 
     QString type() const;
-    void setType( const QString& type );
+    void setType(const QString &type);
 
-    QList<const GeoScenePalette*> palette() const;
-    void addPalette( const GeoScenePalette *palette );
-    int removePalette( const GeoScenePalette *palette ); //returns # of items removed
+    QList<const GeoScenePalette *> palette() const;
+    void addPalette(const GeoScenePalette *palette);
+    int removePalette(const GeoScenePalette *palette); // returns # of items removed
 
     const char *nodeType() const override;
 
- private:
+private:
     QString m_name;
     QString m_type;
-    QList<const GeoScenePalette*> m_palette;
-
+    QList<const GeoScenePalette *> m_palette;
 };
 
 }

@@ -11,7 +11,6 @@
 
 #include "GeoDataCoordinates.h"
 
-
 namespace Marble
 {
 
@@ -23,7 +22,7 @@ class MergingPolylineNodesAnimation : public QObject
     Q_OBJECT
 
 public:
-    explicit MergingPolylineNodesAnimation( PolylineAnnotation *polyline );
+    explicit MergingPolylineNodesAnimation(PolylineAnnotation *polyline);
     ~MergingPolylineNodesAnimation() override;
 
 public Q_SLOTS:

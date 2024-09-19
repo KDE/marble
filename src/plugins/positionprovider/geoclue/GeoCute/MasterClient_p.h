@@ -12,8 +12,6 @@
 
 #include "SimpleDBusInterface.h"
 
-
-
 static const QString serviceName = "org.freedesktop.Geoclue.Master";
 static const QString interfaceName = "org.freedesktop.Geoclue.MasterClient";
 static const QString masterInterfaceName = "org.freedesktop.Geoclue.Master";
@@ -23,12 +21,10 @@ static QString createClientPath();
 
 class GeoCute::MasterClient::Private
 {
-    public:
-        Private();
-        
-        SimpleDBusInterface interface;
+public:
+    Private();
+
+    SimpleDBusInterface interface;
 };
-
-
 
 #endif

@@ -3,10 +3,8 @@
 // SPDX-FileCopyrightText: 2008 Patrick Spendrin <ps_ml@gmx.de>
 //
 
-
 #ifndef MARBLE_GEODATAMULTIGEOMETRY_H
 #define MARBLE_GEODATAMULTIGEOMETRY_H
-
 
 #include "geodata_export.h"
 
@@ -27,9 +25,9 @@ class GeoDataMultiGeometryPrivate;
  */
 class GEODATA_EXPORT GeoDataMultiGeometry : public GeoDataGeometry
 {
- public:
+public:
     GeoDataMultiGeometry();
-    explicit GeoDataMultiGeometry( const GeoDataGeometry& other );
+    explicit GeoDataMultiGeometry(const GeoDataGeometry &other);
 
     ~GeoDataMultiGeometry() override;
 
@@ -40,60 +38,62 @@ class GEODATA_EXPORT GeoDataMultiGeometry : public GeoDataGeometry
     GeoDataGeometry *copy() const override;
 
     bool operator==(const GeoDataMultiGeometry &other) const;
-    bool operator!=(const GeoDataMultiGeometry &other) const { return !(*this == other); }
+    bool operator!=(const GeoDataMultiGeometry &other) const
+    {
+        return !(*this == other);
+    }
 
-    const GeoDataLatLonAltBox& latLonAltBox() const override;
+    const GeoDataLatLonAltBox &latLonAltBox() const override;
 
     int size() const;
-    GeoDataGeometry& at( int pos );
-    const GeoDataGeometry& at( int pos ) const;
-    GeoDataGeometry& operator[]( int pos );
-    const GeoDataGeometry& operator[]( int pos ) const;
+    GeoDataGeometry &at(int pos);
+    const GeoDataGeometry &at(int pos) const;
+    GeoDataGeometry &operator[](int pos);
+    const GeoDataGeometry &operator[](int pos) const;
 
-    GeoDataGeometry& first();
-    const GeoDataGeometry& first() const;
-    GeoDataGeometry& last();
-    const GeoDataGeometry& last() const;
-
-    /**
-     * @brief  returns the requested child item
-     */
-    GeoDataGeometry* child( int );
+    GeoDataGeometry &first();
+    const GeoDataGeometry &first() const;
+    GeoDataGeometry &last();
+    const GeoDataGeometry &last() const;
 
     /**
      * @brief  returns the requested child item
      */
-    const GeoDataGeometry* child( int ) const;
+    GeoDataGeometry *child(int);
+
+    /**
+     * @brief  returns the requested child item
+     */
+    const GeoDataGeometry *child(int) const;
 
     /**
      * @brief returns the position of an item in the list
      */
-    int childPosition( const GeoDataGeometry *child ) const;
+    int childPosition(const GeoDataGeometry *child) const;
 
     /**
-    * @brief add an element
-    */
-    void append( GeoDataGeometry *other );
+     * @brief add an element
+     */
+    void append(GeoDataGeometry *other);
 
-    GeoDataMultiGeometry& operator << ( const GeoDataGeometry& value );
-    
-    QVector<GeoDataGeometry*>::Iterator begin();
-    QVector<GeoDataGeometry*>::Iterator end();
-    QVector<GeoDataGeometry*>::ConstIterator constBegin() const;
-    QVector<GeoDataGeometry*>::ConstIterator constEnd() const;
+    GeoDataMultiGeometry &operator<<(const GeoDataGeometry &value);
+
+    QVector<GeoDataGeometry *>::Iterator begin();
+    QVector<GeoDataGeometry *>::Iterator end();
+    QVector<GeoDataGeometry *>::ConstIterator constBegin() const;
+    QVector<GeoDataGeometry *>::ConstIterator constEnd() const;
     void clear();
     QVector<GeoDataGeometry *> vector();
 
-    QVector<GeoDataGeometry*>::Iterator erase ( QVector<GeoDataGeometry*>::Iterator pos );
-    QVector<GeoDataGeometry*>::Iterator erase ( QVector<GeoDataGeometry*>::Iterator begin,
-                                                  QVector<GeoDataGeometry*>::Iterator end );
+    QVector<GeoDataGeometry *>::Iterator erase(QVector<GeoDataGeometry *>::Iterator pos);
+    QVector<GeoDataGeometry *>::Iterator erase(QVector<GeoDataGeometry *>::Iterator begin, QVector<GeoDataGeometry *>::Iterator end);
 
     // Serialize the Placemark to @p stream
-    void pack( QDataStream& stream ) const override;
+    void pack(QDataStream &stream) const override;
     // Unserialize the Placemark from @p stream
-    void unpack( QDataStream& stream ) override;
+    void unpack(QDataStream &stream) override;
 
- private:
+private:
     Q_DECLARE_PRIVATE(GeoDataMultiGeometry)
 };
 

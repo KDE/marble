@@ -8,28 +8,27 @@
 
 #include "MarbleDebug.h"
 
-#include "KmlElementDictionary.h"
-#include "GeoDataIconStyle.h"
 #include "GeoDataHotSpot.h"
+#include "GeoDataIconStyle.h"
 #include "GeoParser.h"
+#include "KmlElementDictionary.h"
 
 namespace Marble
 {
 namespace kml
 {
-KML_DEFINE_TAG_HANDLER( hotSpot )
+KML_DEFINE_TAG_HANDLER(hotSpot)
 
-GeoNode* KmlhotSpotTagHandler::parse( GeoParser& parser ) const
+GeoNode *KmlhotSpotTagHandler::parse(GeoParser &parser) const
 {
     Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1String(kmlTag_hotSpot)));
 
     GeoStackItem parentItem = parser.parentElement();
-    
-    if ( parentItem.represents( kmlTag_IconStyle ) ) {
-        QPointF pf( parser.attribute( "x" ).trimmed().toFloat(), 
-                    parser.attribute( "y" ).trimmed().toFloat() );
-        QString xu = parser.attribute( "xunits" ).trimmed();
-        QString yu = parser.attribute( "yunits" ).trimmed();
+
+    if (parentItem.represents(kmlTag_IconStyle)) {
+        QPointF pf(parser.attribute("x").trimmed().toFloat(), parser.attribute("y").trimmed().toFloat());
+        QString xu = parser.attribute("xunits").trimmed();
+        QString yu = parser.attribute("yunits").trimmed();
 
         GeoDataHotSpot::Units xunits;
         GeoDataHotSpot::Units yunits;
@@ -50,7 +49,7 @@ GeoNode* KmlhotSpotTagHandler::parse( GeoParser& parser ) const
             yunits = GeoDataHotSpot::Fraction;
         }
 
-        parentItem.nodeAs<GeoDataIconStyle>()->setHotSpot( pf, xunits, yunits );
+        parentItem.nodeAs<GeoDataIconStyle>()->setHotSpot(pf, xunits, yunits);
     }
     return nullptr;
 }

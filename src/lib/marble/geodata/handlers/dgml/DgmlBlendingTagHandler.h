@@ -12,10 +12,10 @@ namespace Marble
 namespace dgml
 {
 
-class DgmlBlendingTagHandler: public GeoTagHandler
+class DgmlBlendingTagHandler : public GeoTagHandler
 {
 public:
-    GeoNode* parse( GeoParser& ) const override;
+    GeoNode *parse(GeoParser &) const override;
 };
 
 }

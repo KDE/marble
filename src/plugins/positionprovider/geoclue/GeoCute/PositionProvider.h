@@ -6,10 +6,8 @@
 #ifndef GEOCUTE_POSITIONPROVIDER_H
 #define GEOCUTE_POSITIONPROVIDER_H
 
-#include "Provider.h"
 #include "Position.h"
-
-
+#include "Provider.h"
 
 class QString;
 
@@ -19,26 +17,23 @@ namespace GeoCute
 class PositionProvider : public Provider
 {
     Q_OBJECT
-    
-    public:
-        PositionProvider(const QString& service, const QString& path,
-            QObject* parent = 0);
-        ~PositionProvider();
-        Position position() const;
 
-        static PositionProvider* detailed();
+public:
+    PositionProvider(const QString &service, const QString &path, QObject *parent = 0);
+    ~PositionProvider();
+    Position position() const;
 
-    Q_SIGNALS:
-        void positionChanged(GeoCute::Position position);
-        
-    private:
-        class Private;
-        Private* const d;
-        Q_PRIVATE_SLOT(d, void positionChangedCall(QDBusMessage message))
+    static PositionProvider *detailed();
+
+Q_SIGNALS:
+    void positionChanged(GeoCute::Position position);
+
+private:
+    class Private;
+    Private *const d;
+    Q_PRIVATE_SLOT(d, void positionChangedCall(QDBusMessage message))
 };
 
 }
-
-
 
 #endif

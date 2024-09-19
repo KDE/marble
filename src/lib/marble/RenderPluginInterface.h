@@ -7,8 +7,8 @@
 #ifndef MARBLE_RENDERPLUGININTERFACE_H
 #define MARBLE_RENDERPLUGININTERFACE_H
 
-#include "PluginInterface.h"
 #include "LayerInterface.h"
+#include "PluginInterface.h"
 
 #include <QStringList>
 
@@ -22,9 +22,9 @@ class RenderPlugin;
  *
  */
 
-class RenderPluginInterface: public PluginInterface, public LayerInterface
+class RenderPluginInterface : public PluginInterface, public LayerInterface
 {
- public:
+public:
     ~RenderPluginInterface() override;
 
     virtual void initialize() = 0;
@@ -63,6 +63,6 @@ class RenderPluginInterface: public PluginInterface, public LayerInterface
 
 }
 
-Q_DECLARE_INTERFACE( Marble::RenderPluginInterface, "org.kde.Marble.RenderPluginInterface/1.09" )
+Q_DECLARE_INTERFACE(Marble::RenderPluginInterface, "org.kde.Marble.RenderPluginInterface/1.09")
 
 #endif

@@ -7,7 +7,8 @@
 #include "GeoDataLink.h"
 #include "GeoDataTypes.h"
 
-namespace Marble {
+namespace Marble
+{
 
 class GeoDataLinkPrivate
 {
@@ -24,51 +25,47 @@ public:
     GeoDataLinkPrivate();
 };
 
-GeoDataLinkPrivate::GeoDataLinkPrivate() :
-    m_href(),
-    m_refreshMode(GeoDataLink::OnChange),
-    m_refreshInterval(4.0),
-    m_viewRefreshMode(GeoDataLink::Never),
-    m_viewRefreshTime(4.0),
-    m_viewBoundScale(1.0),
-    m_viewFormat("BBOX=[bboxWest],[bboxSouth],[bboxEast],[bboxNorth]"),
-    m_httpQuery()
+GeoDataLinkPrivate::GeoDataLinkPrivate()
+    : m_href()
+    , m_refreshMode(GeoDataLink::OnChange)
+    , m_refreshInterval(4.0)
+    , m_viewRefreshMode(GeoDataLink::Never)
+    , m_viewRefreshTime(4.0)
+    , m_viewBoundScale(1.0)
+    , m_viewFormat("BBOX=[bboxWest],[bboxSouth],[bboxEast],[bboxNorth]")
+    , m_httpQuery()
 {
     // nothing to do
 }
 
-GeoDataLink::GeoDataLink() : d( new GeoDataLinkPrivate )
+GeoDataLink::GeoDataLink()
+    : d(new GeoDataLinkPrivate)
 {
     // nothing to do
 }
 
-GeoDataLink::GeoDataLink( const Marble::GeoDataLink &other ) :
-   GeoDataObject( other ), d( new GeoDataLinkPrivate( *other.d ) )
+GeoDataLink::GeoDataLink(const Marble::GeoDataLink &other)
+    : GeoDataObject(other)
+    , d(new GeoDataLinkPrivate(*other.d))
 {
     // nothing to do
 }
 
-GeoDataLink &GeoDataLink::operator=( const GeoDataLink &other )
+GeoDataLink &GeoDataLink::operator=(const GeoDataLink &other)
 {
-    GeoDataObject::operator=( other );
+    GeoDataObject::operator=(other);
     *d = *other.d;
     return *this;
 }
 
-bool GeoDataLink::operator==( const GeoDataLink& other ) const
+bool GeoDataLink::operator==(const GeoDataLink &other) const
 {
-    return equals(other) &&
-           d->m_href == other.d->m_href &&
-           d->m_refreshMode == other.d->m_refreshMode &&
-           d->m_refreshInterval == other.d->m_refreshInterval &&
-           d->m_viewRefreshMode == other.d->m_viewRefreshMode &&
-           d->m_viewRefreshTime == other.d->m_viewRefreshTime &&
-           d->m_viewBoundScale == other.d->m_viewBoundScale &&
-           d->m_viewFormat == other.d->m_viewFormat &&
-           d->m_httpQuery == other.d->m_httpQuery;
+    return equals(other) && d->m_href == other.d->m_href && d->m_refreshMode == other.d->m_refreshMode && d->m_refreshInterval == other.d->m_refreshInterval
+        && d->m_viewRefreshMode == other.d->m_viewRefreshMode && d->m_viewRefreshTime == other.d->m_viewRefreshTime
+        && d->m_viewBoundScale == other.d->m_viewBoundScale && d->m_viewFormat == other.d->m_viewFormat && d->m_httpQuery == other.d->m_httpQuery;
 }
 
-bool GeoDataLink::operator!=( const GeoDataLink& other ) const
+bool GeoDataLink::operator!=(const GeoDataLink &other) const
 {
     return !this->operator==(other);
 }
@@ -88,7 +85,7 @@ QString GeoDataLink::href() const
     return d->m_href;
 }
 
-void GeoDataLink::setHref( const QString& href )
+void GeoDataLink::setHref(const QString &href)
 {
     d->m_href = href;
 }
@@ -98,7 +95,7 @@ GeoDataLink::RefreshMode GeoDataLink::refreshMode() const
     return d->m_refreshMode;
 }
 
-void GeoDataLink::setRefreshMode(RefreshMode refreshMode )
+void GeoDataLink::setRefreshMode(RefreshMode refreshMode)
 {
     d->m_refreshMode = refreshMode;
 }
@@ -108,7 +105,7 @@ qreal GeoDataLink::refreshInterval() const
     return d->m_refreshInterval;
 }
 
-void GeoDataLink::setRefreshInterval( qreal refreshInterval)
+void GeoDataLink::setRefreshInterval(qreal refreshInterval)
 {
     d->m_refreshInterval = refreshInterval;
 }

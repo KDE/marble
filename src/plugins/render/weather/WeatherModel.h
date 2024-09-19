@@ -22,20 +22,20 @@ class AbstractWeatherService;
 class GeoDataLatLonAltBox;
 class MarbleWidget;
 class MarbleModel;
-    
+
 class WeatherModel : public AbstractDataPluginModel
 {
     Q_OBJECT
-    
- public:
-    explicit WeatherModel( const MarbleModel *marbleModel, QObject *parent );
+
+public:
+    explicit WeatherModel(const MarbleModel *marbleModel, QObject *parent);
     ~WeatherModel() override;
 
-    void setUpdateInterval( quint32 hours );
+    void setUpdateInterval(quint32 hours);
 
-    void setFavoriteItems( const QStringList& list ) override;
-    
- public Q_SLOTS:
+    void setFavoriteItems(const QStringList &list) override;
+
+public Q_SLOTS:
     /**
      * Downloads the file from @p url. @p item -> addDownloadedFile() will be called when the
      * download is finished. Additionally initialized() items will be added to the item list
@@ -44,25 +44,24 @@ class WeatherModel : public AbstractDataPluginModel
      * @param type The type of the download
      * @param item The plugin item
      **/
-    void downloadItemData( const QUrl& url, const QString& type, AbstractDataPluginItem *item );
-    
-    void downloadDescriptionFileRequested( const QUrl& url );
+    void downloadItemData(const QUrl &url, const QString &type, AbstractDataPluginItem *item);
+
+    void downloadDescriptionFileRequested(const QUrl &url);
 
     void setMarbleWidget(MarbleWidget *widget);
 
- Q_SIGNALS:
-    void favoriteItemChanged( const QString& id, bool isFavorite );
+Q_SIGNALS:
+    void favoriteItemChanged(const QString &id, bool isFavorite);
 
- protected:
-    void getAdditionalItems( const GeoDataLatLonAltBox& box,
-                             qint32 number = 10 ) override;
-    void getItem( const QString &id ) override;
-    void parseFile( const QByteArray& file ) override;
+protected:
+    void getAdditionalItems(const GeoDataLatLonAltBox &box, qint32 number = 10) override;
+    void getItem(const QString &id) override;
+    void parseFile(const QByteArray &file) override;
 
- private:
-    void addService( AbstractWeatherService *service );
+private:
+    void addService(AbstractWeatherService *service);
 
-    QList<AbstractWeatherService*> m_services;
+    QList<AbstractWeatherService *> m_services;
     QTimer *m_timer;
 };
 

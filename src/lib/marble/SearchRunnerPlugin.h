@@ -6,8 +6,8 @@
 #ifndef MARBLE_SEARCHRUNNERPLUGIN_H
 #define MARBLE_SEARCHRUNNERPLUGIN_H
 
-#include <QObject>
 #include "PluginInterface.h"
+#include <QObject>
 
 namespace Marble
 {
@@ -15,15 +15,15 @@ namespace Marble
 class SearchRunner;
 
 /**
-  * A plugin for Marble to execute a placemark search.
-  */
+ * A plugin for Marble to execute a placemark search.
+ */
 class MARBLE_EXPORT SearchRunnerPlugin : public QObject, public PluginInterface
 {
     Q_OBJECT
 
 public:
     /** Constructor with optional parent object */
-    explicit SearchRunnerPlugin( QObject* parent = nullptr );
+    explicit SearchRunnerPlugin(QObject *parent = nullptr);
 
     /** Destructor */
     ~SearchRunnerPlugin() override;
@@ -36,12 +36,12 @@ public:
     virtual QString guiString() const = 0;
 
     /** Plugin factory method to create a new runner instance.
-      * Method caller gets ownership of the returned object
-      */
+     * Method caller gets ownership of the returned object
+     */
     virtual SearchRunner *newRunner() const = 0;
 
     /** True if the plugin supports its tasks on the given planet */
-    bool supportsCelestialBody( const QString &celestialBodyId ) const;
+    bool supportsCelestialBody(const QString &celestialBodyId) const;
 
     /** True if the plugin can execute its tasks without network access */
     bool canWorkOffline() const;
@@ -59,9 +59,9 @@ public:
     QIcon icon() const override;
 
 protected:
-    void setSupportedCelestialBodies( const QStringList &celestialBodies );
+    void setSupportedCelestialBodies(const QStringList &celestialBodies);
 
-    void setCanWorkOffline( bool canWorkOffline );
+    void setCanWorkOffline(bool canWorkOffline);
 
 private:
     class Private;
@@ -70,6 +70,6 @@ private:
 
 }
 
-Q_DECLARE_INTERFACE( Marble::SearchRunnerPlugin, "org.kde.Marble.SearchRunnerPlugin/1.01" )
+Q_DECLARE_INTERFACE(Marble::SearchRunnerPlugin, "org.kde.Marble.SearchRunnerPlugin/1.01")
 
 #endif // MARBLE_SEARCHRUNNERPLUGIN_H

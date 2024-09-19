@@ -5,8 +5,8 @@
 #include "KmlBalloonVisibilityTagHandler.h"
 #include "GeoDataPlacemark.h"
 #include "GeoParser.h"
-#include "MarbleDebug.h"
 #include "KmlElementDictionary.h"
+#include "MarbleDebug.h"
 
 #include <QDebug>
 
@@ -16,9 +16,9 @@ namespace kml
 {
 namespace gx
 {
-KML_DEFINE_TAG_HANDLER_GX22( balloonVisibility )
+KML_DEFINE_TAG_HANDLER_GX22(balloonVisibility)
 
-GeoNode* KmlballoonVisibilityTagHandler::parse( GeoParser& parser ) const
+GeoNode *KmlballoonVisibilityTagHandler::parse(GeoParser &parser) const
 {
     Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1String(kmlTag_balloonVisibility)));
 
@@ -28,8 +28,8 @@ GeoNode* KmlballoonVisibilityTagHandler::parse( GeoParser& parser ) const
 
     GeoStackItem parentItem = parser.parentElement();
 
-    if( parentItem.is<GeoDataPlacemark>() ){
-        parentItem.nodeAs<GeoDataPlacemark>()->setBalloonVisible( visible );
+    if (parentItem.is<GeoDataPlacemark>()) {
+        parentItem.nodeAs<GeoDataPlacemark>()->setBalloonVisible(visible);
     }
 
     return nullptr;

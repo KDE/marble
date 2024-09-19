@@ -52,7 +52,7 @@ public:
     using GeoSceneAbstractTileProjection::geoCoordinates;
 
 private:
-     Q_DISABLE_COPY(GeoSceneEquirectTileProjection)
+    Q_DISABLE_COPY(GeoSceneEquirectTileProjection)
 };
 
 }

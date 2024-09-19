@@ -3,16 +3,15 @@
 // SPDX-FileCopyrightText: 2010 Dennis Nienhüser <nienhueser@kde.org>
 //
 
-
 #ifndef MARBLE_OSMOPENROUTESERVICERUNNER_H
 #define MARBLE_OSMOPENROUTESERVICERUNNER_H
 
 #include "RoutingRunner.h"
 #include "routing/instructions/RoutingInstruction.h"
 
-#include <QString>
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
+#include <QString>
 
 namespace Marble
 {
@@ -23,33 +22,29 @@ class OpenRouteServiceRunner : public RoutingRunner
 {
     Q_OBJECT
 
-    enum PointType {
-        StartPoint,
-        ViaPoint,
-        EndPoint
-    };
+    enum PointType { StartPoint, ViaPoint, EndPoint };
 
 public:
     explicit OpenRouteServiceRunner(QObject *parent = nullptr);
 
     // Overriding MarbleAbstractRunner
-    void retrieveRoute( const RouteRequest *request ) override;
+    void retrieveRoute(const RouteRequest *request) override;
 
 private Q_SLOTS:
     /** Route data was retrieved via http */
-    void retrieveData( QNetworkReply *reply );
+    void retrieveData(QNetworkReply *reply);
 
     /** A network error occurred */
-    void handleError( QNetworkReply::NetworkError );
+    void handleError(QNetworkReply::NetworkError);
 
     void get();
 
 private:
     static QString formatCoordinates(const GeoDataCoordinates &coordinates);
 
-    GeoDataDocument* parse( const QByteArray &input ) const;
+    GeoDataDocument *parse(const QByteArray &input) const;
 
-    static RoutingInstruction::TurnType parseTurnType( const QString &text, QString* road );
+    static RoutingInstruction::TurnType parseTurnType(const QString &text, QString *road);
 
     QNetworkAccessManager m_networkAccessManager;
 

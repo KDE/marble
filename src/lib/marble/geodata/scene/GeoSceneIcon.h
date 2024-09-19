@@ -7,8 +7,8 @@
 #ifndef MARBLE_GEOSCENEICON_H
 #define MARBLE_GEOSCENEICON_H
 
-#include <QString>
 #include <QColor>
+#include <QString>
 
 #include <geodata_export.h>
 
@@ -22,23 +22,23 @@ namespace Marble
  */
 class GEODATA_EXPORT GeoSceneIcon : public GeoNode
 {
- public:
+public:
     GeoSceneIcon();
     ~GeoSceneIcon() override;
 
     QString pixmap() const;
-    void setPixmap(const QString&);
+    void setPixmap(const QString &);
 
     QColor color() const;
-    void setColor(const QColor&);
+    void setColor(const QColor &);
 
     const char *nodeType() const override;
 
- private:
+private:
     // FIXME: d-pointerfy
 
     QString m_pixmap;
-    QColor  m_color;
+    QColor m_color;
 };
 
 }

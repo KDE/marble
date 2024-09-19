@@ -13,11 +13,11 @@
 #include <QApplication>
 #include <QClipboard>
 #include <QLabel>
-#include <QStyle>
 #include <QMouseEvent>
 #include <QPainter>
-#include <QTimer>
 #include <QPixmap>
+#include <QStyle>
+#include <QTimer>
 
 namespace Marble
 {
@@ -25,9 +25,9 @@ namespace Marble
 class MarbleLineEditPrivate
 {
 public:
-    QLabel* m_clearButton;
+    QLabel *m_clearButton;
 
-    QLabel* m_decoratorButton;
+    QLabel *m_decoratorButton;
 
     QPixmap m_clearPixmap;
 
@@ -41,21 +41,23 @@ public:
 
     int m_iconSize;
 
-    explicit MarbleLineEditPrivate( MarbleLineEdit* parent );
+    explicit MarbleLineEditPrivate(MarbleLineEdit *parent);
 
     void createProgressAnimation();
 };
 
-MarbleLineEditPrivate::MarbleLineEditPrivate( MarbleLineEdit* parent ) :
-    m_clearButton( new QLabel( parent ) ), m_decoratorButton( new QLabel( parent ) ),
-    m_currentFrame( 0 ), m_iconSize( 16 )
+MarbleLineEditPrivate::MarbleLineEditPrivate(MarbleLineEdit *parent)
+    : m_clearButton(new QLabel(parent))
+    , m_decoratorButton(new QLabel(parent))
+    , m_currentFrame(0)
+    , m_iconSize(16)
 {
-    m_clearButton->setCursor( Qt::ArrowCursor );
-    m_clearButton->setToolTip( QObject::tr( "Clear" ) );
-    m_decoratorButton->setCursor( Qt::ArrowCursor );
+    m_clearButton->setCursor(Qt::ArrowCursor);
+    m_clearButton->setToolTip(QObject::tr("Clear"));
+    m_decoratorButton->setCursor(Qt::ArrowCursor);
     createProgressAnimation();
-    m_progressTimer.setInterval( 100 );
-    if ( MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen ) {
+    m_progressTimer.setInterval(100);
+    if (MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen) {
         m_iconSize = 32;
     }
 }
@@ -69,34 +71,33 @@ void MarbleLineEditPrivate::createProgressAnimation()
     qreal const r = d / 2.0; // Circle radius
 
     // Canvas parameters
-    QImage canvas( m_iconSize, m_iconSize, QImage::Format_ARGB32 );
-    QPainter painter( &canvas );
-    painter.setRenderHint( QPainter::Antialiasing, true );
-    painter.setPen( QColor ( Qt::gray ) );
-    painter.setBrush( QColor( Qt::white ) );
+    QImage canvas(m_iconSize, m_iconSize, QImage::Format_ARGB32);
+    QPainter painter(&canvas);
+    painter.setRenderHint(QPainter::Antialiasing, true);
+    painter.setPen(QColor(Qt::gray));
+    painter.setBrush(QColor(Qt::white));
 
     // Create all frames
-    for( double t = 0.0; t < 2 * M_PI; t += M_PI / 8.0 ) {
-        canvas.fill( Qt::transparent );
-        QRectF firstCircle( h - r + q * cos( t ), h - r + q * sin( t ), d, d );
-        QRectF secondCircle( h - r + q * cos( t + M_PI ), h - r + q * sin( t + M_PI ), d, d );
-        painter.drawEllipse( firstCircle );
-        painter.drawEllipse( secondCircle );
-        m_progressAnimation.push_back( QPixmap::fromImage( canvas ) );
+    for (double t = 0.0; t < 2 * M_PI; t += M_PI / 8.0) {
+        canvas.fill(Qt::transparent);
+        QRectF firstCircle(h - r + q * cos(t), h - r + q * sin(t), d, d);
+        QRectF secondCircle(h - r + q * cos(t + M_PI), h - r + q * sin(t + M_PI), d, d);
+        painter.drawEllipse(firstCircle);
+        painter.drawEllipse(secondCircle);
+        m_progressAnimation.push_back(QPixmap::fromImage(canvas));
     }
 }
 
-MarbleLineEdit::MarbleLineEdit( QWidget *parent ) :
-        QLineEdit( parent ), d( new MarbleLineEditPrivate( this ) )
+MarbleLineEdit::MarbleLineEdit(QWidget *parent)
+    : QLineEdit(parent)
+    , d(new MarbleLineEditPrivate(this))
 {
-    updateClearButtonIcon( text() );
+    updateClearButtonIcon(text());
     updateClearButton();
 
-    setDecorator( d->m_decoratorPixmap );
-    connect( this, SIGNAL(textChanged(QString)),
-             SLOT(updateClearButtonIcon(QString)) );
-    connect( &d->m_progressTimer, SIGNAL(timeout()),
-             this, SLOT(updateProgress()) );
+    setDecorator(d->m_decoratorPixmap);
+    connect(this, SIGNAL(textChanged(QString)), SLOT(updateClearButtonIcon(QString)));
+    connect(&d->m_progressTimer, SIGNAL(timeout()), this, SLOT(updateProgress()));
 }
 
 MarbleLineEdit::~MarbleLineEdit()
@@ -107,99 +108,99 @@ MarbleLineEdit::~MarbleLineEdit()
 void MarbleLineEdit::setDecorator(const QPixmap &decorator)
 {
     d->m_decoratorPixmap = decorator;
-    d->m_decoratorButton->setPixmap( d->m_decoratorPixmap );
+    d->m_decoratorButton->setPixmap(d->m_decoratorPixmap);
     int const padding = 2 + d->m_decoratorPixmap.width();
 
     QString const prefixDirection = layoutDirection() == Qt::LeftToRight ? "left" : "right";
     QString decoratorStyleSheet;
-    if ( !d->m_decoratorPixmap.isNull() ) {
-        decoratorStyleSheet = QStringLiteral( "; padding-%1: %2" ).arg( prefixDirection ).arg( padding );
+    if (!d->m_decoratorPixmap.isNull()) {
+        decoratorStyleSheet = QStringLiteral("; padding-%1: %2").arg(prefixDirection).arg(padding);
     }
     // Padding for clear button to avoid text underflow
-    QString const postfixDirection  = layoutDirection() == Qt::LeftToRight ? "right" : "left";
-    QString styleSheet = QStringLiteral( ":enabled { padding-%1: %2; %3}").arg( postfixDirection ).arg( padding ).arg( decoratorStyleSheet );
+    QString const postfixDirection = layoutDirection() == Qt::LeftToRight ? "right" : "left";
+    QString styleSheet = QStringLiteral(":enabled { padding-%1: %2; %3}").arg(postfixDirection).arg(padding).arg(decoratorStyleSheet);
 
     bool const smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
-    if ( !smallScreen ) {
-        setStyleSheet( styleSheet );
+    if (!smallScreen) {
+        setStyleSheet(styleSheet);
     }
 }
 
 void MarbleLineEdit::setBusy(bool busy)
 {
-    if ( busy ) {
+    if (busy) {
         d->m_progressTimer.start();
     } else {
         d->m_progressTimer.stop();
-        d->m_decoratorButton->setPixmap( d->m_decoratorPixmap );
+        d->m_decoratorButton->setPixmap(d->m_decoratorPixmap);
     }
 }
 
-void MarbleLineEdit::updateClearButtonIcon( const QString& text )
+void MarbleLineEdit::updateClearButtonIcon(const QString &text)
 {
-    d->m_clearButton->setVisible( text.length() > 0 );
-    if ( !d->m_clearButton->pixmap().isNull() ) {
+    d->m_clearButton->setVisible(text.length() > 0);
+    if (!d->m_clearButton->pixmap().isNull()) {
         return;
     }
 
     QString const direction = layoutDirection() == Qt::LeftToRight ? "rtl" : "ltr";
     int const size = (MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen) ? 32 : 16;
     QPixmap pixmap = QPixmap(QStringLiteral(":/icons/%1x%1/edit-clear-locationbar-%2.png").arg(size).arg(direction));
-    d->m_clearButton->setPixmap( pixmap );
+    d->m_clearButton->setPixmap(pixmap);
 }
 
 void MarbleLineEdit::updateClearButton()
 {
     const QSize geom = size();
-    const int frameWidth = style()->pixelMetric( QStyle::PM_DefaultFrameWidth, nullptr, this );
+    const int frameWidth = style()->pixelMetric(QStyle::PM_DefaultFrameWidth, nullptr, this);
     const int pixmapSize = d->m_clearButton->pixmap().width() + 1;
     const int decoratorSize = d->m_decoratorPixmap.width() + 1;
 
-    int y = ( geom.height() - pixmapSize ) / 2;
-    if ( layoutDirection() == Qt::LeftToRight ) {
-        d->m_clearButton->move( geom.width() - frameWidth - pixmapSize - decoratorSize, y );
-        d->m_decoratorButton->move( frameWidth - decoratorSize + 1, y );
+    int y = (geom.height() - pixmapSize) / 2;
+    if (layoutDirection() == Qt::LeftToRight) {
+        d->m_clearButton->move(geom.width() - frameWidth - pixmapSize - decoratorSize, y);
+        d->m_decoratorButton->move(frameWidth - decoratorSize + 1, y);
     } else {
-        d->m_clearButton->move( frameWidth - decoratorSize + 1, y );
-        d->m_decoratorButton->move( geom.width() - frameWidth - pixmapSize - decoratorSize, y );
+        d->m_clearButton->move(frameWidth - decoratorSize + 1, y);
+        d->m_decoratorButton->move(geom.width() - frameWidth - pixmapSize - decoratorSize, y);
     }
 }
 
 void MarbleLineEdit::updateProgress()
 {
-    if ( !d->m_progressAnimation.isEmpty() ) {
-        d->m_currentFrame = ( d->m_currentFrame + 1 ) % d->m_progressAnimation.size();
+    if (!d->m_progressAnimation.isEmpty()) {
+        d->m_currentFrame = (d->m_currentFrame + 1) % d->m_progressAnimation.size();
         QPixmap frame = d->m_progressAnimation[d->m_currentFrame];
-        d->m_decoratorButton->setPixmap( frame );
+        d->m_decoratorButton->setPixmap(frame);
     }
 }
 
-void MarbleLineEdit::mouseReleaseEvent( QMouseEvent* e )
+void MarbleLineEdit::mouseReleaseEvent(QMouseEvent *e)
 {
-    if ( d->m_clearButton == childAt( e->pos() ) ) {
+    if (d->m_clearButton == childAt(e->pos())) {
         QString newText;
-        if ( e->button() == Qt::MiddleButton ) {
-            newText = QApplication::clipboard()->text( QClipboard::Selection );
-            setText( newText );
+        if (e->button() == Qt::MiddleButton) {
+            newText = QApplication::clipboard()->text(QClipboard::Selection);
+            setText(newText);
         } else {
-            setSelection( 0, text().size() );
+            setSelection(0, text().size());
             del();
             emit clearButtonClicked();
         }
-        emit textChanged( newText );
+        emit textChanged(newText);
     }
 
-    if ( d->m_decoratorButton == childAt( e->pos() ) ) {
+    if (d->m_decoratorButton == childAt(e->pos())) {
         emit decoratorButtonClicked();
     }
 
-    QLineEdit::mouseReleaseEvent( e );
+    QLineEdit::mouseReleaseEvent(e);
 }
 
-void MarbleLineEdit::resizeEvent( QResizeEvent * event )
+void MarbleLineEdit::resizeEvent(QResizeEvent *event)
 {
     updateClearButton();
-    QLineEdit::resizeEvent( event );
+    QLineEdit::resizeEvent(event);
 }
 
 } // namespace Marble

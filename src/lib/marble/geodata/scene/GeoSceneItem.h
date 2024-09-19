@@ -22,40 +22,40 @@ class GeoSceneIcon;
 
 class GEODATA_EXPORT GeoSceneItem : public GeoNode
 {
- public:
-    explicit GeoSceneItem( const QString& name );
+public:
+    explicit GeoSceneItem(const QString &name);
     ~GeoSceneItem() override;
-    
-    const char* nodeType() const override;
+
+    const char *nodeType() const override;
 
     QString name() const;
 
     QString text() const;
-    void setText( const QString& text );
+    void setText(const QString &text);
 
     bool checkable() const;
-    void setCheckable( bool checkable );
+    void setCheckable(bool checkable);
 
     QString connectTo() const;
-    void setConnectTo( const QString& text );
+    void setConnectTo(const QString &text);
 
-    int  spacing() const;
-    void setSpacing( int spacing );
+    int spacing() const;
+    void setSpacing(int spacing);
 
-    const GeoSceneIcon* icon() const;
-    GeoSceneIcon* icon();
+    const GeoSceneIcon *icon() const;
+    GeoSceneIcon *icon();
 
- private:
-    Q_DISABLE_COPY( GeoSceneItem )
+private:
+    Q_DISABLE_COPY(GeoSceneItem)
 
-    GeoSceneIcon* m_icon;
+    GeoSceneIcon *m_icon;
 
     QString m_name;
     QString m_text;
     QString m_connectTo;
 
-    bool    m_checkable;
-    int     m_spacing;
+    bool m_checkable;
+    int m_spacing;
 };
 
 }

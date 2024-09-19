@@ -14,7 +14,7 @@
 
 namespace Ui
 {
-    class SunControlWidget;
+class SunControlWidget;
 }
 
 namespace Marble
@@ -24,28 +24,28 @@ class MarbleWidget;
 class MARBLE_EXPORT SunControlWidget : public QDialog
 {
     Q_OBJECT
-	
- public:
-    explicit SunControlWidget( MarbleWidget *marbleWidget, QWidget* parent = nullptr );
+
+public:
+    explicit SunControlWidget(MarbleWidget *marbleWidget, QWidget *parent = nullptr);
     ~SunControlWidget() override;
-    void setSunShading( bool );
+    void setSunShading(bool);
 
- private Q_SLOTS:
+private Q_SLOTS:
     void apply();
-	
- Q_SIGNALS:
-    void showSun( bool show );
-    void isLockedToSubSolarPoint( bool show );
-    void isSubSolarPointIconVisible( bool show );
 
- protected:
-    Q_DISABLE_COPY( SunControlWidget )
+Q_SIGNALS:
+    void showSun(bool show);
+    void isLockedToSubSolarPoint(bool show);
+    void isSubSolarPointIconVisible(bool show);
 
-    void showEvent(QShowEvent* event) override;
+protected:
+    Q_DISABLE_COPY(SunControlWidget)
+
+    void showEvent(QShowEvent *event) override;
 
     Ui::SunControlWidget *m_uiWidget;
-    MarbleWidget         *const m_marbleWidget;
-    QString               m_shadow;
+    MarbleWidget *const m_marbleWidget;
+    QString m_shadow;
 };
 
 }

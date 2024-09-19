@@ -7,29 +7,27 @@
 #ifndef MARBLE_NEWBOOKMARKFOLDERDIALOG_H
 #define MARBLE_NEWBOOKMARKFOLDERDIALOG_H
 
-#include "ui_NewBookmarkFolderDialog.h"
 #include "marble_export.h"
+#include "ui_NewBookmarkFolderDialog.h"
 
 namespace Marble
 {
 
 class MARBLE_EXPORT NewBookmarkFolderDialog : public QDialog, private Ui::UiNewBookmarkFolderDialog
 {
-
     Q_OBJECT
 
- public:
-    explicit NewBookmarkFolderDialog( QWidget *parent = nullptr );
+public:
+    explicit NewBookmarkFolderDialog(QWidget *parent = nullptr);
 
     ~NewBookmarkFolderDialog() override;
 
-    void setFolderName( const QString &name );
+    void setFolderName(const QString &name);
 
     QString folderName() const;
 
- private:
-    Q_DISABLE_COPY( NewBookmarkFolderDialog )
-
+private:
+    Q_DISABLE_COPY(NewBookmarkFolderDialog)
 };
 
 }

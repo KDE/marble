@@ -7,9 +7,9 @@
 #define NOTESITEM_H
 
 #include "AbstractDataPluginItem.h"
-#include <QPixmap>
-#include <QLabel>
 #include <QDateTime>
+#include <QLabel>
+#include <QPixmap>
 
 class Comment
 {
@@ -36,7 +36,7 @@ class NotesItem : public AbstractDataPluginItem
     Q_OBJECT
 
 public:
-    explicit NotesItem(QObject* parent);
+    explicit NotesItem(QObject *parent);
 
     ~NotesItem() override;
 
@@ -48,13 +48,13 @@ public:
 
     void setAuthor(const QString &author);
 
-    void setDateCreated(const QDateTime& dateCreated);
+    void setDateCreated(const QDateTime &dateCreated);
 
-    void setNoteStatus(const QString& noteStatus);
+    void setNoteStatus(const QString &noteStatus);
 
-    void setDateClosed(const QDateTime& dataClosed);
+    void setDateClosed(const QDateTime &dataClosed);
 
-    void addComment(const Comment& comment);
+    void addComment(const Comment &comment);
 
 private:
     QPixmap m_pixmap_open;

@@ -7,12 +7,12 @@
 namespace Marble
 {
 
-SearchRunner::SearchRunner( QObject *parent ) :
-    QObject( parent )
+SearchRunner::SearchRunner(QObject *parent)
+    : QObject(parent)
 {
 }
 
-void SearchRunner::setModel( const MarbleModel *model )
+void SearchRunner::setModel(const MarbleModel *model)
 {
     m_model = model;
 }

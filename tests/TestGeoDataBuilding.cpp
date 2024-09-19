@@ -3,16 +3,18 @@
 // SPDX-FileCopyrightText: 2017 Mohammed Nafees <nafees.technocool@gmail.com>
 //
 
-#include <QTest>
 #include "TestUtils.h"
+#include <QTest>
 
 #include "GeoDataBuilding.h"
-#include "GeoDataMultiGeometry.h"
 #include "GeoDataLinearRing.h"
+#include "GeoDataMultiGeometry.h"
 
-namespace Marble {
+namespace Marble
+{
 
-class TestGeoDataBuilding : public QObject {
+class TestGeoDataBuilding : public QObject
+{
     Q_OBJECT
 
 private Q_SLOTS:
@@ -20,7 +22,8 @@ private Q_SLOTS:
     void testHeightExtraction();
 };
 
-void TestGeoDataBuilding::defaultConstructor() {
+void TestGeoDataBuilding::defaultConstructor()
+{
     GeoDataBuilding building;
 
     QCOMPARE(building.height(), 0.0);

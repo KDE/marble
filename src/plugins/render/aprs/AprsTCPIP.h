@@ -9,25 +9,25 @@
 #include "AprsSource.h"
 #include <QString>
 
-namespace Marble {
-    class AprsTCPIP : public AprsSource
-    {
-      public:
-        AprsTCPIP( const QString& hostName, int port );
-        ~AprsTCPIP() override;
+namespace Marble
+{
+class AprsTCPIP : public AprsSource
+{
+public:
+    AprsTCPIP(const QString &hostName, int port);
+    ~AprsTCPIP() override;
 
-        QString    sourceName() const override;
-        QIODevice *openSocket() override;
-        void       checkReadReturn( int length, QIODevice **socket,
-                                    AprsGatherer *gatherer ) override;
+    QString sourceName() const override;
+    QIODevice *openSocket() override;
+    void checkReadReturn(int length, QIODevice **socket, AprsGatherer *gatherer) override;
 
-        bool       canDoDirect() const override;
+    bool canDoDirect() const override;
 
-      private:
-        QString m_hostName;
-        int     m_port;
-        int     m_numErrors;
-    };
+private:
+    QString m_hostName;
+    int m_port;
+    int m_numErrors;
+};
 }
 
 #endif /* APRSTCPIP_H */

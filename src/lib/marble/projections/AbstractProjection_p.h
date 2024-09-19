@@ -6,7 +6,6 @@
 #ifndef MARBLE_ABSTRACTPROJECTIONPRIVATE_H
 #define MARBLE_ABSTRACTPROJECTIONPRIVATE_H
 
-
 namespace Marble
 {
 
@@ -14,20 +13,20 @@ class AbstractProjection;
 
 class AbstractProjectionPrivate
 {
-  public:
-    explicit AbstractProjectionPrivate( AbstractProjection * parent );
+public:
+    explicit AbstractProjectionPrivate(AbstractProjection *parent);
 
-    virtual ~AbstractProjectionPrivate() { };
+    virtual ~AbstractProjectionPrivate() {};
 
     int levelForResolution(qreal resolution) const;
 
-    qreal  m_maxLat;
-    qreal  m_minLat;
-    mutable qreal  m_previousResolution;
-    mutable qreal  m_level;
+    qreal m_maxLat;
+    qreal m_minLat;
+    mutable qreal m_previousResolution;
+    mutable qreal m_level;
 
-    AbstractProjection * const q_ptr;
-    Q_DECLARE_PUBLIC( AbstractProjection )
+    AbstractProjection *const q_ptr;
+    Q_DECLARE_PUBLIC(AbstractProjection)
 };
 
 } // namespace Marble

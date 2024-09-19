@@ -3,7 +3,6 @@
 // SPDX-FileCopyrightText: 2010 Dennis Nienhüser <nienhueser@kde.org>
 //
 
-
 #ifndef MARBLE_LATLONPLUGIN_H
 #define MARBLE_LATLONPLUGIN_H
 
@@ -16,10 +15,10 @@ class LatLonPlugin : public SearchRunnerPlugin
 {
     Q_OBJECT
     Q_PLUGIN_METADATA(IID "org.kde.marble.LatLonPlugin")
-    Q_INTERFACES( Marble::SearchRunnerPlugin )
+    Q_INTERFACES(Marble::SearchRunnerPlugin)
 
 public:
-    explicit LatLonPlugin( QObject *parent = nullptr );
+    explicit LatLonPlugin(QObject *parent = nullptr);
 
     QString name() const override;
 
@@ -35,7 +34,7 @@ public:
 
     QVector<PluginAuthor> pluginAuthors() const override;
 
-    SearchRunner* newRunner() const override;
+    SearchRunner *newRunner() const override;
 };
 
 }

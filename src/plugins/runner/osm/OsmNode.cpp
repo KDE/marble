@@ -6,15 +6,16 @@
 #include <OsmNode.h>
 
 #include "osm/OsmObjectManager.h"
-#include <GeoDataStyle.h>
-#include <GeoDataIconStyle.h>
 #include <GeoDataDocument.h>
+#include <GeoDataIconStyle.h>
+#include <GeoDataStyle.h>
 #include <MarbleDirs.h>
 #include <StyleBuilder.h>
 
 #include <QXmlStreamAttributes>
 
-namespace Marble {
+namespace Marble
+{
 
 void OsmNode::parseCoordinates(const QXmlStreamAttributes &attributes)
 {
@@ -36,7 +37,7 @@ GeoDataPlacemark *OsmNode::create() const
         return nullptr;
     }
 
-    GeoDataPlacemark* placemark = new GeoDataPlacemark;
+    GeoDataPlacemark *placemark = new GeoDataPlacemark;
     placemark->setOsmData(m_osmData);
     auto coordinates = m_coordinates;
     coordinates.setAltitude(m_osmData.tagValue("ele").toDouble());
@@ -44,7 +45,7 @@ GeoDataPlacemark *OsmNode::create() const
 
     QHash<QString, QString>::const_iterator tagIter;
     if ((category == GeoDataPlacemark::TransportCarShare || category == GeoDataPlacemark::MoneyAtm)
-            && (tagIter = m_osmData.findTag(QStringLiteral("operator"))) != m_osmData.tagsEnd()) {
+        && (tagIter = m_osmData.findTag(QStringLiteral("operator"))) != m_osmData.tagsEnd()) {
         placemark->setName(tagIter.value());
     } else {
         placemark->setName(m_osmData.tagValue(QStringLiteral("name")));
@@ -85,13 +86,20 @@ int OsmNode::populationIndex(qint64 population) const
 {
     int popidx = 3;
 
-    if ( population < 2500 )        popidx=10;
-    else if ( population < 5000)    popidx=9;
-    else if ( population < 25000)   popidx=8;
-    else if ( population < 75000)   popidx=7;
-    else if ( population < 250000)  popidx=6;
-    else if ( population < 750000)  popidx=5;
-    else if ( population < 2500000) popidx=4;
+    if (population < 2500)
+        popidx = 10;
+    else if (population < 5000)
+        popidx = 9;
+    else if (population < 25000)
+        popidx = 8;
+    else if (population < 75000)
+        popidx = 7;
+    else if (population < 250000)
+        popidx = 6;
+    else if (population < 750000)
+        popidx = 5;
+    else if (population < 2500000)
+        popidx = 4;
 
     return popidx;
 }

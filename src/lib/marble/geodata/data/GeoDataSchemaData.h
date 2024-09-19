@@ -27,10 +27,10 @@ class GEODATA_EXPORT GeoDataSchemaData : public GeoNode
 {
 public:
     GeoDataSchemaData();
-    GeoDataSchemaData( const GeoDataSchemaData& other );
-    GeoDataSchemaData& operator=( const GeoDataSchemaData& rhs );
-    bool operator==( const GeoDataSchemaData &other ) const;
-    bool operator!=( const GeoDataSchemaData &other ) const;
+    GeoDataSchemaData(const GeoDataSchemaData &other);
+    GeoDataSchemaData &operator=(const GeoDataSchemaData &rhs);
+    bool operator==(const GeoDataSchemaData &other) const;
+    bool operator!=(const GeoDataSchemaData &other) const;
     ~GeoDataSchemaData() override;
 
     /*
@@ -41,17 +41,17 @@ public:
     /*
      * @brief Set the schemaUrl attribute of SchemaData to @p schemaUrl
      */
-    void setSchemaUrl( const QString& schemaUrl );
+    void setSchemaUrl(const QString &schemaUrl);
 
     /*
      * @brief Returns the SimpleData having name attribute @p name
      */
-    GeoDataSimpleData& simpleData( const QString& name ) const;
+    GeoDataSimpleData &simpleData(const QString &name) const;
 
     /*
      * @brief Adds a SimpleData @p simpleData to schemaDataHash
      */
-    void addSimpleData( const GeoDataSimpleData& simpleData );
+    void addSimpleData(const GeoDataSimpleData &simpleData);
 
     /*
      * @brief Dump a list containing all SimpleData values stored in schemaDataHash
@@ -72,22 +72,22 @@ public:
     /*
      * @brief Provides information for downcasting a GeoNode
      */
-    const char* nodeType() const override;
+    const char *nodeType() const override;
 
     /*
      * @brief Serialize SchemaData to a stream @p stream
      */
-    virtual void pack( QDataStream& stream ) const;
+    virtual void pack(QDataStream &stream) const;
 
     /*
      * @brief Unserialize SchemaData from a stream @p stream
      */
-    virtual void unpack( QDataStream& stream );
+    virtual void unpack(QDataStream &stream);
 
 private:
-    GeoDataSchemaDataPrivate * const d;
+    GeoDataSchemaDataPrivate *const d;
 };
 
-}   // namespace Marble
+} // namespace Marble
 
-#endif  // MARBLE_GEODATASCHEMADATA_H
+#endif // MARBLE_GEODATASCHEMADATA_H

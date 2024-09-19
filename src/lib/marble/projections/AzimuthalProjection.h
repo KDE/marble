@@ -25,48 +25,57 @@ class AzimuthalProjectionPrivate;
 class AzimuthalProjection : public AbstractProjection
 {
     // Not a QObject so far because we don't need to send signals.
-  public:
-
+public:
     AzimuthalProjection();
 
     ~AzimuthalProjection() override;
 
-    bool repeatableX() const override { return false; }
+    bool repeatableX() const override
+    {
+        return false;
+    }
 
-    bool traversablePoles()  const override { return true; }
-    bool traversableDateLine()  const override { return true; }
+    bool traversablePoles() const override
+    {
+        return true;
+    }
+    bool traversableDateLine() const override
+    {
+        return true;
+    }
 
-    SurfaceType surfaceType() const override { return Azimuthal; }
+    SurfaceType surfaceType() const override
+    {
+        return Azimuthal;
+    }
 
-    PreservationType preservationType() const override { return NoPreservation; }
+    PreservationType preservationType() const override
+    {
+        return NoPreservation;
+    }
 
     bool isClippedToSphere() const override;
 
     qreal clippingRadius() const override;
 
-    bool  mapCoversViewport( const ViewportParams *viewport ) const override;
+    bool mapCoversViewport(const ViewportParams *viewport) const override;
 
-    bool screenCoordinates( const GeoDataLineString &lineString,
-                            const ViewportParams *viewport,
-                            QVector<QPolygonF*> &polygons ) const override;
+    bool screenCoordinates(const GeoDataLineString &lineString, const ViewportParams *viewport, QVector<QPolygonF *> &polygons) const override;
 
     using AbstractProjection::screenCoordinates;
 
-    QPainterPath mapShape( const ViewportParams *viewport ) const override;
+    QPainterPath mapShape(const ViewportParams *viewport) const override;
 
-    GeoDataLatLonAltBox latLonAltBox( const QRect& screenRect,
-                                      const ViewportParams *viewport ) const override;
+    GeoDataLatLonAltBox latLonAltBox(const QRect &screenRect, const ViewportParams *viewport) const override;
 
- protected:
-    explicit AzimuthalProjection( AzimuthalProjectionPrivate* dd );
+protected:
+    explicit AzimuthalProjection(AzimuthalProjectionPrivate *dd);
 
- private:
-    Q_DECLARE_PRIVATE( AzimuthalProjection )
-    Q_DISABLE_COPY( AzimuthalProjection )
+private:
+    Q_DECLARE_PRIVATE(AzimuthalProjection)
+    Q_DISABLE_COPY(AzimuthalProjection)
 };
 
 }
 
 #endif
-
-

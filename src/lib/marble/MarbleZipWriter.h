@@ -21,44 +21,34 @@
 // We mean it.
 //
 
-#include <QString>
 #include <QFile>
+#include <QString>
 
 #include <marble_export.h>
 
-namespace Marble {
+namespace Marble
+{
 
 class MarbleZipWriterPrivate;
-
 
 class MARBLE_EXPORT MarbleZipWriter
 {
 public:
-    MarbleZipWriter(const QString &fileName, QIODevice::OpenMode mode = (QIODevice::WriteOnly | QIODevice::Truncate) );
+    MarbleZipWriter(const QString &fileName, QIODevice::OpenMode mode = (QIODevice::WriteOnly | QIODevice::Truncate));
 
     explicit MarbleZipWriter(QIODevice *device);
     ~MarbleZipWriter();
 
-    QIODevice* device() const;
+    QIODevice *device() const;
 
     bool isWritable() const;
     bool exists() const;
 
-    enum Status {
-        NoError,
-        FileWriteError,
-        FileOpenError,
-        FilePermissionsError,
-        FileError
-    };
+    enum Status { NoError, FileWriteError, FileOpenError, FilePermissionsError, FileError };
 
     Status status() const;
 
-    enum CompressionPolicy {
-        AlwaysCompress,
-        NeverCompress,
-        AutoCompress
-    };
+    enum CompressionPolicy { AlwaysCompress, NeverCompress, AutoCompress };
 
     void setCompressionPolicy(CompressionPolicy policy);
     CompressionPolicy compressionPolicy() const;
@@ -75,6 +65,7 @@ public:
     void addSymLink(const QString &fileName, const QString &destination);
 
     void close();
+
 private:
     MarbleZipWriterPrivate *d;
     Q_DISABLE_COPY(MarbleZipWriter)

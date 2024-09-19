@@ -19,7 +19,7 @@
 
 namespace Ui
 {
-    class ElevationProfileConfigWidget;
+class ElevationProfileConfigWidget;
 }
 
 namespace Marble
@@ -42,13 +42,13 @@ class ElevationProfileFloatItem : public AbstractFloatItem, public DialogConfigu
     Q_OBJECT
     Q_PLUGIN_METADATA(IID "org.kde.marble.ElevationProfileFloatItem")
 
-    Q_INTERFACES( Marble::RenderPluginInterface )
-    Q_INTERFACES( Marble::DialogConfigurationInterface )
+    Q_INTERFACES(Marble::RenderPluginInterface)
+    Q_INTERFACES(Marble::DialogConfigurationInterface)
 
-    MARBLE_PLUGIN( ElevationProfileFloatItem )
+    MARBLE_PLUGIN(ElevationProfileFloatItem)
 
- public:
-    explicit ElevationProfileFloatItem( const MarbleModel *marbleModel = nullptr );
+public:
+    explicit ElevationProfileFloatItem(const MarbleModel *marbleModel = nullptr);
     ~ElevationProfileFloatItem() override;
 
     QStringList backendTypes() const override;
@@ -75,17 +75,17 @@ class ElevationProfileFloatItem : public AbstractFloatItem, public DialogConfigu
 
     bool isInitialized() const override;
 
-    void setProjection( const ViewportParams *viewport ) override;
+    void setProjection(const ViewportParams *viewport) override;
 
-    void paintContent( QPainter *painter ) override;
+    void paintContent(QPainter *painter) override;
 
     QDialog *configDialog() override;
 
 protected:
-    bool eventFilter( QObject *object, QEvent *e ) override;
-    void contextMenuEvent( QWidget *w, QContextMenuEvent *e ) override;
+    bool eventFilter(QObject *object, QEvent *e) override;
+    void contextMenuEvent(QWidget *w, QContextMenuEvent *e) override;
 
- private Q_SLOTS:
+private Q_SLOTS:
     void handleDataUpdate(const GeoDataLineString &points, const QVector<QPointF> &eleData);
     void updateVisiblePoints();
     void forceRepaint();
@@ -97,55 +97,53 @@ protected:
     void switchToTrackDataSource(int index);
     void switchDataSource(ElevationProfileDataSource *source);
 
-
 Q_SIGNALS:
     void dataUpdated();
 
- private:
-    ElevationProfileDataSource* m_activeDataSource;
+private:
+    ElevationProfileDataSource *m_activeDataSource;
     ElevationProfileRouteDataSource m_routeDataSource;
     ElevationProfileTrackDataSource m_trackDataSource;
     QDialog *m_configDialog;
     Ui::ElevationProfileConfigWidget *ui_configWidget;
 
-    int      m_leftGraphMargin;
-    int      m_eleGraphWidth;
-    qreal    m_viewportWidth;
-    qreal    m_eleGraphHeight;
-    qreal    m_shrinkFactorY;
+    int m_leftGraphMargin;
+    int m_eleGraphWidth;
+    qreal m_viewportWidth;
+    qreal m_eleGraphHeight;
+    qreal m_shrinkFactorY;
 
-    int      m_fontHeight;
+    int m_fontHeight;
 
     ElevationProfilePlotAxis m_axisX;
     ElevationProfilePlotAxis m_axisY;
 
-    GeoDataDocument         m_markerDocument;
+    GeoDataDocument m_markerDocument;
     GeoDataPlacemark *const m_markerPlacemark;
-    int                     m_documentIndex;
+    int m_documentIndex;
 
-    qreal    m_cursorPositionX;
+    qreal m_cursorPositionX;
 
-    bool     m_isInitialized;
+    bool m_isInitialized;
 
     friend class ElevationProfileContextMenu;
-    ElevationProfileContextMenu*   m_contextMenu;
+    ElevationProfileContextMenu *m_contextMenu;
 
-    MarbleWidget*     m_marbleWidget;
+    MarbleWidget *m_marbleWidget;
 
-    int               m_firstVisiblePoint;
-    int               m_lastVisiblePoint;
-    bool              m_zoomToViewport;
-    QVector<QPointF>    m_eleData;
+    int m_firstVisiblePoint;
+    int m_lastVisiblePoint;
+    bool m_zoomToViewport;
+    QVector<QPointF> m_eleData;
     GeoDataLineString m_points;
-    qreal             m_minElevation;
-    qreal             m_maxElevation;
-    qreal             m_gain;
-    qreal             m_loss;
+    qreal m_minElevation;
+    qreal m_maxElevation;
+    qreal m_gain;
+    qreal m_loss;
 
     QVector<QPointF> calculateElevationData(const GeoDataLineString &lineString) const;
     void calculateStatistics(const QVector<QPointF> &eleData);
 };
-
 
 }
 

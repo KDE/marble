@@ -6,8 +6,8 @@
 #ifndef MARBLE_KMLLINKTAGWRITER_H
 #define MARBLE_KMLLINKTAGWRITER_H
 
-#include "GeoTagWriter.h"
 #include "GeoDataLink.h"
+#include "GeoTagWriter.h"
 
 namespace Marble
 {
@@ -15,13 +15,12 @@ namespace Marble
 class KmlLinkTagWriter : public GeoTagWriter
 {
 public:
-    bool write( const GeoNode *node, GeoWriter& writer ) const override;
+    bool write(const GeoNode *node, GeoWriter &writer) const override;
 
-    static QString refreshModeToString( GeoDataLink::RefreshMode refreshMode) ;
+    static QString refreshModeToString(GeoDataLink::RefreshMode refreshMode);
 
 private:
-    static QString viewRefreshModeToString( GeoDataLink::ViewRefreshMode);
-
+    static QString viewRefreshModeToString(GeoDataLink::ViewRefreshMode);
 };
 
 }

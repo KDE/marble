@@ -7,8 +7,8 @@
 
 #include "Route.h"
 
-#include "MarbleDirs.h"
 #include "MarbleDebug.h"
+#include "MarbleDirs.h"
 
 namespace Marble
 {
@@ -16,19 +16,18 @@ namespace Marble
 class VoiceNavigationModelPrivate
 {
 public:
-
-    struct Announcement
-    {
+    struct Announcement {
         bool announcementDone;
         bool turnInstructionDone;
 
-        Announcement(){
+        Announcement()
+        {
             announcementDone = false;
             turnInstructionDone = false;
         }
     };
 
-    VoiceNavigationModel* m_parent;
+    VoiceNavigationModel *m_parent;
 
     QString m_speaker;
 
@@ -58,33 +57,33 @@ public:
 
     QVector<Announcement> m_announcementList;
 
-    explicit VoiceNavigationModelPrivate( VoiceNavigationModel* parent );
+    explicit VoiceNavigationModelPrivate(VoiceNavigationModel *parent);
 
     void reset();
 
     QString audioFile(const QString &name) const;
 
-    QString distanceAudioFile( qreal dest ) const;
+    QString distanceAudioFile(qreal dest) const;
 
-    QString turnTypeAudioFile( Maneuver::Direction turnType, qreal distance );
+    QString turnTypeAudioFile(Maneuver::Direction turnType, qreal distance);
 
-    QString announcementText( Maneuver::Direction turnType, qreal distance );
+    QString announcementText(Maneuver::Direction turnType, qreal distance);
 
-    void updateInstruction(const RouteSegment &segment, qreal distance, Maneuver::Direction turnType );
+    void updateInstruction(const RouteSegment &segment, qreal distance, Maneuver::Direction turnType);
 
-    void updateInstruction( const QString &name );
+    void updateInstruction(const QString &name);
 
     void initializeMaps();
 };
 
-VoiceNavigationModelPrivate::VoiceNavigationModelPrivate( VoiceNavigationModel* parent ) :
-    m_parent( parent ),
-    m_speakerEnabled( true ),
-    m_lastDistance( 0.0 ),
-    m_lastDistanceTraversed( 0.0 ),
-    m_lastTurnType( Maneuver::Unknown ),
-    m_destinationReached( false ),
-    m_deviated( false )
+VoiceNavigationModelPrivate::VoiceNavigationModelPrivate(VoiceNavigationModel *parent)
+    : m_parent(parent)
+    , m_speakerEnabled(true)
+    , m_lastDistance(0.0)
+    , m_lastDistanceTraversed(0.0)
+    , m_lastTurnType(Maneuver::Unknown)
+    , m_destinationReached(false)
+    , m_deviated(false)
 {
     initializeMaps();
 }
@@ -95,27 +94,29 @@ void VoiceNavigationModelPrivate::reset()
     m_lastDistanceTraversed = 0.0;
 }
 
-QString VoiceNavigationModelPrivate::audioFile( const QString &name ) const
+QString VoiceNavigationModelPrivate::audioFile(const QString &name) const
 {
 #ifdef Q_OS_ANDROID
     return name;
 #else
-    QStringList const formats = QStringList() << "ogg" << "mp3" << "wav";
-    if ( m_speakerEnabled ) {
+    QStringList const formats = QStringList() << "ogg"
+                                              << "mp3"
+                                              << "wav";
+    if (m_speakerEnabled) {
         QString const audioTemplate = "%1/%2.%3";
-        for( const QString &format: formats ) {
-            QString const result = audioTemplate.arg( m_speaker, name, format );
-            QFileInfo audioFile( result );
-            if ( audioFile.exists() ) {
+        for (const QString &format : formats) {
+            QString const result = audioTemplate.arg(m_speaker, name, format);
+            QFileInfo audioFile(result);
+            if (audioFile.exists()) {
                 return result;
             }
         }
     }
 
     QString const audioTemplate = "audio/%1.%2";
-    for( const QString &format: formats ) {
-        QString const result = MarbleDirs::path( audioTemplate.arg( name, format ) );
-        if ( !result.isEmpty() ) {
+    for (const QString &format : formats) {
+        QString const result = MarbleDirs::path(audioTemplate.arg(name, format));
+        if (!result.isEmpty()) {
             return result;
         }
     }
@@ -124,46 +125,46 @@ QString VoiceNavigationModelPrivate::audioFile( const QString &name ) const
 #endif
 }
 
-QString VoiceNavigationModelPrivate::distanceAudioFile( qreal dest ) const
+QString VoiceNavigationModelPrivate::distanceAudioFile(qreal dest) const
 {
-    if ( dest > 0.0 && dest < 900.0 ) {
+    if (dest > 0.0 && dest < 900.0) {
         qreal minDistance = 0.0;
         int targetDistance = 0;
         QVector<int> distances;
         distances << 50 << 80 << 100 << 200 << 300 << 400 << 500 << 600 << 700 << 800;
-        for( int distance: distances ) {
-            QString file = audioFile( QString::number( distance ) );
-            qreal currentDistance = qAbs( distance - dest );
-            if ( !file.isEmpty() && ( minDistance == 0.0 || currentDistance < minDistance ) ) {
+        for (int distance : distances) {
+            QString file = audioFile(QString::number(distance));
+            qreal currentDistance = qAbs(distance - dest);
+            if (!file.isEmpty() && (minDistance == 0.0 || currentDistance < minDistance)) {
                 minDistance = currentDistance;
                 targetDistance = distance;
             }
         }
 
-        if ( targetDistance > 0 ) {
-            return audioFile( QString::number( targetDistance ) );
+        if (targetDistance > 0) {
+            return audioFile(QString::number(targetDistance));
         }
     }
 
     return QString();
 }
 
-QString VoiceNavigationModelPrivate::turnTypeAudioFile( Maneuver::Direction turnType, qreal distance )
+QString VoiceNavigationModelPrivate::turnTypeAudioFile(Maneuver::Direction turnType, qreal distance)
 {
     bool const announce = distance >= 75;
-    QMap<Maneuver::Direction, QString> const & map = announce ? m_announceMap : m_turnTypeMap;
-    if ( m_speakerEnabled && map.contains( turnType ) ) {
-        return audioFile( map[turnType] );
+    QMap<Maneuver::Direction, QString> const &map = announce ? m_announceMap : m_turnTypeMap;
+    if (m_speakerEnabled && map.contains(turnType)) {
+        return audioFile(map[turnType]);
     }
 
-    return audioFile( announce ? "ListEnd" : "AppPositive" );
+    return audioFile(announce ? "ListEnd" : "AppPositive");
 }
 
-QString VoiceNavigationModelPrivate::announcementText( Maneuver::Direction turnType, qreal distance )
+QString VoiceNavigationModelPrivate::announcementText(Maneuver::Direction turnType, qreal distance)
 {
     QString announcementText;
     if (distance >= 75) {
-        announcementText = QString("In "+distanceAudioFile(distance)+" meters, ");
+        announcementText = QString("In " + distanceAudioFile(distance) + " meters, ");
     }
     switch (turnType) {
     case Maneuver::Continue:
@@ -209,10 +210,10 @@ QString VoiceNavigationModelPrivate::announcementText( Maneuver::Direction turnT
     return announcementText;
 }
 
-void VoiceNavigationModelPrivate::updateInstruction( const RouteSegment & segment, qreal distance, Maneuver::Direction turnType )
+void VoiceNavigationModelPrivate::updateInstruction(const RouteSegment &segment, qreal distance, Maneuver::Direction turnType)
 {
-    QString turnTypeAudio = turnTypeAudioFile( turnType, distance );
-    if ( turnTypeAudio.isEmpty() ) {
+    QString turnTypeAudio = turnTypeAudioFile(turnType, distance);
+    if (turnTypeAudio.isEmpty()) {
         mDebug() << "Missing audio file for turn type " << turnType << " and speaker " << m_speaker;
         return;
     }
@@ -231,10 +232,10 @@ void VoiceNavigationModelPrivate::updateInstruction( const RouteSegment & segmen
     emit m_parent->instructionChanged();
 }
 
-void VoiceNavigationModelPrivate::updateInstruction( const QString &name )
+void VoiceNavigationModelPrivate::updateInstruction(const QString &name)
 {
     m_queue.clear();
-    m_queue << audioFile( name );
+    m_queue << audioFile(name);
     m_announcementText = name;
     emit m_parent->instructionChanged();
 }
@@ -279,8 +280,9 @@ void VoiceNavigationModelPrivate::initializeMaps()
     m_turnTypeMap[Maneuver::ExitRight] = "TurnRight";
 }
 
-VoiceNavigationModel::VoiceNavigationModel( QObject *parent ) :
-    QObject( parent ), d( new VoiceNavigationModelPrivate( this ) )
+VoiceNavigationModel::VoiceNavigationModel(QObject *parent)
+    : QObject(parent)
+    , d(new VoiceNavigationModelPrivate(this))
 {
     // nothing to do
 }
@@ -297,9 +299,9 @@ QString VoiceNavigationModel::speaker() const
 
 void VoiceNavigationModel::setSpeaker(const QString &speaker)
 {
-    if ( speaker != d->m_speaker ) {
-        QFileInfo speakerDir = QFileInfo( speaker );
-        if ( !speakerDir.exists() ) {
+    if (speaker != d->m_speaker) {
+        QFileInfo speakerDir = QFileInfo(speaker);
+        if (!speakerDir.exists()) {
             d->m_speaker = MarbleDirs::path(QLatin1String("/audio/speakers/") + speaker);
         } else {
             d->m_speaker = speaker;
@@ -315,9 +317,9 @@ bool VoiceNavigationModel::isSpeakerEnabled() const
     return d->m_speakerEnabled;
 }
 
-void VoiceNavigationModel::setSpeakerEnabled( bool enabled )
+void VoiceNavigationModel::setSpeakerEnabled(bool enabled)
 {
-    if ( enabled != d->m_speakerEnabled ) {
+    if (enabled != d->m_speakerEnabled) {
         d->m_speakerEnabled = enabled;
         emit isSpeakerEnabledChanged();
         emit previewChanged();
@@ -329,38 +331,38 @@ void VoiceNavigationModel::reset()
     d->reset();
 }
 
-void VoiceNavigationModel::update(const Route &route, qreal distanceManuever, qreal distanceTarget, bool deviated )
+void VoiceNavigationModel::update(const Route &route, qreal distanceManuever, qreal distanceTarget, bool deviated)
 {
-    if (d->m_lastRoutePath != route.path()){
+    if (d->m_lastRoutePath != route.path()) {
         d->m_announcementList.clear();
         d->m_announcementList.resize(route.size());
         d->m_lastRoutePath = route.path();
     }
 
-    if ( d->m_destinationReached && distanceTarget < 250 ) {
+    if (d->m_destinationReached && distanceTarget < 250) {
         return;
     }
 
-    if ( !d->m_destinationReached && distanceTarget < 50 ) {
+    if (!d->m_destinationReached && distanceTarget < 50) {
         d->m_destinationReached = true;
-        d->updateInstruction( d->m_speakerEnabled ? "You have arrived at your destination" : "AppPositive" );
+        d->updateInstruction(d->m_speakerEnabled ? "You have arrived at your destination" : "AppPositive");
         return;
     }
 
-    if ( distanceTarget > 150 ) {
+    if (distanceTarget > 150) {
         d->m_destinationReached = false;
     }
 
-    if ( deviated && !d->m_deviated ) {
-        d->updateInstruction( d->m_speakerEnabled ? "Deviated from the route" : "ListEnd" );
+    if (deviated && !d->m_deviated) {
+        d->updateInstruction(d->m_speakerEnabled ? "Deviated from the route" : "ListEnd");
     }
     d->m_deviated = deviated;
-    if ( deviated ) {
+    if (deviated) {
         return;
     }
 
     Maneuver::Direction turnType = route.currentSegment().nextRouteSegment().maneuver().direction();
-    if ( !( d->m_lastTurnPoint == route.currentSegment().nextRouteSegment().maneuver().position() ) || turnType != d->m_lastTurnType ) {
+    if (!(d->m_lastTurnPoint == route.currentSegment().nextRouteSegment().maneuver().position()) || turnType != d->m_lastTurnType) {
         d->m_lastTurnPoint = route.currentSegment().nextRouteSegment().maneuver().position();
         d->reset();
     }
@@ -370,19 +372,19 @@ void VoiceNavigationModel::update(const Route &route, qreal distanceManuever, qr
     qreal const distanceTraversed = route.currentSegment().distance() - distanceManuever;
     bool const minDistanceTraversed = d->m_lastDistanceTraversed < 40 && distanceTraversed >= 40;
     bool const announcementAfterTurn = minDistanceTraversed && distanceManuever >= 75;
-    bool const announcement = ( d->m_lastDistance > 850 || announcementAfterTurn ) && distanceManuever <= 850;
-    bool const turn = ( d->m_lastDistance == 0 || d->m_lastDistance > 75 ) && distanceManuever <= 75;
+    bool const announcement = (d->m_lastDistance > 850 || announcementAfterTurn) && distanceManuever <= 850;
+    bool const turn = (d->m_lastDistance == 0 || d->m_lastDistance > 75) && distanceManuever <= 75;
 
     bool const announcementDone = d->m_announcementList[index].announcementDone;
     bool const turnInstructionDone = d->m_announcementList[index].turnInstructionDone;
 
-    if ( ( announcement && !announcementDone ) || ( turn && !turnInstructionDone ) ) {
-        d->updateInstruction( route.currentSegment(), distanceManuever, turnType );
-        VoiceNavigationModelPrivate::Announcement & curAnnouncement = d->m_announcementList[index];
-        if (announcement){
+    if ((announcement && !announcementDone) || (turn && !turnInstructionDone)) {
+        d->updateInstruction(route.currentSegment(), distanceManuever, turnType);
+        VoiceNavigationModelPrivate::Announcement &curAnnouncement = d->m_announcementList[index];
+        if (announcement) {
             curAnnouncement.announcementDone = true;
         }
-        if (turn){
+        if (turn) {
             curAnnouncement.turnInstructionDone = true;
         }
     }
@@ -394,7 +396,7 @@ void VoiceNavigationModel::update(const Route &route, qreal distanceManuever, qr
 
 QString VoiceNavigationModel::preview() const
 {
-    return d->audioFile( d->m_speakerEnabled ? "The Marble team wishes you a pleasant and safe journey!" : "AppPositive" );
+    return d->audioFile(d->m_speakerEnabled ? "The Marble team wishes you a pleasant and safe journey!" : "AppPositive");
 }
 
 QString VoiceNavigationModel::instruction() const

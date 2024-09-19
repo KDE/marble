@@ -12,8 +12,8 @@
 
 using namespace Marble;
 
-PanoramioPlugin::PanoramioPlugin( const MarbleModel *marbleModel ) :
-    AbstractDataPlugin( marbleModel )
+PanoramioPlugin::PanoramioPlugin(const MarbleModel *marbleModel)
+    : AbstractDataPlugin(marbleModel)
 {
 }
 
@@ -24,30 +24,29 @@ QString Marble::PanoramioPlugin::nameId() const
 
 void PanoramioPlugin::initialize()
 {
-    setModel( new PanoramioModel( marbleModel(), this ) );
-    setNumberOfItems( numberOfImagesPerFetch );
+    setModel(new PanoramioModel(marbleModel(), this));
+    setNumberOfItems(numberOfImagesPerFetch);
 }
 
 QString PanoramioPlugin::name() const
 {
-    return tr( "Panoramio Photos" );
+    return tr("Panoramio Photos");
 }
 
 QString PanoramioPlugin::guiString() const
 {
-    return tr( "&Panoramio" );
+    return tr("&Panoramio");
 }
 
 QString PanoramioPlugin::description() const
 {
-    return tr( "Automatically downloads images from around the world in preference to their popularity" );
+    return tr("Automatically downloads images from around the world in preference to their popularity");
 }
 
 QIcon PanoramioPlugin::icon() const
 {
     return QIcon(QStringLiteral(":/icons/panoramio.png"));
 }
-
 
 QString Marble::PanoramioPlugin::version() const
 {
@@ -66,17 +65,17 @@ QVector<PluginAuthor> PanoramioPlugin::pluginAuthors() const
 
 bool PanoramioPlugin::eventFilter(QObject *object, QEvent *event)
 {
-    if ( isInitialized() ) {
-        Q_ASSERT( dynamic_cast<PanoramioModel *>( model() ) != 0 );
+    if (isInitialized()) {
+        Q_ASSERT(dynamic_cast<PanoramioModel *>(model()) != 0);
 
-        PanoramioModel *photoPluginModel = static_cast<PanoramioModel *>( model() );
-        MarbleWidget *widget = dynamic_cast<MarbleWidget *>( object );
-        if ( widget ) {
-            photoPluginModel->setMarbleWidget( widget );
+        PanoramioModel *photoPluginModel = static_cast<PanoramioModel *>(model());
+        MarbleWidget *widget = dynamic_cast<MarbleWidget *>(object);
+        if (widget) {
+            photoPluginModel->setMarbleWidget(widget);
         }
     }
 
-    return AbstractDataPlugin::eventFilter( object, event );
+    return AbstractDataPlugin::eventFilter(object, event);
 }
 
 #include "moc_PanoramioPlugin.cpp"

@@ -12,18 +12,16 @@
 
 #include <libgpsmm.h>
 
-
-
 namespace Marble
 {
 
 class GpsdConnection;
 
-class GpsdThread: public QThread
+class GpsdThread : public QThread
 {
     Q_OBJECT
 
- public:
+public:
     GpsdThread();
 
     ~GpsdThread() override;
@@ -33,13 +31,13 @@ class GpsdThread: public QThread
     QString error() const;
 
 Q_SIGNALS:
-    void statusChanged( PositionProviderStatus status ) const;
+    void statusChanged(PositionProviderStatus status) const;
 
 private:
-    GpsdConnection* m_connection;
-    
- Q_SIGNALS:
-    void gpsdInfo( gps_data_t data );
+    GpsdConnection *m_connection;
+
+Q_SIGNALS:
+    void gpsdInfo(gps_data_t data);
 };
 
 }

@@ -7,23 +7,23 @@
 #include "LocalOsmSearchRunner.h"
 #include "DatabaseQuery.h"
 
-#include "MarbleDebug.h"
 #include "GeoDataPoint.h"
+#include "MarbleDebug.h"
 
 #include <QString>
-#include <QVector>
 #include <QUrl>
+#include <QVector>
 
 namespace Marble
 {
 
 QMap<OsmPlacemark::OsmCategory, GeoDataPlacemark::GeoDataVisualCategory> LocalOsmSearchRunner::m_categoryMap;
 
-LocalOsmSearchRunner::LocalOsmSearchRunner( const QStringList &databaseFiles, QObject *parent ) :
-    SearchRunner( parent ),
-    m_database( databaseFiles )
+LocalOsmSearchRunner::LocalOsmSearchRunner(const QStringList &databaseFiles, QObject *parent)
+    : SearchRunner(parent)
+    , m_database(databaseFiles)
 {
-    if ( m_categoryMap.isEmpty() ) {
+    if (m_categoryMap.isEmpty()) {
         m_categoryMap[OsmPlacemark::UnknownCategory] = GeoDataPlacemark::OsmSite;
         m_categoryMap[OsmPlacemark::Address] = GeoDataPlacemark::OsmSite;
         m_categoryMap[OsmPlacemark::AccomodationCamping] = GeoDataPlacemark::AccomodationCamping;
@@ -93,31 +93,30 @@ LocalOsmSearchRunner::~LocalOsmSearchRunner()
 {
 }
 
-
-void LocalOsmSearchRunner::search( const QString &searchTerm, const GeoDataLatLonBox &preferred )
+void LocalOsmSearchRunner::search(const QString &searchTerm, const GeoDataLatLonBox &preferred)
 {
-    const DatabaseQuery userQuery( model(), searchTerm, preferred );
+    const DatabaseQuery userQuery(model(), searchTerm, preferred);
 
-    QVector<OsmPlacemark> placemarks = m_database.find( userQuery );
+    QVector<OsmPlacemark> placemarks = m_database.find(userQuery);
 
-    QVector<GeoDataPlacemark*> result;
-    for( const OsmPlacemark &placemark: placemarks ) {
-        GeoDataPlacemark* hit = new GeoDataPlacemark;
-        hit->setName( placemark.name() );
-        if ( placemark.category() == OsmPlacemark::Address && !placemark.houseNumber().isEmpty() ) {
+    QVector<GeoDataPlacemark *> result;
+    for (const OsmPlacemark &placemark : placemarks) {
+        GeoDataPlacemark *hit = new GeoDataPlacemark;
+        hit->setName(placemark.name());
+        if (placemark.category() == OsmPlacemark::Address && !placemark.houseNumber().isEmpty()) {
             hit->setName(hit->name() + QLatin1Char(' ') + placemark.houseNumber());
         }
-        if ( !placemark.additionalInformation().isEmpty() ) {
+        if (!placemark.additionalInformation().isEmpty()) {
             hit->setName(hit->name() + QLatin1Char('(') + placemark.additionalInformation() + QLatin1Char(')'));
         }
-        if ( placemark.category() != OsmPlacemark::UnknownCategory ) {
-            hit->setVisualCategory( m_categoryMap[placemark.category()] );
+        if (placemark.category() != OsmPlacemark::UnknownCategory) {
+            hit->setVisualCategory(m_categoryMap[placemark.category()]);
         }
-        hit->setGeometry( new GeoDataPoint( placemark.longitude(), placemark.latitude(), 0.0, GeoDataCoordinates::Degree ) );
+        hit->setGeometry(new GeoDataPoint(placemark.longitude(), placemark.latitude(), 0.0, GeoDataCoordinates::Degree));
         result << hit;
     }
 
-    emit searchFinished( result );
+    emit searchFinished(result);
 }
 
 } // namespace Marble

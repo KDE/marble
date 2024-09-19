@@ -31,7 +31,7 @@ class EclipsesModel : public QAbstractItemModel
     Q_OBJECT
 
 public:
-    explicit EclipsesModel( const MarbleModel *model, QObject *parent = nullptr );
+    explicit EclipsesModel(const MarbleModel *model, QObject *parent = nullptr);
 
     ~EclipsesModel() override;
 
@@ -44,7 +44,7 @@ public:
      * @return GeoDataCoordinates of the current observation point
      * @see setObservationPoint
      */
-    const GeoDataCoordinates& observationPoint() const;
+    const GeoDataCoordinates &observationPoint() const;
 
     /**
      * @brief Set the current observation point
@@ -57,7 +57,7 @@ public:
      *
      * @see observationPoint
      */
-    void setObservationPoint( const GeoDataCoordinates &coords );
+    void setObservationPoint(const GeoDataCoordinates &coords);
 
     /**
      * @brief Set the year
@@ -69,7 +69,7 @@ public:
      *
      * @see year
      */
-    void setYear( int year );
+    void setYear(int year);
 
     /**
      * @brief Return the year
@@ -89,7 +89,7 @@ public:
      *
      * @see withLunarEclipses
      */
-    void setWithLunarEclipses( const bool enable );
+    void setWithLunarEclipses(const bool enable);
 
     /**
      * @brief Return whether or not lunar eclipses are enabled
@@ -114,7 +114,7 @@ public:
      * @return the requested eclipse item or NULL if there is no eclipse
      * @see setYear
      */
-    EclipsesItem* eclipseWithIndex( int index );
+    EclipsesItem *eclipseWithIndex(int index);
 
     /**
      * @brief Return the items in this model
@@ -123,18 +123,15 @@ public:
      *
      * @return list of items in the model
      */
-    QList<EclipsesItem*> items() const;
+    QList<EclipsesItem *> items() const;
 
     // QT abstract item model interface
-    QModelIndex index( int row, int column,
-                       const QModelIndex &parent = QModelIndex() ) const override;
-    QModelIndex parent( const QModelIndex &index ) const override;
-    int rowCount( const QModelIndex &parent = QModelIndex() ) const override;
-    int columnCount( const QModelIndex &parent = QModelIndex() ) const override;
-    QVariant data( const QModelIndex &index,
-                   int role = Qt::DisplayRole ) const override;
-    QVariant headerData( int section, Qt::Orientation orientation,
-                         int role = Qt::DisplayRole ) const override;
+    QModelIndex index(int row, int column, const QModelIndex &parent = QModelIndex()) const override;
+    QModelIndex parent(const QModelIndex &index) const override;
+    int rowCount(const QModelIndex &parent = QModelIndex()) const override;
+    int columnCount(const QModelIndex &parent = QModelIndex()) const override;
+    QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
+    QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const override;
 
 public Q_SLOTS:
     /**
@@ -158,7 +155,7 @@ private:
      *
      * @see clear
      */
-    void addItem( EclipsesItem *item );
+    void addItem(EclipsesItem *item);
 
     /**
      * @brief Clears all items
@@ -171,7 +168,7 @@ private:
 
     const MarbleModel *m_marbleModel;
     EclSolar *m_ecl;
-    QList<EclipsesItem*> m_items;
+    QList<EclipsesItem *> m_items;
     int m_currentYear;
     bool m_withLunarEclipses;
     GeoDataCoordinates m_observationPoint;

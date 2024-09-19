@@ -6,8 +6,8 @@
 #ifndef MARBLE_ROUTEREQUEST_H
 #define MARBLE_ROUTEREQUEST_H
 
-#include "marble_export.h"
 #include "RoutingProfile.h"
+#include "marble_export.h"
 
 #include <QObject>
 
@@ -19,18 +19,17 @@ class GeoDataPlacemark;
 class RouteRequestPrivate;
 
 /**
-  * @brief Points to be included in a route. An ordered list of
-  * GeoDataCoordinates with change notification and Pixmap access, similar
-  * to QAbstractItemModel.
-  */
-class MARBLE_EXPORT RouteRequest: public QObject
+ * @brief Points to be included in a route. An ordered list of
+ * GeoDataCoordinates with change notification and Pixmap access, similar
+ * to QAbstractItemModel.
+ */
+class MARBLE_EXPORT RouteRequest : public QObject
 {
     Q_OBJECT
 
 public:
-
     /** Constructor */
-    explicit RouteRequest( QObject *parent = nullptr );
+    explicit RouteRequest(QObject *parent = nullptr);
 
     /** Destructor */
     ~RouteRequest() override;
@@ -45,72 +44,72 @@ public:
     int size() const;
 
     /** Accessor for the n-th position */
-    GeoDataCoordinates at( int index ) const;
+    GeoDataCoordinates at(int index) const;
 
     /** Add the given element to the end */
-    void append( const GeoDataCoordinates &coordinates, const QString &name = QString() );
+    void append(const GeoDataCoordinates &coordinates, const QString &name = QString());
 
-    void append( const GeoDataPlacemark &placemark );
+    void append(const GeoDataPlacemark &placemark);
 
     /** Add the given element at the given position */
-    void insert( int index, const GeoDataCoordinates &coordinates, const QString &name = QString() );
+    void insert(int index, const GeoDataCoordinates &coordinates, const QString &name = QString());
 
     void insert(int index, const GeoDataPlacemark &placemark);
 
     /** Swaps the given elements at the given positions*/
-    void swap( int index1, int index2 );
+    void swap(int index1, int index2);
 
     /** Change the value of the element at the given position */
-    void setPosition( int index, const GeoDataCoordinates &position, const QString &name = QString() );
+    void setPosition(int index, const GeoDataCoordinates &position, const QString &name = QString());
 
     /** Remove the element at the given position */
-    void remove( int index );
+    void remove(int index);
 
     /** Remove all elements */
     void clear();
 
     /**
-      * Insert a via point. Order will be chosen such that the via point is not before
-      * the start or after the destination. Furthermore the distance between neighboring
-      * route points is minimized
-      *
-      * @note: This does not trigger an update of the route. It becomes "dirty"
-      *
-      * @todo: Minimizing the distance might not always be what the user wants
-      */
-    void addVia( const GeoDataCoordinates &position );
-    void addVia( const GeoDataPlacemark &placemark );
+     * Insert a via point. Order will be chosen such that the via point is not before
+     * the start or after the destination. Furthermore the distance between neighboring
+     * route points is minimized
+     *
+     * @note: This does not trigger an update of the route. It becomes "dirty"
+     *
+     * @todo: Minimizing the distance might not always be what the user wants
+     */
+    void addVia(const GeoDataCoordinates &position);
+    void addVia(const GeoDataPlacemark &placemark);
 
     /** Returns a pixmap which indicates the position of the element */
-    QPixmap pixmap( int index, int size=-1, int margin=2 ) const;
+    QPixmap pixmap(int index, int size = -1, int margin = 2) const;
 
-    void setName( int index, const QString &name );
+    void setName(int index, const QString &name);
 
-    QString name( int index ) const;
+    QString name(int index) const;
 
-    void setVisited( int index, bool visited );
+    void setVisited(int index, bool visited);
 
-    bool visited( int index ) const;
+    bool visited(int index) const;
 
     void reverse();
 
-    void setRoutingProfile( const RoutingProfile &profile );
+    void setRoutingProfile(const RoutingProfile &profile);
 
     RoutingProfile routingProfile() const;
 
-    GeoDataPlacemark & operator[] ( int index );
+    GeoDataPlacemark &operator[](int index);
 
-    GeoDataPlacemark const & operator[] ( int index ) const;
+    GeoDataPlacemark const &operator[](int index) const;
 
 Q_SIGNALS:
     /** The value of the n-th element was changed */
-    void positionChanged( int index, const GeoDataCoordinates &position );
+    void positionChanged(int index, const GeoDataCoordinates &position);
 
     /** An element was added at the given position */
-    void positionAdded( int index );
+    void positionAdded(int index);
 
     /** The element at the given position was removed */
-    void positionRemoved( int index );
+    void positionRemoved(int index);
 
     /** The routing profile was changed */
     void routingProfileChanged();

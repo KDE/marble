@@ -8,9 +8,9 @@
 
 #include "AbstractFloatItem.h"
 
+#include <QIcon>
 #include <QMutex>
 #include <QTimer>
-#include <QIcon>
 
 namespace Marble
 {
@@ -19,18 +19,18 @@ namespace Marble
  * @brief A float item that shows a pie-chart progress
  * indicator when downloads are active
  */
-class ProgressFloatItem  : public AbstractFloatItem
+class ProgressFloatItem : public AbstractFloatItem
 {
     Q_OBJECT
     Q_PLUGIN_METADATA(IID "org.kde.marble.ProgressFloatItem")
 
-    Q_INTERFACES( Marble::RenderPluginInterface )
+    Q_INTERFACES(Marble::RenderPluginInterface)
 
-    MARBLE_PLUGIN( ProgressFloatItem )
+    MARBLE_PLUGIN(ProgressFloatItem)
 
- public:
-    explicit ProgressFloatItem( const MarbleModel *marbleModel = nullptr );
-    ~ProgressFloatItem () override;
+public:
+    explicit ProgressFloatItem(const MarbleModel *marbleModel = nullptr);
+    ~ProgressFloatItem() override;
 
     QStringList backendTypes() const override;
 
@@ -48,20 +48,20 @@ class ProgressFloatItem  : public AbstractFloatItem
 
     QVector<PluginAuthor> pluginAuthors() const override;
 
-    QIcon icon () const override;
+    QIcon icon() const override;
 
-    void initialize () override;
+    void initialize() override;
 
-    bool isInitialized () const override;
+    bool isInitialized() const override;
 
     QPainterPath backgroundShape() const override;
 
-    void paintContent( QPainter *painter ) override;
+    void paintContent(QPainter *painter) override;
 
 private Q_SLOTS:
     void removeProgressItem();
 
-    void handleProgress( int active, int queued );
+    void handleProgress(int active, int queued);
 
     void hideProgress();
 
@@ -69,12 +69,12 @@ private Q_SLOTS:
 
     void scheduleRepaint();
 
- private:
-    Q_DISABLE_COPY( ProgressFloatItem )
+private:
+    Q_DISABLE_COPY(ProgressFloatItem)
 
     bool active() const;
 
-    void setActive( bool active );
+    void setActive(bool active);
 
     bool m_isInitialized;
 
@@ -102,4 +102,3 @@ private Q_SLOTS:
 }
 
 #endif
-

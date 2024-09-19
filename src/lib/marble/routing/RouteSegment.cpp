@@ -10,11 +10,11 @@
 namespace Marble
 {
 
-RouteSegment::RouteSegment() :
-    m_valid( false ),
-    m_distance( 0.0 ),
-    m_travelTime( 0 ),
-    m_nextRouteSegment( nullptr )
+RouteSegment::RouteSegment()
+    : m_valid(false)
+    , m_distance(0.0)
+    , m_travelTime(0)
+    , m_nextRouteSegment(nullptr)
 {
     // nothing to do
 }
@@ -24,26 +24,26 @@ qreal RouteSegment::distance() const
     return m_distance;
 }
 
-const Maneuver & RouteSegment::maneuver() const
+const Maneuver &RouteSegment::maneuver() const
 {
     return m_maneuver;
 }
 
-void RouteSegment::setManeuver( const Maneuver &maneuver )
+void RouteSegment::setManeuver(const Maneuver &maneuver)
 {
     m_maneuver = maneuver;
     m_valid = true;
 }
 
-const GeoDataLineString & RouteSegment::path() const
+const GeoDataLineString &RouteSegment::path() const
 {
     return m_path;
 }
 
-void RouteSegment::setPath( const GeoDataLineString &path )
+void RouteSegment::setPath(const GeoDataLineString &path)
 {
     m_path = path;
-    m_distance = m_path.length( EARTH_RADIUS );
+    m_distance = m_path.length(EARTH_RADIUS);
     m_bounds = m_path.latLonAltBox();
     m_valid = true;
 }
@@ -53,7 +53,7 @@ int RouteSegment::travelTime() const
     return m_travelTime;
 }
 
-void RouteSegment::setTravelTime( int seconds )
+void RouteSegment::setTravelTime(int seconds)
 {
     m_travelTime = seconds;
     m_valid = true;
@@ -64,9 +64,9 @@ GeoDataLatLonBox RouteSegment::bounds() const
     return m_bounds;
 }
 
-const RouteSegment & RouteSegment::nextRouteSegment() const
+const RouteSegment &RouteSegment::nextRouteSegment() const
 {
-    if ( m_nextRouteSegment ) {
+    if (m_nextRouteSegment) {
         return *m_nextRouteSegment;
     }
 
@@ -74,10 +74,10 @@ const RouteSegment & RouteSegment::nextRouteSegment() const
     return invalid;
 }
 
-void RouteSegment::setNextRouteSegment( const RouteSegment* segment )
+void RouteSegment::setNextRouteSegment(const RouteSegment *segment)
 {
     m_nextRouteSegment = segment;
-    if ( segment ) {
+    if (segment) {
         m_valid = true;
     }
 }
@@ -104,104 +104,99 @@ GeoDataCoordinates RouteSegment::projected(const GeoDataCoordinates &p, const Ge
     qreal const x01 = y0 - y1;
     qreal const y21 = x2 - x1;
     qreal const x21 = y2 - y1;
-    qreal const len = x21*x21 + y21*y21;
-    qreal const t = (x01*x21 + y01*y21) / len;
-    if ( t<0.0 ) {
+    qreal const len = x21 * x21 + y21 * y21;
+    qreal const t = (x01 * x21 + y01 * y21) / len;
+    if (t < 0.0) {
         return a;
-    } else if ( t > 1.0 ) {
+    } else if (t > 1.0) {
         return b;
     } else {
         // a + t (b - a);
-        qreal const lon = x1 + t * ( x2 - x1 );
-        qreal const lat = y1 + t * ( y2 - y1 );
-        return GeoDataCoordinates( lon, lat );
+        qreal const lon = x1 + t * (x2 - x1);
+        qreal const lat = y1 + t * (y2 - y1);
+        return GeoDataCoordinates(lon, lat);
     }
-
 }
 
-qreal RouteSegment::distanceTo( const GeoDataCoordinates &point, GeoDataCoordinates &closest, GeoDataCoordinates &interpolated ) const
+qreal RouteSegment::distanceTo(const GeoDataCoordinates &point, GeoDataCoordinates &closest, GeoDataCoordinates &interpolated) const
 {
-    Q_ASSERT( !m_path.isEmpty() );
+    Q_ASSERT(!m_path.isEmpty());
 
-    if ( m_path.size() == 1 ) {
+    if (m_path.size() == 1) {
         closest = m_path.first();
         return EARTH_RADIUS * m_path.first().sphericalDistanceTo(point);
     }
 
     qreal minDistance = -1.0;
     int minIndex = 0;
-    for ( int i=1; i<m_path.size(); ++i ) {
-        qreal const distance = distancePointToLine( point, m_path[i-1], m_path[i] );
-        if ( minDistance < 0.0 || distance < minDistance ) {
+    for (int i = 1; i < m_path.size(); ++i) {
+        qreal const distance = distancePointToLine(point, m_path[i - 1], m_path[i]);
+        if (minDistance < 0.0 || distance < minDistance) {
             minDistance = distance;
             minIndex = i;
         }
     }
 
     closest = m_path[minIndex];
-    if ( minIndex == 0 ) {
+    if (minIndex == 0) {
         interpolated = closest;
     } else {
-        interpolated = projected( point, m_path[minIndex-1], m_path[minIndex] );
+        interpolated = projected(point, m_path[minIndex - 1], m_path[minIndex]);
     }
 
     return minDistance;
 }
 
-qreal RouteSegment::minimalDistanceTo( const GeoDataCoordinates &point ) const
+qreal RouteSegment::minimalDistanceTo(const GeoDataCoordinates &point) const
 {
-    if ( bounds().contains( point) ) {
+    if (bounds().contains(point)) {
         return 0.0;
     }
 
     qreal north(0.0), east(0.0), south(0.0), west(0.0);
-    bounds().boundaries( north, south, east, west );
-    GeoDataCoordinates const northWest( west, north );
-    GeoDataCoordinates const northEast( east, north );
-    GeoDataCoordinates const southhWest( west, south );
-    GeoDataCoordinates const southEast( east, south );
+    bounds().boundaries(north, south, east, west);
+    GeoDataCoordinates const northWest(west, north);
+    GeoDataCoordinates const northEast(east, north);
+    GeoDataCoordinates const southhWest(west, south);
+    GeoDataCoordinates const southEast(east, south);
 
-    qreal distNorth = distancePointToLine( point, northWest, northEast );
-    qreal distEast = distancePointToLine( point, northEast, southEast );
-    qreal distSouth = distancePointToLine( point, southhWest, southEast );
-    qreal distWest = distancePointToLine( point, northWest, southhWest );
-    return qMin( qMin( distNorth, distEast ), qMin( distWest, distSouth ) );
+    qreal distNorth = distancePointToLine(point, northWest, northEast);
+    qreal distEast = distancePointToLine(point, northEast, southEast);
+    qreal distSouth = distancePointToLine(point, southhWest, southEast);
+    qreal distWest = distancePointToLine(point, northWest, southhWest);
+    return qMin(qMin(distNorth, distEast), qMin(distWest, distSouth));
 }
 
 qreal RouteSegment::projectedDirection(const GeoDataCoordinates &point) const
 {
-    if (m_path.size() < 2){
+    if (m_path.size() < 2) {
         return 0;
     }
 
     qreal minDistance = -1.0;
     int minIndex = 0;
-    for ( int i=1; i<m_path.size(); ++i ) {
-        qreal const distance = distancePointToLine( point, m_path[i-1], m_path[i] );
-        if ( minDistance < 0.0 || distance < minDistance ) {
+    for (int i = 1; i < m_path.size(); ++i) {
+        qreal const distance = distancePointToLine(point, m_path[i - 1], m_path[i]);
+        if (minDistance < 0.0 || distance < minDistance) {
             minDistance = distance;
             minIndex = i;
         }
     }
 
-    if ( minIndex == 0 ) {
-        return m_path[0].bearing( m_path[1], GeoDataCoordinates::Degree, GeoDataCoordinates::FinalBearing );
+    if (minIndex == 0) {
+        return m_path[0].bearing(m_path[1], GeoDataCoordinates::Degree, GeoDataCoordinates::FinalBearing);
     } else {
-        return m_path[minIndex-1].bearing( m_path[minIndex], GeoDataCoordinates::Degree, GeoDataCoordinates::FinalBearing );
+        return m_path[minIndex - 1].bearing(m_path[minIndex], GeoDataCoordinates::Degree, GeoDataCoordinates::FinalBearing);
     }
 }
 
-bool RouteSegment::operator ==(const RouteSegment &other) const
+bool RouteSegment::operator==(const RouteSegment &other) const
 {
-    return  m_valid == other.m_valid &&
-            m_distance == other.m_distance &&
-            m_maneuver == other.m_maneuver &&
-            m_travelTime == other.m_travelTime &&
-            m_bounds == other.m_bounds &&
-            m_nextRouteSegment == other.m_nextRouteSegment;
+    return m_valid == other.m_valid && m_distance == other.m_distance && m_maneuver == other.m_maneuver && m_travelTime == other.m_travelTime
+        && m_bounds == other.m_bounds && m_nextRouteSegment == other.m_nextRouteSegment;
 }
 
-bool RouteSegment::operator !=(const RouteSegment &other) const
+bool RouteSegment::operator!=(const RouteSegment &other) const
 {
     return !(other == *this);
 }

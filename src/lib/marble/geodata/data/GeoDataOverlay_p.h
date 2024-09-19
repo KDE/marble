@@ -8,10 +8,11 @@
 
 #include "GeoDataFeature_p.h"
 
-#include <QImage>
 #include <QColor>
+#include <QImage>
 
-namespace Marble {
+namespace Marble
+{
 
 class GeoDataOverlayPrivate : public GeoDataFeaturePrivate
 {
@@ -25,15 +26,15 @@ public:
     QString m_iconPath;
 
     GeoDataOverlayPrivate()
-        : m_color(Qt::white),
-          m_drawOrder(0)
+        : m_color(Qt::white)
+        , m_drawOrder(0)
     {
     }
 
-    GeoDataOverlayPrivate(const GeoDataOverlayPrivate& other)
-      : GeoDataFeaturePrivate(other),
-        m_color(Qt::white),
-        m_drawOrder(0)
+    GeoDataOverlayPrivate(const GeoDataOverlayPrivate &other)
+        : GeoDataFeaturePrivate(other)
+        , m_color(Qt::white)
+        , m_drawOrder(0)
     {
     }
 };

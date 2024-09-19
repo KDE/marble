@@ -25,12 +25,12 @@ class MARBLE_EXPORT SearchRunner : public QObject
     Q_OBJECT
 
 public:
-    explicit SearchRunner( QObject *parent = nullptr );
+    explicit SearchRunner(QObject *parent = nullptr);
 
     /**
      * Stores a pointer to the currently used model
      */
-    void setModel( const MarbleModel *model );
+    void setModel(const MarbleModel *model);
 
     /**
      * Start a placemark search. Called by MarbleRunnerManager, runners
@@ -38,14 +38,14 @@ public:
      * If implemented in a plugin, make sure to include Search in the
      * plugin capabilities, otherwise MarbleRunnerManager will ignore the plugin
      */
-    virtual void search( const QString &searchTerm, const GeoDataLatLonBox &preferred ) = 0;
+    virtual void search(const QString &searchTerm, const GeoDataLatLonBox &preferred) = 0;
 
 Q_SIGNALS:
     /**
      * This is emitted to indicate that the runner has finished the placemark search.
      * @param result the result of the search.
      */
-    void searchFinished( const QVector<GeoDataPlacemark*>& result );
+    void searchFinished(const QVector<GeoDataPlacemark *> &result);
 
 protected:
     /**

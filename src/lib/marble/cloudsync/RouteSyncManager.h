@@ -10,7 +10,8 @@
 
 #include <QObject>
 
-namespace Marble {
+namespace Marble
+{
 
 class CloudSyncManager;
 class RoutingManager;
@@ -21,13 +22,13 @@ class MARBLE_EXPORT RouteSyncManager : public QObject
 {
     Q_OBJECT
 
-    Q_PROPERTY( bool routeSyncEnabled READ isRouteSyncEnabled WRITE setRouteSyncEnabled NOTIFY routeSyncEnabledChanged )
-    
+    Q_PROPERTY(bool routeSyncEnabled READ isRouteSyncEnabled WRITE setRouteSyncEnabled NOTIFY routeSyncEnabledChanged)
+
 public:
-    explicit RouteSyncManager( CloudSyncManager *cloudSyncManager );
+    explicit RouteSyncManager(CloudSyncManager *cloudSyncManager);
     ~RouteSyncManager() override;
 
-    void setRoutingManager( RoutingManager *routingManager );
+    void setRoutingManager(RoutingManager *routingManager);
 
     /**
      * Checks if the user enabled route synchronization.
@@ -39,7 +40,7 @@ public:
      * Setter for enabling/disabling route synchronization.
      * @param enabled Status of route synchronization
      */
-    void setRouteSyncEnabled( bool enabled );
+    void setRouteSyncEnabled(bool enabled);
 
     /**
      * Returns CloudRouteModel associated with RouteSyncManager instance
@@ -78,7 +79,7 @@ public Q_SLOTS:
      * Uploads the route with given timestamp.
      * @param timestamp Timestamp of the route which will be uploaded.
      */
-    void uploadRoute( const QString &timestamp );
+    void uploadRoute(const QString &timestamp);
 
     /**
      * Starts preparing a route list by downloading
@@ -92,32 +93,32 @@ public Q_SLOTS:
      * @param timestamp Timestamp of the route that will be downloaded.
      * @see RouteSyncManager::saveDownloadedToCache()
      */
-    void downloadRoute( const QString &timestamp );
+    void downloadRoute(const QString &timestamp);
 
     /**
      * Opens route.
      * @param timestamp Timestamp of the route that will be opened.
      */
-    void openRoute( const QString &timestamp );
+    void openRoute(const QString &timestamp);
 
     /**
      * Deletes route from cloud.
      * @param timestamp Timestamp of the route that will be deleted.
      */
-    void deleteRoute( const QString &timestamp );
+    void deleteRoute(const QString &timestamp);
 
     /**
      * Removes route from cache.
      * @param timestamp Timestamp of the route that will be removed.
      */
-    void removeRouteFromCache( const QString &timestamp );
+    void removeRouteFromCache(const QString &timestamp);
 
     /**
      * Updates upload progressbar.
      * @param sent Bytes sent.
      * @param total Total bytes.
      */
-    void updateUploadProgressbar( qint64 sent, qint64 total );
+    void updateUploadProgressbar(qint64 sent, qint64 total);
 
 private Q_SLOTS:
     /**
@@ -125,13 +126,12 @@ private Q_SLOTS:
      * and then forwards the list to CloudRouteModel
      * @param routeList Downloaded route list
      */
-    void setRouteModelItems( const QVector<RouteItem> &routeList );
-
+    void setRouteModelItems(const QVector<RouteItem> &routeList);
 
 Q_SIGNALS:
     void routeSyncEnabledChanged(bool enabled);
-    void routeListDownloadProgress( qint64 received, qint64 total );
-    void routeUploadProgress( qint64 sent, qint64 total );
+    void routeListDownloadProgress(qint64 received, qint64 total);
+    void routeUploadProgress(qint64 sent, qint64 total);
 
 private:
     class Private;

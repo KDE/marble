@@ -5,10 +5,8 @@
 // SPDX-FileCopyrightText: 2008-2009 Patrick Spendrin <ps_ml@gmx.de>
 //
 
-
 #ifndef MARBLE_GEODATAPLACEMARK_H
 #define MARBLE_GEODATAPLACEMARK_H
-
 
 #include <QDateTime>
 
@@ -45,9 +43,9 @@ class GeoDataGeometry;
  * not provided in a KML file.
  */
 
-class GEODATA_EXPORT GeoDataPlacemark: public GeoDataFeature
+class GEODATA_EXPORT GeoDataPlacemark : public GeoDataFeature
 {
- public:
+public:
     /**
      * Create a new placemark.
      */
@@ -56,29 +54,29 @@ class GEODATA_EXPORT GeoDataPlacemark: public GeoDataFeature
     /**
      * Create a new placemark from existing placemark @p placemark
      */
-    GeoDataPlacemark( const GeoDataPlacemark& placemark );
+    GeoDataPlacemark(const GeoDataPlacemark &placemark);
 
     /**
      * Create a new placemark with the given @p name.
      */
-    explicit GeoDataPlacemark( const QString &name );
+    explicit GeoDataPlacemark(const QString &name);
 
     /**
-    * Delete the placemark
-    */
+     * Delete the placemark
+     */
     ~GeoDataPlacemark() override;
 
-    GeoDataPlacemark &operator=( const GeoDataPlacemark &other );
+    GeoDataPlacemark &operator=(const GeoDataPlacemark &other);
 
     /**
-    * Equality operators.
-    */
-    bool operator==( const GeoDataPlacemark& other ) const;
-    bool operator!=( const GeoDataPlacemark& other ) const;
+     * Equality operators.
+     */
+    bool operator==(const GeoDataPlacemark &other) const;
+    bool operator!=(const GeoDataPlacemark &other) const;
 
-    const char* nodeType() const override;
+    const char *nodeType() const override;
 
-    GeoDataFeature * clone() const override;
+    GeoDataFeature *clone() const override;
 
     /**
      * @brief  A categorization of a placemark as defined by ...FIXME.
@@ -113,15 +111,15 @@ class GEODATA_EXPORT GeoDataPlacemark: public GeoDataFeature
         // Terrain
         Mountain,
         Volcano,
-        Mons,                    // m
-        Valley,                  // v
+        Mons, // m
+        Valley, // v
         Continent,
         Ocean,
-        OtherTerrain,            // o
+        OtherTerrain, // o
 
         // Space Terrain
-        Crater,                  // c
-        Mare,                    // a
+        Crater, // c
+        Mare, // a
 
         // Places of Interest
         GeographicPole,
@@ -138,8 +136,8 @@ class GEODATA_EXPORT GeoDataPlacemark: public GeoDataFeature
         Coordinate,
 
         // Planets
-        MannedLandingSite,       // h
-        RoboticRover,            // r
+        MannedLandingSite, // h
+        RoboticRover, // r
         UnmannedSoftLandingSite, // u
         UnmannedHardLandingSite, // i
 
@@ -204,7 +202,7 @@ class GEODATA_EXPORT GeoDataPlacemark: public GeoDataFeature
         HighwayMotorwayLink,
         HighwayMotorway, // please keep order (used in for loops)
 
-        //OSM building
+        // OSM building
         Building,
 
         // OpenStreetMap category Accommodation
@@ -492,7 +490,7 @@ class GEODATA_EXPORT GeoDataPlacemark: public GeoDataFeature
         CrossingZebra, // pedestrian vs highway zebra crossing
         CrossingRailway, // pedestrian or highway vs railway crossing
 
-        //Admin level tags for depicting boundary
+        // Admin level tags for depicting boundary
         AdminLevel1, // please keep order (used in for loops)
         AdminLevel2,
         AdminLevel3,
@@ -511,7 +509,7 @@ class GEODATA_EXPORT GeoDataPlacemark: public GeoDataFeature
         IndoorWall,
         IndoorRoom,
 
-        //Custom OSM Tags
+        // Custom OSM Tags
         Landmass,
         UrbanArea,
         InternationalDateLine,
@@ -547,15 +545,15 @@ class GEODATA_EXPORT GeoDataPlacemark: public GeoDataFeature
      *
      * @see GeoDataTrack::GeoDataTrack
      */
-    GeoDataCoordinates coordinate( const QDateTime &dateTime = QDateTime(), bool *iconAtCoordinates = nullptr ) const;
+    GeoDataCoordinates coordinate(const QDateTime &dateTime = QDateTime(), bool *iconAtCoordinates = nullptr) const;
 
     /**
      * The geometry of the GeoDataPlacemark is to be rendered to the marble map
      * along with the icon at the coordinate associated with this Placemark.
      * @return a pointer to the current Geometry object
      */
-    GeoDataGeometry* geometry();
-    const GeoDataGeometry* geometry() const;
+    GeoDataGeometry *geometry();
+    const GeoDataGeometry *geometry() const;
 
     /**
      * @brief displays the name of a place in the locale language of the user
@@ -571,17 +569,17 @@ class GEODATA_EXPORT GeoDataPlacemark: public GeoDataFeature
      * Return the coordinates of the placemark as @p longitude,
      * @p latitude and @p altitude.
      */
-    void coordinate( qreal &longitude, qreal &latitude, qreal &altitude ) const;
+    void coordinate(qreal &longitude, qreal &latitude, qreal &altitude) const;
 
     /**
-      * Quick, safe accessor to the placemark's OsmPlacemarkData stored within it's
-      * ExtendedData. If the extendedData does not contain osmData, the function
-      * inserts a default-constructed one, and returns a reference to it.
-      */
+     * Quick, safe accessor to the placemark's OsmPlacemarkData stored within it's
+     * ExtendedData. If the extendedData does not contain osmData, the function
+     * inserts a default-constructed one, and returns a reference to it.
+     */
     OsmPlacemarkData &osmData();
     const OsmPlacemarkData &osmData() const;
 
-    void setOsmData( const OsmPlacemarkData &osmData );
+    void setOsmData(const OsmPlacemarkData &osmData);
     bool hasOsmData() const;
     /**
      * @since 0.26.0
@@ -592,26 +590,25 @@ class GEODATA_EXPORT GeoDataPlacemark: public GeoDataFeature
      * Set the coordinate of the placemark in @p longitude and
      * @p latitude.
      */
-    void setCoordinate( qreal longitude, qreal latitude, qreal altitude = 0,
-                        GeoDataCoordinates::Unit _unit = GeoDataCoordinates::Radian );
+    void setCoordinate(qreal longitude, qreal latitude, qreal altitude = 0, GeoDataCoordinates::Unit _unit = GeoDataCoordinates::Radian);
 
     /**
-    * Set the coordinate of the placemark with an @p GeoDataPoint.
-    */
-    void setCoordinate( const GeoDataCoordinates &coordinate );
+     * Set the coordinate of the placemark with an @p GeoDataPoint.
+     */
+    void setCoordinate(const GeoDataCoordinates &coordinate);
 
     /**
-     * Sets the current Geometry of this Placemark. @see geometry() and the class 
-     * overview for description of the geometry concept. The geometry can be set 
+     * Sets the current Geometry of this Placemark. @see geometry() and the class
+     * overview for description of the geometry concept. The geometry can be set
      * to any @see GeoDataGeometry like @see GeoDataPoint,@see GeoDataLineString,
      * @see GeoDataLinearRing and @see GeoDataMultiGeometry
      */
-    void setGeometry( GeoDataGeometry *entry );
+    void setGeometry(GeoDataGeometry *entry);
 
     /**
      * Return the area size of the feature in square km.
      *
-     * FIXME: Once we make Marble more area-aware we need to 
+     * FIXME: Once we make Marble more area-aware we need to
      * move this into the GeoDataArea class which will get
      * inherited from GeoDataPlacemark (or GeoDataFeature).
      */
@@ -620,7 +617,7 @@ class GEODATA_EXPORT GeoDataPlacemark: public GeoDataFeature
     /**
      * Set the area size of the feature in square km.
      */
-    void setArea( qreal area );
+    void setArea(qreal area);
 
     /**
      * Return the population of the placemark.
@@ -630,7 +627,7 @@ class GEODATA_EXPORT GeoDataPlacemark: public GeoDataFeature
      * Sets the @p population of the placemark.
      * @param  population  the new population value
      */
-    void setPopulation( qint64 population );
+    void setPopulation(qint64 population);
 
     /**
      * Return the state of the placemark.
@@ -640,7 +637,7 @@ class GEODATA_EXPORT GeoDataPlacemark: public GeoDataFeature
     /**
      * Set the state @p state of the placemark.
      */
-    void setState( const QString &state );
+    void setState(const QString &state);
 
     /**
      * Return the country code of the placemark.
@@ -650,7 +647,7 @@ class GEODATA_EXPORT GeoDataPlacemark: public GeoDataFeature
     /**
      * Set the country @p code of the placemark.
      */
-    void setCountryCode( const QString &code );
+    void setCountryCode(const QString &code);
 
     /**
      * Returns whether balloon is visible or not
@@ -660,14 +657,14 @@ class GEODATA_EXPORT GeoDataPlacemark: public GeoDataFeature
     /**
      * Set visibility of the balloon
      */
-    void setBalloonVisible( bool visible );
+    void setBalloonVisible(bool visible);
 
     /**
      * Serialize the Placemark to a data stream. This is a binary serialisation
      * and is deserialised using @see unpack()
      * @param stream the QDataStream to serialise object to.
      */
-    void pack( QDataStream& stream ) const override;
+    void pack(QDataStream &stream) const override;
 
     /**
      * Serialise this Placemark to a XML stream writer @see QXmlStreamWriter in
@@ -677,16 +674,16 @@ class GEODATA_EXPORT GeoDataPlacemark: public GeoDataFeature
      * method.
      * @param stream the XML Stream Reader to output to.
      */
-    virtual QXmlStreamWriter& pack( QXmlStreamWriter& stream ) const;
+    virtual QXmlStreamWriter &pack(QXmlStreamWriter &stream) const;
 
-    virtual QXmlStreamWriter& operator <<( QXmlStreamWriter& stream ) const;
+    virtual QXmlStreamWriter &operator<<(QXmlStreamWriter &stream) const;
 
     /**
      * Deserialize the Placemark from a data stream. This has the opposite effect
      * from @see pack()
      * @param stream the QDataStream to deserialise from.
      */
-    void unpack( QDataStream& stream ) override;
+    void unpack(QDataStream &stream) override;
 
     /**
      * Returns GeoDataLookAt object if lookAt is setup earlier
@@ -697,9 +694,9 @@ class GEODATA_EXPORT GeoDataPlacemark: public GeoDataFeature
     const GeoDataLookAt *lookAt() const;
     GeoDataLookAt *lookAt();
 
-    static bool placemarkLayoutOrderCompare(const GeoDataPlacemark *a, const GeoDataPlacemark* b);
+    static bool placemarkLayoutOrderCompare(const GeoDataPlacemark *a, const GeoDataPlacemark *b);
 
- private:
+private:
     Q_DECLARE_PRIVATE(GeoDataPlacemark)
 };
 

@@ -27,4 +27,3 @@ extern const char SceneGraphicPolylineAnnotation[];
 }
 
 #endif
-

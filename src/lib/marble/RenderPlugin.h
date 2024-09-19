@@ -10,12 +10,11 @@
 #define MARBLE_RENDERPLUGIN_H
 
 #include <QObject>
-#include <QString>
 #include <QRegion>
+#include <QString>
 
 #include "RenderPluginInterface.h"
 #include "marble_export.h"
-
 
 class QAction;
 class QActionGroup;
@@ -39,27 +38,21 @@ class MARBLE_EXPORT RenderPlugin : public QObject, public RenderPluginInterface
 {
     Q_OBJECT
 
-    Q_PROPERTY ( QString name READ name CONSTANT )
-    Q_PROPERTY ( QString nameId READ nameId CONSTANT )
-    Q_PROPERTY ( QString version READ version CONSTANT )
-    Q_PROPERTY ( QString description READ description CONSTANT )
-    Q_PROPERTY ( bool enabled READ enabled WRITE setEnabled NOTIFY enabledChanged )
-    Q_PROPERTY ( bool visible READ visible WRITE setVisible NOTIFY visibilityChanged )
-    Q_PROPERTY ( bool userCheckable READ isUserCheckable WRITE setUserCheckable NOTIFY userCheckableChanged )
+    Q_PROPERTY(QString name READ name CONSTANT)
+    Q_PROPERTY(QString nameId READ nameId CONSTANT)
+    Q_PROPERTY(QString version READ version CONSTANT)
+    Q_PROPERTY(QString description READ description CONSTANT)
+    Q_PROPERTY(bool enabled READ enabled WRITE setEnabled NOTIFY enabledChanged)
+    Q_PROPERTY(bool visible READ visible WRITE setVisible NOTIFY visibilityChanged)
+    Q_PROPERTY(bool userCheckable READ isUserCheckable WRITE setUserCheckable NOTIFY userCheckableChanged)
 
- public:
+public:
     /**
      * @brief A Type of plugin
      */
-    enum RenderType {
-        UnknownRenderType,
-        TopLevelRenderType,
-        PanelRenderType,
-        OnlineRenderType,
-        ThemeRenderType
-    };
+    enum RenderType { UnknownRenderType, TopLevelRenderType, PanelRenderType, OnlineRenderType, ThemeRenderType };
 
-    explicit RenderPlugin( const MarbleModel *marbleModel );
+    explicit RenderPlugin(const MarbleModel *marbleModel);
     ~RenderPlugin() override;
 
     /**
@@ -83,7 +76,7 @@ class MARBLE_EXPORT RenderPlugin : public QObject, public RenderPluginInterface
      * @return new instance of current plugin
      * @note Typically this method is implemented with the help of the MARBLE_PLUGIN() macro.
      */
-    virtual RenderPlugin *newInstance( const MarbleModel *marbleModel ) const = 0;
+    virtual RenderPlugin *newInstance(const MarbleModel *marbleModel) const = 0;
 
     /**
      * @brief Access to the MarbleModel
@@ -94,7 +87,7 @@ class MARBLE_EXPORT RenderPlugin : public QObject, public RenderPluginInterface
      * @return marble model
      * @see MarbleModel
      */
-    const MarbleModel* marbleModel() const;
+    const MarbleModel *marbleModel() const;
 
     /**
      * @brief Getting all actions
@@ -106,7 +99,7 @@ class MARBLE_EXPORT RenderPlugin : public QObject, public RenderPluginInterface
      *
      * @return a list of grouped actions
      */
-    virtual const QList<QActionGroup*>*   actionGroups() const;
+    virtual const QList<QActionGroup *> *actionGroups() const;
 
     /**
      * @brief Getting all actions which should be placed in the toolbar
@@ -118,7 +111,7 @@ class MARBLE_EXPORT RenderPlugin : public QObject, public RenderPluginInterface
      *
      * @return a list of grouped toolbar actions
      */
-    virtual const QList<QActionGroup*>*   toolbarActionGroups() const;
+    virtual const QList<QActionGroup *> *toolbarActionGroups() const;
 
     /**
      * @brief is enabled
@@ -131,7 +124,7 @@ class MARBLE_EXPORT RenderPlugin : public QObject, public RenderPluginInterface
      * @return enableability of the plugin
      * @see setEnabled
      */
-    bool    enabled() const;
+    bool enabled() const;
 
     /**
      * @brief is visible
@@ -143,7 +136,7 @@ class MARBLE_EXPORT RenderPlugin : public QObject, public RenderPluginInterface
      * @return visibility of the plugin
      * @see setVisible
      */
-    bool    visible() const;
+    bool visible() const;
 
     /**
      * @brief is user checkable
@@ -158,7 +151,7 @@ class MARBLE_EXPORT RenderPlugin : public QObject, public RenderPluginInterface
      * @return checkability of the plugin
      * @see setUserCheckable
      */
-    bool    isUserCheckable() const;
+    bool isUserCheckable() const;
 
     /**
      * @brief Settings of the plugin
@@ -170,7 +163,7 @@ class MARBLE_EXPORT RenderPlugin : public QObject, public RenderPluginInterface
      * @return plugin's settings
      * @see setSettings
      */
-    virtual QHash<QString,QVariant> settings() const;
+    virtual QHash<QString, QVariant> settings() const;
 
     /**
      * @brief Set the settings of the plugin
@@ -180,7 +173,7 @@ class MARBLE_EXPORT RenderPlugin : public QObject, public RenderPluginInterface
      * @param new plugin's settings
      * @see settings
      */
-    virtual void setSettings( const QHash<QString,QVariant> &settings );
+    virtual void setSettings(const QHash<QString, QVariant> &settings);
 
     /**
      * @brief Render type of the plugin
@@ -197,7 +190,7 @@ class MARBLE_EXPORT RenderPlugin : public QObject, public RenderPluginInterface
 
     QString runtimeTrace() const override;
 
- public Q_SLOTS:
+public Q_SLOTS:
     /**
      * @brief setting enabled
      *
@@ -209,7 +202,7 @@ class MARBLE_EXPORT RenderPlugin : public QObject, public RenderPluginInterface
      * @param enabled plugin's enabled state
      * @see enabled
      */
-    void    setEnabled( bool enabled );
+    void setEnabled(bool enabled);
 
     /**
      * @brief setting visible
@@ -219,7 +212,7 @@ class MARBLE_EXPORT RenderPlugin : public QObject, public RenderPluginInterface
      * @param visible visibility of the plugin
      * @see visible
      */
-    void    setVisible( bool visible );
+    void setVisible(bool visible);
 
     /**
      * @brief setting user checkable
@@ -230,7 +223,7 @@ class MARBLE_EXPORT RenderPlugin : public QObject, public RenderPluginInterface
      * @param isUserCheckable user checkability of the plugin
      * @see isUserCheckable
      */
-    void    setUserCheckable(bool isUserCheckable);
+    void setUserCheckable(bool isUserCheckable);
 
     /**
      * @brief Passes an empty set of settings to the plugin
@@ -238,7 +231,7 @@ class MARBLE_EXPORT RenderPlugin : public QObject, public RenderPluginInterface
      * Well behaving plugins restore their settings to default values as a result of calling this method.
      *
      */
-    void    restoreDefaultSettings();
+    void restoreDefaultSettings();
 
     /**
      * @brief Full list of the settings keys
@@ -259,7 +252,7 @@ class MARBLE_EXPORT RenderPlugin : public QObject, public RenderPluginInterface
      *
      * @return successfully changed or not
      */
-    bool setSetting( const QString & key, const QVariant & value );
+    bool setSetting(const QString &key, const QVariant &value);
 
     /**
      * @brief Getting setting value from the settings
@@ -270,7 +263,7 @@ class MARBLE_EXPORT RenderPlugin : public QObject, public RenderPluginInterface
      *
      * @return setting value
      */
-    QVariant setting( const QString & key ) const;
+    QVariant setting(const QString &key) const;
 
     /**
      * @brief Plugin's menu action
@@ -281,16 +274,16 @@ class MARBLE_EXPORT RenderPlugin : public QObject, public RenderPluginInterface
      */
     QAction *action() const;
 
- Q_SIGNALS:
+Q_SIGNALS:
     /**
      * This signal is emitted if the visibility is changed with @see setVisible
      */
-    void visibilityChanged( bool visible, const QString &nameId );
+    void visibilityChanged(bool visible, const QString &nameId);
 
     /**
      * This signal is emitted if the enabled property is changed with @see setEnabled
      */
-    void enabledChanged( bool enable );
+    void enabledChanged(bool enable);
 
     /**
      * This signal is emitted if the user checkable property is changed with @see setUserCheckable
@@ -300,7 +293,7 @@ class MARBLE_EXPORT RenderPlugin : public QObject, public RenderPluginInterface
     /**
      * This signal is emitted if the settings of the RenderPlugin changed.
      */
-    void settingsChanged( const QString& nameId );
+    void settingsChanged(const QString &nameId);
 
     /**
      * This signal is emitted if the actions that the plugin supports change in
@@ -313,12 +306,12 @@ class MARBLE_EXPORT RenderPlugin : public QObject, public RenderPluginInterface
      * @p dirtyRegion which is the region the view will change in. If dirtyRegion.isEmpty() returns
      * true, the whole viewport has to be repainted.
      */
-    void repaintNeeded( const QRegion& dirtyRegion = QRegion() );
+    void repaintNeeded(const QRegion &dirtyRegion = QRegion());
 
- protected:
-    bool eventFilter( QObject *, QEvent * ) override;
+protected:
+    bool eventFilter(QObject *, QEvent *) override;
 
- private:
+private:
     friend class RenderPluginModel;
 
     QStandardItem *item();
@@ -326,14 +319,18 @@ class MARBLE_EXPORT RenderPlugin : public QObject, public RenderPluginInterface
     void applyItemState();
     void retrieveItemState();
 
- private:
-    Q_DISABLE_COPY( RenderPlugin )
+private:
+    Q_DISABLE_COPY(RenderPlugin)
     class Private;
-    Private * const d;
+    Private *const d;
 };
 
-#define MARBLE_PLUGIN(T) public:\
-    RenderPlugin* newInstance( const MarbleModel *marbleModel ) const override { return new T( marbleModel ); }
+#define MARBLE_PLUGIN(T)                                                                                                                                       \
+public:                                                                                                                                                        \
+    RenderPlugin *newInstance(const MarbleModel *marbleModel) const override                                                                                   \
+    {                                                                                                                                                          \
+        return new T(marbleModel);                                                                                                                             \
+    }
 }
 
 #endif

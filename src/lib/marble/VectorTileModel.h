@@ -13,8 +13,8 @@
 
 #include <QMap>
 
-#include "TileId.h"
 #include "GeoDataLatLonBox.h"
+#include "TileId.h"
 
 class QThreadPool;
 
@@ -32,11 +32,11 @@ class TileRunner : public QObject, public QRunnable
     Q_OBJECT
 
 public:
-    TileRunner( TileLoader *loader, const GeoSceneVectorTileDataset *texture, const TileId &id );
+    TileRunner(TileLoader *loader, const GeoSceneVectorTileDataset *texture, const TileId &id);
     void run() override;
 
 Q_SIGNALS:
-    void documentLoaded( const TileId &id, GeoDataDocument *document );
+    void documentLoaded(const TileId &id, GeoDataDocument *document);
 
 private:
     TileLoader *const m_loader;
@@ -49,7 +49,7 @@ class VectorTileModel : public QObject
     Q_OBJECT
 
 public:
-    explicit VectorTileModel( TileLoader *loader, const GeoSceneVectorTileDataset *layer, GeoDataTreeModel *treeModel, QThreadPool *threadPool );
+    explicit VectorTileModel(TileLoader *loader, const GeoSceneVectorTileDataset *layer, GeoDataTreeModel *treeModel, QThreadPool *threadPool);
 
     void setViewport(const GeoDataLatLonBox &bbox);
 
@@ -57,7 +57,7 @@ public:
 
     const GeoSceneVectorTileDataset *layer() const;
 
-    void removeTile(GeoDataDocument* document);
+    void removeTile(GeoDataDocument *document);
 
     int tileZoomLevel() const;
 
@@ -66,35 +66,37 @@ public:
     void reload();
 
 public Q_SLOTS:
-    void updateTile( const TileId &id, GeoDataDocument *document );
+    void updateTile(const TileId &id, GeoDataDocument *document);
 
     void clear();
 
 Q_SIGNALS:
-    void tileCompleted( const TileId &tileId );
+    void tileCompleted(const TileId &tileId);
     void tileAdded(GeoDataDocument *document);
     void tileRemoved(GeoDataDocument *document);
 
 private Q_SLOTS:
-    void cleanupTile(GeoDataObject* feature);
+    void cleanupTile(GeoDataObject *feature);
 
 private:
     void removeTilesOutOfView(const GeoDataLatLonBox &boundingBox);
     void queryTiles(int tileZoomLevel, const QRect &rect);
 
 private:
-    struct CacheDocument
-    {
+    struct CacheDocument {
         /** The CacheDocument takes ownership of doc */
-        CacheDocument(GeoDataDocument *doc, VectorTileModel* vectorTileModel, const GeoDataLatLonBox &boundingBox);
+        CacheDocument(GeoDataDocument *doc, VectorTileModel *vectorTileModel, const GeoDataLatLonBox &boundingBox);
 
         /** Remove the document from the tree and delete the document */
         ~CacheDocument();
 
-        GeoDataLatLonBox latLonBox() const { return m_boundingBox; }
+        GeoDataLatLonBox latLonBox() const
+        {
+            return m_boundingBox;
+        }
 
     private:
-        Q_DISABLE_COPY( CacheDocument )
+        Q_DISABLE_COPY(CacheDocument)
 
         GeoDataDocument *const m_document;
         VectorTileModel *const m_vectorTileModel;
@@ -108,8 +110,8 @@ private:
     int m_tileLoadLevel;
     int m_tileZoomLevel;
     QList<TileId> m_pendingDocuments;
-    QList<GeoDataDocument*> m_garbageQueue;
-    QMap<TileId, QSharedPointer<CacheDocument> > m_documents;
+    QList<GeoDataDocument *> m_garbageQueue;
+    QMap<TileId, QSharedPointer<CacheDocument>> m_documents;
     bool m_deleteDocumentsLater;
 };
 

@@ -5,12 +5,11 @@
 // SPDX-FileCopyrightText: 2008 Inge Wallin <inge@lysator.liu.se>
 //
 
-
 #include "GeoDataGeometry.h"
 #include "GeoDataGeometry_p.h"
 
-#include "GeoDataLinearRing.h"
 #include "GeoDataLineString.h"
+#include "GeoDataLinearRing.h"
 #include "GeoDataModel.h"
 #include "GeoDataMultiGeometry.h"
 #include "GeoDataMultiTrack.h"
@@ -23,20 +22,19 @@
 
 #include <QDataStream>
 
-
 namespace Marble
 {
 
-GeoDataGeometry::GeoDataGeometry( const GeoDataGeometry& other )
-    : GeoDataObject(),
-      d_ptr(other.d_ptr)
+GeoDataGeometry::GeoDataGeometry(const GeoDataGeometry &other)
+    : GeoDataObject()
+    , d_ptr(other.d_ptr)
 {
     d_ptr->ref.ref();
 }
 
-GeoDataGeometry::GeoDataGeometry( GeoDataGeometryPrivate* priv )
-    : GeoDataObject(),
-      d_ptr(priv)
+GeoDataGeometry::GeoDataGeometry(GeoDataGeometryPrivate *priv)
+    : GeoDataObject()
+    , d_ptr(priv)
 {
     d_ptr->ref.ref();
 }
@@ -49,11 +47,11 @@ GeoDataGeometry::~GeoDataGeometry()
 
 void GeoDataGeometry::detach()
 {
-    if(d_ptr->ref.fetchAndAddRelaxed(0) == 1) {
+    if (d_ptr->ref.fetchAndAddRelaxed(0) == 1) {
         return;
     }
 
-     GeoDataGeometryPrivate* new_d = d_ptr->copy();
+    GeoDataGeometryPrivate *new_d = d_ptr->copy();
 
     if (!d_ptr->ref.deref())
         delete d_ptr;
@@ -62,16 +60,16 @@ void GeoDataGeometry::detach()
     d_ptr->ref.ref();
 }
 
-GeoDataGeometry& GeoDataGeometry::operator=( const GeoDataGeometry& other )
+GeoDataGeometry &GeoDataGeometry::operator=(const GeoDataGeometry &other)
 {
-    GeoDataObject::operator=( other );
+    GeoDataObject::operator=(other);
 
     if (!d_ptr->ref.deref())
         delete d_ptr;
 
     d_ptr = other.d_ptr;
     d_ptr->ref.ref();
-    
+
     return *this;
 }
 
@@ -87,8 +85,8 @@ bool GeoDataGeometry::operator==(const GeoDataGeometry &other) const
 
         return thisPoly == otherPoly;
     } else if (nodeType() == GeoDataTypes::GeoDataLinearRingType) {
-        const GeoDataLinearRing &thisRing = static_cast<const GeoDataLinearRing&>(*this);
-        const GeoDataLinearRing &otherRing = static_cast<const GeoDataLinearRing&>(other);
+        const GeoDataLinearRing &thisRing = static_cast<const GeoDataLinearRing &>(*this);
+        const GeoDataLinearRing &otherRing = static_cast<const GeoDataLinearRing &>(other);
 
         return thisRing == otherRing;
     } else if (nodeType() == GeoDataTypes::GeoDataLineStringType) {
@@ -131,7 +129,7 @@ bool GeoDataGeometry::extrude() const
     return d_ptr->m_extrude;
 }
 
-void GeoDataGeometry::setExtrude( bool extrude )
+void GeoDataGeometry::setExtrude(bool extrude)
 {
     detach();
     d_ptr->m_extrude = extrude;
@@ -142,41 +140,39 @@ AltitudeMode GeoDataGeometry::altitudeMode() const
     return d_ptr->m_altitudeMode;
 }
 
-void GeoDataGeometry::setAltitudeMode( const AltitudeMode altitudeMode )
+void GeoDataGeometry::setAltitudeMode(const AltitudeMode altitudeMode)
 {
     detach();
     d_ptr->m_altitudeMode = altitudeMode;
 }
 
-const GeoDataLatLonAltBox& GeoDataGeometry::latLonAltBox() const
+const GeoDataLatLonAltBox &GeoDataGeometry::latLonAltBox() const
 {
     return d_ptr->m_latLonAltBox;
 }
 
-void GeoDataGeometry::pack( QDataStream& stream ) const
+void GeoDataGeometry::pack(QDataStream &stream) const
 {
-    GeoDataObject::pack( stream );
+    GeoDataObject::pack(stream);
 
     stream << d_ptr->m_extrude;
     stream << d_ptr->m_altitudeMode;
 }
 
-void GeoDataGeometry::unpack( QDataStream& stream )
+void GeoDataGeometry::unpack(QDataStream &stream)
 {
     detach();
-    GeoDataObject::unpack( stream );
+    GeoDataObject::unpack(stream);
 
     int am;
     stream >> d_ptr->m_extrude;
     stream >> am;
-    d_ptr->m_altitudeMode = (AltitudeMode) am;
+    d_ptr->m_altitudeMode = (AltitudeMode)am;
 }
 
 bool GeoDataGeometry::equals(const GeoDataGeometry &other) const
 {
-    return GeoDataObject::equals(other) &&
-           d_ptr->m_extrude == other.d_ptr->m_extrude &&
-           d_ptr->m_altitudeMode == other.d_ptr->m_altitudeMode;
+    return GeoDataObject::equals(other) && d_ptr->m_extrude == other.d_ptr->m_extrude && d_ptr->m_altitudeMode == other.d_ptr->m_altitudeMode;
 }
 
 }

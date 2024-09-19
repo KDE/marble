@@ -23,30 +23,30 @@ class RouteSyncManager;
 class GeoDataCoordinates;
 
 /**
-  * A widget consisting of input fields for places / routing destinations,
-  * a list view showing routing instructions and a interactive paint layer
-  * showing placemarks and the route
-  */
+ * A widget consisting of input fields for places / routing destinations,
+ * a list view showing routing instructions and a interactive paint layer
+ * showing placemarks and the route
+ */
 class MARBLE_EXPORT RoutingWidget : public QWidget
 {
     Q_OBJECT
 
 public:
     /**
-      * @brief Constructor
-      * @param marbleWidget The marble widget used to register an event handler
-      * on. Must not be null.
-      * @param parent Optional parent widget
-      */
-    explicit RoutingWidget( MarbleWidget *marbleWidget, QWidget *parent );
+     * @brief Constructor
+     * @param marbleWidget The marble widget used to register an event handler
+     * on. Must not be null.
+     * @param parent Optional parent widget
+     */
+    explicit RoutingWidget(MarbleWidget *marbleWidget, QWidget *parent);
 
     /** Destructor */
     ~RoutingWidget() override;
 
     /** Show or hide the "open file..." button. Default is false (not visible) */
-    void setShowDirectionsButtonVisible( bool visible );
+    void setShowDirectionsButtonVisible(bool visible);
 
-    void setRouteSyncManager(RouteSyncManager* manager);
+    void setRouteSyncManager(RouteSyncManager *manager);
 
 public Q_SLOTS:
     /** Ask the user for a kml file to open */
@@ -69,34 +69,34 @@ private Q_SLOTS:
     void retrieveRoute();
 
     /** User activated a route instruction element in the list view, synchronize paint layer */
-    void activateItem ( const QModelIndex &index );
+    void activateItem(const QModelIndex &index);
 
     /** Placemark search is finished in an input field, switch to its placemark model */
-    void handleSearchResult( RoutingInputWidget *widget );
+    void handleSearchResult(RoutingInputWidget *widget);
 
     /** Switch to the placemark model of an input field */
-    void centerOnInputWidget( RoutingInputWidget *widget );
+    void centerOnInputWidget(RoutingInputWidget *widget);
 
     /** A placemark was selected in the map, synchronize list view */
-    void activatePlacemark( const QModelIndex &index );
+    void activatePlacemark(const QModelIndex &index);
 
     /** Insert another input field at the given position */
-    void insertInputWidget( int index );
+    void insertInputWidget(int index);
 
     /** Remove an existing input field */
-    void removeInputWidget( RoutingInputWidget *widget );
+    void removeInputWidget(RoutingInputWidget *widget);
 
     /** Remove an existing input field */
-    void removeInputWidget( int index );
+    void removeInputWidget(int index);
 
     /** Route state changed */
-    void updateRouteState( RoutingManager::State state );
+    void updateRouteState(RoutingManager::State state);
 
     /** An input field requests a position input from the map */
-    void requestMapPosition( RoutingInputWidget *widget, bool enabled );
+    void requestMapPosition(RoutingInputWidget *widget, bool enabled);
 
     /** Position in the map selected by the user after a previous slotMapInputRequested */
-    void retrieveSelectedPoint( const GeoDataCoordinates &coordinates );
+    void retrieveSelectedPoint(const GeoDataCoordinates &coordinates);
 
     /** Update the text of the Search / GetDirections button */
     void adjustSearchButton();
@@ -120,7 +120,7 @@ private Q_SLOTS:
     void showDirections();
 
     /** Update the route request with the given profile */
-    void setRoutingProfile( int index );
+    void setRoutingProfile(int index);
 
     /** Change selected routing profile to the one set in the shared request */
     void updateActiveRoutingProfile();
@@ -129,11 +129,11 @@ private Q_SLOTS:
     void updateCloudSyncButtons();
 
     /** Open a remote route and center on it */
-    void openCloudRoute( const QString &identifier );
+    void openCloudRoute(const QString &identifier);
 
-    void updateUploadProgress( qint64 sent, qint64 total );
+    void updateUploadProgress(qint64 sent, qint64 total);
 
-    void centerOn( const GeoDataCoordinates &coordinates );
+    void centerOn(const GeoDataCoordinates &coordinates);
 
     void seekTourToStart();
 
@@ -146,7 +146,7 @@ private Q_SLOTS:
     void handlePlanetChange();
 
 protected:
-    bool eventFilter( QObject *o, QEvent *e ) override;
+    bool eventFilter(QObject *o, QEvent *e) override;
     void resizeEvent(QResizeEvent *e) override;
 
 private:

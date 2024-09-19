@@ -13,7 +13,7 @@
 
 namespace Ui
 {
-    class PhotoConfigWidget;
+class PhotoConfigWidget;
 }
 
 namespace Marble
@@ -23,25 +23,25 @@ class PhotoPlugin : public AbstractDataPlugin, public DialogConfigurationInterfa
 {
     Q_OBJECT
     Q_PLUGIN_METADATA(IID "org.kde.marble.PhotoPlugin")
-    Q_INTERFACES( Marble::RenderPluginInterface )
-    Q_INTERFACES( Marble::DialogConfigurationInterface )
-    MARBLE_PLUGIN( PhotoPlugin )
-    
- public:
+    Q_INTERFACES(Marble::RenderPluginInterface)
+    Q_INTERFACES(Marble::DialogConfigurationInterface)
+    MARBLE_PLUGIN(PhotoPlugin)
+
+public:
     PhotoPlugin();
 
-    explicit PhotoPlugin( const MarbleModel *marbleModel );
+    explicit PhotoPlugin(const MarbleModel *marbleModel);
 
     ~PhotoPlugin() override;
 
     void initialize() override;
 
     QString name() const override;
-    
+
     QString guiString() const override;
 
     QString nameId() const override;
-    
+
     QString version() const override;
 
     QString description() const override;
@@ -57,24 +57,24 @@ class PhotoPlugin : public AbstractDataPlugin, public DialogConfigurationInterfa
     /**
      * @return: The settings of the item.
      */
-    QHash<QString,QVariant> settings() const override;
+    QHash<QString, QVariant> settings() const override;
 
     /**
      * Set the settings of the item.
      */
-    void setSettings( const QHash<QString,QVariant> &settings ) override;
+    void setSettings(const QHash<QString, QVariant> &settings) override;
 
- protected:
-    bool eventFilter( QObject *object, QEvent *event ) override;
+protected:
+    bool eventFilter(QObject *object, QEvent *event) override;
 
- private Q_SLOTS:
-   void readSettings();
-   void writeSettings();
+private Q_SLOTS:
+    void readSettings();
+    void writeSettings();
 
-   void updateSettings();
-   void checkNumberOfItems( quint32 number );
+    void updateSettings();
+    void checkNumberOfItems(quint32 number);
 
- private:
+private:
     Ui::PhotoConfigWidget *ui_configWidget;
     QDialog *m_configDialog;
 
@@ -83,4 +83,4 @@ class PhotoPlugin : public AbstractDataPlugin, public DialogConfigurationInterfa
 
 }
 
-#endif //PHOTOPLUGIN_H
+#endif // PHOTOPLUGIN_H

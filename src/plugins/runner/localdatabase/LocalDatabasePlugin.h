@@ -3,7 +3,6 @@
 // SPDX-FileCopyrightText: 2010 Dennis Nienhüser <nienhueser@kde.org>
 //
 
-
 #ifndef MARBLE_LOCALDATABASEPLUGIN_H
 #define MARBLE_LOCALDATABASEPLUGIN_H
 
@@ -16,7 +15,7 @@ class LocalDatabasePlugin : public SearchRunnerPlugin
 {
     Q_OBJECT
     Q_PLUGIN_METADATA(IID "org.kde.marble.LocalDatabasePlugin")
-    Q_INTERFACES( Marble::SearchRunnerPlugin )
+    Q_INTERFACES(Marble::SearchRunnerPlugin)
 
 public:
     explicit LocalDatabasePlugin(QObject *parent = nullptr);
@@ -35,7 +34,7 @@ public:
 
     QVector<PluginAuthor> pluginAuthors() const override;
 
-    SearchRunner* newRunner() const override;
+    SearchRunner *newRunner() const override;
 };
 
 }

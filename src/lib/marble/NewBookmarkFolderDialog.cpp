@@ -8,9 +8,10 @@
 #include "NewBookmarkFolderDialog.h"
 #include "MarbleDebug.h"
 
-namespace Marble {
+namespace Marble
+{
 
-NewBookmarkFolderDialog::NewBookmarkFolderDialog( QWidget *parent )
+NewBookmarkFolderDialog::NewBookmarkFolderDialog(QWidget *parent)
     : QDialog(parent)
 {
     setupUi(this);
@@ -25,9 +26,9 @@ QString NewBookmarkFolderDialog::folderName() const
     return m_name->text();
 }
 
-void NewBookmarkFolderDialog::setFolderName( const QString &name )
+void NewBookmarkFolderDialog::setFolderName(const QString &name)
 {
-    m_name->setText( name );
+    m_name->setText(name);
     m_name->selectAll();
 }
 

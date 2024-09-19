@@ -14,66 +14,60 @@ class OfflineDataModel : public QSortFilterProxyModel
 {
     Q_OBJECT
 
-    Q_PROPERTY( int count READ count NOTIFY countChanged )
+    Q_PROPERTY(int count READ count NOTIFY countChanged)
 
     Q_FLAGS(VehicleType VehicleTypes)
 
 public:
-    enum VehicleType {
-        None = 0x0,
-        Motorcar = 0x1,
-        Bicycle = 0x2,
-        Pedestrian = 0x4,
-        Any = Motorcar | Bicycle | Pedestrian
-    };
+    enum VehicleType { None = 0x0, Motorcar = 0x1, Bicycle = 0x2, Pedestrian = 0x4, Any = Motorcar | Bicycle | Pedestrian };
 
     Q_DECLARE_FLAGS(VehicleTypes, VehicleType)
 
-    explicit OfflineDataModel( QObject* parent = nullptr );
+    explicit OfflineDataModel(QObject *parent = nullptr);
 
     /** @todo FIXME https://bugreports.qt-project.org/browse/QTCOMPONENTS-1206 */
     int count() const;
 
     QHash<int, QByteArray> roleNames() const override;
 
-    QVariant data ( const QModelIndex & index, int role = Qt::DisplayRole ) const override;
+    QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
 
 public Q_SLOTS:
-    void setVehicleTypeFilter( VehicleTypes filter );
+    void setVehicleTypeFilter(VehicleTypes filter);
 
-    void install( int index );
+    void install(int index);
 
-    void uninstall( int index );
+    void uninstall(int index);
 
-    void cancel( int index );
+    void cancel(int index);
 
 Q_SIGNALS:
     void countChanged();
 
-    void installationProgressed( int newstuffindex, qreal progress );
+    void installationProgressed(int newstuffindex, qreal progress);
 
-    void installationFinished( int newstuffindex );
+    void installationFinished(int newstuffindex);
 
-    void installationFailed( int newstuffindex, const QString &error );
+    void installationFailed(int newstuffindex, const QString &error);
 
-    void uninstallationFinished( int newstuffindex );
+    void uninstallationFinished(int newstuffindex);
 
 protected:
-    bool filterAcceptsRow( int source_row, const QModelIndex &source_parent ) const override;
+    bool filterAcceptsRow(int source_row, const QModelIndex &source_parent) const override;
 
 private Q_SLOTS:
-    void handleInstallationProgress( int index, qreal progress );
+    void handleInstallationProgress(int index, qreal progress);
 
-    void handleInstallationFinished( int index );
+    void handleInstallationFinished(int index);
 
-    void handleInstallationFailed( int index, const QString &error );
+    void handleInstallationFailed(int index, const QString &error);
 
-    void handleUninstallationFinished( int index );
+    void handleUninstallationFinished(int index);
 
 private:
-    int fromSource( int idx ) const;
+    int fromSource(int idx) const;
 
-    int toSource( int idx ) const;
+    int toSource(int idx) const;
 
     Marble::NewstuffModel m_newstuffModel;
 

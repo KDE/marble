@@ -14,17 +14,16 @@ class QObject;
 
 namespace Marble
 {
-    
+
 class MarbleWidget;
 class PhotoPluginItem;
 
 class FlickrParser : public QXmlStreamReader
 {
 public:
-    FlickrParser( Marble::MarbleWidget *widget,
-                  QList<PhotoPluginItem *> *list, QObject *parent );
+    FlickrParser(Marble::MarbleWidget *widget, QList<PhotoPluginItem *> *list, QObject *parent);
 
-    bool read( const QByteArray& data );
+    bool read(const QByteArray &data);
 
 private:
     void readUnknownElement();

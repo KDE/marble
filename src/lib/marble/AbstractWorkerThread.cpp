@@ -18,18 +18,18 @@ const int WAIT_TIME = 100;
 
 class AbstractWorkerThreadPrivate
 {
- public:
-    explicit AbstractWorkerThreadPrivate( AbstractWorkerThread *parent )
-            : m_running( false ),
-              m_end( false ),
-              m_parent( parent )
+public:
+    explicit AbstractWorkerThreadPrivate(AbstractWorkerThread *parent)
+        : m_running(false)
+        , m_end(false)
+        , m_parent(parent)
     {
     }
 
     ~AbstractWorkerThreadPrivate()
     {
         m_end = true;
-        m_parent->wait( 1000 );
+        m_parent->wait(1000);
     }
 
     QMutex m_runningMutex;
@@ -39,10 +39,9 @@ class AbstractWorkerThreadPrivate
     AbstractWorkerThread *m_parent;
 };
 
-
-AbstractWorkerThread::AbstractWorkerThread( QObject *parent )
-        : QThread( parent ),
-          d( new AbstractWorkerThreadPrivate( this ) )
+AbstractWorkerThread::AbstractWorkerThread(QObject *parent)
+    : QThread(parent)
+    , d(new AbstractWorkerThreadPrivate(this))
 {
 }
 
@@ -53,11 +52,11 @@ AbstractWorkerThread::~AbstractWorkerThread()
 
 void AbstractWorkerThread::ensureRunning()
 {
-    QMutexLocker locker( &d->m_runningMutex );
-    if ( !d->m_running ) {
-        if ( wait( 2 * WAIT_TIME ) ) {
+    QMutexLocker locker(&d->m_runningMutex);
+    if (!d->m_running) {
+        if (wait(2 * WAIT_TIME)) {
             d->m_running = true;
-            start( QThread::IdlePriority );
+            start(QThread::IdlePriority);
         }
     }
 }
@@ -65,21 +64,19 @@ void AbstractWorkerThread::ensureRunning()
 void AbstractWorkerThread::run()
 {
     int waitAttempts = WAIT_ATTEMPTS;
-    while( !d->m_end ) {
+    while (!d->m_end) {
         d->m_runningMutex.lock();
-        if ( !workAvailable() ) {
+        if (!workAvailable()) {
             waitAttempts--;
-            if ( !waitAttempts || d->m_end ) {
+            if (!waitAttempts || d->m_end) {
                 d->m_running = false;
                 d->m_runningMutex.unlock();
                 break;
-            }
-            else {
+            } else {
                 d->m_runningMutex.unlock();
-                msleep( WAIT_TIME );
+                msleep(WAIT_TIME);
             }
-        }
-        else {
+        } else {
             d->m_runningMutex.unlock();
             work();
 

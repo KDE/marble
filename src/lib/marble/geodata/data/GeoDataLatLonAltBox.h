@@ -4,10 +4,8 @@
 // SPDX-FileCopyrightText: 2008 Torsten Rahn <rahn@kde.org>
 //
 
-
 #ifndef MARBLE_GEODATALATLONALTBOX_H
 #define MARBLE_GEODATALATLONALTBOX_H
-
 
 #include "MarbleGlobal.h"
 
@@ -24,29 +22,28 @@ class GeoDataLatLonAltBoxPrivate;
 
 class GeoDataLineString;
 
-
 /**
  * @short A class that defines a 3D bounding box for geographic data.
  *
  * GeoDataLatLonAltBox is a 3D bounding box that describes a geographic area
  * in terms of latitude, longitude and altitude.
  *
- * The bounding box gets described by assigning the northern, southern, 
+ * The bounding box gets described by assigning the northern, southern,
  * eastern and western boundary.
  * So usually the value of the eastern boundary is bigger than the
  * value of the western boundary. Only if the bounding box crosses the
- * date line then the eastern boundary has got a smaller value than 
+ * date line then the eastern boundary has got a smaller value than
  * the western one.
  */
 
 class GEODATA_EXPORT GeoDataLatLonAltBox : public GeoDataLatLonBox
 {
-    friend bool GEODATA_EXPORT operator==( GeoDataLatLonAltBox const& lhs, GeoDataLatLonAltBox const& rhs );
+    friend bool GEODATA_EXPORT operator==(GeoDataLatLonAltBox const &lhs, GeoDataLatLonAltBox const &rhs);
 
- public:
+public:
     GeoDataLatLonAltBox();
-    GeoDataLatLonAltBox( const GeoDataLatLonAltBox & other );
-    GeoDataLatLonAltBox( const GeoDataLatLonBox &other, qreal minAltitude, qreal maxAltitude );
+    GeoDataLatLonAltBox(const GeoDataLatLonAltBox &other);
+    GeoDataLatLonAltBox(const GeoDataLatLonBox &other, qreal minAltitude, qreal maxAltitude);
     /**
      * @brief A LatLonAltBox with the data from a GeoDataCoordinate
      * This way of creating a GeoDataLatLonAltBox sets the north and south
@@ -54,15 +51,15 @@ class GEODATA_EXPORT GeoDataLatLonAltBox : public GeoDataLatLonBox
      * resulting in a Box that has a 0 Area. This is useful for building
      * LatLonAltBoxes from GeoDataCoordinates.
      */
-    explicit GeoDataLatLonAltBox( const GeoDataCoordinates & coordinates );
-    
+    explicit GeoDataLatLonAltBox(const GeoDataCoordinates &coordinates);
+
     ~GeoDataLatLonAltBox() override;
 
-    GeoDataLatLonAltBox& operator=( const GeoDataLatLonAltBox& other );
-    GeoDataLatLonAltBox& operator=( const GeoDataCoordinates& other );
+    GeoDataLatLonAltBox &operator=(const GeoDataLatLonAltBox &other);
+    GeoDataLatLonAltBox &operator=(const GeoDataCoordinates &other);
 
     /// Provides type information for downcasting a GeoData
-    const char* nodeType() const override;
+    const char *nodeType() const override;
 
     /**
      * @brief qHash, for using GeoDataLatLonAltBox in a QCache as Key
@@ -75,30 +72,30 @@ class GEODATA_EXPORT GeoDataLatLonAltBox : public GeoDataLatLonBox
      * @return the height of the lower altitude boundary in meters.
      */
     qreal minAltitude() const;
-    void setMinAltitude( const qreal minAltitude );
+    void setMinAltitude(const qreal minAltitude);
 
     /**
      * @brief Get the upper altitude boundary of the bounding box.
      * @return the height of the upper altitude boundary in meters.
      */
     qreal maxAltitude() const;
-    void setMaxAltitude( const qreal maxAltitude );
+    void setMaxAltitude(const qreal maxAltitude);
 
     /**
      * @brief Get the reference system for the altitude.
-     * @return the point of reference which marks the origin 
+     * @return the point of reference which marks the origin
      * for measuring the altitude.
      */
     AltitudeMode altitudeMode() const;
-    void setAltitudeMode( const AltitudeMode altitudeMode );
+    void setAltitudeMode(const AltitudeMode altitudeMode);
 
-    bool contains( const GeoDataCoordinates & ) const override;
-    bool     contains( const GeoDataLatLonAltBox & ) const;
+    bool contains(const GeoDataCoordinates &) const override;
+    bool contains(const GeoDataLatLonAltBox &) const;
 
     /**
      * @brief Check if this GeoDataLatLonAltBox intersects with the given one.
      */
-    virtual bool intersects( const GeoDataLatLonAltBox & ) const;
+    virtual bool intersects(const GeoDataLatLonAltBox &) const;
 
     using GeoDataLatLonBox::intersects;
 
@@ -106,7 +103,7 @@ class GEODATA_EXPORT GeoDataLatLonAltBox : public GeoDataLatLonBox
      * @brief Create the smallest bounding box from a line string.
      * @return the smallest bounding box that contains the linestring.
      */
-    static GeoDataLatLonAltBox fromLineString( const GeoDataLineString& lineString );
+    static GeoDataLatLonAltBox fromLineString(const GeoDataLineString &lineString);
 
     /**
      * @brief Indicates whether the bounding box only contains a single 2D point ("singularity").
@@ -126,20 +123,20 @@ class GEODATA_EXPORT GeoDataLatLonAltBox : public GeoDataLatLonBox
     GeoDataCoordinates center() const override;
 
     /// Serialize the contents of the feature to @p stream.
-    void pack( QDataStream& stream ) const override;
+    void pack(QDataStream &stream) const override;
     /// Unserialize the contents of the feature from @p stream.
-    void unpack( QDataStream& stream ) override;
+    void unpack(QDataStream &stream) override;
 
- private:
-    GeoDataLatLonAltBoxPrivate  * const d;
+private:
+    GeoDataLatLonAltBoxPrivate *const d;
 };
 
 uint GEODATA_EXPORT qHash(const GeoDataLatLonAltBox &box, uint seed = 0);
 
-bool GEODATA_EXPORT operator==( GeoDataLatLonAltBox const& lhs, GeoDataLatLonAltBox const& rhs );
+bool GEODATA_EXPORT operator==(GeoDataLatLonAltBox const &lhs, GeoDataLatLonAltBox const &rhs);
 
 }
 
-Q_DECLARE_METATYPE( Marble::GeoDataLatLonAltBox )
+Q_DECLARE_METATYPE(Marble::GeoDataLatLonAltBox)
 
 #endif

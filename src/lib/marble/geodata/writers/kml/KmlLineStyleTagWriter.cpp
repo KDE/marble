@@ -13,26 +13,25 @@
 namespace Marble
 {
 
-static GeoTagWriterRegistrar s_writerLineStyle(
-    GeoTagWriter::QualifiedName( GeoDataTypes::GeoDataLineStyleType,
-                                 kml::kmlTag_nameSpaceOgc22 ),
-    new KmlLineStyleTagWriter );
+static GeoTagWriterRegistrar s_writerLineStyle(GeoTagWriter::QualifiedName(GeoDataTypes::GeoDataLineStyleType, kml::kmlTag_nameSpaceOgc22),
+                                               new KmlLineStyleTagWriter);
 
-KmlLineStyleTagWriter::KmlLineStyleTagWriter() : KmlColorStyleTagWriter( kml::kmlTag_LineStyle )
+KmlLineStyleTagWriter::KmlLineStyleTagWriter()
+    : KmlColorStyleTagWriter(kml::kmlTag_LineStyle)
 {
     // nothing to do
 }
 
-bool KmlLineStyleTagWriter::writeMid( const GeoNode *node, GeoWriter& writer ) const
+bool KmlLineStyleTagWriter::writeMid(const GeoNode *node, GeoWriter &writer) const
 {
-    const GeoDataLineStyle *style = static_cast<const GeoDataLineStyle*>( node );
-    writer.writeOptionalElement( "width", style->width(), 1.0f );
+    const GeoDataLineStyle *style = static_cast<const GeoDataLineStyle *>(node);
+    writer.writeOptionalElement("width", style->width(), 1.0f);
     return true;
 }
 
-bool KmlLineStyleTagWriter::isEmpty( const GeoNode *node ) const
+bool KmlLineStyleTagWriter::isEmpty(const GeoNode *node) const
 {
-    const GeoDataLineStyle *style = static_cast<const GeoDataLineStyle*>( node );
+    const GeoDataLineStyle *style = static_cast<const GeoDataLineStyle *>(node);
     return style->width() == 1.0;
 }
 

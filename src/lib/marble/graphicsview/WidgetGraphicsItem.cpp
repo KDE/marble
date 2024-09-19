@@ -8,8 +8,8 @@
 #include "WidgetGraphicsItem_p.h"
 
 // Marble
-#include "MarbleWidget.h"
 #include "MarbleDebug.h"
+#include "MarbleWidget.h"
 
 // Qt
 #include <QApplication>
@@ -19,10 +19,11 @@
 
 using namespace Marble;
 
-WidgetGraphicsItemPrivate::WidgetGraphicsItemPrivate(WidgetGraphicsItem *widgetGraphicsItem,
-                                                     MarbleGraphicsItem *parent)
-    : ScreenGraphicsItemPrivate(widgetGraphicsItem, parent),
-    m_widget(nullptr), m_marbleWidget(nullptr), m_activeWidget( nullptr )
+WidgetGraphicsItemPrivate::WidgetGraphicsItemPrivate(WidgetGraphicsItem *widgetGraphicsItem, MarbleGraphicsItem *parent)
+    : ScreenGraphicsItemPrivate(widgetGraphicsItem, parent)
+    , m_widget(nullptr)
+    , m_marbleWidget(nullptr)
+    , m_activeWidget(nullptr)
 {
     // nothing to do
 }
@@ -32,7 +33,7 @@ WidgetGraphicsItemPrivate::~WidgetGraphicsItemPrivate()
     delete m_widget;
 }
 
-WidgetGraphicsItem::WidgetGraphicsItem( MarbleGraphicsItem *parent )
+WidgetGraphicsItem::WidgetGraphicsItem(MarbleGraphicsItem *parent)
     : ScreenGraphicsItem(new WidgetGraphicsItemPrivate(this, parent))
 {
 }
@@ -46,11 +47,11 @@ void WidgetGraphicsItem::setWidget(QWidget *widget)
     Q_D(WidgetGraphicsItem);
     d->m_widget = widget;
 
-    QSize size = widget->sizeHint().expandedTo( widget->size() );
-    size = size.expandedTo( widget->minimumSize() );
-    size = size.boundedTo( widget->maximumSize() );
-    setSize( size );
-    widget->resize( size );
+    QSize size = widget->sizeHint().expandedTo(widget->size());
+    size = size.expandedTo(widget->minimumSize());
+    size = size.boundedTo(widget->maximumSize());
+    setSize(size);
+    widget->resize(size);
 }
 
 QWidget *WidgetGraphicsItem::widget() const
@@ -59,85 +60,80 @@ QWidget *WidgetGraphicsItem::widget() const
     return d->m_widget;
 }
 
-void WidgetGraphicsItem::paint( QPainter *painter )
+void WidgetGraphicsItem::paint(QPainter *painter)
 {
     Q_D(WidgetGraphicsItem);
-    if( d->m_widget == nullptr )
+    if (d->m_widget == nullptr)
         return;
 
     // Paint widget without a background
-    d->m_widget->render( painter, QPoint( 0, 0 ), QRegion(), QWidget::RenderFlags( QWidget::DrawChildren) );
+    d->m_widget->render(painter, QPoint(0, 0), QRegion(), QWidget::RenderFlags(QWidget::DrawChildren));
 }
 
-bool WidgetGraphicsItem::eventFilter( QObject *object, QEvent *e )
+bool WidgetGraphicsItem::eventFilter(QObject *object, QEvent *e)
 {
     Q_D(WidgetGraphicsItem);
-    if ( !visible() || d->m_widget == nullptr ) {
+    if (!visible() || d->m_widget == nullptr) {
         return false;
     }
 
-    MarbleWidget *widget = dynamic_cast<MarbleWidget*> (object);
-    if ( !widget ) {
+    MarbleWidget *widget = dynamic_cast<MarbleWidget *>(object);
+    if (!widget) {
         return ScreenGraphicsItem::eventFilter(object, e);
     }
 
-    if ( d->m_marbleWidget != widget ) {
+    if (d->m_marbleWidget != widget) {
         // Delayed initialization
         d->m_marbleWidget = widget;
     }
 
     Q_ASSERT(d->m_marbleWidget);
 
-    if ( e->type() == QEvent::MouseButtonDblClick
-         || e->type() == QEvent::MouseMove
-         || e->type() == QEvent::MouseButtonPress
-         || e->type() == QEvent::MouseButtonRelease )
-    {
+    if (e->type() == QEvent::MouseButtonDblClick || e->type() == QEvent::MouseMove || e->type() == QEvent::MouseButtonPress
+        || e->type() == QEvent::MouseButtonRelease) {
         // Mouse events are forwarded to the underlying widget
-        QMouseEvent *event = static_cast<QMouseEvent*> ( e );
+        QMouseEvent *event = static_cast<QMouseEvent *>(e);
 
         const QVector<QPointF> widgetPositions = absolutePositions();
         QRectF widgetItemRect;
         QPoint shiftedPos;
         QVector<QPointF>::ConstIterator it = widgetPositions.begin();
         bool foundRightPosition = false;
-        for(; !foundRightPosition && it != widgetPositions.end(); ++it ) {
-            widgetItemRect = QRectF( *it, size() );
+        for (; !foundRightPosition && it != widgetPositions.end(); ++it) {
+            widgetItemRect = QRectF(*it, size());
 
-            if ( widgetItemRect.contains( event->pos() ) ) {
+            if (widgetItemRect.contains(event->pos())) {
                 foundRightPosition = true;
                 shiftedPos = event->pos() - widgetItemRect.topLeft().toPoint();
             }
         }
-        
-        if ( foundRightPosition ) {
-            QWidget *child = d->m_widget->childAt( shiftedPos );
 
-            if ( d->m_activeWidget && d->m_activeWidget != child ) {
-                QEvent leaveEvent( QEvent::Leave );
-                QApplication::sendEvent( d->m_activeWidget, &leaveEvent );
+        if (foundRightPosition) {
+            QWidget *child = d->m_widget->childAt(shiftedPos);
+
+            if (d->m_activeWidget && d->m_activeWidget != child) {
+                QEvent leaveEvent(QEvent::Leave);
+                QApplication::sendEvent(d->m_activeWidget, &leaveEvent);
             }
 
-            if ( child && d->m_activeWidget != child ) {
-                QEvent enterEvent( QEvent::Enter );
-                QApplication::sendEvent( child, &enterEvent );
+            if (child && d->m_activeWidget != child) {
+                QEvent enterEvent(QEvent::Enter);
+                QApplication::sendEvent(child, &enterEvent);
             }
             d->m_activeWidget = child;
 
-            if ( child ) {
+            if (child) {
                 shiftedPos -= child->pos(); // transform to children's coordinates
-                QMouseEvent shiftedEvent = QMouseEvent( e->type(), shiftedPos,
-                        event->globalPos(), event->button(), event->buttons(),
-                        event->modifiers() );
-                if ( QApplication::sendEvent( child, &shiftedEvent ) ) {
-                    d->m_marbleWidget->setCursor( d->m_widget->cursor() );
+                QMouseEvent shiftedEvent = QMouseEvent(e->type(), shiftedPos, event->globalPos(), event->button(), event->buttons(), event->modifiers());
+                if (QApplication::sendEvent(child, &shiftedEvent)) {
+                    d->m_marbleWidget->setCursor(d->m_widget->cursor());
                     return true;
                 }
             }
         } else {
-            if ( d->m_activeWidget ) {
-                QEvent leaveEvent( QEvent::Leave );
-                QApplication::sendEvent( d->m_activeWidget, &leaveEvent );
+            if (d->m_activeWidget) {
+                QEvent leaveEvent(QEvent::Leave);
+                QApplication::sendEvent(d->m_activeWidget, &leaveEvent);
                 d->m_activeWidget = nullptr;
             }
         }

@@ -11,10 +11,11 @@ class QTimer;
 #include <marble/GeoDataCoordinates.h>
 #include <marble/GeoDataPlacemark.h>
 
-#include <QWidget>
 #include <QObject>
+#include <QWidget>
 
-namespace Marble {
+namespace Marble
+{
 
 class MarbleWidget;
 
@@ -23,7 +24,7 @@ class CarWorker : public QObject
 {
     Q_OBJECT
 public:
-    CarWorker(const GeoDataCoordinates& city, qreal radius, qreal speed);
+    CarWorker(const GeoDataCoordinates &city, qreal radius, qreal speed);
 
 Q_SIGNALS:
     void coordinatesChanged(GeoDataCoordinates coord);

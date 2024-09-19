@@ -16,12 +16,12 @@
 
 using namespace Marble;
 
-PanoramioItem::PanoramioItem( MarbleWidget *marbleWidget, QObject *parent ) :
-    AbstractDataPluginItem( parent ),
-    m_marbleWidget( marbleWidget )
+PanoramioItem::PanoramioItem(MarbleWidget *marbleWidget, QObject *parent)
+    : AbstractDataPluginItem(parent)
+    , m_marbleWidget(marbleWidget)
 {
-    m_action = new QAction( this );
-    connect( m_action, SIGNAL(triggered()), this, SLOT(openBrowser()) );
+    m_action = new QAction(this);
+    connect(m_action, SIGNAL(triggered()), this, SLOT(openBrowser()));
 }
 
 bool PanoramioItem::initialized() const
@@ -29,26 +29,23 @@ bool PanoramioItem::initialized() const
     return !smallImage.isNull();
 }
 
-void PanoramioItem::addDownloadedFile( const QString &url, const QString &type )
+void PanoramioItem::addDownloadedFile(const QString &url, const QString &type)
 {
-    if( standardImageSize == type ) {
+    if (standardImageSize == type) {
         // Loading original image
         QImage largeImage;
-        largeImage.load( url );
+        largeImage.load(url);
 
         // Scaling the image to the half of the original size
-        smallImage = largeImage.scaled( largeImage.size() / 3,
-                                        Qt::IgnoreAspectRatio,
-                                        Qt::SmoothTransformation );
-        setSize( smallImage.size() );
+        smallImage = largeImage.scaled(largeImage.size() / 3, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
+        setSize(smallImage.size());
         update();
-    }
-    else {
+    } else {
         mDebug() << "can't handle type" << type;
     }
 }
 
-void PanoramioItem::setPhotoUrl( const QUrl &url )
+void PanoramioItem::setPhotoUrl(const QUrl &url)
 {
     m_url = url;
 }
@@ -58,27 +55,27 @@ QDate PanoramioItem::uploadDate() const
     return m_uploadDate;
 }
 
-void PanoramioItem::setUploadDate( const QDate &uploadDate )
+void PanoramioItem::setUploadDate(const QDate &uploadDate)
 {
     m_uploadDate = uploadDate;
 }
 
-bool PanoramioItem::operator<( const AbstractDataPluginItem *other ) const
+bool PanoramioItem::operator<(const AbstractDataPluginItem *other) const
 {
-    Q_ASSERT( dynamic_cast<const PanoramioItem *>( other ) != 0 );
+    Q_ASSERT(dynamic_cast<const PanoramioItem *>(other) != 0);
 
-    return uploadDate() > static_cast<const PanoramioItem *>( other )->uploadDate();
+    return uploadDate() > static_cast<const PanoramioItem *>(other)->uploadDate();
 }
 
-void PanoramioItem::paint( QPainter *painter )
+void PanoramioItem::paint(QPainter *painter)
 {
-    painter->drawImage( 0, 0, smallImage );
+    painter->drawImage(0, 0, smallImage);
 }
 
 QAction *Marble::PanoramioItem::action()
 {
-    if( m_action->icon().isNull() ) {
-        m_action->setIcon( QIcon( QPixmap::fromImage( smallImage ) ) );
+    if (m_action->icon().isNull()) {
+        m_action->setIcon(QIcon(QPixmap::fromImage(smallImage)));
     }
 
     return m_action;
@@ -86,11 +83,11 @@ QAction *Marble::PanoramioItem::action()
 
 void PanoramioItem::openBrowser()
 {
-    if ( m_marbleWidget ) {
-        PopupLayer* popup = m_marbleWidget->popupLayer();
-        popup->setCoordinates( coordinate(), Qt::AlignRight | Qt::AlignVCenter );
+    if (m_marbleWidget) {
+        PopupLayer *popup = m_marbleWidget->popupLayer();
+        popup->setCoordinates(coordinate(), Qt::AlignRight | Qt::AlignVCenter);
         popup->setSize(QSizeF(720, 470));
-        popup->setUrl( m_url );
+        popup->setUrl(m_url);
         popup->popup();
     }
 }

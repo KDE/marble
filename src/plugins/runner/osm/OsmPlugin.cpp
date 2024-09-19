@@ -8,14 +8,14 @@
 namespace Marble
 {
 
-OsmPlugin::OsmPlugin( QObject *parent ) :
-    ParseRunnerPlugin( parent )
+OsmPlugin::OsmPlugin(QObject *parent)
+    : ParseRunnerPlugin(parent)
 {
 }
 
 QString OsmPlugin::name() const
 {
-    return tr( "Osm File Parser" );
+    return tr("Osm File Parser");
 }
 
 QString OsmPlugin::nameId() const
@@ -30,7 +30,7 @@ QString OsmPlugin::version() const
 
 QString OsmPlugin::description() const
 {
-    return tr( "Create GeoDataDocument from Osm Files" );
+    return tr("Create GeoDataDocument from Osm Files");
 }
 
 QString OsmPlugin::copyrightYears() const
@@ -40,14 +40,13 @@ QString OsmPlugin::copyrightYears() const
 
 QVector<PluginAuthor> OsmPlugin::pluginAuthors() const
 {
-    return QVector<PluginAuthor>()
-            << PluginAuthor(QStringLiteral("Thibaut Gridel"), QStringLiteral("tgridel@free.fr"))
-            << PluginAuthor(QStringLiteral("Dennis Nienhüser"), QStringLiteral("nienhueser@kde.org"));
+    return QVector<PluginAuthor>() << PluginAuthor(QStringLiteral("Thibaut Gridel"), QStringLiteral("tgridel@free.fr"))
+                                   << PluginAuthor(QStringLiteral("Dennis Nienhüser"), QStringLiteral("nienhueser@kde.org"));
 }
 
 QString OsmPlugin::fileFormatDescription() const
 {
-    return tr( "OpenStreetMap Data" );
+    return tr("OpenStreetMap Data");
 }
 
 QStringList OsmPlugin::fileExtensions() const
@@ -55,7 +54,7 @@ QStringList OsmPlugin::fileExtensions() const
     return QStringList() << QStringLiteral("osm") << QStringLiteral("osm.zip") << QStringLiteral("o5m") << QStringLiteral("osm.pbf");
 }
 
-ParsingRunner* OsmPlugin::newRunner() const
+ParsingRunner *OsmPlugin::newRunner() const
 {
     return new OsmRunner;
 }

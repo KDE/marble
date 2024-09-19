@@ -3,21 +3,21 @@
 // SPDX-FileCopyrightText: 2013 Mayank Madan <maddiemadan@gmail.com>
 
 #include "KmlFlyToTagHandler.h"
-#include "KmlObjectTagHandler.h"
 #include "GeoDataFlyTo.h"
 #include "GeoDataPlaylist.h"
 #include "GeoParser.h"
-#include "MarbleDebug.h"
 #include "KmlElementDictionary.h"
+#include "KmlObjectTagHandler.h"
+#include "MarbleDebug.h"
 
 namespace Marble
 {
 namespace kml
 {
 
-KML_DEFINE_TAG_HANDLER_GX22( FlyTo )
+KML_DEFINE_TAG_HANDLER_GX22(FlyTo)
 
-GeoNode* KmlFlyToTagHandler::parse( GeoParser& parser ) const
+GeoNode *KmlFlyToTagHandler::parse(GeoParser &parser) const
 {
     Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1String(kmlTag_FlyTo)));
 
@@ -25,8 +25,8 @@ GeoNode* KmlFlyToTagHandler::parse( GeoParser& parser ) const
 
     if (parentItem.is<GeoDataPlaylist>()) {
         GeoDataFlyTo *flyTo = new GeoDataFlyTo;
-        KmlObjectTagHandler::parseIdentifiers( parser, flyTo );
-        parentItem.nodeAs<GeoDataPlaylist>()->addPrimitive( flyTo );
+        KmlObjectTagHandler::parseIdentifiers(parser, flyTo);
+        parentItem.nodeAs<GeoDataPlaylist>()->addPrimitive(flyTo);
         return flyTo;
     }
 
@@ -35,4 +35,3 @@ GeoNode* KmlFlyToTagHandler::parse( GeoParser& parser ) const
 
 }
 }
-

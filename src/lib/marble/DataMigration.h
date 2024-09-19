@@ -16,15 +16,15 @@ class MARBLE_EXPORT DataMigration : public QObject
 {
     Q_OBJECT
 
- public:
-    explicit DataMigration( QObject *parent );
+public:
+    explicit DataMigration(QObject *parent);
     ~DataMigration() override;
 
- public Q_SLOTS:
+public Q_SLOTS:
     void exec();
 
- private:
-    static void moveFiles( const QString& source, const QString& target );
+private:
+    static void moveFiles(const QString &source, const QString &target);
 };
 
 }

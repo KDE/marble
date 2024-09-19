@@ -18,21 +18,45 @@ OsmcSymbol::OsmcSymbol(const QString &tag, int size)
     , m_textColor(Qt::black)
     , m_side(size)
 {
-    m_backgroundTypes
-            << "round" << "circle" << "frame";
+    m_backgroundTypes << "round"
+                      << "circle"
+                      << "frame";
 
-    m_foregroundTypes
-            << "dot" << "bowl" << "circle" << "bar"
-            << "stripe" << "cross" << "x" << "slash"
-            << "backslash" << "rectangle" << "rectangle_line"
-            << "triangle" << "triangle_turned" << "triangle_line"
-            << "diamond" << "pointer" << "fork" << "arch"
-            << "turned_T" << "L" << "lower" << "corner"
-            << "drop_line" << "horse" << "hiker";
+    m_foregroundTypes << "dot"
+                      << "bowl"
+                      << "circle"
+                      << "bar"
+                      << "stripe"
+                      << "cross"
+                      << "x"
+                      << "slash"
+                      << "backslash"
+                      << "rectangle"
+                      << "rectangle_line"
+                      << "triangle"
+                      << "triangle_turned"
+                      << "triangle_line"
+                      << "diamond"
+                      << "pointer"
+                      << "fork"
+                      << "arch"
+                      << "turned_T"
+                      << "L"
+                      << "lower"
+                      << "corner"
+                      << "drop_line"
+                      << "horse"
+                      << "hiker";
 
-    m_precoloredForegroundTypes
-            << "wolfshook" << "shell" << "shell_modern" << "ammonit"
-            << "mine" << "hiker" << "heart" << "tower" << "bridleway";
+    m_precoloredForegroundTypes << "wolfshook"
+                                << "shell"
+                                << "shell_modern"
+                                << "ammonit"
+                                << "mine"
+                                << "hiker"
+                                << "heart"
+                                << "tower"
+                                << "bridleway";
 
     if (parseTag(tag)) {
         render();
@@ -130,9 +154,9 @@ bool OsmcSymbol::parseBackground(const QString &bg)
     return true;
 }
 
-void setXMLAttribute(QDomElement &elem, const QString& tag, const QString& attr, const QString& attrValue);
+void setXMLAttribute(QDomElement &elem, const QString &tag, const QString &attr, const QString &attrValue);
 
-QSvgRenderer* OsmcSymbol::parseForeground(const QString &fg)
+QSvgRenderer *OsmcSymbol::parseForeground(const QString &fg)
 {
     if (m_precoloredForegroundTypes.contains(fg)) {
         return new QSvgRenderer(QStringLiteral(":/osmc-symbols/%1.svg").arg(fg));
@@ -229,7 +253,7 @@ QColor OsmcSymbol::wayColor() const
     return m_wayColor;
 }
 
-void setXMLAttribute(QDomElement &elem, const QString& tag, const QString& attr, const QString& attrValue)
+void setXMLAttribute(QDomElement &elem, const QString &tag, const QString &attr, const QString &attrValue)
 {
     // If elem's tag is equal to the provided one then overwrite desired attribute
     if (elem.tagName() == tag) {

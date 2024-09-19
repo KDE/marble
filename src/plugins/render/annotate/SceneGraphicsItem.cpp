@@ -9,19 +9,18 @@
 #include "SceneGraphicsItem.h"
 
 // Marble
-#include "GeoDataPlacemark.h"
 #include "GeoDataGeometry.h"
-
+#include "GeoDataPlacemark.h"
 
 namespace Marble
 {
 
-SceneGraphicsItem::SceneGraphicsItem( GeoDataPlacemark *placemark ) :
-    GeoGraphicsItem( placemark ),
-    m_state( Editing ),
-    m_hasFocus( false ),
-    m_request( NoRequest ),
-    m_placemark( placemark )
+SceneGraphicsItem::SceneGraphicsItem(GeoDataPlacemark *placemark)
+    : GeoGraphicsItem(placemark)
+    , m_state(Editing)
+    , m_hasFocus(false)
+    , m_request(NoRequest)
+    , m_placemark(placemark)
 {
     // nothing to do
 }
@@ -41,11 +40,11 @@ SceneGraphicsItem::ActionState SceneGraphicsItem::state() const
     return m_state;
 }
 
-void SceneGraphicsItem::setState( ActionState state )
+void SceneGraphicsItem::setState(ActionState state)
 {
     ActionState previousState = m_state;
     m_state = state;
-    dealWithStateChange( previousState );
+    dealWithStateChange(previousState);
 }
 
 bool SceneGraphicsItem::hasFocus() const
@@ -53,7 +52,7 @@ bool SceneGraphicsItem::hasFocus() const
     return m_hasFocus;
 }
 
-void SceneGraphicsItem::setFocus( bool enabled )
+void SceneGraphicsItem::setFocus(bool enabled)
 {
     m_hasFocus = enabled;
 }
@@ -63,7 +62,7 @@ SceneGraphicsItem::MarbleWidgetRequest SceneGraphicsItem::request() const
     return m_request;
 }
 
-void SceneGraphicsItem::setRequest( MarbleWidgetRequest request )
+void SceneGraphicsItem::setRequest(MarbleWidgetRequest request)
 {
     m_request = request;
 }
@@ -78,18 +77,17 @@ GeoDataPlacemark *SceneGraphicsItem::placemark()
     return m_placemark;
 }
 
-bool SceneGraphicsItem::sceneEvent( QEvent *event )
+bool SceneGraphicsItem::sceneEvent(QEvent *event)
 {
-    if ( event->type() == QEvent::MouseButtonPress ) {
-        return mousePressEvent( static_cast<QMouseEvent*>( event ) );
-    } else if ( event->type() == QEvent::MouseMove ) {
-        return mouseMoveEvent( static_cast<QMouseEvent*>( event ) );
-    } else if ( event->type() == QEvent::MouseButtonRelease ) {
-        return mouseReleaseEvent( static_cast<QMouseEvent*>( event ) );
+    if (event->type() == QEvent::MouseButtonPress) {
+        return mousePressEvent(static_cast<QMouseEvent *>(event));
+    } else if (event->type() == QEvent::MouseMove) {
+        return mouseMoveEvent(static_cast<QMouseEvent *>(event));
+    } else if (event->type() == QEvent::MouseButtonRelease) {
+        return mouseReleaseEvent(static_cast<QMouseEvent *>(event));
     }
 
     return false;
 }
 
 }
-

@@ -3,16 +3,15 @@
 // SPDX-FileCopyrightText: 2010 Dennis Nienhüser <nienhueser@kde.org>
 //
 
-
 #ifndef MARBLE_OSMNOMINATIMREVERSEGEOCODINGRUNNER_H
 #define MARBLE_OSMNOMINATIMREVERSEGEOCODINGRUNNER_H
 
-#include "ReverseGeocodingRunner.h"
 #include "GeoDataCoordinates.h"
+#include "ReverseGeocodingRunner.h"
 
-#include <QString>
 #include <QNetworkAccessManager>
 #include <QNetworkRequest>
+#include <QString>
 
 class QNetworkReply;
 class QDomNode;
@@ -31,11 +30,11 @@ public:
     ~OsmNominatimRunner() override;
 
     // Overriding MarbleAbstractRunner
-    void reverseGeocoding( const GeoDataCoordinates &coordinates ) override;
+    void reverseGeocoding(const GeoDataCoordinates &coordinates) override;
 
 private Q_SLOTS:
     // Forward a result to the search or reverse geocoding handler
-    void handleResult( QNetworkReply* );
+    void handleResult(QNetworkReply *);
 
     void returnNoReverseGeocodingResult();
 

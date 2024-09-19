@@ -8,12 +8,13 @@
 
 #include <QVector>
 
-#include "GeoDataGeometry.h"
 #include "GeoDataCoordinates.h"
+#include "GeoDataGeometry.h"
 
 #include "geodata_export.h"
 
-namespace Marble {
+namespace Marble
+{
 class GeoDataBuildingPrivate;
 
 /*!
@@ -37,7 +38,7 @@ public:
         QString label;
     };
 
-    GeoDataBuilding& operator=(const GeoDataBuilding &other);
+    GeoDataBuilding &operator=(const GeoDataBuilding &other);
 
     const char *nodeType() const override;
 
@@ -45,96 +46,84 @@ public:
 
     GeoDataGeometry *copy() const override;
 
-    static double parseBuildingHeight(const QString& buildingHeight);
+    static double parseBuildingHeight(const QString &buildingHeight);
 
     /*!
     Destroys the GeoDataBuilding
 */
     ~GeoDataBuilding() override;
 
-
-/*!
-    @return the height of the building
-*/
+    /*!
+        @return the height of the building
+    */
     double height() const;
 
-
-/*!
-    Sets the height of the building
-    @param height
- */
+    /*!
+        Sets the height of the building
+        @param height
+     */
     void setHeight(double height);
 
-
-/*!
-    @return the minimum level
- */
+    /*!
+        @return the minimum level
+     */
     int minLevel() const;
 
-
-/*!
-    Sets the minimum level of the building
-    @param minLevel
- */
+    /*!
+        Sets the minimum level of the building
+        @param minLevel
+     */
     void setMinLevel(int minLevel);
 
-
-/*!
-    @return the maximum level of the building
- */
+    /*!
+        @return the maximum level of the building
+     */
     int maxLevel() const;
 
-
-/*!
-    Sets the maximum level of the building
-    @param maxLevel
- */
+    /*!
+        Sets the maximum level of the building
+        @param maxLevel
+     */
     void setMaxLevel(int maxLevel);
 
-
-/*!
-    @return the non existent levels in the building
- */
+    /*!
+        @return the non existent levels in the building
+     */
     QVector<int> nonExistentLevels() const;
 
+    /*!
+        Sets the non existent levels of the building
+        @param nonExistentLevels
+     */
+    void setNonExistentLevels(const QVector<int> &nonExistentLevels);
 
-/*!
-    Sets the non existent levels of the building
-    @param nonExistentLevels
- */
-    void setNonExistentLevels(const QVector<int>& nonExistentLevels);
+    /*!
+        @return the multigeometry associated with the building
+     */
+    GeoDataMultiGeometry *multiGeometry() const;
 
+    /*!
+        @return the latlonaltbox for the contained multigeometry
+     */
+    const GeoDataLatLonAltBox &latLonAltBox() const override;
 
-/*!
-    @return the multigeometry associated with the building
- */
-    GeoDataMultiGeometry* multiGeometry() const;
-
-
-/*!
-    @return the latlonaltbox for the contained multigeometry
- */
-    const GeoDataLatLonAltBox& latLonAltBox() const override;
-
-
-/*!
-    @return the name of the building
- */
+    /*!
+        @return the name of the building
+     */
     QString name() const;
 
-
-/*!
-    Sets the name of the building
-    @param name
- */
-    void setName(const QString& name);
+    /*!
+        Sets the name of the building
+        @param name
+     */
+    void setName(const QString &name);
 
     QVector<NamedEntry> entries() const;
 
-    void setEntries(const QVector<NamedEntry>& entries);
+    void setEntries(const QVector<NamedEntry> &entries);
 
 private:
-    GeoDataBuildingPrivate* const d;
+    GeoDataBuildingPrivate *const d;
 };
 
 }

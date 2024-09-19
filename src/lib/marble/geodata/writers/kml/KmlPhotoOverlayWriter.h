@@ -16,7 +16,7 @@ class KmlPhotoOverlayWriter : public KmlOverlayTagWriter
 public:
     KmlPhotoOverlayWriter();
 
-    bool writeMid( const GeoNode *node, GeoWriter &writer ) const override;
+    bool writeMid(const GeoNode *node, GeoWriter &writer) const override;
 };
 
 }

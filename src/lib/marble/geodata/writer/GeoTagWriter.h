@@ -7,8 +7,8 @@
 #ifndef MARBLE_GEOTAGWRITER_H
 #define MARBLE_GEOTAGWRITER_H
 
-#include <QPair>
 #include <QHash>
+#include <QPair>
 
 #include <marble_export.h>
 
@@ -27,7 +27,7 @@ class GeoWriter;
 class MARBLE_EXPORT GeoTagWriter
 {
 public:
-    virtual bool write( const GeoNode *node, GeoWriter& writer ) const = 0;
+    virtual bool write(const GeoNode *node, GeoWriter &writer) const = 0;
 
     /**
      * @brief Object Name and Namespace Pair
@@ -52,27 +52,26 @@ protected:
 private:
     // Only our registrar is allowed to register tag writers.
     friend struct GeoTagWriterRegistrar;
-    static void registerWriter(const QualifiedName&, const GeoTagWriter*);
-    static void unregisterWriter(const QualifiedName&);
+    static void registerWriter(const QualifiedName &, const GeoTagWriter *);
+    static void unregisterWriter(const QualifiedName &);
 
 private:
-    //Collect the Tag Writers and provide a singleton like accessor
-    typedef QHash<QualifiedName, const GeoTagWriter*> TagHash;
-    static TagHash* tagWriterHash();
+    // Collect the Tag Writers and provide a singleton like accessor
+    typedef QHash<QualifiedName, const GeoTagWriter *> TagHash;
+    static TagHash *tagWriterHash();
 
 private:
     // Only our writer is allowed to access tag handlers.
     friend class GeoWriter;
     friend class GeoDataDocumentWriter;
-    static const GeoTagWriter* recognizes(const QualifiedName&);
+    static const GeoTagWriter *recognizes(const QualifiedName &);
 };
 
 // Helper structure
-struct GeoTagWriterRegistrar
-{
+struct GeoTagWriterRegistrar {
 public:
-    GeoTagWriterRegistrar(const GeoTagWriter::QualifiedName& name, const GeoTagWriter* writer) :
-        m_name(name)
+    GeoTagWriterRegistrar(const GeoTagWriter::QualifiedName &name, const GeoTagWriter *writer)
+        : m_name(name)
     {
         GeoTagWriter::registerWriter(name, writer);
     }

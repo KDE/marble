@@ -5,16 +5,15 @@
 
 #include <QObject>
 
-#include "GeoDataContainer.h"
-#include "GeoDataPoint.h"
-#include "GeoDataPlacemark.h"
-#include "GeoDataRelation.h"
 #include "GeoDataCamera.h"
-#include "MarbleGlobal.h"
+#include "GeoDataContainer.h"
+#include "GeoDataPlacemark.h"
 #include "GeoDataPlaylist.h"
+#include "GeoDataPoint.h"
+#include "GeoDataRelation.h"
 #include "GeoDataTour.h"
+#include "MarbleGlobal.h"
 #include "TestUtils.h"
-
 
 namespace Marble
 {
@@ -63,7 +62,6 @@ private Q_SLOTS:
      * parent a null pointer.
      */
     void testGeometryParentInPlacemark();
-
 };
 
 void TestFeatureDetach::testRelation()
@@ -103,7 +101,7 @@ void TestFeatureDetach::testPlacemark()
     GeoDataPlacemark place2 = place1;
 
     GeoDataCoordinates coords2(60, 60, 0, GeoDataCoordinates::Degree);
-    GeoDataPoint *point = static_cast<GeoDataPoint*>( place2.geometry() );
+    GeoDataPoint *point = static_cast<GeoDataPoint *>(place2.geometry());
     point->setCoordinates(coords2);
     QVERIFY(place1.coordinate() == coords1);
 
@@ -145,6 +143,6 @@ void TestFeatureDetach::testGeometryParentInPlacemark()
 
 }
 
-QTEST_MAIN( Marble::TestFeatureDetach )
+QTEST_MAIN(Marble::TestFeatureDetach)
 
 #include "TestFeatureDetach.moc"

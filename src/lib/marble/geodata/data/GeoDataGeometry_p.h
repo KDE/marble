@@ -17,19 +17,19 @@ namespace Marble
 
 class GeoDataGeometryPrivate
 {
-  public:
+public:
     GeoDataGeometryPrivate()
-        : m_extrude( false ),
-          m_altitudeMode( ClampToGround ),
-          ref( 0 )
+        : m_extrude(false)
+        , m_altitudeMode(ClampToGround)
+        , ref(0)
     {
     }
 
-    GeoDataGeometryPrivate( const GeoDataGeometryPrivate& other )
-        : m_extrude( other.m_extrude ),
-          m_altitudeMode( other.m_altitudeMode ),
-          m_latLonAltBox(),
-          ref( 0 )
+    GeoDataGeometryPrivate(const GeoDataGeometryPrivate &other)
+        : m_extrude(other.m_extrude)
+        , m_altitudeMode(other.m_altitudeMode)
+        , m_latLonAltBox()
+        , ref(0)
     {
     }
 
@@ -37,7 +37,7 @@ class GeoDataGeometryPrivate
     {
     }
 
-    GeoDataGeometryPrivate& operator=( const GeoDataGeometryPrivate &other )
+    GeoDataGeometryPrivate &operator=(const GeoDataGeometryPrivate &other)
     {
         m_extrude = other.m_extrude;
         m_altitudeMode = other.m_altitudeMode;
@@ -47,11 +47,11 @@ class GeoDataGeometryPrivate
 
     virtual GeoDataGeometryPrivate *copy() const = 0;
 
-    bool         m_extrude;
+    bool m_extrude;
     AltitudeMode m_altitudeMode;
     mutable GeoDataLatLonAltBox m_latLonAltBox;
 
-    QAtomicInt  ref;
+    QAtomicInt ref;
 };
 
 } // namespace Marble

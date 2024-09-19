@@ -16,7 +16,7 @@ namespace kml
 class KmlNetworkLinkControlTagHandler : public GeoTagHandler
 {
 public:
-    GeoNode * parse( GeoParser & ) const override;
+    GeoNode *parse(GeoParser &) const override;
 };
 
 }

@@ -20,19 +20,19 @@ class GpsdConnection : public QObject
 {
     Q_OBJECT
 
- public:
-    explicit GpsdConnection( QObject* parent = nullptr );
+public:
+    explicit GpsdConnection(QObject *parent = nullptr);
 
     ~GpsdConnection() override;
 
     void initialize();
 
-    QString error() const;    
+    QString error() const;
 
- Q_SIGNALS:
-    void gpsdInfo( gps_data_t data );
+Q_SIGNALS:
+    void gpsdInfo(gps_data_t data);
 
-    void statusChanged( PositionProviderStatus status ) const;    
+    void statusChanged(PositionProviderStatus status) const;
 
 private:
     void open();
@@ -41,9 +41,9 @@ private:
     QTimer m_timer;
     PositionProviderStatus m_status;
     QString m_error;
-    const char* m_oldLocale;
-    
- private Q_SLOTS:
+    const char *m_oldLocale;
+
+private Q_SLOTS:
     void update();
 };
 

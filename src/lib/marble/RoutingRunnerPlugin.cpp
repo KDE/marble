@@ -25,14 +25,14 @@ public:
 };
 
 RoutingRunnerPlugin::Private::Private()
-    : m_canWorkOffline( true )
+    : m_canWorkOffline(true)
 {
     // nothing to do
 }
 
-RoutingRunnerPlugin::RoutingRunnerPlugin( QObject *parent ) :
-    QObject( parent ),
-    d( new Private )
+RoutingRunnerPlugin::RoutingRunnerPlugin(QObject *parent)
+    : QObject(parent)
+    , d(new Private)
 {
 }
 
@@ -46,21 +46,21 @@ QIcon RoutingRunnerPlugin::icon() const
     return QIcon();
 }
 
-bool RoutingRunnerPlugin::supportsCelestialBody( const QString &celestialBodyId ) const
+bool RoutingRunnerPlugin::supportsCelestialBody(const QString &celestialBodyId) const
 {
-    if ( d->m_supportedCelestialBodies.isEmpty() ) {
+    if (d->m_supportedCelestialBodies.isEmpty()) {
         return true;
     }
 
-    return d->m_supportedCelestialBodies.contains( celestialBodyId );
+    return d->m_supportedCelestialBodies.contains(celestialBodyId);
 }
 
-void RoutingRunnerPlugin::setSupportedCelestialBodies( const QStringList &celestialBodies )
+void RoutingRunnerPlugin::setSupportedCelestialBodies(const QStringList &celestialBodies)
 {
     d->m_supportedCelestialBodies = celestialBodies;
 }
 
-void RoutingRunnerPlugin::setCanWorkOffline( bool canWorkOffline )
+void RoutingRunnerPlugin::setCanWorkOffline(bool canWorkOffline)
 {
     d->m_canWorkOffline = canWorkOffline;
 }
@@ -80,14 +80,14 @@ RoutingRunnerPlugin::ConfigWidget *RoutingRunnerPlugin::configWidget()
     return nullptr;
 }
 
-bool RoutingRunnerPlugin::supportsTemplate( RoutingProfilesModel::ProfileTemplate ) const
+bool RoutingRunnerPlugin::supportsTemplate(RoutingProfilesModel::ProfileTemplate) const
 {
     return false;
 }
 
-QHash< QString, QVariant > RoutingRunnerPlugin::templateSettings( RoutingProfilesModel::ProfileTemplate ) const
+QHash<QString, QVariant> RoutingRunnerPlugin::templateSettings(RoutingProfilesModel::ProfileTemplate) const
 {
-    return QHash< QString, QVariant >();
+    return QHash<QString, QVariant>();
 }
 
 QString RoutingRunnerPlugin::statusMessage() const
@@ -95,7 +95,7 @@ QString RoutingRunnerPlugin::statusMessage() const
     return d->m_statusMessage;
 }
 
-void RoutingRunnerPlugin::setStatusMessage( const QString &message )
+void RoutingRunnerPlugin::setStatusMessage(const QString &message)
 {
     d->m_statusMessage = message;
 }

@@ -5,22 +5,18 @@
 
 #include "Provider_p.h"
 
-
-
 using namespace GeoCute;
 
-Provider::Private::Private(Provider& parent, const QString& service,
-    const QString& path)
-    : currentStatus(StatusUnavailable),
-      interface(service, path, interfaceName),
-      parent(parent)
-      
+Provider::Private::Private(Provider &parent, const QString &service, const QString &path)
+    : currentStatus(StatusUnavailable)
+    , interface(service, path, interfaceName)
+    , parent(parent)
+
 {
     // Make sure the provider stays available as long as needed
     interface.asyncCall("AddReference");
     // Get an initial status
-    interface.callWithCallback("GetStatus", QList<QVariant>(), &parent,
-        SLOT(statusChangedCall(int)), 0);
+    interface.callWithCallback("GetStatus", QList<QVariant>(), &parent, SLOT(statusChangedCall(int)), 0);
     // Stay informed about future status updates
     interface.connect("StatusChanged", &parent, SLOT(statusChangedCall(int)));
 }
@@ -40,11 +36,9 @@ void Provider::Private::statusChangedCall(int status)
     }
 }
 
-
-
-Provider::Provider(const QString& service, const QString& path,
-    QObject* parent)
-    : QObject(parent), d(new Private(*this, service, path))
+Provider::Provider(const QString &service, const QString &path, QObject *parent)
+    : QObject(parent)
+    , d(new Private(*this, service, path))
 {
 }
 
@@ -57,7 +51,5 @@ Status Provider::status() const
 {
     return d->currentStatus;
 }
-
-
 
 #include "moc_Provider.cpp"

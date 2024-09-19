@@ -19,13 +19,13 @@ namespace Marble
 
 class GeoGraphicsItemPrivate
 {
- public:
-    explicit GeoGraphicsItemPrivate( const GeoDataFeature *feature)
-        : m_zValue( 0 ),
-          m_minZoomLevel( 0 ),
-          m_feature( feature ),
-          m_styleBuilder(nullptr),
-          m_highlighted( false )
+public:
+    explicit GeoGraphicsItemPrivate(const GeoDataFeature *feature)
+        : m_zValue(0)
+        , m_minZoomLevel(0)
+        , m_feature(feature)
+        , m_styleBuilder(nullptr)
+        , m_highlighted(false)
     {
     }
 
@@ -41,7 +41,7 @@ class GeoGraphicsItemPrivate
     RenderContext m_renderContext;
     GeoDataStyle::ConstPtr m_style;
     const StyleBuilder *m_styleBuilder;
-    QVector<const GeoDataRelation*> m_relations;
+    QVector<const GeoDataRelation *> m_relations;
 
     QStringList m_paintLayers;
 

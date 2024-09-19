@@ -15,72 +15,63 @@
 #define MARBLE_QUATERNION_H
 
 #include "marble_export.h"
-#include <cmath>
 #include <QtGlobal>
+#include <cmath>
 
 namespace Marble
 {
 
-enum
-{
-    Q_X = 0,
-    Q_Y = 1,
-    Q_Z = 2,
-    Q_W = 3
-};
+enum { Q_X = 0, Q_Y = 1, Q_Z = 2, Q_W = 3 };
 
-
-typedef qreal    xmmfloat[4];
-typedef xmmfloat  matrix[3];
-
+typedef qreal xmmfloat[4];
+typedef xmmfloat matrix[3];
 
 class MARBLE_EXPORT Quaternion
 {
- public:
+public:
     Quaternion();
     Quaternion(qreal w, qreal x, qreal y, qreal z);
 
     /*!\brief used to generate Quaternion from longitude and latitude
-     * 
+     *
      * \param lon longitude
      * \param lat latitude
      */
-    static Quaternion   fromSpherical(qreal lon, qreal lat);
-    static Quaternion   fromEuler(qreal pitch, qreal yaw, qreal roll);
+    static Quaternion fromSpherical(qreal lon, qreal lat);
+    static Quaternion fromEuler(qreal pitch, qreal yaw, qreal roll);
 
     static Quaternion slerp(const Quaternion &q1, const Quaternion &q2, qreal t);
     static Quaternion nlerp(const Quaternion &q1, const Quaternion &q2, qreal t);
 
     // Operators
-    Quaternion  operator*(const Quaternion &q) const;
-    Quaternion  operator+(const Quaternion &q) const;
-    Quaternion  operator*(qreal factor) const;
-    bool        operator==(const Quaternion &q) const;
-    Quaternion& operator*=(const Quaternion &q);
-    Quaternion& operator*=(qreal);
+    Quaternion operator*(const Quaternion &q) const;
+    Quaternion operator+(const Quaternion &q) const;
+    Quaternion operator*(qreal factor) const;
+    bool operator==(const Quaternion &q) const;
+    Quaternion &operator*=(const Quaternion &q);
+    Quaternion &operator*=(qreal);
 
-    void        getSpherical(qreal &lon, qreal &lat) const;
+    void getSpherical(qreal &lon, qreal &lat) const;
 
-    void        normalize();
+    void normalize();
 
-    qreal       length() const;
+    qreal length() const;
 
-    Quaternion  inverse() const;
-    Quaternion  log() const;
-    Quaternion  exp() const;
+    Quaternion inverse() const;
+    Quaternion log() const;
+    Quaternion exp() const;
 
-    qreal       pitch() const;
-    qreal       yaw() const;
-    qreal       roll() const;
+    qreal pitch() const;
+    qreal yaw() const;
+    qreal roll() const;
 
+    void rotateAroundAxis(const Quaternion &q);
 
-    void        rotateAroundAxis(const Quaternion &q);
-
-    void        toMatrix(matrix &m) const;
-    void        rotateAroundAxis(const matrix &m);
+    void toMatrix(matrix &m) const;
+    void rotateAroundAxis(const matrix &m);
 
     // TODO: Better add accessors...
-    xmmfloat    v;
+    xmmfloat v;
 };
 
 }

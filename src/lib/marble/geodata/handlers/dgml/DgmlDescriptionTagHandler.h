@@ -17,7 +17,7 @@ namespace dgml
 class DgmlDescriptionTagHandler : public GeoTagHandler
 {
 public:
-    GeoNode* parse(GeoParser&) const override;
+    GeoNode *parse(GeoParser &) const override;
 };
 
 }

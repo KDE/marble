@@ -18,18 +18,18 @@ namespace Marble
 {
 namespace kml
 {
-KML_DEFINE_TAG_HANDLER( countrycode )
+KML_DEFINE_TAG_HANDLER(countrycode)
 
-GeoNode* KmlcountrycodeTagHandler::parse( GeoParser& parser ) const
+GeoNode *KmlcountrycodeTagHandler::parse(GeoParser &parser) const
 {
     Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1String(kmlTag_countrycode)));
 
     GeoStackItem parentItem = parser.parentElement();
-    
-    if( parentItem.is<GeoDataPlacemark>() ) {
+
+    if (parentItem.is<GeoDataPlacemark>()) {
         QString countrycode = parser.readElementText().trimmed();
-        
-        parentItem.nodeAs<GeoDataPlacemark>()->setCountryCode( countrycode );
+
+        parentItem.nodeAs<GeoDataPlacemark>()->setCountryCode(countrycode);
     }
 
     return nullptr;
@@ -38,4 +38,4 @@ GeoNode* KmlcountrycodeTagHandler::parse( GeoParser& parser ) const
 }
 }
 
-#endif //KML_LAZY_IMP
+#endif // KML_LAZY_IMP

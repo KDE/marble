@@ -7,11 +7,11 @@
 
 #include "RoutingRunnerManager.h"
 
-#include "MarblePlacemarkModel.h"
+#include "GeoDataDocument.h"
 #include "MarbleDebug.h"
 #include "MarbleModel.h"
+#include "MarblePlacemarkModel.h"
 #include "Planet.h"
-#include "GeoDataDocument.h"
 #include "PluginManager.h"
 #include "RoutingRunnerPlugin.h"
 #include "RunnerTask.h"
@@ -29,29 +29,29 @@ class MarbleModel;
 class Q_DECL_HIDDEN RoutingRunnerManager::Private
 {
 public:
-    Private( RoutingRunnerManager *parent, const MarbleModel *marbleModel );
+    Private(RoutingRunnerManager *parent, const MarbleModel *marbleModel);
 
     ~Private();
 
     template<typename T>
-    QList<T*> plugins( const QList<T*> &plugins ) const;
+    QList<T *> plugins(const QList<T *> &plugins) const;
 
-    void addRoutingResult( GeoDataDocument *route );
-    void cleanupRoutingTask( RoutingTask *task );
+    void addRoutingResult(GeoDataDocument *route);
+    void cleanupRoutingTask(RoutingTask *task);
 
     RoutingRunnerManager *const q;
     const MarbleModel *const m_marbleModel;
     const PluginManager *const m_pluginManager;
-    QList<RoutingTask*> m_routingTasks;
-    QVector<GeoDataDocument*> m_routingResult;
+    QList<RoutingTask *> m_routingTasks;
+    QVector<GeoDataDocument *> m_routingResult;
 };
 
-RoutingRunnerManager::Private::Private( RoutingRunnerManager *parent, const MarbleModel *marbleModel ) :
-    q( parent ),
-    m_marbleModel( marbleModel ),
-    m_pluginManager( marbleModel->pluginManager() )
+RoutingRunnerManager::Private::Private(RoutingRunnerManager *parent, const MarbleModel *marbleModel)
+    : q(parent)
+    , m_marbleModel(marbleModel)
+    , m_pluginManager(marbleModel->pluginManager())
 {
-    qRegisterMetaType<GeoDataDocument*>( "GeoDataDocument*" );
+    qRegisterMetaType<GeoDataDocument *>("GeoDataDocument*");
 }
 
 RoutingRunnerManager::Private::~Private()
@@ -60,20 +60,19 @@ RoutingRunnerManager::Private::~Private()
 }
 
 template<typename T>
-QList<T*> RoutingRunnerManager::Private::plugins( const QList<T*> &plugins ) const
+QList<T *> RoutingRunnerManager::Private::plugins(const QList<T *> &plugins) const
 {
-    QList<T*> result;
-    for( T* plugin: plugins ) {
-        if ( ( m_marbleModel && m_marbleModel->workOffline() && !plugin->canWorkOffline() ) ) {
+    QList<T *> result;
+    for (T *plugin : plugins) {
+        if ((m_marbleModel && m_marbleModel->workOffline() && !plugin->canWorkOffline())) {
             continue;
         }
 
-        if ( !plugin->canWork() ) {
+        if (!plugin->canWork()) {
             continue;
         }
 
-        if ( m_marbleModel && !plugin->supportsCelestialBody( m_marbleModel->planet()->id() ) )
-        {
+        if (m_marbleModel && !plugin->supportsCelestialBody(m_marbleModel->planet()->id())) {
             continue;
         }
 
@@ -83,34 +82,34 @@ QList<T*> RoutingRunnerManager::Private::plugins( const QList<T*> &plugins ) con
     return result;
 }
 
-void RoutingRunnerManager::Private::addRoutingResult( GeoDataDocument *route )
+void RoutingRunnerManager::Private::addRoutingResult(GeoDataDocument *route)
 {
-    if ( route ) {
+    if (route) {
         mDebug() << "route retrieved";
-        m_routingResult.push_back( route );
-        emit q->routeRetrieved( route );
+        m_routingResult.push_back(route);
+        emit q->routeRetrieved(route);
     }
 }
 
-void RoutingRunnerManager::Private::cleanupRoutingTask( RoutingTask *task )
+void RoutingRunnerManager::Private::cleanupRoutingTask(RoutingTask *task)
 {
-    m_routingTasks.removeAll( task );
+    m_routingTasks.removeAll(task);
     mDebug() << "removing task" << m_routingTasks.size() << " " << (quintptr)task;
-    if ( m_routingTasks.isEmpty() ) {
-        if ( m_routingResult.isEmpty() ) {
-            emit q->routeRetrieved( nullptr );
+    if (m_routingTasks.isEmpty()) {
+        if (m_routingResult.isEmpty()) {
+            emit q->routeRetrieved(nullptr);
         }
 
         emit q->routingFinished();
     }
 }
 
-RoutingRunnerManager::RoutingRunnerManager( const MarbleModel *marbleModel, QObject *parent )
-    : QObject( parent ),
-      d( new Private( this, marbleModel ) )
+RoutingRunnerManager::RoutingRunnerManager(const MarbleModel *marbleModel, QObject *parent)
+    : QObject(parent)
+    , d(new Private(this, marbleModel))
 {
-    if ( QThreadPool::globalInstance()->maxThreadCount() < 4 ) {
-        QThreadPool::globalInstance()->setMaxThreadCount( 4 );
+    if (QThreadPool::globalInstance()->maxThreadCount() < 4) {
+        QThreadPool::globalInstance()->setMaxThreadCount(4);
     }
 }
 
@@ -119,46 +118,45 @@ RoutingRunnerManager::~RoutingRunnerManager()
     delete d;
 }
 
-void RoutingRunnerManager::retrieveRoute( const RouteRequest *request )
+void RoutingRunnerManager::retrieveRoute(const RouteRequest *request)
 {
     RoutingProfile profile = request->routingProfile();
 
     d->m_routingTasks.clear();
     d->m_routingResult.clear();
 
-    QList<RoutingRunnerPlugin*> plugins = d->plugins( d->m_pluginManager->routingRunnerPlugins() );
-    for( RoutingRunnerPlugin* plugin: plugins ) {
-        if ( !profile.name().isEmpty() && !profile.pluginSettings().contains( plugin->nameId() ) ) {
+    QList<RoutingRunnerPlugin *> plugins = d->plugins(d->m_pluginManager->routingRunnerPlugins());
+    for (RoutingRunnerPlugin *plugin : plugins) {
+        if (!profile.name().isEmpty() && !profile.pluginSettings().contains(plugin->nameId())) {
             continue;
         }
 
-        RoutingTask* task = new RoutingTask( plugin->newRunner(), this, request );
-        connect( task, SIGNAL(finished(RoutingTask*)), this, SLOT(cleanupRoutingTask(RoutingTask*)) );
+        RoutingTask *task = new RoutingTask(plugin->newRunner(), this, request);
+        connect(task, SIGNAL(finished(RoutingTask *)), this, SLOT(cleanupRoutingTask(RoutingTask *)));
         mDebug() << "route task" << plugin->nameId() << " " << (quintptr)task;
         d->m_routingTasks << task;
     }
 
-    for( RoutingTask* task: d->m_routingTasks ) {
-        QThreadPool::globalInstance()->start( task );
+    for (RoutingTask *task : d->m_routingTasks) {
+        QThreadPool::globalInstance()->start(task);
     }
 
-    if ( d->m_routingTasks.isEmpty() ) {
+    if (d->m_routingTasks.isEmpty()) {
         mDebug() << "No suitable routing plugins found, cannot retrieve a route";
-        d->cleanupRoutingTask( nullptr );
+        d->cleanupRoutingTask(nullptr);
     }
 }
 
-QVector<GeoDataDocument*> RoutingRunnerManager::searchRoute( const RouteRequest *request, int timeout ) {
+QVector<GeoDataDocument *> RoutingRunnerManager::searchRoute(const RouteRequest *request, int timeout)
+{
     QEventLoop localEventLoop;
     QTimer watchdog;
     watchdog.setSingleShot(true);
-    connect( &watchdog, SIGNAL(timeout()),
-             &localEventLoop, SLOT(quit()));
-    connect(this, SIGNAL(routingFinished()),
-            &localEventLoop, SLOT(quit()), Qt::QueuedConnection );
+    connect(&watchdog, SIGNAL(timeout()), &localEventLoop, SLOT(quit()));
+    connect(this, SIGNAL(routingFinished()), &localEventLoop, SLOT(quit()), Qt::QueuedConnection);
 
-    watchdog.start( timeout );
-    retrieveRoute( request );
+    watchdog.start(timeout);
+    retrieveRoute(request);
     localEventLoop.exec();
     return d->m_routingResult;
 }

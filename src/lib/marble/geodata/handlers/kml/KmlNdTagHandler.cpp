@@ -7,14 +7,14 @@
 #include "KmlNdTagHandler.h"
 
 // Marble
-#include "KmlElementDictionary.h"
 #include "GeoDataExtendedData.h"
 #include "GeoDataGeometry.h"
-#include "GeoDataPlacemark.h"
 #include "GeoDataLineString.h"
 #include "GeoDataLinearRing.h"
-#include "GeoDataPolygon.h"
+#include "GeoDataPlacemark.h"
 #include "GeoDataPoint.h"
+#include "GeoDataPolygon.h"
+#include "KmlElementDictionary.h"
 #include "osm/OsmPlacemarkData.h"
 
 // Qt
@@ -24,11 +24,11 @@ namespace Marble
 {
 namespace kml
 {
-KML_DEFINE_TAG_HANDLER_MX( nd )
+KML_DEFINE_TAG_HANDLER_MX(nd)
 
-GeoNode* KmlndTagHandler::parse( GeoParser& parser ) const
+GeoNode *KmlndTagHandler::parse(GeoParser &parser) const
 {
-    int ndIndex = parser.attribute( "index" ).toInt();
+    int ndIndex = parser.attribute("index").toInt();
     /* Case 1: node of a line placemark:
      *...
      * <Placemark>
@@ -38,31 +38,31 @@ GeoNode* KmlndTagHandler::parse( GeoParser& parser ) const
      *              <mx:nd index="1">...</nd>
      * ...
      */
-    if( parser.parentElement().represents( kmlTag_OsmPlacemarkData ) && parser.parentElement( 2 ).is<GeoDataPlacemark>() ) {
-        GeoDataPlacemark *placemark = parser.parentElement( 2 ).nodeAs<GeoDataPlacemark>();
+    if (parser.parentElement().represents(kmlTag_OsmPlacemarkData) && parser.parentElement(2).is<GeoDataPlacemark>()) {
+        GeoDataPlacemark *placemark = parser.parentElement(2).nodeAs<GeoDataPlacemark>();
         if (auto lineString = geodata_cast<GeoDataLineString>(placemark->geometry())) {
             // Using GeoDataPoint because GeoDataCoordinates is not a GeoNode, so it can't be returned.
-            GeoDataPoint *point = new GeoDataPoint( lineString->at( ndIndex ) );
+            GeoDataPoint *point = new GeoDataPoint(lineString->at(ndIndex));
             return point;
         }
         return nullptr;
     }
     /* Case 2: node of a polygon's boundary
-    *...
-    * <Placemark>
-    *      <ExtendedData>
-    *          <mx:OsmPlacemarkData>
-    *              <mx:member>
-    *                   <mx:OsmPlacemarkData>
-    *                       <mx:nd index="0">...</nd>
-    *                       <mx:nd index="1">...</nd>
-    * ...
-    */
-    else if ( parser.parentElement().represents( kmlTag_OsmPlacemarkData ) && parser.parentElement( 1 ).is<GeoDataLinearRing>() ) {
-        GeoDataLinearRing *linearRing = parser.parentElement( 1 ).nodeAs<GeoDataLinearRing>();
+     *...
+     * <Placemark>
+     *      <ExtendedData>
+     *          <mx:OsmPlacemarkData>
+     *              <mx:member>
+     *                   <mx:OsmPlacemarkData>
+     *                       <mx:nd index="0">...</nd>
+     *                       <mx:nd index="1">...</nd>
+     * ...
+     */
+    else if (parser.parentElement().represents(kmlTag_OsmPlacemarkData) && parser.parentElement(1).is<GeoDataLinearRing>()) {
+        GeoDataLinearRing *linearRing = parser.parentElement(1).nodeAs<GeoDataLinearRing>();
 
         // Using GeoDataPoint because GeoDataCoordinates is not a GeoNode, so it can't be returned.
-        GeoDataPoint *point = new GeoDataPoint( linearRing->at( ndIndex ) );
+        GeoDataPoint *point = new GeoDataPoint(linearRing->at(ndIndex));
         return point;
     }
     return nullptr;

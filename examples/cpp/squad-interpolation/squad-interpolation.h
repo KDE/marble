@@ -6,16 +6,17 @@
 #ifndef SQUAD_INTERPOLATION
 #define SQUAD_INTERPOLATION
 
-#include <marble/MarbleWidget.h>
+#include <marble/GeoDataLineString.h>
+#include <marble/GeoPainter.h>
+#include <marble/LayerInterface.h>
 #include <marble/MarbleMap.h>
 #include <marble/MarbleModel.h>
-#include <marble/GeoPainter.h>
-#include <marble/GeoDataLineString.h>
-#include <marble/LayerInterface.h>
+#include <marble/MarbleWidget.h>
 
 #include <QApplication>
 
-namespace Marble {
+namespace Marble
+{
 
 class MyPaintLayer : public QObject, public LayerInterface
 {
@@ -23,22 +24,21 @@ class MyPaintLayer : public QObject, public LayerInterface
 
 public:
     // Constructor
-    explicit MyPaintLayer( MarbleWidget* widget );
+    explicit MyPaintLayer(MarbleWidget *widget);
 
     // LayerInterface
     QStringList renderPosition() const override;
-    bool render( GeoPainter *painter, ViewportParams *viewport,
-                const QString &renderPos, GeoSceneLayer *layer) override;
+    bool render(GeoPainter *painter, ViewportParams *viewport, const QString &renderPos, GeoSceneLayer *layer) override;
     GeoDataLatLonBox center() const;
 
 private Q_SLOTS:
     void addInterpolatedPoint();
 
 private:
-    void addRandomCity( double minDistanceKm=500, double maxDistanceKm=1500 );
-    static GeoDataCoordinates basePoint( const GeoDataCoordinates &q1, const GeoDataCoordinates &q2, const GeoDataCoordinates &q3 );
+    void addRandomCity(double minDistanceKm = 500, double maxDistanceKm = 1500);
+    static GeoDataCoordinates basePoint(const GeoDataCoordinates &q1, const GeoDataCoordinates &q2, const GeoDataCoordinates &q3);
 
-    MarbleWidget* m_widget;
+    MarbleWidget *m_widget;
     GeoDataLineString m_cities;
     GeoDataLineString m_interpolated;
     double m_fraction;

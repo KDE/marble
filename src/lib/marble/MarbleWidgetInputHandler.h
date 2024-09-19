@@ -8,10 +8,10 @@
 #ifndef MARBLE_MARBLEWIDGETINPUTHANDLER_H
 #define MARBLE_MARBLEWIDGETINPUTHANDLER_H
 
-#include <QObject>
-#include <QSharedPointer>
-#include <QPinchGesture>
 #include "MarbleInputHandler.h"
+#include <QObject>
+#include <QPinchGesture>
+#include <QSharedPointer>
 
 namespace Marble
 {
@@ -37,7 +37,7 @@ private Q_SLOTS:
     void setCursor(const QCursor &cursor) override;
 
 private:
-    bool handleKeyPress(QKeyEvent* event) override;
+    bool handleKeyPress(QKeyEvent *event) override;
     bool handleTouch(QTouchEvent *event) override;
     bool handleGesture(QGestureEvent *e) override;
     AbstractSelectionRubber *selectionRubber() override;

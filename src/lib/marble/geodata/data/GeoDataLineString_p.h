@@ -15,21 +15,21 @@ namespace Marble
 
 class GeoDataLineStringPrivate : public GeoDataGeometryPrivate
 {
-  public:
-    explicit GeoDataLineStringPrivate( TessellationFlags f )
-        :  m_rangeCorrected( nullptr ),
-           m_dirtyRange( true ),
-           m_dirtyBox( true ),
-           m_tessellationFlags( f ),
-           m_previousResolution( -1 ),
-           m_level( -1 )
+public:
+    explicit GeoDataLineStringPrivate(TessellationFlags f)
+        : m_rangeCorrected(nullptr)
+        , m_dirtyRange(true)
+        , m_dirtyBox(true)
+        , m_tessellationFlags(f)
+        , m_previousResolution(-1)
+        , m_level(-1)
     {
     }
 
     GeoDataLineStringPrivate()
-         : m_rangeCorrected( nullptr ),
-           m_dirtyRange( true ),
-           m_dirtyBox( true )
+        : m_rangeCorrected(nullptr)
+        , m_dirtyRange(true)
+        , m_dirtyBox(true)
     {
     }
 
@@ -38,9 +38,9 @@ class GeoDataLineStringPrivate : public GeoDataGeometryPrivate
         delete m_rangeCorrected;
     }
 
-    GeoDataLineStringPrivate& operator=( const GeoDataLineStringPrivate &other)
+    GeoDataLineStringPrivate &operator=(const GeoDataLineStringPrivate &other)
     {
-        GeoDataGeometryPrivate::operator=( other );
+        GeoDataGeometryPrivate::operator=(other);
         m_vector = other.m_vector;
         m_rangeCorrected = nullptr;
         m_dirtyRange = true;
@@ -49,45 +49,40 @@ class GeoDataLineStringPrivate : public GeoDataGeometryPrivate
         return *this;
     }
 
-
     GeoDataGeometryPrivate *copy() const override
-    { 
-        GeoDataLineStringPrivate* copy = new GeoDataLineStringPrivate;
+    {
+        GeoDataLineStringPrivate *copy = new GeoDataLineStringPrivate;
         *copy = *this;
         return copy;
     }
 
-    void toPoleCorrected( const GeoDataLineString & q, GeoDataLineString & poleCorrected ) const;
+    void toPoleCorrected(const GeoDataLineString &q, GeoDataLineString &poleCorrected) const;
 
-    void toDateLineCorrected( const GeoDataLineString & q,
-                              QVector<GeoDataLineString*> & lineStrings ) const;
+    void toDateLineCorrected(const GeoDataLineString &q, QVector<GeoDataLineString *> &lineStrings) const;
 
-    void interpolateDateLine( const GeoDataCoordinates & previousCoords,
-                              const GeoDataCoordinates & currentCoords,
-                              GeoDataCoordinates & previousAtDateline,
-                              GeoDataCoordinates & currentAtDateline,
-                              TessellationFlags f ) const;
+    void interpolateDateLine(const GeoDataCoordinates &previousCoords,
+                             const GeoDataCoordinates &currentCoords,
+                             GeoDataCoordinates &previousAtDateline,
+                             GeoDataCoordinates &currentAtDateline,
+                             TessellationFlags f) const;
 
-    GeoDataCoordinates findDateLine( const GeoDataCoordinates & previousCoords,
-                       const GeoDataCoordinates & currentCoords,
-                       int recursionCounter ) const;
+    GeoDataCoordinates findDateLine(const GeoDataCoordinates &previousCoords, const GeoDataCoordinates &currentCoords, int recursionCounter) const;
 
     quint8 levelForResolution(qreal resolution) const;
     static qreal resolutionForLevel(int level);
-    void optimize(GeoDataLineString& lineString) const;
+    void optimize(GeoDataLineString &lineString) const;
 
     QVector<GeoDataCoordinates> m_vector;
 
-    mutable GeoDataLineString*  m_rangeCorrected;
-    mutable bool                m_dirtyRange;
+    mutable GeoDataLineString *m_rangeCorrected;
+    mutable bool m_dirtyRange;
 
-    mutable bool                m_dirtyBox; // tells whether there have been changes to the
-                                            // GeoDataPoints since the LatLonAltBox has 
-                                            // been calculated. Saves performance. 
-    TessellationFlags           m_tessellationFlags;
-    mutable qreal  m_previousResolution;
+    mutable bool m_dirtyBox; // tells whether there have been changes to the
+                             // GeoDataPoints since the LatLonAltBox has
+                             // been calculated. Saves performance.
+    TessellationFlags m_tessellationFlags;
+    mutable qreal m_previousResolution;
     mutable quint8 m_level;
-
 };
 
 } // namespace Marble

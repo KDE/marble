@@ -16,7 +16,6 @@ class GeoDataTrack;
 
 class MARBLE_EXPORT GeoTrackGraphicsItem : public GeoLineStringGraphicsItem
 {
-
 public:
     explicit GeoTrackGraphicsItem(const GeoDataPlacemark *placemark, const GeoDataTrack *track);
 

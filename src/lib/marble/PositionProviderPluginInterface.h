@@ -14,7 +14,7 @@ namespace Marble
 {
 class GeoDataAccuracy;
 class GeoDataCoordinates;
-  
+
 enum PositionProviderStatus {
     PositionProviderStatusError = 0,
     PositionProviderStatusUnavailable,
@@ -26,9 +26,9 @@ enum PositionProviderStatus {
  * @short The interface for position provider plugins.
  *
  */
-class MARBLE_EXPORT PositionProviderPluginInterface: public PluginInterface
+class MARBLE_EXPORT PositionProviderPluginInterface : public PluginInterface
 {
-  public:
+public:
     ~PositionProviderPluginInterface() override;
 
     virtual void initialize() = 0;
@@ -53,17 +53,17 @@ class MARBLE_EXPORT PositionProviderPluginInterface: public PluginInterface
     virtual QDateTime timestamp() const = 0;
 
     /**
-      * Returns an error string to be presented to the user
-      * if the status is PositionProviderStatusError. For other
-      * states, the result value is undefined.
-      */
+     * Returns an error string to be presented to the user
+     * if the status is PositionProviderStatusError. For other
+     * states, the result value is undefined.
+     */
     virtual QString error() const;
 };
 
 }
 
-Q_DECLARE_INTERFACE( Marble::PositionProviderPluginInterface, "org.kde.Marble.PositionProviderPluginInterface/1.02" )
+Q_DECLARE_INTERFACE(Marble::PositionProviderPluginInterface, "org.kde.Marble.PositionProviderPluginInterface/1.02")
 
-Q_DECLARE_METATYPE( Marble::PositionProviderStatus )
+Q_DECLARE_METATYPE(Marble::PositionProviderStatus)
 
 #endif

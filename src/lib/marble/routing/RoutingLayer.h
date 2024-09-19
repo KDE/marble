@@ -24,20 +24,20 @@ class MarblePlacemarkModel;
 class RoutingLayerPrivate;
 
 /**
-  * @brief A paint layer that serves as a view on a route model
-  */
-class RoutingLayer: public QObject, public LayerInterface
+ * @brief A paint layer that serves as a view on a route model
+ */
+class RoutingLayer : public QObject, public LayerInterface
 {
     Q_OBJECT
 
 public:
     /**
-      * @brief Constructor
-      * @param widget The marble widget used for geopos <-> screenpos transformations
-      *   and repainting of (small) areas. Must not be null
-      * @param parent Optional parent widget
-      */
-    explicit RoutingLayer( MarbleWidget *widget, QWidget *parent = nullptr );
+     * @brief Constructor
+     * @param widget The marble widget used for geopos <-> screenpos transformations
+     *   and repainting of (small) areas. Must not be null
+     * @param parent Optional parent widget
+     */
+    explicit RoutingLayer(MarbleWidget *widget, QWidget *parent = nullptr);
 
     /** Destructor */
     ~RoutingLayer() override;
@@ -49,33 +49,32 @@ public:
     qreal zValue() const override;
 
     /** Reimplemented from LayerInterface. Paints route items and placemarks */
-    bool render( GeoPainter *painter, ViewportParams *viewport,
-                 const QString &renderPos = "NONE", GeoSceneLayer *layer = nullptr ) override;
+    bool render(GeoPainter *painter, ViewportParams *viewport, const QString &renderPos = "NONE", GeoSceneLayer *layer = nullptr) override;
 
     RenderState renderState() const override;
 
     /**
-      * Set the proxy model another QAbstractItemView uses that should share
-      * its selection model with us. Needed because this class uses an unfiltered
-      * model which has different indices than a filtered one.
-      */
-    void synchronizeWith( QItemSelectionModel *selection );
+     * Set the proxy model another QAbstractItemView uses that should share
+     * its selection model with us. Needed because this class uses an unfiltered
+     * model which has different indices than a filtered one.
+     */
+    void synchronizeWith(QItemSelectionModel *selection);
 
     /**
-      * Set the placemark model to use. Implicitly removes the routing model.
-      */
-    void setPlacemarkModel ( MarblePlacemarkModel *model );
+     * Set the placemark model to use. Implicitly removes the routing model.
+     */
+    void setPlacemarkModel(MarblePlacemarkModel *model);
 
     /**
-      * Set the view context to determine whether the map is used interactively
-      */
-    void setViewContext( ViewContext viewContext );
+     * Set the view context to determine whether the map is used interactively
+     */
+    void setViewContext(ViewContext viewContext);
 
     /**
      * Determine whether the route can be edited by the user (via points added,
      * route cleared)
      */
-    void setInteractive( bool interactive );
+    void setInteractive(bool interactive);
 
     /**
      * Returns whether the route is interactive (true by default if not changed
@@ -87,16 +86,16 @@ public:
 
 Q_SIGNALS:
     /**
-      * A placemark was selected (clicked) by the user. The index belongs to
-      * the model set via setModel
-      */
-    void placemarkSelected( const QModelIndex &index );
+     * A placemark was selected (clicked) by the user. The index belongs to
+     * the model set via setModel
+     */
+    void placemarkSelected(const QModelIndex &index);
 
-    void repaintNeeded( const QRect &rect = QRect() );
+    void repaintNeeded(const QRect &rect = QRect());
 
 public:
     /** Overriding QWidget, used to make the layer interactive */
-    bool eventFilter( QObject *obj, QEvent *event ) override;
+    bool eventFilter(QObject *obj, QEvent *event) override;
 
 private Q_SLOTS:
     void removeViaPoint();
@@ -107,19 +106,18 @@ private Q_SLOTS:
     void exportRoute();
 
     /**
-      * Paint a dashed route when downloading a new route, a solid one otherwise.
-      */
+     * Paint a dashed route when downloading a new route, a solid one otherwise.
+     */
     void updateRouteState();
 
     /**
-      * The viewport has changed, recalculate positions accordingly
-      */
+     * The viewport has changed, recalculate positions accordingly
+     */
     void setViewportChanged();
 
 private:
     RoutingLayerPrivate *const d;
     friend class RoutingLayerPrivate;
-
 };
 
 } // namespace Marble

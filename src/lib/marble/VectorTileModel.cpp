@@ -10,21 +10,21 @@
 #include "GeoDataDocument.h"
 #include "GeoDataTreeModel.h"
 #include "GeoSceneVectorTileDataset.h"
-#include "MarbleGlobal.h"
 #include "MarbleDebug.h"
+#include "MarbleGlobal.h"
 #include "MathHelper.h"
 #include "TileLoader.h"
 
-#include <qmath.h>
 #include <QThreadPool>
+#include <qmath.h>
 
 namespace Marble
 {
 
-TileRunner::TileRunner(TileLoader *loader, const GeoSceneVectorTileDataset *tileDataset, const TileId &id) :
-    m_loader(loader),
-    m_tileDataset(tileDataset),
-    m_id(id)
+TileRunner::TileRunner(TileLoader *loader, const GeoSceneVectorTileDataset *tileDataset, const TileId &id)
+    : m_loader(loader)
+    , m_tileDataset(tileDataset)
+    , m_id(id)
 {
 }
 
@@ -35,10 +35,10 @@ void TileRunner::run()
     emit documentLoaded(m_id, document);
 }
 
-VectorTileModel::CacheDocument::CacheDocument(GeoDataDocument *doc, VectorTileModel *vectorTileModel, const GeoDataLatLonBox &boundingBox) :
-    m_document(doc),
-    m_vectorTileModel(vectorTileModel),
-    m_boundingBox(boundingBox)
+VectorTileModel::CacheDocument::CacheDocument(GeoDataDocument *doc, VectorTileModel *vectorTileModel, const GeoDataLatLonBox &boundingBox)
+    : m_document(doc)
+    , m_vectorTileModel(vectorTileModel)
+    , m_boundingBox(boundingBox)
 {
     // nothing to do
 }
@@ -48,18 +48,18 @@ VectorTileModel::CacheDocument::~CacheDocument()
     m_vectorTileModel->removeTile(m_document);
 }
 
-VectorTileModel::VectorTileModel(TileLoader *loader, const GeoSceneVectorTileDataset *layer, GeoDataTreeModel *treeModel, QThreadPool *threadPool) :
-    m_loader(loader),
-    m_layer(layer),
-    m_treeModel(treeModel),
-    m_threadPool(threadPool),
-    m_tileLoadLevel(-1),
-    m_tileZoomLevel(-1),
-    m_deleteDocumentsLater(false)
+VectorTileModel::VectorTileModel(TileLoader *loader, const GeoSceneVectorTileDataset *layer, GeoDataTreeModel *treeModel, QThreadPool *threadPool)
+    : m_loader(loader)
+    , m_layer(layer)
+    , m_treeModel(treeModel)
+    , m_threadPool(threadPool)
+    , m_tileLoadLevel(-1)
+    , m_tileZoomLevel(-1)
+    , m_deleteDocumentsLater(false)
 {
-    connect(this, SIGNAL(tileAdded(GeoDataDocument*)), treeModel, SLOT(addDocument(GeoDataDocument*)));
-    connect(this, SIGNAL(tileRemoved(GeoDataDocument*)), treeModel, SLOT(removeDocument(GeoDataDocument*)));
-    connect(treeModel, SIGNAL(removed(GeoDataObject*)), this, SLOT(cleanupTile(GeoDataObject*)));
+    connect(this, SIGNAL(tileAdded(GeoDataDocument *)), treeModel, SLOT(addDocument(GeoDataDocument *)));
+    connect(this, SIGNAL(tileRemoved(GeoDataDocument *)), treeModel, SLOT(removeDocument(GeoDataDocument *)));
+    connect(treeModel, SIGNAL(removed(GeoDataObject *)), this, SLOT(cleanupTile(GeoDataObject *)));
 }
 
 void VectorTileModel::setViewport(const GeoDataLatLonBox &latLonBox)
@@ -206,7 +206,7 @@ void VectorTileModel::queryTiles(int tileZoomLevel, const QRect &rect)
             if (!m_documents.contains(tileId) && !m_pendingDocuments.contains(tileId)) {
                 m_pendingDocuments << tileId;
                 TileRunner *job = new TileRunner(m_loader, m_layer, tileId);
-                connect(job, SIGNAL(documentLoaded(TileId,GeoDataDocument*)), this, SLOT(updateTile(TileId,GeoDataDocument*)));
+                connect(job, SIGNAL(documentLoaded(TileId, GeoDataDocument *)), this, SLOT(updateTile(TileId, GeoDataDocument *)));
                 m_threadPool->start(job);
             }
         }

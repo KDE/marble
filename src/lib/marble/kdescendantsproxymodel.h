@@ -56,7 +56,6 @@ class MARBLE_EXPORT KDescendantsProxyModel : public QAbstractProxyModel
     Q_OBJECT
 
 public:
-
     /**
      * Creates a new descendant entities proxy model.
      *
@@ -158,8 +157,11 @@ public:
     /**
     Reimplemented to match all descendants.
     */
-    QModelIndexList match(const QModelIndex &start, int role, const QVariant &value,
-                                  int hits = 1, Qt::MatchFlags flags = Qt::MatchFlags(Qt::MatchStartsWith | Qt::MatchWrap)) const Q_DECL_OVERRIDE;
+    QModelIndexList match(const QModelIndex &start,
+                          int role,
+                          const QVariant &value,
+                          int hits = 1,
+                          Qt::MatchFlags flags = Qt::MatchFlags(Qt::MatchStartsWith | Qt::MatchWrap)) const Q_DECL_OVERRIDE;
 
 private:
     Q_DECLARE_PRIVATE(KDescendantsProxyModel)
@@ -182,10 +184,10 @@ private:
     Q_PRIVATE_SLOT(d_func(), void processPendingParents())
 
     // Make these private, they shouldn't be called by applications
-//   virtual bool insertRows(int , int, const QModelIndex & = QModelIndex());
-//   virtual bool insertColumns(int, int, const QModelIndex & = QModelIndex());
-//   virtual bool removeRows(int, int, const QModelIndex & = QModelIndex());
-//   virtual bool removeColumns(int, int, const QModelIndex & = QModelIndex());
+    //   virtual bool insertRows(int , int, const QModelIndex & = QModelIndex());
+    //   virtual bool insertColumns(int, int, const QModelIndex & = QModelIndex());
+    //   virtual bool removeRows(int, int, const QModelIndex & = QModelIndex());
+    //   virtual bool removeColumns(int, int, const QModelIndex & = QModelIndex());
 
     //@endcond
 };

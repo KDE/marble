@@ -13,11 +13,11 @@ namespace Marble
 
 class WlocatePositionProviderPluginPrivate;
 
-class WlocatePositionProviderPlugin: public PositionProviderPlugin
+class WlocatePositionProviderPlugin : public PositionProviderPlugin
 {
     Q_OBJECT
     Q_PLUGIN_METADATA(IID "org.kde.marble.WlocatePositionProviderPlugin")
-    Q_INTERFACES( Marble::PositionProviderPluginInterface )
+    Q_INTERFACES(Marble::PositionProviderPluginInterface)
 
 public:
     WlocatePositionProviderPlugin();
@@ -36,7 +36,7 @@ public:
     bool isInitialized() const override;
 
     // Implementing PositionProviderPlugin
-    PositionProviderPlugin * newInstance() const override;
+    PositionProviderPlugin *newInstance() const override;
 
     // Implementing PositionProviderPluginInterface
     PositionProviderStatus status() const override;
@@ -52,8 +52,7 @@ private Q_SLOTS:
     void handleWlocateResult();
 
 private:
-    WlocatePositionProviderPluginPrivate* const d;
-
+    WlocatePositionProviderPluginPrivate *const d;
 };
 
 }

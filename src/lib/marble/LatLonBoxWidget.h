@@ -13,27 +13,27 @@ namespace Marble
 {
 class GeoDataLatLonBox;
 
-class MARBLE_EXPORT LatLonBoxWidget: public QWidget
+class MARBLE_EXPORT LatLonBoxWidget : public QWidget
 {
     Q_OBJECT
 
- public:
-    explicit LatLonBoxWidget( QWidget * const parent = nullptr, Qt::WindowFlags const f = Qt::WindowFlags() );
+public:
+    explicit LatLonBoxWidget(QWidget *const parent = nullptr, Qt::WindowFlags const f = Qt::WindowFlags());
     ~LatLonBoxWidget() override;
     GeoDataLatLonBox latLonBox() const;
-    void setLatLonBox( GeoDataLatLonBox const & );
+    void setLatLonBox(GeoDataLatLonBox const &);
 
- Q_SIGNALS:
+Q_SIGNALS:
     void valueChanged();
 
- private Q_SLOTS:
+private Q_SLOTS:
     void updateLatSingleStep();
     void updateLonSingleStep();
 
- private:
-    Q_DISABLE_COPY( LatLonBoxWidget )
+private:
+    Q_DISABLE_COPY(LatLonBoxWidget)
     class Private;
-    Private * const d;
+    Private *const d;
 };
 
 }

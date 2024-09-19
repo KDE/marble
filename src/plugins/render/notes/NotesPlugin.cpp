@@ -4,8 +4,8 @@
 //
 
 #include "NotesPlugin.h"
-#include "NotesModel.h"
 #include "MarbleDirs.h"
+#include "NotesModel.h"
 
 #include <QIcon>
 
@@ -56,8 +56,7 @@ QString NotesPlugin::copyrightYears() const
 
 QVector<PluginAuthor> NotesPlugin::pluginAuthors() const
 {
-    return QVector<PluginAuthor>()
-           << PluginAuthor(QStringLiteral("Spencer Brown"), QStringLiteral("spencerbrown991@gmail.com"));
+    return QVector<PluginAuthor>() << PluginAuthor(QStringLiteral("Spencer Brown"), QStringLiteral("spencerbrown991@gmail.com"));
 }
 
 QString NotesPlugin::description() const

@@ -16,31 +16,30 @@ namespace Marble
 
 class GroundLayer : public LayerInterface
 {
- public:
-
+public:
     GroundLayer();
 
     ~GroundLayer() override;
 
     QStringList renderPosition() const override;
 
-    bool render( GeoPainter *painter, ViewportParams *viewport,
-                         const QString& renderPos = QLatin1String("NONE"),
-                         GeoSceneLayer * layer = nullptr ) override;
+    bool render(GeoPainter *painter, ViewportParams *viewport, const QString &renderPos = QLatin1String("NONE"), GeoSceneLayer *layer = nullptr) override;
 
     qreal zValue() const override;
 
-    void setColor( const QColor &color );
+    void setColor(const QColor &color);
 
     QColor color() const;
 
     RenderState renderState() const override;
 
-    QString runtimeTrace() const override { return QStringLiteral("GroundLayer"); }
+    QString runtimeTrace() const override
+    {
+        return QStringLiteral("GroundLayer");
+    }
 
- private:
-    QColor m_color;  // Gets the color specified via DGML's <map bgcolor="">
-    
+private:
+    QColor m_color; // Gets the color specified via DGML's <map bgcolor="">
 };
 
 }

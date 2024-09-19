@@ -18,13 +18,14 @@ using namespace Marble;
 // on loading the "app" module
 extern "C" Q_DECL_EXPORT
 #endif
-int main(int argc, char ** argv)
+    int
+    main(int argc, char **argv)
 {
     QApplication app(argc, argv);
 
 #ifdef Q_OS_ANDROID
     MarbleGlobal::Profiles profiles = MarbleGlobal::SmallScreen | MarbleGlobal::HighResolution;
-    MarbleGlobal::getInstance()->setProfiles( profiles );
+    MarbleGlobal::getInstance()->setProfiles(profiles);
 #endif
 
     MarbleDeclarativePlugin declarativePlugin;

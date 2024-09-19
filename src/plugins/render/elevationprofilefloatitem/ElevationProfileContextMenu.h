@@ -8,30 +8,29 @@
 #ifndef ELEVATIONPROFILECONTEXTMENU_H
 #define ELEVATIONPROFILECONTEXTMENU_H
 
+#include <QMenu>
 #include <QObject>
 #include <QSignalMapper>
-#include <QMenu>
-
 
 namespace Marble
 {
 
 class ElevationProfileFloatItem;
-class ElevationProfileContextMenu : public QObject {
+class ElevationProfileContextMenu : public QObject
+{
     Q_OBJECT
 public:
-    explicit ElevationProfileContextMenu(ElevationProfileFloatItem* floatItem);
-    QMenu* getMenu();
+    explicit ElevationProfileContextMenu(ElevationProfileFloatItem *floatItem);
+    QMenu *getMenu();
 public Q_SLOTS:
     void updateContextMenuEntries();
 
 private:
-    QList<QAction*>            m_selectionActions;
-    ElevationProfileFloatItem* m_floatItem;
-    QActionGroup*              m_sourceGrp;
-    QMenu*                     m_contextMenu;
-    QSignalMapper*             m_trackMapper;
-
+    QList<QAction *> m_selectionActions;
+    ElevationProfileFloatItem *m_floatItem;
+    QActionGroup *m_sourceGrp;
+    QMenu *m_contextMenu;
+    QSignalMapper *m_trackMapper;
 };
 }
 #endif

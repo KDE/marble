@@ -7,8 +7,8 @@
 #ifndef MARBLE_GEOSCENEMAP_H
 #define MARBLE_GEOSCENEMAP_H
 
-#include <QVector>
 #include <QVariant>
+#include <QVector>
 
 #include <geodata_export.h>
 
@@ -30,32 +30,32 @@ class GeoSceneMapPrivate;
  */
 class GEODATA_EXPORT GeoSceneMap : public GeoNode
 {
- public:
+public:
     GeoSceneMap();
     ~GeoSceneMap() override;
-    const char* nodeType() const override;
+    const char *nodeType() const override;
 
     QColor backgroundColor() const;
-    void setBackgroundColor( const QColor& );
+    void setBackgroundColor(const QColor &);
 
     QColor labelColor() const;
-    void setLabelColor( const QColor& );
+    void setLabelColor(const QColor &);
 
     QColor highlightBrushColor() const;
-    void setHighlightBrushColor( const QColor& );
+    void setHighlightBrushColor(const QColor &);
 
     QColor highlightPenColor() const;
-    void setHighlightPenColor( const QColor& );
+    void setHighlightPenColor(const QColor &);
     /**
      * @brief  Add a new layer to the map
      * @param  layer  The new layer
      */
-    void addLayer( GeoSceneLayer* );
+    void addLayer(GeoSceneLayer *);
     /**
      * @ brief Set starting center with lon lat cooredinates
      * used if a scene downloadUrl do not handle elements in other locations
      */
-    void setCenter(const QString & coordinateString);
+    void setCenter(const QString &coordinateString);
     /**
      * @breif Get starting center with cooredinates
      * used if a scene downloadUrl do not handle elements in other locations
@@ -67,55 +67,55 @@ class GEODATA_EXPORT GeoSceneMap : public GeoNode
      * @param  name  The name of the layer
      * @return A pointer to the layer request by its name
      */
-    GeoSceneLayer* layer( const QString& name );
-    const GeoSceneLayer* layer( const QString& name ) const;
+    GeoSceneLayer *layer(const QString &name);
+    const GeoSceneLayer *layer(const QString &name) const;
 
     /**
      * @brief  Return all layers
      * @return A vector that contains pointers to all available layers
      */
-    QVector<GeoSceneLayer*> layers() const;
+    QVector<GeoSceneLayer *> layers() const;
 
     /**
      * @brief  Add a new filter to the map
      * @param  filter  The new filter
      */
-    void addFilter( GeoSceneFilter* );
+    void addFilter(GeoSceneFilter *);
 
     /**
      * @brief  Return a filter by its name
      * @param  name  The name of the filter
      * @return A pointer to the filter request by its name
      */
-    GeoSceneFilter* filter( const QString& name );
+    GeoSceneFilter *filter(const QString &name);
 
     /**
      * @brief  Return all filters
      * @return A vector that contains pointers to all available filters
      */
-    QVector<GeoSceneFilter*> filters() const;
+    QVector<GeoSceneFilter *> filters() const;
 
     /**
      * @brief  Checks for valid layers that contain texture data
-     * @return Whether a texture layer got created internally 
+     * @return Whether a texture layer got created internally
      *
-     * NOTE: The existence of the file(s) that contain the actual data  
+     * NOTE: The existence of the file(s) that contain the actual data
      *       still needs to get checked at runtime!
      */
     bool hasTextureLayers() const;
 
     /**
      * @brief  Checks for valid layers that contain vector data
-     * @return Whether a vector layer got created internally 
+     * @return Whether a vector layer got created internally
      *
-     * NOTE: The existence of the file(s) that contain the actual data  
+     * NOTE: The existence of the file(s) that contain the actual data
      *       still needs to get checked at runtime!
      */
     bool hasVectorLayers() const;
 
- private:
-    Q_DISABLE_COPY( GeoSceneMap )
-    GeoSceneMapPrivate * const d;
+private:
+    Q_DISABLE_COPY(GeoSceneMap)
+    GeoSceneMapPrivate *const d;
 };
 
 }

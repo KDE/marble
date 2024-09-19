@@ -15,17 +15,17 @@ namespace Marble
 
 namespace GeoString
 {
-    static const QRegularExpression combiningDiacriticalMarks("[\\x0300-\\x036F]+");
+static const QRegularExpression combiningDiacriticalMarks("[\\x0300-\\x036F]+");
 
-    QString deaccent( const QString& accentString )
-    {
-        QString    result;
+QString deaccent(const QString &accentString)
+{
+    QString result;
 
-        result = accentString.normalized( QString::NormalizationForm_D ).remove( combiningDiacriticalMarks );
-        result.replace(QChar(0x00F8), QLatin1Char('o'));
-        result.replace(QChar(0x0142), QLatin1Char('l'));
-        return result;
-    }
+    result = accentString.normalized(QString::NormalizationForm_D).remove(combiningDiacriticalMarks);
+    result.replace(QChar(0x00F8), QLatin1Char('o'));
+    result.replace(QChar(0x0142), QLatin1Char('l'));
+    return result;
+}
 }
 }
 

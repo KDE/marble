@@ -10,10 +10,10 @@
 #include "MarbleDebug.h"
 
 #include "GPXElementDictionary.h"
-#include "GeoParser.h"
 #include "GeoDataExtendedData.h"
-#include "GeoDataTrack.h"
 #include "GeoDataSimpleArrayData.h"
+#include "GeoDataTrack.h"
+#include "GeoParser.h"
 
 namespace Marble
 {
@@ -21,23 +21,21 @@ namespace gpx
 {
 GPX_DEFINE_TAG_HANDLER_GARMIN_TRACKPOINTEXT1(hr)
 
-GeoNode* GPXhrTagHandler::parse(GeoParser& parser) const
+GeoNode *GPXhrTagHandler::parse(GeoParser &parser) const
 {
     Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1String(gpxTag_hr)));
 
     GeoStackItem parentItem = parser.parentElement();
 
-    if ( parentItem.is<GeoDataTrack>() )
-    {
-        GeoDataSimpleArrayData* arrayData = parentItem.nodeAs<GeoDataTrack>()
-                        ->extendedData().simpleArrayData(QStringLiteral("heartrate"));
+    if (parentItem.is<GeoDataTrack>()) {
+        GeoDataSimpleArrayData *arrayData = parentItem.nodeAs<GeoDataTrack>()->extendedData().simpleArrayData(QStringLiteral("heartrate"));
         if (!arrayData) {
             arrayData = new GeoDataSimpleArrayData();
-            QString name = parser.attribute( "name" ).trimmed();
+            QString name = parser.attribute("name").trimmed();
             parentItem.nodeAs<GeoDataTrack>()->extendedData().setSimpleArrayData(QStringLiteral("heartrate"), arrayData);
         }
-        QVariant value( parser.readElementText().toInt() );
-        arrayData->append( value );
+        QVariant value(parser.readElementText().toInt());
+        arrayData->append(value);
         return nullptr;
     }
 

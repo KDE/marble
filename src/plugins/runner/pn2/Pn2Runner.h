@@ -9,7 +9,6 @@
 
 #include <QDataStream>
 
-
 namespace Marble
 {
 
@@ -21,20 +20,20 @@ class Pn2Runner : public ParsingRunner
 public:
     explicit Pn2Runner(QObject *parent = nullptr);
     ~Pn2Runner() override;
-    GeoDataDocument* parseFile( const QString &fileName, DocumentRole role, QString& error ) override;
+    GeoDataDocument *parseFile(const QString &fileName, DocumentRole role, QString &error) override;
 
 private:
-    static bool errorCheckLat( qint16 lat );
-    static bool errorCheckLon( qint16 lon );
-    static bool importPolygon( QDataStream &stream, GeoDataLineString* linestring, quint32 nrAbsoluteNodes );
+    static bool errorCheckLat(qint16 lat);
+    static bool errorCheckLon(qint16 lon);
+    static bool importPolygon(QDataStream &stream, GeoDataLineString *linestring, quint32 nrAbsoluteNodes);
 
-    GeoDataDocument* parseForVersion1( const QString &fileName, DocumentRole role );
-    GeoDataDocument* parseForVersion2( const QString &fileName, DocumentRole role );
+    GeoDataDocument *parseForVersion1(const QString &fileName, DocumentRole role);
+    GeoDataDocument *parseForVersion2(const QString &fileName, DocumentRole role);
 
     QDataStream m_stream;
     quint8 m_fileHeaderVersion;
     quint32 m_fileHeaderPolygons;
-    bool m_isMapColorField;       // Whether the file contains color indexes
+    bool m_isMapColorField; // Whether the file contains color indexes
 };
 
 }

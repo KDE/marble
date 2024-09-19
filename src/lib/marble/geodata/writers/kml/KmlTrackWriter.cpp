@@ -16,28 +16,25 @@
 
 using namespace Marble;
 
-static GeoTagWriterRegistrar s_writerPoint( GeoTagWriter::QualifiedName(GeoDataTypes::GeoDataTrackType,
-                                                                            kml::kmlTag_nameSpaceOgc22),
-                                               new KmlTrackWriter() );
+static GeoTagWriterRegistrar s_writerPoint(GeoTagWriter::QualifiedName(GeoDataTypes::GeoDataTrackType, kml::kmlTag_nameSpaceOgc22), new KmlTrackWriter());
 
-bool KmlTrackWriter::write( const GeoNode *node, GeoWriter &writer ) const
+bool KmlTrackWriter::write(const GeoNode *node, GeoWriter &writer) const
 {
-    const GeoDataTrack *track = static_cast<const GeoDataTrack *>( node );
+    const GeoDataTrack *track = static_cast<const GeoDataTrack *>(node);
 
-    writer.writeStartElement( "gx:Track" );
-    KmlObjectTagWriter::writeIdentifiers( writer, track );
+    writer.writeStartElement("gx:Track");
+    KmlObjectTagWriter::writeIdentifiers(writer, track);
 
     int points = track->size();
-    for ( int i = 0; i < points; i++ ) {
-        writer.writeElement( "when", track->whenList().at( i ).toString( Qt::ISODate ) );
+    for (int i = 0; i < points; i++) {
+        writer.writeElement("when", track->whenList().at(i).toString(Qt::ISODate));
 
         qreal lon, lat, alt;
-        track->coordinatesList().at( i ).geoCoordinates( lon, lat, alt, GeoDataCoordinates::Degree );
-        const QString coord = QString::number(lon, 'f', 10) + QLatin1Char(' ') +
-                              QString::number(lat, 'f', 10) + QLatin1Char(' ') +
-                              QString::number(alt, 'f', 10);
+        track->coordinatesList().at(i).geoCoordinates(lon, lat, alt, GeoDataCoordinates::Degree);
+        const QString coord =
+            QString::number(lon, 'f', 10) + QLatin1Char(' ') + QString::number(lat, 'f', 10) + QLatin1Char(' ') + QString::number(alt, 'f', 10);
 
-        writer.writeElement( "gx:coord", coord );
+        writer.writeElement("gx:coord", coord);
     }
     writer.writeEndElement();
 

@@ -9,9 +9,9 @@
 #ifndef MARBLE_PLUGININTERFACE_H
 #define MARBLE_PLUGININTERFACE_H
 
-#include <QVector>
 #include <QCoreApplication> // for Q_DECLARE_TR_FUNCTIONS
 #include <QString>
+#include <QVector>
 #include <QtPlugin>
 
 #include "marble_export.h"
@@ -21,18 +21,19 @@ class QIcon;
 namespace Marble
 {
 
-struct MARBLE_EXPORT PluginAuthor
-{
+struct MARBLE_EXPORT PluginAuthor {
     Q_DECLARE_TR_FUNCTIONS(PluginAuthor)
 public:
     PluginAuthor()
-    {}
+    {
+    }
 
-    PluginAuthor( const QString &name_, const QString &email_, const QString &task_ = PluginAuthor::tr( "Developer" ) ) :
-        name( name_ ),
-        task( task_ ),
-        email( email_ )
-    {}
+    PluginAuthor(const QString &name_, const QString &email_, const QString &task_ = PluginAuthor::tr("Developer"))
+        : name(name_)
+        , task(task_)
+        , email(email_)
+    {
+    }
 
     QString name;
     QString task;
@@ -45,7 +46,7 @@ public:
 
 class MARBLE_EXPORT PluginInterface
 {
- public:
+public:
     virtual ~PluginInterface();
 
     /**
@@ -98,6 +99,6 @@ class MARBLE_EXPORT PluginInterface
 
 Q_DECLARE_TYPEINFO(Marble::PluginAuthor, Q_MOVABLE_TYPE);
 
-Q_DECLARE_INTERFACE( Marble::PluginInterface, "org.kde.Marble.PluginInterface/1.1" )
+Q_DECLARE_INTERFACE(Marble::PluginInterface, "org.kde.Marble.PluginInterface/1.1")
 
 #endif

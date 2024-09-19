@@ -16,8 +16,8 @@
 namespace Marble
 {
 
-JsonRunner::JsonRunner(QObject *parent) :
-    ParsingRunner(parent)
+JsonRunner::JsonRunner(QObject *parent)
+    : ParsingRunner(parent)
 {
 }
 
@@ -29,7 +29,7 @@ GeoDataDocument *JsonRunner::parseFile(const QString &fileName, DocumentRole rol
 {
     // Check that the file exists
     QFile file(fileName);
-    if (! file.exists()) {
+    if (!file.exists()) {
         error = QStringLiteral("File %1 does not exist").arg(fileName);
         mDebug() << error;
         return nullptr;
@@ -42,17 +42,17 @@ GeoDataDocument *JsonRunner::parseFile(const QString &fileName, DocumentRole rol
     JsonParser parser;
 
     // Start parsing
-    if (! parser.read(&file)) {
+    if (!parser.read(&file)) {
         error = QStringLiteral("Could not parse GeoJSON from %1").arg(fileName);
         mDebug() << error;
         return nullptr;
     }
 
-    GeoDataDocument* document = parser.releaseDocument();
+    GeoDataDocument *document = parser.releaseDocument();
     file.close();
 
-    document->setDocumentRole( role );
-    document->setFileName( fileName );
+    document->setDocumentRole(role);
+    document->setFileName(fileName);
 
     return document;
 }

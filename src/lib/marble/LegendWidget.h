@@ -23,24 +23,24 @@ class MARBLE_EXPORT LegendWidget : public QWidget
 {
     Q_OBJECT
 
- public:
-    explicit LegendWidget( QWidget *parent = nullptr, Qt::WindowFlags f = Qt::WindowFlags() );
+public:
+    explicit LegendWidget(QWidget *parent = nullptr, Qt::WindowFlags f = Qt::WindowFlags());
     ~LegendWidget() override;
 
     /**
      * @brief Set a MarbleModel associated to this widget.
      * @param model  the MarbleModel to be set.
      */
-    void setMarbleModel( MarbleModel *model );
+    void setMarbleModel(MarbleModel *model);
 
- Q_SIGNALS:
-    void propertyValueChanged( const QString &propertyName, bool value );
-    void tourLinkClicked( const QString &url );
+Q_SIGNALS:
+    void propertyValueChanged(const QString &propertyName, bool value);
+    void tourLinkClicked(const QString &url);
 
- private:
-    Q_DISABLE_COPY( LegendWidget )
+private:
+    Q_DISABLE_COPY(LegendWidget)
 
-    LegendWidgetPrivate * const d;
+    LegendWidgetPrivate *const d;
 };
 
 }

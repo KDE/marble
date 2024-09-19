@@ -18,19 +18,19 @@ class PlaybackWaitItem : public PlaybackItem
 {
     Q_OBJECT
 public:
-    explicit PlaybackWaitItem( const GeoDataWait* wait );
-    const GeoDataWait* wait() const;
+    explicit PlaybackWaitItem(const GeoDataWait *wait);
+    const GeoDataWait *wait() const;
     double duration() const override;
     void play() override;
     void pause() override;
-    void seek( double position ) override;
+    void seek(double position) override;
     void stop() override;
 
 private Q_SLOTS:
     void playNext();
 
 private:
-    const GeoDataWait* m_wait;
+    const GeoDataWait *m_wait;
     QDateTime m_start;
     QDateTime m_pause;
     bool m_isPlaying;

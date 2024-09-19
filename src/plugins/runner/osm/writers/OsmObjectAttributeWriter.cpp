@@ -4,23 +4,23 @@
 //
 
 #include "OsmObjectAttributeWriter.h"
+#include "GeoWriter.h"
 #include "osm/OsmObjectManager.h"
 #include "osm/OsmPlacemarkData.h"
-#include "GeoWriter.h"
 
-namespace Marble {
-
-void OsmObjectAttributeWriter::writeAttributes( const OsmPlacemarkData& osmData, GeoWriter &writer )
+namespace Marble
 {
-    writer.writeAttribute( "id", QString::number( osmData.id() ) );
-    writer.writeOptionalAttribute( "action", osmData.action() );
-    writer.writeOptionalAttribute( "changeset", osmData.changeset() );
-    writer.writeOptionalAttribute( "timestamp", osmData.timestamp() );
-    writer.writeOptionalAttribute( "uid", osmData.uid() );
-    writer.writeOptionalAttribute( "user", osmData.user() );
-    writer.writeOptionalAttribute( "version", osmData.version() );
-    writer.writeOptionalAttribute( "visible", osmData.isVisible() );
+
+void OsmObjectAttributeWriter::writeAttributes(const OsmPlacemarkData &osmData, GeoWriter &writer)
+{
+    writer.writeAttribute("id", QString::number(osmData.id()));
+    writer.writeOptionalAttribute("action", osmData.action());
+    writer.writeOptionalAttribute("changeset", osmData.changeset());
+    writer.writeOptionalAttribute("timestamp", osmData.timestamp());
+    writer.writeOptionalAttribute("uid", osmData.uid());
+    writer.writeOptionalAttribute("user", osmData.user());
+    writer.writeOptionalAttribute("version", osmData.version());
+    writer.writeOptionalAttribute("visible", osmData.isVisible());
 }
 
 }
-

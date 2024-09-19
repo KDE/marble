@@ -8,8 +8,8 @@
 
 #include <QAbstractItemDelegate>
 
-#include <QModelIndex>
 #include <QIcon>
+#include <QModelIndex>
 
 class QPainter;
 class QRect;
@@ -23,55 +23,45 @@ class PluginItemDelegate : public QAbstractItemDelegate
 {
     Q_OBJECT
 
- public:
-    explicit PluginItemDelegate( QAbstractItemView *view, QObject * parent = nullptr );
+public:
+    explicit PluginItemDelegate(QAbstractItemView *view, QObject *parent = nullptr);
     ~PluginItemDelegate() override;
-    
-    void paint( QPainter *painter,
-                const QStyleOptionViewItem& option,
-                const QModelIndex& index ) const override;
-    QSize sizeHint( const QStyleOptionViewItem& option, const QModelIndex & index ) const override;
 
-    void setAboutIcon( const QIcon& icon );
-    void setConfigIcon( const QIcon& icon );
-    
- Q_SIGNALS:
+    void paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const override;
+    QSize sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const override;
+
+    void setAboutIcon(const QIcon &icon);
+    void setConfigIcon(const QIcon &icon);
+
+Q_SIGNALS:
     /**
      * This signal is emitted if the user clicks on a "about"-button of an item in the view
      * passed to the constructor.
      */
-    void aboutPluginClicked( const QModelIndex &index );
+    void aboutPluginClicked(const QModelIndex &index);
 
     /**
      * This signal is emitted if the user clicks on a "configure"-button of an item in the view
      * passed to the constructor.
      */
-    void configPluginClicked( const QModelIndex &index );
+    void configPluginClicked(const QModelIndex &index);
 
- protected:
-    bool editorEvent( QEvent *event,
-                      QAbstractItemModel *model,
-                      const QStyleOptionViewItem &option,
-                      const QModelIndex &index ) override;
+protected:
+    bool editorEvent(QEvent *event, QAbstractItemModel *model, const QStyleOptionViewItem &option, const QModelIndex &index) override;
 
- private:
-    enum ButtonType {
-        About,
-        Configure
-    };
+private:
+    enum ButtonType { About, Configure };
 
-    static QStyleOptionButton checkboxOption( const QStyleOptionViewItem& option,
-                                              const QModelIndex& index,
-                                              int position = 0,
-                                              Qt::AlignmentFlag alignment = Qt::AlignLeft );
-    QStyleOptionButton buttonOption(   const QStyleOptionViewItem& option,
-                                       const QModelIndex& index,
-                                       PluginItemDelegate::ButtonType type,
-                                       int position = 0,
-                                       Qt::AlignmentFlag alignment = Qt::AlignLeft ) const;
-    static QSize nameSize( const QModelIndex& index );
-    
-    static QRect alignRect( const QRect& object, const QRect& frame, int position, Qt::AlignmentFlag alignment );
+    static QStyleOptionButton
+    checkboxOption(const QStyleOptionViewItem &option, const QModelIndex &index, int position = 0, Qt::AlignmentFlag alignment = Qt::AlignLeft);
+    QStyleOptionButton buttonOption(const QStyleOptionViewItem &option,
+                                    const QModelIndex &index,
+                                    PluginItemDelegate::ButtonType type,
+                                    int position = 0,
+                                    Qt::AlignmentFlag alignment = Qt::AlignLeft) const;
+    static QSize nameSize(const QModelIndex &index);
+
+    static QRect alignRect(const QRect &object, const QRect &frame, int position, Qt::AlignmentFlag alignment);
 
     QModelIndex m_configPressedIndex;
     QModelIndex m_aboutPressedIndex;

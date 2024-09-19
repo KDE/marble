@@ -6,14 +6,13 @@
 #ifndef DOWNLOADOSMDIALOG_H
 #define DOWNLOADOSMDIALOG_H
 
-#include <QDialog>
-#include <QPushButton>
 #include <GeoDataLatLonAltBox.h>
+#include <QDialog>
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
 #include <QProgressDialog>
+#include <QPushButton>
 #include <QTemporaryFile>
-
 
 #include "LatLonBoxWidget.h"
 #include "ui_DownloadOsmDialog.h"
@@ -22,12 +21,12 @@ namespace Marble
 {
 class MarbleWidget;
 class AnnotatePlugin;
-class DownloadOsmDialog : public QDialog,private Ui::DownloadOsmDialog
+class DownloadOsmDialog : public QDialog, private Ui::DownloadOsmDialog
 {
     Q_OBJECT
 
 public:
-    explicit DownloadOsmDialog(MarbleWidget *parent = nullptr,AnnotatePlugin *annotatePlugin = nullptr);
+    explicit DownloadOsmDialog(MarbleWidget *parent = nullptr, AnnotatePlugin *annotatePlugin = nullptr);
     ~DownloadOsmDialog() override;
 
 Q_SIGNALS:
@@ -45,7 +44,7 @@ private:
 
 private Q_SLOTS:
     void downloadFile();
-    void updateCoordinates(const GeoDataLatLonAltBox&);
+    void updateCoordinates(const GeoDataLatLonAltBox &);
     void httpReadyRead();
     void httpFinished();
 };

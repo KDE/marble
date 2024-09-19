@@ -8,14 +8,15 @@
 
 #include <QString>
 
-namespace Marble {
+namespace Marble
+{
 
 class DatabaseQuery;
 
 /**
-  * A lightweight data structure to represent points of interest
-  * like addresses with support for serialization.
-  */
+ * A lightweight data structure to represent points of interest
+ * like addresses with support for serialization.
+ */
 class OsmPlacemark
 {
 public:
@@ -89,45 +90,45 @@ public:
 
     OsmCategory category() const;
 
-    void setCategory( OsmCategory category );
+    void setCategory(OsmCategory category);
 
     /** Placemark name */
     QString name() const;
 
-    void setName( const QString &name );
+    void setName(const QString &name);
 
     /** Placemark's house number, if any */
     QString houseNumber() const;
 
-    void setHouseNumber( const QString &houseNumber );
+    void setHouseNumber(const QString &houseNumber);
 
     /** Identifier of the smallest region containing this placemark,
         0 if none (~main area). */
     int regionId() const;
 
-    void setRegionId( int id );
+    void setRegionId(int id);
 
     /** Regions' name */
     QString additionalInformation() const;
 
-    void setAdditionalInformation( const QString &name );
+    void setAdditionalInformation(const QString &name);
 
     /** Longitude of the placemark's center point, in degree */
     qreal longitude() const;
 
-    void setLongitude( qreal longitude );
+    void setLongitude(qreal longitude);
 
     /** Latitude of the placemark's center point, in degree */
     qreal latitude() const;
 
-    void setLatitude( qreal latitude );
+    void setLatitude(qreal latitude);
 
     /** Placemarks are sorted by name by default */
-    bool operator<( const OsmPlacemark &other) const;
+    bool operator<(const OsmPlacemark &other) const;
 
-    bool operator==( const OsmPlacemark &other ) const;
+    bool operator==(const OsmPlacemark &other) const;
 
-    qreal matchScore( const DatabaseQuery* query ) const;
+    qreal matchScore(const DatabaseQuery *query) const;
 
 private:
     int m_regionId;

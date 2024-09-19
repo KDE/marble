@@ -8,35 +8,35 @@
 #ifndef POSITION_MARKER_H
 #define POSITION_MARKER_H
 
-#include <QHash>
-#include <QVector>
 #include <QColor>
-#include <QPolygon>
+#include <QHash>
 #include <QPixmap>
+#include <QPolygon>
+#include <QVector>
 
 #include "DialogConfigurationInterface.h"
-#include "RenderPlugin.h"
 #include "GeoDataCoordinates.h"
 #include "GeoDataLatLonAltBox.h"
+#include "RenderPlugin.h"
 
 namespace Ui
 {
-    class PositionMarkerConfigWidget;
+class PositionMarkerConfigWidget;
 }
 
 namespace Marble
 {
 
-class PositionMarker  : public RenderPlugin, public DialogConfigurationInterface
+class PositionMarker : public RenderPlugin, public DialogConfigurationInterface
 {
     Q_OBJECT
     Q_PLUGIN_METADATA(IID "org.kde.marble.PositionMarker")
-    Q_INTERFACES( Marble::RenderPluginInterface )
-    Q_INTERFACES( Marble::DialogConfigurationInterface )
-    MARBLE_PLUGIN( PositionMarker )
- public:
-    explicit PositionMarker(const MarbleModel *marbleModel = nullptr );
-    ~PositionMarker () override;
+    Q_INTERFACES(Marble::RenderPluginInterface)
+    Q_INTERFACES(Marble::DialogConfigurationInterface)
+    MARBLE_PLUGIN(PositionMarker)
+public:
+    explicit PositionMarker(const MarbleModel *marbleModel = nullptr);
+    ~PositionMarker() override;
 
     QStringList renderPosition() const override;
 
@@ -58,16 +58,15 @@ class PositionMarker  : public RenderPlugin, public DialogConfigurationInterface
 
     QVector<PluginAuthor> pluginAuthors() const override;
 
-    QIcon icon () const override;
+    QIcon icon() const override;
 
     QDialog *configDialog() override;
 
-    void initialize () override;
+    void initialize() override;
 
-    bool isInitialized () const override;
+    bool isInitialized() const override;
 
-    bool render( GeoPainter *painter, ViewportParams *viewport,
-                 const QString& renderPos, GeoSceneLayer * layer = nullptr ) override;
+    bool render(GeoPainter *painter, ViewportParams *viewport, const QString &renderPos, GeoSceneLayer *layer = nullptr) override;
 
     // Overriding LayerInterface to paint on top of the route
     qreal zValue() const override;
@@ -75,56 +74,55 @@ class PositionMarker  : public RenderPlugin, public DialogConfigurationInterface
     /**
      * @return: The settings of the item.
      */
-    QHash<QString,QVariant> settings() const override;
+    QHash<QString, QVariant> settings() const override;
 
     /**
      * Set the settings of the item.
      */
-    void setSettings( const QHash<QString,QVariant> &settings ) override;
+    void setSettings(const QHash<QString, QVariant> &settings) override;
 
-
- public Q_SLOTS:
+public Q_SLOTS:
     void readSettings();
     void writeSettings();
 
-    void setPosition( const GeoDataCoordinates &position );
+    void setPosition(const GeoDataCoordinates &position);
     void chooseCustomCursor();
     void chooseColor();
-    void resizeCursor( int step );
+    void resizeCursor(int step);
 
- private:
-    Q_DISABLE_COPY( PositionMarker )
+private:
+    Q_DISABLE_COPY(PositionMarker)
 
-    void loadCustomCursor( const QString& filename, bool useCursor );
+    void loadCustomCursor(const QString &filename, bool useCursor);
     void loadDefaultCursor();
 
     const MarbleModel *m_marbleModel;
 
-    bool           m_isInitialized;
-    bool           m_useCustomCursor;
+    bool m_isInitialized;
+    bool m_useCustomCursor;
 
     const QString m_defaultCursorPath;
     GeoDataLatLonAltBox m_lastBoundingBox;
-    GeoDataCoordinates  m_currentPosition;
-    GeoDataCoordinates  m_previousPosition;
-    
+    GeoDataCoordinates m_currentPosition;
+    GeoDataCoordinates m_previousPosition;
+
     Ui::PositionMarkerConfigWidget *ui_configWidget;
     QDialog *m_configDialog;
     QString m_cursorPath;
 
-    QPolygonF           m_arrow;
-    QPolygonF           m_previousArrow;
-    QRegion             m_dirtyRegion;
-    QPixmap             m_customCursor;
-    QPixmap             m_customCursorTransformed;
-    QPixmap             m_defaultCursor;
-    float               m_cursorSize;
-    QColor              m_accuracyColor;
-    QColor              m_trailColor;
-    qreal               m_heading;
+    QPolygonF m_arrow;
+    QPolygonF m_previousArrow;
+    QRegion m_dirtyRegion;
+    QPixmap m_customCursor;
+    QPixmap m_customCursorTransformed;
+    QPixmap m_defaultCursor;
+    float m_cursorSize;
+    QColor m_accuracyColor;
+    QColor m_trailColor;
+    qreal m_heading;
     QVector<GeoDataCoordinates> m_trail;
-    static const int    sm_numTrailPoints = 6;
-    bool                m_showTrail;
+    static const int sm_numTrailPoints = 6;
+    bool m_showTrail;
 
     static const int sm_defaultSizeStep;
     static const int sm_numResizeSteps;

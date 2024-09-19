@@ -20,7 +20,6 @@ class GeoDataFeature;
 class GeoDataContainer;
 class GeoDataTourPrimitive;
 
-
 /**
  * @short The representation of GeoData in a model
  * This class represents all available data given by kml-data files.
@@ -29,14 +28,13 @@ class MARBLE_EXPORT GeoDataTreeModel : public QAbstractItemModel
 {
     Q_OBJECT
 
- public:
-
+public:
     /**
      * Creates a new GeoDataTreeModel.
      *
      * @param parent The parent object.
      */
-    explicit GeoDataTreeModel( QObject *parent = nullptr );
+    explicit GeoDataTreeModel(QObject *parent = nullptr);
 
     /**
      * Destroys the GeoDataModel.
@@ -48,8 +46,7 @@ class MARBLE_EXPORT GeoDataTreeModel : public QAbstractItemModel
      */
     int rowCount(const QModelIndex &parent = QModelIndex()) const override;
 
-    QVariant headerData(int section, Qt::Orientation orientation,
-                                int role = Qt::DisplayRole) const override;
+    QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const override;
 
     QHash<int, QByteArray> roleNames() const override;
 
@@ -74,39 +71,40 @@ class MARBLE_EXPORT GeoDataTreeModel : public QAbstractItemModel
 public Q_SLOTS:
 
     /**
-      * Sets the root document to use. This replaces previously loaded data, if any.
-      * @param document The new root document. Ownership retains with the caller,
-      *   i.e. GeoDataTreeModel will not delete the passed document at its destruction.
-      */
-    void setRootDocument( GeoDataDocument *document );
+     * Sets the root document to use. This replaces previously loaded data, if any.
+     * @param document The new root document. Ownership retains with the caller,
+     *   i.e. GeoDataTreeModel will not delete the passed document at its destruction.
+     */
+    void setRootDocument(GeoDataDocument *document);
 
-    int addFeature( GeoDataContainer *parent, GeoDataFeature *feature, int row = -1 );
+    int addFeature(GeoDataContainer *parent, GeoDataFeature *feature, int row = -1);
 
-    bool removeFeature( GeoDataContainer *parent, int index );
+    bool removeFeature(GeoDataContainer *parent, int index);
 
     int removeFeature(GeoDataFeature *feature);
 
-    void updateFeature( GeoDataFeature *feature );
+    void updateFeature(GeoDataFeature *feature);
 
-    int addDocument( GeoDataDocument *document );
+    int addDocument(GeoDataDocument *document);
 
-    void removeDocument( int index );
+    void removeDocument(int index);
 
-    void removeDocument( GeoDataDocument* document );
+    void removeDocument(GeoDataDocument *document);
 
-    int addTourPrimitive( const QModelIndex &parent, GeoDataTourPrimitive *primitive, int row = -1 );
-    bool removeTourPrimitive( const QModelIndex &parent, int index );
-    bool swapTourPrimitives( const QModelIndex &parent, int indexA, int indexB );
+    int addTourPrimitive(const QModelIndex &parent, GeoDataTourPrimitive *primitive, int row = -1);
+    bool removeTourPrimitive(const QModelIndex &parent, int index);
+    bool swapTourPrimitives(const QModelIndex &parent, int indexA, int indexB);
 
 Q_SIGNALS:
     /// insert and remove row don't trigger any signal that proxies forward
     /// this signal will refresh geometry layer and placemark layout
-    void removed( GeoDataObject *object );
-    void added( GeoDataObject *object );
- private:
-    Q_DISABLE_COPY( GeoDataTreeModel )
+    void removed(GeoDataObject *object);
+    void added(GeoDataObject *object);
+
+private:
+    Q_DISABLE_COPY(GeoDataTreeModel)
     class Private;
-    Private* const d;
+    Private *const d;
 };
 
 }

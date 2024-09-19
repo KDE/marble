@@ -8,14 +8,14 @@
 namespace Marble
 {
 
-LogfilePlugin::LogfilePlugin( QObject *parent ) :
-    ParseRunnerPlugin( parent )
+LogfilePlugin::LogfilePlugin(QObject *parent)
+    : ParseRunnerPlugin(parent)
 {
 }
 
 QString LogfilePlugin::name() const
 {
-    return tr( "TangoGPS Log File Parser" );
+    return tr("TangoGPS Log File Parser");
 }
 
 QString LogfilePlugin::nameId() const
@@ -30,7 +30,7 @@ QString LogfilePlugin::version() const
 
 QString LogfilePlugin::description() const
 {
-    return tr( "Allows loading of TangoGPS log files." );
+    return tr("Allows loading of TangoGPS log files.");
 }
 
 QString LogfilePlugin::copyrightYears() const
@@ -40,13 +40,12 @@ QString LogfilePlugin::copyrightYears() const
 
 QVector<PluginAuthor> LogfilePlugin::pluginAuthors() const
 {
-    return QVector<PluginAuthor>()
-            << PluginAuthor(QStringLiteral("Bernhard Beschow"), QStringLiteral("bbeschow@cs.tu-berlin.de"));
+    return QVector<PluginAuthor>() << PluginAuthor(QStringLiteral("Bernhard Beschow"), QStringLiteral("bbeschow@cs.tu-berlin.de"));
 }
 
 QString LogfilePlugin::fileFormatDescription() const
 {
-    return tr( "TangoGPS Log Files" );
+    return tr("TangoGPS Log Files");
 }
 
 QStringList LogfilePlugin::fileExtensions() const
@@ -54,7 +53,7 @@ QStringList LogfilePlugin::fileExtensions() const
     return QStringList(QStringLiteral("log"));
 }
 
-ParsingRunner* LogfilePlugin::newRunner() const
+ParsingRunner *LogfilePlugin::newRunner() const
 {
     return new LogRunner;
 }

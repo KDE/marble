@@ -9,8 +9,8 @@
 #ifndef MARBLE_HTTPJOB_H
 #define MARBLE_HTTPJOB_H
 
-#include <QObject>
 #include <QNetworkReply>
+#include <QObject>
 
 #include "MarbleGlobal.h"
 
@@ -25,55 +25,55 @@ namespace Marble
 {
 class HttpJobPrivate;
 
-class MARBLE_EXPORT HttpJob: public QObject
+class MARBLE_EXPORT HttpJob : public QObject
 {
     Q_OBJECT
 
- public:
-    HttpJob( const QUrl & sourceUrl, const QString & destFileName, const QString &id, QNetworkAccessManager *networkAccessManager );
+public:
+    HttpJob(const QUrl &sourceUrl, const QString &destFileName, const QString &id, QNetworkAccessManager *networkAccessManager);
     ~HttpJob() override;
 
     QUrl sourceUrl() const;
-    void setSourceUrl( const QUrl & );
+    void setSourceUrl(const QUrl &);
 
     QString initiatorId() const;
-    void setInitiatorId( const QString & );
+    void setInitiatorId(const QString &);
 
     QString destinationFileName() const;
-    void setDestinationFileName( const QString & );
+    void setDestinationFileName(const QString &);
 
     bool tryAgain();
 
     DownloadUsage downloadUsage() const;
-    void setDownloadUsage( const DownloadUsage );
+    void setDownloadUsage(const DownloadUsage);
 
-    void setUserAgentPluginId( const QString & pluginId ) const;
+    void setUserAgentPluginId(const QString &pluginId) const;
 
     QByteArray userAgent() const;
 
- Q_SIGNALS:
+Q_SIGNALS:
     /**
      * errorCode contains 0, if there was no error and 1 otherwise
      */
-    void jobDone( HttpJob *, int errorCode );
-    void redirected( HttpJob * job, const QUrl& redirectionTarget );
+    void jobDone(HttpJob *, int errorCode);
+    void redirected(HttpJob *job, const QUrl &redirectionTarget);
 
     /**
      * This signal is emitted if the data was successfully received and
      * the argument data contains completely the downloaded content.
      */
-    void dataReceived( HttpJob * job, const QByteArray& data );
+    void dataReceived(HttpJob *job, const QByteArray &data);
 
- public Q_SLOTS:
+public Q_SLOTS:
     void execute();
 
 private Q_SLOTS:
-   void downloadProgress( qint64 bytesReceived, qint64 bytesTotal );
-   void error( QNetworkReply::NetworkError code );
-   void finished();
+    void downloadProgress(qint64 bytesReceived, qint64 bytesTotal);
+    void error(QNetworkReply::NetworkError code);
+    void finished();
 
- private:
-    Q_DISABLE_COPY( HttpJob )
+private:
+    Q_DISABLE_COPY(HttpJob)
     HttpJobPrivate *const d;
     friend class HttpJobPrivate;
 };

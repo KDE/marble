@@ -47,11 +47,10 @@ QString GeoUriPlugin::copyrightYears() const
 
 QVector<PluginAuthor> GeoUriPlugin::pluginAuthors() const
 {
-    return QVector<PluginAuthor>()
-            << PluginAuthor(QStringLiteral("Friedrich W. H. Kossebau"), QStringLiteral("kossebau@kde.org"));
+    return QVector<PluginAuthor>() << PluginAuthor(QStringLiteral("Friedrich W. H. Kossebau"), QStringLiteral("kossebau@kde.org"));
 }
 
-SearchRunner* GeoUriPlugin::newRunner() const
+SearchRunner *GeoUriPlugin::newRunner() const
 {
     return new GeoUriRunner;
 }

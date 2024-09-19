@@ -25,29 +25,29 @@ class PanoramioItem : public AbstractDataPluginItem
 {
     Q_OBJECT
 
- public:
-    explicit PanoramioItem( MarbleWidget *marbleWidget, QObject *parent );
+public:
+    explicit PanoramioItem(MarbleWidget *marbleWidget, QObject *parent);
 
     bool initialized() const;
 
-    void addDownloadedFile( const QString &url, const QString &type );
+    void addDownloadedFile(const QString &url, const QString &type);
 
-    void setPhotoUrl( const QUrl &url );
+    void setPhotoUrl(const QUrl &url);
 
     QDate uploadDate() const;
 
-    void setUploadDate( const QDate &uploadDate );
+    void setUploadDate(const QDate &uploadDate);
 
-    void paint( QPainter *painter );
+    void paint(QPainter *painter);
 
     QAction *action();
 
-    bool operator<( const AbstractDataPluginItem *other ) const;
+    bool operator<(const AbstractDataPluginItem *other) const;
 
- public Q_SLOTS:
+public Q_SLOTS:
     void openBrowser();
 
- private:
+private:
     MarbleWidget *const m_marbleWidget;
     QAction *m_action;
     QImage smallImage;

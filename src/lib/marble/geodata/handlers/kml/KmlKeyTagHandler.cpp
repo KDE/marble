@@ -18,18 +18,18 @@ namespace Marble
 {
 namespace kml
 {
-KML_DEFINE_TAG_HANDLER( key )
+KML_DEFINE_TAG_HANDLER(key)
 
-GeoNode* KmlkeyTagHandler::parse( GeoParser& parser ) const
+GeoNode *KmlkeyTagHandler::parse(GeoParser &parser) const
 {
     Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1String(kmlTag_key)));
 
     GeoStackItem parentItem = parser.parentElement();
-    
-    if( parentItem.represents( kmlTag_Pair ) ) {
+
+    if (parentItem.represents(kmlTag_Pair)) {
         QString content = parser.readElementText().trimmed();
-        
-        parentItem.nodeAs<GeoDataStyleMap>()->setLastKey( content );
+
+        parentItem.nodeAs<GeoDataStyleMap>()->setLastKey(content);
     }
 
     return nullptr;

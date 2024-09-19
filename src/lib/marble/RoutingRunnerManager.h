@@ -31,7 +31,7 @@ public:
      * @param pluginManager The plugin manager that gives access to RunnerPlugins
      * @param parent Optional parent object
      */
-    explicit RoutingRunnerManager( const MarbleModel *marbleModel, QObject *parent = nullptr );
+    explicit RoutingRunnerManager(const MarbleModel *marbleModel, QObject *parent = nullptr);
 
     ~RoutingRunnerManager() override;
 
@@ -42,14 +42,14 @@ public:
      * @see searchRoute is blocking.
      * @see routingFinished signal indicates all runners are finished.
      */
-    void retrieveRoute( const RouteRequest *request );
-    QVector<GeoDataDocument *> searchRoute( const RouteRequest *request, int timeout = 30000 );
+    void retrieveRoute(const RouteRequest *request);
+    QVector<GeoDataDocument *> searchRoute(const RouteRequest *request, int timeout = 30000);
 
 Q_SIGNALS:
     /**
      * A route was retrieved
      */
-    void routeRetrieved( GeoDataDocument *route );
+    void routeRetrieved(GeoDataDocument *route);
 
     /**
      * Emitted whenever all runners are finished for the query
@@ -57,8 +57,8 @@ Q_SIGNALS:
     void routingFinished();
 
 private:
-    Q_PRIVATE_SLOT( d, void addRoutingResult( GeoDataDocument *route ) )
-    Q_PRIVATE_SLOT( d, void cleanupRoutingTask( RoutingTask *task ) )
+    Q_PRIVATE_SLOT(d, void addRoutingResult(GeoDataDocument *route))
+    Q_PRIVATE_SLOT(d, void cleanupRoutingTask(RoutingTask *task))
 
     class Private;
     friend class Private;

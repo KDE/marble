@@ -13,36 +13,36 @@
 namespace Marble
 {
 
-LocalOsmSearchPlugin::LocalOsmSearchPlugin( QObject *parent ) :
-    SearchRunnerPlugin( parent ),
-    m_databaseFiles()
+LocalOsmSearchPlugin::LocalOsmSearchPlugin(QObject *parent)
+    : SearchRunnerPlugin(parent)
+    , m_databaseFiles()
 {
     setSupportedCelestialBodies(QStringList(QStringLiteral("earth")));
-    setCanWorkOffline( true );
+    setCanWorkOffline(true);
 
     QString const path = MarbleDirs::localPath() + QLatin1String("/maps/earth/placemarks/");
-    QFileInfo pathInfo( path );
-    if ( !pathInfo.exists() ) {
-        QDir("/").mkpath( pathInfo.absolutePath() );
+    QFileInfo pathInfo(path);
+    if (!pathInfo.exists()) {
+        QDir("/").mkpath(pathInfo.absolutePath());
         pathInfo.refresh();
     }
-    if ( pathInfo.exists() ) {
-        m_watcher.addPath( path );
+    if (pathInfo.exists()) {
+        m_watcher.addPath(path);
     }
-    connect( &m_watcher, SIGNAL(directoryChanged(QString)), this, SLOT(updateDirectory(QString)) );
-    connect( &m_watcher, SIGNAL(fileChanged(QString)), this, SLOT(updateFile(QString)) );
+    connect(&m_watcher, SIGNAL(directoryChanged(QString)), this, SLOT(updateDirectory(QString)));
+    connect(&m_watcher, SIGNAL(fileChanged(QString)), this, SLOT(updateFile(QString)));
 
     updateDatabase();
 }
 
 QString LocalOsmSearchPlugin::name() const
 {
-    return tr( "Local OSM Search" );
+    return tr("Local OSM Search");
 }
 
 QString LocalOsmSearchPlugin::guiString() const
 {
-    return tr( "Offline OpenStreetMap Search" );
+    return tr("Offline OpenStreetMap Search");
 }
 
 QString LocalOsmSearchPlugin::nameId() const
@@ -57,7 +57,7 @@ QString LocalOsmSearchPlugin::version() const
 
 QString LocalOsmSearchPlugin::description() const
 {
-    return tr( "Searches for addresses and points of interest in offline maps." );
+    return tr("Searches for addresses and points of interest in offline maps.");
 }
 
 QString LocalOsmSearchPlugin::copyrightYears() const
@@ -67,33 +67,32 @@ QString LocalOsmSearchPlugin::copyrightYears() const
 
 QVector<PluginAuthor> LocalOsmSearchPlugin::pluginAuthors() const
 {
-    return QVector<PluginAuthor>()
-            << PluginAuthor(QStringLiteral("Dennis Nienhüser"), QStringLiteral("nienhueser@kde.org"));
+    return QVector<PluginAuthor>() << PluginAuthor(QStringLiteral("Dennis Nienhüser"), QStringLiteral("nienhueser@kde.org"));
 }
 
-SearchRunner* LocalOsmSearchPlugin::newRunner() const
+SearchRunner *LocalOsmSearchPlugin::newRunner() const
 {
-    return new LocalOsmSearchRunner( m_databaseFiles );
+    return new LocalOsmSearchRunner(m_databaseFiles);
 }
 
-void LocalOsmSearchPlugin::addDatabaseDirectory( const QString &path )
+void LocalOsmSearchPlugin::addDatabaseDirectory(const QString &path)
 {
-    QDir directory( path );
+    QDir directory(path);
     QStringList const nameFilters = QStringList() << "*.sqlite";
-    QStringList const files( directory.entryList( nameFilters, QDir::Files ) );
-    for( const QString &file: files ) {
-        m_databaseFiles << directory.filePath( file );
+    QStringList const files(directory.entryList(nameFilters, QDir::Files));
+    for (const QString &file : files) {
+        m_databaseFiles << directory.filePath(file);
     }
 }
 
-void LocalOsmSearchPlugin::updateDirectory( const QString & )
+void LocalOsmSearchPlugin::updateDirectory(const QString &)
 {
     updateDatabase();
 }
 
-void LocalOsmSearchPlugin::updateFile( const QString &file )
+void LocalOsmSearchPlugin::updateFile(const QString &file)
 {
-    if ( file.endsWith( QLatin1String( ".sqlite" ) ) ) {
+    if (file.endsWith(QLatin1String(".sqlite"))) {
         updateDatabase();
     }
 }
@@ -102,15 +101,15 @@ void LocalOsmSearchPlugin::updateDatabase()
 {
     m_databaseFiles.clear();
     QStringList const baseDirs = QStringList() << MarbleDirs::systemPath() << MarbleDirs::localPath();
-    for ( const QString &baseDir: baseDirs ) {
+    for (const QString &baseDir : baseDirs) {
         const QString base = baseDir + QLatin1String("/maps/earth/placemarks/");
-        addDatabaseDirectory( base );
+        addDatabaseDirectory(base);
         QDir::Filters filters = QDir::AllDirs | QDir::Readable | QDir::NoDotAndDotDot;
         QDirIterator::IteratorFlags flags = QDirIterator::Subdirectories | QDirIterator::FollowSymlinks;
-        QDirIterator iter( base, filters, flags );
-        while ( iter.hasNext() ) {
+        QDirIterator iter(base, filters, flags);
+        while (iter.hasNext()) {
             iter.next();
-            addDatabaseDirectory( iter.filePath() );
+            addDatabaseDirectory(iter.filePath());
         }
     }
 }

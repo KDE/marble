@@ -6,10 +6,10 @@
 #ifndef REMOVEITEMEDITWIDGET_H
 #define REMOVEITEMEDITWIDGET_H
 
-#include <QWidget>
+#include <QComboBox>
 #include <QPersistentModelIndex>
 #include <QToolButton>
-#include <QComboBox>
+#include <QWidget>
 
 class QModelIndex;
 
@@ -18,30 +18,30 @@ namespace Marble
 
 class GeoDataAnimatedUpdate;
 
-class RemoveItemEditWidget: public QWidget
+class RemoveItemEditWidget : public QWidget
 {
     Q_OBJECT
 
 public:
-    explicit RemoveItemEditWidget( const QModelIndex& index, QWidget* parent=nullptr );
+    explicit RemoveItemEditWidget(const QModelIndex &index, QWidget *parent = nullptr);
     bool editable() const;
 
 Q_SIGNALS:
-    void editingDone( const QModelIndex& index );
+    void editingDone(const QModelIndex &index);
 
 public Q_SLOTS:
-    void setEditable( bool editable );
-    void setFeatureIds( const QStringList &ids );
-    void setDefaultFeatureId( const QString &featureId );
+    void setEditable(bool editable);
+    void setFeatureIds(const QStringList &ids);
+    void setDefaultFeatureId(const QString &featureId);
 
 private Q_SLOTS:
     void save();
 
 private:
-    GeoDataAnimatedUpdate* animatedUpdateElement();
+    GeoDataAnimatedUpdate *animatedUpdateElement();
     QPersistentModelIndex m_index;
     QToolButton *m_button;
-    QComboBox* m_comboBox;
+    QComboBox *m_comboBox;
 };
 
 } // namespace Marble

@@ -8,8 +8,8 @@
 #define MARBLE_GEOGRAPHICSITEM_H
 
 // Marble
-#include "marble_export.h"
 #include "GeoDataStyle.h"
+#include "marble_export.h"
 
 class QString;
 
@@ -40,22 +40,17 @@ private:
 
 class MARBLE_EXPORT GeoGraphicsItem
 {
- public:
-    explicit GeoGraphicsItem( const GeoDataFeature *feature );
+public:
+    explicit GeoGraphicsItem(const GeoDataFeature *feature);
     virtual ~GeoGraphicsItem();
 
-    enum GeoGraphicsItemFlag {
-        NoOptions = 0x0,
-        ItemIsMovable = 0x1,
-        ItemIsSelectable = 0x2,
-        ItemIsVisible = 0x4
-    };
+    enum GeoGraphicsItemFlag { NoOptions = 0x0, ItemIsMovable = 0x1, ItemIsSelectable = 0x2, ItemIsVisible = 0x4 };
 
     Q_DECLARE_FLAGS(GeoGraphicsItemFlags, GeoGraphicsItemFlag)
 
     bool visible() const;
 
-    void setVisible( bool visible );
+    void setVisible(bool visible);
 
     /**
      * Get the GeoGraphicItemFlags value that describes which flags are set on
@@ -68,13 +63,13 @@ class MARBLE_EXPORT GeoGraphicsItem
      * @param flag the flag
      * @param enabled sets if the flag is to be set or unset
      */
-    void setFlag( GeoGraphicsItemFlag flag, bool enabled = true );
+    void setFlag(GeoGraphicsItemFlag flag, bool enabled = true);
 
     /**
      * Replace all of the current flags.
      * @param flags is the new value for this item's flags.
      */
-    void setFlags( GeoGraphicsItemFlags flags );
+    void setFlags(GeoGraphicsItemFlags flags);
 
     /**
      * Returns the minim zoom level on which item will be active.
@@ -84,12 +79,12 @@ class MARBLE_EXPORT GeoGraphicsItem
     /**
      * Sets the minimum zoom level
      */
-    void setMinZoomLevel( int zoomLevel );
+    void setMinZoomLevel(int zoomLevel);
 
     /**
      * Returns the placemark for that item.
      */
-    const GeoDataFeature* feature() const;
+    const GeoDataFeature *feature() const;
 
     /**
      * Returns the bounding box covered by the item.
@@ -114,7 +109,7 @@ class MARBLE_EXPORT GeoGraphicsItem
      * GeoGraphicsItem takes ownership of the
      * passed style and deletes it when appropriate.
      */
-    void setHighlightStyle( const GeoDataStyle::ConstPtr &highlightStyle );
+    void setHighlightStyle(const GeoDataStyle::ConstPtr &highlightStyle);
 
     /**
      * Returns the z value of the item
@@ -124,11 +119,11 @@ class MARBLE_EXPORT GeoGraphicsItem
     /**
      * Set the z value of the item
      */
-    void setZValue( qreal z );
+    void setZValue(qreal z);
 
-    static bool zValueLessThan(GeoGraphicsItem* one, GeoGraphicsItem* two);
-    static bool styleLessThan(GeoGraphicsItem* one, GeoGraphicsItem* two);
-    static bool zValueAndStyleLessThan(GeoGraphicsItem* one, GeoGraphicsItem* two);
+    static bool zValueLessThan(GeoGraphicsItem *one, GeoGraphicsItem *two);
+    static bool styleLessThan(GeoGraphicsItem *one, GeoGraphicsItem *two);
+    static bool zValueAndStyleLessThan(GeoGraphicsItem *one, GeoGraphicsItem *two);
 
     /**
      * Paints the item using the given GeoPainter.
@@ -138,7 +133,7 @@ class MARBLE_EXPORT GeoGraphicsItem
      */
     virtual void paint(GeoPainter *painter, const ViewportParams *viewport, const QString &layer, int tileZoomLevel) = 0;
 
-    void setHighlighted( bool highlight );
+    void setHighlighted(bool highlight);
 
     bool isHighlighted() const;
 
@@ -158,7 +153,7 @@ class MARBLE_EXPORT GeoGraphicsItem
 
     void setRelations(const QSet<const GeoDataRelation *> &relations);
 
- protected:
+protected:
     virtual void handleRelationUpdate(const QVector<const GeoDataRelation *> &relations);
 
     GeoGraphicsItemPrivate *const d;

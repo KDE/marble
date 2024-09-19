@@ -10,38 +10,39 @@ class QString;
 class QUrl;
 class QIcon;
 
-namespace Marble {
+namespace Marble
+{
 
-class RouteItem {
-
+class RouteItem
+{
 public:
     RouteItem();
-    RouteItem( const RouteItem &other );
+    RouteItem(const RouteItem &other);
     ~RouteItem();
 
-    RouteItem& operator=(const RouteItem &other);
-    bool operator==( const RouteItem &other ) const;
+    RouteItem &operator=(const RouteItem &other);
+    bool operator==(const RouteItem &other) const;
 
     QString identifier() const;
-    void setIdentifier( const QString &identifier );
+    void setIdentifier(const QString &identifier);
 
     QString name() const;
-    void setName( const QString &name );
+    void setName(const QString &name);
 
     QIcon preview() const;
-    void setPreview(const QIcon &preview );
+    void setPreview(const QIcon &preview);
 
     QUrl previewUrl() const;
-    void setPreviewUrl( const QUrl &previewUrl );
+    void setPreviewUrl(const QUrl &previewUrl);
 
     QString distance() const;
-    void setDistance( const QString &distance );
+    void setDistance(const QString &distance);
 
     QString duration() const;
-    void setDuration( const QString &duration );
+    void setDuration(const QString &duration);
 
     bool onCloud() const;
-    void setOnCloud( const bool onCloud );
+    void setOnCloud(const bool onCloud);
 
 private:
     class Private;

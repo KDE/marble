@@ -5,28 +5,29 @@
 
 #include "GeoDataDocumentWriter.h"
 
-#include "GeoWriterBackend.h"
-#include "GeoWriter.h"
-#include "GeoTagWriter.h"
 #include "GeoDataDocument.h"
+#include "GeoTagWriter.h"
+#include "GeoWriter.h"
+#include "GeoWriterBackend.h"
 #include "KmlElementDictionary.h"
 
-#include <QFileInfo>
 #include <MarbleDebug.h>
+#include <QFileInfo>
 
-namespace Marble {
+namespace Marble
+{
 
-QSet<QPair<QString, GeoWriterBackend*> > GeoDataDocumentWriter::s_backends;
+QSet<QPair<QString, GeoWriterBackend *>> GeoDataDocumentWriter::s_backends;
 
 bool GeoDataDocumentWriter::write(QIODevice *device, const GeoDataDocument &document, const QString &documentIdentifier)
 {
-    const GeoTagWriter* tagWriter = GeoTagWriter::recognizes(GeoTagWriter::QualifiedName(QString(), documentIdentifier));
+    const GeoTagWriter *tagWriter = GeoTagWriter::recognizes(GeoTagWriter::QualifiedName(QString(), documentIdentifier));
     if (tagWriter) {
         GeoWriter writer;
         writer.setDocumentType(documentIdentifier);
         return writer.write(device, &document);
     } else {
-        for(const auto &backend: s_backends) {
+        for (const auto &backend : s_backends) {
             if (backend.first == documentIdentifier) {
                 backend.second->write(device, document);
                 return true;
@@ -52,12 +53,12 @@ bool GeoDataDocumentWriter::write(const QString &filename, const GeoDataDocument
 
 void GeoDataDocumentWriter::registerWriter(GeoWriterBackend *writer, const QString &fileExtension)
 {
-    s_backends << QPair<QString, GeoWriterBackend*>(fileExtension, writer);
+    s_backends << QPair<QString, GeoWriterBackend *>(fileExtension, writer);
 }
 
 void GeoDataDocumentWriter::unregisterWriter(GeoWriterBackend *writer, const QString &fileExtension)
 {
-    auto pair = QPair<QString, GeoWriterBackend*>(fileExtension, writer);
+    auto pair = QPair<QString, GeoWriterBackend *>(fileExtension, writer);
     s_backends.remove(pair);
     delete writer;
 }
@@ -72,7 +73,7 @@ QString GeoDataDocumentWriter::determineDocumentIdentifier(const QString &filena
         return "0.6";
     }
 
-    for(const auto &backend: s_backends) {
+    for (const auto &backend : s_backends) {
         if (backend.first == fileExtension) {
             return backend.first;
         }

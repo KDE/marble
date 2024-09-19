@@ -8,32 +8,32 @@
 namespace Marble
 {
 
-Route::Route() :
-    m_distance( 0.0 ),
-    m_travelTime( 0 ),
-    m_positionDirty( true ),
-    m_closestSegmentIndex( -1 )
+Route::Route()
+    : m_distance(0.0)
+    , m_travelTime(0)
+    , m_positionDirty(true)
+    , m_closestSegmentIndex(-1)
 {
     // nothing to do
 }
 
-void Route::addRouteSegment( const RouteSegment &segment )
+void Route::addRouteSegment(const RouteSegment &segment)
 {
-    if ( segment.isValid() ) {
-        m_bounds = m_bounds.united( segment.bounds() );
+    if (segment.isValid()) {
+        m_bounds = m_bounds.united(segment.bounds());
         m_distance += segment.distance();
         m_path << segment.path();
-        if ( segment.maneuver().position().isValid() ) {
+        if (segment.maneuver().position().isValid()) {
             m_turnPoints << segment.maneuver().position();
         }
-        if ( segment.maneuver().hasWaypoint() ) {
+        if (segment.maneuver().hasWaypoint()) {
             m_waypoints << segment.maneuver().waypoint();
         }
-        m_segments.push_back( segment );
+        m_segments.push_back(segment);
         m_positionDirty = true;
 
-        for ( int i=1; i<m_segments.size(); ++i ) {
-            m_segments[i-1].setNextRouteSegment(&m_segments[i]);
+        for (int i = 1; i < m_segments.size(); ++i) {
+            m_segments[i - 1].setNextRouteSegment(&m_segments[i]);
         }
     }
 }
@@ -53,7 +53,7 @@ int Route::size() const
     return m_segments.size();
 }
 
-const RouteSegment & Route::at( int index ) const
+const RouteSegment &Route::at(int index) const
 {
     return m_segments[index];
 }
@@ -63,7 +63,7 @@ int Route::indexOf(const RouteSegment &segment) const
     return m_segments.indexOf(segment);
 }
 
-const GeoDataLineString & Route::path() const
+const GeoDataLineString &Route::path() const
 {
     return m_path;
 }
@@ -73,17 +73,17 @@ int Route::travelTime() const
     return m_travelTime;
 }
 
-const GeoDataLineString & Route::turnPoints() const
+const GeoDataLineString &Route::turnPoints() const
 {
     return m_turnPoints;
 }
 
-const GeoDataLineString & Route::waypoints() const
+const GeoDataLineString &Route::waypoints() const
 {
     return m_waypoints;
 }
 
-void Route::setPosition( const GeoDataCoordinates &position )
+void Route::setPosition(const GeoDataCoordinates &position)
 {
     m_position = position;
     m_positionDirty = true;
@@ -96,24 +96,24 @@ GeoDataCoordinates Route::position() const
 
 void Route::updatePosition() const
 {
-    if ( !m_segments.isEmpty() ) {
-        if ( m_closestSegmentIndex < 0 || m_closestSegmentIndex >= m_segments.size() ) {
+    if (!m_segments.isEmpty()) {
+        if (m_closestSegmentIndex < 0 || m_closestSegmentIndex >= m_segments.size()) {
             m_closestSegmentIndex = 0;
         }
 
-        qreal distance = m_segments[m_closestSegmentIndex].distanceTo( m_position, m_currentWaypoint, m_positionOnRoute );
+        qreal distance = m_segments[m_closestSegmentIndex].distanceTo(m_position, m_currentWaypoint, m_positionOnRoute);
         QList<int> candidates;
 
-        for ( int i=0; i<m_segments.size(); ++i ) {
-            if ( i != m_closestSegmentIndex && m_segments[i].minimalDistanceTo( m_position ) <= distance ) {
+        for (int i = 0; i < m_segments.size(); ++i) {
+            if (i != m_closestSegmentIndex && m_segments[i].minimalDistanceTo(m_position) <= distance) {
                 candidates << i;
             }
         }
 
         GeoDataCoordinates closest, interpolated;
-        for( int i: candidates ) {
-            qreal const dist = m_segments[i].distanceTo( m_position, closest, interpolated );
-            if ( distance < 0.0 || dist < distance ) {
+        for (int i : candidates) {
+            qreal const dist = m_segments[i].distanceTo(m_position, closest, interpolated);
+            if (distance < 0.0 || dist < distance) {
                 distance = dist;
                 m_closestSegmentIndex = i;
                 m_positionOnRoute = interpolated;
@@ -125,13 +125,13 @@ void Route::updatePosition() const
     m_positionDirty = false;
 }
 
-const RouteSegment & Route::currentSegment() const
+const RouteSegment &Route::currentSegment() const
 {
-    if ( m_positionDirty ) {
+    if (m_positionDirty) {
         updatePosition();
     }
 
-    if ( m_closestSegmentIndex < 0 || m_closestSegmentIndex >= m_segments.size() ) {
+    if (m_closestSegmentIndex < 0 || m_closestSegmentIndex >= m_segments.size()) {
         static RouteSegment invalid;
         return invalid;
     }
@@ -141,7 +141,7 @@ const RouteSegment & Route::currentSegment() const
 
 GeoDataCoordinates Route::positionOnRoute() const
 {
-    if ( m_positionDirty ) {
+    if (m_positionDirty) {
         updatePosition();
     }
 
@@ -150,7 +150,7 @@ GeoDataCoordinates Route::positionOnRoute() const
 
 GeoDataCoordinates Route::currentWaypoint() const
 {
-    if ( m_positionDirty ) {
+    if (m_positionDirty) {
         updatePosition();
     }
 

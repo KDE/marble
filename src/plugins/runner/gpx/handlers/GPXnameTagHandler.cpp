@@ -8,9 +8,9 @@
 #include "MarbleDebug.h"
 
 #include "GPXElementDictionary.h"
-#include "GeoParser.h"
 #include "GeoDataPlacemark.h"
 #include "GeoDataPoint.h"
+#include "GeoParser.h"
 
 namespace Marble
 {
@@ -18,22 +18,17 @@ namespace gpx
 {
 GPX_DEFINE_TAG_HANDLER(name)
 
-GeoNode* GPXnameTagHandler::parse(GeoParser& parser) const
+GeoNode *GPXnameTagHandler::parse(GeoParser &parser) const
 {
     Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1String(gpxTag_name)));
 
     GeoStackItem parentItem = parser.parentElement();
-    if (parentItem.represents(gpxTag_wpt)
-        || parentItem.represents(gpxTag_trk)
-        || parentItem.represents(gpxTag_rtept))
-    {
-        GeoDataPlacemark* placemark = parentItem.nodeAs<GeoDataPlacemark>();
+    if (parentItem.represents(gpxTag_wpt) || parentItem.represents(gpxTag_trk) || parentItem.represents(gpxTag_rtept)) {
+        GeoDataPlacemark *placemark = parentItem.nodeAs<GeoDataPlacemark>();
 
         placemark->setName(parser.readElementText().trimmed());
-    }
-    else if (parentItem.represents(gpxTag_rte))
-    {
-        GeoDataFeature* route = parentItem.nodeAs<GeoDataFeature>();
+    } else if (parentItem.represents(gpxTag_rte)) {
+        GeoDataFeature *route = parentItem.nodeAs<GeoDataFeature>();
         route->setName(parser.readElementText().trimmed());
     }
     return nullptr;

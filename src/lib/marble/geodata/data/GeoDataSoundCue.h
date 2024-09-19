@@ -21,8 +21,8 @@ public:
     GeoDataSoundCue();
     ~GeoDataSoundCue() override;
 
-    bool operator==( const GeoDataSoundCue &other ) const;
-    bool operator!=( const GeoDataSoundCue &other ) const;
+    bool operator==(const GeoDataSoundCue &other) const;
+    bool operator!=(const GeoDataSoundCue &other) const;
     const char *nodeType() const override;
 
     QString href() const;

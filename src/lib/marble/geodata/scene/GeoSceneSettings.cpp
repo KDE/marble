@@ -8,8 +8,8 @@
 
 #include "MarbleDebug.h"
 
-#include "GeoSceneProperty.h"
 #include "GeoSceneGroup.h"
+#include "GeoSceneProperty.h"
 #include "GeoSceneTypes.h"
 
 namespace Marble
@@ -17,7 +17,7 @@ namespace Marble
 
 class GeoSceneSettingsPrivate
 {
-  public:
+public:
     ~GeoSceneSettingsPrivate()
     {
         qDeleteAll(m_properties);
@@ -25,13 +25,12 @@ class GeoSceneSettingsPrivate
     }
 
     /// The hash table holding all the properties in the settings.
-    QVector<GeoSceneProperty*> m_properties;
-    QVector<GeoSceneGroup*> m_groups;
+    QVector<GeoSceneProperty *> m_properties;
+    QVector<GeoSceneGroup *> m_groups;
 };
 
-
 GeoSceneSettings::GeoSceneSettings()
-    : d( new GeoSceneSettingsPrivate )
+    : d(new GeoSceneSettingsPrivate)
 {
 }
 
@@ -40,27 +39,27 @@ GeoSceneSettings::~GeoSceneSettings()
     delete d;
 }
 
-const char* GeoSceneSettings::nodeType() const
+const char *GeoSceneSettings::nodeType() const
 {
     return GeoSceneTypes::GeoSceneSettingsType;
 }
 
-bool GeoSceneSettings::propertyAvailable( const QString& name, bool& available ) const
+bool GeoSceneSettings::propertyAvailable(const QString &name, bool &available) const
 {
-    QVector<GeoSceneProperty*>::const_iterator it = d->m_properties.constBegin();
-    QVector<GeoSceneProperty*>::const_iterator propEnd = d->m_properties.constEnd();
+    QVector<GeoSceneProperty *>::const_iterator it = d->m_properties.constBegin();
+    QVector<GeoSceneProperty *>::const_iterator propEnd = d->m_properties.constEnd();
     for (; it != propEnd; ++it) {
-        if ( (*it)->name() == name ) {
+        if ((*it)->name() == name) {
             available = (*it)->available();
             return true;
         }
     }
 
-    QVector<GeoSceneGroup*>::const_iterator itGroup = d->m_groups.constBegin();
-    QVector<GeoSceneGroup*>::const_iterator groupEnd = d->m_groups.constEnd();
+    QVector<GeoSceneGroup *>::const_iterator itGroup = d->m_groups.constBegin();
+    QVector<GeoSceneGroup *>::const_iterator groupEnd = d->m_groups.constEnd();
     for (; itGroup != groupEnd; ++itGroup) {
-        bool success = (*itGroup)->propertyAvailable( name, available );
-        if ( success ) {
+        bool success = (*itGroup)->propertyAvailable(name, available);
+        if (success) {
             return true;
         }
     }
@@ -70,24 +69,24 @@ bool GeoSceneSettings::propertyAvailable( const QString& name, bool& available )
     return false;
 }
 
-bool GeoSceneSettings::setPropertyValue( const QString& name, bool value )
+bool GeoSceneSettings::setPropertyValue(const QString &name, bool value)
 {
     mDebug() << name << "to" << value;
-    
-    QVector<GeoSceneProperty*>::const_iterator it = d->m_properties.constBegin();
-    QVector<GeoSceneProperty*>::const_iterator propEnd = d->m_properties.constEnd();
+
+    QVector<GeoSceneProperty *>::const_iterator it = d->m_properties.constBegin();
+    QVector<GeoSceneProperty *>::const_iterator propEnd = d->m_properties.constEnd();
     for (; it != propEnd; ++it) {
-        if ( (*it)->name() == name ) {
-            (*it)->setValue( value );
+        if ((*it)->name() == name) {
+            (*it)->setValue(value);
             return true;
         }
     }
 
-    QVector<GeoSceneGroup*>::const_iterator itGroup = d->m_groups.constBegin();
-    QVector<GeoSceneGroup*>::const_iterator groupEnd = d->m_groups.constEnd();
+    QVector<GeoSceneGroup *>::const_iterator itGroup = d->m_groups.constBegin();
+    QVector<GeoSceneGroup *>::const_iterator groupEnd = d->m_groups.constEnd();
     for (; itGroup != groupEnd; ++itGroup) {
-        bool success = (*itGroup)->setPropertyValue( name, value );
-        if ( success ) {
+        bool success = (*itGroup)->setPropertyValue(name, value);
+        if (success) {
             return true;
         }
     }
@@ -95,22 +94,22 @@ bool GeoSceneSettings::setPropertyValue( const QString& name, bool value )
     return false;
 }
 
-bool GeoSceneSettings::propertyValue( const QString& name, bool& value ) const
+bool GeoSceneSettings::propertyValue(const QString &name, bool &value) const
 {
-    QVector<GeoSceneProperty*>::const_iterator it = d->m_properties.constBegin();
-    QVector<GeoSceneProperty*>::const_iterator propEnd = d->m_properties.constEnd();
+    QVector<GeoSceneProperty *>::const_iterator it = d->m_properties.constBegin();
+    QVector<GeoSceneProperty *>::const_iterator propEnd = d->m_properties.constEnd();
     for (; it != propEnd; ++it) {
-        if ( (*it)->name() == name ) {
+        if ((*it)->name() == name) {
             value = (*it)->value();
             return true;
         }
     }
 
-    QVector<GeoSceneGroup*>::const_iterator itGroup = d->m_groups.constBegin();
-    QVector<GeoSceneGroup*>::const_iterator groupEnd = d->m_groups.constEnd();
+    QVector<GeoSceneGroup *>::const_iterator itGroup = d->m_groups.constBegin();
+    QVector<GeoSceneGroup *>::const_iterator groupEnd = d->m_groups.constEnd();
     for (; itGroup != groupEnd; ++itGroup) {
-        bool success = (*itGroup)->propertyValue( name, value );
-        if ( success ) {
+        bool success = (*itGroup)->propertyValue(name, value);
+        if (success) {
             return true;
         }
     }
@@ -120,12 +119,12 @@ bool GeoSceneSettings::propertyValue( const QString& name, bool& value ) const
     return false;
 }
 
-QVector<GeoSceneProperty*> GeoSceneSettings::allProperties()
+QVector<GeoSceneProperty *> GeoSceneSettings::allProperties()
 {
-    QVector<GeoSceneProperty*> allProperties;
+    QVector<GeoSceneProperty *> allProperties;
 
-    QVector<GeoSceneGroup*>::const_iterator itGroup = d->m_groups.constBegin();
-    QVector<GeoSceneGroup*>::const_iterator groupEnd = d->m_groups.constEnd();
+    QVector<GeoSceneGroup *>::const_iterator itGroup = d->m_groups.constBegin();
+    QVector<GeoSceneGroup *>::const_iterator groupEnd = d->m_groups.constEnd();
     for (; itGroup != groupEnd; ++itGroup) {
         allProperties << (*itGroup)->properties();
     }
@@ -135,57 +134,55 @@ QVector<GeoSceneProperty*> GeoSceneSettings::allProperties()
     return allProperties;
 }
 
-QVector<const GeoSceneProperty*> GeoSceneSettings::allProperties() const
+QVector<const GeoSceneProperty *> GeoSceneSettings::allProperties() const
 {
-    QVector<const GeoSceneProperty*> allProperties;
+    QVector<const GeoSceneProperty *> allProperties;
 
-    QVector<GeoSceneGroup*>::const_iterator itGroup = d->m_groups.constBegin();
-    QVector<GeoSceneGroup*>::const_iterator groupEnd = d->m_groups.constEnd();
+    QVector<GeoSceneGroup *>::const_iterator itGroup = d->m_groups.constBegin();
+    QVector<GeoSceneGroup *>::const_iterator groupEnd = d->m_groups.constEnd();
     for (; itGroup != groupEnd; ++itGroup) {
-        allProperties << const_cast<const GeoSceneGroup*>(*itGroup)->properties();
+        allProperties << const_cast<const GeoSceneGroup *>(*itGroup)->properties();
     }
 
     allProperties.reserve(allProperties.size() + d->m_properties.size());
-    for ( const GeoSceneProperty *property: d->m_properties ) {
+    for (const GeoSceneProperty *property : d->m_properties) {
         allProperties << property;
     }
 
     return allProperties;
 }
 
-void GeoSceneSettings::addGroup( GeoSceneGroup* group )
+void GeoSceneSettings::addGroup(GeoSceneGroup *group)
 {
     // Remove any property that has the same name
-    QVector<GeoSceneGroup*>::iterator it = d->m_groups.begin();
+    QVector<GeoSceneGroup *>::iterator it = d->m_groups.begin();
     while (it != d->m_groups.end()) {
-        GeoSceneGroup* currentGroup = *it;
-        if ( currentGroup->name() == group->name() ) {
+        GeoSceneGroup *currentGroup = *it;
+        if (currentGroup->name() == group->name()) {
             delete currentGroup;
             d->m_groups.erase(it);
             break;
-        }
-        else {
+        } else {
             ++it;
         }
-     }
+    }
 
-    if ( group ) {
-        d->m_groups.append( group );
+    if (group) {
+        d->m_groups.append(group);
 
         // Establish connection to the outside, e.g. the LegendBrowser
-        connect ( group, SIGNAL(valueChanged(QString,bool)), 
-                         SIGNAL(valueChanged(QString,bool)) );
+        connect(group, SIGNAL(valueChanged(QString, bool)), SIGNAL(valueChanged(QString, bool)));
     }
 }
 
-const GeoSceneGroup* GeoSceneSettings::group( const QString& name ) const
+const GeoSceneGroup *GeoSceneSettings::group(const QString &name) const
 {
-    GeoSceneGroup* group = nullptr;
+    GeoSceneGroup *group = nullptr;
 
-    QVector<GeoSceneGroup*>::const_iterator it = d->m_groups.constBegin();
-    QVector<GeoSceneGroup*>::const_iterator groupEnd = d->m_groups.constEnd();
+    QVector<GeoSceneGroup *>::const_iterator it = d->m_groups.constBegin();
+    QVector<GeoSceneGroup *>::const_iterator groupEnd = d->m_groups.constEnd();
     for (; it != groupEnd; ++it) {
-        if ( (*it)->name() == name ) {
+        if ((*it)->name() == name) {
             group = *it;
             break;
         }
@@ -196,45 +193,43 @@ const GeoSceneGroup* GeoSceneSettings::group( const QString& name ) const
 
 // implement non-const method by means of const method,
 // for details, see "Effective C++" (third edition)
-GeoSceneGroup* GeoSceneSettings::group( const QString& name )
+GeoSceneGroup *GeoSceneSettings::group(const QString &name)
 {
-    return const_cast<GeoSceneGroup*>( static_cast<GeoSceneSettings const *>( this )->group( name ));
+    return const_cast<GeoSceneGroup *>(static_cast<GeoSceneSettings const *>(this)->group(name));
 }
 
-void GeoSceneSettings::addProperty( GeoSceneProperty* property )
+void GeoSceneSettings::addProperty(GeoSceneProperty *property)
 {
     // Remove any property that has the same name
-    QVector<GeoSceneProperty*>::iterator it = d->m_properties.begin();
+    QVector<GeoSceneProperty *>::iterator it = d->m_properties.begin();
     while (it != d->m_properties.end()) {
-        GeoSceneProperty* currentProperty = *it;
-        if ( currentProperty->name() == property->name() ) {
+        GeoSceneProperty *currentProperty = *it;
+        if (currentProperty->name() == property->name()) {
             delete currentProperty;
             d->m_properties.erase(it);
             break;
-        }
-        else {
+        } else {
             ++it;
         }
-     }
+    }
 
-    if ( property ) {
-        d->m_properties.append( property );
+    if (property) {
+        d->m_properties.append(property);
 
         // Establish connection to the outside, e.g. the LegendBrowser
-        connect ( property, SIGNAL(valueChanged(QString,bool)), 
-                            SIGNAL(valueChanged(QString,bool)) );
-        emit valueChanged( property->name(), property->value() );
+        connect(property, SIGNAL(valueChanged(QString, bool)), SIGNAL(valueChanged(QString, bool)));
+        emit valueChanged(property->name(), property->value());
     }
 }
 
-const GeoSceneProperty* GeoSceneSettings::property( const QString& name ) const
+const GeoSceneProperty *GeoSceneSettings::property(const QString &name) const
 {
-    GeoSceneProperty* property = nullptr;
+    GeoSceneProperty *property = nullptr;
 
-    QVector<GeoSceneProperty*>::const_iterator it = d->m_properties.constBegin();
-    QVector<GeoSceneProperty*>::const_iterator propEnd = d->m_properties.constEnd();
+    QVector<GeoSceneProperty *>::const_iterator it = d->m_properties.constBegin();
+    QVector<GeoSceneProperty *>::const_iterator propEnd = d->m_properties.constEnd();
     for (; it != propEnd; ++it) {
-        if ( (*it)->name() == name ) {
+        if ((*it)->name() == name) {
             property = *it;
             break;
         }
@@ -245,13 +240,12 @@ const GeoSceneProperty* GeoSceneSettings::property( const QString& name ) const
 
 // implement non-const method by means of const method,
 // for details, see "Effective C++" (third edition)
-GeoSceneProperty* GeoSceneSettings::property( const QString& name )
+GeoSceneProperty *GeoSceneSettings::property(const QString &name)
 {
-    return const_cast<GeoSceneProperty*>
-        ( static_cast<GeoSceneSettings const *>( this )->property( name ));
+    return const_cast<GeoSceneProperty *>(static_cast<GeoSceneSettings const *>(this)->property(name));
 }
 
-QVector<GeoSceneProperty*> GeoSceneSettings::rootProperties()
+QVector<GeoSceneProperty *> GeoSceneSettings::rootProperties()
 {
     return d->m_properties;
 }

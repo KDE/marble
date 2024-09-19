@@ -12,7 +12,6 @@
 
 #include "GeoGraphicsItem.h"
 
-
 namespace Marble
 {
 
@@ -27,7 +26,7 @@ class GeoDataCoordinates;
 class SceneGraphicsItem : public GeoGraphicsItem
 {
 public:
-    explicit SceneGraphicsItem( GeoDataPlacemark *placemark );
+    explicit SceneGraphicsItem(GeoDataPlacemark *placemark);
     ~SceneGraphicsItem() override;
 
     enum ActionState {
@@ -93,14 +92,14 @@ public:
      * @brief Pure virtual method which is implemented by concrete scene graphic items
      * and returns true if the item contains the @p eventPos.
      */
-    virtual bool containsPoint( const QPoint &eventPos ) const = 0;
+    virtual bool containsPoint(const QPoint &eventPos) const = 0;
 
     /**
      * @brief Pure virtual method which is implemented by concrete scene graphic items
      * and deals with changes that occur when this item is no longer the item we interact
      * with (by means of mouse events - so far).
      */
-    virtual void dealWithItemChange( const SceneGraphicsItem *other ) = 0;
+    virtual void dealWithItemChange(const SceneGraphicsItem *other) = 0;
 
     /**
      * @brief Pure virtual method which is implemented by concrete scene graphic items
@@ -109,7 +108,7 @@ public:
      * FIXME: Maybe move this to the model classes since the classes derived from this
      * abstract class should only deal with painting and event handling.
      */
-    virtual void move( const GeoDataCoordinates &source, const GeoDataCoordinates &destination ) = 0;
+    virtual void move(const GeoDataCoordinates &source, const GeoDataCoordinates &destination) = 0;
 
     /**
      * @brief Returns the current state.
@@ -120,7 +119,7 @@ public:
      * @brief Sets the ActionState of this item. This also calls dealWithStateChange() with
      * a parameter: the previous state.
      */
-    void setState( ActionState state );
+    void setState(ActionState state);
 
     /**
      * @brief Returns whether this item has the focus or not.
@@ -132,7 +131,7 @@ public:
      *
      * @param enabled whether the item is to be focused
      */
-    void setFocus( bool enabled );
+    void setFocus(bool enabled);
 
     /**
      * @brief Returns the widget request.
@@ -153,7 +152,7 @@ public:
      * @brief This function is used to call the event distributer and makes use of
      * the re-implemented virtual functions which handle the mouse events.
      */
-    bool sceneEvent( QEvent *event );
+    bool sceneEvent(QEvent *event);
 
     /**
      * @brief It is used for downcasting a SceneGraphicItem. It returns a const char
@@ -167,22 +166,22 @@ protected:
      * @brief Pure virtual functions which handle the mouse events, all of which are
      * re-implemented in every SceneGraphicItem derived classes.
      */
-    virtual bool mousePressEvent( QMouseEvent *event ) = 0;
-    virtual bool mouseMoveEvent( QMouseEvent *event ) = 0;
-    virtual bool mouseReleaseEvent( QMouseEvent *event ) = 0;
+    virtual bool mousePressEvent(QMouseEvent *event) = 0;
+    virtual bool mouseMoveEvent(QMouseEvent *event) = 0;
+    virtual bool mouseReleaseEvent(QMouseEvent *event) = 0;
 
-    virtual void dealWithStateChange( SceneGraphicsItem::ActionState previousState ) = 0;
+    virtual void dealWithStateChange(SceneGraphicsItem::ActionState previousState) = 0;
 
     /**
      * @brief Sets the widget request.
      */
-    void setRequest( MarbleWidgetRequest request );
+    void setRequest(MarbleWidgetRequest request);
 
 private:
-    ActionState         m_state;
-    bool                m_hasFocus;
+    ActionState m_state;
+    bool m_hasFocus;
     MarbleWidgetRequest m_request;
-    GeoDataPlacemark   *m_placemark;
+    GeoDataPlacemark *m_placemark;
 };
 
 }

@@ -6,51 +6,50 @@
 
 #include "CycleStreetsRunner.h"
 
-#include "MarbleDebug.h"
+#include "GeoDataData.h"
 #include "GeoDataDocument.h"
 #include "GeoDataExtendedData.h"
-#include "GeoDataData.h"
-#include "GeoDataPlacemark.h"
 #include "GeoDataLineString.h"
+#include "GeoDataPlacemark.h"
 #include "HttpDownloadManager.h"
+#include "MarbleDebug.h"
 #include "routing/Maneuver.h"
 #include "routing/RouteRequest.h"
 
-#include <QUrl>
-#include <QTimer>
+#include <QJsonArray>
 #include <QJsonDocument>
 #include <QJsonObject>
-#include <QJsonArray>
+#include <QTimer>
+#include <QUrl>
 
 #include <QUrlQuery>
 
 namespace Marble
 {
 
-CycleStreetsRunner::CycleStreetsRunner( QObject *parent ) :
-    RoutingRunner( parent ),
-    m_networkAccessManager(),
-    m_request()
+CycleStreetsRunner::CycleStreetsRunner(QObject *parent)
+    : RoutingRunner(parent)
+    , m_networkAccessManager()
+    , m_request()
 {
-    connect( &m_networkAccessManager, SIGNAL(finished(QNetworkReply*)),
-             this, SLOT(retrieveData(QNetworkReply*)) );
+    connect(&m_networkAccessManager, SIGNAL(finished(QNetworkReply *)), this, SLOT(retrieveData(QNetworkReply *)));
 
-    turns.insert( "", Maneuver::Continue );
-    turns.insert( "straight on", Maneuver::Straight );
-    turns.insert( "bear right", Maneuver::SlightRight );
-    turns.insert( "bear left", Maneuver::SlightLeft );
-    turns.insert( "sharp right", Maneuver::SharpRight );
-    turns.insert( "sharp left", Maneuver::SharpLeft );
-    turns.insert( "turn right", Maneuver::Right );
-    turns.insert( "turn left", Maneuver::Left );
-    turns.insert( "double-back", Maneuver::TurnAround);
-    turns.insert( "first exit", Maneuver::RoundaboutFirstExit );
-    turns.insert( "second exit", Maneuver::RoundaboutSecondExit );
-    turns.insert( "third exit", Maneuver::RoundaboutThirdExit );
-    turns.insert( "fourth exit", Maneuver::RoundaboutExit );
-    turns.insert( "fifth exit", Maneuver::RoundaboutExit );
-    turns.insert( "sixth exit", Maneuver::RoundaboutExit );
-    turns.insert( "seventh or more exit", Maneuver::RoundaboutExit );
+    turns.insert("", Maneuver::Continue);
+    turns.insert("straight on", Maneuver::Straight);
+    turns.insert("bear right", Maneuver::SlightRight);
+    turns.insert("bear left", Maneuver::SlightLeft);
+    turns.insert("sharp right", Maneuver::SharpRight);
+    turns.insert("sharp left", Maneuver::SharpLeft);
+    turns.insert("turn right", Maneuver::Right);
+    turns.insert("turn left", Maneuver::Left);
+    turns.insert("double-back", Maneuver::TurnAround);
+    turns.insert("first exit", Maneuver::RoundaboutFirstExit);
+    turns.insert("second exit", Maneuver::RoundaboutSecondExit);
+    turns.insert("third exit", Maneuver::RoundaboutThirdExit);
+    turns.insert("fourth exit", Maneuver::RoundaboutExit);
+    turns.insert("fifth exit", Maneuver::RoundaboutExit);
+    turns.insert("sixth exit", Maneuver::RoundaboutExit);
+    turns.insert("seventh or more exit", Maneuver::RoundaboutExit);
 }
 
 CycleStreetsRunner::~CycleStreetsRunner()
@@ -58,9 +57,9 @@ CycleStreetsRunner::~CycleStreetsRunner()
     // nothing to do
 }
 
-void CycleStreetsRunner::retrieveRoute( const RouteRequest *route )
+void CycleStreetsRunner::retrieveRoute(const RouteRequest *route)
 {
-    if ( route->size() < 2 || route->size() > 12 ) {
+    if (route->size() < 2 || route->size() > 12) {
         return;
     }
 
@@ -82,34 +81,34 @@ void CycleStreetsRunner::retrieveRoute( const RouteRequest *route )
     }
     GeoDataCoordinates::Unit const degree = GeoDataCoordinates::Degree;
     QString itinerarypoints;
-    itinerarypoints.append(QString::number(route->source().longitude(degree), 'f', 6) + QLatin1Char(',') + QString::number(route->source().latitude(degree), 'f', 6));
-    for ( int i=1; i<route->size(); ++i ) {
-        itinerarypoints.append(QLatin1Char('|') +  QString::number(route->at(i).longitude(degree), 'f', 6) + QLatin1Char(',') + QString::number(route->at(i).latitude(degree), 'f', 6));
+    itinerarypoints.append(QString::number(route->source().longitude(degree), 'f', 6) + QLatin1Char(',')
+                           + QString::number(route->source().latitude(degree), 'f', 6));
+    for (int i = 1; i < route->size(); ++i) {
+        itinerarypoints.append(QLatin1Char('|') + QString::number(route->at(i).longitude(degree), 'f', 6) + QLatin1Char(',')
+                               + QString::number(route->at(i).latitude(degree), 'f', 6));
     }
     queryStrings["itinerarypoints"] = itinerarypoints;
 
-	QUrlQuery urlQuery;
-    for( const QString& key: queryStrings.keys()){
-		urlQuery.addQueryItem(key, queryStrings.value(key));
-	}
-	url.setQuery( urlQuery);
+    QUrlQuery urlQuery;
+    for (const QString &key : queryStrings.keys()) {
+        urlQuery.addQueryItem(key, queryStrings.value(key));
+    }
+    url.setQuery(urlQuery);
 
-    m_request.setUrl( url );
-    m_request.setRawHeader( "User-Agent", HttpDownloadManager::userAgent( "Browser", "CycleStreetsRunner" ) );
+    m_request.setUrl(url);
+    m_request.setRawHeader("User-Agent", HttpDownloadManager::userAgent("Browser", "CycleStreetsRunner"));
 
     QEventLoop eventLoop;
 
     QTimer timer;
-    timer.setSingleShot( true );
-    timer.setInterval( 15000 );
+    timer.setSingleShot(true);
+    timer.setInterval(15000);
 
-    connect( &timer, SIGNAL(timeout()),
-             &eventLoop, SLOT(quit()));
-    connect( this, SIGNAL(routeCalculated(GeoDataDocument*)),
-             &eventLoop, SLOT(quit()) );
+    connect(&timer, SIGNAL(timeout()), &eventLoop, SLOT(quit()));
+    connect(this, SIGNAL(routeCalculated(GeoDataDocument *)), &eventLoop, SLOT(quit()));
 
     // @todo FIXME Must currently be done in the main thread, see bug 257376
-    QTimer::singleShot( 0, this, SLOT(get()) );
+    QTimer::singleShot(0, this, SLOT(get()));
     timer.start();
 
     eventLoop.exec();
@@ -117,47 +116,46 @@ void CycleStreetsRunner::retrieveRoute( const RouteRequest *route )
 
 void CycleStreetsRunner::get()
 {
-    QNetworkReply *reply = m_networkAccessManager.get( m_request );
-    connect( reply, SIGNAL(error(QNetworkReply::NetworkError)),
-             this, SLOT(handleError(QNetworkReply::NetworkError)), Qt::DirectConnection );
+    QNetworkReply *reply = m_networkAccessManager.get(m_request);
+    connect(reply, SIGNAL(error(QNetworkReply::NetworkError)), this, SLOT(handleError(QNetworkReply::NetworkError)), Qt::DirectConnection);
 }
 
-void CycleStreetsRunner::retrieveData( QNetworkReply *reply )
+void CycleStreetsRunner::retrieveData(QNetworkReply *reply)
 {
-    if ( reply->isFinished() ) {
+    if (reply->isFinished()) {
         QByteArray data = reply->readAll();
         reply->deleteLater();
-        //mDebug() << "Download completed: " << data;
-        GeoDataDocument *document = parse( data );
+        // mDebug() << "Download completed: " << data;
+        GeoDataDocument *document = parse(data);
 
-        if ( !document ) {
+        if (!document) {
             mDebug() << "Failed to parse the downloaded route data" << data;
         }
 
-        emit routeCalculated( document );
+        emit routeCalculated(document);
     }
 }
 
-int CycleStreetsRunner::maneuverType(QString& cycleStreetsName) const
+int CycleStreetsRunner::maneuverType(QString &cycleStreetsName) const
 {
-    if ( turns.contains( cycleStreetsName ) ) {
+    if (turns.contains(cycleStreetsName)) {
         return turns[cycleStreetsName];
     }
     return Maneuver::Unknown;
 }
 
-GeoDataDocument *CycleStreetsRunner::parse( const QByteArray &content ) const
+GeoDataDocument *CycleStreetsRunner::parse(const QByteArray &content) const
 {
     QJsonParseError error;
     QJsonDocument json = QJsonDocument::fromJson(content, &error);
 
-    if ( json.isEmpty() ) {
+    if (json.isEmpty()) {
         mDebug() << "Cannot parse json file with routing instructions: " << error.errorString();
         return nullptr;
     }
 
     // Check if CycleStreets has found any error
-    if ( !json.object()["error"].isNull() ) {
+    if (!json.object()["error"].isNull()) {
         mDebug() << "CycleStreets reported an error: " << json.object()["error"].toString();
         return nullptr;
     }
@@ -170,8 +168,8 @@ GeoDataDocument *CycleStreetsRunner::parse( const QByteArray &content ) const
     GeoDataLineString *routeWaypoints = new GeoDataLineString;
     QJsonArray features = json.object()["marker"].toArray();
 
-    if ( features.isEmpty() ) {
-        return nullptr ;
+    if (features.isEmpty()) {
+        return nullptr;
     }
     QJsonObject route = features.first().toObject()["@attributes"].toObject();
     QJsonValue coordinates = route["coordinates"];
@@ -180,29 +178,29 @@ GeoDataDocument *CycleStreetsRunner::parse( const QByteArray &content ) const
     QStringList::iterator iter = coordinatesList.begin();
     QStringList::iterator end = coordinatesList.end();
 
-    for( ; iter != end; ++iter) {
-        const QStringList coordinate =  iter->split(QLatin1Char(','));
-        if ( coordinate.size() == 2 ) {
-            double const lon = coordinate.at( 0 ).toDouble();
-            double const lat = coordinate.at( 1 ).toDouble();
-            GeoDataCoordinates const position( lon, lat, 0.0, GeoDataCoordinates::Degree );
-            routeWaypoints->append( position );
+    for (; iter != end; ++iter) {
+        const QStringList coordinate = iter->split(QLatin1Char(','));
+        if (coordinate.size() == 2) {
+            double const lon = coordinate.at(0).toDouble();
+            double const lat = coordinate.at(1).toDouble();
+            GeoDataCoordinates const position(lon, lat, 0.0, GeoDataCoordinates::Degree);
+            routeWaypoints->append(position);
         }
     }
-    routePlacemark->setGeometry( routeWaypoints );
+    routePlacemark->setGeometry(routeWaypoints);
 
     QTime duration;
-    duration = duration.addSecs( route["time"].toInt() );
-    qreal length = routeWaypoints->length( EARTH_RADIUS );
+    duration = duration.addSecs(route["time"].toInt());
+    qreal length = routeWaypoints->length(EARTH_RADIUS);
 
-    const QString name = nameString( "CS", length, duration );
-    const GeoDataExtendedData data = routeData( length, duration );
-    routePlacemark->setExtendedData( data );
-    result->setName( name );
-    result->append( routePlacemark );
+    const QString name = nameString("CS", length, duration);
+    const GeoDataExtendedData data = routeData(length, duration);
+    routePlacemark->setExtendedData(data);
+    result->setName(name);
+    result->append(routePlacemark);
 
     for (int i = 1; i < features.count(); ++i) {
-        QJsonObject segment = features.at( i ).toObject()["@attributes"].toObject();
+        QJsonObject segment = features.at(i).toObject()["@attributes"].toObject();
 
         QString name = segment["name"].toString();
         QString maneuver = segment["turn"].toString();
@@ -211,42 +209,42 @@ GeoDataDocument *CycleStreetsRunner::parse( const QByteArray &content ) const
 
         GeoDataPlacemark *instructions = new GeoDataPlacemark;
         QString instructionName;
-        if ( !maneuver.isEmpty() ) {
-            instructionName = maneuver.left( 1 ).toUpper() + maneuver.mid( 1 );
+        if (!maneuver.isEmpty()) {
+            instructionName = maneuver.left(1).toUpper() + maneuver.mid(1);
         } else {
             instructionName = "Straight";
         }
         if (name != QLatin1String("Short un-named link") && name != QLatin1String("Un-named link")) {
             instructionName.append(QLatin1String(" into ") + name);
         }
-        instructions->setName( instructionName );
+        instructions->setName(instructionName);
 
         GeoDataExtendedData extendedData;
         GeoDataData turnType;
         turnType.setName(QStringLiteral("turnType"));
-        turnType.setValue( maneuverType( maneuver ) );
-        extendedData.addValue( turnType );
+        turnType.setValue(maneuverType(maneuver));
+        extendedData.addValue(turnType);
 
-        instructions->setExtendedData( extendedData );
+        instructions->setExtendedData(extendedData);
         GeoDataLineString *lineString = new GeoDataLineString;
         QStringList::iterator iter = points.begin();
         QStringList::iterator end = points.end();
-        for  ( int j=0; iter != end; ++iter, ++j ) {
+        for (int j = 0; iter != end; ++iter, ++j) {
             const QStringList coordinate = iter->split(QLatin1Char(','));
-            if ( coordinate.size() == 2 ) {
-                double const lon = coordinate.at( 0 ).toDouble();
-                double const lat = coordinate.at( 1 ).toDouble();
+            if (coordinate.size() == 2) {
+                double const lon = coordinate.at(0).toDouble();
+                double const lat = coordinate.at(1).toDouble();
                 double const alt = j < elevation.size() ? elevation[j].toDouble() : 0.0;
-                lineString->append( GeoDataCoordinates( lon, lat, alt, GeoDataCoordinates::Degree ) );
+                lineString->append(GeoDataCoordinates(lon, lat, alt, GeoDataCoordinates::Degree));
             }
         }
-        instructions->setGeometry( lineString );
-        result->append( instructions );
+        instructions->setGeometry(lineString);
+        result->append(instructions);
     }
     return result;
 }
 
-void CycleStreetsRunner::handleError( QNetworkReply::NetworkError error )
+void CycleStreetsRunner::handleError(QNetworkReply::NetworkError error)
 {
     mDebug() << " Error when retrieving cyclestreets.net route: " << error;
 }

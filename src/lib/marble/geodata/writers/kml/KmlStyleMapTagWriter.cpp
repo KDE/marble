@@ -14,24 +14,22 @@
 namespace Marble
 {
 
-static GeoTagWriterRegistrar s_writerStyleMap(
-    GeoTagWriter::QualifiedName( GeoDataTypes::GeoDataStyleMapType,
-                                 kml::kmlTag_nameSpaceOgc22 ),
-    new KmlStyleMapTagWriter );
+static GeoTagWriterRegistrar s_writerStyleMap(GeoTagWriter::QualifiedName(GeoDataTypes::GeoDataStyleMapType, kml::kmlTag_nameSpaceOgc22),
+                                              new KmlStyleMapTagWriter);
 
-bool KmlStyleMapTagWriter::write( const GeoNode *node, GeoWriter& writer ) const
+bool KmlStyleMapTagWriter::write(const GeoNode *node, GeoWriter &writer) const
 {
-    const GeoDataStyleMap *map = static_cast<const GeoDataStyleMap*>( node );
+    const GeoDataStyleMap *map = static_cast<const GeoDataStyleMap *>(node);
 
-    writer.writeStartElement( QString::fromUtf8(kml::kmlTag_StyleMap) );
-    KmlObjectTagWriter::writeIdentifiers( writer, map );
+    writer.writeStartElement(QString::fromUtf8(kml::kmlTag_StyleMap));
+    KmlObjectTagWriter::writeIdentifiers(writer, map);
 
-    QMapIterator<QString, QString> iter( *map );
-    while ( iter.hasNext() ) {
+    QMapIterator<QString, QString> iter(*map);
+    while (iter.hasNext()) {
         iter.next();
-        writer.writeStartElement( QString::fromUtf8(kml::kmlTag_Pair) );
-        writer.writeElement( kml::kmlTag_key, iter.key() );
-        writer.writeElement( kml::kmlTag_styleUrl, iter.value() );
+        writer.writeStartElement(QString::fromUtf8(kml::kmlTag_Pair));
+        writer.writeElement(kml::kmlTag_key, iter.key());
+        writer.writeElement(kml::kmlTag_styleUrl, iter.value());
         writer.writeEndElement();
     }
 

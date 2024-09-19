@@ -22,17 +22,17 @@ class MARBLE_EXPORT TinyWebBrowser : public QWidget
 {
     Q_OBJECT
 
- public:
-    explicit TinyWebBrowser( QWidget* parent = 0 );
+public:
+    explicit TinyWebBrowser(QWidget *parent = 0);
 
     static QByteArray userAgent(const QString &platform, const QString &plugin);
 
- public Q_SLOTS:
-    void setWikipediaPath( const QString& relativeUrl );
+public Q_SLOTS:
+    void setWikipediaPath(const QString &relativeUrl);
     void print();
 
- Q_SIGNALS:
-    void statusMessage( const QString& );
+Q_SIGNALS:
+    void statusMessage(const QString &);
 };
 
 }

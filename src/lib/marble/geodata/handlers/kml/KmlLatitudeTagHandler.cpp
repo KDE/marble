@@ -11,34 +11,34 @@
 #include "KmlElementDictionary.h"
 #include "MarbleGlobal.h"
 
-#include "GeoDataLookAt.h"
 #include "GeoDataCamera.h"
-#include "GeoParser.h"
 #include "GeoDataCoordinates.h"
 #include "GeoDataLocation.h"
+#include "GeoDataLookAt.h"
+#include "GeoParser.h"
 
 namespace Marble
 {
 namespace kml
 {
-    KML_DEFINE_TAG_HANDLER( latitude )
-    GeoNode *KmllatitudeTagHandler::parse( GeoParser & parser ) const
-    {
-        Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1String(kmlTag_latitude)));
+KML_DEFINE_TAG_HANDLER(latitude)
+GeoNode *KmllatitudeTagHandler::parse(GeoParser &parser) const
+{
+    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1String(kmlTag_latitude)));
 
-        GeoStackItem parentItem = parser.parentElement();
+    GeoStackItem parentItem = parser.parentElement();
 
-        if ( parentItem.is<GeoDataLookAt>() ) {
-            qreal latitude = parser.readElementText().trimmed().toDouble();
-            parentItem.nodeAs<GeoDataLookAt>()->setLatitude(latitude, GeoDataCoordinates::Degree);
-        } else if ( parentItem.is<GeoDataCamera>() ) {
-            qreal latitude = parser.readElementText().trimmed().toDouble();
-            parentItem.nodeAs<GeoDataCamera>()->setLatitude(latitude, GeoDataCoordinates::Degree);
-        } else if ( parentItem.is<GeoDataLocation>() ) {
-	        qreal latitude = parser.readElementText().trimmed().toDouble();
-	        parentItem.nodeAs<GeoDataLocation>()->setLatitude(latitude, GeoDataCoordinates::Degree);
-	}
-        return nullptr;
+    if (parentItem.is<GeoDataLookAt>()) {
+        qreal latitude = parser.readElementText().trimmed().toDouble();
+        parentItem.nodeAs<GeoDataLookAt>()->setLatitude(latitude, GeoDataCoordinates::Degree);
+    } else if (parentItem.is<GeoDataCamera>()) {
+        qreal latitude = parser.readElementText().trimmed().toDouble();
+        parentItem.nodeAs<GeoDataCamera>()->setLatitude(latitude, GeoDataCoordinates::Degree);
+    } else if (parentItem.is<GeoDataLocation>()) {
+        qreal latitude = parser.readElementText().trimmed().toDouble();
+        parentItem.nodeAs<GeoDataLocation>()->setLatitude(latitude, GeoDataCoordinates::Degree);
     }
-  }
+    return nullptr;
+}
+}
 }

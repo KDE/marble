@@ -7,30 +7,29 @@
 
 #include "MarbleDebug.h"
 
-#include "KmlElementDictionary.h"
 #include "GeoDataCamera.h"
-#include "GeoParser.h"
 #include "GeoDataOrientation.h"
-
+#include "GeoParser.h"
+#include "KmlElementDictionary.h"
 
 namespace Marble
 {
 namespace kml
 {
-KML_DEFINE_TAG_HANDLER( tilt )
+KML_DEFINE_TAG_HANDLER(tilt)
 
-GeoNode* KmltiltTagHandler::parse( GeoParser& parser ) const
+GeoNode *KmltiltTagHandler::parse(GeoParser &parser) const
 {
     Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1String(kmlTag_tilt)));
 
     GeoStackItem parentItem = parser.parentElement();
 
-    if ( parentItem.is<GeoDataCamera>() ){
+    if (parentItem.is<GeoDataCamera>()) {
         qreal tilt = parser.readElementText().trimmed().toDouble();
         parentItem.nodeAs<GeoDataCamera>()->setTilt(tilt);
-    } else if ( parentItem.is<GeoDataOrientation>() ){
+    } else if (parentItem.is<GeoDataOrientation>()) {
         double tilt = parser.readElementText().trimmed().toDouble();
-	parentItem.nodeAs<GeoDataOrientation>()->setTilt(tilt);
+        parentItem.nodeAs<GeoDataOrientation>()->setTilt(tilt);
     }
     return nullptr;
 }

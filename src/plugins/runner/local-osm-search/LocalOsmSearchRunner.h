@@ -9,9 +9,9 @@
 
 #include "SearchRunner.h"
 
+#include "GeoDataPlacemark.h"
 #include "OsmDatabase.h"
 #include "OsmPlacemark.h"
-#include "GeoDataPlacemark.h"
 
 #include <QMap>
 
@@ -22,11 +22,11 @@ class LocalOsmSearchRunner : public SearchRunner
 {
     Q_OBJECT
 public:
-    explicit LocalOsmSearchRunner( const QStringList &databaseFiles, QObject *parent = nullptr );
+    explicit LocalOsmSearchRunner(const QStringList &databaseFiles, QObject *parent = nullptr);
 
     ~LocalOsmSearchRunner() override;
 
-    void search( const QString &searchTerm, const GeoDataLatLonBox &preferred ) override;
+    void search(const QString &searchTerm, const GeoDataLatLonBox &preferred) override;
 
 private:
     OsmDatabase m_database;

@@ -6,27 +6,27 @@
 #include <QApplication>
 #include <QQuickView>
 
-#include <marble/declarative/MarbleQuickItem.h>
 #include <marble/MarbleMap.h>
 #include <marble/declarative/MarbleDeclarativePlugin.h>
+#include <marble/declarative/MarbleQuickItem.h>
 
 using namespace Marble;
 
 class MarbleDemoItem : public MarbleQuickItem
 {
-Q_OBJECT
+    Q_OBJECT
 
 public:
-    MarbleDemoItem(QQuickItem *parent = nullptr) : MarbleQuickItem(parent)
+    MarbleDemoItem(QQuickItem *parent = nullptr)
+        : MarbleQuickItem(parent)
     {
         // nothing to do
     }
 
     void componentComplete() override
     {
-        QQuickItem *pinch = findChild<QQuickItem*>(QStringLiteral("pinchArea"));
-        if (pinch)
-        {
+        QQuickItem *pinch = findChild<QQuickItem *>(QStringLiteral("pinchArea"));
+        if (pinch) {
             pinch->installEventFilter(getEventFilter());
         }
     }
@@ -67,7 +67,7 @@ public:
         qmlRegisterType<MarbleDemoItem>("org.kde.marble", 0, 20, "MarbleDemoItem");
         setSource(QUrl(QStringLiteral("qrc:/main.qml")));
 
-        if(status()!=QQuickView::Ready)
+        if (status() != QQuickView::Ready)
             qDebug("can't initialise view");
 
         QSurfaceFormat format;

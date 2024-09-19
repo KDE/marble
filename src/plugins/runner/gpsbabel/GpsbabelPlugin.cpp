@@ -8,14 +8,14 @@
 namespace Marble
 {
 
-GpsbabelPlugin::GpsbabelPlugin( QObject *parent ) :
-    ParseRunnerPlugin( parent )
+GpsbabelPlugin::GpsbabelPlugin(QObject *parent)
+    : ParseRunnerPlugin(parent)
 {
 }
 
 QString GpsbabelPlugin::name() const
 {
-    return tr( "GPSBabel NMEA File Parser" );
+    return tr("GPSBabel NMEA File Parser");
 }
 
 QString GpsbabelPlugin::nameId() const
@@ -30,7 +30,7 @@ QString GpsbabelPlugin::version() const
 
 QString GpsbabelPlugin::description() const
 {
-    return tr( "Allows loading of NMEA files through GPSBabel." );
+    return tr("Allows loading of NMEA files through GPSBabel.");
 }
 
 QString GpsbabelPlugin::copyrightYears() const
@@ -40,28 +40,21 @@ QString GpsbabelPlugin::copyrightYears() const
 
 QVector<PluginAuthor> GpsbabelPlugin::pluginAuthors() const
 {
-    return QVector<PluginAuthor>()
-            << PluginAuthor(QStringLiteral("Mohammed Nafees"), QStringLiteral("nafees.technocool@gmail.com"));
+    return QVector<PluginAuthor>() << PluginAuthor(QStringLiteral("Mohammed Nafees"), QStringLiteral("nafees.technocool@gmail.com"));
 }
 
 QString GpsbabelPlugin::fileFormatDescription() const
 {
-    return tr( "GPSBabel files" );
+    return tr("GPSBabel files");
 }
 
 QStringList GpsbabelPlugin::fileExtensions() const
 {
-    return QStringList()
-        << QStringLiteral("nmea")
-        << QStringLiteral("igc")
-        << QStringLiteral("tiger")
-        << QStringLiteral("ov2")
-        << QStringLiteral("garmin")
-        << QStringLiteral("csv")
-        << QStringLiteral("magellan");
+    return QStringList() << QStringLiteral("nmea") << QStringLiteral("igc") << QStringLiteral("tiger") << QStringLiteral("ov2") << QStringLiteral("garmin")
+                         << QStringLiteral("csv") << QStringLiteral("magellan");
 }
 
-ParsingRunner* GpsbabelPlugin::newRunner() const
+ParsingRunner *GpsbabelPlugin::newRunner() const
 {
     return new GpsbabelRunner;
 }

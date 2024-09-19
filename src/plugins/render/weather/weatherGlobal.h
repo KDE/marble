@@ -3,7 +3,6 @@
 // SPDX-FileCopyrightText: 2009 Bastian Holst <bastianholst@gmx.de>
 //
 
-
 #ifndef WEATHERGLOBAL_H
 #define WEATHERGLOBAL_H
 

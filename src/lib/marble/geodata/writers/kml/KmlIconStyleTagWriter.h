@@ -6,8 +6,8 @@
 #ifndef MARBLE_KMLICONSTYLETAGWRITER_H
 #define MARBLE_KMLICONSTYLETAGWRITER_H
 
-#include "GeoTagWriter.h"
 #include "GeoDataHotSpot.h"
+#include "GeoTagWriter.h"
 #include "KmlColorStyleTagWriter.h"
 
 namespace Marble
@@ -19,11 +19,11 @@ public:
     KmlIconStyleTagWriter();
 
 protected:
-    bool writeMid( const GeoNode *node, GeoWriter& writer ) const override;
-    bool isEmpty( const GeoNode *node ) const override;
+    bool writeMid(const GeoNode *node, GeoWriter &writer) const override;
+    bool isEmpty(const GeoNode *node) const override;
 
 private:
-    static QString unitString( GeoDataHotSpot::Units unit );
+    static QString unitString(GeoDataHotSpot::Units unit);
 };
 
 }

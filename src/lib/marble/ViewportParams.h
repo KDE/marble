@@ -7,18 +7,17 @@
 #ifndef MARBLE_VIEWPORTPARAMS_H
 #define MARBLE_VIEWPORTPARAMS_H
 
-
 /** @file
  * This file contains the headers for ViewportParams.
- * 
+ *
  * @author Inge Wallin  <inge@lysator.liu.se>
  */
 
 #include <QSize>
 
 #include "GeoDataCoordinates.h"
-#include "Quaternion.h"
 #include "MarbleGlobal.h"
+#include "Quaternion.h"
 #include "marble_export.h"
 
 class QPolygonF;
@@ -33,19 +32,16 @@ class GeoDataLineString;
 class AbstractProjection;
 class ViewportParamsPrivate;
 
-/** 
+/**
  * @short A public class that controls what is visible in the viewport of a Marble map.
  *
  */
 
 class MARBLE_EXPORT ViewportParams
 {
- public:
-    ViewportParams( );
-    explicit ViewportParams( Projection projection,
-                             qreal centerLongitude = 0, qreal centerLatitude = 0,
-                             int radius = 2000,
-                             const QSize &size = QSize( 100, 100 ) );
+public:
+    ViewportParams();
+    explicit ViewportParams(Projection projection, qreal centerLongitude = 0, qreal centerLatitude = 0, int radius = 2000, const QSize &size = QSize(100, 100));
     ~ViewportParams();
 
     // Getters and setters
@@ -55,36 +51,36 @@ class MARBLE_EXPORT ViewportParams
 
     int polarity() const;
 
-    const GeoDataLatLonAltBox& viewLatLonAltBox() const;
+    const GeoDataLatLonAltBox &viewLatLonAltBox() const;
 
-    GeoDataLatLonAltBox latLonAltBox( const QRect &screenRect ) const;
+    GeoDataLatLonAltBox latLonAltBox(const QRect &screenRect) const;
 
     // Calculates an educated guess for the average angle in radians covered per pixel.
     // Given a certain resolution it doesn't make much sense
     // - to display an object that covers an angle that is smaller than that.
-    // - to display two points as distinct points if they are separated by a 
+    // - to display two points as distinct points if they are separated by a
     //   an angular distance that is smaller. Instead only one point should be shown.
     // So this method helps to filter out details.
     // It's somewhat related to https://en.wikipedia.org/wiki/Angular_resolution
 
     qreal angularResolution() const;
 
-    // Determines whether a geographical feature is big enough so that it should 
+    // Determines whether a geographical feature is big enough so that it should
     // represent a single point on the screen already.
     // See angularResolution()
 
-    bool resolves ( const GeoDataLatLonBox &latLonBox, qreal pixel = 2.0 ) const;
+    bool resolves(const GeoDataLatLonBox &latLonBox, qreal pixel = 2.0) const;
 
-    bool resolves ( const GeoDataLatLonAltBox &latLonAltBox, qreal pixel = 2.0, qreal altitude = 10000.0 ) const;
+    bool resolves(const GeoDataLatLonAltBox &latLonAltBox, qreal pixel = 2.0, qreal altitude = 10000.0) const;
 
-    // Determines whether two points are located enough apart so that it makes 
+    // Determines whether two points are located enough apart so that it makes
     // sense to display them as distinct points. If this is not the case
     // calculation and drawing of one point can be skipped as only a single
     // point will be displayed on the screen.
-    
-    bool resolves ( const GeoDataCoordinates &coord1, const GeoDataCoordinates &coord2 ) const;
 
-    int  radius() const;
+    bool resolves(const GeoDataCoordinates &coord1, const GeoDataCoordinates &coord2) const;
+
+    int radius() const;
 
     /**
      * @brief Change the radius of the planet
@@ -92,19 +88,19 @@ class MARBLE_EXPORT ViewportParams
      */
     void setRadius(int radius);
 
-    void centerOn( qreal lon, qreal lat );
-    void setHeading( qreal heading );
+    void centerOn(qreal lon, qreal lat);
+    void setHeading(qreal heading);
 
     Quaternion planetAxis() const;
     const matrix &planetAxisMatrix() const;
 
-    int width()  const;
+    int width() const;
     int height() const;
     QSize size() const;
 
     void setWidth(int newWidth);
     void setHeight(int newHeight);
-    void setSize(const QSize& newSize);
+    void setSize(const QSize &newSize);
 
     qreal centerLongitude() const;
     qreal centerLatitude() const;
@@ -120,8 +116,7 @@ class MARBLE_EXPORT ViewportParams
      *
      * @see ViewportParams
      */
-    bool screenCoordinates( const qreal lon, const qreal lat,
-                            qreal &x, qreal &y ) const;
+    bool screenCoordinates(const qreal lon, const qreal lat, qreal &x, qreal &y) const;
 
     /**
      * @brief Get the screen coordinates corresponding to geographical coordinates in the map.
@@ -136,13 +131,10 @@ class MARBLE_EXPORT ViewportParams
      *
      * @see ViewportParams
      */
-    bool screenCoordinates( const GeoDataCoordinates &geopoint,
-                            qreal &x, qreal &y,
-                            bool &globeHidesPoint ) const;
+    bool screenCoordinates(const GeoDataCoordinates &geopoint, qreal &x, qreal &y, bool &globeHidesPoint) const;
 
     // Will just call the virtual version with a dummy globeHidesPoint.
-    bool screenCoordinates( const GeoDataCoordinates &geopoint,
-                            qreal &x, qreal &y ) const;
+    bool screenCoordinates(const GeoDataCoordinates &geopoint, qreal &x, qreal &y) const;
 
     /**
      * @brief Get the coordinates of screen points for geographical coordinates in the map.
@@ -160,14 +152,9 @@ class MARBLE_EXPORT ViewportParams
      *
      * @see ViewportParams
      */
-    bool screenCoordinates( const GeoDataCoordinates &coordinates,
-                            qreal *x, qreal &y, int &pointRepeatNum,
-                            const QSizeF& size,
-                            bool &globeHidesPoint ) const;
+    bool screenCoordinates(const GeoDataCoordinates &coordinates, qreal *x, qreal &y, int &pointRepeatNum, const QSizeF &size, bool &globeHidesPoint) const;
 
-
-    bool screenCoordinates( const GeoDataLineString &lineString,
-                            QVector<QPolygonF*> &polygons ) const;
+    bool screenCoordinates(const GeoDataLineString &lineString, QVector<QPolygonF *> &polygons) const;
 
     /**
      * @brief Get the earth coordinates corresponding to a pixel in the map.
@@ -179,9 +166,7 @@ class MARBLE_EXPORT ViewportParams
      * @return @c true  if the pixel (x, y) is within the globe
      *         @c false if the pixel (x, y) is outside the globe, i.e. in space.
      */
-    bool geoCoordinates( const int x, const int y,
-                         qreal &lon, qreal &lat,
-                         GeoDataCoordinates::Unit unit = GeoDataCoordinates::Degree ) const;
+    bool geoCoordinates(const int x, const int y, qreal &lon, qreal &lat, GeoDataCoordinates::Unit unit = GeoDataCoordinates::Degree) const;
 
     qreal heading() const;
     bool mapCoversViewport() const;
@@ -191,29 +176,29 @@ class MARBLE_EXPORT ViewportParams
     QRegion mapRegion() const;
 
     /**
-      * @return The current point of focus, e.g. the point that is not moved
-      * when changing the zoom level. If not set, it defaults to the
-      * center point.
-      * @see centerCoordinates setFocusPoint resetFocusPoint
-      */
+     * @return The current point of focus, e.g. the point that is not moved
+     * when changing the zoom level. If not set, it defaults to the
+     * center point.
+     * @see centerCoordinates setFocusPoint resetFocusPoint
+     */
     GeoDataCoordinates focusPoint() const;
 
     /**
-      * @brief Change the point of focus, overridding any previously set focus point.
-      * @param focusPoint New focus point
-      * @see focusPoint resetFocusPoint
-      */
+     * @brief Change the point of focus, overridding any previously set focus point.
+     * @param focusPoint New focus point
+     * @see focusPoint resetFocusPoint
+     */
     void setFocusPoint(const GeoDataCoordinates &focusPoint);
 
     /**
-      * @brief Invalidate any focus point set with @ref setFocusPoint.
-      * @see focusPoint setFocusPoint
-      */
+     * @brief Invalidate any focus point set with @ref setFocusPoint.
+     * @see focusPoint setFocusPoint
+     */
     void resetFocusPoint();
 
- private:
-    Q_DISABLE_COPY( ViewportParams )
-    ViewportParamsPrivate * const d;
+private:
+    Q_DISABLE_COPY(ViewportParams)
+    ViewportParamsPrivate *const d;
 };
 
 }

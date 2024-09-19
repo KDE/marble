@@ -14,14 +14,12 @@ class GeoWriter;
 class OsmObjectAttributeWriter
 {
 public:
-
     /**
      * Writes the standard osm attributes: id, action, changeset, visible, timestamp, uid, user, version
      */
-    static void writeAttributes( const OsmPlacemarkData &osmData, GeoWriter &writer );
+    static void writeAttributes(const OsmPlacemarkData &osmData, GeoWriter &writer);
 };
 
 }
 
 #endif
-

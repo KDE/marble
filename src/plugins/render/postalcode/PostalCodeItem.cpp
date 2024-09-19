@@ -16,14 +16,14 @@
 
 using namespace Marble;
 
-const QFont PostalCodeItem::s_font = QFont( QStringLiteral( "Sans Serif" ), 10, QFont::Bold );
+const QFont PostalCodeItem::s_font = QFont(QStringLiteral("Sans Serif"), 10, QFont::Bold);
 const int PostalCodeItem::s_labelOutlineWidth = 5;
 
-PostalCodeItem::PostalCodeItem( QObject *parent )
-    : AbstractDataPluginItem( parent )
+PostalCodeItem::PostalCodeItem(QObject *parent)
+    : AbstractDataPluginItem(parent)
 {
-    setSize( QSize( 0, 0 ) );
-    setCacheMode( ItemCoordinateCache );
+    setSize(QSize(0, 0));
+    setCacheMode(ItemCoordinateCache);
 }
 
 PostalCodeItem::~PostalCodeItem()
@@ -35,7 +35,7 @@ bool PostalCodeItem::initialized() const
     return !m_text.isEmpty();
 }
 
-bool PostalCodeItem::operator<( const AbstractDataPluginItem *other ) const
+bool PostalCodeItem::operator<(const AbstractDataPluginItem *other) const
 {
     return this->id() < other->id();
 }
@@ -45,35 +45,35 @@ QString PostalCodeItem::text() const
     return m_text;
 }
 
-void PostalCodeItem::setText( const QString& text )
+void PostalCodeItem::setText(const QString &text)
 {
-    QFontMetrics metrics( s_font );
-    setSize( metrics.size( 0, text ) + QSize( 10, 10 ) );
+    QFontMetrics metrics(s_font);
+    setSize(metrics.size(0, text) + QSize(10, 10));
     m_text = text;
 }
 
-void PostalCodeItem::paint( QPainter *painter )
+void PostalCodeItem::paint(QPainter *painter)
 {
     painter->save();
 
-    const int fontAscent = QFontMetrics( s_font ).ascent();
+    const int fontAscent = QFontMetrics(s_font).ascent();
 
-    QPen outlinepen( Qt::white );
-    outlinepen.setWidthF( s_labelOutlineWidth );
-    QBrush  outlinebrush( Qt::black );
+    QPen outlinepen(Qt::white);
+    outlinepen.setWidthF(s_labelOutlineWidth);
+    QBrush outlinebrush(Qt::black);
 
-    const QPointF baseline( s_labelOutlineWidth / 2.0, fontAscent );
+    const QPointF baseline(s_labelOutlineWidth / 2.0, fontAscent);
 
     QPainterPath outlinepath;
-    outlinepath.addText( baseline, s_font, m_text );
+    outlinepath.addText(baseline, s_font, m_text);
 
-    painter->setRenderHint( QPainter::Antialiasing, true );
-    painter->setPen( outlinepen );
-    painter->setBrush( outlinebrush );
-    painter->drawPath( outlinepath );
-    painter->setPen( Qt::NoPen );
-    painter->drawPath( outlinepath );
-    painter->setRenderHint( QPainter::Antialiasing, false );
+    painter->setRenderHint(QPainter::Antialiasing, true);
+    painter->setPen(outlinepen);
+    painter->setBrush(outlinebrush);
+    painter->drawPath(outlinepath);
+    painter->setPen(Qt::NoPen);
+    painter->drawPath(outlinepath);
+    painter->setRenderHint(QPainter::Antialiasing, false);
 
     painter->restore();
 }

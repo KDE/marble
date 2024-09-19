@@ -21,24 +21,24 @@ namespace Marble
  */
 class GEODATA_EXPORT GeoSceneAbstractDataset : public GeoNode
 {
- public:
+public:
     ~GeoSceneAbstractDataset() override {};
 
     QString name() const;
 
     QString fileFormat() const;
-    void setFileFormat( const QString& fileFormat );
+    void setFileFormat(const QString &fileFormat);
 
     int expire() const;
-    void setExpire( int expire );
+    void setExpire(int expire);
 
- protected:
-    explicit GeoSceneAbstractDataset( const QString& name );
+protected:
+    explicit GeoSceneAbstractDataset(const QString &name);
 
- private:
+private:
     QString m_name;
     QString m_fileFormat;
-    int     m_expire;
+    int m_expire;
 };
 
 }

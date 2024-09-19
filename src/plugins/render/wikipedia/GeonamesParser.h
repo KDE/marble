@@ -21,25 +21,23 @@ class WikipediaItem;
 class GeonamesParser : public QXmlStreamReader
 {
 public:
-    GeonamesParser( MarbleWidget* widget,
-                    QList<WikipediaItem *> *list,
-                    QObject *parent );
+    GeonamesParser(MarbleWidget *widget, QList<WikipediaItem *> *list, QObject *parent);
 
-    bool read( const QByteArray& data );
+    bool read(const QByteArray &data);
 
 private:
     void readUnknownElement();
     void readGeonames();
     void readEntry();
-    void readTitle( WikipediaItem *item );
-    void readLongitude( WikipediaItem *item );
-    void readLatitude( WikipediaItem *item );
-    void readUrl( WikipediaItem *item );
-    void readSummary( WikipediaItem *item );
-    void readThumbnailImage( WikipediaItem *item );
-    void readRank( WikipediaItem *item );
+    void readTitle(WikipediaItem *item);
+    void readLongitude(WikipediaItem *item);
+    void readLatitude(WikipediaItem *item);
+    void readUrl(WikipediaItem *item);
+    void readSummary(WikipediaItem *item);
+    void readThumbnailImage(WikipediaItem *item);
+    void readRank(WikipediaItem *item);
 
-    MarbleWidget* m_marbleWidget;
+    MarbleWidget *m_marbleWidget;
     QList<WikipediaItem *> *m_list;
     QObject *m_parent;
 };

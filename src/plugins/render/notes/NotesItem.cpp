@@ -16,9 +16,9 @@ const QFont NotesItem::s_font = QFont(QStringLiteral("Sans Serif"), 10);
 const int NotesItem::s_labelOutlineWidth = 5;
 
 NotesItem::NotesItem(QObject *parent)
-    : AbstractDataPluginItem(parent),
-      m_pixmap_open(QPixmap(MarbleDirs::path("bitmaps/notes_open.png"))),
-      m_pixmap_closed(QPixmap(MarbleDirs::path("bitmaps/notes_closed.png")))
+    : AbstractDataPluginItem(parent)
+    , m_pixmap_open(QPixmap(MarbleDirs::path("bitmaps/notes_open.png")))
+    , m_pixmap_closed(QPixmap(MarbleDirs::path("bitmaps/notes_closed.png")))
 {
     setSize(m_pixmap_open.size());
     setAlignment(Qt::AlignHCenter | Qt::AlignTop);
@@ -47,7 +47,7 @@ void NotesItem::paint(QPainter *painter)
     const int fontAscent = painter->fontMetrics().ascent();
     QPen outlinepen(Qt::white);
     outlinepen.setWidthF(s_labelOutlineWidth);
-    QBrush  outlinebrush(Qt::black);
+    QBrush outlinebrush(Qt::black);
 
     const QPointF baseline(s_labelOutlineWidth / 2.0, fontAscent);
 
@@ -64,37 +64,37 @@ void NotesItem::paint(QPainter *painter)
 
     int const y = qMax(0, int(size().width() - m_pixmap_open.width()) / 2);
 
-    //The two pixmaps have the same dimensions, so all the logic for one works for the other
-    QPixmap const & pixmap = m_noteStatus == "closed" ? m_pixmap_closed : m_pixmap_open;
+    // The two pixmaps have the same dimensions, so all the logic for one works for the other
+    QPixmap const &pixmap = m_noteStatus == "closed" ? m_pixmap_closed : m_pixmap_open;
     painter->drawPixmap(y, 2 + painter->fontMetrics().height(), pixmap);
 
     painter->restore();
 }
 
-void NotesItem::setDateCreated(const QDateTime& dateCreated)
+void NotesItem::setDateCreated(const QDateTime &dateCreated)
 {
     m_dateCreated = dateCreated;
 }
 
-void NotesItem::setDateClosed(const QDateTime& dateClosed)
+void NotesItem::setDateClosed(const QDateTime &dateClosed)
 {
     m_dateClosed = dateClosed;
 }
 
-void NotesItem::setNoteStatus(const QString& noteStatus)
+void NotesItem::setNoteStatus(const QString &noteStatus)
 {
     m_noteStatus = noteStatus;
 }
 
-void NotesItem::addComment(const Comment& comment)
+void NotesItem::addComment(const Comment &comment)
 {
     m_commentsList.push_back(comment);
-    std::sort(m_commentsList.begin(), m_commentsList.end(), [](const Comment & a, const Comment & b) {
+    std::sort(m_commentsList.begin(), m_commentsList.end(), [](const Comment &a, const Comment &b) {
         return a.date() > b.date();
     });
 
     QStringList toolTip;
-    for (auto const &entry: m_commentsList) {
+    for (auto const &entry : m_commentsList) {
         QString const date = QLocale().toString(entry.date(), QLocale::ShortFormat);
         QString const user = entry.user().isEmpty() ? tr("anonymous", "The author name is not known") : entry.user();
         toolTip << QStringLiteral("%1\n--%2, %3").arg(entry.text().trimmed()).arg(user).arg(date);
@@ -106,7 +106,8 @@ void NotesItem::addComment(const Comment& comment)
     setSize(QSizeF(width, fontmet.height() + 2 + m_pixmap_open.height()));
 }
 
-Comment::Comment() : m_uid(0)
+Comment::Comment()
+    : m_uid(0)
 {
 }
 

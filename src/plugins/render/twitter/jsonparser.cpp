@@ -7,50 +7,46 @@
 
 jsonParser::jsonParser()
 {
-  myEngine.setProcessEventsInterval(10);//this lets the gui remain responsive
+    myEngine.setProcessEventsInterval(10); // this lets the gui remain responsive
 }
 
 jsonParser::~jsonParser()
 {
 }
 
-twitterDataStructure jsonParser::parseObjectOnPosition(const QString &content , int requiredObjectPosition)
+twitterDataStructure jsonParser::parseObjectOnPosition(const QString &content, int requiredObjectPosition)
 {
     return dataStorage;
 }
 
-QList <twitterDataStructure> jsonParser::parseAllObjects(const QString &content , int numberOfObjects)
+QList<twitterDataStructure> jsonParser::parseAllObjects(const QString &content, int numberOfObjects)
 {
     QString temp = QLatin1String("var myJSONObject =  { \"twitter\":") + content + QLatin1Char('}');
-    int iterator = 0;//the count starts fom one
-    if (temp != QLatin1String("Twitter is down for database maintenance. It will return in about 30 minutes"))
-    {
-	myEngine.evaluate(QString("function userName(k){return myJSONObject.twitter[k].user.name};"));
-	myEngine.evaluate(QString("function userLocation(k){return myJSONObject.twitter[k].user.location};"));
-	myEngine.evaluate(QString("function userText(k){return myJSONObject.twitter[k].text};"));
+    int iterator = 0; // the count starts fom one
+    if (temp != QLatin1String("Twitter is down for database maintenance. It will return in about 30 minutes")) {
+        myEngine.evaluate(QString("function userName(k){return myJSONObject.twitter[k].user.name};"));
+        myEngine.evaluate(QString("function userLocation(k){return myJSONObject.twitter[k].user.location};"));
+        myEngine.evaluate(QString("function userText(k){return myJSONObject.twitter[k].text};"));
 
-    myEngine.evaluate(temp);
-    while ((iterator) < numberOfObjects) {
-	myEngine.evaluate(QString("var a ="+QString::number(iterator) )).toString();
-        dataStorage.user=myEngine.evaluate(QString("userName(a)")).toString();
- 	dataStorage.location=myEngine.evaluate(QString("userLocation(a)")).toString();
- 	dataStorage.text=myEngine.evaluate(QString("userText(a)")).toString();
-        
-	parsedJsonOutput.insert(iterator , dataStorage);
+        myEngine.evaluate(temp);
+        while ((iterator) < numberOfObjects) {
+            myEngine.evaluate(QString("var a =" + QString::number(iterator))).toString();
+            dataStorage.user = myEngine.evaluate(QString("userName(a)")).toString();
+            dataStorage.location = myEngine.evaluate(QString("userLocation(a)")).toString();
+            dataStorage.text = myEngine.evaluate(QString("userText(a)")).toString();
 
-        ++iterator;
-      }
+            parsedJsonOutput.insert(iterator, dataStorage);
+
+            ++iterator;
+        }
+    } else {
+        // twitter is down :(
+        dataStorage.user = "@Twitter Plugin";
+        dataStorage.location = "Equator";
+        dataStorage.text = "Twitter is down , Please try in 30 minutes ";
+        parsedJsonOutput << dataStorage;
     }
-   else 
-    {
-//twitter is down :(
-      dataStorage.user="@Twitter Plugin";
-      dataStorage.location="Equator";
-      dataStorage.text="Twitter is down , Please try in 30 minutes " ;
-      parsedJsonOutput<<dataStorage;
-
-    }
-   return parsedJsonOutput;
+    return parsedJsonOutput;
 }
 
 googleMapDataStructure jsonParser::geoCodingAPIparseObject(QString content)
@@ -68,5 +64,3 @@ googleMapDataStructure jsonParser::geoCodingAPIparseObject(QString content)
     mDebug() << "twitter lan lon text=" << returnStructure.lat << returnStructure.lon;
     return returnStructure;
 }
-
-

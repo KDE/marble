@@ -4,17 +4,18 @@
 //
 
 #include "SerialTrack.h"
-#include "PlaybackFlyToItem.h"
-#include "PlaybackWaitItem.h"
-#include "PlaybackTourControlItem.h"
 #include "GeoDataCamera.h"
 #include "GeoDataLookAt.h"
+#include "PlaybackFlyToItem.h"
+#include "PlaybackTourControlItem.h"
+#include "PlaybackWaitItem.h"
 #include "TourPlayback.h"
 
 namespace Marble
 {
 
-SerialTrack::SerialTrack(): QObject()
+SerialTrack::SerialTrack()
+    : QObject()
 {
     m_currentIndex = 0;
     m_finishedPosition = 0;
@@ -27,18 +28,18 @@ SerialTrack::~SerialTrack()
     clear();
 }
 
-void SerialTrack::append(PlaybackItem* item)
+void SerialTrack::append(PlaybackItem *item)
 {
-    connect( item, SIGNAL(progressChanged(double)), this, SLOT(changeProgress(double)) );
-    connect( item, SIGNAL(centerOn(GeoDataCoordinates)), this, SIGNAL(centerOn(GeoDataCoordinates)) );
-    connect( item, SIGNAL(finished()), this, SLOT(handleFinishedItem()) ) ;
-    connect( item, SIGNAL(paused()), this, SLOT(pause()) ) ;
-    m_items.append( item );
-    if( m_items.size() == 1 ) {
-        PlaybackFlyToItem *flyTo = dynamic_cast<PlaybackFlyToItem*>( item );
-        if( flyTo != nullptr ) {
-            flyTo->setFirst( true )
-;        }
+    connect(item, SIGNAL(progressChanged(double)), this, SLOT(changeProgress(double)));
+    connect(item, SIGNAL(centerOn(GeoDataCoordinates)), this, SIGNAL(centerOn(GeoDataCoordinates)));
+    connect(item, SIGNAL(finished()), this, SLOT(handleFinishedItem()));
+    connect(item, SIGNAL(paused()), this, SLOT(pause()));
+    m_items.append(item);
+    if (m_items.size() == 1) {
+        PlaybackFlyToItem *flyTo = dynamic_cast<PlaybackFlyToItem *>(item);
+        if (flyTo != nullptr) {
+            flyTo->setFirst(true);
+        }
     }
 }
 
@@ -57,20 +58,20 @@ void SerialTrack::pause()
 void SerialTrack::stop()
 {
     m_paused = true;
-    if( m_items.size() != 0 && m_currentIndex >= 0 && m_currentIndex <= m_items.size() - 1 ){
+    if (m_items.size() != 0 && m_currentIndex >= 0 && m_currentIndex <= m_items.size() - 1) {
         m_items[m_currentIndex]->stop();
     }
     m_finishedPosition = 0;
-    emit progressChanged( m_finishedPosition );
+    emit progressChanged(m_finishedPosition);
     m_currentIndex = 0;
 }
 
-void SerialTrack::seek( double offset )
+void SerialTrack::seek(double offset)
 {
     m_currentPosition = offset;
     int index = -1;
-    for( int i = 0; i < m_items.size(); i++ ){
-        if( offset < m_items[i]->duration() ){
+    for (int i = 0; i < m_items.size(); i++) {
+        if (offset < m_items[i]->duration()) {
             index = i;
             break;
         } else {
@@ -79,42 +80,42 @@ void SerialTrack::seek( double offset )
         }
     }
 
-    if( index == -1 ){
+    if (index == -1) {
         index = m_items.size() - 1;
     }
 
-    if( index < m_items.size() - 1 ){
-        for( int i = index + 1; i < m_items.size(); i++ ){
-            m_items[ i ]->stop();
+    if (index < m_items.size() - 1) {
+        for (int i = index + 1; i < m_items.size(); i++) {
+            m_items[i]->stop();
         }
     }
 
-    if( index > m_currentIndex ){
-        for( int i = m_currentIndex; i < index ; i++ ){
-            m_finishedPosition += m_items[ i ]->duration();
+    if (index > m_currentIndex) {
+        for (int i = m_currentIndex; i < index; i++) {
+            m_finishedPosition += m_items[i]->duration();
         }
-    }else{
-        for( int i = m_currentIndex - 1; i >= index && i >= 0; i-- ){
-            m_finishedPosition -= m_items[ i ]->duration();
+    } else {
+        for (int i = m_currentIndex - 1; i >= index && i >= 0; i--) {
+            m_finishedPosition -= m_items[i]->duration();
         }
     }
 
     if (m_currentIndex != index && !m_paused) {
-        m_items[ index ]->play();
+        m_items[index]->play();
     }
 
     m_currentIndex = index;
-    if ( m_currentIndex != -1 ){
-        double t = offset / m_items[ m_currentIndex ]->duration();
-        Q_ASSERT( t >= 0 && t <= 1 );
-        m_items[ m_currentIndex ]->seek( t );
+    if (m_currentIndex != -1) {
+        double t = offset / m_items[m_currentIndex]->duration();
+        Q_ASSERT(t >= 0 && t <= 1);
+        m_items[m_currentIndex]->seek(t);
     }
 }
 
 double SerialTrack::duration() const
 {
     double duration = 0.0;
-    for (PlaybackItem* item: m_items) {
+    for (PlaybackItem *item : m_items) {
         duration += item->duration();
     }
     return duration;
@@ -122,7 +123,7 @@ double SerialTrack::duration() const
 
 void SerialTrack::clear()
 {
-    qDeleteAll( m_items );
+    qDeleteAll(m_items);
     m_items.clear();
     m_currentIndex = 0;
     m_finishedPosition = 0;
@@ -132,24 +133,24 @@ void SerialTrack::clear()
 
 void SerialTrack::handleFinishedItem()
 {
-    if( m_paused ){
+    if (m_paused) {
         return;
     }
-    if ( m_currentIndex + 1 < m_items.size() ) {
+    if (m_currentIndex + 1 < m_items.size()) {
         m_finishedPosition += m_items[m_currentIndex]->duration();
         m_currentIndex++;
         m_items[m_currentIndex]->play();
-        emit itemFinished( m_currentIndex + 1 );
+        emit itemFinished(m_currentIndex + 1);
 
     } else {
         emit finished();
     }
 }
 
-void SerialTrack::changeProgress( double progress )
+void SerialTrack::changeProgress(double progress)
 {
     m_currentPosition = m_finishedPosition + progress;
-    emit progressChanged( m_currentPosition );
+    emit progressChanged(m_currentPosition);
 }
 
 int SerialTrack::size() const
@@ -157,9 +158,9 @@ int SerialTrack::size() const
     return m_items.size();
 }
 
-PlaybackItem* SerialTrack::at( int i )
+PlaybackItem *SerialTrack::at(int i)
 {
-    return m_items.at( i );
+    return m_items.at(i);
 }
 
 double SerialTrack::currentPosition()

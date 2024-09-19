@@ -38,7 +38,7 @@ public:
     virtual ~GeoNode();
 
     /// Provides type information for downcasting a GeoNode
-    virtual const char* nodeType() const = 0;
+    virtual const char *nodeType() const = 0;
 };
 
 }

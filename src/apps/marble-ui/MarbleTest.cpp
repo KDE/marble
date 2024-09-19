@@ -10,54 +10,53 @@
 #include <QElapsedTimer>
 #include <QMessageBox>
 
-#include <MarbleGlobal.h>
 #include <MarbleDebug.h>
-#include <MarbleWidget.h>
+#include <MarbleGlobal.h>
 #include <MarbleModel.h>
+#include <MarbleWidget.h>
 
 using namespace Marble;
 
-MarbleTest::MarbleTest( MarbleWidget* marbleWidget )
+MarbleTest::MarbleTest(MarbleWidget *marbleWidget)
     : m_marbleWidget(marbleWidget)
 {
 }
 
 void MarbleTest::timeDemo()
 {
-    QMessageBox::information(m_marbleWidget, QStringLiteral( "Marble Speed Test" ), QStringLiteral( "Press Ok to start test" ) );
+    QMessageBox::information(m_marbleWidget, QStringLiteral("Marble Speed Test"), QStringLiteral("Press Ok to start test"));
 
-    m_marbleWidget->setViewContext( Marble::Animation );
+    m_marbleWidget->setViewContext(Marble::Animation);
 
-        for ( int k = 0; k < 10; ++k ) {
-            m_marbleWidget->moveRight( Instant );
-            QCoreApplication::sendPostedEvents();
-            m_marbleWidget->repaint();
-        }
-        for ( int k = 0; k < 10; ++k ) {
-            m_marbleWidget->moveLeft( Instant );
-            QCoreApplication::sendPostedEvents();
-            m_marbleWidget->repaint();
-        }
+    for (int k = 0; k < 10; ++k) {
+        m_marbleWidget->moveRight(Instant);
+        QCoreApplication::sendPostedEvents();
+        m_marbleWidget->repaint();
+    }
+    for (int k = 0; k < 10; ++k) {
+        m_marbleWidget->moveLeft(Instant);
+        QCoreApplication::sendPostedEvents();
+        m_marbleWidget->repaint();
+    }
 
     qDebug() << "Starting Performance Test";
 
     QElapsedTimer t;
     t.start();
 
-    for ( int j = 0; j < 10; ++j ) {
-        for ( int k = 0; k < 10; ++k ) {
-            m_marbleWidget->moveRight( Instant );
+    for (int j = 0; j < 10; ++j) {
+        for (int k = 0; k < 10; ++k) {
+            m_marbleWidget->moveRight(Instant);
             QCoreApplication::sendPostedEvents();
             m_marbleWidget->repaint();
         }
-        for ( int k = 0; k < 10; ++k ) {
-            m_marbleWidget->moveLeft( Instant );
+        for (int k = 0; k < 10; ++k) {
+            m_marbleWidget->moveLeft(Instant);
             QCoreApplication::sendPostedEvents();
             m_marbleWidget->repaint();
         }
     }
 
-    qDebug( "Timedemo finished in %ims", static_cast<int>(t.elapsed()));
-    qDebug() <<  QStringLiteral("= %1 fps").arg(200*1000/(qreal)(t.elapsed()));
-
+    qDebug("Timedemo finished in %ims", static_cast<int>(t.elapsed()));
+    qDebug() << QStringLiteral("= %1 fps").arg(200 * 1000 / (qreal)(t.elapsed()));
 }

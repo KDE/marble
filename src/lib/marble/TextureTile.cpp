@@ -13,12 +13,12 @@
 namespace Marble
 {
 
-TextureTile::TextureTile( TileId const & tileId, QImage const & image, const Blending * blending )
-    : Tile( tileId ),
-      m_image( image ),
-      m_blending( blending )
+TextureTile::TextureTile(TileId const &tileId, QImage const &image, const Blending *blending)
+    : Tile(tileId)
+    , m_image(image)
+    , m_blending(blending)
 {
-    Q_ASSERT( !image.isNull() );
+    Q_ASSERT(!image.isNull());
 }
 
 TextureTile::~TextureTile()
@@ -26,4 +26,3 @@ TextureTile::~TextureTile()
 }
 
 }
-

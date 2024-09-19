@@ -17,7 +17,7 @@ namespace kml
 class KmlLinearRingTagHandler : public GeoTagHandler
 {
 public:
-    GeoNode* parse(GeoParser&) const override;
+    GeoNode *parse(GeoParser &) const override;
 };
 
 }

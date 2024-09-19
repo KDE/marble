@@ -57,11 +57,10 @@ public:
      * </Placemark>
      *@endcode
      */
-     static bool write( const GeoDataFeature *feature, GeoWriter& writer );
-     static bool writeOsmData( const GeoDataGeometry *geometry, const OsmPlacemarkData &osmData, GeoWriter& writer );
+    static bool write(const GeoDataFeature *feature, GeoWriter &writer);
+    static bool writeOsmData(const GeoDataGeometry *geometry, const OsmPlacemarkData &osmData, GeoWriter &writer);
 };
 
 }
 
 #endif
-

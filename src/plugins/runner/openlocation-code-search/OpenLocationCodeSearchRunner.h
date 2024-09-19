@@ -6,9 +6,9 @@
 #ifndef OPENLOCATIONCODESEARCHRUNNER_H
 #define OPENLOCATIONCODESEARCHRUNNER_H
 
-#include "SearchRunner.h"
 #include "GeoDataLatLonBox.h"
 #include "MarbleDebug.h"
+#include "SearchRunner.h"
 
 namespace Marble
 {
@@ -19,27 +19,26 @@ class OpenLocationCodeSearchRunner : public SearchRunner
 {
     Q_OBJECT
 public:
-    explicit OpenLocationCodeSearchRunner( QObject *parent = nullptr );
+    explicit OpenLocationCodeSearchRunner(QObject *parent = nullptr);
 
-    void search( const QString &searchTerm, const GeoDataLatLonBox &preferred ) override;
+    void search(const QString &searchTerm, const GeoDataLatLonBox &preferred) override;
 
 private:
-
     /**
      * Makes a GeoDataPolygon which contains the boundary points of the
      * boundingBox parameter.
      */
-    GeoDataPolygon polygonFromLatLonBox( const GeoDataLatLonBox& boundingBox ) const;
+    GeoDataPolygon polygonFromLatLonBox(const GeoDataLatLonBox &boundingBox) const;
 
     /**
      * Decode a valid open location code string into a GeoDataLatLonBox.
      */
-    GeoDataLatLonBox decodeOLC( const QString &ocl ) const;
+    GeoDataLatLonBox decodeOLC(const QString &ocl) const;
 
     /**
      * Decide if the string is a valid & full open location code.
      */
-    bool isValidOLC( const QString &ocl ) const;
+    bool isValidOLC(const QString &ocl) const;
 
     /**
      * Maps each character from the accepted chars to its corresponding index

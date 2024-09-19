@@ -3,13 +3,11 @@
 // SPDX-FileCopyrightText: 2008 Patrick Spendrin <ps_ml@gmx.de>
 //
 
-
 #ifndef MARBLE_GEODATASTYLEMAP_H
 #define MARBLE_GEODATASTYLEMAP_H
 
-
-#include <QString>
 #include <QMap>
+#include <QString>
 
 #include "GeoDataStyleSelector.h"
 
@@ -29,52 +27,51 @@ class GeoDataStyleMapPrivate;
  * @see GeoDataStyle
  * @see GeoDataStyleSelector
  */
-class GEODATA_EXPORT GeoDataStyleMap : public GeoDataStyleSelector,
-                                       public QMap<QString, QString>
+class GEODATA_EXPORT GeoDataStyleMap : public GeoDataStyleSelector, public QMap<QString, QString>
 {
-  public:
+public:
     /// Provides type information for downcasting a GeoNode
-    const char* nodeType() const override;
+    const char *nodeType() const override;
 
     /**
-    * @brief return the last key
-    */
+     * @brief return the last key
+     */
     QString lastKey() const;
     /**
-    * @brief Set the last key
-    * this property is needed to set an entry in the kml parser
-    * after the parser has set the last key, it will read the value
-    * and add both to this map
-    * @param key the last key
-    */
-    void setLastKey( const QString& key );
-    
-    /**
-    * @brief assignment operator
-    * @param other the styleMap which gets duplicated.
-    */
-    GeoDataStyleMap& operator=( const GeoDataStyleMap& other );
+     * @brief Set the last key
+     * this property is needed to set an entry in the kml parser
+     * after the parser has set the last key, it will read the value
+     * and add both to this map
+     * @param key the last key
+     */
+    void setLastKey(const QString &key);
 
-    bool operator==( const GeoDataStyleMap &other ) const;
-    bool operator!=( const GeoDataStyleMap &other ) const;
+    /**
+     * @brief assignment operator
+     * @param other the styleMap which gets duplicated.
+     */
+    GeoDataStyleMap &operator=(const GeoDataStyleMap &other);
+
+    bool operator==(const GeoDataStyleMap &other) const;
+    bool operator!=(const GeoDataStyleMap &other) const;
 
     /**
      * @brief Serialize the stylemap to a stream
      * @param  stream  the stream
      */
-    void pack( QDataStream& stream ) const override;
+    void pack(QDataStream &stream) const override;
     /**
      * @brief  Unserialize the stylemap from a stream
      * @param  stream  the stream
      */
-    void unpack( QDataStream& stream ) override;
+    void unpack(QDataStream &stream) override;
 
     GeoDataStyleMap();
-    GeoDataStyleMap( const GeoDataStyleMap& other );
+    GeoDataStyleMap(const GeoDataStyleMap &other);
     ~GeoDataStyleMap() override;
 
-  private:
-    GeoDataStyleMapPrivate * const d;
+private:
+    GeoDataStyleMapPrivate *const d;
 };
 
 }

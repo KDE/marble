@@ -11,19 +11,19 @@
 
 using namespace Marble;
 
-CoordinatesParser::CoordinatesParser( GeoDataCoordinates *coordinates )
-    : m_coordinates( coordinates )
+CoordinatesParser::CoordinatesParser(GeoDataCoordinates *coordinates)
+    : m_coordinates(coordinates)
 {
 }
 
-bool CoordinatesParser::read( QIODevice *device )
+bool CoordinatesParser::read(QIODevice *device)
 {
-    setDevice( device );
-    
-    while( !atEnd() ) {
+    setDevice(device);
+
+    while (!atEnd()) {
         readNext();
-        
-        if( isStartElement() ) {
+
+        if (isStartElement()) {
             if (name() == QLatin1String("rsp")) {
                 if (attributes().value(QLatin1String("stat")) == QLatin1String("ok")) {
                     readRsp();
@@ -35,37 +35,36 @@ bool CoordinatesParser::read( QIODevice *device )
             }
         }
     }
-    
+
     return !error();
 }
 
-
 void CoordinatesParser::readUnknownElement()
 {
-    Q_ASSERT( isStartElement() );
+    Q_ASSERT(isStartElement());
 
-    while ( !atEnd() ) {
+    while (!atEnd()) {
         readNext();
 
-        if ( isEndElement() )
+        if (isEndElement())
             break;
 
-        if ( isStartElement() )
+        if (isStartElement())
             readUnknownElement();
     }
 }
 
 void CoordinatesParser::readRsp()
 {
-    Q_ASSERT( isStartElement() );
-    
-    while( !atEnd() ) {
+    Q_ASSERT(isStartElement());
+
+    while (!atEnd()) {
         readNext();
-        
-        if( isEndElement() )
+
+        if (isEndElement())
             break;
-        
-        if( isStartElement() ) {
+
+        if (isStartElement()) {
             if (name() == QLatin1String("photo"))
                 readPhoto();
             else
@@ -76,16 +75,15 @@ void CoordinatesParser::readRsp()
 
 void CoordinatesParser::readPhoto()
 {
-    Q_ASSERT( isStartElement()
-              && name() == QLatin1String("photo"));
-    
-    while( !atEnd() ) {
+    Q_ASSERT(isStartElement() && name() == QLatin1String("photo"));
+
+    while (!atEnd()) {
         readNext();
-        
-        if( isEndElement() )
+
+        if (isEndElement())
             break;
-        
-        if( isStartElement() ) {
+
+        if (isStartElement()) {
             if (name() == QLatin1String("location"))
                 readLocation();
             else
@@ -96,19 +94,18 @@ void CoordinatesParser::readPhoto()
 
 void CoordinatesParser::readLocation()
 {
-    Q_ASSERT( isStartElement()
-              && name() == QLatin1String("location"));
- 
+    Q_ASSERT(isStartElement() && name() == QLatin1String("location"));
+
     m_coordinates->setLatitude(attributes().value(QLatin1String("latitude")).toString().toDouble() * DEG2RAD);
     m_coordinates->setLongitude(attributes().value(QLatin1String("longitude")).toString().toDouble() * DEG2RAD);
-    
-    while( !atEnd() ) {
+
+    while (!atEnd()) {
         readNext();
-        
-        if( isEndElement() )
+
+        if (isEndElement())
             break;
-        
-        if( isStartElement() )
+
+        if (isStartElement())
             break;
     }
 }

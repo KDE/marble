@@ -13,7 +13,8 @@
 class QColor;
 class QDateTime;
 
-namespace Marble {
+namespace Marble
+{
 
 class GeoDataCoordinates;
 class GeoDataTrack;
@@ -26,9 +27,7 @@ class MarbleClock;
 class SatellitesTLEItem : public TrackerPluginItem
 {
 public:
-    SatellitesTLEItem( const QString &name,
-                       elsetrec satrec,
-                       const MarbleClock *clock );
+    SatellitesTLEItem(const QString &name, elsetrec satrec, const MarbleClock *clock);
 
     void update() override;
 
@@ -46,7 +45,7 @@ private:
      * Add a point in the GeoDataTrack geometry of the placemark with time
      * dateTime and coordinates of the satellite determined from m_satrec.
      */
-    void addPointAt( const QDateTime &dateTime );
+    void addPointAt(const QDateTime &dateTime);
 
     /**
      * Create a GeoDataCoordinates object from the cartesian coordinates
@@ -54,7 +53,7 @@ private:
      * as TEME (True equator, Mean equinox) with Greenwich Mean Sidereal Time
      * @p gmst in radians at time of observation.
      */
-    GeoDataCoordinates fromTEME( double x, double y, double z, double gmst ) const;
+    GeoDataCoordinates fromTEME(double x, double y, double z, double gmst) const;
 
     /**
      * @return The time at the satellite epoch determined from m_satrec
@@ -88,12 +87,12 @@ private:
      * Returns the Greenwich Mean Sideral Time in radians, @p minutes
      * after the epoch.
      */
-    double gmst( double minutes ) const;
+    double gmst(double minutes) const;
 
     /**
      * @return The square of @p x
      */
-    static double square( double x );
+    static double square(double x);
 };
 
 } // namespace Marble

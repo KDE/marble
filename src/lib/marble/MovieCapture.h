@@ -21,16 +21,29 @@ class MovieCapturePrivate;
 class MovieFormat
 {
 public:
-    MovieFormat() {}
-    explicit MovieFormat( const QString &type, const QString &name, const QString &extension) :
-        m_type( type ),
-        m_name( name ),
-        m_extension( extension )
-    {}
+    MovieFormat()
+    {
+    }
+    explicit MovieFormat(const QString &type, const QString &name, const QString &extension)
+        : m_type(type)
+        , m_name(name)
+        , m_extension(extension)
+    {
+    }
 
-    QString type() const { return m_type; }
-    QString name() const { return m_name; }
-    QString extension() const { return m_extension; }
+    QString type() const
+    {
+        return m_type;
+    }
+    QString name() const
+    {
+        return m_name;
+    }
+    QString extension() const
+    {
+        return m_extension;
+    }
+
 private:
     QString m_type;
     QString m_name;
@@ -64,16 +77,15 @@ private Q_SLOTS:
     void processWrittenMovie(int exitCode);
 
 Q_SIGNALS:
-    void rateCalculated( double );
+    void rateCalculated(double);
     void errorOccured();
 
 protected:
-    MovieCapturePrivate * const d_ptr;
+    MovieCapturePrivate *const d_ptr;
 
 private:
     Q_DECLARE_PRIVATE(MovieCapture)
     QVector<MovieFormat> m_supportedFormats;
-
 };
 
 } // namespace Marble

@@ -16,23 +16,23 @@ class NavigationSlider : public QAbstractSlider
 {
     Q_OBJECT
 public:
-    explicit NavigationSlider( QWidget *parent = nullptr );
+    explicit NavigationSlider(QWidget *parent = nullptr);
     ~NavigationSlider() override;
 
 Q_SIGNALS:
     void repaintNeeded();
 
 protected:
-    void enterEvent( QEnterEvent * ) override;
-    void mouseMoveEvent( QMouseEvent * mouseEvent) override;
-    void mousePressEvent( QMouseEvent * ) override;
-    void mouseReleaseEvent( QMouseEvent * ) override;
-    void leaveEvent( QEvent * ) override;
-    void paintEvent( QPaintEvent * ) override;
+    void enterEvent(QEnterEvent *) override;
+    void mouseMoveEvent(QMouseEvent *mouseEvent) override;
+    void mousePressEvent(QMouseEvent *) override;
+    void mouseReleaseEvent(QMouseEvent *) override;
+    void leaveEvent(QEvent *) override;
+    void paintEvent(QPaintEvent *) override;
     void repaint();
 
 private:
-    static QPixmap pixmap(const QString &id );
+    static QPixmap pixmap(const QString &id);
     QString m_handleImagePath;
 };
 

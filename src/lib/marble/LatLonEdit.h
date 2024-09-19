@@ -17,44 +17,45 @@ namespace Marble
 
 class LatLonEditPrivate;
 
-class MARBLE_EXPORT  LatLonEdit : public QWidget
+class MARBLE_EXPORT LatLonEdit : public QWidget
 {
     Q_OBJECT
-    //FIXME: make the dimension enum work
-    //Q_PROPERTY( qreal value READ value WRITE setValue )
-    //Q_PROPERTY( int dimension READ dimension WRITE setDimension )
+    // FIXME: make the dimension enum work
+    // Q_PROPERTY( qreal value READ value WRITE setValue )
+    // Q_PROPERTY( int dimension READ dimension WRITE setDimension )
 
 public:
     /**
      * @brief This enum is used to choose the dimension.
      */
     enum Dimension {
-        Latitude,             ///< Latitude
-        Longitude            ///< Longitude
+        Latitude, ///< Latitude
+        Longitude ///< Longitude
     };
 
-    explicit LatLonEdit(QWidget *parent = nullptr, Dimension dimension = Longitude,
-                        GeoDataCoordinates::Notation notation = GeoDataCoordinates::DMS);
+    explicit LatLonEdit(QWidget *parent = nullptr, Dimension dimension = Longitude, GeoDataCoordinates::Notation notation = GeoDataCoordinates::DMS);
     ~LatLonEdit() override;
     qreal value() const;
     Dimension dimension() const;
     GeoDataCoordinates::Notation notation() const;
 public Q_SLOTS:
     void setValue(qreal newvalue);
-    void setDimension( Dimension dimension );
+    void setDimension(Dimension dimension);
     void setNotation(GeoDataCoordinates::Notation notation);
 Q_SIGNALS:
-    void valueChanged( qreal value );
+    void valueChanged(qreal value);
 private Q_SLOTS:
     void checkIntValueOverflow();
     void checkUIntValueOverflow();
     void checkFloatValueOverflow();
     void onSignChanged();
+
 private:
     // recalculates m_value based on spinboxes
     void recalculate();
+
 private:
-    LatLonEditPrivate * const d;
+    LatLonEditPrivate *const d;
 };
 
 }

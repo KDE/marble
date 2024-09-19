@@ -23,34 +23,33 @@ class MarbleWidget;
 class AbstractWeatherService : public QObject
 {
     Q_OBJECT
-    
- public:
-    explicit AbstractWeatherService( const MarbleModel *model, QObject *parent );
+
+public:
+    explicit AbstractWeatherService(const MarbleModel *model, QObject *parent);
     ~AbstractWeatherService() override;
-    void setMarbleWidget( MarbleWidget* widget );
-    
- public Q_SLOTS:
-    virtual void setFavoriteItems( const QStringList& favorite );
+    void setMarbleWidget(MarbleWidget *widget);
+
+public Q_SLOTS:
+    virtual void setFavoriteItems(const QStringList &favorite);
     QStringList favoriteItems() const;
 
-    virtual void getAdditionalItems( const GeoDataLatLonAltBox& box,
-                                     qint32 number = 10 ) = 0;
-    virtual void getItem( const QString &id ) = 0;
-    virtual void parseFile( const QByteArray& file );
-    
- Q_SIGNALS:
-    void requestedDownload( const QUrl& url, const QString& type, AbstractDataPluginItem *item );
-    void createdItems( const QList<AbstractDataPluginItem*>& items );
-    void downloadDescriptionFileRequested( const QUrl& );
+    virtual void getAdditionalItems(const GeoDataLatLonAltBox &box, qint32 number = 10) = 0;
+    virtual void getItem(const QString &id) = 0;
+    virtual void parseFile(const QByteArray &file);
+
+Q_SIGNALS:
+    void requestedDownload(const QUrl &url, const QString &type, AbstractDataPluginItem *item);
+    void createdItems(const QList<AbstractDataPluginItem *> &items);
+    void downloadDescriptionFileRequested(const QUrl &);
 
 protected:
-    const MarbleModel* marbleModel() const;
-    MarbleWidget* marbleWidget();
+    const MarbleModel *marbleModel() const;
+    MarbleWidget *marbleWidget();
 
 private:
     const MarbleModel *const m_marbleModel;
     QStringList m_favoriteItems;
-    MarbleWidget* m_marbleWidget;
+    MarbleWidget *m_marbleWidget;
 };
 
 } // namespace Marble

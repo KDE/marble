@@ -3,7 +3,6 @@
 // SPDX-FileCopyrightText: 2010 Dennis Nienhüser <nienhueser@kde.org>
 //
 
-
 #ifndef MARBLE_TRAVELINGSALESMANPLUGIN_H
 #define MARBLE_TRAVELINGSALESMANPLUGIN_H
 
@@ -16,12 +15,12 @@ class TravelingSalesmanPlugin : public RunnerPlugin
 {
     Q_OBJECT
     Q_PLUGIN_METADATA(IID "org.kde.marble.TravelingSalesmanPlugin")
-    Q_INTERFACES( Marble::RunnerPlugin )
+    Q_INTERFACES(Marble::RunnerPlugin)
 
 public:
-    explicit TravelingSalesmanPlugin( QObject *parent = 0 );
+    explicit TravelingSalesmanPlugin(QObject *parent = 0);
 
-    virtual MarbleAbstractRunner* newRunner() const;
+    virtual MarbleAbstractRunner *newRunner() const;
 };
 
 }

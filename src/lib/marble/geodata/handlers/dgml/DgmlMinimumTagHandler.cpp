@@ -16,7 +16,7 @@ namespace dgml
 {
 DGML_DEFINE_TAG_HANDLER(Minimum)
 
-GeoNode* DgmlMinimumTagHandler::parse(GeoParser& parser) const
+GeoNode *DgmlMinimumTagHandler::parse(GeoParser &parser) const
 {
     // Check whether the tag is valid
     Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1String(dgmlTag_Minimum)));
@@ -34,7 +34,6 @@ GeoNode* DgmlMinimumTagHandler::parse(GeoParser& parser) const
         else
             parser.raiseWarning(QObject::tr("Could not convert <minimum> child text content to integer. Was: '%1'").arg(parsedText));
     }
-
 
     return nullptr;
 }

@@ -6,7 +6,6 @@
 #ifndef MARBLE_OSMRELATIONTAGWRITER_H
 #define MARBLE_OSMRELATIONTAGWRITER_H
 
-
 #include <QMap>
 
 namespace Marble
@@ -19,18 +18,12 @@ class OsmPlacemarkData;
 
 class OsmRelationTagWriter
 {
-
 public:
-    static void writeRelation( const QVector<GeoDataPlacemark*>& relation, const QString& id,
-                           const QMap<QString,QString>& tags, GeoWriter& writer );
+    static void writeRelation(const QVector<GeoDataPlacemark *> &relation, const QString &id, const QMap<QString, QString> &tags, GeoWriter &writer);
 
-    static void writeMultipolygon( const GeoDataPolygon& polygon,
-                                   const OsmPlacemarkData& osmData, GeoWriter& writer );
+    static void writeMultipolygon(const GeoDataPolygon &polygon, const OsmPlacemarkData &osmData, GeoWriter &writer);
 };
 
 }
 
 #endif
-
-
-

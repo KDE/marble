@@ -26,7 +26,7 @@ public:
 private:
     friend class OsmRelationManagerWidget;
     GeoDataPlacemark *m_placemark;
-    const QHash< qint64, OsmPlacemarkData > *m_allRelations;
+    const QHash<qint64, OsmPlacemarkData> *m_allRelations;
     QMenu *m_relationDropMenu;
 };
 

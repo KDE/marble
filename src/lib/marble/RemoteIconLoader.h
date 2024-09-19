@@ -20,25 +20,26 @@ class RemoteIconLoaderPrivate;
 class RemoteIconLoader : public QObject
 {
     Q_OBJECT;
+
 public:
-    explicit RemoteIconLoader( QObject *parent = nullptr );
+    explicit RemoteIconLoader(QObject *parent = nullptr);
     ~RemoteIconLoader() override;
 
     /**
-        * Handles the icon request for passed url( whether icon is available
-        * in cache or on disk or it should gor for a download
-        */
-    QImage load( const QUrl& url );
+     * Handles the icon request for passed url( whether icon is available
+     * in cache or on disk or it should gor for a download
+     */
+    QImage load(const QUrl &url);
 
 Q_SIGNALS:
     /**
-        * Signal to indicate that image has been downloaded
-        * and is ready to be display now
-        */
+     * Signal to indicate that image has been downloaded
+     * and is ready to be display now
+     */
     void iconReady();
 
 private Q_SLOTS:
-    void storeIcon( const QByteArray&, const QString& );
+    void storeIcon(const QByteArray &, const QString &);
 
 private:
     RemoteIconLoaderPrivate *d;
@@ -46,4 +47,4 @@ private:
 
 }
 
-#endif  // MARBLE_REMOTEICONLOADER_H
+#endif // MARBLE_REMOTEICONLOADER_H

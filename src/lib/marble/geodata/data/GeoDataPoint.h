@@ -5,7 +5,6 @@
 // SPDX-FileCopyrightText: 2008 Patrick Spendrin <ps_ml@gmx.de>
 //
 
-
 #ifndef MARBLE_GEODATAPOINT_H
 #define MARBLE_GEODATAPOINT_H
 
@@ -14,39 +13,39 @@
 
 #include <cmath>
 
-#include "geodata_export.h"
-#include "GeoDataGeometry.h"
 #include "GeoDataCoordinates.h"
+#include "GeoDataGeometry.h"
+#include "geodata_export.h"
 
 namespace Marble
 {
 
 class GeoDataPointPrivate;
 
-/** 
+/**
  * @short A Geometry object representing a 3d point
  *
  * GeoDataPoint is the GeoDataGeometry class representing a single three
  * dimensional point. It reflects the Point tag of KML spec and can be contained
- * in objects holding GeoDataGeometry objects. 
- * Nevertheless GeoDataPoint shouldn't be used if you just want to store 
+ * in objects holding GeoDataGeometry objects.
+ * Nevertheless GeoDataPoint shouldn't be used if you just want to store
  * 3d coordinates of a point that doesn't need to be inherited from GeoDataGeometry
- * In that case use GeoDataCoordinates instead which has nearly the same features 
- * and is much more light weight. 
+ * In that case use GeoDataCoordinates instead which has nearly the same features
+ * and is much more light weight.
  * Please consider this especially if you expect to have a high
  * amount of points e.g. for line strings, linear rings and polygons.
  * @see GeoDataCoordinates
  * @see GeoDataGeometry
-*/
+ */
 
 class GEODATA_EXPORT GeoDataPoint : public GeoDataGeometry
 {
- public:
+public:
     using Notation = GeoDataCoordinates::Notation;
     using Unit = GeoDataCoordinates::Unit;
 
-    GeoDataPoint( const GeoDataPoint& other );
-    explicit GeoDataPoint( const GeoDataCoordinates& other );
+    GeoDataPoint(const GeoDataPoint &other);
+    explicit GeoDataPoint(const GeoDataCoordinates &other);
     GeoDataPoint();
 
     /**
@@ -57,8 +56,7 @@ class GEODATA_EXPORT GeoDataPoint : public GeoDataGeometry
      * @param _unit units that lon and lat get measured in
      * (default for Radian: north pole at pi/2, southpole at -pi/2)
      */
-    GeoDataPoint( qreal lon, qreal lat, qreal alt = 0,
-                  GeoDataPoint::Unit _unit = GeoDataCoordinates::Radian );
+    GeoDataPoint(qreal lon, qreal lat, qreal alt = 0, GeoDataPoint::Unit _unit = GeoDataCoordinates::Radian);
 
     ~GeoDataPoint() override;
 
@@ -66,33 +64,32 @@ class GEODATA_EXPORT GeoDataPoint : public GeoDataGeometry
 
     GeoDataGeometry *copy() const override;
 
-    bool operator==( const GeoDataPoint &other ) const;
-    bool operator!=( const GeoDataPoint &other ) const;
+    bool operator==(const GeoDataPoint &other) const;
+    bool operator!=(const GeoDataPoint &other) const;
 
-    void setCoordinates( const GeoDataCoordinates &coordinates );
+    void setCoordinates(const GeoDataCoordinates &coordinates);
 
-    const GeoDataCoordinates& coordinates() const;
+    const GeoDataCoordinates &coordinates() const;
 
     /// Provides type information for downcasting a GeoData
-    const char* nodeType() const override;
+    const char *nodeType() const override;
 
     // Type definitions
     using Vector = QVector<GeoDataPoint>;
 
-
     // Serialize the Placemark to @p stream
-    void pack( QDataStream& stream ) const override;
+    void pack(QDataStream &stream) const override;
     // Unserialize the Placemark from @p stream
-    void unpack( QDataStream& stream ) override;
+    void unpack(QDataStream &stream) override;
 
     virtual void detach();
 
- private:
+private:
     Q_DECLARE_PRIVATE(GeoDataPoint)
 };
 
 }
 
-Q_DECLARE_METATYPE( Marble::GeoDataPoint )
+Q_DECLARE_METATYPE(Marble::GeoDataPoint)
 
 #endif

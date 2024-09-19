@@ -27,16 +27,16 @@ class MapViewItemDelegate : public QStyledItemDelegate
     Q_OBJECT
 
 public:
-    explicit MapViewItemDelegate( QListView* view );
-    void paint( QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index ) const override;
-    QSize sizeHint( const QStyleOptionViewItem &option, const QModelIndex &index ) const override;
+    explicit MapViewItemDelegate(QListView *view);
+    void paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const override;
+    QSize sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const override;
 
 private:
-    static QString text( const QModelIndex &index );
-    QListView* m_view;
+    static QString text(const QModelIndex &index);
+    QListView *m_view;
     QIcon m_bookmarkIcon;
 };
 
-} //Namespace: Marble
+} // Namespace: Marble
 
 #endif // MAPVIEWITEMDELEGATE_H

@@ -10,10 +10,9 @@
 #include "../../lib/marble/MarbleModel.h"
 #include "../../lib/marble/MarbleWidget.h"
 
-
 MarbleWidgetPlugin::MarbleWidgetPlugin(QObject *parent)
-    : QObject(parent),
-      m_initialized( false )
+    : QObject(parent)
+    , m_initialized(false)
 {
     // nothing to do
 }
@@ -30,7 +29,7 @@ bool MarbleWidgetPlugin::isInitialized() const
 
 QWidget *MarbleWidgetPlugin::createWidget(QWidget *parent)
 {
-    Marble::MarbleWidget* marbleWidget = new Marble::MarbleWidget( parent );
+    Marble::MarbleWidget *marbleWidget = new Marble::MarbleWidget(parent);
     marbleWidget->setMapThemeId(QStringLiteral("earth/srtm/srtm.dgml"));
 
     return marbleWidget;

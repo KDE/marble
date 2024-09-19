@@ -5,14 +5,13 @@
 
 #include <QObject>
 
+#include "GeoDataLinearRing.h"
+#include "GeoDataMultiGeometry.h"
 #include "GeoDataMultiTrack.h"
 #include "GeoDataPoint.h"
 #include "GeoDataPolygon.h"
-#include "GeoDataLinearRing.h"
 #include "GeoDataTrack.h"
-#include "GeoDataMultiGeometry.h"
 #include "TestUtils.h"
-
 
 namespace Marble
 {
@@ -68,11 +67,11 @@ void TestGeometryDetach::testMultiGeometry()
     multiGeom1.append(point);
 
     GeoDataMultiGeometry multiGeom2 = multiGeom1;
-    static_cast<GeoDataPoint*>(multiGeom2.child(0))->setCoordinates(m_coords2);
-    QVERIFY(static_cast<GeoDataPoint*>(multiGeom1.child(0))->coordinates() == m_coords1);
+    static_cast<GeoDataPoint *>(multiGeom2.child(0))->setCoordinates(m_coords2);
+    QVERIFY(static_cast<GeoDataPoint *>(multiGeom1.child(0))->coordinates() == m_coords1);
 
     const GeoDataMultiGeometry multiGeom3 = multiGeom1;
-    QVERIFY(static_cast<const GeoDataPoint*>(multiGeom3.child(0))->coordinates() == m_coords1);
+    QVERIFY(static_cast<const GeoDataPoint *>(multiGeom3.child(0))->coordinates() == m_coords1);
 }
 
 void TestGeometryDetach::testMultiTrack()
@@ -125,6 +124,6 @@ void TestGeometryDetach::testPolygon()
 
 }
 
-QTEST_MAIN( Marble::TestGeometryDetach )
+QTEST_MAIN(Marble::TestGeometryDetach)
 
 #include "TestGeometryDetach.moc"

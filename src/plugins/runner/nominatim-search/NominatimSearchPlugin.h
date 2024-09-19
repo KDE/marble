@@ -4,7 +4,6 @@
 // SPDX-FileCopyrightText: 2012 Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 //
 
-
 #ifndef MARBLE_NOMINATIMSEARCHPLUGIN_H
 #define MARBLE_NOMINATIMSEARCHPLUGIN_H
 
@@ -17,10 +16,10 @@ class NominatimPlugin : public SearchRunnerPlugin
 {
     Q_OBJECT
     Q_PLUGIN_METADATA(IID "org.kde.marble.NominatimSearchPlugin")
-    Q_INTERFACES( Marble::SearchRunnerPlugin )
+    Q_INTERFACES(Marble::SearchRunnerPlugin)
 
 public:
-    explicit NominatimPlugin( QObject *parent = nullptr );
+    explicit NominatimPlugin(QObject *parent = nullptr);
 
     QString name() const override;
 
@@ -36,7 +35,7 @@ public:
 
     QVector<PluginAuthor> pluginAuthors() const override;
 
-    SearchRunner* newRunner() const override;
+    SearchRunner *newRunner() const override;
 };
 
 }

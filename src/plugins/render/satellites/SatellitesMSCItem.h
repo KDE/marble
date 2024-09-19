@@ -8,14 +8,15 @@
 
 #include "TrackerPluginItem.h"
 
-#include <QString>
 #include <QDateTime>
+#include <QString>
 
 #include <planetarySats.h>
 
 class QColor;
 
-namespace Marble {
+namespace Marble
+{
 
 class GeoDataTrack;
 class MarbleClock;
@@ -27,15 +28,15 @@ class MarbleClock;
 class SatellitesMSCItem : public TrackerPluginItem
 {
 public:
-    SatellitesMSCItem( const QString &name,
-                       const QString &category,
-                       const QString &relatedBody,
-                       const QString &catalog,
-                       const QDateTime &missionStart,
-                       const QDateTime &missionEnd,
-                       int catalogIndex,
-                       PlanetarySats *planSat,
-                       const MarbleClock *clock );
+    SatellitesMSCItem(const QString &name,
+                      const QString &category,
+                      const QString &relatedBody,
+                      const QString &catalog,
+                      const QDateTime &missionStart,
+                      const QDateTime &missionEnd,
+                      int catalogIndex,
+                      PlanetarySats *planSat,
+                      const MarbleClock *clock);
     ~SatellitesMSCItem() override;
 
     QString category() const;
@@ -44,8 +45,8 @@ public:
     int catalogIndex() const;
     QString id() const;
 
-    const QDateTime& missionStart() const;
-    const QDateTime& missionEnd() const;
+    const QDateTime &missionStart() const;
+    const QDateTime &missionEnd() const;
 
     void update() override;
 
@@ -74,7 +75,7 @@ private:
     const QDateTime m_missionEnd;
 
     void setDescription();
-    void addTrackPointAt( const QDateTime &dateTime );
+    void addTrackPointAt(const QDateTime &dateTime);
 };
 
 } // namespace Marble

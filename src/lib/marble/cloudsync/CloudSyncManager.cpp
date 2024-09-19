@@ -10,8 +10,8 @@
 namespace Marble
 {
 
-class Q_DECL_HIDDEN CloudSyncManager::Private {
-
+class Q_DECL_HIDDEN CloudSyncManager::Private
+{
 public:
     Private();
     ~Private();
@@ -27,8 +27,8 @@ public:
     QString m_status;
     CloudSyncManager::Status m_status_type;
 
-    RouteSyncManager* m_routeSyncManager;
-    BookmarkSyncManager* m_bookmarkSyncManager;
+    RouteSyncManager *m_routeSyncManager;
+    BookmarkSyncManager *m_bookmarkSyncManager;
 };
 
 CloudSyncManager::Private::~Private()
@@ -37,29 +37,29 @@ CloudSyncManager::Private::~Private()
     delete m_bookmarkSyncManager;
 }
 
-CloudSyncManager::Private::Private() :
-    m_workOffline( false ),
-    m_syncEnabled( false ),
-    m_owncloudProtocol( "http" ),
-    m_ownloudServer(),
-    m_owncloudUsername(),
-    m_owncloudPassword(),
-    m_status(),
-    m_status_type( CloudSyncManager::Unknown),
-    m_routeSyncManager( nullptr ),
-    m_bookmarkSyncManager( nullptr )
+CloudSyncManager::Private::Private()
+    : m_workOffline(false)
+    , m_syncEnabled(false)
+    , m_owncloudProtocol("http")
+    , m_ownloudServer()
+    , m_owncloudUsername()
+    , m_owncloudPassword()
+    , m_status()
+    , m_status_type(CloudSyncManager::Unknown)
+    , m_routeSyncManager(nullptr)
+    , m_bookmarkSyncManager(nullptr)
 {
 }
 
-CloudSyncManager::CloudSyncManager( QObject *parent ) :
-    QObject( parent ),
-    d( new Private )
+CloudSyncManager::CloudSyncManager(QObject *parent)
+    : QObject(parent)
+    , d(new Private)
 {
 }
 
 CloudSyncManager::~CloudSyncManager()
 {
-  delete d;
+    delete d;
 }
 
 bool CloudSyncManager::workOffline() const
@@ -67,11 +67,11 @@ bool CloudSyncManager::workOffline() const
     return d->m_workOffline;
 }
 
-void CloudSyncManager::setWorkOffline( bool offline )
+void CloudSyncManager::setWorkOffline(bool offline)
 {
-    if ( offline != d->m_workOffline ) {
+    if (offline != d->m_workOffline) {
         d->m_workOffline = offline;
-        emit workOfflineChanged( d->m_workOffline );
+        emit workOfflineChanged(d->m_workOffline);
     }
 }
 
@@ -95,75 +95,75 @@ QString CloudSyncManager::owncloudPassword() const
     return d->m_owncloudPassword;
 }
 
-void CloudSyncManager::setSyncEnabled( bool enabled )
+void CloudSyncManager::setSyncEnabled(bool enabled)
 {
-    if ( d->m_syncEnabled != enabled ) {
+    if (d->m_syncEnabled != enabled) {
         d->m_syncEnabled = enabled;
-        emit syncEnabledChanged( d->m_syncEnabled );
+        emit syncEnabledChanged(d->m_syncEnabled);
     }
 }
 
-void CloudSyncManager::setOwncloudCredentials( const QString &server, const QString &user, const QString &password )
+void CloudSyncManager::setOwncloudCredentials(const QString &server, const QString &user, const QString &password)
 {
     QUrl const oldApiUrl = apiUrl();
-    blockSignals( true );
-    setOwncloudServer( server );
-    setOwncloudUsername( user );
-    setOwncloudPassword( password );
-    blockSignals( false );
-    if ( oldApiUrl != apiUrl() ) {
-        emit apiUrlChanged( apiUrl() );
+    blockSignals(true);
+    setOwncloudServer(server);
+    setOwncloudUsername(user);
+    setOwncloudPassword(password);
+    blockSignals(false);
+    if (oldApiUrl != apiUrl()) {
+        emit apiUrlChanged(apiUrl());
     }
 }
 
-void CloudSyncManager::setOwncloudServer( const QString &server )
+void CloudSyncManager::setOwncloudServer(const QString &server)
 {
     QString const oldProtocol = d->m_owncloudProtocol;
     QString const oldServer = d->m_ownloudServer;
 
     if (server.startsWith(QLatin1String("http://"))) {
         d->m_owncloudProtocol = "http://";
-        d->m_ownloudServer = server.mid( 7 );
+        d->m_ownloudServer = server.mid(7);
     } else if (server.startsWith(QLatin1String("https://"))) {
         d->m_owncloudProtocol = "https://";
-        d->m_ownloudServer = server.mid ( 8 );
+        d->m_ownloudServer = server.mid(8);
     } else {
         d->m_owncloudProtocol = "http://";
         d->m_ownloudServer = server;
     }
 
-    if ( oldServer != d->m_ownloudServer ) {
-        emit owncloudServerChanged( owncloudServer() );
-        emit apiUrlChanged( apiUrl() );
-    } else if ( oldProtocol != d->m_owncloudProtocol ) {
-        emit apiUrlChanged( apiUrl() );
+    if (oldServer != d->m_ownloudServer) {
+        emit owncloudServerChanged(owncloudServer());
+        emit apiUrlChanged(apiUrl());
+    } else if (oldProtocol != d->m_owncloudProtocol) {
+        emit apiUrlChanged(apiUrl());
     }
 }
 
-void CloudSyncManager::setOwncloudUsername( const QString &username )
+void CloudSyncManager::setOwncloudUsername(const QString &username)
 {
-    if ( d->m_owncloudUsername != username ) {
+    if (d->m_owncloudUsername != username) {
         d->m_owncloudUsername = username;
-        emit owncloudUsernameChanged( d->m_owncloudUsername );
-        emit apiUrlChanged( apiUrl() );
+        emit owncloudUsernameChanged(d->m_owncloudUsername);
+        emit apiUrlChanged(apiUrl());
     }
 }
 
-void CloudSyncManager::setOwncloudPassword( const QString &password )
+void CloudSyncManager::setOwncloudPassword(const QString &password)
 {
-    if ( d->m_owncloudPassword != password ) {
+    if (d->m_owncloudPassword != password) {
         d->m_owncloudPassword = password;
-        emit owncloudPasswordChanged( d->m_owncloudPassword );
-        emit apiUrlChanged( apiUrl() );
+        emit owncloudPasswordChanged(d->m_owncloudPassword);
+        emit apiUrlChanged(apiUrl());
     }
 }
 
-void CloudSyncManager::setStatus( const QString &status, CloudSyncManager::Status status_type )
+void CloudSyncManager::setStatus(const QString &status, CloudSyncManager::Status status_type)
 {
-    if( d->m_status != status && d->m_status_type != status_type) {
+    if (d->m_status != status && d->m_status_type != status_type) {
         d->m_status = status;
         d->m_status_type = status_type;
-        emit statusChanged( d->m_status );
+        emit statusChanged(d->m_status);
     }
 }
 
@@ -184,16 +184,18 @@ QString CloudSyncManager::apiPath() const
 
 QUrl CloudSyncManager::apiUrl() const
 {
-    return QUrl( QStringLiteral( "%0%1:%2@%3/%4" )
-                 .arg( d->m_owncloudProtocol )
-                 .arg( d->m_owncloudUsername ).arg( d->m_owncloudPassword )
-                 .arg( d->m_ownloudServer ).arg( apiPath() ) );
+    return QUrl(QStringLiteral("%0%1:%2@%3/%4")
+                    .arg(d->m_owncloudProtocol)
+                    .arg(d->m_owncloudUsername)
+                    .arg(d->m_owncloudPassword)
+                    .arg(d->m_ownloudServer)
+                    .arg(apiPath()));
 }
 
 RouteSyncManager *CloudSyncManager::routeSyncManager()
 {
-    if ( !d->m_routeSyncManager ) {
-        d->m_routeSyncManager = new RouteSyncManager( this );
+    if (!d->m_routeSyncManager) {
+        d->m_routeSyncManager = new RouteSyncManager(this);
     }
 
     return d->m_routeSyncManager;
@@ -201,8 +203,8 @@ RouteSyncManager *CloudSyncManager::routeSyncManager()
 
 BookmarkSyncManager *CloudSyncManager::bookmarkSyncManager()
 {
-    if ( !d->m_bookmarkSyncManager ) {
-        d->m_bookmarkSyncManager = new BookmarkSyncManager( this );
+    if (!d->m_bookmarkSyncManager) {
+        d->m_bookmarkSyncManager = new BookmarkSyncManager(this);
     }
 
     return d->m_bookmarkSyncManager;

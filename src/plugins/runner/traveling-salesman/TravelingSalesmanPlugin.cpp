@@ -9,18 +9,19 @@
 namespace Marble
 {
 
-TravelingSalesmanPlugin::TravelingSalesmanPlugin( QObject *parent ) : RunnerPlugin( parent )
+TravelingSalesmanPlugin::TravelingSalesmanPlugin(QObject *parent)
+    : RunnerPlugin(parent)
 {
-    setCapabilities( Routing );
+    setCapabilities(Routing);
     setSupportedCelestialBodies(QStringList(QStringLiteral("earth")));
-    setCanWorkOffline( true );
-    setName( tr( "Traveling Salesman" ) );
-    setNameId( "travelingsalesman" );
-    setDescription( tr( "Retrieves routes from traveling salesman" ) );
-    setGuiString( tr( "Traveling Salesman Routing" ) );
+    setCanWorkOffline(true);
+    setName(tr("Traveling Salesman"));
+    setNameId("travelingsalesman");
+    setDescription(tr("Retrieves routes from traveling salesman"));
+    setGuiString(tr("Traveling Salesman Routing"));
 }
 
-MarbleAbstractRunner* TravelingSalesmanPlugin::newRunner() const
+MarbleAbstractRunner *TravelingSalesmanPlugin::newRunner() const
 {
     return new TravelingSalesmanRunner;
 }

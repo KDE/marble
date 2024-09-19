@@ -7,8 +7,8 @@
 #ifndef MARBLE_GEOSCENEZOOM_H
 #define MARBLE_GEOSCENEZOOM_H
 
-#include <geodata_export.h>
 #include "GeoDocument.h"
+#include <geodata_export.h>
 
 namespace Marble
 {
@@ -18,23 +18,23 @@ namespace Marble
  */
 class GEODATA_EXPORT GeoSceneZoom : public GeoNode
 {
- public:
+public:
     GeoSceneZoom();
 
     int minimum() const;
-    void setMinimum( int name );
+    void setMinimum(int name);
     int maximum() const;
-    void setMaximum( int target );
+    void setMaximum(int target);
     bool discrete() const;
-    void setDiscrete( bool theme );
+    void setDiscrete(bool theme);
 
     const char *nodeType() const override;
 
- private:
+private:
     // FIXME: d-pointerfy
 
-    int  m_minimum;
-    int  m_maximum;
+    int m_minimum;
+    int m_maximum;
     bool m_discrete;
 };
 

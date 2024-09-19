@@ -14,46 +14,46 @@ namespace Marble
 class FileStoragePolicy : public StoragePolicy
 {
     Q_OBJECT
-    
-    public:
-        /**
-         * Creates a new file storage policy.
-         *
-         * @param dataDirectory The directory where the data should go to.
-         * @param parent The parent object.
-         */
-        explicit FileStoragePolicy( const QString &dataDirectory = QString(), QObject *parent = nullptr );
 
-        /**
-         * Destroys the cache storage policy.
-         */
-        ~FileStoragePolicy() override;
+public:
+    /**
+     * Creates a new file storage policy.
+     *
+     * @param dataDirectory The directory where the data should go to.
+     * @param parent The parent object.
+     */
+    explicit FileStoragePolicy(const QString &dataDirectory = QString(), QObject *parent = nullptr);
 
-        /**
-         * Returns whether the @p fileName exists already.
-         */
-        bool fileExists( const QString &fileName ) const override;
+    /**
+     * Destroys the cache storage policy.
+     */
+    ~FileStoragePolicy() override;
 
-        /**
-         * Updates the @p fileName with the given @p data.
-         */
-        bool updateFile( const QString &fileName, const QByteArray &data ) override;
+    /**
+     * Returns whether the @p fileName exists already.
+     */
+    bool fileExists(const QString &fileName) const override;
 
-        /**
-         * Clears the cache.
-         */
-	void clearCache() override;
+    /**
+     * Updates the @p fileName with the given @p data.
+     */
+    bool updateFile(const QString &fileName, const QByteArray &data) override;
 
-        /**
-         * Returns the last error message.
-         */
-        QString lastErrorMessage() const override;
+    /**
+     * Clears the cache.
+     */
+    void clearCache() override;
 
-    private:
-	Q_DISABLE_COPY( FileStoragePolicy )
-	
-        QString m_dataDirectory;
-        QString m_errorMsg;
+    /**
+     * Returns the last error message.
+     */
+    QString lastErrorMessage() const override;
+
+private:
+    Q_DISABLE_COPY(FileStoragePolicy)
+
+    QString m_dataDirectory;
+    QString m_errorMsg;
 };
 
 }

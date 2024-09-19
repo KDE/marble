@@ -6,79 +6,73 @@
 #ifndef APRSGATHERER_H
 #define APRSGATHERER_H
 
-#include <QThread>
 #include <QMap>
 #include <QString>
+#include <QThread>
 
-#include "AprsSource.h"
 #include "AprsObject.h"
+#include "AprsSource.h"
 
 class QIODevice;
 class QMutex;
 
-namespace Marble {
-        
-    class AprsGatherer : public QThread
-    {
-        Q_OBJECT
+namespace Marble
+{
 
-            public:
-        AprsGatherer( AprsSource *from,
-                      QMap<QString, AprsObject *> *objects,
-                      QMutex *mutex,
-                      QString *filter
-            );
-        AprsGatherer( QIODevice                   *from,
-                      QMap<QString, AprsObject *> *objects,
-                      QMutex *mutex,
-                      QString *filter
-            );
-        void run() override;
+class AprsGatherer : public QThread
+{
+    Q_OBJECT
 
-        void addObject( const QString &callSign,
-                        qreal latitude, qreal longitude, bool canDoDirect,
-                        const QString &routePath,
-                        const QChar &symbolTable,
-                        const QChar &symbolCode );
+public:
+    AprsGatherer(AprsSource *from, QMap<QString, AprsObject *> *objects, QMutex *mutex, QString *filter);
+    AprsGatherer(QIODevice *from, QMap<QString, AprsObject *> *objects, QMutex *mutex, QString *filter);
+    void run() override;
 
-        void setDumpOutput( bool to );
-        bool dumpOutput() const;
+    void addObject(const QString &callSign,
+                   qreal latitude,
+                   qreal longitude,
+                   bool canDoDirect,
+                   const QString &routePath,
+                   const QChar &symbolTable,
+                   const QChar &symbolCode);
 
-        void setSeenFrom ( GeoAprsCoordinates::SeenFrom seenFrom );
-        GeoAprsCoordinates::SeenFrom seenFrom();
+    void setDumpOutput(bool to);
+    bool dumpOutput() const;
 
-        void shutDown();
-        static void sleepFor(int seconds);
+    void setSeenFrom(GeoAprsCoordinates::SeenFrom seenFrom);
+    GeoAprsCoordinates::SeenFrom seenFrom();
 
-      private:
-        void initMicETables();
-        static qreal calculateLongitude( const QString &threeBytes,
-                                         int offset, bool isEast );
+    void shutDown();
+    static void sleepFor(int seconds);
 
-        AprsSource                  *m_source;
-        QIODevice                   *m_socket;
-        QString                     *m_filter;
-        bool                         m_running;
-        bool                         m_dumpOutput;
-        GeoAprsCoordinates::SeenFrom m_seenFrom;
-        QString                      m_sourceName;
+private:
+    void initMicETables();
+    static qreal calculateLongitude(const QString &threeBytes, int offset, bool isEast);
 
-        // Shared with the parent thread
-        QMutex                      *m_mutex;
-        QMap<QString, AprsObject *> *m_objects;
+    AprsSource *m_source;
+    QIODevice *m_socket;
+    QString *m_filter;
+    bool m_running;
+    bool m_dumpOutput;
+    GeoAprsCoordinates::SeenFrom m_seenFrom;
+    QString m_sourceName;
 
-        QMap<QPair<QChar, QChar>, QString> m_pixmaps;
+    // Shared with the parent thread
+    QMutex *m_mutex;
+    QMap<QString, AprsObject *> *m_objects;
 
-        // Mic-E decoding tables
-        QMap<QChar, int>                   m_dstCallDigits;
-        QMap<QChar, bool>                  m_dstCallSouthEast;
-        QMap<QChar, int>                   m_dstCallLongitudeOffset;
-        QMap<QChar, int>                   m_dstCallMessageBit;
+    QMap<QPair<QChar, QChar>, QString> m_pixmaps;
 
-        QMap<int, QString>                 m_standardMessageText;
-        QMap<int, QString>                 m_customMessageText;
-        QMap<QChar, int>                   m_infoFieldByte1;
-    };
+    // Mic-E decoding tables
+    QMap<QChar, int> m_dstCallDigits;
+    QMap<QChar, bool> m_dstCallSouthEast;
+    QMap<QChar, int> m_dstCallLongitudeOffset;
+    QMap<QChar, int> m_dstCallMessageBit;
+
+    QMap<int, QString> m_standardMessageText;
+    QMap<int, QString> m_customMessageText;
+    QMap<QChar, int> m_infoFieldByte1;
+};
 }
 
 #endif /* APRSGATHERER_H */

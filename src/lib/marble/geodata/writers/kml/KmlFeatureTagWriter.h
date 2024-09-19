@@ -14,15 +14,15 @@ namespace Marble
 {
 
 // No registration for this writer, ColorStyle is an abstract kml element
-class KmlFeatureTagWriter: public GeoTagWriter
+class KmlFeatureTagWriter : public GeoTagWriter
 {
 public:
-    explicit KmlFeatureTagWriter( const QString &elementName );
+    explicit KmlFeatureTagWriter(const QString &elementName);
 
-    bool write( const GeoNode *node, GeoWriter& writer ) const override;
+    bool write(const GeoNode *node, GeoWriter &writer) const override;
 
 protected:
-    virtual bool writeMid( const GeoNode *node, GeoWriter& writer ) const = 0;
+    virtual bool writeMid(const GeoNode *node, GeoWriter &writer) const = 0;
 
 private:
     QString const m_elementName;

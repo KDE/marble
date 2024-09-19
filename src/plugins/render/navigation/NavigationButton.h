@@ -15,18 +15,18 @@ class NavigationButton : public QAbstractButton
 {
     Q_OBJECT
 public:
-    explicit NavigationButton( QWidget *parent = nullptr );
+    explicit NavigationButton(QWidget *parent = nullptr);
 
 Q_SIGNALS:
     void repaintNeeded();
 
 protected:
-    void mousePressEvent ( QMouseEvent *mouseEvent ) override;
-    void mouseReleaseEvent ( QMouseEvent *mouseEvent ) override;
-    void enterEvent( QEnterEvent * e) override;
-    void leaveEvent( QEvent * e) override;
-    void changeEvent( QEvent *e ) override;
-    void paintEvent( QPaintEvent * ) override;
+    void mousePressEvent(QMouseEvent *mouseEvent) override;
+    void mouseReleaseEvent(QMouseEvent *mouseEvent) override;
+    void enterEvent(QEnterEvent *e) override;
+    void leaveEvent(QEvent *e) override;
+    void changeEvent(QEvent *e) override;
+    void paintEvent(QPaintEvent *) override;
 
 private:
     QIcon::Mode m_iconMode;

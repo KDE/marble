@@ -5,19 +5,18 @@
 //
 
 #include "MarbleLocale.h"
-#include "MarbleLocale_p.h"
-#include "MarbleGlobal.h"
 #include "MarbleDebug.h"
+#include "MarbleGlobal.h"
+#include "MarbleLocale_p.h"
 
 // Qt
 #include <QLocale>
-
 
 namespace Marble
 {
 
 MarbleLocalePrivate::MarbleLocalePrivate()
-    : m_measurementSystem( MarbleLocale::MetricSystem )
+    : m_measurementSystem(MarbleLocale::MetricSystem)
 {
 }
 
@@ -26,7 +25,7 @@ MarbleLocalePrivate::~MarbleLocalePrivate()
 }
 
 MarbleLocale::MarbleLocale()
-    : d ( new MarbleLocalePrivate )
+    : d(new MarbleLocalePrivate)
 {
 }
 
@@ -35,7 +34,7 @@ MarbleLocale::~MarbleLocale()
     delete d;
 }
 
-void MarbleLocale::setMeasurementSystem( MarbleLocale::MeasurementSystem measurementSystem )
+void MarbleLocale::setMeasurementSystem(MarbleLocale::MeasurementSystem measurementSystem)
 {
     d->m_measurementSystem = measurementSystem;
 }
@@ -45,8 +44,7 @@ MarbleLocale::MeasurementSystem MarbleLocale::measurementSystem() const
     return d->m_measurementSystem;
 }
 
-void MarbleLocale::meterToTargetUnit(qreal meters, MeasurementSystem targetSystem,
-                                     qreal &targetValue, MeasureUnit &targetUnit)
+void MarbleLocale::meterToTargetUnit(qreal meters, MeasurementSystem targetSystem, qreal &targetValue, MeasureUnit &targetUnit)
 {
     targetValue = meters;
 
@@ -146,14 +144,12 @@ QString MarbleLocale::languageCode()
     int index = lang.indexOf(QLatin1Char('_'));
     if (lang == QLatin1String("C")) {
         code = "en";
-    }
-    else if ( index != -1 ) {
-        code = lang.left ( index );
-    }
-    else {
+    } else if (index != -1) {
+        code = lang.left(index);
+    } else {
         index = lang.indexOf(QLatin1Char('@'));
-        if ( index != -1 )
-            code = lang.left ( index );
+        if (index != -1)
+            code = lang.left(index);
         else
             code = lang;
     }

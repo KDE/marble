@@ -3,13 +3,12 @@
 // SPDX-FileCopyrightText: 2007 Murad Tagirov <tmurad@gmail.com>
 //
 
-
 #include "GeoDataIconStyle.h"
 
 #include <QUrl>
 
-#include "MarbleDirs.h"
 #include "MarbleDebug.h"
+#include "MarbleDirs.h"
 #include "RemoteIconLoader.h"
 
 #include "GeoDataTypes.h"
@@ -21,27 +20,27 @@ namespace Marble
 
 class GeoDataIconStylePrivate
 {
-  public:
+public:
     GeoDataIconStylePrivate()
-        : m_scale( 1.0 ),
-        m_size(0, 0),
-        m_aspectRatioMode(Qt::KeepAspectRatio),
-        m_iconPath(),
-        m_heading( 0 )
+        : m_scale(1.0)
+        , m_size(0, 0)
+        , m_aspectRatioMode(Qt::KeepAspectRatio)
+        , m_iconPath()
+        , m_heading(0)
     {
     }
 
-    GeoDataIconStylePrivate( const QString& iconPath, const QPointF &hotSpot )
-        : m_scale( 1.0 ),
-          m_size(0, 0),
-          m_aspectRatioMode(Qt::KeepAspectRatio),
-          m_iconPath( iconPath ),
-          m_hotSpot( hotSpot ),
-          m_heading( 0 )
+    GeoDataIconStylePrivate(const QString &iconPath, const QPointF &hotSpot)
+        : m_scale(1.0)
+        , m_size(0, 0)
+        , m_aspectRatioMode(Qt::KeepAspectRatio)
+        , m_iconPath(iconPath)
+        , m_hotSpot(hotSpot)
+        , m_heading(0)
     {
     }
 
-    RemoteIconLoader* remoteIconLoader() const
+    RemoteIconLoader *remoteIconLoader() const
     {
         static RemoteIconLoader *remoteIconLoader = new RemoteIconLoader();
         return remoteIconLoader;
@@ -51,20 +50,15 @@ class GeoDataIconStylePrivate
     {
         QSize iconSize = size.isNull() ? m_icon.size() : size;
         // Scaling the placemark's icon based on its size, scale, and maximum icon size.
-        if ( iconSize.width()*m_scale > s_maximumIconSize.width()
-             || iconSize.height()*m_scale > s_maximumIconSize.height() ) {
-            iconSize.scale( s_maximumIconSize, Qt::KeepAspectRatio );
-        }
-        else if ( iconSize.width()*m_scale < s_minimumIconSize.width()
-                  || iconSize.height()*m_scale < s_minimumIconSize.width() ) {
-            iconSize.scale( s_minimumIconSize, Qt::KeepAspectRatio );
-        }
-        else {
+        if (iconSize.width() * m_scale > s_maximumIconSize.width() || iconSize.height() * m_scale > s_maximumIconSize.height()) {
+            iconSize.scale(s_maximumIconSize, Qt::KeepAspectRatio);
+        } else if (iconSize.width() * m_scale < s_minimumIconSize.width() || iconSize.height() * m_scale < s_minimumIconSize.width()) {
+            iconSize.scale(s_minimumIconSize, Qt::KeepAspectRatio);
+        } else {
             iconSize *= m_scale;
         }
 
-        return QSize(iconSize.width() - iconSize.width() % 2,
-                     iconSize.height() - iconSize.height() % 2);
+        return QSize(iconSize.width() - iconSize.width() % 2, iconSize.height() - iconSize.height() % 2);
     }
 
     QImage loadIcon(const QString &path, const QSize &size) const
@@ -89,7 +83,7 @@ class GeoDataIconStylePrivate
             }
         }
 
-        if(QUrl(m_iconPath).isValid() ) {
+        if (QUrl(m_iconPath).isValid()) {
             // if image is not found on disk, check whether the icon is
             // at remote location. If yes then go for remote icon loading
             return remoteIconLoader()->load(QUrl(m_iconPath));
@@ -99,29 +93,30 @@ class GeoDataIconStylePrivate
         return QImage();
     }
 
-    float            m_scale;
+    float m_scale;
 
-    QImage           m_icon;
-    QSize            m_size;
+    QImage m_icon;
+    QSize m_size;
     Qt::AspectRatioMode m_aspectRatioMode;
-    QImage           m_scaledIcon;
-    QString          m_iconPath;
-    GeoDataHotSpot   m_hotSpot;
-    int              m_heading;
+    QImage m_scaledIcon;
+    QString m_iconPath;
+    GeoDataHotSpot m_hotSpot;
+    int m_heading;
 };
 
-GeoDataIconStyle::GeoDataIconStyle() :
-    d( new GeoDataIconStylePrivate() )
+GeoDataIconStyle::GeoDataIconStyle()
+    : d(new GeoDataIconStylePrivate())
 {
 }
 
-GeoDataIconStyle::GeoDataIconStyle( const GeoDataIconStyle& other ) :
-    GeoDataColorStyle( other ), d( new GeoDataIconStylePrivate( *other.d ) )
+GeoDataIconStyle::GeoDataIconStyle(const GeoDataIconStyle &other)
+    : GeoDataColorStyle(other)
+    , d(new GeoDataIconStylePrivate(*other.d))
 {
 }
 
-GeoDataIconStyle::GeoDataIconStyle( const QString& iconPath, const QPointF &hotSpot ) :
-    d( new GeoDataIconStylePrivate( iconPath, hotSpot ) )
+GeoDataIconStyle::GeoDataIconStyle(const QString &iconPath, const QPointF &hotSpot)
+    : d(new GeoDataIconStylePrivate(iconPath, hotSpot))
 {
 }
 
@@ -130,33 +125,29 @@ GeoDataIconStyle::~GeoDataIconStyle()
     delete d;
 }
 
-GeoDataIconStyle& GeoDataIconStyle::operator=( const GeoDataIconStyle& other )
+GeoDataIconStyle &GeoDataIconStyle::operator=(const GeoDataIconStyle &other)
 {
-    GeoDataColorStyle::operator=( other );
+    GeoDataColorStyle::operator=(other);
     *d = *other.d;
     return *this;
 }
 
-bool GeoDataIconStyle::operator==( const GeoDataIconStyle &other ) const
+bool GeoDataIconStyle::operator==(const GeoDataIconStyle &other) const
 {
-    if ( GeoDataColorStyle::operator!=( other ) ) {
+    if (GeoDataColorStyle::operator!=(other)) {
         return false;
     }
 
-    return d->m_scale == other.d->m_scale &&
-           d->m_icon == other.d->m_icon &&
-           d->m_size == other.d->m_size &&
-           d->m_iconPath == other.d->m_iconPath &&
-           d->m_hotSpot == other.d->m_hotSpot &&
-           d->m_heading == other.d->m_heading;
+    return d->m_scale == other.d->m_scale && d->m_icon == other.d->m_icon && d->m_size == other.d->m_size && d->m_iconPath == other.d->m_iconPath
+        && d->m_hotSpot == other.d->m_hotSpot && d->m_heading == other.d->m_heading;
 }
 
-bool GeoDataIconStyle::operator!=( const GeoDataIconStyle &other ) const
+bool GeoDataIconStyle::operator!=(const GeoDataIconStyle &other) const
 {
-    return !this->operator==( other );
+    return !this->operator==(other);
 }
 
-const char* GeoDataIconStyle::nodeType() const
+const char *GeoDataIconStyle::nodeType() const
 {
     return GeoDataTypes::GeoDataIconStyleType;
 }
@@ -167,7 +158,7 @@ void GeoDataIconStyle::setIcon(const QImage &icon)
     d->m_scaledIcon = QImage();
 }
 
-void GeoDataIconStyle::setIconPath( const QString& filename )
+void GeoDataIconStyle::setIconPath(const QString &filename)
 {
     d->m_iconPath = filename;
 
@@ -187,27 +178,23 @@ QString GeoDataIconStyle::iconPath() const
 
 QImage GeoDataIconStyle::icon() const
 {
-    if ( !d->m_icon.isNull() ) {
+    if (!d->m_icon.isNull()) {
         return d->m_icon;
-    }
-    else if ( !d->m_iconPath.isEmpty() ) {
+    } else if (!d->m_iconPath.isEmpty()) {
         d->m_icon = d->loadIcon(resolvePath(d->m_iconPath), d->m_size);
         return d->m_icon;
-    }
-    else
+    } else
         return QImage();
 }
 
-void GeoDataIconStyle::setHotSpot( const QPointF& hotSpot,
-                                   GeoDataHotSpot::Units xunits,
-                                   GeoDataHotSpot::Units yunits )
+void GeoDataIconStyle::setHotSpot(const QPointF &hotSpot, GeoDataHotSpot::Units xunits, GeoDataHotSpot::Units yunits)
 {
-    d->m_hotSpot.setHotSpot( hotSpot, xunits, yunits );
+    d->m_hotSpot.setHotSpot(hotSpot, xunits, yunits);
 }
 
-QPointF GeoDataIconStyle::hotSpot( GeoDataHotSpot::Units &xunits, GeoDataHotSpot::Units &yunits ) const
+QPointF GeoDataIconStyle::hotSpot(GeoDataHotSpot::Units &xunits, GeoDataHotSpot::Units &yunits) const
 {
-    return d->m_hotSpot.hotSpot( xunits, yunits );
+    return d->m_hotSpot.hotSpot(xunits, yunits);
 }
 
 void GeoDataIconStyle::setSize(const QSize &size, Qt::AspectRatioMode aspectRatioMode)
@@ -263,7 +250,7 @@ QImage GeoDataIconStyle::scaledIcon() const
         QImage const image = icon();
         if (!image.isNull()) {
             QSize iconSize = d->scaledSize(image.size());
-            d->m_scaledIcon = image.scaled( iconSize, Qt::KeepAspectRatio, Qt::SmoothTransformation ) ;
+            d->m_scaledIcon = image.scaled(iconSize, Qt::KeepAspectRatio, Qt::SmoothTransformation);
         }
     }
     return d->m_scaledIcon;
@@ -274,7 +261,7 @@ int GeoDataIconStyle::heading() const
     return d->m_heading;
 }
 
-void GeoDataIconStyle::setHeading( int heading )
+void GeoDataIconStyle::setHeading(int heading)
 {
     d->m_heading = heading;
 }
@@ -284,22 +271,22 @@ RemoteIconLoader *GeoDataIconStyle::remoteIconLoader() const
     return d->remoteIconLoader();
 }
 
-void GeoDataIconStyle::pack( QDataStream& stream ) const
+void GeoDataIconStyle::pack(QDataStream &stream) const
 {
-    GeoDataColorStyle::pack( stream );
+    GeoDataColorStyle::pack(stream);
 
     stream << d->m_scale;
     stream << d->m_icon;
-    d->m_hotSpot.pack( stream );
+    d->m_hotSpot.pack(stream);
 }
 
-void GeoDataIconStyle::unpack( QDataStream& stream )
+void GeoDataIconStyle::unpack(QDataStream &stream)
 {
-    GeoDataColorStyle::unpack( stream );
+    GeoDataColorStyle::unpack(stream);
 
     stream >> d->m_scale;
     stream >> d->m_icon;
-    d->m_hotSpot.unpack( stream );
+    d->m_hotSpot.unpack(stream);
 }
 
 }

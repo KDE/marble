@@ -3,14 +3,11 @@
 // SPDX-FileCopyrightText: 2008 Torsten Rahn <tackat@kde.org>
 //
 
-
 #ifndef MARBLE_GEODATALINEARRING_H
 #define MARBLE_GEODATALINEARRING_H
 
-
-#include "geodata_export.h"
 #include "GeoDataLineString.h"
-
+#include "geodata_export.h"
 
 namespace Marble
 {
@@ -61,23 +58,20 @@ class GeoDataLinearRingPrivate;
 */
 class GEODATA_EXPORT GeoDataLinearRing : public GeoDataLineString
 {
+public:
+    /*!
+        \brief Creates a new LinearRing.
+    */
+    explicit GeoDataLinearRing(TessellationFlags f = NoTessellation);
 
- public:
-/*!
-    \brief Creates a new LinearRing.
-*/
-    explicit GeoDataLinearRing( TessellationFlags f = NoTessellation);
-
-
-/*!
-    \brief Creates a LinearRing from an existing geometry object.
-*/
+    /*!
+        \brief Creates a LinearRing from an existing geometry object.
+    */
     explicit GeoDataLinearRing(const GeoDataGeometry &other);
 
-    
-/*!
-    \brief Destroys a LinearRing.
-*/
+    /*!
+        \brief Destroys a LinearRing.
+    */
     ~GeoDataLinearRing() override;
 
     const char *nodeType() const override;
@@ -86,48 +80,45 @@ class GEODATA_EXPORT GeoDataLinearRing : public GeoDataLineString
 
     GeoDataGeometry *copy() const override;
 
+    /*!
+        \brief Returns true/false depending on whether this and other are/are not equal.
+    */
 
-/*!
-    \brief Returns true/false depending on whether this and other are/are not equal.
-*/
+    bool operator==(const GeoDataLinearRing &other) const;
+    bool operator!=(const GeoDataLinearRing &other) const;
 
-    bool operator==( const GeoDataLinearRing &other ) const;
-    bool operator!=( const GeoDataLinearRing &other ) const;
+    /*!
+        \brief Returns whether a LinearRing is a closed polygon.
 
-
-/*!
-    \brief Returns whether a LinearRing is a closed polygon.
-
-    \return <code>true</code> for a LinearRing.
-*/
+        \return <code>true</code> for a LinearRing.
+    */
     bool isClosed() const override;
 
-    
-/*!
-    \brief Returns the length of the LinearRing across a sphere.
+    /*!
+        \brief Returns the length of the LinearRing across a sphere.
 
-    As a parameter the \a planetRadius needs to be passed.
+        As a parameter the \a planetRadius needs to be passed.
 
-    \return The return value is the length of the LinearRing.
-    The unit used for the resulting length matches the unit of the planet
-    radius.
+        \return The return value is the length of the LinearRing.
+        The unit used for the resulting length matches the unit of the planet
+        radius.
 
-    This method can be used as an approximation for the circumference of a
-    LinearRing.
-*/
-    qreal length( qreal planetRadius, int offset = 0 ) const override;
+        This method can be used as an approximation for the circumference of a
+        LinearRing.
+    */
+    qreal length(qreal planetRadius, int offset = 0) const override;
 
-/*!
-    \brief Returns whether the given coordinates lie within the polygon.
+    /*!
+        \brief Returns whether the given coordinates lie within the polygon.
 
-    \return <code>true</code> if the coordinates lie within the polygon, false otherwise.
-*/
-    virtual bool contains( const GeoDataCoordinates &coordinates ) const;
+        \return <code>true</code> if the coordinates lie within the polygon, false otherwise.
+    */
+    virtual bool contains(const GeoDataCoordinates &coordinates) const;
 
-/*!
- * \brief Returns whether the orientaion of ring is coloskwise or not
- * \return Return value is true if ring is clockwise orientated
- */
+    /*!
+     * \brief Returns whether the orientaion of ring is coloskwise or not
+     * \return Return value is true if ring is clockwise orientated
+     */
     virtual bool isClockwise() const;
 };
 

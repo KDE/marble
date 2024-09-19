@@ -11,22 +11,22 @@
 namespace Marble
 {
 
-OpenRouteServicePlugin::OpenRouteServicePlugin( QObject *parent ) :
-    RoutingRunnerPlugin( parent )
+OpenRouteServicePlugin::OpenRouteServicePlugin(QObject *parent)
+    : RoutingRunnerPlugin(parent)
 {
     setSupportedCelestialBodies(QStringList(QStringLiteral("earth")));
-    setCanWorkOffline( false );
-    setStatusMessage( tr ( "This service requires an Internet connection." ) );
+    setCanWorkOffline(false);
+    setStatusMessage(tr("This service requires an Internet connection."));
 }
 
 QString OpenRouteServicePlugin::name() const
 {
-    return tr( "OpenRouteService Routing" );
+    return tr("OpenRouteService Routing");
 }
 
 QString OpenRouteServicePlugin::guiString() const
 {
-    return tr( "OpenRouteService" );
+    return tr("OpenRouteService");
 }
 
 QString OpenRouteServicePlugin::nameId() const
@@ -41,7 +41,7 @@ QString OpenRouteServicePlugin::version() const
 
 QString OpenRouteServicePlugin::description() const
 {
-    return tr( "Routing in Europe using openrouteservice.org" );
+    return tr("Routing in Europe using openrouteservice.org");
 }
 
 QString OpenRouteServicePlugin::copyrightYears() const
@@ -51,8 +51,7 @@ QString OpenRouteServicePlugin::copyrightYears() const
 
 QVector<PluginAuthor> OpenRouteServicePlugin::pluginAuthors() const
 {
-    return QVector<PluginAuthor>()
-            << PluginAuthor(QStringLiteral("Dennis Nienhüser"), QStringLiteral("nienhueser@kde.org"));
+    return QVector<PluginAuthor>() << PluginAuthor(QStringLiteral("Dennis Nienhüser"), QStringLiteral("nienhueser@kde.org"));
 }
 
 RoutingRunner *OpenRouteServicePlugin::newRunner() const
@@ -65,25 +64,24 @@ class OpenRouteServiceConfigWidget : public RoutingRunnerPlugin::ConfigWidget
     Q_OBJECT
 
 public:
-
     OpenRouteServiceConfigWidget()
         : RoutingRunnerPlugin::ConfigWidget()
     {
         ui_configWidget = new Ui::OpenRouteServiceConfigWidget;
-        ui_configWidget->setupUi( this );
+        ui_configWidget->setupUi(this);
 
-        ui_configWidget->preference->addItem( tr( "Car (recommended way)" ), "Recommended" );
-        ui_configWidget->preference->addItem( tr( "Car (fastest way)" ), "Fastest" );
-        ui_configWidget->preference->addItem( tr( "Car (shortest way)" ), "Shortest" );
-        ui_configWidget->preference->addItem( tr( "Pedestrian (shortest way)" ), "Pedestrian" );
-        ui_configWidget->preference->addItem( tr( "Bicycle (shortest track)" ), "Bicycle" );
-        ui_configWidget->preference->addItem( tr( "Bicycle (Mountainbike)" ), "BicycleMTB" );
-        ui_configWidget->preference->addItem( tr( "Bicycle (Racer)" ), "BicycleRacer" );
-        ui_configWidget->preference->addItem( tr( "Bicycle (safest track)" ), "BicycleSafety" );
-        ui_configWidget->preference->addItem( tr( "Bicycle (preferred Cycleway/-route)" ), "BicycleTour" );
+        ui_configWidget->preference->addItem(tr("Car (recommended way)"), "Recommended");
+        ui_configWidget->preference->addItem(tr("Car (fastest way)"), "Fastest");
+        ui_configWidget->preference->addItem(tr("Car (shortest way)"), "Shortest");
+        ui_configWidget->preference->addItem(tr("Pedestrian (shortest way)"), "Pedestrian");
+        ui_configWidget->preference->addItem(tr("Bicycle (shortest track)"), "Bicycle");
+        ui_configWidget->preference->addItem(tr("Bicycle (Mountainbike)"), "BicycleMTB");
+        ui_configWidget->preference->addItem(tr("Bicycle (Racer)"), "BicycleRacer");
+        ui_configWidget->preference->addItem(tr("Bicycle (safest track)"), "BicycleSafety");
+        ui_configWidget->preference->addItem(tr("Bicycle (preferred Cycleway/-route)"), "BicycleTour");
     }
 
-    void loadSettings( const QHash<QString, QVariant> &settings_ ) override
+    void loadSettings(const QHash<QString, QVariant> &settings_) override
     {
         QHash<QString, QVariant> settings = settings_;
 
@@ -91,8 +89,7 @@ public:
         if (!settings.contains(QStringLiteral("preference"))) {
             settings.insert(QStringLiteral("preference"), QStringLiteral("Fastest"));
         }
-        ui_configWidget->preference->setCurrentIndex(
-            ui_configWidget->preference->findData(settings.value(QStringLiteral("preference")).toString()));
+        ui_configWidget->preference->setCurrentIndex(ui_configWidget->preference->findData(settings.value(QStringLiteral("preference")).toString()));
         ui_configWidget->noMotorways->setCheckState(static_cast<Qt::CheckState>(settings.value(QStringLiteral("noMotorways")).toInt()));
         ui_configWidget->noTollways->setCheckState(static_cast<Qt::CheckState>(settings.value(QStringLiteral("noTollways")).toInt()));
         ui_configWidget->noFerries->setCheckState(static_cast<Qt::CheckState>(settings.value(QStringLiteral("noFerries")).toInt()));
@@ -100,14 +97,14 @@ public:
 
     QHash<QString, QVariant> settings() const override
     {
-        QHash<QString,QVariant> settings;
-        settings.insert(QStringLiteral("preference"),
-                        ui_configWidget->preference->itemData( ui_configWidget->preference->currentIndex() ) );
+        QHash<QString, QVariant> settings;
+        settings.insert(QStringLiteral("preference"), ui_configWidget->preference->itemData(ui_configWidget->preference->currentIndex()));
         settings.insert(QStringLiteral("noMotorways"), ui_configWidget->noMotorways->checkState());
         settings.insert(QStringLiteral("noTollways"), ui_configWidget->noTollways->checkState());
         settings.insert(QStringLiteral("noFerries"), ui_configWidget->noFerries->checkState());
         return settings;
     }
+
 private:
     Ui::OpenRouteServiceConfigWidget *ui_configWidget;
 };
@@ -117,37 +114,33 @@ RoutingRunnerPlugin::ConfigWidget *OpenRouteServicePlugin::configWidget()
     return new OpenRouteServiceConfigWidget();
 }
 
-
-bool OpenRouteServicePlugin::supportsTemplate( RoutingProfilesModel::ProfileTemplate profileTemplate ) const
+bool OpenRouteServicePlugin::supportsTemplate(RoutingProfilesModel::ProfileTemplate profileTemplate) const
 {
-    return
-        (profileTemplate == RoutingProfilesModel::CarFastestTemplate)  ||
-        (profileTemplate == RoutingProfilesModel::CarShortestTemplate) ||
-        (profileTemplate == RoutingProfilesModel::BicycleTemplate)     ||
-        (profileTemplate == RoutingProfilesModel::PedestrianTemplate);
+    return (profileTemplate == RoutingProfilesModel::CarFastestTemplate) || (profileTemplate == RoutingProfilesModel::CarShortestTemplate)
+        || (profileTemplate == RoutingProfilesModel::BicycleTemplate) || (profileTemplate == RoutingProfilesModel::PedestrianTemplate);
 }
 
-QHash< QString, QVariant > OpenRouteServicePlugin::templateSettings( RoutingProfilesModel::ProfileTemplate profileTemplate ) const
+QHash<QString, QVariant> OpenRouteServicePlugin::templateSettings(RoutingProfilesModel::ProfileTemplate profileTemplate) const
 {
     QHash<QString, QVariant> result;
-    switch ( profileTemplate ) {
-        case RoutingProfilesModel::CarFastestTemplate:
-            result.insert(QStringLiteral("preference"), QStringLiteral("Fastest"));
-            break;
-        case RoutingProfilesModel::CarShortestTemplate:
-            result.insert(QStringLiteral("preference"), QStringLiteral("Shortest"));
-            break;
-        case RoutingProfilesModel::CarEcologicalTemplate:
-            break;
-        case RoutingProfilesModel::BicycleTemplate:
-            result.insert(QStringLiteral("preference"), QStringLiteral("Bicycle"));
-            break;
-        case RoutingProfilesModel::PedestrianTemplate:
-            result.insert(QStringLiteral("preference"), QStringLiteral("Pedestrian"));
-            break;
-        case RoutingProfilesModel::LastTemplate:
-            Q_ASSERT( false );
-            break;
+    switch (profileTemplate) {
+    case RoutingProfilesModel::CarFastestTemplate:
+        result.insert(QStringLiteral("preference"), QStringLiteral("Fastest"));
+        break;
+    case RoutingProfilesModel::CarShortestTemplate:
+        result.insert(QStringLiteral("preference"), QStringLiteral("Shortest"));
+        break;
+    case RoutingProfilesModel::CarEcologicalTemplate:
+        break;
+    case RoutingProfilesModel::BicycleTemplate:
+        result.insert(QStringLiteral("preference"), QStringLiteral("Bicycle"));
+        break;
+    case RoutingProfilesModel::PedestrianTemplate:
+        result.insert(QStringLiteral("preference"), QStringLiteral("Pedestrian"));
+        break;
+    case RoutingProfilesModel::LastTemplate:
+        Q_ASSERT(false);
+        break;
     }
     return result;
 }

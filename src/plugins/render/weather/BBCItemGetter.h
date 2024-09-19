@@ -24,25 +24,24 @@ class BBCItemGetter : public AbstractWorkerThread
 {
     Q_OBJECT
 
- public:
-    explicit BBCItemGetter( QObject *parent = nullptr );
+public:
+    explicit BBCItemGetter(QObject *parent = nullptr);
     ~BBCItemGetter() override;
 
-    void setSchedule( const GeoDataLatLonBox& box,
-                      qint32 number );
+    void setSchedule(const GeoDataLatLonBox &box, qint32 number);
 
-    void setStationList( const QList<BBCStation>& items );
+    void setStationList(const QList<BBCStation> &items);
 
-    BBCStation station( const QString &id );
+    BBCStation station(const QString &id);
 
- protected:
+protected:
     bool workAvailable() override;
     void work() override;
 
- Q_SIGNALS:
-    void foundStation( const BBCStation& );
+Q_SIGNALS:
+    void foundStation(const BBCStation &);
 
- public:
+public:
     QList<BBCStation> m_items;
     QMutex m_scheduleMutex;
     GeoDataLatLonBox m_scheduledBox;

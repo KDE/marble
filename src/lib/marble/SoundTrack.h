@@ -19,20 +19,20 @@ class SoundTrack : public QObject
     Q_OBJECT
 
 public:
-    explicit SoundTrack( PlaybackSoundCueItem* item );
-    void setDelayBeforeTrackStarts( double delay );
+    explicit SoundTrack(PlaybackSoundCueItem *item);
+    void setDelayBeforeTrackStarts(double delay);
     double delayBeforeTrackStarts() const;
     void play();
     void pause();
-    void seek( double position );
+    void seek(double position);
     void stop();
-    void setPaused( bool );
+    void setPaused(bool);
 
 public Q_SLOTS:
     void playSlot();
 
 private:
-    PlaybackSoundCueItem* m_item;
+    PlaybackSoundCueItem *m_item;
     QDateTime m_playTime;
     QDateTime m_pauseTime;
     double m_delayBeforeTrackStarts;

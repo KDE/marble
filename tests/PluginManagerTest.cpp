@@ -3,9 +3,8 @@
 // SPDX-FileCopyrightText: 2008 Patrick Spendrin <ps_ml@gmx.de>
 //
 
-
-#include "MarbleDirs.h"
 #include "PluginManager.h"
+#include "MarbleDirs.h"
 
 #include <QTest>
 
@@ -15,16 +14,16 @@ namespace Marble
 class PluginManagerTest : public QObject
 {
     Q_OBJECT
-    private Q_SLOTS:
-        void loadPlugins();
+private Q_SLOTS:
+    void loadPlugins();
 };
 
 void PluginManagerTest::loadPlugins()
 {
-    MarbleDirs::setMarbleDataPath( DATA_PATH );
-    MarbleDirs::setMarblePluginPath( PLUGIN_PATH );
+    MarbleDirs::setMarbleDataPath(DATA_PATH);
+    MarbleDirs::setMarblePluginPath(PLUGIN_PATH);
 
-    const int pluginNumber = MarbleDirs::pluginEntryList( "", QDir::Files ).size();
+    const int pluginNumber = MarbleDirs::pluginEntryList("", QDir::Files).size();
 
     PluginManager pm;
     const int renderPlugins = pm.renderPlugins().size();
@@ -36,11 +35,11 @@ void PluginManagerTest::loadPlugins()
 
     const int runnerPlugins = searchRunnerPlugins + reverseGeocodingRunnerPlugins + routingRunnerPlugins + parsingRunnerPlugins;
 
-    QCOMPARE( renderPlugins + positionPlugins + runnerPlugins, pluginNumber );
+    QCOMPARE(renderPlugins + positionPlugins + runnerPlugins, pluginNumber);
 }
 
 }
 
-QTEST_MAIN( Marble::PluginManagerTest )
+QTEST_MAIN(Marble::PluginManagerTest)
 
 #include "PluginManagerTest.moc"

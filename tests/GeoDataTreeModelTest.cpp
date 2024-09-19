@@ -27,21 +27,21 @@ void GeoDataTreeModelTest::defaultConstructor()
 {
     const GeoDataTreeModel model;
 
-    QCOMPARE( model.rowCount(), 0 );
-    QCOMPARE( model.columnCount(), 4 );
+    QCOMPARE(model.rowCount(), 0);
+    QCOMPARE(model.columnCount(), 4);
 
-    QCOMPARE( model.headerData( 0, Qt::Horizontal, Qt::DisplayRole ), QVariant( tr( "Name" ) ) );
-    QCOMPARE( model.headerData( 1, Qt::Horizontal, Qt::DisplayRole ), QVariant( tr( "Type" ) ) );
-    QCOMPARE( model.headerData( 2, Qt::Horizontal, Qt::DisplayRole ), QVariant( tr( "Popularity" ) ) );
-    QCOMPARE( model.headerData( 3, Qt::Horizontal, Qt::DisplayRole ), QVariant( tr( "PopIndex", "Popularity index" ) ) );
+    QCOMPARE(model.headerData(0, Qt::Horizontal, Qt::DisplayRole), QVariant(tr("Name")));
+    QCOMPARE(model.headerData(1, Qt::Horizontal, Qt::DisplayRole), QVariant(tr("Type")));
+    QCOMPARE(model.headerData(2, Qt::Horizontal, Qt::DisplayRole), QVariant(tr("Popularity")));
+    QCOMPARE(model.headerData(3, Qt::Horizontal, Qt::DisplayRole), QVariant(tr("PopIndex", "Popularity index")));
 
-    QCOMPARE( model.index( 0, 0 ), QModelIndex() );
-    QCOMPARE( model.index( nullptr ), QModelIndex() );
-    QCOMPARE( model.parent( QModelIndex() ), QModelIndex() );
-    QCOMPARE( model.data( QModelIndex(), Qt::DisplayRole ), QVariant() );
-    QCOMPARE( model.flags( QModelIndex() ), Qt::NoItemFlags );
+    QCOMPARE(model.index(0, 0), QModelIndex());
+    QCOMPARE(model.index(nullptr), QModelIndex());
+    QCOMPARE(model.parent(QModelIndex()), QModelIndex());
+    QCOMPARE(model.data(QModelIndex(), Qt::DisplayRole), QVariant());
+    QCOMPARE(model.flags(QModelIndex()), Qt::NoItemFlags);
 
-    QVERIFY( const_cast<GeoDataTreeModel *>( &model )->rootDocument() != nullptr );
+    QVERIFY(const_cast<GeoDataTreeModel *>(&model)->rootDocument() != nullptr);
 }
 
 void GeoDataTreeModelTest::setRootDocument()
@@ -51,7 +51,7 @@ void GeoDataTreeModelTest::setRootDocument()
     {
         GeoDataTreeModel model;
 
-        model.setRootDocument( &document );
+        model.setRootDocument(&document);
         // ~GeoDataTreeModel() shouldn't delete document
     }
 }
@@ -63,13 +63,13 @@ void GeoDataTreeModelTest::addDocument()
 
         GeoDataTreeModel model;
 
-        model.addDocument( document );
-        QCOMPARE( model.rowCount(), 1 );
+        model.addDocument(document);
+        QCOMPARE(model.rowCount(), 1);
     }
 }
 
 }
 
-QTEST_MAIN( Marble::GeoDataTreeModelTest )
+QTEST_MAIN(Marble::GeoDataTreeModelTest)
 
 #include "GeoDataTreeModelTest.moc"

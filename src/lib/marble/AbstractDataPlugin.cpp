@@ -7,45 +7,46 @@
 #include "AbstractDataPlugin.h"
 
 // Marble
-#include "AbstractDataPluginModel.h"
 #include "AbstractDataPluginItem.h"
+#include "AbstractDataPluginModel.h"
 #include "GeoPainter.h"
 #include "GeoSceneLayer.h"
+#include "MarbleDebug.h"
 #include "MarbleModel.h"
 #include "ViewportParams.h"
-#include "MarbleDebug.h"
 
 // Qt
-#include <QTimer>
 #include <QRegion>
+#include <QTimer>
 
 namespace Marble
 {
 
 class AbstractDataPluginPrivate
 {
- public:
+public:
     AbstractDataPluginPrivate()
-        : m_model( nullptr ),
-          m_numberOfItems( 10 )
+        : m_model(nullptr)
+        , m_numberOfItems(10)
     {
-      m_updateTimer.setSingleShot( true );
+        m_updateTimer.setSingleShot(true);
     }
-    
-    ~AbstractDataPluginPrivate() {
+
+    ~AbstractDataPluginPrivate()
+    {
         delete m_model;
     }
-    
+
     AbstractDataPluginModel *m_model;
     quint32 m_numberOfItems;
     QTimer m_updateTimer;
 };
 
-AbstractDataPlugin::AbstractDataPlugin( const MarbleModel *marbleModel )
-    : RenderPlugin( marbleModel ),
-      d( new AbstractDataPluginPrivate )
+AbstractDataPlugin::AbstractDataPlugin(const MarbleModel *marbleModel)
+    : RenderPlugin(marbleModel)
+    , d(new AbstractDataPluginPrivate)
 {
-  connect( &d->m_updateTimer, SIGNAL(timeout()), this, SIGNAL(repaintNeeded()) );
+    connect(&d->m_updateTimer, SIGNAL(timeout()), this, SIGNAL(repaintNeeded()));
 }
 
 AbstractDataPlugin::~AbstractDataPlugin()
@@ -60,31 +61,30 @@ bool AbstractDataPlugin::isInitialized() const
 
 QStringList AbstractDataPlugin::backendTypes() const
 {
-    return QStringList( name() );
+    return QStringList(name());
 }
 
 QString AbstractDataPlugin::renderPolicy() const
 {
-    return QStringLiteral( "ALWAYS" );
+    return QStringLiteral("ALWAYS");
 }
 
 QStringList AbstractDataPlugin::renderPosition() const
 {
-    return QStringList( "ALWAYS_ON_TOP" );
+    return QStringList("ALWAYS_ON_TOP");
 }
 
-bool AbstractDataPlugin::render( GeoPainter *painter, ViewportParams *viewport,
-             const QString& renderPos, GeoSceneLayer * layer)
+bool AbstractDataPlugin::render(GeoPainter *painter, ViewportParams *viewport, const QString &renderPos, GeoSceneLayer *layer)
 {
-    Q_UNUSED( renderPos );
-    Q_UNUSED( layer );
+    Q_UNUSED(renderPos);
+    Q_UNUSED(layer);
 
-    QList<AbstractDataPluginItem*> items = d->m_model->items( viewport, numberOfItems() );
+    QList<AbstractDataPluginItem *> items = d->m_model->items(viewport, numberOfItems());
     painter->save();
 
     // Paint the most important item at last
-    for( int i = items.size() - 1; i >= 0; --i ) {
-        items.at( i )->paintEvent( painter, viewport );
+    for (int i = items.size() - 1; i >= 0; --i) {
+        items.at(i)->paintEvent(painter, viewport);
     }
 
     painter->restore();
@@ -102,19 +102,17 @@ const AbstractDataPluginModel *AbstractDataPlugin::model() const
     return d->m_model;
 }
 
-void AbstractDataPlugin::setModel( AbstractDataPluginModel* model )
+void AbstractDataPlugin::setModel(AbstractDataPluginModel *model)
 {
-    if ( d->m_model ) {
-        disconnect( d->m_model, SIGNAL(itemsUpdated()), this, SLOT(delayedUpdate()) );
+    if (d->m_model) {
+        disconnect(d->m_model, SIGNAL(itemsUpdated()), this, SLOT(delayedUpdate()));
         delete d->m_model;
     }
     d->m_model = model;
 
-    connect( d->m_model, SIGNAL(itemsUpdated()), this, SLOT(delayedUpdate()) );
-    connect( d->m_model, SIGNAL(favoriteItemsChanged(QStringList)), this,
-             SLOT(favoriteItemsChanged(QStringList)) );
-    connect( d->m_model, SIGNAL(favoriteItemsOnlyChanged()), this,
-                         SIGNAL(favoriteItemsOnlyChanged()) );
+    connect(d->m_model, SIGNAL(itemsUpdated()), this, SLOT(delayedUpdate()));
+    connect(d->m_model, SIGNAL(favoriteItemsChanged(QStringList)), this, SLOT(favoriteItemsChanged(QStringList)));
+    connect(d->m_model, SIGNAL(favoriteItemsOnlyChanged()), this, SIGNAL(favoriteItemsOnlyChanged()));
 
     emit favoritesModelChanged();
 }
@@ -123,22 +121,21 @@ quint32 AbstractDataPlugin::numberOfItems() const
 {
     return d->m_numberOfItems;
 }
-    
-void AbstractDataPlugin::setNumberOfItems( quint32 number )
+
+void AbstractDataPlugin::setNumberOfItems(quint32 number)
 {
-    bool changed = ( number != d->m_numberOfItems );
+    bool changed = (number != d->m_numberOfItems);
     d->m_numberOfItems = number;
 
-    if ( changed )
-        emit changedNumberOfItems( number );
+    if (changed)
+        emit changedNumberOfItems(number);
 }
 
-QList<AbstractDataPluginItem *> AbstractDataPlugin::whichItemAt( const QPoint& curpos )
+QList<AbstractDataPluginItem *> AbstractDataPlugin::whichItemAt(const QPoint &curpos)
 {
-    if ( d->m_model && enabled() && visible()) {
-        return d->m_model->whichItemAt( curpos );
-    }
-    else {
+    if (d->m_model && enabled() && visible()) {
+        return d->m_model->whichItemAt(curpos);
+    } else {
         return QList<AbstractDataPluginItem *>();
     }
 }
@@ -148,10 +145,10 @@ RenderPlugin::RenderType AbstractDataPlugin::renderType() const
     return OnlineRenderType;
 }
 
-void AbstractDataPlugin::setFavoriteItemsOnly( bool favoriteOnly )
+void AbstractDataPlugin::setFavoriteItemsOnly(bool favoriteOnly)
 {
-    if ( d->m_model && d->m_model->isFavoriteItemsOnly() != favoriteOnly ) {
-        d->m_model->setFavoriteItemsOnly( favoriteOnly );
+    if (d->m_model && d->m_model->isFavoriteItemsOnly() != favoriteOnly) {
+        d->m_model->setFavoriteItemsOnly(favoriteOnly);
     }
 }
 
@@ -165,17 +162,16 @@ QObject *AbstractDataPlugin::favoritesModel()
     return d->m_model ? d->m_model->favoritesModel() : nullptr;
 }
 
-void AbstractDataPlugin::favoriteItemsChanged( const QStringList& favoriteItems )
+void AbstractDataPlugin::favoriteItemsChanged(const QStringList &favoriteItems)
 {
-  Q_UNUSED( favoriteItems )
+    Q_UNUSED(favoriteItems)
 }
 
 void AbstractDataPlugin::delayedUpdate()
 {
-  if ( !d->m_updateTimer.isActive() )
-  {
-    d->m_updateTimer.start( 500 );
-  }
+    if (!d->m_updateTimer.isActive()) {
+        d->m_updateTimer.start(500);
+    }
 }
 
 } // namespace Marble

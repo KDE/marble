@@ -19,9 +19,9 @@ class GeoDataCoordinates;
 
 class MARBLE_EXPORT TileId
 {
- public:
-    TileId( QString const & mapThemeId, int zoomLevel, int tileX, int tileY );
-    TileId( uint mapThemeIdHash, int zoomLevel, int tileX, int tileY );
+public:
+    TileId(QString const &mapThemeId, int zoomLevel, int tileX, int tileY);
+    TileId(uint mapThemeIdHash, int zoomLevel, int tileX, int tileY);
     TileId();
 
     int zoomLevel() const;
@@ -29,20 +29,19 @@ class MARBLE_EXPORT TileId
     int y() const;
     uint mapThemeIdHash() const;
 
-    bool operator==( TileId const& rhs ) const;
-    bool operator<( TileId const& rhs ) const;
+    bool operator==(TileId const &rhs) const;
+    bool operator<(TileId const &rhs) const;
 
-    static TileId fromCoordinates( const GeoDataCoordinates& coords, int zoomLevel );
+    static TileId fromCoordinates(const GeoDataCoordinates &coords, int zoomLevel);
 
- private:
+private:
     uint m_mapThemeIdHash;
     int m_zoomLevel;
     int m_tileX;
     int m_tileY;
 };
 
-uint qHash( TileId const& );
-
+uint qHash(TileId const &);
 
 // inline definitions
 
@@ -66,45 +65,34 @@ inline uint TileId::mapThemeIdHash() const
     return m_mapThemeIdHash;
 }
 
-inline bool TileId::operator==( TileId const& rhs ) const
+inline bool TileId::operator==(TileId const &rhs) const
 {
-    return m_zoomLevel == rhs.m_zoomLevel
-        && m_tileX == rhs.m_tileX
-        && m_tileY == rhs.m_tileY
-        && m_mapThemeIdHash == rhs.m_mapThemeIdHash;
+    return m_zoomLevel == rhs.m_zoomLevel && m_tileX == rhs.m_tileX && m_tileY == rhs.m_tileY && m_mapThemeIdHash == rhs.m_mapThemeIdHash;
 }
 
-inline bool TileId::operator<( TileId const& rhs ) const
+inline bool TileId::operator<(TileId const &rhs) const
 {
     if (m_zoomLevel < rhs.m_zoomLevel)
         return true;
-    else if (m_zoomLevel == rhs.m_zoomLevel
-             && m_tileX < rhs.m_tileX)
+    else if (m_zoomLevel == rhs.m_zoomLevel && m_tileX < rhs.m_tileX)
         return true;
-    else if (m_zoomLevel == rhs.m_zoomLevel
-             && m_tileX == rhs.m_tileX
-             && m_tileY < rhs.m_tileY)
+    else if (m_zoomLevel == rhs.m_zoomLevel && m_tileX == rhs.m_tileX && m_tileY < rhs.m_tileY)
         return true;
-    else if (m_zoomLevel == rhs.m_zoomLevel
-             && m_tileX == rhs.m_tileX
-             && m_tileY == rhs.m_tileY
-             && m_mapThemeIdHash < rhs.m_mapThemeIdHash)
+    else if (m_zoomLevel == rhs.m_zoomLevel && m_tileX == rhs.m_tileX && m_tileY == rhs.m_tileY && m_mapThemeIdHash < rhs.m_mapThemeIdHash)
         return true;
     return false;
 }
 
-inline uint qHash( TileId const& tid )
+inline uint qHash(TileId const &tid)
 {
-    const quint64 tmp = (( quint64 )( tid.zoomLevel() ) << 36 )
-        + (( quint64 )( tid.x() ) << 18 )
-        + ( quint64 )( tid.y() );
-    return ::qHash( tmp ) ^ tid.mapThemeIdHash();
+    const quint64 tmp = ((quint64)(tid.zoomLevel()) << 36) + ((quint64)(tid.x()) << 18) + (quint64)(tid.y());
+    return ::qHash(tmp) ^ tid.mapThemeIdHash();
 }
 
 }
 
 #ifndef QT_NO_DEBUG_STREAM
-QDebug operator<<( QDebug, const Marble::TileId & );
+QDebug operator<<(QDebug, const Marble::TileId &);
 #endif
 
 #endif

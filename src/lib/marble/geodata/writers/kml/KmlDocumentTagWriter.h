@@ -15,10 +15,10 @@ namespace Marble
 class KmlDocumentTagWriter : public KmlFeatureTagWriter
 {
 public:
-  KmlDocumentTagWriter();
+    KmlDocumentTagWriter();
 
 protected:
-    bool writeMid( const GeoNode *node, GeoWriter& writer ) const override;
+    bool writeMid(const GeoNode *node, GeoWriter &writer) const override;
 };
 
 }

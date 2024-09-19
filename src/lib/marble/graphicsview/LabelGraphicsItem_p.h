@@ -8,10 +8,10 @@
 
 #include "FrameGraphicsItem_p.h"
 
-#include <QString>
-#include <QSizeF>
-#include <QImage>
 #include <QIcon>
+#include <QImage>
+#include <QSizeF>
+#include <QString>
 
 class QFont;
 
@@ -22,9 +22,8 @@ class LabelGraphicsItem;
 
 class LabelGraphicsItemPrivate : public FrameGraphicsItemPrivate
 {
- public:
-    LabelGraphicsItemPrivate(LabelGraphicsItem *labelGraphicsItem,
-                             MarbleGraphicsItem *parent);
+public:
+    LabelGraphicsItemPrivate(LabelGraphicsItem *labelGraphicsItem, MarbleGraphicsItem *parent);
 
     // TODO: This has to go up to MarbleGraphicsItem
     static QFont font();

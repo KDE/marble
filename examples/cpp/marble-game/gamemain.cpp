@@ -7,16 +7,16 @@
 
 #include "GameMainWindow.h"
 
-#include <marble/MarbleDirs.h>
 #include <marble/MarbleDebug.h>
-#include <marble/MarbleLocale.h>
+#include <marble/MarbleDirs.h>
 #include <marble/MarbleGlobal.h>
+#include <marble/MarbleLocale.h>
 
 #include <QApplication>
+#include <QDebug>
 #include <QDir>
 #include <QLocale>
 #include <QTranslator>
-#include <QDebug>
 
 using namespace Marble;
 
@@ -28,8 +28,8 @@ int main(int argc, char *argv[])
     app.setOrganizationDomain(QStringLiteral("kde.org"));
     // Widget translation
 
-    QString      lang = QLocale::system().name().section(QLatin1Char('_'), 0, 0);
-    QTranslator  translator;
+    QString lang = QLocale::system().name().section(QLatin1Char('_'), 0, 0);
+    QTranslator translator;
     translator.load(QLatin1String("marble-") + lang, MarbleDirs::path(QStringLiteral("lang")));
     app.installTranslator(&translator);
 
@@ -39,12 +39,11 @@ int main(int argc, char *argv[])
     // application bundle...
 
 #ifdef Q_WS_WIN
-    QApplication::addLibraryPath( QApplication::applicationDirPath()
-                                  + QDir::separator() + QLatin1String("plugins"));
+    QApplication::addLibraryPath(QApplication::applicationDirPath() + QDir::separator() + QLatin1String("plugins"));
 #endif
 
     QString marbleDataPath;
-    int dataPathIndex=0;
+    int dataPathIndex = 0;
 
     QStringList args = QApplication::arguments();
 
@@ -60,29 +59,24 @@ int main(int argc, char *argv[])
         return 0;
     }
 
-    for ( int i = 1; i < args.count(); ++i ) {
+    for (int i = 1; i < args.count(); ++i) {
         const QString arg = args.at(i);
 
-        if ( arg == QLatin1String( "--debug-info" ) )
-        {
-            MarbleDebug::setEnabled( true );
-        }
-        else if ( arg.startsWith( QLatin1String( "--marbledatapath=" ), Qt::CaseInsensitive ) )
-        {
+        if (arg == QLatin1String("--debug-info")) {
+            MarbleDebug::setEnabled(true);
+        } else if (arg.startsWith(QLatin1String("--marbledatapath="), Qt::CaseInsensitive)) {
             marbleDataPath = args.at(i).mid(17);
-        }
-        else if ( arg.compare( QLatin1String( "--marbledatapath" ), Qt::CaseInsensitive ) == 0 && i+1 < args.size() ) {
+        } else if (arg.compare(QLatin1String("--marbledatapath"), Qt::CaseInsensitive) == 0 && i + 1 < args.size()) {
             dataPathIndex = i + 1;
-            marbleDataPath = args.value( dataPathIndex );
+            marbleDataPath = args.value(dataPathIndex);
             ++i;
         }
     }
 
-    MarbleLocale::MeasurementSystem const measurement =
-            (MarbleLocale::MeasurementSystem)QLocale::system().measurementSystem();
-    MarbleGlobal::getInstance()->locale()->setMeasurementSystem( measurement );
+    MarbleLocale::MeasurementSystem const measurement = (MarbleLocale::MeasurementSystem)QLocale::system().measurementSystem();
+    MarbleGlobal::getInstance()->locale()->setMeasurementSystem(measurement);
 
-    MainWindow *window = new MainWindow( marbleDataPath );
+    MainWindow *window = new MainWindow(marbleDataPath);
     window->show();
     return app.exec();
 }

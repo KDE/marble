@@ -1,14 +1,14 @@
 #ifndef MARBLE_TILELAYER_H
 #define MARBLE_TILELAYER_H
 
+#include "GeoSceneAbstractTileProjection.h"
 #include <LayerInterface.h>
 #include <QObject>
-#include "GeoSceneAbstractTileProjection.h"
 
 namespace Marble
 {
 
-class MARBLE_EXPORT TileLayer :  public QObject, public LayerInterface
+class MARBLE_EXPORT TileLayer : public QObject, public LayerInterface
 {
     Q_OBJECT
 public:
@@ -19,8 +19,8 @@ public:
     virtual QSize tileSize() const = 0;
     virtual const GeoSceneAbstractTileProjection *tileProjection() const = 0;
 
-    virtual int tileColumnCount( int level ) const = 0;
-    virtual int tileRowCount( int level ) const = 0;
+    virtual int tileColumnCount(int level) const = 0;
+    virtual int tileRowCount(int level) const = 0;
 
     virtual int layerCount() const = 0;
 };

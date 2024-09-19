@@ -7,8 +7,8 @@
 
 using namespace Marble;
 
-GeoNamesWeatherItem::GeoNamesWeatherItem( QObject *parent )
-    : WeatherItem( parent )
+GeoNamesWeatherItem::GeoNamesWeatherItem(QObject *parent)
+    : WeatherItem(parent)
 {
 }
 
@@ -16,20 +16,20 @@ GeoNamesWeatherItem::~GeoNamesWeatherItem()
 {
 }
 
-void GeoNamesWeatherItem::addDownloadedFile( const QString& url, const QString& type )
+void GeoNamesWeatherItem::addDownloadedFile(const QString &url, const QString &type)
 {
-    Q_UNUSED( url )
-    Q_UNUSED( type )
+    Q_UNUSED(url)
+    Q_UNUSED(type)
 }
 
 QString GeoNamesWeatherItem::service() const
 {
-    return QStringLiteral( "GeoNames" );
+    return QStringLiteral("GeoNames");
 }
 
 QString GeoNamesWeatherItem::creditHtml() const
 {
-    return tr( "Supported by <a href=\"https://www.geonames.org/export/JSON-webservices.html\" target=\"_BLANK\">geonames.org</a>" );
+    return tr("Supported by <a href=\"https://www.geonames.org/export/JSON-webservices.html\" target=\"_BLANK\">geonames.org</a>");
 }
 
 #include "moc_GeoNamesWeatherItem.cpp"

@@ -16,7 +16,7 @@ namespace gx
 class KmlAnimatedUpdateTagHandler : public GeoTagHandler
 {
 public:
-    GeoNode* parse(GeoParser&) const override;
+    GeoNode *parse(GeoParser &) const override;
 };
 }
 }

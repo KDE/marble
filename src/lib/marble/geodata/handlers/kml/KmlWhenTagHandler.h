@@ -19,14 +19,14 @@ namespace kml
 class KmlwhenTagHandler : public GeoTagHandler
 {
 public:
-    GeoNode* parse(GeoParser&) const override;
+    GeoNode *parse(GeoParser &) const override;
 
-    static QDateTime parse( const QString &dateTime );
+    static QDateTime parse(const QString &dateTime);
 
-    static GeoDataTimeStamp parseTimestamp( const QString &dateTime );
+    static GeoDataTimeStamp parseTimestamp(const QString &dateTime);
 
 private:
-    static Marble::GeoDataTimeStamp::TimeResolution modify( QString& whenString );
+    static Marble::GeoDataTimeStamp::TimeResolution modify(QString &whenString);
 };
 
 }

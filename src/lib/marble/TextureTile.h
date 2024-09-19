@@ -44,40 +44,39 @@ class TileId;
 
 class TextureTile : public Tile
 {
- public:
-    TextureTile(TileId const & tileId, QImage const & image, const Blending * blending );
+public:
+    TextureTile(TileId const &tileId, QImage const &image, const Blending *blending);
     ~TextureTile() override;
 
-/*!
-    \brief Returns the QImage that describes the look of the Tile
-    \return A non-zero pointer to a QImage associated with the tile.
-*/
-    QImage const * image() const;
+    /*!
+        \brief Returns the QImage that describes the look of the Tile
+        \return A non-zero pointer to a QImage associated with the tile.
+    */
+    QImage const *image() const;
 
-/*!
-    \brief Returns the kind of blending used for the texture tile.
-    \return A pointer to the blending object used for painting/merging the Tile.
+    /*!
+        \brief Returns the kind of blending used for the texture tile.
+        \return A pointer to the blending object used for painting/merging the Tile.
 
-    If no blending is set the pointer returned will be zero.
-*/
-    Blending const * blending() const;
+        If no blending is set the pointer returned will be zero.
+    */
+    Blending const *blending() const;
 
     int byteCount() const;
 
- private:
-    Q_DISABLE_COPY( TextureTile )
+private:
+    Q_DISABLE_COPY(TextureTile)
 
     QImage const m_image;
-    Blending const * const m_blending;
-
+    Blending const *const m_blending;
 };
 
-inline QImage const * TextureTile::image() const
+inline QImage const *TextureTile::image() const
 {
     return &m_image;
 }
 
-inline Blending const * TextureTile::blending() const
+inline Blending const *TextureTile::blending() const
 {
     return m_blending;
 }

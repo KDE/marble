@@ -3,13 +3,10 @@
 
 #include "thumbnailer.h"
 
-
-extern "C"
-{
+extern "C" {
 
 Q_DECL_EXPORT ThumbnailCreator *new_creator()
 {
     return new Marble::GeoDataThumbnailer;
 }
-
 }

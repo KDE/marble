@@ -3,7 +3,6 @@
 // SPDX-FileCopyrightText: 2013 Mihail Ivchenko <ematirov@gmail.com>
 //
 
-
 #ifndef MARBLE_CYCLESTREETSRUNNER_H
 #define MARBLE_CYCLESTREETSRUNNER_H
 
@@ -25,28 +24,27 @@ public:
     ~CycleStreetsRunner() override;
 
     // Overriding MarbleAbstractRunner
-    void retrieveRoute( const RouteRequest *request ) override;
+    void retrieveRoute(const RouteRequest *request) override;
 
 private Q_SLOTS:
     void get();
 
     /** Route data was retrieved via http */
-    void retrieveData( QNetworkReply *reply );
+    void retrieveData(QNetworkReply *reply);
 
     /** A network error occurred */
-    void handleError( QNetworkReply::NetworkError );
+    void handleError(QNetworkReply::NetworkError);
 
 private:
+    GeoDataDocument *parse(const QByteArray &content) const;
 
-    GeoDataDocument *parse( const QByteArray &content ) const;
-
-    int maneuverType( QString& cycleStreetsName ) const;
+    int maneuverType(QString &cycleStreetsName) const;
 
     QNetworkAccessManager m_networkAccessManager;
 
     QNetworkRequest m_request;
 
-    QMap<QString,int> turns;
+    QMap<QString, int> turns;
 };
 
 }

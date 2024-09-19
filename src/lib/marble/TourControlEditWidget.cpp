@@ -9,46 +9,46 @@
 
 #include <QHBoxLayout>
 #include <QLabel>
-#include <QToolButton>
 #include <QRadioButton>
+#include <QToolButton>
 
-#include "MarblePlacemarkModel.h"
 #include "GeoDataTourControl.h"
+#include "MarblePlacemarkModel.h"
 
 namespace Marble
 {
 
-TourControlEditWidget::TourControlEditWidget( const QModelIndex &index, QWidget *parent ) :
-    QWidget( parent ),
-    m_index( index ),
-    m_radio_play( new QRadioButton ),
-    m_radio_pause( new QRadioButton ),
-    m_button( new QToolButton )
+TourControlEditWidget::TourControlEditWidget(const QModelIndex &index, QWidget *parent)
+    : QWidget(parent)
+    , m_index(index)
+    , m_radio_play(new QRadioButton)
+    , m_radio_pause(new QRadioButton)
+    , m_button(new QToolButton)
 {
     QHBoxLayout *layout = new QHBoxLayout;
-    layout->setSpacing( 5 );
+    layout->setSpacing(5);
 
-    QLabel* iconLabel = new QLabel;
+    QLabel *iconLabel = new QLabel;
     iconLabel->setPixmap(QPixmap(QStringLiteral(":/marble/media-playback-pause.png")));
-    layout->addWidget( iconLabel );
+    layout->addWidget(iconLabel);
 
-    layout->addWidget( m_radio_play );
-    m_radio_play->setText( tr( "Play" ) );
+    layout->addWidget(m_radio_play);
+    m_radio_play->setText(tr("Play"));
 
-    layout->addWidget( m_radio_pause );
-    m_radio_pause->setText( tr( "Pause" ) );
+    layout->addWidget(m_radio_pause);
+    m_radio_pause->setText(tr("Pause"));
 
-    if( tourControlElement()->playMode() == GeoDataTourControl::Play ){
-        m_radio_play->setChecked( true );
-    }else{
-        m_radio_pause->setChecked( true );
+    if (tourControlElement()->playMode() == GeoDataTourControl::Play) {
+        m_radio_play->setChecked(true);
+    } else {
+        m_radio_pause->setChecked(true);
     }
 
     m_button->setIcon(QIcon(QStringLiteral(":/marble/document-save.png")));
     connect(m_button, SIGNAL(clicked()), this, SLOT(save()));
-    layout->addWidget( m_button );
+    layout->addWidget(m_button);
 
-    setLayout( layout );
+    setLayout(layout);
 }
 
 bool TourControlEditWidget::editable() const
@@ -56,25 +56,25 @@ bool TourControlEditWidget::editable() const
     return m_button->isEnabled();
 }
 
-void TourControlEditWidget::setEditable( bool editable )
+void TourControlEditWidget::setEditable(bool editable)
 {
-    m_button->setEnabled( editable );
+    m_button->setEnabled(editable);
 }
 
 void TourControlEditWidget::save()
 {
-    if ( m_radio_play->isChecked() ) {
-        tourControlElement()->setPlayMode( GeoDataTourControl::Play );
+    if (m_radio_play->isChecked()) {
+        tourControlElement()->setPlayMode(GeoDataTourControl::Play);
     } else {
-        tourControlElement()->setPlayMode( GeoDataTourControl::Pause );
+        tourControlElement()->setPlayMode(GeoDataTourControl::Pause);
     }
     emit editingDone(m_index);
 }
 
-GeoDataTourControl* TourControlEditWidget::tourControlElement()
+GeoDataTourControl *TourControlEditWidget::tourControlElement()
 {
-    GeoDataObject *object = qvariant_cast<GeoDataObject*>(m_index.data( MarblePlacemarkModel::ObjectPointerRole ) );
-    Q_ASSERT( object );
+    GeoDataObject *object = qvariant_cast<GeoDataObject *>(m_index.data(MarblePlacemarkModel::ObjectPointerRole));
+    Q_ASSERT(object);
     auto tourControl = geodata_cast<GeoDataTourControl>(object);
     Q_ASSERT(tourControl);
     return tourControl;

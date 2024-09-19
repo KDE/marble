@@ -11,13 +11,13 @@
 #define MARBLETWITTERPLUGIN_H
 #define RADIANSTODEGREES 57.2957795
 
-#include "../lib/HttpDownloadManager.h"
 #include "../lib/CacheStoragePolicy.h"
-#include "jsonparser.h"
-#include "RenderPlugin.h"
-#include "MarbleDirs.h"
-#include "GeoPainter.h"
+#include "../lib/HttpDownloadManager.h"
 #include "GeoDataCoordinates.h"
+#include "GeoPainter.h"
+#include "MarbleDirs.h"
+#include "RenderPlugin.h"
+#include "jsonparser.h"
 
 namespace Marble
 {
@@ -26,9 +26,8 @@ namespace Marble
  * @short The class that specifies the a simple panormaio plugin
  *
  */
-struct twitterStructure
-{
-    QString twit ;
+struct twitterStructure {
+    QString twit;
     GeoDataCoordinates location;
 };
 
@@ -56,31 +55,30 @@ public:
 
     QIcon icon() const;
 
-
     void initialize();
 
     bool isInitialized() const;
 
-    bool render(GeoPainter *painter, ViewportParams *viewport, const QString& renderPos, GeoSceneLayer * layer = 0);
+    bool render(GeoPainter *painter, ViewportParams *viewport, const QString &renderPos, GeoSceneLayer *layer = 0);
 
     ~twitterPlugin();
 
 public Q_SLOTS:
-    void slotJsonDownloadComplete(QString , QString);   //completed download of json reply fom panoramio
-    void slotGeoCodingReplyRecieved(QString , QString);   //completed download of image
+    void slotJsonDownloadComplete(QString, QString); // completed download of json reply fom panoramio
+    void slotGeoCodingReplyRecieved(QString, QString); // completed download of image
 
 Q_SIGNALS:
-    void statusMessageForImageDownloadingProcess(const QString&);
+    void statusMessageForImageDownloadingProcess(const QString &);
+
 private:
     CacheStoragePolicy *m_storagePolicy;
     HttpDownloadManager *m_downloadManager;
     jsonParser twitterJsonParser;
     void downloadtwitter(int, int, qreal, qreal, qreal, qreal);
-    QList <twitterStructure > twitsWithLocation;//this list will hold pointers to TWITT we have downloaded successfully figured out :)
-    QList <twitterDataStructure> parsedData;
-   void findLatLonOfStreetAddress(QString streetAddress);
-    int privateFlagForRenderingTwitts;//this flag is one when globe has an Image  (downloaded or already there in cache)
-
+    QList<twitterStructure> twitsWithLocation; // this list will hold pointers to TWITT we have downloaded successfully figured out :)
+    QList<twitterDataStructure> parsedData;
+    void findLatLonOfStreetAddress(QString streetAddress);
+    int privateFlagForRenderingTwitts; // this flag is one when globe has an Image  (downloaded or already there in cache)
 };
 
 }

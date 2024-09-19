@@ -8,8 +8,8 @@
 #ifndef MARBLE_ROUTINGRUNNERPLUGIN_H
 #define MARBLE_ROUTINGRUNNERPLUGIN_H
 
-#include <QObject>
 #include "PluginInterface.h"
+#include <QObject>
 
 #include <QHash>
 #include <QWidget>
@@ -23,15 +23,15 @@ class MarbleAbstractRunner;
 class RoutingRunner;
 
 /**
-  * A plugin for Marble to execute a routing task.
-  */
+ * A plugin for Marble to execute a routing task.
+ */
 class MARBLE_EXPORT RoutingRunnerPlugin : public QObject, public PluginInterface
 {
     Q_OBJECT
 
 public:
     /** Constructor with optional parent object */
-    explicit RoutingRunnerPlugin( QObject* parent = nullptr );
+    explicit RoutingRunnerPlugin(QObject *parent = nullptr);
 
     /** Destructor */
     ~RoutingRunnerPlugin() override;
@@ -44,12 +44,12 @@ public:
     virtual QString guiString() const = 0;
 
     /** Plugin factory method to create a new runner instance.
-      * Method caller gets ownership of the returned object
-      */
+     * Method caller gets ownership of the returned object
+     */
     virtual RoutingRunner *newRunner() const = 0;
 
     /** True if the plugin supports its tasks on the given planet */
-    bool supportsCelestialBody( const QString &celestialBodyId ) const;
+    bool supportsCelestialBody(const QString &celestialBodyId) const;
 
     /** True if the plugin can execute its tasks without network access */
     bool canWorkOffline() const;
@@ -72,7 +72,7 @@ public:
     class ConfigWidget : public QWidget
     {
     public:
-        virtual void loadSettings( const QHash<QString, QVariant> &settings ) = 0;
+        virtual void loadSettings(const QHash<QString, QVariant> &settings) = 0;
         virtual QHash<QString, QVariant> settings() const = 0;
     };
     /**
@@ -83,17 +83,17 @@ public:
     virtual ConfigWidget *configWidget();
 
     /** True if the plugin supports the given routing profile template */
-    virtual bool supportsTemplate( RoutingProfilesModel::ProfileTemplate profileTemplate ) const;
+    virtual bool supportsTemplate(RoutingProfilesModel::ProfileTemplate profileTemplate) const;
 
     /** Settings for the given routing profile template */
-    virtual QHash<QString, QVariant> templateSettings( RoutingProfilesModel::ProfileTemplate profileTemplate ) const;
+    virtual QHash<QString, QVariant> templateSettings(RoutingProfilesModel::ProfileTemplate profileTemplate) const;
 
 protected:
-    void setStatusMessage( const QString &message );
+    void setStatusMessage(const QString &message);
 
-    void setSupportedCelestialBodies( const QStringList &celestialBodies );
+    void setSupportedCelestialBodies(const QStringList &celestialBodies);
 
-    void setCanWorkOffline( bool canWorkOffline );
+    void setCanWorkOffline(bool canWorkOffline);
 
 private:
     class Private;
@@ -102,6 +102,6 @@ private:
 
 }
 
-Q_DECLARE_INTERFACE( Marble::RoutingRunnerPlugin, "org.kde.Marble.RunnerRunnerPlugin/1.01" )
+Q_DECLARE_INTERFACE(Marble::RoutingRunnerPlugin, "org.kde.Marble.RunnerRunnerPlugin/1.01")
 
 #endif // MARBLE_ROUTINGRUNNERPLUGIN_H

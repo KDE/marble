@@ -8,10 +8,11 @@
 
 #include "GeoDataOverlay_p.h"
 
-#include "GeoDataTypes.h"
 #include "GeoDataLatLonQuad.h"
+#include "GeoDataTypes.h"
 
-namespace Marble {
+namespace Marble
+{
 
 class GeoDataGroundOverlayPrivate : public GeoDataOverlayPrivate
 {
@@ -28,8 +29,8 @@ public:
 };
 
 GeoDataGroundOverlayPrivate::GeoDataGroundOverlayPrivate()
-    : m_altitude(0.0),
-      m_altitudeMode(ClampToGround)
+    : m_altitude(0.0)
+    , m_altitudeMode(ClampToGround)
 {
 }
 

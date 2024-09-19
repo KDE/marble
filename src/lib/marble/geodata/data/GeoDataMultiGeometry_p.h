@@ -8,21 +8,20 @@
 
 #include "GeoDataGeometry_p.h"
 
-#include "GeoDataPoint.h"
-#include "GeoDataPolygon.h"
-#include "GeoDataTrack.h"
-#include "GeoDataMultiTrack.h"
 #include "GeoDataLineString.h"
 #include "GeoDataLinearRing.h"
 #include "GeoDataModel.h"
-
+#include "GeoDataMultiTrack.h"
+#include "GeoDataPoint.h"
+#include "GeoDataPolygon.h"
+#include "GeoDataTrack.h"
 
 namespace Marble
 {
 
 class GeoDataMultiGeometryPrivate : public GeoDataGeometryPrivate
 {
-  public:
+public:
     GeoDataMultiGeometryPrivate()
     {
     }
@@ -32,30 +31,29 @@ class GeoDataMultiGeometryPrivate : public GeoDataGeometryPrivate
         qDeleteAll(m_vector);
     }
 
-    GeoDataMultiGeometryPrivate& operator=( const GeoDataMultiGeometryPrivate &other)
+    GeoDataMultiGeometryPrivate &operator=(const GeoDataMultiGeometryPrivate &other)
     {
-        GeoDataGeometryPrivate::operator=( other );
+        GeoDataGeometryPrivate::operator=(other);
 
-        qDeleteAll( m_vector );
+        qDeleteAll(m_vector);
         m_vector.clear();
 
         m_vector.reserve(other.m_vector.size());
 
-        for (const GeoDataGeometry *geometry: other.m_vector) {
-
+        for (const GeoDataGeometry *geometry : other.m_vector) {
             m_vector.append(geometry->copy());
         }
         return *this;
     }
 
     GeoDataGeometryPrivate *copy() const override
-    { 
-        GeoDataMultiGeometryPrivate* copy = new GeoDataMultiGeometryPrivate;
+    {
+        GeoDataMultiGeometryPrivate *copy = new GeoDataMultiGeometryPrivate;
         *copy = *this;
         return copy;
     }
 
-    QVector<GeoDataGeometry*>  m_vector;
+    QVector<GeoDataGeometry *> m_vector;
 };
 
 } // namespace Marble

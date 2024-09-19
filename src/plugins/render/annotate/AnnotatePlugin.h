@@ -5,18 +5,16 @@
 // SPDX-FileCopyrightText: 2014 Calin Cruceru <crucerucalincristian@gmail.com>
 //
 
-
 #ifndef MARBLE_ANNOTATEPLUGIN_H
 #define MARBLE_ANNOTATEPLUGIN_H
 
-#include "RenderPlugin.h"
-#include "SceneGraphicsItem.h"
 #include "GeoDataGroundOverlay.h"
 #include "GroundOverlayFrame.h"
+#include "RenderPlugin.h"
+#include "SceneGraphicsItem.h"
 
 #include <QMenu>
 #include <QSortFilterProxyModel>
-
 
 namespace Marble
 {
@@ -29,17 +27,16 @@ class PolylineAnnotation;
 class PlacemarkTextAnnotation;
 class OsmPlacemarkData;
 
-
 /**
  * @brief This class specifies the Marble layer interface of a plugin which
  * annotates maps with polygons and placemarks.
  */
-class AnnotatePlugin :  public RenderPlugin
+class AnnotatePlugin : public RenderPlugin
 {
     Q_OBJECT
     Q_PLUGIN_METADATA(IID "org.kde.marble.AnnotatePlugin")
-    Q_INTERFACES( Marble::RenderPluginInterface )
-    MARBLE_PLUGIN( AnnotatePlugin )
+    Q_INTERFACES(Marble::RenderPluginInterface)
+    MARBLE_PLUGIN(AnnotatePlugin)
 
 public:
     explicit AnnotatePlugin(const MarbleModel *model = nullptr);
@@ -61,54 +58,53 @@ public:
 
     QString description() const override;
 
-    QIcon icon () const override;
+    QIcon icon() const override;
 
     QString copyrightYears() const override;
 
     QVector<PluginAuthor> pluginAuthors() const override;
 
-    void initialize () override;
+    void initialize() override;
 
-    bool isInitialized () const override;
+    bool isInitialized() const override;
 
     QString runtimeTrace() const override;
 
-    const QList<QActionGroup*> *actionGroups() const override;
+    const QList<QActionGroup *> *actionGroups() const override;
 
-    bool render( GeoPainter *painter, ViewportParams *viewport,
-                 const QString &renderPos, GeoSceneLayer *layer = nullptr ) override;
+    bool render(GeoPainter *painter, ViewportParams *viewport, const QString &renderPos, GeoSceneLayer *layer = nullptr) override;
 
 Q_SIGNALS:
     void placemarkMoved();
-    void nodeAdded( const GeoDataCoordinates &coordinates );
-    void itemMoved( GeoDataPlacemark *placemark );
-    void mouseMoveGeoPosition( const QString& );
+    void nodeAdded(const GeoDataCoordinates &coordinates);
+    void itemMoved(GeoDataPlacemark *placemark);
+    void mouseMoveGeoPosition(const QString &);
 
 private Q_SLOTS:
-    void enableModel( bool enabled );
+    void enableModel(bool enabled);
     void askToRemoveFocusItem();
     void removeFocusItem();
     void clearAnnotations();
     void saveAnnotationFile();
     void loadAnnotationFile();
-    void openAnnotationFile(const QString&);
+    void openAnnotationFile(const QString &);
     void copyItem();
     void cutItem();
     void pasteItem();
 
     void addTextAnnotation();
     void editTextAnnotation();
-    void stopEditingTextAnnotation( int result );
+    void stopEditingTextAnnotation(int result);
 
     void addOverlay();
     void editOverlay();
     void removeOverlay();
-    void updateOverlayFrame( GeoDataGroundOverlay *overlay );
+    void updateOverlayFrame(GeoDataGroundOverlay *overlay);
 
     void addPolygon();
-    void stopEditingPolygon( int result );
-    void setAddingPolygonHole( bool enabled );
-    void setAddingNodes( bool enabled );
+    void stopEditingPolygon(int result);
+    void setAddingPolygonHole(bool enabled);
+    void setAddingNodes(bool enabled);
     void editPolygon();
     void selectNode();
     void deleteNode();
@@ -118,53 +114,53 @@ private Q_SLOTS:
 
     void addPolyline();
     void editPolyline();
-    void stopEditingPolyline( int result );
+    void stopEditingPolyline(int result);
     void setPolylineAvailable();
 
-    void addRelation( const OsmPlacemarkData &relationOsmData );
+    void addRelation(const OsmPlacemarkData &relationOsmData);
     void downloadOsm();
 
 protected:
-    bool eventFilter( QObject *watched, QEvent *event ) override;
+    bool eventFilter(QObject *watched, QEvent *event) override;
 
 private:
     void addContextItems();
-    void setupActions( MarbleWidget *marbleWidget );
+    void setupActions(MarbleWidget *marbleWidget);
     static void disableActions(QActionGroup *group);
     static void enableAllActions(QActionGroup *group);
-    void enableActionsOnItemType( const QString &type );
+    void enableActionsOnItemType(const QString &type);
     void disableFocusActions();
 
     void setupTextAnnotationRmbMenu();
-    void showTextAnnotationRmbMenu( qreal x, qreal y );
+    void showTextAnnotationRmbMenu(qreal x, qreal y);
 
     void setupGroundOverlayModel();
     void setupOverlayRmbMenu();
-    void showOverlayRmbMenu( GeoDataGroundOverlay *overlay, qreal x, qreal y );
-    void displayOverlayFrame( GeoDataGroundOverlay *overlay );
+    void showOverlayRmbMenu(GeoDataGroundOverlay *overlay, qreal x, qreal y);
+    void displayOverlayFrame(GeoDataGroundOverlay *overlay);
     void clearOverlayFrames();
 
     void setupPolygonRmbMenu();
     void setupNodeRmbMenu();
-    void showPolygonRmbMenu( qreal x, qreal y );
-    void showNodeRmbMenu( qreal x, qreal y );
+    void showPolygonRmbMenu(qreal x, qreal y);
+    void showNodeRmbMenu(qreal x, qreal y);
 
     void setupPolylineRmbMenu();
-    void showPolylineRmbMenu( qreal x, qreal y );
+    void showPolylineRmbMenu(qreal x, qreal y);
 
-    void handleUncaughtEvents( QMouseEvent *mouseEvent );
-    void handleReleaseOverlay( QMouseEvent *mouseEvent );
-    bool handleDrawingPolyline( QMouseEvent *mouseEvent );
-    bool handleDrawingPolygon( QMouseEvent *mouseEvent );
-    bool handleMovingSelectedItem( QMouseEvent *mouseEvent );
+    void handleUncaughtEvents(QMouseEvent *mouseEvent);
+    void handleReleaseOverlay(QMouseEvent *mouseEvent);
+    bool handleDrawingPolyline(QMouseEvent *mouseEvent);
+    bool handleDrawingPolygon(QMouseEvent *mouseEvent);
+    bool handleMovingSelectedItem(QMouseEvent *mouseEvent);
 
-    void handleRequests( QMouseEvent *mouseEvent, SceneGraphicsItem *item );
-    void handleSuccessfulPressEvent( QMouseEvent *mouseEvent, SceneGraphicsItem *item );
-    void handleSuccessfulHoverEvent( QMouseEvent *mouseEvent, SceneGraphicsItem *item );
-    void handleSuccessfulReleaseEvent( QMouseEvent *mouseEvent, SceneGraphicsItem *item );
+    void handleRequests(QMouseEvent *mouseEvent, SceneGraphicsItem *item);
+    void handleSuccessfulPressEvent(QMouseEvent *mouseEvent, SceneGraphicsItem *item);
+    void handleSuccessfulHoverEvent(QMouseEvent *mouseEvent, SceneGraphicsItem *item);
+    void handleSuccessfulReleaseEvent(QMouseEvent *mouseEvent, SceneGraphicsItem *item);
 
-    void announceStateChanged( SceneGraphicsItem::ActionState newState );
-    void setupCursor( SceneGraphicsItem *item );
+    void announceStateChanged(SceneGraphicsItem::ActionState newState);
+    void setupCursor(SceneGraphicsItem *item);
 
     const GeoDataCoordinates mouseGeoDataCoordinates(QMouseEvent *mouseEvent) const;
 
@@ -178,16 +174,15 @@ private:
     QMenu *m_textAnnotationRmbMenu;
     QMenu *m_polylineRmbMenu;
 
-    QList<QActionGroup*> m_actions;
+    QList<QActionGroup *> m_actions;
     QSortFilterProxyModel m_groundOverlayModel;
-    QMap<GeoDataGroundOverlay*, SceneGraphicsItem*> m_groundOverlayFrames;
+    QMap<GeoDataGroundOverlay *, SceneGraphicsItem *> m_groundOverlayFrames;
 
     // A list of all osm relations
     QHash<qint64, OsmPlacemarkData> m_osmRelations;
 
-
-    GeoDataDocument* m_annotationDocument;
-    QList<SceneGraphicsItem*> m_graphicsItems;
+    GeoDataDocument *m_annotationDocument;
+    QList<SceneGraphicsItem *> m_graphicsItems;
 
     SceneGraphicsItem *m_movedItem;
     SceneGraphicsItem *m_focusItem;

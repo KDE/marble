@@ -3,14 +3,13 @@
 // SPDX-FileCopyrightText: 2009 Andrew Manson <g.real.ate@gmail.com>
 //
 
-#include "GeoDataPoint.h"
 #include "GeoDataLinearRing.h"
+#include "GeoDataPoint.h"
 
 #include <QObject>
 #include <QTest>
 
 using namespace Marble;
-
 
 class TestGeoDataGeometry : public QObject
 {
@@ -28,7 +27,7 @@ void TestGeoDataGeometry::downcastPointTest_data()
     QTest::addColumn<GeoDataPoint>("point");
 
     GeoDataPoint point1;
-    point1.setCoordinates( GeoDataCoordinates(.5, .2, 100) );
+    point1.setCoordinates(GeoDataCoordinates(.5, .2, 100));
     QTest::newRow("First") << point1;
 }
 
@@ -36,12 +35,12 @@ void TestGeoDataGeometry::downcastPointTest()
 {
     QFETCH(GeoDataPoint, point);
 
-    QVERIFY( ! point.coordinates().toString().isEmpty() );
+    QVERIFY(!point.coordinates().toString().isEmpty());
 
-    GeoDataCoordinates tmp( point.coordinates() );
-    GeoDataPoint newPoint( tmp );
+    GeoDataCoordinates tmp(point.coordinates());
+    GeoDataPoint newPoint(tmp);
 
-    QCOMPARE( newPoint.coordinates().toString(), point.coordinates().toString() );
+    QCOMPARE(newPoint.coordinates().toString(), point.coordinates().toString());
 }
 
 /**
@@ -80,6 +79,5 @@ void TestGeoDataGeometry::deleteAndDetachTest3()
     line2 << GeoDataCoordinates();
 }
 
-QTEST_MAIN( TestGeoDataGeometry )
+QTEST_MAIN(TestGeoDataGeometry)
 #include "TestGeoDataGeometry.moc"
-

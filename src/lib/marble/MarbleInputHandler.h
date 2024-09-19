@@ -10,8 +10,8 @@
 
 #include <QObject>
 
-#include "marble_export.h"
 #include "GeoDataCoordinates.h"
+#include "marble_export.h"
 
 class QEvent;
 class QKeyEvent;
@@ -31,15 +31,15 @@ class MarbleAbstractPresenter;
 class AbstractDataPluginItem;
 class RenderPlugin;
 
-class MARBLE_EXPORT MarbleInputHandler  : public QObject
+class MARBLE_EXPORT MarbleInputHandler : public QObject
 {
     Q_OBJECT
 
- public:
-    explicit MarbleInputHandler( MarbleAbstractPresenter* );
+public:
+    explicit MarbleInputHandler(MarbleAbstractPresenter *);
     ~MarbleInputHandler() override;
 
-    void setPositionSignalConnected( bool connected );
+    void setPositionSignalConnected(bool connected);
     bool isPositionSignalConnected() const;
 
     /**
@@ -50,19 +50,19 @@ class MARBLE_EXPORT MarbleInputHandler  : public QObject
      * @brief  Set whether a popup menu appears on a click (not drag) with the left mouse button
      * @param  enabled True to enable the popup menu (default), false to disable it
      */
-    void setMouseButtonPopupEnabled( Qt::MouseButton mouseButton, bool enabled );
+    void setMouseButtonPopupEnabled(Qt::MouseButton mouseButton, bool enabled);
 
     /**
      * @brief  Return whether the left mouse button popup menu is active
      * @return True iff a popup menu is shown on left mouse button clicks
      */
-    bool isMouseButtonPopupEnabled( Qt::MouseButton mouseButton ) const;
+    bool isMouseButtonPopupEnabled(Qt::MouseButton mouseButton) const;
 
-    void setPanViaArrowsEnabled( bool enabled );
+    void setPanViaArrowsEnabled(bool enabled);
 
     bool panViaArrowsEnabled() const;
 
-    void setInertialEarthRotationEnabled( bool enabled );
+    void setInertialEarthRotationEnabled(bool enabled);
 
     /**
      * @brief Returns true iff dragging the map with the mouse keeps spinning
@@ -71,46 +71,48 @@ class MARBLE_EXPORT MarbleInputHandler  : public QObject
      */
     bool inertialEarthRotationEnabled() const;
 
-    void setMouseViewRotationEnabled( bool enabled );
+    void setMouseViewRotationEnabled(bool enabled);
 
     bool mouseViewRotationEnabled() const;
 
     /// should the map do kinetic scrolling, this would stop the operation
     virtual void stopInertialEarthRotation();
 
- Q_SIGNALS:
+Q_SIGNALS:
     // Mouse button menus
-    void lmbRequest( int, int );
-    void rmbRequest( int, int );
+    void lmbRequest(int, int);
+    void rmbRequest(int, int);
 
-    //Gps coordinates
-    void mouseClickScreenPosition( int, int );
-    void mouseMoveGeoPosition( const QString& );
+    // Gps coordinates
+    void mouseClickScreenPosition(int, int);
+    void mouseMoveGeoPosition(const QString &);
 
     /*
      * To detect mouse click followed by mouse move
      * with no mouse move in between
      */
-    void mouseClickGeoPosition( qreal, qreal, GeoDataCoordinates::Unit );
+    void mouseClickGeoPosition(qreal, qreal, GeoDataCoordinates::Unit);
 
- protected Q_SLOTS:
+protected Q_SLOTS:
     void restoreViewContext();
 
- protected:
+protected:
     class Protected;
-    Protected * const d;
+    Protected *const d;
 
- private Q_SLOTS:
-    virtual void installPluginEventFilter( RenderPlugin *renderPlugin ) = 0;
+private Q_SLOTS:
+    virtual void installPluginEventFilter(RenderPlugin *renderPlugin) = 0;
 
- private:
-    Q_DISABLE_COPY( MarbleInputHandler )
+private:
+    Q_DISABLE_COPY(MarbleInputHandler)
 };
 
 class AbstractSelectionRubber
 {
 public:
-    virtual ~AbstractSelectionRubber() {}
+    virtual ~AbstractSelectionRubber()
+    {
+    }
     virtual void show() = 0;
     virtual void hide() = 0;
     virtual bool isVisible() const = 0;
@@ -118,33 +120,33 @@ public:
     virtual void setGeometry(const QRect &geometry) = 0;
 };
 
-class MARBLE_EXPORT MarbleDefaultInputHandler  : public MarbleInputHandler
+class MARBLE_EXPORT MarbleDefaultInputHandler : public MarbleInputHandler
 {
     Q_OBJECT
 
- public:
-    explicit MarbleDefaultInputHandler( MarbleAbstractPresenter* marblePresenter);
+public:
+    explicit MarbleDefaultInputHandler(MarbleAbstractPresenter *marblePresenter);
     ~MarbleDefaultInputHandler() override;
 
     void stopInertialEarthRotation() override;
 
- protected:
-    bool eventFilter( QObject *, QEvent * ) override;
+protected:
+    bool eventFilter(QObject *, QEvent *) override;
     bool handleMouseEvent(QMouseEvent *e);
     bool handlePinch(const QPointF &center, qreal scaleFactor, Qt::GestureState state);
 
-    //FIXME - refactor (abstraction & composition)
+    // FIXME - refactor (abstraction & composition)
     const AbstractDataPluginItem *lastToolTipItem() const;
-    QTimer* toolTipTimer();
+    QTimer *toolTipTimer();
     QPoint toolTipPosition() const;
 
     virtual bool handleKeyPress(QKeyEvent *e);
     virtual void handleMouseButtonPressAndHold(const QPoint &position);
 
- private Q_SLOTS:
-    void installPluginEventFilter( RenderPlugin *renderPlugin ) override = 0;
-    virtual void showLmbMenu( int, int ) = 0;
-    virtual void showRmbMenu( int, int ) = 0;
+private Q_SLOTS:
+    void installPluginEventFilter(RenderPlugin *renderPlugin) override = 0;
+    virtual void showLmbMenu(int, int) = 0;
+    virtual void showRmbMenu(int, int) = 0;
     void handlePressAndHold();
 
     virtual void openItemToolTip() = 0;
@@ -152,7 +154,7 @@ class MARBLE_EXPORT MarbleDefaultInputHandler  : public MarbleInputHandler
 
     void lmbTimeout();
 
- private:
+private:
     virtual AbstractSelectionRubber *selectionRubber() = 0;
     virtual bool layersEventFilter(QObject *, QEvent *) = 0;
 
@@ -170,18 +172,18 @@ class MARBLE_EXPORT MarbleDefaultInputHandler  : public MarbleInputHandler
     virtual void hideSelectionIfCtrlReleased(QEvent *e);
     virtual void checkReleasedMove(QMouseEvent *e);
 
-    //Returns whatever should be returned from mouse event handling loop
+    // Returns whatever should be returned from mouse event handling loop
     virtual bool acceptMouse();
 
     void notifyPosition(bool isAboveMap, qreal mouseLon, qreal mouseLat);
     QPoint mouseMovedOutside(QMouseEvent *event);
-    void adjustCursorShape(const QPoint& mousePosition, const QPoint& mouseDirection);
+    void adjustCursorShape(const QPoint &mousePosition, const QPoint &mouseDirection);
 
     Q_DISABLE_COPY(MarbleDefaultInputHandler)
     class Private;
-    Private * const d;
+    Private *const d;
 };
 
 }
 
-#endif  //MARBLE_MARBLEINPUTHANDLER_H
+#endif // MARBLE_MARBLEINPUTHANDLER_H

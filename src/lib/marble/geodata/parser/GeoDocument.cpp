@@ -5,8 +5,8 @@
 */
 
 #include "GeoDocument.h"
-#include <cstdio>
 #include "GeoSceneTypes.h"
+#include <cstdio>
 
 namespace Marble
 {
@@ -28,7 +28,6 @@ bool GeoDocument::isGeoSceneDocument() const
 {
     return false;
 }
-
 
 GeoNode::GeoNode()
 {

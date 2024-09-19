@@ -22,7 +22,7 @@ namespace Marble
 
 class LegendWidgetPrivate : public Ui::LegendWidget
 {
- public:
+public:
     LegendWidgetPrivate();
 };
 
@@ -30,14 +30,13 @@ LegendWidgetPrivate::LegendWidgetPrivate()
 {
 }
 
-LegendWidget::LegendWidget( QWidget *parent, Qt::WindowFlags f )
-    : QWidget( parent, f ),
-      d( new LegendWidgetPrivate )
+LegendWidget::LegendWidget(QWidget *parent, Qt::WindowFlags f)
+    : QWidget(parent, f)
+    , d(new LegendWidgetPrivate)
 {
-    d->setupUi( this );
-    layout()->setContentsMargins( 0, 0, 0, 0 );
-    connect( d->m_marbleLegendBrowser, SIGNAL(tourLinkClicked(QString)),
-             this, SIGNAL(tourLinkClicked(QString)) );
+    d->setupUi(this);
+    layout()->setContentsMargins(0, 0, 0, 0);
+    connect(d->m_marbleLegendBrowser, SIGNAL(tourLinkClicked(QString)), this, SIGNAL(tourLinkClicked(QString)));
 }
 
 LegendWidget::~LegendWidget()
@@ -45,14 +44,13 @@ LegendWidget::~LegendWidget()
     delete d;
 }
 
-void LegendWidget::setMarbleModel( MarbleModel *model )
+void LegendWidget::setMarbleModel(MarbleModel *model)
 {
     // Initialize the MarbleLegendBrowser
-    d->m_marbleLegendBrowser->setMarbleModel( model );
+    d->m_marbleLegendBrowser->setMarbleModel(model);
 
     // connect signals for the Legend
-    connect( d->m_marbleLegendBrowser, SIGNAL(toggledShowProperty(QString,bool)),
-             this,                            SIGNAL(propertyValueChanged(QString,bool)) );
+    connect(d->m_marbleLegendBrowser, SIGNAL(toggledShowProperty(QString, bool)), this, SIGNAL(propertyValueChanged(QString, bool)));
 }
 
 }

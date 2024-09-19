@@ -6,29 +6,28 @@
 
 #include "GeoSceneLegend.h"
 
-#include "GeoSceneTypes.h"
 #include "GeoSceneSection.h"
+#include "GeoSceneTypes.h"
 
 namespace Marble
 {
 
 class GeoSceneLegendPrivate
 {
-  public:
+public:
     ~GeoSceneLegendPrivate()
     {
-        qDeleteAll( m_sections );
+        qDeleteAll(m_sections);
     }
 
-     /// The vector holding all the sections in the legend.
-    /// (We want to preserve the order and don't care 
+    /// The vector holding all the sections in the legend.
+    /// (We want to preserve the order and don't care
     /// much about speed here), so we don't use a hash
-    QVector<const GeoSceneSection*> m_sections;
+    QVector<const GeoSceneSection *> m_sections;
 };
 
-
 GeoSceneLegend::GeoSceneLegend()
-    : d( new GeoSceneLegendPrivate )
+    : d(new GeoSceneLegendPrivate)
 {
 }
 
@@ -37,33 +36,32 @@ GeoSceneLegend::~GeoSceneLegend()
     delete d;
 }
 
-const char* GeoSceneLegend::nodeType() const
+const char *GeoSceneLegend::nodeType() const
 {
     return GeoSceneTypes::GeoSceneLegendType;
 }
 
-void GeoSceneLegend::addSection( const GeoSceneSection* section )
+void GeoSceneLegend::addSection(const GeoSceneSection *section)
 {
     // Remove any section that has the same name
-    QVector<const GeoSceneSection*>::iterator it = d->m_sections.begin();
+    QVector<const GeoSceneSection *>::iterator it = d->m_sections.begin();
     while (it != d->m_sections.end()) {
-        const GeoSceneSection* currentSection = *it;
-        if ( currentSection->name() == section->name() ) {
+        const GeoSceneSection *currentSection = *it;
+        if (currentSection->name() == section->name()) {
             delete currentSection;
             d->m_sections.erase(it);
             break;
-        }
-        else {
+        } else {
             ++it;
         }
-     }
+    }
 
-    if ( section ) {
-        d->m_sections.append( section );
+    if (section) {
+        d->m_sections.append(section);
     }
 }
 
-QVector<const GeoSceneSection*> GeoSceneLegend::sections() const
+QVector<const GeoSceneSection *> GeoSceneLegend::sections() const
 {
     return d->m_sections;
 }

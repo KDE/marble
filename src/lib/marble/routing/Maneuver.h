@@ -15,7 +15,6 @@ namespace Marble
 
 class MARBLE_EXPORT Maneuver
 {
-
 public:
     enum Direction {
         Unknown = 0,
@@ -41,33 +40,33 @@ public:
 
     Direction direction() const;
 
-    void setDirection( Direction direction );
+    void setDirection(Direction direction);
 
     GeoDataCoordinates position() const;
 
-    void setPosition( const GeoDataCoordinates &position );
+    void setPosition(const GeoDataCoordinates &position);
 
     GeoDataCoordinates waypoint() const;
 
     bool hasWaypoint() const;
 
-    void setWaypoint( const GeoDataCoordinates &waypoint, int index );
+    void setWaypoint(const GeoDataCoordinates &waypoint, int index);
 
     int waypointIndex() const;
 
     QString instructionText() const;
 
-    void setInstructionText( const QString &text );
+    void setInstructionText(const QString &text);
 
     QString roadName() const;
 
-    void setRoadName( const QString &roadName );
+    void setRoadName(const QString &roadName);
 
     QString directionPixmap() const;
 
-    bool operator==( const Maneuver &other ) const;
+    bool operator==(const Maneuver &other) const;
 
-    bool operator!=( const Maneuver &other ) const;
+    bool operator!=(const Maneuver &other) const;
 
 private:
     Direction m_direction;

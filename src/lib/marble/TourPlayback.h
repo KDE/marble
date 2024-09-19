@@ -29,16 +29,16 @@ class MARBLE_EXPORT TourPlayback : public QObject
 {
     Q_OBJECT
 public:
-    explicit TourPlayback(QObject *parent=nullptr);
+    explicit TourPlayback(QObject *parent = nullptr);
     ~TourPlayback() override;
 
     void setTour(GeoDataTour *tour);
-    void setMarbleWidget( MarbleWidget *widget );
+    void setMarbleWidget(MarbleWidget *widget);
 
     /**
      * @brief setBaseUrl - sets base url for using in QWebView.
      */
-    void setBaseUrl( const QUrl &baseUrl );
+    void setBaseUrl(const QUrl &baseUrl);
 
     /**
      * @brief baseUrl - gets base url which is using in QWebView.
@@ -57,7 +57,7 @@ public:
      * Seek to the given timestamp (in seconds)
      * @param offset Target timestamp in seconds in the range 0..duration()
      */
-    void seek( double offset );
+    void seek(double offset);
 
     /** Size of main track (flyto, wait, tourcontrol primitives) **/
     int mainTrackSize();
@@ -65,7 +65,7 @@ public:
      * Element of main track (flyto, wait, tourcontrol primitives)
      * @param i Position of element.
      */
-    PlaybackItem* mainTrackItemAt( int i );
+    PlaybackItem *mainTrackItemAt(int i);
 
 public Q_SLOTS:
     void updateTracks();
@@ -75,21 +75,21 @@ Q_SIGNALS:
     void finished();
     void paused();
     void stopped();
-    void progressChanged( double );
-    void updated( GeoDataFeature* );
-    void added( GeoDataContainer *parent, GeoDataFeature *feature, int row );
+    void progressChanged(double);
+    void updated(GeoDataFeature *);
+    void added(GeoDataContainer *parent, GeoDataFeature *feature, int row);
     void removed(GeoDataFeature *feature);
-    void itemFinished( int index );
+    void itemFinished(int index);
 
 private Q_SLOTS:
     void stopTour();
-    void showBalloon( GeoDataPlacemark* );
+    void showBalloon(GeoDataPlacemark *);
     void hideBalloon();
-    void centerOn( const GeoDataCoordinates &coordinates );
-    void handleFinishedItem( int index );
+    void centerOn(const GeoDataCoordinates &coordinates);
+    void handleFinishedItem(int index);
 
 private:
-    TourPlaybackPrivate * const d;
+    TourPlaybackPrivate *const d;
 };
 
 } // namespace Marble

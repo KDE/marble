@@ -9,11 +9,13 @@
 #include <QDialog>
 #include <QMap>
 
-namespace Ui {
-    class SatellitesConfigDialog;
+namespace Ui
+{
+class SatellitesConfigDialog;
 }
 
-namespace Marble {
+namespace Marble
+{
 
 class SatellitesConfigAbstractItem;
 class SatellitesConfigNodeItem;
@@ -23,50 +25,38 @@ class SatellitesConfigDialog : public QDialog
     Q_OBJECT
 
 public:
-    enum {
-        IsLoadedRole    = Qt::UserRole + 1
-    };
+    enum { IsLoadedRole = Qt::UserRole + 1 };
 
-    explicit SatellitesConfigDialog( QWidget *parent = nullptr );
+    explicit SatellitesConfigDialog(QWidget *parent = nullptr);
     ~SatellitesConfigDialog() override;
 
     void update();
 
-    void setUserDataSources( const QStringList &sources );
+    void setUserDataSources(const QStringList &sources);
     QStringList userDataSources() const;
-    void setUserDataSourceLoaded( const QString& source, bool loaded );
+    void setUserDataSourceLoaded(const QString &source, bool loaded);
 
-    SatellitesConfigAbstractItem* addSatelliteItem( const QString &body,
-                                                    const QString &category,
-                                                    const QString &title,
-                                                    const QString &id,
-                                                    const QString &url = QString() );
-    SatellitesConfigAbstractItem* addTLESatelliteItem( const QString &category,
-                                                       const QString &title,
-                                                       const QString &url );
+    SatellitesConfigAbstractItem *
+    addSatelliteItem(const QString &body, const QString &category, const QString &title, const QString &id, const QString &url = QString());
+    SatellitesConfigAbstractItem *addTLESatelliteItem(const QString &category, const QString &title, const QString &url);
 
-    Ui::SatellitesConfigDialog* configWidget();
+    Ui::SatellitesConfigDialog *configWidget();
 
 Q_SIGNALS:
     void dataSourcesReloadRequested();
-    void userDataSourceAdded( const QString &source );
-    void userDataSourceRemoved( const QString &source );
+    void userDataSourceAdded(const QString &source);
+    void userDataSourceRemoved(const QString &source);
     void userDataSourcesChanged();
     void activatePluginClicked();
 
 public Q_SLOTS:
-    void setDialogActive( bool active );
+    void setDialogActive(bool active);
 
 protected:
     void initialize();
     void setupDataSourcesTab();
-    SatellitesConfigNodeItem* getSatellitesCategoryItem(
-        const QString &body,
-        const QString &category,
-        bool create = false );
-    SatellitesConfigNodeItem* getSatellitesBodyItem(
-        const QString &body,
-        bool create = false );
+    SatellitesConfigNodeItem *getSatellitesCategoryItem(const QString &body, const QString &category, bool create = false);
+    SatellitesConfigNodeItem *getSatellitesBodyItem(const QString &body, bool create = false);
     void expandTreeView();
 
 protected Q_SLOTS:
@@ -77,7 +67,7 @@ protected Q_SLOTS:
     void updateButtonState();
 
 private:
-    QString translation( const QString &from ) const;
+    QString translation(const QString &from) const;
 
     QStringList m_userDataSources;
     Ui::SatellitesConfigDialog *m_configWidget;
@@ -87,4 +77,3 @@ private:
 } // namespace Marble
 
 #endif // MARBLE_SATELLITESCONFIGDIALOG_H
-

@@ -8,8 +8,9 @@
 
 using namespace Marble;
 
-StoragePolicy::StoragePolicy( QObject *parent )
-    : QObject( parent )
-{}
+StoragePolicy::StoragePolicy(QObject *parent)
+    : QObject(parent)
+{
+}
 
 #include "moc_StoragePolicy.cpp"

@@ -5,24 +5,24 @@
 
 #include "MonavPlugin.h"
 
-#include "signals.h"
-#include "MonavRunner.h"
 #include "MonavConfigWidget.h"
 #include "MonavMap.h"
 #include "MonavMapsModel.h"
+#include "MonavRunner.h"
+#include "signals.h"
 
-#include "MarbleDirs.h"
-#include "MarbleDebug.h"
-#include "GeoDataLatLonBox.h"
 #include "GeoDataData.h"
 #include "GeoDataExtendedData.h"
+#include "GeoDataLatLonBox.h"
+#include "MarbleDebug.h"
+#include "MarbleDirs.h"
 #include "routing/RouteRequest.h"
 
-#include <QProcess>
 #include <QDirIterator>
 #include <QLocalSocket>
-#include <QThread>
+#include <QProcess>
 #include <QTextStream>
+#include <QThread>
 
 namespace Marble
 {
@@ -31,13 +31,14 @@ namespace Marble
 class MonavWaiter : private QThread
 {
 public:
-    static void msleep( unsigned long milliSeconds ) {
-        QThread::msleep( milliSeconds );
+    static void msleep(unsigned long milliSeconds)
+    {
+        QThread::msleep(milliSeconds);
     }
 
 private:
     MonavWaiter() = delete;
-    Q_DISABLE_COPY( MonavWaiter )
+    Q_DISABLE_COPY(MonavWaiter)
 };
 
 class MonavPluginPrivate
@@ -69,17 +70,19 @@ public:
 
     void initialize();
 
-    static bool areaLessThan( const MonavMap &first, const MonavMap &second );
+    static bool areaLessThan(const MonavMap &first, const MonavMap &second);
 
 private:
-    void loadMap( const QString &path );
+    void loadMap(const QString &path);
 
     bool m_initialized;
 };
 
-MonavPluginPrivate::MonavPluginPrivate() : m_ownsServer( false ),
-    m_monavDaemonProcess("monav-daemon"), m_monavVersion( MonavPlugin::Monav_0_3 ),
-    m_initialized( false )
+MonavPluginPrivate::MonavPluginPrivate()
+    : m_ownsServer(false)
+    , m_monavDaemonProcess("monav-daemon")
+    , m_monavVersion(MonavPlugin::Monav_0_3)
+    , m_initialized(false)
 {
     // nothing to do
 }
@@ -92,18 +95,19 @@ MonavPluginPrivate::~MonavPluginPrivate()
 bool MonavPluginPrivate::isDaemonRunning()
 {
     QLocalSocket socket;
-    socket.connectToServer( "MoNavD" );
+    socket.connectToServer("MoNavD");
     return socket.waitForConnected();
 }
 
 bool MonavPluginPrivate::isDaemonInstalled()
 {
     QString path = QProcessEnvironment::systemEnvironment().value(QStringLiteral("PATH"), QStringLiteral("/usr/local/bin:/usr/bin:/bin"));
-    auto const applications = QStringList() << "monav-daemon" << "MoNavD";
-    for( const QString &application: applications ) {
-        for( const QString &dir: path.split( QLatin1Char( ':' ) ) ) {
-            QFileInfo executable( QDir( dir ), application );
-            if ( executable.exists() ) {
+    auto const applications = QStringList() << "monav-daemon"
+                                            << "MoNavD";
+    for (const QString &application : applications) {
+        for (const QString &dir : path.split(QLatin1Char(':'))) {
+            QFileInfo executable(QDir(dir), application);
+            if (executable.exists()) {
                 return true;
             }
         }
@@ -114,11 +118,11 @@ bool MonavPluginPrivate::isDaemonInstalled()
 
 bool MonavPluginPrivate::startDaemon()
 {
-    if ( !isDaemonRunning() ) {
-        if ( QProcess::startDetached( m_monavDaemonProcess, QStringList() ) ) {
+    if (!isDaemonRunning()) {
+        if (QProcess::startDetached(m_monavDaemonProcess, QStringList())) {
             m_ownsServer = true;
         } else {
-            if ( QProcess::startDetached( "MoNavD", QStringList() ) ) {
+            if (QProcess::startDetached("MoNavD", QStringList())) {
                 m_ownsServer = true;
                 m_monavDaemonProcess = "MoNavD";
                 m_monavVersion = MonavPlugin::Monav_0_2;
@@ -129,11 +133,11 @@ bool MonavPluginPrivate::startDaemon()
 
         // Give monav-daemon up to one second to set up its server
         // Without that, the first route request would fail
-        for ( int i = 0; i < 10; ++i ) {
-            if ( isDaemonRunning() ) {
+        for (int i = 0; i < 10; ++i) {
+            if (isDaemonRunning()) {
                 break;
             }
-            MonavWaiter::msleep( 100 );
+            MonavWaiter::msleep(100);
         }
 
         return true;
@@ -144,42 +148,42 @@ bool MonavPluginPrivate::startDaemon()
 
 void MonavPluginPrivate::stopDaemon()
 {
-    if ( m_ownsServer ) {
+    if (m_ownsServer) {
         m_ownsServer = false;
-        QProcess::startDetached( m_monavDaemonProcess, QStringList() << "-t" );
+        QProcess::startDetached(m_monavDaemonProcess, QStringList() << "-t");
     }
 }
 
 void MonavPluginPrivate::loadMaps()
 {
-    if ( m_maps.isEmpty() ) {
+    if (m_maps.isEmpty()) {
         QStringList const baseDirs = QStringList() << MarbleDirs::systemPath() << MarbleDirs::localPath();
-        for ( const QString &baseDir: baseDirs ) {
+        for (const QString &baseDir : baseDirs) {
             const QString base = baseDir + QLatin1String("/maps/earth/monav/");
-            loadMap( base );
+            loadMap(base);
             QDir::Filters filters = QDir::AllDirs | QDir::Readable | QDir::NoDotAndDotDot;
             QDirIterator::IteratorFlags flags = QDirIterator::Subdirectories | QDirIterator::FollowSymlinks;
-            QDirIterator iter( base, filters, flags );
-            while ( iter.hasNext() ) {
+            QDirIterator iter(base, filters, flags);
+            while (iter.hasNext()) {
                 iter.next();
-                loadMap( iter.filePath() );
+                loadMap(iter.filePath());
             }
         }
         // Prefer maps where bounding boxes are known
-        std::sort( m_maps.begin(), m_maps.end(), MonavMap::areaLessThan );
+        std::sort(m_maps.begin(), m_maps.end(), MonavMap::areaLessThan);
     }
 }
 
-void MonavPluginPrivate::loadMap( const QString &path )
+void MonavPluginPrivate::loadMap(const QString &path)
 {
-    QDir mapDir( path );
-    QFileInfo pluginsFile( mapDir, "plugins.ini" );
-    QFileInfo moduleFile( mapDir, "Module.ini" );
-    if ( pluginsFile.exists() && !moduleFile.exists() ) {
+    QDir mapDir(path);
+    QFileInfo pluginsFile(mapDir, "plugins.ini");
+    QFileInfo moduleFile(mapDir, "Module.ini");
+    if (pluginsFile.exists() && !moduleFile.exists()) {
         qDebug() << "Migrating" << mapDir.dirName() << "from monav-0.2";
-        QFile file( moduleFile.absoluteFilePath() );
-        file.open( QIODevice::WriteOnly );
-        QTextStream stream( &file );
+        QFile file(moduleFile.absoluteFilePath());
+        file.open(QIODevice::WriteOnly);
+        QTextStream stream(&file);
         stream << "[General]\nconfigVersion=2\n";
         stream << "router=Contraction Hierarchies\ngpsLookup=GPS Grid\n";
         stream << "routerFileFormatVersion=1\ngpsLookupFileFormatVersion=1\n";
@@ -188,38 +192,38 @@ void MonavPluginPrivate::loadMap( const QString &path )
         moduleFile.refresh();
     }
 
-    if ( moduleFile.exists() ) {
+    if (moduleFile.exists()) {
         MonavMap map;
-        map.setDirectory( mapDir );
-        m_maps.append( map );
+        map.setDirectory(mapDir);
+        m_maps.append(map);
     }
 }
 
 void MonavPluginPrivate::initialize()
 {
-    if ( !m_initialized ) {
+    if (!m_initialized) {
         m_initialized = true;
         loadMaps();
     }
 }
 
-MonavPlugin::MonavPlugin( QObject *parent ) :
-    RoutingRunnerPlugin( parent ),
-    d( new MonavPluginPrivate )
+MonavPlugin::MonavPlugin(QObject *parent)
+    : RoutingRunnerPlugin(parent)
+    , d(new MonavPluginPrivate)
 {
     setSupportedCelestialBodies(QStringList(QStringLiteral("earth")));
-    setCanWorkOffline( true );
+    setCanWorkOffline(true);
 
-    if ( d->isDaemonInstalled() ) {
+    if (d->isDaemonInstalled()) {
         d->initialize();
-        if ( d->m_maps.isEmpty() ) {
-            setStatusMessage( tr ( "No offline maps installed yet." ) );
+        if (d->m_maps.isEmpty()) {
+            setStatusMessage(tr("No offline maps installed yet."));
         }
     } else {
-        setStatusMessage( tr ( "The monav routing daemon does not seem to be installed on your system." ) );
+        setStatusMessage(tr("The monav routing daemon does not seem to be installed on your system."));
     }
 
-    connect( qApp, SIGNAL(aboutToQuit()), this, SLOT(stopDaemon()) );
+    connect(qApp, SIGNAL(aboutToQuit()), this, SLOT(stopDaemon()));
 }
 
 MonavPlugin::~MonavPlugin()
@@ -229,12 +233,12 @@ MonavPlugin::~MonavPlugin()
 
 QString MonavPlugin::name() const
 {
-    return tr( "Monav Routing" );
+    return tr("Monav Routing");
 }
 
 QString MonavPlugin::guiString() const
 {
-    return tr( "Monav" );
+    return tr("Monav");
 }
 
 QString MonavPlugin::nameId() const
@@ -249,7 +253,7 @@ QString MonavPlugin::version() const
 
 QString MonavPlugin::description() const
 {
-    return tr( "Offline routing using the monav daemon" );
+    return tr("Offline routing using the monav daemon");
 }
 
 QString MonavPlugin::copyrightYears() const
@@ -259,33 +263,32 @@ QString MonavPlugin::copyrightYears() const
 
 QVector<PluginAuthor> MonavPlugin::pluginAuthors() const
 {
-    return QVector<PluginAuthor>()
-            << PluginAuthor(QStringLiteral("Dennis Nienhüser"), QStringLiteral("nienhueser@kde.org"));
+    return QVector<PluginAuthor>() << PluginAuthor(QStringLiteral("Dennis Nienhüser"), QStringLiteral("nienhueser@kde.org"));
 }
 
 RoutingRunner *MonavPlugin::newRunner() const
 {
     d->initialize();
-    if ( !d->startDaemon() ) {
+    if (!d->startDaemon()) {
         mDebug() << "Failed to start the monav routing daemon";
     }
 
-    return new MonavRunner( this );
+    return new MonavRunner(this);
 }
 
-QString MonavPlugin::mapDirectoryForRequest( const RouteRequest* request ) const
+QString MonavPlugin::mapDirectoryForRequest(const RouteRequest *request) const
 {
     d->initialize();
 
     QHash<QString, QVariant> settings = request->routingProfile().pluginSettings()[nameId()];
     const QString transport = settings[QStringLiteral("transport")].toString();
 
-    for ( int j=0; j<d->m_maps.size(); ++j ) {
+    for (int j = 0; j < d->m_maps.size(); ++j) {
         bool valid = true;
-        if ( transport.isEmpty() || transport == d->m_maps[j].transport() ) {
-            for ( int i = 0; i < request->size(); ++i ) {
-                GeoDataCoordinates via = request->at( i );
-                if ( !d->m_maps[j].containsPoint( via ) ) {
+        if (transport.isEmpty() || transport == d->m_maps[j].transport()) {
+            for (int i = 0; i < request->size(); ++i) {
+                GeoDataCoordinates via = request->at(i);
+                if (!d->m_maps[j].containsPoint(via)) {
                     valid = false;
                     break;
                 }
@@ -294,10 +297,10 @@ QString MonavPlugin::mapDirectoryForRequest( const RouteRequest* request ) const
             valid = false;
         }
 
-        if ( valid ) {
-            if ( j ) {
+        if (valid) {
+            if (j) {
                 // Subsequent route requests will likely be in the same country
-                qSwap( d->m_maps[0], d->m_maps[j] );
+                qSwap(d->m_maps[0], d->m_maps[j]);
             }
             // mDebug() << "Using " << d->m_maps.first().m_directory.dirName() << " as monav map";
             return d->m_maps.first().directory().absolutePath();
@@ -307,19 +310,19 @@ QString MonavPlugin::mapDirectoryForRequest( const RouteRequest* request ) const
     return QString();
 }
 
-QStringList MonavPlugin::mapDirectoriesForRequest( const RouteRequest* request ) const
+QStringList MonavPlugin::mapDirectoriesForRequest(const RouteRequest *request) const
 {
     QStringList result;
     d->initialize();
     QHash<QString, QVariant> settings = request->routingProfile().pluginSettings()[nameId()];
     const QString transport = settings[QStringLiteral("transport")].toString();
 
-    for ( int j=0; j<d->m_maps.size(); ++j ) {
+    for (int j = 0; j < d->m_maps.size(); ++j) {
         bool valid = true;
-        if ( transport.isEmpty() || transport == d->m_maps[j].transport() ) {
-            for ( int i = 0; i < request->size(); ++i ) {
-                GeoDataCoordinates via = request->at( i );
-                if ( !d->m_maps[j].containsPoint( via ) ) {
+        if (transport.isEmpty() || transport == d->m_maps[j].transport()) {
+            for (int i = 0; i < request->size(); ++i) {
+                GeoDataCoordinates via = request->at(i);
+                if (!d->m_maps[j].containsPoint(via)) {
                     valid = false;
                     break;
                 }
@@ -328,7 +331,7 @@ QStringList MonavPlugin::mapDirectoriesForRequest( const RouteRequest* request )
             valid = false;
         }
 
-        if ( valid ) {
+        if (valid) {
             result << d->m_maps[j].directory().absolutePath();
         }
     }
@@ -338,13 +341,13 @@ QStringList MonavPlugin::mapDirectoriesForRequest( const RouteRequest* request )
 
 RoutingRunnerPlugin::ConfigWidget *MonavPlugin::configWidget()
 {
-    return new MonavConfigWidget( this );
+    return new MonavConfigWidget(this);
 }
 
-MonavMapsModel* MonavPlugin::installedMapsModel()
+MonavMapsModel *MonavPlugin::installedMapsModel()
 {
     d->initialize();
-    return new MonavMapsModel( d->m_maps );
+    return new MonavMapsModel(d->m_maps);
 }
 
 void MonavPlugin::reloadMaps()
@@ -359,34 +362,34 @@ bool MonavPlugin::canWork() const
     return !d->m_maps.isEmpty();
 }
 
-bool MonavPlugin::supportsTemplate( RoutingProfilesModel::ProfileTemplate profileTemplate ) const
+bool MonavPlugin::supportsTemplate(RoutingProfilesModel::ProfileTemplate profileTemplate) const
 {
     // Since we support multiple maps, pretty much anything can be installed, but ecological is
     // not supported by monav
     return profileTemplate != RoutingProfilesModel::CarEcologicalTemplate;
 }
 
-QHash< QString, QVariant > MonavPlugin::templateSettings( RoutingProfilesModel::ProfileTemplate profileTemplate ) const
+QHash<QString, QVariant> MonavPlugin::templateSettings(RoutingProfilesModel::ProfileTemplate profileTemplate) const
 {
     QHash<QString, QVariant> result;
-    switch ( profileTemplate ) {
-        case RoutingProfilesModel::CarFastestTemplate:
-            result["transport"] = "Motorcar";
-            break;
-        case RoutingProfilesModel::CarShortestTemplate:
-            result["transport"] = "Motorcar";
-            break;
-        case RoutingProfilesModel::CarEcologicalTemplate:
-            break;
-        case RoutingProfilesModel::BicycleTemplate:
-            result["transport"] = "Bicycle";
-            break;
-        case RoutingProfilesModel::PedestrianTemplate:
-            result["transport"] = "Pedestrian";
-            break;
-        case RoutingProfilesModel::LastTemplate:
-            Q_ASSERT( false );
-            break;
+    switch (profileTemplate) {
+    case RoutingProfilesModel::CarFastestTemplate:
+        result["transport"] = "Motorcar";
+        break;
+    case RoutingProfilesModel::CarShortestTemplate:
+        result["transport"] = "Motorcar";
+        break;
+    case RoutingProfilesModel::CarEcologicalTemplate:
+        break;
+    case RoutingProfilesModel::BicycleTemplate:
+        result["transport"] = "Bicycle";
+        break;
+    case RoutingProfilesModel::PedestrianTemplate:
+        result["transport"] = "Pedestrian";
+        break;
+    case RoutingProfilesModel::LastTemplate:
+        Q_ASSERT(false);
+        break;
     }
     return result;
 }

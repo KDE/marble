@@ -5,14 +5,12 @@
 // SPDX-FileCopyrightText: 2010-2013 Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 //
 
-
 #ifndef MARBLE_QTMAINWINDOW_H
 #define MARBLE_QTMAINWINDOW_H
 
-
+#include "ControlView.h"
 #include <QMainWindow>
 #include <QVariantMap>
-#include "ControlView.h"
 
 class QActionGroup;
 class QAction;
@@ -36,121 +34,120 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    explicit MainWindow(const QString& marbleDataPath = QString(),
-                        const QVariantMap& cmdLineSettings = QVariantMap(),
-                        QWidget *parent=nullptr);
+    explicit MainWindow(const QString &marbleDataPath = QString(), const QVariantMap &cmdLineSettings = QVariantMap(), QWidget *parent = nullptr);
     ~MainWindow() override;
 
-
-    ControlView* marbleControl() {
+    ControlView *marbleControl()
+    {
         return m_controlView;
     }
-    MarbleWidget* marbleWidget() {
+    MarbleWidget *marbleWidget()
+    {
         return m_controlView->marbleWidget();
     }
 
-    void addGeoDataFile( const QString &fileName );
+    void addGeoDataFile(const QString &fileName);
 
 protected:
-    void  closeEvent( QCloseEvent *event ) override;
+    void closeEvent(QCloseEvent *event) override;
 
 private:
-    void  createActions();
-    void  createMenus( const QList<QAction*> &panelActions );
-    void  createStatusBar();
+    void createActions();
+    void createMenus(const QList<QAction *> &panelActions);
+    void createStatusBar();
 
-    static QString  readMarbleDataPath();
-    void  readSettings(const QVariantMap& overrideSettings = QVariantMap());
-    void  writeSettings();
+    static QString readMarbleDataPath();
+    void readSettings(const QVariantMap &overrideSettings = QVariantMap());
+    void writeSettings();
 
 private Q_SLOTS:
-    void  showPosition( const QString& position);
-    void  showDistance( const QString& position);
-    void  showZoom( int );
-    void  showDateTime();
+    void showPosition(const QString &position);
+    void showDistance(const QString &position);
+    void showZoom(int);
+    void showDateTime();
 
-    void  initObject(const QVariantMap& cmdLineSettings);
-    void  editSettings();
-    void  updateSettings();
-    
-    void  fallBackToDefaultTheme();
+    void initObject(const QVariantMap &cmdLineSettings);
+    void editSettings();
+    void updateSettings();
 
-    void  changeRecordingState();
+    void fallBackToDefaultTheme();
 
-    void  updateWindowTitle();
-    void  updateCenterFromTheme();
+    void changeRecordingState();
+
+    void updateWindowTitle();
+    void updateCenterFromTheme();
 
     // File Menu
-    void  openFile();
-    void  openMapDialog();
-    void  exportMapScreenShot();
-    void  showDownloadRegionDialog();
-    void  printMapScreenShot();
-    void  workOffline( bool );
-    void  showMapWizard();
+    void openFile();
+    void openMapDialog();
+    void exportMapScreenShot();
+    void showDownloadRegionDialog();
+    void printMapScreenShot();
+    void workOffline(bool);
+    void showMapWizard();
 
     // Edit Menu
-    void  copyMap();
-    void  copyCoordinates();
-    void  updateMapEditButtonVisibility( const QString &mapTheme );
-    void  showMovieCaptureDialog();
-    void  stopRecording();
+    void copyMap();
+    void copyCoordinates();
+    void updateMapEditButtonVisibility(const QString &mapTheme);
+    void showMovieCaptureDialog();
+    void stopRecording();
 
     // View Menu
-    void  lockPosition( bool );
-    void  createPluginsMenus();
-    void  createPluginMenus();
-    void  showClouds( bool );
-    void  controlSun();
-    void  controlTime();
-    void  showSun( bool );
-    void  reload();
+    void lockPosition(bool);
+    void createPluginsMenus();
+    void createPluginMenus();
+    void showClouds(bool);
+    void controlSun();
+    void controlTime();
+    void showSun(bool);
+    void reload();
 
     // Settings Menu
-    void  changeViewSize( QAction* );
-    void  showFullScreen( bool );
-    void  showStatusBar( bool );
-    void  setupStatusBar();
-    void  setupDownloadProgressBar();
+    void changeViewSize(QAction *);
+    void showFullScreen(bool);
+    void showStatusBar(bool);
+    void setupStatusBar();
+    void setupDownloadProgressBar();
 
     // Help Menu
-    void  enterWhatsThis();
-    void  aboutMarble();
-    void  handbook();
-    void  openForum();
+    void enterWhatsThis();
+    void aboutMarble();
+    void handbook();
+    void openForum();
 
-    //Bookmark Menu
-    void  openEditBookmarkDialog();
-    void  setHome();
-    void  createBookmarksListMenu( QMenu *bookmarksListMenu, const GeoDataContainer *container );
-    void  lookAtBookmark( QAction * action );
-    void  manageBookmarks();
-    void  createBookmarkMenu();
-    void  createFolderList( QMenu *bookmarksListMenu, const GeoDataContainer *container );
-    void  showBookmarks( bool show );
+    // Bookmark Menu
+    void openEditBookmarkDialog();
+    void setHome();
+    void createBookmarksListMenu(QMenu *bookmarksListMenu, const GeoDataContainer *container);
+    void lookAtBookmark(QAction *action);
+    void manageBookmarks();
+    void createBookmarkMenu();
+    void createFolderList(QMenu *bookmarksListMenu, const GeoDataContainer *container);
+    void showBookmarks(bool show);
 
     // Download region dialog
-    void  downloadRegion();
+    void downloadRegion();
 
-    void showZoomLevel( bool show );
-    void changeAngleDisplayUnit( QAction *action );
+    void showZoomLevel(bool show);
+    void changeAngleDisplayUnit(QAction *action);
 
-    void handleProgress( int, int );
+    void handleProgress(int, int);
     void removeProgressItem();
 
 private:
     ControlView *m_controlView;
     QSize m_savedSize;
-    SunControlWidget* m_sunControlDialog;
-    TimeControlWidget* m_timeControlDialog;
+    SunControlWidget *m_sunControlDialog;
+    TimeControlWidget *m_timeControlDialog;
     QtMarbleConfigDialog *m_configDialog;
-    DownloadRegionDialog* m_downloadRegionDialog;
-    MovieCaptureDialog* m_movieCaptureDialog;
+    DownloadRegionDialog *m_downloadRegionDialog;
+    MovieCaptureDialog *m_movieCaptureDialog;
 
     /// Store plugin toolbar pointers so that they can be removed/updated later
-    QList<QToolBar*> m_pluginToolbars;
+    QList<QToolBar *> m_pluginToolbars;
     /// Store plugin menus so that they can be removed/updated later
-    QList<QAction*> m_pluginMenus;
+    QList<QAction *> m_pluginMenus;
 
     QMenu *m_fileMenu;
     QMenu *m_viewMenu;
@@ -200,23 +197,23 @@ private:
     QAction *m_forumAction;
 
     // Status Bar
-    QString     m_position;
-    QString     m_distance;
-    QString     m_zoom;
-    QString     m_clock;
-    QLabel      *m_positionLabel;
-    QLabel      *m_distanceLabel;
-    QLabel      *m_zoomLabel;
-    QLabel      *m_clockLabel;
+    QString m_position;
+    QString m_distance;
+    QString m_zoom;
+    QString m_clock;
+    QLabel *m_positionLabel;
+    QLabel *m_distanceLabel;
+    QLabel *m_zoomLabel;
+    QLabel *m_clockLabel;
     QProgressBar *m_downloadProgressBar;
-    QAction     *m_toggleTileLevelAction;
+    QAction *m_toggleTileLevelAction;
     QActionGroup *m_angleDisplayUnitActionGroup;
-    QAction     *m_dmsDegreeAction;
-    QAction     *m_decimalDegreeAction;
-    QAction     *m_utmAction;
+    QAction *m_dmsDegreeAction;
+    QAction *m_decimalDegreeAction;
+    QAction *m_utmAction;
     void updateStatusBar();
 
-    //Bookmark Menu
+    // Bookmark Menu
     QAction *m_addBookmarkAction;
     QAction *m_setHomeAction;
     QAction *m_toggleBookmarkDisplayAction;

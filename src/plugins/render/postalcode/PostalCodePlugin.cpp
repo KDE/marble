@@ -11,31 +11,31 @@
 using namespace Marble;
 
 PostalCodePlugin::PostalCodePlugin()
-    : AbstractDataPlugin( nullptr )
+    : AbstractDataPlugin(nullptr)
 {
 }
 
-PostalCodePlugin::PostalCodePlugin( const MarbleModel *marbleModel )
-    : AbstractDataPlugin( marbleModel )
+PostalCodePlugin::PostalCodePlugin(const MarbleModel *marbleModel)
+    : AbstractDataPlugin(marbleModel)
 {
-    setEnabled( true );
-    setVisible( false );
+    setEnabled(true);
+    setVisible(false);
 }
 
 void PostalCodePlugin::initialize()
 {
-    setModel( new PostalCodeModel( marbleModel(), this ) );
-    setNumberOfItems( 20 );
+    setModel(new PostalCodeModel(marbleModel(), this));
+    setNumberOfItems(20);
 }
 
 QString PostalCodePlugin::name() const
 {
-    return tr( "Postal Codes" );
+    return tr("Postal Codes");
 }
 
 QString PostalCodePlugin::guiString() const
 {
-    return tr( "Postal Codes" );
+    return tr("Postal Codes");
 }
 
 QString PostalCodePlugin::nameId() const
@@ -55,13 +55,12 @@ QString PostalCodePlugin::copyrightYears() const
 
 QVector<PluginAuthor> PostalCodePlugin::pluginAuthors() const
 {
-    return QVector<PluginAuthor>()
-            << PluginAuthor(QStringLiteral("Valery Kharitonov"), QStringLiteral("kharvd@gmail.com"));
+    return QVector<PluginAuthor>() << PluginAuthor(QStringLiteral("Valery Kharitonov"), QStringLiteral("kharvd@gmail.com"));
 }
 
 QString PostalCodePlugin::description() const
 {
-    return tr( "Shows postal codes of the area on the map." );
+    return tr("Shows postal codes of the area on the map.");
 }
 
 QIcon PostalCodePlugin::icon() const

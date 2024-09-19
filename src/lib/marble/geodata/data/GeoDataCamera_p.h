@@ -3,7 +3,6 @@
 // SPDX-FileCopyrightText: 2013 Mayank Madan <maddiemadan@gmail.com>
 //
 
-
 #ifndef MARBLE_GEODATACAMERA_P_H
 #define MARBLE_GEODATACAMERA_P_H
 
@@ -16,13 +15,13 @@ namespace Marble
 
 class GeoDataCameraPrivate
 {
- public :
+public:
     GeoDataCameraPrivate()
-        : m_coordinates(),
-          m_roll( 0.0 ),
-          m_heading( 0.0 ),
-          m_tilt( 0.0 ),
-          ref( 1 )
+        : m_coordinates()
+        , m_roll(0.0)
+        , m_heading(0.0)
+        , m_tilt(0.0)
+        , ref(1)
     {
     }
 

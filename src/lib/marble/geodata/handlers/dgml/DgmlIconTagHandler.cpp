@@ -11,8 +11,8 @@
 #include <QColor>
 
 // Marble
-#include "DgmlElementDictionary.h"
 #include "DgmlAttributeDictionary.h"
+#include "DgmlElementDictionary.h"
 #include "GeoParser.h"
 #include "GeoSceneHead.h"
 #include "GeoSceneIcon.h"
@@ -24,12 +24,12 @@ namespace dgml
 {
 DGML_DEFINE_TAG_HANDLER(Icon)
 
-GeoNode* DgmlIconTagHandler::parse(GeoParser& parser) const
+GeoNode *DgmlIconTagHandler::parse(GeoParser &parser) const
 {
     // Check whether the tag is valid
     Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1String(dgmlTag_Icon)));
 
-    QString pixmapRelativePath  = parser.attribute(dgmlAttr_pixmap).trimmed();
+    QString pixmapRelativePath = parser.attribute(dgmlAttr_pixmap).trimmed();
 
     QColor color(parser.attribute(dgmlAttr_color).trimmed());
 
@@ -39,13 +39,13 @@ GeoNode* DgmlIconTagHandler::parse(GeoParser& parser) const
     GeoStackItem parentItem = parser.parentElement();
     if (parentItem.represents(dgmlTag_Head)) {
         icon = parentItem.nodeAs<GeoSceneHead>()->icon();
-        icon->setPixmap( pixmapRelativePath );
-        icon->setColor( color );
+        icon->setPixmap(pixmapRelativePath);
+        icon->setColor(color);
     }
     if (parentItem.represents(dgmlTag_Item)) {
         icon = parentItem.nodeAs<GeoSceneItem>()->icon();
-        icon->setPixmap( pixmapRelativePath );
-        icon->setColor( color );
+        icon->setPixmap(pixmapRelativePath);
+        icon->setColor(color);
     }
 
     return nullptr;

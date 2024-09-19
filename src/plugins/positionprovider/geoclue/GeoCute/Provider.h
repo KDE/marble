@@ -18,24 +18,21 @@ namespace GeoCute
 class Provider : public QObject
 {
     Q_OBJECT
-    
-    public:
-        Provider(const QString& service, const QString& path,
-            QObject* parent = 0);
-        virtual ~Provider();
-        Status status() const;
 
-    Q_SIGNALS:
-        void statusChanged(GeoCute::Status status);
-    
-    private:
-        class Private;
-        Private* const d;
-        Q_PRIVATE_SLOT(d, void statusChangedCall(int status))
+public:
+    Provider(const QString &service, const QString &path, QObject *parent = 0);
+    virtual ~Provider();
+    Status status() const;
+
+Q_SIGNALS:
+    void statusChanged(GeoCute::Status status);
+
+private:
+    class Private;
+    Private *const d;
+    Q_PRIVATE_SLOT(d, void statusChangedCall(int status))
 };
 
 }
-
-
 
 #endif

@@ -8,8 +8,8 @@
 
 // Marble
 #include "BBCParser.h"
-#include "WeatherData.h"
 #include "MarbleDebug.h"
+#include "WeatherData.h"
 
 // Qt
 #include <QUrl>
@@ -17,10 +17,10 @@
 using namespace Marble;
 /* TRANSLATOR Marble::BBCWeatherItem */
 
-BBCWeatherItem::BBCWeatherItem( QObject *parent )
-    : WeatherItem( parent ),
-      m_observationRequested( false ),
-      m_forecastRequested( false )
+BBCWeatherItem::BBCWeatherItem(QObject *parent)
+    : WeatherItem(parent)
+    , m_observationRequested(false)
+    , m_forecastRequested(false)
 {
 }
 
@@ -28,16 +28,15 @@ BBCWeatherItem::~BBCWeatherItem()
 {
 }
 
-bool BBCWeatherItem::request( const QString& type )
+bool BBCWeatherItem::request(const QString &type)
 {
     if (type == QLatin1String("bbcobservation")) {
-        if ( !m_observationRequested ) {
+        if (!m_observationRequested) {
             m_observationRequested = true;
             return true;
         }
-    }
-    else if (type == QLatin1String("bbcforecast")) {
-        if ( !m_forecastRequested ) {
+    } else if (type == QLatin1String("bbcforecast")) {
+        if (!m_forecastRequested) {
             m_forecastRequested = true;
             return true;
         }
@@ -47,13 +46,13 @@ bool BBCWeatherItem::request( const QString& type )
 
 QString BBCWeatherItem::service() const
 {
-    return QStringLiteral( "BBC" );
+    return QStringLiteral("BBC");
 }
 
-void BBCWeatherItem::addDownloadedFile( const QString& url, const QString& type )
+void BBCWeatherItem::addDownloadedFile(const QString &url, const QString &type)
 {
     if (type == QLatin1String("bbcobservation") || type == QLatin1String("bbcforecast")) {
-        BBCParser::instance()->scheduleRead( url, this, type );
+        BBCParser::instance()->scheduleRead(url, this, type);
     }
 }
 
@@ -62,7 +61,7 @@ quint32 BBCWeatherItem::bbcId() const
     return m_bbcId;
 }
 
-void BBCWeatherItem::setBbcId( quint32 id )
+void BBCWeatherItem::setBbcId(quint32 id)
 {
     m_bbcId = id;
     setId(QLatin1String("bbc") + QString::number(id));
@@ -70,19 +69,18 @@ void BBCWeatherItem::setBbcId( quint32 id )
 
 QUrl BBCWeatherItem::observationUrl() const
 {
-    return QUrl( QStringLiteral( "http://newsrss.bbc.co.uk/weather/forecast/%1/ObservationsRSS.xml" )
-                    .arg( QString::number( bbcId() ) ) );
+    return QUrl(QStringLiteral("http://newsrss.bbc.co.uk/weather/forecast/%1/ObservationsRSS.xml").arg(QString::number(bbcId())));
 }
 
 QUrl BBCWeatherItem::forecastUrl() const
 {
-    return QUrl( QStringLiteral( "http://newsrss.bbc.co.uk/weather/forecast/%1/Next3DaysRSS.xml" )
-                    .arg( QString::number( bbcId() ) ) );
+    return QUrl(QStringLiteral("http://newsrss.bbc.co.uk/weather/forecast/%1/Next3DaysRSS.xml").arg(QString::number(bbcId())));
 }
 
 QString BBCWeatherItem::creditHtml() const
 {
-    return tr( "Supported by <a href=\"https://www.bbc.co.uk/blogs/bbcbackstage\" target=\"_BLANK\">backstage.bbc.co.uk</a>.<br>Weather data from UK MET Office" );
+    return tr(
+        "Supported by <a href=\"https://www.bbc.co.uk/blogs/bbcbackstage\" target=\"_BLANK\">backstage.bbc.co.uk</a>.<br>Weather data from UK MET Office");
 }
 
 #include "moc_BBCWeatherItem.cpp"

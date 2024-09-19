@@ -8,8 +8,8 @@
 #ifndef MARBLE_GEOSCENEDOCUMENT_H
 #define MARBLE_GEOSCENEDOCUMENT_H
 
-#include <QObject>
 #include "GeoDocument.h"
+#include <QObject>
 
 #include <geodata_export.h>
 
@@ -26,38 +26,39 @@ class GeoSceneDocumentPrivate;
 /**
  * @short A container for features parsed from the DGML file.
  */
-class GEODATA_EXPORT GeoSceneDocument : public QObject, 
-                                        public GeoDocument,
-                                        public GeoNode
+class GEODATA_EXPORT GeoSceneDocument : public QObject, public GeoDocument, public GeoNode
 {
     Q_OBJECT
 
- public:
+public:
     GeoSceneDocument();
     ~GeoSceneDocument() override;
-    
-    const char* nodeType() const override;
 
-    bool isGeoSceneDocument() const override { return true; }
+    const char *nodeType() const override;
 
-    const GeoSceneHead* head() const;
-    GeoSceneHead* head();
+    bool isGeoSceneDocument() const override
+    {
+        return true;
+    }
 
-    const GeoSceneMap* map() const;
-    GeoSceneMap* map();
+    const GeoSceneHead *head() const;
+    GeoSceneHead *head();
 
-    const GeoSceneSettings* settings() const;
-    GeoSceneSettings* settings();
+    const GeoSceneMap *map() const;
+    GeoSceneMap *map();
 
-    const GeoSceneLegend* legend() const;
-    GeoSceneLegend* legend();
+    const GeoSceneSettings *settings() const;
+    GeoSceneSettings *settings();
 
- Q_SIGNALS:
-    void valueChanged( const QString&, bool );
+    const GeoSceneLegend *legend() const;
+    GeoSceneLegend *legend();
 
- private:
-    Q_DISABLE_COPY( GeoSceneDocument )
-    GeoSceneDocumentPrivate * const d;
+Q_SIGNALS:
+    void valueChanged(const QString &, bool);
+
+private:
+    Q_DISABLE_COPY(GeoSceneDocument)
+    GeoSceneDocumentPrivate *const d;
 };
 
 }

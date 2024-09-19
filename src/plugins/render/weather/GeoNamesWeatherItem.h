@@ -15,11 +15,11 @@ class GeoNamesWeatherItem : public WeatherItem
 {
     Q_OBJECT
 
- public:
-    explicit GeoNamesWeatherItem( QObject *parent = nullptr );
+public:
+    explicit GeoNamesWeatherItem(QObject *parent = nullptr);
     ~GeoNamesWeatherItem() override;
 
-    void addDownloadedFile( const QString& url, const QString& type ) override;
+    void addDownloadedFile(const QString &url, const QString &type) override;
 
     QString service() const override;
     QString creditHtml() const;

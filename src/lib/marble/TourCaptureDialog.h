@@ -10,11 +10,13 @@
 
 #include "marble_export.h"
 
-namespace Ui {
+namespace Ui
+{
 class TourCaptureDialog;
 }
 
-namespace Marble {
+namespace Marble
+{
 
 class MarbleWidget;
 
@@ -31,14 +33,14 @@ public:
 public Q_SLOTS:
     void startRecording();
     void stopRecording();
-    void setRate( double rate );
-    void setTourPlayback( TourPlayback* playback );
-    void setDefaultFilename( const QString &filename );
+    void setRate(double rate);
+    void setTourPlayback(TourPlayback *playback);
+    void setDefaultFilename(const QString &filename);
     void handleError();
 
 private Q_SLOTS:
     void loadDestinationFile();
-    void updateProgress( double position );
+    void updateProgress(double position);
     void recordNextFrame();
 
 private:

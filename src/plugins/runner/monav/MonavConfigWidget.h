@@ -6,8 +6,8 @@
 #ifndef MARBLE_MONAVCONFIGWIDGET_H
 #define MARBLE_MONAVCONFIGWIDGET_H
 
-#include "ui_MonavConfigWidget.h"
 #include "RoutingRunnerPlugin.h"
+#include "ui_MonavConfigWidget.h"
 
 #include <QWidget>
 
@@ -24,19 +24,19 @@ class MonavConfigWidget : public RoutingRunnerPlugin::ConfigWidget, private Ui::
     Q_OBJECT
 
 public:
-    explicit MonavConfigWidget( MonavPlugin* plugin );
+    explicit MonavConfigWidget(MonavPlugin *plugin);
 
     ~MonavConfigWidget() override;
 
-    void loadSettings( const QHash<QString, QVariant> &settings ) override;
+    void loadSettings(const QHash<QString, QVariant> &settings) override;
 
     QHash<QString, QVariant> settings() const override;
 
 protected:
-    void showEvent ( QShowEvent * event ) override;
+    void showEvent(QShowEvent *event) override;
 
 private Q_SLOTS:
-    void retrieveMapList( QNetworkReply *reply );
+    void retrieveMapList(QNetworkReply *reply);
 
     void retrieveData();
 
@@ -48,21 +48,21 @@ private Q_SLOTS:
 
     void downloadMap();
 
-    void updateProgressBar( qint64 bytesReceived, qint64 bytesTotal );
+    void updateProgressBar(qint64 bytesReceived, qint64 bytesTotal);
 
-    void mapInstalled( int exitStatus );
+    void mapInstalled(int exitStatus);
 
-    void updateTransportTypeFilter( const QString &filter );
+    void updateTransportTypeFilter(const QString &filter);
 
-    void removeMap( int index );
+    void removeMap(int index);
 
-    void upgradeMap( int index );
+    void upgradeMap(int index);
 
     void cancelOperation();
 
 private:
     friend class MonavConfigWidgetPrivate;
-    MonavConfigWidgetPrivate* const d;
+    MonavConfigWidgetPrivate *const d;
 };
 
 }

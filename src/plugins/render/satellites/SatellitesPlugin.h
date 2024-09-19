@@ -7,9 +7,9 @@
 #ifndef MARBLE_SATELLITESPLUGIN_H
 #define MARBLE_SATELLITESPLUGIN_H
 
+#include "DialogConfigurationInterface.h"
 #include "RenderPlugin.h"
 #include "SatellitesConfigDialog.h"
-#include "DialogConfigurationInterface.h"
 #include "SatellitesModel.h"
 
 #include <QHash>
@@ -23,19 +23,18 @@ class SatellitesConfigModel;
  * @brief This plugin displays satellites and their orbits.
  *
  */
-class SatellitesPlugin : public RenderPlugin,
-                         public DialogConfigurationInterface
+class SatellitesPlugin : public RenderPlugin, public DialogConfigurationInterface
 {
     Q_OBJECT
     Q_PLUGIN_METADATA(IID "org.kde.marble.SatellitesPlugin")
-    Q_INTERFACES( Marble::RenderPluginInterface )
-    Q_INTERFACES( Marble::DialogConfigurationInterface )
-    MARBLE_PLUGIN( SatellitesPlugin )
+    Q_INTERFACES(Marble::RenderPluginInterface)
+    Q_INTERFACES(Marble::DialogConfigurationInterface)
+    MARBLE_PLUGIN(SatellitesPlugin)
 
 public:
-    explicit SatellitesPlugin( const MarbleModel *marbleModel = nullptr );
+    explicit SatellitesPlugin(const MarbleModel *marbleModel = nullptr);
     ~SatellitesPlugin() override;
-    
+
     QStringList backendTypes() const override;
     QString renderPolicy() const override;
     QStringList renderPosition() const override;
@@ -52,34 +51,31 @@ public:
     void initialize() override;
     bool isInitialized() const override;
 
-    bool render( GeoPainter *painter,
-                 ViewportParams *viewport,
-                 const QString &renderPos,
-                 GeoSceneLayer *layer ) override;
+    bool render(GeoPainter *painter, ViewportParams *viewport, const QString &renderPos, GeoSceneLayer *layer) override;
 
-    bool eventFilter( QObject *object, QEvent *event ) override;
+    bool eventFilter(QObject *object, QEvent *event) override;
 
     QHash<QString, QVariant> settings() const override;
-    void setSettings( const QHash<QString, QVariant> &settings ) override;
+    void setSettings(const QHash<QString, QVariant> &settings) override;
 
     SatellitesConfigDialog *configDialog() override;
 
 private Q_SLOTS:
     void activate();
-    void enableModel( bool enabled );
-    void visibleModel( bool visible );
+    void enableModel(bool enabled);
+    void visibleModel(bool visible);
     void readSettings();
     void writeSettings();
     void updateSettings();
-    void updateDataSourceConfig( const QString &source );
-    void dataSourceParsed( const QString &source );
-    void userDataSourceAdded( const QString &source );
+    void updateDataSourceConfig(const QString &source);
+    void dataSourceParsed(const QString &source);
+    void userDataSourceAdded(const QString &source);
 
-    void showOrbit( bool show );
+    void showOrbit(bool show);
     void trackPlacemark();
 
 protected:
-    void activateDataSource( const QString &source );
+    void activateDataSource(const QString &source);
     void addBuiltInDataSources();
 
 private:
@@ -94,7 +90,7 @@ private:
 
     QAction *m_showOrbitAction;
     QAction *m_trackPlacemarkAction;
-    QVector<TrackerPluginItem*> m_trackerList;
+    QVector<TrackerPluginItem *> m_trackerList;
 };
 
 } // namespace Marble

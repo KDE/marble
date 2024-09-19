@@ -3,11 +3,10 @@
 // SPDX-FileCopyrightText: 2012 Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 //
 
-
-#include "GeoDataTreeModel.h"
-#include "GeoDataAccuracy.h"
-#include "PositionProviderPlugin.h"
 #include "PositionTracking.h"
+#include "GeoDataAccuracy.h"
+#include "GeoDataTreeModel.h"
+#include "PositionProviderPlugin.h"
 #include "TestUtils.h"
 
 #include <QSignalSpy>
@@ -15,41 +14,89 @@
 class FakeProvider : public Marble::PositionProviderPlugin
 {
 public:
-    FakeProvider() :
-        m_status( Marble::PositionProviderStatusUnavailable ),
-        m_position(),
-        m_accuracy(),
-        m_speed( 0.0 ),
-        m_direction( 0.0 ),
-        m_timestamp()
-    {}
+    FakeProvider()
+        : m_status(Marble::PositionProviderStatusUnavailable)
+        , m_position()
+        , m_accuracy()
+        , m_speed(0.0)
+        , m_direction(0.0)
+        , m_timestamp()
+    {
+    }
 
-    QString name() const override           { return "fake plugin"; }
-    QString guiString() const override      { return "fake"; }
-    QString nameId() const override         { return "fakeplugin"; }
-    QString version() const override        { return "1.0"; }
-    QString description() const override    { return "plugin for testing"; }
-    QIcon icon() const override             { return QIcon(); }
-    QString copyrightYears() const override { return "2012"; }
-    QVector<Marble::PluginAuthor> pluginAuthors() const override { return QVector<Marble::PluginAuthor>(); }
-    void initialize() override {}
-    bool isInitialized() const override     { return true; }
+    QString name() const override
+    {
+        return "fake plugin";
+    }
+    QString guiString() const override
+    {
+        return "fake";
+    }
+    QString nameId() const override
+    {
+        return "fakeplugin";
+    }
+    QString version() const override
+    {
+        return "1.0";
+    }
+    QString description() const override
+    {
+        return "plugin for testing";
+    }
+    QIcon icon() const override
+    {
+        return QIcon();
+    }
+    QString copyrightYears() const override
+    {
+        return "2012";
+    }
+    QVector<Marble::PluginAuthor> pluginAuthors() const override
+    {
+        return QVector<Marble::PluginAuthor>();
+    }
+    void initialize() override
+    {
+    }
+    bool isInitialized() const override
+    {
+        return true;
+    }
 
-    Marble::PositionProviderStatus status() const override { return m_status; }
-    Marble::GeoDataCoordinates position() const override { return m_position; }
-    Marble::GeoDataAccuracy accuracy() const override { return m_accuracy; }
-    qreal speed() const override { return m_speed; }
-    qreal direction() const override { return m_direction; }
-    QDateTime timestamp() const override { return m_timestamp; }
+    Marble::PositionProviderStatus status() const override
+    {
+        return m_status;
+    }
+    Marble::GeoDataCoordinates position() const override
+    {
+        return m_position;
+    }
+    Marble::GeoDataAccuracy accuracy() const override
+    {
+        return m_accuracy;
+    }
+    qreal speed() const override
+    {
+        return m_speed;
+    }
+    qreal direction() const override
+    {
+        return m_direction;
+    }
+    QDateTime timestamp() const override
+    {
+        return m_timestamp;
+    }
 
-    Marble::PositionProviderPlugin *newInstance() const override { return nullptr; }
+    Marble::PositionProviderPlugin *newInstance() const override
+    {
+        return nullptr;
+    }
 
-    void setStatus( Marble::PositionProviderStatus status );
-    void setPosition( const Marble::GeoDataCoordinates &position,
-                      const Marble::GeoDataAccuracy &accuracy,
-                      qreal speed,
-                      qreal direction,
-                      const QDateTime &timestamp );
+    void setStatus(Marble::PositionProviderStatus status);
+    void
+    setPosition(const Marble::GeoDataCoordinates &position, const Marble::GeoDataAccuracy &accuracy, qreal speed, qreal direction, const QDateTime &timestamp);
 
 private:
     Marble::PositionProviderStatus m_status;
@@ -60,22 +107,22 @@ private:
     QDateTime m_timestamp;
 };
 
-void FakeProvider::setStatus( Marble::PositionProviderStatus status )
+void FakeProvider::setStatus(Marble::PositionProviderStatus status)
 {
     const Marble::PositionProviderStatus oldStatus = m_status;
 
     m_status = status;
 
-    if ( oldStatus != m_status ) {
-        emit statusChanged( m_status );
+    if (oldStatus != m_status) {
+        emit statusChanged(m_status);
     }
 }
 
-void FakeProvider::setPosition( const Marble::GeoDataCoordinates &position,
-                                const Marble::GeoDataAccuracy &accuracy,
-                                qreal speed,
-                                qreal direction,
-                                const QDateTime &timestamp )
+void FakeProvider::setPosition(const Marble::GeoDataCoordinates &position,
+                               const Marble::GeoDataAccuracy &accuracy,
+                               qreal speed,
+                               qreal direction,
+                               const QDateTime &timestamp)
 {
     m_position = position;
     m_accuracy = accuracy;
@@ -83,7 +130,7 @@ void FakeProvider::setPosition( const Marble::GeoDataCoordinates &position,
     m_direction = direction;
     m_timestamp = timestamp;
 
-    emit positionChanged( m_position, m_accuracy );
+    emit positionChanged(m_position, m_accuracy);
 }
 
 namespace Marble
@@ -93,10 +140,10 @@ class PositionTrackingTest : public QObject
 {
     Q_OBJECT
 
- public:
+public:
     PositionTrackingTest();
 
- private Q_SLOTS:
+private Q_SLOTS:
     void construct();
 
     void statusChanged_data();
@@ -109,38 +156,38 @@ class PositionTrackingTest : public QObject
 
 PositionTrackingTest::PositionTrackingTest()
 {
-    qRegisterMetaType<GeoDataCoordinates>( "GeoDataCoordinates" );
-    qRegisterMetaType<PositionProviderStatus>( "PositionProviderStatus" );
+    qRegisterMetaType<GeoDataCoordinates>("GeoDataCoordinates");
+    qRegisterMetaType<PositionProviderStatus>("PositionProviderStatus");
 }
 
 void PositionTrackingTest::construct()
 {
     GeoDataTreeModel treeModel;
-    const PositionTracking tracking( &treeModel );
+    const PositionTracking tracking(&treeModel);
 
-    QCOMPARE( const_cast<PositionTracking &>( tracking ).positionProviderPlugin(), static_cast<PositionProviderPlugin *>( nullptr ) );
-    QCOMPARE( tracking.speed(), qreal( 0 ) );
-    QCOMPARE( tracking.direction(), qreal( 0 ) );
-    QCOMPARE( tracking.timestamp(), QDateTime() );
-    QCOMPARE( tracking.accuracy(), GeoDataAccuracy() );
-    QCOMPARE( tracking.trackVisible(), true );
-    QCOMPARE( tracking.currentLocation(), GeoDataCoordinates() );
-    QCOMPARE( tracking.status(), PositionProviderStatusUnavailable );
-    QCOMPARE( tracking.isTrackEmpty(), true );
+    QCOMPARE(const_cast<PositionTracking &>(tracking).positionProviderPlugin(), static_cast<PositionProviderPlugin *>(nullptr));
+    QCOMPARE(tracking.speed(), qreal(0));
+    QCOMPARE(tracking.direction(), qreal(0));
+    QCOMPARE(tracking.timestamp(), QDateTime());
+    QCOMPARE(tracking.accuracy(), GeoDataAccuracy());
+    QCOMPARE(tracking.trackVisible(), true);
+    QCOMPARE(tracking.currentLocation(), GeoDataCoordinates());
+    QCOMPARE(tracking.status(), PositionProviderStatusUnavailable);
+    QCOMPARE(tracking.isTrackEmpty(), true);
 
-    QCOMPARE( treeModel.rowCount(), 1 );
-    const QModelIndex indexPositionTracking = treeModel.index( 0, 0 );
-    QCOMPARE( treeModel.data( indexPositionTracking, Qt::DisplayRole ).toString(), QString( "Position Tracking" ) );
-    QCOMPARE( treeModel.rowCount( indexPositionTracking ), 2 );
-    const QModelIndex indexCurrentPosition = treeModel.index( 0, 0, indexPositionTracking );
-    QCOMPARE( treeModel.data( indexCurrentPosition, Qt::DisplayRole ).toString(), QString( "Current Position" ) );
-    const QModelIndex indexCurrentTrack = treeModel.index( 1, 0, indexPositionTracking );
-    QCOMPARE( treeModel.data( indexCurrentTrack, Qt::DisplayRole ).toString(), QString( "Current Track" ) );
+    QCOMPARE(treeModel.rowCount(), 1);
+    const QModelIndex indexPositionTracking = treeModel.index(0, 0);
+    QCOMPARE(treeModel.data(indexPositionTracking, Qt::DisplayRole).toString(), QString("Position Tracking"));
+    QCOMPARE(treeModel.rowCount(indexPositionTracking), 2);
+    const QModelIndex indexCurrentPosition = treeModel.index(0, 0, indexPositionTracking);
+    QCOMPARE(treeModel.data(indexCurrentPosition, Qt::DisplayRole).toString(), QString("Current Position"));
+    const QModelIndex indexCurrentTrack = treeModel.index(1, 0, indexPositionTracking);
+    QCOMPARE(treeModel.data(indexCurrentTrack, Qt::DisplayRole).toString(), QString("Current Track"));
 }
 
 void PositionTrackingTest::statusChanged_data()
 {
-    QTest::addColumn<PositionProviderStatus>( "finalStatus" );
+    QTest::addColumn<PositionProviderStatus>("finalStatus");
 
     addRow() << PositionProviderStatusError;
     addRow() << PositionProviderStatusUnavailable;
@@ -150,85 +197,85 @@ void PositionTrackingTest::statusChanged_data()
 
 void PositionTrackingTest::statusChanged()
 {
-    QFETCH( PositionProviderStatus, finalStatus );
-    const int expectedStatusChangedCount = ( finalStatus == PositionProviderStatusUnavailable ) ? 0 : 1;
+    QFETCH(PositionProviderStatus, finalStatus);
+    const int expectedStatusChangedCount = (finalStatus == PositionProviderStatusUnavailable) ? 0 : 1;
 
     GeoDataTreeModel treeModel;
-    PositionTracking tracking( &treeModel );
+    PositionTracking tracking(&treeModel);
 
-    QSignalSpy statusChangedSpy( &tracking, SIGNAL(statusChanged(PositionProviderStatus)) );
+    QSignalSpy statusChangedSpy(&tracking, SIGNAL(statusChanged(PositionProviderStatus)));
 
     FakeProvider provider;
-    provider.setStatus( finalStatus );
+    provider.setStatus(finalStatus);
 
-    tracking.setPositionProviderPlugin( &provider );
+    tracking.setPositionProviderPlugin(&provider);
 
-    QCOMPARE( tracking.status(), finalStatus );
-    QCOMPARE( statusChangedSpy.count(), expectedStatusChangedCount );
+    QCOMPARE(tracking.status(), finalStatus);
+    QCOMPARE(statusChangedSpy.count(), expectedStatusChangedCount);
 }
 
 void PositionTrackingTest::setPositionProviderPlugin()
 {
-    const GeoDataCoordinates coordinates( 1.2, 0.9 );
-    const GeoDataAccuracy accuracy( GeoDataAccuracy::Detailed, 10.0, 22.0 );
+    const GeoDataCoordinates coordinates(1.2, 0.9);
+    const GeoDataAccuracy accuracy(GeoDataAccuracy::Detailed, 10.0, 22.0);
     const qreal speed = 32.8;
     const qreal direction = 49.7;
-    const QDateTime timestamp( QDate( 1, 3, 1994 ), QTime() );
+    const QDateTime timestamp(QDate(1, 3, 1994), QTime());
 
     GeoDataTreeModel treeModel;
-    PositionTracking tracking( &treeModel );
+    PositionTracking tracking(&treeModel);
 
-    QSignalSpy gpsLocationSpy( &tracking, SIGNAL(gpsLocation(GeoDataCoordinates,qreal)) );
+    QSignalSpy gpsLocationSpy(&tracking, SIGNAL(gpsLocation(GeoDataCoordinates, qreal)));
 
-    QPointer<FakeProvider> provider( new FakeProvider );
-    provider->setStatus( PositionProviderStatusAvailable );
-    provider->setPosition( coordinates, accuracy, speed, direction, timestamp );
+    QPointer<FakeProvider> provider(new FakeProvider);
+    provider->setStatus(PositionProviderStatusAvailable);
+    provider->setPosition(coordinates, accuracy, speed, direction, timestamp);
 
-    tracking.setPositionProviderPlugin( provider );
+    tracking.setPositionProviderPlugin(provider);
 
-    QCOMPARE( tracking.currentLocation(), coordinates );
-    QCOMPARE( tracking.accuracy(), accuracy );
-    QCOMPARE( tracking.speed(), speed );
-    QCOMPARE( tracking.direction(), direction );
-    QCOMPARE( tracking.timestamp(), timestamp );
-    QCOMPARE( gpsLocationSpy.count(), 1 );
+    QCOMPARE(tracking.currentLocation(), coordinates);
+    QCOMPARE(tracking.accuracy(), accuracy);
+    QCOMPARE(tracking.speed(), speed);
+    QCOMPARE(tracking.direction(), direction);
+    QCOMPARE(tracking.timestamp(), timestamp);
+    QCOMPARE(gpsLocationSpy.count(), 1);
 
-    tracking.setPositionProviderPlugin( nullptr );
+    tracking.setPositionProviderPlugin(nullptr);
 
-    QVERIFY( provider.isNull() );
+    QVERIFY(provider.isNull());
 }
 
 void PositionTrackingTest::clearTrack()
 {
-    const GeoDataCoordinates position( 2.1, 0.8 );
-    const GeoDataAccuracy accuracy( GeoDataAccuracy::Detailed, 10.0, 22.0 );
+    const GeoDataCoordinates position(2.1, 0.8);
+    const GeoDataAccuracy accuracy(GeoDataAccuracy::Detailed, 10.0, 22.0);
     const qreal speed = 32.8;
     const qreal direction = 49.7;
-    const QDateTime timestamp( QDate( 1, 3, 1994 ), QTime() );
+    const QDateTime timestamp(QDate(1, 3, 1994), QTime());
 
     GeoDataTreeModel treeModel;
-    PositionTracking tracking( &treeModel );
+    PositionTracking tracking(&treeModel);
 
     FakeProvider provider;
-    tracking.setPositionProviderPlugin( &provider );
+    tracking.setPositionProviderPlugin(&provider);
 
     tracking.clearTrack();
 
-    QVERIFY( tracking.isTrackEmpty() );
+    QVERIFY(tracking.isTrackEmpty());
 
-    provider.setStatus( PositionProviderStatusAvailable );
+    provider.setStatus(PositionProviderStatusAvailable);
 
-    provider.setPosition( position, accuracy, speed, direction, timestamp );
+    provider.setPosition(position, accuracy, speed, direction, timestamp);
 
-    QVERIFY( !tracking.isTrackEmpty() );
+    QVERIFY(!tracking.isTrackEmpty());
 
     tracking.clearTrack();
 
-    QVERIFY( tracking.isTrackEmpty() );
+    QVERIFY(tracking.isTrackEmpty());
 }
 
 }
 
-QTEST_MAIN( Marble::PositionTrackingTest )
+QTEST_MAIN(Marble::PositionTrackingTest)
 
 #include "PositionTrackingTest.moc"

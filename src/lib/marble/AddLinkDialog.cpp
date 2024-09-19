@@ -8,11 +8,12 @@
 #include "ui_AddLinkDialog.h"
 
 // Qt
+#include <QDebug>
 #include <QMessageBox>
 #include <QPushButton>
-#include <QDebug>
 
-namespace Marble {
+namespace Marble
+{
 
 class Q_DECL_HIDDEN AddLinkDialog::Private : public Ui::UiAddLinkDialog
 {
@@ -21,8 +22,8 @@ public:
     ~Private();
 };
 
-AddLinkDialog::Private::Private() :
-    Ui::UiAddLinkDialog()
+AddLinkDialog::Private::Private()
+    : Ui::UiAddLinkDialog()
 {
     // nothing to do
 }
@@ -31,15 +32,15 @@ AddLinkDialog::Private::~Private()
 {
 }
 
-AddLinkDialog::AddLinkDialog( QWidget *parent ) :
-    QDialog( parent ),
-    d( new Private() )
+AddLinkDialog::AddLinkDialog(QWidget *parent)
+    : QDialog(parent)
+    , d(new Private())
 {
-    d->setupUi( this );
+    d->setupUi(this);
 
-    d->buttonBox->button( QDialogButtonBox::Ok )->setDefault( true );
-    connect( d->buttonBox->button( QDialogButtonBox::Ok ), SIGNAL(pressed()), this, SLOT(checkFields()) );
-    connect( this, SIGNAL(finished(int)), SLOT(deleteLater()) );
+    d->buttonBox->button(QDialogButtonBox::Ok)->setDefault(true);
+    connect(d->buttonBox->button(QDialogButtonBox::Ok), SIGNAL(pressed()), this, SLOT(checkFields()));
+    connect(this, SIGNAL(finished(int)), SLOT(deleteLater()));
 }
 
 AddLinkDialog::~AddLinkDialog()
@@ -59,14 +60,10 @@ QString AddLinkDialog::url() const
 
 void AddLinkDialog::checkFields()
 {
-    if ( d->m_url->text().isEmpty() ) {
-            QMessageBox::warning( this,
-                                  tr( "No URL specified" ),
-                                  tr( "Please specify a URL for this link." ) );
-    } else if ( d->m_name->text().isEmpty() ) {
-        QMessageBox::warning( this,
-                              tr( "No name specified" ),
-                              tr( "Please specify a name for this link." ) );
+    if (d->m_url->text().isEmpty()) {
+        QMessageBox::warning(this, tr("No URL specified"), tr("Please specify a URL for this link."));
+    } else if (d->m_name->text().isEmpty()) {
+        QMessageBox::warning(this, tr("No name specified"), tr("Please specify a name for this link."));
     } else {
         accept();
     }

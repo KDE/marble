@@ -8,8 +8,8 @@
 
 #include <QDialog>
 
-
-namespace Marble {
+namespace Marble
+{
 
 class GeoDataPlacemark;
 class GeoDataFeature;
@@ -20,35 +20,33 @@ class EditPolylineDialog : public QDialog
 {
     Q_OBJECT
 public:
-    EditPolylineDialog( GeoDataPlacemark *placemark,
-                        const QHash<qint64, OsmPlacemarkData> *relations = nullptr,
-                        QWidget *parent = nullptr );
+    EditPolylineDialog(GeoDataPlacemark *placemark, const QHash<qint64, OsmPlacemarkData> *relations = nullptr, QWidget *parent = nullptr);
     ~EditPolylineDialog() override;
 
 public Q_SLOTS:
-    void handleAddingNode( const GeoDataCoordinates &node );
-    void handleItemMoving( GeoDataPlacemark *item );
+    void handleAddingNode(const GeoDataCoordinates &node);
+    void handleItemMoving(GeoDataPlacemark *item);
     void handleChangingStyle();
 
 Q_SIGNALS:
-    void polylineUpdated( GeoDataFeature *feature );
+    void polylineUpdated(GeoDataFeature *feature);
 
     /**
      * @brief relationCreated signals the annotate plugin that a new relation has been
      * created( or modified ) within the relation editor
      * @param relation the relation's osmData
      */
-    void relationCreated( const OsmPlacemarkData &relation );
+    void relationCreated(const OsmPlacemarkData &relation);
 
 private Q_SLOTS:
     void updatePolyline();
-    void updateLinesDialog( const QColor &color );
-    void restoreInitial( int result );
+    void updateLinesDialog(const QColor &color);
+    void restoreInitial(int result);
     void checkFields();
 
 private:
     class Private;
-    Private * const d;
+    Private *const d;
 };
 
 }

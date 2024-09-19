@@ -4,7 +4,6 @@
 // SPDX-FileCopyrightText: 2007 Inge Wallin <ingwa@kde.org>
 //
 
-
 // Own
 #include "TileCreatorDialog.h"
 
@@ -23,25 +22,22 @@ namespace Marble
 
 class TileCreatorDialogPrivate
 {
- public:
-    Ui::TileCreatorDialog  uiWidget;
+public:
+    Ui::TileCreatorDialog uiWidget;
 
     TileCreator *m_creator;
 };
 
-    
 TileCreatorDialog::TileCreatorDialog(TileCreator *creator, QWidget *parent)
-    : QDialog(parent),
-      d( new TileCreatorDialogPrivate )
+    : QDialog(parent)
+    , d(new TileCreatorDialogPrivate)
 {
     d->m_creator = creator;
-    
+
     d->uiWidget.setupUi(this);
 
-    connect( d->m_creator, SIGNAL(progress(int)),
-             this, SLOT(setProgress(int)), Qt::QueuedConnection );
-    connect( d->uiWidget.buttonBox, SIGNAL(rejected()),
-             this, SLOT(cancelTileCreation()) );
+    connect(d->m_creator, SIGNAL(progress(int)), this, SLOT(setProgress(int)), Qt::QueuedConnection);
+    connect(d->uiWidget.buttonBox, SIGNAL(rejected()), this, SLOT(cancelTileCreation()));
 
     // Start the creation process
     d->m_creator->start();
@@ -49,7 +45,7 @@ TileCreatorDialog::TileCreatorDialog(TileCreator *creator, QWidget *parent)
 
 void TileCreatorDialog::cancelTileCreation()
 {
-    d->uiWidget.buttonBox->button(QDialogButtonBox::Cancel)->setEnabled( false );
+    d->uiWidget.buttonBox->button(QDialogButtonBox::Cancel)->setEnabled(false);
 
     /** @todo: Cancelling mostly crashes Marble. Fix that and uncomment below */
     // d->m_creator->cancelTileCreation();
@@ -57,31 +53,29 @@ void TileCreatorDialog::cancelTileCreation()
 
 TileCreatorDialog::~TileCreatorDialog()
 {
-    disconnect( d->m_creator, SIGNAL(progress(int)),
-                this, SLOT(setProgress(int)) );
+    disconnect(d->m_creator, SIGNAL(progress(int)), this, SLOT(setProgress(int)));
 
-    if ( d->m_creator->isRunning() )
+    if (d->m_creator->isRunning())
         d->m_creator->cancelTileCreation();
     d->m_creator->wait();
     d->m_creator->deleteLater();
     delete d;
 }
 
-void TileCreatorDialog::setProgress( int progress )
+void TileCreatorDialog::setProgress(int progress)
 {
-    d->uiWidget.progressBar->setValue( progress );
+    d->uiWidget.progressBar->setValue(progress);
 
-    if ( progress == 100 )
-	{
-        QTimer::singleShot( 0, this, SLOT(accept()) ); 
-	}
+    if (progress == 100) {
+        QTimer::singleShot(0, this, SLOT(accept()));
+    }
 }
 
-void TileCreatorDialog::setSummary( const QString& name, 
-                                    const QString& description )
-{ 
-    const QString summary = QLatin1String("<b>") + QCoreApplication::translate("DGML", name.toUtf8().constData()) + QLatin1String("</b><br>") + QCoreApplication::translate("DGML", description.toUtf8().constData());
-    d->uiWidget.descriptionLabel->setText( summary );
+void TileCreatorDialog::setSummary(const QString &name, const QString &description)
+{
+    const QString summary = QLatin1String("<b>") + QCoreApplication::translate("DGML", name.toUtf8().constData()) + QLatin1String("</b><br>")
+        + QCoreApplication::translate("DGML", description.toUtf8().constData());
+    d->uiWidget.descriptionLabel->setText(summary);
 }
 
 }

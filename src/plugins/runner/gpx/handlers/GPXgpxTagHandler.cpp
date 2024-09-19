@@ -12,12 +12,12 @@
 #include "GeoDataParser.h"
 
 #include "GeoDataDocument.h"
-#include "GeoDataStyle.h"
+#include "GeoDataHotSpot.h"
 #include "GeoDataIconStyle.h"
 #include "GeoDataLabelStyle.h"
 #include "GeoDataLineStyle.h"
+#include "GeoDataStyle.h"
 #include "GeoDataStyleMap.h"
-#include "GeoDataHotSpot.h"
 #include "MarbleColors.h"
 #include "MarbleDirs.h"
 #include "MarbleGlobal.h"
@@ -28,16 +28,16 @@ namespace gpx
 {
 GPX_DEFINE_TAG_HANDLER(gpx)
 
-GeoNode* GPXgpxTagHandler::parse(GeoParser& parser) const
+GeoNode *GPXgpxTagHandler::parse(GeoParser &parser) const
 {
-    GeoDataDocument* doc = geoDataDoc( parser );
+    GeoDataDocument *doc = geoDataDoc(parser);
 
     GeoDataStyle::Ptr style(new GeoDataStyle);
     GeoDataLineStyle lineStyle;
     QColor transparentRed = Oxygen::brickRed6;
-    transparentRed.setAlpha( 200 );
-    lineStyle.setColor( transparentRed );
-    lineStyle.setWidth( 4 );
+    transparentRed.setAlpha(200);
+    lineStyle.setColor(transparentRed);
+    lineStyle.setWidth(4);
     style->setLineStyle(lineStyle);
     style->setId(QStringLiteral("track"));
 
@@ -51,9 +51,9 @@ GeoNode* GPXgpxTagHandler::parse(GeoParser& parser) const
     GeoDataStyle::Ptr routestyle(new GeoDataStyle);
     GeoDataLineStyle routeLineStyle;
     QColor skyBlue = Oxygen::skyBlue6;
-    skyBlue.setAlpha( 200 );
-    routeLineStyle.setColor( skyBlue );
-    routeLineStyle.setWidth( 5 );
+    skyBlue.setAlpha(200);
+    routeLineStyle.setColor(skyBlue);
+    routeLineStyle.setWidth(5);
     routestyle->setLineStyle(routeLineStyle);
     routestyle->setId(QStringLiteral("route"));
 
@@ -68,7 +68,7 @@ GeoNode* GPXgpxTagHandler::parse(GeoParser& parser) const
     waypointStyle->setId(QStringLiteral("waypoint"));
     GeoDataIconStyle iconStyle;
     iconStyle.setIconPath(MarbleDirs::path(QStringLiteral("bitmaps/flag.png")));
-    iconStyle.setHotSpot(QPointF(0.12,0.03), GeoDataHotSpot::Fraction, GeoDataHotSpot::Fraction);
+    iconStyle.setHotSpot(QPointF(0.12, 0.03), GeoDataHotSpot::Fraction, GeoDataHotSpot::Fraction);
     waypointStyle->setIconStyle(iconStyle);
 
     GeoDataLabelStyle waypointLabelStyle;

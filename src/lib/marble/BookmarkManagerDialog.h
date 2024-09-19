@@ -6,8 +6,8 @@
 #ifndef MARBLE_BOOKMARKMANAGERDIALOG_H
 #define MARBLE_BOOKMARKMANAGERDIALOG_H
 
-#include "ui_BookmarkManagerDialog.h"
 #include "marble_export.h"
+#include "ui_BookmarkManagerDialog.h"
 
 #include <QDialog>
 
@@ -23,14 +23,14 @@ class MARBLE_EXPORT BookmarkManagerDialog : public QDialog, private Ui::UiBookma
 {
     Q_OBJECT
 
- public:
+public:
     /** Constructor. The model is used to retrieve the bookmark manager */
-    explicit BookmarkManagerDialog( MarbleModel* model, QWidget *parent = nullptr );
+    explicit BookmarkManagerDialog(MarbleModel *model, QWidget *parent = nullptr);
 
     /** Destructor */
     ~BookmarkManagerDialog() override;
 
-    void setButtonBoxVisible( bool visible );
+    void setButtonBoxVisible(bool visible);
 
 private Q_SLOTS:
     void saveBookmarks();
@@ -40,24 +40,24 @@ private Q_SLOTS:
     void importBookmarks();
 
 private:
-    Q_PRIVATE_SLOT( d, void updateButtonState() )
+    Q_PRIVATE_SLOT(d, void updateButtonState())
 
-    Q_PRIVATE_SLOT( d, void addNewFolder() )
+    Q_PRIVATE_SLOT(d, void addNewFolder())
 
-    Q_PRIVATE_SLOT( d, void renameFolder() )
+    Q_PRIVATE_SLOT(d, void renameFolder())
 
-    Q_PRIVATE_SLOT( d, void deleteFolder() )
+    Q_PRIVATE_SLOT(d, void deleteFolder())
 
-    Q_PRIVATE_SLOT( d, void editBookmark() )
+    Q_PRIVATE_SLOT(d, void editBookmark())
 
-    Q_PRIVATE_SLOT( d, void deleteBookmark() )
+    Q_PRIVATE_SLOT(d, void deleteBookmark())
 
-    Q_PRIVATE_SLOT( d, void handleFolderSelection( const QModelIndex &index ) )
+    Q_PRIVATE_SLOT(d, void handleFolderSelection(const QModelIndex &index))
 
-    Q_PRIVATE_SLOT( d, void discardChanges() )
+    Q_PRIVATE_SLOT(d, void discardChanges())
 
-    Q_DISABLE_COPY( BookmarkManagerDialog )
-    BookmarkManagerDialogPrivate* const d;
+    Q_DISABLE_COPY(BookmarkManagerDialog)
+    BookmarkManagerDialogPrivate *const d;
     friend class BookmarkManagerDialogPrivate;
 };
 

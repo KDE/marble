@@ -6,29 +6,30 @@
 
 #include "FileViewFloatItem.h"
 
-#include <QRect>
-#include <QPoint>
 #include <QApplication>
 #include <QFileDialog>
 #include <QListView>
 #include <QMenu>
-#include <QSlider>
 #include <QMouseEvent>
+#include <QPoint>
+#include <QRect>
+#include <QSlider>
 
-#include "MarbleDebug.h"
 #include "FileViewModel.h"
 #include "GeoPainter.h"
-#include "ViewportParams.h"
+#include "MarbleDebug.h"
 #include "MarbleWidget.h"
-
+#include "ViewportParams.h"
 
 using namespace Marble;
 
-FileViewFloatItem::FileViewFloatItem(const QPointF &point,
-        const QSizeF &size) :
-    AbstractFloatItem(point, size), m_marbleWidget(0),
-            m_fileView(0), m_fileViewParent(0),
-            m_repaintScheduled(true), m_persIndex(0)
+FileViewFloatItem::FileViewFloatItem(const QPointF &point, const QSizeF &size)
+    : AbstractFloatItem(point, size)
+    , m_marbleWidget(0)
+    , m_fileView(0)
+    , m_fileViewParent(0)
+    , m_repaintScheduled(true)
+    , m_persIndex(0)
 {
     // Plugin is not enabled by default
     setEnabled(false);
@@ -72,14 +73,12 @@ QIcon FileViewFloatItem::icon() const
 void FileViewFloatItem::initialize()
 {
     m_fileViewParent = new QWidget(0);
-    m_fileViewParent->setFixedSize(size().toSize() - QSize(2 * padding(), 2
-            * padding()));
+    m_fileViewParent->setFixedSize(size().toSize() - QSize(2 * padding(), 2 * padding()));
     m_fileView = new QListView(m_fileViewParent);
     m_fileView->resize(100, 240);
     m_fileView->setResizeMode(QListView::Adjust);
-    m_fileView->setContextMenuPolicy( Qt::CustomContextMenu );
-    connect(m_fileView, SIGNAL(customContextMenuRequested(QPoint)),
-            this,       SLOT(contextMenu(QPoint)));
+    m_fileView->setContextMenuPolicy(Qt::CustomContextMenu);
+    connect(m_fileView, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(contextMenu(QPoint)));
 }
 
 bool FileViewFloatItem::isInitialized() const
@@ -91,106 +90,96 @@ QPainterPath FileViewFloatItem::backgroundShape() const
 {
     QPainterPath path;
     QSizeF paintedSize = paintedRect().size();
-    path.addRoundedRect( QRectF( 0.0, 0.0, paintedSize.width() - 1, paintedSize.height() - 1 ), 6, 6 );
+    path.addRoundedRect(QRectF(0.0, 0.0, paintedSize.width() - 1, paintedSize.height() - 1), 6, 6);
     return path;
 }
 
-void FileViewFloatItem::changeViewport( ViewportParams *viewport )
+void FileViewFloatItem::changeViewport(ViewportParams *viewport)
 {
-    Q_UNUSED( viewport );
+    Q_UNUSED(viewport);
     update();
 }
 
-void FileViewFloatItem::paintContent( GeoPainter *painter, ViewportParams *viewport,
-                                      const QString& renderPos, GeoSceneLayer * layer)
+void FileViewFloatItem::paintContent(GeoPainter *painter, ViewportParams *viewport, const QString &renderPos, GeoSceneLayer *layer)
 {
-    Q_UNUSED( viewport );
-    Q_UNUSED( layer );
-    Q_UNUSED( renderPos );
+    Q_UNUSED(viewport);
+    Q_UNUSED(layer);
+    Q_UNUSED(renderPos);
 
-    if( !m_fileView->model() ) {
+    if (!m_fileView->model()) {
         m_fileView->setModel(marbleModel()->fileViewModel());
     }
     painter->end();
     // Paint widget without a background
-    m_fileViewParent->render( painter->device(), 
-          QPoint( padding(), padding() ), QRegion(),QWidget::RenderFlags(QWidget::DrawChildren));
+    m_fileViewParent->render(painter->device(), QPoint(padding(), padding()), QRegion(), QWidget::RenderFlags(QWidget::DrawChildren));
 
-    painter->begin( painter->device() );
+    painter->begin(painter->device());
     m_fileView->update();
 }
 
 bool FileViewFloatItem::eventFilter(QObject *object, QEvent *e)
 {
-    if ( !enabled() || !visible() ) {
+    if (!enabled() || !visible()) {
         return false;
     }
 
-    MarbleWidget *widget = dynamic_cast<MarbleWidget*> (object);
-    if ( !widget ) {
+    MarbleWidget *widget = dynamic_cast<MarbleWidget *>(object);
+    if (!widget) {
         return AbstractFloatItem::eventFilter(object, e);
     }
 
-    if ( m_marbleWidget != widget ) {
+    if (m_marbleWidget != widget) {
         // Delayed initialization
         m_marbleWidget = widget;
     }
 
-    Q_ASSERT( m_marbleWidget );
+    Q_ASSERT(m_marbleWidget);
     // Mouse events are forwarded to the underlying widget
-    QMouseEvent *event = static_cast<QMouseEvent*> (e);
-    QRectF floatItemRect = QRectF( positivePosition(), size() );
+    QMouseEvent *event = static_cast<QMouseEvent *>(e);
+    QRectF floatItemRect = QRectF(positivePosition(), size());
 
-    QPoint shiftedPos = event->pos() - floatItemRect.topLeft().toPoint()
-            - QPoint( padding(), padding() );
-    if( e->type() == QEvent::MouseMove ) {
+    QPoint shiftedPos = event->pos() - floatItemRect.topLeft().toPoint() - QPoint(padding(), padding());
+    if (e->type() == QEvent::MouseMove) {
         m_itemPosition = event->globalPos();
     }
 
-    if( floatItemRect.contains( event->pos() ) ) {
-        QWidget *child = m_fileViewParent->childAt( shiftedPos );
+    if (floatItemRect.contains(event->pos())) {
+        QWidget *child = m_fileViewParent->childAt(shiftedPos);
 
-        if( child ) {
-            m_marbleWidget->setCursor( Qt::ArrowCursor );
+        if (child) {
+            m_marbleWidget->setCursor(Qt::ArrowCursor);
 
             // there needs to be some extra handling for the scrollbars
-            // these need some special treatment due to them not forwarding 
+            // these need some special treatment due to them not forwarding
             // their mouseevents to their scrollbars.
-            if( reinterpret_cast<QScrollBar*>( child ) == m_fileView->horizontalScrollBar() ) {
-                shiftedPos -= QPoint( 0, m_fileView->viewport()->size().height() );
-            } else if( reinterpret_cast<QScrollBar*>( child ) == m_fileView->verticalScrollBar() ) {
-                shiftedPos -= QPoint( m_fileView->viewport()->size().width(), 0 );
+            if (reinterpret_cast<QScrollBar *>(child) == m_fileView->horizontalScrollBar()) {
+                shiftedPos -= QPoint(0, m_fileView->viewport()->size().height());
+            } else if (reinterpret_cast<QScrollBar *>(child) == m_fileView->verticalScrollBar()) {
+                shiftedPos -= QPoint(m_fileView->viewport()->size().width(), 0);
             }
-            QMouseEvent shiftedEvent( e->type(), shiftedPos,
-                    event->globalPos(), event->button(), event->buttons(),
-                    event->modifiers() );
-            if( QApplication::sendEvent(child, &shiftedEvent) ) {
-                if( e->type() == QEvent::MouseButtonPress || 
-                    e->type() == QEvent::MouseButtonRelease || 
-                    e->type() == QEvent::MouseButtonDblClick ||
-                    e->type() == QEvent::MouseMove )
+            QMouseEvent shiftedEvent(e->type(), shiftedPos, event->globalPos(), event->button(), event->buttons(), event->modifiers());
+            if (QApplication::sendEvent(child, &shiftedEvent)) {
+                if (e->type() == QEvent::MouseButtonPress || e->type() == QEvent::MouseButtonRelease || e->type() == QEvent::MouseButtonDblClick
+                    || e->type() == QEvent::MouseMove)
                     updateFileView();
                 return true;
             }
-            
         }
     }
 
     return AbstractFloatItem::eventFilter(object, e);
 }
 
-void FileViewFloatItem::selectTheme(const QString& theme)
+void FileViewFloatItem::selectTheme(const QString &theme)
 {
     Q_UNUSED(theme);
-    
-    if ( m_marbleWidget ) {
-    }
+
+    if (m_marbleWidget) { }
 }
 
 void FileViewFloatItem::updateFileView()
 {
-    if (m_marbleWidget)
-    {
+    if (m_marbleWidget) {
         // Trigger a repaint of the float item. Otherwise button state updates
         // are delayed
         QRectF floatItemRect = QRectF(positivePosition(), size()).toRect();
@@ -200,20 +189,18 @@ void FileViewFloatItem::updateFileView()
     }
 }
 
-void FileViewFloatItem::contextMenu( const QPoint& pos )
+void FileViewFloatItem::contextMenu(const QPoint &pos)
 {
-    if( !m_marbleWidget )
+    if (!m_marbleWidget)
         return;
 
-    QPointer<QMenu> test = new QMenu( m_fileView );
+    QPointer<QMenu> test = new QMenu(m_fileView);
     // We need the global position to move the menu.
     // pos contains the relative position.
-    test->move( m_itemPosition );
-    connect( test->addAction( tr( "Open file..." ) ), SIGNAL(triggered()),
-             this, SLOT(addFile()) );
-    connect( test->addAction( tr( "Close this file" ) ), SIGNAL(triggered()),
-             this, SLOT(removeFile()) );
-    m_persIndex = new QPersistentModelIndex( m_fileView->indexAt( pos ) );
+    test->move(m_itemPosition);
+    connect(test->addAction(tr("Open file...")), SIGNAL(triggered()), this, SLOT(addFile()));
+    connect(test->addAction(tr("Close this file")), SIGNAL(triggered()), this, SLOT(removeFile()));
+    m_persIndex = new QPersistentModelIndex(m_fileView->indexAt(pos));
     test->exec();
     delete test;
 }
@@ -221,21 +208,22 @@ void FileViewFloatItem::contextMenu( const QPoint& pos )
 void FileViewFloatItem::addFile()
 {
     QString fileName;
-    fileName = QFileDialog::getOpenFileName(m_marbleWidget, tr("Open File"),
+    fileName = QFileDialog::getOpenFileName(m_marbleWidget,
+                                            tr("Open File"),
                                             QString(),
                                             tr("All Supported Files (*.gpx *.kml *.pnt);;GPS Data (*.gpx);;Google Earth KML (*.kml);PNT Data (*.pnt)"));
 
-    if ( ! fileName.isEmpty() ) {
-        m_marbleWidget->model()->addGeoDataFile( fileName );
+    if (!fileName.isEmpty()) {
+        m_marbleWidget->model()->addGeoDataFile(fileName);
     }
 }
 
 void FileViewFloatItem::removeFile()
 {
-    //reinterpret_cast<FileViewModel*>(m_fileView->model())->setSelectedIndex( *m_persIndex );
-    mDebug() << m_fileView->model()->data( *m_persIndex, Qt::DisplayRole ).toString();
+    // reinterpret_cast<FileViewModel*>(m_fileView->model())->setSelectedIndex( *m_persIndex );
+    mDebug() << m_fileView->model()->data(*m_persIndex, Qt::DisplayRole).toString();
     // close selected file
-    reinterpret_cast<FileViewModel*>(m_fileView->model())->closeFile();
+    reinterpret_cast<FileViewModel *>(m_fileView->model())->closeFile();
 }
 
 #include "moc_FileViewFloatItem.cpp"

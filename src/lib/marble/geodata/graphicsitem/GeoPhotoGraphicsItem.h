@@ -18,15 +18,15 @@ namespace Marble
 class MARBLE_EXPORT GeoPhotoGraphicsItem : public GeoGraphicsItem
 {
 public:
-    explicit GeoPhotoGraphicsItem( const GeoDataFeature *feature );
+    explicit GeoPhotoGraphicsItem(const GeoDataFeature *feature);
 
-    void setPoint( const GeoDataPoint& point );
+    void setPoint(const GeoDataPoint &point);
 
     GeoDataPoint point() const;
 
-    void paint(GeoPainter* painter, const ViewportParams *viewport, const QString &layer, int tileZoomLevel) override;
+    void paint(GeoPainter *painter, const ViewportParams *viewport, const QString &layer, int tileZoomLevel) override;
 
-    const GeoDataLatLonAltBox& latLonAltBox() const override;
+    const GeoDataLatLonAltBox &latLonAltBox() const override;
 
     bool contains(const QPoint &point, const ViewportParams *viewport) const override;
 

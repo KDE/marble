@@ -9,22 +9,22 @@
 namespace Marble
 {
 
-OSRMPlugin::OSRMPlugin( QObject *parent ) :
-    RoutingRunnerPlugin( parent )
+OSRMPlugin::OSRMPlugin(QObject *parent)
+    : RoutingRunnerPlugin(parent)
 {
     setSupportedCelestialBodies(QStringList(QStringLiteral("earth")));
-    setCanWorkOffline( false );
-    setStatusMessage( tr ( "This service requires an Internet connection." ) );
+    setCanWorkOffline(false);
+    setStatusMessage(tr("This service requires an Internet connection."));
 }
 
 QString OSRMPlugin::name() const
 {
-    return tr( "Open Source Routing Machine (OSRM) Routing" );
+    return tr("Open Source Routing Machine (OSRM) Routing");
 }
 
 QString OSRMPlugin::guiString() const
 {
-    return tr( "OSRM" );
+    return tr("OSRM");
 }
 
 QString OSRMPlugin::nameId() const
@@ -39,7 +39,7 @@ QString OSRMPlugin::version() const
 
 QString OSRMPlugin::description() const
 {
-    return tr( "Worldwide routing using project-osrm.org" );
+    return tr("Worldwide routing using project-osrm.org");
 }
 
 QString OSRMPlugin::copyrightYears() const
@@ -49,8 +49,7 @@ QString OSRMPlugin::copyrightYears() const
 
 QVector<PluginAuthor> OSRMPlugin::pluginAuthors() const
 {
-    return QVector<PluginAuthor>()
-            << PluginAuthor(QStringLiteral("Dennis Nienhüser"), QStringLiteral("nienhueser@kde.org"));
+    return QVector<PluginAuthor>() << PluginAuthor(QStringLiteral("Dennis Nienhüser"), QStringLiteral("nienhueser@kde.org"));
 }
 
 RoutingRunner *OSRMPlugin::newRunner() const
@@ -58,7 +57,7 @@ RoutingRunner *OSRMPlugin::newRunner() const
     return new OSRMRunner;
 }
 
-bool OSRMPlugin::supportsTemplate( RoutingProfilesModel::ProfileTemplate profileTemplate ) const
+bool OSRMPlugin::supportsTemplate(RoutingProfilesModel::ProfileTemplate profileTemplate) const
 {
     return profileTemplate == RoutingProfilesModel::CarFastestTemplate;
 }

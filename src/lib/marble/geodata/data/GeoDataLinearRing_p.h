@@ -13,9 +13,9 @@ namespace Marble
 
 class GeoDataLinearRingPrivate : public GeoDataLineStringPrivate
 {
-  public:
-    explicit GeoDataLinearRingPrivate( TessellationFlags f )
-     : GeoDataLineStringPrivate( f )
+public:
+    explicit GeoDataLinearRingPrivate(TessellationFlags f)
+        : GeoDataLineStringPrivate(f)
     {
     }
 
@@ -24,8 +24,8 @@ class GeoDataLinearRingPrivate : public GeoDataLineStringPrivate
     }
 
     GeoDataGeometryPrivate *copy() const override
-    { 
-        GeoDataLinearRingPrivate* copy = new GeoDataLinearRingPrivate;
+    {
+        GeoDataLinearRingPrivate *copy = new GeoDataLinearRingPrivate;
         *copy = *this;
         return copy;
     }

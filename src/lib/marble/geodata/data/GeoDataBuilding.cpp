@@ -7,23 +7,24 @@
 #include "GeoDataBuilding_p.h"
 #include "GeoDataTypes.h"
 
-namespace Marble {
+namespace Marble
+{
 
 GeoDataBuilding::GeoDataBuilding()
-    : GeoDataGeometry(new GeoDataBuildingPrivate),
-      d(new GeoDataBuildingPrivate)
+    : GeoDataGeometry(new GeoDataBuildingPrivate)
+    , d(new GeoDataBuildingPrivate)
 {
 }
 
 GeoDataBuilding::GeoDataBuilding(const GeoDataGeometry &other)
-    : GeoDataGeometry(other),
-      d(new GeoDataBuildingPrivate)
+    : GeoDataGeometry(other)
+    , d(new GeoDataBuildingPrivate)
 {
 }
 
 GeoDataBuilding::GeoDataBuilding(const GeoDataBuilding &other)
-    : GeoDataGeometry(other),
-      d(new GeoDataBuildingPrivate(*other.d))
+    : GeoDataGeometry(other)
+    , d(new GeoDataBuildingPrivate(*other.d))
 {
 }
 
@@ -32,7 +33,7 @@ GeoDataBuilding::~GeoDataBuilding()
     delete d;
 }
 
-GeoDataBuilding& GeoDataBuilding::operator=(const GeoDataBuilding& other)
+GeoDataBuilding &GeoDataBuilding::operator=(const GeoDataBuilding &other)
 {
     GeoDataGeometry::operator=(other);
     *d = *other.d;
@@ -94,7 +95,7 @@ void GeoDataBuilding::setNonExistentLevels(const QVector<int> &nonExistentLevels
     d->m_nonExistentLevels = nonExistentLevels;
 }
 
-GeoDataMultiGeometry* GeoDataBuilding::multiGeometry() const
+GeoDataMultiGeometry *GeoDataBuilding::multiGeometry() const
 {
     return &d->m_multiGeometry;
 }
@@ -111,7 +112,7 @@ QString GeoDataBuilding::name() const
     return d->m_name;
 }
 
-void GeoDataBuilding::setName(const QString& name)
+void GeoDataBuilding::setName(const QString &name)
 {
     d->m_name = name;
 }
@@ -126,7 +127,7 @@ void GeoDataBuilding::setEntries(const QVector<GeoDataBuilding::NamedEntry> &ent
     d->m_entries = entries;
 }
 
-double GeoDataBuilding::parseBuildingHeight(const QString& buildingHeight)
+double GeoDataBuilding::parseBuildingHeight(const QString &buildingHeight)
 {
     double height = 8.0;
 
@@ -137,14 +138,15 @@ double GeoDataBuilding::parseBuildingHeight(const QString& buildingHeight)
         return extractedHeight;
     }
 
-    if (buildingHeight.endsWith(QLatin1Char('m')) ||
-        buildingHeight.endsWith(QLatin1String("meter")) ||
-        buildingHeight.endsWith(QLatin1String("meters")) ||
-        buildingHeight.endsWith(QLatin1String("metre")) ||
-        buildingHeight.endsWith(QLatin1String("metres"))) {
-        QString const heightValue = QString(buildingHeight).remove(QStringLiteral("meters"))
-                .remove(QStringLiteral("meter")).remove(QStringLiteral("metres"))
-                .remove(QStringLiteral("metre")).remove(QLatin1Char('m')).trimmed();
+    if (buildingHeight.endsWith(QLatin1Char('m')) || buildingHeight.endsWith(QLatin1String("meter")) || buildingHeight.endsWith(QLatin1String("meters"))
+        || buildingHeight.endsWith(QLatin1String("metre")) || buildingHeight.endsWith(QLatin1String("metres"))) {
+        QString const heightValue = QString(buildingHeight)
+                                        .remove(QStringLiteral("meters"))
+                                        .remove(QStringLiteral("meter"))
+                                        .remove(QStringLiteral("metres"))
+                                        .remove(QStringLiteral("metre"))
+                                        .remove(QLatin1Char('m'))
+                                        .trimmed();
         bool extracted;
         double extractedHeight = heightValue.toDouble(&extracted);
         if (extracted) {

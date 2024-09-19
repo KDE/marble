@@ -6,61 +6,43 @@
 #ifndef OWSSERVICEMANAGER_H
 #define OWSSERVICEMANAGER_H
 
-#include <QObject>
-#include <QNetworkAccessManager>
-#include <QImage>
 #include <QDomDocument>
+#include <QImage>
+#include <QNetworkAccessManager>
+#include <QObject>
 
 class QNetworkReply;
 
 namespace Marble
 {
 
-enum OwsServiceType {
-    NoOwsType,
-    WmsType,
-    WmtsType,
-    WfsType,
-    WcsType
-};
+enum OwsServiceType { NoOwsType, WmsType, WmtsType, WfsType, WcsType };
 
-enum OwsCapabilitiesStatus {
-    OwsCapabilitiesNone,
-    OwsCapabilitiesSuccess,
-    OwsCapabilitiesNoOwsServer,
-    OwsCapabilitiesReplyUnreadable,
-    OwsCapabilitiesFailed
-};
+enum OwsCapabilitiesStatus { OwsCapabilitiesNone, OwsCapabilitiesSuccess, OwsCapabilitiesNoOwsServer, OwsCapabilitiesReplyUnreadable, OwsCapabilitiesFailed };
 
+enum WmsImageStatus { WmsImageNone, WmsImageSuccess, WmsImageFailed, WmsImageFailedServerMessage };
 
-enum WmsImageStatus {
-    WmsImageNone,
-    WmsImageSuccess,
-    WmsImageFailed,
-    WmsImageFailedServerMessage
-};
-
-class OwsMappingCapabilities {
-
+class OwsMappingCapabilities
+{
 public:
     OwsMappingCapabilities();
 
-    void setVersion(const QString& version);
+    void setVersion(const QString &version);
     QString version() const; // "1.1.1" or "1.3.0"
 
-    void setTitle(const QString& title);
+    void setTitle(const QString &title);
     QString title() const;
 
-    void setAbstract(const QString& abstract);
+    void setAbstract(const QString &abstract);
     QString abstract() const;
 
     QStringList layers() const;
 
-    QString title(const QString& layer);
-    QString abstract(const QString& layer);
-    QString style(const QString& layer);
+    QString title(const QString &layer);
+    QString abstract(const QString &layer);
+    QString style(const QString &layer);
 
-    void setOwsLayerMetaInfo(const QMap<QString, QStringList>& wmsLayerMetaInfo);
+    void setOwsLayerMetaInfo(const QMap<QString, QStringList> &wmsLayerMetaInfo);
     QMap<QString, QStringList> owsLayerMetaInfo() const;
 
 protected:
@@ -71,31 +53,30 @@ protected:
     QMap<QString, QStringList> m_owsLayerMetaInfo; // layerName -> Title, Abstract, LegendUrl, Style
 };
 
-class WmsCapabilities : public OwsMappingCapabilities {
-
+class WmsCapabilities : public OwsMappingCapabilities
+{
 public:
     WmsCapabilities();
 
-
-    void setContactInformation(const QString& info);
+    void setContactInformation(const QString &info);
     QString contactInformation() const;
 
-    void setFees(const QString& fee);
+    void setFees(const QString &fee);
     QString fees() const;
 
-    QStringList projections(const QString& layer);
-    QString boundingBox(const QString& layer, const QString& projection);
-    QString legendUrl(const QString& layer);
-    QStringList styles(const QStringList& layers);
-    QString boundingBoxNSEWDegrees(const QStringList& layers, const QString& projection);
+    QStringList projections(const QString &layer);
+    QString boundingBox(const QString &layer, const QString &projection);
+    QString legendUrl(const QString &layer);
+    QStringList styles(const QStringList &layers);
+    QString boundingBoxNSEWDegrees(const QStringList &layers, const QString &projection);
 
-    void setReferenceSystemType(const QString& refSystem);
+    void setReferenceSystemType(const QString &refSystem);
     QString referenceSystemType() const; // SRS (1.1.1) or CRS (1.3.0)
 
-    void setWmsLayerCoordinateSystems(const QMap<QString, QMap<QString, QString>>& wmsLayerCoordinateSystems);
+    void setWmsLayerCoordinateSystems(const QMap<QString, QMap<QString, QString>> &wmsLayerCoordinateSystems);
     QMap<QString, QMap<QString, QString>> wmsLayerCoordinateSystems() const;
 
-    void setFormats(const QStringList& formats);
+    void setFormats(const QStringList &formats);
     QStringList formats();
 
     QString m_referenceSystemType;
@@ -108,42 +89,37 @@ public:
     QStringList m_formats; // png, jpg, ...
 };
 
-class WmtsCapabilities : public OwsMappingCapabilities {
-
+class WmtsCapabilities : public OwsMappingCapabilities
+{
 public:
     WmtsCapabilities();
 
-    void setWmtsTileMatrixSets(const QMap<QString, QStringList> & wmtsTileMatrixSets);
+    void setWmtsTileMatrixSets(const QMap<QString, QStringList> &wmtsTileMatrixSets);
     QMap<QString, QStringList> wmtsTileMatrixSets() const;
-    void setWmtsTileResource(const QMap<QString, QMap<QString, QString>> & wmtsTileResource);
+    void setWmtsTileResource(const QMap<QString, QMap<QString, QString>> &wmtsTileResource);
     QMap<QString, QMap<QString, QString>> wmtsTileResource() const;
 
     QMap<QString, QStringList> m_wmtsTileMatrixSets; //  layerId -> TileMatrixSets
     QMap<QString, QMap<QString, QString>> m_wmtsTileResource; // layerId -> Format -> RessourceUrl
 };
 
-enum ImageResultType {
-    GenericImage,
-    LevelZeroTile,
-    PreviewImage,
-    LegendImage
-};
+enum ImageResultType { GenericImage, LevelZeroTile, PreviewImage, LegendImage };
 
-class ImageRequestResult {
-
+class ImageRequestResult
+{
 public:
     ImageRequestResult();
 
     void setImageStatus(WmsImageStatus imageStatus);
     WmsImageStatus imageStatus() const;
 
-    void setResultImage(const QImage& image);
+    void setResultImage(const QImage &image);
     QImage resultImage() const;
 
-    void setResultRaw(const QByteArray& resultRaw);
+    void setResultRaw(const QByteArray &resultRaw);
     QByteArray resultRaw() const;
 
-    void setResultFormat(const QString& resultFormat);
+    void setResultFormat(const QString &resultFormat);
     QString resultFormat() const;
 
     void setResultType(const ImageResultType);
@@ -164,23 +140,29 @@ public:
     explicit OwsServiceManager(QObject *parent = nullptr);
 
 public Q_SLOTS:
-    void queryOwsCapabilities(const QUrl& queryUrl, const QString& serviceString = "WMS");
-    void queryWmsMap(const QUrl& url, const QString& layers, const QString& projection,
-                     const QString& bbox, const QString& format, const QString& styles = QString());
-    void queryWmsLevelZeroTile(const QUrl& url, const QString &layers, const QString &projection,
-                            const QString &format, const QString &styles = QString());
-    void queryWmsPreviewImage(const QUrl& url, const QString &layers, const QString &projection,
-                           const QString &format, const QString &styles = QString());
-    void queryWmsLegendImage(const QUrl& url);
+    void queryOwsCapabilities(const QUrl &queryUrl, const QString &serviceString = "WMS");
+    void queryWmsMap(const QUrl &url,
+                     const QString &layers,
+                     const QString &projection,
+                     const QString &bbox,
+                     const QString &format,
+                     const QString &styles = QString());
+    void queryWmsLevelZeroTile(const QUrl &url, const QString &layers, const QString &projection, const QString &format, const QString &styles = QString());
+    void queryWmsPreviewImage(const QUrl &url, const QString &layers, const QString &projection, const QString &format, const QString &styles = QString());
+    void queryWmsLegendImage(const QUrl &url);
 
-    void queryWmtsLevelZeroTile(const QString& url, const QString& style, const QString& tileMatrixSet);
-    void queryWmtsPreviewImage(const QString& url, const QString& style, const QString& tileMatrixSet);
-    void queryWmtsTile(const QString& url, const QString& style, const QString& tileMatrixSet,
-                       const QString& tileMatrix, const QString& tileRow, const QString& tileCol);
+    void queryWmtsLevelZeroTile(const QString &url, const QString &style, const QString &tileMatrixSet);
+    void queryWmtsPreviewImage(const QString &url, const QString &style, const QString &tileMatrixSet);
+    void queryWmtsTile(const QString &url,
+                       const QString &style,
+                       const QString &tileMatrixSet,
+                       const QString &tileMatrix,
+                       const QString &tileRow,
+                       const QString &tileCol);
 
-    void queryXYZPreviewImage(const QString& urlString);
-    void queryXYZLevelZeroTile(const QString& urlString);
-    void queryXYZImage(const QString urlString);    
+    void queryXYZPreviewImage(const QString &urlString);
+    void queryXYZLevelZeroTile(const QString &urlString);
+    void queryXYZImage(const QString urlString);
 
     void handleAuthentication(QNetworkReply *reply, QAuthenticator *authenticator);
 
@@ -203,10 +185,10 @@ Q_SIGNALS:
     void imageRequestResultReady();
 
 private Q_SLOTS:
-    void parseOwsCapabilities(QNetworkReply* reply);
-    void parseWmsCapabilities(QNetworkReply* reply);
-    void parseWmtsCapabilities(QNetworkReply* reply);
-    void parseImageResult(QNetworkReply* reply);
+    void parseOwsCapabilities(QNetworkReply *reply);
+    void parseWmsCapabilities(QNetworkReply *reply);
+    void parseWmtsCapabilities(QNetworkReply *reply);
+    void parseImageResult(QNetworkReply *reply);
 
 private:
     QUrl m_url;

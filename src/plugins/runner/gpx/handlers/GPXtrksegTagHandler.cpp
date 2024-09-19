@@ -8,11 +8,11 @@
 #include "MarbleDebug.h"
 
 #include "GPXElementDictionary.h"
-#include "GeoParser.h"
+#include "GeoDataMultiGeometry.h"
 #include "GeoDataPlacemark.h"
 #include "GeoDataPoint.h"
-#include "GeoDataMultiGeometry.h"
 #include "GeoDataTrack.h"
+#include "GeoParser.h"
 
 namespace Marble
 {
@@ -20,18 +20,17 @@ namespace gpx
 {
 GPX_DEFINE_TAG_HANDLER(trkseg)
 
-GeoNode* GPXtrksegTagHandler::parse(GeoParser& parser) const
+GeoNode *GPXtrksegTagHandler::parse(GeoParser &parser) const
 {
     Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1String(gpxTag_trkseg)));
 
     GeoStackItem parentItem = parser.parentElement();
-    if (parentItem.represents(gpxTag_trk))
-    {
-        GeoDataPlacemark* placemark = parentItem.nodeAs<GeoDataPlacemark>();
-        GeoDataMultiGeometry *multigeometry = static_cast<GeoDataMultiGeometry*>(placemark->geometry());
+    if (parentItem.represents(gpxTag_trk)) {
+        GeoDataPlacemark *placemark = parentItem.nodeAs<GeoDataPlacemark>();
+        GeoDataMultiGeometry *multigeometry = static_cast<GeoDataMultiGeometry *>(placemark->geometry());
         GeoDataTrack *track = new GeoDataTrack;
 
-        multigeometry->append( track );
+        multigeometry->append(track);
         return track;
     }
     return nullptr;

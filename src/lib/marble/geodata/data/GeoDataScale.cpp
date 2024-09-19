@@ -7,7 +7,8 @@
 #include "GeoDataScale.h"
 #include "GeoDataTypes.h"
 
-namespace Marble {
+namespace Marble
+{
 
 class GeoDataScalePrivate
 {
@@ -21,42 +22,42 @@ public:
     GeoDataScalePrivate();
 };
 
-GeoDataScalePrivate::GeoDataScalePrivate() :
-    m_x(1), m_y(1), m_z(1)
+GeoDataScalePrivate::GeoDataScalePrivate()
+    : m_x(1)
+    , m_y(1)
+    , m_z(1)
 {
     // nothing to do
 }
 
-GeoDataScale::GeoDataScale() : d( new GeoDataScalePrivate )
+GeoDataScale::GeoDataScale()
+    : d(new GeoDataScalePrivate)
 {
     // nothing to do
 }
 
-GeoDataScale::GeoDataScale( const Marble::GeoDataScale &other ) :
-    GeoDataObject( other ), d( new GeoDataScalePrivate( *other.d ) )
+GeoDataScale::GeoDataScale(const Marble::GeoDataScale &other)
+    : GeoDataObject(other)
+    , d(new GeoDataScalePrivate(*other.d))
 {
     // nothing to do
 }
 
-GeoDataScale &GeoDataScale::operator=( const GeoDataScale &other )
+GeoDataScale &GeoDataScale::operator=(const GeoDataScale &other)
 {
-    GeoDataObject::operator=( other );
+    GeoDataObject::operator=(other);
     *d = *other.d;
     return *this;
 }
 
-
-bool GeoDataScale::operator==( const GeoDataScale &other ) const
+bool GeoDataScale::operator==(const GeoDataScale &other) const
 {
-    return equals(other) &&
-           d->m_x == other.d->m_x &&
-           d->m_y == other.d->m_y &&
-           d->m_z == other.d->m_z;
+    return equals(other) && d->m_x == other.d->m_x && d->m_y == other.d->m_y && d->m_z == other.d->m_z;
 }
 
-bool GeoDataScale::operator!=( const GeoDataScale &other ) const
+bool GeoDataScale::operator!=(const GeoDataScale &other) const
 {
-    return !this->operator==( other );
+    return !this->operator==(other);
 }
 
 GeoDataScale::~GeoDataScale()
@@ -74,7 +75,7 @@ double GeoDataScale::x() const
     return d->m_x;
 }
 
-void GeoDataScale::setX( double x )
+void GeoDataScale::setX(double x)
 {
     d->m_x = x;
 }
@@ -84,7 +85,7 @@ double GeoDataScale::y() const
     return d->m_y;
 }
 
-void GeoDataScale::setY( double y )
+void GeoDataScale::setY(double y)
 {
     d->m_y = y;
 }
@@ -94,7 +95,7 @@ double GeoDataScale::z() const
     return d->m_z;
 }
 
-void GeoDataScale::setZ( double z )
+void GeoDataScale::setZ(double z)
 {
     d->m_z = z;
 }

@@ -76,7 +76,7 @@ public:
      *
      * @return range of tile indexes covering given geographical box at given zoom level
      */
-     virtual QRect tileIndexes(const GeoDataLatLonBox &latLonBox, int zoomLevel) const = 0;
+    virtual QRect tileIndexes(const GeoDataLatLonBox &latLonBox, int zoomLevel) const = 0;
 
     /**
      * @brief Get the boundary geo coordinates corresponding to a tile.
@@ -100,9 +100,9 @@ public:
      */
     GeoDataLatLonBox geoCoordinates(const TileId &tileId) const;
 
- private:
-     Q_DISABLE_COPY(GeoSceneAbstractTileProjection)
-     const QScopedPointer<GeoSceneAbstractTileProjectionPrivate> d_ptr;
+private:
+    Q_DISABLE_COPY(GeoSceneAbstractTileProjection)
+    const QScopedPointer<GeoSceneAbstractTileProjectionPrivate> d_ptr;
 };
 
 }

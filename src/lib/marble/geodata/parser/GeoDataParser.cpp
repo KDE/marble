@@ -4,7 +4,6 @@
     SPDX-License-Identifier: LGPL-2.0-or-later
 */
 
-
 // Own
 #include "GeoDataParser.h"
 
@@ -38,19 +37,15 @@ GeoDataParser::~GeoDataParser()
 
 bool GeoDataParser::isValidRootElement()
 {
-    if (m_source == GeoData_UNKNOWN)
-    {
-        if (GeoParser::isValidElement(kml::kmlTag_kml))
-        {
+    if (m_source == GeoData_UNKNOWN) {
+        if (GeoParser::isValidElement(kml::kmlTag_kml)) {
             m_source = GeoData_KML;
-        }
-        else
-        {
+        } else {
             Q_ASSERT(false);
             return false;
         }
     }
-    switch ((GeoDataSourceType) m_source) {
+    switch ((GeoDataSourceType)m_source) {
     // TODO: case GeoData_GeoRSS:
     case GeoData_KML:
         return isValidElement(kml::kmlTag_kml);
@@ -60,21 +55,18 @@ bool GeoDataParser::isValidRootElement()
     }
 }
 
-bool GeoDataParser::isValidElement(const QString& tagName) const
+bool GeoDataParser::isValidElement(const QString &tagName) const
 {
     if (!GeoParser::isValidElement(tagName))
         return false;
 
-    switch ((GeoDataSourceType) m_source) {
+    switch ((GeoDataSourceType)m_source) {
     // TODO: case GeoData_GeoRSS:
     case GeoData_KML: {
         const QStringView namespaceUri = this->namespaceUri();
-        return (namespaceUri == QLatin1String(kml::kmlTag_nameSpace20) ||
-                namespaceUri == QLatin1String(kml::kmlTag_nameSpace21) ||
-                namespaceUri == QLatin1String(kml::kmlTag_nameSpace22) ||
-                namespaceUri == QLatin1String(kml::kmlTag_nameSpaceOgc22) ||
-                namespaceUri == QLatin1String(kml::kmlTag_nameSpaceGx22) ||
-                namespaceUri == QLatin1String(kml::kmlTag_nameSpaceMx));
+        return (namespaceUri == QLatin1String(kml::kmlTag_nameSpace20) || namespaceUri == QLatin1String(kml::kmlTag_nameSpace21)
+                || namespaceUri == QLatin1String(kml::kmlTag_nameSpace22) || namespaceUri == QLatin1String(kml::kmlTag_nameSpaceOgc22)
+                || namespaceUri == QLatin1String(kml::kmlTag_nameSpaceGx22) || namespaceUri == QLatin1String(kml::kmlTag_nameSpaceMx));
     }
     default:
         break;
@@ -85,17 +77,17 @@ bool GeoDataParser::isValidElement(const QString& tagName) const
     return false;
 }
 
-GeoDocument* GeoDataParser::createDocument() const
+GeoDocument *GeoDataParser::createDocument() const
 {
     return new GeoDataDocument;
 }
 
 // Global helper function for the tag handlers
-GeoDataDocument* geoDataDoc(GeoParser& parser)
+GeoDataDocument *geoDataDoc(GeoParser &parser)
 {
-    GeoDocument* document = parser.activeDocument();
+    GeoDocument *document = parser.activeDocument();
     Q_ASSERT(document->isGeoDataDocument());
-    return static_cast<GeoDataDocument*>(document);
+    return static_cast<GeoDataDocument *>(document);
 }
 
 }

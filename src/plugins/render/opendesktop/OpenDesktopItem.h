@@ -5,7 +5,7 @@
 
 #ifndef OPENDESKTOPITEM_H
 #define OPENDESKTOPITEM_H
- 
+
 #include "AbstractDataPluginItem.h"
 #include "MarbleWidget.h"
 
@@ -15,60 +15,60 @@ class QAction;
 
 namespace Marble
 {
- 
+
 class OpenDesktopItem : public AbstractDataPluginItem
 {
     Q_OBJECT
 
-    public:
-        explicit OpenDesktopItem(QObject *parent);
+public:
+    explicit OpenDesktopItem(QObject *parent);
 
-        ~OpenDesktopItem() override;
+    ~OpenDesktopItem() override;
 
-        bool initialized() const override;
+    bool initialized() const override;
 
-        void addDownloadedFile( const QString& url, const QString& type ) override;
-        
-        void paint( QPainter *painter ) override;
+    void addDownloadedFile(const QString &url, const QString &type) override;
 
-        bool operator<( const AbstractDataPluginItem *other ) const override;
+    void paint(QPainter *painter) override;
 
-        void updateToolTip();
-        
-        QAction *action() override;
-        
-        QUrl profileUrl() const;
+    bool operator<(const AbstractDataPluginItem *other) const override;
 
-        QUrl avatarUrl() const;
+    void updateToolTip();
 
-        void setAvatarUrl( const QUrl& url );
+    QAction *action() override;
 
-        QString fullName() const;
+    QUrl profileUrl() const;
 
-        void setFullName(const QString& fullName );
+    QUrl avatarUrl() const;
 
-        QString location() const;
+    void setAvatarUrl(const QUrl &url);
 
-        void setLocation(const QString& location );
+    QString fullName() const;
 
-        QString role() const;
+    void setFullName(const QString &fullName);
 
-        void setRole(const QString& role );
+    QString location() const;
 
-        void setMarbleWidget(MarbleWidget *widget);
-    
-    public Q_SLOTS:
-        void openBrowser();
+    void setLocation(const QString &location);
 
-    private:
-        MarbleWidget *m_marbleWidget;
-        QString m_fullName;
-        QString m_location;
-        QString m_role;
-        QPixmap m_pixmap;
-        QUrl m_avatarUrl;
-        QAction* m_action;
+    QString role() const;
+
+    void setRole(const QString &role);
+
+    void setMarbleWidget(MarbleWidget *widget);
+
+public Q_SLOTS:
+    void openBrowser();
+
+private:
+    MarbleWidget *m_marbleWidget;
+    QString m_fullName;
+    QString m_location;
+    QString m_role;
+    QPixmap m_pixmap;
+    QUrl m_avatarUrl;
+    QAction *m_action;
 };
- 
+
 }
 #endif // OPENDESKTOPITEM_H

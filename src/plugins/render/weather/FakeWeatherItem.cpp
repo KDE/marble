@@ -8,8 +8,8 @@
 
 using namespace Marble;
 
-FakeWeatherItem::FakeWeatherItem( QObject *parent )
-    : WeatherItem( parent )
+FakeWeatherItem::FakeWeatherItem(QObject *parent)
+    : WeatherItem(parent)
 {
 }
 
@@ -19,12 +19,12 @@ FakeWeatherItem::~FakeWeatherItem()
 
 QString FakeWeatherItem::service() const
 {
-    return QStringLiteral( "fake" );
+    return QStringLiteral("fake");
 }
 
-void FakeWeatherItem::addDownloadedFile( const QString& url, const QString& type )
+void FakeWeatherItem::addDownloadedFile(const QString &url, const QString &type)
 {
     // There are no downloadable files for the fake backend
-    Q_UNUSED( url );
-    Q_UNUSED( type );
+    Q_UNUSED(url);
+    Q_UNUSED(type);
 }

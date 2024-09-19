@@ -6,27 +6,23 @@
 #include "OsmTagWriter.h"
 
 #include "GeoWriter.h"
-#include "OsmElementDictionary.h"
 #include "MarbleGlobal.h"
+#include "OsmElementDictionary.h"
 
 namespace Marble
 {
 
-static GeoTagWriterRegistrar s_writerOsm( GeoTagWriter::QualifiedName( "",
-                                                                       osm::osmTag_version06 ),
-                                               new OsmTagWriter() );
+static GeoTagWriterRegistrar s_writerOsm(GeoTagWriter::QualifiedName("", osm::osmTag_version06), new OsmTagWriter());
 
-
-bool OsmTagWriter::write( const GeoNode *node, GeoWriter& writer ) const
+bool OsmTagWriter::write(const GeoNode *node, GeoWriter &writer) const
 {
-    Q_UNUSED( node );
+    Q_UNUSED(node);
 
-    writer.writeStartElement( "osm" );
-    writer.writeAttribute( "version", QString::fromUtf8(osm::osmTag_version06) );
+    writer.writeStartElement("osm");
+    writer.writeAttribute("version", QString::fromUtf8(osm::osmTag_version06));
     writer.writeAttribute("generator", QLatin1String("Marble ") + Marble::MARBLE_VERSION_STRING);
 
     return true;
 }
 
 }
-

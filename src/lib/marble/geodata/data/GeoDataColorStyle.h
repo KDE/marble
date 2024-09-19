@@ -5,7 +5,6 @@
 // SPDX-FileCopyrightText: 2012 Mohammed Nafees <nafees.technocool@gmail.com>
 //
 
-
 #ifndef MARBLE_GEODATACOLORSTYLE_H
 #define MARBLE_GEODATACOLORSTYLE_H
 
@@ -57,15 +56,15 @@ class GeoDataColorStylePrivate;
  */
 class GEODATA_EXPORT GeoDataColorStyle : public GeoDataObject
 {
-  public:
+public:
     /// Provides type information for downcasting a GeoData
-    const char* nodeType() const override;
+    const char *nodeType() const override;
 
     /**
      * @brief  Set a new color
      * @param  value  the new color value
      */
-    void setColor( const QColor &value );
+    void setColor(const QColor &value);
     /// Return the color component
     QColor color() const;
 
@@ -73,11 +72,11 @@ class GEODATA_EXPORT GeoDataColorStyle : public GeoDataObject
     enum ColorMode { Normal, Random };
 
     /**
-      * @brief Returns the color that should be painted: Either color() or a randomized
-      * version of it, depending on the colorMode() setting. Randomization happens once
-      * per setColor() call, i.e. repeated calls to paintedColor always return the same
-      * color unless setColor is called in between.
-      */
+     * @brief Returns the color that should be painted: Either color() or a randomized
+     * version of it, depending on the colorMode() setting. Randomization happens once
+     * per setColor() call, i.e. repeated calls to paintedColor always return the same
+     * color unless setColor is called in between.
+     */
     QColor paintedColor() const;
 
     /**
@@ -88,28 +87,27 @@ class GEODATA_EXPORT GeoDataColorStyle : public GeoDataObject
     /// Return the color mode
     ColorMode colorMode() const;
 
-
     /**
-    * assignment operator
-    * @param other the other colorstyle
-    */
-    GeoDataColorStyle& operator=( const GeoDataColorStyle& other );
-    bool operator==( const GeoDataColorStyle &other ) const;
-    bool operator!=( const GeoDataColorStyle &other ) const;
+     * assignment operator
+     * @param other the other colorstyle
+     */
+    GeoDataColorStyle &operator=(const GeoDataColorStyle &other);
+    bool operator==(const GeoDataColorStyle &other) const;
+    bool operator!=(const GeoDataColorStyle &other) const;
 
     /**
      * @brief Serialize the style to a stream
      * @param  stream  the stream
      */
-    void pack( QDataStream& stream ) const override;
+    void pack(QDataStream &stream) const override;
     /**
      * @brief  Unserialize the style from a stream
      * @param  stream  the stream
      */
-    void unpack( QDataStream& stream ) override;
+    void unpack(QDataStream &stream) override;
 
     GeoDataColorStyle();
-    GeoDataColorStyle( const GeoDataColorStyle& other );
+    GeoDataColorStyle(const GeoDataColorStyle &other);
 
     ~GeoDataColorStyle() override;
 
@@ -118,8 +116,8 @@ class GEODATA_EXPORT GeoDataColorStyle : public GeoDataObject
      */
     static QString contrastColor(const QColor &color);
 
-  private:
-    GeoDataColorStylePrivate * const d;
+private:
+    GeoDataColorStylePrivate *const d;
 };
 
 }

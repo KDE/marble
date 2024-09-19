@@ -19,4 +19,4 @@ qreal msvc_atanh(qreal x);
 #define atanh msvc_atanh
 #endif
 
-#endif  // MATHHELPER_H
+#endif // MATHHELPER_H

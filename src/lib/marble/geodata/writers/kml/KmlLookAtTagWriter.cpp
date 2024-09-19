@@ -4,13 +4,12 @@
 // SPDX-FileCopyrightText: 2013 Illya Kovalevskyy <illya.kovalevskyy@gmail.com>
 //
 
-
 #include "KmlLookAtTagWriter.h"
 
 #include "GeoDataLookAt.h"
-#include "GeoDataTypes.h"
 #include "GeoDataTimeSpan.h"
 #include "GeoDataTimeStamp.h"
+#include "GeoDataTypes.h"
 #include "GeoWriter.h"
 #include "KmlElementDictionary.h"
 #include "KmlGroundOverlayWriter.h"
@@ -21,18 +20,14 @@
 namespace Marble
 {
 
-static GeoTagWriterRegistrar s_writerLookAt( GeoTagWriter::QualifiedName(GeoDataTypes::GeoDataLookAtType,
-                                                                            kml::kmlTag_nameSpaceOgc22),
-                                               new KmlLookAtTagWriter() );
+static GeoTagWriterRegistrar s_writerLookAt(GeoTagWriter::QualifiedName(GeoDataTypes::GeoDataLookAtType, kml::kmlTag_nameSpaceOgc22), new KmlLookAtTagWriter());
 
-
-bool KmlLookAtTagWriter::write( const GeoNode *node,
-                               GeoWriter& writer ) const
+bool KmlLookAtTagWriter::write(const GeoNode *node, GeoWriter &writer) const
 {
-    const GeoDataLookAt *lookAt = static_cast<const GeoDataLookAt*>(node);
+    const GeoDataLookAt *lookAt = static_cast<const GeoDataLookAt *>(node);
 
-    writer.writeStartElement( QString::fromUtf8(kml::kmlTag_LookAt) );
-    KmlObjectTagWriter::writeIdentifiers( writer, lookAt );
+    writer.writeStartElement(QString::fromUtf8(kml::kmlTag_LookAt));
+    KmlObjectTagWriter::writeIdentifiers(writer, lookAt);
 
     if (lookAt->timeStamp().when().isValid()) {
         writer.writeStartElement("gx:TimeStamp");
@@ -40,7 +35,7 @@ bool KmlLookAtTagWriter::write( const GeoNode *node,
         writer.writeEndElement();
     }
 
-    if( lookAt->timeSpan().isValid() ){
+    if (lookAt->timeSpan().isValid()) {
         writer.writeStartElement("gx:TimeSpan");
         if (lookAt->timeSpan().begin().when().isValid())
             writer.writeElement("begin", lookAt->timeSpan().begin().when().toString(Qt::ISODate));
@@ -49,11 +44,11 @@ bool KmlLookAtTagWriter::write( const GeoNode *node,
         writer.writeEndElement();
     }
 
-    writer.writeOptionalElement( "longitude", QString::number( lookAt->longitude( GeoDataCoordinates::Degree ), 'f', 10 ) );
-    writer.writeOptionalElement( "latitude", QString::number( lookAt->latitude( GeoDataCoordinates::Degree ), 'f', 10 ) );
-    writer.writeOptionalElement( "altitude", QString::number( lookAt->altitude(), 'f', 10 ) );
-    writer.writeOptionalElement( "range", QString::number( lookAt->range(), 'f', 10 ) );
-    KmlGroundOverlayWriter::writeAltitudeMode( writer, lookAt->altitudeMode() );
+    writer.writeOptionalElement("longitude", QString::number(lookAt->longitude(GeoDataCoordinates::Degree), 'f', 10));
+    writer.writeOptionalElement("latitude", QString::number(lookAt->latitude(GeoDataCoordinates::Degree), 'f', 10));
+    writer.writeOptionalElement("altitude", QString::number(lookAt->altitude(), 'f', 10));
+    writer.writeOptionalElement("range", QString::number(lookAt->range(), 'f', 10));
+    KmlGroundOverlayWriter::writeAltitudeMode(writer, lookAt->altitudeMode());
 
     writer.writeEndElement();
 

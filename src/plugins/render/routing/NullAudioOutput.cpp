@@ -5,8 +5,8 @@
 
 #include "AudioOutput.h"
 
-#include "MarbleDirs.h"
 #include "MarbleDebug.h"
+#include "MarbleDirs.h"
 #include "routing/instructions/RoutingInstruction.h"
 
 namespace Marble
@@ -15,8 +15,8 @@ namespace Marble
 class AudioOutputPrivate
 {
 public:
-  void audioOutputFinished();
-  void playInstructions();
+    void audioOutputFinished();
+    void playInstructions();
 };
 
 void AudioOutputPrivate::audioOutputFinished()
@@ -29,8 +29,9 @@ void AudioOutputPrivate::playInstructions()
     // nothing to do
 }
 
-AudioOutput::AudioOutput( QObject* parent ) : QObject( parent ),
-    d( new AudioOutputPrivate )
+AudioOutput::AudioOutput(QObject *parent)
+    : QObject(parent)
+    , d(new AudioOutputPrivate)
 {
     // nothing to do
 }
@@ -40,12 +41,12 @@ AudioOutput::~AudioOutput()
     delete d;
 }
 
-void AudioOutput::update( const Route &, qreal, qreal, bool )
+void AudioOutput::update(const Route &, qreal, qreal, bool)
 {
     // nothing to do
 }
 
-void AudioOutput::setMuted( bool )
+void AudioOutput::setMuted(bool)
 {
     // nothing to do
 }
@@ -55,7 +56,7 @@ bool AudioOutput::isMuted() const
     return true;
 }
 
-void AudioOutput::setSpeaker( const QString & )
+void AudioOutput::setSpeaker(const QString &)
 {
     // nothing to do
 }
@@ -65,7 +66,7 @@ QString AudioOutput::speaker() const
     return QString();
 }
 
-void AudioOutput::setSoundEnabled( bool )
+void AudioOutput::setSoundEnabled(bool)
 {
     // nothing to do
 }

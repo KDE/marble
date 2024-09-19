@@ -23,31 +23,22 @@ class MARBLE_EXPORT ConflictDialog : public QDialog
     Q_OBJECT
 
 public:
-    enum Button {
-        Local = 1,
-        Cloud,
-        AllLocal,
-        AllCloud
-    };
+    enum Button { Local = 1, Cloud, AllLocal, AllCloud };
 
-    enum ResolveAction {
-        AskUser,
-        PreferLocal,
-        PreferCloud
-    };
+    enum ResolveAction { AskUser, PreferLocal, PreferCloud };
 
-    explicit ConflictDialog( QWidget *parent = nullptr );
-    void setMergeItem( MergeItem *item );
+    explicit ConflictDialog(QWidget *parent = nullptr);
+    void setMergeItem(MergeItem *item);
 
 public Q_SLOTS:
     void open() override;
     void stopAutoResolve();
 
 Q_SIGNALS:
-    void resolveConflict( MergeItem *mergeItem );
+    void resolveConflict(MergeItem *mergeItem);
 
 private Q_SLOTS:
-    void resolveConflict( QAbstractButton *button );
+    void resolveConflict(QAbstractButton *button);
 
 private:
     void prepareLayout();

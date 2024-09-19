@@ -27,8 +27,8 @@ AbstractGeoPolygonGraphicsItem *GeoPolygonGraphicsItem::createGraphicsItem(const
     return new BuildingGraphicsItem(placemark, building);
 }
 
-GeoPolygonGraphicsItem::GeoPolygonGraphicsItem(const GeoDataPlacemark *placemark, const GeoDataPolygon *polygon) :
-    AbstractGeoPolygonGraphicsItem(placemark, polygon)
+GeoPolygonGraphicsItem::GeoPolygonGraphicsItem(const GeoDataPlacemark *placemark, const GeoDataPolygon *polygon)
+    : AbstractGeoPolygonGraphicsItem(placemark, polygon)
 {
     const int elevation = extractElevation(*placemark);
     setZValue(zValue() + elevation);
@@ -38,8 +38,8 @@ GeoPolygonGraphicsItem::GeoPolygonGraphicsItem(const GeoDataPlacemark *placemark
     setPaintLayers(QStringList(paintLayer));
 }
 
-GeoPolygonGraphicsItem::GeoPolygonGraphicsItem(const GeoDataPlacemark *placemark, const GeoDataLinearRing *ring) :
-    AbstractGeoPolygonGraphicsItem(placemark, ring)
+GeoPolygonGraphicsItem::GeoPolygonGraphicsItem(const GeoDataPlacemark *placemark, const GeoDataLinearRing *ring)
+    : AbstractGeoPolygonGraphicsItem(placemark, ring)
 {
     const int elevation = extractElevation(*placemark);
     setZValue(zValue() + elevation);

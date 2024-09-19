@@ -11,39 +11,39 @@
 #include "MarbleDirs.h"
 #include "ViewportParams.h"
 
-#include <QRect>
 #include <QColor>
 #include <QPainter>
 #include <QPainterPath>
 #include <QPushButton>
+#include <QRect>
 #include <QSvgRenderer>
 
 namespace Marble
 {
 
 CompassFloatItem::CompassFloatItem()
-    : AbstractFloatItem( nullptr ),
-      m_svgobj( nullptr ),
-      m_polarity( 0 ),
-      m_themeIndex( 0 ),
-      m_configDialog( nullptr ),
-      m_uiConfigWidget( nullptr )
+    : AbstractFloatItem(nullptr)
+    , m_svgobj(nullptr)
+    , m_polarity(0)
+    , m_themeIndex(0)
+    , m_configDialog(nullptr)
+    , m_uiConfigWidget(nullptr)
 {
 }
 
-CompassFloatItem::CompassFloatItem( const MarbleModel *marbleModel )
-    : AbstractFloatItem( marbleModel, QPointF( -1.0, 10.0 ), QSizeF( 75.0, 75.0 ) ),
-      m_isInitialized( false ),
-      m_svgobj( nullptr ),
-      m_compass(),
-      m_polarity( 0 ),
-      m_themeIndex( 0 ),
-      m_configDialog( nullptr ),
-      m_uiConfigWidget( nullptr )
+CompassFloatItem::CompassFloatItem(const MarbleModel *marbleModel)
+    : AbstractFloatItem(marbleModel, QPointF(-1.0, 10.0), QSizeF(75.0, 75.0))
+    , m_isInitialized(false)
+    , m_svgobj(nullptr)
+    , m_compass()
+    , m_polarity(0)
+    , m_themeIndex(0)
+    , m_configDialog(nullptr)
+    , m_uiConfigWidget(nullptr)
 {
 }
 
-CompassFloatItem::~CompassFloatItem ()
+CompassFloatItem::~CompassFloatItem()
 {
     delete m_svgobj;
 }
@@ -55,12 +55,12 @@ QStringList CompassFloatItem::backendTypes() const
 
 QString CompassFloatItem::name() const
 {
-    return tr( "Compass" );
+    return tr("Compass");
 }
 
 QString CompassFloatItem::guiString() const
 {
-    return tr( "&Compass" );
+    return tr("&Compass");
 }
 
 QString CompassFloatItem::nameId() const
@@ -75,7 +75,7 @@ QString CompassFloatItem::version() const
 
 QString CompassFloatItem::description() const
 {
-    return tr( "This is a float item that provides a compass." );
+    return tr("This is a float item that provides a compass.");
 }
 
 QString CompassFloatItem::copyrightYears() const
@@ -85,9 +85,8 @@ QString CompassFloatItem::copyrightYears() const
 
 QVector<PluginAuthor> CompassFloatItem::pluginAuthors() const
 {
-    return QVector<PluginAuthor>()
-            << PluginAuthor(QStringLiteral("Dennis Nienhüser"), QStringLiteral("nienhueser@kde.org"))
-            << PluginAuthor(QStringLiteral("Torsten Rahn"), QStringLiteral("tackat@kde.org"));
+    return QVector<PluginAuthor>() << PluginAuthor(QStringLiteral("Dennis Nienhüser"), QStringLiteral("nienhueser@kde.org"))
+                                   << PluginAuthor(QStringLiteral("Torsten Rahn"), QStringLiteral("tackat@kde.org"));
 }
 
 QIcon CompassFloatItem::icon() const
@@ -110,94 +109,90 @@ QPainterPath CompassFloatItem::backgroundShape() const
 {
     QRectF contentRect = this->contentRect();
     QPainterPath path;
-    int fontheight = QFontMetrics( font() ).ascent();
-    int compassLength = static_cast<int>( contentRect.height() ) - 5 - fontheight;
+    int fontheight = QFontMetrics(font()).ascent();
+    int compassLength = static_cast<int>(contentRect.height()) - 5 - fontheight;
 
-    path.addEllipse( QRectF( QPointF( marginLeft() + padding() + ( contentRect.width() - compassLength ) / 2,
-                                      marginTop() + padding() + 5 + fontheight ),
-                             QSize( compassLength, compassLength ) ).toRect() );
+    path.addEllipse(QRectF(QPointF(marginLeft() + padding() + (contentRect.width() - compassLength) / 2, marginTop() + padding() + 5 + fontheight),
+                           QSize(compassLength, compassLength))
+                        .toRect());
     return path;
 }
 
-void CompassFloatItem::setProjection( const ViewportParams *viewport )
+void CompassFloatItem::setProjection(const ViewportParams *viewport)
 {
     // figure out the polarity ...
-    if ( m_polarity != viewport->polarity() ) {
+    if (m_polarity != viewport->polarity()) {
         m_polarity = viewport->polarity();
         update();
     }
 
-    AbstractFloatItem::setProjection( viewport );
+    AbstractFloatItem::setProjection(viewport);
 }
 
-void CompassFloatItem::paintContent( QPainter *painter )
+void CompassFloatItem::paintContent(QPainter *painter)
 {
     painter->save();
 
-    QRectF compassRect( contentRect() );
+    QRectF compassRect(contentRect());
 
-    const QString dirstr =
-        (m_polarity == +1) ? tr("N") :
-        (m_polarity == -1) ? tr("S") :
-        /*else*/             QString();
+    const QString dirstr = (m_polarity == +1) ? tr("N")
+        : (m_polarity == -1)                  ? tr("S")
+                                              :
+                             /*else*/ QString();
 
-    int fontheight = QFontMetrics( font() ).ascent();
-    int fontwidth = QFontMetrics( font() ).boundingRect( dirstr ).width();
+    int fontheight = QFontMetrics(font()).ascent();
+    int fontwidth = QFontMetrics(font()).boundingRect(dirstr).width();
 
-    QPen outlinepen( background().color() );
-    outlinepen.setWidth( 2 );
-    QBrush outlinebrush( pen().color() );
+    QPen outlinepen(background().color());
+    outlinepen.setWidth(2);
+    QBrush outlinebrush(pen().color());
 
-    QPainterPath   outlinepath;
-    const QPointF  baseline( 0.5 * (qreal)( compassRect.width() - fontwidth ),
-                             (qreal)(fontheight) + 2.0 );
+    QPainterPath outlinepath;
+    const QPointF baseline(0.5 * (qreal)(compassRect.width() - fontwidth), (qreal)(fontheight) + 2.0);
 
-    outlinepath.addText( baseline, font(), dirstr );
+    outlinepath.addText(baseline, font(), dirstr);
 
-    painter->setPen( outlinepen );
-    painter->setBrush( outlinebrush );
-    painter->drawPath( outlinepath );
+    painter->setPen(outlinepen);
+    painter->setBrush(outlinebrush);
+    painter->drawPath(outlinepath);
 
-    painter->setPen( Qt::NoPen );
-    painter->drawPath( outlinepath );
+    painter->setPen(Qt::NoPen);
+    painter->drawPath(outlinepath);
 
-    int compassLength = static_cast<int>( compassRect.height() ) - 5 - fontheight;
-        
-    QSize compassSize( compassLength, compassLength ); 
+    int compassLength = static_cast<int>(compassRect.height()) - 5 - fontheight;
+
+    QSize compassSize(compassLength, compassLength);
 
     // Rerender compass pixmap if the size has changed
-    if ( m_compass.isNull() || m_compass.size() != compassSize ) {
-        m_compass = QPixmap( compassSize );
-        m_compass.fill( Qt::transparent );
-        QPainter mapPainter( &m_compass );
-        mapPainter.setViewport( m_compass.rect() );
-        m_svgobj->render( &mapPainter ); 
+    if (m_compass.isNull() || m_compass.size() != compassSize) {
+        m_compass = QPixmap(compassSize);
+        m_compass.fill(Qt::transparent);
+        QPainter mapPainter(&m_compass);
+        mapPainter.setViewport(m_compass.rect());
+        m_svgobj->render(&mapPainter);
     }
-    painter->drawPixmap( QPoint( static_cast<int>( compassRect.width() - compassLength ) / 2, fontheight + 5 ), m_compass );
+    painter->drawPixmap(QPoint(static_cast<int>(compassRect.width() - compassLength) / 2, fontheight + 5), m_compass);
 
     painter->restore();
 }
 
 QDialog *CompassFloatItem::configDialog()
 {
-    if ( !m_configDialog ) {
+    if (!m_configDialog) {
         m_configDialog = new QDialog();
         m_uiConfigWidget = new Ui::CompassConfigWidget;
-        m_uiConfigWidget->setupUi( m_configDialog );
+        m_uiConfigWidget->setupUi(m_configDialog);
         readSettings();
-        connect( m_uiConfigWidget->m_buttonBox, SIGNAL(accepted()),
-                SLOT(writeSettings()) );
-        connect( m_uiConfigWidget->m_buttonBox, SIGNAL(rejected()),
-                SLOT(readSettings()) );
-        QPushButton *applyButton = m_uiConfigWidget->m_buttonBox->button( QDialogButtonBox::Apply );
-        connect( applyButton, SIGNAL(clicked()),
-                 this,        SLOT(writeSettings()) );
+        connect(m_uiConfigWidget->m_buttonBox, SIGNAL(accepted()), SLOT(writeSettings()));
+        connect(m_uiConfigWidget->m_buttonBox, SIGNAL(rejected()), SLOT(readSettings()));
+        QPushButton *applyButton = m_uiConfigWidget->m_buttonBox->button(QDialogButtonBox::Apply);
+        connect(applyButton, SIGNAL(clicked()), this, SLOT(writeSettings()));
     }
 
     return m_configDialog;
 }
 
-QHash<QString,QVariant> CompassFloatItem::settings() const
+QHash<QString, QVariant> CompassFloatItem::settings() const
 {
     QHash<QString, QVariant> result = AbstractFloatItem::settings();
 
@@ -206,9 +201,9 @@ QHash<QString,QVariant> CompassFloatItem::settings() const
     return result;
 }
 
-void CompassFloatItem::setSettings( const QHash<QString,QVariant> &settings )
+void CompassFloatItem::setSettings(const QHash<QString, QVariant> &settings)
 {
-    AbstractFloatItem::setSettings( settings );
+    AbstractFloatItem::setSettings(settings);
 
     m_themeIndex = settings.value(QStringLiteral("theme"), 0).toInt();
 
@@ -217,12 +212,12 @@ void CompassFloatItem::setSettings( const QHash<QString,QVariant> &settings )
 
 void CompassFloatItem::readSettings()
 {
-    if ( m_uiConfigWidget && m_themeIndex >= 0 && m_themeIndex < m_uiConfigWidget->m_themeList->count() ) {
-        m_uiConfigWidget->m_themeList->setCurrentRow( m_themeIndex );
+    if (m_uiConfigWidget && m_themeIndex >= 0 && m_themeIndex < m_uiConfigWidget->m_themeList->count()) {
+        m_uiConfigWidget->m_themeList->setCurrentRow(m_themeIndex);
     }
 
     QString theme = QStringLiteral(":/compass.svg");
-    switch( m_themeIndex ) {
+    switch (m_themeIndex) {
     case 1:
         theme = QStringLiteral(":/compass-arrows.svg");
         break;
@@ -235,18 +230,18 @@ void CompassFloatItem::readSettings()
     }
 
     delete m_svgobj;
-    m_svgobj = new QSvgRenderer( theme, this );
+    m_svgobj = new QSvgRenderer(theme, this);
     m_compass = QPixmap();
 }
 
 void CompassFloatItem::writeSettings()
 {
-    if ( m_uiConfigWidget ) {
+    if (m_uiConfigWidget) {
         m_themeIndex = m_uiConfigWidget->m_themeList->currentRow();
     }
     readSettings();
     update();
-    emit settingsChanged( nameId() );
+    emit settingsChanged(nameId());
 }
 
 }

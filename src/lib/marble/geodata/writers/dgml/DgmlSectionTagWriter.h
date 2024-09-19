@@ -14,7 +14,7 @@ namespace Marble
 class DgmlSectionTagWriter : public GeoTagWriter
 {
 public:
-    bool write( const GeoNode *node, GeoWriter& writer ) const override;    
+    bool write(const GeoNode *node, GeoWriter &writer) const override;
 };
 
 }

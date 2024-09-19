@@ -14,8 +14,8 @@
 namespace Marble
 {
 
-LogRunner::LogRunner( QObject *parent ) :
-    ParsingRunner( parent )
+LogRunner::LogRunner(QObject *parent)
+    : ParsingRunner(parent)
 {
 }
 
@@ -25,32 +25,32 @@ LogRunner::~LogRunner()
 
 GeoDataDocument *LogRunner::parseFile(const QString &fileName, DocumentRole role, QString &errorString)
 {
-    QFile file( fileName );
-    if ( !file.exists() ) {
+    QFile file(fileName);
+    if (!file.exists()) {
         errorString = QStringLiteral("File %1 does not exist").arg(fileName);
         mDebug() << errorString;
         return nullptr;
     }
 
-    file.open( QIODevice::ReadOnly );
-    QTextStream stream( &file );
+    file.open(QIODevice::ReadOnly);
+    QTextStream stream(&file);
 
     GeoDataLineString *const track = new GeoDataLineString;
 
     GeoDataPlacemark *const placemark = new GeoDataPlacemark;
-    placemark->setGeometry( track );
+    placemark->setGeometry(track);
 
     GeoDataDocument *document = new GeoDataDocument();
-    document->setDocumentRole( role );
-    document->append( placemark );
+    document->setDocumentRole(role);
+    document->append(placemark);
 
     int count = 0;
     bool error = false;
-    while( !stream.atEnd() || error ){
+    while (!stream.atEnd() || error) {
         const QString line = stream.readLine();
         const QStringList list = line.split(QLatin1Char(','));
 
-        if ( list.size() != 7 ) {
+        if (list.size() != 7) {
             mDebug() << "Aborting due to error in line" << count << ". Line was:" << line;
             error = true;
             break;
@@ -64,31 +64,31 @@ GeoDataDocument *LogRunner::parseFile(const QString &fileName, DocumentRole role
         const QString strHdop = list[5];
         const QString strTime = list[6];
 
-        if ( strLat.isEmpty() || strLon.isEmpty() || strElevation.isEmpty() ) {
+        if (strLat.isEmpty() || strLon.isEmpty() || strElevation.isEmpty()) {
             continue;
         }
 
         bool okLat, okLon, okAlt = false;
-        const qreal lat = strLat.toDouble( &okLat );
-        const qreal lon = strLon.toDouble( &okLon );
-        const qreal alt = strElevation.toDouble( &okAlt );
+        const qreal lat = strLat.toDouble(&okLat);
+        const qreal lon = strLon.toDouble(&okLon);
+        const qreal alt = strElevation.toDouble(&okAlt);
 
-        if ( !okLat || !okLon || !okAlt ) {
+        if (!okLat || !okLon || !okAlt) {
             continue;
         }
 
-        GeoDataCoordinates coord( lon, lat, alt, GeoDataCoordinates::Degree );
-        track->append( coord );
+        GeoDataCoordinates coord(lon, lat, alt, GeoDataCoordinates::Degree);
+        track->append(coord);
     }
 
     file.close();
-    if ( track->size() == 0 || error ) {
+    if (track->size() == 0 || error) {
         delete document;
         document = nullptr;
         return nullptr;
     }
 
-    document->setFileName( fileName );
+    document->setFileName(fileName);
     return document;
 }
 

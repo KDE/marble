@@ -13,7 +13,8 @@
 class QLineEdit;
 class QDialogButtonBox;
 
-namespace Marble {
+namespace Marble
+{
 
 class OsmRelationEditorDialogPrivate;
 class OsmTagEditorWidget;
@@ -29,7 +30,7 @@ class MARBLE_EXPORT OsmRelationEditorDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit OsmRelationEditorDialog( OsmPlacemarkData *relationData, QWidget *parent = nullptr );
+    explicit OsmRelationEditorDialog(OsmPlacemarkData *relationData, QWidget *parent = nullptr);
     ~OsmRelationEditorDialog() override;
 
 private Q_SLOTS:

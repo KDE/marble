@@ -14,21 +14,21 @@
 namespace Marble
 {
 
-GosmorePlugin::GosmorePlugin( QObject *parent ) :
-    RoutingRunnerPlugin( parent )
+GosmorePlugin::GosmorePlugin(QObject *parent)
+    : RoutingRunnerPlugin(parent)
 {
     setSupportedCelestialBodies(QStringList(QStringLiteral("earth")));
-    setCanWorkOffline( true );
+    setCanWorkOffline(true);
 }
 
 QString GosmorePlugin::name() const
 {
-    return tr( "Gosmore Routing" );
+    return tr("Gosmore Routing");
 }
 
 QString GosmorePlugin::guiString() const
 {
-    return tr( "Gosmore" );
+    return tr("Gosmore");
 }
 
 QString GosmorePlugin::nameId() const
@@ -43,7 +43,7 @@ QString GosmorePlugin::version() const
 
 QString GosmorePlugin::description() const
 {
-    return tr( "Offline route retrieval using Gosmore" );
+    return tr("Offline route retrieval using Gosmore");
 }
 
 QString GosmorePlugin::copyrightYears() const
@@ -53,9 +53,8 @@ QString GosmorePlugin::copyrightYears() const
 
 QVector<PluginAuthor> GosmorePlugin::pluginAuthors() const
 {
-    return QVector<PluginAuthor>()
-            << PluginAuthor(QStringLiteral("Dennis Nienhüser"), QStringLiteral("nienhueser@kde.org"))
-            << PluginAuthor(QStringLiteral("Bernhard Beschow"), QStringLiteral("bbeschow@cs.tu-berlin.de"));
+    return QVector<PluginAuthor>() << PluginAuthor(QStringLiteral("Dennis Nienhüser"), QStringLiteral("nienhueser@kde.org"))
+                                   << PluginAuthor(QStringLiteral("Bernhard Beschow"), QStringLiteral("bbeschow@cs.tu-berlin.de"));
 }
 
 RoutingRunner *GosmorePlugin::newRunner() const
@@ -66,11 +65,11 @@ RoutingRunner *GosmorePlugin::newRunner() const
 bool GosmorePlugin::canWork() const
 {
     QDir mapDir(MarbleDirs::localPath() + QLatin1String("/maps/earth/gosmore/"));
-    QFileInfo mapFile = QFileInfo ( mapDir, "gosmore.pak" );
+    QFileInfo mapFile = QFileInfo(mapDir, "gosmore.pak");
     return mapFile.exists();
 }
 
-bool GosmorePlugin::supportsTemplate( RoutingProfilesModel::ProfileTemplate profileTemplate ) const
+bool GosmorePlugin::supportsTemplate(RoutingProfilesModel::ProfileTemplate profileTemplate) const
 {
     return profileTemplate == RoutingProfilesModel::CarFastestTemplate;
 }

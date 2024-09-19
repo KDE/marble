@@ -15,18 +15,17 @@ class GeoDataChangePrivate : public GeoDataContainerPrivate
 {
 };
 
-
 GeoDataChange::GeoDataChange()
-  : GeoDataContainer(new GeoDataChangePrivate)
+    : GeoDataContainer(new GeoDataChangePrivate)
 {
 }
 
 GeoDataChange::GeoDataChange(const GeoDataChange &other)
-  : GeoDataContainer(other, new GeoDataChangePrivate(*other.d_func()))
+    : GeoDataContainer(other, new GeoDataChangePrivate(*other.d_func()))
 {
 }
 
-GeoDataChange &GeoDataChange::operator=( const GeoDataChange &other )
+GeoDataChange &GeoDataChange::operator=(const GeoDataChange &other)
 {
     if (this != &other) {
         Q_D(GeoDataChange);
@@ -36,21 +35,21 @@ GeoDataChange &GeoDataChange::operator=( const GeoDataChange &other )
     return *this;
 }
 
-bool GeoDataChange::operator==( const GeoDataChange &other ) const
+bool GeoDataChange::operator==(const GeoDataChange &other) const
 {
     return GeoDataContainer::equals(other);
 }
 
-bool GeoDataChange::operator!=( const GeoDataChange &other ) const
+bool GeoDataChange::operator!=(const GeoDataChange &other) const
 {
-    return !this->operator==( other );
+    return !this->operator==(other);
 }
 
 GeoDataChange::~GeoDataChange()
 {
 }
 
-GeoDataFeature * GeoDataChange::clone() const
+GeoDataFeature *GeoDataChange::clone() const
 {
     return new GeoDataChange(*this);
 }

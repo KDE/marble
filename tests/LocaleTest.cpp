@@ -3,15 +3,16 @@
 // SPDX-FileCopyrightText: 2015 Ilya Kowalewski <illya.kovalevskyy@gmail.com>
 //
 
-#include <QTest>
-#include "MarbleLocale.h"
 #include "MarbleGlobal.h"
+#include "MarbleLocale.h"
 #include "TestUtils.h"
+#include <QTest>
 
 Q_DECLARE_METATYPE(Marble::MarbleLocale::MeasurementSystem)
 Q_DECLARE_METATYPE(Marble::MarbleLocale::MeasureUnit)
 
-namespace Marble {
+namespace Marble
+{
 
 class LocaleTest : public QObject
 {
@@ -76,6 +77,6 @@ void LocaleTest::meterToCustomUnit()
 
 } // namespace Marble
 
-QTEST_MAIN( Marble::LocaleTest )
+QTEST_MAIN(Marble::LocaleTest)
 
 #include "LocaleTest.moc"

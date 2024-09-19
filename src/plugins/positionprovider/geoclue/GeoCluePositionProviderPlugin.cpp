@@ -7,13 +7,11 @@
 
 #include "GeoCute/PositionProvider.h"
 
-
-
 using namespace Marble;
 
 QString GeoCluePositionProviderPlugin::name() const
 {
-    return tr( "GeoClue position provider Plugin" );
+    return tr("GeoClue position provider Plugin");
 }
 
 QString GeoCluePositionProviderPlugin::nameId() const
@@ -23,12 +21,12 @@ QString GeoCluePositionProviderPlugin::nameId() const
 
 QString GeoCluePositionProviderPlugin::guiString() const
 {
-    return tr( "GeoClue" );
+    return tr("GeoClue");
 }
 
 QString GeoCluePositionProviderPlugin::description() const
 {
-    return tr( "Reports the position via the GeoClue Location Framework." );
+    return tr("Reports the position via the GeoClue Location Framework.");
 }
 
 QIcon GeoCluePositionProviderPlugin::icon() const
@@ -40,10 +38,8 @@ void GeoCluePositionProviderPlugin::initialize()
 {
     m_positionProvider = GeoCute::PositionProvider::detailed();
     if (m_positionProvider) {
-        connect( m_positionProvider, SIGNAL(positionChanged(GeoCute::Position)),
-                 SLOT(updatePosition(GeoCute::Position)) );
-        connect( m_positionProvider, SIGNAL(statusChanged(GeoCute::Status)),
-                 SLOT(updateStatus(GeoCute::Status)) );
+        connect(m_positionProvider, SIGNAL(positionChanged(GeoCute::Position)), SLOT(updatePosition(GeoCute::Position)));
+        connect(m_positionProvider, SIGNAL(statusChanged(GeoCute::Status)), SLOT(updateStatus(GeoCute::Status)));
     }
 }
 
@@ -52,7 +48,7 @@ bool GeoCluePositionProviderPlugin::isInitialized() const
     return m_positionProvider;
 }
 
-PositionProviderPlugin* GeoCluePositionProviderPlugin::newInstance() const
+PositionProviderPlugin *GeoCluePositionProviderPlugin::newInstance() const
 {
     return new GeoCluePositionProviderPlugin;
 }
@@ -72,7 +68,8 @@ GeoDataAccuracy GeoCluePositionProviderPlugin::accuracy() const
     return m_accuracy;
 }
 
-GeoCluePositionProviderPlugin::GeoCluePositionProviderPlugin() : m_positionProvider(0)
+GeoCluePositionProviderPlugin::GeoCluePositionProviderPlugin()
+    : m_positionProvider(0)
 {
 }
 
@@ -83,8 +80,7 @@ GeoCluePositionProviderPlugin::~GeoCluePositionProviderPlugin()
 
 void GeoCluePositionProviderPlugin::updatePosition(GeoCute::Position newPosition)
 {
-    m_position = GeoDataCoordinates(newPosition.longitude, newPosition.latitude,
-                                    newPosition.altitude, GeoDataCoordinates::Degree);
+    m_position = GeoDataCoordinates(newPosition.longitude, newPosition.latitude, newPosition.altitude, GeoDataCoordinates::Degree);
     m_accuracy.level = static_cast<GeoDataAccuracy::Level>(newPosition.accuracy.level);
     m_accuracy.horizontal = newPosition.accuracy.horizontal;
     m_accuracy.vertical = newPosition.accuracy.vertical;

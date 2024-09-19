@@ -8,48 +8,49 @@
 #include "GeoDataVec2.h"
 #include "MarbleGlobal.h"
 
-namespace Marble {
+namespace Marble
+{
 
 class GeoDataScreenOverlayPrivate;
 
 /**
  */
-class GEODATA_EXPORT GeoDataScreenOverlay: public GeoDataOverlay
+class GEODATA_EXPORT GeoDataScreenOverlay : public GeoDataOverlay
 {
 public:
     GeoDataScreenOverlay();
 
-    GeoDataScreenOverlay( const GeoDataScreenOverlay &other );
+    GeoDataScreenOverlay(const GeoDataScreenOverlay &other);
 
     ~GeoDataScreenOverlay() override;
 
-    GeoDataScreenOverlay& operator=( const GeoDataScreenOverlay &other );
-    bool operator==( const GeoDataScreenOverlay &other ) const;
-    bool operator!=( const GeoDataScreenOverlay &other ) const;
+    GeoDataScreenOverlay &operator=(const GeoDataScreenOverlay &other);
+    bool operator==(const GeoDataScreenOverlay &other) const;
+    bool operator!=(const GeoDataScreenOverlay &other) const;
 
-    GeoDataFeature * clone() const override;
+    GeoDataFeature *clone() const override;
 
     /** Provides type information for downcasting a GeoNode */
-    const char* nodeType() const override;
+    const char *nodeType() const override;
 
     GeoDataVec2 overlayXY() const;
-    void setOverlayXY( const GeoDataVec2 &vec2 );
+    void setOverlayXY(const GeoDataVec2 &vec2);
     void setOverlayXY(qreal x, qreal y, GeoDataVec2::Unit xunit, GeoDataVec2::Unit yunit);
 
     GeoDataVec2 screenXY() const;
-    void setScreenXY( const GeoDataVec2 &vec2 );
+    void setScreenXY(const GeoDataVec2 &vec2);
     void setScreenXY(qreal x, qreal y, GeoDataVec2::Unit xunit, GeoDataVec2::Unit yunit);
 
     GeoDataVec2 rotationXY() const;
-    void setRotationXY( const GeoDataVec2 &vec2 );
+    void setRotationXY(const GeoDataVec2 &vec2);
     void setRotationXY(qreal x, qreal y, GeoDataVec2::Unit xunit, GeoDataVec2::Unit yunit);
 
     GeoDataVec2 size() const;
-    void setSize( const GeoDataVec2 &vec2 );
+    void setSize(const GeoDataVec2 &vec2);
     void setSize(qreal x, qreal y, GeoDataVec2::Unit xunit, GeoDataVec2::Unit yunit);
 
     qreal rotation() const;
-    void setRotation( qreal rotation );
+    void setRotation(qreal rotation);
 
 private:
     Q_DECLARE_PRIVATE(GeoDataScreenOverlay)

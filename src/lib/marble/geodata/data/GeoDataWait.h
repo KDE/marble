@@ -16,7 +16,6 @@ namespace Marble
 class GEODATA_EXPORT GeoDataWait : public GeoDataTourPrimitive
 {
 public:
-
     GeoDataWait();
     ~GeoDataWait() override;
 

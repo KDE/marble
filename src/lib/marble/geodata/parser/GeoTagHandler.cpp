@@ -4,13 +4,11 @@
     SPDX-License-Identifier: LGPL-2.0-or-later
 */
 
-
 // Own
 #include "GeoTagHandler.h"
 
 // Marble
 #include "MarbleDebug.h"
-
 
 namespace Marble
 {
@@ -18,7 +16,7 @@ namespace Marble
 // Set to a value greater than 0, to dump tag handlers as they get registered
 #define DUMP_TAG_HANDLER_REGISTRATION 0
 
-GeoTagHandler::TagHash* GeoTagHandler::s_tagHandlerHash = nullptr;
+GeoTagHandler::TagHash *GeoTagHandler::s_tagHandlerHash = nullptr;
 
 GeoTagHandler::GeoTagHandler()
 {
@@ -28,7 +26,7 @@ GeoTagHandler::~GeoTagHandler()
 {
 }
 
-GeoTagHandler::TagHash* GeoTagHandler::tagHandlerHash()
+GeoTagHandler::TagHash *GeoTagHandler::tagHandlerHash()
 {
     if (!s_tagHandlerHash)
         s_tagHandlerHash = new TagHash();
@@ -37,9 +35,9 @@ GeoTagHandler::TagHash* GeoTagHandler::tagHandlerHash()
     return s_tagHandlerHash;
 }
 
-void GeoTagHandler::registerHandler(const GeoParser::QualifiedName& qName, const GeoTagHandler* handler)
+void GeoTagHandler::registerHandler(const GeoParser::QualifiedName &qName, const GeoTagHandler *handler)
 {
-    TagHash* hash = tagHandlerHash();
+    TagHash *hash = tagHandlerHash();
 
     Q_ASSERT(!hash->contains(qName));
     hash->insert(qName, handler);
@@ -50,9 +48,9 @@ void GeoTagHandler::registerHandler(const GeoParser::QualifiedName& qName, const
 #endif
 }
 
-void GeoTagHandler::unregisterHandler(const GeoParser::QualifiedName& qName)
+void GeoTagHandler::unregisterHandler(const GeoParser::QualifiedName &qName)
 {
-    TagHash* hash = tagHandlerHash();
+    TagHash *hash = tagHandlerHash();
 
     Q_ASSERT(hash->contains(qName));
     delete hash->value(qName);
@@ -60,9 +58,9 @@ void GeoTagHandler::unregisterHandler(const GeoParser::QualifiedName& qName)
     Q_ASSERT(!hash->contains(qName));
 }
 
-const GeoTagHandler* GeoTagHandler::recognizes(const GeoParser::QualifiedName& qName)
+const GeoTagHandler *GeoTagHandler::recognizes(const GeoParser::QualifiedName &qName)
 {
-    TagHash* hash = tagHandlerHash();
+    TagHash *hash = tagHandlerHash();
 
     if (!hash->contains(qName))
         return nullptr;

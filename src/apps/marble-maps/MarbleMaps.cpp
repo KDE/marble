@@ -10,22 +10,22 @@
 #include <QGuiApplication>
 
 #ifdef Q_OS_ANDROID
-#include <QtAndroid>
 #include <QAndroidJniObject>
+#include <QtAndroid>
 #include <qandroidfunctions.h>
 #endif
 
-namespace Marble {
-
-MarbleMaps::MarbleMaps(QQuickItem *parent) :
-    MarbleQuickItem(parent),
-    m_suspended(false),
-    m_keepScreenOn(false)
+namespace Marble
 {
-    QGuiApplication* application = qobject_cast<QGuiApplication*>(QGuiApplication::instance());
+
+MarbleMaps::MarbleMaps(QQuickItem *parent)
+    : MarbleQuickItem(parent)
+    , m_suspended(false)
+    , m_keepScreenOn(false)
+{
+    QGuiApplication *application = qobject_cast<QGuiApplication *>(QGuiApplication::instance());
     if (application) {
-        connect(application, SIGNAL(applicationStateChanged(Qt::ApplicationState)),
-                this, SLOT(handleApplicationStateChange(Qt::ApplicationState)));
+        connect(application, SIGNAL(applicationStateChanged(Qt::ApplicationState)), this, SLOT(handleApplicationStateChange(Qt::ApplicationState)));
     }
 
 #ifdef Q_OS_ANDROID
@@ -43,7 +43,7 @@ MarbleMaps::MarbleMaps(QQuickItem *parent) :
                 QAndroidJniObject const path = data.callObjectMethod("getPath", "()Ljava/lang/String;");
                 if (path.isValid()) {
                     model()->addGeoDataFile(path.toString());
-                    connect( model()->fileManager(), SIGNAL(centeredDocument(GeoDataLatLonBox)), this, SLOT(centerOn(GeoDataLatLonBox)) );
+                    connect(model()->fileManager(), SIGNAL(centeredDocument(GeoDataLatLonBox)), this, SLOT(centerOn(GeoDataLatLonBox)));
                 }
             }
         }
@@ -67,17 +67,18 @@ void MarbleMaps::setKeepScreenOn(bool screenOn)
         return;
     }
     m_keepScreenOn = screenOn;
-    char const * const action = m_keepScreenOn ? "addFlags" : "clearFlags";
+    char const *const action = m_keepScreenOn ? "addFlags" : "clearFlags";
 #ifdef Q_OS_ANDROID
-    QtAndroid::runOnAndroidThread([action](){
-    QAndroidJniObject activity = QtAndroid::androidActivity();
-    if (activity.isValid()) {
-        QAndroidJniObject window = activity.callObjectMethod("getWindow", "()Landroid/view/Window;");
-        if (window.isValid()) {
-            const int FLAG_KEEP_SCREEN_ON = 128;
-            window.callMethod<void>(action, "(I)V", FLAG_KEEP_SCREEN_ON);
+    QtAndroid::runOnAndroidThread([action]() {
+        QAndroidJniObject activity = QtAndroid::androidActivity();
+        if (activity.isValid()) {
+            QAndroidJniObject window = activity.callObjectMethod("getWindow", "()Landroid/view/Window;");
+            if (window.isValid()) {
+                const int FLAG_KEEP_SCREEN_ON = 128;
+                window.callMethod<void>(action, "(I)V", FLAG_KEEP_SCREEN_ON);
+            }
         }
-    }});
+    });
 #else
     Q_UNUSED(action);
 #endif

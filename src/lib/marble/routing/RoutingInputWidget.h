@@ -22,68 +22,67 @@ class MarbleModel;
 class MarblePlacemarkModel;
 
 /**
-  * Combines a line edit for input and a couple of buttons to let
-  * the user type in a search term, find according placemarks using
-  * the marble runner manager and store one of them as the current
-  * selection (target position)
-  */
+ * Combines a line edit for input and a couple of buttons to let
+ * the user type in a search term, find according placemarks using
+ * the marble runner manager and store one of them as the current
+ * selection (target position)
+ */
 class RoutingInputWidget : public QWidget
 {
     Q_OBJECT
 
 public:
-
     /** Constructor */
-    explicit RoutingInputWidget( MarbleModel* model, int index, QWidget *parent = nullptr );
+    explicit RoutingInputWidget(MarbleModel *model, int index, QWidget *parent = nullptr);
 
     /** Destructor */
     ~RoutingInputWidget() override;
 
     /**
-      * Returns true if the user has selected a valid geo position
-      * @see targetPosition
-      */
+     * Returns true if the user has selected a valid geo position
+     * @see targetPosition
+     */
     bool hasTargetPosition() const;
 
     /**
-      * Returns the geoposition selected by the user, or a default
-      * constructed geoposition if hasTargetPosition returns false
-      * @see hasTargetPosition selectPlacemark
-      */
+     * Returns the geoposition selected by the user, or a default
+     * constructed geoposition if hasTargetPosition returns false
+     * @see hasTargetPosition selectPlacemark
+     */
     GeoDataCoordinates targetPosition() const;
 
     /**
-      * Returns the placemark model that contains search results
-      */
+     * Returns the placemark model that contains search results
+     */
     MarblePlacemarkModel *searchResultModel();
 
     /**
-      * Returns false iff the input text is empty
-      */
+     * Returns false iff the input text is empty
+     */
     bool hasInput() const;
 
     /**
-      * Change the data index in the route request model
-      */
-    void setIndex( int index );
+     * Change the data index in the route request model
+     */
+    void setIndex(int index);
 
     /**
-      * Remove target position and user input, if any
-      */
+     * Remove target position and user input, if any
+     */
     void clear();
 
 public Q_SLOTS:
     /**
-      * Search for placemarks matching the current input text. Does nothing
-      * if input is empty
-      */
+     * Search for placemarks matching the current input text. Does nothing
+     * if input is empty
+     */
     void findPlacemarks();
 
     /** Set the target position to the given coordinates,
-      * eliminating any previously set positions
-      * @see selectPlacemark hasTargetPosition
-      */
-    void setTargetPosition( const GeoDataCoordinates &position, const QString &name = QString() );
+     * eliminating any previously set positions
+     * @see selectPlacemark hasTargetPosition
+     */
+    void setTargetPosition(const GeoDataCoordinates &position, const QString &name = QString());
 
     /** Cancel a started input request from the map */
     void abortMapInputRequest();
@@ -93,23 +92,23 @@ public Q_SLOTS:
 
 Q_SIGNALS:
     /** All runners are finished */
-    void searchFinished( RoutingInputWidget * );
+    void searchFinished(RoutingInputWidget *);
 
     /** User requests to remove this widget */
-    void removalRequest( RoutingInputWidget * );
+    void removalRequest(RoutingInputWidget *);
 
     /** User requests to activate this widget */
-    void activityRequest( RoutingInputWidget * );
+    void activityRequest(RoutingInputWidget *);
 
     /** User requests position input from the map */
-    void mapInputModeEnabled( RoutingInputWidget *, bool enabled );
+    void mapInputModeEnabled(RoutingInputWidget *, bool enabled);
 
     /** hasTargetPosition changed because of selecting a placemark or changing the search term */
-    void targetValidityChanged( bool targetValid );
+    void targetValidityChanged(bool targetValid);
 
 private Q_SLOTS:
     /** Runner progress */
-    void setPlacemarkModel( QAbstractItemModel * );
+    void setPlacemarkModel(QAbstractItemModel *);
 
     /** Handle click on the goto target button */
     void requestActivity();
@@ -118,7 +117,7 @@ private Q_SLOTS:
     void requestRemoval();
 
     /** Handle click on the map input button */
-    void setMapInputModeEnabled( bool enabled );
+    void setMapInputModeEnabled(bool enabled);
 
     /** All runners have completed */
     void finishSearch();
@@ -127,21 +126,21 @@ private Q_SLOTS:
     void setInvalid();
 
     /** Set the target position (dragging) */
-    void updatePosition( int index, const GeoDataCoordinates &position );
+    void updatePosition(int index, const GeoDataCoordinates &position);
 
     void reverseGeocoding();
 
-    void retrieveReverseGeocodingResult( const GeoDataCoordinates &coordinates, const GeoDataPlacemark &placemark );
+    void retrieveReverseGeocodingResult(const GeoDataCoordinates &coordinates, const GeoDataPlacemark &placemark);
 
     void setHomePosition();
 
     void setCurrentLocation();
 
-    void updateCurrentLocationButton( PositionProviderStatus status );
+    void updateCurrentLocationButton(PositionProviderStatus status);
 
-    void updateCenterButton( bool hasPosition );
+    void updateCenterButton(bool hasPosition);
 
-    void setBookmarkPosition( QAction* bookmark );
+    void setBookmarkPosition(QAction *bookmark);
 
     void openTargetSelectionDialog();
 

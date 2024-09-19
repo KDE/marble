@@ -10,9 +10,9 @@
 
 #include "MarbleDebug.h"
 
-#include "DgmlElementDictionary.h"
 #include "DgmlAttributeDictionary.h"
 #include "DgmlAuxillaryDictionary.h"
+#include "DgmlElementDictionary.h"
 #include "GeoParser.h"
 #include "GeoSceneLayer.h"
 #include "GeoSceneTextureTileDataset.h"
@@ -23,7 +23,7 @@ namespace dgml
 {
 DGML_DEFINE_TAG_HANDLER(Texture)
 
-GeoNode* DgmlTextureTagHandler::parse(GeoParser& parser) const
+GeoNode *DgmlTextureTagHandler::parse(GeoParser &parser) const
 {
     // Check whether the tag is valid
     Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1String(dgmlTag_Texture)));
@@ -32,7 +32,7 @@ GeoNode* DgmlTextureTagHandler::parse(GeoParser& parser) const
 
     const QString expireStr = parser.attribute(dgmlAttr_expire).trimmed();
     int expire = std::numeric_limits<int>::max();
-    if ( !expireStr.isEmpty() )
+    if (!expireStr.isEmpty())
         expire = expireStr.toInt();
 
     GeoSceneTileDataset *texture = nullptr;
@@ -40,14 +40,12 @@ GeoNode* DgmlTextureTagHandler::parse(GeoParser& parser) const
     // Checking for parent item
     GeoStackItem parentItem = parser.parentElement();
 
-    // Check parent type and make sure that the dataSet type 
+    // Check parent type and make sure that the dataSet type
     // matches the backend of the parent layer
-    if ( parentItem.represents(dgmlTag_Layer)
-        && parentItem.nodeAs<GeoSceneLayer>()->backend() == dgmlValue_texture ) {
-
-        texture = new GeoSceneTextureTileDataset( name );
-        texture->setExpire( expire );
-        parentItem.nodeAs<GeoSceneLayer>()->addDataset( texture );
+    if (parentItem.represents(dgmlTag_Layer) && parentItem.nodeAs<GeoSceneLayer>()->backend() == dgmlValue_texture) {
+        texture = new GeoSceneTextureTileDataset(name);
+        texture->setExpire(expire);
+        parentItem.nodeAs<GeoSceneLayer>()->addDataset(texture);
     }
 
     return texture;

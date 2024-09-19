@@ -12,7 +12,8 @@
 #include <QString>
 #include <QStringList>
 
-namespace Marble {
+namespace Marble
+{
 
 class DatabaseQuery;
 class GeoDataCoordinates;
@@ -20,25 +21,25 @@ class GeoDataCoordinates;
 class OsmDatabase
 {
 public:
-    explicit OsmDatabase( const QStringList &databaseFiles );
+    explicit OsmDatabase(const QStringList &databaseFiles);
 
     // Methods for read access
 
     /** Search the database for matching regions and placemarks */
-    QVector<OsmPlacemark> find( const DatabaseQuery &userQuery );
+    QVector<OsmPlacemark> find(const DatabaseQuery &userQuery);
 
 private:
-    static QString wildcardQuery( const QString &term );
+    static QString wildcardQuery(const QString &term);
 
-    static void makeUnique( QVector<OsmPlacemark> &placemarks );
+    static void makeUnique(QVector<OsmPlacemark> &placemarks);
 
     QStringList m_databaseFiles;
 
-    static QString formatDistance( const GeoDataCoordinates &a, const GeoDataCoordinates &b );
+    static QString formatDistance(const GeoDataCoordinates &a, const GeoDataCoordinates &b);
 
-    static qreal bearing( const GeoDataCoordinates &a, const GeoDataCoordinates &b );
+    static qreal bearing(const GeoDataCoordinates &a, const GeoDataCoordinates &b);
 
-    Q_DISABLE_COPY( OsmDatabase )
+    Q_DISABLE_COPY(OsmDatabase)
 };
 
 }

@@ -10,11 +10,11 @@
 #include "MarbleDebug.h"
 
 #include "GPXElementDictionary.h"
-#include "GeoParser.h"
-#include "GeoDataLineString.h"
 #include "GeoDataCoordinates.h"
+#include "GeoDataLineString.h"
 #include "GeoDataPlacemark.h"
 #include "GeoDataStyle.h"
+#include "GeoParser.h"
 
 namespace Marble
 {
@@ -22,15 +22,14 @@ namespace gpx
 {
 GPX_DEFINE_TAG_HANDLER(rtept)
 
-GeoNode* GPXrteptTagHandler::parse(GeoParser& parser) const
+GeoNode *GPXrteptTagHandler::parse(GeoParser &parser) const
 {
     Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1String(gpxTag_rtept)));
 
     GeoStackItem parentItem = parser.parentElement();
-    if (parentItem.represents(gpxTag_rte))
-    {
-        GeoDataPlacemark* placemark = parentItem.nodeAs<GeoDataPlacemark>();
-        GeoDataLineString* linestring = static_cast<GeoDataLineString*>(placemark->geometry());
+    if (parentItem.represents(gpxTag_rte)) {
+        GeoDataPlacemark *placemark = parentItem.nodeAs<GeoDataPlacemark>();
+        GeoDataLineString *linestring = static_cast<GeoDataLineString *>(placemark->geometry());
         GeoDataCoordinates coord;
 
         QXmlStreamAttributes attributes = parser.attributes();
@@ -38,18 +37,15 @@ GeoNode* GPXrteptTagHandler::parse(GeoParser& parser) const
         qreal lat = 0;
         qreal lon = 0;
         tmp = attributes.value(QLatin1String(gpxTag_lat));
-        if ( !tmp.isEmpty() )
-        {
+        if (!tmp.isEmpty()) {
             lat = tmp.toString().toFloat();
         }
         tmp = attributes.value(QLatin1String(gpxTag_lon));
-        if ( !tmp.isEmpty() )
-        {
+        if (!tmp.isEmpty()) {
             lon = tmp.toString().toFloat();
         }
         coord.set(lon, lat, 0, GeoDataCoordinates::Degree);
         linestring->append(coord);
-
     }
     return nullptr;
 }

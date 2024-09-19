@@ -15,14 +15,10 @@ class OsmPlacemarkData;
 
 class OsmWayTagWriter
 {
-
 public:
-    static void writeWay( const GeoDataLineString& lineString,
-                          const OsmPlacemarkData& osmData, GeoWriter& writer );
+    static void writeWay(const GeoDataLineString &lineString, const OsmPlacemarkData &osmData, GeoWriter &writer);
 };
 
 }
 
 #endif
-
-

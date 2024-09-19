@@ -4,7 +4,6 @@
 // SPDX-FileCopyrightText: 2012 Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 //
 
-
 #ifndef MARBLE_GOSMOREREVERSEGEOCODINGRUNNER_H
 #define MARBLE_GOSMOREREVERSEGEOCODINGRUNNER_H
 
@@ -23,10 +22,10 @@ public:
     ~GosmoreRunner() override;
 
     // Overriding MarbleAbstractRunner
-    void reverseGeocoding( const GeoDataCoordinates &coordinates ) override;
+    void reverseGeocoding(const GeoDataCoordinates &coordinates) override;
 
 private:
-    GosmoreRunnerPrivate* const d;
+    GosmoreRunnerPrivate *const d;
 };
 
 }

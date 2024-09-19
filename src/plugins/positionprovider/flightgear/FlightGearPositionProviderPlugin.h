@@ -20,9 +20,9 @@ class FlightGearPositionProviderPlugin : public PositionProviderPlugin
 {
     Q_OBJECT
     Q_PLUGIN_METADATA(IID "org.kde.marble.FlightGearPositionProviderPlugin")
-    Q_INTERFACES( Marble::PositionProviderPluginInterface )
+    Q_INTERFACES(Marble::PositionProviderPluginInterface)
 
- public:
+public:
     FlightGearPositionProviderPlugin();
     ~FlightGearPositionProviderPlugin() override;
 
@@ -37,7 +37,7 @@ class FlightGearPositionProviderPlugin : public PositionProviderPlugin
     void initialize() override;
     bool isInitialized() const override;
 
-    PositionProviderPlugin * newInstance() const override;
+    PositionProviderPlugin *newInstance() const override;
 
     PositionProviderStatus status() const override;
     GeoDataCoordinates position() const override;
@@ -48,12 +48,12 @@ class FlightGearPositionProviderPlugin : public PositionProviderPlugin
     QDateTime timestamp() const override;
 
 private Q_SLOTS:
-   void readPendingDatagrams();
+    void readPendingDatagrams();
 
- private:
+private:
     void parseNmeaSentence(const QString &sentence);
     static double parsePosition(const QString &value, bool isNegative);
-    QUdpSocket* m_socket;
+    QUdpSocket *m_socket;
     PositionProviderStatus m_status;
     GeoDataCoordinates m_position;
     GeoDataAccuracy m_accuracy;

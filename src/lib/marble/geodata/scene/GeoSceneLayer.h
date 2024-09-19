@@ -27,49 +27,49 @@ class GeoSceneLayerPrivate;
 
 class GEODATA_EXPORT GeoSceneLayer : public GeoNode
 {
- public:
-    explicit GeoSceneLayer( const QString& name );
+public:
+    explicit GeoSceneLayer(const QString &name);
     ~GeoSceneLayer() override;
-    
-    const char* nodeType() const override;
+
+    const char *nodeType() const override;
 
     /**
      * @brief  Add a data set to the legend
      * @param  dataset  the new data set
      */
-    void addDataset( GeoSceneAbstractDataset* );
+    void addDataset(GeoSceneAbstractDataset *);
 
-    const GeoSceneAbstractDataset * dataset( const QString& ) const;
-    GeoSceneAbstractDataset * dataset( const QString& );
+    const GeoSceneAbstractDataset *dataset(const QString &) const;
+    GeoSceneAbstractDataset *dataset(const QString &);
 
-    const GeoSceneAbstractDataset * groundDataset() const;
-    GeoSceneAbstractDataset * groundDataset();
+    const GeoSceneAbstractDataset *groundDataset() const;
+    GeoSceneAbstractDataset *groundDataset();
 
-    QVector<GeoSceneAbstractDataset*> datasets() const;
+    QVector<GeoSceneAbstractDataset *> datasets() const;
 
     QString name() const;
 
     QString backend() const;
-    void setBackend( const QString& plugin );
+    void setBackend(const QString &plugin);
 
     /**
      * @brief  returns whether the data is organized in quad tiles.
      */
     bool isTiled() const;
-    void setTiled( bool );
+    void setTiled(bool);
 
     QString role() const;
-    void setRole( const QString& type );
+    void setRole(const QString &type);
 
-    const GeoSceneFilter * filter() const;
-    GeoSceneFilter * filter();
-    void addFilter( GeoSceneFilter * filter );
-    void removeFilter( GeoSceneFilter * filter );
+    const GeoSceneFilter *filter() const;
+    GeoSceneFilter *filter();
+    void addFilter(GeoSceneFilter *filter);
+    void removeFilter(GeoSceneFilter *filter);
 
- private:
-    Q_DISABLE_COPY( GeoSceneLayer )
+private:
+    Q_DISABLE_COPY(GeoSceneLayer)
 
-    GeoSceneLayerPrivate * const d;
+    GeoSceneLayerPrivate *const d;
 };
 
 }

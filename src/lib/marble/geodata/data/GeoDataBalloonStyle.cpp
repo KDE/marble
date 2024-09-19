@@ -22,40 +22,38 @@ public:
     GeoDataBalloonStyle::DisplayMode m_mode;
 };
 
-GeoDataBalloonStylePrivate::GeoDataBalloonStylePrivate() :
-    m_bgColor( Qt::white ),
-    m_textColor( Qt::black ),
-    m_mode( GeoDataBalloonStyle::Default )
+GeoDataBalloonStylePrivate::GeoDataBalloonStylePrivate()
+    : m_bgColor(Qt::white)
+    , m_textColor(Qt::black)
+    , m_mode(GeoDataBalloonStyle::Default)
 {
 }
 
-GeoDataBalloonStyle::GeoDataBalloonStyle() :
-    d( new GeoDataBalloonStylePrivate )
+GeoDataBalloonStyle::GeoDataBalloonStyle()
+    : d(new GeoDataBalloonStylePrivate)
 {
 }
 
-GeoDataBalloonStyle::GeoDataBalloonStyle( const Marble::GeoDataBalloonStyle &other ) :
-    GeoDataColorStyle( other ), d( new GeoDataBalloonStylePrivate( *other.d ) )
+GeoDataBalloonStyle::GeoDataBalloonStyle(const Marble::GeoDataBalloonStyle &other)
+    : GeoDataColorStyle(other)
+    , d(new GeoDataBalloonStylePrivate(*other.d))
 {
 }
 
-GeoDataBalloonStyle &GeoDataBalloonStyle::operator=( const GeoDataBalloonStyle &other )
+GeoDataBalloonStyle &GeoDataBalloonStyle::operator=(const GeoDataBalloonStyle &other)
 {
     GeoDataColorStyle::operator=(other);
     *d = *other.d;
     return *this;
 }
 
-bool GeoDataBalloonStyle::operator==( const GeoDataBalloonStyle &other ) const
+bool GeoDataBalloonStyle::operator==(const GeoDataBalloonStyle &other) const
 {
-    return equals(other) &&
-           d->m_bgColor == other.d->m_bgColor &&
-           d->m_mode == other.d->m_mode &&
-           d->m_text == other.d->m_text &&
-           d->m_textColor == other.d->m_textColor;
+    return equals(other) && d->m_bgColor == other.d->m_bgColor && d->m_mode == other.d->m_mode && d->m_text == other.d->m_text
+        && d->m_textColor == other.d->m_textColor;
 }
 
-bool GeoDataBalloonStyle::operator!=( const GeoDataBalloonStyle &other ) const
+bool GeoDataBalloonStyle::operator!=(const GeoDataBalloonStyle &other) const
 {
     return !this->operator==(other);
 }
@@ -75,7 +73,7 @@ QColor GeoDataBalloonStyle::backgroundColor() const
     return d->m_bgColor;
 }
 
-void GeoDataBalloonStyle::setBackgroundColor( const QColor &color )
+void GeoDataBalloonStyle::setBackgroundColor(const QColor &color)
 {
     d->m_bgColor = color;
 }
@@ -85,7 +83,7 @@ QColor GeoDataBalloonStyle::textColor() const
     return d->m_textColor;
 }
 
-void GeoDataBalloonStyle::setTextColor( const QColor &color )
+void GeoDataBalloonStyle::setTextColor(const QColor &color)
 {
     d->m_textColor = color;
 }
@@ -95,7 +93,7 @@ QString GeoDataBalloonStyle::text() const
     return d->m_text;
 }
 
-void GeoDataBalloonStyle::setText( const QString &text )
+void GeoDataBalloonStyle::setText(const QString &text)
 {
     d->m_text = text;
 }
@@ -110,18 +108,18 @@ void GeoDataBalloonStyle::setDisplayMode(DisplayMode mode)
     d->m_mode = mode;
 }
 
-void GeoDataBalloonStyle::pack( QDataStream& stream ) const
+void GeoDataBalloonStyle::pack(QDataStream &stream) const
 {
-    GeoDataColorStyle::pack( stream );
+    GeoDataColorStyle::pack(stream);
 
     stream << d->m_bgColor.name();
     stream << d->m_textColor.name();
     stream << d->m_text;
 }
 
-void GeoDataBalloonStyle::unpack( QDataStream& stream )
+void GeoDataBalloonStyle::unpack(QDataStream &stream)
 {
-    GeoDataColorStyle::unpack( stream );
+    GeoDataColorStyle::unpack(stream);
 
     stream >> d->m_bgColor;
     stream >> d->m_textColor;

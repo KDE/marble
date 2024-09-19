@@ -13,7 +13,8 @@
 
 class QVariant;
 
-namespace Marble {
+namespace Marble
+{
 
 class MarbleClock;
 
@@ -24,14 +25,13 @@ class SatellitesModel : public TrackerPluginModel
 {
     Q_OBJECT
 public:
-    SatellitesModel( GeoDataTreeModel *treeModel,
-                     const MarbleClock *clock );
+    SatellitesModel(GeoDataTreeModel *treeModel, const MarbleClock *clock);
 
-    void loadSettings( const QHash<QString, QVariant> &settings );
-    void setPlanet( const QString &lcPlanet );
+    void loadSettings(const QHash<QString, QVariant> &settings);
+    void setPlanet(const QString &lcPlanet);
     void updateVisibility();
 
-    void parseFile( const QString &id, const QByteArray &file ) override;
+    void parseFile(const QString &id, const QByteArray &file) override;
 
 protected:
     /**
@@ -39,11 +39,11 @@ protected:
      * A description of the Marble Satellites Catalog format can be found at:
      * https://techbase.kde.org/Projects/Marble/SatelliteCatalogFormat
      */
-    void parseCatalog( const QString &id, const QByteArray &data );
+    void parseCatalog(const QString &id, const QByteArray &data);
     /**
      * Parse the two line elements set file @p id with content @p data.
      */
-    void parseTLE( const QString &id, const QByteArray &data );
+    void parseTLE(const QString &id, const QByteArray &data);
 
 private:
     void setupColors();

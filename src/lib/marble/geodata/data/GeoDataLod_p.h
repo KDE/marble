@@ -15,12 +15,12 @@ namespace Marble
 
 class GeoDataLodPrivate
 {
-  public:
+public:
     GeoDataLodPrivate()
-         : m_minLodPixels( 0 ),
-           m_maxLodPixels( -1 ),
-           m_minFadeExtent( 0 ),
-           m_maxFadeExtent( 0 )
+        : m_minLodPixels(0)
+        , m_maxLodPixels(-1)
+        , m_minFadeExtent(0)
+        , m_maxFadeExtent(0)
     {
     }
 

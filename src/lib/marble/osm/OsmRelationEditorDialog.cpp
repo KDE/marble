@@ -7,38 +7,38 @@
 #include "OsmRelationEditorDialog.h"
 
 // Marble
-#include "OsmTagEditorWidget.h"
-#include "OsmPlacemarkData.h"
-#include "OsmObjectManager.h"
-#include "GeoDataPlacemark.h"
-#include "GeoDataExtendedData.h"
 #include "GeoDataData.h"
+#include "GeoDataExtendedData.h"
+#include "GeoDataPlacemark.h"
+#include "OsmObjectManager.h"
+#include "OsmPlacemarkData.h"
+#include "OsmTagEditorWidget.h"
 
 // Qt
-#include <QVBoxLayout>
+#include <QDialogButtonBox>
 #include <QHBoxLayout>
-#include <QMessageBox>
 #include <QLabel>
 #include <QLineEdit>
-#include <QDialogButtonBox>
+#include <QMessageBox>
+#include <QVBoxLayout>
 
-namespace Marble {
+namespace Marble
+{
 
-
-OsmRelationEditorDialog::OsmRelationEditorDialog( OsmPlacemarkData *relationData, QWidget *parent ) :
-    QDialog( parent )
+OsmRelationEditorDialog::OsmRelationEditorDialog(OsmPlacemarkData *relationData, QWidget *parent)
+    : QDialog(parent)
 {
     m_relationData = relationData;
-    QVBoxLayout *layout = new QVBoxLayout( this );
+    QVBoxLayout *layout = new QVBoxLayout(this);
 
     // Name input area
     QHBoxLayout *nameLayout = new QHBoxLayout();
-    QLabel *nameLabel = new QLabel( tr( "Name" ), this );
-    m_nameLineEdit = new QLineEdit( this );
+    QLabel *nameLabel = new QLabel(tr("Name"), this);
+    m_nameLineEdit = new QLineEdit(this);
     m_nameLineEdit->setText(relationData->tagValue(QStringLiteral("name")));
-    nameLayout->addWidget( nameLabel );
-    nameLayout->addWidget( m_nameLineEdit );
-    layout->addLayout( nameLayout );
+    nameLayout->addWidget(nameLabel);
+    nameLayout->addWidget(m_nameLineEdit);
+    layout->addLayout(nameLayout);
 
     // Tag editor area
     // A dummy placemark is needed because the OsmTagEditorWidget works with placemarks
@@ -47,18 +47,17 @@ OsmRelationEditorDialog::OsmRelationEditorDialog( OsmPlacemarkData *relationData
     // its special relation status
     GeoDataExtendedData extendedData;
     extendedData.addValue(GeoDataData(QStringLiteral("osmRelation"), QStringLiteral("yes")));
-    m_dummyPlacemark->setExtendedData( extendedData );
-    m_dummyPlacemark->setOsmData( *m_relationData );
-    OsmObjectManager::initializeOsmData( m_dummyPlacemark );
-    m_tagEditor = new OsmTagEditorWidget( m_dummyPlacemark, this );
-    layout->addWidget( m_tagEditor );
+    m_dummyPlacemark->setExtendedData(extendedData);
+    m_dummyPlacemark->setOsmData(*m_relationData);
+    OsmObjectManager::initializeOsmData(m_dummyPlacemark);
+    m_tagEditor = new OsmTagEditorWidget(m_dummyPlacemark, this);
+    layout->addWidget(m_tagEditor);
 
     // Button box area
-    m_buttonBox = new QDialogButtonBox( QDialogButtonBox::Ok | QDialogButtonBox::Cancel, this );
-    layout->addWidget( m_buttonBox );
+    m_buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel, this);
+    layout->addWidget(m_buttonBox);
 
-    QObject::connect( m_buttonBox, SIGNAL(accepted()),
-                       this, SLOT(checkFields()) );
+    QObject::connect(m_buttonBox, SIGNAL(accepted()), this, SLOT(checkFields()));
     connect(m_buttonBox, SIGNAL(rejected()), SLOT(reject()));
 }
 
@@ -77,17 +76,11 @@ void OsmRelationEditorDialog::finish()
 
 void OsmRelationEditorDialog::checkFields()
 {
-    if ( m_nameLineEdit->text().isEmpty() ) {
-        QMessageBox::warning( this,
-                              tr( "No name specified" ),
-                              tr( "Please specify a name for this relation." ) );
-    }
-    else if (!m_dummyPlacemark->osmData().containsTagKey(QStringLiteral("type"))) {
-        QMessageBox::warning( this,
-                              tr( "No type tag specified" ),
-                              tr( "Please add a type tag for this relation." ) );
-    }
-    else {
+    if (m_nameLineEdit->text().isEmpty()) {
+        QMessageBox::warning(this, tr("No name specified"), tr("Please specify a name for this relation."));
+    } else if (!m_dummyPlacemark->osmData().containsTagKey(QStringLiteral("type"))) {
+        QMessageBox::warning(this, tr("No type tag specified"), tr("Please add a type tag for this relation."));
+    } else {
         finish();
     }
 }
@@ -95,4 +88,3 @@ void OsmRelationEditorDialog::checkFields()
 }
 
 #include "moc_OsmRelationEditorDialog.cpp"
-

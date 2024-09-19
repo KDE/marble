@@ -17,8 +17,8 @@ public:
 };
 
 PositionProviderPlugin::PositionProviderPlugin(QObject *parent)
-    : QObject(parent),
-      d( new PositionProviderPluginPrivate() )
+    : QObject(parent)
+    , d(new PositionProviderPluginPrivate())
 {
 }
 

@@ -35,7 +35,7 @@ public:
      * @param pluginManager The plugin manager that gives access to RunnerPlugins
      * @param parent Optional parent object
      */
-    explicit SearchRunnerManager( const MarbleModel *marbleModel, QObject *parent = nullptr );
+    explicit SearchRunnerManager(const MarbleModel *marbleModel, QObject *parent = nullptr);
 
     ~SearchRunnerManager() override;
 
@@ -46,23 +46,23 @@ public:
      * @see searchPlacemark is blocking.
      * @see searchFinished signal indicates all runners are finished.
      */
-    void findPlacemarks( const QString &searchTerm, const GeoDataLatLonBox &preferred = GeoDataLatLonBox() );
-    QVector<GeoDataPlacemark *> searchPlacemarks( const QString &searchTerm, const GeoDataLatLonBox &preferred = GeoDataLatLonBox(), int timeout = 30000 );
+    void findPlacemarks(const QString &searchTerm, const GeoDataLatLonBox &preferred = GeoDataLatLonBox());
+    QVector<GeoDataPlacemark *> searchPlacemarks(const QString &searchTerm, const GeoDataLatLonBox &preferred = GeoDataLatLonBox(), int timeout = 30000);
 
 Q_SIGNALS:
     /**
      * Placemarks were added to or removed from the model
      * @todo FIXME: this sounds like a duplication of QAbstractItemModel signals
      */
-    void searchResultChanged( QAbstractItemModel *model );
-    void searchResultChanged( const QVector<GeoDataPlacemark *> &result );
+    void searchResultChanged(QAbstractItemModel *model);
+    void searchResultChanged(const QVector<GeoDataPlacemark *> &result);
 
     /**
      * The search request for the given search term has finished, i.e. all
      * runners are finished and reported their results via the
      * @see searchResultChanged signal
      */
-    void searchFinished( const QString &searchTerm );
+    void searchFinished(const QString &searchTerm);
 
     /**
      * Emitted whenever all runners are finished for the query
@@ -70,8 +70,8 @@ Q_SIGNALS:
     void placemarkSearchFinished();
 
 private:
-    Q_PRIVATE_SLOT( d, void addSearchResult( const QVector<GeoDataPlacemark *> &result ) )
-    Q_PRIVATE_SLOT( d, void cleanupSearchTask( SearchTask *task ) )
+    Q_PRIVATE_SLOT(d, void addSearchResult(const QVector<GeoDataPlacemark *> &result))
+    Q_PRIVATE_SLOT(d, void cleanupSearchTask(SearchTask *task))
 
     class Private;
     friend class Private;

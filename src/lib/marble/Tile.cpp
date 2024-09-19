@@ -13,8 +13,8 @@
 namespace Marble
 {
 
-Tile::Tile(TileId const & tileId)
-    : m_id( tileId )
+Tile::Tile(TileId const &tileId)
+    : m_id(tileId)
 {
 }
 

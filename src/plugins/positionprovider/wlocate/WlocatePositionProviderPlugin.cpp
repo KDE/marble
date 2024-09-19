@@ -5,13 +5,13 @@
 
 #include "WlocatePositionProviderPlugin.h"
 
-#include <GeoDataCoordinates.h>
 #include <GeoDataAccuracy.h>
+#include <GeoDataCoordinates.h>
 
-#include <QFutureWatcher>
-#include <QtConcurrentRun>
 #include <QDateTime>
+#include <QFutureWatcher>
 #include <QIcon>
+#include <QtConcurrentRun>
 
 #ifndef ENV_LINUX
 #define ENV_LINUX
@@ -24,7 +24,8 @@
 #undef ENV_LINUX
 #endif
 
-namespace Marble {
+namespace Marble
+{
 
 class WlocatePositionProviderPluginPrivate
 {
@@ -38,17 +39,23 @@ public:
     bool m_initialized;
     char m_quality;
     short m_ccode;
-    QFutureWatcher<int>* m_futureWatcher;
+    QFutureWatcher<int> *m_futureWatcher;
 
     WlocatePositionProviderPluginPrivate();
 
     ~WlocatePositionProviderPluginPrivate();
 };
 
-WlocatePositionProviderPluginPrivate::WlocatePositionProviderPluginPrivate() :
-        m_status( PositionProviderStatusAcquiring ), m_speed( 0 ), m_direction( 0 ),
-        m_longitude( 0.0 ), m_latitude( 0.0 ), m_initialized( false ),
-        m_quality( 0 ), m_ccode( 0 ), m_futureWatcher( nullptr )
+WlocatePositionProviderPluginPrivate::WlocatePositionProviderPluginPrivate()
+    : m_status(PositionProviderStatusAcquiring)
+    , m_speed(0)
+    , m_direction(0)
+    , m_longitude(0.0)
+    , m_latitude(0.0)
+    , m_initialized(false)
+    , m_quality(0)
+    , m_ccode(0)
+    , m_futureWatcher(nullptr)
 {
     // nothing to do
 }
@@ -60,7 +67,7 @@ WlocatePositionProviderPluginPrivate::~WlocatePositionProviderPluginPrivate()
 
 QString WlocatePositionProviderPlugin::name() const
 {
-    return tr( "Wlocate Position Provider Plugin" );
+    return tr("Wlocate Position Provider Plugin");
 }
 
 QString WlocatePositionProviderPlugin::nameId() const
@@ -70,7 +77,7 @@ QString WlocatePositionProviderPlugin::nameId() const
 
 QString WlocatePositionProviderPlugin::guiString() const
 {
-    return tr( "WLAN (Open WLAN Map)" );
+    return tr("WLAN (Open WLAN Map)");
 }
 
 QString WlocatePositionProviderPlugin::version() const
@@ -80,7 +87,7 @@ QString WlocatePositionProviderPlugin::version() const
 
 QString WlocatePositionProviderPlugin::description() const
 {
-    return tr( "Reports the current position based on nearby WLAN access points" );
+    return tr("Reports the current position based on nearby WLAN access points");
 }
 
 QString WlocatePositionProviderPlugin::copyrightYears() const
@@ -90,8 +97,7 @@ QString WlocatePositionProviderPlugin::copyrightYears() const
 
 QVector<PluginAuthor> WlocatePositionProviderPlugin::pluginAuthors() const
 {
-    return QVector<PluginAuthor>()
-            << PluginAuthor(QStringLiteral("Dennis Nienhüser"), QStringLiteral("nienhueser@kde.org"));
+    return QVector<PluginAuthor>() << PluginAuthor(QStringLiteral("Dennis Nienhüser"), QStringLiteral("nienhueser@kde.org"));
 }
 
 QIcon WlocatePositionProviderPlugin::icon() const
@@ -99,7 +105,7 @@ QIcon WlocatePositionProviderPlugin::icon() const
     return QIcon();
 }
 
-PositionProviderPlugin* WlocatePositionProviderPlugin::newInstance() const
+PositionProviderPlugin *WlocatePositionProviderPlugin::newInstance() const
 {
     return new WlocatePositionProviderPlugin;
 }
@@ -111,7 +117,7 @@ PositionProviderStatus WlocatePositionProviderPlugin::status() const
 
 GeoDataCoordinates WlocatePositionProviderPlugin::position() const
 {
-    return GeoDataCoordinates( d->m_longitude, d->m_latitude, 0.0, GeoDataCoordinates::Degree );
+    return GeoDataCoordinates(d->m_longitude, d->m_latitude, 0.0, GeoDataCoordinates::Degree);
 }
 
 qreal WlocatePositionProviderPlugin::speed() const
@@ -128,13 +134,12 @@ GeoDataAccuracy WlocatePositionProviderPlugin::accuracy() const
 {
     GeoDataAccuracy result;
 
-    if ( status() == PositionProviderStatusAvailable ) {
+    if (status() == PositionProviderStatusAvailable) {
         result.level = GeoDataAccuracy::Detailed;
         /** @todo: Try mapping the accuracy percentage returned by libwlocate to something useful */
         result.horizontal = 0;
         result.vertical = 0;
-    }
-    else {
+    } else {
         result.level = GeoDataAccuracy::none;
         result.horizontal = 0;
         result.vertical = 0;
@@ -148,8 +153,8 @@ QDateTime WlocatePositionProviderPlugin::timestamp() const
     return d->m_timestamp;
 }
 
-WlocatePositionProviderPlugin::WlocatePositionProviderPlugin() :
-        d( new WlocatePositionProviderPluginPrivate )
+WlocatePositionProviderPlugin::WlocatePositionProviderPlugin()
+    : d(new WlocatePositionProviderPluginPrivate)
 {
     // nothing to do
 }
@@ -172,23 +177,23 @@ bool WlocatePositionProviderPlugin::isInitialized() const
 
 void WlocatePositionProviderPlugin::update()
 {
-    if ( !d->m_futureWatcher ) {
-        d->m_futureWatcher = new QFutureWatcher<int>( this );
-        connect( d->m_futureWatcher, SIGNAL(finished()), this, SLOT(handleWlocateResult()) );
+    if (!d->m_futureWatcher) {
+        d->m_futureWatcher = new QFutureWatcher<int>(this);
+        connect(d->m_futureWatcher, SIGNAL(finished()), this, SLOT(handleWlocateResult()));
     }
 
-    QFuture<int> future = QtConcurrent::run( &wloc_get_location, &d->m_latitude, &d->m_longitude, &d->m_quality, &d->m_ccode );
-    d->m_futureWatcher->setFuture( future );
+    QFuture<int> future = QtConcurrent::run(&wloc_get_location, &d->m_latitude, &d->m_longitude, &d->m_quality, &d->m_ccode);
+    d->m_futureWatcher->setFuture(future);
 }
 
 void WlocatePositionProviderPlugin::handleWlocateResult()
 {
-    if ( d->m_futureWatcher->isFinished() ) {
+    if (d->m_futureWatcher->isFinished()) {
         int const returnCode = d->m_futureWatcher->result();
         d->m_status = returnCode == WLOC_OK ? PositionProviderStatusAvailable : PositionProviderStatusError;
-        if ( d->m_status == PositionProviderStatusAvailable ) {
+        if (d->m_status == PositionProviderStatusAvailable) {
             d->m_timestamp = QDateTime::currentDateTimeUtc();
-            emit positionChanged( position(), accuracy() );
+            emit positionChanged(position(), accuracy());
         }
     }
 }

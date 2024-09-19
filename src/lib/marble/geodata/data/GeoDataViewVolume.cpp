@@ -22,45 +22,43 @@ public:
     qreal m_near;
 };
 
-GeoDataViewVolumePrivate::GeoDataViewVolumePrivate() :
-    m_leftFov(),
-    m_rightFov(),
-    m_bottomFov(),
-    m_topFov(),
-    m_near()
+GeoDataViewVolumePrivate::GeoDataViewVolumePrivate()
+    : m_leftFov()
+    , m_rightFov()
+    , m_bottomFov()
+    , m_topFov()
+    , m_near()
 {
     // nothing to do
 }
 
-GeoDataViewVolume::GeoDataViewVolume() : d( new GeoDataViewVolumePrivate )
+GeoDataViewVolume::GeoDataViewVolume()
+    : d(new GeoDataViewVolumePrivate)
 {
     // nothing to do
 }
 
-GeoDataViewVolume::GeoDataViewVolume( const Marble::GeoDataViewVolume &other ) :
-    GeoDataObject(), d( new GeoDataViewVolumePrivate( *other.d ) )
+GeoDataViewVolume::GeoDataViewVolume(const Marble::GeoDataViewVolume &other)
+    : GeoDataObject()
+    , d(new GeoDataViewVolumePrivate(*other.d))
 {
     // nothing to do
 }
 
-GeoDataViewVolume &GeoDataViewVolume::operator=( const GeoDataViewVolume &other )
+GeoDataViewVolume &GeoDataViewVolume::operator=(const GeoDataViewVolume &other)
 {
-    GeoDataObject::operator=( other );
+    GeoDataObject::operator=(other);
     *d = *other.d;
     return *this;
 }
 
-bool GeoDataViewVolume::operator==(const GeoDataViewVolume& other) const
+bool GeoDataViewVolume::operator==(const GeoDataViewVolume &other) const
 {
-    return equals(other)
-        && d->m_leftFov == other.d->m_leftFov
-        && d->m_rightFov == other.d->m_rightFov
-        && d->m_topFov == other.d->m_topFov
-        && d->m_bottomFov == other.d->m_bottomFov
-        && d->m_near == other.d->m_near;
+    return equals(other) && d->m_leftFov == other.d->m_leftFov && d->m_rightFov == other.d->m_rightFov && d->m_topFov == other.d->m_topFov
+        && d->m_bottomFov == other.d->m_bottomFov && d->m_near == other.d->m_near;
 }
 
-bool GeoDataViewVolume::operator!=(const GeoDataViewVolume& other) const
+bool GeoDataViewVolume::operator!=(const GeoDataViewVolume &other) const
 {
     return !this->operator==(other);
 }

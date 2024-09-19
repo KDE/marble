@@ -32,7 +32,7 @@ namespace dgml
 class DgmlCenterTagHandler : public GeoTagHandler
 {
 public:
-    virtual GeoNode* parse(GeoParser&) const;
+    virtual GeoNode *parse(GeoParser &) const;
 };
 
 }

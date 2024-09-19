@@ -3,59 +3,50 @@
 // SPDX-FileCopyrightText: 2012 Dennis Nienhüser <nienhueser@kde.org>
 // SPDX-FileCopyrightText: 2013 Sanjiban Bairagya <sanjiban22393@gmail.com>
 
-
 #ifndef MARBLE_GEODATALINK_H
 #define MARBLE_GEODATALINK_H
 
 #include "GeoDataObject.h"
 #include "MarbleGlobal.h"
 
-namespace Marble {
+namespace Marble
+{
 
 class GeoDataLinkPrivate;
 
 /**
  */
-class GEODATA_EXPORT GeoDataLink: public GeoDataObject
+class GEODATA_EXPORT GeoDataLink : public GeoDataObject
 {
 public:
-    enum RefreshMode {
-        OnChange,
-        OnInterval,
-        OnExpire
-    };
+    enum RefreshMode { OnChange, OnInterval, OnExpire };
 
-    enum ViewRefreshMode {
-        Never,
-        OnStop,
-        OnRequest,
-        OnRegion
-    };
+    enum ViewRefreshMode { Never, OnStop, OnRequest, OnRegion };
 
     GeoDataLink();
 
-    GeoDataLink( const GeoDataLink &other );
+    GeoDataLink(const GeoDataLink &other);
 
-    GeoDataLink& operator=( const GeoDataLink &other );
-    bool operator==( const GeoDataLink &other ) const;
-    bool operator!=( const GeoDataLink &other ) const;
+    GeoDataLink &operator=(const GeoDataLink &other);
+    bool operator==(const GeoDataLink &other) const;
+    bool operator!=(const GeoDataLink &other) const;
 
     ~GeoDataLink() override;
 
     /** Provides type information for downcasting a GeoNode */
-    const char* nodeType() const override;
+    const char *nodeType() const override;
 
     QString href() const;
 
-    void setHref( const QString& href );
+    void setHref(const QString &href);
 
     RefreshMode refreshMode() const;
 
-    void setRefreshMode( RefreshMode refreshMode );
+    void setRefreshMode(RefreshMode refreshMode);
 
     qreal refreshInterval() const;
 
-    void setRefreshInterval( qreal refreshInterval );
+    void setRefreshInterval(qreal refreshInterval);
 
     ViewRefreshMode viewRefreshMode() const;
 
@@ -78,7 +69,7 @@ public:
     void setHttpQuery(const QString &httpQuery);
 
 private:
-    GeoDataLinkPrivate* const d;
+    GeoDataLinkPrivate *const d;
 };
 
 }

@@ -7,27 +7,27 @@
 
 #include "MarbleDebug.h"
 
-#include "KmlWhenTagHandler.h"
-#include "KmlElementDictionary.h"
 #include "GeoDataTimeSpan.h"
 #include "GeoParser.h"
+#include "KmlElementDictionary.h"
+#include "KmlWhenTagHandler.h"
 
 namespace Marble
 {
 namespace kml
 {
-KML_DEFINE_TAG_HANDLER( begin )
+KML_DEFINE_TAG_HANDLER(begin)
 
-GeoNode* KmlbeginTagHandler::parse( GeoParser& parser ) const
+GeoNode *KmlbeginTagHandler::parse(GeoParser &parser) const
 {
     Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1String(kmlTag_begin)));
 
     GeoStackItem parentItem = parser.parentElement();
 
-    if( parentItem.represents( kmlTag_TimeSpan ) ) {
+    if (parentItem.represents(kmlTag_TimeSpan)) {
         QString beginString = parser.readElementText().trimmed();
-        GeoDataTimeStamp beginStamp = KmlwhenTagHandler::parseTimestamp( beginString );
-        parentItem.nodeAs<GeoDataTimeSpan>()->setBegin( beginStamp );
+        GeoDataTimeStamp beginStamp = KmlwhenTagHandler::parseTimestamp(beginString);
+        parentItem.nodeAs<GeoDataTimeSpan>()->setBegin(beginStamp);
     }
 
     return nullptr;

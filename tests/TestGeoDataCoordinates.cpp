@@ -4,19 +4,18 @@
 // SPDX-FileCopyrightText: 2011 Friedrich W. H. Kossebau <kossebau@kde.org>
 // SPDX-FileCopyrightText: 2012 Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 
+#include "GeoDataCoordinates.h"
 #include "MarbleGlobal.h"
 #include "MarbleWidget.h"
-#include "GeoDataCoordinates.h"
 #include "TestUtils.h"
 
-#include <QLocale>
 #include <QDebug>
-#include <QTranslator>
-#include <QTemporaryFile>
+#include <QLocale>
 #include <QRandomGenerator>
+#include <QTemporaryFile>
+#include <QTranslator>
 
 using namespace Marble;
-
 
 class TestGeoDataCoordinates : public QObject
 {
@@ -68,7 +67,7 @@ private Q_SLOTS:
 
 void TestGeoDataCoordinates::initTestCase()
 {
-    QLocale::setDefault( QLocale::c() ); // needed for testing toString* conversions
+    QLocale::setDefault(QLocale::c()); // needed for testing toString* conversions
 
     QTime time = QTime::currentTime();
     QRandomGenerator::global()->seed((uint)time.msec());
@@ -101,10 +100,10 @@ void TestGeoDataCoordinates::testConstruction()
     QVERIFY(coordinates3 != invalid2);
 
     QCOMPARE(coordinates3.longitude(GeoDataCoordinates::Degree), lon);
-    QCOMPARE(coordinates3.longitude(), lon*DEG2RAD);
+    QCOMPARE(coordinates3.longitude(), lon * DEG2RAD);
 
     QCOMPARE(coordinates3.latitude(GeoDataCoordinates::Degree), lat);
-    QCOMPARE(coordinates3.latitude(), lat*DEG2RAD);
+    QCOMPARE(coordinates3.latitude(), lat * DEG2RAD);
 
     QCOMPARE(coordinates3.altitude(), alt);
 
@@ -121,10 +120,10 @@ void TestGeoDataCoordinates::testConstruction()
 
     coordinates3.geoCoordinates(myLongitude, myLatitude);
 
-    QCOMPARE(myLongitude, lon*DEG2RAD);
-    QCOMPARE(myLatitude, lat*DEG2RAD);
+    QCOMPARE(myLongitude, lon * DEG2RAD);
+    QCOMPARE(myLatitude, lat * DEG2RAD);
 
-    GeoDataCoordinates coordinates4(lon*DEG2RAD, lat*DEG2RAD, alt);
+    GeoDataCoordinates coordinates4(lon * DEG2RAD, lat * DEG2RAD, alt);
 
     QVERIFY(coordinates4.isValid());
     QCOMPARE(coordinates4, GeoDataCoordinates(lon, lat, alt, GeoDataCoordinates::Degree));
@@ -143,7 +142,7 @@ void TestGeoDataCoordinates::testConstruction()
 
     GeoDataCoordinates coordinates6(invalid1.longitude(), invalid1.latitude(), invalid1.altitude(), GeoDataCoordinates::Radian, invalid1.detail());
 
-    QVERIFY(coordinates6.isValid());  // it should be valid, even though
+    QVERIFY(coordinates6.isValid()); // it should be valid, even though
     QCOMPARE(coordinates6, invalid1); // it is equal to an invalid one
 }
 
@@ -167,7 +166,6 @@ void TestGeoDataCoordinates::testSet_Degree()
     QVERIFY(coordinates2.isValid());
     QCOMPARE(coordinates1, GeoDataCoordinates(lon, lat, alt, GeoDataCoordinates::Degree));
     QCOMPARE(coordinates2, GeoDataCoordinates(0, 0, 0, GeoDataCoordinates::Degree));
-
 }
 
 /*
@@ -390,73 +388,67 @@ void TestGeoDataCoordinates::testIsPole()
 
 void TestGeoDataCoordinates::testNormalizeLat_data()
 {
-    QTest::addColumn<qreal>( "latRadian" );
+    QTest::addColumn<qreal>("latRadian");
 
-    QTest::newRow( "north pole" ) << qreal(M_PI / 2);
-    QTest::newRow( "south pole" ) << qreal(- M_PI / 2);
-    QTest::newRow( "somewhere" ) << qreal(1.0);
+    QTest::newRow("north pole") << qreal(M_PI / 2);
+    QTest::newRow("south pole") << qreal(-M_PI / 2);
+    QTest::newRow("somewhere") << qreal(1.0);
 }
 
 void TestGeoDataCoordinates::testNormalizeLat()
 {
-    QFETCH( qreal, latRadian );
+    QFETCH(qreal, latRadian);
 
     qreal latDegree = RAD2DEG * latRadian;
-    for ( int i = 1; i < 10; ++i ) {
-        if ( ( i % 2 ) == 0 ) {
-            QCOMPARE( GeoDataCoordinates::normalizeLat( latRadian + i * M_PI, GeoDataCoordinates::Radian ), latRadian );
-            QCOMPARE( GeoDataCoordinates::normalizeLat( latRadian + i * M_PI ), latRadian );
-            QCOMPARE( GeoDataCoordinates::normalizeLat( latDegree + i * 180, GeoDataCoordinates::Degree ), latDegree );
-        }
-        else {
-            QCOMPARE( GeoDataCoordinates::normalizeLat( latRadian + i * M_PI, GeoDataCoordinates::Radian ), -latRadian );
-            QCOMPARE( GeoDataCoordinates::normalizeLat( latRadian + i * M_PI ), -latRadian );
-            QCOMPARE( GeoDataCoordinates::normalizeLat( latDegree + i * 180, GeoDataCoordinates::Degree ), -latDegree );
+    for (int i = 1; i < 10; ++i) {
+        if ((i % 2) == 0) {
+            QCOMPARE(GeoDataCoordinates::normalizeLat(latRadian + i * M_PI, GeoDataCoordinates::Radian), latRadian);
+            QCOMPARE(GeoDataCoordinates::normalizeLat(latRadian + i * M_PI), latRadian);
+            QCOMPARE(GeoDataCoordinates::normalizeLat(latDegree + i * 180, GeoDataCoordinates::Degree), latDegree);
+        } else {
+            QCOMPARE(GeoDataCoordinates::normalizeLat(latRadian + i * M_PI, GeoDataCoordinates::Radian), -latRadian);
+            QCOMPARE(GeoDataCoordinates::normalizeLat(latRadian + i * M_PI), -latRadian);
+            QCOMPARE(GeoDataCoordinates::normalizeLat(latDegree + i * 180, GeoDataCoordinates::Degree), -latDegree);
         }
     }
 }
 
 void TestGeoDataCoordinates::testNormalizeLon_data()
 {
-    QTest::addColumn<qreal>( "lonRadian" );
+    QTest::addColumn<qreal>("lonRadian");
 
-    QTest::newRow( "half east" ) << qreal(M_PI / 2);
-    QTest::newRow( "half west" ) << qreal(- M_PI / 2);
-    QTest::newRow( "somewhere" ) << qreal(1.0);
-    QTest::newRow( "date line east" ) << qreal(M_PI);
-    QTest::newRow( "date line west" ) << - qreal(M_PI);
-
+    QTest::newRow("half east") << qreal(M_PI / 2);
+    QTest::newRow("half west") << qreal(-M_PI / 2);
+    QTest::newRow("somewhere") << qreal(1.0);
+    QTest::newRow("date line east") << qreal(M_PI);
+    QTest::newRow("date line west") << -qreal(M_PI);
 }
 
 void TestGeoDataCoordinates::testNormalizeLon()
 {
-    QFETCH( qreal, lonRadian );
+    QFETCH(qreal, lonRadian);
 
     qreal lonDegree = RAD2DEG * lonRadian;
-    for ( int i = 1; i < 10; ++i ) {
-        if ( lonRadian == qreal(M_PI) || lonRadian == qreal(-M_PI) ) {
-            int lonRadianLarge = qRound( lonRadian * 1000 );
-            int lonDegreeLarge = qRound( lonDegree * 1000 );
-            if ( qRound( GeoDataCoordinates::normalizeLon( lonRadian + i * 2 * M_PI ) * 1000 ) != lonRadianLarge
-                 && qRound( GeoDataCoordinates::normalizeLon( lonRadian + i * 2 * M_PI ) * 1000 ) != -lonRadianLarge )
-            {
-                QFAIL( "Error at M_PI/-M_PI" );
+    for (int i = 1; i < 10; ++i) {
+        if (lonRadian == qreal(M_PI) || lonRadian == qreal(-M_PI)) {
+            int lonRadianLarge = qRound(lonRadian * 1000);
+            int lonDegreeLarge = qRound(lonDegree * 1000);
+            if (qRound(GeoDataCoordinates::normalizeLon(lonRadian + i * 2 * M_PI) * 1000) != lonRadianLarge
+                && qRound(GeoDataCoordinates::normalizeLon(lonRadian + i * 2 * M_PI) * 1000) != -lonRadianLarge) {
+                QFAIL("Error at M_PI/-M_PI");
             }
-            if ( qRound( GeoDataCoordinates::normalizeLon( lonRadian + i * 2 * M_PI, GeoDataCoordinates::Radian ) * 1000 ) != lonRadianLarge
-                 && qRound( GeoDataCoordinates::normalizeLon( lonRadian + i * 2 * M_PI, GeoDataCoordinates::Radian ) * 1000 ) != -lonRadianLarge )
-            {
-                QFAIL( "Error at M_PI/-M_PI" );
+            if (qRound(GeoDataCoordinates::normalizeLon(lonRadian + i * 2 * M_PI, GeoDataCoordinates::Radian) * 1000) != lonRadianLarge
+                && qRound(GeoDataCoordinates::normalizeLon(lonRadian + i * 2 * M_PI, GeoDataCoordinates::Radian) * 1000) != -lonRadianLarge) {
+                QFAIL("Error at M_PI/-M_PI");
             }
-            if ( qRound( GeoDataCoordinates::normalizeLon( lonDegree + i * 360, GeoDataCoordinates::Degree ) * 1000 ) != lonDegreeLarge
-                 && qRound( GeoDataCoordinates::normalizeLon( lonDegree + i * 360, GeoDataCoordinates::Degree ) * 1000 ) != -lonDegreeLarge )
-            {
-                QFAIL( "Error at M_PI/-M_PI" );
+            if (qRound(GeoDataCoordinates::normalizeLon(lonDegree + i * 360, GeoDataCoordinates::Degree) * 1000) != lonDegreeLarge
+                && qRound(GeoDataCoordinates::normalizeLon(lonDegree + i * 360, GeoDataCoordinates::Degree) * 1000) != -lonDegreeLarge) {
+                QFAIL("Error at M_PI/-M_PI");
             }
-        }
-        else {
-            QCOMPARE( GeoDataCoordinates::normalizeLon( lonRadian + i * 2 * M_PI, GeoDataCoordinates::Radian ), lonRadian );
-            QCOMPARE( GeoDataCoordinates::normalizeLon( lonRadian + i * 2 * M_PI ), lonRadian );
-            QCOMPARE( GeoDataCoordinates::normalizeLon( lonDegree + i * 360, GeoDataCoordinates::Degree ), lonDegree );
+        } else {
+            QCOMPARE(GeoDataCoordinates::normalizeLon(lonRadian + i * 2 * M_PI, GeoDataCoordinates::Radian), lonRadian);
+            QCOMPARE(GeoDataCoordinates::normalizeLon(lonRadian + i * 2 * M_PI), lonRadian);
+            QCOMPARE(GeoDataCoordinates::normalizeLon(lonDegree + i * 360, GeoDataCoordinates::Degree), lonDegree);
         }
     }
 }
@@ -486,7 +478,7 @@ void TestGeoDataCoordinates::testNormalizeDegree()
     qreal normalized_lon = lon;
     qreal normalized_lat = lat;
 
-    GeoDataCoordinates::normalizeLonLat( normalized_lon, normalized_lat, GeoDataCoordinates::Degree);
+    GeoDataCoordinates::normalizeLonLat(normalized_lon, normalized_lat, GeoDataCoordinates::Degree);
     QCOMPARE(normalized_lon, qreal(20));
     QCOMPARE(normalized_lat, qreal(50));
 }
@@ -520,33 +512,33 @@ void TestGeoDataCoordinates::testNormalizeRadian()
     qreal normalized_lon = lon;
     qreal normalized_lat = lat;
 
-    GeoDataCoordinates::normalizeLonLat( normalized_lon, normalized_lat, GeoDataCoordinates::Radian);
+    GeoDataCoordinates::normalizeLonLat(normalized_lon, normalized_lat, GeoDataCoordinates::Radian);
     QCOMPARE(ceil(normalized_lon * 1000) / 1000, qreal(0.459));
     QCOMPARE(ceil(normalized_lat * 1000) / 1000, qreal(0.442));
 }
 
-enum SignType {NoSign, PositiveSign, NegativeSign};
-enum SphereType {PosSphere, NegSphere};
-enum UnitsType {NoUnits, WithUnits};
-enum SpacesType {NoSpaces, WithSpaces};
-enum LocaleType {CLocale, SystemLocale};
+enum SignType { NoSign, PositiveSign, NegativeSign };
+enum SphereType { PosSphere, NegSphere };
+enum UnitsType { NoUnits, WithUnits };
+enum SpacesType { NoSpaces, WithSpaces };
+enum LocaleType { CLocale, SystemLocale };
 
 static QString
-createDegreeString(SignType signType,
-                   int degreeValue, int minutesValue, qreal secondsValue,
-                   LocaleType locale,
-                   UnitsType unitsType, SpacesType spacesType)
+createDegreeString(SignType signType, int degreeValue, int minutesValue, qreal secondsValue, LocaleType locale, UnitsType unitsType, SpacesType spacesType)
 {
     QString string;
 
     // add degree
-    if (signType != NoSign) string.append(QLatin1Char(signType==PositiveSign?'+':'-'));
+    if (signType != NoSign)
+        string.append(QLatin1Char(signType == PositiveSign ? '+' : '-'));
     string.append(QString::number(degreeValue));
-    if (unitsType == WithUnits) string.append(QChar(0xb0));
+    if (unitsType == WithUnits)
+        string.append(QChar(0xb0));
 
     // add minutes
     string.append(QLatin1Char(' ') + QString::number(minutesValue));
-    if (unitsType == WithUnits) string.append(QLatin1Char('\''));
+    if (unitsType == WithUnits)
+        string.append(QLatin1Char('\''));
 
     // add seconds
     if (locale == CLocale) {
@@ -554,25 +546,25 @@ createDegreeString(SignType signType,
     } else {
         string.append(QLatin1Char(' ') + QLocale::system().toString(secondsValue, 'f', 10));
     }
-    if (unitsType == WithUnits) string.append(QLatin1Char('"'));
+    if (unitsType == WithUnits)
+        string.append(QLatin1Char('"'));
 
-    if (spacesType == WithSpaces) string.append(QLatin1Char(' '));
+    if (spacesType == WithSpaces)
+        string.append(QLatin1Char(' '));
 
     return string;
 }
 
-static QString
-createDegreeString(SignType signType,
-                   int degreeValue, qreal minutesValue,
-                   LocaleType locale,
-                   UnitsType unitsType, SpacesType spacesType)
+static QString createDegreeString(SignType signType, int degreeValue, qreal minutesValue, LocaleType locale, UnitsType unitsType, SpacesType spacesType)
 {
     QString string;
 
     // add degree
-    if (signType != NoSign) string.append(QLatin1Char(signType==PositiveSign?'+':'-'));
+    if (signType != NoSign)
+        string.append(QLatin1Char(signType == PositiveSign ? '+' : '-'));
     string.append(QString::number(degreeValue));
-    if (unitsType == WithUnits) string.append(QChar(0xb0));
+    if (unitsType == WithUnits)
+        string.append(QChar(0xb0));
 
     // add minutes
     if (locale == CLocale) {
@@ -580,31 +572,32 @@ createDegreeString(SignType signType,
     } else {
         string.append(QLatin1Char(' ') + QLocale::system().toString(minutesValue, 'f', 10));
     }
-    if (unitsType == WithUnits) string.append(QLatin1Char('\''));
+    if (unitsType == WithUnits)
+        string.append(QLatin1Char('\''));
 
-    if (spacesType == WithSpaces) string.append(QLatin1Char(' '));
+    if (spacesType == WithSpaces)
+        string.append(QLatin1Char(' '));
 
     return string;
 }
 
-static QString
-createDegreeString(SignType signType,
-                   qreal degreeValue,
-                   LocaleType locale,
-                   UnitsType unitsType, SpacesType spacesType)
+static QString createDegreeString(SignType signType, qreal degreeValue, LocaleType locale, UnitsType unitsType, SpacesType spacesType)
 {
     QString string;
 
     // add degree
-    if (signType != NoSign) string.append(QLatin1Char(signType==PositiveSign?'+':'-'));
+    if (signType != NoSign)
+        string.append(QLatin1Char(signType == PositiveSign ? '+' : '-'));
     if (locale == CLocale) {
         string.append(QString::number(degreeValue, 'f', 10));
     } else {
         string.append(QLocale::system().toString(degreeValue, 'f', 10));
     }
-    if (unitsType == WithUnits) string.append(QChar(0xb0));
+    if (unitsType == WithUnits)
+        string.append(QChar(0xb0));
 
-    if (spacesType == WithSpaces) string.append(QLatin1Char(' '));
+    if (spacesType == WithSpaces)
+        string.append(QLatin1Char(' '));
 
     return string;
 }
@@ -618,23 +611,15 @@ void TestGeoDataCoordinates::testFromStringDMS_data()
     QTest::addColumn<qreal>("lon");
     QTest::addColumn<qreal>("lat");
 
-    const QVector<SignType> signTypes = QVector<SignType>()
-        << NoSign << PositiveSign << NegativeSign;
-    const QVector<SphereType> sphereTypes = QVector<SphereType>()
-        << PosSphere << NegSphere;
-    const QVector<UnitsType> unitsTypes = QVector<UnitsType>()
-        << NoUnits << WithUnits;
-    const QVector<SpacesType> spacesTypes = QVector<SpacesType>()
-        << NoSpaces << WithSpaces;
-    const QVector<LocaleType> localeTypes = QVector<LocaleType>()
-        << CLocale << SystemLocale;
+    const QVector<SignType> signTypes = QVector<SignType>() << NoSign << PositiveSign << NegativeSign;
+    const QVector<SphereType> sphereTypes = QVector<SphereType>() << PosSphere << NegSphere;
+    const QVector<UnitsType> unitsTypes = QVector<UnitsType>() << NoUnits << WithUnits;
+    const QVector<SpacesType> spacesTypes = QVector<SpacesType>() << NoSpaces << WithSpaces;
+    const QVector<LocaleType> localeTypes = QVector<LocaleType>() << CLocale << SystemLocale;
 
-    const QVector<uint> degreeSamples = QVector<uint>()
-        << 0 << 140 << 180;
-    const QVector<uint> minutesSamples = QVector<uint>()
-        << 0 << 23 << 59;
-    const QVector<qreal> secondsSamples = QVector<qreal>()
-        << 0.0 << 3.14159 << 59.9999999;
+    const QVector<uint> degreeSamples = QVector<uint>() << 0 << 140 << 180;
+    const QVector<uint> minutesSamples = QVector<uint>() << 0 << 23 << 59;
+    const QVector<qreal> secondsSamples = QVector<qreal>() << 0.0 << 3.14159 << 59.9999999;
 
     for (const UnitsType unitsType : unitsTypes) {
         for (const SpacesType spacesType : spacesTypes) {
@@ -642,79 +627,73 @@ void TestGeoDataCoordinates::testFromStringDMS_data()
             for (const SphereType lonSphere : sphereTypes) {
                 for (const SignType lonSignType : signTypes) {
                     const bool lonIsPositive =
-                        (lonSphere==PosSphere && lonSignType!=NegativeSign) ||
-                        (lonSphere==NegSphere && lonSignType==NegativeSign);
+                        (lonSphere == PosSphere && lonSignType != NegativeSign) || (lonSphere == NegSphere && lonSignType == NegativeSign);
                     for (const uint lonDegree : degreeSamples) {
                         for (const uint lonMinutes : minutesSamples) {
                             if (lonDegree == 180 && lonMinutes != 0) {
                                 continue;
                             }
                             for (const qreal lonSeconds : secondsSamples) {
-                                if(lonDegree == 180 && lonSeconds != 0.0) {
+                                if (lonDegree == 180 && lonSeconds != 0.0) {
                                     continue;
                                 }
                                 // lat
-                                for (const SphereType latSphere: sphereTypes) {
-                                    for(const SignType latSignType: signTypes) {
+                                for (const SphereType latSphere : sphereTypes) {
+                                    for (const SignType latSignType : signTypes) {
                                         const bool latIsPositive =
-                                            (latSphere==PosSphere && latSignType!=NegativeSign) ||
-                                            (latSphere==NegSphere && latSignType==NegativeSign);
-                                        for (const uint latDegree: degreeSamples) {
-                                            for(const uint latMinutes: minutesSamples) {
-                                                if(latDegree == 180 && latMinutes != 0) {
+                                            (latSphere == PosSphere && latSignType != NegativeSign) || (latSphere == NegSphere && latSignType == NegativeSign);
+                                        for (const uint latDegree : degreeSamples) {
+                                            for (const uint latMinutes : minutesSamples) {
+                                                if (latDegree == 180 && latMinutes != 0) {
                                                     continue;
                                                 }
                                                 for (const qreal latSeconds : secondsSamples) {
-                                                    if(latDegree == 180 && latSeconds != 0.0) {
+                                                    if (latDegree == 180 && latSeconds != 0.0) {
                                                         continue;
                                                     }
                                                     // locale
-                                                    for(const LocaleType locale : localeTypes) {
+                                                    for (const LocaleType locale : localeTypes) {
                                                         // actual construction
                                                         // Create lon & lat values
-                                                        qreal lon = (qreal)lonDegree + lonMinutes*MIN2HOUR + lonSeconds*SEC2HOUR;
-                                                        if( ! lonIsPositive )
+                                                        qreal lon = (qreal)lonDegree + lonMinutes * MIN2HOUR + lonSeconds * SEC2HOUR;
+                                                        if (!lonIsPositive)
                                                             lon *= -1;
-                                                        qreal lat = (qreal)latDegree + latMinutes*MIN2HOUR + latSeconds*SEC2HOUR;
-                                                        if( ! latIsPositive )
+                                                        qreal lat = (qreal)latDegree + latMinutes * MIN2HOUR + latSeconds * SEC2HOUR;
+                                                        if (!latIsPositive)
                                                             lat *= -1;
 
                                                         // Create string
                                                         QString string;
-                                                        string.append(createDegreeString(latSignType,
-                                                                                         latDegree, latMinutes, latSeconds,
-                                                                                         locale,
-                                                                                         unitsType, spacesType));
-                                                        string.append(QLatin1Char(latSphere==PosSphere?'N':'S'));
+                                                        string.append(
+                                                            createDegreeString(latSignType, latDegree, latMinutes, latSeconds, locale, unitsType, spacesType));
+                                                        string.append(QLatin1Char(latSphere == PosSphere ? 'N' : 'S'));
                                                         string.append(QLatin1Char(' '));
-                                                        string.append(createDegreeString(lonSignType,
-                                                                                         lonDegree, lonMinutes, lonSeconds,
-                                                                                         locale,
-                                                                                         unitsType, spacesType));
-                                                        string.append(QLatin1Char(lonSphere==PosSphere?'E':'W'));
+                                                        string.append(
+                                                            createDegreeString(lonSignType, lonDegree, lonMinutes, lonSeconds, locale, unitsType, spacesType));
+                                                        string.append(QLatin1Char(lonSphere == PosSphere ? 'E' : 'W'));
 
                                                         // Create row title
                                                         QString rowTitle;
-                                                        rowTitle.append(QLatin1String(spacesType==WithSpaces?"spaced dir":"unspaced dir"))
-                                                                .append(QLatin1String(unitsType==WithUnits?"|units":"|no units"))
-                                                                .append(QLatin1String("|lon:"))
-                                                                .append(QLatin1Char(lonIsPositive?'+':'-'))
-                                                                .append(QString::number(lonDegree)+QChar(0xb0))
-                                                                .append(QString::number(lonMinutes)+QLatin1Char('\''))
-                                                                .append(QString::number(lonSeconds, 'f', 10)+QLatin1Char('"'))
-                                                                .append(QLatin1Char(lonSphere==PosSphere?'P':'N'))
-                                                                .append(QLatin1String("|lat:"))
-                                                                .append(QLatin1Char(latIsPositive?'+':'-'))
-                                                                .append(QString::number(latDegree)+QChar(0xb0))
-                                                                .append(QString::number(latMinutes)+QLatin1Char('\''))
-                                                                .append(QString::number(latSeconds, 'f', 10)+QLatin1Char('"'))
-                                                                .append(QLatin1Char(latSphere==PosSphere?'P':'N'))
-                                                                .append(QLatin1Char('|')).append(QLatin1Char(locale==CLocale?'C':'L'))
-                                                                .append(QLatin1Char('|')).append(string).append(QLatin1Char('|'));
-                                                        QTest::newRow(rowTitle.toLatin1().constData())
-                                                            << string
-                                                            << lon
-                                                            << lat;
+                                                        rowTitle.append(QLatin1String(spacesType == WithSpaces ? "spaced dir" : "unspaced dir"))
+                                                            .append(QLatin1String(unitsType == WithUnits ? "|units" : "|no units"))
+                                                            .append(QLatin1String("|lon:"))
+                                                            .append(QLatin1Char(lonIsPositive ? '+' : '-'))
+                                                            .append(QString::number(lonDegree) + QChar(0xb0))
+                                                            .append(QString::number(lonMinutes) + QLatin1Char('\''))
+                                                            .append(QString::number(lonSeconds, 'f', 10) + QLatin1Char('"'))
+                                                            .append(QLatin1Char(lonSphere == PosSphere ? 'P' : 'N'))
+                                                            .append(QLatin1String("|lat:"))
+                                                            .append(QLatin1Char(latIsPositive ? '+' : '-'))
+                                                            .append(QString::number(latDegree) + QChar(0xb0))
+                                                            .append(QString::number(latMinutes) + QLatin1Char('\''))
+                                                            .append(QString::number(latSeconds, 'f', 10) + QLatin1Char('"'))
+                                                            .append(QLatin1Char(latSphere == PosSphere ? 'P' : 'N'))
+                                                            .append(QLatin1Char('|'))
+                                                            .append(QLatin1Char(locale == CLocale ? 'C' : 'L'))
+                                                            .append(QLatin1Char('|'))
+                                                            .append(string)
+                                                            .append(QLatin1Char('|'));
+                                                        QTest::newRow(rowTitle.toLatin1().constData()) << string << lon << lat;
                                                     }
                                                 }
                                             }
@@ -736,7 +715,7 @@ void TestGeoDataCoordinates::testFromStringDMS_data()
 void TestGeoDataCoordinates::testFromStringDMS()
 {
     // only run random 5% of all possible permutations
-    if ((qreal( QRandomGenerator::global()->generate()) / RAND_MAX) > 0.05) {
+    if ((qreal(QRandomGenerator::global()->generate()) / RAND_MAX) > 0.05) {
         QSKIP("Not picked for this run.");
     }
 
@@ -747,12 +726,12 @@ void TestGeoDataCoordinates::testFromStringDMS()
     bool succeeded = false;
     const GeoDataCoordinates coords = GeoDataCoordinates::fromString(string, succeeded);
 
-    if(! succeeded)
-        qWarning() << "Could not parse"<<string <<"for"<<lon<<lat;
+    if (!succeeded)
+        qWarning() << "Could not parse" << string << "for" << lon << lat;
 
     QVERIFY(succeeded);
     QCOMPARE(coords.longitude(GeoDataCoordinates::Degree), lon);
-    QCOMPARE(coords.latitude(GeoDataCoordinates::Degree),  lat);
+    QCOMPARE(coords.latitude(GeoDataCoordinates::Degree), lat);
 }
 
 /*
@@ -764,21 +743,14 @@ void TestGeoDataCoordinates::testFromStringDM_data()
     QTest::addColumn<qreal>("lon");
     QTest::addColumn<qreal>("lat");
 
-    const QVector<SignType> signTypes = QVector<SignType>()
-        << NoSign << PositiveSign << NegativeSign;
-    const QVector<SphereType> sphereTypes = QVector<SphereType>()
-        << PosSphere << NegSphere;
-    const QVector<UnitsType> unitsTypes = QVector<UnitsType>()
-        << NoUnits << WithUnits;
-    const QVector<SpacesType> spacesTypes = QVector<SpacesType>()
-        << NoSpaces << WithSpaces;
-    const QVector<LocaleType> localeTypes = QVector<LocaleType>()
-        << CLocale << SystemLocale;
+    const QVector<SignType> signTypes = QVector<SignType>() << NoSign << PositiveSign << NegativeSign;
+    const QVector<SphereType> sphereTypes = QVector<SphereType>() << PosSphere << NegSphere;
+    const QVector<UnitsType> unitsTypes = QVector<UnitsType>() << NoUnits << WithUnits;
+    const QVector<SpacesType> spacesTypes = QVector<SpacesType>() << NoSpaces << WithSpaces;
+    const QVector<LocaleType> localeTypes = QVector<LocaleType>() << CLocale << SystemLocale;
 
-    const QVector<uint> degreeSamples = QVector<uint>()
-        << 0 << 140 << 180;
-    const QVector<qreal> minutesSamples = QVector<qreal>()
-        << 0.0 << 3.14159 << 59.9999999;
+    const QVector<uint> degreeSamples = QVector<uint>() << 0 << 140 << 180;
+    const QVector<qreal> minutesSamples = QVector<qreal>() << 0.0 << 3.14159 << 59.9999999;
 
     for (const UnitsType unitsType : unitsTypes) {
         for (const SpacesType spacesType : spacesTypes) {
@@ -786,65 +758,59 @@ void TestGeoDataCoordinates::testFromStringDM_data()
             for (const SphereType lonSphere : sphereTypes) {
                 for (const SignType lonSignType : signTypes) {
                     const bool lonIsPositive =
-                        (lonSphere==PosSphere && lonSignType!=NegativeSign) ||
-                        (lonSphere==NegSphere && lonSignType==NegativeSign);
+                        (lonSphere == PosSphere && lonSignType != NegativeSign) || (lonSphere == NegSphere && lonSignType == NegativeSign);
                     for (const uint lonDegree : degreeSamples) {
                         for (const qreal lonMinutes : minutesSamples) {
-                            if(lonDegree == 180 && lonMinutes != 0.0) continue;
+                            if (lonDegree == 180 && lonMinutes != 0.0)
+                                continue;
                             // lat
-                            for (const SphereType latSphere: sphereTypes) {
-                                for (const SignType latSignType: signTypes) {
+                            for (const SphereType latSphere : sphereTypes) {
+                                for (const SignType latSignType : signTypes) {
                                     const bool latIsPositive =
-                                        (latSphere==PosSphere && latSignType!=NegativeSign) ||
-                                        (latSphere==NegSphere && latSignType==NegativeSign);
-                                    for (const uint latDegree: degreeSamples) {
-                                        for (const qreal latMinutes: minutesSamples) {
-                                            if(latDegree == 180 && latMinutes != 0.0) continue;
+                                        (latSphere == PosSphere && latSignType != NegativeSign) || (latSphere == NegSphere && latSignType == NegativeSign);
+                                    for (const uint latDegree : degreeSamples) {
+                                        for (const qreal latMinutes : minutesSamples) {
+                                            if (latDegree == 180 && latMinutes != 0.0)
+                                                continue;
                                             // locale
-                                            for (const LocaleType locale: localeTypes) {
+                                            for (const LocaleType locale : localeTypes) {
                                                 // actual construction
                                                 // Create lon & lat values
-                                                qreal lon = (qreal)lonDegree + lonMinutes*MIN2HOUR;
-                                                if( ! lonIsPositive )
+                                                qreal lon = (qreal)lonDegree + lonMinutes * MIN2HOUR;
+                                                if (!lonIsPositive)
                                                     lon *= -1;
-                                                qreal lat = (qreal)latDegree + latMinutes*MIN2HOUR;
-                                                if( ! latIsPositive )
+                                                qreal lat = (qreal)latDegree + latMinutes * MIN2HOUR;
+                                                if (!latIsPositive)
                                                     lat *= -1;
 
                                                 // Create string
                                                 QString string;
-                                                string.append(createDegreeString(latSignType,
-                                                                                 latDegree, latMinutes,
-                                                                                 locale,
-                                                                                 unitsType, spacesType));
-                                                string.append(QLatin1Char(latSphere==PosSphere?'N':'S'));
+                                                string.append(createDegreeString(latSignType, latDegree, latMinutes, locale, unitsType, spacesType));
+                                                string.append(QLatin1Char(latSphere == PosSphere ? 'N' : 'S'));
                                                 string.append(QLatin1Char(' '));
-                                                string.append(createDegreeString(lonSignType,
-                                                                                 lonDegree, lonMinutes,
-                                                                                 locale,
-                                                                                 unitsType, spacesType));
-                                                string.append(QLatin1Char(lonSphere==PosSphere?'E':'W'));
+                                                string.append(createDegreeString(lonSignType, lonDegree, lonMinutes, locale, unitsType, spacesType));
+                                                string.append(QLatin1Char(lonSphere == PosSphere ? 'E' : 'W'));
 
                                                 // Create row title
                                                 QString rowTitle;
-                                                rowTitle.append(QLatin1String(spacesType==WithSpaces?"spaced dir":"unspaced dir"))
-                                                        .append(QLatin1String(unitsType==WithUnits?"|units":"|no units"))
-                                                        .append(QLatin1String("|lon:"))
-                                                        .append(QLatin1Char(lonIsPositive?'+':'-'))
-                                                        .append(QString::number(lonDegree)+QChar(0xb0))
-                                                        .append(QString::number(lonMinutes, 'f', 10)+QLatin1Char('\''))
-                                                        .append(QLatin1Char(lonSphere==PosSphere?'P':'N'))
-                                                        .append(QLatin1String("|lat:"))
-                                                        .append(QLatin1Char(latIsPositive?'+':'-'))
-                                                        .append(QString::number(latDegree)+QChar(0xb0))
-                                                        .append(QString::number(latMinutes, 'f', 10)+QLatin1Char('\''))
-                                                        .append(QLatin1Char(latSphere==PosSphere?'P':'N'))
-                                                        .append(QLatin1Char('|')).append(QLatin1Char(locale==CLocale?'C':'L'))
-                                                        .append(QLatin1Char('|')).append(string).append(QLatin1Char('|'));
-                                                QTest::newRow(rowTitle.toLatin1().constData())
-                                                    << string
-                                                    << lon
-                                                    << lat;
+                                                rowTitle.append(QLatin1String(spacesType == WithSpaces ? "spaced dir" : "unspaced dir"))
+                                                    .append(QLatin1String(unitsType == WithUnits ? "|units" : "|no units"))
+                                                    .append(QLatin1String("|lon:"))
+                                                    .append(QLatin1Char(lonIsPositive ? '+' : '-'))
+                                                    .append(QString::number(lonDegree) + QChar(0xb0))
+                                                    .append(QString::number(lonMinutes, 'f', 10) + QLatin1Char('\''))
+                                                    .append(QLatin1Char(lonSphere == PosSphere ? 'P' : 'N'))
+                                                    .append(QLatin1String("|lat:"))
+                                                    .append(QLatin1Char(latIsPositive ? '+' : '-'))
+                                                    .append(QString::number(latDegree) + QChar(0xb0))
+                                                    .append(QString::number(latMinutes, 'f', 10) + QLatin1Char('\''))
+                                                    .append(QLatin1Char(latSphere == PosSphere ? 'P' : 'N'))
+                                                    .append(QLatin1Char('|'))
+                                                    .append(QLatin1Char(locale == CLocale ? 'C' : 'L'))
+                                                    .append(QLatin1Char('|'))
+                                                    .append(string)
+                                                    .append(QLatin1Char('|'));
+                                                QTest::newRow(rowTitle.toLatin1().constData()) << string << lon << lat;
                                             }
                                         }
                                     }
@@ -864,10 +830,9 @@ void TestGeoDataCoordinates::testFromStringDM_data()
 void TestGeoDataCoordinates::testFromStringDM()
 {
     // only run random 5% of all possible permutations
-    if ((qreal( QRandomGenerator::global()->generate()) / RAND_MAX) > 0.05) {
+    if ((qreal(QRandomGenerator::global()->generate()) / RAND_MAX) > 0.05) {
         QSKIP("Not picked for this run.");
     }
-
 
     QFETCH(QString, string);
     QFETCH(qreal, lon);
@@ -876,12 +841,12 @@ void TestGeoDataCoordinates::testFromStringDM()
     bool succeeded = false;
     const GeoDataCoordinates coords = GeoDataCoordinates::fromString(string, succeeded);
 
-    if(! succeeded)
-        qWarning() << "Could not parse"<<string <<"for"<<lon<<lat;
+    if (!succeeded)
+        qWarning() << "Could not parse" << string << "for" << lon << lat;
 
     QVERIFY(succeeded);
     QCOMPARE(coords.longitude(GeoDataCoordinates::Degree), lon);
-    QCOMPARE(coords.latitude(GeoDataCoordinates::Degree),  lat);
+    QCOMPARE(coords.latitude(GeoDataCoordinates::Degree), lat);
 }
 
 /*
@@ -893,80 +858,65 @@ void TestGeoDataCoordinates::testFromStringD_data()
     QTest::addColumn<qreal>("lon");
     QTest::addColumn<qreal>("lat");
 
-    const QVector<SignType> signTypes = QVector<SignType>()
-        << NoSign << PositiveSign << NegativeSign;
-    const QVector<SphereType> sphereTypes = QVector<SphereType>()
-        << PosSphere << NegSphere;
-    const QVector<UnitsType> unitsTypes = QVector<UnitsType>()
-        << NoUnits << WithUnits;
-    const QVector<SpacesType> spacesTypes = QVector<SpacesType>()
-        << NoSpaces << WithSpaces;
-    const QVector<LocaleType> localeTypes = QVector<LocaleType>()
-        << CLocale << SystemLocale;
+    const QVector<SignType> signTypes = QVector<SignType>() << NoSign << PositiveSign << NegativeSign;
+    const QVector<SphereType> sphereTypes = QVector<SphereType>() << PosSphere << NegSphere;
+    const QVector<UnitsType> unitsTypes = QVector<UnitsType>() << NoUnits << WithUnits;
+    const QVector<SpacesType> spacesTypes = QVector<SpacesType>() << NoSpaces << WithSpaces;
+    const QVector<LocaleType> localeTypes = QVector<LocaleType>() << CLocale << SystemLocale;
 
-    const QVector<qreal> degreeSamples = QVector<qreal>()
-        << qreal(0.0) << qreal(3.14159) << qreal(180.0);
+    const QVector<qreal> degreeSamples = QVector<qreal>() << qreal(0.0) << qreal(3.14159) << qreal(180.0);
 
-    for (const UnitsType unitsType: unitsTypes) {
-        for (const SpacesType spacesType: spacesTypes) {
+    for (const UnitsType unitsType : unitsTypes) {
+        for (const SpacesType spacesType : spacesTypes) {
             // lon
-            for (const SphereType lonSphere: sphereTypes) {
-                for (const SignType lonSignType: signTypes) {
+            for (const SphereType lonSphere : sphereTypes) {
+                for (const SignType lonSignType : signTypes) {
                     const bool lonIsPositive =
-                        (lonSphere==PosSphere && lonSignType!=NegativeSign) ||
-                        (lonSphere==NegSphere && lonSignType==NegativeSign);
+                        (lonSphere == PosSphere && lonSignType != NegativeSign) || (lonSphere == NegSphere && lonSignType == NegativeSign);
                     for (const qreal lonDegree : degreeSamples) {
                         // lat
                         for (const SphereType latSphere : sphereTypes) {
                             for (const SignType latSignType : signTypes) {
                                 const bool latIsPositive =
-                                    (latSphere==PosSphere && latSignType!=NegativeSign) ||
-                                    (latSphere==NegSphere && latSignType==NegativeSign);
+                                    (latSphere == PosSphere && latSignType != NegativeSign) || (latSphere == NegSphere && latSignType == NegativeSign);
                                 for (const qreal latDegree : degreeSamples) {
                                     // locale
                                     for (const LocaleType locale : localeTypes) {
-
-                                    // actual construction
+                                        // actual construction
                                         // Create lon & lat values
                                         qreal lon = lonDegree;
-                                        if (! lonIsPositive)
+                                        if (!lonIsPositive)
                                             lon *= -1;
                                         qreal lat = latDegree;
-                                        if (! latIsPositive)
+                                        if (!latIsPositive)
                                             lat *= -1;
 
                                         // Create string
                                         QString string;
-                                        string.append(createDegreeString(latSignType,
-                                                                         latDegree,
-                                                                         locale,
-                                                                         unitsType, spacesType));
-                                        string.append(QLatin1Char(latSphere==PosSphere?'N':'S'));
+                                        string.append(createDegreeString(latSignType, latDegree, locale, unitsType, spacesType));
+                                        string.append(QLatin1Char(latSphere == PosSphere ? 'N' : 'S'));
                                         string.append(QLatin1Char(' '));
-                                        string.append(createDegreeString(lonSignType,
-                                                                         lonDegree,
-                                                                         locale,
-                                                                         unitsType, spacesType));
-                                        string.append(QLatin1Char(lonSphere==PosSphere?'E':'W'));
+                                        string.append(createDegreeString(lonSignType, lonDegree, locale, unitsType, spacesType));
+                                        string.append(QLatin1Char(lonSphere == PosSphere ? 'E' : 'W'));
 
                                         // Create row title
                                         QString rowTitle;
-                                        rowTitle.append(QLatin1String(spacesType==WithSpaces?"spaced dir":"unspaced dir"))
-                                                .append(QLatin1String(unitsType==WithUnits?"|units":"|no units"))
-                                                .append(QLatin1String("|lon:"))
-                                                .append(QLatin1Char(lonIsPositive?'+':'-'))
-                                                .append(QString::number(lonDegree, 'f', 10)+QChar(0xb0))
-                                                .append(QLatin1Char(lonSphere==PosSphere?'P':'N'))
-                                                .append(QLatin1String("|lat:"))
-                                                .append(QLatin1Char(latIsPositive?'+':'-'))
-                                                .append(QString::number(latDegree, 'f', 10)+QChar(0xb0))
-                                                .append(QLatin1Char(latSphere==PosSphere?'P':'N'))
-                                                .append(QLatin1Char('|')).append(QLatin1Char(locale==CLocale?'C':'L'))
-                                                .append(QLatin1Char('|')).append(string).append(QLatin1Char('|'));
-                                        QTest::newRow(rowTitle.toLatin1().constData())
-                                            << string
-                                            << lon
-                                            << lat;
+                                        rowTitle.append(QLatin1String(spacesType == WithSpaces ? "spaced dir" : "unspaced dir"))
+                                            .append(QLatin1String(unitsType == WithUnits ? "|units" : "|no units"))
+                                            .append(QLatin1String("|lon:"))
+                                            .append(QLatin1Char(lonIsPositive ? '+' : '-'))
+                                            .append(QString::number(lonDegree, 'f', 10) + QChar(0xb0))
+                                            .append(QLatin1Char(lonSphere == PosSphere ? 'P' : 'N'))
+                                            .append(QLatin1String("|lat:"))
+                                            .append(QLatin1Char(latIsPositive ? '+' : '-'))
+                                            .append(QString::number(latDegree, 'f', 10) + QChar(0xb0))
+                                            .append(QLatin1Char(latSphere == PosSphere ? 'P' : 'N'))
+                                            .append(QLatin1Char('|'))
+                                            .append(QLatin1Char(locale == CLocale ? 'C' : 'L'))
+                                            .append(QLatin1Char('|'))
+                                            .append(string)
+                                            .append(QLatin1Char('|'));
+                                        QTest::newRow(rowTitle.toLatin1().constData()) << string << lon << lat;
                                     }
                                 }
                             }
@@ -994,34 +944,42 @@ void TestGeoDataCoordinates::testFromStringD()
     bool succeeded = false;
     const GeoDataCoordinates coords = GeoDataCoordinates::fromString(string, succeeded);
 
-    if(! succeeded)
-        qWarning() << "Could not parse"<<string <<"for"<<lon<<lat;
+    if (!succeeded)
+        qWarning() << "Could not parse" << string << "for" << lon << lat;
 
     QVERIFY(succeeded);
     QCOMPARE(coords.longitude(GeoDataCoordinates::Degree), lon);
-    QCOMPARE(coords.latitude(GeoDataCoordinates::Degree),  lat);
+    QCOMPARE(coords.latitude(GeoDataCoordinates::Degree), lat);
 }
 
 class FromStringRegExpTranslator : public QTranslator
 {
 public:
-    FromStringRegExpTranslator(const QString& _degree, const QString& _minutes, const QString& _seconds,
-                               const QString& _north, const QString& _south,
-                               const QString& _east, const QString& _west)
-    : QTranslator((QObject*)nullptr)
-    , degree( _degree )
-    , minutes( _minutes )
-    , seconds( _seconds )
-    , north( _north )
-    , south( _south )
-    , east( _east )
-    , west( _west )
-    {}
+    FromStringRegExpTranslator(const QString &_degree,
+                               const QString &_minutes,
+                               const QString &_seconds,
+                               const QString &_north,
+                               const QString &_south,
+                               const QString &_east,
+                               const QString &_west)
+        : QTranslator((QObject *)nullptr)
+        , degree(_degree)
+        , minutes(_minutes)
+        , seconds(_seconds)
+        , north(_north)
+        , south(_south)
+        , east(_east)
+        , west(_west)
+    {
+    }
 
 public: // QTranslator API
-    bool isEmpty() const override { return false; }
-    QString translate( const char* context, const char* sourceText,
-                               const char* disambiguation = nullptr, int n = -1 ) const override;
+    bool isEmpty() const override
+    {
+        return false;
+    }
+    QString translate(const char *context, const char *sourceText, const char *disambiguation = nullptr, int n = -1) const override;
+
 private:
     const QString degree;
     const QString minutes;
@@ -1032,29 +990,28 @@ private:
     const QString west;
 };
 
-QString FromStringRegExpTranslator::translate(const char* context, const char* sourceText,
-                                               const char* disambiguation , int n) const
+QString FromStringRegExpTranslator::translate(const char *context, const char *sourceText, const char *disambiguation, int n) const
 {
     Q_UNUSED(n);
-    if (qstrcmp(context, "GeoDataCoordinates") != 0 )
+    if (qstrcmp(context, "GeoDataCoordinates") != 0)
         return QString();
 
-    if (qstrcmp(sourceText, "*") != 0 )
+    if (qstrcmp(sourceText, "*") != 0)
         return QString();
 
-    if (qstrcmp(disambiguation, "North direction terms") == 0 )
+    if (qstrcmp(disambiguation, "North direction terms") == 0)
         return north;
-    if (qstrcmp(disambiguation, "South direction terms") == 0 )
+    if (qstrcmp(disambiguation, "South direction terms") == 0)
         return south;
-    if (qstrcmp(disambiguation, "East direction terms") == 0 )
+    if (qstrcmp(disambiguation, "East direction terms") == 0)
         return east;
-    if (qstrcmp(disambiguation, "West direction terms") == 0 )
+    if (qstrcmp(disambiguation, "West direction terms") == 0)
         return west;
-    if (qstrcmp(disambiguation, "Degree symbol terms") == 0 )
+    if (qstrcmp(disambiguation, "Degree symbol terms") == 0)
         return degree;
-    if (qstrcmp(disambiguation, "Minutes symbol terms") == 0 )
+    if (qstrcmp(disambiguation, "Minutes symbol terms") == 0)
         return minutes;
-    if (qstrcmp(disambiguation, "Seconds symbol terms") == 0 )
+    if (qstrcmp(disambiguation, "Seconds symbol terms") == 0)
         return seconds;
 
     return QString();
@@ -1063,36 +1020,48 @@ QString FromStringRegExpTranslator::translate(const char* context, const char* s
 class Sample
 {
 public:
-    Sample() {}
-    Sample(const char* _name, const char* _string, qreal _lon, qreal _lat)
-    : name(QString::fromUtf8(_name))
-    , string(QString::fromUtf8(_string))
-    , lon(_lon)
-    , lat(_lat)
-    {}
+    Sample()
+    {
+    }
+    Sample(const char *_name, const char *_string, qreal _lon, qreal _lat)
+        : name(QString::fromUtf8(_name))
+        , string(QString::fromUtf8(_string))
+        , lon(_lon)
+        , lat(_lat)
+    {
+    }
     QString name;
     QString string;
     qreal lon;
     qreal lat;
 };
 
-class Language {
+class Language
+{
 public:
-    Language() {}
-    Language(const char* _name,
-             const char* _degree, const char* _minutes, const char* _seconds,
-             const char* _north, const char* _south, const char* _east, const char* _west,
-             const QVector<Sample>& _samples)
-    : name(QString::fromUtf8(_name))
-    , degree(QString::fromUtf8(_degree))
-    , minutes(QString::fromUtf8(_minutes))
-    , seconds(QString::fromUtf8(_seconds))
-    , north(QString::fromUtf8(_north))
-    , south(QString::fromUtf8(_south))
-    , east(QString::fromUtf8(_east))
-    , west(QString::fromUtf8(_west))
-    , samples(_samples)
-    {}
+    Language()
+    {
+    }
+    Language(const char *_name,
+             const char *_degree,
+             const char *_minutes,
+             const char *_seconds,
+             const char *_north,
+             const char *_south,
+             const char *_east,
+             const char *_west,
+             const QVector<Sample> &_samples)
+        : name(QString::fromUtf8(_name))
+        , degree(QString::fromUtf8(_degree))
+        , minutes(QString::fromUtf8(_minutes))
+        , seconds(QString::fromUtf8(_seconds))
+        , north(QString::fromUtf8(_north))
+        , south(QString::fromUtf8(_south))
+        , east(QString::fromUtf8(_east))
+        , west(QString::fromUtf8(_west))
+        , samples(_samples)
+    {
+    }
     QString name;
     QString degree;
     QString minutes;
@@ -1119,61 +1088,37 @@ void TestGeoDataCoordinates::testFromLocaleString_data()
     QTest::addColumn<qreal>("lat");
 
     const QVector<Language> languages = QVector<Language>()
-        << Language(
-            "English",
-            "*", // degree
-            "*", // minutes
-            "*", // seconds
-            "*", // north
-            "*", // south
-            "*", // east
-            "*", // west
-            QVector<Sample>()
-                << Sample(
-                    "London",
-                    "N051 30.150′ W000 07.234′",
-                    -0.12056666666666666921, 51.50249999999999772626)
-                << Sample(
-                    "Ålgård",
-                    "N58.764828 E5.855483",
-                    5.85548300000000043752, 58.76482800000000139562))
+        << Language("English",
+                    "*", // degree
+                    "*", // minutes
+                    "*", // seconds
+                    "*", // north
+                    "*", // south
+                    "*", // east
+                    "*", // west
+                    QVector<Sample>() << Sample("London", "N051 30.150′ W000 07.234′", -0.12056666666666666921, 51.50249999999999772626)
+                                      << Sample("Ålgård", "N58.764828 E5.855483", 5.85548300000000043752, 58.76482800000000139562))
 
-        << Language(
-            "Japanese",
-            "度", // degree
-            "分", // minutes
-            "秒", // seconds
-            "北緯", // north
-            "南緯", // south
-            "東経", // east
-            "西経", // west
-            QVector<Sample>()
-                << Sample(
-                    "London",
-                    "北緯51度30分28秒 西経0度07分41秒",
-                    -0.12805555555555556135, 51.50777777777777544088)
-                << Sample(
-                    "Sydney",
-                    "南緯33度52分06秒 東経151度12分31秒",
-                    151.20861111111111085847, -33.86833333333333229120))
-        << Language(
-            "Korean",
-            "도", // degree
-            "분", // minutes
-            "초", // seconds
-            "북위", // north
-            "남위", // south
-            "동경", // east
-            "서경", // west
-            QVector<Sample>()
-                << Sample(
-                    "London",
-                    "북위 51도 30분 26초, 서경 0도 7분 39초",
-                    -0.12750000000000000222, 51.50722222222222512755)
-                << Sample(
-                    "Sydney",
-                    "남위 33도 31분 56초, 동경 151도 12분 40초",
-                    151.21111111111110858474, -33.53222222222222370647))
+        << Language("Japanese",
+                    "度", // degree
+                    "分", // minutes
+                    "秒", // seconds
+                    "北緯", // north
+                    "南緯", // south
+                    "東経", // east
+                    "西経", // west
+                    QVector<Sample>() << Sample("London", "北緯51度30分28秒 西経0度07分41秒", -0.12805555555555556135, 51.50777777777777544088)
+                                      << Sample("Sydney", "南緯33度52分06秒 東経151度12分31秒", 151.20861111111111085847, -33.86833333333333229120))
+        << Language("Korean",
+                    "도", // degree
+                    "분", // minutes
+                    "초", // seconds
+                    "북위", // north
+                    "남위", // south
+                    "동경", // east
+                    "서경", // west
+                    QVector<Sample>() << Sample("London", "북위 51도 30분 26초, 서경 0도 7분 39초", -0.12750000000000000222, 51.50722222222222512755)
+                                      << Sample("Sydney", "남위 33도 31분 56초, 동경 151도 12분 40초", 151.21111111111110858474, -33.53222222222222370647))
 
 // TODO: allow test control for parsing float in given locale
 #if 0
@@ -1193,50 +1138,35 @@ void TestGeoDataCoordinates::testFromLocaleString_data()
                     -5.40483333333333337833, 36.17783333333333217752))
 #endif
 
-        << Language(
-            "German",
-            "*", // degree
-            "*", // minutes
-            "*", // seconds
-            "N", //north
-            "S", // south
-            "O", // east
-            "W", // west
-            QVector<Sample>()
-                << Sample(
-                    "London",
-                    "51° 31′ N, 0° 7′ W",
-                    -0.11666666666666666852, 51.51666666666666571928))
+        << Language("German",
+                    "*", // degree
+                    "*", // minutes
+                    "*", // seconds
+                    "N", // north
+                    "S", // south
+                    "O", // east
+                    "W", // west
+                    QVector<Sample>() << Sample("London", "51° 31′ N, 0° 7′ W", -0.11666666666666666852, 51.51666666666666571928))
 
-        << Language(
-            "Greek",
-            "", // degree
-            "", // minutes
-            "", // seconds
-            "Β", // north
-            "Ν", // south
-            "Α", // east
-            "Δ", // west
-            QVector<Sample>()
-                << Sample(
-                    "Χαλκίδα",
-                    "38° 28′ Β 23° 36′ Α",
-                    23.6, 38.46666666666666856))
+        << Language("Greek",
+                    "", // degree
+                    "", // minutes
+                    "", // seconds
+                    "Β", // north
+                    "Ν", // south
+                    "Α", // east
+                    "Δ", // west
+                    QVector<Sample>() << Sample("Χαλκίδα", "38° 28′ Β 23° 36′ Α", 23.6, 38.46666666666666856))
 
-        << Language(
-            "Dutch",
-            "", // degree
-            "", // minutes
-            "", // seconds
-            "N|NB", // north
-            "Z|ZB", // south
-            "O|OL", // east
-            "W|WL", // west
-            QVector<Sample>()
-                << Sample(
-                    "Amersfoort",
-                    "N 52° 8′ 32.14″ , E 5° 24′ 56.09″",
-                    5.41558055555555561966, 52.14226111111111094942)
+        << Language("Dutch",
+                    "", // degree
+                    "", // minutes
+                    "", // seconds
+                    "N|NB", // north
+                    "Z|ZB", // south
+                    "O|OL", // east
+                    "W|WL", // west
+                    QVector<Sample>() << Sample("Amersfoort", "N 52° 8′ 32.14″ , E 5° 24′ 56.09″", 5.41558055555555561966, 52.14226111111111094942)
 // TODO: allow test control for parsing float in given locale
 #if 0
                 << Sample(
@@ -1252,22 +1182,17 @@ void TestGeoDataCoordinates::testFromLocaleString_data()
                     "33°55'29,52\" ZB 18°25'26,60\" OL",
                     18.42405555555555451974, -33.92486666666666650372)
 #endif
-               )
+                        )
 
-        << Language(
-            "Polish",
-            "", // degree
-            "", // minutes
-            "", // seconds
-            "Pn.|Pn", // north
-            "Płd.|Płd", // south
-            "Wschod.|Wschod|Wsch.|Wsch|Ws.|Ws", // east
-            "Zach.|Zach|Z", // west
-            QVector<Sample>()
-                << Sample(
-                    "Warsaw",
-                    "52°13′56″Pn. 21°00′30″Ws.",
-                    21.00833333333333285964, 52.23222222222221944321))
+        << Language("Polish",
+                    "", // degree
+                    "", // minutes
+                    "", // seconds
+                    "Pn.|Pn", // north
+                    "Płd.|Płd", // south
+                    "Wschod.|Wschod|Wsch.|Wsch|Ws.|Ws", // east
+                    "Zach.|Zach|Z", // west
+                    QVector<Sample>() << Sample("Warsaw", "52°13′56″Pn. 21°00′30″Ws.", 21.00833333333333285964, 52.23222222222221944321))
 
 // TODO: allow test control for parsing float in given locale
 #if 0
@@ -1287,268 +1212,161 @@ void TestGeoDataCoordinates::testFromLocaleString_data()
                     5.41558055555555561966, 52.14226111111111094942))
 #endif
 
-        << Language(
-            "Norwegian",
-            "", // degree
-            "", // minutes
-            "", // seconds
-            "N", // north
-            "S", // south
-            "Ø", // east
-            "V", // west
-            QVector<Sample>()
-                << Sample(
-                    "London",
-                    "51° 30′ 25” N 0° 7′ 39” V",
-                    -0.12750000000000000222, 51.50694444444444286546)
-                << Sample(
-                    "Ålgård",
-                    "58° 45′ 53.38″ N 5° 51′ 19.74″ Ø",
-                    5.85548333333333292927, 58.76482777777777499750))
+        << Language("Norwegian",
+                    "", // degree
+                    "", // minutes
+                    "", // seconds
+                    "N", // north
+                    "S", // south
+                    "Ø", // east
+                    "V", // west
+                    QVector<Sample>() << Sample("London", "51° 30′ 25” N 0° 7′ 39” V", -0.12750000000000000222, 51.50694444444444286546)
+                                      << Sample("Ålgård", "58° 45′ 53.38″ N 5° 51′ 19.74″ Ø", 5.85548333333333292927, 58.76482777777777499750))
 
-        << Language(
-            "Swedish",
-            "", // degree
-            "", // minutes
-            "", // seconds
-            "N", // north
-            "S", // south
-            "O", // east
-            "V", // west
-            QVector<Sample>()
-                << Sample(
-                    "London",
-                    "51°30′29″N 0°7′29″V",
-                    -0.12472222222222222043, 51.50805555555555770297)
-                << Sample(
-                    "Sydney",
-                    "33°31′56″S 151°12′40″O",
-                    151.21111111111110858474, -33.53222222222222370647))
+        << Language("Swedish",
+                    "", // degree
+                    "", // minutes
+                    "", // seconds
+                    "N", // north
+                    "S", // south
+                    "O", // east
+                    "V", // west
+                    QVector<Sample>() << Sample("London", "51°30′29″N 0°7′29″V", -0.12472222222222222043, 51.50805555555555770297)
+                                      << Sample("Sydney", "33°31′56″S 151°12′40″O", 151.21111111111110858474, -33.53222222222222370647))
 
-        << Language(
-            "Icelandic",
-            "", // degree
-            "", // minutes
-            "", // seconds
-            "N", //north
-            "S", // south
-            "A", // east
-            "V", // west
-//TODO:     "breidd 51°30'26\" N, lengd 0°7'39\" V" // London
-            QVector<Sample>()
-                << Sample(
-                    "Sydney",
-                    "33°31'56\" S, 151°12'40\" A",
-                    151.21111111111110858474, -33.53222222222222370647))
+        << Language("Icelandic",
+                    "", // degree
+                    "", // minutes
+                    "", // seconds
+                    "N", // north
+                    "S", // south
+                    "A", // east
+                    "V", // west
+                    // TODO:     "breidd 51°30'26\" N, lengd 0°7'39\" V" // London
+                    QVector<Sample>() << Sample("Sydney", "33°31'56\" S, 151°12'40\" A", 151.21111111111110858474, -33.53222222222222370647))
 
-        << Language(
-            "Turkish",
-            "", // degree
-            "", // minutes
-            "", // seconds
-            "K", // north
-            "G", // south
-            "D", // east
-            "B", // west
-            QVector<Sample>()
-                << Sample(
-                    "London",
-                    "51° 30′ 28″ K, 0° 7′ 41″ B",
-                    -0.12805555555555556135, 51.50777777777777544088))
+        << Language("Turkish",
+                    "", // degree
+                    "", // minutes
+                    "", // seconds
+                    "K", // north
+                    "G", // south
+                    "D", // east
+                    "B", // west
+                    QVector<Sample>() << Sample("London", "51° 30′ 28″ K, 0° 7′ 41″ B", -0.12805555555555556135, 51.50777777777777544088))
 
-        << Language(
-            "Spanish", // (incl. Latin America)
-            "", // degree
-            "", // minutes
-            "", // seconds
-            "N", // north
-            "S", // south
-            "E", // east
-            "O|W", // west
-            QVector<Sample>()
-                << Sample(
-                    "London",
-                    "51°30′25″N 00°07′39″O",
-                    -0.12750000000000000222, 51.50694444444444286546)
-                << Sample(
-                    "Else",
-                    "52° 8′ 32.14″ N, 5° 24′ 56.09″ W",
-                    -5.41558055555555561966, 52.14226111111111094942)
-                << Sample(
-                    "Bogotá",
-                    "4°35’53″N 74°4’33″O",
-                    -74.07583333333333541759, 4.59805555555555667269))
+        << Language("Spanish", // (incl. Latin America)
+                    "", // degree
+                    "", // minutes
+                    "", // seconds
+                    "N", // north
+                    "S", // south
+                    "E", // east
+                    "O|W", // west
+                    QVector<Sample>() << Sample("London", "51°30′25″N 00°07′39″O", -0.12750000000000000222, 51.50694444444444286546)
+                                      << Sample("Else", "52° 8′ 32.14″ N, 5° 24′ 56.09″ W", -5.41558055555555561966, 52.14226111111111094942)
+                                      << Sample("Bogotá", "4°35’53″N 74°4’33″O", -74.07583333333333541759, 4.59805555555555667269))
 
-        << Language(
-            "French",
-            "", // degree
-            "", // minutes
-            "", // seconds
-            "N", // north
-            "S", // south
-            "E", // east
-            "O", // west
-            QVector<Sample>()
-                << Sample(
-                    "London",
-                    "51° 30′ 18″ N 0° 04′ 43″ O",
-                    -0.07861111111111110383, 51.50500000000000255795))
+        << Language("French",
+                    "", // degree
+                    "", // minutes
+                    "", // seconds
+                    "N", // north
+                    "S", // south
+                    "E", // east
+                    "O", // west
+                    QVector<Sample>() << Sample("London", "51° 30′ 18″ N 0° 04′ 43″ O", -0.07861111111111110383, 51.50500000000000255795))
 
-        << Language(
-            "Portuguese", // incl. Brazilian Portuguese
-            "", // degree
-            "", // minutes
-            "", // seconds
-            "N", // north
-            "S", // south
-            "E|L", // east
-            "O", // west
-            QVector<Sample>()
-                << Sample(
-                    "London",
-                    "52° 8′ 32.14″ N, 5° 24′ 56.09″ E",
-                    5.41558055555555561966, 52.14226111111111094942))
+        << Language("Portuguese", // incl. Brazilian Portuguese
+                    "", // degree
+                    "", // minutes
+                    "", // seconds
+                    "N", // north
+                    "S", // south
+                    "E|L", // east
+                    "O", // west
+                    QVector<Sample>() << Sample("London", "52° 8′ 32.14″ N, 5° 24′ 56.09″ E", 5.41558055555555561966, 52.14226111111111094942))
 
-        << Language(
-            "Arabic",
-            "", // degree
-            "", // minutes
-            "", // seconds
-    "شمال", // north
-    "جنوب", // south
-    "شرق", // east
-    "غرب", // west
-            QVector<Sample>()
-                << Sample(
-                    "Warsaw",
-    "52°13′56″ شمال 21°00′30″ شرق",
-                    21.00833333333333285964, 52.23222222222221944321))
+        << Language("Arabic",
+                    "", // degree
+                    "", // minutes
+                    "", // seconds
+                    "شمال", // north
+                    "جنوب", // south
+                    "شرق", // east
+                    "غرب", // west
+                    QVector<Sample>() << Sample("Warsaw", "52°13′56″ شمال 21°00′30″ شرق", 21.00833333333333285964, 52.23222222222221944321))
 
-        << Language(
-            "Russian",
-            "", //"град", "градусов" // degree
-            "", //"мин", "минут" // minutes
-            "", //"сек", "секунд" // seconds
-            "с. ш.", // north
-            "ю. ш.", // south
-            "в. д.", // east
-            "з. д.", // west
-            QVector<Sample>()
-                << Sample(
-                    "London",
-                    "51°30′26″ с. ш. 0°07′39″ з. д.",
-                    -0.12750000000000000222, 51.50722222222222512755))
+        << Language("Russian",
+                    "", //"град", "градусов" // degree
+                    "", //"мин", "минут" // minutes
+                    "", //"сек", "секунд" // seconds
+                    "с. ш.", // north
+                    "ю. ш.", // south
+                    "в. д.", // east
+                    "з. д.", // west
+                    QVector<Sample>() << Sample("London", "51°30′26″ с. ш. 0°07′39″ з. д.", -0.12750000000000000222, 51.50722222222222512755))
 
-        << Language(
-            "Ukrainian",
-            "", // degree
-            "", // minutes
-            "", // seconds
-            "пн. ш.", // north
-            "пд. ш.", // south
-            "сх. д.", // east
-            "зх. д.", // west
-            QVector<Sample>()
-                << Sample(
-                    "London",
-                    "51°30' пн. ш. 0°07' сх. д.",
-                    0.11666666666666666852, 51.50000000000000000000)
-                << Sample(
-                    "Sydney",
-                    "33°52'10'' пд. ш. 151°12'30'' сх. д.",
-                    151.20833333333334280724, -33.86944444444444712872)
-                << Sample(
-                    "Rio de Janeiro",
-                    "22°54'30'' пд. ш. 43°11'47'' зх. д.",
-                    -43.19638888888889027839, -22.90833333333333499127))
+        << Language("Ukrainian",
+                    "", // degree
+                    "", // minutes
+                    "", // seconds
+                    "пн. ш.", // north
+                    "пд. ш.", // south
+                    "сх. д.", // east
+                    "зх. д.", // west
+                    QVector<Sample>() << Sample("London", "51°30' пн. ш. 0°07' сх. д.", 0.11666666666666666852, 51.50000000000000000000)
+                                      << Sample("Sydney", "33°52'10'' пд. ш. 151°12'30'' сх. д.", 151.20833333333334280724, -33.86944444444444712872)
+                                      << Sample("Rio de Janeiro", "22°54'30'' пд. ш. 43°11'47'' зх. д.", -43.19638888888889027839, -22.90833333333333499127))
 
-        << Language(
-            "Bulgarian",
-            "", // degree
-            "", // minutes
-            "", // seconds
-            "с. ш.", // north
-            "ю. ш.", // south
-            "и. д.", // east
-            "и. д.", // west
-            QVector<Sample>()
-                << Sample(
-                    "London",
-                    "51°30′26″ с. ш. 0°07′39″ и. д.",
-                    0.12750000000000000222, 51.50722222222222512755))
+        << Language("Bulgarian",
+                    "", // degree
+                    "", // minutes
+                    "", // seconds
+                    "с. ш.", // north
+                    "ю. ш.", // south
+                    "и. д.", // east
+                    "и. д.", // west
+                    QVector<Sample>() << Sample("London", "51°30′26″ с. ш. 0°07′39″ и. д.", 0.12750000000000000222, 51.50722222222222512755))
 
-        << Language(
-            "Czech",
-            "", // degree
-            "", // minutes
-            "", // seconds
-            "s. š.", // north
-            "j. š.", // south
-            "z. d.", // east
-            "v. d.", // west
-            QVector<Sample>()
-                << Sample(
-                    "London",
-                    "51°30′42″ s. š., 0°02′56″ z. d.",
-                    0.04888888888888889145, 51.51166666666666316132)
-                << Sample(
-                    "Sydney",
-                    "33° 52′ j. š., 151° 13′ v. d.",
-                    -151.21666666666669698316, -33.86666666666666714036))
+        << Language("Czech",
+                    "", // degree
+                    "", // minutes
+                    "", // seconds
+                    "s. š.", // north
+                    "j. š.", // south
+                    "z. d.", // east
+                    "v. d.", // west
+                    QVector<Sample>() << Sample("London", "51°30′42″ s. š., 0°02′56″ z. d.", 0.04888888888888889145, 51.51166666666666316132)
+                                      << Sample("Sydney", "33° 52′ j. š., 151° 13′ v. d.", -151.21666666666669698316, -33.86666666666666714036))
 
+        << Language("Hindi",
+                    "", // degree
+                    "", // minutes
+                    "", // seconds
+                    "उ", // north
+                    "द", // south
+                    "पू", // east
+                    "प", // west
+                    QVector<Sample>() << Sample("London", "51°30′25″उ 00°07′39″पू", 0.12750000000000000222, 51.50694444444444286546))
 
-        << Language(
-            "Hindi",
-            "", // degree
-            "", // minutes
-            "", // seconds
-            "उ", // north
-            "द", // south
-            "पू", // east
-            "प", // west
-            QVector<Sample>()
-                << Sample(
-                    "London",
-                    "51°30′25″उ 00°07′39″पू",
-                    0.12750000000000000222, 51.50694444444444286546))
+        << Language("Tamil",
+                    "", // degree
+                    "", // minutes
+                    "", // seconds
+                    "வ", // north
+                    "தெ", // south
+                    "கி", // east
+                    "மே", // west
+                    QVector<Sample>() << Sample("London", "51°30′25″ வ 00°07′39″ கி", 0.12750000000000000222, 51.50694444444444286546));
 
-        << Language(
-            "Tamil",
-            "", // degree
-            "", // minutes
-            "", // seconds
-            "வ", // north
-            "தெ", // south
-            "கி", // east
-            "மே", // west
-            QVector<Sample>()
-                << Sample(
-                    "London",
-                    "51°30′25″ வ 00°07′39″ கி",
-                    0.12750000000000000222, 51.50694444444444286546))
-        ;
+    for (const Language &language : languages) {
+        for (const Sample &sample : language.samples) {
+            const QString rowTitle = language.name + QLatin1String("|") + sample.name + QLatin1String("|lon:") + QString::number(sample.lon, 'f', 10)
+                + QLatin1String("|lat:") + QString::number(sample.lat, 'f', 10);
 
-    for ( const Language& language: languages ) {
-        for ( const Sample& sample: language.samples ) {
-            const QString rowTitle =
-                language.name +
-                QLatin1String("|") + sample.name +
-                QLatin1String("|lon:") +
-                QString::number(sample.lon, 'f', 10) +
-                QLatin1String("|lat:") +
-                QString::number(sample.lat, 'f', 10);
-
-            QTest::newRow(rowTitle.toLatin1().constData())
-                << language.degree
-                << language.minutes
-                << language.seconds
-                << language.north
-                << language.south
-                << language.east
-                << language.west
-                << sample.string
-                << sample.lon
-                << sample.lat;
+            QTest::newRow(rowTitle.toLatin1().constData()) << language.degree << language.minutes << language.seconds << language.north << language.south
+                                                           << language.east << language.west << sample.string << sample.lon << sample.lat;
         }
     }
 }
@@ -1573,17 +1391,17 @@ void TestGeoDataCoordinates::testFromLocaleString()
     bool succeeded = false;
     const GeoDataCoordinates coords = GeoDataCoordinates::fromString(string, succeeded);
 
-    if(! succeeded)
-        qWarning() << "Could not parse"<<string <<"for"<<lon<<lat;
+    if (!succeeded)
+        qWarning() << "Could not parse" << string << "for" << lon << lat;
 
     QVERIFY(succeeded);
 
-// Uncomment to get the lon and lat values with more precision
-// qWarning() << "lon"<<QString::number(coords.longitude(GeoDataCoordinates::Degree), 'f', 20)
-//            << "lat"<<QString::number(coords.latitude(GeoDataCoordinates::Degree), 'f', 20);
+    // Uncomment to get the lon and lat values with more precision
+    // qWarning() << "lon"<<QString::number(coords.longitude(GeoDataCoordinates::Degree), 'f', 20)
+    //            << "lat"<<QString::number(coords.latitude(GeoDataCoordinates::Degree), 'f', 20);
 
     QCOMPARE(coords.longitude(GeoDataCoordinates::Degree), lon);
-    QCOMPARE(coords.latitude(GeoDataCoordinates::Degree),  lat);
+    QCOMPARE(coords.latitude(GeoDataCoordinates::Degree), lat);
 
     QCoreApplication::removeTranslator(&translator);
 }
@@ -1598,65 +1416,64 @@ void TestGeoDataCoordinates::testToString_Decimal_data()
     QTest::addColumn<int>("precision");
     QTest::addColumn<QString>("expected");
 
-    addRow() << qreal(150.0) << qreal(80.0) << 0 << QString::fromUtf8( " 150°E,   80°N" );
-    addRow() << qreal(150.0) << qreal(80.0) << 1 << QString::fromUtf8( "150.0°E,  80.0°N" );
-    addRow() << qreal(150.0) << qreal(80.0) << 2 << QString::fromUtf8( "150.00°E,  80.00°N" );
-    addRow() << qreal(150.0) << qreal(80.0) << 3 << QString::fromUtf8( "150.000°E,  80.000°N" );
-    addRow() << qreal(150.0) << qreal(80.0) << 4 << QString::fromUtf8( "150.0000°E,  80.0000°N" );
-    addRow() << qreal(150.0) << qreal(80.0) << 5 << QString::fromUtf8( "150.00000°E,  80.00000°N" );
+    addRow() << qreal(150.0) << qreal(80.0) << 0 << QString::fromUtf8(" 150°E,   80°N");
+    addRow() << qreal(150.0) << qreal(80.0) << 1 << QString::fromUtf8("150.0°E,  80.0°N");
+    addRow() << qreal(150.0) << qreal(80.0) << 2 << QString::fromUtf8("150.00°E,  80.00°N");
+    addRow() << qreal(150.0) << qreal(80.0) << 3 << QString::fromUtf8("150.000°E,  80.000°N");
+    addRow() << qreal(150.0) << qreal(80.0) << 4 << QString::fromUtf8("150.0000°E,  80.0000°N");
+    addRow() << qreal(150.0) << qreal(80.0) << 5 << QString::fromUtf8("150.00000°E,  80.00000°N");
 
-    addRow() << qreal(149.6)       << qreal(79.6)       << 0 << QString::fromUtf8( " 150°E,   80°N" );
-    addRow() << qreal(149.96)      << qreal(79.96)      << 0 << QString::fromUtf8( " 150°E,   80°N" );
+    addRow() << qreal(149.6) << qreal(79.6) << 0 << QString::fromUtf8(" 150°E,   80°N");
+    addRow() << qreal(149.96) << qreal(79.96) << 0 << QString::fromUtf8(" 150°E,   80°N");
 
-    addRow() << qreal(149.6)       << qreal(79.6)       << 1 << QString::fromUtf8( "149.6°E,  79.6°N" );
-    addRow() << qreal(149.96)      << qreal(79.96)      << 1 << QString::fromUtf8( "150.0°E,  80.0°N" );
-    addRow() << qreal(149.996)     << qreal(79.996)     << 1 << QString::fromUtf8( "150.0°E,  80.0°N" );
+    addRow() << qreal(149.6) << qreal(79.6) << 1 << QString::fromUtf8("149.6°E,  79.6°N");
+    addRow() << qreal(149.96) << qreal(79.96) << 1 << QString::fromUtf8("150.0°E,  80.0°N");
+    addRow() << qreal(149.996) << qreal(79.996) << 1 << QString::fromUtf8("150.0°E,  80.0°N");
 
-    addRow() << qreal(149.96)      << qreal(79.96)      << 2 << QString::fromUtf8( "149.96°E,  79.96°N" );
-    addRow() << qreal(149.996)     << qreal(79.996)     << 2 << QString::fromUtf8( "150.00°E,  80.00°N" );
-    addRow() << qreal(149.9996)    << qreal(79.9996)    << 2 << QString::fromUtf8( "150.00°E,  80.00°N" );
+    addRow() << qreal(149.96) << qreal(79.96) << 2 << QString::fromUtf8("149.96°E,  79.96°N");
+    addRow() << qreal(149.996) << qreal(79.996) << 2 << QString::fromUtf8("150.00°E,  80.00°N");
+    addRow() << qreal(149.9996) << qreal(79.9996) << 2 << QString::fromUtf8("150.00°E,  80.00°N");
 
-    addRow() << qreal(149.996)     << qreal(79.996)     << 3 << QString::fromUtf8( "149.996°E,  79.996°N" );
-    addRow() << qreal(149.9996)    << qreal(79.9996)    << 3 << QString::fromUtf8( "150.000°E,  80.000°N" );
-    addRow() << qreal(149.99996)   << qreal(79.99996)   << 3 << QString::fromUtf8( "150.000°E,  80.000°N" );
+    addRow() << qreal(149.996) << qreal(79.996) << 3 << QString::fromUtf8("149.996°E,  79.996°N");
+    addRow() << qreal(149.9996) << qreal(79.9996) << 3 << QString::fromUtf8("150.000°E,  80.000°N");
+    addRow() << qreal(149.99996) << qreal(79.99996) << 3 << QString::fromUtf8("150.000°E,  80.000°N");
 
-    addRow() << qreal(149.9996)    << qreal(79.9996)    << 4 << QString::fromUtf8( "149.9996°E,  79.9996°N" );
-    addRow() << qreal(149.99996)   << qreal(79.99996)   << 4 << QString::fromUtf8( "150.0000°E,  80.0000°N" );
-    addRow() << qreal(149.999996)  << qreal(79.999996)  << 4 << QString::fromUtf8( "150.0000°E,  80.0000°N" );
+    addRow() << qreal(149.9996) << qreal(79.9996) << 4 << QString::fromUtf8("149.9996°E,  79.9996°N");
+    addRow() << qreal(149.99996) << qreal(79.99996) << 4 << QString::fromUtf8("150.0000°E,  80.0000°N");
+    addRow() << qreal(149.999996) << qreal(79.999996) << 4 << QString::fromUtf8("150.0000°E,  80.0000°N");
 
-    addRow() << qreal(149.99996)   << qreal(79.99996)   << 5 << QString::fromUtf8( "149.99996°E,  79.99996°N" );
-    addRow() << qreal(149.999996)  << qreal(79.999996)  << 5 << QString::fromUtf8( "150.00000°E,  80.00000°N" );
-    addRow() << qreal(149.9999996) << qreal(79.9999996) << 5 << QString::fromUtf8( "150.00000°E,  80.00000°N" );
+    addRow() << qreal(149.99996) << qreal(79.99996) << 5 << QString::fromUtf8("149.99996°E,  79.99996°N");
+    addRow() << qreal(149.999996) << qreal(79.999996) << 5 << QString::fromUtf8("150.00000°E,  80.00000°N");
+    addRow() << qreal(149.9999996) << qreal(79.9999996) << 5 << QString::fromUtf8("150.00000°E,  80.00000°N");
 
-    addRow() << qreal(149.999996)  << qreal(79.999996)  << 6 << QString::fromUtf8( "149.999996°E,  79.999996°N" );
-    addRow() << qreal(149.9999996) << qreal(79.9999996) << 6 << QString::fromUtf8( "150.000000°E,  80.000000°N" );
+    addRow() << qreal(149.999996) << qreal(79.999996) << 6 << QString::fromUtf8("149.999996°E,  79.999996°N");
+    addRow() << qreal(149.9999996) << qreal(79.9999996) << 6 << QString::fromUtf8("150.000000°E,  80.000000°N");
 
+    addRow() << qreal(150.1) << qreal(80.1) << 0 << QString::fromUtf8(" 150°E,   80°N");
+    addRow() << qreal(150.01) << qreal(80.01) << 0 << QString::fromUtf8(" 150°E,   80°N");
 
-    addRow() << qreal(150.1)       << qreal(80.1)       << 0 << QString::fromUtf8( " 150°E,   80°N" );
-    addRow() << qreal(150.01)      << qreal(80.01)      << 0 << QString::fromUtf8( " 150°E,   80°N" );
+    addRow() << qreal(150.1) << qreal(80.1) << 1 << QString::fromUtf8("150.1°E,  80.1°N");
+    addRow() << qreal(150.01) << qreal(80.01) << 1 << QString::fromUtf8("150.0°E,  80.0°N");
+    addRow() << qreal(150.001) << qreal(80.001) << 1 << QString::fromUtf8("150.0°E,  80.0°N");
 
-    addRow() << qreal(150.1)       << qreal(80.1)       << 1 << QString::fromUtf8( "150.1°E,  80.1°N" );
-    addRow() << qreal(150.01)      << qreal(80.01)      << 1 << QString::fromUtf8( "150.0°E,  80.0°N" );
-    addRow() << qreal(150.001)     << qreal(80.001)     << 1 << QString::fromUtf8( "150.0°E,  80.0°N" );
+    addRow() << qreal(150.01) << qreal(80.01) << 2 << QString::fromUtf8("150.01°E,  80.01°N");
+    addRow() << qreal(150.001) << qreal(80.001) << 2 << QString::fromUtf8("150.00°E,  80.00°N");
+    addRow() << qreal(150.0001) << qreal(80.0001) << 2 << QString::fromUtf8("150.00°E,  80.00°N");
 
-    addRow() << qreal(150.01)      << qreal(80.01)      << 2 << QString::fromUtf8( "150.01°E,  80.01°N" );
-    addRow() << qreal(150.001)     << qreal(80.001)     << 2 << QString::fromUtf8( "150.00°E,  80.00°N" );
-    addRow() << qreal(150.0001)    << qreal(80.0001)    << 2 << QString::fromUtf8( "150.00°E,  80.00°N" );
+    addRow() << qreal(150.001) << qreal(80.001) << 3 << QString::fromUtf8("150.001°E,  80.001°N");
+    addRow() << qreal(150.0001) << qreal(80.0001) << 3 << QString::fromUtf8("150.000°E,  80.000°N");
+    addRow() << qreal(150.00001) << qreal(80.00001) << 3 << QString::fromUtf8("150.000°E,  80.000°N");
 
-    addRow() << qreal(150.001)     << qreal(80.001)     << 3 << QString::fromUtf8( "150.001°E,  80.001°N" );
-    addRow() << qreal(150.0001)    << qreal(80.0001)    << 3 << QString::fromUtf8( "150.000°E,  80.000°N" );
-    addRow() << qreal(150.00001)   << qreal(80.00001)   << 3 << QString::fromUtf8( "150.000°E,  80.000°N" );
+    addRow() << qreal(150.0001) << qreal(80.0001) << 4 << QString::fromUtf8("150.0001°E,  80.0001°N");
+    addRow() << qreal(150.00001) << qreal(80.00001) << 4 << QString::fromUtf8("150.0000°E,  80.0000°N");
+    addRow() << qreal(150.000001) << qreal(80.000001) << 4 << QString::fromUtf8("150.0000°E,  80.0000°N");
 
-    addRow() << qreal(150.0001)    << qreal(80.0001)    << 4 << QString::fromUtf8( "150.0001°E,  80.0001°N" );
-    addRow() << qreal(150.00001)   << qreal(80.00001)   << 4 << QString::fromUtf8( "150.0000°E,  80.0000°N" );
-    addRow() << qreal(150.000001)  << qreal(80.000001)  << 4 << QString::fromUtf8( "150.0000°E,  80.0000°N" );
+    addRow() << qreal(150.00001) << qreal(80.00001) << 5 << QString::fromUtf8("150.00001°E,  80.00001°N");
+    addRow() << qreal(150.000001) << qreal(80.000001) << 5 << QString::fromUtf8("150.00000°E,  80.00000°N");
+    addRow() << qreal(150.0000001) << qreal(80.0000001) << 5 << QString::fromUtf8("150.00000°E,  80.00000°N");
 
-    addRow() << qreal(150.00001)   << qreal(80.00001)   << 5 << QString::fromUtf8( "150.00001°E,  80.00001°N" );
-    addRow() << qreal(150.000001)  << qreal(80.000001)  << 5 << QString::fromUtf8( "150.00000°E,  80.00000°N" );
-    addRow() << qreal(150.0000001) << qreal(80.0000001) << 5 << QString::fromUtf8( "150.00000°E,  80.00000°N" );
-
-    addRow() << qreal(150.000001)  << qreal(80.000001)  << 6 << QString::fromUtf8( "150.000001°E,  80.000001°N" );
-    addRow() << qreal(150.0000001) << qreal(80.0000001) << 6 << QString::fromUtf8( "150.000000°E,  80.000000°N" );
+    addRow() << qreal(150.000001) << qreal(80.000001) << 6 << QString::fromUtf8("150.000001°E,  80.000001°N");
+    addRow() << qreal(150.0000001) << qreal(80.0000001) << 6 << QString::fromUtf8("150.000000°E,  80.000000°N");
 }
 
 /*
@@ -1664,15 +1481,15 @@ void TestGeoDataCoordinates::testToString_Decimal_data()
  */
 void TestGeoDataCoordinates::testToString_Decimal()
 {
-    QFETCH( qreal, lon );
-    QFETCH( qreal, lat );
-    QFETCH( int, precision );
-    QFETCH( QString, expected );
+    QFETCH(qreal, lon);
+    QFETCH(qreal, lat);
+    QFETCH(int, precision);
+    QFETCH(QString, expected);
 
-    const GeoDataCoordinates coordinates( lon, lat, 0, GeoDataCoordinates::Degree );
+    const GeoDataCoordinates coordinates(lon, lat, 0, GeoDataCoordinates::Degree);
 
-    const QString result = coordinates.toString( GeoDataCoordinates::Decimal, precision );
-    QCOMPARE( result, expected );
+    const QString result = coordinates.toString(GeoDataCoordinates::Decimal, precision);
+    QCOMPARE(result, expected);
 }
 
 /*
@@ -1685,48 +1502,49 @@ void TestGeoDataCoordinates::testToString_DMS_data()
     QTest::addColumn<int>("precision");
     QTest::addColumn<QString>("expected");
 
-    addRow() << qreal(0.)                         << qreal(0.)                        << 0 << QString::fromUtf8( "  0°E,   0°S" );
-    addRow() << qreal(150.)                       << qreal(80.)                       << 0 << QString::fromUtf8( "150°E,  80°N" );
-    addRow() << qreal(149. + 31./60)              << qreal(79. + 31./60)              << 0 << QString::fromUtf8( "150°E,  80°N" );
-    addRow() << qreal(149. + 30./60 + 31./3600)   << qreal(79. + 30./60 + 31./3600)   << 0 << QString::fromUtf8( "150°E,  80°N" );
-    addRow() << qreal(149. + 30./60 + 30.51/3600) << qreal(79. + 30./60 + 30.51/3600) << 0 << QString::fromUtf8( "150°E,  80°N" );
-    addRow() << qreal(150. + 29./60)              << qreal(80. + 29./60)              << 0 << QString::fromUtf8( "150°E,  80°N" );
-    addRow() << qreal(150. + 29./60 + 29./3600)   << qreal(80. + 29./60 + 29./3600)   << 0 << QString::fromUtf8( "150°E,  80°N" );
-    addRow() << qreal(150. + 29./60 + 29.49/3600) << qreal(80. + 29./60 + 29.49/3600) << 0 << QString::fromUtf8( "150°E,  80°N" );
+    addRow() << qreal(0.) << qreal(0.) << 0 << QString::fromUtf8("  0°E,   0°S");
+    addRow() << qreal(150.) << qreal(80.) << 0 << QString::fromUtf8("150°E,  80°N");
+    addRow() << qreal(149. + 31. / 60) << qreal(79. + 31. / 60) << 0 << QString::fromUtf8("150°E,  80°N");
+    addRow() << qreal(149. + 30. / 60 + 31. / 3600) << qreal(79. + 30. / 60 + 31. / 3600) << 0 << QString::fromUtf8("150°E,  80°N");
+    addRow() << qreal(149. + 30. / 60 + 30.51 / 3600) << qreal(79. + 30. / 60 + 30.51 / 3600) << 0 << QString::fromUtf8("150°E,  80°N");
+    addRow() << qreal(150. + 29. / 60) << qreal(80. + 29. / 60) << 0 << QString::fromUtf8("150°E,  80°N");
+    addRow() << qreal(150. + 29. / 60 + 29. / 3600) << qreal(80. + 29. / 60 + 29. / 3600) << 0 << QString::fromUtf8("150°E,  80°N");
+    addRow() << qreal(150. + 29. / 60 + 29.49 / 3600) << qreal(80. + 29. / 60 + 29.49 / 3600) << 0 << QString::fromUtf8("150°E,  80°N");
 
-    addRow() << qreal(0.)                         << qreal(0.)                        << 1 << QString::fromUtf8( "  0° 00'E,   0° 00'S" );
-    addRow() << qreal(150.)                       << qreal(80.)                       << 1 << QString::fromUtf8( "150° 00'E,  80° 00'N" );
-    addRow() << qreal(149. + 59./60 + 31./3600)   << qreal(79. + 59./60 + 31./3600)   << 1 << QString::fromUtf8( "150° 00'E,  80° 00'N" );
-    addRow() << qreal(149. + 59./60 + 30.51/3600) << qreal(79. + 59./60 + 30.51/3600) << 1 << QString::fromUtf8( "150° 00'E,  80° 00'N" );
-    addRow() << qreal(150.          + 29./3600)   << qreal(80.          + 29./3600)   << 1 << QString::fromUtf8( "150° 00'E,  80° 00'N" );
-    addRow() << qreal(150.          + 29.49/3600) << qreal(80.          + 29.49/3600) << 1 << QString::fromUtf8( "150° 00'E,  80° 00'N" );
+    addRow() << qreal(0.) << qreal(0.) << 1 << QString::fromUtf8("  0° 00'E,   0° 00'S");
+    addRow() << qreal(150.) << qreal(80.) << 1 << QString::fromUtf8("150° 00'E,  80° 00'N");
+    addRow() << qreal(149. + 59. / 60 + 31. / 3600) << qreal(79. + 59. / 60 + 31. / 3600) << 1 << QString::fromUtf8("150° 00'E,  80° 00'N");
+    addRow() << qreal(149. + 59. / 60 + 30.51 / 3600) << qreal(79. + 59. / 60 + 30.51 / 3600) << 1 << QString::fromUtf8("150° 00'E,  80° 00'N");
+    addRow() << qreal(150. + 29. / 3600) << qreal(80. + 29. / 3600) << 1 << QString::fromUtf8("150° 00'E,  80° 00'N");
+    addRow() << qreal(150. + 29.49 / 3600) << qreal(80. + 29.49 / 3600) << 1 << QString::fromUtf8("150° 00'E,  80° 00'N");
 
-    addRow() << qreal(0.)                         << qreal(0.)                        << 2 << QString::fromUtf8( "  0° 00'E,   0° 00'S" );
-    addRow() << qreal(150.)                       << qreal(80.)                       << 2 << QString::fromUtf8( "150° 00'E,  80° 00'N" );
-    addRow() << qreal(149. + 59./60 + 31./3600)   << qreal(79. + 59./60 + 31./3600)   << 2 << QString::fromUtf8( "150° 00'E,  80° 00'N" );
-    addRow() << qreal(149. + 59./60 + 30.51/3600) << qreal(79. + 59./60 + 30.51/3600) << 2 << QString::fromUtf8( "150° 00'E,  80° 00'N" );
-    addRow() << qreal(150.          + 29./3600)   << qreal(80.          + 29./3600)   << 2 << QString::fromUtf8( "150° 00'E,  80° 00'N" );
-    addRow() << qreal(150.          + 29.49/3600) << qreal(80.          + 29.49/3600) << 2 << QString::fromUtf8( "150° 00'E,  80° 00'N" );
+    addRow() << qreal(0.) << qreal(0.) << 2 << QString::fromUtf8("  0° 00'E,   0° 00'S");
+    addRow() << qreal(150.) << qreal(80.) << 2 << QString::fromUtf8("150° 00'E,  80° 00'N");
+    addRow() << qreal(149. + 59. / 60 + 31. / 3600) << qreal(79. + 59. / 60 + 31. / 3600) << 2 << QString::fromUtf8("150° 00'E,  80° 00'N");
+    addRow() << qreal(149. + 59. / 60 + 30.51 / 3600) << qreal(79. + 59. / 60 + 30.51 / 3600) << 2 << QString::fromUtf8("150° 00'E,  80° 00'N");
+    addRow() << qreal(150. + 29. / 3600) << qreal(80. + 29. / 3600) << 2 << QString::fromUtf8("150° 00'E,  80° 00'N");
+    addRow() << qreal(150. + 29.49 / 3600) << qreal(80. + 29.49 / 3600) << 2 << QString::fromUtf8("150° 00'E,  80° 00'N");
 
-    addRow() << qreal(0.)                         << qreal(0.)                        << 3 << QString::fromUtf8( "  0° 00' 00\"E,   0° 00' 00\"S" );
-    addRow() << qreal(150.)                       << qreal(80.)                       << 3 << QString::fromUtf8( "150° 00' 00\"E,  80° 00' 00\"N" );
-    addRow() << qreal(149. + 59./60 + 59.51/3600) << qreal(79. + 59./60 + 59.51/3600) << 3 << QString::fromUtf8( "150° 00' 00\"E,  80° 00' 00\"N" );
-    addRow() << qreal(150.          +  0.49/3600) << qreal(80.          +  0.49/3600) << 3 << QString::fromUtf8( "150° 00' 00\"E,  80° 00' 00\"N" );
+    addRow() << qreal(0.) << qreal(0.) << 3 << QString::fromUtf8("  0° 00' 00\"E,   0° 00' 00\"S");
+    addRow() << qreal(150.) << qreal(80.) << 3 << QString::fromUtf8("150° 00' 00\"E,  80° 00' 00\"N");
+    addRow() << qreal(149. + 59. / 60 + 59.51 / 3600) << qreal(79. + 59. / 60 + 59.51 / 3600) << 3 << QString::fromUtf8("150° 00' 00\"E,  80° 00' 00\"N");
+    addRow() << qreal(150. + 0.49 / 3600) << qreal(80. + 0.49 / 3600) << 3 << QString::fromUtf8("150° 00' 00\"E,  80° 00' 00\"N");
 
-    addRow() << qreal(0.)                         << qreal(0.)                        << 4 << QString::fromUtf8( "  0° 00' 00\"E,   0° 00' 00\"S" );
-    addRow() << qreal(150.)                       << qreal(80.)                       << 4 << QString::fromUtf8( "150° 00' 00\"E,  80° 00' 00\"N" );
-    addRow() << qreal(149. + 59./60 + 59.51/3600) << qreal(79. + 59./60 + 59.51/3600) << 4 << QString::fromUtf8( "150° 00' 00\"E,  80° 00' 00\"N" );
-    addRow() << qreal(150.          +  0.49/3600) << qreal(80.          +  0.49/3600) << 4 << QString::fromUtf8( "150° 00' 00\"E,  80° 00' 00\"N" );
+    addRow() << qreal(0.) << qreal(0.) << 4 << QString::fromUtf8("  0° 00' 00\"E,   0° 00' 00\"S");
+    addRow() << qreal(150.) << qreal(80.) << 4 << QString::fromUtf8("150° 00' 00\"E,  80° 00' 00\"N");
+    addRow() << qreal(149. + 59. / 60 + 59.51 / 3600) << qreal(79. + 59. / 60 + 59.51 / 3600) << 4 << QString::fromUtf8("150° 00' 00\"E,  80° 00' 00\"N");
+    addRow() << qreal(150. + 0.49 / 3600) << qreal(80. + 0.49 / 3600) << 4 << QString::fromUtf8("150° 00' 00\"E,  80° 00' 00\"N");
 
-    addRow() << qreal(0.)                          << qreal(0.)                         << 5 << QString::fromUtf8( "  0° 00' 00.0\"E,   0° 00' 00.0\"S" );
-    addRow() << qreal(150.)                        << qreal(80.)                        << 5 << QString::fromUtf8( "150° 00' 00.0\"E,  80° 00' 00.0\"N" );
-    addRow() << qreal(149. + 59./60 + 59.951/3600) << qreal(79. + 59./60 + 59.951/3600) << 5 << QString::fromUtf8( "150° 00' 00.0\"E,  80° 00' 00.0\"N" );
-    addRow() << qreal(150.          +  0.049/3600) << qreal(80.          +  0.049/3600) << 5 << QString::fromUtf8( "150° 00' 00.0\"E,  80° 00' 00.0\"N" );
+    addRow() << qreal(0.) << qreal(0.) << 5 << QString::fromUtf8("  0° 00' 00.0\"E,   0° 00' 00.0\"S");
+    addRow() << qreal(150.) << qreal(80.) << 5 << QString::fromUtf8("150° 00' 00.0\"E,  80° 00' 00.0\"N");
+    addRow() << qreal(149. + 59. / 60 + 59.951 / 3600) << qreal(79. + 59. / 60 + 59.951 / 3600) << 5 << QString::fromUtf8("150° 00' 00.0\"E,  80° 00' 00.0\"N");
+    addRow() << qreal(150. + 0.049 / 3600) << qreal(80. + 0.049 / 3600) << 5 << QString::fromUtf8("150° 00' 00.0\"E,  80° 00' 00.0\"N");
 
-    addRow() << qreal(0.)                           << qreal(0.)                          << 6 << QString::fromUtf8( "  0° 00' 00.00\"E,   0° 00' 00.00\"S" );
-    addRow() << qreal(150.)                         << qreal(80.)                         << 6 << QString::fromUtf8( "150° 00' 00.00\"E,  80° 00' 00.00\"N" );
-    addRow() << qreal(149. + 59./60 + 59.9951/3600) << qreal(79. + 59./60 + 59.9951/3600) << 6 << QString::fromUtf8( "150° 00' 00.00\"E,  80° 00' 00.00\"N" );
-    addRow() << qreal(150.          +  0.0049/3600) << qreal(80.          +  0.0049/3600) << 6 << QString::fromUtf8( "150° 00' 00.00\"E,  80° 00' 00.00\"N" );
+    addRow() << qreal(0.) << qreal(0.) << 6 << QString::fromUtf8("  0° 00' 00.00\"E,   0° 00' 00.00\"S");
+    addRow() << qreal(150.) << qreal(80.) << 6 << QString::fromUtf8("150° 00' 00.00\"E,  80° 00' 00.00\"N");
+    addRow() << qreal(149. + 59. / 60 + 59.9951 / 3600) << qreal(79. + 59. / 60 + 59.9951 / 3600) << 6
+             << QString::fromUtf8("150° 00' 00.00\"E,  80° 00' 00.00\"N");
+    addRow() << qreal(150. + 0.0049 / 3600) << qreal(80. + 0.0049 / 3600) << 6 << QString::fromUtf8("150° 00' 00.00\"E,  80° 00' 00.00\"N");
 }
 
 /*
@@ -1734,15 +1552,15 @@ void TestGeoDataCoordinates::testToString_DMS_data()
  */
 void TestGeoDataCoordinates::testToString_DMS()
 {
-    QFETCH( qreal, lon );
-    QFETCH( qreal, lat );
-    QFETCH( int, precision );
-    QFETCH( QString, expected );
+    QFETCH(qreal, lon);
+    QFETCH(qreal, lat);
+    QFETCH(int, precision);
+    QFETCH(QString, expected);
 
-    const GeoDataCoordinates coordinates( lon, lat, 0, GeoDataCoordinates::Degree );
+    const GeoDataCoordinates coordinates(lon, lat, 0, GeoDataCoordinates::Degree);
 
-    const QString result = coordinates.toString( GeoDataCoordinates::DMS, precision );
-    QCOMPARE( result, expected );
+    const QString result = coordinates.toString(GeoDataCoordinates::DMS, precision);
+    QCOMPARE(result, expected);
 }
 
 /*
@@ -1755,32 +1573,32 @@ void TestGeoDataCoordinates::testToString_DM_data()
     QTest::addColumn<int>("precision");
     QTest::addColumn<QString>("expected");
 
-    addRow() << qreal(0.)              << qreal(0.)             << 0 << QString::fromUtf8( "  0°E,   0°S" );
-    addRow() << qreal(150.)            << qreal(80.)            << 0 << QString::fromUtf8( "150°E,  80°N" );
-    addRow() << qreal(149. + 31./60)   << qreal(79. + 31./60)   << 0 << QString::fromUtf8( "150°E,  80°N" );
-    addRow() << qreal(149. + 30.51/60) << qreal(79. + 30.51/60) << 0 << QString::fromUtf8( "150°E,  80°N" );
-    addRow() << qreal(150. + 29./60)   << qreal(80. + 29./60)   << 0 << QString::fromUtf8( "150°E,  80°N" );
-    addRow() << qreal(150. + 29.49/60) << qreal(80. + 29.49/60) << 0 << QString::fromUtf8( "150°E,  80°N" );
+    addRow() << qreal(0.) << qreal(0.) << 0 << QString::fromUtf8("  0°E,   0°S");
+    addRow() << qreal(150.) << qreal(80.) << 0 << QString::fromUtf8("150°E,  80°N");
+    addRow() << qreal(149. + 31. / 60) << qreal(79. + 31. / 60) << 0 << QString::fromUtf8("150°E,  80°N");
+    addRow() << qreal(149. + 30.51 / 60) << qreal(79. + 30.51 / 60) << 0 << QString::fromUtf8("150°E,  80°N");
+    addRow() << qreal(150. + 29. / 60) << qreal(80. + 29. / 60) << 0 << QString::fromUtf8("150°E,  80°N");
+    addRow() << qreal(150. + 29.49 / 60) << qreal(80. + 29.49 / 60) << 0 << QString::fromUtf8("150°E,  80°N");
 
-    addRow() << qreal(0.)              << qreal(0.)             << 1 << QString::fromUtf8( "  0° 00'E,   0° 00'S" );
-    addRow() << qreal(150.)            << qreal(80.)            << 1 << QString::fromUtf8( "150° 00'E,  80° 00'N" );
-    addRow() << qreal(149. + 59.51/60) << qreal(79. + 59.51/60) << 1 << QString::fromUtf8( "150° 00'E,  80° 00'N" );
-    addRow() << qreal(150. +  0.49/60) << qreal(80. +  0.49/60) << 1 << QString::fromUtf8( "150° 00'E,  80° 00'N" );
+    addRow() << qreal(0.) << qreal(0.) << 1 << QString::fromUtf8("  0° 00'E,   0° 00'S");
+    addRow() << qreal(150.) << qreal(80.) << 1 << QString::fromUtf8("150° 00'E,  80° 00'N");
+    addRow() << qreal(149. + 59.51 / 60) << qreal(79. + 59.51 / 60) << 1 << QString::fromUtf8("150° 00'E,  80° 00'N");
+    addRow() << qreal(150. + 0.49 / 60) << qreal(80. + 0.49 / 60) << 1 << QString::fromUtf8("150° 00'E,  80° 00'N");
 
-    addRow() << qreal(0.)              << qreal(0.)             << 2 << QString::fromUtf8( "  0° 00'E,   0° 00'S" );
-    addRow() << qreal(150.)            << qreal(80.)            << 2 << QString::fromUtf8( "150° 00'E,  80° 00'N" );
-    addRow() << qreal(149. + 59.51/60) << qreal(79. + 59.51/60) << 2 << QString::fromUtf8( "150° 00'E,  80° 00'N" );
-    addRow() << qreal(150. +  0.49/60) << qreal(80. +  0.49/60) << 2 << QString::fromUtf8( "150° 00'E,  80° 00'N" );
+    addRow() << qreal(0.) << qreal(0.) << 2 << QString::fromUtf8("  0° 00'E,   0° 00'S");
+    addRow() << qreal(150.) << qreal(80.) << 2 << QString::fromUtf8("150° 00'E,  80° 00'N");
+    addRow() << qreal(149. + 59.51 / 60) << qreal(79. + 59.51 / 60) << 2 << QString::fromUtf8("150° 00'E,  80° 00'N");
+    addRow() << qreal(150. + 0.49 / 60) << qreal(80. + 0.49 / 60) << 2 << QString::fromUtf8("150° 00'E,  80° 00'N");
 
-    addRow() << qreal(0.)               << qreal(0.)              << 3 << QString::fromUtf8( "  0° 00.0'E,   0° 00.0'S" );
-    addRow() << qreal(150.)             << qreal(80.)             << 3 << QString::fromUtf8( "150° 00.0'E,  80° 00.0'N" );
-    addRow() << qreal(149. + 59.951/60) << qreal(79. + 59.951/60) << 3 << QString::fromUtf8( "150° 00.0'E,  80° 00.0'N" );
-    addRow() << qreal(150. +  0.049/60) << qreal(80. +  0.049/60) << 3 << QString::fromUtf8( "150° 00.0'E,  80° 00.0'N" );
+    addRow() << qreal(0.) << qreal(0.) << 3 << QString::fromUtf8("  0° 00.0'E,   0° 00.0'S");
+    addRow() << qreal(150.) << qreal(80.) << 3 << QString::fromUtf8("150° 00.0'E,  80° 00.0'N");
+    addRow() << qreal(149. + 59.951 / 60) << qreal(79. + 59.951 / 60) << 3 << QString::fromUtf8("150° 00.0'E,  80° 00.0'N");
+    addRow() << qreal(150. + 0.049 / 60) << qreal(80. + 0.049 / 60) << 3 << QString::fromUtf8("150° 00.0'E,  80° 00.0'N");
 
-    addRow() << qreal(0.)                << qreal(0.)               << 4 << QString::fromUtf8( "  0° 00.00'E,   0° 00.00'S" );
-    addRow() << qreal(150.)              << qreal(80.)              << 4 << QString::fromUtf8( "150° 00.00'E,  80° 00.00'N" );
-    addRow() << qreal(149. + 59.9951/60) << qreal(79. + 59.9951/60) << 4 << QString::fromUtf8( "150° 00.00'E,  80° 00.00'N" );
-    addRow() << qreal(150. +  0.0049/60) << qreal(80. +  0.0049/60) << 4 << QString::fromUtf8( "150° 00.00'E,  80° 00.00'N" );
+    addRow() << qreal(0.) << qreal(0.) << 4 << QString::fromUtf8("  0° 00.00'E,   0° 00.00'S");
+    addRow() << qreal(150.) << qreal(80.) << 4 << QString::fromUtf8("150° 00.00'E,  80° 00.00'N");
+    addRow() << qreal(149. + 59.9951 / 60) << qreal(79. + 59.9951 / 60) << 4 << QString::fromUtf8("150° 00.00'E,  80° 00.00'N");
+    addRow() << qreal(150. + 0.0049 / 60) << qreal(80. + 0.0049 / 60) << 4 << QString::fromUtf8("150° 00.00'E,  80° 00.00'N");
 }
 
 /*
@@ -1788,15 +1606,15 @@ void TestGeoDataCoordinates::testToString_DM_data()
  */
 void TestGeoDataCoordinates::testToString_DM()
 {
-    QFETCH( qreal, lon );
-    QFETCH( qreal, lat );
-    QFETCH( int, precision );
-    QFETCH( QString, expected );
+    QFETCH(qreal, lon);
+    QFETCH(qreal, lat);
+    QFETCH(int, precision);
+    QFETCH(QString, expected);
 
-    const GeoDataCoordinates coordinates( lon, lat, 0, GeoDataCoordinates::Degree );
+    const GeoDataCoordinates coordinates(lon, lat, 0, GeoDataCoordinates::Degree);
 
-    const QString result = coordinates.toString( GeoDataCoordinates::DM, precision );
-    QCOMPARE( result, expected );
+    const QString result = coordinates.toString(GeoDataCoordinates::DM, precision);
+    QCOMPARE(result, expected);
 }
 
 /*
@@ -1820,17 +1638,17 @@ void TestGeoDataCoordinates::testPack()
     QFETCH(qreal, lat);
     QFETCH(qreal, alt);
 
-    GeoDataCoordinates coordinates1,coordinates2;
+    GeoDataCoordinates coordinates1, coordinates2;
     coordinates1.set(lon, lat, alt, GeoDataCoordinates::Degree);
 
     QTemporaryFile file;
-    if(file.open()) {
+    if (file.open()) {
         QDataStream out(&file);
         coordinates1.pack(out);
     }
     file.close();
 
-    if(file.open()) {
+    if (file.open()) {
         QDataStream in(&file);
         coordinates2.unpack(in);
     }
@@ -1864,45 +1682,45 @@ void TestGeoDataCoordinates::testUTM_data()
      */
 
     // Equator
-    addRow() << qreal(-180.0)   << qreal(0.0)       << 1  << "N" << 16602144 << 0;
-    addRow() << qreal(0)        << qreal(0.0)       << 31 << "N" << 16602144 << 0;
-    addRow() << qreal(150.567)  << qreal(0.0)       << 56 << "N" << 22918607 << 0;
+    addRow() << qreal(-180.0) << qreal(0.0) << 1 << "N" << 16602144 << 0;
+    addRow() << qreal(0) << qreal(0.0) << 31 << "N" << 16602144 << 0;
+    addRow() << qreal(150.567) << qreal(0.0) << 56 << "N" << 22918607 << 0;
 
     // Zone borders
     int zoneNumber = 1;
-    for ( int i = -180; i <= 180; i += 6 ){
+    for (int i = -180; i <= 180; i += 6) {
         addRow() << qreal(i) << qreal(0.0) << zoneNumber << "N" << 16602144 << 0;
         zoneNumber++;
     }
 
     // Northern hemisphere
-    addRow() << qreal(-180.0)   << qreal(15)        << 1  << "P" << 17734904 << 166051369;
-    addRow() << qreal(0)        << qreal(60.5)      << 31 << "V" << 33523714 << 671085271;
-    addRow() << qreal(150.567)  << qreal(75.123)    << 56 << "X" << 43029080 << 833876115;
+    addRow() << qreal(-180.0) << qreal(15) << 1 << "P" << 17734904 << 166051369;
+    addRow() << qreal(0) << qreal(60.5) << 31 << "V" << 33523714 << 671085271;
+    addRow() << qreal(150.567) << qreal(75.123) << 56 << "X" << 43029080 << 833876115;
 
     // Southern hemisphere
-    addRow() << qreal(-3.5)     << qreal(-50)       << 30 << "F" << 46416654 << 446124952;
-    addRow() << qreal(22.56)    << qreal(-62.456)   << 34 << "E" << 58047905 << 307404780;
+    addRow() << qreal(-3.5) << qreal(-50) << 30 << "F" << 46416654 << 446124952;
+    addRow() << qreal(22.56) << qreal(-62.456) << 34 << "E" << 58047905 << 307404780;
 
     // Exceptions
 
     // North pole (no zone associated, so it returns 0)
-    addRow() << qreal(-100.0)   << qreal(85.0)      << 0  << "Y" << 49026986 << 943981733;
-    addRow() << qreal(100.0)    << qreal(85.0)      << 0  << "Z" << 50973014 << 943981733;
+    addRow() << qreal(-100.0) << qreal(85.0) << 0 << "Y" << 49026986 << 943981733;
+    addRow() << qreal(100.0) << qreal(85.0) << 0 << "Z" << 50973014 << 943981733;
 
     // South pole (no zone associated, so it returns 0)
-    addRow() << qreal(-100.0)   << qreal(-85.0)     << 0  << "A" << 49026986 << 56018267;
-    addRow() << qreal(100.0)    << qreal(-85.0)     << 0  << "B" << 50973014 << 56018267;
+    addRow() << qreal(-100.0) << qreal(-85.0) << 0 << "A" << 49026986 << 56018267;
+    addRow() << qreal(100.0) << qreal(-85.0) << 0 << "B" << 50973014 << 56018267;
 
     // Stavanger, in southwestern Norway, is in zone 32
-    addRow() << qreal(5.73)     << qreal(58.97)     << 32 << "V" << 31201538 << 654131013;
+    addRow() << qreal(5.73) << qreal(58.97) << 32 << "V" << 31201538 << 654131013;
     // Same longitude, at the equator, is in zone 31
-    addRow() << qreal(5.73)     << qreal(0.0)       << 31 << "N" << 80389643 << 0;
+    addRow() << qreal(5.73) << qreal(0.0) << 31 << "N" << 80389643 << 0;
 
     // Svalbard is in zone 33
-    addRow() << qreal(10.55)    << qreal(78.88)     << 33 << "X" << 40427848 << 876023047;
+    addRow() << qreal(10.55) << qreal(78.88) << 33 << "X" << 40427848 << 876023047;
     // Same longitude, at the equator, is in zone 32
-    addRow() << qreal(10.55)    << qreal(0.0)       << 32 << "N" << 67249738 << 0;
+    addRow() << qreal(10.55) << qreal(0.0) << 32 << "N" << 67249738 << 0;
 }
 
 /*
@@ -1912,7 +1730,8 @@ void TestGeoDataCoordinates::testUTM_data()
  *     - utmEasting()
  *     - utmNorthing()
  */
-void TestGeoDataCoordinates::testUTM(){
+void TestGeoDataCoordinates::testUTM()
+{
     QFETCH(qreal, lon);
     QFETCH(qreal, lat);
     QFETCH(int, zone);
@@ -1930,15 +1749,12 @@ void TestGeoDataCoordinates::testUTM(){
      * values are expressed in centimeters, the actual values are converted
      * to this unit.
      */
-    int actualEasting = qRound( 100.0 * coordinates.utmEasting() );
-    int actualNorthing = qRound( 100.0 * coordinates.utmNorthing() );
+    int actualEasting = qRound(100.0 * coordinates.utmEasting());
+    int actualNorthing = qRound(100.0 * coordinates.utmNorthing());
 
-    QCOMPARE( actualEasting, easting );
-    QCOMPARE( actualNorthing, northing );
+    QCOMPARE(actualEasting, easting);
+    QCOMPARE(actualNorthing, northing);
 }
 
 QTEST_MAIN(TestGeoDataCoordinates)
 #include "TestGeoDataCoordinates.moc"
-
-
-

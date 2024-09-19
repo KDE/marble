@@ -31,10 +31,10 @@ const char gpxTag_trkseg[] = "trkseg";
 const char gpxTag_wpt[] = "wpt";
 const char gpxTag_rte[] = "rte";
 const char gpxTag_rtept[] = "rtept";
-const char gpxTag_cmt [] = "cmt";
-const char gpxTag_link [] = "link";
-const char gpxTag_url [] = "url";
-const char gpxTag_urlname [] = "urlname";
+const char gpxTag_cmt[] = "cmt";
+const char gpxTag_link[] = "link";
+const char gpxTag_url[] = "url";
+const char gpxTag_urlname[] = "urlname";
 
 const char gpxTag_nameSpaceGarminTrackPointExt1[] = "http://www.garmin.com/xmlschemas/TrackPointExtension/v1";
 const char gpxTag_TrackPointExtension[] = "TrackPointExtension";

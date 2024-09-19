@@ -6,8 +6,6 @@
 #ifndef GEOCUTE_ACCURACYLEVEL_H
 #define GEOCUTE_ACCURACYLEVEL_H
 
-
-
 namespace GeoCute
 {
 
@@ -22,7 +20,5 @@ enum AccuracyLevel {
 };
 
 }
-
-
 
 #endif

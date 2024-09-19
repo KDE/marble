@@ -8,11 +8,11 @@
 #include "MarbleDebug.h"
 
 #include "GPXElementDictionary.h"
-#include "GeoParser.h"
 #include "GeoDataDocument.h"
+#include "GeoDataLineString.h"
 #include "GeoDataPlacemark.h"
 #include "GeoDataPoint.h"
-#include "GeoDataLineString.h"
+#include "GeoParser.h"
 
 namespace Marble
 {
@@ -20,14 +20,13 @@ namespace gpx
 {
 GPX_DEFINE_TAG_HANDLER(rte)
 
-GeoNode* GPXrteTagHandler::parse(GeoParser& parser) const
+GeoNode *GPXrteTagHandler::parse(GeoParser &parser) const
 {
     Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1String(gpxTag_rte)));
 
     GeoStackItem parentItem = parser.parentElement();
-    if (parentItem.represents(gpxTag_gpx))
-    {
-        GeoDataDocument* doc = parentItem.nodeAs<GeoDataDocument>();
+    if (parentItem.represents(gpxTag_gpx)) {
+        GeoDataDocument *doc = parentItem.nodeAs<GeoDataDocument>();
 
         // placemark for the linestring
         GeoDataPlacemark *placemark = new GeoDataPlacemark;

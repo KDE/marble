@@ -8,10 +8,10 @@
 
 #include <QString>
 
-#include "KmlElementDictionary.h"
-#include "MarbleDebug.h"
 #include "GeoDataFeature.h"
 #include "GeoDataStyleMap.h"
+#include "KmlElementDictionary.h"
+#include "MarbleDebug.h"
 
 #include "GeoParser.h"
 
@@ -19,26 +19,26 @@ namespace Marble
 {
 namespace kml
 {
-KML_DEFINE_TAG_HANDLER( styleUrl )
+KML_DEFINE_TAG_HANDLER(styleUrl)
 
-GeoNode* KmlstyleUrlTagHandler::parse( GeoParser& parser ) const
+GeoNode *KmlstyleUrlTagHandler::parse(GeoParser &parser) const
 {
     Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1String(kmlTag_styleUrl)));
 
     GeoStackItem parentItem = parser.parentElement();
     GeoStackItem grandParentItem = parser.parentElement();
-    
-    if( parentItem.represents( kmlTag_Pair ) ) {
+
+    if (parentItem.represents(kmlTag_Pair)) {
         QString content = parser.readElementText().trimmed();
 
         QString key = parentItem.nodeAs<GeoDataStyleMap>()->lastKey();
-        (*parentItem.nodeAs<GeoDataStyleMap>())[ key ] = content;
+        (*parentItem.nodeAs<GeoDataStyleMap>())[key] = content;
         parentItem.nodeAs<GeoDataStyleMap>()->setLastKey(QString());
 
-    } else if( parentItem.is<GeoDataFeature>() ) {
+    } else if (parentItem.is<GeoDataFeature>()) {
         QString content = parser.readElementText().trimmed();
 
-        parentItem.nodeAs<GeoDataFeature>()->setStyleUrl( content );
+        parentItem.nodeAs<GeoDataFeature>()->setStyleUrl(content);
     }
     return nullptr;
 }

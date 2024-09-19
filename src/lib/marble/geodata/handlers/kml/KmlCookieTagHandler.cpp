@@ -5,27 +5,26 @@
 
 #include "KmlCookieTagHandler.h"
 
-#include "KmlElementDictionary.h"
 #include "GeoDataNetworkLinkControl.h"
 #include "GeoDataParser.h"
+#include "KmlElementDictionary.h"
 
 namespace Marble
 {
 namespace kml
 {
-KML_DEFINE_TAG_HANDLER( cookie )
+KML_DEFINE_TAG_HANDLER(cookie)
 
-GeoNode* KmlcookieTagHandler::parse( GeoParser& parser ) const
+GeoNode *KmlcookieTagHandler::parse(GeoParser &parser) const
 {
     Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1String(kmlTag_cookie)));
 
     GeoStackItem parentItem = parser.parentElement();
 
-    if ( parentItem.represents( kmlTag_NetworkLinkControl ) )
-    {
+    if (parentItem.represents(kmlTag_NetworkLinkControl)) {
         QString cookie = parser.readElementText();
 
-        parentItem.nodeAs<GeoDataNetworkLinkControl>()->setCookie( cookie );
+        parentItem.nodeAs<GeoDataNetworkLinkControl>()->setCookie(cookie);
     }
 
     return nullptr;

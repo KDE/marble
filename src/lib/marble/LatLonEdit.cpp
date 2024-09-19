@@ -3,13 +3,10 @@
 // SPDX-FileCopyrightText: 2008 Henry de Valence <hdevalence@gmail.com>
 // SPDX-FileCopyrightText: 2011 Friedrich W. H. Kossebau <kossebau@kde.org>
 
-
 #include "LatLonEdit.h"
 #include "ui_LatLonEdit.h"
 
 #include "MarbleDebug.h"
-
-
 
 namespace Marble
 {
@@ -21,21 +18,26 @@ namespace Marble
 // for DMS, just the UI elements for DMS are created and modified as needed,
 // if another notation is selected. This involves showing and hiding them and
 // setting the proper suffix and min/max values.
-// The logic per notation is moved into specialized subclasses of a class 
+// The logic per notation is moved into specialized subclasses of a class
 // AbstractInputHandler.
 // TODO: simply remove the LatLonEdit.ui file and embed code directly here?
 
 enum { PositiveSphereIndex = 0, NegativeSphereIndex = 1 };
-
 
 class LatLonEditPrivate;
 
 class AbstractInputHandler // TODO: better name
 {
 protected:
-    explicit AbstractInputHandler(LatLonEditPrivate *ui) : m_ui(ui) {}
+    explicit AbstractInputHandler(LatLonEditPrivate *ui)
+        : m_ui(ui)
+    {
+    }
+
 public:
-    virtual ~AbstractInputHandler() {}
+    virtual ~AbstractInputHandler()
+    {
+    }
 
 public: // API to be implemented
     virtual void setupUi() = 0;
@@ -47,13 +49,17 @@ public: // API to be implemented
     virtual qreal calculateValue() const = 0;
 
 protected:
-    LatLonEditPrivate * const m_ui;
+    LatLonEditPrivate *const m_ui;
 };
 
 class DecimalInputHandler : public AbstractInputHandler
 {
 public:
-    explicit DecimalInputHandler(LatLonEditPrivate *ui) : AbstractInputHandler(ui) {}
+    explicit DecimalInputHandler(LatLonEditPrivate *ui)
+        : AbstractInputHandler(ui)
+    {
+    }
+
 public: // AbstractInputHandler API
     void setupUi() override;
     void setupMinMax(LatLonEdit::Dimension dimension) override;
@@ -67,7 +73,11 @@ public: // AbstractInputHandler API
 class DMSInputHandler : public AbstractInputHandler
 {
 public:
-    explicit DMSInputHandler(LatLonEditPrivate *ui) : AbstractInputHandler(ui) {}
+    explicit DMSInputHandler(LatLonEditPrivate *ui)
+        : AbstractInputHandler(ui)
+    {
+    }
+
 public: // AbstractInputHandler API
     void setupUi() override;
     void setupMinMax(LatLonEdit::Dimension dimension) override;
@@ -81,7 +91,11 @@ public: // AbstractInputHandler API
 class DMInputHandler : public AbstractInputHandler
 {
 public:
-    explicit DMInputHandler(LatLonEditPrivate *ui) : AbstractInputHandler(ui) {}
+    explicit DMInputHandler(LatLonEditPrivate *ui)
+        : AbstractInputHandler(ui)
+    {
+    }
+
 public: // AbstractInputHandler API
     void setupUi() override;
     void setupMinMax(LatLonEdit::Dimension dimension) override;
@@ -113,15 +127,13 @@ public:
 
     LatLonEditPrivate();
     ~LatLonEditPrivate();
-    void init(QWidget* parent);
+    void init(QWidget *parent);
 };
 
-
-static void
-switchSign( QComboBox *sign )
+static void switchSign(QComboBox *sign)
 {
     const bool isNegativeSphere = (sign->currentIndex() == NegativeSphereIndex);
-    sign->setCurrentIndex( isNegativeSphere ? PositiveSphereIndex : NegativeSphereIndex );
+    sign->setCurrentIndex(isNegativeSphere ? PositiveSphereIndex : NegativeSphereIndex);
 }
 
 void DecimalInputHandler::setupUi()
@@ -138,7 +150,7 @@ void DecimalInputHandler::setupMinMax(LatLonEdit::Dimension dimension)
     const qreal maxValue = (dimension == LatLonEdit::Longitude) ? 180.0 : 90.0;
 
     m_ui->m_floatValueEditor->setMinimum(-maxValue);
-    m_ui->m_floatValueEditor->setMaximum( maxValue);
+    m_ui->m_floatValueEditor->setMaximum(maxValue);
 }
 
 void DecimalInputHandler::setValue(qreal value)
@@ -189,17 +201,17 @@ void DMSInputHandler::setupMinMax(LatLonEdit::Dimension dimension)
     const int maxValue = (dimension == LatLonEdit::Longitude) ? 180 : 90;
 
     m_ui->m_intValueEditor->setMinimum(-maxValue);
-    m_ui->m_intValueEditor->setMaximum( maxValue);
+    m_ui->m_intValueEditor->setMaximum(maxValue);
 }
 
 void DMSInputHandler::setValue(qreal value)
 {
-    value = qAbs( value );
+    value = qAbs(value);
 
-    int degValue = (int) value;
+    int degValue = (int)value;
 
     qreal minFValue = 60 * (value - degValue);
-    int minValue = (int) minFValue;
+    int minValue = (int)minFValue;
     qreal secFValue = 60 * (minFValue - minValue);
     // Adjustment for fuzziness (like 49.999999999999999999999)
     int secValue = qRound(secFValue);
@@ -212,9 +224,9 @@ void DMSInputHandler::setValue(qreal value)
         ++degValue;
     }
 
-    m_ui->m_intValueEditor->setValue( degValue );
-    m_ui->m_uintValueEditor->setValue( minValue );
-    m_ui->m_floatValueEditor->setValue( secFValue );
+    m_ui->m_intValueEditor->setValue(degValue);
+    m_ui->m_uintValueEditor->setValue(minValue);
+    m_ui->m_floatValueEditor->setValue(secFValue);
 }
 
 void DMSInputHandler::handleIntEditChange()
@@ -224,8 +236,8 @@ void DMSInputHandler::handleIntEditChange()
     const int maxDegValue = m_ui->m_intValueEditor->maximum();
     // at max/min?
     if (degValue <= minDegValue || maxDegValue <= degValue) {
-        m_ui->m_uintValueEditor->setValue( 0 );
-        m_ui->m_floatValueEditor->setValue( 0.0 );
+        m_ui->m_uintValueEditor->setValue(0);
+        m_ui->m_floatValueEditor->setValue(0.0);
     }
 }
 
@@ -236,12 +248,12 @@ void DMSInputHandler::handleUIntEditChange()
 
     if (minValue < 0) {
         if (degValue != 0) {
-            m_ui->m_uintValueEditor->setValue( 59 );
+            m_ui->m_uintValueEditor->setValue(59);
             const int degDec = (degValue > 0) ? 1 : -1;
-            m_ui->m_intValueEditor->setValue( degValue - degDec );
+            m_ui->m_intValueEditor->setValue(degValue - degDec);
         } else {
-            switchSign( m_ui->m_sign );
-            m_ui->m_uintValueEditor->setValue( 1 );
+            switchSign(m_ui->m_sign);
+            m_ui->m_uintValueEditor->setValue(1);
         }
     } else {
         const int minDegValue = m_ui->m_intValueEditor->minimum();
@@ -249,17 +261,17 @@ void DMSInputHandler::handleUIntEditChange()
         // at max/min already?
         if (degValue <= minDegValue || maxDegValue <= degValue) {
             // ignore
-            m_ui->m_uintValueEditor->setValue( 0 );
-        // overflow?
+            m_ui->m_uintValueEditor->setValue(0);
+            // overflow?
         } else if (minValue >= 60) {
-            m_ui->m_uintValueEditor->setValue( 0 );
+            m_ui->m_uintValueEditor->setValue(0);
             // will reach max/min?
-            if (minDegValue+1 == degValue || degValue == maxDegValue-1) {
+            if (minDegValue + 1 == degValue || degValue == maxDegValue - 1) {
                 // reset also sec
-                m_ui->m_floatValueEditor->setValue( 0.0 );
+                m_ui->m_floatValueEditor->setValue(0.0);
             }
             const int degInc = (degValue > 0) ? 1 : -1;
-            m_ui->m_intValueEditor->setValue( degValue + degInc );
+            m_ui->m_intValueEditor->setValue(degValue + degInc);
         }
     }
 }
@@ -273,16 +285,16 @@ void DMSInputHandler::handleFloatEditChange()
     if (secValue < 0.0) {
         const qreal secDiff = -secValue;
         if (degValue == 0 && minValue == 0) {
-            switchSign( m_ui->m_sign );
-            m_ui->m_floatValueEditor->setValue( secDiff );
+            switchSign(m_ui->m_sign);
+            m_ui->m_floatValueEditor->setValue(secDiff);
         } else {
-            m_ui->m_floatValueEditor->setValue( 60.0 - secDiff );
+            m_ui->m_floatValueEditor->setValue(60.0 - secDiff);
             if (minValue > 0) {
-                m_ui->m_uintValueEditor->setValue( minValue - 1 );
+                m_ui->m_uintValueEditor->setValue(minValue - 1);
             } else {
-                m_ui->m_uintValueEditor->setValue( 59 );
+                m_ui->m_uintValueEditor->setValue(59);
                 const int degDec = (degValue > 0) ? 1 : -1;
-                m_ui->m_intValueEditor->setValue( degValue - degDec );
+                m_ui->m_intValueEditor->setValue(degValue - degDec);
             }
         }
     } else {
@@ -291,31 +303,31 @@ void DMSInputHandler::handleFloatEditChange()
         // at max/min already?
         if (degValue <= minDegValue || maxDegValue <= degValue) {
             // ignore
-            m_ui->m_floatValueEditor->setValue( 0.0 );
-        // need to inc minutes?
+            m_ui->m_floatValueEditor->setValue(0.0);
+            // need to inc minutes?
         } else if (secValue >= 60.0) {
             qreal newSec = secValue - 60.0;
             // will reach max/min?
             if (minValue == 59) {
-                m_ui->m_uintValueEditor->setValue( 0 );
+                m_ui->m_uintValueEditor->setValue(0);
                 // will reach max/min?
-                if (minDegValue+1 == degValue || degValue == maxDegValue-1) {
+                if (minDegValue + 1 == degValue || degValue == maxDegValue - 1) {
                     // reset also sec
                     newSec = 0.0;
                 }
                 const int degInc = (degValue > 0) ? 1 : -1;
-                m_ui->m_intValueEditor->setValue( degValue + degInc );
+                m_ui->m_intValueEditor->setValue(degValue + degInc);
             } else {
-                m_ui->m_uintValueEditor->setValue( minValue + 1 );
+                m_ui->m_uintValueEditor->setValue(minValue + 1);
             }
-            m_ui->m_floatValueEditor->setValue( newSec );
+            m_ui->m_floatValueEditor->setValue(newSec);
         }
     }
 }
 
 qreal DMSInputHandler::calculateValue() const
 {
-    const bool isNegativeDeg = ( m_ui->m_intValueEditor->value() < 0 );
+    const bool isNegativeDeg = (m_ui->m_intValueEditor->value() < 0);
 
     const qreal deg = (qreal)(qAbs(m_ui->m_intValueEditor->value()));
     const qreal min = (qreal)(m_ui->m_uintValueEditor->value()) / 60.0;
@@ -347,7 +359,7 @@ void DMInputHandler::setupMinMax(LatLonEdit::Dimension dimension)
     const int maxValue = (dimension == LatLonEdit::Longitude) ? 180 : 90;
 
     m_ui->m_intValueEditor->setMinimum(-maxValue);
-    m_ui->m_intValueEditor->setMaximum( maxValue);
+    m_ui->m_intValueEditor->setMaximum(maxValue);
 }
 
 void DMInputHandler::setValue(qreal value)
@@ -358,14 +370,14 @@ void DMInputHandler::setValue(qreal value)
 
     qreal minFValue = 60 * (value - degValue);
     // Adjustment for fuzziness (like 49.999999999999999999999)
-    int minValue = qRound( minFValue );
+    int minValue = qRound(minFValue);
     if (minValue > 59) {
         minFValue = 0.0;
         ++degValue;
     }
 
-    m_ui->m_intValueEditor->setValue( degValue );
-    m_ui->m_floatValueEditor->setValue( minFValue );
+    m_ui->m_intValueEditor->setValue(degValue);
+    m_ui->m_floatValueEditor->setValue(minFValue);
 }
 
 void DMInputHandler::handleIntEditChange()
@@ -375,7 +387,7 @@ void DMInputHandler::handleIntEditChange()
     const int maxDegValue = m_ui->m_intValueEditor->maximum();
     // at max/min?
     if (degValue <= minDegValue || maxDegValue <= degValue) {
-        m_ui->m_floatValueEditor->setValue( 0.0 );
+        m_ui->m_floatValueEditor->setValue(0.0);
     }
 }
 
@@ -392,11 +404,11 @@ void DMInputHandler::handleFloatEditChange()
     if (minValue < 0.0) {
         const qreal minDiff = -minValue;
         if (degValue == 0) {
-            switchSign( m_ui->m_sign );
-            m_ui->m_floatValueEditor->setValue( minDiff );
+            switchSign(m_ui->m_sign);
+            m_ui->m_floatValueEditor->setValue(minDiff);
         } else {
-            m_ui->m_floatValueEditor->setValue( 60.0 - minDiff );
-            m_ui->m_intValueEditor->setValue( degValue - 1 );
+            m_ui->m_floatValueEditor->setValue(60.0 - minDiff);
+            m_ui->m_intValueEditor->setValue(degValue - 1);
         }
     } else {
         const int minDegValue = m_ui->m_intValueEditor->minimum();
@@ -404,25 +416,25 @@ void DMInputHandler::handleFloatEditChange()
         // at max/min already?
         if (degValue <= minDegValue || maxDegValue <= degValue) {
             // ignore
-            m_ui->m_floatValueEditor->setValue( 0.0 );
-        // need to inc degrees?
+            m_ui->m_floatValueEditor->setValue(0.0);
+            // need to inc degrees?
         } else if (minValue >= 60.0) {
             qreal newMin = minValue - 60.0;
             // will reach max/min?
-            if (minDegValue+1 == degValue || degValue == maxDegValue-1) {
+            if (minDegValue + 1 == degValue || degValue == maxDegValue - 1) {
                 // reset also sec
                 newMin = 0.0;
             } else {
-                m_ui->m_intValueEditor->setValue( degValue + 1 );
+                m_ui->m_intValueEditor->setValue(degValue + 1);
             }
-            m_ui->m_floatValueEditor->setValue( newMin );
+            m_ui->m_floatValueEditor->setValue(newMin);
         }
     }
 }
 
 qreal DMInputHandler::calculateValue() const
 {
-    const bool isNegativeDeg = ( m_ui->m_intValueEditor->value() < 0 );
+    const bool isNegativeDeg = (m_ui->m_intValueEditor->value() < 0);
 
     const qreal deg = (qreal)(qAbs(m_ui->m_intValueEditor->value()));
     const qreal min = m_ui->m_floatValueEditor->value() / 60.0;
@@ -439,40 +451,42 @@ qreal DMInputHandler::calculateValue() const
     return value;
 }
 
-
 LatLonEditPrivate::LatLonEditPrivate()
     : m_dimension(LatLonEdit::Latitude)
     , m_value(0.0)
     , m_notation(GeoDataCoordinates::DMS)
     , m_inputHandler(new DMSInputHandler(this))
     , m_updating(false)
-{}
+{
+}
 
 LatLonEditPrivate::~LatLonEditPrivate()
 {
     delete m_inputHandler;
 }
 
-void LatLonEditPrivate::init(QWidget* parent) { setupUi(parent); }
-
+void LatLonEditPrivate::init(QWidget *parent)
+{
+    setupUi(parent);
 }
 
+}
 
 using namespace Marble;
 
 LatLonEdit::LatLonEdit(QWidget *parent, LatLonEdit::Dimension dimension, GeoDataCoordinates::Notation notation)
-    : QWidget( parent ), d(new LatLonEditPrivate())
+    : QWidget(parent)
+    , d(new LatLonEditPrivate())
 {
     d->init(this);
     setDimension(dimension);
     setNotation(notation);
 
-    connect(d->m_intValueEditor,   SIGNAL(valueChanged(int)),    this, SLOT(checkIntValueOverflow()));
-    connect(d->m_uintValueEditor,  SIGNAL(valueChanged(int)),    this, SLOT(checkUIntValueOverflow()));
+    connect(d->m_intValueEditor, SIGNAL(valueChanged(int)), this, SLOT(checkIntValueOverflow()));
+    connect(d->m_uintValueEditor, SIGNAL(valueChanged(int)), this, SLOT(checkUIntValueOverflow()));
     connect(d->m_floatValueEditor, SIGNAL(valueChanged(double)), this, SLOT(checkFloatValueOverflow()));
 
-    connect(d->m_sign, SIGNAL(currentIndexChanged(int)),
-                 this, SLOT(onSignChanged()));
+    connect(d->m_sign, SIGNAL(currentIndexChanged(int)), this, SLOT(onSignChanged()));
 }
 
 LatLonEdit::~LatLonEdit()
@@ -492,7 +506,7 @@ GeoDataCoordinates::Notation LatLonEdit::notation() const
 
 void LatLonEdit::onSignChanged()
 {
-    if( d->m_updating )
+    if (d->m_updating)
         return;
 
     // Only flip the value if it does not match the sign
@@ -506,10 +520,10 @@ void LatLonEdit::onSignChanged()
         }
     }
 
-    emit valueChanged( d->m_value );
+    emit valueChanged(d->m_value);
 }
 
-void LatLonEdit::setDimension( Dimension dimension )
+void LatLonEdit::setDimension(Dimension dimension)
 {
     d->m_dimension = dimension;
 
@@ -523,12 +537,12 @@ void LatLonEdit::setDimension( Dimension dimension )
 
         switch (dimension) {
         case Longitude:
-            d->m_sign->addItem( tr("E", "East, the direction" ) );
-            d->m_sign->addItem( tr("W", "West, the direction" ) );
+            d->m_sign->addItem(tr("E", "East, the direction"));
+            d->m_sign->addItem(tr("W", "West, the direction"));
             break;
         case Latitude:
-            d->m_sign->addItem( tr("N", "North, the direction" ) );
-            d->m_sign->addItem( tr("S", "South, the direction" ) );
+            d->m_sign->addItem(tr("N", "North, the direction"));
+            d->m_sign->addItem(tr("S", "South, the direction"));
             break;
         }
     }
@@ -536,7 +550,7 @@ void LatLonEdit::setDimension( Dimension dimension )
     d->m_updating = false;
 
     // reset value, old one is useless
-    setValue( 0.0 );
+    setValue(0.0);
 }
 
 void LatLonEdit::setNotation(GeoDataCoordinates::Notation notation)
@@ -576,7 +590,7 @@ void LatLonEdit::setNotation(GeoDataCoordinates::Notation notation)
 
 void LatLonEdit::checkFloatValueOverflow()
 {
-    if( d->m_updating )
+    if (d->m_updating)
         return;
 
     d->m_updating = true;
@@ -588,10 +602,9 @@ void LatLonEdit::checkFloatValueOverflow()
     recalculate();
 }
 
-
 void LatLonEdit::checkUIntValueOverflow()
 {
-    if( d->m_updating )
+    if (d->m_updating)
         return;
 
     d->m_updating = true;
@@ -605,7 +618,7 @@ void LatLonEdit::checkUIntValueOverflow()
 
 void LatLonEdit::checkIntValueOverflow()
 {
-    if( d->m_updating )
+    if (d->m_updating)
         return;
 
     d->m_updating = true;
@@ -617,7 +630,7 @@ void LatLonEdit::checkIntValueOverflow()
     recalculate();
 }
 
-void LatLonEdit::setValue( qreal value )
+void LatLonEdit::setValue(qreal value)
 {
     // limit to allowed values
     const qreal maxValue = (d->m_dimension == Longitude) ? 180.0 : 90.0;
@@ -632,7 +645,7 @@ void LatLonEdit::setValue( qreal value )
     }
 
     // no change?
-    if( value == d->m_value ) {
+    if (value == d->m_value) {
         return;
     }
 
@@ -647,7 +660,7 @@ void LatLonEdit::setValue( qreal value )
     d->m_inputHandler->setValue(value);
 
     const bool isNegative = (value < 0.0);
-    d->m_sign->setCurrentIndex( isNegative ? NegativeSphereIndex : PositiveSphereIndex );
+    d->m_sign->setCurrentIndex(isNegative ? NegativeSphereIndex : PositiveSphereIndex);
 
     d->m_updating = false;
 }
@@ -656,8 +669,7 @@ void LatLonEdit::recalculate()
 {
     d->m_value = d->m_inputHandler->calculateValue();
 
-    emit valueChanged( d->m_value );
+    emit valueChanged(d->m_value);
 }
-
 
 #include "moc_LatLonEdit.cpp"

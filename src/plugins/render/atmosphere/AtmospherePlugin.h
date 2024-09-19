@@ -18,13 +18,13 @@ class AtmospherePlugin : public RenderPlugin
 {
     Q_OBJECT
     Q_PLUGIN_METADATA(IID "org.kde.marble.AtmospherePlugin")
-    Q_INTERFACES( Marble::RenderPluginInterface )
-    MARBLE_PLUGIN( AtmospherePlugin )
+    Q_INTERFACES(Marble::RenderPluginInterface)
+    MARBLE_PLUGIN(AtmospherePlugin)
 
 public:
     AtmospherePlugin();
 
-    explicit AtmospherePlugin( const MarbleModel *marbleModel );
+    explicit AtmospherePlugin(const MarbleModel *marbleModel);
 
     QStringList backendTypes() const override;
 
@@ -56,7 +56,7 @@ public:
 
     bool isInitialized() const override;
 
-    bool render( GeoPainter *painter, ViewportParams *viewport, const QString& renderPos, GeoSceneLayer * layer = nullptr ) override;
+    bool render(GeoPainter *painter, ViewportParams *viewport, const QString &renderPos, GeoSceneLayer *layer = nullptr) override;
     void repaintPixmap(const ViewportParams *viewParams);
 
 public Q_SLOTS:

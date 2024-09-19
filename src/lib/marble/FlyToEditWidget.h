@@ -8,8 +8,8 @@
 #ifndef FLYTOEDITWIDGET_H
 #define FLYTOEDITWIDGET_H
 
-#include <QWidget>
 #include <QPersistentModelIndex>
+#include <QWidget>
 
 #include "GeoDataCoordinates.h"
 
@@ -23,30 +23,30 @@ namespace Marble
 class GeoDataFlyTo;
 class MarbleWidget;
 
-class FlyToEditWidget: public QWidget
+class FlyToEditWidget : public QWidget
 {
     Q_OBJECT
 
 public:
-    FlyToEditWidget( const QModelIndex& index, MarbleWidget* widget, QWidget* parent=nullptr );
+    FlyToEditWidget(const QModelIndex &index, MarbleWidget *widget, QWidget *parent = nullptr);
     bool editable() const;
 
 Q_SIGNALS:
-    void editingDone( const QModelIndex& index );
+    void editingDone(const QModelIndex &index);
 
 public Q_SLOTS:
-    void setEditable( bool editable );
+    void setEditable(bool editable);
 
     /** We disable editing of wait duration for first flyto in playlist. */
-    void setFirstFlyTo(const QPersistentModelIndex &index );
+    void setFirstFlyTo(const QPersistentModelIndex &index);
 
 private Q_SLOTS:
     void save();
     void updateCoordinates();
 
 private:
-    GeoDataFlyTo* flyToElement();
-    MarbleWidget* m_widget;
+    GeoDataFlyTo *flyToElement();
+    MarbleWidget *m_widget;
     QPersistentModelIndex m_index;
     QDoubleSpinBox *m_durationSpin;
     QComboBox *m_modeCombo;

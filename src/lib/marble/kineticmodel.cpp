@@ -8,8 +8,8 @@
 
 #include "kineticmodel.h"
 
-#include <QTimer>
 #include <QElapsedTimer>
+#include <QTimer>
 
 static const int KineticModelDefaultUpdateInterval = 15; // ms
 
@@ -46,7 +46,6 @@ KineticModelPrivate::KineticModelPrivate()
     , lastHeading(0)
     , changingPosition(true)
 {
-
 }
 
 KineticModel::KineticModel(QObject *parent)
@@ -59,7 +58,6 @@ KineticModel::KineticModel(QObject *parent)
 
 KineticModel::~KineticModel()
 {
-
 }
 
 bool KineticModel::hasVelocity() const
@@ -82,15 +80,15 @@ QPointF KineticModel::position() const
     return d_ptr->position;
 }
 
-void KineticModel::setPosition(const QPointF& position)
+void KineticModel::setPosition(const QPointF &position)
 {
-    setPosition( position.x(), position.y() );
+    setPosition(position.x(), position.y());
 }
 
 void KineticModel::setPosition(qreal posX, qreal posY)
 {
-    d_ptr->position.setX( posX );
-    d_ptr->position.setY( posY );
+    d_ptr->position.setX(posX);
+    d_ptr->position.setY(posY);
 
     int elapsed = d_ptr->timestamp.elapsed();
 
@@ -99,10 +97,10 @@ void KineticModel::setPosition(qreal posX, qreal posY)
         return;
     }
 
-    qreal delta = static_cast<qreal>( elapsed ) / 1000.0;
+    qreal delta = static_cast<qreal>(elapsed) / 1000.0;
 
     QPointF lastSpeed = d_ptr->velocity;
-    QPointF currentSpeed = ( d_ptr->position - d_ptr->lastPosition ) / delta;
+    QPointF currentSpeed = (d_ptr->position - d_ptr->lastPosition) / delta;
     d_ptr->velocity = 0.2 * lastSpeed + 0.8 * currentSpeed;
     d_ptr->lastPosition = d_ptr->position;
 
@@ -115,10 +113,10 @@ void KineticModel::setHeading(qreal heading)
     d_ptr->heading = heading;
 
     int elapsed = d_ptr->timestamp.elapsed();
-    qreal delta = static_cast<qreal>( elapsed ) / 1000.0;
+    qreal delta = static_cast<qreal>(elapsed) / 1000.0;
 
     qreal lastSpeed = d_ptr->velocityHeading;
-    qreal currentSpeed = delta ? ( d_ptr->heading - d_ptr->lastHeading ) / delta : 0;
+    qreal currentSpeed = delta ? (d_ptr->heading - d_ptr->lastHeading) / delta : 0;
     d_ptr->velocityHeading = 0.5 * lastSpeed + 0.2 * currentSpeed;
     d_ptr->lastHeading = d_ptr->heading;
 
@@ -126,15 +124,15 @@ void KineticModel::setHeading(qreal heading)
     d_ptr->timestamp.start();
 }
 
-void KineticModel::jumpToPosition(const QPointF& position)
+void KineticModel::jumpToPosition(const QPointF &position)
 {
-    jumpToPosition( position.x(), position.y() );
+    jumpToPosition(position.x(), position.y());
 }
 
 void KineticModel::jumpToPosition(qreal posX, qreal posY)
 {
-    d_ptr->position.setX( posX );
-    d_ptr->position.setY( posY );
+    d_ptr->position.setX(posX);
+    d_ptr->position.setY(posY);
 }
 
 int KineticModel::updateInterval() const
@@ -163,21 +161,21 @@ void KineticModel::start()
 
     // prevent kinetic spinning if last mouse move is too long ago
     const int elapsed = d->timestamp.elapsed();
-    if ( elapsed > 2 * d->ticker.interval() ) {
+    if (elapsed > 2 * d->ticker.interval()) {
         d->ticker.stop();
         emit finished();
         return;
     }
 
-    d->deacceleration = d->velocity * 1000 / ( 1 + d_ptr->duration );
+    d->deacceleration = d->velocity * 1000 / (1 + d_ptr->duration);
     if (d->deacceleration.x() < 0) {
-        d->deacceleration.setX( -d->deacceleration.x() );
+        d->deacceleration.setX(-d->deacceleration.x());
     }
     if (d->deacceleration.y() < 0) {
-        d->deacceleration.setY( -d->deacceleration.y() );
+        d->deacceleration.setY(-d->deacceleration.y());
     }
 
-    d->deaccelerationHeading = qAbs(d->velocityHeading) * 1000 / ( 1 + d_ptr->duration );
+    d->deaccelerationHeading = qAbs(d->velocityHeading) * 1000 / (1 + d_ptr->duration);
 
     if (!d->ticker.isActive())
         d->ticker.start();
@@ -187,7 +185,7 @@ void KineticModel::update()
 {
     Q_D(KineticModel);
 
-    int elapsed = qMin( static_cast<int>(d->timestamp.elapsed()), 100 ); // limit to 100msec to reduce catapult effect (bug 294608)
+    int elapsed = qMin(static_cast<int>(d->timestamp.elapsed()), 100); // limit to 100msec to reduce catapult effect (bug 294608)
     qreal delta = static_cast<qreal>(elapsed) / 1000.0;
 
     bool stop = false;
@@ -196,26 +194,26 @@ void KineticModel::update()
         QPointF vstep = d->deacceleration * delta;
 
         if (d->velocity.x() < vstep.x() && d->velocity.x() >= -vstep.x()) {
-            d->velocity.setX( 0 );
+            d->velocity.setX(0);
         } else {
             if (d->velocity.x() > 0)
-                d->velocity.setX( d->velocity.x() - vstep.x() );
+                d->velocity.setX(d->velocity.x() - vstep.x());
             else
-                d->velocity.setX( d->velocity.x() + vstep.x() );
+                d->velocity.setX(d->velocity.x() + vstep.x());
         }
 
         if (d->velocity.y() < vstep.y() && d->velocity.y() >= -vstep.y()) {
-            d->velocity.setY( 0 );
+            d->velocity.setY(0);
         } else {
             if (d->velocity.y() > 0)
-                d->velocity.setY( d->velocity.y() - vstep.y() );
+                d->velocity.setY(d->velocity.y() - vstep.y());
             else
-                d->velocity.setY( d->velocity.y() + vstep.y() );
+                d->velocity.setY(d->velocity.y() + vstep.y());
         }
 
         stop = d->velocity.isNull();
 
-        emit positionChanged( d->position.x(), d->position.y() );
+        emit positionChanged(d->position.x(), d->position.y());
     } else {
         d->heading += d->velocityHeading * delta;
         qreal vstep = d->deaccelerationHeading * delta; // Always positive.
@@ -227,7 +225,7 @@ void KineticModel::update()
 
         stop = !d->velocityHeading;
 
-        emit headingChanged( d->heading );
+        emit headingChanged(d->heading);
     }
 
     if (stop) {
@@ -239,4 +237,3 @@ void KineticModel::update()
 }
 
 #include "moc_kineticmodel.cpp"
-

@@ -8,18 +8,20 @@
 
 #include "AbstractDataPlugin.h"
 
-namespace Marble {
+namespace Marble
+{
 
-class PostalCodePlugin : public AbstractDataPlugin {
+class PostalCodePlugin : public AbstractDataPlugin
+{
     Q_OBJECT
     Q_PLUGIN_METADATA(IID "org.kde.marble.PostalCodePlugin")
-    Q_INTERFACES( Marble::RenderPluginInterface )
-    MARBLE_PLUGIN( PostalCodePlugin )
+    Q_INTERFACES(Marble::RenderPluginInterface)
+    MARBLE_PLUGIN(PostalCodePlugin)
 
- public:
+public:
     PostalCodePlugin();
 
-    explicit PostalCodePlugin( const MarbleModel *marbleModel );
+    explicit PostalCodePlugin(const MarbleModel *marbleModel);
 
     void initialize() override;
 

@@ -19,20 +19,20 @@ class StyleBuilder;
 class BookmarkManagerPrivate
 {
 public:
-    explicit BookmarkManagerPrivate( GeoDataTreeModel *treeModel );
+    explicit BookmarkManagerPrivate(GeoDataTreeModel *treeModel);
 
     ~BookmarkManagerPrivate();
 
     void resetBookmarkDocument();
 
-    static void setVisualCategory( GeoDataContainer *container );
+    static void setVisualCategory(GeoDataContainer *container);
 
     GeoDataTreeModel *const m_treeModel;
 
     GeoDataDocument *m_bookmarkDocument;
 
     QString m_bookmarkFileRelativePath;
-    const StyleBuilder* m_styleBuilder;
+    const StyleBuilder *m_styleBuilder;
 };
 
 }

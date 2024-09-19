@@ -14,10 +14,9 @@ namespace Marble
 class KmlLatLonQuadWriter : public GeoTagWriter
 {
 public:
-    bool write( const GeoNode *node, GeoWriter& writer ) const override;
+    bool write(const GeoNode *node, GeoWriter &writer) const override;
 };
 
 }
-
 
 #endif // KMLLATLONQUADWRITER_H

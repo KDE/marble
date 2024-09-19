@@ -6,47 +6,48 @@
 
 #include "GeoDataObject.h"
 
-#include <QtGlobal>
 #include <QDataStream>
 #include <QFileInfo>
 #include <QUrl>
+#include <QtGlobal>
 
 #include "GeoDataDocument.h"
 
 #include "GeoDataTypes.h"
-
 
 namespace Marble
 {
 
 class GeoDataObjectPrivate
 {
-  public:
+public:
     GeoDataObjectPrivate()
-        : m_id(),
-          m_targetId(),
-          m_parent(nullptr)
+        : m_id()
+        , m_targetId()
+        , m_parent(nullptr)
     {
     }
 
-    QString  m_id;
-    QString  m_targetId;
+    QString m_id;
+    QString m_targetId;
     GeoDataObject *m_parent;
 };
 
 GeoDataObject::GeoDataObject()
-    : GeoNode(), Serializable(),
-      d( new GeoDataObjectPrivate() )
+    : GeoNode()
+    , Serializable()
+    , d(new GeoDataObjectPrivate())
 {
 }
 
-GeoDataObject::GeoDataObject( GeoDataObject const & other )
-    : GeoNode(), Serializable( other ),
-      d( new GeoDataObjectPrivate( *other.d ) )
+GeoDataObject::GeoDataObject(GeoDataObject const &other)
+    : GeoNode()
+    , Serializable(other)
+    , d(new GeoDataObjectPrivate(*other.d))
 {
 }
 
-GeoDataObject & GeoDataObject::operator=( const GeoDataObject & rhs )
+GeoDataObject &GeoDataObject::operator=(const GeoDataObject &rhs)
 {
     *d = *rhs.d;
     return *this;
@@ -77,7 +78,7 @@ QString GeoDataObject::id() const
     return d->m_id;
 }
 
-void GeoDataObject::setId( const QString& value )
+void GeoDataObject::setId(const QString &value)
 {
     d->m_id = value;
 }
@@ -87,37 +88,37 @@ QString GeoDataObject::targetId() const
     return d->m_targetId;
 }
 
-void GeoDataObject::setTargetId( const QString& value )
+void GeoDataObject::setTargetId(const QString &value)
 {
     d->m_targetId = value;
 }
 
-QString GeoDataObject::resolvePath( const QString &relativePath ) const
+QString GeoDataObject::resolvePath(const QString &relativePath) const
 {
-    QUrl const url( relativePath );
-    QFileInfo const fileInfo( url.path() );
-    if ( url.isRelative() && fileInfo.isRelative() ) {
-        GeoDataDocument const * document = dynamic_cast<GeoDataDocument const*>( this );
-        if ( document ) {
+    QUrl const url(relativePath);
+    QFileInfo const fileInfo(url.path());
+    if (url.isRelative() && fileInfo.isRelative()) {
+        GeoDataDocument const *document = dynamic_cast<GeoDataDocument const *>(this);
+        if (document) {
             QString const baseUri = document->baseUri();
             QFileInfo const documentRoot = QFileInfo(baseUri.isEmpty() ? document->fileName() : baseUri);
             QFileInfo const absoluteImage(documentRoot.absolutePath() + QLatin1Char('/') + url.path());
             return absoluteImage.absoluteFilePath();
-        } else if ( d->m_parent ) {
-            return d->m_parent->resolvePath( relativePath );
+        } else if (d->m_parent) {
+            return d->m_parent->resolvePath(relativePath);
         }
     }
 
     return relativePath;
 }
 
-void GeoDataObject::pack( QDataStream& stream ) const
+void GeoDataObject::pack(QDataStream &stream) const
 {
     stream << d->m_id;
     stream << d->m_targetId;
 }
 
-void GeoDataObject::unpack( QDataStream& stream )
+void GeoDataObject::unpack(QDataStream &stream)
 {
     stream >> d->m_id;
     stream >> d->m_targetId;

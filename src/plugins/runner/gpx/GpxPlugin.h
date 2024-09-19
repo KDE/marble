@@ -14,10 +14,10 @@ class GpxPlugin : public ParseRunnerPlugin
 {
     Q_OBJECT
     Q_PLUGIN_METADATA(IID "org.kde.marble.GpxPlugin")
-    Q_INTERFACES( Marble::ParseRunnerPlugin )
+    Q_INTERFACES(Marble::ParseRunnerPlugin)
 
 public:
-    explicit GpxPlugin( QObject *parent = nullptr );
+    explicit GpxPlugin(QObject *parent = nullptr);
 
     QString name() const override;
 
@@ -35,7 +35,7 @@ public:
 
     QStringList fileExtensions() const override;
 
-    ParsingRunner* newRunner() const override;
+    ParsingRunner *newRunner() const override;
 };
 
 }

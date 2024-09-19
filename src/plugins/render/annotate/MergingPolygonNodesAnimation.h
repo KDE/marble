@@ -11,8 +11,8 @@
 
 #include "GeoDataCoordinates.h"
 
-
-namespace Marble {
+namespace Marble
+{
 
 class AreaAnnotation;
 class GeoDataLinearRing;
@@ -22,13 +22,10 @@ class MergingPolygonNodesAnimation : public QObject
     Q_OBJECT
 
 public:
-    explicit MergingPolygonNodesAnimation( AreaAnnotation *polygon );
+    explicit MergingPolygonNodesAnimation(AreaAnnotation *polygon);
     ~MergingPolygonNodesAnimation() override;
 
-    enum NodesBoundary {
-        InnerBoundary,
-        OuterBoundary
-    };
+    enum NodesBoundary { InnerBoundary, OuterBoundary };
 
 public Q_SLOTS:
     void startAnimation();
@@ -49,8 +46,8 @@ private:
     const int second_i;
     const int second_j;
 
-    QTimer         *m_timer;
-    NodesBoundary   m_boundary;
+    QTimer *m_timer;
+    NodesBoundary m_boundary;
 
     GeoDataLinearRing &outerRing;
     QVector<GeoDataLinearRing> &innerRings;

@@ -8,14 +8,14 @@
 namespace Marble
 {
 
-ShpPlugin::ShpPlugin( QObject *parent ) :
-    ParseRunnerPlugin( parent )
+ShpPlugin::ShpPlugin(QObject *parent)
+    : ParseRunnerPlugin(parent)
 {
 }
 
 QString ShpPlugin::name() const
 {
-    return tr( "Shp File Parser" );
+    return tr("Shp File Parser");
 }
 
 QString ShpPlugin::nameId() const
@@ -30,7 +30,7 @@ QString ShpPlugin::version() const
 
 QString ShpPlugin::description() const
 {
-    return tr( "Create GeoDataDocument from Shp Files" );
+    return tr("Create GeoDataDocument from Shp Files");
 }
 
 QString ShpPlugin::copyrightYears() const
@@ -40,13 +40,12 @@ QString ShpPlugin::copyrightYears() const
 
 QVector<PluginAuthor> ShpPlugin::pluginAuthors() const
 {
-    return QVector<PluginAuthor>()
-            << PluginAuthor(QStringLiteral("Thibaut Gridel"), QStringLiteral("tgridel@free.fr"));
+    return QVector<PluginAuthor>() << PluginAuthor(QStringLiteral("Thibaut Gridel"), QStringLiteral("tgridel@free.fr"));
 }
 
 QString ShpPlugin::fileFormatDescription() const
 {
-    return tr( "Shapefile Map Files" );
+    return tr("Shapefile Map Files");
 }
 
 QStringList ShpPlugin::fileExtensions() const
@@ -54,7 +53,7 @@ QStringList ShpPlugin::fileExtensions() const
     return QStringList(QStringLiteral("shp"));
 }
 
-ParsingRunner* ShpPlugin::newRunner() const
+ParsingRunner *ShpPlugin::newRunner() const
 {
     return new ShpRunner;
 }

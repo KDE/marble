@@ -9,19 +9,19 @@
 namespace Marble
 {
 
-LocalDatabasePlugin::LocalDatabasePlugin( QObject *parent ) :
-    SearchRunnerPlugin( parent )
+LocalDatabasePlugin::LocalDatabasePlugin(QObject *parent)
+    : SearchRunnerPlugin(parent)
 {
 }
 
 QString LocalDatabasePlugin::name() const
 {
-    return tr( "Local Database Search" );
+    return tr("Local Database Search");
 }
 
 QString LocalDatabasePlugin::guiString() const
 {
-    return tr( "Local Database" );
+    return tr("Local Database");
 }
 
 QString LocalDatabasePlugin::nameId() const
@@ -36,7 +36,7 @@ QString LocalDatabasePlugin::version() const
 
 QString LocalDatabasePlugin::description() const
 {
-    return tr( "Searches the internal Marble database for placemarks" );
+    return tr("Searches the internal Marble database for placemarks");
 }
 
 QString LocalDatabasePlugin::copyrightYears() const
@@ -46,11 +46,10 @@ QString LocalDatabasePlugin::copyrightYears() const
 
 QVector<PluginAuthor> LocalDatabasePlugin::pluginAuthors() const
 {
-    return QVector<PluginAuthor>()
-            << PluginAuthor(QStringLiteral("Dennis Nienhüser"), QStringLiteral("nienhueser@kde.org"));
+    return QVector<PluginAuthor>() << PluginAuthor(QStringLiteral("Dennis Nienhüser"), QStringLiteral("nienhueser@kde.org"));
 }
 
-SearchRunner* LocalDatabasePlugin::newRunner() const
+SearchRunner *LocalDatabasePlugin::newRunner() const
 {
     return new LocalDatabaseRunner;
 }

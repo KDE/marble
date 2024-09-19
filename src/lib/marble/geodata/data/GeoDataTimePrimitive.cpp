@@ -19,12 +19,14 @@ namespace Marble
 {
 
 GeoDataTimePrimitive::GeoDataTimePrimitive()
-    : GeoDataObject(), d( new GeoDataTimePrimitivePrivate )
+    : GeoDataObject()
+    , d(new GeoDataTimePrimitivePrivate)
 {
 }
 
-GeoDataTimePrimitive::GeoDataTimePrimitive( const GeoDataTimePrimitive& other )
-    : GeoDataObject( other ), d( new GeoDataTimePrimitivePrivate( *other.d ) )
+GeoDataTimePrimitive::GeoDataTimePrimitive(const GeoDataTimePrimitive &other)
+    : GeoDataObject(other)
+    , d(new GeoDataTimePrimitivePrivate(*other.d))
 {
 }
 
@@ -33,26 +35,26 @@ GeoDataTimePrimitive::~GeoDataTimePrimitive()
     delete d;
 }
 
-GeoDataTimePrimitive& GeoDataTimePrimitive::operator=( const GeoDataTimePrimitive& other )
+GeoDataTimePrimitive &GeoDataTimePrimitive::operator=(const GeoDataTimePrimitive &other)
 {
-    GeoDataObject::operator=( other );
+    GeoDataObject::operator=(other);
     *d = *other.d;
     return *this;
 }
 
-const char* GeoDataTimePrimitive::nodeType() const
+const char *GeoDataTimePrimitive::nodeType() const
 {
     return GeoDataTypes::GeoDataTimePrimitiveType;
 }
 
-void GeoDataTimePrimitive::pack( QDataStream& stream ) const
+void GeoDataTimePrimitive::pack(QDataStream &stream) const
 {
-    GeoDataObject::pack( stream );
+    GeoDataObject::pack(stream);
 }
 
-void GeoDataTimePrimitive::unpack( QDataStream& stream )
+void GeoDataTimePrimitive::unpack(QDataStream &stream)
 {
-    GeoDataObject::unpack( stream );
+    GeoDataObject::unpack(stream);
 }
 
 }

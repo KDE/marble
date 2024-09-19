@@ -8,8 +8,8 @@
 
 #include "marble_export.h"
 
-#include <QModelIndex>
 #include <QAbstractListModel>
+#include <QModelIndex>
 
 class QNetworkReply;
 
@@ -23,22 +23,13 @@ class MARBLE_EXPORT CloudRouteModel : public QAbstractListModel
     Q_OBJECT
 
 public:
-    enum RouteRoles {
-        Timestamp = Qt::UserRole + 1,
-        Name,
-        PreviewUrl,
-        Distance,
-        Duration,
-        IsCached,
-        IsDownloading,
-        IsOnCloud
-    };
+    enum RouteRoles { Timestamp = Qt::UserRole + 1, Name, PreviewUrl, Distance, Duration, IsCached, IsDownloading, IsOnCloud };
 
-    explicit CloudRouteModel( QObject *parent = nullptr );
+    explicit CloudRouteModel(QObject *parent = nullptr);
     ~CloudRouteModel() override;
 
-    QVariant data( const QModelIndex& index, int role = Qt::DisplayRole ) const override;
-    int rowCount( const QModelIndex& parent = QModelIndex() ) const override;
+    QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
+    int rowCount(const QModelIndex &parent = QModelIndex()) const override;
 
     /** Overload of QAbstractListModel */
     QHash<int, QByteArray> roleNames() const override;
@@ -47,14 +38,14 @@ public:
      * Sets the list of routes that will show up in CloudRoutesDialog.
      * @param items List of routes.
      */
-    void setItems( const QVector<RouteItem> &items );
+    void setItems(const QVector<RouteItem> &items);
 
     /**
      * Checks if specified route exists in the local cache.
      * @param index Index of the route.
      * @return true, if exists.
      */
-    bool isCached( const QModelIndex &index ) const;
+    bool isCached(const QModelIndex &index) const;
 
     /**
      * Getter for the item currently being downloaded.
@@ -66,14 +57,14 @@ public:
      * Marks the route at given index as being downloaded.
      * @param index Index of the route.
      */
-    void setDownloadingItem( const QPersistentModelIndex &index );
+    void setDownloadingItem(const QPersistentModelIndex &index);
 
     /**
      * Checks if route is being downloaded.
      * @param index Index of the route.
      * @return true, if downloading.
      */
-    bool isDownloading( const QModelIndex &index ) const;
+    bool isDownloading(const QModelIndex &index) const;
 
     /**
      * Total size of the item currently being downloaded.
@@ -93,11 +84,11 @@ public:
      * @param index Index of the item whose preview is requested
      * @return Route's preview as QIcon
      */
-    QIcon preview( const QModelIndex &index ) const;
+    QIcon preview(const QModelIndex &index) const;
 
 public Q_SLOTS:
-    void updateProgress( qint64 currentSize, qint64 totalSize );
-    void setPreview( QNetworkReply *reply );
+    void updateProgress(qint64 currentSize, qint64 totalSize);
+    void setPreview(QNetworkReply *reply);
 
 private:
     class Private;

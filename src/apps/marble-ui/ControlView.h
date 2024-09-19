@@ -8,13 +8,11 @@
 // Testapplication with controls
 //
 
-
 #ifndef MARBLE_CONTROLVIEW_H
 #define MARBLE_CONTROLVIEW_H
 
-
-#include <QWidget>
 #include <QPointer>
+#include <QWidget>
 
 #include "MarbleWidget.h"
 
@@ -41,19 +39,25 @@ class ControlView : public QWidget
 {
     Q_OBJECT
 
- public:
-    explicit ControlView( QWidget * = nullptr );
+public:
+    explicit ControlView(QWidget * = nullptr);
     ~ControlView() override;
 
     /**
-      * Returns the version of the Marble applications (which differs from
-      * the Marble library version).
-      */
+     * Returns the version of the Marble applications (which differs from
+     * the Marble library version).
+     */
     static QString applicationVersion();
 
-    MarbleWidget      *marbleWidget()        { return m_marbleWidget; }
-    MarbleModel       *marbleModel()         { return m_marbleWidget->model(); }
-    MapThemeManager   *mapThemeManager();
+    MarbleWidget *marbleWidget()
+    {
+        return m_marbleWidget;
+    }
+    MarbleModel *marbleModel()
+    {
+        return m_marbleWidget->model();
+    }
+    MapThemeManager *mapThemeManager();
 
     void zoomIn();
     void zoomOut();
@@ -62,53 +66,56 @@ class ControlView : public QWidget
     void moveUp();
     void moveDown();
 
-    void addGeoDataFile( const QString &filename );
+    void addGeoDataFile(const QString &filename);
 
-    QPixmap mapScreenShot() { return m_marbleWidget->mapScreenShot(); }
-    
+    QPixmap mapScreenShot()
+    {
+        return m_marbleWidget->mapScreenShot();
+    }
+
     /**
-      * Returns a default map theme: earth/srtm/srtm.dgml if installed,
-      * any other theme id if earth/srtm/srtm.dgml is not installed,
-      * or an empty string if no themes are installed at all
-      */
+     * Returns a default map theme: earth/srtm/srtm.dgml if installed,
+     * any other theme id if earth/srtm/srtm.dgml is not installed,
+     * or an empty string if no themes are installed at all
+     */
     QString defaultMapThemeId() const;
 
     /**
-      * Returns the editor used to launch a map editor application
-      */
+     * Returns the editor used to launch a map editor application
+     */
     QString externalMapEditor() const;
 
     /**
-      * Change the editor to launch via @see launchExternalMapEditor. Recognized values
-      * are 'potlatch', 'josm', 'merkaartor'
-      */
-    void setExternalMapEditor( const QString &editor );
+     * Change the editor to launch via @see launchExternalMapEditor. Recognized values
+     * are 'potlatch', 'josm', 'merkaartor'
+     */
+    void setExternalMapEditor(const QString &editor);
 
-    QList<QAction*> setupDockWidgets( QMainWindow* mainWindow );
+    QList<QAction *> setupDockWidgets(QMainWindow *mainWindow);
 
-    CurrentLocationWidget* currentLocationWidget();
+    CurrentLocationWidget *currentLocationWidget();
 
-    void setWorkOffline( bool workOffline );
+    void setWorkOffline(bool workOffline);
 
-    CloudSyncManager* cloudSyncManager();
+    CloudSyncManager *cloudSyncManager();
 
     /**
      * Opens the passed Geo URI
      * @return true if uri could be parsed and opened
      * @see Marble::GeoUriParser for details
      */
-    bool openGeoUri( const QString& geoUriString );
+    bool openGeoUri(const QString &geoUriString);
 
-    static QActionGroup* createViewSizeActionGroup( QObject* parent );
+    static QActionGroup *createViewSizeActionGroup(QObject *parent);
 
- public Q_SLOTS:
-    void printMapScreenShot( const QPointer<QPrintDialog>& dialog );
+public Q_SLOTS:
+    void printMapScreenShot(const QPointer<QPrintDialog> &dialog);
     void printPreview();
-    void paintPrintPreview( QPrinter * printer );
+    void paintPrintPreview(QPrinter *printer);
 
     /**
-      * Start the configured external map editor (or update it if it is already running)
-      */
+     * Start the configured external map editor (or update it if it is already running)
+     */
     void launchExternalMapEditor();
 
     /**
@@ -116,16 +123,16 @@ class ControlView : public QWidget
      */
     void togglePanelVisibility();
 
-    void handleTourLinkClicked( const QString &path );
+    void handleTourLinkClicked(const QString &path);
 
-    void openTour( const QString &filename );
+    void openTour(const QString &filename);
 
 Q_SIGNALS:
     void showMapWizard();
     void mapThemeDeleted();
 
 protected:
-    void closeEvent( QCloseEvent *event ) override;
+    void closeEvent(QCloseEvent *event) override;
     /**
      * @brief Reimplementation of the dragEnterEvent() function in QWidget.
      */
@@ -139,42 +146,42 @@ protected:
 private Q_SLOTS:
     void showSearch();
     // Bookmark sync slots
-    void showConflictDialog( MergeItem *item );
+    void showConflictDialog(MergeItem *item);
     void updateAnnotationDockVisibility();
     void updateAnnotationDock();
-    
- private:
+
+private:
     /**
-      * Try to reach an external application server at localhost:8111. If none is running,
-      * start the given application
-      * @param application Executable to start when no server is running
-      * @param argument Argument to set the download region for the external application.
-      * Use placeholders %1-%4 for the borders
-      */
-    void synchronizeWithExternalMapEditor( const QString &application, const QString &argument );
+     * Try to reach an external application server at localhost:8111. If none is running,
+     * start the given application
+     * @param application Executable to start when no server is running
+     * @param argument Argument to set the download region for the external application.
+     * Use placeholders %1-%4 for the borders
+     */
+    void synchronizeWithExternalMapEditor(const QString &application, const QString &argument);
 
-    static void printPixmap( QPrinter * printer, const QPixmap& pixmap );
-    void printMap( QTextDocument &document, QString &text, QPrinter *printer );
-    void printLegend( QTextDocument &document, QString &text );
-    void printRouteSummary( QTextDocument &document, QString &text );
-    void printDrivingInstructions( QTextDocument &document, QString &text );
-    static void printDrivingInstructionsAdvice( QTextDocument &document, QString &text );
-    static void addViewSizeAction( QActionGroup* actionGroup, const QString &nameTemplate, int width, int height );
+    static void printPixmap(QPrinter *printer, const QPixmap &pixmap);
+    void printMap(QTextDocument &document, QString &text, QPrinter *printer);
+    void printLegend(QTextDocument &document, QString &text);
+    void printRouteSummary(QTextDocument &document, QString &text);
+    void printDrivingInstructions(QTextDocument &document, QString &text);
+    static void printDrivingInstructionsAdvice(QTextDocument &document, QString &text);
+    static void addViewSizeAction(QActionGroup *actionGroup, const QString &nameTemplate, int width, int height);
 
-    MapThemeManager   *const m_mapThemeManager;
-    MarbleWidget      *m_marbleWidget;
-    QString            m_externalEditor;
-    QDockWidget       *m_searchDock;
-    CurrentLocationWidget* m_locationWidget;
+    MapThemeManager *const m_mapThemeManager;
+    MarbleWidget *m_marbleWidget;
+    QString m_externalEditor;
+    QDockWidget *m_searchDock;
+    CurrentLocationWidget *m_locationWidget;
     ConflictDialog *m_conflictDialog;
     CloudSyncManager *m_cloudSyncManager;
-    QAction         *m_togglePanelVisibilityAction;
-    QList<QAction*>  m_panelActions;
-    QList<bool>      m_panelVisibility;
-    bool             m_isPanelVisible;
-    TourWidget      *m_tourWidget;
-    QDockWidget     *m_annotationDock;
-    RenderPlugin    *m_annotationPlugin;
+    QAction *m_togglePanelVisibilityAction;
+    QList<QAction *> m_panelActions;
+    QList<bool> m_panelVisibility;
+    bool m_isPanelVisible;
+    TourWidget *m_tourWidget;
+    QDockWidget *m_annotationDock;
+    RenderPlugin *m_annotationPlugin;
 };
 
 }

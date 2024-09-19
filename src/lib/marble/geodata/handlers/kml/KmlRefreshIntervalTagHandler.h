@@ -16,11 +16,10 @@ namespace kml
 class KmlrefreshIntervalTagHandler : public GeoTagHandler
 {
 public:
-    GeoNode * parse( GeoParser & ) const override;
+    GeoNode *parse(GeoParser &) const override;
 };
 
 }
 }
 
 #endif
-

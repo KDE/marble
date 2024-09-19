@@ -20,14 +20,11 @@ class ScreenGraphicsItemPrivate;
 
 class MARBLE_EXPORT ScreenGraphicsItem : public MarbleGraphicsItem
 {
- public:
-    enum GraphicsItemFlag {
-        ItemIsMovable = 0x1,
-        ItemIsHideable = 0x2
-    };
+public:
+    enum GraphicsItemFlag { ItemIsMovable = 0x1, ItemIsHideable = 0x2 };
     Q_DECLARE_FLAGS(GraphicsItemFlags, GraphicsItemFlag)
 
-    explicit ScreenGraphicsItem( MarbleGraphicsItem *parent = nullptr );
+    explicit ScreenGraphicsItem(MarbleGraphicsItem *parent = nullptr);
 
     ~ScreenGraphicsItem() override;
 
@@ -41,7 +38,7 @@ class MARBLE_EXPORT ScreenGraphicsItem : public MarbleGraphicsItem
      * Positive y-coordinates are counted top-aligned from the top border of the parent item.
      * Negative y-coordinates are counted right-aligned from the bottom border of the parent item.
      */
-    void    setPosition( const QPointF& position );
+    void setPosition(const QPointF &position);
 
     /**
      * @brief Return the position of the ScreenGraphicsItem
@@ -84,14 +81,14 @@ class MARBLE_EXPORT ScreenGraphicsItem : public MarbleGraphicsItem
      * Sets the flags to flags. All flags in flags will be enabled and all other flags will
      * be disabled. By default all flags are disabled.
      */
-    void setFlags( GraphicsItemFlags flags );
+    void setFlags(GraphicsItemFlags flags);
 
- protected:
+protected:
     explicit ScreenGraphicsItem(ScreenGraphicsItemPrivate *dd);
 
-    bool eventFilter( QObject *, QEvent * ) override;
+    bool eventFilter(QObject *, QEvent *) override;
 
- private:
+private:
     Q_DECLARE_PRIVATE(ScreenGraphicsItem)
 };
 

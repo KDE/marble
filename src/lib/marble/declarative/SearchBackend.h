@@ -9,8 +9,8 @@
 #include <QObject>
 #include <QSortFilterProxyModel>
 
-#include "MarbleQuickItem.h"
 #include "MarblePlacemarkModel.h"
+#include "MarbleQuickItem.h"
 #include "Placemark.h"
 
 class QCompleter;
@@ -25,7 +25,7 @@ class SearchBackend : public QObject
 
     Q_PROPERTY(QObject *marbleQuickItem READ marbleQuickItem WRITE setMarbleQuickItem NOTIFY marbleQuickItemChanged)
     Q_PROPERTY(MarblePlacemarkModel *completionModel READ completionModel NOTIFY completionModelChanged)
-    Q_PROPERTY(Placemark* selectedPlacemark READ selectedPlacemark NOTIFY selectedPlacemarkChanged)
+    Q_PROPERTY(Placemark *selectedPlacemark READ selectedPlacemark NOTIFY selectedPlacemarkChanged)
 
 public:
     explicit SearchBackend(QObject *parent = nullptr);
@@ -33,15 +33,15 @@ public:
     Q_INVOKABLE void setCompletionPrefix(const QString &prefix);
     QObject *marbleQuickItem();
     MarblePlacemarkModel *completionModel();
-    const QObject* marbleQuickItem() const;
-    Placemark* selectedPlacemark();
+    const QObject *marbleQuickItem() const;
+    Placemark *selectedPlacemark();
 
 Q_SIGNALS:
     void marbleQuickItemChanged(QObject *marbleQuickItem);
     void completionModelChanged(MarblePlacemarkModel *model);
     void searchResultChanged(MarblePlacemarkModel *model);
     void searchFinished(const QString &searchTerm);
-    void selectedPlacemarkChanged(Placemark * selectedPlacemark);
+    void selectedPlacemarkChanged(Placemark *selectedPlacemark);
 
 public Q_SLOTS:
     Q_INVOKABLE void setSelectedPlacemark(int placemarkIndex);
@@ -56,7 +56,7 @@ private:
     MarblePlacemarkModel *m_placemarkModel;
     QCompleter *m_completer;
     MarblePlacemarkModel *m_completionModel;
-    QVector<GeoDataPlacemark*> *m_completionContainer;
+    QVector<GeoDataPlacemark *> *m_completionContainer;
     Placemark m_selectedPlacemark;
     QString m_lastSuccessfulCompletion;
 };

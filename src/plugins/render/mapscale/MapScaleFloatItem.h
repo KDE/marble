@@ -11,7 +11,7 @@
 
 namespace Ui
 {
-    class MapScaleConfigWidget;
+class MapScaleConfigWidget;
 }
 
 namespace Marble
@@ -26,11 +26,11 @@ class MapScaleFloatItem : public AbstractFloatItem, public DialogConfigurationIn
 {
     Q_OBJECT
     Q_PLUGIN_METADATA(IID "org.kde.marble.MapScaleFloatItem")
-    Q_INTERFACES( Marble::RenderPluginInterface )
-    Q_INTERFACES( Marble::DialogConfigurationInterface )
-    MARBLE_PLUGIN( MapScaleFloatItem )
- public:
-    explicit MapScaleFloatItem( const MarbleModel *marbleModel = nullptr );
+    Q_INTERFACES(Marble::RenderPluginInterface)
+    Q_INTERFACES(Marble::DialogConfigurationInterface)
+    MARBLE_PLUGIN(MapScaleFloatItem)
+public:
+    explicit MapScaleFloatItem(const MarbleModel *marbleModel = nullptr);
     ~MapScaleFloatItem() override;
 
     QStringList backendTypes() const override;
@@ -49,24 +49,23 @@ class MapScaleFloatItem : public AbstractFloatItem, public DialogConfigurationIn
 
     QVector<PluginAuthor> pluginAuthors() const override;
 
-    QIcon icon () const override;
+    QIcon icon() const override;
 
-    void initialize () override;
+    void initialize() override;
 
-    bool isInitialized () const override;
+    bool isInitialized() const override;
 
-    void setProjection( const ViewportParams *viewport ) override;
+    void setProjection(const ViewportParams *viewport) override;
 
-    void paintContent( QPainter *painter ) override;
-
+    void paintContent(QPainter *painter) override;
 
     QDialog *configDialog() override;
 
- protected:
-    void contextMenuEvent( QWidget *w, QContextMenuEvent *e ) override;
-    void toolTipEvent( QHelpEvent *e ) override;
+protected:
+    void contextMenuEvent(QWidget *w, QContextMenuEvent *e) override;
+    void toolTipEvent(QHelpEvent *e) override;
 
- private Q_SLOTS:
+private Q_SLOTS:
     void readSettings();
     void writeSettings();
     void toggleRatioScaleVisibility();
@@ -75,35 +74,35 @@ class MapScaleFloatItem : public AbstractFloatItem, public DialogConfigurationIn
 private:
     void calcScaleBar();
 
- private:
+private:
     QDialog *m_configDialog;
     Ui::MapScaleConfigWidget *ui_configWidget;
 
-    int      m_radius;
+    int m_radius;
 
-    QString  m_target;
+    QString m_target;
 
-    int      m_leftBarMargin;
-    int      m_rightBarMargin;
-    int      m_scaleBarWidth;
-    int      m_viewportWidth;
-    int      m_scaleBarHeight;
-    qreal    m_scaleBarDistance;
+    int m_leftBarMargin;
+    int m_rightBarMargin;
+    int m_scaleBarWidth;
+    int m_viewportWidth;
+    int m_scaleBarHeight;
+    qreal m_scaleBarDistance;
 
-    qreal    m_pixel2Length;
-    int      m_bestDivisor;
-    int      m_pixelInterval;
-    int      m_valueInterval;
+    qreal m_pixel2Length;
+    int m_bestDivisor;
+    int m_pixelInterval;
+    int m_valueInterval;
 
     QString m_ratioString;
 
-    bool     m_scaleInitDone;
+    bool m_scaleInitDone;
 
-    bool     m_showRatioScale;
+    bool m_showRatioScale;
 
-    QMenu*   m_contextMenu;
+    QMenu *m_contextMenu;
 
-    QAction  *m_minimizeAction;
+    QAction *m_minimizeAction;
     bool m_minimized;
     int m_widthScaleFactor;
 };

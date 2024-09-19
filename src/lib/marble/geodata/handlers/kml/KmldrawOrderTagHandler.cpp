@@ -5,17 +5,17 @@
 
 #include "KmldrawOrderTagHandler.h"
 
-#include "KmlElementDictionary.h"
 #include "GeoDataOverlay.h"
 #include "GeoParser.h"
+#include "KmlElementDictionary.h"
 
 namespace Marble
 {
 namespace kml
 {
-KML_DEFINE_TAG_HANDLER( drawOrder )
+KML_DEFINE_TAG_HANDLER(drawOrder)
 
-GeoNode* KmldrawOrderTagHandler::parse(GeoParser &parser) const
+GeoNode *KmldrawOrderTagHandler::parse(GeoParser &parser) const
 {
     Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1String(kmlTag_drawOrder)));
 

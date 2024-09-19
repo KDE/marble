@@ -18,11 +18,10 @@ namespace kml
 class KmlOsmPlacemarkDataTagHandler : public GeoTagHandler
 {
 public:
-    GeoNode* parse( GeoParser& parser ) const override;
+    GeoNode *parse(GeoParser &parser) const override;
 };
 
 }
 }
 
 #endif
-

@@ -16,32 +16,30 @@ class GeoDataLatLonAltBox;
 class TileCoordsPyramid;
 class MarbleWidget;
 
-class MARBLE_EXPORT DownloadRegionDialog: public QDialog
+class MARBLE_EXPORT DownloadRegionDialog : public QDialog
 {
     Q_OBJECT
 
- public:
+public:
     enum SelectionMethod { VisibleRegionMethod, SpecifiedRegionMethod, RouteDownloadMethod };
 
-    explicit DownloadRegionDialog( MarbleWidget *const widget, QWidget * const parent = nullptr,
-                                   Qt::WindowFlags const f = Qt::WindowFlags() );
+    explicit DownloadRegionDialog(MarbleWidget *const widget, QWidget *const parent = nullptr, Qt::WindowFlags const f = Qt::WindowFlags());
     ~DownloadRegionDialog() override;
-    void setAllowedTileLevelRange( int const minimumTileLevel,
-                                   int const maximumTileLevel );
-    void setVisibleTileLevel( int const tileLevel );
-    void setSelectionMethod( SelectionMethod const );
+    void setAllowedTileLevelRange(int const minimumTileLevel, int const maximumTileLevel);
+    void setVisibleTileLevel(int const tileLevel);
+    void setSelectionMethod(SelectionMethod const);
 
     QVector<TileCoordsPyramid> region() const;
 
     TileType tileType() const;
 
- public Q_SLOTS:
-    void setSpecifiedLatLonAltBox( GeoDataLatLonAltBox const & );
-    void setVisibleLatLonAltBox( GeoDataLatLonAltBox const & );
+public Q_SLOTS:
+    void setSpecifiedLatLonAltBox(GeoDataLatLonAltBox const &);
+    void setVisibleLatLonAltBox(GeoDataLatLonAltBox const &);
     void updateTileLayer();
     void delayUpdateTileLayer();
 
- Q_SIGNALS:
+Q_SIGNALS:
     /// This signal is emitted when the "Apply" button is pressed.
     void applied();
     /// This signal is emitted when the dialog receives a QHideEvent.
@@ -49,11 +47,11 @@ class MARBLE_EXPORT DownloadRegionDialog: public QDialog
     /// This signal is emitted when the dialog receives a QShowEvent
     void shown();
 
- protected:
-    void hideEvent( QHideEvent * event ) override;
-    void showEvent( QShowEvent * event ) override;
+protected:
+    void hideEvent(QHideEvent *event) override;
+    void showEvent(QShowEvent *event) override;
 
- private Q_SLOTS:
+private Q_SLOTS:
     void toggleSelectionMethod();
     void updateTileCount();
     void updateTileType();
@@ -63,11 +61,10 @@ class MARBLE_EXPORT DownloadRegionDialog: public QDialog
     /// This slot sets the unit of the offset(m or km) in the spinbox
     void setOffsetUnit();
 
- private:
-    Q_DISABLE_COPY( DownloadRegionDialog )
+private:
+    Q_DISABLE_COPY(DownloadRegionDialog)
     class Private;
-    Private * const d;
-
+    Private *const d;
 };
 
 }

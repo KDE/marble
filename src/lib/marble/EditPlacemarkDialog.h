@@ -10,7 +10,8 @@
 
 #include <QDialog>
 
-namespace Marble {
+namespace Marble
+{
 
 class GeoDataFeature;
 class GeoDataPlacemark;
@@ -24,15 +25,13 @@ class MARBLE_EXPORT EditPlacemarkDialog : public QDialog
     Q_OBJECT
 
 public:
-    EditPlacemarkDialog( GeoDataPlacemark *placemark,
-                         const QHash<qint64,OsmPlacemarkData> *relations = nullptr,
-                         QWidget *parent = nullptr );
+    EditPlacemarkDialog(GeoDataPlacemark *placemark, const QHash<qint64, OsmPlacemarkData> *relations = nullptr, QWidget *parent = nullptr);
     ~EditPlacemarkDialog() override;
 
     /**
      * @brief setLabelColor tells the dialog what the label color is
      */
-    void setLabelColor( const QColor &color );
+    void setLabelColor(const QColor &color);
 
     /**
      * @brief idFilter gets filter for id of placemark
@@ -68,23 +67,23 @@ public Q_SLOTS:
      * @brief setIdFilter sets filter for id of placemark.
      * @param filter QStringList with ids which could not be used as id.
      */
-    void setIdFilter( const QStringList &filter );
+    void setIdFilter(const QStringList &filter);
 
     /**
      * @brief setTargetIds sets ids which could be target of placemark.
      * @param targetIds QStringList with ids which could be target of placemark.
      */
-    void setTargetIds( const QStringList &targetIds );
+    void setTargetIds(const QStringList &targetIds);
 
     /**
      * @brief setTargetIdFieldVisible tells the dialog whether targetId field should be shown.
      */
-    void setTargetIdFieldVisible( bool visible );
+    void setTargetIdFieldVisible(bool visible);
 
     /**
      * @brief setIdFieldVisible tells the dialog whether id field should be shown.
      */
-    void setIdFieldVisible( bool visible );
+    void setIdFieldVisible(bool visible);
 
     /**
      * @brief isReadOnly tells whether the data from input fields is protected
@@ -94,7 +93,7 @@ public Q_SLOTS:
     /**
      * @brief Protecting data from input fields changes
      */
-    void setReadOnly( bool state );
+    void setReadOnly(bool state);
 
 private Q_SLOTS:
 
@@ -115,14 +114,14 @@ private Q_SLOTS:
      * button with a filled pixmap as its icon. This slot updates the color fill of this
      * pixmap.
      */
-    void updateLabelDialog( const QColor &color );
+    void updateLabelDialog(const QColor &color);
 
     /**
      * @brief updateIconDialog The same as above, but for icons.
      * FIXME: This is not functional ATM - we need some mechanism for customizing existing
      * icons.
      */
-    void updateIconDialog( const QColor &color );
+    void updateIconDialog(const QColor &color);
 
     /**
      * @brief updatePlacemarkAltitude changes an actual elevation value of placemark instance
@@ -134,7 +133,7 @@ private Q_SLOTS:
      * @brief restoreInitial restores the dialog's previous settings if the dialog closes with
      * a zero return value.
      */
-    void restoreInitial( int result );
+    void restoreInitial(int result);
 
     /**
      * @brief toogleDescriptionEditMode toggles edit mode for description field.
@@ -146,18 +145,18 @@ Q_SIGNALS:
      * instance has changed.
      * @param feature The instance's placemark.
      */
-    void textAnnotationUpdated( GeoDataFeature *feature );
+    void textAnnotationUpdated(GeoDataFeature *feature);
 
     /**
      * @brief relationCreated signals the annotate plugin that a new relation has been
      * created( or modified ) within the relation editor
      * @param relation the relation's osmData
      */
-    void relationCreated( const OsmPlacemarkData &relation );
+    void relationCreated(const OsmPlacemarkData &relation);
 
 private:
     class Private;
-    Private * const d;
+    Private *const d;
 };
 
 }

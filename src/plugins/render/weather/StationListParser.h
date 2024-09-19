@@ -17,19 +17,19 @@ namespace Marble
 {
 
 class BBCStation;
-    
+
 class StationListParser : public QThread, public QXmlStreamReader
 {
     Q_OBJECT
 public:
-    explicit StationListParser( QObject *parent );
+    explicit StationListParser(QObject *parent);
     ~StationListParser() override;
 
     void read();
 
     QList<BBCStation> stationList() const;
 
-    void setPath( const QString& path );
+    void setPath(const QString &path);
 
 protected:
     void run() override;
@@ -39,7 +39,7 @@ private:
     void readStationList();
     void readStation();
     QString readCharacters();
-    void readPoint( BBCStation *station );
+    void readPoint(BBCStation *station);
 
     QString m_path;
     QList<BBCStation> m_list;

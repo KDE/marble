@@ -5,10 +5,11 @@
 
 #include "GeoDataNetworkLink.h"
 
-#include "GeoDataTypes.h"
 #include "GeoDataLink.h"
+#include "GeoDataTypes.h"
 
-namespace Marble {
+namespace Marble
+{
 
 class GeoDataNetworkLinkPrivate
 {
@@ -22,41 +23,41 @@ public:
     GeoDataNetworkLinkPrivate();
 };
 
-GeoDataNetworkLinkPrivate::GeoDataNetworkLinkPrivate() :
-    m_refreshVisibility(false), m_flyToView(false)
+GeoDataNetworkLinkPrivate::GeoDataNetworkLinkPrivate()
+    : m_refreshVisibility(false)
+    , m_flyToView(false)
 {
     // nothing to do
 }
 
-GeoDataNetworkLink::GeoDataNetworkLink() : d( new GeoDataNetworkLinkPrivate )
+GeoDataNetworkLink::GeoDataNetworkLink()
+    : d(new GeoDataNetworkLinkPrivate)
 {
     // nothing to do
 }
 
-GeoDataNetworkLink::GeoDataNetworkLink( const Marble::GeoDataNetworkLink &other ) :
-    GeoDataFeature( other ), d( new GeoDataNetworkLinkPrivate( *other.d ) )
+GeoDataNetworkLink::GeoDataNetworkLink(const Marble::GeoDataNetworkLink &other)
+    : GeoDataFeature(other)
+    , d(new GeoDataNetworkLinkPrivate(*other.d))
 {
     // nothing to do
 }
 
-GeoDataNetworkLink &GeoDataNetworkLink::operator=( const GeoDataNetworkLink &other )
+GeoDataNetworkLink &GeoDataNetworkLink::operator=(const GeoDataNetworkLink &other)
 {
-    GeoDataFeature::operator=( other );
+    GeoDataFeature::operator=(other);
     *d = *other.d;
     return *this;
 }
 
-bool GeoDataNetworkLink::operator==( const GeoDataNetworkLink &other ) const
+bool GeoDataNetworkLink::operator==(const GeoDataNetworkLink &other) const
 {
-    return equals( other) &&
-           d->m_refreshVisibility == other.d->m_refreshVisibility &&
-           d->m_link == other.d->m_link &&
-           d->m_flyToView == other.d->m_flyToView;
+    return equals(other) && d->m_refreshVisibility == other.d->m_refreshVisibility && d->m_link == other.d->m_link && d->m_flyToView == other.d->m_flyToView;
 }
 
-bool GeoDataNetworkLink::operator!=( const GeoDataNetworkLink &other ) const
+bool GeoDataNetworkLink::operator!=(const GeoDataNetworkLink &other) const
 {
-    return !this->operator==( other );
+    return !this->operator==(other);
 }
 
 GeoDataNetworkLink::~GeoDataNetworkLink()
@@ -64,11 +65,10 @@ GeoDataNetworkLink::~GeoDataNetworkLink()
     delete d;
 }
 
-GeoDataFeature * GeoDataNetworkLink::clone() const
+GeoDataFeature *GeoDataNetworkLink::clone() const
 {
     return new GeoDataNetworkLink(*this);
 }
-
 
 const char *GeoDataNetworkLink::nodeType() const
 {
@@ -80,7 +80,7 @@ bool GeoDataNetworkLink::refreshVisibility() const
     return d->m_refreshVisibility;
 }
 
-void GeoDataNetworkLink::setRefreshVisibility( bool refreshVisibility )
+void GeoDataNetworkLink::setRefreshVisibility(bool refreshVisibility)
 {
     d->m_refreshVisibility = refreshVisibility;
 }
@@ -90,7 +90,7 @@ bool GeoDataNetworkLink::flyToView() const
     return d->m_flyToView;
 }
 
-void GeoDataNetworkLink::setFlyToView( bool flyToView)
+void GeoDataNetworkLink::setFlyToView(bool flyToView)
 {
     d->m_flyToView = flyToView;
 }
@@ -100,7 +100,7 @@ GeoDataLink &GeoDataNetworkLink::link()
     return d->m_link;
 }
 
-const GeoDataLink& GeoDataNetworkLink::link() const
+const GeoDataLink &GeoDataNetworkLink::link() const
 {
     return d->m_link;
 }

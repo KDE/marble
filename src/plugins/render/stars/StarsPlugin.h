@@ -10,15 +10,15 @@
 #ifndef MARBLESTARSPLUGIN_H
 #define MARBLESTARSPLUGIN_H
 
-#include <QVector>
+#include <QBrush>
 #include <QHash>
 #include <QMap>
 #include <QVariant>
-#include <QBrush>
+#include <QVector>
 
-#include "RenderPlugin.h"
-#include "Quaternion.h"
 #include "DialogConfigurationInterface.h"
+#include "Quaternion.h"
+#include "RenderPlugin.h"
 
 class QMenu;
 
@@ -26,7 +26,7 @@ class SolarSystem;
 
 namespace Ui
 {
-    class StarsConfigWidget;
+class StarsConfigWidget;
 }
 
 namespace Marble
@@ -35,7 +35,9 @@ namespace Marble
 class StarPoint
 {
 public:
-    StarPoint() {}
+    StarPoint()
+    {
+    }
     /**
      * @brief create a starpoint from right ascension and declination
      * @param  id identifier
@@ -45,15 +47,17 @@ public:
      * (default for Radian: north pole at pi/2, southpole at -pi/2)
      * @param  colorId color
      */
-    StarPoint(int id, qreal rect, qreal decl, qreal mag, int colorId) :
-        m_id( id ),
-        m_magnitude( mag ),
-        m_colorId( colorId )
+    StarPoint(int id, qreal rect, qreal decl, qreal mag, int colorId)
+        : m_id(id)
+        , m_magnitude(mag)
+        , m_colorId(colorId)
     {
-        m_q = Quaternion::fromSpherical( rect, decl );
+        m_q = Quaternion::fromSpherical(rect, decl);
     }
 
-    ~StarPoint() {}
+    ~StarPoint()
+    {
+    }
 
     qreal magnitude() const
     {
@@ -69,23 +73,25 @@ public:
     {
         return m_id;
     }
-    
+
     int colorId() const
     {
         return m_colorId;
-    } 
+    }
 
 private:
-    int         m_id;
-    qreal       m_magnitude;
-    Quaternion  m_q;
-    int         m_colorId;
+    int m_id;
+    qreal m_magnitude;
+    Quaternion m_q;
+    int m_colorId;
 };
 
 class DsoPoint
 {
 public:
-    DsoPoint() {}
+    DsoPoint()
+    {
+    }
     /**
      * @brief create a dsopoint from right ascension and declination
      * @param  id point identifier
@@ -93,15 +99,16 @@ public:
      * @param  decl declination
      * (default for Radian: north pole at pi/2, southpole at -pi/2)
      */
-    DsoPoint(const QString& id, qreal rect, qreal decl) {
+    DsoPoint(const QString &id, qreal rect, qreal decl)
+    {
         m_id = id;
-        m_q = Quaternion::fromSpherical( rect, decl );
+        m_q = Quaternion::fromSpherical(rect, decl);
     }
 
     QString id() const
     {
         return m_id;
-    }  
+    }
 
     const Quaternion &quaternion() const
     {
@@ -109,8 +116,8 @@ public:
     }
 
 private:
-    QString    m_id;
-    Quaternion  m_q;
+    QString m_id;
+    Quaternion m_q;
 };
 
 /**
@@ -125,10 +132,10 @@ class StarsPlugin : public RenderPlugin, public DialogConfigurationInterface
     Q_OBJECT
     Q_PLUGIN_METADATA(IID "org.kde.marble.StarsPlugin")
     Q_INTERFACES(Marble::RenderPluginInterface)
-    Q_INTERFACES( Marble::DialogConfigurationInterface )
+    Q_INTERFACES(Marble::DialogConfigurationInterface)
     MARBLE_PLUGIN(StarsPlugin)
 public:
-    explicit StarsPlugin( const MarbleModel *marbleModel=nullptr );
+    explicit StarsPlugin(const MarbleModel *marbleModel = nullptr);
     ~StarsPlugin() override;
 
     QStringList backendTypes() const override;
@@ -159,18 +166,18 @@ public:
 
     bool isInitialized() const override;
 
-    bool render( GeoPainter *painter, ViewportParams *viewport, const QString& renderPos, GeoSceneLayer * layer = nullptr ) override;
+    bool render(GeoPainter *painter, ViewportParams *viewport, const QString &renderPos, GeoSceneLayer *layer = nullptr) override;
 
     QDialog *configDialog() override;
 
-    QHash<QString,QVariant> settings() const override;
+    QHash<QString, QVariant> settings() const override;
 
-    void setSettings( const QHash<QString,QVariant> &settings ) override;
+    void setSettings(const QHash<QString, QVariant> &settings) override;
 
     QString assembledConstellation(const QString &name);
 
 protected:
-    bool eventFilter( QObject *object, QEvent *e ) override;
+    bool eventFilter(QObject *object, QEvent *e) override;
 
 private Q_SLOTS:
     void requestRepaint();
@@ -192,9 +199,9 @@ public Q_SLOTS:
 
 private:
     template<class T>
-    T readSetting( const QHash<QString, QVariant> &settings, const QString &key, const T &defaultValue )
+    T readSetting(const QHash<QString, QVariant> &settings, const QString &key, const T &defaultValue)
     {
-        if ( !settings.contains( key ) ) {
+        if (!settings.contains(key)) {
             return defaultValue;
         }
 
@@ -208,12 +215,7 @@ private:
     QHash<QString, QString> m_nativeHash;
     int m_nameIndex;
 
-    void renderPlanet(const QString &planetId,
-                      GeoPainter *painter,
-                      SolarSystem &sys,
-                      ViewportParams *viewport,
-                      qreal skyRadius,
-                      matrix &skyAxisMatrix) const;
+    void renderPlanet(const QString &planetId, GeoPainter *painter, SolarSystem &sys, ViewportParams *viewport, qreal skyRadius, matrix &skyAxisMatrix) const;
     void createStarPixmaps();
     void loadStars();
     void loadConstellations();
@@ -242,7 +244,7 @@ private:
     QPixmap m_pixmapMoon;
     QVector<Constellation> m_constellations;
     QVector<DsoPoint> m_dsos;
-    QHash<int,int> m_idHash;
+    QHash<int, int> m_idHash;
     QImage m_dsoImage;
     int m_magnitudeLimit;
     int m_zoomCoefficient;
@@ -264,10 +266,10 @@ private:
 
     /* Context menu */
     QPointer<QMenu> m_contextMenu;
-    QAction* m_constellationsAction;
-    QAction* m_sunMoonAction;
-    QAction* m_planetsAction;
-    QAction* m_dsoAction;
+    QAction *m_constellationsAction;
+    QAction *m_sunMoonAction;
+    QAction *m_planetsAction;
+    QAction *m_dsoAction;
 
     bool m_doRender;
 };
@@ -275,16 +277,17 @@ private:
 class Constellation
 {
 public:
-    Constellation() {}
-    Constellation(StarsPlugin *plugin, const QString &name, const QString &stars) :
-        m_plugin( plugin ),
-        m_name( name )
+    Constellation()
+    {
+    }
+    Constellation(StarsPlugin *plugin, const QString &name, const QString &stars)
+        : m_plugin(plugin)
+        , m_name(name)
     {
         const QStringList starlist = stars.split(QLatin1Char(' '));
         for (int i = 0; i < starlist.size(); ++i) {
             m_stars << starlist.at(i).toInt();
         }
-
     }
 
     int size() const
@@ -312,7 +315,6 @@ private:
     StarsPlugin *m_plugin;
     QString m_name;
     QVector<int> m_stars;
-
 };
 
 }

@@ -14,14 +14,14 @@ namespace Marble
 namespace kml
 {
 
-KML_DEFINE_TAG_HANDLER( viewRefreshMode )
+KML_DEFINE_TAG_HANDLER(viewRefreshMode)
 
-GeoNode* KmlviewRefreshModeTagHandler::parse( GeoParser& parser ) const
+GeoNode *KmlviewRefreshModeTagHandler::parse(GeoParser &parser) const
 {
     Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1String(kmlTag_viewRefreshMode)));
 
     GeoStackItem parentItem = parser.parentElement();
-    if ( parentItem.is<GeoDataLink>() ) {
+    if (parentItem.is<GeoDataLink>()) {
         QString content = parser.readElementText().trimmed();
 
         GeoDataLink::ViewRefreshMode mode = GeoDataLink::Never;
@@ -33,7 +33,7 @@ GeoNode* KmlviewRefreshModeTagHandler::parse( GeoParser& parser ) const
             mode = GeoDataLink::OnRequest;
         }
 
-        parentItem.nodeAs<GeoDataLink>()->setViewRefreshMode( mode );
+        parentItem.nodeAs<GeoDataLink>()->setViewRefreshMode(mode);
     }
 
     return nullptr;

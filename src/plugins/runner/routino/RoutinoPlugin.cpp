@@ -4,29 +4,29 @@
 //
 
 #include "RoutinoPlugin.h"
-#include "RoutinoRunner.h"
 #include "MarbleDirs.h"
+#include "RoutinoRunner.h"
 
 #include "ui_RoutinoConfigWidget.h"
 
 namespace Marble
 {
 
-RoutinoPlugin::RoutinoPlugin( QObject *parent ) :
-    RoutingRunnerPlugin( parent )
+RoutinoPlugin::RoutinoPlugin(QObject *parent)
+    : RoutingRunnerPlugin(parent)
 {
     setSupportedCelestialBodies(QStringList(QStringLiteral("earth")));
-    setCanWorkOffline( true );
+    setCanWorkOffline(true);
 }
 
 QString RoutinoPlugin::name() const
 {
-    return tr( "Routino Routing" );
+    return tr("Routino Routing");
 }
 
 QString RoutinoPlugin::guiString() const
 {
-    return tr( "Routino" );
+    return tr("Routino");
 }
 
 QString RoutinoPlugin::nameId() const
@@ -41,7 +41,7 @@ QString RoutinoPlugin::version() const
 
 QString RoutinoPlugin::description() const
 {
-    return tr( "Retrieves routes from routino" );
+    return tr("Retrieves routes from routino");
 }
 
 QString RoutinoPlugin::copyrightYears() const
@@ -51,8 +51,7 @@ QString RoutinoPlugin::copyrightYears() const
 
 QVector<PluginAuthor> RoutinoPlugin::pluginAuthors() const
 {
-    return QVector<PluginAuthor>()
-            << PluginAuthor(QStringLiteral("Dennis Nienhüser"), QStringLiteral("nienhueser@kde.org"));
+    return QVector<PluginAuthor>() << PluginAuthor(QStringLiteral("Dennis Nienhüser"), QStringLiteral("nienhueser@kde.org"));
 }
 
 RoutingRunner *RoutinoPlugin::newRunner() const
@@ -62,15 +61,15 @@ RoutingRunner *RoutinoPlugin::newRunner() const
 
 class RoutinoConfigWidget : public RoutingRunnerPlugin::ConfigWidget
 {
-Q_OBJECT
+    Q_OBJECT
 public:
     RoutinoConfigWidget()
         : RoutingRunnerPlugin::ConfigWidget()
     {
         ui_configWidget = new Ui::RoutinoConfigWidget;
-        ui_configWidget->setupUi( this );
+        ui_configWidget->setupUi(this);
         QStringList transports;
-        //TODO: read from profiles.xml
+        // TODO: read from profiles.xml
         ui_configWidget->transport->addItem(tr("Pedestrian"), "foot");
         ui_configWidget->transport->addItem(tr("Horse"), "horse");
         ui_configWidget->transport->addItem(tr("Wheelchair"), "wheelchair");
@@ -86,7 +85,7 @@ public:
     {
         delete ui_configWidget;
     }
-    void loadSettings( const QHash<QString, QVariant> &settings_ ) override
+    void loadSettings(const QHash<QString, QVariant> &settings_) override
     {
         QHash<QString, QVariant> settings = settings_;
 
@@ -94,28 +93,27 @@ public:
         if (!settings.contains(QStringLiteral("transport"))) {
             settings.insert(QStringLiteral("transport"), QStringLiteral("motorcar"));
         }
-        ui_configWidget->transport->setCurrentIndex(
-            ui_configWidget->transport->findData(settings.value(QStringLiteral("transport")).toString()));
+        ui_configWidget->transport->setCurrentIndex(ui_configWidget->transport->findData(settings.value(QStringLiteral("transport")).toString()));
         if (settings.value(QStringLiteral("method")).toString() == QLatin1String("shortest")) {
-            ui_configWidget->shortest->setChecked( true );
+            ui_configWidget->shortest->setChecked(true);
         } else {
-            ui_configWidget->fastest->setChecked( true );
+            ui_configWidget->fastest->setChecked(true);
         }
     }
 
     QHash<QString, QVariant> settings() const override
     {
-        QHash<QString,QVariant> settings;
-        settings.insert(QStringLiteral("transport"),
-                        ui_configWidget->transport->itemData( ui_configWidget->transport->currentIndex() ) );
+        QHash<QString, QVariant> settings;
+        settings.insert(QStringLiteral("transport"), ui_configWidget->transport->itemData(ui_configWidget->transport->currentIndex()));
 
-        if ( ui_configWidget->shortest->isChecked() ) {
+        if (ui_configWidget->shortest->isChecked()) {
             settings.insert(QStringLiteral("method"), QStringLiteral("shortest"));
         } else {
             settings.insert(QStringLiteral("method"), QStringLiteral("fastest"));
         }
         return settings;
     }
+
 private:
     Ui::RoutinoConfigWidget *ui_configWidget;
 };
@@ -127,38 +125,35 @@ RoutingRunnerPlugin::ConfigWidget *RoutinoPlugin::configWidget()
 
 bool RoutinoPlugin::supportsTemplate(RoutingProfilesModel::ProfileTemplate profileTemplate) const
 {
-    return
-        (profileTemplate == RoutingProfilesModel::CarFastestTemplate)  ||
-        (profileTemplate == RoutingProfilesModel::CarShortestTemplate) ||
-        (profileTemplate == RoutingProfilesModel::BicycleTemplate)     ||
-        (profileTemplate == RoutingProfilesModel::PedestrianTemplate);
+    return (profileTemplate == RoutingProfilesModel::CarFastestTemplate) || (profileTemplate == RoutingProfilesModel::CarShortestTemplate)
+        || (profileTemplate == RoutingProfilesModel::BicycleTemplate) || (profileTemplate == RoutingProfilesModel::PedestrianTemplate);
 }
 
-QHash< QString, QVariant > RoutinoPlugin::templateSettings(RoutingProfilesModel::ProfileTemplate profileTemplate) const
+QHash<QString, QVariant> RoutinoPlugin::templateSettings(RoutingProfilesModel::ProfileTemplate profileTemplate) const
 {
     QHash<QString, QVariant> result;
-    switch ( profileTemplate ) {
-        case RoutingProfilesModel::CarFastestTemplate:
-            result.insert(QStringLiteral("transport"), QStringLiteral("motorcar"));
-            result.insert(QStringLiteral("method"), QStringLiteral("fastest"));
-            break;
-        case RoutingProfilesModel::CarShortestTemplate:
-            result.insert(QStringLiteral("transport"), QStringLiteral("motorcar"));
-            result.insert(QStringLiteral("method"), QStringLiteral("shortest"));
-            break;
-        case RoutingProfilesModel::CarEcologicalTemplate:
-            break;
-        case RoutingProfilesModel::BicycleTemplate:
-            result.insert(QStringLiteral("transport"), QStringLiteral("bicycle"));
-            result.insert(QStringLiteral("method"), QStringLiteral("shortest"));
-            break;
-        case RoutingProfilesModel::PedestrianTemplate:
-            result.insert(QStringLiteral("transport"), QStringLiteral("foot"));
-            result.insert(QStringLiteral("method"), QStringLiteral("shortest"));
-            break;
-        case RoutingProfilesModel::LastTemplate:
-            Q_ASSERT( false );
-            break;
+    switch (profileTemplate) {
+    case RoutingProfilesModel::CarFastestTemplate:
+        result.insert(QStringLiteral("transport"), QStringLiteral("motorcar"));
+        result.insert(QStringLiteral("method"), QStringLiteral("fastest"));
+        break;
+    case RoutingProfilesModel::CarShortestTemplate:
+        result.insert(QStringLiteral("transport"), QStringLiteral("motorcar"));
+        result.insert(QStringLiteral("method"), QStringLiteral("shortest"));
+        break;
+    case RoutingProfilesModel::CarEcologicalTemplate:
+        break;
+    case RoutingProfilesModel::BicycleTemplate:
+        result.insert(QStringLiteral("transport"), QStringLiteral("bicycle"));
+        result.insert(QStringLiteral("method"), QStringLiteral("shortest"));
+        break;
+    case RoutingProfilesModel::PedestrianTemplate:
+        result.insert(QStringLiteral("transport"), QStringLiteral("foot"));
+        result.insert(QStringLiteral("method"), QStringLiteral("shortest"));
+        break;
+    case RoutingProfilesModel::LastTemplate:
+        Q_ASSERT(false);
+        break;
     }
     return result;
 }

@@ -15,12 +15,12 @@
 #include "DialogConfigurationInterface.h"
 #include "GeoDataLatLonAltBox.h"
 #include "GeoDataLineString.h"
-#include "RenderPlugin.h"
 #include "MarbleWidget.h"
+#include "RenderPlugin.h"
 
+#include <QAction>
 #include <QFont>
 #include <QPen>
-#include <QAction>
 #include <QPixmap>
 
 namespace Marble
@@ -31,17 +31,14 @@ class MeasureToolPlugin : public RenderPlugin, public DialogConfigurationInterfa
 {
     Q_OBJECT
     Q_PLUGIN_METADATA(IID "org.kde.marble.MeasureToolPlugin")
-    Q_INTERFACES( Marble::RenderPluginInterface )
-    Q_INTERFACES( Marble::DialogConfigurationInterface )
-    MARBLE_PLUGIN( MeasureToolPlugin )
+    Q_INTERFACES(Marble::RenderPluginInterface)
+    Q_INTERFACES(Marble::DialogConfigurationInterface)
+    MARBLE_PLUGIN(MeasureToolPlugin)
 
- public:
-    explicit MeasureToolPlugin( const MarbleModel *marbleModel = nullptr );
+public:
+    explicit MeasureToolPlugin(const MarbleModel *marbleModel = nullptr);
 
-    enum PaintMode {
-        Polygon = 0,
-        Circular
-    };
+    enum PaintMode { Polygon = 0, Circular };
 
     QStringList backendTypes() const override;
     QString renderPolicy() const override;
@@ -58,43 +55,43 @@ class MeasureToolPlugin : public RenderPlugin, public DialogConfigurationInterfa
 
     QVector<PluginAuthor> pluginAuthors() const override;
 
-    QIcon icon () const override;
+    QIcon icon() const override;
 
-    void initialize () override;
+    void initialize() override;
 
-    bool isInitialized () const override;
+    bool isInitialized() const override;
 
-    bool render( GeoPainter *painter, ViewportParams *viewport, const QString& renderPos, GeoSceneLayer * layer = nullptr ) override;
+    bool render(GeoPainter *painter, ViewportParams *viewport, const QString &renderPos, GeoSceneLayer *layer = nullptr) override;
 
     QDialog *configDialog() override;
-    QHash<QString,QVariant> settings() const override;
-    void setSettings( const QHash<QString,QVariant> &settings ) override;
+    QHash<QString, QVariant> settings() const override;
+    void setSettings(const QHash<QString, QVariant> &settings) override;
 
- Q_SIGNALS:
-    void  numberOfMeasurePointsChanged( int newNumber );
+Q_SIGNALS:
+    void numberOfMeasurePointsChanged(int newNumber);
 
- public Q_SLOTS:
-    bool  eventFilter( QObject *object, QEvent *event ) override;
+public Q_SLOTS:
+    bool eventFilter(QObject *object, QEvent *event) override;
 
- private:
-    void  drawMeasurePoints( GeoPainter *painter );
-    void  drawInfobox( GeoPainter *painter ) const;
-    void  drawSegments( GeoPainter *painter );
-    void  addContextItems();
-    void  removeContextItems();
+private:
+    void drawMeasurePoints(GeoPainter *painter);
+    void drawInfobox(GeoPainter *painter) const;
+    void drawSegments(GeoPainter *painter);
+    void addContextItems();
+    void removeContextItems();
 
- private Q_SLOTS:
-    void  setNumberOfMeasurePoints( int number );
-    void  addMeasurePointEvent();
+private Q_SLOTS:
+    void setNumberOfMeasurePoints(int number);
+    void addMeasurePointEvent();
 
-    void  addMeasurePoint( qreal lon, qreal lat );
-    void  removeLastMeasurePoint();
-    void  removeMeasurePoints();
+    void addMeasurePoint(qreal lon, qreal lat);
+    void removeLastMeasurePoint();
+    void removeMeasurePoints();
 
     void writeSettings();
 
- private:
-    Q_DISABLE_COPY( MeasureToolPlugin )
+private:
+    Q_DISABLE_COPY(MeasureToolPlugin)
 
     static QString meterToPreferredUnit(qreal meters, bool isSquare = false);
 
@@ -103,17 +100,17 @@ class MeasureToolPlugin : public RenderPlugin, public DialogConfigurationInterfa
     GeoDataLatLonAltBox m_latLonAltBox;
 
     QPixmap m_mark;
-    QFont   m_font_regular;
-    int     m_fontascent;
+    QFont m_font_regular;
+    int m_fontascent;
 
-    QPen    m_pen;
+    QPen m_pen;
 
     QAction *m_addMeasurePointAction;
     QAction *m_removeLastMeasurePointAction;
     QAction *m_removeMeasurePointsAction;
     QAction *m_separator;
 
-    MarbleWidget* m_marbleWidget;
+    MarbleWidget *m_marbleWidget;
 
     MeasureConfigDialog *m_configDialog;
 

@@ -5,8 +5,8 @@
 //
 
 #include "OpenDesktopPlugin.h"
-#include "OpenDesktopModel.h"
 #include "MarbleWidget.h"
+#include "OpenDesktopModel.h"
 
 #include "ui_OpenDesktopConfigWidget.h"
 
@@ -15,35 +15,35 @@
 using namespace Marble;
 
 OpenDesktopPlugin::OpenDesktopPlugin()
-    : AbstractDataPlugin( nullptr ),
-      m_configDialog( nullptr ),
-      m_uiConfigWidget( nullptr )
+    : AbstractDataPlugin(nullptr)
+    , m_configDialog(nullptr)
+    , m_uiConfigWidget(nullptr)
 {
 }
 
-OpenDesktopPlugin::OpenDesktopPlugin( const MarbleModel *marbleModel )
-    : AbstractDataPlugin( marbleModel ),
-      m_configDialog( nullptr ),
-      m_uiConfigWidget( nullptr )
+OpenDesktopPlugin::OpenDesktopPlugin(const MarbleModel *marbleModel)
+    : AbstractDataPlugin(marbleModel)
+    , m_configDialog(nullptr)
+    , m_uiConfigWidget(nullptr)
 {
-    setEnabled( true ); // Plugin is enabled by default
-    setVisible( false ); // Plugin is invisible by default
+    setEnabled(true); // Plugin is enabled by default
+    setVisible(false); // Plugin is invisible by default
 }
 
 void OpenDesktopPlugin::initialize()
 {
-    setModel( new OpenDesktopModel( marbleModel(), this ) );
-    setNumberOfItems( defaultItemsOnScreen ); // Setting the number of items on the screen.
+    setModel(new OpenDesktopModel(marbleModel(), this));
+    setNumberOfItems(defaultItemsOnScreen); // Setting the number of items on the screen.
 }
 
 QString OpenDesktopPlugin::name() const
 {
-    return tr( "OpenDesktop Items" );
+    return tr("OpenDesktop Items");
 }
 
 QString OpenDesktopPlugin::guiString() const
 {
-    return tr( "&OpenDesktop Community" );
+    return tr("&OpenDesktop Community");
 }
 
 QString OpenDesktopPlugin::nameId() const
@@ -58,7 +58,7 @@ QString OpenDesktopPlugin::version() const
 
 QString OpenDesktopPlugin::description() const
 {
-    return tr( "Shows OpenDesktop users' avatars and some extra information about them on the map." );
+    return tr("Shows OpenDesktop users' avatars and some extra information about them on the map.");
 }
 
 QString OpenDesktopPlugin::copyrightYears() const
@@ -68,8 +68,7 @@ QString OpenDesktopPlugin::copyrightYears() const
 
 QVector<PluginAuthor> OpenDesktopPlugin::pluginAuthors() const
 {
-    return QVector<PluginAuthor>()
-            << PluginAuthor(QStringLiteral("Utku Aydin"), QStringLiteral("utkuaydin34@gmail.com"));
+    return QVector<PluginAuthor>() << PluginAuthor(QStringLiteral("Utku Aydin"), QStringLiteral("utkuaydin34@gmail.com"));
 }
 
 QIcon OpenDesktopPlugin::icon() const
@@ -79,26 +78,22 @@ QIcon OpenDesktopPlugin::icon() const
 
 QDialog *OpenDesktopPlugin::configDialog()
 {
-    if ( !m_configDialog ) {
+    if (!m_configDialog) {
         m_configDialog = new QDialog();
         m_uiConfigWidget = new Ui::OpenDesktopConfigWidget;
-        m_uiConfigWidget->setupUi( m_configDialog );
+        m_uiConfigWidget->setupUi(m_configDialog);
         readSettings();
 
-        connect( m_uiConfigWidget->m_buttonBox, SIGNAL(accepted()),
-                SLOT(writeSettings()) );
-        connect( m_uiConfigWidget->m_buttonBox, SIGNAL(rejected()),
-                SLOT(readSettings()) );
-        QPushButton *applyButton = m_uiConfigWidget->m_buttonBox->button( 
-                                                         QDialogButtonBox::Apply );
-        connect( applyButton, SIGNAL(clicked()),
-                 this,        SLOT(writeSettings()) );
+        connect(m_uiConfigWidget->m_buttonBox, SIGNAL(accepted()), SLOT(writeSettings()));
+        connect(m_uiConfigWidget->m_buttonBox, SIGNAL(rejected()), SLOT(readSettings()));
+        QPushButton *applyButton = m_uiConfigWidget->m_buttonBox->button(QDialogButtonBox::Apply);
+        connect(applyButton, SIGNAL(clicked()), this, SLOT(writeSettings()));
     }
 
     return m_configDialog;
 }
 
-QHash<QString,QVariant> OpenDesktopPlugin::settings() const
+QHash<QString, QVariant> OpenDesktopPlugin::settings() const
 {
     QHash<QString, QVariant> settings = AbstractDataPlugin::settings();
 
@@ -109,41 +104,41 @@ QHash<QString,QVariant> OpenDesktopPlugin::settings() const
 
 bool OpenDesktopPlugin::eventFilter(QObject *object, QEvent *event)
 {
-    if ( isInitialized() ) {
-        OpenDesktopModel *odModel = qobject_cast<OpenDesktopModel*>( model() );
+    if (isInitialized()) {
+        OpenDesktopModel *odModel = qobject_cast<OpenDesktopModel *>(model());
         Q_ASSERT(odModel);
-        MarbleWidget* widget = qobject_cast<MarbleWidget*>( object );
-        if ( widget ) {
+        MarbleWidget *widget = qobject_cast<MarbleWidget *>(object);
+        if (widget) {
             odModel->setMarbleWidget(widget);
         }
     }
 
-    return AbstractDataPlugin::eventFilter( object, event );
+    return AbstractDataPlugin::eventFilter(object, event);
 }
 
-void OpenDesktopPlugin::setSettings( const QHash<QString,QVariant> &settings )
+void OpenDesktopPlugin::setSettings(const QHash<QString, QVariant> &settings)
 {
-    AbstractDataPlugin::setSettings( settings );
+    AbstractDataPlugin::setSettings(settings);
 
     setNumberOfItems(settings.value(QStringLiteral("itemsOnScreen"), defaultItemsOnScreen).toInt());
 
-    emit settingsChanged( nameId() );
+    emit settingsChanged(nameId());
 }
 
 void OpenDesktopPlugin::readSettings()
 {
-    if ( m_uiConfigWidget ) {
-        m_uiConfigWidget->m_itemsOnScreenSpin->setValue( numberOfItems() );
+    if (m_uiConfigWidget) {
+        m_uiConfigWidget->m_itemsOnScreenSpin->setValue(numberOfItems());
     }
 }
 
 void OpenDesktopPlugin::writeSettings()
 {
-    if ( m_uiConfigWidget ) {
-        setNumberOfItems( m_uiConfigWidget->m_itemsOnScreenSpin->value() );
+    if (m_uiConfigWidget) {
+        setNumberOfItems(m_uiConfigWidget->m_itemsOnScreenSpin->value());
     }
 
-    emit settingsChanged( nameId() );
+    emit settingsChanged(nameId());
 }
 
 #include "moc_OpenDesktopPlugin.cpp"

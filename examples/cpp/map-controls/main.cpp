@@ -5,17 +5,17 @@
 
 #include <QApplication>
 
+#include <QLabel>
 #include <QLayout>
 #include <QSlider>
-#include <QLabel>
 
 #include <marble/MarbleWidget.h>
 
 using namespace Marble;
 
-int main(int argc, char** argv)
+int main(int argc, char **argv)
 {
-    QApplication app(argc,argv);
+    QApplication app(argc, argv);
     QWidget *window = new QWidget;
 
     // Create a Marble QWidget without a parent
@@ -30,19 +30,19 @@ int main(int argc, char** argv)
     mapWidget->setShowCompass(false);
 
     // Set the map quality to gain speed
-    mapWidget->setMapQualityForViewContext( NormalQuality, Still );
-    mapWidget->setMapQualityForViewContext( LowQuality, Animation );
+    mapWidget->setMapQualityForViewContext(NormalQuality, Still);
+    mapWidget->setMapQualityForViewContext(LowQuality, Animation);
 
     // Create a horizontal zoom slider and set the default zoom
-    QSlider * zoomSlider = new QSlider(Qt::Horizontal);
-    zoomSlider->setMinimum( 1000 );
-    zoomSlider->setMaximum( 2400 );
+    QSlider *zoomSlider = new QSlider(Qt::Horizontal);
+    zoomSlider->setMinimum(1000);
+    zoomSlider->setMaximum(2400);
 
-    mapWidget->zoomView( zoomSlider->value() );
+    mapWidget->zoomView(zoomSlider->value());
 
     // Create a label to show the geodetic position
-    QLabel * positionLabel = new QLabel();
-    positionLabel->setSizePolicy( QSizePolicy::Preferred, QSizePolicy::Fixed );
+    QLabel *positionLabel = new QLabel();
+    positionLabel->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed);
 
     // Add all widgets to the vertical layout.
     QVBoxLayout *layout = new QVBoxLayout;
@@ -55,17 +55,14 @@ int main(int argc, char** argv)
     mapWidget->centerOn(home);
 
     // Connect the map widget to the position label.
-    QObject::connect( mapWidget, SIGNAL(mouseMoveGeoPosition(QString)),
-                      positionLabel, SLOT(setText(QString)) );
+    QObject::connect(mapWidget, SIGNAL(mouseMoveGeoPosition(QString)), positionLabel, SLOT(setText(QString)));
 
     // Connect the zoom slider to the map widget and vice versa.
-    QObject::connect( zoomSlider, SIGNAL(valueChanged(int)),
-                      mapWidget, SLOT(zoomView(int)) );
-    QObject::connect( mapWidget, SIGNAL(zoomChanged(int)),
-                      zoomSlider, SLOT(setValue(int)) );
+    QObject::connect(zoomSlider, SIGNAL(valueChanged(int)), mapWidget, SLOT(zoomView(int)));
+    QObject::connect(mapWidget, SIGNAL(zoomChanged(int)), zoomSlider, SLOT(setValue(int)));
 
     window->setLayout(layout);
-    window->resize( 400, 300 );
+    window->resize(400, 300);
 
     window->show();
 

@@ -3,7 +3,6 @@
 // SPDX-FileCopyrightText: 2013 Mayank Madan <maddiemadan@gmail.com>
 //
 
-
 #include "GeoDataCamera.h"
 #include "GeoDataCamera_p.h"
 
@@ -14,68 +13,64 @@
 namespace Marble
 {
 
-GeoDataCamera::GeoDataCamera() :
-    GeoDataAbstractView(),
-    d( new GeoDataCameraPrivate )
+GeoDataCamera::GeoDataCamera()
+    : GeoDataAbstractView()
+    , d(new GeoDataCameraPrivate)
 {
 }
 
-GeoDataCamera::GeoDataCamera( const GeoDataCamera& other ) :
-    GeoDataAbstractView(),
-    d( other.d )
+GeoDataCamera::GeoDataCamera(const GeoDataCamera &other)
+    : GeoDataAbstractView()
+    , d(other.d)
 {
     d->ref.ref();
 }
 
-GeoDataCamera& GeoDataCamera::operator=( const GeoDataCamera &other )
+GeoDataCamera &GeoDataCamera::operator=(const GeoDataCamera &other)
 {
-    GeoDataAbstractView::operator=( other );
-    qAtomicAssign( d, other.d );
+    GeoDataAbstractView::operator=(other);
+    qAtomicAssign(d, other.d);
     return *this;
 }
 
-bool GeoDataCamera::operator==( const GeoDataCamera &other ) const
+bool GeoDataCamera::operator==(const GeoDataCamera &other) const
 {
-    return equals(other) &&
-           d->m_coordinates == other.d->m_coordinates &&
-           d->m_roll == other.d->m_roll &&
-           d->m_heading == other.d->m_heading &&
-           d->m_tilt == other.d->m_tilt &&
-           altitudeMode() == other.altitudeMode();
+    return equals(other) && d->m_coordinates == other.d->m_coordinates && d->m_roll == other.d->m_roll && d->m_heading == other.d->m_heading
+        && d->m_tilt == other.d->m_tilt && altitudeMode() == other.altitudeMode();
 }
 
-bool GeoDataCamera::operator!=( const GeoDataCamera &other ) const
+bool GeoDataCamera::operator!=(const GeoDataCamera &other) const
 {
     return !this->operator==(other);
 }
 
 GeoDataCamera::~GeoDataCamera()
 {
-    if( !d->ref.deref() ) {
+    if (!d->ref.deref()) {
         delete d;
     }
 }
 
 GeoDataAbstractView *GeoDataCamera::copy() const
 {
-    return new GeoDataCamera( *this );
+    return new GeoDataCamera(*this);
 }
 
-void GeoDataCamera::setCoordinates( const GeoDataCoordinates& coordinates )
+void GeoDataCamera::setCoordinates(const GeoDataCoordinates &coordinates)
 {
     detach();
     d->m_coordinates = coordinates;
 }
 
-const char* GeoDataCamera::nodeType() const
+const char *GeoDataCamera::nodeType() const
 {
     return GeoDataTypes::GeoDataCameraType;
 }
 
-void GeoDataCamera::setAltitude( qreal altitude )
+void GeoDataCamera::setAltitude(qreal altitude)
 {
     detach();
-    d->m_coordinates.setAltitude( altitude );
+    d->m_coordinates.setAltitude(altitude);
 }
 
 qreal GeoDataCamera::altitude() const
@@ -83,26 +78,26 @@ qreal GeoDataCamera::altitude() const
     return d->m_coordinates.altitude();
 }
 
-void GeoDataCamera::setLatitude( qreal latitude, GeoDataCoordinates::Unit unit )
+void GeoDataCamera::setLatitude(qreal latitude, GeoDataCoordinates::Unit unit)
 {
     detach();
-    d->m_coordinates.setLatitude( latitude, unit );
+    d->m_coordinates.setLatitude(latitude, unit);
 }
 
-qreal GeoDataCamera::latitude( GeoDataCoordinates::Unit unit ) const
+qreal GeoDataCamera::latitude(GeoDataCoordinates::Unit unit) const
 {
-    return d->m_coordinates.latitude( unit );
+    return d->m_coordinates.latitude(unit);
 }
 
-void GeoDataCamera::setLongitude( qreal longitude, GeoDataCoordinates::Unit unit )
+void GeoDataCamera::setLongitude(qreal longitude, GeoDataCoordinates::Unit unit)
 {
     detach();
-    d->m_coordinates.setLongitude( longitude, unit );
+    d->m_coordinates.setLongitude(longitude, unit);
 }
 
-qreal GeoDataCamera::longitude( GeoDataCoordinates::Unit unit ) const
+qreal GeoDataCamera::longitude(GeoDataCoordinates::Unit unit) const
 {
-    return d->m_coordinates.longitude( unit );
+    return d->m_coordinates.longitude(unit);
 }
 
 GeoDataCoordinates GeoDataCamera::coordinates() const
@@ -145,7 +140,7 @@ void GeoDataCamera::setTilt(qreal tilt)
 
 void GeoDataCamera::detach()
 {
-    qAtomicDetach( d );
+    qAtomicDetach(d);
 }
 
 }

@@ -9,19 +9,19 @@
 namespace Marble
 {
 
-LatLonPlugin::LatLonPlugin( QObject *parent ) :
-    SearchRunnerPlugin( parent )
+LatLonPlugin::LatLonPlugin(QObject *parent)
+    : SearchRunnerPlugin(parent)
 {
 }
 
 QString LatLonPlugin::name() const
 {
-    return tr( "Geographic Coordinates Search" );
+    return tr("Geographic Coordinates Search");
 }
 
 QString LatLonPlugin::guiString() const
 {
-    return tr( "Geographic Coordinates" );
+    return tr("Geographic Coordinates");
 }
 
 QString LatLonPlugin::nameId() const
@@ -36,7 +36,7 @@ QString LatLonPlugin::version() const
 
 QString LatLonPlugin::description() const
 {
-    return tr( "Direct input of geographic coordinates" );
+    return tr("Direct input of geographic coordinates");
 }
 
 QString LatLonPlugin::copyrightYears() const
@@ -46,11 +46,10 @@ QString LatLonPlugin::copyrightYears() const
 
 QVector<PluginAuthor> LatLonPlugin::pluginAuthors() const
 {
-    return QVector<PluginAuthor>()
-            << PluginAuthor(QStringLiteral("Dennis Nienhüser"), QStringLiteral("nienhueser@kde.org"));
+    return QVector<PluginAuthor>() << PluginAuthor(QStringLiteral("Dennis Nienhüser"), QStringLiteral("nienhueser@kde.org"));
 }
 
-SearchRunner* LatLonPlugin::newRunner() const
+SearchRunner *LatLonPlugin::newRunner() const
 {
     return new LatLonRunner;
 }

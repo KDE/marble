@@ -9,9 +9,8 @@
 #include <QColor>
 #include <QPointer>
 
-#include "SceneGraphicsItem.h"
 #include "GeoDataCoordinates.h"
-
+#include "SceneGraphicsItem.h"
 
 namespace Marble
 {
@@ -24,31 +23,31 @@ class PolylineAnnotation : public SceneGraphicsItem
     friend class MergingPolylineNodesAnimation;
 
 public:
-    explicit PolylineAnnotation( GeoDataPlacemark *placemark );
+    explicit PolylineAnnotation(GeoDataPlacemark *placemark);
     ~PolylineAnnotation() override;
 
     /**
      * @brief Paints the nodes on the screen and updates the regions which correspond
      * to each node using the given GeoPainter.
      */
-    void paint( GeoPainter *painter, const ViewportParams *viewport, const QString &layer , int tileZoomLevel) override;
+    void paint(GeoPainter *painter, const ViewportParams *viewport, const QString &layer, int tileZoomLevel) override;
 
     /**
      * @brief Returns true if either the polyline's associated region or one of its nodes
      * contains the given QPoint. Note that the return value depends on the state.
      */
-    bool containsPoint( const QPoint &eventPos ) const override;
+    bool containsPoint(const QPoint &eventPos) const override;
 
     /**
      * @brief It is used so far to remove the hover effect while being in the
      * AddingPolylineNodes state (@see SceneGraphicsItem::dealWithItemChange documentation).
      */
-    void dealWithItemChange( const SceneGraphicsItem *other ) override;
+    void dealWithItemChange(const SceneGraphicsItem *other) override;
 
     /**
      * @brief Moves the whole polyline to the destination point.
      */
-    void move( const GeoDataCoordinates &source, const GeoDataCoordinates &destination ) override;
+    void move(const GeoDataCoordinates &source, const GeoDataCoordinates &destination) override;
 
     /**
      * @brief Changes the busy state of the object according to @p enabled. It is mostly used
@@ -56,7 +55,7 @@ public:
      * focus property (you can have a focused polyline which does not accept events because is
      * busy).
      */
-    void setBusy( bool enabled );
+    void setBusy(bool enabled);
 
     /**
      * @brief Returns whether the annotation is 'busy' or not - this usually means that something
@@ -113,19 +112,19 @@ protected:
      * SceneGraphicsItem::sceneEvent() (@see Template Method pattern). Each of these
      * event handlers are structured according to the state.
      */
-    bool mousePressEvent( QMouseEvent *event ) override;
-    bool mouseMoveEvent( QMouseEvent *event ) override;
-    bool mouseReleaseEvent( QMouseEvent *event ) override;
+    bool mousePressEvent(QMouseEvent *event) override;
+    bool mouseMoveEvent(QMouseEvent *event) override;
+    bool mouseReleaseEvent(QMouseEvent *event) override;
 
-    void dealWithStateChange( SceneGraphicsItem::ActionState previousState ) override;
+    void dealWithStateChange(SceneGraphicsItem::ActionState previousState) override;
 
 private:
     /**
-    * @brief It is called when the ::paint method is called for the first time. It
-    * initializes the m_nodesList by creating the PolylineNodes.
-    * @see updateRegions() method for more detailed explanation.
-    */
-    void setupRegionsLists( GeoPainter *painter );
+     * @brief It is called when the ::paint method is called for the first time. It
+     * initializes the m_nodesList by creating the PolylineNodes.
+     * @see updateRegions() method for more detailed explanation.
+     */
+    void setupRegionsLists(GeoPainter *painter);
 
     /**
      * @brief As briefly mentioned above, the PolylineNodes instances are not created at
@@ -134,61 +133,59 @@ private:
      * method called. We need the GeoPainter for doing this because we have to get the
      * ellipse around the GeoDataCoordinates.
      */
-    void updateRegions( GeoPainter *painter );
+    void updateRegions(GeoPainter *painter);
 
     /**
      * @brief It iterates through all nodes and paints them on the map. It takes into
      * consideration the active flags of each PolylineNode.
      */
-    void drawNodes( GeoPainter *painter );
+    void drawNodes(GeoPainter *painter);
 
     /**
      * @brief Tests if the polyline's nodes contain the given point and in case they do, it
      * returns the index of the first one.
      */
-    int nodeContains( const QPoint &point ) const;
+    int nodeContains(const QPoint &point) const;
 
     /**
      * @brief Tests if the polyline's virtual nodes contain the given point and in case they
      * do, it returns the index of the first one.
      */
-    int virtualNodeContains( const QPoint &point ) const;
+    int virtualNodeContains(const QPoint &point) const;
 
     /**
      * @brief Returns true/false on how the polyline (its 'lines' excepting its nodes) contain
      * the given point or not.
      */
-    bool polylineContains( const QPoint &point ) const;
+    bool polylineContains(const QPoint &point) const;
 
     /**
      * @brief It is called from processOnMove functions and deals with polylines
      * hovering.
      */
-    bool dealWithHovering( QMouseEvent *mouseEvent );
+    bool dealWithHovering(QMouseEvent *mouseEvent);
 
     /**
      * @brief Each state has its corresponding event handler, since in each state the
      * item may behave differently. These are the event handlers for the Editing state.
      */
-    bool processEditingOnPress( QMouseEvent *mouseEvent );
-    bool processEditingOnMove( QMouseEvent *mouseEvent );
-    bool processEditingOnRelease( QMouseEvent *mouseEvent );
+    bool processEditingOnPress(QMouseEvent *mouseEvent);
+    bool processEditingOnMove(QMouseEvent *mouseEvent);
+    bool processEditingOnRelease(QMouseEvent *mouseEvent);
 
     /**
      * @brief These are the event handlers for the MergingPolylineNodes state.
      */
-    bool processMergingOnPress( QMouseEvent *mouseEvent );
-    bool processMergingOnMove( QMouseEvent *mouseEvent );
+    bool processMergingOnPress(QMouseEvent *mouseEvent);
+    bool processMergingOnMove(QMouseEvent *mouseEvent);
     static bool processMergingOnRelease(QMouseEvent *mouseEvent);
 
     /**
      * @brief These are the event handlers for the AddingPolylineNodes state.
      */
-    bool processAddingNodesOnPress( QMouseEvent *mouseEvent );
-    bool processAddingNodesOnMove( QMouseEvent *mouseEvent );
-    bool processAddingNodesOnRelease( QMouseEvent *mouseEvent );
-
-
+    bool processAddingNodesOnPress(QMouseEvent *mouseEvent);
+    bool processAddingNodesOnMove(QMouseEvent *mouseEvent);
+    bool processAddingNodesOnRelease(QMouseEvent *mouseEvent);
 
     /**
      * @brief Since they are used in many functions, the size and color of nodes for each
@@ -207,7 +204,7 @@ private:
 
     QVector<PolylineNode> m_nodesList;
     QVector<PolylineNode> m_virtualNodesList;
-    QRegion               m_polylineRegion;
+    QRegion m_polylineRegion;
 
     // Used in Editing state
     enum EditingInteractingObject {

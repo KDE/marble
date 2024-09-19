@@ -8,10 +8,10 @@
 namespace Marble
 {
 
-PrintOptionsWidget::PrintOptionsWidget( QWidget * parent, Qt::WindowFlags flags ) :
-        QWidget( parent, flags )
+PrintOptionsWidget::PrintOptionsWidget(QWidget *parent, Qt::WindowFlags flags)
+    : QWidget(parent, flags)
 {
-    setupUi( this );
+    setupUi(this);
 }
 
 bool PrintOptionsWidget::printMap() const
@@ -19,9 +19,9 @@ bool PrintOptionsWidget::printMap() const
     return mapCheckBox->isChecked();
 }
 
-void PrintOptionsWidget::setPrintMap( bool print )
+void PrintOptionsWidget::setPrintMap(bool print)
 {
-    mapCheckBox->setChecked( print );
+    mapCheckBox->setChecked(print);
 }
 
 bool PrintOptionsWidget::printBackground() const
@@ -29,9 +29,9 @@ bool PrintOptionsWidget::printBackground() const
     return backgroundCheckBox->isChecked();
 }
 
-void PrintOptionsWidget::setPrintBackground( bool print )
+void PrintOptionsWidget::setPrintBackground(bool print)
 {
-    backgroundCheckBox->setChecked( print );
+    backgroundCheckBox->setChecked(print);
 }
 
 bool PrintOptionsWidget::printLegend() const
@@ -39,9 +39,9 @@ bool PrintOptionsWidget::printLegend() const
     return legendCheckBox->isChecked();
 }
 
-void PrintOptionsWidget::setPrintLegend( bool print )
+void PrintOptionsWidget::setPrintLegend(bool print)
 {
-    legendCheckBox->setChecked( print );
+    legendCheckBox->setChecked(print);
 }
 
 bool PrintOptionsWidget::printRouteSummary() const
@@ -49,9 +49,9 @@ bool PrintOptionsWidget::printRouteSummary() const
     return routeSummaryCheckBox->isChecked();
 }
 
-void PrintOptionsWidget::setPrintRouteSummary( bool print )
+void PrintOptionsWidget::setPrintRouteSummary(bool print)
 {
-    routeSummaryCheckBox->setChecked( print );
+    routeSummaryCheckBox->setChecked(print);
 }
 
 bool PrintOptionsWidget::printDrivingInstructions() const
@@ -59,24 +59,24 @@ bool PrintOptionsWidget::printDrivingInstructions() const
     return drivingInstructionsCheckBox->isChecked();
 }
 
-void PrintOptionsWidget::setPrintDrivingInstructions( bool print )
+void PrintOptionsWidget::setPrintDrivingInstructions(bool print)
 {
-    drivingInstructionsCheckBox->setChecked( print );
+    drivingInstructionsCheckBox->setChecked(print);
 }
 
-void PrintOptionsWidget::setBackgroundControlsEnabled( bool enabled )
+void PrintOptionsWidget::setBackgroundControlsEnabled(bool enabled)
 {
-    backgroundCheckBox->setEnabled( enabled );
+    backgroundCheckBox->setEnabled(enabled);
 }
 
-void PrintOptionsWidget::setLegendControlsEnabled( bool enabled )
+void PrintOptionsWidget::setLegendControlsEnabled(bool enabled)
 {
-    legendCheckBox->setEnabled( enabled );
+    legendCheckBox->setEnabled(enabled);
 }
 
-void PrintOptionsWidget::setRouteControlsEnabled( bool enabled )
+void PrintOptionsWidget::setRouteControlsEnabled(bool enabled)
 {
-    routeGroupBox->setEnabled( enabled );
+    routeGroupBox->setEnabled(enabled);
 }
 
 bool PrintOptionsWidget::printDrivingInstructionsAdvice() const
@@ -84,9 +84,9 @@ bool PrintOptionsWidget::printDrivingInstructionsAdvice() const
     return drivingInstructionsAdviceCheckBox->isChecked();
 }
 
-void PrintOptionsWidget::setPrintDrivingInstructionsAdvice( bool enabled )
+void PrintOptionsWidget::setPrintDrivingInstructionsAdvice(bool enabled)
 {
-    drivingInstructionsAdviceCheckBox->setChecked( enabled );
+    drivingInstructionsAdviceCheckBox->setChecked(enabled);
 }
 
 }

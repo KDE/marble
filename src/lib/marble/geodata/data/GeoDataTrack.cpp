@@ -10,31 +10,35 @@
 #include "GeoDataTypes.h"
 #include "MarbleDebug.h"
 
-#include "GeoDataLineString.h"
 #include "GeoDataExtendedData.h"
+#include "GeoDataLineString.h"
 
-#include <QMap>
 #include <QDateTime>
+#include <QMap>
 
-namespace Marble {
+namespace Marble
+{
 
 class GeoDataTrackPrivate : public GeoDataGeometryPrivate
 {
 public:
     GeoDataTrackPrivate()
-        : m_lineStringNeedsUpdate( false ),
-          m_interpolate( false )
+        : m_lineStringNeedsUpdate(false)
+        , m_interpolate(false)
     {
     }
 
-    GeoDataGeometryPrivate *copy() const override { return new GeoDataTrackPrivate( *this ); }
+    GeoDataGeometryPrivate *copy() const override
+    {
+        return new GeoDataTrackPrivate(*this);
+    }
 
     void equalizeWhenSize()
     {
         m_when.reserve(m_coordinates.size());
-        while ( m_when.size() < m_coordinates.size() ) {
-            //fill coordinates without time information with null QDateTime
-            m_when.append( QDateTime() );
+        while (m_when.size() < m_coordinates.size()) {
+            // fill coordinates without time information with null QDateTime
+            m_when.append(QDateTime());
         }
     }
 
@@ -49,21 +53,19 @@ public:
     GeoDataExtendedData m_extendedData;
 };
 
-GeoDataTrack::GeoDataTrack() :
-    GeoDataGeometry( new GeoDataTrackPrivate() )
+GeoDataTrack::GeoDataTrack()
+    : GeoDataGeometry(new GeoDataTrackPrivate())
 {
-
 }
 
-GeoDataTrack::GeoDataTrack( const GeoDataTrack &other )
-    : GeoDataGeometry( other )
+GeoDataTrack::GeoDataTrack(const GeoDataTrack &other)
+    : GeoDataGeometry(other)
 {
-
 }
 
-GeoDataTrack &GeoDataTrack::operator=( const GeoDataTrack &other )
+GeoDataTrack &GeoDataTrack::operator=(const GeoDataTrack &other)
 {
-    GeoDataGeometry::operator=( other );
+    GeoDataGeometry::operator=(other);
 
     return *this;
 }
@@ -83,22 +85,18 @@ GeoDataGeometry *GeoDataTrack::copy() const
     return new GeoDataTrack(*this);
 }
 
-
-bool GeoDataTrack::operator==( const GeoDataTrack& other ) const
+bool GeoDataTrack::operator==(const GeoDataTrack &other) const
 {
     Q_D(const GeoDataTrack);
-    const GeoDataTrackPrivate * const otherD = other.d_func();
+    const GeoDataTrackPrivate *const otherD = other.d_func();
 
-    return equals(other) &&
-           d->m_when == otherD->m_when &&
-           d->m_coordinates == otherD->m_coordinates &&
-           d->m_extendedData == otherD->m_extendedData &&
-           d->m_interpolate == otherD->m_interpolate;
+    return equals(other) && d->m_when == otherD->m_when && d->m_coordinates == otherD->m_coordinates && d->m_extendedData == otherD->m_extendedData
+        && d->m_interpolate == otherD->m_interpolate;
 }
 
-bool GeoDataTrack::operator!=( const GeoDataTrack& other ) const
+bool GeoDataTrack::operator!=(const GeoDataTrack &other) const
 {
-    return !this->operator==( other );
+    return !this->operator==(other);
 }
 
 int GeoDataTrack::size() const
@@ -155,7 +153,7 @@ QVector<QDateTime> GeoDataTrack::whenList() const
     return d->m_when;
 }
 
-GeoDataCoordinates GeoDataTrack::coordinatesAt( const QDateTime &when ) const
+GeoDataCoordinates GeoDataTrack::coordinatesAt(const QDateTime &when) const
 {
     Q_D(const GeoDataTrack);
 
@@ -164,14 +162,14 @@ GeoDataCoordinates GeoDataTrack::coordinatesAt( const QDateTime &when ) const
     }
 
     if (d->m_when.contains(when)) {
-        //exact match found
+        // exact match found
         const int index = d->m_when.indexOf(when);
         if (index < d->m_coordinates.size()) {
             return d->m_coordinates.at(index);
         }
     }
 
-    if ( !interpolate() ) {
+    if (!interpolate()) {
         return GeoDataCoordinates();
     }
 
@@ -183,15 +181,15 @@ GeoDataCoordinates GeoDataTrack::coordinatesAt( const QDateTime &when ) const
         }
     }
 
-    QMap<QDateTime, GeoDataCoordinates>::const_iterator nextEntry = const_cast<const PointMap&>(pointMap).upperBound( when );
+    QMap<QDateTime, GeoDataCoordinates>::const_iterator nextEntry = const_cast<const PointMap &>(pointMap).upperBound(when);
 
     // No tracked point happened before "when"
-    if ( nextEntry == pointMap.constBegin() ) {
+    if (nextEntry == pointMap.constBegin()) {
         mDebug() << "No tracked point before " << when;
         return GeoDataCoordinates();
     }
 
-    if ( nextEntry == pointMap.constEnd() ) {
+    if (nextEntry == pointMap.constEnd()) {
         mDebug() << "No track point after" << when;
         return GeoDataCoordinates();
     }
@@ -203,38 +201,38 @@ GeoDataCoordinates GeoDataTrack::coordinatesAt( const QDateTime &when ) const
     QDateTime nextWhen = nextEntry.key();
     GeoDataCoordinates nextCoord = nextEntry.value();
 
-    int interval = previousWhen.msecsTo( nextWhen );
-    int position = previousWhen.msecsTo( when );
+    int interval = previousWhen.msecsTo(nextWhen);
+    int position = previousWhen.msecsTo(when);
     qreal t = (qreal)position / (qreal)interval;
 
     return previousCoord.interpolate(nextCoord, t);
 }
 
-GeoDataCoordinates GeoDataTrack::coordinatesAt( int index ) const
+GeoDataCoordinates GeoDataTrack::coordinatesAt(int index) const
 {
     Q_D(const GeoDataTrack);
     return d->m_coordinates.at(index);
 }
 
-void GeoDataTrack::addPoint( const QDateTime &when, const GeoDataCoordinates &coord )
+void GeoDataTrack::addPoint(const QDateTime &when, const GeoDataCoordinates &coord)
 {
     detach();
 
     Q_D(GeoDataTrack);
     d->equalizeWhenSize();
     d->m_lineStringNeedsUpdate = true;
-    int i=0;
+    int i = 0;
     while (i < d->m_when.size()) {
         if (d->m_when.at(i) > when) {
             break;
         }
         ++i;
     }
-    d->m_when.insert(i, when );
-    d->m_coordinates.insert(i, coord );
+    d->m_when.insert(i, when);
+    d->m_coordinates.insert(i, coord);
 }
 
-void GeoDataTrack::appendCoordinates( const GeoDataCoordinates &coord )
+void GeoDataTrack::appendCoordinates(const GeoDataCoordinates &coord)
 {
     detach();
 
@@ -244,7 +242,7 @@ void GeoDataTrack::appendCoordinates( const GeoDataCoordinates &coord )
     d->m_coordinates.append(coord);
 }
 
-void GeoDataTrack::appendAltitude( qreal altitude )
+void GeoDataTrack::appendAltitude(qreal altitude)
 {
     detach();
 
@@ -255,11 +253,11 @@ void GeoDataTrack::appendAltitude( qreal altitude )
         return;
     }
     GeoDataCoordinates coordinates = d->m_coordinates.takeLast();
-    coordinates.setAltitude( altitude );
+    coordinates.setAltitude(altitude);
     d->m_coordinates.append(coordinates);
 }
 
-void GeoDataTrack::appendWhen( const QDateTime &when )
+void GeoDataTrack::appendWhen(const QDateTime &when)
 {
     detach();
 
@@ -277,12 +275,12 @@ void GeoDataTrack::clear()
     d->m_lineStringNeedsUpdate = true;
 }
 
-void GeoDataTrack::removeBefore( const QDateTime &when )
+void GeoDataTrack::removeBefore(const QDateTime &when)
 {
     detach();
 
     Q_D(GeoDataTrack);
-    Q_ASSERT( d->m_coordinates.size() == d->m_when.size());
+    Q_ASSERT(d->m_coordinates.size() == d->m_when.size());
     if (d->m_when.isEmpty()) {
         return;
     }
@@ -294,7 +292,7 @@ void GeoDataTrack::removeBefore( const QDateTime &when )
     }
 }
 
-void GeoDataTrack::removeAfter( const QDateTime &when )
+void GeoDataTrack::removeAfter(const QDateTime &when)
 {
     detach();
 
@@ -315,13 +313,13 @@ const GeoDataLineString *GeoDataTrack::lineString() const
     Q_D(const GeoDataTrack);
     if (d->m_lineStringNeedsUpdate) {
         d->m_lineString = GeoDataLineString();
-        d->m_lineString.append( coordinatesList() );
+        d->m_lineString.append(coordinatesList());
         d->m_lineStringNeedsUpdate = false;
     }
     return &d->m_lineString;
 }
 
-GeoDataExtendedData& GeoDataTrack::extendedData()
+GeoDataExtendedData &GeoDataTrack::extendedData()
 {
     detach();
 
@@ -329,13 +327,13 @@ GeoDataExtendedData& GeoDataTrack::extendedData()
     return d->m_extendedData;
 }
 
-const GeoDataExtendedData& GeoDataTrack::extendedData() const
+const GeoDataExtendedData &GeoDataTrack::extendedData() const
 {
     Q_D(const GeoDataTrack);
     return d->m_extendedData;
 }
 
-void GeoDataTrack::setExtendedData( const GeoDataExtendedData& extendedData )
+void GeoDataTrack::setExtendedData(const GeoDataExtendedData &extendedData)
 {
     detach();
 
@@ -343,20 +341,20 @@ void GeoDataTrack::setExtendedData( const GeoDataExtendedData& extendedData )
     d->m_extendedData = extendedData;
 }
 
-const GeoDataLatLonAltBox& GeoDataTrack::latLonAltBox() const
+const GeoDataLatLonAltBox &GeoDataTrack::latLonAltBox() const
 {
     return lineString()->latLonAltBox();
 }
 
-//TODO
-void GeoDataTrack::pack( QDataStream& stream ) const
+// TODO
+void GeoDataTrack::pack(QDataStream &stream) const
 {
-    GeoDataGeometry::pack( stream );
+    GeoDataGeometry::pack(stream);
 }
-//TODO
-void GeoDataTrack::unpack( QDataStream& stream )
+// TODO
+void GeoDataTrack::unpack(QDataStream &stream)
 {
-    GeoDataGeometry::unpack( stream );
+    GeoDataGeometry::unpack(stream);
 }
 
 }

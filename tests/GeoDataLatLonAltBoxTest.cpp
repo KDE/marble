@@ -7,8 +7,8 @@
 #include <QRandomGenerator>
 
 #include "GeoDataCoordinates.h"
-#include "GeoDataLinearRing.h"
 #include "GeoDataLatLonAltBox.h"
+#include "GeoDataLinearRing.h"
 
 namespace Marble
 {
@@ -17,14 +17,13 @@ class GeoDataLatLonAltBoxTest : public QObject
 {
     Q_OBJECT
 
- private Q_SLOTS:
+private Q_SLOTS:
     void fromLineStringTest();
 
- private:
+private:
     qreal randomLon();
     qreal randomLat();
 };
-
 
 void GeoDataLatLonAltBoxTest::fromLineStringTest()
 {
@@ -34,34 +33,32 @@ void GeoDataLatLonAltBoxTest::fromLineStringTest()
     qreal lat2 = randomLat();
     GeoDataLatLonAltBox sourceBox;
 
-    if ( lat1 >= lat2 ) {
-        sourceBox = GeoDataLatLonBox( lat1, lat2, east, west, GeoDataCoordinates::Degree );
-    }
-    else {
-        sourceBox = GeoDataLatLonBox( lat2, lat1, east, west, GeoDataCoordinates::Degree );
+    if (lat1 >= lat2) {
+        sourceBox = GeoDataLatLonBox(lat1, lat2, east, west, GeoDataCoordinates::Degree);
+    } else {
+        sourceBox = GeoDataLatLonBox(lat2, lat1, east, west, GeoDataCoordinates::Degree);
     }
 
     GeoDataLinearRing ring;
     // SouthWest
-    ring << GeoDataCoordinates( sourceBox.west(), sourceBox.south() );
+    ring << GeoDataCoordinates(sourceBox.west(), sourceBox.south());
     // SouthEast
-    ring << GeoDataCoordinates( sourceBox.east(), sourceBox.south() );
+    ring << GeoDataCoordinates(sourceBox.east(), sourceBox.south());
     // NorthEast
-    ring << GeoDataCoordinates( sourceBox.east(), sourceBox.north() );
+    ring << GeoDataCoordinates(sourceBox.east(), sourceBox.north());
     // NorthWest
-    ring << GeoDataCoordinates( sourceBox.west(), sourceBox.north() );
+    ring << GeoDataCoordinates(sourceBox.west(), sourceBox.north());
 
-    QCOMPARE( GeoDataLatLonAltBox::fromLineString( ring ).toString(), sourceBox.toString() );
-
+    QCOMPARE(GeoDataLatLonAltBox::fromLineString(ring).toString(), sourceBox.toString());
 }
 
 qreal GeoDataLatLonAltBoxTest::randomLon()
 {
     qreal lon = QRandomGenerator::global()->generate();
-    while ( lon < -180 ) {
+    while (lon < -180) {
         lon += 360;
     }
-    while ( lon > 180 ) {
+    while (lon > 180) {
         lon -= 360;
     }
 
@@ -71,10 +68,10 @@ qreal GeoDataLatLonAltBoxTest::randomLon()
 qreal GeoDataLatLonAltBoxTest::randomLat()
 {
     qreal lat = QRandomGenerator::global()->generate();
-    while ( lat < -90 ) {
+    while (lat < -90) {
         lat += 180;
     }
-    while ( lat > 90 ) {
+    while (lat > 90) {
         lat -= 180;
     }
 
@@ -83,6 +80,6 @@ qreal GeoDataLatLonAltBoxTest::randomLat()
 
 } // namespace Marble
 
-QTEST_MAIN( Marble::GeoDataLatLonAltBoxTest )
+QTEST_MAIN(Marble::GeoDataLatLonAltBoxTest)
 
 #include "GeoDataLatLonAltBoxTest.moc"

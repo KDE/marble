@@ -3,18 +3,18 @@
 // SPDX-FileCopyrightText: 2013 Illya Kovalevskyy <illya.kovalevskyy@gmail.com>
 //
 
-#include <GeoDataParser.h>
-#include <GeoDataDocument.h>
-#include <GeoDataUpdate.h>
-#include <GeoDataTour.h>
-#include <GeoDataPlaylist.h>
-#include <GeoDataTourControl.h>
-#include <MarbleDebug.h>
-#include <GeoDataFolder.h>
 #include <GeoDataAnimatedUpdate.h>
+#include <GeoDataDocument.h>
+#include <GeoDataFolder.h>
+#include <GeoDataParser.h>
+#include <GeoDataPlaylist.h>
+#include <GeoDataTour.h>
+#include <GeoDataTourControl.h>
+#include <GeoDataUpdate.h>
+#include <MarbleDebug.h>
 
-#include <QObject>
 #include <QBuffer>
+#include <QObject>
 #include <QTest>
 
 using namespace Marble;
@@ -29,28 +29,28 @@ private Q_SLOTS:
 
 void TestTour::initTestCase()
 {
-    MarbleDebug::setEnabled( true );
+    MarbleDebug::setEnabled(true);
 }
 
 GeoDataDocument *parseKml(const QString &content)
 {
-    GeoDataParser parser( GeoData_KML );
+    GeoDataParser parser(GeoData_KML);
 
-    QByteArray array( content.toUtf8() );
-    QBuffer buffer( &array );
-    buffer.open( QIODevice::ReadOnly );
-    //qDebug() << "Buffer content:" << endl << buffer.buffer();
-    if ( !parser.read( &buffer ) ) {
-        qFatal( "Could not parse data!" );
+    QByteArray array(content.toUtf8());
+    QBuffer buffer(&array);
+    buffer.open(QIODevice::ReadOnly);
+    // qDebug() << "Buffer content:" << endl << buffer.buffer();
+    if (!parser.read(&buffer)) {
+        qFatal("Could not parse data!");
     }
-    GeoDocument* document = parser.releaseDocument();
-    Q_ASSERT( document );
-    return static_cast<GeoDataDocument*>( document );
+    GeoDocument *document = parser.releaseDocument();
+    Q_ASSERT(document);
+    return static_cast<GeoDataDocument *>(document);
 }
 
 void TestTour::simpleParseTest()
 {
-  QString const centerContent (
+    QString const centerContent(
         "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
         "<kml xmlns=\"http://www.opengis.net/kml/2.2\""
         " xmlns:gx=\"http://www.google.com/kml/ext/2.2\">"
@@ -79,16 +79,15 @@ void TestTour::simpleParseTest()
         "       </gx:Playlist>"
         "   </gx:Tour>"
         "</Folder>"
-        "</kml>" );
+        "</kml>");
 
-    GeoDataDocument* dataDocument = parseKml( centerContent );
-    QCOMPARE( dataDocument->folderList().size(), 1 );
-    GeoDataFolder *folder = dataDocument->folderList().at( 0 );
+    GeoDataDocument *dataDocument = parseKml(centerContent);
+    QCOMPARE(dataDocument->folderList().size(), 1);
+    GeoDataFolder *folder = dataDocument->folderList().at(0);
 
-
-    GeoDataTour *tour_1 = dynamic_cast<GeoDataTour*>(folder->child(0));
-    GeoDataTour *tour_2 = dynamic_cast<GeoDataTour*>(folder->child(1));
-    GeoDataTour *tour_3 = dynamic_cast<GeoDataTour*>(folder->child(2));
+    GeoDataTour *tour_1 = dynamic_cast<GeoDataTour *>(folder->child(0));
+    GeoDataTour *tour_2 = dynamic_cast<GeoDataTour *>(folder->child(1));
+    GeoDataTour *tour_3 = dynamic_cast<GeoDataTour *>(folder->child(2));
 
     QVERIFY(tour_1 != nullptr);
     QVERIFY(tour_2 != nullptr);
@@ -109,8 +108,7 @@ void TestTour::simpleParseTest()
     GeoDataPlaylist *playlist = tour_2->playlist();
     QVERIFY(playlist != nullptr);
 
-    GeoDataTourControl *control = dynamic_cast<GeoDataTourControl*>(
-                playlist->primitive(0));
+    GeoDataTourControl *control = dynamic_cast<GeoDataTourControl *>(playlist->primitive(0));
     QVERIFY(control != nullptr);
     QCOMPARE(control->id(), QString("space"));
     QCOMPARE(control->playMode(), GeoDataTourControl::Pause);
@@ -118,15 +116,14 @@ void TestTour::simpleParseTest()
     GeoDataPlaylist *playlist2 = tour_3->playlist();
     QVERIFY(playlist2 != nullptr);
 
-    GeoDataAnimatedUpdate *update = dynamic_cast<GeoDataAnimatedUpdate*>(playlist2->primitive(0));
+    GeoDataAnimatedUpdate *update = dynamic_cast<GeoDataAnimatedUpdate *>(playlist2->primitive(0));
     QVERIFY(update != nullptr);
-    QCOMPARE(update->duration(),5.0);
-    QCOMPARE(update->update()->targetHref(),QString("Whatever.jpg"));
+    QCOMPARE(update->duration(), 5.0);
+    QCOMPARE(update->update()->targetHref(), QString("Whatever.jpg"));
 
     delete dataDocument;
 }
 
-QTEST_MAIN( TestTour )
+QTEST_MAIN(TestTour)
 
 #include "TestTour.moc"
-

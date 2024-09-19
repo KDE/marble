@@ -27,25 +27,25 @@
 
 #include <marble_export.h>
 
-namespace Marble {
+namespace Marble
+{
 
 class MarbleZipReaderPrivate;
 
 class MARBLE_EXPORT MarbleZipReader
 {
 public:
-    MarbleZipReader(const QString &fileName, QIODevice::OpenMode mode = QIODevice::ReadOnly );
+    MarbleZipReader(const QString &fileName, QIODevice::OpenMode mode = QIODevice::ReadOnly);
 
     explicit MarbleZipReader(QIODevice *device);
     ~MarbleZipReader();
 
-    QIODevice* device() const;
+    QIODevice *device() const;
 
     bool isReadable() const;
     bool exists() const;
 
-    struct MARBLE_EXPORT FileInfo
-    {
+    struct MARBLE_EXPORT FileInfo {
         FileInfo();
         FileInfo(const FileInfo &other);
         ~FileInfo();
@@ -69,13 +69,7 @@ public:
     QByteArray fileData(const QString &fileName) const;
     bool extractAll(const QString &destinationDir) const;
 
-    enum Status {
-        NoError,
-        FileReadError,
-        FileOpenError,
-        FilePermissionsError,
-        FileError
-    };
+    enum Status { NoError, FileReadError, FileOpenError, FilePermissionsError, FileError };
 
     Status status() const;
 

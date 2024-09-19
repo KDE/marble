@@ -19,7 +19,7 @@ class EditGroundOverlayDialog : public QDialog
     Q_OBJECT
 
 public:
-    EditGroundOverlayDialog( GeoDataGroundOverlay *overlay, TextureLayer *textureLayer, QWidget *parent = nullptr );
+    EditGroundOverlayDialog(GeoDataGroundOverlay *overlay, TextureLayer *textureLayer, QWidget *parent = nullptr);
     ~EditGroundOverlayDialog() override;
 
 private Q_SLOTS:
@@ -28,11 +28,11 @@ private Q_SLOTS:
     void checkFields();
 
 Q_SIGNALS:
-    void groundOverlayUpdated( GeoDataGroundOverlay* );
+    void groundOverlayUpdated(GeoDataGroundOverlay *);
 
 private:
     class Private;
-    Private * const d;
+    Private *const d;
 };
 
 }

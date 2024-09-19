@@ -6,8 +6,8 @@
 
 #include "KmlPolygonTagWriter.h"
 
-#include "GeoDataPolygon.h"
 #include "GeoDataLinearRing.h"
+#include "GeoDataPolygon.h"
 #include "GeoDataTypes.h"
 #include "GeoWriter.h"
 #include "KmlElementDictionary.h"
@@ -16,38 +16,33 @@
 namespace Marble
 {
 
-static GeoTagWriterRegistrar s_writerLookAt(
-    GeoTagWriter::QualifiedName( GeoDataTypes::GeoDataPolygonType,
-                                 kml::kmlTag_nameSpaceOgc22 ),
-    new KmlPolygonTagWriter);
+static GeoTagWriterRegistrar s_writerLookAt(GeoTagWriter::QualifiedName(GeoDataTypes::GeoDataPolygonType, kml::kmlTag_nameSpaceOgc22), new KmlPolygonTagWriter);
 
-bool KmlPolygonTagWriter::write( const GeoNode *node, GeoWriter& writer ) const
+bool KmlPolygonTagWriter::write(const GeoNode *node, GeoWriter &writer) const
 {
-    const GeoDataPolygon *polygon = static_cast<const GeoDataPolygon*>( node );
+    const GeoDataPolygon *polygon = static_cast<const GeoDataPolygon *>(node);
 
-    writer.writeStartElement( QString::fromUtf8(kml::kmlTag_Polygon) );
-    KmlObjectTagWriter::writeIdentifiers( writer, polygon );
-    writer.writeOptionalElement( kml::kmlTag_extrude, QString::number( polygon->extrude() ), "0" );
+    writer.writeStartElement(QString::fromUtf8(kml::kmlTag_Polygon));
+    KmlObjectTagWriter::writeIdentifiers(writer, polygon);
+    writer.writeOptionalElement(kml::kmlTag_extrude, QString::number(polygon->extrude()), "0");
 
-    writer.writeStartElement( "outerBoundaryIs" );
-    writeElement( &polygon->outerBoundary(), writer );
+    writer.writeStartElement("outerBoundaryIs");
+    writeElement(&polygon->outerBoundary(), writer);
     writer.writeEndElement();
 
-    const QVector<GeoDataLinearRing>& linearRings = polygon->innerBoundaries();
+    const QVector<GeoDataLinearRing> &linearRings = polygon->innerBoundaries();
     if (linearRings.size() > 0) {
-	writer.writeStartElement( "innerBoundaryIs" );
-	for ( int i = 0; i < linearRings.size(); ++i ) {
-	    const GeoDataLinearRing& ring = linearRings[i];
-	    writeElement( &ring, writer );
-	}
-	writer.writeEndElement();
+        writer.writeStartElement("innerBoundaryIs");
+        for (int i = 0; i < linearRings.size(); ++i) {
+            const GeoDataLinearRing &ring = linearRings[i];
+            writeElement(&ring, writer);
+        }
+        writer.writeEndElement();
     }
 
     writer.writeEndElement();
 
     return true;
-
 }
 
 }
-

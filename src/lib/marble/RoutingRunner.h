@@ -7,8 +7,8 @@
 #ifndef MARBLE_ROUTINGRUNNER_H
 #define MARBLE_ROUTINGRUNNER_H
 
-#include <QObject>
 #include "marble_export.h"
+#include <QObject>
 
 class QTime;
 
@@ -24,7 +24,7 @@ class MARBLE_EXPORT RoutingRunner : public QObject
     Q_OBJECT
 
 public:
-    explicit RoutingRunner( QObject *parent );
+    explicit RoutingRunner(QObject *parent);
 
     /**
      * Start a route download orw calculation. Called by MarbleRunnerManager, runners
@@ -32,20 +32,20 @@ public:
      * If implemented in a plugin, make sure to include Routing in the
      * plugin capabilities, otherwise MarbleRunnerManager will ignore the plugin
      */
-    virtual void retrieveRoute( const RouteRequest *request ) = 0;
+    virtual void retrieveRoute(const RouteRequest *request) = 0;
 
 Q_SIGNALS:
     /**
      * Route download/calculation is finished, result in the given route object.
      * To be emitted by runners after a @see retrieveRoute call.
      */
-    void routeCalculated( GeoDataDocument* route );
+    void routeCalculated(GeoDataDocument *route);
 
 protected:
-    const QString nameString( const QString &name, qreal length, const QTime &duration ) const;
-    const QString lengthString( qreal length ) const;
-    const QString durationString( const QTime &duration ) const;
-    const GeoDataExtendedData routeData( qreal length, const QTime &duration ) const;
+    const QString nameString(const QString &name, qreal length, const QTime &duration) const;
+    const QString lengthString(qreal length) const;
+    const QString durationString(const QTime &duration) const;
+    const GeoDataExtendedData routeData(qreal length, const QTime &duration) const;
 };
 
 }

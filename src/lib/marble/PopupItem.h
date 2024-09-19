@@ -37,7 +37,7 @@ class PopupItem : public QObject, public BillboardGraphicsItem
 {
     Q_OBJECT
 public:
-    explicit PopupItem( QObject* parent = nullptr );
+    explicit PopupItem(QObject *parent = nullptr);
     ~PopupItem() override;
 
     /**
@@ -78,7 +78,7 @@ public:
      *
      * @param url new url for web window
      */
-    void setUrl( const QUrl &url );
+    void setUrl(const QUrl &url);
 
     /**
      * @brief Set content of the popup
@@ -89,7 +89,7 @@ public:
      * @param html custom html for popup
      * @param baseUrl base URL for popup
      */
-    void setContent( const QString &html, const QUrl & baseUrl = QUrl() );
+    void setContent(const QString &html, const QUrl &baseUrl = QUrl());
 
     /**
      * @brief Sets text color of the header
@@ -102,7 +102,7 @@ public:
      *
      * @param color text color of the header
      */
-    void setTextColor( const QColor &color );
+    void setTextColor(const QColor &color);
 
     /**
      * @brief Sets background color of the bubble
@@ -112,9 +112,9 @@ public:
      *
      * @param color background color of the bubble
      */
-    void setBackgroundColor( const QColor &color );
+    void setBackgroundColor(const QColor &color);
 
-    bool eventFilter( QObject *, QEvent *e ) override;
+    bool eventFilter(QObject *, QEvent *e) override;
 
     void clearHistory();
 
@@ -166,16 +166,16 @@ private Q_SLOTS:
     void openUrl(const QUrl &url);
 
 protected:
-    void paint( QPainter *painter ) override;
+    void paint(QPainter *painter) override;
 
 Q_SIGNALS:
     void repaintNeeded();
     void hide();
 
 private:
-    QPixmap pixmap( const QString &imageid ) const;
-    static void colorize( QImage &img, const QColor &col );
-    QWidget* transform( QPoint &point ) const;
+    QPixmap pixmap(const QString &imageid) const;
+    static void colorize(QImage &img, const QColor &col);
+    QWidget *transform(QPoint &point) const;
 
     QWidget *m_widget;
     Ui::WebPopupWidget m_ui;

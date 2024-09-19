@@ -3,50 +3,49 @@
 // SPDX-FileCopyrightText: 2012 Rene Kuettner <rene@bitkanal.net>
 //
 
-
 #include "SatellitesMSCItem.h"
 
-#include <QFile>
 #include <QColor>
+#include <QFile>
 
+#include "GeoDataCoordinates.h"
+#include "GeoDataPlacemark.h"
+#include "GeoDataPoint.h"
+#include "GeoDataStyle.h"
+#include "GeoDataTrack.h"
+#include "GeoPainter.h"
 #include "MarbleClock.h"
 #include "MarbleDebug.h"
 #include "MarbleGlobal.h"
-#include "GeoPainter.h"
-#include "GeoDataCoordinates.h"
-#include "GeoDataPlacemark.h"
-#include "GeoDataStyle.h"
-#include "GeoDataTrack.h"
-#include "GeoDataPoint.h"
 
-namespace Marble {
+namespace Marble
+{
 
-SatellitesMSCItem::SatellitesMSCItem( const QString &name, 
-                                      const QString &category,
-                                      const QString &relatedBody,
-                                      const QString &catalog,
-                                      const QDateTime &missionStart,
-                                      const QDateTime &missionEnd,
-                                      int catalogIndex,
-                                      PlanetarySats *planSat,
-                                      const MarbleClock *clock )
-    : TrackerPluginItem( name ),
-      m_track( new GeoDataTrack() ),
-      m_clock( clock ),
-      m_planSat( planSat ),
-      m_category( category ),
-      m_relatedBody( relatedBody ),
-      m_catalog( catalog ),
-      m_catalogIndex( catalogIndex ),
-      m_missionStart( missionStart ),
-      m_missionEnd( missionEnd )
+SatellitesMSCItem::SatellitesMSCItem(const QString &name,
+                                     const QString &category,
+                                     const QString &relatedBody,
+                                     const QString &catalog,
+                                     const QDateTime &missionStart,
+                                     const QDateTime &missionEnd,
+                                     int catalogIndex,
+                                     PlanetarySats *planSat,
+                                     const MarbleClock *clock)
+    : TrackerPluginItem(name)
+    , m_track(new GeoDataTrack())
+    , m_clock(clock)
+    , m_planSat(planSat)
+    , m_category(category)
+    , m_relatedBody(relatedBody)
+    , m_catalog(catalog)
+    , m_catalogIndex(catalogIndex)
+    , m_missionStart(missionStart)
+    , m_missionEnd(missionEnd)
 {
     placemark()->setVisualCategory(GeoDataPlacemark::Satellite);
-    placemark()->setZoomLevel( 0 );
-    placemark()->setGeometry( m_track );
+    placemark()->setZoomLevel(0);
+    placemark()->setGeometry(m_track);
 
-    m_planSat->getKeplerElements(
-        m_perc, m_apoc, m_inc, m_ecc, m_ra, m_tano, m_m0, m_a, m_n0 );
+    m_planSat->getKeplerElements(m_perc, m_apoc, m_inc, m_ecc, m_ra, m_tano, m_m0, m_a, m_n0);
 
     m_period = 86400. / m_n0;
     m_step_secs = m_period / 500;
@@ -82,15 +81,15 @@ int SatellitesMSCItem::catalogIndex() const
 
 QString SatellitesMSCItem::id() const
 {
-    return QStringLiteral( "%1:%2" ).arg( catalog() ).arg( catalogIndex() );
+    return QStringLiteral("%1:%2").arg(catalog()).arg(catalogIndex());
 }
 
-const QDateTime& SatellitesMSCItem::missionStart() const
+const QDateTime &SatellitesMSCItem::missionStart() const
 {
     return m_missionStart;
 }
 
-const QDateTime& SatellitesMSCItem::missionEnd() const
+const QDateTime &SatellitesMSCItem::missionEnd() const
 {
     return m_missionEnd;
 }
@@ -124,64 +123,61 @@ void SatellitesMSCItem::setDescription()
     html.replace("%period%", "?");
     html.replace("%semiMajorAxis%", "?");
 
-    placemark()->setDescription( html );
+    placemark()->setDescription(html);
 }
 
 void SatellitesMSCItem::update()
 {
-    if( m_missionStart.isValid() ) {
-        setVisible( ( m_clock->dateTime() > m_missionStart ) );
+    if (m_missionStart.isValid()) {
+        setVisible((m_clock->dateTime() > m_missionStart));
     }
 
-    if( m_missionEnd.isValid() ) {
-        setVisible( ( m_clock->dateTime() < m_missionEnd ) );
+    if (m_missionEnd.isValid()) {
+        setVisible((m_clock->dateTime() < m_missionEnd));
     }
 
-    if( !isEnabled() || !isVisible() ) {
+    if (!isEnabled() || !isVisible()) {
         return;
     }
 
     QDateTime t = m_clock->dateTime();
     QDateTime endTime = t;
-    if( isTrackVisible() ) {
-        t = t.addSecs( - m_period / 2. );
-        endTime = t.addSecs( m_period );
+    if (isTrackVisible()) {
+        t = t.addSecs(-m_period / 2.);
+        endTime = t.addSecs(m_period);
 
-        m_track->removeBefore( t );
-        m_track->removeAfter( endTime );
+        m_track->removeBefore(t);
+        m_track->removeAfter(endTime);
 
-        if( m_track->firstWhen().isValid() && m_track->firstWhen() < t) {
-            t = m_track->firstWhen().addSecs( m_step_secs );
+        if (m_track->firstWhen().isValid() && m_track->firstWhen() < t) {
+            t = m_track->firstWhen().addSecs(m_step_secs);
         }
 
-        for(; t < endTime; t = t.addSecs(m_step_secs)) {
-            addTrackPointAt( t );
+        for (; t < endTime; t = t.addSecs(m_step_secs)) {
+            addTrackPointAt(t);
         }
     } else {
         m_track->clear();
     }
 
-    addTrackPointAt( m_clock->dateTime() );
+    addTrackPointAt(m_clock->dateTime());
 }
 
-void SatellitesMSCItem::addTrackPointAt( const QDateTime &dateTime )
+void SatellitesMSCItem::addTrackPointAt(const QDateTime &dateTime)
 {
-    double lng    = 0.;
-    double lat    = 0.;
+    double lng = 0.;
+    double lat = 0.;
     double height = 0.;
 
     QDateTime dt = dateTime.toUTC();
     QDate date = dt.date();
     QTime time = dt.time();
 
-    m_planSat->setMJD( date.year(), date.month(), date.day(),
-                       time.hour(), time.minute(), time.second() );
+    m_planSat->setMJD(date.year(), date.month(), date.day(), time.hour(), time.minute(), time.second());
     m_planSat->currentPos();
-    m_planSat->getPlanetographic( lng, lat, height );
+    m_planSat->getPlanetographic(lng, lat, height);
 
-    m_track->addPoint( dateTime,
-                       GeoDataCoordinates( lng, lat, height * 1000,
-                                           GeoDataCoordinates::Degree) );
+    m_track->addPoint(dateTime, GeoDataCoordinates(lng, lat, height * 1000, GeoDataCoordinates::Degree));
 }
 
 } // namespace Marble

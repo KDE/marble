@@ -33,57 +33,57 @@ class WeatherItem : public AbstractDataPluginItem
 {
     Q_OBJECT
 
-    Q_PROPERTY( QString station READ stationName WRITE setStationName NOTIFY stationNameChanged )
-    Q_PROPERTY( QString description READ description NOTIFY descriptionChanged )
-    Q_PROPERTY( QString image READ image NOTIFY imageChanged )
-    Q_PROPERTY( double temperature READ temperature NOTIFY temperatureChanged )
+    Q_PROPERTY(QString station READ stationName WRITE setStationName NOTIFY stationNameChanged)
+    Q_PROPERTY(QString description READ description NOTIFY descriptionChanged)
+    Q_PROPERTY(QString image READ image NOTIFY imageChanged)
+    Q_PROPERTY(double temperature READ temperature NOTIFY temperatureChanged)
 
- public:
-    explicit WeatherItem( QObject *parent = nullptr );
-    explicit WeatherItem( MarbleWidget* widget, QObject *parent = nullptr );
+public:
+    explicit WeatherItem(QObject *parent = nullptr);
+    explicit WeatherItem(MarbleWidget *widget, QObject *parent = nullptr);
     ~WeatherItem() override;
-    
+
     QAction *action() override;
 
     /**
      * Test if the item wants to request @p type again.
      */
-    virtual bool request( const QString& type );
-    
+    virtual bool request(const QString &type);
+
     /**
      * Returns the provider of the weather information.
      */
     virtual QString service() const = 0;
-     
+
     bool initialized() const override;
-    
-    void addDownloadedFile( const QString& url, const QString& type ) override = 0;
-                         
-    bool operator<( const AbstractDataPluginItem *other ) const override;
-    
+
+    void addDownloadedFile(const QString &url, const QString &type) override = 0;
+
+    bool operator<(const AbstractDataPluginItem *other) const override;
+
     QString stationName() const;
-    void setStationName( const QString& name );
-    
+    void setStationName(const QString &name);
+
     WeatherData currentWeather() const;
-    void setCurrentWeather( const WeatherData& weather );
+    void setCurrentWeather(const WeatherData &weather);
 
     QMap<QDate, WeatherData> forecastWeather() const;
-    void setForecastWeather( const QMap<QDate, WeatherData>& forecasts );
+    void setForecastWeather(const QMap<QDate, WeatherData> &forecasts);
 
     /**
      * Adds additional forecasts to the list. If there are multiple forecasts for one day,
      * it will choose the most recent (as of pubDate).
      */
-    void addForecastWeather( const QList<WeatherData>& forecasts );
-    
+    void addForecastWeather(const QList<WeatherData> &forecasts);
+
     quint8 priority() const;
-    void setPriority( quint8 priority );
+    void setPriority(quint8 priority);
 
-    void setSettings( const QHash<QString, QVariant>& settings ) override;
+    void setSettings(const QHash<QString, QVariant> &settings) override;
 
-    void setMarbleWidget( MarbleWidget *widget );
+    void setMarbleWidget(MarbleWidget *widget);
 
-    QList<QAction*> actions() override;
+    QList<QAction *> actions() override;
 
     QString description() const;
 
@@ -91,7 +91,7 @@ class WeatherItem : public AbstractDataPluginItem
 
     double temperature() const;
 
- public Q_SLOTS:
+public Q_SLOTS:
     void openBrowser();
 
 Q_SIGNALS:
@@ -103,9 +103,9 @@ Q_SIGNALS:
 
     void temperatureChanged();
 
- private:
+private:
     Q_DISABLE_COPY(WeatherItem)
-    WeatherItemPrivate * const d;
+    WeatherItemPrivate *const d;
     friend class WeatherItemPrivate;
     QString createFromTemplate(const QString &templateHtml);
 };

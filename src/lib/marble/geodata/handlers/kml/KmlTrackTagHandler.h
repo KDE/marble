@@ -15,9 +15,8 @@ namespace kml
 
 class KmlTrackTagHandler : public Marble::GeoTagHandler
 {
-
 public:
-    GeoNode *parse( GeoParser &parser ) const override;
+    GeoNode *parse(GeoParser &parser) const override;
 };
 
 }

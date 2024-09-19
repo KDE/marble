@@ -20,25 +20,25 @@ class MarbleGraphicsGridLayoutPrivate;
 
 class MARBLE_EXPORT MarbleGraphicsGridLayout : public AbstractMarbleGraphicsLayout
 {
- public:
-    MarbleGraphicsGridLayout( int rows, int columns );
+public:
+    MarbleGraphicsGridLayout(int rows, int columns);
     ~MarbleGraphicsGridLayout() override;
 
-    void addItem( ScreenGraphicsItem *item, int row, int column );
+    void addItem(ScreenGraphicsItem *item, int row, int column);
 
     /**
      * This updates the positions of all items in the layout.
      * Calling this will be done on every repainting, so you won't have to do it yourself.
      */
-    void updatePositions( MarbleGraphicsItem *parent ) override;
+    void updatePositions(MarbleGraphicsItem *parent) override;
 
     Qt::Alignment alignment() const;
 
-    Qt::Alignment alignment( ScreenGraphicsItem *item ) const;
+    Qt::Alignment alignment(ScreenGraphicsItem *item) const;
 
-    void setAlignment( Qt::Alignment align );
+    void setAlignment(Qt::Alignment align);
 
-    void setAlignment( ScreenGraphicsItem *item, Qt::Alignment );
+    void setAlignment(ScreenGraphicsItem *item, Qt::Alignment);
 
     /**
      * Returns the spacing between the items inside the layout.
@@ -48,10 +48,10 @@ class MARBLE_EXPORT MarbleGraphicsGridLayout : public AbstractMarbleGraphicsLayo
     /**
      * Set the spacing between the items inside the layout. By default the spacing is 0.
      */
-    void setSpacing( int spacing );
+    void setSpacing(int spacing);
 
- private:
-    MarbleGraphicsGridLayoutPrivate * const d;
+private:
+    MarbleGraphicsGridLayoutPrivate *const d;
 };
 
 } // namespace Marble

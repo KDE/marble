@@ -7,27 +7,26 @@
 
 #include "MarbleDebug.h"
 
-#include "KmlElementDictionary.h"
 #include "GeoDataImagePyramid.h"
 #include "GeoDataParser.h"
+#include "KmlElementDictionary.h"
 
 namespace Marble
 {
 namespace kml
 {
-KML_DEFINE_TAG_HANDLER( maxHeight )
+KML_DEFINE_TAG_HANDLER(maxHeight)
 
-GeoNode* KmlmaxHeightTagHandler::parse( GeoParser& parser ) const
+GeoNode *KmlmaxHeightTagHandler::parse(GeoParser &parser) const
 {
     Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1String(kmlTag_maxHeight)));
 
     GeoStackItem parentItem = parser.parentElement();
 
-    if (parentItem.represents( kmlTag_ImagePyramid ))
-    {
+    if (parentItem.represents(kmlTag_ImagePyramid)) {
         int maxHeight = parser.readElementText().toInt();
 
-        parentItem.nodeAs<GeoDataImagePyramid>()->setMaxHeight( maxHeight );
+        parentItem.nodeAs<GeoDataImagePyramid>()->setMaxHeight(maxHeight);
     }
     return nullptr;
 }

@@ -17,15 +17,15 @@ class SunLocator;
 
 class BlendingFactory
 {
- public:
-    explicit BlendingFactory( const SunLocator *sunLocator );
+public:
+    explicit BlendingFactory(const SunLocator *sunLocator);
     ~BlendingFactory();
 
-    void setLevelZeroLayout( int levelZeroColumns, int levelZeroRows );
+    void setLevelZeroLayout(int levelZeroColumns, int levelZeroRows);
 
-    Blending const * findBlending( QString const & name ) const;
+    Blending const *findBlending(QString const &name) const;
 
- private:
+private:
     Q_DISABLE_COPY(BlendingFactory)
     SunLightBlending *const m_sunLightBlending;
     QHash<QString, Blending const *> m_blendings;

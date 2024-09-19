@@ -21,16 +21,16 @@ class GEODATA_EXPORT GeoDataViewVolume : public GeoDataObject
 public:
     GeoDataViewVolume();
 
-    GeoDataViewVolume( const GeoDataViewVolume &other );
+    GeoDataViewVolume(const GeoDataViewVolume &other);
 
-    GeoDataViewVolume& operator=( const GeoDataViewVolume &other );
-    bool operator==( const GeoDataViewVolume &other ) const;
-    bool operator!=( const GeoDataViewVolume &other ) const;
+    GeoDataViewVolume &operator=(const GeoDataViewVolume &other);
+    bool operator==(const GeoDataViewVolume &other) const;
+    bool operator!=(const GeoDataViewVolume &other) const;
 
     ~GeoDataViewVolume() override;
 
     /** Provides type information for downcasting a GeoNode */
-    const char* nodeType() const override;
+    const char *nodeType() const override;
 
     qreal leftFov() const;
     void setLeftFov(qreal leftFov);
@@ -48,7 +48,7 @@ public:
     void setNear(qreal near);
 
 private:
-    GeoDataViewVolumePrivate* const d;
+    GeoDataViewVolumePrivate *const d;
 };
 
 }

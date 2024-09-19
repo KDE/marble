@@ -27,27 +27,27 @@ class TrackerPluginModel : public QObject
 public:
     /**
      * Constructs a model with the given @p treeModel and @p pluginManager.
-     * 
+     *
      * These parameters can be obtained by calling treeModel() and
      * pluginManager() on an instance of MarbleModel.
      */
-    explicit TrackerPluginModel( GeoDataTreeModel *treeModel );
+    explicit TrackerPluginModel(GeoDataTreeModel *treeModel);
 
     ~TrackerPluginModel() override;
 
-    void enable( bool enabled );
+    void enable(bool enabled);
 
     /**
      * Add the item @p mark to the model.
      *
      * @see beginUpdateItems, endUpdateItems
      */
-    void addItem( TrackerPluginItem *mark );
+    void addItem(TrackerPluginItem *mark);
 
     /**
      * Return all available items.
      */
-    QVector<TrackerPluginItem*> items() const;
+    QVector<TrackerPluginItem *> items() const;
 
     /**
      * Remove all items from the model.
@@ -77,7 +77,7 @@ public:
      * Once the file is downloaded, parseFile() will be called with its first
      * parameter equals to @p id.
      */
-    void downloadFile( const QUrl &url, const QString &id );
+    void downloadFile(const QUrl &url, const QString &id);
 
     /**
      * This method is called whenever a file queued up for download by
@@ -86,17 +86,17 @@ public:
      * @param id The @p id parameter passed to downloadFile()
      * @param file The content of the file
      */
-    virtual void parseFile( const QString &id, const QByteArray &file );
+    virtual void parseFile(const QString &id, const QByteArray &file);
 
 Q_SIGNALS:
     void itemUpdateStarted();
     void itemUpdateEnded();
-    void fileParsed( const QString &id );
+    void fileParsed(const QString &id);
 
 private:
     TrackerPluginModelPrivate *d;
-    Q_PRIVATE_SLOT( d, void downloaded( const QString &, const QString & ) );
-    Q_PRIVATE_SLOT( d, void update() );
+    Q_PRIVATE_SLOT(d, void downloaded(const QString &, const QString &));
+    Q_PRIVATE_SLOT(d, void update());
 };
 
 } // namespace Marble

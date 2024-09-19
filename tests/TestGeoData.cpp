@@ -3,20 +3,20 @@
 // SPDX-FileCopyrightText: 2009 Bastian Holst <bastianholst@gmx.de>
 //
 
-#include <QTest>
-#include <QDebug>
+#include "GeoDataCoordinates.h"
 #include "GeoDataDocument.h"
 #include "GeoDataFolder.h"
-#include "GeoDataLinearRing.h"
-#include "GeoDataLineString.h"
-#include "GeoDataPlacemark.h"
-#include "GeoDataCoordinates.h"
-#include "GeoDataLatLonAltBox.h"
-#include "GeoDataTypes.h"
-#include "GeoDataStyle.h"
 #include "GeoDataIconStyle.h"
+#include "GeoDataLatLonAltBox.h"
+#include "GeoDataLineString.h"
+#include "GeoDataLinearRing.h"
+#include "GeoDataPlacemark.h"
+#include "GeoDataStyle.h"
 #include "GeoDataStyleMap.h"
+#include "GeoDataTypes.h"
 #include "MarbleDebug.h"
+#include <QDebug>
+#include <QTest>
 
 namespace Marble
 {
@@ -35,12 +35,12 @@ void TestGeoData::nodeTypeTest()
 {
     /// basic testing of nodeType
     GeoDataFolder *folder = new GeoDataFolder;
-    const char* folderType = GeoDataTypes::GeoDataFolderType;
-    QCOMPARE( folder->nodeType(), folderType );
+    const char *folderType = GeoDataTypes::GeoDataFolderType;
+    QCOMPARE(folder->nodeType(), folderType);
 
     /// testing the nodeType of an object appended to a container
     GeoDataDocument document;
-    document.append( folder );
+    document.append(folder);
     GeoDataFeature &featureRef = document.last();
     QVERIFY(geodata_cast<GeoDataFolder>(&featureRef));
 }
@@ -66,11 +66,10 @@ void TestGeoData::parentingTest()
     folder->append(placemark2);
     QCOMPARE(folder->size(), 1);
 
-
     /// retrieve child and check it matches placemark
     GeoDataPlacemark *placemarkPtr;
     QVERIFY(geodata_cast<GeoDataPlacemark>(document->child(0)));
-    placemarkPtr = static_cast<GeoDataPlacemark*>(document->child(0));
+    placemarkPtr = static_cast<GeoDataPlacemark *>(document->child(0));
     QCOMPARE(placemarkPtr, placemark);
 
     /// check retrieved placemark matches intented child
@@ -80,7 +79,7 @@ void TestGeoData::parentingTest()
     /// retrieve child two and check it matches folder
     GeoDataFolder *folderPtr;
     QVERIFY(geodata_cast<GeoDataFolder>(document->child(1)));
-    folderPtr = static_cast<GeoDataFolder*>(document->child(1));
+    folderPtr = static_cast<GeoDataFolder *>(document->child(1));
     QCOMPARE(folderPtr, folder);
 
     /// check retrieved folder matches intended child
@@ -89,43 +88,42 @@ void TestGeoData::parentingTest()
 
     /// retrieve child three and check it matches placemark
     QCOMPARE(folderPtr->size(), 1);
-    placemarkPtr = static_cast<GeoDataPlacemark*>(folderPtr->child(0));
+    placemarkPtr = static_cast<GeoDataPlacemark *>(folderPtr->child(0));
     QCOMPARE(placemarkPtr->nodeType(), placemark2->nodeType());
     QCOMPARE(placemarkPtr, placemark2);
-
 
     /// check retrieved placemark matches intended child
     QCOMPARE(folderPtr->childPosition(placemarkPtr), 0);
 
     /// Set a style
     GeoDataIconStyle iconStyle;
-    iconStyle.setIconPath( "myicon.png" );
+    iconStyle.setIconPath("myicon.png");
     GeoDataStyle::Ptr style(new GeoDataStyle);
-    style->setId( "mystyle" );
-    style->setIconStyle( iconStyle );
-    GeoDataObject* noParent = nullptr;
-    QCOMPARE( style->parent(), noParent );
-    QCOMPARE( iconStyle.parent(), noParent );
-    document->setStyle( style );
-    QCOMPARE( style->parent(), document ); // Parent should be assigned now
-    QCOMPARE( style->iconStyle().parent(), style.data() );
-    QCOMPARE( iconStyle.parent(), noParent ); // setIconStyle copies
-    QCOMPARE( placemark->style()->parent(), noParent );
-    placemark->setStyle( style );
-    QCOMPARE( placemark->style()->parent(), placemark ); // Parent should be assigned now
+    style->setId("mystyle");
+    style->setIconStyle(iconStyle);
+    GeoDataObject *noParent = nullptr;
+    QCOMPARE(style->parent(), noParent);
+    QCOMPARE(iconStyle.parent(), noParent);
+    document->setStyle(style);
+    QCOMPARE(style->parent(), document); // Parent should be assigned now
+    QCOMPARE(style->iconStyle().parent(), style.data());
+    QCOMPARE(iconStyle.parent(), noParent); // setIconStyle copies
+    QCOMPARE(placemark->style()->parent(), noParent);
+    placemark->setStyle(style);
+    QCOMPARE(placemark->style()->parent(), placemark); // Parent should be assigned now
 
     /// Set a style map
-    GeoDataStyleMap* styleMap = new GeoDataStyleMap;
-    styleMap->setId( "mystylemap" );
-    styleMap->insert( "normal", "#mystyle" );
-    styleMap->insert( "highlight", "#mystyle" );
-    document->addStyle( style );
-    document->setStyleMap( styleMap );
-    QCOMPARE( placemark2->style()->parent(), noParent );
-    placemark2->setStyleUrl( "#mystyle" );
-    QCOMPARE( placemark2->style()->parent(), document ); // Parent is document, not placemark2
-    QCOMPARE( iconStyle.iconPath(), QString( "myicon.png" ) );
-    QCOMPARE( placemark2->style()->iconStyle().iconPath(), QString( "myicon.png" ) );
+    GeoDataStyleMap *styleMap = new GeoDataStyleMap;
+    styleMap->setId("mystylemap");
+    styleMap->insert("normal", "#mystyle");
+    styleMap->insert("highlight", "#mystyle");
+    document->addStyle(style);
+    document->setStyleMap(styleMap);
+    QCOMPARE(placemark2->style()->parent(), noParent);
+    placemark2->setStyleUrl("#mystyle");
+    QCOMPARE(placemark2->style()->parent(), document); // Parent is document, not placemark2
+    QCOMPARE(iconStyle.iconPath(), QString("myicon.png"));
+    QCOMPARE(placemark2->style()->iconStyle().iconPath(), QString("myicon.png"));
 }
 
 void TestGeoData::testCast()
@@ -145,11 +143,11 @@ void TestGeoData::testCast()
     QCOMPARE(geodata_cast<GeoDataLinearRing>(cbase), nullptr);
     QCOMPARE(geodata_cast<GeoDataPlacemark>(cbase), nullptr);
 
-    QCOMPARE(geodata_cast<GeoDataPlacemark>(static_cast<GeoDataObject*>(nullptr)), nullptr);
+    QCOMPARE(geodata_cast<GeoDataPlacemark>(static_cast<GeoDataObject *>(nullptr)), nullptr);
 }
 
 }
 
-QTEST_MAIN( Marble::TestGeoData )
+QTEST_MAIN(Marble::TestGeoData)
 
 #include "TestGeoData.moc"

@@ -4,7 +4,6 @@
 // SPDX-FileCopyrightText: 2007 Inge Wallin <ingwa@kde.org>
 //
 
-
 #ifndef MARBLE_GEODATASTYLESELECTOR_H
 #define MARBLE_GEODATASTYLESELECTOR_H
 
@@ -31,35 +30,35 @@ class GeoDataStyleSelectorPrivate;
  */
 class GEODATA_EXPORT GeoDataStyleSelector : public GeoDataObject
 {
-  public:
+public:
     ~GeoDataStyleSelector() override;
 
     /**
-    * @brief assignment operator
-    */
-    GeoDataStyleSelector& operator=( const GeoDataStyleSelector& other );
+     * @brief assignment operator
+     */
+    GeoDataStyleSelector &operator=(const GeoDataStyleSelector &other);
 
-    bool operator==( const GeoDataStyleSelector &other ) const;
-    bool operator!=( const GeoDataStyleSelector &other ) const;
+    bool operator==(const GeoDataStyleSelector &other) const;
+    bool operator!=(const GeoDataStyleSelector &other) const;
 
     /**
      * @brief Serialize the styleselector to a stream
      * @param  stream  the stream
      */
-    void pack( QDataStream& stream ) const override;
+    void pack(QDataStream &stream) const override;
 
     /**
      * @brief  Unserialize the styleselector from a stream
      * @param  stream  the stream
      */
-    void unpack( QDataStream& stream ) override;
+    void unpack(QDataStream &stream) override;
 
- protected:
+protected:
     GeoDataStyleSelector();
-    GeoDataStyleSelector( const GeoDataStyleSelector& other );
+    GeoDataStyleSelector(const GeoDataStyleSelector &other);
 
- private:
-    GeoDataStyleSelectorPrivate * const d;
+private:
+    GeoDataStyleSelectorPrivate *const d;
 };
 
 }

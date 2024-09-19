@@ -27,30 +27,30 @@ class MARBLE_EXPORT TourWidget : public QWidget
     Q_OBJECT
 
 public:
-    explicit TourWidget( QWidget *parent = nullptr, Qt::WindowFlags f = Qt::WindowFlags() );
+    explicit TourWidget(QWidget *parent = nullptr, Qt::WindowFlags f = Qt::WindowFlags());
     ~TourWidget() override;
 
-    void setMarbleWidget( MarbleWidget *widget );
-    bool openTour( const QString &filename );
+    void setMarbleWidget(MarbleWidget *widget);
+    bool openTour(const QString &filename);
     bool isPlaying() const;
 
-    bool eventFilter( QObject *watched, QEvent *event ) override;
+    bool eventFilter(QObject *watched, QEvent *event) override;
 
 public Q_SLOTS:
     void startPlaying();
     void pausePlaying();
     void togglePlaying();
     void stopPlaying();
-    void handleSliderMove( int );
+    void handleSliderMove(int);
     /**
      * Highlights the item currently being played.
      */
-    void setHighlightedItemIndex( int index );
+    void setHighlightedItemIndex(int index);
 
 Q_SIGNALS:
-    void featureUpdated( GeoDataFeature *feature );
-    void featureAdded( GeoDataContainer *parent, GeoDataFeature *feature, int row );
-    void featureRemoved( const GeoDataFeature *feature  );
+    void featureUpdated(GeoDataFeature *feature);
+    void featureAdded(GeoDataContainer *parent, GeoDataFeature *feature, int row);
+    void featureRemoved(const GeoDataFeature *feature);
 
 private Q_SLOTS:
     void moveUp();
@@ -67,21 +67,21 @@ private Q_SLOTS:
     void stopLooping();
 
 protected:
-    void closeEvent( QCloseEvent *event ) override;
+    void closeEvent(QCloseEvent *event) override;
 
 private:
-    Q_PRIVATE_SLOT( d, void openFile() )
-    Q_PRIVATE_SLOT( d, void createTour() )
-    Q_PRIVATE_SLOT( d, void saveTour() )
-    Q_PRIVATE_SLOT( d, void saveTourAs() )
-    Q_PRIVATE_SLOT( d, void captureTour() )
-    Q_PRIVATE_SLOT( d, void updateButtonsStates() )
-    Q_PRIVATE_SLOT( d, void mapCenterOn( const QModelIndex &index ) )
-    Q_PRIVATE_SLOT( d, void handlePlaybackProgress( const double position ) )
-    Q_DISABLE_COPY( TourWidget )
+    Q_PRIVATE_SLOT(d, void openFile())
+    Q_PRIVATE_SLOT(d, void createTour())
+    Q_PRIVATE_SLOT(d, void saveTour())
+    Q_PRIVATE_SLOT(d, void saveTourAs())
+    Q_PRIVATE_SLOT(d, void captureTour())
+    Q_PRIVATE_SLOT(d, void updateButtonsStates())
+    Q_PRIVATE_SLOT(d, void mapCenterOn(const QModelIndex &index))
+    Q_PRIVATE_SLOT(d, void handlePlaybackProgress(const double position))
+    Q_DISABLE_COPY(TourWidget)
 
     void removeHighlight();
-    TourWidgetPrivate * const d;
+    TourWidgetPrivate *const d;
 };
 
 }

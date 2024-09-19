@@ -22,32 +22,32 @@ class MARBLE_EXPORT VoiceNavigationModel : public QObject
     Q_OBJECT
 
     Q_PROPERTY(QString speaker READ speaker WRITE setSpeaker NOTIFY speakerChanged)
-    Q_PROPERTY(bool isSpeakerEnabled READ isSpeakerEnabled WRITE setSpeakerEnabled NOTIFY isSpeakerEnabledChanged )
+    Q_PROPERTY(bool isSpeakerEnabled READ isSpeakerEnabled WRITE setSpeakerEnabled NOTIFY isSpeakerEnabledChanged)
     Q_PROPERTY(QString instruction READ instruction NOTIFY instructionChanged)
     Q_PROPERTY(QString preview READ preview NOTIFY previewChanged)
 
 public:
     /** Constructor */
-    explicit VoiceNavigationModel( QObject *parent = nullptr );
+    explicit VoiceNavigationModel(QObject *parent = nullptr);
 
     /** Destructor */
     ~VoiceNavigationModel() override;
 
-// Initialization
+    // Initialization
     QString speaker() const;
 
-    void setSpeaker( const QString &speaker );
+    void setSpeaker(const QString &speaker);
 
     bool isSpeakerEnabled() const;
 
-    void setSpeakerEnabled( bool enabled );
+    void setSpeakerEnabled(bool enabled);
 
     void reset();
 
 public Q_SLOTS:
-    void update( const Route &route, qreal distanceManuever, qreal distanceTarget, bool deviated );
+    void update(const Route &route, qreal distanceManuever, qreal distanceTarget, bool deviated);
 
-// Turn instructions
+    // Turn instructions
     QString preview() const;
 
     QString instruction() const;
@@ -62,7 +62,7 @@ Q_SIGNALS:
     void previewChanged();
 
 private:
-    VoiceNavigationModelPrivate* const d;
+    VoiceNavigationModelPrivate *const d;
     friend class VoiceNavigationModelPrivate;
 };
 

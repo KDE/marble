@@ -8,9 +8,9 @@
 #include "MarbleDebug.h"
 
 #include "GPXElementDictionary.h"
-#include "GeoParser.h"
 #include "GeoDataPoint.h"
 #include "GeoDataTrack.h"
+#include "GeoParser.h"
 
 #include <QDateTime>
 
@@ -20,16 +20,15 @@ namespace gpx
 {
 GPX_DEFINE_TAG_HANDLER(time)
 
-GeoNode* GPXtimeTagHandler::parse(GeoParser& parser) const
+GeoNode *GPXtimeTagHandler::parse(GeoParser &parser) const
 {
     Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1String(gpxTag_time)));
 
     GeoStackItem parentItem = parser.parentElement();
-    if (parentItem.represents(gpxTag_trkpt))
-    {
-        GeoDataTrack* track = parentItem.nodeAs<GeoDataTrack>();
-        QDateTime dateTime = QDateTime::fromString( parser.readElementText().trimmed(), Qt::ISODate );
-        track->appendWhen( dateTime );
+    if (parentItem.represents(gpxTag_trkpt)) {
+        GeoDataTrack *track = parentItem.nodeAs<GeoDataTrack>();
+        QDateTime dateTime = QDateTime::fromString(parser.readElementText().trimmed(), Qt::ISODate);
+        track->appendWhen(dateTime);
     }
     return nullptr;
 }

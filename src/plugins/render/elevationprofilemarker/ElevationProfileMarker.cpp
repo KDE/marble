@@ -6,38 +6,36 @@
 
 #include "ElevationProfileMarker.h"
 
-#include "MarbleLocale.h"
-#include "MarbleModel.h"
 #include "GeoDataDocument.h"
 #include "GeoDataPlacemark.h"
-#include "GeoPainter.h"
 #include "GeoDataTreeModel.h"
-#include "ViewportParams.h"
+#include "GeoPainter.h"
 #include "MarbleGraphicsGridLayout.h"
+#include "MarbleLocale.h"
+#include "MarbleModel.h"
+#include "ViewportParams.h"
 
-#include <QRect>
 #include <QIcon>
+#include <QRect>
 
 namespace Marble
 {
 
-ElevationProfileMarker::ElevationProfileMarker( const MarbleModel *marbleModel )
-        : RenderPlugin( marbleModel ),
-        m_markerPlacemark( nullptr ),
-        m_markerItem(),
-        m_markerIcon( &m_markerItem ),
-        m_markerText( &m_markerItem )
+ElevationProfileMarker::ElevationProfileMarker(const MarbleModel *marbleModel)
+    : RenderPlugin(marbleModel)
+    , m_markerPlacemark(nullptr)
+    , m_markerItem()
+    , m_markerIcon(&m_markerItem)
+    , m_markerText(&m_markerItem)
 {
-    if ( !marbleModel ) {
+    if (!marbleModel) {
         return;
     }
-    setVisible( false );
-    m_markerItem.setCacheMode( MarbleGraphicsItem::ItemCoordinateCache );
+    setVisible(false);
+    m_markerItem.setCacheMode(MarbleGraphicsItem::ItemCoordinateCache);
 
-    connect( const_cast<MarbleModel *>( marbleModel )->treeModel(), SIGNAL(added(GeoDataObject*)),
-             this, SLOT(onGeoObjectAdded(GeoDataObject*)) );
-    connect( const_cast<MarbleModel *>( marbleModel )->treeModel(), SIGNAL(removed(GeoDataObject*)),
-             this, SLOT(onGeoObjectRemoved(GeoDataObject*)) );
+    connect(const_cast<MarbleModel *>(marbleModel)->treeModel(), SIGNAL(added(GeoDataObject *)), this, SLOT(onGeoObjectAdded(GeoDataObject *)));
+    connect(const_cast<MarbleModel *>(marbleModel)->treeModel(), SIGNAL(removed(GeoDataObject *)), this, SLOT(onGeoObjectRemoved(GeoDataObject *)));
 }
 
 ElevationProfileMarker::~ElevationProfileMarker()
@@ -66,12 +64,12 @@ qreal ElevationProfileMarker::zValue() const
 
 QString ElevationProfileMarker::name() const
 {
-    return tr( "Elevation Profile Marker" );
+    return tr("Elevation Profile Marker");
 }
 
 QString ElevationProfileMarker::guiString() const
 {
-    return tr( "&Elevation Profile Marker" );
+    return tr("&Elevation Profile Marker");
 }
 
 QString ElevationProfileMarker::nameId() const
@@ -86,7 +84,7 @@ QString ElevationProfileMarker::version() const
 
 QString ElevationProfileMarker::description() const
 {
-    return tr( "Marks the current elevation of the elevation profile on the map." );
+    return tr("Marks the current elevation of the elevation profile on the map.");
 }
 
 QString ElevationProfileMarker::copyrightYears() const
@@ -96,9 +94,8 @@ QString ElevationProfileMarker::copyrightYears() const
 
 QVector<PluginAuthor> ElevationProfileMarker::pluginAuthors() const
 {
-    return QVector<PluginAuthor>()
-            << PluginAuthor(QStringLiteral("Bernhard Beschow"), QStringLiteral("bbeschow@cs.tu-berlin.de"))
-            << PluginAuthor(QStringLiteral("Florian Eßer"), QStringLiteral("f.esser@rwth-aachen.de"));
+    return QVector<PluginAuthor>() << PluginAuthor(QStringLiteral("Bernhard Beschow"), QStringLiteral("bbeschow@cs.tu-berlin.de"))
+                                   << PluginAuthor(QStringLiteral("Florian Eßer"), QStringLiteral("f.esser@rwth-aachen.de"));
 }
 
 QIcon ElevationProfileMarker::icon() const
@@ -110,13 +107,13 @@ void ElevationProfileMarker::initialize()
 {
     m_markerIcon.setImage(QImage(QStringLiteral(":/flag-red-mirrored.png")));
 
-    MarbleGraphicsGridLayout *topLayout = new MarbleGraphicsGridLayout( 1, 2 );
-    m_markerItem.setLayout( topLayout );
-    topLayout->addItem( &m_markerIcon, 0, 0 );
+    MarbleGraphicsGridLayout *topLayout = new MarbleGraphicsGridLayout(1, 2);
+    m_markerItem.setLayout(topLayout);
+    topLayout->addItem(&m_markerIcon, 0, 0);
 
-    m_markerText.setFrame( LabelGraphicsItem::RoundedRectFrame );
-    m_markerText.setPadding( 1 );
-    topLayout->addItem( &m_markerText, 0, 1 );
+    m_markerText.setFrame(LabelGraphicsItem::RoundedRectFrame);
+    m_markerText.setPadding(1);
+    topLayout->addItem(&m_markerText, 0, 1);
 }
 
 bool ElevationProfileMarker::isInitialized() const
@@ -124,28 +121,27 @@ bool ElevationProfileMarker::isInitialized() const
     return !m_markerIcon.image().isNull();
 }
 
-bool ElevationProfileMarker::render( GeoPainter* painter, ViewportParams* viewport, const QString& renderPos, GeoSceneLayer* layer )
+bool ElevationProfileMarker::render(GeoPainter *painter, ViewportParams *viewport, const QString &renderPos, GeoSceneLayer *layer)
 {
-    Q_UNUSED( renderPos )
-    Q_UNUSED( layer )
+    Q_UNUSED(renderPos)
+    Q_UNUSED(layer)
 
-    if ( !m_markerPlacemark )
+    if (!m_markerPlacemark)
         return true;
 
-    if ( m_currentPosition != m_markerPlacemark->coordinate() ) {
+    if (m_currentPosition != m_markerPlacemark->coordinate()) {
         m_currentPosition = m_markerPlacemark->coordinate();
 
-        if ( m_currentPosition.isValid() ) {
-            QString unitString = tr( "m" );
+        if (m_currentPosition.isValid()) {
+            QString unitString = tr("m");
             int displayScale = 1.0;
-            const MarbleLocale::MeasurementSystem measurementSystem =
-                    MarbleGlobal::getInstance()->locale()->measurementSystem();
-            switch ( measurementSystem ) {
+            const MarbleLocale::MeasurementSystem measurementSystem = MarbleGlobal::getInstance()->locale()->measurementSystem();
+            switch (measurementSystem) {
             case MarbleLocale::MetricSystem:
                 /* nothing to do */
                 break;
             case MarbleLocale::ImperialSystem:
-                unitString = tr( "ft" );
+                unitString = tr("ft");
                 displayScale = M2FT;
                 break;
             case MarbleLocale::NauticalSystem:
@@ -154,30 +150,27 @@ bool ElevationProfileMarker::render( GeoPainter* painter, ViewportParams* viewpo
             }
 
             QString intervalStr;
-            intervalStr.setNum( m_currentPosition.altitude() * displayScale, 'f', 1 );
+            intervalStr.setNum(m_currentPosition.altitude() * displayScale, 'f', 1);
             intervalStr += QLatin1Char(' ') + unitString;
-            m_markerText.setText( intervalStr );
+            m_markerText.setText(intervalStr);
         }
     }
 
-    if ( m_currentPosition.isValid() ) {
+    if (m_currentPosition.isValid()) {
         qreal x;
         qreal y;
         qreal lon;
         qreal lat;
         // move the icon by some pixels, so that the pole of the flag sits at the exact point
-        int dx = +3 + m_markerItem.size().width() / 2 - m_markerIcon.contentRect().right();//-4;
+        int dx = +3 + m_markerItem.size().width() / 2 - m_markerIcon.contentRect().right(); //-4;
         int dy = -6;
-        viewport->screenCoordinates( m_currentPosition.longitude( GeoDataCoordinates::Radian ),
-                                     m_currentPosition.latitude ( GeoDataCoordinates::Radian ),
-                                     x, y );
-        viewport->geoCoordinates( x + dx, y + dy, lon, lat, GeoDataCoordinates::Radian );
-        m_markerItem.setCoordinate( GeoDataCoordinates( lon, lat, m_currentPosition.altitude(),
-                                                            GeoDataCoordinates::Radian ) );
+        viewport->screenCoordinates(m_currentPosition.longitude(GeoDataCoordinates::Radian), m_currentPosition.latitude(GeoDataCoordinates::Radian), x, y);
+        viewport->geoCoordinates(x + dx, y + dy, lon, lat, GeoDataCoordinates::Radian);
+        m_markerItem.setCoordinate(GeoDataCoordinates(lon, lat, m_currentPosition.altitude(), GeoDataCoordinates::Radian));
 
         painter->save();
 
-        m_markerItem.paintEvent( painter, viewport );
+        m_markerItem.paintEvent(painter, viewport);
 
         painter->restore();
     }
@@ -185,14 +178,14 @@ bool ElevationProfileMarker::render( GeoPainter* painter, ViewportParams* viewpo
     return true;
 }
 
-void ElevationProfileMarker::onGeoObjectAdded( GeoDataObject *object )
+void ElevationProfileMarker::onGeoObjectAdded(GeoDataObject *object)
 {
-    if ( m_markerPlacemark )
+    if (m_markerPlacemark)
         return;
 
-    GeoDataDocument *document = dynamic_cast<GeoDataDocument *>( object );
+    GeoDataDocument *document = dynamic_cast<GeoDataDocument *>(object);
 
-    if ( !document )
+    if (!document)
         return;
 
     if (document->name() != QLatin1String("Elevation Profile"))
@@ -201,15 +194,15 @@ void ElevationProfileMarker::onGeoObjectAdded( GeoDataObject *object )
     if (document->isEmpty())
         return;
 
-    m_markerPlacemark = dynamic_cast<GeoDataPlacemark *>( document->child( 0 ) );
+    m_markerPlacemark = dynamic_cast<GeoDataPlacemark *>(document->child(0));
 
-    setVisible( m_markerPlacemark != nullptr );
+    setVisible(m_markerPlacemark != nullptr);
 }
 
-void ElevationProfileMarker::onGeoObjectRemoved( GeoDataObject *object )
+void ElevationProfileMarker::onGeoObjectRemoved(GeoDataObject *object)
 {
-    GeoDataDocument *const document = dynamic_cast<GeoDataDocument *>( object );
-    if ( !document )
+    GeoDataDocument *const document = dynamic_cast<GeoDataDocument *>(object);
+    if (!document)
         return;
 
     if (document->name() != QLatin1String("Elevation Profile"))

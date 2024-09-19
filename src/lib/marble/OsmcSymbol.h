@@ -23,17 +23,17 @@ public:
 private:
     bool parseTag(const QString &tag);
     bool parseBackground(const QString &bg);
-    QSvgRenderer* parseForeground(const QString &fg);
+    QSvgRenderer *parseForeground(const QString &fg);
 
     void render();
 
-    QColor  m_wayColor;
-    QColor  m_backgroundColor;
+    QColor m_wayColor;
+    QColor m_backgroundColor;
     QString m_backgroundType;
     QSvgRenderer *m_foreground;
     QSvgRenderer *m_foreground2;
     QString m_text;
-    QColor  m_textColor;
+    QColor m_textColor;
 
     QImage m_image;
 

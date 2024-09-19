@@ -14,18 +14,16 @@
 
 using namespace Marble;
 
-FlickrParser::FlickrParser( MarbleWidget *widget,
-                            QList<PhotoPluginItem *> *list,
-                            QObject *parent )
-    : m_marbleWidget( widget ),
-      m_list( list ),
-      m_parent( parent )
+FlickrParser::FlickrParser(MarbleWidget *widget, QList<PhotoPluginItem *> *list, QObject *parent)
+    : m_marbleWidget(widget)
+    , m_list(list)
+    , m_parent(parent)
 {
 }
 
-bool FlickrParser::read( const QByteArray& data )
+bool FlickrParser::read(const QByteArray &data)
 {
-    addData( data );
+    addData(data);
 
     while (!atEnd()) {
         readNext();
@@ -48,32 +46,30 @@ bool FlickrParser::read( const QByteArray& data )
 
 void FlickrParser::readUnknownElement()
 {
-    Q_ASSERT( isStartElement() );
+    Q_ASSERT(isStartElement());
 
-    while ( !atEnd() ) {
+    while (!atEnd()) {
         readNext();
 
-        if ( isEndElement() )
+        if (isEndElement())
             break;
 
-        if ( isStartElement() )
+        if (isStartElement())
             readUnknownElement();
     }
 }
 
 void FlickrParser::readFlickr()
 {
-    Q_ASSERT( isStartElement()
-              && name() == QLatin1String("rsp")
-              && attributes().value(QLatin1String("stat")) == QLatin1String("ok"));
-              
-    while( !atEnd() ) {
+    Q_ASSERT(isStartElement() && name() == QLatin1String("rsp") && attributes().value(QLatin1String("stat")) == QLatin1String("ok"));
+
+    while (!atEnd()) {
         readNext();
-        
-        if( isEndElement() )
+
+        if (isEndElement())
             break;
-        
-        if( isStartElement() ) {
+
+        if (isStartElement()) {
             if (name() == QLatin1String("photos"))
                 readPhotos();
             else
@@ -84,16 +80,15 @@ void FlickrParser::readFlickr()
 
 void FlickrParser::readPhotos()
 {
-    Q_ASSERT( isStartElement()
-              && name() == QLatin1String("photos"));
+    Q_ASSERT(isStartElement() && name() == QLatin1String("photos"));
 
-    while( !atEnd() ) {
+    while (!atEnd()) {
         readNext();
-        
-        if( isEndElement() )
+
+        if (isEndElement())
             break;
-        
-        if( isStartElement() ) {
+
+        if (isStartElement()) {
             if (name() == QLatin1String("photo"))
                 readPhoto();
             else
@@ -104,27 +99,26 @@ void FlickrParser::readPhotos()
 
 void FlickrParser::readPhoto()
 {
-    Q_ASSERT( isStartElement()
-              && name() == QLatin1String("photo"));
+    Q_ASSERT(isStartElement() && name() == QLatin1String("photo"));
 
-    if( attributes().hasAttribute(QLatin1String("id")) ) {
-        PhotoPluginItem *item = new PhotoPluginItem( m_marbleWidget, m_parent );
-        item->setId( attributes().value(QLatin1String("id")).toString() );
-        item->setServer( attributes().value(QLatin1String("server")).toString() );
-        item->setFarm( attributes().value(QLatin1String("farm")).toString() );
-        item->setSecret( attributes().value(QLatin1String("secret")).toString() );
-        item->setOwner( attributes().value(QLatin1String("owner")).toString() );
-        item->setTitle( attributes().value(QLatin1String("title")).toString() );
-        m_list->append( item );
+    if (attributes().hasAttribute(QLatin1String("id"))) {
+        PhotoPluginItem *item = new PhotoPluginItem(m_marbleWidget, m_parent);
+        item->setId(attributes().value(QLatin1String("id")).toString());
+        item->setServer(attributes().value(QLatin1String("server")).toString());
+        item->setFarm(attributes().value(QLatin1String("farm")).toString());
+        item->setSecret(attributes().value(QLatin1String("secret")).toString());
+        item->setOwner(attributes().value(QLatin1String("owner")).toString());
+        item->setTitle(attributes().value(QLatin1String("title")).toString());
+        m_list->append(item);
     }
-    
-    while( !atEnd() ) {
+
+    while (!atEnd()) {
         readNext();
-        
-        if( isEndElement() )
+
+        if (isEndElement())
             break;
-        
-        if( isStartElement() )
+
+        if (isStartElement())
             break;
     }
 }

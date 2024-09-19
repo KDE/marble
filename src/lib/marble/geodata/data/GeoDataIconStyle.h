@@ -4,10 +4,8 @@
 // SPDX-FileCopyrightText: 2007 Inge Wallin <ingwa@kde.org>
 //
 
-
 #ifndef MARBLE_GEODATAICONSTYLE_H
 #define MARBLE_GEODATAICONSTYLE_H
-
 
 #include "GeoDataColorStyle.h"
 #include "GeoDataHotSpot.h"
@@ -23,29 +21,28 @@ class GeoDataIconStylePrivate;
 class RemoteIconLoader;
 
 // Limits for the user in case of scaling the icon too much
-static const QSize s_maximumIconSize = QSize( 100, 100 );
-static const QSize s_minimumIconSize = QSize( 10, 10 );
+static const QSize s_maximumIconSize = QSize(100, 100);
+static const QSize s_minimumIconSize = QSize(10, 10);
 
 /**
  */
 class GEODATA_EXPORT GeoDataIconStyle : public GeoDataColorStyle
 {
-  public:
+public:
     GeoDataIconStyle();
-    GeoDataIconStyle( const GeoDataIconStyle& other );
-    explicit GeoDataIconStyle( const QString& iconPath,
-                               const QPointF &hotSpot = QPointF( 0.5, 0.5 ) );
+    GeoDataIconStyle(const GeoDataIconStyle &other);
+    explicit GeoDataIconStyle(const QString &iconPath, const QPointF &hotSpot = QPointF(0.5, 0.5));
     ~GeoDataIconStyle() override;
 
-    GeoDataIconStyle& operator=( const GeoDataIconStyle& other );
+    GeoDataIconStyle &operator=(const GeoDataIconStyle &other);
 
-    bool operator==( const GeoDataIconStyle &other ) const;
-    bool operator!=( const GeoDataIconStyle &other ) const;
+    bool operator==(const GeoDataIconStyle &other) const;
+    bool operator!=(const GeoDataIconStyle &other) const;
 
     /// Provides type information for downcasting a GeoData
-    const char* nodeType() const override;
+    const char *nodeType() const override;
 
-    void setIcon( const QImage& icon );
+    void setIcon(const QImage &icon);
     QImage icon() const;
 
     /**
@@ -58,11 +55,11 @@ class GEODATA_EXPORT GeoDataIconStyle : public GeoDataColorStyle
      * @brief setIconPath Set the path to load the icon from. Any existing icon is invalidated.
      * @param filename Path to the icon to load. Can also be a virtual file system like qrc:/
      */
-    void setIconPath( const QString& filename );
+    void setIconPath(const QString &filename);
     QString iconPath() const;
 
-    void setHotSpot( const QPointF& hotSpot, GeoDataHotSpot::Units xunits, GeoDataHotSpot::Units yunits );
-    QPointF hotSpot( GeoDataHotSpot::Units& xunits, GeoDataHotSpot::Units& yunits ) const;
+    void setHotSpot(const QPointF &hotSpot, GeoDataHotSpot::Units xunits, GeoDataHotSpot::Units yunits);
+    QPointF hotSpot(GeoDataHotSpot::Units &xunits, GeoDataHotSpot::Units &yunits) const;
 
     /**
      * @brief setSize Change the size of @see icon(). A null size (0, 0) is treated as a request to keep
@@ -72,7 +69,7 @@ class GEODATA_EXPORT GeoDataIconStyle : public GeoDataColorStyle
      * it is resized unless a null size is passed. Otherwise icon() will be scaled to the given size.
      * @param aspectRatioMode Aspect ratio mode.
      */
-    void setSize(const QSize &size, Qt::AspectRatioMode aspectRatioMode=Qt::KeepAspectRatio);
+    void setSize(const QSize &size, Qt::AspectRatioMode aspectRatioMode = Qt::KeepAspectRatio);
 
     /**
      * @brief size Returns the size @see icon() will have if it can be loaded from @see iconPath.
@@ -85,18 +82,18 @@ class GEODATA_EXPORT GeoDataIconStyle : public GeoDataColorStyle
     float scale() const;
 
     int heading() const;
-    void setHeading( int heading );
-    
+    void setHeading(int heading);
+
     RemoteIconLoader *remoteIconLoader() const;
 
     /*
      * Serializable methods
      */
-    void pack( QDataStream& stream ) const override;
-    void unpack( QDataStream& stream ) override;
+    void pack(QDataStream &stream) const override;
+    void unpack(QDataStream &stream) override;
 
-  private:
-    GeoDataIconStylePrivate * const d;
+private:
+    GeoDataIconStylePrivate *const d;
 };
 
 }

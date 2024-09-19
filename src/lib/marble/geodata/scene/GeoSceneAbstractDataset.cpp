@@ -13,10 +13,10 @@ namespace Marble
 
 // FIXME: Filters are a Dataset.
 
-GeoSceneAbstractDataset::GeoSceneAbstractDataset( const QString& name )
-    : m_name( name ),
-      m_fileFormat(),
-      m_expire( std::numeric_limits<int>::max() )
+GeoSceneAbstractDataset::GeoSceneAbstractDataset(const QString &name)
+    : m_name(name)
+    , m_fileFormat()
+    , m_expire(std::numeric_limits<int>::max())
 {
 }
 
@@ -30,7 +30,7 @@ QString GeoSceneAbstractDataset::fileFormat() const
     return m_fileFormat;
 }
 
-void GeoSceneAbstractDataset::setFileFormat( const QString& fileFormat )
+void GeoSceneAbstractDataset::setFileFormat(const QString &fileFormat)
 {
     m_fileFormat = fileFormat;
 }
@@ -40,7 +40,7 @@ int GeoSceneAbstractDataset::expire() const
     return m_expire;
 }
 
-void GeoSceneAbstractDataset::setExpire( int expire )
+void GeoSceneAbstractDataset::setExpire(int expire)
 {
     m_expire = expire;
 }

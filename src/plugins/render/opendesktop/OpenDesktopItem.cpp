@@ -5,62 +5,61 @@
 //
 
 #include "OpenDesktopItem.h"
-#include <QPainter>
 #include "ViewportParams.h"
 #include "layers/PopupLayer.h"
+#include <QPainter>
 
 #include <QAction>
 
 using namespace Marble;
 
-OpenDesktopItem::OpenDesktopItem(QObject *parent):
-            AbstractDataPluginItem(parent)
+OpenDesktopItem::OpenDesktopItem(QObject *parent)
+    : AbstractDataPluginItem(parent)
 {
-    m_action = new QAction( this );
-    connect( m_action, SIGNAL(triggered()), this, SLOT(openBrowser()) );
-    setCacheMode( ItemCoordinateCache );
+    m_action = new QAction(this);
+    connect(m_action, SIGNAL(triggered()), this, SLOT(openBrowser()));
+    setCacheMode(ItemCoordinateCache);
 }
- 
+
 OpenDesktopItem::~OpenDesktopItem()
 {
     delete m_action;
 }
- 
+
 bool OpenDesktopItem::initialized() const
 {
     return size() != QSizeF(-1, -1);
 }
- 
-bool OpenDesktopItem::operator<( const AbstractDataPluginItem *other ) const
+
+bool OpenDesktopItem::operator<(const AbstractDataPluginItem *other) const
 {
     // Custom avatars will have more priority than default ones
     QString noAvatar = "http://opendesktop.org/usermanager/nopic.png";
-    const OpenDesktopItem* item = dynamic_cast<const OpenDesktopItem*>( other );
-    
-    if( item )
-    {
-        if( this->avatarUrl().toString() == noAvatar && item->avatarUrl().toString() != noAvatar )
+    const OpenDesktopItem *item = dynamic_cast<const OpenDesktopItem *>(other);
+
+    if (item) {
+        if (this->avatarUrl().toString() == noAvatar && item->avatarUrl().toString() != noAvatar)
             return false;
-        
-        else if( this->avatarUrl().toString() != noAvatar && item->avatarUrl().toString() == noAvatar )
-            return true;   
+
+        else if (this->avatarUrl().toString() != noAvatar && item->avatarUrl().toString() == noAvatar)
+            return true;
     }
-    
+
     return this > other;
 }
 
-void OpenDesktopItem::addDownloadedFile( const QString& url, const QString& type )
-{  
+void OpenDesktopItem::addDownloadedFile(const QString &url, const QString &type)
+{
     if (type == QLatin1String("avatar")) {
-        m_pixmap.load( url );
-        setSize( m_pixmap.size() );
+        m_pixmap.load(url);
+        setSize(m_pixmap.size());
         emit updated();
     }
 }
 
-void OpenDesktopItem::paint( QPainter *painter )
+void OpenDesktopItem::paint(QPainter *painter)
 {
-    painter->drawPixmap(0, 0, m_pixmap);  
+    painter->drawPixmap(0, 0, m_pixmap);
 }
 
 void OpenDesktopItem::updateToolTip()
@@ -76,35 +75,35 @@ void OpenDesktopItem::updateToolTip()
         "<tr><td align='right'>Location:</td><td>%2</td></tr>"
         "<tr><td align='right'>Role:</td><td>%3</td></tr>"
         "</table></body></html>");
-    setToolTip( toolTip.arg( fullName() ).arg( location() ).arg( role() ) );
+    setToolTip(toolTip.arg(fullName()).arg(location()).arg(role()));
 }
 
 QAction *OpenDesktopItem::action()
 {
-    m_action->setText( id() );
+    m_action->setText(id());
     return m_action;
 }
 
 void OpenDesktopItem::openBrowser()
 {
     PopupLayer *popup = m_marbleWidget->popupLayer();
-    popup->setCoordinates( coordinate(), Qt::AlignRight | Qt::AlignVCenter );
-    popup->setUrl( profileUrl() );
-    popup->setSize( QSizeF( 900, 600 ) );
+    popup->setCoordinates(coordinate(), Qt::AlignRight | Qt::AlignVCenter);
+    popup->setUrl(profileUrl());
+    popup->setSize(QSizeF(900, 600));
     popup->popup();
 }
 
 QUrl OpenDesktopItem::profileUrl() const
 {
-   return QUrl( QStringLiteral( "http://opendesktop.org/usermanager/search.php?username=%1" ).arg( id() ) );
+    return QUrl(QStringLiteral("http://opendesktop.org/usermanager/search.php?username=%1").arg(id()));
 }
 
 QUrl OpenDesktopItem::avatarUrl() const
 {
     return m_avatarUrl;
 }
-   
-void OpenDesktopItem::setAvatarUrl( const QUrl& url )
+
+void OpenDesktopItem::setAvatarUrl(const QUrl &url)
 {
     m_avatarUrl = url;
 }
@@ -113,8 +112,8 @@ QString OpenDesktopItem::fullName() const
 {
     return m_fullName;
 }
-   
-void OpenDesktopItem::setFullName( const QString& fullName )
+
+void OpenDesktopItem::setFullName(const QString &fullName)
 {
     m_fullName = fullName;
     updateToolTip();
@@ -125,7 +124,7 @@ QString OpenDesktopItem::location() const
     return m_location;
 }
 
-void OpenDesktopItem::setLocation( const QString& location )
+void OpenDesktopItem::setLocation(const QString &location)
 {
     m_location = location;
     updateToolTip();
@@ -136,7 +135,7 @@ QString OpenDesktopItem::role() const
     return m_role;
 }
 
-void OpenDesktopItem::setRole( const QString& role )
+void OpenDesktopItem::setRole(const QString &role)
 {
     m_role = role;
     updateToolTip();

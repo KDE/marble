@@ -9,24 +9,24 @@
 #include "AprsSource.h"
 #include <QString>
 
-namespace Marble {
-    class AprsTTY : public AprsSource
-    {
-      public:
-        explicit AprsTTY( const QString &ttyName );
-        ~AprsTTY() override;
+namespace Marble
+{
+class AprsTTY : public AprsSource
+{
+public:
+    explicit AprsTTY(const QString &ttyName);
+    ~AprsTTY() override;
 
-        QString sourceName() const override;
-        QIODevice *openSocket() override;
-        void       checkReadReturn( int length, QIODevice **socket,
-                                    AprsGatherer *gatherer ) override;
+    QString sourceName() const override;
+    QIODevice *openSocket() override;
+    void checkReadReturn(int length, QIODevice **socket, AprsGatherer *gatherer) override;
 
-        bool       canDoDirect() const override;
+    bool canDoDirect() const override;
 
-      private:
-        QString m_ttyName;
-        int     m_numErrors;
-    };
+private:
+    QString m_ttyName;
+    int m_numErrors;
+};
 }
 
 #endif /* APRSTTY_H */

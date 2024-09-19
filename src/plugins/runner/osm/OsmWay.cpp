@@ -3,18 +3,19 @@
 // SPDX-FileCopyrightText: 2015 Dennis Nienhüser <nienhueser@kde.org>
 //
 
-#include <OsmRelation.h>
-#include <MarbleDebug.h>
-#include <GeoDataPlacemark.h>
+#include <GeoDataDocument.h>
 #include <GeoDataLineStyle.h>
+#include <GeoDataMultiGeometry.h>
+#include <GeoDataPlacemark.h>
 #include <GeoDataPolyStyle.h>
 #include <GeoDataStyle.h>
-#include <GeoDataDocument.h>
-#include <osm/OsmObjectManager.h>
+#include <MarbleDebug.h>
 #include <MarbleDirs.h>
-#include <GeoDataMultiGeometry.h>
+#include <OsmRelation.h>
+#include <osm/OsmObjectManager.h>
 
-namespace Marble {
+namespace Marble
+{
 
 QSet<StyleBuilder::OsmTag> OsmWay::s_areaTags;
 QSet<StyleBuilder::OsmTag> OsmWay::s_buildingTags;
@@ -28,14 +29,14 @@ GeoDataPlacemark *OsmWay::create(const OsmNodes &nodes, QSet<qint64> &usedNodes)
         GeoDataLinearRing linearRing;
         linearRing.reserve(m_references.size());
         bool const stripLastNode = m_references.first() == m_references.last();
-        for (int i=0, n=m_references.size() - (stripLastNode ? 1 : 0); i<n; ++i) {
+        for (int i = 0, n = m_references.size() - (stripLastNode ? 1 : 0); i < n; ++i) {
             qint64 nodeId = m_references[i];
             auto const nodeIter = nodes.constFind(nodeId);
             if (nodeIter == nodes.constEnd()) {
                 return nullptr;
             }
 
-            OsmNode const & node = nodeIter.value();
+            OsmNode const &node = nodeIter.value();
             osmData.addNodeReference(node.coordinates(), node.osmData());
             linearRing.append(node.coordinates());
             usedNodes << nodeId;
@@ -56,13 +57,13 @@ GeoDataPlacemark *OsmWay::create(const OsmNodes &nodes, QSet<qint64> &usedNodes)
         GeoDataLineString lineString;
         lineString.reserve(m_references.size());
 
-        for(auto nodeId: m_references) {
+        for (auto nodeId : m_references) {
             auto const nodeIter = nodes.constFind(nodeId);
             if (nodeIter == nodes.constEnd()) {
                 return nullptr;
             }
 
-            OsmNode const & node = nodeIter.value();
+            OsmNode const &node = nodeIter.value();
             osmData.addNodeReference(node.coordinates(), node.osmData());
             lineString.append(node.coordinates());
             usedNodes << nodeId;
@@ -120,10 +121,8 @@ bool OsmWay::isArea() const
         return true;
     }
 
-    bool const isLinearFeature =
-            m_osmData.containsTag(QStringLiteral("area"), QStringLiteral("no")) ||
-            m_osmData.containsTagKey(QStringLiteral("highway")) ||
-            m_osmData.containsTagKey(QStringLiteral("barrier"));
+    bool const isLinearFeature = m_osmData.containsTag(QStringLiteral("area"), QStringLiteral("no")) || m_osmData.containsTagKey(QStringLiteral("highway"))
+        || m_osmData.containsTagKey(QStringLiteral("barrier"));
     if (isLinearFeature) {
         return false;
     }
@@ -133,7 +132,7 @@ bool OsmWay::isArea() const
         return true;
     }
 
-    for (auto iter = m_osmData.tagsBegin(), end=m_osmData.tagsEnd(); iter != end; ++iter) {
+    for (auto iter = m_osmData.tagsBegin(), end = m_osmData.tagsEnd(); iter != end; ++iter) {
         const auto tag = StyleBuilder::OsmTag(iter.key(), iter.value());
         if (isAreaTag(tag)) {
             return true;
@@ -160,7 +159,7 @@ bool OsmWay::isAreaTag(const StyleBuilder::OsmTag &keyValue)
         s_areaTags.insert(StyleBuilder::OsmTag(QStringLiteral("area"), QStringLiteral("yes")));
         s_areaTags.insert(StyleBuilder::OsmTag(QStringLiteral("waterway"), QStringLiteral("riverbank")));
 
-        for (auto const & tag: StyleBuilder::buildingTags()) {
+        for (auto const &tag : StyleBuilder::buildingTags()) {
             s_areaTags.insert(tag);
         }
         s_areaTags.insert(StyleBuilder::OsmTag(QStringLiteral("man_made"), QStringLiteral("bridge")));
@@ -197,7 +196,7 @@ bool OsmWay::isAreaTag(const StyleBuilder::OsmTag &keyValue)
 
 bool OsmWay::isBuilding() const
 {
-    for (auto iter = m_osmData.tagsBegin(), end=m_osmData.tagsEnd(); iter != end; ++iter) {
+    for (auto iter = m_osmData.tagsBegin(), end = m_osmData.tagsEnd(); iter != end; ++iter) {
         const auto tag = StyleBuilder::OsmTag(iter.key(), iter.value());
         if (isBuildingTag(tag)) {
             return true;
@@ -210,7 +209,7 @@ bool OsmWay::isBuilding() const
 bool OsmWay::isBuildingTag(const StyleBuilder::OsmTag &keyValue)
 {
     if (s_buildingTags.isEmpty()) {
-        for (auto const & tag: StyleBuilder::buildingTags()) {
+        for (auto const &tag : StyleBuilder::buildingTags()) {
             s_buildingTags.insert(tag);
         }
     }
@@ -244,7 +243,7 @@ double OsmWay::extractBuildingHeight() const
         int const levels = tagIter.value().toInt();
         int const skipLevels = m_osmData.tagValue(QStringLiteral("building:min_level")).toInt();
         /** @todo Is 35 as an upper bound for the number of levels sane? */
-        height = 3.0 * qBound(1, 1+levels-skipLevels, 35);
+        height = 3.0 * qBound(1, 1 + levels - skipLevels, 35);
     }
 
     return qBound(1.0, height, 1000.0);

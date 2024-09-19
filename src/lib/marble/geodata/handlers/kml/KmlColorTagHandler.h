@@ -19,9 +19,9 @@ namespace kml
 class KmlcolorTagHandler : public GeoTagHandler
 {
 public:
-    GeoNode* parse(GeoParser&) const override;
+    GeoNode *parse(GeoParser &) const override;
 
-    static QColor parseColor( const QString &colorString );
+    static QColor parseColor(const QString &colorString);
 };
 
 }

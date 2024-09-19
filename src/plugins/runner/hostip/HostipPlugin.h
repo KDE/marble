@@ -3,7 +3,6 @@
 // SPDX-FileCopyrightText: 2010 Dennis Nienhüser <nienhueser@kde.org>
 //
 
-
 #ifndef MARBLE_HOSTIPPLUGIN_H
 #define MARBLE_HOSTIPPLUGIN_H
 
@@ -16,10 +15,10 @@ class HostipPlugin : public SearchRunnerPlugin
 {
     Q_OBJECT
     Q_PLUGIN_METADATA(IID "org.kde.marble.HostipPlugin")
-    Q_INTERFACES( Marble::SearchRunnerPlugin )
+    Q_INTERFACES(Marble::SearchRunnerPlugin)
 
 public:
-    explicit HostipPlugin( QObject *parent = nullptr );
+    explicit HostipPlugin(QObject *parent = nullptr);
 
     QString name() const override;
 
@@ -35,7 +34,7 @@ public:
 
     QVector<PluginAuthor> pluginAuthors() const override;
 
-    SearchRunner* newRunner() const override;
+    SearchRunner *newRunner() const override;
 
     bool canWork() const override;
 };

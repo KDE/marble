@@ -6,9 +6,9 @@
 #ifndef MARBLE_KMLLISTSTYLETAGWRITER_H
 #define MARBLE_KMLLISTSTYLETAGWRITER_H
 
-#include "GeoTagWriter.h"
-#include "GeoDataListStyle.h"
 #include "GeoDataItemIcon.h"
+#include "GeoDataListStyle.h"
+#include "GeoTagWriter.h"
 
 namespace Marble
 {
@@ -16,11 +16,11 @@ namespace Marble
 class KmlListStyleTagWriter : public GeoTagWriter
 {
 public:
-    bool write( const GeoNode *node, GeoWriter& writer ) const override;
+    bool write(const GeoNode *node, GeoWriter &writer) const override;
 
 private:
-    static QString itemTypeToString( GeoDataListStyle::ListItemType itemType );
-    static QString iconStateToString( GeoDataItemIcon::ItemIconStates state );
+    static QString itemTypeToString(GeoDataListStyle::ListItemType itemType);
+    static QString iconStateToString(GeoDataItemIcon::ItemIconStates state);
 };
 
 }

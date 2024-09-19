@@ -11,10 +11,11 @@
 
 #include "MarbleDebug.h"
 
-namespace Marble {
+namespace Marble
+{
 
-SatellitesConfigNodeItem::SatellitesConfigNodeItem( const QString &name )
-    : SatellitesConfigAbstractItem( name )
+SatellitesConfigNodeItem::SatellitesConfigNodeItem(const QString &name)
+    : SatellitesConfigAbstractItem(name)
 {
 }
 
@@ -24,44 +25,44 @@ SatellitesConfigNodeItem::~SatellitesConfigNodeItem()
 
 void SatellitesConfigNodeItem::loadSettings(const QHash<QString, QVariant> &settings)
 {
-    for( SatellitesConfigAbstractItem *item: m_children ) {
-        item->loadSettings( settings );
+    for (SatellitesConfigAbstractItem *item : m_children) {
+        item->loadSettings(settings);
     }
 }
 
-QVariant SatellitesConfigNodeItem::data( int column, int role ) const
+QVariant SatellitesConfigNodeItem::data(int column, int role) const
 {
-    QVariant base = SatellitesConfigAbstractItem::data( column, role );
-    if ( base.isValid() ) {
+    QVariant base = SatellitesConfigAbstractItem::data(column, role);
+    if (base.isValid()) {
         return base;
     }
 
-    switch ( role ) {
+    switch (role) {
     case IdListRole:
     case UrlListRole: {
         QStringList list;
-        for( SatellitesConfigAbstractItem *item: m_children ) {
-            if ( item->data( column, Qt::CheckStateRole ).toInt() != Qt::Unchecked ) {
-                list.append( item->data( column, role).toStringList() );
+        for (SatellitesConfigAbstractItem *item : m_children) {
+            if (item->data(column, Qt::CheckStateRole).toInt() != Qt::Unchecked) {
+                list.append(item->data(column, role).toStringList());
             }
         }
         return list;
     }
     case FullIdListRole: {
         QStringList fullIdList;
-        for( SatellitesConfigAbstractItem *item: m_children ) {
-            fullIdList.append( item->data( column, role ).toStringList() );
+        for (SatellitesConfigAbstractItem *item : m_children) {
+            fullIdList.append(item->data(column, role).toStringList());
         }
         return fullIdList;
     }
     case Qt::CheckStateRole: {
         bool oneChecked = false;
         bool oneUnchecked = false;
-        for( SatellitesConfigAbstractItem *item: m_children ) {         
-            switch ( item->data( column, Qt::CheckStateRole ).toInt() ) {
+        for (SatellitesConfigAbstractItem *item : m_children) {
+            switch (item->data(column, Qt::CheckStateRole).toInt()) {
             case Qt::Checked:
                 oneChecked = true;
-                if ( oneUnchecked ) {
+                if (oneUnchecked) {
                     return Qt::PartiallyChecked;
                 }
                 break;
@@ -69,28 +70,28 @@ QVariant SatellitesConfigNodeItem::data( int column, int role ) const
                 return Qt::PartiallyChecked;
             case Qt::Unchecked:
                 oneUnchecked = true;
-                if ( oneChecked ) {
+                if (oneChecked) {
                     return Qt::PartiallyChecked;
                 }
             }
         }
 
-        return QVariant( oneChecked ? Qt::Checked : Qt::Unchecked );
+        return QVariant(oneChecked ? Qt::Checked : Qt::Unchecked);
     }
     }
 
     return QVariant();
 }
 
-bool SatellitesConfigNodeItem::setData( int column, int role, const QVariant &data )
+bool SatellitesConfigNodeItem::setData(int column, int role, const QVariant &data)
 {
-    if ( role == Qt::CheckStateRole ) {
-        switch ( column ) {
+    if (role == Qt::CheckStateRole) {
+        switch (column) {
         case 0:
             // fall through
         case 1:
-            for( SatellitesConfigAbstractItem *item: m_children ) {
-                item->setData( column, role, data );
+            for (SatellitesConfigAbstractItem *item : m_children) {
+                item->setData(column, role, data);
             }
             return true;
         }
@@ -104,19 +105,19 @@ bool SatellitesConfigNodeItem::isLeaf() const
     return false;
 }
 
-SatellitesConfigAbstractItem *SatellitesConfigNodeItem::childAt( int row ) const
+SatellitesConfigAbstractItem *SatellitesConfigNodeItem::childAt(int row) const
 {
-    if ( m_children.size() <= row ) {
+    if (m_children.size() <= row) {
         return nullptr;
     }
 
-    return m_children.at( row );
+    return m_children.at(row);
 }
 
-int SatellitesConfigNodeItem::indexOf( const SatellitesConfigAbstractItem *child ) const
+int SatellitesConfigNodeItem::indexOf(const SatellitesConfigAbstractItem *child) const
 {
-    //TODO: find out if we can avoid the const_cast
-    return m_children.indexOf( const_cast<SatellitesConfigAbstractItem *>( child ) );
+    // TODO: find out if we can avoid the const_cast
+    return m_children.indexOf(const_cast<SatellitesConfigAbstractItem *>(child));
 }
 
 int SatellitesConfigNodeItem::childrenCount() const
@@ -124,21 +125,20 @@ int SatellitesConfigNodeItem::childrenCount() const
     return m_children.size();
 }
 
-void SatellitesConfigNodeItem::appendChild( SatellitesConfigAbstractItem *item )
+void SatellitesConfigNodeItem::appendChild(SatellitesConfigAbstractItem *item)
 {
-    item->setParent( this );
-    m_children.append( item );
+    item->setParent(this);
+    m_children.append(item);
 }
 
 void SatellitesConfigNodeItem::clear()
 {
-    for( int i = childrenCount(); i > 0; --i ) {
-        SatellitesConfigAbstractItem *item = m_children.at( i - 1 );
+    for (int i = childrenCount(); i > 0; --i) {
+        SatellitesConfigAbstractItem *item = m_children.at(i - 1);
         item->clear();
-        m_children.remove( i - 1 );
+        m_children.remove(i - 1);
         delete item;
     }
 }
 
 } // namespace Marble
-

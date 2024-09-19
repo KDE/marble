@@ -11,18 +11,17 @@
 
 qreal msvc_asinh(qreal x)
 {
-    if ( _isnan ( x ) ) {
+    if (_isnan(x)) {
         errno = EDOM;
         return x;
     }
 
-    return ( log( x + sqrt ( x * x + 1.0 ) ) );
+    return (log(x + sqrt(x * x + 1.0)));
 }
 
 qreal msvc_atanh(qreal x)
 {
-    return ( 0.5 * log( ( 1.0 + x ) / ( 1.0 - x ) ) );
+    return (0.5 * log((1.0 + x) / (1.0 - x)));
 }
 
-#endif  // Q_CC_MSVC
-
+#endif // Q_CC_MSVC

@@ -32,12 +32,12 @@ class GpsInfo : public AbstractFloatItem
 {
     Q_OBJECT
     Q_PLUGIN_METADATA(IID "org.kde.marble.GpsInfo")
-    Q_INTERFACES( Marble::RenderPluginInterface )
-    MARBLE_PLUGIN( GpsInfo )
-    
- public:
+    Q_INTERFACES(Marble::RenderPluginInterface)
+    MARBLE_PLUGIN(GpsInfo)
+
+public:
     GpsInfo();
-    explicit GpsInfo( const MarbleModel *marbleModel );
+    explicit GpsInfo(const MarbleModel *marbleModel);
     ~GpsInfo() override;
 
     QStringList backendTypes() const override;
@@ -56,21 +56,21 @@ class GpsInfo : public AbstractFloatItem
 
     QVector<PluginAuthor> pluginAuthors() const override;
 
-    QIcon icon () const override;
+    QIcon icon() const override;
 
-    void initialize () override;
+    void initialize() override;
 
-    bool isInitialized () const override;
+    bool isInitialized() const override;
 
     void forceRepaint();
 
- private Q_SLOTS:
-    void updateLocation( const GeoDataCoordinates& coordinates, qreal speed);
+private Q_SLOTS:
+    void updateLocation(const GeoDataCoordinates &coordinates, qreal speed);
 
- private:
-    MarbleLocale* m_locale;
+private:
+    MarbleLocale *m_locale;
     Ui::GpsInfoPlugin m_widget;
-    WidgetGraphicsItem* m_widgetItem;
+    WidgetGraphicsItem *m_widgetItem;
 };
 
 }

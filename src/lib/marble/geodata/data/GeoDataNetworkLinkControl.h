@@ -25,19 +25,19 @@ class GEODATA_EXPORT GeoDataNetworkLinkControl : public GeoDataContainer
 public:
     GeoDataNetworkLinkControl();
 
-    GeoDataNetworkLinkControl( const GeoDataNetworkLinkControl &other );
+    GeoDataNetworkLinkControl(const GeoDataNetworkLinkControl &other);
 
     ~GeoDataNetworkLinkControl() override;
 
-    GeoDataNetworkLinkControl& operator=( const GeoDataNetworkLinkControl &other );
+    GeoDataNetworkLinkControl &operator=(const GeoDataNetworkLinkControl &other);
 
-    bool operator==( const GeoDataNetworkLinkControl &other ) const;
-    bool operator!=( const GeoDataNetworkLinkControl &other ) const;
+    bool operator==(const GeoDataNetworkLinkControl &other) const;
+    bool operator!=(const GeoDataNetworkLinkControl &other) const;
 
-    GeoDataFeature * clone() const override;
+    GeoDataFeature *clone() const override;
 
     /** Provides type information for downcasting a GeoNode */
-    const char* nodeType() const override;
+    const char *nodeType() const override;
 
     qreal minRefreshPeriod() const;
     void setMinRefreshPeriod(qreal minRefreshPeriod);
@@ -46,34 +46,34 @@ public:
     void setMaxSessionLength(qreal maxSessionLength);
 
     QString cookie() const;
-    void setCookie( const QString &cookie );
+    void setCookie(const QString &cookie);
 
     QString message() const;
-    void setMessage( const QString &message );
+    void setMessage(const QString &message);
 
     QString linkName() const;
-    void setLinkName( const QString &linkName );
+    void setLinkName(const QString &linkName);
 
     QString linkDescription() const;
-    void setLinkDescription( const QString &linkDescription );
+    void setLinkDescription(const QString &linkDescription);
 
     QString linkSnippet() const;
-    void setLinkSnippet( const QString &linkSnippet );
+    void setLinkSnippet(const QString &linkSnippet);
     int maxLines() const;
     void setMaxLines(int maxLines);
 
     QDateTime expires() const;
-    void setExpires( const QDateTime &expires );
+    void setExpires(const QDateTime &expires);
 
-    GeoDataUpdate& update();
-    const GeoDataUpdate& update() const;
-    void setUpdate( const GeoDataUpdate &update );
+    GeoDataUpdate &update();
+    const GeoDataUpdate &update() const;
+    void setUpdate(const GeoDataUpdate &update);
 
-    GeoDataAbstractView* abstractView() const;
+    GeoDataAbstractView *abstractView() const;
     /**
      * Sets the abstract view and takes control of this pointer.
      */
-    void setAbstractView( GeoDataAbstractView *abstractView );
+    void setAbstractView(GeoDataAbstractView *abstractView);
 
 private:
     Q_DECLARE_PRIVATE(GeoDataNetworkLinkControl)

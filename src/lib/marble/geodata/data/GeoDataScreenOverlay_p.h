@@ -6,22 +6,23 @@
 
 #include "GeoDataOverlay_p.h"
 
-namespace Marble {
+namespace Marble
+{
 
 class GeoDataScreenOverlayPrivate : public GeoDataOverlayPrivate
 {
 public:
     GeoDataScreenOverlayPrivate();
 
-    GeoDataVec2  m_overlayXY;
-    GeoDataVec2  m_screenXY;
-    GeoDataVec2  m_rotationXY;
-    GeoDataVec2  m_size;
-    qreal        m_rotation;
+    GeoDataVec2 m_overlayXY;
+    GeoDataVec2 m_screenXY;
+    GeoDataVec2 m_rotationXY;
+    GeoDataVec2 m_size;
+    qreal m_rotation;
 };
 
-GeoDataScreenOverlayPrivate::GeoDataScreenOverlayPrivate() :
-    m_rotation(0.0)
+GeoDataScreenOverlayPrivate::GeoDataScreenOverlayPrivate()
+    : m_rotation(0.0)
 {
 }
 

@@ -8,13 +8,13 @@
 
 #include "GeoDataFeature_p.h"
 
-#include "GeoDataPoint.h"
 #include "GeoDataLinearRing.h"
-#include "GeoDataPolygon.h"
+#include "GeoDataMultiGeometry.h"
 #include "GeoDataMultiTrack.h"
+#include "GeoDataPoint.h"
+#include "GeoDataPolygon.h"
 #include "GeoDataTrack.h"
 #include "GeoDataTypes.h"
-#include "GeoDataMultiGeometry.h"
 #include "osm/OsmPlacemarkData.h"
 
 namespace Marble
@@ -23,13 +23,13 @@ namespace Marble
 class GeoDataPlacemarkExtendedData
 {
 public:
-    GeoDataPlacemarkExtendedData() :
-        m_area( -1.0 ),
-        m_isBalloonVisible( false )
+    GeoDataPlacemarkExtendedData()
+        : m_area(-1.0)
+        , m_isBalloonVisible(false)
     {
         // nothing to do
     }
-    GeoDataPlacemarkExtendedData & operator=(const GeoDataPlacemarkExtendedData &other)
+    GeoDataPlacemarkExtendedData &operator=(const GeoDataPlacemarkExtendedData &other)
     {
         m_countrycode = other.m_countrycode;
         m_area = other.m_area;
@@ -40,9 +40,7 @@ public:
 
     bool operator==(const GeoDataPlacemarkExtendedData &other) const
     {
-        return m_countrycode == other.m_countrycode &&
-                m_area == other.m_area &&
-                m_state == other.m_state;
+        return m_countrycode == other.m_countrycode && m_area == other.m_area && m_state == other.m_state;
     }
 
     bool operator!=(const GeoDataPlacemarkExtendedData &other) const
@@ -50,33 +48,33 @@ public:
         return !(*this == other);
     }
 
-    QString             m_countrycode;  // Country code.
-    qreal               m_area;         // Area in square kilometer
-    QString             m_state;        // State
-    bool                m_isBalloonVisible;  //Visibility of balloon
+    QString m_countrycode; // Country code.
+    qreal m_area; // Area in square kilometer
+    QString m_state; // State
+    bool m_isBalloonVisible; // Visibility of balloon
 };
 
 class GeoDataPlacemarkPrivate : public GeoDataFeaturePrivate
 {
     Q_DECLARE_TR_FUNCTIONS(GeoDataPlacemark)
 
-  public:
-    GeoDataPlacemarkPrivate() :
-        m_geometry(new GeoDataPoint),
-        m_population( -1 ),
-        m_placemarkExtendedData(nullptr),
-        m_visualCategory(GeoDataPlacemark::Default),
-        m_osmPlacemarkData(nullptr)
+public:
+    GeoDataPlacemarkPrivate()
+        : m_geometry(new GeoDataPoint)
+        , m_population(-1)
+        , m_placemarkExtendedData(nullptr)
+        , m_visualCategory(GeoDataPlacemark::Default)
+        , m_osmPlacemarkData(nullptr)
     {
     }
 
-    GeoDataPlacemarkPrivate(const GeoDataPlacemarkPrivate& other)
-      : GeoDataFeaturePrivate(other),
-        m_geometry(other.m_geometry->copy()),
-        m_population(other.m_population),
-        m_placemarkExtendedData(nullptr),
-        m_visualCategory(other.m_visualCategory),
-        m_osmPlacemarkData(nullptr)
+    GeoDataPlacemarkPrivate(const GeoDataPlacemarkPrivate &other)
+        : GeoDataFeaturePrivate(other)
+        , m_geometry(other.m_geometry->copy())
+        , m_population(other.m_population)
+        , m_placemarkExtendedData(nullptr)
+        , m_visualCategory(other.m_visualCategory)
+        , m_osmPlacemarkData(nullptr)
     {
         if (other.m_placemarkExtendedData) {
             m_placemarkExtendedData = new GeoDataPlacemarkExtendedData(*other.m_placemarkExtendedData);
@@ -93,13 +91,13 @@ class GeoDataPlacemarkPrivate : public GeoDataFeaturePrivate
         delete m_osmPlacemarkData;
     }
 
-    GeoDataPlacemarkPrivate& operator=( const GeoDataPlacemarkPrivate& other )
+    GeoDataPlacemarkPrivate &operator=(const GeoDataPlacemarkPrivate &other)
     {
-        if ( this == &other ) {
+        if (this == &other) {
             return *this;
         }
 
-        GeoDataFeaturePrivate::operator=( other );
+        GeoDataFeaturePrivate::operator=(other);
 
         m_population = other.m_population;
         m_visualCategory = other.m_visualCategory;
@@ -130,7 +128,7 @@ class GeoDataPlacemarkPrivate : public GeoDataFeaturePrivate
         return GeoDataPlacemarkId;
     }
 
-    GeoDataPlacemarkExtendedData & placemarkExtendedData()
+    GeoDataPlacemarkExtendedData &placemarkExtendedData()
     {
         if (!m_placemarkExtendedData) {
             m_placemarkExtendedData = new GeoDataPlacemarkExtendedData;
@@ -139,12 +137,12 @@ class GeoDataPlacemarkPrivate : public GeoDataFeaturePrivate
         return *m_placemarkExtendedData;
     }
 
-    const GeoDataPlacemarkExtendedData & placemarkExtendedData() const
+    const GeoDataPlacemarkExtendedData &placemarkExtendedData() const
     {
         return m_placemarkExtendedData ? *m_placemarkExtendedData : s_nullPlacemarkExtendedData;
     }
 
-    OsmPlacemarkData & osmPlacemarkData()
+    OsmPlacemarkData &osmPlacemarkData()
     {
         if (!m_osmPlacemarkData) {
             m_osmPlacemarkData = new OsmPlacemarkData;
@@ -152,18 +150,18 @@ class GeoDataPlacemarkPrivate : public GeoDataFeaturePrivate
         return *m_osmPlacemarkData;
     }
 
-    const OsmPlacemarkData & osmPlacemarkData() const
+    const OsmPlacemarkData &osmPlacemarkData() const
     {
         return m_osmPlacemarkData ? *m_osmPlacemarkData : s_nullOsmPlacemarkData;
     }
 
     // Data for a Placemark in addition to those in GeoDataFeature.
-    GeoDataGeometry    *m_geometry;     // any GeoDataGeometry entry like locations
-    qint64              m_population;   // population in number of inhabitants
+    GeoDataGeometry *m_geometry; // any GeoDataGeometry entry like locations
+    qint64 m_population; // population in number of inhabitants
     GeoDataPlacemarkExtendedData *m_placemarkExtendedData;
     GeoDataPlacemark::GeoDataVisualCategory m_visualCategory; // the visual category
 
-    OsmPlacemarkData* m_osmPlacemarkData;
+    OsmPlacemarkData *m_osmPlacemarkData;
     static const OsmPlacemarkData s_nullOsmPlacemarkData;
     static const GeoDataPlacemarkExtendedData s_nullPlacemarkExtendedData;
 };

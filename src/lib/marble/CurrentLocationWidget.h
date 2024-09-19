@@ -7,8 +7,8 @@
 #define MARBLE_CURRENTLOCATIONWIDGET_H
 
 // Marble
-#include "marble_export.h"
 #include "AutoNavigation.h"
+#include "marble_export.h"
 
 // Qt
 #include <QWidget>
@@ -26,15 +26,15 @@ class MARBLE_EXPORT CurrentLocationWidget : public QWidget
 {
     Q_OBJECT
 
- public:
-    explicit CurrentLocationWidget( QWidget *parent = nullptr, Qt::WindowFlags f = Qt::WindowFlags() );
+public:
+    explicit CurrentLocationWidget(QWidget *parent = nullptr, Qt::WindowFlags f = Qt::WindowFlags());
     ~CurrentLocationWidget() override;
 
     /**
      * @brief Set a MarbleWidget associated to this widget.
      * @param widget  the MarbleWidget to be set.
      */
-    void setMarbleWidget( MarbleWidget *widget );
+    void setMarbleWidget(MarbleWidget *widget);
 
     AutoNavigation::CenterMode recenterMode() const;
 
@@ -46,53 +46,52 @@ class MARBLE_EXPORT CurrentLocationWidget : public QWidget
 
     QString lastSavePath() const;
 
- public Q_SLOTS:
-     /// Slot that decides whether recentering should be done
-    void setRecenterMode( int recenterMode );
+public Q_SLOTS:
+    /// Slot that decides whether recentering should be done
+    void setRecenterMode(int recenterMode);
 
     /// Slot for Auto Zooming while navigating
-    void setAutoZoom( bool activate );
+    void setAutoZoom(bool activate);
 
-    void setTrackVisible( bool visible );
+    void setTrackVisible(bool visible);
 
-    void setLastOpenPath( const QString &path );
+    void setLastOpenPath(const QString &path);
 
-    void setLastSavePath( const QString &path );
+    void setLastSavePath(const QString &path);
 
- private:
+private:
+    void changePositionProvider(const QString &provider);
 
-    void changePositionProvider( const QString& provider );
-
-    Q_SLOT void changePositionProvider( int index );
+    Q_SLOT void changePositionProvider(int index);
     Q_SLOT void trackPlacemark();
 
-    Q_DISABLE_COPY( CurrentLocationWidget )
+    Q_DISABLE_COPY(CurrentLocationWidget)
 
-    CurrentLocationWidgetPrivate * const d;
+    CurrentLocationWidgetPrivate *const d;
 
-    Q_PRIVATE_SLOT( d, void receiveGpsCoordinates( const GeoDataCoordinates &in, qreal speed ) )
-    Q_PRIVATE_SLOT( d, void adjustPositionTrackingStatus( PositionProviderStatus status ) )
-    Q_PRIVATE_SLOT( d, void centerOnCurrentLocation() )
+    Q_PRIVATE_SLOT(d, void receiveGpsCoordinates(const GeoDataCoordinates &in, qreal speed))
+    Q_PRIVATE_SLOT(d, void adjustPositionTrackingStatus(PositionProviderStatus status))
+    Q_PRIVATE_SLOT(d, void centerOnCurrentLocation())
 
     /**
      * @brief Slot for setting re-center combobox if re-centering is enabled other than from CurrentLocationWidget
      * @see RoutingPlugin
      */
-     Q_PRIVATE_SLOT( d, void updateRecenterComboBox( AutoNavigation::CenterMode centerMode ) )
+    Q_PRIVATE_SLOT(d, void updateRecenterComboBox(AutoNavigation::CenterMode centerMode))
 
     /**
      * @brief Slot for toggling auto zoom checkbox if auto zooming is enabled other than from CurrentLocationWidget
      * @see RoutingPlugin
      */
-     Q_PRIVATE_SLOT( d, void updateAutoZoomCheckBox( bool autoZoom ) )
+    Q_PRIVATE_SLOT(d, void updateAutoZoomCheckBox(bool autoZoom))
 
-     Q_PRIVATE_SLOT( d, void updateActivePositionProvider( PositionProviderPlugin* ) )
+    Q_PRIVATE_SLOT(d, void updateActivePositionProvider(PositionProviderPlugin *))
 
-     Q_PRIVATE_SLOT( d, void updateGuidanceMode() )
+    Q_PRIVATE_SLOT(d, void updateGuidanceMode())
 
-     Q_PRIVATE_SLOT( d, void saveTrack() )
-     Q_PRIVATE_SLOT( d, void openTrack() )
-     Q_PRIVATE_SLOT( d, void clearTrack() )
+    Q_PRIVATE_SLOT(d, void saveTrack())
+    Q_PRIVATE_SLOT(d, void openTrack())
+    Q_PRIVATE_SLOT(d, void clearTrack())
 };
 
 }

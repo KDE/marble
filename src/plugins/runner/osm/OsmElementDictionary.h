@@ -6,7 +6,6 @@
 #ifndef MARBLE_OSMELEMENTDICTIONARY_H
 #define MARBLE_OSMELEMENTDICTIONARY_H
 
-
 namespace Marble
 {
 namespace osm

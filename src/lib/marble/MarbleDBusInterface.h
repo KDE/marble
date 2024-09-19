@@ -10,15 +10,16 @@
 
 namespace Marble
 {
-    class MarbleWidget;
+class MarbleWidget;
 }
 
 #include <QDBusAbstractAdaptor>
+#include <QPointF>
 #include <QScopedPointer>
 #include <QStringList>
-#include <QPointF>
 
-namespace Marble {
+namespace Marble
+{
 
 class MARBLE_EXPORT MarbleDBusInterface : public QDBusAbstractAdaptor
 {
@@ -33,7 +34,7 @@ class MARBLE_EXPORT MarbleDBusInterface : public QDBusAbstractAdaptor
     Q_PROPERTY(QPointF center READ center WRITE setCenter NOTIFY centerChanged)
 
 public:
-    explicit MarbleDBusInterface(MarbleWidget* widget);
+    explicit MarbleDBusInterface(MarbleWidget *widget);
     ~MarbleDBusInterface() override;
 
     QString mapTheme() const;
@@ -43,20 +44,20 @@ public:
     QPointF center() const;
 
 public Q_SLOTS:
-    void setMapTheme( const QString & mapTheme );
-    void setZoom( int zoom );
+    void setMapTheme(const QString &mapTheme);
+    void setZoom(int zoom);
     QStringList properties() const;
-    void setCenter( const QPointF &center ) const;
+    void setCenter(const QPointF &center) const;
 
 public Q_SLOTS:
-    Q_INVOKABLE void setPropertyEnabled( const QString &key, bool enabled );
-    Q_INVOKABLE bool isPropertyEnabled( const QString &key ) const;
+    Q_INVOKABLE void setPropertyEnabled(const QString &key, bool enabled);
+    Q_INVOKABLE bool isPropertyEnabled(const QString &key) const;
 
 Q_SIGNALS:
-    void mapThemeChanged( const QString &mapTheme );
-    void tileLevelChanged( int tileLevel );
-    void zoomChanged( int zoom );
-    void centerChanged( const QPointF &center );
+    void mapThemeChanged(const QString &mapTheme);
+    void tileLevelChanged(int tileLevel);
+    void zoomChanged(int zoom);
+    void centerChanged(const QPointF &center);
 
 private Q_SLOTS:
     void handleVisibleLatLonAltBoxChange();

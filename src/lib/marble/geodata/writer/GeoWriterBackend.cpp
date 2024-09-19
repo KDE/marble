@@ -7,16 +7,17 @@
 
 #include "GeoDataDocumentWriter.h"
 
-namespace Marble {
+namespace Marble
+{
 
 GeoWriterBackend::~GeoWriterBackend()
 {
     // does nothing
 }
 
-GeoWriterBackendRegistrar::GeoWriterBackendRegistrar(GeoWriterBackend *writer, const QString &fileExtension) :
-    m_writer(writer),
-    m_fileExtension(fileExtension)
+GeoWriterBackendRegistrar::GeoWriterBackendRegistrar(GeoWriterBackend *writer, const QString &fileExtension)
+    : m_writer(writer)
+    , m_fileExtension(fileExtension)
 {
     GeoDataDocumentWriter::registerWriter(writer, fileExtension);
 }

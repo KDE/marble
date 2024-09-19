@@ -6,11 +6,11 @@
 #ifndef MARBLE_ECLIPSESITEM_H
 #define MARBLE_ECLIPSESITEM_H
 
-#include <QObject>
 #include <QDateTime>
+#include <QObject>
 
-#include "GeoDataLineString.h"
 #include "GeoDataCoordinates.h"
+#include "GeoDataLineString.h"
 #include "GeoDataLinearRing.h"
 
 #include <eclsolar.h>
@@ -34,20 +34,19 @@ class EclipsesItem : public QObject
     Q_OBJECT
 
 public:
-
     /**
      * @brief A type of an eclipse event
      */
     enum EclipsePhase {
-        TotalMoon               = -4,
-        PartialMoon             = -3,
-        PenumbralMoon           = -1,
-        PartialSun              =  1,
-        NonCentralAnnularSun    =  2,
-        NonCentralTotalSun      =  3,
-        AnnularSun              =  4,
-        TotalSun                =  5,
-        AnnularTotalSun         =  6
+        TotalMoon = -4,
+        PartialMoon = -3,
+        PenumbralMoon = -1,
+        PartialSun = 1,
+        NonCentralAnnularSun = 2,
+        NonCentralTotalSun = 3,
+        AnnularSun = 4,
+        TotalSun = 5,
+        AnnularTotalSun = 6
     };
 
     /**
@@ -56,7 +55,7 @@ public:
      * @param index The object index
      * @param parent The parent object
      */
-    explicit EclipsesItem( EclSolar *ecl, int index, QObject *parent = nullptr );
+    explicit EclipsesItem(EclSolar *ecl, int index, QObject *parent = nullptr);
 
     ~EclipsesItem() override;
 
@@ -79,7 +78,7 @@ public:
      *
      * @return True if the event takes place at @p dateTime or false otherwise.
      */
-    bool takesPlaceAt( const QDateTime &dateTime ) const;
+    bool takesPlaceAt(const QDateTime &dateTime) const;
 
     /**
      * @brief Returns the phase of this eclipse event
@@ -87,7 +86,6 @@ public:
      * @see phaseText
      */
     EclipsesItem::EclipsePhase phase() const;
-
 
     /**
      * @brief Returns an icon of the eclipse type
@@ -107,21 +105,21 @@ public:
      * @return The DateTime of the eclipse's maximum
      * @see maxLocation
      */
-    const QDateTime& dateMaximum() const;
+    const QDateTime &dateMaximum() const;
 
     /**
      * @brief Returns the start date of the eclipse's partial phase
      * @return The start date of the partial phase
      * @see endDatePartial
      */
-    const QDateTime& startDatePartial() const;
+    const QDateTime &startDatePartial() const;
 
     /**
      * @brief Returns the end date of the eclipse's partial phase
      * @return The end date of the partial phase
      * @see startDatePartial
      */
-    const QDateTime& endDatePartial() const;
+    const QDateTime &endDatePartial() const;
 
     /**
      * @brief Returns the number of hours the partial phase takes place
@@ -140,7 +138,7 @@ public:
      * @return The start date of the total phase or an invalid date
      * @see endDateTotal
      */
-    const QDateTime& startDateTotal() const;
+    const QDateTime &startDateTotal() const;
 
     /**
      * @brief Returns the end date of the eclipse's total phase
@@ -152,7 +150,7 @@ public:
      * @return The end date of the total phase or an invalid date
      * @see startDateTotal
      */
-    const QDateTime& endDateTotal() const;
+    const QDateTime &endDateTotal() const;
 
     /**
      * @brief Return the eclipse's magnitude
@@ -165,37 +163,37 @@ public:
      * @return GeoDataCoordinates of the eclipse's maximum
      * @see dateMaximum
      */
-    const GeoDataCoordinates& maxLocation();
+    const GeoDataCoordinates &maxLocation();
 
     /**
      * @brief The eclipse's central line
      * @return The central line of the eclipse
      */
-    const GeoDataLineString& centralLine();
+    const GeoDataLineString &centralLine();
 
     /**
      * @brief Return the eclipse's umbra
      * @return The eclipse's umbra
      */
-    const GeoDataLinearRing& umbra();
+    const GeoDataLinearRing &umbra();
 
     /**
      * @brief Return the eclipse's southern penumbra
      * @return The eclipse's southern penumbra
      */
-    const GeoDataLineString& southernPenumbra();
+    const GeoDataLineString &southernPenumbra();
 
     /**
      * @brief Return the eclipse's northern penumbra
      * @return The eclipse's northern umbra
      */
-    const GeoDataLineString& northernPenumbra();
+    const GeoDataLineString &northernPenumbra();
 
     /**
      * @brief Return the eclipse's sun boundaries
      * @return The eclipse's sun boundaries
      */
-    const QList<GeoDataLinearRing>& sunBoundaries();
+    const QList<GeoDataLinearRing> &sunBoundaries();
 
     /**
      * @brief Return the shadow cone of the umbra
@@ -260,4 +258,3 @@ private:
 }
 
 #endif // MARBLE_ECLIPSESITEM_H
-

@@ -14,23 +14,23 @@
 #include "MarbleModel.h"
 
 // Qt
-#include <QUrl>
 #include <QString>
+#include <QUrl>
 
 using namespace Marble;
 
-PanoramioModel::PanoramioModel( const MarbleModel *marbleModel, QObject *parent ) :
-    AbstractDataPluginModel( "panoramio", marbleModel, parent ),
-    m_marbleWidget( 0 )
+PanoramioModel::PanoramioModel(const MarbleModel *marbleModel, QObject *parent)
+    : AbstractDataPluginModel("panoramio", marbleModel, parent)
+    , m_marbleWidget(0)
 {
 }
 
-void PanoramioModel::setMarbleWidget( MarbleWidget *widget )
+void PanoramioModel::setMarbleWidget(MarbleWidget *widget)
 {
     m_marbleWidget = widget;
 }
 
-void PanoramioModel::getAdditionalItems( const GeoDataLatLonAltBox &box, qint32 number )
+void PanoramioModel::getAdditionalItems(const GeoDataLatLonAltBox &box, qint32 number)
 {
     if (marbleModel()->planetId() != QLatin1String("earth")) {
         return;
@@ -38,51 +38,40 @@ void PanoramioModel::getAdditionalItems( const GeoDataLatLonAltBox &box, qint32 
 
     // FIXME: Download a list of constant number, because the parser doesn't support
     // loading a file of an unknown length.
-    const QUrl jsonUrl(QLatin1String("http://www.panoramio.com/map/get_panoramas.php?from=")
-                       + QString::number(0)
-                       + QLatin1String("&order=upload_date")
-                       + QLatin1String("&set=public")
-                       + QLatin1String("&to=")   + QString::number(number)
-//                        + QLatin1String("&to=") + QString::number( number )
-                       + QLatin1String("&minx=") + QString::number(box.west() * RAD2DEG)
-                       + QLatin1String("&miny=") + QString::number(box.south() * RAD2DEG)
-                       + QLatin1String("&maxx=") + QString::number(box.east() * RAD2DEG)
-                       + QLatin1String("&maxy=") + QString::number(box.north() * RAD2DEG)
+    const QUrl jsonUrl(QLatin1String("http://www.panoramio.com/map/get_panoramas.php?from=") + QString::number(0) + QLatin1String("&order=upload_date")
+                       + QLatin1String("&set=public") + QLatin1String("&to=")
+                       + QString::number(number)
+                       //                        + QLatin1String("&to=") + QString::number( number )
+                       + QLatin1String("&minx=") + QString::number(box.west() * RAD2DEG) + QLatin1String("&miny=") + QString::number(box.south() * RAD2DEG)
+                       + QLatin1String("&maxx=") + QString::number(box.east() * RAD2DEG) + QLatin1String("&maxy=") + QString::number(box.north() * RAD2DEG)
                        + QLatin1String("&size=small"));
 
-    downloadDescriptionFile( jsonUrl );
+    downloadDescriptionFile(jsonUrl);
 }
 
-void PanoramioModel::parseFile( const QByteArray &file )
+void PanoramioModel::parseFile(const QByteArray &file)
 {
     PanoramioParser panoramioJsonParser;
-    QList<panoramioDataStructure> list
-        = panoramioJsonParser.parseAllObjects( file,
-                                               numberOfImagesPerFetch );
+    QList<panoramioDataStructure> list = panoramioJsonParser.parseAllObjects(file, numberOfImagesPerFetch);
 
     QList<panoramioDataStructure>::iterator it;
-    for ( it = list.begin(); it != list.end(); ++it ) {
+    for (it = list.begin(); it != list.end(); ++it) {
         // Setting the meta information of the current image
-        GeoDataCoordinates coordinates( (*it).longitude,
-                                        (*it).latitude,
-                                        0,
-                                        GeoDataCoordinates::Degree );
-                                        
-        if( itemExists( QString::number( (*it).photo_id ) ) ) {
+        GeoDataCoordinates coordinates((*it).longitude, (*it).latitude, 0, GeoDataCoordinates::Degree);
+
+        if (itemExists(QString::number((*it).photo_id))) {
             continue;
         }
-        
-        PanoramioItem *item = new PanoramioItem( m_marbleWidget, this );
-        item->setCoordinate( coordinates );
-        item->setId( QString::number( (*it).photo_id ) );
-        item->setPhotoUrl( (*it).photo_url );
-        item->setUploadDate( (*it).upload_date );
 
-        downloadItem( QUrl( (*it).photo_file_url ),
-                            standardImageSize,
-                            item );
+        PanoramioItem *item = new PanoramioItem(m_marbleWidget, this);
+        item->setCoordinate(coordinates);
+        item->setId(QString::number((*it).photo_id));
+        item->setPhotoUrl((*it).photo_url);
+        item->setUploadDate((*it).upload_date);
 
-        addItemToList( item );
+        downloadItem(QUrl((*it).photo_file_url), standardImageSize, item);
+
+        addItemToList(item);
     }
 }
 

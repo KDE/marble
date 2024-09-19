@@ -4,7 +4,6 @@
 // SPDX-FileCopyrightText: 2016 Piotr Wójcik <chocimier@tlen.pl>
 //
 
-
 #ifndef MARBLE_YOURSRUNNER_H
 #define MARBLE_YOURSRUNNER_H
 
@@ -21,26 +20,26 @@ class YoursRunner : public RoutingRunner
     Q_OBJECT
 
 public:
-    explicit YoursRunner( QObject *parent = nullptr );
+    explicit YoursRunner(QObject *parent = nullptr);
 
     ~YoursRunner() override;
 
     // Overriding MarbleAbstractRunner
-    void retrieveRoute( const RouteRequest *request ) override;
+    void retrieveRoute(const RouteRequest *request) override;
 
 private Q_SLOTS:
     /** Route data was retrieved via http */
-    void retrieveData( QNetworkReply *reply );
+    void retrieveData(QNetworkReply *reply);
 
     /** A network error occurred */
-    void handleError( QNetworkReply::NetworkError );
+    void handleError(QNetworkReply::NetworkError);
 
     void get();
 
 private:
-    static GeoDataDocument* parse( const QByteArray &input );
+    static GeoDataDocument *parse(const QByteArray &input);
 
-    static qreal distance( const GeoDataDocument* document );
+    static qreal distance(const GeoDataDocument *document);
 
     QNetworkAccessManager m_networkAccessManager;
 

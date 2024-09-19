@@ -7,75 +7,75 @@
 
 #include "FlyToEditWidget.h"
 
-#include <QDoubleSpinBox>
-#include <QToolButton>
-#include <QLabel>
-#include <QHBoxLayout>
 #include <QComboBox>
+#include <QDoubleSpinBox>
+#include <QHBoxLayout>
+#include <QLabel>
+#include <QToolButton>
 
+#include "GeoDataCamera.h"
+#include "GeoDataLookAt.h"
+#include "MarblePlacemarkModel.h"
 #include "MarbleWidget.h"
 #include "geodata/data/GeoDataFlyTo.h"
-#include "GeoDataLookAt.h"
-#include "GeoDataCamera.h"
-#include "MarblePlacemarkModel.h"
 
 namespace Marble
 {
 
-FlyToEditWidget::FlyToEditWidget( const QModelIndex &index, MarbleWidget* widget, QWidget *parent ) :
-    QWidget( parent ),
-    m_widget( widget ),
-    m_index( index ),
-    m_button( new QToolButton )
+FlyToEditWidget::FlyToEditWidget(const QModelIndex &index, MarbleWidget *widget, QWidget *parent)
+    : QWidget(parent)
+    , m_widget(widget)
+    , m_index(index)
+    , m_button(new QToolButton)
 {
     QHBoxLayout *layout = new QHBoxLayout;
-    layout->setSpacing( 5 );
+    layout->setSpacing(5);
 
-    QLabel* iconLabel = new QLabel;
+    QLabel *iconLabel = new QLabel;
     iconLabel->setPixmap(QPixmap(QStringLiteral(":/marble/flag.png")));
-    layout->addWidget( iconLabel );
+    layout->addWidget(iconLabel);
 
     QHBoxLayout *pairLayout = new QHBoxLayout;
-    pairLayout->setSpacing( 10 );
+    pairLayout->setSpacing(10);
 
     QHBoxLayout *durationLayout = new QHBoxLayout;
-    durationLayout->setSpacing( 5 );
+    durationLayout->setSpacing(5);
 
     QLabel *durationLabel = new QLabel;
-    durationLabel->setText( tr("Duration:") );
-    durationLayout->addWidget( durationLabel );
+    durationLabel->setText(tr("Duration:"));
+    durationLayout->addWidget(durationLabel);
 
     m_durationSpin = new QDoubleSpinBox;
-    durationLayout->addWidget( m_durationSpin );
-    m_durationSpin->setValue( flyToElement()->duration() );
-    m_durationSpin->setSuffix( tr(" s", "seconds") );
+    durationLayout->addWidget(m_durationSpin);
+    m_durationSpin->setValue(flyToElement()->duration());
+    m_durationSpin->setSuffix(tr(" s", "seconds"));
 
     QHBoxLayout *modeLayout = new QHBoxLayout;
-    modeLayout->addSpacing( 5 );
+    modeLayout->addSpacing(5);
 
     QLabel *modeLabel = new QLabel;
-    modeLabel->setText( tr("Mode:") );
-    modeLayout->addWidget( modeLabel );
+    modeLabel->setText(tr("Mode:"));
+    modeLayout->addWidget(modeLabel);
 
     m_modeCombo = new QComboBox;
-    modeLayout->addWidget( m_modeCombo );
-    m_modeCombo->addItem( tr("Smooth") );
-    m_modeCombo->addItem( tr("Bounce") );
+    modeLayout->addWidget(m_modeCombo);
+    m_modeCombo->addItem(tr("Smooth"));
+    m_modeCombo->addItem(tr("Bounce"));
 
-    if( flyToElement()->flyToMode() == GeoDataFlyTo::Smooth ){
-        m_modeCombo->setCurrentIndex( 0 );
-    } else if( flyToElement()->flyToMode() == GeoDataFlyTo::Bounce ){
-        m_modeCombo->setCurrentIndex( 1 );
+    if (flyToElement()->flyToMode() == GeoDataFlyTo::Smooth) {
+        m_modeCombo->setCurrentIndex(0);
+    } else if (flyToElement()->flyToMode() == GeoDataFlyTo::Bounce) {
+        m_modeCombo->setCurrentIndex(1);
     } else {
-        m_modeCombo->setCurrentIndex( -1 );
+        m_modeCombo->setCurrentIndex(-1);
     }
 
-    pairLayout->addLayout( durationLayout );
-    pairLayout->addLayout( modeLayout );
+    pairLayout->addLayout(durationLayout);
+    pairLayout->addLayout(modeLayout);
 
-    layout->addLayout( pairLayout );
+    layout->addLayout(pairLayout);
 
-    QToolButton* flyToPinCenter = new QToolButton;
+    QToolButton *flyToPinCenter = new QToolButton;
     flyToPinCenter->setIcon(QIcon(QStringLiteral(":/marble/places.png")));
     flyToPinCenter->setToolTip(tr("Current map center"));
     connect(flyToPinCenter, SIGNAL(clicked()), this, SLOT(updateCoordinates()));
@@ -83,9 +83,9 @@ FlyToEditWidget::FlyToEditWidget( const QModelIndex &index, MarbleWidget* widget
 
     m_button->setIcon(QIcon(QStringLiteral(":/marble/document-save.png")));
     connect(m_button, SIGNAL(clicked()), this, SLOT(save()));
-    layout->addWidget( m_button );
+    layout->addWidget(m_button);
 
-    setLayout( layout );
+    setLayout(layout);
 }
 
 bool FlyToEditWidget::editable() const
@@ -93,14 +93,14 @@ bool FlyToEditWidget::editable() const
     return m_button->isEnabled();
 }
 
-void FlyToEditWidget::setEditable( bool editable )
+void FlyToEditWidget::setEditable(bool editable)
 {
-    m_button->setEnabled( editable );
+    m_button->setEnabled(editable);
 }
 
 void FlyToEditWidget::setFirstFlyTo(const QPersistentModelIndex &index)
 {
-    if( m_index.internalPointer() == index.internalPointer() ) {
+    if (m_index.internalPointer() == index.internalPointer()) {
         m_durationSpin->setValue(0);
     }
 }
@@ -108,7 +108,7 @@ void FlyToEditWidget::setFirstFlyTo(const QPersistentModelIndex &index)
 void FlyToEditWidget::updateCoordinates()
 {
     m_coord = m_widget->focusPoint();
-    m_coord.setAltitude( m_widget->lookAt().range() );
+    m_coord.setAltitude(m_widget->lookAt().range());
 }
 
 void FlyToEditWidget::save()
@@ -116,31 +116,31 @@ void FlyToEditWidget::save()
     if (flyToElement()->view() != nullptr && m_coord != GeoDataCoordinates()) {
         GeoDataCoordinates coords = m_coord;
         if (auto camera = geodata_cast<GeoDataCamera>(flyToElement()->view())) {
-            camera->setCoordinates( coords );
+            camera->setCoordinates(coords);
         } else if (auto lookAt = geodata_cast<GeoDataLookAt>(flyToElement()->view())) {
-            lookAt->setCoordinates( coords );
-        } else{
+            lookAt->setCoordinates(coords);
+        } else {
             lookAt = new GeoDataLookAt;
-            lookAt->setCoordinates( coords );
-            flyToElement()->setView( lookAt );
+            lookAt->setCoordinates(coords);
+            flyToElement()->setView(lookAt);
         }
     }
 
     flyToElement()->setDuration(m_durationSpin->value());
 
     if (m_modeCombo->currentIndex() == 0) {
-        flyToElement()->setFlyToMode( GeoDataFlyTo::Smooth );
+        flyToElement()->setFlyToMode(GeoDataFlyTo::Smooth);
     } else if (m_modeCombo->currentIndex() == 1) {
-        flyToElement()->setFlyToMode( GeoDataFlyTo::Bounce );
+        flyToElement()->setFlyToMode(GeoDataFlyTo::Bounce);
     }
 
     emit editingDone(m_index);
 }
 
-GeoDataFlyTo* FlyToEditWidget::flyToElement()
+GeoDataFlyTo *FlyToEditWidget::flyToElement()
 {
-    GeoDataObject *object = qvariant_cast<GeoDataObject*>(m_index.data( MarblePlacemarkModel::ObjectPointerRole ) );
-    Q_ASSERT( object );
+    GeoDataObject *object = qvariant_cast<GeoDataObject *>(m_index.data(MarblePlacemarkModel::ObjectPointerRole));
+    Q_ASSERT(object);
     auto flyTo = geodata_cast<GeoDataFlyTo>(object);
     Q_ASSERT(flyTo);
     return flyTo;

@@ -7,15 +7,16 @@
 #include "GeoDataScreenOverlay_p.h"
 #include "GeoDataTypes.h"
 
-namespace Marble {
+namespace Marble
+{
 
 GeoDataScreenOverlay::GeoDataScreenOverlay()
-  : GeoDataOverlay(new GeoDataScreenOverlayPrivate)
+    : GeoDataOverlay(new GeoDataScreenOverlayPrivate)
 {
 }
 
-GeoDataScreenOverlay::GeoDataScreenOverlay( const Marble::GeoDataScreenOverlay &other )
-  : GeoDataOverlay(other, new GeoDataScreenOverlayPrivate(*other.d_func()))
+GeoDataScreenOverlay::GeoDataScreenOverlay(const Marble::GeoDataScreenOverlay &other)
+    : GeoDataOverlay(other, new GeoDataScreenOverlayPrivate(*other.d_func()))
 {
 }
 
@@ -23,7 +24,7 @@ GeoDataScreenOverlay::~GeoDataScreenOverlay()
 {
 }
 
-GeoDataScreenOverlay &GeoDataScreenOverlay::operator=( const GeoDataScreenOverlay &other )
+GeoDataScreenOverlay &GeoDataScreenOverlay::operator=(const GeoDataScreenOverlay &other)
 {
     if (this != &other) {
         Q_D(GeoDataScreenOverlay);
@@ -33,25 +34,21 @@ GeoDataScreenOverlay &GeoDataScreenOverlay::operator=( const GeoDataScreenOverla
     return *this;
 }
 
-bool GeoDataScreenOverlay::operator==(const GeoDataScreenOverlay& other) const
+bool GeoDataScreenOverlay::operator==(const GeoDataScreenOverlay &other) const
 {
     Q_D(const GeoDataScreenOverlay);
-    const GeoDataScreenOverlayPrivate* const other_d = other.d_func();
+    const GeoDataScreenOverlayPrivate *const other_d = other.d_func();
 
-    return equals(other) &&
-           d->m_overlayXY == other_d->m_overlayXY &&
-           d->m_screenXY == other_d->m_screenXY &&
-           d->m_rotationXY == other_d->m_rotationXY &&
-           d->m_size == other_d->m_size &&
-           d->m_rotation == other_d->m_rotation;
+    return equals(other) && d->m_overlayXY == other_d->m_overlayXY && d->m_screenXY == other_d->m_screenXY && d->m_rotationXY == other_d->m_rotationXY
+        && d->m_size == other_d->m_size && d->m_rotation == other_d->m_rotation;
 }
 
-bool GeoDataScreenOverlay::operator!=(const GeoDataScreenOverlay& other) const
+bool GeoDataScreenOverlay::operator!=(const GeoDataScreenOverlay &other) const
 {
     return !this->operator==(other);
 }
 
-GeoDataFeature * GeoDataScreenOverlay::clone() const
+GeoDataFeature *GeoDataScreenOverlay::clone() const
 {
     return new GeoDataScreenOverlay(*this);
 }

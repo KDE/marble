@@ -3,7 +3,6 @@
 // SPDX-FileCopyrightText: 2010 Utku Aydin <utkuaydin34@gmail.com>
 //
 
-
 #ifndef EARTHQUAKEITEM_H
 #define EARTHQUAKEITEM_H
 
@@ -20,7 +19,7 @@ class EarthquakeItem : public AbstractDataPluginItem
     Q_OBJECT
 
 public:
-    explicit EarthquakeItem( QObject *parent );
+    explicit EarthquakeItem(QObject *parent);
 
     ~EarthquakeItem() override;
 
@@ -28,23 +27,23 @@ public:
     bool initialized() const override;
 
     // Here the item gets painted
-    void paint( QPainter *painter ) override;
+    void paint(QPainter *painter) override;
 
-    bool operator<( const AbstractDataPluginItem *other ) const override;
+    bool operator<(const AbstractDataPluginItem *other) const override;
 
     // Magnitude whose value we use to determine circle's diameter
     double magnitude() const;
 
-    void setMagnitude( double magnitude );
+    void setMagnitude(double magnitude);
 
-    void setDateTime( const QDateTime &dateTime );
+    void setDateTime(const QDateTime &dateTime);
 
     QDateTime dateTime() const;
 
     /** Earthquake's depth in km */
     double depth() const;
 
-    void setDepth( double depth );
+    void setDepth(double depth);
 
 private:
     void updateTooltip();

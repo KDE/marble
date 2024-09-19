@@ -7,8 +7,8 @@
 #ifndef MARBLE_PARSINGRUNNER_H
 #define MARBLE_PARSINGRUNNER_H
 
-#include <QObject>
 #include "marble_export.h"
+#include <QObject>
 
 #include "GeoDataDocument.h"
 
@@ -20,14 +20,14 @@ class MARBLE_EXPORT ParsingRunner : public QObject
     Q_OBJECT
 
 public:
-    explicit ParsingRunner( QObject *parent = nullptr );
+    explicit ParsingRunner(QObject *parent = nullptr);
 
     /**
-      * Start a file parsing.
-      * If implemented in a plugin, make sure to include Parsing in the
-      * plugin capabilities, otherwise MarbleRunnerManager will ignore the plugin
-      */
-    virtual GeoDataDocument* parseFile( const QString &fileName, DocumentRole role, QString& error ) = 0;
+     * Start a file parsing.
+     * If implemented in a plugin, make sure to include Parsing in the
+     * plugin capabilities, otherwise MarbleRunnerManager will ignore the plugin
+     */
+    virtual GeoDataDocument *parseFile(const QString &fileName, DocumentRole role, QString &error) = 0;
 };
 
 }

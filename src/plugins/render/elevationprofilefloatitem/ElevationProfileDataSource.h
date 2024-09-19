@@ -31,7 +31,7 @@ class ElevationProfileDataSource : public QObject
     Q_OBJECT
 
 public:
-    explicit ElevationProfileDataSource( QObject *parent = nullptr );
+    explicit ElevationProfileDataSource(QObject *parent = nullptr);
 
     /**
      * @brief isDataAvailable
@@ -59,7 +59,7 @@ class ElevationProfileTrackDataSource : public ElevationProfileDataSource
     Q_OBJECT
 
 public:
-    explicit ElevationProfileTrackDataSource( const GeoDataTreeModel *treeModel, QObject *parent = nullptr );
+    explicit ElevationProfileTrackDataSource(const GeoDataTreeModel *treeModel, QObject *parent = nullptr);
 
     bool isDataAvailable() const override;
 
@@ -76,11 +76,11 @@ protected:
     qreal getElevation(const GeoDataCoordinates &coordinates) const override;
 
 private Q_SLOTS:
-    void handleObjectAdded( GeoDataObject *object );
-    void handleObjectRemoved( GeoDataObject *object );
+    void handleObjectAdded(GeoDataObject *object);
+    void handleObjectRemoved(GeoDataObject *object);
 
 private:
-    QHash<QString, QList<const GeoDataTrack *> > m_trackHash;
+    QHash<QString, QList<const GeoDataTrack *>> m_trackHash;
     QStringList m_trackChooserList;
     QList<const GeoDataTrack *> m_trackList;
     int m_currentSourceIndex;
@@ -94,7 +94,7 @@ class ElevationProfileRouteDataSource : public ElevationProfileDataSource
     Q_OBJECT
 
 public:
-    ElevationProfileRouteDataSource( const RoutingModel *routingModel, const ElevationModel *elevationModel, QObject *parent = nullptr );
+    ElevationProfileRouteDataSource(const RoutingModel *routingModel, const ElevationModel *elevationModel, QObject *parent = nullptr);
 
     bool isDataAvailable() const override;
 

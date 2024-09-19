@@ -4,7 +4,6 @@
 // SPDX-FileCopyrightText: 2012 Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 //
 
-
 #ifndef MARBLE_GOSMOREROUTINGRUNNER_H
 #define MARBLE_GOSMOREROUTINGRUNNER_H
 
@@ -24,10 +23,10 @@ public:
     ~GosmoreRunner() override;
 
     // Overriding MarbleAbstractRunner
-    void retrieveRoute( const RouteRequest *request ) override;
+    void retrieveRoute(const RouteRequest *request) override;
 
 private:
-    GosmoreRunnerPrivate* const d;
+    GosmoreRunnerPrivate *const d;
 };
 
 }

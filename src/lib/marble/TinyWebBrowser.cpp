@@ -8,17 +8,17 @@
 #include "TinyWebBrowser.h"
 
 // Qt
-#include <QPointer>
 #include <QAction>
 #include <QDesktopServices>
 #include <QPainter>
+#include <QPointer>
 #include <QPrintDialog>
 #include <QPrinter>
 
 // Marble
-#include "MarbleGlobal.h"
 #include "MarbleDebug.h"
 #include "MarbleDirs.h"
+#include "MarbleGlobal.h"
 #include "MarbleLocale.h"
 #include "MarbleWebView.h"
 
@@ -36,63 +36,59 @@ static QString guessWikipediaDomain()
     return QLatin1String("https://") + code + QLatin1String(".m.wikipedia.org/");
 }
 
-TinyWebBrowser::TinyWebBrowser( QWidget* parent )
-    : QWebEngineView( parent ),
-      d( nullptr )
+TinyWebBrowser::TinyWebBrowser(QWidget *parent)
+    : QWebEngineView(parent)
+    , d(nullptr)
 {
-    MarbleWebPage * page = new MarbleWebPage();
+    MarbleWebPage *page = new MarbleWebPage();
     setPage(page);
 
-    connect( this, SIGNAL(statusBarMessage(QString)),
-             this, SIGNAL(statusMessage(QString)) );
+    connect(this, SIGNAL(statusBarMessage(QString)), this, SIGNAL(statusMessage(QString)));
 
-    connect( page, SIGNAL(linkClicked(QUrl)),
-             this, SLOT(openExternalLink(QUrl)) );
-    connect( this, SIGNAL(titleChanged(QString)),
-             this, SLOT(setWindowTitle(QString)) );
+    connect(page, SIGNAL(linkClicked(QUrl)), this, SLOT(openExternalLink(QUrl)));
+    connect(this, SIGNAL(titleChanged(QString)), this, SLOT(setWindowTitle(QString)));
 
-    pageAction( QWebEnginePage::OpenLinkInNewWindow )->setEnabled( false );
-    pageAction( QWebEnginePage::OpenLinkInNewWindow )->setVisible( false );
+    pageAction(QWebEnginePage::OpenLinkInNewWindow)->setEnabled(false);
+    pageAction(QWebEnginePage::OpenLinkInNewWindow)->setVisible(false);
 }
 
 TinyWebBrowser::~TinyWebBrowser()
 {
     // not yet needed
-    //delete d;
+    // delete d;
 }
 
-void TinyWebBrowser::setWikipediaPath( const QString& relativeUrl )
+void TinyWebBrowser::setWikipediaPath(const QString &relativeUrl)
 {
     QUrl url(relativeUrl);
-    if ( url.isRelative() )
-        url = QUrl( guessWikipediaDomain() ).resolved( url );
-    load( url );
+    if (url.isRelative())
+        url = QUrl(guessWikipediaDomain()).resolved(url);
+    load(url);
 }
 
 void TinyWebBrowser::print()
 {
-#ifndef QT_NO_PRINTER	
+#ifndef QT_NO_PRINTER
     QPrinter printer;
 
-    QPointer<QPrintDialog> dlg = new QPrintDialog( &printer, this );
-    if ( dlg->exec() )
-        QWebEngineView::print( &printer );
+    QPointer<QPrintDialog> dlg = new QPrintDialog(&printer, this);
+    if (dlg->exec())
+        QWebEngineView::print(&printer);
     delete dlg;
 #endif
 }
 
-QWebEngineView *TinyWebBrowser::createWindow( QWebEnginePage::WebWindowType type )
+QWebEngineView *TinyWebBrowser::createWindow(QWebEnginePage::WebWindowType type)
 {
     Q_UNUSED(type)
-    TinyWebBrowser *view = new TinyWebBrowser( this );
+    TinyWebBrowser *view = new TinyWebBrowser(this);
     return view;
 }
 
-void TinyWebBrowser::openExternalLink( const QUrl& url )
+void TinyWebBrowser::openExternalLink(const QUrl &url)
 {
-    QDesktopServices::openUrl( url );
+    QDesktopServices::openUrl(url);
 }
-
 
 } // namespace Marble
 

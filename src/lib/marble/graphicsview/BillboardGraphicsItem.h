@@ -27,14 +27,14 @@ class BillboardGraphicsItemPrivate;
  */
 class MARBLE_EXPORT BillboardGraphicsItem : public MarbleGraphicsItem
 {
- public:
+public:
     BillboardGraphicsItem();
 
     GeoDataCoordinates coordinate() const;
-    void setCoordinate( const GeoDataCoordinates &coordinates );
+    void setCoordinate(const GeoDataCoordinates &coordinates);
 
     Qt::Alignment alignment() const;
-    void setAlignment( Qt::Alignment alignment );
+    void setAlignment(Qt::Alignment alignment);
 
     /**
      * @brief Returns the absolute screen positions of the item.
@@ -56,9 +56,9 @@ class MARBLE_EXPORT BillboardGraphicsItem : public MarbleGraphicsItem
     /**
      * Returns the rect of one representation of the object that is at the given position.
      */
-    QRectF containsRect( const QPointF &point ) const;
+    QRectF containsRect(const QPointF &point) const;
 
- private:
+private:
     Q_DECLARE_PRIVATE(BillboardGraphicsItem)
 };
 

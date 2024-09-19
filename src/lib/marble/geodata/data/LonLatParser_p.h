@@ -29,20 +29,13 @@ private:
      * if it contains the system locale decimalpoint char,
      * otherwise parses it in the C locale.
      */
-    static double parseDouble(const QString& input);
+    static double parseDouble(const QString &input);
     static QString createDecimalPointExp();
-    static void getLocaleList(QStringList& localeList, const QString& localeListString,
-                              const QLatin1String& placeholder, const QString& separator);
-    static bool isDirection(const QString& input, const QString& direction);
-    static bool isDirection(const QString& input, const QStringList& directions);
-    static bool isOneOfDirections(const QString& input,
-                                  const QString& firstDirection,
-                                  const QString& secondDirection,
-                                  bool& isFirstDirection);
-    static bool isOneOfDirections(const QString& input,
-                                  const QStringList& firstDirections,
-                                  const QStringList& secondDirections,
-                                  bool& isFirstDirection);
+    static void getLocaleList(QStringList &localeList, const QString &localeListString, const QLatin1String &placeholder, const QString &separator);
+    static bool isDirection(const QString &input, const QString &direction);
+    static bool isDirection(const QString &input, const QStringList &directions);
+    static bool isOneOfDirections(const QString &input, const QString &firstDirection, const QString &secondDirection, bool &isFirstDirection);
+    static bool isOneOfDirections(const QString &input, const QStringList &firstDirections, const QStringList &secondDirections, bool &isFirstDirection);
 
     /**
      * function template for the function calculating the degree value from
@@ -53,9 +46,9 @@ private:
      * @param isPosHemisphere if the texts of the degree value are relative to the pos hemisphere
      * @return the calculated degree value
      */
-    static qreal degreeValueFromDMS(const QRegularExpressionMatch& regexMatch, int c, bool isPosHemisphere);
-    static qreal degreeValueFromDM(const QRegularExpressionMatch& regexMatch, int c, bool isPosHemisphere);
-    static qreal degreeValueFromD(const QRegularExpressionMatch& regexMatch, int c, bool isPosHemisphere);
+    static qreal degreeValueFromDMS(const QRegularExpressionMatch &regexMatch, int c, bool isPosHemisphere);
+    static qreal degreeValueFromDM(const QRegularExpressionMatch &regexMatch, int c, bool isPosHemisphere);
+    static qreal degreeValueFromD(const QRegularExpressionMatch &regexMatch, int c, bool isPosHemisphere);
 
 public:
     LonLatParser();
@@ -65,17 +58,23 @@ public:
      * @param input the string to parse, must not have other content than the coordinates
      * @return @c true on successful parsing, @c false otherwise.
      */
-    bool parse(const QString& input);
+    bool parse(const QString &input);
 
     /**
      * @brief return the lon value from the last successful parsing
      */
-    qreal lon() const { return m_lon; }
+    qreal lon() const
+    {
+        return m_lon;
+    }
 
     /**
      * @brief return the lat value from the last successful parsing
      */
-    qreal lat() const { return m_lat; }
+    qreal lat() const
+    {
+        return m_lat;
+    }
 
 private:
     /**
@@ -84,9 +83,9 @@ private:
      * @param dirPosition position of the dir in the list of captured texts
      * @return @c true on successful parsing, @c false otherwise.
      */
-    bool tryMatchFromDms(const QString& input, DirPosition dirPosition);
-    bool tryMatchFromDm(const QString& input, DirPosition dirPosition);
-    bool tryMatchFromD(const QString& input, DirPosition dirPosition);
+    bool tryMatchFromDms(const QString &input, DirPosition dirPosition);
+    bool tryMatchFromDm(const QString &input, DirPosition dirPosition);
+    bool tryMatchFromD(const QString &input, DirPosition dirPosition);
 
     /**
      * @brief initializes also all properties which only need to be lazily initialized
@@ -105,17 +104,11 @@ private:
      *                              @c false otherwise
      * @return @c true if @p dir1 and @p dir2 are correct, @c false otherwise.
      */
-    bool isCorrectDirections(const QString& dir1, const QString& dir2,
-                             bool& isDir1LonDir,
-                             bool& isLonDirPosHemisphere, bool& isLatDirPosHemisphere) const;
-    bool isLocaleLonDirection(const QString& input,
-                              bool& isDirPosHemisphere) const;
-    bool isLocaleLatDirection(const QString& input,
-                              bool& isDirPosHemisphere) const;
-    bool isLonDirection(const QString& input,
-                        bool& isDirPosHemisphere) const;
-    bool isLatDirection(const QString& input,
-                        bool& isDirPosHemisphere) const;
+    bool isCorrectDirections(const QString &dir1, const QString &dir2, bool &isDir1LonDir, bool &isLonDirPosHemisphere, bool &isLatDirPosHemisphere) const;
+    bool isLocaleLonDirection(const QString &input, bool &isDirPosHemisphere) const;
+    bool isLocaleLatDirection(const QString &input, bool &isDirPosHemisphere) const;
+    bool isLonDirection(const QString &input, bool &isDirPosHemisphere) const;
+    bool isLatDirection(const QString &input, bool &isDirPosHemisphere) const;
 
 private:
     qreal m_lon;

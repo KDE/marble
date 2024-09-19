@@ -12,29 +12,28 @@ class QIODevice;
 
 namespace Marble
 {
-    
+
 class GeoDataCoordinates;
 
 class CoordinatesParser : public QXmlStreamReader
 {
 public:
-    explicit CoordinatesParser( GeoDataCoordinates *coordinates );
+    explicit CoordinatesParser(GeoDataCoordinates *coordinates);
 
-    bool read( QIODevice *device );
+    bool read(QIODevice *device);
 
 private:
     void readUnknownElement();
-    
+
     void readRsp();
-    
+
     void readPhoto();
-    
+
     void readLocation();
-    
+
     GeoDataCoordinates *m_coordinates;
 };
 
 } // Marble namespace
 
 #endif // COORDINATESPARSER_H
-

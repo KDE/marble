@@ -9,18 +9,18 @@
 #include <QAndroidJniObject>
 #endif
 
-TextToSpeechClient::TextToSpeechClient(QObject *parent) :
-    QObject(parent)
+TextToSpeechClient::TextToSpeechClient(QObject *parent)
+    : QObject(parent)
 {
-    //nothing to do
+    // nothing to do
 }
 
 TextToSpeechClient::~TextToSpeechClient()
 {
-    //nothing to do
+    // nothing to do
 }
 
-void TextToSpeechClient::readText(const QString & text)
+void TextToSpeechClient::readText(const QString &text)
 {
 #ifdef Q_OS_ANDROID
     QAndroidJniObject jniText = QAndroidJniObject::fromString(text);
@@ -30,11 +30,14 @@ void TextToSpeechClient::readText(const QString & text)
 #endif
 }
 
-void TextToSpeechClient::setLocale(const QString & locale)
+void TextToSpeechClient::setLocale(const QString &locale)
 {
 #ifdef Q_OS_ANDROID
     QAndroidJniObject jniText = QAndroidJniObject::fromString(locale);
-    QAndroidJniObject::callStaticMethod<void>("org/kde/marble/maps/TextToSpeechClient", "initSpeakerStatic", "(Ljava/lang/String;)V", jniText.object<jstring>());
+    QAndroidJniObject::callStaticMethod<void>("org/kde/marble/maps/TextToSpeechClient",
+                                              "initSpeakerStatic",
+                                              "(Ljava/lang/String;)V",
+                                              jniText.object<jstring>());
 #else
     Q_UNUSED(locale)
 #endif

@@ -16,11 +16,10 @@ namespace Marble
 
 class GeoSceneVectorTileDataset : public GeoSceneTileDataset
 {
- public:
+public:
+    explicit GeoSceneVectorTileDataset(const QString &name);
 
-    explicit GeoSceneVectorTileDataset( const QString& name );
-
-    const char* nodeType() const override;
+    const char *nodeType() const override;
 };
 
 }

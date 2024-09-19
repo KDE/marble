@@ -3,7 +3,6 @@
 // SPDX-FileCopyrightText: 2011 Niko Sams <niko.sams@gmail.com>
 //
 
-
 #ifndef MARBLE_ELEVATIONMODEL_H
 #define MARBLE_ELEVATIONMODEL_H
 
@@ -17,8 +16,9 @@ namespace Marble
 {
 class GeoDataCoordinates;
 
-namespace {
-    unsigned int const invalidElevationData = 32768;
+namespace
+{
+unsigned int const invalidElevationData = 32768;
 }
 
 class TileId;
@@ -30,11 +30,11 @@ class MARBLE_EXPORT ElevationModel : public QObject
 {
     Q_OBJECT
 public:
-    explicit ElevationModel( HttpDownloadManager *downloadManager, PluginManager* pluginManager, QObject *parent = nullptr );
+    explicit ElevationModel(HttpDownloadManager *downloadManager, PluginManager *pluginManager, QObject *parent = nullptr);
     ~ElevationModel() override;
 
-    qreal height( qreal lon, qreal lat ) const;
-    QVector<GeoDataCoordinates> heightProfile( qreal fromLon, qreal fromLat, qreal toLon, qreal toLat ) const;
+    qreal height(qreal lon, qreal lat) const;
+    QVector<GeoDataCoordinates> heightProfile(qreal fromLon, qreal fromLat, qreal toLon, qreal toLat) const;
 
 Q_SIGNALS:
     /**
@@ -44,7 +44,7 @@ Q_SIGNALS:
     void updateAvailable();
 
 private:
-    Q_PRIVATE_SLOT( d, void tileCompleted( const TileId&, const QImage& ) )
+    Q_PRIVATE_SLOT(d, void tileCompleted(const TileId &, const QImage &))
 
 private:
     friend class ElevationModelPrivate;

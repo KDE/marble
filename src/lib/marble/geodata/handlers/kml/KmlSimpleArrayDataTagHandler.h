@@ -16,7 +16,7 @@ namespace kml
 class KmlSimpleArrayDataTagHandler : public GeoTagHandler
 {
 public:
-    GeoNode* parse(GeoParser&) const override;
+    GeoNode *parse(GeoParser &) const override;
 };
 
 }

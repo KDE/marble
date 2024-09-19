@@ -21,45 +21,39 @@ class GeoDataTimeStampPrivate;
  */
 class GEODATA_EXPORT GeoDataTimeStamp : public GeoDataTimePrimitive
 {
-  public:
-    enum TimeResolution {
-        SecondResolution,
-        DayResolution,
-        MonthResolution,
-        YearResolution
-    };
+public:
+    enum TimeResolution { SecondResolution, DayResolution, MonthResolution, YearResolution };
 
     GeoDataTimeStamp();
-    GeoDataTimeStamp( const GeoDataTimeStamp& other );
+    GeoDataTimeStamp(const GeoDataTimeStamp &other);
     ~GeoDataTimeStamp() override;
 
     /**
-    * @brief assignment operator
-    */
-    GeoDataTimeStamp& operator=( const GeoDataTimeStamp& other );
+     * @brief assignment operator
+     */
+    GeoDataTimeStamp &operator=(const GeoDataTimeStamp &other);
 
     /**
      * @brief equality operators
      */
-    bool operator==( const GeoDataTimeStamp& other ) const;
-    bool operator!=( const GeoDataTimeStamp& other ) const;
-
+    bool operator==(const GeoDataTimeStamp &other) const;
+    bool operator!=(const GeoDataTimeStamp &other) const;
 
     /// Provides type information for downcasting a GeoNode
-    const char* nodeType() const override;
+    const char *nodeType() const override;
 
     /**
-    * @brief return the when time of timestamp
-    */
+     * @brief return the when time of timestamp
+     */
     QDateTime when() const;
- 
+
     /**
-    * @brief Set the when time of timestamp
-    * @param when the when time of timestamp
-    */
-    void setWhen( const QDateTime& when );
-    
-    void setResolution( TimeResolution resolution );
+     * @brief Set the when time of timestamp
+     * @param when the when time of timestamp
+     */
+    void setWhen(const QDateTime &when);
+
+    void setResolution(TimeResolution resolution);
 
     TimeResolution resolution() const;
 
@@ -67,16 +61,16 @@ class GEODATA_EXPORT GeoDataTimeStamp : public GeoDataTimePrimitive
      * @brief Serialize the timestamp to a stream
      * @param  stream  the stream
      */
-    void pack( QDataStream& stream ) const override;
+    void pack(QDataStream &stream) const override;
 
     /**
      * @brief  Unserialize the timestamp from a stream
      * @param  stream  the stream
      */
-    void unpack( QDataStream& stream ) override;
+    void unpack(QDataStream &stream) override;
 
-  private:
-    GeoDataTimeStampPrivate * const d;
+private:
+    GeoDataTimeStampPrivate *const d;
 };
 
 }

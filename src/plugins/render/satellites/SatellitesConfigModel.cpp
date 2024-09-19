@@ -5,14 +5,15 @@
 
 #include "SatellitesConfigModel.h"
 
-#include "SatellitesConfigLeafItem.h"
 #include "MarbleDebug.h"
+#include "SatellitesConfigLeafItem.h"
 
-namespace Marble {
+namespace Marble
+{
 
-SatellitesConfigModel::SatellitesConfigModel( QObject *parent )
-    : QAbstractItemModel( parent ),
-      m_rootItem(new SatellitesConfigNodeItem(QString()))
+SatellitesConfigModel::SatellitesConfigModel(QObject *parent)
+    : QAbstractItemModel(parent)
+    , m_rootItem(new SatellitesConfigNodeItem(QString()))
 {
 }
 
@@ -23,30 +24,27 @@ SatellitesConfigModel::~SatellitesConfigModel()
 
 QStringList SatellitesConfigModel::idList() const
 {
-    return m_rootItem->data( 0, SatellitesConfigAbstractItem::IdListRole )
-            .toStringList();
+    return m_rootItem->data(0, SatellitesConfigAbstractItem::IdListRole).toStringList();
 }
 
 QStringList SatellitesConfigModel::fullIdList() const
 {
-    return m_rootItem->data( 0, SatellitesConfigAbstractItem::FullIdListRole )
-            .toStringList();
+    return m_rootItem->data(0, SatellitesConfigAbstractItem::FullIdListRole).toStringList();
 }
 
 QStringList SatellitesConfigModel::urlList() const
 {
-    return m_rootItem->data( 0, SatellitesConfigAbstractItem::UrlListRole )
-            .toStringList();
+    return m_rootItem->data(0, SatellitesConfigAbstractItem::UrlListRole).toStringList();
 }
 
 void SatellitesConfigModel::loadSettings(const QHash<QString, QVariant> &settings)
 {
-    m_rootItem->loadSettings( settings );
+    m_rootItem->loadSettings(settings);
 }
 
-void SatellitesConfigModel::appendChild( SatellitesConfigAbstractItem *child )
+void SatellitesConfigModel::appendChild(SatellitesConfigAbstractItem *child)
 {
-    m_rootItem->appendChild( child );
+    m_rootItem->appendChild(child);
 }
 
 void SatellitesConfigModel::clear()
@@ -54,131 +52,118 @@ void SatellitesConfigModel::clear()
     m_rootItem->clear();
 }
 
-QVariant SatellitesConfigModel::data( const QModelIndex &index, int role ) const
+QVariant SatellitesConfigModel::data(const QModelIndex &index, int role) const
 {
-    if ( !index.isValid() ) {
+    if (!index.isValid()) {
         return QVariant();
     }
 
-    SatellitesConfigAbstractItem *item = 
-        static_cast<SatellitesConfigAbstractItem *>( index.internalPointer() );
-    return item->data( index.column(), role );
+    SatellitesConfigAbstractItem *item = static_cast<SatellitesConfigAbstractItem *>(index.internalPointer());
+    return item->data(index.column(), role);
 }
 
-bool SatellitesConfigModel::setData( const QModelIndex &index,
-                                     const QVariant &value,
-                                     int role )
+bool SatellitesConfigModel::setData(const QModelIndex &index, const QVariant &value, int role)
 {
-    SatellitesConfigAbstractItem *item =
-        static_cast<SatellitesConfigAbstractItem *>( index.internalPointer() );
+    SatellitesConfigAbstractItem *item = static_cast<SatellitesConfigAbstractItem *>(index.internalPointer());
 
-    bool success = item->setData( index.column(), role, value );
+    bool success = item->setData(index.column(), role, value);
 
-    if ( success ) {
-        QModelIndex parentCellIndex = this->index( index.parent().row(),
-                                                   index.column(),
-                                                   index.parent().parent() );
-        emit dataChanged( parentCellIndex, parentCellIndex );
+    if (success) {
+        QModelIndex parentCellIndex = this->index(index.parent().row(), index.column(), index.parent().parent());
+        emit dataChanged(parentCellIndex, parentCellIndex);
     }
 
     return success;
 }
 
-int SatellitesConfigModel::columnCount( const QModelIndex &parent ) const
+int SatellitesConfigModel::columnCount(const QModelIndex &parent) const
 {
-    Q_UNUSED( parent )
-    //TODO: enable second column
+    Q_UNUSED(parent)
+    // TODO: enable second column
     return 1;
 }
 
-int SatellitesConfigModel::rowCount( const QModelIndex &parent ) const
+int SatellitesConfigModel::rowCount(const QModelIndex &parent) const
 {
-    if ( parent.column() > 0 ) {
+    if (parent.column() > 0) {
         return 0;
     }
 
     SatellitesConfigAbstractItem *parentItem = nullptr;
-    if ( !parent.isValid() ) {
+    if (!parent.isValid()) {
         parentItem = m_rootItem;
     } else {
-        parentItem = static_cast<SatellitesConfigAbstractItem *>(
-            parent.internalPointer() );
+        parentItem = static_cast<SatellitesConfigAbstractItem *>(parent.internalPointer());
     }
 
     return parentItem->childrenCount();
 }
 
-QModelIndex SatellitesConfigModel::parent( const QModelIndex &child ) const
+QModelIndex SatellitesConfigModel::parent(const QModelIndex &child) const
 {
-    if ( !child.isValid() ) {
+    if (!child.isValid()) {
         return QModelIndex();
     }
 
-    SatellitesConfigAbstractItem *childItem =
-        static_cast<SatellitesConfigAbstractItem *>( child.internalPointer() );
+    SatellitesConfigAbstractItem *childItem = static_cast<SatellitesConfigAbstractItem *>(child.internalPointer());
     SatellitesConfigAbstractItem *parentItem = childItem->parent();
 
-    if ( parentItem == m_rootItem ) {
+    if (parentItem == m_rootItem) {
         return QModelIndex();
     }
 
-    return createIndex( parentItem->row(), 0, parentItem );
+    return createIndex(parentItem->row(), 0, parentItem);
 }
 
-QModelIndex SatellitesConfigModel::index( int row, int column,
-                                          const QModelIndex &parent ) const
+QModelIndex SatellitesConfigModel::index(int row, int column, const QModelIndex &parent) const
 {
-    if ( !hasIndex( row, column, parent ) ) {
+    if (!hasIndex(row, column, parent)) {
         return QModelIndex();
     }
 
     SatellitesConfigAbstractItem *parentItem = nullptr;
-    if ( !parent.isValid() ) {
+    if (!parent.isValid()) {
         parentItem = m_rootItem;
     } else {
-        parentItem = static_cast<SatellitesConfigAbstractItem *>(
-            parent.internalPointer() );
+        parentItem = static_cast<SatellitesConfigAbstractItem *>(parent.internalPointer());
     }
 
-    SatellitesConfigAbstractItem *childItem = parentItem->childAt( row );
+    SatellitesConfigAbstractItem *childItem = parentItem->childAt(row);
 
-    if ( !childItem ) {
+    if (!childItem) {
         return QModelIndex();
     }
 
-    return createIndex( row, column, childItem );
+    return createIndex(row, column, childItem);
 }
 
-QVariant SatellitesConfigModel::headerData( int section,
-                                            Qt::Orientation orientation,
-                                            int role ) const
+QVariant SatellitesConfigModel::headerData(int section, Qt::Orientation orientation, int role) const
 {
-    if ( orientation != Qt::Horizontal || role != Qt::DisplayRole ) {
+    if (orientation != Qt::Horizontal || role != Qt::DisplayRole) {
         return QVariant();
     }
 
     switch (section) {
-        case 0: {
-            return QVariant( tr( "Catalogs" ) );
-        }
-        default: {
-            return QVariant();
-        }
+    case 0: {
+        return QVariant(tr("Catalogs"));
+    }
+    default: {
+        return QVariant();
+    }
     }
 }
 
-Qt::ItemFlags SatellitesConfigModel::flags( const QModelIndex &index ) const
+Qt::ItemFlags SatellitesConfigModel::flags(const QModelIndex &index) const
 {
-    if ( !index.isValid() ) {
+    if (!index.isValid()) {
         return Qt::ItemFlags();
     }
 
-    SatellitesConfigAbstractItem *item =
-        static_cast<SatellitesConfigAbstractItem *>( index.internalPointer() );
+    SatellitesConfigAbstractItem *item = static_cast<SatellitesConfigAbstractItem *>(index.internalPointer());
     return item->flags();
 }
 
-SatellitesConfigNodeItem* SatellitesConfigModel::rootItem() const
+SatellitesConfigNodeItem *SatellitesConfigModel::rootItem() const
 {
     return m_rootItem;
 }
@@ -186,4 +171,3 @@ SatellitesConfigNodeItem* SatellitesConfigModel::rootItem() const
 } // namespace Marble
 
 #include "moc_SatellitesConfigModel.cpp"
-

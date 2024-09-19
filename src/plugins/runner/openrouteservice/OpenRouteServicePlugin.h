@@ -3,7 +3,6 @@
 // SPDX-FileCopyrightText: 2010 Dennis Nienhüser <nienhueser@kde.org>
 //
 
-
 #ifndef MARBLE_OPENROUTESERVICEPLUGIN_H
 #define MARBLE_OPENROUTESERVICEPLUGIN_H
 
@@ -16,10 +15,10 @@ class OpenRouteServicePlugin : public RoutingRunnerPlugin
 {
     Q_OBJECT
     Q_PLUGIN_METADATA(IID "org.kde.marble.OpenRouteServicePlugin")
-    Q_INTERFACES( Marble::RoutingRunnerPlugin )
+    Q_INTERFACES(Marble::RoutingRunnerPlugin)
 
 public:
-    explicit OpenRouteServicePlugin( QObject *parent = nullptr );
+    explicit OpenRouteServicePlugin(QObject *parent = nullptr);
 
     QString name() const override;
 
@@ -37,11 +36,10 @@ public:
 
     RoutingRunner *newRunner() const override;
 
-    ConfigWidget* configWidget() override;
+    ConfigWidget *configWidget() override;
 
-    bool supportsTemplate( RoutingProfilesModel::ProfileTemplate profileTemplate ) const override;
-    QHash<QString, QVariant> templateSettings( RoutingProfilesModel::ProfileTemplate profileTemplate ) const override;
-
+    bool supportsTemplate(RoutingProfilesModel::ProfileTemplate profileTemplate) const override;
+    QHash<QString, QVariant> templateSettings(RoutingProfilesModel::ProfileTemplate profileTemplate) const override;
 };
 
 }

@@ -4,7 +4,6 @@
 // SPDX-FileCopyrightText: 2012 Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 //
 
-
 #ifndef MARBLE_GOSMOREREVERSEGEOCODINGPLUGIN_H
 #define MARBLE_GOSMOREREVERSEGEOCODINGPLUGIN_H
 
@@ -17,10 +16,10 @@ class GosmorePlugin : public ReverseGeocodingRunnerPlugin
 {
     Q_OBJECT
     Q_PLUGIN_METADATA(IID "org.kde.marble.GosmoreReverseGeocodingPlugin")
-    Q_INTERFACES( Marble::ReverseGeocodingRunnerPlugin )
+    Q_INTERFACES(Marble::ReverseGeocodingRunnerPlugin)
 
 public:
-    explicit GosmorePlugin( QObject *parent = nullptr );
+    explicit GosmorePlugin(QObject *parent = nullptr);
 
     QString name() const override;
 
@@ -36,7 +35,7 @@ public:
 
     QVector<PluginAuthor> pluginAuthors() const override;
 
-    ReverseGeocodingRunner* newRunner() const override;
+    ReverseGeocodingRunner *newRunner() const override;
 
     bool canWork() const override;
 };

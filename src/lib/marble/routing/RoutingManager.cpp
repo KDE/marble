@@ -6,32 +6,32 @@
 #include "RoutingManager.h"
 
 #include "AlternativeRoutesModel.h"
-#include "MarbleModel.h"
-#include "RouteRequest.h"
-#include "RoutingModel.h"
-#include "RoutingProfilesModel.h"
-#include "RoutingRunnerPlugin.h"
-#include "GeoWriter.h"
+#include "GeoDataData.h"
 #include "GeoDataDocument.h"
 #include "GeoDataExtendedData.h"
-#include "GeoDataData.h"
 #include "GeoDataFolder.h"
 #include "GeoDataParser.h"
 #include "GeoDataPlacemark.h"
 #include "GeoDataTreeModel.h"
+#include "GeoWriter.h"
 #include "MarbleColors.h"
-#include "MarbleDirs.h"
 #include "MarbleDebug.h"
-#include "PositionTracking.h"
+#include "MarbleDirs.h"
+#include "MarbleModel.h"
 #include "PluginManager.h"
 #include "PositionProviderPlugin.h"
+#include "PositionTracking.h"
 #include "Route.h"
+#include "RouteRequest.h"
+#include "RoutingModel.h"
+#include "RoutingProfilesModel.h"
 #include "RoutingRunnerManager.h"
+#include "RoutingRunnerPlugin.h"
 #include <KmlElementDictionary.h>
 
+#include <QCheckBox>
 #include <QFile>
 #include <QMessageBox>
-#include <QCheckBox>
 #include <QMutexLocker>
 
 namespace Marble
@@ -40,7 +40,7 @@ namespace Marble
 class RoutingManagerPrivate
 {
 public:
-    RoutingManager* q;
+    RoutingManager *q;
 
     RouteRequest m_routeRequest;
 
@@ -84,88 +84,87 @@ public:
 
     static GeoDataFolder *createFolderFromRequest(const RouteRequest &request);
 
-    static QString stateFile( const QString &name = QStringLiteral( "route.kml" ) );
+    static QString stateFile(const QString &name = QStringLiteral("route.kml"));
 
-    void saveRoute( const QString &filename );
+    void saveRoute(const QString &filename);
 
-    void loadRoute( const QString &filename );
+    void loadRoute(const QString &filename);
 
-    void addRoute( GeoDataDocument* route );
+    void addRoute(GeoDataDocument *route);
 
     void routingFinished();
 
     void setCurrentRoute(const GeoDataDocument *route);
 
-    void recalculateRoute( bool deviated );
+    void recalculateRoute(bool deviated);
 
-    static void importPlacemark( RouteSegment &outline, QVector<RouteSegment> &segments, const GeoDataPlacemark *placemark );
+    static void importPlacemark(RouteSegment &outline, QVector<RouteSegment> &segments, const GeoDataPlacemark *placemark);
 };
 
-RoutingManagerPrivate::RoutingManagerPrivate(MarbleModel *model, RoutingManager *manager) :
-        q( manager ),
-        m_routeRequest( manager ),
-        m_routingModel(&m_routeRequest, model->positionTracking(), manager),
-        m_profilesModel( model->pluginManager() ),
-        m_state( RoutingManager::Retrieved ),
-        m_pluginManager( model->pluginManager() ),
-        m_treeModel( model->treeModel() ),
-        m_positionTracking( model->positionTracking() ),
-        m_alternativeRoutesModel(manager),
-        m_runnerManager(model, manager),
-        m_haveRoute( false ),
-        m_guidanceModeEnabled( false ),
-        m_shutdownPositionTracking( false ),
-        m_guidanceModeWarning( true ),
-        m_routeColorStandard( Oxygen::skyBlue4 ),
-        m_routeColorHighlighted( Oxygen::skyBlue1 ),
-        m_routeColorAlternative( Oxygen::aluminumGray4 )
+RoutingManagerPrivate::RoutingManagerPrivate(MarbleModel *model, RoutingManager *manager)
+    : q(manager)
+    , m_routeRequest(manager)
+    , m_routingModel(&m_routeRequest, model->positionTracking(), manager)
+    , m_profilesModel(model->pluginManager())
+    , m_state(RoutingManager::Retrieved)
+    , m_pluginManager(model->pluginManager())
+    , m_treeModel(model->treeModel())
+    , m_positionTracking(model->positionTracking())
+    , m_alternativeRoutesModel(manager)
+    , m_runnerManager(model, manager)
+    , m_haveRoute(false)
+    , m_guidanceModeEnabled(false)
+    , m_shutdownPositionTracking(false)
+    , m_guidanceModeWarning(true)
+    , m_routeColorStandard(Oxygen::skyBlue4)
+    , m_routeColorHighlighted(Oxygen::skyBlue1)
+    , m_routeColorAlternative(Oxygen::aluminumGray4)
 {
-    m_routeColorStandard.setAlpha( 200 );
-    m_routeColorHighlighted.setAlpha( 200 );
-    m_routeColorAlternative.setAlpha( 200 );
+    m_routeColorStandard.setAlpha(200);
+    m_routeColorHighlighted.setAlpha(200);
+    m_routeColorAlternative.setAlpha(200);
 }
 
 GeoDataFolder *RoutingManagerPrivate::createFolderFromRequest(const RouteRequest &request)
 {
-    GeoDataFolder* result = new GeoDataFolder;
+    GeoDataFolder *result = new GeoDataFolder;
 
     result->setName(QStringLiteral("Route Request"));
 
     for (int i = 0; i < request.size(); ++i) {
         GeoDataPlacemark *placemark = new GeoDataPlacemark(request[i]);
-        result->append( placemark );
+        result->append(placemark);
     }
 
     return result;
 }
 
-QString RoutingManagerPrivate::stateFile( const QString &name)
+QString RoutingManagerPrivate::stateFile(const QString &name)
 {
     QString const subdir = "routing";
-    QDir dir( MarbleDirs::localPath() );
-    if ( !dir.exists( subdir ) ) {
-        if ( !dir.mkdir( subdir ) ) {
-            mDebug() << "Unable to create dir " << dir.absoluteFilePath( subdir );
+    QDir dir(MarbleDirs::localPath());
+    if (!dir.exists(subdir)) {
+        if (!dir.mkdir(subdir)) {
+            mDebug() << "Unable to create dir " << dir.absoluteFilePath(subdir);
             return dir.absolutePath();
         }
     }
 
-    if ( !dir.cd( subdir ) ) {
-        mDebug() << "Cannot change into " << dir.absoluteFilePath( subdir );
+    if (!dir.cd(subdir)) {
+        mDebug() << "Cannot change into " << dir.absoluteFilePath(subdir);
     }
 
-    return dir.absoluteFilePath( name );
+    return dir.absoluteFilePath(name);
 }
 
 void RoutingManagerPrivate::saveRoute(const QString &filename)
 {
     GeoWriter writer;
-    writer.setDocumentType( kml::kmlTag_nameSpaceOgc22 );
+    writer.setDocumentType(kml::kmlTag_nameSpaceOgc22);
 
-    QMutexLocker locker( &m_fileMutex );
-    QFile file( filename );
-    if ( !file.open( QIODevice::WriteOnly | QIODevice::Truncate ) )
-    {
+    QMutexLocker locker(&m_fileMutex);
+    QFile file(filename);
+    if (!file.open(QIODevice::WriteOnly | QIODevice::Truncate)) {
         mDebug() << "Cannot write to " << file.fileName();
         return;
     }
@@ -173,16 +172,16 @@ void RoutingManagerPrivate::saveRoute(const QString &filename)
     GeoDataDocument container;
     container.setName(QStringLiteral("Route"));
     GeoDataFolder *request = createFolderFromRequest(m_routeRequest);
-    if ( request ) {
-        container.append( request );
+    if (request) {
+        container.append(request);
     }
 
     const GeoDataDocument *route = m_alternativeRoutesModel.currentRoute();
-    if ( route ) {
-        container.append( new GeoDataDocument( *route ) );
+    if (route) {
+        container.append(new GeoDataDocument(*route));
     }
 
-    if ( !writer.write( &file, &container ) ) {
+    if (!writer.write(&file, &container)) {
         mDebug() << "Can not write route state to " << file.fileName();
     }
     file.close();
@@ -190,14 +189,14 @@ void RoutingManagerPrivate::saveRoute(const QString &filename)
 
 void RoutingManagerPrivate::loadRoute(const QString &filename)
 {
-    QFile file( filename );
-    if ( !file.open( QIODevice::ReadOnly ) ) {
+    QFile file(filename);
+    if (!file.open(QIODevice::ReadOnly)) {
         mDebug() << "Can not read route from " << file.fileName();
         return;
     }
 
-    GeoDataParser parser( GeoData_KML );
-    if ( !parser.read( &file ) ) {
+    GeoDataParser parser(GeoData_KML);
+    if (!parser.read(&file)) {
         mDebug() << "Could not parse file: " << parser.errorString();
         return;
     }
@@ -206,40 +205,40 @@ void RoutingManagerPrivate::loadRoute(const QString &filename)
     file.close();
     bool loaded = false;
 
-    GeoDataDocument* container = dynamic_cast<GeoDataDocument*>( doc );
+    GeoDataDocument *container = dynamic_cast<GeoDataDocument *>(doc);
     if (container && !container->isEmpty()) {
-        GeoDataFolder* viaPoints = dynamic_cast<GeoDataFolder*>( &container->first() );
-        if ( viaPoints ) {
+        GeoDataFolder *viaPoints = dynamic_cast<GeoDataFolder *>(&container->first());
+        if (viaPoints) {
             loaded = true;
-            QVector<GeoDataPlacemark*> placemarks = viaPoints->placemarkList();
-            for( int i=0; i<placemarks.size(); ++i ) {
-                if ( i < m_routeRequest.size() ) {
+            QVector<GeoDataPlacemark *> placemarks = viaPoints->placemarkList();
+            for (int i = 0; i < placemarks.size(); ++i) {
+                if (i < m_routeRequest.size()) {
                     m_routeRequest[i] = *placemarks[i];
                 } else {
-                    m_routeRequest.append( *placemarks[i] );
+                    m_routeRequest.append(*placemarks[i]);
                 }
             }
 
             // clear unneeded via points
             const int viaPoints_needed = placemarks.size();
-            for ( int i = m_routeRequest.size(); i > viaPoints_needed; --i ) {
-                m_routeRequest.remove( viaPoints_needed );
+            for (int i = m_routeRequest.size(); i > viaPoints_needed; --i) {
+                m_routeRequest.remove(viaPoints_needed);
             }
         } else {
             mDebug() << "Expected a GeoDataDocument with at least one child, didn't get one though";
         }
     }
 
-    if ( container && container->size() == 2 ) {
-        GeoDataDocument* route = dynamic_cast<GeoDataDocument*>(&container->last());
-        if ( route ) {
+    if (container && container->size() == 2) {
+        GeoDataDocument *route = dynamic_cast<GeoDataDocument *>(&container->last());
+        if (route) {
             loaded = true;
             m_alternativeRoutesModel.clear();
-            m_alternativeRoutesModel.addRoute( new GeoDataDocument(*route), AlternativeRoutesModel::Instant );
-            m_alternativeRoutesModel.setCurrentRoute( 0 );
+            m_alternativeRoutesModel.addRoute(new GeoDataDocument(*route), AlternativeRoutesModel::Instant);
+            m_alternativeRoutesModel.setCurrentRoute(0);
             m_state = RoutingManager::Retrieved;
-            emit q->stateChanged( m_state );
-            emit q->routeRetrieved( route );
+            emit q->stateChanged(m_state);
+            emit q->routeRetrieved(route);
         } else {
             mDebug() << "Expected a GeoDataDocument child, didn't get one though";
         }
@@ -249,24 +248,20 @@ void RoutingManagerPrivate::loadRoute(const QString &filename)
         delete doc; // == container
     } else {
         mDebug() << "File " << filename << " is not a valid Marble route .kml file";
-        if ( container ) {
-            m_treeModel->addDocument( container );
+        if (container) {
+            m_treeModel->addDocument(container);
         }
     }
 }
 
-RoutingManager::RoutingManager(MarbleModel *marbleModel, QObject *parent) :
-    QObject(parent),
-    d(new RoutingManagerPrivate(marbleModel, this))
+RoutingManager::RoutingManager(MarbleModel *marbleModel, QObject *parent)
+    : QObject(parent)
+    , d(new RoutingManagerPrivate(marbleModel, this))
 {
-    connect( &d->m_runnerManager, SIGNAL(routeRetrieved(GeoDataDocument*)),
-             this, SLOT(addRoute(GeoDataDocument*)) );
-    connect( &d->m_runnerManager, SIGNAL(routingFinished()),
-             this, SLOT(routingFinished()) );
-    connect(&d->m_alternativeRoutesModel, SIGNAL(currentRouteChanged(const GeoDataDocument*)),
-            this, SLOT(setCurrentRoute(const GeoDataDocument*)));
-    connect( &d->m_routingModel, SIGNAL(deviatedFromRoute(bool)),
-             this, SLOT(recalculateRoute(bool)) );
+    connect(&d->m_runnerManager, SIGNAL(routeRetrieved(GeoDataDocument *)), this, SLOT(addRoute(GeoDataDocument *)));
+    connect(&d->m_runnerManager, SIGNAL(routingFinished()), this, SLOT(routingFinished()));
+    connect(&d->m_alternativeRoutesModel, SIGNAL(currentRouteChanged(const GeoDataDocument *)), this, SLOT(setCurrentRoute(const GeoDataDocument *)));
+    connect(&d->m_routingModel, SIGNAL(deviatedFromRoute(bool)), this, SLOT(recalculateRoute(bool)));
 }
 
 RoutingManager::~RoutingManager()
@@ -289,7 +284,7 @@ const RoutingModel *RoutingManager::routingModel() const
     return &d->m_routingModel;
 }
 
-RouteRequest* RoutingManager::routeRequest()
+RouteRequest *RoutingManager::routeRequest()
 {
     return &d->m_routeRequest;
 }
@@ -304,41 +299,41 @@ void RoutingManager::retrieveRoute()
     d->m_haveRoute = false;
 
     int realSize = 0;
-    for ( int i = 0; i < d->m_routeRequest.size(); ++i ) {
+    for (int i = 0; i < d->m_routeRequest.size(); ++i) {
         // Sort out dummy targets
-        if ( d->m_routeRequest.at( i ).isValid() ) {
+        if (d->m_routeRequest.at(i).isValid()) {
             ++realSize;
         }
     }
 
-    d->m_alternativeRoutesModel.newRequest( &d->m_routeRequest );
-    if ( realSize > 1 ) {
+    d->m_alternativeRoutesModel.newRequest(&d->m_routeRequest);
+    if (realSize > 1) {
         d->m_state = RoutingManager::Downloading;
-        d->m_runnerManager.retrieveRoute( &d->m_routeRequest );
+        d->m_runnerManager.retrieveRoute(&d->m_routeRequest);
     } else {
         d->m_routingModel.clear();
         d->m_state = RoutingManager::Retrieved;
     }
-    emit stateChanged( d->m_state );
+    emit stateChanged(d->m_state);
 }
 
-void RoutingManagerPrivate::addRoute( GeoDataDocument* route )
+void RoutingManagerPrivate::addRoute(GeoDataDocument *route)
 {
-    if ( route ) {
-        m_alternativeRoutesModel.addRoute( route );
+    if (route) {
+        m_alternativeRoutesModel.addRoute(route);
     }
 
-    if ( !m_haveRoute ) {
+    if (!m_haveRoute) {
         m_haveRoute = route != nullptr;
     }
 
-    emit q->routeRetrieved( route );
+    emit q->routeRetrieved(route);
 }
 
 void RoutingManagerPrivate::routingFinished()
 {
     m_state = RoutingManager::Retrieved;
-    emit q->stateChanged( m_state );
+    emit q->stateChanged(m_state);
 }
 
 void RoutingManagerPrivate::setCurrentRoute(const GeoDataDocument *document)
@@ -359,134 +354,136 @@ void RoutingManagerPrivate::setCurrentRoute(const GeoDataDocument *document)
         }
     }
 
-    if ( segments.isEmpty() ) {
+    if (segments.isEmpty()) {
         segments << outline;
     }
 
     // Map via points onto segments
-    if ( m_routeRequest.size() > 1 && segments.size() > 1 ) {
+    if (m_routeRequest.size() > 1 && segments.size() > 1) {
         int index = 0;
-        for ( int j = 0; j < m_routeRequest.size(); ++j ) {
-            QPair<int, qreal> minimum( -1, -1.0 );
+        for (int j = 0; j < m_routeRequest.size(); ++j) {
+            QPair<int, qreal> minimum(-1, -1.0);
             int viaIndex = -1;
-            for ( int i = index; i < segments.size(); ++i ) {
+            for (int i = index; i < segments.size(); ++i) {
                 const RouteSegment &segment = segments[i];
                 GeoDataCoordinates closest;
-                const qreal distance = segment.distanceTo( m_routeRequest.at( j ), closest, closest );
-                if ( minimum.first < 0 || distance < minimum.second ) {
+                const qreal distance = segment.distanceTo(m_routeRequest.at(j), closest, closest);
+                if (minimum.first < 0 || distance < minimum.second) {
                     minimum.first = i;
                     minimum.second = distance;
                     viaIndex = j;
                 }
             }
 
-            if ( minimum.first >= 0 ) {
+            if (minimum.first >= 0) {
                 index = minimum.first;
-                Maneuver viaPoint = segments[ minimum.first ].maneuver();
-                viaPoint.setWaypoint( m_routeRequest.at( viaIndex ), viaIndex );
-                segments[ minimum.first ].setManeuver( viaPoint );
+                Maneuver viaPoint = segments[minimum.first].maneuver();
+                viaPoint.setWaypoint(m_routeRequest.at(viaIndex), viaIndex);
+                segments[minimum.first].setManeuver(viaPoint);
             }
         }
     }
 
     Route route;
 
-    if ( segments.size() > 0 ) {
-        for( const RouteSegment &segment: segments ) {
-            route.addRouteSegment( segment );
+    if (segments.size() > 0) {
+        for (const RouteSegment &segment : segments) {
+            route.addRouteSegment(segment);
         }
     }
 
-    m_routingModel.setRoute( route );
+    m_routingModel.setRoute(route);
 }
 
-void RoutingManagerPrivate::importPlacemark( RouteSegment &outline, QVector<RouteSegment> &segments, const GeoDataPlacemark *placemark )
+void RoutingManagerPrivate::importPlacemark(RouteSegment &outline, QVector<RouteSegment> &segments, const GeoDataPlacemark *placemark)
 {
-    const GeoDataGeometry* geometry = placemark->geometry();
-    const GeoDataLineString* lineString = dynamic_cast<const GeoDataLineString*>( geometry );
-    QStringList blacklist = QStringList() << "" << "Route" << "Tessellated";
+    const GeoDataGeometry *geometry = placemark->geometry();
+    const GeoDataLineString *lineString = dynamic_cast<const GeoDataLineString *>(geometry);
+    QStringList blacklist = QStringList() << ""
+                                          << "Route"
+                                          << "Tessellated";
     RouteSegment segment;
     bool isOutline = true;
-    if ( !blacklist.contains( placemark->name() ) ) {
-        if( lineString ) {
+    if (!blacklist.contains(placemark->name())) {
+        if (lineString) {
             Maneuver maneuver;
-            maneuver.setInstructionText( placemark->name() );
-            maneuver.setPosition( lineString->at( 0 ) );
+            maneuver.setInstructionText(placemark->name());
+            maneuver.setPosition(lineString->at(0));
 
             if (placemark->extendedData().contains(QStringLiteral("turnType"))) {
                 QVariant turnType = placemark->extendedData().value(QStringLiteral("turnType")).value();
                 // The enum value is converted to/from an int in the QVariant
                 // because only a limited set of data types can be serialized with QVariant's
                 // toString() method (which is used to serialize <ExtendedData>/<Data> values)
-                maneuver.setDirection( Maneuver::Direction( turnType.toInt() ) );
+                maneuver.setDirection(Maneuver::Direction(turnType.toInt()));
             }
 
             if (placemark->extendedData().contains(QStringLiteral("roadName"))) {
                 QVariant roadName = placemark->extendedData().value(QStringLiteral("roadName")).value();
-                maneuver.setRoadName( roadName.toString() );
+                maneuver.setRoadName(roadName.toString());
             }
 
-            segment.setManeuver( maneuver );
+            segment.setManeuver(maneuver);
             isOutline = false;
         }
     }
 
-    if ( lineString ) {
-        segment.setPath( *lineString );
+    if (lineString) {
+        segment.setPath(*lineString);
 
-        if ( isOutline ) {
+        if (isOutline) {
             outline = segment;
         } else {
-            segments.push_back( segment );
+            segments.push_back(segment);
         }
     }
 }
 
-AlternativeRoutesModel* RoutingManager::alternativeRoutesModel()
+AlternativeRoutesModel *RoutingManager::alternativeRoutesModel()
 {
     return &d->m_alternativeRoutesModel;
 }
 
 void RoutingManager::writeSettings() const
 {
-    d->saveRoute( d->stateFile() );
+    d->saveRoute(d->stateFile());
 }
 
-void RoutingManager::saveRoute( const QString &filename ) const
+void RoutingManager::saveRoute(const QString &filename) const
 {
-    d->saveRoute( filename );
+    d->saveRoute(filename);
 }
 
-void RoutingManager::loadRoute( const QString &filename )
+void RoutingManager::loadRoute(const QString &filename)
 {
-    d->loadRoute( filename );
+    d->loadRoute(filename);
 }
 
-RoutingProfile RoutingManager::defaultProfile( RoutingProfile::TransportType transportType ) const
+RoutingProfile RoutingManager::defaultProfile(RoutingProfile::TransportType transportType) const
 {
     RoutingProfile profile;
     RoutingProfilesModel::ProfileTemplate tpl = RoutingProfilesModel::CarFastestTemplate;
-    switch ( transportType ) {
+    switch (transportType) {
     case RoutingProfile::Motorcar:
         tpl = RoutingProfilesModel::CarFastestTemplate;
         profile.setName(QStringLiteral("Motorcar"));
-        profile.setTransportType( RoutingProfile::Motorcar );
+        profile.setTransportType(RoutingProfile::Motorcar);
         break;
     case RoutingProfile::Bicycle:
         tpl = RoutingProfilesModel::BicycleTemplate;
         profile.setName(QStringLiteral("Bicycle"));
-        profile.setTransportType( RoutingProfile::Bicycle );
+        profile.setTransportType(RoutingProfile::Bicycle);
         break;
     case RoutingProfile::Pedestrian:
         tpl = RoutingProfilesModel::PedestrianTemplate;
         profile.setName(QStringLiteral("Pedestrian"));
-        profile.setTransportType( RoutingProfile::Pedestrian );
+        profile.setTransportType(RoutingProfile::Pedestrian);
         break;
     }
 
-    for( RoutingRunnerPlugin* plugin: d->m_pluginManager->routingRunnerPlugins() ) {
-        if ( plugin->supportsTemplate( tpl ) ) {
-            profile.pluginSettings()[plugin->nameId()] = plugin->templateSettings( tpl );
+    for (RoutingRunnerPlugin *plugin : d->m_pluginManager->routingRunnerPlugins()) {
+        if (plugin->supportsTemplate(tpl)) {
+            profile.pluginSettings()[plugin->nameId()] = plugin->templateSettings(tpl);
         }
     }
 
@@ -495,72 +492,73 @@ RoutingProfile RoutingManager::defaultProfile( RoutingProfile::TransportType tra
 
 void RoutingManager::readSettings()
 {
-    d->loadRoute( d->stateFile() );
+    d->loadRoute(d->stateFile());
 }
 
-void RoutingManager::setGuidanceModeEnabled( bool enabled )
+void RoutingManager::setGuidanceModeEnabled(bool enabled)
 {
-    if ( d->m_guidanceModeEnabled == enabled ) {
+    if (d->m_guidanceModeEnabled == enabled) {
         return;
     }
 
     d->m_guidanceModeEnabled = enabled;
 
-    if ( enabled ) {
-        d->saveRoute( d->stateFile( "guidance.kml" ) );
+    if (enabled) {
+        d->saveRoute(d->stateFile("guidance.kml"));
 
-        if ( d->m_guidanceModeWarning ) {
-            QString text = QLatin1String("<p>") + tr("Caution: Driving instructions may be incomplete or wrong.") +
-                QLatin1Char(' ') + tr("Road construction, weather and other unforeseen variables can result in the suggested route not to be the most expedient or safest route to your destination.") +
-                QLatin1Char(' ') + tr("Please use common sense while navigating.") + QLatin1String("</p>") +
-                QLatin1String("<p>") + tr("The Marble development team wishes you a pleasant and safe journey.") + QLatin1String("</p>");
+        if (d->m_guidanceModeWarning) {
+            QString text = QLatin1String("<p>") + tr("Caution: Driving instructions may be incomplete or wrong.") + QLatin1Char(' ')
+                + tr("Road construction, weather and other unforeseen variables can result in the suggested route not to be the most expedient or safest route "
+                     "to your destination.")
+                + QLatin1Char(' ') + tr("Please use common sense while navigating.") + QLatin1String("</p>") + QLatin1String("<p>")
+                + tr("The Marble development team wishes you a pleasant and safe journey.") + QLatin1String("</p>");
             QPointer<QMessageBox> messageBox = new QMessageBox(QMessageBox::Information, tr("Guidance Mode"), text, QMessageBox::Ok);
-            QCheckBox *showAgain = new QCheckBox( tr( "Show again" ) );
-            showAgain->setChecked( true );
-            showAgain->blockSignals( true ); // otherwise it'd close the dialog
-            messageBox->addButton( showAgain, QMessageBox::ActionRole );
+            QCheckBox *showAgain = new QCheckBox(tr("Show again"));
+            showAgain->setChecked(true);
+            showAgain->blockSignals(true); // otherwise it'd close the dialog
+            messageBox->addButton(showAgain, QMessageBox::ActionRole);
             const bool smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
-            messageBox->resize( 380, smallScreen ? 400 : 240 );
+            messageBox->resize(380, smallScreen ? 400 : 240);
             messageBox->exec();
-            if ( !messageBox.isNull() ) {
+            if (!messageBox.isNull()) {
                 d->m_guidanceModeWarning = showAgain->isChecked();
             }
             delete messageBox;
         }
     } else {
-        d->loadRoute( d->stateFile( "guidance.kml" ) );
+        d->loadRoute(d->stateFile("guidance.kml"));
     }
 
-    PositionProviderPlugin* positionProvider = d->m_positionTracking->positionProviderPlugin();
-    if ( !positionProvider && enabled ) {
-        QList<const PositionProviderPlugin*> plugins = d->m_pluginManager->positionProviderPlugins();
-        if ( plugins.size() > 0 ) {
+    PositionProviderPlugin *positionProvider = d->m_positionTracking->positionProviderPlugin();
+    if (!positionProvider && enabled) {
+        QList<const PositionProviderPlugin *> plugins = d->m_pluginManager->positionProviderPlugins();
+        if (plugins.size() > 0) {
             positionProvider = plugins.first()->newInstance();
         }
-        d->m_positionTracking->setPositionProviderPlugin( positionProvider );
+        d->m_positionTracking->setPositionProviderPlugin(positionProvider);
         d->m_shutdownPositionTracking = true;
-    } else if ( positionProvider && !enabled && d->m_shutdownPositionTracking ) {
+    } else if (positionProvider && !enabled && d->m_shutdownPositionTracking) {
         d->m_shutdownPositionTracking = false;
-        d->m_positionTracking->setPositionProviderPlugin( nullptr );
+        d->m_positionTracking->setPositionProviderPlugin(nullptr);
     }
 
-    emit guidanceModeEnabledChanged( d->m_guidanceModeEnabled );
+    emit guidanceModeEnabledChanged(d->m_guidanceModeEnabled);
 }
 
-void RoutingManagerPrivate::recalculateRoute( bool deviated )
+void RoutingManagerPrivate::recalculateRoute(bool deviated)
 {
-    if ( m_guidanceModeEnabled && deviated ) {
-        for ( int i=m_routeRequest.size()-3; i>=0; --i ) {
-            if ( m_routeRequest.visited( i ) ) {
-                m_routeRequest.remove( i );
+    if (m_guidanceModeEnabled && deviated) {
+        for (int i = m_routeRequest.size() - 3; i >= 0; --i) {
+            if (m_routeRequest.visited(i)) {
+                m_routeRequest.remove(i);
             }
         }
 
-        if ( m_routeRequest.size() == 2 && m_routeRequest.visited( 0 ) && !m_routeRequest.visited( 1 ) ) {
-            m_routeRequest.setPosition( 0, m_positionTracking->currentLocation(), QObject::tr( "Current Location" ) );
+        if (m_routeRequest.size() == 2 && m_routeRequest.visited(0) && !m_routeRequest.visited(1)) {
+            m_routeRequest.setPosition(0, m_positionTracking->currentLocation(), QObject::tr("Current Location"));
             q->retrieveRoute();
-        } else if ( m_routeRequest.size() != 0 && !m_routeRequest.visited( m_routeRequest.size()-1 ) ) {
-            m_routeRequest.insert( 0, m_positionTracking->currentLocation(), QObject::tr( "Current Location" ) );
+        } else if (m_routeRequest.size() != 0 && !m_routeRequest.visited(m_routeRequest.size() - 1)) {
+            m_routeRequest.insert(0, m_positionTracking->currentLocation(), QObject::tr("Current Location"));
             q->retrieveRoute();
         }
     }
@@ -578,7 +576,7 @@ void RoutingManager::clearRoute()
     retrieveRoute();
 }
 
-void RoutingManager::setShowGuidanceModeStartupWarning( bool show )
+void RoutingManager::setShowGuidanceModeStartupWarning(bool show)
 {
     d->m_guidanceModeWarning = show;
 }
@@ -588,7 +586,7 @@ bool RoutingManager::showGuidanceModeStartupWarning() const
     return d->m_guidanceModeWarning;
 }
 
-void RoutingManager::setLastOpenPath( const QString &path )
+void RoutingManager::setLastOpenPath(const QString &path)
 {
     d->m_lastOpenPath = path;
 }
@@ -598,7 +596,7 @@ QString RoutingManager::lastOpenPath() const
     return d->m_lastOpenPath;
 }
 
-void RoutingManager::setLastSavePath( const QString &path )
+void RoutingManager::setLastSavePath(const QString &path)
 {
     d->m_lastSavePath = path;
 }
@@ -608,7 +606,7 @@ QString RoutingManager::lastSavePath() const
     return d->m_lastSavePath;
 }
 
-void RoutingManager::setRouteColorStandard( const QColor& color )
+void RoutingManager::setRouteColorStandard(const QColor &color)
 {
     d->m_routeColorStandard = color;
 }
@@ -618,7 +616,7 @@ QColor RoutingManager::routeColorStandard() const
     return d->m_routeColorStandard;
 }
 
-void RoutingManager::setRouteColorHighlighted( const QColor& color )
+void RoutingManager::setRouteColorHighlighted(const QColor &color)
 {
     d->m_routeColorHighlighted = color;
 }
@@ -628,7 +626,7 @@ QColor RoutingManager::routeColorHighlighted() const
     return d->m_routeColorHighlighted;
 }
 
-void RoutingManager::setRouteColorAlternative( const QColor& color )
+void RoutingManager::setRouteColorAlternative(const QColor &color)
 {
     d->m_routeColorAlternative = color;
 }

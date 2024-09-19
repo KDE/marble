@@ -8,13 +8,13 @@
 
 #include "GeoTagWriter.h"
 
-namespace Marble {
+namespace Marble
+{
 
 class KmlTrackWriter : public GeoTagWriter
 {
-
 public:
-    bool write( const GeoNode *node, GeoWriter &writer ) const override;
+    bool write(const GeoNode *node, GeoWriter &writer) const override;
 };
 
 }

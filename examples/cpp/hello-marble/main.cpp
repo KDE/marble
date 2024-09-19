@@ -9,16 +9,16 @@
 
 using namespace Marble;
 
-int main(int argc, char** argv)
+int main(int argc, char **argv)
 {
-    QApplication app(argc,argv);
+    QApplication app(argc, argv);
 
     // Create a Marble QWidget without a parent
     MarbleWidget *mapWidget = new MarbleWidget();
 
     // Load the OpenStreetMap map
     mapWidget->setMapThemeId(QStringLiteral("earth/openstreetmap/openstreetmap.dgml"));
-//    mapWidget->setMapThemeId(QStringLiteral("earth/vectorosm/vectorosm.dgml"));
+    //    mapWidget->setMapThemeId(QStringLiteral("earth/vectorosm/vectorosm.dgml"));
     mapWidget->centerOn(11.19, 47.68);
     mapWidget->zoomView(2900);
     mapWidget->show();

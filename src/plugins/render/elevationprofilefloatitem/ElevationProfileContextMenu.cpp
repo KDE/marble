@@ -12,14 +12,15 @@
 #include "ElevationProfileFloatItem.h"
 #include "MarbleDebug.h"
 
-namespace Marble {
+namespace Marble
+{
 
-ElevationProfileContextMenu::ElevationProfileContextMenu(ElevationProfileFloatItem *floatItem):
-    QObject(floatItem),
-    m_floatItem(floatItem),
-    m_sourceGrp(nullptr),
-    m_contextMenu(nullptr),
-    m_trackMapper(nullptr)
+ElevationProfileContextMenu::ElevationProfileContextMenu(ElevationProfileFloatItem *floatItem)
+    : QObject(floatItem)
+    , m_floatItem(floatItem)
+    , m_sourceGrp(nullptr)
+    , m_contextMenu(nullptr)
+    , m_trackMapper(nullptr)
 {
 }
 
@@ -28,17 +29,16 @@ QMenu *ElevationProfileContextMenu::getMenu()
     if (!m_contextMenu) {
         m_contextMenu = m_floatItem->contextMenu();
 
-        for ( QAction *action: m_contextMenu->actions() ) {
-            if ( action->text() == tr( "&Configure..." ) ) {
-                m_contextMenu->removeAction( action );
+        for (QAction *action : m_contextMenu->actions()) {
+            if (action->text() == tr("&Configure...")) {
+                m_contextMenu->removeAction(action);
                 break;
             }
         }
 
-        QAction *zoomToViewportAction = m_contextMenu->addAction( tr("&Zoom to viewport"), m_floatItem,
-                                SLOT(toggleZoomToViewport()) );
-        zoomToViewportAction->setCheckable( true );
-        zoomToViewportAction->setChecked( m_floatItem->m_zoomToViewport );
+        QAction *zoomToViewportAction = m_contextMenu->addAction(tr("&Zoom to viewport"), m_floatItem, SLOT(toggleZoomToViewport()));
+        zoomToViewportAction->setCheckable(true);
+        zoomToViewportAction->setChecked(m_floatItem->m_zoomToViewport);
         m_contextMenu->addSeparator();
 
         m_sourceGrp = new QActionGroup(this);
@@ -56,8 +56,8 @@ void ElevationProfileContextMenu::updateContextMenuEntries()
     }
 
     // completely rebuild selection, TODO could be possibly improved to only add/remove items incrementally
-    for (QAction* action: m_selectionActions) {
-        m_contextMenu->removeAction( action );
+    for (QAction *action : m_selectionActions) {
+        m_contextMenu->removeAction(action);
     }
 
     // clear state
@@ -65,20 +65,20 @@ void ElevationProfileContextMenu::updateContextMenuEntries()
     m_selectionActions.clear();
 
     // add route data source (if available)
-    if ( m_floatItem->m_routeDataSource.isDataAvailable()) {
-        QAction *route = new QAction( tr( "Route" ), m_contextMenu );
+    if (m_floatItem->m_routeDataSource.isDataAvailable()) {
+        QAction *route = new QAction(tr("Route"), m_contextMenu);
         route->setActionGroup(m_sourceGrp);
         route->setCheckable(true);
         route->setChecked(m_floatItem->m_activeDataSource == &m_floatItem->m_routeDataSource);
-        connect( route, SIGNAL(triggered()), m_floatItem, SLOT(switchToRouteDataSource()) );
+        connect(route, SIGNAL(triggered()), m_floatItem, SLOT(switchToRouteDataSource()));
         m_selectionActions.append(route);
     }
 
     // add tracks (if available)
-    if ( m_floatItem->m_trackDataSource.isDataAvailable()) {
+    if (m_floatItem->m_trackDataSource.isDataAvailable()) {
         QStringList sources = m_floatItem->m_trackDataSource.sourceDescriptions();
-        for (int i = 0; i<sources.size(); ++i) {
-            QAction *track = new QAction( tr("Track: ") + sources[i], m_contextMenu);
+        for (int i = 0; i < sources.size(); ++i) {
+            QAction *track = new QAction(tr("Track: ") + sources[i], m_contextMenu);
             connect(track, SIGNAL(triggered()), m_trackMapper, SLOT(map()));
             track->setCheckable(true);
             track->setChecked(m_floatItem->m_activeDataSource == &m_floatItem->m_trackDataSource && m_floatItem->m_trackDataSource.currentSourceIndex() == i);
@@ -90,13 +90,13 @@ void ElevationProfileContextMenu::updateContextMenuEntries()
     }
 
     // no route or track available, add disabled action to inform user about it
-    if ( m_selectionActions.isEmpty() ) {
-        QAction *disabledInformationAction = new QAction( tr( "Create a route or load a track from file to view its elevation profile." ), m_contextMenu);
+    if (m_selectionActions.isEmpty()) {
+        QAction *disabledInformationAction = new QAction(tr("Create a route or load a track from file to view its elevation profile."), m_contextMenu);
         disabledInformationAction->setEnabled(false);
         m_selectionActions.append(disabledInformationAction);
     }
 
-    for (QAction *action: m_selectionActions) {
+    for (QAction *action : m_selectionActions) {
         m_contextMenu->addAction(action);
     }
 }

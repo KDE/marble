@@ -18,14 +18,16 @@ class MarbleWidget;
 
 class MarbleTest
 {
- public:
-    explicit MarbleTest( MarbleWidget* marbleWidget );
-    virtual ~MarbleTest(){ }
+public:
+    explicit MarbleTest(MarbleWidget *marbleWidget);
+    virtual ~MarbleTest()
+    {
+    }
 
     void timeDemo();
 
- private:
-    MarbleWidget      *m_marbleWidget;
+private:
+    MarbleWidget *m_marbleWidget;
 };
 
 }

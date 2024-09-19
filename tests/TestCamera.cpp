@@ -5,10 +5,10 @@
 
 #include <QObject>
 
+#include "TestUtils.h"
+#include <GeoDataCamera.h>
 #include <GeoDataDocument.h>
 #include <MarbleDebug.h>
-#include <GeoDataCamera.h>
-#include "TestUtils.h"
 
 using namespace Marble;
 
@@ -22,12 +22,12 @@ private Q_SLOTS:
 
 void TestCamera::initTestCase()
 {
-    MarbleDebug::setEnabled( true );
+    MarbleDebug::setEnabled(true);
 }
 
 void TestCamera::simpleParseTest()
 {
-  QString const kmlContent (
+    QString const kmlContent(
         "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
         "<kml xmlns=\"http://www.opengis.net/kml/2.2\""
         " xmlns:gx=\"http://www.google.com/kml/ext/2.2\">"
@@ -42,26 +42,25 @@ void TestCamera::simpleParseTest()
         "     <altitudeMode>relativeToGround</altitudeMode>"
         "   </Camera>"
         "</Document>"
-        "</kml>" );
+        "</kml>");
 
-    GeoDataDocument* dataDocument = parseKml( kmlContent );
-    GeoDataCamera *camera = dynamic_cast<GeoDataCamera*>( dataDocument->abstractView() );
+    GeoDataDocument *dataDocument = parseKml(kmlContent);
+    GeoDataCamera *camera = dynamic_cast<GeoDataCamera *>(dataDocument->abstractView());
 
-    QVERIFY( camera != nullptr);
+    QVERIFY(camera != nullptr);
 
     GeoDataCoordinates::Unit const degree = GeoDataCoordinates::Degree;
-    QCOMPARE( camera->longitude( degree ), 1.0 );
-    QCOMPARE( camera->latitude( degree ), 2.0 );
-    QCOMPARE( camera->altitude(), 3.0 );
-    QCOMPARE( camera->heading(), 4.0 );
-    QCOMPARE( camera->tilt(), 5.0 );
-    QCOMPARE( camera->roll(), 6.0 );
-    QCOMPARE( camera->altitudeMode(), RelativeToGround );
+    QCOMPARE(camera->longitude(degree), 1.0);
+    QCOMPARE(camera->latitude(degree), 2.0);
+    QCOMPARE(camera->altitude(), 3.0);
+    QCOMPARE(camera->heading(), 4.0);
+    QCOMPARE(camera->tilt(), 5.0);
+    QCOMPARE(camera->roll(), 6.0);
+    QCOMPARE(camera->altitudeMode(), RelativeToGround);
 
     delete dataDocument;
 }
 
-QTEST_MAIN( TestCamera )
+QTEST_MAIN(TestCamera)
 
 #include "TestCamera.moc"
-

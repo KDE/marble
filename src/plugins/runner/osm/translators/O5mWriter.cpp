@@ -5,19 +5,19 @@
 
 #include "O5mWriter.h"
 
+#include "GeoDataBuilding.h"
 #include "GeoDataDocument.h"
 #include "GeoDataLineString.h"
 #include "GeoDataLinearRing.h"
-#include "GeoDataPlacemark.h"
-#include "GeoDataRelation.h"
-#include "GeoDataPolygon.h"
-#include "GeoDataBuilding.h"
 #include "GeoDataMultiGeometry.h"
+#include "GeoDataPlacemark.h"
+#include "GeoDataPolygon.h"
+#include "GeoDataRelation.h"
 #include "GeoWriter.h"
 #include "osm/OsmPlacemarkData.h"
 
-#include <QDataStream>
 #include <QBuffer>
+#include <QDataStream>
 
 namespace Marble
 {
@@ -64,7 +64,7 @@ void O5mWriter::writeNodes(const OsmConverter::Nodes &nodes, QDataStream &stream
 
     QByteArray bufferData;
     QBuffer buffer(&bufferData);
-    for(auto const & node: nodes) {
+    for (auto const &node : nodes) {
         if (node.second.id() == lastId) {
             continue;
         }
@@ -75,11 +75,11 @@ void O5mWriter::writeNodes(const OsmConverter::Nodes &nodes, QDataStream &stream
         buffer.open(QIODevice::WriteOnly);
         QDataStream bufferStream(&buffer);
 
-        OsmPlacemarkData const & osmData = node.second;
+        OsmPlacemarkData const &osmData = node.second;
         qint64 idDiff = osmData.id() - lastId;
         writeSigned(idDiff, bufferStream);
         writeVersion(osmData, bufferStream);
-        GeoDataCoordinates const & coordinates = node.first;
+        GeoDataCoordinates const &coordinates = node.first;
         double const lon = coordinates.longitude(GeoDataCoordinates::Degree);
         double const lat = coordinates.latitude(GeoDataCoordinates::Degree);
         writeSigned(deltaTo(lon, lastLon), bufferStream);
@@ -111,14 +111,14 @@ void O5mWriter::writeWays(const OsmConverter::Ways &ways, QDataStream &stream) c
     QBuffer buffer(&bufferData);
     QByteArray referencesBufferData;
     QBuffer referencesBuffer(&referencesBufferData);
-    for (auto const & way: ways) {
+    for (auto const &way : ways) {
         Q_ASSERT(way.first);
         if (way.second.id() == lastId) {
             continue;
         }
 
         stream << qint8(0x11); // way start indicator
-        OsmPlacemarkData const & osmData = way.second;
+        OsmPlacemarkData const &osmData = way.second;
 
         bufferData.clear();
         buffer.open(QIODevice::WriteOnly);
@@ -154,19 +154,19 @@ void O5mWriter::writeRelations(const OsmConverter::Relations &relations, QDataSt
     stream << qint8(0xff); // reset delta encoding counters
     StringTable stringTable;
     qint64 lastId = 0;
-    qint64 lastReferenceId[3] = { 0, 0, 0 };
+    qint64 lastReferenceId[3] = {0, 0, 0};
 
     QByteArray bufferData;
     QBuffer buffer(&bufferData);
     QByteArray referencesBufferData;
     QBuffer referencesBuffer(&referencesBufferData);
-    for (auto const & relation: relations) {
+    for (auto const &relation : relations) {
         if (relation.second.id() == lastId) {
             continue;
         }
 
         stream << qint8(0x12); // relation start indicator
-        OsmPlacemarkData const & osmData = relation.second;
+        OsmPlacemarkData const &osmData = relation.second;
 
         bufferData.clear();
         buffer.open(QIODevice::WriteOnly);
@@ -182,7 +182,7 @@ void O5mWriter::writeRelations(const OsmConverter::Relations &relations, QDataSt
         QDataStream referencesStream(&referencesBuffer);
         if (const auto placemark = geodata_cast<GeoDataPlacemark>(relation.first)) {
             if (const auto building = geodata_cast<GeoDataBuilding>(placemark->geometry())) {
-                auto polygon = geodata_cast<GeoDataPolygon>(& static_cast<const GeoDataMultiGeometry*>(building->multiGeometry())->at(0));
+                auto polygon = geodata_cast<GeoDataPolygon>(&static_cast<const GeoDataMultiGeometry *>(building->multiGeometry())->at(0));
                 Q_ASSERT(polygon);
                 writeMultipolygonMembers(*polygon, lastReferenceId, osmData, stringTable, referencesStream);
             } else {
@@ -212,7 +212,11 @@ void O5mWriter::writeTrailer(QDataStream &stream) const
     stream << qint8(0xfe); // o5m file end indicator
 }
 
-void O5mWriter::writeMultipolygonMembers(const GeoDataPolygon &polygon, qint64 (&lastId)[3], const OsmPlacemarkData &osmData, StringTable &stringTable, QDataStream &stream) const
+void O5mWriter::writeMultipolygonMembers(const GeoDataPolygon &polygon,
+                                         qint64 (&lastId)[3],
+                                         const OsmPlacemarkData &osmData,
+                                         StringTable &stringTable,
+                                         QDataStream &stream) const
 {
     qint64 id = osmData.memberReference(-1).id();
     qint64 idDiff = id - lastId[(int)OsmType::Way];
@@ -220,7 +224,7 @@ void O5mWriter::writeMultipolygonMembers(const GeoDataPolygon &polygon, qint64 (
     lastId[(int)OsmType::Way] = id;
     writeStringPair(StringPair("1outer", QString()), stringTable, stream); // type=way, role=outer
     for (int index = 0; index < polygon.innerBoundaries().size(); ++index) {
-        id = osmData.memberReference( index ).id();
+        id = osmData.memberReference(index).id();
         qint64 idDiff = id - lastId[(int)OsmType::Way];
         writeSigned(idDiff, stream);
         writeStringPair(StringPair("1inner", QString()), stringTable, stream); // type=way, role=inner
@@ -228,7 +232,11 @@ void O5mWriter::writeMultipolygonMembers(const GeoDataPolygon &polygon, qint64 (
     }
 }
 
-void O5mWriter::writeRelationMembers(const GeoDataRelation *relation, qint64 (&lastId)[3], const OsmPlacemarkData &osmData, O5mWriter::StringTable &stringTable, QDataStream &stream) const
+void O5mWriter::writeRelationMembers(const GeoDataRelation *relation,
+                                     qint64 (&lastId)[3],
+                                     const OsmPlacemarkData &osmData,
+                                     O5mWriter::StringTable &stringTable,
+                                     QDataStream &stream) const
 {
     Q_UNUSED(relation);
     for (auto iter = osmData.relationReferencesBegin(), end = osmData.relationReferencesEnd(); iter != end; ++iter) {
@@ -246,8 +254,8 @@ void O5mWriter::writeReferences(const GeoDataLineString &lineString, qint64 &las
     QVector<GeoDataCoordinates>::const_iterator it = lineString.constBegin();
     QVector<GeoDataCoordinates>::ConstIterator const end = lineString.constEnd();
 
-    for ( ; it != end; ++it ) {
-        qint64 id = osmData.nodeReference( *it ).id();
+    for (; it != end; ++it) {
+        qint64 id = osmData.nodeReference(*it).id();
         qint64 idDiff = id - lastId;
         writeSigned(idDiff, stream);
         lastId = id;
@@ -282,7 +290,7 @@ void O5mWriter::writeTags(const OsmPlacemarkData &osmData, StringTable &stringTa
         m_blacklistedTags << QStringLiteral("mx:action");
     }
 
-    for (auto iter=osmData.tagsBegin(), end = osmData.tagsEnd(); iter != end; ++iter) {
+    for (auto iter = osmData.tagsBegin(), end = osmData.tagsEnd(); iter != end; ++iter) {
         if (!m_blacklistedTags.contains(iter.key())) {
             writeStringPair(StringPair(iter.key(), iter.value()), stringTable, stream);
         }
@@ -326,8 +334,8 @@ void O5mWriter::writeSigned(qint64 value, QDataStream &stream) const
     if (negative) {
         value = -value - 1;
     }
-    quint8 word = (value >> 6) > 0 ? (1<<7) : 0;
-    word |= ( (value << 1) & 0x7e);
+    quint8 word = (value >> 6) > 0 ? (1 << 7) : 0;
+    word |= ((value << 1) & 0x7e);
     if (negative) {
         word |= 0x01;
     }

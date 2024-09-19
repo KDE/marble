@@ -10,10 +10,10 @@
 #include <QStringView>
 
 #include "GPXElementDictionary.h"
-#include "GeoParser.h"
 #include "GeoDataDocument.h"
 #include "GeoDataPlacemark.h"
 #include "GeoDataPoint.h"
+#include "GeoParser.h"
 
 namespace Marble
 {
@@ -21,14 +21,13 @@ namespace gpx
 {
 GPX_DEFINE_TAG_HANDLER(wpt)
 
-GeoNode* GPXwptTagHandler::parse(GeoParser& parser) const
+GeoNode *GPXwptTagHandler::parse(GeoParser &parser) const
 {
     Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1String(gpxTag_wpt)));
 
     GeoStackItem parentItem = parser.parentElement();
-    if (parentItem.represents(gpxTag_gpx))
-    {
-        GeoDataDocument* doc = parentItem.nodeAs<GeoDataDocument>();
+    if (parentItem.represents(gpxTag_gpx)) {
+        GeoDataDocument *doc = parentItem.nodeAs<GeoDataDocument>();
         GeoDataPlacemark *placemark = new GeoDataPlacemark;
 
         QXmlStreamAttributes attributes = parser.attributes();
@@ -36,16 +35,14 @@ GeoNode* GPXwptTagHandler::parse(GeoParser& parser) const
         qreal lat = 0;
         qreal lon = 0;
         tmp = attributes.value(QLatin1String(gpxTag_lat));
-        if ( !tmp.isEmpty() )
-        {
+        if (!tmp.isEmpty()) {
             lat = tmp.toString().toFloat();
         }
         tmp = attributes.value(QLatin1String(gpxTag_lon));
-        if ( !tmp.isEmpty() )
-        {
+        if (!tmp.isEmpty()) {
             lon = tmp.toString().toFloat();
         }
-        placemark->setCoordinate( lon, lat, 0, GeoDataCoordinates::Degree );
+        placemark->setCoordinate(lon, lat, 0, GeoDataCoordinates::Degree);
         placemark->setRole(QStringLiteral("Waypoint"));
 
         placemark->setStyle(doc->style(QStringLiteral("waypoint")));

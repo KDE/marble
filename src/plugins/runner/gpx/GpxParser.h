@@ -7,7 +7,8 @@
 
 #include "GeoParser.h"
 
-namespace Marble {
+namespace Marble
+{
 
 class GpxParser : public GeoParser
 {
@@ -16,11 +17,10 @@ public:
     ~GpxParser() override;
 
 private:
-    bool isValidElement(const QString& tagName) const override;
+    bool isValidElement(const QString &tagName) const override;
     bool isValidRootElement() override;
 
-    GeoDocument* createDocument() const override;
-
+    GeoDocument *createDocument() const override;
 };
 
 }

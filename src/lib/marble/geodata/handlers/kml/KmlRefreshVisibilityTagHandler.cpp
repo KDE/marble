@@ -15,16 +15,16 @@ namespace Marble
 namespace kml
 {
 
-KML_DEFINE_TAG_HANDLER( refreshVisibility )
+KML_DEFINE_TAG_HANDLER(refreshVisibility)
 
-GeoNode *KmlrefreshVisibilityTagHandler::parse(GeoParser & parser) const
+GeoNode *KmlrefreshVisibilityTagHandler::parse(GeoParser &parser) const
 {
     Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1String(kmlTag_refreshVisibility)));
 
     GeoStackItem parentItem = parser.parentElement();
-    if( parentItem.is<GeoDataNetworkLink>() ) {
+    if (parentItem.is<GeoDataNetworkLink>()) {
         QString content = parser.readElementText().trimmed();
-        GeoDataNetworkLink* networkLink = parentItem.nodeAs<GeoDataNetworkLink>();
+        GeoDataNetworkLink *networkLink = parentItem.nodeAs<GeoDataNetworkLink>();
         networkLink->setRefreshVisibility(content == QLatin1String("1"));
     }
 

@@ -3,7 +3,6 @@
 // SPDX-FileCopyrightText: 2013 Mihail Ivchenko <ematirov@gmail.com>
 //
 
-
 #ifndef MARBLE_CYCLESTREETSPLUGIN_H
 #define MARBLE_CYCLESTREETSPLUGIN_H
 
@@ -16,10 +15,10 @@ class CycleStreetsPlugin : public RoutingRunnerPlugin
 {
     Q_OBJECT
     Q_PLUGIN_METADATA(IID "org.kde.marble.CycleStreetsPlugin")
-    Q_INTERFACES( Marble::RoutingRunnerPlugin )
+    Q_INTERFACES(Marble::RoutingRunnerPlugin)
 
 public:
-    explicit CycleStreetsPlugin( QObject *parent = nullptr );
+    explicit CycleStreetsPlugin(QObject *parent = nullptr);
 
     QString name() const override;
 
@@ -37,10 +36,9 @@ public:
 
     RoutingRunner *newRunner() const override;
 
-    ConfigWidget* configWidget() override;
+    ConfigWidget *configWidget() override;
 
-    bool supportsTemplate( RoutingProfilesModel::ProfileTemplate profileTemplate ) const override;
-
+    bool supportsTemplate(RoutingProfilesModel::ProfileTemplate profileTemplate) const override;
 };
 
 }

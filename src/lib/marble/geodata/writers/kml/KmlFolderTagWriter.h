@@ -15,10 +15,10 @@ namespace Marble
 class KmlFolderTagWriter : public KmlFeatureTagWriter
 {
 public:
-  KmlFolderTagWriter();
+    KmlFolderTagWriter();
 
 protected:
-    bool writeMid( const GeoNode *node, GeoWriter& writer ) const override;
+    bool writeMid(const GeoNode *node, GeoWriter &writer) const override;
 };
 
 }

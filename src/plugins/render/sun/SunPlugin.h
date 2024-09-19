@@ -23,12 +23,12 @@ class SunPlugin : public RenderPlugin
 {
     Q_OBJECT
     Q_PLUGIN_METADATA(IID "org.kde.marble.SunPlugin")
-    Q_INTERFACES( Marble::RenderPluginInterface )
-    MARBLE_PLUGIN( SunPlugin )
- public:
+    Q_INTERFACES(Marble::RenderPluginInterface)
+    MARBLE_PLUGIN(SunPlugin)
+public:
     SunPlugin();
 
-    explicit SunPlugin( const MarbleModel *marbleModel );
+    explicit SunPlugin(const MarbleModel *marbleModel);
 
     QStringList backendTypes() const override;
 
@@ -50,13 +50,13 @@ class SunPlugin : public RenderPlugin
 
     QVector<PluginAuthor> pluginAuthors() const override;
 
-    QIcon icon () const override;
+    QIcon icon() const override;
 
-    void initialize () override;
+    void initialize() override;
 
-    bool isInitialized () const override;
+    bool isInitialized() const override;
 
-    bool render( GeoPainter *painter, ViewportParams *viewport, const QString& renderPos, GeoSceneLayer * layer = nullptr ) override;
+    bool render(GeoPainter *painter, ViewportParams *viewport, const QString &renderPos, GeoSceneLayer *layer = nullptr) override;
 
 private:
     QPixmap m_pixmap;

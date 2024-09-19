@@ -13,7 +13,8 @@
 #ifndef MARBLE_CELESTIALSORTFILTERPROXYMODEL_H
 #define MARBLE_CELESTIALSORTFILTERPROXYMODEL_H
 
-namespace Marble {
+namespace Marble
+{
 
 /**
  * @brief The CelestialSortFilterProxyModel class is a proxy used by both

@@ -16,21 +16,21 @@ namespace dgml
 {
 DGML_DEFINE_TAG_HANDLER(TileSize)
 
-GeoNode* DgmlTileSizeTagHandler::parse( GeoParser& parser ) const
+GeoNode *DgmlTileSizeTagHandler::parse(GeoParser &parser) const
 {
     // Check whether the tag is valid
     Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1String(dgmlTag_TileSize)));
 
     // Checking for parent item
     GeoStackItem parentItem = parser.parentElement();
-    if ( !parentItem.represents( dgmlTag_Texture ) && !parentItem.represents( dgmlTag_Vectortile ))
+    if (!parentItem.represents(dgmlTag_Texture) && !parentItem.represents(dgmlTag_Vectortile))
         return nullptr;
 
     int width = parser.attribute(dgmlAttr_width).toInt();
     int height = parser.attribute(dgmlAttr_height).toInt();
-    QSize const size( width, height );
-    if ( !size.isEmpty() ) {
-        parentItem.nodeAs<GeoSceneTileDataset>()->setTileSize( size );
+    QSize const size(width, height);
+    if (!size.isEmpty()) {
+        parentItem.nodeAs<GeoSceneTileDataset>()->setTileSize(size);
     }
 
     return nullptr;

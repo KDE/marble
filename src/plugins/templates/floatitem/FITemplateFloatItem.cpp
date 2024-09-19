@@ -3,36 +3,33 @@
 // SPDX-FileCopyrightText: 2008 Inge Wallin <inge@lysator.liu.se>
 //
 
-
 // Local
 #include "FITemplateFloatItem.h"
 
 // Qt
-#include <QRect>
 #include <QColor>
+#include <QRect>
 #include <QSvgRenderer>
 
 // Marble
+#include "GeoDataCoordinates.h"
+#include "GeoPainter.h"
 #include "MarbleDebug.h"
 #include "MarbleDirs.h"
-#include "GeoPainter.h"
-#include "GeoDataCoordinates.h"
 #include "ViewportParams.h"
 
 namespace Marble
 {
 
-FITemplateFloatItem::FITemplateFloatItem ( const QPointF &point,
-					    const QSizeF &size )
-    : AbstractFloatItem( point, size ),
-      m_compass(),
-      m_polarity( 0 )
+FITemplateFloatItem::FITemplateFloatItem(const QPointF &point, const QSizeF &size)
+    : AbstractFloatItem(point, size)
+    , m_compass()
+    , m_polarity(0)
 {
-    m_svgobj = new QSvgRenderer(MarbleDirs::path(QStringLiteral("svg/compass.svg")),
-                                 this );
+    m_svgobj = new QSvgRenderer(MarbleDirs::path(QStringLiteral("svg/compass.svg")), this);
 }
 
-FITemplateFloatItem::~FITemplateFloatItem ()
+FITemplateFloatItem::~FITemplateFloatItem()
 {
     delete m_svgobj;
 }
@@ -44,12 +41,12 @@ QStringList FITemplateFloatItem::backendTypes() const
 
 QString FITemplateFloatItem::name() const
 {
-    return tr( "FITemplate" );
+    return tr("FITemplate");
 }
 
 QString FITemplateFloatItem::guiString() const
 {
-    return tr( "Float Item &Template" );
+    return tr("Float Item &Template");
 }
 
 QString FITemplateFloatItem::nameId() const
@@ -59,21 +56,20 @@ QString FITemplateFloatItem::nameId() const
 
 QString FITemplateFloatItem::description() const
 {
-    return tr( "This is a template class for float items." );
+    return tr("This is a template class for float items.");
 }
 
-QIcon FITemplateFloatItem::icon () const
+QIcon FITemplateFloatItem::icon() const
 {
     return QIcon();
 }
 
-
-void FITemplateFloatItem::initialize ()
+void FITemplateFloatItem::initialize()
 {
     // Initialize your float item here
 }
 
-bool FITemplateFloatItem::isInitialized () const
+bool FITemplateFloatItem::isInitialized() const
 {
     // Return whether your float item is initialized here.
     return true;
@@ -85,16 +81,14 @@ QPainterPath FITemplateFloatItem::backgroundShape() const
     // your float item.
 }
 
-bool FITemplateFloatItem::needsUpdate( ViewportParams *viewport )
+bool FITemplateFloatItem::needsUpdate(ViewportParams *viewport)
 {
     // Return whether your float item needs to be redrawn.
 }
 
-bool FITemplateFloatItem::renderFloatItem( GeoPainter     *painter,
-					   ViewportParams *viewport,
-					   GeoSceneLayer  *layer )
+bool FITemplateFloatItem::renderFloatItem(GeoPainter *painter, ViewportParams *viewport, GeoSceneLayer *layer)
 {
-    // Here you should render your float item 
+    // Here you should render your float item
 }
 
 }

@@ -16,18 +16,13 @@ class GeoPainter;
 class TextureColorizer;
 class ViewportParams;
 
-
 class TextureMapperInterface
 {
 public:
     TextureMapperInterface();
     virtual ~TextureMapperInterface();
 
-    virtual void mapTexture( GeoPainter *painter,
-                             const ViewportParams *viewport,
-                             int tileZoomLevel,
-                             const QRect &dirtyRect,
-                             TextureColorizer *texColorizer ) = 0;
+    virtual void mapTexture(GeoPainter *painter, const ViewportParams *viewport, int tileZoomLevel, const QRect &dirtyRect, TextureColorizer *texColorizer) = 0;
 
     void setRepaintNeeded();
 

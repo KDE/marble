@@ -13,9 +13,9 @@ class TextureTile;
 
 class Blending
 {
- public:
+public:
     virtual ~Blending();
-    virtual void blend( QImage * const bottom, TextureTile const * const top ) const = 0;
+    virtual void blend(QImage *const bottom, TextureTile const *const top) const = 0;
 };
 
 }

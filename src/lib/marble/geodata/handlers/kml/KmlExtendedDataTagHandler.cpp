@@ -7,10 +7,10 @@
 
 #include "MarbleDebug.h"
 
-#include "KmlElementDictionary.h"
 #include "GeoDataExtendedData.h"
 #include "GeoDataFeature.h"
 #include "GeoDataTrack.h"
+#include "KmlElementDictionary.h"
 
 #include "GeoParser.h"
 
@@ -18,26 +18,25 @@ namespace Marble
 {
 namespace kml
 {
-KML_DEFINE_TAG_HANDLER( ExtendedData )
+KML_DEFINE_TAG_HANDLER(ExtendedData)
 
-GeoNode* KmlExtendedDataTagHandler::parse( GeoParser& parser ) const
+GeoNode *KmlExtendedDataTagHandler::parse(GeoParser &parser) const
 {
     Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1String(kmlTag_ExtendedData)));
 
     GeoStackItem parentItem = parser.parentElement();
 
-    if( parentItem.is<GeoDataFeature>() ) {
+    if (parentItem.is<GeoDataFeature>()) {
         GeoDataExtendedData extendedData;
-        parentItem.nodeAs<GeoDataFeature>()->setExtendedData( extendedData );
-        return static_cast<GeoDataExtendedData*>( &parentItem.nodeAs<GeoDataFeature>()->extendedData() );
-    } else if( parentItem.is<GeoDataTrack>() ) {
+        parentItem.nodeAs<GeoDataFeature>()->setExtendedData(extendedData);
+        return static_cast<GeoDataExtendedData *>(&parentItem.nodeAs<GeoDataFeature>()->extendedData());
+    } else if (parentItem.is<GeoDataTrack>()) {
         GeoDataExtendedData extendedData;
-        parentItem.nodeAs<GeoDataTrack>()->setExtendedData( extendedData );
-        return static_cast<GeoDataExtendedData*>( &parentItem.nodeAs<GeoDataTrack>()->extendedData() );
+        parentItem.nodeAs<GeoDataTrack>()->setExtendedData(extendedData);
+        return static_cast<GeoDataExtendedData *>(&parentItem.nodeAs<GeoDataTrack>()->extendedData());
     } else {
         return nullptr;
     }
-
 }
 
 }

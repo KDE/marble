@@ -7,17 +7,17 @@
 #include <QQmlApplicationEngine>
 #include <QtQuick>
 
+#include "MarbleDirs.h"
+#include "MarbleMaps.h"
+#include "TextToSpeechClient.h"
 #include "declarative/MarbleDeclarativePlugin.h"
 #include <MarbleGlobal.h>
-#include "MarbleMaps.h"
-#include "MarbleDirs.h"
-#include "TextToSpeechClient.h"
 
 using namespace Marble;
 
 static bool loadTranslator(const QString &fullPath, QApplication &app)
 {
-    QTranslator* translator = new QTranslator(&app);
+    QTranslator *translator = new QTranslator(&app);
     if (!translator->load(fullPath)) {
         delete translator;
         return false;
@@ -88,12 +88,13 @@ static void loadTranslations(QApplication &app)
 // on loading the "app" module
 extern "C" Q_DECL_EXPORT
 #endif
-int main(int argc, char ** argv)
+    int
+    main(int argc, char **argv)
 {
     QApplication app(argc, argv);
-    app.setApplicationName( "Marble Maps" );
-    app.setOrganizationName( "KDE" );
-    app.setOrganizationDomain( "kde.org" );
+    app.setApplicationName("Marble Maps");
+    app.setOrganizationName("KDE");
+    app.setOrganizationDomain("kde.org");
     app.setDesktopFileName(QStringLiteral("org.kde.marble.maps"));
 
     // Load Qt translation system catalog for libmarblewidget, the plugins and this app
@@ -105,7 +106,7 @@ int main(int argc, char ** argv)
     qmlRegisterType<MarbleMaps>(uri, 0, 20, "MarbleMaps");
 
     QQmlApplicationEngine engine;
-    TextToSpeechClient * tts = new TextToSpeechClient(&engine);
+    TextToSpeechClient *tts = new TextToSpeechClient(&engine);
     engine.rootContext()->setContextProperty("textToSpeechClient", tts);
     engine.load(QUrl("qrc:/MainScreen.qml"));
     // @todo Ship translations and only fall back to english if no translations for the system locale are installed

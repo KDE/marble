@@ -34,57 +34,62 @@ class MARBLE_EXPORT MarbleLegendBrowser : public MarbleWebView
 {
     Q_OBJECT
 
- public:
-    explicit MarbleLegendBrowser( QWidget* parent );
+public:
+    explicit MarbleLegendBrowser(QWidget *parent);
     ~MarbleLegendBrowser() override;
 
-    void setMarbleModel( MarbleModel *marbleModel );
+    void setMarbleModel(MarbleModel *marbleModel);
     QSize sizeHint() const override;
 
- Q_SIGNALS:
-    void toggledShowProperty( const QString&, bool );
-    void tourLinkClicked( const QString &url );
+Q_SIGNALS:
+    void toggledShowProperty(const QString &, bool);
+    void tourLinkClicked(const QString &url);
 
- public Q_SLOTS:
-    void setCheckedProperty( const QString& name, bool checked );
-    void setRadioCheckedProperty( const QString& value,const QString& name, bool checked );
+public Q_SLOTS:
+    void setCheckedProperty(const QString &name, bool checked);
+    void setRadioCheckedProperty(const QString &value, const QString &name, bool checked);
 
- private Q_SLOTS:
+private Q_SLOTS:
     void initTheme();
     void loadLegend();
-    void openLinkExternally( const QUrl &url );
+    void openLinkExternally(const QUrl &url);
 
- protected:
-    bool event( QEvent * event ) override;
+protected:
+    bool event(QEvent *event) override;
     static QString readHtml(const QUrl &name);
-    QString  generateSectionsHtml();
+    QString generateSectionsHtml();
     static void translateHtml(QString &html);
 
- private:
-    void injectWebChannel( QString &html );
-    void reverseSupportCheckboxes( QString &html );
- private:
-    Q_DISABLE_COPY( MarbleLegendBrowser )
-    MarbleLegendBrowserPrivate  * const d;
+private:
+    void injectWebChannel(QString &html);
+    void reverseSupportCheckboxes(QString &html);
+
+private:
+    Q_DISABLE_COPY(MarbleLegendBrowser)
+    MarbleLegendBrowserPrivate *const d;
 };
 
 class MarbleJsWrapper : public QObject
 {
     Q_OBJECT
 public:
-    explicit MarbleJsWrapper( MarbleLegendBrowser* parent ) : m_parent(parent) {}
+    explicit MarbleJsWrapper(MarbleLegendBrowser *parent)
+        : m_parent(parent)
+    {
+    }
 
 public Q_SLOTS:
-    void setCheckedProperty( const QString& name, bool checked )
+    void setCheckedProperty(const QString &name, bool checked)
     {
         m_parent->setCheckedProperty(name, checked);
     }
-    void setRadioCheckedProperty( const QString& value,const QString& name, bool checked )
+    void setRadioCheckedProperty(const QString &value, const QString &name, bool checked)
     {
         m_parent->setRadioCheckedProperty(value, name, checked);
     }
+
 private:
-    MarbleLegendBrowser * m_parent;
+    MarbleLegendBrowser *m_parent;
 };
 
 }

@@ -7,25 +7,26 @@
 //
 
 #include "OsmParser.h"
-#include "OsmElementDictionary.h"
-#include "osm/OsmObjectManager.h"
 #include "GeoDataDocument.h"
 #include "GeoDataPoint.h"
-#include "GeoDataStyle.h"
 #include "GeoDataPolyStyle.h"
-#include <MarbleZipReader.h>
-#include "o5mreader.h"
+#include "GeoDataStyle.h"
+#include "OsmElementDictionary.h"
 #include "OsmPbfParser.h"
+#include "o5mreader.h"
+#include "osm/OsmObjectManager.h"
+#include <MarbleZipReader.h>
 
+#include <QBuffer>
 #include <QColor>
 #include <QFile>
 #include <QFileInfo>
-#include <QBuffer>
 #include <QSet>
 
 #include <MarbleDebug.h>
 
-namespace Marble {
+namespace Marble
+{
 
 GeoDataDocument *OsmParser::parse(const QString &filename, QString &error)
 {
@@ -44,9 +45,9 @@ GeoDataDocument *OsmParser::parse(const QString &filename, QString &error)
     }
 }
 
-GeoDataDocument* OsmParser::parseO5m(const QString &filename, QString &error)
+GeoDataDocument *OsmParser::parseO5m(const QString &filename, QString &error)
 {
-    O5mreader* reader;
+    O5mreader *reader;
     O5mreaderDataset data;
     O5mreaderIterateRet outerState, innerState;
     char *key, *value;
@@ -67,23 +68,19 @@ GeoDataDocument* OsmParser::parseO5m(const QString &filename, QString &error)
     // Only executed if the opened file is not truncated, starts correctly, and
     // if memory for the reader and its O5M StringPairTable was fully allocated.
     if (success != O5MREADER_ERR_CODE_OK) {
-        while( (outerState = o5mreader_iterateDataSet(reader, &data)) == O5MREADER_ITERATE_RET_NEXT) {
+        while ((outerState = o5mreader_iterateDataSet(reader, &data)) == O5MREADER_ITERATE_RET_NEXT) {
             switch (data.type) {
-            case O5MREADER_DS_NODE:
-            {
-                OsmNode& node = nodes[data.id];
+            case O5MREADER_DS_NODE: {
+                OsmNode &node = nodes[data.id];
                 node.osmData().setId(data.id);
-                node.setCoordinates(GeoDataCoordinates(data.lon*1.0e-7, data.lat*1.0e-7,
-                                                       0.0, GeoDataCoordinates::Degree));
+                node.setCoordinates(GeoDataCoordinates(data.lon * 1.0e-7, data.lat * 1.0e-7, 0.0, GeoDataCoordinates::Degree));
                 while ((innerState = o5mreader_iterateTags(reader, &key, &value)) == O5MREADER_ITERATE_RET_NEXT) {
                     const QString keyString = *stringPool.insert(QString::fromUtf8(key));
                     const QString valueString = *stringPool.insert(QString::fromUtf8(value));
                     node.osmData().addTag(keyString, valueString);
                 }
-            }
-                break;
-            case O5MREADER_DS_WAY:
-            {
+            } break;
+            case O5MREADER_DS_WAY: {
                 OsmWay &way = ways[data.id];
                 way.osmData().setId(data.id);
                 uint64_t nodeId;
@@ -95,10 +92,8 @@ GeoDataDocument* OsmParser::parseO5m(const QString &filename, QString &error)
                     const QString valueString = *stringPool.insert(QString::fromUtf8(value));
                     way.osmData().addTag(keyString, valueString);
                 }
-            }
-                break;
-            case O5MREADER_DS_REL:
-            {
+            } break;
+            case O5MREADER_DS_REL: {
                 OsmRelation &relation = relations[data.id];
                 relation.osmData().setId(data.id);
                 char *role;
@@ -113,20 +108,20 @@ GeoDataDocument* OsmParser::parseO5m(const QString &filename, QString &error)
                     const QString valueString = *stringPool.insert(QString::fromUtf8(value));
                     relation.osmData().addTag(keyString, valueString);
                 }
-            }
-                break;
+            } break;
             }
         }
     }
 
     fclose(file);
     error = reader->errMsg;
-    if (!error.isEmpty()) mDebug() << error;
+    if (!error.isEmpty())
+        mDebug() << error;
     o5mreader_close(reader);
     return createDocument(nodes, ways, relations);
 }
 
-GeoDataDocument* OsmParser::parseXml(const QString &filename, QString &error)
+GeoDataDocument *OsmParser::parseXml(const QString &filename, QString &error)
 {
     QXmlStreamReader parser;
     QFile file;
@@ -152,7 +147,7 @@ GeoDataDocument* OsmParser::parseXml(const QString &filename, QString &error)
         parser.setDevice(&file);
     }
 
-    OsmPlacemarkData* osmData(nullptr);
+    OsmPlacemarkData *osmData(nullptr);
     QString parentTag;
     qint64 parentId(0);
     // share string data on the heap at least for this file
@@ -169,10 +164,8 @@ GeoDataDocument* OsmParser::parseXml(const QString &filename, QString &error)
         }
 
         QStringView const tagName = parser.name();
-        if (tagName == QStringView(QString::fromUtf8(osm::osmTag_node)) ||
-            tagName == QStringView(QString::fromUtf8(osm::osmTag_way))  ||
-            tagName == QStringView(QString::fromUtf8(osm::osmTag_relation)))
-        {
+        if (tagName == QStringView(QString::fromUtf8(osm::osmTag_node)) || tagName == QStringView(QString::fromUtf8(osm::osmTag_way))
+            || tagName == QStringView(QString::fromUtf8(osm::osmTag_relation))) {
             parentTag = parser.name().toString();
             parentId = parser.attributes().value(QLatin1String("id")).toLongLong();
 
@@ -208,7 +201,7 @@ GeoDataDocument* OsmParser::parseXml(const QString &filename, QString &error)
     return createDocument(m_nodes, m_ways, m_relations);
 }
 
-GeoDataDocument* OsmParser::parseOsmPbf(const QString &filename, QString &error)
+GeoDataDocument *OsmParser::parseOsmPbf(const QString &filename, QString &error)
 {
     QFile f(filename);
     if (!f.open(QFile::ReadOnly)) {
@@ -224,26 +217,26 @@ GeoDataDocument* OsmParser::parseOsmPbf(const QString &filename, QString &error)
 
 GeoDataDocument *OsmParser::createDocument(OsmNodes &nodes, OsmWays &ways, OsmRelations &relations)
 {
-    GeoDataDocument* document = new GeoDataDocument;
+    GeoDataDocument *document = new GeoDataDocument;
     GeoDataPolyStyle backgroundPolyStyle;
-    backgroundPolyStyle.setFill( true );
-    backgroundPolyStyle.setOutline( false );
+    backgroundPolyStyle.setFill(true);
+    backgroundPolyStyle.setOutline(false);
     backgroundPolyStyle.setColor(QStringLiteral("#f1eee8"));
     GeoDataStyle::Ptr backgroundStyle(new GeoDataStyle);
-    backgroundStyle->setPolyStyle( backgroundPolyStyle );
+    backgroundStyle->setPolyStyle(backgroundPolyStyle);
     backgroundStyle->setId(QStringLiteral("background"));
-    document->addStyle( backgroundStyle );
+    document->addStyle(backgroundStyle);
 
     QSet<qint64> usedNodes, usedWays;
-    for(auto const &relation: relations) {
+    for (auto const &relation : relations) {
         relation.createMultipolygon(document, ways, nodes, usedNodes, usedWays);
     }
-    for(auto id: usedWays) {
+    for (auto id : usedWays) {
         ways.remove(id);
     }
 
-    QHash<qint64, GeoDataPlacemark*> placemarks;
-    for (auto iter=ways.constBegin(), end=ways.constEnd(); iter != end; ++iter) {
+    QHash<qint64, GeoDataPlacemark *> placemarks;
+    for (auto iter = ways.constBegin(), end = ways.constEnd(); iter != end; ++iter) {
         auto placemark = iter.value().create(nodes, usedNodes);
         if (placemark) {
             document->append(placemark);
@@ -251,13 +244,13 @@ GeoDataDocument *OsmParser::createDocument(OsmNodes &nodes, OsmWays &ways, OsmRe
         }
     }
 
-    for(auto id: usedNodes) {
+    for (auto id : usedNodes) {
         if (nodes[id].osmData().isEmpty()) {
             nodes.remove(id);
         }
     }
 
-    for(auto const &node: nodes) {
+    for (auto const &node : nodes) {
         auto placemark = node.create();
         if (placemark) {
             document->append(placemark);
@@ -265,7 +258,7 @@ GeoDataDocument *OsmParser::createDocument(OsmNodes &nodes, OsmWays &ways, OsmRe
         }
     }
 
-    for(auto const &relation: relations) {
+    for (auto const &relation : relations) {
         relation.createRelation(document, placemarks);
     }
 

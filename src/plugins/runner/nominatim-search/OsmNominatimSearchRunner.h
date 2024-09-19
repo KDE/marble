@@ -3,15 +3,14 @@
 // SPDX-FileCopyrightText: 2010 Dennis Nienhüser <nienhueser@kde.org>
 //
 
-
 #ifndef MARBLE_OSMNOMINATIMSEARCHRUNNER_H
 #define MARBLE_OSMNOMINATIMSEARCHRUNNER_H
 
 #include "SearchRunner.h"
 
-#include <QString>
 #include <QNetworkAccessManager>
 #include <QNetworkRequest>
+#include <QString>
 
 class QNetworkReply;
 class QDomNode;
@@ -28,11 +27,11 @@ public:
 
     ~OsmNominatimRunner() override;
 
-    void search( const QString &searchTerm, const GeoDataLatLonBox &preferred ) override;
+    void search(const QString &searchTerm, const GeoDataLatLonBox &preferred) override;
 
 private Q_SLOTS:
     // Forward a result to the search or reverse geocoding handler
-    void handleResult( QNetworkReply* );
+    void handleResult(QNetworkReply *);
 
     // No results (or an error)
     void returnNoResults();

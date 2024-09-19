@@ -12,14 +12,14 @@
 namespace Marble
 {
 
-GeoSceneVectorTileDataset::GeoSceneVectorTileDataset( const QString& name )
-    : GeoSceneTileDataset( name ){
+GeoSceneVectorTileDataset::GeoSceneVectorTileDataset(const QString &name)
+    : GeoSceneTileDataset(name)
+{
 }
 
-const char* GeoSceneVectorTileDataset::nodeType() const
+const char *GeoSceneVectorTileDataset::nodeType() const
 {
     return GeoSceneTypes::GeoSceneVectorTileType;
 }
 
 }
-

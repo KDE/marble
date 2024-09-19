@@ -11,23 +11,21 @@
 
 #include "PositionProviderPlugin.h"
 
-
-
 namespace GeoCute
 {
-    class PositionProvider;
+class PositionProvider;
 }
 
 namespace Marble
 {
 
-class GeoCluePositionProviderPlugin: public PositionProviderPlugin
+class GeoCluePositionProviderPlugin : public PositionProviderPlugin
 {
     Q_OBJECT
     Q_PLUGIN_METADATA(IID "org.kde.marble.GeoCluePositionProviderPlugin")
-    Q_INTERFACES( Marble::PositionProviderPluginInterface )
+    Q_INTERFACES(Marble::PositionProviderPluginInterface)
 
- public:
+public:
     GeoCluePositionProviderPlugin();
     virtual ~GeoCluePositionProviderPlugin();
 
@@ -39,25 +37,23 @@ class GeoCluePositionProviderPlugin: public PositionProviderPlugin
     virtual void initialize();
     virtual bool isInitialized() const;
 
-    virtual PositionProviderPlugin * newInstance() const;
+    virtual PositionProviderPlugin *newInstance() const;
 
     virtual PositionProviderStatus status() const;
     virtual GeoDataCoordinates position() const;
     virtual GeoDataAccuracy accuracy() const;
-    
- private:
-    GeoCute::PositionProvider* m_positionProvider;
+
+private:
+    GeoCute::PositionProvider *m_positionProvider;
     PositionProviderStatus m_status;
     GeoDataCoordinates m_position;
     GeoDataAccuracy m_accuracy;
-    
- private Q_SLOTS:
+
+private Q_SLOTS:
     void updatePosition(GeoCute::Position newPosition);
     void updateStatus(GeoCute::Status newStatus);
 };
 
 }
-
-
 
 #endif

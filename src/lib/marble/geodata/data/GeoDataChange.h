@@ -21,19 +21,19 @@ class GEODATA_EXPORT GeoDataChange : public GeoDataContainer
 public:
     GeoDataChange();
 
-    GeoDataChange( const GeoDataChange &other );
+    GeoDataChange(const GeoDataChange &other);
 
     ~GeoDataChange() override;
 
-    GeoDataChange& operator=( const GeoDataChange &other );
+    GeoDataChange &operator=(const GeoDataChange &other);
 
-    bool operator==( const GeoDataChange &other ) const;
-    bool operator!=( const GeoDataChange &other ) const;
+    bool operator==(const GeoDataChange &other) const;
+    bool operator!=(const GeoDataChange &other) const;
 
-    GeoDataFeature * clone() const override;
+    GeoDataFeature *clone() const override;
 
     /** Provides type information for downcasting a GeoNode */
-    const char* nodeType() const override;
+    const char *nodeType() const override;
 
 private:
     Q_DECLARE_PRIVATE(GeoDataChange)

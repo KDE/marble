@@ -18,30 +18,30 @@ class BBCStationPrivate;
 
 class BBCStation
 {
- public:
+public:
     BBCStation();
-    BBCStation( const BBCStation& other );
+    BBCStation(const BBCStation &other);
 
     ~BBCStation();
 
     void detach();
 
-    BBCStation& operator=( const BBCStation &other );
-    bool operator<( const BBCStation& other ) const;
+    BBCStation &operator=(const BBCStation &other);
+    bool operator<(const BBCStation &other) const;
 
     QString name() const;
-    void setName( const QString& name );
+    void setName(const QString &name);
 
     GeoDataCoordinates coordinate() const;
-    void setCoordinate( const GeoDataCoordinates& coordinate );
+    void setCoordinate(const GeoDataCoordinates &coordinate);
 
     quint32 bbcId() const;
-    void setBbcId( quint32 id );
+    void setBbcId(quint32 id);
 
     quint8 priority() const;
-    void setPriority( quint8 priority );
+    void setPriority(quint8 priority);
 
- private:
+private:
     BBCStationPrivate *d;
 };
 

@@ -6,27 +6,26 @@
 #ifndef GPSDPOSITIONPROVIDERPLUGIN_H
 #define GPSDPOSITIONPROVIDERPLUGIN_H
 
-#include "PositionProviderPlugin.h"
-#include "GeoDataCoordinates.h"
 #include "GeoDataAccuracy.h"
+#include "GeoDataCoordinates.h"
+#include "PositionProviderPlugin.h"
 
 #include <QDateTime>
 
 #include <libgpsmm.h>
-
 
 namespace Marble
 {
 
 class GpsdThread;
 
-class GpsdPositionProviderPlugin: public PositionProviderPlugin
+class GpsdPositionProviderPlugin : public PositionProviderPlugin
 {
     Q_OBJECT
     Q_PLUGIN_METADATA(IID "org.kde.marble.GpsdPositionProviderPlugin")
-    Q_INTERFACES( Marble::PositionProviderPluginInterface )
+    Q_INTERFACES(Marble::PositionProviderPluginInterface)
 
- public:
+public:
     GpsdPositionProviderPlugin();
     ~GpsdPositionProviderPlugin() override;
 
@@ -41,7 +40,7 @@ class GpsdPositionProviderPlugin: public PositionProviderPlugin
     void initialize() override;
     bool isInitialized() const override;
 
-    PositionProviderPlugin * newInstance() const override;
+    PositionProviderPlugin *newInstance() const override;
 
     PositionProviderStatus status() const override;
     GeoDataCoordinates position() const override;
@@ -51,8 +50,8 @@ class GpsdPositionProviderPlugin: public PositionProviderPlugin
     qreal direction() const override;
     QDateTime timestamp() const override;
 
- private:
-    GpsdThread* m_thread;
+private:
+    GpsdThread *m_thread;
     PositionProviderStatus m_status;
     GeoDataCoordinates m_position;
     GeoDataAccuracy m_accuracy;
@@ -60,7 +59,7 @@ class GpsdPositionProviderPlugin: public PositionProviderPlugin
     qreal m_track;
     QDateTime m_timestamp;
 
- private Q_SLOTS:
+private Q_SLOTS:
     void update(gps_data_t data);
 };
 

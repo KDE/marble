@@ -7,9 +7,9 @@
 #include "BBCParser.h"
 
 // Marble
-#include "MarbleGlobal.h"
 #include "BBCWeatherItem.h"
 #include "MarbleDebug.h"
+#include "MarbleGlobal.h"
 
 // Qt
 #include <QDateTime>
@@ -19,14 +19,14 @@
 
 using namespace Marble;
 
-BBCParser::BBCParser( QObject *parent ) :
-    AbstractWorkerThread( parent ),
-    m_dayConditions(),
-    m_nightConditions(),
-    m_windDirections(),
-    m_pressureDevelopments(),
-    m_visibilityStates(),
-    m_monthNames()
+BBCParser::BBCParser(QObject *parent)
+    : AbstractWorkerThread(parent)
+    , m_dayConditions()
+    , m_nightConditions()
+    , m_windDirections()
+    , m_pressureDevelopments()
+    , m_visibilityStates()
+    , m_monthNames()
 {
     m_dayConditions["sunny"] = WeatherData::ClearDay;
     m_dayConditions["clear"] = WeatherData::ClearDay;
@@ -181,9 +181,7 @@ BBCParser *BBCParser::instance()
     return &parser;
 }
 
-void BBCParser::scheduleRead( const QString& path,
-                              BBCWeatherItem *item,
-                              const QString& type )
+void BBCParser::scheduleRead(const QString &path, BBCWeatherItem *item, const QString &type)
 {
     ScheduleEntry entry;
     entry.path = path;
@@ -191,7 +189,7 @@ void BBCParser::scheduleRead( const QString& path,
     entry.type = type;
 
     m_scheduleMutex.lock();
-    m_schedule.push( entry );
+    m_schedule.push(entry);
     m_scheduleMutex.unlock();
 
     ensureRunning();
@@ -199,7 +197,7 @@ void BBCParser::scheduleRead( const QString& path,
 
 bool BBCParser::workAvailable()
 {
-    QMutexLocker locker( &m_scheduleMutex );
+    QMutexLocker locker(&m_scheduleMutex);
     return !m_schedule.isEmpty();
 }
 
@@ -209,38 +207,37 @@ void BBCParser::work()
     ScheduleEntry entry = m_schedule.pop();
     m_scheduleMutex.unlock();
 
-    QFile file( entry.path );
-    if( !file.open( QIODevice::ReadOnly | QIODevice::Text ) ) {
+    QFile file(entry.path);
+    if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
         return;
     }
 
-    QList<WeatherData> data = read( &file );
+    QList<WeatherData> data = read(&file);
 
-    if( !data.isEmpty() && !entry.item.isNull() ) {
+    if (!data.isEmpty() && !entry.item.isNull()) {
         if (entry.type == QLatin1String("bbcobservation")) {
-            entry.item->setCurrentWeather( data.at( 0 ) );
-        }
-        else if (entry.type == QLatin1String("bbcforecast")) {
-            entry.item->addForecastWeather( data );
+            entry.item->setCurrentWeather(data.at(0));
+        } else if (entry.type == QLatin1String("bbcforecast")) {
+            entry.item->addForecastWeather(data);
         }
 
         emit parsedFile();
     }
 }
 
-QList<WeatherData> BBCParser::read( QIODevice *device )
+QList<WeatherData> BBCParser::read(QIODevice *device)
 {
     m_list.clear();
-    setDevice( device );
+    setDevice(device);
 
-    while ( !atEnd() ) {
+    while (!atEnd()) {
         readNext();
 
-        if ( isStartElement() ) {
+        if (isStartElement()) {
             if (name() == QLatin1String("rss"))
                 readBBC();
             else
-                raiseError( QObject::tr("The file is not a valid BBC answer.") );
+                raiseError(QObject::tr("The file is not a valid BBC answer."));
         }
     }
 
@@ -249,31 +246,30 @@ QList<WeatherData> BBCParser::read( QIODevice *device )
 
 void BBCParser::readUnknownElement()
 {
-    Q_ASSERT( isStartElement() );
+    Q_ASSERT(isStartElement());
 
-    while ( !atEnd() ) {
+    while (!atEnd()) {
         readNext();
 
-        if ( isEndElement() )
+        if (isEndElement())
             break;
 
-        if ( isStartElement() )
+        if (isStartElement())
             readUnknownElement();
     }
 }
 
 void BBCParser::readBBC()
 {
-    Q_ASSERT( isStartElement()
-              && name() == QLatin1String("rss"));
-              
-    while( !atEnd() ) {
+    Q_ASSERT(isStartElement() && name() == QLatin1String("rss"));
+
+    while (!atEnd()) {
         readNext();
-        
-        if( isEndElement() )
+
+        if (isEndElement())
             break;
-        
-        if( isStartElement() ) {
+
+        if (isStartElement()) {
             if (name() == QLatin1String("channel"))
                 readChannel();
             else
@@ -284,16 +280,15 @@ void BBCParser::readBBC()
 
 void BBCParser::readChannel()
 {
-    Q_ASSERT( isStartElement()
-              && name() == QLatin1String("channel"));
+    Q_ASSERT(isStartElement() && name() == QLatin1String("channel"));
 
-    while( !atEnd() ) {
+    while (!atEnd()) {
         readNext();
-        
-        if( isEndElement() )
+
+        if (isEndElement())
             break;
-        
-        if( isStartElement() ) {
+
+        if (isStartElement()) {
             if (name() == QLatin1String("item"))
                 readItem();
             else
@@ -304,136 +299,130 @@ void BBCParser::readChannel()
 
 void BBCParser::readItem()
 {
-    Q_ASSERT( isStartElement()
-              && name() == QLatin1String("item"));
-    
+    Q_ASSERT(isStartElement() && name() == QLatin1String("item"));
+
     WeatherData item;
-    
-    while( !atEnd() ) {
+
+    while (!atEnd()) {
         readNext();
-        
-        if( isEndElement() )
+
+        if (isEndElement())
             break;
-        
-        if( isStartElement() ) {
+
+        if (isStartElement()) {
             if (name() == QLatin1String("description"))
-                readDescription( &item );
-            else if(name() == QLatin1String("title"))
-                readTitle( &item );
+                readDescription(&item);
+            else if (name() == QLatin1String("title"))
+                readTitle(&item);
             else if (name() == QLatin1String("pubDate"))
-                readPubDate( &item );
+                readPubDate(&item);
             else
                 readUnknownElement();
         }
     }
-    
-    m_list.append( item );
+
+    m_list.append(item);
 }
 
-void BBCParser::readDescription( WeatherData *data )
+void BBCParser::readDescription(WeatherData *data)
 {
-    Q_ASSERT( isStartElement()
-              && name() == QLatin1String("description"));
-        
-    while( !atEnd() ) {
+    Q_ASSERT(isStartElement() && name() == QLatin1String("description"));
+
+    while (!atEnd()) {
         readNext();
-        
-        if( isEndElement() )
+
+        if (isEndElement())
             break;
-        
-        if( isStartElement() ) {
+
+        if (isStartElement()) {
             readUnknownElement();
         }
-        
-        if( isCharacters() ) {
+
+        if (isCharacters()) {
             QString description = text().toString();
             QRegExp regExp;
-            
+
             // Temperature
-            regExp.setPattern( "(Temperature:\\s*)(-?\\d+)(.C)" );
-            int pos = regExp.indexIn( description );
-            if ( pos > -1 ) {
-                QString value = regExp.cap( 2 );
-                data->setTemperature( value.toDouble(), WeatherData::Celsius );
+            regExp.setPattern("(Temperature:\\s*)(-?\\d+)(.C)");
+            int pos = regExp.indexIn(description);
+            if (pos > -1) {
+                QString value = regExp.cap(2);
+                data->setTemperature(value.toDouble(), WeatherData::Celsius);
             }
 
             // Max Temperature
-            regExp.setPattern( "(Max Temp:\\s*)(-?\\d+)(.C)" );
-            pos = regExp.indexIn( description );
-            if ( pos > -1 ) {
-                QString value = regExp.cap( 2 );
-                data->setMaxTemperature( value.toDouble(), WeatherData::Celsius );
+            regExp.setPattern("(Max Temp:\\s*)(-?\\d+)(.C)");
+            pos = regExp.indexIn(description);
+            if (pos > -1) {
+                QString value = regExp.cap(2);
+                data->setMaxTemperature(value.toDouble(), WeatherData::Celsius);
             }
 
             // Min Temperature
-            regExp.setPattern( "(Min Temp:\\s*)(-?\\d+)(.C)" );
-            pos = regExp.indexIn( description );
-            if ( pos > -1 ) {
-                QString value = regExp.cap( 2 );
-                data->setMinTemperature( value.toDouble(), WeatherData::Celsius );
+            regExp.setPattern("(Min Temp:\\s*)(-?\\d+)(.C)");
+            pos = regExp.indexIn(description);
+            if (pos > -1) {
+                QString value = regExp.cap(2);
+                data->setMinTemperature(value.toDouble(), WeatherData::Celsius);
             }
 
             // Wind direction
-            regExp.setPattern( "(Wind Direction:\\s*)([NESW]+)(,)" );
-            pos = regExp.indexIn( description );
-            if ( pos > -1 ) {
-                QString wind = regExp.cap( 2 );
+            regExp.setPattern("(Wind Direction:\\s*)([NESW]+)(,)");
+            pos = regExp.indexIn(description);
+            if (pos > -1) {
+                QString wind = regExp.cap(2);
 
-                if ( m_windDirections.contains( wind ) ) {
-                    data->setWindDirection( m_windDirections.value( wind ) );
-                }
-                else {
+                if (m_windDirections.contains(wind)) {
+                    data->setWindDirection(m_windDirections.value(wind));
+                } else {
                     mDebug() << "UNHANDLED WIND DIRECTION, PLEASE REPORT: " << wind;
                 }
             }
 
             // Wind speed
-            regExp.setPattern( "(Wind Speed:\\s*)(\\d+)(mph)" );
-            pos = regExp.indexIn( description );
-            if ( pos > -1 ) {
-                QString speed = regExp.cap( 2 );
-                data->setWindSpeed( speed.toFloat(), WeatherData::mph );
+            regExp.setPattern("(Wind Speed:\\s*)(\\d+)(mph)");
+            pos = regExp.indexIn(description);
+            if (pos > -1) {
+                QString speed = regExp.cap(2);
+                data->setWindSpeed(speed.toFloat(), WeatherData::mph);
             }
 
             // Relative Humidity
-            regExp.setPattern( "(Relative Humidity:\\s*)(\\d+)(.,)" );
-            pos = regExp.indexIn( description );
-            if ( pos > -1 ) {
-                QString humidity = regExp.cap( 2 );
-                data->setHumidity( humidity.toFloat() );
+            regExp.setPattern("(Relative Humidity:\\s*)(\\d+)(.,)");
+            pos = regExp.indexIn(description);
+            if (pos > -1) {
+                QString humidity = regExp.cap(2);
+                data->setHumidity(humidity.toFloat());
             }
 
             // Pressure
-            regExp.setPattern( "(Pressure:\\s*)(\\d+mB|N/A)(, )([a-z ]+|N/A)(,)" );
-            pos = regExp.indexIn( description );
-            if ( pos > -1 ) {
-                QString pressure = regExp.cap( 2 );
+            regExp.setPattern("(Pressure:\\s*)(\\d+mB|N/A)(, )([a-z ]+|N/A)(,)");
+            pos = regExp.indexIn(description);
+            if (pos > -1) {
+                QString pressure = regExp.cap(2);
                 if (pressure != QLatin1String("N/A")) {
-                    pressure.chop( 2 );
-                    data->setPressure( pressure.toFloat()/1000, WeatherData::Bar );
+                    pressure.chop(2);
+                    data->setPressure(pressure.toFloat() / 1000, WeatherData::Bar);
                 }
 
-                QString pressureDevelopment = regExp.cap( 4 );
+                QString pressureDevelopment = regExp.cap(4);
 
-                if ( m_pressureDevelopments.contains( pressureDevelopment ) ) {
-                    data->setPressureDevelopment( m_pressureDevelopments.value( pressureDevelopment ) );
-                }
-                else {
-                    mDebug() << "UNHANDLED PRESSURE DEVELOPMENT, PLEASE REPORT: "
-                             << pressureDevelopment;
+                if (m_pressureDevelopments.contains(pressureDevelopment)) {
+                    data->setPressureDevelopment(m_pressureDevelopments.value(pressureDevelopment));
+                } else {
+                    mDebug() << "UNHANDLED PRESSURE DEVELOPMENT, PLEASE REPORT: " << pressureDevelopment;
                 }
             }
 
             // Visibility
-            regExp.setPattern( "(Visibility:\\s*)([^,]+)" );
-            pos = regExp.indexIn( description );
-            if ( pos > -1 ) {
-                QString visibility = regExp.cap( 2 );
+            regExp.setPattern("(Visibility:\\s*)([^,]+)");
+            pos = regExp.indexIn(description);
+            if (pos > -1) {
+                QString visibility = regExp.cap(2);
 
-                if ( m_visibilityStates.contains( visibility.toLower() ) ) {
-                    data->setVisibilty( m_visibilityStates.value( visibility ) );
-                }
-                else {
+                if (m_visibilityStates.contains(visibility.toLower())) {
+                    data->setVisibilty(m_visibilityStates.value(visibility));
+                } else {
                     mDebug() << "UNHANDLED VISIBILITY, PLEASE REPORT: " << visibility;
                 }
             }
@@ -441,41 +430,39 @@ void BBCParser::readDescription( WeatherData *data )
     }
 }
 
-void BBCParser::readTitle( WeatherData *data )
+void BBCParser::readTitle(WeatherData *data)
 {
-    Q_ASSERT( isStartElement()
-              && name() == QLatin1String("title"));
-    
-    while( !atEnd() ) {
+    Q_ASSERT(isStartElement() && name() == QLatin1String("title"));
+
+    while (!atEnd()) {
         readNext();
-        
-        if( isEndElement() )
+
+        if (isEndElement())
             break;
-        
-        if( isStartElement() ) {
+
+        if (isStartElement()) {
             readUnknownElement();
         }
-        
-        if( isCharacters() ) {
+
+        if (isCharacters()) {
             QString title = text().toString();
             QRegExp regExp;
-            
+
             // Condition
-            regExp.setPattern( "(^.*)(:\\s*)([\\w ]+)([\\,\\.]\\s*)" );
-            int pos = regExp.indexIn( title );
-            if ( pos > -1 ) {
-                QString value = regExp.cap( 3 );
-                
-                if( m_dayConditions.contains( value ) ) {
+            regExp.setPattern("(^.*)(:\\s*)([\\w ]+)([\\,\\.]\\s*)");
+            int pos = regExp.indexIn(title);
+            if (pos > -1) {
+                QString value = regExp.cap(3);
+
+                if (m_dayConditions.contains(value)) {
                     // TODO: Switch for day/night
-                    data->setCondition( m_dayConditions.value( value ) );
-                }
-                else {
+                    data->setCondition(m_dayConditions.value(value));
+                } else {
                     mDebug() << "UNHANDLED BBC WEATHER CONDITION, PLEASE REPORT: " << value;
                 }
 
-                QString dayString = regExp.cap( 1 );
-                Qt::DayOfWeek dayOfWeek = (Qt::DayOfWeek) 0;
+                QString dayString = regExp.cap(1);
+                Qt::DayOfWeek dayOfWeek = (Qt::DayOfWeek)0;
                 if (dayString.contains(QLatin1String("Monday"))) {
                     dayOfWeek = Qt::Monday;
                 } else if (dayString.contains(QLatin1String("Tuesday"))) {
@@ -492,67 +479,61 @@ void BBCParser::readTitle( WeatherData *data )
                     dayOfWeek = Qt::Sunday;
                 }
                 QDate date = QDate::currentDate();
-                date = date.addDays( -1 );
+                date = date.addDays(-1);
 
-                for ( int i = 0; i < 7; i++ ) {
-                    if ( date.dayOfWeek() == dayOfWeek ) {
-                        data->setDataDate( date );
+                for (int i = 0; i < 7; i++) {
+                    if (date.dayOfWeek() == dayOfWeek) {
+                        data->setDataDate(date);
                     }
-                    date = date.addDays( 1 );
+                    date = date.addDays(1);
                 }
             }
         }
     }
 }
 
-void BBCParser::readPubDate( WeatherData *data )
+void BBCParser::readPubDate(WeatherData *data)
 {
-    Q_ASSERT( isStartElement()
-              && name() == QLatin1String("pubDate"));
+    Q_ASSERT(isStartElement() && name() == QLatin1String("pubDate"));
 
-    while( !atEnd() ) {
+    while (!atEnd()) {
         readNext();
 
-        if( isEndElement() )
+        if (isEndElement())
             break;
 
-        if( isStartElement() ) {
+        if (isStartElement()) {
             readUnknownElement();
         }
 
-        if( isCharacters() ) {
+        if (isCharacters()) {
             QString pubDate = text().toString();
             QRegExp regExp;
 
-            regExp.setPattern( "([A-Za-z]+,\\s+)(\\d+)(\\s+)([A-Za-z]+)(\\s+)(\\d{4,4})(\\s+)(\\d+)(:)(\\d+)(:)(\\d+)(\\s+)([+-])(\\d{2,2})(\\d{2,2})" );
-            int pos = regExp.indexIn( pubDate );
-            if ( pos > -1 ) {
+            regExp.setPattern("([A-Za-z]+,\\s+)(\\d+)(\\s+)([A-Za-z]+)(\\s+)(\\d{4,4})(\\s+)(\\d+)(:)(\\d+)(:)(\\d+)(\\s+)([+-])(\\d{2,2})(\\d{2,2})");
+            int pos = regExp.indexIn(pubDate);
+            if (pos > -1) {
                 QDateTime dateTime;
                 QDate date;
                 QTime time;
 
-                dateTime.setTimeSpec( Qt::UTC );
-                date.setDate( regExp.cap( 6 ).toInt(),
-                             m_monthNames.value( regExp.cap( 4 ) ),
-                             regExp.cap( 2 ).toInt() );
-                time.setHMS( regExp.cap( 8 ).toInt(),
-                             regExp.cap( 10 ).toInt(),
-                             regExp.cap( 12 ).toInt() );
+                dateTime.setTimeSpec(Qt::UTC);
+                date.setDate(regExp.cap(6).toInt(), m_monthNames.value(regExp.cap(4)), regExp.cap(2).toInt());
+                time.setHMS(regExp.cap(8).toInt(), regExp.cap(10).toInt(), regExp.cap(12).toInt());
 
-                dateTime.setDate( date );
-                dateTime.setTime( time );
+                dateTime.setDate(date);
+                dateTime.setTime(time);
 
                 // Timezone
                 if (regExp.cap(14) == QLatin1String("-")) {
-                    dateTime = dateTime.addSecs( 60*60*regExp.cap( 15 ).toInt() );
-                    dateTime = dateTime.addSecs( 60   *regExp.cap( 16 ).toInt() );
-                }
-                else {
-                    dateTime = dateTime.addSecs( -60*60*regExp.cap( 15 ).toInt() );
-                    dateTime = dateTime.addSecs( -60   *regExp.cap( 16 ).toInt() );
+                    dateTime = dateTime.addSecs(60 * 60 * regExp.cap(15).toInt());
+                    dateTime = dateTime.addSecs(60 * regExp.cap(16).toInt());
+                } else {
+                    dateTime = dateTime.addSecs(-60 * 60 * regExp.cap(15).toInt());
+                    dateTime = dateTime.addSecs(-60 * regExp.cap(16).toInt());
                 }
 
-                data->setPublishingTime( dateTime );
+                data->setPublishingTime(dateTime);
             }
         }
     }

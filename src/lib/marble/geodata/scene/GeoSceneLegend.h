@@ -7,8 +7,8 @@
 #ifndef MARBLE_GEOSCENELEGEND_H
 #define MARBLE_GEOSCENELEGEND_H
 
-#include <QVector>
 #include "GeoDocument.h"
+#include <QVector>
 
 #include <geodata_export.h>
 
@@ -25,22 +25,22 @@ class GeoSceneLegendPrivate;
 
 class GEODATA_EXPORT GeoSceneLegend : public GeoNode
 {
- public:
+public:
     GeoSceneLegend();
     ~GeoSceneLegend() override;
-    
-    const char* nodeType() const override;
+
+    const char *nodeType() const override;
 
     /**
      * @brief  Add a section to the legend
      * @param  section  the new section
      */
-    void addSection( const GeoSceneSection* );
-    QVector<const GeoSceneSection*> sections() const;
+    void addSection(const GeoSceneSection *);
+    QVector<const GeoSceneSection *> sections() const;
 
- private:
-    Q_DISABLE_COPY( GeoSceneLegend )
-    GeoSceneLegendPrivate * const d;
+private:
+    Q_DISABLE_COPY(GeoSceneLegend)
+    GeoSceneLegendPrivate *const d;
 };
 
 }

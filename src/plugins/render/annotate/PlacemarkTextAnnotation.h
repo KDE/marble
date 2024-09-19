@@ -8,8 +8,8 @@
 #ifndef PLACEMARKTEXTANNOTATION_H
 #define PLACEMARKTEXTANNOTATION_H
 
-#include <QColor>
 #include "SceneGraphicsItem.h"
+#include <QColor>
 
 namespace Marble
 {
@@ -17,16 +17,16 @@ namespace Marble
 class PlacemarkTextAnnotation : public SceneGraphicsItem
 {
 public:
-    explicit PlacemarkTextAnnotation( GeoDataPlacemark *placemark );
+    explicit PlacemarkTextAnnotation(GeoDataPlacemark *placemark);
     ~PlacemarkTextAnnotation() override;
 
     void paint(GeoPainter *painter, const ViewportParams *viewport, const QString &layer, int tileZoomLevel) override;
 
-    bool containsPoint( const QPoint &eventPos ) const override;
+    bool containsPoint(const QPoint &eventPos) const override;
 
-    void dealWithItemChange( const SceneGraphicsItem *other ) override;
+    void dealWithItemChange(const SceneGraphicsItem *other) override;
 
-    void move( const GeoDataCoordinates &source, const GeoDataCoordinates &destination ) override;
+    void move(const GeoDataCoordinates &source, const GeoDataCoordinates &destination) override;
 
     /**
      * @brief Provides information for downcasting a SceneGraphicsItem.
@@ -39,11 +39,11 @@ public:
     QColor labelColor() const;
 
 protected:
-    bool mousePressEvent( QMouseEvent *event ) override;
-    bool mouseMoveEvent( QMouseEvent *event ) override;
-    bool mouseReleaseEvent( QMouseEvent *event ) override;
+    bool mousePressEvent(QMouseEvent *event) override;
+    bool mouseMoveEvent(QMouseEvent *event) override;
+    bool mouseReleaseEvent(QMouseEvent *event) override;
 
-    void dealWithStateChange( SceneGraphicsItem::ActionState previousState ) override;
+    void dealWithStateChange(SceneGraphicsItem::ActionState previousState) override;
 
 private:
     const ViewportParams *m_viewport;

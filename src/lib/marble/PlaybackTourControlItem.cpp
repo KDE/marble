@@ -10,19 +10,19 @@
 namespace Marble
 {
 
-PlaybackTourControlItem::PlaybackTourControlItem(const GeoDataTourControl* tourControl)
+PlaybackTourControlItem::PlaybackTourControlItem(const GeoDataTourControl *tourControl)
 {
     m_tourControl = tourControl;
 }
 
-const GeoDataTourControl* PlaybackTourControlItem::tourControl() const
+const GeoDataTourControl *PlaybackTourControlItem::tourControl() const
 {
     return m_tourControl;
 }
 
 void PlaybackTourControlItem::play()
 {
-    if( m_tourControl->playMode() == GeoDataTourControl::Pause ) {
+    if (m_tourControl->playMode() == GeoDataTourControl::Pause) {
         emit paused();
     }
 }
@@ -37,9 +37,9 @@ void PlaybackTourControlItem::pause()
     // nothing to do
 }
 
-void PlaybackTourControlItem::seek( double position )
+void PlaybackTourControlItem::seek(double position)
 {
-    Q_UNUSED( position );
+    Q_UNUSED(position);
     // nothing to do
 }
 

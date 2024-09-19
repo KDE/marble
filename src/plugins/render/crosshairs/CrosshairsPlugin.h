@@ -13,19 +13,18 @@
 
 #include <QPixmap>
 
-
-#include "RenderPlugin.h"
 #include "DialogConfigurationInterface.h"
+#include "RenderPlugin.h"
 
 class QSvgRenderer;
 
-namespace Ui {
-    class CrosshairsConfigWidget;
+namespace Ui
+{
+class CrosshairsConfigWidget;
 }
 
 namespace Marble
 {
-
 
 /**
  * @short The class that specifies the Marble layer interface of a plugin.
@@ -36,14 +35,14 @@ class CrosshairsPlugin : public RenderPlugin, public DialogConfigurationInterfac
 {
     Q_OBJECT
     Q_PLUGIN_METADATA(IID "org.kde.marble.CrosshairsPlugin")
-    Q_INTERFACES( Marble::RenderPluginInterface )
-    Q_INTERFACES( Marble::DialogConfigurationInterface )
+    Q_INTERFACES(Marble::RenderPluginInterface)
+    Q_INTERFACES(Marble::DialogConfigurationInterface)
     MARBLE_PLUGIN(CrosshairsPlugin)
 
- public:
+public:
     CrosshairsPlugin();
 
-    explicit CrosshairsPlugin( const MarbleModel *marbleModel );
+    explicit CrosshairsPlugin(const MarbleModel *marbleModel);
 
     ~CrosshairsPlugin() override;
 
@@ -69,27 +68,27 @@ class CrosshairsPlugin : public RenderPlugin, public DialogConfigurationInterfac
 
     QVector<PluginAuthor> pluginAuthors() const override;
 
-    QIcon icon () const override;
+    QIcon icon() const override;
 
-    void initialize () override;
+    void initialize() override;
 
-    bool isInitialized () const override;
+    bool isInitialized() const override;
 
-    bool render( GeoPainter *painter, ViewportParams *viewport, const QString& renderPos, GeoSceneLayer * layer = nullptr ) override;
+    bool render(GeoPainter *painter, ViewportParams *viewport, const QString &renderPos, GeoSceneLayer *layer = nullptr) override;
 
     QDialog *configDialog() override;
 
-    QHash<QString,QVariant> settings() const override;
+    QHash<QString, QVariant> settings() const override;
 
-    void setSettings( const QHash<QString,QVariant> &settings ) override;
+    void setSettings(const QHash<QString, QVariant> &settings) override;
 
 private Q_SLOTS:
-   void readSettings();
+    void readSettings();
 
-   void writeSettings();
+    void writeSettings();
 
- private:
-    Q_DISABLE_COPY( CrosshairsPlugin )
+private:
+    Q_DISABLE_COPY(CrosshairsPlugin)
 
     bool m_isInitialized;
 
@@ -99,8 +98,8 @@ private Q_SLOTS:
 
     QString m_theme;
 
-    QDialog * m_configDialog;
-    Ui::CrosshairsConfigWidget * m_uiConfigWidget;
+    QDialog *m_configDialog;
+    Ui::CrosshairsConfigWidget *m_uiConfigWidget;
 };
 
 }

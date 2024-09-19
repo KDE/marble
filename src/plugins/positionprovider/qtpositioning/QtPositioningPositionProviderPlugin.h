@@ -16,11 +16,11 @@ namespace Marble
 
 class QtPositioningPositionProviderPluginPrivate;
 
-class QtPositioningPositionProviderPlugin: public PositionProviderPlugin
+class QtPositioningPositionProviderPlugin : public PositionProviderPlugin
 {
     Q_OBJECT
     Q_PLUGIN_METADATA(IID "org.kde.marble.QtPositioningPositionProviderPlugin")
-    Q_INTERFACES( Marble::PositionProviderPluginInterface )
+    Q_INTERFACES(Marble::PositionProviderPluginInterface)
 
 public:
     QtPositioningPositionProviderPlugin();
@@ -42,7 +42,7 @@ public:
     QDateTime timestamp() const override;
 
     // Implementing PositionProviderPlugin
-    PositionProviderPlugin * newInstance() const override;
+    PositionProviderPlugin *newInstance() const override;
 
     // Implementing PositionProviderPluginInterface
     PositionProviderStatus status() const override;
@@ -52,11 +52,10 @@ public:
 private Q_SLOTS:
     /** Regular (each second) position and status update */
     void update();
-    void update(const QGeoPositionInfo& position);
+    void update(const QGeoPositionInfo &position);
 
 private:
-    QtPositioningPositionProviderPluginPrivate* const d;
-
+    QtPositioningPositionProviderPluginPrivate *const d;
 };
 
 }

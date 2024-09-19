@@ -25,35 +25,35 @@ private Q_SLOTS:
 
 void MapViewWidgetTest::initTestCase()
 {
-    qRegisterMetaType<Projection>( "Projection" );
+    qRegisterMetaType<Projection>("Projection");
 }
 
 void MapViewWidgetTest::setMapThemeId()
 {
     MapViewWidget widget;
-    QSignalSpy spy( &widget, SIGNAL(mapThemeIdChanged(QString)) );
+    QSignalSpy spy(&widget, SIGNAL(mapThemeIdChanged(QString)));
 
     widget.setMapThemeId(QString());
 
-    QCOMPARE( spy.count(), 0 );
+    QCOMPARE(spy.count(), 0);
 
-    widget.setMapThemeId( "foo/bar/bar.dgml" );
+    widget.setMapThemeId("foo/bar/bar.dgml");
 }
 
 void MapViewWidgetTest::setProjection()
 {
     MapViewWidget widget;
-    QSignalSpy spy( &widget, SIGNAL(projectionChanged(Projection)) );
+    QSignalSpy spy(&widget, SIGNAL(projectionChanged(Projection)));
 
-    widget.setProjection( Spherical );
+    widget.setProjection(Spherical);
 
-    QCOMPARE( spy.count(), 0 );
+    QCOMPARE(spy.count(), 0);
 
-    widget.setProjection( Mercator );
+    widget.setProjection(Mercator);
 }
 
 }
 
-QTEST_MAIN( Marble::MapViewWidgetTest )
+QTEST_MAIN(Marble::MapViewWidgetTest)
 
 #include "MapViewWidgetTest.moc"

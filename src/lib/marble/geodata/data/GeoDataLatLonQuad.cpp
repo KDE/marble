@@ -6,7 +6,8 @@
 #include "GeoDataLatLonQuad.h"
 #include "GeoDataTypes.h"
 
-namespace Marble {
+namespace Marble
+{
 
 class GeoDataLatLonQuadPrivate
 {
@@ -19,39 +20,42 @@ public:
     GeoDataLatLonQuadPrivate();
 };
 
-GeoDataLatLonQuadPrivate::GeoDataLatLonQuadPrivate() :
-    m_bottomLeft(),m_bottomRight(),m_topRight(),m_topLeft()
+GeoDataLatLonQuadPrivate::GeoDataLatLonQuadPrivate()
+    : m_bottomLeft()
+    , m_bottomRight()
+    , m_topRight()
+    , m_topLeft()
 {
     // nothing to do
 }
 
-GeoDataLatLonQuad::GeoDataLatLonQuad() : GeoDataObject(), d( new GeoDataLatLonQuadPrivate )
+GeoDataLatLonQuad::GeoDataLatLonQuad()
+    : GeoDataObject()
+    , d(new GeoDataLatLonQuadPrivate)
 {
     // nothing to do
 }
 
-GeoDataLatLonQuad::GeoDataLatLonQuad( const Marble::GeoDataLatLonQuad &other ) :
-    GeoDataObject( other ), d( new GeoDataLatLonQuadPrivate( *other.d ) )
+GeoDataLatLonQuad::GeoDataLatLonQuad(const Marble::GeoDataLatLonQuad &other)
+    : GeoDataObject(other)
+    , d(new GeoDataLatLonQuadPrivate(*other.d))
 {
     // nothing to do
 }
 
-GeoDataLatLonQuad &GeoDataLatLonQuad::operator=( const GeoDataLatLonQuad &other )
+GeoDataLatLonQuad &GeoDataLatLonQuad::operator=(const GeoDataLatLonQuad &other)
 {
     *d = *other.d;
     return *this;
 }
 
-bool GeoDataLatLonQuad::operator==(const GeoDataLatLonQuad& other) const
+bool GeoDataLatLonQuad::operator==(const GeoDataLatLonQuad &other) const
 {
-    return equals( other )
-           && d->m_bottomLeft == other.d->m_bottomLeft
-           && d->m_bottomRight == other.d->m_bottomRight
-           && d->m_topLeft == other.d->m_topLeft
-           && d->m_topRight == other.d->m_topRight;
+    return equals(other) && d->m_bottomLeft == other.d->m_bottomLeft && d->m_bottomRight == other.d->m_bottomRight && d->m_topLeft == other.d->m_topLeft
+        && d->m_topRight == other.d->m_topRight;
 }
 
-bool GeoDataLatLonQuad::operator!=(const GeoDataLatLonQuad& other) const
+bool GeoDataLatLonQuad::operator!=(const GeoDataLatLonQuad &other) const
 {
     return !this->operator==(other);
 }
@@ -66,86 +70,85 @@ const char *GeoDataLatLonQuad::nodeType() const
     return GeoDataTypes::GeoDataLatLonQuadType;
 }
 
-qreal GeoDataLatLonQuad::bottomLeftLatitude( GeoDataCoordinates::Unit unit ) const
+qreal GeoDataLatLonQuad::bottomLeftLatitude(GeoDataCoordinates::Unit unit) const
 {
     return d->m_bottomLeft.latitude(unit);
 }
 
-void GeoDataLatLonQuad::setBottomLeftLatitude( qreal latitude, GeoDataCoordinates::Unit unit )
+void GeoDataLatLonQuad::setBottomLeftLatitude(qreal latitude, GeoDataCoordinates::Unit unit)
 {
-    d->m_bottomLeft.setLatitude( latitude, unit );
+    d->m_bottomLeft.setLatitude(latitude, unit);
 }
 
-qreal GeoDataLatLonQuad::bottomLeftLongitude( GeoDataCoordinates::Unit unit ) const
+qreal GeoDataLatLonQuad::bottomLeftLongitude(GeoDataCoordinates::Unit unit) const
 {
-    return d->m_bottomLeft.longitude( unit );
+    return d->m_bottomLeft.longitude(unit);
 }
 
-void GeoDataLatLonQuad::setBottomLeftLongitude( qreal longitude, GeoDataCoordinates::Unit unit )
+void GeoDataLatLonQuad::setBottomLeftLongitude(qreal longitude, GeoDataCoordinates::Unit unit)
 {
-    d->m_bottomLeft.setLongitude( longitude, unit );
+    d->m_bottomLeft.setLongitude(longitude, unit);
 }
 
-qreal GeoDataLatLonQuad::bottomRightLatitude( GeoDataCoordinates::Unit unit ) const
+qreal GeoDataLatLonQuad::bottomRightLatitude(GeoDataCoordinates::Unit unit) const
 {
-    return d->m_bottomRight.latitude( unit );
+    return d->m_bottomRight.latitude(unit);
 }
 
-void GeoDataLatLonQuad::setBottomRightLatitude( qreal latitude, GeoDataCoordinates::Unit unit )
+void GeoDataLatLonQuad::setBottomRightLatitude(qreal latitude, GeoDataCoordinates::Unit unit)
 {
-    d->m_bottomRight.setLatitude( latitude, unit );
+    d->m_bottomRight.setLatitude(latitude, unit);
 }
 
-qreal GeoDataLatLonQuad::bottomRightLongitude( GeoDataCoordinates::Unit unit ) const
+qreal GeoDataLatLonQuad::bottomRightLongitude(GeoDataCoordinates::Unit unit) const
 {
-    return d->m_bottomRight.longitude( unit );
+    return d->m_bottomRight.longitude(unit);
 }
 
-void GeoDataLatLonQuad::setBottomRightLongitude( qreal longitude, GeoDataCoordinates::Unit unit )
+void GeoDataLatLonQuad::setBottomRightLongitude(qreal longitude, GeoDataCoordinates::Unit unit)
 {
-    d->m_bottomRight.setLongitude( longitude, unit );
+    d->m_bottomRight.setLongitude(longitude, unit);
 }
 
-qreal GeoDataLatLonQuad::topRightLatitude( GeoDataCoordinates::Unit unit ) const
+qreal GeoDataLatLonQuad::topRightLatitude(GeoDataCoordinates::Unit unit) const
 {
-    return d->m_topRight.latitude( unit );
+    return d->m_topRight.latitude(unit);
 }
 
-void GeoDataLatLonQuad::setTopRightLatitude( qreal latitude, GeoDataCoordinates::Unit unit )
+void GeoDataLatLonQuad::setTopRightLatitude(qreal latitude, GeoDataCoordinates::Unit unit)
 {
-    d->m_topRight.setLatitude( latitude, unit );
+    d->m_topRight.setLatitude(latitude, unit);
 }
 
-qreal GeoDataLatLonQuad::topRightLongitude( GeoDataCoordinates::Unit unit ) const
+qreal GeoDataLatLonQuad::topRightLongitude(GeoDataCoordinates::Unit unit) const
 {
-    return d->m_topRight.longitude( unit );
+    return d->m_topRight.longitude(unit);
 }
 
-void GeoDataLatLonQuad::setTopRightLongitude( qreal longitude, GeoDataCoordinates::Unit unit )
+void GeoDataLatLonQuad::setTopRightLongitude(qreal longitude, GeoDataCoordinates::Unit unit)
 {
-    d->m_topRight.setLongitude( longitude, unit );
+    d->m_topRight.setLongitude(longitude, unit);
 }
 
-qreal GeoDataLatLonQuad::topLeftLatitude( GeoDataCoordinates::Unit unit ) const
+qreal GeoDataLatLonQuad::topLeftLatitude(GeoDataCoordinates::Unit unit) const
 {
-    return d->m_topLeft.latitude( unit );
+    return d->m_topLeft.latitude(unit);
 }
 
-void GeoDataLatLonQuad::setTopLeftLatitude( qreal latitude, GeoDataCoordinates::Unit unit )
+void GeoDataLatLonQuad::setTopLeftLatitude(qreal latitude, GeoDataCoordinates::Unit unit)
 {
-    d->m_topLeft.setLatitude( latitude, unit );
+    d->m_topLeft.setLatitude(latitude, unit);
 }
 
-qreal GeoDataLatLonQuad::topLeftLongitude( GeoDataCoordinates::Unit unit ) const
+qreal GeoDataLatLonQuad::topLeftLongitude(GeoDataCoordinates::Unit unit) const
 {
-    return d->m_topLeft.longitude( unit );
+    return d->m_topLeft.longitude(unit);
 }
 
-void GeoDataLatLonQuad::setTopLeftLongitude( qreal longitude, GeoDataCoordinates::Unit unit )
+void GeoDataLatLonQuad::setTopLeftLongitude(qreal longitude, GeoDataCoordinates::Unit unit)
 {
-    d->m_topLeft.setLongitude(longitude, unit );
+    d->m_topLeft.setLongitude(longitude, unit);
 }
-
 
 GeoDataCoordinates &GeoDataLatLonQuad::bottomLeft() const
 {
@@ -188,8 +191,7 @@ void GeoDataLatLonQuad::setTopLeft(const GeoDataCoordinates &coordinates)
 
 bool GeoDataLatLonQuad::isValid() const
 {
-    return d->m_bottomLeft.isValid() && d->m_bottomRight.isValid()
-           && d->m_topLeft.isValid() && d->m_topRight.isValid();
+    return d->m_bottomLeft.isValid() && d->m_bottomRight.isValid() && d->m_topLeft.isValid() && d->m_topRight.isValid();
 }
 
 }

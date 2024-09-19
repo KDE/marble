@@ -9,17 +9,18 @@
 #include "AbstractDataPlugin.h"
 #include "DialogConfigurationInterface.h"
 
-namespace Ui {
-    class OpenDesktopConfigWidget;
+namespace Ui
+{
+class OpenDesktopConfigWidget;
 }
- 
-namespace Marble {
 
-const int defaultItemsOnScreen = 15;
- 
-class OpenDesktopPlugin : public AbstractDataPlugin, public DialogConfigurationInterface
+namespace Marble
 {
 
+const int defaultItemsOnScreen = 15;
+
+class OpenDesktopPlugin : public AbstractDataPlugin, public DialogConfigurationInterface
+{
     Q_OBJECT
     Q_PLUGIN_METADATA(IID "org.kde.marble.OpenDesktopPlugin")
 
@@ -27,20 +28,20 @@ class OpenDesktopPlugin : public AbstractDataPlugin, public DialogConfigurationI
     Q_INTERFACES(Marble::DialogConfigurationInterface)
 
     MARBLE_PLUGIN(OpenDesktopPlugin)
- 
- public:
+
+public:
     OpenDesktopPlugin();
 
-    explicit OpenDesktopPlugin( const MarbleModel *marbleModel );
+    explicit OpenDesktopPlugin(const MarbleModel *marbleModel);
 
     void initialize() override;
 
     QString name() const override;
-    
+
     QString guiString() const override;
 
     QString nameId() const override;
-    
+
     QString version() const override;
 
     QString description() const override;
@@ -53,9 +54,9 @@ class OpenDesktopPlugin : public AbstractDataPlugin, public DialogConfigurationI
 
     QDialog *configDialog() override;
 
-    QHash<QString,QVariant> settings() const override;
+    QHash<QString, QVariant> settings() const override;
 
-    void setSettings( const QHash<QString,QVariant> &settings ) override;
+    void setSettings(const QHash<QString, QVariant> &settings) override;
 
 protected:
     bool eventFilter(QObject *object, QEvent *event) override;
@@ -64,12 +65,12 @@ private Q_SLOTS:
     void readSettings();
 
     void writeSettings();
- 
- private:
-    QDialog * m_configDialog;
-    Ui::OpenDesktopConfigWidget * m_uiConfigWidget;
+
+private:
+    QDialog *m_configDialog;
+    Ui::OpenDesktopConfigWidget *m_uiConfigWidget;
 };
- 
+
 }
- 
+
 #endif // OPENDESKTOPPLUGIN_H

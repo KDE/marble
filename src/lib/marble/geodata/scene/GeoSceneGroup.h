@@ -22,13 +22,12 @@ class GeoSceneProperty;
  * @short Group inside the settings of a GeoScene document.
  */
 
-class GeoSceneGroup : public QObject,
-                      public GeoNode
+class GeoSceneGroup : public QObject, public GeoNode
 {
     Q_OBJECT
 
- public:
-    explicit GeoSceneGroup( const QString& name );
+public:
+    explicit GeoSceneGroup(const QString &name);
     ~GeoSceneGroup() override;
 
     /**
@@ -38,7 +37,7 @@ class GeoSceneGroup : public QObject,
      * @return @c true  the property was registered in this group
      *         @c false the property wasn't registered in this group
      */
-    bool propertyAvailable( const QString& name, bool& available ) const;
+    bool propertyAvailable(const QString &name, bool &available) const;
 
     /**
      * @brief  Set the value of a property in this group
@@ -47,7 +46,7 @@ class GeoSceneGroup : public QObject,
      * @return @c true  the property was found and changed accordingly
      *         @c false the property couldn't be found in this group
      */
-    bool setPropertyValue( const QString& name, bool value );
+    bool setPropertyValue(const QString &name, bool value);
 
     /**
      * @brief  Get the value of a property in this group
@@ -56,30 +55,30 @@ class GeoSceneGroup : public QObject,
      * @return @c true  the property was found and returned accordingly
      *         @c false the property couldn't be found in this group
      */
-    bool propertyValue( const QString& name, bool& value ) const;
+    bool propertyValue(const QString &name, bool &value) const;
 
     /**
      * @brief  Add a property to this setting group
      * @param  property  the new property
      */
-    void addProperty(GeoSceneProperty*);
-    const GeoSceneProperty* property( const QString& name ) const;
-    GeoSceneProperty* property( const QString& name );
-    QVector<GeoSceneProperty*> properties();
-    QVector<const GeoSceneProperty*> properties() const;
+    void addProperty(GeoSceneProperty *);
+    const GeoSceneProperty *property(const QString &name) const;
+    GeoSceneProperty *property(const QString &name);
+    QVector<GeoSceneProperty *> properties();
+    QVector<const GeoSceneProperty *> properties() const;
 
     QString name() const;
 
     const char *nodeType() const override;
 
- Q_SIGNALS:
-    void valueChanged( const QString&, bool );
+Q_SIGNALS:
+    void valueChanged(const QString &, bool);
 
- private:
-    Q_DISABLE_COPY( GeoSceneGroup )
+private:
+    Q_DISABLE_COPY(GeoSceneGroup)
 
     /// The vector holding all the properties in this settings group.
-    QVector<GeoSceneProperty*> m_properties;
+    QVector<GeoSceneProperty *> m_properties;
 
     QString m_name;
 };

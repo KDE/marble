@@ -12,9 +12,9 @@
 
 #include "MarbleDebug.h"
 
-#include "DgmlElementDictionary.h"
 #include "DgmlAttributeDictionary.h"
 #include "DgmlAuxillaryDictionary.h"
+#include "DgmlElementDictionary.h"
 #include "GeoParser.h"
 #include "GeoSceneLayer.h"
 #include "GeoSceneVectorTileDataset.h"
@@ -25,16 +25,16 @@ namespace dgml
 {
 DGML_DEFINE_TAG_HANDLER(Vectortile)
 
-GeoNode* DgmlVectortileTagHandler::parse( GeoParser& parser ) const
+GeoNode *DgmlVectortileTagHandler::parse(GeoParser &parser) const
 {
     // Check whether the tag is valid
     Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1String(dgmlTag_Vectortile)));
 
-    const QString name = parser.attribute( dgmlAttr_name ).trimmed();
+    const QString name = parser.attribute(dgmlAttr_name).trimmed();
 
-    const QString expireStr = parser.attribute( dgmlAttr_expire ).trimmed();
+    const QString expireStr = parser.attribute(dgmlAttr_expire).trimmed();
     int expire = std::numeric_limits<int>::max();
-    if ( !expireStr.isEmpty() )
+    if (!expireStr.isEmpty())
         expire = expireStr.toInt();
 
     GeoSceneTileDataset *texture = nullptr;
@@ -44,12 +44,10 @@ GeoNode* DgmlVectortileTagHandler::parse( GeoParser& parser ) const
 
     // Check parent type and make sure that the dataSet type
     // matches the backend of the parent layer
-    if ( parentItem.represents( dgmlTag_Layer )
-        && parentItem.nodeAs<GeoSceneLayer>()->backend() == dgmlValue_vectortile ) {
-
-        texture = new GeoSceneVectorTileDataset( name );
-        texture->setExpire( expire );
-        parentItem.nodeAs<GeoSceneLayer>()->addDataset( texture );
+    if (parentItem.represents(dgmlTag_Layer) && parentItem.nodeAs<GeoSceneLayer>()->backend() == dgmlValue_vectortile) {
+        texture = new GeoSceneVectorTileDataset(name);
+        texture->setExpire(expire);
+        parentItem.nodeAs<GeoSceneLayer>()->addDataset(texture);
     }
 
     return texture;
@@ -57,4 +55,3 @@ GeoNode* DgmlVectortileTagHandler::parse( GeoParser& parser ) const
 
 }
 }
-

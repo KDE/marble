@@ -16,7 +16,8 @@ class MarbleModel;
 
 class OpenCachingModelPrivate;
 
-namespace {
+namespace
+{
 // The maximum number of items we want to show on the screen.
 const quint32 numberOfItemsOnScreen = 20;
 }
@@ -29,30 +30,28 @@ class OpenCachingModel : public AbstractDataPluginModel
     Q_OBJECT
 
 public:
-    explicit OpenCachingModel( const PluginManager *pluginManager, QObject *parent = 0 );
+    explicit OpenCachingModel(const PluginManager *pluginManager, QObject *parent = 0);
     ~OpenCachingModel();
 
-    void setNumResults( int numResults );
-    void setMaxDistance( int maxDistance );
-    void setMinDifficulty( double minDifficulty );
-    void setMaxDifficulty( double maxDifficulty );
-    void setStartDate( const QDateTime& startDate );
-    void setEndDate( const QDateTime& endDate );
+    void setNumResults(int numResults);
+    void setMaxDistance(int maxDistance);
+    void setMinDifficulty(double minDifficulty);
+    void setMaxDifficulty(double maxDifficulty);
+    void setStartDate(const QDateTime &startDate);
+    void setEndDate(const QDateTime &endDate);
 
 protected:
     /**
      * Generates the download url for the description file from the web service depending on
      * the @p box surrounding the view and the @p number of files to show.
      **/
-    virtual void getAdditionalItems( const GeoDataLatLonAltBox& box,
-                                     const MarbleModel *model,
-                                     qint32 number = 10 );
+    virtual void getAdditionalItems(const GeoDataLatLonAltBox &box, const MarbleModel *model, qint32 number = 10);
 
     /**
      * Parses the @p file which getAdditionalItems downloads and
      * prepares the data for usage.
      **/
-    void parseFile( const QByteArray& file );
+    void parseFile(const QByteArray &file);
 
 private:
     int m_numResults;

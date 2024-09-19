@@ -15,11 +15,11 @@ class PanoramioPlugin : public AbstractDataPlugin
 {
     Q_OBJECT
     Q_PLUGIN_METADATA(IID "org.kde.marble.PanoramioPlugin")
-    Q_INTERFACES( Marble::RenderPluginInterface )
-    MARBLE_PLUGIN( PanoramioPlugin )
+    Q_INTERFACES(Marble::RenderPluginInterface)
+    MARBLE_PLUGIN(PanoramioPlugin)
 
- public:
-    explicit PanoramioPlugin( const MarbleModel *marbleModel = 0 );
+public:
+    explicit PanoramioPlugin(const MarbleModel *marbleModel = 0);
 
     QString nameId() const;
 
@@ -39,8 +39,8 @@ class PanoramioPlugin : public AbstractDataPlugin
 
     QIcon icon() const;
 
- protected:
-    bool eventFilter( QObject *object, QEvent *event );
+protected:
+    bool eventFilter(QObject *object, QEvent *event);
 };
 
 }

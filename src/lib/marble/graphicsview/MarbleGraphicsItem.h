@@ -27,12 +27,8 @@ class MarbleGraphicsItemPrivate;
 
 class MARBLE_EXPORT MarbleGraphicsItem
 {
- public:
-    enum CacheMode {
-        NoCache,
-        ItemCoordinateCache,
-        DeviceCoordinateCache
-    };
+public:
+    enum CacheMode { NoCache, ItemCoordinateCache, DeviceCoordinateCache };
 
     virtual ~MarbleGraphicsItem();
 
@@ -40,12 +36,12 @@ class MARBLE_EXPORT MarbleGraphicsItem
      * Paints the item on the screen in view coordinates.
      * It is not safe to call this function from a thread other than the gui thread.
      */
-    bool paintEvent( QPainter *painter, const ViewportParams *viewport );
+    bool paintEvent(QPainter *painter, const ViewportParams *viewport);
 
     /**
      * Returns true if the Item contains @p point in parent coordinates.
      */
-    bool contains( const QPointF& point ) const;
+    bool contains(const QPointF &point) const;
 
     /**
      * Returns the layout of the MarbleGraphicsItem.
@@ -56,7 +52,7 @@ class MARBLE_EXPORT MarbleGraphicsItem
      * Set the layout of the graphics item. The layout will now handle positions of added child
      * items. The MarbleGraphicsItem takes ownership of the layout.
      */
-    void setLayout( AbstractMarbleGraphicsLayout *layout );
+    void setLayout(AbstractMarbleGraphicsLayout *layout);
 
     /**
      * Returns the cache mode of the item
@@ -66,7 +62,7 @@ class MARBLE_EXPORT MarbleGraphicsItem
     /**
      * Set the cache mode of the item
      */
-    void setCacheMode( CacheMode mode );
+    void setCacheMode(CacheMode mode);
 
     /**
      * Returns if the item is visible.
@@ -76,7 +72,7 @@ class MARBLE_EXPORT MarbleGraphicsItem
     /**
      * Makes the item visible or invisible, depending on @p visible.
      */
-    void setVisible( bool visible );
+    void setVisible(bool visible);
 
     /**
      * Hides the item. Equivalent to setVisible( false )
@@ -96,7 +92,7 @@ class MARBLE_EXPORT MarbleGraphicsItem
     /**
      * Set the size of the item
      */
-    void setSize( const QSizeF& size );
+    void setSize(const QSizeF &size);
 
     /**
      * Returns the size of the content of the MarbleGraphicsItem.
@@ -107,25 +103,25 @@ class MARBLE_EXPORT MarbleGraphicsItem
     /**
      * Set the size of the content of the item.
      */
-    virtual void setContentSize( const QSizeF& size );
+    virtual void setContentSize(const QSizeF &size);
 
     /**
      * Returns the rect of the content in item coordinates.
      */
     virtual QRectF contentRect() const;
 
-    virtual void setProjection(const ViewportParams *viewport );
+    virtual void setProjection(const ViewportParams *viewport);
 
- protected:
+protected:
     explicit MarbleGraphicsItem(MarbleGraphicsItemPrivate *dd);
 
     /**
      * Paints the item in item coordinates. This has to be reimplemented by the subclass
      * This function will be called by paintEvent().
      */
-    virtual void paint( QPainter *painter );
+    virtual void paint(QPainter *painter);
 
-    virtual bool eventFilter( QObject *object, QEvent *e );
+    virtual bool eventFilter(QObject *object, QEvent *e);
 
     /**
      * Marks the item and all parent items as invalid. If caching is enabled, the next paintEvent()
@@ -133,10 +129,10 @@ class MARBLE_EXPORT MarbleGraphicsItem
      */
     void update();
 
- protected:
-    MarbleGraphicsItemPrivate * const d_ptr;
+protected:
+    MarbleGraphicsItemPrivate *const d_ptr;
 
- private:
+private:
     Q_DISABLE_COPY(MarbleGraphicsItem)
     Q_DECLARE_PRIVATE(MarbleGraphicsItem)
 };

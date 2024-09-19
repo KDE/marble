@@ -12,7 +12,6 @@
 #include "GeoDataCoordinates.h"
 #include "LabelGraphicsItem.h"
 
-
 namespace Marble
 {
 
@@ -24,12 +23,12 @@ class ElevationProfileMarker : public RenderPlugin
     Q_OBJECT
     Q_PLUGIN_METADATA(IID "org.kde.marble.ElevationProfileMarker")
 
-    Q_INTERFACES( Marble::RenderPluginInterface )
+    Q_INTERFACES(Marble::RenderPluginInterface)
 
-    MARBLE_PLUGIN( ElevationProfileMarker )
+    MARBLE_PLUGIN(ElevationProfileMarker)
 
- public:
-    explicit ElevationProfileMarker( const MarbleModel *marbleModel = nullptr );
+public:
+    explicit ElevationProfileMarker(const MarbleModel *marbleModel = nullptr);
     ~ElevationProfileMarker() override;
 
     QStringList backendTypes() const override;
@@ -60,14 +59,13 @@ class ElevationProfileMarker : public RenderPlugin
 
     bool isInitialized() const override;
 
-    bool render( GeoPainter *painter, ViewportParams *viewport,
-                 const QString &renderPos, GeoSceneLayer *layer = nullptr ) override;
+    bool render(GeoPainter *painter, ViewportParams *viewport, const QString &renderPos, GeoSceneLayer *layer = nullptr) override;
 
- private Q_SLOTS:
-    void onGeoObjectAdded( GeoDataObject *object );
-    void onGeoObjectRemoved( GeoDataObject *object );
+private Q_SLOTS:
+    void onGeoObjectAdded(GeoDataObject *object);
+    void onGeoObjectRemoved(GeoDataObject *object);
 
- private:
+private:
     GeoDataPlacemark *m_markerPlacemark;
     GeoDataCoordinates m_currentPosition;
 
@@ -75,7 +73,6 @@ class ElevationProfileMarker : public RenderPlugin
     LabelGraphicsItem m_markerIcon;
     LabelGraphicsItem m_markerText;
 };
-
 
 }
 

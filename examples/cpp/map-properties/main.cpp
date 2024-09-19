@@ -5,15 +5,15 @@
 
 #include <QApplication>
 
+#include <marble/AbstractFloatItem.h>
 #include <marble/MarbleGlobal.h>
 #include <marble/MarbleWidget.h>
-#include <marble/AbstractFloatItem.h>
 
 using namespace Marble;
 
-int main(int argc, char** argv)
+int main(int argc, char **argv)
 {
-    QApplication app(argc,argv);
+    QApplication app(argc, argv);
 
     // Create a Marble QWidget without a parent
     MarbleWidget *mapWidget = new MarbleWidget();
@@ -21,28 +21,27 @@ int main(int argc, char** argv)
     // Load the OpenStreetMap map
     mapWidget->setMapThemeId(QStringLiteral("earth/bluemarble/bluemarble.dgml"));
 
-    mapWidget->setProjection( Mercator );
+    mapWidget->setProjection(Mercator);
 
     // Enable the cloud cover and enable the country borders
-    mapWidget->setShowClouds( true );
-    mapWidget->setShowBorders( true );
+    mapWidget->setShowClouds(true);
+    mapWidget->setShowBorders(true);
 
     // Hide the FloatItems: Compass and StatusBar
     mapWidget->setShowOverviewMap(false);
     mapWidget->setShowScaleBar(false);
 
     const auto floatItems = mapWidget->floatItems();
-    for (AbstractFloatItem * floatItem : floatItems) {
+    for (AbstractFloatItem *floatItem : floatItems) {
         if (floatItem && floatItem->nameId() == QLatin1String("compass")) {
-
             // Put the compass onto the left hand side
-            floatItem->setPosition( QPoint( 10, 10 ) );
+            floatItem->setPosition(QPoint(10, 10));
             // Make the content size of the compass smaller
-            floatItem->setContentSize( QSize( 50, 50 ) );
+            floatItem->setContentSize(QSize(50, 50));
         }
     }
 
-    mapWidget->resize( 400, 300 );
+    mapWidget->resize(400, 300);
     mapWidget->show();
 
     return app.exec();

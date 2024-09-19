@@ -14,7 +14,7 @@ namespace Marble
 
 class GeoDataMultiTrackPrivate : public GeoDataGeometryPrivate
 {
-  public:
+public:
     GeoDataMultiTrackPrivate()
     {
     }
@@ -24,28 +24,28 @@ class GeoDataMultiTrackPrivate : public GeoDataGeometryPrivate
         qDeleteAll(m_vector);
     }
 
-    GeoDataMultiTrackPrivate& operator=( const GeoDataMultiTrackPrivate &other)
+    GeoDataMultiTrackPrivate &operator=(const GeoDataMultiTrackPrivate &other)
     {
-        GeoDataGeometryPrivate::operator=( other );
+        GeoDataGeometryPrivate::operator=(other);
 
-        qDeleteAll( m_vector );
+        qDeleteAll(m_vector);
         m_vector.clear();
 
         m_vector.reserve(other.m_vector.size());
-        for( GeoDataTrack *track: other.m_vector ) {
-            m_vector.append( new GeoDataTrack( *track ) );
+        for (GeoDataTrack *track : other.m_vector) {
+            m_vector.append(new GeoDataTrack(*track));
         }
         return *this;
     }
 
     GeoDataGeometryPrivate *copy() const override
-    { 
-         GeoDataMultiTrackPrivate* copy = new GeoDataMultiTrackPrivate;
+    {
+        GeoDataMultiTrackPrivate *copy = new GeoDataMultiTrackPrivate;
         *copy = *this;
         return copy;
     }
 
-    QVector<GeoDataTrack*>  m_vector;
+    QVector<GeoDataTrack *> m_vector;
 };
 
 } // namespace Marble

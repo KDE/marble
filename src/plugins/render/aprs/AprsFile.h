@@ -9,24 +9,24 @@
 #include "AprsSource.h"
 #include <QString>
 
-namespace Marble {
+namespace Marble
+{
 class AprsFile : public AprsSource
-    {
-      public:
-        explicit AprsFile( const QString &fileName );
-        ~AprsFile() override;
+{
+public:
+    explicit AprsFile(const QString &fileName);
+    ~AprsFile() override;
 
-        QString    sourceName() const override;
-        QIODevice *openSocket() override;
-        void       checkReadReturn( int length, QIODevice **socket,
-                                    AprsGatherer *gatherer ) override;
+    QString sourceName() const override;
+    QIODevice *openSocket() override;
+    void checkReadReturn(int length, QIODevice **socket, AprsGatherer *gatherer) override;
 
-        bool       canDoDirect() const override;
+    bool canDoDirect() const override;
 
-      private:
-        QString m_fileName;
-        int     m_errorCount;
-    };
+private:
+    QString m_fileName;
+    int m_errorCount;
+};
 }
 
 #endif /* APRSFILE_H */

@@ -4,13 +4,12 @@
 // SPDX-FileCopyrightText: 2008 Jens-Michael Hoffmann <jensmh@gmx.de>
 //
 
-
 #ifndef MARBLE_GEODATAOBJECT_H
 #define MARBLE_GEODATAOBJECT_H
 
 #include "geodata_export.h"
 
-#include "GeoDocument.h" 
+#include "GeoDocument.h"
 #include "Serializable.h"
 
 #include <QMetaType>
@@ -40,13 +39,12 @@ class GeoDataObjectPrivate;
  * mechanism of KML is used, which is currently not supported by
  * Marble.
  */
-class GEODATA_EXPORT GeoDataObject : public GeoNode,
-                      public Serializable
+class GEODATA_EXPORT GeoDataObject : public GeoNode, public Serializable
 {
 public:
     GeoDataObject();
-    GeoDataObject( const GeoDataObject & );
-    GeoDataObject & operator=( const GeoDataObject & );
+    GeoDataObject(const GeoDataObject &);
+    GeoDataObject &operator=(const GeoDataObject &);
     ~GeoDataObject() override;
 
     /// Provides the parent of the object in GeoDataContainers
@@ -64,7 +62,7 @@ public:
      * @brief Set the id of the object
      * @param value the new id value
      */
-    void setId( const QString &value );
+    void setId(const QString &value);
 
     /**
      * @brief Get the targetId of the object to be replaced
@@ -74,27 +72,25 @@ public:
      * @brief set a new targetId of this object
      * @param value the new targetId value
      */
-    void setTargetId( const QString &value );
+    void setTargetId(const QString &value);
 
-    QString resolvePath( const QString &relativePath ) const;
+    QString resolvePath(const QString &relativePath) const;
 
     /// Reimplemented from Serializable
-    void pack( QDataStream& stream ) const override;
+    void pack(QDataStream &stream) const override;
     /// Reimplemented from Serializable
-    void unpack( QDataStream& steam ) override;
+    void unpack(QDataStream &steam) override;
 
- private:
+private:
+    GeoDataObjectPrivate *d;
 
-    GeoDataObjectPrivate * d;
-
- protected:
+protected:
     /**
      * @brief Compares the value of id and targetId of the two objects
      * @return true if they these values are equal or false otherwise
      */
     virtual bool equals(const GeoDataObject &other) const;
 };
-
 
 /**
  * Returns the given node cast to type T if the node was instantiated as type T; otherwise returns 0.
@@ -140,6 +136,6 @@ const T *geodata_cast(const GeoDataObject *node)
 
 }
 
-Q_DECLARE_METATYPE( Marble::GeoDataObject* )
+Q_DECLARE_METATYPE(Marble::GeoDataObject *)
 
 #endif

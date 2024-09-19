@@ -25,29 +25,28 @@ class GeoDataPlacemark;
  */
 class NodeItemDelegate : public QItemDelegate
 {
-
-Q_OBJECT
+    Q_OBJECT
 
 public:
-    NodeItemDelegate( GeoDataPlacemark* placemark, QTreeView* view );
-    QSize sizeHint( const QStyleOptionViewItem &option, const QModelIndex &index ) const override;
-    QWidget* createEditor(QWidget *parent, const QStyleOptionViewItem &option, const QModelIndex &index) const override;
+    NodeItemDelegate(GeoDataPlacemark *placemark, QTreeView *view);
+    QSize sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const override;
+    QWidget *createEditor(QWidget *parent, const QStyleOptionViewItem &option, const QModelIndex &index) const override;
     void updateEditorGeometry(QWidget *editor, const QStyleOptionViewItem &option, const QModelIndex &index) const override;
     void setEditorData(QWidget *editor, const QModelIndex &index) const override;
     void setModelData(QWidget *editor, QAbstractItemModel *model, const QModelIndex &index) const override;
     void paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const override;
 
 private:
-    GeoDataPlacemark* m_placemark;
+    GeoDataPlacemark *m_placemark;
     mutable QModelIndex m_indexBeingEdited;
-    QTreeView* m_view;
+    QTreeView *m_view;
 
 private Q_SLOTS:
-    void previewNodeMove( qreal value);
-    void unsetCurrentEditor( QWidget* widget );
+    void previewNodeMove(qreal value);
+    void unsetCurrentEditor(QWidget *widget);
 
 Q_SIGNALS:
-    void modelChanged( GeoDataPlacemark* placemark ) const;
+    void modelChanged(GeoDataPlacemark *placemark) const;
     void geometryChanged() const;
 };
 

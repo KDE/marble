@@ -6,17 +6,18 @@
 #ifndef MARBLE_ECLIPSESPLUGIN_H
 #define MARBLE_ECLIPSESPLUGIN_H
 
-#include "RenderPlugin.h"
 #include "DialogConfigurationInterface.h"
+#include "RenderPlugin.h"
 
-#include <QHash>
 #include <QActionGroup>
+#include <QHash>
 
 class QMenu;
 
-namespace Ui {
-    class EclipsesConfigDialog;
-    class EclipsesReminderDialog;
+namespace Ui
+{
+class EclipsesConfigDialog;
+class EclipsesReminderDialog;
 }
 
 namespace Marble
@@ -33,19 +34,18 @@ class EclipsesBrowserDialog;
  * It utilizes Gerhard Holtcamps eclsolar class to render nice
  * visualizations of eclipse events on earth.
  */
-class EclipsesPlugin : public RenderPlugin,
-                       public DialogConfigurationInterface
+class EclipsesPlugin : public RenderPlugin, public DialogConfigurationInterface
 {
     Q_OBJECT
     Q_PLUGIN_METADATA(IID "org.kde.marble.EclipsesPlugin")
 
-    Q_INTERFACES( Marble::RenderPluginInterface )
-    Q_INTERFACES( Marble::DialogConfigurationInterface )
-    MARBLE_PLUGIN( EclipsesPlugin )
+    Q_INTERFACES(Marble::RenderPluginInterface)
+    Q_INTERFACES(Marble::DialogConfigurationInterface)
+    MARBLE_PLUGIN(EclipsesPlugin)
 
 public:
     EclipsesPlugin();
-    explicit EclipsesPlugin( const MarbleModel *marbleModel );
+    explicit EclipsesPlugin(const MarbleModel *marbleModel);
     ~EclipsesPlugin() override;
 
     // this is the implementation of the RenderPlugin interface
@@ -63,22 +63,19 @@ public:
     QVector<PluginAuthor> pluginAuthors() const override;
     QIcon icon() const override;
     RenderPlugin::RenderType renderType() const override;
-    QList<QActionGroup*>* actionGroups() const override;
+    QList<QActionGroup *> *actionGroups() const override;
     QDialog *configDialog() override;
 
     void initialize() override;
     bool isInitialized() const override;
 
-    bool render( GeoPainter *painter,
-                 ViewportParams *viewport,
-                 const QString &renderPos,
-                 GeoSceneLayer *layer ) override;
+    bool render(GeoPainter *painter, ViewportParams *viewport, const QString &renderPos, GeoSceneLayer *layer) override;
 
     QHash<QString, QVariant> settings() const override;
-    void setSettings( const QHash<QString, QVariant> &settings ) override;
+    void setSettings(const QHash<QString, QVariant> &settings) override;
 
 protected:
-    bool eventFilter( QObject *object, QEvent *e ) override;
+    bool eventFilter(QObject *object, QEvent *e) override;
 
 private Q_SLOTS:
     void readSettings();
@@ -102,7 +99,7 @@ private Q_SLOTS:
      * Shows the eclipse with index @p index in year @p year by setting
      * the marble clock to the time of the eclipse's maximum.
      */
-    void showEclipse( int year, int index );
+    void showEclipse(int year, int index);
 
     /**
      * @brief Show an eclipse event selected from the menu
@@ -113,7 +110,7 @@ private Q_SLOTS:
      * The eclipse's index is stored in the actions data field while the
      * year is taken from the action's text.
      */
-    void showEclipseFromMenu( QAction *action );
+    void showEclipseFromMenu(QAction *action);
 
     /**
      * @brief Update menu item state
@@ -124,7 +121,7 @@ private Q_SLOTS:
     void updateMenuItemState();
 
 private:
-    bool renderItem( GeoPainter *painter, EclipsesItem *item ) const;
+    bool renderItem(GeoPainter *painter, EclipsesItem *item) const;
 
 private:
     bool m_isInitialized;
@@ -132,7 +129,7 @@ private:
     MarbleWidget *m_marbleWidget;
 
     EclipsesModel *m_model;
-    QList<QActionGroup*> m_actionGroups;
+    QList<QActionGroup *> m_actionGroups;
     QActionGroup *m_eclipsesActionGroup;
     QHash<QString, QVariant> m_settings;
     QAction *m_eclipsesMenuAction;

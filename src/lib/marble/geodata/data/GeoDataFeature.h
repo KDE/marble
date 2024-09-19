@@ -4,7 +4,6 @@
 // SPDX-FileCopyrightText: 2009 Patrick Spendrin <ps_ml@gmx.de>
 //
 
-
 #ifndef MARBLE_GEODATAFEATURE_H
 #define MARBLE_GEODATAFEATURE_H
 
@@ -43,19 +42,22 @@ class GeoDataSnippet;
  */
 class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
 {
- public:
+public:
     GeoDataFeature();
     /// Create a new GeoDataFeature with @p name as its name.
-    explicit GeoDataFeature( const QString& name );
+    explicit GeoDataFeature(const QString &name);
 
-    GeoDataFeature( const GeoDataFeature& other );
+    GeoDataFeature(const GeoDataFeature &other);
 
     ~GeoDataFeature() override;
 
-    GeoDataFeature& operator=( const GeoDataFeature& other );
+    GeoDataFeature &operator=(const GeoDataFeature &other);
 
     bool operator==(const GeoDataFeature &other) const;
-    inline bool operator!=(const GeoDataFeature &other) const { return !(*this == other); }
+    inline bool operator!=(const GeoDataFeature &other) const
+    {
+        return !(*this == other);
+    }
 
     EnumFeatureId featureId() const;
 
@@ -73,7 +75,7 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
      * @brief Set a new name for this feature
      * @param value  the new name
      */
-    void setName( const QString &value );
+    void setName(const QString &value);
 
     /**
      * @brief A short description of the feature.
@@ -87,22 +89,22 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
      * @brief Set a new name for this feature
      * @param value  the new name
      */
-    void setSnippet( const GeoDataSnippet &value );
+    void setSnippet(const GeoDataSnippet &value);
 
     /// Return the address of the feature
     QString address() const;
     /// Set the address of this feature to @p value.
-    void setAddress( const QString &value);
+    void setAddress(const QString &value);
 
     /// Return the phone number of the feature
     QString phoneNumber() const;
     /// Set the phone number of this feature to @p value.
-    void setPhoneNumber( const QString &value );
+    void setPhoneNumber(const QString &value);
 
     /// Return the text description of the feature.
     QString description() const;
     /// Set the description of this feature to @p value.
-    void setDescription( const QString &value );
+    void setDescription(const QString &value);
 
     /**
      * @brief test if the description is CDATA or not
@@ -114,18 +116,18 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
      */
     bool descriptionIsCDATA() const;
     /// Set the description to be CDATA See: @see descriptionIsCDATA()
-    void setDescriptionCDATA( bool cdata );
+    void setDescriptionCDATA(bool cdata);
 
     /// Get the Abstract view of the feature
     const GeoDataAbstractView *abstractView() const;
     GeoDataAbstractView *abstractView();
     /// Set the abstract view of the feature
-    void setAbstractView( GeoDataAbstractView *abstractView );
+    void setAbstractView(GeoDataAbstractView *abstractView);
 
     /// Return the styleUrl of the feature.
     QString styleUrl() const;
     /// Set the styleUrl of this feature to @p value.
-    void setStyleUrl( const QString &value );
+    void setStyleUrl(const QString &value);
 
     /// Return whether this feature is visible or not
     bool isVisible() const;
@@ -141,31 +143,31 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
      * should be shown or not.  This can be changed either from a GUI
      * or through some action of the program.
      */
-    void setVisible( bool value );
+    void setVisible(bool value);
 
     /**
      * Return the timespan of the feature.
      */
-    const GeoDataTimeSpan& timeSpan() const;
-    GeoDataTimeSpan& timeSpan();
+    const GeoDataTimeSpan &timeSpan() const;
+    GeoDataTimeSpan &timeSpan();
 
     /**
      * Set the timespan of the feature.
      * @param timeSpan new of timespan.
      */
-    void setTimeSpan( const GeoDataTimeSpan &timeSpan );
+    void setTimeSpan(const GeoDataTimeSpan &timeSpan);
 
     /**
      * Return the timestamp of the feature.
      */
-    const GeoDataTimeStamp& timeStamp() const;
-    GeoDataTimeStamp& timeStamp();
+    const GeoDataTimeStamp &timeStamp() const;
+    GeoDataTimeStamp &timeStamp();
 
     /**
      * Set the timestamp of the feature.
      * @param timeStamp new of the timestamp.
      */
-    void setTimeStamp( const GeoDataTimeStamp &timeStamp );
+    void setTimeStamp(const GeoDataTimeStamp &timeStamp);
 
     /**
      * Return the style assigned to the placemark, or a default style if none has been set
@@ -179,32 +181,32 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
      * Sets the style of the placemark.
      * @param  style  the new style to be used.
      */
-    void setStyle( const QSharedPointer<GeoDataStyle> &style );
+    void setStyle(const QSharedPointer<GeoDataStyle> &style);
 
     /**
      * Return the ExtendedData assigned to the feature.
      */
-    GeoDataExtendedData& extendedData();
-    const GeoDataExtendedData& extendedData() const;
+    GeoDataExtendedData &extendedData();
+    const GeoDataExtendedData &extendedData() const;
 
     /**
      * Sets the ExtendedData of the feature.
      * @param  extendedData  the new ExtendedData to be used.
      */
-    void setExtendedData( const GeoDataExtendedData& extendedData );
+    void setExtendedData(const GeoDataExtendedData &extendedData);
 
     /**
      * Return the region assigned to the placemark.
      */
-    const GeoDataRegion& region() const;
-    GeoDataRegion& region();
+    const GeoDataRegion &region() const;
+    GeoDataRegion &region();
     /**
      * @brief Sets the region of the placemark.
      * @param region new value for the region
      *
      * The feature is only shown when the region if active.
      */
-    void setRegion( const GeoDataRegion& region );
+    void setRegion(const GeoDataRegion &region);
 
     /**
      * Return the role of the placemark.
@@ -216,7 +218,7 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
      * Sets the role of the placemark.
      * @param  role  the new role to be used.
      */
-    void setRole( const QString &role );
+    void setRole(const QString &role);
 
     /**
      * @brief Return the popularity index of the placemark.
@@ -229,7 +231,7 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
      * Sets the popularity @p index of the placemark.
      * @param  index  the new index to be used.
      */
-    void setZoomLevel( int index );
+    void setZoomLevel(int index);
 
     /**
      * Return the popularity of the feature.
@@ -239,7 +241,7 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
      * Sets the @p popularity of the feature.
      * @param  popularity  the new popularity value
      */
-    void setPopularity( qint64 popularity );
+    void setPopularity(qint64 popularity);
 
     /**
      * Return a pointer to a GeoDataStyleMap object which represents the styleMap
@@ -248,31 +250,30 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
      * normal style.
      * @see GeoDataStyleMap
      */
-    const GeoDataStyleMap* styleMap() const;
+    const GeoDataStyleMap *styleMap() const;
     /**
      * Sets the styleMap of the feature
      */
-    void setStyleMap( const GeoDataStyleMap* map );
+    void setStyleMap(const GeoDataStyleMap *map);
 
     /// Duplicate into another equal instance
-    virtual GeoDataFeature * clone() const = 0;
-
+    virtual GeoDataFeature *clone() const = 0;
 
     /// Serialize the contents of the feature to @p stream.
-    void pack( QDataStream& stream ) const override;
+    void pack(QDataStream &stream) const override;
     /// Unserialize the contents of the feature from @p stream.
-    void unpack( QDataStream& stream ) override;
+    void unpack(QDataStream &stream) override;
 
- protected:
+protected:
     // the d-pointer needs to be protected to be accessible from derived classes
-    GeoDataFeaturePrivate* const d_ptr;
-    explicit GeoDataFeature(GeoDataFeaturePrivate* dd);
-    GeoDataFeature(const GeoDataFeature& other, GeoDataFeaturePrivate* dd);
+    GeoDataFeaturePrivate *const d_ptr;
+    explicit GeoDataFeature(GeoDataFeaturePrivate *dd);
+    GeoDataFeature(const GeoDataFeature &other, GeoDataFeaturePrivate *dd);
 
-    bool equals( const GeoDataFeature &other ) const;
+    bool equals(const GeoDataFeature &other) const;
     using GeoDataObject::equals;
 
- private:
+private:
     Q_DECLARE_PRIVATE(GeoDataFeature)
 };
 

@@ -12,21 +12,22 @@
 
 #include <QString>
 
-namespace Marble {
+namespace Marble
+{
 
 class MarbleModel;
 class GeoDataLatLonBox;
 
 /**
-  * Parse result of a user's search term
-  */
+ * Parse result of a user's search term
+ */
 class DatabaseQuery
 {
 public:
-    enum QueryType { 
-        AddressSearch,  /// precise search for an address
+    enum QueryType {
+        AddressSearch, /// precise search for an address
         CategorySearch, /// search which contains a poi category
-        BroadSearch     /// any other non specific search
+        BroadSearch /// any other non specific search
     };
 
     enum ResultFormat {
@@ -34,7 +35,7 @@ public:
         DistanceFormat /// display results with distance information
     };
 
-    DatabaseQuery( const MarbleModel* model, const QString &searchTerm, const GeoDataLatLonBox &preferred );
+    DatabaseQuery(const MarbleModel *model, const QString &searchTerm, const GeoDataLatLonBox &preferred);
 
     QueryType queryType() const;
 
@@ -53,7 +54,7 @@ public:
     GeoDataCoordinates position() const;
 
 private:
-    bool isPointOfInterest( const QString &category );
+    bool isPointOfInterest(const QString &category);
 
     QueryType m_queryType;
     ResultFormat m_resultFormat;

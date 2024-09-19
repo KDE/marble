@@ -6,12 +6,12 @@
 #ifndef MARBLE_ROUTINGINSTRUCTION_H
 #define MARBLE_ROUTINGINSTRUCTION_H
 
-#include "RoutingWaypoint.h"
 #include "RoutingPoint.h"
+#include "RoutingWaypoint.h"
 #include "marble_export.h"
 
-#include <QVector>
 #include <QMetaType>
+#include <QVector>
 
 class QTextStream;
 
@@ -19,9 +19,9 @@ namespace Marble
 {
 
 /**
-  * Stores data related to one instruction: Road name, angle to predecessor,
-  * associated waypoints etc. Can be streamed directly to a QTextStream.
-  */
+ * Stores data related to one instruction: Road name, angle to predecessor,
+ * associated waypoints etc. Can be streamed directly to a QTextStream.
+ */
 class MARBLE_EXPORT RoutingInstruction
 {
 public:
@@ -46,13 +46,13 @@ public:
     };
 
     /** Constructor */
-    explicit RoutingInstruction( const RoutingWaypoint &item = RoutingWaypoint() );
+    explicit RoutingInstruction(const RoutingWaypoint &item = RoutingWaypoint());
 
     /**
-      * Append data of the given item, returns true if item's street
-      * name matches instructions street name
-      */
-    bool append( const RoutingWaypoint &item, int angle );
+     * Append data of the given item, returns true if item's street
+     * name matches instructions street name
+     */
+    bool append(const RoutingWaypoint &item, int angle);
 
     /** Name of the road to turn into */
     QString roadName() const;
@@ -67,32 +67,32 @@ public:
     QVector<RoutingWaypoint> points() const;
 
     /**
-      * Contains the intersection point and points near it on the previous and current road.
-      * Near is taken as that waypoint with the largest different to the intersection point
-      * that does not exceed 50 meter.
-      */
+     * Contains the intersection point and points near it on the previous and current road.
+     * Near is taken as that waypoint with the largest different to the intersection point
+     * that does not exceed 50 meter.
+     */
     QVector<RoutingPoint> intersectionPoints() const;
 
     /** The angle between the two turn roads, in radians */
     qreal angleToPredecssor() const;
 
     /** Previous turn road. Will be 0 for the first one (route start) */
-    RoutingInstruction* predecessor();
+    RoutingInstruction *predecessor();
 
     /** Const overload for #predecessor */
-    const RoutingInstruction* predecessor() const;
+    const RoutingInstruction *predecessor() const;
 
     /** Change the predecessor */
-    void setPredecessor( RoutingInstruction* predecessor );
+    void setPredecessor(RoutingInstruction *predecessor);
 
     /** Next turn road. Will be 0 for the last one (destination) */
-    RoutingInstruction* successor();
+    RoutingInstruction *successor();
 
     /** Const overload for #successor */
-    const RoutingInstruction* successor() const;
+    const RoutingInstruction *successor() const;
 
     /** Change the successor */
-    void setSuccessor( RoutingInstruction* successor );
+    void setSuccessor(RoutingInstruction *successor);
 
     /** The accumulated distance of all waypoints belonging to this instruction */
     qreal distance() const;
@@ -117,7 +117,7 @@ public:
     /** Formats the instruction for a human reader */
     QString instructionText() const;
 
-    static QString generateRoadInstruction( TurnType turnType, const QString &roadName );
+    static QString generateRoadInstruction(TurnType turnType, const QString &roadName);
 
 protected:
     int roundaboutExitNumber() const;
@@ -143,17 +143,17 @@ private:
 
     int m_roundaboutExit;
 
-    RoutingInstruction* m_predecessor;
+    RoutingInstruction *m_predecessor;
 
-    RoutingInstruction* m_successor;
+    RoutingInstruction *m_successor;
 };
 
-QTextStream& operator<<( QTextStream& stream, const RoutingInstruction &i );
+QTextStream &operator<<(QTextStream &stream, const RoutingInstruction &i);
 
 using RoutingInstructions = QVector<RoutingInstruction>;
 
 } // namespace Marble
 
-Q_DECLARE_METATYPE( Marble::RoutingInstruction::TurnType )
+Q_DECLARE_METATYPE(Marble::RoutingInstruction::TurnType)
 
 #endif // MARBLE_ROUTINGINSTRUCTION_H

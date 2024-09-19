@@ -3,7 +3,6 @@
 // SPDX-FileCopyrightText: 2008 Patrick Spendrin <ps_ml@gmx.de>
 //
 
-
 #include "GeoDataPolyStyle.h"
 #include "GeoDataTypes.h"
 #include "MarbleDirs.h"
@@ -16,7 +15,7 @@ namespace Marble
 
 class GeoDataPolyStylePrivate
 {
-  public:
+public:
     GeoDataPolyStylePrivate()
         : m_fill(true)
         , m_outline(true)
@@ -26,9 +25,9 @@ class GeoDataPolyStylePrivate
     }
 
     /// whether to fill the polygon
-    bool  m_fill;
+    bool m_fill;
     /// whether to draw the outline
-    bool  m_outline;
+    bool m_outline;
     Qt::BrushStyle m_brushStyle;
     /// The value of colorIndex will be maped to a color for brush
     quint8 m_colorIndex;
@@ -37,19 +36,20 @@ class GeoDataPolyStylePrivate
 };
 
 GeoDataPolyStyle::GeoDataPolyStyle()
-    : d( new GeoDataPolyStylePrivate )
+    : d(new GeoDataPolyStylePrivate)
 {
 }
 
-GeoDataPolyStyle::GeoDataPolyStyle( const GeoDataPolyStyle& other )
-    : GeoDataColorStyle( other ), d( new GeoDataPolyStylePrivate( *other.d ) )
+GeoDataPolyStyle::GeoDataPolyStyle(const GeoDataPolyStyle &other)
+    : GeoDataColorStyle(other)
+    , d(new GeoDataPolyStylePrivate(*other.d))
 {
 }
 
-GeoDataPolyStyle::GeoDataPolyStyle( const QColor &color )
-    : d( new GeoDataPolyStylePrivate )
+GeoDataPolyStyle::GeoDataPolyStyle(const QColor &color)
+    : d(new GeoDataPolyStylePrivate)
 {
-    setColor( color );
+    setColor(color);
 }
 
 GeoDataPolyStyle::~GeoDataPolyStyle()
@@ -57,30 +57,28 @@ GeoDataPolyStyle::~GeoDataPolyStyle()
     delete d;
 }
 
-GeoDataPolyStyle& GeoDataPolyStyle::operator=( const GeoDataPolyStyle& other )
+GeoDataPolyStyle &GeoDataPolyStyle::operator=(const GeoDataPolyStyle &other)
 {
-    GeoDataColorStyle::operator=( other );
+    GeoDataColorStyle::operator=(other);
     *d = *other.d;
     return *this;
 }
 
-bool GeoDataPolyStyle::operator==( const GeoDataPolyStyle &other ) const
+bool GeoDataPolyStyle::operator==(const GeoDataPolyStyle &other) const
 {
-    if ( GeoDataColorStyle::operator!=( other ) ) {
+    if (GeoDataColorStyle::operator!=(other)) {
         return false;
     }
 
-    return d->m_fill == other.d->m_fill &&
-           d->m_outline == other.d->m_outline &&
-           d->m_brushStyle == other.d->m_brushStyle;
+    return d->m_fill == other.d->m_fill && d->m_outline == other.d->m_outline && d->m_brushStyle == other.d->m_brushStyle;
 }
 
-bool GeoDataPolyStyle::operator!=( const GeoDataPolyStyle &other ) const
+bool GeoDataPolyStyle::operator!=(const GeoDataPolyStyle &other) const
 {
-    return !this->operator==( other );
+    return !this->operator==(other);
 }
 
-const char* GeoDataPolyStyle::nodeType() const
+const char *GeoDataPolyStyle::nodeType() const
 {
     return GeoDataTypes::GeoDataPolyStyleType;
 }
@@ -105,7 +103,7 @@ bool GeoDataPolyStyle::outline() const
     return d->m_outline;
 }
 
-void GeoDataPolyStyle::setBrushStyle( const Qt::BrushStyle style )
+void GeoDataPolyStyle::setBrushStyle(const Qt::BrushStyle style)
 {
     d->m_brushStyle = style;
 }
@@ -115,7 +113,7 @@ Qt::BrushStyle GeoDataPolyStyle::brushStyle() const
     return d->m_brushStyle;
 }
 
-void GeoDataPolyStyle::setColorIndex( quint8 colorIndex )
+void GeoDataPolyStyle::setColorIndex(quint8 colorIndex)
 {
     d->m_colorIndex = colorIndex;
 }
@@ -125,7 +123,7 @@ quint8 GeoDataPolyStyle::colorIndex() const
     return d->m_colorIndex;
 }
 
-void GeoDataPolyStyle::setTexturePath( const QString& texturePath )
+void GeoDataPolyStyle::setTexturePath(const QString &texturePath)
 {
     d->m_texturePath = texturePath;
     d->m_textureImage = QImage();
@@ -138,27 +136,27 @@ QString GeoDataPolyStyle::texturePath() const
 
 QImage GeoDataPolyStyle::textureImage() const
 {
-    if ( !d->m_textureImage.isNull() ) {
+    if (!d->m_textureImage.isNull()) {
         return d->m_textureImage;
-    } else if ( !d->m_texturePath.isEmpty() ) {
-        d->m_textureImage = QImage( resolvePath( d->m_texturePath ) );
+    } else if (!d->m_texturePath.isEmpty()) {
+        d->m_textureImage = QImage(resolvePath(d->m_texturePath));
     }
 
     return d->m_textureImage;
 }
 
-void GeoDataPolyStyle::pack( QDataStream& stream ) const
+void GeoDataPolyStyle::pack(QDataStream &stream) const
 {
-    GeoDataColorStyle::pack( stream );
+    GeoDataColorStyle::pack(stream);
 
     stream << d->m_fill;
     stream << d->m_outline;
     stream << d->m_colorIndex;
 }
 
-void GeoDataPolyStyle::unpack( QDataStream& stream )
+void GeoDataPolyStyle::unpack(QDataStream &stream)
 {
-    GeoDataColorStyle::unpack( stream );
+    GeoDataColorStyle::unpack(stream);
 
     stream >> d->m_fill;
     stream >> d->m_outline;

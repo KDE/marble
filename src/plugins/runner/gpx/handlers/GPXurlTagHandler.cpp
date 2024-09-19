@@ -8,10 +8,10 @@
 #include "MarbleDebug.h"
 
 #include "GPXElementDictionary.h"
-#include "GeoParser.h"
-#include "GeoDataPlacemark.h"
 #include "GeoDataData.h"
 #include "GeoDataExtendedData.h"
+#include "GeoDataPlacemark.h"
+#include "GeoParser.h"
 
 namespace Marble
 {
@@ -24,14 +24,13 @@ GPX_DEFINE_TAG_HANDLER_10(url)
 // simplest means to make it available to the user.
 // In addition, url properties are saved to extendedData.
 // The insertion is done in the urlname element, which is the link text.
-GeoNode* GPXurlTagHandler::parse(GeoParser& parser) const
+GeoNode *GPXurlTagHandler::parse(GeoParser &parser) const
 {
     Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1String(gpxTag_url)));
 
     GeoStackItem parentItem = parser.parentElement();
-    if (parentItem.represents(gpxTag_wpt))
-    {
-        GeoDataPlacemark* placemark = parentItem.nodeAs<GeoDataPlacemark>();
+    if (parentItem.represents(gpxTag_wpt)) {
+        GeoDataPlacemark *placemark = parentItem.nodeAs<GeoDataPlacemark>();
 
         QString url = parser.readElementText().trimmed();
 

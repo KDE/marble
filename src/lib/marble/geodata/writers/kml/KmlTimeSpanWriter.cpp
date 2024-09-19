@@ -9,28 +9,24 @@
 #include "GeoDataTypes.h"
 #include "GeoWriter.h"
 #include "KmlElementDictionary.h"
-#include "KmlTimeStampTagWriter.h"
 #include "KmlObjectTagWriter.h"
+#include "KmlTimeStampTagWriter.h"
 
 namespace Marble
 {
 
-static GeoTagWriterRegistrar s_writerLookAt(
-    GeoTagWriter::QualifiedName( GeoDataTypes::GeoDataTimeSpanType,
-				 kml::kmlTag_nameSpaceOgc22 ),
-    new KmlTimeSpanWriter );
+static GeoTagWriterRegistrar s_writerLookAt(GeoTagWriter::QualifiedName(GeoDataTypes::GeoDataTimeSpanType, kml::kmlTag_nameSpaceOgc22), new KmlTimeSpanWriter);
 
-bool KmlTimeSpanWriter::write( const GeoNode *node,
-			       GeoWriter& writer ) const
+bool KmlTimeSpanWriter::write(const GeoNode *node, GeoWriter &writer) const
 {
     Q_ASSERT(dynamic_cast<const GeoDataTimeSpan *>(node));
     const GeoDataTimeSpan *timespan = static_cast<const GeoDataTimeSpan *>(node);
 
-    writer.writeStartElement( QString::fromUtf8(kml::kmlTag_TimeSpan) );
-    KmlObjectTagWriter::writeIdentifiers( writer, timespan );
+    writer.writeStartElement(QString::fromUtf8(kml::kmlTag_TimeSpan));
+    KmlObjectTagWriter::writeIdentifiers(writer, timespan);
 
-    writer.writeTextElement( "begin", KmlTimeStampTagWriter::toString( timespan->begin() ) );
-    writer.writeTextElement( "end", KmlTimeStampTagWriter::toString( timespan->end() ) );
+    writer.writeTextElement("begin", KmlTimeStampTagWriter::toString(timespan->begin()));
+    writer.writeTextElement("end", KmlTimeStampTagWriter::toString(timespan->end()));
 
     writer.writeEndElement();
 
@@ -38,4 +34,3 @@ bool KmlTimeSpanWriter::write( const GeoNode *node,
 }
 
 }
-

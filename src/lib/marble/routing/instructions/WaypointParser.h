@@ -10,8 +10,8 @@
 #include "marble_export.h"
 
 #include <QMap>
-#include <QVariant>
 #include <QStringList>
+#include <QVariant>
 
 class QTextStream;
 
@@ -22,39 +22,33 @@ class MARBLE_EXPORT WaypointParser
 {
 public:
     /** Fields which can be parsed */
-    enum Field {
-        Longitude,
-        Latitude,
-        JunctionType,
-        RoadName,
-        TotalSecondsRemaining,
-        RoadType
-    };
+    enum Field { Longitude, Latitude, JunctionType, RoadName, TotalSecondsRemaining, RoadType };
 
     /** Constructor */
     WaypointParser();
 
     /** Parses the given stream and returns the extracted waypoint list */
-    RoutingWaypoints parse( QTextStream &stream ) const;
+    RoutingWaypoints parse(QTextStream &stream) const;
 
     /** Associate the zero-based field no index with the given semantic type */
-    void setFieldIndex( Field field, int index );
+    void setFieldIndex(Field field, int index);
 
     /** The line separator used in the stream passed to #parse. Default is "\n" */
-    void setLineSeparator( const QString &separator );
+    void setLineSeparator(const QString &separator);
 
     /** The field separator. Default is ',' */
-    void setFieldSeparator( const QChar &separator );
+    void setFieldSeparator(const QChar &separator);
 
     /** Associate the given string key with the given junction type */
-    void addJunctionTypeMapping( const QString &key, RoutingWaypoint::JunctionType value );
+    void addJunctionTypeMapping(const QString &key, RoutingWaypoint::JunctionType value);
 
 private:
     template<class T>
-    T readField( Field field, const QStringList &fields, const T &defaultValue = T() ) const {
+    T readField(Field field, const QStringList &fields, const T &defaultValue = T()) const
+    {
         int index = m_fieldIndices[field];
-        if ( index >= 0 && index < fields.size() ) {
-            return QVariant( fields[index] ).value<T>();
+        if (index >= 0 && index < fields.size()) {
+            return QVariant(fields[index]).value<T>();
         }
 
         return defaultValue;
@@ -68,7 +62,7 @@ private:
 
     QMap<QString, RoutingWaypoint::JunctionType> m_junctionTypeMapping;
 
-    Q_DISABLE_COPY( WaypointParser )
+    Q_DISABLE_COPY(WaypointParser)
 };
 
 } // namespace Marble

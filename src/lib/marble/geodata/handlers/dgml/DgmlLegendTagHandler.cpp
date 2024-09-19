@@ -20,7 +20,7 @@ namespace dgml
 {
 DGML_DEFINE_TAG_HANDLER(Legend)
 
-GeoNode* DgmlLegendTagHandler::parse(GeoParser& parser) const
+GeoNode *DgmlLegendTagHandler::parse(GeoParser &parser) const
 {
     Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1String(dgmlTag_Legend)));
 

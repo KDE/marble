@@ -9,7 +9,6 @@
 #ifndef MARBLE_GEODATAFOLDER_H
 #define MARBLE_GEODATAFOLDER_H
 
-
 #include "GeoDataContainer.h"
 
 #include "geodata_export.h"
@@ -32,26 +31,26 @@ class GeoDataFolderPrivate;
  */
 class GEODATA_EXPORT GeoDataFolder : public GeoDataContainer
 {
- public:
+public:
     GeoDataFolder();
-    GeoDataFolder( const GeoDataFolder& other );
+    GeoDataFolder(const GeoDataFolder &other);
     ~GeoDataFolder() override;
 
-    GeoDataFolder& operator=(const GeoDataFolder& other);
+    GeoDataFolder &operator=(const GeoDataFolder &other);
 
-    bool operator==( const GeoDataFolder &other ) const;
-    bool operator!=( const GeoDataFolder &other ) const;
+    bool operator==(const GeoDataFolder &other) const;
+    bool operator!=(const GeoDataFolder &other) const;
 
-    const char* nodeType() const override;
+    const char *nodeType() const override;
 
-    GeoDataFeature * clone() const override;
+    GeoDataFeature *clone() const override;
 
- private:
+private:
     Q_DECLARE_PRIVATE(GeoDataFolder)
 };
 
 }
 
-Q_DECLARE_METATYPE(Marble::GeoDataFolder*)
+Q_DECLARE_METATYPE(Marble::GeoDataFolder *)
 
 #endif

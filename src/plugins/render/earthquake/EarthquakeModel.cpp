@@ -6,26 +6,27 @@
 #include "EarthquakeModel.h"
 #include "EarthquakeItem.h"
 
-#include "MarbleGlobal.h"
-#include "MarbleModel.h"
 #include "GeoDataCoordinates.h"
 #include "GeoDataLatLonAltBox.h"
 #include "MarbleDebug.h"
+#include "MarbleGlobal.h"
+#include "MarbleModel.h"
 
 #include <QDebug>
+#include <QJsonArray>
+#include <QJsonDocument>
+#include <QJsonObject>
 #include <QString>
 #include <QUrl>
-#include <QJsonDocument>
-#include <QJsonArray>
-#include <QJsonObject>
 
-namespace Marble {
+namespace Marble
+{
 
-EarthquakeModel::EarthquakeModel( const MarbleModel *marbleModel, QObject *parent )
-    : AbstractDataPluginModel( "earthquake", marbleModel, parent ),
-      m_minMagnitude( 0.0 ),
-      m_startDate( QDateTime::fromString( "2006-02-04", "yyyy-MM-dd" ) ),
-      m_endDate( QDateTime::currentDateTime() )
+EarthquakeModel::EarthquakeModel(const MarbleModel *marbleModel, QObject *parent)
+    : AbstractDataPluginModel("earthquake", marbleModel, parent)
+    , m_minMagnitude(0.0)
+    , m_startDate(QDateTime::fromString("2006-02-04", "yyyy-MM-dd"))
+    , m_endDate(QDateTime::currentDateTime())
 {
     // nothing to do
 }
@@ -34,40 +35,36 @@ EarthquakeModel::~EarthquakeModel()
 {
 }
 
-void EarthquakeModel::setMinMagnitude( double minMagnitude )
+void EarthquakeModel::setMinMagnitude(double minMagnitude)
 {
     m_minMagnitude = minMagnitude;
 }
 
-void EarthquakeModel::setStartDate( const QDateTime& startDate )
+void EarthquakeModel::setStartDate(const QDateTime &startDate)
 {
     m_startDate = startDate;
 }
 
-void EarthquakeModel::setEndDate( const QDateTime& endDate )
+void EarthquakeModel::setEndDate(const QDateTime &endDate)
 {
     m_endDate = endDate;
 }
 
-void EarthquakeModel::getAdditionalItems( const GeoDataLatLonAltBox& box, qint32 number )
+void EarthquakeModel::getAdditionalItems(const GeoDataLatLonAltBox &box, qint32 number)
 {
     if (marbleModel()->planetId() != QLatin1String("earth")) {
         return;
     }
 
-    const QString geonamesUrl( QLatin1String("http://api.geonames.org/earthquakesJSON") +
-        QLatin1String("?north=")   + QString::number(box.north() * RAD2DEG) +
-        QLatin1String("&south=")   + QString::number(box.south() * RAD2DEG) +
-        QLatin1String("&east=")    + QString::number(box.east() * RAD2DEG) +
-        QLatin1String("&west=")    + QString::number(box.west() * RAD2DEG) +
-        QLatin1String("&date=")    + m_endDate.toString("yyyy-MM-dd") +
-        QLatin1String("&maxRows=") + QString::number(number) +
-        QLatin1String("&username=marble") +
-        QLatin1String("&formatted=true"));
-    downloadDescriptionFile( QUrl( geonamesUrl ) );
+    const QString geonamesUrl(QLatin1String("http://api.geonames.org/earthquakesJSON") + QLatin1String("?north=") + QString::number(box.north() * RAD2DEG)
+                              + QLatin1String("&south=") + QString::number(box.south() * RAD2DEG) + QLatin1String("&east=")
+                              + QString::number(box.east() * RAD2DEG) + QLatin1String("&west=") + QString::number(box.west() * RAD2DEG)
+                              + QLatin1String("&date=") + m_endDate.toString("yyyy-MM-dd") + QLatin1String("&maxRows=") + QString::number(number)
+                              + QLatin1String("&username=marble") + QLatin1String("&formatted=true"));
+    downloadDescriptionFile(QUrl(geonamesUrl));
 }
 
-void EarthquakeModel::parseFile( const QByteArray& file )
+void EarthquakeModel::parseFile(const QByteArray &file)
 {
     QJsonDocument jsonDoc = QJsonDocument::fromJson(file);
     QJsonValue earthquakesValue = jsonDoc.object().value(QStringLiteral("earthquakes"));
@@ -75,7 +72,7 @@ void EarthquakeModel::parseFile( const QByteArray& file )
     // Parse if any result exists
     if (earthquakesValue.isArray()) {
         // Add items to the list
-        QList<AbstractDataPluginItem*> items;
+        QList<AbstractDataPluginItem *> items;
 
         QJsonArray earthquakeArray = earthquakesValue.toArray();
         for (int earthquakeIndex = 0; earthquakeIndex < earthquakeArray.size(); ++earthquakeIndex) {
@@ -90,25 +87,24 @@ void EarthquakeModel::parseFile( const QByteArray& file )
             const QDateTime date = QDateTime::fromString(dateString, QStringLiteral("yyyy-MM-dd hh:mm:ss"));
             const double depth = levelObject.value(QStringLiteral("depth")).toDouble();
 
-            if( date <= m_endDate && date >= m_startDate && magnitude >= m_minMagnitude ) {
-                if( !itemExists( eqid ) ) {
+            if (date <= m_endDate && date >= m_startDate && magnitude >= m_minMagnitude) {
+                if (!itemExists(eqid)) {
                     // If it does not exists, create it
-                    GeoDataCoordinates coordinates( longitude, latitude, 0.0, GeoDataCoordinates::Degree );
-                    EarthquakeItem *item = new EarthquakeItem( this );
-                    item->setId( eqid );
-                    item->setCoordinate( coordinates );
-                    item->setMagnitude( magnitude );
-                    item->setDateTime( date );
-                    item->setDepth( depth );
+                    GeoDataCoordinates coordinates(longitude, latitude, 0.0, GeoDataCoordinates::Degree);
+                    EarthquakeItem *item = new EarthquakeItem(this);
+                    item->setId(eqid);
+                    item->setCoordinate(coordinates);
+                    item->setMagnitude(magnitude);
+                    item->setDateTime(date);
+                    item->setDepth(depth);
                     items << item;
                 }
             }
         }
 
-        addItemsToList( items );
+        addItemsToList(items);
     }
 }
-
 
 }
 

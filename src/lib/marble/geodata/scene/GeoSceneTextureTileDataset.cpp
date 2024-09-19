@@ -6,18 +6,18 @@
     SPDX-License-Identifier: LGPL-2.1-or-later
 */
 
-
 #include "GeoSceneTextureTileDataset.h"
 #include "GeoSceneTypes.h"
 
 namespace Marble
 {
 
-GeoSceneTextureTileDataset::GeoSceneTextureTileDataset( const QString& name )
-    : GeoSceneTileDataset( name ){
+GeoSceneTextureTileDataset::GeoSceneTextureTileDataset(const QString &name)
+    : GeoSceneTileDataset(name)
+{
 }
 
-const char* GeoSceneTextureTileDataset::nodeType() const
+const char *GeoSceneTextureTileDataset::nodeType() const
 {
     return GeoSceneTypes::GeoSceneTextureTileType;
 }

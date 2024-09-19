@@ -14,15 +14,14 @@ namespace Marble
 class FakeWeatherService : public AbstractWeatherService
 {
     Q_OBJECT
- 
- public:
-    explicit FakeWeatherService( const MarbleModel *model, QObject *parent );
+
+public:
+    explicit FakeWeatherService(const MarbleModel *model, QObject *parent);
     ~FakeWeatherService() override;
-    
- public Q_SLOTS:
-    void getAdditionalItems( const GeoDataLatLonAltBox& box,
-                             qint32 number = 10 ) override;
-    void getItem( const QString &id ) override;
+
+public Q_SLOTS:
+    void getAdditionalItems(const GeoDataLatLonAltBox &box, qint32 number = 10) override;
+    void getItem(const QString &id) override;
 };
 
 } // namespace Marble

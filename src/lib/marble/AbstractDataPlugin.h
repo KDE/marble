@@ -7,12 +7,12 @@
 #define MARBLE_ABSTRACTDATAPLUGIN_H
 
 // Marble
-#include "marble_export.h"
 #include "RenderPlugin.h"
+#include "marble_export.h"
 
 namespace Marble
 {
-    
+
 class ViewportParams;
 class GeoSceneLayer;
 class AbstractDataPluginItem;
@@ -34,13 +34,13 @@ class MARBLE_EXPORT AbstractDataPlugin : public RenderPlugin
 {
     Q_OBJECT
 
-    Q_PROPERTY( bool favoriteItemsOnly READ isFavoriteItemsOnly WRITE setFavoriteItemsOnly NOTIFY favoriteItemsOnlyChanged )
+    Q_PROPERTY(bool favoriteItemsOnly READ isFavoriteItemsOnly WRITE setFavoriteItemsOnly NOTIFY favoriteItemsOnlyChanged)
     /** @todo FIXME Qt Quick segfaults if using the real class here instead of QObject */
-    Q_PROPERTY( QObject* favoritesModel READ favoritesModel NOTIFY favoritesModelChanged )
-    Q_PROPERTY( int numberOfItems READ numberOfItems WRITE setNumberOfItems NOTIFY changedNumberOfItems )
-    
- public:    
-    explicit AbstractDataPlugin( const MarbleModel *marbleModel );
+    Q_PROPERTY(QObject *favoritesModel READ favoritesModel NOTIFY favoritesModelChanged)
+    Q_PROPERTY(int numberOfItems READ numberOfItems WRITE setNumberOfItems NOTIFY changedNumberOfItems)
+
+public:
+    explicit AbstractDataPlugin(const MarbleModel *marbleModel);
 
     ~AbstractDataPlugin() override;
 
@@ -50,23 +50,22 @@ class MARBLE_EXPORT AbstractDataPlugin : public RenderPlugin
      * @brief Returns the name(s) of the backend that the plugin can render
      */
     QStringList backendTypes() const override;
-    
+
     /**
      * @brief Return how the plugin settings should be used.
      */
     QString renderPolicy() const override;
-    
+
     /**
      * @brief Preferred level in the layer stack for the rendering
      */
     QStringList renderPosition() const override;
-    
+
     /**
      * @brief Renders the content provided by the plugin on the viewport.
      * @return @c true  Returns whether the rendering has been successful
      */
-    bool render( GeoPainter *painter, ViewportParams *viewport,
-                 const QString& renderPos = QLatin1String("NONE"), GeoSceneLayer * layer = nullptr ) override;
+    bool render(GeoPainter *painter, ViewportParams *viewport, const QString &renderPos = QLatin1String("NONE"), GeoSceneLayer *layer = nullptr) override;
 
     /**
      * @return The model associated with the plugin.
@@ -77,25 +76,25 @@ class MARBLE_EXPORT AbstractDataPlugin : public RenderPlugin
     /**
      * Set the model of the plugin.
      */
-    void setModel( AbstractDataPluginModel* model );
+    void setModel(AbstractDataPluginModel *model);
 
     /**
      * Set the number of items to be shown at the same time.
      */
-    void setNumberOfItems( quint32 number );
-    
+    void setNumberOfItems(quint32 number);
+
     /**
      * @return The number of items to be shown at the same time.
      */
     quint32 numberOfItems() const;
-    
+
     /**
      * This function returns all items at the position @p curpos. Depending on where they have
      * been painted the last time.
      *
      * @return The items at the given position.
      */
-    QList<AbstractDataPluginItem *> whichItemAt( const QPoint& curpos );
+    QList<AbstractDataPluginItem *> whichItemAt(const QPoint &curpos);
 
     /**
      * Function for returning the type of plugin this is for.
@@ -106,28 +105,28 @@ class MARBLE_EXPORT AbstractDataPlugin : public RenderPlugin
     RenderType renderType() const override;
 
     /** Convenience method to set the favorite item state on the current model */
-    void setFavoriteItemsOnly( bool favoriteOnly );
+    void setFavoriteItemsOnly(bool favoriteOnly);
 
     bool isFavoriteItemsOnly() const;
 
-    QObject* favoritesModel();
+    QObject *favoritesModel();
 
- private Q_SLOTS:
-    virtual void favoriteItemsChanged( const QStringList& favoriteItems );
+private Q_SLOTS:
+    virtual void favoriteItemsChanged(const QStringList &favoriteItems);
 
     void delayedUpdate();
 
- Q_SIGNALS:
-    void changedNumberOfItems( quint32 number );
+Q_SIGNALS:
+    void changedNumberOfItems(quint32 number);
 
     void favoriteItemsOnlyChanged();
 
     void favoritesModelChanged();
-    
- private:
-    AbstractDataPluginPrivate * const d;
+
+private:
+    AbstractDataPluginPrivate *const d;
 };
-    
+
 }
 
 #endif

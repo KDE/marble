@@ -6,9 +6,8 @@
 #ifndef MARBLE_TILESCALINGTEXTUREMAPPER_H
 #define MARBLE_TILESCALINGTEXTUREMAPPER_H
 
-
-#include <QObject>
 #include "TextureMapperInterface.h"
+#include <QObject>
 
 #include "TileId.h"
 
@@ -25,30 +24,23 @@ class TileScalingTextureMapper : public QObject, public TextureMapperInterface
 {
     Q_OBJECT
 
- public:
-    explicit TileScalingTextureMapper( StackedTileLoader *tileLoader, QObject *parent = nullptr );
+public:
+    explicit TileScalingTextureMapper(StackedTileLoader *tileLoader, QObject *parent = nullptr);
 
-    void mapTexture( GeoPainter *painter,
-                             const ViewportParams *viewport,
-                             int tileZoomLevel,
-                             const QRect &dirtyRect,
-                             TextureColorizer *texColorizer ) override;
+    void mapTexture(GeoPainter *painter, const ViewportParams *viewport, int tileZoomLevel, const QRect &dirtyRect, TextureColorizer *texColorizer) override;
 
- private Q_SLOTS:
-    void removePixmap( const TileId &tileId );
+private Q_SLOTS:
+    void removePixmap(const TileId &tileId);
     void clearPixmaps();
 
- private:
-    void mapTexture( GeoPainter *painter,
-                     const ViewportParams *viewport,
-                     int tileZoomLevel,
-                     TextureColorizer *texColorizer );
+private:
+    void mapTexture(GeoPainter *painter, const ViewportParams *viewport, int tileZoomLevel, TextureColorizer *texColorizer);
 
- private:
+private:
     StackedTileLoader *const m_tileLoader;
     QCache<TileId, const QPixmap> m_cache;
     QImage m_canvasImage;
-    int    m_radius;
+    int m_radius;
 };
 
 }

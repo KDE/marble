@@ -13,12 +13,12 @@ class TextToSpeechClient : public QObject
     Q_OBJECT
 
 public:
-    explicit TextToSpeechClient(QObject * parent = nullptr);
+    explicit TextToSpeechClient(QObject *parent = nullptr);
     ~TextToSpeechClient() override;
 
 public Q_SLOTS:
-    Q_INVOKABLE void readText(const QString & text);
-    Q_INVOKABLE void setLocale(const QString & locale);
+    Q_INVOKABLE void readText(const QString &text);
+    Q_INVOKABLE void setLocale(const QString &locale);
 };
 
 #endif

@@ -9,10 +9,11 @@
 #include <QQuickItem>
 
 #include <Placemark.h>
-#include <routing/RoutingModel.h>
 #include <RouteRequestModel.h>
+#include <routing/RoutingModel.h>
 
-namespace Marble {
+namespace Marble
+{
 
 class MarbleMap;
 class RoutingPrivate;
@@ -20,28 +21,28 @@ class RoutingPrivate;
 class Routing : public QQuickItem
 {
     Q_OBJECT
-    Q_PROPERTY( MarbleMap* marbleMap READ marbleMap WRITE setMarbleMap NOTIFY marbleMapChanged)
-    Q_PROPERTY( QString routingProfile READ routingProfile WRITE setRoutingProfile NOTIFY routingProfileChanged )
-    Q_PROPERTY( bool hasRoute READ hasRoute NOTIFY hasRouteChanged )
-    Q_PROPERTY( bool hasWaypoints READ hasWaypoints NOTIFY hasWaypointsChanged )
-    Q_PROPERTY( RoutingModel* routingModel READ routingModel NOTIFY routingModelChanged)
-    Q_PROPERTY( QQmlComponent* waypointDelegate READ waypointDelegate WRITE setWaypointDelegate NOTIFY waypointDelegateChanged)
-    Q_PROPERTY( RouteRequestModel* routeRequestModel READ routeRequestModel NOTIFY routeRequestModelChanged)
+    Q_PROPERTY(MarbleMap *marbleMap READ marbleMap WRITE setMarbleMap NOTIFY marbleMapChanged)
+    Q_PROPERTY(QString routingProfile READ routingProfile WRITE setRoutingProfile NOTIFY routingProfileChanged)
+    Q_PROPERTY(bool hasRoute READ hasRoute NOTIFY hasRouteChanged)
+    Q_PROPERTY(bool hasWaypoints READ hasWaypoints NOTIFY hasWaypointsChanged)
+    Q_PROPERTY(RoutingModel *routingModel READ routingModel NOTIFY routingModelChanged)
+    Q_PROPERTY(QQmlComponent *waypointDelegate READ waypointDelegate WRITE setWaypointDelegate NOTIFY waypointDelegateChanged)
+    Q_PROPERTY(RouteRequestModel *routeRequestModel READ routeRequestModel NOTIFY routeRequestModelChanged)
 
 public:
     enum RoutingProfile { Motorcar, Bicycle, Pedestrian };
 
-    explicit Routing( QQuickItem* parent = nullptr );
+    explicit Routing(QQuickItem *parent = nullptr);
 
     ~Routing() override;
 
-    void setMarbleMap( MarbleMap* marbleMap );
+    void setMarbleMap(MarbleMap *marbleMap);
 
     MarbleMap *marbleMap();
 
     QString routingProfile() const;
 
-    void setRoutingProfile( const QString & profile );
+    void setRoutingProfile(const QString &profile);
 
     bool hasRoute() const;
 
@@ -49,26 +50,26 @@ public:
 
     RoutingModel *routingModel();
 
-    QQmlComponent * waypointDelegate() const;
+    QQmlComponent *waypointDelegate() const;
 
     Q_INVOKABLE int waypointCount() const;
 
-    RouteRequestModel* routeRequestModel();
+    RouteRequestModel *routeRequestModel();
 
 public Q_SLOTS:
-    void addVia( qreal lon, qreal lat );
+    void addVia(qreal lon, qreal lat);
 
-    void addViaAtIndex( int index, qreal lon, qreal lat );
+    void addViaAtIndex(int index, qreal lon, qreal lat);
 
-    void addViaByPlacemark( Placemark * placemark );
+    void addViaByPlacemark(Placemark *placemark);
 
-    void addViaByPlacemarkAtIndex( int index, Placemark * placemark );
+    void addViaByPlacemarkAtIndex(int index, Placemark *placemark);
 
-    void setVia( int index, qreal lon, qreal lat );
+    void setVia(int index, qreal lon, qreal lat);
 
-    void removeVia( int index );
+    void removeVia(int index);
 
-    void swapVias( int index1, int index2 );
+    void swapVias(int index1, int index2);
 
     void reverseRoute();
 
@@ -76,15 +77,15 @@ public Q_SLOTS:
 
     void updateRoute();
 
-    void openRoute( const QString &filename );
+    void openRoute(const QString &filename);
 
-    void saveRoute( const QString &filename );
+    void saveRoute(const QString &filename);
 
-    QObject* waypointModel();
+    QObject *waypointModel();
 
-    void setWaypointDelegate(QQmlComponent * waypointDelegate);
+    void setWaypointDelegate(QQmlComponent *waypointDelegate);
 
-    int addSearchResultPlacemark( Placemark * placemark );
+    int addSearchResultPlacemark(Placemark *placemark);
 
     void clearSearchResultPlacemarks();
 
@@ -99,13 +100,13 @@ Q_SIGNALS:
 
     void routingModelChanged();
 
-    void waypointDelegateChanged(QQmlComponent * waypointDelegate);
+    void waypointDelegateChanged(QQmlComponent *waypointDelegate);
 
-    void routeRequestModelChanged(RouteRequestModel* routeRequestModel);
+    void routeRequestModelChanged(RouteRequestModel *routeRequestModel);
 
 protected:
     // Implements QQuickItem interface
-    QSGNode * updatePaintNode(QSGNode *oldNode, UpdatePaintNodeData *) override;
+    QSGNode *updatePaintNode(QSGNode *oldNode, UpdatePaintNodeData *) override;
 
 private Q_SLOTS:
     void updateWaypointItems();
@@ -113,7 +114,7 @@ private Q_SLOTS:
     void updateSearchResultPlacemarks();
 
 private:
-    RoutingPrivate* const d;    
+    RoutingPrivate *const d;
 };
 
 }

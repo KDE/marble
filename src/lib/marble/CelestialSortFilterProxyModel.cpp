@@ -11,7 +11,8 @@
 // Self
 #include "CelestialSortFilterProxyModel.h"
 
-namespace Marble {
+namespace Marble
+{
 
 CelestialSortFilterProxyModel::CelestialSortFilterProxyModel()
 {
@@ -20,19 +21,20 @@ CelestialSortFilterProxyModel::CelestialSortFilterProxyModel()
     setupDwarfsList();
 }
 
-CelestialSortFilterProxyModel::~CelestialSortFilterProxyModel() {}
-
-
-QVariant CelestialSortFilterProxyModel::data( const QModelIndex &index, int role ) const
+CelestialSortFilterProxyModel::~CelestialSortFilterProxyModel()
 {
-    QVariant var = QSortFilterProxyModel::data( index, role );
-    if ( role == Qt::DisplayRole && index.column() == 0 ) {
+}
+
+QVariant CelestialSortFilterProxyModel::data(const QModelIndex &index, int role) const
+{
+    QVariant var = QSortFilterProxyModel::data(index, role);
+    if (role == Qt::DisplayRole && index.column() == 0) {
         QString newOne = var.toString();
         if (newOne == tr("Moon")) {
             return QString(QLatin1String("  ") + tr("Moon"));
-        } else if ( m_moons.contains( newOne.toLower() ) ) {
+        } else if (m_moons.contains(newOne.toLower())) {
             return QString(QLatin1String("  ") + newOne + QLatin1String(" (") + tr("moon") + QLatin1Char(')'));
-        } else if ( m_dwarfs.contains( newOne.toLower() ) ) {
+        } else if (m_dwarfs.contains(newOne.toLower())) {
             return QString(newOne + QLatin1String(" (") + tr("dwarf planet") + QLatin1Char(')'));
         }
         return newOne;
@@ -40,7 +42,6 @@ QVariant CelestialSortFilterProxyModel::data( const QModelIndex &index, int role
         return var;
     }
 }
-
 
 void CelestialSortFilterProxyModel::setupPriorities()
 {
@@ -99,29 +100,29 @@ void CelestialSortFilterProxyModel::setupDwarfsList()
     m_dwarfs.push_back("ceres");
 }
 
-bool CelestialSortFilterProxyModel::lessThan( const QModelIndex &left, const QModelIndex &right ) const
+bool CelestialSortFilterProxyModel::lessThan(const QModelIndex &left, const QModelIndex &right) const
 {
-    const QString nameLeft = sourceModel()->index( left.row(), 1 ).data().toString();
-    const QString nameRight = sourceModel()->index( right.row(), 1 ).data().toString();
+    const QString nameLeft = sourceModel()->index(left.row(), 1).data().toString();
+    const QString nameRight = sourceModel()->index(right.row(), 1).data().toString();
     const QString first = nameLeft.toLower();
     const QString second = nameRight.toLower();
 
     // both are in the list
-    if ( m_priority.contains( first ) && m_priority.contains( second ) ) {
+    if (m_priority.contains(first) && m_priority.contains(second)) {
         return m_priority[first] > m_priority[second];
     }
 
     // only left in the list
-    if ( m_priority.contains( first ) && !m_priority.contains( second ) ) {
+    if (m_priority.contains(first) && !m_priority.contains(second)) {
         return true;
     }
 
     // only right in the list
-    if (!m_priority.contains( first ) && m_priority.contains( second ) ) {
+    if (!m_priority.contains(first) && m_priority.contains(second)) {
         return false;
     }
 
-    return QSortFilterProxyModel::lessThan( left, right );
+    return QSortFilterProxyModel::lessThan(left, right);
 }
 
 }

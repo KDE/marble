@@ -9,21 +9,22 @@
 #include "GeoDataGeometry_p.h"
 #include "GeoDataMultiGeometry.h"
 
-namespace Marble {
+namespace Marble
+{
 
 class GeoDataBuildingPrivate : public GeoDataGeometryPrivate
 {
 public:
     GeoDataBuildingPrivate()
-        : m_height(0.0),
-          m_minLevel(0),
-          m_maxLevel(0)
+        : m_height(0.0)
+        , m_minLevel(0)
+        , m_maxLevel(0)
     {
     }
 
     GeoDataGeometryPrivate *copy() const override
     {
-        GeoDataBuildingPrivate* copy = new GeoDataBuildingPrivate;
+        GeoDataBuildingPrivate *copy = new GeoDataBuildingPrivate;
         *copy = *this;
         return copy;
     }

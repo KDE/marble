@@ -6,9 +6,9 @@
 #ifndef MARBLE_ABSTRACTDATAPLUGINITEM_H
 #define MARBLE_ABSTRACTDATAPLUGINITEM_H
 
+#include <QHash>
 #include <QObject>
 #include <QString>
-#include <QHash>
 
 #include "BillboardGraphicsItem.h"
 #include "marble_export.h"
@@ -24,12 +24,12 @@ class MARBLE_EXPORT AbstractDataPluginItem : public QObject, public BillboardGra
 {
     Q_OBJECT
 
-    Q_PROPERTY( QString identifier READ id WRITE setId NOTIFY idChanged )
-    Q_PROPERTY( bool favorite READ isFavorite WRITE setFavorite NOTIFY favoriteChanged )
-    Q_PROPERTY( bool sticky READ isSticky WRITE setSticky NOTIFY stickyChanged )
+    Q_PROPERTY(QString identifier READ id WRITE setId NOTIFY idChanged)
+    Q_PROPERTY(bool favorite READ isFavorite WRITE setFavorite NOTIFY favoriteChanged)
+    Q_PROPERTY(bool sticky READ isSticky WRITE setSticky NOTIFY stickyChanged)
 
- public:
-    explicit AbstractDataPluginItem( QObject *parent = nullptr );
+public:
+    explicit AbstractDataPluginItem(QObject *parent = nullptr);
     ~AbstractDataPluginItem() override;
 
     /**
@@ -40,23 +40,23 @@ class MARBLE_EXPORT AbstractDataPluginItem : public QObject, public BillboardGra
     /**
      * Set the tool tip for the item.
      */
-    void setToolTip( const QString& toolTip );
+    void setToolTip(const QString &toolTip);
 
     QString id() const;
-    void setId( const QString& id );
+    void setId(const QString &id);
 
     bool isFavorite() const;
-    virtual void setFavorite( bool favorite );
+    virtual void setFavorite(bool favorite);
 
     bool isSticky() const;
-    void setSticky( bool sticky );
+    void setSticky(bool sticky);
 
     /**
      * @brief Set the settings of the item.
      * This is usually called automatically before painting. If you reimplement this it would be
      * useful to check for changes before copying.
      */
-    virtual void setSettings( const QHash<QString, QVariant>& settings );
+    virtual void setSettings(const QHash<QString, QVariant> &settings);
 
     /**
      * Returns the action of this specific item.
@@ -65,22 +65,22 @@ class MARBLE_EXPORT AbstractDataPluginItem : public QObject, public BillboardGra
 
     virtual bool initialized() const = 0;
 
-    virtual void addDownloadedFile( const QString& url, const QString& type );
+    virtual void addDownloadedFile(const QString &url, const QString &type);
 
-    virtual bool operator<( const AbstractDataPluginItem *other ) const = 0;
+    virtual bool operator<(const AbstractDataPluginItem *other) const = 0;
 
-    virtual QList<QAction*> actions();
+    virtual QList<QAction *> actions();
 
- Q_SIGNALS:
+Q_SIGNALS:
     void updated();
     void idChanged();
-    void favoriteChanged( const QString& id, bool favorite );
+    void favoriteChanged(const QString &id, bool favorite);
     void stickyChanged();
 
- public Q_SLOTS:
-   void toggleFavorite();
+public Q_SLOTS:
+    void toggleFavorite();
 
- private:
+private:
     friend class AbstractDataPluginModel;
 
     /**
@@ -88,9 +88,9 @@ class MARBLE_EXPORT AbstractDataPluginItem : public QObject, public BillboardGra
      * time.
      */
     qreal addedAngularResolution() const;
-    void setAddedAngularResolution( qreal resolution );
+    void setAddedAngularResolution(qreal resolution);
 
-    AbstractDataPluginItemPrivate * const d;
+    AbstractDataPluginItemPrivate *const d;
 };
 
 } // Marble namespace

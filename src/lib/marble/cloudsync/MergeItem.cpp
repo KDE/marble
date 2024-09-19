@@ -5,8 +5,8 @@
 
 #include "MergeItem.h"
 
-
-namespace Marble {
+namespace Marble
+{
 
 MergeItem::MergeItem()
 {
@@ -17,7 +17,7 @@ QString MergeItem::pathA() const
     return m_pathA;
 }
 
-void MergeItem::setPathA( const QString &path )
+void MergeItem::setPathA(const QString &path)
 {
     m_pathA = path;
     emit pathAChanged();
@@ -28,7 +28,7 @@ QString MergeItem::pathB() const
     return m_pathB;
 }
 
-void MergeItem::setPathB( const QString &path )
+void MergeItem::setPathB(const QString &path)
 {
     m_pathB = path;
     emit pathBChanged();
@@ -39,7 +39,7 @@ GeoDataPlacemark MergeItem::placemarkA() const
     return m_placemarkA;
 }
 
-void MergeItem::setPlacemarkA( const GeoDataPlacemark &placemark )
+void MergeItem::setPlacemarkA(const GeoDataPlacemark &placemark)
 {
     m_placemarkA = placemark;
     emit placemarkAChanged();
@@ -52,7 +52,7 @@ GeoDataPlacemark MergeItem::placemarkB() const
     return m_placemarkB;
 }
 
-void MergeItem::setPlacemarkB( const GeoDataPlacemark &placemark )
+void MergeItem::setPlacemarkB(const GeoDataPlacemark &placemark)
 {
     m_placemarkB = placemark;
     emit placemarkBChanged();
@@ -85,7 +85,7 @@ MergeItem::Action MergeItem::actionA()
     return m_actionA;
 }
 
-void MergeItem::setActionA( MergeItem::Action action )
+void MergeItem::setActionA(MergeItem::Action action)
 {
     m_actionA = action;
 }
@@ -95,7 +95,7 @@ MergeItem::Action MergeItem::actionB() const
     return m_actionB;
 }
 
-void MergeItem::setActionB( MergeItem::Action action )
+void MergeItem::setActionB(MergeItem::Action action)
 {
     m_actionB = action;
 }
@@ -105,7 +105,7 @@ MergeItem::Resolution MergeItem::resolution() const
     return m_resolution;
 }
 
-void MergeItem::setResolution( MergeItem::Resolution resolution )
+void MergeItem::setResolution(MergeItem::Resolution resolution)
 {
     m_resolution = resolution;
     emit resolutionChanged();

@@ -15,21 +15,24 @@ namespace Marble
 {
 
 // That's the font we will use to paint.
-QFont OpenCachingItem::s_font = QFont( QStringLiteral( "Sans Serif" ), 8 );
-QPixmap OpenCachingItem::s_icon = QPixmap( "/usr/share/icons/oxygen/32x32/status/folder-open.png" );
+QFont OpenCachingItem::s_font = QFont(QStringLiteral("Sans Serif"), 8);
+QPixmap OpenCachingItem::s_icon = QPixmap("/usr/share/icons/oxygen/32x32/status/folder-open.png");
 
-OpenCachingItem::OpenCachingItem( const OpenCachingCache& cache, QObject *parent )
-    : AbstractDataPluginItem( parent ), m_cache( cache ), m_infoDialog( 0), m_action( new QAction( this ) ), m_logIndex( 0 )
+OpenCachingItem::OpenCachingItem(const OpenCachingCache &cache, QObject *parent)
+    : AbstractDataPluginItem(parent)
+    , m_cache(cache)
+    , m_infoDialog(0)
+    , m_action(new QAction(this))
+    , m_logIndex(0)
 {
     // The size of an item without a text is 0
-    setSize( QSize( m_cache.difficulty() * 10, m_cache.difficulty() * 10 ) );
-    s_font.setBold( true );
+    setSize(QSize(m_cache.difficulty() * 10, m_cache.difficulty() * 10));
+    s_font.setBold(true);
     updateTooltip();
     setId(QLatin1String("opencache-") + cache.id());
-    setCoordinate( GeoDataCoordinates( cache.longitude(), cache.latitude(), 0.0, GeoDataCoordinates::Degree ) );
-    setTarget( "earth" );
-    connect( m_action, SIGNAL(triggered()),
-             this, SLOT(showInfoDialog()) );
+    setCoordinate(GeoDataCoordinates(cache.longitude(), cache.latitude(), 0.0, GeoDataCoordinates::Degree));
+    setTarget("earth");
+    connect(m_action, SIGNAL(triggered()), this, SLOT(showInfoDialog()));
 }
 
 OpenCachingItem::~OpenCachingItem()
@@ -50,81 +53,76 @@ bool OpenCachingItem::initialized()
 
 void OpenCachingItem::showInfoDialog()
 {
-    if( !m_infoDialog ) {
+    if (!m_infoDialog) {
         m_infoDialog = infoDialog();
     }
-    Q_ASSERT( m_infoDialog );
+    Q_ASSERT(m_infoDialog);
     m_infoDialog->show();
 }
 
 QDialog *OpenCachingItem::infoDialog()
 {
-    if ( !m_infoDialog ) {
+    if (!m_infoDialog) {
         // Initializing information dialog
         m_infoDialog = new QDialog();
         m_ui = new Ui::OpenCachingCacheDialog;
-        m_ui->setupUi( m_infoDialog );
-        m_ui->m_cacheName->setText( m_cache.cacheName() );
-        m_ui->m_country->setText( m_cache.country() );
-        m_ui->m_dateCreated->setText( m_cache.dateCreated().toString( Qt::SystemLocaleShortDate ) );
-        m_ui->m_dateHidden->setText( m_cache.dateHidden().toString( Qt::SystemLocaleShortDate ) );
-        m_ui->m_dateLastModified->setText( m_cache.dateCreated().toString( Qt::SystemLocaleShortDate ) );
-        m_ui->m_difficulty->setText( QString::number( m_cache.difficulty() ) );
-        m_ui->m_latitude->setText( QString::number( m_cache.latitude() ) );
-        m_ui->m_longitude->setText( QString::number( m_cache.longitude() ) );
-        m_ui->m_size->setText( m_cache.sizeString() );
-        m_ui->m_status->setText( m_cache.status() );
-        m_ui->m_terrain->setText( QString::number( m_cache.terrain() ) );
-        m_ui->m_type->setText( m_cache.cacheType() );
-        m_ui->m_userName->setText( m_cache.userName() );
+        m_ui->setupUi(m_infoDialog);
+        m_ui->m_cacheName->setText(m_cache.cacheName());
+        m_ui->m_country->setText(m_cache.country());
+        m_ui->m_dateCreated->setText(m_cache.dateCreated().toString(Qt::SystemLocaleShortDate));
+        m_ui->m_dateHidden->setText(m_cache.dateHidden().toString(Qt::SystemLocaleShortDate));
+        m_ui->m_dateLastModified->setText(m_cache.dateCreated().toString(Qt::SystemLocaleShortDate));
+        m_ui->m_difficulty->setText(QString::number(m_cache.difficulty()));
+        m_ui->m_latitude->setText(QString::number(m_cache.latitude()));
+        m_ui->m_longitude->setText(QString::number(m_cache.longitude()));
+        m_ui->m_size->setText(m_cache.sizeString());
+        m_ui->m_status->setText(m_cache.status());
+        m_ui->m_terrain->setText(QString::number(m_cache.terrain()));
+        m_ui->m_type->setText(m_cache.cacheType());
+        m_ui->m_userName->setText(m_cache.userName());
         QHash<QString, OpenCachingCacheDescription> descriptions = m_cache.description();
         QStringList languages = descriptions.keys();
-        qSort( languages );
-        m_ui->m_languageBox->addItems( languages );
-        if( descriptions.size() > 0 ) {
-            updateDescriptionLanguage( languages.first() );
-            connect( m_ui->m_languageBox, SIGNAL(currentIndexChanged(QString)),
-                     this, SLOT(updateDescriptionLanguage(QString)) );
+        qSort(languages);
+        m_ui->m_languageBox->addItems(languages);
+        if (descriptions.size() > 0) {
+            updateDescriptionLanguage(languages.first());
+            connect(m_ui->m_languageBox, SIGNAL(currentIndexChanged(QString)), this, SLOT(updateDescriptionLanguage(QString)));
         }
         OpenCachingCacheLog log = m_cache.log();
-        if( log.size() > 0 ) {
-            m_ui->m_logText->setHtml( log[m_logIndex].text() );
+        if (log.size() > 0) {
+            m_ui->m_logText->setHtml(log[m_logIndex].text());
             m_ui->m_logCount->setText(QLatin1String("1 / ") + QString::number(log.size()));
-            connect( m_ui->m_nextButton, SIGNAL(clicked()),
-                     this, SLOT(nextLogEntry()) );
-            connect( m_ui->m_previousButton, SIGNAL(clicked()),
-                     this, SLOT(previousLogEntry()) );
+            connect(m_ui->m_nextButton, SIGNAL(clicked()), this, SLOT(nextLogEntry()));
+            connect(m_ui->m_previousButton, SIGNAL(clicked()), this, SLOT(previousLogEntry()));
         }
-        if( log.size() > 1 ) {
-            m_ui->m_nextButton->setEnabled( true );
+        if (log.size() > 1) {
+            m_ui->m_nextButton->setEnabled(true);
         }
-        QPushButton *closeButton = m_ui->m_buttonBox->button( QDialogButtonBox::Close );
-        connect( closeButton, SIGNAL(clicked()),
-                 m_infoDialog, SLOT(close()) );
-        m_infoDialog->setWindowTitle( m_cache.cacheName() );
+        QPushButton *closeButton = m_ui->m_buttonBox->button(QDialogButtonBox::Close);
+        connect(closeButton, SIGNAL(clicked()), m_infoDialog, SLOT(close()));
+        m_infoDialog->setWindowTitle(m_cache.cacheName());
     }
     return m_infoDialog;
 }
 
 QAction *OpenCachingItem::action()
 {
-    m_action->setText( m_cache.cacheName() );
+    m_action->setText(m_cache.cacheName());
     return m_action;
 }
 
-bool OpenCachingItem::operator<( const AbstractDataPluginItem *other ) const
+bool OpenCachingItem::operator<(const AbstractDataPluginItem *other) const
 {
     // FIXME shorter distance to current position?
-    const OpenCachingItem* item = dynamic_cast<const OpenCachingItem*>( other );
+    const OpenCachingItem *item = dynamic_cast<const OpenCachingItem *>(other);
     return item ? m_cache.id() < item->m_cache.id() : false;
 }
 
-void OpenCachingItem::paint( GeoPainter *painter, ViewportParams *viewport,
-                            const QString& renderPos, GeoSceneLayer * layer )
+void OpenCachingItem::paint(GeoPainter *painter, ViewportParams *viewport, const QString &renderPos, GeoSceneLayer *layer)
 {
-    Q_UNUSED( viewport )
-    Q_UNUSED( renderPos )
-    Q_UNUSED( layer )
+    Q_UNUSED(viewport)
+    Q_UNUSED(renderPos)
+    Q_UNUSED(layer)
 
     // Save the old painter state.
     painter->save();
@@ -133,37 +131,36 @@ void OpenCachingItem::paint( GeoPainter *painter, ViewportParams *viewport,
     qreal width;
     qreal height;
 
-    if( !s_icon.isNull() ) {
+    if (!s_icon.isNull()) {
         width = s_icon.width();
         height = s_icon.height();
-        painter->drawPixmap( 0, 0, s_icon );
-    }
-    else {
+        painter->drawPixmap(0, 0, s_icon);
+    } else {
         width = m_cache.difficulty() * 10;
         height = m_cache.difficulty() * 10;
         // Draws the circle with circles' center as rectangle's top-left corner.
-        QRect arcRect( 0, 0, width, height );
+        QRect arcRect(0, 0, width, height);
         QColor color = Oxygen::brickRed4;
-        if ( m_cache.difficulty() < 2.0 ) {
+        if (m_cache.difficulty() < 2.0) {
             color = Oxygen::sunYellow6;
-        } else if ( m_cache.difficulty() < 4.0 ) {
+        } else if (m_cache.difficulty() < 4.0) {
             color = Oxygen::hotOrange4;
         }
-        painter->setPen( QPen( Qt::NoPen ) );
-        QBrush brush( color );
-        brush.setColor( color );
-        painter->setBrush( brush );
-        painter->drawEllipse( arcRect );
+        painter->setPen(QPen(Qt::NoPen));
+        QBrush brush(color);
+        brush.setColor(color);
+        painter->setBrush(brush);
+        painter->drawEllipse(arcRect);
     }
 
     // Draws difficulty of the cache
-    QFontMetrics metrics( s_font );
-    QString difficultyText = QString::number( m_cache.difficulty() );
-    QRect difficultyRect = metrics.boundingRect( difficultyText );
-    painter->setBrush( QBrush() );
-    painter->setPen( QPen() );
-    painter->setFont( s_font );
-    painter->drawText( QPoint( (width - difficultyRect.width()) / 2, (height - difficultyRect.height()) / 2 + metrics.ascent() ), difficultyText );
+    QFontMetrics metrics(s_font);
+    QString difficultyText = QString::number(m_cache.difficulty());
+    QRect difficultyRect = metrics.boundingRect(difficultyText);
+    painter->setBrush(QBrush());
+    painter->setPen(QPen());
+    painter->setFont(s_font);
+    painter->drawText(QPoint((width - difficultyRect.width()) / 2, (height - difficultyRect.height()) / 2 + metrics.ascent()), difficultyText);
 
     // Restore the old painter state.
     painter->restore();
@@ -172,40 +169,36 @@ void OpenCachingItem::paint( GeoPainter *painter, ViewportParams *viewport,
 void OpenCachingItem::updateTooltip()
 {
     QString html = QLatin1String("<table cellpadding=\"2\">");
-    if ( m_cache.id() != 0 ) {
-        html += tr("<tr><td align=\"right\">Cache name</td>") +
-            QLatin1String("<td>") + m_cache.cacheName() + QLatin1String("</td></tr>") +
-            tr("<tr><td align=\"right\">User name</td><td>") + m_cache.userName() + QLatin1String("</td></tr>");
-        if ( !m_cache.cacheName().isEmpty() ) {
+    if (m_cache.id() != 0) {
+        html += tr("<tr><td align=\"right\">Cache name</td>") + QLatin1String("<td>") + m_cache.cacheName() + QLatin1String("</td></tr>")
+            + tr("<tr><td align=\"right\">User name</td><td>") + m_cache.userName() + QLatin1String("</td></tr>");
+        if (!m_cache.cacheName().isEmpty()) {
             html += tr("<tr><td align=\"right\">Date hidden</td><td>") + m_cache.dateHidden().toString(Qt::SystemLocaleShortDate) + QLatin1String("</td></tr>");
         }
-        html +=
-            tr("<tr><td align=\"right\">Difficulty</td><td>") + QString::number(m_cache.difficulty()) + QLatin1String("</td></tr>") +
-            tr("<tr><td align=\"right\">Size</td><td>") + m_cache.sizeString() + QLatin1String("</td></tr>") +
-            QLatin1String("</table>");
-        setToolTip( html );
+        html += tr("<tr><td align=\"right\">Difficulty</td><td>") + QString::number(m_cache.difficulty()) + QLatin1String("</td></tr>")
+            + tr("<tr><td align=\"right\">Size</td><td>") + m_cache.sizeString() + QLatin1String("</td></tr>") + QLatin1String("</table>");
+        setToolTip(html);
     }
 }
 
-void OpenCachingItem::updateDescriptionLanguage( const QString& language )
+void OpenCachingItem::updateDescriptionLanguage(const QString &language)
 {
     QHash<QString, OpenCachingCacheDescription> descriptions = m_cache.description();
-    const QString text = descriptions[language].shortDescription() + QLatin1String("\n\n") +
-            descriptions[language].description() + QLatin1String("\n\n") +
-            descriptions[language].hint() + QLatin1String("\n\n");
-    m_ui->m_descriptionText->setHtml( text );
+    const QString text = descriptions[language].shortDescription() + QLatin1String("\n\n") + descriptions[language].description() + QLatin1String("\n\n")
+        + descriptions[language].hint() + QLatin1String("\n\n");
+    m_ui->m_descriptionText->setHtml(text);
 }
 
 void OpenCachingItem::nextLogEntry()
 {
     OpenCachingCacheLog log = m_cache.log();
-    if( m_logIndex + 1 < log.size() ) {
+    if (m_logIndex + 1 < log.size()) {
         m_logIndex++;
-        m_ui->m_logText->setHtml( log[m_logIndex].text() );
+        m_ui->m_logText->setHtml(log[m_logIndex].text());
         m_ui->m_logCount->setText(QString::number(m_logIndex + 1) + QLatin1String(" / ") + QString::number(log.size()));
-        m_ui->m_previousButton->setEnabled( true );
-        if( m_logIndex == log.size() - 1 ) {
-            m_ui->m_nextButton->setEnabled( false );
+        m_ui->m_previousButton->setEnabled(true);
+        if (m_logIndex == log.size() - 1) {
+            m_ui->m_nextButton->setEnabled(false);
         }
     }
 }
@@ -213,13 +206,13 @@ void OpenCachingItem::nextLogEntry()
 void OpenCachingItem::previousLogEntry()
 {
     OpenCachingCacheLog log = m_cache.log();
-    if( m_logIndex - 1 >= 0 ) {
+    if (m_logIndex - 1 >= 0) {
         m_logIndex--;
-        m_ui->m_logText->setHtml( log[m_logIndex].text() );
+        m_ui->m_logText->setHtml(log[m_logIndex].text());
         m_ui->m_logCount->setText(QString::number(m_logIndex + 1) + QLatin1String(" / ") + QString::number(log.size()));
-        m_ui->m_nextButton->setEnabled( true );
-        if( m_logIndex == 0 ) {
-            m_ui->m_previousButton->setEnabled( false );
+        m_ui->m_nextButton->setEnabled(true);
+        if (m_logIndex == 0) {
+            m_ui->m_previousButton->setEnabled(false);
         }
     }
 }

@@ -1,7 +1,6 @@
 // SPDX-FileCopyrightText: 2011 Friedrich W. H. Kossebau <kossebau@kde.org>
 // SPDX-License-Identifier: LGPL-2.1-or-later
 
-
 #ifndef MARBLE_PLASMARUNNER_H
 #define MARBLE_PLASMARUNNER_H
 
@@ -9,11 +8,9 @@
 #include <KRunner/AbstractRunner>
 #include <krunner_version.h>
 
-
 namespace Marble
 {
 class GeoDataFolder;
-
 
 class PlasmaRunner : public Plasma::AbstractRunner
 {
@@ -31,11 +28,9 @@ public: // Plasma::AbstractRunner API
     void run(const Plasma::RunnerContext &context, const Plasma::QueryMatch &match) override;
 
 private:
-    void collectMatches(QList<Plasma::QueryMatch> &matches,
-                        const QString &query, const GeoDataFolder *folder);
+    void collectMatches(QList<Plasma::QueryMatch> &matches, const QString &query, const GeoDataFolder *folder);
 };
 
 }
 
 #endif
-

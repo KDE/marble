@@ -23,19 +23,19 @@ class OsmConverter
 {
 public:
     typedef QPair<QString, QString> Tag;
-    typedef QPair<GeoDataCoordinates, OsmPlacemarkData > Node;
-    typedef QPair<const GeoDataLineString*, OsmPlacemarkData > Way;
-    typedef QPair<const GeoDataFeature*, OsmPlacemarkData > Relation;
+    typedef QPair<GeoDataCoordinates, OsmPlacemarkData> Node;
+    typedef QPair<const GeoDataLineString *, OsmPlacemarkData> Way;
+    typedef QPair<const GeoDataFeature *, OsmPlacemarkData> Relation;
 
     using Nodes = QVector<Node>;
     using Tags = QVector<Tag>;
     using Ways = QVector<Way>;
     using Relations = QVector<Relation>;
 
-    void read(const GeoDataDocument* document);
+    void read(const GeoDataDocument *document);
 
-    const Nodes & nodes() const;
-    const Ways & ways() const;
+    const Nodes &nodes() const;
+    const Ways &ways() const;
     const Relations &relations() const;
 
 private:
@@ -43,14 +43,10 @@ private:
     Ways m_ways;
     Relations m_relations;
 
-    void processLinearRing(GeoDataLinearRing *linearRing,
-                           const OsmPlacemarkData& osmData);
-    void processPolygon(GeoDataPolygon *polygon,
-                        const OsmPlacemarkData& osmData,
-                        GeoDataPlacemark* placemark);
+    void processLinearRing(GeoDataLinearRing *linearRing, const OsmPlacemarkData &osmData);
+    void processPolygon(GeoDataPolygon *polygon, const OsmPlacemarkData &osmData, GeoDataPlacemark *placemark);
 };
 
 }
 
 #endif
-

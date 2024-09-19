@@ -32,18 +32,20 @@ class MARBLE_EXPORT PopupLayer : public QObject, public LayerInterface
 {
     Q_OBJECT
 public:
-    explicit PopupLayer( MarbleWidget *widget, QObject* parent = nullptr );
+    explicit PopupLayer(MarbleWidget *widget, QObject *parent = nullptr);
     ~PopupLayer() override;
 
     QStringList renderPosition() const override;
-    bool render( GeoPainter *painter, ViewportParams *viewport,
-                 const QString &, GeoSceneLayer * ) override;
-    bool eventFilter( QObject *, QEvent * ) override;
+    bool render(GeoPainter *painter, ViewportParams *viewport, const QString &, GeoSceneLayer *) override;
+    bool eventFilter(QObject *, QEvent *) override;
     qreal zValue() const override;
 
     RenderState renderState() const override;
 
-    QString runtimeTrace() const override { return QStringLiteral("PopupLayer"); }
+    QString runtimeTrace() const override
+    {
+        return QStringLiteral("PopupLayer");
+    }
 
     /**
      * @brief Is popup item visible
@@ -63,7 +65,7 @@ public:
      *
      * @param visible visibility of the item
      */
-    void setVisible( bool visible );
+    void setVisible(bool visible);
 
     /**
      * @brief Make the dialog pop up
@@ -87,7 +89,7 @@ public:
      * @param coordinates geo coordinates
      * @param alignment alignment of popup when it visible
      */
-    void setCoordinates( const GeoDataCoordinates &coordinates, Qt::Alignment alignment );
+    void setCoordinates(const GeoDataCoordinates &coordinates, Qt::Alignment alignment);
 
     /**
      * @brief Sets URL of the browser
@@ -96,7 +98,7 @@ public:
      *
      * @param url url for web browser
      */
-    void setUrl( const QUrl &url );
+    void setUrl(const QUrl &url);
 
     /**
      * @brief Sets size of popup item
@@ -105,7 +107,7 @@ public:
      *
      * @param size popup size, arrows in count
      */
-    void setSize( const QSizeF &size );
+    void setSize(const QSizeF &size);
 
     /**
      * @brief Sets content of the browser
@@ -114,7 +116,7 @@ public:
      *
      * @param html content (in html format)
      */
-    void setContent( const QString &html, const QUrl & baseUrl = QUrl() );
+    void setContent(const QString &html, const QUrl &baseUrl = QUrl());
 
     /**
      * @brief Sets background color of the header
@@ -123,7 +125,7 @@ public:
      *
      * @param color color to set
      */
-    void setBackgroundColor( const QColor &color );
+    void setBackgroundColor(const QColor &color);
 
     /**
      * @brief Sets text color of the header
@@ -132,7 +134,7 @@ public:
      *
      * @param color color to set
      */
-    void setTextColor( const QColor &color );
+    void setTextColor(const QColor &color);
 
 Q_SIGNALS:
     void repaintNeeded();

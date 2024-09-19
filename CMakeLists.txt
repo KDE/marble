@@ -29,6 +29,8 @@ include(GenerateExportHeader)
 include(KDEInstallDirs)
 include(KDECMakeSettings)
 include(KDECompilerSettings NO_POLICY_SCOPE)
+include(KDEClangFormat)
+include(KDEGitCommitHooks)
 
 include(ECMSetupVersion)
 include(ECMInstallIcons)
@@ -335,3 +337,9 @@ marble_install_po_files_as_qm(poqm)
 include(MarbleCPackOptions)
 
 marble_feature_summary(WHAT ALL INCLUDE_QUIET_PACKAGES)
+
+
+file(GLOB_RECURSE ALL_CLANG_FORMAT_SOURCE_FILES src/*.cpp src/*.h tests/*.h tests/*.cpp examples/*.h examples/*.cpp)
+kde_clang_format(${ALL_CLANG_FORMAT_SOURCE_FILES})
+
+kde_configure_git_pre_commit_hook(CHECKS CLANG_FORMAT)

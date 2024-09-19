@@ -9,7 +9,8 @@
 #include <QObject>
 #include <QtQml>
 
-namespace Marble {
+namespace Marble
+{
 
 class MarbleQuickItem;
 class NavigationPrivate;
@@ -17,7 +18,7 @@ class NavigationPrivate;
 class Navigation : public QObject
 {
     Q_OBJECT
-    Q_PROPERTY(Marble::MarbleQuickItem * marbleQuickItem READ marbleQuickItem WRITE setMarbleQuickItem NOTIFY marbleQuickItemChanged)
+    Q_PROPERTY(Marble::MarbleQuickItem *marbleQuickItem READ marbleQuickItem WRITE setMarbleQuickItem NOTIFY marbleQuickItemChanged)
     Q_PROPERTY(bool guidanceModeEnabled READ guidanceModeEnabled WRITE setGuidanceModeEnabled NOTIFY guidanceModeEnabledChanged)
     Q_PROPERTY(bool muted READ muted WRITE setMuted NOTIFY mutedChanged)
     Q_PROPERTY(QString speaker READ speaker WRITE setSpeaker NOTIFY speakerChanged)
@@ -32,13 +33,13 @@ class Navigation : public QObject
     Q_PROPERTY(QPointF screenPosition READ screenPosition NOTIFY screenPositionChanged)
 
 public:
-    explicit Navigation( QObject* parent = nullptr );
+    explicit Navigation(QObject *parent = nullptr);
 
     ~Navigation() override;
 
     bool guidanceModeEnabled() const;
 
-    void setGuidanceModeEnabled( bool enabled );
+    void setGuidanceModeEnabled(bool enabled);
 
     bool muted() const;
 
@@ -58,18 +59,18 @@ public:
 
     QString speaker() const;
 
-    void setSpeaker( const QString &speaker );
+    void setSpeaker(const QString &speaker);
 
     bool deviated() const;
 
-    Marble::MarbleQuickItem * marbleQuickItem() const;
+    Marble::MarbleQuickItem *marbleQuickItem() const;
 
     double screenAccuracy() const;
 
     QPointF screenPosition() const;
 
 public Q_SLOTS:
-    void setMarbleQuickItem(Marble::MarbleQuickItem * marbleQuickItem);
+    void setMarbleQuickItem(Marble::MarbleQuickItem *marbleQuickItem);
 
 Q_SIGNALS:
     void mapChanged();
@@ -96,7 +97,7 @@ Q_SIGNALS:
 
     void deviationChanged();
 
-    void marbleQuickItemChanged(Marble::MarbleQuickItem * marbleQuickItem);
+    void marbleQuickItemChanged(Marble::MarbleQuickItem *marbleQuickItem);
 
     void screenAccuracyChanged();
 
@@ -107,7 +108,7 @@ private Q_SLOTS:
     void updateScreenPosition();
 
 private:
-    NavigationPrivate* const d;
+    NavigationPrivate *const d;
 };
 
 }
