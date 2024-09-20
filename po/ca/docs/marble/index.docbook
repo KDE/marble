@@ -475,9 +475,7 @@
     </screenshot>
 
     <para
->A la primera pestanya del diàleg es proporcionen algunes dades molt bàsiques, com el nom, les coordenades i la bandera del país on pertany el lloc. A més, es mostren els números de població de les ciutats, així com l'elevació de les muntanyes. Si el vostre ordinador està connectat a Internet i esteu en línia, el &marble; intentarà connectar-se a la popular enciclopèdia d'Internet <quote
->Viquipèdia</quote
->. Si hi ha disponible algun article de Viquipèdia, el &marble; el mostrarà al full de dades. </para>
+>A la primera pestanya del diàleg es proporcionen algunes dades molt bàsiques, com el nom, les coordenades i la bandera del país on pertany el lloc. A més, es mostren els números de població de les ciutats, així com l'elevació de les muntanyes. Si el vostre ordinador està connectat a Internet i esteu en línia, el &marble; intentarà connectar-se a la popular enciclopèdia d'Internet «Viquipèdia». Si hi ha disponible algun article de Viquipèdia, el &marble; el mostrarà al full de dades. </para>
 
     <note
 ><para
@@ -517,9 +515,7 @@
 >A</guibutton
 >, l'origen de l'itinerari. Premeu &Intro; o feu clic sobre el botó <guibutton
 >Cerca</guibutton
-> per a trobar els llocs assenyalats corresponents. Es mostrarà una petita animació de progrés del progrés mentre espereu que acabi. Utilitzant el terme de cerca <quote
->Weavers Lane, London</quote
->, el resultat serà similar a la captura de pantalla a sota: </para>
+> per a trobar els llocs assenyalats corresponents. Es mostrarà una petita animació de progrés del progrés mentre espereu que acabi. Utilitzant el terme de cerca «Weavers Lane, London», el resultat serà similar a la captura de pantalla a sota: </para>
 
       <screenshot>
         <screeninfo
@@ -553,9 +549,7 @@
 >Obtén indicacions</guilabel
 >? El &marble; està indicant que s'ha introduït correctament tota la informació necessària per a calcular un itinerari. Premeu el botó <guilabel
 >Obtén indicacions</guilabel
-> per a obtenir un itinerari adequat. Si la vostra destinació és el terme de cerca <quote
->Sun Walk, London</quote
->, el resultat serà similar a aquesta captura de pantalla: </para>
+> per a obtenir un itinerari adequat. Si la vostra destinació és el terme de cerca «Sun Walk, London», el resultat serà similar a aquesta captura de pantalla: </para>
 
       <screenshot>
         <screeninfo
@@ -1926,11 +1920,11 @@
         <varlistentry>
           <term
 ><guilabel
->Tipus de lletra predeterminat del mapa:</guilabel
+>Lletra predeterminada del mapa:</guilabel
 ></term>
           <listitem
 ><para
->El tipus de lletra predeterminat que s'utilitzarà en el mapa.</para
+>La lletra predeterminada que s'utilitzarà en el mapa.</para
 ></listitem>
         </varlistentry>
       </variablelist>

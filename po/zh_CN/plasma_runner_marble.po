@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-05 12:24+0000\n"
+"POT-Creation-Date: 2024-09-20 00:37+0000\n"
 "PO-Revision-Date: 2024-04-23 19:31\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -17,22 +17,22 @@ msgstr ""
 "X-Crowdin-File: /kf5-trunk/messages/marble/plasma_runner_marble.pot\n"
 "X-Crowdin-File-ID: 5163\n"
 
-#: plasmarunner.cpp:36
+#: plasmarunner.cpp:35
 #, kde-format
 msgid "Shows the coordinates :q: in OpenStreetMap with Marble."
 msgstr "使用 Marble 在 OpenStreetMap 中显示坐标 :q:"
 
-#: plasmarunner.cpp:37
+#: plasmarunner.cpp:36
 #, kde-format
 msgid "Shows the geo bookmark containing :q: in OpenStreetMap with Marble."
 msgstr "使用 Marble 在 OpenStreetMap 中显示包含 :q: 的地理书签"
 
-#: plasmarunner.cpp:58
+#: plasmarunner.cpp:56
 #, kde-format
 msgid "Show the coordinates %1 in OpenStreetMap with Marble"
 msgstr "使用 Marble 在 OpenStreetMap 中显示坐标 %1"
 
-#: plasmarunner.cpp:124
+#: plasmarunner.cpp:118
 #, kde-format
 msgid "Show in OpenStreetMap with Marble"
 msgstr "使用 Marble 在 OpenStreetMap 中显示"

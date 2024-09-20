@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-11-05 12:24+0000\n"
-"PO-Revision-Date: 2022-08-27 04:58+0200\n"
+"PO-Revision-Date: 2024-09-19 08:38+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.1.1\n"
+"X-Generator: Poedit 3.5\n"
 
 #: package/contents/config/config.qml:12
 #, kde-format
@@ -61,7 +61,7 @@ msgstr "დებარეობა"
 #: package/contents/ui/configMapDisplay.qml:82
 #, kde-format
 msgid "Longitude:"
-msgstr "გეოლოკაციის გრძედი:"
+msgstr "გრძედი:"
 
 #: package/contents/ui/configMapDisplay.qml:99
 #, kde-format

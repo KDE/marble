@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_runner_marblerunner\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-05 12:24+0000\n"
+"POT-Creation-Date: 2024-09-20 00:37+0000\n"
 "PO-Revision-Date: 2012-04-19 14:09+0200\n"
 "Last-Translator: Joëlle Cornavin <jcorn@free.fr>\n"
 "Language-Team: French <kde-francophone@kde.org>\n"
@@ -20,23 +20,23 @@ msgstr ""
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
 
-#: plasmarunner.cpp:36
+#: plasmarunner.cpp:35
 #, kde-format
 msgid "Shows the coordinates :q: in OpenStreetMap with Marble."
 msgstr "Affiche les coordonnées :q: dans OpenStreetMap avec Marble."
 
-#: plasmarunner.cpp:37
+#: plasmarunner.cpp:36
 #, kde-format
 msgid "Shows the geo bookmark containing :q: in OpenStreetMap with Marble."
 msgstr ""
 "Affiche le signet géographique contenant :q: dans OpenStreetMap avec Marble."
 
-#: plasmarunner.cpp:58
+#: plasmarunner.cpp:56
 #, kde-format
 msgid "Show the coordinates %1 in OpenStreetMap with Marble"
 msgstr "Affiche les coordonnées %1 dans OpenStreetMap avec Marble"
 
-#: plasmarunner.cpp:124
+#: plasmarunner.cpp:118
 #, kde-format
 msgid "Show in OpenStreetMap with Marble"
 msgstr "Afficher dans OpenStreetMap avec Marble"

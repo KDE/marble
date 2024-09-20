@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-05 12:24+0000\n"
+"POT-Creation-Date: 2024-09-20 00:37+0000\n"
 "PO-Revision-Date: 2011-11-12 10:32+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
@@ -17,23 +17,23 @@ msgstr ""
 "X-Generator: Lokalize 1.2\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
-#: plasmarunner.cpp:36
+#: plasmarunner.cpp:35
 #, kde-format
 msgid "Shows the coordinates :q: in OpenStreetMap with Marble."
 msgstr "Muestra las coordenadas :q: en OpenStreetMap con Marble."
 
-#: plasmarunner.cpp:37
+#: plasmarunner.cpp:36
 #, kde-format
 msgid "Shows the geo bookmark containing :q: in OpenStreetMap with Marble."
 msgstr ""
 "Muestra el marcador geográfico que contiene :q: en OpenStreetMap con Marble."
 
-#: plasmarunner.cpp:58
+#: plasmarunner.cpp:56
 #, kde-format
 msgid "Show the coordinates %1 in OpenStreetMap with Marble"
 msgstr "Mostrar las coordenadas %1 en OpenStreetMap con Marble"
 
-#: plasmarunner.cpp:124
+#: plasmarunner.cpp:118
 #, kde-format
 msgid "Show in OpenStreetMap with Marble"
 msgstr "Mostrar en OpenStreetMap con Marble"

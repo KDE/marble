@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-19 00:37+0000\n"
-"PO-Revision-Date: 2023-01-27 07:22+0100\n"
+"POT-Creation-Date: 2024-09-20 00:37+0000\n"
+"PO-Revision-Date: 2024-09-19 09:12+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.2.2\n"
+"X-Generator: Poedit 3.5\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -28,668 +28,680 @@ msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "Temuri.doghonadze@gmail.com"
 
-#: kdemain.cpp:91
+#: kdemain.cpp:86
 #, kde-format
 msgid "Marble Virtual Globe"
 msgstr "ვირტუალური გლობუსი Marble"
 
-#: kdemain.cpp:93
+#: kdemain.cpp:88
 #, kde-format
 msgid "A World Atlas."
 msgstr "მსოფლიო ატლასი."
 
-#: kdemain.cpp:95
+#: kdemain.cpp:90
 #, kde-format
 msgid "(c) 2007-%1"
 msgstr "(c) 2007-%1"
 
-#: kdemain.cpp:100 kdemain.cpp:286
+#: kdemain.cpp:95 kdemain.cpp:210
 #, kde-format
 msgid "Torsten Rahn"
 msgstr "Torsten Rahn"
 
-#: kdemain.cpp:101
+#: kdemain.cpp:95
 #, kde-format
 msgid "Developer and Original Author"
 msgstr "პროგრამისტი ა საწყისი ავტორი"
 
-#: kdemain.cpp:103
+#: kdemain.cpp:96
 #, kde-format
 msgid "Bernhard Beschow"
 msgstr "Bernhard Beschow"
 
-#: kdemain.cpp:104
+#: kdemain.cpp:96
 #, kde-format
 msgid "WMS Support, Mobile, Performance"
 msgstr "WMS-ის მხარდაჭერა, მობილური, წარმადობა"
 
-#: kdemain.cpp:106
+#: kdemain.cpp:97
 #, kde-format
 msgid "Thibaut Gridel"
 msgstr "Thibaut Gridel"
 
-#: kdemain.cpp:107
+#: kdemain.cpp:97
 #, kde-format
 msgid "Geodata"
 msgstr "გეოდატა"
 
-#: kdemain.cpp:109
+#: kdemain.cpp:98
 #, kde-format
 msgid "Jens-Michael Hoffmann"
 msgstr "Jens-Michael Hoffmann"
 
-#: kdemain.cpp:110
+#: kdemain.cpp:98
 #, kde-format
 msgid "OpenStreetMap Integration, OSM Namefinder, Download Management"
 msgstr "OpenStreetMap Integration, OSM Namefinder, Download Management"
 
-#: kdemain.cpp:112
+#: kdemain.cpp:99
 #, kde-format
 msgid "Florian E&szlig;er"
 msgstr "Florian E&szlig;er"
 
-#: kdemain.cpp:113
+#: kdemain.cpp:99
 #, kde-format
 msgid "Elevation Profile"
 msgstr "სიმაღლის პროფილი"
 
-#: kdemain.cpp:115
+#: kdemain.cpp:100
 #, kde-format
 msgid "Wes Hardaker"
 msgstr "Wes Hardaker"
 
-#: kdemain.cpp:116
+#: kdemain.cpp:100
 #, kde-format
 msgid "APRS Plugin"
 msgstr "APRS დამატება"
 
-#: kdemain.cpp:118 kdemain.cpp:202
+#: kdemain.cpp:101 kdemain.cpp:155
 #, kde-format
 msgid "Bastian Holst"
 msgstr "Bastian Holst"
 
-#: kdemain.cpp:119
+#: kdemain.cpp:101
 #, kde-format
 msgid "Online Services support"
 msgstr "ონლაინ სერვისების მხარდაჭერა"
 
-#: kdemain.cpp:121 kdemain.cpp:172
+#: kdemain.cpp:102 kdemain.cpp:125
 #, kde-format
 msgid "Guillaume Martres"
 msgstr "Guillaume Martres"
 
-#: kdemain.cpp:122
+#: kdemain.cpp:102
 #, kde-format
 msgid "Satellites"
 msgstr "თანამგზავრები"
 
-#: kdemain.cpp:124 kdemain.cpp:168
+#: kdemain.cpp:103 kdemain.cpp:121
 #, kde-format
 msgid "Rene Kuettner"
 msgstr "Rene Kuettner"
 
-#: kdemain.cpp:125
+#: kdemain.cpp:103
 #, kde-format
 msgid "Satellites, Eclipses"
 msgstr "სატელიტები, ოვალები"
 
-#: kdemain.cpp:127
+#: kdemain.cpp:104
 #, kde-format
 msgid "Friedrich W. H. Kossebau"
 msgstr "Friedrich W. H. Kossebau"
 
-#: kdemain.cpp:128
+#: kdemain.cpp:104
 #, kde-format
 msgid "Plasma Integration, Bugfixes"
 msgstr "Plasma -სთან ინტეგრაცია, შეცდომების ჩასწორება"
 
-#: kdemain.cpp:130
+#: kdemain.cpp:105
 #, kde-format
 msgid "Dennis Nienhüser"
 msgstr "Dennis Nienhüser"
 
-#: kdemain.cpp:131
+#: kdemain.cpp:105
 #, kde-format
 msgid "Routing, Navigation, Mobile"
 msgstr "რაუტინგი, ნავიგაცია, მობილური"
 
-#: kdemain.cpp:133
+#: kdemain.cpp:106
 #, kde-format
 msgid "Niko Sams"
 msgstr "ნიკო სამსი"
 
-#: kdemain.cpp:134
+#: kdemain.cpp:106
 #, kde-format
 msgid "Routing, Elevation Profile"
 msgstr "რაუტინგი, სიმაღლის პროფილი"
 
-#: kdemain.cpp:136 kdemain.cpp:206
+#: kdemain.cpp:107 kdemain.cpp:159
 #, kde-format
 msgid "Patrick Spendrin"
 msgstr "Patrick Spendrin"
 
-#: kdemain.cpp:137
+#: kdemain.cpp:107
 #, kde-format
 msgid "Core Developer: KML and Windows support"
 msgstr "მთავარი პროგრამისტი, KML და Windows-ის მხარდაჭერა"
 
-#: kdemain.cpp:139
+#: kdemain.cpp:108
 #, kde-format
 msgid "Eckhart Wörner"
 msgstr "Eckhart Wörner"
 
-#: kdemain.cpp:140
+#: kdemain.cpp:108
 #, kde-format
 msgid "Bugfixes"
 msgstr "შეცდომების გასწორება"
 
-#: kdemain.cpp:145
+#: kdemain.cpp:112
 #, kde-format
 msgid "Inge Wallin"
 msgstr "Inge Wallin"
 
-#: kdemain.cpp:146
+#: kdemain.cpp:112
 #, kde-format
 msgid "Core Developer and Co-Maintainer"
 msgstr "Core Developer and Co-Maintainer"
 
-#: kdemain.cpp:148
+#: kdemain.cpp:113
 #, kde-format
 msgid "Henry de Valence"
 msgstr "Henry de Valence"
 
-#: kdemain.cpp:149
+#: kdemain.cpp:113
 #, kde-format
 msgid "Core Developer: Marble Runners, World-Clock Plasmoid"
 msgstr "Core Developer: Marble Runners, World-Clock Plasmoid"
 
-#: kdemain.cpp:151
+#: kdemain.cpp:114
 #, kde-format
 msgid "Pino Toscano"
 msgstr "Pino Toscano"
 
-#: kdemain.cpp:152
+#: kdemain.cpp:114
 #, kde-format
 msgid "Network plugins"
 msgstr "ქსელური დამატებები"
 
-#: kdemain.cpp:154
+#: kdemain.cpp:115
 #, kde-format
 msgid "Harshit Jain"
 msgstr "Harshit Jain"
 
-#: kdemain.cpp:155
+#: kdemain.cpp:115
 #, kde-format
 msgid "Planet filter"
 msgstr "პლანეტების ფილტრი"
 
-#: kdemain.cpp:157
+#: kdemain.cpp:116
 #, kde-format
 msgid "Simon Edwards"
 msgstr "Simon Edwards"
 
-#: kdemain.cpp:158
+#: kdemain.cpp:116
 #, kde-format
 msgid "Marble Python Bindings"
 msgstr "Marble-ის Python-ის ბმები"
 
-#: kdemain.cpp:160
+#: kdemain.cpp:117
 #, kde-format
 msgid "Magnus Valle"
 msgstr "Magnus Valle"
 
-#: kdemain.cpp:161
+#: kdemain.cpp:117
 #, kde-format
 msgid "Historical Maps"
 msgstr "ისტორიული რუკები"
 
-#: kdemain.cpp:163
+#: kdemain.cpp:118
 #, kde-format
 msgid "Médéric Boquien"
 msgstr "Médéric Boquien"
 
-#: kdemain.cpp:164
+#: kdemain.cpp:118
 #, kde-format
 msgid "Astronomical Observatories"
 msgstr "ასტრონომიული ობსერვატორიები"
 
-#: kdemain.cpp:169
+#: kdemain.cpp:122
 #, kde-format
 msgid ""
 "ESA Summer of Code in Space 2012 Project: Visualization of planetary "
 "satellites"
 msgstr ""
+"ESA-ის საზაფხულო კოდი კოსმოსში 2012-ის პროექტი: პლანეტის თანამგზავრების "
+"ვიზუალიზაცია"
 
-#: kdemain.cpp:173
+#: kdemain.cpp:126
 #, kde-format
 msgid ""
 "ESA Summer of Code in Space 2011 Project: Visualization of Satellite Orbits"
 msgstr ""
+"ESA-ის საზაფხულო კოდი კოსმოსში 2011-ის პროექტი: თანამგზავრის ორბიტების "
+"ვიზუალიზაცია"
 
-#: kdemain.cpp:178
+#: kdemain.cpp:131
 #, kde-format
 msgid "Konstantin Oblaukhov"
 msgstr "Konstantin Oblaukhov"
 
-#: kdemain.cpp:179
+#: kdemain.cpp:132
 #, kde-format
 msgid "Google Summer of Code 2011 Project: OpenStreetMap Vector Rendering"
 msgstr "პროექტი Google Summer of Code 2011: OpenStreetMap -ის ვექტორულ რენდერი"
 
-#: kdemain.cpp:182
+#: kdemain.cpp:135
 #, kde-format
 msgid "Daniel Marth"
 msgstr "Daniel Marth"
 
-#: kdemain.cpp:183
+#: kdemain.cpp:136
 #, kde-format
 msgid "Google Summer of Code 2011 Project: Marble Touch on MeeGo"
 msgstr "პროექტი Google Summer of Code 2011: Marble Touch MeeGo-ზე"
 
-#: kdemain.cpp:186
+#: kdemain.cpp:139
 #, kde-format
 msgid "Gaurav Gupta"
 msgstr "Gaurav Gupta"
 
-#: kdemain.cpp:187
+#: kdemain.cpp:140
 #, kde-format
 msgid "Google Summer of Code 2010 Project: Bookmarks"
 msgstr "პროექტი Google Summer of Code 2010: სანიშნები"
 
-#: kdemain.cpp:190
+#: kdemain.cpp:143
 #, kde-format
 msgid "Harshit Jain "
 msgstr "Harshit Jain "
 
-#: kdemain.cpp:191
+#: kdemain.cpp:144
 #, kde-format
 msgid "Google Summer of Code 2010 Project: Time Support"
 msgstr "პროექტი Google Summer of Code 2010: დროის მხარდაჭერა"
 
-#: kdemain.cpp:194
+#: kdemain.cpp:147
 #, kde-format
 msgid "Siddharth Srivastava"
 msgstr "Siddharth Srivastava"
 
-#: kdemain.cpp:195
+#: kdemain.cpp:148
 #, kde-format
 msgid "Google Summer of Code 2010 Project: Turn-by-turn Navigation"
 msgstr "პროექტი Google Summer of Code 2010: ნაბიჯ-ნაბიჯ ნავიგაცია"
 
-#: kdemain.cpp:198 kdemain.cpp:218
+#: kdemain.cpp:151 kdemain.cpp:171
 #, kde-format
 msgid "Andrew Manson"
 msgstr "Andrew Manson"
 
-#: kdemain.cpp:199
+#: kdemain.cpp:152
 #, kde-format
 msgid "Google Summer of Code 2009 Project: OSM Annotation"
 msgstr "პროექტი Google Summer of Code 2009: OSM ანოტაცია"
 
-#: kdemain.cpp:203
+#: kdemain.cpp:156
 #, kde-format
 msgid "Google Summer of Code 2009 Project: Online Services"
 msgstr "პროექტი Google Summer of Code 2009: ონლაინ სერვისები"
 
-#: kdemain.cpp:207
+#: kdemain.cpp:160
 #, kde-format
 msgid "Google Summer of Code 2008 Project: Vector Tiles for Marble"
-msgstr ""
+msgstr "Google Summer of Code 2008-ის პროექტი: ვექტორული ფილები Marble-სთვის"
 
-#: kdemain.cpp:210
+#: kdemain.cpp:163
 #, kde-format
 msgid "Shashank Singh"
 msgstr "Shashank Singh"
 
-#: kdemain.cpp:211
+#: kdemain.cpp:164
 #, kde-format
 msgid ""
 "Google Summer of Code 2008 Project: Panoramio / Wikipedia -photo support for "
 "Marble"
 msgstr ""
+"Google Summer of Code 2008-ის პროექტი: Panoramio / Wikipedia-ის სურათების "
+"მხარდაჭერა Marble-სთვის"
 
-#: kdemain.cpp:214
+#: kdemain.cpp:167
 #, kde-format
 msgid "Carlos Licea"
 msgstr "Carlos Licea"
 
-#: kdemain.cpp:215
+#: kdemain.cpp:168
 #, kde-format
 msgid ""
 "Google Summer of Code 2007 Project: Equirectangular Projection (\"Flat Map\")"
 msgstr ""
+"Google Summer of Code 2007-ის პროექტი: ტოლფერდა პროექცია (\"ბარტყელი რუკა\")"
 
-#: kdemain.cpp:219
+#: kdemain.cpp:172
 #, kde-format
 msgid "Google Summer of Code 2007 Project: GPS Support for Marble"
 msgstr "პროექტი Google Summer of Code 2007: Marble-ის GPS-ის მხარდაჭერა"
 
-#: kdemain.cpp:222
+#: kdemain.cpp:175
 #, kde-format
 msgid "Murad Tagirov"
 msgstr "Murad Tagirov"
 
-#: kdemain.cpp:223
+#: kdemain.cpp:176
 #, kde-format
 msgid "Google Summer of Code 2007 Project: KML Support for Marble"
 msgstr "პროექტი Google Summer of Code 2007: Marble-ის KML-ის მხარდაჭერა"
 
-#: kdemain.cpp:228
+#: kdemain.cpp:181
 #, kde-format
 msgid "Simon Schmeisser"
 msgstr "Simon Schmeisser"
 
-#: kdemain.cpp:229 kdemain.cpp:231 kdemain.cpp:233 kdemain.cpp:235
-#: kdemain.cpp:237 kdemain.cpp:239 kdemain.cpp:241 kdemain.cpp:243
-#: kdemain.cpp:245 kdemain.cpp:247 kdemain.cpp:249 kdemain.cpp:251
-#: kdemain.cpp:253 kdemain.cpp:255 kdemain.cpp:257 kdemain.cpp:259
-#: kdemain.cpp:261 kdemain.cpp:263 kdemain.cpp:265
+#: kdemain.cpp:181 kdemain.cpp:182 kdemain.cpp:183 kdemain.cpp:184
+#: kdemain.cpp:185 kdemain.cpp:186 kdemain.cpp:187 kdemain.cpp:188
+#: kdemain.cpp:189 kdemain.cpp:190 kdemain.cpp:191 kdemain.cpp:192
+#: kdemain.cpp:193 kdemain.cpp:194 kdemain.cpp:195 kdemain.cpp:196
+#: kdemain.cpp:197 kdemain.cpp:198 kdemain.cpp:199
 #, kde-format
 msgid "Development & Patches"
 msgstr "განვითარება და პაჩები"
 
-#: kdemain.cpp:230
+#: kdemain.cpp:182
 #, kde-format
 msgid "Claudiu Covaci"
 msgstr "Claudiu Covaci"
 
-#: kdemain.cpp:232
+#: kdemain.cpp:183
 #, kde-format
 msgid "David Roberts"
 msgstr "David Roberts"
 
-#: kdemain.cpp:234
+#: kdemain.cpp:184
 #, kde-format
 msgid "Nikolas Zimmermann"
 msgstr "Nikolas Zimmermann"
 
-#: kdemain.cpp:236
+#: kdemain.cpp:185
 #, kde-format
 msgid "Jan Becker"
 msgstr "Jan Becker"
 
-#: kdemain.cpp:238
+#: kdemain.cpp:186
 #, kde-format
 msgid "Stefan Asserhäll"
 msgstr "Stefan Asserhäll"
 
-#: kdemain.cpp:240
+#: kdemain.cpp:187
 #, kde-format
 msgid "Laurent Montel"
 msgstr "Laurent Montel"
 
-#: kdemain.cpp:242
+#: kdemain.cpp:188
 #, kde-format
 msgid "Mayank Madan"
 msgstr "Mayank Madan"
 
-#: kdemain.cpp:244
+#: kdemain.cpp:189
 #, kde-format
 msgid "Prashanth Udupa"
 msgstr "Prashanth Udupa"
 
-#: kdemain.cpp:246
+#: kdemain.cpp:190
 #, kde-format
 msgid "Anne-Marie Mahfouf"
 msgstr "Anne-Marie Mahfouf"
 
-#: kdemain.cpp:248
+#: kdemain.cpp:191
 #, kde-format
 msgid "Josef Spillner"
 msgstr "Josef Spillner"
 
-#: kdemain.cpp:250
+#: kdemain.cpp:192
 #, kde-format
 msgid "Frerich Raabe"
 msgstr "Frerich Raabe"
 
-#: kdemain.cpp:252
+#: kdemain.cpp:193
 #, kde-format
 msgid "Frederik Gladhorn"
 msgstr "Frederik Gladhorn"
 
-#: kdemain.cpp:254
+#: kdemain.cpp:194
 #, kde-format
 msgid "Fredrik Höglund"
 msgstr "Fredrik Höglund"
 
-#: kdemain.cpp:256
+#: kdemain.cpp:195
 #, kde-format
 msgid "Albert Astals Cid"
 msgstr "Albert Astals Cid"
 
-#: kdemain.cpp:258
+#: kdemain.cpp:196
 #, kde-format
 msgid "Thomas Zander"
 msgstr "Thomas Zander"
 
-#: kdemain.cpp:260
+#: kdemain.cpp:197
 #, kde-format
 msgid "Joseph Wenninger"
 msgstr "Joseph Wenninger"
 
-#: kdemain.cpp:262
+#: kdemain.cpp:198
 #, kde-format
 msgid "Kris Thomsen"
 msgstr "Kris Thomsen"
 
-#: kdemain.cpp:264
+#: kdemain.cpp:199
 #, kde-format
 msgid "Daniel Molkentin"
 msgstr "Daniel Molkentin"
 
-#: kdemain.cpp:266
+#: kdemain.cpp:200
 #, kde-format
 msgid "Christophe Leske"
 msgstr "Christophe Leske"
 
-#: kdemain.cpp:267 kdemain.cpp:269 kdemain.cpp:271 kdemain.cpp:273
-#: kdemain.cpp:275 kdemain.cpp:277 kdemain.cpp:279 kdemain.cpp:281
-#: kdemain.cpp:283
+#: kdemain.cpp:200 kdemain.cpp:201 kdemain.cpp:202 kdemain.cpp:203
+#: kdemain.cpp:204 kdemain.cpp:205 kdemain.cpp:206 kdemain.cpp:207
+#: kdemain.cpp:208
 #, kde-format
 msgid "Platforms & Distributions"
 msgstr "პლატფორმები და დისტრიბუტივები"
 
-#: kdemain.cpp:268
+#: kdemain.cpp:201
 #, kde-format
 msgid "Sebastian Wiedenroth"
 msgstr "Sebastian Wiedenroth"
 
-#: kdemain.cpp:270
+#: kdemain.cpp:202
 #, kde-format
 msgid "Tim Sutton"
 msgstr "Tim Sutton"
 
-#: kdemain.cpp:272
+#: kdemain.cpp:203
 #, kde-format
 msgid "Christian Ehrlicher"
 msgstr "Christian Ehrlicher"
 
-#: kdemain.cpp:274
+#: kdemain.cpp:204
 #, kde-format
 msgid "Ralf Habacker"
 msgstr "Ralf Habacker"
 
-#: kdemain.cpp:276
+#: kdemain.cpp:205
 #, kde-format
 msgid "Steffen Joeris"
 msgstr "Steffen Joeris"
 
-#: kdemain.cpp:278
+#: kdemain.cpp:206
 #, kde-format
 msgid "Marcus Czeslinski"
 msgstr "Marcus Czeslinski"
 
-#: kdemain.cpp:280
+#: kdemain.cpp:207
 #, kde-format
 msgid "Marcus D. Hanwell"
 msgstr "Marcus D. Hanwell"
 
-#: kdemain.cpp:282
+#: kdemain.cpp:208
 #, kde-format
 msgid "Chitlesh Goorah"
 msgstr "Chitlesh Goorah"
 
-#: kdemain.cpp:284
+#: kdemain.cpp:209
 #, kde-format
 msgid "Nuno Pinheiro"
 msgstr "Nuno Pinheiro"
 
-#: kdemain.cpp:285 kdemain.cpp:287
+#: kdemain.cpp:209 kdemain.cpp:210
 #, kde-format
 msgid "Artwork"
 msgstr "ნამუშევრები"
 
-#: kdemain.cpp:290
+#: kdemain.cpp:213
 #, kde-format
 msgid "Luis Silva"
 msgstr "Luis Silva"
 
-#: kdemain.cpp:291 kdemain.cpp:293 kdemain.cpp:295 kdemain.cpp:297
-#: kdemain.cpp:299 kdemain.cpp:301 kdemain.cpp:303 kdemain.cpp:305
-#: kdemain.cpp:307 kdemain.cpp:309
+#: kdemain.cpp:213 kdemain.cpp:214 kdemain.cpp:215 kdemain.cpp:216
+#: kdemain.cpp:217 kdemain.cpp:218 kdemain.cpp:219 kdemain.cpp:220
+#: kdemain.cpp:221 kdemain.cpp:222
 #, kde-format
 msgid "Various Suggestions & Testing"
 msgstr "სხვადასხვა რჩევები და ტესტირება"
 
-#: kdemain.cpp:292
+#: kdemain.cpp:214
 #, kde-format
 msgid "Stefan Jordan"
 msgstr "Stefan Jordan"
 
-#: kdemain.cpp:294
+#: kdemain.cpp:215
 #, kde-format
 msgid "Robert Scott"
 msgstr "Robert Scott"
 
-#: kdemain.cpp:296
+#: kdemain.cpp:216
 #, kde-format
 msgid "Lubos Petrovic"
 msgstr "Lubos Petrovic"
 
-#: kdemain.cpp:298
+#: kdemain.cpp:217
 #, kde-format
 msgid "Benoit Sigoure"
 msgstr "Benoit Sigoure"
 
-#: kdemain.cpp:300
+#: kdemain.cpp:218
 #, kde-format
 msgid "Martin Konold"
 msgstr "Martin Konold"
 
-#: kdemain.cpp:302
+#: kdemain.cpp:219
 #, kde-format
 msgid "Matthias Welwarsky"
 msgstr "Matthias Welwarsky"
 
-#: kdemain.cpp:304
+#: kdemain.cpp:220
 #, kde-format
 msgid "Rainer Endres"
 msgstr "Rainer Endres"
 
-#: kdemain.cpp:306
+#: kdemain.cpp:221
 #, kde-format
 msgid "Ralf Gesellensetter"
 msgstr "Ralf Gesellensetter"
 
-#: kdemain.cpp:308
+#: kdemain.cpp:222
 #, kde-format
 msgid "Tim Alder"
 msgstr "Tim Alder"
 
-#: kdemain.cpp:310
+#: kdemain.cpp:223
 #, kde-format
 msgid "John Layt"
 msgstr "John Layt"
 
-#: kdemain.cpp:311
+#: kdemain.cpp:224
 #, kde-format
 msgid ""
 "Special thanks for providing an important source of inspiration by creating "
 "Marble's predecessor \"Kartographer\"."
 msgstr ""
+"დიდი მადლობა Marble-ის წინაპრის, \"Kartographer\"-ის შექმნისთვის, რომელიც "
+"ძვირფასი წყარო იყო."
 
-#: kdemain.cpp:327
+#: kdemain.cpp:240
 #, kde-format
 msgid "Enable debug output"
 msgstr "გამართვის გამოტანის ჩართვა"
 
-#: kdemain.cpp:330
+#: kdemain.cpp:243
 #, kde-format
 msgid "Display OSM placemarks according to the level selected"
-msgstr ""
+msgstr "OSM-ის ადგილის მარკერების ჩვენება მონიშნულ დონეზე დამოკიდებულებით"
 
-#: kdemain.cpp:332
+#: kdemain.cpp:245
 #, kde-format
 msgid "Make a time measurement to check performance"
-msgstr ""
+msgstr "დროის გაზომვა წარმადობის გასაზომად"
 
-#: kdemain.cpp:334
+#: kdemain.cpp:247
 #, kde-format
 msgid "Show frame rate"
 msgstr "კადრების სიხშირის ჩვენება"
 
-#: kdemain.cpp:336
+#: kdemain.cpp:249
 #, kde-format
 msgid "Show tile IDs"
-msgstr ""
+msgstr "ფილის ID-ების ჩვენება"
 
-#: kdemain.cpp:338
+#: kdemain.cpp:251
 #, kde-format
 msgid "Show time spent in each layer"
 msgstr "თითოეულ ფენაზე დახარჯული დროის ჩვენება"
 
-#: kdemain.cpp:340
+#: kdemain.cpp:253
 #, kde-format
 msgid "Use a different directory <directory> which contains map data."
 msgstr ""
+"გამოყენება სხვა საქაღალდის, <directory>, რომელიც რუკის მონაცემებს შეიცავს."
 
-#: kdemain.cpp:342
+#: kdemain.cpp:255
 #, kde-format
 msgid "Do not use the interface optimized for small screens"
 msgstr "პატარა ეკრანისთვის ოპტიმიზირებული ინტერფეისის არ გამოყენება"
 
-#: kdemain.cpp:343
+#: kdemain.cpp:256
 #, kde-format
 msgid "Use the interface optimized for small screens"
 msgstr "პატარა ეკრანისთვის ოპტიმიზირებული ინტერფეისის გამოყენება"
 
-#: kdemain.cpp:345
+#: kdemain.cpp:258
 #, kde-format
 msgid "Do not use the interface optimized for high resolutions"
 msgstr ""
 "მაღალი გაფართოების მქონე ეკრანისთვის ოპტიმიზირებული ინტერფეისის არ გამოყენება"
 
-#: kdemain.cpp:346
+#: kdemain.cpp:259
 #, kde-format
 msgid "Use the interface optimized for high resolutions"
 msgstr ""
 "მაღალი გაფართოების მქონე ეკრანისთვის ოპტიმიზირებული ინტერფეისის გამოყენება"
 
-#: kdemain.cpp:348
+#: kdemain.cpp:261
 #, kde-format
 msgid "Show map at given lat lon <coordinates>"
-msgstr ""
+msgstr "რუკის ჩვენება მითითებული გრძ/გან-ით <coordinates>"
 
-#: kdemain.cpp:350
+#: kdemain.cpp:263
 #, kde-format
 msgid "Show map at given geo <uri>"
-msgstr ""
+msgstr "რუკის ჩვენება მითითებულ გეომისამართზე <uri>"
 
-#: kdemain.cpp:352
+#: kdemain.cpp:265
 #, kde-format
 msgid "Set the distance of the observer to the globe (in km)"
-msgstr ""
+msgstr "დააყენეთ დამკვირვებლის დაშორება პლანეტიდან (კმ-ში)"
 
-#: kdemain.cpp:354
+#: kdemain.cpp:267
 #, kde-format
 msgid "Use map <id> (e.g. \"earth/openstreetmap/openstreetmap.dgml\")"
 msgstr ""
+"რუკის გამოყენება id-ით: <id> (მაგ: \"earth/openstreetmap/openstreetmap.dgml"
+"\")"
 
-#: kdemain.cpp:356
+#: kdemain.cpp:269
 #, kde-format
 msgid "One or more placemark files to be opened"
-msgstr ""
+msgstr "ერთი ან მეტი ადგილის წერტილების ფაილი გასახსნელად"
 
 #. i18n: ectx: label, entry, group (Time)
 #: marble.kcfg:58
@@ -719,13 +731,13 @@ msgstr "კუთხის გასაზომი ერთეული."
 #: marble.kcfg:124
 #, kde-format
 msgid "The quality at which a still map gets painted."
-msgstr ""
+msgstr "ხარისხი, რომლითაც უძრავი რუკა იხატება."
 
 #. i18n: ectx: label, entry, group (View)
 #: marble.kcfg:135
 #, kde-format
 msgid "The quality at which an animated map gets painted."
-msgstr ""
+msgstr "ხარისხი, რომლითაც მოძრავი რუკა იხატება."
 
 #. i18n: ectx: label, entry, group (View)
 #: marble.kcfg:146
@@ -749,7 +761,7 @@ msgstr "ბოლო საქაღალდის გახსნა შეგ
 #: marble.kcfg:179
 #, kde-format
 msgid "The behaviour of the planet's axis on mouse dragging."
-msgstr ""
+msgstr "პლანეტის ღერძის ქცევა თაგუნათი გადათრევისას."
 
 #. i18n: ectx: label, entry, group (Navigation)
 #: marble.kcfg:187
@@ -761,25 +773,26 @@ msgstr "აპლიკაციის გაშვებისას ნაჩ�
 #: marble.kcfg:201
 #, kde-format
 msgid "Display animation on voyage to target."
-msgstr ""
+msgstr "ანიმაციის ჩვენება სამიზნემდე მოგზაურობისას."
 
 #. i18n: ectx: label, entry, group (Navigation)
 #: marble.kcfg:205
 #, kde-format
 msgid "The external OpenStreetMap editor application"
-msgstr ""
+msgstr "გარე OpenStreetMap-ის რედაქტორი აპლიკაცია"
 
 #. i18n: ectx: label, entry, group (Cache)
 #: marble.kcfg:211
 #, kde-format
 msgid "Cache for tiles reserved in the physical memory."
-msgstr ""
+msgstr "კეში ფილებისთვის, რომლებიც ფიზიკურ მეხსიერებაშია დაცული."
 
 #. i18n: ectx: label, entry, group (Cache)
 #: marble.kcfg:217
 #, kde-format
 msgid "Maximum space on the hard disk that can be used to store tiles."
 msgstr ""
+"მაქსიმალური ადგილი დისკზე, რომელიც გამოყენებული იქნება ფილები შესანახად."
 
 #. i18n: ectx: label, entry (proxyUrl), group (Cache)
 #: marble.kcfg:223
@@ -828,6 +841,8 @@ msgstr "პროქსის ავთენტიკაცია სჭირ�
 #, kde-format
 msgid "The position tracking plugin used to determine the current location"
 msgstr ""
+"მდებარეობის ტრეკინგის დამატება, რომელიც მიმდინარე მდებარეობის დასადგენად "
+"გამოიყენება"
 
 #: marble_part.cpp:104
 #, kde-format
@@ -849,7 +864,7 @@ msgstr "ფილის გადიდების დონე: %1"
 msgid "Time: %1"
 msgstr "დრო: %1"
 
-#: marble_part.cpp:168
+#: marble_part.cpp:166
 #, kde-format
 msgid ""
 "Sorry, unable to open '%1':\n"
@@ -858,308 +873,308 @@ msgstr ""
 "%1-ის გახსნის შეცდომა:\n"
 "\"%2\""
 
-#: marble_part.cpp:169
+#: marble_part.cpp:166
 #, kde-format
 msgid "File not readable"
 msgstr "ფაილი წაკითხვადი არაა"
 
-#: marble_part.cpp:218
+#: marble_part.cpp:214
 #, kde-format
 msgid "A Virtual Globe"
 msgstr "ვირტუალური გლობუსი"
 
-#: marble_part.cpp:232
+#: marble_part.cpp:227
 #, kde-format
 msgid "Sorry, unable to open '%1'. The file is not accessible."
 msgstr "%1-ის გახსნის შეცდომა. ფაილი მიუწვდომელია."
 
-#: marble_part.cpp:233
+#: marble_part.cpp:227
 #, kde-format
 msgid "File not accessible"
 msgstr "ფაილი მიუწვდომელია"
 
-#: marble_part.cpp:254
+#: marble_part.cpp:248
 #, kde-format
 msgid "All Supported Files"
 msgstr "ყველა მხარდაჭერილი ფაილი"
 
-#: marble_part.cpp:260
+#: marble_part.cpp:254
 #, kde-format
 msgctxt "@title:window"
 msgid "Open File"
 msgstr "ფაილის გახსნა"
 
-#: marble_part.cpp:277
+#: marble_part.cpp:270
 #, kde-format
 msgctxt "@title:window"
 msgid "Export Map"
 msgstr "რუკის გატანა"
 
-#: marble_part.cpp:278
+#: marble_part.cpp:270
 #, kde-format
 msgid "Images *.jpg *.png"
 msgstr "გამოსახულებები *.jpg *.png"
 
-#: marble_part.cpp:292
+#: marble_part.cpp:282
 #, kde-format
 msgctxt "Application name"
 msgid "Marble"
 msgstr "Marble"
 
-#: marble_part.cpp:293
+#: marble_part.cpp:282
 #, kde-format
 msgid "An error occurred while trying to save the file.\n"
 msgstr "შეცდომა ფაილის ჩაწერისას.\n"
 
-#: marble_part.cpp:484
+#: marble_part.cpp:464
 #, kde-format
 msgid "Unnamed"
 msgstr "უსახელო"
 
-#: marble_part.cpp:715
+#: marble_part.cpp:684
 #, kde-format
 msgctxt "Action for downloading an entire region of a map"
 msgid "Download Region..."
 msgstr "რეგიონის გადმოწერა..."
 
-#: marble_part.cpp:729
+#: marble_part.cpp:696
 #, kde-format
 msgctxt "Action for saving the map to a file"
 msgid "&Export Map..."
 msgstr "რუგის &გატანა..."
 
-#: marble_part.cpp:738
+#: marble_part.cpp:704
 #, kde-format
 msgctxt "Action for toggling offline mode"
 msgid "&Work Offline"
 msgstr "ოფლაინ &მუშაობა"
 
-#: marble_part.cpp:748
+#: marble_part.cpp:712
 #, kde-format
 msgctxt "Action for copying the map to the clipboard"
 msgid "&Copy Map"
 msgstr "რუკის &კოპირება"
 
-#: marble_part.cpp:755
+#: marble_part.cpp:717
 #, kde-format
 msgctxt "Action for copying the coordinates to the clipboard"
 msgid "C&opy Coordinates"
 msgstr "კოორდინატების &კოპირება"
 
-#: marble_part.cpp:763
+#: marble_part.cpp:723
 #, kde-format
 msgctxt "Action for opening a file"
 msgid "&Open..."
 msgstr "&გახსნა..."
 
-#: marble_part.cpp:770
+#: marble_part.cpp:729
 #, kde-format
 msgctxt "Action for downloading maps (GHNS)"
 msgid "Download Maps..."
 msgstr "რუკების გადმოწერა..."
 
-#: marble_part.cpp:773
+#: marble_part.cpp:732
 #, kde-format
 msgctxt "Status tip"
 msgid "Download new maps"
 msgstr "ახალი რუკების გადმოწერა"
 
-#: marble_part.cpp:779
+#: marble_part.cpp:737
 #, kde-format
 msgctxt "Action for creating new maps"
 msgid "&Create a New Map..."
 msgstr "&ახალი რუკის შექმნა..."
 
-#: marble_part.cpp:784
+#: marble_part.cpp:740
 #, kde-format
 msgctxt "Status tip"
 msgid "A wizard guides you through the creation of your own map theme."
-msgstr ""
+msgstr "ოსტატი გიხელმძღვანელებთ საკუთარი რუკის თემის შექმნაში."
 
-#: marble_part.cpp:811
+#: marble_part.cpp:764
 #, kde-format
 msgctxt "Action for toggling clouds"
 msgid "&Clouds"
 msgstr "&ღრუბლები"
 
-#: marble_part.cpp:818
+#: marble_part.cpp:770
 #, kde-format
 msgctxt "Action for sun control dialog"
 msgid "S&un Control..."
 msgstr "&მზის კონტროლი..."
 
-#: marble_part.cpp:828
+#: marble_part.cpp:779
 #, kde-format
 msgctxt "Action for time control dialog"
 msgid "&Time Control..."
 msgstr "&დროის კონტროლი..."
 
-#: marble_part.cpp:837
+#: marble_part.cpp:785
 #, kde-format
 msgctxt "Action for locking float items on the map"
 msgid "Lock Position"
 msgstr "პოზიციის ჩაკეტვა"
 
-#: marble_part.cpp:848
+#: marble_part.cpp:794
 #, kde-format
 msgid "Show Shadow"
 msgstr "ჩრდილის ჩვენება"
 
-#: marble_part.cpp:851
+#: marble_part.cpp:797
 #, kde-format
 msgid "Hide Shadow"
 msgstr "ჩრდილის დამალვა"
 
-#: marble_part.cpp:852
+#: marble_part.cpp:798
 #, kde-format
 msgid "Shows and hides the shadow of the sun"
 msgstr "მზის ჩრდილის დამალვა/ჩვენება"
 
-#: marble_part.cpp:856
+#: marble_part.cpp:802
 #, kde-format
 msgid "Show sun icon on the Sub-Solar Point"
-msgstr ""
+msgstr "მზს ხატულას ჩვენება ქვე-სოლარულ წერტილზე"
 
-#: marble_part.cpp:858
+#: marble_part.cpp:804
 #, kde-format
 msgid "Hide sun icon on the Sub-Solar Point"
-msgstr ""
+msgstr "მზს ხატულას დამალვა ქვე-სოლარულ წერტილზე"
 
-#: marble_part.cpp:859
+#: marble_part.cpp:805
 #, kde-format
 msgid "Show sun icon on the sub-solar point"
-msgstr ""
+msgstr "მზს ხატულას ჩვენება ქვე-სოლარულ წერტილზე"
 
-#: marble_part.cpp:864
+#: marble_part.cpp:809
 #, kde-format
 msgid "Lock Globe to the Sub-Solar Point"
-msgstr ""
+msgstr "გლობუსის დაბლოკვა ქვე-სოლარულ წერტილზე"
 
-#: marble_part.cpp:866
+#: marble_part.cpp:811
 #, kde-format
 msgid "Unlock Globe to the Sub-Solar Point"
-msgstr ""
+msgstr "გლობუსის განბლოკვა ქვე-სოლარულ წერტილზე"
 
-#: marble_part.cpp:867
+#: marble_part.cpp:812
 #, kde-format
 msgid "Lock globe to the sub-solar point"
-msgstr ""
+msgstr "გლობუსის დაბლოკვა ქვე-სოლარულ წერტილზე"
 
-#: marble_part.cpp:882
+#: marble_part.cpp:826
 #, kde-format
 msgctxt "Add Bookmark"
 msgid "Add &Bookmark..."
 msgstr "&სანიშნის დაყენება..."
 
-#: marble_part.cpp:890
+#: marble_part.cpp:833
 #, kde-format
 msgctxt "Show Bookmarks"
 msgid "Show &Bookmarks"
 msgstr "&სანიშნების ჩვენება"
 
-#: marble_part.cpp:891
+#: marble_part.cpp:834
 #, kde-format
 msgid "Show or hide bookmarks in the map"
 msgstr "რუკაზე სანიშნების ჩვენება და დამალვა"
 
-#: marble_part.cpp:899
+#: marble_part.cpp:841
 #, kde-format
 msgid "&Set Home Location"
 msgstr "საწყისი მდებარეობის &დაყენება"
 
-#: marble_part.cpp:906
+#: marble_part.cpp:847
 #, kde-format
 msgctxt "Manage Bookmarks"
 msgid "&Manage Bookmarks..."
 msgstr "სანიშნების &მართვა..."
 
-#: marble_part.cpp:918
+#: marble_part.cpp:856
 #, kde-format
 msgctxt "Edit the map in an external application"
 msgid "&Edit Map..."
 msgstr "რუკის &ჩასწორება..."
 
-#: marble_part.cpp:926
+#: marble_part.cpp:862
 #, kde-format
 msgid "&Record Movie"
 msgstr "&ფილმის ჩაწერა"
 
-#: marble_part.cpp:928
+#: marble_part.cpp:864
 #, kde-format
 msgid "Records a movie of the globe"
-msgstr ""
+msgstr "აღრიცხავს მსოფლიოს ფილმს"
 
-#: marble_part.cpp:934
+#: marble_part.cpp:869
 #, kde-format
 msgid "&Stop Recording"
 msgstr "ჩანაწერის &შეჩერება"
 
-#: marble_part.cpp:936
+#: marble_part.cpp:871
 #, kde-format
 msgid "Stop recording a movie of the globe"
-msgstr ""
+msgstr "გლობუსის ფილმის ჩაწერის გაჩერება"
 
-#: marble_part.cpp:1287
+#: marble_part.cpp:1205
 #, kde-format
 msgctxt "Action for toggling"
 msgid "Show Position"
 msgstr "მდებარეობის ჩვენება"
 
-#: marble_part.cpp:1289
+#: marble_part.cpp:1206
 #, kde-format
 msgctxt "Action for toggling"
 msgid "Show Date and Time"
 msgstr "დროისა და თარიღის ჩვენება"
 
-#: marble_part.cpp:1291
+#: marble_part.cpp:1207
 #, kde-format
 msgctxt "Action for toggling"
 msgid "Show Altitude"
 msgstr "სიმაღლის ჩვენება"
 
-#: marble_part.cpp:1294
+#: marble_part.cpp:1208
 #, kde-format
 msgctxt "Action for toggling"
 msgid "Show Tile Zoom Level"
-msgstr ""
+msgstr "ფილის გადიდების დონის ჩვენება"
 
-#: marble_part.cpp:1296
+#: marble_part.cpp:1209
 #, kde-format
 msgctxt "Action for toggling"
 msgid "Show Download Progress Bar"
 msgstr "გადმოწერის მიმდინარეობის ჩვენება"
 
-#: marble_part.cpp:1393
+#: marble_part.cpp:1300
 #, kde-format
 msgid "View"
 msgstr "ნახვა"
 
-#: marble_part.cpp:1404
+#: marble_part.cpp:1311
 #, kde-format
 msgid "Navigation"
 msgstr "ნავიგაცია"
 
-#: marble_part.cpp:1415
+#: marble_part.cpp:1321
 #, kde-format
 msgid "Cache & Proxy"
 msgstr "ქეში & პროქსი"
 
-#: marble_part.cpp:1428
+#: marble_part.cpp:1331
 #, kde-format
 msgid "Date & Time"
 msgstr "თარიღი & დრო"
 
-#: marble_part.cpp:1436
+#: marble_part.cpp:1339
 #, kde-format
 msgid "Synchronization"
 msgstr "სინქრონიზაცია"
 
-#: marble_part.cpp:1449
+#: marble_part.cpp:1349
 #, kde-format
 msgid "Routing"
 msgstr "რაუტინგი"
 
-#: marble_part.cpp:1457
+#: marble_part.cpp:1357
 #, kde-format
 msgid "Plugins"
 msgstr "დამატებები"

@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-05 12:24+0000\n"
+"POT-Creation-Date: 2024-09-20 00:37+0000\n"
 "PO-Revision-Date: 2016-10-15 12:56+0100\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
@@ -19,22 +19,22 @@ msgstr ""
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
 
-#: plasmarunner.cpp:36
+#: plasmarunner.cpp:35
 #, kde-format
 msgid "Shows the coordinates :q: in OpenStreetMap with Marble."
 msgstr "Vis koordinatane :q: i OpenStreetMap med Marble."
 
-#: plasmarunner.cpp:37
+#: plasmarunner.cpp:36
 #, kde-format
 msgid "Shows the geo bookmark containing :q: in OpenStreetMap with Marble."
 msgstr "Vis geobokmerket som inneheld :q: i OpenStreetMap med Marble."
 
-#: plasmarunner.cpp:58
+#: plasmarunner.cpp:56
 #, kde-format
 msgid "Show the coordinates %1 in OpenStreetMap with Marble"
 msgstr "Vis koordinatane %1 i OpenStreetMap med Marble."
 
-#: plasmarunner.cpp:124
+#: plasmarunner.cpp:118
 #, kde-format
 msgid "Show in OpenStreetMap with Marble"
 msgstr "Vis i OpenStreetMap med Marble."
