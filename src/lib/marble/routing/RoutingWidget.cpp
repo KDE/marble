@@ -315,7 +315,7 @@ RoutingWidget::RoutingWidget(MarbleWidget *marbleWidget, QWidget *parent)
     d->setupToolBar();
     d->m_ui.routeComboBox->setVisible(false);
     d->m_ui.routeComboBox->setModel(d->m_routingManager->alternativeRoutesModel());
-    layout()->setContentsMargins(0, 0, 0, 0);
+    layout()->setContentsMargins({});
 
     d->m_ui.routingProfileComboBox->setModel(d->m_routingManager->profilesModel());
 

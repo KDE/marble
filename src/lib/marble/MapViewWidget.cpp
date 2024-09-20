@@ -168,7 +168,7 @@ public:
         m_toolBar->addWidget(m_globeViewButton);
         m_toolBar->addWidget(m_mercatorViewButton);
         m_toolBar->addSeparator();
-        m_toolBar->setContentsMargins(0, 0, 0, 0);
+        m_toolBar->setContentsMargins({});
         m_toolBar->setIconSize(QSize(16, 16));
         m_mapViewUi.toolBarLayout->insertWidget(0, m_toolBar);
 
@@ -244,7 +244,7 @@ MapViewWidget::MapViewWidget(QWidget *parent, Qt::WindowFlags f)
     , d(new Private(this))
 {
     d->m_mapViewUi.setupUi(this);
-    layout()->setContentsMargins(0, 0, 0, 0);
+    layout()->setContentsMargins({});
 
     if (MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen) {
         QGridLayout *layout = new QGridLayout;

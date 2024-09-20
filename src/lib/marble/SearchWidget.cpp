@@ -103,7 +103,7 @@ SearchWidget::SearchWidget(QWidget *parent, Qt::WindowFlags flags)
     QVBoxLayout *layout = new QVBoxLayout;
     layout->addWidget(d->m_searchField);
     layout->addWidget(d->m_searchResultView);
-    layout->setContentsMargins(0, 0, 0, 0);
+    layout->setContentsMargins({});
     setLayout(layout);
 }
 
