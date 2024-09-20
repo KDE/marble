@@ -27,7 +27,7 @@ public:
     void timeDemo();
 
 private:
-    MarbleWidget *m_marbleWidget;
+    MarbleWidget *const m_marbleWidget;
 };
 
 }
