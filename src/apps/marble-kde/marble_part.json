@@ -3,6 +3,13 @@
         "Icon": "marble",
         "MimeTypes": [],
         "Name": "Marble Part",
+        "Name[bg]": "Marble Part",
+        "Name[es]": "Part de Marble",
+        "Name[nl]": "Onderdeel van Marble",
+        "Name[sv]": "Marble-delprogram",
+        "Name[tr]": "Bilye Part",
+        "Name[uk]": "Компонент Marble",
+        "Name[x-test]": "xxMarble Partxx",
         "ServiceTypes": [
             "Browser/View",
             "KParts/ReadOnlyPart"
