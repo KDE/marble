@@ -1,8 +1,8 @@
 # Translation of marble.po to Catalan (Valencian)
-# Copyright (C) 2007-2023 This_file_is_part_of_KDE
+# Copyright (C) 2007-2024 This_file_is_part_of_KDE
 #
 # Orestes Mas Casals <orestes@tsc.upc.edu>, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015.
-# Josep M. Ferrer <txemaq@gmail.com>, 2008, 2009, 2010, 2011, 2012, 2014, 2015, 2016, 2017, 2020, 2021.
+# SPDX-FileCopyrightText: 2008, 2009, 2010, 2011, 2012, 2014, 2015, 2016, 2017, 2020, 2021, 2024 Josep M. Ferrer <txemaq@gmail.com>
 # Joan Maspons <joanmaspons@gmail.com>, 2011.
 # Antoni Bella Pérez <antonibella5@yahoo.com>, 2012, 2013, 2014, 2015, 2018, 2019, 2020, 2021, 2023.
 msgid ""
@@ -10,14 +10,14 @@ msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-09-20 00:37+0000\n"
-"PO-Revision-Date: 2023-03-14 16:41+0100\n"
-"Last-Translator: Antoni Bella Pérez <antonibella5@yahoo.com>\n"
+"PO-Revision-Date: 2024-09-19 10:22+0200\n"
+"Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: Lokalize 24.08.0\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Accelerator-Marker: &\n"
 
@@ -751,7 +751,7 @@ msgstr "La ubicació de les etiquetes."
 #: marble.kcfg:155
 #, kde-format
 msgid "The general font used on the map."
-msgstr "El tipus de lletra general utilitzat en el mapa."
+msgstr "La lletra general utilitzada en el mapa."
 
 #. i18n: ectx: label, entry (lastFileOpenDir), group (View)
 #: marble.kcfg:159
@@ -1247,6 +1247,3 @@ msgstr "Barra d'eines principal"
 #, kde-format
 msgid "Edit Toolbar"
 msgstr "Barra d'eines d'edició"
-
-#~ msgid "marble_part"
-#~ msgstr "marble_part"
