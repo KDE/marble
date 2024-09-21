@@ -3,73 +3,108 @@
 // SPDX-FileCopyrightText: 2016 Dennis Nienhüser <nienhueser@kde.org>
 //
 
-import QtQuick 2.8
-import QtQuick.Controls 2.2
-import QtQuick.Layouts 1.3
+import QtQuick
+import QtQuick.Controls
+import QtQuick.Layouts
 
-import org.kde.kirigami 2.0 as Kirigami
+import org.kde.kirigami as Kirigami
+import org.kde.kirigamiaddons.formcard as FormCard
 
-import org.kde.marble 0.20
+import org.kde.marble
 
-Kirigami.ScrollablePage {
-    id: optionsPage
-    padding: 0
-    topPadding: 0
-    leftPadding: 0
-    rightPadding: 0
-    bottomPadding: 0
+FormCard.FormCardPage {
+    id: root
 
-    signal backTriggered()
+    property var marbleMaps
 
-    Column {
-        anchors {
-            fill: parent
-            margins: Kirigami.Units.gridUnit
+    title: i18nc("@title:window", "Layer Options")
+
+    FormCard.FormHeader {
+        title: i18nc("@title:group", "Public Transport Layers")
+    }
+
+    FormCard.FormCard {
+        FormCard.FormCheckDelegate {
+            text: i18nc("@option:check", "Train")
+            icon.source: Qt.resolvedUrl("images/transport-mode-train.svg")
+            checked: root.marbleMaps.isRelationTypeVisible("train")
+            onCheckedChanged: root.marbleMaps.setRelationTypeVisible("train", checked)
         }
 
-        Label {
-            text: qsTr("<h3>Layer Options</h3>")
+        FormCard.FormCheckDelegate {
+            text: i18nc("@option:check", "Subway")
+            icon.source: Qt.resolvedUrl("images/transport-mode-subway.svg")
+            checked: root.marbleMaps.isRelationTypeVisible("subway")
+            onCheckedChanged: root.marbleMaps.setRelationTypeVisible("subway", checked)
         }
 
-        Label {
-            text: qsTr("<h4>Public Transport Layers</h4>")
+        FormCard.FormCheckDelegate {
+            text: i18nc("@option:check", "Tram")
+            icon.source: Qt.resolvedUrl("images/transport-mode-tram.svg")
+            checked: root.marbleMaps.isRelationTypeVisible("tram")
+            onCheckedChanged: root.marbleMaps.setRelationTypeVisible("tram", checked)
         }
 
-        Item{
-            implicitHeight: publicTransportLoader.height + Kirigami.Units.gridUnit * 4
-            width: parent.width
-
-            Loader {
-                anchors.fill: parent
-                id: publicTransportLoader
-                source: "PublicTransport.qml"
-
-                onLoaded: {
-                    item.implicitWidth = parent.width
-                    item.marbleMaps = marbleMaps
-                }
-            }
+        FormCard.FormCheckDelegate {
+            text: i18nc("@option:check", "Bus")
+            icon.source: Qt.resolvedUrl("images/transport-mode-bus.svg")
+            checked: root.marbleMaps.isRelationTypeVisible("bus")
+            onCheckedChanged: root.marbleMaps.setRelationTypeVisible("bus", checked)
         }
 
-        Label {
-            topPadding: Kirigami.Units.gridUnit
-            text: qsTr("<h4>Outdoor Activities Layers</h4>")
+        FormCard.FormCheckDelegate {
+            text: i18nc("@option:check", "Trolley Bus")
+            icon.source: Qt.resolvedUrl("images/transport-mode-bus.svg")
+            checked: root.marbleMaps.isRelationTypeVisible("trolley-bus")
+            onCheckedChanged: root.marbleMaps.setRelationTypeVisible("trolley-bus", checked)
+        }
+    }
+
+    FormCard.FormHeader {
+        title: i18n("Outdoor Activities Layers")
+    }
+
+    FormCard.FormCard {
+        FormCard.FormCheckDelegate {
+            text: i18nc("@option:check", "Walkways")
+            icon.source: Qt.resolvedUrl("images/transport-mode-walk.svg")
+            checked: root.marbleMaps.isRelationTypeVisible("foot")
+            onCheckedChanged: root.marbleMaps.setRelationTypeVisible("foot", checked)
         }
 
-        Item{
-            implicitHeight: outdoorActivitiesLoader.height + Kirigami.Units.gridUnit * 6
-            width: parent.width
+        FormCard.FormCheckDelegate {
+            text: i18nc("@option:check", "Hiking Routes")
+            icon.source: Qt.resolvedUrl("images/transport-mode-walk.svg")
+            checked: root.marbleMaps.isRelationTypeVisible("hiking")
+            onCheckedChanged: root.marbleMaps.setRelationTypeVisible("hiking", checked)
+        }
 
-            Loader {
-                anchors.fill: parent
-                id: outdoorActivitiesLoader
-                source: "OutdoorActivities.qml"
+        FormCard.FormCheckDelegate {
+            text: i18nc("@option:check", "Bicycle Routes")
+            icon.source: Qt.resolvedUrl("images/transport-mode-bike.svg")
+            checked: root.marbleMaps.isRelationTypeVisible("bicycle")
+            onCheckedChanged: root.marbleMaps.setRelationTypeVisible("bicycle", checked)
+        }
 
-                onLoaded: {
-                    item.implicitWidth = parent.width
-                    item.marbleMaps = marbleMaps
-                }
-            }
+        FormCard.FormCheckDelegate {
+            text: i18nc("@option:check", "Mountainbike Routes")
+            icon.source: Qt.resolvedUrl("images/transport-mode-bike.svg")
+            checked: root.marbleMaps.isRelationTypeVisible("mountainbike")
+            onCheckedChanged: root.marbleMaps.setRelationTypeVisible("mountainbike", checked)
+        }
+
+        FormCard.FormCheckDelegate {
+            text: i18nc("@option:check", "Inline Skating Routes")
+            icon.source: Qt.resolvedUrl("images/transport-mode-inline-skater.svg")
+            checked: root.marbleMaps.isRelationTypeVisible("inline-skates")
+            onCheckedChanged: root.marbleMaps.setRelationTypeVisible("inline-skates", checked)
+        }
+
+        FormCard.FormCheckDelegate {
+            text: i18nc("@option:check", "Bridleways")
+            icon.source: Qt.resolvedUrl("images/transport-mode-horse-riding.svg")
+            checked: root.marbleMaps.isRelationTypeVisible("horse")
+            onCheckedChanged: root.marbleMaps.setRelationTypeVisible("horse", checked)
         }
     }
 }
