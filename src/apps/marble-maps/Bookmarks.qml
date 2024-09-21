@@ -4,237 +4,65 @@
 //
 
 import QtQuick
-import QtQuick.Controls
+import QtQuick.Controls as Controls
 import QtQuick.Window
 import QtQuick.Layouts
 import QtQml.Models
-import QtQuick.Controls.Material
-import Qt5Compat.GraphicalEffects
 
 import org.kde.kirigami as Kirigami
+import org.kde.kirigamiaddons.delegates as Delegates
 
 import org.kde.marble
 
-Kirigami.Page {
-    id: bookmarkPage
-    title: "Bookmarks"
+Kirigami.ScrollablePage {
+    id: root
 
-    property variant marbleQuickItem
-    signal backTriggered()
+    title: i18nc("@title:window", "Bookmarks")
 
-    Flickable {
-        id: root
-        anchors.fill: parent
-        property int currentIndex: 0
-
-        SystemPalette {
-            id: palette
-            colorGroup: SystemPalette.Active
-        }
-
-        Column {
-            id: column
-            anchors {
-                fill: parent
-                margins: Screen.pixelDensity * 2
-            }
-
-            Text {
-                text: "<h3>Bookmarks</h3>"
-            }
-
-            ListView {
-                id: bookmarksView
-                interactive: false
-                width: parent.width
-                spacing: 5
-                height: contentHeight
-
-                model: DelegateModel {
-                    id: visualModel
-                    model: bookmarks.model
-
-                    delegate:
-                        MouseArea {
-                        id: delegateRoot
-                        propagateComposedEvents: true
-                        property int visualIndex: DelegateModel.itemsIndex
-                        width: bookmarksView.width
-                        height:  100
-                        drag.target: icon
-                        drag.axis: Drag.YAxis
-
-                        SwipeDelegate {
-                            id: delegate
-                            text: model.display
-                            width: parent.width
-                            height: Screen.pixelDensity * 2 + Math.max(bookmarkText.height, imageButton.height)
-
-                            contentItem: Rectangle {
-                                id: icon
-                                width: parent.width
-                                height: Screen.pixelDensity + Math.max(bookmarkText.height, imageButton.height)
-
-                                anchors {
-                                    horizontalCenter: parent.horizontalCenter;
-                                    verticalCenter: parent.verticalCenter
-                                }
-
-                                Drag.active: delegateRoot.drag.active
-                                Drag.source: delegateRoot
-                                Drag.hotSpot.x: 50
-                                Drag.hotSpot.y: 50
-                                color: "transparent"
-
-                                Text{
-                                    id: bookmarkText
-                                    anchors.left: imageButton.right
-                                    leftPadding: 5
-                                    text: delegate.text
-                                    elide: Text.ElideRight
-                                    horizontalAlignment: Text.AlignLeft
-                                    anchors.verticalCenter: parent.verticalCenter
-                                    font.pointSize: 12
-                                    color: palette.text
-                                }
-
-                                Image {
-                                    id: imageButton
-                                    anchors {
-                                        left: bookmarksView.left
-                                        verticalCenter: parent.verticalCenter
-                                    }
-                                    source: "qrc:///material/place.svg"
-                                    width: Screen.pixelDensity * 6
-                                    verticalAlignment: Qt.AlignVCenter
-
-                                    height: width
-                                    smooth: true
-                                }
-
-                                ColorOverlay{
-                                    anchors.fill: imageButton
-                                    source: imageButton
-                                    color: palette.highlight
-                                }
-                            }
-
-                            swipe.behind: Item {
-                                width: parent.width
-                                height: parent.height
-
-                                Rectangle{
-                                    width: parent.width
-                                    color: "#333333"
-                                    height: parent.height
-                                    z: 200
-                                    Text {
-                                        font.pointSize: 10
-                                        text: qsTr("Removed")
-                                        color: "white"
-
-                                        padding: 20
-                                        anchors.fill: parent
-                                        horizontalAlignment: Qt.AlignRight
-                                        verticalAlignment: Qt.AlignVCenter
-
-                                        opacity: delegate.swipe.complete ? 1 : 0
-                                        Behavior on opacity {
-                                            NumberAnimation {}
-                                        }
-                                    }
-                                }
-
-                                SwipeDelegate.onClicked: delegate.swipe.close()
-                                SwipeDelegate.onPressedChanged: undoTimer.stop()
-                            }
-
-
-                            Timer {
-                                id: undoTimer
-                                interval: 1600
-                                onTriggered: {
-                                    var currentBookmark = bookmarks.placemark(index)
-                                    bookmarks.removeBookmark(currentBookmark.longitude, currentBookmark.latitude)
-                                }
-                            }
-
-                            swipe.onCompleted: undoTimer.start()
-                            swipe.onClosed: delegate.swipe.close()
-                            swipe.transition: Transition {
-                                SmoothedAnimation { velocity: 3; easing.type: Easing.InOutCubic }
-                            }
-
-                            states: [
-                                State {
-                                    when: icon.Drag.active
-                                    ParentChange {
-                                        target: icon
-                                        parent: root
-                                    }
-
-                                    AnchorChanges {
-                                        target: icon;
-                                        anchors.horizontalCenter: undefined;
-                                        anchors.verticalCenter: undefined
-                                    }
-                                }
-                            ]
-
-                            background: Rectangle {
-                                color: "transparent"
-                            }
-                        }
-
-                        DropArea {
-                            anchors.fill: parent
-                            onEntered: visualModel.items.move(drag.source.visualIndex, delegateRoot.visualIndex)
-                        }
-                    }
-                }
-
-                remove: Transition {
-                    SequentialAnimation {
-                        PauseAnimation { duration: 125 }
-                        NumberAnimation { property: "height"; to: 0; easing.type: Easing.InOutQuad }
-                    }
-                }
-
-                displaced: Transition {
-                    SequentialAnimation {
-                        PauseAnimation { duration: 125 }
-                        NumberAnimation { property: "y"; easing.type: Easing.InOutQuad }
-                    }
-                }
-            }
-
-            Column {
-                visible: bookmarksView.model.count === 0
-                width: parent.width
-
-                Text {
-                    width: 0.8 * parent.width
-                    font.pointSize: 18
-                    color: paletteDisabled.text
-                    text: qsTr("Your bookmarks will appear here.")
-                    wrapMode: Text.WrapAtWordBoundaryOrAnywhere
-                    elide: Text.ElideRight
-                }
-
-                Image {
-                    anchors.right: parent.right
-                    anchors.bottom: column.bottom
-                    width: 0.3 * parent.width
-                    fillMode: Image.PreserveAspectFit
-                    source: "qrc:/konqi/books.png"
-                }
-            }
-        }
-
-    }
+    property var marbleMaps
 
     Bookmarks {
         id: bookmarks
-        map: marbleQuickItem
+        map: marbleMaps
+    }
+
+    ListView {
+        id: bookmarksView
+
+        model: bookmarks.model
+
+        delegate: Delegates.RoundedItemDelegate {
+            id: bookmarkDelegate
+
+            required property int index
+            required property var model
+
+            icon.name: 'mark-location-symbolic'
+            text: model.display
+
+            contentItem: RowLayout {
+                spacing: Kirigami.Units.smallSpacing
+
+                Delegates.DefaultContentItem {
+                    itemDelegate: bookmarkDelegate
+                    Layout.fillWidth: true
+                }
+
+                Controls.ToolButton {
+                    icon.name: 'delete-symbolic'
+                    onClicked: {
+                        const currentBookmark = bookmarks.placemark(index)
+                        bookmarks.removeBookmark(currentBookmark.longitude, currentBookmark.latitude)
+                    }
+                }
+            }
+        }
+
+        Kirigami.PlaceholderMessage {
+            anchors.centerIn: parent
+            text: i18n("Your bookmarks will appear here.")
+            visible: bookmarksView.count === 0
+            width: parent.width - Kirigami.Units.gridUnit * 4
+        }
     }
 }
