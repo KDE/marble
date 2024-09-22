@@ -37,7 +37,6 @@ qt_add_qml_module(marble-maps
         PositionMarker.qml
         Waypoint.qml
         CurrentPosition.qml
-        SidePanel.qml
         Options.qml
         Bookmarks.qml
         MarbleScrollBar.qml
