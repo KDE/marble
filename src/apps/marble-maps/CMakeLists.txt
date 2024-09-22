@@ -51,6 +51,9 @@ qt_add_qml_module(marble-maps
         images/transport-mode-train.svg
         images/transport-mode-tram.svg
         images/transport-mode-subway.svg
+        images/gps_fixed.png
+        images/gps_not_fixed.png
+        images/backdrop.png
 )
 
 install(TARGETS marble-maps RUNTIME DESTINATION bin)

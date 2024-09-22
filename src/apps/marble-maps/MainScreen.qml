@@ -465,21 +465,21 @@ Kirigami.ApplicationWindow {
                 id: zoomToPositionButton
                 anchors {
                     right: parent.right
-                    rightMargin: Screen.pixelDensity * 1
-                    bottom: mapItem.bottom
-                    bottomMargin: 10
+                    rightMargin: Kirigami.Units.largeSpacing
+                    bottom: parent.bottom
+                    bottomMargin: Kirigami.Units.largeSpacing
                 }
 
                 enabled: marbleMaps.positionAvailable
 
-                iconSource: marbleMaps.positionAvailable ? "qrc:///gps_fixed.png" : "qrc:///gps_not_fixed.png"
+                icon.source: marbleMaps.positionAvailable ? Qt.resolvedUrl("images/gps_fixed.png") : Qt.resolvedUrl("images/gps_not_fixed.png")
 
                 onClicked: marbleMaps.centerOnCurrentPosition()
 
                 property real distance: 0
 
-                function updateIndicator() {
-                    var point = marbleMaps.mapFromItem(zoomToPositionButton, diameter * 0.5, diameter * 0.5);
+                function updateIndicator(): void {
+                    const point = marbleMaps.mapFromItem(zoomToPositionButton, diameter * 0.5, diameter * 0.5);
                     distance = 0.001 * marbleMaps.distanceFromPointToCurrentLocation(point);
                     angle = marbleMaps.angleFromPointToCurrentLocation(point);
                 }

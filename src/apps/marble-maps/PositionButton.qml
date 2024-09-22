@@ -7,16 +7,13 @@
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Window
+import org.kde.kirigamiaddons.components as Components
 
-Item {
+Components.FloatingButton {
     id: root
 
-    property alias diameter: button.radius
-    property alias iconSource: button.icon.source
     property real angle: 0
     property alias showDirection: indicator.visible
-
-    signal clicked()
 
     Image {
         id: indicator
@@ -24,9 +21,9 @@ Item {
             horizontalCenter: button.horizontalCenter
             verticalCenter: button.verticalCenter
         }
-        width: root.diameter
-        height: root.diameter
-        source: "qrc:///backdrop.png"
+        width: root.contentWidth
+        height: root.contentHeight
+        source: Qt.resolvedUrl("images/backdrop.png")
         transform: Rotation {
             origin {
                 x: indicator.width / 2
@@ -40,16 +37,4 @@ Item {
             angle: root.angle + 45
         }
     }
-
-    RoundButton {
-        id: button
-        onClicked: root.clicked()
-        anchors {
-            horizontalCenter: parent.horizontalCenter
-            verticalCenter: parent.verticalCenter
-        }
-    }
-
-    width: 1.41 * diameter
-    height: width
 }
