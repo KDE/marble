@@ -3,12 +3,15 @@
 // SPDX-FileCopyrightText: 2016 Dennis Nienhüser <nienhueser@kde.org>
 //
 
-import QtQuick 2.3
-import QtQuick.Window 2.2
+import QtQuick
+import QtQuick.Layouts
+import QtQuick.Controls as Controls
 
-import org.kde.marble 0.20
+import org.kde.kirigami as Kirigami
 
-Item {
+import org.kde.marble
+
+RowLayout {
     id: root
     height: text === "" ? 0 : Math.max(icon.height, text.height)
 
@@ -16,25 +19,21 @@ Item {
     property alias icon: icon.source
     property alias font: text.font
     property alias maximumLineCount: text.maximumLineCount
-    property alias linkColor: text.linkColor
 
     signal linkActivated(string link)
 
-    Image {
+    Kirigami.Icon {
         id: icon
-        sourceSize.height: Screen.pixelDensity * 3
-        fillMode: Image.PreserveAspectFit
-        anchors.verticalCenter: text.verticalCenter
+        Layout.preferredWidth: Kirigami.Units.iconSizes.smallMedium
+        Layout.preferredHeight: Kirigami.Units.iconSizes.smallMedium
     }
 
-    Text {
+    Controls.Label {
         id: text
-        anchors.left: icon.right
-        anchors.right: parent.right
-        anchors.leftMargin: icon.width === 0 ? 0 : Screen.pixelDensity * 1
-        font.pointSize: 16
         wrapMode: Text.WordWrap
         elide: Text.ElideRight
+        Layout.fillWidth: true
+        Layout.alignment: Qt.AlignVCenter
 
         onLinkActivated: root.linkActivated(link)
 
