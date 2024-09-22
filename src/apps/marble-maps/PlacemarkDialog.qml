@@ -176,7 +176,7 @@ Components.BottomDrawer {
                 spacing: Kirigami.Units.smallSpacing
                 Repeater {
                     id: tagsView
-                    model: placemark ? placemark.tags : undefined
+                    model: visible && placemark ? placemark.tags : undefined
                     delegate: Kirigami.Chip {
                         text: modelData
                         checkable: false
