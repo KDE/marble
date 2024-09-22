@@ -85,7 +85,7 @@ void ParsingRunnerManager::parseFile(const QString &fileName, DocumentRole role)
     const QString completeSuffix = fileInfo.completeSuffix().toLower();
 
     d->m_parsingTasks = 0;
-    for (const ParseRunnerPlugin *plugin : plugins) {
+    for (const ParseRunnerPlugin *plugin : std::as_const(plugins)) {
         QStringList const extensions = plugin->fileExtensions();
         if (extensions.isEmpty() || extensions.contains(suffix) || extensions.contains(completeSuffix)) {
             ParsingTask *task = new ParsingTask(plugin->newRunner(), this, fileName, role);

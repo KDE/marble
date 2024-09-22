@@ -192,7 +192,7 @@ bool GeometryLayer::render(GeoPainter *painter, ViewportParams *viewport, const 
                 mDebug() << item << " provides no paint layers, so I force one onto it.";
                 paintLayers << QString();
             }
-            for (const auto &layer : paintLayers) {
+            for (const auto &layer : std::as_const(paintLayers)) {
                 if (knownLayers.contains(layer)) {
                     GeometryLayerPrivate::PaintFragments &fragments = paintFragments[layer];
                     double const zValue = item->zValue();
@@ -255,11 +255,11 @@ bool GeometryLayer::render(GeoPainter *painter, ViewportParams *viewport, const 
         }
     }
 
-    for (const auto &item : d->m_cachedDefaultLayer) {
+    for (const auto &item : std::as_const(d->m_cachedDefaultLayer)) {
         item.second->paint(painter, viewport, item.first, d->m_tileLevel);
     }
 
-    for (ScreenOverlayGraphicsItem *item : d->m_screenOverlays) {
+    for (ScreenOverlayGraphicsItem *item : std::as_const(d->m_screenOverlays)) {
         item->paintEvent(painter, viewport);
     }
 
@@ -485,7 +485,7 @@ void GeometryLayerPrivate::removeGraphicsItems(const GeoDataFeature *feature)
             removeGraphicsItems(child);
         }
     } else if (geodata_cast<GeoDataScreenOverlay>(feature)) {
-        for (ScreenOverlayGraphicsItem *item : m_screenOverlays) {
+        for (ScreenOverlayGraphicsItem *item : std::as_const(m_screenOverlays)) {
             if (item->screenOverlay() == feature) {
                 m_screenOverlays.removeAll(item);
             }

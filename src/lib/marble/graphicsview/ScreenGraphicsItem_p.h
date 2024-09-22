@@ -75,7 +75,7 @@ public:
 
         QVector<QPointF> absolutePositions;
         absolutePositions.reserve(parentPositions.size());
-        for (const QPointF &point : parentPositions) {
+        for (const QPointF &point : std::as_const(parentPositions)) {
             absolutePositions.append(point + relativePosition);
         }
 

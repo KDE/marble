@@ -99,7 +99,7 @@ QSGNode *Routing::updatePaintNode(QSGNode *oldNode, UpdatePaintNodeData *)
     if (!polygons.isEmpty()) {
         delete oldNode;
         oldNode = new QSGNode;
-        for (const QPolygonF *itPolygon : polygons) {
+        for (const QPolygonF *itPolygon : std::as_const(polygons)) {
             QPolygonF const &polygon = *itPolygon;
             QVector<QVector2D> normals;
             int segmentCount = itPolygon->size() - 1;
@@ -233,12 +233,12 @@ int Routing::addSearchResultPlacemark(Placemark *placemark)
 
 void Routing::clearSearchResultPlacemarks()
 {
-    for (Placemark *placemark : d->m_searchResultPlacemarks) {
+    for (Placemark *placemark : std::as_const(d->m_searchResultPlacemarks)) {
         placemark->deleteLater();
     }
     d->m_searchResultPlacemarks.clear();
 
-    for (QQuickItem *item : d->m_searchResultItems) {
+    for (QQuickItem *item : std::as_const(d->m_searchResultItems)) {
         item->deleteLater();
     }
     d->m_searchResultItems.clear();

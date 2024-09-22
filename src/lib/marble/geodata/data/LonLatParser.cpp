@@ -61,7 +61,7 @@ void LonLatParser::initAll()
     QString fullNamesExp;
     QString simpleLetters;
 
-    for (const QString &dir : dirs) {
+    for (const QString &dir : std::as_const(dirs)) {
         // collect simple letters
         if ((dir.length() == 1) && (QLatin1Char('a') <= dir.at(0)) && (dir.at(0) <= QLatin1Char('z'))) {
             simpleLetters += dir;
@@ -94,15 +94,15 @@ void LonLatParser::initAll()
     // u201D: ” RIGHT DOUBLE QUOTATION MARK
 
     m_degreeExp = QStringLiteral(u"\u00B0|\u00BA");
-    for (const QString &symbol : m_degreeLocale) {
+    for (const QString &symbol : std::as_const(m_degreeLocale)) {
         m_degreeExp += QLatin1Char('|') + QRegularExpression::escape(symbol);
     }
     m_minutesExp = QStringLiteral(u"'|\u2032|\u00B4|\u20C2|\u2019");
-    for (const QString &symbol : m_minutesLocale) {
+    for (const QString &symbol : std::as_const(m_minutesLocale)) {
         m_minutesExp += QLatin1Char('|') + QRegularExpression::escape(symbol);
     }
     m_secondsExp = QStringLiteral(u"\"|\u2033|\u201D|''|\u2032\u2032|\u00B4\u00B4|\u20C2\u20C2|\u2019\u2019");
-    for (const QString &symbol : m_secondsLocale) {
+    for (const QString &symbol : std::as_const(m_secondsLocale)) {
         m_secondsExp += QLatin1Char('|') + QRegularExpression::escape(symbol);
     }
 }

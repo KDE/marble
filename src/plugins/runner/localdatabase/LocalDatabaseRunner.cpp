@@ -43,7 +43,7 @@ void LocalDatabaseRunner::search(const QString &searchTerm, const GeoDataLatLonB
             resultList = placemarkModel->match(firstIndex, Qt::DisplayRole, searchTerm, -1, Qt::MatchStartsWith);
 
             bool const searchEverywhere = preferred.isEmpty();
-            for (const QModelIndex &index : resultList) {
+            for (const QModelIndex &index : std::as_const(resultList)) {
                 if (!index.isValid()) {
                     mDebug() << "invalid index!!!";
                     continue;

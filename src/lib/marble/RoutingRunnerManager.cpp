@@ -126,7 +126,7 @@ void RoutingRunnerManager::retrieveRoute(const RouteRequest *request)
     d->m_routingResult.clear();
 
     QList<RoutingRunnerPlugin *> plugins = d->plugins(d->m_pluginManager->routingRunnerPlugins());
-    for (RoutingRunnerPlugin *plugin : plugins) {
+    for (RoutingRunnerPlugin *plugin : std::as_const(plugins)) {
         if (!profile.name().isEmpty() && !profile.pluginSettings().contains(plugin->nameId())) {
             continue;
         }
@@ -137,7 +137,7 @@ void RoutingRunnerManager::retrieveRoute(const RouteRequest *request)
         d->m_routingTasks << task;
     }
 
-    for (RoutingTask *task : d->m_routingTasks) {
+    for (RoutingTask *task : std::as_const(d->m_routingTasks)) {
         QThreadPool::globalInstance()->start(task);
     }
 

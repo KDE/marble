@@ -75,9 +75,9 @@ QString Placemark::description() const
             QString const stars = m_placemark.osmData().tagValue(QStringLiteral("stars"));
             if (!stars.isEmpty()) {
                 bool hasStars;
-                int const numStars = stars.mid(0, 1).toInt(&hasStars);
+                int const numStars = QStringView{stars}.mid(0, 1).toInt(&hasStars);
                 if (hasStars) {
-                    m_description += QString(' ') + QStringLiteral("★").repeated(numStars) + stars.mid(1);
+                    m_description += u' ' + QStringLiteral("★").repeated(numStars) + stars.mid(1);
                 } else {
                     addTagValue(m_description, QStringLiteral("stars"));
                 }
@@ -942,7 +942,7 @@ void Placemark::updateRelations(const Marble::GeoDataPlacemark &placemark)
                 }
             }
         }
-        for (auto relation : allRelations) {
+        for (auto relation : std::as_const(allRelations)) {
             if (relation->containsAnyOf(placemarkIds)) {
                 relevantRelations << relation;
             }

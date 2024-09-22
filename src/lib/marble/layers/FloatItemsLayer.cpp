@@ -28,7 +28,7 @@ bool FloatItemsLayer::render(GeoPainter *painter, ViewportParams *viewport, cons
     Q_UNUSED(renderPos)
     Q_UNUSED(layer)
 
-    for (AbstractFloatItem *item : m_floatItems) {
+    for (AbstractFloatItem *item : std::as_const(m_floatItems)) {
         if (!item->enabled()) {
             continue;
         }

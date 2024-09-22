@@ -427,7 +427,7 @@ void OverviewMap::setCurrentWidget(QSvgWidget *widget)
 
 void OverviewMap::loadPlanetMaps()
 {
-    for (const QString &planet : m_planetID) {
+    for (const QString &planet : std::as_const(m_planetID)) {
         if (m_svgWidgets.contains(planet)) {
             m_svgWidgets[planet]->load(m_svgPaths[planet]);
         } else {

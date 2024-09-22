@@ -87,7 +87,7 @@ void OsmTagEditorWidgetPrivate::populateCurrentTagsList()
 void OsmTagEditorWidgetPrivate::populatePresetTagsList()
 {
     QList<OsmTag> tags = recommendedTags();
-    for (const OsmTag &tag : tags) {
+    for (const OsmTag &tag : std::as_const(tags)) {
         QTreeWidgetItem *tagItem = tagWidgetItem(tag);
         m_recommendedTagsList->addTopLevelItem(tagItem);
     }

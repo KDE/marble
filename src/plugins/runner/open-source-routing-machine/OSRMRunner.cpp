@@ -150,7 +150,7 @@ RoutingInstruction::TurnType OSRMRunner::parseTurnType(const QString &instructio
     } else if (instruction == QLatin1String("10")) {
         return RoutingInstruction::Continue;
     } else if (instruction.startsWith(QLatin1String("11-"))) {
-        int const exit = instruction.mid(3).toInt();
+        int const exit = QStringView{instruction}.mid(3).toInt();
         switch (exit) {
         case 1:
             return RoutingInstruction::RoundaboutFirstExit;

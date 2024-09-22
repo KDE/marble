@@ -81,12 +81,12 @@ void HostipRunner::slotRequestFinished(QNetworkReply *reply)
     for (QString line = reply->readLine(); !line.isEmpty(); line = reply->readLine()) {
         QString lonInd = "Longitude: ";
         if (line.startsWith(lonInd)) {
-            lon = line.mid(lonInd.length()).toDouble();
+            lon = QStringView{line}.mid(lonInd.length()).toDouble();
         }
 
         QString latInd = "Latitude: ";
         if (line.startsWith(latInd)) {
-            lat = line.mid(latInd.length()).toDouble();
+            lat = QStringView{line}.mid(latInd.length()).toDouble();
         }
     }
 

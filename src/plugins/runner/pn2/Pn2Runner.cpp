@@ -74,7 +74,7 @@ bool Pn2Runner::importPolygon(QDataStream &stream, GeoDataLineString *linestring
     for (quint32 absoluteNode = 1; absoluteNode <= nrAbsoluteNodes; absoluteNode++) {
         stream >> lat >> lon >> nrRelativeNodes;
 
-        error = error | errorCheckLat(lat) | errorCheckLon(lon);
+        error = error | errorCheckLat(lat) || errorCheckLon(lon);
 
         qreal degLat = (1.0 * lat / 120.0);
         qreal degLon = (1.0 * lon / 120.0);
@@ -88,7 +88,7 @@ bool Pn2Runner::importPolygon(QDataStream &stream, GeoDataLineString *linestring
             qint16 currLat = relativeLat + lat;
             qint16 currLon = relativeLon + lon;
 
-            error = error | errorCheckLat(currLat) | errorCheckLon(currLon);
+            error = error | errorCheckLat(currLat) || errorCheckLon(currLon);
 
             qreal currDegLat = (1.0 * currLat / 120.0);
             qreal currDegLon = (1.0 * currLon / 120.0);

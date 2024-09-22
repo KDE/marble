@@ -95,7 +95,7 @@ GeoDataLineString GosmoreRunnerPrivate::parseGosmoreOutput(const QByteArray &con
     GeoDataLineString routeWaypoints;
 
     QStringList lines = QString::fromLocal8Bit(content).split(QLatin1Char('\r'));
-    for (const QString &line : lines) {
+    for (const QString &line : std::as_const(lines)) {
         const QStringList fields = line.split(QLatin1Char(','));
         if (fields.size() >= 5) {
             qreal lon = fields.at(1).toDouble();

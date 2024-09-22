@@ -162,7 +162,7 @@ void GeoLineStringGraphicsItem::paint(GeoPainter *painter, const ViewportParams 
             configurePainterForLine(painter, viewport, false);
         }
         s_previousStyle = style().data();
-        for (const QPolygonF *itPolygon : m_cachedPolygons) {
+        for (const QPolygonF *itPolygon : std::as_const(m_cachedPolygons)) {
             painter->drawPolyline(*itPolygon);
         }
     }
@@ -290,7 +290,7 @@ void GeoLineStringGraphicsItem::paintInline(GeoPainter *painter, const ViewportP
     if (s_paintInline) {
         m_renderLabel = painter->pen().widthF() >= 6.0f;
         m_penWidth = painter->pen().widthF();
-        for (const QPolygonF *itPolygon : m_cachedPolygons) {
+        for (const QPolygonF *itPolygon : std::as_const(m_cachedPolygons)) {
             painter->drawPolyline(*itPolygon);
         }
     }

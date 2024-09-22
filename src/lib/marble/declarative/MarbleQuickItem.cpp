@@ -490,7 +490,7 @@ bool MarbleQuickItem::showBackground() const
 bool MarbleQuickItem::showPositionMarker() const
 {
     QList<RenderPlugin *> plugins = d->m_map.renderPlugins();
-    for (const RenderPlugin *plugin : plugins) {
+    for (const RenderPlugin *plugin : std::as_const(plugins)) {
         if (plugin->nameId() == QLatin1String("positionMarker")) {
             return plugin->visible();
         }
@@ -785,13 +785,13 @@ void MarbleQuickItem::selectPlacemarkAt(int x, int y)
 {
     auto features = d->m_map.whichFeatureAt(QPoint(x, y));
     QVector<GeoDataPlacemark const *> placemarks;
-    for (auto feature : features) {
+    for (auto feature : std::as_const(features)) {
         if (const auto placemark = geodata_cast<GeoDataPlacemark>(feature)) {
             placemarks << placemark;
         }
     }
 
-    for (auto placemark : placemarks) {
+    for (auto placemark : std::as_const(placemarks)) {
         if (d->m_placemark && placemark->coordinate() == d->m_placemark->placemark().coordinate()) {
             d->m_placemark->deleteLater();
             d->m_placemark = nullptr;
@@ -1014,7 +1014,7 @@ void MarbleQuickItem::setShowPositionMarker(bool showPositionMarker)
     }
 
     QList<RenderPlugin *> plugins = d->m_map.renderPlugins();
-    for (RenderPlugin *plugin : plugins) {
+    for (RenderPlugin *plugin : std::as_const(plugins)) {
         if (plugin->nameId() == QLatin1String("positionMarker")) {
             plugin->setVisible(showPositionMarker);
             break;
@@ -1058,7 +1058,7 @@ void MarbleQuickItem::setPositionProvider(const QString &positionProvider)
     }
 
     QList<const PositionProviderPlugin *> plugins = d->m_model.pluginManager()->positionProviderPlugins();
-    for (const PositionProviderPlugin *plugin : plugins) {
+    for (const PositionProviderPlugin *plugin : std::as_const(plugins)) {
         if (plugin->nameId() == positionProvider) {
             PositionProviderPlugin *newPlugin = plugin->newInstance();
             d->m_model.positionTracking()->setPositionProviderPlugin(newPlugin);

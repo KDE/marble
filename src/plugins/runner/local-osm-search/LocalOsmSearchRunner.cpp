@@ -100,7 +100,7 @@ void LocalOsmSearchRunner::search(const QString &searchTerm, const GeoDataLatLon
     QVector<OsmPlacemark> placemarks = m_database.find(userQuery);
 
     QVector<GeoDataPlacemark *> result;
-    for (const OsmPlacemark &placemark : placemarks) {
+    for (const OsmPlacemark &placemark : std::as_const(placemarks)) {
         GeoDataPlacemark *hit = new GeoDataPlacemark;
         hit->setName(placemark.name());
         if (placemark.category() == OsmPlacemark::Address && !placemark.houseNumber().isEmpty()) {

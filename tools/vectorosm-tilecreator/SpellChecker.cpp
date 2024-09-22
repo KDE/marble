@@ -34,7 +34,7 @@ void SpellChecker::correctPlaceLabels(const QVector<GeoDataPlacemark *> &placema
     int hits = 0;
     int validated = 0;
     int misses = 0;
-    for (auto place : places) {
+    for (auto place : std::as_const(places)) {
         auto const places = candidatesFor(place);
         bool hasMatch = false;
         bool isValid = false;

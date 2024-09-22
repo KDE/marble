@@ -64,7 +64,7 @@ bool MonavRunnerPrivate::retrieveData(const RouteRequest *route, RoutingResult *
     // for performance reasons. Do not merge both.
     QStringList alternatives = m_plugin->mapDirectoriesForRequest(route);
     alternatives.removeOne(mapDir);
-    for (const QString &mapDir : alternatives) {
+    for (const QString &mapDir : std::as_const(alternatives)) {
         if (retrieveData(route, mapDir, reply)) {
             return true;
         }

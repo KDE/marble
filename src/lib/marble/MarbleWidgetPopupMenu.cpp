@@ -675,7 +675,7 @@ void MarbleWidgetPopupMenu::slotInfoDialog()
         recognizedTags << "contact:facebook"
                        << "url";
 
-        for (const QString &tag : recognizedTags) {
+        for (const QString &tag : std::as_const(recognizedTags)) {
             if (data.containsTagKey(tag)) {
                 hasOsmData = true;
                 break;

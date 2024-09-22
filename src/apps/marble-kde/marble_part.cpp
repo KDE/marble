@@ -258,7 +258,7 @@ bool MarblePart::openFile()
         m_lastFileOpenPath = QFileInfo(firstFile).absolutePath();
     }
 
-    for (const QString &fileName : fileNames) {
+    for (const QString &fileName : std::as_const(fileNames)) {
         openUrl(QUrl::fromLocalFile(fileName));
     }
 
@@ -1451,7 +1451,7 @@ void MarblePart::updateSettings()
     if (MarbleSettings::systemTimezone() == true) {
         QDateTime localTime = QDateTime::currentDateTime().toLocalTime();
         localTime.setTimeSpec(Qt::UTC);
-        m_controlView->marbleModel()->setClockTimezone(QDateTime::currentDateTime().toUTC().secsTo(localTime));
+        m_controlView->marbleModel()->setClockTimezone(QDateTime::currentDateTimeUtc().secsTo(localTime));
     } else if (MarbleSettings::utc() == true) {
         m_controlView->marbleModel()->setClockTimezone(0);
     } else if (MarbleSettings::customTimezone() == true) {

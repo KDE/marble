@@ -133,7 +133,7 @@ QList<QFileInfo> MonavMap::files() const
                                           << "names"
                                           << "paths"
                                           << "types";
-    for (const QString &file : fileNames) {
+    for (const QString &file : std::as_const(fileNames)) {
         files << QFileInfo(m_directory, QLatin1String("Contraction Hierarchies_") + file);
     }
 
@@ -142,7 +142,7 @@ QList<QFileInfo> MonavMap::files() const
                               << "index_1"
                               << "index_2"
                               << "index_3";
-    for (const QString &file : fileNames) {
+    for (const QString &file : std::as_const(fileNames)) {
         files << QFileInfo(m_directory, QLatin1String("GPSGrid_") + file);
     }
 

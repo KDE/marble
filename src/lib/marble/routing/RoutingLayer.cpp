@@ -432,7 +432,7 @@ QPixmap RoutingLayerPrivate::createRoutePoint(const QColor &penColor, const QCol
 
 bool RoutingLayerPrivate::handleMouseButtonPress(QMouseEvent *e)
 {
-    for (const RequestRegion &region : m_regions) {
+    for (const RequestRegion &region : std::as_const(m_regions)) {
         if (region.region.contains(e->pos())) {
             if (e->button() == Qt::LeftButton) {
                 m_movingIndex = region.index;
@@ -449,7 +449,7 @@ bool RoutingLayerPrivate::handleMouseButtonPress(QMouseEvent *e)
         }
     }
 
-    for (const ModelRegion &region : m_instructionRegions) {
+    for (const ModelRegion &region : std::as_const(m_instructionRegions)) {
         if (region.region.contains(e->pos()) && m_selectionModel) {
             if (e->button() == Qt::LeftButton) {
                 QItemSelectionModel::SelectionFlag command = QItemSelectionModel::ClearAndSelect;
@@ -489,14 +489,14 @@ bool RoutingLayerPrivate::handleMouseButtonPress(QMouseEvent *e)
         return false;
     }
 
-    for (const RequestRegion &region : m_alternativeRouteRegions) {
+    for (const RequestRegion &region : std::as_const(m_alternativeRouteRegions)) {
         if (region.region.contains(e->pos())) {
             m_alternativeRoutesModel->setCurrentRoute(region.index);
             return true;
         }
     }
 
-    for (const ModelRegion &region : m_placemarks) {
+    for (const ModelRegion &region : std::as_const(m_placemarks)) {
         if (region.region.contains(e->pos())) {
             emit q->placemarkSelected(region.index);
             return true;
@@ -586,13 +586,13 @@ bool RoutingLayerPrivate::handleMouseMove(QMouseEvent *e)
 
 bool RoutingLayerPrivate::isInfoPoint(const QPoint &point)
 {
-    for (const RequestRegion &region : m_regions) {
+    for (const RequestRegion &region : std::as_const(m_regions)) {
         if (region.region.contains(point)) {
             return true;
         }
     }
 
-    for (const ModelRegion &region : m_instructionRegions) {
+    for (const ModelRegion &region : std::as_const(m_instructionRegions)) {
         if (region.region.contains(point)) {
             return true;
         }
@@ -603,7 +603,7 @@ bool RoutingLayerPrivate::isInfoPoint(const QPoint &point)
 
 bool RoutingLayerPrivate::isAlternativeRoutePoint(const QPoint &point)
 {
-    for (const RequestRegion &region : m_alternativeRouteRegions) {
+    for (const RequestRegion &region : std::as_const(m_alternativeRouteRegions)) {
         if (region.region.contains(point)) {
             return true;
         }

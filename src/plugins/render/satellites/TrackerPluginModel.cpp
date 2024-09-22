@@ -47,7 +47,7 @@ public:
 
     void update()
     {
-        for (TrackerPluginItem *item : m_itemVector) {
+        for (TrackerPluginItem *item : std::as_const(m_itemVector)) {
             item->update();
         }
     }
@@ -56,7 +56,7 @@ public:
     {
         // we cannot use ->clear() since its implementation
         // will delete all items
-        for (TrackerPluginItem *item : m_itemVector) {
+        for (TrackerPluginItem *item : std::as_const(m_itemVector)) {
             int idx = m_document->childPosition(item->placemark());
             if (item->isEnabled() && idx == -1) {
                 m_document->append(item->placemark());

@@ -84,7 +84,7 @@ GeoDataDocument *VectorClipper::clipTo(const GeoDataLatLonBox &tileBoundary, int
         }
     }
 
-    for (auto relation : m_relations) {
+    for (auto relation : std::as_const(m_relations)) {
         if (relation->containsAnyOf(osmIds)) {
             GeoDataRelation *multi = new GeoDataRelation;
             multi->osmData() = relation->osmData();

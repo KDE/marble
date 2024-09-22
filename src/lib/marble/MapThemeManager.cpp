@@ -389,7 +389,7 @@ void MapThemeManager::Private::updateMapThemeModel()
         }
     }
 
-    for (const QString &mapThemeId : stringlist) {
+    for (const QString &mapThemeId : std::as_const(stringlist)) {
         const QString celestialBodyId = mapThemeId.section(QLatin1Char('/'), 0, 0);
         QString celestialBodyName = PlanetFactory::localizedName(celestialBodyId);
 

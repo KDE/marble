@@ -132,7 +132,7 @@ QString VoiceNavigationModelPrivate::distanceAudioFile(qreal dest) const
         int targetDistance = 0;
         QVector<int> distances;
         distances << 50 << 80 << 100 << 200 << 300 << 400 << 500 << 600 << 700 << 800;
-        for (int distance : distances) {
+        for (int distance : std::as_const(distances)) {
             QString file = audioFile(QString::number(distance));
             qreal currentDistance = qAbs(distance - dest);
             if (!file.isEmpty() && (minDistance == 0.0 || currentDistance < minDistance)) {

@@ -289,7 +289,7 @@ void MapWizard::processCapabilitiesResults()
     d->uiWidget.labelWmsTitle->setText(QStringLiteral("Web Service: <b>%1</b>").arg(owsCapabilities.title()));
     d->uiWidget.labelWmsTitle->setToolTip(QStringLiteral("<small>%1</small>").arg(owsCapabilities.abstract()));
 
-    for (auto layer : owsCapabilities.layers()) {
+    for (const auto &layer : owsCapabilities.layers()) {
         if (!layer.isEmpty()) {
             QStandardItem *item = new QStandardItem(owsCapabilities.title(layer));
             item->setData(layer, layerIdRole);
@@ -352,7 +352,7 @@ void MapWizard::processSelectedLayerInformation()
 
     QStringList selectedList;
     QModelIndexList selectedIndexes = d->uiWidget.listViewWmsLayers->selectionModel()->selectedIndexes();
-    for (auto selectedIndex : selectedIndexes) {
+    for (auto selectedIndex : std::as_const(selectedIndexes)) {
         selectedList << d->sortModel->data(selectedIndex, layerIdRole).toString();
     }
     d->selectedLayers = selectedList;
@@ -374,7 +374,7 @@ void MapWizard::processSelectedLayerInformation()
 
     if (d->owsManager.owsServiceType() == WmsType) {
         WmsCapabilities capabilities = d->owsManager.wmsCapabilities();
-        for (auto projection : capabilities.projections(d->selectedLayers.first())) {
+        for (const auto &projection : capabilities.projections(d->selectedLayers.first())) {
             projectionTextList << epsgToText[projection];
         }
         d->uiWidget.labelWmsTileProjection->setText(tr("Tile Projection:"));
@@ -787,7 +787,7 @@ bool MapWizard::validateCurrentPage()
         if (d->mapProviderType == MapWizardPrivate::WmsMap && d->uiWidget.listViewWmsLayers->currentIndex().isValid()) {
             QStringList selectedList;
             QModelIndexList selectedIndexes = d->uiWidget.listViewWmsLayers->selectionModel()->selectedIndexes();
-            for (auto selectedIndex : selectedIndexes) {
+            for (auto selectedIndex : std::as_const(selectedIndexes)) {
                 selectedList << d->sortModel->data(selectedIndex, layerIdRole).toString();
             }
             d->selectedLayers = selectedList;
@@ -808,7 +808,7 @@ bool MapWizard::validateCurrentPage()
         } else if (d->mapProviderType == MapWizardPrivate::WmtsMap && d->uiWidget.listViewWmsLayers->currentIndex().isValid()) {
             QStringList selectedList;
             QModelIndexList selectedIndexes = d->uiWidget.listViewWmsLayers->selectionModel()->selectedIndexes();
-            for (auto selectedIndex : selectedIndexes) {
+            for (auto selectedIndex : std::as_const(selectedIndexes)) {
                 selectedList << d->sortModel->data(selectedIndex, layerIdRole).toString();
             }
             d->selectedLayers = selectedList;
@@ -926,7 +926,7 @@ bool MapWizard::validateCurrentPage()
         } else if (d->mapProviderType == MapWizardPrivate::WmtsMap) {
             QStringList selectedList;
             QModelIndexList selectedIndexes = d->uiWidget.listViewWmsLayers->selectionModel()->selectedIndexes();
-            for (auto selectedIndex : selectedIndexes) {
+            for (auto selectedIndex : std::as_const(selectedIndexes)) {
                 selectedList << d->sortModel->data(selectedIndex, layerIdRole).toString();
             }
             d->selectedLayers = selectedList;

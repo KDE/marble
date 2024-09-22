@@ -76,7 +76,7 @@ VectorTileLayer::Private::~Private()
 
 void VectorTileLayer::Private::updateTile(const TileId &tileId, GeoDataDocument *document)
 {
-    for (VectorTileModel *mapper : m_activeTileModels) {
+    for (VectorTileModel *mapper : std::as_const(m_activeTileModels)) {
         mapper->updateTile(tileId, document);
     }
 }
@@ -85,7 +85,7 @@ void VectorTileLayer::Private::updateLayerSettings()
 {
     m_activeTileModels.clear();
 
-    for (VectorTileModel *candidate : m_tileModels) {
+    for (VectorTileModel *candidate : std::as_const(m_tileModels)) {
         bool enabled = true;
         if (m_layerSettings) {
             const bool propertyExists = m_layerSettings->propertyValue(candidate->name(), enabled);
@@ -124,7 +124,7 @@ RenderState VectorTileLayer::renderState() const
 int VectorTileLayer::tileZoomLevel() const
 {
     int level = -1;
-    for (const auto *mapper : d->m_activeTileModels) {
+    for (const auto *mapper : std::as_const(d->m_activeTileModels)) {
         level = qMax(level, mapper->tileZoomLevel());
     }
     return level;
@@ -133,7 +133,7 @@ int VectorTileLayer::tileZoomLevel() const
 QString VectorTileLayer::runtimeTrace() const
 {
     int tiles = 0;
-    for (const auto *mapper : d->m_activeTileModels) {
+    for (const auto *mapper : std::as_const(d->m_activeTileModels)) {
         tiles += mapper->cachedDocuments();
     }
     int const layers = d->m_activeTileModels.size();
@@ -148,7 +148,7 @@ bool VectorTileLayer::render(GeoPainter *painter, ViewportParams *viewport, cons
 
     int const oldLevel = tileZoomLevel();
     int level = 0;
-    for (VectorTileModel *mapper : d->m_activeTileModels) {
+    for (VectorTileModel *mapper : std::as_const(d->m_activeTileModels)) {
         mapper->setViewport(viewport->viewLatLonAltBox());
         level = qMax(level, mapper->tileZoomLevel());
     }
@@ -161,7 +161,7 @@ bool VectorTileLayer::render(GeoPainter *painter, ViewportParams *viewport, cons
 
 void VectorTileLayer::reload()
 {
-    for (auto mapper : d->m_activeTileModels) {
+    for (auto mapper : std::as_const(d->m_activeTileModels)) {
         mapper->reload();
     }
 }
@@ -175,7 +175,7 @@ const GeoSceneAbstractTileProjection *VectorTileLayer::tileProjection() const
 {
     if (!d->m_activeTileModels.isEmpty())
         return d->m_activeTileModels.first()->layer()->tileProjection();
-    return 0;
+    return nullptr;
 }
 
 int VectorTileLayer::tileColumnCount(int level) const
@@ -211,7 +211,7 @@ void VectorTileLayer::downloadTile(const TileId &id)
 
 void VectorTileLayer::reset()
 {
-    for (VectorTileModel *mapper : d->m_tileModels) {
+    for (VectorTileModel *mapper : std::as_const(d->m_tileModels)) {
         mapper->clear();
     }
 }

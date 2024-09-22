@@ -559,7 +559,7 @@ bool AnnotatePlugin::eventFilter(QObject *watched, QEvent *event)
     }
 
     // Pass the event to Graphic Items.
-    for (SceneGraphicsItem *item : m_graphicsItems) {
+    for (SceneGraphicsItem *item : std::as_const(m_graphicsItems)) {
         if (!item->containsPoint(mouseEvent->pos())) {
             continue;
         }
@@ -1593,7 +1593,7 @@ void AnnotatePlugin::addRelation(const OsmPlacemarkData &relationData)
 
 void AnnotatePlugin::announceStateChanged(SceneGraphicsItem::ActionState newState)
 {
-    for (SceneGraphicsItem *item : m_graphicsItems) {
+    for (SceneGraphicsItem *item : std::as_const(m_graphicsItems)) {
         item->setState(newState);
         m_marbleWidget->model()->treeModel()->updateFeature(item->placemark());
     }

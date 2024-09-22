@@ -125,7 +125,7 @@ public:
             toolTip += QLatin1Char('\n');
 
             QDate const minDate = QDate::currentDate();
-            for (const WeatherData &data : m_forecastWeather) {
+            for (const WeatherData &data : std::as_const(m_forecastWeather)) {
                 QDate date = data.dataDate();
                 if (date >= minDate && data.hasValidCondition() && data.hasValidMinTemperature() && data.hasValidMaxTemperature()) {
                     toolTip += QLatin1Char('\n')
@@ -481,7 +481,7 @@ QString WeatherItem::createFromTemplate(const QString &templateHtml)
 
     int forecastNumber = 0;
 
-    for (const WeatherData &forecast : d->m_forecastWeather) {
+    for (const WeatherData &forecast : std::as_const(d->m_forecastWeather)) {
         forecastNumber++;
         const QString suffix = QString::number(forecastNumber);
         QDate date = forecast.dataDate();

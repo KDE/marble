@@ -231,7 +231,7 @@ GeoDataDocument *OsmParser::createDocument(OsmNodes &nodes, OsmWays &ways, OsmRe
     for (auto const &relation : relations) {
         relation.createMultipolygon(document, ways, nodes, usedNodes, usedWays);
     }
-    for (auto id : usedWays) {
+    for (auto id : std::as_const(usedWays)) {
         ways.remove(id);
     }
 
@@ -244,13 +244,13 @@ GeoDataDocument *OsmParser::createDocument(OsmNodes &nodes, OsmWays &ways, OsmRe
         }
     }
 
-    for (auto id : usedNodes) {
+    for (auto id : std::as_const(usedNodes)) {
         if (nodes[id].osmData().isEmpty()) {
             nodes.remove(id);
         }
     }
 
-    for (auto const &node : nodes) {
+    for (auto const &node : std::as_const(nodes)) {
         auto placemark = node.create();
         if (placemark) {
             document->append(placemark);

@@ -101,7 +101,7 @@ void CurrentLocationWidget::setMarbleWidget(MarbleWidget *widget)
 
     const PluginManager *pluginManager = d->m_widget->model()->pluginManager();
     d->m_positionProviderPlugins = pluginManager->positionProviderPlugins();
-    for (const PositionProviderPlugin *plugin : d->m_positionProviderPlugins) {
+    for (const PositionProviderPlugin *plugin : std::as_const(d->m_positionProviderPlugins)) {
         d->m_currentLocationUi.positionTrackingComboBox->addItem(plugin->guiString());
     }
     if (d->m_positionProviderPlugins.isEmpty()) {
@@ -308,7 +308,7 @@ void CurrentLocationWidget::changePositionProvider(int index)
 
 void CurrentLocationWidget::changePositionProvider(const QString &provider)
 {
-    for (const PositionProviderPlugin *plugin : d->m_positionProviderPlugins) {
+    for (const PositionProviderPlugin *plugin : std::as_const(d->m_positionProviderPlugins)) {
         if (plugin->guiString() == provider) {
             d->m_currentLocationUi.locationLabel->setEnabled(true);
             PositionProviderPlugin *instance = plugin->newInstance();

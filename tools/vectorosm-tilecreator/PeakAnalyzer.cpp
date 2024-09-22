@@ -84,7 +84,7 @@ void PeakAnalyzer::dbScan(const Peaks &peaks, double maxDistance, int minPoints)
             first = false;
         }
     }
-    for (auto peak : noise) {
+    for (auto peak : std::as_const(noise)) {
         peak->osmData().addTag(QLatin1String("marbleZoomLevel"), QLatin1String("11"));
     }
 }

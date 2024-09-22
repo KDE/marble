@@ -91,7 +91,7 @@ WayConcatenator::WayConcatenator(GeoDataDocument *document)
     }
 
     document->clear();
-    for (auto placemark : m_otherPlacemarks) {
+    for (auto placemark : std::as_const(m_otherPlacemarks)) {
         document->append(placemark);
     }
     addWayChunks(document);
@@ -109,7 +109,7 @@ int WayConcatenator::mergedWays() const
 
 void WayConcatenator::addWayChunks(GeoDataDocument *document)
 {
-    for (auto const &placemark : m_wayPlacemarks) {
+    for (auto const &placemark : std::as_const(m_wayPlacemarks)) {
         document->append(placemark->clone());
     }
 

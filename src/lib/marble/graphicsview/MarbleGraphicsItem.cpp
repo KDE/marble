@@ -73,7 +73,7 @@ bool MarbleGraphicsItem::paintEvent(QPainter *painter, const ViewportParams *vie
             paint(&pixmapPainter);
 
             // Paint children
-            for (MarbleGraphicsItem *item : d->m_children) {
+            for (MarbleGraphicsItem *item : std::as_const(d->m_children)) {
                 item->paintEvent(&pixmapPainter, viewport);
             }
         }
@@ -89,7 +89,7 @@ bool MarbleGraphicsItem::paintEvent(QPainter *painter, const ViewportParams *vie
             paint(painter);
 
             // Paint children
-            for (MarbleGraphicsItem *item : d->m_children) {
+            for (MarbleGraphicsItem *item : std::as_const(d->m_children)) {
                 item->paintEvent(painter, viewport);
             }
 

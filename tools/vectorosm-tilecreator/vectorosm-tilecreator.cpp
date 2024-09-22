@@ -134,7 +134,7 @@ int main(int argc, char *argv[])
             spellChecker.setVerbose(parser.isSet("verbose"));
             spellChecker.correctPlaceLabels(map.data()->placemarkList());
         }
-        for (auto zoomLevel : zoomLevels) {
+        for (auto zoomLevel : std::as_const(zoomLevels)) {
             TileIterator iter(world, zoomLevel);
             qint64 count = 0;
             qint64 const total = iter.total();

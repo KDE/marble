@@ -185,7 +185,7 @@ void ElevationProfileTrackDataSource::handleObjectRemoved(GeoDataObject *object)
     }
 
     const QList<const GeoDataTrack *> list = m_trackHash.value(key);
-    const GeoDataTrack *const selectedTrack = m_currentSourceIndex == -1 ? 0 : m_trackList[m_currentSourceIndex];
+    const GeoDataTrack *const selectedTrack = m_currentSourceIndex == -1 ? nullptr : m_trackList[m_currentSourceIndex];
     for (int i = 0; i < list.size(); i++) {
         int idx = m_trackList.indexOf(list[i]);
         m_trackList.removeAt(idx);

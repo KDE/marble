@@ -308,7 +308,7 @@ void QtMarbleConfigDialog::readSettings()
     if (systemTimezone() == true) {
         QDateTime localTime = QDateTime::currentDateTime().toLocalTime();
         localTime.setTimeSpec(Qt::UTC);
-        d->m_marbleWidget->model()->setClockTimezone(QDateTime::currentDateTime().toUTC().secsTo(localTime));
+        d->m_marbleWidget->model()->setClockTimezone(QDateTime::currentDateTimeUtc().secsTo(localTime));
     } else if (UTC() == true) {
         d->m_marbleWidget->model()->setClockTimezone(0);
     } else if (customTimezone() == true) {

@@ -129,7 +129,7 @@ void TextureLayer::Private::updateTextureLayers()
 {
     QVector<GeoSceneTextureTileDataset const *> result;
 
-    for (const GeoSceneTextureTileDataset *candidate : m_textures) {
+    for (const GeoSceneTextureTileDataset *candidate : std::as_const(m_textures)) {
         bool enabled = true;
         if (m_textureLayerSettings) {
             const bool propertyExists = m_textureLayerSettings->propertyValue(candidate->name(), enabled);
@@ -226,7 +226,7 @@ void TextureLayer::Private::updateGroundOverlays()
 void TextureLayer::Private::addCustomTextures()
 {
     m_textures.reserve(m_textures.size() + m_customTextures.size());
-    for (GeoSceneTextureTileDataset *t : m_customTextures) {
+    for (GeoSceneTextureTileDataset *t : std::as_const(m_customTextures)) {
         m_textures.append(t);
     }
 }

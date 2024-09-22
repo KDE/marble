@@ -176,7 +176,7 @@ QVector<const GeoDataFeature *> PlacemarkLayout::whichPlacemarkAt(const QPoint &
 
     QVector<const GeoDataFeature *> ret;
 
-    for (VisiblePlacemark *mark : m_paintOrder) {
+    for (VisiblePlacemark *mark : std::as_const(m_paintOrder)) {
         if (mark->labelRect().contains(curpos) || mark->symbolRect().contains(curpos)) {
             ret.append(mark->placemark());
         }
@@ -286,7 +286,7 @@ QSet<TileId> PlacemarkLayout::visibleTiles(const ViewportParams &viewport, int z
         geoRects << GeoDataLatLonBox(north, south, east, -M_PI);
     }
 
-    for (const GeoDataLatLonBox &geoRect : geoRects) {
+    for (const GeoDataLatLonBox &geoRect : std::as_const(geoRects)) {
         TileId key;
         QRect rect;
 
@@ -388,7 +388,7 @@ QVector<VisiblePlacemark *> PlacemarkLayout::generateLayout(const ViewportParams
         }
         std::sort(placemarkList.begin(), placemarkList.end(), GeoDataPlacemark::placemarkLayoutOrderCompare);
 
-        for (const GeoDataPlacemark *placemark : placemarkList) {
+        for (const GeoDataPlacemark *placemark : std::as_const(placemarkList)) {
             const GeoDataCoordinates coordinates = placemarkIconCoordinates(placemark);
             if (!coordinates.isValid()) {
                 continue;
@@ -465,12 +465,12 @@ QVector<VisiblePlacemark *> PlacemarkLayout::generateLayout(const ViewportParams
         if (m_visiblePlacemarks.size() > qMax(100, 4 * m_paintOrder.size())) {
             auto const extendedBox = viewLatLonAltBox.scaled(2.0, 2.0);
             QVector<VisiblePlacemark *> outdated;
-            for (auto placemark : m_visiblePlacemarks) {
+            for (auto placemark : std::as_const(m_visiblePlacemarks)) {
                 if (!extendedBox.contains(placemark->coordinates())) {
                     outdated << placemark;
                 }
             }
-            for (auto placemark : outdated) {
+            for (auto placemark : std::as_const(outdated)) {
                 delete m_visiblePlacemarks.take(placemark->placemark());
             }
         }
@@ -500,7 +500,7 @@ bool PlacemarkLayout::hasPlacemarkAt(const QPoint &pos)
         return true;
     }
 
-    for (VisiblePlacemark *mark : m_paintOrder) {
+    for (VisiblePlacemark *mark : std::as_const(m_paintOrder)) {
         if (mark->labelRect().contains(pos) || mark->symbolRect().contains(pos)) {
             m_lastPlacemarkLabelRect = mark->labelRect();
             m_lastPlacemarkSymbolRect = mark->symbolRect();

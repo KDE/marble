@@ -188,7 +188,7 @@ TagsFilter::Tags TileDirectory::tagsFilteredIn(int zoomLevel) const
         }
 
         auto const tagMap = StyleBuilder::osmTagMapping();
-        for (auto category : categories) {
+        for (auto category : std::as_const(categories)) {
             for (auto iter = tagMap.begin(), end = tagMap.end(); iter != end; ++iter) {
                 if (iter.value() == category) {
                     int zoomLevel = StyleBuilder::minimumZoomLevel(category);
@@ -397,7 +397,7 @@ void TileDirectory::createOsmTiles() const
     bool first = true;
     if (!hasAllTiles) {
         qint64 count = 0;
-        for (auto const &tiles : tileLevels) {
+        for (auto const &tiles : std::as_const(tileLevels)) {
             for (auto const &tileId : tiles) {
                 ++count;
                 QString const inputFile =
@@ -437,7 +437,7 @@ void TileDirectory::createOsmTiles() const
     }
 
     tileLevels.remove(m_zoomLevel);
-    for (auto const &tiles : tileLevels) {
+    for (auto const &tiles : std::as_const(tileLevels)) {
         for (auto const &tileId : tiles) {
             QFile::remove(osmFileFor(tileId));
         }
@@ -463,7 +463,7 @@ int TileDirectory::innerNodes(const TileId &tile) const
 
     int innerNodes = 0;
     if (m_boundingPolygon.isEmpty()) {
-        for (auto const &coordinate : bounds) {
+        for (auto const &coordinate : std::as_const(bounds)) {
             if (m_boundingBox.contains(coordinate)) {
                 ++innerNodes;
             }
@@ -471,7 +471,7 @@ int TileDirectory::innerNodes(const TileId &tile) const
         return innerNodes;
     }
 
-    for (auto const &coordinate : bounds) {
+    for (auto const &coordinate : std::as_const(bounds)) {
         for (auto const &ring : m_boundingPolygon) {
             if (ring.contains(coordinate)) {
                 ++innerNodes;
@@ -510,13 +510,13 @@ GeoDataLatLonBox TileDirectory::boundingBox(const QString &filename) const
     GeoDataLatLonBox boundingBox;
     for (QString const &line : output) {
         if (line.startsWith("lon min:")) {
-            boundingBox.setWest(line.mid(8).toDouble(), GeoDataCoordinates::Degree);
+            boundingBox.setWest(QStringView{line}.mid(8).toDouble(), GeoDataCoordinates::Degree);
         } else if (line.startsWith("lon max")) {
-            boundingBox.setEast(line.mid(8).toDouble(), GeoDataCoordinates::Degree);
+            boundingBox.setEast(QStringView{line}.mid(8).toDouble(), GeoDataCoordinates::Degree);
         } else if (line.startsWith("lat min:")) {
-            boundingBox.setSouth(line.mid(8).toDouble(), GeoDataCoordinates::Degree);
+            boundingBox.setSouth(QStringView{line}.mid(8).toDouble(), GeoDataCoordinates::Degree);
         } else if (line.startsWith("lat max:")) {
-            boundingBox.setNorth(line.mid(8).toDouble(), GeoDataCoordinates::Degree);
+            boundingBox.setNorth(QStringView{line}.mid(8).toDouble(), GeoDataCoordinates::Degree);
         }
     }
     return boundingBox;

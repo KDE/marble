@@ -61,7 +61,7 @@ void NotesModel::parseFile(const QByteArray &file)
         QList<AbstractDataPluginItem *> items;
 
         QJsonArray jsonArray = features.toArray();
-        for (auto const jsonRef : jsonArray) {
+        for (auto const jsonRef : std::as_const(jsonArray)) {
             QJsonObject jsonObj = jsonRef.toObject();
             QJsonObject geometry = jsonObj.value(QStringLiteral("geometry")).toObject();
             QJsonArray coordinates = geometry.value(QStringLiteral("coordinates")).toArray();
@@ -84,7 +84,7 @@ void NotesModel::parseFile(const QByteArray &file)
             item->setNoteStatus(noteStatus);
             item->setDateClosed(dateClosed);
 
-            for (auto const commentRef : noteComments) {
+            for (auto const commentRef : std::as_const(noteComments)) {
                 QJsonObject commentObj = commentRef.toObject();
                 QDateTime date = QDateTime::fromString(commentObj.value("date").toString(), Qt::ISODate);
                 QString user = commentObj.value("user").toString();

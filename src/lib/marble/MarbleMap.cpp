@@ -259,7 +259,7 @@ void MarbleMapPrivate::updateProperty(const QString &name, bool show)
         m_textureLayer.setShowRelief(show);
     }
 
-    for (RenderPlugin *renderPlugin : m_renderPlugins) {
+    for (RenderPlugin *renderPlugin : std::as_const(m_renderPlugins)) {
         if (name == renderPlugin->nameId()) {
             if (renderPlugin->visible() == show) {
                 break;
@@ -276,7 +276,7 @@ void MarbleMapPrivate::addPlugins()
 {
     for (const RenderPlugin *factory : m_model->pluginManager()->renderPlugins()) {
         bool alreadyCreated = false;
-        for (const RenderPlugin *existing : m_renderPlugins) {
+        for (const RenderPlugin *existing : std::as_const(m_renderPlugins)) {
             if (existing->nameId() == factory->nameId()) {
                 alreadyCreated = true;
                 break;
@@ -977,7 +977,7 @@ void MarbleMapPrivate::updateMapTheme()
             if (filter->type() == QLatin1String("colorize")) {
                 // no need to look up with MarbleDirs twice so they are left null for now
                 QList<const GeoScenePalette *> palette = filter->palette();
-                for (const GeoScenePalette *curPalette : palette) {
+                for (const GeoScenePalette *curPalette : std::as_const(palette)) {
                     if (curPalette->type() == QLatin1String("sea")) {
                         seafile = MarbleDirs::path(curPalette->file());
                     } else if (curPalette->type() == QLatin1String("land")) {
@@ -1025,7 +1025,7 @@ void MarbleMapPrivate::updateMapTheme()
     m_styleBuilder.setDefaultLabelColor(m_model->mapTheme()->map()->labelColor());
     m_placemarkLayer.requestStyleReset();
 
-    for (RenderPlugin *renderPlugin : m_renderPlugins) {
+    for (RenderPlugin *renderPlugin : std::as_const(m_renderPlugins)) {
         bool propertyAvailable = false;
         m_model->mapTheme()->settings()->propertyAvailable(renderPlugin->nameId(), propertyAvailable);
         bool propertyValue = false;

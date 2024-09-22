@@ -387,7 +387,7 @@ void RoutingManagerPrivate::setCurrentRoute(const GeoDataDocument *document)
     Route route;
 
     if (segments.size() > 0) {
-        for (const RouteSegment &segment : segments) {
+        for (const RouteSegment &segment : std::as_const(segments)) {
             route.addRouteSegment(segment);
         }
     }

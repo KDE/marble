@@ -70,7 +70,7 @@ public:
     {
         QDir dir(m_dirName);
         QFileInfoList entries = dir.entryInfoList(QDir::Files);
-        for (const QFileInfo &file : entries) {
+        for (const QFileInfo &file : std::as_const(entries)) {
             QFile(file.absoluteFilePath()).remove();
         }
         dir.rmdir(dir.absolutePath());

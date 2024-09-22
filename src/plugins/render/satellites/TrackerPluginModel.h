@@ -95,8 +95,8 @@ Q_SIGNALS:
 
 private:
     TrackerPluginModelPrivate *d;
-    Q_PRIVATE_SLOT(d, void downloaded(const QString &, const QString &));
-    Q_PRIVATE_SLOT(d, void update());
+    Q_PRIVATE_SLOT(d, void downloaded(const QString &, const QString &))
+    Q_PRIVATE_SLOT(d, void update())
 };
 
 } // namespace Marble

@@ -150,7 +150,7 @@ QList<GeoGraphicsItem *> GeoGraphicsScene::selectedItems() const
 
 void GeoGraphicsScene::resetStyle()
 {
-    for (auto const &items : d->m_tiledItems) {
+    for (auto const &items : std::as_const(d->m_tiledItems)) {
         for (auto item : items) {
             item->resetStyle();
         }
@@ -164,7 +164,7 @@ void GeoGraphicsScene::applyHighlight(const QVector<GeoDataPlacemark *> &selecte
      * First set the items, which were selected previously, to
      * use normal style
      */
-    for (GeoGraphicsItem *item : d->m_selectedItems) {
+    for (GeoGraphicsItem *item : std::as_const(d->m_selectedItems)) {
         item->setHighlighted(false);
     }
 

@@ -53,7 +53,7 @@ public:
 
     void setParent(GeoDataObject *parent)
     {
-        for (GeoDataFeature *feature : m_vector) {
+        for (GeoDataFeature *feature : std::as_const(m_vector)) {
             feature->setParent(parent);
         }
     }

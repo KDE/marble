@@ -170,7 +170,7 @@ QString ControlView::defaultMapThemeId() const
 
     const QStringList installedThemes = m_mapThemeManager->mapThemeIds();
 
-    for (const QString &fallback : fallBackThemes) {
+    for (const QString &fallback : std::as_const(fallBackThemes)) {
         if (installedThemes.contains(fallback)) {
             return fallback;
         }
@@ -705,7 +705,7 @@ QList<QAction *> ControlView::setupDockWidgets(QMainWindow *mainWindow)
     m_panelActions << m_annotationDock->toggleViewAction();
     m_panelActions << legendDock->toggleViewAction();
     m_panelActions << tourDock->toggleViewAction();
-    for (QAction *action : m_panelActions) {
+    for (QAction *action : std::as_const(m_panelActions)) {
         m_panelVisibility << action->isVisible();
     }
 
@@ -724,7 +724,7 @@ QList<QAction *> ControlView::setupDockWidgets(QMainWindow *mainWindow)
     QList<QAction *> panelMenuActions;
     panelMenuActions << m_togglePanelVisibilityAction;
     panelMenuActions << panelSeparatorAct;
-    for (QAction *action : m_panelActions) {
+    for (QAction *action : std::as_const(m_panelActions)) {
         panelMenuActions << action;
     }
 

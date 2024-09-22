@@ -80,7 +80,7 @@ TextureColorizer::TextureColorizer(const QString &seafile, const QString &landfi
     QStringList filelist;
     filelist << seafile << landfile;
 
-    for (const QString &filename : filelist) {
+    for (const QString &filename : std::as_const(filelist)) {
         QLinearGradient gradient(0, 0, 256, 0);
 
         QFile file(filename);
@@ -188,13 +188,13 @@ void TextureColorizer::drawIndividualDocument(GeoPainter *painter, const GeoData
 
 void TextureColorizer::drawTextureMap(GeoPainter *painter)
 {
-    for (const GeoDataDocument *doc : m_landDocuments) {
+    for (const GeoDataDocument *doc : std::as_const(m_landDocuments)) {
         painter->setPen(QPen(Qt::NoPen));
         painter->setBrush(QBrush(m_landColor));
         drawIndividualDocument(painter, doc);
     }
 
-    for (const GeoDataDocument *doc : m_seaDocuments) {
+    for (const GeoDataDocument *doc : std::as_const(m_seaDocuments)) {
         if (doc->isVisible()) {
             painter->setPen(Qt::NoPen);
             painter->setBrush(QBrush(m_seaColor));

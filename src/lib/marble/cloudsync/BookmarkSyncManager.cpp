@@ -335,7 +335,7 @@ void BookmarkSyncManager::Private::clearCache()
     QDir cacheDir(m_cachePath);
     QFileInfoList fileInfoList = cacheDir.entryInfoList(QStringList() << "*.kml", QDir::NoFilter, QDir::Name);
     if (!fileInfoList.isEmpty()) {
-        for (const QFileInfo &fileInfo : fileInfoList) {
+        for (const QFileInfo &fileInfo : std::as_const(fileInfoList)) {
             QFile file(fileInfo.absoluteFilePath());
             bool removed = file.remove();
             if (!removed) {
@@ -508,13 +508,13 @@ QList<DiffItem> BookmarkSyncManager::Private::diff(QIODevice *fileA, QIODevice *
 
 void BookmarkSyncManager::Private::merge()
 {
-    for (const DiffItem &itemA : m_diffA) {
+    for (const DiffItem &itemA : std::as_const(m_diffA)) {
         if (itemA.m_action == DiffItem::NoAction) {
             bool deleted = false;
             bool changed = false;
             DiffItem other;
 
-            for (const DiffItem &itemB : m_diffB) {
+            for (const DiffItem &itemB : std::as_const(m_diffB)) {
                 if (EARTH_RADIUS * itemA.m_placemarkA.coordinate().sphericalDistanceTo(itemB.m_placemarkA.coordinate()) <= 1) {
                     if (itemB.m_action == DiffItem::Deleted) {
                         deleted = true;
@@ -535,7 +535,7 @@ void BookmarkSyncManager::Private::merge()
             bool conflict = false;
             DiffItem other;
 
-            for (const DiffItem &itemB : m_diffB) {
+            for (const DiffItem &itemB : std::as_const(m_diffB)) {
                 if (EARTH_RADIUS * itemA.m_placemarkB.coordinate().sphericalDistanceTo(itemB.m_placemarkB.coordinate()) <= 1) {
                     if ((itemA.m_action == DiffItem::Changed && (itemB.m_action == DiffItem::Changed || itemB.m_action == DiffItem::Deleted))
                         || (itemA.m_action == DiffItem::Deleted && itemB.m_action == DiffItem::Changed)) {
@@ -587,7 +587,7 @@ void BookmarkSyncManager::Private::merge()
         }
     }
 
-    for (const DiffItem &itemB : m_diffB) {
+    for (const DiffItem &itemB : std::as_const(m_diffB)) {
         if (itemB.m_action == DiffItem::Created) {
             m_merged.append(itemB);
         }
@@ -713,7 +713,7 @@ void BookmarkSyncManager::Private::continueSynchronization()
         } else {
             QList<DiffItem> diffList = diff(lastSyncedPath, m_localBookmarksPath);
             bool localModified = false;
-            for (const DiffItem &item : diffList) {
+            for (const DiffItem &item : std::as_const(diffList)) {
                 if (item.m_action != DiffItem::NoAction) {
                     localModified = true;
                 }

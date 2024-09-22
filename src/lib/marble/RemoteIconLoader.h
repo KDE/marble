@@ -19,7 +19,7 @@ class RemoteIconLoaderPrivate;
 
 class RemoteIconLoader : public QObject
 {
-    Q_OBJECT;
+    Q_OBJECT
 
 public:
     explicit RemoteIconLoader(QObject *parent = nullptr);

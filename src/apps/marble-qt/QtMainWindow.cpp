@@ -250,7 +250,7 @@ void MainWindow::initObject(const QVariantMap &cmdLineSettings)
     setupStatusBar();
     readSettings(cmdLineSettings);
 
-    for (const QString &path : m_commandlineFilePaths) {
+    for (const QString &path : std::as_const(m_commandlineFilePaths)) {
         m_controlView->marbleModel()->addGeoDataFile(path);
     }
 
@@ -563,7 +563,7 @@ void MainWindow::createBookmarksListMenu(QMenu *bookmarksListMenu, const GeoData
 
     QVector<GeoDataPlacemark *> bookmarks = container->placemarkList();
 
-    for (const GeoDataPlacemark *placemark : bookmarks) {
+    for (const GeoDataPlacemark *placemark : std::as_const(bookmarks)) {
         QAction *bookmarkAction = new QAction(placemark->name(), this);
         QVariant var;
 
@@ -603,7 +603,7 @@ void MainWindow::createFolderList(QMenu *bookmarksListMenu, const GeoDataContain
     if (folders.size() == 1 && folders.first()->name() == tr("Default")) {
         createBookmarksListMenu(bookmarksListMenu, folders.first());
     } else {
-        for (const GeoDataFolder *folder : folders) {
+        for (const GeoDataFolder *folder : std::as_const(folders)) {
             QMenu *subMenu = bookmarksListMenu->addMenu(QIcon(QStringLiteral(":/icons/folder-bookmark.png")), folder->name());
             createFolderList(subMenu, folder);
             connect(subMenu, SIGNAL(triggered(QAction *)), this, SLOT(lookAtBookmark(QAction *)));
@@ -973,7 +973,7 @@ void MainWindow::openFile()
         m_lastFileOpenPath = QFileInfo(firstFile).absolutePath();
     }
 
-    for (const QString &fileName : fileNames) {
+    for (const QString &fileName : std::as_const(fileNames)) {
         m_controlView->marbleModel()->addGeoDataFile(fileName);
     }
 }

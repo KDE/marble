@@ -144,7 +144,7 @@ AbstractDataPluginModelPrivate::~AbstractDataPluginModelPrivate()
 void AbstractDataPluginModelPrivate::updateFavoriteItems()
 {
     if (m_favoriteItemsOnly) {
-        for (const QString &id : m_favoriteItems) {
+        for (const QString &id : std::as_const(m_favoriteItems)) {
             if (!m_parent->findItem(id)) {
                 m_parent->getItem(id);
             }
@@ -200,7 +200,7 @@ int FavoritesModel::rowCount(const QModelIndex &parent) const
     }
 
     int count = 0;
-    for (AbstractDataPluginItem *item : d->m_itemSet) {
+    for (AbstractDataPluginItem *item : std::as_const(d->m_itemSet)) {
         if (item->initialized() && item->isFavorite()) {
             ++count;
         }
@@ -214,7 +214,7 @@ QVariant FavoritesModel::data(const QModelIndex &index, int role) const
     int const row = index.row();
     if (row >= 0 && row < rowCount()) {
         int count = 0;
-        for (AbstractDataPluginItem *item : d->m_itemSet) {
+        for (AbstractDataPluginItem *item : std::as_const(d->m_itemSet)) {
             if (item->initialized() && item->isFavorite()) {
                 if (count == row) {
                     QString const roleName = roleNames().value(role);
@@ -345,7 +345,7 @@ QList<AbstractDataPluginItem *> AbstractDataPluginModel::whichItemAt(const QPoin
     QList<AbstractDataPluginItem *> itemsAt;
 
     const QPointF curposF(curpos);
-    for (AbstractDataPluginItem *item : d->m_displayedItems) {
+    for (AbstractDataPluginItem *item : std::as_const(d->m_displayedItems)) {
         if (item && item->contains(curposF)) {
             itemsAt.append(item);
         }
@@ -519,7 +519,7 @@ QString AbstractDataPluginModelPrivate::generateFilepath(const QString &id, cons
 
 AbstractDataPluginItem *AbstractDataPluginModel::findItem(const QString &id) const
 {
-    for (AbstractDataPluginItem *item : d->m_itemSet) {
+    for (AbstractDataPluginItem *item : std::as_const(d->m_itemSet)) {
         if (item->id() == id) {
             return item;
         }

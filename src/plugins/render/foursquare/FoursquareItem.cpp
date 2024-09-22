@@ -157,7 +157,7 @@ void FoursquareItem::paint(QPainter *painter)
     painterPath.addRoundedRect(boundingRect, 5, 5);
     painter->setClipPath(painterPath);
     painter->drawPath(painterPath);
-    painter->fillPath(painterPath, QBrush(QColor("#39AC39")));
+    painter->fillPath(painterPath, QBrush(QColor(0x39AC39)));
     painter->drawText(rect.adjusted(5, 5, -5, -5), 0, m_name);
 
     painter->restore();

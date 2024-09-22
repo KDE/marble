@@ -147,7 +147,7 @@ GeoDataDocument *YoursRunner::parse(const QByteArray &content)
 qreal YoursRunner::distance(const GeoDataDocument *document)
 {
     QVector<GeoDataFolder *> folders = document->folderList();
-    for (const GeoDataFolder *folder : folders) {
+    for (const GeoDataFolder *folder : std::as_const(folders)) {
         for (const GeoDataPlacemark *placemark : folder->placemarkList()) {
             const GeoDataGeometry *geometry = placemark->geometry();
             if (geometry->geometryId() == GeoDataLineStringId) {

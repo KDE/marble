@@ -78,7 +78,7 @@ void GeoPolyline::updateScreenPositions()
         m_screenCoordinates.clear();
         if (success) {
             int i = 0;
-            for (auto screenPolygon : std::as_const(m_screenPolygons)) {
+            for (const auto &screenPolygon : std::as_const(m_screenPolygons)) {
                 QVariantList polyline;
                 for (auto node : screenPolygon) {
                     QVariantMap vmap;
@@ -96,7 +96,7 @@ void GeoPolyline::updateScreenPositions()
             polygonBoundingRect = m_screenPolygons[0].boundingRect();
         } else {
             QPolygonF polygons;
-            for (auto polygon : std::as_const(m_screenPolygons)) {
+            for (const auto &polygon : std::as_const(m_screenPolygons)) {
                 polygons << polygon;
             }
             polygonBoundingRect = polygons.boundingRect();

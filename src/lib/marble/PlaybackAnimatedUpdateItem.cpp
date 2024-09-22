@@ -199,7 +199,7 @@ void PlaybackAnimatedUpdateItem::stop()
         }
     }
 
-    for (GeoDataFeature *feature : m_deletedObjects) {
+    for (GeoDataFeature *feature : std::as_const(m_deletedObjects)) {
         if (feature->targetId().isEmpty()) {
             continue;
         }

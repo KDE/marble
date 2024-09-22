@@ -82,7 +82,7 @@ bool EclipsesModel::withLunarEclipses() const
 
 EclipsesItem *EclipsesModel::eclipseWithIndex(int index)
 {
-    for (EclipsesItem *item : m_items) {
+    for (EclipsesItem *item : std::as_const(m_items)) {
         if (item->index() == index) {
             return item;
         }

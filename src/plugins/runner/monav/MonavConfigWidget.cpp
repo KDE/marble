@@ -259,7 +259,7 @@ bool MonavConfigWidgetPrivate::fillComboBox(QStringList items, QComboBox *comboB
 bool MonavConfigWidgetPrivate::updateContinents(QComboBox *comboBox)
 {
     QSet<QString> continents;
-    for (const MonavStuffEntry &map : m_remoteMaps) {
+    for (const MonavStuffEntry &map : std::as_const(m_remoteMaps)) {
         Q_ASSERT(map.isValid());
         continents << map.continent();
     }
@@ -270,7 +270,7 @@ bool MonavConfigWidgetPrivate::updateContinents(QComboBox *comboBox)
 bool MonavConfigWidgetPrivate::updateStates(const QString &continent, QComboBox *comboBox)
 {
     QSet<QString> states;
-    for (const MonavStuffEntry &map : m_remoteMaps) {
+    for (const MonavStuffEntry &map : std::as_const(m_remoteMaps)) {
         Q_ASSERT(map.isValid());
         if (map.continent() == continent) {
             states << map.state();
@@ -284,7 +284,7 @@ bool MonavConfigWidgetPrivate::updateRegions(const QString &continent, const QSt
 {
     comboBox->clear();
     QMap<QString, QString> regions;
-    for (const MonavStuffEntry &map : m_remoteMaps) {
+    for (const MonavStuffEntry &map : std::as_const(m_remoteMaps)) {
         Q_ASSERT(map.isValid());
         if (map.continent() == continent && map.state() == state) {
             QString item = "%1 - %2";
@@ -650,7 +650,7 @@ void MonavConfigWidget::upgradeMap(int index)
 {
     QString payload = d->m_mapsModel->payload(index);
     if (!payload.isEmpty()) {
-        for (const MonavStuffEntry &entry : d->m_remoteMaps) {
+        for (const MonavStuffEntry &entry : std::as_const(d->m_remoteMaps)) {
             if (entry.payload().endsWith(QLatin1Char('/') + payload)) {
                 d->m_currentDownload = entry.payload();
                 d->install();

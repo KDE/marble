@@ -80,7 +80,7 @@ QVector<OsmPlacemark> OsmDatabase::find(const DatabaseQuery &userQuery)
     QVector<OsmPlacemark> result;
     QElapsedTimer timer;
     timer.start();
-    for (const QString &databaseFile : m_databaseFiles) {
+    for (const QString &databaseFile : std::as_const(m_databaseFiles)) {
         database.setDatabaseName(databaseFile);
         if (!database.open()) {
             qWarning() << "Failed to connect to database" << databaseFile;

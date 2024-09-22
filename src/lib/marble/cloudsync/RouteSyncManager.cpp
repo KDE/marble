@@ -133,7 +133,7 @@ QVector<RouteItem> RouteSyncManager::cachedRouteList() const
 {
     QVector<RouteItem> routeList;
     QStringList cachedRoutes = d->m_cacheDir.entryList(QStringList() << "*.kml", QDir::Files);
-    for (const QString &routeFilename : cachedRoutes) {
+    for (const QString &routeFilename : std::as_const(cachedRoutes)) {
         QFile file(d->m_cacheDir.absolutePath() + QLatin1Char('/') + routeFilename);
         file.open(QFile::ReadOnly);
 
@@ -195,7 +195,7 @@ void RouteSyncManager::prepareRouteList()
     d->m_routeList.clear();
 
     QVector<RouteItem> cachedRoutes = cachedRouteList();
-    for (const RouteItem &item : cachedRoutes) {
+    for (const RouteItem &item : std::as_const(cachedRoutes)) {
         d->m_routeList.append(item);
     }
 
@@ -256,7 +256,7 @@ void RouteSyncManager::setRouteModelItems(const QVector<RouteItem> &routeList)
         }
 
         QStringList cachedRoutes;
-        for (const RouteItem &item : d->m_routeList) {
+        for (const RouteItem &item : std::as_const(d->m_routeList)) {
             cachedRoutes.append(item.identifier());
         }
 

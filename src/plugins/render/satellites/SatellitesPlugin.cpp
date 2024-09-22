@@ -199,7 +199,7 @@ bool SatellitesPlugin::eventFilter(QObject *object, QEvent *event)
     if (mouseEvent->button() == Qt::LeftButton) {
         m_trackerList.clear();
         QVector<const GeoDataFeature *> vector = widget->whichFeatureAt(mouseEvent->pos());
-        for (const GeoDataFeature *feature : vector) {
+        for (const GeoDataFeature *feature : std::as_const(vector)) {
             const GeoDataPlacemark *placemark = dynamic_cast<const GeoDataPlacemark *>(feature);
             if (placemark) {
                 for (TrackerPluginItem *obj : m_satModel->items()) {
@@ -329,7 +329,7 @@ void SatellitesPlugin::updateSettings()
     QStringList dsList = m_settings[QStringLiteral("dataSources")].toStringList();
     dsList << m_settings[QStringLiteral("userDataSources")].toStringList();
     dsList.removeDuplicates();
-    for (const QString &ds : dsList) {
+    for (const QString &ds : std::as_const(dsList)) {
         mDebug() << "Loading satellite data from:" << ds;
         m_satModel->downloadFile(QUrl(ds), ds);
     }

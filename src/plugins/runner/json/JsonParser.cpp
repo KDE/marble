@@ -57,24 +57,24 @@ JsonParser::JsonParser()
     // Set default styles for GeoJSON objects using Simplestyle specification 1.1.0
 
     // Set "marker-color": "#7e7e7e" and "marker-size": "medium"
-    m_iconStylePoints->setColor(QColor("#ff7e7e7e"));
+    m_iconStylePoints->setColor(QColor(0x7e, 0x7e, 0x7e, 0xff));
     m_iconStylePoints->setIconPath(MarbleDirs::path(QStringLiteral("svg/dot-circle-regular.svg")));
     m_iconStylePoints->setSize(QSize(22, 22), Qt::KeepAspectRatio);
 
     m_iconStyleOther->setIconPath(nullptr);
-    m_iconStyleOther->setColor(QColor("#ff7e7e7e"));
+    m_iconStyleOther->setColor(QColor(0x7e, 0x7e, 0x7e, 0xff));
 
     // Set "stroke": "#555555", "stroke-opacity": 1.0 and "stroke-width": 2 (increased to 2.5 due
     // to problems with antialiased lines disappearing on drawn maps
-    m_lineStyle->setColor(QColor("#ff555555"));
+    m_lineStyle->setColor(QColor(0x55, 0x55, 0x55, 0xff));
     m_lineStyle->setWidth(2.5);
 
     // Set "fill": "#555555" and "fill-opacity": 0.6
-    m_polyStyle->setColor(QColor("#99555555"));
+    m_polyStyle->setColor(QColor(0x55, 0x55, 0x55, 0x99));
 
     // Set visual properties not part of the Simplestyle spec
 
-    m_labelStyle->setColor(QColor("#ff000000"));
+    m_labelStyle->setColor(QColor(0, 0, 0, 0xff));
     m_labelStyle->setGlow(true);
 
     m_polyStyle->setFill(true);

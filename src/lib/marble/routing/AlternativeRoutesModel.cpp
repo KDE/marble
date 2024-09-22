@@ -242,7 +242,7 @@ qreal AlternativeRoutesModel::Private::instructionScore(const GeoDataDocument *d
                                           << "Route"
                                           << "Tessellated";
     QVector<GeoDataFolder *> folders = document->folderList();
-    for (const GeoDataFolder *folder : folders) {
+    for (const GeoDataFolder *folder : std::as_const(folders)) {
         for (const GeoDataPlacemark *placemark : folder->placemarkList()) {
             if (!blacklist.contains(placemark->name())) {
                 hasInstructions = true;
@@ -267,7 +267,7 @@ qreal AlternativeRoutesModel::Private::instructionScore(const GeoDataDocument *d
 const GeoDataLineString *AlternativeRoutesModel::Private::waypoints(const GeoDataDocument *document)
 {
     QVector<GeoDataFolder *> folders = document->folderList();
-    for (const GeoDataFolder *folder : folders) {
+    for (const GeoDataFolder *folder : std::as_const(folders)) {
         for (const GeoDataPlacemark *placemark : folder->placemarkList()) {
             const GeoDataGeometry *geometry = placemark->geometry();
             const GeoDataLineString *lineString = dynamic_cast<const GeoDataLineString *>(geometry);
@@ -343,7 +343,7 @@ void AlternativeRoutesModel::addRestrainedRoutes()
     Q_ASSERT(d->m_routes.isEmpty());
     std::sort(d->m_restrainedRoutes.begin(), d->m_restrainedRoutes.end(), Private::higherScore);
 
-    for (GeoDataDocument *route : d->m_restrainedRoutes) {
+    for (GeoDataDocument *route : std::as_const(d->m_restrainedRoutes)) {
         if (!d->filter(route)) {
             int affected = d->m_routes.size();
             beginInsertRows(QModelIndex(), affected, affected);

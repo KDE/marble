@@ -94,10 +94,10 @@ void BuildingGraphicsItem::updatePolygons(const ViewportParams &viewport,
     } else if (ring()) {
         viewport.screenCoordinates(*ring(), outerPolygons);
     }
-    for (auto *polygon : outerPolygons) {
+    for (auto *polygon : std::as_const(outerPolygons)) {
         normalizeWindingOrder(polygon);
     }
-    for (auto *polygon : innerPolygons) {
+    for (auto *polygon : std::as_const(innerPolygons)) {
         normalizeWindingOrder(polygon);
     }
 }
@@ -224,21 +224,21 @@ void BuildingGraphicsItem::paintRoof(GeoPainter *painter, const ViewportParams *
             painter->setPen(Qt::NoPen);
             QVector<QPolygonF *> fillPolygons = painter->createFillPolygons(m_cachedOuterRoofPolygons, m_cachedInnerRoofPolygons);
 
-            for (const QPolygonF *fillPolygon : fillPolygons) {
+            for (const QPolygonF *fillPolygon : std::as_const(fillPolygons)) {
                 painter->drawPolygon(*fillPolygon);
             }
 
             painter->setPen(currentPen);
 
-            for (const QPolygonF *outerRoof : m_cachedOuterRoofPolygons) {
+            for (const QPolygonF *outerRoof : std::as_const(m_cachedOuterRoofPolygons)) {
                 painter->drawPolyline(*outerRoof);
             }
-            for (const QPolygonF *innerRoof : m_cachedInnerRoofPolygons) {
+            for (const QPolygonF *innerRoof : std::as_const(m_cachedInnerRoofPolygons)) {
                 painter->drawPolyline(*innerRoof);
             }
             qDeleteAll(fillPolygons);
         } else {
-            for (const QPolygonF *outerRoof : m_cachedOuterRoofPolygons) {
+            for (const QPolygonF *outerRoof : std::as_const(m_cachedOuterRoofPolygons)) {
                 painter->drawPolygon(*outerRoof);
             }
         }
@@ -252,21 +252,21 @@ void BuildingGraphicsItem::paintRoof(GeoPainter *painter, const ViewportParams *
             painter->setPen(Qt::NoPen);
             QVector<QPolygonF *> fillPolygons = painter->createFillPolygons(m_cachedOuterPolygons, m_cachedInnerPolygons);
 
-            for (const QPolygonF *fillPolygon : fillPolygons) {
+            for (const QPolygonF *fillPolygon : std::as_const(fillPolygons)) {
                 painter->drawPolygon(*fillPolygon);
             }
 
             painter->setPen(currentPen);
 
-            for (const QPolygonF *outerPolygon : m_cachedOuterPolygons) {
+            for (const QPolygonF *outerPolygon : std::as_const(m_cachedOuterPolygons)) {
                 painter->drawPolyline(*outerPolygon);
             }
-            for (const QPolygonF *innerPolygon : m_cachedInnerPolygons) {
+            for (const QPolygonF *innerPolygon : std::as_const(m_cachedInnerPolygons)) {
                 painter->drawPolyline(*innerPolygon);
             }
             qDeleteAll(fillPolygons);
         } else {
-            for (const QPolygonF *outerPolygon : m_cachedOuterPolygons) {
+            for (const QPolygonF *outerPolygon : std::as_const(m_cachedOuterPolygons)) {
                 painter->drawPolygon(*outerPolygon);
             }
         }
@@ -346,7 +346,7 @@ void BuildingGraphicsItem::paintFrame(GeoPainter *painter, const ViewportParams 
         return;
 
     if (drawAccurate3D && isCameraAboveBuilding) {
-        for (const QPolygonF *outline : m_cachedOuterPolygons) {
+        for (const QPolygonF *outline : std::as_const(m_cachedOuterPolygons)) {
             if (outline->isEmpty()) {
                 continue;
             }
@@ -374,7 +374,7 @@ void BuildingGraphicsItem::paintFrame(GeoPainter *painter, const ViewportParams 
             }
             m_cachedOuterRoofPolygons.append(outerRoof);
         }
-        for (const QPolygonF *outline : m_cachedInnerPolygons) {
+        for (const QPolygonF *outline : std::as_const(m_cachedInnerPolygons)) {
             if (outline->isEmpty()) {
                 continue;
             }
@@ -406,7 +406,7 @@ void BuildingGraphicsItem::paintFrame(GeoPainter *painter, const ViewportParams 
         // don't draw the building sides - just draw the base frame instead
         QVector<QPolygonF *> fillPolygons = painter->createFillPolygons(m_cachedOuterPolygons, m_cachedInnerPolygons);
 
-        for (QPolygonF *fillPolygon : fillPolygons) {
+        for (QPolygonF *fillPolygon : std::as_const(fillPolygons)) {
             painter->drawPolygon(*fillPolygon);
         }
         qDeleteAll(fillPolygons);
@@ -428,7 +428,7 @@ void BuildingGraphicsItem::screenPolygons(const ViewportParams &viewport,
         viewport.screenCoordinates(innerBoundary, innerPolygonsPerBoundary);
 
         innerPolygons.reserve(innerPolygons.size() + innerPolygonsPerBoundary.size());
-        for (QPolygonF *innerPolygonPerBoundary : innerPolygonsPerBoundary) {
+        for (QPolygonF *innerPolygonPerBoundary : std::as_const(innerPolygonsPerBoundary)) {
             innerPolygons << innerPolygonPerBoundary;
         }
     }

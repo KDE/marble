@@ -186,14 +186,14 @@ void SearchRunnerManager::findPlacemarks(const QString &searchTerm, const GeoDat
     }
 
     QList<const SearchRunnerPlugin *> plugins = d->plugins(d->m_pluginManager->searchRunnerPlugins());
-    for (const SearchRunnerPlugin *plugin : plugins) {
+    for (const SearchRunnerPlugin *plugin : std::as_const(plugins)) {
         SearchTask *task = new SearchTask(plugin->newRunner(), this, d->m_marbleModel, searchTerm, preferred);
         connect(task, SIGNAL(finished(SearchTask *)), this, SLOT(cleanupSearchTask(SearchTask *)));
         d->m_searchTasks << task;
         mDebug() << "search task " << plugin->nameId() << " " << (quintptr)task;
     }
 
-    for (SearchTask *task : d->m_searchTasks) {
+    for (SearchTask *task : std::as_const(d->m_searchTasks)) {
         QThreadPool::globalInstance()->start(task);
     }
 
