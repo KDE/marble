@@ -46,28 +46,6 @@ MarblePlacemarkModel::MarblePlacemarkModel(QObject *parent)
     : QAbstractListModel(parent)
     , d(new Private)
 {
-    QHash<int, QByteArray> roles;
-    roles[DescriptionRole] = "description";
-    roles[Qt::DisplayRole] = "name";
-    roles[Qt::DecorationRole] = "icon";
-    roles[IconPathRole] = "iconPath";
-    roles[PopularityIndexRole] = "zoomLevel";
-    roles[VisualCategoryRole] = "visualCategory";
-    roles[AreaRole] = "area";
-    roles[PopulationRole] = "population";
-    roles[CountryCodeRole] = "countryCode";
-    roles[StateRole] = "state";
-    roles[PopularityRole] = "popularity";
-    roles[GeoTypeRole] = "role";
-    roles[CoordinateRole] = "coordinate";
-    roles[StyleRole] = "style";
-    roles[GmtRole] = "gmt";
-    roles[DstRole] = "dst";
-    roles[GeometryRole] = "geometry";
-    roles[ObjectPointerRole] = "objectPointer";
-    roles[LongitudeRole] = "longitude";
-    roles[LatitudeRole] = "latitude";
-    m_roleNames = roles;
 }
 
 MarblePlacemarkModel::~MarblePlacemarkModel()
@@ -98,7 +76,28 @@ int MarblePlacemarkModel::columnCount(const QModelIndex &parent) const
 
 QHash<int, QByteArray> MarblePlacemarkModel::roleNames() const
 {
-    return m_roleNames;
+    return {
+        {DescriptionRole, "description"},
+        {Qt::DisplayRole, "name"},
+        {Qt::DecorationRole, "icon"},
+        {IconPathRole, "iconPath"},
+        {PopularityIndexRole, "zoomLevel"},
+        {VisualCategoryRole, "visualCategory"},
+        {AreaRole, "area"},
+        {PopulationRole, "population"},
+        {CountryCodeRole, "countryCode"},
+        {StateRole, "state"},
+        {PopularityRole, "popularity"},
+        {GeoTypeRole, "role"},
+        {CoordinateRole, "coordinate"},
+        {StyleRole, "style"},
+        {GmtRole, "gmt"},
+        {DstRole, "dst"},
+        {GeometryRole, "geometry"},
+        {ObjectPointerRole, "objectPointer"},
+        {LongitudeRole, "longitude"},
+        {LatitudeRole, "latitude"},
+    };
 }
 
 QVariant MarblePlacemarkModel::data(const QModelIndex &index, int role) const
