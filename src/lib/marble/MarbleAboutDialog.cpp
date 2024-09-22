@@ -363,7 +363,7 @@ void MarbleAboutDialog::setApplicationTitle(const QString &title)
 {
     QString const titleHtml = QLatin1String("<b>") + title + QLatin1String("</b>");
     d->uiWidget.m_pMarbleTitleLabel->setText(titleHtml);
-    QString const applicationVersion = tr("Using Marble Library version %1").arg(MARBLE_VERSION_STRING);
+    QString const applicationVersion = tr("Using Marble Library version %1").arg(QLatin1StringView(MARBLE_VERSION_STRING));
     d->uiWidget.m_pMarbleVersionLabel->setText(applicationVersion);
     QTextBrowser *browser = d->uiWidget.m_pMarbleAboutBrowser;
     QString text;

@@ -44,13 +44,7 @@ INCLUDE(graphicsview/CMakeLists.txt)
 INCLUDE(layers/CMakeLists.txt)
 INCLUDE(osm/CMakeLists.txt)
 
-set(MARBLE_LIB_VERSION ${PROJECT_VERSION})
-set(MARBLE_LIB_VERSION_MAJOR ${PROJECT_VERSION_MAJOR})
-set(MARBLE_LIB_VERSION_MINOR ${PROJECT_VERSION_MINOR})
-set(MARBLE_LIB_VERSION_PATCH ${PROJECT_VERSION_PATCH})
-set(MARBLE_LIB_SOVERSION 28)
 set(HEADER_PREFIX MARBLE_LIB)
-configure_file("${marble_SOURCE_DIR}/cmake/templates/versionheader.h.in" "${CMAKE_CURRENT_BINARY_DIR}/marble_version.h")
 include(CMakePackageConfigHelpers)
 write_basic_package_version_file("${CMAKE_CURRENT_BINARY_DIR}/${MARBLE_CMAKECONFIGNAME}ConfigVersion.cmake" VERSION "${PROJECT_VERSION}" COMPATIBILITY AnyNewerVersion)
 
@@ -449,8 +443,8 @@ set_target_properties(marblewidget  PROPERTIES
 
 if (NOT ANDROID)
   set_target_properties(marblewidget  PROPERTIES
-    VERSION ${MARBLE_LIB_VERSION}
-    SOVERSION ${MARBLE_LIB_SOVERSION}
+    VERSION ${MARBLE_VERSION}
+    SOVERSION ${MARBLE_SOVERSION}
   )
 endif()
 

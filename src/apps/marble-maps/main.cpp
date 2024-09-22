@@ -11,10 +11,10 @@
 #include <KLocalizedContext>
 #include <KLocalizedString>
 
-#include "../../../marble-version.h"
 #include "MarbleMaps.h"
 #include "declarative/MarbleDeclarativePlugin.h"
 #include <MarbleGlobal.h>
+#include <marble_version.h>
 
 #ifndef Q_OS_ANDROID
 #include <KCrash>

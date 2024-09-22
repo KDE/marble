@@ -5,18 +5,8 @@ INCLUDE_DIRECTORIES(
  ${CMAKE_CURRENT_BINARY_DIR}
 )
 
-set(ASTRO_CMAKECONFIGNAME Astro)
-set(ASTRO_LIB_VERSION ${PROJECT_VERSION})
-set(ASTRO_LIB_VERSION_MAJOR ${PROJECT_VERSION_MAJOR})
-set(ASTRO_LIB_VERSION_MINOR ${PROJECT_VERSION_MINOR})
-set(ASTRO_LIB_VERSION_PATCH ${PROJECT_VERSION_PATCH})
-set(ASTRO_LIB_SOVERSION 1)
-set(HEADER_PREFIX ASTRO_LIB)
-configure_file("${marble_SOURCE_DIR}/cmake/templates/versionheader.h.in" "${CMAKE_CURRENT_BINARY_DIR}/astro_version.h")
 include(CMakePackageConfigHelpers)
 write_basic_package_version_file("${CMAKE_CURRENT_BINARY_DIR}/${ASTRO_CMAKECONFIGNAME}ConfigVersion.cmake" VERSION "${PROJECT_VERSION}" COMPATIBILITY AnyNewerVersion)
-
-ADD_DEFINITIONS(-O3)
 
 SET(astrolib_SRCS
   astrolib.cpp
@@ -25,6 +15,12 @@ SET(astrolib_SRCS
   eclsolar.cpp
   planetarySats.cpp
   solarsystem.cpp
+)
+
+ecm_setup_version(${RELEASE_SERVICE_VERSION}
+    VARIABLE_PREFIX ASTRO
+    VERSION_HEADER ${CMAKE_CURRENT_BINARY_DIR}/astro-version.h
+    SOVERSION 1
 )
 
 ADD_LIBRARY(astro ${astrolib_SRCS})
@@ -47,8 +43,8 @@ endif(WIN32)
 if (NOT ANDROID)
   set_target_properties(astro PROPERTIES
       EXPORT_NAME "Astro"
-      VERSION ${ASTRO_LIB_VERSION}
-      SOVERSION ${ASTRO_LIB_SOVERSION}
+      VERSION ${ASTRO_VERSION}
+      SOVERSION ${ASTRO_SOVERSION}
   )
 endif()
 

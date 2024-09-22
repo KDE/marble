@@ -226,16 +226,6 @@ const qreal SEC2HOUR = 1.0 / HOUR2SEC;
 
 const qreal TWOPI = 2 * M_PI;
 
-// Version definitions to use with an external application (as digiKam)
-
-// String for about dialog and http user agent
-const QString MARBLE_VERSION_STRING = QString::fromLatin1(MARBLE_LIB_VERSION_STRING);
-
-// API Version id:
-// up until the 21.04 release, this was supposed to be 0xMMmmpp (major,minor,patch), but in reality it was stuck at version 0.27.0
-// now it is  ((major<<16)|(minor<<8)|(patch))
-#define MARBLE_VERSION MARBLE_LIB_VERSION
-
 static const char NOT_AVAILABLE[] = QT_TRANSLATE_NOOP("Marble", "not available");
 
 const int tileDigits = 6;
