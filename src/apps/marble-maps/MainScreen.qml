@@ -86,7 +86,7 @@ Kirigami.ApplicationWindow {
                 text: i18n("Public Transport")
                 checkable: true
                 checked: marbleMaps.showPublicTransport
-                icon.source: "images/transport-mode-bus.svg"
+                icon.source: Qt.resolvedUrl("images/transport-mode-bus.svg")
                 visible: true
                 onTriggered: {
                     sidePanel.close()
