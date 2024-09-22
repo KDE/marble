@@ -36,9 +36,15 @@ Kirigami.ScrollablePage {
 
             required property int index
             required property var model
+            required property var coordinate
 
             icon.name: 'mark-location-symbolic'
             text: model.display
+
+            onClicked: {
+                root.marbleMaps.centerOn(coordinate)
+                root.Controls.ApplicationWindow.window.pageStack.layers.pop();
+            }
 
             contentItem: RowLayout {
                 spacing: Kirigami.Units.smallSpacing
