@@ -13,11 +13,7 @@ target_link_libraries(marble-maps PUBLIC
 qt_add_qml_module(marble-maps
     URI org.kde.marble.maps
     QML_FILES
-        Completion.qml
         MainScreen.qml
-        SearchResults.qml
-        SearchField.qml
-        Search.qml
         IconText.qml
         PositionButton.qml
         BoxedText.qml
@@ -58,3 +54,4 @@ qt_add_qml_module(marble-maps
 
 install(TARGETS marble-maps RUNTIME DESTINATION bin)
 install(PROGRAMS org.kde.marble.maps.desktop DESTINATION ${KDE_INSTALL_APPDIR})
+install(PROGRAMS org.kde.marble.maps.appdata.xml DESTINATION ${KDE_INSTALL_METAINFODIR})
