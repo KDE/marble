@@ -7,10 +7,13 @@
 #define TEXTTOSPEECHCLIENT_H
 
 #include <QObject>
+#include <qqmlregistration.h>
 
 class TextToSpeechClient : public QObject
 {
     Q_OBJECT
+    QML_ELEMENT
+    QML_SINGLETON
 
 public:
     explicit TextToSpeechClient(QObject *parent = nullptr);

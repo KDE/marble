@@ -4,20 +4,17 @@
 // SPDX-FileCopyrightText: 2015 Dennis Nienhüser <nienhueser@kde.org>
 //
 
-import QtQuick 2.3
-import QtQuick.Controls
-import QtQuick.Layouts 1.1
-import QtQuick.Window 2.2
+import QtQuick
+import QtQuick.Controls as Controls
+import QtQuick.Layouts
 
-import org.kde.marble 0.20
+import org.kde.marble
 
-Item {
+RowLayout {
     id: root
 
-    property string selectedProfile: carProfileButton.profile
-    property string profileIcon: "qrc:///material/directions-car.svg"
-    height: rowLayout.height
-    width: rowLayout.width
+    property string selectedProfile
+    property string profileIcon
 
     Settings {
         id: settings
@@ -26,34 +23,33 @@ Item {
         }
     }
 
-    RowLayout {
-        id: rowLayout
-        ExclusiveGroup {
-            id: profileGroup
-            onCurrentChanged: {
-                profileIcon = current.imageSource
-                selectedProfile = current.profile;
-            }
+    Controls.RadioButton {
+        id: carProfileButton
+        checked: settings.value("Routing", "profile") === "" || settings.value("Routing", "profile", profile) === profile
+        text: i18n("Car (fastest)");
+        onClicked: {
+            root.selectedProfile = text;
+            root.profileIcon = Qt.resolvedUrl("images/transport-mode-car.svg");
         }
 
-        RouteProfileRadioButton {
-            id: carProfileButton
-            checked: settings.value("Routing", "profile") === "" || settings.value("Routing", "profile", profile) === profile
-            exclusiveGroup: profileGroup
-            property string profile: qsTr("Car (fastest)")
-            imageSource: "qrc:///material/directions-car.svg"
+        Component.onCompleted: clicked();
+    }
+
+    Controls.RadioButton {
+        checked: settings.value("Routing", "profile") === profile
+        text: i18n("Bicycle");
+        onClicked: {
+            root.selectedProfile = text;
+            root.profileIcon = Qt.resolvedUrl("images/transport-mode-bike.svg");
         }
-        RouteProfileRadioButton {
-            checked: settings.value("Routing", "profile") === profile
-            exclusiveGroup: profileGroup
-            property string profile: qsTr("Bicycle")
-            imageSource: "qrc:///material/directions-bike.svg"
-        }
-        RouteProfileRadioButton {
-            checked: settings.value("Routing", "profile") === profile
-            exclusiveGroup: profileGroup
-            property string profile: qsTr("Pedestrian")
-            imageSource: "qrc:///material/directions-walk.svg"
+    }
+
+    Controls.RadioButton {
+        checked: settings.value("Routing", "profile") === profile
+        text: i18n("Pedestrian")
+        onClicked: {
+            root.selectedProfile = text;
+            root.profileIcon = Qt.resolvedUrl("images/transport-mode-walk.svg");
         }
     }
 }

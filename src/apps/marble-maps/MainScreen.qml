@@ -8,54 +8,35 @@
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Window
+import QtQuick.Layouts
 
 import org.kde.marble
 import org.kde.kirigami as Kirigami
+import org.kde.kirigamiaddons.delegates as Delegates
+import org.kde.kirigamiaddons.components as Components
 
-Kirigami.AbstractApplicationWindow {
+Kirigami.ApplicationWindow {
     id: app
-    title: qsTr("Marble Maps")
-    visible: true
+    title: i18n("Marble Maps")
 
     width: 600
     height: 400
 
-    property alias state: stateTracker.state
+    property string state
 
     property var selectedPlacemark
     property bool showOsmTags: false
     property int currentWaypointIndex: 0
 
-    property real animatedMargin: app.state === "none" ? 0 : -dialogLoader.height
-    property bool dialogExpanded: animatedMargin === -dialogLoader.height
-    property real mapOffset: !dialogExpanded ? animatedMargin / 2 : 0
-
-    Behavior on animatedMargin {
-        NumberAnimation {
-            id: dialogAnimation
-            duration: 200
-            easing.type: Easing.OutQuart
-        }
-    }
-
     onSelectedPlacemarkChanged: {
         if (!selectedPlacemark) {
             app.state = "none"
         }
-        else {
-            bookmarkButton.bookmark = bookmarks.isBookmark(selectedPlacemark.longitude, selectedPlacemark.latitude)
-        }
-    }
-
-    SystemPalette{
-        id: palette
-        colorGroup: SystemPalette.Active
     }
 
     Settings {
         id: settings
     }
-
 
     property bool aboutToQuit: false
 
@@ -86,9 +67,7 @@ Kirigami.AbstractApplicationWindow {
 
     globalDrawer: Kirigami.GlobalDrawer {
         id: sidePanel
-        title: qsTr("Settings")
 
-        handleVisible: false
         property alias showAccessibility: accessibilityAction.checked
 
         Settings {
@@ -102,10 +81,10 @@ Kirigami.AbstractApplicationWindow {
         actions: [
             Kirigami.Action {
                 id: publicTransportAction
-                text: qsTr("Public Transport")
+                text: i18n("Public Transport")
                 checkable: true
                 checked: marbleMaps.showPublicTransport
-                icon.source: "qrc:///material/directions-bus.svg"
+                icon.source: "images/transport-mode-bus.svg"
                 visible: true
                 onTriggered: {
                     sidePanel.close()
@@ -117,9 +96,9 @@ Kirigami.AbstractApplicationWindow {
                 id: outdoorActivitiesAction
                 checkable: true
                 checked: marbleMaps.showOutdoorActivities
-                text: qsTr("Outdoor Activities")
+                text: i18n("Outdoor Activities")
                 visible: true
-                icon.source: "qrc:///material/directions-run.svg"
+                icon.source: Qt.resolvedUrl("images/transport-mode-walk.svg")
                 onTriggered: {
                     sidePanel.close()
                     marbleMaps.showOutdoorActivities = checked
@@ -129,79 +108,155 @@ Kirigami.AbstractApplicationWindow {
                 id: accessibilityAction
                 checkable: true
                 checked: settings.value("MarbleMaps", "showAccessibility", "false") === "true"
-                text: qsTr("Accessibility")
+                text: i18nc("@action:button", "Accessibility")
                 visible: true
-                icon.source: "qrc:///material/wheelchair.svg"
+                icon.name: 'preferences-desktop-accessibility-symbolic'
                 onTriggered: {
                     sidePanelSettings.value("MarbleMaps", "showAccessibility", "false") === "true"
                 }
             },
             Kirigami.Action{ enabled: false},
             Kirigami.Action {
-                text: qsTr("About")
-                icon.source: "qrc:///marble.svg"
+                text: i18nc("@action:button", "About")
+                icon.name: 'help-about-symbolic'
                 visible: true
                 onTriggered: {
                     app.state = "about"
                     sidePanel.close()
                     source = ""
-                    app.pageStack.push("qrc:///AboutDialog.qml")
+                    app.pageStack.pushDialogLayer(Qt.createComponent("org.kde.kirigamiaddons.formcard", "AboutPage"))
                 }
             },
             Kirigami.Action {
-                text: qsTr("Bookmarks")
-                icon.source: "qrc:///material/star.svg"
+                text: i18nc("@action:button", "Bookmarks")
+                icon.name: 'bookmarks-symbolic'
                 onTriggered: {
                     app.state = "bookmarks"
                     sidePanel.close()
-                    app.pageStack.push("qrc:///Bookmarks.qml")
+                    app.pageStack.layers.push(Qt.createComponent("org.kde.marble.maps", "Bookmarks"), {
+                        marbleMaps: marbleMaps
+                    })
                 }
             },
             Kirigami.Action {
-                text: qsTr("Layer Options")
-                icon.source: "qrc:///settings.png"
+                text: i18nc("@action:button", "Layer Options")
+                icon.name: 'settings-configure-symbolic'
                 onTriggered: {
                     app.state = "options"
                     sidePanel.close()
-                    app.pageStack.push("qrc:///Options.qml")
+                    app.pageStack.layers.push(Qt.createComponent("org.kde.marble.maps", "Options"), {
+                        marbleMaps: marbleMaps
+                    })
                 }
-            },
+            }/*,
             Kirigami.Action {
-                text: qsTr("Routing")
-                icon.source: "qrc:///material/directions.svg"
+                text: i18n("Routing")
+                icon.source: "images/directions.svg"
                 onTriggered: {
                     app.state = "route"
+                    app.pageStack.layers.push(Qt.createComponent("org.kde.marble.maps", "RoutingPage"), {
+                        marbleMaps: marbleMaps
+                    })
                 }
-            }
+            }*/
         ]
-
-        Binding {
-            target: pageStack.currentItem
-            property: "marbleQuickItem"
-            value: marbleMaps
-            when: app.state === "bookmarks"
-        }
     }
 
-    pageStack: StackView {
-        anchors.fill: parent
-        initialItem: page
-    }
+    pageStack.initialPage: page
 
     Kirigami.Page {
         id: page
+
         padding: 0
         topPadding: 0
         leftPadding: 0
         rightPadding: 0
         bottomPadding: 0
-        title: qsTr("Marble Maps")
+        title: i18n("Marble Maps")
 
-        Item {
+        titleDelegate: Kirigami.SearchField {
+            id: searchField
+
+            Layout.fillWidth: true
+            autoAccept: false
+            onAccepted: {
+                if (text.length === 0) {
+                    searchResultPopup.visible = false;
+                    return;
+                }
+                backend.search(text)
+            }
+
+            onTextChanged: fireSearchDelay.restart();
+
+            Timer {
+                id: fireSearchDelay
+                interval: Kirigami.Units.shortDuration
+                running: false
+                repeat: false
+                onTriggered: {
+                    searchField.accepted();
+                }
+            }
+        }
+
+        SearchBackend {
+            id: backend
+
+            marbleQuickItem: marbleMaps
+            onSearchResultChanged: {
+                searchResults.model = model;
+                searchResultPopup.visible = true;
+            }
+        }
+
+        ScrollView {
+            id: searchResultPopup
+
+            anchors.fill: parent
+
+            visible: false
+            z: 2
+
+            background: Rectangle {
+                Kirigami.Theme.colorSet: Kirigami.Theme.View
+                Kirigami.Theme.inherit: false
+            }
+
+            contentItem: ListView {
+                id: searchResults
+
+                clip: true
+
+                delegate: Delegates.RoundedItemDelegate {
+                    id: searchDelegate
+
+                    required property int index
+                    required property string name
+                    required property string description
+                    required property string iconPath
+
+                    text: name
+                    icon.source: iconPath.substr(0,1) === '/' ? "file://" + iconPath : iconPath
+
+                    onClicked: {
+                        backend.setSelectedPlacemark(index);
+                        searchResultPopup.visible = false;
+
+                        if (routingManager) {
+                            routingManager.addSearchResultAsPlacemark(backend.selectedPlacemark);
+                        }
+                        app.selectedPlacemark = backend.selectedPlacemark;
+                        app.state = "place"
+                    }
+                }
+
+                model: backend.completionModel
+            }
+        }
+
+        contentItem: Item {
             id: mapItem
-
-            width: parent.width
-            height: parent.height - dialogLoader.height - bottomMenu.height
 
             PinchArea {
                 anchors.fill: parent
@@ -242,19 +297,19 @@ Kirigami.AbstractApplicationWindow {
                     showPositionMarker: false
                     animationViewContext: dialogAnimation.running
 
-                    placemarkDelegate: Image {
+                    placemarkDelegate: Kirigami.Icon {
                         id: balloon
                         property int xPos: 0
                         property int yPos: 0
                         property real animationOffset: 0
                         property var placemark: null
                         x: xPos - 0.5 * width
-                        y: yPos - height - 30 * Screen.pixelDensity * animationOffset
+                        y: yPos - height - 30 * animationOffset
                         opacity: 1.0 - animationOffset
 
                         Connections {
                             target: app
-                            onSelectedPlacemarkChanged:  balloonAnimation.restart()
+                            onSelectedPlacemarkChanged: balloonAnimation.restart()
                         }
 
                         NumberAnimation {
@@ -267,16 +322,15 @@ Kirigami.AbstractApplicationWindow {
                             easing.type: Easing.OutBounce
                         }
 
-
-                        width: Screen.pixelDensity*6
+                        width: Kirigami.Units.iconSizes.medium
                         height: width
-                        source: "qrc:///ic_place.png"
+                        source: "add-placemark-symbolic"
                         onPlacemarkChanged: {
                             app.selectedPlacemark = placemark
                             if (placemark) {
-                                app.state = "place"
+                                placemarkDialog.open();
                             } else {
-                                app.state = "none"
+                                placemarkDialog.close();
                             }
                         }
                     }
@@ -396,7 +450,7 @@ Kirigami.AbstractApplicationWindow {
 
             BoxedText {
                 id: distanceIndicator
-                text: qsTr("%1 km").arg(zoomToPositionButton.distance < 10 ? zoomToPositionButton.distance.toFixed(1) : zoomToPositionButton.distance.toFixed(0))
+                text: i18n("%1 km", zoomToPositionButton.distance < 10 ? zoomToPositionButton.distance.toFixed(1) : zoomToPositionButton.distance.toFixed(0))
                 anchors {
                     bottom: zoomToPositionButton.top
                     horizontalCenter: zoomToPositionButton.horizontalCenter
@@ -432,235 +486,129 @@ Kirigami.AbstractApplicationWindow {
             }
         }
 
+        PlacemarkDialog {
+            id: placemarkDialog
 
-        Row {
-            id: bottomMenu
-            anchors.left: parent.left
-            anchors.right: parent.right
-            anchors.bottom: dialogLoader.top
-            width: parent.width
-            height: bottomMenu.visible ? routeEditorButton.height + Screen.pixelDensity * 2 : 0
-            anchors.topMargin: app.animatedMargin
-            visible: app.state === "place" || app.state === "route"
+            visible: false
+            placemark: app.selectedPlacemark
+            bookmarks: bookmarks
+            showOsmTags: app.showOsmTags
+            showAccessibility: sidePanel.showAccessibility
+            parent: app.Overlay.overlay
+        }
 
-            onVisibleChanged: bottomMenuAnimation.start()
+        /*
+        Kirigami.OverlayDrawer {
+            id: drawer
 
-            NumberAnimation {
-                id: bottomMenuAnimation
-                target: bottomMenu
-                property: "y"
-                from: app.height - bottomMenu.height
-                to: 0
-                duration: 500
-                easing.type: Easing.InExpo
-            }
+            handleVisible: false
+            edge: Qt.BottomEdge
 
-            Item {
-                id: bottomMenuBackground
-                anchors.fill: parent
-                Rectangle {
-                    color: Material.accent
-                    anchors.fill : parent
-                }
-            }
+            height: parent.height
 
-            Row {
-                anchors.centerIn: parent
-                spacing: Kirigami.Units.gridUnit * 2
+            visible: app.state === "place"
 
-                ToolButton {
-                    id: routeEditorButton
-                    property string currentProfileIcon: "qrc:///material/directions-car.svg"
-                    height: Screen.pixelDensity * 6
-                    width: height
-                    enabled: app.state !== "route" || routingManager.hasRoute
-                    icon.source: "qrc:///material/directions.svg"
+            contentItem: ColumnLayout {
+                Kir
+                RowLayout {
+                    Layout.fillWidth: true
 
-                    onClicked: {
-                        if (app.state === "route") {
-                            app.state = "none"
-                            navigationManager.visible = true
-                        } else if (app.state === "place") {
-                            app.state = "route"
-                            routingManager.addToRoute()
-                        } else {
-                            app.state = "route"
-                            navigationManager.visible = false
+                    ToolButton {
+                        id: routeEditorButton
+                        property string currentProfileIcon: Qt.resolvedUrl("./images/transport-mode-car.svg")
+                        enabled: app.state !== "route" || routingManager.hasRoute
+                        icon.source: Qt.resolvedUrl("./images/directions.svg")
+
+                        onClicked: {
+                            if (app.state === "route") {
+                                app.state = "none"
+                                navigationManager.visible = true
+                            } else if (app.state === "place") {
+                                app.state = "route"
+                                routingManager.addToRoute()
+                            } else {
+                                app.state = "route"
+                                navigationManager.visible = false
+                            }
+                        }
+                        states: [
+                            State {
+                                name: ""
+                                PropertyChanges {
+                                    target: routeEditorButton
+                                    icon.source: Qt.resolvedUrl("images/directions.svg")
+                                }
+                            },
+                            State {
+                                name: "routingAction"
+                                when: app.state === "route"
+                                PropertyChanges { target: routeEditorButton; icon.source: "qrc:///material/navigation.svg"; }
+                            },
+                            State {
+                                name: "placeAction"
+                                when: app.state === "place"
+                                PropertyChanges { target: routeEditorButton; icon.source: Qt.resolvedUrl("images/directions.svg") }
+                            }
+                        ]
+                    }
+
+                    ToolButton {
+                        id: bookmarkButton
+                        property bool bookmark: bookmarks.isBookmark(app.selectedPlacemark.longitude, app.selectedPlacemark.latitude)
+                        enabled: app.state === "place"
+                        visible: app.state === "place"
+                        icon.name: bookmark ? 'bookmarks-bookmarked-symbolic' : 'bookmarks-symbolic'
+                        onClicked: {
+                            if (bookmarkButton.bookmark) {
+                                bookmarks.removeBookmark(app.selectedPlacemark.longitude, app.selectedPlacemark.latitude)
+                            } else {
+                                bookmarks.addBookmark(app.selectedPlacemark, "Default")
+                            }
+                            bookmarkButton.bookmark = !bookmarkButton.bookmark
                         }
                     }
-                    states: [
-                        State {
-                            name: ""
-                            PropertyChanges { target: routeEditorButton; icon.source: "qrc:///material/directions.svg"; }
-                        },
-                        State {
-                            name: "routingAction"
-                            when: app.state === "route"
-                            PropertyChanges { target: routeEditorButton; icon.source: "qrc:///material/navigation.svg"; }
-                        },
-                        State {
-                            name: "placeAction"
-                            when: app.state === "place"
-                            PropertyChanges { target: routeEditorButton; icon.source: "qrc:///material/directions.svg" }
-                        }
-                    ]
                 }
 
-                ToolButton {
-                    id: bookmarkButton
-                    anchors.verticalCenter: parent.verticalCenter
-                    height: Screen.pixelDensity * 6
-                    width: height
-                    property bool bookmark: bookmarks.isBookmark(app.selectedPlacemark.longitude, app.selectedPlacemark.latitude)
-                    enabled: app.state === "place"
-                    visible: app.state === "place"
-                    icon.source: bookmark ? "qrc:///material/star.svg" : "qrc:///material/star_border.svg"
-                    onClicked: {
-                        if (bookmarkButton.bookmark) {
-                            bookmarks.removeBookmark(app.selectedPlacemark.longitude, app.selectedPlacemark.latitude)
-                        } else {
-                            bookmarks.addBookmark(app.selectedPlacemark, "Default")
+                Loader {
+                    id: dialogLoader
+
+                    Layout.fillWidth: true
+
+                    onLoaded: {
+                        if (app.state === "place") {
+                            dialogLoader.item.map = marbleMaps
+                            dialogLoader.item.placemark = app.selectedPlacemark
+                            dialogLoader.item.showOsmTags = app.showOsmTags
+                            dialogLoader.item.showAccessibility = sidePanel.showAccessibility
+                        } else if (app.state === "route") {
+                            item.routingManager = routingManager
+                            item.routingProfile = routingManager.routingProfile
+                            item.currentIndex =  Qt.binding(function() { return app.currentWaypointIndex })
+                        } else if (app.state == "position") {
+                            dialogLoader.item.map = marbleMaps
+                            dialogLoader.item.navigationManager = navigationManager
+                        } else if (app.state == "none"){
+                            dialogLoader.height = 0
                         }
-                        bookmarkButton.bookmark = !bookmarkButton.bookmark
+                    }
+
+                    Connections {
+                        target: dialogLoader.item
+                        onCurrentProfileIconChanged: routeEditorButton.currentProfileIcon = dialogLoader.item.currentProfileIcon
+                        ignoreUnknownSignals: true
                     }
                 }
-            }
-        }
 
-
-        BorderImage {
-            anchors.top: mapItem.bottom
-            anchors.bottom: dialogLoader.bottom
-            anchors.right: parent.right
-            anchors.left: parent.left
-            anchors.margins: -14
-            border { top: 14; left: 14; right: 14; bottom: 14 }
-            source: "qrc:///border_shadow.png"
-        }
-
-        Search {
-            id: search
-            anchors.fill: parent
-            marbleQuickItem: marbleMaps
-            visible: !navigationManager.visible
-
-            onItemSelected: {
-                if (routingManager) {
-                    routingManager.addSearchResultAsPlacemark(suggestedPlacemark);
-                }
-                app.selectedPlacemark = suggestedPlacemark;
-                app.state = "place"
-            }
-            onMenuButtonClicked: sidePanel.open()
-        }
-
-        Loader {
-            id: dialogLoader
-            focus: true
-            width: childrenRect.width
-            height : childrenRect.height
-
-            anchors {
-                left: parent.left
-                right: parent.right
-                top: parent.bottom
-                bottom: bottomMenu.top
-                topMargin: app.animatedMargin
-                bottomMargin: Kirigami.Units.gridUnits * 10
-            }
-
-            NumberAnimation {
-                id: loaderAnimation
-                target: dialogLoader.item
-                property: "y"
-                from: dialogLoader.height === 0 ? app.height : app.height - dialogLoader.item.height
-                to: 0
-                duration: 500
-                easing.type: Easing.InExpo
-            }
-
-            onLoaded: {
-                app.state != "none" ? loaderAnimation.running = true : loaderAnimation.running = false
-                if (app.state === "place") {
-                    dialogLoader.item.map = marbleMaps
-                    dialogLoader.item.placemark = app.selectedPlacemark
-                    dialogLoader.item.showOsmTags = app.showOsmTags
-                    dialogLoader.item.showAccessibility = sidePanel.showAccessibility
-                } else if (app.state === "route") {
-                    item.routingManager = routingManager
-                    item.routingProfile = routingManager.routingProfile
-                    item.currentIndex =  Qt.binding(function() { return app.currentWaypointIndex })
-                } else if (app.state == "position") {
-                    dialogLoader.item.map = marbleMaps
-                    dialogLoader.item.navigationManager = navigationManager
-                } else if (app.state == "none"){
-                    dialogLoader.height = 0
+                Item {
+                    Layout.fillHeight: true
                 }
             }
+        } */
 
-            Connections {
-                target: dialogLoader.item
-                onCurrentProfileIconChanged: routeEditorButton.currentProfileIcon = dialogLoader.item.currentProfileIcon
-                ignoreUnknownSignals: true
-            }
-        }
-
-        Rectangle {
-            width: parent.width
-            color: Kirigami.Theme.textColor
-            opacity: 0.4
-            height: 1
-            anchors.bottom: dialogLoader.top
-        }
-
-        Item {
-            id: stateTracker
-            state: "none"
-
-            states: [
-                State {
-                    name: "none"
-                    PropertyChanges { target: dialogLoader; source: "" }
-                },
-                State {
-                    name: "position"
-                    PropertyChanges { target: dialogLoader; source: "CurrentPosition.qml" }
-                },
-                State {
-                    name: "route"
-                    PropertyChanges { target: dialogLoader; source: "RouteEditor.qml" }
-                },
-                State {
-                    name: "place"
-                    PropertyChanges { target: dialogLoader; source: "PlacemarkDialog.qml" }
-                },
-                State {
-                    name: "about"
-                    PropertyChanges { target: dialogLoader; source: "" }
-                },
-                State {
-                    name: "settings"
-                    PropertyChanges { target: dialogLoader; source: "SettingsDialog.qml" }
-                },
-                State {
-                    name: "developer"
-                    PropertyChanges { target: dialogLoader; source: "DeveloperDialog.qml" }
-                },
-                State {
-                    name: "options"
-                    PropertyChanges { target: dialogLoader; source: "" }
-                },
-                State {
-                    name: "bookmarks"
-                    PropertyChanges { target: dialogLoader; source: "" }
-                }
-            ]
-        }
-
-        BoxedText {
+        /* BoxedText {
             id: quitHelper
             visible: false
-            text: qsTr("Press again to close.")
+            text: i18n("Press again to close.")
             anchors.bottom: parent.bottom
             anchors.bottomMargin: Screen.pixelDensity * 5
             anchors.horizontalCenter: parent.horizontalCenter
@@ -680,12 +628,12 @@ Kirigami.AbstractApplicationWindow {
                     quitHelper.visible = false
                 }
             }
-        }
+        }*/
+    }
 
-        Bookmarks {
-            id: bookmarks
-            map: marbleMaps
-        }
+    Bookmarks {
+        id: bookmarks
+        map: marbleMaps
     }
 }
 

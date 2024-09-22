@@ -3,12 +3,12 @@
 // SPDX-FileCopyrightText: 2016 Dennis Nienhüser <nienhueser@kde.org>
 //
 
-import QtQuick 2.3
+import QtQuick
 import QtQuick.Controls
-import QtQuick.Window 2.2
-import QtQuick.Layouts 1.1
+import QtQuick.Window
+import QtQuick.Layouts
 
-import org.kde.marble 0.20
+import org.kde.marble
 
 Item {
     id: root
@@ -30,7 +30,7 @@ Item {
         color: palette.base
     }
 
-    Column {
+    ColumnLayout {
         id: column
         anchors.left: parent.left
         anchors.right: parent.right
@@ -38,33 +38,20 @@ Item {
         anchors.margins: Screen.pixelDensity * 2
         spacing: Screen.pixelDensity * 2
 
-        Text {
-            font.pointSize: 18
+        Label {
             text: root.map ? (root.map.speed * 3.6).toFixed(1) + " km/h – " + root.map.currentPosition.coordinates : ""
+            Layout.fillWidth: true
         }
 
-        Row {
-            id: row
-            width: root.width
-            spacing: Screen.pixelDensity * 2
-
-            Switch {
-                id: navigationModeSwitch
-                anchors.verticalCenter: parent.verticalCenter
-                onClicked: {
-                    if (root.navigationManager) {
-                        root.navigationManager.guidanceModeEnabled = checked
-                    }
+        Switch {
+            id: navigationModeSwitch
+            Layout.fillWidth: true
+            onClicked: {
+                if (root.navigationManager) {
+                    root.navigationManager.guidanceModeEnabled = checked
                 }
             }
-
-            Text {
-                width: row.width - row.spacing - navigationModeSwitch.width
-                height: navigationModeSwitch.height
-                verticalAlignment: Text.AlignVCenter
-                text: qsTr("Follow Current Position")
-                font.pointSize: 18
-            }
+            text: i18nc("@option:check", "Follow Current Position")
         }
     }
 }

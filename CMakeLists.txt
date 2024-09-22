@@ -42,6 +42,11 @@ include(MarbleMacros)
 
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
+ecm_setup_version(${RELEASE_SERVICE_VERSION}
+    VARIABLE_PREFIX MARBLE
+    VERSION_HEADER ${CMAKE_CURRENT_BINARY_DIR}/marble-version.h
+)
+
 remove_definitions(-DQT_NO_CAST_FROM_ASCII -DQT_NO_KEYWORDS)
 
 ####################################################
@@ -78,6 +83,8 @@ find_package(Qt6 ${QT_MIN_VERSION} REQUIRED
         PrintSupport
         Core5Compat
 )
+
+find_package(KF6 ${KF_MIN_VERSION} REQUIRED CoreAddons I18n Crash)
 
 qt_policy(SET QTP0001 NEW)
 

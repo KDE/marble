@@ -1,48 +1,58 @@
-set(marble_SRCS main.cpp MarbleMaps.cpp TextToSpeechClient.cpp MarbleMaps.h TextToSpeechClient.h)
-qt6_add_resources(marble_QRCS MarbleMaps.qrc)
+# SPDX-FileCopyrightText: 2024 Carl Schwan <carl@carlschwan.eu>
+# SPDX-License-Identifier: BSD-3-Clause
 
-include_directories(${CMAKE_CURRENT_BINARY_DIR})
+add_executable(marble-maps main.cpp MarbleMaps.cpp TextToSpeechClient.cpp MarbleMaps.h TextToSpeechClient.h)
 
-add_executable(marble-maps ${marble_SRCS} ${marble_QRCS})
-
-if (ANDROID)
-    find_package(Qt6 ${REQUIRED_QT_VERSION} REQUIRED
-        COMPONENTS
-            AndroidExtras
-            QuickControls2
-    )
-
-    # while not directly linked, need to be listed here to have deployqt pick up those libs
-    target_link_libraries (
-        marble-maps
-        marblewidget
-        astro
-        Qt6::Concurrent
-        Qt6::Xml
-        Qt6::Widgets
-        Qt6::PrintSupport
-        Qt6::Network
-        Qt6::Sql
-        Qt6::Svg
-        Qt6::Positioning
-        Qt6::AndroidExtras
-        Qt6::Multimedia
-        Qt6::QuickControls2
-    )
-
-    if (TARGET Qt6::WebEngineWidgets)
-        target_link_libraries(${TARGET} Qt6::WebEngineWidgets Qt6::WebEngine)
-    endif()
-endif()
-
-target_link_libraries (
-    marble-maps
+target_link_libraries(marble-maps PUBLIC
     marbledeclarative
+    KF6::CoreAddons
+    KF6::I18n
+    KF6::Crash
 )
-if(ANDROID)
-    FILE(GLOB QML_FILES *.qml)
-    add_custom_target(marble-maps_resources ALL SOURCES ${QML_FILES} package/AndroidManifest.xml)
-elseif(BUILD_TOUCH)
-    install(TARGETS marble-maps RUNTIME DESTINATION bin)
-    install(PROGRAMS org.kde.marble.maps.desktop DESTINATION ${KDE_INSTALL_APPDIR})
-endif()
+
+qt_add_qml_module(marble-maps
+    URI org.kde.marble.maps
+    QML_FILES
+        Completion.qml
+        MainScreen.qml
+        SearchResults.qml
+        SearchField.qml
+        Search.qml
+        IconText.qml
+        PositionButton.qml
+        BoxedText.qml
+        ImageButton.qml
+        WaypointImage.qml
+        RoutingManager.qml
+        PlacemarkDialog.qml
+        SettingsDialog.qml
+        DeveloperDialog.qml
+        ProfileSelectorMenu.qml
+        FloatingMenuButton.qml
+        RouteEditor.qml
+        RoutesItem.qml
+        MenuIcon.qml
+        NavigationInfoBar.qml
+        NavigationManager.qml
+        PositionMarker.qml
+        Waypoint.qml
+        CurrentPosition.qml
+        SidePanel.qml
+        Options.qml
+        Bookmarks.qml
+        MarbleScrollBar.qml
+    RESOURCES
+        images/directions.svg
+        images/transport-mode-bus.svg
+        images/transport-mode-car.svg
+        images/transport-mode-walk.svg
+        images/transport-mode-bike.svg
+        images/transport-mode-horse-riding.svg
+        images/transport-mode-inline-skater.svg
+        images/transport-mode-train.svg
+        images/transport-mode-tram.svg
+        images/transport-mode-subway.svg
+)
+
+install(TARGETS marble-maps RUNTIME DESTINATION bin)
+install(PROGRAMS org.kde.marble.maps.desktop DESTINATION ${KDE_INSTALL_APPDIR})

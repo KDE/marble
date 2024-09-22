@@ -7,11 +7,18 @@
 #include <QQmlApplicationEngine>
 #include <QtQuick>
 
-#include "MarbleDirs.h"
+#include <KAboutData>
+#include <KLocalizedContext>
+#include <KLocalizedString>
+
+#include "../../../marble-version.h"
 #include "MarbleMaps.h"
-#include "TextToSpeechClient.h"
 #include "declarative/MarbleDeclarativePlugin.h"
 #include <MarbleGlobal.h>
+
+#ifndef Q_OS_ANDROID
+#include <KCrash>
+#endif
 
 using namespace Marble;
 
@@ -92,10 +99,26 @@ extern "C" Q_DECL_EXPORT
     main(int argc, char **argv)
 {
     QApplication app(argc, argv);
-    app.setApplicationName("Marble Maps");
-    app.setOrganizationName("KDE");
-    app.setOrganizationDomain("kde.org");
-    app.setDesktopFileName(QStringLiteral("org.kde.marble.maps"));
+
+    KAboutData about(QStringLiteral("marble-maps"),
+                     i18n("Marble Maps"),
+                     QStringLiteral(MARBLE_VERSION_STRING),
+                     i18n("Maps"),
+                     KAboutLicense::GPL_V3,
+                     i18n("© KDE Community"));
+
+    KAboutData::setApplicationData(about);
+
+#ifndef Q_OS_ANDROID
+    KCrash::initialize();
+#endif
+
+    QCommandLineParser parser;
+    about.setupCommandLine(&parser);
+    parser.process(app);
+    about.processCommandLine(&parser);
+
+    QApplication::setWindowIcon(QIcon::fromTheme(QStringLiteral("org.kde.marble")));
 
     // Load Qt translation system catalog for libmarblewidget, the plugins and this app
     loadTranslations(app);
@@ -103,14 +126,10 @@ extern "C" Q_DECL_EXPORT
     MarbleDeclarativePlugin declarativePlugin;
     const char uri[] = "org.kde.marble";
     declarativePlugin.registerTypes(uri);
-    qmlRegisterType<MarbleMaps>(uri, 0, 20, "MarbleMaps");
 
     QQmlApplicationEngine engine;
-    TextToSpeechClient *tts = new TextToSpeechClient(&engine);
-    engine.rootContext()->setContextProperty("textToSpeechClient", tts);
-    engine.load(QUrl("qrc:/MainScreen.qml"));
-    // @todo Ship translations and only fall back to english if no translations for the system locale are installed
-    tts->setLocale("en");
+    engine.rootContext()->setContextObject(new KLocalizedContext(&engine));
+    engine.loadFromModule("org.kde.marble.maps", "MainScreen");
 
     return app.exec();
 }
