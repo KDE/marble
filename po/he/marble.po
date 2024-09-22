@@ -5,19 +5,20 @@
 # Meni Livne <livne@kde.org>, 2007.
 # Diego Iastrubni <elcuco@kde.org>, 2008.
 # Elkana Bardugo <ttv200@gmail.com>, 2017. #zanata
+# SPDX-FileCopyrightText: 2024 Yaron Shahrabani <sh.yaron@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-09-20 00:37+0000\n"
-"PO-Revision-Date: 2017-05-16 07:00-0400\n"
-"Last-Translator: Copied by Zanata <copied-by-zanata@zanata.org>\n"
-"Language-Team: Hebrew <kde-l10n-he@kde.org>\n"
+"PO-Revision-Date: 2024-09-21 10:52+0300\n"
+"Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
+"Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Zanata 3.9.6\n"
+"X-Generator: Lokalize 24.05.2\n"
 "Plural-Forms: nplurals=4; plural=(n == 1) ? 0 : ((n == 2) ? 1 : ((n > 10 && "
 "n % 10 == 0) ? 2 : 3));\n"
 
@@ -32,9 +33,9 @@ msgid "Your emails"
 msgstr "kde-l10n-he@kde.org"
 
 #: kdemain.cpp:86
-#, fuzzy, kde-format
+#, kde-format
 msgid "Marble Virtual Globe"
-msgstr "הגלובוס השולחני Marble"
+msgstr "הגלובוס הווירטואלי Marble"
 
 #: kdemain.cpp:88
 #, kde-format
@@ -44,22 +45,22 @@ msgstr "אטלס עולמי."
 #: kdemain.cpp:90
 #, kde-format
 msgid "(c) 2007-%1"
-msgstr ""
+msgstr "‏(c) 2007‏-%1"
 
 #: kdemain.cpp:95 kdemain.cpp:210
 #, kde-format
 msgid "Torsten Rahn"
-msgstr "Torsten Rahn"
+msgstr "טורסטן ראן"
 
 #: kdemain.cpp:95
 #, kde-format
 msgid "Developer and Original Author"
-msgstr ""
+msgstr "מפתח ויוצר מקורי"
 
 #: kdemain.cpp:96
 #, kde-format
 msgid "Bernhard Beschow"
-msgstr ""
+msgstr "ברנהרד בשקוב"
 
 #: kdemain.cpp:96
 #, kde-format
@@ -92,9 +93,9 @@ msgid "Florian E&szlig;er"
 msgstr ""
 
 #: kdemain.cpp:99
-#, fuzzy, kde-format
+#, kde-format
 msgid "Elevation Profile"
-msgstr "שיא גובה"
+msgstr "פרופיל עילוי"
 
 #: kdemain.cpp:100
 #, kde-format
@@ -102,9 +103,9 @@ msgid "Wes Hardaker"
 msgstr ""
 
 #: kdemain.cpp:100
-#, fuzzy, kde-format
+#, kde-format
 msgid "APRS Plugin"
-msgstr "שורת חיפוש"
+msgstr "תוסף APRS"
 
 #: kdemain.cpp:101 kdemain.cpp:155
 #, kde-format
@@ -114,7 +115,7 @@ msgstr ""
 #: kdemain.cpp:101
 #, kde-format
 msgid "Online Services support"
-msgstr ""
+msgstr "תמיכה בשירותים מקוונים"
 
 #: kdemain.cpp:102 kdemain.cpp:125
 #, kde-format
@@ -122,9 +123,9 @@ msgid "Guillaume Martres"
 msgstr ""
 
 #: kdemain.cpp:102
-#, fuzzy, kde-format
+#, kde-format
 msgid "Satellites"
-msgstr "תמונת לוויין"
+msgstr "לוויינים"
 
 #: kdemain.cpp:103 kdemain.cpp:121
 #, kde-format
@@ -132,19 +133,19 @@ msgid "Rene Kuettner"
 msgstr ""
 
 #: kdemain.cpp:103
-#, fuzzy, kde-format
+#, kde-format
 msgid "Satellites, Eclipses"
-msgstr "תמונת לוויין"
+msgstr "לוויינים, ליקויי חמה"
 
 #: kdemain.cpp:104
 #, kde-format
 msgid "Friedrich W. H. Kossebau"
-msgstr ""
+msgstr "פרידריך ו. ה. קוסבאו"
 
 #: kdemain.cpp:104
 #, kde-format
 msgid "Plasma Integration, Bugfixes"
-msgstr ""
+msgstr "שילוב מול פלזמה, תיקוני תקלות"
 
 #: kdemain.cpp:105
 #, kde-format
@@ -152,9 +153,9 @@ msgid "Dennis Nienhüser"
 msgstr ""
 
 #: kdemain.cpp:105
-#, fuzzy, kde-format
+#, kde-format
 msgid "Routing, Navigation, Mobile"
-msgstr "ניווט"
+msgstr "ניווט, מסלול, נייד"
 
 #: kdemain.cpp:106
 #, kde-format
@@ -162,39 +163,39 @@ msgid "Niko Sams"
 msgstr ""
 
 #: kdemain.cpp:106
-#, fuzzy, kde-format
+#, kde-format
 msgid "Routing, Elevation Profile"
-msgstr "פקד ניווט"
+msgstr "ניווט, פרופיל עילוי"
 
 #: kdemain.cpp:107 kdemain.cpp:159
 #, kde-format
 msgid "Patrick Spendrin"
-msgstr ""
+msgstr "פטריק ספנדרין"
 
 #: kdemain.cpp:107
 #, kde-format
 msgid "Core Developer: KML and Windows support"
-msgstr ""
+msgstr "מפתח ליבה: תמיכה ב־KML וב־Windows"
 
 #: kdemain.cpp:108
 #, kde-format
 msgid "Eckhart Wörner"
-msgstr ""
+msgstr "אקהארט וירנר"
 
 #: kdemain.cpp:108
 #, kde-format
 msgid "Bugfixes"
-msgstr ""
+msgstr "תיקון תקלות"
 
 #: kdemain.cpp:112
 #, kde-format
 msgid "Inge Wallin"
-msgstr "Inge Wallin"
+msgstr "אינגה וולין"
 
 #: kdemain.cpp:112
-#, fuzzy, kde-format
+#, kde-format
 msgid "Core Developer and Co-Maintainer"
-msgstr "כותב מקורי, מפתח ומתחזק"
+msgstr "מפתח ליבה ומתחזק משנה"
 
 #: kdemain.cpp:113
 #, kde-format
@@ -209,12 +210,12 @@ msgstr ""
 #: kdemain.cpp:114
 #, kde-format
 msgid "Pino Toscano"
-msgstr ""
+msgstr "פינו טוסקנו"
 
 #: kdemain.cpp:114
 #, kde-format
 msgid "Network plugins"
-msgstr ""
+msgstr "תוספי רשת"
 
 #: kdemain.cpp:115
 #, kde-format
@@ -229,22 +230,22 @@ msgstr ""
 #: kdemain.cpp:116
 #, kde-format
 msgid "Simon Edwards"
-msgstr ""
+msgstr "סיימון אדוארדס"
 
 #: kdemain.cpp:116
-#, fuzzy, kde-format
+#, kde-format
 msgid "Marble Python Bindings"
-msgstr "&הגדרות מטמון של Marble"
+msgstr "איגודי פיית׳ון של Marble"
 
 #: kdemain.cpp:117
 #, kde-format
 msgid "Magnus Valle"
-msgstr ""
+msgstr "מגנוס ואלה"
 
 #: kdemain.cpp:117
-#, fuzzy, kde-format
+#, kde-format
 msgid "Historical Maps"
-msgstr "מפה היסטורית 1689"
+msgstr "מפות היסטוריות"
 
 #: kdemain.cpp:118
 #, kde-format
@@ -272,7 +273,7 @@ msgstr ""
 #: kdemain.cpp:131
 #, kde-format
 msgid "Konstantin Oblaukhov"
-msgstr ""
+msgstr "קונסטנטין אובלאוחוב"
 
 #: kdemain.cpp:132
 #, kde-format
@@ -292,12 +293,12 @@ msgstr ""
 #: kdemain.cpp:139
 #, kde-format
 msgid "Gaurav Gupta"
-msgstr ""
+msgstr "גואראב גופטה"
 
 #: kdemain.cpp:140
 #, kde-format
 msgid "Google Summer of Code 2010 Project: Bookmarks"
-msgstr ""
+msgstr "מיזם של Google Summer of Code 2010: סימניות"
 
 #: kdemain.cpp:143
 #, kde-format
@@ -370,7 +371,7 @@ msgstr ""
 #: kdemain.cpp:175
 #, kde-format
 msgid "Murad Tagirov"
-msgstr ""
+msgstr "מוראד טגירוב"
 
 #: kdemain.cpp:176
 #, kde-format
@@ -389,22 +390,22 @@ msgstr ""
 #: kdemain.cpp:197 kdemain.cpp:198 kdemain.cpp:199
 #, kde-format
 msgid "Development & Patches"
-msgstr ""
+msgstr "פיתוח ותיקונים"
 
 #: kdemain.cpp:182
 #, kde-format
 msgid "Claudiu Covaci"
-msgstr ""
+msgstr "קלאודיו קובאצי"
 
 #: kdemain.cpp:183
 #, kde-format
 msgid "David Roberts"
-msgstr ""
+msgstr "דיויד רוברטס"
 
 #: kdemain.cpp:184
 #, kde-format
 msgid "Nikolas Zimmermann"
-msgstr ""
+msgstr "ניקולס צימרמן"
 
 #: kdemain.cpp:185
 #, kde-format
@@ -414,12 +415,12 @@ msgstr ""
 #: kdemain.cpp:186
 #, kde-format
 msgid "Stefan Asserhäll"
-msgstr ""
+msgstr "סטפן אסרהול"
 
 #: kdemain.cpp:187
 #, kde-format
 msgid "Laurent Montel"
-msgstr ""
+msgstr "לורנט מונטל"
 
 #: kdemain.cpp:188
 #, kde-format
@@ -434,7 +435,7 @@ msgstr ""
 #: kdemain.cpp:190
 #, kde-format
 msgid "Anne-Marie Mahfouf"
-msgstr ""
+msgstr "אן־מרי מחפוף"
 
 #: kdemain.cpp:191
 #, kde-format
@@ -444,12 +445,12 @@ msgstr ""
 #: kdemain.cpp:192
 #, kde-format
 msgid "Frerich Raabe"
-msgstr ""
+msgstr "פרריך ראבה"
 
 #: kdemain.cpp:193
 #, kde-format
 msgid "Frederik Gladhorn"
-msgstr ""
+msgstr "פרדריק גלדהורן"
 
 #: kdemain.cpp:194
 #, kde-format
@@ -459,27 +460,27 @@ msgstr ""
 #: kdemain.cpp:195
 #, kde-format
 msgid "Albert Astals Cid"
-msgstr ""
+msgstr "אלברט אסטלס סיד"
 
 #: kdemain.cpp:196
 #, kde-format
 msgid "Thomas Zander"
-msgstr ""
+msgstr "תומס זנדר"
 
 #: kdemain.cpp:197
 #, kde-format
 msgid "Joseph Wenninger"
-msgstr ""
+msgstr "ג׳וזף ונינגר"
 
 #: kdemain.cpp:198
 #, kde-format
 msgid "Kris Thomsen"
-msgstr ""
+msgstr "כריס תומסן"
 
 #: kdemain.cpp:199
 #, kde-format
 msgid "Daniel Molkentin"
-msgstr ""
+msgstr "דניאל מולקנטין"
 
 #: kdemain.cpp:200
 #, kde-format
@@ -499,9 +500,9 @@ msgid "Sebastian Wiedenroth"
 msgstr ""
 
 #: kdemain.cpp:202
-#, fuzzy, kde-format
+#, kde-format
 msgid "Tim Sutton"
-msgstr "איזורי זמן"
+msgstr "טים סוטון"
 
 #: kdemain.cpp:203
 #, kde-format
@@ -536,49 +537,49 @@ msgstr ""
 #: kdemain.cpp:209
 #, kde-format
 msgid "Nuno Pinheiro"
-msgstr ""
+msgstr "נונו פיניירו"
 
 #: kdemain.cpp:209 kdemain.cpp:210
 #, kde-format
 msgid "Artwork"
-msgstr ""
+msgstr "עיצוב אומנותי"
 
 #: kdemain.cpp:213
 #, kde-format
 msgid "Luis Silva"
-msgstr ""
+msgstr "לואיס סילבה"
 
 #: kdemain.cpp:213 kdemain.cpp:214 kdemain.cpp:215 kdemain.cpp:216
 #: kdemain.cpp:217 kdemain.cpp:218 kdemain.cpp:219 kdemain.cpp:220
 #: kdemain.cpp:221 kdemain.cpp:222
 #, kde-format
 msgid "Various Suggestions & Testing"
-msgstr ""
+msgstr "מגוון הצעות ובדיקות"
 
 #: kdemain.cpp:214
 #, kde-format
 msgid "Stefan Jordan"
-msgstr ""
+msgstr "סטיבן ג׳ורדן"
 
 #: kdemain.cpp:215
 #, kde-format
 msgid "Robert Scott"
-msgstr ""
+msgstr "רוברט סקוט"
 
 #: kdemain.cpp:216
 #, kde-format
 msgid "Lubos Petrovic"
-msgstr ""
+msgstr "לובוש פטרוביץ"
 
 #: kdemain.cpp:217
 #, kde-format
 msgid "Benoit Sigoure"
-msgstr ""
+msgstr "בנואה סיגוור"
 
 #: kdemain.cpp:218
-#, fuzzy, kde-format
+#, kde-format
 msgid "Martin Konold"
-msgstr "סרגל כלים ראשי"
+msgstr "מרטין קונולד"
 
 #: kdemain.cpp:219
 #, kde-format
@@ -588,22 +589,22 @@ msgstr ""
 #: kdemain.cpp:220
 #, kde-format
 msgid "Rainer Endres"
-msgstr ""
+msgstr "ריינר אנדרס"
 
 #: kdemain.cpp:221
 #, kde-format
 msgid "Ralf Gesellensetter"
-msgstr ""
+msgstr "ראלף גסלנסטר"
 
 #: kdemain.cpp:222
-#, fuzzy, kde-format
+#, kde-format
 msgid "Tim Alder"
-msgstr "מחוון התקרבות"
+msgstr "טים אלדר"
 
 #: kdemain.cpp:223
 #, kde-format
 msgid "John Layt"
-msgstr ""
+msgstr "ג׳ון לייט"
 
 #: kdemain.cpp:224
 #, kde-format
@@ -615,7 +616,7 @@ msgstr ""
 #: kdemain.cpp:240
 #, kde-format
 msgid "Enable debug output"
-msgstr ""
+msgstr "הפעלת פלט ניפוי שגיאות"
 
 #: kdemain.cpp:243
 #, kde-format
@@ -630,17 +631,17 @@ msgstr "מדידת זמנים כדי לבדוק את הביצועים"
 #: kdemain.cpp:247
 #, kde-format
 msgid "Show frame rate"
-msgstr "הצג מחוון מסגרות לשנייה"
+msgstr "הצגת מחוון תמוניות לשנייה"
 
 #: kdemain.cpp:249
-#, fuzzy, kde-format
+#, kde-format
 msgid "Show tile IDs"
-msgstr "הצג מיקומים"
+msgstr "הצגת מזהי אריחים"
 
 #: kdemain.cpp:251
 #, kde-format
 msgid "Show time spent in each layer"
-msgstr ""
+msgstr "הצגת הזמן שהושקע בכל שכבה"
 
 #: kdemain.cpp:253
 #, kde-format
@@ -760,9 +761,9 @@ msgstr ""
 
 #. i18n: ectx: label, entry, group (Navigation)
 #: marble.kcfg:201
-#, fuzzy, kde-format
+#, kde-format
 msgid "Display animation on voyage to target."
-msgstr "&הנפש את המעבר ליעד"
+msgstr "הצגת הנפשה במסע אל היעד."
 
 #. i18n: ectx: label, entry, group (Navigation)
 #: marble.kcfg:205
@@ -786,43 +787,43 @@ msgstr ""
 #: marble.kcfg:223
 #, kde-format
 msgid "URL for the proxy server."
-msgstr ""
+msgstr "כתובת שרת המתווך."
 
 #. i18n: ectx: label, entry, group (Cache)
 #: marble.kcfg:227
 #, kde-format
 msgid "Port for the proxy server."
-msgstr ""
+msgstr "פתחת שרת המתווך."
 
 #. i18n: ectx: label, entry (proxyUser), group (Cache)
 #: marble.kcfg:233
-#, fuzzy, kde-format
+#, kde-format
 msgid "Username for authorization."
-msgstr "שם חלופי עבור המיקום."
+msgstr "שם משתמש לאימות."
 
 #. i18n: ectx: label, entry (proxyPass), group (Cache)
 #: marble.kcfg:236
-#, fuzzy, kde-format
+#, kde-format
 msgid "Password for authorization."
-msgstr "שם חלופי עבור המיקום."
+msgstr "סיסמה לאימות."
 
 #. i18n: ectx: label, entry (proxyHttp), group (Cache)
 #: marble.kcfg:239
 #, kde-format
 msgid "Proxy type is HTTP"
-msgstr ""
+msgstr "סוג המתווך הוא HTTP"
 
 #. i18n: ectx: label, entry (proxySocks5), group (Cache)
 #: marble.kcfg:250
 #, kde-format
 msgid "Proxy type is Socks5"
-msgstr ""
+msgstr "סוג המתווך הוא Socks5"
 
 #. i18n: ectx: label, entry (proxyAuth), group (Cache)
 #: marble.kcfg:254
-#, fuzzy, kde-format
+#, kde-format
 msgid "Proxy requires Authentication"
-msgstr "יציאה מהתוכנית"
+msgstr "המתווך דורש אימות"
 
 #. i18n: ectx: label, entry (activePositionTrackingPlugin), group (Plugins)
 #: marble.kcfg:260
@@ -833,7 +834,7 @@ msgstr ""
 #: marble_part.cpp:104
 #, kde-format
 msgid "Position: %1"
-msgstr "מיקום: %1"
+msgstr "מקום: %1"
 
 #: marble_part.cpp:105
 #, kde-format
@@ -846,9 +847,9 @@ msgid "Tile Zoom Level: %1"
 msgstr ""
 
 #: marble_part.cpp:107
-#, fuzzy, kde-format
+#, kde-format
 msgid "Time: %1"
-msgstr "&שעה"
+msgstr "שעה: %1"
 
 #: marble_part.cpp:166
 #, kde-format
@@ -863,9 +864,9 @@ msgid "File not readable"
 msgstr ""
 
 #: marble_part.cpp:214
-#, fuzzy, kde-format
+#, kde-format
 msgid "A Virtual Globe"
-msgstr "הגלובוס השולחני"
+msgstr "הגלובוס הווירטואלי"
 
 #: marble_part.cpp:227
 #, kde-format
@@ -883,18 +884,16 @@ msgid "All Supported Files"
 msgstr ""
 
 #: marble_part.cpp:254
-#, fuzzy, kde-format
-#| msgid "Open File"
+#, kde-format
 msgctxt "@title:window"
 msgid "Open File"
-msgstr "פתח קובץ"
+msgstr "פתיחת קובץ"
 
 #: marble_part.cpp:270
-#, fuzzy, kde-format
-#| msgid "Export Map"
+#, kde-format
 msgctxt "@title:window"
 msgid "Export Map"
-msgstr "ייצא מפה"
+msgstr "ייצוא מפה"
 
 #: marble_part.cpp:270
 #, kde-format
@@ -913,57 +912,57 @@ msgid "An error occurred while trying to save the file.\n"
 msgstr "אירעה שגיאה במהלך הניסיון לשמור את הקובץ.\n"
 
 #: marble_part.cpp:464
-#, fuzzy, kde-format
+#, kde-format
 msgid "Unnamed"
-msgstr "&הצג שמות:"
+msgstr "ללא שם"
 
 #: marble_part.cpp:684
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "Action for downloading an entire region of a map"
 msgid "Download Region..."
-msgstr "מוריד נתונים..."
+msgstr "הורדת איזור…"
 
 #: marble_part.cpp:696
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "Action for saving the map to a file"
 msgid "&Export Map..."
-msgstr "&ייצוא מפה..."
+msgstr "יי&צוא מפה..."
 
 #: marble_part.cpp:704
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "Action for toggling offline mode"
 msgid "&Work Offline"
-msgstr "&עבוד לא מקוון"
+msgstr "עבודה &לא מקוונת"
 
 #: marble_part.cpp:712
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "Action for copying the map to the clipboard"
 msgid "&Copy Map"
-msgstr "הע&תק מפה"
+msgstr "הע&תקת מפה"
 
 #: marble_part.cpp:717
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "Action for copying the coordinates to the clipboard"
 msgid "C&opy Coordinates"
-msgstr "הע&תק קואורדינטות"
+msgstr "הע&תקת נקודות ציון"
 
 #: marble_part.cpp:723
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "Action for opening a file"
 msgid "&Open..."
-msgstr "&פתח מפה..."
+msgstr "&פתיחה…"
 
 #: marble_part.cpp:729
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "Action for downloading maps (GHNS)"
 msgid "Download Maps..."
-msgstr "מוריד נתונים..."
+msgstr "הורדת מפות…"
 
 #: marble_part.cpp:732
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "Status tip"
 msgid "Download new maps"
-msgstr "&הורד מפות חדשות"
+msgstr "הורדת מפות חדשות"
 
 #: marble_part.cpp:737
 #, kde-format
@@ -978,38 +977,38 @@ msgid "A wizard guides you through the creation of your own map theme."
 msgstr ""
 
 #: marble_part.cpp:764
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "Action for toggling clouds"
 msgid "&Clouds"
 msgstr "&עננים"
 
 #: marble_part.cpp:770
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "Action for sun control dialog"
 msgid "S&un Control..."
-msgstr "&שליטה על השמש..."
+msgstr "&בקרת שמש…"
 
 #: marble_part.cpp:779
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "Action for time control dialog"
 msgid "&Time Control..."
-msgstr "&שליטה על השמש..."
+msgstr "בקרת ש&עה…"
 
 #: marble_part.cpp:785
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "Action for locking float items on the map"
 msgid "Lock Position"
-msgstr "נעל מיקום"
+msgstr "נעילת מקום"
 
 #: marble_part.cpp:794
-#, fuzzy, kde-format
+#, kde-format
 msgid "Show Shadow"
-msgstr "צל"
+msgstr "הצגת צל"
 
 #: marble_part.cpp:797
-#, fuzzy, kde-format
+#, kde-format
 msgid "Hide Shadow"
-msgstr "צל"
+msgstr "הסתרת צל"
 
 #: marble_part.cpp:798
 #, kde-format
@@ -1047,16 +1046,16 @@ msgid "Lock globe to the sub-solar point"
 msgstr ""
 
 #: marble_part.cpp:826
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "Add Bookmark"
 msgid "Add &Bookmark..."
-msgstr "&חפש"
+msgstr "הוספת &סימנייה…"
 
 #: marble_part.cpp:833
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "Show Bookmarks"
 msgid "Show &Bookmarks"
-msgstr "&חפש"
+msgstr "הצגת &סימניות"
 
 #: marble_part.cpp:834
 #, kde-format
@@ -1064,21 +1063,21 @@ msgid "Show or hide bookmarks in the map"
 msgstr ""
 
 #: marble_part.cpp:841
-#, fuzzy, kde-format
+#, kde-format
 msgid "&Set Home Location"
-msgstr "הצג את מיקום הבית"
+msgstr "הגדרת מקום ה&בית"
 
 #: marble_part.cpp:847
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "Manage Bookmarks"
 msgid "&Manage Bookmarks..."
-msgstr "&חפש"
+msgstr "&ניהול סימניות…"
 
 #: marble_part.cpp:856
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "Edit the map in an external application"
 msgid "&Edit Map..."
-msgstr "&עריכה"
+msgstr "&עריכת מפה…"
 
 #: marble_part.cpp:862
 #, kde-format
@@ -1101,22 +1100,22 @@ msgid "Stop recording a movie of the globe"
 msgstr ""
 
 #: marble_part.cpp:1205
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "Action for toggling"
 msgid "Show Position"
-msgstr "נעל מיקום"
+msgstr "הצגת מקום"
 
 #: marble_part.cpp:1206
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "Action for toggling"
 msgid "Show Date and Time"
-msgstr "הצג מחוון מסגרות לשנייה"
+msgstr "הצגת תאריך ושעה"
 
 #: marble_part.cpp:1207
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "Action for toggling"
 msgid "Show Altitude"
-msgstr "קו רוחב"
+msgstr "הצגת גובה"
 
 #: marble_part.cpp:1208
 #, kde-format
@@ -1128,7 +1127,7 @@ msgstr ""
 #, kde-format
 msgctxt "Action for toggling"
 msgid "Show Download Progress Bar"
-msgstr ""
+msgstr "הצגת סרגל התקדמות הורדה"
 
 #: marble_part.cpp:1300
 #, kde-format
@@ -1146,19 +1145,19 @@ msgid "Cache & Proxy"
 msgstr "מתווך ומטמון"
 
 #: marble_part.cpp:1331
-#, fuzzy, kde-format
+#, kde-format
 msgid "Date & Time"
-msgstr "&שעה"
+msgstr "תאריך ושעה"
 
 #: marble_part.cpp:1339
 #, kde-format
 msgid "Synchronization"
-msgstr ""
+msgstr "סנכרון"
 
 #: marble_part.cpp:1349
-#, fuzzy, kde-format
+#, kde-format
 msgid "Routing"
-msgstr "גשר"
+msgstr "ניווט"
 
 #: marble_part.cpp:1357
 #, kde-format
@@ -1175,7 +1174,7 @@ msgstr "&קובץ"
 #: marble_part.rc:21 marbleui.rc:14
 #, kde-format
 msgid "&Edit"
-msgstr "&עריכה"
+msgstr "ע&ריכה"
 
 #. i18n: ectx: Menu (view)
 #: marble_part.rc:31 marbleui.rc:18
@@ -1193,31 +1192,31 @@ msgstr "&תיבות מידע"
 #: marble_part.rc:42
 #, kde-format
 msgid "&Online Services"
-msgstr ""
+msgstr "&שירותים מקוונים"
 
 #. i18n: ectx: Menu (settings)
 #: marble_part.rc:55 marbleui.rc:31
 #, kde-format
 msgid "&Settings"
-msgstr "&הגדרות"
+msgstr "ה&גדרות"
 
 #. i18n: ectx: Menu (panels)
 #: marble_part.rc:59
 #, kde-format
 msgid "&Panels"
-msgstr ""
+msgstr "&לוחות"
 
 #. i18n: ectx: Menu (viewSize)
 #: marble_part.rc:65
-#, fuzzy, kde-format
+#, kde-format
 msgid "&View Size"
-msgstr "&תצוגה"
+msgstr "&גודל תצוגה"
 
 #. i18n: ectx: Menu (bookmarks)
 #: marble_part.rc:73 marbleui.rc:29
-#, fuzzy, kde-format
+#, kde-format
 msgid "&Bookmarks"
-msgstr "&חפש"
+msgstr "&סימניות"
 
 #. i18n: ectx: ToolBar (mainToolBar)
 #: marble_part.rc:84 marbleui.rc:36
@@ -1227,9 +1226,9 @@ msgstr "סרגל כלים ראשי"
 
 #. i18n: ectx: ToolBar (pluginToolBar)
 #: marble_part.rc:97
-#, fuzzy, kde-format
+#, kde-format
 msgid "Edit Toolbar"
-msgstr "סרגל כלים ראשי"
+msgstr "סרגל כלי עריכה"
 
 #~ msgid "marble_part"
 #~ msgstr "marble_part"

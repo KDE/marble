@@ -6,16 +6,18 @@
 # Diego Iastrubni <elcuco@kde.org>, 2008, 2012.
 # Elkana Bardugo <ttv200@gmail.com>, 2016.
 # Elkana Bardugo <ttv200@gmail.com>, 2017. #zanata
+# SPDX-FileCopyrightText: 2024 Yaron Shahrabani <sh.yaron@gmail.com>
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2017-05-16 07:00-0400\n"
-"Last-Translator: Copied by Zanata <copied-by-zanata@zanata.org>\n"
-"Language-Team: Hebrew <kde-i18n-doc@kde.org>\n"
+"Project-Id-Version: \n"
+"PO-Revision-Date: 2024-09-21 10:37+0300\n"
+"Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
+"Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Zanata 3.9.6\n"
+"X-Generator: Lokalize 24.05.2\n"
 "Plural-Forms: nplurals=4; plural=(n == 1) ? 0 : ((n == 2) ? 1 : ((n > 10 && "
 "n % 10 == 0) ? 2 : 3));\n"
 "X-Qt-Contexts: true\n"
@@ -1887,7 +1889,7 @@ msgstr ""
 #. file data/legend.html
 msgctxt "Legends|"
 msgid "Populated Places"
-msgstr ""
+msgstr "אזורים מאוכלסים"
 
 #. file data/legend.html
 #, fuzzy
@@ -3999,6 +4001,8 @@ msgid "%n rooms"
 msgid_plural "%n rooms"
 msgstr[0] ""
 msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
 
 #: src/lib/marble/declarative/Placemark.cpp:102
 #, qt-format
@@ -4007,6 +4011,8 @@ msgid "%n beds"
 msgid_plural "%n beds"
 msgstr[0] ""
 msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
 
 #: src/lib/marble/declarative/Placemark.cpp:108
 #, fuzzy, qt-format
@@ -4481,6 +4487,8 @@ msgid "%n seats"
 msgid_plural "%n seats"
 msgstr[0] ""
 msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
 
 #: src/lib/marble/declarative/Placemark.cpp:361
 msgctxt "Marble::Placemark|A bench provides a backrest to lean against"
@@ -5420,6 +5428,8 @@ msgid "There is a limit of %n tile(s) to download."
 msgid_plural "There is a limit of %n tile(s) to download."
 msgstr[0] ""
 msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
 
 #: src/lib/marble/DownloadRegionDialog.cpp:497
 msgctxt "Marble::DownloadRegionDialog|"
@@ -7928,6 +7938,8 @@ msgid_plural ""
 "Parsing failed line %1. Still %n unclosed tag(s) after document end. "
 msgstr[0] "הפיענוח נכשל. עדיין יש %1 תגיות פתוחות לאחר סיום המסמך."
 msgstr[1] "הפיענוח נכשל. עדיין יש %1 תגיות פתוחות לאחר סיום המסמך."
+msgstr[2] ""
+msgstr[3] ""
 
 #: src/lib/marble/geodata/parser/GeoParser.cpp:123
 #, fuzzy, qt-format
@@ -7994,6 +8006,8 @@ msgid "%n result(s) found."
 msgid_plural "%n result(s) found."
 msgstr[0] ""
 msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
 
 #: src/lib/marble/GoToDialog.ui:14
 #, fuzzy
@@ -17631,10 +17645,9 @@ msgstr "הר"
 
 #: src/plugins/runner/gosmore-reversegeocoding/GosmoreReverseGeocodingPlugin.cpp:31
 #: src/plugins/runner/gosmore-routing/GosmoreRoutingPlugin.cpp:31
-#, fuzzy
 msgctxt "Marble::GosmorePlugin|"
 msgid "Gosmore"
-msgstr "הר"
+msgstr "Gosmore"
 
 #: src/plugins/runner/gosmore-reversegeocoding/GosmoreReverseGeocodingPlugin.cpp:46
 msgctxt "Marble::GosmorePlugin|"
@@ -17642,10 +17655,9 @@ msgid "Offline reverse geocoding using Gosmore."
 msgstr ""
 
 #: src/plugins/runner/gosmore-routing/GosmoreRoutingPlugin.cpp:26
-#, fuzzy
 msgctxt "Marble::GosmorePlugin|"
 msgid "Gosmore Routing"
-msgstr "הר"
+msgstr "ניווט עם Gosmore"
 
 #: src/plugins/runner/gosmore-routing/GosmoreRoutingPlugin.cpp:46
 msgctxt "Marble::GosmorePlugin|"
@@ -17678,10 +17690,9 @@ msgid "Create GeoDataDocument from Gpx Files"
 msgstr ""
 
 #: src/plugins/runner/gpx/GpxPlugin.cpp:48
-#, fuzzy
 msgctxt "Marble::GpxPlugin|"
 msgid "GPS Data"
-msgstr "&נתונים"
+msgstr "נתוני נווטן"
 
 #: src/plugins/runner/hostip/HostipPlugin.cpp:22
 msgctxt "Marble::HostipPlugin|"
@@ -17832,10 +17843,9 @@ msgid "doctor"
 msgstr ""
 
 #: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:99
-#, fuzzy
 msgctxt "QObject|"
 msgid "hospital"
-msgstr "עיר בירה"
+msgstr "בית חולים"
 
 #: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:101
 msgctxt "QObject|"
@@ -17863,10 +17873,9 @@ msgid "supermarket"
 msgstr ""
 
 #: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:111
-#, fuzzy
 msgctxt "QObject|"
 msgid "attraction"
-msgstr "מדינה"
+msgstr "מוקד עניין"
 
 #: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:113
 msgctxt "QObject|"
@@ -17892,13 +17901,12 @@ msgstr ""
 #, fuzzy
 msgctxt "QObject|"
 msgid "ruin"
-msgstr "פני שטח"
+msgstr "חורבות"
 
 #: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:123
-#, fuzzy
 msgctxt "QObject|"
 msgid "theatre"
-msgstr "&שמור"
+msgstr "תיאטרון"
 
 #: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:125
 msgctxt "QObject|"
@@ -17909,7 +17917,7 @@ msgstr ""
 #, fuzzy
 msgctxt "QObject|"
 msgid "view point"
-msgstr "מפה רגילה"
+msgstr "נקודת תצפית"
 
 #: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:129
 msgctxt "QObject|"
@@ -17927,10 +17935,9 @@ msgid "airport runway"
 msgstr ""
 
 #: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:135
-#, fuzzy
 msgctxt "QObject|"
 msgid "airport apron"
-msgstr "ייצא מפה"
+msgstr "רחבת חניית מטוסים"
 
 #: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:137
 msgctxt "QObject|"
@@ -17938,10 +17945,9 @@ msgid "airport taxiway"
 msgstr ""
 
 #: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:139
-#, fuzzy
 msgctxt "QObject|"
 msgid "bus station"
-msgstr "שם חלופי"
+msgstr "תחנת אוטובוס"
 
 #: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:141
 msgctxt "QObject|"
@@ -17962,13 +17968,12 @@ msgstr ""
 #, fuzzy
 msgctxt "QObject|"
 msgid "parking"
-msgstr "עקוב אחר GPS"
+msgstr "חנייה"
 
 #: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:149
-#, fuzzy
 msgctxt "QObject|"
 msgid "train station"
-msgstr "שם חלופי"
+msgstr "תחנת רכבת"
 
 #: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:151
 msgctxt "QObject|"
@@ -18006,16 +18011,14 @@ msgid "memorial"
 msgstr ""
 
 #: src/plugins/runner/local-osm-search/LocalOsmSearchPlugin.cpp:40
-#, fuzzy
 msgctxt "Marble::LocalOsmSearchPlugin|"
 msgid "Local OSM Search"
-msgstr "&חפש"
+msgstr "חיפוש OSM מקומי"
 
 #: src/plugins/runner/local-osm-search/LocalOsmSearchPlugin.cpp:45
-#, fuzzy
 msgctxt "Marble::LocalOsmSearchPlugin|"
 msgid "Offline OpenStreetMap Search"
-msgstr "&פתיחת מפה..."
+msgstr "חיפוש בלתי מקוון ב־OpenStreeMap"
 
 #: src/plugins/runner/local-osm-search/LocalOsmSearchPlugin.cpp:60
 msgctxt "Marble::LocalOsmSearchPlugin|"
@@ -18024,31 +18027,26 @@ msgstr ""
 
 #: src/plugins/runner/local-osm-search/OsmDatabase.cpp:264
 #: src/plugins/runner/local-osm-search/OsmDatabase.cpp:266
-#, fuzzy
 msgctxt "QObject|"
 msgid "north"
 msgstr "צפון"
 
 #: src/plugins/runner/local-osm-search/OsmDatabase.cpp:268
-#, fuzzy
 msgctxt "QObject|"
 msgid "north-west"
-msgstr "גבולות"
+msgstr "צפון־מערב"
 
 #: src/plugins/runner/local-osm-search/OsmDatabase.cpp:270
-#, fuzzy
 msgctxt "QObject|"
 msgid "west"
 msgstr "מערב"
 
 #: src/plugins/runner/local-osm-search/OsmDatabase.cpp:272
-#, fuzzy
 msgctxt "QObject|"
 msgid "south-west"
-msgstr "דרום"
+msgstr "דרום־מערב"
 
 #: src/plugins/runner/local-osm-search/OsmDatabase.cpp:274
-#, fuzzy
 msgctxt "QObject|"
 msgid "south"
 msgstr "דרום"
@@ -18057,10 +18055,9 @@ msgstr "דרום"
 #, fuzzy
 msgctxt "QObject|"
 msgid "south-east"
-msgstr "גבולות"
+msgstr "דרום־מזרח"
 
 #: src/plugins/runner/local-osm-search/OsmDatabase.cpp:278
-#, fuzzy
 msgctxt "QObject|"
 msgid "east"
 msgstr "מזרח"
@@ -18069,7 +18066,7 @@ msgstr "מזרח"
 #, fuzzy
 msgctxt "QObject|"
 msgid "north-east"
-msgstr "גבולות"
+msgstr "צפון־מזרח"
 
 #: src/plugins/runner/localdatabase/LocalDatabasePlugin.cpp:19
 msgctxt "Marble::LocalDatabasePlugin|"
@@ -18150,16 +18147,14 @@ msgid "This service requires an Internet connection."
 msgstr ""
 
 #: src/plugins/runner/mapquest/MapQuestPlugin.cpp:24
-#, fuzzy
 msgctxt "Marble::MapQuestPlugin|"
 msgid "MapQuest Routing"
-msgstr "הר"
+msgstr "ניווט ב־MapQuest"
 
 #: src/plugins/runner/mapquest/MapQuestPlugin.cpp:29
-#, fuzzy
 msgctxt "Marble::MapQuestPlugin|"
 msgid "MapQuest"
-msgstr "הר"
+msgstr "MapQuest"
 
 #: src/plugins/runner/mapquest/MapQuestPlugin.cpp:44
 msgctxt "Marble::MapQuestPlugin|"
@@ -18210,10 +18205,10 @@ msgid "Favor"
 msgstr ""
 
 #: src/plugins/runner/monav/MonavConfigWidget.cpp:485
-#, fuzzy, qt-format
+#, qt-format
 msgctxt "QObject|"
 msgid "Downloading %1"
-msgstr "ההורדה נכשלה: %1."
+msgstr "%1 בהורדה"
 
 #: src/plugins/runner/monav/MonavConfigWidget.cpp:506
 #, qt-format
@@ -18237,10 +18232,9 @@ msgid "Are you sure you want to delete this map from the system?"
 msgstr ""
 
 #: src/plugins/runner/monav/MonavConfigWidget.cpp:642
-#, fuzzy
 msgctxt "Marble::MonavConfigWidget|"
 msgid "Remove Map"
-msgstr "מפה רגילה"
+msgstr "הסרת מפה"
 
 #: src/plugins/runner/monav/MonavConfigWidget.cpp:673
 msgctxt "QObject|"
@@ -18248,16 +18242,14 @@ msgid "Nothing to do."
 msgstr ""
 
 #: src/plugins/runner/monav/MonavConfigWidget.ui:20
-#, fuzzy
 msgctxt "MonavConfigWidget|"
 msgid "Monav Configuration"
-msgstr "הר"
+msgstr "הגדרות Monav"
 
 #: src/plugins/runner/monav/MonavConfigWidget.ui:43
-#, fuzzy
 msgctxt "MonavConfigWidget|"
 msgid "Configure"
-msgstr "הגדרת פקד השליטה על השמש"
+msgstr "הגדרה"
 
 #: src/plugins/runner/monav/MonavConfigWidget.ui:51
 msgctxt "MonavConfigWidget|"
@@ -18270,10 +18262,9 @@ msgid "Any"
 msgstr ""
 
 #: src/plugins/runner/monav/MonavConfigWidget.ui:107
-#, fuzzy
 msgctxt "MonavConfigWidget|"
 msgid "Manage Maps"
-msgstr "יוצר מפה"
+msgstr "ניהול מפות"
 
 #: src/plugins/runner/monav/MonavConfigWidget.ui:142
 msgctxt "MonavConfigWidget|"
@@ -18281,22 +18272,19 @@ msgid "Install New"
 msgstr ""
 
 #: src/plugins/runner/monav/MonavConfigWidget.ui:151
-#, fuzzy
 msgctxt "MonavConfigWidget|"
 msgid "Continent"
-msgstr "הגדרת פקד השליטה על השמש"
+msgstr "יבשת"
 
 #: src/plugins/runner/monav/MonavConfigWidget.ui:165
-#, fuzzy
 msgctxt "MonavConfigWidget|"
 msgid "Country"
-msgstr "מדינה:"
+msgstr "מדינה"
 
 #: src/plugins/runner/monav/MonavConfigWidget.ui:179
-#, fuzzy
 msgctxt "MonavConfigWidget|"
 msgid "Download Variant"
-msgstr "ההורדה הסתיימה."
+msgstr "הורדת הגוון"
 
 #: src/plugins/runner/monav/MonavConfigWidget.ui:193
 msgctxt "MonavConfigWidget|"
@@ -18319,7 +18307,6 @@ msgid "Abort"
 msgstr ""
 
 #: src/plugins/runner/monav/MonavMapsModel.cpp:43
-#, fuzzy
 msgctxt "Marble::MonavMapsModel|"
 msgid "Name"
 msgstr "שם"
@@ -18345,10 +18332,9 @@ msgid "Delete"
 msgstr ""
 
 #: src/plugins/runner/monav/MonavMapsModel.cpp:53
-#, fuzzy
 msgctxt "Marble::MonavMapsModel|"
 msgid "Date"
-msgstr "&נתונים"
+msgstr "תאריך"
 
 #: src/plugins/runner/monav/MonavPlugin.cpp:220
 msgctxt "Marble::MonavPlugin|"
@@ -18361,16 +18347,14 @@ msgid "The monav routing daemon does not seem to be installed on your system."
 msgstr ""
 
 #: src/plugins/runner/monav/MonavPlugin.cpp:236
-#, fuzzy
 msgctxt "Marble::MonavPlugin|"
 msgid "Monav Routing"
-msgstr "הר"
+msgstr "ניווט עם Monav"
 
 #: src/plugins/runner/monav/MonavPlugin.cpp:241
-#, fuzzy
 msgctxt "Marble::MonavPlugin|"
 msgid "Monav"
-msgstr "הר"
+msgstr "Monav"
 
 #: src/plugins/runner/monav/MonavPlugin.cpp:256
 msgctxt "Marble::MonavPlugin|"
@@ -18385,10 +18369,9 @@ msgstr "הר"
 
 #: src/plugins/runner/nominatim-reversegeocoding/NominatimReverseGeocodingPlugin.cpp:27
 #: src/plugins/runner/nominatim-search/NominatimSearchPlugin.cpp:27
-#, fuzzy
 msgctxt "Marble::NominatimPlugin|"
 msgid "OpenStreetMap Nominatim"
-msgstr "&פתיחת מפה..."
+msgstr "OpenStreetMap Nominatim"
 
 #: src/plugins/runner/nominatim-reversegeocoding/NominatimReverseGeocodingPlugin.cpp:42
 msgctxt "Marble::NominatimPlugin|"
@@ -18396,10 +18379,9 @@ msgid "Online reverse geocoding using the OpenStreetMap Nominatim service"
 msgstr ""
 
 #: src/plugins/runner/nominatim-search/NominatimSearchPlugin.cpp:22
-#, fuzzy
 msgctxt "Marble::NominatimPlugin|"
 msgid "OpenStreetMap Nominatim Search"
-msgstr "&פתיחת מפה..."
+msgstr "חיפוש Nominatim ב־OpenStreetMap"
 
 #: src/plugins/runner/nominatim-search/NominatimSearchPlugin.cpp:42
 msgctxt "Marble::NominatimPlugin|"
@@ -18427,16 +18409,14 @@ msgid "Worldwide routing using project-osrm.org"
 msgstr ""
 
 #: src/plugins/runner/openlocation-code-search/OpenLocationCodeSearchPlugin.cpp:19
-#, fuzzy
 msgctxt "Marble::OpenLocationCodeSearchPlugin|"
 msgid "Open Location Code Search"
-msgstr "מתחיל חיפוש"
+msgstr "חיפוש קוד מקום פתוח"
 
 #: src/plugins/runner/openlocation-code-search/OpenLocationCodeSearchPlugin.cpp:24
-#, fuzzy
 msgctxt "Marble::OpenLocationCodeSearchPlugin|"
 msgid "Open Location Code"
-msgstr "מתחיל חיפוש"
+msgstr "קוד מקום פתוח/Open Location Code"
 
 #: src/plugins/runner/openlocation-code-search/OpenLocationCodeSearchPlugin.cpp:39
 msgctxt "Marble::OpenLocationCodeSearchPlugin|"
@@ -18471,16 +18451,14 @@ msgid "This service requires an Internet connection."
 msgstr ""
 
 #: src/plugins/runner/openrouteservice/OpenRouteServicePlugin.cpp:24
-#, fuzzy
 msgctxt "Marble::OpenRouteServicePlugin|"
 msgid "OpenRouteService Routing"
-msgstr "הר"
+msgstr "ניווט עם OpenRouteService"
 
 #: src/plugins/runner/openrouteservice/OpenRouteServicePlugin.cpp:29
-#, fuzzy
 msgctxt "Marble::OpenRouteServicePlugin|"
 msgid "OpenRouteService"
-msgstr "ייצא מפה"
+msgstr "OpenRouteService"
 
 #: src/plugins/runner/openrouteservice/OpenRouteServicePlugin.cpp:44
 msgctxt "Marble::OpenRouteServicePlugin|"
@@ -18543,10 +18521,9 @@ msgid "Create GeoDataDocument from Osm Files"
 msgstr ""
 
 #: src/plugins/runner/osm/OsmPlugin.cpp:49
-#, fuzzy
 msgctxt "Marble::OsmPlugin|"
 msgid "OpenStreetMap Data"
-msgstr "&פתיחת מפה..."
+msgstr "נתוני OpenStreetMap"
 
 #: src/plugins/runner/pn2/Pn2Plugin.cpp:18
 msgctxt "Marble::Pn2Plugin|"
@@ -18594,22 +18571,19 @@ msgid "Fastest"
 msgstr ""
 
 #: src/plugins/runner/routino/RoutinoConfigWidget.ui:40
-#, fuzzy
 msgctxt "RoutinoConfigWidget|"
 msgid "Shortest"
-msgstr "תיאור קצר:"
+msgstr "הקצר ביותר"
 
 #: src/plugins/runner/routino/RoutinoPlugin.cpp:24
-#, fuzzy
 msgctxt "Marble::RoutinoPlugin|"
 msgid "Routino Routing"
-msgstr "הר"
+msgstr "ניווט רוטינו"
 
 #: src/plugins/runner/routino/RoutinoPlugin.cpp:29
-#, fuzzy
 msgctxt "Marble::RoutinoPlugin|"
 msgid "Routino"
-msgstr "הר"
+msgstr "רוטינו"
 
 #: src/plugins/runner/routino/RoutinoPlugin.cpp:44
 msgctxt "Marble::RoutinoPlugin|"
@@ -18632,10 +18606,9 @@ msgid "Wheelchair"
 msgstr ""
 
 #: src/plugins/runner/routino/RoutinoPlugin.cpp:76
-#, fuzzy
 msgctxt "Marble::RoutinoConfigWidget|"
 msgid "Bicycle"
-msgstr "עקוב אחר GPS"
+msgstr "אופניים"
 
 #: src/plugins/runner/routino/RoutinoPlugin.cpp:77
 msgctxt "Marble::RoutinoConfigWidget|"
@@ -18648,10 +18621,9 @@ msgid "Motorbike"
 msgstr ""
 
 #: src/plugins/runner/routino/RoutinoPlugin.cpp:79
-#, fuzzy
 msgctxt "Marble::RoutinoConfigWidget|"
 msgid "Motorcar"
-msgstr "עקוב אחר GPS"
+msgstr "רכב ממונע"
 
 #: src/plugins/runner/routino/RoutinoPlugin.cpp:80
 msgctxt "Marble::RoutinoConfigWidget|"
@@ -18699,10 +18671,9 @@ msgid "Traveling Salesman Routing"
 msgstr ""
 
 #: src/plugins/runner/yours/YoursConfigWidget.ui:17
-#, fuzzy
 msgctxt "YoursConfigWidget|"
 msgid "Transport:"
-msgstr "שם חלופי"
+msgstr "תעבורה:"
 
 #: src/plugins/runner/yours/YoursConfigWidget.ui:27
 msgctxt "YoursConfigWidget|"
@@ -18715,10 +18686,9 @@ msgid "Fastest"
 msgstr ""
 
 #: src/plugins/runner/yours/YoursConfigWidget.ui:40
-#, fuzzy
 msgctxt "YoursConfigWidget|"
 msgid "Shortest"
-msgstr "תיאור קצר:"
+msgstr "הקצר ביותר"
 
 #: src/plugins/runner/yours/YoursPlugin.cpp:20
 msgctxt "Marble::YoursPlugin|"
@@ -18726,16 +18696,14 @@ msgid "This service requires an Internet connection."
 msgstr ""
 
 #: src/plugins/runner/yours/YoursPlugin.cpp:25
-#, fuzzy
 msgctxt "Marble::YoursPlugin|"
 msgid "Yours Routing"
-msgstr "הר"
+msgstr "ניווט שלך"
 
 #: src/plugins/runner/yours/YoursPlugin.cpp:30
-#, fuzzy
 msgctxt "Marble::YoursPlugin|"
 msgid "Yours"
-msgstr "צוות התרגום של KDE ישראל"
+msgstr "שלך"
 
 #: src/plugins/runner/yours/YoursPlugin.cpp:45
 msgctxt "Marble::YoursPlugin|"
@@ -18748,34 +18716,29 @@ msgid "Pedestrian"
 msgstr ""
 
 #: src/plugins/runner/yours/YoursPlugin.cpp:75
-#, fuzzy
 msgctxt "Marble::YoursConfigWidget|"
 msgid "Bicycle"
-msgstr "עקוב אחר GPS"
+msgstr "אופניים"
 
 #: src/plugins/runner/yours/YoursPlugin.cpp:76
-#, fuzzy
 msgctxt "Marble::YoursConfigWidget|"
 msgid "Motorcar"
-msgstr "עקוב אחר GPS"
+msgstr "רכב ממונע"
 
 #: src/plugins/templates/floatitem/FITemplateFloatItem.cpp:44
-#, fuzzy
 msgctxt "Marble::FITemplateFloatItem|"
 msgid "FITemplate"
-msgstr "FITemplate"
+msgstr "תבנית פריט צף"
 
 #: src/plugins/templates/floatitem/FITemplateFloatItem.cpp:49
-#, fuzzy
 msgctxt "Marble::FITemplateFloatItem|"
 msgid "Float Item &Template"
-msgstr "&תבנית של פריט צף"
+msgstr "תבנית &פריט צף"
 
 #: src/plugins/templates/floatitem/FITemplateFloatItem.cpp:59
-#, fuzzy
 msgctxt "Marble::FITemplateFloatItem|"
 msgid "This is a template class for float items."
-msgstr "זהו מחלקה של תבנית עבור פריטים צפים."
+msgstr "זאת מחלקת תבניות לפריטים צפים"
 
 #, fuzzy
 #~ msgctxt "Marble::MainWindow|"
