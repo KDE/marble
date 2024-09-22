@@ -34,8 +34,8 @@ public:
     explicit RoutingPrivate(QObject *parent = nullptr);
 
     MarbleMap *m_marbleMap;
-    QMap<QString, Marble::RoutingProfile> m_profiles;
-    QString m_routingProfile;
+    QMap<Routing::RoutingProfile, Marble::RoutingProfile> m_profiles;
+    Routing::RoutingProfile m_routingProfile;
     QQmlComponent *m_waypointDelegate;
     QMap<int, QQuickItem *> m_waypointItems;
     RouteRequestModel *m_routeRequestModel;
@@ -313,9 +313,9 @@ void Routing::setMarbleMap(MarbleMap *marbleMap)
         QList<Marble::RoutingProfile> profiles = routingManager->profilesModel()->profiles();
         if (profiles.size() == 4) {
             /** @todo FIXME: Restrictive assumptions on available plugins and certain profile loading implementation */
-            d->m_profiles[QStringLiteral("Motorcar")] = profiles.at(0);
-            d->m_profiles[QStringLiteral("Bicycle")] = profiles.at(2);
-            d->m_profiles[QStringLiteral("Pedestrian")] = profiles.at(3);
+            d->m_profiles[Motorcar] = profiles.at(0);
+            d->m_profiles[Bicycle] = profiles.at(2);
+            d->m_profiles[Pedestrian] = profiles.at(3);
         } else {
             qDebug() << "Unexpected size of default routing profiles: " << profiles.size();
         }
@@ -332,12 +332,12 @@ MarbleMap *Routing::marbleMap()
     return d->m_marbleMap;
 }
 
-QString Routing::routingProfile() const
+Routing::RoutingProfile Routing::routingProfile() const
 {
     return d->m_routingProfile;
 }
 
-void Routing::setRoutingProfile(const QString &profile)
+void Routing::setRoutingProfile(Routing::RoutingProfile profile)
 {
     if (d->m_routingProfile != profile) {
         d->m_routingProfile = profile;

@@ -22,7 +22,7 @@ class Routing : public QQuickItem
 {
     Q_OBJECT
     Q_PROPERTY(MarbleMap *marbleMap READ marbleMap WRITE setMarbleMap NOTIFY marbleMapChanged)
-    Q_PROPERTY(QString routingProfile READ routingProfile WRITE setRoutingProfile NOTIFY routingProfileChanged)
+    Q_PROPERTY(RoutingProfile routingProfile READ routingProfile WRITE setRoutingProfile NOTIFY routingProfileChanged)
     Q_PROPERTY(bool hasRoute READ hasRoute NOTIFY hasRouteChanged)
     Q_PROPERTY(bool hasWaypoints READ hasWaypoints NOTIFY hasWaypointsChanged)
     Q_PROPERTY(RoutingModel *routingModel READ routingModel NOTIFY routingModelChanged)
@@ -30,7 +30,12 @@ class Routing : public QQuickItem
     Q_PROPERTY(RouteRequestModel *routeRequestModel READ routeRequestModel NOTIFY routeRequestModelChanged)
 
 public:
-    enum RoutingProfile { Motorcar, Bicycle, Pedestrian };
+    enum RoutingProfile {
+        Motorcar,
+        Bicycle,
+        Pedestrian,
+    };
+    Q_ENUM(RoutingProfile)
 
     explicit Routing(QQuickItem *parent = nullptr);
 
@@ -40,9 +45,9 @@ public:
 
     MarbleMap *marbleMap();
 
-    QString routingProfile() const;
+    RoutingProfile routingProfile() const;
 
-    void setRoutingProfile(const QString &profile);
+    void setRoutingProfile(RoutingProfile profile);
 
     bool hasRoute() const;
 
