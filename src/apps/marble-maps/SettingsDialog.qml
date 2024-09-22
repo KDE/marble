@@ -45,12 +45,12 @@ Item {
 
         Text {
             id: text
-            text: qsTr("Network Settings")
+            text: i18n("Network Settings")
         }
 
         CheckBox {
             id: wlanOnly
-            text: qsTr("Download Maps via WLAN only")
+            text: i18n("Download Maps via WLAN only")
             checked: settings.value("Network", "wlanOnly") === "true"
             onCheckedChanged: marbleMaps.wlanOnly = checked
         }
