@@ -17,7 +17,6 @@ qt_add_qml_module(marble-maps
         IconText.qml
         PositionButton.qml
         BoxedText.qml
-        ImageButton.qml
         WaypointImage.qml
         RoutingManager.qml
         PlacemarkDialog.qml
