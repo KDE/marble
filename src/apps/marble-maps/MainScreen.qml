@@ -70,6 +70,8 @@ Kirigami.ApplicationWindow {
 
         property alias showAccessibility: accessibilityAction.checked
 
+        isMenu: true
+
         Settings {
             id: sidePanelSettings
             property bool showUpdateInfo: Number(value("MarbleMaps", "updateInfoVersion", "0")) < 1
@@ -115,7 +117,7 @@ Kirigami.ApplicationWindow {
                     sidePanelSettings.value("MarbleMaps", "showAccessibility", "false") === "true"
                 }
             },
-            Kirigami.Action{ enabled: false},
+            Kirigami.Action{ separator: true },
             Kirigami.Action {
                 text: i18nc("@action:button", "About")
                 icon.name: 'help-about-symbolic'
