@@ -38,6 +38,10 @@ class Quaternion;
 
 class GEODATA_EXPORT GeoDataCoordinates
 {
+    Q_GADGET
+    Q_PROPERTY(qreal longitude READ longitude CONSTANT)
+    Q_PROPERTY(qreal latitude READ latitude CONSTANT)
+
     Q_DECLARE_TR_FUNCTIONS(GeoDataCoordinates)
 
 public:
