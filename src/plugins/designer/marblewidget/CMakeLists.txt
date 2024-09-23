@@ -7,6 +7,6 @@ INCLUDE_DIRECTORIES(
  ${Qt6Designer_INCLUDE_DIRS}
 )
 
-set( marbleplugin_SRCS MarbleWidgetPlugin.cpp )
+set( marbleplugin_SRCS MarbleWidgetPlugin.cpp MarbleWidgetPlugin.h)
 
 marble_add_designer_plugin( MarbleWidgetPlugin ${marbleplugin_SRCS} )

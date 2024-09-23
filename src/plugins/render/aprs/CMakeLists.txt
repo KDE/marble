@@ -20,11 +20,17 @@ set( aprs_SRCS AprsPlugin.cpp
                AprsObject.cpp
 	       AprsGatherer.cpp
 	       GeoAprsCoordinates.cpp
+               AprsObject.h
+               AprsGatherer.h
+               GeoAprsCoordinates.h
 	       ${CMAKE_CURRENT_BINARY_DIR}/AprsGatherer_mic_e.cpp
 
 	       AprsSource.cpp
 	       AprsTCPIP.cpp
 	       AprsFile.cpp
+               AprsSource.h
+               AprsTCPIP.h
+               AprsFile.h
 
 	       ${serial_src} )
 

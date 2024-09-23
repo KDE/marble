@@ -7,6 +7,6 @@ INCLUDE_DIRECTORIES(
  ${Qt6Designer_INCLUDE_DIRS}
 )
 
-set( latloneditplugin_SRCS LatLonEditPlugin.cpp )
+set( latloneditplugin_SRCS LatLonEditPlugin.cpp LatLonEditPlugin.h)
 
 marble_add_designer_plugin( LatLonEditPlugin ${latloneditplugin_SRCS} )
