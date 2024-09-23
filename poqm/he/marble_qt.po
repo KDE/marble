@@ -2404,292 +2404,6 @@ msgctxt "StarNames|"
 msgid "Vulpecula"
 msgstr ""
 
-#: src/apps/marble-maps/AboutDialog.qml:40
-msgctxt "AboutDialog|"
-msgid ""
-"<h3>Marble Maps</h3><p>Find your way! Marble Maps brings the highly detailed "
-"OpenStreetMap to your mobile devices. It features a crisp, beautiful map "
-"with an intuitive user interface. It's open source, entirely based on free "
-"data and open standards and respects your privacy.</p>"
-msgstr ""
-
-#: src/apps/marble-maps/AboutDialog.qml:64
-msgctxt "AboutDialog|"
-msgid ""
-"<h3>Support</h3><p>Do you have a question? Want to file a suggestion for "
-"improvement? Please use the <a href=\"https://forum.kde.org/viewforum.php?"
-"f=217\">Marble forum</a> to get in touch with fellow Marble users and "
-"developers. Further support channels are listed at <a href=\"https://marble."
-"kde.org/support.php\">marble.kde.org</a>. We are looking forward to your "
-"feedback!</p>"
-msgstr ""
-
-#: src/apps/marble-maps/AboutDialog.qml:89
-msgctxt "AboutDialog|"
-msgid ""
-"<h3>Development Team</h3><p>The main developers of this app are Dennis "
-"Nienhüser, Torsten Rahn, Sanjiban Bairagya, Friedrich W. H. Kossebau, Gábor "
-"Péterffy and Mikhail Ivchenko. They are part of more than 200 developers who "
-"already contributed to the Marble project. <br> Contact us via <a href="
-"\"https://mail.kde.org/mailman/listinfo/marble-devel\">marble-devel@kde.org</"
-"a>.</p>"
-msgstr ""
-
-#: src/apps/marble-maps/AboutDialog.qml:116
-msgctxt "AboutDialog|"
-msgid ""
-"<h3>Attribution</h3><p>The map is based on data from the <a href=\"https://"
-"www.openstreetmap.org\">OpenStreetMap</a> project, available under the <a "
-"href=\"https://opendatacommons.org/licenses/odbl/\">Open Database License</"
-"a>. Additionally public domain data from the <a href=\"https://www."
-"naturalearthdata.com/\">Natural Earth</a> project is used. The map style is "
-"influenced by and uses icons from <a href=\"https://github.com/gravitystorm/"
-"openstreetmap-carto\">OpenStreetMap Carto</a> (<a href=\"https://"
-"creativecommons.org/publicdomain/zero/1.0/\">CC0 Public Domain)</a>.</p>"
-msgstr ""
-
-#: src/apps/marble-maps/Bookmarks.qml:133
-#, fuzzy
-msgctxt "Bookmarks|"
-msgid "Removed"
-msgstr "מפה רגילה"
-
-#: src/apps/marble-maps/Bookmarks.qml:219
-msgctxt "Bookmarks|"
-msgid "Your bookmarks will appear here."
-msgstr ""
-
-#: src/apps/marble-maps/CurrentPosition.qml:65
-#, fuzzy
-msgctxt "CurrentPosition|"
-msgid "Follow Current Position"
-msgstr "מיקום נוכחי"
-
-#: src/apps/marble-maps/MainScreen.qml:17
-#: src/apps/marble-maps/MainScreen.qml:198
-#, fuzzy
-msgctxt "MainScreen|"
-msgid "Marble Maps"
-msgstr "יוצר מפה"
-
-#: src/apps/marble-maps/MainScreen.qml:89
-#, fuzzy
-msgctxt "MainScreen|"
-msgid "Settings"
-msgstr "&הגדרות"
-
-#: src/apps/marble-maps/MainScreen.qml:105
-#, fuzzy
-msgctxt "MainScreen|"
-msgid "Public Transport"
-msgstr "שם חלופי"
-
-#: src/apps/marble-maps/MainScreen.qml:120
-msgctxt "MainScreen|"
-msgid "Outdoor Activities"
-msgstr ""
-
-#: src/apps/marble-maps/MainScreen.qml:132
-msgctxt "MainScreen|"
-msgid "Accessibility"
-msgstr ""
-
-#: src/apps/marble-maps/MainScreen.qml:141
-#, fuzzy
-msgctxt "MainScreen|"
-msgid "About"
-msgstr "&אודות"
-
-#: src/apps/marble-maps/MainScreen.qml:152
-#, fuzzy
-msgctxt "MainScreen|"
-msgid "Bookmarks"
-msgstr "ייצא מפה"
-
-#: src/apps/marble-maps/MainScreen.qml:161
-msgctxt "MainScreen|"
-msgid "Layer Options"
-msgstr ""
-
-#: src/apps/marble-maps/MainScreen.qml:170
-#, fuzzy
-msgctxt "MainScreen|"
-msgid "Routing"
-msgstr "הר"
-
-#: src/apps/marble-maps/MainScreen.qml:399
-#, fuzzy, qt-format
-msgctxt "MainScreen|"
-msgid "%1 km"
-msgstr "%1 מ'"
-
-#: src/apps/marble-maps/MainScreen.qml:663
-msgctxt "MainScreen|"
-msgid "Press again to close."
-msgstr ""
-
-#: src/apps/marble-maps/NavigationInfoBar.qml:21
-#, fuzzy, qt-format
-msgctxt "NavigationInfoBar|"
-msgid "%1 km"
-msgstr "%1 מ'"
-
-#: src/apps/marble-maps/NavigationInfoBar.qml:23
-#: src/apps/marble-maps/NavigationInfoBar.qml:25
-#, fuzzy, qt-format
-msgctxt "NavigationInfoBar|"
-msgid "%1 m"
-msgstr "%1 מ'"
-
-#: src/apps/marble-maps/Options.qml:31
-msgctxt "Options|"
-msgid "<h3>Layer Options</h3>"
-msgstr ""
-
-#: src/apps/marble-maps/Options.qml:35
-#, fuzzy
-msgctxt "Options|"
-msgid "<h4>Public Transport Layers</h4>"
-msgstr "שם חלופי"
-
-#: src/apps/marble-maps/Options.qml:56
-msgctxt "Options|"
-msgid "<h4>Outdoor Activities Layers</h4>"
-msgstr ""
-
-#: src/apps/marble-maps/OutdoorActivities.qml:21
-msgctxt "OutdoorActivities|"
-msgid "Walkways"
-msgstr ""
-
-#: src/apps/marble-maps/OutdoorActivities.qml:26
-#, fuzzy
-msgctxt "OutdoorActivities|"
-msgid "Hiking Routes"
-msgstr "ייצא מפה"
-
-#: src/apps/marble-maps/OutdoorActivities.qml:31
-#, fuzzy
-msgctxt "OutdoorActivities|"
-msgid "Bicycle Routes"
-msgstr "עקוב אחר GPS"
-
-#: src/apps/marble-maps/OutdoorActivities.qml:36
-#, fuzzy
-msgctxt "OutdoorActivities|"
-msgid "Mountainbike Routes"
-msgstr "הר"
-
-#: src/apps/marble-maps/OutdoorActivities.qml:41
-#, fuzzy
-msgctxt "OutdoorActivities|"
-msgid "Inline Skating Routes"
-msgstr "ייצא מפה"
-
-#: src/apps/marble-maps/OutdoorActivities.qml:46
-#, fuzzy
-msgctxt "OutdoorActivities|"
-msgid "Bridleways"
-msgstr "גבולות"
-
-#: src/apps/marble-maps/PlacemarkDialog.qml:168
-msgctxt "PlacemarkDialog|"
-msgid "<h2>Routes</h2>"
-msgstr ""
-
-#: src/apps/marble-maps/ProfileSelectorMenu.qml:43
-#, fuzzy
-msgctxt "ProfileSelectorMenu|"
-msgid "Car (fastest)"
-msgstr "0 מ' (מים)"
-
-#: src/apps/marble-maps/ProfileSelectorMenu.qml:49
-#, fuzzy
-msgctxt "ProfileSelectorMenu|"
-msgid "Bicycle"
-msgstr "עקוב אחר GPS"
-
-#: src/apps/marble-maps/ProfileSelectorMenu.qml:55
-msgctxt "ProfileSelectorMenu|"
-msgid "Pedestrian"
-msgstr ""
-
-#: src/apps/marble-maps/PublicTransport.qml:21
-#, fuzzy
-msgctxt "PublicTransport|"
-msgid "Train"
-msgstr "פני שטח"
-
-#: src/apps/marble-maps/PublicTransport.qml:26
-msgctxt "PublicTransport|"
-msgid "Subway"
-msgstr ""
-
-#: src/apps/marble-maps/PublicTransport.qml:31
-msgctxt "PublicTransport|"
-msgid "Tram"
-msgstr ""
-
-#: src/apps/marble-maps/PublicTransport.qml:36
-msgctxt "PublicTransport|"
-msgid "Bus"
-msgstr ""
-
-#: src/apps/marble-maps/PublicTransport.qml:41
-msgctxt "PublicTransport|"
-msgid "Trolley Bus"
-msgstr ""
-
-#: src/apps/marble-maps/RouteEditor.qml:62
-msgctxt "RouteEditor|"
-msgid "Search for places to integrate them into a route."
-msgstr ""
-
-#: src/apps/marble-maps/Search.qml:161
-msgctxt "Search|"
-msgid "Your bookmarks will appear here."
-msgstr ""
-
-#: src/apps/marble-maps/SearchField.qml:70
-#, fuzzy
-msgctxt "SearchField|"
-msgid "Search"
-msgstr "&חפש"
-
-#: src/apps/marble-maps/SettingsDialog.qml:48
-#, fuzzy
-msgctxt "SettingsDialog|"
-msgid "Network Settings"
-msgstr "&הגדרות"
-
-#: src/apps/marble-maps/SettingsDialog.qml:53
-#, fuzzy
-msgctxt "SettingsDialog|"
-msgid "Download Maps via WLAN only"
-msgstr "ההורדה הסתיימה."
-
-#: src/apps/marble-maps/SidePanel.qml:49 src/apps/marble-maps/SidePanel.qml:113
-#, fuzzy
-msgctxt "SidePanel|"
-msgid "Public Transport"
-msgstr "שם חלופי"
-
-#: src/apps/marble-maps/SidePanel.qml:70 src/apps/marble-maps/SidePanel.qml:126
-msgctxt "SidePanel|"
-msgid "Outdoor Activities"
-msgstr ""
-
-#: src/apps/marble-maps/SidePanel.qml:89
-msgctxt "SidePanel|"
-msgid "Accessibility"
-msgstr ""
-
-#: src/apps/marble-maps/SidePanel.qml:101
-#, fuzzy
-msgctxt "SidePanel|"
-msgid "About Marble Maps…"
-msgstr "אודות Marble"
-
 #: src/apps/marble-qt/qtmain.cpp:89
 #, fuzzy
 msgctxt "Marble::MainWindow|"
@@ -7955,29 +7669,29 @@ msgctxt "QObject|"
 msgid "This is an Invalid File"
 msgstr "הקובץ הוא לא קובץ DGML 2.0 תקני"
 
-#: src/lib/marble/GeoDataTreeModel.cpp:179
+#: src/lib/marble/GeoDataTreeModel.cpp:156
 #, fuzzy
 msgctxt "Marble::GeoDataTreeModel|"
 msgid "Name"
 msgstr "שם"
 
-#: src/lib/marble/GeoDataTreeModel.cpp:181
+#: src/lib/marble/GeoDataTreeModel.cpp:158
 msgctxt "Marble::GeoDataTreeModel|"
 msgid "Type"
 msgstr ""
 
-#: src/lib/marble/GeoDataTreeModel.cpp:183
+#: src/lib/marble/GeoDataTreeModel.cpp:160
 #, fuzzy
 msgctxt "Marble::GeoDataTreeModel|"
 msgid "Popularity"
 msgstr "אוכלוסייה:"
 
-#: src/lib/marble/GeoDataTreeModel.cpp:185
+#: src/lib/marble/GeoDataTreeModel.cpp:162
 msgctxt "Marble::GeoDataTreeModel|Popularity index"
 msgid "PopIndex"
 msgstr ""
 
-#: src/lib/marble/GeoDataTreeModel.cpp:236
+#: src/lib/marble/GeoDataTreeModel.cpp:232
 msgctxt "Marble::GeoDataTreeModel|"
 msgid "Playlist"
 msgstr ""
@@ -10343,7 +10057,7 @@ msgctxt "MarbleCloudSyncSettingsWidget|"
 msgid "Test Login"
 msgstr "תוסף בדיקה"
 
-#: src/lib/marble/MarbleGlobal.h:239
+#: src/lib/marble/MarbleGlobal.h:229
 msgctxt "Marble|"
 msgid "not available"
 msgstr ""
@@ -18739,6 +18453,131 @@ msgstr "תבנית &פריט צף"
 msgctxt "Marble::FITemplateFloatItem|"
 msgid "This is a template class for float items."
 msgstr "זאת מחלקת תבניות לפריטים צפים"
+
+#, fuzzy
+#~ msgctxt "Bookmarks|"
+#~ msgid "Removed"
+#~ msgstr "מפה רגילה"
+
+#, fuzzy
+#~ msgctxt "CurrentPosition|"
+#~ msgid "Follow Current Position"
+#~ msgstr "מיקום נוכחי"
+
+#, fuzzy
+#~ msgctxt "MainScreen|"
+#~ msgid "Marble Maps"
+#~ msgstr "יוצר מפה"
+
+#, fuzzy
+#~ msgctxt "MainScreen|"
+#~ msgid "Settings"
+#~ msgstr "&הגדרות"
+
+#, fuzzy
+#~ msgctxt "MainScreen|"
+#~ msgid "Public Transport"
+#~ msgstr "שם חלופי"
+
+#, fuzzy
+#~ msgctxt "MainScreen|"
+#~ msgid "About"
+#~ msgstr "&אודות"
+
+#, fuzzy
+#~ msgctxt "MainScreen|"
+#~ msgid "Bookmarks"
+#~ msgstr "ייצא מפה"
+
+#, fuzzy
+#~ msgctxt "MainScreen|"
+#~ msgid "Routing"
+#~ msgstr "הר"
+
+#, fuzzy
+#~ msgctxt "MainScreen|"
+#~ msgid "%1 km"
+#~ msgstr "%1 מ'"
+
+#, fuzzy
+#~ msgctxt "NavigationInfoBar|"
+#~ msgid "%1 km"
+#~ msgstr "%1 מ'"
+
+#, fuzzy
+#~ msgctxt "NavigationInfoBar|"
+#~ msgid "%1 m"
+#~ msgstr "%1 מ'"
+
+#, fuzzy
+#~ msgctxt "Options|"
+#~ msgid "<h4>Public Transport Layers</h4>"
+#~ msgstr "שם חלופי"
+
+#, fuzzy
+#~ msgctxt "OutdoorActivities|"
+#~ msgid "Hiking Routes"
+#~ msgstr "ייצא מפה"
+
+#, fuzzy
+#~ msgctxt "OutdoorActivities|"
+#~ msgid "Bicycle Routes"
+#~ msgstr "עקוב אחר GPS"
+
+#, fuzzy
+#~ msgctxt "OutdoorActivities|"
+#~ msgid "Mountainbike Routes"
+#~ msgstr "הר"
+
+#, fuzzy
+#~ msgctxt "OutdoorActivities|"
+#~ msgid "Inline Skating Routes"
+#~ msgstr "ייצא מפה"
+
+#, fuzzy
+#~ msgctxt "OutdoorActivities|"
+#~ msgid "Bridleways"
+#~ msgstr "גבולות"
+
+#, fuzzy
+#~ msgctxt "ProfileSelectorMenu|"
+#~ msgid "Car (fastest)"
+#~ msgstr "0 מ' (מים)"
+
+#, fuzzy
+#~ msgctxt "ProfileSelectorMenu|"
+#~ msgid "Bicycle"
+#~ msgstr "עקוב אחר GPS"
+
+#, fuzzy
+#~ msgctxt "PublicTransport|"
+#~ msgid "Train"
+#~ msgstr "פני שטח"
+
+#, fuzzy
+#~ msgctxt "SearchField|"
+#~ msgid "Search"
+#~ msgstr "&חפש"
+
+#, fuzzy
+#~ msgctxt "SettingsDialog|"
+#~ msgid "Network Settings"
+#~ msgstr "&הגדרות"
+
+#, fuzzy
+#~ msgctxt "SettingsDialog|"
+#~ msgid "Download Maps via WLAN only"
+#~ msgstr "ההורדה הסתיימה."
+
+#, fuzzy
+#~ msgctxt "SidePanel|"
+#~ msgid "Public Transport"
+#~ msgstr "שם חלופי"
+
+#, fuzzy
+#~ msgctxt "SidePanel|"
+#~ msgid "About Marble Maps…"
+#~ msgstr "אודות Marble"
 
 #, fuzzy
 #~ msgctxt "Marble::MainWindow|"

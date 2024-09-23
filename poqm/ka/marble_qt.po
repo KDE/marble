@@ -2323,287 +2323,6 @@ msgctxt "StarNames|"
 msgid "Vulpecula"
 msgstr "მელია"
 
-#: src/apps/marble-maps/AboutDialog.qml:40
-msgctxt "AboutDialog|"
-msgid ""
-"<h3>Marble Maps</h3><p>Find your way! Marble Maps brings the highly detailed "
-"OpenStreetMap to your mobile devices. It features a crisp, beautiful map "
-"with an intuitive user interface. It's open source, entirely based on free "
-"data and open standards and respects your privacy.</p>"
-msgstr ""
-"<h3>Marble-ის რუკები</h3><p>იპოვე შენი გზა! Marble-ის რუკები თქვენს მობილურ "
-"მოწყობილობებს უაღრესად დეტალურ OpenStreetMap- ს მოაქვს. მას აქვს crisp, "
-"ლამაზი რუკა ინტუიციური მომხმარებლის ინტერფეისით. ის არის ღია წყარო, რომელიც "
-"მთლიანად ეფუძნება უფასო მონაცემებს და ღია სტანდარტებს და პატივს სცემს თქვენს "
-"კონფიდენციალობას.</p>"
-
-#: src/apps/marble-maps/AboutDialog.qml:64
-msgctxt "AboutDialog|"
-msgid ""
-"<h3>Support</h3><p>Do you have a question? Want to file a suggestion for "
-"improvement? Please use the <a href=\"https://forum.kde.org/viewforum.php?"
-"f=217\">Marble forum</a> to get in touch with fellow Marble users and "
-"developers. Further support channels are listed at <a href=\"https://marble."
-"kde.org/support.php\">marble.kde.org</a>. We are looking forward to your "
-"feedback!</p>"
-msgstr ""
-"<h3>მხარდაჭერა</h3><p>კითხვა გაქვს? გსურთ შეიტანოთ წინადადება გაუმჯობესების "
-"შესახებ? გთხოვთ, გამოიყენოთ <a href=\"https://forum.kde.org/viewforum.php?"
-"f=217\">Marble-ის ფორუმი</a> , რომ დაუკავშირდეთ Marble-ის მომხმარებლებს და "
-"დეველოპერებს. შემდგომი მხარდაჭერის არხები ჩამოთვლილია <a href=\"https://"
-"marble.kde.org/support.php\">marble.kde.org</a>. ჩვენ ველით თქვენს "
-"გამოხმაურებას!</p>"
-
-#: src/apps/marble-maps/AboutDialog.qml:89
-msgctxt "AboutDialog|"
-msgid ""
-"<h3>Development Team</h3><p>The main developers of this app are Dennis "
-"Nienhüser, Torsten Rahn, Sanjiban Bairagya, Friedrich W. H. Kossebau, Gábor "
-"Péterffy and Mikhail Ivchenko. They are part of more than 200 developers who "
-"already contributed to the Marble project. <br> Contact us via <a href="
-"\"https://mail.kde.org/mailman/listinfo/marble-devel\">marble-devel@kde.org</"
-"a>.</p>"
-msgstr ""
-"<h3>განვითარების გუნდი</h3><p>ამ აპლიკაციის მთავარი დეველოპერები არიან დენის "
-"ნიენჰუსერი, ტორსტენ რანი, სანჯიბან ბაირაგია, ფრიდრიხ ვ. ჰ. კოსებაუ, გაბორ "
-"პეტერფი და მიხაილ ივჩენკო. ისინი 200-ზე მეტი დეველოპერის ნაწილია, რომლებმაც "
-"უკვე წვლილი შეიტანეს Marble-ის პროექტში. <br> დაგვიკავშირდით <a href="
-"\"https://mail.kde.org/mailman/listinfo/marble-devel\">marble-devel@kde.org "
-"საშუალებით</a>.</p>"
-
-#: src/apps/marble-maps/AboutDialog.qml:116
-msgctxt "AboutDialog|"
-msgid ""
-"<h3>Attribution</h3><p>The map is based on data from the <a href=\"https://"
-"www.openstreetmap.org\">OpenStreetMap</a> project, available under the <a "
-"href=\"https://opendatacommons.org/licenses/odbl/\">Open Database License</"
-"a>. Additionally public domain data from the <a href=\"https://www."
-"naturalearthdata.com/\">Natural Earth</a> project is used. The map style is "
-"influenced by and uses icons from <a href=\"https://github.com/gravitystorm/"
-"openstreetmap-carto\">OpenStreetMap Carto</a> (<a href=\"https://"
-"creativecommons.org/publicdomain/zero/1.0/\">CC0 Public Domain)</a>.</p>"
-msgstr ""
-
-#: src/apps/marble-maps/Bookmarks.qml:133
-msgctxt "Bookmarks|"
-msgid "Removed"
-msgstr "ამოღებულია"
-
-#: src/apps/marble-maps/Bookmarks.qml:219
-msgctxt "Bookmarks|"
-msgid "Your bookmarks will appear here."
-msgstr "თქვენი სანიშნები აქ გამოჩნდება."
-
-#: src/apps/marble-maps/CurrentPosition.qml:65
-msgctxt "CurrentPosition|"
-msgid "Follow Current Position"
-msgstr "მიმდინარე მდებარეობის მიყოლა"
-
-#: src/apps/marble-maps/MainScreen.qml:17
-#: src/apps/marble-maps/MainScreen.qml:198
-msgctxt "MainScreen|"
-msgid "Marble Maps"
-msgstr "Marble რუკები"
-
-#: src/apps/marble-maps/MainScreen.qml:89
-msgctxt "MainScreen|"
-msgid "Settings"
-msgstr "მორგება"
-
-#: src/apps/marble-maps/MainScreen.qml:105
-msgctxt "MainScreen|"
-msgid "Public Transport"
-msgstr "საჯარო ტრანსპორტი"
-
-#: src/apps/marble-maps/MainScreen.qml:120
-msgctxt "MainScreen|"
-msgid "Outdoor Activities"
-msgstr "აქტიური დასვენება"
-
-#: src/apps/marble-maps/MainScreen.qml:132
-msgctxt "MainScreen|"
-msgid "Accessibility"
-msgstr "წვდომადობა"
-
-#: src/apps/marble-maps/MainScreen.qml:141
-msgctxt "MainScreen|"
-msgid "About"
-msgstr "შესახებ"
-
-#: src/apps/marble-maps/MainScreen.qml:152
-msgctxt "MainScreen|"
-msgid "Bookmarks"
-msgstr "სანიშნები"
-
-#: src/apps/marble-maps/MainScreen.qml:161
-msgctxt "MainScreen|"
-msgid "Layer Options"
-msgstr "ფენის პარამეტრები"
-
-#: src/apps/marble-maps/MainScreen.qml:170
-msgctxt "MainScreen|"
-msgid "Routing"
-msgstr "რაუტინგი"
-
-#: src/apps/marble-maps/MainScreen.qml:399
-#, qt-format
-msgctxt "MainScreen|"
-msgid "%1 km"
-msgstr "%1 კმ"
-
-#: src/apps/marble-maps/MainScreen.qml:663
-msgctxt "MainScreen|"
-msgid "Press again to close."
-msgstr "დასახურად კიდევ ერთხელ დააწექით."
-
-#: src/apps/marble-maps/NavigationInfoBar.qml:21
-#, qt-format
-msgctxt "NavigationInfoBar|"
-msgid "%1 km"
-msgstr "%1 კმ"
-
-#: src/apps/marble-maps/NavigationInfoBar.qml:23
-#: src/apps/marble-maps/NavigationInfoBar.qml:25
-#, qt-format
-msgctxt "NavigationInfoBar|"
-msgid "%1 m"
-msgstr "%1 მ"
-
-#: src/apps/marble-maps/Options.qml:31
-msgctxt "Options|"
-msgid "<h3>Layer Options</h3>"
-msgstr "<h3>ფენის მორგება</h3>"
-
-#: src/apps/marble-maps/Options.qml:35
-msgctxt "Options|"
-msgid "<h4>Public Transport Layers</h4>"
-msgstr "<h4>საჯარო ტრანსპორტის ფენები</h4>"
-
-#: src/apps/marble-maps/Options.qml:56
-msgctxt "Options|"
-msgid "<h4>Outdoor Activities Layers</h4>"
-msgstr "<h4>აქტიური დასვენების დონეები</h4>"
-
-#: src/apps/marble-maps/OutdoorActivities.qml:21
-msgctxt "OutdoorActivities|"
-msgid "Walkways"
-msgstr "ხეივანი"
-
-#: src/apps/marble-maps/OutdoorActivities.qml:26
-msgctxt "OutdoorActivities|"
-msgid "Hiking Routes"
-msgstr "სალაშქრო ტრასები"
-
-#: src/apps/marble-maps/OutdoorActivities.qml:31
-msgctxt "OutdoorActivities|"
-msgid "Bicycle Routes"
-msgstr "ველოტრასები"
-
-#: src/apps/marble-maps/OutdoorActivities.qml:36
-msgctxt "OutdoorActivities|"
-msgid "Mountainbike Routes"
-msgstr "სამთო ველოტრასები"
-
-#: src/apps/marble-maps/OutdoorActivities.qml:41
-msgctxt "OutdoorActivities|"
-msgid "Inline Skating Routes"
-msgstr "როლერბლეიდინგის მარშრუტები"
-
-#: src/apps/marble-maps/OutdoorActivities.qml:46
-msgctxt "OutdoorActivities|"
-msgid "Bridleways"
-msgstr "საჯირითო ტრასები"
-
-#: src/apps/marble-maps/PlacemarkDialog.qml:168
-msgctxt "PlacemarkDialog|"
-msgid "<h2>Routes</h2>"
-msgstr "<h2>გზები</h2>"
-
-#: src/apps/marble-maps/ProfileSelectorMenu.qml:43
-msgctxt "ProfileSelectorMenu|"
-msgid "Car (fastest)"
-msgstr "მანქანა (უსწრაფესი)"
-
-#: src/apps/marble-maps/ProfileSelectorMenu.qml:49
-msgctxt "ProfileSelectorMenu|"
-msgid "Bicycle"
-msgstr "ველოსიპედი"
-
-#: src/apps/marble-maps/ProfileSelectorMenu.qml:55
-msgctxt "ProfileSelectorMenu|"
-msgid "Pedestrian"
-msgstr "საფეხმავლო"
-
-#: src/apps/marble-maps/PublicTransport.qml:21
-msgctxt "PublicTransport|"
-msgid "Train"
-msgstr "მატარებელი"
-
-#: src/apps/marble-maps/PublicTransport.qml:26
-msgctxt "PublicTransport|"
-msgid "Subway"
-msgstr "მეტრო"
-
-#: src/apps/marble-maps/PublicTransport.qml:31
-msgctxt "PublicTransport|"
-msgid "Tram"
-msgstr "ტრამვაი"
-
-#: src/apps/marble-maps/PublicTransport.qml:36
-msgctxt "PublicTransport|"
-msgid "Bus"
-msgstr "მატარებელი"
-
-#: src/apps/marble-maps/PublicTransport.qml:41
-msgctxt "PublicTransport|"
-msgid "Trolley Bus"
-msgstr "ტროლებუსი"
-
-#: src/apps/marble-maps/RouteEditor.qml:62
-msgctxt "RouteEditor|"
-msgid "Search for places to integrate them into a route."
-msgstr "ადგილების ძებნა მათი გზაში ინტეგრაციისთვის."
-
-#: src/apps/marble-maps/Search.qml:161
-msgctxt "Search|"
-msgid "Your bookmarks will appear here."
-msgstr "თქვენი სანიშნები აქ გამოჩნდება."
-
-#: src/apps/marble-maps/SearchField.qml:70
-msgctxt "SearchField|"
-msgid "Search"
-msgstr "ძებნა"
-
-#: src/apps/marble-maps/SettingsDialog.qml:48
-msgctxt "SettingsDialog|"
-msgid "Network Settings"
-msgstr "ქსელის მორგება"
-
-#: src/apps/marble-maps/SettingsDialog.qml:53
-msgctxt "SettingsDialog|"
-msgid "Download Maps via WLAN only"
-msgstr "რუკების, მხოლოდ, WLAN-ით გადმოწერა"
-
-#: src/apps/marble-maps/SidePanel.qml:49 src/apps/marble-maps/SidePanel.qml:113
-msgctxt "SidePanel|"
-msgid "Public Transport"
-msgstr "საჯარო ტრანსპორტი"
-
-#: src/apps/marble-maps/SidePanel.qml:70 src/apps/marble-maps/SidePanel.qml:126
-msgctxt "SidePanel|"
-msgid "Outdoor Activities"
-msgstr "გარე აქტივობები"
-
-#: src/apps/marble-maps/SidePanel.qml:89
-msgctxt "SidePanel|"
-msgid "Accessibility"
-msgstr "წვდომადობა"
-
-#: src/apps/marble-maps/SidePanel.qml:101
-msgctxt "SidePanel|"
-msgid "About Marble Maps…"
-msgstr "Marble-ის რუკების შესახებ…"
-
 #: src/apps/marble-qt/qtmain.cpp:89
 msgctxt "Marble::MainWindow|"
 msgid "Marble - Virtual Globe"
@@ -7580,27 +7299,27 @@ msgctxt "QObject|"
 msgid "This is an Invalid File"
 msgstr "ეს არასწორი ფაილია"
 
-#: src/lib/marble/GeoDataTreeModel.cpp:179
+#: src/lib/marble/GeoDataTreeModel.cpp:156
 msgctxt "Marble::GeoDataTreeModel|"
 msgid "Name"
 msgstr "სახელი"
 
-#: src/lib/marble/GeoDataTreeModel.cpp:181
+#: src/lib/marble/GeoDataTreeModel.cpp:158
 msgctxt "Marble::GeoDataTreeModel|"
 msgid "Type"
 msgstr "ტიპით"
 
-#: src/lib/marble/GeoDataTreeModel.cpp:183
+#: src/lib/marble/GeoDataTreeModel.cpp:160
 msgctxt "Marble::GeoDataTreeModel|"
 msgid "Popularity"
 msgstr "პოპულარობა"
 
-#: src/lib/marble/GeoDataTreeModel.cpp:185
+#: src/lib/marble/GeoDataTreeModel.cpp:162
 msgctxt "Marble::GeoDataTreeModel|Popularity index"
 msgid "PopIndex"
 msgstr "პოპ. ინდექსი"
 
-#: src/lib/marble/GeoDataTreeModel.cpp:236
+#: src/lib/marble/GeoDataTreeModel.cpp:232
 msgctxt "Marble::GeoDataTreeModel|"
 msgid "Playlist"
 msgstr "დასაკრავი სია"
@@ -10187,7 +9906,7 @@ msgctxt "MarbleCloudSyncSettingsWidget|"
 msgid "Test Login"
 msgstr "სატესტო შესვლა"
 
-#: src/lib/marble/MarbleGlobal.h:239
+#: src/lib/marble/MarbleGlobal.h:229
 msgctxt "Marble|"
 msgid "not available"
 msgstr "მიუწვდომელია"
@@ -13084,6 +12803,7 @@ msgid ""
 "Cannot merge a node from polygon's outer boundary with a node from one of "
 "its inner boundaries."
 msgstr ""
+"ვერ შერწყმა კვანძის პოლიგონის გარე საზღვარი კვანძის ერთი მისი შიდა საზღვრები."
 
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:757
 msgctxt "Marble::AnnotatePlugin|"
@@ -13096,6 +12816,8 @@ msgid ""
 "Cannot merge the selected nodes. Most probably this would make the polygon's "
 "outer boundary not contain all its inner boundary nodes."
 msgstr ""
+"მონიშნული კვანძების შერწყმა შეუძლებელია. სავარაუდოდ, ის პოლიგონის გარე "
+"საზღვარს ისე შეცვლის, რომ არ შეიცავს მის შიდა სასაზღვრო კვანძებს."
 
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:863
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:941
@@ -13217,6 +12939,8 @@ msgid ""
 "Cannot delete one of the selected nodes. Most probably this would make the "
 "polygon's outer boundary not contain all its inner boundary nodes."
 msgstr ""
+"ვერ წაშლის ერთ-ერთ არჩეულ კვანძს. სავარაუდოდ, ეს გახდის პოლიგონის გარე "
+"საზღვარს, რომელიც არ შეიცავს მის შიდა სასაზღვრო კვანძებს."
 
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:1404
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:1424
@@ -14094,6 +13818,10 @@ msgid ""
 "you want more information on a specific event, select it and click OK.</p></"
 "body></html>"
 msgstr ""
+"<html><head/><body><p>Marble-მა აღმოაჩინა, რომ უახლოეს მომავალში მოხდება "
+"შემდეგი <span style=\" font-weight:600;\">დაბნელების მოვლენები</span> . თუ "
+"გსურთ მეტი ინფორმაცია კონკრეტული მოვლენის შესახებ, აირჩიეთ იგი და დააჭირეთ "
+"ღილაკს დიახ.</p></body></html>"
 
 #: src/plugins/render/eclipses/EclipsesReminderDialog.ui:33
 msgctxt "EclipsesReminderDialog|"
@@ -14134,6 +13862,7 @@ msgstr "ტრეკი: "
 msgctxt "Marble::ElevationProfileContextMenu|"
 msgid "Create a route or load a track from file to view its elevation profile."
 msgstr ""
+"შექმენით მარშრუტი ან ჩატვირთეთ ის ფაილიდან, რომ მისი სიმაღლის პროფილი იხილოთ."
 
 #: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:97
 msgctxt "Marble::ElevationProfileFloatItem|"
@@ -14149,11 +13878,13 @@ msgstr "&სიმაღლის პროფილი"
 msgctxt "Marble::ElevationProfileFloatItem|"
 msgid "A float item that shows the elevation profile of the current route."
 msgstr ""
+"მცურავი ელემენტი, რომელიც აჩვენებს მიმდინარე მარშრუტის სიმაღლის პროფილს."
 
 #: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:190
 msgctxt "Marble::ElevationProfileFloatItem|"
 msgid "Create a route or load a track from file to view its elevation profile."
 msgstr ""
+"შექმენით მარშრუტი ან ჩატვირთეთ ის ფაილიდან, რომ მისი სიმაღლის პროფილი იხილოთ."
 
 #: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:197
 msgctxt "Marble::ElevationProfileFloatItem|"
@@ -14161,6 +13892,8 @@ msgid ""
 "Not enough points in the current viewport.\n"
 "Try to disable 'Zoom to viewport'."
 msgstr ""
+"არ არის საკმარისი წერტილები მიმდინარე ხედში.\n"
+"შეეცადეთ გამორთოთ \"ხედის წერტილის გადიდება\"."
 
 #: src/plugins/render/elevationprofilefloatitem/ElevationProfileFloatItem.cpp:280
 #, qt-format
@@ -14206,7 +13939,7 @@ msgstr "სიმაღლის პროფილის მარკ&ერი
 #: src/plugins/render/elevationprofilemarker/ElevationProfileMarker.cpp:87
 msgctxt "Marble::ElevationProfileMarker|"
 msgid "Marks the current elevation of the elevation profile on the map."
-msgstr ""
+msgstr "დანიშნავს სიმაღლის პროფილის მიმდინარე სიმაღლეს რუკაზე."
 
 #: src/plugins/render/elevationprofilemarker/ElevationProfileMarker.cpp:136
 msgctxt "Marble::ElevationProfileMarker|"
@@ -14392,6 +14125,7 @@ msgstr "&სახელიანი ჭდეები"
 msgctxt "GraticuleConfigWidget|"
 msgid "Show Labels for Prime meridian, Equator, Tropics."
 msgstr ""
+"ჭდეების ჩვენება ნულოვანი მერიდიანისთვის, ეკვატორისთვის და ტროპიკებისთვის."
 
 #: src/plugins/render/graticule/GraticuleConfigWidget.ui:1415
 msgctxt "GraticuleConfigWidget|"
@@ -14446,7 +14180,7 @@ msgstr "მთავარი მერიდიანი"
 #: src/plugins/render/graticule/GraticulePlugin.cpp:297
 msgctxt "Marble::GraticulePlugin|"
 msgid "Antimeridian"
-msgstr ""
+msgstr "180-ე მერიდიანი"
 
 #: src/plugins/render/graticule/GraticulePlugin.cpp:363
 msgctxt "Marble::GraticulePlugin|"
@@ -14498,7 +14232,7 @@ msgstr "&დეტალების ჩვენება"
 #: src/plugins/render/mapscale/MapScaleConfigWidget.ui:14
 msgctxt "MapScaleConfigWidget|"
 msgid "Configure Scale Bar Plugin"
-msgstr ""
+msgstr "მასშტაბის ზოლის დამატების მორგება"
 
 #: src/plugins/render/mapscale/MapScaleConfigWidget.ui:20
 msgctxt "MapScaleConfigWidget|"
@@ -14606,7 +14340,7 @@ msgstr "ჩასადები"
 #: src/plugins/render/measure/MeasureConfigDialog.ui:80
 msgctxt "MeasureConfigDialog|"
 msgid "Bearing Change"
-msgstr ""
+msgstr "პელენგის შეცვლა"
 
 #: src/plugins/render/measure/MeasureConfigDialog.ui:90
 msgctxt "MeasureConfigDialog|"
@@ -14992,6 +14726,8 @@ msgid ""
 "Shows OpenDesktop users' avatars and some extra information about them on "
 "the map."
 msgstr ""
+"აჩვენებს OpenDesktop მომხმარებლების ავატარებს და მათ შესახებ დამატებით "
+"ინფორმაციას რუკაზე."
 
 #: src/plugins/render/overviewmap/OverviewMap.cpp:73
 msgctxt "Marble::OverviewMap|"
@@ -15196,7 +14932,7 @@ msgstr "აირჩიეთ ფერი"
 #: src/plugins/render/positionmarker/PositionMarkerConfigWidget.ui:14
 msgctxt "PositionMarkerConfigWidget|"
 msgid "Configure Position Marker Plugin"
-msgstr ""
+msgstr "მდებარეობის დანიშვნის დამატების მორგება"
 
 #: src/plugins/render/positionmarker/PositionMarkerConfigWidget.ui:20
 msgctxt "PositionMarkerConfigWidget|"
@@ -15224,6 +14960,8 @@ msgctxt "PositionMarkerConfigWidget|"
 msgid ""
 "Position marker images indicating the direction should point north (top)."
 msgstr ""
+"მდებარეობის მარკერის გამოსახულებები, რომელიც ნიშნავს, რომ მიმართულება "
+"ჩრდილოეთით (ზემოთ) უნდა მიუთითებდეს."
 
 #: src/plugins/render/positionmarker/PositionMarkerConfigWidget.ui:150
 msgctxt "PositionMarkerConfigWidget|"
@@ -15243,7 +14981,7 @@ msgstr "&სიზუსტე:"
 #: src/plugins/render/positionmarker/PositionMarkerConfigWidget.ui:191
 msgctxt "PositionMarkerConfigWidget|"
 msgid "Color of the position marker's accuracy indicator."
-msgstr ""
+msgstr "მდებარეობის მარკერის სიზუსტის მაჩვენებლის ფერი."
 
 #: src/plugins/render/positionmarker/PositionMarkerConfigWidget.ui:201
 msgctxt "PositionMarkerConfigWidget|"
@@ -15253,7 +14991,7 @@ msgstr "კვალი:"
 #: src/plugins/render/positionmarker/PositionMarkerConfigWidget.ui:220
 msgctxt "PositionMarkerConfigWidget|"
 msgid "Color of the position marker's trail."
-msgstr ""
+msgstr "მდებარეობის მარკერის კვალის ფერი."
 
 #: src/plugins/render/postalcode/PostalCodePlugin.cpp:33
 #: src/plugins/render/postalcode/PostalCodePlugin.cpp:38
@@ -17018,12 +16756,12 @@ msgstr "Geo URI"
 #: src/plugins/runner/geouri/GeoUriPlugin.cpp:40
 msgctxt "Marble::GeoUriPlugin|"
 msgid "Input of geographic coordinates by the geo URI scheme"
-msgstr ""
+msgstr "გეოგრაფიული კოორდინატების შეყვანა geo URI სქემით"
 
 #: src/plugins/runner/gosmore-reversegeocoding/GosmoreReverseGeocodingPlugin.cpp:26
 msgctxt "Marble::GosmorePlugin|"
 msgid "Gosmore Reverse Geocoding"
-msgstr ""
+msgstr "Gosmore-ის უკუგეოკოდირება"
 
 #: src/plugins/runner/gosmore-reversegeocoding/GosmoreReverseGeocodingPlugin.cpp:31
 #: src/plugins/runner/gosmore-routing/GosmoreRoutingPlugin.cpp:31
@@ -17034,7 +16772,7 @@ msgstr "Gosmore"
 #: src/plugins/runner/gosmore-reversegeocoding/GosmoreReverseGeocodingPlugin.cpp:46
 msgctxt "Marble::GosmorePlugin|"
 msgid "Offline reverse geocoding using Gosmore."
-msgstr ""
+msgstr "ხაზგარეშე უკუგეოკოდირება Gosmore-ის გამოყენებით."
 
 #: src/plugins/runner/gosmore-routing/GosmoreRoutingPlugin.cpp:26
 msgctxt "Marble::GosmorePlugin|"
@@ -17455,7 +17193,7 @@ msgstr "ლოკალური ბაზა"
 #: src/plugins/runner/localdatabase/LocalDatabasePlugin.cpp:39
 msgctxt "Marble::LocalDatabasePlugin|"
 msgid "Searches the internal Marble database for placemarks"
-msgstr ""
+msgstr "მოძებნის ადგილის მარკერებს შიდა Marble-ის მონაცემთა ბაზაში"
 
 #: src/plugins/runner/log/LogPlugin.cpp:18
 msgctxt "Marble::LogfilePlugin|"
@@ -17514,6 +17252,9 @@ msgid ""
 "href=\"https://developer.mapquest.com/plan_purchase/steps/business_edition/"
 "business_edition_free/register\">here</a>."
 msgstr ""
+"MapQuest-ით მარშრუტზაციისთვის აუცილებელია AppKey. მისი რეგისტრაცია <a href="
+"\"https://developer.mapquest.com/plan_purchase/steps/business_edition/"
+"business_edition_free/register\">აქ</a> შეგიძლიათ."
 
 #: src/plugins/runner/mapquest/MapQuestPlugin.cpp:19
 msgctxt "Marble::MapQuestPlugin|"
@@ -17739,7 +17480,7 @@ msgstr "ინტერნეტგარეშე მარშრუტებ�
 #: src/plugins/runner/nominatim-reversegeocoding/NominatimReverseGeocodingPlugin.cpp:22
 msgctxt "Marble::NominatimPlugin|"
 msgid "OpenStreetMap Nominatim Reverse Geocoding"
-msgstr ""
+msgstr "OpenStreetMap Nominatim-ის უკუგეოკოდირება"
 
 #: src/plugins/runner/nominatim-reversegeocoding/NominatimReverseGeocodingPlugin.cpp:27
 #: src/plugins/runner/nominatim-search/NominatimSearchPlugin.cpp:27
@@ -17750,7 +17491,7 @@ msgstr "OpenStreetMap Nominatim"
 #: src/plugins/runner/nominatim-reversegeocoding/NominatimReverseGeocodingPlugin.cpp:42
 msgctxt "Marble::NominatimPlugin|"
 msgid "Online reverse geocoding using the OpenStreetMap Nominatim service"
-msgstr ""
+msgstr "ინტერნეტში უკუგეოკოდირება სერვისით OpenStreetMap Nominatim"
 
 #: src/plugins/runner/nominatim-search/NominatimSearchPlugin.cpp:22
 msgctxt "Marble::NominatimPlugin|"
@@ -17760,7 +17501,7 @@ msgstr "OpenStreetMap Nominatim-ში ძებნა"
 #: src/plugins/runner/nominatim-search/NominatimSearchPlugin.cpp:42
 msgctxt "Marble::NominatimPlugin|"
 msgid "Online search for placemarks using the OpenStreetMap Nominatim service"
-msgstr ""
+msgstr "ინტერნეტში ადგილის მარკერების ძებნა სერვისით OpenStreetMap Nominatim"
 
 #: src/plugins/runner/open-source-routing-machine/OSRMPlugin.cpp:17
 msgctxt "Marble::OSRMPlugin|"
@@ -18115,6 +17856,224 @@ msgstr "მცურავი ელემენტის &ნიმუში"
 msgctxt "Marble::FITemplateFloatItem|"
 msgid "This is a template class for float items."
 msgstr "ეს ნიმუშია მცურავი ელემენტებისთვის."
+
+#~ msgctxt "AboutDialog|"
+#~ msgid ""
+#~ "<h3>Marble Maps</h3><p>Find your way! Marble Maps brings the highly "
+#~ "detailed OpenStreetMap to your mobile devices. It features a crisp, "
+#~ "beautiful map with an intuitive user interface. It's open source, "
+#~ "entirely based on free data and open standards and respects your privacy."
+#~ "</p>"
+#~ msgstr ""
+#~ "<h3>Marble-ის რუკები</h3><p>იპოვე შენი გზა! Marble-ის რუკები თქვენს "
+#~ "მობილურ მოწყობილობებს უაღრესად დეტალურ OpenStreetMap- ს მოაქვს. მას აქვს "
+#~ "crisp, ლამაზი რუკა ინტუიციური მომხმარებლის ინტერფეისით. ის არის ღია "
+#~ "წყარო, რომელიც მთლიანად ეფუძნება უფასო მონაცემებს და ღია სტანდარტებს და "
+#~ "პატივს სცემს თქვენს კონფიდენციალობას.</p>"
+
+#~ msgctxt "AboutDialog|"
+#~ msgid ""
+#~ "<h3>Support</h3><p>Do you have a question? Want to file a suggestion for "
+#~ "improvement? Please use the <a href=\"https://forum.kde.org/viewforum.php?"
+#~ "f=217\">Marble forum</a> to get in touch with fellow Marble users and "
+#~ "developers. Further support channels are listed at <a href=\"https://"
+#~ "marble.kde.org/support.php\">marble.kde.org</a>. We are looking forward "
+#~ "to your feedback!</p>"
+#~ msgstr ""
+#~ "<h3>მხარდაჭერა</h3><p>კითხვა გაქვს? გსურთ შეიტანოთ წინადადება "
+#~ "გაუმჯობესების შესახებ? გთხოვთ, გამოიყენოთ <a href=\"https://forum.kde.org/"
+#~ "viewforum.php?f=217\">Marble-ის ფორუმი</a> , რომ დაუკავშირდეთ Marble-ის "
+#~ "მომხმარებლებს და დეველოპერებს. შემდგომი მხარდაჭერის არხები ჩამოთვლილია <a "
+#~ "href=\"https://marble.kde.org/support.php\">marble.kde.org</a>. ჩვენ "
+#~ "ველით თქვენს გამოხმაურებას!</p>"
+
+#~ msgctxt "AboutDialog|"
+#~ msgid ""
+#~ "<h3>Development Team</h3><p>The main developers of this app are Dennis "
+#~ "Nienhüser, Torsten Rahn, Sanjiban Bairagya, Friedrich W. H. Kossebau, "
+#~ "Gábor Péterffy and Mikhail Ivchenko. They are part of more than 200 "
+#~ "developers who already contributed to the Marble project. <br> Contact us "
+#~ "via <a href=\"https://mail.kde.org/mailman/listinfo/marble-devel\">marble-"
+#~ "devel@kde.org</a>.</p>"
+#~ msgstr ""
+#~ "<h3>განვითარების გუნდი</h3><p>ამ აპლიკაციის მთავარი დეველოპერები არიან "
+#~ "დენის ნიენჰუსერი, ტორსტენ რანი, სანჯიბან ბაირაგია, ფრიდრიხ ვ. ჰ. კოსებაუ, "
+#~ "გაბორ პეტერფი და მიხაილ ივჩენკო. ისინი 200-ზე მეტი დეველოპერის ნაწილია, "
+#~ "რომლებმაც უკვე წვლილი შეიტანეს Marble-ის პროექტში. <br> დაგვიკავშირდით <a "
+#~ "href=\"https://mail.kde.org/mailman/listinfo/marble-devel\">marble-"
+#~ "devel@kde.org საშუალებით</a>.</p>"
+
+#~ msgctxt "Bookmarks|"
+#~ msgid "Removed"
+#~ msgstr "ამოღებულია"
+
+#~ msgctxt "Bookmarks|"
+#~ msgid "Your bookmarks will appear here."
+#~ msgstr "თქვენი სანიშნები აქ გამოჩნდება."
+
+#~ msgctxt "CurrentPosition|"
+#~ msgid "Follow Current Position"
+#~ msgstr "მიმდინარე მდებარეობის მიყოლა"
+
+#~ msgctxt "MainScreen|"
+#~ msgid "Marble Maps"
+#~ msgstr "Marble რუკები"
+
+#~ msgctxt "MainScreen|"
+#~ msgid "Settings"
+#~ msgstr "მორგება"
+
+#~ msgctxt "MainScreen|"
+#~ msgid "Public Transport"
+#~ msgstr "საჯარო ტრანსპორტი"
+
+#~ msgctxt "MainScreen|"
+#~ msgid "Outdoor Activities"
+#~ msgstr "აქტიური დასვენება"
+
+#~ msgctxt "MainScreen|"
+#~ msgid "Accessibility"
+#~ msgstr "წვდომადობა"
+
+#~ msgctxt "MainScreen|"
+#~ msgid "About"
+#~ msgstr "შესახებ"
+
+#~ msgctxt "MainScreen|"
+#~ msgid "Bookmarks"
+#~ msgstr "სანიშნები"
+
+#~ msgctxt "MainScreen|"
+#~ msgid "Layer Options"
+#~ msgstr "ფენის პარამეტრები"
+
+#~ msgctxt "MainScreen|"
+#~ msgid "Routing"
+#~ msgstr "რაუტინგი"
+
+#~ msgctxt "MainScreen|"
+#~ msgid "%1 km"
+#~ msgstr "%1 კმ"
+
+#~ msgctxt "MainScreen|"
+#~ msgid "Press again to close."
+#~ msgstr "დასახურად კიდევ ერთხელ დააწექით."
+
+#~ msgctxt "NavigationInfoBar|"
+#~ msgid "%1 km"
+#~ msgstr "%1 კმ"
+
+#~ msgctxt "NavigationInfoBar|"
+#~ msgid "%1 m"
+#~ msgstr "%1 მ"
+
+#~ msgctxt "Options|"
+#~ msgid "<h3>Layer Options</h3>"
+#~ msgstr "<h3>ფენის მორგება</h3>"
+
+#~ msgctxt "Options|"
+#~ msgid "<h4>Public Transport Layers</h4>"
+#~ msgstr "<h4>საჯარო ტრანსპორტის ფენები</h4>"
+
+#~ msgctxt "Options|"
+#~ msgid "<h4>Outdoor Activities Layers</h4>"
+#~ msgstr "<h4>აქტიური დასვენების დონეები</h4>"
+
+#~ msgctxt "OutdoorActivities|"
+#~ msgid "Walkways"
+#~ msgstr "ხეივანი"
+
+#~ msgctxt "OutdoorActivities|"
+#~ msgid "Hiking Routes"
+#~ msgstr "სალაშქრო ტრასები"
+
+#~ msgctxt "OutdoorActivities|"
+#~ msgid "Bicycle Routes"
+#~ msgstr "ველოტრასები"
+
+#~ msgctxt "OutdoorActivities|"
+#~ msgid "Mountainbike Routes"
+#~ msgstr "სამთო ველოტრასები"
+
+#~ msgctxt "OutdoorActivities|"
+#~ msgid "Inline Skating Routes"
+#~ msgstr "როლერბლეიდინგის მარშრუტები"
+
+#~ msgctxt "OutdoorActivities|"
+#~ msgid "Bridleways"
+#~ msgstr "საჯირითო ტრასები"
+
+#~ msgctxt "PlacemarkDialog|"
+#~ msgid "<h2>Routes</h2>"
+#~ msgstr "<h2>გზები</h2>"
+
+#~ msgctxt "ProfileSelectorMenu|"
+#~ msgid "Car (fastest)"
+#~ msgstr "მანქანა (უსწრაფესი)"
+
+#~ msgctxt "ProfileSelectorMenu|"
+#~ msgid "Bicycle"
+#~ msgstr "ველოსიპედი"
+
+#~ msgctxt "ProfileSelectorMenu|"
+#~ msgid "Pedestrian"
+#~ msgstr "საფეხმავლო"
+
+#~ msgctxt "PublicTransport|"
+#~ msgid "Train"
+#~ msgstr "მატარებელი"
+
+#~ msgctxt "PublicTransport|"
+#~ msgid "Subway"
+#~ msgstr "მეტრო"
+
+#~ msgctxt "PublicTransport|"
+#~ msgid "Tram"
+#~ msgstr "ტრამვაი"
+
+#~ msgctxt "PublicTransport|"
+#~ msgid "Bus"
+#~ msgstr "მატარებელი"
+
+#~ msgctxt "PublicTransport|"
+#~ msgid "Trolley Bus"
+#~ msgstr "ტროლებუსი"
+
+#~ msgctxt "RouteEditor|"
+#~ msgid "Search for places to integrate them into a route."
+#~ msgstr "ადგილების ძებნა მათი გზაში ინტეგრაციისთვის."
+
+#~ msgctxt "Search|"
+#~ msgid "Your bookmarks will appear here."
+#~ msgstr "თქვენი სანიშნები აქ გამოჩნდება."
+
+#~ msgctxt "SearchField|"
+#~ msgid "Search"
+#~ msgstr "ძებნა"
+
+#~ msgctxt "SettingsDialog|"
+#~ msgid "Network Settings"
+#~ msgstr "ქსელის მორგება"
+
+#~ msgctxt "SettingsDialog|"
+#~ msgid "Download Maps via WLAN only"
+#~ msgstr "რუკების, მხოლოდ, WLAN-ით გადმოწერა"
+
+#~ msgctxt "SidePanel|"
+#~ msgid "Public Transport"
+#~ msgstr "საჯარო ტრანსპორტი"
+
+#~ msgctxt "SidePanel|"
+#~ msgid "Outdoor Activities"
+#~ msgstr "გარე აქტივობები"
+
+#~ msgctxt "SidePanel|"
+#~ msgid "Accessibility"
+#~ msgstr "წვდომადობა"
+
+#~ msgctxt "SidePanel|"
+#~ msgid "About Marble Maps…"
+#~ msgstr "Marble-ის რუკების შესახებ…"
 
 #~ msgctxt "OpenCachingCacheDialog|KDE::DoNotExtract"
 #~ msgid "TextLabel"

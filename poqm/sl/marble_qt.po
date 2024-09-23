@@ -2330,295 +2330,6 @@ msgctxt "StarNames|"
 msgid "Vulpecula"
 msgstr "Lisička"
 
-#: src/apps/marble-maps/AboutDialog.qml:40
-msgctxt "AboutDialog|"
-msgid ""
-"<h3>Marble Maps</h3><p>Find your way! Marble Maps brings the highly detailed "
-"OpenStreetMap to your mobile devices. It features a crisp, beautiful map "
-"with an intuitive user interface. It's open source, entirely based on free "
-"data and open standards and respects your privacy.</p>"
-msgstr ""
-"<h3>Karte Marble</h3><p>Poiščite vašo pot! Karte Marble omogočajo prikaz "
-"visokokakovostnega zemljevida OpenStreetMap na vaših prenosnih napravah. "
-"OpenStreetMap ponuja prelep zemljevid, ki ga upravljate preko intuitivnega "
-"uporabniškega vmesnika. Gre za odprtokoden projekt, v celoti temelječ na "
-"prostih podatkih in odprtih standardih, ki poleg tega spoštuje vašo "
-"zasebnost.</p>"
-
-#: src/apps/marble-maps/AboutDialog.qml:64
-msgctxt "AboutDialog|"
-msgid ""
-"<h3>Support</h3><p>Do you have a question? Want to file a suggestion for "
-"improvement? Please use the <a href=\"https://forum.kde.org/viewforum.php?"
-"f=217\">Marble forum</a> to get in touch with fellow Marble users and "
-"developers. Further support channels are listed at <a href=\"https://marble."
-"kde.org/support.php\">marble.kde.org</a>. We are looking forward to your "
-"feedback!</p>"
-msgstr ""
-"<h3>Podpora</h3><p>Ali imate vprašanje? Ali bi želeli predlagati izboljšavo? "
-"Uporabite <a href=\"https://forum.kde.org/viewforum.php?f=217\">forum za "
-"Marble</a>, da stopite v stik z drugimi uporabniki Marble in njegovimi "
-"razvijalci. Več podpornih kanalov lahko najdete na <a href=\"https://marble."
-"kde.org/support.php\">marble.kde.org</a>. Veselimo se vašega odziva!</p>"
-
-#: src/apps/marble-maps/AboutDialog.qml:89
-msgctxt "AboutDialog|"
-msgid ""
-"<h3>Development Team</h3><p>The main developers of this app are Dennis "
-"Nienhüser, Torsten Rahn, Sanjiban Bairagya, Friedrich W. H. Kossebau, Gábor "
-"Péterffy and Mikhail Ivchenko. They are part of more than 200 developers who "
-"already contributed to the Marble project. <br> Contact us via <a href="
-"\"https://mail.kde.org/mailman/listinfo/marble-devel\">marble-devel@kde.org</"
-"a>.</p>"
-msgstr ""
-"<h3>Razvojna ekipa</h3><p>Glavni razvijalci tega programa so Dennis "
-"Nienhüser, Torsten Rahn, Sanjiban Bairagya, Friedrich W. H. Kossebau, Gábor "
-"Péterffy in Mikhail Ivchenko. So del več kot 200 razvijalcev, ki so že "
-"prispevali k projektu Marble.<br>Z nami lahko stopite v stik preko <a href="
-"\"https://mail.kde.org/mailman/listinfo/marble-devel\">marble-devel@kde.org</"
-"a>.</p>"
-
-#: src/apps/marble-maps/AboutDialog.qml:116
-msgctxt "AboutDialog|"
-msgid ""
-"<h3>Attribution</h3><p>The map is based on data from the <a href=\"https://"
-"www.openstreetmap.org\">OpenStreetMap</a> project, available under the <a "
-"href=\"https://opendatacommons.org/licenses/odbl/\">Open Database License</"
-"a>. Additionally public domain data from the <a href=\"https://www."
-"naturalearthdata.com/\">Natural Earth</a> project is used. The map style is "
-"influenced by and uses icons from <a href=\"https://github.com/gravitystorm/"
-"openstreetmap-carto\">OpenStreetMap Carto</a> (<a href=\"https://"
-"creativecommons.org/publicdomain/zero/1.0/\">CC0 Public Domain)</a>.</p>"
-msgstr ""
-"<h3>Omemba</h3><p>Karta temelji na podatkih iz projekta <a href=\"https://"
-"www.openstreetmap.org\">OpenStreetMap</a>, ki je na voljo pod licenco <a "
-"href=\"http://opendatacommons.org/licenses/odbl/\">Open Database License</"
-"a>. Dodatno so uporabljeni javni podatki iz projekta <a href=\"http://www."
-"naturalearthdata.com/\">Natural Earth</a>. Slog karte, vključno z ikonami, "
-"je povzet po <a href=\"https://github.com/gravitystorm/openstreetmap-carto"
-"\">OpenStreetMap Carto</a> (<a href=\"http://creativecommons.org/"
-"publicdomain/zero/1.0/\">CC0 Public Domain)</a>.</p>"
-
-#: src/apps/marble-maps/Bookmarks.qml:133
-msgctxt "Bookmarks|"
-msgid "Removed"
-msgstr "Odstranjeno"
-
-#: src/apps/marble-maps/Bookmarks.qml:219
-msgctxt "Bookmarks|"
-msgid "Your bookmarks will appear here."
-msgstr "Tu se bodo pojavili vaši zaznamki."
-
-#: src/apps/marble-maps/CurrentPosition.qml:65
-msgctxt "CurrentPosition|"
-msgid "Follow Current Position"
-msgstr "Sledi trenutnemu položaju"
-
-#: src/apps/marble-maps/MainScreen.qml:17
-#: src/apps/marble-maps/MainScreen.qml:198
-msgctxt "MainScreen|"
-msgid "Marble Maps"
-msgstr "Karte Marble"
-
-#: src/apps/marble-maps/MainScreen.qml:89
-msgctxt "MainScreen|"
-msgid "Settings"
-msgstr "Nastavitve"
-
-#: src/apps/marble-maps/MainScreen.qml:105
-msgctxt "MainScreen|"
-msgid "Public Transport"
-msgstr "Javni prevoz"
-
-#: src/apps/marble-maps/MainScreen.qml:120
-msgctxt "MainScreen|"
-msgid "Outdoor Activities"
-msgstr "Aktivnosti zunaj"
-
-#: src/apps/marble-maps/MainScreen.qml:132
-msgctxt "MainScreen|"
-msgid "Accessibility"
-msgstr "Dostopnost"
-
-#: src/apps/marble-maps/MainScreen.qml:141
-msgctxt "MainScreen|"
-msgid "About"
-msgstr "O"
-
-#: src/apps/marble-maps/MainScreen.qml:152
-msgctxt "MainScreen|"
-msgid "Bookmarks"
-msgstr "Zaznamki"
-
-#: src/apps/marble-maps/MainScreen.qml:161
-msgctxt "MainScreen|"
-msgid "Layer Options"
-msgstr "Možnosti plasti"
-
-#: src/apps/marble-maps/MainScreen.qml:170
-msgctxt "MainScreen|"
-msgid "Routing"
-msgstr "Usmerjanje"
-
-#: src/apps/marble-maps/MainScreen.qml:399
-#, qt-format
-msgctxt "MainScreen|"
-msgid "%1 km"
-msgstr "%1 km"
-
-#: src/apps/marble-maps/MainScreen.qml:663
-msgctxt "MainScreen|"
-msgid "Press again to close."
-msgstr "Pritisnite še enkrat za zaprtje."
-
-#: src/apps/marble-maps/NavigationInfoBar.qml:21
-#, qt-format
-msgctxt "NavigationInfoBar|"
-msgid "%1 km"
-msgstr "%1 km"
-
-#: src/apps/marble-maps/NavigationInfoBar.qml:23
-#: src/apps/marble-maps/NavigationInfoBar.qml:25
-#, qt-format
-msgctxt "NavigationInfoBar|"
-msgid "%1 m"
-msgstr "%1 m"
-
-#: src/apps/marble-maps/Options.qml:31
-msgctxt "Options|"
-msgid "<h3>Layer Options</h3>"
-msgstr "<h3>Možnosti plasti</h3>"
-
-#: src/apps/marble-maps/Options.qml:35
-msgctxt "Options|"
-msgid "<h4>Public Transport Layers</h4>"
-msgstr "<h4>Plasti javnega prevoza</h4>"
-
-#: src/apps/marble-maps/Options.qml:56
-msgctxt "Options|"
-msgid "<h4>Outdoor Activities Layers</h4>"
-msgstr "<h4>Plasti aktivnosti zunaj</h4>"
-
-#: src/apps/marble-maps/OutdoorActivities.qml:21
-msgctxt "OutdoorActivities|"
-msgid "Walkways"
-msgstr "Peš poti"
-
-#: src/apps/marble-maps/OutdoorActivities.qml:26
-msgctxt "OutdoorActivities|"
-msgid "Hiking Routes"
-msgstr "Sprehajalne poti"
-
-#: src/apps/marble-maps/OutdoorActivities.qml:31
-msgctxt "OutdoorActivities|"
-msgid "Bicycle Routes"
-msgstr "Kolesarske poti"
-
-#: src/apps/marble-maps/OutdoorActivities.qml:36
-msgctxt "OutdoorActivities|"
-msgid "Mountainbike Routes"
-msgstr "Poti za gorska kolesa"
-
-#: src/apps/marble-maps/OutdoorActivities.qml:41
-msgctxt "OutdoorActivities|"
-msgid "Inline Skating Routes"
-msgstr "Poti za rolkanje"
-
-#: src/apps/marble-maps/OutdoorActivities.qml:46
-msgctxt "OutdoorActivities|"
-msgid "Bridleways"
-msgstr "Mostički"
-
-#: src/apps/marble-maps/PlacemarkDialog.qml:168
-msgctxt "PlacemarkDialog|"
-msgid "<h2>Routes</h2>"
-msgstr "<h2>Poti</h2>"
-
-#: src/apps/marble-maps/ProfileSelectorMenu.qml:43
-msgctxt "ProfileSelectorMenu|"
-msgid "Car (fastest)"
-msgstr "Avto (najhitreje)"
-
-#: src/apps/marble-maps/ProfileSelectorMenu.qml:49
-msgctxt "ProfileSelectorMenu|"
-msgid "Bicycle"
-msgstr "Kolo"
-
-#: src/apps/marble-maps/ProfileSelectorMenu.qml:55
-msgctxt "ProfileSelectorMenu|"
-msgid "Pedestrian"
-msgstr "Peš"
-
-#: src/apps/marble-maps/PublicTransport.qml:21
-msgctxt "PublicTransport|"
-msgid "Train"
-msgstr "Železnica"
-
-#: src/apps/marble-maps/PublicTransport.qml:26
-msgctxt "PublicTransport|"
-msgid "Subway"
-msgstr "Podzemna železnica"
-
-#: src/apps/marble-maps/PublicTransport.qml:31
-msgctxt "PublicTransport|"
-msgid "Tram"
-msgstr "Tramvaj"
-
-#: src/apps/marble-maps/PublicTransport.qml:36
-msgctxt "PublicTransport|"
-msgid "Bus"
-msgstr "Avtobus"
-
-#: src/apps/marble-maps/PublicTransport.qml:41
-msgctxt "PublicTransport|"
-msgid "Trolley Bus"
-msgstr "Trolejbus"
-
-#: src/apps/marble-maps/RouteEditor.qml:62
-msgctxt "RouteEditor|"
-msgid "Search for places to integrate them into a route."
-msgstr "Poiščite mesta in jih vgradite v pot."
-
-#: src/apps/marble-maps/Search.qml:161
-msgctxt "Search|"
-msgid "Your bookmarks will appear here."
-msgstr "Tukaj se bodo pojavili vaši zaznamki."
-
-#: src/apps/marble-maps/SearchField.qml:70
-msgctxt "SearchField|"
-msgid "Search"
-msgstr "Poišči"
-
-#: src/apps/marble-maps/SettingsDialog.qml:48
-msgctxt "SettingsDialog|"
-msgid "Network Settings"
-msgstr "Nastavitve omrežja"
-
-#: src/apps/marble-maps/SettingsDialog.qml:53
-msgctxt "SettingsDialog|"
-msgid "Download Maps via WLAN only"
-msgstr "Naloži karte samo prek WLAN"
-
-#: src/apps/marble-maps/SidePanel.qml:49 src/apps/marble-maps/SidePanel.qml:113
-msgctxt "SidePanel|"
-msgid "Public Transport"
-msgstr "Javni prevoz"
-
-#: src/apps/marble-maps/SidePanel.qml:70 src/apps/marble-maps/SidePanel.qml:126
-msgctxt "SidePanel|"
-msgid "Outdoor Activities"
-msgstr "Aktivnosti zunaj"
-
-#: src/apps/marble-maps/SidePanel.qml:89
-msgctxt "SidePanel|"
-msgid "Accessibility"
-msgstr "Dostopnost"
-
-#: src/apps/marble-maps/SidePanel.qml:101
-msgctxt "SidePanel|"
-msgid "About Marble Maps…"
-msgstr "O kartah Marble…"
-
 #: src/apps/marble-qt/qtmain.cpp:89
 msgctxt "Marble::MainWindow|"
 msgid "Marble - Virtual Globe"
@@ -7616,27 +7327,27 @@ msgctxt "QObject|"
 msgid "This is an Invalid File"
 msgstr "To ni veljavna datoteka"
 
-#: src/lib/marble/GeoDataTreeModel.cpp:179
+#: src/lib/marble/GeoDataTreeModel.cpp:156
 msgctxt "Marble::GeoDataTreeModel|"
 msgid "Name"
 msgstr "Ime"
 
-#: src/lib/marble/GeoDataTreeModel.cpp:181
+#: src/lib/marble/GeoDataTreeModel.cpp:158
 msgctxt "Marble::GeoDataTreeModel|"
 msgid "Type"
 msgstr "Vrsta"
 
-#: src/lib/marble/GeoDataTreeModel.cpp:183
+#: src/lib/marble/GeoDataTreeModel.cpp:160
 msgctxt "Marble::GeoDataTreeModel|"
 msgid "Popularity"
 msgstr "Priljubljenost"
 
-#: src/lib/marble/GeoDataTreeModel.cpp:185
+#: src/lib/marble/GeoDataTreeModel.cpp:162
 msgctxt "Marble::GeoDataTreeModel|Popularity index"
 msgid "PopIndex"
 msgstr "KazaloPriljubljenosti"
 
-#: src/lib/marble/GeoDataTreeModel.cpp:236
+#: src/lib/marble/GeoDataTreeModel.cpp:232
 msgctxt "Marble::GeoDataTreeModel|"
 msgid "Playlist"
 msgstr "Seznam predvajanja"
@@ -10223,7 +9934,7 @@ msgctxt "MarbleCloudSyncSettingsWidget|"
 msgid "Test Login"
 msgstr "Preizkusna prijava"
 
-#: src/lib/marble/MarbleGlobal.h:239
+#: src/lib/marble/MarbleGlobal.h:229
 msgctxt "Marble|"
 msgid "not available"
 msgstr "ni na voljo"
@@ -18167,6 +17878,246 @@ msgstr "Predloga plavajočega predmeta"
 msgctxt "Marble::FITemplateFloatItem|"
 msgid "This is a template class for float items."
 msgstr "Ta razred je predloga za plavajoče predmete."
+
+#~ msgctxt "AboutDialog|"
+#~ msgid ""
+#~ "<h3>Marble Maps</h3><p>Find your way! Marble Maps brings the highly "
+#~ "detailed OpenStreetMap to your mobile devices. It features a crisp, "
+#~ "beautiful map with an intuitive user interface. It's open source, "
+#~ "entirely based on free data and open standards and respects your privacy."
+#~ "</p>"
+#~ msgstr ""
+#~ "<h3>Karte Marble</h3><p>Poiščite vašo pot! Karte Marble omogočajo prikaz "
+#~ "visokokakovostnega zemljevida OpenStreetMap na vaših prenosnih napravah. "
+#~ "OpenStreetMap ponuja prelep zemljevid, ki ga upravljate preko "
+#~ "intuitivnega uporabniškega vmesnika. Gre za odprtokoden projekt, v celoti "
+#~ "temelječ na prostih podatkih in odprtih standardih, ki poleg tega "
+#~ "spoštuje vašo zasebnost.</p>"
+
+#~ msgctxt "AboutDialog|"
+#~ msgid ""
+#~ "<h3>Support</h3><p>Do you have a question? Want to file a suggestion for "
+#~ "improvement? Please use the <a href=\"https://forum.kde.org/viewforum.php?"
+#~ "f=217\">Marble forum</a> to get in touch with fellow Marble users and "
+#~ "developers. Further support channels are listed at <a href=\"https://"
+#~ "marble.kde.org/support.php\">marble.kde.org</a>. We are looking forward "
+#~ "to your feedback!</p>"
+#~ msgstr ""
+#~ "<h3>Podpora</h3><p>Ali imate vprašanje? Ali bi želeli predlagati "
+#~ "izboljšavo? Uporabite <a href=\"https://forum.kde.org/viewforum.php?"
+#~ "f=217\">forum za Marble</a>, da stopite v stik z drugimi uporabniki "
+#~ "Marble in njegovimi razvijalci. Več podpornih kanalov lahko najdete na <a "
+#~ "href=\"https://marble.kde.org/support.php\">marble.kde.org</a>. Veselimo "
+#~ "se vašega odziva!</p>"
+
+#~ msgctxt "AboutDialog|"
+#~ msgid ""
+#~ "<h3>Development Team</h3><p>The main developers of this app are Dennis "
+#~ "Nienhüser, Torsten Rahn, Sanjiban Bairagya, Friedrich W. H. Kossebau, "
+#~ "Gábor Péterffy and Mikhail Ivchenko. They are part of more than 200 "
+#~ "developers who already contributed to the Marble project. <br> Contact us "
+#~ "via <a href=\"https://mail.kde.org/mailman/listinfo/marble-devel\">marble-"
+#~ "devel@kde.org</a>.</p>"
+#~ msgstr ""
+#~ "<h3>Razvojna ekipa</h3><p>Glavni razvijalci tega programa so Dennis "
+#~ "Nienhüser, Torsten Rahn, Sanjiban Bairagya, Friedrich W. H. Kossebau, "
+#~ "Gábor Péterffy in Mikhail Ivchenko. So del več kot 200 razvijalcev, ki so "
+#~ "že prispevali k projektu Marble.<br>Z nami lahko stopite v stik preko <a "
+#~ "href=\"https://mail.kde.org/mailman/listinfo/marble-devel\">marble-"
+#~ "devel@kde.org</a>.</p>"
+
+#~ msgctxt "AboutDialog|"
+#~ msgid ""
+#~ "<h3>Attribution</h3><p>The map is based on data from the <a href="
+#~ "\"https://www.openstreetmap.org\">OpenStreetMap</a> project, available "
+#~ "under the <a href=\"https://opendatacommons.org/licenses/odbl/\">Open "
+#~ "Database License</a>. Additionally public domain data from the <a href="
+#~ "\"https://www.naturalearthdata.com/\">Natural Earth</a> project is used. "
+#~ "The map style is influenced by and uses icons from <a href=\"https://"
+#~ "github.com/gravitystorm/openstreetmap-carto\">OpenStreetMap Carto</a> (<a "
+#~ "href=\"https://creativecommons.org/publicdomain/zero/1.0/\">CC0 Public "
+#~ "Domain)</a>.</p>"
+#~ msgstr ""
+#~ "<h3>Omemba</h3><p>Karta temelji na podatkih iz projekta <a href=\"https://"
+#~ "www.openstreetmap.org\">OpenStreetMap</a>, ki je na voljo pod licenco <a "
+#~ "href=\"http://opendatacommons.org/licenses/odbl/\">Open Database License</"
+#~ "a>. Dodatno so uporabljeni javni podatki iz projekta <a href=\"http://www."
+#~ "naturalearthdata.com/\">Natural Earth</a>. Slog karte, vključno z "
+#~ "ikonami, je povzet po <a href=\"https://github.com/gravitystorm/"
+#~ "openstreetmap-carto\">OpenStreetMap Carto</a> (<a href=\"http://"
+#~ "creativecommons.org/publicdomain/zero/1.0/\">CC0 Public Domain)</a>.</p>"
+
+#~ msgctxt "Bookmarks|"
+#~ msgid "Removed"
+#~ msgstr "Odstranjeno"
+
+#~ msgctxt "Bookmarks|"
+#~ msgid "Your bookmarks will appear here."
+#~ msgstr "Tu se bodo pojavili vaši zaznamki."
+
+#~ msgctxt "CurrentPosition|"
+#~ msgid "Follow Current Position"
+#~ msgstr "Sledi trenutnemu položaju"
+
+#~ msgctxt "MainScreen|"
+#~ msgid "Marble Maps"
+#~ msgstr "Karte Marble"
+
+#~ msgctxt "MainScreen|"
+#~ msgid "Settings"
+#~ msgstr "Nastavitve"
+
+#~ msgctxt "MainScreen|"
+#~ msgid "Public Transport"
+#~ msgstr "Javni prevoz"
+
+#~ msgctxt "MainScreen|"
+#~ msgid "Outdoor Activities"
+#~ msgstr "Aktivnosti zunaj"
+
+#~ msgctxt "MainScreen|"
+#~ msgid "Accessibility"
+#~ msgstr "Dostopnost"
+
+#~ msgctxt "MainScreen|"
+#~ msgid "About"
+#~ msgstr "O"
+
+#~ msgctxt "MainScreen|"
+#~ msgid "Bookmarks"
+#~ msgstr "Zaznamki"
+
+#~ msgctxt "MainScreen|"
+#~ msgid "Layer Options"
+#~ msgstr "Možnosti plasti"
+
+#~ msgctxt "MainScreen|"
+#~ msgid "Routing"
+#~ msgstr "Usmerjanje"
+
+#~ msgctxt "MainScreen|"
+#~ msgid "%1 km"
+#~ msgstr "%1 km"
+
+#~ msgctxt "MainScreen|"
+#~ msgid "Press again to close."
+#~ msgstr "Pritisnite še enkrat za zaprtje."
+
+#~ msgctxt "NavigationInfoBar|"
+#~ msgid "%1 km"
+#~ msgstr "%1 km"
+
+#~ msgctxt "NavigationInfoBar|"
+#~ msgid "%1 m"
+#~ msgstr "%1 m"
+
+#~ msgctxt "Options|"
+#~ msgid "<h3>Layer Options</h3>"
+#~ msgstr "<h3>Možnosti plasti</h3>"
+
+#~ msgctxt "Options|"
+#~ msgid "<h4>Public Transport Layers</h4>"
+#~ msgstr "<h4>Plasti javnega prevoza</h4>"
+
+#~ msgctxt "Options|"
+#~ msgid "<h4>Outdoor Activities Layers</h4>"
+#~ msgstr "<h4>Plasti aktivnosti zunaj</h4>"
+
+#~ msgctxt "OutdoorActivities|"
+#~ msgid "Walkways"
+#~ msgstr "Peš poti"
+
+#~ msgctxt "OutdoorActivities|"
+#~ msgid "Hiking Routes"
+#~ msgstr "Sprehajalne poti"
+
+#~ msgctxt "OutdoorActivities|"
+#~ msgid "Bicycle Routes"
+#~ msgstr "Kolesarske poti"
+
+#~ msgctxt "OutdoorActivities|"
+#~ msgid "Mountainbike Routes"
+#~ msgstr "Poti za gorska kolesa"
+
+#~ msgctxt "OutdoorActivities|"
+#~ msgid "Inline Skating Routes"
+#~ msgstr "Poti za rolkanje"
+
+#~ msgctxt "OutdoorActivities|"
+#~ msgid "Bridleways"
+#~ msgstr "Mostički"
+
+#~ msgctxt "PlacemarkDialog|"
+#~ msgid "<h2>Routes</h2>"
+#~ msgstr "<h2>Poti</h2>"
+
+#~ msgctxt "ProfileSelectorMenu|"
+#~ msgid "Car (fastest)"
+#~ msgstr "Avto (najhitreje)"
+
+#~ msgctxt "ProfileSelectorMenu|"
+#~ msgid "Bicycle"
+#~ msgstr "Kolo"
+
+#~ msgctxt "ProfileSelectorMenu|"
+#~ msgid "Pedestrian"
+#~ msgstr "Peš"
+
+#~ msgctxt "PublicTransport|"
+#~ msgid "Train"
+#~ msgstr "Železnica"
+
+#~ msgctxt "PublicTransport|"
+#~ msgid "Subway"
+#~ msgstr "Podzemna železnica"
+
+#~ msgctxt "PublicTransport|"
+#~ msgid "Tram"
+#~ msgstr "Tramvaj"
+
+#~ msgctxt "PublicTransport|"
+#~ msgid "Bus"
+#~ msgstr "Avtobus"
+
+#~ msgctxt "PublicTransport|"
+#~ msgid "Trolley Bus"
+#~ msgstr "Trolejbus"
+
+#~ msgctxt "RouteEditor|"
+#~ msgid "Search for places to integrate them into a route."
+#~ msgstr "Poiščite mesta in jih vgradite v pot."
+
+#~ msgctxt "Search|"
+#~ msgid "Your bookmarks will appear here."
+#~ msgstr "Tukaj se bodo pojavili vaši zaznamki."
+
+#~ msgctxt "SearchField|"
+#~ msgid "Search"
+#~ msgstr "Poišči"
+
+#~ msgctxt "SettingsDialog|"
+#~ msgid "Network Settings"
+#~ msgstr "Nastavitve omrežja"
+
+#~ msgctxt "SettingsDialog|"
+#~ msgid "Download Maps via WLAN only"
+#~ msgstr "Naloži karte samo prek WLAN"
+
+#~ msgctxt "SidePanel|"
+#~ msgid "Public Transport"
+#~ msgstr "Javni prevoz"
+
+#~ msgctxt "SidePanel|"
+#~ msgid "Outdoor Activities"
+#~ msgstr "Aktivnosti zunaj"
+
+#~ msgctxt "SidePanel|"
+#~ msgid "Accessibility"
+#~ msgstr "Dostopnost"
+
+#~ msgctxt "SidePanel|"
+#~ msgid "About Marble Maps…"
+#~ msgstr "O kartah Marble…"
 
 #~ msgctxt "OpenCachingCacheDialog|KDE::DoNotExtract"
 #~ msgid "TextLabel"

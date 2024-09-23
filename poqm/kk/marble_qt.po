@@ -2629,321 +2629,6 @@ msgctxt "StarNames|"
 msgid "Vulpecula"
 msgstr "Түлкі"
 
-#: src/apps/marble-maps/AboutDialog.qml:40
-msgctxt "AboutDialog|"
-msgid ""
-"<h3>Marble Maps</h3><p>Find your way! Marble Maps brings the highly detailed "
-"OpenStreetMap to your mobile devices. It features a crisp, beautiful map "
-"with an intuitive user interface. It's open source, entirely based on free "
-"data and open standards and respects your privacy.</p>"
-msgstr ""
-
-#: src/apps/marble-maps/AboutDialog.qml:64
-msgctxt "AboutDialog|"
-msgid ""
-"<h3>Support</h3><p>Do you have a question? Want to file a suggestion for "
-"improvement? Please use the <a href=\"https://forum.kde.org/viewforum.php?"
-"f=217\">Marble forum</a> to get in touch with fellow Marble users and "
-"developers. Further support channels are listed at <a href=\"https://marble."
-"kde.org/support.php\">marble.kde.org</a>. We are looking forward to your "
-"feedback!</p>"
-msgstr ""
-
-#: src/apps/marble-maps/AboutDialog.qml:89
-msgctxt "AboutDialog|"
-msgid ""
-"<h3>Development Team</h3><p>The main developers of this app are Dennis "
-"Nienhüser, Torsten Rahn, Sanjiban Bairagya, Friedrich W. H. Kossebau, Gábor "
-"Péterffy and Mikhail Ivchenko. They are part of more than 200 developers who "
-"already contributed to the Marble project. <br> Contact us via <a href="
-"\"https://mail.kde.org/mailman/listinfo/marble-devel\">marble-devel@kde.org</"
-"a>.</p>"
-msgstr ""
-
-#: src/apps/marble-maps/AboutDialog.qml:116
-msgctxt "AboutDialog|"
-msgid ""
-"<h3>Attribution</h3><p>The map is based on data from the <a href=\"https://"
-"www.openstreetmap.org\">OpenStreetMap</a> project, available under the <a "
-"href=\"https://opendatacommons.org/licenses/odbl/\">Open Database License</"
-"a>. Additionally public domain data from the <a href=\"https://www."
-"naturalearthdata.com/\">Natural Earth</a> project is used. The map style is "
-"influenced by and uses icons from <a href=\"https://github.com/gravitystorm/"
-"openstreetmap-carto\">OpenStreetMap Carto</a> (<a href=\"https://"
-"creativecommons.org/publicdomain/zero/1.0/\">CC0 Public Domain)</a>.</p>"
-msgstr ""
-
-#: src/apps/marble-maps/Bookmarks.qml:133
-#, fuzzy
-#| msgid "Remove"
-msgctxt "Bookmarks|"
-msgid "Removed"
-msgstr "Өшіру"
-
-#: src/apps/marble-maps/Bookmarks.qml:219
-msgctxt "Bookmarks|"
-msgid "Your bookmarks will appear here."
-msgstr ""
-
-#: src/apps/marble-maps/CurrentPosition.qml:65
-#, fuzzy
-#| msgid "Current Location"
-msgctxt "CurrentPosition|"
-msgid "Follow Current Position"
-msgstr "Назардағы орын"
-
-#: src/apps/marble-maps/MainScreen.qml:17
-#: src/apps/marble-maps/MainScreen.qml:198
-#, fuzzy
-#| msgid "Manage Bookmarks"
-msgctxt "MainScreen|"
-msgid "Marble Maps"
-msgstr "Бетбелгілерін басқару"
-
-#: src/apps/marble-maps/MainScreen.qml:89
-#, fuzzy
-#| msgid "Settings"
-msgctxt "MainScreen|"
-msgid "Settings"
-msgstr "Баптау"
-
-#: src/apps/marble-maps/MainScreen.qml:105
-#, fuzzy
-#| msgid "Transit (Public Transport)"
-msgctxt "MainScreen|"
-msgid "Public Transport"
-msgstr "Қоғамдық көлгімен"
-
-#: src/apps/marble-maps/MainScreen.qml:120
-msgctxt "MainScreen|"
-msgid "Outdoor Activities"
-msgstr ""
-
-#: src/apps/marble-maps/MainScreen.qml:132
-msgctxt "MainScreen|"
-msgid "Accessibility"
-msgstr ""
-
-#: src/apps/marble-maps/MainScreen.qml:141
-#, fuzzy
-#| msgid "About"
-msgctxt "MainScreen|"
-msgid "About"
-msgstr "Осы туралы"
-
-#: src/apps/marble-maps/MainScreen.qml:152
-#, fuzzy
-#| msgid "Bookmarks"
-msgctxt "MainScreen|"
-msgid "Bookmarks"
-msgstr "Бетбелгілер"
-
-#: src/apps/marble-maps/MainScreen.qml:161
-#, fuzzy
-#| msgid "New Profile"
-msgctxt "MainScreen|"
-msgid "Layer Options"
-msgstr "Жаңа іс-әлпеті"
-
-#: src/apps/marble-maps/MainScreen.qml:170
-#, fuzzy
-#| msgid "Routing"
-msgctxt "MainScreen|"
-msgid "Routing"
-msgstr "Жол салу"
-
-#: src/apps/marble-maps/MainScreen.qml:399
-#, fuzzy, qt-format
-#| msgid "%1 km"
-msgctxt "MainScreen|"
-msgid "%1 km"
-msgstr "%1 км"
-
-#: src/apps/marble-maps/MainScreen.qml:663
-msgctxt "MainScreen|"
-msgid "Press again to close."
-msgstr ""
-
-#: src/apps/marble-maps/NavigationInfoBar.qml:21
-#, fuzzy, qt-format
-#| msgid "%1 km"
-msgctxt "NavigationInfoBar|"
-msgid "%1 km"
-msgstr "%1 км"
-
-#: src/apps/marble-maps/NavigationInfoBar.qml:23
-#: src/apps/marble-maps/NavigationInfoBar.qml:25
-#, fuzzy, qt-format
-#| msgid "%1 m"
-msgctxt "NavigationInfoBar|"
-msgid "%1 m"
-msgstr "%1 м"
-
-#: src/apps/marble-maps/Options.qml:31
-msgctxt "Options|"
-msgid "<h3>Layer Options</h3>"
-msgstr ""
-
-#: src/apps/marble-maps/Options.qml:35
-#, fuzzy
-#| msgid "Transit (Public Transport)"
-msgctxt "Options|"
-msgid "<h4>Public Transport Layers</h4>"
-msgstr "Қоғамдық көлгімен"
-
-#: src/apps/marble-maps/Options.qml:56
-msgctxt "Options|"
-msgid "<h4>Outdoor Activities Layers</h4>"
-msgstr ""
-
-#: src/apps/marble-maps/OutdoorActivities.qml:21
-msgctxt "OutdoorActivities|"
-msgid "Walkways"
-msgstr ""
-
-#: src/apps/marble-maps/OutdoorActivities.qml:26
-#, fuzzy
-#| msgid "Open Route"
-msgctxt "OutdoorActivities|"
-msgid "Hiking Routes"
-msgstr "Маршрутты ашу"
-
-#: src/apps/marble-maps/OutdoorActivities.qml:31
-#, fuzzy
-#| msgid "bicycle rental"
-msgctxt "OutdoorActivities|"
-msgid "Bicycle Routes"
-msgstr "велосипед жалға беру"
-
-#: src/apps/marble-maps/OutdoorActivities.qml:36
-#, fuzzy
-#| msgid "Mountain"
-msgctxt "OutdoorActivities|"
-msgid "Mountainbike Routes"
-msgstr "Тау"
-
-#: src/apps/marble-maps/OutdoorActivities.qml:41
-#, fuzzy
-#| msgid "Save Route"
-msgctxt "OutdoorActivities|"
-msgid "Inline Skating Routes"
-msgstr "Маршрутты сақтау"
-
-#: src/apps/marble-maps/OutdoorActivities.qml:46
-msgctxt "OutdoorActivities|"
-msgid "Bridleways"
-msgstr ""
-
-#: src/apps/marble-maps/PlacemarkDialog.qml:168
-msgctxt "PlacemarkDialog|"
-msgid "<h2>Routes</h2>"
-msgstr ""
-
-#: src/apps/marble-maps/ProfileSelectorMenu.qml:43
-#, fuzzy
-#| msgid "Car (fastest)"
-msgctxt "ProfileSelectorMenu|"
-msgid "Car (fastest)"
-msgstr "Автомобильмен (ең тезі)"
-
-#: src/apps/marble-maps/ProfileSelectorMenu.qml:49
-#, fuzzy
-#| msgid "Bicycle"
-msgctxt "ProfileSelectorMenu|"
-msgid "Bicycle"
-msgstr "Велосипедпен"
-
-#: src/apps/marble-maps/ProfileSelectorMenu.qml:55
-#, fuzzy
-#| msgid "Pedestrian"
-msgctxt "ProfileSelectorMenu|"
-msgid "Pedestrian"
-msgstr "Жаяу"
-
-#: src/apps/marble-maps/PublicTransport.qml:21
-#, fuzzy
-#| msgid "rain"
-msgctxt "PublicTransport|"
-msgid "Train"
-msgstr "жаңбыр"
-
-#: src/apps/marble-maps/PublicTransport.qml:26
-msgctxt "PublicTransport|"
-msgid "Subway"
-msgstr ""
-
-#: src/apps/marble-maps/PublicTransport.qml:31
-#, fuzzy
-#| msgid "tram stop"
-msgctxt "PublicTransport|"
-msgid "Tram"
-msgstr "трамвай аялдамасы"
-
-#: src/apps/marble-maps/PublicTransport.qml:36
-msgctxt "PublicTransport|"
-msgid "Bus"
-msgstr ""
-
-#: src/apps/marble-maps/PublicTransport.qml:41
-msgctxt "PublicTransport|"
-msgid "Trolley Bus"
-msgstr ""
-
-#: src/apps/marble-maps/RouteEditor.qml:62
-msgctxt "RouteEditor|"
-msgid "Search for places to integrate them into a route."
-msgstr ""
-
-#: src/apps/marble-maps/Search.qml:161
-msgctxt "Search|"
-msgid "Your bookmarks will appear here."
-msgstr ""
-
-#: src/apps/marble-maps/SearchField.qml:70
-#, fuzzy
-#| msgid "Search"
-msgctxt "SearchField|"
-msgid "Search"
-msgstr "Іздеу"
-
-#: src/apps/marble-maps/SettingsDialog.qml:48
-#, fuzzy
-#| msgid "Settings"
-msgctxt "SettingsDialog|"
-msgid "Network Settings"
-msgstr "Баптау"
-
-#: src/apps/marble-maps/SettingsDialog.qml:53
-#, fuzzy
-#| msgid "Download Region"
-msgctxt "SettingsDialog|"
-msgid "Download Maps via WLAN only"
-msgstr "Аймақты жүктеп алу"
-
-#: src/apps/marble-maps/SidePanel.qml:49 src/apps/marble-maps/SidePanel.qml:113
-#, fuzzy
-#| msgid "Transit (Public Transport)"
-msgctxt "SidePanel|"
-msgid "Public Transport"
-msgstr "Қоғамдық көлгімен"
-
-#: src/apps/marble-maps/SidePanel.qml:70 src/apps/marble-maps/SidePanel.qml:126
-msgctxt "SidePanel|"
-msgid "Outdoor Activities"
-msgstr ""
-
-#: src/apps/marble-maps/SidePanel.qml:89
-msgctxt "SidePanel|"
-msgid "Accessibility"
-msgstr ""
-
-#: src/apps/marble-maps/SidePanel.qml:101
-#, fuzzy
-#| msgid "Routing - Marble"
-msgctxt "SidePanel|"
-msgid "About Marble Maps…"
-msgstr "Жол салу - Marble"
-
 #: src/apps/marble-qt/qtmain.cpp:89
 #, fuzzy
 #| msgid "Marble - Virtual Globe"
@@ -8825,33 +8510,33 @@ msgctxt "QObject|"
 msgid "This is an Invalid File"
 msgstr "Бұл файл жарамсыз"
 
-#: src/lib/marble/GeoDataTreeModel.cpp:179
+#: src/lib/marble/GeoDataTreeModel.cpp:156
 #, fuzzy
 #| msgid "Name"
 msgctxt "Marble::GeoDataTreeModel|"
 msgid "Name"
 msgstr "Атауы"
 
-#: src/lib/marble/GeoDataTreeModel.cpp:181
+#: src/lib/marble/GeoDataTreeModel.cpp:158
 #, fuzzy
 #| msgid "Type: "
 msgctxt "Marble::GeoDataTreeModel|"
 msgid "Type"
 msgstr "Түрі: "
 
-#: src/lib/marble/GeoDataTreeModel.cpp:183
+#: src/lib/marble/GeoDataTreeModel.cpp:160
 #, fuzzy
 #| msgid "Population:"
 msgctxt "Marble::GeoDataTreeModel|"
 msgid "Popularity"
 msgstr "Тұрғындар саны:"
 
-#: src/lib/marble/GeoDataTreeModel.cpp:185
+#: src/lib/marble/GeoDataTreeModel.cpp:162
 msgctxt "Marble::GeoDataTreeModel|Popularity index"
 msgid "PopIndex"
 msgstr ""
 
-#: src/lib/marble/GeoDataTreeModel.cpp:236
+#: src/lib/marble/GeoDataTreeModel.cpp:232
 msgctxt "Marble::GeoDataTreeModel|"
 msgid "Playlist"
 msgstr ""
@@ -11906,7 +11591,7 @@ msgctxt "MarbleCloudSyncSettingsWidget|"
 msgid "Test Login"
 msgstr ""
 
-#: src/lib/marble/MarbleGlobal.h:239
+#: src/lib/marble/MarbleGlobal.h:229
 #, fuzzy
 #| msgid "not available"
 msgctxt "Marble|"
@@ -21687,6 +21372,168 @@ msgstr "Қалқымалы &үлгісі"
 msgctxt "Marble::FITemplateFloatItem|"
 msgid "This is a template class for float items."
 msgstr "Қалқымалы нәрселердің үлгі класы."
+
+#, fuzzy
+#~| msgid "Remove"
+#~ msgctxt "Bookmarks|"
+#~ msgid "Removed"
+#~ msgstr "Өшіру"
+
+#, fuzzy
+#~| msgid "Current Location"
+#~ msgctxt "CurrentPosition|"
+#~ msgid "Follow Current Position"
+#~ msgstr "Назардағы орын"
+
+#, fuzzy
+#~| msgid "Manage Bookmarks"
+#~ msgctxt "MainScreen|"
+#~ msgid "Marble Maps"
+#~ msgstr "Бетбелгілерін басқару"
+
+#, fuzzy
+#~| msgid "Settings"
+#~ msgctxt "MainScreen|"
+#~ msgid "Settings"
+#~ msgstr "Баптау"
+
+#, fuzzy
+#~| msgid "Transit (Public Transport)"
+#~ msgctxt "MainScreen|"
+#~ msgid "Public Transport"
+#~ msgstr "Қоғамдық көлгімен"
+
+#, fuzzy
+#~| msgid "About"
+#~ msgctxt "MainScreen|"
+#~ msgid "About"
+#~ msgstr "Осы туралы"
+
+#, fuzzy
+#~| msgid "Bookmarks"
+#~ msgctxt "MainScreen|"
+#~ msgid "Bookmarks"
+#~ msgstr "Бетбелгілер"
+
+#, fuzzy
+#~| msgid "New Profile"
+#~ msgctxt "MainScreen|"
+#~ msgid "Layer Options"
+#~ msgstr "Жаңа іс-әлпеті"
+
+#, fuzzy
+#~| msgid "Routing"
+#~ msgctxt "MainScreen|"
+#~ msgid "Routing"
+#~ msgstr "Жол салу"
+
+#, fuzzy
+#~| msgid "%1 km"
+#~ msgctxt "MainScreen|"
+#~ msgid "%1 km"
+#~ msgstr "%1 км"
+
+#, fuzzy
+#~| msgid "%1 km"
+#~ msgctxt "NavigationInfoBar|"
+#~ msgid "%1 km"
+#~ msgstr "%1 км"
+
+#, fuzzy
+#~| msgid "%1 m"
+#~ msgctxt "NavigationInfoBar|"
+#~ msgid "%1 m"
+#~ msgstr "%1 м"
+
+#, fuzzy
+#~| msgid "Transit (Public Transport)"
+#~ msgctxt "Options|"
+#~ msgid "<h4>Public Transport Layers</h4>"
+#~ msgstr "Қоғамдық көлгімен"
+
+#, fuzzy
+#~| msgid "Open Route"
+#~ msgctxt "OutdoorActivities|"
+#~ msgid "Hiking Routes"
+#~ msgstr "Маршрутты ашу"
+
+#, fuzzy
+#~| msgid "bicycle rental"
+#~ msgctxt "OutdoorActivities|"
+#~ msgid "Bicycle Routes"
+#~ msgstr "велосипед жалға беру"
+
+#, fuzzy
+#~| msgid "Mountain"
+#~ msgctxt "OutdoorActivities|"
+#~ msgid "Mountainbike Routes"
+#~ msgstr "Тау"
+
+#, fuzzy
+#~| msgid "Save Route"
+#~ msgctxt "OutdoorActivities|"
+#~ msgid "Inline Skating Routes"
+#~ msgstr "Маршрутты сақтау"
+
+#, fuzzy
+#~| msgid "Car (fastest)"
+#~ msgctxt "ProfileSelectorMenu|"
+#~ msgid "Car (fastest)"
+#~ msgstr "Автомобильмен (ең тезі)"
+
+#, fuzzy
+#~| msgid "Bicycle"
+#~ msgctxt "ProfileSelectorMenu|"
+#~ msgid "Bicycle"
+#~ msgstr "Велосипедпен"
+
+#, fuzzy
+#~| msgid "Pedestrian"
+#~ msgctxt "ProfileSelectorMenu|"
+#~ msgid "Pedestrian"
+#~ msgstr "Жаяу"
+
+#, fuzzy
+#~| msgid "rain"
+#~ msgctxt "PublicTransport|"
+#~ msgid "Train"
+#~ msgstr "жаңбыр"
+
+#, fuzzy
+#~| msgid "tram stop"
+#~ msgctxt "PublicTransport|"
+#~ msgid "Tram"
+#~ msgstr "трамвай аялдамасы"
+
+#, fuzzy
+#~| msgid "Search"
+#~ msgctxt "SearchField|"
+#~ msgid "Search"
+#~ msgstr "Іздеу"
+
+#, fuzzy
+#~| msgid "Settings"
+#~ msgctxt "SettingsDialog|"
+#~ msgid "Network Settings"
+#~ msgstr "Баптау"
+
+#, fuzzy
+#~| msgid "Download Region"
+#~ msgctxt "SettingsDialog|"
+#~ msgid "Download Maps via WLAN only"
+#~ msgstr "Аймақты жүктеп алу"
+
+#, fuzzy
+#~| msgid "Transit (Public Transport)"
+#~ msgctxt "SidePanel|"
+#~ msgid "Public Transport"
+#~ msgstr "Қоғамдық көлгімен"
+
+#, fuzzy
+#~| msgid "Routing - Marble"
+#~ msgctxt "SidePanel|"
+#~ msgid "About Marble Maps…"
+#~ msgstr "Жол салу - Marble"
 
 #, fuzzy
 #~| msgid "Ctrl+O"

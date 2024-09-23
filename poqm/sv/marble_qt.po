@@ -2328,295 +2328,6 @@ msgctxt "StarNames|"
 msgid "Vulpecula"
 msgstr "Räven"
 
-#: src/apps/marble-maps/AboutDialog.qml:40
-msgctxt "AboutDialog|"
-msgid ""
-"<h3>Marble Maps</h3><p>Find your way! Marble Maps brings the highly detailed "
-"OpenStreetMap to your mobile devices. It features a crisp, beautiful map "
-"with an intuitive user interface. It's open source, entirely based on free "
-"data and open standards and respects your privacy.</p>"
-msgstr ""
-"<h3>Marble kartor</h3><p>Hitta rätt! Marble kartor ger dig de mycket "
-"detaljerade kartorna från OpenStreetMap på din mobilenhet. De är skarpa, "
-"snygga kartor med ett intuitivt användargränssnitt. De har öppen källkod, "
-"helt baserad på fria uppgifter och öppna standarder, och respekterar din "
-"integritet.</p>"
-
-#: src/apps/marble-maps/AboutDialog.qml:64
-msgctxt "AboutDialog|"
-msgid ""
-"<h3>Support</h3><p>Do you have a question? Want to file a suggestion for "
-"improvement? Please use the <a href=\"https://forum.kde.org/viewforum.php?"
-"f=217\">Marble forum</a> to get in touch with fellow Marble users and "
-"developers. Further support channels are listed at <a href=\"https://marble."
-"kde.org/support.php\">marble.kde.org</a>. We are looking forward to your "
-"feedback!</p>"
-msgstr ""
-"<h3>Support</h3><p>Har du en fråga? Vill du skicka in ett "
-"förbättringsförslag? Använd <a href=\"https://forum.kde.org/viewforum.php?"
-"f=217\">Marbles forum</a> för att få kontakt med andra användare och "
-"utvecklare av Marble. Ytterligare supportkanaler listas på <a href=\"https://"
-"marble.kde.org/support.php\">marble.kde.org</a>. Vi ser fram emot din "
-"återkoppling!</p>"
-
-#: src/apps/marble-maps/AboutDialog.qml:89
-msgctxt "AboutDialog|"
-msgid ""
-"<h3>Development Team</h3><p>The main developers of this app are Dennis "
-"Nienhüser, Torsten Rahn, Sanjiban Bairagya, Friedrich W. H. Kossebau, Gábor "
-"Péterffy and Mikhail Ivchenko. They are part of more than 200 developers who "
-"already contributed to the Marble project. <br> Contact us via <a href="
-"\"https://mail.kde.org/mailman/listinfo/marble-devel\">marble-devel@kde.org</"
-"a>.</p>"
-msgstr ""
-"<h3>Utvecklingsgrupp</h3><p>Huvudutvecklarna av den här applikationen är "
-"Dennis Nienhüser, Torsten Rahn, Sanjiban Bairagya, Friedrich W. H. Kossebau, "
-"Gábor Péterffy och Mikhail Ivchenko. De ingår bland de mer än 200 utvecklare "
-"som redan har bidragit till Marble.<br>Kontakta oss via <a href=\"https://"
-"mail.kde.org/mailman/listinfo/marble-devel\">marble-devel@kde.org</a>.</p>"
-
-#: src/apps/marble-maps/AboutDialog.qml:116
-msgctxt "AboutDialog|"
-msgid ""
-"<h3>Attribution</h3><p>The map is based on data from the <a href=\"https://"
-"www.openstreetmap.org\">OpenStreetMap</a> project, available under the <a "
-"href=\"https://opendatacommons.org/licenses/odbl/\">Open Database License</"
-"a>. Additionally public domain data from the <a href=\"https://www."
-"naturalearthdata.com/\">Natural Earth</a> project is used. The map style is "
-"influenced by and uses icons from <a href=\"https://github.com/gravitystorm/"
-"openstreetmap-carto\">OpenStreetMap Carto</a> (<a href=\"https://"
-"creativecommons.org/publicdomain/zero/1.0/\">CC0 Public Domain)</a>.</p>"
-msgstr ""
-"<h3>Erkännanden</h3><p>Kartan är baserad på uppgifter från projektet <a href="
-"\"https://www.openstreetmap.org\">OpenStreetMap</a>, tillgängliga enligt <a "
-"href=\"https://opendatacommons.org/licenses/odbl/\">Open Database</a>-"
-"licensen. Dessutom används uppgifter som är allmängods från projektet <a "
-"href=\"https://www.naturalearthdata.com/\">Natural Earth</a>. Kartans stil "
-"är influerad av och använder ikoner från <a href=\"https://github.com/"
-"gravitystorm/openstreetmap-carto\">OpenStreetMap Carto</a> (<a href="
-"\"https://creativecommons.org/publicdomain/zero/1.0/\">CC0 Public Domain)</"
-"a>.</p>"
-
-#: src/apps/marble-maps/Bookmarks.qml:133
-msgctxt "Bookmarks|"
-msgid "Removed"
-msgstr "Borttaget"
-
-#: src/apps/marble-maps/Bookmarks.qml:219
-msgctxt "Bookmarks|"
-msgid "Your bookmarks will appear here."
-msgstr "Dina bokmärken visas här."
-
-#: src/apps/marble-maps/CurrentPosition.qml:65
-msgctxt "CurrentPosition|"
-msgid "Follow Current Position"
-msgstr "Följ nuvarande position"
-
-#: src/apps/marble-maps/MainScreen.qml:17
-#: src/apps/marble-maps/MainScreen.qml:198
-msgctxt "MainScreen|"
-msgid "Marble Maps"
-msgstr "Marble-kartor"
-
-#: src/apps/marble-maps/MainScreen.qml:89
-msgctxt "MainScreen|"
-msgid "Settings"
-msgstr "Inställningar"
-
-#: src/apps/marble-maps/MainScreen.qml:105
-msgctxt "MainScreen|"
-msgid "Public Transport"
-msgstr "Kollektivtrafik"
-
-#: src/apps/marble-maps/MainScreen.qml:120
-msgctxt "MainScreen|"
-msgid "Outdoor Activities"
-msgstr "Utomhusaktiviteter"
-
-#: src/apps/marble-maps/MainScreen.qml:132
-msgctxt "MainScreen|"
-msgid "Accessibility"
-msgstr "Handikappanpassning"
-
-#: src/apps/marble-maps/MainScreen.qml:141
-msgctxt "MainScreen|"
-msgid "About"
-msgstr "Om"
-
-#: src/apps/marble-maps/MainScreen.qml:152
-msgctxt "MainScreen|"
-msgid "Bookmarks"
-msgstr "Bokmärken"
-
-#: src/apps/marble-maps/MainScreen.qml:161
-msgctxt "MainScreen|"
-msgid "Layer Options"
-msgstr "Lagerinställningar"
-
-#: src/apps/marble-maps/MainScreen.qml:170
-msgctxt "MainScreen|"
-msgid "Routing"
-msgstr "Vägbeskrivning"
-
-#: src/apps/marble-maps/MainScreen.qml:399
-#, qt-format
-msgctxt "MainScreen|"
-msgid "%1 km"
-msgstr "%1 km"
-
-#: src/apps/marble-maps/MainScreen.qml:663
-msgctxt "MainScreen|"
-msgid "Press again to close."
-msgstr "Tryck igen för att stänga."
-
-#: src/apps/marble-maps/NavigationInfoBar.qml:21
-#, qt-format
-msgctxt "NavigationInfoBar|"
-msgid "%1 km"
-msgstr "%1 km"
-
-#: src/apps/marble-maps/NavigationInfoBar.qml:23
-#: src/apps/marble-maps/NavigationInfoBar.qml:25
-#, qt-format
-msgctxt "NavigationInfoBar|"
-msgid "%1 m"
-msgstr "%1 m"
-
-#: src/apps/marble-maps/Options.qml:31
-msgctxt "Options|"
-msgid "<h3>Layer Options</h3>"
-msgstr "<h3>Lagerinställningar</h3>"
-
-#: src/apps/marble-maps/Options.qml:35
-msgctxt "Options|"
-msgid "<h4>Public Transport Layers</h4>"
-msgstr "<h4>Kollektivtrafiklager</h4>"
-
-#: src/apps/marble-maps/Options.qml:56
-msgctxt "Options|"
-msgid "<h4>Outdoor Activities Layers</h4>"
-msgstr "<h4>Utomhusaktivitetslager</h4>"
-
-#: src/apps/marble-maps/OutdoorActivities.qml:21
-msgctxt "OutdoorActivities|"
-msgid "Walkways"
-msgstr "Gångvägar"
-
-#: src/apps/marble-maps/OutdoorActivities.qml:26
-msgctxt "OutdoorActivities|"
-msgid "Hiking Routes"
-msgstr "Vandringsleder"
-
-#: src/apps/marble-maps/OutdoorActivities.qml:31
-msgctxt "OutdoorActivities|"
-msgid "Bicycle Routes"
-msgstr "Cykelvägar"
-
-#: src/apps/marble-maps/OutdoorActivities.qml:36
-msgctxt "OutdoorActivities|"
-msgid "Mountainbike Routes"
-msgstr "Mountainbike-vägar"
-
-#: src/apps/marble-maps/OutdoorActivities.qml:41
-msgctxt "OutdoorActivities|"
-msgid "Inline Skating Routes"
-msgstr "Rullskridskovägar"
-
-#: src/apps/marble-maps/OutdoorActivities.qml:46
-msgctxt "OutdoorActivities|"
-msgid "Bridleways"
-msgstr "Ridvägar"
-
-#: src/apps/marble-maps/PlacemarkDialog.qml:168
-msgctxt "PlacemarkDialog|"
-msgid "<h2>Routes</h2>"
-msgstr "<h2>Leder</h2>"
-
-#: src/apps/marble-maps/ProfileSelectorMenu.qml:43
-msgctxt "ProfileSelectorMenu|"
-msgid "Car (fastest)"
-msgstr "Bil (snabbast)"
-
-#: src/apps/marble-maps/ProfileSelectorMenu.qml:49
-msgctxt "ProfileSelectorMenu|"
-msgid "Bicycle"
-msgstr "Cykel"
-
-#: src/apps/marble-maps/ProfileSelectorMenu.qml:55
-msgctxt "ProfileSelectorMenu|"
-msgid "Pedestrian"
-msgstr "Fotgängare"
-
-#: src/apps/marble-maps/PublicTransport.qml:21
-msgctxt "PublicTransport|"
-msgid "Train"
-msgstr "Tåg"
-
-#: src/apps/marble-maps/PublicTransport.qml:26
-msgctxt "PublicTransport|"
-msgid "Subway"
-msgstr "Tunnelbana"
-
-#: src/apps/marble-maps/PublicTransport.qml:31
-msgctxt "PublicTransport|"
-msgid "Tram"
-msgstr "Spårvagn"
-
-#: src/apps/marble-maps/PublicTransport.qml:36
-msgctxt "PublicTransport|"
-msgid "Bus"
-msgstr "Buss"
-
-#: src/apps/marble-maps/PublicTransport.qml:41
-msgctxt "PublicTransport|"
-msgid "Trolley Bus"
-msgstr "Trådbuss"
-
-#: src/apps/marble-maps/RouteEditor.qml:62
-msgctxt "RouteEditor|"
-msgid "Search for places to integrate them into a route."
-msgstr "Sök efter platser för att infoga i en vägbeskrivning."
-
-#: src/apps/marble-maps/Search.qml:161
-msgctxt "Search|"
-msgid "Your bookmarks will appear here."
-msgstr "Dina bokmärken visas här."
-
-#: src/apps/marble-maps/SearchField.qml:70
-msgctxt "SearchField|"
-msgid "Search"
-msgstr "Sök"
-
-#: src/apps/marble-maps/SettingsDialog.qml:48
-msgctxt "SettingsDialog|"
-msgid "Network Settings"
-msgstr "Nätverksinställningar"
-
-#: src/apps/marble-maps/SettingsDialog.qml:53
-msgctxt "SettingsDialog|"
-msgid "Download Maps via WLAN only"
-msgstr "Ladda bara ner kartor via WLAN"
-
-#: src/apps/marble-maps/SidePanel.qml:49 src/apps/marble-maps/SidePanel.qml:113
-msgctxt "SidePanel|"
-msgid "Public Transport"
-msgstr "Kollektivtrafik"
-
-#: src/apps/marble-maps/SidePanel.qml:70 src/apps/marble-maps/SidePanel.qml:126
-msgctxt "SidePanel|"
-msgid "Outdoor Activities"
-msgstr "Utomhusaktiviteter"
-
-#: src/apps/marble-maps/SidePanel.qml:89
-msgctxt "SidePanel|"
-msgid "Accessibility"
-msgstr "Handikappanpassning"
-
-#: src/apps/marble-maps/SidePanel.qml:101
-msgctxt "SidePanel|"
-msgid "About Marble Maps…"
-msgstr "Om Marble kartor..."
-
 #: src/apps/marble-qt/qtmain.cpp:89
 msgctxt "Marble::MainWindow|"
 msgid "Marble - Virtual Globe"
@@ -7602,27 +7313,27 @@ msgctxt "QObject|"
 msgid "This is an Invalid File"
 msgstr "Filen är ogiltig"
 
-#: src/lib/marble/GeoDataTreeModel.cpp:179
+#: src/lib/marble/GeoDataTreeModel.cpp:156
 msgctxt "Marble::GeoDataTreeModel|"
 msgid "Name"
 msgstr "Namn"
 
-#: src/lib/marble/GeoDataTreeModel.cpp:181
+#: src/lib/marble/GeoDataTreeModel.cpp:158
 msgctxt "Marble::GeoDataTreeModel|"
 msgid "Type"
 msgstr "Typ"
 
-#: src/lib/marble/GeoDataTreeModel.cpp:183
+#: src/lib/marble/GeoDataTreeModel.cpp:160
 msgctxt "Marble::GeoDataTreeModel|"
 msgid "Popularity"
 msgstr "Popularitet"
 
-#: src/lib/marble/GeoDataTreeModel.cpp:185
+#: src/lib/marble/GeoDataTreeModel.cpp:162
 msgctxt "Marble::GeoDataTreeModel|Popularity index"
 msgid "PopIndex"
 msgstr "Popularitetsindex"
 
-#: src/lib/marble/GeoDataTreeModel.cpp:236
+#: src/lib/marble/GeoDataTreeModel.cpp:232
 msgctxt "Marble::GeoDataTreeModel|"
 msgid "Playlist"
 msgstr "Spellista"
@@ -10212,7 +9923,7 @@ msgctxt "MarbleCloudSyncSettingsWidget|"
 msgid "Test Login"
 msgstr "Prova inloggning"
 
-#: src/lib/marble/MarbleGlobal.h:239
+#: src/lib/marble/MarbleGlobal.h:229
 msgctxt "Marble|"
 msgid "not available"
 msgstr "ej tillgänglig"
@@ -18171,6 +17882,246 @@ msgstr "&Mall för flyttbart objekt"
 msgctxt "Marble::FITemplateFloatItem|"
 msgid "This is a template class for float items."
 msgstr "Det här är en mallklass för flyttbara objekt."
+
+#~ msgctxt "AboutDialog|"
+#~ msgid ""
+#~ "<h3>Marble Maps</h3><p>Find your way! Marble Maps brings the highly "
+#~ "detailed OpenStreetMap to your mobile devices. It features a crisp, "
+#~ "beautiful map with an intuitive user interface. It's open source, "
+#~ "entirely based on free data and open standards and respects your privacy."
+#~ "</p>"
+#~ msgstr ""
+#~ "<h3>Marble kartor</h3><p>Hitta rätt! Marble kartor ger dig de mycket "
+#~ "detaljerade kartorna från OpenStreetMap på din mobilenhet. De är skarpa, "
+#~ "snygga kartor med ett intuitivt användargränssnitt. De har öppen källkod, "
+#~ "helt baserad på fria uppgifter och öppna standarder, och respekterar din "
+#~ "integritet.</p>"
+
+#~ msgctxt "AboutDialog|"
+#~ msgid ""
+#~ "<h3>Support</h3><p>Do you have a question? Want to file a suggestion for "
+#~ "improvement? Please use the <a href=\"https://forum.kde.org/viewforum.php?"
+#~ "f=217\">Marble forum</a> to get in touch with fellow Marble users and "
+#~ "developers. Further support channels are listed at <a href=\"https://"
+#~ "marble.kde.org/support.php\">marble.kde.org</a>. We are looking forward "
+#~ "to your feedback!</p>"
+#~ msgstr ""
+#~ "<h3>Support</h3><p>Har du en fråga? Vill du skicka in ett "
+#~ "förbättringsförslag? Använd <a href=\"https://forum.kde.org/viewforum.php?"
+#~ "f=217\">Marbles forum</a> för att få kontakt med andra användare och "
+#~ "utvecklare av Marble. Ytterligare supportkanaler listas på <a href="
+#~ "\"https://marble.kde.org/support.php\">marble.kde.org</a>. Vi ser fram "
+#~ "emot din återkoppling!</p>"
+
+#~ msgctxt "AboutDialog|"
+#~ msgid ""
+#~ "<h3>Development Team</h3><p>The main developers of this app are Dennis "
+#~ "Nienhüser, Torsten Rahn, Sanjiban Bairagya, Friedrich W. H. Kossebau, "
+#~ "Gábor Péterffy and Mikhail Ivchenko. They are part of more than 200 "
+#~ "developers who already contributed to the Marble project. <br> Contact us "
+#~ "via <a href=\"https://mail.kde.org/mailman/listinfo/marble-devel\">marble-"
+#~ "devel@kde.org</a>.</p>"
+#~ msgstr ""
+#~ "<h3>Utvecklingsgrupp</h3><p>Huvudutvecklarna av den här applikationen är "
+#~ "Dennis Nienhüser, Torsten Rahn, Sanjiban Bairagya, Friedrich W. H. "
+#~ "Kossebau, Gábor Péterffy och Mikhail Ivchenko. De ingår bland de mer än "
+#~ "200 utvecklare som redan har bidragit till Marble.<br>Kontakta oss via <a "
+#~ "href=\"https://mail.kde.org/mailman/listinfo/marble-devel\">marble-"
+#~ "devel@kde.org</a>.</p>"
+
+#~ msgctxt "AboutDialog|"
+#~ msgid ""
+#~ "<h3>Attribution</h3><p>The map is based on data from the <a href="
+#~ "\"https://www.openstreetmap.org\">OpenStreetMap</a> project, available "
+#~ "under the <a href=\"https://opendatacommons.org/licenses/odbl/\">Open "
+#~ "Database License</a>. Additionally public domain data from the <a href="
+#~ "\"https://www.naturalearthdata.com/\">Natural Earth</a> project is used. "
+#~ "The map style is influenced by and uses icons from <a href=\"https://"
+#~ "github.com/gravitystorm/openstreetmap-carto\">OpenStreetMap Carto</a> (<a "
+#~ "href=\"https://creativecommons.org/publicdomain/zero/1.0/\">CC0 Public "
+#~ "Domain)</a>.</p>"
+#~ msgstr ""
+#~ "<h3>Erkännanden</h3><p>Kartan är baserad på uppgifter från projektet <a "
+#~ "href=\"https://www.openstreetmap.org\">OpenStreetMap</a>, tillgängliga "
+#~ "enligt <a href=\"https://opendatacommons.org/licenses/odbl/\">Open "
+#~ "Database</a>-licensen. Dessutom används uppgifter som är allmängods från "
+#~ "projektet <a href=\"https://www.naturalearthdata.com/\">Natural Earth</"
+#~ "a>. Kartans stil är influerad av och använder ikoner från <a href="
+#~ "\"https://github.com/gravitystorm/openstreetmap-carto\">OpenStreetMap "
+#~ "Carto</a> (<a href=\"https://creativecommons.org/publicdomain/zero/1.0/"
+#~ "\">CC0 Public Domain)</a>.</p>"
+
+#~ msgctxt "Bookmarks|"
+#~ msgid "Removed"
+#~ msgstr "Borttaget"
+
+#~ msgctxt "Bookmarks|"
+#~ msgid "Your bookmarks will appear here."
+#~ msgstr "Dina bokmärken visas här."
+
+#~ msgctxt "CurrentPosition|"
+#~ msgid "Follow Current Position"
+#~ msgstr "Följ nuvarande position"
+
+#~ msgctxt "MainScreen|"
+#~ msgid "Marble Maps"
+#~ msgstr "Marble-kartor"
+
+#~ msgctxt "MainScreen|"
+#~ msgid "Settings"
+#~ msgstr "Inställningar"
+
+#~ msgctxt "MainScreen|"
+#~ msgid "Public Transport"
+#~ msgstr "Kollektivtrafik"
+
+#~ msgctxt "MainScreen|"
+#~ msgid "Outdoor Activities"
+#~ msgstr "Utomhusaktiviteter"
+
+#~ msgctxt "MainScreen|"
+#~ msgid "Accessibility"
+#~ msgstr "Handikappanpassning"
+
+#~ msgctxt "MainScreen|"
+#~ msgid "About"
+#~ msgstr "Om"
+
+#~ msgctxt "MainScreen|"
+#~ msgid "Bookmarks"
+#~ msgstr "Bokmärken"
+
+#~ msgctxt "MainScreen|"
+#~ msgid "Layer Options"
+#~ msgstr "Lagerinställningar"
+
+#~ msgctxt "MainScreen|"
+#~ msgid "Routing"
+#~ msgstr "Vägbeskrivning"
+
+#~ msgctxt "MainScreen|"
+#~ msgid "%1 km"
+#~ msgstr "%1 km"
+
+#~ msgctxt "MainScreen|"
+#~ msgid "Press again to close."
+#~ msgstr "Tryck igen för att stänga."
+
+#~ msgctxt "NavigationInfoBar|"
+#~ msgid "%1 km"
+#~ msgstr "%1 km"
+
+#~ msgctxt "NavigationInfoBar|"
+#~ msgid "%1 m"
+#~ msgstr "%1 m"
+
+#~ msgctxt "Options|"
+#~ msgid "<h3>Layer Options</h3>"
+#~ msgstr "<h3>Lagerinställningar</h3>"
+
+#~ msgctxt "Options|"
+#~ msgid "<h4>Public Transport Layers</h4>"
+#~ msgstr "<h4>Kollektivtrafiklager</h4>"
+
+#~ msgctxt "Options|"
+#~ msgid "<h4>Outdoor Activities Layers</h4>"
+#~ msgstr "<h4>Utomhusaktivitetslager</h4>"
+
+#~ msgctxt "OutdoorActivities|"
+#~ msgid "Walkways"
+#~ msgstr "Gångvägar"
+
+#~ msgctxt "OutdoorActivities|"
+#~ msgid "Hiking Routes"
+#~ msgstr "Vandringsleder"
+
+#~ msgctxt "OutdoorActivities|"
+#~ msgid "Bicycle Routes"
+#~ msgstr "Cykelvägar"
+
+#~ msgctxt "OutdoorActivities|"
+#~ msgid "Mountainbike Routes"
+#~ msgstr "Mountainbike-vägar"
+
+#~ msgctxt "OutdoorActivities|"
+#~ msgid "Inline Skating Routes"
+#~ msgstr "Rullskridskovägar"
+
+#~ msgctxt "OutdoorActivities|"
+#~ msgid "Bridleways"
+#~ msgstr "Ridvägar"
+
+#~ msgctxt "PlacemarkDialog|"
+#~ msgid "<h2>Routes</h2>"
+#~ msgstr "<h2>Leder</h2>"
+
+#~ msgctxt "ProfileSelectorMenu|"
+#~ msgid "Car (fastest)"
+#~ msgstr "Bil (snabbast)"
+
+#~ msgctxt "ProfileSelectorMenu|"
+#~ msgid "Bicycle"
+#~ msgstr "Cykel"
+
+#~ msgctxt "ProfileSelectorMenu|"
+#~ msgid "Pedestrian"
+#~ msgstr "Fotgängare"
+
+#~ msgctxt "PublicTransport|"
+#~ msgid "Train"
+#~ msgstr "Tåg"
+
+#~ msgctxt "PublicTransport|"
+#~ msgid "Subway"
+#~ msgstr "Tunnelbana"
+
+#~ msgctxt "PublicTransport|"
+#~ msgid "Tram"
+#~ msgstr "Spårvagn"
+
+#~ msgctxt "PublicTransport|"
+#~ msgid "Bus"
+#~ msgstr "Buss"
+
+#~ msgctxt "PublicTransport|"
+#~ msgid "Trolley Bus"
+#~ msgstr "Trådbuss"
+
+#~ msgctxt "RouteEditor|"
+#~ msgid "Search for places to integrate them into a route."
+#~ msgstr "Sök efter platser för att infoga i en vägbeskrivning."
+
+#~ msgctxt "Search|"
+#~ msgid "Your bookmarks will appear here."
+#~ msgstr "Dina bokmärken visas här."
+
+#~ msgctxt "SearchField|"
+#~ msgid "Search"
+#~ msgstr "Sök"
+
+#~ msgctxt "SettingsDialog|"
+#~ msgid "Network Settings"
+#~ msgstr "Nätverksinställningar"
+
+#~ msgctxt "SettingsDialog|"
+#~ msgid "Download Maps via WLAN only"
+#~ msgstr "Ladda bara ner kartor via WLAN"
+
+#~ msgctxt "SidePanel|"
+#~ msgid "Public Transport"
+#~ msgstr "Kollektivtrafik"
+
+#~ msgctxt "SidePanel|"
+#~ msgid "Outdoor Activities"
+#~ msgstr "Utomhusaktiviteter"
+
+#~ msgctxt "SidePanel|"
+#~ msgid "Accessibility"
+#~ msgstr "Handikappanpassning"
+
+#~ msgctxt "SidePanel|"
+#~ msgid "About Marble Maps…"
+#~ msgstr "Om Marble kartor..."
 
 #~ msgctxt "OpenCachingCacheDialog|KDE::DoNotExtract"
 #~ msgid "TextLabel"
