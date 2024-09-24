@@ -10,7 +10,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"PO-Revision-Date: 2024-09-21 10:37+0300\n"
+"PO-Revision-Date: 2024-09-23 21:50+0300\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -10297,12 +10297,12 @@ msgstr ""
 #: src/lib/marble/MarbleNavigationSettingsWidget.ui:208
 msgctxt "MarbleNavigationSettingsWidget|"
 msgid "JOSM"
-msgstr ""
+msgstr "JOSM"
 
 #: src/lib/marble/MarbleNavigationSettingsWidget.ui:213
 msgctxt "MarbleNavigationSettingsWidget|"
 msgid "Merkaartor"
-msgstr ""
+msgstr "Merkaartor"
 
 #: src/lib/marble/MarbleNavigator.ui:62
 #, fuzzy
@@ -10488,22 +10488,22 @@ msgstr "תוסף בדיקה"
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:23
 msgctxt "MarbleTimeSettingsWidget|"
 msgid "Time Zone"
-msgstr ""
+msgstr "אזור זמן"
 
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:29
 msgctxt "MarbleTimeSettingsWidget|"
 msgid "UTC"
-msgstr ""
+msgstr "זמן אוניברסלי מתואם - UTC"
 
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:39
 msgctxt "MarbleTimeSettingsWidget|"
 msgid "System time zone"
-msgstr ""
+msgstr "אזור הזמן של המערכת"
 
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:51
 msgctxt "MarbleTimeSettingsWidget|"
 msgid "Choose Time zone"
-msgstr ""
+msgstr "בחירת אזור זמן"
 
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:68
 #, fuzzy
@@ -10514,132 +10514,132 @@ msgstr "העתק קואורדינטות"
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:73
 msgctxt "MarbleTimeSettingsWidget|"
 msgid "European Central Time"
-msgstr ""
+msgstr "שעון מרכז אירופה"
 
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:78
 msgctxt "MarbleTimeSettingsWidget|"
 msgid "Eastern European Time"
-msgstr ""
+msgstr "שעון מזרח אירופה"
 
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:83
 msgctxt "MarbleTimeSettingsWidget|"
 msgid "Egypt Standard Time"
-msgstr ""
+msgstr "שעון מצרים"
 
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:88
 msgctxt "MarbleTimeSettingsWidget|"
 msgid "Eastern African Time"
-msgstr ""
+msgstr "שעון מזרח אפריקה"
 
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:93
 msgctxt "MarbleTimeSettingsWidget|"
 msgid "Middle East Time"
-msgstr ""
+msgstr "שעון המזרח התיכון"
 
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:98
 msgctxt "MarbleTimeSettingsWidget|"
 msgid "Near East Time"
-msgstr ""
+msgstr "שעון המזרח הקרוב"
 
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:103
 msgctxt "MarbleTimeSettingsWidget|"
 msgid "Pakistan Lahore Time"
-msgstr ""
+msgstr "שעון לאהור פקיסטאן"
 
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:108
 msgctxt "MarbleTimeSettingsWidget|"
 msgid "India Standard Time"
-msgstr ""
+msgstr "שעון הודו"
 
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:113
 msgctxt "MarbleTimeSettingsWidget|"
 msgid "Bangladesh Standard Time"
-msgstr ""
+msgstr "שעון בנגלדש"
 
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:118
 msgctxt "MarbleTimeSettingsWidget|"
 msgid "Vietnam Standard Time"
-msgstr ""
+msgstr "שעון וייטנאם"
 
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:123
 msgctxt "MarbleTimeSettingsWidget|"
 msgid "China Taiwan Time"
-msgstr ""
+msgstr "שעון סין טאיוואן"
 
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:128
 msgctxt "MarbleTimeSettingsWidget|"
 msgid "Japan Standard Time"
-msgstr ""
+msgstr "שעון יפן"
 
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:133
 msgctxt "MarbleTimeSettingsWidget|"
 msgid "Australia Central Time"
-msgstr ""
+msgstr "שעון מרכז אוסטרליה"
 
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:138
 msgctxt "MarbleTimeSettingsWidget|"
 msgid "Australia Eastern Time"
-msgstr ""
+msgstr "שעון מזרח אוסטרליה"
 
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:143
 msgctxt "MarbleTimeSettingsWidget|"
 msgid "Solomon Standard Time"
-msgstr ""
+msgstr "שעון סולומון"
 
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:148
 msgctxt "MarbleTimeSettingsWidget|"
 msgid "New Zealand Standard Time"
-msgstr ""
+msgstr "שעון ניו זילנד"
 
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:153
 msgctxt "MarbleTimeSettingsWidget|"
 msgid "Midway Islands Time"
-msgstr ""
+msgstr "שעון מידוויי"
 
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:158
 msgctxt "MarbleTimeSettingsWidget|"
 msgid "Hawaii Standard Time"
-msgstr ""
+msgstr "שעון הוואי"
 
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:163
 msgctxt "MarbleTimeSettingsWidget|"
 msgid "Alaska Standard Time"
-msgstr ""
+msgstr "שעון אלסקה"
 
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:168
 msgctxt "MarbleTimeSettingsWidget|"
 msgid "Pacific Standard Time"
-msgstr ""
+msgstr "שעון האוקיינוס השקט"
 
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:173
 msgctxt "MarbleTimeSettingsWidget|"
 msgid "Phoenix Standard Time"
-msgstr ""
+msgstr "שעון פיניקס ארה״ב"
 
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:178
 msgctxt "MarbleTimeSettingsWidget|"
 msgid "Mountain Standard Time"
-msgstr ""
+msgstr "שעון הרי ארה״ב"
 
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:183
 msgctxt "MarbleTimeSettingsWidget|"
 msgid "Central Standard Time"
-msgstr ""
+msgstr "שעון מרכז ארה״ב"
 
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:188
 msgctxt "MarbleTimeSettingsWidget|"
 msgid "Eastern Standard Time"
-msgstr ""
+msgstr "שעון מזרח ארה״ב"
 
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:193
 msgctxt "MarbleTimeSettingsWidget|"
 msgid "Indiana Eastern Standard Time"
-msgstr ""
+msgstr "שעון המזרח אינדיאנה"
 
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:198
 msgctxt "MarbleTimeSettingsWidget|"
 msgid "Puerto Rico and US Virgin Islands Time"
-msgstr ""
+msgstr "שעון פוארטו ריקו ואיי הבתולה האמריקאיים"
 
 #: src/lib/marble/MarbleTimeSettingsWidget.ui:203
 msgctxt "MarbleTimeSettingsWidget|"
@@ -16770,10 +16770,9 @@ msgid "Weather update interval"
 msgstr ""
 
 #: src/plugins/render/weather/WeatherConfigWidget.ui:224
-#, fuzzy
 msgctxt "WeatherConfigWidget|"
 msgid " hours"
-msgstr "צוות התרגום של KDE ישראל"
+msgstr " שעות"
 
 #: src/plugins/render/weather/WeatherData.cpp:314
 msgctxt "WeatherData|"
@@ -16781,16 +16780,14 @@ msgid "sunny"
 msgstr ""
 
 #: src/plugins/render/weather/WeatherData.cpp:316
-#, fuzzy
 msgctxt "WeatherData|"
 msgid "clear"
-msgstr "&חפש"
+msgstr "פינוי"
 
 #: src/plugins/render/weather/WeatherData.cpp:319
-#, fuzzy
 msgctxt "WeatherData|"
 msgid "few clouds"
-msgstr "&סגור"
+msgstr "מעט עננים"
 
 #: src/plugins/render/weather/WeatherData.cpp:322
 msgctxt "WeatherData|"
@@ -16798,34 +16795,29 @@ msgid "partly cloudy"
 msgstr ""
 
 #: src/plugins/render/weather/WeatherData.cpp:324
-#, fuzzy
 msgctxt "WeatherData|"
 msgid "overcast"
-msgstr "גבולות"
+msgstr "מעונן"
 
 #: src/plugins/render/weather/WeatherData.cpp:327
-#, fuzzy
 msgctxt "WeatherData|"
 msgid "light showers"
-msgstr "הצג גבולות"
+msgstr "ממטרים קלים"
 
 #: src/plugins/render/weather/WeatherData.cpp:330
-#, fuzzy
 msgctxt "WeatherData|"
 msgid "showers"
-msgstr "הצג גבולות"
+msgstr "ממטרים"
 
 #: src/plugins/render/weather/WeatherData.cpp:332
-#, fuzzy
 msgctxt "WeatherData|"
 msgid "light rain"
-msgstr "פני שטח"
+msgstr "גשם קל"
 
 #: src/plugins/render/weather/WeatherData.cpp:334
-#, fuzzy
 msgctxt "WeatherData|"
 msgid "rain"
-msgstr "פני שטח"
+msgstr "גשם"
 
 #: src/plugins/render/weather/WeatherData.cpp:337
 msgctxt "WeatherData|"
@@ -16848,10 +16840,9 @@ msgid "occasionally snow"
 msgstr ""
 
 #: src/plugins/render/weather/WeatherData.cpp:346
-#, fuzzy
 msgctxt "WeatherData|"
 msgid "light snow"
-msgstr "פני שטח"
+msgstr "שלג קל"
 
 #: src/plugins/render/weather/WeatherData.cpp:348
 msgctxt "WeatherData|"
@@ -16874,112 +16865,94 @@ msgid "sandstorm"
 msgstr ""
 
 #: src/plugins/render/weather/WeatherData.cpp:403
-#, fuzzy
 msgctxt "WeatherData|"
 msgid "N"
-msgstr "צ"
+msgstr "צפ׳"
 
 #: src/plugins/render/weather/WeatherData.cpp:405
-#, fuzzy
 msgctxt "WeatherData|"
 msgid "NNE"
-msgstr "צ"
+msgstr "צפ׳־צפ׳־מז׳"
 
 #: src/plugins/render/weather/WeatherData.cpp:407
-#, fuzzy
 msgctxt "WeatherData|"
 msgid "NE"
-msgstr "צ"
+msgstr "צפ׳־מז׳"
 
 #: src/plugins/render/weather/WeatherData.cpp:409
-#, fuzzy
 msgctxt "WeatherData|"
 msgid "ENE"
-msgstr "צ"
+msgstr "מז׳־צפ׳־מז׳"
 
 #: src/plugins/render/weather/WeatherData.cpp:411
-#, fuzzy
 msgctxt "WeatherData|"
 msgid "E"
-msgstr "מז"
+msgstr "מז׳"
 
 #: src/plugins/render/weather/WeatherData.cpp:413
-#, fuzzy
 msgctxt "WeatherData|"
 msgid "SSE"
-msgstr "ד"
+msgstr "דר׳־דר׳־מז׳"
 
 #: src/plugins/render/weather/WeatherData.cpp:415
-#, fuzzy
 msgctxt "WeatherData|"
 msgid "SE"
-msgstr "ד"
+msgstr "דר׳־מז׳"
 
 #: src/plugins/render/weather/WeatherData.cpp:417
-#, fuzzy
 msgctxt "WeatherData|"
 msgid "ESE"
-msgstr "ד"
+msgstr "מז׳־דר׳־מז׳"
 
 #: src/plugins/render/weather/WeatherData.cpp:419
-#, fuzzy
 msgctxt "WeatherData|"
 msgid "S"
-msgstr "ד"
+msgstr "דר׳"
 
 #: src/plugins/render/weather/WeatherData.cpp:421
-#, fuzzy
 msgctxt "WeatherData|"
 msgid "NNW"
-msgstr "צ"
+msgstr "צפ׳־צפ׳־מע׳"
 
 #: src/plugins/render/weather/WeatherData.cpp:423
-#, fuzzy
 msgctxt "WeatherData|"
 msgid "NW"
-msgstr "צ"
+msgstr "צפ׳־מע׳"
 
 #: src/plugins/render/weather/WeatherData.cpp:425
-#, fuzzy
 msgctxt "WeatherData|"
 msgid "WNW"
-msgstr "צ"
+msgstr "מע׳־צפ׳־מע׳"
 
 #: src/plugins/render/weather/WeatherData.cpp:427
-#, fuzzy
 msgctxt "WeatherData|"
 msgid "W"
-msgstr "מע"
+msgstr "מע׳"
 
 #: src/plugins/render/weather/WeatherData.cpp:429
-#, fuzzy
 msgctxt "WeatherData|"
 msgid "SSW"
-msgstr "ד"
+msgstr "דר׳־דר׳־מע׳"
 
 #: src/plugins/render/weather/WeatherData.cpp:431
-#, fuzzy
 msgctxt "WeatherData|"
 msgid "SW"
-msgstr "ד"
+msgstr "דר׳־מע׳"
 
 #: src/plugins/render/weather/WeatherData.cpp:433
-#, fuzzy
 msgctxt "WeatherData|"
 msgid "WSW"
-msgstr "ד"
+msgstr "מע׳־דר׳־מע׳"
 
 #: src/plugins/render/weather/WeatherData.cpp:544
-#, fuzzy
 msgctxt "QObject|"
 msgid "mph"
-msgstr "ק\"מ"
+msgstr " מיילים לשעה"
 
 #: src/plugins/render/weather/WeatherData.cpp:547
-#, fuzzy
 msgctxt "QObject|"
 msgid "m/s"
-msgstr "ק\"מ"
+msgstr "מטרים לשנייה"
 
 #: src/plugins/render/weather/WeatherData.cpp:550
 msgctxt "QObject|"
@@ -17025,7 +16998,7 @@ msgstr ""
 #, fuzzy
 msgctxt "WeatherData|air pressure has no change"
 msgid "steady"
-msgstr "מוכן"
+msgstr "יציב"
 
 #: src/plugins/render/weather/WeatherData.cpp:729
 msgctxt "WeatherData|air pressure falls"
@@ -17093,16 +17066,15 @@ msgid "Humidity: %1<br>"
 msgstr ""
 
 #: src/plugins/render/weather/WeatherItem.cpp:49
-#, fuzzy
 msgctxt "WeatherItemPrivate|"
 msgid "Weather"
-msgstr "0 מ' (מים)"
+msgstr "מזג אוויר"
 
 #: src/plugins/render/weather/WeatherItem.cpp:102
-#, fuzzy, qt-format
+#, qt-format
 msgctxt "WeatherItemPrivate|"
 msgid "Station: %1\n"
-msgstr "אוכלוסייה:"
+msgstr "תחנה: %1\n"
 
 #: src/plugins/render/weather/WeatherItem.cpp:111
 #, qt-format
@@ -17147,28 +17119,24 @@ msgid "%1: %2, %3 to %4"
 msgstr ""
 
 #: src/plugins/render/weather/WeatherItem.cpp:196
-#, fuzzy
 msgctxt "WeatherItemPrivate|"
 msgid "Remove from Favorites"
-msgstr "ה&סר נקודות מדידה"
+msgstr "הסרה מהמועדפים"
 
 #: src/plugins/render/weather/WeatherItem.cpp:196
-#, fuzzy
 msgctxt "WeatherItemPrivate|"
 msgid "Add to Favorites"
-msgstr "ה&סר נקודות מדידה"
+msgstr "הוספה למועדפים"
 
 #: src/plugins/render/weather/WeatherPlugin.cpp:73
-#, fuzzy
 msgctxt "Marble::WeatherPlugin|"
 msgid "Weather"
-msgstr "0 מ' (מים)"
+msgstr "מזג אוויר"
 
 #: src/plugins/render/weather/WeatherPlugin.cpp:78
-#, fuzzy
 msgctxt "Marble::WeatherPlugin|"
 msgid "&Weather"
-msgstr "0 מ' (מים)"
+msgstr "מזג &אוויר"
 
 #: src/plugins/render/weather/WeatherPlugin.cpp:93
 msgctxt "Marble::WeatherPlugin|"
@@ -17184,16 +17152,14 @@ msgid ""
 msgstr ""
 
 #: src/plugins/render/wikipedia/GeonamesParser.cpp:37
-#, fuzzy
 msgctxt "QObject|"
 msgid "The file is not a valid Geonames answer."
-msgstr "הקובץ הוא לא קובץ DGML 2.0 תקני"
+msgstr "הקובץ הוא לא תגובה תקנית של Geonames."
 
 #: src/plugins/render/wikipedia/WikipediaConfigWidget.ui:14
-#, fuzzy
 msgctxt "WikipediaConfigWidget|"
 msgid "Configure Wikipedia Plugin"
-msgstr "מתחיל חיפוש"
+msgstr "הגדרת תוסף ויקיפדיה"
 
 #: src/plugins/render/wikipedia/WikipediaConfigWidget.ui:20
 msgctxt "WikipediaConfigWidget|"
@@ -17214,16 +17180,14 @@ msgid "<b>%1</b><br>%2"
 msgstr ""
 
 #: src/plugins/render/wikipedia/WikipediaPlugin.cpp:65
-#, fuzzy
 msgctxt "Marble::WikipediaPlugin|"
 msgid "Wikipedia Articles"
-msgstr "ויקיפדיה"
+msgstr "ערכים של ויקיפדיה"
 
 #: src/plugins/render/wikipedia/WikipediaPlugin.cpp:70
-#, fuzzy
 msgctxt "Marble::WikipediaPlugin|"
 msgid "&Wikipedia"
-msgstr "ויקיפדיה"
+msgstr "&ויקיפדיה"
 
 #: src/plugins/render/wikipedia/WikipediaPlugin.cpp:85
 msgctxt "Marble::WikipediaPlugin|"
@@ -17240,10 +17204,9 @@ msgid ""
 msgstr ""
 
 #: src/plugins/runner/cache/CachePlugin.cpp:18
-#, fuzzy
 msgctxt "Marble::CachePlugin|"
 msgid "Cache File Parser"
-msgstr "&הגדרות"
+msgstr "מפענח קובצי מטמון"
 
 #: src/plugins/runner/cache/CachePlugin.cpp:33
 msgctxt "Marble::CachePlugin|"
@@ -17251,16 +17214,14 @@ msgid "Create GeoDataDocument from Cache Files"
 msgstr ""
 
 #: src/plugins/runner/cache/CachePlugin.cpp:48
-#, fuzzy
 msgctxt "Marble::CachePlugin|"
 msgid "Marble Cache Files"
-msgstr "&הגדרות"
+msgstr "קובצי מטמון של Marble"
 
 #: src/plugins/runner/cyclestreets/CycleStreetsConfigWidget.ui:20
-#, fuzzy
 msgctxt "CycleStreetsConfigWidget|"
 msgid "Route type:"
-msgstr "ייצא מפה"
+msgstr "סוג נתיב:"
 
 #: src/plugins/runner/cyclestreets/CycleStreetsConfigWidget.ui:30
 msgctxt "CycleStreetsConfigWidget|"
@@ -17318,16 +17279,14 @@ msgid "This service requires an Internet connection."
 msgstr ""
 
 #: src/plugins/runner/cyclestreets/CycleStreetsPlugin.cpp:83
-#, fuzzy
 msgctxt "Marble::CycleStreetsPlugin|"
 msgid "CycleStreets Routing"
-msgstr "הר"
+msgstr "ניווט עם CycleStreets"
 
 #: src/plugins/runner/cyclestreets/CycleStreetsPlugin.cpp:88
-#, fuzzy
 msgctxt "Marble::CycleStreetsPlugin|"
 msgid "CycleStreets"
-msgstr "הר"
+msgstr "CycleStreets"
 
 #: src/plugins/runner/cyclestreets/CycleStreetsPlugin.cpp:103
 msgctxt "Marble::CycleStreetsPlugin|"
@@ -17460,16 +17419,14 @@ msgid "Geographic Coordinates Search"
 msgstr "העתק קואורדינטות"
 
 #: src/plugins/runner/latlon/LatLonPlugin.cpp:24
-#, fuzzy
 msgctxt "Marble::LatLonPlugin|"
 msgid "Geographic Coordinates"
-msgstr "העתק קואורדינטות"
+msgstr "נקודות ציון גאוגרפיות"
 
 #: src/plugins/runner/latlon/LatLonPlugin.cpp:39
-#, fuzzy
 msgctxt "Marble::LatLonPlugin|"
 msgid "Direct input of geographic coordinates"
-msgstr "העתק קואורדינטות"
+msgstr "קלט ישיר של נקודות ציון גאוגרפיות"
 
 #: src/plugins/runner/local-osm-search/DatabaseQuery.cpp:65
 msgctxt "QObject|"

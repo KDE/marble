@@ -1,0 +1,5016 @@
+# translation of marble.po to Occitan (lengadocian)
+# Copyright (C) 2008 This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Yannig Marchegay (Kokoyaya) <yannig@marchegay.org>, 2007, 2008.
+msgid ""
+msgstr ""
+"Project-Id-Version: marble\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2024-09-23 00:36+0000\n"
+"PO-Revision-Date: 2008-08-05 22:27+0200\n"
+"Last-Translator: Yannig Marchegay (Kokoyaya) <yannig@marchegay.org>\n"
+"Language-Team: Occitan (lengadocian) <ubuntu-l10n-oci@lists.ubuntu.com>\n"
+"Language: oc\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: KBabel 1.11.4\n"
+"X-Qt-Contexts: true\n"
+
+#, fuzzy, kde-format
+#| msgctxt "EMAIL OF TRANSLATORS"
+#| msgid "Your emails"
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "yannig@marchegay.org"
+
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "yannig@marchegay.org"
+
+#: Bookmarks.qml:20
+#, kde-format
+msgctxt "@title:window"
+msgid "Bookmarks"
+msgstr ""
+
+#: Bookmarks.qml:69
+#, kde-format
+msgid "Your bookmarks will appear here."
+msgstr ""
+
+#: CurrentPosition.qml:54
+#, fuzzy, kde-format
+#| msgid "Location"
+msgctxt "@option:check"
+msgid "Follow Current Position"
+msgstr "Emplaçament"
+
+#: main.cpp:37 MainScreen.qml:20 MainScreen.qml:177
+#, fuzzy, kde-format
+#| msgid "&About"
+msgid "Marble Maps"
+msgstr "&A prepaus de"
+
+#: main.cpp:39
+#, fuzzy, kde-format
+#| msgid "&Edit"
+msgid "Maps"
+msgstr "&Edicion"
+
+#: main.cpp:41
+#, kde-format
+msgid "© KDE Community"
+msgstr ""
+
+#: MainScreen.qml:86
+#, fuzzy, kde-format
+#| msgid "Transportation"
+msgid "Public Transport"
+msgstr "Los transpòrts"
+
+#: MainScreen.qml:101
+#, kde-format
+msgid "Outdoor Activities"
+msgstr ""
+
+#: MainScreen.qml:113
+#, kde-format
+msgctxt "@action:button"
+msgid "Accessibility"
+msgstr ""
+
+#: MainScreen.qml:122
+#, fuzzy, kde-format
+#| msgid "&About"
+msgctxt "@action:button"
+msgid "About"
+msgstr "&A prepaus de"
+
+#: MainScreen.qml:133
+#, kde-format
+msgctxt "@action:button"
+msgid "Bookmarks"
+msgstr ""
+
+#: MainScreen.qml:144
+#, kde-format
+msgctxt "@action:button"
+msgid "Layer Options"
+msgstr ""
+
+#: MainScreen.qml:455
+#, fuzzy, kde-format
+#| msgid "10 mm"
+msgid "%1 km"
+msgstr "10 mm"
+
+#: NavigationInfoBar.qml:20
+#, fuzzy, kde-format
+#| msgid "10 mm"
+msgctxt "distance in km"
+msgid "%1 km"
+msgstr "10 mm"
+
+#: NavigationInfoBar.qml:22
+#, kde-format
+msgctxt "distance in m"
+msgid "%1 m"
+msgstr ""
+
+#: NavigationInfoBar.qml:24
+#, kde-format
+msgctxt "distance in m with decimals"
+msgid "%1 m"
+msgstr ""
+
+#: Options.qml:20
+#, kde-format
+msgctxt "@title:window"
+msgid "Layer Options"
+msgstr ""
+
+#: Options.qml:23
+#, fuzzy, kde-format
+#| msgid "Transportation"
+msgctxt "@title:group"
+msgid "Public Transport Layers"
+msgstr "Los transpòrts"
+
+#: Options.qml:28
+#, kde-format
+msgctxt "@option:check"
+msgid "Train"
+msgstr ""
+
+#: Options.qml:35
+#, kde-format
+msgctxt "@option:check"
+msgid "Subway"
+msgstr ""
+
+#: Options.qml:42
+#, kde-format
+msgctxt "@option:check"
+msgid "Tram"
+msgstr ""
+
+#: Options.qml:49
+#, kde-format
+msgctxt "@option:check"
+msgid "Bus"
+msgstr ""
+
+#: Options.qml:56
+#, kde-format
+msgctxt "@option:check"
+msgid "Trolley Bus"
+msgstr ""
+
+#: Options.qml:64
+#, kde-format
+msgid "Outdoor Activities Layers"
+msgstr ""
+
+#: Options.qml:69
+#, kde-format
+msgctxt "@option:check"
+msgid "Walkways"
+msgstr ""
+
+#: Options.qml:76
+#, fuzzy, kde-format
+#| msgid "Open File"
+msgctxt "@option:check"
+msgid "Hiking Routes"
+msgstr "Dobrir un fichièr"
+
+#: Options.qml:83
+#, fuzzy, kde-format
+#| msgid "Back"
+msgctxt "@option:check"
+msgid "Bicycle Routes"
+msgstr "Pista"
+
+#: Options.qml:90
+#, kde-format
+msgctxt "@option:check"
+msgid "Mountainbike Routes"
+msgstr ""
+
+#: Options.qml:97
+#, fuzzy, kde-format
+#| msgid "Open File"
+msgctxt "@option:check"
+msgid "Inline Skating Routes"
+msgstr "Dobrir un fichièr"
+
+#: Options.qml:104
+#, kde-format
+msgctxt "@option:check"
+msgid "Bridleways"
+msgstr ""
+
+#: PlacemarkDialog.qml:48
+#, fuzzy, kde-format
+#| msgid "Name"
+msgctxt "placeholder"
+msgid "No Name"
+msgstr "Nom"
+
+#: PlacemarkDialog.qml:168
+#, kde-format
+msgctxt "@title:group"
+msgid "Tags:"
+msgstr ""
+
+#: ProfileSelectorMenu.qml:29
+#, fuzzy, kde-format
+#| msgid "State"
+msgid "Car (fastest)"
+msgstr "Aiga"
+
+#: ProfileSelectorMenu.qml:40
+#, fuzzy, kde-format
+#| msgid "Back"
+msgid "Bicycle"
+msgstr "Pista"
+
+#: ProfileSelectorMenu.qml:49
+#, kde-format
+msgid "Pedestrian"
+msgstr ""
+
+#: RouteEditor.qml:62
+#, kde-format
+msgid "Search for places to integrate them into a route."
+msgstr ""
+
+#: SettingsDialog.qml:48
+#, fuzzy, kde-format
+#| msgid "&Settings"
+msgid "Network Settings"
+msgstr "&Paramètres"
+
+#: SettingsDialog.qml:53
+#, fuzzy, kde-format
+#| msgid "Save File"
+msgid "Download Maps via WLAN only"
+msgstr "Enregistrar lo fichièr"
+
+#, fuzzy
+#~| msgid "State"
+#~ msgctxt "DGML|"
+#~ msgid "Craters"
+#~ msgstr "Aiga"
+
+#, fuzzy
+#~| msgid "&Search"
+#~ msgctxt "DGML|"
+#~ msgid "Maria"
+#~ msgstr "&Recercar"
+
+#, fuzzy
+#~| msgid "State"
+#~ msgctxt "DGML|"
+#~ msgid "Other"
+#~ msgstr "Aiga"
+
+#, fuzzy
+#~| msgid "Temperature"
+#~ msgctxt "DGML|"
+#~ msgid "Temperature (July)"
+#~ msgstr "Temperatura"
+
+#, fuzzy
+#~| msgid "Temperature"
+#~ msgctxt "DGML|"
+#~ msgid "Temperature"
+#~ msgstr "Temperatura"
+
+#, fuzzy
+#~| msgid "Transportation"
+#~ msgctxt "DGML|"
+#~ msgid "Airport"
+#~ msgstr "Los transpòrts"
+
+#, fuzzy
+#~| msgid "International"
+#~ msgctxt "DGML|"
+#~ msgid "International"
+#~ msgstr "Internacional"
+
+#, fuzzy
+#~| msgid "State"
+#~ msgctxt "DGML|"
+#~ msgid "State"
+#~ msgstr "Estat"
+
+#, fuzzy
+#~| msgid "Surface"
+#~ msgctxt "DGML|"
+#~ msgid "Surface"
+#~ msgstr "Surfàcia"
+
+#, fuzzy
+#~| msgid "State"
+#~ msgctxt "DGML|"
+#~ msgid "Water"
+#~ msgstr "Aiga"
+
+#, fuzzy
+#~| msgid "Areas"
+#~ msgctxt "DGML|"
+#~ msgid "Atlas"
+#~ msgstr "Zònas"
+
+#, fuzzy
+#~| msgid "Navigation"
+#~ msgctxt "DGML|"
+#~ msgid "Elevation"
+#~ msgstr "Navegacion"
+
+#, fuzzy
+#~| msgid "10 mm"
+#~ msgctxt "DGML|"
+#~ msgid "7000 m"
+#~ msgstr "10 mm"
+
+#, fuzzy
+#~| msgid "10 mm"
+#~ msgctxt "DGML|"
+#~ msgid "5000 m"
+#~ msgstr "10 mm"
+
+#, fuzzy
+#~| msgid "10 mm"
+#~ msgctxt "DGML|"
+#~ msgid "3500 m"
+#~ msgstr "10 mm"
+
+#, fuzzy
+#~| msgid "10 mm"
+#~ msgctxt "DGML|"
+#~ msgid "2000 m"
+#~ msgstr "10 mm"
+
+#, fuzzy
+#~| msgid "10 mm"
+#~ msgctxt "DGML|"
+#~ msgid "1000 m"
+#~ msgstr "10 mm"
+
+#, fuzzy
+#~| msgid "10 mm"
+#~ msgctxt "DGML|"
+#~ msgid "500 m"
+#~ msgstr "10 mm"
+
+#, fuzzy
+#~| msgid "10 mm"
+#~ msgctxt "DGML|"
+#~ msgid "200 m"
+#~ msgstr "10 mm"
+
+#, fuzzy
+#~| msgid "10 mm"
+#~ msgctxt "DGML|"
+#~ msgid "0 m"
+#~ msgstr "10 mm"
+
+#, fuzzy
+#~| msgid "10 mm"
+#~ msgctxt "DGML|"
+#~ msgid "-200 m"
+#~ msgstr "10 mm"
+
+#, fuzzy
+#~| msgid "10 mm"
+#~ msgctxt "DGML|"
+#~ msgid "-2000 m"
+#~ msgstr "10 mm"
+
+#, fuzzy
+#~| msgid "10 mm"
+#~ msgctxt "DGML|"
+#~ msgid "-4000 m"
+#~ msgstr "10 mm"
+
+#, fuzzy
+#~| msgid "10 mm"
+#~ msgctxt "DGML|"
+#~ msgid "-6500 m"
+#~ msgstr "10 mm"
+
+#, fuzzy
+#~| msgid "10 mm"
+#~ msgctxt "DGML|"
+#~ msgid "-11000 m"
+#~ msgstr "10 mm"
+
+#, fuzzy
+#~| msgid "Transportation"
+#~ msgctxt "DGML|"
+#~ msgid "Transportation"
+#~ msgstr "Los transpòrts"
+
+#, fuzzy
+#~| msgid "Location"
+#~ msgctxt "DGML|"
+#~ msgid "Education"
+#~ msgstr "Emplaçament"
+
+#, fuzzy
+#~| msgid "Save File"
+#~ msgctxt "DGML|"
+#~ msgid "Accommodation"
+#~ msgstr "Enregistrar lo fichièr"
+
+#, fuzzy
+#~| msgid "Back"
+#~ msgctxt "DGML|"
+#~ msgid "Track"
+#~ msgstr "Pista"
+
+#, fuzzy
+#~| msgid "International"
+#~ msgctxt "DGML|"
+#~ msgid "Railway station"
+#~ msgstr "Internacional"
+
+#, fuzzy
+#~| msgid "Forest"
+#~ msgctxt "DGML|"
+#~ msgid "Forest"
+#~ msgstr "Sapin"
+
+#, fuzzy
+#~| msgid "International"
+#~ msgctxt "DGML|"
+#~ msgid "Tourist attraction"
+#~ msgstr "Internacional"
+
+#, fuzzy
+#~| msgid "Save File"
+#~ msgctxt "DGML|"
+#~ msgid "Veterinary"
+#~ msgstr "Enregistrar lo fichièr"
+
+#, fuzzy
+#~| msgid "State"
+#~ msgctxt "DGML|"
+#~ msgid "Theatre"
+#~ msgstr "Estat"
+
+#, fuzzy
+#~| msgid "International"
+#~ msgctxt "DGML|"
+#~ msgid "Fire station"
+#~ msgstr "Internacional"
+
+#, fuzzy
+#~| msgid "&Search"
+#~ msgctxt "DGML|"
+#~ msgid "Car"
+#~ msgstr "&Recercar"
+
+#, fuzzy
+#~| msgid "International"
+#~ msgctxt "DGML|"
+#~ msgid "Texts and illustrations"
+#~ msgstr "Internacional"
+
+#, fuzzy
+#~| msgid "Description"
+#~ msgctxt "DGML|"
+#~ msgid "Precipitation"
+#~ msgstr "Descripcion"
+
+#, fuzzy
+#~| msgid "Down"
+#~ msgctxt "DGML|"
+#~ msgid "Town"
+#~ msgstr "Aval"
+
+#, fuzzy
+#~| msgid "State"
+#~ msgctxt "DGML|"
+#~ msgid "SRTM Data"
+#~ msgstr "Estat"
+
+#, fuzzy
+#~| msgid "Navigation"
+#~ msgctxt "DGML|"
+#~ msgid "Sentinel2 Satellite Map"
+#~ msgstr "Navigacion"
+
+#, fuzzy
+#~| msgid "Temperature"
+#~ msgctxt "DGML|"
+#~ msgid "Temperature (December)"
+#~ msgstr "Temperatura"
+
+#, fuzzy
+#~| msgid "&File"
+#~ msgctxt "DGML|"
+#~ msgid "Satellite View"
+#~ msgstr "&Fichièr"
+
+#, fuzzy
+#~| msgid "Ice"
+#~ msgctxt "DGML|"
+#~ msgid "Ice"
+#~ msgstr "Glaça"
+
+#, fuzzy
+#~| msgid "Navigation"
+#~ msgctxt "DGML|"
+#~ msgid "Vegetation"
+#~ msgstr "Navegacion"
+
+#, fuzzy
+#~| msgid "Right"
+#~ msgctxt "DGML|"
+#~ msgid "Night Sky"
+#~ msgstr "Drecha"
+
+#, fuzzy
+#~| msgid "Legend"
+#~ msgctxt "Legends|"
+#~ msgid "Marble: Legend"
+#~ msgstr "Legenda"
+
+#, fuzzy
+#~| msgid "International"
+#~ msgctxt "Legends|"
+#~ msgid "Population:"
+#~ msgstr "Internacional"
+
+#, fuzzy
+#~| msgid "Areas"
+#~ msgctxt "StarNames|"
+#~ msgid "Ara"
+#~ msgstr "Zònas"
+
+#, fuzzy
+#~| msgid "&Cancel"
+#~ msgctxt "StarNames|"
+#~ msgid "Cancer"
+#~ msgstr "&Anullar"
+
+#, fuzzy
+#~| msgid "State"
+#~ msgctxt "StarNames|"
+#~ msgid "Crater"
+#~ msgstr "Aiga"
+
+#, fuzzy
+#~| msgid "Normal"
+#~ msgctxt "StarNames|"
+#~ msgid "Norma"
+#~ msgstr "Normal"
+
+#, fuzzy
+#~| msgid "Open File"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&Open..."
+#~ msgstr "Dobrir un fichièr"
+
+#, fuzzy
+#~| msgid "Save File"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&Download Maps..."
+#~ msgstr "Enregistrar lo fichièr"
+
+#, fuzzy
+#~| msgid "Save File"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&Export Map..."
+#~ msgstr "Enregistrar lo fichièr"
+
+#, fuzzy
+#~| msgid "Save File"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Download &Region..."
+#~ msgstr "Enregistrar lo fichièr"
+
+#, fuzzy
+#~| msgid "&Print..."
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&Print..."
+#~ msgstr "&Estampar..."
+
+#, fuzzy
+#~| msgid "Ctrl+O"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Ctrl+P"
+#~ msgstr "Ctrl+O"
+
+#, fuzzy
+#~| msgid "&Quit"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&Quit"
+#~ msgstr "&Sortir"
+
+#, fuzzy
+#~| msgid "Ctrl+O"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Ctrl+Q"
+#~ msgstr "Ctrl+O"
+
+#, fuzzy
+#~| msgid "&Edit"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&Edit Map..."
+#~ msgstr "&Edicion"
+
+#, fuzzy
+#~| msgid "Show date"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&Show Status Bar"
+#~ msgstr "Visualizar la data"
+
+#, fuzzy
+#~| msgid "Description"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Lock Position"
+#~ msgstr "Descripcion"
+
+#, fuzzy
+#~| msgid "&Close"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&Clouds"
+#~ msgstr "&Tampar"
+
+#, fuzzy
+#~| msgid "What's &This"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "What's &This"
+#~ msgstr "Qu'es &aquò ?"
+
+#, fuzzy
+#~| msgid "&About"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "About &Qt"
+#~ msgstr "&A prepaus de"
+
+#, fuzzy
+#~| msgid "Location"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&Set Home Location"
+#~ msgstr "Emplaçament"
+
+#, fuzzy
+#~| msgid "&File"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&File"
+#~ msgstr "&Fichièr"
+
+#, fuzzy
+#~| msgid "&Edit"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&Edit"
+#~ msgstr "&Edicion"
+
+#, fuzzy
+#~| msgid "&View"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&View"
+#~ msgstr "Aficha&tge"
+
+#, fuzzy
+#~| msgid "Open File"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&Online Services"
+#~ msgstr "Dobrir un fichièr"
+
+#, fuzzy
+#~| msgid "Show date"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&Panels"
+#~ msgstr "Visualizar la data"
+
+#, fuzzy
+#~| msgid "&View"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&View Size"
+#~ msgstr "Aficha&tge"
+
+#, fuzzy
+#~| msgid "&Settings"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&Settings"
+#~ msgstr "&Paramètres"
+
+#, fuzzy
+#~| msgid "&Help"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&Help"
+#~ msgstr "&Ajuda"
+
+#, fuzzy
+#~| msgid "Home"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&Home"
+#~ msgstr "Repertòri personal"
+
+#, fuzzy
+#~| msgid "Ready"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Ready"
+#~ msgstr "Prèst"
+
+#, fuzzy
+#~| msgid "&Edit"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Export Map"
+#~ msgstr "&Edicion"
+
+#, fuzzy
+#~| msgid "Description"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Position: %1"
+#~ msgstr "Descripcion"
+
+#, fuzzy
+#~| msgid "Zoom In"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Zoom: %1"
+#~ msgstr "Agrandir lo zoom"
+
+#, fuzzy
+#~| msgid "&File"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Time: %1"
+#~ msgstr "&Fichièr"
+
+#, fuzzy
+#~| msgid "Open File"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Open File"
+#~ msgstr "Dobrir un fichièr"
+
+#, fuzzy
+#~| msgid "Legend"
+#~ msgctxt "Marble::ControlView|"
+#~ msgid "Legend"
+#~ msgstr "Legenda"
+
+#, fuzzy
+#~| msgid "Open File"
+#~ msgctxt "Marble::ControlView|"
+#~ msgid "Routing"
+#~ msgstr "Dobrir un fichièr"
+
+#, fuzzy
+#~| msgid "Location"
+#~ msgctxt "Marble::ControlView|"
+#~ msgid "Location"
+#~ msgstr "Emplaçament"
+
+#, fuzzy
+#~| msgid "&Search"
+#~ msgctxt "Marble::ControlView|"
+#~ msgid "Search"
+#~ msgstr "&Recercar"
+
+#, fuzzy
+#~| msgid "&File"
+#~ msgctxt "Marble::ControlView|"
+#~ msgid "Map View"
+#~ msgstr "&Fichièr"
+
+#, fuzzy
+#~| msgid "&File"
+#~ msgctxt "Marble::ControlView|"
+#~ msgid "Files"
+#~ msgstr "&Fichièr"
+
+#, fuzzy
+#~| msgid "Back"
+#~ msgctxt "Marble::ControlView|"
+#~ msgid "Tour"
+#~ msgstr "Pista"
+
+#, fuzzy
+#~| msgid "Show date"
+#~ msgctxt "Marble::ControlView|"
+#~ msgid "Show &All Panels"
+#~ msgstr "Visualizar la data"
+
+#, fuzzy
+#~| msgid "&File"
+#~ msgctxt "Marble::AbstractFloatItem|"
+#~ msgid "&Hide"
+#~ msgstr "&Fichièr"
+
+#, fuzzy
+#~| msgid "Path"
+#~ msgctxt "UiAddLinkDialog|"
+#~ msgid "Add link"
+#~ msgstr "Camin"
+
+#, fuzzy
+#~| msgid "Name"
+#~ msgctxt "UiAddLinkDialog|"
+#~ msgid "Name:"
+#~ msgstr "Nom"
+
+#, fuzzy
+#~| msgid "Desert"
+#~ msgctxt "BookmarkManagerDialogPrivate|"
+#~ msgid "Remove Folder"
+#~ msgstr "Desèrt"
+
+#, fuzzy
+#~| msgid "Desert"
+#~ msgctxt "UiBookmarkManagerDialog|"
+#~ msgid "Delete"
+#~ msgstr "Desèrt"
+
+#, fuzzy
+#~| msgid "&Edit"
+#~ msgctxt "UiBookmarkManagerDialog|"
+#~ msgid "Edit"
+#~ msgstr "&Edicion"
+
+#, fuzzy
+#~| msgid "Save File"
+#~ msgctxt "CloudRoutesDialog|"
+#~ msgid "Cloud Routes"
+#~ msgstr "Enregistrar lo fichièr"
+
+#, fuzzy
+#~| msgid "not available"
+#~ msgctxt "CloudRoutesDialog|"
+#~ msgid "No route available."
+#~ msgstr "pas disponible"
+
+#, fuzzy
+#~| msgid "&Close"
+#~ msgctxt "Marble::ConflictDialog|"
+#~ msgid "Use local"
+#~ msgstr "&Tampar"
+
+#, fuzzy
+#~| msgid "&Close"
+#~ msgctxt "Marble::ConflictDialog|"
+#~ msgid "Use cloud"
+#~ msgstr "&Tampar"
+
+#, fuzzy
+#~| msgid "&Close"
+#~ msgctxt "Marble::ConflictDialog|"
+#~ msgid "Always use cloud"
+#~ msgstr "&Tampar"
+
+#, fuzzy
+#~| msgid "Desert"
+#~ msgctxt "Marble::ConflictDialog|"
+#~ msgid "Deleted"
+#~ msgstr "Desèrt"
+
+#, fuzzy
+#~| msgid "Open File"
+#~ msgctxt "Marble::RouteItemDelegate|"
+#~ msgid "Open"
+#~ msgstr "Dobrir un fichièr"
+
+#, fuzzy
+#~| msgid "Desert"
+#~ msgctxt "Marble::RouteItemDelegate|"
+#~ msgid "Delete from cloud"
+#~ msgstr "Desèrt"
+
+#, fuzzy
+#~| msgid "not available"
+#~ msgctxt "QObject|"
+#~ msgid "No position available."
+#~ msgstr "pas disponible"
+
+#, fuzzy
+#~| msgid "km"
+#~ msgctxt "QObject|"
+#~ msgid "km/h"
+#~ msgstr "km"
+
+#, fuzzy
+#~| msgid "km"
+#~ msgctxt "QObject|"
+#~ msgid "m"
+#~ msgstr "m"
+
+#, fuzzy
+#~| msgid "km"
+#~ msgctxt "QObject|"
+#~ msgid "km"
+#~ msgstr "km"
+
+#, fuzzy
+#~| msgid "km"
+#~ msgctxt "QObject|"
+#~ msgid "m/h"
+#~ msgstr "km"
+
+#, fuzzy
+#~| msgid "Left"
+#~ msgctxt "QObject|"
+#~ msgid "ft"
+#~ msgstr "Esquèrra"
+
+#, fuzzy
+#~| msgid "km"
+#~ msgctxt "QObject|"
+#~ msgid "nm"
+#~ msgstr "m"
+
+#, fuzzy
+#~| msgid "Back"
+#~ msgctxt "QObject|"
+#~ msgid "Save Track"
+#~ msgstr "Pista"
+
+#, fuzzy
+#~| msgid "Back"
+#~ msgctxt "QObject|"
+#~ msgid "Open Track"
+#~ msgstr "Pista"
+
+#, fuzzy
+#~| msgid "Location"
+#~ msgctxt "CurrentLocationWidget|"
+#~ msgid "Current Location"
+#~ msgstr "Emplaçament"
+
+#, fuzzy
+#~| msgid "Description"
+#~ msgctxt "CurrentLocationWidget|"
+#~ msgid "Position Tracking"
+#~ msgstr "Descripcion"
+
+#, fuzzy
+#~| msgid "Back"
+#~ msgctxt "CurrentLocationWidget|"
+#~ msgid "Show Track"
+#~ msgstr "Pista"
+
+#, fuzzy
+#~| msgid "Back"
+#~ msgctxt "CurrentLocationWidget|"
+#~ msgid "Clear Track"
+#~ msgstr "Pista"
+
+#, fuzzy
+#~| msgid "..."
+#~ msgctxt "CurrentLocationWidget|"
+#~ msgid "..."
+#~ msgstr "..."
+
+#, fuzzy
+#~| msgid "not available"
+#~ msgctxt "CurrentLocationWidget|"
+#~ msgid "No position available."
+#~ msgstr "pas disponible"
+
+#, fuzzy
+#~| msgid "Navigation"
+#~ msgctxt "DataMigrationWidget|"
+#~ msgid "Data Migration"
+#~ msgstr "Navigacion"
+
+#, fuzzy
+#~| msgid "Location"
+#~ msgctxt "QObject|"
+#~ msgid "Current Location"
+#~ msgstr "Emplaçament"
+
+#, fuzzy
+#~| msgid "Back"
+#~ msgctxt "Marble::Placemark|"
+#~ msgid "%1 parking spaces"
+#~ msgstr "Pista"
+
+#, fuzzy
+#~| msgid "not available"
+#~ msgctxt "Marble::Placemark|A copy shop provides computers for customer use"
+#~ msgid "Computers available"
+#~ msgstr "pas disponible"
+
+#, fuzzy
+#~| msgid "not available"
+#~ msgctxt ""
+#~ "Marble::Placemark|A copy shop does not provide computers for customer use"
+#~ msgid "No computers available"
+#~ msgstr "pas disponible"
+
+#, fuzzy
+#~| msgid "Open File"
+#~ msgctxt ""
+#~ "Marble::Placemark|A copy shop provides a paid service to make phone calls"
+#~ msgid "Phone service"
+#~ msgstr "Dobrir un fichièr"
+
+#, fuzzy
+#~| msgid "Name"
+#~ msgctxt "Marble::Placemark|An active volcano"
+#~ msgid "Active"
+#~ msgstr "Nom"
+
+#, fuzzy
+#~| msgid "Normal"
+#~ msgctxt ""
+#~ "Marble::Placemark|A dormant volcano that will erupt at some point in the "
+#~ "future."
+#~ msgid "Dormant"
+#~ msgstr "Normal"
+
+#, fuzzy
+#~| msgid "Navigation"
+#~ msgctxt "Marble::Placemark|"
+#~ msgid "Rehabilitation"
+#~ msgstr "Navegacion"
+
+#, fuzzy
+#~| msgid "10 mm"
+#~ msgctxt "Marble::Placemark|"
+#~ msgid "%1 km/h"
+#~ msgstr "10 mm"
+
+#, fuzzy
+#~| msgid "Back"
+#~ msgctxt "Marble::Placemark|Parking spaces"
+#~ msgid "%1 disabled spaces"
+#~ msgstr "Pista"
+
+#, fuzzy
+#~| msgid "Back"
+#~ msgctxt "Marble::Placemark|Parking spaces"
+#~ msgid "%1 women spaces"
+#~ msgstr "Pista"
+
+#, fuzzy
+#~| msgid "Back"
+#~ msgctxt "Marble::Placemark|Parking spaces"
+#~ msgid "%1 parent and child spaces"
+#~ msgstr "Pista"
+
+#, fuzzy
+#~| msgid "not available"
+#~ msgctxt "Marble::Placemark|"
+#~ msgid "No reservation possible"
+#~ msgstr "pas disponible"
+
+#, fuzzy
+#~| msgid "Open File"
+#~ msgctxt "Marble::Placemark|"
+#~ msgid "Self-service"
+#~ msgstr "Dobrir un fichièr"
+
+#, fuzzy
+#~| msgid "Open File"
+#~ msgctxt "Marble::Placemark|"
+#~ msgid "No self-service"
+#~ msgstr "Dobrir un fichièr"
+
+#, fuzzy
+#~| msgid "Description"
+#~ msgctxt "Marble::Placemark|"
+#~ msgid "Inscription: %1"
+#~ msgstr "Descripcion"
+
+#, fuzzy
+#~| msgid "State"
+#~ msgctxt "Marble::Placemark|A carriage is heated"
+#~ msgid "Is heated"
+#~ msgstr "Estat"
+
+#, fuzzy
+#~| msgid "State"
+#~ msgctxt "Marble::Placemark|A carriage is not heated"
+#~ msgid "Not heated"
+#~ msgstr "Estat"
+
+#, fuzzy
+#~| msgid "not available"
+#~ msgctxt "Marble::Placemark|Bicycles can be transported"
+#~ msgid "Bicycle transportation possible"
+#~ msgstr "pas disponible"
+
+#, fuzzy
+#~| msgid "not available"
+#~ msgctxt "Marble::Placemark|Bicyles cannot be transported"
+#~ msgid "Bicycle transportation impossible"
+#~ msgstr "pas disponible"
+
+#, fuzzy
+#~| msgid "State"
+#~ msgctxt "Marble::Placemark|"
+#~ msgid "Not patrolled"
+#~ msgstr "Estat"
+
+#, fuzzy
+#~| msgid "Country:"
+#~ msgctxt "Marble::Placemark|Entry station of an aerialway"
+#~ msgid "Entry"
+#~ msgstr "Païs :"
+
+#, fuzzy
+#~| msgid "Navigation"
+#~ msgctxt "Marble::Placemark|"
+#~ msgid "Elevation: %1 m"
+#~ msgstr "Navegacion"
+
+#, fuzzy
+#~| msgid "not available"
+#~ msgctxt ""
+#~ "Marble::Placemark|Public wireless Internet access is available here."
+#~ msgid "Public wifi available"
+#~ msgstr "pas disponible"
+
+#, fuzzy
+#~| msgid "not available"
+#~ msgctxt "Marble::Placemark|Public wireless Internet is available here."
+#~ msgid "Public wifi available"
+#~ msgstr "pas disponible"
+
+#, fuzzy
+#~| msgid "International"
+#~ msgctxt "Marble::RouteRelationModel|"
+#~ msgid "International walking route"
+#~ msgstr "Internacional"
+
+#, fuzzy
+#~| msgid "Down"
+#~ msgctxt "Marble::RouteRelationModel|"
+#~ msgid "National walking route"
+#~ msgstr "Aval"
+
+#, fuzzy
+#~| msgid "International"
+#~ msgctxt "Marble::RouteRelationModel|"
+#~ msgid "International cycling route"
+#~ msgstr "Internacional"
+
+#, fuzzy
+#~| msgid "Navigation"
+#~ msgctxt "Marble::RouteRelationModel|"
+#~ msgid "Regional route"
+#~ msgstr "Navegacion"
+
+#, fuzzy
+#~| msgid "Down"
+#~ msgctxt "Marble::RouteRelationModel|"
+#~ msgid "National route"
+#~ msgstr "Aval"
+
+#, fuzzy
+#~| msgid "Low Quality"
+#~ msgctxt "Marble::RouteRelationModel|"
+#~ msgid "Local route"
+#~ msgstr "Qualitat bassa"
+
+#, fuzzy
+#~| msgid "Save File"
+#~ msgctxt "Marble::DownloadRegionDialog|"
+#~ msgid "Download Route"
+#~ msgstr "Enregistrar lo fichièr"
+
+#, fuzzy
+#~| msgid "Save File"
+#~ msgctxt "Marble::DownloadRegionDialog|"
+#~ msgid "Download Region"
+#~ msgstr "Enregistrar lo fichièr"
+
+#, fuzzy
+#~| msgid "&File"
+#~ msgctxt "Marble::DownloadRegionDialog|"
+#~ msgid "Vector tiles"
+#~ msgstr "&Fichièr"
+
+#, fuzzy
+#~| msgid "Description"
+#~ msgctxt "UiEditBookmarkDialog|"
+#~ msgid "&Description:"
+#~ msgstr "Descripcion"
+
+#, fuzzy
+#~| msgid "Desert"
+#~ msgctxt "UiEditBookmarkDialog|"
+#~ msgid "&Folder:"
+#~ msgstr "Desèrt"
+
+#, fuzzy
+#~| msgid "Desert"
+#~ msgctxt "UiEditBookmarkDialog|"
+#~ msgid "&Add Folder..."
+#~ msgstr "Desèrt"
+
+#, fuzzy
+#~| msgid "Navigation"
+#~ msgctxt "Marble::EditPlacemarkDialog|"
+#~ msgid "Relations"
+#~ msgstr "Navegacion"
+
+#, fuzzy
+#~| msgid "Navigation"
+#~ msgctxt "Marble::EditPlacemarkDialog|"
+#~ msgid "Elevation"
+#~ msgstr "Navegacion"
+
+#, fuzzy
+#~| msgid "Description"
+#~ msgctxt "UiEditPlacemarkDialog|"
+#~ msgid "Description"
+#~ msgstr "Descripcion"
+
+#, fuzzy
+#~| msgid "&Search"
+#~ msgctxt "UiEditPlacemarkDialog|"
+#~ msgid "Scale:"
+#~ msgstr "&Recercar"
+
+#, fuzzy
+#~| msgid "Path"
+#~ msgctxt "UiEditPlacemarkDialog|"
+#~ msgid "Add link"
+#~ msgstr "Camin"
+
+#, fuzzy
+#~| msgid "Navigation"
+#~ msgctxt "ElevationWidget|"
+#~ msgid "Elevation:"
+#~ msgstr "Navegacion"
+
+#, fuzzy
+#~| msgid "km"
+#~ msgctxt "ElevationWidget|"
+#~ msgid " m"
+#~ msgstr "m"
+
+#, fuzzy
+#~| msgid "Show date"
+#~ msgctxt "ExternalEditor|"
+#~ msgid "Editor Details"
+#~ msgstr "Visualizar la data"
+
+#, fuzzy
+#~| msgid "&File"
+#~ msgctxt "FileViewWidget|"
+#~ msgid "File View"
+#~ msgstr "&Fichièr"
+
+#, fuzzy
+#~| msgid "&Save"
+#~ msgctxt "FileViewWidget|"
+#~ msgid "&Save"
+#~ msgstr "&Enregistrar"
+
+#, fuzzy
+#~| msgid "&Close"
+#~ msgctxt "FileViewWidget|"
+#~ msgid "&Close"
+#~ msgstr "&Tampar"
+
+#, fuzzy
+#~| msgid "International"
+#~ msgctxt "Marble::FlyToEditWidget|"
+#~ msgid "Duration:"
+#~ msgstr "Internacional"
+
+#, fuzzy
+#~| msgid "Open File"
+#~ msgctxt "Marble::FlyToEditWidget|"
+#~ msgid "Current map center"
+#~ msgstr "Dobrir un fichièr"
+
+#, fuzzy
+#~| msgid "F9"
+#~ msgctxt "FormattedTextWidget|"
+#~ msgid "9"
+#~ msgstr "F9"
+
+#, fuzzy
+#~| msgid "Main Toolbar"
+#~ msgctxt "FormattedTextWidget|"
+#~ msgid "toolBar"
+#~ msgstr "Barra d'espleches principala"
+
+#, fuzzy
+#~| msgid "Path"
+#~ msgctxt "FormattedTextWidget|"
+#~ msgid "Add link"
+#~ msgstr "Camin"
+
+#, fuzzy
+#~| msgid "W"
+#~ msgctxt "GeoDataCoordinates|"
+#~ msgid "W"
+#~ msgstr "W"
+
+#, fuzzy
+#~| msgid "E"
+#~ msgctxt "GeoDataCoordinates|"
+#~ msgid "E"
+#~ msgstr "M"
+
+#, fuzzy
+#~| msgid "N"
+#~ msgctxt "GeoDataCoordinates|"
+#~ msgid "N"
+#~ msgstr "N"
+
+#, fuzzy
+#~| msgid "S"
+#~ msgctxt "GeoDataCoordinates|"
+#~ msgid "S"
+#~ msgstr "E"
+
+#, fuzzy
+#~| msgid "State"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Crater"
+#~ msgstr "Aiga"
+
+#, fuzzy
+#~| msgid "&Search"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Sea"
+#~ msgstr "&Recercar"
+
+#, fuzzy
+#~| msgid "City"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "City"
+#~ msgstr "Ciutat"
+
+#, fuzzy
+#~| msgid "City"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "County Capital"
+#~ msgstr "Ciutat"
+
+#, fuzzy
+#~| msgid "City"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "State Capital"
+#~ msgstr "Ciutat"
+
+#, fuzzy
+#~| msgid "Down"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Nation Capital"
+#~ msgstr "Aval"
+
+#, fuzzy
+#~| msgid "Navigation"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Nation"
+#~ msgstr "Navigacion"
+
+#, fuzzy
+#~| msgid "Navigation"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Satellite"
+#~ msgstr "Navigacion"
+
+#, fuzzy
+#~| msgid "City"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "City Capital"
+#~ msgstr "Ciutat"
+
+#, fuzzy
+#~| msgid "Down"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "National Capital"
+#~ msgstr "Aval"
+
+#, fuzzy
+#~| msgid "Low Quality"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Locality"
+#~ msgstr "Qualitat bassa"
+
+#, fuzzy
+#~| msgid "Down"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Town"
+#~ msgstr "Aval"
+
+#, fuzzy
+#~| msgid "Down"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Town Capital"
+#~ msgstr "Aval"
+
+#, fuzzy
+#~| msgid "City"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Village Capital"
+#~ msgstr "Ciutat"
+
+#, fuzzy
+#~| msgid "State"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Water"
+#~ msgstr "Aiga"
+
+#, fuzzy
+#~| msgid "State"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Heath"
+#~ msgstr "Aiga"
+
+#, fuzzy
+#~| msgid "Navigation"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Elevator"
+#~ msgstr "Navegacion"
+
+#, fuzzy
+#~| msgid "Show date"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Unknown Road"
+#~ msgstr "Visualizar la data"
+
+#, fuzzy
+#~| msgid "Path"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Path"
+#~ msgstr "Camin"
+
+#, fuzzy
+#~| msgid "Back"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Track"
+#~ msgstr "Pista"
+
+#, fuzzy
+#~| msgid "Show date"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Tertiary Link Road"
+#~ msgstr "Visualizar la data"
+
+#, fuzzy
+#~| msgid "Show date"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Tertiary Road"
+#~ msgstr "Visualizar la data"
+
+#, fuzzy
+#~| msgid "Show date"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Trunk Link Road"
+#~ msgstr "Visualizar la data"
+
+#, fuzzy
+#~| msgid "Show date"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Trunk Road"
+#~ msgstr "Visualizar la data"
+
+#, fuzzy
+#~| msgid "&Search"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Bar"
+#~ msgstr "&Recercar"
+
+#, fuzzy
+#~| msgid "Save File"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Veterinary"
+#~ msgstr "Enregistrar lo fichièr"
+
+#, fuzzy
+#~| msgid "State"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Water Park"
+#~ msgstr "Aiga"
+
+#, fuzzy
+#~| msgid "Right"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Night Club"
+#~ msgstr "Drecha"
+
+#, fuzzy
+#~| msgid "International"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Fire Station"
+#~ msgstr "Internacional"
+
+#, fuzzy
+#~| msgid "Down"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Town Hall"
+#~ msgstr "Aval"
+
+#, fuzzy
+#~| msgid "International"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Charging Station"
+#~ msgstr "Internacional"
+
+#, fuzzy
+#~| msgid "State"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Car Wash"
+#~ msgstr "Aiga"
+
+#, fuzzy
+#~| msgid "Low Quality"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Social Facility"
+#~ msgstr "Qualitat bassa"
+
+#, fuzzy
+#~| msgid "City"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "City Wall"
+#~ msgstr "Ciutat"
+
+#, fuzzy
+#~| msgid "Transportation"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Lift Gate"
+#~ msgstr "Los transpòrts"
+
+#, fuzzy
+#~| msgid "City"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Wall"
+#~ msgstr "Ciutat"
+
+#, fuzzy
+#~| msgid "Back"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Cave Entrance"
+#~ msgstr "Pista"
+
+#, fuzzy
+#~| msgid "Show date"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Confectionery"
+#~ msgstr "Visualizar la data"
+
+#, fuzzy
+#~| msgid "Open File"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Beauty Services"
+#~ msgstr "Dobrir un fichièr"
+
+#, fuzzy
+#~| msgid "Back"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Bicycle Shop"
+#~ msgstr "Pista"
+
+#, fuzzy
+#~| msgid "State"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Car Dealer"
+#~ msgstr "Aiga"
+
+#, fuzzy
+#~| msgid "State"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Car Repair Shop"
+#~ msgstr "Aiga"
+
+#, fuzzy
+#~| msgid "State"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Car Parts"
+#~ msgstr "Aiga"
+
+#, fuzzy
+#~| msgid "Back"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Motorcycle Shop"
+#~ msgstr "Pista"
+
+#, fuzzy
+#~| msgid "Transportation"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Sports Shop"
+#~ msgstr "Los transpòrts"
+
+#, fuzzy
+#~| msgid "Open File"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Printing Services"
+#~ msgstr "Dobrir un fichièr"
+
+#, fuzzy
+#~| msgid "Save File"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Stationery"
+#~ msgstr "Enregistrar lo fichièr"
+
+#, fuzzy
+#~| msgid "State"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Tea Shop"
+#~ msgstr "Aiga"
+
+#, fuzzy
+#~| msgid "State"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Water Tower"
+#~ msgstr "Aiga"
+
+#, fuzzy
+#~| msgid "Navigation"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Communications Tower"
+#~ msgstr "Navigacion"
+
+#, fuzzy
+#~| msgid "International"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Tourist Attraction"
+#~ msgstr "Internacional"
+
+#, fuzzy
+#~| msgid "International"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Information"
+#~ msgstr "Internacional"
+
+#, fuzzy
+#~| msgid "State"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Theatre"
+#~ msgstr "Estat"
+
+#, fuzzy
+#~| msgid "Open File"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "View Point"
+#~ msgstr "Dobrir un fichièr"
+
+#, fuzzy
+#~| msgid "Zoom In"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Zoo"
+#~ msgstr "Agrandir lo zoom"
+
+#, fuzzy
+#~| msgid "Transportation"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Airport Gate"
+#~ msgstr "Los transpòrts"
+
+#, fuzzy
+#~| msgid "Transportation"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Airport Runway"
+#~ msgstr "Los transpòrts"
+
+#, fuzzy
+#~| msgid "Transportation"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Airport Apron"
+#~ msgstr "Los transpòrts"
+
+#, fuzzy
+#~| msgid "Transportation"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Airport Taxiway"
+#~ msgstr "Los transpòrts"
+
+#, fuzzy
+#~| msgid "Transportation"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Airport Terminal"
+#~ msgstr "Los transpòrts"
+
+#, fuzzy
+#~| msgid "International"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Bus Station"
+#~ msgstr "Internacional"
+
+#, fuzzy
+#~| msgid "International"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Bus Stop"
+#~ msgstr "Internacional"
+
+#, fuzzy
+#~| msgid "International"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Gas Station"
+#~ msgstr "Internacional"
+
+#, fuzzy
+#~| msgid "Back"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Parking"
+#~ msgstr "Pista"
+
+#, fuzzy
+#~| msgid "Back"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Parking Space"
+#~ msgstr "Pista"
+
+#, fuzzy
+#~| msgid "Back"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Bicycle Rental"
+#~ msgstr "Pista"
+
+#, fuzzy
+#~| msgid "State"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Car Rental"
+#~ msgstr "Aiga"
+
+#, fuzzy
+#~| msgid "International"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Train Station"
+#~ msgstr "Internacional"
+
+#, fuzzy
+#~| msgid "Back"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Bicycle Parking"
+#~ msgstr "Pista"
+
+#, fuzzy
+#~| msgid "Back"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Motorcycle Parking"
+#~ msgstr "Pista"
+
+#, fuzzy
+#~| msgid "&Search"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Marina"
+#~ msgstr "&Recercar"
+
+#, fuzzy
+#~| msgid "Back"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Park"
+#~ msgstr "Pista"
+
+#, fuzzy
+#~| msgid "Temperature"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Cemetery"
+#~ msgstr "Temperatura"
+
+#, fuzzy
+#~| msgid "Show date"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Construction"
+#~ msgstr "Visualizar la data"
+
+#, fuzzy
+#~| msgid "Legend"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Landfill"
+#~ msgstr "Legenda"
+
+#, fuzzy
+#~| msgid "Shadow"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Meadow"
+#~ msgstr "Ombra"
+
+#, fuzzy
+#~| msgid "International"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Railway"
+#~ msgstr "Internacional"
+
+#, fuzzy
+#~| msgid "International"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Rail"
+#~ msgstr "Internacional"
+
+#, fuzzy
+#~| msgid "Right"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Light Rail"
+#~ msgstr "Drecha"
+
+#, fuzzy
+#~| msgid "International"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Railway Construction"
+#~ msgstr "Internacional"
+
+#, fuzzy
+#~| msgid "State"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Power Tower"
+#~ msgstr "Aiga"
+
+#, fuzzy
+#~| msgid "International"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Aerialway Station"
+#~ msgstr "Internacional"
+
+#, fuzzy
+#~| msgid "State"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Rope Tow"
+#~ msgstr "Aiga"
+
+#, fuzzy
+#~| msgid "Back"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Skitour"
+#~ msgstr "Pista"
+
+#, fuzzy
+#~| msgid "Back"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Snow Park"
+#~ msgstr "Pista"
+
+#, fuzzy
+#~| msgid "Legend"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Land Mass"
+#~ msgstr "Legenda"
+
+#, fuzzy
+#~| msgid "International"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "International Date Line"
+#~ msgstr "Internacional"
+
+#, fuzzy
+#~| msgid "International"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Railway Crossing"
+#~ msgstr "Internacional"
+
+#, fuzzy
+#~| msgid "Back"
+#~ msgctxt "GeoLineStringGraphicsItem|"
+#~ msgid "Detour"
+#~ msgstr "Pista"
+
+#, fuzzy
+#~| msgid "Open File"
+#~ msgctxt "GeoLineStringGraphicsItem|"
+#~ msgid "Ferry Route"
+#~ msgstr "Dobrir un fichièr"
+
+#, fuzzy
+#~| msgid "Back"
+#~ msgctxt "GeoLineStringGraphicsItem|"
+#~ msgid "Bicycle Route"
+#~ msgstr "Pista"
+
+#, fuzzy
+#~| msgid "Open File"
+#~ msgctxt "GeoLineStringGraphicsItem|"
+#~ msgid "Walking Route"
+#~ msgstr "Dobrir un fichièr"
+
+#, fuzzy
+#~| msgid "Open File"
+#~ msgctxt "GeoLineStringGraphicsItem|"
+#~ msgid "Hiking Route"
+#~ msgstr "Dobrir un fichièr"
+
+#, fuzzy
+#~| msgid "Open File"
+#~ msgctxt "GeoLineStringGraphicsItem|"
+#~ msgid "Inline Skates Route"
+#~ msgstr "Dobrir un fichièr"
+
+#, fuzzy
+#~| msgid "Back"
+#~ msgctxt "GeoLineStringGraphicsItem|"
+#~ msgid "Skitour"
+#~ msgstr "Pista"
+
+#, fuzzy
+#~| msgid "Location"
+#~ msgctxt "Marble::TargetModel|"
+#~ msgid "Current Location: %1"
+#~ msgstr "Emplaçament"
+
+#, fuzzy
+#~| msgid "Home"
+#~ msgctxt "Marble::TargetModel|"
+#~ msgid "Home"
+#~ msgstr "Repertòri personal"
+
+#, fuzzy
+#~| msgid "Go To"
+#~ msgctxt "GoTo|"
+#~ msgid "Go To..."
+#~ msgstr "Anar a"
+
+#, fuzzy
+#~| msgid "&Search"
+#~ msgctxt "GoTo|"
+#~ msgid "Search"
+#~ msgstr "&Recercar"
+
+#, fuzzy
+#~| msgid "N"
+#~ msgctxt "LatLonBoxWidget|"
+#~ msgid "&N"
+#~ msgstr "N"
+
+#, fuzzy
+#~| msgid "W"
+#~ msgctxt "LatLonBoxWidget|"
+#~ msgid "&W"
+#~ msgstr "W"
+
+#, fuzzy
+#~| msgid "E"
+#~ msgctxt "LatLonBoxWidget|"
+#~ msgid "&E"
+#~ msgstr "M"
+
+#, fuzzy
+#~| msgid "S"
+#~ msgctxt "LatLonBoxWidget|"
+#~ msgid "&S"
+#~ msgstr "E"
+
+#, fuzzy
+#~| msgid "E"
+#~ msgctxt "Marble::LatLonEdit|East, the direction"
+#~ msgid "E"
+#~ msgstr "M"
+
+#, fuzzy
+#~| msgid "W"
+#~ msgctxt "Marble::LatLonEdit|West, the direction"
+#~ msgid "W"
+#~ msgstr "W"
+
+#, fuzzy
+#~| msgid "N"
+#~ msgctxt "Marble::LatLonEdit|North, the direction"
+#~ msgid "N"
+#~ msgstr "N"
+
+#, fuzzy
+#~| msgid "S"
+#~ msgctxt "Marble::LatLonEdit|South, the direction"
+#~ msgid "S"
+#~ msgstr "E"
+
+#, fuzzy
+#~| msgid "Legend"
+#~ msgctxt "LegendWidget|"
+#~ msgid "Legend"
+#~ msgstr "Legenda"
+
+#, fuzzy
+#~| msgid "&Cancel"
+#~ msgctxt "Marble::MapItemDelegate|"
+#~ msgid "Cancel"
+#~ msgstr "&Anullar"
+
+#, fuzzy
+#~| msgid "Open File"
+#~ msgctxt "Marble::MapItemDelegate|"
+#~ msgid "Open"
+#~ msgstr "Dobrir un fichièr"
+
+#, fuzzy
+#~| msgid "Name"
+#~ msgctxt "QObject|"
+#~ msgid "Name"
+#~ msgstr "Nom"
+
+#, fuzzy
+#~| msgid "&File"
+#~ msgctxt "Marble::MapViewWidget|"
+#~ msgid "Globe View"
+#~ msgstr "&Fichièr"
+
+#, fuzzy
+#~| msgid "&File"
+#~ msgctxt "Marble::MapViewWidget|"
+#~ msgid "Mercator View"
+#~ msgstr "&Fichièr"
+
+#, fuzzy
+#~| msgid "&File"
+#~ msgctxt "Marble::MapViewWidget|"
+#~ msgid "Flat View"
+#~ msgstr "&Fichièr"
+
+#, fuzzy
+#~| msgid "&File"
+#~ msgctxt "MapViewWidget|"
+#~ msgid "Map View"
+#~ msgstr "&Fichièr"
+
+#, fuzzy
+#~| msgid "Description"
+#~ msgctxt "MapViewWidget|"
+#~ msgid "&Projection"
+#~ msgstr "Descripcion"
+
+#, fuzzy
+#~| msgid "&File"
+#~ msgctxt "MapViewWidget|"
+#~ msgid "Globe"
+#~ msgstr "&Fichièr"
+
+#, fuzzy
+#~| msgid "Open File"
+#~ msgctxt "Marble::PreviewDialog|"
+#~ msgid "Preview Map"
+#~ msgstr "Dobrir un fichièr"
+
+#, fuzzy
+#~| msgid "Description"
+#~ msgctxt "Marble::MapWizard|"
+#~ msgid "Tile Projection:"
+#~ msgstr "Descripcion"
+
+#, fuzzy
+#~| msgid "Open File"
+#~ msgctxt "Marble::MapWizard|"
+#~ msgid "Preview Image"
+#~ msgstr "Dobrir un fichièr"
+
+#, fuzzy
+#~| msgid "Save File"
+#~ msgctxt "Marble::MapWizard|"
+#~ msgid "Base Tile"
+#~ msgstr "Enregistrar lo fichièr"
+
+#, fuzzy
+#~| msgid "Legend"
+#~ msgctxt "Marble::MapWizard|"
+#~ msgid "Legend Image"
+#~ msgstr "Legenda"
+
+#, fuzzy
+#~| msgid "Name"
+#~ msgctxt "Marble::MapWizard|"
+#~ msgid "Map Name"
+#~ msgstr "Nom"
+
+#, fuzzy
+#~| msgid "Open File"
+#~ msgctxt "MapWizard|"
+#~ msgid "Wms-Service:"
+#~ msgstr "Dobrir un fichièr"
+
+#, fuzzy
+#~| msgid "&Search"
+#~ msgctxt "MapWizard|"
+#~ msgid "Search:"
+#~ msgstr "&Recercar"
+
+#, fuzzy
+#~| msgid "Back"
+#~ msgctxt "MapWizard|"
+#~ msgid "Custom Backdrop"
+#~ msgstr "Precedent"
+
+#, fuzzy
+#~| msgid "Description"
+#~ msgctxt "MapWizard|"
+#~ msgid "Tile Projection:"
+#~ msgstr "Descripcion"
+
+#, fuzzy
+#~| msgid "&Settings"
+#~ msgctxt "MapWizard|"
+#~ msgid "Service Info"
+#~ msgstr "&Paramètres"
+
+#, fuzzy
+#~| msgid "Desert"
+#~ msgctxt "MapWizard|"
+#~ msgid "Select Color"
+#~ msgstr "Desèrt"
+
+#, fuzzy
+#~| msgid "..."
+#~ msgctxt "MapWizard|"
+#~ msgid "..."
+#~ msgstr "..."
+
+#, fuzzy
+#~| msgid "Name"
+#~ msgctxt "MapWizard|"
+#~ msgid "Map Name:"
+#~ msgstr "Nom"
+
+#, fuzzy
+#~| msgid "Description"
+#~ msgctxt "MapWizard|"
+#~ msgid "Description:"
+#~ msgstr "Descripcion"
+
+#, fuzzy
+#~| msgid "Open File"
+#~ msgctxt "MapWizard|"
+#~ msgid "Preview Image:"
+#~ msgstr "Dobrir un fichièr"
+
+#, fuzzy
+#~| msgid "Open File"
+#~ msgctxt "MapWizard|"
+#~ msgid "preview image"
+#~ msgstr "Dobrir un fichièr"
+
+#, fuzzy
+#~| msgid "Legend"
+#~ msgctxt "MapWizard|"
+#~ msgid "Legend Image:"
+#~ msgstr "Legenda"
+
+#, fuzzy
+#~| msgid "Name"
+#~ msgctxt "MapWizard|"
+#~ msgid "Map Theme:"
+#~ msgstr "Nom"
+
+#, fuzzy
+#~| msgid "Open File"
+#~ msgctxt "MapWizard|"
+#~ msgid "Preview Map"
+#~ msgstr "Dobrir un fichièr"
+
+#, fuzzy
+#~| msgid "&About"
+#~ msgctxt "MarbleAboutDialog|"
+#~ msgid "About Marble"
+#~ msgstr "&A prepaus de"
+
+#, fuzzy
+#~| msgid "&About"
+#~ msgctxt "MarbleAboutDialog|"
+#~ msgid "&About"
+#~ msgstr "&A prepaus de"
+
+#, fuzzy
+#~| msgid "A&uthors"
+#~ msgctxt "MarbleAboutDialog|"
+#~ msgid "A&uthors"
+#~ msgstr "A&utors"
+
+#, fuzzy
+#~| msgid "State"
+#~ msgctxt "MarbleAboutDialog|"
+#~ msgid "&Data"
+#~ msgstr "Estat"
+
+#, fuzzy
+#~| msgid "&License Agreement"
+#~ msgctxt "MarbleAboutDialog|"
+#~ msgid "&License Agreement"
+#~ msgstr "&Acòrdi de licéncia"
+
+#, fuzzy
+#~| msgid "&Search"
+#~ msgctxt "MarbleCacheSettingsWidget|"
+#~ msgid "C&ache"
+#~ msgstr "&Recercar"
+
+#, fuzzy
+#~| msgid "MB"
+#~ msgctxt "MarbleCacheSettingsWidget|"
+#~ msgid " MB"
+#~ msgstr "Mo"
+
+#, fuzzy
+#~| msgid "&Search"
+#~ msgctxt "MarbleCacheSettingsWidget|"
+#~ msgid "C&lear"
+#~ msgstr "&Recercar"
+
+#, fuzzy
+#~| msgid "not available"
+#~ msgctxt "Marble|"
+#~ msgid "not available"
+#~ msgstr "pas disponible"
+
+#, fuzzy
+#~| msgid "&Search"
+#~ msgctxt "QObject|"
+#~ msgid "Clear"
+#~ msgstr "&Recercar"
+
+#, fuzzy
+#~| msgid "km"
+#~ msgctxt "QObject|means meter"
+#~ msgid "m"
+#~ msgstr "m"
+
+#, fuzzy
+#~| msgid "km"
+#~ msgctxt "QObject|means milimeters"
+#~ msgid "mm"
+#~ msgstr "m"
+
+#, fuzzy
+#~| msgid "km"
+#~ msgctxt "QObject|means kilometers"
+#~ msgid "km"
+#~ msgstr "km"
+
+#, fuzzy
+#~| msgid "km"
+#~ msgctxt "QObject|means centimeters"
+#~ msgid "cm"
+#~ msgstr "m"
+
+#, fuzzy
+#~| msgid "Left"
+#~ msgctxt "QObject|means feet"
+#~ msgid "ft"
+#~ msgstr "Esquèrra"
+
+#, fuzzy
+#~| msgid "km"
+#~ msgctxt "QObject|means miles"
+#~ msgid "mi"
+#~ msgstr "m"
+
+#, fuzzy
+#~| msgid "km"
+#~ msgctxt "QObject|means nautical miles"
+#~ msgid "nm"
+#~ msgstr "m"
+
+#, fuzzy
+#~| msgid "Location"
+#~ msgctxt "MarbleNavigationSettingsWidget|"
+#~ msgid "&Drag location:"
+#~ msgstr "Emplaçament"
+
+#, fuzzy
+#~| msgid "Location"
+#~ msgctxt "MarbleNavigationSettingsWidget|"
+#~ msgid "&Inertial globe rotation"
+#~ msgstr "Emplaçament"
+
+#, fuzzy
+#~| msgid "Location"
+#~ msgctxt "MarbleNavigationSettingsWidget|"
+#~ msgid "Show Home Location"
+#~ msgstr "Emplaçament"
+
+#, fuzzy
+#~| msgid "Up"
+#~ msgctxt "MarbleNavigator|"
+#~ msgid "Up"
+#~ msgstr "Amont"
+
+#, fuzzy
+#~| msgid "..."
+#~ msgctxt "MarbleNavigator|"
+#~ msgid "..."
+#~ msgstr "..."
+
+#, fuzzy
+#~| msgid "&File"
+#~ msgctxt "MarbleNavigator|"
+#~ msgid "Reset View"
+#~ msgstr "&Fichièr"
+
+#, fuzzy
+#~| msgid "Home"
+#~ msgctxt "MarbleNavigator|"
+#~ msgid "Home"
+#~ msgstr "Repertòri personal"
+
+#, fuzzy
+#~| msgid "Right"
+#~ msgctxt "MarbleNavigator|"
+#~ msgid "Right"
+#~ msgstr "Drecha"
+
+#, fuzzy
+#~| msgid "Down"
+#~ msgctxt "MarbleNavigator|"
+#~ msgid "Down"
+#~ msgstr "Aval"
+
+#, fuzzy
+#~| msgid "Zoom In"
+#~ msgctxt "MarbleNavigator|"
+#~ msgid "Zoom In"
+#~ msgstr "Agrandir lo zoom"
+
+#, fuzzy
+#~| msgid "+"
+#~ msgctxt "MarbleNavigator|"
+#~ msgid "+"
+#~ msgstr "+"
+
+#, fuzzy
+#~| msgid "Zoom Out"
+#~ msgctxt "MarbleNavigator|"
+#~ msgid "Zoom Out"
+#~ msgstr "Reduire el zoom"
+
+#, fuzzy
+#~| msgid "-"
+#~ msgctxt "MarbleNavigator|"
+#~ msgid "-"
+#~ msgstr "-"
+
+#, fuzzy
+#~| msgid "Plugins"
+#~ msgctxt "MarblePluginSettingsWidget|"
+#~ msgid "P&lugins"
+#~ msgstr "Ajustons"
+
+#, fuzzy
+#~| msgid "Save File"
+#~ msgctxt "MarbleTimeSettingsWidget|"
+#~ msgid "Load last session time"
+#~ msgstr "Enregistrar lo fichièr"
+
+#, fuzzy
+#~| msgid "Low Quality"
+#~ msgctxt "MarbleViewSettingsWidget|"
+#~ msgid "Map &Quality"
+#~ msgstr "Qualitat bassa"
+
+#, fuzzy
+#~| msgid "High Quality"
+#~ msgctxt "MarbleViewSettingsWidget|"
+#~ msgid "Outline Quality"
+#~ msgstr "Qualitat nauta"
+
+#, fuzzy
+#~| msgid "Low Quality"
+#~ msgctxt "MarbleViewSettingsWidget|"
+#~ msgid "Low Quality"
+#~ msgstr "Qualitat bassa"
+
+#, fuzzy
+#~| msgid "Normal"
+#~ msgctxt "MarbleViewSettingsWidget|"
+#~ msgid "Normal"
+#~ msgstr "Normal"
+
+#, fuzzy
+#~| msgid "High Quality"
+#~ msgctxt "MarbleViewSettingsWidget|"
+#~ msgid "High Quality"
+#~ msgstr "Qualitat nauta"
+
+#, fuzzy
+#~| msgid "High Quality"
+#~ msgctxt "MarbleViewSettingsWidget|"
+#~ msgid "Print Quality"
+#~ msgstr "Qualitat nauta"
+
+#, fuzzy
+#~| msgid "International"
+#~ msgctxt "MarbleViewSettingsWidget|"
+#~ msgid "During &animations:"
+#~ msgstr "Internacional"
+
+#, fuzzy
+#~| msgid "&About"
+#~ msgctxt "Marble::MarbleWidgetPopupMenu|"
+#~ msgid "&About"
+#~ msgstr "&A prepaus de"
+
+#, fuzzy
+#~| msgid "Show date"
+#~ msgctxt "Marble::MarbleWidgetPopupMenu|"
+#~ msgid "&Address Details"
+#~ msgstr "Visualizar la data"
+
+#, fuzzy
+#~| msgid "not available"
+#~ msgctxt "Marble::MarbleWidgetPopupMenu|"
+#~ msgid "No description available."
+#~ msgstr "pas disponible"
+
+#, fuzzy
+#~| msgid "City"
+#~ msgctxt "Marble::MarbleWidgetPopupMenu|"
+#~ msgid "City"
+#~ msgstr "Ciutat"
+
+#, fuzzy
+#~| msgid "S"
+#~ msgctxt "Marble::MovieCapture|"
+#~ msgid "SWF"
+#~ msgstr "E"
+
+#, fuzzy
+#~| msgid "&Search"
+#~ msgctxt "Marble::MovieCaptureDialog|Start recording a movie"
+#~ msgid "&Start"
+#~ msgstr "&Recercar"
+
+#, fuzzy
+#~| msgid "not available"
+#~ msgctxt "Marble::MovieCaptureDialog|"
+#~ msgid "Codecs are unavailable"
+#~ msgstr "pas disponible"
+
+#, fuzzy
+#~| msgid "Save File"
+#~ msgctxt "Marble::MovieCaptureDialog|"
+#~ msgid "Save video file"
+#~ msgstr "Enregistrar lo fichièr"
+
+#, fuzzy
+#~| msgid "Open File"
+#~ msgctxt "MovieCaptureDialog|"
+#~ msgid "Open..."
+#~ msgstr "Dobrir un fichièr"
+
+#, fuzzy
+#~| msgid "&File"
+#~ msgctxt "UiNewBookmarkFolderDialog|"
+#~ msgid "&Folder name:"
+#~ msgstr "&Fichièr"
+
+#, fuzzy
+#~| msgid "Name"
+#~ msgctxt "Marble::OsmRelationEditorDialog|"
+#~ msgid "Name"
+#~ msgstr "Nom"
+
+#, fuzzy
+#~| msgid "Navigation"
+#~ msgctxt "Marble::OsmRelationManagerWidget|"
+#~ msgid "New Relation"
+#~ msgstr "Navegacion"
+
+#, fuzzy
+#~| msgid "&Edit"
+#~ msgctxt "Marble::OsmRelationManagerWidget|"
+#~ msgid "Edit"
+#~ msgstr "&Edicion"
+
+#, fuzzy
+#~| msgid "Location"
+#~ msgctxt "OsmRelationManagerWidgetPrivate|"
+#~ msgid "Current Relations"
+#~ msgstr "Emplaçament"
+
+#, fuzzy
+#~| msgid "Name"
+#~ msgctxt "OsmRelationManagerWidgetPrivate|"
+#~ msgid "Name"
+#~ msgstr "Nom"
+
+#, fuzzy
+#~| msgid "Role"
+#~ msgctxt "OsmRelationManagerWidgetPrivate|"
+#~ msgid "Role"
+#~ msgstr "Ròtle"
+
+#, fuzzy
+#~| msgid "Navigation"
+#~ msgctxt "OsmRelationManagerWidgetPrivate|"
+#~ msgid "Add Relation"
+#~ msgstr "Navegacion"
+
+#, fuzzy
+#~| msgid "Navigation"
+#~ msgctxt "QObject|"
+#~ msgid "New Relation"
+#~ msgstr "Navegacion"
+
+#, fuzzy
+#~| msgid "Open File"
+#~ msgctxt "OsmTagEditorWidgetPrivate|"
+#~ msgid "Current Tags"
+#~ msgstr "Dobrir un fichièr"
+
+#, fuzzy
+#~| msgid "Open File"
+#~ msgctxt "QObject|"
+#~ msgid "Open File"
+#~ msgstr "Dobrir un fichièr"
+
+#, fuzzy
+#~| msgid "Name"
+#~ msgctxt "PlacemarkEditHeaderPrivate|"
+#~ msgid "Name:"
+#~ msgstr "Nom"
+
+#, fuzzy
+#~| msgid "Description"
+#~ msgctxt "PlacemarkEditHeaderPrivate|"
+#~ msgid "Position:"
+#~ msgstr "Descripcion"
+
+#, fuzzy
+#~| msgid "Description"
+#~ msgctxt "Marble::PlacemarkPositionProviderPlugin|"
+#~ msgid "Placemark position provider Plugin"
+#~ msgstr "Descripcion"
+
+#, fuzzy
+#~| msgid "Path"
+#~ msgctxt "QObject|the planet"
+#~ msgid "Earth"
+#~ msgstr "Camin"
+
+#, fuzzy
+#~| msgid "&Search"
+#~ msgctxt "QObject|the planet"
+#~ msgid "Mars"
+#~ msgstr "&Recercar"
+
+#, fuzzy
+#~| msgid "Show date"
+#~ msgctxt "QObject|a planet without data"
+#~ msgid "Unknown Planet"
+#~ msgstr "Visualizar la data"
+
+#, fuzzy
+#~| msgid "&About"
+#~ msgctxt "Marble::PluginAboutDialog|"
+#~ msgid "About %1"
+#~ msgstr "&A prepaus de"
+
+#, fuzzy
+#~| msgid "State"
+#~ msgctxt "Marble::PluginAboutDialog|"
+#~ msgid "Data"
+#~ msgstr "Estat"
+
+#, fuzzy
+#~| msgid "Legend"
+#~ msgctxt "PrintOptions|"
+#~ msgid "Legend"
+#~ msgstr "Legenda"
+
+#, fuzzy
+#~| msgid "Open File"
+#~ msgctxt "PrintOptions|"
+#~ msgid "Route"
+#~ msgstr "Dobrir un fichièr"
+
+#, fuzzy
+#~| msgid "International"
+#~ msgctxt "PrintOptions|"
+#~ msgid "Driving Instructions"
+#~ msgstr "Internacional"
+
+#, fuzzy
+#~| msgid "&File"
+#~ msgctxt "QObject|"
+#~ msgid "Globe"
+#~ msgstr "&Fichièr"
+
+#, fuzzy
+#~| msgid "&View"
+#~ msgctxt "Marble::QtMarbleConfigDialog|"
+#~ msgid "View"
+#~ msgstr "Visualizacion"
+
+#, fuzzy
+#~| msgid "Navigation"
+#~ msgctxt "Marble::QtMarbleConfigDialog|"
+#~ msgid "Navigation"
+#~ msgstr "Navigacion"
+
+#, fuzzy
+#~| msgid "Open File"
+#~ msgctxt "Marble::QtMarbleConfigDialog|"
+#~ msgid "Routing"
+#~ msgstr "Dobrir un fichièr"
+
+#, fuzzy
+#~| msgid "Plugins"
+#~ msgctxt "Marble::QtMarbleConfigDialog|"
+#~ msgid "Plugins"
+#~ msgstr "Ajustons"
+
+#, fuzzy
+#~| msgid "Description"
+#~ msgctxt "Marble::RouteSimulationPositionProviderPlugin|"
+#~ msgid "Current Route Position Provider Plugin"
+#~ msgstr "Descripcion"
+
+#, fuzzy
+#~| msgid "Open File"
+#~ msgctxt "Marble::RouteSimulationPositionProviderPlugin|"
+#~ msgid "Current Route"
+#~ msgstr "Dobrir un fichièr"
+
+#, fuzzy
+#~| msgid "Location"
+#~ msgctxt "QObject|"
+#~ msgid "Current &Location"
+#~ msgstr "Emplaçament"
+
+#, fuzzy
+#~| msgid "Save File"
+#~ msgctxt "QObject|"
+#~ msgid "From &Map..."
+#~ msgstr "Enregistrar lo fichièr"
+
+#, fuzzy
+#~| msgid "Home"
+#~ msgctxt "QObject|"
+#~ msgid "&Home"
+#~ msgstr "Repertòri personal"
+
+#, fuzzy
+#~| msgid "Location"
+#~ msgctxt "Marble::RoutingInputWidget|"
+#~ msgid "Current Location"
+#~ msgstr "Emplaçament"
+
+#, fuzzy
+#~| msgid "Open File"
+#~ msgctxt "QObject|"
+#~ msgid "&Export Route..."
+#~ msgstr "Dobrir un fichièr"
+
+#, fuzzy
+#~| msgid "Open File"
+#~ msgctxt "Marble::RoutingLayer|"
+#~ msgid "Export Route"
+#~ msgstr "Dobrir un fichièr"
+
+#, fuzzy
+#~| msgid "Show date"
+#~ msgctxt "Marble::RoutingManager|"
+#~ msgid "Show again"
+#~ msgstr "Visualizar la data"
+
+#, fuzzy
+#~| msgid "Name"
+#~ msgctxt "RoutingProfileSettingsDialog|"
+#~ msgid "Name:"
+#~ msgstr "Nom"
+
+#, fuzzy
+#~| msgid "&Settings"
+#~ msgctxt "RoutingProfileSettingsDialog|"
+#~ msgid "Service Settings"
+#~ msgstr "&Paramètres"
+
+#, fuzzy
+#~| msgid "not available"
+#~ msgctxt "RoutingProfileSettingsDialog|"
+#~ msgid "No configuration available"
+#~ msgstr "pas disponible"
+
+#, fuzzy
+#~| msgid "Navigation"
+#~ msgctxt "Marble::RoutingProfilesWidget|"
+#~ msgid "New Profile"
+#~ msgstr "Navegacion"
+
+#, fuzzy
+#~| msgid "&Search"
+#~ msgctxt "QObject|"
+#~ msgid "Search"
+#~ msgstr "&Recercar"
+
+#, fuzzy
+#~| msgid "Open File"
+#~ msgctxt "QObject|"
+#~ msgid "Open Route"
+#~ msgstr "Dobrir un fichièr"
+
+#, fuzzy
+#~| msgid "Open File"
+#~ msgctxt "QObject|"
+#~ msgid "Save Route"
+#~ msgstr "Dobrir un fichièr"
+
+#, fuzzy
+#~| msgid "Open File"
+#~ msgctxt "QObject|"
+#~ msgid "Preview Route"
+#~ msgstr "Dobrir un fichièr"
+
+#, fuzzy
+#~| msgid "Save File"
+#~ msgctxt "QObject|"
+#~ msgid "Manage Cloud Routes"
+#~ msgstr "Enregistrar lo fichièr"
+
+#, fuzzy
+#~| msgid "Path"
+#~ msgctxt "QObject|"
+#~ msgid "Add Via"
+#~ msgstr "Camin"
+
+#, fuzzy
+#~| msgid "Open File"
+#~ msgctxt "QObject|"
+#~ msgid "Reverse Route"
+#~ msgstr "Dobrir un fichièr"
+
+#, fuzzy
+#~| msgid "Open File"
+#~ msgctxt "QObject|"
+#~ msgid "Clear Route"
+#~ msgstr "Dobrir un fichièr"
+
+#, fuzzy
+#~| msgid "&Settings"
+#~ msgctxt "QObject|"
+#~ msgid "Settings"
+#~ msgstr "&Paramètres"
+
+#, fuzzy
+#~| msgid "Open File"
+#~ msgctxt "Marble::RoutingWidget|"
+#~ msgid "Open Route"
+#~ msgstr "Dobrir un fichièr"
+
+#, fuzzy
+#~| msgid "Open File"
+#~ msgctxt "Marble::RoutingWidget|"
+#~ msgid "Save Route"
+#~ msgstr "Dobrir un fichièr"
+
+#, fuzzy
+#~| msgid "Open File"
+#~ msgctxt "Marble::RoutingWidget|"
+#~ msgid "Uploading route..."
+#~ msgstr "Dobrir un fichièr"
+
+#, fuzzy
+#~| msgid "&Search"
+#~ msgctxt "RoutingWidget|"
+#~ msgid "Search"
+#~ msgstr "&Recercar"
+
+#, fuzzy
+#~| msgid "Show date"
+#~ msgctxt "RoutingWidget|"
+#~ msgid "Show Details"
+#~ msgstr "Visualizar la data"
+
+#, fuzzy
+#~| msgid "km"
+#~ msgctxt "Marble::RoutingRunner|"
+#~ msgid "m"
+#~ msgstr "m"
+
+#, fuzzy
+#~| msgid "km"
+#~ msgctxt "Marble::RoutingRunner|"
+#~ msgid "mi"
+#~ msgstr "m"
+
+#, fuzzy
+#~| msgid "Left"
+#~ msgctxt "Marble::RoutingRunner|"
+#~ msgid "ft"
+#~ msgstr "Esquèrra"
+
+#, fuzzy
+#~| msgid "km"
+#~ msgctxt "Marble::RoutingRunner|"
+#~ msgid "km"
+#~ msgstr "km"
+
+#, fuzzy
+#~| msgid "km"
+#~ msgctxt "Marble::RoutingRunner|"
+#~ msgid "nm"
+#~ msgstr "m"
+
+#, fuzzy
+#~| msgid "&Search"
+#~ msgctxt "Marble::SearchInputWidget|"
+#~ msgid "Global Search"
+#~ msgstr "&Recercar"
+
+#, fuzzy
+#~| msgid "&Search"
+#~ msgctxt "Marble::SearchInputWidget|"
+#~ msgid "Area Search"
+#~ msgstr "&Recercar"
+
+#, fuzzy
+#~| msgid "&Search"
+#~ msgctxt "QObject|"
+#~ msgid "Search Results"
+#~ msgstr "&Recercar"
+
+#, fuzzy
+#~| msgid "State"
+#~ msgctxt "QObject|"
+#~ msgid "Search for '%1'"
+#~ msgstr "Aiga"
+
+#, fuzzy
+#~| msgid "Open File"
+#~ msgctxt "Marble::SoundCueEditWidget|"
+#~ msgid "Select sound files..."
+#~ msgstr "Dobrir un fichièr"
+
+#, fuzzy
+#~| msgid "Right"
+#~ msgctxt "SunControlWidget|"
+#~ msgid "&Night Map"
+#~ msgstr "Drecha"
+
+#, fuzzy
+#~| msgid "Zoom In"
+#~ msgctxt "TileLevelRangeWidget|"
+#~ msgid "Zoom"
+#~ msgstr "Agrandir lo zoom"
+
+#, fuzzy
+#~| msgid "&File"
+#~ msgctxt "TimeControlWidget|"
+#~ msgid "Time"
+#~ msgstr "&Fichièr"
+
+#, fuzzy
+#~| msgid "Open File"
+#~ msgctxt "TimeControlWidget|"
+#~ msgid "&New date and time:"
+#~ msgstr "Dobrir un fichièr"
+
+#, fuzzy
+#~| msgid "Now"
+#~ msgctxt "TimeControlWidget|"
+#~ msgid "Now"
+#~ msgstr "Ara"
+
+#, fuzzy
+#~| msgid "Open File"
+#~ msgctxt "TimeControlWidget|"
+#~ msgid "Current &date and time:"
+#~ msgstr "Dobrir un fichièr"
+
+#, fuzzy
+#~| msgid "not available"
+#~ msgctxt "Marble::TourCaptureDialog|"
+#~ msgid "Codecs are unavailable"
+#~ msgstr "pas disponible"
+
+#, fuzzy
+#~| msgid "Save File"
+#~ msgctxt "Marble::TourCaptureDialog|"
+#~ msgid "Save video file"
+#~ msgstr "Enregistrar lo fichièr"
+
+#, fuzzy
+#~| msgid "&Search"
+#~ msgctxt "Marble::TourCaptureDialog|"
+#~ msgid "Start"
+#~ msgstr "&Recercar"
+
+#, fuzzy
+#~| msgid "&Cancel"
+#~ msgctxt "Marble::TourCaptureDialog|"
+#~ msgid "Cancel"
+#~ msgstr "&Anullar"
+
+#, fuzzy
+#~| msgid "Open File"
+#~ msgctxt "TourCaptureDialog|"
+#~ msgid "Open..."
+#~ msgstr "Dobrir un fichièr"
+
+#, fuzzy
+#~| msgid "&Search"
+#~ msgctxt "TourCaptureDialog|"
+#~ msgid "Start"
+#~ msgstr "&Recercar"
+
+#, fuzzy
+#~| msgid "&Close"
+#~ msgctxt "TourCaptureDialog|"
+#~ msgid "Close"
+#~ msgstr "&Tampar"
+
+#, fuzzy
+#~| msgid "Back"
+#~ msgctxt "Marble::TourItemDelegate|"
+#~ msgid "Play the tour"
+#~ msgstr "Pista"
+
+#, fuzzy
+#~| msgid "Back"
+#~ msgctxt "Marble::TourItemDelegate|"
+#~ msgid "Pause the tour"
+#~ msgstr "Pista"
+
+#, fuzzy
+#~| msgid "Path"
+#~ msgctxt "QObject|"
+#~ msgid "Add Wait"
+#~ msgstr "Camin"
+
+#, fuzzy
+#~| msgid "Desert"
+#~ msgctxt "QObject|"
+#~ msgid "Add SoundCue"
+#~ msgstr "Desèrt"
+
+#, fuzzy
+#~| msgid "Back"
+#~ msgctxt "QObject|"
+#~ msgid "Save tour"
+#~ msgstr "Pista"
+
+#, fuzzy
+#~| msgid "Back"
+#~ msgctxt "QObject|"
+#~ msgid "Open Tour"
+#~ msgstr "Pista"
+
+#, fuzzy
+#~| msgid "Back"
+#~ msgctxt "QObject|"
+#~ msgid "Save Tour as"
+#~ msgstr "Pista"
+
+#, fuzzy
+#~| msgid "Back"
+#~ msgctxt "TourWidget|"
+#~ msgid "Tour"
+#~ msgstr "Pista"
+
+#, fuzzy
+#~| msgid "Main Toolbar"
+#~ msgctxt "TourWidget|"
+#~ msgid "toolBar"
+#~ msgstr "Barra d'espleches principala"
+
+#, fuzzy
+#~| msgid "Desert"
+#~ msgctxt "TourWidget|"
+#~ msgid "Delete"
+#~ msgstr "Desèrt"
+
+#, fuzzy
+#~| msgid "Back"
+#~ msgctxt "TourWidget|"
+#~ msgid "New Tour"
+#~ msgstr "Pista"
+
+#, fuzzy
+#~| msgid "Back"
+#~ msgctxt "TourWidget|"
+#~ msgid "Save Tour"
+#~ msgstr "Pista"
+
+#, fuzzy
+#~| msgid "Back"
+#~ msgctxt "TourWidget|"
+#~ msgid "Save Tour As"
+#~ msgstr "Pista"
+
+#, fuzzy
+#~| msgid "Back"
+#~ msgctxt "TourWidget|"
+#~ msgid "Open Tour"
+#~ msgstr "Pista"
+
+#, fuzzy
+#~| msgid "Back"
+#~ msgctxt "TourWidget|"
+#~ msgid "Record tour"
+#~ msgstr "Pista"
+
+#, fuzzy
+#~| msgid "International"
+#~ msgctxt "Marble::WaitEditWidget|"
+#~ msgid "Wait duration:"
+#~ msgstr "Internacional"
+
+#, fuzzy
+#~| msgid "Description"
+#~ msgctxt "Marble::FlightGearPositionProviderPlugin|"
+#~ msgid "FlightGear position provider Plugin"
+#~ msgstr "Descripcion"
+
+#, fuzzy
+#~| msgid "Description"
+#~ msgctxt "Marble::GeoCluePositionProviderPlugin|"
+#~ msgid "GeoClue position provider Plugin"
+#~ msgstr "Descripcion"
+
+#, fuzzy
+#~| msgid "Description"
+#~ msgctxt "Marble::GpsdPositionProviderPlugin|"
+#~ msgid "Gpsd position provider Plugin"
+#~ msgstr "Descripcion"
+
+#, fuzzy
+#~| msgid "Description"
+#~ msgctxt "Marble::QtPositioningPositionProviderPlugin|"
+#~ msgid "Qt Positioning Position Provider Plugin"
+#~ msgstr "Descripcion"
+
+#, fuzzy
+#~| msgid "Location"
+#~ msgctxt "Marble::QtPositioningPositionProviderPlugin|"
+#~ msgid "Qt Positioning Location"
+#~ msgstr "Emplaçament"
+
+#, fuzzy
+#~| msgid "Description"
+#~ msgctxt "Marble::WlocatePositionProviderPlugin|"
+#~ msgid "Wlocate Position Provider Plugin"
+#~ msgstr "Descripcion"
+
+#, fuzzy
+#~| msgid "Save File"
+#~ msgctxt "Marble::AnnotatePlugin|"
+#~ msgid "Annotation"
+#~ msgstr "Enregistrar lo fichièr"
+
+#, fuzzy
+#~| msgid "Save File"
+#~ msgctxt "Marble::AnnotatePlugin|"
+#~ msgid "&Annotation"
+#~ msgstr "Enregistrar lo fichièr"
+
+#, fuzzy
+#~| msgid "Save File"
+#~ msgctxt "Marble::AnnotatePlugin|"
+#~ msgid "Annotations"
+#~ msgstr "Enregistrar lo fichièr"
+
+#, fuzzy
+#~| msgid "Save File"
+#~ msgctxt "QObject|"
+#~ msgid "Clear all annotations"
+#~ msgstr "Enregistrar lo fichièr"
+
+#, fuzzy
+#~| msgid "Save File"
+#~ msgctxt "Marble::AnnotatePlugin|"
+#~ msgid "Save Annotation File"
+#~ msgstr "Enregistrar lo fichièr"
+
+#, fuzzy
+#~| msgid "Save File"
+#~ msgctxt "Marble::AnnotatePlugin|"
+#~ msgid "Open Annotation File"
+#~ msgstr "Enregistrar lo fichièr"
+
+#, fuzzy
+#~| msgid "Desert"
+#~ msgctxt "Marble::AnnotatePlugin|"
+#~ msgid "Add Nodes"
+#~ msgstr "Desèrt"
+
+#, fuzzy
+#~| msgid "Path"
+#~ msgctxt "Marble::AnnotatePlugin|"
+#~ msgid "Add Path"
+#~ msgstr "Camin"
+
+#, fuzzy
+#~| msgid "Desert"
+#~ msgctxt "Marble::AnnotatePlugin|"
+#~ msgid "Add Ground Overlay"
+#~ msgstr "Desèrt"
+
+#, fuzzy
+#~| msgid "Save File"
+#~ msgctxt "Marble::AnnotatePlugin|"
+#~ msgid "Load Annotation File"
+#~ msgstr "Enregistrar lo fichièr"
+
+#, fuzzy
+#~| msgid "Save File"
+#~ msgctxt "Marble::AnnotatePlugin|"
+#~ msgid "Clear all Annotations"
+#~ msgstr "Enregistrar lo fichièr"
+
+#, fuzzy
+#~| msgid "Country"
+#~ msgctxt "Marble::AnnotatePlugin|"
+#~ msgid "Cut"
+#~ msgstr "País"
+
+#, fuzzy
+#~| msgid "Desert"
+#~ msgctxt "Marble::AnnotatePlugin|"
+#~ msgid "Deselect All Nodes"
+#~ msgstr "Desèrt"
+
+#, fuzzy
+#~| msgid "Desert"
+#~ msgctxt "Marble::AnnotatePlugin|"
+#~ msgid "Delete All Selected Nodes"
+#~ msgstr "Desèrt"
+
+#, fuzzy
+#~| msgid "Desert"
+#~ msgctxt "Marble::AnnotatePlugin|"
+#~ msgid "Select Node"
+#~ msgstr "Desèrt"
+
+#, fuzzy
+#~| msgid "Desert"
+#~ msgctxt "Marble::AnnotatePlugin|"
+#~ msgid "Delete Node"
+#~ msgstr "Desèrt"
+
+#, fuzzy
+#~| msgid "Desert"
+#~ msgctxt "Marble::AnnotatePlugin|"
+#~ msgid "Deselect Node"
+#~ msgstr "Desèrt"
+
+#, fuzzy
+#~| msgid "Save File"
+#~ msgctxt "Marble::DownloadOsmDialog|"
+#~ msgid "Download"
+#~ msgstr "Enregistrar lo fichièr"
+
+#, fuzzy
+#~| msgid "Description"
+#~ msgctxt "UiEditGroundOverlayDialog|"
+#~ msgid "Description"
+#~ msgstr "Descripcion"
+
+#, fuzzy
+#~| msgid "N"
+#~ msgctxt "UiEditGroundOverlayDialog|"
+#~ msgid "N"
+#~ msgstr "N"
+
+#, fuzzy
+#~| msgid "W"
+#~ msgctxt "UiEditGroundOverlayDialog|"
+#~ msgid "W"
+#~ msgstr "W"
+
+#, fuzzy
+#~| msgid "E"
+#~ msgctxt "UiEditGroundOverlayDialog|"
+#~ msgid "E"
+#~ msgstr "M"
+
+#, fuzzy
+#~| msgid "S"
+#~ msgctxt "UiEditGroundOverlayDialog|"
+#~ msgid "S"
+#~ msgstr "E"
+
+#, fuzzy
+#~| msgid "Save File"
+#~ msgctxt "UiEditGroundOverlayDialog|"
+#~ msgid "Rotation"
+#~ msgstr "Enregistrar lo fichièr"
+
+#, fuzzy
+#~| msgid "Navigation"
+#~ msgctxt "Marble::EditPolygonDialog|"
+#~ msgid "Relations"
+#~ msgstr "Navegacion"
+
+#, fuzzy
+#~| msgid "Name"
+#~ msgctxt "UiEditPolygonDialog|"
+#~ msgid "Name"
+#~ msgstr "Nom"
+
+#, fuzzy
+#~| msgid "Description"
+#~ msgctxt "UiEditPolygonDialog|"
+#~ msgid "Description"
+#~ msgstr "Descripcion"
+
+#, fuzzy
+#~| msgid "Desert"
+#~ msgctxt "UiEditPolygonDialog|"
+#~ msgid "Nodes"
+#~ msgstr "Desèrt"
+
+#, fuzzy
+#~| msgid "Navigation"
+#~ msgctxt "Marble::EditPolylineDialog|"
+#~ msgid "Relations"
+#~ msgstr "Navegacion"
+
+#, fuzzy
+#~| msgid "Path"
+#~ msgctxt "UiEditPolylineDialog|"
+#~ msgid "Add path"
+#~ msgstr "Camin"
+
+#, fuzzy
+#~| msgid "Name"
+#~ msgctxt "UiEditPolylineDialog|"
+#~ msgid "Name"
+#~ msgstr "Nom"
+
+#, fuzzy
+#~| msgid "Description"
+#~ msgctxt "UiEditPolylineDialog|"
+#~ msgid "Description"
+#~ msgstr "Descripcion"
+
+#, fuzzy
+#~| msgid "Desert"
+#~ msgctxt "UiEditPolylineDialog|"
+#~ msgid "Nodes"
+#~ msgstr "Desèrt"
+
+#, fuzzy
+#~| msgid "Now"
+#~ msgctxt "Marble::NodeModel|"
+#~ msgid "No."
+#~ msgstr "Ara"
+
+#, fuzzy
+#~| msgid "Navigation"
+#~ msgctxt "Marble::NodeModel|"
+#~ msgid "Elevation"
+#~ msgstr "Navegacion"
+
+#, fuzzy
+#~| msgid "Plugins"
+#~ msgctxt "AprsConfigWidget|"
+#~ msgid "APRS Plugin"
+#~ msgstr "Ajustons"
+
+#, fuzzy
+#~| msgid "International"
+#~ msgctxt "AprsConfigWidget|"
+#~ msgid "Internet"
+#~ msgstr "Internacional"
+
+#, fuzzy
+#~| msgid "&File"
+#~ msgctxt "AprsConfigWidget|"
+#~ msgid "File"
+#~ msgstr "&Fichièr"
+
+#, fuzzy
+#~| msgid "N"
+#~ msgctxt "Marble::CompassFloatItem|"
+#~ msgid "N"
+#~ msgstr "N"
+
+#, fuzzy
+#~| msgid "S"
+#~ msgctxt "Marble::CompassFloatItem|"
+#~ msgid "S"
+#~ msgstr "E"
+
+#, fuzzy
+#~| msgid "Path"
+#~ msgctxt "EarthquakeConfigWidget|"
+#~ msgid "Configure Earthquakes Plugin"
+#~ msgstr "Camin"
+
+#, fuzzy
+#~| msgid "Path"
+#~ msgctxt "Marble::EarthquakePlugin|"
+#~ msgid "Earthquakes"
+#~ msgstr "Camin"
+
+#, fuzzy
+#~| msgid "Path"
+#~ msgctxt "Marble::EarthquakePlugin|"
+#~ msgid "&Earthquakes"
+#~ msgstr "Camin"
+
+#, fuzzy
+#~| msgid "&Settings"
+#~ msgctxt "EclipsesBrowserDialog|"
+#~ msgid "&Settings..."
+#~ msgstr "&Paramètres"
+
+#, fuzzy
+#~| msgid "&Close"
+#~ msgctxt "EclipsesBrowserDialog|"
+#~ msgid "&Close"
+#~ msgstr "&Tampar"
+
+#, fuzzy
+#~| msgid "&View"
+#~ msgctxt "EclipsesConfigDialog|"
+#~ msgid "&View"
+#~ msgstr "Aficha&tge"
+
+#, fuzzy
+#~| msgid "&Search"
+#~ msgctxt "Marble::EclipsesModel|"
+#~ msgid "Start"
+#~ msgstr "&Recercar"
+
+#, fuzzy
+#~| msgid "Navigation"
+#~ msgctxt "ElevationProfileConfigWidget|"
+#~ msgid "Configure Elevation Profile Plugin"
+#~ msgstr "Navegacion"
+
+#, fuzzy
+#~| msgid "Open File"
+#~ msgctxt "Marble::ElevationProfileContextMenu|"
+#~ msgid "Route"
+#~ msgstr "Dobrir un fichièr"
+
+#, fuzzy
+#~| msgid "Back"
+#~ msgctxt "Marble::ElevationProfileContextMenu|"
+#~ msgid "Track: "
+#~ msgstr "Pista"
+
+#, fuzzy
+#~| msgid "Navigation"
+#~ msgctxt "Marble::ElevationProfileFloatItem|"
+#~ msgid "Elevation Profile"
+#~ msgstr "Navegacion"
+
+#, fuzzy
+#~| msgid "Navigation"
+#~ msgctxt "Marble::ElevationProfileFloatItem|"
+#~ msgid "&Elevation Profile"
+#~ msgstr "Navegacion"
+
+#, fuzzy
+#~| msgid "km"
+#~ msgctxt "Marble::ElevationProfilePlotAxis|"
+#~ msgid "km"
+#~ msgstr "km"
+
+#, fuzzy
+#~| msgid "km"
+#~ msgctxt "Marble::ElevationProfilePlotAxis|"
+#~ msgid "m"
+#~ msgstr "m"
+
+#, fuzzy
+#~| msgid "km"
+#~ msgctxt "Marble::ElevationProfilePlotAxis|"
+#~ msgid "mi"
+#~ msgstr "m"
+
+#, fuzzy
+#~| msgid "Left"
+#~ msgctxt "Marble::ElevationProfilePlotAxis|"
+#~ msgid "ft"
+#~ msgstr "Esquèrra"
+
+#, fuzzy
+#~| msgid "km"
+#~ msgctxt "Marble::ElevationProfilePlotAxis|"
+#~ msgid "nm"
+#~ msgstr "m"
+
+#, fuzzy
+#~| msgid "Navigation"
+#~ msgctxt "Marble::ElevationProfileMarker|"
+#~ msgid "Elevation Profile Marker"
+#~ msgstr "Navegacion"
+
+#, fuzzy
+#~| msgid "Navigation"
+#~ msgctxt "Marble::ElevationProfileMarker|"
+#~ msgid "&Elevation Profile Marker"
+#~ msgstr "Navegacion"
+
+#, fuzzy
+#~| msgid "km"
+#~ msgctxt "Marble::ElevationProfileMarker|"
+#~ msgid "m"
+#~ msgstr "m"
+
+#, fuzzy
+#~| msgid "Left"
+#~ msgctxt "Marble::ElevationProfileMarker|"
+#~ msgid "ft"
+#~ msgstr "Esquèrra"
+
+#, fuzzy
+#~| msgid "&File"
+#~ msgctxt "Marble::FileViewFloatItem|"
+#~ msgid "File View"
+#~ msgstr "&Fichièr"
+
+#, fuzzy
+#~| msgid "&File"
+#~ msgctxt "Marble::FileViewFloatItem|"
+#~ msgid "&File View"
+#~ msgstr "&Fichièr"
+
+#, fuzzy
+#~| msgid "Open File"
+#~ msgctxt "Marble::FileViewFloatItem|"
+#~ msgid "Open file..."
+#~ msgstr "Dobrir un fichièr"
+
+#, fuzzy
+#~| msgid "Open File"
+#~ msgctxt "Marble::FileViewFloatItem|"
+#~ msgid "Open File"
+#~ msgstr "Dobrir un fichièr"
+
+#, fuzzy
+#~| msgid "Show date"
+#~ msgctxt "Marble::FoursquarePlugin|"
+#~ msgid "&Places"
+#~ msgstr "Visualizar la data"
+
+#, fuzzy
+#~| msgid "km"
+#~ msgctxt "Marble::GpsInfo|"
+#~ msgid "mph"
+#~ msgstr "km"
+
+#, fuzzy
+#~| msgid "Left"
+#~ msgctxt "Marble::GpsInfo|"
+#~ msgid "ft"
+#~ msgstr "Esquèrra"
+
+#, fuzzy
+#~| msgid "km"
+#~ msgctxt "Marble::GpsInfo|"
+#~ msgid "km/h"
+#~ msgstr "km"
+
+#, fuzzy
+#~| msgid "km"
+#~ msgctxt "Marble::GpsInfo|"
+#~ msgid "m"
+#~ msgstr "m"
+
+#, fuzzy
+#~| msgid "km"
+#~ msgctxt "Marble::GpsInfo|"
+#~ msgid "nm"
+#~ msgstr "m"
+
+#, fuzzy
+#~| msgid "Description"
+#~ msgctxt "GpsInfoPlugin|"
+#~ msgid "Direction"
+#~ msgstr "Descripcion"
+
+#, fuzzy
+#~| msgid "&License Agreement"
+#~ msgctxt "Marble::License|"
+#~ msgid "License"
+#~ msgstr "&Acòrdi de licéncia"
+
+#, fuzzy
+#~| msgid "&License Agreement"
+#~ msgctxt "Marble::License|"
+#~ msgid "&License"
+#~ msgstr "&Acòrdi de licéncia"
+
+#, fuzzy
+#~| msgid "&License Agreement"
+#~ msgctxt "Marble::License|"
+#~ msgid "&Full License"
+#~ msgstr "&Acòrdi de licéncia"
+
+#, fuzzy
+#~| msgid "Show date"
+#~ msgctxt "Marble::License|"
+#~ msgid "&Show Details"
+#~ msgstr "Visualizar la data"
+
+#, fuzzy
+#~| msgid "&Search"
+#~ msgctxt "Marble::MapScaleFloatItem|"
+#~ msgid "Scale Bar"
+#~ msgstr "&Recercar"
+
+#, fuzzy
+#~| msgid "&Search"
+#~ msgctxt "Marble::MapScaleFloatItem|"
+#~ msgid "&Scale Bar"
+#~ msgstr "&Recercar"
+
+#, fuzzy
+#~| msgid "km"
+#~ msgctxt "Marble::MapScaleFloatItem|"
+#~ msgid "km"
+#~ msgstr "km"
+
+#, fuzzy
+#~| msgid "km"
+#~ msgctxt "Marble::MapScaleFloatItem|"
+#~ msgid "m"
+#~ msgstr "m"
+
+#, fuzzy
+#~| msgid "km"
+#~ msgctxt "Marble::MapScaleFloatItem|"
+#~ msgid "mi"
+#~ msgstr "m"
+
+#, fuzzy
+#~| msgid "km"
+#~ msgctxt "Marble::MapScaleFloatItem|"
+#~ msgid "nm"
+#~ msgstr "m"
+
+#, fuzzy
+#~| msgid "Navigation"
+#~ msgctxt "MeasureConfigDialog|"
+#~ msgid "Measure Tool Configuration"
+#~ msgstr "Navigacion"
+
+#, fuzzy
+#~| msgid "Temperature"
+#~ msgctxt "MeasureConfigDialog|"
+#~ msgid "Perimeter"
+#~ msgstr "Temperatura"
+
+#, fuzzy
+#~| msgid "Temperature"
+#~ msgctxt "Marble::MeasureToolPlugin|"
+#~ msgid ""
+#~ "Area:\n"
+#~ "%1"
+#~ msgstr "Temperatura"
+
+#, fuzzy
+#~| msgid "Temperature"
+#~ msgctxt "Marble::MeasureToolPlugin|"
+#~ msgid ""
+#~ "Perimeter:\n"
+#~ "%1"
+#~ msgstr "Temperatura"
+
+#, fuzzy
+#~| msgid "Temperature"
+#~ msgctxt "Marble::MeasureToolPlugin|"
+#~ msgid "Total Distance: %1<br/>\n"
+#~ msgstr "Temperatura"
+
+#, fuzzy
+#~| msgid "Temperature"
+#~ msgctxt "Marble::MeasureToolPlugin|"
+#~ msgid "Area: %1<br/>\n"
+#~ msgstr "Temperatura"
+
+#, fuzzy
+#~| msgid "Temperature"
+#~ msgctxt "Marble::MeasureToolPlugin|"
+#~ msgid "Perimeter: %1<br/>\n"
+#~ msgstr "Temperatura"
+
+#, fuzzy
+#~| msgid "Temperature"
+#~ msgctxt "Marble::MeasureToolPlugin|"
+#~ msgid "Radius: %1<br/>\n"
+#~ msgstr "Temperatura"
+
+#, fuzzy
+#~| msgid "Temperature"
+#~ msgctxt "Marble::MeasureToolPlugin|"
+#~ msgid "Circumference: %1<br/>\n"
+#~ msgstr "Temperatura"
+
+#, fuzzy
+#~| msgid "Navigation"
+#~ msgctxt "Navigation|"
+#~ msgid "Navigation"
+#~ msgstr "Navigacion"
+
+#, fuzzy
+#~| msgid "Navigation"
+#~ msgctxt "Marble::NavigationFloatItem|"
+#~ msgid "Navigation"
+#~ msgstr "Navigacion"
+
+#, fuzzy
+#~| msgid "Navigation"
+#~ msgctxt "Marble::NavigationFloatItem|"
+#~ msgid "&Navigation"
+#~ msgstr "Navigacion"
+
+#, fuzzy
+#~| msgid "Location"
+#~ msgctxt "Marble::NavigationFloatItem|"
+#~ msgid "Current Location Button"
+#~ msgstr "Emplaçament"
+
+#, fuzzy
+#~| msgid "State"
+#~ msgctxt "OpenCachingCacheDialog|"
+#~ msgid "Status:"
+#~ msgstr "Estat"
+
+#, fuzzy
+#~| msgid "Country:"
+#~ msgctxt "OpenCachingCacheDialog|"
+#~ msgid "Country:"
+#~ msgstr "Païs :"
+
+#, fuzzy
+#~| msgid "Description"
+#~ msgctxt "OpenCachingCacheDialog|"
+#~ msgid "Description"
+#~ msgstr "Descripcion"
+
+#, fuzzy
+#~| msgid "Open File"
+#~ msgctxt "OpenCachingCacheDialog|"
+#~ msgid "Previous"
+#~ msgstr "Dobrir un fichièr"
+
+#, fuzzy
+#~| msgid "&Search"
+#~ msgctxt "OpenCachingConfigWidget|"
+#~ msgid "Start:"
+#~ msgstr "&Recercar"
+
+#, fuzzy
+#~| msgid "Navigation"
+#~ msgctxt "OpenDesktopConfigWidget|"
+#~ msgid "OpenDesktop plugin configuration"
+#~ msgstr "Navigacion"
+
+#, fuzzy
+#~| msgid "Open File"
+#~ msgctxt "OverviewMapConfigWidget|"
+#~ msgid "Configure Overview Map"
+#~ msgstr "Dobrir un fichièr"
+
+#, fuzzy
+#~| msgid "Name"
+#~ msgctxt "OverviewMapConfigWidget|"
+#~ msgid "Map &Image"
+#~ msgstr "Nom"
+
+#, fuzzy
+#~| msgid "Show date"
+#~ msgctxt "OverviewMapConfigWidget|"
+#~ msgid "&Planet:"
+#~ msgstr "Visualizar la data"
+
+#, fuzzy
+#~| msgid "1x"
+#~ msgctxt "OverviewMapConfigWidget|"
+#~ msgid "x"
+#~ msgstr "1 x"
+
+#, fuzzy
+#~| msgid "Open File"
+#~ msgctxt "OverviewMapConfigWidget|"
+#~ msgid "Preview"
+#~ msgstr "Dobrir un fichièr"
+
+#, fuzzy
+#~| msgid "&File"
+#~ msgctxt "OverviewMapConfigWidget|"
+#~ msgid "Filename"
+#~ msgstr "&Fichièr"
+
+#, fuzzy
+#~| msgid "Description"
+#~ msgctxt "OverviewMapConfigWidget|"
+#~ msgid "Position I&ndicator:"
+#~ msgstr "Descripcion"
+
+#, fuzzy
+#~| msgid "&License Agreement"
+#~ msgctxt "PhotoConfigWidget|"
+#~ msgid "License"
+#~ msgstr "&Acòrdi de licéncia"
+
+#, fuzzy
+#~| msgid "Description"
+#~ msgctxt "Marble::PositionMarker|"
+#~ msgid "Position Marker"
+#~ msgstr "Descripcion"
+
+#, fuzzy
+#~| msgid "Description"
+#~ msgctxt "Marble::PositionMarker|"
+#~ msgid "&Position Marker"
+#~ msgstr "Descripcion"
+
+#, fuzzy
+#~| msgid "Description"
+#~ msgctxt "PositionMarkerConfigWidget|"
+#~ msgid "Configure Position Marker Plugin"
+#~ msgstr "Descripcion"
+
+#, fuzzy
+#~| msgid "Save File"
+#~ msgctxt "Marble::ProgressFloatItem|"
+#~ msgid "Download Progress Indicator"
+#~ msgstr "Enregistrar lo fichièr"
+
+#, fuzzy
+#~| msgid "Save File"
+#~ msgctxt "Marble::ProgressFloatItem|"
+#~ msgid "&Download Progress"
+#~ msgstr "Enregistrar lo fichièr"
+
+#, fuzzy
+#~| msgid "Navigation"
+#~ msgctxt "RoutingConfigDialog|"
+#~ msgid "Routing Configuration"
+#~ msgstr "Navigacion"
+
+#, fuzzy
+#~| msgid "Open File"
+#~ msgctxt "QObject|"
+#~ msgid "Route left."
+#~ msgstr "Dobrir un fichièr"
+
+#, fuzzy
+#~| msgid "Open File"
+#~ msgctxt "Marble::RoutingPlugin|"
+#~ msgid "Routing"
+#~ msgstr "Dobrir un fichièr"
+
+#, fuzzy
+#~| msgid "Open File"
+#~ msgctxt "Marble::RoutingPlugin|"
+#~ msgid "&Routing"
+#~ msgstr "Dobrir un fichièr"
+
+#, fuzzy
+#~| msgid "Zoom Out"
+#~ msgctxt "RoutingPlugin|"
+#~ msgid "Zoom Out"
+#~ msgstr "Reduire el zoom"
+
+#, fuzzy
+#~| msgid "-"
+#~ msgctxt "RoutingPlugin|"
+#~ msgid "-"
+#~ msgstr "-"
+
+#, fuzzy
+#~| msgid "Zoom In"
+#~ msgctxt "RoutingPlugin|"
+#~ msgid "Zoom In"
+#~ msgstr "Agrandir lo zoom"
+
+#, fuzzy
+#~| msgid "+"
+#~ msgctxt "RoutingPlugin|"
+#~ msgid "+"
+#~ msgstr "+"
+
+#, fuzzy
+#~| msgid "State"
+#~ msgctxt "Marble::SatellitesConfigDialog|"
+#~ msgid "Other"
+#~ msgstr "Aiga"
+
+#, fuzzy
+#~| msgid "Path"
+#~ msgctxt "Marble::SatellitesConfigDialog|"
+#~ msgid "Earth"
+#~ msgstr "Camin"
+
+#, fuzzy
+#~| msgid "&Search"
+#~ msgctxt "Marble::SatellitesConfigDialog|"
+#~ msgid "Mars"
+#~ msgstr "&Recercar"
+
+#, fuzzy
+#~| msgid "Navigation"
+#~ msgctxt "Marble::SatellitesConfigDialog|"
+#~ msgid "&Satellites"
+#~ msgstr "Navigacion"
+
+#, fuzzy
+#~| msgid "&Search"
+#~ msgctxt "Marble::SatellitesConfigDialog|"
+#~ msgid "&Data Sources"
+#~ msgstr "&Recercar"
+
+#, fuzzy
+#~| msgid "Navigation"
+#~ msgctxt "SatellitesConfigDialog|"
+#~ msgid "Satellites Configuration"
+#~ msgstr "Navigacion"
+
+#, fuzzy
+#~| msgid "Navigation"
+#~ msgctxt "SatellitesConfigDialog|"
+#~ msgid "&Satellites"
+#~ msgstr "Navigacion"
+
+#, fuzzy
+#~| msgid "&Search"
+#~ msgctxt "SatellitesConfigDialog|"
+#~ msgid "&Data Sources"
+#~ msgstr "&Recercar"
+
+#, fuzzy
+#~| msgid "-"
+#~ msgctxt "SatellitesConfigDialog|"
+#~ msgid "-"
+#~ msgstr "-"
+
+#, fuzzy
+#~| msgid "+"
+#~ msgctxt "SatellitesConfigDialog|"
+#~ msgid "+"
+#~ msgstr "+"
+
+#, fuzzy
+#~| msgid "..."
+#~ msgctxt "SatellitesConfigDialog|"
+#~ msgid "..."
+#~ msgstr "..."
+
+#, fuzzy
+#~| msgid "not available"
+#~ msgctxt "QObject|"
+#~ msgid "No info available."
+#~ msgstr "pas disponible"
+
+#, fuzzy
+#~| msgid "Navigation"
+#~ msgctxt "Marble::SatellitesPlugin|"
+#~ msgid "Satellites"
+#~ msgstr "Navigacion"
+
+#, fuzzy
+#~| msgid "Navigation"
+#~ msgctxt "Marble::SatellitesPlugin|"
+#~ msgid "&Satellites"
+#~ msgstr "Navigacion"
+
+#, fuzzy
+#~| msgid "Navigation"
+#~ msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
+#~ msgid "Space Stations"
+#~ msgstr "Navegacion"
+
+#, fuzzy
+#~| msgid "State"
+#~ msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
+#~ msgid "Weather"
+#~ msgstr "Aiga"
+
+#, fuzzy
+#~| msgid "&Search"
+#~ msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
+#~ msgid "Earth Resources"
+#~ msgstr "&Recercar"
+
+#, fuzzy
+#~| msgid "Navigation"
+#~ msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
+#~ msgid "Tracking and Data Relay Satellite System (TDRSS)"
+#~ msgstr "Navigacion"
+
+#, fuzzy
+#~| msgid "Navigation"
+#~ msgctxt "Marble::SatellitesPlugin|"
+#~ msgid "Communications Satellites"
+#~ msgstr "Navigacion"
+
+#, fuzzy
+#~| msgid "Save File"
+#~ msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
+#~ msgid "Geostationary"
+#~ msgstr "Enregistrar lo fichièr"
+
+#, fuzzy
+#~| msgid "&Search"
+#~ msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
+#~ msgid "Globalstar"
+#~ msgstr "&Recercar"
+
+#, fuzzy
+#~| msgid "State"
+#~ msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
+#~ msgid "Other"
+#~ msgstr "Aiga"
+
+#, fuzzy
+#~| msgid "Navigation"
+#~ msgctxt "Marble::SatellitesPlugin|"
+#~ msgid "Navigation Satellites"
+#~ msgstr "Navigacion"
+
+#, fuzzy
+#~| msgid "International"
+#~ msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
+#~ msgid "GPS Operational"
+#~ msgstr "Internacional"
+
+#, fuzzy
+#~| msgid "International"
+#~ msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
+#~ msgid "Glonass Operational"
+#~ msgstr "Internacional"
+
+#, fuzzy
+#~| msgid "Navigation"
+#~ msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
+#~ msgid "Navy Navigation Satellite System (NNSS)"
+#~ msgstr "Navigacion"
+
+#, fuzzy
+#~| msgid "Navigation"
+#~ msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
+#~ msgid "Russian LEO Navigation"
+#~ msgstr "Navigacion"
+
+#, fuzzy
+#~| msgid "Navigation"
+#~ msgctxt "Marble::SatellitesPlugin|"
+#~ msgid "Scientific Satellites"
+#~ msgstr "Navigacion"
+
+#, fuzzy
+#~| msgid "Location"
+#~ msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
+#~ msgid "Education"
+#~ msgstr "Emplaçament"
+
+#, fuzzy
+#~| msgid "Navigation"
+#~ msgctxt "Marble::SatellitesPlugin|"
+#~ msgid "Miscellaneous Satellites"
+#~ msgstr "Navigacion"
+
+#, fuzzy
+#~| msgid "km"
+#~ msgctxt "Marble::Speedometer|"
+#~ msgid "mph"
+#~ msgstr "km"
+
+#, fuzzy
+#~| msgid "km"
+#~ msgctxt "Marble::Speedometer|"
+#~ msgid "km/h"
+#~ msgstr "km"
+
+#, fuzzy
+#~| msgid "km"
+#~ msgctxt "Speedometer|"
+#~ msgid "km/h"
+#~ msgstr "km"
+
+#, fuzzy
+#~| msgid "Path"
+#~ msgctxt "StarsConfigWidget|"
+#~ msgid "Earth"
+#~ msgstr "Camin"
+
+#, fuzzy
+#~| msgid "&Search"
+#~ msgctxt "StarsConfigWidget|"
+#~ msgid "Mars"
+#~ msgstr "&Recercar"
+
+#, fuzzy
+#~| msgid "Show date"
+#~ msgctxt "StarsConfigWidget|"
+#~ msgid "Magnify Sun and Moon"
+#~ msgstr "Visualizar la data"
+
+#, fuzzy
+#~| msgid "State"
+#~ msgctxt "StarsConfigWidget|"
+#~ msgid "Other"
+#~ msgstr "Aiga"
+
+#, fuzzy
+#~| msgid "Show date"
+#~ msgctxt "StarsConfigWidget|"
+#~ msgid "Constellations"
+#~ msgstr "Visualizar la data"
+
+#, fuzzy
+#~| msgid "Name"
+#~ msgctxt "StarsConfigWidget|"
+#~ msgid "Names"
+#~ msgstr "Nom"
+
+#, fuzzy
+#~| msgid "Name"
+#~ msgctxt "StarsConfigWidget|"
+#~ msgid "Latin Name"
+#~ msgstr "Nom"
+
+#, fuzzy
+#~| msgid "International"
+#~ msgctxt "StarsConfigWidget|"
+#~ msgid "Native Translation"
+#~ msgstr "Internacional"
+
+#, fuzzy
+#~| msgid "Navigation"
+#~ msgctxt "StarsConfigWidget|"
+#~ msgid "Abbreviation"
+#~ msgstr "Navegacion"
+
+#, fuzzy
+#~| msgid "&Search"
+#~ msgctxt "Marble::StarsPlugin|"
+#~ msgid "Stars"
+#~ msgstr "&Recercar"
+
+#, fuzzy
+#~| msgid "&Search"
+#~ msgctxt "Marble::StarsPlugin|"
+#~ msgid "&Stars"
+#~ msgstr "&Recercar"
+
+#, fuzzy
+#~| msgid "Show date"
+#~ msgctxt "Marble::StarsPlugin|"
+#~ msgid "Show &Constellations"
+#~ msgstr "Visualizar la data"
+
+#, fuzzy
+#~| msgid "Show date"
+#~ msgctxt "Marble::StarsPlugin|"
+#~ msgid "Show &Sun and Moon"
+#~ msgstr "Visualizar la data"
+
+#, fuzzy
+#~| msgid "Show date"
+#~ msgctxt "Marble::StarsPlugin|"
+#~ msgid "Show &Planets"
+#~ msgstr "Visualizar la data"
+
+#, fuzzy
+#~| msgid "International"
+#~ msgctxt "WeatherConfigWidget|"
+#~ msgid "Information"
+#~ msgstr "Internacional"
+
+#, fuzzy
+#~| msgid "Temperature"
+#~ msgctxt "WeatherConfigWidget|"
+#~ msgid "Temperature"
+#~ msgstr "Temperatura"
+
+#, fuzzy
+#~| msgid "International"
+#~ msgctxt "WeatherConfigWidget|"
+#~ msgid "Wind direction"
+#~ msgstr "Internacional"
+
+#, fuzzy
+#~| msgctxt "NAME OF TRANSLATORS"
+#~| msgid "Your names"
+#~ msgctxt "WeatherConfigWidget|"
+#~ msgid " hours"
+#~ msgstr "Yannig Marchegay (Kokoyaya)"
+
+#, fuzzy
+#~| msgid "&Search"
+#~ msgctxt "WeatherData|"
+#~ msgid "clear"
+#~ msgstr "Netejar"
+
+#, fuzzy
+#~| msgid "&Close"
+#~ msgctxt "WeatherData|"
+#~ msgid "few clouds"
+#~ msgstr "&Tampar"
+
+#, fuzzy
+#~| msgid "Forest"
+#~ msgctxt "WeatherData|"
+#~ msgid "overcast"
+#~ msgstr "Sapin"
+
+#, fuzzy
+#~| msgid "N"
+#~ msgctxt "WeatherData|"
+#~ msgid "N"
+#~ msgstr "N"
+
+#, fuzzy
+#~| msgid "N"
+#~ msgctxt "WeatherData|"
+#~ msgid "NNE"
+#~ msgstr "N"
+
+#, fuzzy
+#~| msgid "N"
+#~ msgctxt "WeatherData|"
+#~ msgid "NE"
+#~ msgstr "N"
+
+#, fuzzy
+#~| msgid "N"
+#~ msgctxt "WeatherData|"
+#~ msgid "ENE"
+#~ msgstr "N"
+
+#, fuzzy
+#~| msgid "E"
+#~ msgctxt "WeatherData|"
+#~ msgid "E"
+#~ msgstr "M"
+
+#, fuzzy
+#~| msgid "S"
+#~ msgctxt "WeatherData|"
+#~ msgid "SSE"
+#~ msgstr "E"
+
+#, fuzzy
+#~| msgid "S"
+#~ msgctxt "WeatherData|"
+#~ msgid "SE"
+#~ msgstr "E"
+
+#, fuzzy
+#~| msgid "S"
+#~ msgctxt "WeatherData|"
+#~ msgid "ESE"
+#~ msgstr "E"
+
+#, fuzzy
+#~| msgid "S"
+#~ msgctxt "WeatherData|"
+#~ msgid "S"
+#~ msgstr "E"
+
+#, fuzzy
+#~| msgid "N"
+#~ msgctxt "WeatherData|"
+#~ msgid "NNW"
+#~ msgstr "N"
+
+#, fuzzy
+#~| msgid "N"
+#~ msgctxt "WeatherData|"
+#~ msgid "NW"
+#~ msgstr "N"
+
+#, fuzzy
+#~| msgid "N"
+#~ msgctxt "WeatherData|"
+#~ msgid "WNW"
+#~ msgstr "N"
+
+#, fuzzy
+#~| msgid "W"
+#~ msgctxt "WeatherData|"
+#~ msgid "W"
+#~ msgstr "W"
+
+#, fuzzy
+#~| msgid "S"
+#~ msgctxt "WeatherData|"
+#~ msgid "SSW"
+#~ msgstr "E"
+
+#, fuzzy
+#~| msgid "S"
+#~ msgctxt "WeatherData|"
+#~ msgid "SW"
+#~ msgstr "E"
+
+#, fuzzy
+#~| msgid "S"
+#~ msgctxt "WeatherData|"
+#~ msgid "WSW"
+#~ msgstr "E"
+
+#, fuzzy
+#~| msgid "km"
+#~ msgctxt "QObject|"
+#~ msgid "mph"
+#~ msgstr "km"
+
+#, fuzzy
+#~| msgid "km"
+#~ msgctxt "QObject|"
+#~ msgid "m/s"
+#~ msgstr "km"
+
+#, fuzzy
+#~| msgid "Ready"
+#~ msgctxt "WeatherData|air pressure has no change"
+#~ msgid "steady"
+#~ msgstr "Prèst"
+
+#, fuzzy
+#~| msgid "Temperature"
+#~ msgctxt "WeatherData|"
+#~ msgid "Temperature: %1<br>"
+#~ msgstr "Temperatura"
+
+#, fuzzy
+#~| msgid "Temperature"
+#~ msgctxt "WeatherData|"
+#~ msgid "Max temperature: %1<br>"
+#~ msgstr "Temperatura"
+
+#, fuzzy
+#~| msgid "Temperature"
+#~ msgctxt "WeatherData|"
+#~ msgid "Min temperature: %1<br>"
+#~ msgstr "Temperatura"
+
+#, fuzzy
+#~| msgid "Temperature"
+#~ msgctxt "WeatherData|"
+#~ msgid "Pressure: %1<br>"
+#~ msgstr "Temperatura"
+
+#, fuzzy
+#~| msgid "State"
+#~ msgctxt "WeatherItemPrivate|"
+#~ msgid "Weather"
+#~ msgstr "Aiga"
+
+#, fuzzy
+#~| msgid "State"
+#~ msgctxt "Marble::WeatherPlugin|"
+#~ msgid "Weather"
+#~ msgstr "Aiga"
+
+#, fuzzy
+#~| msgid "State"
+#~ msgctxt "Marble::WeatherPlugin|"
+#~ msgid "&Weather"
+#~ msgstr "Aiga"
+
+#, fuzzy
+#~| msgid "Open File"
+#~ msgctxt "CycleStreetsConfigWidget|"
+#~ msgid "Route type:"
+#~ msgstr "Dobrir un fichièr"
+
+#, fuzzy
+#~| msgid "&Search"
+#~ msgctxt "Marble::GeoUriPlugin|"
+#~ msgid "Geo URI Search"
+#~ msgstr "&Recercar"
+
+#, fuzzy
+#~| msgid "State"
+#~ msgctxt "Marble::GpxPlugin|"
+#~ msgid "GPS Data"
+#~ msgstr "Estat"
+
+#, fuzzy
+#~| msgid "International"
+#~ msgctxt "QObject|"
+#~ msgid "attraction"
+#~ msgstr "Internacional"
+
+#, fuzzy
+#~| msgid "State"
+#~ msgctxt "QObject|"
+#~ msgid "theatre"
+#~ msgstr "Estat"
+
+#, fuzzy
+#~| msgid "Open File"
+#~ msgctxt "QObject|"
+#~ msgid "view point"
+#~ msgstr "Dobrir un fichièr"
+
+#, fuzzy
+#~| msgid "Transportation"
+#~ msgctxt "QObject|"
+#~ msgid "airport"
+#~ msgstr "Los transpòrts"
+
+#, fuzzy
+#~| msgid "Transportation"
+#~ msgctxt "QObject|"
+#~ msgid "airport runway"
+#~ msgstr "Los transpòrts"
+
+#, fuzzy
+#~| msgid "Transportation"
+#~ msgctxt "QObject|"
+#~ msgid "airport apron"
+#~ msgstr "Los transpòrts"
+
+#, fuzzy
+#~| msgid "Transportation"
+#~ msgctxt "QObject|"
+#~ msgid "airport taxiway"
+#~ msgstr "Los transpòrts"
+
+#, fuzzy
+#~| msgid "International"
+#~ msgctxt "QObject|"
+#~ msgid "bus station"
+#~ msgstr "Internacional"
+
+#, fuzzy
+#~| msgid "Back"
+#~ msgctxt "QObject|"
+#~ msgid "parking"
+#~ msgstr "Pista"
+
+#, fuzzy
+#~| msgid "International"
+#~ msgctxt "QObject|"
+#~ msgid "train station"
+#~ msgstr "Internacional"
+
+#, fuzzy
+#~| msgid "&Search"
+#~ msgctxt "Marble::LocalOsmSearchPlugin|"
+#~ msgid "Local OSM Search"
+#~ msgstr "&Recercar"
+
+#, fuzzy
+#~| msgid "Forest"
+#~ msgctxt "QObject|"
+#~ msgid "north"
+#~ msgstr "Sapin"
+
+#, fuzzy
+#~| msgid "Forest"
+#~ msgctxt "QObject|"
+#~ msgid "north-west"
+#~ msgstr "Sapin"
+
+#, fuzzy
+#~| msgid "Forest"
+#~ msgctxt "QObject|"
+#~ msgid "west"
+#~ msgstr "Sapin"
+
+#, fuzzy
+#~| msgid "&About"
+#~ msgctxt "QObject|"
+#~ msgid "south-west"
+#~ msgstr "&A prepaus de"
+
+#, fuzzy
+#~| msgid "&About"
+#~ msgctxt "QObject|"
+#~ msgid "south"
+#~ msgstr "&A prepaus de"
+
+#, fuzzy
+#~| msgid "Forest"
+#~ msgctxt "QObject|"
+#~ msgid "south-east"
+#~ msgstr "Sapin"
+
+#, fuzzy
+#~| msgid "Forest"
+#~ msgctxt "QObject|"
+#~ msgid "east"
+#~ msgstr "Sapin"
+
+#, fuzzy
+#~| msgid "Forest"
+#~ msgctxt "QObject|"
+#~ msgid "north-east"
+#~ msgstr "Sapin"
+
+#, fuzzy
+#~| msgid "Save File"
+#~ msgctxt "QObject|"
+#~ msgid "Downloading %1"
+#~ msgstr "Enregistrar lo fichièr"
+
+#, fuzzy
+#~| msgid "Navigation"
+#~ msgctxt "MonavConfigWidget|"
+#~ msgid "Monav Configuration"
+#~ msgstr "Navigacion"
+
+#, fuzzy
+#~| msgid "Transportation"
+#~ msgctxt "MonavConfigWidget|"
+#~ msgid "Transport Type:"
+#~ msgstr "Los transpòrts"
+
+#, fuzzy
+#~| msgid "Country:"
+#~ msgctxt "MonavConfigWidget|"
+#~ msgid "Country"
+#~ msgstr "Païs :"
+
+#, fuzzy
+#~| msgid "Save File"
+#~ msgctxt "MonavConfigWidget|"
+#~ msgid "Download Variant"
+#~ msgstr "Enregistrar lo fichièr"
+
+#, fuzzy
+#~| msgid "Name"
+#~ msgctxt "Marble::MonavMapsModel|"
+#~ msgid "Name"
+#~ msgstr "Nom"
+
+#, fuzzy
+#~| msgid "Transportation"
+#~ msgctxt "Marble::MonavMapsModel|"
+#~ msgid "Transport"
+#~ msgstr "Los transpòrts"
+
+#, fuzzy
+#~| msgid "Desert"
+#~ msgctxt "Marble::MonavMapsModel|"
+#~ msgid "Delete"
+#~ msgstr "Desèrt"
+
+#, fuzzy
+#~| msgid "Open File"
+#~ msgctxt "Marble::MonavPlugin|"
+#~ msgid "Monav Routing"
+#~ msgstr "Dobrir un fichièr"
+
+#, fuzzy
+#~| msgid "Save File"
+#~ msgctxt "Marble::OpenLocationCodeSearchPlugin|"
+#~ msgid "Open Location Code Search"
+#~ msgstr "Enregistrar lo fichièr"
+
+#, fuzzy
+#~| msgid "Save File"
+#~ msgctxt "Marble::OpenLocationCodeSearchPlugin|"
+#~ msgid "Open Location Code"
+#~ msgstr "Enregistrar lo fichièr"
+
+#, fuzzy
+#~| msgid "Open File"
+#~ msgctxt "Marble::OpenRouteServicePlugin|"
+#~ msgid "OpenRouteService"
+#~ msgstr "Dobrir un fichièr"
+
+#, fuzzy
+#~| msgid "Transportation"
+#~ msgctxt "RoutinoConfigWidget|"
+#~ msgid "Transport:"
+#~ msgstr "Los transpòrts"
+
+#, fuzzy
+#~| msgid "Open File"
+#~ msgctxt "Marble::RoutinoPlugin|"
+#~ msgid "Routino"
+#~ msgstr "Dobrir un fichièr"
+
+#, fuzzy
+#~| msgid "Back"
+#~ msgctxt "Marble::RoutinoConfigWidget|"
+#~ msgid "Motorcar"
+#~ msgstr "Pista"
+
+#, fuzzy
+#~| msgid "Transportation"
+#~ msgctxt "YoursConfigWidget|"
+#~ msgid "Transport:"
+#~ msgstr "Los transpòrts"
+
+#, fuzzy
+#~| msgctxt "NAME OF TRANSLATORS"
+#~| msgid "Your names"
+#~ msgctxt "Marble::YoursPlugin|"
+#~ msgid "Yours"
+#~ msgstr "Yannig Marchegay (Kokoyaya)"
+
+#, fuzzy
+#~| msgid "Back"
+#~ msgctxt "Marble::YoursConfigWidget|"
+#~ msgid "Bicycle"
+#~ msgstr "Pista"
+
+#, fuzzy
+#~| msgid "Back"
+#~ msgctxt "Marble::YoursConfigWidget|"
+#~ msgid "Motorcar"
+#~ msgstr "Pista"
+
+#, fuzzy
+#~| msgid "Temperature"
+#~ msgctxt "Marble::FITemplateFloatItem|"
+#~ msgid "FITemplate"
+#~ msgstr "Temperatura"
+
+#, fuzzy
+#~| msgid "Temperature"
+#~ msgctxt "Marble::FITemplateFloatItem|"
+#~ msgid "Float Item &Template"
+#~ msgstr "Temperatura"
+
+#, fuzzy
+#~| msgid "Desert"
+#~ msgctxt "Bookmarks|"
+#~ msgid "Removed"
+#~ msgstr "Desèrt"
+
+#, fuzzy
+#~| msgid "&Settings"
+#~ msgctxt "MainScreen|"
+#~ msgid "Settings"
+#~ msgstr "&Paramètres"
+
+#, fuzzy
+#~| msgid "&About"
+#~ msgctxt "MainScreen|"
+#~ msgid "About"
+#~ msgstr "&A prepaus de"
+
+#, fuzzy
+#~| msgid "Open File"
+#~ msgctxt "MainScreen|"
+#~ msgid "Routing"
+#~ msgstr "Dobrir un fichièr"
+
+#, fuzzy
+#~| msgid "10 mm"
+#~ msgctxt "NavigationInfoBar|"
+#~ msgid "%1 km"
+#~ msgstr "10 mm"
+
+#, fuzzy
+#~| msgid "Back"
+#~ msgctxt "ProfileSelectorMenu|"
+#~ msgid "Bicycle"
+#~ msgstr "Pista"
+
+#, fuzzy
+#~| msgid "&Search"
+#~ msgctxt "SearchField|"
+#~ msgid "Search"
+#~ msgstr "&Recercar"
+
+#, fuzzy
+#~| msgid "Transportation"
+#~ msgctxt "SidePanel|"
+#~ msgid "Public Transport"
+#~ msgstr "Los transpòrts"
+
+#, fuzzy
+#~| msgid "Ctrl+O"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Ctrl+O"
+#~ msgstr "Ctrl+O"
+
+#, fuzzy
+#~| msgid "Ctrl+O"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Ctrl+S"
+#~ msgstr "Ctrl+O"
+
+#, fuzzy
+#~| msgid "Ctrl+O"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Ctrl+C"
+#~ msgstr "Ctrl+O"
+
+#, fuzzy
+#~| msgid "Ctrl+O"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Ctrl+E"
+#~ msgstr "Ctrl+O"
+
+#, fuzzy
+#~| msgid "Ctrl+O"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Ctrl+B"
+#~ msgstr "Ctrl+O"
+
+#, fuzzy
+#~| msgid "Transportation"
+#~ msgctxt "Marble::MapWizard|"
+#~ msgid "Airport"
+#~ msgstr "Los transpòrts"
+
+#, fuzzy
+#~| msgid "International"
+#~ msgctxt "Marble::MapWizard|"
+#~ msgid "International"
+#~ msgstr "Internacional"
+
+#, fuzzy
+#~| msgid "State"
+#~ msgctxt "Marble::MapWizard|"
+#~ msgid "State"
+#~ msgstr "Estat"
+
+#, fuzzy
+#~| msgid "Save File"
+#~ msgctxt "Marble::MapViewWidget|"
+#~ msgid "&Upload Map..."
+#~ msgstr "Enregistrar lo fichièr"
+
+#, fuzzy
+#~| msgid "Open File"
+#~ msgctxt "PlacemarkDialog|"
+#~ msgid "Routes"
+#~ msgstr "Dobrir un fichièr"
+
+#, fuzzy
+#~| msgid "&Cancel"
+#~ msgctxt "MovieCaptureDialog|"
+#~ msgid "Cancel"
+#~ msgstr "&Anullar"
+
+#, fuzzy
+#~| msgid "Shadow"
+#~ msgctxt "SunControlWidget|"
+#~ msgid "Shadow"
+#~ msgstr "Ombra"
+
+#, fuzzy
+#~| msgid "&Cancel"
+#~ msgctxt "SunControlWidget|"
+#~ msgid "Cancel"
+#~ msgstr "&Anullar"
+
+#, fuzzy
+#~| msgid "&Cancel"
+#~ msgctxt "TileCreatorDialog|"
+#~ msgid "&Cancel"
+#~ msgstr "&Anullar"
+
+#, fuzzy
+#~| msgid "&Cancel"
+#~ msgctxt "TimeControlWidget|"
+#~ msgid "Cancel"
+#~ msgstr "&Anullar"
+
+#, fuzzy
+#~| msgid "&Cancel"
+#~ msgctxt "Marble::DownloadOsmDialog|"
+#~ msgid "Cancel"
+#~ msgstr "&Anullar"
+
+#, fuzzy
+#~| msgid "..."
+#~ msgctxt "CacheDetailsDialog|"
+#~ msgid "..."
+#~ msgstr "..."
+
+#, fuzzy
+#~| msgid "Description"
+#~ msgctxt "CacheDetailsDialog|"
+#~ msgid "Description"
+#~ msgstr "Descripcion"
+
+#, fuzzy
+#~| msgid "&Close"
+#~ msgctxt "CacheDetailsDialog|"
+#~ msgid "&Close"
+#~ msgstr "&Tampar"
+
+#, fuzzy
+#~| msgid "Description"
+#~ msgctxt "Marble::OpenCachingComItem|"
+#~ msgid "Verification:"
+#~ msgstr "Descripcion"
+
+#, fuzzy
+#~| msgid "Right"
+#~ msgctxt "Marble::OpenCachingComModel|"
+#~ msgid "Night"
+#~ msgstr "Drecha"
+
+#, fuzzy
+#~| msgid "Right"
+#~ msgctxt "Marble::OpenCachingComModel|"
+#~ msgid "UV light"
+#~ msgstr "Drecha"
+
+#, fuzzy
+#~| msgid "&Cancel"
+#~ msgctxt "BookmarkManagerDialogPrivate|"
+#~ msgid "Cancel"
+#~ msgstr "&Anullar"
+
+#, fuzzy
+#~| msgid "Plugins"
+#~ msgctxt "Marble::NotesPlugin|"
+#~ msgid "Notes Plugin"
+#~ msgstr "Ajustons"
+
+#, fuzzy
+#~| msgid "Down"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "City National Capital"
+#~ msgstr "Aval"
+
+#, fuzzy
+#~| msgid "Down"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Town National Capital"
+#~ msgstr "Aval"
+
+#, fuzzy
+#~| msgid "City"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Village National Capital"
+#~ msgstr "Ciutat"
+
+#, fuzzy
+#~| msgid "&Search"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Bag"
+#~ msgstr "&Recercar"
+
+#, fuzzy
+#~| msgid "&Search"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Car"
+#~ msgstr "&Recercar"
+
+#, fuzzy
+#~| msgid "Navigation"
+#~ msgctxt "Marble::RoutingProfileSettingsDialog|"
+#~ msgid "Routing Profile - Marble"
+#~ msgstr "Navegacion"
+
+#, fuzzy
+#~| msgid "Zoom Out"
+#~ msgctxt "RoutingPlugin|"
+#~ msgid "zoom out"
+#~ msgstr "Reduire el zoom"
+
+#, fuzzy
+#~| msgid "Zoom In"
+#~ msgctxt "RoutingPlugin|"
+#~ msgid "zoom in"
+#~ msgstr "Agrandir lo zoom"
+
+#, fuzzy
+#~| msgid "State"
+#~ msgctxt "GeoDataFeature|"
+#~ msgid "Crater"
+#~ msgstr "Aiga"
+
+#, fuzzy
+#~| msgid "Down"
+#~ msgctxt "GeoDataFeature|"
+#~ msgid "Town"
+#~ msgstr "Aval"
+
+#, fuzzy
+#~| msgid "State"
+#~ msgctxt "GeoDataFeature|"
+#~ msgid "Water"
+#~ msgstr "Aiga"
+
+#, fuzzy
+#~| msgid "Back"
+#~ msgctxt "GeoDataFeature|"
+#~ msgid "Track"
+#~ msgstr "Pista"
+
+#, fuzzy
+#~| msgid "Save File"
+#~ msgctxt "GeoDataFeature|"
+#~ msgid "Veterinary"
+#~ msgstr "Enregistrar lo fichièr"
+
+#, fuzzy
+#~| msgid "&Search"
+#~ msgctxt "GeoDataFeature|"
+#~ msgid "Car"
+#~ msgstr "&Recercar"
+
+#, fuzzy
+#~| msgid "State"
+#~ msgctxt "GeoDataFeature|"
+#~ msgid "Theatre"
+#~ msgstr "Estat"
+
+#, fuzzy
+#~| msgid "City"
+#~ msgctxt "Marble::Placemark|"
+#~ msgid "City"
+#~ msgstr "Ciutat"
+
+#, fuzzy
+#~| msgid "Down"
+#~ msgctxt "Marble::Placemark|"
+#~ msgid "Town"
+#~ msgstr "Aval"
+
+#, fuzzy
+#~| msgid "State"
+#~ msgctxt "Marble::Placemark|"
+#~ msgid "Water"
+#~ msgstr "Aiga"
+
+#, fuzzy
+#~| msgid "Back"
+#~ msgctxt "Marble::Placemark|"
+#~ msgid "Track"
+#~ msgstr "Pista"
+
+#, fuzzy
+#~| msgid "Save File"
+#~ msgctxt "Marble::Placemark|"
+#~ msgid "Veterinary"
+#~ msgstr "Enregistrar lo fichièr"
+
+#, fuzzy
+#~| msgid "&Search"
+#~ msgctxt "Marble::Placemark|"
+#~ msgid "Car"
+#~ msgstr "&Recercar"
+
+#, fuzzy
+#~| msgid "International"
+#~ msgctxt "Marble::Placemark|"
+#~ msgid "Information"
+#~ msgstr "Internacional"
+
+#, fuzzy
+#~| msgid "State"
+#~ msgctxt "Marble::Placemark|"
+#~ msgid "Theatre"
+#~ msgstr "Estat"
+
+#, fuzzy
+#~| msgid "State"
+#~ msgctxt "Marble::Placemark|"
+#~ msgid "Crater"
+#~ msgstr "Aiga"
+
+#, fuzzy
+#~| msgid "Description"
+#~ msgctxt "Marble::MaemoPositionProviderPlugin|"
+#~ msgid "Maemo Position Provider Plugin"
+#~ msgstr "Descripcion"
+
+#, fuzzy
+#~| msgid "Open File"
+#~ msgctxt "MarbleViewSettingsWidget|"
+#~ msgid "OpenGL"
+#~ msgstr "Dobrir un fichièr"
+
+#, fuzzy
+#~| msgid "Name"
+#~ msgctxt "Marble::QtMarbleConfigDialog|"
+#~ msgid "Native"
+#~ msgstr "Nom"
+
+#, fuzzy
+#~| msgid "Name"
+#~ msgctxt "Marble::QtMarbleConfigDialog|"
+#~ msgid "Native (X11)"
+#~ msgstr "Nom"
+
+#, fuzzy
+#~| msgid "E"
+#~ msgctxt "East, the direction"
+#~ msgid "E"
+#~ msgstr "M"
+
+#, fuzzy
+#~| msgid "W"
+#~ msgctxt "West, the direction"
+#~ msgid "W"
+#~ msgstr "W"
+
+#, fuzzy
+#~| msgid "N"
+#~ msgctxt "North, the direction"
+#~ msgid "N"
+#~ msgstr "N"
+
+#, fuzzy
+#~| msgid "S"
+#~ msgctxt "South, the direction"
+#~ msgid "S"
+#~ msgstr "E"
+
+#, fuzzy
+#~| msgid "km"
+#~ msgctxt "means meter"
+#~ msgid "m"
+#~ msgstr "m"
+
+#, fuzzy
+#~| msgid "km"
+#~ msgctxt "means kilometers"
+#~ msgid "km"
+#~ msgstr "km"
+
+#, fuzzy
+#~| msgid "Left"
+#~ msgctxt "means feet"
+#~ msgid "ft"
+#~ msgstr "Esquèrra"
+
+#, fuzzy
+#~| msgid "km"
+#~ msgctxt "means miles"
+#~ msgid "mi"
+#~ msgstr "m"
+
+#, fuzzy
+#~| msgid "km"
+#~ msgctxt "means nautical miles"
+#~ msgid "nm"
+#~ msgstr "m"
+
+#, fuzzy
+#~| msgid "Path"
+#~ msgctxt "the planet"
+#~ msgid "Earth"
+#~ msgstr "Camin"
+
+#, fuzzy
+#~| msgid "&Search"
+#~ msgctxt "the planet"
+#~ msgid "Mars"
+#~ msgstr "&Recercar"
+
+#, fuzzy
+#~| msgid "State"
+#~ msgctxt "Name of a satellite group"
+#~ msgid "Weather"
+#~ msgstr "Aiga"
+
+#, fuzzy
+#~| msgid "State"
+#~ msgctxt "Name of a satellite group"
+#~ msgid "Other"
+#~ msgstr "Aiga"
+
+#, fuzzy
+#~| msgid "Desert"
+#~ msgid "Merge Nodes"
+#~ msgstr "Desèrt"
+
+#, fuzzy
+#~| msgid "Open File"
+#~ msgid "Open Route..."
+#~ msgstr "Dobrir un fichièr"
+
+#, fuzzy
+#~| msgid "Open File"
+#~ msgid "Save Route..."
+#~ msgstr "Dobrir un fichièr"
+
+#, fuzzy
+#~| msgid "Save File"
+#~ msgid "Download Osm File"
+#~ msgstr "Enregistrar lo fichièr"
+
+#, fuzzy
+#~| msgid "Forest"
+#~ msgctxt "The compass direction"
+#~ msgid "West"
+#~ msgstr "Sapin"
+
+#, fuzzy
+#~| msgid "State"
+#~ msgid "Meters"
+#~ msgstr "Aiga"
+
+#, fuzzy
+#~| msgid "(c) 2007"
+#~ msgid "(c) 2007, 2008, 2009"
+#~ msgstr "(c) 2007"
+
+#~ msgid "Torsten Rahn"
+#~ msgstr "Torsten Rahn"
+
+#~ msgid "Forward"
+#~ msgstr "Trasmetre"
+
+#~ msgid "None"
+#~ msgstr "Pas cap"
+
+#, fuzzy
+#~| msgid "N"
+#~ msgctxt "one-letter uppercase abbreviation for North"
+#~ msgid "N"
+#~ msgstr "N"
+
+#, fuzzy
+#~| msgid "E"
+#~ msgctxt "one-letter uppercase abbreviation for East"
+#~ msgid "E"
+#~ msgstr "M"
+
+#, fuzzy
+#~| msgid "S"
+#~ msgctxt "one-letter uppercase abbreviation for South"
+#~ msgid "S"
+#~ msgstr "E"
+
+#, fuzzy
+#~| msgid "W"
+#~ msgctxt "one-letter uppercase abbreviation for West"
+#~ msgid "W"
+#~ msgstr "W"

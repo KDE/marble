@@ -1,0 +1,57 @@
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Language: en\n"
+"X-Qt-Contexts: true\n"
+
+#: ../src/lib/marble/DownloadRegionDialog.cpp:491
+#, qt-format
+msgctxt "Marble::DownloadRegionDialog|"
+msgid "There is a limit of %n tile(s) to download."
+msgid_plural "There is a limit of %n tile(s) to download."
+msgstr[0] "There is a limit of %n tile to download."
+msgstr[1] "There is a limit of %n tiles to download."
+
+#: ../src/lib/marble/declarative/Placemark.cpp:96
+#, qt-format
+msgctxt "Marble::Placemark|"
+msgid "%n rooms"
+msgid_plural "%n rooms"
+msgstr[0] "%n room"
+msgstr[1] "%n rooms"
+
+#: ../src/lib/marble/declarative/Placemark.cpp:102
+#, qt-format
+msgctxt "Marble::Placemark|"
+msgid "%n beds"
+msgid_plural "%n beds"
+msgstr[0] "%n bed"
+msgstr[1] "%n beds"
+
+#: ../src/lib/marble/declarative/Placemark.cpp:355
+#, qt-format
+msgctxt "Marble::Placemark|number of seats a bench provides"
+msgid "%n seats"
+msgid_plural "%n seats"
+msgstr[0] "%n seat"
+msgstr[1] "%n seats"
+
+#: ../src/lib/marble/geodata/parser/GeoParser.cpp:86
+#, qt-format
+msgctxt "QObject|"
+msgid "Parsing failed line %1. Still %n unclosed tag(s) after document end. "
+msgid_plural ""
+"Parsing failed line %1. Still %n unclosed tag(s) after document end. "
+msgstr[0] "Parsing failed line %1. Still %n unclosed tag after document end."
+msgstr[1] "Parsing failed line %1. Still %n unclosed tags after document end."
+
+#: ../src/lib/marble/GoToDialog.cpp:436
+#, qt-format
+msgctxt "QObject|Number of search results"
+msgid "%n result(s) found."
+msgid_plural "%n result(s) found."
+msgstr[0] "%n result found."
+msgstr[1] "%n results found."

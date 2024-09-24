@@ -5196,6 +5196,10 @@ msgid ""
 "future. If you want to alter the default map editor later, you can do so in "
 "the Marble Settings."
 msgstr ""
+"გამორთეთ, რომ რუკის რედაქტორის არჩევა შემდეგ ჯერზე თავიდან გკითხოთ. სხვა "
+"შემთხვევაში თქვენი არჩევანი დამახსოვრებული და მომავალში ავტომატურად "
+"გამოყენებული იქნება. თუ გნებავთ, შეცვალოთ ნაგულისხმევი რუკის რედაქტორი "
+"მოგვიანებით, ეს Marble-ის მორგების ფანჯარაში შეგიძლიათ."
 
 #: src/lib/marble/ExternalEditor.ui:51
 msgctxt "ExternalEditor|"
@@ -5218,6 +5222,8 @@ msgid ""
 "iD is an OpenStreetMap editor for quick editing tasks and beginners. It "
 "requires a web browser."
 msgstr ""
+"iD არის OpenStreetMap-ის რედაქტორი სწრაფი ჩასწორების ამოცანებისთვის და "
+"დამწყებებისთვის. მას ბრაუზერი სჭირდება."
 
 #: src/lib/marble/ExternalEditorDialog.cpp:89
 msgctxt "Marble::ExternalEditorDialog|"
@@ -7268,12 +7274,14 @@ msgstr "სასრიალო ბილიკი"
 msgctxt "QObject|"
 msgid "Could not convert <maximum> child text content to integer. Was: '%1'"
 msgstr ""
+"ვერ გადავიყვანე <maximum> შვილის ტექსტის შემცველობა მთელ რიცხვში. იყო: '%1'"
 
 #: src/lib/marble/geodata/handlers/dgml/DgmlMinimumTagHandler.cpp:35
 #, qt-format
 msgctxt "QObject|"
 msgid "Could not convert <minimum> child text content to integer. Was: '%1'"
 msgstr ""
+"ვერ გადავიყვანე <minimum> შვილის ტექსტის შემცველობა მთელ რიცხვში. იყო: '%1'"
 
 #: src/lib/marble/geodata/parser/GeoParser.cpp:86
 #, qt-format
@@ -7640,7 +7648,7 @@ msgstr "სტერეოგრაფიული"
 #: src/lib/marble/MapViewWidget.ui:86
 msgctxt "MapViewWidget|"
 msgid "Lambert Azimuthal Equal Area"
-msgstr ""
+msgstr "ლამბერტის ტოლდიდა აზიმუტის პროექცია"
 
 #: src/lib/marble/MapViewWidget.ui:95
 msgctxt "MapViewWidget|"
@@ -9471,6 +9479,15 @@ msgid ""
 "MapQuest routing service is subject to the <a href=\"https://info.mapquest."
 "com/terms-of-use/\">MapQuest terms of use</a>.</p>"
 msgstr ""
+"<p><i>MapQuest</i><br />Marble-ში გამოყენებული ზოგიერთი მარშრუტი "
+"ჩამოტვირთვის გზით მოცემულია <a href=\"https://www.mapquest.com/\">MapQuest</"
+"a> და მათი ღია მონაცემთა Map API- ები და ვებ სერვისები.<br />მიმართულებები "
+"თავაზიანობის შესახებ MapQuest მუშაობს OpenStreetMap მონაცემებზე, რომელთა "
+"გამოყენება თავისუფლად შესაძლებელია <a href=\"https://wiki.openstreetmap.org/"
+"index.php/OpenStreetMap_License\">Creative Commons Attribution-ShareAlike "
+"2.0 ლიცენზიის პირობებით</a>. MapQuest მარშრუტის სერვისის გამოყენება "
+"ექვემდებარება <a href=\"https://info.mapquest.com/terms-of-use/\">MapQuest "
+"გამოყენების პირობებს</a>.</p>"
 
 #: src/lib/marble/MarbleAboutDialog.cpp:319
 msgctxt "QObject|"
@@ -11320,6 +11337,9 @@ msgid ""
 "p><p>Applications: Display of seismic and radio data and for use in digital "
 "planetariums.</p>"
 msgstr ""
+"<p><b>აზიმუტური ეკვიდისტანტური პროექცია</b> (\"თევზის თვალი\")</"
+"p><p>პროგრამები: სეისმური და რადიო მონაცემების ჩვენება და ციფრულ "
+"პლანეტარიუმებში გამოსაყენებლად.</p>"
 
 #: src/lib/marble/projections/EquirectProjection.cpp:33
 msgctxt "QObject|"
@@ -11332,6 +11352,9 @@ msgid ""
 "<p><b>Equirectangular Projection</b> (\"Plate carrée\")</p><p>Applications: "
 "De facto standard for global texture data sets for computer software.</p>"
 msgstr ""
+"<p><b>თანასწორკუთხა პროექცია</b> (\"Plate carrée\")</p><p>პროგრამები: დე "
+"ფაქტო სტანდარტი კომპიუტერული პროგრამული უზრუნველყოფის გლობალური ტექსტურის "
+"მონაცემთა ნაკრებისთვის.</p>"
 
 #: src/lib/marble/projections/GnomonicProjection.cpp:61
 msgctxt "QObject|"
@@ -11345,11 +11368,14 @@ msgid ""
 "displaying panorama photography. Also used for navigation, radio and seismic "
 "work.</p>"
 msgstr ""
+"<p><b>გნომონური პროექცია</b> (\"სწორი წრფივი\")</p><p>პროგრამები: "
+"გამოიყენება პანორამული ფოტოგრაფიის ჩვენებისთვის. ასევე გამოიყენება "
+"ნავიგაციის, რადიო და სეისმური სამუშაოებისთვის.</p>"
 
 #: src/lib/marble/projections/LambertAzimuthalProjection.cpp:61
 msgctxt "QObject|"
 msgid "Lambert Azimuthal Equal-Area"
-msgstr ""
+msgstr "ლამბერტის ტოლდიდა აზიმუტის პროექცია"
 
 #: src/lib/marble/projections/LambertAzimuthalProjection.cpp:66
 msgctxt "QObject|"
@@ -11357,6 +11383,8 @@ msgid ""
 "<p><b>Lambert Azimuthal Equal-Area Projection</b></p><p>Applications: Used "
 "in structural geology to plot directional data.</p>"
 msgstr ""
+"<p><b>ლამბერტის ტოლდიდა აზიმუტის პროექცია</b></p><p>პროგრამები: გამოიყენება "
+"სტრუქტურულ გეოლოგიაში მიმართულებითი მონაცემების დასახაზად.</p>"
 
 #: src/lib/marble/projections/MercatorProjection.cpp:39
 msgctxt "QObject|"

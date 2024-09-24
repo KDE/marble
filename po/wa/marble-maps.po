@@ -1,0 +1,7137 @@
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Jean Cayron <jean.cayron@gmail.com>, 2008, 2009.
+# Jean Cayron et Odile Lambert <jean.cayron@gmail.com>, 2010, 2011.
+msgid ""
+msgstr ""
+"Project-Id-Version: marble_qt\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2024-09-23 00:36+0000\n"
+"PO-Revision-Date: 2011-01-14 10:24+0100\n"
+"Last-Translator: Jean Cayron <jean.cayron@gmail.com>\n"
+"Language-Team: Walloon <linux@walon.org>\n"
+"Language: wa\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 1.0\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Qt-Contexts: true\n"
+
+#, fuzzy, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "Tchôke-divins des Markes di plaeces"
+
+#, fuzzy, kde-format
+#| msgid "Show Navigation Panel"
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "Mostrer l' panea di naiviaedje"
+
+#: Bookmarks.qml:20
+#, fuzzy, kde-format
+#| msgid "&Bookmarks"
+msgctxt "@title:window"
+msgid "Bookmarks"
+msgstr "&Rimarkes"
+
+#: Bookmarks.qml:69
+#, kde-format
+msgid "Your bookmarks will appear here."
+msgstr ""
+
+#: CurrentPosition.qml:54
+#, fuzzy, kde-format
+#| msgid "Current Location"
+msgctxt "@option:check"
+msgid "Follow Current Position"
+msgstr "Eplaeçmint do moumint"
+
+#: main.cpp:37 MainScreen.qml:20 MainScreen.qml:177
+#, fuzzy, kde-format
+#| msgid "&Bookmarks"
+msgid "Marble Maps"
+msgstr "&Rimarkes"
+
+#: main.cpp:39
+#, fuzzy, kde-format
+#| msgid "&Edit Map"
+msgid "Maps"
+msgstr "&Candjî mape"
+
+#: main.cpp:41
+#, kde-format
+msgid "© KDE Community"
+msgstr ""
+
+#: MainScreen.qml:86
+#, fuzzy, kde-format
+#| msgid "Navigation"
+msgid "Public Transport"
+msgstr "Naiviaedje"
+
+#: MainScreen.qml:101
+#, kde-format
+msgid "Outdoor Activities"
+msgstr ""
+
+#: MainScreen.qml:113
+#, kde-format
+msgctxt "@action:button"
+msgid "Accessibility"
+msgstr ""
+
+#: MainScreen.qml:122
+#, fuzzy, kde-format
+msgctxt "@action:button"
+msgid "About"
+msgstr "Åd fw&ait"
+
+#: MainScreen.qml:133
+#, fuzzy, kde-format
+#| msgid "&Bookmarks"
+msgctxt "@action:button"
+msgid "Bookmarks"
+msgstr "&Rimarkes"
+
+#: MainScreen.qml:144
+#, kde-format
+msgctxt "@action:button"
+msgid "Layer Options"
+msgstr ""
+
+#: MainScreen.qml:455
+#, fuzzy, kde-format
+#| msgid "%1 km"
+msgid "%1 km"
+msgstr "%1 km"
+
+#: NavigationInfoBar.qml:20
+#, fuzzy, kde-format
+#| msgid "%1 km"
+msgctxt "distance in km"
+msgid "%1 km"
+msgstr "%1 km"
+
+#: NavigationInfoBar.qml:22
+#, fuzzy, kde-format
+#| msgid "%1 m"
+msgctxt "distance in m"
+msgid "%1 m"
+msgstr "%1 m"
+
+#: NavigationInfoBar.qml:24
+#, fuzzy, kde-format
+#| msgid "%1 m"
+msgctxt "distance in m with decimals"
+msgid "%1 m"
+msgstr "%1 m"
+
+#: Options.qml:20
+#, kde-format
+msgctxt "@title:window"
+msgid "Layer Options"
+msgstr ""
+
+#: Options.qml:23
+#, fuzzy, kde-format
+#| msgid "Navigation"
+msgctxt "@title:group"
+msgid "Public Transport Layers"
+msgstr "Naiviaedje"
+
+#: Options.qml:28
+#, fuzzy, kde-format
+msgctxt "@option:check"
+msgid "Train"
+msgstr "Nåcion"
+
+#: Options.qml:35
+#, kde-format
+msgctxt "@option:check"
+msgid "Subway"
+msgstr ""
+
+#: Options.qml:42
+#, kde-format
+msgctxt "@option:check"
+msgid "Tram"
+msgstr ""
+
+#: Options.qml:49
+#, kde-format
+msgctxt "@option:check"
+msgid "Bus"
+msgstr ""
+
+#: Options.qml:56
+#, kde-format
+msgctxt "@option:check"
+msgid "Trolley Bus"
+msgstr ""
+
+#: Options.qml:64
+#, kde-format
+msgid "Outdoor Activities Layers"
+msgstr ""
+
+#: Options.qml:69
+#, kde-format
+msgctxt "@option:check"
+msgid "Walkways"
+msgstr ""
+
+#: Options.qml:76
+#, fuzzy, kde-format
+#| msgid "Export Map"
+msgctxt "@option:check"
+msgid "Hiking Routes"
+msgstr "Ebaguer mape"
+
+#: Options.qml:83
+#, fuzzy, kde-format
+msgctxt "@option:check"
+msgid "Bicycle Routes"
+msgstr "Nåcion"
+
+#: Options.qml:90
+#, fuzzy, kde-format
+#| msgid "Mountain"
+msgctxt "@option:check"
+msgid "Mountainbike Routes"
+msgstr "Montinne"
+
+#: Options.qml:97
+#, fuzzy, kde-format
+#| msgid "Export Map"
+msgctxt "@option:check"
+msgid "Inline Skating Routes"
+msgstr "Ebaguer mape"
+
+#: Options.qml:104
+#, kde-format
+msgctxt "@option:check"
+msgid "Bridleways"
+msgstr ""
+
+#: PlacemarkDialog.qml:48
+#, fuzzy, kde-format
+#| msgid "Name"
+msgctxt "placeholder"
+msgid "No Name"
+msgstr "No"
+
+#: PlacemarkDialog.qml:168
+#, kde-format
+msgctxt "@title:group"
+msgid "Tags:"
+msgstr ""
+
+#: ProfileSelectorMenu.qml:29
+#, fuzzy, kde-format
+#| msgid "Crater"
+msgid "Car (fastest)"
+msgstr "Traitoe"
+
+#: ProfileSelectorMenu.qml:40
+#, fuzzy, kde-format
+msgid "Bicycle"
+msgstr "Nåcion"
+
+#: ProfileSelectorMenu.qml:49
+#, kde-format
+msgid "Pedestrian"
+msgstr ""
+
+#: RouteEditor.qml:62
+#, kde-format
+msgid "Search for places to integrate them into a route."
+msgstr ""
+
+#: SettingsDialog.qml:48
+#, fuzzy, kde-format
+#| msgid "&Settings"
+msgid "Network Settings"
+msgstr "&Apontiaedjes"
+
+#: SettingsDialog.qml:53
+#, fuzzy, kde-format
+#| msgid "Download finished."
+msgid "Download Maps via WLAN only"
+msgstr "L' aberwetaedje a fni."
+
+#, fuzzy
+#~| msgctxt "the earth's moon"
+#~| msgid "Moon"
+#~ msgctxt "DGML|"
+#~ msgid "Moon"
+#~ msgstr "Lune"
+
+#, fuzzy
+#~| msgid "Landing Site"
+#~ msgctxt "DGML|"
+#~ msgid "Landing Sites"
+#~ msgstr "Sire di rashidaedje"
+
+#, fuzzy
+#~| msgid "Crater"
+#~ msgctxt "DGML|"
+#~ msgid "Craters"
+#~ msgstr "Traitoe"
+
+#, fuzzy
+#~| msgid "Maria"
+#~ msgctxt "DGML|"
+#~ msgid "Maria"
+#~ msgstr "Mareye"
+
+#, fuzzy
+#~| msgid "Other Place"
+#~ msgctxt "DGML|"
+#~ msgid "Other features"
+#~ msgstr "Ôte plaece"
+
+#, fuzzy
+#~| msgid "Coordinate Grid"
+#~ msgctxt "DGML|"
+#~ msgid "Coordinate Grid"
+#~ msgstr "Grile des cordinêyes"
+
+#, fuzzy
+#~| msgid "Landing Site"
+#~ msgctxt "DGML|"
+#~ msgid "Manned landing site"
+#~ msgstr "Sire di rashidaedje"
+
+#, fuzzy
+#~| msgid "Mountain"
+#~ msgctxt "DGML|"
+#~ msgid "Mons, mountain"
+#~ msgstr "Montinne"
+
+#, fuzzy
+#~ msgctxt "DGML|"
+#~ msgid "Other"
+#~ msgstr "Traitoe"
+
+#, fuzzy
+#~| msgid "Copy Coordinates"
+#~ msgctxt "DGML|"
+#~ msgid "Selenographic Pole"
+#~ msgstr "Copyî cordinêyes"
+
+#, fuzzy
+#~ msgctxt "DGML|"
+#~ msgid "Terrain"
+#~ msgstr "Nåcion"
+
+#, fuzzy
+#~| msgid "FITemplate"
+#~ msgctxt "DGML|"
+#~ msgid "Temperature"
+#~ msgstr "ModeleCF"
+
+#, fuzzy
+#~| msgid "Mountain"
+#~ msgctxt "DGML|"
+#~ msgid "Mountain"
+#~ msgstr "Montinne"
+
+#, fuzzy
+#~| msgid "Volcano"
+#~ msgctxt "DGML|"
+#~ msgid "Volcano"
+#~ msgstr "Volcan"
+
+#, fuzzy
+#~| msgid "Copy Coordinates"
+#~ msgctxt "DGML|"
+#~ msgid "Geographic Pole"
+#~ msgstr "Copyî cordinêyes"
+
+#, fuzzy
+#~| msgid "Shipwreck"
+#~ msgctxt "DGML|"
+#~ msgid "Shipwreck"
+#~ msgstr "Nåfraedje"
+
+#, fuzzy
+#~| msgid "Astronomical observatory"
+#~ msgctxt "DGML|"
+#~ msgid "Astronomical Observatory"
+#~ msgstr "Observatwere astronomike"
+
+#, fuzzy
+#~| msgid "Navigation"
+#~ msgctxt "DGML|"
+#~ msgid "International"
+#~ msgstr "Naiviaedje"
+
+#, fuzzy
+#~| msgid "&Stars"
+#~ msgctxt "DGML|"
+#~ msgid "State"
+#~ msgstr "&Sitoeles"
+
+#, fuzzy
+#~ msgctxt "DGML|"
+#~ msgid "Light terrain"
+#~ msgstr "Nåcion"
+
+#, fuzzy
+#~ msgctxt "DGML|"
+#~ msgid "Dark terrain"
+#~ msgstr "Nåcion"
+
+#, fuzzy
+#~| msgid "Crater"
+#~ msgctxt "DGML|"
+#~ msgid "Water"
+#~ msgstr "Traitoe"
+
+#, fuzzy
+#~| msgid "Atlas"
+#~ msgctxt "DGML|"
+#~ msgid "Atlas"
+#~ msgstr "Atlasse"
+
+#, fuzzy
+#~| msgid "Elevation extreme"
+#~ msgctxt "DGML|"
+#~ msgid "Elevation"
+#~ msgstr "Nouzome hôteur"
+
+#, fuzzy
+#~| msgid "Antarctic Circle"
+#~ msgctxt "DGML|"
+#~ msgid "Antarctic Iceshelves"
+#~ msgstr "Ceke antårtike"
+
+#, fuzzy
+#~| msgid "Map View"
+#~ msgctxt "DGML|"
+#~ msgid "OSM Bitmap Tiles"
+#~ msgstr "Vuwe del mape"
+
+#, fuzzy
+#~| msgid "Navigation"
+#~ msgctxt "DGML|"
+#~ msgid "Transportation"
+#~ msgstr "Naiviaedje"
+
+#, fuzzy
+#~| msgid "Location"
+#~ msgctxt "DGML|"
+#~ msgid "Education"
+#~ msgstr "Eplaeçmint"
+
+#, fuzzy
+#~ msgctxt "DGML|"
+#~ msgid "Accommodation"
+#~ msgstr "Schaper fitchî"
+
+#, fuzzy
+#~| msgctxt "a planet without data"
+#~| msgid "Unknown Planet"
+#~ msgctxt "DGML|"
+#~ msgid "Trunk road"
+#~ msgstr "Planete nén cnoxhowe"
+
+#, fuzzy
+#~ msgctxt "DGML|"
+#~ msgid "Track"
+#~ msgstr "Nåcion"
+
+#, fuzzy
+#~| msgid "Navigation"
+#~ msgctxt "DGML|"
+#~ msgid "Railway station"
+#~ msgstr "Naiviaedje"
+
+#, fuzzy
+#~| msgid "Nation"
+#~ msgctxt "DGML|"
+#~ msgid "Tourist attraction"
+#~ msgstr "Nåcion"
+
+#, fuzzy
+#~ msgctxt "DGML|"
+#~ msgid "Veterinary"
+#~ msgstr "Schaper fitchî"
+
+#, fuzzy
+#~| msgid "&Stars"
+#~ msgctxt "DGML|"
+#~ msgid "Theatre"
+#~ msgstr "&Sitoeles"
+
+#, fuzzy
+#~| msgid "Capital"
+#~ msgctxt "DGML|"
+#~ msgid "Hospital"
+#~ msgstr "Mwaisse veye"
+
+#, fuzzy
+#~| msgid "Navigation"
+#~ msgctxt "DGML|"
+#~ msgid "Fire station"
+#~ msgstr "Naiviaedje"
+
+#, fuzzy
+#~| msgid "&Bookmarks"
+#~ msgctxt "DGML|"
+#~ msgid "Books"
+#~ msgstr "&Rimarkes"
+
+#, fuzzy
+#~ msgctxt "DGML|"
+#~ msgid "Car"
+#~ msgstr "Båre di schåle"
+
+#, fuzzy
+#~| msgid "OpenStreetMap"
+#~ msgctxt "DGML|"
+#~ msgid "OpenStreetMap"
+#~ msgstr "OpenStreetMap"
+
+#, fuzzy
+#~| msgid "&Copy Map"
+#~ msgctxt "DGML|"
+#~ msgid "Plain Map"
+#~ msgstr "&Copyî mape"
+
+#, fuzzy
+#~ msgctxt "DGML|"
+#~ msgid "Behaim Places"
+#~ msgstr "Tchôke-divins des Markes di plaeces"
+
+#, fuzzy
+#~| msgid "Navigation"
+#~ msgctxt "DGML|"
+#~ msgid "Texts and illustrations"
+#~ msgstr "Naiviaedje"
+
+#, fuzzy
+#~| msgid "Description"
+#~ msgctxt "DGML|"
+#~ msgid "Precipitation"
+#~ msgstr "Discrijhaedje"
+
+#, fuzzy
+#~| msgid "Satellites"
+#~ msgctxt "DGML|"
+#~ msgid "Sentinel2 Satellite Map"
+#~ msgstr "Satelites"
+
+#, fuzzy
+#~| msgid "Satellites"
+#~ msgctxt "DGML|"
+#~ msgid "Satellite View"
+#~ msgstr "Satelites"
+
+#, fuzzy
+#~| msgid "Nation"
+#~ msgctxt "DGML|"
+#~ msgid "Vegetation"
+#~ msgstr "Nåcion"
+
+#, fuzzy
+#~| msgid "Marble"
+#~ msgctxt "Legends|"
+#~ msgid "Marble: Legend"
+#~ msgstr "Marble"
+
+#, fuzzy
+#~| msgid "Nation"
+#~ msgctxt "Legends|"
+#~ msgid "Population:"
+#~ msgstr "Nåcion"
+
+#, fuzzy
+#~| msgid "Capital"
+#~ msgctxt "Legends|"
+#~ msgid "Capitals:"
+#~ msgstr "Mwaisse veye"
+
+#, fuzzy
+#~| msgid "Area:"
+#~ msgctxt "StarNames|"
+#~ msgid "Ara"
+#~ msgstr "Surface :"
+
+#, fuzzy
+#~| msgid "Tropic of Capricorn"
+#~ msgctxt "StarNames|"
+#~ msgid "Capricornus"
+#~ msgstr "Tropike do Gadot"
+
+#, fuzzy
+#~| msgid "Crater"
+#~ msgctxt "StarNames|"
+#~ msgid "Crater"
+#~ msgstr "Traitoe"
+
+#, fuzzy
+#~| msgctxt "the planet"
+#~| msgid "Uranus"
+#~ msgctxt "StarNames|"
+#~ msgid "Eridanus"
+#~ msgstr "Uranus"
+
+#, fuzzy
+#~| msgid "Marble - Virtual Globe"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Marble - Virtual Globe"
+#~ msgstr "Marble - Forveyowe bole daegnrece"
+
+#, fuzzy
+#~| msgid "Marble"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Marble"
+#~ msgstr "Marble"
+
+#, fuzzy
+#~| msgid "&Open..."
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&Open..."
+#~ msgstr "&Drovi..."
+
+#, fuzzy
+#~| msgid "Open a file for viewing on Marble"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Open a file for viewing on Marble"
+#~ msgstr "Drovi on fitchî pol vey dins Marble"
+
+#, fuzzy
+#~| msgid "&Download Maps..."
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&Download Maps..."
+#~ msgstr "&Aberweter mapes..."
+
+#, fuzzy
+#~| msgid "&Export Map..."
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&Export Map..."
+#~ msgstr "&Ebaguer mape..."
+
+#, fuzzy
+#~| msgid "Save a screenshot of the map"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Save a screenshot of the map"
+#~ msgstr "Schaper ene waitroûlêye del mape"
+
+#, fuzzy
+#~| msgid "Download &Region..."
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Download &Region..."
+#~ msgstr "Aberweter &redjon..."
+
+#, fuzzy
+#~| msgid "&Print..."
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&Print..."
+#~ msgstr "&Rexhe..."
+
+#, fuzzy
+#~| msgid "Ctrl+P"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Ctrl+P"
+#~ msgstr "Ctrl+P"
+
+#, fuzzy
+#~| msgid "Print a screenshot of the map"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Print a screenshot of the map"
+#~ msgstr "Rexhe ene waitroûlêye del mape"
+
+#, fuzzy
+#~| msgid "Print Previe&w ..."
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Print Previe&w ..."
+#~ msgstr "&Voeyaedje divant d' imprimer ..."
+
+#, fuzzy
+#~| msgid "&Quit"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&Quit"
+#~ msgstr "C&witer"
+
+#, fuzzy
+#~| msgid "Ctrl+Q"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Ctrl+Q"
+#~ msgstr "Ctrl+Q"
+
+#, fuzzy
+#~| msgid "Quit the Application"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Quit the Application"
+#~ msgstr "Cwiter l' programe"
+
+#, fuzzy
+#~| msgid "&Copy Map"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&Copy Map"
+#~ msgstr "&Copyî mape"
+
+#, fuzzy
+#~| msgid "Copy a screenshot of the map"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Copy a screenshot of the map"
+#~ msgstr "Copyî ene waitroûlêye del mape"
+
+#, fuzzy
+#~| msgid "&Edit Map"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&Edit Map..."
+#~ msgstr "&Candjî mape"
+
+#, fuzzy
+#~| msgid "&Configure Marble"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&Configure Marble"
+#~ msgstr "&Apontyî Marble"
+
+#, fuzzy
+#~| msgid "Show the configuration dialog"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Show the configuration dialog"
+#~ msgstr "Mostrer l' divize di naiviaedje"
+
+#, fuzzy
+#~| msgid "C&opy Coordinates"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "C&opy Coordinates"
+#~ msgstr "C&opyî cordinêyes"
+
+#, fuzzy
+#~| msgid "Copy the center coordinates as text"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Copy the center coordinates as text"
+#~ msgstr "Copyî les cordinêyes do mitan come do tecse"
+
+#, fuzzy
+#~| msgid "&Full Screen Mode"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&Full Screen Mode"
+#~ msgstr "Môde &tote li waitroûle"
+
+#, fuzzy
+#~| msgid "Full Screen Mode"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Full Screen Mode"
+#~ msgstr "Môde tote li waitroûle"
+
+#, fuzzy
+#~| msgid "Show Status Bar"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&Show Status Bar"
+#~ msgstr "Mostrer li bår ås messaedjes"
+
+#, fuzzy
+#~| msgid "Show Status Bar"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Show Status Bar"
+#~ msgstr "Mostrer li bår ås messaedjes"
+
+#, fuzzy
+#~| msgid "Lock Position"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Lock Position"
+#~ msgstr "Eclawer eplaeçmint"
+
+#, fuzzy
+#~| msgid "Lock Position of Floating Items"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Lock Position of Floating Items"
+#~ msgstr "Eclawer eplaeçmint des cayets flotants"
+
+#, fuzzy
+#~| msgid "&Clouds"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&Clouds"
+#~ msgstr "&Nûlêyes"
+
+#, fuzzy
+#~| msgid "Show Real Time Cloud Cover"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Show Real Time Cloud Cover"
+#~ msgstr "Mostrer e vraiy tins l' coviete des nulêyes"
+
+#, fuzzy
+#~| msgid "Work Off&line"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Work Off&line"
+#~ msgstr "&Ovrer disraloyî"
+
+#, fuzzy
+#~| msgid "&Time Control..."
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&Time Control..."
+#~ msgstr "Mwaistraedje do &tins..."
+
+#, fuzzy
+#~| msgid "Configure Time Control "
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Configure Time Control "
+#~ msgstr "Apontyî l' mwaistraedje do tins"
+
+#, fuzzy
+#~| msgid "S&un Control..."
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "S&un Control..."
+#~ msgstr "Mwaistraedje do s&olea..."
+
+#, fuzzy
+#~| msgid "Configure Sun Control"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Configure Sun Control"
+#~ msgstr "Apontyî l' mwaistraedje do solea"
+
+#, fuzzy
+#~| msgid "&Redisplay"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&Redisplay"
+#~ msgstr "&Rihåyner"
+
+#, fuzzy
+#~| msgid "Reload Current Map"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Reload Current Map"
+#~ msgstr "Ritcherdjî l' mape do moumint"
+
+#, fuzzy
+#~| msgid "Marble Virtual Globe &Handbook"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Marble Virtual Globe &Handbook"
+#~ msgstr "&Esplikêyes di Marble Forveyowe Bole daegnrece"
+
+#, fuzzy
+#~| msgid "Show the Handbook for Marble Virtual Globe"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Show the Handbook for Marble Virtual Globe"
+#~ msgstr "Mostrer ls esplikêyes po Marble Forveyowe Bole daegnrece"
+
+#, fuzzy
+#~| msgid "What's &This"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "What's &This"
+#~ msgstr "&Cwè çki c' est d' ça?"
+
+#, fuzzy
+#~| msgid "Show a detailed explanation of the action."
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Show a detailed explanation of the action."
+#~ msgstr "Mostrer des spepieusès esplikêyes di l' accion."
+
+#, fuzzy
+#~| msgid "&About Marble Virtual Globe"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&About Marble Virtual Globe"
+#~ msgstr "Åd fw&ait di Marble - Forveyowe bole daegnrece"
+
+#, fuzzy
+#~| msgid "Show the application's About Box"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Show the application's About Box"
+#~ msgstr "Mostrer l' boesse Åd fwait då programe"
+
+#, fuzzy
+#~| msgid "About &Qt"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "About &Qt"
+#~ msgstr "Åd fwait di &Qt"
+
+#, fuzzy
+#~| msgid "Show the Qt library's About box"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Show the Qt library's About box"
+#~ msgstr "Mostrer l' boesse Åd fwait dal livreye Qt"
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Add &Bookmark..."
+#~ msgstr "Tchôke-divins des Markes di plaeces"
+
+#, fuzzy
+#~| msgid "Add Bookmark"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Add Bookmark"
+#~ msgstr "Radjouter ene rimåke"
+
+#, fuzzy
+#~| msgid "&Set Home Location"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&Set Home Location"
+#~ msgstr "&Defini l' plaece di vosse måjhon"
+
+#, fuzzy
+#~| msgid "&Bookmarks"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Show &Bookmarks"
+#~ msgstr "&Rimarkes"
+
+#, fuzzy
+#~| msgid "&Bookmarks"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&Manage Bookmarks..."
+#~ msgstr "&Rimarkes"
+
+#, fuzzy
+#~| msgid "&Bookmarks"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Manage Bookmarks"
+#~ msgstr "&Rimarkes"
+
+#, fuzzy
+#~| msgid "&File"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&File"
+#~ msgstr "&Fitchî"
+
+#, fuzzy
+#~| msgid "&Edit"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&Edit"
+#~ msgstr "&Candjî"
+
+#, fuzzy
+#~| msgid "&View"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&View"
+#~ msgstr "&Vey"
+
+#, fuzzy
+#~| msgid "Export Map"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&Online Services"
+#~ msgstr "Ebaguer mape"
+
+#, fuzzy
+#~| msgid "&Bookmarks"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&Bookmarks"
+#~ msgstr "&Rimarkes"
+
+#, fuzzy
+#~| msgid "Show &Navigation Panel"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&Panels"
+#~ msgstr "Mostrer l' panea di &naiviaedje"
+
+#, fuzzy
+#~| msgid "&View"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&View Size"
+#~ msgstr "&Vey"
+
+#, fuzzy
+#~| msgid "&Settings"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&Settings"
+#~ msgstr "&Apontiaedjes"
+
+#, fuzzy
+#~| msgid "&Help"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&Help"
+#~ msgstr "&Aidance"
+
+#, fuzzy
+#~| msgid "&Help"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&Home"
+#~ msgstr "&Aidance"
+
+#, fuzzy
+#~| msgid "Ready"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Ready"
+#~ msgstr "Presse"
+
+#, fuzzy
+#~| msgid "Export Map"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Export Map"
+#~ msgstr "Ebaguer mape"
+
+#, fuzzy
+#~| msgid "Images (*.jpg *.png)"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Images (*.jpg *.png)"
+#~ msgstr "Imådjes (*.jpg *.png)"
+
+#, fuzzy
+#~| msgid "An error occurred while trying to save the file.\n"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "An error occurred while trying to save the file.\n"
+#~ msgstr "Åk n' a nén stî come dji sayîve di schaper l' fitchî.\n"
+
+#, fuzzy
+#~| msgid "Marble - Desktop Globe"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Marble Virtual Globe %1"
+#~ msgstr "Marble - Bole daegnrece pol sicribanne"
+
+#, fuzzy
+#~| msgid "Lock Position"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Position: %1"
+#~ msgstr "Eclawer eplaeçmint"
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "All Supported Files"
+#~ msgstr ""
+#~ "Tos les fitchîs sopoirtés (*.gpx *.kml);;dinêyes GPS (*.gpx);;KML di "
+#~ "Google Earth (*.kml)"
+
+#, fuzzy
+#~| msgid "Open File"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Open File"
+#~ msgstr "Drovi fitchî"
+
+#, fuzzy
+#~| msgid "Marble - Virtual Globe"
+#~ msgctxt "Marble::ControlView|"
+#~ msgid "Marble - Virtual Globe"
+#~ msgstr "Marble - Forveyowe bole daegnrece"
+
+#, fuzzy
+#~| msgid "Legend"
+#~ msgctxt "Marble::ControlView|"
+#~ msgid "Legend"
+#~ msgstr "Ledjinde"
+
+#, fuzzy
+#~| msgid "Mountain"
+#~ msgctxt "Marble::ControlView|"
+#~ msgid "Routing"
+#~ msgstr "Montinne"
+
+#, fuzzy
+#~| msgid "Location"
+#~ msgctxt "Marble::ControlView|"
+#~ msgid "Location"
+#~ msgstr "Eplaeçmint"
+
+#, fuzzy
+#~| msgid "Map View"
+#~ msgctxt "Marble::ControlView|"
+#~ msgid "Map View"
+#~ msgstr "Vuwe del mape"
+
+#, fuzzy
+#~| msgid "&File"
+#~ msgctxt "Marble::ControlView|"
+#~ msgid "Files"
+#~ msgstr "&Fitchî"
+
+#, fuzzy
+#~| msgid "Export Map"
+#~ msgctxt "Marble::ControlView|"
+#~ msgid "Tour"
+#~ msgstr "Ebaguer mape"
+
+#, fuzzy
+#~| msgid "Show &Navigation Panel"
+#~ msgctxt "Marble::ControlView|"
+#~ msgid "Hide &All Panels"
+#~ msgstr "Mostrer l' panea di &naiviaedje"
+
+#, fuzzy
+#~| msgid "Show &Navigation Panel"
+#~ msgctxt "Marble::ControlView|"
+#~ msgid "Show or hide all panels."
+#~ msgstr "Mostrer l' panea di &naiviaedje"
+
+#, fuzzy
+#~| msgid "Show &Navigation Panel"
+#~ msgctxt "Marble::ControlView|"
+#~ msgid "Show &All Panels"
+#~ msgstr "Mostrer l' panea di &naiviaedje"
+
+#, fuzzy
+#~| msgid "&Hide"
+#~ msgctxt "Marble::AbstractFloatItem|"
+#~ msgid "&Hide"
+#~ msgstr "Catc&hî"
+
+#, fuzzy
+#~ msgctxt "Marble::AbstractFloatItem|"
+#~ msgid "&Configure..."
+#~ msgstr "Apontyî l' contrôle do solea"
+
+#, fuzzy
+#~| msgid "Path"
+#~ msgctxt "UiAddLinkDialog|"
+#~ msgid "Add link"
+#~ msgstr "Tchimin"
+
+#, fuzzy
+#~| msgid "Name"
+#~ msgctxt "UiAddLinkDialog|"
+#~ msgid "Name:"
+#~ msgstr "No"
+
+#, fuzzy
+#~| msgid "Mountain"
+#~ msgctxt "BookmarkManagerDialogPrivate|"
+#~ msgid "Remove Folder"
+#~ msgstr "Montinne"
+
+#, fuzzy
+#~| msgid "&Bookmarks"
+#~ msgctxt "Marble::BookmarkManagerDialog|"
+#~ msgid "Export Bookmarks"
+#~ msgstr "&Rimarkes"
+
+#, fuzzy
+#~| msgid "GpxFile (*.gpx)"
+#~ msgctxt "Marble::BookmarkManagerDialog|"
+#~ msgid "KML files (*.kml)"
+#~ msgstr "FitchîGpx (*.gpx)"
+
+#, fuzzy
+#~| msgid "&Bookmarks"
+#~ msgctxt "Marble::BookmarkManagerDialog|"
+#~ msgid "Bookmark Export"
+#~ msgstr "&Rimarkes"
+
+#, fuzzy
+#~| msgid "&Bookmarks"
+#~ msgctxt "Marble::BookmarkManagerDialog|"
+#~ msgid "Import Bookmarks"
+#~ msgstr "&Rimarkes"
+
+#, fuzzy
+#~| msgid "GpxFile (*.gpx)"
+#~ msgctxt "Marble::BookmarkManagerDialog|"
+#~ msgid "KML Files (*.kml)"
+#~ msgstr "FitchîGpx (*.gpx)"
+
+#, fuzzy
+#~| msgid "The file is not a valid DGML 2.0 file"
+#~ msgctxt "Marble::BookmarkManagerDialog|"
+#~ msgid "The file %1 cannot be opened as a KML file."
+#~ msgstr "Li fitchî n' est nén on fitchî DGML 2.0 valåbe"
+
+#, fuzzy
+#~| msgid "&Bookmarks"
+#~ msgctxt "Marble::BookmarkManagerDialog|"
+#~ msgid "Bookmark Import"
+#~ msgstr "&Rimarkes"
+
+#, fuzzy
+#~| msgid "&Bookmarks"
+#~ msgctxt "BookmarkManagerDialogPrivate|"
+#~ msgid "Imported bookmark"
+#~ msgstr "&Rimarkes"
+
+#, fuzzy
+#~| msgid "&Bookmarks"
+#~ msgctxt "BookmarkManagerDialogPrivate|"
+#~ msgid "Existing bookmark"
+#~ msgstr "&Rimarkes"
+
+#, fuzzy
+#~ msgctxt "BookmarkManagerDialogPrivate|"
+#~ msgid "Replace"
+#~ msgstr "Tchôke-divins des Markes di plaeces"
+
+#, fuzzy
+#~ msgctxt "BookmarkManagerDialogPrivate|"
+#~ msgid "Replace All"
+#~ msgstr "Tchôke-divins des Markes di plaeces"
+
+#, fuzzy
+#~| msgid "&Bookmarks"
+#~ msgctxt "UiBookmarkManagerDialog|"
+#~ msgid "Bookmark Manager"
+#~ msgstr "&Rimarkes"
+
+#, fuzzy
+#~| msgid "&Bookmarks"
+#~ msgctxt "UiBookmarkManagerDialog|"
+#~ msgid "Import Bookmarks..."
+#~ msgstr "&Rimarkes"
+
+#, fuzzy
+#~| msgid "&Bookmarks"
+#~ msgctxt "UiBookmarkManagerDialog|"
+#~ msgid "Export Bookmarks..."
+#~ msgstr "&Rimarkes"
+
+#, fuzzy
+#~| msgid "&Bookmarks"
+#~ msgctxt "UiBookmarkManagerDialog|"
+#~ msgid "Bookmarks"
+#~ msgstr "&Rimarkes"
+
+#, fuzzy
+#~| msgid "&Edit"
+#~ msgctxt "UiBookmarkManagerDialog|"
+#~ msgid "Edit"
+#~ msgstr "&Candjî"
+
+#, fuzzy
+#~| msgid "Unable to insert data into cache"
+#~ msgctxt "QObject|"
+#~ msgid "Unable to insert data into cache"
+#~ msgstr "Dji n' sai stitchî di dnêyes el muchete"
+
+#, fuzzy
+#~| msgctxt "the earth's moon"
+#~| msgid "Moon"
+#~ msgctxt "Marble::CelestialSortFilterProxyModel|"
+#~ msgid "Moon"
+#~ msgstr "Lune"
+
+#, fuzzy
+#~| msgid "&Bookmarks"
+#~ msgctxt "Marble::BookmarkSyncManager|"
+#~ msgid "Bookmarks"
+#~ msgstr "&Rimarkes"
+
+#, fuzzy
+#~| msgid "Download finished."
+#~ msgctxt "CloudRoutesDialog|"
+#~ msgid "Cloud Routes"
+#~ msgstr "L' aberwetaedje a fni."
+
+#, fuzzy
+#~| msgid "not available"
+#~ msgctxt "CloudRoutesDialog|"
+#~ msgid "No route available."
+#~ msgstr "nén disponibe"
+
+#, fuzzy
+#~| msgid "Placemarks Plugin"
+#~ msgctxt "Marble::ConflictDialog|"
+#~ msgid "Local placemark"
+#~ msgstr "Tchôke-divins des Markes di plaeces"
+
+#, fuzzy
+#~ msgctxt "Marble::ConflictDialog|"
+#~ msgid "Cloud placemark"
+#~ msgstr "Tchôke-divins des Markes di plaeces"
+
+#, fuzzy
+#~| msgid "&Open..."
+#~ msgctxt "Marble::RouteItemDelegate|"
+#~ msgid "Open"
+#~ msgstr "&Drovi..."
+
+#, fuzzy
+#~| msgid "&Remove Measure Points"
+#~ msgctxt "Marble::RouteItemDelegate|"
+#~ msgid "Remove from device"
+#~ msgstr "&Oister des ponts d' muzuraedje"
+
+#, fuzzy
+#~| msgid "not available"
+#~ msgctxt "QObject|"
+#~ msgid "No position available."
+#~ msgstr "nén disponibe"
+
+#, fuzzy
+#~| msgid "km/h"
+#~ msgctxt "QObject|"
+#~ msgid "km/h"
+#~ msgstr "km/e"
+
+#, fuzzy
+#~| msgid "m"
+#~ msgctxt "QObject|"
+#~ msgid "m"
+#~ msgstr "m"
+
+#, fuzzy
+#~| msgid "km"
+#~ msgctxt "QObject|"
+#~ msgid "km"
+#~ msgstr "km"
+
+#, fuzzy
+#~| msgid "m/h"
+#~ msgctxt "QObject|"
+#~ msgid "m/h"
+#~ msgstr "m/e"
+
+#, fuzzy
+#~| msgid "ft"
+#~ msgctxt "QObject|"
+#~ msgid "ft"
+#~ msgstr "pî"
+
+#, fuzzy
+#~| msgid "m"
+#~ msgctxt "QObject|"
+#~ msgid "nm"
+#~ msgstr "m"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "Placemark"
+#~ msgstr "Tchôke-divins des Markes di plaeces"
+
+#, fuzzy
+#~| msgid "Export Map"
+#~ msgctxt "QObject|"
+#~ msgid "Save Track"
+#~ msgstr "Ebaguer mape"
+
+#, fuzzy
+#~| msgid "GpxFile (*.gpx)"
+#~ msgctxt "QObject|"
+#~ msgid "KML File (*.kml)"
+#~ msgstr "FitchîGpx (*.gpx)"
+
+#, fuzzy
+#~| msgid "Export Map"
+#~ msgctxt "QObject|"
+#~ msgid "Open Track"
+#~ msgstr "Ebaguer mape"
+
+#, fuzzy
+#~| msgid "Current Location"
+#~ msgctxt "CurrentLocationWidget|"
+#~ msgid "Current Location"
+#~ msgstr "Eplaeçmint do moumint"
+
+#, fuzzy
+#~ msgctxt "CurrentLocationWidget|"
+#~ msgid "Position Tracking"
+#~ msgstr "Tchôke-divins GeoRender"
+
+#, fuzzy
+#~| msgid "Show Navigation Panel"
+#~ msgctxt "CurrentLocationWidget|"
+#~ msgid "Show Track"
+#~ msgstr "Mostrer l' panea di naiviaedje"
+
+#, fuzzy
+#~ msgctxt "CurrentLocationWidget|"
+#~ msgid "Clear Track"
+#~ msgstr "Båre di schåle"
+
+#, fuzzy
+#~| msgid "not available"
+#~ msgctxt "CurrentLocationWidget|"
+#~ msgid "No position available."
+#~ msgstr "nén disponibe"
+
+#, fuzzy
+#~| msgid "Navigation"
+#~ msgctxt "DataMigrationWidget|"
+#~ msgid "Data Migration"
+#~ msgstr "Naiviaedje"
+
+#, fuzzy
+#~| msgid "Current Location"
+#~ msgctxt "QObject|"
+#~ msgid "Current Location"
+#~ msgstr "Eplaeçmint do moumint"
+
+#, fuzzy
+#~ msgctxt "Marble::Placemark|"
+#~ msgid "%1 parking spaces"
+#~ msgstr "Nåcion"
+
+#, fuzzy
+#~| msgid "not available"
+#~ msgctxt "Marble::Placemark|A copy shop provides computers for customer use"
+#~ msgid "Computers available"
+#~ msgstr "nén disponibe"
+
+#, fuzzy
+#~| msgid "not available"
+#~ msgctxt ""
+#~ "Marble::Placemark|A copy shop does not provide computers for customer use"
+#~ msgid "No computers available"
+#~ msgstr "nén disponibe"
+
+#, fuzzy
+#~| msgid "Export Map"
+#~ msgctxt ""
+#~ "Marble::Placemark|A copy shop provides a paid service to make phone calls"
+#~ msgid "Phone service"
+#~ msgstr "Ebaguer mape"
+
+#, fuzzy
+#~ msgctxt "Marble::Placemark|An active volcano"
+#~ msgid "Active"
+#~ msgstr "Nåcion"
+
+#, fuzzy
+#~| msgid "Volcano"
+#~ msgctxt "Marble::Placemark|"
+#~ msgid "Stratovolcano"
+#~ msgstr "Volcan"
+
+#, fuzzy
+#~| msgid "Capital"
+#~ msgctxt "Marble::Placemark|"
+#~ msgid "Hospital"
+#~ msgstr "Mwaisse veye"
+
+#, fuzzy
+#~| msgid "Elevation extreme"
+#~ msgctxt "Marble::Placemark|"
+#~ msgid "Rehabilitation"
+#~ msgstr "Nouzome hôteur"
+
+#, fuzzy
+#~| msgid "%1 km"
+#~ msgctxt "Marble::Placemark|"
+#~ msgid "%1 km/h"
+#~ msgstr "%1 km"
+
+#, fuzzy
+#~ msgctxt "Marble::Placemark|Parking spaces"
+#~ msgid "%1 disabled spaces"
+#~ msgstr "Nåcion"
+
+#, fuzzy
+#~ msgctxt "Marble::Placemark|Parking spaces"
+#~ msgid "%1 women spaces"
+#~ msgstr "Nåcion"
+
+#, fuzzy
+#~ msgctxt "Marble::Placemark|Parking spaces"
+#~ msgid "%1 parent and child spaces"
+#~ msgstr "Nåcion"
+
+#, fuzzy
+#~| msgid "not available"
+#~ msgctxt "Marble::Placemark|"
+#~ msgid "No reservation possible"
+#~ msgstr "nén disponibe"
+
+#, fuzzy
+#~| msgid "Export Map"
+#~ msgctxt "Marble::Placemark|"
+#~ msgid "Self-service"
+#~ msgstr "Ebaguer mape"
+
+#, fuzzy
+#~| msgid "Export Map"
+#~ msgctxt "Marble::Placemark|"
+#~ msgid "No self-service"
+#~ msgstr "Ebaguer mape"
+
+#, fuzzy
+#~| msgid "Description"
+#~ msgctxt "Marble::Placemark|"
+#~ msgid "Inscription: %1"
+#~ msgstr "Discrijhaedje"
+
+#, fuzzy
+#~| msgid "&Stars"
+#~ msgctxt "Marble::Placemark|A carriage is heated"
+#~ msgid "Is heated"
+#~ msgstr "&Sitoeles"
+
+#, fuzzy
+#~| msgid "&Stars"
+#~ msgctxt "Marble::Placemark|A carriage is not heated"
+#~ msgid "Not heated"
+#~ msgstr "&Sitoeles"
+
+#, fuzzy
+#~| msgid "not available"
+#~ msgctxt "Marble::Placemark|Bicycles can be transported"
+#~ msgid "Bicycle transportation possible"
+#~ msgstr "nén disponibe"
+
+#, fuzzy
+#~| msgid "not available"
+#~ msgctxt "Marble::Placemark|Bicyles cannot be transported"
+#~ msgid "Bicycle transportation impossible"
+#~ msgstr "nén disponibe"
+
+#, fuzzy
+#~| msgid "Mountain"
+#~ msgctxt "Marble::Placemark|A ski piste with trees (gladed)"
+#~ msgid "Contains trees"
+#~ msgstr "Montinne"
+
+#, fuzzy
+#~| msgid "&Stars"
+#~ msgctxt "Marble::Placemark|"
+#~ msgid "Not patrolled"
+#~ msgstr "&Sitoeles"
+
+#, fuzzy
+#~| msgid "Elevation extreme"
+#~ msgctxt "Marble::Placemark|"
+#~ msgid "Elevation: %1 m"
+#~ msgstr "Nouzome hôteur"
+
+#, fuzzy
+#~| msgid "show public twitts in their places"
+#~ msgctxt ""
+#~ "Marble::Placemark|This location does not provide public Internet access"
+#~ msgid "No public Internet access"
+#~ msgstr "mostrer les publics twites a leus plaeces"
+
+#, fuzzy
+#~| msgid "not available"
+#~ msgctxt ""
+#~ "Marble::Placemark|Public wireless Internet access is available here."
+#~ msgid "Public wifi available"
+#~ msgstr "nén disponibe"
+
+#, fuzzy
+#~| msgid "not available"
+#~ msgctxt "Marble::Placemark|Public wireless Internet is available here."
+#~ msgid "Public wifi available"
+#~ msgstr "nén disponibe"
+
+#, fuzzy
+#~| msgid "Navigation"
+#~ msgctxt "Marble::RouteRelationModel|"
+#~ msgid "International walking route"
+#~ msgstr "Naiviaedje"
+
+#, fuzzy
+#~| msgid "Regional Capital"
+#~ msgctxt "Marble::RouteRelationModel|"
+#~ msgid "National walking route"
+#~ msgstr "Mwaisse veye redjonåle"
+
+#, fuzzy
+#~| msgid "Navigation"
+#~ msgctxt "Marble::RouteRelationModel|"
+#~ msgid "International cycling route"
+#~ msgstr "Naiviaedje"
+
+#, fuzzy
+#~| msgid "Regional Capital"
+#~ msgctxt "Marble::RouteRelationModel|"
+#~ msgid "National route"
+#~ msgstr "Mwaisse veye redjonåle"
+
+#, fuzzy
+#~| msgid "Location"
+#~ msgctxt "Marble::RouteRelationModel|"
+#~ msgid "Local route"
+#~ msgstr "Eplaeçmint"
+
+#, fuzzy
+#~| msgid "Download finished."
+#~ msgctxt "Marble::DownloadRegionDialog|"
+#~ msgid "Download Route"
+#~ msgstr "L' aberwetaedje a fni."
+
+#, fuzzy
+#~| msgid "Download finished."
+#~ msgctxt "Marble::DownloadRegionDialog|"
+#~ msgid "Download Region"
+#~ msgstr "L' aberwetaedje a fni."
+
+#, fuzzy
+#~| msgid "Map View"
+#~ msgctxt "Marble::DownloadRegionDialog|"
+#~ msgid "Vector tiles"
+#~ msgstr "Vuwe del mape"
+
+#, fuzzy
+#~| msgid "Add Bookmark"
+#~ msgctxt "UiEditBookmarkDialog|"
+#~ msgid "Edit Bookmark"
+#~ msgstr "Radjouter ene rimåke"
+
+#, fuzzy
+#~| msgid "Description"
+#~ msgctxt "UiEditBookmarkDialog|"
+#~ msgid "&Description:"
+#~ msgstr "Discrijhaedje"
+
+#, fuzzy
+#~ msgctxt "UiEditBookmarkDialog|"
+#~ msgid "&Folder:"
+#~ msgstr "Tchôke-divins des Markes di plaeces"
+
+#, fuzzy
+#~ msgctxt "Marble::EditPlacemarkDialog|"
+#~ msgid "Untitled Placemark"
+#~ msgstr "Tchôke-divins des Markes di plaeces"
+
+#, fuzzy
+#~| msgid "Elevation extreme"
+#~ msgctxt "Marble::EditPlacemarkDialog|"
+#~ msgid "Relations"
+#~ msgstr "Nouzome hôteur"
+
+#, fuzzy
+#~| msgid "Elevation extreme"
+#~ msgctxt "Marble::EditPlacemarkDialog|"
+#~ msgid "Elevation"
+#~ msgstr "Nouzome hôteur"
+
+#, fuzzy
+#~ msgctxt "UiEditPlacemarkDialog|"
+#~ msgid "Edit placemark"
+#~ msgstr "Tchôke-divins des Markes di plaeces"
+
+#, fuzzy
+#~| msgid "Description"
+#~ msgctxt "UiEditPlacemarkDialog|"
+#~ msgid "Description"
+#~ msgstr "Discrijhaedje"
+
+#, fuzzy
+#~| msgid "Scale Bar"
+#~ msgctxt "UiEditPlacemarkDialog|"
+#~ msgid "Scale:"
+#~ msgstr "Båre di schåle"
+
+#, fuzzy
+#~| msgid "Placemarks Plugin"
+#~ msgctxt "UiEditPlacemarkDialog|"
+#~ msgid "Show placemark"
+#~ msgstr "Tchôke-divins des Markes di plaeces"
+
+#, fuzzy
+#~| msgid "Bold"
+#~ msgctxt "UiEditPlacemarkDialog|"
+#~ msgid "Bold"
+#~ msgstr "Cråssès letes"
+
+#, fuzzy
+#~| msgid "Italic"
+#~ msgctxt "UiEditPlacemarkDialog|"
+#~ msgid "Italics"
+#~ msgstr "Clintcheye"
+
+#, fuzzy
+#~| msgid "Underline"
+#~ msgctxt "UiEditPlacemarkDialog|"
+#~ msgid "Underlined"
+#~ msgstr "Sorlignî"
+
+#, fuzzy
+#~| msgid "Path"
+#~ msgctxt "UiEditPlacemarkDialog|"
+#~ msgid "Add link"
+#~ msgstr "Tchimin"
+
+#, fuzzy
+#~| msgid "Elevation extreme"
+#~ msgctxt "ElevationWidget|"
+#~ msgid "Elevation:"
+#~ msgstr "Nouzome hôteur"
+
+#, fuzzy
+#~| msgid "m"
+#~ msgctxt "ElevationWidget|"
+#~ msgid " m"
+#~ msgstr "m"
+
+#, fuzzy
+#~| msgid "Print Previe&w ..."
+#~ msgctxt "ExternalEditor|"
+#~ msgid "Editor Preview"
+#~ msgstr "&Voeyaedje divant d' imprimer ..."
+
+#, fuzzy
+#~| msgid "File View"
+#~ msgctxt "FileViewWidget|"
+#~ msgid "File View"
+#~ msgstr "Vuwe do fitchî"
+
+#, fuzzy
+#~| msgid "&Clouds"
+#~ msgctxt "FileViewWidget|"
+#~ msgid "&Close"
+#~ msgstr "&Nûlêyes"
+
+#, fuzzy
+#~| msgid "Nation"
+#~ msgctxt "Marble::FlyToEditWidget|"
+#~ msgid "Duration:"
+#~ msgstr "Nåcion"
+
+#, fuzzy
+#~| msgid "Export Map"
+#~ msgctxt "Marble::FlyToEditWidget|"
+#~ msgid "Current map center"
+#~ msgstr "Ebaguer mape"
+
+#, fuzzy
+#~ msgctxt "Marble::FormattedTextWidget|"
+#~ msgid "Choose image"
+#~ msgstr "Tchôke-divins des Markes di plaeces"
+
+#, fuzzy
+#~ msgctxt "Marble::FormattedTextWidget|"
+#~ msgid "All Supported Files (*.png *.jpg *.jpeg)"
+#~ msgstr ""
+#~ "Tos les fitchîs sopoirtés (*.gpx *.kml);;dinêyes GPS (*.gpx);;KML di "
+#~ "Google Earth (*.kml)"
+
+#, fuzzy
+#~| msgid "F9"
+#~ msgctxt "FormattedTextWidget|"
+#~ msgid "9"
+#~ msgstr "F9"
+
+#, fuzzy
+#~| msgid "Bold"
+#~ msgctxt "FormattedTextWidget|"
+#~ msgid "Bold"
+#~ msgstr "Cråssès letes"
+
+#, fuzzy
+#~| msgid "Italic"
+#~ msgctxt "FormattedTextWidget|"
+#~ msgid "Italics"
+#~ msgstr "Clintcheye"
+
+#, fuzzy
+#~| msgid "Underline"
+#~ msgctxt "FormattedTextWidget|"
+#~ msgid "Underlined"
+#~ msgstr "Sorlignî"
+
+#, fuzzy
+#~| msgid "Path"
+#~ msgctxt "FormattedTextWidget|"
+#~ msgid "Add link"
+#~ msgstr "Tchimin"
+
+#, fuzzy
+#~| msgid "W"
+#~ msgctxt "GeoDataCoordinates|"
+#~ msgid "W"
+#~ msgstr "C"
+
+#, fuzzy
+#~| msgid "E"
+#~ msgctxt "GeoDataCoordinates|"
+#~ msgid "E"
+#~ msgstr "L"
+
+#, fuzzy
+#~| msgid "N"
+#~ msgctxt "GeoDataCoordinates|"
+#~ msgid "N"
+#~ msgstr "B"
+
+#, fuzzy
+#~| msgid "S"
+#~ msgctxt "GeoDataCoordinates|"
+#~ msgid "S"
+#~ msgstr "N"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Terrain"
+#~ msgstr "Nåcion"
+
+#, fuzzy
+#~| msgid "Crater"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Crater"
+#~ msgstr "Traitoe"
+
+#, fuzzy
+#~| msgid "Landing Site"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Manned Landing Site"
+#~ msgstr "Sire di rashidaedje"
+
+#, fuzzy
+#~| msgid "Landing Site"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Unmanned Soft Landing Site"
+#~ msgstr "Sire di rashidaedje"
+
+#, fuzzy
+#~| msgid "Landing Site"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Unmanned Hard Landing Site"
+#~ msgstr "Sire di rashidaedje"
+
+#, fuzzy
+#~| msgid "Mountain"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Mountain"
+#~ msgstr "Montinne"
+
+#, fuzzy
+#~| msgid "City"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "City"
+#~ msgstr "Veye"
+
+#, fuzzy
+#~| msgid "Capital"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "County Capital"
+#~ msgstr "Mwaisse veye"
+
+#, fuzzy
+#~| msgid "Capital"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "State Capital"
+#~ msgstr "Mwaisse veye"
+
+#, fuzzy
+#~| msgid "Regional Capital"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Nation Capital"
+#~ msgstr "Mwaisse veye redjonåle"
+
+#, fuzzy
+#~| msgid "Navigation"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Nation"
+#~ msgstr "Naiviaedje"
+
+#, fuzzy
+#~| msgid "Volcano"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Volcano"
+#~ msgstr "Volcan"
+
+#, fuzzy
+#~| msgid "Continent"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Continent"
+#~ msgstr "Continint"
+
+#, fuzzy
+#~| msgid "Ocean"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Ocean"
+#~ msgstr "Grande basse"
+
+#, fuzzy
+#~| msgid "Copy Coordinates"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Geographic Pole"
+#~ msgstr "Copyî cordinêyes"
+
+#, fuzzy
+#~| msgid "Shipwreck"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Ship Wreck"
+#~ msgstr "Nåfraedje"
+
+#, fuzzy
+#~| msgid "Current Location"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Observatory"
+#~ msgstr "Eplaeçmint do moumint"
+
+#, fuzzy
+#~| msgid "Copy Coordinates"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Coordinate"
+#~ msgstr "Copyî cordinêyes"
+
+#, fuzzy
+#~| msgid "&Bookmarks"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Bookmark"
+#~ msgstr "&Rimarkes"
+
+#, fuzzy
+#~| msgid "Satellites"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Satellite"
+#~ msgstr "Satelites"
+
+#, fuzzy
+#~| msgid "Capital"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "City Capital"
+#~ msgstr "Mwaisse veye"
+
+#, fuzzy
+#~| msgid "Regional Capital"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "National Capital"
+#~ msgstr "Mwaisse veye redjonåle"
+
+#, fuzzy
+#~| msgid "Location"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Locality"
+#~ msgstr "Eplaeçmint"
+
+#, fuzzy
+#~| msgid "Regional Capital"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Town Capital"
+#~ msgstr "Mwaisse veye redjonåle"
+
+#, fuzzy
+#~| msgid "Capital"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Village"
+#~ msgstr "Mwaisse veye"
+
+#, fuzzy
+#~| msgid "Capital"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Village Capital"
+#~ msgstr "Mwaisse veye"
+
+#, fuzzy
+#~| msgid "Crater"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Water"
+#~ msgstr "Traitoe"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Heath"
+#~ msgstr "Traitoe"
+
+#, fuzzy
+#~| msgid "Elevation extreme"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Elevator"
+#~ msgstr "Nouzome hôteur"
+
+#, fuzzy
+#~| msgctxt "a planet without data"
+#~| msgid "Unknown Planet"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Unknown Road"
+#~ msgstr "Planete nén cnoxhowe"
+
+#, fuzzy
+#~| msgid "Path"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Path"
+#~ msgstr "Tchimin"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Track"
+#~ msgstr "Nåcion"
+
+#, fuzzy
+#~| msgctxt "a planet without data"
+#~| msgid "Unknown Planet"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Service Road"
+#~ msgstr "Planete nén cnoxhowe"
+
+#, fuzzy
+#~| msgctxt "a planet without data"
+#~| msgid "Unknown Planet"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Residential Road"
+#~ msgstr "Planete nén cnoxhowe"
+
+#, fuzzy
+#~| msgid "Landing Site"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Living Street"
+#~ msgstr "Sire di rashidaedje"
+
+#, fuzzy
+#~| msgctxt "a planet without data"
+#~| msgid "Unknown Planet"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Tertiary Link Road"
+#~ msgstr "Planete nén cnoxhowe"
+
+#, fuzzy
+#~| msgctxt "a planet without data"
+#~| msgid "Unknown Planet"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Tertiary Road"
+#~ msgstr "Planete nén cnoxhowe"
+
+#, fuzzy
+#~| msgctxt "a planet without data"
+#~| msgid "Unknown Planet"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Secondary Link Road"
+#~ msgstr "Planete nén cnoxhowe"
+
+#, fuzzy
+#~| msgctxt "a planet without data"
+#~| msgid "Unknown Planet"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Secondary Road"
+#~ msgstr "Planete nén cnoxhowe"
+
+#, fuzzy
+#~| msgctxt "a planet without data"
+#~| msgid "Unknown Planet"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Primary Link Road"
+#~ msgstr "Planete nén cnoxhowe"
+
+#, fuzzy
+#~| msgctxt "a planet without data"
+#~| msgid "Unknown Planet"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Primary Road"
+#~ msgstr "Planete nén cnoxhowe"
+
+#, fuzzy
+#~| msgctxt "a planet without data"
+#~| msgid "Unknown Planet"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Trunk Link Road"
+#~ msgstr "Planete nén cnoxhowe"
+
+#, fuzzy
+#~| msgctxt "a planet without data"
+#~| msgid "Unknown Planet"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Trunk Road"
+#~ msgstr "Planete nén cnoxhowe"
+
+#, fuzzy
+#~| msgctxt "a planet without data"
+#~| msgid "Unknown Planet"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Motorway Link Road"
+#~ msgstr "Planete nén cnoxhowe"
+
+#, fuzzy
+#~| msgctxt "a planet without data"
+#~| msgid "Unknown Planet"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Motorway"
+#~ msgstr "Planete nén cnoxhowe"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Bar"
+#~ msgstr "Båre di schåle"
+
+#, fuzzy
+#~| msgid "Capital"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Hospital"
+#~ msgstr "Mwaisse veye"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Veterinary"
+#~ msgstr "Schaper fitchî"
+
+#, fuzzy
+#~| msgid "Mountain"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Mountain Rescue"
+#~ msgstr "Montinne"
+
+#, fuzzy
+#~| msgid "Crater"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Water Park"
+#~ msgstr "Traitoe"
+
+#, fuzzy
+#~| msgid "Mountain"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Fountain"
+#~ msgstr "Montinne"
+
+#, fuzzy
+#~| msgid "&Edit Map"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Night Club"
+#~ msgstr "&Candjî mape"
+
+#, fuzzy
+#~| msgid "Navigation"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Fire Station"
+#~ msgstr "Naiviaedje"
+
+#, fuzzy
+#~| msgid "Regional Capital"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Town Hall"
+#~ msgstr "Mwaisse veye redjonåle"
+
+#, fuzzy
+#~| msgid "Navigation"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Charging Station"
+#~ msgstr "Naiviaedje"
+
+#, fuzzy
+#~| msgid "Crater"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Car Wash"
+#~ msgstr "Traitoe"
+
+#, fuzzy
+#~| msgid "Location"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Social Facility"
+#~ msgstr "Eplaeçmint"
+
+#, fuzzy
+#~| msgid "City"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "City Wall"
+#~ msgstr "Veye"
+
+#, fuzzy
+#~| msgid "City"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Wall"
+#~ msgstr "Veye"
+
+#, fuzzy
+#~| msgid "Export Map"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Cave Entrance"
+#~ msgstr "Ebaguer mape"
+
+#, fuzzy
+#~| msgid "Show &Navigation Panel"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Confectionery"
+#~ msgstr "Mostrer l' panea di &naiviaedje"
+
+#, fuzzy
+#~| msgid "Export Map"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Beauty Services"
+#~ msgstr "Ebaguer mape"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Bicycle Shop"
+#~ msgstr "Nåcion"
+
+#, fuzzy
+#~| msgid "Crater"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Car Dealer"
+#~ msgstr "Traitoe"
+
+#, fuzzy
+#~| msgid "Crater"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Car Repair Shop"
+#~ msgstr "Traitoe"
+
+#, fuzzy
+#~| msgid "Crater"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Car Parts"
+#~ msgstr "Traitoe"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Motorcycle Shop"
+#~ msgstr "Nåcion"
+
+#, fuzzy
+#~| msgid "Export Map"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Printing Services"
+#~ msgstr "Ebaguer mape"
+
+#, fuzzy
+#~| msgid "Photos"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Photo Shop"
+#~ msgstr "Fotos"
+
+#, fuzzy
+#~| msgid "&Bookmarks"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Bookshop"
+#~ msgstr "&Rimarkes"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Stationery"
+#~ msgstr "Schaper fitchî"
+
+#, fuzzy
+#~| msgid "Photos"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Tobacco Shop"
+#~ msgstr "Fotos"
+
+#, fuzzy
+#~| msgid "Crater"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Tea Shop"
+#~ msgstr "Traitoe"
+
+#, fuzzy
+#~| msgid "Photos"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Computer Shop"
+#~ msgstr "Fotos"
+
+#, fuzzy
+#~| msgid "Crater"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Water Tower"
+#~ msgstr "Traitoe"
+
+#, fuzzy
+#~| msgid "Show Navigation Panel"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Communications Tower"
+#~ msgstr "Mostrer l' panea di naiviaedje"
+
+#, fuzzy
+#~| msgid "Nation"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Tourist Attraction"
+#~ msgstr "Nåcion"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Information"
+#~ msgstr "Schaper fitchî"
+
+#, fuzzy
+#~| msgid "&Stars"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Theatre"
+#~ msgstr "&Sitoeles"
+
+#, fuzzy
+#~| msgid "&Copy Map"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "View Point"
+#~ msgstr "&Copyî mape"
+
+#, fuzzy
+#~| msgid "Export Map"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Airport Gate"
+#~ msgstr "Ebaguer mape"
+
+#, fuzzy
+#~| msgid "Export Map"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Airport Apron"
+#~ msgstr "Ebaguer mape"
+
+#, fuzzy
+#~| msgid "Export Map"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Airport Terminal"
+#~ msgstr "Ebaguer mape"
+
+#, fuzzy
+#~| msgid "Navigation"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Bus Station"
+#~ msgstr "Naiviaedje"
+
+#, fuzzy
+#~| msgid "Navigation"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Bus Stop"
+#~ msgstr "Naiviaedje"
+
+#, fuzzy
+#~| msgid "Navigation"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Gas Station"
+#~ msgstr "Naiviaedje"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Parking"
+#~ msgstr "Nåcion"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Parking Space"
+#~ msgstr "Nåcion"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Bicycle Rental"
+#~ msgstr "Nåcion"
+
+#, fuzzy
+#~| msgid "Crater"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Car Rental"
+#~ msgstr "Traitoe"
+
+#, fuzzy
+#~| msgid "Navigation"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Train Station"
+#~ msgstr "Naiviaedje"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Bicycle Parking"
+#~ msgstr "Nåcion"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Motorcycle Parking"
+#~ msgstr "Nåcion"
+
+#, fuzzy
+#~| msgid "Maria"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Marina"
+#~ msgstr "Mareye"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Park"
+#~ msgstr "Nåcion"
+
+#, fuzzy
+#~| msgid "Show &Navigation Panel"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Construction"
+#~ msgstr "Mostrer l' panea di &naiviaedje"
+
+#, fuzzy
+#~| msgid "Navigation"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Railway"
+#~ msgstr "Naiviaedje"
+
+#, fuzzy
+#~| msgid "Navigation"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Rail"
+#~ msgstr "Naiviaedje"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Light Rail"
+#~ msgstr "Nåcion"
+
+#, fuzzy
+#~| msgid "Navigation"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Railway Construction"
+#~ msgstr "Naiviaedje"
+
+#, fuzzy
+#~| msgid "Crater"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Power Tower"
+#~ msgstr "Traitoe"
+
+#, fuzzy
+#~| msgid "Navigation"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Aerialway Station"
+#~ msgstr "Naiviaedje"
+
+#, fuzzy
+#~| msgid "Crater"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Rope Tow"
+#~ msgstr "Traitoe"
+
+#, fuzzy
+#~| msgid "Export Map"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Skitour"
+#~ msgstr "Ebaguer mape"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Snow Park"
+#~ msgstr "Nåcion"
+
+#, fuzzy
+#~| msgid "Navigation"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "International Date Line"
+#~ msgstr "Naiviaedje"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Drain"
+#~ msgstr "Nåcion"
+
+#, fuzzy
+#~| msgid "Crosshairs"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Crosswalk"
+#~ msgstr "Croes"
+
+#, fuzzy
+#~| msgid "Navigation"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Railway Crossing"
+#~ msgstr "Naiviaedje"
+
+#, fuzzy
+#~| msgid "Export Map"
+#~ msgctxt "GeoLineStringGraphicsItem|"
+#~ msgid "Detour"
+#~ msgstr "Ebaguer mape"
+
+#, fuzzy
+#~| msgid "Export Map"
+#~ msgctxt "GeoLineStringGraphicsItem|"
+#~ msgid "Ferry Route"
+#~ msgstr "Ebaguer mape"
+
+#, fuzzy
+#~ msgctxt "GeoLineStringGraphicsItem|"
+#~ msgid "Bicycle Route"
+#~ msgstr "Nåcion"
+
+#, fuzzy
+#~| msgid "Mountain"
+#~ msgctxt "GeoLineStringGraphicsItem|"
+#~ msgid "Mountainbike Route"
+#~ msgstr "Montinne"
+
+#, fuzzy
+#~| msgid "Export Map"
+#~ msgctxt "GeoLineStringGraphicsItem|"
+#~ msgid "Walking Route"
+#~ msgstr "Ebaguer mape"
+
+#, fuzzy
+#~| msgid "Export Map"
+#~ msgctxt "GeoLineStringGraphicsItem|"
+#~ msgid "Hiking Route"
+#~ msgstr "Ebaguer mape"
+
+#, fuzzy
+#~| msgid "Export Map"
+#~ msgctxt "GeoLineStringGraphicsItem|"
+#~ msgid "Inline Skates Route"
+#~ msgstr "Ebaguer mape"
+
+#, fuzzy
+#~| msgid "Export Map"
+#~ msgctxt "GeoLineStringGraphicsItem|"
+#~ msgid "Skitour"
+#~ msgstr "Ebaguer mape"
+
+#, fuzzy
+#~| msgid ""
+#~| "Could not convert <maximum> child text content to integer. Was: '%1'"
+#~ msgctxt "QObject|"
+#~ msgid "Could not convert <maximum> child text content to integer. Was: '%1'"
+#~ msgstr ""
+#~ "Dji n' a savou cvierser <maximum> l' ådvins do tecse efant en èn etir. Ç' "
+#~ "a stî : « %1 »"
+
+#, fuzzy
+#~| msgid ""
+#~| "Could not convert <minimum> child text content to integer. Was: '%1'"
+#~ msgctxt "QObject|"
+#~ msgid "Could not convert <minimum> child text content to integer. Was: '%1'"
+#~ msgstr ""
+#~ "Dji n' a savou cvierser <minimum> l' ådvins do tecse efant en èn etir. Ç' "
+#~ "a stî : « %1 »"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid ""
+#~ "Parsing failed line %1. Still %n unclosed tag(s) after document end. "
+#~ msgid_plural ""
+#~ "Parsing failed line %1. Still %n unclosed tag(s) after document end. "
+#~ msgstr[0] ""
+#~ "L' analijhe del sintake a fwait berwete. I gn a co %1 etiketes nén "
+#~ "cloyowes après l' difén do documint."
+#~ msgstr[1] ""
+#~ "L' analijhe del sintake a fwait berwete. I gn a co %1 etiketes nén "
+#~ "cloyowes après l' difén do documint."
+
+#, fuzzy
+#~| msgid ""
+#~| "Parse error at line %1, column %2:\n"
+#~| "%3."
+#~ msgctxt "QObject|"
+#~ msgid "Error parsing file at line: %1 and column %2 . "
+#~ msgstr ""
+#~ "Aroke d' analijhe del sintake al roye %1, colone %2 :\n"
+#~ "%3"
+
+#, fuzzy
+#~| msgid "The file is not a valid DGML 2.0 file"
+#~ msgctxt "QObject|"
+#~ msgid "This is an Invalid File"
+#~ msgstr "Li fitchî n' est nén on fitchî DGML 2.0 valåbe"
+
+#, fuzzy
+#~| msgid "Population:"
+#~ msgctxt "Marble::GeoDataTreeModel|"
+#~ msgid "Popularity"
+#~ msgstr "Nombe di djins :"
+
+#, fuzzy
+#~| msgid "Current Location"
+#~ msgctxt "Marble::TargetModel|"
+#~ msgid "Current Location: %1"
+#~ msgstr "Eplaeçmint do moumint"
+
+#, fuzzy
+#~| msgid "&Help"
+#~ msgctxt "Marble::TargetModel|"
+#~ msgid "Home"
+#~ msgstr "&Aidance"
+
+#, fuzzy
+#~| msgid "N"
+#~ msgctxt "LatLonBoxWidget|"
+#~ msgid "&N"
+#~ msgstr "B"
+
+#, fuzzy
+#~| msgid "W"
+#~ msgctxt "LatLonBoxWidget|"
+#~ msgid "&W"
+#~ msgstr "C"
+
+#, fuzzy
+#~| msgid "E"
+#~ msgctxt "LatLonBoxWidget|"
+#~ msgid "&E"
+#~ msgstr "L"
+
+#, fuzzy
+#~| msgid "S"
+#~ msgctxt "LatLonBoxWidget|"
+#~ msgid "&S"
+#~ msgstr "N"
+
+#, fuzzy
+#~| msgid "E"
+#~ msgctxt "Marble::LatLonEdit|East, the direction"
+#~ msgid "E"
+#~ msgstr "L"
+
+#, fuzzy
+#~| msgid "W"
+#~ msgctxt "Marble::LatLonEdit|West, the direction"
+#~ msgid "W"
+#~ msgstr "C"
+
+#, fuzzy
+#~| msgid "N"
+#~ msgctxt "Marble::LatLonEdit|North, the direction"
+#~ msgid "N"
+#~ msgstr "B"
+
+#, fuzzy
+#~| msgid "S"
+#~ msgctxt "Marble::LatLonEdit|South, the direction"
+#~ msgid "S"
+#~ msgstr "N"
+
+#, fuzzy
+#~| msgid "Legend"
+#~ msgctxt "LegendWidget|"
+#~ msgid "Legend"
+#~ msgstr "Ledjinde"
+
+#, fuzzy
+#~| msgid "&Copy Map"
+#~ msgctxt "Marble::MapItemDelegate|"
+#~ msgid "Remove"
+#~ msgstr "&Copyî mape"
+
+#, fuzzy
+#~| msgid "&Open..."
+#~ msgctxt "Marble::MapItemDelegate|"
+#~ msgid "Open"
+#~ msgstr "&Drovi..."
+
+#, fuzzy
+#~| msgid "Marble - Virtual Globe"
+#~ msgctxt "MapThemeDownloadDialog|"
+#~ msgid "Install Maps"
+#~ msgstr "Marble - Forveyowe bole daegnrece"
+
+#, fuzzy
+#~| msgid "Name"
+#~ msgctxt "QObject|"
+#~ msgid "Name"
+#~ msgstr "No"
+
+#, fuzzy
+#~| msgid "File View"
+#~ msgctxt "Marble::MapViewWidget|"
+#~ msgid "Globe View"
+#~ msgstr "Vuwe do fitchî"
+
+#, fuzzy
+#~| msgid "Copy Coordinates"
+#~ msgctxt "Marble::MapViewWidget|"
+#~ msgid "Spherical view"
+#~ msgstr "Copyî cordinêyes"
+
+#, fuzzy
+#~| msgid "Map View"
+#~ msgctxt "Marble::MapViewWidget|"
+#~ msgid "Mercator View"
+#~ msgstr "Vuwe del mape"
+
+#, fuzzy
+#~| msgid "File View"
+#~ msgctxt "Marble::MapViewWidget|"
+#~ msgid "Flat View"
+#~ msgstr "Vuwe do fitchî"
+
+#, fuzzy
+#~| msgid "Copy Coordinates"
+#~ msgctxt "Marble::MapViewWidget|"
+#~ msgid "Stereographic view"
+#~ msgstr "Copyî cordinêyes"
+
+#, fuzzy
+#~| msgid "Marble"
+#~ msgctxt "Marble::MapViewWidget|"
+#~ msgid "Marble"
+#~ msgstr "Marble"
+
+#, fuzzy
+#~| msgid "Map View"
+#~ msgctxt "MapViewWidget|"
+#~ msgid "Map View"
+#~ msgstr "Vuwe del mape"
+
+#, fuzzy
+#~| msgid "Location"
+#~ msgctxt "MapViewWidget|"
+#~ msgid "&Projection"
+#~ msgstr "Eplaeçmint"
+
+#, fuzzy
+#~| msgid "File View"
+#~ msgctxt "MapViewWidget|"
+#~ msgid "Globe"
+#~ msgstr "Vuwe do fitchî"
+
+#, fuzzy
+#~| msgid "&Copy Map"
+#~ msgctxt "MapViewWidget|"
+#~ msgid "Flat Map"
+#~ msgstr "&Copyî mape"
+
+#, fuzzy
+#~| msgid "Map View"
+#~ msgctxt "MapViewWidget|"
+#~ msgid "Mercator"
+#~ msgstr "Vuwe del mape"
+
+#, fuzzy
+#~| msgid "Copy Coordinates"
+#~ msgctxt "MapViewWidget|"
+#~ msgid "Stereographic"
+#~ msgstr "Copyî cordinêyes"
+
+#, fuzzy
+#~| msgid "Overview Map"
+#~ msgctxt "Marble::PreviewDialog|"
+#~ msgid "Preview Map"
+#~ msgstr "Mwaisse vuwe del mape"
+
+#, fuzzy
+#~| msgid "Location"
+#~ msgctxt "Marble::MapWizard|"
+#~ msgid "Tile Projection:"
+#~ msgstr "Eplaeçmint"
+
+#, fuzzy
+#~| msgid "Overview Map"
+#~ msgctxt "Marble::MapWizard|"
+#~ msgid "Preview Image"
+#~ msgstr "Mwaisse vuwe del mape"
+
+#, fuzzy
+#~| msgid "Save File"
+#~ msgctxt "Marble::MapWizard|"
+#~ msgid "Base Tile"
+#~ msgstr "Schaper fitchî"
+
+#, fuzzy
+#~| msgid "Legend"
+#~ msgctxt "Marble::MapWizard|"
+#~ msgid "Legend Image"
+#~ msgstr "Ledjinde"
+
+#, fuzzy
+#~| msgid "%1 m"
+#~ msgctxt "Marble::MapWizard|"
+#~ msgid "%1"
+#~ msgstr "%1 m"
+
+#, fuzzy
+#~| msgid "Map View"
+#~ msgctxt "Marble::MapWizard|"
+#~ msgid "Map Title"
+#~ msgstr "Vuwe del mape"
+
+#, fuzzy
+#~| msgid "Name"
+#~ msgctxt "Marble::MapWizard|"
+#~ msgid "Map Name"
+#~ msgstr "No"
+
+#, fuzzy
+#~| msgid "Export Map"
+#~ msgctxt "MapWizard|"
+#~ msgid "Wms-Service:"
+#~ msgstr "Ebaguer mape"
+
+#, fuzzy
+#~| msgid "Location"
+#~ msgctxt "MapWizard|"
+#~ msgid "Tile Projection:"
+#~ msgstr "Eplaeçmint"
+
+#, fuzzy
+#~| msgctxt "a planet without data"
+#~| msgid "Unknown Planet"
+#~ msgctxt "MapWizard|"
+#~ msgid "Service Info"
+#~ msgstr "Planete nén cnoxhowe"
+
+#, fuzzy
+#~| msgid "OpenStreetMap"
+#~ msgctxt "MapWizard|"
+#~ msgid "OpenStreetMap"
+#~ msgstr "OpenStreetMap"
+
+#, fuzzy
+#~| msgid "&Copy Map"
+#~ msgctxt "MapWizard|"
+#~ msgid "Select Color"
+#~ msgstr "&Copyî mape"
+
+#, fuzzy
+#~| msgid "Map View"
+#~ msgctxt "MapWizard|"
+#~ msgid "Map Title:"
+#~ msgstr "Vuwe del mape"
+
+#, fuzzy
+#~| msgid "Name"
+#~ msgctxt "MapWizard|"
+#~ msgid "Map Name:"
+#~ msgstr "No"
+
+#, fuzzy
+#~| msgid "Description"
+#~ msgctxt "MapWizard|"
+#~ msgid "Description:"
+#~ msgstr "Discrijhaedje"
+
+#, fuzzy
+#~| msgid "Overview Map"
+#~ msgctxt "MapWizard|"
+#~ msgid "Preview Image:"
+#~ msgstr "Mwaisse vuwe del mape"
+
+#, fuzzy
+#~| msgid "Overview Map"
+#~ msgctxt "MapWizard|"
+#~ msgid "preview image"
+#~ msgstr "Mwaisse vuwe del mape"
+
+#, fuzzy
+#~ msgctxt "MapWizard|"
+#~ msgid "Change..."
+#~ msgstr "Apontyî l' contrôle do solea"
+
+#, fuzzy
+#~| msgid "Legend"
+#~ msgctxt "MapWizard|"
+#~ msgid "Legend Image:"
+#~ msgstr "Ledjinde"
+
+#, fuzzy
+#~| msgid "Name"
+#~ msgctxt "MapWizard|"
+#~ msgid "Map Theme:"
+#~ msgstr "No"
+
+#, fuzzy
+#~| msgid "Overview Map"
+#~ msgctxt "MapWizard|"
+#~ msgid "Preview Map"
+#~ msgstr "Mwaisse vuwe del mape"
+
+#, fuzzy
+#~| msgid "Marble - Desktop Globe"
+#~ msgctxt "QObject|"
+#~ msgid "Marble Virtual Globe"
+#~ msgstr "Marble - Bole daegnrece pol sicribanne"
+
+#, fuzzy
+#~| msgid "<b>Developers</b>"
+#~ msgctxt "QObject|"
+#~ msgid "<b>Developers</b>"
+#~ msgstr "<b>Diswalpeus</b>"
+
+#, fuzzy
+#~| msgid "<b>Maps</b>"
+#~ msgctxt "QObject|"
+#~ msgid "<b>Join us</b>"
+#~ msgstr "<b>Mapes</b>"
+
+#, fuzzy
+#~| msgid "<b>Google Summer of Code</b>"
+#~ msgctxt "QObject|"
+#~ msgid "<b>ESA - Summer of Code in Space</b>"
+#~ msgstr "<b>Google Summer of Code</b>"
+
+#, fuzzy
+#~| msgid "<p><b>2008</b></p>"
+#~ msgctxt "QObject|"
+#~ msgid "<p><b>2016</b></p>"
+#~ msgstr "<p><b>2008</b></p>"
+
+#, fuzzy
+#~| msgid "<p><b>2008</b></p>"
+#~ msgctxt "QObject|"
+#~ msgid "<p><b>2015</b></p>"
+#~ msgstr "<p><b>2008</b></p>"
+
+#, fuzzy
+#~| msgid "<p><b>2008</b></p>"
+#~ msgctxt "QObject|"
+#~ msgid "<p><b>2014</b></p>"
+#~ msgstr "<p><b>2008</b></p>"
+
+#, fuzzy
+#~| msgid "<p><b>2008</b></p>"
+#~ msgctxt "QObject|"
+#~ msgid "<p><b>2013</b></p>"
+#~ msgstr "<p><b>2008</b></p>"
+
+#, fuzzy
+#~| msgid "<p><b>2008</b></p>"
+#~ msgctxt "QObject|"
+#~ msgid "<p><b>2012</b></p>"
+#~ msgstr "<p><b>2008</b></p>"
+
+#, fuzzy
+#~| msgid "<p><b>2008</b></p>"
+#~ msgctxt "QObject|"
+#~ msgid "<p><b>2011</b></p>"
+#~ msgstr "<p><b>2008</b></p>"
+
+#, fuzzy
+#~| msgid "<b>Google Summer of Code</b>"
+#~ msgctxt "QObject|"
+#~ msgid "<b>Google Code-in</b>"
+#~ msgstr "<b>Google Summer of Code</b>"
+
+#, fuzzy
+#~| msgid "<b>Google Summer of Code</b>"
+#~ msgctxt "QObject|"
+#~ msgid "<b>Google Summer of Code</b>"
+#~ msgstr "<b>Google Summer of Code</b>"
+
+#, fuzzy
+#~| msgid "<p><b>2008</b></p>"
+#~ msgctxt "QObject|"
+#~ msgid "<p><b>2017</b></p>"
+#~ msgstr "<p><b>2008</b></p>"
+
+#, fuzzy
+#~| msgid "<p><b>2008</b></p>"
+#~ msgctxt "QObject|"
+#~ msgid "<p><b>2010</b></p>"
+#~ msgstr "<p><b>2008</b></p>"
+
+#, fuzzy
+#~| msgid "<p><b>2008</b></p>"
+#~ msgctxt "QObject|"
+#~ msgid "<p><b>2009</b></p>"
+#~ msgstr "<p><b>2008</b></p>"
+
+#, fuzzy
+#~| msgid "<p><b>2008</b></p>"
+#~ msgctxt "QObject|"
+#~ msgid "<p><b>2008</b></p>"
+#~ msgstr "<p><b>2008</b></p>"
+
+#, fuzzy
+#~| msgid "<b>2007</b>"
+#~ msgctxt "QObject|"
+#~ msgid "<b>2007</b>"
+#~ msgstr "<b>2007</b>"
+
+#, fuzzy
+#~| msgid "<b>Stars</b>"
+#~ msgctxt "QObject|"
+#~ msgid "<b>Credits</b>"
+#~ msgstr "<b>Sitoels</b>"
+
+#, fuzzy
+#~| msgid "<b>Maps</b>"
+#~ msgctxt "QObject|"
+#~ msgid "<b>Maps</b>"
+#~ msgstr "<b>Mapes</b>"
+
+#, fuzzy
+#~| msgid "<b>Street Map</b>"
+#~ msgctxt "QObject|"
+#~ msgid "<b>Street Map</b>"
+#~ msgstr "<b>Mape des rowes</b>"
+
+#, fuzzy
+#~| msgid "<b>Cities and Locations</b>"
+#~ msgctxt "QObject|"
+#~ msgid "<b>Cities and Locations</b>"
+#~ msgstr "<b>Veyes eyet plaeces</b>"
+
+#, fuzzy
+#~| msgid "<b>Flags</b>"
+#~ msgctxt "QObject|"
+#~ msgid "<b>Flags</b>"
+#~ msgstr "<b>Drapeas</b>"
+
+#, fuzzy
+#~| msgid "<b>Stars</b>"
+#~ msgctxt "QObject|"
+#~ msgid "<b>Stars</b>"
+#~ msgstr "<b>Sitoels</b>"
+
+#, fuzzy
+#~ msgctxt "Marble::MarbleAboutDialog|"
+#~ msgid ""
+#~ "<br />(c) 2007-%1 by the authors of Marble Virtual Globe<br /><br /><a "
+#~ "href=\"https://edu.kde.org/marble\">https://edu.kde.org/marble</a>"
+#~ msgstr ""
+#~ "<br />© 2007, 2008, 2009 Li Pordjet Marble<br /><br /><a href=\"http://"
+#~ "edu.kde.org/marble\">http://edu.kde.org/marble</a>"
+
+#, fuzzy
+#~| msgid "Mountain"
+#~ msgctxt "MarbleAboutDialog|"
+#~ msgid "About Marble"
+#~ msgstr "Montinne"
+
+#, fuzzy
+#~| msgid "Version %1"
+#~ msgctxt "MarbleAboutDialog|"
+#~ msgid "Version Unknown"
+#~ msgstr "Modêye %1"
+
+#, fuzzy
+#~| msgid "&About"
+#~ msgctxt "MarbleAboutDialog|"
+#~ msgid "&About"
+#~ msgstr "Åd fw&ait"
+
+#, fuzzy
+#~ msgctxt "MarbleCacheSettingsWidget|"
+#~ msgid "C&lear"
+#~ msgstr "Båre di schåle"
+
+#, fuzzy
+#~| msgid "Quit the Application"
+#~ msgctxt "MarbleCacheSettingsWidget|"
+#~ msgid "Requires authentication"
+#~ msgstr "Cwiter l' programe"
+
+#, fuzzy
+#~| msgid "Test Plugin"
+#~ msgctxt "MarbleCloudSyncSettingsWidget|"
+#~ msgid "Test Login"
+#~ msgstr "Tchôke-divins di sayaedje"
+
+#, fuzzy
+#~| msgid "not available"
+#~ msgctxt "Marble|"
+#~ msgid "not available"
+#~ msgstr "nén disponibe"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "Clear"
+#~ msgstr "Båre di schåle"
+
+#, fuzzy
+#~| msgid "m"
+#~ msgctxt "QObject|means meter"
+#~ msgid "m"
+#~ msgstr "m"
+
+#, fuzzy
+#~| msgid "m"
+#~ msgctxt "QObject|means milimeters"
+#~ msgid "mm"
+#~ msgstr "m"
+
+#, fuzzy
+#~| msgid "km"
+#~ msgctxt "QObject|means kilometers"
+#~ msgid "km"
+#~ msgstr "km"
+
+#, fuzzy
+#~| msgid "m"
+#~ msgctxt "QObject|means centimeters"
+#~ msgid "cm"
+#~ msgstr "m"
+
+#, fuzzy
+#~| msgid "ft"
+#~ msgctxt "QObject|means feet"
+#~ msgid "ft"
+#~ msgstr "pî"
+
+#, fuzzy
+#~ msgctxt "QObject|means inches"
+#~ msgid "in"
+#~ msgstr "Nåcion"
+
+#, fuzzy
+#~| msgid "m"
+#~ msgctxt "QObject|means miles"
+#~ msgid "mi"
+#~ msgstr "m"
+
+#, fuzzy
+#~| msgid "m"
+#~ msgctxt "QObject|means nautical miles"
+#~ msgid "nm"
+#~ msgstr "m"
+
+#, fuzzy
+#~| msgid "Nation"
+#~ msgctxt "MarbleNavigationSettingsWidget|"
+#~ msgid "&Drag location:"
+#~ msgstr "Nåcion"
+
+#, fuzzy
+#~| msgid "&Set Home Location"
+#~ msgctxt "MarbleNavigationSettingsWidget|"
+#~ msgid "&Inertial globe rotation"
+#~ msgstr "&Defini l' plaece di vosse måjhon"
+
+#, fuzzy
+#~| msgid "&Set Home Location"
+#~ msgctxt "MarbleNavigationSettingsWidget|"
+#~ msgid "Show Home Location"
+#~ msgstr "&Defini l' plaece di vosse måjhon"
+
+#, fuzzy
+#~| msgid "File View"
+#~ msgctxt "MarbleNavigator|"
+#~ msgid "Reset View"
+#~ msgstr "Vuwe do fitchî"
+
+#, fuzzy
+#~| msgid "&Help"
+#~ msgctxt "MarbleNavigator|"
+#~ msgid "Home"
+#~ msgstr "&Aidance"
+
+#, fuzzy
+#~| msgid "-"
+#~ msgctxt "MarbleNavigator|"
+#~ msgid "-"
+#~ msgstr "-"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid ""
+#~ "<br/>(c) %1 The Marble Project<br /><br/><a href=\"https://edu.kde.org/"
+#~ "marble\">https://edu.kde.org/marble</a>"
+#~ msgstr ""
+#~ "<br />© 2007, 2008, 2009 Li Pordjet Marble<br /><br /><a href=\"http://"
+#~ "edu.kde.org/marble\">http://edu.kde.org/marble</a>"
+
+#, fuzzy
+#~ msgctxt "MarblePluginSettingsWidget|"
+#~ msgid "P&lugins"
+#~ msgstr "Tchôke-divins di sayaedje"
+
+#, fuzzy
+#~ msgctxt "MarbleTimeSettingsWidget|"
+#~ msgid "Choose Time zone"
+#~ msgstr "Tchôke-divins des Markes di plaeces"
+
+#, fuzzy
+#~| msgid "Copy Coordinates"
+#~ msgctxt "MarbleTimeSettingsWidget|"
+#~ msgid "Universal Time Coordinated"
+#~ msgstr "Copyî cordinêyes"
+
+#, fuzzy
+#~| msgid "Stars Plugin"
+#~ msgctxt "MarbleTimeSettingsWidget|"
+#~ msgid "Load last session time"
+#~ msgstr "Tchôke-divins Stoeles"
+
+#, fuzzy
+#~| msgid "Total Distance: %1 m"
+#~ msgctxt "MarbleViewSettingsWidget|"
+#~ msgid "&Distance:"
+#~ msgstr "Distance totåle : %1 m"
+
+#, fuzzy
+#~| msgid "Nation"
+#~ msgctxt "MarbleViewSettingsWidget|"
+#~ msgid "During &animations:"
+#~ msgstr "Nåcion"
+
+#, fuzzy
+#~ msgctxt "MarbleViewSettingsWidget|"
+#~ msgid "&Place names:"
+#~ msgstr "Tchôke-divins des Markes di plaeces"
+
+#, fuzzy
+#~| msgid "&Copy Map"
+#~ msgctxt "MarbleWebView|"
+#~ msgid "Copy"
+#~ msgstr "&Copyî mape"
+
+#, fuzzy
+#~| msgid "Copy Coordinates"
+#~ msgctxt "Marble::MarbleWidgetPopupMenu|"
+#~ msgid "Copy Coordinates"
+#~ msgstr "Copyî cordinêyes"
+
+#, fuzzy
+#~| msgid "Mountain"
+#~ msgctxt "Marble::MarbleWidgetPopupMenu|"
+#~ msgid "Directions &from here"
+#~ msgstr "Montinne"
+
+#, fuzzy
+#~| msgid "Mountain"
+#~ msgctxt "Marble::MarbleWidgetPopupMenu|"
+#~ msgid "Directions &to here"
+#~ msgstr "Montinne"
+
+#, fuzzy
+#~ msgctxt "Marble::MarbleWidgetPopupMenu|"
+#~ msgid "Add &Bookmark"
+#~ msgstr "Tchôke-divins des Markes di plaeces"
+
+#, fuzzy
+#~| msgid "&Full Screen Mode"
+#~ msgctxt "Marble::MarbleWidgetPopupMenu|"
+#~ msgid "&Full Screen Mode"
+#~ msgstr "Môde &tote li waitroûle"
+
+#, fuzzy
+#~| msgid "&About"
+#~ msgctxt "Marble::MarbleWidgetPopupMenu|"
+#~ msgid "&About"
+#~ msgstr "Åd fw&ait"
+
+#, fuzzy
+#~| msgid "Show Navigation Panel"
+#~ msgctxt "Marble::MarbleWidgetPopupMenu|"
+#~ msgid "&Address Details"
+#~ msgstr "Mostrer l' panea di naiviaedje"
+
+#, fuzzy
+#~| msgid "not available"
+#~ msgctxt "Marble::MarbleWidgetPopupMenu|"
+#~ msgid "No description available."
+#~ msgstr "nén disponibe"
+
+#, fuzzy
+#~| msgid "Regional Capital"
+#~ msgctxt "Marble::MarbleWidgetPopupMenu|"
+#~ msgid "National Capital"
+#~ msgstr "Mwaisse veye redjonåle"
+
+#, fuzzy
+#~| msgid "City"
+#~ msgctxt "Marble::MarbleWidgetPopupMenu|"
+#~ msgid "City"
+#~ msgstr "Veye"
+
+#, fuzzy
+#~| msgid "Capital"
+#~ msgctxt "Marble::MarbleWidgetPopupMenu|"
+#~ msgid "State Capital"
+#~ msgstr "Mwaisse veye"
+
+#, fuzzy
+#~| msgid "Capital"
+#~ msgctxt "Marble::MarbleWidgetPopupMenu|"
+#~ msgid "County Capital"
+#~ msgstr "Mwaisse veye"
+
+#, fuzzy
+#~| msgid "Capital"
+#~ msgctxt "Marble::MarbleWidgetPopupMenu|"
+#~ msgid "Capital"
+#~ msgstr "Mwaisse veye"
+
+#, fuzzy
+#~ msgctxt "Marble::MovieCapture|"
+#~ msgid "SWF"
+#~ msgstr "N"
+
+#, fuzzy
+#~| msgid "&Stars"
+#~ msgctxt "Marble::MovieCaptureDialog|Start recording a movie"
+#~ msgid "&Start"
+#~ msgstr "&Sitoeles"
+
+#, fuzzy
+#~| msgid "not available"
+#~ msgctxt "Marble::MovieCaptureDialog|"
+#~ msgid "Codecs are unavailable"
+#~ msgstr "nén disponibe"
+
+#, fuzzy
+#~ msgctxt "Marble::MovieCaptureDialog|"
+#~ msgid "Save video file"
+#~ msgstr "Schaper fitchî"
+
+#, fuzzy
+#~| msgid "The file is not a valid DGML 2.0 file"
+#~ msgctxt "Marble::MovieCaptureDialog|"
+#~ msgid "Filename is not valid"
+#~ msgstr "Li fitchî n' est nén on fitchî DGML 2.0 valåbe"
+
+#, fuzzy
+#~| msgid "Mountain"
+#~ msgctxt "MovieCaptureDialog|"
+#~ msgid "Movie Recording"
+#~ msgstr "Montinne"
+
+#, fuzzy
+#~| msgid "&Open..."
+#~ msgctxt "MovieCaptureDialog|"
+#~ msgid "Open..."
+#~ msgstr "&Drovi..."
+
+#, fuzzy
+#~| msgid "&New Bookmark Folder"
+#~ msgctxt "UiNewBookmarkFolderDialog|"
+#~ msgid "New Bookmark Folder"
+#~ msgstr "&Novea ridant des rmarkes"
+
+#, fuzzy
+#~| msgid "Name"
+#~ msgctxt "Marble::OsmRelationEditorDialog|"
+#~ msgid "Name"
+#~ msgstr "No"
+
+#, fuzzy
+#~| msgid "Nation"
+#~ msgctxt "Marble::OsmRelationManagerWidget|"
+#~ msgid "New Relation"
+#~ msgstr "Nåcion"
+
+#, fuzzy
+#~| msgid "&Copy Map"
+#~ msgctxt "Marble::OsmRelationManagerWidget|"
+#~ msgid "Remove"
+#~ msgstr "&Copyî mape"
+
+#, fuzzy
+#~| msgid "&Edit"
+#~ msgctxt "Marble::OsmRelationManagerWidget|"
+#~ msgid "Edit"
+#~ msgstr "&Candjî"
+
+#, fuzzy
+#~| msgid "Current Location"
+#~ msgctxt "OsmRelationManagerWidgetPrivate|"
+#~ msgid "Current Relations"
+#~ msgstr "Eplaeçmint do moumint"
+
+#, fuzzy
+#~| msgid "Name"
+#~ msgctxt "OsmRelationManagerWidgetPrivate|"
+#~ msgid "Name"
+#~ msgstr "No"
+
+#, fuzzy
+#~| msgid "Elevation extreme"
+#~ msgctxt "OsmRelationManagerWidgetPrivate|"
+#~ msgid "Add Relation"
+#~ msgstr "Nouzome hôteur"
+
+#, fuzzy
+#~| msgid "Nation"
+#~ msgctxt "QObject|"
+#~ msgid "New Relation"
+#~ msgstr "Nåcion"
+
+#, fuzzy
+#~| msgid "Current Location"
+#~ msgctxt "OsmTagEditorWidgetPrivate|"
+#~ msgid "Current Tags"
+#~ msgstr "Eplaeçmint do moumint"
+
+#, fuzzy
+#~| msgid "Open File"
+#~ msgctxt "QObject|"
+#~ msgid "Open File"
+#~ msgstr "Drovi fitchî"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "All Supported Files (*.png)"
+#~ msgstr ""
+#~ "Tos les fitchîs sopoirtés (*.gpx *.kml);;dinêyes GPS (*.gpx);;KML di "
+#~ "Google Earth (*.kml)"
+
+#, fuzzy
+#~| msgid "Name"
+#~ msgctxt "PlacemarkEditHeaderPrivate|"
+#~ msgid "Name:"
+#~ msgstr "No"
+
+#, fuzzy
+#~| msgid "Lock Position"
+#~ msgctxt "PlacemarkEditHeaderPrivate|"
+#~ msgid "Position:"
+#~ msgstr "Eclawer eplaeçmint"
+
+#, fuzzy
+#~ msgctxt "Marble::PlacemarkPositionProviderPlugin|"
+#~ msgid "Placemark position provider Plugin"
+#~ msgstr "Tchôke-divins GeoRender"
+
+#, fuzzy
+#~ msgctxt "Marble::PlacemarkPositionProviderPlugin|"
+#~ msgid "Placemark"
+#~ msgstr "Tchôke-divins des Markes di plaeces"
+
+#, fuzzy
+#~| msgctxt "the planet"
+#~| msgid "Mercury"
+#~ msgctxt "QObject|the planet"
+#~ msgid "Mercury"
+#~ msgstr "Mercure"
+
+#, fuzzy
+#~| msgctxt "the planet"
+#~| msgid "Venus"
+#~ msgctxt "QObject|the planet"
+#~ msgid "Venus"
+#~ msgstr "Venus"
+
+#, fuzzy
+#~| msgctxt "the planet"
+#~| msgid "Earth"
+#~ msgctxt "QObject|the planet"
+#~ msgid "Earth"
+#~ msgstr "Daegne"
+
+#, fuzzy
+#~| msgctxt "the planet"
+#~| msgid "Mars"
+#~ msgctxt "QObject|the planet"
+#~ msgid "Mars"
+#~ msgstr "Måss"
+
+#, fuzzy
+#~| msgctxt "the planet"
+#~| msgid "Jupiter"
+#~ msgctxt "QObject|the planet"
+#~ msgid "Jupiter"
+#~ msgstr "Djupiter"
+
+#, fuzzy
+#~| msgctxt "the planet"
+#~| msgid "Saturn"
+#~ msgctxt "QObject|the planet"
+#~ msgid "Saturn"
+#~ msgstr "Satûne"
+
+#, fuzzy
+#~| msgctxt "the planet"
+#~| msgid "Uranus"
+#~ msgctxt "QObject|the planet"
+#~ msgid "Uranus"
+#~ msgstr "Uranus"
+
+#, fuzzy
+#~| msgctxt "the planet"
+#~| msgid "Neptune"
+#~ msgctxt "QObject|the planet"
+#~ msgid "Neptune"
+#~ msgstr "Neptune"
+
+#, fuzzy
+#~| msgctxt "the planet"
+#~| msgid "Pluto"
+#~ msgctxt "QObject|the planet"
+#~ msgid "Pluto"
+#~ msgstr "Pluton"
+
+#, fuzzy
+#~| msgctxt "the earth's star"
+#~| msgid "Sun"
+#~ msgctxt "QObject|the earth's star"
+#~ msgid "Sun"
+#~ msgstr "Solea"
+
+#, fuzzy
+#~| msgctxt "the earth's moon"
+#~| msgid "Moon"
+#~ msgctxt "QObject|the earth's moon"
+#~ msgid "Moon"
+#~ msgstr "Lune"
+
+#, fuzzy
+#~| msgctxt "a planet without data"
+#~| msgid "Unknown Planet"
+#~ msgctxt "QObject|a planet without data"
+#~ msgid "Unknown Planet"
+#~ msgstr "Planete nén cnoxhowe"
+
+#, fuzzy
+#~ msgctxt "Marble::PluginAboutDialog|"
+#~ msgid "About %1"
+#~ msgstr "Åd fw&ait"
+
+#, fuzzy
+#~| msgid "Version %1"
+#~ msgctxt "Marble::PluginAboutDialog|"
+#~ msgid "Version %1"
+#~ msgstr "Modêye %1"
+
+#, fuzzy
+#~ msgctxt "PluginAuthor|"
+#~ msgid "Developer"
+#~ msgstr "<b>Diswalpeus</b>"
+
+#, fuzzy
+#~ msgctxt "Marble::PluginItemDelegate|"
+#~ msgid "Configure"
+#~ msgstr "Apontyî l' contrôle do solea"
+
+#, fuzzy
+#~| msgctxt "a planet without data"
+#~| msgid "Unknown Planet"
+#~ msgctxt "QObject|"
+#~ msgid "Unknown error"
+#~ msgstr "Planete nén cnoxhowe"
+
+#, fuzzy
+#~| msgid "Marble"
+#~ msgctxt "PrintOptions|"
+#~ msgid "Marble"
+#~ msgstr "Marble"
+
+#, fuzzy
+#~| msgid "Legend"
+#~ msgctxt "PrintOptions|"
+#~ msgid "Legend"
+#~ msgstr "Ledjinde"
+
+#, fuzzy
+#~| msgid "Export Map"
+#~ msgctxt "PrintOptions|"
+#~ msgid "Route"
+#~ msgstr "Ebaguer mape"
+
+#, fuzzy
+#~| msgid "Navigation"
+#~ msgctxt "PrintOptions|"
+#~ msgid "Driving Instructions"
+#~ msgstr "Naiviaedje"
+
+#, fuzzy
+#~| msgid "&Copy Map"
+#~ msgctxt "QObject|"
+#~ msgid "Flat Map"
+#~ msgstr "&Copyî mape"
+
+#, fuzzy
+#~| msgid "Map View"
+#~ msgctxt "QObject|"
+#~ msgid "Mercator"
+#~ msgstr "Vuwe del mape"
+
+#, fuzzy
+#~| msgid "File View"
+#~ msgctxt "QObject|"
+#~ msgid "Globe"
+#~ msgstr "Vuwe do fitchî"
+
+#, fuzzy
+#~| msgid "Copy Coordinates"
+#~ msgctxt "QObject|"
+#~ msgid "Stereographic"
+#~ msgstr "Copyî cordinêyes"
+
+#, fuzzy
+#~ msgctxt "Marble::QtMarbleConfigDialog|"
+#~ msgid "View"
+#~ msgstr "&Vey"
+
+#, fuzzy
+#~| msgid "Navigation"
+#~ msgctxt "Marble::QtMarbleConfigDialog|"
+#~ msgid "Navigation"
+#~ msgstr "Naiviaedje"
+
+#, fuzzy
+#~| msgid "Mountain"
+#~ msgctxt "Marble::QtMarbleConfigDialog|"
+#~ msgid "Routing"
+#~ msgstr "Montinne"
+
+#, fuzzy
+#~ msgctxt "Marble::QtMarbleConfigDialog|"
+#~ msgid "Plugins"
+#~ msgstr "Tchôke-divins di sayaedje"
+
+#, fuzzy
+#~ msgctxt "Marble::RemoveItemEditWidget|"
+#~ msgid "Choose item:"
+#~ msgstr "Tchôke-divins des Markes di plaeces"
+
+#, fuzzy
+#~ msgctxt "Marble::RouteSimulationPositionProviderPlugin|"
+#~ msgid "Current Route Position Provider Plugin"
+#~ msgstr "Tchôke-divins GeoRender"
+
+#, fuzzy
+#~| msgid "Export Map"
+#~ msgctxt "Marble::RouteSimulationPositionProviderPlugin|"
+#~ msgid "Current Route"
+#~ msgstr "Ebaguer mape"
+
+#, fuzzy
+#~| msgid "Continent"
+#~ msgctxt "QObject|"
+#~ msgid "Continue."
+#~ msgstr "Continint"
+
+#, fuzzy
+#~| msgid "Continent"
+#~ msgctxt "QObject|"
+#~ msgid "Continue onto %1."
+#~ msgstr "Continint"
+
+#, fuzzy
+#~| msgid "Continent"
+#~ msgctxt "QObject|"
+#~ msgid "Merge onto %1."
+#~ msgstr "Continint"
+
+#, fuzzy
+#~| msgid "Continent"
+#~ msgctxt "QObject|"
+#~ msgid "Continue on %1."
+#~ msgstr "Continint"
+
+#, fuzzy
+#~| msgid "&Copy Map"
+#~ msgctxt "QObject|"
+#~ msgid "Remove via point"
+#~ msgstr "&Copyî mape"
+
+#, fuzzy
+#~| msgid "Current Location"
+#~ msgctxt "QObject|"
+#~ msgid "Current &Location"
+#~ msgstr "Eplaeçmint do moumint"
+
+#, fuzzy
+#~| msgid "&Export Map..."
+#~ msgctxt "QObject|"
+#~ msgid "From &Map..."
+#~ msgstr "&Ebaguer mape..."
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "From &Bookmark"
+#~ msgstr "Tchôke-divins des Markes di plaeces"
+
+#, fuzzy
+#~| msgid "&Help"
+#~ msgctxt "QObject|"
+#~ msgid "&Home"
+#~ msgstr "&Aidance"
+
+#, fuzzy
+#~| msgid "Current Location"
+#~ msgctxt "Marble::RoutingInputWidget|"
+#~ msgid "Current Location"
+#~ msgstr "Eplaeçmint do moumint"
+
+#, fuzzy
+#~ msgctxt "Marble::RoutingInputWidget|"
+#~ msgid "Choose Placemark"
+#~ msgstr "Tchôke-divins des Markes di plaeces"
+
+#, fuzzy
+#~| msgid "&Copy Map"
+#~ msgctxt "QObject|"
+#~ msgid "&Remove this Destination"
+#~ msgstr "&Copyî mape"
+
+#, fuzzy
+#~| msgid "&Export Map..."
+#~ msgctxt "QObject|"
+#~ msgid "&Export Route..."
+#~ msgstr "&Ebaguer mape..."
+
+#, fuzzy
+#~| msgid "Export Map"
+#~ msgctxt "Marble::RoutingLayer|"
+#~ msgid "Export Route"
+#~ msgstr "Ebaguer mape"
+
+#, fuzzy
+#~| msgid "GpxFile (*.gpx)"
+#~ msgctxt "Marble::RoutingLayer|"
+#~ msgid "GPX and KML files (*.gpx *.kml)"
+#~ msgstr "FitchîGpx (*.gpx)"
+
+#, fuzzy
+#~| msgid "Mountain"
+#~ msgctxt "Marble::RoutingManager|"
+#~ msgid "Guidance Mode"
+#~ msgstr "Montinne"
+
+#, fuzzy
+#~| msgid "Show Navigation Panel"
+#~ msgctxt "Marble::RoutingManager|"
+#~ msgid "Show again"
+#~ msgstr "Mostrer l' panea di naiviaedje"
+
+#, fuzzy
+#~| msgid "Configure Sun Control"
+#~ msgctxt "RoutingProfileSettingsDialog|"
+#~ msgid "Configure Routing Profile"
+#~ msgstr "Apontyî l' mwaistraedje do solea"
+
+#, fuzzy
+#~| msgid "Name"
+#~ msgctxt "RoutingProfileSettingsDialog|"
+#~ msgid "Name:"
+#~ msgstr "No"
+
+#, fuzzy
+#~| msgid "&Settings"
+#~ msgctxt "RoutingProfileSettingsDialog|"
+#~ msgid "Service Settings"
+#~ msgstr "&Apontiaedjes"
+
+#, fuzzy
+#~| msgid "not available"
+#~ msgctxt "RoutingProfileSettingsDialog|"
+#~ msgid "No configuration available"
+#~ msgstr "nén disponibe"
+
+#, fuzzy
+#~ msgctxt "RoutingProfileSettingsDialog|"
+#~ msgid "Configure"
+#~ msgstr "Apontyî l' contrôle do solea"
+
+#, fuzzy
+#~| msgctxt "a planet without data"
+#~| msgid "Unknown Planet"
+#~ msgctxt "Marble::RoutingProfilesModel|"
+#~ msgid "Unknown"
+#~ msgstr "Planete nén cnoxhowe"
+
+#, fuzzy
+#~| msgid "Elevation extreme"
+#~ msgctxt "Marble::RoutingProfilesWidget|"
+#~ msgid "New Profile"
+#~ msgstr "Nouzome hôteur"
+
+#, fuzzy
+#~ msgctxt "RoutingSettingsWidget|"
+#~ msgid "&Configure..."
+#~ msgstr "Apontyî l' contrôle do solea"
+
+#, fuzzy
+#~| msgid "&Copy Map"
+#~ msgctxt "RoutingSettingsWidget|"
+#~ msgid "&Remove"
+#~ msgstr "&Copyî mape"
+
+#, fuzzy
+#~| msgid "Mountain"
+#~ msgctxt "QObject|"
+#~ msgid "Get Directions"
+#~ msgstr "Montinne"
+
+#, fuzzy
+#~| msgid "Export Map"
+#~ msgctxt "QObject|"
+#~ msgid "Open Route"
+#~ msgstr "Ebaguer mape"
+
+#, fuzzy
+#~| msgid "Export Map"
+#~ msgctxt "QObject|"
+#~ msgid "Save Route"
+#~ msgstr "Ebaguer mape"
+
+#, fuzzy
+#~| msgid "Export Map"
+#~ msgctxt "QObject|"
+#~ msgid "Preview Route"
+#~ msgstr "Ebaguer mape"
+
+#, fuzzy
+#~| msgid "Download finished."
+#~ msgctxt "QObject|"
+#~ msgid "Manage Cloud Routes"
+#~ msgstr "L' aberwetaedje a fni."
+
+#, fuzzy
+#~| msgid "Path"
+#~ msgctxt "QObject|"
+#~ msgid "Add Via"
+#~ msgstr "Tchimin"
+
+#, fuzzy
+#~| msgid "Export Map"
+#~ msgctxt "QObject|"
+#~ msgid "Reverse Route"
+#~ msgstr "Ebaguer mape"
+
+#, fuzzy
+#~| msgid "Export Map"
+#~ msgctxt "QObject|"
+#~ msgid "Clear Route"
+#~ msgstr "Ebaguer mape"
+
+#, fuzzy
+#~| msgid "&Settings"
+#~ msgctxt "QObject|"
+#~ msgid "Settings"
+#~ msgstr "&Apontiaedjes"
+
+#, fuzzy
+#~| msgid "Placemarks Plugin"
+#~ msgctxt "Marble::RoutingWidget|"
+#~ msgid "placemarks found: %1"
+#~ msgstr "Tchôke-divins des Markes di plaeces"
+
+#, fuzzy
+#~| msgid "Placemarks Plugin"
+#~ msgctxt "Marble::RoutingWidget|"
+#~ msgid "No placemark found"
+#~ msgstr "Tchôke-divins des Markes di plaeces"
+
+#, fuzzy
+#~| msgid "Placemarks Plugin"
+#~ msgctxt "Marble::RoutingWidget|"
+#~ msgid "No route found"
+#~ msgstr "Tchôke-divins des Markes di plaeces"
+
+#, fuzzy
+#~| msgid "Placemarks Plugin"
+#~ msgctxt "Marble::RoutingWidget|"
+#~ msgid "routes found: %1"
+#~ msgstr "Tchôke-divins des Markes di plaeces"
+
+#, fuzzy
+#~| msgid "Export Map"
+#~ msgctxt "Marble::RoutingWidget|"
+#~ msgid "Open Route"
+#~ msgstr "Ebaguer mape"
+
+#, fuzzy
+#~| msgid "GpxFile (*.gpx)"
+#~ msgctxt "Marble::RoutingWidget|"
+#~ msgid "KML Files (*.kml)"
+#~ msgstr "FitchîGpx (*.gpx)"
+
+#, fuzzy
+#~| msgid "Export Map"
+#~ msgctxt "Marble::RoutingWidget|"
+#~ msgid "Save Route"
+#~ msgstr "Ebaguer mape"
+
+#, fuzzy
+#~| msgid "GpxFile (*.gpx)"
+#~ msgctxt "Marble::RoutingWidget|"
+#~ msgid "KML files (*.kml)"
+#~ msgstr "FitchîGpx (*.gpx)"
+
+#, fuzzy
+#~| msgid "&Export Map..."
+#~ msgctxt "Marble::RoutingWidget|"
+#~ msgid "Uploading route..."
+#~ msgstr "&Ebaguer mape..."
+
+#, fuzzy
+#~| msgid "Show Navigation Panel"
+#~ msgctxt "RoutingWidget|"
+#~ msgid "Show Details"
+#~ msgstr "Mostrer l' panea di naiviaedje"
+
+#, fuzzy
+#~| msgid "m"
+#~ msgctxt "Marble::RoutingRunner|"
+#~ msgid "m"
+#~ msgstr "m"
+
+#, fuzzy
+#~| msgid "m"
+#~ msgctxt "Marble::RoutingRunner|"
+#~ msgid "mi"
+#~ msgstr "m"
+
+#, fuzzy
+#~| msgid "ft"
+#~ msgctxt "Marble::RoutingRunner|"
+#~ msgid "ft"
+#~ msgstr "pî"
+
+#, fuzzy
+#~| msgid "km"
+#~ msgctxt "Marble::RoutingRunner|"
+#~ msgid "km"
+#~ msgstr "km"
+
+#, fuzzy
+#~| msgid "m"
+#~ msgctxt "Marble::RoutingRunner|"
+#~ msgid "nm"
+#~ msgstr "m"
+
+#, fuzzy
+#~| msgctxt "the planet"
+#~| msgid "Earth"
+#~ msgctxt "QObject|"
+#~ msgid "Search Results"
+#~ msgstr "Daegne"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "Search for '%1'"
+#~ msgstr "Traitoe"
+
+#, fuzzy
+#~| msgid "Open File"
+#~ msgctxt "Marble::SoundCueEditWidget|"
+#~ msgid "Select sound files..."
+#~ msgstr "Drovi fitchî"
+
+#, fuzzy
+#~ msgctxt "Marble::SoundCueEditWidget|"
+#~ msgid "Supported Sound Files (*.mp3 *.ogg *.wav)"
+#~ msgstr ""
+#~ "Tos les fitchîs sopoirtés (*.gpx *.kml);;dinêyes GPS (*.gpx);;KML di "
+#~ "Google Earth (*.kml)"
+
+#, fuzzy
+#~| msgid "S&un Control..."
+#~ msgctxt "SunControlWidget|"
+#~ msgid "Sun Control"
+#~ msgstr "Mwaistraedje do s&olea..."
+
+#, fuzzy
+#~| msgid "&Edit Map"
+#~ msgctxt "SunControlWidget|"
+#~ msgid "&Night Map"
+#~ msgstr "&Candjî mape"
+
+#, fuzzy
+#~| msgid "Overview Map"
+#~ msgctxt "TileCreatorDialog|"
+#~ msgid "Creating Map"
+#~ msgstr "Mwaisse vuwe del mape"
+
+#, fuzzy
+#~| msgid "&Time Control..."
+#~ msgctxt "TimeControlWidget|"
+#~ msgid "Time Control"
+#~ msgstr "Mwaistraedje do &tins..."
+
+#, fuzzy
+#~| msgid "Current Location"
+#~ msgctxt "TimeControlWidget|"
+#~ msgid "&New date and time:"
+#~ msgstr "Eplaeçmint do moumint"
+
+#, fuzzy
+#~| msgid "Current Location"
+#~ msgctxt "TimeControlWidget|"
+#~ msgid "Current &date and time:"
+#~ msgstr "Eplaeçmint do moumint"
+
+#, fuzzy
+#~| msgid "not available"
+#~ msgctxt "Marble::TourCaptureDialog|"
+#~ msgid "Codecs are unavailable"
+#~ msgstr "nén disponibe"
+
+#, fuzzy
+#~ msgctxt "Marble::TourCaptureDialog|"
+#~ msgid "Save video file"
+#~ msgstr "Schaper fitchî"
+
+#, fuzzy
+#~| msgid "The file is not a valid DGML 2.0 file"
+#~ msgctxt "Marble::TourCaptureDialog|"
+#~ msgid "Filename is not valid"
+#~ msgstr "Li fitchî n' est nén on fitchî DGML 2.0 valåbe"
+
+#, fuzzy
+#~| msgid "&Stars"
+#~ msgctxt "Marble::TourCaptureDialog|"
+#~ msgid "Start"
+#~ msgstr "&Sitoeles"
+
+#, fuzzy
+#~| msgid "Mountain"
+#~ msgctxt "TourCaptureDialog|"
+#~ msgid "Movie Recording"
+#~ msgstr "Montinne"
+
+#, fuzzy
+#~| msgid "&Open..."
+#~ msgctxt "TourCaptureDialog|"
+#~ msgid "Open..."
+#~ msgstr "&Drovi..."
+
+#, fuzzy
+#~| msgid "&Stars"
+#~ msgctxt "TourCaptureDialog|"
+#~ msgid "Start"
+#~ msgstr "&Sitoeles"
+
+#, fuzzy
+#~| msgid "Export Map"
+#~ msgctxt "Marble::TourItemDelegate|"
+#~ msgid "Play the tour"
+#~ msgstr "Ebaguer mape"
+
+#, fuzzy
+#~| msgid "Export Map"
+#~ msgctxt "Marble::TourItemDelegate|"
+#~ msgid "Pause the tour"
+#~ msgstr "Ebaguer mape"
+
+#, fuzzy
+#~| msgid "&Copy Map"
+#~ msgctxt "Marble::TourItemDelegate|"
+#~ msgid "Create item %1"
+#~ msgstr "&Copyî mape"
+
+#, fuzzy
+#~| msgid "&Copy Map"
+#~ msgctxt "Marble::TourItemDelegate|"
+#~ msgid "Remove item %1"
+#~ msgstr "&Copyî mape"
+
+#, fuzzy
+#~| msgid "&Copy Map"
+#~ msgctxt "Marble::TourItemDelegate|"
+#~ msgid "Change item %1"
+#~ msgstr "&Copyî mape"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "Add Placemark to Tour"
+#~ msgstr "Tchôke-divins des Markes di plaeces"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "Change Placemark in Tour"
+#~ msgstr "Tchôke-divins des Markes di plaeces"
+
+#, fuzzy
+#~| msgid "Path"
+#~ msgctxt "QObject|"
+#~ msgid "Add Wait"
+#~ msgstr "Tchimin"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "Add Placemark"
+#~ msgstr "Tchôke-divins des Markes di plaeces"
+
+#, fuzzy
+#~| msgid "Placemarks Plugin"
+#~ msgctxt "QObject|"
+#~ msgid "Remove placemark"
+#~ msgstr "Tchôke-divins des Markes di plaeces"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "Change placemark"
+#~ msgstr "Tchôke-divins des Markes di plaeces"
+
+#, fuzzy
+#~| msgid "Export Map"
+#~ msgctxt "QObject|"
+#~ msgid "Save tour"
+#~ msgstr "Ebaguer mape"
+
+#, fuzzy
+#~| msgid "Export Map"
+#~ msgctxt "QObject|"
+#~ msgid "Open Tour"
+#~ msgstr "Ebaguer mape"
+
+#, fuzzy
+#~| msgid "GpxFile (*.gpx)"
+#~ msgctxt "QObject|"
+#~ msgid "KML Tours (*.kml)"
+#~ msgstr "FitchîGpx (*.gpx)"
+
+#, fuzzy
+#~| msgid "&Copy Map"
+#~ msgctxt "QObject|"
+#~ msgid "Remove Selected Items"
+#~ msgstr "&Copyî mape"
+
+#, fuzzy
+#~| msgid "Export Map"
+#~ msgctxt "QObject|"
+#~ msgid "Save Tour as"
+#~ msgstr "Ebaguer mape"
+
+#, fuzzy
+#~| msgid "Export Map"
+#~ msgctxt "TourWidget|"
+#~ msgid "Tour"
+#~ msgstr "Ebaguer mape"
+
+#, fuzzy
+#~| msgid "Export Map"
+#~ msgctxt "TourWidget|"
+#~ msgid "New Tour"
+#~ msgstr "Ebaguer mape"
+
+#, fuzzy
+#~| msgid "Export Map"
+#~ msgctxt "TourWidget|"
+#~ msgid "Save Tour"
+#~ msgstr "Ebaguer mape"
+
+#, fuzzy
+#~| msgid "Export Map"
+#~ msgctxt "TourWidget|"
+#~ msgid "Save Tour As"
+#~ msgstr "Ebaguer mape"
+
+#, fuzzy
+#~| msgid "Export Map"
+#~ msgctxt "TourWidget|"
+#~ msgid "Open Tour"
+#~ msgstr "Ebaguer mape"
+
+#, fuzzy
+#~| msgid "Export Map"
+#~ msgctxt "TourWidget|"
+#~ msgid "Record tour"
+#~ msgstr "Ebaguer mape"
+
+#, fuzzy
+#~| msgid "Nation"
+#~ msgctxt "Marble::WaitEditWidget|"
+#~ msgid "Wait duration:"
+#~ msgstr "Nåcion"
+
+#, fuzzy
+#~ msgctxt "Marble::FlightGearPositionProviderPlugin|"
+#~ msgid "FlightGear position provider Plugin"
+#~ msgstr "Tchôke-divins GeoRender"
+
+#, fuzzy
+#~ msgctxt "Marble::GeoCluePositionProviderPlugin|"
+#~ msgid "GeoClue position provider Plugin"
+#~ msgstr "Tchôke-divins GeoRender"
+
+#, fuzzy
+#~ msgctxt "Marble::GpsdPositionProviderPlugin|"
+#~ msgid "Gpsd position provider Plugin"
+#~ msgstr "Tchôke-divins GeoRender"
+
+#, fuzzy
+#~ msgctxt "Marble::QtPositioningPositionProviderPlugin|"
+#~ msgid "Qt Positioning Position Provider Plugin"
+#~ msgstr "Tchôke-divins GeoRender"
+
+#, fuzzy
+#~| msgid "&Set Home Location"
+#~ msgctxt "Marble::QtPositioningPositionProviderPlugin|"
+#~ msgid "Qt Positioning Location"
+#~ msgstr "&Defini l' plaece di vosse måjhon"
+
+#, fuzzy
+#~ msgctxt "Marble::WlocatePositionProviderPlugin|"
+#~ msgid "Wlocate Position Provider Plugin"
+#~ msgstr "Tchôke-divins GeoRender"
+
+#, fuzzy
+#~ msgctxt "Marble::AnnotatePlugin|"
+#~ msgid "Annotation"
+#~ msgstr "Schaper fitchî"
+
+#, fuzzy
+#~ msgctxt "Marble::AnnotatePlugin|"
+#~ msgid "&Annotation"
+#~ msgstr "Schaper fitchî"
+
+#, fuzzy
+#~ msgctxt "Marble::AnnotatePlugin|"
+#~ msgid "Annotations"
+#~ msgstr "Schaper fitchî"
+
+#, fuzzy
+#~| msgid "&Copy Map"
+#~ msgctxt "QObject|"
+#~ msgid "Remove current item"
+#~ msgstr "&Copyî mape"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "Clear all annotations"
+#~ msgstr "Schaper fitchî"
+
+#, fuzzy
+#~ msgctxt "Marble::AnnotatePlugin|"
+#~ msgid "Save Annotation File"
+#~ msgstr "Schaper fitchî"
+
+#, fuzzy
+#~ msgctxt "Marble::AnnotatePlugin|"
+#~ msgid ""
+#~ "All Supported Files (*.kml *.osm);;KML file (*.kml);;Open Street Map file "
+#~ "(*.osm)"
+#~ msgstr ""
+#~ "Tos les fitchîs sopoirtés (*.gpx *.kml);;dinêyes GPS (*.gpx);;KML di "
+#~ "Google Earth (*.kml)"
+
+#, fuzzy
+#~ msgctxt "Marble::AnnotatePlugin|"
+#~ msgid "Open Annotation File"
+#~ msgstr "Drovi fitchî"
+
+#, fuzzy
+#~ msgctxt "Marble::AnnotatePlugin|"
+#~ msgid ""
+#~ "All Supported Files (*.kml *.osm);;Kml Annotation file (*.kml);;Open "
+#~ "Street Map file (*.osm)"
+#~ msgstr ""
+#~ "Tos les fitchîs sopoirtés (*.gpx *.kml);;dinêyes GPS (*.gpx);;KML di "
+#~ "Google Earth (*.kml)"
+
+#, fuzzy
+#~| msgid "&Copy Map"
+#~ msgctxt "Marble::AnnotatePlugin|"
+#~ msgid "Select Item"
+#~ msgstr "&Copyî mape"
+
+#, fuzzy
+#~| msgid "&Copy Map"
+#~ msgctxt "Marble::AnnotatePlugin|"
+#~ msgid "Add Polygon"
+#~ msgstr "&Copyî mape"
+
+#, fuzzy
+#~ msgctxt "Marble::AnnotatePlugin|"
+#~ msgid "Add Placemark"
+#~ msgstr "Tchôke-divins des Markes di plaeces"
+
+#, fuzzy
+#~| msgid "Path"
+#~ msgctxt "Marble::AnnotatePlugin|"
+#~ msgid "Add Path"
+#~ msgstr "Tchimin"
+
+#, fuzzy
+#~| msgid "&Remove Measure Points"
+#~ msgctxt "Marble::AnnotatePlugin|"
+#~ msgid "Add Ground Overlay"
+#~ msgstr "&Oister des ponts d' muzuraedje"
+
+#, fuzzy
+#~| msgid "&Copy Map"
+#~ msgctxt "Marble::AnnotatePlugin|"
+#~ msgid "Remove Item"
+#~ msgstr "&Copyî mape"
+
+#, fuzzy
+#~| msgid "Stars Plugin"
+#~ msgctxt "Marble::AnnotatePlugin|"
+#~ msgid "Load Annotation File"
+#~ msgstr "Tchôke-divins Stoeles"
+
+#, fuzzy
+#~ msgctxt "Marble::AnnotatePlugin|"
+#~ msgid "Clear all Annotations"
+#~ msgstr "Schaper fitchî"
+
+#, fuzzy
+#~| msgid "OpenStreetMap"
+#~ msgctxt "Marble::AnnotatePlugin|"
+#~ msgid "Download OpenStreetMap Data"
+#~ msgstr "OpenStreetMap"
+
+#, fuzzy
+#~| msgid "&Copy Map"
+#~ msgctxt "Marble::AnnotatePlugin|"
+#~ msgid "Copy"
+#~ msgstr "&Copyî mape"
+
+#, fuzzy
+#~| msgid "&Copy Map"
+#~ msgctxt "Marble::AnnotatePlugin|"
+#~ msgid "Remove"
+#~ msgstr "&Copyî mape"
+
+#, fuzzy
+#~| msgid "&Remove Measure Points"
+#~ msgctxt "Marble::AnnotatePlugin|"
+#~ msgid "Untitled Ground Overlay"
+#~ msgstr "&Oister des ponts d' muzuraedje"
+
+#, fuzzy
+#~| msgid "&Copy Map"
+#~ msgctxt "Marble::AnnotatePlugin|"
+#~ msgid "Deselect All Nodes"
+#~ msgstr "&Copyî mape"
+
+#, fuzzy
+#~| msgid "&Copy Map"
+#~ msgctxt "Marble::AnnotatePlugin|"
+#~ msgid "Delete All Selected Nodes"
+#~ msgstr "&Copyî mape"
+
+#, fuzzy
+#~| msgid "&Copy Map"
+#~ msgctxt "Marble::AnnotatePlugin|"
+#~ msgid "Select Node"
+#~ msgstr "&Copyî mape"
+
+#, fuzzy
+#~| msgid "&Copy Map"
+#~ msgctxt "Marble::AnnotatePlugin|"
+#~ msgid "Delete Node"
+#~ msgstr "&Copyî mape"
+
+#, fuzzy
+#~| msgid "&Copy Map"
+#~ msgctxt "Marble::AnnotatePlugin|"
+#~ msgid "Deselect Node"
+#~ msgstr "&Copyî mape"
+
+#, fuzzy
+#~| msgid "Download finished."
+#~ msgctxt "Marble::DownloadOsmDialog|"
+#~ msgid "Download"
+#~ msgstr "L' aberwetaedje a fni."
+
+#, fuzzy
+#~| msgid "&Remove Measure Points"
+#~ msgctxt "UiEditGroundOverlayDialog|"
+#~ msgid "Edit ground overlay"
+#~ msgstr "&Oister des ponts d' muzuraedje"
+
+#, fuzzy
+#~| msgid "Description"
+#~ msgctxt "UiEditGroundOverlayDialog|"
+#~ msgid "Description"
+#~ msgstr "Discrijhaedje"
+
+#, fuzzy
+#~| msgid "Copy Coordinates"
+#~ msgctxt "UiEditGroundOverlayDialog|"
+#~ msgid "Coordinates"
+#~ msgstr "Copyî cordinêyes"
+
+#, fuzzy
+#~| msgid "N"
+#~ msgctxt "UiEditGroundOverlayDialog|"
+#~ msgid "N"
+#~ msgstr "B"
+
+#, fuzzy
+#~| msgid "W"
+#~ msgctxt "UiEditGroundOverlayDialog|"
+#~ msgid "W"
+#~ msgstr "C"
+
+#, fuzzy
+#~| msgid "E"
+#~ msgctxt "UiEditGroundOverlayDialog|"
+#~ msgid "E"
+#~ msgstr "L"
+
+#, fuzzy
+#~| msgid "S"
+#~ msgctxt "UiEditGroundOverlayDialog|"
+#~ msgid "S"
+#~ msgstr "N"
+
+#, fuzzy
+#~ msgctxt "UiEditGroundOverlayDialog|"
+#~ msgid "Rotation"
+#~ msgstr "Schaper fitchî"
+
+#, fuzzy
+#~| msgid "Elevation extreme"
+#~ msgctxt "Marble::EditPolygonDialog|"
+#~ msgid "Relations"
+#~ msgstr "Nouzome hôteur"
+
+#, fuzzy
+#~| msgid "&Copy Map"
+#~ msgctxt "Marble::EditPolygonDialog|"
+#~ msgid "Untitled Polygon"
+#~ msgstr "&Copyî mape"
+
+#, fuzzy
+#~| msgid "Name"
+#~ msgctxt "UiEditPolygonDialog|"
+#~ msgid "Name"
+#~ msgstr "No"
+
+#, fuzzy
+#~| msgid "Description"
+#~ msgctxt "UiEditPolygonDialog|"
+#~ msgid "Description"
+#~ msgstr "Discrijhaedje"
+
+#, fuzzy
+#~| msgid "Elevation extreme"
+#~ msgctxt "Marble::EditPolylineDialog|"
+#~ msgid "Relations"
+#~ msgstr "Nouzome hôteur"
+
+#, fuzzy
+#~ msgctxt "Marble::EditPolylineDialog|"
+#~ msgid "Untitled Path"
+#~ msgstr "Tchôke-divins des Markes di plaeces"
+
+#, fuzzy
+#~| msgid "Path"
+#~ msgctxt "UiEditPolylineDialog|"
+#~ msgid "Add path"
+#~ msgstr "Tchimin"
+
+#, fuzzy
+#~| msgid "Name"
+#~ msgctxt "UiEditPolylineDialog|"
+#~ msgid "Name"
+#~ msgstr "No"
+
+#, fuzzy
+#~| msgid "Description"
+#~ msgctxt "UiEditPolylineDialog|"
+#~ msgid "Description"
+#~ msgstr "Discrijhaedje"
+
+#, fuzzy
+#~| msgid "Elevation extreme"
+#~ msgctxt "Marble::NodeModel|"
+#~ msgid "Elevation"
+#~ msgstr "Nouzome hôteur"
+
+#, fuzzy
+#~| msgid "Stars Plugin"
+#~ msgctxt "AprsConfigWidget|"
+#~ msgid "APRS Plugin"
+#~ msgstr "Tchôke-divins Stoeles"
+
+#, fuzzy
+#~| msgid "&Redisplay"
+#~ msgctxt "AprsConfigWidget|"
+#~ msgid "Display"
+#~ msgstr "&Rihåyner"
+
+#, fuzzy
+#~| msgid "&File"
+#~ msgctxt "AprsConfigWidget|"
+#~ msgid "File"
+#~ msgstr "&Fitchî"
+
+#, fuzzy
+#~| msgid "&Atmosphere"
+#~ msgctxt "Marble::AtmospherePlugin|"
+#~ msgid "Atmosphere"
+#~ msgstr "&Atmosfere"
+
+#, fuzzy
+#~| msgid "&Atmosphere"
+#~ msgctxt "Marble::AtmospherePlugin|"
+#~ msgid "&Atmosphere"
+#~ msgstr "&Atmosfere"
+
+#, fuzzy
+#~| msgid "Show the application's About Box"
+#~ msgctxt "Marble::AtmospherePlugin|"
+#~ msgid "Shows the atmosphere around the earth."
+#~ msgstr "Mostrer l' boesse Åd fwait då programe"
+
+#, fuzzy
+#~ msgctxt "CompassConfigWidget|"
+#~ msgid "Configure Compass Plugin"
+#~ msgstr "Tchôke-divins Stoeles"
+
+#, fuzzy
+#~| msgid "Compass"
+#~ msgctxt "Marble::CompassFloatItem|"
+#~ msgid "Compass"
+#~ msgstr "Rôze des vints"
+
+#, fuzzy
+#~| msgid "&Compass"
+#~ msgctxt "Marble::CompassFloatItem|"
+#~ msgid "&Compass"
+#~ msgstr "&Rôze des vints"
+
+#, fuzzy
+#~| msgid "This is a float item that provides a compass."
+#~ msgctxt "Marble::CompassFloatItem|"
+#~ msgid "This is a float item that provides a compass."
+#~ msgstr "Çouchal est on cayet flotant ki dene ene rôze des vints."
+
+#, fuzzy
+#~| msgid "N"
+#~ msgctxt "Marble::CompassFloatItem|"
+#~ msgid "N"
+#~ msgstr "B"
+
+#, fuzzy
+#~| msgid "S"
+#~ msgctxt "Marble::CompassFloatItem|"
+#~ msgid "S"
+#~ msgstr "N"
+
+#, fuzzy
+#~ msgctxt "CrosshairsConfigWidget|"
+#~ msgid "Configure Crosshairs Plugin"
+#~ msgstr "Tchôke-divins Stoeles"
+
+#, fuzzy
+#~| msgid "Arctic Circle"
+#~ msgctxt "CrosshairsConfigWidget|"
+#~ msgid "Circled"
+#~ msgstr "Ceje årtike"
+
+#, fuzzy
+#~| msgid "Crosshairs"
+#~ msgctxt "Marble::CrosshairsPlugin|"
+#~ msgid "Crosshairs"
+#~ msgstr "Croes"
+
+#, fuzzy
+#~| msgid "Cross&hairs"
+#~ msgctxt "Marble::CrosshairsPlugin|"
+#~ msgid "Cross&hairs"
+#~ msgstr "C&roes"
+
+#, fuzzy
+#~| msgid "A plugin that shows crosshairs."
+#~ msgctxt "Marble::CrosshairsPlugin|"
+#~ msgid "A plugin that shows crosshairs."
+#~ msgstr "On tchôke-divins k' håyene les croes."
+
+#, fuzzy
+#~| msgctxt "the planet"
+#~| msgid "Earth"
+#~ msgctxt "EarthquakeConfigWidget|"
+#~ msgid "Configure Earthquakes Plugin"
+#~ msgstr "Daegne"
+
+#, fuzzy
+#~| msgctxt "the planet"
+#~| msgid "Earth"
+#~ msgctxt "Marble::EarthquakePlugin|"
+#~ msgid "Earthquakes"
+#~ msgstr "Daegne"
+
+#, fuzzy
+#~| msgid "&Earth"
+#~ msgctxt "Marble::EarthquakePlugin|"
+#~ msgid "&Earthquakes"
+#~ msgstr "&Daegne"
+
+#, fuzzy
+#~| msgid "Show the application's About Box"
+#~ msgctxt "Marble::EarthquakePlugin|"
+#~ msgid "Shows earthquakes on the map."
+#~ msgstr "Mostrer l' boesse Åd fwait då programe"
+
+#, fuzzy
+#~| msgid "&Settings"
+#~ msgctxt "EclipsesBrowserDialog|"
+#~ msgid "&Settings..."
+#~ msgstr "&Apontiaedjes"
+
+#, fuzzy
+#~| msgid "&Clouds"
+#~ msgctxt "EclipsesBrowserDialog|"
+#~ msgid "&Close"
+#~ msgstr "&Nûlêyes"
+
+#, fuzzy
+#~ msgctxt "EclipsesConfigDialog|"
+#~ msgid "Eclipses Configuration"
+#~ msgstr "Tchôke-divins Stoeles"
+
+#, fuzzy
+#~| msgid "&View"
+#~ msgctxt "EclipsesConfigDialog|"
+#~ msgid "&View"
+#~ msgstr "&Vey"
+
+#, fuzzy
+#~| msgid "&Stars"
+#~ msgctxt "Marble::EclipsesModel|"
+#~ msgid "Start"
+#~ msgstr "&Sitoeles"
+
+#, fuzzy
+#~ msgctxt "ElevationProfileConfigWidget|"
+#~ msgid "Configure Elevation Profile Plugin"
+#~ msgstr "Tchôke-divins Stoeles"
+
+#, fuzzy
+#~ msgctxt "Marble::ElevationProfileContextMenu|"
+#~ msgid "&Configure..."
+#~ msgstr "Apontyî l' contrôle do solea"
+
+#, fuzzy
+#~| msgid "Export Map"
+#~ msgctxt "Marble::ElevationProfileContextMenu|"
+#~ msgid "Route"
+#~ msgstr "Ebaguer mape"
+
+#, fuzzy
+#~ msgctxt "Marble::ElevationProfileContextMenu|"
+#~ msgid "Track: "
+#~ msgstr "Nåcion"
+
+#, fuzzy
+#~| msgid "Elevation extreme"
+#~ msgctxt "Marble::ElevationProfileFloatItem|"
+#~ msgid "Elevation Profile"
+#~ msgstr "Nouzome hôteur"
+
+#, fuzzy
+#~| msgid "Elevation extreme"
+#~ msgctxt "Marble::ElevationProfileFloatItem|"
+#~ msgid "&Elevation Profile"
+#~ msgstr "Nouzome hôteur"
+
+#, fuzzy
+#~| msgid "This is a float item that provides an overview map."
+#~ msgctxt "Marble::ElevationProfileFloatItem|"
+#~ msgid "A float item that shows the elevation profile of the current route."
+#~ msgstr "Çouchal est on cayet flotant ki dene ene mwaisse vuwe del mape."
+
+#, fuzzy
+#~| msgid "km"
+#~ msgctxt "Marble::ElevationProfilePlotAxis|"
+#~ msgid "km"
+#~ msgstr "km"
+
+#, fuzzy
+#~| msgid "m"
+#~ msgctxt "Marble::ElevationProfilePlotAxis|"
+#~ msgid "m"
+#~ msgstr "m"
+
+#, fuzzy
+#~| msgid "m"
+#~ msgctxt "Marble::ElevationProfilePlotAxis|"
+#~ msgid "mi"
+#~ msgstr "m"
+
+#, fuzzy
+#~| msgid "ft"
+#~ msgctxt "Marble::ElevationProfilePlotAxis|"
+#~ msgid "ft"
+#~ msgstr "pî"
+
+#, fuzzy
+#~| msgid "m"
+#~ msgctxt "Marble::ElevationProfilePlotAxis|"
+#~ msgid "nm"
+#~ msgstr "m"
+
+#, fuzzy
+#~| msgid "Elevation extreme"
+#~ msgctxt "Marble::ElevationProfileMarker|"
+#~ msgid "Elevation Profile Marker"
+#~ msgstr "Nouzome hôteur"
+
+#, fuzzy
+#~| msgid "Elevation extreme"
+#~ msgctxt "Marble::ElevationProfileMarker|"
+#~ msgid "&Elevation Profile Marker"
+#~ msgstr "Nouzome hôteur"
+
+#, fuzzy
+#~| msgid "This is a float item that provides an overview map."
+#~ msgctxt "Marble::ElevationProfileMarker|"
+#~ msgid "Marks the current elevation of the elevation profile on the map."
+#~ msgstr "Çouchal est on cayet flotant ki dene ene mwaisse vuwe del mape."
+
+#, fuzzy
+#~| msgid "m"
+#~ msgctxt "Marble::ElevationProfileMarker|"
+#~ msgid "m"
+#~ msgstr "m"
+
+#, fuzzy
+#~| msgid "ft"
+#~ msgctxt "Marble::ElevationProfileMarker|"
+#~ msgid "ft"
+#~ msgstr "pî"
+
+#, fuzzy
+#~| msgid "File View"
+#~ msgctxt "Marble::FileViewFloatItem|"
+#~ msgid "File View"
+#~ msgstr "Vuwe do fitchî"
+
+#, fuzzy
+#~| msgid "&File View"
+#~ msgctxt "Marble::FileViewFloatItem|"
+#~ msgid "&File View"
+#~ msgstr "Vuwe do &fitchî"
+
+#, fuzzy
+#~| msgid "Open File"
+#~ msgctxt "Marble::FileViewFloatItem|"
+#~ msgid "Open file..."
+#~ msgstr "Drovi fitchî"
+
+#, fuzzy
+#~| msgid "close this kml file..."
+#~ msgctxt "Marble::FileViewFloatItem|"
+#~ msgid "Close this file"
+#~ msgstr "clôre ci fitchî kml..."
+
+#, fuzzy
+#~| msgid "Open File"
+#~ msgctxt "Marble::FileViewFloatItem|"
+#~ msgid "Open File"
+#~ msgstr "Drovi fitchî"
+
+#, fuzzy
+#~| msgid ""
+#~| "All Supported Files (*.gpx *.kml);;GPS Data (*.gpx);;Google Earth KML (*."
+#~| "kml)"
+#~ msgctxt "Marble::FileViewFloatItem|"
+#~ msgid ""
+#~ "All Supported Files (*.gpx *.kml *.pnt);;GPS Data (*.gpx);;Google Earth "
+#~ "KML (*.kml);PNT Data (*.pnt)"
+#~ msgstr ""
+#~ "Tos les fitchîs sopoirtés (*.gpx *.kml);;dinêyes GPS (*.gpx);;KML di "
+#~ "Google Earth (*.kml)"
+
+#, fuzzy
+#~ msgctxt "Marble::FoursquarePlugin|"
+#~ msgid "Places"
+#~ msgstr "Tchôke-divins des Markes di plaeces"
+
+#, fuzzy
+#~ msgctxt "Marble::FoursquarePlugin|"
+#~ msgid "&Places"
+#~ msgstr "Tchôke-divins des Markes di plaeces"
+
+#, fuzzy
+#~| msgid "This is a float item that provides a compass."
+#~ msgctxt "Marble::GpsInfo|"
+#~ msgid "This is a float item that provides Gps Information."
+#~ msgstr "Çouchal est on cayet flotant ki dene ene rôze des vints."
+
+#, fuzzy
+#~| msgid "km"
+#~ msgctxt "Marble::GpsInfo|"
+#~ msgid "mph"
+#~ msgstr "km"
+
+#, fuzzy
+#~| msgid "ft"
+#~ msgctxt "Marble::GpsInfo|"
+#~ msgid "ft"
+#~ msgstr "pî"
+
+#, fuzzy
+#~| msgid "km/h"
+#~ msgctxt "Marble::GpsInfo|"
+#~ msgid "km/h"
+#~ msgstr "km/e"
+
+#, fuzzy
+#~| msgid "m"
+#~ msgctxt "Marble::GpsInfo|"
+#~ msgid "m"
+#~ msgstr "m"
+
+#, fuzzy
+#~| msgid "m"
+#~ msgctxt "Marble::GpsInfo|"
+#~ msgid "nm"
+#~ msgstr "m"
+
+#, fuzzy
+#~| msgid "Description"
+#~ msgctxt "GpsInfoPlugin|"
+#~ msgid "Direction"
+#~ msgstr "Discrijhaedje"
+
+#, fuzzy
+#~| msgid "Coordinate Grid"
+#~ msgctxt "GraticuleConfigWidget|"
+#~ msgid "Coordinate Grid Plugin"
+#~ msgstr "Grile des cordinêyes"
+
+#, fuzzy
+#~| msgid "Coordinate Grid"
+#~ msgctxt "GraticuleConfigWidget|"
+#~ msgid "Color of the coordinate grid."
+#~ msgstr "Grile des cordinêyes"
+
+#, fuzzy
+#~| msgid "Coordinate Grid"
+#~ msgctxt "Marble::GraticulePlugin|"
+#~ msgid "Coordinate Grid"
+#~ msgstr "Grile des cordinêyes"
+
+#, fuzzy
+#~| msgid "Coordinate &Grid"
+#~ msgctxt "Marble::GraticulePlugin|"
+#~ msgid "Coordinate &Grid"
+#~ msgstr "&Grile des cordinêyes"
+
+#, fuzzy
+#~| msgid "A plugin that shows a coordinate grid."
+#~ msgctxt "Marble::GraticulePlugin|"
+#~ msgid "A plugin that shows a coordinate grid."
+#~ msgstr "On tchôke-divins k' håyene ene grile des cordinêyes."
+
+#, fuzzy
+#~| msgid "Tropic of Cancer"
+#~ msgctxt "Marble::GraticulePlugin|"
+#~ msgid "Tropic of Cancer"
+#~ msgstr "Tropike do Crantche"
+
+#, fuzzy
+#~| msgid "Tropic of Capricorn"
+#~ msgctxt "Marble::GraticulePlugin|"
+#~ msgid "Tropic of Capricorn"
+#~ msgstr "Tropike do Gadot"
+
+#, fuzzy
+#~| msgid "Arctic Circle"
+#~ msgctxt "Marble::GraticulePlugin|"
+#~ msgid "Arctic Circle"
+#~ msgstr "Ceje årtike"
+
+#, fuzzy
+#~| msgid "Antarctic Circle"
+#~ msgctxt "Marble::GraticulePlugin|"
+#~ msgid "Antarctic Circle"
+#~ msgstr "Ceke antårtike"
+
+#, fuzzy
+#~| msgid "&Full Screen Mode"
+#~ msgctxt "Marble::License|"
+#~ msgid "License"
+#~ msgstr "Môde &tote li waitroûle"
+
+#, fuzzy
+#~| msgid "&Full Screen Mode"
+#~ msgctxt "Marble::License|"
+#~ msgid "&License"
+#~ msgstr "Môde &tote li waitroûle"
+
+#, fuzzy
+#~| msgid "This is a float item that provides a compass."
+#~ msgctxt "Marble::License|"
+#~ msgid "This is a float item that provides copyright information."
+#~ msgstr "Çouchal est on cayet flotant ki dene ene rôze des vints."
+
+#, fuzzy
+#~| msgid "&Full Screen Mode"
+#~ msgctxt "Marble::License|"
+#~ msgid "&Full License"
+#~ msgstr "Môde &tote li waitroûle"
+
+#, fuzzy
+#~| msgid "Show Navigation Panel"
+#~ msgctxt "Marble::License|"
+#~ msgid "&Show Details"
+#~ msgstr "Mostrer l' panea di naiviaedje"
+
+#, fuzzy
+#~ msgctxt "MapScaleConfigWidget|"
+#~ msgid "Configure Scale Bar Plugin"
+#~ msgstr "Tchôke-divins Stoeles"
+
+#, fuzzy
+#~| msgid "Show Navigation Panel"
+#~ msgctxt "MapScaleConfigWidget|"
+#~ msgid "Show Ratio Scale"
+#~ msgstr "Mostrer l' panea di naiviaedje"
+
+#, fuzzy
+#~| msgid "Scale Bar"
+#~ msgctxt "Marble::MapScaleFloatItem|"
+#~ msgid "Scale Bar"
+#~ msgstr "Båre di schåle"
+
+#, fuzzy
+#~| msgid "&Scale Bar"
+#~ msgctxt "Marble::MapScaleFloatItem|"
+#~ msgid "&Scale Bar"
+#~ msgstr "Båre di &schåle"
+
+#, fuzzy
+#~| msgid "This is a float item that provides a map scale."
+#~ msgctxt "Marble::MapScaleFloatItem|"
+#~ msgid "This is a float item that provides a map scale."
+#~ msgstr "Çouchal est on cayet flotant k' dene ene schåle del mape."
+
+#, fuzzy
+#~ msgctxt "Marble::MapScaleFloatItem|"
+#~ msgid "Original Developer"
+#~ msgstr "<b>Diswalpeus</b>"
+
+#, fuzzy
+#~| msgid "km"
+#~ msgctxt "Marble::MapScaleFloatItem|"
+#~ msgid "km"
+#~ msgstr "km"
+
+#, fuzzy
+#~| msgid "m"
+#~ msgctxt "Marble::MapScaleFloatItem|"
+#~ msgid "m"
+#~ msgstr "m"
+
+#, fuzzy
+#~| msgid "m"
+#~ msgctxt "Marble::MapScaleFloatItem|"
+#~ msgid "mi"
+#~ msgstr "m"
+
+#, fuzzy
+#~| msgid "m"
+#~ msgctxt "Marble::MapScaleFloatItem|"
+#~ msgid "nm"
+#~ msgstr "m"
+
+#, fuzzy
+#~ msgctxt "Marble::MapScaleFloatItem|"
+#~ msgid "&Configure..."
+#~ msgstr "Apontyî l' contrôle do solea"
+
+#, fuzzy
+#~| msgid "Mountain"
+#~ msgctxt "MeasureConfigDialog|"
+#~ msgid "Measure Tool Configuration"
+#~ msgstr "Montinne"
+
+#, fuzzy
+#~| msgid "&Copy Map"
+#~ msgctxt "MeasureConfigDialog|"
+#~ msgid "Polygon"
+#~ msgstr "&Copyî mape"
+
+#, fuzzy
+#~| msgid "Arctic Circle"
+#~ msgctxt "MeasureConfigDialog|"
+#~ msgid "Circle"
+#~ msgstr "Ceje årtike"
+
+#, fuzzy
+#~| msgid "Total Distance: %1 m"
+#~ msgctxt "MeasureConfigDialog|"
+#~ msgid "Distance "
+#~ msgstr "Distance totåle : %1 m"
+
+#, fuzzy
+#~| msgid "Add &Measure Point"
+#~ msgctxt "Marble::MeasureToolPlugin|"
+#~ msgid "Measure Tool"
+#~ msgstr "Radjouter pont d' &muzuraedje"
+
+#, fuzzy
+#~| msgid "Add &Measure Point"
+#~ msgctxt "Marble::MeasureToolPlugin|"
+#~ msgid "&Measure Tool"
+#~ msgstr "Radjouter pont d' &muzuraedje"
+
+#, fuzzy
+#~| msgid "Total Distance: %1 m"
+#~ msgctxt "Marble::MeasureToolPlugin|"
+#~ msgid "Total Distance: %1<br/>\n"
+#~ msgstr "Distance totåle : %1 m"
+
+#, fuzzy
+#~| msgid "Total Distance: %1 m"
+#~ msgctxt "Marble::MeasureToolPlugin|"
+#~ msgid "Perimeter: %1<br/>\n"
+#~ msgstr "Distance totåle : %1 m"
+
+#, fuzzy
+#~| msgid "Total Distance: %1 m"
+#~ msgctxt "Marble::MeasureToolPlugin|"
+#~ msgid "Radius: %1<br/>\n"
+#~ msgstr "Distance totåle : %1 m"
+
+#, fuzzy
+#~| msgid "Add &Measure Point"
+#~ msgctxt "Marble::MeasureToolPlugin|"
+#~ msgid "Add &Measure Point"
+#~ msgstr "Radjouter pont d' &muzuraedje"
+
+#, fuzzy
+#~ msgctxt "Marble::MeasureToolPlugin|"
+#~ msgid "Remove &Last Measure Point"
+#~ msgstr "&Oister des ponts d' muzuraedje"
+
+#, fuzzy
+#~| msgid "&Remove Measure Points"
+#~ msgctxt "Marble::MeasureToolPlugin|"
+#~ msgid "&Remove Measure Points"
+#~ msgstr "&Oister des ponts d' muzuraedje"
+
+#, fuzzy
+#~| msgid "Navigation"
+#~ msgctxt "Navigation|"
+#~ msgid "Navigation"
+#~ msgstr "Naiviaedje"
+
+#, fuzzy
+#~| msgid "Navigation"
+#~ msgctxt "Marble::NavigationFloatItem|"
+#~ msgid "Navigation"
+#~ msgstr "Naiviaedje"
+
+#, fuzzy
+#~| msgid "&Navigation"
+#~ msgctxt "Marble::NavigationFloatItem|"
+#~ msgid "&Navigation"
+#~ msgstr "&Naiviaedje"
+
+#, fuzzy
+#~| msgid "A mouse control to zoom and move the map"
+#~ msgctxt "Marble::NavigationFloatItem|"
+#~ msgid "A mouse control to zoom and move the map"
+#~ msgstr "On contrôle del sori po zoumer eyet bodjî l' mape"
+
+#, fuzzy
+#~| msgid "Current Location"
+#~ msgctxt "Marble::NavigationFloatItem|"
+#~ msgid "Current Location Button"
+#~ msgstr "Eplaeçmint do moumint"
+
+#, fuzzy
+#~| msgid "OpenStreetMap"
+#~ msgctxt "Marble::NotesPlugin|"
+#~ msgid "Display OpenStreetMap Mapper Notes."
+#~ msgstr "OpenStreetMap"
+
+#, fuzzy
+#~| msgid "&Status Bar"
+#~ msgctxt "OpenCachingCacheDialog|"
+#~ msgid "Status:"
+#~ msgstr "Bår ås me&ssaedje"
+
+#, fuzzy
+#~ msgctxt "OpenCachingCacheDialog|"
+#~ msgid "Terrain:"
+#~ msgstr "Nåcion"
+
+#, fuzzy
+#~| msgid "Description"
+#~ msgctxt "OpenCachingCacheDialog|"
+#~ msgid "Description"
+#~ msgstr "Discrijhaedje"
+
+#, fuzzy
+#~| msgid "Export Map"
+#~ msgctxt "OpenCachingCacheDialog|"
+#~ msgid "Previous"
+#~ msgstr "Ebaguer mape"
+
+#, fuzzy
+#~| msgid "Total Distance: %1 m"
+#~ msgctxt "OpenCachingConfigWidget|"
+#~ msgid "Maximum Distance:"
+#~ msgstr "Distance totåle : %1 m"
+
+#, fuzzy
+#~| msgid "&Stars"
+#~ msgctxt "OpenCachingConfigWidget|"
+#~ msgid "Start:"
+#~ msgstr "&Sitoeles"
+
+#, fuzzy
+#~| msgid "Mountain"
+#~ msgctxt "OpenDesktopConfigWidget|"
+#~ msgid "OpenDesktop plugin configuration"
+#~ msgstr "Montinne"
+
+#, fuzzy
+#~| msgid "Overview Map"
+#~ msgctxt "Marble::OverviewMap|"
+#~ msgid "Overview Map"
+#~ msgstr "Mwaisse vuwe del mape"
+
+#, fuzzy
+#~| msgid "&Overview Map"
+#~ msgctxt "Marble::OverviewMap|"
+#~ msgid "&Overview Map"
+#~ msgstr "&Mwaisse vuwe del mape"
+
+#, fuzzy
+#~| msgid "This is a float item that provides an overview map."
+#~ msgctxt "Marble::OverviewMap|"
+#~ msgid "This is a float item that provides an overview map."
+#~ msgstr "Çouchal est on cayet flotant ki dene ene mwaisse vuwe del mape."
+
+#, fuzzy
+#~| msgid "Overview Map"
+#~ msgctxt "Marble::OverviewMap|"
+#~ msgid "Choose Overview Map"
+#~ msgstr "Mwaisse vuwe del mape"
+
+#, fuzzy
+#~| msgid "Overview Map"
+#~ msgctxt "OverviewMapConfigWidget|"
+#~ msgid "Configure Overview Map"
+#~ msgstr "Mwaisse vuwe del mape"
+
+#, fuzzy
+#~| msgid "Name"
+#~ msgctxt "OverviewMapConfigWidget|"
+#~ msgid "Map &Image"
+#~ msgstr "No"
+
+#, fuzzy
+#~| msgid "Show &Navigation Panel"
+#~ msgctxt "OverviewMapConfigWidget|"
+#~ msgid "&Planet:"
+#~ msgstr "Mostrer l' panea di &naiviaedje"
+
+#, fuzzy
+#~| msgid "Overview Map"
+#~ msgctxt "OverviewMapConfigWidget|"
+#~ msgid "Preview"
+#~ msgstr "Mwaisse vuwe del mape"
+
+#, fuzzy
+#~| msgid "&File"
+#~ msgctxt "OverviewMapConfigWidget|"
+#~ msgid "Filename"
+#~ msgstr "&Fitchî"
+
+#, fuzzy
+#~| msgid "&Set Home Location"
+#~ msgctxt "OverviewMapConfigWidget|"
+#~ msgid "Position I&ndicator:"
+#~ msgstr "&Defini l' plaece di vosse måjhon"
+
+#, fuzzy
+#~| msgid "Panoramio Photos"
+#~ msgctxt "Marble::PanoramioPlugin|"
+#~ msgid "Panoramio Photos"
+#~ msgstr "Fotos Panoramio"
+
+#, fuzzy
+#~| msgid "&Panoramio"
+#~ msgctxt "Marble::PanoramioPlugin|"
+#~ msgid "&Panoramio"
+#~ msgstr "&Panoramio"
+
+#, fuzzy
+#~| msgid ""
+#~| "Automatically downloads images from around the world in preference to "
+#~| "their popularity"
+#~ msgctxt "Marble::PanoramioPlugin|"
+#~ msgid ""
+#~ "Automatically downloads images from around the world in preference to "
+#~ "their popularity"
+#~ msgstr ""
+#~ "Aberwete otomaticmint ds imådjes di ttavå l' daegne di preferince sorlon "
+#~ "leu popularité"
+
+#, fuzzy
+#~| msgid "The file is not a valid DGML 2.0 file"
+#~ msgctxt "QObject|"
+#~ msgid "The file is not a valid Flickr answer."
+#~ msgstr "Li fitchî n' est nén on fitchî DGML 2.0 valåbe"
+
+#, fuzzy
+#~ msgctxt "PhotoConfigWidget|"
+#~ msgid "Configure Photo Plugin"
+#~ msgstr "Tchôke-divins Stoeles"
+
+#, fuzzy
+#~| msgid "&Full Screen Mode"
+#~ msgctxt "PhotoConfigWidget|"
+#~ msgid "License"
+#~ msgstr "Môde &tote li waitroûle"
+
+#, fuzzy
+#~| msgid "Photos"
+#~ msgctxt "Marble::PhotoPlugin|"
+#~ msgid "Photos"
+#~ msgstr "Fotos"
+
+#, fuzzy
+#~| msgid "&Photos"
+#~ msgctxt "Marble::PhotoPlugin|"
+#~ msgid "&Photos"
+#~ msgstr "&Fotos"
+
+#, fuzzy
+#~| msgid ""
+#~| "Automatically downloads images from around the world in preference to "
+#~| "their popularity"
+#~ msgctxt "Marble::PhotoPlugin|"
+#~ msgid ""
+#~ "Automatically downloads images from around the world in preference to "
+#~ "their popularity"
+#~ msgstr ""
+#~ "Aberwete otomaticmint ds imådjes di ttavå l' daegne di preferince sorlon "
+#~ "leu popularité"
+
+#, fuzzy
+#~ msgctxt "Marble::PositionMarker|"
+#~ msgid "Position Marker"
+#~ msgstr "Tchôke-divins GeoRender"
+
+#, fuzzy
+#~ msgctxt "Marble::PositionMarker|"
+#~ msgid "&Position Marker"
+#~ msgstr "Tchôke-divins GeoRender"
+
+#, fuzzy
+#~ msgctxt "PositionMarkerConfigWidget|"
+#~ msgid "Configure Position Marker Plugin"
+#~ msgstr "Tchôke-divins GeoRender"
+
+#, fuzzy
+#~| msgid "Show the application's About Box"
+#~ msgctxt "Marble::PostalCodePlugin|"
+#~ msgid "Shows postal codes of the area on the map."
+#~ msgstr "Mostrer l' boesse Åd fwait då programe"
+
+#, fuzzy
+#~| msgid "Download finished."
+#~ msgctxt "Marble::ProgressFloatItem|"
+#~ msgid "Download Progress Indicator"
+#~ msgstr "L' aberwetaedje a fni."
+
+#, fuzzy
+#~| msgid "Download finished."
+#~ msgctxt "Marble::ProgressFloatItem|"
+#~ msgid "&Download Progress"
+#~ msgstr "L' aberwetaedje a fni."
+
+#, fuzzy
+#~| msgid "Mountain"
+#~ msgctxt "RoutingConfigDialog|"
+#~ msgid "Routing Configuration"
+#~ msgstr "Montinne"
+
+#, fuzzy
+#~| msgid "Export Map"
+#~ msgctxt "QObject|"
+#~ msgid "Route left."
+#~ msgstr "Ebaguer mape"
+
+#, fuzzy
+#~| msgid "Mountain"
+#~ msgctxt "Marble::RoutingPlugin|"
+#~ msgid "Routing"
+#~ msgstr "Montinne"
+
+#, fuzzy
+#~| msgid "Mountain"
+#~ msgctxt "Marble::RoutingPlugin|"
+#~ msgid "&Routing"
+#~ msgstr "Montinne"
+
+#, fuzzy
+#~| msgid "Mountain"
+#~ msgctxt "RoutingPlugin|"
+#~ msgid "Guidance Mode"
+#~ msgstr "Montinne"
+
+#, fuzzy
+#~| msgid "-"
+#~ msgctxt "RoutingPlugin|"
+#~ msgid "-"
+#~ msgstr "-"
+
+#, fuzzy
+#~| msgctxt "the earth's moon"
+#~| msgid "Moon"
+#~ msgctxt "Marble::SatellitesConfigDialog|"
+#~ msgid "Moons"
+#~ msgstr "Lune"
+
+#, fuzzy
+#~ msgctxt "Marble::SatellitesConfigDialog|"
+#~ msgid "Other"
+#~ msgstr "Traitoe"
+
+#, fuzzy
+#~| msgctxt "the earth's moon"
+#~| msgid "Moon"
+#~ msgctxt "Marble::SatellitesConfigDialog|"
+#~ msgid "Moon"
+#~ msgstr "Lune"
+
+#, fuzzy
+#~| msgctxt "the earth's star"
+#~| msgid "Sun"
+#~ msgctxt "Marble::SatellitesConfigDialog|"
+#~ msgid "Sun"
+#~ msgstr "Solea"
+
+#, fuzzy
+#~| msgctxt "the planet"
+#~| msgid "Mercury"
+#~ msgctxt "Marble::SatellitesConfigDialog|"
+#~ msgid "Mercury"
+#~ msgstr "Mercure"
+
+#, fuzzy
+#~| msgctxt "the planet"
+#~| msgid "Venus"
+#~ msgctxt "Marble::SatellitesConfigDialog|"
+#~ msgid "Venus"
+#~ msgstr "Venus"
+
+#, fuzzy
+#~| msgctxt "the planet"
+#~| msgid "Earth"
+#~ msgctxt "Marble::SatellitesConfigDialog|"
+#~ msgid "Earth"
+#~ msgstr "Daegne"
+
+#, fuzzy
+#~| msgctxt "the planet"
+#~| msgid "Mars"
+#~ msgctxt "Marble::SatellitesConfigDialog|"
+#~ msgid "Mars"
+#~ msgstr "Måss"
+
+#, fuzzy
+#~| msgctxt "the planet"
+#~| msgid "Jupiter"
+#~ msgctxt "Marble::SatellitesConfigDialog|"
+#~ msgid "Jupiter"
+#~ msgstr "Djupiter"
+
+#, fuzzy
+#~| msgctxt "the planet"
+#~| msgid "Saturn"
+#~ msgctxt "Marble::SatellitesConfigDialog|"
+#~ msgid "Saturn"
+#~ msgstr "Satûne"
+
+#, fuzzy
+#~| msgctxt "the planet"
+#~| msgid "Uranus"
+#~ msgctxt "Marble::SatellitesConfigDialog|"
+#~ msgid "Uranus"
+#~ msgstr "Uranus"
+
+#, fuzzy
+#~| msgctxt "the planet"
+#~| msgid "Neptune"
+#~ msgctxt "Marble::SatellitesConfigDialog|"
+#~ msgid "Neptune"
+#~ msgstr "Neptune"
+
+#, fuzzy
+#~| msgid "&Satellites"
+#~ msgctxt "Marble::SatellitesConfigDialog|"
+#~ msgid "&Satellites"
+#~ msgstr "&Satelites"
+
+#, fuzzy
+#~| msgctxt "the planet"
+#~| msgid "Earth"
+#~ msgctxt "Marble::SatellitesConfigDialog|"
+#~ msgid "&Data Sources"
+#~ msgstr "Daegne"
+
+#, fuzzy
+#~| msgid "&DataView Plugin"
+#~ msgctxt "Marble::SatellitesConfigDialog|"
+#~ msgid "&Activate Plugin"
+#~ msgstr "&Tchôke-divins VuweDinêyes"
+
+#, fuzzy
+#~ msgctxt "Marble::SatellitesConfigDialog|"
+#~ msgid "All Supported Files (*.txt *.msc)"
+#~ msgstr ""
+#~ "Tos les fitchîs sopoirtés (*.gpx *.kml);;dinêyes GPS (*.gpx);;KML di "
+#~ "Google Earth (*.kml)"
+
+#, fuzzy
+#~| msgid "GpxFile (*.gpx)"
+#~ msgctxt "Marble::SatellitesConfigDialog|"
+#~ msgid "All Files (*.*)"
+#~ msgstr "FitchîGpx (*.gpx)"
+
+#, fuzzy
+#~| msgid "OpenStreetMap"
+#~ msgctxt "Marble::SatellitesConfigDialog|"
+#~ msgid "Open Satellite Data File"
+#~ msgstr "OpenStreetMap"
+
+#, fuzzy
+#~| msgid "&Copy Map"
+#~ msgctxt "Marble::SatellitesConfigDialog|"
+#~ msgid "Delete selected data source"
+#~ msgstr "&Copyî mape"
+
+#, fuzzy
+#~| msgid "Satellite View"
+#~ msgctxt "SatellitesConfigDialog|"
+#~ msgid "Satellites Configuration"
+#~ msgstr "Vuwe satelite"
+
+#, fuzzy
+#~| msgid "&Satellites"
+#~ msgctxt "SatellitesConfigDialog|"
+#~ msgid "&Satellites"
+#~ msgstr "&Satelites"
+
+#, fuzzy
+#~| msgctxt "the planet"
+#~| msgid "Earth"
+#~ msgctxt "SatellitesConfigDialog|"
+#~ msgid "&Data Sources"
+#~ msgstr "Daegne"
+
+#, fuzzy
+#~| msgid "-"
+#~ msgctxt "SatellitesConfigDialog|"
+#~ msgid "-"
+#~ msgstr "-"
+
+#, fuzzy
+#~| msgid "OpenStreetMap"
+#~ msgctxt "SatellitesConfigDialog|"
+#~ msgid "Satellite Data Sources:"
+#~ msgstr "OpenStreetMap"
+
+#, fuzzy
+#~| msgid "&Copy Map"
+#~ msgctxt "SatellitesConfigDialog|"
+#~ msgid "Remove selected data source."
+#~ msgstr "&Copyî mape"
+
+#, fuzzy
+#~| msgid "&DataView Plugin"
+#~ msgctxt "SatellitesConfigDialog|"
+#~ msgid "&Activate Plugin"
+#~ msgstr "&Tchôke-divins VuweDinêyes"
+
+#, fuzzy
+#~| msgid "not available"
+#~ msgctxt "QObject|"
+#~ msgid "No info available."
+#~ msgstr "nén disponibe"
+
+#, fuzzy
+#~| msgid "Satellites"
+#~ msgctxt "Marble::SatellitesPlugin|"
+#~ msgid "Satellites"
+#~ msgstr "Satelites"
+
+#, fuzzy
+#~| msgid "&Satellites"
+#~ msgctxt "Marble::SatellitesPlugin|"
+#~ msgid "&Satellites"
+#~ msgstr "&Satelites"
+
+#, fuzzy
+#~| msgid "This plugin displays TBD satellites."
+#~ msgctxt "Marble::SatellitesPlugin|"
+#~ msgid "This plugin displays satellites and their orbits."
+#~ msgstr "Ci tchôke-divins håyene les satelites TBD."
+
+#, fuzzy
+#~| msgid "Satellites"
+#~ msgctxt "Marble::SatellitesPlugin|"
+#~ msgid "Special-Interest Satellites"
+#~ msgstr "Satelites"
+
+#, fuzzy
+#~| msgid "Elevation extreme"
+#~ msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
+#~ msgid "Space Stations"
+#~ msgstr "Nouzome hôteur"
+
+#, fuzzy
+#~ msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
+#~ msgid "Weather"
+#~ msgstr "Traitoe"
+
+#, fuzzy
+#~| msgctxt "the planet"
+#~| msgid "Earth"
+#~ msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
+#~ msgid "Earth Resources"
+#~ msgstr "Daegne"
+
+#, fuzzy
+#~| msgid "Show Navigation Panel"
+#~ msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
+#~ msgid "Tracking and Data Relay Satellite System (TDRSS)"
+#~ msgstr "Mostrer l' panea di naiviaedje"
+
+#, fuzzy
+#~| msgid "Show Navigation Panel"
+#~ msgctxt "Marble::SatellitesPlugin|"
+#~ msgid "Communications Satellites"
+#~ msgstr "Mostrer l' panea di naiviaedje"
+
+#, fuzzy
+#~ msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
+#~ msgid "Geostationary"
+#~ msgstr "Schaper fitchî"
+
+#, fuzzy
+#~ msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
+#~ msgid "Other"
+#~ msgstr "Traitoe"
+
+#, fuzzy
+#~| msgid "Show Navigation Panel"
+#~ msgctxt "Marble::SatellitesPlugin|"
+#~ msgid "Navigation Satellites"
+#~ msgstr "Mostrer l' panea di naiviaedje"
+
+#, fuzzy
+#~| msgid "Show Navigation Panel"
+#~ msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
+#~ msgid "Navy Navigation Satellite System (NNSS)"
+#~ msgstr "Mostrer l' panea di naiviaedje"
+
+#, fuzzy
+#~| msgid "Navigation"
+#~ msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
+#~ msgid "Russian LEO Navigation"
+#~ msgstr "Naiviaedje"
+
+#, fuzzy
+#~| msgid "Satellites"
+#~ msgctxt "Marble::SatellitesPlugin|"
+#~ msgid "Scientific Satellites"
+#~ msgstr "Satelites"
+
+#, fuzzy
+#~| msgid "Location"
+#~ msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
+#~ msgid "Education"
+#~ msgstr "Eplaeçmint"
+
+#, fuzzy
+#~| msgid "Show Navigation Panel"
+#~ msgctxt "Marble::SatellitesPlugin|"
+#~ msgid "Miscellaneous Satellites"
+#~ msgstr "Mostrer l' panea di naiviaedje"
+
+#, fuzzy
+#~| msgid "km"
+#~ msgctxt "Marble::Speedometer|"
+#~ msgid "mph"
+#~ msgstr "km"
+
+#, fuzzy
+#~| msgid "km/h"
+#~ msgctxt "Marble::Speedometer|"
+#~ msgid "km/h"
+#~ msgstr "km/e"
+
+#, fuzzy
+#~| msgid "km/h"
+#~ msgctxt "Speedometer|"
+#~ msgid "km/h"
+#~ msgstr "km/e"
+
+#, fuzzy
+#~ msgctxt "StarsConfigWidget|"
+#~ msgid "Configure Stars Plugin"
+#~ msgstr "Tchôke-divins Stoeles"
+
+#, fuzzy
+#~| msgctxt "the earth's star"
+#~| msgid "Sun"
+#~ msgctxt "StarsConfigWidget|"
+#~ msgid "Sun"
+#~ msgstr "Solea"
+
+#, fuzzy
+#~| msgctxt "the earth's moon"
+#~| msgid "Moon"
+#~ msgctxt "StarsConfigWidget|"
+#~ msgid "Moon"
+#~ msgstr "Lune"
+
+#, fuzzy
+#~| msgctxt "the planet"
+#~| msgid "Mercury"
+#~ msgctxt "StarsConfigWidget|"
+#~ msgid "Mercury"
+#~ msgstr "Mercure"
+
+#, fuzzy
+#~| msgctxt "the planet"
+#~| msgid "Venus"
+#~ msgctxt "StarsConfigWidget|"
+#~ msgid "Venus"
+#~ msgstr "Venus"
+
+#, fuzzy
+#~| msgctxt "the planet"
+#~| msgid "Earth"
+#~ msgctxt "StarsConfigWidget|"
+#~ msgid "Earth"
+#~ msgstr "Daegne"
+
+#, fuzzy
+#~| msgctxt "the planet"
+#~| msgid "Mars"
+#~ msgctxt "StarsConfigWidget|"
+#~ msgid "Mars"
+#~ msgstr "Måss"
+
+#, fuzzy
+#~| msgctxt "the planet"
+#~| msgid "Jupiter"
+#~ msgctxt "StarsConfigWidget|"
+#~ msgid "Jupiter"
+#~ msgstr "Djupiter"
+
+#, fuzzy
+#~| msgctxt "the planet"
+#~| msgid "Saturn"
+#~ msgctxt "StarsConfigWidget|"
+#~ msgid "Saturn"
+#~ msgstr "Satûne"
+
+#, fuzzy
+#~| msgctxt "the planet"
+#~| msgid "Uranus"
+#~ msgctxt "StarsConfigWidget|"
+#~ msgid "Uranus"
+#~ msgstr "Uranus"
+
+#, fuzzy
+#~| msgctxt "the planet"
+#~| msgid "Neptune"
+#~ msgctxt "StarsConfigWidget|"
+#~ msgid "Neptune"
+#~ msgstr "Neptune"
+
+#, fuzzy
+#~| msgid "Show Navigation Panel"
+#~ msgctxt "StarsConfigWidget|"
+#~ msgid "Magnify Sun and Moon"
+#~ msgstr "Mostrer l' panea di naiviaedje"
+
+#, fuzzy
+#~ msgctxt "StarsConfigWidget|"
+#~ msgid "Other"
+#~ msgstr "Traitoe"
+
+#, fuzzy
+#~| msgid "Show &Navigation Panel"
+#~ msgctxt "StarsConfigWidget|"
+#~ msgid "Constellations"
+#~ msgstr "Mostrer l' panea di &naiviaedje"
+
+#, fuzzy
+#~| msgid "Name"
+#~ msgctxt "StarsConfigWidget|"
+#~ msgid "Names"
+#~ msgstr "No"
+
+#, fuzzy
+#~| msgid "Name"
+#~ msgctxt "StarsConfigWidget|"
+#~ msgid "Latin Name"
+#~ msgstr "No"
+
+#, fuzzy
+#~| msgid "Navigation"
+#~ msgctxt "StarsConfigWidget|"
+#~ msgid "Native Translation"
+#~ msgstr "Naiviaedje"
+
+#, fuzzy
+#~| msgid "Elevation extreme"
+#~ msgctxt "StarsConfigWidget|"
+#~ msgid "Abbreviation"
+#~ msgstr "Nouzome hôteur"
+
+#, fuzzy
+#~| msgid "Coordinate Grid"
+#~ msgctxt "StarsConfigWidget|"
+#~ msgid "Coordinate Grid"
+#~ msgstr "Grile des cordinêyes"
+
+#, fuzzy
+#~| msgid "&Stars"
+#~ msgctxt "Marble::StarsPlugin|"
+#~ msgid "Stars"
+#~ msgstr "&Sitoeles"
+
+#, fuzzy
+#~| msgid "&Stars"
+#~ msgctxt "Marble::StarsPlugin|"
+#~ msgid "&Stars"
+#~ msgstr "&Sitoeles"
+
+#, fuzzy
+#~| msgid "A plugin that shows the Starry Sky."
+#~ msgctxt "Marble::StarsPlugin|"
+#~ msgid "A plugin that shows the Starry Sky and the Sun."
+#~ msgstr "On tchôke-divins k' håyene li Stoelé Cîr."
+
+#, fuzzy
+#~| msgctxt "the earth's star"
+#~| msgid "Sun"
+#~ msgctxt "Marble::StarsPlugin|"
+#~ msgid "Sun"
+#~ msgstr "Solea"
+
+#, fuzzy
+#~| msgid "Show &Navigation Panel"
+#~ msgctxt "Marble::StarsPlugin|"
+#~ msgid "Show &Constellations"
+#~ msgstr "Mostrer l' panea di &naiviaedje"
+
+#, fuzzy
+#~| msgid "Show Navigation Panel"
+#~ msgctxt "Marble::StarsPlugin|"
+#~ msgid "Show &Sun and Moon"
+#~ msgstr "Mostrer l' panea di naiviaedje"
+
+#, fuzzy
+#~| msgid "Show &Navigation Panel"
+#~ msgctxt "Marble::StarsPlugin|"
+#~ msgid "Show &Planets"
+#~ msgstr "Mostrer l' panea di &naiviaedje"
+
+#, fuzzy
+#~ msgctxt "Marble::StarsPlugin|"
+#~ msgid "&Configure..."
+#~ msgstr "Apontyî l' contrôle do solea"
+
+#, fuzzy
+#~| msgctxt "the earth's star"
+#~| msgid "Sun"
+#~ msgctxt "Marble::SunPlugin|"
+#~ msgid "Sun"
+#~ msgstr "Solea"
+
+#, fuzzy
+#~| msgid "A plugin that shows the Starry Sky."
+#~ msgctxt "Marble::SunPlugin|"
+#~ msgid "A plugin that shows the Sun."
+#~ msgstr "On tchôke-divins k' håyene li Stoelé Cîr."
+
+#, fuzzy
+#~| msgid "twitter "
+#~ msgctxt "Marble::twitterPlugin|"
+#~ msgid "twitter "
+#~ msgstr "twitter "
+
+#, fuzzy
+#~| msgid "&twitter"
+#~ msgctxt "Marble::twitterPlugin|"
+#~ msgid "&twitter"
+#~ msgstr "&twitter"
+
+#, fuzzy
+#~| msgid "show public twitts in their places"
+#~ msgctxt "Marble::twitterPlugin|"
+#~ msgid "show public twitts in their places"
+#~ msgstr "mostrer les publics twites a leus plaeces"
+
+#, fuzzy
+#~| msgid "The file is not a valid DGML 2.0 file"
+#~ msgctxt "QObject|"
+#~ msgid "The file is not a valid BBC answer."
+#~ msgstr "Li fitchî n' est nén on fitchî DGML 2.0 valåbe"
+
+#, fuzzy
+#~| msgid "The file is not a valid DGML 2.0 file"
+#~ msgctxt "QObject|"
+#~ msgid "The file is not a valid file."
+#~ msgstr "Li fitchî n' est nén on fitchî DGML 2.0 valåbe"
+
+#, fuzzy
+#~ msgctxt "WeatherConfigWidget|"
+#~ msgid "Configure Weather Plugin"
+#~ msgstr "Tchôke-divins Stoeles"
+
+#, fuzzy
+#~ msgctxt "WeatherConfigWidget|"
+#~ msgid "Information"
+#~ msgstr "Schaper fitchî"
+
+#, fuzzy
+#~| msgid "FITemplate"
+#~ msgctxt "WeatherConfigWidget|"
+#~ msgid "Temperature"
+#~ msgstr "ModeleCF"
+
+#, fuzzy
+#~| msgid "Nation"
+#~ msgctxt "WeatherConfigWidget|"
+#~ msgid "Wind direction"
+#~ msgstr "Nåcion"
+
+#, fuzzy
+#~ msgctxt "WeatherData|"
+#~ msgid "clear"
+#~ msgstr "Båre di schåle"
+
+#, fuzzy
+#~| msgid "Map View"
+#~ msgctxt "WeatherData|"
+#~ msgid "overcast"
+#~ msgstr "Vuwe del mape"
+
+#, fuzzy
+#~ msgctxt "WeatherData|"
+#~ msgid "rain"
+#~ msgstr "Nåcion"
+
+#, fuzzy
+#~| msgid "N"
+#~ msgctxt "WeatherData|"
+#~ msgid "N"
+#~ msgstr "B"
+
+#, fuzzy
+#~ msgctxt "WeatherData|"
+#~ msgid "NNE"
+#~ msgstr "B"
+
+#, fuzzy
+#~ msgctxt "WeatherData|"
+#~ msgid "NE"
+#~ msgstr "B"
+
+#, fuzzy
+#~ msgctxt "WeatherData|"
+#~ msgid "ENE"
+#~ msgstr "B"
+
+#, fuzzy
+#~| msgid "E"
+#~ msgctxt "WeatherData|"
+#~ msgid "E"
+#~ msgstr "L"
+
+#, fuzzy
+#~ msgctxt "WeatherData|"
+#~ msgid "SSE"
+#~ msgstr "N"
+
+#, fuzzy
+#~ msgctxt "WeatherData|"
+#~ msgid "SE"
+#~ msgstr "N"
+
+#, fuzzy
+#~ msgctxt "WeatherData|"
+#~ msgid "ESE"
+#~ msgstr "N"
+
+#, fuzzy
+#~| msgid "S"
+#~ msgctxt "WeatherData|"
+#~ msgid "S"
+#~ msgstr "N"
+
+#, fuzzy
+#~ msgctxt "WeatherData|"
+#~ msgid "NNW"
+#~ msgstr "B"
+
+#, fuzzy
+#~ msgctxt "WeatherData|"
+#~ msgid "NW"
+#~ msgstr "B"
+
+#, fuzzy
+#~ msgctxt "WeatherData|"
+#~ msgid "WNW"
+#~ msgstr "B"
+
+#, fuzzy
+#~| msgid "W"
+#~ msgctxt "WeatherData|"
+#~ msgid "W"
+#~ msgstr "C"
+
+#, fuzzy
+#~ msgctxt "WeatherData|"
+#~ msgid "SSW"
+#~ msgstr "N"
+
+#, fuzzy
+#~ msgctxt "WeatherData|"
+#~ msgid "SW"
+#~ msgstr "N"
+
+#, fuzzy
+#~ msgctxt "WeatherData|"
+#~ msgid "WSW"
+#~ msgstr "N"
+
+#, fuzzy
+#~| msgid "km"
+#~ msgctxt "QObject|"
+#~ msgid "mph"
+#~ msgstr "km"
+
+#, fuzzy
+#~| msgid "km"
+#~ msgctxt "QObject|"
+#~ msgid "m/s"
+#~ msgstr "km"
+
+#, fuzzy
+#~ msgctxt "WeatherData|air pressure has no change"
+#~ msgid "steady"
+#~ msgstr "Presse"
+
+#, fuzzy
+#~ msgctxt "WeatherItemPrivate|"
+#~ msgid "Weather"
+#~ msgstr "Traitoe"
+
+#, fuzzy
+#~| msgid "Current Location"
+#~ msgctxt "WeatherItemPrivate|"
+#~ msgid "Station: %1\n"
+#~ msgstr "Eplaeçmint do moumint"
+
+#, fuzzy
+#~| msgid "&Remove Measure Points"
+#~ msgctxt "WeatherItemPrivate|"
+#~ msgid "Remove from Favorites"
+#~ msgstr "&Oister des ponts d' muzuraedje"
+
+#, fuzzy
+#~| msgid "&Remove Measure Points"
+#~ msgctxt "WeatherItemPrivate|"
+#~ msgid "Add to Favorites"
+#~ msgstr "&Oister des ponts d' muzuraedje"
+
+#, fuzzy
+#~ msgctxt "Marble::WeatherPlugin|"
+#~ msgid "Weather"
+#~ msgstr "Traitoe"
+
+#, fuzzy
+#~ msgctxt "Marble::WeatherPlugin|"
+#~ msgid "&Weather"
+#~ msgstr "Traitoe"
+
+#, fuzzy
+#~| msgid "The file is not a valid DGML 2.0 file"
+#~ msgctxt "QObject|"
+#~ msgid "The file is not a valid Geonames answer."
+#~ msgstr "Li fitchî n' est nén on fitchî DGML 2.0 valåbe"
+
+#, fuzzy
+#~ msgctxt "WikipediaConfigWidget|"
+#~ msgid "Configure Wikipedia Plugin"
+#~ msgstr "Tchôke-divins Stoeles"
+
+#, fuzzy
+#~| msgid "<p><b>2008</b></p>"
+#~ msgctxt ""
+#~ "Marble::WikipediaItem|Title:\n"
+#~ "Summary"
+#~ msgid "<b>%1</b><br>%2"
+#~ msgstr "<p><b>2008</b></p>"
+
+#, fuzzy
+#~| msgid "Wikipedia Articles"
+#~ msgctxt "Marble::WikipediaPlugin|"
+#~ msgid "Wikipedia Articles"
+#~ msgstr "Årtikes di Wikipedia"
+
+#, fuzzy
+#~| msgid "&Wikipedia"
+#~ msgctxt "Marble::WikipediaPlugin|"
+#~ msgid "&Wikipedia"
+#~ msgstr "&Wikipedia"
+
+#, fuzzy
+#~| msgid "Export Map"
+#~ msgctxt "CycleStreetsConfigWidget|"
+#~ msgid "Route type:"
+#~ msgstr "Ebaguer mape"
+
+#, fuzzy
+#~| msgid "Mountain"
+#~ msgctxt "Marble::CycleStreetsPlugin|"
+#~ msgid "CycleStreets Routing"
+#~ msgstr "Montinne"
+
+#, fuzzy
+#~| msgid "Mountain"
+#~ msgctxt "Marble::CycleStreetsPlugin|"
+#~ msgid "CycleStreets"
+#~ msgstr "Montinne"
+
+#, fuzzy
+#~| msgid "Copy Coordinates"
+#~ msgctxt "Marble::GeoUriPlugin|"
+#~ msgid "Input of geographic coordinates by the geo URI scheme"
+#~ msgstr "Copyî cordinêyes"
+
+#, fuzzy
+#~| msgid "Mountain"
+#~ msgctxt "Marble::GosmorePlugin|"
+#~ msgid "Gosmore Reverse Geocoding"
+#~ msgstr "Montinne"
+
+#, fuzzy
+#~| msgid "Mountain"
+#~ msgctxt "Marble::GosmorePlugin|"
+#~ msgid "Gosmore"
+#~ msgstr "Montinne"
+
+#, fuzzy
+#~| msgid "Mountain"
+#~ msgctxt "Marble::GosmorePlugin|"
+#~ msgid "Gosmore Routing"
+#~ msgstr "Montinne"
+
+#, fuzzy
+#~| msgid "Copy Coordinates"
+#~ msgctxt "Marble::LatLonPlugin|"
+#~ msgid "Geographic Coordinates Search"
+#~ msgstr "Copyî cordinêyes"
+
+#, fuzzy
+#~| msgid "Copy Coordinates"
+#~ msgctxt "Marble::LatLonPlugin|"
+#~ msgid "Geographic Coordinates"
+#~ msgstr "Copyî cordinêyes"
+
+#, fuzzy
+#~| msgid "Copy Coordinates"
+#~ msgctxt "Marble::LatLonPlugin|"
+#~ msgid "Direct input of geographic coordinates"
+#~ msgstr "Copyî cordinêyes"
+
+#, fuzzy
+#~| msgid "Capital"
+#~ msgctxt "QObject|"
+#~ msgid "hospital"
+#~ msgstr "Mwaisse veye"
+
+#, fuzzy
+#~| msgid "Nation"
+#~ msgctxt "QObject|"
+#~ msgid "attraction"
+#~ msgstr "Nåcion"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "ruin"
+#~ msgstr "Nåcion"
+
+#, fuzzy
+#~| msgid "&Stars"
+#~ msgctxt "QObject|"
+#~ msgid "theatre"
+#~ msgstr "&Sitoeles"
+
+#, fuzzy
+#~| msgid "&Copy Map"
+#~ msgctxt "QObject|"
+#~ msgid "view point"
+#~ msgstr "&Copyî mape"
+
+#, fuzzy
+#~| msgid "Export Map"
+#~ msgctxt "QObject|"
+#~ msgid "airport apron"
+#~ msgstr "Ebaguer mape"
+
+#, fuzzy
+#~| msgid "Navigation"
+#~ msgctxt "QObject|"
+#~ msgid "bus station"
+#~ msgstr "Naiviaedje"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "parking"
+#~ msgstr "Nåcion"
+
+#, fuzzy
+#~| msgid "Navigation"
+#~ msgctxt "QObject|"
+#~ msgid "train station"
+#~ msgstr "Naiviaedje"
+
+#, fuzzy
+#~| msgid "Italic"
+#~ msgctxt "QObject|"
+#~ msgid "taxi"
+#~ msgstr "Clintcheye"
+
+#, fuzzy
+#~| msgid "OpenStreetMap"
+#~ msgctxt "Marble::LocalOsmSearchPlugin|"
+#~ msgid "Offline OpenStreetMap Search"
+#~ msgstr "OpenStreetMap"
+
+#, fuzzy
+#~| msgctxt "The compass direction"
+#~| msgid "North"
+#~ msgctxt "QObject|"
+#~ msgid "north"
+#~ msgstr "Bijhe"
+
+#, fuzzy
+#~| msgctxt "The compass direction"
+#~| msgid "North"
+#~ msgctxt "QObject|"
+#~ msgid "north-west"
+#~ msgstr "Bijhe"
+
+#, fuzzy
+#~| msgctxt "The compass direction"
+#~| msgid "West"
+#~ msgctxt "QObject|"
+#~ msgid "west"
+#~ msgstr "Coûtchant"
+
+#, fuzzy
+#~| msgctxt "The compass direction"
+#~| msgid "South"
+#~ msgctxt "QObject|"
+#~ msgid "south-west"
+#~ msgstr "Nonne"
+
+#, fuzzy
+#~| msgctxt "The compass direction"
+#~| msgid "South"
+#~ msgctxt "QObject|"
+#~ msgid "south"
+#~ msgstr "Nonne"
+
+#, fuzzy
+#~| msgctxt "The compass direction"
+#~| msgid "South"
+#~ msgctxt "QObject|"
+#~ msgid "south-east"
+#~ msgstr "Nonne"
+
+#, fuzzy
+#~| msgctxt "The compass direction"
+#~| msgid "East"
+#~ msgctxt "QObject|"
+#~ msgid "east"
+#~ msgstr "Levant"
+
+#, fuzzy
+#~| msgctxt "The compass direction"
+#~| msgid "North"
+#~ msgctxt "QObject|"
+#~ msgid "north-east"
+#~ msgstr "Bijhe"
+
+#, fuzzy
+#~| msgid "Mountain"
+#~ msgctxt "Marble::MapQuestPlugin|"
+#~ msgid "MapQuest Routing"
+#~ msgstr "Montinne"
+
+#, fuzzy
+#~| msgid "Mountain"
+#~ msgctxt "Marble::MapQuestPlugin|"
+#~ msgid "MapQuest"
+#~ msgstr "Montinne"
+
+#, fuzzy
+#~| msgid "Download failed: %1."
+#~ msgctxt "QObject|"
+#~ msgid "Downloading %1"
+#~ msgstr "L' aberwetaedje a fwait berwete : %1."
+
+#, fuzzy
+#~| msgid "&Copy Map"
+#~ msgctxt "Marble::MonavConfigWidget|"
+#~ msgid "Remove Map"
+#~ msgstr "&Copyî mape"
+
+#, fuzzy
+#~| msgid "Mountain"
+#~ msgctxt "MonavConfigWidget|"
+#~ msgid "Monav Configuration"
+#~ msgstr "Montinne"
+
+#, fuzzy
+#~ msgctxt "MonavConfigWidget|"
+#~ msgid "Configure"
+#~ msgstr "Apontyî l' contrôle do solea"
+
+#, fuzzy
+#~| msgid "&Bookmarks"
+#~ msgctxt "MonavConfigWidget|"
+#~ msgid "Manage Maps"
+#~ msgstr "&Rimarkes"
+
+#, fuzzy
+#~| msgid "Continent"
+#~ msgctxt "MonavConfigWidget|"
+#~ msgid "Continent"
+#~ msgstr "Continint"
+
+#, fuzzy
+#~| msgid "Download finished."
+#~ msgctxt "MonavConfigWidget|"
+#~ msgid "Download Variant"
+#~ msgstr "L' aberwetaedje a fni."
+
+#, fuzzy
+#~| msgid "Name"
+#~ msgctxt "Marble::MonavMapsModel|"
+#~ msgid "Name"
+#~ msgstr "No"
+
+#, fuzzy
+#~| msgid "Mountain"
+#~ msgctxt "Marble::MonavPlugin|"
+#~ msgid "Monav Routing"
+#~ msgstr "Montinne"
+
+#, fuzzy
+#~| msgctxt "the earth's moon"
+#~| msgid "Moon"
+#~ msgctxt "Marble::MonavPlugin|"
+#~ msgid "Monav"
+#~ msgstr "Lune"
+
+#, fuzzy
+#~| msgid "OpenStreetMap"
+#~ msgctxt "Marble::NominatimPlugin|"
+#~ msgid "OpenStreetMap Nominatim Reverse Geocoding"
+#~ msgstr "OpenStreetMap"
+
+#, fuzzy
+#~| msgid "OpenStreetMap"
+#~ msgctxt "Marble::NominatimPlugin|"
+#~ msgid "OpenStreetMap Nominatim"
+#~ msgstr "OpenStreetMap"
+
+#, fuzzy
+#~| msgid "OpenStreetMap"
+#~ msgctxt "Marble::NominatimPlugin|"
+#~ msgid "OpenStreetMap Nominatim Search"
+#~ msgstr "OpenStreetMap"
+
+#, fuzzy
+#~ msgctxt "Marble::OpenLocationCodeSearchPlugin|"
+#~ msgid "Open Location Code Search"
+#~ msgstr "Drovi fitchî"
+
+#, fuzzy
+#~ msgctxt "Marble::OpenLocationCodeSearchPlugin|"
+#~ msgid "Open Location Code"
+#~ msgstr "Drovi fitchî"
+
+#, fuzzy
+#~| msgid "Mountain"
+#~ msgctxt "Marble::OpenRouteServicePlugin|"
+#~ msgid "OpenRouteService Routing"
+#~ msgstr "Montinne"
+
+#, fuzzy
+#~| msgid "Export Map"
+#~ msgctxt "Marble::OpenRouteServicePlugin|"
+#~ msgid "OpenRouteService"
+#~ msgstr "Ebaguer mape"
+
+#, fuzzy
+#~| msgid "OpenStreetMap"
+#~ msgctxt "Marble::OsmPlugin|"
+#~ msgid "OpenStreetMap Data"
+#~ msgstr "OpenStreetMap"
+
+#, fuzzy
+#~| msgid "Mountain"
+#~ msgctxt "Marble::RoutinoPlugin|"
+#~ msgid "Routino Routing"
+#~ msgstr "Montinne"
+
+#, fuzzy
+#~| msgid "Mountain"
+#~ msgctxt "Marble::RoutinoPlugin|"
+#~ msgid "Routino"
+#~ msgstr "Montinne"
+
+#, fuzzy
+#~| msgctxt "a planet without data"
+#~| msgid "Unknown Planet"
+#~ msgctxt "Marble::RoutinoConfigWidget|"
+#~ msgid "Motorcar"
+#~ msgstr "Planete nén cnoxhowe"
+
+#, fuzzy
+#~| msgid "Navigation"
+#~ msgctxt "YoursConfigWidget|"
+#~ msgid "Transport:"
+#~ msgstr "Naiviaedje"
+
+#, fuzzy
+#~| msgid "Mountain"
+#~ msgctxt "Marble::YoursPlugin|"
+#~ msgid "Yours Routing"
+#~ msgstr "Montinne"
+
+#, fuzzy
+#~ msgctxt "Marble::YoursConfigWidget|"
+#~ msgid "Bicycle"
+#~ msgstr "Nåcion"
+
+#, fuzzy
+#~| msgctxt "a planet without data"
+#~| msgid "Unknown Planet"
+#~ msgctxt "Marble::YoursConfigWidget|"
+#~ msgid "Motorcar"
+#~ msgstr "Planete nén cnoxhowe"
+
+#, fuzzy
+#~| msgid "FITemplate"
+#~ msgctxt "Marble::FITemplateFloatItem|"
+#~ msgid "FITemplate"
+#~ msgstr "ModeleCF"
+
+#, fuzzy
+#~| msgid "Float Item &Template"
+#~ msgctxt "Marble::FITemplateFloatItem|"
+#~ msgid "Float Item &Template"
+#~ msgstr "&Modele po les cayets flotants"
+
+#, fuzzy
+#~| msgid "This is a template class for float items."
+#~ msgctxt "Marble::FITemplateFloatItem|"
+#~ msgid "This is a template class for float items."
+#~ msgstr "Çouchal est ene classe di modele po les cayets flotants."
+
+#, fuzzy
+#~| msgid "&Copy Map"
+#~ msgctxt "Bookmarks|"
+#~ msgid "Removed"
+#~ msgstr "&Copyî mape"
+
+#, fuzzy
+#~| msgid "&Settings"
+#~ msgctxt "MainScreen|"
+#~ msgid "Settings"
+#~ msgstr "&Apontiaedjes"
+
+#, fuzzy
+#~ msgctxt "MainScreen|"
+#~ msgid "About"
+#~ msgstr "Åd fw&ait"
+
+#, fuzzy
+#~| msgid "&Bookmarks"
+#~ msgctxt "MainScreen|"
+#~ msgid "Bookmarks"
+#~ msgstr "&Rimarkes"
+
+#, fuzzy
+#~| msgid "Mountain"
+#~ msgctxt "MainScreen|"
+#~ msgid "Routing"
+#~ msgstr "Montinne"
+
+#, fuzzy
+#~| msgid "%1 km"
+#~ msgctxt "NavigationInfoBar|"
+#~ msgid "%1 km"
+#~ msgstr "%1 km"
+
+#, fuzzy
+#~ msgctxt "ProfileSelectorMenu|"
+#~ msgid "Bicycle"
+#~ msgstr "Nåcion"
+
+#, fuzzy
+#~ msgctxt "PublicTransport|"
+#~ msgid "Train"
+#~ msgstr "Nåcion"
+
+#, fuzzy
+#~| msgid "Navigation"
+#~ msgctxt "SidePanel|"
+#~ msgid "Public Transport"
+#~ msgstr "Naiviaedje"
+
+#, fuzzy
+#~| msgid "Mountain"
+#~ msgctxt "SidePanel|"
+#~ msgid "About Marble Maps…"
+#~ msgstr "Montinne"
+
+#, fuzzy
+#~| msgid "Ctrl+O"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Ctrl+O"
+#~ msgstr "Ctrl+O"
+
+#, fuzzy
+#~| msgid "Ctrl+S"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Ctrl+S"
+#~ msgstr "Ctrl+S"
+
+#, fuzzy
+#~| msgid "Ctrl+C"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Ctrl+C"
+#~ msgstr "Ctrl+C"
+
+#, fuzzy
+#~| msgid "Ctrl+E"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Ctrl+E"
+#~ msgstr "Ctrl+C"
+
+#, fuzzy
+#~| msgid "Ctrl+Shift+F"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Ctrl+Shift+F"
+#~ msgstr "Ctrl+Shift+F"
+
+#, fuzzy
+#~| msgid "F5"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "F5"
+#~ msgstr "F5"
+
+#, fuzzy
+#~| msgid "F1"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "F1"
+#~ msgstr "F1"
+
+#, fuzzy
+#~| msgid "Shift+F1"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Shift+F1"
+#~ msgstr "Shift+F1"
+
+#, fuzzy
+#~| msgid "Ctrl+B"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Ctrl+B"
+#~ msgstr "Ctrl+R"
+
+#, fuzzy
+#~| msgid "Copy Coordinates"
+#~ msgctxt "Marble::MapWizard|"
+#~ msgid "Geographic Pole"
+#~ msgstr "Copyî cordinêyes"
+
+#, fuzzy
+#~| msgid "Shipwreck"
+#~ msgctxt "Marble::MapWizard|"
+#~ msgid "Shipwreck"
+#~ msgstr "Nåfraedje"
+
+#, fuzzy
+#~| msgid "Current Location"
+#~ msgctxt "Marble::MapWizard|"
+#~ msgid "Observatory"
+#~ msgstr "Eplaeçmint do moumint"
+
+#, fuzzy
+#~| msgid "Mountain"
+#~ msgctxt "Marble::MapWizard|"
+#~ msgid "Mountain"
+#~ msgstr "Montinne"
+
+#, fuzzy
+#~| msgid "Volcano"
+#~ msgctxt "Marble::MapWizard|"
+#~ msgid "Volcano"
+#~ msgstr "Volcan"
+
+#, fuzzy
+#~| msgid "Navigation"
+#~ msgctxt "Marble::MapWizard|"
+#~ msgid "International"
+#~ msgstr "Naiviaedje"
+
+#, fuzzy
+#~| msgid "&Stars"
+#~ msgctxt "Marble::MapWizard|"
+#~ msgid "State"
+#~ msgstr "&Sitoeles"
+
+#, fuzzy
+#~ msgctxt "MapWizard|"
+#~ msgid "Terrain"
+#~ msgstr "Nåcion"
+
+#, fuzzy
+#~| msgid "Coordinate Grid"
+#~ msgctxt "MapWizard|"
+#~ msgid "Coordinate Grid"
+#~ msgstr "Grile des cordinêyes"
+
+#, fuzzy
+#~| msgid "&Add Bookmark"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&Add Bookmark"
+#~ msgstr "&Radjouter rimarke"
+
+#, fuzzy
+#~ msgctxt "RoutingSettingsWidget|"
+#~ msgid "&Configure"
+#~ msgstr "Apontyî l' contrôle do solea"
+
+#, fuzzy
+#~| msgid "&Download Maps..."
+#~ msgctxt "Marble::MapViewWidget|"
+#~ msgid "&Upload Map..."
+#~ msgstr "&Aberweter mapes..."
+
+#, fuzzy
+#~| msgid "Export Map"
+#~ msgctxt "PlacemarkDialog|"
+#~ msgid "Routes"
+#~ msgstr "Ebaguer mape"
+
+#, fuzzy
+#~| msgid "Description"
+#~ msgctxt "CacheDetailsDialog|"
+#~ msgid "Description"
+#~ msgstr "Discrijhaedje"
+
+#, fuzzy
+#~| msgid "&Clouds"
+#~ msgctxt "CacheDetailsDialog|"
+#~ msgid "&Close"
+#~ msgstr "&Nûlêyes"
+
+#, fuzzy
+#~ msgctxt "Marble::OpenCachingComItem|"
+#~ msgid "Terrain:"
+#~ msgstr "Nåcion"
+
+#, fuzzy
+#~| msgid "Nation"
+#~ msgctxt "Marble::OpenCachingComItem|"
+#~ msgid "Verification:"
+#~ msgstr "Nåcion"
+
+#, fuzzy
+#~| msgid "Total Distance: %1 m"
+#~ msgctxt "Marble::OpenCachingComItem|"
+#~ msgid "Distance:"
+#~ msgstr "Distance totåle : %1 m"
+
+#, fuzzy
+#~| msgid "Total Distance: %1 m"
+#~ msgctxt "Marble::OpenCachingComItem|"
+#~ msgid "Distance from home:"
+#~ msgstr "Distance totåle : %1 m"
+
+#, fuzzy
+#~ msgctxt "Marble::OpenCachingComItem|"
+#~ msgid "Terrain"
+#~ msgstr "Nåcion"
+
+#, fuzzy
+#~| msgid "Placemarks Plugin"
+#~ msgctxt "Marble::OpenCachingComItem|"
+#~ msgid "Last found: "
+#~ msgstr "Tchôke-divins des Markes di plaeces"
+
+#, fuzzy
+#~| msgid "Regional Capital"
+#~ msgctxt "Marble::OpenCachingComModel|"
+#~ msgid "Traditional Cache"
+#~ msgstr "Mwaisse veye redjonåle"
+
+#, fuzzy
+#~| msgid "Regional Capital"
+#~ msgctxt "Marble::OpenCachingComModel|"
+#~ msgid "Virtual Cache"
+#~ msgstr "Mwaisse veye redjonåle"
+
+#, fuzzy
+#~| msgctxt "a planet without data"
+#~| msgid "Unknown Planet"
+#~ msgctxt "Marble::OpenCachingComModel|"
+#~ msgid "Unknown Cache"
+#~ msgstr "Planete nén cnoxhowe"
+
+#, fuzzy
+#~| msgid "&Test Plugin"
+#~ msgctxt "Marble::NotesPlugin|"
+#~ msgid "Notes Plugin"
+#~ msgstr "&Tchôke-divins di sayaedje"
+
+#, fuzzy
+#~| msgid "%1 m"
+#~ msgctxt "Marble::Placemark|"
+#~ msgid "%1 m"
+#~ msgstr "%1 m"
+
+#, fuzzy
+#~| msgid "Regional Capital"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "City National Capital"
+#~ msgstr "Mwaisse veye redjonåle"
+
+#, fuzzy
+#~| msgid "Regional Capital"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Town National Capital"
+#~ msgstr "Mwaisse veye redjonåle"
+
+#, fuzzy
+#~| msgid "Regional Capital"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Village National Capital"
+#~ msgstr "Mwaisse veye redjonåle"
+
+#, fuzzy
+#~| msgid "Current Location"
+#~ msgctxt "Marble::Placemark|"
+#~ msgid "There is no reservation"
+#~ msgstr "Eplaeçmint do moumint"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Bag"
+#~ msgstr "Båre di schåle"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Car"
+#~ msgstr "Båre di schåle"
+
+#, fuzzy
+#~| msgid "&Copy Map"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Copy"
+#~ msgstr "&Copyî mape"
+
+#, fuzzy
+#~| msgid "&Bookmarks"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Book"
+#~ msgstr "&Rimarkes"
+
+#, fuzzy
+#~| msgid "Mountain"
+#~ msgctxt "Marble::RoutingProfileSettingsDialog|"
+#~ msgid "Routing Profile - Marble"
+#~ msgstr "Montinne"
+
+#, fuzzy
+#~| msgid "Mountain"
+#~ msgctxt "Marble::RoutingWidget|"
+#~ msgid "Directions - Marble"
+#~ msgstr "Montinne"
+
+#, fuzzy
+#~ msgctxt "GeoDataFeature|"
+#~ msgid "Terrain"
+#~ msgstr "Nåcion"
+
+#, fuzzy
+#~| msgid "Crater"
+#~ msgctxt "GeoDataFeature|"
+#~ msgid "Crater"
+#~ msgstr "Traitoe"
+
+#, fuzzy
+#~| msgid "Mountain"
+#~ msgctxt "GeoDataFeature|"
+#~ msgid "Mountain"
+#~ msgstr "Montinne"
+
+#, fuzzy
+#~| msgid "Volcano"
+#~ msgctxt "GeoDataFeature|"
+#~ msgid "Volcano"
+#~ msgstr "Volcan"
+
+#, fuzzy
+#~| msgid "Copy Coordinates"
+#~ msgctxt "GeoDataFeature|"
+#~ msgid "Geographic Pole"
+#~ msgstr "Copyî cordinêyes"
+
+#, fuzzy
+#~| msgid "Crater"
+#~ msgctxt "GeoDataFeature|"
+#~ msgid "Water"
+#~ msgstr "Traitoe"
+
+#, fuzzy
+#~ msgctxt "GeoDataFeature|"
+#~ msgid "Track"
+#~ msgstr "Nåcion"
+
+#, fuzzy
+#~| msgid "Capital"
+#~ msgctxt "GeoDataFeature|"
+#~ msgid "Hospital"
+#~ msgstr "Mwaisse veye"
+
+#, fuzzy
+#~ msgctxt "GeoDataFeature|"
+#~ msgid "Veterinary"
+#~ msgstr "Schaper fitchî"
+
+#, fuzzy
+#~ msgctxt "GeoDataFeature|"
+#~ msgid "Car"
+#~ msgstr "Båre di schåle"
+
+#, fuzzy
+#~| msgid "&Stars"
+#~ msgctxt "GeoDataFeature|"
+#~ msgid "Theatre"
+#~ msgstr "&Sitoeles"
+
+#, fuzzy
+#~| msgid "&Bookmarks"
+#~ msgctxt "Marble::BookmarkManagerDialog|"
+#~ msgid "Import Bookmarks - Marble"
+#~ msgstr "&Rimarkes"
+
+#, fuzzy
+#~| msgid "&Bookmarks"
+#~ msgctxt "UiEditBookmarkDialog|"
+#~ msgid "Edit Bookmark - Marble"
+#~ msgstr "&Rimarkes"
+
+#, fuzzy
+#~| msgid "New Bookmark Folder"
+#~ msgctxt "UiNewBookmarkFolderDialog|"
+#~ msgid "New Bookmark Folder - Marble"
+#~ msgstr "Novea ridant des rmarkes"
+
+#, fuzzy
+#~| msgid "Mountain"
+#~ msgctxt "Marble::RoutingManager|"
+#~ msgid "Guidance Mode - Marble"
+#~ msgstr "Montinne"
+
+#, fuzzy
+#~| msgid "City"
+#~ msgctxt "Marble::Placemark|"
+#~ msgid "City"
+#~ msgstr "Veye"
+
+#, fuzzy
+#~| msgid "Capital"
+#~ msgctxt "Marble::Placemark|"
+#~ msgid "County Capital"
+#~ msgstr "Mwaisse veye"
+
+#, fuzzy
+#~| msgid "Capital"
+#~ msgctxt "Marble::Placemark|"
+#~ msgid "State Capital"
+#~ msgstr "Mwaisse veye"
+
+#, fuzzy
+#~| msgid "Mountain"
+#~ msgctxt "Marble::Placemark|"
+#~ msgid "Mountain"
+#~ msgstr "Montinne"
+
+#, fuzzy
+#~| msgid "Continent"
+#~ msgctxt "Marble::Placemark|"
+#~ msgid "Continent"
+#~ msgstr "Continint"
+
+#, fuzzy
+#~| msgid "Copy Coordinates"
+#~ msgctxt "Marble::Placemark|"
+#~ msgid "Geographic Pole"
+#~ msgstr "Copyî cordinêyes"
+
+#, fuzzy
+#~| msgid "Current Location"
+#~ msgctxt "Marble::Placemark|"
+#~ msgid "Observatory"
+#~ msgstr "Eplaeçmint do moumint"
+
+#, fuzzy
+#~| msgid "Crater"
+#~ msgctxt "Marble::Placemark|"
+#~ msgid "Water"
+#~ msgstr "Traitoe"
+
+#, fuzzy
+#~ msgctxt "Marble::Placemark|"
+#~ msgid "Track"
+#~ msgstr "Nåcion"
+
+#, fuzzy
+#~ msgctxt "Marble::Placemark|"
+#~ msgid "Veterinary"
+#~ msgstr "Schaper fitchî"
+
+#, fuzzy
+#~ msgctxt "Marble::Placemark|"
+#~ msgid "Car"
+#~ msgstr "Båre di schåle"
+
+#, fuzzy
+#~ msgctxt "Marble::Placemark|"
+#~ msgid "Information"
+#~ msgstr "Schaper fitchî"
+
+#, fuzzy
+#~| msgid "&Stars"
+#~ msgctxt "Marble::Placemark|"
+#~ msgid "Theatre"
+#~ msgstr "&Sitoeles"
+
+#, fuzzy
+#~ msgctxt "Marble::Placemark|"
+#~ msgid "Terrain"
+#~ msgstr "Nåcion"
+
+#, fuzzy
+#~| msgid "Crater"
+#~ msgctxt "Marble::Placemark|"
+#~ msgid "Crater"
+#~ msgstr "Traitoe"
+
+#, fuzzy
+#~| msgid "Marble - Desktop Globe"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Marble Virtual Globe"
+#~ msgstr "Marble - Bole daegnrece pol sicribanne"
+
+#, fuzzy
+#~| msgid "&Wikipedia"
+#~ msgctxt "Marble::Placemark|"
+#~ msgid "Wikipedia"
+#~ msgstr "&Wikipedia"
+
+#, fuzzy
+#~ msgctxt "Marble::MaemoPositionProviderPlugin|"
+#~ msgid "Maemo Position Provider Plugin"
+#~ msgstr "Tchôke-divins GeoRender"
+
+#, fuzzy
+#~| msgid "Maemo"
+#~ msgctxt "Marble::MaemoPositionProviderPlugin|"
+#~ msgid "Maemo"
+#~ msgstr "Maemo"
+
+#, fuzzy
+#~| msgid "&Open..."
+#~ msgctxt "MarbleViewSettingsWidget|"
+#~ msgid "OpenGL"
+#~ msgstr "&Drovi..."
+
+#, fuzzy
+#~ msgctxt "Marble::QtMarbleConfigDialog|"
+#~ msgid "Native"
+#~ msgstr "Nåcion"
+
+#, fuzzy
+#~ msgctxt "Marble::QtMarbleConfigDialog|"
+#~ msgid "Native (X11)"
+#~ msgstr "Nåcion"
+
+#~ msgctxt "East, the direction"
+#~ msgid "E"
+#~ msgstr "L"
+
+#~ msgctxt "West, the direction"
+#~ msgid "W"
+#~ msgstr "C"
+
+#~ msgctxt "North, the direction"
+#~ msgid "N"
+#~ msgstr "B"
+
+#~ msgctxt "South, the direction"
+#~ msgid "S"
+#~ msgstr "N"
+
+#, fuzzy
+#~| msgid "m"
+#~ msgctxt "means meter"
+#~ msgid "m"
+#~ msgstr "m"
+
+#, fuzzy
+#~| msgid "km"
+#~ msgctxt "means kilometers"
+#~ msgid "km"
+#~ msgstr "km"
+
+#, fuzzy
+#~| msgid "ft"
+#~ msgctxt "means feet"
+#~ msgid "ft"
+#~ msgstr "pî"
+
+#, fuzzy
+#~| msgid "m"
+#~ msgctxt "means miles"
+#~ msgid "mi"
+#~ msgstr "m"
+
+#, fuzzy
+#~| msgid "m"
+#~ msgctxt "means nautical miles"
+#~ msgid "nm"
+#~ msgstr "m"
+
+#~ msgctxt "the planet"
+#~ msgid "Mercury"
+#~ msgstr "Mercure"
+
+#~ msgctxt "the planet"
+#~ msgid "Venus"
+#~ msgstr "Venus"
+
+#~ msgctxt "the planet"
+#~ msgid "Earth"
+#~ msgstr "Daegne"
+
+#~ msgctxt "the planet"
+#~ msgid "Mars"
+#~ msgstr "Måss"
+
+#~ msgctxt "the planet"
+#~ msgid "Jupiter"
+#~ msgstr "Djupiter"
+
+#~ msgctxt "the planet"
+#~ msgid "Saturn"
+#~ msgstr "Satûne"
+
+#~ msgctxt "the planet"
+#~ msgid "Uranus"
+#~ msgstr "Uranus"
+
+#~ msgctxt "the planet"
+#~ msgid "Neptune"
+#~ msgstr "Neptune"
+
+#~ msgctxt "the earth's star"
+#~ msgid "Sun"
+#~ msgstr "Solea"
+
+#~ msgctxt "the earth's moon"
+#~ msgid "Moon"
+#~ msgstr "Lune"
+
+#, fuzzy
+#~ msgctxt "Name of a satellite group"
+#~ msgid "Weather"
+#~ msgstr "Traitoe"
+
+#, fuzzy
+#~ msgctxt "Name of a satellite group"
+#~ msgid "Other"
+#~ msgstr "Traitoe"
+
+#, fuzzy
+#~| msgid "&Copy Map"
+#~ msgid "Remove item"
+#~ msgstr "&Copyî mape"
+
+#, fuzzy
+#~ msgid "Supported video (*.mp4 *.webm *.ogg)"
+#~ msgstr ""
+#~ "Tos les fitchîs sopoirtés (*.gpx *.kml);;dinêyes GPS (*.gpx);;KML di "
+#~ "Google Earth (*.kml)"
+
+#~ msgid "Total Distance: %1 km"
+#~ msgstr "Distance totåle : %1 km"
+
+#, fuzzy
+#~ msgid "All Supported Files (*.kml);;KML file (*.kml)"
+#~ msgstr ""
+#~ "Tos les fitchîs sopoirtés (*.gpx *.kml);;dinêyes GPS (*.gpx);;KML di "
+#~ "Google Earth (*.kml)"
+
+#, fuzzy
+#~| msgid "Show Navigation Panel"
+#~ msgid "Show &Sun"
+#~ msgstr "Mostrer l' panea di naiviaedje"
+
+#, fuzzy
+#~| msgid "Map View"
+#~ msgid "Map View - Marble"
+#~ msgstr "Vuwe del mape"
+
+#, fuzzy
+#~| msgid "Export Map"
+#~ msgid "Open Route..."
+#~ msgstr "Ebaguer mape"
+
+#, fuzzy
+#~| msgid "Export Map"
+#~ msgid "Save Route..."
+#~ msgstr "Ebaguer mape"
+
+#, fuzzy
+#~| msgid "Mountain"
+#~ msgid "Tracking - Marble"
+#~ msgstr "Montinne"
+
+#~ msgid "Show Atmosphere"
+#~ msgstr "Mostrer l' atmosfere"
+
+#, fuzzy
+#~ msgid "OSM Annotation Plugin"
+#~ msgstr "Tchôke-divins Stoeles"
+
+#, fuzzy
+#~ msgid "Download Osm File"
+#~ msgstr "L' aberwetaedje a fwait berwete : %1."
+
+#~ msgid "Marble Info Center - %1"
+#~ msgstr "Cinte d' infôrmåcions di Marble - %1"
+
+#~ msgid "Elevation extreme"
+#~ msgstr "Nouzome hôteur"
+
+#~ msgid "%1 sq km"
+#~ msgstr "%1 km²"
+
+#~ msgid "%1 Mio. sq km"
+#~ msgstr "%1 Mio. km²"
+
+#~ msgid "%1 inh."
+#~ msgstr "%1 p."
+
+#~ msgid "%1 Mio. inh."
+#~ msgstr "%1 Mio. p."
+
+#~ msgid "KIO Network Plugin"
+#~ msgstr "Tchôke-divins di rantoele KIO"
+
+#~ msgid "KIO based Network Plugin"
+#~ msgstr "Tchôke-divins di rantoele båzé so KIO"
+
+#, fuzzy
+#~ msgid "QNam Network Plugin"
+#~ msgstr "Tchôke-divins des Markes di plaeces"
+
+#, fuzzy
+#~| msgid ""
+#~| "All Supported Files (*.gpx *.kml);;GPS Data (*.gpx);;Google Earth KML (*."
+#~| "kml)"
+#~ msgid ""
+#~ "All Supported Files (*.gpx *.kml *.log *.osm *.pnt *.shp);;GPS Data (*."
+#~ "gpx);;Google Earth KML (*.kml);;TangoGPS Log File (*.log);;OpenStreetmap "
+#~ "Data (*.osm);;Micro World Database II (*.pnt);;Shapefile map file (*.shp)"
+#~ msgstr ""
+#~ "Tos les fitchîs sopoirtés (*.gpx *.kml);;dinêyes GPS (*.gpx);;KML di "
+#~ "Google Earth (*.kml)"
+
+#, fuzzy
+#~| msgid "Version %1"
+#~ msgid "Head on %1"
+#~ msgstr "Modêye %1"
+
+#, fuzzy
+#~ msgid "File Reader Position ProviderPlugin"
+#~ msgstr "Tchôke-divins GeoRender"
+
+#, fuzzy
+#~ msgid ""
+#~ "<br />(c) 2009, 2010 The Marble Project<br /><br /><a href=\"http://edu."
+#~ "kde.org/marble\">http://edu.kde.org/marble</a>"
+#~ msgstr ""
+#~ "<br />© 2007, 2008, 2009 Li Pordjet Marble<br /><br /><a href=\"http://"
+#~ "edu.kde.org/marble\">http://edu.kde.org/marble</a>"
+
+#, fuzzy
+#~ msgid ""
+#~ "<br />(c) 2009 The Marble Project<br /><br /><a href=\"http://edu.kde.org/"
+#~ "marble\">http://edu.kde.org/marble</a>"
+#~ msgstr ""
+#~ "<br />© 2007, 2008, 2009 Li Pordjet Marble<br /><br /><a href=\"http://"
+#~ "edu.kde.org/marble\">http://edu.kde.org/marble</a>"
+
+#, fuzzy
+#~ msgid ""
+#~ "<br />(c) 2010 The Marble Project<br /><br /><a href=\"http://edu.kde.org/"
+#~ "marble\">http://edu.kde.org/marble</a>"
+#~ msgstr ""
+#~ "<br />© 2007, 2008, 2009 Li Pordjet Marble<br /><br /><a href=\"http://"
+#~ "edu.kde.org/marble\">http://edu.kde.org/marble</a>"
+
+#, fuzzy
+#~ msgid ""
+#~ "<br />(c) 2009, 2010, 2011 The Marble Project<br /><br /><a href=\"http://"
+#~ "edu.kde.org/marble\">http://edu.kde.org/marble</a>"
+#~ msgstr ""
+#~ "<br />© 2007, 2008, 2009 Li Pordjet Marble<br /><br /><a href=\"http://"
+#~ "edu.kde.org/marble\">http://edu.kde.org/marble</a>"
+
+#~ msgid "&Earth"
+#~ msgstr "&Daegne"
+
+#~ msgctxt "The compass direction"
+#~ msgid "North"
+#~ msgstr "Bijhe"
+
+#~ msgctxt "The compass direction"
+#~ msgid "East"
+#~ msgstr "Levant"
+
+#~ msgctxt "The compass direction"
+#~ msgid "South"
+#~ msgstr "Nonne"
+
+#~ msgctxt "The compass direction"
+#~ msgid "West"
+#~ msgstr "Coûtchant"
+
+#~ msgid "0 N 0 W"
+#~ msgstr "0 B 0 C"
+
+#, fuzzy
+#~ msgid ""
+#~ "<br />(c) 2009, 2010 The Marble Project <br /><br /><a href=\"http://edu."
+#~ "kde.org/marble\">http://edu.kde.org/marble</a>"
+#~ msgstr ""
+#~ "<br />© 2007, 2008, 2009 Li Pordjet Marble<br /><br /><a href=\"http://"
+#~ "edu.kde.org/marble\">http://edu.kde.org/marble</a>"
+
+#, fuzzy
+#~ msgid ""
+#~ "<br />(c) 2009, 2010, 2011 The Marble Project <br /><br /><a href="
+#~ "\"http://edu.kde.org/marble\">http://edu.kde.org/marble</a>"
+#~ msgstr ""
+#~ "<br />© 2007, 2008, 2009 Li Pordjet Marble<br /><br /><a href=\"http://"
+#~ "edu.kde.org/marble\">http://edu.kde.org/marble</a>"
+
+#~ msgid "The file is not a valid GPX 1.0 / 1.1 file"
+#~ msgstr "Li fitchî n' est nén on fitchî GPX 1.0 / 1.1 valåbe"
+
+#, fuzzy
+#~| msgid "The file is not a valid DGML 2.0 file"
+#~ msgid "The file is not a valid OSM file"
+#~ msgstr "Li fitchî n' est nén on fitchî DGML 2.0 valåbe"
+
+#~ msgid "The file is not a valid DGML 2.0 file"
+#~ msgstr "Li fitchî n' est nén on fitchî DGML 2.0 valåbe"
+
+#~ msgid "File format unrecognized"
+#~ msgstr "Cogne do fitchî nén rconexhowe"
+
+#~ msgid "The file is not a valid KML 2.0 / 2.1 / 2.2 file"
+#~ msgstr "Li fitchî n' est nén on fitchî KML 2.0 / 2.1 / 2.2 valåbe"
+
+#, fuzzy
+#~| msgid ""
+#~| "<br />(c) 2007, 2008, 2009 The Marble Project<br /><br /><a href="
+#~| "\"http://edu.kde.org/marble\">http://edu.kde.org/marble</a>"
+#~ msgid ""
+#~ "<br />(c) 2007, 2008, 2009, 2010 The Marble Project<br /><br /><a href="
+#~ "\"http://edu.kde.org/marble\">http://edu.kde.org/marble</a>"
+#~ msgstr ""
+#~ "<br />© 2007, 2008, 2009 Li Pordjet Marble<br /><br /><a href=\"http://"
+#~ "edu.kde.org/marble\">http://edu.kde.org/marble</a>"
+
+#~ msgid "&Remove all Bookmarks"
+#~ msgstr "&Oister totes les rimarkes"
+
+#~ msgid "Remove all Bookmarks"
+#~ msgstr "Oister totes les rimarkes"
+
+#~ msgid "KM"
+#~ msgstr "KM"
+
+#~ msgid "This is a simple test plugin."
+#~ msgstr "Çouchal est on simpe tchôke-divins di sayaedje."
+
+#~ msgid "Open new kml file..."
+#~ msgstr "Drovi nove fitchî kml..."
+
+#~ msgid ""
+#~ "All Supported Files (*.gpx *.kml);;GPS Data (*.gpx);;Google Earth KML (*."
+#~ "kml)"
+#~ msgstr ""
+#~ "Tos les fitchîs sopoirtés (*.gpx *.kml);;dinêyes GPS (*.gpx);;KML di "
+#~ "Google Earth (*.kml)"
+
+#, fuzzy
+#~ msgid "Meters"
+#~ msgstr "Traitoe"
+
+#~ msgid "DataView Plugin"
+#~ msgstr "Tchôke-divins VuweDinêyes"
+
+#~ msgid "A plugin that displays all the loaded data in a separate window."
+#~ msgstr ""
+#~ "On tchôke-divins k' håyene totes les dnêyes tcherdjeyes dins on purnea a "
+#~ "pårt."
+
+#~ msgid "GeoRenderer Plugin"
+#~ msgstr "Tchôke-divins GeoRender"
+
+#, fuzzy
+#~ msgid "&GeoRenderer Plugin"
+#~ msgstr "Tchôke-divins &GeoData"
+
+#~ msgid "Sh&ow"
+#~ msgstr "M&ostrer"
+
+#~ msgid "GpxSax"
+#~ msgstr "GpxSax"
+
+#~ msgid "GpxFile (*.gpx)"
+#~ msgstr "FitchîGpx (*.gpx)"
+
+#~ msgid "&Placemarks Plugin"
+#~ msgstr "Tchôke-divins des Markes di &plaeces"
+
+#~ msgid "A plugin that displays placemarks."
+#~ msgstr "On tchôke-divins k' håyene des markes di plaeces."
+
+#~ msgid "mi/h"
+#~ msgstr "mi/e"

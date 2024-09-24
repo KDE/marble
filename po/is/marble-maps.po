@@ -1,0 +1,4231 @@
+# translation of marble_qt.po to Icelandic
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Sveinn í Felli <sveinki@nett.is>, 2009.
+msgid ""
+msgstr ""
+"Project-Id-Version: marble_qt\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2024-09-23 00:36+0000\n"
+"PO-Revision-Date: 2009-12-03 16:55+0000\n"
+"Last-Translator: Sveinn í Felli <sveinki@nett.is>\n"
+"Language-Team: Icelandic <kde-isl@molar.is>\n"
+"Language: is\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.11.4\n"
+"Plural-Forms: Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Qt-Contexts: true\n"
+
+#, fuzzy, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "&Skrá"
+
+#, fuzzy, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "Sýna stjór&nunarspjald"
+
+#: Bookmarks.qml:20
+#, fuzzy, kde-format
+msgctxt "@title:window"
+msgid "Bookmarks"
+msgstr "Mountain"
+
+#: Bookmarks.qml:69
+#, kde-format
+msgid "Your bookmarks will appear here."
+msgstr ""
+
+#: CurrentPosition.qml:54
+#, fuzzy, kde-format
+msgctxt "@option:check"
+msgid "Follow Current Position"
+msgstr "Staðsetning"
+
+#: main.cpp:37 MainScreen.qml:20 MainScreen.qml:177
+#, fuzzy, kde-format
+msgid "Marble Maps"
+msgstr "Marmari"
+
+#: main.cpp:39
+#, fuzzy, kde-format
+msgid "Maps"
+msgstr "Br&eyta"
+
+#: main.cpp:41
+#, kde-format
+msgid "© KDE Community"
+msgstr ""
+
+#: MainScreen.qml:86
+#, fuzzy, kde-format
+msgid "Public Transport"
+msgstr "Leiðarstýring"
+
+#: MainScreen.qml:101
+#, kde-format
+msgid "Outdoor Activities"
+msgstr ""
+
+#: MainScreen.qml:113
+#, kde-format
+msgctxt "@action:button"
+msgid "Accessibility"
+msgstr ""
+
+#: MainScreen.qml:122
+#, fuzzy, kde-format
+msgctxt "@action:button"
+msgid "About"
+msgstr "Um"
+
+#: MainScreen.qml:133
+#, fuzzy, kde-format
+msgctxt "@action:button"
+msgid "Bookmarks"
+msgstr "Mountain"
+
+#: MainScreen.qml:144
+#, kde-format
+msgctxt "@action:button"
+msgid "Layer Options"
+msgstr ""
+
+#: MainScreen.qml:455
+#, fuzzy, kde-format
+msgid "%1 km"
+msgstr "km/klst"
+
+#: NavigationInfoBar.qml:20
+#, fuzzy, kde-format
+msgctxt "distance in km"
+msgid "%1 km"
+msgstr "km/klst"
+
+#: NavigationInfoBar.qml:22
+#, kde-format
+msgctxt "distance in m"
+msgid "%1 m"
+msgstr ""
+
+#: NavigationInfoBar.qml:24
+#, kde-format
+msgctxt "distance in m with decimals"
+msgid "%1 m"
+msgstr ""
+
+#: Options.qml:20
+#, kde-format
+msgctxt "@title:window"
+msgid "Layer Options"
+msgstr ""
+
+#: Options.qml:23
+#, fuzzy, kde-format
+msgctxt "@title:group"
+msgid "Public Transport Layers"
+msgstr "Leiðarstýring"
+
+#: Options.qml:28
+#, kde-format
+msgctxt "@option:check"
+msgid "Train"
+msgstr ""
+
+#: Options.qml:35
+#, kde-format
+msgctxt "@option:check"
+msgid "Subway"
+msgstr ""
+
+#: Options.qml:42
+#, kde-format
+msgctxt "@option:check"
+msgid "Tram"
+msgstr ""
+
+#: Options.qml:49
+#, kde-format
+msgctxt "@option:check"
+msgid "Bus"
+msgstr ""
+
+#: Options.qml:56
+#, kde-format
+msgctxt "@option:check"
+msgid "Trolley Bus"
+msgstr ""
+
+#: Options.qml:64
+#, kde-format
+msgid "Outdoor Activities Layers"
+msgstr ""
+
+#: Options.qml:69
+#, kde-format
+msgctxt "@option:check"
+msgid "Walkways"
+msgstr ""
+
+#: Options.qml:76
+#, fuzzy, kde-format
+msgctxt "@option:check"
+msgid "Hiking Routes"
+msgstr "Opna skrá"
+
+#: Options.qml:83
+#, fuzzy, kde-format
+msgctxt "@option:check"
+msgid "Bicycle Routes"
+msgstr "stígandi"
+
+#: Options.qml:90
+#, fuzzy, kde-format
+msgctxt "@option:check"
+msgid "Mountainbike Routes"
+msgstr "Mountain"
+
+#: Options.qml:97
+#, fuzzy, kde-format
+msgctxt "@option:check"
+msgid "Inline Skating Routes"
+msgstr "Opna skrá"
+
+#: Options.qml:104
+#, kde-format
+msgctxt "@option:check"
+msgid "Bridleways"
+msgstr ""
+
+#: PlacemarkDialog.qml:48
+#, fuzzy, kde-format
+msgctxt "placeholder"
+msgid "No Name"
+msgstr "Nafn"
+
+#: PlacemarkDialog.qml:168
+#, kde-format
+msgctxt "@title:group"
+msgid "Tags:"
+msgstr ""
+
+#: ProfileSelectorMenu.qml:29
+#, fuzzy, kde-format
+msgid "Car (fastest)"
+msgstr "Bikarinn"
+
+#: ProfileSelectorMenu.qml:40
+#, fuzzy, kde-format
+msgid "Bicycle"
+msgstr "stígandi"
+
+#: ProfileSelectorMenu.qml:49
+#, kde-format
+msgid "Pedestrian"
+msgstr ""
+
+#: RouteEditor.qml:62
+#, kde-format
+msgid "Search for places to integrate them into a route."
+msgstr ""
+
+#: SettingsDialog.qml:48
+#, fuzzy, kde-format
+msgid "Network Settings"
+msgstr "&Stillingar"
+
+#: SettingsDialog.qml:53
+#, kde-format
+msgid "Download Maps via WLAN only"
+msgstr ""
+
+#, fuzzy
+#~ msgctxt "DGML|"
+#~ msgid "Moon"
+#~ msgstr "tunglið"
+
+#, fuzzy
+#~ msgctxt "DGML|"
+#~ msgid "Craters"
+#~ msgstr "Bikarinn"
+
+#, fuzzy
+#~ msgctxt "DGML|"
+#~ msgid "Maria"
+#~ msgstr "Tunglhöf"
+
+#, fuzzy
+#~ msgctxt "DGML|"
+#~ msgid "Coordinate Grid"
+#~ msgstr "Hnita Net"
+
+#, fuzzy
+#~ msgctxt "DGML|"
+#~ msgid "Mons, mountain"
+#~ msgstr "Mountain"
+
+#, fuzzy
+#~ msgctxt "DGML|"
+#~ msgid "Other"
+#~ msgstr "Veður"
+
+#, fuzzy
+#~ msgctxt "DGML|"
+#~ msgid "Mountain"
+#~ msgstr "Mountain"
+
+#, fuzzy
+#~ msgctxt "DGML|"
+#~ msgid "Volcano"
+#~ msgstr "Eldfjall"
+
+#, fuzzy
+#~ msgctxt "DGML|"
+#~ msgid "International"
+#~ msgstr "Gögn"
+
+#, fuzzy
+#~ msgctxt "DGML|"
+#~ msgid "State"
+#~ msgstr "Mars"
+
+#, fuzzy
+#~ msgctxt "DGML|"
+#~ msgid "Light terrain"
+#~ msgstr "dálítil rigning"
+
+#, fuzzy
+#~ msgctxt "DGML|"
+#~ msgid "Water"
+#~ msgstr "Bikarinn"
+
+#, fuzzy
+#~ msgctxt "DGML|"
+#~ msgid "Atlas"
+#~ msgstr "Atlas"
+
+#, fuzzy
+#~ msgctxt "DGML|"
+#~ msgid "Elevation"
+#~ msgstr "Staðsetning"
+
+#, fuzzy
+#~ msgctxt "DGML|"
+#~ msgid "Transportation"
+#~ msgstr "Leiðarstýring"
+
+#, fuzzy
+#~ msgctxt "DGML|"
+#~ msgid "Education"
+#~ msgstr "Staðsetning"
+
+#, fuzzy
+#~ msgctxt "DGML|"
+#~ msgid "Accommodation"
+#~ msgstr "Staðsetning"
+
+#, fuzzy
+#~ msgctxt "DGML|"
+#~ msgid "Railway station"
+#~ msgstr "Leiðarstýring"
+
+#, fuzzy
+#~ msgctxt "DGML|"
+#~ msgid "Tourist attraction"
+#~ msgstr "Leiðarstýring"
+
+#, fuzzy
+#~ msgctxt "DGML|"
+#~ msgid "Veterinary"
+#~ msgstr "Staðsetning"
+
+#, fuzzy
+#~ msgctxt "DGML|"
+#~ msgid "Theatre"
+#~ msgstr "Mars"
+
+#, fuzzy
+#~ msgctxt "DGML|"
+#~ msgid "Fire station"
+#~ msgstr "Leiðarstýring"
+
+#, fuzzy
+#~ msgctxt "DGML|"
+#~ msgid "Bar"
+#~ msgstr "Slá"
+
+#, fuzzy
+#~ msgctxt "DGML|"
+#~ msgid "Car"
+#~ msgstr "bjart"
+
+#, fuzzy
+#~ msgctxt "DGML|"
+#~ msgid "OpenStreetMap"
+#~ msgstr "OpenStreetMap"
+
+#, fuzzy
+#~ msgctxt "DGML|"
+#~ msgid "Texts and illustrations"
+#~ msgstr "Leiðarstýring"
+
+#, fuzzy
+#~ msgctxt "DGML|"
+#~ msgid "Precipitation"
+#~ msgstr "Lýsing"
+
+#, fuzzy
+#~ msgctxt "DGML|"
+#~ msgid "SRTM Data"
+#~ msgstr "Gögn"
+
+#, fuzzy
+#~ msgctxt "DGML|"
+#~ msgid "Sentinel2 Satellite Map"
+#~ msgstr "Sýna stjór&nunarspjald"
+
+#, fuzzy
+#~ msgctxt "DGML|"
+#~ msgid "Satellite View"
+#~ msgstr "OpenStreetMap"
+
+#, fuzzy
+#~ msgctxt "DGML|"
+#~ msgid "Vegetation"
+#~ msgstr "Staðsetning"
+
+#, fuzzy
+#~ msgctxt "Legends|"
+#~ msgid "Marble: Legend"
+#~ msgstr "Marmari"
+
+#, fuzzy
+#~ msgctxt "Legends|"
+#~ msgid "Population:"
+#~ msgstr "Leiðarstýring"
+
+#, fuzzy
+#~ msgctxt "StarNames|"
+#~ msgid "Ara"
+#~ msgstr "Svæði:"
+
+#, fuzzy
+#~ msgctxt "StarNames|"
+#~ msgid "Crater"
+#~ msgstr "Bikarinn"
+
+#, fuzzy
+#~ msgctxt "StarNames|"
+#~ msgid "Eridanus"
+#~ msgstr "Úranus"
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Marble"
+#~ msgstr "Marmari"
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&Open..."
+#~ msgstr "&Opna kort..."
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&Export Map..."
+#~ msgstr "Br&eyta"
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&Print..."
+#~ msgstr "&Prenta..."
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Ctrl+P"
+#~ msgstr "Ctrl+P"
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&Quit"
+#~ msgstr "&Hætta"
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Ctrl+Q"
+#~ msgstr "Ctrl+O"
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&Edit Map..."
+#~ msgstr "Br&eyta"
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&Configure Marble"
+#~ msgstr "Stilla"
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Show the configuration dialog"
+#~ msgstr "Sýnir glugga fyrir almenna valkosti"
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "C&opy Coordinates"
+#~ msgstr "Hnita Net"
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&Full Screen Mode"
+#~ msgstr "Fylla skjá"
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Full Screen Mode"
+#~ msgstr "Fylla skjá"
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&Show Status Bar"
+#~ msgstr "Sýna stjór&nunarspjald"
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Lock Position"
+#~ msgstr "Staðsetning"
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&Clouds"
+#~ msgstr "S&ký"
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&Time Control..."
+#~ msgstr "Stilla"
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Configure Time Control "
+#~ msgstr "Stilla"
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Configure Sun Control"
+#~ msgstr "Stilla"
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "What's &This"
+#~ msgstr "H&vað er þetta"
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "About &Qt"
+#~ msgstr "Um"
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Add &Bookmark..."
+#~ msgstr "Mountain"
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&Set Home Location"
+#~ msgstr "Staðsetning"
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&Manage Bookmarks..."
+#~ msgstr "Mountain"
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&File"
+#~ msgstr "&Skrá"
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&Edit"
+#~ msgstr "Br&eyta"
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&View"
+#~ msgstr "S&koða"
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&Online Services"
+#~ msgstr "Opna skrá"
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&Panels"
+#~ msgstr "Sýna stjór&nunarspjald"
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&View Size"
+#~ msgstr "S&koða"
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&Settings"
+#~ msgstr "&Stillingar"
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&Help"
+#~ msgstr "&Hjálp"
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&Home"
+#~ msgstr "&Hjálp"
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Ready"
+#~ msgstr "Tilbúinn"
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Export Map"
+#~ msgstr "Br&eyta"
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Position: %1"
+#~ msgstr "Lýsing"
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Open File"
+#~ msgstr "Opna skrá"
+
+#, fuzzy
+#~ msgctxt "Marble::ControlView|"
+#~ msgid "Legend"
+#~ msgstr "Skýring"
+
+#, fuzzy
+#~ msgctxt "Marble::ControlView|"
+#~ msgid "Routing"
+#~ msgstr "Mountain"
+
+#, fuzzy
+#~ msgctxt "Marble::ControlView|"
+#~ msgid "Location"
+#~ msgstr "Staðsetning"
+
+#, fuzzy
+#~ msgctxt "Marble::ControlView|"
+#~ msgid "Map View"
+#~ msgstr "Skoða"
+
+#, fuzzy
+#~ msgctxt "Marble::ControlView|"
+#~ msgid "Files"
+#~ msgstr "&Skrá"
+
+#, fuzzy
+#~ msgctxt "Marble::ControlView|"
+#~ msgid "Tour"
+#~ msgstr "Opna skrá"
+
+#, fuzzy
+#~ msgctxt "Marble::ControlView|"
+#~ msgid "Hide &All Panels"
+#~ msgstr "Sýna stjór&nunarspjald"
+
+#, fuzzy
+#~ msgctxt "Marble::ControlView|"
+#~ msgid "Show or hide all panels."
+#~ msgstr "Sýna stjór&nunarspjald"
+
+#, fuzzy
+#~ msgctxt "Marble::ControlView|"
+#~ msgid "Show &All Panels"
+#~ msgstr "Sýna stjór&nunarspjald"
+
+#, fuzzy
+#~ msgctxt "Marble::AbstractFloatItem|"
+#~ msgid "&Hide"
+#~ msgstr "&Fela"
+
+#, fuzzy
+#~ msgctxt "Marble::AbstractFloatItem|"
+#~ msgid "&Configure..."
+#~ msgstr "Stilla"
+
+#, fuzzy
+#~ msgctxt "UiAddLinkDialog|"
+#~ msgid "Add link"
+#~ msgstr "Slóð"
+
+#, fuzzy
+#~ msgctxt "UiAddLinkDialog|"
+#~ msgid "Name:"
+#~ msgstr "Nafn"
+
+#, fuzzy
+#~ msgctxt "BookmarkManagerDialogPrivate|"
+#~ msgid "Remove Folder"
+#~ msgstr "Mountain"
+
+#, fuzzy
+#~ msgctxt "UiBookmarkManagerDialog|"
+#~ msgid "Bookmark Manager"
+#~ msgstr "Mountain"
+
+#, fuzzy
+#~ msgctxt "UiBookmarkManagerDialog|"
+#~ msgid "Edit"
+#~ msgstr "Br&eyta"
+
+#, fuzzy
+#~ msgctxt "Marble::CelestialSortFilterProxyModel|"
+#~ msgid "Moon"
+#~ msgstr "tunglið"
+
+#, fuzzy
+#~ msgctxt "CloudRoutesDialog|"
+#~ msgid "Cloud Routes"
+#~ msgstr "Opna skrá"
+
+#, fuzzy
+#~ msgctxt "Marble::RouteItemDelegate|"
+#~ msgid "Open"
+#~ msgstr "&Opna kort..."
+
+#, fuzzy
+#~ msgctxt "Marble::RouteItemDelegate|"
+#~ msgid "Upload to cloud"
+#~ msgstr "léttskýjað"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "km/h"
+#~ msgstr "km/klst"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "m"
+#~ msgstr "m"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "km"
+#~ msgstr "km"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "m/h"
+#~ msgstr "km/klst"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "ft"
+#~ msgstr "ft"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "nm"
+#~ msgstr "m"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "Save Track"
+#~ msgstr "Opna skrá"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "Open Track"
+#~ msgstr "Opna skrá"
+
+#, fuzzy
+#~ msgctxt "CurrentLocationWidget|"
+#~ msgid "Current Location"
+#~ msgstr "Staðsetning"
+
+#, fuzzy
+#~ msgctxt "CurrentLocationWidget|"
+#~ msgid "Position Tracking"
+#~ msgstr "Staðsetning"
+
+#, fuzzy
+#~ msgctxt "CurrentLocationWidget|"
+#~ msgid "Show Track"
+#~ msgstr "Sýna stjór&nunarspjald"
+
+#, fuzzy
+#~ msgctxt "CurrentLocationWidget|"
+#~ msgid "Clear Track"
+#~ msgstr "bjart"
+
+#, fuzzy
+#~ msgctxt "DataMigrationWidget|"
+#~ msgid "Data Migration"
+#~ msgstr "Leiðarstýring"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "Current Location"
+#~ msgstr "Staðsetning"
+
+#, fuzzy
+#~ msgctxt "Marble::Placemark|"
+#~ msgid "%1 parking spaces"
+#~ msgstr "stígandi"
+
+#, fuzzy
+#~ msgctxt ""
+#~ "Marble::Placemark|A copy shop does not provide computers for customer use"
+#~ msgid "No computers available"
+#~ msgstr "Sýnir glugga fyrir almenna valkosti"
+
+#, fuzzy
+#~ msgctxt ""
+#~ "Marble::Placemark|A copy shop provides a paid service to make phone calls"
+#~ msgid "Phone service"
+#~ msgstr "Opna skrá"
+
+#, fuzzy
+#~ msgctxt "Marble::Placemark|"
+#~ msgid "Stratovolcano"
+#~ msgstr "Eldfjall"
+
+#, fuzzy
+#~ msgctxt "Marble::Placemark|"
+#~ msgid "Rehabilitation"
+#~ msgstr "Staðsetning"
+
+#, fuzzy
+#~ msgctxt "Marble::Placemark|Parking spaces"
+#~ msgid "%1 disabled spaces"
+#~ msgstr "stígandi"
+
+#, fuzzy
+#~ msgctxt "Marble::Placemark|Parking spaces"
+#~ msgid "%1 women spaces"
+#~ msgstr "stígandi"
+
+#, fuzzy
+#~ msgctxt "Marble::Placemark|Parking spaces"
+#~ msgid "%1 parent and child spaces"
+#~ msgstr "stígandi"
+
+#, fuzzy
+#~ msgctxt "Marble::Placemark|A hut provides showers inside or aside"
+#~ msgid "Has shower"
+#~ msgstr "dálitlar skúrir"
+
+#, fuzzy
+#~ msgctxt "Marble::Placemark|"
+#~ msgid "Self-service"
+#~ msgstr "Opna skrá"
+
+#, fuzzy
+#~ msgctxt "Marble::Placemark|"
+#~ msgid "No self-service"
+#~ msgstr "Opna skrá"
+
+#, fuzzy
+#~ msgctxt "Marble::Placemark|"
+#~ msgid "Inscription: %1"
+#~ msgstr "Lýsing"
+
+#, fuzzy
+#~ msgctxt "Marble::Placemark|A carriage is heated"
+#~ msgid "Is heated"
+#~ msgstr "Mars"
+
+#, fuzzy
+#~ msgctxt "Marble::Placemark|A carriage is not heated"
+#~ msgid "Not heated"
+#~ msgstr "Mars"
+
+#, fuzzy
+#~ msgctxt "Marble::Placemark|A ski piste with trees (gladed)"
+#~ msgid "Contains trees"
+#~ msgstr "Mountain"
+
+#, fuzzy
+#~ msgctxt "Marble::Placemark|"
+#~ msgid "Not patrolled"
+#~ msgstr "Mars"
+
+#, fuzzy
+#~ msgctxt "Marble::Placemark|"
+#~ msgid "Elevation: %1 m"
+#~ msgstr "Staðsetning"
+
+#, fuzzy
+#~ msgctxt "Marble::RouteRelationModel|"
+#~ msgid "International walking route"
+#~ msgstr "Gögn"
+
+#, fuzzy
+#~ msgctxt "Marble::RouteRelationModel|"
+#~ msgid "National walking route"
+#~ msgstr "Borg"
+
+#, fuzzy
+#~ msgctxt "Marble::RouteRelationModel|"
+#~ msgid "International cycling route"
+#~ msgstr "Gögn"
+
+#, fuzzy
+#~ msgctxt "Marble::RouteRelationModel|"
+#~ msgid "National route"
+#~ msgstr "Borg"
+
+#, fuzzy
+#~ msgctxt "Marble::RouteRelationModel|"
+#~ msgid "Local route"
+#~ msgstr "Staðsetning"
+
+#, fuzzy
+#~ msgctxt "Marble::DownloadRegionDialog|"
+#~ msgid "Download Route"
+#~ msgstr "Opna skrá"
+
+#, fuzzy
+#~ msgctxt "Marble::DownloadRegionDialog|"
+#~ msgid "Vector tiles"
+#~ msgstr "Merkúr"
+
+#, fuzzy
+#~ msgctxt "UiEditBookmarkDialog|"
+#~ msgid "&Description:"
+#~ msgstr "Lýsing"
+
+#, fuzzy
+#~ msgctxt "UiEditBookmarkDialog|"
+#~ msgid "&Folder:"
+#~ msgstr "Mountain"
+
+#, fuzzy
+#~ msgctxt "Marble::EditPlacemarkDialog|"
+#~ msgid "Relations"
+#~ msgstr "Staðsetning"
+
+#, fuzzy
+#~ msgctxt "Marble::EditPlacemarkDialog|"
+#~ msgid "Elevation"
+#~ msgstr "Staðsetning"
+
+#, fuzzy
+#~ msgctxt "UiEditPlacemarkDialog|"
+#~ msgid "Description"
+#~ msgstr "Lýsing"
+
+#, fuzzy
+#~ msgctxt "UiEditPlacemarkDialog|"
+#~ msgid "Bold"
+#~ msgstr "Feitletrað"
+
+#, fuzzy
+#~ msgctxt "UiEditPlacemarkDialog|"
+#~ msgid "Italics"
+#~ msgstr "Skáletrað"
+
+#, fuzzy
+#~ msgctxt "UiEditPlacemarkDialog|"
+#~ msgid "Underlined"
+#~ msgstr "Undirstrikað"
+
+#, fuzzy
+#~ msgctxt "UiEditPlacemarkDialog|"
+#~ msgid "Add link"
+#~ msgstr "Slóð"
+
+#, fuzzy
+#~ msgctxt "ElevationWidget|"
+#~ msgid "Elevation:"
+#~ msgstr "Staðsetning"
+
+#, fuzzy
+#~ msgctxt "ElevationWidget|"
+#~ msgid " m"
+#~ msgstr "m"
+
+#, fuzzy
+#~ msgctxt "FileViewWidget|"
+#~ msgid "File View"
+#~ msgstr "Skoða"
+
+#, fuzzy
+#~ msgctxt "FileViewWidget|"
+#~ msgid "&Close"
+#~ msgstr "S&ký"
+
+#, fuzzy
+#~ msgctxt "Marble::FlyToEditWidget|"
+#~ msgid "Duration:"
+#~ msgstr "Leiðarstýring"
+
+#, fuzzy
+#~ msgctxt "Marble::FlyToEditWidget|"
+#~ msgid "Current map center"
+#~ msgstr "Opna skrá"
+
+#, fuzzy
+#~ msgctxt "FormattedTextWidget|"
+#~ msgid "9"
+#~ msgstr "F9"
+
+#, fuzzy
+#~ msgctxt "FormattedTextWidget|"
+#~ msgid "Bold"
+#~ msgstr "Feitletrað"
+
+#, fuzzy
+#~ msgctxt "FormattedTextWidget|"
+#~ msgid "Italics"
+#~ msgstr "Skáletrað"
+
+#, fuzzy
+#~ msgctxt "FormattedTextWidget|"
+#~ msgid "Underlined"
+#~ msgstr "Undirstrikað"
+
+#, fuzzy
+#~ msgctxt "FormattedTextWidget|"
+#~ msgid "Add link"
+#~ msgstr "Slóð"
+
+#, fuzzy
+#~ msgctxt "GeoDataCoordinates|"
+#~ msgid "W"
+#~ msgstr "V"
+
+#, fuzzy
+#~ msgctxt "GeoDataCoordinates|"
+#~ msgid "E"
+#~ msgstr "A"
+
+#, fuzzy
+#~ msgctxt "GeoDataCoordinates|"
+#~ msgid "N"
+#~ msgstr "N"
+
+#, fuzzy
+#~ msgctxt "GeoDataCoordinates|"
+#~ msgid "S"
+#~ msgstr "S"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Crater"
+#~ msgstr "Bikarinn"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Mountain"
+#~ msgstr "Mountain"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "City"
+#~ msgstr "Borg"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "County Capital"
+#~ msgstr "Borg"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "State Capital"
+#~ msgstr "Borg"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Nation Capital"
+#~ msgstr "Borg"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Nation"
+#~ msgstr "Leiðarstýring"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Volcano"
+#~ msgstr "Eldfjall"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Continent"
+#~ msgstr "Stilla"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Observatory"
+#~ msgstr "Merkúr"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Coordinate"
+#~ msgstr "Hnita Net"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Bookmark"
+#~ msgstr "Mountain"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Satellite"
+#~ msgstr "Sýna stjór&nunarspjald"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "City Capital"
+#~ msgstr "Borg"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "National Capital"
+#~ msgstr "Borg"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Locality"
+#~ msgstr "Staðsetning"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Town Capital"
+#~ msgstr "Borg"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Village Capital"
+#~ msgstr "Borg"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Water"
+#~ msgstr "Bikarinn"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Heath"
+#~ msgstr "Veður"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Elevator"
+#~ msgstr "Staðsetning"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Unknown Road"
+#~ msgstr "Sýna stjór&nunarspjald"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Path"
+#~ msgstr "Slóð"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Track"
+#~ msgstr "Opna skrá"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Tertiary Link Road"
+#~ msgstr "Sýna stjór&nunarspjald"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Tertiary Road"
+#~ msgstr "Sýna stjór&nunarspjald"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Trunk Link Road"
+#~ msgstr "Sýna stjór&nunarspjald"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Trunk Road"
+#~ msgstr "Sýna stjór&nunarspjald"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Bar"
+#~ msgstr "Slá"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Veterinary"
+#~ msgstr "Staðsetning"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Mountain Rescue"
+#~ msgstr "Mountain"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Water Park"
+#~ msgstr "Bikarinn"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Fountain"
+#~ msgstr "Mountain"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Night Club"
+#~ msgstr "Br&eyta"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Fire Station"
+#~ msgstr "Leiðarstýring"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Charging Station"
+#~ msgstr "Leiðarstýring"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Car Wash"
+#~ msgstr "Bikarinn"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Social Facility"
+#~ msgstr "Staðsetning"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "City Wall"
+#~ msgstr "Borg"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Wall"
+#~ msgstr "Borg"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Cave Entrance"
+#~ msgstr "Opna skrá"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Confectionery"
+#~ msgstr "Sýna stjór&nunarspjald"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Beauty Services"
+#~ msgstr "Opna skrá"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Chemist"
+#~ msgstr "mistur"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Bicycle Shop"
+#~ msgstr "stígandi"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Car Dealer"
+#~ msgstr "Bikarinn"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Car Repair Shop"
+#~ msgstr "Bikarinn"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Car Parts"
+#~ msgstr "Bikarinn"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Motorcycle Shop"
+#~ msgstr "stígandi"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Printing Services"
+#~ msgstr "Opna skrá"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Photo Shop"
+#~ msgstr "Ljósmyndir"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Bookshop"
+#~ msgstr "Mountain"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Stationery"
+#~ msgstr "Staðsetning"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Tobacco Shop"
+#~ msgstr "Ljósmyndir"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Tea Shop"
+#~ msgstr "Bikarinn"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Computer Shop"
+#~ msgstr "Ljósmyndir"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Lighthouse"
+#~ msgstr "dálitlar skúrir"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Water Tower"
+#~ msgstr "Bikarinn"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Communications Tower"
+#~ msgstr "Sýna stjór&nunarspjald"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Tourist Attraction"
+#~ msgstr "Leiðarstýring"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Information"
+#~ msgstr "Staðsetning"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Theatre"
+#~ msgstr "Mars"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "View Point"
+#~ msgstr "Opna skrá"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Airport Gate"
+#~ msgstr "Br&eyta"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Airport Apron"
+#~ msgstr "Br&eyta"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Airport Terminal"
+#~ msgstr "Br&eyta"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Bus Station"
+#~ msgstr "Leiðarstýring"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Bus Stop"
+#~ msgstr "Leiðarstýring"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Gas Station"
+#~ msgstr "Leiðarstýring"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Parking"
+#~ msgstr "stígandi"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Parking Space"
+#~ msgstr "stígandi"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Bicycle Rental"
+#~ msgstr "stígandi"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Car Rental"
+#~ msgstr "Bikarinn"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Train Station"
+#~ msgstr "Leiðarstýring"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Bicycle Parking"
+#~ msgstr "stígandi"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Motorcycle Parking"
+#~ msgstr "stígandi"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Marina"
+#~ msgstr "Tunglhöf"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Park"
+#~ msgstr "stígandi"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Construction"
+#~ msgstr "Sýna stjór&nunarspjald"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Railway"
+#~ msgstr "Leiðarstýring"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Rail"
+#~ msgstr "Leiðarstýring"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Light Rail"
+#~ msgstr "dálítil rigning"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Railway Construction"
+#~ msgstr "Leiðarstýring"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Power Tower"
+#~ msgstr "Bikarinn"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Aerialway Station"
+#~ msgstr "Leiðarstýring"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Rope Tow"
+#~ msgstr "Bikarinn"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Skitour"
+#~ msgstr "Opna skrá"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Snow Park"
+#~ msgstr "stígandi"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "International Date Line"
+#~ msgstr "Gögn"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Railway Crossing"
+#~ msgstr "Leiðarstýring"
+
+#, fuzzy
+#~ msgctxt "GeoLineStringGraphicsItem|"
+#~ msgid "Detour"
+#~ msgstr "Opna skrá"
+
+#, fuzzy
+#~ msgctxt "GeoLineStringGraphicsItem|"
+#~ msgid "Ferry Route"
+#~ msgstr "Opna skrá"
+
+#, fuzzy
+#~ msgctxt "GeoLineStringGraphicsItem|"
+#~ msgid "Bicycle Route"
+#~ msgstr "stígandi"
+
+#, fuzzy
+#~ msgctxt "GeoLineStringGraphicsItem|"
+#~ msgid "Mountainbike Route"
+#~ msgstr "Mountain"
+
+#, fuzzy
+#~ msgctxt "GeoLineStringGraphicsItem|"
+#~ msgid "Walking Route"
+#~ msgstr "Opna skrá"
+
+#, fuzzy
+#~ msgctxt "GeoLineStringGraphicsItem|"
+#~ msgid "Hiking Route"
+#~ msgstr "Opna skrá"
+
+#, fuzzy
+#~ msgctxt "GeoLineStringGraphicsItem|"
+#~ msgid "Inline Skates Route"
+#~ msgstr "Opna skrá"
+
+#, fuzzy
+#~ msgctxt "GeoLineStringGraphicsItem|"
+#~ msgid "Skitour"
+#~ msgstr "Opna skrá"
+
+#, fuzzy
+#~ msgctxt "Marble::TargetModel|"
+#~ msgid "Current Location: %1"
+#~ msgstr "Staðsetning"
+
+#, fuzzy
+#~ msgctxt "Marble::TargetModel|"
+#~ msgid "Home"
+#~ msgstr "&Hjálp"
+
+#, fuzzy
+#~ msgctxt "LatLonBoxWidget|"
+#~ msgid "&N"
+#~ msgstr "N"
+
+#, fuzzy
+#~ msgctxt "LatLonBoxWidget|"
+#~ msgid "&W"
+#~ msgstr "V"
+
+#, fuzzy
+#~ msgctxt "LatLonBoxWidget|"
+#~ msgid "&E"
+#~ msgstr "A"
+
+#, fuzzy
+#~ msgctxt "LatLonBoxWidget|"
+#~ msgid "&S"
+#~ msgstr "S"
+
+#, fuzzy
+#~ msgctxt "Marble::LatLonEdit|East, the direction"
+#~ msgid "E"
+#~ msgstr "A"
+
+#, fuzzy
+#~ msgctxt "Marble::LatLonEdit|West, the direction"
+#~ msgid "W"
+#~ msgstr "V"
+
+#, fuzzy
+#~ msgctxt "Marble::LatLonEdit|North, the direction"
+#~ msgid "N"
+#~ msgstr "N"
+
+#, fuzzy
+#~ msgctxt "Marble::LatLonEdit|South, the direction"
+#~ msgid "S"
+#~ msgstr "S"
+
+#, fuzzy
+#~ msgctxt "LegendWidget|"
+#~ msgid "Legend"
+#~ msgstr "Skýring"
+
+#, fuzzy
+#~ msgctxt "Marble::MapItemDelegate|"
+#~ msgid "Open"
+#~ msgstr "&Opna kort..."
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "Name"
+#~ msgstr "Nafn"
+
+#, fuzzy
+#~ msgctxt "Marble::MapViewWidget|"
+#~ msgid "Globe View"
+#~ msgstr "Skoða"
+
+#, fuzzy
+#~ msgctxt "Marble::MapViewWidget|"
+#~ msgid "Mercator View"
+#~ msgstr "Merkúr"
+
+#, fuzzy
+#~ msgctxt "Marble::MapViewWidget|"
+#~ msgid "Flat View"
+#~ msgstr "Skoða"
+
+#, fuzzy
+#~ msgctxt "Marble::MapViewWidget|"
+#~ msgid "Marble"
+#~ msgstr "Marmari"
+
+#, fuzzy
+#~ msgctxt "MapViewWidget|"
+#~ msgid "Map View"
+#~ msgstr "Skoða"
+
+#, fuzzy
+#~ msgctxt "MapViewWidget|"
+#~ msgid "&Projection"
+#~ msgstr "Staðsetning"
+
+#, fuzzy
+#~ msgctxt "MapViewWidget|"
+#~ msgid "Mercator"
+#~ msgstr "Merkúr"
+
+#, fuzzy
+#~ msgctxt "Marble::PreviewDialog|"
+#~ msgid "Preview Map"
+#~ msgstr "Opna skrá"
+
+#, fuzzy
+#~ msgctxt "Marble::MapWizard|"
+#~ msgid "Tile Projection:"
+#~ msgstr "Staðsetning"
+
+#, fuzzy
+#~ msgctxt "Marble::MapWizard|"
+#~ msgid "Preview Image"
+#~ msgstr "Opna skrá"
+
+#, fuzzy
+#~ msgctxt "Marble::MapWizard|"
+#~ msgid "Base Tile"
+#~ msgstr "Vista skrá"
+
+#, fuzzy
+#~ msgctxt "Marble::MapWizard|"
+#~ msgid "Legend Image"
+#~ msgstr "Skýring"
+
+#, fuzzy
+#~ msgctxt "Marble::MapWizard|"
+#~ msgid "Map Name"
+#~ msgstr "Nafn"
+
+#, fuzzy
+#~ msgctxt "MapWizard|"
+#~ msgid "Wms-Service:"
+#~ msgstr "Opna skrá"
+
+#, fuzzy
+#~ msgctxt "MapWizard|"
+#~ msgid "Tile Projection:"
+#~ msgstr "Staðsetning"
+
+#, fuzzy
+#~ msgctxt "MapWizard|"
+#~ msgid "Service Info"
+#~ msgstr "&Stillingar"
+
+#, fuzzy
+#~ msgctxt "MapWizard|"
+#~ msgid "OpenStreetMap"
+#~ msgstr "OpenStreetMap"
+
+#, fuzzy
+#~ msgctxt "MapWizard|"
+#~ msgid "Select Color"
+#~ msgstr "Opna skrá"
+
+#, fuzzy
+#~ msgctxt "MapWizard|"
+#~ msgid "Map Name:"
+#~ msgstr "Nafn"
+
+#, fuzzy
+#~ msgctxt "MapWizard|"
+#~ msgid "Description:"
+#~ msgstr "Lýsing"
+
+#, fuzzy
+#~ msgctxt "MapWizard|"
+#~ msgid "Preview Image:"
+#~ msgstr "Opna skrá"
+
+#, fuzzy
+#~ msgctxt "MapWizard|"
+#~ msgid "preview image"
+#~ msgstr "Opna skrá"
+
+#, fuzzy
+#~ msgctxt "MapWizard|"
+#~ msgid "Change..."
+#~ msgstr "Stilla"
+
+#, fuzzy
+#~ msgctxt "MapWizard|"
+#~ msgid "Legend Image:"
+#~ msgstr "Skýring"
+
+#, fuzzy
+#~ msgctxt "MapWizard|"
+#~ msgid "Map Theme:"
+#~ msgstr "Nafn"
+
+#, fuzzy
+#~ msgctxt "MapWizard|"
+#~ msgid "Preview Map"
+#~ msgstr "Opna skrá"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "<b>Developers</b>"
+#~ msgstr "Forritari"
+
+#, fuzzy
+#~ msgctxt "MarbleAboutDialog|"
+#~ msgid "About Marble"
+#~ msgstr "Mountain"
+
+#, fuzzy
+#~ msgctxt "MarbleAboutDialog|"
+#~ msgid "Version Unknown"
+#~ msgstr "Útgáfa %1"
+
+#, fuzzy
+#~ msgctxt "MarbleAboutDialog|"
+#~ msgid "&About"
+#~ msgstr "&Um"
+
+#, fuzzy
+#~ msgctxt "MarbleAboutDialog|"
+#~ msgid "&Data"
+#~ msgstr "Gögn"
+
+#, fuzzy
+#~ msgctxt "MarbleCacheSettingsWidget|"
+#~ msgid "C&lear"
+#~ msgstr "bjart"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "Clear"
+#~ msgstr "bjart"
+
+#, fuzzy
+#~ msgctxt "QObject|means meter"
+#~ msgid "m"
+#~ msgstr "m"
+
+#, fuzzy
+#~ msgctxt "QObject|means milimeters"
+#~ msgid "mm"
+#~ msgstr "m"
+
+#, fuzzy
+#~ msgctxt "QObject|means kilometers"
+#~ msgid "km"
+#~ msgstr "km"
+
+#, fuzzy
+#~ msgctxt "QObject|means centimeters"
+#~ msgid "cm"
+#~ msgstr "m"
+
+#, fuzzy
+#~ msgctxt "QObject|means feet"
+#~ msgid "ft"
+#~ msgstr "ft"
+
+#, fuzzy
+#~ msgctxt "QObject|means miles"
+#~ msgid "mi"
+#~ msgstr "m"
+
+#, fuzzy
+#~ msgctxt "QObject|means nautical miles"
+#~ msgid "nm"
+#~ msgstr "m"
+
+#, fuzzy
+#~ msgctxt "MarbleNavigationSettingsWidget|"
+#~ msgid "&Drag location:"
+#~ msgstr "Leiðarstýring"
+
+#, fuzzy
+#~ msgctxt "MarbleNavigationSettingsWidget|"
+#~ msgid "&Inertial globe rotation"
+#~ msgstr "Staðsetning"
+
+#, fuzzy
+#~ msgctxt "MarbleNavigationSettingsWidget|"
+#~ msgid "Show Home Location"
+#~ msgstr "Staðsetning"
+
+#, fuzzy
+#~ msgctxt "MarbleNavigator|"
+#~ msgid "Reset View"
+#~ msgstr "Skoða"
+
+#, fuzzy
+#~ msgctxt "MarbleNavigator|"
+#~ msgid "Home"
+#~ msgstr "&Hjálp"
+
+#, fuzzy
+#~ msgctxt "MarbleNavigator|"
+#~ msgid "-"
+#~ msgstr "-"
+
+#, fuzzy
+#~ msgctxt "MarblePluginSettingsWidget|"
+#~ msgid "P&lugins"
+#~ msgstr "Íforrit"
+
+#, fuzzy
+#~ msgctxt "MarbleViewSettingsWidget|"
+#~ msgid "During &animations:"
+#~ msgstr "Leiðarstýring"
+
+#, fuzzy
+#~ msgctxt "Marble::MarbleWidgetPopupMenu|"
+#~ msgid "Copy Coordinates"
+#~ msgstr "Hnita Net"
+
+#, fuzzy
+#~ msgctxt "Marble::MarbleWidgetPopupMenu|"
+#~ msgid "Directions &from here"
+#~ msgstr "Mountain"
+
+#, fuzzy
+#~ msgctxt "Marble::MarbleWidgetPopupMenu|"
+#~ msgid "Directions &to here"
+#~ msgstr "Mountain"
+
+#, fuzzy
+#~ msgctxt "Marble::MarbleWidgetPopupMenu|"
+#~ msgid "&Full Screen Mode"
+#~ msgstr "Fylla skjá"
+
+#, fuzzy
+#~ msgctxt "Marble::MarbleWidgetPopupMenu|"
+#~ msgid "&About"
+#~ msgstr "&Um"
+
+#, fuzzy
+#~ msgctxt "Marble::MarbleWidgetPopupMenu|"
+#~ msgid "&Address Details"
+#~ msgstr "Sýna stjór&nunarspjald"
+
+#, fuzzy
+#~ msgctxt "Marble::MarbleWidgetPopupMenu|"
+#~ msgid "City"
+#~ msgstr "Borg"
+
+#, fuzzy
+#~ msgctxt "Marble::MovieCapture|"
+#~ msgid "SWF"
+#~ msgstr "SV"
+
+#, fuzzy
+#~ msgctxt "Marble::MovieCaptureDialog|Start recording a movie"
+#~ msgid "&Start"
+#~ msgstr "Mars"
+
+#, fuzzy
+#~ msgctxt "MovieCaptureDialog|"
+#~ msgid "Movie Recording"
+#~ msgstr "Mountain"
+
+#, fuzzy
+#~ msgctxt "MovieCaptureDialog|"
+#~ msgid "Open..."
+#~ msgstr "&Opna kort..."
+
+#, fuzzy
+#~ msgctxt "UiNewBookmarkFolderDialog|"
+#~ msgid "New Bookmark Folder"
+#~ msgstr "Mountain"
+
+#, fuzzy
+#~ msgctxt "Marble::OsmRelationEditorDialog|"
+#~ msgid "Name"
+#~ msgstr "Nafn"
+
+#, fuzzy
+#~ msgctxt "Marble::OsmRelationManagerWidget|"
+#~ msgid "New Relation"
+#~ msgstr "Staðsetning"
+
+#, fuzzy
+#~ msgctxt "Marble::OsmRelationManagerWidget|"
+#~ msgid "Edit"
+#~ msgstr "Br&eyta"
+
+#, fuzzy
+#~ msgctxt "OsmRelationManagerWidgetPrivate|"
+#~ msgid "Current Relations"
+#~ msgstr "Staðsetning"
+
+#, fuzzy
+#~ msgctxt "OsmRelationManagerWidgetPrivate|"
+#~ msgid "Name"
+#~ msgstr "Nafn"
+
+#, fuzzy
+#~ msgctxt "OsmRelationManagerWidgetPrivate|"
+#~ msgid "Add Relation"
+#~ msgstr "Staðsetning"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "New Relation"
+#~ msgstr "Staðsetning"
+
+#, fuzzy
+#~ msgctxt "OsmTagEditorWidgetPrivate|"
+#~ msgid "Current Tags"
+#~ msgstr "Opna skrá"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "Open File"
+#~ msgstr "Opna skrá"
+
+#, fuzzy
+#~ msgctxt "PlacemarkEditHeaderPrivate|"
+#~ msgid "Name:"
+#~ msgstr "Nafn"
+
+#, fuzzy
+#~ msgctxt "PlacemarkEditHeaderPrivate|"
+#~ msgid "Position:"
+#~ msgstr "Lýsing"
+
+#, fuzzy
+#~ msgctxt "Marble::PlacemarkPositionProviderPlugin|"
+#~ msgid "Placemark position provider Plugin"
+#~ msgstr "Staðsetning"
+
+#, fuzzy
+#~ msgctxt "QObject|the planet"
+#~ msgid "Mercury"
+#~ msgstr "Merkúr"
+
+#, fuzzy
+#~ msgctxt "QObject|the planet"
+#~ msgid "Venus"
+#~ msgstr "Venus"
+
+#, fuzzy
+#~ msgctxt "QObject|the planet"
+#~ msgid "Earth"
+#~ msgstr "jörðin"
+
+#, fuzzy
+#~ msgctxt "QObject|the planet"
+#~ msgid "Mars"
+#~ msgstr "Mars"
+
+#, fuzzy
+#~ msgctxt "QObject|the planet"
+#~ msgid "Jupiter"
+#~ msgstr "Júpíter"
+
+#, fuzzy
+#~ msgctxt "QObject|the planet"
+#~ msgid "Saturn"
+#~ msgstr "Satúrnus"
+
+#, fuzzy
+#~ msgctxt "QObject|the planet"
+#~ msgid "Uranus"
+#~ msgstr "Úranus"
+
+#, fuzzy
+#~ msgctxt "QObject|the planet"
+#~ msgid "Neptune"
+#~ msgstr "Neptúnus"
+
+#, fuzzy
+#~ msgctxt "QObject|the planet"
+#~ msgid "Pluto"
+#~ msgstr "Plútó"
+
+#, fuzzy
+#~ msgctxt "QObject|the earth's star"
+#~ msgid "Sun"
+#~ msgstr "sólin"
+
+#, fuzzy
+#~ msgctxt "QObject|the earth's moon"
+#~ msgid "Moon"
+#~ msgstr "tunglið"
+
+#, fuzzy
+#~ msgctxt "QObject|a planet without data"
+#~ msgid "Unknown Planet"
+#~ msgstr "Sýna stjór&nunarspjald"
+
+#, fuzzy
+#~ msgctxt "Marble::PluginAboutDialog|"
+#~ msgid "About %1"
+#~ msgstr "Um %1"
+
+#, fuzzy
+#~ msgctxt "Marble::PluginAboutDialog|"
+#~ msgid "Version %1"
+#~ msgstr "Útgáfa %1"
+
+#, fuzzy
+#~ msgctxt "Marble::PluginAboutDialog|"
+#~ msgid "Data"
+#~ msgstr "Gögn"
+
+#, fuzzy
+#~ msgctxt "PluginAuthor|"
+#~ msgid "Developer"
+#~ msgstr "Forritari"
+
+#, fuzzy
+#~ msgctxt "Marble::PluginItemDelegate|"
+#~ msgid "Configure"
+#~ msgstr "Stilla"
+
+#, fuzzy
+#~ msgctxt "PrintOptions|"
+#~ msgid "Marble"
+#~ msgstr "Marmari"
+
+#, fuzzy
+#~ msgctxt "PrintOptions|"
+#~ msgid "Legend"
+#~ msgstr "Skýring"
+
+#, fuzzy
+#~ msgctxt "PrintOptions|"
+#~ msgid "Route"
+#~ msgstr "Opna skrá"
+
+#, fuzzy
+#~ msgctxt "PrintOptions|"
+#~ msgid "Driving Instructions"
+#~ msgstr "Leiðarstýring"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "Mercator"
+#~ msgstr "Merkúr"
+
+#, fuzzy
+#~ msgctxt "Marble::QtMarbleConfigDialog|"
+#~ msgid "View"
+#~ msgstr "Skoða"
+
+#, fuzzy
+#~ msgctxt "Marble::QtMarbleConfigDialog|"
+#~ msgid "Navigation"
+#~ msgstr "Leiðarstýring"
+
+#, fuzzy
+#~ msgctxt "Marble::QtMarbleConfigDialog|"
+#~ msgid "Routing"
+#~ msgstr "Mountain"
+
+#, fuzzy
+#~ msgctxt "Marble::QtMarbleConfigDialog|"
+#~ msgid "Plugins"
+#~ msgstr "Íforrit"
+
+#, fuzzy
+#~ msgctxt "Marble::RouteSimulationPositionProviderPlugin|"
+#~ msgid "Current Route Position Provider Plugin"
+#~ msgstr "Staðsetning"
+
+#, fuzzy
+#~ msgctxt "Marble::RouteSimulationPositionProviderPlugin|"
+#~ msgid "Current Route"
+#~ msgstr "Opna skrá"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "Continue."
+#~ msgstr "Stilla"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "Continue onto %1."
+#~ msgstr "Stilla"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "Merge onto %1."
+#~ msgstr "Stilla"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "Continue on %1."
+#~ msgstr "Stilla"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "Current &Location"
+#~ msgstr "Staðsetning"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "&Home"
+#~ msgstr "&Hjálp"
+
+#, fuzzy
+#~ msgctxt "Marble::RoutingInputWidget|"
+#~ msgid "Current Location"
+#~ msgstr "Staðsetning"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "&Export Route..."
+#~ msgstr "Opna skrá"
+
+#, fuzzy
+#~ msgctxt "Marble::RoutingLayer|"
+#~ msgid "Export Route"
+#~ msgstr "Opna skrá"
+
+#, fuzzy
+#~ msgctxt "Marble::RoutingManager|"
+#~ msgid "Guidance Mode"
+#~ msgstr "Mountain"
+
+#, fuzzy
+#~ msgctxt "Marble::RoutingManager|"
+#~ msgid "Show again"
+#~ msgstr "Sýna stjór&nunarspjald"
+
+#, fuzzy
+#~ msgctxt "RoutingProfileSettingsDialog|"
+#~ msgid "Configure Routing Profile"
+#~ msgstr "Stilla"
+
+#, fuzzy
+#~ msgctxt "RoutingProfileSettingsDialog|"
+#~ msgid "Name:"
+#~ msgstr "Nafn"
+
+#, fuzzy
+#~ msgctxt "RoutingProfileSettingsDialog|"
+#~ msgid "Service Settings"
+#~ msgstr "&Stillingar"
+
+#, fuzzy
+#~ msgctxt "RoutingProfileSettingsDialog|"
+#~ msgid "No configuration available"
+#~ msgstr "Sýnir glugga fyrir almenna valkosti"
+
+#, fuzzy
+#~ msgctxt "RoutingProfileSettingsDialog|"
+#~ msgid "Configure"
+#~ msgstr "Stilla"
+
+#, fuzzy
+#~ msgctxt "RoutingSettingsWidget|"
+#~ msgid "&Configure..."
+#~ msgstr "Stilla"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "Get Directions"
+#~ msgstr "Mountain"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "Open Route"
+#~ msgstr "Opna skrá"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "Save Route"
+#~ msgstr "Opna skrá"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "Preview Route"
+#~ msgstr "Opna skrá"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "Upload to Cloud"
+#~ msgstr "léttskýjað"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "Add Via"
+#~ msgstr "Slóð"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "Reverse Route"
+#~ msgstr "Opna skrá"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "Clear Route"
+#~ msgstr "Opna skrá"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "Settings"
+#~ msgstr "&Stillingar"
+
+#, fuzzy
+#~ msgctxt "Marble::RoutingWidget|"
+#~ msgid "Open Route"
+#~ msgstr "Opna skrá"
+
+#, fuzzy
+#~ msgctxt "Marble::RoutingWidget|"
+#~ msgid "Save Route"
+#~ msgstr "Opna skrá"
+
+#, fuzzy
+#~ msgctxt "Marble::RoutingWidget|"
+#~ msgid "Uploading route..."
+#~ msgstr "Opna skrá"
+
+#, fuzzy
+#~ msgctxt "RoutingWidget|"
+#~ msgid "Show Details"
+#~ msgstr "Sýna stjór&nunarspjald"
+
+#, fuzzy
+#~ msgctxt "Marble::RoutingRunner|"
+#~ msgid "m"
+#~ msgstr "m"
+
+#, fuzzy
+#~ msgctxt "Marble::RoutingRunner|"
+#~ msgid "mi"
+#~ msgstr "m"
+
+#, fuzzy
+#~ msgctxt "Marble::RoutingRunner|"
+#~ msgid "ft"
+#~ msgstr "ft"
+
+#, fuzzy
+#~ msgctxt "Marble::RoutingRunner|"
+#~ msgid "km"
+#~ msgstr "km"
+
+#, fuzzy
+#~ msgctxt "Marble::RoutingRunner|"
+#~ msgid "nm"
+#~ msgstr "m"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "Search Results"
+#~ msgstr "jörðin"
+
+#, fuzzy
+#~ msgctxt "Marble::SoundCueEditWidget|"
+#~ msgid "Select sound files..."
+#~ msgstr "Opna skrá"
+
+#, fuzzy
+#~ msgctxt "SunControlWidget|"
+#~ msgid "&Night Map"
+#~ msgstr "Br&eyta"
+
+#, fuzzy
+#~ msgctxt "TimeControlWidget|"
+#~ msgid "Time Control"
+#~ msgstr "Stilla"
+
+#, fuzzy
+#~ msgctxt "TimeControlWidget|"
+#~ msgid "&New date and time:"
+#~ msgstr "Opna skrá"
+
+#, fuzzy
+#~ msgctxt "TimeControlWidget|"
+#~ msgid "Current &date and time:"
+#~ msgstr "Opna skrá"
+
+#, fuzzy
+#~ msgctxt "Marble::TourCaptureDialog|"
+#~ msgid "Start"
+#~ msgstr "Mars"
+
+#, fuzzy
+#~ msgctxt "TourCaptureDialog|"
+#~ msgid "Movie Recording"
+#~ msgstr "Mountain"
+
+#, fuzzy
+#~ msgctxt "TourCaptureDialog|"
+#~ msgid "Open..."
+#~ msgstr "&Opna kort..."
+
+#, fuzzy
+#~ msgctxt "TourCaptureDialog|"
+#~ msgid "Start"
+#~ msgstr "Mars"
+
+#, fuzzy
+#~ msgctxt "Marble::TourItemDelegate|"
+#~ msgid "Play the tour"
+#~ msgstr "Opna skrá"
+
+#, fuzzy
+#~ msgctxt "Marble::TourItemDelegate|"
+#~ msgid "Pause the tour"
+#~ msgstr "Opna skrá"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "Add Wait"
+#~ msgstr "Slóð"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "Save tour"
+#~ msgstr "Opna skrá"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "Open Tour"
+#~ msgstr "Opna skrá"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "Save Tour as"
+#~ msgstr "Opna skrá"
+
+#, fuzzy
+#~ msgctxt "TourWidget|"
+#~ msgid "Tour"
+#~ msgstr "Opna skrá"
+
+#, fuzzy
+#~ msgctxt "TourWidget|"
+#~ msgid "New Tour"
+#~ msgstr "Opna skrá"
+
+#, fuzzy
+#~ msgctxt "TourWidget|"
+#~ msgid "Save Tour"
+#~ msgstr "Opna skrá"
+
+#, fuzzy
+#~ msgctxt "TourWidget|"
+#~ msgid "Save Tour As"
+#~ msgstr "Opna skrá"
+
+#, fuzzy
+#~ msgctxt "TourWidget|"
+#~ msgid "Open Tour"
+#~ msgstr "Opna skrá"
+
+#, fuzzy
+#~ msgctxt "TourWidget|"
+#~ msgid "Record tour"
+#~ msgstr "Opna skrá"
+
+#, fuzzy
+#~ msgctxt "Marble::WaitEditWidget|"
+#~ msgid "Wait duration:"
+#~ msgstr "Leiðarstýring"
+
+#, fuzzy
+#~ msgctxt "Marble::FlightGearPositionProviderPlugin|"
+#~ msgid "FlightGear position provider Plugin"
+#~ msgstr "Staðsetning"
+
+#, fuzzy
+#~ msgctxt "Marble::FlightGearPositionProviderPlugin|"
+#~ msgid "FlightGear"
+#~ msgstr "dálitlar skúrir"
+
+#, fuzzy
+#~ msgctxt "Marble::GeoCluePositionProviderPlugin|"
+#~ msgid "GeoClue position provider Plugin"
+#~ msgstr "Staðsetning"
+
+#, fuzzy
+#~ msgctxt "Marble::GpsdPositionProviderPlugin|"
+#~ msgid "Gpsd position provider Plugin"
+#~ msgstr "Staðsetning"
+
+#, fuzzy
+#~ msgctxt "Marble::QtPositioningPositionProviderPlugin|"
+#~ msgid "Qt Positioning Position Provider Plugin"
+#~ msgstr "Staðsetning"
+
+#, fuzzy
+#~ msgctxt "Marble::QtPositioningPositionProviderPlugin|"
+#~ msgid "Qt Positioning Location"
+#~ msgstr "Staðsetning"
+
+#, fuzzy
+#~ msgctxt "Marble::WlocatePositionProviderPlugin|"
+#~ msgid "Wlocate Position Provider Plugin"
+#~ msgstr "Staðsetning"
+
+#, fuzzy
+#~ msgctxt "Marble::AnnotatePlugin|"
+#~ msgid "Annotation"
+#~ msgstr "Staðsetning"
+
+#, fuzzy
+#~ msgctxt "Marble::AnnotatePlugin|"
+#~ msgid "&Annotation"
+#~ msgstr "Staðsetning"
+
+#, fuzzy
+#~ msgctxt "Marble::AnnotatePlugin|"
+#~ msgid "Annotations"
+#~ msgstr "Staðsetning"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "Clear all annotations"
+#~ msgstr "Staðsetning"
+
+#, fuzzy
+#~ msgctxt "Marble::AnnotatePlugin|"
+#~ msgid "Save Annotation File"
+#~ msgstr "Staðsetning"
+
+#, fuzzy
+#~ msgctxt "Marble::AnnotatePlugin|"
+#~ msgid "Open Annotation File"
+#~ msgstr "Staðsetning"
+
+#, fuzzy
+#~ msgctxt "Marble::AnnotatePlugin|"
+#~ msgid "Add Path"
+#~ msgstr "Slóð"
+
+#, fuzzy
+#~ msgctxt "Marble::AnnotatePlugin|"
+#~ msgid "Load Annotation File"
+#~ msgstr "Staðsetning"
+
+#, fuzzy
+#~ msgctxt "Marble::AnnotatePlugin|"
+#~ msgid "Clear all Annotations"
+#~ msgstr "Staðsetning"
+
+#, fuzzy
+#~ msgctxt "Marble::AnnotatePlugin|"
+#~ msgid "Download OpenStreetMap Data"
+#~ msgstr "OpenStreetMap"
+
+#, fuzzy
+#~ msgctxt "Marble::AnnotatePlugin|"
+#~ msgid "Select Node"
+#~ msgstr "Opna skrá"
+
+#, fuzzy
+#~ msgctxt "Marble::DownloadOsmDialog|"
+#~ msgid "Download"
+#~ msgstr "Opna skrá"
+
+#, fuzzy
+#~ msgctxt "UiEditGroundOverlayDialog|"
+#~ msgid "Description"
+#~ msgstr "Lýsing"
+
+#, fuzzy
+#~ msgctxt "UiEditGroundOverlayDialog|"
+#~ msgid "Coordinates"
+#~ msgstr "Hnita Net"
+
+#, fuzzy
+#~ msgctxt "UiEditGroundOverlayDialog|"
+#~ msgid "N"
+#~ msgstr "N"
+
+#, fuzzy
+#~ msgctxt "UiEditGroundOverlayDialog|"
+#~ msgid "W"
+#~ msgstr "V"
+
+#, fuzzy
+#~ msgctxt "UiEditGroundOverlayDialog|"
+#~ msgid "E"
+#~ msgstr "A"
+
+#, fuzzy
+#~ msgctxt "UiEditGroundOverlayDialog|"
+#~ msgid "S"
+#~ msgstr "S"
+
+#, fuzzy
+#~ msgctxt "UiEditGroundOverlayDialog|"
+#~ msgid "Rotation"
+#~ msgstr "Staðsetning"
+
+#, fuzzy
+#~ msgctxt "Marble::EditPolygonDialog|"
+#~ msgid "Relations"
+#~ msgstr "Staðsetning"
+
+#, fuzzy
+#~ msgctxt "UiEditPolygonDialog|"
+#~ msgid "Name"
+#~ msgstr "Nafn"
+
+#, fuzzy
+#~ msgctxt "UiEditPolygonDialog|"
+#~ msgid "Description"
+#~ msgstr "Lýsing"
+
+#, fuzzy
+#~ msgctxt "Marble::EditPolylineDialog|"
+#~ msgid "Relations"
+#~ msgstr "Staðsetning"
+
+#, fuzzy
+#~ msgctxt "UiEditPolylineDialog|"
+#~ msgid "Add path"
+#~ msgstr "Slóð"
+
+#, fuzzy
+#~ msgctxt "UiEditPolylineDialog|"
+#~ msgid "Name"
+#~ msgstr "Nafn"
+
+#, fuzzy
+#~ msgctxt "UiEditPolylineDialog|"
+#~ msgid "Description"
+#~ msgstr "Lýsing"
+
+#, fuzzy
+#~ msgctxt "Marble::NodeModel|"
+#~ msgid "Elevation"
+#~ msgstr "Staðsetning"
+
+#, fuzzy
+#~ msgctxt "AprsConfigWidget|"
+#~ msgid "APRS Plugin"
+#~ msgstr "Íforrit"
+
+#, fuzzy
+#~ msgctxt "AprsConfigWidget|"
+#~ msgid "File"
+#~ msgstr "&Skrá"
+
+#, fuzzy
+#~ msgctxt "Marble::AtmospherePlugin|"
+#~ msgid "Shows the atmosphere around the earth."
+#~ msgstr "Sýnir glugga fyrir almenna valkosti"
+
+#, fuzzy
+#~ msgctxt "CompassConfigWidget|"
+#~ msgid "Configure Compass Plugin"
+#~ msgstr "Sýnir glugga fyrir almenna valkosti"
+
+#, fuzzy
+#~ msgctxt "Marble::CompassFloatItem|"
+#~ msgid "Compass"
+#~ msgstr "Kompás"
+
+#, fuzzy
+#~ msgctxt "Marble::CompassFloatItem|"
+#~ msgid "&Compass"
+#~ msgstr "Kompás"
+
+#, fuzzy
+#~ msgctxt "Marble::CompassFloatItem|"
+#~ msgid "N"
+#~ msgstr "N"
+
+#, fuzzy
+#~ msgctxt "Marble::CompassFloatItem|"
+#~ msgid "S"
+#~ msgstr "S"
+
+#, fuzzy
+#~ msgctxt "CrosshairsConfigWidget|"
+#~ msgid "Configure Crosshairs Plugin"
+#~ msgstr "Sýnir glugga fyrir almenna valkosti"
+
+#, fuzzy
+#~ msgctxt "EarthquakeConfigWidget|"
+#~ msgid "Configure Earthquakes Plugin"
+#~ msgstr "jörðin"
+
+#, fuzzy
+#~ msgctxt "Marble::EarthquakePlugin|"
+#~ msgid "Earthquakes"
+#~ msgstr "jörðin"
+
+#, fuzzy
+#~ msgctxt "Marble::EarthquakePlugin|"
+#~ msgid "&Earthquakes"
+#~ msgstr "jörðin"
+
+#, fuzzy
+#~ msgctxt "Marble::EarthquakePlugin|"
+#~ msgid "Shows earthquakes on the map."
+#~ msgstr "Sýnir glugga fyrir almenna valkosti"
+
+#, fuzzy
+#~ msgctxt "EclipsesBrowserDialog|"
+#~ msgid "&Settings..."
+#~ msgstr "&Stillingar"
+
+#, fuzzy
+#~ msgctxt "EclipsesBrowserDialog|"
+#~ msgid "&Close"
+#~ msgstr "S&ký"
+
+#, fuzzy
+#~ msgctxt "EclipsesConfigDialog|"
+#~ msgid "Eclipses Configuration"
+#~ msgstr "Sýnir glugga fyrir almenna valkosti"
+
+#, fuzzy
+#~ msgctxt "EclipsesConfigDialog|"
+#~ msgid "&View"
+#~ msgstr "S&koða"
+
+#, fuzzy
+#~ msgctxt "Marble::EclipsesModel|"
+#~ msgid "Start"
+#~ msgstr "Mars"
+
+#, fuzzy
+#~ msgctxt "ElevationProfileConfigWidget|"
+#~ msgid "Configure Elevation Profile Plugin"
+#~ msgstr "Sýnir glugga fyrir almenna valkosti"
+
+#, fuzzy
+#~ msgctxt "Marble::ElevationProfileContextMenu|"
+#~ msgid "&Configure..."
+#~ msgstr "Stilla"
+
+#, fuzzy
+#~ msgctxt "Marble::ElevationProfileContextMenu|"
+#~ msgid "Route"
+#~ msgstr "Opna skrá"
+
+#, fuzzy
+#~ msgctxt "Marble::ElevationProfileFloatItem|"
+#~ msgid "Elevation Profile"
+#~ msgstr "Mountain"
+
+#, fuzzy
+#~ msgctxt "Marble::ElevationProfileFloatItem|"
+#~ msgid "&Elevation Profile"
+#~ msgstr "Mountain"
+
+#, fuzzy
+#~ msgctxt "Marble::ElevationProfilePlotAxis|"
+#~ msgid "km"
+#~ msgstr "km"
+
+#, fuzzy
+#~ msgctxt "Marble::ElevationProfilePlotAxis|"
+#~ msgid "m"
+#~ msgstr "m"
+
+#, fuzzy
+#~ msgctxt "Marble::ElevationProfilePlotAxis|"
+#~ msgid "mi"
+#~ msgstr "m"
+
+#, fuzzy
+#~ msgctxt "Marble::ElevationProfilePlotAxis|"
+#~ msgid "ft"
+#~ msgstr "ft"
+
+#, fuzzy
+#~ msgctxt "Marble::ElevationProfilePlotAxis|"
+#~ msgid "nm"
+#~ msgstr "m"
+
+#, fuzzy
+#~ msgctxt "Marble::ElevationProfileMarker|"
+#~ msgid "Elevation Profile Marker"
+#~ msgstr "Mountain"
+
+#, fuzzy
+#~ msgctxt "Marble::ElevationProfileMarker|"
+#~ msgid "&Elevation Profile Marker"
+#~ msgstr "Mountain"
+
+#, fuzzy
+#~ msgctxt "Marble::ElevationProfileMarker|"
+#~ msgid "m"
+#~ msgstr "m"
+
+#, fuzzy
+#~ msgctxt "Marble::ElevationProfileMarker|"
+#~ msgid "ft"
+#~ msgstr "ft"
+
+#, fuzzy
+#~ msgctxt "Marble::FileViewFloatItem|"
+#~ msgid "File View"
+#~ msgstr "Skoða"
+
+#, fuzzy
+#~ msgctxt "Marble::FileViewFloatItem|"
+#~ msgid "&File View"
+#~ msgstr "Skoða"
+
+#, fuzzy
+#~ msgctxt "Marble::FileViewFloatItem|"
+#~ msgid "Open file..."
+#~ msgstr "Opna skrá"
+
+#, fuzzy
+#~ msgctxt "Marble::FileViewFloatItem|"
+#~ msgid "Open File"
+#~ msgstr "Opna skrá"
+
+#, fuzzy
+#~ msgctxt "Marble::FoursquarePlugin|"
+#~ msgid "&Places"
+#~ msgstr "Sýna stjór&nunarspjald"
+
+#, fuzzy
+#~ msgctxt "Marble::GpsInfo|"
+#~ msgid "mph"
+#~ msgstr "mi/klst"
+
+#, fuzzy
+#~ msgctxt "Marble::GpsInfo|"
+#~ msgid "ft"
+#~ msgstr "ft"
+
+#, fuzzy
+#~ msgctxt "Marble::GpsInfo|"
+#~ msgid "km/h"
+#~ msgstr "km/klst"
+
+#, fuzzy
+#~ msgctxt "Marble::GpsInfo|"
+#~ msgid "m"
+#~ msgstr "m"
+
+#, fuzzy
+#~ msgctxt "Marble::GpsInfo|"
+#~ msgid "nm"
+#~ msgstr "m"
+
+#, fuzzy
+#~ msgctxt "GpsInfoPlugin|"
+#~ msgid "Direction"
+#~ msgstr "Lýsing"
+
+#, fuzzy
+#~ msgctxt "GraticuleConfigWidget|"
+#~ msgid "Coordinate Grid Plugin"
+#~ msgstr "Hnita Net"
+
+#, fuzzy
+#~ msgctxt "GraticuleConfigWidget|"
+#~ msgid "Color of the coordinate grid."
+#~ msgstr "Hnita Net"
+
+#, fuzzy
+#~ msgctxt "GraticuleConfigWidget|"
+#~ msgid "&Equator:"
+#~ msgstr "Miðbaugur"
+
+#, fuzzy
+#~ msgctxt "Marble::GraticulePlugin|"
+#~ msgid "Coordinate Grid"
+#~ msgstr "Hnita Net"
+
+#, fuzzy
+#~ msgctxt "Marble::GraticulePlugin|"
+#~ msgid "Coordinate &Grid"
+#~ msgstr "Hnita Net"
+
+#, fuzzy
+#~ msgctxt "Marble::GraticulePlugin|"
+#~ msgid "Equator"
+#~ msgstr "Miðbaugur"
+
+#, fuzzy
+#~ msgctxt "Marble::License|"
+#~ msgid "License"
+#~ msgstr "Fylla skjá"
+
+#, fuzzy
+#~ msgctxt "Marble::License|"
+#~ msgid "&License"
+#~ msgstr "Fylla skjá"
+
+#, fuzzy
+#~ msgctxt "Marble::License|"
+#~ msgid "&Full License"
+#~ msgstr "Fylla skjá"
+
+#, fuzzy
+#~ msgctxt "Marble::License|"
+#~ msgid "&Show Details"
+#~ msgstr "Sýna stjór&nunarspjald"
+
+#, fuzzy
+#~ msgctxt "MapScaleConfigWidget|"
+#~ msgid "Configure Scale Bar Plugin"
+#~ msgstr "Sýnir glugga fyrir almenna valkosti"
+
+#, fuzzy
+#~ msgctxt "Marble::MapScaleFloatItem|"
+#~ msgid "Original Developer"
+#~ msgstr "Forritari"
+
+#, fuzzy
+#~ msgctxt "Marble::MapScaleFloatItem|"
+#~ msgid "km"
+#~ msgstr "km"
+
+#, fuzzy
+#~ msgctxt "Marble::MapScaleFloatItem|"
+#~ msgid "m"
+#~ msgstr "m"
+
+#, fuzzy
+#~ msgctxt "Marble::MapScaleFloatItem|"
+#~ msgid "mi"
+#~ msgstr "m"
+
+#, fuzzy
+#~ msgctxt "Marble::MapScaleFloatItem|"
+#~ msgid "nm"
+#~ msgstr "m"
+
+#, fuzzy
+#~ msgctxt "Marble::MapScaleFloatItem|"
+#~ msgid "&Configure..."
+#~ msgstr "Stilla"
+
+#, fuzzy
+#~ msgctxt "MeasureConfigDialog|"
+#~ msgid "Measure Tool Configuration"
+#~ msgstr "Mountain"
+
+#, fuzzy
+#~ msgctxt "Navigation|"
+#~ msgid "Navigation"
+#~ msgstr "Leiðarstýring"
+
+#, fuzzy
+#~ msgctxt "Marble::NavigationFloatItem|"
+#~ msgid "Navigation"
+#~ msgstr "Leiðarstýring"
+
+#, fuzzy
+#~ msgctxt "Marble::NavigationFloatItem|"
+#~ msgid "&Navigation"
+#~ msgstr "Stjór&n"
+
+#, fuzzy
+#~ msgctxt "Marble::NavigationFloatItem|"
+#~ msgid "Current Location Button"
+#~ msgstr "Staðsetning"
+
+#, fuzzy
+#~ msgctxt "Marble::NotesPlugin|"
+#~ msgid "Display OpenStreetMap Mapper Notes."
+#~ msgstr "OpenStreetMap"
+
+#, fuzzy
+#~ msgctxt "OpenCachingCacheDialog|"
+#~ msgid "Status:"
+#~ msgstr "Mars"
+
+#, fuzzy
+#~ msgctxt "OpenCachingCacheDialog|"
+#~ msgid "Description"
+#~ msgstr "Lýsing"
+
+#, fuzzy
+#~ msgctxt "OpenCachingCacheDialog|"
+#~ msgid "Previous"
+#~ msgstr "Opna skrá"
+
+#, fuzzy
+#~ msgctxt "OpenCachingConfigWidget|"
+#~ msgid "Start:"
+#~ msgstr "Mars"
+
+#, fuzzy
+#~ msgctxt "OpenDesktopConfigWidget|"
+#~ msgid "OpenDesktop plugin configuration"
+#~ msgstr "Mountain"
+
+#, fuzzy
+#~ msgctxt "OverviewMapConfigWidget|"
+#~ msgid "Configure Overview Map"
+#~ msgstr "Stilla"
+
+#, fuzzy
+#~ msgctxt "OverviewMapConfigWidget|"
+#~ msgid "Map &Image"
+#~ msgstr "Nafn"
+
+#, fuzzy
+#~ msgctxt "OverviewMapConfigWidget|"
+#~ msgid "&Planet:"
+#~ msgstr "Sýna stjór&nunarspjald"
+
+#, fuzzy
+#~ msgctxt "OverviewMapConfigWidget|"
+#~ msgid "Preview"
+#~ msgstr "Opna skrá"
+
+#, fuzzy
+#~ msgctxt "OverviewMapConfigWidget|"
+#~ msgid "Filename"
+#~ msgstr "&Skrá"
+
+#, fuzzy
+#~ msgctxt "OverviewMapConfigWidget|"
+#~ msgid "Position I&ndicator:"
+#~ msgstr "Staðsetning"
+
+#, fuzzy
+#~ msgctxt "PhotoConfigWidget|"
+#~ msgid "Configure Photo Plugin"
+#~ msgstr "Sýnir glugga fyrir almenna valkosti"
+
+#, fuzzy
+#~ msgctxt "PhotoConfigWidget|"
+#~ msgid "License"
+#~ msgstr "Fylla skjá"
+
+#, fuzzy
+#~ msgctxt "Marble::PhotoPlugin|"
+#~ msgid "Photos"
+#~ msgstr "Ljósmyndir"
+
+#, fuzzy
+#~ msgctxt "Marble::PhotoPlugin|"
+#~ msgid "&Photos"
+#~ msgstr "Ljósmyndir"
+
+#, fuzzy
+#~ msgctxt "PositionMarkerConfigWidget|"
+#~ msgid "Configure Position Marker Plugin"
+#~ msgstr "Sýnir glugga fyrir almenna valkosti"
+
+#, fuzzy
+#~ msgctxt "Marble::PostalCodePlugin|"
+#~ msgid "Shows postal codes of the area on the map."
+#~ msgstr "Sýnir glugga fyrir almenna valkosti"
+
+#, fuzzy
+#~ msgctxt "RoutingConfigDialog|"
+#~ msgid "Routing Configuration"
+#~ msgstr "Mountain"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "Route left."
+#~ msgstr "Opna skrá"
+
+#, fuzzy
+#~ msgctxt "Marble::RoutingPlugin|"
+#~ msgid "Routing"
+#~ msgstr "Mountain"
+
+#, fuzzy
+#~ msgctxt "Marble::RoutingPlugin|"
+#~ msgid "&Routing"
+#~ msgstr "Mountain"
+
+#, fuzzy
+#~ msgctxt "RoutingPlugin|"
+#~ msgid "Guidance Mode"
+#~ msgstr "Mountain"
+
+#, fuzzy
+#~ msgctxt "RoutingPlugin|"
+#~ msgid "-"
+#~ msgstr "-"
+
+#, fuzzy
+#~ msgctxt "Marble::SatellitesConfigDialog|"
+#~ msgid "Moons"
+#~ msgstr "tunglið"
+
+#, fuzzy
+#~ msgctxt "Marble::SatellitesConfigDialog|"
+#~ msgid "Other"
+#~ msgstr "Veður"
+
+#, fuzzy
+#~ msgctxt "Marble::SatellitesConfigDialog|"
+#~ msgid "Moon"
+#~ msgstr "tunglið"
+
+#, fuzzy
+#~ msgctxt "Marble::SatellitesConfigDialog|"
+#~ msgid "Sun"
+#~ msgstr "sólin"
+
+#, fuzzy
+#~ msgctxt "Marble::SatellitesConfigDialog|"
+#~ msgid "Mercury"
+#~ msgstr "Merkúr"
+
+#, fuzzy
+#~ msgctxt "Marble::SatellitesConfigDialog|"
+#~ msgid "Venus"
+#~ msgstr "Venus"
+
+#, fuzzy
+#~ msgctxt "Marble::SatellitesConfigDialog|"
+#~ msgid "Earth"
+#~ msgstr "jörðin"
+
+#, fuzzy
+#~ msgctxt "Marble::SatellitesConfigDialog|"
+#~ msgid "Mars"
+#~ msgstr "Mars"
+
+#, fuzzy
+#~ msgctxt "Marble::SatellitesConfigDialog|"
+#~ msgid "Jupiter"
+#~ msgstr "Júpíter"
+
+#, fuzzy
+#~ msgctxt "Marble::SatellitesConfigDialog|"
+#~ msgid "Saturn"
+#~ msgstr "Satúrnus"
+
+#, fuzzy
+#~ msgctxt "Marble::SatellitesConfigDialog|"
+#~ msgid "Uranus"
+#~ msgstr "Úranus"
+
+#, fuzzy
+#~ msgctxt "Marble::SatellitesConfigDialog|"
+#~ msgid "Neptune"
+#~ msgstr "Neptúnus"
+
+#, fuzzy
+#~ msgctxt "Marble::SatellitesConfigDialog|"
+#~ msgid "&Satellites"
+#~ msgstr "Sýna stjór&nunarspjald"
+
+#, fuzzy
+#~ msgctxt "Marble::SatellitesConfigDialog|"
+#~ msgid "&Data Sources"
+#~ msgstr "jörðin"
+
+#, fuzzy
+#~ msgctxt "Marble::SatellitesConfigDialog|"
+#~ msgid "Open Satellite Data File"
+#~ msgstr "OpenStreetMap"
+
+#, fuzzy
+#~ msgctxt "SatellitesConfigDialog|"
+#~ msgid "Satellites Configuration"
+#~ msgstr "Sýnir glugga fyrir almenna valkosti"
+
+#, fuzzy
+#~ msgctxt "SatellitesConfigDialog|"
+#~ msgid "&Satellites"
+#~ msgstr "Sýna stjór&nunarspjald"
+
+#, fuzzy
+#~ msgctxt "SatellitesConfigDialog|"
+#~ msgid "&Data Sources"
+#~ msgstr "jörðin"
+
+#, fuzzy
+#~ msgctxt "SatellitesConfigDialog|"
+#~ msgid "-"
+#~ msgstr "-"
+
+#, fuzzy
+#~ msgctxt "SatellitesConfigDialog|"
+#~ msgid "Satellite Data Sources:"
+#~ msgstr "OpenStreetMap"
+
+#, fuzzy
+#~ msgctxt "Marble::SatellitesPlugin|"
+#~ msgid "Satellites"
+#~ msgstr "Sýna stjór&nunarspjald"
+
+#, fuzzy
+#~ msgctxt "Marble::SatellitesPlugin|"
+#~ msgid "&Satellites"
+#~ msgstr "Sýna stjór&nunarspjald"
+
+#, fuzzy
+#~ msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
+#~ msgid "Space Stations"
+#~ msgstr "Staðsetning"
+
+#, fuzzy
+#~ msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
+#~ msgid "Weather"
+#~ msgstr "Veður"
+
+#, fuzzy
+#~ msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
+#~ msgid "Earth Resources"
+#~ msgstr "jörðin"
+
+#, fuzzy
+#~ msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
+#~ msgid "Tracking and Data Relay Satellite System (TDRSS)"
+#~ msgstr "Sýna stjór&nunarspjald"
+
+#, fuzzy
+#~ msgctxt "Marble::SatellitesPlugin|"
+#~ msgid "Communications Satellites"
+#~ msgstr "Sýna stjór&nunarspjald"
+
+#, fuzzy
+#~ msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
+#~ msgid "Geostationary"
+#~ msgstr "Staðsetning"
+
+#, fuzzy
+#~ msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
+#~ msgid "Other"
+#~ msgstr "Veður"
+
+#, fuzzy
+#~ msgctxt "Marble::SatellitesPlugin|"
+#~ msgid "Navigation Satellites"
+#~ msgstr "Sýna stjór&nunarspjald"
+
+#, fuzzy
+#~ msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
+#~ msgid "GPS Operational"
+#~ msgstr "Gögn"
+
+#, fuzzy
+#~ msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
+#~ msgid "Glonass Operational"
+#~ msgstr "Gögn"
+
+#, fuzzy
+#~ msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
+#~ msgid "Navy Navigation Satellite System (NNSS)"
+#~ msgstr "Sýna stjór&nunarspjald"
+
+#, fuzzy
+#~ msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
+#~ msgid "Russian LEO Navigation"
+#~ msgstr "Leiðarstýring"
+
+#, fuzzy
+#~ msgctxt "Marble::SatellitesPlugin|"
+#~ msgid "Scientific Satellites"
+#~ msgstr "Sýna stjór&nunarspjald"
+
+#, fuzzy
+#~ msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
+#~ msgid "Education"
+#~ msgstr "Staðsetning"
+
+#, fuzzy
+#~ msgctxt "Marble::SatellitesPlugin|"
+#~ msgid "Miscellaneous Satellites"
+#~ msgstr "Sýna stjór&nunarspjald"
+
+#, fuzzy
+#~ msgctxt "Marble::Speedometer|"
+#~ msgid "mph"
+#~ msgstr "mi/klst"
+
+#, fuzzy
+#~ msgctxt "Marble::Speedometer|"
+#~ msgid "km/h"
+#~ msgstr "km/klst"
+
+#, fuzzy
+#~ msgctxt "Speedometer|"
+#~ msgid "km/h"
+#~ msgstr "km/klst"
+
+#, fuzzy
+#~ msgctxt "StarsConfigWidget|"
+#~ msgid "Configure Stars Plugin"
+#~ msgstr "Sýnir glugga fyrir almenna valkosti"
+
+#, fuzzy
+#~ msgctxt "StarsConfigWidget|"
+#~ msgid "Sun"
+#~ msgstr "sólin"
+
+#, fuzzy
+#~ msgctxt "StarsConfigWidget|"
+#~ msgid "Moon"
+#~ msgstr "tunglið"
+
+#, fuzzy
+#~ msgctxt "StarsConfigWidget|"
+#~ msgid "Mercury"
+#~ msgstr "Merkúr"
+
+#, fuzzy
+#~ msgctxt "StarsConfigWidget|"
+#~ msgid "Venus"
+#~ msgstr "Venus"
+
+#, fuzzy
+#~ msgctxt "StarsConfigWidget|"
+#~ msgid "Earth"
+#~ msgstr "jörðin"
+
+#, fuzzy
+#~ msgctxt "StarsConfigWidget|"
+#~ msgid "Mars"
+#~ msgstr "Mars"
+
+#, fuzzy
+#~ msgctxt "StarsConfigWidget|"
+#~ msgid "Jupiter"
+#~ msgstr "Júpíter"
+
+#, fuzzy
+#~ msgctxt "StarsConfigWidget|"
+#~ msgid "Saturn"
+#~ msgstr "Satúrnus"
+
+#, fuzzy
+#~ msgctxt "StarsConfigWidget|"
+#~ msgid "Uranus"
+#~ msgstr "Úranus"
+
+#, fuzzy
+#~ msgctxt "StarsConfigWidget|"
+#~ msgid "Neptune"
+#~ msgstr "Neptúnus"
+
+#, fuzzy
+#~ msgctxt "StarsConfigWidget|"
+#~ msgid "Magnify Sun and Moon"
+#~ msgstr "Sýna stjór&nunarspjald"
+
+#, fuzzy
+#~ msgctxt "StarsConfigWidget|"
+#~ msgid "Other"
+#~ msgstr "Veður"
+
+#, fuzzy
+#~ msgctxt "StarsConfigWidget|"
+#~ msgid "Constellations"
+#~ msgstr "Sýna stjór&nunarspjald"
+
+#, fuzzy
+#~ msgctxt "StarsConfigWidget|"
+#~ msgid "Names"
+#~ msgstr "Nafn"
+
+#, fuzzy
+#~ msgctxt "StarsConfigWidget|"
+#~ msgid "Latin Name"
+#~ msgstr "Nafn"
+
+#, fuzzy
+#~ msgctxt "StarsConfigWidget|"
+#~ msgid "Native Translation"
+#~ msgstr "Leiðarstýring"
+
+#, fuzzy
+#~ msgctxt "StarsConfigWidget|"
+#~ msgid "Abbreviation"
+#~ msgstr "Staðsetning"
+
+#, fuzzy
+#~ msgctxt "StarsConfigWidget|"
+#~ msgid "Coordinate Grid"
+#~ msgstr "Hnita Net"
+
+#, fuzzy
+#~ msgctxt "Marble::StarsPlugin|"
+#~ msgid "Stars"
+#~ msgstr "Mars"
+
+#, fuzzy
+#~ msgctxt "Marble::StarsPlugin|"
+#~ msgid "&Stars"
+#~ msgstr "Mars"
+
+#, fuzzy
+#~ msgctxt "Marble::StarsPlugin|"
+#~ msgid "Sun"
+#~ msgstr "sólin"
+
+#, fuzzy
+#~ msgctxt "Marble::StarsPlugin|"
+#~ msgid "Show &Constellations"
+#~ msgstr "Sýna stjór&nunarspjald"
+
+#, fuzzy
+#~ msgctxt "Marble::StarsPlugin|"
+#~ msgid "Show &Sun and Moon"
+#~ msgstr "Sýna stjór&nunarspjald"
+
+#, fuzzy
+#~ msgctxt "Marble::StarsPlugin|"
+#~ msgid "Show &Planets"
+#~ msgstr "Sýna stjór&nunarspjald"
+
+#, fuzzy
+#~ msgctxt "Marble::StarsPlugin|"
+#~ msgid "&Configure..."
+#~ msgstr "Stilla"
+
+#, fuzzy
+#~ msgctxt "Marble::SunPlugin|"
+#~ msgid "Sun"
+#~ msgstr "sólin"
+
+#, fuzzy
+#~ msgctxt "WeatherConfigWidget|"
+#~ msgid "Configure Weather Plugin"
+#~ msgstr "Sýnir glugga fyrir almenna valkosti"
+
+#, fuzzy
+#~ msgctxt "WeatherConfigWidget|"
+#~ msgid "Information"
+#~ msgstr "Staðsetning"
+
+#, fuzzy
+#~ msgctxt "WeatherConfigWidget|"
+#~ msgid "Wind direction"
+#~ msgstr "Leiðarstýring"
+
+#, fuzzy
+#~ msgctxt "WeatherConfigWidget|"
+#~ msgid "Knots"
+#~ msgstr "hnútar"
+
+#, fuzzy
+#~ msgctxt "WeatherConfigWidget|"
+#~ msgid "Beaufort"
+#~ msgstr "Beaufort"
+
+#, fuzzy
+#~ msgctxt "WeatherData|"
+#~ msgid "sunny"
+#~ msgstr "sólbjart"
+
+#, fuzzy
+#~ msgctxt "WeatherData|"
+#~ msgid "clear"
+#~ msgstr "bjart"
+
+#, fuzzy
+#~ msgctxt "WeatherData|"
+#~ msgid "partly cloudy"
+#~ msgstr "léttskýjað"
+
+#, fuzzy
+#~ msgctxt "WeatherData|"
+#~ msgid "overcast"
+#~ msgstr "skýjað"
+
+#, fuzzy
+#~ msgctxt "WeatherData|"
+#~ msgid "light showers"
+#~ msgstr "dálitlar skúrir"
+
+#, fuzzy
+#~ msgctxt "WeatherData|"
+#~ msgid "showers"
+#~ msgstr "dálitlar skúrir"
+
+#, fuzzy
+#~ msgctxt "WeatherData|"
+#~ msgid "light rain"
+#~ msgstr "dálítil rigning"
+
+#, fuzzy
+#~ msgctxt "WeatherData|"
+#~ msgid "thunderstorm"
+#~ msgstr "sandfok"
+
+#, fuzzy
+#~ msgctxt "WeatherData|"
+#~ msgid "hail"
+#~ msgstr "hagl"
+
+#, fuzzy
+#~ msgctxt "WeatherData|"
+#~ msgid "light snow"
+#~ msgstr "dálítil snjókoma"
+
+#, fuzzy
+#~ msgctxt "WeatherData|"
+#~ msgid "snow"
+#~ msgstr "snjór"
+
+#, fuzzy
+#~ msgctxt "WeatherData|"
+#~ msgid "mist"
+#~ msgstr "mistur"
+
+#, fuzzy
+#~ msgctxt "WeatherData|"
+#~ msgid "sandstorm"
+#~ msgstr "sandfok"
+
+#, fuzzy
+#~ msgctxt "WeatherData|"
+#~ msgid "N"
+#~ msgstr "N"
+
+#, fuzzy
+#~ msgctxt "WeatherData|"
+#~ msgid "NNE"
+#~ msgstr "NNA"
+
+#, fuzzy
+#~ msgctxt "WeatherData|"
+#~ msgid "NE"
+#~ msgstr "NA"
+
+#, fuzzy
+#~ msgctxt "WeatherData|"
+#~ msgid "ENE"
+#~ msgstr "ANA"
+
+#, fuzzy
+#~ msgctxt "WeatherData|"
+#~ msgid "E"
+#~ msgstr "A"
+
+#, fuzzy
+#~ msgctxt "WeatherData|"
+#~ msgid "SSE"
+#~ msgstr "SSA"
+
+#, fuzzy
+#~ msgctxt "WeatherData|"
+#~ msgid "SE"
+#~ msgstr "SA"
+
+#, fuzzy
+#~ msgctxt "WeatherData|"
+#~ msgid "ESE"
+#~ msgstr "ASA"
+
+#, fuzzy
+#~ msgctxt "WeatherData|"
+#~ msgid "S"
+#~ msgstr "S"
+
+#, fuzzy
+#~ msgctxt "WeatherData|"
+#~ msgid "NNW"
+#~ msgstr "NNV"
+
+#, fuzzy
+#~ msgctxt "WeatherData|"
+#~ msgid "NW"
+#~ msgstr "NV"
+
+#, fuzzy
+#~ msgctxt "WeatherData|"
+#~ msgid "WNW"
+#~ msgstr "VNV"
+
+#, fuzzy
+#~ msgctxt "WeatherData|"
+#~ msgid "W"
+#~ msgstr "V"
+
+#, fuzzy
+#~ msgctxt "WeatherData|"
+#~ msgid "SSW"
+#~ msgstr "SSW"
+
+#, fuzzy
+#~ msgctxt "WeatherData|"
+#~ msgid "SW"
+#~ msgstr "SV"
+
+#, fuzzy
+#~ msgctxt "WeatherData|"
+#~ msgid "WSW"
+#~ msgstr "VSV"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "mph"
+#~ msgstr "mi/klst"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "m/s"
+#~ msgstr "m/sek"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "knots"
+#~ msgstr "hnútar"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "Beaufort"
+#~ msgstr "Beaufort"
+
+#, fuzzy
+#~ msgctxt "WeatherData|"
+#~ msgid "hPa"
+#~ msgstr "hPa"
+
+#, fuzzy
+#~ msgctxt "WeatherData|"
+#~ msgid "kPa"
+#~ msgstr "kPa"
+
+#, fuzzy
+#~ msgctxt "WeatherData|"
+#~ msgid "Bar"
+#~ msgstr "Slá"
+
+#, fuzzy
+#~ msgctxt "WeatherData|"
+#~ msgid "mmHg"
+#~ msgstr "mmHg"
+
+#, fuzzy
+#~ msgctxt "WeatherData|air pressure is rising"
+#~ msgid "rising"
+#~ msgstr "stígandi"
+
+#, fuzzy
+#~ msgctxt "WeatherData|air pressure has no change"
+#~ msgid "steady"
+#~ msgstr "stöðugur"
+
+#, fuzzy
+#~ msgctxt "WeatherData|air pressure falls"
+#~ msgid "falling"
+#~ msgstr "fallandi"
+
+#, fuzzy
+#~ msgctxt "WeatherItemPrivate|"
+#~ msgid "Weather"
+#~ msgstr "Veður"
+
+#, fuzzy
+#~ msgctxt "Marble::WeatherPlugin|"
+#~ msgid "Weather"
+#~ msgstr "Veður"
+
+#, fuzzy
+#~ msgctxt "Marble::WeatherPlugin|"
+#~ msgid "&Weather"
+#~ msgstr "Veður"
+
+#, fuzzy
+#~ msgctxt "WikipediaConfigWidget|"
+#~ msgid "Configure Wikipedia Plugin"
+#~ msgstr "Sýnir glugga fyrir almenna valkosti"
+
+#, fuzzy
+#~ msgctxt "CycleStreetsConfigWidget|"
+#~ msgid "Route type:"
+#~ msgstr "Opna skrá"
+
+#, fuzzy
+#~ msgctxt "Marble::CycleStreetsPlugin|"
+#~ msgid "CycleStreets Routing"
+#~ msgstr "Mountain"
+
+#, fuzzy
+#~ msgctxt "Marble::CycleStreetsPlugin|"
+#~ msgid "CycleStreets"
+#~ msgstr "Mountain"
+
+#, fuzzy
+#~ msgctxt "Marble::GosmorePlugin|"
+#~ msgid "Gosmore Reverse Geocoding"
+#~ msgstr "Mountain"
+
+#, fuzzy
+#~ msgctxt "Marble::GosmorePlugin|"
+#~ msgid "Gosmore"
+#~ msgstr "Mountain"
+
+#, fuzzy
+#~ msgctxt "Marble::GosmorePlugin|"
+#~ msgid "Gosmore Routing"
+#~ msgstr "Mountain"
+
+#, fuzzy
+#~ msgctxt "Marble::GpxPlugin|"
+#~ msgid "GPS Data"
+#~ msgstr "Gögn"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "bar"
+#~ msgstr "Slá"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "attraction"
+#~ msgstr "Leiðarstýring"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "theatre"
+#~ msgstr "Mars"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "view point"
+#~ msgstr "Opna skrá"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "airport apron"
+#~ msgstr "Br&eyta"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "bus station"
+#~ msgstr "Leiðarstýring"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "parking"
+#~ msgstr "stígandi"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "train station"
+#~ msgstr "Leiðarstýring"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "taxi"
+#~ msgstr "Skáletrað"
+
+#, fuzzy
+#~ msgctxt "Marble::LocalOsmSearchPlugin|"
+#~ msgid "Offline OpenStreetMap Search"
+#~ msgstr "OpenStreetMap"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "north"
+#~ msgstr "Norður"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "north-west"
+#~ msgstr "Norður"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "west"
+#~ msgstr "Vestan"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "south-west"
+#~ msgstr "Suður"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "south"
+#~ msgstr "Suður"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "south-east"
+#~ msgstr "Suður"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "east"
+#~ msgstr "Austan"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "north-east"
+#~ msgstr "Norður"
+
+#, fuzzy
+#~ msgctxt "Marble::MapQuestPlugin|"
+#~ msgid "MapQuest Routing"
+#~ msgstr "Mountain"
+
+#, fuzzy
+#~ msgctxt "Marble::MapQuestPlugin|"
+#~ msgid "MapQuest"
+#~ msgstr "Mountain"
+
+#, fuzzy
+#~ msgctxt "MonavConfigWidget|"
+#~ msgid "Monav Configuration"
+#~ msgstr "Mountain"
+
+#, fuzzy
+#~ msgctxt "MonavConfigWidget|"
+#~ msgid "Configure"
+#~ msgstr "Stilla"
+
+#, fuzzy
+#~ msgctxt "MonavConfigWidget|"
+#~ msgid "Continent"
+#~ msgstr "Stilla"
+
+#, fuzzy
+#~ msgctxt "Marble::MonavMapsModel|"
+#~ msgid "Name"
+#~ msgstr "Nafn"
+
+#, fuzzy
+#~ msgctxt "Marble::MonavPlugin|"
+#~ msgid "Monav Routing"
+#~ msgstr "Mountain"
+
+#, fuzzy
+#~ msgctxt "Marble::MonavPlugin|"
+#~ msgid "Monav"
+#~ msgstr "tunglið"
+
+#, fuzzy
+#~ msgctxt "Marble::NominatimPlugin|"
+#~ msgid "OpenStreetMap Nominatim Reverse Geocoding"
+#~ msgstr "OpenStreetMap"
+
+#, fuzzy
+#~ msgctxt "Marble::NominatimPlugin|"
+#~ msgid "OpenStreetMap Nominatim"
+#~ msgstr "OpenStreetMap"
+
+#, fuzzy
+#~ msgctxt "Marble::NominatimPlugin|"
+#~ msgid "OpenStreetMap Nominatim Search"
+#~ msgstr "OpenStreetMap"
+
+#, fuzzy
+#~ msgctxt "Marble::OpenLocationCodeSearchPlugin|"
+#~ msgid "Open Location Code Search"
+#~ msgstr "Staðsetning"
+
+#, fuzzy
+#~ msgctxt "Marble::OpenLocationCodeSearchPlugin|"
+#~ msgid "Open Location Code"
+#~ msgstr "Staðsetning"
+
+#, fuzzy
+#~ msgctxt "Marble::OpenRouteServicePlugin|"
+#~ msgid "OpenRouteService Routing"
+#~ msgstr "Mountain"
+
+#, fuzzy
+#~ msgctxt "Marble::OpenRouteServicePlugin|"
+#~ msgid "OpenRouteService"
+#~ msgstr "Opna skrá"
+
+#, fuzzy
+#~ msgctxt "Marble::OsmPlugin|"
+#~ msgid "OpenStreetMap Data"
+#~ msgstr "OpenStreetMap"
+
+#, fuzzy
+#~ msgctxt "Marble::RoutinoPlugin|"
+#~ msgid "Routino Routing"
+#~ msgstr "Mountain"
+
+#, fuzzy
+#~ msgctxt "Marble::RoutinoPlugin|"
+#~ msgid "Routino"
+#~ msgstr "Mountain"
+
+#, fuzzy
+#~ msgctxt "Marble::RoutinoConfigWidget|"
+#~ msgid "Motorcar"
+#~ msgstr "stígandi"
+
+#, fuzzy
+#~ msgctxt "YoursConfigWidget|"
+#~ msgid "Transport:"
+#~ msgstr "Leiðarstýring"
+
+#, fuzzy
+#~ msgctxt "Marble::YoursPlugin|"
+#~ msgid "Yours Routing"
+#~ msgstr "Mountain"
+
+#, fuzzy
+#~ msgctxt "Marble::YoursConfigWidget|"
+#~ msgid "Bicycle"
+#~ msgstr "stígandi"
+
+#, fuzzy
+#~ msgctxt "Marble::YoursConfigWidget|"
+#~ msgid "Motorcar"
+#~ msgstr "stígandi"
+
+#, fuzzy
+#~ msgctxt "Bookmarks|"
+#~ msgid "Removed"
+#~ msgstr "Mountain"
+
+#, fuzzy
+#~ msgctxt "MainScreen|"
+#~ msgid "Settings"
+#~ msgstr "&Stillingar"
+
+#, fuzzy
+#~ msgctxt "MainScreen|"
+#~ msgid "About"
+#~ msgstr "Um"
+
+#, fuzzy
+#~ msgctxt "MainScreen|"
+#~ msgid "Routing"
+#~ msgstr "Mountain"
+
+#, fuzzy
+#~ msgctxt "ProfileSelectorMenu|"
+#~ msgid "Bicycle"
+#~ msgstr "stígandi"
+
+#, fuzzy
+#~ msgctxt "SidePanel|"
+#~ msgid "Public Transport"
+#~ msgstr "Leiðarstýring"
+
+#, fuzzy
+#~ msgctxt "SidePanel|"
+#~ msgid "About Marble Maps…"
+#~ msgstr "Mountain"
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Ctrl+O"
+#~ msgstr "Ctrl+O"
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Ctrl+S"
+#~ msgstr "Ctrl+S"
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Ctrl+C"
+#~ msgstr "Ctrl+C"
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Ctrl+E"
+#~ msgstr "Ctrl+O"
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Ctrl+Shift+F"
+#~ msgstr "Ctrl+S"
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "F1"
+#~ msgstr "F1"
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Ctrl+B"
+#~ msgstr "Ctrl+O"
+
+#, fuzzy
+#~ msgctxt "Marble::MapWizard|"
+#~ msgid "Observatory"
+#~ msgstr "Merkúr"
+
+#, fuzzy
+#~ msgctxt "Marble::MapWizard|"
+#~ msgid "Mountain"
+#~ msgstr "Mountain"
+
+#, fuzzy
+#~ msgctxt "Marble::MapWizard|"
+#~ msgid "Volcano"
+#~ msgstr "Eldfjall"
+
+#, fuzzy
+#~ msgctxt "Marble::MapWizard|"
+#~ msgid "International"
+#~ msgstr "Gögn"
+
+#, fuzzy
+#~ msgctxt "Marble::MapWizard|"
+#~ msgid "State"
+#~ msgstr "Mars"
+
+#, fuzzy
+#~ msgctxt "MapWizard|"
+#~ msgid "Coordinate Grid"
+#~ msgstr "Hnita Net"
+
+#, fuzzy
+#~ msgctxt "RoutingSettingsWidget|"
+#~ msgid "&Configure"
+#~ msgstr "Stilla"
+
+#, fuzzy
+#~ msgctxt "Marble::MapViewWidget|"
+#~ msgid "&Upload Map..."
+#~ msgstr "Opna skrá"
+
+#, fuzzy
+#~ msgctxt "PlacemarkDialog|"
+#~ msgid "Routes"
+#~ msgstr "Opna skrá"
+
+#, fuzzy
+#~ msgctxt "CacheDetailsDialog|"
+#~ msgid "Description"
+#~ msgstr "Lýsing"
+
+#, fuzzy
+#~ msgctxt "CacheDetailsDialog|"
+#~ msgid "&Close"
+#~ msgstr "S&ký"
+
+#, fuzzy
+#~ msgctxt "Marble::OpenCachingComItem|"
+#~ msgid "Verification:"
+#~ msgstr "Leiðarstýring"
+
+#, fuzzy
+#~ msgctxt "Marble::NotesPlugin|"
+#~ msgid "Notes Plugin"
+#~ msgstr "Íforrit"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "City National Capital"
+#~ msgstr "Borg"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Town National Capital"
+#~ msgstr "Borg"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Village National Capital"
+#~ msgstr "Borg"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Bag"
+#~ msgstr "Slá"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Beauty"
+#~ msgstr "Beaufort"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Car"
+#~ msgstr "bjart"
+
+#, fuzzy
+#~ msgctxt "Marble::RoutingProfileSettingsDialog|"
+#~ msgid "Routing Profile - Marble"
+#~ msgstr "Mountain"
+
+#, fuzzy
+#~ msgctxt "Marble::RoutingWidget|"
+#~ msgid "Directions - Marble"
+#~ msgstr "Mountain"
+
+#, fuzzy
+#~ msgctxt "GeoDataFeature|"
+#~ msgid "Crater"
+#~ msgstr "Bikarinn"
+
+#, fuzzy
+#~ msgctxt "GeoDataFeature|"
+#~ msgid "Mountain"
+#~ msgstr "Mountain"
+
+#, fuzzy
+#~ msgctxt "GeoDataFeature|"
+#~ msgid "Volcano"
+#~ msgstr "Eldfjall"
+
+#, fuzzy
+#~ msgctxt "GeoDataFeature|"
+#~ msgid "Water"
+#~ msgstr "Bikarinn"
+
+#, fuzzy
+#~ msgctxt "GeoDataFeature|"
+#~ msgid "Bar"
+#~ msgstr "Slá"
+
+#, fuzzy
+#~ msgctxt "GeoDataFeature|"
+#~ msgid "Veterinary"
+#~ msgstr "Staðsetning"
+
+#, fuzzy
+#~ msgctxt "GeoDataFeature|"
+#~ msgid "Car"
+#~ msgstr "bjart"
+
+#, fuzzy
+#~ msgctxt "GeoDataFeature|"
+#~ msgid "Theatre"
+#~ msgstr "Mars"
+
+#, fuzzy
+#~ msgctxt "Marble::RoutingManager|"
+#~ msgid "Guidance Mode - Marble"
+#~ msgstr "Mountain"
+
+#, fuzzy
+#~ msgctxt "Marble::Placemark|"
+#~ msgid "City"
+#~ msgstr "Borg"
+
+#, fuzzy
+#~ msgctxt "Marble::Placemark|"
+#~ msgid "Mountain"
+#~ msgstr "Mountain"
+
+#, fuzzy
+#~ msgctxt "Marble::Placemark|"
+#~ msgid "Continent"
+#~ msgstr "Stilla"
+
+#, fuzzy
+#~ msgctxt "Marble::Placemark|"
+#~ msgid "Observatory"
+#~ msgstr "Merkúr"
+
+#, fuzzy
+#~ msgctxt "Marble::Placemark|"
+#~ msgid "Water"
+#~ msgstr "Bikarinn"
+
+#, fuzzy
+#~ msgctxt "Marble::Placemark|"
+#~ msgid "Bar"
+#~ msgstr "Slá"
+
+#, fuzzy
+#~ msgctxt "Marble::Placemark|"
+#~ msgid "Veterinary"
+#~ msgstr "Staðsetning"
+
+#, fuzzy
+#~ msgctxt "Marble::Placemark|"
+#~ msgid "Car"
+#~ msgstr "bjart"
+
+#, fuzzy
+#~ msgctxt "Marble::Placemark|"
+#~ msgid "Information"
+#~ msgstr "Staðsetning"
+
+#, fuzzy
+#~ msgctxt "Marble::Placemark|"
+#~ msgid "Theatre"
+#~ msgstr "Mars"
+
+#, fuzzy
+#~ msgctxt "Marble::Placemark|"
+#~ msgid "Crater"
+#~ msgstr "Bikarinn"
+
+#, fuzzy
+#~ msgctxt "Marble::MaemoPositionProviderPlugin|"
+#~ msgid "Maemo Position Provider Plugin"
+#~ msgstr "Staðsetning"
+
+#, fuzzy
+#~ msgctxt "MarbleViewSettingsWidget|"
+#~ msgid "OpenGL"
+#~ msgstr "&Opna kort..."
+
+#, fuzzy
+#~ msgctxt "East, the direction"
+#~ msgid "E"
+#~ msgstr "A"
+
+#, fuzzy
+#~ msgctxt "West, the direction"
+#~ msgid "W"
+#~ msgstr "V"
+
+#, fuzzy
+#~ msgctxt "North, the direction"
+#~ msgid "N"
+#~ msgstr "N"
+
+#, fuzzy
+#~ msgctxt "South, the direction"
+#~ msgid "S"
+#~ msgstr "S"
+
+#, fuzzy
+#~ msgctxt "means meter"
+#~ msgid "m"
+#~ msgstr "m"
+
+#, fuzzy
+#~ msgctxt "means kilometers"
+#~ msgid "km"
+#~ msgstr "km"
+
+#, fuzzy
+#~ msgctxt "means feet"
+#~ msgid "ft"
+#~ msgstr "ft"
+
+#, fuzzy
+#~ msgctxt "means miles"
+#~ msgid "mi"
+#~ msgstr "m"
+
+#, fuzzy
+#~ msgctxt "means nautical miles"
+#~ msgid "nm"
+#~ msgstr "m"
+
+#, fuzzy
+#~ msgctxt "the planet"
+#~ msgid "Mercury"
+#~ msgstr "Merkúr"
+
+#, fuzzy
+#~ msgctxt "the planet"
+#~ msgid "Venus"
+#~ msgstr "Venus"
+
+#, fuzzy
+#~ msgctxt "the planet"
+#~ msgid "Earth"
+#~ msgstr "jörðin"
+
+#, fuzzy
+#~ msgctxt "the planet"
+#~ msgid "Mars"
+#~ msgstr "Mars"
+
+#, fuzzy
+#~ msgctxt "the planet"
+#~ msgid "Jupiter"
+#~ msgstr "Júpíter"
+
+#, fuzzy
+#~ msgctxt "the planet"
+#~ msgid "Saturn"
+#~ msgstr "Satúrnus"
+
+#, fuzzy
+#~ msgctxt "the planet"
+#~ msgid "Uranus"
+#~ msgstr "Úranus"
+
+#, fuzzy
+#~ msgctxt "the planet"
+#~ msgid "Neptune"
+#~ msgstr "Neptúnus"
+
+#, fuzzy
+#~ msgctxt "the earth's star"
+#~ msgid "Sun"
+#~ msgstr "sólin"
+
+#, fuzzy
+#~ msgctxt "the earth's moon"
+#~ msgid "Moon"
+#~ msgstr "tunglið"
+
+#, fuzzy
+#~ msgctxt "Name of a satellite group"
+#~ msgid "Weather"
+#~ msgstr "Veður"
+
+#, fuzzy
+#~ msgctxt "Name of a satellite group"
+#~ msgid "Other"
+#~ msgstr "Veður"
+
+#, fuzzy
+#~ msgid "Show &Sun"
+#~ msgstr "Sýna stjór&nunarspjald"
+
+#, fuzzy
+#~ msgid "Open Route..."
+#~ msgstr "Opna skrá"
+
+#, fuzzy
+#~ msgid "Save Route..."
+#~ msgstr "Opna skrá"
+
+#, fuzzy
+#~ msgid "Head on %1"
+#~ msgstr "Útgáfa %1"
+
+#, fuzzy
+#~ msgctxt "The compass direction"
+#~ msgid "North"
+#~ msgstr "Norður"
+
+#, fuzzy
+#~ msgctxt "The compass direction"
+#~ msgid "East"
+#~ msgstr "Austan"
+
+#, fuzzy
+#~ msgctxt "The compass direction"
+#~ msgid "South"
+#~ msgstr "Suður"
+
+#, fuzzy
+#~ msgctxt "The compass direction"
+#~ msgid "West"
+#~ msgstr "Vestan"
+
+#, fuzzy
+#~ msgid "Meters"
+#~ msgstr "Veður"

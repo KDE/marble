@@ -1,0 +1,6913 @@
+# Translation of marble.po to Hebrew
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Meni Livne <livne@kde.org>, 2007.
+# Diego Iastrubni <elcuco@kde.org>, 2008, 2012.
+# Elkana Bardugo <ttv200@gmail.com>, 2016.
+# Elkana Bardugo <ttv200@gmail.com>, 2017. #zanata
+# SPDX-FileCopyrightText: 2024 Yaron Shahrabani <sh.yaron@gmail.com>
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2024-09-23 00:36+0000\n"
+"PO-Revision-Date: 2024-09-21 10:37+0300\n"
+"Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
+"Language-Team: צוות התרגום של KDE ישראל\n"
+"Language: he\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 24.05.2\n"
+"Plural-Forms: nplurals=4; plural=(n == 1) ? 0 : ((n == 2) ? 1 : ((n > 10 && "
+"n % 10 == 0) ? 2 : 3));\n"
+"X-Qt-Contexts: true\n"
+
+#, fuzzy, kde-format
+#| msgctxt "Marble::YoursPlugin|"
+#| msgid "Yours"
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "שלך"
+
+#, fuzzy, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "הצג רשת"
+
+#: Bookmarks.qml:20
+#, fuzzy, kde-format
+msgctxt "@title:window"
+msgid "Bookmarks"
+msgstr "ייצא מפה"
+
+#: Bookmarks.qml:69
+#, kde-format
+msgid "Your bookmarks will appear here."
+msgstr ""
+
+#: CurrentPosition.qml:54
+#, fuzzy, kde-format
+msgctxt "@option:check"
+msgid "Follow Current Position"
+msgstr "מיקום נוכחי"
+
+#: main.cpp:37 MainScreen.qml:20 MainScreen.qml:177
+#, fuzzy, kde-format
+msgid "Marble Maps"
+msgstr "יוצר מפה"
+
+#: main.cpp:39
+#, fuzzy, kde-format
+msgid "Maps"
+msgstr "&עריכה"
+
+#: main.cpp:41
+#, kde-format
+msgid "© KDE Community"
+msgstr ""
+
+#: MainScreen.qml:86
+#, fuzzy, kde-format
+msgid "Public Transport"
+msgstr "שם חלופי"
+
+#: MainScreen.qml:101
+#, kde-format
+msgid "Outdoor Activities"
+msgstr ""
+
+#: MainScreen.qml:113
+#, kde-format
+msgctxt "@action:button"
+msgid "Accessibility"
+msgstr ""
+
+#: MainScreen.qml:122
+#, fuzzy, kde-format
+msgctxt "@action:button"
+msgid "About"
+msgstr "&אודות"
+
+#: MainScreen.qml:133
+#, fuzzy, kde-format
+msgctxt "@action:button"
+msgid "Bookmarks"
+msgstr "ייצא מפה"
+
+#: MainScreen.qml:144
+#, kde-format
+msgctxt "@action:button"
+msgid "Layer Options"
+msgstr ""
+
+#: MainScreen.qml:455
+#, fuzzy, kde-format
+msgid "%1 km"
+msgstr "%1 מ'"
+
+#: NavigationInfoBar.qml:20
+#, fuzzy, kde-format
+msgctxt "distance in km"
+msgid "%1 km"
+msgstr "%1 מ'"
+
+#: NavigationInfoBar.qml:22
+#, fuzzy, kde-format
+msgctxt "distance in m"
+msgid "%1 m"
+msgstr "%1 מ'"
+
+#: NavigationInfoBar.qml:24
+#, fuzzy, kde-format
+msgctxt "distance in m with decimals"
+msgid "%1 m"
+msgstr "%1 מ'"
+
+#: Options.qml:20
+#, kde-format
+msgctxt "@title:window"
+msgid "Layer Options"
+msgstr ""
+
+#: Options.qml:23
+#, fuzzy, kde-format
+msgctxt "@title:group"
+msgid "Public Transport Layers"
+msgstr "שם חלופי"
+
+#: Options.qml:28
+#, fuzzy, kde-format
+msgctxt "@option:check"
+msgid "Train"
+msgstr "פני שטח"
+
+#: Options.qml:35
+#, kde-format
+msgctxt "@option:check"
+msgid "Subway"
+msgstr ""
+
+#: Options.qml:42
+#, kde-format
+msgctxt "@option:check"
+msgid "Tram"
+msgstr ""
+
+#: Options.qml:49
+#, kde-format
+msgctxt "@option:check"
+msgid "Bus"
+msgstr ""
+
+#: Options.qml:56
+#, kde-format
+msgctxt "@option:check"
+msgid "Trolley Bus"
+msgstr ""
+
+#: Options.qml:64
+#, kde-format
+msgid "Outdoor Activities Layers"
+msgstr ""
+
+#: Options.qml:69
+#, kde-format
+msgctxt "@option:check"
+msgid "Walkways"
+msgstr ""
+
+#: Options.qml:76
+#, fuzzy, kde-format
+msgctxt "@option:check"
+msgid "Hiking Routes"
+msgstr "ייצא מפה"
+
+#: Options.qml:83
+#, fuzzy, kde-format
+msgctxt "@option:check"
+msgid "Bicycle Routes"
+msgstr "עקוב אחר GPS"
+
+#: Options.qml:90
+#, fuzzy, kde-format
+msgctxt "@option:check"
+msgid "Mountainbike Routes"
+msgstr "הר"
+
+#: Options.qml:97
+#, fuzzy, kde-format
+msgctxt "@option:check"
+msgid "Inline Skating Routes"
+msgstr "ייצא מפה"
+
+#: Options.qml:104
+#, fuzzy, kde-format
+msgctxt "@option:check"
+msgid "Bridleways"
+msgstr "גבולות"
+
+#: PlacemarkDialog.qml:48
+#, fuzzy, kde-format
+msgctxt "placeholder"
+msgid "No Name"
+msgstr "שם"
+
+#: PlacemarkDialog.qml:168
+#, kde-format
+msgctxt "@title:group"
+msgid "Tags:"
+msgstr ""
+
+#: ProfileSelectorMenu.qml:29
+#, fuzzy, kde-format
+msgid "Car (fastest)"
+msgstr "0 מ' (מים)"
+
+#: ProfileSelectorMenu.qml:40
+#, fuzzy, kde-format
+#| msgctxt "Marble::RoutinoConfigWidget|"
+#| msgid "Bicycle"
+msgid "Bicycle"
+msgstr "אופניים"
+
+#: ProfileSelectorMenu.qml:49
+#, kde-format
+msgid "Pedestrian"
+msgstr ""
+
+#: RouteEditor.qml:62
+#, kde-format
+msgid "Search for places to integrate them into a route."
+msgstr ""
+
+#: SettingsDialog.qml:48
+#, fuzzy, kde-format
+msgid "Network Settings"
+msgstr "&הגדרות"
+
+#: SettingsDialog.qml:53
+#, fuzzy, kde-format
+msgid "Download Maps via WLAN only"
+msgstr "ההורדה הסתיימה."
+
+#, fuzzy
+#~ msgctxt "DGML|"
+#~ msgid "Craters"
+#~ msgstr "0 מ' (מים)"
+
+#, fuzzy
+#~ msgctxt "DGML|"
+#~ msgid "Maria"
+#~ msgstr "Marble"
+
+#, fuzzy
+#~ msgctxt "DGML|"
+#~ msgid "Other features"
+#~ msgstr "מקום אחר"
+
+#, fuzzy
+#~ msgctxt "DGML|"
+#~ msgid "Coordinate Grid"
+#~ msgstr "רשת קואורדינטות"
+
+#, fuzzy
+#~ msgctxt "DGML|"
+#~ msgid "Mons, mountain"
+#~ msgstr "הר"
+
+#, fuzzy
+#~ msgctxt "DGML|"
+#~ msgid "Other"
+#~ msgstr "0 מ' (מים)"
+
+#, fuzzy
+#~ msgctxt "DGML|"
+#~ msgid "Selenographic Pole"
+#~ msgstr "העתק קואורדינטות"
+
+#, fuzzy
+#~ msgctxt "DGML|"
+#~ msgid "Terrain"
+#~ msgstr "פני שטח"
+
+#, fuzzy
+#~ msgctxt "DGML|"
+#~ msgid "Water Bodies"
+#~ msgstr "גופי מים"
+
+#, fuzzy
+#~ msgctxt "DGML|"
+#~ msgid "Temperature"
+#~ msgstr "FITemplate"
+
+#, fuzzy
+#~ msgctxt "DGML|"
+#~ msgid "Mountain"
+#~ msgstr "הר"
+
+#, fuzzy
+#~ msgctxt "DGML|"
+#~ msgid "Volcano"
+#~ msgstr "הר געש"
+
+#, fuzzy
+#~ msgctxt "DGML|"
+#~ msgid "Geographic Pole"
+#~ msgstr "העתק קואורדינטות"
+
+#, fuzzy
+#~ msgctxt "DGML|"
+#~ msgid "Shipwreck"
+#~ msgstr "מספנה"
+
+#, fuzzy
+#~ msgctxt "DGML|"
+#~ msgid "Astronomical Observatory"
+#~ msgstr "מיקום נוכחי"
+
+#, fuzzy
+#~ msgctxt "DGML|"
+#~ msgid "International"
+#~ msgstr "שם חלופי"
+
+#, fuzzy
+#~ msgctxt "DGML|"
+#~ msgid "State"
+#~ msgstr "&שמור"
+
+#, fuzzy
+#~ msgctxt "DGML|"
+#~ msgid "Lake"
+#~ msgstr "אגם"
+
+#, fuzzy
+#~ msgctxt "DGML|"
+#~ msgid "River"
+#~ msgstr "נהר"
+
+#, fuzzy
+#~ msgctxt "DGML|"
+#~ msgid "Earth at Night"
+#~ msgstr "כדור הארץ בלילה"
+
+#, fuzzy
+#~ msgctxt "DGML|"
+#~ msgid ""
+#~ "This image of <i>Earth's city lights</i> was created with data from the "
+#~ "Defense Meteorological Satellite Program (DMSP) Operational Linescan "
+#~ "System (OLS)."
+#~ msgstr ""
+#~ "תמונה זו של אורות הערים על פני כדור הארץ נוצרה באמצעות נתונים ממערכת קווי "
+#~ "הסריקה הביצועית (OLS) של תוכנית הלוויינים המטאורולוגיים להגנה (DMSP)."
+
+#, fuzzy
+#~ msgctxt "DGML|"
+#~ msgid "Light terrain"
+#~ msgstr "פני שטח"
+
+#, fuzzy
+#~ msgctxt "DGML|"
+#~ msgid "Dark terrain"
+#~ msgstr "פני שטח"
+
+#, fuzzy
+#~ msgctxt "DGML|"
+#~ msgid "Water"
+#~ msgstr "0 מ' (מים)"
+
+#, fuzzy
+#~ msgctxt "DGML|"
+#~ msgid "Atlas"
+#~ msgstr "אטלס"
+
+#, fuzzy
+#~ msgctxt "DGML|"
+#~ msgid ""
+#~ "<p>A <i>classic topographic map</i>.</p><p>It uses vector lines to mark "
+#~ "coastlines, country borders etc. and bitmap graphics to create the height "
+#~ "relief.</p>"
+#~ msgstr ""
+#~ "מפה טופוגרפית קלאסית שמשתמשת בקווים וקטוריים כדי לסמן חופים, גבולות בין "
+#~ "מדינות וכו', ובגרפיקת מפת סיביות כדי ליצור את תבליט הגבהים."
+
+#, fuzzy
+#~ msgctxt "DGML|"
+#~ msgid "Urban Areas"
+#~ msgstr "אטלס"
+
+#, fuzzy
+#~ msgctxt "DGML|"
+#~ msgid "Ice and Glaciers"
+#~ msgstr "קרח וקרחונים"
+
+#, fuzzy
+#~ msgctxt "DGML|"
+#~ msgid "Elevation"
+#~ msgstr "גובה:"
+
+#, fuzzy
+#~ msgctxt "DGML|"
+#~ msgid "Maritime Borders"
+#~ msgstr "גבול מחוז"
+
+#, fuzzy
+#~ msgctxt "DGML|"
+#~ msgid "Glaciers"
+#~ msgstr "קרח וקרחונים"
+
+#, fuzzy
+#~ msgctxt "DGML|"
+#~ msgid "7000 m"
+#~ msgstr "7000 מ'"
+
+#, fuzzy
+#~ msgctxt "DGML|"
+#~ msgid "5000 m"
+#~ msgstr "5000 מ'"
+
+#, fuzzy
+#~ msgctxt "DGML|"
+#~ msgid "3500 m"
+#~ msgstr "3500 מ'"
+
+#, fuzzy
+#~ msgctxt "DGML|"
+#~ msgid "2000 m"
+#~ msgstr "2000 מ'"
+
+#, fuzzy
+#~ msgctxt "DGML|"
+#~ msgid "1000 m"
+#~ msgstr "1000 מ'"
+
+#, fuzzy
+#~ msgctxt "DGML|"
+#~ msgid "500 m"
+#~ msgstr "500 מ'"
+
+#, fuzzy
+#~ msgctxt "DGML|"
+#~ msgid "200 m"
+#~ msgstr "200 מ'"
+
+#, fuzzy
+#~ msgctxt "DGML|"
+#~ msgid "50 m"
+#~ msgstr "50 מ'"
+
+#, fuzzy
+#~ msgctxt "DGML|"
+#~ msgid "0 m"
+#~ msgstr "0 מ'"
+
+#, fuzzy
+#~ msgctxt "DGML|"
+#~ msgid "0 m (Water)"
+#~ msgstr "0 מ' (מים)"
+
+#, fuzzy
+#~ msgctxt "DGML|"
+#~ msgid "-50 m"
+#~ msgstr "-50 מ'"
+
+#, fuzzy
+#~ msgctxt "DGML|"
+#~ msgid "-200 m"
+#~ msgstr "-200 מ'"
+
+#, fuzzy
+#~ msgctxt "DGML|"
+#~ msgid "-2000 m"
+#~ msgstr "-2000 מ'"
+
+#, fuzzy
+#~ msgctxt "DGML|"
+#~ msgid "-4000 m"
+#~ msgstr "-4000 מ'"
+
+#, fuzzy
+#~ msgctxt "DGML|"
+#~ msgid "-6500 m"
+#~ msgstr "-6500 מ'"
+
+#, fuzzy
+#~ msgctxt "DGML|"
+#~ msgid "-11000 m"
+#~ msgstr "-11000 מ'"
+
+#, fuzzy
+#~ msgctxt "DGML|"
+#~ msgid "Explore the Earth"
+#~ msgstr "כדור הארץ"
+
+#, fuzzy
+#~ msgctxt "DGML|"
+#~ msgid "OSM Bitmap Tiles"
+#~ msgstr "תצוגת מפה"
+
+#, fuzzy
+#~ msgctxt "DGML|"
+#~ msgid "Transportation"
+#~ msgstr "שם חלופי"
+
+#, fuzzy
+#~ msgctxt "DGML|"
+#~ msgid "Areas"
+#~ msgstr "אטלס"
+
+#, fuzzy
+#~ msgctxt "DGML|"
+#~ msgid "Education"
+#~ msgstr "מיקום"
+
+#, fuzzy
+#~ msgctxt "DGML|"
+#~ msgid "Accommodation"
+#~ msgstr "מתחיל חיפוש"
+
+#, fuzzy
+#~ msgctxt "DGML|"
+#~ msgid "Track"
+#~ msgstr "עקוב אחר GPS"
+
+#, fuzzy
+#~ msgctxt "DGML|"
+#~ msgid "Bridleway"
+#~ msgstr "גבולות"
+
+#, fuzzy
+#~ msgctxt "DGML|"
+#~ msgid "Railway station"
+#~ msgstr "שם חלופי"
+
+#, fuzzy
+#~ msgctxt "DGML|"
+#~ msgid "Lightrail, tram"
+#~ msgstr "פני שטח"
+
+#, fuzzy
+#~ msgctxt "DGML|"
+#~ msgid "Bridge"
+#~ msgstr "גבולות"
+
+#, fuzzy
+#~ msgctxt "DGML|"
+#~ msgid "Forest"
+#~ msgstr "גבולות"
+
+#, fuzzy
+#~ msgctxt "DGML|"
+#~ msgid "Tourist attraction"
+#~ msgstr "מדינה"
+
+#, fuzzy
+#~ msgctxt "DGML|"
+#~ msgid "Veterinary"
+#~ msgstr "מתחיל חיפוש"
+
+#, fuzzy
+#~ msgctxt "DGML|"
+#~ msgid "Theatre"
+#~ msgstr "&שמור"
+
+#, fuzzy
+#~ msgctxt "DGML|"
+#~ msgid "Hospital"
+#~ msgstr "עיר בירה"
+
+#, fuzzy
+#~ msgctxt "DGML|"
+#~ msgid "Fire station"
+#~ msgstr "שם חלופי"
+
+#, fuzzy
+#~ msgctxt "DGML|"
+#~ msgid "Books"
+#~ msgstr "ייצא מפה"
+
+#, fuzzy
+#~ msgctxt "DGML|"
+#~ msgid "Car"
+#~ msgstr "&חפש"
+
+#, fuzzy
+#~ msgctxt "DGML|"
+#~ msgid "OpenStreetMap"
+#~ msgstr "&פתיחת מפה..."
+
+#, fuzzy
+#~ msgctxt "DGML|"
+#~ msgid "Plain Map"
+#~ msgstr "מפה רגילה"
+
+#, fuzzy
+#~ msgctxt "DGML|"
+#~ msgid ""
+#~ "<p>A <i>plain map</i>.</p><p>It uses vector lines to mark coastlines and "
+#~ "country borders, etc...</p>"
+#~ msgstr ""
+#~ "מפה רגילה שמשתמשת בקווים וקטוריים כדי לסמן חופים, גבולות בין מדינות וכו'."
+
+#, fuzzy
+#~ msgctxt "DGML|"
+#~ msgid "Behaim Places"
+#~ msgstr "תבליט"
+
+#, fuzzy
+#~ msgctxt "DGML|"
+#~ msgid "Texts and illustrations"
+#~ msgstr "שם חלופי"
+
+#, fuzzy
+#~ msgctxt "DGML|"
+#~ msgid "Precipitation"
+#~ msgstr "&היטל"
+
+#, fuzzy
+#~ msgctxt "DGML|"
+#~ msgid "0 mm"
+#~ msgstr "0 מ'"
+
+#, fuzzy
+#~ msgctxt "DGML|"
+#~ msgid "10 mm"
+#~ msgstr "0 מ'"
+
+#, fuzzy
+#~ msgctxt "DGML|"
+#~ msgid "40 mm"
+#~ msgstr "0 מ'"
+
+#, fuzzy
+#~ msgctxt "DGML|"
+#~ msgid "63 mm"
+#~ msgstr "3500 מ'"
+
+#, fuzzy
+#~ msgctxt "DGML|"
+#~ msgid "127 mm"
+#~ msgstr "%1 מ'"
+
+#, fuzzy
+#~ msgctxt "DGML|"
+#~ msgid "256 mm"
+#~ msgstr "50 מ'"
+
+#, fuzzy
+#~ msgctxt "DGML|"
+#~ msgid "512 mm"
+#~ msgstr "%1 מ'"
+
+#, fuzzy
+#~ msgctxt "DGML|"
+#~ msgid "Town"
+#~ msgstr "למטה"
+
+#, fuzzy
+#~ msgctxt "DGML|"
+#~ msgid "SRTM Data"
+#~ msgstr "&נתונים"
+
+#, fuzzy
+#~ msgctxt "DGML|"
+#~ msgid "Rivers"
+#~ msgstr "נהר"
+
+#, fuzzy
+#~ msgctxt "DGML|"
+#~ msgid "Sentinel2 Satellite Map"
+#~ msgstr "לווינים"
+
+#, fuzzy
+#~ msgctxt "DGML|"
+#~ msgid "Satellite View"
+#~ msgstr "לווינים"
+
+#, fuzzy
+#~ msgctxt "DGML|"
+#~ msgid ""
+#~ "<p>Earth as seen from Space.</p><p>The map is based on NASA's beautiful "
+#~ "\"Blue Marble Next Generation\" pictures. Credits: NASA's Earth "
+#~ "Observatory</p>"
+#~ msgstr ""
+#~ "כדור הארץ כפי שנצפה מהחלל. מפה זו מבוססת על תמונות \"Blue Marble Next "
+#~ "Generation\" של נאסא. תודות למצפה כדור הארץ של נאסא."
+
+#, fuzzy
+#~ msgctxt "DGML|"
+#~ msgid "Vegetation"
+#~ msgstr "גובה"
+
+#, fuzzy
+#~ msgctxt "DGML|"
+#~ msgid "Night Sky"
+#~ msgstr "ימינה"
+
+#, fuzzy
+#~ msgctxt "Legends|"
+#~ msgid "Marble: Legend"
+#~ msgstr "Marble"
+
+#~ msgctxt "Legends|"
+#~ msgid "Populated Places"
+#~ msgstr "אזורים מאוכלסים"
+
+#, fuzzy
+#~ msgctxt "Legends|"
+#~ msgid "Population:"
+#~ msgstr "מדינה"
+
+#, fuzzy
+#~ msgctxt "Legends|"
+#~ msgid "&gt; 1&nbsp;000&nbsp;000"
+#~ msgstr "&gt; 1,000,000"
+
+#, fuzzy
+#~ msgctxt "Legends|"
+#~ msgid "&ge; 100&nbsp;000"
+#~ msgstr "&ge; 100,000"
+
+#, fuzzy
+#~ msgctxt "Legends|"
+#~ msgid "&ge; 10&nbsp;000"
+#~ msgstr "&ge; 10,000"
+
+#, fuzzy
+#~ msgctxt "Legends|"
+#~ msgid "&lt; 10&nbsp;000"
+#~ msgstr "&lt; 10,000"
+
+#, fuzzy
+#~ msgctxt "Legends|"
+#~ msgid "Capitals:"
+#~ msgstr "ערי בירה:"
+
+#, fuzzy
+#~ msgctxt "Legends|"
+#~ msgid "Red:&nbsp;Nation"
+#~ msgstr "אדום&nbsp;מדינה"
+
+#, fuzzy
+#~ msgctxt "Legends|"
+#~ msgid "Orange:&nbsp;State"
+#~ msgstr "כתום&nbsp;איזור"
+
+#, fuzzy
+#~ msgctxt "Legends|"
+#~ msgid "Yellow:&nbsp;County"
+#~ msgstr "צהוב&nbsp;מחוז"
+
+#, fuzzy
+#~ msgctxt "Legends|"
+#~ msgid "White:&nbsp;None"
+#~ msgstr "לבן&nbsp;כלום"
+
+#, fuzzy
+#~ msgctxt "StarNames|"
+#~ msgid "Ara"
+#~ msgstr "אטלס"
+
+#, fuzzy
+#~ msgctxt "StarNames|"
+#~ msgid "Cancer"
+#~ msgstr "&ביטול"
+
+#, fuzzy
+#~ msgctxt "StarNames|"
+#~ msgid "Crater"
+#~ msgstr "0 מ' (מים)"
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Marble - Virtual Globe"
+#~ msgstr "‏Marble - גלובוס שולחני"
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Marble"
+#~ msgstr "Marble"
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&Open..."
+#~ msgstr "&פתח..."
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Open a file for viewing on Marble"
+#~ msgstr "פתיחת קובץ להצגה ב־Marble"
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&Download Maps..."
+#~ msgstr "&הורד מפות..."
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&Export Map..."
+#~ msgstr "&ייצא מפה..."
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Save a screenshot of the map"
+#~ msgstr "שמור תצלום של המפה"
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Download &Region..."
+#~ msgstr "הורד &איזור..."
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&Print..."
+#~ msgstr "ה&דפס..."
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Ctrl+P"
+#~ msgstr "Ctrl+P"
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Print a screenshot of the map"
+#~ msgstr "הדפסת תצלום של המפה"
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&Quit"
+#~ msgstr "י&ציאה"
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Ctrl+Q"
+#~ msgstr "Ctrl+Q"
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Quit the Application"
+#~ msgstr "יציאה מהתוכנית"
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&Copy Map"
+#~ msgstr "הע&תק מפה"
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Copy a screenshot of the map"
+#~ msgstr "העתקת תצלום של המפה"
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&Edit Map..."
+#~ msgstr "&עריכה"
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&Configure Marble"
+#~ msgstr "הגדרת פקד השליטה על השמש"
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Show the configuration dialog"
+#~ msgstr "הצג סרגל ניווט"
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "C&opy Coordinates"
+#~ msgstr "הע&תק קואורדינטות"
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Copy the center coordinates as text"
+#~ msgstr "העתק קואורדינטות בתור טקסט"
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&Full Screen Mode"
+#~ msgstr "&מצב מסך מלא"
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Full Screen Mode"
+#~ msgstr "מצב מסך מלא"
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&Show Status Bar"
+#~ msgstr "הצג שורת מצב"
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Show Status Bar"
+#~ msgstr "הצג שורת מצב"
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Lock Position"
+#~ msgstr "אוכלוסייה:"
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&Clouds"
+#~ msgstr "&עננים"
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Show Real Time Cloud Cover"
+#~ msgstr "הצג את עטיפת העננים בזמן אמת"
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Work Off&line"
+#~ msgstr "&עבוד באופן לא מקוון"
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&Time Control..."
+#~ msgstr "&שליטה על השמש..."
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Configure Time Control "
+#~ msgstr "הגדרת פקד השליטה על השמש"
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "S&un Control..."
+#~ msgstr "&שליטה על השמש..."
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Configure Sun Control"
+#~ msgstr "הגדרת פקד השליטה על השמש"
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Reload Current Map"
+#~ msgstr "מפה רגילה"
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Marble Virtual Globe &Handbook"
+#~ msgstr "הגלובוס השולחני Marble"
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Show the Handbook for Marble Virtual Globe"
+#~ msgstr "&אודות הגלובוס השולחני Marble"
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "What's &This"
+#~ msgstr "מה &זה"
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Show a detailed explanation of the action."
+#~ msgstr "הצג הסבר מפורט של הפעולה."
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&About Marble Virtual Globe"
+#~ msgstr "&אודות הגלובוס השולחני Marble"
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Show the application's About Box"
+#~ msgstr "הצג את תיבות האודות של התוכנית"
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "About &Qt"
+#~ msgstr "אודות &Qt"
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Show the Qt library's About box"
+#~ msgstr "הצג את תיבת האודות של ספריית Qt"
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Add &Bookmark..."
+#~ msgstr "ייצא מפה"
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Add Bookmark"
+#~ msgstr "ייצא מפה"
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&Set Home Location"
+#~ msgstr "קבע &מיקום בית"
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Show &Bookmarks"
+#~ msgstr "ייצא מפה"
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&Manage Bookmarks..."
+#~ msgstr "ייצא מפה"
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Manage Bookmarks"
+#~ msgstr "ייצא מפה"
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&File"
+#~ msgstr "&קובץ"
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&Edit"
+#~ msgstr "&עריכה"
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&View"
+#~ msgstr "&תצוגה"
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&Online Services"
+#~ msgstr "ייצא מפה"
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&Bookmarks"
+#~ msgstr "ייצא מפה"
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&Panels"
+#~ msgstr "הצג מיקומים"
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&View Size"
+#~ msgstr "&תצוגה"
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&Settings"
+#~ msgstr "&הגדרות"
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&Help"
+#~ msgstr "ע&זרה"
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&Home"
+#~ msgstr "בית"
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Ready"
+#~ msgstr "מוכן"
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Export Map"
+#~ msgstr "ייצא מפה"
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Images (*.jpg *.png)"
+#~ msgstr "תמונות ‎(*.jpg *.png)‎"
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "An error occurred while trying to save the file.\n"
+#~ msgstr "אירעה שגיאה במהלך הניסיון לשמור את הקובץ.\n"
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Marble Virtual Globe %1"
+#~ msgstr "‏Marble - גלובוס שולחני"
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Position: %1"
+#~ msgstr "אוכלוסייה:"
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Altitude: %1"
+#~ msgstr "קו &רוחב"
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Zoom: %1"
+#~ msgstr "התקרבות: %1"
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Time: %1"
+#~ msgstr "ער&כת נושא"
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "All Supported Files"
+#~ msgstr ""
+#~ "כל הקבצים הנתמכים (‎*.gpx *.kml);;מידע של ‏GPS‏ (‎*.gpx);;Google Earth KML‏ (‎*."
+#~ "kml)"
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Open File"
+#~ msgstr "פתח קובץ"
+
+#, fuzzy
+#~ msgctxt "Marble::ControlView|"
+#~ msgid "Marble - Virtual Globe"
+#~ msgstr "‏Marble - גלובוס שולחני"
+
+#, fuzzy
+#~ msgctxt "Marble::ControlView|"
+#~ msgid "Legend"
+#~ msgstr "מקרא"
+
+#, fuzzy
+#~ msgctxt "Marble::ControlView|"
+#~ msgid "Routing"
+#~ msgstr "הר"
+
+#, fuzzy
+#~ msgctxt "Marble::ControlView|"
+#~ msgid "Location"
+#~ msgstr "מיקום"
+
+#, fuzzy
+#~ msgctxt "Marble::ControlView|"
+#~ msgid "Search"
+#~ msgstr "&חפש"
+
+#, fuzzy
+#~ msgctxt "Marble::ControlView|"
+#~ msgid "Map View"
+#~ msgstr "תצוגת מפה"
+
+#, fuzzy
+#~ msgctxt "Marble::ControlView|"
+#~ msgid "Files"
+#~ msgstr "&קובץ"
+
+#, fuzzy
+#~ msgctxt "Marble::ControlView|"
+#~ msgid "Tour"
+#~ msgstr "עקוב אחר GPS"
+
+#, fuzzy
+#~ msgctxt "Marble::ControlView|"
+#~ msgid "Hide &All Panels"
+#~ msgstr "הצג מיקומים"
+
+#, fuzzy
+#~ msgctxt "Marble::ControlView|"
+#~ msgid "Show or hide all panels."
+#~ msgstr "הצג נהרות/אגמים"
+
+#, fuzzy
+#~ msgctxt "Marble::ControlView|"
+#~ msgid "Show &All Panels"
+#~ msgstr "הצג מיקומים"
+
+#, fuzzy
+#~ msgctxt "Marble::AbstractFloatItem|"
+#~ msgid "&Hide"
+#~ msgstr "&הסתר"
+
+#, fuzzy
+#~ msgctxt "Marble::AbstractFloatItem|"
+#~ msgid "&Configure..."
+#~ msgstr "הגדרת פקד השליטה על השמש"
+
+#, fuzzy
+#~ msgctxt "Marble::AddLinkDialog|"
+#~ msgid "Please specify a URL for this link."
+#~ msgstr "שם חלופי עבור המיקום."
+
+#, fuzzy
+#~ msgctxt "Marble::AddLinkDialog|"
+#~ msgid "Please specify a name for this link."
+#~ msgstr "שם חלופי עבור המיקום."
+
+#, fuzzy
+#~ msgctxt "UiAddLinkDialog|"
+#~ msgid "Add link"
+#~ msgstr "נתיב"
+
+#, fuzzy
+#~ msgctxt "UiAddLinkDialog|"
+#~ msgid "Name:"
+#~ msgstr "שם"
+
+#, fuzzy
+#~ msgctxt "BookmarkManagerDialogPrivate|"
+#~ msgid "Remove Folder"
+#~ msgstr "אודות Marble"
+
+#, fuzzy
+#~ msgctxt "Marble::BookmarkManagerDialog|"
+#~ msgid "Export Bookmarks"
+#~ msgstr "ייצא מפה"
+
+#, fuzzy
+#~ msgctxt "Marble::BookmarkManagerDialog|"
+#~ msgid "KML files (*.kml)"
+#~ msgstr "קובץ GpxFile ‏(‎*.gpx)"
+
+#, fuzzy
+#~ msgctxt "Marble::BookmarkManagerDialog|"
+#~ msgid "Bookmark Export"
+#~ msgstr "ייצא מפה"
+
+#, fuzzy
+#~ msgctxt "Marble::BookmarkManagerDialog|"
+#~ msgid "Import Bookmarks"
+#~ msgstr "ייצא מפה"
+
+#, fuzzy
+#~ msgctxt "Marble::BookmarkManagerDialog|"
+#~ msgid "KML Files (*.kml)"
+#~ msgstr "קובץ GpxFile ‏(‎*.gpx)"
+
+#, fuzzy
+#~ msgctxt "Marble::BookmarkManagerDialog|"
+#~ msgid "The file %1 cannot be opened as a KML file."
+#~ msgstr "הקובץ הוא לא קובץ DGML 2.0 תקני"
+
+#, fuzzy
+#~ msgctxt "Marble::BookmarkManagerDialog|"
+#~ msgid "Bookmark Import"
+#~ msgstr "ייצא מפה"
+
+#, fuzzy
+#~ msgctxt "BookmarkManagerDialogPrivate|"
+#~ msgid "Imported bookmark"
+#~ msgstr "ייצא מפה"
+
+#, fuzzy
+#~ msgctxt "BookmarkManagerDialogPrivate|"
+#~ msgid "Existing bookmark"
+#~ msgstr "ייצא מפה"
+
+#, fuzzy
+#~ msgctxt "BookmarkManagerDialogPrivate|"
+#~ msgid "Replace"
+#~ msgstr "תבליט"
+
+#, fuzzy
+#~ msgctxt "BookmarkManagerDialogPrivate|"
+#~ msgid "Replace All"
+#~ msgstr "תבליט"
+
+#, fuzzy
+#~ msgctxt "UiBookmarkManagerDialog|"
+#~ msgid "Bookmark Manager"
+#~ msgstr "ייצא מפה"
+
+#, fuzzy
+#~ msgctxt "UiBookmarkManagerDialog|"
+#~ msgid "Import Bookmarks..."
+#~ msgstr "ייצא מפה"
+
+#, fuzzy
+#~ msgctxt "UiBookmarkManagerDialog|"
+#~ msgid "Export Bookmarks..."
+#~ msgstr "ייצא מפה"
+
+#, fuzzy
+#~ msgctxt "UiBookmarkManagerDialog|"
+#~ msgid "Bookmarks"
+#~ msgstr "ייצא מפה"
+
+#, fuzzy
+#~ msgctxt "UiBookmarkManagerDialog|"
+#~ msgid "Edit"
+#~ msgstr "&עריכה"
+
+#, fuzzy
+#~ msgctxt "Marble::BookmarkSyncManager|"
+#~ msgid "Bookmarks"
+#~ msgstr "ייצא מפה"
+
+#, fuzzy
+#~ msgctxt "CloudRoutesDialog|"
+#~ msgid "Cloud Routes"
+#~ msgstr "ההורדה הסתיימה."
+
+#, fuzzy
+#~ msgctxt "Marble::ConflictDialog|"
+#~ msgid "Use local"
+#~ msgstr "&סגור"
+
+#, fuzzy
+#~ msgctxt "Marble::ConflictDialog|"
+#~ msgid "Use cloud"
+#~ msgstr "&סגור"
+
+#, fuzzy
+#~ msgctxt "Marble::ConflictDialog|"
+#~ msgid "Always use cloud"
+#~ msgstr "&סגור"
+
+#, fuzzy
+#~ msgctxt "Marble::ConflictDialog|"
+#~ msgid "Local placemark"
+#~ msgstr "מפה רגילה"
+
+#, fuzzy
+#~ msgctxt "Marble::ConflictDialog|"
+#~ msgid "Cloud placemark"
+#~ msgstr "מפה רגילה"
+
+#, fuzzy
+#~ msgctxt "Marble::RouteItemDelegate|"
+#~ msgid "Open"
+#~ msgstr "&פתח..."
+
+#, fuzzy
+#~ msgctxt "Marble::RouteItemDelegate|"
+#~ msgid "Remove from device"
+#~ msgstr "ה&סר נקודות מדידה"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "Error when determining current location: "
+#~ msgstr "אפשר לשונית המציגה את המיקום הנוכחי"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "km/h"
+#~ msgstr "ק\"מ"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "m"
+#~ msgstr "מ'"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "km"
+#~ msgstr "ק\"מ"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "m/h"
+#~ msgstr "ק\"מ"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "ft"
+#~ msgstr "שמאלה"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "nm"
+#~ msgstr "מ'"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "Placemark"
+#~ msgstr "מפה רגילה"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "Save Track"
+#~ msgstr "עקוב אחר GPS"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "KML File (*.kml)"
+#~ msgstr "קובץ GpxFile ‏(‎*.gpx)"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "Open Track"
+#~ msgstr "עקוב אחר GPS"
+
+#, fuzzy
+#~ msgctxt "CurrentLocationWidget|"
+#~ msgid "Current Location"
+#~ msgstr "מיקום נוכחי"
+
+#, fuzzy
+#~ msgctxt "CurrentLocationWidget|"
+#~ msgid "Position Tracking"
+#~ msgstr "אוכלוסייה:"
+
+#, fuzzy
+#~ msgctxt "CurrentLocationWidget|"
+#~ msgid "Show Track"
+#~ msgstr "עקוב אחר GPS"
+
+#, fuzzy
+#~ msgctxt "CurrentLocationWidget|"
+#~ msgid "Clear Track"
+#~ msgstr "עקוב אחר GPS"
+
+#, fuzzy
+#~ msgctxt "CurrentLocationWidget|"
+#~ msgid "..."
+#~ msgstr "..."
+
+#, fuzzy
+#~ msgctxt "DataMigrationWidget|"
+#~ msgid "Data Migration"
+#~ msgstr "ניווט"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "Current Location"
+#~ msgstr "מיקום נוכחי"
+
+#, fuzzy
+#~ msgctxt "Marble::Placemark|"
+#~ msgid "%1 parking spaces"
+#~ msgstr "עקוב אחר GPS"
+
+#, fuzzy
+#~ msgctxt ""
+#~ "Marble::Placemark|A copy shop does not provide computers for customer use"
+#~ msgid "No computers available"
+#~ msgstr "הצג סרגל ניווט"
+
+#, fuzzy
+#~ msgctxt ""
+#~ "Marble::Placemark|A copy shop provides a paid service to make phone calls"
+#~ msgid "Phone service"
+#~ msgstr "ייצא מפה"
+
+#, fuzzy
+#~ msgctxt "Marble::Placemark|An active volcano"
+#~ msgid "Active"
+#~ msgstr "מדינה"
+
+#, fuzzy
+#~ msgctxt "Marble::Placemark|"
+#~ msgid "Stratovolcano"
+#~ msgstr "הר געש"
+
+#, fuzzy
+#~ msgctxt "Marble::Placemark|"
+#~ msgid "Alternative medicine"
+#~ msgstr "שם חלופי"
+
+#, fuzzy
+#~ msgctxt "Marble::Placemark|"
+#~ msgid "Hospital"
+#~ msgstr "עיר בירה"
+
+#, fuzzy
+#~ msgctxt "Marble::Placemark|"
+#~ msgid "Rehabilitation"
+#~ msgstr "גובה:"
+
+#, fuzzy
+#~ msgctxt "Marble::Placemark|"
+#~ msgid "%1 km/h"
+#~ msgstr "%1 מ'"
+
+#, fuzzy
+#~ msgctxt "Marble::Placemark|Parking spaces"
+#~ msgid "%1 disabled spaces"
+#~ msgstr "עקוב אחר GPS"
+
+#, fuzzy
+#~ msgctxt "Marble::Placemark|Parking spaces"
+#~ msgid "%1 women spaces"
+#~ msgstr "עקוב אחר GPS"
+
+#, fuzzy
+#~ msgctxt "Marble::Placemark|Parking spaces"
+#~ msgid "%1 parent and child spaces"
+#~ msgstr "עקוב אחר GPS"
+
+#, fuzzy
+#~ msgctxt "Marble::Placemark|A hut provides showers inside or aside"
+#~ msgid "Has shower"
+#~ msgstr "הצג גבולות"
+
+#, fuzzy
+#~ msgctxt "Marble::Placemark|"
+#~ msgid "Self-service"
+#~ msgstr "ייצא מפה"
+
+#, fuzzy
+#~ msgctxt "Marble::Placemark|"
+#~ msgid "No self-service"
+#~ msgstr "ייצא מפה"
+
+#, fuzzy
+#~ msgctxt "Marble::Placemark|"
+#~ msgid "Inscription: %1"
+#~ msgstr "תיאור"
+
+#, fuzzy
+#~ msgctxt "Marble::Placemark|"
+#~ msgid "%1 minutes"
+#~ msgstr "ערים"
+
+#, fuzzy
+#~ msgctxt "Marble::Placemark|A carriage is not protected from the weather"
+#~ msgid "No weather protection"
+#~ msgstr "שם המיקום"
+
+#, fuzzy
+#~ msgctxt "Marble::Placemark|A carriage is heated"
+#~ msgid "Is heated"
+#~ msgstr "&שמור"
+
+#, fuzzy
+#~ msgctxt "Marble::Placemark|A carriage is not heated"
+#~ msgid "Not heated"
+#~ msgstr "&שמור"
+
+#, fuzzy
+#~ msgctxt "Marble::Placemark|"
+#~ msgid "Lit at night"
+#~ msgstr "כדור הארץ בלילה"
+
+#, fuzzy
+#~ msgctxt "Marble::Placemark|A ski piste with trees (gladed)"
+#~ msgid "Contains trees"
+#~ msgstr "הר"
+
+#, fuzzy
+#~ msgctxt "Marble::Placemark|"
+#~ msgid "Not patrolled"
+#~ msgstr "&שמור"
+
+#, fuzzy
+#~ msgctxt "Marble::Placemark|Entry station of an aerialway"
+#~ msgid "Entry"
+#~ msgstr "מדינה:"
+
+#, fuzzy
+#~ msgctxt "Marble::Placemark|Transit only station of an aerialway"
+#~ msgid "No entry or exit"
+#~ msgstr "גבול מדינה"
+
+#, fuzzy
+#~ msgctxt "Marble::Placemark|"
+#~ msgid "Elevation: %1 m"
+#~ msgstr "גובה:"
+
+#, fuzzy
+#~ msgctxt ""
+#~ "Marble::Placemark|This location does not provide public Internet access"
+#~ msgid "No public Internet access"
+#~ msgstr "הצג את ה־twitts הפומביים במקומות שלהם"
+
+#, fuzzy
+#~ msgctxt "Marble::RouteRelationModel|"
+#~ msgid "International walking route"
+#~ msgstr "שם חלופי"
+
+#, fuzzy
+#~ msgctxt "Marble::RouteRelationModel|"
+#~ msgid "National walking route"
+#~ msgstr "בירת מחוז"
+
+#, fuzzy
+#~ msgctxt "Marble::RouteRelationModel|"
+#~ msgid "International cycling route"
+#~ msgstr "שם חלופי"
+
+#, fuzzy
+#~ msgctxt "Marble::RouteRelationModel|"
+#~ msgid "Regional route"
+#~ msgstr "גובה"
+
+#, fuzzy
+#~ msgctxt "Marble::RouteRelationModel|"
+#~ msgid "National route"
+#~ msgstr "בירת מחוז"
+
+#, fuzzy
+#~ msgctxt "Marble::RouteRelationModel|"
+#~ msgid "Local route"
+#~ msgstr "מיקום"
+
+#, fuzzy
+#~ msgctxt "Marble::DownloadRegionDialog|"
+#~ msgid "Download Route"
+#~ msgstr "ההורדה הסתיימה."
+
+#, fuzzy
+#~ msgctxt "Marble::DownloadRegionDialog|"
+#~ msgid "Selection Method"
+#~ msgstr "הצג דגם גבהים"
+
+#, fuzzy
+#~ msgctxt "Marble::DownloadRegionDialog|"
+#~ msgid "Download Region"
+#~ msgstr "ההורדה הסתיימה."
+
+#, fuzzy
+#~ msgctxt "Marble::DownloadRegionDialog|"
+#~ msgid "Vector tiles"
+#~ msgstr "תצוגת מפה"
+
+#, fuzzy
+#~ msgctxt "UiEditBookmarkDialog|"
+#~ msgid "Edit Bookmark"
+#~ msgstr "ייצא מפה"
+
+#, fuzzy
+#~ msgctxt "UiEditBookmarkDialog|"
+#~ msgid "&Description:"
+#~ msgstr "תיאור"
+
+#, fuzzy
+#~ msgctxt "UiEditBookmarkDialog|"
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<table border=\"0\" style=\"-qt-table-type: root; margin-top:4px; margin-"
+#~ "bottom:4px; margin-left:4px; margin-right:4px;\">\n"
+#~ "<tr>\n"
+#~ "<td style=\"border: none;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-family:'Ubuntu';\"><br /></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-family:'Ubuntu';\"><br /></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-family:'Ubuntu';\"><br /></p></td></tr></table></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">(c) 2007, The Marble "
+#~ "Project</p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-style:italic;\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">http://edu.kde.org/"
+#~ "marble</p></body></html>"
+
+#, fuzzy
+#~ msgctxt "UiEditBookmarkDialog|"
+#~ msgid "&Folder:"
+#~ msgstr "הצג דגם גבהים"
+
+#, fuzzy
+#~ msgctxt "UiEditBookmarkDialog|"
+#~ msgid "&Add Folder..."
+#~ msgstr "הצג דגם גבהים"
+
+#, fuzzy
+#~ msgctxt "Marble::EditPlacemarkDialog|"
+#~ msgid "Untitled Placemark"
+#~ msgstr "מפה רגילה"
+
+#, fuzzy
+#~ msgctxt "Marble::EditPlacemarkDialog|"
+#~ msgid "Relations"
+#~ msgstr "גובה:"
+
+#, fuzzy
+#~ msgctxt "Marble::EditPlacemarkDialog|"
+#~ msgid "Elevation"
+#~ msgstr "גובה:"
+
+#, fuzzy
+#~ msgctxt "Marble::EditPlacemarkDialog|"
+#~ msgid "Please specify a name for this placemark."
+#~ msgstr "שם חלופי עבור המיקום."
+
+#, fuzzy
+#~ msgctxt "Marble::EditPlacemarkDialog|"
+#~ msgid "Please specify a ID for this placemark."
+#~ msgstr "שם חלופי עבור המיקום."
+
+#, fuzzy
+#~ msgctxt "Marble::EditPlacemarkDialog|"
+#~ msgid "Please specify a valid ID for this placemark."
+#~ msgstr "שם חלופי עבור המיקום."
+
+#, fuzzy
+#~ msgctxt "Marble::EditPlacemarkDialog|"
+#~ msgid "Please specify an icon for this placemark or add a valid tag."
+#~ msgstr "שם חלופי עבור המיקום."
+
+#, fuzzy
+#~ msgctxt "Marble::EditPlacemarkDialog|"
+#~ msgid "Please specify a valid path for the icon file."
+#~ msgstr "שם חלופי עבור המיקום."
+
+#, fuzzy
+#~ msgctxt "UiEditPlacemarkDialog|"
+#~ msgid "Edit placemark"
+#~ msgstr "מפה רגילה"
+
+#, fuzzy
+#~ msgctxt "UiEditPlacemarkDialog|"
+#~ msgid "Description"
+#~ msgstr "תיאור"
+
+#, fuzzy
+#~ msgctxt "UiEditPlacemarkDialog|"
+#~ msgid "Scale:"
+#~ msgstr "מחוון קנה מידה"
+
+#, fuzzy
+#~ msgctxt "UiEditPlacemarkDialog|"
+#~ msgid "Show placemark"
+#~ msgstr "מפה רגילה"
+
+#, fuzzy
+#~ msgctxt "UiEditPlacemarkDialog|"
+#~ msgid "Underlined"
+#~ msgstr "שורת חיפוש"
+
+#, fuzzy
+#~ msgctxt "UiEditPlacemarkDialog|"
+#~ msgid "Add link"
+#~ msgstr "נתיב"
+
+#, fuzzy
+#~ msgctxt "ElevationWidget|"
+#~ msgid "Elevation:"
+#~ msgstr "גובה:"
+
+#, fuzzy
+#~ msgctxt "ElevationWidget|"
+#~ msgid " m"
+#~ msgstr "0 מ'"
+
+#, fuzzy
+#~ msgctxt "FileViewWidget|"
+#~ msgid "File View"
+#~ msgstr "תצוגת קבצים"
+
+#, fuzzy
+#~ msgctxt "FileViewWidget|"
+#~ msgid "&Save"
+#~ msgstr "&שמור"
+
+#, fuzzy
+#~ msgctxt "FileViewWidget|"
+#~ msgid "&Close"
+#~ msgstr "&סגור"
+
+#, fuzzy
+#~ msgctxt "Marble::FlyToEditWidget|"
+#~ msgid "Duration:"
+#~ msgstr "מדינה"
+
+#, fuzzy
+#~ msgctxt "Marble::FlyToEditWidget|"
+#~ msgid "Current map center"
+#~ msgstr "ייצא מפה"
+
+#, fuzzy
+#~ msgctxt "Marble::FormattedTextWidget|"
+#~ msgid "All Supported Files (*.png *.jpg *.jpeg)"
+#~ msgstr ""
+#~ "כל הקבצים הנתמכים (‎*.gpx *.kml);;מידע של ‏GPS‏ (‎*.gpx);;Google Earth KML‏ (‎*."
+#~ "kml)"
+
+#, fuzzy
+#~ msgctxt "FormattedTextWidget|"
+#~ msgid "9"
+#~ msgstr "F9"
+
+#, fuzzy
+#~ msgctxt "FormattedTextWidget|"
+#~ msgid "Underlined"
+#~ msgstr "שורת חיפוש"
+
+#, fuzzy
+#~ msgctxt "FormattedTextWidget|"
+#~ msgid "Add link"
+#~ msgstr "נתיב"
+
+#, fuzzy
+#~ msgctxt "GeoDataCoordinates|"
+#~ msgid "W"
+#~ msgstr "מע"
+
+#, fuzzy
+#~ msgctxt "GeoDataCoordinates|"
+#~ msgid "E"
+#~ msgstr "מז"
+
+#, fuzzy
+#~ msgctxt "GeoDataCoordinates|"
+#~ msgid "N"
+#~ msgstr "צ"
+
+#, fuzzy
+#~ msgctxt "GeoDataCoordinates|"
+#~ msgid "S"
+#~ msgstr "ד"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Terrain"
+#~ msgstr "פני שטח"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Crater"
+#~ msgstr "0 מ' (מים)"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Sea"
+#~ msgstr "&חפש"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Mountain"
+#~ msgstr "הר"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "City"
+#~ msgstr "עיר"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "County Capital"
+#~ msgstr "עיר בירה"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "State Capital"
+#~ msgstr "עיר בירה"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Nation Capital"
+#~ msgstr "בירת מחוז"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Nation"
+#~ msgstr "ניווט"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Volcano"
+#~ msgstr "הר געש"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Continent"
+#~ msgstr "הגדרת פקד השליטה על השמש"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Ocean"
+#~ msgstr "אוקיינוס"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Geographic Pole"
+#~ msgstr "העתק קואורדינטות"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Magnetic Pole"
+#~ msgstr "קו &רוחב"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Ship Wreck"
+#~ msgstr "מספנה"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Observatory"
+#~ msgstr "מיקום נוכחי"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Coordinate"
+#~ msgstr "קואורדינטות:"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Bookmark"
+#~ msgstr "ייצא מפה"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Satellite"
+#~ msgstr "לווינים"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "City Capital"
+#~ msgstr "עיר בירה"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "National Capital"
+#~ msgstr "בירת מחוז"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Locality"
+#~ msgstr "מיקום"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Town"
+#~ msgstr "למטה"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Town Capital"
+#~ msgstr "בירת מחוז"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Village"
+#~ msgstr "עיר בירה"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Village Capital"
+#~ msgstr "עיר בירה"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Water"
+#~ msgstr "0 מ' (מים)"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Glacier"
+#~ msgstr "קרח וקרחונים"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Heath"
+#~ msgstr "0 מ' (מים)"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Elevator"
+#~ msgstr "גובה:"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Unknown Road"
+#~ msgstr "הצג מיקומים"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Path"
+#~ msgstr "נתיב"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Track"
+#~ msgstr "עקוב אחר GPS"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Tertiary Link Road"
+#~ msgstr "הצג מיקומים"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Tertiary Road"
+#~ msgstr "הצג מיקומים"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Trunk Link Road"
+#~ msgstr "הצג מיקומים"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Trunk Road"
+#~ msgstr "הצג מיקומים"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "University"
+#~ msgstr "נהר"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Bar"
+#~ msgstr "&חפש"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Hospital"
+#~ msgstr "עיר בירה"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Veterinary"
+#~ msgstr "מתחיל חיפוש"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Mountain Rescue"
+#~ msgstr "הר"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Water Park"
+#~ msgstr "0 מ' (מים)"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Fountain"
+#~ msgstr "הר"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Night Club"
+#~ msgstr "ימינה"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Fire Station"
+#~ msgstr "שם חלופי"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Town Hall"
+#~ msgstr "למטה"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Charging Station"
+#~ msgstr "שם חלופי"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Car Wash"
+#~ msgstr "0 מ' (מים)"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Social Facility"
+#~ msgstr "מיקום"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "City Wall"
+#~ msgstr "עיר"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Wall"
+#~ msgstr "עיר"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Cave Entrance"
+#~ msgstr "עקוב אחר GPS"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Confectionery"
+#~ msgstr "הגדר &מיקום בית"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Beauty Services"
+#~ msgstr "ייצא מפה"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Bicycle Shop"
+#~ msgstr "עקוב אחר GPS"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Car Dealer"
+#~ msgstr "0 מ' (מים)"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Car Repair Shop"
+#~ msgstr "0 מ' (מים)"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Car Parts"
+#~ msgstr "0 מ' (מים)"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Motorcycle Shop"
+#~ msgstr "עקוב אחר GPS"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Printing Services"
+#~ msgstr "ייצא מפה"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Bookshop"
+#~ msgstr "ייצא מפה"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Stationery"
+#~ msgstr "מתחיל חיפוש"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Tea Shop"
+#~ msgstr "0 מ' (מים)"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Bridge"
+#~ msgstr "גבולות"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Lighthouse"
+#~ msgstr "הצג גבולות"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Water Tower"
+#~ msgstr "גופי מים"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Communications Tower"
+#~ msgstr "הצג סרגל ניווט"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Tourist Attraction"
+#~ msgstr "מדינה"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Information"
+#~ msgstr "שם חלופי"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Theatre"
+#~ msgstr "&שמור"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Theme Park"
+#~ msgstr "ער&כת נושא"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "View Point"
+#~ msgstr "מפה רגילה"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Zoo"
+#~ msgstr "התקרב"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Airport Gate"
+#~ msgstr "ייצא מפה"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Airport Apron"
+#~ msgstr "ייצא מפה"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Airport Terminal"
+#~ msgstr "ייצא מפה"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Bus Station"
+#~ msgstr "שם חלופי"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Bus Stop"
+#~ msgstr "שם חלופי"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Gas Station"
+#~ msgstr "שם חלופי"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Parking"
+#~ msgstr "עקוב אחר GPS"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Parking Space"
+#~ msgstr "עקוב אחר GPS"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Bicycle Rental"
+#~ msgstr "עקוב אחר GPS"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Car Rental"
+#~ msgstr "0 מ' (מים)"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Train Station"
+#~ msgstr "שם חלופי"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Bicycle Parking"
+#~ msgstr "עקוב אחר GPS"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Motorcycle Parking"
+#~ msgstr "עקוב אחר GPS"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Marina"
+#~ msgstr "Marble"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Park"
+#~ msgstr "עקוב אחר GPS"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Construction"
+#~ msgstr "הגדר &מיקום בית"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Landfill"
+#~ msgstr "מקרא"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Railway"
+#~ msgstr "שם חלופי"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Rail"
+#~ msgstr "שם חלופי"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Light Rail"
+#~ msgstr "פני שטח"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Railway Construction"
+#~ msgstr "שם חלופי"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Power Tower"
+#~ msgstr "גופי מים"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Aerialway Station"
+#~ msgstr "שם חלופי"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Rope Tow"
+#~ msgstr "גופי מים"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Skitour"
+#~ msgstr "עקוב אחר GPS"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Winter Hike"
+#~ msgstr "גופי מים"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Snow Park"
+#~ msgstr "עקוב אחר GPS"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Land Mass"
+#~ msgstr "מקרא"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Urban Area"
+#~ msgstr "אטלס"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "International Date Line"
+#~ msgstr "שם חלופי"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Drain"
+#~ msgstr "פני שטח"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "River"
+#~ msgstr "נהר"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Railway Crossing"
+#~ msgstr "שם חלופי"
+
+#, fuzzy
+#~ msgctxt "GeoLineStringGraphicsItem|"
+#~ msgid "Detour"
+#~ msgstr "עקוב אחר GPS"
+
+#, fuzzy
+#~ msgctxt "GeoLineStringGraphicsItem|"
+#~ msgid "Ferry Route"
+#~ msgstr "ייצא מפה"
+
+#, fuzzy
+#~ msgctxt "GeoLineStringGraphicsItem|"
+#~ msgid "Bicycle Route"
+#~ msgstr "עקוב אחר GPS"
+
+#, fuzzy
+#~ msgctxt "GeoLineStringGraphicsItem|"
+#~ msgid "Mountainbike Route"
+#~ msgstr "הר"
+
+#, fuzzy
+#~ msgctxt "GeoLineStringGraphicsItem|"
+#~ msgid "Walking Route"
+#~ msgstr "ייצא מפה"
+
+#, fuzzy
+#~ msgctxt "GeoLineStringGraphicsItem|"
+#~ msgid "Hiking Route"
+#~ msgstr "ייצא מפה"
+
+#, fuzzy
+#~ msgctxt "GeoLineStringGraphicsItem|"
+#~ msgid "Bridleway"
+#~ msgstr "גבולות"
+
+#, fuzzy
+#~ msgctxt "GeoLineStringGraphicsItem|"
+#~ msgid "Inline Skates Route"
+#~ msgstr "ייצא מפה"
+
+#, fuzzy
+#~ msgctxt "GeoLineStringGraphicsItem|"
+#~ msgid "Skitour"
+#~ msgstr "עקוב אחר GPS"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "Could not convert <maximum> child text content to integer. Was: '%1'"
+#~ msgstr "אין אפשרות להמיר <maximum> תוכן של צאצאי טקסט למספר. היה \"%1\""
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "Could not convert <minimum> child text content to integer. Was: '%1'"
+#~ msgstr "אין אפשרות להמיר <minimum> תוכן של צאצאי טקסט למספר. היה \"%1\""
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid ""
+#~ "Parsing failed line %1. Still %n unclosed tag(s) after document end. "
+#~ msgid_plural ""
+#~ "Parsing failed line %1. Still %n unclosed tag(s) after document end. "
+#~ msgstr[0] "הפיענוח נכשל. עדיין יש %1 תגיות פתוחות לאחר סיום המסמך."
+#~ msgstr[1] "הפיענוח נכשל. עדיין יש %1 תגיות פתוחות לאחר סיום המסמך."
+#~ msgstr[2] ""
+#~ msgstr[3] ""
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "Error parsing file at line: %1 and column %2 . "
+#~ msgstr ""
+#~ "אירעה שגיאת פיענוח בשורה %1, עמודה %2:\n"
+#~ "%3."
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "This is an Invalid File"
+#~ msgstr "הקובץ הוא לא קובץ DGML 2.0 תקני"
+
+#, fuzzy
+#~ msgctxt "Marble::GeoDataTreeModel|"
+#~ msgid "Popularity"
+#~ msgstr "אוכלוסייה:"
+
+#, fuzzy
+#~ msgctxt "Marble::TargetModel|"
+#~ msgid "Current Location: %1"
+#~ msgstr "מיקום נוכחי"
+
+#, fuzzy
+#~ msgctxt "Marble::TargetModel|"
+#~ msgid "Home"
+#~ msgstr "בית"
+
+#, fuzzy
+#~ msgctxt "GoTo|"
+#~ msgid "Go To..."
+#~ msgstr "עבור אל"
+
+#, fuzzy
+#~ msgctxt "GoTo|"
+#~ msgid "Search"
+#~ msgstr "&חפש"
+
+#, fuzzy
+#~ msgctxt "LatLonBoxWidget|"
+#~ msgid "Northern Latitude"
+#~ msgstr "קו &רוחב"
+
+#, fuzzy
+#~ msgctxt "LatLonBoxWidget|"
+#~ msgid "&N"
+#~ msgstr "צ"
+
+#, fuzzy
+#~ msgctxt "LatLonBoxWidget|"
+#~ msgid "Western Longitude"
+#~ msgstr "קו &אורך"
+
+#, fuzzy
+#~ msgctxt "LatLonBoxWidget|"
+#~ msgid "&W"
+#~ msgstr "מע"
+
+#, fuzzy
+#~ msgctxt "LatLonBoxWidget|"
+#~ msgid "Eastern Longitude"
+#~ msgstr "קו &אורך"
+
+#, fuzzy
+#~ msgctxt "LatLonBoxWidget|"
+#~ msgid "&E"
+#~ msgstr "מז"
+
+#, fuzzy
+#~ msgctxt "LatLonBoxWidget|"
+#~ msgid "Southern Latitude"
+#~ msgstr "קו &רוחב"
+
+#, fuzzy
+#~ msgctxt "LatLonBoxWidget|"
+#~ msgid "&S"
+#~ msgstr "ד"
+
+#, fuzzy
+#~ msgctxt "Marble::LatLonEdit|East, the direction"
+#~ msgid "E"
+#~ msgstr "מז"
+
+#, fuzzy
+#~ msgctxt "Marble::LatLonEdit|West, the direction"
+#~ msgid "W"
+#~ msgstr "מע"
+
+#, fuzzy
+#~ msgctxt "Marble::LatLonEdit|North, the direction"
+#~ msgid "N"
+#~ msgstr "צ"
+
+#, fuzzy
+#~ msgctxt "Marble::LatLonEdit|South, the direction"
+#~ msgid "S"
+#~ msgstr "ד"
+
+#, fuzzy
+#~ msgctxt "LegendWidget|"
+#~ msgid "Legend"
+#~ msgstr "מקרא"
+
+#, fuzzy
+#~ msgctxt "Marble::MapItemDelegate|"
+#~ msgid "Remove"
+#~ msgstr "מפה רגילה"
+
+#, fuzzy
+#~ msgctxt "Marble::MapItemDelegate|"
+#~ msgid "Cancel"
+#~ msgstr "&ביטול"
+
+#, fuzzy
+#~ msgctxt "Marble::MapItemDelegate|"
+#~ msgid "Open"
+#~ msgstr "&פתח..."
+
+#, fuzzy
+#~ msgctxt "MapThemeDownloadDialog|"
+#~ msgid "Install Maps"
+#~ msgstr "‏Marble - גלובוס שולחני"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "Name"
+#~ msgstr "שם"
+
+#, fuzzy
+#~ msgctxt "Marble::MapViewWidget|"
+#~ msgid "Globe View"
+#~ msgstr "תצוגת קבצים"
+
+#, fuzzy
+#~ msgctxt "Marble::MapViewWidget|"
+#~ msgid "Spherical view"
+#~ msgstr "העתק קואורדינטות"
+
+#, fuzzy
+#~ msgctxt "Marble::MapViewWidget|"
+#~ msgid "Mercator View"
+#~ msgstr "תצוגת מפה"
+
+#, fuzzy
+#~ msgctxt "Marble::MapViewWidget|"
+#~ msgid "Flat View"
+#~ msgstr "תצוגת קבצים"
+
+#, fuzzy
+#~ msgctxt "Marble::MapViewWidget|"
+#~ msgid "Stereographic view"
+#~ msgstr "העתק קואורדינטות"
+
+#, fuzzy
+#~ msgctxt "Marble::MapViewWidget|"
+#~ msgid "&Show Large Icons"
+#~ msgstr "הצג גבולות"
+
+#, fuzzy
+#~ msgctxt "Marble::MapViewWidget|"
+#~ msgid "Marble"
+#~ msgstr "Marble"
+
+#, fuzzy
+#~ msgctxt "MapViewWidget|"
+#~ msgid "Map View"
+#~ msgstr "תצוגת מפה"
+
+#, fuzzy
+#~ msgctxt "MapViewWidget|"
+#~ msgid "&Projection"
+#~ msgstr "&היטל"
+
+#, fuzzy
+#~ msgctxt "MapViewWidget|"
+#~ msgid "Globe"
+#~ msgstr "גלובוס"
+
+#, fuzzy
+#~ msgctxt "MapViewWidget|"
+#~ msgid "Flat Map"
+#~ msgstr "מפה רגילה"
+
+#, fuzzy
+#~ msgctxt "MapViewWidget|"
+#~ msgid "Mercator"
+#~ msgstr "תצוגת מפה"
+
+#, fuzzy
+#~ msgctxt "MapViewWidget|"
+#~ msgid "Stereographic"
+#~ msgstr "העתק קואורדינטות"
+
+#, fuzzy
+#~ msgctxt "MapViewWidget|"
+#~ msgid "&Theme"
+#~ msgstr "ער&כת נושא"
+
+#, fuzzy
+#~ msgctxt "MapViewWidget|"
+#~ msgid "Here you can choose the preferred map view from different topics."
+#~ msgstr "כאן באפשרותך לבחור את תצוגת המפה המועדפת עליך."
+
+#, fuzzy
+#~ msgctxt "Marble::PreviewDialog|"
+#~ msgid "Preview Map"
+#~ msgstr "מפת סקירה"
+
+#, fuzzy
+#~ msgctxt "Marble::MapWizard|"
+#~ msgid "Tile Projection:"
+#~ msgstr "&היטל"
+
+#, fuzzy
+#~ msgctxt "Marble::MapWizard|"
+#~ msgid "Preview Image"
+#~ msgstr "מפת סקירה"
+
+#, fuzzy
+#~ msgctxt "Marble::MapWizard|"
+#~ msgid "Base Tile"
+#~ msgstr "שמור קובץ"
+
+#, fuzzy
+#~ msgctxt "Marble::MapWizard|"
+#~ msgid "Legend Image"
+#~ msgstr "מקרא"
+
+#, fuzzy
+#~ msgctxt "Marble::MapWizard|"
+#~ msgid "%1"
+#~ msgstr "%1 מ'"
+
+#, fuzzy
+#~ msgctxt "Marble::MapWizard|"
+#~ msgid "Please specify a source image."
+#~ msgstr "שם חלופי עבור המיקום."
+
+#, fuzzy
+#~ msgctxt "Marble::MapWizard|"
+#~ msgid "Map Title"
+#~ msgstr "תצוגת מפה"
+
+#, fuzzy
+#~ msgctxt "Marble::MapWizard|"
+#~ msgid "Please specify a map title."
+#~ msgstr "שם חלופי עבור המיקום."
+
+#, fuzzy
+#~ msgctxt "Marble::MapWizard|"
+#~ msgid "Map Name"
+#~ msgstr "שם"
+
+#, fuzzy
+#~ msgctxt "Marble::MapWizard|"
+#~ msgid "Please specify a map name."
+#~ msgstr "שם חלופי עבור המיקום."
+
+#, fuzzy
+#~ msgctxt "Marble::MapWizard|"
+#~ msgid "Please specify a preview image."
+#~ msgstr "שם חלופי עבור המיקום."
+
+#, fuzzy
+#~ msgctxt "MapWizard|"
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">Welcome to the Map Creation Wizard!</span></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">We will guide you "
+#~ "through the process of creating a map theme for Marble. In the end you "
+#~ "will have your own map that you can view in Marble.</p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Please choose the "
+#~ "source that you want to use for the data of your map theme:</p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:12px; margin-bottom:12px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">(c) 2007, The Marble "
+#~ "Project</p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-style:italic;\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">http://edu.kde.org/"
+#~ "marble</p></body></html>"
+
+#, fuzzy
+#~ msgctxt "MapWizard|"
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">WMS Server</span></p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Please choose a <a href="
+#~ "\"https://en.wikipedia.org/wiki/Web_Map_Service\"><span style=\" text-"
+#~ "decoration: underline; color:#0057ae;\">WMS</span></a> server or enter a "
+#~ "custom server URL.</p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">הגלובוס השולחני Marble</span></p></body></html>"
+
+#, fuzzy
+#~ msgctxt "MapWizard|"
+#~ msgid "Wms-Service:"
+#~ msgstr "ייצא מפה"
+
+#, fuzzy
+#~ msgctxt "MapWizard|"
+#~ msgid "Search:"
+#~ msgstr "&חפש"
+
+#, fuzzy
+#~ msgctxt "MapWizard|"
+#~ msgid "Tile Projection:"
+#~ msgstr "&היטל"
+
+#, fuzzy
+#~ msgctxt "MapWizard|"
+#~ msgid "Service Info"
+#~ msgstr "&הגדרות"
+
+#, fuzzy
+#~ msgctxt "MapWizard|"
+#~ msgid "OpenStreetMap"
+#~ msgstr "&פתיחת מפה..."
+
+#, fuzzy
+#~ msgctxt "MapWizard|"
+#~ msgid "Select Color"
+#~ msgstr "הצג דגם גבהים"
+
+#, fuzzy
+#~ msgctxt "MapWizard|"
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">World Map Bitmap Image</span></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-weight:600;\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Please choose the "
+#~ "location of a world map that is stored in a single image file (JPG, PNG, "
+#~ "etc.). It needs to be provided in <a href=\"https://en.wikipedia.org/wiki/"
+#~ "Equirectangular_projection\"><span style=\" text-decoration: underline; "
+#~ "color:#0057ae;\">Equirectangular projection</span></a>, so the shape "
+#~ "should look like this (size ratio: 2:1):</p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><img src=\":/data/svg/"
+#~ "worldmap.svg\" width=\"150\" /></p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">(c) 2007, The Marble "
+#~ "Project</p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-style:italic;\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">http://edu.kde.org/"
+#~ "marble</p></body></html>"
+
+#, fuzzy
+#~ msgctxt "MapWizard|"
+#~ msgid "..."
+#~ msgstr "..."
+
+#, fuzzy
+#~ msgctxt "MapWizard|"
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Bitstream Vera Sans'; font-"
+#~ "size:9pt; font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif'; font-weight:600;\">URL Scheme for Indexed Tiles</"
+#~ "span></p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif';\">Please enter the URL used for downloading "
+#~ "individual tiles. Use the placeholders </span><span style=\" font-"
+#~ "family:'Sans Serif'; font-style:italic;\">{x}</span><span style=\" font-"
+#~ "family:'Sans Serif';\">, </span><span style=\" font-family:'Sans Serif'; "
+#~ "font-style:italic;\">{y}</span><span style=\" font-family:'Sans Serif';"
+#~ "\">, and </span><span style=\" font-family:'Sans Serif'; font-style:"
+#~ "italic;\">{zoomLevel}</span><span style=\" font-family:'Sans Serif';\"> "
+#~ "to reference a tile from the index.</span></p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">(c) 2007, The Marble "
+#~ "Project</p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-style:italic;\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">http://edu.kde.org/"
+#~ "marble</p></body></html>"
+
+#, fuzzy
+#~ msgctxt "MapWizard|"
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Bitstream Vera Sans'; font-"
+#~ "size:9pt; font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif'; font-weight:600;\">General Information</span></p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif';\">Please specify a title, a name and an icon for "
+#~ "your new map. Add a description to let users know what your map is about. "
+#~ "</span></p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">הגלובוס השולחני Marble</span></p></body></html>"
+
+#, fuzzy
+#~ msgctxt "MapWizard|"
+#~ msgid "Map Title:"
+#~ msgstr "תצוגת מפה"
+
+#, fuzzy
+#~ msgctxt "MapWizard|"
+#~ msgid "Map Name:"
+#~ msgstr "שם"
+
+#, fuzzy
+#~ msgctxt "MapWizard|"
+#~ msgid "Description:"
+#~ msgstr "תיאור"
+
+#, fuzzy
+#~ msgctxt "MapWizard|"
+#~ msgid "Preview Image:"
+#~ msgstr "מפת סקירה"
+
+#, fuzzy
+#~ msgctxt "MapWizard|"
+#~ msgid "preview image"
+#~ msgstr "מפת סקירה"
+
+#, fuzzy
+#~ msgctxt "MapWizard|"
+#~ msgid "Change..."
+#~ msgstr "הגדרת פקד השליטה על השמש"
+
+#, fuzzy
+#~ msgctxt "MapWizard|"
+#~ msgid "Legend Image:"
+#~ msgstr "מקרא"
+
+#, fuzzy
+#~ msgctxt "MapWizard|"
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">Summary</span></p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Congratulations! You "
+#~ "have entered all the data that is necessary to create your map theme. "
+#~ "Check the summary below carefully and press the &quot;Finish&quot; button "
+#~ "to create the theme. </p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Please consider "
+#~ "contributing the map theme back to the Marble community if the license "
+#~ "and the terms of use allow for it.</p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:12px; margin-bottom:12px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">(c) 2007, The Marble "
+#~ "Project</p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-style:italic;\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">http://edu.kde.org/"
+#~ "marble</p></body></html>"
+
+#, fuzzy
+#~ msgctxt "MapWizard|"
+#~ msgid "Map Theme:"
+#~ msgstr "שם"
+
+#, fuzzy
+#~ msgctxt "MapWizard|"
+#~ msgid "Preview Map"
+#~ msgstr "מפת סקירה"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "Marble Virtual Globe"
+#~ msgstr "‏Marble - גלובוס שולחני"
+
+#, fuzzy
+#~ msgctxt "Marble::MarbleAboutDialog|"
+#~ msgid ""
+#~ "<br />(c) 2007-%1 by the authors of Marble Virtual Globe<br /><br /><a "
+#~ "href=\"https://edu.kde.org/marble\">https://edu.kde.org/marble</a>"
+#~ msgstr ""
+#~ "<br />(c) 2007, 2008, 2009 פרוייקט Marble<br /><br /><a href=\"http://edu."
+#~ "kde.org/marble\">http://edu.kde.org/marble</a>"
+
+#, fuzzy
+#~ msgctxt "MarbleAboutDialog|"
+#~ msgid "About Marble"
+#~ msgstr "אודות Marble"
+
+#, fuzzy
+#~ msgctxt "MarbleAboutDialog|"
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">Marble Virtual Globe</span></p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">הגלובוס השולחני Marble</span></p></body></html>"
+
+#, fuzzy
+#~ msgctxt "MarbleAboutDialog|"
+#~ msgid "Version Unknown"
+#~ msgstr "גירסה %1"
+
+#, fuzzy
+#~ msgctxt "MarbleAboutDialog|"
+#~ msgid "&About"
+#~ msgstr "&אודות"
+
+#, fuzzy
+#~ msgctxt "MarbleAboutDialog|"
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:10pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-size:9pt;\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "size:9pt;\">(c) 2007, The Marble Project</span></p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-size:9pt; font-style:italic;\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "size:9pt;\">https://marble.kde.org/</span></p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">(c) 2007, The Marble "
+#~ "Project</p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-style:italic;\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">http://edu.kde.org/"
+#~ "marble</p></body></html>"
+
+#, fuzzy
+#~ msgctxt "MarbleAboutDialog|"
+#~ msgid "A&uthors"
+#~ msgstr "&כותבים"
+
+#, fuzzy
+#~ msgctxt "MarbleAboutDialog|"
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:10pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-size:9pt;\"></p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">הגלובוס השולחני Marble</span></p></body></html>"
+
+#, fuzzy
+#~ msgctxt "MarbleAboutDialog|"
+#~ msgid "&Data"
+#~ msgstr "&נתונים"
+
+#, fuzzy
+#~ msgctxt "MarbleAboutDialog|"
+#~ msgid "&License Agreement"
+#~ msgstr "&הסכם רישיון"
+
+#, fuzzy
+#~ msgctxt "MarbleAboutDialog|"
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:10pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-family:'MS Shell Dlg 2'; font-size:8pt;\"></p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">הגלובוס השולחני Marble</span></p></body></html>"
+
+#, fuzzy
+#~ msgctxt "MarbleCacheSettingsWidget|"
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">There are two caches "
+#~ "being used for Marble: The physical memory which is needed to keep map "
+#~ "data in the computer's memory. Increasing the value will make the "
+#~ "application more responsive. The hard disc memory cache is used by "
+#~ "download contents from the Internet (e.g. Wikipedia data or map data). "
+#~ "Decrease this value if you want to save space on the hard disc and if "
+#~ "high usage of the Internet is not an issue. </p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">(c) 2007, The Marble "
+#~ "Project</p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-style:italic;\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">http://edu.kde.org/"
+#~ "marble</p></body></html>"
+
+#, fuzzy
+#~ msgctxt "MarbleCacheSettingsWidget|"
+#~ msgid "C&ache"
+#~ msgstr "&חפש"
+
+#, fuzzy
+#~ msgctxt "MarbleCacheSettingsWidget|"
+#~ msgid "C&lear"
+#~ msgstr "&חפש"
+
+#, fuzzy
+#~ msgctxt "MarbleCacheSettingsWidget|"
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Proxy settings for your "
+#~ "local intranet. Please leave empty if there is no proxy.</p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "style:italic;\">תפקיד</span></p></body></html>"
+
+#, fuzzy
+#~ msgctxt "MarbleCacheSettingsWidget|"
+#~ msgid "Requires authentication"
+#~ msgstr "יציאה מהתוכנית"
+
+#, fuzzy
+#~ msgctxt "MarbleCloudSyncSettingsWidget|"
+#~ msgid "Test Login"
+#~ msgstr "תוסף בדיקה"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "Clear"
+#~ msgstr "&חפש"
+
+#, fuzzy
+#~ msgctxt "QObject|means meter"
+#~ msgid "m"
+#~ msgstr "מ'"
+
+#, fuzzy
+#~ msgctxt "QObject|means milimeters"
+#~ msgid "mm"
+#~ msgstr "מ'"
+
+#, fuzzy
+#~ msgctxt "QObject|means kilometers"
+#~ msgid "km"
+#~ msgstr "ק\"מ"
+
+#, fuzzy
+#~ msgctxt "QObject|means centimeters"
+#~ msgid "cm"
+#~ msgstr "מ'"
+
+#, fuzzy
+#~ msgctxt "QObject|means feet"
+#~ msgid "ft"
+#~ msgstr "שמאלה"
+
+#, fuzzy
+#~ msgctxt "QObject|means inches"
+#~ msgid "in"
+#~ msgstr "פני שטח"
+
+#, fuzzy
+#~ msgctxt "QObject|means miles"
+#~ msgid "mi"
+#~ msgstr "מ'"
+
+#, fuzzy
+#~ msgctxt "QObject|means nautical miles"
+#~ msgid "nm"
+#~ msgstr "מ'"
+
+#, fuzzy
+#~ msgctxt "MarbleNavigationSettingsWidget|"
+#~ msgid "&Drag location:"
+#~ msgstr "&היטל"
+
+#, fuzzy
+#~ msgctxt "MarbleNavigationSettingsWidget|"
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">While dragging the "
+#~ "mouse there are two standard behaviours when dealing with a virtual globe:"
+#~ "</p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">The location below "
+#~ "mouse pointer will follow the cursor exactly: As a result e.g. the north "
+#~ "pole will not stay at the top which can lead to confusion. By default "
+#~ "Marble makes sure that north is always up which results in a dragging "
+#~ "behaviour where the location below the mouse pointer slightly \"detaches"
+#~ "\" from the cursor. </p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">(c) 2007, The Marble "
+#~ "Project</p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-style:italic;\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">http://edu.kde.org/"
+#~ "marble</p></body></html>"
+
+#, fuzzy
+#~ msgctxt "MarbleNavigationSettingsWidget|"
+#~ msgid "&Inertial globe rotation"
+#~ msgstr "קבע &מיקום בית"
+
+#, fuzzy
+#~ msgctxt "MarbleNavigationSettingsWidget|"
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">When searching for a "
+#~ "location Marble can either move instantly to the new location or it can "
+#~ "show a travel animation from the previous place to the new place.</p></"
+#~ "body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">אין תיאור זמין</p></"
+#~ "body></html>"
+
+#, fuzzy
+#~ msgctxt "MarbleNavigationSettingsWidget|"
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">By default Marble will "
+#~ "display the home location immediately after the application has started. "
+#~ "As an alternative it can also show the last position that was active when "
+#~ "the user left the application. </p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">אין תיאור זמין</p></"
+#~ "body></html>"
+
+#, fuzzy
+#~ msgctxt "MarbleNavigationSettingsWidget|"
+#~ msgid "Show Home Location"
+#~ msgstr "קבע &מיקום בית"
+
+#, fuzzy
+#~ msgctxt "MarbleNavigator|"
+#~ msgid "Up"
+#~ msgstr "למעלה"
+
+#, fuzzy
+#~ msgctxt "MarbleNavigator|"
+#~ msgid "Tilts the globe's axis towards the user."
+#~ msgstr "הטיית ציר כדור הארץ לעברך."
+
+#, fuzzy
+#~ msgctxt "MarbleNavigator|"
+#~ msgid "..."
+#~ msgstr "..."
+
+#, fuzzy
+#~ msgctxt "MarbleNavigator|"
+#~ msgid "Rotates the globe counterclockwise around its axis."
+#~ msgstr "סיבוב כדור הארץ סביב צירו נגד כיוון השעון."
+
+#, fuzzy
+#~ msgctxt "MarbleNavigator|"
+#~ msgid "Reset View"
+#~ msgstr "אפס תצוגה"
+
+#, fuzzy
+#~ msgctxt "MarbleNavigator|"
+#~ msgid "Click this button to restore the original zoom level and view angle."
+#~ msgstr "לחץ על כפתור זה כדי לשחזר את רמת ההתקרבות וזווית הצפייה המקורית."
+
+#, fuzzy
+#~ msgctxt "MarbleNavigator|"
+#~ msgid "Home"
+#~ msgstr "בית"
+
+#, fuzzy
+#~ msgctxt "MarbleNavigator|"
+#~ msgid "Right"
+#~ msgstr "ימינה"
+
+#, fuzzy
+#~ msgctxt "MarbleNavigator|"
+#~ msgid "Rotates the globe clockwise around its axis."
+#~ msgstr "סיבוב כדור הארץ סביב צירו עם כיוון השעון."
+
+#, fuzzy
+#~ msgctxt "MarbleNavigator|"
+#~ msgid "Down"
+#~ msgstr "למטה"
+
+#, fuzzy
+#~ msgctxt "MarbleNavigator|"
+#~ msgid "Tilts the globe's axis away from the user."
+#~ msgstr "הטיית ציר כדור הארץ הרחק ממך."
+
+#, fuzzy
+#~ msgctxt "MarbleNavigator|"
+#~ msgid "Zoom In"
+#~ msgstr "התקרב"
+
+#, fuzzy
+#~ msgctxt "MarbleNavigator|"
+#~ msgid "Zoom in by pressing this button to see more detail."
+#~ msgstr "לחץ על כפתור זה כדי להתקרב ולהציג יותר פרטים.."
+
+#, fuzzy
+#~ msgctxt "MarbleNavigator|"
+#~ msgid "+"
+#~ msgstr "+"
+
+#, fuzzy
+#~ msgctxt "MarbleNavigator|"
+#~ msgid "Zoom Slider"
+#~ msgstr "מחוון התקרבות"
+
+#, fuzzy
+#~ msgctxt "MarbleNavigator|"
+#~ msgid "Use this slider to adjust the zoom level of the map."
+#~ msgstr "השתמש במחוון זה כדי לכוונן את רמת ההתקרבות של המפה."
+
+#, fuzzy
+#~ msgctxt "MarbleNavigator|"
+#~ msgid "Zoom Out"
+#~ msgstr "התרחק"
+
+#, fuzzy
+#~ msgctxt "MarbleNavigator|"
+#~ msgid "Zoom out by pressing this button to see less detail."
+#~ msgstr "לחץ על כפתור זה כדי להתרחק ולהציג פחות פרטים.."
+
+#, fuzzy
+#~ msgctxt "MarbleNavigator|"
+#~ msgid "-"
+#~ msgstr "-"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid ""
+#~ "<br/>(c) %1 The Marble Project<br /><br/><a href=\"https://edu.kde.org/"
+#~ "marble\">https://edu.kde.org/marble</a>"
+#~ msgstr ""
+#~ "<br />(c) 2007, 2008, 2009 פרוייקט Marble<br /><br /><a href=\"http://edu."
+#~ "kde.org/marble\">http://edu.kde.org/marble</a>"
+
+#, fuzzy
+#~ msgctxt "MarblePluginSettingsWidget|"
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'DejaVu Sans'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif';\">This is Marble's machine room for advanced users. "
+#~ "Here you can select and deselect the functionality that is provided "
+#~ "through plugins. </span></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif';\">Deselecting a plugin will remove the functionality "
+#~ "from the map, menus and toolbars. </span></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "family:'Sans Serif';\">Also some of the plugins might allow for tweaking "
+#~ "their configuration a bit. </span></p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">(c) 2007, The Marble "
+#~ "Project</p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-style:italic;\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">http://edu.kde.org/"
+#~ "marble</p></body></html>"
+
+#, fuzzy
+#~ msgctxt "MarblePluginSettingsWidget|"
+#~ msgid "P&lugins"
+#~ msgstr "תוסף בדיקה"
+
+#, fuzzy
+#~ msgctxt "MarbleTimeSettingsWidget|"
+#~ msgid "Universal Time Coordinated"
+#~ msgstr "העתק קואורדינטות"
+
+#, fuzzy
+#~ msgctxt "MarbleTimeSettingsWidget|"
+#~ msgid "Load last session time"
+#~ msgstr "מתחיל חיפוש"
+
+#, fuzzy
+#~ msgctxt "MarbleViewSettingsWidget|"
+#~ msgid "&Distance:"
+#~ msgstr "מרחק כולל: %1 מ'"
+
+#, fuzzy
+#~ msgctxt "MarbleViewSettingsWidget|"
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">The unit that gets used "
+#~ "to measure altitude, lengths and distances (e.g. km, mi, ft).</p></body></"
+#~ "html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "style:italic;\">תפקיד</span></p></body></html>"
+
+#, fuzzy
+#~ msgctxt "MarbleViewSettingsWidget|"
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Specifies the notation "
+#~ "of angles in coordinates: By default the Degree-Minute-Second notation (e."
+#~ "g. 54°30'00\" ) gets used. As an alternative you can choose decimal "
+#~ "degrees (e.g. 54.5°).</p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">אין תיאור זמין</p></"
+#~ "body></html>"
+
+#, fuzzy
+#~ msgctxt "MarbleViewSettingsWidget|"
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Specifies the map "
+#~ "quality that gets displayed while there is no user input. Usually this "
+#~ "allows for high map quality as speed is no concern.</p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "style:italic;\">תפקיד</span></p></body></html>"
+
+#, fuzzy
+#~ msgctxt "MarbleViewSettingsWidget|"
+#~ msgid "During &animations:"
+#~ msgstr "מדינה"
+
+#, fuzzy
+#~ msgctxt "MarbleViewSettingsWidget|"
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Specifies the map "
+#~ "quality that gets displayed during map animations (e.g. while dragging "
+#~ "the globe). </p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Especially on slow "
+#~ "machines it is advisable to set this option to \"low quality\" as this "
+#~ "will give better speed.</p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">(c) 2007, The Marble "
+#~ "Project</p>\n"
+#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; "
+#~ "font-style:italic;\"></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">http://edu.kde.org/"
+#~ "marble</p></body></html>"
+
+#, fuzzy
+#~ msgctxt "MarbleViewSettingsWidget|"
+#~ msgid "&Place names:"
+#~ msgstr "תבליט"
+
+#, fuzzy
+#~ msgctxt "MarbleViewSettingsWidget|"
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Places often have "
+#~ "different names in different languages. The label on the map can show the "
+#~ "name in the user's language. Alternatively it can display the name in the "
+#~ "official language and glyphs of that place. </p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">אין תיאור זמין</p></"
+#~ "body></html>"
+
+#, fuzzy
+#~ msgctxt "MarbleViewSettingsWidget|"
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">The default font that "
+#~ "gets used on the map.</p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "style:italic;\">תפקיד</span></p></body></html>"
+
+#, fuzzy
+#~ msgctxt "MarbleWebView|"
+#~ msgid "Copy"
+#~ msgstr "הע&תק מפה"
+
+#, fuzzy
+#~ msgctxt "Marble::MarbleWidgetPopupMenu|"
+#~ msgid "Copy Coordinates"
+#~ msgstr "העתק קואורדינטות"
+
+#, fuzzy
+#~ msgctxt "Marble::MarbleWidgetPopupMenu|"
+#~ msgid "Directions &from here"
+#~ msgstr "אודות Marble"
+
+#, fuzzy
+#~ msgctxt "Marble::MarbleWidgetPopupMenu|"
+#~ msgid "Directions &to here"
+#~ msgstr "אודות Marble"
+
+#, fuzzy
+#~ msgctxt "Marble::MarbleWidgetPopupMenu|"
+#~ msgid "Add &Bookmark"
+#~ msgstr "ייצא מפה"
+
+#, fuzzy
+#~ msgctxt "Marble::MarbleWidgetPopupMenu|"
+#~ msgid "&Full Screen Mode"
+#~ msgstr "&מצב מסך מלא"
+
+#, fuzzy
+#~ msgctxt "Marble::MarbleWidgetPopupMenu|"
+#~ msgid "&About"
+#~ msgstr "&אודות"
+
+#, fuzzy
+#~ msgctxt "Marble::MarbleWidgetPopupMenu|"
+#~ msgid "&Address Details"
+#~ msgstr "הצג רשת"
+
+#, fuzzy
+#~ msgctxt "Marble::MarbleWidgetPopupMenu|"
+#~ msgid "National Capital"
+#~ msgstr "בירת מחוז"
+
+#, fuzzy
+#~ msgctxt "Marble::MarbleWidgetPopupMenu|"
+#~ msgid "City"
+#~ msgstr "עיר"
+
+#, fuzzy
+#~ msgctxt "Marble::MarbleWidgetPopupMenu|"
+#~ msgid "State Capital"
+#~ msgstr "עיר בירה"
+
+#, fuzzy
+#~ msgctxt "Marble::MarbleWidgetPopupMenu|"
+#~ msgid "County Capital"
+#~ msgstr "עיר בירה"
+
+#, fuzzy
+#~ msgctxt "Marble::MarbleWidgetPopupMenu|"
+#~ msgid "Capital"
+#~ msgstr "עיר בירה"
+
+#, fuzzy
+#~ msgctxt "Marble::MovieCapture|"
+#~ msgid "SWF"
+#~ msgstr "ד"
+
+#, fuzzy
+#~ msgctxt "Marble::MovieCaptureDialog|Start recording a movie"
+#~ msgid "&Start"
+#~ msgstr "&כוכבים"
+
+#, fuzzy
+#~ msgctxt "Marble::MovieCaptureDialog|"
+#~ msgid "Save video file"
+#~ msgstr "שמור קובץ"
+
+#, fuzzy
+#~ msgctxt "Marble::MovieCaptureDialog|"
+#~ msgid "Filename is not valid"
+#~ msgstr "הקובץ הוא לא קובץ DGML 2.0 תקני"
+
+#, fuzzy
+#~ msgctxt "MovieCaptureDialog|"
+#~ msgid "Movie Recording"
+#~ msgstr "אודות Marble"
+
+#, fuzzy
+#~ msgctxt "MovieCaptureDialog|"
+#~ msgid "Destination video:"
+#~ msgstr "שדה תיאור"
+
+#, fuzzy
+#~ msgctxt "MovieCaptureDialog|"
+#~ msgid "Open..."
+#~ msgstr "&פתח..."
+
+#, fuzzy
+#~ msgctxt "UiNewBookmarkFolderDialog|"
+#~ msgid "New Bookmark Folder"
+#~ msgstr "אודות Marble"
+
+#, fuzzy
+#~ msgctxt "UiNewBookmarkFolderDialog|"
+#~ msgid "&Folder name:"
+#~ msgstr "תבליט"
+
+#, fuzzy
+#~ msgctxt "Marble::OsmRelationEditorDialog|"
+#~ msgid "Name"
+#~ msgstr "שם"
+
+#, fuzzy
+#~ msgctxt "Marble::OsmRelationEditorDialog|"
+#~ msgid "Please specify a name for this relation."
+#~ msgstr "שם חלופי עבור המיקום."
+
+#, fuzzy
+#~ msgctxt "Marble::OsmRelationEditorDialog|"
+#~ msgid "Please add a type tag for this relation."
+#~ msgstr "שם חלופי עבור המיקום."
+
+#, fuzzy
+#~ msgctxt "Marble::OsmRelationManagerWidget|"
+#~ msgid "New Relation"
+#~ msgstr "מדינה"
+
+#, fuzzy
+#~ msgctxt "Marble::OsmRelationManagerWidget|"
+#~ msgid "Remove"
+#~ msgstr "מפה רגילה"
+
+#, fuzzy
+#~ msgctxt "Marble::OsmRelationManagerWidget|"
+#~ msgid "Edit"
+#~ msgstr "&עריכה"
+
+#, fuzzy
+#~ msgctxt "OsmRelationManagerWidgetPrivate|"
+#~ msgid "Current Relations"
+#~ msgstr "מיקום נוכחי"
+
+#, fuzzy
+#~ msgctxt "OsmRelationManagerWidgetPrivate|"
+#~ msgid "Name"
+#~ msgstr "שם"
+
+#, fuzzy
+#~ msgctxt "OsmRelationManagerWidgetPrivate|"
+#~ msgid "Role"
+#~ msgstr "תפקיד"
+
+#, fuzzy
+#~ msgctxt "OsmRelationManagerWidgetPrivate|"
+#~ msgid "Add Relation"
+#~ msgstr "גובה:"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "New Relation"
+#~ msgstr "מדינה"
+
+#, fuzzy
+#~ msgctxt "OsmTagEditorWidgetPrivate|"
+#~ msgid "Current Tags"
+#~ msgstr "מיקום נוכחי"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "Open File"
+#~ msgstr "פתח קובץ"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "All Supported Files (*.png)"
+#~ msgstr ""
+#~ "כל הקבצים הנתמכים (‎*.gpx *.kml);;מידע של ‏GPS‏ (‎*.gpx);;Google Earth KML‏ (‎*."
+#~ "kml)"
+
+#, fuzzy
+#~ msgctxt "PlacemarkEditHeaderPrivate|"
+#~ msgid "Name:"
+#~ msgstr "שם"
+
+#, fuzzy
+#~ msgctxt "PlacemarkEditHeaderPrivate|"
+#~ msgid "Position:"
+#~ msgstr "אוכלוסייה:"
+
+#, fuzzy
+#~ msgctxt "Marble::PlacemarkPositionProviderPlugin|"
+#~ msgid "Placemark position provider Plugin"
+#~ msgstr "תוסף GeoData"
+
+#, fuzzy
+#~ msgctxt "Marble::PlacemarkPositionProviderPlugin|"
+#~ msgid "Placemark"
+#~ msgstr "מפה רגילה"
+
+#, fuzzy
+#~ msgctxt "QObject|the planet"
+#~ msgid "Mercury"
+#~ msgstr "תצוגת מפה"
+
+#, fuzzy
+#~ msgctxt "QObject|the planet"
+#~ msgid "Earth"
+#~ msgstr "&כדור הארץ"
+
+#, fuzzy
+#~ msgctxt "QObject|the planet"
+#~ msgid "Mars"
+#~ msgstr "Marble"
+
+#, fuzzy
+#~ msgctxt "QObject|a planet without data"
+#~ msgid "Unknown Planet"
+#~ msgstr "הצג מיקומים"
+
+#, fuzzy
+#~ msgctxt "Marble::PluginAboutDialog|"
+#~ msgid "About %1"
+#~ msgstr "&אודות"
+
+#, fuzzy
+#~ msgctxt "Marble::PluginAboutDialog|"
+#~ msgid "Version %1"
+#~ msgstr "גירסה %1"
+
+#, fuzzy
+#~ msgctxt "Marble::PluginAboutDialog|"
+#~ msgid "Data"
+#~ msgstr "&נתונים"
+
+#, fuzzy
+#~ msgctxt "PluginAuthor|"
+#~ msgid "Developer"
+#~ msgstr "כותב מקורי, מפתח ומתחזק"
+
+#, fuzzy
+#~ msgctxt "Marble::PluginItemDelegate|"
+#~ msgid "Configure"
+#~ msgstr "הגדרת פקד השליטה על השמש"
+
+#, fuzzy
+#~ msgctxt "PrintOptions|"
+#~ msgid "Marble"
+#~ msgstr "Marble"
+
+#, fuzzy
+#~ msgctxt "PrintOptions|"
+#~ msgid "Map"
+#~ msgstr "מפה"
+
+#, fuzzy
+#~ msgctxt "PrintOptions|"
+#~ msgid "Legend"
+#~ msgstr "מקרא"
+
+#, fuzzy
+#~ msgctxt "PrintOptions|"
+#~ msgid "Route"
+#~ msgstr "ייצא מפה"
+
+#, fuzzy
+#~ msgctxt "PrintOptions|"
+#~ msgid "Driving Instructions"
+#~ msgstr "שם חלופי"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "Flat Map"
+#~ msgstr "מפה רגילה"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "Mercator"
+#~ msgstr "תצוגת מפה"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "Globe"
+#~ msgstr "גלובוס"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "Stereographic"
+#~ msgstr "העתק קואורדינטות"
+
+#, fuzzy
+#~ msgctxt "Marble::QtMarbleConfigDialog|"
+#~ msgid "View"
+#~ msgstr "&תצוגה"
+
+#, fuzzy
+#~ msgctxt "Marble::QtMarbleConfigDialog|"
+#~ msgid "Navigation"
+#~ msgstr "ניווט"
+
+#, fuzzy
+#~ msgctxt "Marble::QtMarbleConfigDialog|"
+#~ msgid "Routing"
+#~ msgstr "הר"
+
+#, fuzzy
+#~ msgctxt "Marble::QtMarbleConfigDialog|"
+#~ msgid "Plugins"
+#~ msgstr "תוסף בדיקה"
+
+#, fuzzy
+#~ msgctxt "Marble::RemoveItemEditWidget|"
+#~ msgid "Choose item:"
+#~ msgstr "מפה רגילה"
+
+#, fuzzy
+#~ msgctxt "Marble::RouteSimulationPositionProviderPlugin|"
+#~ msgid "Current Route Position Provider Plugin"
+#~ msgstr "תוסף GeoData"
+
+#, fuzzy
+#~ msgctxt "Marble::RouteSimulationPositionProviderPlugin|"
+#~ msgid "Current Route"
+#~ msgstr "ייצא מפה"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "Continue."
+#~ msgstr "הגדרת פקד השליטה על השמש"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "Go straight ahead."
+#~ msgstr "שדה תיאור"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "Continue onto %1."
+#~ msgstr "הגדרת פקד השליטה על השמש"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "Merge onto %1."
+#~ msgstr "הגדרת פקד השליטה על השמש"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "Continue on %1."
+#~ msgstr "הגדרת פקד השליטה על השמש"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "Remove via point"
+#~ msgstr "מפה רגילה"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "Current &Location"
+#~ msgstr "מיקום נוכחי"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "From &Map..."
+#~ msgstr "&פתיחת מפה..."
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "From &Bookmark"
+#~ msgstr "ייצא מפה"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "&Home"
+#~ msgstr "בית"
+
+#, fuzzy
+#~ msgctxt "Marble::RoutingInputWidget|"
+#~ msgid "Current Location"
+#~ msgstr "מיקום נוכחי"
+
+#, fuzzy
+#~ msgctxt "Marble::RoutingInputWidget|"
+#~ msgid "Choose Placemark"
+#~ msgstr "מפה רגילה"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "&Remove this Destination"
+#~ msgstr "מפה רגילה"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "&Export Route..."
+#~ msgstr "&ייצא מפה..."
+
+#, fuzzy
+#~ msgctxt "Marble::RoutingLayer|"
+#~ msgid "Export Route"
+#~ msgstr "ייצא מפה"
+
+#, fuzzy
+#~ msgctxt "Marble::RoutingLayer|"
+#~ msgid "GPX and KML files (*.gpx *.kml)"
+#~ msgstr "קובץ GpxFile ‏(‎*.gpx)"
+
+#, fuzzy
+#~ msgctxt "Marble::RoutingManager|"
+#~ msgid "Guidance Mode"
+#~ msgstr "אודות Marble"
+
+#, fuzzy
+#~ msgctxt "Marble::RoutingManager|"
+#~ msgid "Show again"
+#~ msgstr "הצג רשת"
+
+#, fuzzy
+#~ msgctxt "RoutingProfileSettingsDialog|"
+#~ msgid "Configure Routing Profile"
+#~ msgstr "הגדרת פקד השליטה על השמש"
+
+#, fuzzy
+#~ msgctxt "RoutingProfileSettingsDialog|"
+#~ msgid "Name:"
+#~ msgstr "שם"
+
+#, fuzzy
+#~ msgctxt "RoutingProfileSettingsDialog|"
+#~ msgid "Service Settings"
+#~ msgstr "&הגדרות"
+
+#, fuzzy
+#~ msgctxt "RoutingProfileSettingsDialog|"
+#~ msgid "No configuration available"
+#~ msgstr "הצג סרגל ניווט"
+
+#, fuzzy
+#~ msgctxt "RoutingProfileSettingsDialog|"
+#~ msgid "Configure"
+#~ msgstr "הגדרת פקד השליטה על השמש"
+
+#, fuzzy
+#~ msgctxt "Marble::RoutingProfilesWidget|"
+#~ msgid "New Profile"
+#~ msgstr "שיא גובה"
+
+#, fuzzy
+#~ msgctxt "RoutingSettingsWidget|"
+#~ msgid "&Configure..."
+#~ msgstr "הגדרת פקד השליטה על השמש"
+
+#, fuzzy
+#~ msgctxt "RoutingSettingsWidget|"
+#~ msgid "&Remove"
+#~ msgstr "מפה רגילה"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "Get Directions"
+#~ msgstr "אודות Marble"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "Search"
+#~ msgstr "&חפש"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "Open Route"
+#~ msgstr "ייצא מפה"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "Save Route"
+#~ msgstr "ייצא מפה"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "Preview Route"
+#~ msgstr "ייצא מפה"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "Manage Cloud Routes"
+#~ msgstr "ההורדה הסתיימה."
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "Add Via"
+#~ msgstr "נתיב"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "Reverse Route"
+#~ msgstr "ייצא מפה"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "Clear Route"
+#~ msgstr "ייצא מפה"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "Settings"
+#~ msgstr "&הגדרות"
+
+#, fuzzy
+#~ msgctxt "Marble::RoutingWidget|"
+#~ msgid "No placemark found"
+#~ msgstr "מפה רגילה"
+
+#, fuzzy
+#~ msgctxt "Marble::RoutingWidget|"
+#~ msgid "Open Route"
+#~ msgstr "ייצא מפה"
+
+#, fuzzy
+#~ msgctxt "Marble::RoutingWidget|"
+#~ msgid "KML Files (*.kml)"
+#~ msgstr "קובץ GpxFile ‏(‎*.gpx)"
+
+#, fuzzy
+#~ msgctxt "Marble::RoutingWidget|"
+#~ msgid "Save Route"
+#~ msgstr "ייצא מפה"
+
+#, fuzzy
+#~ msgctxt "Marble::RoutingWidget|"
+#~ msgid "KML files (*.kml)"
+#~ msgstr "קובץ GpxFile ‏(‎*.gpx)"
+
+#, fuzzy
+#~ msgctxt "Marble::RoutingWidget|"
+#~ msgid "Uploading route..."
+#~ msgstr "&ייצא מפה..."
+
+#, fuzzy
+#~ msgctxt "RoutingWidget|"
+#~ msgid "Search"
+#~ msgstr "&חפש"
+
+#, fuzzy
+#~ msgctxt "RoutingWidget|"
+#~ msgid "Show Details"
+#~ msgstr "הצג רשת"
+
+#, fuzzy
+#~ msgctxt "Marble::RoutingRunner|"
+#~ msgid "m"
+#~ msgstr "מ'"
+
+#, fuzzy
+#~ msgctxt "Marble::RoutingRunner|"
+#~ msgid "mi"
+#~ msgstr "מ'"
+
+#, fuzzy
+#~ msgctxt "Marble::RoutingRunner|"
+#~ msgid "ft"
+#~ msgstr "שמאלה"
+
+#, fuzzy
+#~ msgctxt "Marble::RoutingRunner|"
+#~ msgid "km"
+#~ msgstr "ק\"מ"
+
+#, fuzzy
+#~ msgctxt "Marble::RoutingRunner|"
+#~ msgid "nm"
+#~ msgstr "מ'"
+
+#, fuzzy
+#~ msgctxt "Marble::SearchInputWidget|"
+#~ msgid "Global Search"
+#~ msgstr "&חפש"
+
+#, fuzzy
+#~ msgctxt "Marble::SearchInputWidget|"
+#~ msgid "Area Search"
+#~ msgstr "&חפש"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "Search Results"
+#~ msgstr "&חפש"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "Search for '%1'"
+#~ msgstr "0 מ' (מים)"
+
+#, fuzzy
+#~ msgctxt "Marble::SoundCueEditWidget|"
+#~ msgid "Select sound files..."
+#~ msgstr "הצג דגם גבהים"
+
+#, fuzzy
+#~ msgctxt "Marble::SoundCueEditWidget|"
+#~ msgid "Supported Sound Files (*.mp3 *.ogg *.wav)"
+#~ msgstr ""
+#~ "כל הקבצים הנתמכים (‎*.gpx *.kml);;מידע של ‏GPS‏ (‎*.gpx);;Google Earth KML‏ (‎*."
+#~ "kml)"
+
+#, fuzzy
+#~ msgctxt "SunControlWidget|"
+#~ msgid "Sun Control"
+#~ msgstr "פקד ניווט"
+
+#, fuzzy
+#~ msgctxt "SunControlWidget|"
+#~ msgid "&Night Map"
+#~ msgstr "ימינה"
+
+#, fuzzy
+#~ msgctxt "SunControlWidget|"
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">Attention: Panning the map is disabled now! </span></p>\n"
+#~ "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Uncheck the &quot;Lock "
+#~ "map view to Subsolar Point&quot; option to allow for viewing a different "
+#~ "place on the globe again.</p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">הגלובוס השולחני Marble</span></p></body></html>"
+
+#, fuzzy
+#~ msgctxt "TileCreatorDialog|"
+#~ msgid "Creating Map"
+#~ msgstr "יוצר מפה"
+
+#, fuzzy
+#~ msgctxt "TileCreatorDialog|"
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /></head><body style="
+#~ "\" white-space: pre-wrap; font-family:Sans Serif; font-size:9pt; font-"
+#~ "weight:400; font-style:normal; text-decoration:none;\"><p style=\" margin-"
+#~ "top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-"
+#~ "indent:0; text-indent:0px;\"><span style=\" font-weight:600;\">Satellite "
+#~ "View</span></p><p style=\" margin-top:0px; margin-bottom:0px; margin-"
+#~ "left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Earth "
+#~ "as seen from Space. The map is based on NASA's beautiful \"Blue Marble "
+#~ "Next Generation\" pictures. Credits: NASA's Earth Observatory</p></body></"
+#~ "html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /></head><body style="
+#~ "\" white-space: pre-wrap; font-family:Sans Serif; font-size:9pt; font-"
+#~ "weight:400; font-style:normal; text-decoration:none;\"><p style=\" margin-"
+#~ "top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-"
+#~ "indent:0; text-indent:0px;\"><span style=\" font-weight:600;\">תמונת "
+#~ "לוויין</span></p><p style=\" margin-top:0px; margin-bottom:0px; margin-"
+#~ "left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">כדור "
+#~ "הארץ כפי שנצפה מהחלל. מפה זו מבוססת על תמונות \"Blue Marble Next "
+#~ "Generation\" של נאסא. תודות למצפה כדור הארץ של נאסא.</p></body></html>"
+
+#, fuzzy
+#~ msgctxt "TileCreatorDialog|"
+#~ msgid ""
+#~ "Marble needs to create this map. This only needs to be done once and may "
+#~ "take a few seconds."
+#~ msgstr ""
+#~ "‏Marble צריך ליצור מפה זו. הדבר יתבצע פעם אחת בלבד ועשוי להימשך מספר שניות."
+
+#, fuzzy
+#~ msgctxt "TileLevelRangeWidget|"
+#~ msgid "Zoom"
+#~ msgstr "התקרב"
+
+#, fuzzy
+#~ msgctxt "TimeControlWidget|"
+#~ msgid "Time Control"
+#~ msgstr "&שליטה על השמש..."
+
+#, fuzzy
+#~ msgctxt "TimeControlWidget|"
+#~ msgid "Time"
+#~ msgstr "ער&כת נושא"
+
+#, fuzzy
+#~ msgctxt "TimeControlWidget|"
+#~ msgid "&New date and time:"
+#~ msgstr "מיקום נוכחי"
+
+#, fuzzy
+#~ msgctxt "TimeControlWidget|"
+#~ msgid "Current &date and time:"
+#~ msgstr "מיקום נוכחי"
+
+#, fuzzy
+#~ msgctxt "Marble::TourCaptureDialog|"
+#~ msgid "Save video file"
+#~ msgstr "שמור קובץ"
+
+#, fuzzy
+#~ msgctxt "Marble::TourCaptureDialog|"
+#~ msgid "Filename is not valid"
+#~ msgstr "הקובץ הוא לא קובץ DGML 2.0 תקני"
+
+#, fuzzy
+#~ msgctxt "Marble::TourCaptureDialog|"
+#~ msgid "Start"
+#~ msgstr "&כוכבים"
+
+#, fuzzy
+#~ msgctxt "Marble::TourCaptureDialog|"
+#~ msgid "Cancel"
+#~ msgstr "&ביטול"
+
+#, fuzzy
+#~ msgctxt "TourCaptureDialog|"
+#~ msgid "Movie Recording"
+#~ msgstr "אודות Marble"
+
+#, fuzzy
+#~ msgctxt "TourCaptureDialog|"
+#~ msgid "Destination video"
+#~ msgstr "שדה תיאור"
+
+#, fuzzy
+#~ msgctxt "TourCaptureDialog|"
+#~ msgid "Open..."
+#~ msgstr "&פתח..."
+
+#, fuzzy
+#~ msgctxt "TourCaptureDialog|"
+#~ msgid "Start"
+#~ msgstr "&כוכבים"
+
+#, fuzzy
+#~ msgctxt "TourCaptureDialog|"
+#~ msgid "Close"
+#~ msgstr "&סגור"
+
+#, fuzzy
+#~ msgctxt "Marble::TourItemDelegate|"
+#~ msgid "Play the tour"
+#~ msgstr "עקוב אחר GPS"
+
+#, fuzzy
+#~ msgctxt "Marble::TourItemDelegate|"
+#~ msgid "Pause the tour"
+#~ msgstr "עקוב אחר GPS"
+
+#, fuzzy
+#~ msgctxt "Marble::TourItemDelegate|"
+#~ msgid "Create item %1"
+#~ msgstr "מפה רגילה"
+
+#, fuzzy
+#~ msgctxt "Marble::TourItemDelegate|"
+#~ msgid "Remove item %1"
+#~ msgstr "מפה רגילה"
+
+#, fuzzy
+#~ msgctxt "Marble::TourItemDelegate|"
+#~ msgid "Change item %1"
+#~ msgstr "מפה רגילה"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "Change Placemark in Tour"
+#~ msgstr "מפה רגילה"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "Add Wait"
+#~ msgstr "נתיב"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "Add SoundCue"
+#~ msgstr "הצג דגם גבהים"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "Add Placemark"
+#~ msgstr "מפה רגילה"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "Remove placemark"
+#~ msgstr "מפה רגילה"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "Change placemark"
+#~ msgstr "מפה רגילה"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "Save tour"
+#~ msgstr "עקוב אחר GPS"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "Open Tour"
+#~ msgstr "עקוב אחר GPS"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "KML Tours (*.kml)"
+#~ msgstr "קובץ GpxFile ‏(‎*.gpx)"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "Remove Selected Items"
+#~ msgstr "מפה רגילה"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "Save Tour as"
+#~ msgstr "עקוב אחר GPS"
+
+#, fuzzy
+#~ msgctxt "TourWidget|"
+#~ msgid "Tour"
+#~ msgstr "עקוב אחר GPS"
+
+#, fuzzy
+#~ msgctxt "TourWidget|"
+#~ msgid "New Tour"
+#~ msgstr "עקוב אחר GPS"
+
+#, fuzzy
+#~ msgctxt "TourWidget|"
+#~ msgid "Save Tour"
+#~ msgstr "עקוב אחר GPS"
+
+#, fuzzy
+#~ msgctxt "TourWidget|"
+#~ msgid "Save Tour As"
+#~ msgstr "עקוב אחר GPS"
+
+#, fuzzy
+#~ msgctxt "TourWidget|"
+#~ msgid "Open Tour"
+#~ msgstr "עקוב אחר GPS"
+
+#, fuzzy
+#~ msgctxt "TourWidget|"
+#~ msgid "Record tour"
+#~ msgstr "עקוב אחר GPS"
+
+#, fuzzy
+#~ msgctxt "Marble::WaitEditWidget|"
+#~ msgid "Wait duration:"
+#~ msgstr "מדינה"
+
+#, fuzzy
+#~ msgctxt "Marble::FlightGearPositionProviderPlugin|"
+#~ msgid "FlightGear position provider Plugin"
+#~ msgstr "תוסף GeoData"
+
+#, fuzzy
+#~ msgctxt "Marble::FlightGearPositionProviderPlugin|"
+#~ msgid "FlightGear"
+#~ msgstr "פני שטח"
+
+#, fuzzy
+#~ msgctxt "Marble::GeoCluePositionProviderPlugin|"
+#~ msgid "GeoClue position provider Plugin"
+#~ msgstr "תוסף GeoData"
+
+#, fuzzy
+#~ msgctxt "Marble::GpsdPositionProviderPlugin|"
+#~ msgid "Gpsd position provider Plugin"
+#~ msgstr "תוסף GeoData"
+
+#, fuzzy
+#~ msgctxt "Marble::QtPositioningPositionProviderPlugin|"
+#~ msgid "Qt Positioning Position Provider Plugin"
+#~ msgstr "תוסף GeoData"
+
+#, fuzzy
+#~ msgctxt "Marble::QtPositioningPositionProviderPlugin|"
+#~ msgid "Qt Positioning Location"
+#~ msgstr "קבע &מיקום בית"
+
+#, fuzzy
+#~ msgctxt "Marble::WlocatePositionProviderPlugin|"
+#~ msgid "Wlocate Position Provider Plugin"
+#~ msgstr "תוסף GeoData"
+
+#, fuzzy
+#~ msgctxt "Marble::AnnotatePlugin|"
+#~ msgid "Annotation"
+#~ msgstr "מתחיל חיפוש"
+
+#, fuzzy
+#~ msgctxt "Marble::AnnotatePlugin|"
+#~ msgid "&Annotation"
+#~ msgstr "מתחיל חיפוש"
+
+#, fuzzy
+#~ msgctxt "Marble::AnnotatePlugin|"
+#~ msgid "Annotations"
+#~ msgstr "מתחיל חיפוש"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "Remove current item"
+#~ msgstr "מפה רגילה"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "Clear all annotations"
+#~ msgstr "מתחיל חיפוש"
+
+#, fuzzy
+#~ msgctxt "Marble::AnnotatePlugin|"
+#~ msgid "Save Annotation File"
+#~ msgstr "מתחיל חיפוש"
+
+#, fuzzy
+#~ msgctxt "Marble::AnnotatePlugin|"
+#~ msgid ""
+#~ "All Supported Files (*.kml *.osm);;KML file (*.kml);;Open Street Map file "
+#~ "(*.osm)"
+#~ msgstr ""
+#~ "כל הקבצים הנתמכים (‎*.gpx *.kml);;מידע של ‏GPS‏ (‎*.gpx);;Google Earth KML‏ (‎*."
+#~ "kml)"
+
+#, fuzzy
+#~ msgctxt "Marble::AnnotatePlugin|"
+#~ msgid "Open Annotation File"
+#~ msgstr "מתחיל חיפוש"
+
+#, fuzzy
+#~ msgctxt "Marble::AnnotatePlugin|"
+#~ msgid ""
+#~ "All Supported Files (*.kml *.osm);;Kml Annotation file (*.kml);;Open "
+#~ "Street Map file (*.osm)"
+#~ msgstr ""
+#~ "כל הקבצים הנתמכים (‎*.gpx *.kml);;מידע של ‏GPS‏ (‎*.gpx);;Google Earth KML‏ (‎*."
+#~ "kml)"
+
+#, fuzzy
+#~ msgctxt "Marble::AnnotatePlugin|"
+#~ msgid "Select Item"
+#~ msgstr "הצג דגם גבהים"
+
+#, fuzzy
+#~ msgctxt "Marble::AnnotatePlugin|"
+#~ msgid "Add Polygon"
+#~ msgstr "מפה רגילה"
+
+#, fuzzy
+#~ msgctxt "Marble::AnnotatePlugin|"
+#~ msgid "Add Nodes"
+#~ msgstr "הצג דגם גבהים"
+
+#, fuzzy
+#~ msgctxt "Marble::AnnotatePlugin|"
+#~ msgid "Add Placemark"
+#~ msgstr "מפה רגילה"
+
+#, fuzzy
+#~ msgctxt "Marble::AnnotatePlugin|"
+#~ msgid "Add Path"
+#~ msgstr "נתיב"
+
+#, fuzzy
+#~ msgctxt "Marble::AnnotatePlugin|"
+#~ msgid "Add Ground Overlay"
+#~ msgstr "ה&סר נקודות מדידה"
+
+#, fuzzy
+#~ msgctxt "Marble::AnnotatePlugin|"
+#~ msgid "Remove Item"
+#~ msgstr "מפה רגילה"
+
+#, fuzzy
+#~ msgctxt "Marble::AnnotatePlugin|"
+#~ msgid "Load Annotation File"
+#~ msgstr "מתחיל חיפוש"
+
+#, fuzzy
+#~ msgctxt "Marble::AnnotatePlugin|"
+#~ msgid "Clear all Annotations"
+#~ msgstr "מתחיל חיפוש"
+
+#, fuzzy
+#~ msgctxt "Marble::AnnotatePlugin|"
+#~ msgid "Download OpenStreetMap Data"
+#~ msgstr "&פתיחת מפה..."
+
+#, fuzzy
+#~ msgctxt "Marble::AnnotatePlugin|"
+#~ msgid "Cut"
+#~ msgstr "מדינה"
+
+#, fuzzy
+#~ msgctxt "Marble::AnnotatePlugin|"
+#~ msgid "Copy"
+#~ msgstr "הע&תק מפה"
+
+#, fuzzy
+#~ msgctxt "Marble::AnnotatePlugin|"
+#~ msgid "Remove"
+#~ msgstr "מפה רגילה"
+
+#, fuzzy
+#~ msgctxt "Marble::AnnotatePlugin|"
+#~ msgid "Untitled Ground Overlay"
+#~ msgstr "ה&סר נקודות מדידה"
+
+#, fuzzy
+#~ msgctxt "Marble::AnnotatePlugin|"
+#~ msgid "Deselect All Nodes"
+#~ msgstr "מפה רגילה"
+
+#, fuzzy
+#~ msgctxt "Marble::AnnotatePlugin|"
+#~ msgid "Delete All Selected Nodes"
+#~ msgstr "מפה רגילה"
+
+#, fuzzy
+#~ msgctxt "Marble::AnnotatePlugin|"
+#~ msgid "Select Node"
+#~ msgstr "הצג דגם גבהים"
+
+#, fuzzy
+#~ msgctxt "Marble::AnnotatePlugin|"
+#~ msgid "Delete Node"
+#~ msgstr "הצג דגם גבהים"
+
+#, fuzzy
+#~ msgctxt "Marble::AnnotatePlugin|"
+#~ msgid "Deselect Node"
+#~ msgstr "הצג דגם גבהים"
+
+#, fuzzy
+#~ msgctxt "Marble::DownloadOsmDialog|"
+#~ msgid "Download"
+#~ msgstr "ההורדה הסתיימה."
+
+#, fuzzy
+#~ msgctxt "Marble::EditGroundOverlayDialog|"
+#~ msgid "Please specify a name for this ground overlay."
+#~ msgstr "שם חלופי עבור המיקום."
+
+#, fuzzy
+#~ msgctxt "Marble::EditGroundOverlayDialog|"
+#~ msgid "Please specify an image file."
+#~ msgstr "שם חלופי עבור המיקום."
+
+#, fuzzy
+#~ msgctxt "Marble::EditGroundOverlayDialog|"
+#~ msgid "Please specify a valid path for the image file."
+#~ msgstr "שם חלופי עבור המיקום."
+
+#, fuzzy
+#~ msgctxt "UiEditGroundOverlayDialog|"
+#~ msgid "Edit ground overlay"
+#~ msgstr "ה&סר נקודות מדידה"
+
+#, fuzzy
+#~ msgctxt "UiEditGroundOverlayDialog|"
+#~ msgid "Description"
+#~ msgstr "תיאור"
+
+#, fuzzy
+#~ msgctxt "UiEditGroundOverlayDialog|"
+#~ msgid "Coordinates"
+#~ msgstr "קואורדינטות:"
+
+#, fuzzy
+#~ msgctxt "UiEditGroundOverlayDialog|"
+#~ msgid "N"
+#~ msgstr "צ"
+
+#, fuzzy
+#~ msgctxt "UiEditGroundOverlayDialog|"
+#~ msgid "W"
+#~ msgstr "מע"
+
+#, fuzzy
+#~ msgctxt "UiEditGroundOverlayDialog|"
+#~ msgid "E"
+#~ msgstr "מז"
+
+#, fuzzy
+#~ msgctxt "UiEditGroundOverlayDialog|"
+#~ msgid "S"
+#~ msgstr "ד"
+
+#, fuzzy
+#~ msgctxt "UiEditGroundOverlayDialog|"
+#~ msgid "Rotation"
+#~ msgstr "מתחיל חיפוש"
+
+#, fuzzy
+#~ msgctxt "Marble::EditPolygonDialog|"
+#~ msgid "Relations"
+#~ msgstr "גובה:"
+
+#, fuzzy
+#~ msgctxt "Marble::EditPolygonDialog|"
+#~ msgid "Untitled Polygon"
+#~ msgstr "מפה רגילה"
+
+#, fuzzy
+#~ msgctxt "Marble::EditPolygonDialog|"
+#~ msgid "Please specify a name for this polygon."
+#~ msgstr "שם חלופי עבור המיקום."
+
+#, fuzzy
+#~ msgctxt "UiEditPolygonDialog|"
+#~ msgid "Name"
+#~ msgstr "שם"
+
+#, fuzzy
+#~ msgctxt "UiEditPolygonDialog|"
+#~ msgid "Description"
+#~ msgstr "תיאור"
+
+#, fuzzy
+#~ msgctxt "UiEditPolygonDialog|"
+#~ msgid "Area"
+#~ msgstr "אטלס"
+
+#, fuzzy
+#~ msgctxt "UiEditPolygonDialog|"
+#~ msgid "Nodes"
+#~ msgstr "הצג דגם גבהים"
+
+#, fuzzy
+#~ msgctxt "Marble::EditPolylineDialog|"
+#~ msgid "Relations"
+#~ msgstr "גובה:"
+
+#, fuzzy
+#~ msgctxt "Marble::EditPolylineDialog|"
+#~ msgid "Untitled Path"
+#~ msgstr "מפה רגילה"
+
+#, fuzzy
+#~ msgctxt "Marble::EditPolylineDialog|"
+#~ msgid "Please specify a name for this polyline."
+#~ msgstr "שם חלופי עבור המיקום."
+
+#, fuzzy
+#~ msgctxt "Marble::EditPolylineDialog|"
+#~ msgid "Please specify at least 2 nodes for the path by clicking on the map."
+#~ msgstr "שם חלופי עבור המיקום."
+
+#, fuzzy
+#~ msgctxt "UiEditPolylineDialog|"
+#~ msgid "Add path"
+#~ msgstr "נתיב"
+
+#, fuzzy
+#~ msgctxt "UiEditPolylineDialog|"
+#~ msgid "Name"
+#~ msgstr "שם"
+
+#, fuzzy
+#~ msgctxt "UiEditPolylineDialog|"
+#~ msgid "Description"
+#~ msgstr "תיאור"
+
+#, fuzzy
+#~ msgctxt "UiEditPolylineDialog|"
+#~ msgid "Nodes"
+#~ msgstr "הצג דגם גבהים"
+
+#, fuzzy
+#~ msgctxt "Marble::NodeModel|"
+#~ msgid "Longitude"
+#~ msgstr "קו &אורך"
+
+#, fuzzy
+#~ msgctxt "Marble::NodeModel|"
+#~ msgid "Latitude"
+#~ msgstr "קו &רוחב"
+
+#, fuzzy
+#~ msgctxt "Marble::NodeModel|"
+#~ msgid "Elevation"
+#~ msgstr "גובה:"
+
+#, fuzzy
+#~ msgctxt "AprsConfigWidget|"
+#~ msgid "APRS Plugin"
+#~ msgstr "מתחיל חיפוש"
+
+#, fuzzy
+#~ msgctxt "AprsConfigWidget|"
+#~ msgid "Internet"
+#~ msgstr "שם חלופי"
+
+#, fuzzy
+#~ msgctxt "AprsConfigWidget|"
+#~ msgid "APRS Data Sources"
+#~ msgstr "גיליון נתונים"
+
+#, fuzzy
+#~ msgctxt "AprsConfigWidget|"
+#~ msgid "File"
+#~ msgstr "&קובץ"
+
+#, fuzzy
+#~ msgctxt "Marble::AtmospherePlugin|"
+#~ msgid "Atmosphere"
+#~ msgstr "&אטמוספרה"
+
+#, fuzzy
+#~ msgctxt "Marble::AtmospherePlugin|"
+#~ msgid "&Atmosphere"
+#~ msgstr "&אטמוספרה"
+
+#, fuzzy
+#~ msgctxt "Marble::AtmospherePlugin|"
+#~ msgid "Shows the atmosphere around the earth."
+#~ msgstr "הצג את תיבות האודות של התוכנית"
+
+#, fuzzy
+#~ msgctxt "CompassConfigWidget|"
+#~ msgid "Configure Compass Plugin"
+#~ msgstr "מתחיל חיפוש"
+
+#, fuzzy
+#~ msgctxt "CompassConfigWidget|"
+#~ msgid "Theme"
+#~ msgstr "ער&כת נושא"
+
+#, fuzzy
+#~ msgctxt "CompassConfigWidget|"
+#~ msgid "Magnet"
+#~ msgstr "קו &רוחב"
+
+#, fuzzy
+#~ msgctxt "Marble::CompassFloatItem|"
+#~ msgid "Compass"
+#~ msgstr "מצפן"
+
+#, fuzzy
+#~ msgctxt "Marble::CompassFloatItem|"
+#~ msgid "&Compass"
+#~ msgstr "&מצפן"
+
+#, fuzzy
+#~ msgctxt "Marble::CompassFloatItem|"
+#~ msgid "This is a float item that provides a compass."
+#~ msgstr "זהו פריט צף המספק מצפן."
+
+#, fuzzy
+#~ msgctxt "Marble::CompassFloatItem|"
+#~ msgid "N"
+#~ msgstr "צ"
+
+#, fuzzy
+#~ msgctxt "Marble::CompassFloatItem|"
+#~ msgid "S"
+#~ msgstr "ד"
+
+#, fuzzy
+#~ msgctxt "CrosshairsConfigWidget|"
+#~ msgid "Configure Crosshairs Plugin"
+#~ msgstr "מתחיל חיפוש"
+
+#, fuzzy
+#~ msgctxt "CrosshairsConfigWidget|"
+#~ msgid "Theme"
+#~ msgstr "ער&כת נושא"
+
+#, fuzzy
+#~ msgctxt "Marble::CrosshairsPlugin|"
+#~ msgid "A plugin that shows crosshairs."
+#~ msgstr "תוסף המציג את השמיים מלאים בכוכבים."
+
+#, fuzzy
+#~ msgctxt "EarthquakeConfigWidget|"
+#~ msgid "Configure Earthquakes Plugin"
+#~ msgstr "&כדור הארץ"
+
+#, fuzzy
+#~ msgctxt "EarthquakeConfigWidget|"
+#~ msgid "Minimum magnitude:"
+#~ msgstr "קו &רוחב"
+
+#, fuzzy
+#~ msgctxt "Marble::EarthquakeItem|"
+#~ msgid "Date:"
+#~ msgstr "&נתונים"
+
+#, fuzzy
+#~ msgctxt "Marble::EarthquakeItem|"
+#~ msgid "Magnitude:"
+#~ msgstr "קו &רוחב"
+
+#, fuzzy
+#~ msgctxt "Marble::EarthquakePlugin|"
+#~ msgid "Earthquakes"
+#~ msgstr "&כדור הארץ"
+
+#, fuzzy
+#~ msgctxt "Marble::EarthquakePlugin|"
+#~ msgid "&Earthquakes"
+#~ msgstr "&כדור הארץ"
+
+#, fuzzy
+#~ msgctxt "Marble::EarthquakePlugin|"
+#~ msgid "Shows earthquakes on the map."
+#~ msgstr "הצג את תיבות האודות של התוכנית"
+
+#, fuzzy
+#~ msgctxt "EclipsesBrowserDialog|"
+#~ msgid "Eclipse Browser"
+#~ msgstr "דפדפן המיקומים"
+
+#, fuzzy
+#~ msgctxt "EclipsesBrowserDialog|"
+#~ msgid "&Settings..."
+#~ msgstr "&הגדרות"
+
+#, fuzzy
+#~ msgctxt "EclipsesBrowserDialog|"
+#~ msgid "&Close"
+#~ msgstr "&סגור"
+
+#, fuzzy
+#~ msgctxt "EclipsesConfigDialog|"
+#~ msgid "Eclipses Configuration"
+#~ msgstr "מתחיל חיפוש"
+
+#, fuzzy
+#~ msgctxt "EclipsesConfigDialog|"
+#~ msgid "&View"
+#~ msgstr "&תצוגה"
+
+#, fuzzy
+#~ msgctxt "Marble::EclipsesModel|"
+#~ msgid "Start"
+#~ msgstr "&כוכבים"
+
+#, fuzzy
+#~ msgctxt "Marble::EclipsesModel|"
+#~ msgid "Magnitude"
+#~ msgstr "קו &רוחב"
+
+#, fuzzy
+#~ msgctxt "ElevationProfileConfigWidget|"
+#~ msgid "Configure Elevation Profile Plugin"
+#~ msgstr "מתחיל חיפוש"
+
+#, fuzzy
+#~ msgctxt "Marble::ElevationProfileContextMenu|"
+#~ msgid "&Configure..."
+#~ msgstr "הגדרת פקד השליטה על השמש"
+
+#, fuzzy
+#~ msgctxt "Marble::ElevationProfileContextMenu|"
+#~ msgid "Route"
+#~ msgstr "ייצא מפה"
+
+#, fuzzy
+#~ msgctxt "Marble::ElevationProfileContextMenu|"
+#~ msgid "Track: "
+#~ msgstr "עקוב אחר GPS"
+
+#, fuzzy
+#~ msgctxt "Marble::ElevationProfileFloatItem|"
+#~ msgid "Elevation Profile"
+#~ msgstr "שיא גובה"
+
+#, fuzzy
+#~ msgctxt "Marble::ElevationProfileFloatItem|"
+#~ msgid "&Elevation Profile"
+#~ msgstr "שיא גובה"
+
+#, fuzzy
+#~ msgctxt "Marble::ElevationProfileFloatItem|"
+#~ msgid "A float item that shows the elevation profile of the current route."
+#~ msgstr "זהו פריט צף שמספק סקירה של המפה."
+
+#, fuzzy
+#~ msgctxt "Marble::ElevationProfilePlotAxis|"
+#~ msgid "km"
+#~ msgstr "ק\"מ"
+
+#, fuzzy
+#~ msgctxt "Marble::ElevationProfilePlotAxis|"
+#~ msgid "m"
+#~ msgstr "מ'"
+
+#, fuzzy
+#~ msgctxt "Marble::ElevationProfilePlotAxis|"
+#~ msgid "mi"
+#~ msgstr "מ'"
+
+#, fuzzy
+#~ msgctxt "Marble::ElevationProfilePlotAxis|"
+#~ msgid "ft"
+#~ msgstr "שמאלה"
+
+#, fuzzy
+#~ msgctxt "Marble::ElevationProfilePlotAxis|"
+#~ msgid "nm"
+#~ msgstr "מ'"
+
+#, fuzzy
+#~ msgctxt "Marble::ElevationProfileMarker|"
+#~ msgid "Elevation Profile Marker"
+#~ msgstr "שיא גובה"
+
+#, fuzzy
+#~ msgctxt "Marble::ElevationProfileMarker|"
+#~ msgid "&Elevation Profile Marker"
+#~ msgstr "שיא גובה"
+
+#, fuzzy
+#~ msgctxt "Marble::ElevationProfileMarker|"
+#~ msgid "Marks the current elevation of the elevation profile on the map."
+#~ msgstr "זהו פריט צף שמספק סקירה של המפה."
+
+#, fuzzy
+#~ msgctxt "Marble::ElevationProfileMarker|"
+#~ msgid "m"
+#~ msgstr "מ'"
+
+#, fuzzy
+#~ msgctxt "Marble::ElevationProfileMarker|"
+#~ msgid "ft"
+#~ msgstr "שמאלה"
+
+#, fuzzy
+#~ msgctxt "Marble::FileViewFloatItem|"
+#~ msgid "File View"
+#~ msgstr "תצוגת קבצים"
+
+#, fuzzy
+#~ msgctxt "Marble::FileViewFloatItem|"
+#~ msgid "&File View"
+#~ msgstr "תצוגת קבצים"
+
+#, fuzzy
+#~ msgctxt "Marble::FileViewFloatItem|"
+#~ msgid "Open file..."
+#~ msgstr "פתח קובץ"
+
+#, fuzzy
+#~ msgctxt "Marble::FileViewFloatItem|"
+#~ msgid "Open File"
+#~ msgstr "פתח קובץ"
+
+#, fuzzy
+#~ msgctxt "Marble::FileViewFloatItem|"
+#~ msgid ""
+#~ "All Supported Files (*.gpx *.kml *.pnt);;GPS Data (*.gpx);;Google Earth "
+#~ "KML (*.kml);PNT Data (*.pnt)"
+#~ msgstr ""
+#~ "כל הקבצים הנתמכים (‎*.gpx *.kml);;מידע של ‏GPS‏ (‎*.gpx);;Google Earth KML‏ (‎*."
+#~ "kml)"
+
+#, fuzzy
+#~ msgctxt "Marble::FoursquarePlugin|"
+#~ msgid "Places"
+#~ msgstr "תבליט"
+
+#, fuzzy
+#~ msgctxt "Marble::FoursquarePlugin|"
+#~ msgid "&Places"
+#~ msgstr "תבליט"
+
+#, fuzzy
+#~ msgctxt "Marble::GpsInfo|"
+#~ msgid "This is a float item that provides Gps Information."
+#~ msgstr "זהו פריט צף המספק מצפן."
+
+#, fuzzy
+#~ msgctxt "Marble::GpsInfo|"
+#~ msgid "mph"
+#~ msgstr "ק\"מ"
+
+#, fuzzy
+#~ msgctxt "Marble::GpsInfo|"
+#~ msgid "ft"
+#~ msgstr "שמאלה"
+
+#, fuzzy
+#~ msgctxt "Marble::GpsInfo|"
+#~ msgid "km/h"
+#~ msgstr "ק\"מ"
+
+#, fuzzy
+#~ msgctxt "Marble::GpsInfo|"
+#~ msgid "m"
+#~ msgstr "מ'"
+
+#, fuzzy
+#~ msgctxt "Marble::GpsInfo|"
+#~ msgid "nm"
+#~ msgstr "מ'"
+
+#, fuzzy
+#~ msgctxt "GpsInfoPlugin|"
+#~ msgid "Direction"
+#~ msgstr "&היטל"
+
+#, fuzzy
+#~ msgctxt "GpsInfoPlugin|"
+#~ msgid "Altitude"
+#~ msgstr "קו &רוחב"
+
+#, fuzzy
+#~ msgctxt "GraticuleConfigWidget|"
+#~ msgid "Coordinate Grid Plugin"
+#~ msgstr "רשת קואורדינטות"
+
+#, fuzzy
+#~ msgctxt "GraticuleConfigWidget|"
+#~ msgid "Color of the coordinate grid."
+#~ msgstr "רשת קואורדינטות"
+
+#, fuzzy
+#~ msgctxt "GraticuleConfigWidget|"
+#~ msgid "Color of the equator."
+#~ msgstr "תפקיד המיקום."
+
+#, fuzzy
+#~ msgctxt "GraticuleConfigWidget|"
+#~ msgid "Show numerical Labels."
+#~ msgstr "הצג נהרות/אגמים"
+
+#, fuzzy
+#~ msgctxt "Marble::GraticulePlugin|"
+#~ msgid "Coordinate Grid"
+#~ msgstr "רשת קואורדינטות"
+
+#, fuzzy
+#~ msgctxt "Marble::GraticulePlugin|"
+#~ msgid "Coordinate &Grid"
+#~ msgstr "רשת קואורדינטות"
+
+#, fuzzy
+#~ msgctxt "Marble::GraticulePlugin|"
+#~ msgid "A plugin that shows a coordinate grid."
+#~ msgstr "תוסף המציג את השמיים מלאים בכוכבים."
+
+#, fuzzy
+#~ msgctxt "Marble::GraticulePlugin|"
+#~ msgid "Please choose the color for the equator."
+#~ msgstr "שם חלופי עבור המיקום."
+
+#, fuzzy
+#~ msgctxt "Marble::License|"
+#~ msgid "License"
+#~ msgstr "&הסכם רישיון"
+
+#, fuzzy
+#~ msgctxt "Marble::License|"
+#~ msgid "&License"
+#~ msgstr "&הסכם רישיון"
+
+#, fuzzy
+#~ msgctxt "Marble::License|"
+#~ msgid "This is a float item that provides copyright information."
+#~ msgstr "זהו פריט צף המספק מצפן."
+
+#, fuzzy
+#~ msgctxt "Marble::License|"
+#~ msgid "&Full License"
+#~ msgstr "&מצב מסך מלא"
+
+#, fuzzy
+#~ msgctxt "Marble::License|"
+#~ msgid "&Show Details"
+#~ msgstr "הצג רשת"
+
+#, fuzzy
+#~ msgctxt "MapScaleConfigWidget|"
+#~ msgid "Configure Scale Bar Plugin"
+#~ msgstr "מתחיל חיפוש"
+
+#, fuzzy
+#~ msgctxt "MapScaleConfigWidget|"
+#~ msgid "Show Ratio Scale"
+#~ msgstr "הצג סרגל ניווט"
+
+#, fuzzy
+#~ msgctxt "Marble::MapScaleFloatItem|"
+#~ msgid "Scale Bar"
+#~ msgstr "מחוון קנה מידה"
+
+#, fuzzy
+#~ msgctxt "Marble::MapScaleFloatItem|"
+#~ msgid "&Scale Bar"
+#~ msgstr "&מחוון קנה מידה"
+
+#, fuzzy
+#~ msgctxt "Marble::MapScaleFloatItem|"
+#~ msgid "This is a float item that provides a map scale."
+#~ msgstr "זהו פריט צף שמספק קנה מידה של המפה."
+
+#, fuzzy
+#~ msgctxt "Marble::MapScaleFloatItem|"
+#~ msgid "Original Developer"
+#~ msgstr "כותב מקורי, מפתח ומתחזק"
+
+#, fuzzy
+#~ msgctxt "Marble::MapScaleFloatItem|"
+#~ msgid "km"
+#~ msgstr "ק\"מ"
+
+#, fuzzy
+#~ msgctxt "Marble::MapScaleFloatItem|"
+#~ msgid "m"
+#~ msgstr "מ'"
+
+#, fuzzy
+#~ msgctxt "Marble::MapScaleFloatItem|"
+#~ msgid "mi"
+#~ msgstr "מ'"
+
+#, fuzzy
+#~ msgctxt "Marble::MapScaleFloatItem|"
+#~ msgid "nm"
+#~ msgstr "מ'"
+
+#, fuzzy
+#~ msgctxt "Marble::MapScaleFloatItem|"
+#~ msgid "&Configure..."
+#~ msgstr "הגדרת פקד השליטה על השמש"
+
+#, fuzzy
+#~ msgctxt "MeasureConfigDialog|"
+#~ msgid "Measure Tool Configuration"
+#~ msgstr "הר"
+
+#, fuzzy
+#~ msgctxt "MeasureConfigDialog|"
+#~ msgid "Polygon"
+#~ msgstr "מפה רגילה"
+
+#, fuzzy
+#~ msgctxt "MeasureConfigDialog|"
+#~ msgid "Distance "
+#~ msgstr "מרחק כולל: %1 מ'"
+
+#, fuzzy
+#~ msgctxt "MeasureConfigDialog|"
+#~ msgid "Area"
+#~ msgstr "אטלס"
+
+#, fuzzy
+#~ msgctxt "Marble::MeasureToolPlugin|"
+#~ msgid "Measure Tool"
+#~ msgstr "ה&וסף נקודת מדידה"
+
+#, fuzzy
+#~ msgctxt "Marble::MeasureToolPlugin|"
+#~ msgid "&Measure Tool"
+#~ msgstr "ה&וסף נקודת מדידה"
+
+#, fuzzy
+#~ msgctxt "Marble::MeasureToolPlugin|"
+#~ msgid ""
+#~ "Area:\n"
+#~ "%1"
+#~ msgstr "איזור:"
+
+#, fuzzy
+#~ msgctxt "Marble::MeasureToolPlugin|"
+#~ msgid "Total Distance: %1<br/>\n"
+#~ msgstr "מרחק כולל: %1 מ'"
+
+#, fuzzy
+#~ msgctxt "Marble::MeasureToolPlugin|"
+#~ msgid "Area: %1<br/>\n"
+#~ msgstr "איזור:"
+
+#, fuzzy
+#~ msgctxt "Marble::MeasureToolPlugin|"
+#~ msgid "Perimeter: %1<br/>\n"
+#~ msgstr "מרחק כולל: %1 מ'"
+
+#, fuzzy
+#~ msgctxt "Marble::MeasureToolPlugin|"
+#~ msgid "Radius: %1<br/>\n"
+#~ msgstr "מרחק כולל: %1 מ'"
+
+#, fuzzy
+#~ msgctxt "Marble::MeasureToolPlugin|"
+#~ msgid "Add &Measure Point"
+#~ msgstr "ה&וסף נקודת מדידה"
+
+#, fuzzy
+#~ msgctxt "Marble::MeasureToolPlugin|"
+#~ msgid "Remove &Last Measure Point"
+#~ msgstr "ה&סר נקודות מדידה"
+
+#, fuzzy
+#~ msgctxt "Marble::MeasureToolPlugin|"
+#~ msgid "&Remove Measure Points"
+#~ msgstr "ה&סר נקודות מדידה"
+
+#, fuzzy
+#~ msgctxt "Navigation|"
+#~ msgid "Navigation"
+#~ msgstr "ניווט"
+
+#, fuzzy
+#~ msgctxt "Marble::NavigationFloatItem|"
+#~ msgid "Navigation"
+#~ msgstr "ניווט"
+
+#, fuzzy
+#~ msgctxt "Marble::NavigationFloatItem|"
+#~ msgid "&Navigation"
+#~ msgstr "&ניווט"
+
+#, fuzzy
+#~ msgctxt "Marble::NavigationFloatItem|"
+#~ msgid "A mouse control to zoom and move the map"
+#~ msgstr "השתמש בעכבר כדי להתקרב ולהזיז את המפה"
+
+#, fuzzy
+#~ msgctxt "Marble::NavigationFloatItem|"
+#~ msgid "Current Location Button"
+#~ msgstr "מיקום נוכחי"
+
+#, fuzzy
+#~ msgctxt "Marble::NotesPlugin|"
+#~ msgid "Display OpenStreetMap Mapper Notes."
+#~ msgstr "&פתיחת מפה..."
+
+#, fuzzy
+#~ msgctxt "OpenCachingCacheDialog|"
+#~ msgid "Cache name:"
+#~ msgstr "&ביטול"
+
+#, fuzzy
+#~ msgctxt "OpenCachingCacheDialog|"
+#~ msgid "Status:"
+#~ msgstr "&שורת מצב"
+
+#, fuzzy
+#~ msgctxt "OpenCachingCacheDialog|"
+#~ msgid "Country:"
+#~ msgstr "מדינה:"
+
+#, fuzzy
+#~ msgctxt "OpenCachingCacheDialog|"
+#~ msgid "Terrain:"
+#~ msgstr "פני שטח"
+
+#, fuzzy
+#~ msgctxt "OpenCachingCacheDialog|"
+#~ msgid "Longitude:"
+#~ msgstr "קו &אורך"
+
+#, fuzzy
+#~ msgctxt "OpenCachingCacheDialog|"
+#~ msgid "Latitude:"
+#~ msgstr "קו &רוחב"
+
+#, fuzzy
+#~ msgctxt "OpenCachingCacheDialog|"
+#~ msgid "Description"
+#~ msgstr "תיאור"
+
+#, fuzzy
+#~ msgctxt "OpenCachingCacheDialog|"
+#~ msgid "Previous"
+#~ msgstr "ייצא מפה"
+
+#, fuzzy
+#~ msgctxt "OpenCachingConfigWidget|"
+#~ msgid "Maximum Distance:"
+#~ msgstr "מרחק כולל: %1 מ'"
+
+#, fuzzy
+#~ msgctxt "OpenCachingConfigWidget|"
+#~ msgid "Start:"
+#~ msgstr "&כוכבים"
+
+#, fuzzy
+#~ msgctxt "OpenDesktopConfigWidget|"
+#~ msgid "OpenDesktop plugin configuration"
+#~ msgstr "אודות Marble"
+
+#, fuzzy
+#~ msgctxt "Marble::OverviewMap|"
+#~ msgid "Overview Map"
+#~ msgstr "מפת סקירה"
+
+#, fuzzy
+#~ msgctxt "Marble::OverviewMap|"
+#~ msgid "&Overview Map"
+#~ msgstr "&מפת סקירה"
+
+#, fuzzy
+#~ msgctxt "Marble::OverviewMap|"
+#~ msgid "This is a float item that provides an overview map."
+#~ msgstr "זהו פריט צף שמספק סקירה של המפה."
+
+#, fuzzy
+#~ msgctxt "Marble::OverviewMap|"
+#~ msgid "Choose Overview Map"
+#~ msgstr "מפת סקירה"
+
+#, fuzzy
+#~ msgctxt "OverviewMapConfigWidget|"
+#~ msgid "Configure Overview Map"
+#~ msgstr "מפת סקירה"
+
+#, fuzzy
+#~ msgctxt "OverviewMapConfigWidget|"
+#~ msgid "Map &Image"
+#~ msgstr "שם"
+
+#, fuzzy
+#~ msgctxt "OverviewMapConfigWidget|"
+#~ msgid "&Planet:"
+#~ msgstr "הצג מיקומים"
+
+#, fuzzy
+#~ msgctxt "OverviewMapConfigWidget|"
+#~ msgid "Preview"
+#~ msgstr "מפת סקירה"
+
+#, fuzzy
+#~ msgctxt "OverviewMapConfigWidget|"
+#~ msgid "Filename"
+#~ msgstr "&קובץ"
+
+#, fuzzy
+#~ msgctxt "OverviewMapConfigWidget|"
+#~ msgid "Position I&ndicator:"
+#~ msgstr "אוכלוסייה:"
+
+#, fuzzy
+#~ msgctxt "Marble::PanoramioPlugin|"
+#~ msgid "Panoramio Photos"
+#~ msgstr "תמונות של Panoramio"
+
+#, fuzzy
+#~ msgctxt "Marble::PanoramioPlugin|"
+#~ msgid "&Panoramio"
+#~ msgstr "&Panoramio"
+
+#, fuzzy
+#~ msgctxt "Marble::PanoramioPlugin|"
+#~ msgid ""
+#~ "Automatically downloads images from around the world in preference to "
+#~ "their popularity"
+#~ msgstr "מוריד תמונות מכל רחבי תבל בהתאם לפופולאריות שלהן"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "The file is not a valid Flickr answer."
+#~ msgstr "הקובץ הוא לא קובץ DGML 2.0 תקני"
+
+#, fuzzy
+#~ msgctxt "PhotoConfigWidget|"
+#~ msgid "Configure Photo Plugin"
+#~ msgstr "מתחיל חיפוש"
+
+#, fuzzy
+#~ msgctxt "PhotoConfigWidget|"
+#~ msgid "License"
+#~ msgstr "&הסכם רישיון"
+
+#, fuzzy
+#~ msgctxt "Marble::PhotoPlugin|"
+#~ msgid ""
+#~ "Automatically downloads images from around the world in preference to "
+#~ "their popularity"
+#~ msgstr "מוריד תמונות מכל רחבי תבל בהתאם לפופולאריות שלהן"
+
+#, fuzzy
+#~ msgctxt "Marble::PositionMarker|"
+#~ msgid "Position Marker"
+#~ msgstr "אוכלוסייה:"
+
+#, fuzzy
+#~ msgctxt "Marble::PositionMarker|"
+#~ msgid "&Position Marker"
+#~ msgstr "אוכלוסייה:"
+
+#, fuzzy
+#~ msgctxt "PositionMarkerConfigWidget|"
+#~ msgid "Configure Position Marker Plugin"
+#~ msgstr "אוכלוסייה:"
+
+#, fuzzy
+#~ msgctxt "Marble::PostalCodePlugin|"
+#~ msgid "Shows postal codes of the area on the map."
+#~ msgstr "הצג את תיבות האודות של התוכנית"
+
+#, fuzzy
+#~ msgctxt "Marble::ProgressFloatItem|"
+#~ msgid "Download Progress Indicator"
+#~ msgstr "ההורדה הסתיימה."
+
+#, fuzzy
+#~ msgctxt "Marble::ProgressFloatItem|"
+#~ msgid "&Download Progress"
+#~ msgstr "ההורדה הסתיימה."
+
+#, fuzzy
+#~ msgctxt "RoutingConfigDialog|"
+#~ msgid "Routing Configuration"
+#~ msgstr "אודות Marble"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "Starting guidance mode, please wait..."
+#~ msgstr "אפשר לשונית המציגה את המיקום הנוכחי"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "Route left."
+#~ msgstr "ייצא מפה"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "Destination ahead."
+#~ msgstr "שדה תיאור"
+
+#, fuzzy
+#~ msgctxt "Marble::RoutingPlugin|"
+#~ msgid "Routing"
+#~ msgstr "הר"
+
+#, fuzzy
+#~ msgctxt "Marble::RoutingPlugin|"
+#~ msgid "&Routing"
+#~ msgstr "הר"
+
+#, fuzzy
+#~ msgctxt "RoutingPlugin|"
+#~ msgid "Guidance Mode"
+#~ msgstr "אודות Marble"
+
+#, fuzzy
+#~ msgctxt "RoutingPlugin|"
+#~ msgid "Zoom Out"
+#~ msgstr "התרחק"
+
+#, fuzzy
+#~ msgctxt "RoutingPlugin|"
+#~ msgid "-"
+#~ msgstr "-"
+
+#, fuzzy
+#~ msgctxt "RoutingPlugin|"
+#~ msgid "Zoom In"
+#~ msgstr "התקרב"
+
+#, fuzzy
+#~ msgctxt "RoutingPlugin|"
+#~ msgid "+"
+#~ msgstr "+"
+
+#, fuzzy
+#~ msgctxt "Marble::SatellitesConfigDialog|"
+#~ msgid "Other"
+#~ msgstr "0 מ' (מים)"
+
+#, fuzzy
+#~ msgctxt "Marble::SatellitesConfigDialog|"
+#~ msgid "Mercury"
+#~ msgstr "תצוגת מפה"
+
+#, fuzzy
+#~ msgctxt "Marble::SatellitesConfigDialog|"
+#~ msgid "Earth"
+#~ msgstr "&כדור הארץ"
+
+#, fuzzy
+#~ msgctxt "Marble::SatellitesConfigDialog|"
+#~ msgid "Mars"
+#~ msgstr "Marble"
+
+#, fuzzy
+#~ msgctxt "Marble::SatellitesConfigDialog|"
+#~ msgid "&Satellites"
+#~ msgstr "&לוויינים"
+
+#, fuzzy
+#~ msgctxt "Marble::SatellitesConfigDialog|"
+#~ msgid "&Data Sources"
+#~ msgstr "גיליון נתונים"
+
+#, fuzzy
+#~ msgctxt "Marble::SatellitesConfigDialog|"
+#~ msgid "&Activate Plugin"
+#~ msgstr "ת&וסף DataView"
+
+#, fuzzy
+#~ msgctxt "Marble::SatellitesConfigDialog|"
+#~ msgid "Add Data Source"
+#~ msgstr "גיליון נתונים"
+
+#, fuzzy
+#~ msgctxt "Marble::SatellitesConfigDialog|"
+#~ msgid "All Supported Files (*.txt *.msc)"
+#~ msgstr ""
+#~ "כל הקבצים הנתמכים (‎*.gpx *.kml);;מידע של ‏GPS‏ (‎*.gpx);;Google Earth KML‏ (‎*."
+#~ "kml)"
+
+#, fuzzy
+#~ msgctxt "Marble::SatellitesConfigDialog|"
+#~ msgid "All Files (*.*)"
+#~ msgstr "קובץ GpxFile ‏(‎*.gpx)"
+
+#, fuzzy
+#~ msgctxt "Marble::SatellitesConfigDialog|"
+#~ msgid "Open Satellite Data File"
+#~ msgstr "&פתיחת מפה..."
+
+#, fuzzy
+#~ msgctxt "Marble::SatellitesConfigDialog|"
+#~ msgid "Delete selected data source"
+#~ msgstr "מפה רגילה"
+
+#, fuzzy
+#~ msgctxt "SatellitesConfigDialog|"
+#~ msgid "Satellites Configuration"
+#~ msgstr "תמונת לוויין"
+
+#, fuzzy
+#~ msgctxt "SatellitesConfigDialog|"
+#~ msgid "&Satellites"
+#~ msgstr "&לוויינים"
+
+#, fuzzy
+#~ msgctxt "SatellitesConfigDialog|"
+#~ msgid "&Data Sources"
+#~ msgstr "גיליון נתונים"
+
+#, fuzzy
+#~ msgctxt "SatellitesConfigDialog|"
+#~ msgid "-"
+#~ msgstr "-"
+
+#, fuzzy
+#~ msgctxt "SatellitesConfigDialog|"
+#~ msgid "&Reload All Data Sources"
+#~ msgstr "גיליון נתונים"
+
+#, fuzzy
+#~ msgctxt "SatellitesConfigDialog|"
+#~ msgid "Satellite Data Sources:"
+#~ msgstr "&פתיחת מפה..."
+
+#, fuzzy
+#~ msgctxt "SatellitesConfigDialog|"
+#~ msgid "+"
+#~ msgstr "+"
+
+#, fuzzy
+#~ msgctxt "SatellitesConfigDialog|"
+#~ msgid "Remove selected data source."
+#~ msgstr "מפה רגילה"
+
+#, fuzzy
+#~ msgctxt "SatellitesConfigDialog|"
+#~ msgid "..."
+#~ msgstr "..."
+
+#, fuzzy
+#~ msgctxt "SatellitesConfigDialog|"
+#~ msgid "&Activate Plugin"
+#~ msgstr "ת&וסף DataView"
+
+#, fuzzy
+#~ msgctxt "Marble::SatellitesPlugin|"
+#~ msgid "Satellites"
+#~ msgstr "לווינים"
+
+#, fuzzy
+#~ msgctxt "Marble::SatellitesPlugin|"
+#~ msgid "&Satellites"
+#~ msgstr "&לוויינים"
+
+#, fuzzy
+#~ msgctxt "Marble::SatellitesPlugin|"
+#~ msgid "This plugin displays satellites and their orbits."
+#~ msgstr "תוסף זה מציג את הלויינים של TDB."
+
+#, fuzzy
+#~ msgctxt "Marble::SatellitesPlugin|"
+#~ msgid "Special-Interest Satellites"
+#~ msgstr "לווינים"
+
+#, fuzzy
+#~ msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
+#~ msgid "Space Stations"
+#~ msgstr "גובה:"
+
+#, fuzzy
+#~ msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
+#~ msgid "Weather"
+#~ msgstr "0 מ' (מים)"
+
+#, fuzzy
+#~ msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
+#~ msgid "Earth Resources"
+#~ msgstr "גיליון נתונים"
+
+#, fuzzy
+#~ msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
+#~ msgid "Tracking and Data Relay Satellite System (TDRSS)"
+#~ msgstr "הצג סרגל ניווט"
+
+#, fuzzy
+#~ msgctxt "Marble::SatellitesPlugin|"
+#~ msgid "Communications Satellites"
+#~ msgstr "הצג סרגל ניווט"
+
+#, fuzzy
+#~ msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
+#~ msgid "Geostationary"
+#~ msgstr "מתחיל חיפוש"
+
+#, fuzzy
+#~ msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
+#~ msgid "Globalstar"
+#~ msgstr "&חפש"
+
+#, fuzzy
+#~ msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
+#~ msgid "Other"
+#~ msgstr "0 מ' (מים)"
+
+#, fuzzy
+#~ msgctxt "Marble::SatellitesPlugin|"
+#~ msgid "Navigation Satellites"
+#~ msgstr "הצג סרגל ניווט"
+
+#, fuzzy
+#~ msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
+#~ msgid "GPS Operational"
+#~ msgstr "שם חלופי"
+
+#, fuzzy
+#~ msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
+#~ msgid "Glonass Operational"
+#~ msgstr "שם חלופי"
+
+#, fuzzy
+#~ msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
+#~ msgid "Navy Navigation Satellite System (NNSS)"
+#~ msgstr "הצג סרגל ניווט"
+
+#, fuzzy
+#~ msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
+#~ msgid "Russian LEO Navigation"
+#~ msgstr "ניווט"
+
+#, fuzzy
+#~ msgctxt "Marble::SatellitesPlugin|"
+#~ msgid "Scientific Satellites"
+#~ msgstr "לווינים"
+
+#, fuzzy
+#~ msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
+#~ msgid "Education"
+#~ msgstr "מיקום"
+
+#, fuzzy
+#~ msgctxt "Marble::SatellitesPlugin|"
+#~ msgid "Miscellaneous Satellites"
+#~ msgstr "הצג סרגל ניווט"
+
+#, fuzzy
+#~ msgctxt "Marble::Speedometer|"
+#~ msgid "mph"
+#~ msgstr "ק\"מ"
+
+#, fuzzy
+#~ msgctxt "Marble::Speedometer|"
+#~ msgid "km/h"
+#~ msgstr "ק\"מ"
+
+#, fuzzy
+#~ msgctxt "Speedometer|"
+#~ msgid "km/h"
+#~ msgstr "ק\"מ"
+
+#, fuzzy
+#~ msgctxt "StarsConfigWidget|"
+#~ msgid "Configure Stars Plugin"
+#~ msgstr "מתחיל חיפוש"
+
+#, fuzzy
+#~ msgctxt "StarsConfigWidget|"
+#~ msgid "Star Magnitude Limit"
+#~ msgstr "קו &רוחב"
+
+#, fuzzy
+#~ msgctxt "StarsConfigWidget|"
+#~ msgid "Mercury"
+#~ msgstr "תצוגת מפה"
+
+#, fuzzy
+#~ msgctxt "StarsConfigWidget|"
+#~ msgid "Earth"
+#~ msgstr "&כדור הארץ"
+
+#, fuzzy
+#~ msgctxt "StarsConfigWidget|"
+#~ msgid "Mars"
+#~ msgstr "Marble"
+
+#, fuzzy
+#~ msgctxt "StarsConfigWidget|"
+#~ msgid "Magnify Sun and Moon"
+#~ msgstr "הצג רשת"
+
+#, fuzzy
+#~ msgctxt "StarsConfigWidget|"
+#~ msgid "Other"
+#~ msgstr "0 מ' (מים)"
+
+#, fuzzy
+#~ msgctxt "StarsConfigWidget|"
+#~ msgid "Constellations"
+#~ msgstr "הגדר &מיקום בית"
+
+#, fuzzy
+#~ msgctxt "StarsConfigWidget|"
+#~ msgid "Names"
+#~ msgstr "שם"
+
+#, fuzzy
+#~ msgctxt "StarsConfigWidget|"
+#~ msgid "Latin Name"
+#~ msgstr "שם"
+
+#, fuzzy
+#~ msgctxt "StarsConfigWidget|"
+#~ msgid "Native Translation"
+#~ msgstr "שם חלופי"
+
+#, fuzzy
+#~ msgctxt "StarsConfigWidget|"
+#~ msgid "Abbreviation"
+#~ msgstr "גובה:"
+
+#, fuzzy
+#~ msgctxt "StarsConfigWidget|"
+#~ msgid "Coordinate Grid"
+#~ msgstr "רשת קואורדינטות"
+
+#, fuzzy
+#~ msgctxt "Marble::StarsPlugin|"
+#~ msgid "Stars"
+#~ msgstr "&כוכבים"
+
+#, fuzzy
+#~ msgctxt "Marble::StarsPlugin|"
+#~ msgid "&Stars"
+#~ msgstr "&כוכבים"
+
+#, fuzzy
+#~ msgctxt "Marble::StarsPlugin|"
+#~ msgid "A plugin that shows the Starry Sky and the Sun."
+#~ msgstr "תוסף המציג את השמיים מלאים בכוכבים."
+
+#, fuzzy
+#~ msgctxt "Marble::StarsPlugin|"
+#~ msgid "Show &Constellations"
+#~ msgstr "הגדר &מיקום בית"
+
+#, fuzzy
+#~ msgctxt "Marble::StarsPlugin|"
+#~ msgid "Show &Sun and Moon"
+#~ msgstr "הצג רשת"
+
+#, fuzzy
+#~ msgctxt "Marble::StarsPlugin|"
+#~ msgid "Show &Planets"
+#~ msgstr "הצג מיקומים"
+
+#, fuzzy
+#~ msgctxt "Marble::StarsPlugin|"
+#~ msgid "&Configure..."
+#~ msgstr "הגדרת פקד השליטה על השמש"
+
+#, fuzzy
+#~ msgctxt "Marble::SunPlugin|"
+#~ msgid "A plugin that shows the Sun."
+#~ msgstr "תוסף המציג את השמיים מלאים בכוכבים."
+
+#, fuzzy
+#~ msgctxt "Marble::twitterPlugin|"
+#~ msgid "twitter "
+#~ msgstr "twitter "
+
+#, fuzzy
+#~ msgctxt "Marble::twitterPlugin|"
+#~ msgid "&twitter"
+#~ msgstr "&twitter"
+
+#, fuzzy
+#~ msgctxt "Marble::twitterPlugin|"
+#~ msgid "show public twitts in their places"
+#~ msgstr "הצג את ה־twitts הפומביים במקומות שלהם"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "The file is not a valid BBC answer."
+#~ msgstr "הקובץ הוא לא קובץ DGML 2.0 תקני"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "The file is not a valid file."
+#~ msgstr "הקובץ הוא לא קובץ DGML 2.0 תקני"
+
+#, fuzzy
+#~ msgctxt "WeatherConfigWidget|"
+#~ msgid "Configure Weather Plugin"
+#~ msgstr "מתחיל חיפוש"
+
+#, fuzzy
+#~ msgctxt "WeatherConfigWidget|"
+#~ msgid "Information"
+#~ msgstr "שם חלופי"
+
+#, fuzzy
+#~ msgctxt "WeatherConfigWidget|"
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Here you can "
+#~ "choose if you want the weather condition to be shown (for example, clouds "
+#~ "or clear sky.) Marble will only show the condition if this information is "
+#~ "available.</p></body></html>\n"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "style:italic;\">תפקיד</span></p></body></html>"
+
+#, fuzzy
+#~ msgctxt "WeatherConfigWidget|"
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Selects if you "
+#~ "want the temperature to be shown. The temperature will only be shown for "
+#~ "the stations it is available for.</p></body></html>\n"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "style:italic;\">תפקיד</span></p></body></html>"
+
+#, fuzzy
+#~ msgctxt "WeatherConfigWidget|"
+#~ msgid "Temperature"
+#~ msgstr "FITemplate"
+
+#, fuzzy
+#~ msgctxt "WeatherConfigWidget|"
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Select if you "
+#~ "want the wind direction to be shown. The wind direction will only be "
+#~ "shown if it is available for the particular station.</p></body></html>\n"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "style:italic;\">תפקיד</span></p></body></html>"
+
+#, fuzzy
+#~ msgctxt "WeatherConfigWidget|"
+#~ msgid "Wind direction"
+#~ msgstr "מדינה"
+
+#, fuzzy
+#~ msgctxt "WeatherConfigWidget|"
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Select if you "
+#~ "want the wind speed to be shown. The wind speed will only be shown if it "
+#~ "is available for the particular station.</p></body></html>\n"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "style:italic;\">תפקיד</span></p></body></html>"
+
+#, fuzzy
+#~ msgctxt "WeatherConfigWidget|"
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">The unit used to "
+#~ "measure the temperature.</p></body></html>\n"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "style:italic;\">תפקיד</span></p></body></html>"
+
+#, fuzzy
+#~ msgctxt "WeatherConfigWidget|"
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">The unit used to "
+#~ "measure the wind speed.</p></body></html>\n"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "style:italic;\">תפקיד</span></p></body></html>"
+
+#, fuzzy
+#~ msgctxt "WeatherConfigWidget|"
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\\np, li { white-space: pre-wrap; }\\n</style></head><body style=\" "
+#~ "font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:"
+#~ "normal;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+#~ "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">The unit used to "
+#~ "measure the air pressure.</p></body></html>\n"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "style:italic;\">תפקיד</span></p></body></html>"
+
+#, fuzzy
+#~ msgctxt "WeatherConfigWidget|"
+#~ msgid " hours"
+#~ msgstr "צוות התרגום של KDE ישראל"
+
+#, fuzzy
+#~ msgctxt "WeatherData|"
+#~ msgid "clear"
+#~ msgstr "&חפש"
+
+#, fuzzy
+#~ msgctxt "WeatherData|"
+#~ msgid "few clouds"
+#~ msgstr "&סגור"
+
+#, fuzzy
+#~ msgctxt "WeatherData|"
+#~ msgid "overcast"
+#~ msgstr "גבולות"
+
+#, fuzzy
+#~ msgctxt "WeatherData|"
+#~ msgid "light showers"
+#~ msgstr "הצג גבולות"
+
+#, fuzzy
+#~ msgctxt "WeatherData|"
+#~ msgid "showers"
+#~ msgstr "הצג גבולות"
+
+#, fuzzy
+#~ msgctxt "WeatherData|"
+#~ msgid "light rain"
+#~ msgstr "פני שטח"
+
+#, fuzzy
+#~ msgctxt "WeatherData|"
+#~ msgid "rain"
+#~ msgstr "פני שטח"
+
+#, fuzzy
+#~ msgctxt "WeatherData|"
+#~ msgid "light snow"
+#~ msgstr "פני שטח"
+
+#, fuzzy
+#~ msgctxt "WeatherData|"
+#~ msgid "N"
+#~ msgstr "צ"
+
+#, fuzzy
+#~ msgctxt "WeatherData|"
+#~ msgid "NNE"
+#~ msgstr "צ"
+
+#, fuzzy
+#~ msgctxt "WeatherData|"
+#~ msgid "NE"
+#~ msgstr "צ"
+
+#, fuzzy
+#~ msgctxt "WeatherData|"
+#~ msgid "ENE"
+#~ msgstr "צ"
+
+#, fuzzy
+#~ msgctxt "WeatherData|"
+#~ msgid "E"
+#~ msgstr "מז"
+
+#, fuzzy
+#~ msgctxt "WeatherData|"
+#~ msgid "SSE"
+#~ msgstr "ד"
+
+#, fuzzy
+#~ msgctxt "WeatherData|"
+#~ msgid "SE"
+#~ msgstr "ד"
+
+#, fuzzy
+#~ msgctxt "WeatherData|"
+#~ msgid "ESE"
+#~ msgstr "ד"
+
+#, fuzzy
+#~ msgctxt "WeatherData|"
+#~ msgid "S"
+#~ msgstr "ד"
+
+#, fuzzy
+#~ msgctxt "WeatherData|"
+#~ msgid "NNW"
+#~ msgstr "צ"
+
+#, fuzzy
+#~ msgctxt "WeatherData|"
+#~ msgid "NW"
+#~ msgstr "צ"
+
+#, fuzzy
+#~ msgctxt "WeatherData|"
+#~ msgid "WNW"
+#~ msgstr "צ"
+
+#, fuzzy
+#~ msgctxt "WeatherData|"
+#~ msgid "W"
+#~ msgstr "מע"
+
+#, fuzzy
+#~ msgctxt "WeatherData|"
+#~ msgid "SSW"
+#~ msgstr "ד"
+
+#, fuzzy
+#~ msgctxt "WeatherData|"
+#~ msgid "SW"
+#~ msgstr "ד"
+
+#, fuzzy
+#~ msgctxt "WeatherData|"
+#~ msgid "WSW"
+#~ msgstr "ד"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "mph"
+#~ msgstr "ק\"מ"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "m/s"
+#~ msgstr "ק\"מ"
+
+#, fuzzy
+#~ msgctxt "WeatherData|air pressure has no change"
+#~ msgid "steady"
+#~ msgstr "מוכן"
+
+#, fuzzy
+#~ msgctxt "WeatherItemPrivate|"
+#~ msgid "Weather"
+#~ msgstr "0 מ' (מים)"
+
+#, fuzzy
+#~ msgctxt "WeatherItemPrivate|"
+#~ msgid "Station: %1\n"
+#~ msgstr "אוכלוסייה:"
+
+#, fuzzy
+#~ msgctxt "WeatherItemPrivate|"
+#~ msgid "Remove from Favorites"
+#~ msgstr "ה&סר נקודות מדידה"
+
+#, fuzzy
+#~ msgctxt "WeatherItemPrivate|"
+#~ msgid "Add to Favorites"
+#~ msgstr "ה&סר נקודות מדידה"
+
+#, fuzzy
+#~ msgctxt "Marble::WeatherPlugin|"
+#~ msgid "Weather"
+#~ msgstr "0 מ' (מים)"
+
+#, fuzzy
+#~ msgctxt "Marble::WeatherPlugin|"
+#~ msgid "&Weather"
+#~ msgstr "0 מ' (מים)"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "The file is not a valid Geonames answer."
+#~ msgstr "הקובץ הוא לא קובץ DGML 2.0 תקני"
+
+#, fuzzy
+#~ msgctxt "WikipediaConfigWidget|"
+#~ msgid "Configure Wikipedia Plugin"
+#~ msgstr "מתחיל חיפוש"
+
+#, fuzzy
+#~ msgctxt "Marble::WikipediaPlugin|"
+#~ msgid "Wikipedia Articles"
+#~ msgstr "ויקיפדיה"
+
+#, fuzzy
+#~ msgctxt "Marble::WikipediaPlugin|"
+#~ msgid "&Wikipedia"
+#~ msgstr "ויקיפדיה"
+
+#, fuzzy
+#~ msgctxt "Marble::CachePlugin|"
+#~ msgid "Cache File Parser"
+#~ msgstr "&הגדרות"
+
+#, fuzzy
+#~ msgctxt "Marble::CachePlugin|"
+#~ msgid "Marble Cache Files"
+#~ msgstr "&הגדרות"
+
+#, fuzzy
+#~ msgctxt "CycleStreetsConfigWidget|"
+#~ msgid "Route type:"
+#~ msgstr "ייצא מפה"
+
+#, fuzzy
+#~ msgctxt "Marble::CycleStreetsPlugin|"
+#~ msgid "CycleStreets Routing"
+#~ msgstr "הר"
+
+#, fuzzy
+#~ msgctxt "Marble::CycleStreetsPlugin|"
+#~ msgid "CycleStreets"
+#~ msgstr "הר"
+
+#, fuzzy
+#~ msgctxt "Marble::GeoUriPlugin|"
+#~ msgid "Geo URI Search"
+#~ msgstr "&חפש"
+
+#, fuzzy
+#~ msgctxt "Marble::GeoUriPlugin|"
+#~ msgid "Input of geographic coordinates by the geo URI scheme"
+#~ msgstr "העתק קואורדינטות"
+
+#, fuzzy
+#~ msgctxt "Marble::GosmorePlugin|"
+#~ msgid "Gosmore Reverse Geocoding"
+#~ msgstr "הר"
+
+#~ msgctxt "Marble::GosmorePlugin|"
+#~ msgid "Gosmore"
+#~ msgstr "Gosmore"
+
+#~ msgctxt "Marble::GosmorePlugin|"
+#~ msgid "Gosmore Routing"
+#~ msgstr "ניווט עם Gosmore"
+
+#~ msgctxt "Marble::GpxPlugin|"
+#~ msgid "GPS Data"
+#~ msgstr "נתוני נווטן"
+
+#, fuzzy
+#~ msgctxt "Marble::LatLonPlugin|"
+#~ msgid "Geographic Coordinates Search"
+#~ msgstr "העתק קואורדינטות"
+
+#, fuzzy
+#~ msgctxt "Marble::LatLonPlugin|"
+#~ msgid "Geographic Coordinates"
+#~ msgstr "העתק קואורדינטות"
+
+#, fuzzy
+#~ msgctxt "Marble::LatLonPlugin|"
+#~ msgid "Direct input of geographic coordinates"
+#~ msgstr "העתק קואורדינטות"
+
+#~ msgctxt "QObject|"
+#~ msgid "hospital"
+#~ msgstr "בית חולים"
+
+#~ msgctxt "QObject|"
+#~ msgid "attraction"
+#~ msgstr "מוקד עניין"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "ruin"
+#~ msgstr "חורבות"
+
+#~ msgctxt "QObject|"
+#~ msgid "theatre"
+#~ msgstr "תיאטרון"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "view point"
+#~ msgstr "נקודת תצפית"
+
+#~ msgctxt "QObject|"
+#~ msgid "airport apron"
+#~ msgstr "רחבת חניית מטוסים"
+
+#~ msgctxt "QObject|"
+#~ msgid "bus station"
+#~ msgstr "תחנת אוטובוס"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "parking"
+#~ msgstr "חנייה"
+
+#~ msgctxt "QObject|"
+#~ msgid "train station"
+#~ msgstr "תחנת רכבת"
+
+#~ msgctxt "Marble::LocalOsmSearchPlugin|"
+#~ msgid "Local OSM Search"
+#~ msgstr "חיפוש OSM מקומי"
+
+#~ msgctxt "Marble::LocalOsmSearchPlugin|"
+#~ msgid "Offline OpenStreetMap Search"
+#~ msgstr "חיפוש בלתי מקוון ב־OpenStreeMap"
+
+#~ msgctxt "QObject|"
+#~ msgid "north"
+#~ msgstr "צפון"
+
+#~ msgctxt "QObject|"
+#~ msgid "north-west"
+#~ msgstr "צפון־מערב"
+
+#~ msgctxt "QObject|"
+#~ msgid "west"
+#~ msgstr "מערב"
+
+#~ msgctxt "QObject|"
+#~ msgid "south-west"
+#~ msgstr "דרום־מערב"
+
+#~ msgctxt "QObject|"
+#~ msgid "south"
+#~ msgstr "דרום"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "south-east"
+#~ msgstr "דרום־מזרח"
+
+#~ msgctxt "QObject|"
+#~ msgid "east"
+#~ msgstr "מזרח"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "north-east"
+#~ msgstr "צפון־מזרח"
+
+#~ msgctxt "Marble::MapQuestPlugin|"
+#~ msgid "MapQuest Routing"
+#~ msgstr "ניווט ב־MapQuest"
+
+#~ msgctxt "Marble::MapQuestPlugin|"
+#~ msgid "MapQuest"
+#~ msgstr "MapQuest"
+
+#~ msgctxt "QObject|"
+#~ msgid "Downloading %1"
+#~ msgstr "%1 בהורדה"
+
+#~ msgctxt "Marble::MonavConfigWidget|"
+#~ msgid "Remove Map"
+#~ msgstr "הסרת מפה"
+
+#~ msgctxt "MonavConfigWidget|"
+#~ msgid "Monav Configuration"
+#~ msgstr "הגדרות Monav"
+
+#~ msgctxt "MonavConfigWidget|"
+#~ msgid "Configure"
+#~ msgstr "הגדרה"
+
+#~ msgctxt "MonavConfigWidget|"
+#~ msgid "Manage Maps"
+#~ msgstr "ניהול מפות"
+
+#~ msgctxt "MonavConfigWidget|"
+#~ msgid "Continent"
+#~ msgstr "יבשת"
+
+#~ msgctxt "MonavConfigWidget|"
+#~ msgid "Country"
+#~ msgstr "מדינה"
+
+#~ msgctxt "MonavConfigWidget|"
+#~ msgid "Download Variant"
+#~ msgstr "הורדת הגוון"
+
+#~ msgctxt "Marble::MonavMapsModel|"
+#~ msgid "Name"
+#~ msgstr "שם"
+
+#~ msgctxt "Marble::MonavMapsModel|"
+#~ msgid "Date"
+#~ msgstr "תאריך"
+
+#~ msgctxt "Marble::MonavPlugin|"
+#~ msgid "Monav Routing"
+#~ msgstr "ניווט עם Monav"
+
+#~ msgctxt "Marble::MonavPlugin|"
+#~ msgid "Monav"
+#~ msgstr "Monav"
+
+#, fuzzy
+#~ msgctxt "Marble::NominatimPlugin|"
+#~ msgid "OpenStreetMap Nominatim Reverse Geocoding"
+#~ msgstr "הר"
+
+#~ msgctxt "Marble::NominatimPlugin|"
+#~ msgid "OpenStreetMap Nominatim"
+#~ msgstr "OpenStreetMap Nominatim"
+
+#~ msgctxt "Marble::NominatimPlugin|"
+#~ msgid "OpenStreetMap Nominatim Search"
+#~ msgstr "חיפוש Nominatim ב־OpenStreetMap"
+
+#~ msgctxt "Marble::OpenLocationCodeSearchPlugin|"
+#~ msgid "Open Location Code Search"
+#~ msgstr "חיפוש קוד מקום פתוח"
+
+#~ msgctxt "Marble::OpenLocationCodeSearchPlugin|"
+#~ msgid "Open Location Code"
+#~ msgstr "קוד מקום פתוח/Open Location Code"
+
+#~ msgctxt "Marble::OpenRouteServicePlugin|"
+#~ msgid "OpenRouteService Routing"
+#~ msgstr "ניווט עם OpenRouteService"
+
+#~ msgctxt "Marble::OpenRouteServicePlugin|"
+#~ msgid "OpenRouteService"
+#~ msgstr "OpenRouteService"
+
+#~ msgctxt "Marble::OsmPlugin|"
+#~ msgid "OpenStreetMap Data"
+#~ msgstr "נתוני OpenStreetMap"
+
+#~ msgctxt "RoutinoConfigWidget|"
+#~ msgid "Shortest"
+#~ msgstr "הקצר ביותר"
+
+#~ msgctxt "Marble::RoutinoPlugin|"
+#~ msgid "Routino Routing"
+#~ msgstr "ניווט רוטינו"
+
+#~ msgctxt "Marble::RoutinoPlugin|"
+#~ msgid "Routino"
+#~ msgstr "רוטינו"
+
+#~ msgctxt "Marble::RoutinoConfigWidget|"
+#~ msgid "Motorcar"
+#~ msgstr "רכב ממונע"
+
+#~ msgctxt "YoursConfigWidget|"
+#~ msgid "Transport:"
+#~ msgstr "תעבורה:"
+
+#~ msgctxt "YoursConfigWidget|"
+#~ msgid "Shortest"
+#~ msgstr "הקצר ביותר"
+
+#~ msgctxt "Marble::YoursPlugin|"
+#~ msgid "Yours Routing"
+#~ msgstr "ניווט שלך"
+
+#~ msgctxt "Marble::YoursConfigWidget|"
+#~ msgid "Bicycle"
+#~ msgstr "אופניים"
+
+#~ msgctxt "Marble::YoursConfigWidget|"
+#~ msgid "Motorcar"
+#~ msgstr "רכב ממונע"
+
+#~ msgctxt "Marble::FITemplateFloatItem|"
+#~ msgid "FITemplate"
+#~ msgstr "תבנית פריט צף"
+
+#~ msgctxt "Marble::FITemplateFloatItem|"
+#~ msgid "Float Item &Template"
+#~ msgstr "תבנית &פריט צף"
+
+#~ msgctxt "Marble::FITemplateFloatItem|"
+#~ msgid "This is a template class for float items."
+#~ msgstr "זאת מחלקת תבניות לפריטים צפים"
+
+#, fuzzy
+#~ msgctxt "Bookmarks|"
+#~ msgid "Removed"
+#~ msgstr "מפה רגילה"
+
+#, fuzzy
+#~ msgctxt "MainScreen|"
+#~ msgid "Settings"
+#~ msgstr "&הגדרות"
+
+#, fuzzy
+#~ msgctxt "MainScreen|"
+#~ msgid "About"
+#~ msgstr "&אודות"
+
+#, fuzzy
+#~ msgctxt "MainScreen|"
+#~ msgid "Bookmarks"
+#~ msgstr "ייצא מפה"
+
+#, fuzzy
+#~ msgctxt "MainScreen|"
+#~ msgid "Routing"
+#~ msgstr "הר"
+
+#, fuzzy
+#~ msgctxt "NavigationInfoBar|"
+#~ msgid "%1 km"
+#~ msgstr "%1 מ'"
+
+#, fuzzy
+#~ msgctxt "ProfileSelectorMenu|"
+#~ msgid "Bicycle"
+#~ msgstr "עקוב אחר GPS"
+
+#, fuzzy
+#~ msgctxt "PublicTransport|"
+#~ msgid "Train"
+#~ msgstr "פני שטח"
+
+#, fuzzy
+#~ msgctxt "SearchField|"
+#~ msgid "Search"
+#~ msgstr "&חפש"
+
+#, fuzzy
+#~ msgctxt "SidePanel|"
+#~ msgid "Public Transport"
+#~ msgstr "שם חלופי"
+
+#, fuzzy
+#~ msgctxt "SidePanel|"
+#~ msgid "About Marble Maps…"
+#~ msgstr "אודות Marble"
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Ctrl+O"
+#~ msgstr "Ctrl+O"
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Ctrl+S"
+#~ msgstr "Ctrl+S"
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Ctrl+C"
+#~ msgstr "Ctrl+C"
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Ctrl+E"
+#~ msgstr "Ctrl+O"
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Ctrl+Shift+F"
+#~ msgstr "Ctrl+Shift+F"
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Shift+F1"
+#~ msgstr "Shift+F1"
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Ctrl+B"
+#~ msgstr "Ctrl+O"
+
+#, fuzzy
+#~ msgctxt "Marble::MapWizard|"
+#~ msgid "Geographic Pole"
+#~ msgstr "העתק קואורדינטות"
+
+#, fuzzy
+#~ msgctxt "Marble::MapWizard|"
+#~ msgid "Shipwreck"
+#~ msgstr "מספנה"
+
+#, fuzzy
+#~ msgctxt "Marble::MapWizard|"
+#~ msgid "Observatory"
+#~ msgstr "מיקום נוכחי"
+
+#, fuzzy
+#~ msgctxt "Marble::MapWizard|"
+#~ msgid "Mountain"
+#~ msgstr "הר"
+
+#, fuzzy
+#~ msgctxt "Marble::MapWizard|"
+#~ msgid "Volcano"
+#~ msgstr "הר געש"
+
+#, fuzzy
+#~ msgctxt "Marble::MapWizard|"
+#~ msgid "International"
+#~ msgstr "שם חלופי"
+
+#, fuzzy
+#~ msgctxt "Marble::MapWizard|"
+#~ msgid "State"
+#~ msgstr "&שמור"
+
+#, fuzzy
+#~ msgctxt "MapWizard|"
+#~ msgid "Terrain"
+#~ msgstr "פני שטח"
+
+#, fuzzy
+#~ msgctxt "MapWizard|"
+#~ msgid "Coordinate Grid"
+#~ msgstr "רשת קואורדינטות"
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&Add Bookmark"
+#~ msgstr "ייצא מפה"
+
+#, fuzzy
+#~ msgctxt "RoutingSettingsWidget|"
+#~ msgid "&Configure"
+#~ msgstr "הגדרת פקד השליטה על השמש"
+
+#, fuzzy
+#~ msgctxt "Marble::MapViewWidget|"
+#~ msgid "&Upload Map..."
+#~ msgstr "מוריד נתונים..."
+
+#, fuzzy
+#~ msgctxt "PlacemarkDialog|"
+#~ msgid "Routes"
+#~ msgstr "ייצא מפה"
+
+#, fuzzy
+#~ msgctxt "MovieCaptureDialog|"
+#~ msgid "Cancel"
+#~ msgstr "&ביטול"
+
+#~ msgctxt "SunControlWidget|"
+#~ msgid "OK"
+#~ msgstr "אישור"
+
+#, fuzzy
+#~ msgctxt "SunControlWidget|"
+#~ msgid "Cancel"
+#~ msgstr "&ביטול"
+
+#, fuzzy
+#~ msgctxt "TileCreatorDialog|"
+#~ msgid "&Cancel"
+#~ msgstr "&ביטול"
+
+#~ msgctxt "TimeControlWidget|"
+#~ msgid "OK"
+#~ msgstr "אישור"
+
+#, fuzzy
+#~ msgctxt "TimeControlWidget|"
+#~ msgid "Cancel"
+#~ msgstr "&ביטול"
+
+#, fuzzy
+#~ msgctxt "Marble::DownloadOsmDialog|"
+#~ msgid "Cancel"
+#~ msgstr "&ביטול"
+
+#, fuzzy
+#~ msgctxt "CacheDetailsDialog|"
+#~ msgid "..."
+#~ msgstr "..."
+
+#, fuzzy
+#~ msgctxt "CacheDetailsDialog|"
+#~ msgid "Description"
+#~ msgstr "תיאור"
+
+#, fuzzy
+#~ msgctxt "CacheDetailsDialog|"
+#~ msgid "&Close"
+#~ msgstr "&סגור"
+
+#, fuzzy
+#~ msgctxt "Marble::OpenCachingComItem|"
+#~ msgid "Terrain:"
+#~ msgstr "פני שטח"
+
+#, fuzzy
+#~ msgctxt "Marble::OpenCachingComItem|"
+#~ msgid "Verification:"
+#~ msgstr "תיאור"
+
+#, fuzzy
+#~ msgctxt "Marble::OpenCachingComItem|"
+#~ msgid "Distance:"
+#~ msgstr "מרחק כולל: %1 מ'"
+
+#, fuzzy
+#~ msgctxt "Marble::OpenCachingComItem|"
+#~ msgid "Distance from home:"
+#~ msgstr "מרחק כולל: %1 מ'"
+
+#, fuzzy
+#~ msgctxt "Marble::OpenCachingComItem|"
+#~ msgid "Terrain"
+#~ msgstr "פני שטח"
+
+#, fuzzy
+#~ msgctxt "Marble::OpenCachingComItem|"
+#~ msgid "Date: "
+#~ msgstr "&נתונים"
+
+#, fuzzy
+#~ msgctxt "Marble::OpenCachingComModel|"
+#~ msgid "Night"
+#~ msgstr "ימינה"
+
+#, fuzzy
+#~ msgctxt "Marble::OpenCachingComModel|"
+#~ msgid "UV light"
+#~ msgstr "ימינה"
+
+#, fuzzy
+#~ msgctxt "Marble::OpenCachingComModel|"
+#~ msgid "Traditional Cache"
+#~ msgstr "בירת מחוז"
+
+#, fuzzy
+#~ msgctxt "Marble::OpenCachingComModel|"
+#~ msgid "Virtual Cache"
+#~ msgstr "בירת מחוז"

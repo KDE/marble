@@ -1,0 +1,2565 @@
+# Translation of marble_qt to Croatian
+#
+# Andrej Dundovic <adundovi@gmail.com>, 2010.
+# Marko Dimjasevic <marko@dimjasevic.net>, 2010, 2011.
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2024-09-23 00:36+0000\n"
+"PO-Revision-Date: 2011-08-10 23:32+0200\n"
+"Last-Translator: Marko Dimjašević <marko@dimjasevic.net>\n"
+"Language-Team: Croatian <kde-croatia-list@lists.sourceforge.net>\n"
+"Language: hr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 1.2\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Environment: kde\n"
+"X-Accelerator-Marker: &\n"
+"X-Text-Markup: qtrich\n"
+"X-Qt-Contexts: true\n"
+
+#, fuzzy, kde-format
+#| msgid "Routing"
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "Usmjeravanje"
+
+#, fuzzy, kde-format
+#| msgctxt "a planet without data"
+#| msgid "Unknown Planet"
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "Nepoznat planet"
+
+#: Bookmarks.qml:20
+#, fuzzy, kde-format
+#| msgid "&Export route..."
+msgctxt "@title:window"
+msgid "Bookmarks"
+msgstr "Izv&ezi rutu…"
+
+#: Bookmarks.qml:69
+#, kde-format
+msgid "Your bookmarks will appear here."
+msgstr ""
+
+#: CurrentPosition.qml:54
+#, fuzzy, kde-format
+#| msgid "Export Route"
+msgctxt "@option:check"
+msgid "Follow Current Position"
+msgstr "Izvezi rutu"
+
+#: main.cpp:37 MainScreen.qml:20 MainScreen.qml:177
+#, fuzzy, kde-format
+#| msgid "Routing"
+msgid "Marble Maps"
+msgstr "Usmjeravanje"
+
+#: main.cpp:39
+#, kde-format
+msgid "Maps"
+msgstr ""
+
+#: main.cpp:41
+#, kde-format
+msgid "© KDE Community"
+msgstr ""
+
+#: MainScreen.qml:86
+#, kde-format
+msgid "Public Transport"
+msgstr ""
+
+#: MainScreen.qml:101
+#, kde-format
+msgid "Outdoor Activities"
+msgstr ""
+
+#: MainScreen.qml:113
+#, kde-format
+msgctxt "@action:button"
+msgid "Accessibility"
+msgstr ""
+
+#: MainScreen.qml:122
+#, kde-format
+msgctxt "@action:button"
+msgid "About"
+msgstr ""
+
+#: MainScreen.qml:133
+#, fuzzy, kde-format
+#| msgid "&Export route..."
+msgctxt "@action:button"
+msgid "Bookmarks"
+msgstr "Izv&ezi rutu…"
+
+#: MainScreen.qml:144
+#, kde-format
+msgctxt "@action:button"
+msgid "Layer Options"
+msgstr ""
+
+#: MainScreen.qml:455
+#, kde-format
+msgid "%1 km"
+msgstr ""
+
+#: NavigationInfoBar.qml:20
+#, kde-format
+msgctxt "distance in km"
+msgid "%1 km"
+msgstr ""
+
+#: NavigationInfoBar.qml:22
+#, kde-format
+msgctxt "distance in m"
+msgid "%1 m"
+msgstr ""
+
+#: NavigationInfoBar.qml:24
+#, kde-format
+msgctxt "distance in m with decimals"
+msgid "%1 m"
+msgstr ""
+
+#: Options.qml:20
+#, kde-format
+msgctxt "@title:window"
+msgid "Layer Options"
+msgstr ""
+
+#: Options.qml:23
+#, kde-format
+msgctxt "@title:group"
+msgid "Public Transport Layers"
+msgstr ""
+
+#: Options.qml:28
+#, kde-format
+msgctxt "@option:check"
+msgid "Train"
+msgstr ""
+
+#: Options.qml:35
+#, kde-format
+msgctxt "@option:check"
+msgid "Subway"
+msgstr ""
+
+#: Options.qml:42
+#, kde-format
+msgctxt "@option:check"
+msgid "Tram"
+msgstr ""
+
+#: Options.qml:49
+#, kde-format
+msgctxt "@option:check"
+msgid "Bus"
+msgstr ""
+
+#: Options.qml:56
+#, kde-format
+msgctxt "@option:check"
+msgid "Trolley Bus"
+msgstr ""
+
+#: Options.qml:64
+#, kde-format
+msgid "Outdoor Activities Layers"
+msgstr ""
+
+#: Options.qml:69
+#, kde-format
+msgctxt "@option:check"
+msgid "Walkways"
+msgstr ""
+
+#: Options.qml:76
+#, fuzzy, kde-format
+#| msgid "Export Route"
+msgctxt "@option:check"
+msgid "Hiking Routes"
+msgstr "Izvezi rutu"
+
+#: Options.qml:83
+#, fuzzy, kde-format
+#| msgid "Export Route"
+msgctxt "@option:check"
+msgid "Bicycle Routes"
+msgstr "Izvezi rutu"
+
+#: Options.qml:90
+#, fuzzy, kde-format
+#| msgid "Routing"
+msgctxt "@option:check"
+msgid "Mountainbike Routes"
+msgstr "Usmjeravanje"
+
+#: Options.qml:97
+#, fuzzy, kde-format
+#| msgid "Export Route"
+msgctxt "@option:check"
+msgid "Inline Skating Routes"
+msgstr "Izvezi rutu"
+
+#: Options.qml:104
+#, kde-format
+msgctxt "@option:check"
+msgid "Bridleways"
+msgstr ""
+
+#: PlacemarkDialog.qml:48
+#, kde-format
+msgctxt "placeholder"
+msgid "No Name"
+msgstr ""
+
+#: PlacemarkDialog.qml:168
+#, kde-format
+msgctxt "@title:group"
+msgid "Tags:"
+msgstr ""
+
+#: ProfileSelectorMenu.qml:29
+#, kde-format
+msgid "Car (fastest)"
+msgstr ""
+
+#: ProfileSelectorMenu.qml:40
+#, fuzzy, kde-format
+#| msgid "Export Route"
+msgid "Bicycle"
+msgstr "Izvezi rutu"
+
+#: ProfileSelectorMenu.qml:49
+#, kde-format
+msgid "Pedestrian"
+msgstr ""
+
+#: RouteEditor.qml:62
+#, kde-format
+msgid "Search for places to integrate them into a route."
+msgstr ""
+
+#: SettingsDialog.qml:48
+#, kde-format
+msgid "Network Settings"
+msgstr ""
+
+#: SettingsDialog.qml:53
+#, kde-format
+msgid "Download Maps via WLAN only"
+msgstr ""
+
+#, fuzzy
+#~| msgctxt "the earth's moon"
+#~| msgid "Moon"
+#~ msgctxt "DGML|"
+#~ msgid "Moon"
+#~ msgstr "Mjesec"
+
+#, fuzzy
+#~| msgctxt "the planet"
+#~| msgid "Mars"
+#~ msgctxt "DGML|"
+#~ msgid "State"
+#~ msgstr "Mars"
+
+#, fuzzy
+#~| msgid "unknown road"
+#~ msgctxt "DGML|"
+#~ msgid "Trunk road"
+#~ msgstr "nepoznata cesta"
+
+#, fuzzy
+#~| msgctxt "the planet"
+#~| msgid "Mars"
+#~ msgctxt "DGML|"
+#~ msgid "Theatre"
+#~ msgstr "Mars"
+
+#, fuzzy
+#~| msgctxt "the planet"
+#~| msgid "Uranus"
+#~ msgctxt "StarNames|"
+#~ msgid "Eridanus"
+#~ msgstr "Uran"
+
+#, fuzzy
+#~| msgid "Export Route"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&Open..."
+#~ msgstr "Izvezi rutu"
+
+#, fuzzy
+#~| msgid "&Export route..."
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&Export Map..."
+#~ msgstr "Izv&ezi rutu…"
+
+#, fuzzy
+#~| msgid "&Export route..."
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&Edit Map..."
+#~ msgstr "Izv&ezi rutu…"
+
+#, fuzzy
+#~| msgid "Routing"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&Configure Marble"
+#~ msgstr "Usmjeravanje"
+
+#, fuzzy
+#~| msgid "Continue on %1."
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Configure Time Control "
+#~ msgstr "Nastavite na %1."
+
+#, fuzzy
+#~| msgid "&Export route..."
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Add &Bookmark..."
+#~ msgstr "Izv&ezi rutu…"
+
+#, fuzzy
+#~| msgid "&Export route..."
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&Manage Bookmarks..."
+#~ msgstr "Izv&ezi rutu…"
+
+#, fuzzy
+#~| msgid "Export Route"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&Online Services"
+#~ msgstr "Izvezi rutu"
+
+#, fuzzy
+#~| msgctxt "a planet without data"
+#~| msgid "Unknown Planet"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&Panels"
+#~ msgstr "Nepoznat planet"
+
+#, fuzzy
+#~| msgid "Export Route"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Export Map"
+#~ msgstr "Izvezi rutu"
+
+#, fuzzy
+#~| msgid "Export Route"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Open File"
+#~ msgstr "Izvezi rutu"
+
+#, fuzzy
+#~| msgid "Routing"
+#~ msgctxt "Marble::ControlView|"
+#~ msgid "Routing"
+#~ msgstr "Usmjeravanje"
+
+#, fuzzy
+#~| msgid "Search"
+#~ msgctxt "Marble::ControlView|"
+#~ msgid "Search"
+#~ msgstr "Traži"
+
+#, fuzzy
+#~| msgid "Export Route"
+#~ msgctxt "Marble::ControlView|"
+#~ msgid "Tour"
+#~ msgstr "Izvezi rutu"
+
+#, fuzzy
+#~| msgctxt "a planet without data"
+#~| msgid "Unknown Planet"
+#~ msgctxt "Marble::ControlView|"
+#~ msgid "Show &All Panels"
+#~ msgstr "Nepoznat planet"
+
+#, fuzzy
+#~| msgid "Routing"
+#~ msgctxt "BookmarkManagerDialogPrivate|"
+#~ msgid "Remove Folder"
+#~ msgstr "Usmjeravanje"
+
+#, fuzzy
+#~| msgid "GPX files (*.gpx)"
+#~ msgctxt "Marble::BookmarkManagerDialog|"
+#~ msgid "KML files (*.kml)"
+#~ msgstr "GPX datoteke (*.gpx)"
+
+#, fuzzy
+#~| msgid "&Export route..."
+#~ msgctxt "Marble::BookmarkManagerDialog|"
+#~ msgid "Import Bookmarks"
+#~ msgstr "Izv&ezi rutu…"
+
+#, fuzzy
+#~| msgid "GPX files (*.gpx)"
+#~ msgctxt "Marble::BookmarkManagerDialog|"
+#~ msgid "KML Files (*.kml)"
+#~ msgstr "GPX datoteke (*.gpx)"
+
+#, fuzzy
+#~| msgid "&Export route..."
+#~ msgctxt "BookmarkManagerDialogPrivate|"
+#~ msgid "Imported bookmark"
+#~ msgstr "Izv&ezi rutu…"
+
+#, fuzzy
+#~| msgid "&Export route..."
+#~ msgctxt "BookmarkManagerDialogPrivate|"
+#~ msgid "Existing bookmark"
+#~ msgstr "Izv&ezi rutu…"
+
+#, fuzzy
+#~| msgid "Routing"
+#~ msgctxt "UiBookmarkManagerDialog|"
+#~ msgid "Bookmark Manager"
+#~ msgstr "Usmjeravanje"
+
+#, fuzzy
+#~| msgid "&Export route..."
+#~ msgctxt "UiBookmarkManagerDialog|"
+#~ msgid "Export Bookmarks..."
+#~ msgstr "Izv&ezi rutu…"
+
+#, fuzzy
+#~| msgctxt "the earth's moon"
+#~| msgid "Moon"
+#~ msgctxt "Marble::CelestialSortFilterProxyModel|"
+#~ msgid "Moon"
+#~ msgstr "Mjesec"
+
+#, fuzzy
+#~| msgid "Export Route"
+#~ msgctxt "CloudRoutesDialog|"
+#~ msgid "Cloud Routes"
+#~ msgstr "Izvezi rutu"
+
+#, fuzzy
+#~| msgid "Export Route"
+#~ msgctxt "Marble::RouteItemDelegate|"
+#~ msgid "Open"
+#~ msgstr "Izvezi rutu"
+
+#, fuzzy
+#~| msgid "Export Route"
+#~ msgctxt "QObject|"
+#~ msgid "Save Track"
+#~ msgstr "Izvezi rutu"
+
+#, fuzzy
+#~| msgid "GPX files (*.gpx)"
+#~ msgctxt "QObject|"
+#~ msgid "KML File (*.kml)"
+#~ msgstr "GPX datoteke (*.gpx)"
+
+#, fuzzy
+#~| msgid "Export Route"
+#~ msgctxt "QObject|"
+#~ msgid "Open Track"
+#~ msgstr "Izvezi rutu"
+
+#, fuzzy
+#~| msgid "Export Route"
+#~ msgctxt "CurrentLocationWidget|"
+#~ msgid "Current Location"
+#~ msgstr "Izvezi rutu"
+
+#, fuzzy
+#~| msgid "Export Route"
+#~ msgctxt "QObject|"
+#~ msgid "Current Location"
+#~ msgstr "Izvezi rutu"
+
+#, fuzzy
+#~| msgid "Export Route"
+#~ msgctxt ""
+#~ "Marble::Placemark|A copy shop provides a paid service to make phone calls"
+#~ msgid "Phone service"
+#~ msgstr "Izvezi rutu"
+
+#, fuzzy
+#~| msgid "Export Route"
+#~ msgctxt "Marble::Placemark|"
+#~ msgid "Self-service"
+#~ msgstr "Izvezi rutu"
+
+#, fuzzy
+#~| msgid "Export Route"
+#~ msgctxt "Marble::Placemark|"
+#~ msgid "No self-service"
+#~ msgstr "Izvezi rutu"
+
+#, fuzzy
+#~| msgctxt "the planet"
+#~| msgid "Mars"
+#~ msgctxt "Marble::Placemark|A carriage is heated"
+#~ msgid "Is heated"
+#~ msgstr "Mars"
+
+#, fuzzy
+#~| msgctxt "the planet"
+#~| msgid "Mars"
+#~ msgctxt "Marble::Placemark|A carriage is not heated"
+#~ msgid "Not heated"
+#~ msgstr "Mars"
+
+#, fuzzy
+#~| msgid "Continue on %1."
+#~ msgctxt "Marble::Placemark|A ski piste with trees (gladed)"
+#~ msgid "Contains trees"
+#~ msgstr "Nastavite na %1."
+
+#, fuzzy
+#~| msgctxt "the planet"
+#~| msgid "Mars"
+#~ msgctxt "Marble::Placemark|"
+#~ msgid "Not patrolled"
+#~ msgstr "Mars"
+
+#, fuzzy
+#~| msgid "Routing"
+#~ msgctxt "Marble::Placemark|"
+#~ msgid "Elevation: %1 m"
+#~ msgstr "Usmjeravanje"
+
+#, fuzzy
+#~| msgid "Export Route"
+#~ msgctxt "Marble::DownloadRegionDialog|"
+#~ msgid "Download Route"
+#~ msgstr "Izvezi rutu"
+
+#, fuzzy
+#~| msgctxt "the planet"
+#~| msgid "Mercury"
+#~ msgctxt "Marble::DownloadRegionDialog|"
+#~ msgid "Vector tiles"
+#~ msgstr "Merkur"
+
+#, fuzzy
+#~| msgid "Estimated download size: %1 MB"
+#~ msgctxt "Marble::DownloadRegionDialog|"
+#~ msgid "Estimated download size: %1 MB"
+#~ msgstr "Procijenjena veličina preuzimanja: %1 MB"
+
+#, fuzzy
+#~| msgid "Estimated download size: %1 kB"
+#~ msgctxt "Marble::DownloadRegionDialog|"
+#~ msgid "Estimated download size: %1 kB"
+#~ msgstr "Procijenjena veličina preuzimanja: %1 kB"
+
+#, fuzzy
+#~| msgid "&Export route..."
+#~ msgctxt "UiEditBookmarkDialog|"
+#~ msgid "Edit Bookmark"
+#~ msgstr "Izv&ezi rutu…"
+
+#, fuzzy
+#~| msgid "Get Directions"
+#~ msgctxt "UiEditBookmarkDialog|"
+#~ msgid "&Description:"
+#~ msgstr "Nabavi upute"
+
+#, fuzzy
+#~| msgid "Routing"
+#~ msgctxt "UiEditBookmarkDialog|"
+#~ msgid "&Folder:"
+#~ msgstr "Usmjeravanje"
+
+#, fuzzy
+#~| msgid "Export Route"
+#~ msgctxt "Marble::FlyToEditWidget|"
+#~ msgid "Current map center"
+#~ msgstr "Izvezi rutu"
+
+#, fuzzy
+#~| msgid "Search"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Sea"
+#~ msgstr "Traži"
+
+#, fuzzy
+#~| msgctxt "the planet"
+#~| msgid "Mars"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Nation"
+#~ msgstr "Mars"
+
+#, fuzzy
+#~| msgid "Continue on %1."
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Continent"
+#~ msgstr "Nastavite na %1."
+
+#, fuzzy
+#~| msgctxt "the planet"
+#~| msgid "Mercury"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Observatory"
+#~ msgstr "Merkur"
+
+#, fuzzy
+#~| msgid "&Export route..."
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Bookmark"
+#~ msgstr "Izv&ezi rutu…"
+
+#, fuzzy
+#~| msgid "Routing"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Elevator"
+#~ msgstr "Usmjeravanje"
+
+#, fuzzy
+#~| msgctxt "a planet without data"
+#~| msgid "Unknown Planet"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Unknown Road"
+#~ msgstr "Nepoznat planet"
+
+#, fuzzy
+#~| msgid "Export Route"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Track"
+#~ msgstr "Izvezi rutu"
+
+#, fuzzy
+#~| msgid "unknown road"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Service Road"
+#~ msgstr "nepoznata cesta"
+
+#, fuzzy
+#~| msgid "unknown road"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Residential Road"
+#~ msgstr "nepoznata cesta"
+
+#, fuzzy
+#~| msgid "unknown road"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Tertiary Link Road"
+#~ msgstr "nepoznata cesta"
+
+#, fuzzy
+#~| msgid "unknown road"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Tertiary Road"
+#~ msgstr "nepoznata cesta"
+
+#, fuzzy
+#~| msgid "unknown road"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Secondary Link Road"
+#~ msgstr "nepoznata cesta"
+
+#, fuzzy
+#~| msgid "unknown road"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Secondary Road"
+#~ msgstr "nepoznata cesta"
+
+#, fuzzy
+#~| msgid "unknown road"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Primary Link Road"
+#~ msgstr "nepoznata cesta"
+
+#, fuzzy
+#~| msgid "unknown road"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Primary Road"
+#~ msgstr "nepoznata cesta"
+
+#, fuzzy
+#~| msgid "unknown road"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Trunk Link Road"
+#~ msgstr "nepoznata cesta"
+
+#, fuzzy
+#~| msgid "unknown road"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Trunk Road"
+#~ msgstr "nepoznata cesta"
+
+#, fuzzy
+#~| msgid "unknown road"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Motorway Link Road"
+#~ msgstr "nepoznata cesta"
+
+#, fuzzy
+#~| msgid "unknown road"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Motorway"
+#~ msgstr "nepoznata cesta"
+
+#, fuzzy
+#~| msgid "Export Route"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Bar"
+#~ msgstr "Izvezi rutu"
+
+#, fuzzy
+#~| msgid "Get Directions"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Fire Station"
+#~ msgstr "Nabavi upute"
+
+#, fuzzy
+#~| msgid "Get Directions"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Charging Station"
+#~ msgstr "Nabavi upute"
+
+#, fuzzy
+#~| msgid "Export Route"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Cave Entrance"
+#~ msgstr "Izvezi rutu"
+
+#, fuzzy
+#~| msgctxt "the planet"
+#~| msgid "Mars"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Confectionery"
+#~ msgstr "Mars"
+
+#, fuzzy
+#~| msgid "Export Route"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Beauty Services"
+#~ msgstr "Izvezi rutu"
+
+#, fuzzy
+#~| msgid "Export Route"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Printing Services"
+#~ msgstr "Izvezi rutu"
+
+#, fuzzy
+#~| msgid "&Export route..."
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Bookshop"
+#~ msgstr "Izv&ezi rutu…"
+
+#, fuzzy
+#~| msgctxt "the planet"
+#~| msgid "Mars"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Stationery"
+#~ msgstr "Mars"
+
+#, fuzzy
+#~| msgctxt "the planet"
+#~| msgid "Mars"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Communications Tower"
+#~ msgstr "Mars"
+
+#, fuzzy
+#~| msgid "Get Directions"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Tourist Attraction"
+#~ msgstr "Nabavi upute"
+
+#, fuzzy
+#~| msgctxt "the planet"
+#~| msgid "Mars"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Theatre"
+#~ msgstr "Mars"
+
+#, fuzzy
+#~| msgid "Remove this position"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "View Point"
+#~ msgstr "Ukloni ovaj položaj"
+
+#, fuzzy
+#~| msgid "Export Route"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Airport Gate"
+#~ msgstr "Izvezi rutu"
+
+#, fuzzy
+#~| msgid "Export Route"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Airport Apron"
+#~ msgstr "Izvezi rutu"
+
+#, fuzzy
+#~| msgid "Export Route"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Airport Terminal"
+#~ msgstr "Izvezi rutu"
+
+#, fuzzy
+#~| msgid "Get Directions"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Bus Station"
+#~ msgstr "Nabavi upute"
+
+#, fuzzy
+#~| msgid "Get Directions"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Bus Stop"
+#~ msgstr "Nabavi upute"
+
+#, fuzzy
+#~| msgid "Get Directions"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Gas Station"
+#~ msgstr "Nabavi upute"
+
+#, fuzzy
+#~| msgid "Get Directions"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Train Station"
+#~ msgstr "Nabavi upute"
+
+#, fuzzy
+#~| msgctxt "the planet"
+#~| msgid "Mars"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Construction"
+#~ msgstr "Mars"
+
+#, fuzzy
+#~| msgid "Get Directions"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Aerialway Station"
+#~ msgstr "Nabavi upute"
+
+#, fuzzy
+#~| msgid "Export Route"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Skitour"
+#~ msgstr "Izvezi rutu"
+
+#, fuzzy
+#~| msgid "Export Route"
+#~ msgctxt "GeoLineStringGraphicsItem|"
+#~ msgid "Detour"
+#~ msgstr "Izvezi rutu"
+
+#, fuzzy
+#~| msgid "Export Route"
+#~ msgctxt "GeoLineStringGraphicsItem|"
+#~ msgid "Ferry Route"
+#~ msgstr "Izvezi rutu"
+
+#, fuzzy
+#~| msgid "Routing"
+#~ msgctxt "GeoLineStringGraphicsItem|"
+#~ msgid "Mountainbike Route"
+#~ msgstr "Usmjeravanje"
+
+#, fuzzy
+#~| msgid "Export Route"
+#~ msgctxt "GeoLineStringGraphicsItem|"
+#~ msgid "Walking Route"
+#~ msgstr "Izvezi rutu"
+
+#, fuzzy
+#~| msgid "Export Route"
+#~ msgctxt "GeoLineStringGraphicsItem|"
+#~ msgid "Hiking Route"
+#~ msgstr "Izvezi rutu"
+
+#, fuzzy
+#~| msgid "Export Route"
+#~ msgctxt "GeoLineStringGraphicsItem|"
+#~ msgid "Inline Skates Route"
+#~ msgstr "Izvezi rutu"
+
+#, fuzzy
+#~| msgid "Export Route"
+#~ msgctxt "GeoLineStringGraphicsItem|"
+#~ msgid "Skitour"
+#~ msgstr "Izvezi rutu"
+
+#, fuzzy
+#~| msgid "Export Route"
+#~ msgctxt "Marble::TargetModel|"
+#~ msgid "Current Location: %1"
+#~ msgstr "Izvezi rutu"
+
+#, fuzzy
+#~| msgid "Search"
+#~ msgctxt "GoTo|"
+#~ msgid "Search"
+#~ msgstr "Traži"
+
+#, fuzzy
+#~| msgid "Update"
+#~ msgctxt "Marble::MapItemDelegate|"
+#~ msgid "Update"
+#~ msgstr "Nadogradnja"
+
+#, fuzzy
+#~| msgid "Export Route"
+#~ msgctxt "Marble::MapItemDelegate|"
+#~ msgid "Open"
+#~ msgstr "Izvezi rutu"
+
+#, fuzzy
+#~| msgctxt "the planet"
+#~| msgid "Mercury"
+#~ msgctxt "Marble::MapViewWidget|"
+#~ msgid "Mercator View"
+#~ msgstr "Merkur"
+
+#, fuzzy
+#~| msgid "Center Map here"
+#~ msgctxt "Marble::MapViewWidget|"
+#~ msgid "&Delete Map Theme"
+#~ msgstr "Ovdje centriraj kartu"
+
+#, fuzzy
+#~| msgctxt "the planet"
+#~| msgid "Mercury"
+#~ msgctxt "MapViewWidget|"
+#~ msgid "Mercator"
+#~ msgstr "Merkur"
+
+#, fuzzy
+#~| msgid "Export Route"
+#~ msgctxt "Marble::PreviewDialog|"
+#~ msgid "Preview Map"
+#~ msgstr "Izvezi rutu"
+
+#, fuzzy
+#~| msgid "Get Directions"
+#~ msgctxt "Marble::MapWizard|"
+#~ msgid "Tile Projection:"
+#~ msgstr "Nabavi upute"
+
+#, fuzzy
+#~| msgid "Export Route"
+#~ msgctxt "Marble::MapWizard|"
+#~ msgid "Preview Image"
+#~ msgstr "Izvezi rutu"
+
+#, fuzzy
+#~| msgid "Export Route"
+#~ msgctxt "Marble::MapWizard|"
+#~ msgid "Legend Image"
+#~ msgstr "Izvezi rutu"
+
+#, fuzzy
+#~| msgid "Export Route"
+#~ msgctxt "MapWizard|"
+#~ msgid "Wms-Service:"
+#~ msgstr "Izvezi rutu"
+
+#, fuzzy
+#~| msgid "Search"
+#~ msgctxt "MapWizard|"
+#~ msgid "Search:"
+#~ msgstr "Traži"
+
+#, fuzzy
+#~| msgid "Get Directions"
+#~ msgctxt "MapWizard|"
+#~ msgid "Tile Projection:"
+#~ msgstr "Nabavi upute"
+
+#, fuzzy
+#~| msgid "unknown road"
+#~ msgctxt "MapWizard|"
+#~ msgid "Service Info"
+#~ msgstr "nepoznata cesta"
+
+#, fuzzy
+#~| msgid "Export Route"
+#~ msgctxt "MapWizard|"
+#~ msgid "Preview Image:"
+#~ msgstr "Izvezi rutu"
+
+#, fuzzy
+#~| msgid "Export Route"
+#~ msgctxt "MapWizard|"
+#~ msgid "preview image"
+#~ msgstr "Izvezi rutu"
+
+#, fuzzy
+#~| msgid "Center Map here"
+#~ msgctxt "MapWizard|"
+#~ msgid "Map Theme:"
+#~ msgstr "Ovdje centriraj kartu"
+
+#, fuzzy
+#~| msgid "Export Route"
+#~ msgctxt "MapWizard|"
+#~ msgid "Preview Map"
+#~ msgstr "Izvezi rutu"
+
+#, fuzzy
+#~| msgid "Routing"
+#~ msgctxt "MarbleAboutDialog|"
+#~ msgid "About Marble"
+#~ msgstr "Usmjeravanje"
+
+#, fuzzy
+#~| msgctxt "a planet without data"
+#~| msgid "Unknown Planet"
+#~ msgctxt "MarbleAboutDialog|"
+#~ msgid "Version Unknown"
+#~ msgstr "Nepoznat planet"
+
+#, fuzzy
+#~| msgid "Export Route"
+#~ msgctxt "QObject|"
+#~ msgid "Clear"
+#~ msgstr "Izvezi rutu"
+
+#, fuzzy
+#~| msgid "Plugins"
+#~ msgctxt "MarblePluginSettingsWidget|"
+#~ msgid "P&lugins"
+#~ msgstr "Priključci"
+
+#, fuzzy
+#~| msgid "Routing"
+#~ msgctxt "Marble::MarbleWidgetPopupMenu|"
+#~ msgid "Directions &from here"
+#~ msgstr "Usmjeravanje"
+
+#, fuzzy
+#~| msgid "Routing"
+#~ msgctxt "Marble::MarbleWidgetPopupMenu|"
+#~ msgid "Directions &to here"
+#~ msgstr "Usmjeravanje"
+
+#, fuzzy
+#~| msgctxt "the planet"
+#~| msgid "Mars"
+#~ msgctxt "Marble::MovieCaptureDialog|Start recording a movie"
+#~ msgid "&Start"
+#~ msgstr "Mars"
+
+#, fuzzy
+#~| msgid "Routing"
+#~ msgctxt "MovieCaptureDialog|"
+#~ msgid "Movie Recording"
+#~ msgstr "Usmjeravanje"
+
+#, fuzzy
+#~| msgid "Export Route"
+#~ msgctxt "MovieCaptureDialog|"
+#~ msgid "Open..."
+#~ msgstr "Izvezi rutu"
+
+#, fuzzy
+#~| msgid "Routing"
+#~ msgctxt "UiNewBookmarkFolderDialog|"
+#~ msgid "New Bookmark Folder"
+#~ msgstr "Usmjeravanje"
+
+#, fuzzy
+#~| msgid "Export Route"
+#~ msgctxt "OsmRelationManagerWidgetPrivate|"
+#~ msgid "Current Relations"
+#~ msgstr "Izvezi rutu"
+
+#, fuzzy
+#~| msgid "Export Route"
+#~ msgctxt "OsmTagEditorWidgetPrivate|"
+#~ msgid "Current Tags"
+#~ msgstr "Izvezi rutu"
+
+#, fuzzy
+#~| msgid "Export Route"
+#~ msgctxt "QObject|"
+#~ msgid "Open File"
+#~ msgstr "Izvezi rutu"
+
+#, fuzzy
+#~| msgid "GPX files (*.gpx)"
+#~ msgctxt "QObject|"
+#~ msgid "All Supported Files (*.png)"
+#~ msgstr "GPX datoteke (*.gpx)"
+
+#, fuzzy
+#~| msgctxt "the planet"
+#~| msgid "Mercury"
+#~ msgctxt "QObject|the planet"
+#~ msgid "Mercury"
+#~ msgstr "Merkur"
+
+#, fuzzy
+#~| msgctxt "the planet"
+#~| msgid "Venus"
+#~ msgctxt "QObject|the planet"
+#~ msgid "Venus"
+#~ msgstr "Venera"
+
+#, fuzzy
+#~| msgctxt "the planet"
+#~| msgid "Earth"
+#~ msgctxt "QObject|the planet"
+#~ msgid "Earth"
+#~ msgstr "Zemlja"
+
+#, fuzzy
+#~| msgctxt "the planet"
+#~| msgid "Mars"
+#~ msgctxt "QObject|the planet"
+#~ msgid "Mars"
+#~ msgstr "Mars"
+
+#, fuzzy
+#~| msgctxt "the planet"
+#~| msgid "Jupiter"
+#~ msgctxt "QObject|the planet"
+#~ msgid "Jupiter"
+#~ msgstr "Jupiter"
+
+#, fuzzy
+#~| msgctxt "the planet"
+#~| msgid "Saturn"
+#~ msgctxt "QObject|the planet"
+#~ msgid "Saturn"
+#~ msgstr "Saturn"
+
+#, fuzzy
+#~| msgctxt "the planet"
+#~| msgid "Uranus"
+#~ msgctxt "QObject|the planet"
+#~ msgid "Uranus"
+#~ msgstr "Uran"
+
+#, fuzzy
+#~| msgctxt "the planet"
+#~| msgid "Neptune"
+#~ msgctxt "QObject|the planet"
+#~ msgid "Neptune"
+#~ msgstr "Neptun"
+
+#, fuzzy
+#~| msgctxt "the planet"
+#~| msgid "Pluto"
+#~ msgctxt "QObject|the planet"
+#~ msgid "Pluto"
+#~ msgstr "Pluton"
+
+#, fuzzy
+#~| msgctxt "the earth's star"
+#~| msgid "Sun"
+#~ msgctxt "QObject|the earth's star"
+#~ msgid "Sun"
+#~ msgstr "Sunce"
+
+#, fuzzy
+#~| msgctxt "the earth's moon"
+#~| msgid "Moon"
+#~ msgctxt "QObject|the earth's moon"
+#~ msgid "Moon"
+#~ msgstr "Mjesec"
+
+#, fuzzy
+#~| msgctxt "a planet without data"
+#~| msgid "Unknown Planet"
+#~ msgctxt "QObject|a planet without data"
+#~ msgid "Unknown Planet"
+#~ msgstr "Nepoznat planet"
+
+#, fuzzy
+#~| msgid "unknown road"
+#~ msgctxt "QObject|"
+#~ msgid "Unknown error"
+#~ msgstr "nepoznata cesta"
+
+#, fuzzy
+#~| msgid "Export Route"
+#~ msgctxt "PrintOptions|"
+#~ msgid "Route"
+#~ msgstr "Izvezi rutu"
+
+#, fuzzy
+#~| msgctxt "the planet"
+#~| msgid "Mercury"
+#~ msgctxt "QObject|"
+#~ msgid "Mercator"
+#~ msgstr "Merkur"
+
+#, fuzzy
+#~| msgid "Routing"
+#~ msgctxt "Marble::QtMarbleConfigDialog|"
+#~ msgid "Routing"
+#~ msgstr "Usmjeravanje"
+
+#, fuzzy
+#~| msgid "Plugins"
+#~ msgctxt "Marble::QtMarbleConfigDialog|"
+#~ msgid "Plugins"
+#~ msgstr "Priključci"
+
+#, fuzzy
+#~| msgid "Export Route"
+#~ msgctxt "Marble::RouteSimulationPositionProviderPlugin|"
+#~ msgid "Current Route"
+#~ msgstr "Izvezi rutu"
+
+#, fuzzy
+#~| msgid "Take the %1. exit in the roundabout into %2."
+#~ msgctxt "QObject|"
+#~ msgid "Enter the roundabout."
+#~ msgstr "Idite na %1. izlaz u kružnom toku u %2."
+
+#, fuzzy
+#~| msgid "Take the %1. exit in the roundabout into %2."
+#~ msgctxt "QObject|"
+#~ msgid "Take the exit."
+#~ msgstr "Idite na %1. izlaz u kružnom toku u %2."
+
+#, fuzzy
+#~| msgid "Take the %1. exit in the roundabout into %2."
+#~ msgctxt "QObject|"
+#~ msgid "Take the exit towards %1."
+#~ msgstr "Idite na %1. izlaz u kružnom toku u %2."
+
+#, fuzzy
+#~| msgid "Follow the road for %1 %2."
+#~ msgctxt "QObject|"
+#~ msgid "Follow the road for %1 %2."
+#~ msgstr "Slijedite cestu %1 %2."
+
+#, fuzzy
+#~| msgid "Take the %1. exit in the roundabout into %2."
+#~ msgctxt "QObject|"
+#~ msgid "Take the %1. exit in the roundabout."
+#~ msgstr "Idite na %1. izlaz u kružnom toku u %2."
+
+#, fuzzy
+#~| msgid "Take the %1. exit in the roundabout into %2."
+#~ msgctxt "QObject|"
+#~ msgid "Take the %1. exit in the roundabout into %2."
+#~ msgstr "Idite na %1. izlaz u kružnom toku u %2."
+
+#, fuzzy
+#~| msgid "Continue on %1."
+#~ msgctxt "QObject|"
+#~ msgid "Continue."
+#~ msgstr "Nastavite na %1."
+
+#, fuzzy
+#~| msgid "Turn left into %1."
+#~ msgctxt "QObject|"
+#~ msgid "Merge."
+#~ msgstr "Skrenite ulijevo u %1."
+
+#, fuzzy
+#~| msgid "Turn around onto %1."
+#~ msgctxt "QObject|"
+#~ msgid "Turn around."
+#~ msgstr "Zaokrenite se na %1."
+
+#, fuzzy
+#~| msgid "Turn sharp left on %1."
+#~ msgctxt "QObject|"
+#~ msgid "Turn sharp left."
+#~ msgstr "Skrenite oštro ulijevo na %1."
+
+#, fuzzy
+#~| msgid "Turn left into %1."
+#~ msgctxt "QObject|"
+#~ msgid "Turn left."
+#~ msgstr "Skrenite ulijevo u %1."
+
+#, fuzzy
+#~| msgid "Keep slightly left on %1."
+#~ msgctxt "QObject|"
+#~ msgid "Keep slightly left."
+#~ msgstr "Idite lagano ulijevo na %1."
+
+#, fuzzy
+#~| msgid "Keep slightly right on %1."
+#~ msgctxt "QObject|"
+#~ msgid "Keep slightly right."
+#~ msgstr "Idite lagano udesno na %1."
+
+#, fuzzy
+#~| msgid "Turn right into %1."
+#~ msgctxt "QObject|"
+#~ msgid "Turn right."
+#~ msgstr "Skrenite udesno u %1."
+
+#, fuzzy
+#~| msgid "Turn sharp right into %1."
+#~ msgctxt "QObject|"
+#~ msgid "Turn sharp right."
+#~ msgstr "Skrenite oštro udesno u %1."
+
+#, fuzzy
+#~| msgid "Take the %1. exit in the roundabout into %2."
+#~ msgctxt "QObject|"
+#~ msgid "Exit the roundabout."
+#~ msgstr "Idite na %1. izlaz u kružnom toku u %2."
+
+#, fuzzy
+#~| msgid "Take the %1. exit in the roundabout into %2."
+#~ msgctxt "QObject|"
+#~ msgid "Take the exit to the left."
+#~ msgstr "Idite na %1. izlaz u kružnom toku u %2."
+
+#, fuzzy
+#~| msgid "Take the %1. exit in the roundabout into %2."
+#~ msgctxt "QObject|"
+#~ msgid "Take the exit to the right."
+#~ msgstr "Idite na %1. izlaz u kružnom toku u %2."
+
+#, fuzzy
+#~| msgid "Continue on %1."
+#~ msgctxt "QObject|"
+#~ msgid "Continue onto %1."
+#~ msgstr "Nastavite na %1."
+
+#, fuzzy
+#~| msgid "Turn left into %1."
+#~ msgctxt "QObject|"
+#~ msgid "Merge onto %1."
+#~ msgstr "Skrenite ulijevo u %1."
+
+#, fuzzy
+#~| msgid "Turn around onto %1."
+#~ msgctxt "QObject|"
+#~ msgid "Turn around onto %1."
+#~ msgstr "Zaokrenite se na %1."
+
+#, fuzzy
+#~| msgid "Turn sharp left on %1."
+#~ msgctxt "QObject|"
+#~ msgid "Turn sharp left on %1."
+#~ msgstr "Skrenite oštro ulijevo na %1."
+
+#, fuzzy
+#~| msgid "Turn left into %1."
+#~ msgctxt "QObject|"
+#~ msgid "Turn left into %1."
+#~ msgstr "Skrenite ulijevo u %1."
+
+#, fuzzy
+#~| msgid "Keep slightly left on %1."
+#~ msgctxt "QObject|"
+#~ msgid "Keep slightly left on %1."
+#~ msgstr "Idite lagano ulijevo na %1."
+
+#, fuzzy
+#~| msgid "Continue on %1."
+#~ msgctxt "QObject|"
+#~ msgid "Continue on %1."
+#~ msgstr "Nastavite na %1."
+
+#, fuzzy
+#~| msgid "Keep slightly right on %1."
+#~ msgctxt "QObject|"
+#~ msgid "Keep slightly right on %1."
+#~ msgstr "Idite lagano udesno na %1."
+
+#, fuzzy
+#~| msgid "Turn right into %1."
+#~ msgctxt "QObject|"
+#~ msgid "Turn right into %1."
+#~ msgstr "Skrenite udesno u %1."
+
+#, fuzzy
+#~| msgid "Turn sharp right into %1."
+#~ msgctxt "QObject|"
+#~ msgid "Turn sharp right into %1."
+#~ msgstr "Skrenite oštro udesno u %1."
+
+#, fuzzy
+#~| msgid "Take the %1. exit in the roundabout into %2."
+#~ msgctxt "QObject|"
+#~ msgid "Exit the roundabout into %2."
+#~ msgstr "Idite na %1. izlaz u kružnom toku u %2."
+
+#, fuzzy
+#~| msgid "Take the %1. exit in the roundabout into %2."
+#~ msgctxt "QObject|"
+#~ msgid "Take the exit to the left onto %1."
+#~ msgstr "Idite na %1. izlaz u kružnom toku u %2."
+
+#, fuzzy
+#~| msgid "Take the %1. exit in the roundabout into %2."
+#~ msgctxt "QObject|"
+#~ msgid "Take the exit to the right onto %1."
+#~ msgstr "Idite na %1. izlaz u kružnom toku u %2."
+
+#, fuzzy
+#~| msgid "Remove this position"
+#~ msgctxt "QObject|"
+#~ msgid "Remove via point"
+#~ msgstr "Ukloni ovaj položaj"
+
+#, fuzzy
+#~| msgid "Center Map here"
+#~ msgctxt "QObject|"
+#~ msgid "&Center Map here"
+#~ msgstr "Ovdje centriraj kartu"
+
+#, fuzzy
+#~| msgid "Export Route"
+#~ msgctxt "QObject|"
+#~ msgid "Current &Location"
+#~ msgstr "Izvezi rutu"
+
+#, fuzzy
+#~| msgid "Export Route"
+#~ msgctxt "Marble::RoutingInputWidget|"
+#~ msgid "Current Location"
+#~ msgstr "Izvezi rutu"
+
+#, fuzzy
+#~| msgid "&Remove this destination"
+#~ msgctxt "QObject|"
+#~ msgid "&Remove this Destination"
+#~ msgstr "Ukloni od&redište"
+
+#, fuzzy
+#~| msgid "&Export route..."
+#~ msgctxt "QObject|"
+#~ msgid "&Export Route..."
+#~ msgstr "Izv&ezi rutu…"
+
+#, fuzzy
+#~| msgid "Export Route"
+#~ msgctxt "Marble::RoutingLayer|"
+#~ msgid "Export Route"
+#~ msgstr "Izvezi rutu"
+
+#, fuzzy
+#~| msgid "GPX files (*.gpx)"
+#~ msgctxt "Marble::RoutingLayer|"
+#~ msgid "GPX and KML files (*.gpx *.kml)"
+#~ msgstr "GPX datoteke (*.gpx)"
+
+#, fuzzy
+#~| msgid "Routing"
+#~ msgctxt "Marble::RoutingManager|"
+#~ msgid "Guidance Mode"
+#~ msgstr "Usmjeravanje"
+
+#, fuzzy
+#~| msgctxt "a planet without data"
+#~| msgid "Unknown Planet"
+#~ msgctxt "Marble::RoutingManager|"
+#~ msgid "Show again"
+#~ msgstr "Nepoznat planet"
+
+#, fuzzy
+#~| msgid "Routing"
+#~ msgctxt "RoutingProfileSettingsDialog|"
+#~ msgid "Configure Routing Profile"
+#~ msgstr "Usmjeravanje"
+
+#, fuzzy
+#~| msgctxt "a planet without data"
+#~| msgid "Unknown Planet"
+#~ msgctxt "Marble::RoutingProfilesModel|"
+#~ msgid "Unknown"
+#~ msgstr "Nepoznat planet"
+
+#, fuzzy
+#~| msgid "Routing"
+#~ msgctxt "RoutingSettingsWidget|"
+#~ msgid "&Configure..."
+#~ msgstr "Usmjeravanje"
+
+#, fuzzy
+#~| msgid "Get Directions"
+#~ msgctxt "QObject|"
+#~ msgid "Get Directions"
+#~ msgstr "Nabavi upute"
+
+#, fuzzy
+#~| msgid "Retrieve routing instructions for the selected destinations."
+#~ msgctxt "QObject|"
+#~ msgid "Retrieve routing instructions for the selected destinations."
+#~ msgstr "Dohvati upute usmjeravanje za odabrana odredišta."
+
+#, fuzzy
+#~| msgid "Search"
+#~ msgctxt "QObject|"
+#~ msgid "Search"
+#~ msgstr "Traži"
+
+#, fuzzy
+#~| msgid "Find places matching the search term"
+#~ msgctxt "QObject|"
+#~ msgid "Find places matching the search term"
+#~ msgstr "Nađi mjesta koja odgovaraju uvjetima pretaživanja"
+
+#, fuzzy
+#~| msgid "Export Route"
+#~ msgctxt "QObject|"
+#~ msgid "Open Route"
+#~ msgstr "Izvezi rutu"
+
+#, fuzzy
+#~| msgid "Export Route"
+#~ msgctxt "QObject|"
+#~ msgid "Save Route"
+#~ msgstr "Izvezi rutu"
+
+#, fuzzy
+#~| msgid "Export Route"
+#~ msgctxt "QObject|"
+#~ msgid "Preview Route"
+#~ msgstr "Izvezi rutu"
+
+#, fuzzy
+#~| msgid "Export Route"
+#~ msgctxt "QObject|"
+#~ msgid "Reverse Route"
+#~ msgstr "Izvezi rutu"
+
+#, fuzzy
+#~| msgid "Export Route"
+#~ msgctxt "QObject|"
+#~ msgid "Clear Route"
+#~ msgstr "Izvezi rutu"
+
+#, fuzzy
+#~| msgid "Export Route"
+#~ msgctxt "Marble::RoutingWidget|"
+#~ msgid "Open Route"
+#~ msgstr "Izvezi rutu"
+
+#, fuzzy
+#~| msgid "GPX files (*.gpx)"
+#~ msgctxt "Marble::RoutingWidget|"
+#~ msgid "KML Files (*.kml)"
+#~ msgstr "GPX datoteke (*.gpx)"
+
+#, fuzzy
+#~| msgid "Export Route"
+#~ msgctxt "Marble::RoutingWidget|"
+#~ msgid "Save Route"
+#~ msgstr "Izvezi rutu"
+
+#, fuzzy
+#~| msgid "GPX files (*.gpx)"
+#~ msgctxt "Marble::RoutingWidget|"
+#~ msgid "KML files (*.kml)"
+#~ msgstr "GPX datoteke (*.gpx)"
+
+#, fuzzy
+#~| msgid "&Export route..."
+#~ msgctxt "Marble::RoutingWidget|"
+#~ msgid "Uploading route..."
+#~ msgstr "Izv&ezi rutu…"
+
+#, fuzzy
+#~| msgid "Search"
+#~ msgctxt "RoutingWidget|"
+#~ msgid "Search"
+#~ msgstr "Traži"
+
+#, fuzzy
+#~| msgid "Search"
+#~ msgctxt "Marble::SearchInputWidget|"
+#~ msgid "Global Search"
+#~ msgstr "Traži"
+
+#, fuzzy
+#~| msgid "Search"
+#~ msgctxt "Marble::SearchInputWidget|"
+#~ msgid "Area Search"
+#~ msgstr "Traži"
+
+#, fuzzy
+#~| msgid "Search"
+#~ msgctxt "QObject|"
+#~ msgid "Search Results"
+#~ msgstr "Traži"
+
+#, fuzzy
+#~| msgid "Export Route"
+#~ msgctxt "TimeControlWidget|"
+#~ msgid "&New date and time:"
+#~ msgstr "Izvezi rutu"
+
+#, fuzzy
+#~| msgid "Export Route"
+#~ msgctxt "TimeControlWidget|"
+#~ msgid "Current &date and time:"
+#~ msgstr "Izvezi rutu"
+
+#, fuzzy
+#~| msgctxt "the planet"
+#~| msgid "Mars"
+#~ msgctxt "Marble::TourCaptureDialog|"
+#~ msgid "Start"
+#~ msgstr "Mars"
+
+#, fuzzy
+#~| msgid "Routing"
+#~ msgctxt "TourCaptureDialog|"
+#~ msgid "Movie Recording"
+#~ msgstr "Usmjeravanje"
+
+#, fuzzy
+#~| msgid "Export Route"
+#~ msgctxt "TourCaptureDialog|"
+#~ msgid "Open..."
+#~ msgstr "Izvezi rutu"
+
+#, fuzzy
+#~| msgctxt "the planet"
+#~| msgid "Mars"
+#~ msgctxt "TourCaptureDialog|"
+#~ msgid "Start"
+#~ msgstr "Mars"
+
+#, fuzzy
+#~| msgid "Export Route"
+#~ msgctxt "Marble::TourItemDelegate|"
+#~ msgid "Play the tour"
+#~ msgstr "Izvezi rutu"
+
+#, fuzzy
+#~| msgid "Export Route"
+#~ msgctxt "Marble::TourItemDelegate|"
+#~ msgid "Pause the tour"
+#~ msgstr "Izvezi rutu"
+
+#, fuzzy
+#~| msgid "Update"
+#~ msgctxt "Marble::TourItemDelegate|"
+#~ msgid "Create item %1"
+#~ msgstr "Nadogradnja"
+
+#, fuzzy
+#~| msgid "Remove this position"
+#~ msgctxt "Marble::TourItemDelegate|"
+#~ msgid "Remove item %1"
+#~ msgstr "Ukloni ovaj položaj"
+
+#, fuzzy
+#~| msgid "Update"
+#~ msgctxt "Marble::TourItemDelegate|"
+#~ msgid "Update items"
+#~ msgstr "Nadogradnja"
+
+#, fuzzy
+#~| msgid "Export Route"
+#~ msgctxt "QObject|"
+#~ msgid "Save tour"
+#~ msgstr "Izvezi rutu"
+
+#, fuzzy
+#~| msgid "Export Route"
+#~ msgctxt "QObject|"
+#~ msgid "Open Tour"
+#~ msgstr "Izvezi rutu"
+
+#, fuzzy
+#~| msgid "GPX files (*.gpx)"
+#~ msgctxt "QObject|"
+#~ msgid "KML Tours (*.kml)"
+#~ msgstr "GPX datoteke (*.gpx)"
+
+#, fuzzy
+#~| msgid "Export Route"
+#~ msgctxt "QObject|"
+#~ msgid "Save Tour as"
+#~ msgstr "Izvezi rutu"
+
+#, fuzzy
+#~| msgid "Export Route"
+#~ msgctxt "TourWidget|"
+#~ msgid "Tour"
+#~ msgstr "Izvezi rutu"
+
+#, fuzzy
+#~| msgid "Export Route"
+#~ msgctxt "TourWidget|"
+#~ msgid "New Tour"
+#~ msgstr "Izvezi rutu"
+
+#, fuzzy
+#~| msgid "Export Route"
+#~ msgctxt "TourWidget|"
+#~ msgid "Save Tour"
+#~ msgstr "Izvezi rutu"
+
+#, fuzzy
+#~| msgid "Export Route"
+#~ msgctxt "TourWidget|"
+#~ msgid "Save Tour As"
+#~ msgstr "Izvezi rutu"
+
+#, fuzzy
+#~| msgid "Export Route"
+#~ msgctxt "TourWidget|"
+#~ msgid "Open Tour"
+#~ msgstr "Izvezi rutu"
+
+#, fuzzy
+#~| msgid "Export Route"
+#~ msgctxt "TourWidget|"
+#~ msgid "Record tour"
+#~ msgstr "Izvezi rutu"
+
+#, fuzzy
+#~| msgid "GeoClue"
+#~ msgctxt "Marble::GeoCluePositionProviderPlugin|"
+#~ msgid "GeoClue"
+#~ msgstr "GeoClue"
+
+#, fuzzy
+#~| msgid "Export Route"
+#~ msgctxt "Marble::DownloadOsmDialog|"
+#~ msgid "Download"
+#~ msgstr "Izvezi rutu"
+
+#, fuzzy
+#~| msgid "Plugins"
+#~ msgctxt "AprsConfigWidget|"
+#~ msgid "APRS Plugin"
+#~ msgstr "Priključci"
+
+#, fuzzy
+#~| msgid "Choose position from the map"
+#~ msgctxt "Marble::AtmospherePlugin|"
+#~ msgid "Shows the atmosphere around the earth."
+#~ msgstr "Odaberite položaj s karte"
+
+#, fuzzy
+#~| msgctxt "the planet"
+#~| msgid "Earth"
+#~ msgctxt "EarthquakeConfigWidget|"
+#~ msgid "Configure Earthquakes Plugin"
+#~ msgstr "Zemlja"
+
+#, fuzzy
+#~| msgctxt "the planet"
+#~| msgid "Earth"
+#~ msgctxt "Marble::EarthquakePlugin|"
+#~ msgid "Earthquakes"
+#~ msgstr "Zemlja"
+
+#, fuzzy
+#~| msgctxt "the planet"
+#~| msgid "Earth"
+#~ msgctxt "Marble::EarthquakePlugin|"
+#~ msgid "&Earthquakes"
+#~ msgstr "Zemlja"
+
+#, fuzzy
+#~| msgid "Choose position from the map"
+#~ msgctxt "Marble::EarthquakePlugin|"
+#~ msgid "Shows earthquakes on the map."
+#~ msgstr "Odaberite položaj s karte"
+
+#, fuzzy
+#~| msgctxt "the planet"
+#~| msgid "Mars"
+#~ msgctxt "Marble::EclipsesModel|"
+#~ msgid "Start"
+#~ msgstr "Mars"
+
+#, fuzzy
+#~| msgid "Routing"
+#~ msgctxt "ElevationProfileConfigWidget|"
+#~ msgid "Configure Elevation Profile Plugin"
+#~ msgstr "Usmjeravanje"
+
+#, fuzzy
+#~| msgid "Export Route"
+#~ msgctxt "Marble::ElevationProfileContextMenu|"
+#~ msgid "Route"
+#~ msgstr "Izvezi rutu"
+
+#, fuzzy
+#~| msgid "Routing"
+#~ msgctxt "Marble::ElevationProfileFloatItem|"
+#~ msgid "Elevation Profile"
+#~ msgstr "Usmjeravanje"
+
+#, fuzzy
+#~| msgid "Routing"
+#~ msgctxt "Marble::ElevationProfileFloatItem|"
+#~ msgid "&Elevation Profile"
+#~ msgstr "Usmjeravanje"
+
+#, fuzzy
+#~| msgid "Routing"
+#~ msgctxt "Marble::ElevationProfileMarker|"
+#~ msgid "Elevation Profile Marker"
+#~ msgstr "Usmjeravanje"
+
+#, fuzzy
+#~| msgid "Routing"
+#~ msgctxt "Marble::ElevationProfileMarker|"
+#~ msgid "&Elevation Profile Marker"
+#~ msgstr "Usmjeravanje"
+
+#, fuzzy
+#~| msgid "Export Route"
+#~ msgctxt "Marble::FileViewFloatItem|"
+#~ msgid "Open file..."
+#~ msgstr "Izvezi rutu"
+
+#, fuzzy
+#~| msgid "Export Route"
+#~ msgctxt "Marble::FileViewFloatItem|"
+#~ msgid "Open File"
+#~ msgstr "Izvezi rutu"
+
+#, fuzzy
+#~| msgctxt "a planet without data"
+#~| msgid "Unknown Planet"
+#~ msgctxt "Marble::FoursquarePlugin|"
+#~ msgid "&Places"
+#~ msgstr "Nepoznat planet"
+
+#, fuzzy
+#~| msgid "Get Directions"
+#~ msgctxt "GpsInfoPlugin|"
+#~ msgid "Direction"
+#~ msgstr "Nabavi upute"
+
+#, fuzzy
+#~| msgctxt "a planet without data"
+#~| msgid "Unknown Planet"
+#~ msgctxt "Marble::License|"
+#~ msgid "&Show Details"
+#~ msgstr "Nepoznat planet"
+
+#, fuzzy
+#~| msgid "Routing"
+#~ msgctxt "MeasureConfigDialog|"
+#~ msgid "Measure Tool Configuration"
+#~ msgstr "Usmjeravanje"
+
+#, fuzzy
+#~| msgid "Remove this position"
+#~ msgctxt "Marble::MeasureToolPlugin|"
+#~ msgid "Remove &Last Measure Point"
+#~ msgstr "Ukloni ovaj položaj"
+
+#, fuzzy
+#~| msgid "Remove this position"
+#~ msgctxt "Marble::MeasureToolPlugin|"
+#~ msgid "&Remove Measure Points"
+#~ msgstr "Ukloni ovaj položaj"
+
+#, fuzzy
+#~| msgid "Export Route"
+#~ msgctxt "Marble::NavigationFloatItem|"
+#~ msgid "Current Location Button"
+#~ msgstr "Izvezi rutu"
+
+#, fuzzy
+#~| msgctxt "the planet"
+#~| msgid "Mars"
+#~ msgctxt "OpenCachingCacheDialog|"
+#~ msgid "Status:"
+#~ msgstr "Mars"
+
+#, fuzzy
+#~| msgid "Export Route"
+#~ msgctxt "OpenCachingCacheDialog|"
+#~ msgid "Previous"
+#~ msgstr "Izvezi rutu"
+
+#, fuzzy
+#~| msgctxt "the planet"
+#~| msgid "Mars"
+#~ msgctxt "OpenCachingConfigWidget|"
+#~ msgid "Start:"
+#~ msgstr "Mars"
+
+#, fuzzy
+#~| msgid "Routing"
+#~ msgctxt "OpenDesktopConfigWidget|"
+#~ msgid "OpenDesktop plugin configuration"
+#~ msgstr "Usmjeravanje"
+
+#, fuzzy
+#~| msgid "Routing"
+#~ msgctxt "OverviewMapConfigWidget|"
+#~ msgid "Configure Overview Map"
+#~ msgstr "Usmjeravanje"
+
+#, fuzzy
+#~| msgctxt "a planet without data"
+#~| msgid "Unknown Planet"
+#~ msgctxt "OverviewMapConfigWidget|"
+#~ msgid "&Planet:"
+#~ msgstr "Nepoznat planet"
+
+#, fuzzy
+#~| msgid "Export Route"
+#~ msgctxt "OverviewMapConfigWidget|"
+#~ msgid "Preview"
+#~ msgstr "Izvezi rutu"
+
+#, fuzzy
+#~| msgid "Choose position from the map"
+#~ msgctxt "Marble::PostalCodePlugin|"
+#~ msgid "Shows postal codes of the area on the map."
+#~ msgstr "Odaberite položaj s karte"
+
+#, fuzzy
+#~| msgid "Routing"
+#~ msgctxt "RoutingConfigDialog|"
+#~ msgid "Routing Configuration"
+#~ msgstr "Usmjeravanje"
+
+#, fuzzy
+#~| msgid "Turn left into %1."
+#~ msgctxt "QObject|"
+#~ msgid "Route left."
+#~ msgstr "Skrenite ulijevo u %1."
+
+#, fuzzy
+#~| msgid "Routing"
+#~ msgctxt "Marble::RoutingPlugin|"
+#~ msgid "Routing"
+#~ msgstr "Usmjeravanje"
+
+#, fuzzy
+#~| msgid "Routing"
+#~ msgctxt "Marble::RoutingPlugin|"
+#~ msgid "&Routing"
+#~ msgstr "Usmjeravanje"
+
+#, fuzzy
+#~| msgid "Routing"
+#~ msgctxt "RoutingPlugin|"
+#~ msgid "Guidance Mode"
+#~ msgstr "Usmjeravanje"
+
+#, fuzzy
+#~| msgctxt "the earth's moon"
+#~| msgid "Moon"
+#~ msgctxt "Marble::SatellitesConfigDialog|"
+#~ msgid "Moons"
+#~ msgstr "Mjesec"
+
+#, fuzzy
+#~| msgctxt "the earth's moon"
+#~| msgid "Moon"
+#~ msgctxt "Marble::SatellitesConfigDialog|"
+#~ msgid "Moon"
+#~ msgstr "Mjesec"
+
+#, fuzzy
+#~| msgctxt "the earth's star"
+#~| msgid "Sun"
+#~ msgctxt "Marble::SatellitesConfigDialog|"
+#~ msgid "Sun"
+#~ msgstr "Sunce"
+
+#, fuzzy
+#~| msgctxt "the planet"
+#~| msgid "Mercury"
+#~ msgctxt "Marble::SatellitesConfigDialog|"
+#~ msgid "Mercury"
+#~ msgstr "Merkur"
+
+#, fuzzy
+#~| msgctxt "the planet"
+#~| msgid "Venus"
+#~ msgctxt "Marble::SatellitesConfigDialog|"
+#~ msgid "Venus"
+#~ msgstr "Venera"
+
+#, fuzzy
+#~| msgctxt "the planet"
+#~| msgid "Earth"
+#~ msgctxt "Marble::SatellitesConfigDialog|"
+#~ msgid "Earth"
+#~ msgstr "Zemlja"
+
+#, fuzzy
+#~| msgctxt "the planet"
+#~| msgid "Mars"
+#~ msgctxt "Marble::SatellitesConfigDialog|"
+#~ msgid "Mars"
+#~ msgstr "Mars"
+
+#, fuzzy
+#~| msgctxt "the planet"
+#~| msgid "Jupiter"
+#~ msgctxt "Marble::SatellitesConfigDialog|"
+#~ msgid "Jupiter"
+#~ msgstr "Jupiter"
+
+#, fuzzy
+#~| msgctxt "the planet"
+#~| msgid "Saturn"
+#~ msgctxt "Marble::SatellitesConfigDialog|"
+#~ msgid "Saturn"
+#~ msgstr "Saturn"
+
+#, fuzzy
+#~| msgctxt "the planet"
+#~| msgid "Uranus"
+#~ msgctxt "Marble::SatellitesConfigDialog|"
+#~ msgid "Uranus"
+#~ msgstr "Uran"
+
+#, fuzzy
+#~| msgctxt "the planet"
+#~| msgid "Neptune"
+#~ msgctxt "Marble::SatellitesConfigDialog|"
+#~ msgid "Neptune"
+#~ msgstr "Neptun"
+
+#, fuzzy
+#~| msgctxt "the planet"
+#~| msgid "Earth"
+#~ msgctxt "Marble::SatellitesConfigDialog|"
+#~ msgid "&Data Sources"
+#~ msgstr "Zemlja"
+
+#, fuzzy
+#~| msgid "GPX files (*.gpx)"
+#~ msgctxt "Marble::SatellitesConfigDialog|"
+#~ msgid "All Supported Files (*.txt *.msc)"
+#~ msgstr "GPX datoteke (*.gpx)"
+
+#, fuzzy
+#~| msgid "GPX files (*.gpx)"
+#~ msgctxt "Marble::SatellitesConfigDialog|"
+#~ msgid "All Files (*.*)"
+#~ msgstr "GPX datoteke (*.gpx)"
+
+#, fuzzy
+#~| msgctxt "the planet"
+#~| msgid "Earth"
+#~ msgctxt "SatellitesConfigDialog|"
+#~ msgid "&Data Sources"
+#~ msgstr "Zemlja"
+
+#, fuzzy
+#~| msgctxt "the planet"
+#~| msgid "Earth"
+#~ msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
+#~ msgid "Earth Resources"
+#~ msgstr "Zemlja"
+
+#, fuzzy
+#~| msgid "Search"
+#~ msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
+#~ msgid "Globalstar"
+#~ msgstr "Traži"
+
+#, fuzzy
+#~| msgctxt "the earth's star"
+#~| msgid "Sun"
+#~ msgctxt "StarsConfigWidget|"
+#~ msgid "Sun"
+#~ msgstr "Sunce"
+
+#, fuzzy
+#~| msgctxt "the earth's moon"
+#~| msgid "Moon"
+#~ msgctxt "StarsConfigWidget|"
+#~ msgid "Moon"
+#~ msgstr "Mjesec"
+
+#, fuzzy
+#~| msgctxt "the planet"
+#~| msgid "Mercury"
+#~ msgctxt "StarsConfigWidget|"
+#~ msgid "Mercury"
+#~ msgstr "Merkur"
+
+#, fuzzy
+#~| msgctxt "the planet"
+#~| msgid "Venus"
+#~ msgctxt "StarsConfigWidget|"
+#~ msgid "Venus"
+#~ msgstr "Venera"
+
+#, fuzzy
+#~| msgctxt "the planet"
+#~| msgid "Earth"
+#~ msgctxt "StarsConfigWidget|"
+#~ msgid "Earth"
+#~ msgstr "Zemlja"
+
+#, fuzzy
+#~| msgctxt "the planet"
+#~| msgid "Mars"
+#~ msgctxt "StarsConfigWidget|"
+#~ msgid "Mars"
+#~ msgstr "Mars"
+
+#, fuzzy
+#~| msgctxt "the planet"
+#~| msgid "Jupiter"
+#~ msgctxt "StarsConfigWidget|"
+#~ msgid "Jupiter"
+#~ msgstr "Jupiter"
+
+#, fuzzy
+#~| msgctxt "the planet"
+#~| msgid "Saturn"
+#~ msgctxt "StarsConfigWidget|"
+#~ msgid "Saturn"
+#~ msgstr "Saturn"
+
+#, fuzzy
+#~| msgctxt "the planet"
+#~| msgid "Uranus"
+#~ msgctxt "StarsConfigWidget|"
+#~ msgid "Uranus"
+#~ msgstr "Uran"
+
+#, fuzzy
+#~| msgctxt "the planet"
+#~| msgid "Neptune"
+#~ msgctxt "StarsConfigWidget|"
+#~ msgid "Neptune"
+#~ msgstr "Neptun"
+
+#, fuzzy
+#~| msgctxt "the planet"
+#~| msgid "Mars"
+#~ msgctxt "Marble::StarsPlugin|"
+#~ msgid "Stars"
+#~ msgstr "Mars"
+
+#, fuzzy
+#~| msgctxt "the planet"
+#~| msgid "Mars"
+#~ msgctxt "Marble::StarsPlugin|"
+#~ msgid "&Stars"
+#~ msgstr "Mars"
+
+#, fuzzy
+#~| msgctxt "the earth's star"
+#~| msgid "Sun"
+#~ msgctxt "Marble::StarsPlugin|"
+#~ msgid "Sun"
+#~ msgstr "Sunce"
+
+#, fuzzy
+#~| msgctxt "a planet without data"
+#~| msgid "Unknown Planet"
+#~ msgctxt "Marble::StarsPlugin|"
+#~ msgid "Show &Constellations"
+#~ msgstr "Nepoznat planet"
+
+#, fuzzy
+#~| msgctxt "a planet without data"
+#~| msgid "Unknown Planet"
+#~ msgctxt "Marble::StarsPlugin|"
+#~ msgid "Show &Planets"
+#~ msgstr "Nepoznat planet"
+
+#, fuzzy
+#~| msgctxt "the earth's star"
+#~| msgid "Sun"
+#~ msgctxt "Marble::SunPlugin|"
+#~ msgid "Sun"
+#~ msgstr "Sunce"
+
+#, fuzzy
+#~| msgid "Get Directions"
+#~ msgctxt "WeatherConfigWidget|"
+#~ msgid "Wind direction"
+#~ msgstr "Nabavi upute"
+
+#, fuzzy
+#~| msgctxt "the planet"
+#~| msgid "Mercury"
+#~ msgctxt "WeatherData|"
+#~ msgid "overcast"
+#~ msgstr "Merkur"
+
+#, fuzzy
+#~| msgid "Turn left into %1."
+#~ msgctxt "CycleStreetsConfigWidget|"
+#~ msgid "Route type:"
+#~ msgstr "Skrenite ulijevo u %1."
+
+#, fuzzy
+#~| msgid "Search"
+#~ msgctxt "Marble::GeoUriPlugin|"
+#~ msgid "Geo URI Search"
+#~ msgstr "Traži"
+
+#, fuzzy
+#~| msgid "Routing"
+#~ msgctxt "Marble::GosmorePlugin|"
+#~ msgid "Gosmore Routing"
+#~ msgstr "Usmjeravanje"
+
+#, fuzzy
+#~| msgctxt "the planet"
+#~| msgid "Mars"
+#~ msgctxt "QObject|"
+#~ msgid "theatre"
+#~ msgstr "Mars"
+
+#, fuzzy
+#~| msgid "Remove this position"
+#~ msgctxt "QObject|"
+#~ msgid "view point"
+#~ msgstr "Ukloni ovaj položaj"
+
+#, fuzzy
+#~| msgid "Export Route"
+#~ msgctxt "QObject|"
+#~ msgid "airport apron"
+#~ msgstr "Izvezi rutu"
+
+#, fuzzy
+#~| msgid "Search"
+#~ msgctxt "Marble::LocalOsmSearchPlugin|"
+#~ msgid "Local OSM Search"
+#~ msgstr "Traži"
+
+#, fuzzy
+#~| msgctxt "The compass direction"
+#~| msgid "North"
+#~ msgctxt "QObject|"
+#~ msgid "north"
+#~ msgstr "Sjever"
+
+#, fuzzy
+#~| msgctxt "The compass direction"
+#~| msgid "North"
+#~ msgctxt "QObject|"
+#~ msgid "north-west"
+#~ msgstr "Sjever"
+
+#, fuzzy
+#~| msgctxt "The compass direction"
+#~| msgid "West"
+#~ msgctxt "QObject|"
+#~ msgid "west"
+#~ msgstr "Zapad"
+
+#, fuzzy
+#~| msgctxt "The compass direction"
+#~| msgid "South"
+#~ msgctxt "QObject|"
+#~ msgid "south-west"
+#~ msgstr "Jug"
+
+#, fuzzy
+#~| msgctxt "The compass direction"
+#~| msgid "South"
+#~ msgctxt "QObject|"
+#~ msgid "south"
+#~ msgstr "Jug"
+
+#, fuzzy
+#~| msgctxt "The compass direction"
+#~| msgid "South"
+#~ msgctxt "QObject|"
+#~ msgid "south-east"
+#~ msgstr "Jug"
+
+#, fuzzy
+#~| msgctxt "The compass direction"
+#~| msgid "East"
+#~ msgctxt "QObject|"
+#~ msgid "east"
+#~ msgstr "Istok"
+
+#, fuzzy
+#~| msgctxt "The compass direction"
+#~| msgid "North"
+#~ msgctxt "QObject|"
+#~ msgid "north-east"
+#~ msgstr "Sjever"
+
+#, fuzzy
+#~| msgid "Routing"
+#~ msgctxt "Marble::MapQuestPlugin|"
+#~ msgid "MapQuest Routing"
+#~ msgstr "Usmjeravanje"
+
+#, fuzzy
+#~| msgid "Routing"
+#~ msgctxt "Marble::MapQuestPlugin|"
+#~ msgid "MapQuest"
+#~ msgstr "Usmjeravanje"
+
+#, fuzzy
+#~| msgid "Remove this position"
+#~ msgctxt "Marble::MonavConfigWidget|"
+#~ msgid "Remove Map"
+#~ msgstr "Ukloni ovaj položaj"
+
+#, fuzzy
+#~| msgid "Continue on %1."
+#~ msgctxt "MonavConfigWidget|"
+#~ msgid "Continent"
+#~ msgstr "Nastavite na %1."
+
+#, fuzzy
+#~| msgid "Update"
+#~ msgctxt "Marble::MonavMapsModel|"
+#~ msgid "Update"
+#~ msgstr "Nadogradnja"
+
+#, fuzzy
+#~| msgid "Routing"
+#~ msgctxt "Marble::MonavPlugin|"
+#~ msgid "Monav Routing"
+#~ msgstr "Usmjeravanje"
+
+#, fuzzy
+#~| msgid "Export Route"
+#~ msgctxt "Marble::OpenRouteServicePlugin|"
+#~ msgid "OpenRouteService"
+#~ msgstr "Izvezi rutu"
+
+#, fuzzy
+#~| msgid "Routing"
+#~ msgctxt "Marble::RoutinoPlugin|"
+#~ msgid "Routino Routing"
+#~ msgstr "Usmjeravanje"
+
+#, fuzzy
+#~| msgid "Routing"
+#~ msgctxt "Marble::RoutinoPlugin|"
+#~ msgid "Routino"
+#~ msgstr "Usmjeravanje"
+
+#, fuzzy
+#~| msgid "unknown road"
+#~ msgctxt "Marble::RoutinoConfigWidget|"
+#~ msgid "Motorcar"
+#~ msgstr "nepoznata cesta"
+
+#, fuzzy
+#~| msgid "Routing"
+#~ msgctxt "Marble::YoursPlugin|"
+#~ msgid "Yours Routing"
+#~ msgstr "Usmjeravanje"
+
+#, fuzzy
+#~| msgid "unknown road"
+#~ msgctxt "Marble::YoursConfigWidget|"
+#~ msgid "Motorcar"
+#~ msgstr "nepoznata cesta"
+
+#, fuzzy
+#~| msgid "Remove this position"
+#~ msgctxt "Bookmarks|"
+#~ msgid "Removed"
+#~ msgstr "Ukloni ovaj položaj"
+
+#, fuzzy
+#~| msgid "Routing"
+#~ msgctxt "MainScreen|"
+#~ msgid "Routing"
+#~ msgstr "Usmjeravanje"
+
+#, fuzzy
+#~| msgid "Search"
+#~ msgctxt "SearchField|"
+#~ msgid "Search"
+#~ msgstr "Traži"
+
+#, fuzzy
+#~| msgctxt "the planet"
+#~| msgid "Mercury"
+#~ msgctxt "Marble::MapWizard|"
+#~ msgid "Observatory"
+#~ msgstr "Merkur"
+
+#, fuzzy
+#~| msgctxt "the planet"
+#~| msgid "Mars"
+#~ msgctxt "Marble::MapWizard|"
+#~ msgid "State"
+#~ msgstr "Mars"
+
+#, fuzzy
+#~| msgid "&Export route..."
+#~ msgctxt "Marble::MapViewWidget|"
+#~ msgid "&Upload Map..."
+#~ msgstr "Izv&ezi rutu…"
+
+#, fuzzy
+#~| msgid "Export Route"
+#~ msgctxt "PlacemarkDialog|"
+#~ msgid "Routes"
+#~ msgstr "Izvezi rutu"
+
+#, fuzzy
+#~| msgctxt "a planet without data"
+#~| msgid "Unknown Planet"
+#~ msgctxt "Marble::OpenCachingComModel|"
+#~ msgid "Unknown Cache"
+#~ msgstr "Nepoznat planet"
+
+#, fuzzy
+#~| msgid "Choose position from the map"
+#~ msgctxt "Marble::OpenCachingComPlugin|"
+#~ msgid "Shows caches from OpenCaching.com on the map."
+#~ msgstr "Odaberite položaj s karte"
+
+#, fuzzy
+#~| msgid "Plugins"
+#~ msgctxt "Marble::NotesPlugin|"
+#~ msgid "Notes Plugin"
+#~ msgstr "Priključci"
+
+#, fuzzy
+#~| msgid "Export Route"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Bag"
+#~ msgstr "Izvezi rutu"
+
+#, fuzzy
+#~| msgid "Export Route"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Car"
+#~ msgstr "Izvezi rutu"
+
+#, fuzzy
+#~| msgid "Routing"
+#~ msgctxt "Marble::RoutingProfileSettingsDialog|"
+#~ msgid "Routing Profile - Marble"
+#~ msgstr "Usmjeravanje"
+
+#, fuzzy
+#~| msgid "Routing"
+#~ msgctxt "Marble::RoutingWidget|"
+#~ msgid "Directions - Marble"
+#~ msgstr "Usmjeravanje"
+
+#, fuzzy
+#~| msgctxt "the planet"
+#~| msgid "Mars"
+#~ msgctxt "GeoDataFeature|"
+#~ msgid "Theatre"
+#~ msgstr "Mars"
+
+#, fuzzy
+#~| msgid "Routing"
+#~ msgctxt "Marble::RoutingManager|"
+#~ msgid "Guidance Mode - Marble"
+#~ msgstr "Usmjeravanje"
+
+#, fuzzy
+#~| msgid "Continue on %1."
+#~ msgctxt "Marble::Placemark|"
+#~ msgid "Continent"
+#~ msgstr "Nastavite na %1."
+
+#, fuzzy
+#~| msgctxt "the planet"
+#~| msgid "Mercury"
+#~ msgctxt "Marble::Placemark|"
+#~ msgid "Observatory"
+#~ msgstr "Merkur"
+
+#, fuzzy
+#~| msgctxt "the planet"
+#~| msgid "Mars"
+#~ msgctxt "Marble::Placemark|"
+#~ msgid "Theatre"
+#~ msgstr "Mars"
+
+#~ msgctxt "the planet"
+#~ msgid "Mercury"
+#~ msgstr "Merkur"
+
+#~ msgctxt "the planet"
+#~ msgid "Venus"
+#~ msgstr "Venera"
+
+#~ msgctxt "the planet"
+#~ msgid "Earth"
+#~ msgstr "Zemlja"
+
+#~ msgctxt "the planet"
+#~ msgid "Mars"
+#~ msgstr "Mars"
+
+#~ msgctxt "the planet"
+#~ msgid "Jupiter"
+#~ msgstr "Jupiter"
+
+#~ msgctxt "the planet"
+#~ msgid "Saturn"
+#~ msgstr "Saturn"
+
+#~ msgctxt "the planet"
+#~ msgid "Uranus"
+#~ msgstr "Uran"
+
+#~ msgctxt "the planet"
+#~ msgid "Neptune"
+#~ msgstr "Neptun"
+
+#~ msgctxt "the earth's star"
+#~ msgid "Sun"
+#~ msgstr "Sunce"
+
+#~ msgctxt "the earth's moon"
+#~ msgid "Moon"
+#~ msgstr "Mjesec"
+
+#, fuzzy
+#~| msgid "Export Route"
+#~ msgid "Save Route..."
+#~ msgstr "Izvezi rutu"
+
+#~ msgid "KIO Network Plugin"
+#~ msgstr "Mrežni priključak za KIO"
+
+#~ msgid "KIO based Network Plugin"
+#~ msgstr "Mrežni priključak baziran na KIO-u"
+
+#~ msgid ""
+#~ "A network plugin which supports HTTP pipelining to deliver a better user "
+#~ "experience."
+#~ msgstr ""
+#~ "Mrežni priključak koji podržava HTTP tuneliranje radi pružanja boljeg "
+#~ "korisničkog iskustva."
+
+#~ msgid "QHttp based Network Plugin"
+#~ msgstr "Mrežni priključak baziran na QHttp-u"
+
+#~ msgid "QHttp based network plugin"
+#~ msgstr "Mrežni priključak baziran na QHttp-u"
+
+#~ msgid "QNam Network Plugin"
+#~ msgstr "Mrežni priključak QNam"
+
+#~ msgid "QNetworkAccessManager based Network Plugin"
+#~ msgstr "Mrežni priključak baziran na QNetworkAccessManager-u"
+
+#~ msgctxt "The compass direction"
+#~ msgid "North"
+#~ msgstr "Sjever"
+
+#~ msgctxt "The compass direction"
+#~ msgid "East"
+#~ msgstr "Istok"
+
+#~ msgctxt "The compass direction"
+#~ msgid "South"
+#~ msgstr "Jug"
+
+#~ msgctxt "The compass direction"
+#~ msgid "West"
+#~ msgstr "Zapad"

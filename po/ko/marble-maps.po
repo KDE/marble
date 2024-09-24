@@ -1,0 +1,3641 @@
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+# Shinjo Park <kde@peremen.name>, 2009, 2011, 2013, 2015, 2020, 2021.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: marble\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2024-09-23 00:36+0000\n"
+"PO-Revision-Date: 2021-06-24 01:16+0200\n"
+"Last-Translator: Shinjo Park <kde@peremen.name>\n"
+"Language-Team: Korean <kde-kr@kde.org>\n"
+"Language: ko\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Lokalize 20.12.3\n"
+"X-Qt-Contexts: true\n"
+
+#, fuzzy, kde-format
+#| msgctxt "UiEditBookmarkDialog|"
+#| msgid "&Folder"
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "폴더(&F)"
+
+#, fuzzy, kde-format
+#| msgctxt "ExternalEditor|"
+#| msgid "Editor Details"
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "편집기 자세한 정보"
+
+#: Bookmarks.qml:20
+#, fuzzy, kde-format
+#| msgctxt "QObject|"
+#| msgid "Bookmarks"
+msgctxt "@title:window"
+msgid "Bookmarks"
+msgstr "책갈피"
+
+#: Bookmarks.qml:69
+#, kde-format
+msgid "Your bookmarks will appear here."
+msgstr ""
+
+#: CurrentPosition.qml:54
+#, kde-format
+msgctxt "@option:check"
+msgid "Follow Current Position"
+msgstr ""
+
+#: main.cpp:37 MainScreen.qml:20 MainScreen.qml:177
+#, fuzzy, kde-format
+#| msgctxt "MainScreen|"
+#| msgid "Marble Maps"
+msgid "Marble Maps"
+msgstr "Marble 지도"
+
+#: main.cpp:39
+#, fuzzy, kde-format
+#| msgid "Export Map"
+msgid "Maps"
+msgstr "지도 내보내기"
+
+#: main.cpp:41
+#, kde-format
+msgid "© KDE Community"
+msgstr ""
+
+#: MainScreen.qml:86
+#, fuzzy, kde-format
+#| msgctxt "RoutinoConfigWidget|"
+#| msgid "Transport:"
+msgid "Public Transport"
+msgstr "전송:"
+
+#: MainScreen.qml:101
+#, kde-format
+msgid "Outdoor Activities"
+msgstr ""
+
+#: MainScreen.qml:113
+#, kde-format
+msgctxt "@action:button"
+msgid "Accessibility"
+msgstr ""
+
+#: MainScreen.qml:122
+#, fuzzy, kde-format
+#| msgctxt "Marble::MainWindow|"
+#| msgid "About &Qt"
+msgctxt "@action:button"
+msgid "About"
+msgstr "Qt 정보(&Q)"
+
+#: MainScreen.qml:133
+#, fuzzy, kde-format
+#| msgctxt "QObject|"
+#| msgid "Bookmarks"
+msgctxt "@action:button"
+msgid "Bookmarks"
+msgstr "책갈피"
+
+#: MainScreen.qml:144
+#, kde-format
+msgctxt "@action:button"
+msgid "Layer Options"
+msgstr ""
+
+#: MainScreen.qml:455
+#, fuzzy, kde-format
+#| msgctxt "MainScreen|"
+#| msgid "%1 km"
+msgid "%1 km"
+msgstr "%1 km"
+
+#: NavigationInfoBar.qml:20
+#, fuzzy, kde-format
+#| msgctxt "MainScreen|"
+#| msgid "%1 km"
+msgctxt "distance in km"
+msgid "%1 km"
+msgstr "%1 km"
+
+#: NavigationInfoBar.qml:22
+#, fuzzy, kde-format
+#| msgctxt "NavigationInfoBar|"
+#| msgid "%1 m"
+msgctxt "distance in m"
+msgid "%1 m"
+msgstr "%1 m"
+
+#: NavigationInfoBar.qml:24
+#, fuzzy, kde-format
+#| msgctxt "NavigationInfoBar|"
+#| msgid "%1 m"
+msgctxt "distance in m with decimals"
+msgid "%1 m"
+msgstr "%1 m"
+
+#: Options.qml:20
+#, kde-format
+msgctxt "@title:window"
+msgid "Layer Options"
+msgstr ""
+
+#: Options.qml:23
+#, kde-format
+msgctxt "@title:group"
+msgid "Public Transport Layers"
+msgstr ""
+
+#: Options.qml:28
+#, fuzzy, kde-format
+#| msgctxt "WeatherData|"
+#| msgid "rain"
+msgctxt "@option:check"
+msgid "Train"
+msgstr "비"
+
+#: Options.qml:35
+#, fuzzy, kde-format
+#| msgctxt "DGML|"
+#| msgid "Subway"
+msgctxt "@option:check"
+msgid "Subway"
+msgstr "도시 철도"
+
+#: Options.qml:42
+#, kde-format
+msgctxt "@option:check"
+msgid "Tram"
+msgstr ""
+
+#: Options.qml:49
+#, fuzzy, kde-format
+#| msgctxt "GeoLineStringGraphicsItem|"
+#| msgid "Bus"
+msgctxt "@option:check"
+msgid "Bus"
+msgstr "버스"
+
+#: Options.qml:56
+#, kde-format
+msgctxt "@option:check"
+msgid "Trolley Bus"
+msgstr ""
+
+#: Options.qml:64
+#, kde-format
+msgid "Outdoor Activities Layers"
+msgstr ""
+
+#: Options.qml:69
+#, kde-format
+msgctxt "@option:check"
+msgid "Walkways"
+msgstr ""
+
+#: Options.qml:76
+#, fuzzy, kde-format
+#| msgid "Open File"
+msgctxt "@option:check"
+msgid "Hiking Routes"
+msgstr "파일 열기"
+
+#: Options.qml:83
+#, fuzzy, kde-format
+#| msgid "Open File"
+msgctxt "@option:check"
+msgid "Bicycle Routes"
+msgstr "파일 열기"
+
+#: Options.qml:90
+#, fuzzy, kde-format
+#| msgid "Routing"
+msgctxt "@option:check"
+msgid "Mountainbike Routes"
+msgstr "길 찾기"
+
+#: Options.qml:97
+#, fuzzy, kde-format
+#| msgid "Open File"
+msgctxt "@option:check"
+msgid "Inline Skating Routes"
+msgstr "파일 열기"
+
+#: Options.qml:104
+#, fuzzy, kde-format
+#| msgctxt "DGML|"
+#| msgid "Bridge"
+msgctxt "@option:check"
+msgid "Bridleways"
+msgstr "브리지"
+
+#: PlacemarkDialog.qml:48
+#, fuzzy, kde-format
+#| msgctxt "Marble::GeoDataTreeModel|"
+#| msgid "Name"
+msgctxt "placeholder"
+msgid "No Name"
+msgstr "이름"
+
+#: PlacemarkDialog.qml:168
+#, fuzzy, kde-format
+#| msgctxt "Marble::EditPlacemarkDialog|"
+#| msgid "Tags"
+msgctxt "@title:group"
+msgid "Tags:"
+msgstr "태그"
+
+#: ProfileSelectorMenu.qml:29
+#, kde-format
+msgid "Car (fastest)"
+msgstr ""
+
+#: ProfileSelectorMenu.qml:40
+#, fuzzy, kde-format
+#| msgctxt "Marble::RoutingProfilesModel|"
+#| msgid "Bicycle"
+msgid "Bicycle"
+msgstr "자전거 가게"
+
+#: ProfileSelectorMenu.qml:49
+#, kde-format
+msgid "Pedestrian"
+msgstr ""
+
+#: RouteEditor.qml:62
+#, kde-format
+msgid "Search for places to integrate them into a route."
+msgstr ""
+
+#: SettingsDialog.qml:48
+#, fuzzy, kde-format
+#| msgctxt "SettingsDialog|"
+#| msgid "Network Settings"
+msgid "Network Settings"
+msgstr "네트워크 설정"
+
+#: SettingsDialog.qml:53
+#, kde-format
+msgid "Download Maps via WLAN only"
+msgstr ""
+
+#~ msgctxt "DGML|"
+#~ msgid "Moon"
+#~ msgstr "달"
+
+#~ msgctxt "DGML|"
+#~ msgid "Explore the Moon"
+#~ msgstr "달 탐색"
+
+#~ msgctxt "DGML|"
+#~ msgid "Landing Sites"
+#~ msgstr "착륙 지점"
+
+#~ msgctxt "DGML|"
+#~ msgid "Craters"
+#~ msgstr "충돌구"
+
+#~ msgctxt "DGML|"
+#~ msgid "Maria"
+#~ msgstr "마리아"
+
+#~ msgctxt "DGML|"
+#~ msgid "Other"
+#~ msgstr "기타"
+
+#~ msgctxt "DGML|"
+#~ msgid "Terrain"
+#~ msgstr "지형"
+
+#~ msgctxt "DGML|"
+#~ msgid "Boundaries"
+#~ msgstr "경계"
+
+#~ msgctxt "DGML|"
+#~ msgid "Temperature"
+#~ msgstr "온도"
+
+#~ msgctxt "DGML|"
+#~ msgid "Mountain"
+#~ msgstr "산"
+
+#~ msgctxt "DGML|"
+#~ msgid "Volcano"
+#~ msgstr "화산"
+
+#~ msgctxt "DGML|"
+#~ msgid "Geographic Pole"
+#~ msgstr "지리극"
+
+#~ msgctxt "DGML|"
+#~ msgid "Magnetic Pole"
+#~ msgstr "자기극"
+
+#~ msgctxt "DGML|"
+#~ msgid "Airport"
+#~ msgstr "공항"
+
+#~ msgctxt "DGML|"
+#~ msgid "Shipwreck"
+#~ msgstr "난파선"
+
+#~ msgctxt "DGML|"
+#~ msgid "Astronomical Observatory"
+#~ msgstr "천문대"
+
+#~ msgctxt "DGML|"
+#~ msgid "International"
+#~ msgstr "국제"
+
+#~ msgctxt "DGML|"
+#~ msgid "Lake"
+#~ msgstr "호수"
+
+#~ msgctxt "DGML|"
+#~ msgid "River"
+#~ msgstr "강"
+
+#~ msgctxt "DGML|"
+#~ msgid "42&deg;C"
+#~ msgstr "42&deg;C"
+
+#~ msgctxt "DGML|"
+#~ msgid "32&deg;C"
+#~ msgstr "32&deg;C"
+
+#~ msgctxt "DGML|"
+#~ msgid "23&deg;C"
+#~ msgstr "23&deg;C"
+
+#~ msgctxt "DGML|"
+#~ msgid "12&deg;C"
+#~ msgstr "12&deg;C"
+
+#~ msgctxt "DGML|"
+#~ msgid "1&deg;C"
+#~ msgstr "1&deg;C"
+
+#~ msgctxt "DGML|"
+#~ msgid "-10&deg;C"
+#~ msgstr "-10&deg;C"
+
+#~ msgctxt "DGML|"
+#~ msgid "-21&deg;C"
+#~ msgstr "-21&deg;C"
+
+#~ msgctxt "DGML|"
+#~ msgid "-32&deg;C"
+#~ msgstr "-32&deg;C"
+
+#~ msgctxt "DGML|"
+#~ msgid "-41&deg;C"
+#~ msgstr "-41&deg;C"
+
+#~ msgctxt "DGML|"
+#~ msgid "-69&deg;C"
+#~ msgstr "-69&deg;C"
+
+#~ msgctxt "DGML|"
+#~ msgid "Earth at Night"
+#~ msgstr "밤의 지구"
+
+#~ msgctxt "DGML|"
+#~ msgid "Surface"
+#~ msgstr "표면"
+
+#~ msgctxt "DGML|"
+#~ msgid "Populated Places"
+#~ msgstr "거주지"
+
+#~ msgctxt "DGML|"
+#~ msgid "Light terrain"
+#~ msgstr "밝은 지형"
+
+#~ msgctxt "DGML|"
+#~ msgid "Dark terrain"
+#~ msgstr "어두운 지형"
+
+#~ msgctxt "DGML|"
+#~ msgid "Water"
+#~ msgstr "물"
+
+#~ msgctxt "DGML|"
+#~ msgid "Atlas"
+#~ msgstr "아틀라스"
+
+#~ msgctxt "DGML|"
+#~ msgid "Ice and Glaciers"
+#~ msgstr "얼음과 빙하"
+
+#~ msgctxt "DGML|"
+#~ msgid "Relief"
+#~ msgstr "대지"
+
+#~ msgctxt "DGML|"
+#~ msgid "Elevation"
+#~ msgstr "고도"
+
+#~ msgctxt "DGML|"
+#~ msgid "Disputed Areas"
+#~ msgstr "분쟁 지역"
+
+#~ msgctxt "DGML|"
+#~ msgid "Maritime Borders"
+#~ msgstr "해양 경계"
+
+#~ msgctxt "DGML|"
+#~ msgid "Historic Lake"
+#~ msgstr "역사적 호수"
+
+#~ msgctxt "DGML|"
+#~ msgid "Playa"
+#~ msgstr "플라야"
+
+#~ msgctxt "DGML|"
+#~ msgid "Glaciers"
+#~ msgstr "빙하"
+
+#~ msgctxt "DGML|"
+#~ msgid "Antarctic Iceshelves"
+#~ msgstr "극지방 얼음층"
+
+#~ msgctxt "DGML|"
+#~ msgid "7000 m"
+#~ msgstr "7000 m"
+
+#~ msgctxt "DGML|"
+#~ msgid "5000 m"
+#~ msgstr "5000 m"
+
+#~ msgctxt "DGML|"
+#~ msgid "3500 m"
+#~ msgstr "3500 m"
+
+#~ msgctxt "DGML|"
+#~ msgid "2000 m"
+#~ msgstr "2000 m"
+
+#~ msgctxt "DGML|"
+#~ msgid "1000 m"
+#~ msgstr "1000 m"
+
+#~ msgctxt "DGML|"
+#~ msgid "500 m"
+#~ msgstr "500 m"
+
+#~ msgctxt "DGML|"
+#~ msgid "200 m"
+#~ msgstr "200 m"
+
+#~ msgctxt "DGML|"
+#~ msgid "50 m"
+#~ msgstr "50 m"
+
+#~ msgctxt "DGML|"
+#~ msgid "0 m"
+#~ msgstr "0 m"
+
+#~ msgctxt "DGML|"
+#~ msgid "0 m (Water)"
+#~ msgstr "0 m(수면)"
+
+#~ msgctxt "DGML|"
+#~ msgid "-50 m"
+#~ msgstr "-50 m"
+
+#~ msgctxt "DGML|"
+#~ msgid "-200 m"
+#~ msgstr "-200 m"
+
+#~ msgctxt "DGML|"
+#~ msgid "-2000 m"
+#~ msgstr "-2000 m"
+
+#~ msgctxt "DGML|"
+#~ msgid "-4000 m"
+#~ msgstr "-4000 m"
+
+#~ msgctxt "DGML|"
+#~ msgid "-6500 m"
+#~ msgstr "-6500 m"
+
+#~ msgctxt "DGML|"
+#~ msgid "-11000 m"
+#~ msgstr "-11000 m"
+
+#~ msgctxt "DGML|"
+#~ msgid "Vector OSM (Development)"
+#~ msgstr "벡터 OSM(개발)"
+
+#~ msgctxt "DGML|"
+#~ msgid "Explore the Earth"
+#~ msgstr "지구 탐색"
+
+#~ msgctxt "DGML|"
+#~ msgid "Entertainment"
+#~ msgstr "엔터테인먼트"
+
+#~ msgctxt "DGML|"
+#~ msgid "Emergency"
+#~ msgstr "긴급"
+
+#~ msgctxt "DGML|"
+#~ msgid "Shop"
+#~ msgstr "가게"
+
+#~ msgctxt "DGML|"
+#~ msgid "Railway"
+#~ msgstr "철도"
+
+#~ msgctxt "DGML|"
+#~ msgid "College"
+#~ msgstr "대학"
+
+#~ msgctxt "DGML|"
+#~ msgid "School"
+#~ msgstr "학교"
+
+#~ msgctxt "DGML|"
+#~ msgid "ATM"
+#~ msgstr "ATM"
+
+#~ msgctxt "DGML|"
+#~ msgid "Bank"
+#~ msgstr "은행"
+
+#~ msgctxt "DGML|"
+#~ msgid "Pharmacy"
+#~ msgstr "약국"
+
+#~ msgctxt "DGML|"
+#~ msgid "Theatre"
+#~ msgstr "극장"
+
+#~ msgctxt "DGML|"
+#~ msgid "Toilets"
+#~ msgstr "화장실"
+
+#~ msgctxt "DGML|"
+#~ msgid "Hotel"
+#~ msgstr "호텔"
+
+#~ msgctxt "DGML|"
+#~ msgid "Hospital"
+#~ msgstr "병원"
+
+#~ msgctxt "DGML|"
+#~ msgid "Ruins"
+#~ msgstr "유적"
+
+#~ msgctxt "DGML|"
+#~ msgid "Cafe"
+#~ msgstr "카페"
+
+#~ msgctxt "DGML|"
+#~ msgid "Fast Food"
+#~ msgstr "패스트 푸드"
+
+#~ msgctxt "DGML|"
+#~ msgid "Pub"
+#~ msgstr "술집"
+
+#~ msgctxt "DGML|"
+#~ msgid "Restaurant"
+#~ msgstr "음식점"
+
+#~ msgctxt "DGML|"
+#~ msgid "Alcohol"
+#~ msgstr "주류"
+
+#~ msgctxt "DGML|"
+#~ msgid "Bakery"
+#~ msgstr "제과점"
+
+#~ msgctxt "DGML|"
+#~ msgid "Clothes"
+#~ msgstr "의류 상점"
+
+#~ msgctxt "DGML|"
+#~ msgid "Convenience"
+#~ msgstr "편의 기능"
+
+#~ msgctxt "DGML|"
+#~ msgid "Gas"
+#~ msgstr "Gas"
+
+#~ msgctxt "DGML|"
+#~ msgid "Gift"
+#~ msgstr "선물"
+
+#~ msgctxt "DGML|"
+#~ msgid "OpenStreetMap"
+#~ msgstr "OpenStreetMap"
+
+#~ msgctxt "DGML|"
+#~ msgid "Precipitation"
+#~ msgstr "강수량"
+
+#~ msgctxt "DGML|"
+#~ msgid "Satellite View"
+#~ msgstr "위성 보기"
+
+#, fuzzy
+#~| msgid "Navigation"
+#~ msgctxt "DGML|"
+#~ msgid "Vegetation"
+#~ msgstr "탐색"
+
+#~ msgctxt "DGML|"
+#~ msgid "Desert"
+#~ msgstr "사막"
+
+#~ msgctxt "StarNames|"
+#~ msgid "Aquarius"
+#~ msgstr "물병자리"
+
+#~ msgctxt "StarNames|"
+#~ msgid "Aries"
+#~ msgstr "양자리"
+
+#~ msgctxt "StarNames|"
+#~ msgid "Cancer"
+#~ msgstr "게자리"
+
+#~ msgctxt "StarNames|"
+#~ msgid "Leo"
+#~ msgstr "사자자리"
+
+#~ msgctxt "StarNames|"
+#~ msgid "Libra"
+#~ msgstr "천칭자리"
+
+#~ msgctxt "StarNames|"
+#~ msgid "Phoenix"
+#~ msgstr "피닉스"
+
+#~ msgctxt "StarNames|"
+#~ msgid "Pisces"
+#~ msgstr "물고기자리"
+
+#~ msgctxt "StarNames|"
+#~ msgid "Sagittarius"
+#~ msgstr "궁수자리"
+
+#~ msgctxt "StarNames|"
+#~ msgid "Taurus"
+#~ msgstr "황소자리"
+
+#~ msgctxt "StarNames|"
+#~ msgid "Virgo"
+#~ msgstr "처녀자리"
+
+#, fuzzy
+#~| msgid "Marble Virtual Globe"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Marble - Virtual Globe"
+#~ msgstr "Marble 가상 지구본"
+
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Marble"
+#~ msgstr "Marble"
+
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid ""
+#~ "Sorry, unable to open '%1':\n"
+#~ "'%2'"
+#~ msgstr ""
+#~ "죄송합니다. '%1'을(를) 열 수 없습니다:\n"
+#~ "'%2'"
+
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&Export Map..."
+#~ msgstr "지도 내보내기(&E)..."
+
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&Quit"
+#~ msgstr "끝내기(&Q)"
+
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Ctrl+Q"
+#~ msgstr "Ctrl+Q"
+
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&Copy Map"
+#~ msgstr "지도 복사(&C)"
+
+#, fuzzy
+#~| msgctxt "Marble::MainWindow|"
+#~| msgid "&Edit Map"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&Edit Map..."
+#~ msgstr "지도 편집(&E)"
+
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&Record Movie"
+#~ msgstr "녹화 시작(&R)"
+
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Records a movie of the globe"
+#~ msgstr "지구본 동영상 녹화 시작"
+
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Stop recording a movie of the globe"
+#~ msgstr "지구본 동영상 녹화 중지"
+
+#, fuzzy
+#~| msgid "&Configure..."
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&Configure Marble"
+#~ msgstr "설정(&C)..."
+
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "C&opy Coordinates"
+#~ msgstr "좌표 복사(&O)"
+
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Full Screen Mode"
+#~ msgstr "전체 화면 모드"
+
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&Show Status Bar"
+#~ msgstr "상태 표시줄 표시(&S)"
+
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Show Status Bar"
+#~ msgstr "상태 표시줄 표시"
+
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Lock Position"
+#~ msgstr "위치 고정"
+
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&Clouds"
+#~ msgstr "구름(&C)"
+
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&Time Control..."
+#~ msgstr "시간 제어(&T)..."
+
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "S&un Control..."
+#~ msgstr "태양 제어(&U)..."
+
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&Redisplay"
+#~ msgstr "다시 표시(&R)"
+
+#, fuzzy
+#~| msgid "Marble Virtual Globe"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Marble Virtual Globe &Handbook"
+#~ msgstr "Marble 가상 지구본"
+
+#, fuzzy
+#~| msgid "Marble Virtual Globe"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Show the Handbook for Marble Virtual Globe"
+#~ msgstr "Marble 가상 지구본"
+
+#, fuzzy
+#~| msgid "Marble Virtual Globe"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&About Marble Virtual Globe"
+#~ msgstr "Marble 가상 지구본"
+
+#, fuzzy
+#~| msgctxt "Marble::MarbleWidgetPopupMenu|"
+#~| msgid "Add &Bookmark"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Add &Bookmark..."
+#~ msgstr "책갈피 추가(&B)"
+
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&Set Home Location"
+#~ msgstr "집 위치 설정(&S)"
+
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Show &Bookmarks"
+#~ msgstr "책갈피 표시(&B)"
+
+#, fuzzy
+#~| msgctxt "Marble::MainWindow|"
+#~| msgid "&Manage Bookmarks"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&Manage Bookmarks..."
+#~ msgstr "책갈피 관리(&M)"
+
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Manage Bookmarks"
+#~ msgstr "책갈피 관리"
+
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&Create a New Map..."
+#~ msgstr "새 지도 만들기(&C)..."
+
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "A wizard guides you through the creation of your own map theme."
+#~ msgstr "마법사에서 내 지도 테마를 만드는 것을 도와 줍니다."
+
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Show Tile Zoom Level"
+#~ msgstr "타일 크기 단계 표시"
+
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&File"
+#~ msgstr "파일(&F)"
+
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&Edit"
+#~ msgstr "편집(&E)"
+
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&View"
+#~ msgstr "보기(&V)"
+
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&Info Boxes"
+#~ msgstr "정보 상자(&I)"
+
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&Online Services"
+#~ msgstr "온라인 서비스(&O)"
+
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&Bookmarks"
+#~ msgstr "책갈피(&B)"
+
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&Panels"
+#~ msgstr "패널(&P)"
+
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&View Size"
+#~ msgstr "보기 크기(&V)"
+
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&Settings"
+#~ msgstr "설정(&S)"
+
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&Help"
+#~ msgstr "도움말(&H)"
+
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&Home"
+#~ msgstr "홈(&H)"
+
+#, fuzzy
+#~| msgid "Ready"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Ready"
+#~ msgstr "준비"
+
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Export Map"
+#~ msgstr "지도 내보내기"
+
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "An error occurred while trying to save the file.\n"
+#~ msgstr "파일을 저장하는 중 오류가 발생했습니다.\n"
+
+#, fuzzy
+#~| msgid "Marble Virtual Globe"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Marble Virtual Globe %1"
+#~ msgstr "Marble 가상 지구본"
+
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Position: %1"
+#~ msgstr "위치: %1"
+
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Altitude: %1"
+#~ msgstr "고도: %1"
+
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Time: %1"
+#~ msgstr "시간: %1"
+
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "All Supported Files"
+#~ msgstr "모든 지원하는 파일"
+
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Open File"
+#~ msgstr "파일 열기"
+
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Unnamed"
+#~ msgstr "이름 없음"
+
+#, fuzzy
+#~| msgid "Marble Virtual Globe"
+#~ msgctxt "Marble::ControlView|"
+#~ msgid "Marble - Virtual Globe"
+#~ msgstr "Marble 가상 지구본"
+
+#~ msgctxt "Marble::ControlView|"
+#~ msgid "Legend"
+#~ msgstr "범례"
+
+#~ msgctxt "Marble::ControlView|"
+#~ msgid "Routing"
+#~ msgstr "길 찾기"
+
+#, fuzzy
+#~| msgid "Search"
+#~ msgctxt "Marble::ControlView|"
+#~ msgid "Search"
+#~ msgstr "찾기"
+
+#~ msgctxt "Marble::ControlView|"
+#~ msgid "Map View"
+#~ msgstr "지도 보기"
+
+#~ msgctxt "Marble::ControlView|"
+#~ msgid "Files"
+#~ msgstr "파일"
+
+#~ msgctxt "Marble::ControlView|"
+#~ msgid "Hide &All Panels"
+#~ msgstr "모든 패널 숨기기(&A)"
+
+#~ msgctxt "Marble::ControlView|"
+#~ msgid "Show or hide all panels."
+#~ msgstr "모든 패널을 표시하거나 숨깁니다."
+
+#~ msgctxt "Marble::ControlView|"
+#~ msgid "Show &All Panels"
+#~ msgstr "모든 패널 표시(&A)"
+
+#~ msgctxt "Marble::AbstractFloatItem|"
+#~ msgid "&Hide"
+#~ msgstr "숨기기(&H)"
+
+#~ msgctxt "Marble::AbstractFloatItem|"
+#~ msgid "&Configure..."
+#~ msgstr "설정(&C)..."
+
+#~ msgctxt "Marble::AddLinkDialog|"
+#~ msgid "No name specified"
+#~ msgstr "이름을 지정하지 않음"
+
+#~ msgctxt "UiAddLinkDialog|"
+#~ msgid "URL:"
+#~ msgstr "URL:"
+
+#~ msgctxt "UiAddLinkDialog|"
+#~ msgid "Name:"
+#~ msgstr "이름:"
+
+#~ msgctxt "BookmarkManagerDialogPrivate|"
+#~ msgid "Remove Folder"
+#~ msgstr "폴더 삭제"
+
+#~ msgctxt "Marble::BookmarkManagerDialog|"
+#~ msgid "Export Bookmarks"
+#~ msgstr "책갈피 내보내기"
+
+#, fuzzy
+#~| msgid "All Files (*.*)"
+#~ msgctxt "Marble::BookmarkManagerDialog|"
+#~ msgid "KML files (*.kml)"
+#~ msgstr "모든 파일 (*.*)"
+
+#, fuzzy
+#~| msgid "Export Map"
+#~ msgctxt "Marble::BookmarkManagerDialog|"
+#~ msgid "Bookmark Export"
+#~ msgstr "지도 내보내기"
+
+#~ msgctxt "Marble::BookmarkManagerDialog|"
+#~ msgid "Import Bookmarks"
+#~ msgstr "책갈피 가져오기"
+
+#, fuzzy
+#~| msgid "All Files (*.*)"
+#~ msgctxt "Marble::BookmarkManagerDialog|"
+#~ msgid "KML Files (*.kml)"
+#~ msgstr "모든 파일 (*.*)"
+
+#, fuzzy
+#~| msgid "Export Map"
+#~ msgctxt "Marble::BookmarkManagerDialog|"
+#~ msgid "Bookmark Import"
+#~ msgstr "지도 내보내기"
+
+#, fuzzy
+#~| msgid "Export Map"
+#~ msgctxt "BookmarkManagerDialogPrivate|"
+#~ msgid "Imported bookmark"
+#~ msgstr "지도 내보내기"
+
+#, fuzzy
+#~| msgid "Export Map"
+#~ msgctxt "BookmarkManagerDialogPrivate|"
+#~ msgid "Existing bookmark"
+#~ msgstr "지도 내보내기"
+
+#~ msgctxt "BookmarkManagerDialogPrivate|"
+#~ msgid "Replace All"
+#~ msgstr "모두 바꾸기"
+
+#~ msgctxt "BookmarkManagerDialogPrivate|"
+#~ msgid "Skip"
+#~ msgstr "건너뛰기"
+
+#~ msgctxt "BookmarkManagerDialogPrivate|"
+#~ msgid "Skip All"
+#~ msgstr "모두 건너뛰기"
+
+#~ msgctxt "UiBookmarkManagerDialog|"
+#~ msgid "Bookmark Manager"
+#~ msgstr "책갈피 관리자"
+
+#~ msgctxt "UiBookmarkManagerDialog|"
+#~ msgid "Import Bookmarks..."
+#~ msgstr "책갈피 가져오기..."
+
+#~ msgctxt "UiBookmarkManagerDialog|"
+#~ msgid "Export Bookmarks..."
+#~ msgstr "책갈피 내보내기..."
+
+#, fuzzy
+#~| msgid "Delete"
+#~ msgctxt "UiBookmarkManagerDialog|"
+#~ msgid "Delete"
+#~ msgstr "삭제"
+
+#~ msgctxt "UiBookmarkManagerDialog|"
+#~ msgid "Bookmarks"
+#~ msgstr "책갈피"
+
+#~ msgctxt "Marble::CelestialSortFilterProxyModel|"
+#~ msgid "Moon"
+#~ msgstr "달"
+
+#~ msgctxt "Marble::BookmarkSyncManager|"
+#~ msgid "Bookmarks"
+#~ msgstr "책갈피"
+
+#~ msgctxt "Marble::ConflictDialog|"
+#~ msgid "Changed"
+#~ msgstr "변경됨"
+
+#~ msgctxt "Marble::ConflictDialog|"
+#~ msgid "Deleted"
+#~ msgstr "삭제됨"
+
+#, fuzzy
+#~| msgid "Open File"
+#~ msgctxt "Marble::RouteItemDelegate|"
+#~ msgid "Open"
+#~ msgstr "파일 열기"
+
+#~ msgctxt "QObject|"
+#~ msgid "km/h"
+#~ msgstr "km/h"
+
+#~ msgctxt "QObject|"
+#~ msgid "m"
+#~ msgstr "m"
+
+#~ msgctxt "QObject|"
+#~ msgid "km"
+#~ msgstr "km"
+
+#~ msgctxt "QObject|"
+#~ msgid "ft"
+#~ msgstr "ft"
+
+#~ msgctxt "QObject|"
+#~ msgid "kt"
+#~ msgstr "kt"
+
+#~ msgctxt "QObject|"
+#~ msgid "nm"
+#~ msgstr "nm"
+
+#, fuzzy
+#~| msgid "All Files (*.*)"
+#~ msgctxt "QObject|"
+#~ msgid "KML File (*.kml)"
+#~ msgstr "모든 파일 (*.*)"
+
+#, fuzzy
+#~| msgid "Navigation"
+#~ msgctxt "DataMigrationWidget|"
+#~ msgid "Data Migration"
+#~ msgstr "탐색"
+
+#~ msgctxt "Marble::Placemark|"
+#~ msgid "LPG"
+#~ msgstr "LPG"
+
+#~ msgctxt "Marble::Placemark|"
+#~ msgid "Batteries"
+#~ msgstr "배터리"
+
+#~ msgctxt "Marble::Placemark|"
+#~ msgid "Clothes"
+#~ msgstr "의류 상점"
+
+#~ msgctxt "Marble::Placemark|An active volcano"
+#~ msgid "Active"
+#~ msgstr "활성"
+
+#~ msgctxt "Marble::Placemark|"
+#~ msgid "Hospital"
+#~ msgstr "병원"
+
+#~ msgctxt "Marble::Placemark|"
+#~ msgid "%1 minutes"
+#~ msgstr "%1분"
+
+#~ msgctxt "Marble::Placemark|Entry station of an aerialway"
+#~ msgid "Entry"
+#~ msgstr "항목"
+
+#, fuzzy
+#~| msgid "Navigation"
+#~ msgctxt "Marble::Placemark|"
+#~ msgid "Elevation: %1 m"
+#~ msgstr "탐색"
+
+#~ msgctxt "Marble::Placemark|Positive floor level"
+#~ msgid "Floor %1"
+#~ msgstr "%1층"
+
+#~ msgctxt "Marble::DownloadRegionDialog|"
+#~ msgid "Selection Method"
+#~ msgstr "선택 방법"
+
+#, fuzzy
+#~| msgctxt "ExternalEditor|"
+#~| msgid "Editor Details"
+#~ msgctxt "Marble::DownloadRegionDialog|"
+#~ msgid "Vector tiles"
+#~ msgstr "편집기 자세한 정보"
+
+#~ msgctxt "UiEditBookmarkDialog|"
+#~ msgid "Edit Bookmark"
+#~ msgstr "책갈피 편집"
+
+#, fuzzy
+#~| msgctxt "UiEditBookmarkDialog|"
+#~| msgid "&Description"
+#~ msgctxt "UiEditBookmarkDialog|"
+#~ msgid "&Description:"
+#~ msgstr "설명(&D)"
+
+#, fuzzy
+#~| msgctxt "UiEditBookmarkDialog|"
+#~| msgid "&Folder"
+#~ msgctxt "UiEditBookmarkDialog|"
+#~ msgid "&Folder:"
+#~ msgstr "폴더(&F)"
+
+#, fuzzy
+#~| msgctxt "UiEditBookmarkDialog|"
+#~| msgid "&Folder"
+#~ msgctxt "UiEditBookmarkDialog|"
+#~ msgid "&Add Folder..."
+#~ msgstr "폴더(&F)"
+
+#~ msgctxt "Marble::EditPlacemarkDialog|"
+#~ msgid "Relations"
+#~ msgstr "관계"
+
+#~ msgctxt "Marble::EditPlacemarkDialog|"
+#~ msgid "Elevation"
+#~ msgstr "고도"
+
+#~ msgctxt "Marble::EditPlacemarkDialog|"
+#~ msgid "No name specified"
+#~ msgstr "이름을 지정하지 않음"
+
+#~ msgctxt "UiEditPlacemarkDialog|"
+#~ msgid "Description"
+#~ msgstr "설명"
+
+#~ msgctxt "UiEditPlacemarkDialog|"
+#~ msgid "Scale:"
+#~ msgstr "크기 조정:"
+
+#~ msgctxt "UiEditPlacemarkDialog|"
+#~ msgid "Icon"
+#~ msgstr "아이콘"
+
+#~ msgctxt "UiEditPlacemarkDialog|"
+#~ msgid "Bold"
+#~ msgstr "굵게"
+
+#~ msgctxt "UiEditPlacemarkDialog|"
+#~ msgid "Italics"
+#~ msgstr "이탤릭"
+
+#, fuzzy
+#~| msgid "Navigation"
+#~ msgctxt "ElevationWidget|"
+#~ msgid "Elevation:"
+#~ msgstr "탐색"
+
+#, fuzzy
+#~| msgid "Properties"
+#~ msgctxt "QObject|"
+#~ msgid "View Properties"
+#~ msgstr "속성"
+
+#~ msgctxt "FileViewWidget|"
+#~ msgid "File View"
+#~ msgstr "파일 보기"
+
+#~ msgctxt "FileViewWidget|"
+#~ msgid "&Save"
+#~ msgstr "저장(&S)"
+
+#~ msgctxt "FileViewWidget|"
+#~ msgid "&Close"
+#~ msgstr "닫기(&C)"
+
+#~ msgctxt "Marble::FlyToEditWidget|"
+#~ msgid "Bounce"
+#~ msgstr "튕김"
+
+#~ msgctxt "Marble::FormattedTextWidget|"
+#~ msgid "Choose image"
+#~ msgstr "그림 선택"
+
+#~ msgctxt "FormattedTextWidget|"
+#~ msgid "toolBar"
+#~ msgstr "도구 모음"
+
+#~ msgctxt "FormattedTextWidget|"
+#~ msgid "Bold"
+#~ msgstr "굵게"
+
+#~ msgctxt "FormattedTextWidget|"
+#~ msgid "Italics"
+#~ msgstr "이탤릭"
+
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Terrain"
+#~ msgstr "지형"
+
+#, fuzzy
+#~| msgid "Search"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Sea"
+#~ msgstr "찾기"
+
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "City"
+#~ msgstr "도시"
+
+#, fuzzy
+#~| msgid "Navigation"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Nation"
+#~ msgstr "탐색"
+
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Ocean"
+#~ msgstr "해안"
+
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Coordinate"
+#~ msgstr "동등 어구"
+
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Bookmark"
+#~ msgstr "책갈피"
+
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Hamlet"
+#~ msgstr "Hamlet"
+
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Locality"
+#~ msgstr "자치구"
+
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Elevator"
+#~ msgstr "엘리베이터"
+
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Steps"
+#~ msgstr "단계"
+
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Unknown Road"
+#~ msgstr "알 수 없는 도로"
+
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Hostel"
+#~ msgstr "호스텔"
+
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Hotel"
+#~ msgstr "호텔"
+
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Guest House"
+#~ msgstr "게스트 하우스"
+
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "College"
+#~ msgstr "대학"
+
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "School"
+#~ msgstr "학교"
+
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Cafe"
+#~ msgstr "카페"
+
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Fast Food"
+#~ msgstr "패스트 푸드"
+
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Pub"
+#~ msgstr "술집"
+
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Restaurant"
+#~ msgstr "음식점"
+
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Hospital"
+#~ msgstr "병원"
+
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Pharmacy"
+#~ msgstr "약국"
+
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "ATM"
+#~ msgstr "ATM"
+
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Bank"
+#~ msgstr "은행"
+
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Fountain"
+#~ msgstr "분수대"
+
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Court House"
+#~ msgstr "법원"
+
+#, fuzzy
+#~| msgid "Navigation"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Fire Station"
+#~ msgstr "탐색"
+
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Police"
+#~ msgstr "경찰서"
+
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Post Box"
+#~ msgstr "우체통"
+
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Post Office"
+#~ msgstr "우체국"
+
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Telephone"
+#~ msgstr "전화"
+
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Toilets"
+#~ msgstr "화장실"
+
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Town Hall"
+#~ msgstr "마을 회관"
+
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Drinking Water"
+#~ msgstr "음수대"
+
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Charging Station"
+#~ msgstr "충전소"
+
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Social Facility"
+#~ msgstr "사회 센터"
+
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Wall"
+#~ msgstr "벽"
+
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Peak"
+#~ msgstr "극"
+
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Tree"
+#~ msgstr "트리"
+
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Beverages"
+#~ msgstr "음료 가게"
+
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Supermarket"
+#~ msgstr "슈퍼마켓"
+
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Bakery"
+#~ msgstr "제과점"
+
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Butcher"
+#~ msgstr "정육점"
+
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Confectionery"
+#~ msgstr "과자 가게"
+
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Greengrocer"
+#~ msgstr "청과상"
+
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Department Store"
+#~ msgstr "백화점"
+
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Variety Store"
+#~ msgstr "잡화점"
+
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Chemist"
+#~ msgstr "약국"
+
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Cosmetics"
+#~ msgstr "화장품 상점"
+
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Hairdresser"
+#~ msgstr "미용실"
+
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Optician"
+#~ msgstr "안경점"
+
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Perfumery"
+#~ msgstr "향수 판매점"
+
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Hardware Store"
+#~ msgstr "철물점"
+
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Florist"
+#~ msgstr "꽃집"
+
+#, fuzzy
+#~| msgid "Export Map"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Bookshop"
+#~ msgstr "지도 내보내기"
+
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Gift Shop"
+#~ msgstr "선물 가게"
+
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Stationery"
+#~ msgstr "문구점"
+
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Laundry"
+#~ msgstr "세탁소"
+
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Travel Agency"
+#~ msgstr "여행사"
+
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Deli"
+#~ msgstr "델리카트슨"
+
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Shop"
+#~ msgstr "가게"
+
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Bridge"
+#~ msgstr "브리지"
+
+#, fuzzy
+#~| msgid "Navigation"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Communications Tower"
+#~ msgstr "탐색"
+
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Tourist Attraction"
+#~ msgstr "관광 지구"
+
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Museum"
+#~ msgstr "박물관"
+
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Theatre"
+#~ msgstr "극장"
+
+#, fuzzy
+#~| msgid "Properties"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "View Point"
+#~ msgstr "속성"
+
+#, fuzzy
+#~| msgid "Export Map"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Airport Gate"
+#~ msgstr "지도 내보내기"
+
+#, fuzzy
+#~| msgid "Export Map"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Airport Apron"
+#~ msgstr "지도 내보내기"
+
+#, fuzzy
+#~| msgid "Export Map"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Airport Terminal"
+#~ msgstr "지도 내보내기"
+
+#, fuzzy
+#~| msgid "Navigation"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Bus Station"
+#~ msgstr "탐색"
+
+#, fuzzy
+#~| msgid "Navigation"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Bus Stop"
+#~ msgstr "탐색"
+
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Car Sharing"
+#~ msgstr "카 셰어링"
+
+#, fuzzy
+#~| msgid "Navigation"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Gas Station"
+#~ msgstr "탐색"
+
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Platform"
+#~ msgstr "플랫폼"
+
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Bicycle Rental"
+#~ msgstr "자전거 대여점"
+
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Car Rental"
+#~ msgstr "자동차 대여점"
+
+#, fuzzy
+#~| msgid "Navigation"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Train Station"
+#~ msgstr "탐색"
+
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Bicycle Parking"
+#~ msgstr "자전거 주차"
+
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Motorcycle Parking"
+#~ msgstr "오토바이 주차"
+
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Christian"
+#~ msgstr "기독교"
+
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Jewish"
+#~ msgstr "유대교"
+
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Commercial"
+#~ msgstr "상업적"
+
+#, fuzzy
+#~| msgid "Navigation"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Construction"
+#~ msgstr "탐색"
+
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Industrial"
+#~ msgstr "인더스트리얼"
+
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Landfill"
+#~ msgstr "매립"
+
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Military"
+#~ msgstr "군사"
+
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Railway"
+#~ msgstr "철도"
+
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Retail"
+#~ msgstr "유통"
+
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Light Rail"
+#~ msgstr "경전철"
+
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Subway"
+#~ msgstr "도시 철도"
+
+#, fuzzy
+#~| msgid "Navigation"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Railway Construction"
+#~ msgstr "탐색"
+
+#, fuzzy
+#~| msgid "Navigation"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Aerialway Station"
+#~ msgstr "탐색"
+
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Stream"
+#~ msgstr "스트림"
+
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "River"
+#~ msgstr "강"
+
+#, fuzzy
+#~| msgid "Navigation"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Railway Crossing"
+#~ msgstr "탐색"
+
+#, fuzzy
+#~| msgid "Open File"
+#~ msgctxt "GeoLineStringGraphicsItem|"
+#~ msgid "Ferry Route"
+#~ msgstr "파일 열기"
+
+#~ msgctxt "GeoLineStringGraphicsItem|"
+#~ msgid "Subway"
+#~ msgstr "도시 철도"
+
+#, fuzzy
+#~| msgid "Open File"
+#~ msgctxt "GeoLineStringGraphicsItem|"
+#~ msgid "Bicycle Route"
+#~ msgstr "파일 열기"
+
+#, fuzzy
+#~| msgid "Routing"
+#~ msgctxt "GeoLineStringGraphicsItem|"
+#~ msgid "Mountainbike Route"
+#~ msgstr "길 찾기"
+
+#, fuzzy
+#~| msgid "Open File"
+#~ msgctxt "GeoLineStringGraphicsItem|"
+#~ msgid "Walking Route"
+#~ msgstr "파일 열기"
+
+#, fuzzy
+#~| msgid "Open File"
+#~ msgctxt "GeoLineStringGraphicsItem|"
+#~ msgid "Hiking Route"
+#~ msgstr "파일 열기"
+
+#~ msgctxt "Marble::GeoDataTreeModel|"
+#~ msgid "Playlist"
+#~ msgstr "재생 목록"
+
+#, fuzzy
+#~| msgid "Search"
+#~ msgctxt "GoTo|"
+#~ msgid "Search"
+#~ msgstr "찾기"
+
+#~ msgctxt "LegendWidget|"
+#~ msgid "Legend"
+#~ msgstr "범례"
+
+#~ msgctxt "LegendWidget|"
+#~ msgid "about:blank"
+#~ msgstr "about:blank"
+
+#~ msgctxt "Marble::MapItemDelegate|"
+#~ msgid "Install"
+#~ msgstr "설치"
+
+#~ msgctxt "Marble::MapItemDelegate|"
+#~ msgid "Remove"
+#~ msgstr "삭제"
+
+#~ msgctxt "Marble::MapItemDelegate|"
+#~ msgid "Cancel"
+#~ msgstr "취소"
+
+#~ msgctxt "Marble::MapItemDelegate|"
+#~ msgid "Upgrade"
+#~ msgstr "업그레이드"
+
+#, fuzzy
+#~| msgid "Open File"
+#~ msgctxt "Marble::MapItemDelegate|"
+#~ msgid "Open"
+#~ msgstr "파일 열기"
+
+#~ msgctxt "QObject|"
+#~ msgid "Name"
+#~ msgstr "이름"
+
+#~ msgctxt "Marble::MapViewWidget|"
+#~ msgid "Globe View"
+#~ msgstr "지구본 보기"
+
+#~ msgctxt "Marble::MapViewWidget|"
+#~ msgid "Flat View"
+#~ msgstr "평면 보기"
+
+#~ msgctxt "Marble::MapViewWidget|"
+#~ msgid "&Show Large Icons"
+#~ msgstr "큰 아이콘 표시(&S)"
+
+#~ msgctxt "Marble::MapViewWidget|"
+#~ msgid "&Favorite"
+#~ msgstr "책갈피(&F)"
+
+#~ msgctxt "Marble::MapViewWidget|"
+#~ msgid "&Create a New Map..."
+#~ msgstr "새 지도 만들기(&C)..."
+
+#~ msgctxt "Marble::MapViewWidget|"
+#~ msgid "Marble"
+#~ msgstr "Marble"
+
+#~ msgctxt "MapViewWidget|"
+#~ msgid "Map View"
+#~ msgstr "지도 보기"
+
+#~ msgctxt "MapViewWidget|"
+#~ msgid "&Projection"
+#~ msgstr "투영법(&P)"
+
+#~ msgctxt "MapViewWidget|"
+#~ msgid "Globe"
+#~ msgstr "지구본"
+
+#~ msgctxt "MapViewWidget|"
+#~ msgid "Gnomonic"
+#~ msgstr "심사도법"
+
+#~ msgctxt "MapViewWidget|"
+#~ msgid "&Theme"
+#~ msgstr "테마(&T)"
+
+#, fuzzy
+#~| msgctxt "MapViewWidget|"
+#~| msgid "&Projection"
+#~ msgctxt "Marble::MapWizard|"
+#~ msgid "Tile Projection:"
+#~ msgstr "투영법(&P)"
+
+#, fuzzy
+#~| msgctxt "Marble::ControlView|"
+#~| msgid "Legend"
+#~ msgctxt "Marble::MapWizard|"
+#~ msgid "Legend Image"
+#~ msgstr "범례"
+
+#, fuzzy
+#~| msgctxt "NavigationInfoBar|"
+#~| msgid "%1 m"
+#~ msgctxt "Marble::MapWizard|"
+#~ msgid "%1"
+#~ msgstr "%1 m"
+
+#~ msgctxt "Marble::MapWizard|"
+#~ msgid "Archiving failed"
+#~ msgstr "보관 작업 실패"
+
+#, fuzzy
+#~| msgctxt "AprsConfigWidget|"
+#~| msgid "Server"
+#~ msgctxt "Marble::MapWizard|"
+#~ msgid "WMS Server"
+#~ msgstr "서버"
+
+#, fuzzy
+#~| msgctxt "AprsConfigWidget|"
+#~| msgid "Server"
+#~ msgctxt "Marble::MapWizard|"
+#~ msgid "WMTS Server"
+#~ msgstr "서버"
+
+#~ msgctxt "MapWizard|"
+#~ msgid "URL:"
+#~ msgstr "URL:"
+
+#~ msgctxt "MapWizard|"
+#~ msgid "https://"
+#~ msgstr "https://"
+
+#, fuzzy
+#~| msgctxt "MarbleCloudSyncSettingsWidget|"
+#~| msgid "Server:"
+#~ msgctxt "MapWizard|"
+#~ msgid "Wms-Service:"
+#~ msgstr "서버:"
+
+#, fuzzy
+#~| msgid "Search"
+#~ msgctxt "MapWizard|"
+#~ msgid "Search:"
+#~ msgstr "찾기"
+
+#, fuzzy
+#~| msgctxt "MapViewWidget|"
+#~| msgid "&Projection"
+#~ msgctxt "MapWizard|"
+#~ msgid "Tile Projection:"
+#~ msgstr "투영법(&P)"
+
+#, fuzzy
+#~| msgctxt "DGML|"
+#~| msgid "OpenStreetMap"
+#~ msgctxt "MapWizard|"
+#~ msgid "OpenStreetMap"
+#~ msgstr "OpenStreetMap"
+
+#, fuzzy
+#~| msgctxt "Marble::AnnotatePlugin|"
+#~| msgid "Select Node"
+#~ msgctxt "MapWizard|"
+#~ msgid "Select Color"
+#~ msgstr "노드 선택"
+
+#~ msgctxt "MapWizard|"
+#~ msgid "Description:"
+#~ msgstr "설명:"
+
+#, fuzzy
+#~| msgid "&Configure..."
+#~ msgctxt "MapWizard|"
+#~ msgid "Change..."
+#~ msgstr "설정(&C)..."
+
+#~ msgctxt "QObject|"
+#~ msgid "Marble Virtual Globe"
+#~ msgstr "Marble 가상 지구본"
+
+#~ msgctxt "MarbleAboutDialog|"
+#~ msgid "A&uthors"
+#~ msgstr "작성자(&U)"
+
+#~ msgctxt "MarbleCacheSettingsWidget|"
+#~ msgid " MB"
+#~ msgstr " MB"
+
+#~ msgctxt "MarbleCacheSettingsWidget|"
+#~ msgid "Cl&ear"
+#~ msgstr "비우기(&E)"
+
+#~ msgctxt "MarbleCacheSettingsWidget|"
+#~ msgid "&Proxy:"
+#~ msgstr "프록시(&P):"
+
+#~ msgctxt "MarbleCacheSettingsWidget|"
+#~ msgid "P&ort:"
+#~ msgstr "포트(&O):"
+
+#~ msgctxt "MarbleCacheSettingsWidget|"
+#~ msgid "&Password:"
+#~ msgstr "암호(&P):"
+
+#~ msgctxt "MarbleCloudSyncSettingsWidget|"
+#~ msgid "Server:"
+#~ msgstr "서버:"
+
+#~ msgctxt "MarbleCloudSyncSettingsWidget|"
+#~ msgid "Username:"
+#~ msgstr "사용자 이름:"
+
+#~ msgctxt "MarbleCloudSyncSettingsWidget|"
+#~ msgid "Password:"
+#~ msgstr "암호:"
+
+#~ msgctxt "MarbleCloudSyncSettingsWidget|"
+#~ msgid "Test Login"
+#~ msgstr "로그인 시험"
+
+#~ msgctxt "Marble|"
+#~ msgid "not available"
+#~ msgstr "사용할 수 없음"
+
+#~ msgctxt "QObject|means meter"
+#~ msgid "m"
+#~ msgstr "m"
+
+#~ msgctxt "QObject|means kilometers"
+#~ msgid "km"
+#~ msgstr "km"
+
+#~ msgctxt "QObject|means centimeters"
+#~ msgid "cm"
+#~ msgstr "cm"
+
+#~ msgctxt "QObject|means feet"
+#~ msgid "ft"
+#~ msgstr "ft"
+
+#~ msgctxt "QObject|means yards"
+#~ msgid "yd"
+#~ msgstr "yd"
+
+#~ msgctxt "QObject|means miles"
+#~ msgid "mi"
+#~ msgstr "mi"
+
+#~ msgctxt "QObject|means nautical miles"
+#~ msgid "nm"
+#~ msgstr "nm"
+
+#, fuzzy
+#~| msgctxt "Marble::MainWindow|"
+#~| msgid "&Set Home Location"
+#~ msgctxt "MarbleNavigationSettingsWidget|"
+#~ msgid "&Inertial globe rotation"
+#~ msgstr "집 위치 설정(&S)"
+
+#~ msgctxt "MarbleNavigationSettingsWidget|"
+#~ msgid "Show Home Location"
+#~ msgstr "집 위치 표시"
+
+#~ msgctxt "MarbleNavigator|"
+#~ msgid "Reset View"
+#~ msgstr "보기 초기화"
+
+#~ msgctxt "MarbleNavigator|"
+#~ msgid "Zoom In"
+#~ msgstr "확대"
+
+#~ msgctxt "MarbleNavigator|"
+#~ msgid "Zoom Out"
+#~ msgstr "축소"
+
+#, fuzzy
+#~| msgid "Plugins"
+#~ msgctxt "MarblePluginSettingsWidget|"
+#~ msgid "P&lugins"
+#~ msgstr "플러그인"
+
+#~ msgctxt "MarbleTimeSettingsWidget|"
+#~ msgid "Time Zone"
+#~ msgstr "시간대"
+
+#~ msgctxt "MarbleTimeSettingsWidget|"
+#~ msgid "UTC"
+#~ msgstr "UTC"
+
+#~ msgctxt "MarbleViewSettingsWidget|"
+#~ msgid "&Distance:"
+#~ msgstr "거리(&D):"
+
+#~ msgctxt "MarbleViewSettingsWidget|"
+#~ msgid "An&gle:"
+#~ msgstr "각도(&G):"
+
+#~ msgctxt "MarbleViewSettingsWidget|"
+#~ msgid "High Quality"
+#~ msgstr "고품질"
+
+#~ msgctxt "MarbleWebView|"
+#~ msgid "Copy"
+#~ msgstr "복사"
+
+#~ msgctxt "Marble::MarbleWidgetPopupMenu|"
+#~ msgid "Add &Bookmark"
+#~ msgstr "책갈피 추가(&B)"
+
+#~ msgctxt "Marble::MarbleWidgetPopupMenu|"
+#~ msgid "&Address Details"
+#~ msgstr "주소 정보(&A)"
+
+#~ msgctxt "Marble::MarbleWidgetPopupMenu|"
+#~ msgid "No description available."
+#~ msgstr "설명이 없습니다."
+
+#~ msgctxt "Marble::MarbleWidgetPopupMenu|"
+#~ msgid "City"
+#~ msgstr "도시"
+
+#~ msgctxt "Marble::MarbleWidgetPopupMenu|"
+#~ msgid "&Info Boxes"
+#~ msgstr "정보 상자(&I)"
+
+#~ msgctxt "Marble::MarbleWidgetPopupMenu|"
+#~ msgid "Address Details"
+#~ msgstr "주소 정보"
+
+#~ msgctxt "Marble::MovieCaptureDialog|Start recording a movie"
+#~ msgid "&Start"
+#~ msgstr "시작(&S)"
+
+#, fuzzy
+#~| msgid "Filename is not valid"
+#~ msgctxt "Marble::MovieCaptureDialog|"
+#~ msgid "Filename is not valid"
+#~ msgstr "파일 이름이 올바르지 않음"
+
+#~ msgctxt "MovieCaptureDialog|"
+#~ msgid "Open..."
+#~ msgstr "열기..."
+
+#~ msgctxt "Marble::OsmRelationEditorDialog|"
+#~ msgid "Name"
+#~ msgstr "이름"
+
+#~ msgctxt "Marble::OsmRelationEditorDialog|"
+#~ msgid "No name specified"
+#~ msgstr "이름을 지정하지 않음"
+
+#~ msgctxt "Marble::OsmRelationManagerWidget|"
+#~ msgid "Remove"
+#~ msgstr "삭제"
+
+#~ msgctxt "OsmRelationManagerWidgetPrivate|"
+#~ msgid "Name"
+#~ msgstr "이름"
+
+#~ msgctxt "Marble::OsmTagEditorWidget|"
+#~ msgid "value"
+#~ msgstr "값"
+
+#~ msgctxt "OsmTagEditorWidgetPrivate|"
+#~ msgid "Key"
+#~ msgstr "키"
+
+#~ msgctxt "QObject|"
+#~ msgid "value"
+#~ msgstr "값"
+
+#~ msgctxt "QObject|"
+#~ msgid "Open File"
+#~ msgstr "파일 열기"
+
+#, fuzzy
+#~| msgid "All Files (*.*)"
+#~ msgctxt "QObject|"
+#~ msgid "All Supported Files (*.png)"
+#~ msgstr "모든 파일 (*.*)"
+
+#~ msgctxt "PlacemarkEditHeaderPrivate|"
+#~ msgid "Browse..."
+#~ msgstr "찾아보기..."
+
+#~ msgctxt "PlacemarkEditHeaderPrivate|"
+#~ msgid "Name:"
+#~ msgstr "이름:"
+
+#~ msgctxt "PlacemarkEditHeaderPrivate|"
+#~ msgid "ID:"
+#~ msgstr "ID:"
+
+#~ msgctxt "QObject|the planet"
+#~ msgid "Venus"
+#~ msgstr "금성"
+
+#~ msgctxt "QObject|the planet"
+#~ msgid "Earth"
+#~ msgstr "지구"
+
+#~ msgctxt "QObject|the planet"
+#~ msgid "Mars"
+#~ msgstr "화성"
+
+#~ msgctxt "QObject|the planet"
+#~ msgid "Jupiter"
+#~ msgstr "목성"
+
+#~ msgctxt "QObject|the planet"
+#~ msgid "Saturn"
+#~ msgstr "토성"
+
+#~ msgctxt "QObject|the planet"
+#~ msgid "Uranus"
+#~ msgstr "천왕성"
+
+#~ msgctxt "QObject|the planet"
+#~ msgid "Neptune"
+#~ msgstr "해왕성"
+
+#~ msgctxt "QObject|the planet"
+#~ msgid "Pluto"
+#~ msgstr "명왕성"
+
+#~ msgctxt "QObject|the earth's moon"
+#~ msgid "Moon"
+#~ msgstr "달"
+
+#~ msgctxt "QObject|"
+#~ msgid "Sky"
+#~ msgstr "천구"
+
+#~ msgctxt "QObject|a planet without data"
+#~ msgid "Unknown Planet"
+#~ msgstr "알 수 없는 행성"
+
+#~ msgctxt "Marble::PluginAboutDialog|"
+#~ msgid "Version %1"
+#~ msgstr "버전 %1"
+
+#~ msgctxt "Marble::PluginAboutDialog|"
+#~ msgid "Data"
+#~ msgstr "데이터"
+
+#~ msgctxt "PluginAuthor|"
+#~ msgid "Developer"
+#~ msgstr "개발자"
+
+#, fuzzy
+#~| msgid "&Configure..."
+#~ msgctxt "Marble::PluginItemDelegate|"
+#~ msgid "Configure"
+#~ msgstr "설정(&C)..."
+
+#~ msgctxt "QObject|"
+#~ msgid "Unknown error"
+#~ msgstr "알 수 없는 오류"
+
+#~ msgctxt "PrintOptions|"
+#~ msgid "Marble"
+#~ msgstr "Marble"
+
+#~ msgctxt "PrintOptions|"
+#~ msgid "Legend"
+#~ msgstr "범례"
+
+#, fuzzy
+#~| msgid "Routing"
+#~ msgctxt "PrintOptions|"
+#~ msgid "Route"
+#~ msgstr "길 찾기"
+
+#~ msgctxt "PrintOptions|"
+#~ msgid "Footer"
+#~ msgstr "바닥글"
+
+#~ msgctxt "QObject|"
+#~ msgid "Gnomonic"
+#~ msgstr "심사도법"
+
+#~ msgctxt "QObject|"
+#~ msgid "Globe"
+#~ msgstr "지구본"
+
+#~ msgctxt "Marble::QtMarbleConfigDialog|"
+#~ msgid "View"
+#~ msgstr "보기"
+
+#~ msgctxt "Marble::QtMarbleConfigDialog|"
+#~ msgid "Navigation"
+#~ msgstr "탐색"
+
+#~ msgctxt "Marble::QtMarbleConfigDialog|"
+#~ msgid "Date and Time"
+#~ msgstr "날짜와 시간"
+
+#~ msgctxt "Marble::QtMarbleConfigDialog|"
+#~ msgid "Routing"
+#~ msgstr "길 찾기"
+
+#~ msgctxt "Marble::QtMarbleConfigDialog|"
+#~ msgid "Plugins"
+#~ msgstr "플러그인"
+
+#~ msgctxt "Marble::QtMarbleConfigDialog|"
+#~ msgid "Synchronization"
+#~ msgstr "동기화"
+
+#~ msgctxt "QObject|"
+#~ msgid "&Home"
+#~ msgstr "홈(&H)"
+
+#, fuzzy
+#~| msgid "Export Map"
+#~ msgctxt "QObject|"
+#~ msgid "&Export Route..."
+#~ msgstr "지도 내보내기"
+
+#, fuzzy
+#~| msgid "Export Map"
+#~ msgctxt "Marble::RoutingLayer|"
+#~ msgid "Export Route"
+#~ msgstr "지도 내보내기"
+
+#~ msgctxt "Marble::RoutingManager|"
+#~ msgid "Show again"
+#~ msgstr "다시 표시"
+
+#~ msgctxt "RoutingProfileSettingsDialog|"
+#~ msgid "Name:"
+#~ msgstr "이름:"
+
+#, fuzzy
+#~| msgid "&Configure..."
+#~ msgctxt "RoutingProfileSettingsDialog|"
+#~ msgid "Configure"
+#~ msgstr "설정(&C)..."
+
+#~ msgctxt "Marble::RoutingProfilesWidget|"
+#~ msgid "New Profile"
+#~ msgstr "새 프로필"
+
+#, fuzzy
+#~| msgctxt "RoutingSettingsWidget|"
+#~| msgid "&Add"
+#~ msgctxt "RoutingSettingsWidget|"
+#~ msgid "&Add..."
+#~ msgstr "추가(&A)"
+
+#, fuzzy
+#~| msgctxt "Marble::AbstractFloatItem|"
+#~| msgid "&Configure..."
+#~ msgctxt "RoutingSettingsWidget|"
+#~ msgid "&Configure..."
+#~ msgstr "설정(&C)..."
+
+#~ msgctxt "RoutingSettingsWidget|"
+#~ msgid "&Remove"
+#~ msgstr "삭제(&R)"
+
+#~ msgctxt "RoutingSettingsWidget|"
+#~ msgid "Move &Up"
+#~ msgstr "위로 이동(&U)"
+
+#~ msgctxt "RoutingSettingsWidget|"
+#~ msgid "Move &Down"
+#~ msgstr "아래로 이동(&D)"
+
+#, fuzzy
+#~| msgid "Search"
+#~ msgctxt "QObject|"
+#~ msgid "Search"
+#~ msgstr "찾기"
+
+#, fuzzy
+#~| msgid "Open File"
+#~ msgctxt "QObject|"
+#~ msgid "Open Route"
+#~ msgstr "파일 열기"
+
+#~ msgctxt "QObject|"
+#~ msgid "Settings"
+#~ msgstr "설정"
+
+#, fuzzy
+#~| msgid "Open File"
+#~ msgctxt "Marble::RoutingWidget|"
+#~ msgid "Open Route"
+#~ msgstr "파일 열기"
+
+#, fuzzy
+#~| msgid "All Files (*.*)"
+#~ msgctxt "Marble::RoutingWidget|"
+#~ msgid "KML Files (*.kml)"
+#~ msgstr "모든 파일 (*.*)"
+
+#, fuzzy
+#~| msgid "All Files (*.*)"
+#~ msgctxt "Marble::RoutingWidget|"
+#~ msgid "KML files (*.kml)"
+#~ msgstr "모든 파일 (*.*)"
+
+#~ msgctxt "RoutingWidget|"
+#~ msgid "Bicycle"
+#~ msgstr "자전거 가게"
+
+#, fuzzy
+#~| msgid "Search"
+#~ msgctxt "RoutingWidget|"
+#~ msgid "Search"
+#~ msgstr "찾기"
+
+#~ msgctxt "RoutingWidget|"
+#~ msgid "Show Details"
+#~ msgstr "자세한 정보 표시"
+
+#~ msgctxt "Marble::RoutingRunner|"
+#~ msgid "m"
+#~ msgstr "m"
+
+#~ msgctxt "Marble::RoutingRunner|"
+#~ msgid "mi"
+#~ msgstr "mi"
+
+#~ msgctxt "Marble::RoutingRunner|"
+#~ msgid "ft"
+#~ msgstr "ft"
+
+#~ msgctxt "Marble::RoutingRunner|"
+#~ msgid "km"
+#~ msgstr "km"
+
+#~ msgctxt "Marble::RoutingRunner|"
+#~ msgid "nm"
+#~ msgstr "nm"
+
+#, fuzzy
+#~| msgid "Search"
+#~ msgctxt "Marble::SearchInputWidget|"
+#~ msgid "Global Search"
+#~ msgstr "찾기"
+
+#, fuzzy
+#~| msgid "Search"
+#~ msgctxt "Marble::SearchInputWidget|"
+#~ msgid "Area Search"
+#~ msgstr "찾기"
+
+#~ msgctxt "QObject|"
+#~ msgid "Search Results"
+#~ msgstr "검색 결과"
+
+#~ msgctxt "QObject|"
+#~ msgid "Search for '%1'"
+#~ msgstr "'%1' 검색"
+
+#~ msgctxt "SunControlWidget|"
+#~ msgid "Sha&dow"
+#~ msgstr "그림자(&D)"
+
+#, fuzzy
+#~| msgid "Export Map"
+#~ msgctxt "SunControlWidget|"
+#~ msgid "&Night Map"
+#~ msgstr "지도 내보내기"
+
+#~ msgctxt "TimeControlWidget|"
+#~ msgid "&New date and time:"
+#~ msgstr "새로운 날짜와 시간(&N):"
+
+#~ msgctxt "TimeControlWidget|"
+#~ msgid "Now"
+#~ msgstr "현재"
+
+#, fuzzy
+#~| msgid "Filename is not valid"
+#~ msgctxt "Marble::TourCaptureDialog|"
+#~ msgid "Filename is not valid"
+#~ msgstr "파일 이름이 올바르지 않음"
+
+#~ msgctxt "Marble::TourCaptureDialog|"
+#~ msgid "Cancel"
+#~ msgstr "취소"
+
+#~ msgctxt "TourCaptureDialog|"
+#~ msgid "Open..."
+#~ msgstr "열기..."
+
+#~ msgctxt "TourCaptureDialog|"
+#~ msgid "Close"
+#~ msgstr "닫기"
+
+#~ msgctxt "Marble::TourControlEditWidget|"
+#~ msgid "Pause"
+#~ msgstr "일시 정지"
+
+#, fuzzy
+#~| msgid "Remove"
+#~ msgctxt "Marble::TourItemDelegate|"
+#~ msgid "Remove item %1"
+#~ msgstr "삭제"
+
+#~ msgctxt "QObject|"
+#~ msgid "Loop"
+#~ msgstr "반복"
+
+#~ msgctxt "QObject|"
+#~ msgid "Discard Changes"
+#~ msgstr "변경 사항 취소"
+
+#~ msgctxt "TourWidget|"
+#~ msgid "toolBar"
+#~ msgstr "도구 모음"
+
+#~ msgctxt "TourWidget|"
+#~ msgid "Move up"
+#~ msgstr "위로 이동"
+
+#~ msgctxt "TourWidget|"
+#~ msgid "Move down"
+#~ msgstr "아래로 이동"
+
+#, fuzzy
+#~| msgid "Delete"
+#~ msgctxt "TourWidget|"
+#~ msgid "Delete"
+#~ msgstr "삭제"
+
+#, fuzzy
+#~| msgid "Open File"
+#~ msgctxt "Marble::AnnotatePlugin|"
+#~ msgid "Open Annotation File"
+#~ msgstr "파일 열기"
+
+#~ msgctxt "Marble::AnnotatePlugin|"
+#~ msgid "Operation not permitted"
+#~ msgstr "지원하지 않는 동작"
+
+#~ msgctxt "Marble::AnnotatePlugin|"
+#~ msgid "Add Nodes"
+#~ msgstr "노드 추가"
+
+#~ msgctxt "Marble::AnnotatePlugin|"
+#~ msgid "Remove Item"
+#~ msgstr "항목 삭제"
+
+#~ msgctxt "Marble::AnnotatePlugin|"
+#~ msgid "Paste"
+#~ msgstr "붙여넣기"
+
+#~ msgctxt "Marble::AnnotatePlugin|"
+#~ msgid "Cut"
+#~ msgstr "잘라내기"
+
+#~ msgctxt "Marble::AnnotatePlugin|"
+#~ msgid "Copy"
+#~ msgstr "복사"
+
+#~ msgctxt "Marble::AnnotatePlugin|"
+#~ msgid "Remove"
+#~ msgstr "삭제"
+
+#, fuzzy
+#~| msgid "Properties"
+#~ msgctxt "Marble::AnnotatePlugin|"
+#~ msgid "Properties"
+#~ msgstr "속성"
+
+#~ msgctxt "Marble::AnnotatePlugin|"
+#~ msgid "Select Node"
+#~ msgstr "노드 선택"
+
+#, fuzzy
+#~| msgid "Delete"
+#~ msgctxt "Marble::AnnotatePlugin|"
+#~ msgid "Delete Node"
+#~ msgstr "삭제"
+
+#~ msgctxt "Marble::DownloadOsmDialog|"
+#~ msgid "Download"
+#~ msgstr "다운로드"
+
+#~ msgctxt "Marble::DownloadOsmDialog|"
+#~ msgid "ERROR"
+#~ msgstr "오류"
+
+#~ msgctxt "Marble::EditGroundOverlayDialog|"
+#~ msgid "No name specified"
+#~ msgstr "이름을 지정하지 않음"
+
+#~ msgctxt "UiEditGroundOverlayDialog|"
+#~ msgid "Description"
+#~ msgstr "설명"
+
+#~ msgctxt "UiEditGroundOverlayDialog|"
+#~ msgid "Coordinates"
+#~ msgstr "좌표"
+
+#~ msgctxt "UiEditGroundOverlayDialog|"
+#~ msgid "Rotation"
+#~ msgstr "회전"
+
+#~ msgctxt "Marble::EditPolygonDialog|"
+#~ msgid "Tags"
+#~ msgstr "태그"
+
+#~ msgctxt "Marble::EditPolygonDialog|"
+#~ msgid "Relations"
+#~ msgstr "관계"
+
+#~ msgctxt "Marble::EditPolygonDialog|"
+#~ msgid "No name specified"
+#~ msgstr "이름을 지정하지 않음"
+
+#~ msgctxt "UiEditPolygonDialog|"
+#~ msgid "Name"
+#~ msgstr "이름"
+
+#~ msgctxt "UiEditPolygonDialog|"
+#~ msgid "Description"
+#~ msgstr "설명"
+
+#~ msgctxt "UiEditPolygonDialog|"
+#~ msgid "Filled"
+#~ msgstr "채워짐"
+
+#~ msgctxt "UiEditPolygonDialog|"
+#~ msgid "Not Filled"
+#~ msgstr "채우지 않음"
+
+#~ msgctxt "Marble::EditPolylineDialog|"
+#~ msgid "Tags"
+#~ msgstr "태그"
+
+#~ msgctxt "Marble::EditPolylineDialog|"
+#~ msgid "Relations"
+#~ msgstr "관계"
+
+#~ msgctxt "Marble::EditPolylineDialog|"
+#~ msgid "No name specified"
+#~ msgstr "이름을 지정하지 않음"
+
+#~ msgctxt "UiEditPolylineDialog|"
+#~ msgid "Name"
+#~ msgstr "이름"
+
+#~ msgctxt "UiEditPolylineDialog|"
+#~ msgid "Description"
+#~ msgstr "설명"
+
+#~ msgctxt "Marble::NodeModel|"
+#~ msgid "Longitude"
+#~ msgstr "경도"
+
+#~ msgctxt "Marble::NodeModel|"
+#~ msgid "Latitude"
+#~ msgstr "위도"
+
+#~ msgctxt "Marble::NodeModel|"
+#~ msgid "Elevation"
+#~ msgstr "고도"
+
+#~ msgctxt "AprsConfigWidget|"
+#~ msgid "APRS Plugin"
+#~ msgstr "APRS 플러그인"
+
+#~ msgctxt "AprsConfigWidget|"
+#~ msgid "Internet"
+#~ msgstr "인터넷"
+
+#~ msgctxt "AprsConfigWidget|"
+#~ msgid "Server"
+#~ msgstr "서버"
+
+#~ msgctxt "AprsConfigWidget|"
+#~ msgid "Port"
+#~ msgstr "포트"
+
+#~ msgctxt "AprsConfigWidget|"
+#~ msgid "TTY"
+#~ msgstr "TTY"
+
+#~ msgctxt "AprsConfigWidget|"
+#~ msgid "File"
+#~ msgstr "파일"
+
+#~ msgctxt "CompassConfigWidget|"
+#~ msgid "Theme"
+#~ msgstr "테마"
+
+#~ msgctxt "CompassConfigWidget|"
+#~ msgid "Arrows"
+#~ msgstr "화살표"
+
+#~ msgctxt "CompassConfigWidget|"
+#~ msgid "Atom"
+#~ msgstr "원자"
+
+#~ msgctxt "CompassConfigWidget|"
+#~ msgid "Magnet"
+#~ msgstr "마그넷 링크"
+
+#~ msgctxt "CrosshairsConfigWidget|"
+#~ msgid "Theme"
+#~ msgstr "테마"
+
+#~ msgctxt "Marble::CrosshairsPlugin|"
+#~ msgid "Crosshairs"
+#~ msgstr "십자가"
+
+#, fuzzy
+#~| msgid "&Configure..."
+#~ msgctxt "EarthquakeConfigWidget|"
+#~ msgid "Configure Earthquakes Plugin"
+#~ msgstr "설정(&C)..."
+
+#~ msgctxt "EarthquakeConfigWidget|"
+#~ msgid "Filter"
+#~ msgstr "필터"
+
+#~ msgctxt "EarthquakeConfigWidget|"
+#~ msgid "Past"
+#~ msgstr "과거"
+
+#~ msgctxt "EarthquakeConfigWidget|"
+#~ msgid "days"
+#~ msgstr "일"
+
+#~ msgctxt "Marble::EarthquakeItem|"
+#~ msgid "Date:"
+#~ msgstr "날짜:"
+
+#~ msgctxt "Marble::EarthquakeItem|"
+#~ msgid "Magnitude:"
+#~ msgstr "절대등급:"
+
+#~ msgctxt "Marble::EarthquakeItem|"
+#~ msgid "Depth:"
+#~ msgstr "깊이:"
+
+#~ msgctxt "EclipsesBrowserDialog|"
+#~ msgid "&Close"
+#~ msgstr "닫기(&C)"
+
+#~ msgctxt "EclipsesConfigDialog|"
+#~ msgid "&View"
+#~ msgstr "보기(&V)"
+
+#~ msgctxt "Marble::EclipsesModel|"
+#~ msgid "Magnitude"
+#~ msgstr "절대등급"
+
+#~ msgctxt "Marble::ElevationProfileContextMenu|"
+#~ msgid "&Configure..."
+#~ msgstr "설정(&C)..."
+
+#, fuzzy
+#~| msgid "Routing"
+#~ msgctxt "Marble::ElevationProfileContextMenu|"
+#~ msgid "Route"
+#~ msgstr "길 찾기"
+
+#~ msgctxt "Marble::ElevationProfileFloatItem|"
+#~ msgid "Elevation Profile"
+#~ msgstr "고도 프로필"
+
+#~ msgctxt "Marble::ElevationProfilePlotAxis|"
+#~ msgid "km"
+#~ msgstr "km"
+
+#~ msgctxt "Marble::ElevationProfilePlotAxis|"
+#~ msgid "m"
+#~ msgstr "m"
+
+#~ msgctxt "Marble::ElevationProfilePlotAxis|"
+#~ msgid "mi"
+#~ msgstr "mi"
+
+#~ msgctxt "Marble::ElevationProfilePlotAxis|"
+#~ msgid "ft"
+#~ msgstr "ft"
+
+#~ msgctxt "Marble::ElevationProfilePlotAxis|"
+#~ msgid "nm"
+#~ msgstr "nm"
+
+#~ msgctxt "Marble::ElevationProfileMarker|"
+#~ msgid "m"
+#~ msgstr "m"
+
+#~ msgctxt "Marble::ElevationProfileMarker|"
+#~ msgid "ft"
+#~ msgstr "ft"
+
+#~ msgctxt "Marble::FileViewFloatItem|"
+#~ msgid "File View"
+#~ msgstr "파일 보기"
+
+#~ msgctxt "Marble::FileViewFloatItem|"
+#~ msgid "&File View"
+#~ msgstr "파일 보기(&F)"
+
+#~ msgctxt "Marble::FileViewFloatItem|"
+#~ msgid "Open file..."
+#~ msgstr "파일 열기..."
+
+#~ msgctxt "Marble::FileViewFloatItem|"
+#~ msgid "Open File"
+#~ msgstr "파일 열기"
+
+#~ msgctxt "Marble::FoursquarePlugin|"
+#~ msgid "Places"
+#~ msgstr "위치"
+
+#~ msgctxt "Marble::GpsInfo|"
+#~ msgid "mph"
+#~ msgstr "mph"
+
+#~ msgctxt "Marble::GpsInfo|"
+#~ msgid "ft"
+#~ msgstr "ft"
+
+#~ msgctxt "Marble::GpsInfo|"
+#~ msgid "km/h"
+#~ msgstr "km/h"
+
+#~ msgctxt "Marble::GpsInfo|"
+#~ msgid "m"
+#~ msgstr "m"
+
+#~ msgctxt "Marble::GpsInfo|"
+#~ msgid "kt"
+#~ msgstr "kt"
+
+#~ msgctxt "Marble::GpsInfo|"
+#~ msgid "nm"
+#~ msgstr "nm"
+
+#~ msgctxt "GpsInfoPlugin|"
+#~ msgid "Speed"
+#~ msgstr "속도"
+
+#~ msgctxt "GpsInfoPlugin|"
+#~ msgid "Direction"
+#~ msgstr "방향"
+
+#~ msgctxt "GpsInfoPlugin|"
+#~ msgid "Altitude"
+#~ msgstr "고도"
+
+#~ msgctxt "GraticuleConfigWidget|"
+#~ msgid "&Grid:"
+#~ msgstr "격자(&G):"
+
+#~ msgctxt "Marble::GraticulePlugin|"
+#~ msgid "Equator"
+#~ msgstr "적도면"
+
+#~ msgctxt "Marble::License|"
+#~ msgid "License"
+#~ msgstr "라이선스"
+
+#~ msgctxt "Marble::License|"
+#~ msgid "&Show Details"
+#~ msgstr "자세히 보기(&S)"
+
+#~ msgctxt "MapScaleConfigWidget|"
+#~ msgid "Minimize"
+#~ msgstr "최소화"
+
+#~ msgctxt "Marble::MapScaleFloatItem|"
+#~ msgid "Minimize"
+#~ msgstr "최소화"
+
+#~ msgctxt "Marble::MapScaleFloatItem|"
+#~ msgid "Scale Bar"
+#~ msgstr "축척 표시줄"
+
+#~ msgctxt "Marble::MapScaleFloatItem|"
+#~ msgid "&Scale Bar"
+#~ msgstr "축척 표시줄(&S)"
+
+#~ msgctxt "Marble::MapScaleFloatItem|"
+#~ msgid "km"
+#~ msgstr "km"
+
+#~ msgctxt "Marble::MapScaleFloatItem|"
+#~ msgid "m"
+#~ msgstr "m"
+
+#~ msgctxt "Marble::MapScaleFloatItem|"
+#~ msgid "mi"
+#~ msgstr "mi"
+
+#~ msgctxt "Marble::MapScaleFloatItem|"
+#~ msgid "nm"
+#~ msgstr "nm"
+
+#~ msgctxt "Marble::MapScaleFloatItem|"
+#~ msgid "&Configure..."
+#~ msgstr "설정(&C)..."
+
+#, fuzzy
+#~| msgid "Navigation"
+#~ msgctxt "MeasureConfigDialog|"
+#~ msgid "Measure Tool Configuration"
+#~ msgstr "탐색"
+
+#~ msgctxt "MeasureConfigDialog|"
+#~ msgid "Polygon"
+#~ msgstr "다각형"
+
+#, fuzzy
+#~| msgid "Discard Changes"
+#~ msgctxt "MeasureConfigDialog|"
+#~ msgid "Bearing Change"
+#~ msgstr "변경 사항 취소"
+
+#~ msgctxt "Marble::MeasureToolPlugin|"
+#~ msgid "Measure Tool"
+#~ msgstr "측정 도구"
+
+#~ msgctxt "Navigation|"
+#~ msgid "Navigation"
+#~ msgstr "탐색"
+
+#~ msgctxt "Marble::NavigationFloatItem|"
+#~ msgid "Navigation"
+#~ msgstr "탐색"
+
+#~ msgctxt "Marble::NavigationFloatItem|"
+#~ msgid "&Navigation"
+#~ msgstr "탐색(&N)"
+
+#~ msgctxt "Marble::NotesItem|The author name is not known"
+#~ msgid "anonymous"
+#~ msgstr "익명"
+
+#~ msgctxt "OpenCachingCacheDialog|"
+#~ msgid "General"
+#~ msgstr "일반"
+
+#~ msgctxt "OpenCachingCacheDialog|"
+#~ msgid "User name:"
+#~ msgstr "사용자 이름:"
+
+#~ msgctxt "OpenCachingCacheDialog|"
+#~ msgid "Status:"
+#~ msgstr "상태:"
+
+#~ msgctxt "OpenCachingCacheDialog|"
+#~ msgid "Country:"
+#~ msgstr "국가:"
+
+#~ msgctxt "OpenCachingCacheDialog|"
+#~ msgid "Size:"
+#~ msgstr "크기:"
+
+#~ msgctxt "OpenCachingCacheDialog|"
+#~ msgid "Difficulty:"
+#~ msgstr "난이도:"
+
+#~ msgctxt "OpenCachingCacheDialog|"
+#~ msgid "Longitude:"
+#~ msgstr "경도:"
+
+#~ msgctxt "OpenCachingCacheDialog|"
+#~ msgid "Latitude:"
+#~ msgstr "위도:"
+
+#~ msgctxt "OpenCachingCacheDialog|"
+#~ msgid "Description"
+#~ msgstr "설명"
+
+#~ msgctxt "OpenCachingConfigWidget|"
+#~ msgid "Filter"
+#~ msgstr "필터"
+
+#~ msgctxt "OpenCachingConfigWidget|"
+#~ msgid "Start:"
+#~ msgstr "시작:"
+
+#~ msgctxt "OpenCachingConfigWidget|"
+#~ msgid "End:"
+#~ msgstr "끝:"
+
+#, fuzzy
+#~| msgid "Navigation"
+#~ msgctxt "OpenDesktopConfigWidget|"
+#~ msgid "OpenDesktop plugin configuration"
+#~ msgstr "탐색"
+
+#, fuzzy
+#~| msgid "&Configure..."
+#~ msgctxt "OverviewMapConfigWidget|"
+#~ msgid "Configure Overview Map"
+#~ msgstr "설정(&C)..."
+
+#~ msgctxt "OverviewMapConfigWidget|"
+#~ msgid "&Planet:"
+#~ msgstr "행성(&P):"
+
+#~ msgctxt "OverviewMapConfigWidget|"
+#~ msgid "&Size:"
+#~ msgstr "크기(&S):"
+
+#~ msgctxt "OverviewMapConfigWidget|"
+#~ msgid "x"
+#~ msgstr "x"
+
+#~ msgctxt "OverviewMapConfigWidget|"
+#~ msgid "Preview"
+#~ msgstr "미리 보기"
+
+#~ msgctxt "OverviewMapConfigWidget|"
+#~ msgid "Filename"
+#~ msgstr "파일 이름"
+
+#~ msgctxt "PhotoConfigWidget|"
+#~ msgid "License"
+#~ msgstr "라이선스"
+
+#~ msgctxt "Marble::PhotoPlugin|"
+#~ msgid "Photos"
+#~ msgstr "사진"
+
+#~ msgctxt "Marble::PositionMarker|"
+#~ msgid "Please choose a color"
+#~ msgstr "색을 선택하십시오"
+
+#~ msgctxt "PositionMarkerConfigWidget|"
+#~ msgid "&Custom:"
+#~ msgstr "사용자 정의(&C):"
+
+#~ msgctxt "PositionMarkerConfigWidget|"
+#~ msgid "&Accuracy:"
+#~ msgstr "정확도(&A):"
+
+#~ msgctxt "Marble::ProgressFloatItem|"
+#~ msgid "Download Progress Indicator"
+#~ msgstr "다운로드 진행 표시줄"
+
+#~ msgctxt "Marble::ProgressFloatItem|"
+#~ msgid "&Download Progress"
+#~ msgstr "다운로드 진행(&P)"
+
+#, fuzzy
+#~| msgid "Navigation"
+#~ msgctxt "RoutingConfigDialog|"
+#~ msgid "Routing Configuration"
+#~ msgstr "탐색"
+
+#~ msgctxt "Marble::RoutingPlugin|"
+#~ msgid "Routing"
+#~ msgstr "길 찾기"
+
+#, fuzzy
+#~| msgid "Routing"
+#~ msgctxt "Marble::RoutingPlugin|"
+#~ msgid "&Routing"
+#~ msgstr "길 찾기"
+
+#~ msgctxt "RoutingPlugin|"
+#~ msgid "R"
+#~ msgstr "R"
+
+#~ msgctxt "RoutingPlugin|"
+#~ msgid "Zoom Out"
+#~ msgstr "축소"
+
+#~ msgctxt "RoutingPlugin|"
+#~ msgid "Zoom In"
+#~ msgstr "확대"
+
+#~ msgctxt "Marble::SatellitesConfigDialog|"
+#~ msgid "Comets"
+#~ msgstr "혜성"
+
+#~ msgctxt "Marble::SatellitesConfigDialog|"
+#~ msgid "Other"
+#~ msgstr "기타"
+
+#~ msgctxt "Marble::SatellitesConfigDialog|"
+#~ msgid "Moon"
+#~ msgstr "달"
+
+#~ msgctxt "Marble::SatellitesConfigDialog|"
+#~ msgid "Venus"
+#~ msgstr "금성"
+
+#~ msgctxt "Marble::SatellitesConfigDialog|"
+#~ msgid "Earth"
+#~ msgstr "지구"
+
+#~ msgctxt "Marble::SatellitesConfigDialog|"
+#~ msgid "Mars"
+#~ msgstr "화성"
+
+#~ msgctxt "Marble::SatellitesConfigDialog|"
+#~ msgid "Jupiter"
+#~ msgstr "목성"
+
+#~ msgctxt "Marble::SatellitesConfigDialog|"
+#~ msgid "Saturn"
+#~ msgstr "토성"
+
+#~ msgctxt "Marble::SatellitesConfigDialog|"
+#~ msgid "Uranus"
+#~ msgstr "천왕성"
+
+#~ msgctxt "Marble::SatellitesConfigDialog|"
+#~ msgid "Neptune"
+#~ msgstr "해왕성"
+
+#, fuzzy
+#~| msgid "All Files (*.*)"
+#~ msgctxt "Marble::SatellitesConfigDialog|"
+#~ msgid "All Supported Files (*.txt *.msc)"
+#~ msgstr "모든 파일 (*.*)"
+
+#~ msgctxt "Marble::SatellitesConfigDialog|"
+#~ msgid "All Files (*.*)"
+#~ msgstr "모든 파일 (*.*)"
+
+#, fuzzy
+#~| msgid "Navigation"
+#~ msgctxt "SatellitesConfigDialog|"
+#~ msgid "Satellites Configuration"
+#~ msgstr "탐색"
+
+#~ msgctxt "Marble::SatellitesConfigModel|"
+#~ msgid "Catalogs"
+#~ msgstr "카탈로그"
+
+#~ msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
+#~ msgid "Iridium"
+#~ msgstr "이리듐"
+
+#~ msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
+#~ msgid "Experimental"
+#~ msgstr "실험적"
+
+#~ msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
+#~ msgid "Other"
+#~ msgstr "기타"
+
+#, fuzzy
+#~| msgid "Navigation"
+#~ msgctxt "Marble::SatellitesPlugin|"
+#~ msgid "Navigation Satellites"
+#~ msgstr "탐색"
+
+#, fuzzy
+#~| msgid "Navigation"
+#~ msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
+#~ msgid "Russian LEO Navigation"
+#~ msgstr "탐색"
+
+#~ msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
+#~ msgid "Engineering"
+#~ msgstr "공학"
+
+#~ msgctxt "Marble::Speedometer|"
+#~ msgid "mph"
+#~ msgstr "mph"
+
+#~ msgctxt "Marble::Speedometer|"
+#~ msgid "km/h"
+#~ msgstr "km/h"
+
+#~ msgctxt "Marble::Speedometer|"
+#~ msgid "kt"
+#~ msgstr "kt"
+
+#~ msgctxt "Speedometer|"
+#~ msgid "km/h"
+#~ msgstr "km/h"
+
+#~ msgctxt "StarsConfigWidget|"
+#~ msgid "Solar System"
+#~ msgstr "태양계"
+
+#~ msgctxt "StarsConfigWidget|"
+#~ msgid "Moon"
+#~ msgstr "달"
+
+#~ msgctxt "StarsConfigWidget|"
+#~ msgid "Venus"
+#~ msgstr "금성"
+
+#~ msgctxt "StarsConfigWidget|"
+#~ msgid "Earth"
+#~ msgstr "지구"
+
+#~ msgctxt "StarsConfigWidget|"
+#~ msgid "Mars"
+#~ msgstr "화성"
+
+#~ msgctxt "StarsConfigWidget|"
+#~ msgid "Jupiter"
+#~ msgstr "목성"
+
+#~ msgctxt "StarsConfigWidget|"
+#~ msgid "Saturn"
+#~ msgstr "토성"
+
+#~ msgctxt "StarsConfigWidget|"
+#~ msgid "Uranus"
+#~ msgstr "천왕성"
+
+#~ msgctxt "StarsConfigWidget|"
+#~ msgid "Neptune"
+#~ msgstr "해왕성"
+
+#~ msgctxt "StarsConfigWidget|"
+#~ msgid "Use name labels"
+#~ msgstr "이름 라벨 사용"
+
+#~ msgctxt "StarsConfigWidget|"
+#~ msgid "Magnify Sun and Moon"
+#~ msgstr "태양과 달 확대"
+
+#~ msgctxt "StarsConfigWidget|"
+#~ msgid "Other"
+#~ msgstr "기타"
+
+#~ msgctxt "StarsConfigWidget|"
+#~ msgid "Constellations"
+#~ msgstr "별자리"
+
+#~ msgctxt "StarsConfigWidget|"
+#~ msgid "Names"
+#~ msgstr "이름"
+
+#~ msgctxt "StarsConfigWidget|"
+#~ msgid "Abbreviation"
+#~ msgstr "축약형"
+
+#~ msgctxt "StarsConfigWidget|"
+#~ msgid "Celestial Equator"
+#~ msgstr "천구상 적도면"
+
+#~ msgctxt "StarsConfigWidget|"
+#~ msgid "Ecliptic"
+#~ msgstr "황도면"
+
+#~ msgctxt "Marble::StarsPlugin|"
+#~ msgid "Show &Constellations"
+#~ msgstr "별자리 표시(&C)"
+
+#~ msgctxt "Marble::StarsPlugin|"
+#~ msgid "Show &Sun and Moon"
+#~ msgstr "태양과 달 표시(&S)"
+
+#~ msgctxt "Marble::StarsPlugin|"
+#~ msgid "Show &Planets"
+#~ msgstr "행성 표시(&P)"
+
+#~ msgctxt "Marble::StarsPlugin|"
+#~ msgid "&Configure..."
+#~ msgstr "설정(&C)..."
+
+#, fuzzy
+#~| msgid "Filename is not valid"
+#~ msgctxt "QObject|"
+#~ msgid "The file is not a valid file."
+#~ msgstr "파일 이름이 올바르지 않음"
+
+#~ msgctxt "WeatherConfigWidget|"
+#~ msgid "Temperature"
+#~ msgstr "온도"
+
+#~ msgctxt "WeatherConfigWidget|"
+#~ msgid "Units"
+#~ msgstr "단위"
+
+#~ msgctxt "WeatherConfigWidget|"
+#~ msgid "Bars"
+#~ msgstr "막대"
+
+#~ msgctxt "WeatherData|"
+#~ msgid "sunny"
+#~ msgstr "맑음"
+
+#~ msgctxt "WeatherData|"
+#~ msgid "few clouds"
+#~ msgstr "구름 조금"
+
+#~ msgctxt "WeatherData|"
+#~ msgid "partly cloudy"
+#~ msgstr "부분적으로 흐림"
+
+#~ msgctxt "WeatherData|"
+#~ msgid "overcast"
+#~ msgstr "흐림"
+
+#~ msgctxt "WeatherData|"
+#~ msgid "light showers"
+#~ msgstr "약한 소나기"
+
+#~ msgctxt "WeatherData|"
+#~ msgid "showers"
+#~ msgstr "소나기"
+
+#~ msgctxt "WeatherData|"
+#~ msgid "light rain"
+#~ msgstr "약한 비"
+
+#~ msgctxt "WeatherData|"
+#~ msgid "thunderstorm"
+#~ msgstr "뇌우"
+
+#~ msgctxt "WeatherData|"
+#~ msgid "hail"
+#~ msgstr "우박"
+
+#~ msgctxt "WeatherData|"
+#~ msgid "light snow"
+#~ msgstr "약한 눈"
+
+#~ msgctxt "WeatherData|"
+#~ msgid "mist"
+#~ msgstr "박무"
+
+#~ msgctxt "WeatherData|"
+#~ msgid "sandstorm"
+#~ msgstr "모래 폭풍"
+
+#~ msgctxt "WeatherData|"
+#~ msgid "NNE"
+#~ msgstr "북북동"
+
+#~ msgctxt "WeatherData|"
+#~ msgid "NE"
+#~ msgstr "북동"
+
+#~ msgctxt "WeatherData|"
+#~ msgid "ENE"
+#~ msgstr "동북동"
+
+#~ msgctxt "WeatherData|"
+#~ msgid "SSE"
+#~ msgstr "남남동"
+
+#~ msgctxt "WeatherData|"
+#~ msgid "ESE"
+#~ msgstr "동남동"
+
+#~ msgctxt "WeatherData|"
+#~ msgid "NNW"
+#~ msgstr "북북서"
+
+#~ msgctxt "WeatherData|"
+#~ msgid "NW"
+#~ msgstr "북서"
+
+#~ msgctxt "WeatherData|"
+#~ msgid "WNW"
+#~ msgstr "서북서"
+
+#~ msgctxt "WeatherData|"
+#~ msgid "SSW"
+#~ msgstr "남남서"
+
+#~ msgctxt "WeatherData|"
+#~ msgid "SW"
+#~ msgstr "남서"
+
+#~ msgctxt "WeatherData|"
+#~ msgid "WSW"
+#~ msgstr "서남서"
+
+#~ msgctxt "QObject|"
+#~ msgid "mph"
+#~ msgstr "mph"
+
+#~ msgctxt "QObject|"
+#~ msgid "m/s"
+#~ msgstr "m/s"
+
+#~ msgctxt "QObject|"
+#~ msgid "knots"
+#~ msgstr "노트"
+
+#~ msgctxt "WeatherData|"
+#~ msgid "hPa"
+#~ msgstr "hPa"
+
+#~ msgctxt "WeatherData|"
+#~ msgid "kPa"
+#~ msgstr "kPa"
+
+#~ msgctxt "WeatherData|"
+#~ msgid "mmHg"
+#~ msgstr "mmHg"
+
+#, fuzzy
+#~| msgid "Ready"
+#~ msgctxt "WeatherData|air pressure has no change"
+#~ msgid "steady"
+#~ msgstr "준비"
+
+#~ msgctxt "WeatherItemPrivate|"
+#~ msgid "Remove from Favorites"
+#~ msgstr "책갈피에서 삭제"
+
+#~ msgctxt "WeatherItemPrivate|"
+#~ msgid "Add to Favorites"
+#~ msgstr "책갈피에 추가"
+
+#, fuzzy
+#~| msgid "Search"
+#~ msgctxt "Marble::GeoUriPlugin|"
+#~ msgid "Geo URI Search"
+#~ msgstr "찾기"
+
+#, fuzzy
+#~| msgid "Routing"
+#~ msgctxt "Marble::GosmorePlugin|"
+#~ msgid "Gosmore Routing"
+#~ msgstr "길 찾기"
+
+#~ msgctxt "Marble::LatLonPlugin|"
+#~ msgid "Geographic Coordinates"
+#~ msgstr "지리 좌표"
+
+#~ msgctxt "QObject|"
+#~ msgid "college"
+#~ msgstr "대학"
+
+#~ msgctxt "QObject|"
+#~ msgid "school"
+#~ msgstr "학교"
+
+#~ msgctxt "QObject|"
+#~ msgid "university"
+#~ msgstr "대학교"
+
+#~ msgctxt "QObject|"
+#~ msgid "bar"
+#~ msgstr "bar"
+
+#, fuzzy
+#~| msgid "Navigation"
+#~ msgctxt "QObject|"
+#~ msgid "attraction"
+#~ msgstr "탐색"
+
+#, fuzzy
+#~| msgid "Export Map"
+#~ msgctxt "QObject|"
+#~ msgid "airport apron"
+#~ msgstr "지도 내보내기"
+
+#, fuzzy
+#~| msgid "Navigation"
+#~ msgctxt "QObject|"
+#~ msgid "train station"
+#~ msgstr "탐색"
+
+#~ msgctxt "QObject|"
+#~ msgid "atm"
+#~ msgstr "atm"
+
+#~ msgctxt "QObject|"
+#~ msgid "north"
+#~ msgstr "북"
+
+#~ msgctxt "QObject|"
+#~ msgid "west"
+#~ msgstr "서"
+
+#~ msgctxt "QObject|"
+#~ msgid "south"
+#~ msgstr "남"
+
+#~ msgctxt "QObject|"
+#~ msgid "east"
+#~ msgstr "동"
+
+#, fuzzy
+#~| msgid "Routing"
+#~ msgctxt "Marble::MapQuestPlugin|"
+#~ msgid "MapQuest Routing"
+#~ msgstr "길 찾기"
+
+#~ msgctxt "Marble::MapQuestConfigWidget|"
+#~ msgid "Bicycle"
+#~ msgstr "자전거 가게"
+
+#~ msgctxt "Marble::MapQuestConfigWidget|"
+#~ msgid "Ignore"
+#~ msgstr "무시"
+
+#~ msgctxt "Marble::MapQuestConfigWidget|"
+#~ msgid "Favor"
+#~ msgstr "좋아하는 곡"
+
+#, fuzzy
+#~| msgid "Remove"
+#~ msgctxt "Marble::MonavConfigWidget|"
+#~ msgid "Remove Map"
+#~ msgstr "삭제"
+
+#, fuzzy
+#~| msgid "Navigation"
+#~ msgctxt "MonavConfigWidget|"
+#~ msgid "Monav Configuration"
+#~ msgstr "탐색"
+
+#, fuzzy
+#~| msgid "&Configure..."
+#~ msgctxt "MonavConfigWidget|"
+#~ msgid "Configure"
+#~ msgstr "설정(&C)..."
+
+#~ msgctxt "MonavConfigWidget|"
+#~ msgid "Any"
+#~ msgstr "임의"
+
+#~ msgctxt "MonavConfigWidget|"
+#~ msgid "Install"
+#~ msgstr "설치"
+
+#~ msgctxt "Marble::MonavMapsModel|"
+#~ msgid "Name"
+#~ msgstr "이름"
+
+#, fuzzy
+#~| msgid "Delete"
+#~ msgctxt "Marble::MonavMapsModel|"
+#~ msgid "Delete"
+#~ msgstr "삭제"
+
+#~ msgctxt "Marble::MonavMapsModel|"
+#~ msgid "Date"
+#~ msgstr "날짜"
+
+#, fuzzy
+#~| msgid "Routing"
+#~ msgctxt "Marble::MonavPlugin|"
+#~ msgid "Monav Routing"
+#~ msgstr "길 찾기"
+
+#~ msgctxt "RoutinoConfigWidget|"
+#~ msgid "Method"
+#~ msgstr "방법"
+
+#~ msgctxt "RoutinoConfigWidget|"
+#~ msgid "Fastest"
+#~ msgstr "빠르게"
+
+#, fuzzy
+#~| msgid "Routing"
+#~ msgctxt "Marble::RoutinoPlugin|"
+#~ msgid "Routino Routing"
+#~ msgstr "길 찾기"
+
+#, fuzzy
+#~| msgid "Routing"
+#~ msgctxt "Marble::RoutinoPlugin|"
+#~ msgid "Routino"
+#~ msgstr "길 찾기"
+
+#~ msgctxt "Marble::RoutinoConfigWidget|"
+#~ msgid "Horse"
+#~ msgstr "말"
+
+#~ msgctxt "Marble::RoutinoConfigWidget|"
+#~ msgid "Wheelchair"
+#~ msgstr "휠체어"
+
+#~ msgctxt "Marble::RoutinoConfigWidget|"
+#~ msgid "Bicycle"
+#~ msgstr "자전거 가게"
+
+#~ msgctxt "YoursConfigWidget|"
+#~ msgid "Transport:"
+#~ msgstr "전송:"
+
+#~ msgctxt "YoursConfigWidget|"
+#~ msgid "Method"
+#~ msgstr "방법"
+
+#~ msgctxt "YoursConfigWidget|"
+#~ msgid "Fastest"
+#~ msgstr "빠르게"
+
+#, fuzzy
+#~| msgid "Routing"
+#~ msgctxt "Marble::YoursPlugin|"
+#~ msgid "Yours Routing"
+#~ msgstr "길 찾기"
+
+#~ msgctxt "Marble::YoursConfigWidget|"
+#~ msgid "Bicycle"
+#~ msgstr "자전거 가게"
+
+#~ msgctxt "Bookmarks|"
+#~ msgid "Removed"
+#~ msgstr "삭제됨"
+
+#~ msgctxt "MainScreen|"
+#~ msgid "Settings"
+#~ msgstr "설정"
+
+#~ msgctxt "MainScreen|"
+#~ msgid "Bookmarks"
+#~ msgstr "책갈피"
+
+#~ msgctxt "MainScreen|"
+#~ msgid "Routing"
+#~ msgstr "길 찾기"
+
+#~ msgctxt "NavigationInfoBar|"
+#~ msgid "%1 km"
+#~ msgstr "%1 km"
+
+#~ msgctxt "ProfileSelectorMenu|"
+#~ msgid "Bicycle"
+#~ msgstr "자전거 가게"
+
+#~ msgctxt "PublicTransport|"
+#~ msgid "Subway"
+#~ msgstr "도시 철도"
+
+#~ msgctxt "PublicTransport|"
+#~ msgid "Bus"
+#~ msgstr "버스"
+
+#, fuzzy
+#~| msgid "Search"
+#~ msgctxt "SearchField|"
+#~ msgid "Search"
+#~ msgstr "찾기"
+
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Ctrl+O"
+#~ msgstr "Ctrl+O"
+
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Ctrl+S"
+#~ msgstr "Ctrl+S"
+
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Ctrl+C"
+#~ msgstr "Ctrl+C"
+
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "F5"
+#~ msgstr "F5"
+
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "F1"
+#~ msgstr "F1"
+
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Ctrl+B"
+#~ msgstr "Ctrl+B"
+
+#~ msgctxt "Marble::MapWizard|"
+#~ msgid "International"
+#~ msgstr "국제"
+
+#~ msgctxt "MapWizard|"
+#~ msgid "Terrain"
+#~ msgstr "지형"
+
+#~ msgctxt "RoutingSettingsWidget|"
+#~ msgid "&Configure"
+#~ msgstr "설정(&C)"
+
+#, fuzzy
+#~| msgid "Routing"
+#~ msgctxt "PlacemarkDialog|"
+#~ msgid "Routes"
+#~ msgstr "길 찾기"
+
+#, fuzzy
+#~| msgid "Plugins"
+#~ msgctxt "Marble::NotesPlugin|"
+#~ msgid "Notes Plugin"
+#~ msgstr "플러그인"
+
+#, fuzzy
+#~| msgid "Remove"
+#~ msgctxt "GeoDataFeature|"
+#~ msgid "Folder"
+#~ msgstr "삭제"
+
+#, fuzzy
+#~| msgid "Marble Virtual Globe"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Marble Virtual Globe"
+#~ msgstr "Marble 가상 지구본"

@@ -1,0 +1,1692 @@
+# Linerly <linerly@protonmail.com>, 2022.
+# Wantoyèk <wantoyek@gmail.com>, 2022.
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2024-09-23 00:36+0000\n"
+"PO-Revision-Date: 2022-08-26 23:44+0700\n"
+"Last-Translator: Wantoyèk <wantoyek@gmail.com>\n"
+"Language-Team: Indonesian <kde-i18n-doc@kde.org>\n"
+"Language: id\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Qt-Contexts: true\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lokalize 21.12.3\n"
+
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr ""
+
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr ""
+
+#: Bookmarks.qml:20
+#, fuzzy, kde-format
+#| msgctxt "DGML|"
+#| msgid "Books"
+msgctxt "@title:window"
+msgid "Bookmarks"
+msgstr "Buku"
+
+#: Bookmarks.qml:69
+#, kde-format
+msgid "Your bookmarks will appear here."
+msgstr ""
+
+#: CurrentPosition.qml:54
+#, kde-format
+msgctxt "@option:check"
+msgid "Follow Current Position"
+msgstr ""
+
+#: main.cpp:37 MainScreen.qml:20 MainScreen.qml:177
+#, kde-format
+msgid "Marble Maps"
+msgstr ""
+
+#: main.cpp:39
+#, kde-format
+msgid "Maps"
+msgstr ""
+
+#: main.cpp:41
+#, kde-format
+msgid "© KDE Community"
+msgstr ""
+
+#: MainScreen.qml:86
+#, kde-format
+msgid "Public Transport"
+msgstr ""
+
+#: MainScreen.qml:101
+#, kde-format
+msgid "Outdoor Activities"
+msgstr ""
+
+#: MainScreen.qml:113
+#, kde-format
+msgctxt "@action:button"
+msgid "Accessibility"
+msgstr ""
+
+#: MainScreen.qml:122
+#, kde-format
+msgctxt "@action:button"
+msgid "About"
+msgstr ""
+
+#: MainScreen.qml:133
+#, fuzzy, kde-format
+#| msgctxt "DGML|"
+#| msgid "Books"
+msgctxt "@action:button"
+msgid "Bookmarks"
+msgstr "Buku"
+
+#: MainScreen.qml:144
+#, kde-format
+msgctxt "@action:button"
+msgid "Layer Options"
+msgstr ""
+
+#: MainScreen.qml:455
+#, kde-format
+msgid "%1 km"
+msgstr ""
+
+#: NavigationInfoBar.qml:20
+#, kde-format
+msgctxt "distance in km"
+msgid "%1 km"
+msgstr ""
+
+#: NavigationInfoBar.qml:22
+#, kde-format
+msgctxt "distance in m"
+msgid "%1 m"
+msgstr ""
+
+#: NavigationInfoBar.qml:24
+#, kde-format
+msgctxt "distance in m with decimals"
+msgid "%1 m"
+msgstr ""
+
+#: Options.qml:20
+#, kde-format
+msgctxt "@title:window"
+msgid "Layer Options"
+msgstr ""
+
+#: Options.qml:23
+#, kde-format
+msgctxt "@title:group"
+msgid "Public Transport Layers"
+msgstr ""
+
+#: Options.qml:28
+#, fuzzy, kde-format
+#| msgctxt "DGML|"
+#| msgid "Terrain"
+msgctxt "@option:check"
+msgid "Train"
+msgstr "Medan"
+
+#: Options.qml:35
+#, fuzzy, kde-format
+#| msgctxt "DGML|"
+#| msgid "Subway"
+msgctxt "@option:check"
+msgid "Subway"
+msgstr "Kereta bawah tanah"
+
+#: Options.qml:42
+#, kde-format
+msgctxt "@option:check"
+msgid "Tram"
+msgstr ""
+
+#: Options.qml:49
+#, kde-format
+msgctxt "@option:check"
+msgid "Bus"
+msgstr ""
+
+#: Options.qml:56
+#, kde-format
+msgctxt "@option:check"
+msgid "Trolley Bus"
+msgstr ""
+
+#: Options.qml:64
+#, kde-format
+msgid "Outdoor Activities Layers"
+msgstr ""
+
+#: Options.qml:69
+#, kde-format
+msgctxt "@option:check"
+msgid "Walkways"
+msgstr ""
+
+#: Options.qml:76
+#, kde-format
+msgctxt "@option:check"
+msgid "Hiking Routes"
+msgstr ""
+
+#: Options.qml:83
+#, kde-format
+msgctxt "@option:check"
+msgid "Bicycle Routes"
+msgstr ""
+
+#: Options.qml:90
+#, kde-format
+msgctxt "@option:check"
+msgid "Mountainbike Routes"
+msgstr ""
+
+#: Options.qml:97
+#, kde-format
+msgctxt "@option:check"
+msgid "Inline Skating Routes"
+msgstr ""
+
+#: Options.qml:104
+#, fuzzy, kde-format
+#| msgctxt "DGML|"
+#| msgid "Bridleway"
+msgctxt "@option:check"
+msgid "Bridleways"
+msgstr "Jalan kekang"
+
+#: PlacemarkDialog.qml:48
+#, kde-format
+msgctxt "placeholder"
+msgid "No Name"
+msgstr ""
+
+#: PlacemarkDialog.qml:168
+#, kde-format
+msgctxt "@title:group"
+msgid "Tags:"
+msgstr ""
+
+#: ProfileSelectorMenu.qml:29
+#, kde-format
+msgid "Car (fastest)"
+msgstr ""
+
+#: ProfileSelectorMenu.qml:40
+#, kde-format
+msgid "Bicycle"
+msgstr ""
+
+#: ProfileSelectorMenu.qml:49
+#, kde-format
+msgid "Pedestrian"
+msgstr ""
+
+#: RouteEditor.qml:62
+#, kde-format
+msgid "Search for places to integrate them into a route."
+msgstr ""
+
+#: SettingsDialog.qml:48
+#, kde-format
+msgid "Network Settings"
+msgstr ""
+
+#: SettingsDialog.qml:53
+#, kde-format
+msgid "Download Maps via WLAN only"
+msgstr ""
+
+#~ msgctxt "DGML|"
+#~ msgid "Moon"
+#~ msgstr "Bulan"
+
+#~ msgctxt "DGML|"
+#~ msgid ""
+#~ "<p>The moon.</p><p>The map is based on data from the Clementine Moon "
+#~ "mission (UVVIS Basemap Mosaic). Credits: NASA/SDIO, Courtesy <a href="
+#~ "\"http://astrogeology.usgs.gov\">USGS Astrogeology Research Program</a></"
+#~ "p>"
+#~ msgstr ""
+#~ "<p>Bulan.</p><p>Petanya berdasarkan pada data dari misi Clementine Moon "
+#~ "(UVVIS Basemap Mosaic). Kredit: NASA/SDIO, Sumber dari <a href=\"http://"
+#~ "astrogeology.usgs.gov\">Program Riset Astrogeologi USGS</a></p>"
+
+#~ msgctxt "DGML|"
+#~ msgid "Explore the Moon"
+#~ msgstr "Jelajahi Bulan"
+
+#~ msgctxt "DGML|"
+#~ msgid "Landing Sites"
+#~ msgstr "Situs Pendaratan"
+
+#~ msgctxt "DGML|"
+#~ msgid "Craters"
+#~ msgstr "Kawah"
+
+#~ msgctxt "DGML|"
+#~ msgid "Maria"
+#~ msgstr "Maria"
+
+#~ msgctxt "DGML|"
+#~ msgid "Other features"
+#~ msgstr "Fitur lainnya"
+
+#~ msgctxt "DGML|"
+#~ msgid "Places of Interest"
+#~ msgstr "Tempat Menarik"
+
+#~ msgctxt "DGML|"
+#~ msgid "Coordinate Grid"
+#~ msgstr "Kisi Koordinat"
+
+#~ msgctxt "DGML|"
+#~ msgid ""
+#~ "<a href=\"tour://moon/clementine/tour.kml\">Play a tour of different "
+#~ "landing sites.</a>"
+#~ msgstr ""
+#~ "<a href=\"tour://moon/clementine/tour.kml\">Mainkan sebuah tur tentang "
+#~ "berbagai situs pendaratan.</a>"
+
+#~ msgctxt "DGML|"
+#~ msgid "Manned landing site"
+#~ msgstr "Situs pendaratan berawak"
+
+#~ msgctxt "DGML|"
+#~ msgid "Robotic rover"
+#~ msgstr "Rover robotik"
+
+#~ msgctxt "DGML|"
+#~ msgid "Unmanned soft landing"
+#~ msgstr "Pendaratan lunak tidak berawak"
+
+#~ msgctxt "DGML|"
+#~ msgid "Unmanned hard landing"
+#~ msgstr "Pendaratan keras tidak berawak"
+
+#~ msgctxt "DGML|"
+#~ msgid "Crater, impact crater"
+#~ msgstr "Kawah, kawah tubrukan"
+
+#~ msgctxt "DGML|"
+#~ msgid "Mons, mountain"
+#~ msgstr "Gunung"
+
+#~ msgctxt "DGML|"
+#~ msgid "Vallis, valley"
+#~ msgstr "Lembah"
+
+#~ msgctxt "DGML|"
+#~ msgid "Other"
+#~ msgstr "Lainnya"
+
+#~ msgctxt "DGML|"
+#~ msgid "Selenographic Pole"
+#~ msgstr "Tiang Selenografi"
+
+#~ msgctxt "DGML|"
+#~ msgid "Temperature (July)"
+#~ msgstr "Temperatur (Juli)"
+
+#~ msgctxt "DGML|"
+#~ msgid "A map which shows the average temperature in July."
+#~ msgstr "Sebuah peta yang menampilkan temperatur rata-rata pada Juli."
+
+#~ msgctxt "DGML|"
+#~ msgid "Boundaries"
+#~ msgstr "Batasan"
+
+#~ msgctxt "DGML|"
+#~ msgid "Water Bodies"
+#~ msgstr "Badan Air"
+
+#~ msgctxt "DGML|"
+#~ msgid "Temperature"
+#~ msgstr "Temperatur"
+
+#~ msgctxt "DGML|"
+#~ msgid "Mountain"
+#~ msgstr "Gunung"
+
+#~ msgctxt "DGML|"
+#~ msgid "Volcano"
+#~ msgstr "Gunung Berapi"
+
+#~ msgctxt "DGML|"
+#~ msgid "Geographic Pole"
+#~ msgstr "Tiang Geografis"
+
+#~ msgctxt "DGML|"
+#~ msgid "Magnetic Pole"
+#~ msgstr "Tiang Magnetik"
+
+#~ msgctxt "DGML|"
+#~ msgid "Airport"
+#~ msgstr "Bandara"
+
+#~ msgctxt "DGML|"
+#~ msgid "Shipwreck"
+#~ msgstr "Bangkai Kapal"
+
+#~ msgctxt "DGML|"
+#~ msgid "Astronomical Observatory"
+#~ msgstr "Observatorium Astronomi"
+
+#~ msgctxt "DGML|"
+#~ msgid "International"
+#~ msgstr "Internasional"
+
+#~ msgctxt "DGML|"
+#~ msgid "State"
+#~ msgstr "Negara"
+
+#~ msgctxt "DGML|"
+#~ msgid "Lake"
+#~ msgstr "Danau"
+
+#~ msgctxt "DGML|"
+#~ msgid "River"
+#~ msgstr "Sungai"
+
+#~ msgctxt "DGML|"
+#~ msgid "42&deg;C"
+#~ msgstr "42&deg;C"
+
+#~ msgctxt "DGML|"
+#~ msgid "32&deg;C"
+#~ msgstr "32&deg;C"
+
+#~ msgctxt "DGML|"
+#~ msgid "23&deg;C"
+#~ msgstr "23&deg;C"
+
+#~ msgctxt "DGML|"
+#~ msgid "12&deg;C"
+#~ msgstr "12&deg;C"
+
+#~ msgctxt "DGML|"
+#~ msgid "1&deg;C"
+#~ msgstr "1&deg;C"
+
+#~ msgctxt "DGML|"
+#~ msgid "-10&deg;C"
+#~ msgstr "-10&deg;C"
+
+#~ msgctxt "DGML|"
+#~ msgid "-21&deg;C"
+#~ msgstr "-21&deg;C"
+
+#~ msgctxt "DGML|"
+#~ msgid "-32&deg;C"
+#~ msgstr "-32&deg;C"
+
+#~ msgctxt "DGML|"
+#~ msgid "-41&deg;C"
+#~ msgstr "-41&deg;C"
+
+#~ msgctxt "DGML|"
+#~ msgid "-69&deg;C"
+#~ msgstr "-69&deg;C"
+
+#~ msgctxt "DGML|"
+#~ msgid "Earth at Night"
+#~ msgstr "Bumi di Malam Hari"
+
+#~ msgctxt "DGML|"
+#~ msgid ""
+#~ "This image of <i>Earth's city lights</i> was created with data from the "
+#~ "Defense Meteorological Satellite Program (DMSP) Operational Linescan "
+#~ "System (OLS)."
+#~ msgstr ""
+#~ "Gambar <i>lampu kota di Bumi</i> ini dibuat dengan data dari Sistem "
+#~ "Linescan Operasional Program Satelit Meteorologi Pertahanan (DMSP)(OLS)."
+
+#~ msgctxt "DGML|"
+#~ msgid "Surface"
+#~ msgstr "Permukaan"
+
+#~ msgctxt "DGML|"
+#~ msgid "Populated Places"
+#~ msgstr "Tempat Berpenduduk"
+
+#~ msgctxt "DGML|"
+#~ msgid "Light terrain"
+#~ msgstr "Medan terang"
+
+#~ msgctxt "DGML|"
+#~ msgid "Dark terrain"
+#~ msgstr "Medan gelap"
+
+#~ msgctxt "DGML|"
+#~ msgid "Water"
+#~ msgstr "Air"
+
+#~ msgctxt "DGML|"
+#~ msgid "Atlas"
+#~ msgstr "Atlas"
+
+#~ msgctxt "DGML|"
+#~ msgid ""
+#~ "<p>A <i>classic topographic map</i>.</p><p>It uses vector lines to mark "
+#~ "coastlines, country borders etc. and bitmap graphics to create the height "
+#~ "relief.</p>"
+#~ msgstr ""
+#~ "<p>Sebuah <i>peta topografi klasik</i>.</p><p>Peta ini menggunakan garis "
+#~ "vektor untuk menandai garis pantai, perbatasan negara, dll. dan grafik "
+#~ "bitmap untuk membuat ketinggian relief.</p>"
+
+#~ msgctxt "DGML|"
+#~ msgid "Urban Areas"
+#~ msgstr "Daerah Perkotaan"
+
+#~ msgctxt "DGML|"
+#~ msgid "Ice and Glaciers"
+#~ msgstr "Es dan Gletser"
+
+#~ msgctxt "DGML|"
+#~ msgid "Relief"
+#~ msgstr "Relief"
+
+#~ msgctxt "DGML|"
+#~ msgid "Elevation"
+#~ msgstr "Ketinggian"
+
+#~ msgctxt "DGML|"
+#~ msgid "Disputed Areas"
+#~ msgstr "Area Disengketakan"
+
+#~ msgctxt "DGML|"
+#~ msgid "Maritime Borders"
+#~ msgstr "Perbatasan Maritim"
+
+#~ msgctxt "DGML|"
+#~ msgid "Historic Lake"
+#~ msgstr "Danau Bersejarah"
+
+#~ msgctxt "DGML|"
+#~ msgid "Playa"
+#~ msgstr "Playa"
+
+#~ msgctxt "DGML|"
+#~ msgid "Glaciers"
+#~ msgstr "Gletser"
+
+#~ msgctxt "DGML|"
+#~ msgid "Antarctic Iceshelves"
+#~ msgstr "Rak Es Antartika"
+
+#~ msgctxt "DGML|"
+#~ msgid "7000 m"
+#~ msgstr "7000 m"
+
+#~ msgctxt "DGML|"
+#~ msgid "5000 m"
+#~ msgstr "5000 m"
+
+#~ msgctxt "DGML|"
+#~ msgid "3500 m"
+#~ msgstr "3500 m"
+
+#~ msgctxt "DGML|"
+#~ msgid "2000 m"
+#~ msgstr "2000 m"
+
+#~ msgctxt "DGML|"
+#~ msgid "1000 m"
+#~ msgstr "1000 m"
+
+#~ msgctxt "DGML|"
+#~ msgid "500 m"
+#~ msgstr "500 m"
+
+#~ msgctxt "DGML|"
+#~ msgid "200 m"
+#~ msgstr "200 m"
+
+#~ msgctxt "DGML|"
+#~ msgid "50 m"
+#~ msgstr "50 m"
+
+#~ msgctxt "DGML|"
+#~ msgid "0 m"
+#~ msgstr "0 m"
+
+#~ msgctxt "DGML|"
+#~ msgid "0 m (Water)"
+#~ msgstr "0 m (Air)"
+
+#~ msgctxt "DGML|"
+#~ msgid "-50 m"
+#~ msgstr "-50 m"
+
+#~ msgctxt "DGML|"
+#~ msgid "-200 m"
+#~ msgstr "-200 m"
+
+#~ msgctxt "DGML|"
+#~ msgid "-2000 m"
+#~ msgstr "-2000 m"
+
+#~ msgctxt "DGML|"
+#~ msgid "-4000 m"
+#~ msgstr "-4000 m"
+
+#~ msgctxt "DGML|"
+#~ msgid "-6500 m"
+#~ msgstr "-6500 m"
+
+#~ msgctxt "DGML|"
+#~ msgid "-11000 m"
+#~ msgstr "-11000 m"
+
+#~ msgctxt "DGML|"
+#~ msgid "Vector OSM (Development)"
+#~ msgstr "OSM Vektor (Pengembangan)"
+
+#~ msgctxt "DGML|"
+#~ msgid ""
+#~ "<p>A <i>global roadmap</i> created by the OpenStreetMap (OSM) project.</"
+#~ "p><p>OSM is an open community which creates free editable maps.</p>"
+#~ msgstr ""
+#~ "<p>Sebuah <i>peta jalan global</i> yang dibuat oleh proyek OpenStreetMap "
+#~ "(OSM).</p><p>OSM adalah komunitas terbuka yang membuat peta bebas yang "
+#~ "dapat diedit.</p>"
+
+#~ msgctxt "DGML|"
+#~ msgid "Explore the Earth"
+#~ msgstr "Jelajahi Bumi"
+
+#~ msgctxt "DGML|"
+#~ msgid ""
+#~ "<a href=\"tour://earth/openstreetmap/tour.kml\">Play a tour of popular "
+#~ "places.</a>"
+#~ msgstr ""
+#~ "<a href=\"tour://earth/openstreetmap/tour.kml\">Mainkan sebuah tur "
+#~ "tentang berbagai tempat populer.</a>"
+
+#~ msgctxt "DGML|"
+#~ msgid "Vector OSM"
+#~ msgstr "OSM Vektor"
+
+#~ msgctxt "DGML|"
+#~ msgid ""
+#~ "<p>A <i>global roadmap</i> created by the OpenStreetMap (OSM) project.</"
+#~ "p><p>OSM is an open community which creates free editable maps. The OSM "
+#~ "data was rendered using Mapnik.</p>"
+#~ msgstr ""
+#~ "<p>Sebuah <i>peta jalan global</i> yang dibuat oleh proyek OpenStreetMap "
+#~ "(OSM).</p><p>OSM adalah komunitas terbuka yang membuat peta bebas yang "
+#~ "dapat diedit. Data OSM dirender menggunakan Mapnik.</p>"
+
+#~ msgctxt "DGML|"
+#~ msgid "OSM Bitmap Tiles"
+#~ msgstr "Ubin Bitmap OSM"
+
+#~ msgctxt "DGML|"
+#~ msgid "Transportation"
+#~ msgstr "Transportasi"
+
+#~ msgctxt "DGML|"
+#~ msgid "Areas"
+#~ msgstr "Area"
+
+#~ msgctxt "DGML|"
+#~ msgid "Education"
+#~ msgstr "Edukasi"
+
+#~ msgctxt "DGML|"
+#~ msgid "Financial"
+#~ msgstr "Keuangan"
+
+#~ msgctxt "DGML|"
+#~ msgid "Healthcare"
+#~ msgstr "Kesehatan"
+
+#~ msgctxt "DGML|"
+#~ msgid "Entertainment"
+#~ msgstr "Hiburan"
+
+#~ msgctxt "DGML|"
+#~ msgid "Public Buildings"
+#~ msgstr "Bangunan Publik"
+
+#~ msgctxt "DGML|"
+#~ msgid "Accommodation"
+#~ msgstr "Akomodasi"
+
+#~ msgctxt "DGML|"
+#~ msgid "Emergency"
+#~ msgstr "Darurat"
+
+#~ msgctxt "DGML|"
+#~ msgid "Historic"
+#~ msgstr "Bersejarah"
+
+#~ msgctxt "DGML|"
+#~ msgid "Food and Drinks"
+#~ msgstr "Makanan dan Minuman"
+
+#~ msgctxt "DGML|"
+#~ msgid "Shop"
+#~ msgstr "Toko"
+
+#~ msgctxt "DGML|"
+#~ msgid "Motorway"
+#~ msgstr "Jalan kendaraan bermotor"
+
+#~ msgctxt "DGML|"
+#~ msgid "Trunk road"
+#~ msgstr "Jalan bagasi"
+
+#~ msgctxt "DGML|"
+#~ msgid "Primary road"
+#~ msgstr "Jalan utama"
+
+#~ msgctxt "DGML|"
+#~ msgid "Secondary road"
+#~ msgstr "Jalan sekunder"
+
+#~ msgctxt "DGML|"
+#~ msgid "Unclassified road"
+#~ msgstr "Jalan tidak terklasifikasi"
+
+#~ msgctxt "DGML|"
+#~ msgid "Unsurfaced road"
+#~ msgstr "Jalan tanpa permukaan"
+
+#~ msgctxt "DGML|"
+#~ msgid "Track"
+#~ msgstr "Trek"
+
+#~ msgctxt "DGML|"
+#~ msgid "Byway"
+#~ msgstr "Jalan Raya"
+
+#~ msgctxt "DGML|"
+#~ msgid "Cycleway"
+#~ msgstr "Jalur sepeda"
+
+#~ msgctxt "DGML|"
+#~ msgid "Footway"
+#~ msgstr "Trotoar"
+
+#~ msgctxt "DGML|"
+#~ msgid "Railway station"
+#~ msgstr "Stasiun kereta"
+
+#~ msgctxt "DGML|"
+#~ msgid "Railway"
+#~ msgstr "Kereta api"
+
+#~ msgctxt "DGML|"
+#~ msgid "Lightrail, tram"
+#~ msgstr "Rel ringan, trem"
+
+#~ msgctxt "DGML|"
+#~ msgid "Airport runway, taxiway"
+#~ msgstr "Landasan pacu bandara, jalur taxi"
+
+#~ msgctxt "DGML|"
+#~ msgid "Airport apron, terminal"
+#~ msgstr "Apron bandara, terminal"
+
+#~ msgctxt "DGML|"
+#~ msgid "Administrative boundary"
+#~ msgstr "Batas administrasi"
+
+#~ msgctxt "DGML|"
+#~ msgid "Bridge"
+#~ msgstr "Jembatan"
+
+#~ msgctxt "DGML|"
+#~ msgid "Tunnel"
+#~ msgstr "Terowongan"
+
+#~ msgctxt "DGML|"
+#~ msgid "Forest"
+#~ msgstr "Hutan"
+
+#~ msgctxt "DGML|"
+#~ msgid "Wood"
+#~ msgstr "Kayu"
+
+#~ msgctxt "DGML|"
+#~ msgid "Golf course"
+#~ msgstr "Lapangan golf"
+
+#~ msgctxt "DGML|"
+#~ msgid "Park"
+#~ msgstr "Taman"
+
+#~ msgctxt "DGML|"
+#~ msgid "Residential Area"
+#~ msgstr "Area permukiman"
+
+#~ msgctxt "DGML|"
+#~ msgid "Tourist attraction"
+#~ msgstr "Objek wisata"
+
+#~ msgctxt "DGML|"
+#~ msgid "Common, meadow"
+#~ msgstr "Umum, padang rumput"
+
+#~ msgctxt "DGML|"
+#~ msgid "Retail area"
+#~ msgstr "Area ritel"
+
+#~ msgctxt "DGML|"
+#~ msgid "Industrial Area"
+#~ msgstr "Area industri"
+
+#~ msgctxt "DGML|"
+#~ msgid "Commercial Area"
+#~ msgstr "Area komersial"
+
+#~ msgctxt "DGML|"
+#~ msgid "Heathland"
+#~ msgstr "Tanah kesehatan"
+
+#~ msgctxt "DGML|"
+#~ msgid "Lake, reservoir"
+#~ msgstr "Danau, waduk"
+
+#~ msgctxt "DGML|"
+#~ msgid "Farm"
+#~ msgstr "Tanah pertanian"
+
+#~ msgctxt "DGML|"
+#~ msgid "Brownfield site"
+#~ msgstr "Situs ladang cokelat"
+
+#~ msgctxt "DGML|"
+#~ msgid "Cemetery"
+#~ msgstr "Kuburan"
+
+#~ msgctxt "DGML|"
+#~ msgid "Allotments"
+#~ msgstr "Jatah"
+
+#~ msgctxt "DGML|"
+#~ msgid "Sports pitch"
+#~ msgstr "Lapangan olahraga"
+
+#~ msgctxt "DGML|"
+#~ msgid "Sports centre"
+#~ msgstr "Pusat olahraga"
+
+#~ msgctxt "DGML|"
+#~ msgid "Nature reserve"
+#~ msgstr "Cagar alam"
+
+#~ msgctxt "DGML|"
+#~ msgid "Military area"
+#~ msgstr "Area militer"
+
+#~ msgctxt "DGML|"
+#~ msgid "School, university"
+#~ msgstr "Sekolah, universitas"
+
+#~ msgctxt "DGML|"
+#~ msgid "Significant Building"
+#~ msgstr "Bangunan penting"
+
+#~ msgctxt "DGML|"
+#~ msgid "Summit, peak"
+#~ msgstr "Puncak"
+
+#~ msgctxt "DGML|"
+#~ msgid "College"
+#~ msgstr "Kampus"
+
+#~ msgctxt "DGML|"
+#~ msgid "Kindergarten"
+#~ msgstr "Taman kanak-kanak"
+
+#~ msgctxt "DGML|"
+#~ msgid "Library"
+#~ msgstr "Perpustakaan"
+
+#~ msgctxt "DGML|"
+#~ msgid "School"
+#~ msgstr "Sekolah"
+
+#~ msgctxt "DGML|"
+#~ msgid "University"
+#~ msgstr "Universitas"
+
+#~ msgctxt "DGML|"
+#~ msgid "ATM"
+#~ msgstr "ATM"
+
+#~ msgctxt "DGML|"
+#~ msgid "Bank"
+#~ msgstr "Bank"
+
+#~ msgctxt "DGML|"
+#~ msgid "Bureau de change"
+#~ msgstr "Penukaran mata uang"
+
+#~ msgctxt "DGML|"
+#~ msgid "Dentist"
+#~ msgstr "Dokter gigi"
+
+#~ msgctxt "DGML|"
+#~ msgid "Doctors"
+#~ msgstr "Dokter"
+
+#~ msgctxt "DGML|"
+#~ msgid "Pharmacy"
+#~ msgstr "Apotek"
+
+#~ msgctxt "DGML|"
+#~ msgid "Veterinary"
+#~ msgstr "Dokter hewan"
+
+#~ msgctxt "DGML|"
+#~ msgid "Cinema"
+#~ msgstr "Bioskop"
+
+#~ msgctxt "DGML|"
+#~ msgid "Theatre"
+#~ msgstr "Teater"
+
+#~ msgctxt "DGML|"
+#~ msgid "Court"
+#~ msgstr "Pengadilan"
+
+#~ msgctxt "DGML|"
+#~ msgid "Embassy"
+#~ msgstr "Kedutaan"
+
+#~ msgctxt "DGML|"
+#~ msgid "Church"
+#~ msgstr "Gereja"
+
+#~ msgctxt "DGML|"
+#~ msgid "Playground"
+#~ msgstr "Taman bermain"
+
+#~ msgctxt "DGML|"
+#~ msgid "Place of worship"
+#~ msgstr "Tempat beribadah"
+
+#~ msgctxt "DGML|"
+#~ msgid "Post office"
+#~ msgstr "Kantor pos"
+
+#~ msgctxt "DGML|"
+#~ msgid "Public building"
+#~ msgstr "Bangunan publik"
+
+#~ msgctxt "DGML|"
+#~ msgid "Toilets"
+#~ msgstr "Toilet"
+
+#~ msgctxt "DGML|"
+#~ msgid "Hotel"
+#~ msgstr "Hotel"
+
+#~ msgctxt "DGML|"
+#~ msgid "Motel"
+#~ msgstr "Motel"
+
+#~ msgctxt "DGML|"
+#~ msgid "Hospital"
+#~ msgstr "Rumah sakit"
+
+#~ msgctxt "DGML|"
+#~ msgid "Fire station"
+#~ msgstr "Stasiun pemadam kebakaran"
+
+#~ msgctxt "DGML|"
+#~ msgid "Monument"
+#~ msgstr "Monumen"
+
+#~ msgctxt "DGML|"
+#~ msgid "Ruins"
+#~ msgstr "Reruntuhan"
+
+#~ msgctxt "DGML|"
+#~ msgid "Bar"
+#~ msgstr "Bar"
+
+#~ msgctxt "DGML|"
+#~ msgid "Biergarten"
+#~ msgstr "Taman bir"
+
+#~ msgctxt "DGML|"
+#~ msgid "Cafe"
+#~ msgstr "Kafe"
+
+#~ msgctxt "DGML|"
+#~ msgid "Drinking water"
+#~ msgstr "Air minum"
+
+#~ msgctxt "DGML|"
+#~ msgid "Fast Food"
+#~ msgstr "Makanan cepat saji"
+
+#~ msgctxt "DGML|"
+#~ msgid "Ice Cream"
+#~ msgstr "Es krim"
+
+#~ msgctxt "DGML|"
+#~ msgid "Pub"
+#~ msgstr "Pub"
+
+#~ msgctxt "DGML|"
+#~ msgid "Restaurant"
+#~ msgstr "Restoran"
+
+#~ msgctxt "DGML|"
+#~ msgid "Alcohol"
+#~ msgstr "Alkohol"
+
+#~ msgctxt "DGML|"
+#~ msgid "Bakery"
+#~ msgstr "Toko roti"
+
+#~ msgctxt "DGML|"
+#~ msgid "Car"
+#~ msgstr "Mobil"
+
+#~ msgctxt "DGML|"
+#~ msgid "Clothes"
+#~ msgstr "Pakaian"
+
+#~ msgctxt "DGML|"
+#~ msgid "Convenience"
+#~ msgstr "Toko serba-ada"
+
+#~ msgctxt "DGML|"
+#~ msgid "Gas"
+#~ msgstr "Pom bensin"
+
+#~ msgctxt "DGML|"
+#~ msgid "Gift"
+#~ msgstr "Hadiah"
+
+#~ msgctxt "DGML|"
+#~ msgid "Empty globe"
+#~ msgstr "Globe kosong"
+
+#~ msgctxt "DGML|"
+#~ msgid ""
+#~ "<p>An <i>empty globe</i> used as a base to load and view .osm files "
+#~ "(offline maps).</p>"
+#~ msgstr ""
+#~ "<p>Sebuah <i>globe kosong</i> digunakan sebagai dasar untuk memuat dan "
+#~ "melihat file .osm (peta luring).</p>"
+
+#~ msgctxt "DGML|"
+#~ msgid "OpenStreetMap"
+#~ msgstr "OpenStreetMap"
+
+#~ msgctxt "DGML|"
+#~ msgid "Humanitarian OSM Team"
+#~ msgstr "Tim OSM Kemanusiaan"
+
+#~ msgctxt "DGML|"
+#~ msgid "Plain Map"
+#~ msgstr "Peta Biasa"
+
+#~ msgctxt "DGML|"
+#~ msgid ""
+#~ "<p>A <i>plain map</i>.</p><p>It uses vector lines to mark coastlines and "
+#~ "country borders, etc...</p>"
+#~ msgstr ""
+#~ "<p>Sebuah <i>peta biasa</i>.</p><p>Menggunakan garis vektor untuk "
+#~ "menandai garis laut danperbatasan negara, dll...</p>"
+
+#~ msgctxt "DGML|"
+#~ msgid "Behaim Globe 1492"
+#~ msgstr "Globe Behaim 1492"
+
+#~ msgctxt "DGML|"
+#~ msgid ""
+#~ "<p> Martin Behaim's <i>Erdapfel</i> is the oldest existent globe of the "
+#~ "Earth. <i>Credits: Germanisches Nationalmuseum, Nuremberg, License: CC BY-"
+#~ "SA 3.0.</i></p>"
+#~ msgstr ""
+#~ "<p><i>Erdapfel</i> Martin Behaim adalah globe Bumi tertua yang ada. "
+#~ "<i>Kredit: Germanisches Nationalmuseum, Nuremberg, Lisensi: CC BY-SA 3.0."
+#~ "</i></p>"
+
+#~ msgctxt "DGML|"
+#~ msgid "Places (in German)"
+#~ msgstr "Tempat (di Jerman)"
+
+#~ msgctxt "DGML|"
+#~ msgid "Behaim Places"
+#~ msgstr "Tempat Behaim"
+
+#~ msgctxt "DGML|"
+#~ msgid "Texts and illustrations"
+#~ msgstr "Teks dan ilustrasi"
+
+#~ msgctxt "DGML|"
+#~ msgid "Facsimile drawings"
+#~ msgstr "Gambar faksimili"
+
+#~ msgctxt "DGML|"
+#~ msgid "Ravenstein (1908)"
+#~ msgstr "Ravenstein (1908)"
+
+#~ msgctxt "DGML|"
+#~ msgid "Ghillany (1853)"
+#~ msgstr "Ghillany (1853)"
+
+#~ msgctxt "DGML|"
+#~ msgid "Reference lines"
+#~ msgstr "Garis referensi"
+
+#~ msgctxt "DGML|"
+#~ msgid "Accurate Coastline"
+#~ msgstr "Garis Laut Akurat"
+
+#~ msgctxt "DGML|"
+#~ msgid "Precipitation (July)"
+#~ msgstr "Curah hujan (Juli)"
+
+#~ msgctxt "DGML|"
+#~ msgid ""
+#~ "A map which shows the average precipitation (rain/snow/hail/etc) in July."
+#~ msgstr ""
+#~ "Peta yang menunjukkan curah hujan rata-rata (hujan, salju, hujan es, "
+#~ "dll.) pada bulan Juli."
+
+#~ msgctxt "DGML|"
+#~ msgid "Precipitation"
+#~ msgstr "Curah hujan"
+
+#~ msgctxt "DGML|"
+#~ msgid "0 mm"
+#~ msgstr "0 mm"
+
+#~ msgctxt "DGML|"
+#~ msgid "10 mm"
+#~ msgstr "10 mm"
+
+#~ msgctxt "DGML|"
+#~ msgid "40 mm"
+#~ msgstr "40 mm"
+
+#~ msgctxt "DGML|"
+#~ msgid "63 mm"
+#~ msgstr "63 mm"
+
+#~ msgctxt "DGML|"
+#~ msgid "89 mm"
+#~ msgstr "89 mm"
+
+#~ msgctxt "DGML|"
+#~ msgid "127 mm"
+#~ msgstr "127 mm"
+
+#~ msgctxt "DGML|"
+#~ msgid "256 mm"
+#~ msgstr "256 mm"
+
+#~ msgctxt "DGML|"
+#~ msgid "512 mm"
+#~ msgstr "512 mm"
+
+#~ msgctxt "DGML|"
+#~ msgid "1024 mm or more"
+#~ msgstr "1024 mm atau lebih"
+
+#~ msgctxt "DGML|"
+#~ msgid "Precipitation (December)"
+#~ msgstr "Curah hujan (Desember)"
+
+#~ msgctxt "DGML|"
+#~ msgid "A map which shows the average precipitation in December."
+#~ msgstr ""
+#~ "Sebuah peta yang menunjukkan curah hujan rata-rata pada bulan Desember."
+
+#~ msgctxt "DGML|"
+#~ msgid "Historical Map 1689"
+#~ msgstr "Peta Bersejarah 1689"
+
+#~ msgctxt "DGML|"
+#~ msgid ""
+#~ "<i>Historical world map</i> from the year 1689 created by G. van Schagen "
+#~ "in Amsterdam."
+#~ msgstr ""
+#~ "<i>Peta dunia bersejarah</i> dari tahun 1689 dibuat oleh G. van Schagen "
+#~ "di Amsterdam."
+
+#~ msgctxt "DGML|"
+#~ msgid "Town"
+#~ msgstr "Kota"
+
+#~ msgctxt "DGML|"
+#~ msgid "SRTM Data"
+#~ msgstr "Data SRTM"
+
+#~ msgctxt "DGML|"
+#~ msgid "Political Map"
+#~ msgstr "Peta Politik"
+
+#~ msgctxt "DGML|"
+#~ msgid ""
+#~ "<p>A <i>Political Map</i>.</p><p>The theme displays various countries.</p>"
+#~ msgstr ""
+#~ "<p>Sebuah <i>Peta Politik</i>.</p><p>Temanya menunjukkan tentang berbagai "
+#~ "negara.</p>"
+
+#~ msgctxt "DGML|"
+#~ msgid "Rivers"
+#~ msgstr "Sungai"
+
+#~ msgctxt "DGML|"
+#~ msgid "Sentinel2 Satellite Map"
+#~ msgstr "Peta Satelit Sentinel2"
+
+#~ msgctxt "DGML|"
+#~ msgid "<p>A <i>satellite map</i> based on ESA's Sentinel 2 mission.</p>"
+#~ msgstr "<p>Sebuah <i>peta satelit</i> berdasarkan misi ESA Sentinel 2.</p>"
+
+#~ msgctxt "DGML|"
+#~ msgid "Temperature (December)"
+#~ msgstr "Temperatur (Desember)"
+
+#~ msgctxt "DGML|"
+#~ msgid "A map which shows the average temperature in December."
+#~ msgstr ""
+#~ "Sebuah peta yang menunjukkan temperatur rata-rata pada bulan Desember."
+
+#~ msgctxt "DGML|"
+#~ msgid "Satellite View"
+#~ msgstr "Tampilan Satelit"
+
+#~ msgctxt "DGML|"
+#~ msgid ""
+#~ "<p>Earth as seen from Space.</p><p>The map is based on NASA's beautiful "
+#~ "\"Blue Marble Next Generation\" pictures. Credits: NASA's Earth "
+#~ "Observatory</p>"
+#~ msgstr ""
+#~ "<p>Bumi dilihat dari Luar Angkasa.</p><p>Petanya berdasarkan citra \"Blue "
+#~ "Marble Next Generation\" NASA yang indah. Kredit: Observatorium Bumi "
+#~ "NASA</p>"
+
+#~ msgctxt "DGML|"
+#~ msgid "Ice"
+#~ msgstr "Es"
+
+#~ msgctxt "DGML|"
+#~ msgid "Vegetation"
+#~ msgstr "Vegetasi"
+
+#~ msgctxt "DGML|"
+#~ msgid "Desert"
+#~ msgstr "Gurun"
+
+#~ msgctxt "DGML|"
+#~ msgid "Night Sky"
+#~ msgstr "Langit Malam"
+
+#~ msgctxt "DGML|"
+#~ msgid ""
+#~ "<p>The <i>night sky</i>.</p><p>Displays the stars and constellations at "
+#~ "night.</p>"
+#~ msgstr ""
+#~ "<p><i>Langit malam</i>.</p><p>Menampilkan bintang dan rasi bintang di "
+#~ "malam hari.</p>"
+
+#~ msgctxt "Legends|"
+#~ msgid "Marble: Legend"
+#~ msgstr "Marble: Legenda"
+
+#~ msgctxt "Legends|"
+#~ msgid "<a href=\"checkbox:cities\"/>"
+#~ msgstr "<a href=\"checkbox:cities\"/>"
+
+#~ msgctxt "Legends|"
+#~ msgid "Populated Places"
+#~ msgstr "Tempat Berpenduduk"
+
+#~ msgctxt "Legends|"
+#~ msgid "Population:"
+#~ msgstr "Populasi:"
+
+#~ msgctxt "Legends|"
+#~ msgid "&gt; 1&nbsp;000&nbsp;000"
+#~ msgstr "&gt; 1&nbsp;000&nbsp;000"
+
+#~ msgctxt "Legends|"
+#~ msgid "&ge; 100&nbsp;000"
+#~ msgstr "&ge; 100&nbsp;000"
+
+#~ msgctxt "Legends|"
+#~ msgid "&ge; 10&nbsp;000"
+#~ msgstr "&ge; 10&nbsp;000"
+
+#~ msgctxt "Legends|"
+#~ msgid "&lt; 10&nbsp;000"
+#~ msgstr "&lt; 10&nbsp;000"
+
+#~ msgctxt "Legends|"
+#~ msgid "<br/>"
+#~ msgstr "<br/>"
+
+#~ msgctxt "Legends|"
+#~ msgid "Capitals:"
+#~ msgstr "Ibu Kota:"
+
+#~ msgctxt "Legends|"
+#~ msgid "Red:&nbsp;Nation"
+#~ msgstr "Merah:&nbsp;Bangsa"
+
+#~ msgctxt "Legends|"
+#~ msgid "Orange:&nbsp;State"
+#~ msgstr "Oranye:&nbsp;Negara"
+
+#~ msgctxt "Legends|"
+#~ msgid "Yellow:&nbsp;County"
+#~ msgstr "Kuning:&nbsp;Daerah"
+
+#~ msgctxt "Legends|"
+#~ msgid "White:&nbsp;None"
+#~ msgstr "Putih:&nbsp;Nihil"
+
+#~ msgctxt "Legends|"
+#~ msgid "<!-- ##customLegendEntries:all## -->"
+#~ msgstr "<!-- ##customLegendEntries:all## -->"
+
+#~ msgctxt "StarNames|"
+#~ msgid "Andromeda"
+#~ msgstr "Andromeda"
+
+#~ msgctxt "StarNames|"
+#~ msgid "Antlia"
+#~ msgstr "Antlia"
+
+#~ msgctxt "StarNames|"
+#~ msgid "Apus"
+#~ msgstr "Apus"
+
+#~ msgctxt "StarNames|"
+#~ msgid "Aquarius"
+#~ msgstr "Aquarius"
+
+#~ msgctxt "StarNames|"
+#~ msgid "Aquila"
+#~ msgstr "Aquila"
+
+#~ msgctxt "StarNames|"
+#~ msgid "Ara"
+#~ msgstr "Ara"
+
+#~ msgctxt "StarNames|"
+#~ msgid "Aries"
+#~ msgstr "Aries"
+
+#~ msgctxt "StarNames|"
+#~ msgid "Auriga"
+#~ msgstr "Auriga"
+
+#~ msgctxt "StarNames|"
+#~ msgid "Boötes"
+#~ msgstr "Boötes"
+
+#~ msgctxt "StarNames|"
+#~ msgid "Caelum"
+#~ msgstr "Caelum"
+
+#~ msgctxt "StarNames|"
+#~ msgid "Camelopardalis"
+#~ msgstr "Camelopardalis"
+
+#~ msgctxt "StarNames|"
+#~ msgid "Cancer"
+#~ msgstr "Cancer"
+
+#~ msgctxt "StarNames|"
+#~ msgid "Canes Venatici"
+#~ msgstr "Canes Venatici"
+
+#~ msgctxt "StarNames|"
+#~ msgid "Canis Major"
+#~ msgstr "Canis Major"
+
+#~ msgctxt "StarNames|"
+#~ msgid "Canis Minor"
+#~ msgstr "Canis Minor"
+
+#~ msgctxt "StarNames|"
+#~ msgid "Capricornus"
+#~ msgstr "Capricornus"
+
+#~ msgctxt "StarNames|"
+#~ msgid "Carina"
+#~ msgstr "Carina"
+
+#~ msgctxt "StarNames|"
+#~ msgid "Cassiopeia"
+#~ msgstr "Cassiopeia"
+
+#~ msgctxt "StarNames|"
+#~ msgid "Centaurus"
+#~ msgstr "Centaurus"
+
+#~ msgctxt "StarNames|"
+#~ msgid "Cepheus"
+#~ msgstr "Cepheus"
+
+#~ msgctxt "StarNames|"
+#~ msgid "Cetus"
+#~ msgstr "Cetus"
+
+#~ msgctxt "StarNames|"
+#~ msgid "Chamaeleon"
+#~ msgstr "Chamaeleon"
+
+#~ msgctxt "StarNames|"
+#~ msgid "Circinus"
+#~ msgstr "Circinus"
+
+#~ msgctxt "StarNames|"
+#~ msgid "Columba"
+#~ msgstr "Columba"
+
+#~ msgctxt "StarNames|"
+#~ msgid "Coma Berenices"
+#~ msgstr "Coma Berenices"
+
+#~ msgctxt "StarNames|"
+#~ msgid "Corona Australis"
+#~ msgstr "Corona Australis"
+
+#~ msgctxt "StarNames|"
+#~ msgid "Corona Borealis"
+#~ msgstr "Corona Borealis"
+
+#~ msgctxt "StarNames|"
+#~ msgid "Corvus"
+#~ msgstr "Corvus"
+
+#~ msgctxt "StarNames|"
+#~ msgid "Crater"
+#~ msgstr "Crater"
+
+#~ msgctxt "StarNames|"
+#~ msgid "Crux"
+#~ msgstr "Crux"
+
+#~ msgctxt "StarNames|"
+#~ msgid "Cygnus"
+#~ msgstr "Cygnus"
+
+#~ msgctxt "StarNames|"
+#~ msgid "Delphinus"
+#~ msgstr "Delphinus"
+
+#~ msgctxt "StarNames|"
+#~ msgid "Dorado"
+#~ msgstr "Dorado"
+
+#~ msgctxt "StarNames|"
+#~ msgid "Draco"
+#~ msgstr "Draco"
+
+#~ msgctxt "StarNames|"
+#~ msgid "Equuleus"
+#~ msgstr "Equuleus"
+
+#~ msgctxt "StarNames|"
+#~ msgid "Eridanus"
+#~ msgstr "Eridanus"
+
+#~ msgctxt "StarNames|"
+#~ msgid "Fornax"
+#~ msgstr "Fornax"
+
+#~ msgctxt "StarNames|"
+#~ msgid "Gemini"
+#~ msgstr "Gemini"
+
+#~ msgctxt "StarNames|"
+#~ msgid "Grus"
+#~ msgstr "Grus"
+
+#~ msgctxt "StarNames|"
+#~ msgid "Hercules"
+#~ msgstr "Hercules"
+
+#~ msgctxt "StarNames|"
+#~ msgid "Horologium"
+#~ msgstr "Horologium"
+
+#~ msgctxt "StarNames|"
+#~ msgid "Hydra"
+#~ msgstr "Hydra"
+
+#~ msgctxt "StarNames|"
+#~ msgid "Hydrus"
+#~ msgstr "Hydrus"
+
+#~ msgctxt "StarNames|"
+#~ msgid "Indus"
+#~ msgstr "Indus"
+
+#~ msgctxt "StarNames|"
+#~ msgid "Lacerta"
+#~ msgstr "Lacerta"
+
+#~ msgctxt "StarNames|"
+#~ msgid "Leo"
+#~ msgstr "Leo"
+
+#~ msgctxt "StarNames|"
+#~ msgid "Leo Minor"
+#~ msgstr "Leo Minor"
+
+#~ msgctxt "StarNames|"
+#~ msgid "Lepus"
+#~ msgstr "Lepus"
+
+#~ msgctxt "StarNames|"
+#~ msgid "Libra"
+#~ msgstr "Libra"
+
+#~ msgctxt "StarNames|"
+#~ msgid "Lupus"
+#~ msgstr "Lupus"
+
+#~ msgctxt "StarNames|"
+#~ msgid "Lynx"
+#~ msgstr "Lynx"
+
+#~ msgctxt "StarNames|"
+#~ msgid "Lyra"
+#~ msgstr "Lyra"
+
+#~ msgctxt "StarNames|"
+#~ msgid "Mensa"
+#~ msgstr "Mensa"
+
+#~ msgctxt "StarNames|"
+#~ msgid "Microscopium"
+#~ msgstr "Microscopium"
+
+#~ msgctxt "StarNames|"
+#~ msgid "Monoceros"
+#~ msgstr "Monoceros"
+
+#~ msgctxt "StarNames|"
+#~ msgid "Musca"
+#~ msgstr "Musca"
+
+#~ msgctxt "StarNames|"
+#~ msgid "Norma"
+#~ msgstr "Norma"
+
+#~ msgctxt "StarNames|"
+#~ msgid "Octans"
+#~ msgstr "Octans"
+
+#~ msgctxt "StarNames|"
+#~ msgid "Ophiuchus"
+#~ msgstr "Ophiuchus"
+
+#~ msgctxt "StarNames|"
+#~ msgid "Orion"
+#~ msgstr "Orion"
+
+#~ msgctxt "StarNames|"
+#~ msgid "Pavo"
+#~ msgstr "Pavo"
+
+#~ msgctxt "StarNames|"
+#~ msgid "Pegasus"
+#~ msgstr "Pegasus"
+
+#~ msgctxt "StarNames|"
+#~ msgid "Perseus"
+#~ msgstr "Perseus"
+
+#~ msgctxt "StarNames|"
+#~ msgid "Phoenix"
+#~ msgstr "Phoenix"
+
+#~ msgctxt "StarNames|"
+#~ msgid "Pictor"
+#~ msgstr "Pictor"
+
+#~ msgctxt "StarNames|"
+#~ msgid "Pisces"
+#~ msgstr "Pisces"
+
+#~ msgctxt "StarNames|"
+#~ msgid "Piscis Austrinus"
+#~ msgstr "Piscis Austrinus"
+
+#~ msgctxt "StarNames|"
+#~ msgid "Puppis"
+#~ msgstr "Puppis"
+
+#~ msgctxt "StarNames|"
+#~ msgid "Pyxis"
+#~ msgstr "Pyxis"
+
+#~ msgctxt "StarNames|"
+#~ msgid "Reticulum"
+#~ msgstr "Reticulum"
+
+#~ msgctxt "StarNames|"
+#~ msgid "Sagitta"
+#~ msgstr "Sagitta"
+
+#~ msgctxt "StarNames|"
+#~ msgid "Sagittarius"
+#~ msgstr "Sagittarius"
+
+#~ msgctxt "StarNames|"
+#~ msgid "Scorpius"
+#~ msgstr "Scorpius"
+
+#~ msgctxt "StarNames|"
+#~ msgid "Sculptor"
+#~ msgstr "Sculptor"
+
+#~ msgctxt "StarNames|"
+#~ msgid "Scutum"
+#~ msgstr "Scutum"
+
+#~ msgctxt "StarNames|"
+#~ msgid "Serpens"
+#~ msgstr "Serpens"
+
+#~ msgctxt "StarNames|"
+#~ msgid "Sextans"
+#~ msgstr "Sextans"
+
+#~ msgctxt "StarNames|"
+#~ msgid "Taurus"
+#~ msgstr "Taurus"
+
+#~ msgctxt "StarNames|"
+#~ msgid "Telescopium"
+#~ msgstr "Telescopium"
+
+#~ msgctxt "StarNames|"
+#~ msgid "Triangulum"
+#~ msgstr "Triangulum"
+
+#~ msgctxt "StarNames|"
+#~ msgid "Triangulum Australe"
+#~ msgstr "Triangulum Australe"
+
+#~ msgctxt "StarNames|"
+#~ msgid "Tucana"
+#~ msgstr "Tucana"
+
+#~ msgctxt "StarNames|"
+#~ msgid "Ursa Major"
+#~ msgstr "Ursa Major"
+
+#~ msgctxt "StarNames|"
+#~ msgid "Ursa Minor"
+#~ msgstr "Ursa Minor"
+
+#~ msgctxt "StarNames|"
+#~ msgid "Vela"
+#~ msgstr "Vela"
+
+#~ msgctxt "StarNames|"
+#~ msgid "Virgo"
+#~ msgstr "Virgo"
+
+#~ msgctxt "StarNames|"
+#~ msgid "Volans"
+#~ msgstr "Volans"
+
+#~ msgctxt "StarNames|"
+#~ msgid "Vulpecula"
+#~ msgstr "Vulpecula"
+
+#, fuzzy
+#~| msgctxt "DGML|"
+#~| msgid "Vector OSM"
+#~ msgctxt "Marble::DownloadRegionDialog|"
+#~ msgid "Vector tiles"
+#~ msgstr "OSM Vektor"
+
+#, fuzzy
+#~| msgctxt "DGML|"
+#~| msgid "OpenStreetMap"
+#~ msgctxt "MapWizard|"
+#~ msgid "OpenStreetMap"
+#~ msgstr "OpenStreetMap"
+
+#~ msgctxt "AboutDialog|"
+#~ msgid ""
+#~ "<h3>Marble Maps</h3><p>Find your way! Marble Maps brings the highly "
+#~ "detailed OpenStreetMap to your mobile devices. It features a crisp, "
+#~ "beautiful map with an intuitive user interface. It's open source, "
+#~ "entirely based on free data and open standards and respects your privacy."
+#~ "</p>"
+#~ msgstr ""
+#~ "<h3>Marble Maps</h3><p>Temukan jalan Anda! Marble Maps memberikan "
+#~ "OpenStreetMap yang sangat rinci ke peranti ponsel Anda. Memfiturkan "
+#~ "sebuah peta yang tajam dan indah dengan antarmuka pengguna yang intuitif. "
+#~ "Sumber terbuka, berdasarkan hanya pada data bebas dan standar terbuka dan "
+#~ "menghormati privasi Anda.</p>"
+
+#~ msgctxt "DGML|"
+#~ msgid "Hillshading"
+#~ msgstr "Bayangan bukit"

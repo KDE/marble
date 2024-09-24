@@ -1,0 +1,2243 @@
+# translation of marble.po to Belarusian
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Darafei Praliaskouski <komzpa@licei2.com>, 2007.
+msgid ""
+msgstr ""
+"Project-Id-Version: marble\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2024-09-23 00:36+0000\n"
+"PO-Revision-Date: 2007-06-22 20:09+0300\n"
+"Last-Translator: Darafei Praliaskouski <komzpa@licei2.com>\n"
+"Language-Team: Belarusian <i18n@mova.org>\n"
+"Language: be\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.11.4\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || n%10>=5 && n%10<=9 || n"
+"%100>=11 && n%100<=14 ? 2 : 3);\n"
+"X-Qt-Contexts: true\n"
+
+#, fuzzy, kde-format
+#| msgctxt "EMAIL OF TRANSLATORS"
+#| msgid "Your emails"
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "komzpa@licei2.com"
+
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "komzpa@licei2.com"
+
+#: Bookmarks.qml:20
+#, kde-format
+msgctxt "@title:window"
+msgid "Bookmarks"
+msgstr ""
+
+#: Bookmarks.qml:69
+#, kde-format
+msgid "Your bookmarks will appear here."
+msgstr ""
+
+#: CurrentPosition.qml:54
+#, fuzzy, kde-format
+#| msgid "Show scale bar"
+msgctxt "@option:check"
+msgid "Follow Current Position"
+msgstr "Паказваць паласу маштабу"
+
+#: main.cpp:37 MainScreen.qml:20 MainScreen.qml:177
+#, fuzzy, kde-format
+#| msgid "Marble"
+msgid "Marble Maps"
+msgstr "Marble"
+
+#: main.cpp:39
+#, kde-format
+msgid "Maps"
+msgstr ""
+
+#: main.cpp:41
+#, kde-format
+msgid "© KDE Community"
+msgstr ""
+
+#: MainScreen.qml:86
+#, kde-format
+msgid "Public Transport"
+msgstr ""
+
+#: MainScreen.qml:101
+#, kde-format
+msgid "Outdoor Activities"
+msgstr ""
+
+#: MainScreen.qml:113
+#, kde-format
+msgctxt "@action:button"
+msgid "Accessibility"
+msgstr ""
+
+#: MainScreen.qml:122
+#, fuzzy, kde-format
+#| msgid "Marble"
+msgctxt "@action:button"
+msgid "About"
+msgstr "Marble"
+
+#: MainScreen.qml:133
+#, kde-format
+msgctxt "@action:button"
+msgid "Bookmarks"
+msgstr ""
+
+#: MainScreen.qml:144
+#, kde-format
+msgctxt "@action:button"
+msgid "Layer Options"
+msgstr ""
+
+#: MainScreen.qml:455
+#, kde-format
+msgid "%1 km"
+msgstr ""
+
+#: NavigationInfoBar.qml:20
+#, kde-format
+msgctxt "distance in km"
+msgid "%1 km"
+msgstr ""
+
+#: NavigationInfoBar.qml:22
+#, kde-format
+msgctxt "distance in m"
+msgid "%1 m"
+msgstr ""
+
+#: NavigationInfoBar.qml:24
+#, kde-format
+msgctxt "distance in m with decimals"
+msgid "%1 m"
+msgstr ""
+
+#: Options.qml:20
+#, kde-format
+msgctxt "@title:window"
+msgid "Layer Options"
+msgstr ""
+
+#: Options.qml:23
+#, kde-format
+msgctxt "@title:group"
+msgid "Public Transport Layers"
+msgstr ""
+
+#: Options.qml:28
+#, kde-format
+msgctxt "@option:check"
+msgid "Train"
+msgstr ""
+
+#: Options.qml:35
+#, kde-format
+msgctxt "@option:check"
+msgid "Subway"
+msgstr ""
+
+#: Options.qml:42
+#, kde-format
+msgctxt "@option:check"
+msgid "Tram"
+msgstr ""
+
+#: Options.qml:49
+#, kde-format
+msgctxt "@option:check"
+msgid "Bus"
+msgstr ""
+
+#: Options.qml:56
+#, kde-format
+msgctxt "@option:check"
+msgid "Trolley Bus"
+msgstr ""
+
+#: Options.qml:64
+#, kde-format
+msgid "Outdoor Activities Layers"
+msgstr ""
+
+#: Options.qml:69
+#, kde-format
+msgctxt "@option:check"
+msgid "Walkways"
+msgstr ""
+
+#: Options.qml:76
+#, fuzzy, kde-format
+#| msgid "Show scale bar"
+msgctxt "@option:check"
+msgid "Hiking Routes"
+msgstr "Паказваць паласу маштабу"
+
+#: Options.qml:83
+#, fuzzy, kde-format
+#| msgid "Show scale bar"
+msgctxt "@option:check"
+msgid "Bicycle Routes"
+msgstr "Паказваць паласу маштабу"
+
+#: Options.qml:90
+#, kde-format
+msgctxt "@option:check"
+msgid "Mountainbike Routes"
+msgstr ""
+
+#: Options.qml:97
+#, fuzzy, kde-format
+#| msgid "&Print"
+msgctxt "@option:check"
+msgid "Inline Skating Routes"
+msgstr "&Друкаваць"
+
+#: Options.qml:104
+#, kde-format
+msgctxt "@option:check"
+msgid "Bridleways"
+msgstr ""
+
+#: PlacemarkDialog.qml:48
+#, kde-format
+msgctxt "placeholder"
+msgid "No Name"
+msgstr ""
+
+#: PlacemarkDialog.qml:168
+#, kde-format
+msgctxt "@title:group"
+msgid "Tags:"
+msgstr ""
+
+#: ProfileSelectorMenu.qml:29
+#, fuzzy, kde-format
+#| msgid "Coordinates: "
+msgid "Car (fastest)"
+msgstr "Каардынаты: "
+
+#: ProfileSelectorMenu.qml:40
+#, fuzzy, kde-format
+#| msgid "Show scale bar"
+msgid "Bicycle"
+msgstr "Паказваць паласу маштабу"
+
+#: ProfileSelectorMenu.qml:49
+#, kde-format
+msgid "Pedestrian"
+msgstr ""
+
+#: RouteEditor.qml:62
+#, kde-format
+msgid "Search for places to integrate them into a route."
+msgstr ""
+
+#: SettingsDialog.qml:48
+#, kde-format
+msgid "Network Settings"
+msgstr ""
+
+#: SettingsDialog.qml:53
+#, kde-format
+msgid "Download Maps via WLAN only"
+msgstr ""
+
+#, fuzzy
+#~| msgid "Coordinates: "
+#~ msgctxt "DGML|"
+#~ msgid "Craters"
+#~ msgstr "Каардынаты: "
+
+#, fuzzy
+#~| msgid "Marble"
+#~ msgctxt "DGML|"
+#~ msgid "Maria"
+#~ msgstr "Marble"
+
+#, fuzzy
+#~| msgid "Coordinates: "
+#~ msgctxt "DGML|"
+#~ msgid "Coordinate Grid"
+#~ msgstr "Каардынаты: "
+
+#, fuzzy
+#~| msgid "Coordinates: "
+#~ msgctxt "DGML|"
+#~ msgid "Other"
+#~ msgstr "Каардынаты: "
+
+#, fuzzy
+#~| msgid "Coordinates: "
+#~ msgctxt "DGML|"
+#~ msgid "Selenographic Pole"
+#~ msgstr "Каардынаты: "
+
+#, fuzzy
+#~| msgid "Coordinates: "
+#~ msgctxt "DGML|"
+#~ msgid "Geographic Pole"
+#~ msgstr "Каардынаты: "
+
+#, fuzzy
+#~| msgid "Marble"
+#~ msgctxt "DGML|"
+#~ msgid "State"
+#~ msgstr "Marble"
+
+#, fuzzy
+#~| msgid "Coordinates: "
+#~ msgctxt "DGML|"
+#~ msgid "Water"
+#~ msgstr "Каардынаты: "
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "DGML|"
+#~ msgid "Elevation"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "The Earth"
+#~ msgctxt "DGML|"
+#~ msgid "Explore the Earth"
+#~ msgstr "Зямля"
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "DGML|"
+#~ msgid "Education"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "Form"
+#~ msgctxt "DGML|"
+#~ msgid "Forest"
+#~ msgstr "Форма"
+
+#, fuzzy
+#~| msgid "Form"
+#~ msgctxt "DGML|"
+#~ msgid "Farm"
+#~ msgstr "Форма"
+
+#, fuzzy
+#~| msgid "Marble"
+#~ msgctxt "DGML|"
+#~ msgid "Theatre"
+#~ msgstr "Marble"
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "DGML|"
+#~ msgid "Car"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "&Print"
+#~ msgctxt "DGML|"
+#~ msgid "Plain Map"
+#~ msgstr "&Друкаваць"
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "DGML|"
+#~ msgid "Vegetation"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "Marble"
+#~ msgctxt "Legends|"
+#~ msgid "Marble: Legend"
+#~ msgstr "Marble"
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "Legends|"
+#~ msgid "Population:"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "Coordinates: "
+#~ msgctxt "StarNames|"
+#~ msgid "Crater"
+#~ msgstr "Каардынаты: "
+
+#, fuzzy
+#~| msgid "Form"
+#~ msgctxt "StarNames|"
+#~ msgid "Norma"
+#~ msgstr "Форма"
+
+#, fuzzy
+#~| msgid "Marble"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Marble"
+#~ msgstr "Marble"
+
+#, fuzzy
+#~| msgid "&Print"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&Print..."
+#~ msgstr "&Друкаваць"
+
+#, fuzzy
+#~| msgid "Coordinates: "
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "C&opy Coordinates"
+#~ msgstr "Каардынаты: "
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&Show Status Bar"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Show Status Bar"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Lock Position"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "Marble"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "About &Qt"
+#~ msgstr "Marble"
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&Set Home Location"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&Panels"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Position: %1"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "Marble::ControlView|"
+#~ msgid "Routing"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "Marble::ControlView|"
+#~ msgid "Location"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "Marble::ControlView|"
+#~ msgid "Show &All Panels"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "&Print"
+#~ msgctxt "BookmarkManagerDialogPrivate|"
+#~ msgid "Remove Folder"
+#~ msgstr "&Друкаваць"
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "CloudRoutesDialog|"
+#~ msgid "Cloud Routes"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "CurrentLocationWidget|"
+#~ msgid "Current Location"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "CurrentLocationWidget|"
+#~ msgid "Position Tracking"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "CurrentLocationWidget|"
+#~ msgid "Show Track"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "CurrentLocationWidget|"
+#~ msgid "Clear Track"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "DataMigrationWidget|"
+#~ msgid "Data Migration"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "QObject|"
+#~ msgid "Current Location"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "Form"
+#~ msgctxt ""
+#~ "Marble::Placemark|A dormant volcano that will erupt at some point in the "
+#~ "future."
+#~ msgid "Dormant"
+#~ msgstr "Форма"
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "Marble::Placemark|"
+#~ msgid "Rehabilitation"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "Marble::Placemark|"
+#~ msgid "Inscription: %1"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "Marble"
+#~ msgctxt "Marble::Placemark|A carriage is heated"
+#~ msgid "Is heated"
+#~ msgstr "Marble"
+
+#, fuzzy
+#~| msgid "Marble"
+#~ msgctxt "Marble::Placemark|A carriage is not heated"
+#~ msgid "Not heated"
+#~ msgstr "Marble"
+
+#, fuzzy
+#~| msgid "Marble"
+#~ msgctxt "Marble::Placemark|"
+#~ msgid "Not patrolled"
+#~ msgstr "Marble"
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "Marble::Placemark|"
+#~ msgid "Elevation: %1 m"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "&Print"
+#~ msgctxt "Marble::RouteRelationModel|"
+#~ msgid "Local route"
+#~ msgstr "&Друкаваць"
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "Marble::DownloadRegionDialog|"
+#~ msgid "Download Route"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "Marble::DownloadRegionDialog|"
+#~ msgid "Vector tiles"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "UiEditBookmarkDialog|"
+#~ msgid "&Description:"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "&Print"
+#~ msgctxt "UiEditBookmarkDialog|"
+#~ msgid "&Folder:"
+#~ msgstr "&Друкаваць"
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "Marble::EditPlacemarkDialog|"
+#~ msgid "Relations"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "Marble::EditPlacemarkDialog|"
+#~ msgid "Elevation"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "UiEditPlacemarkDialog|"
+#~ msgid "Description"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "UiEditPlacemarkDialog|"
+#~ msgid "Scale:"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "UiEditPlacemarkDialog|"
+#~ msgid "Show placemark"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "ElevationWidget|"
+#~ msgid "Elevation:"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "ExternalEditor|"
+#~ msgid "Editor Details"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "Marble::FlyToEditWidget|"
+#~ msgid "Duration:"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "Coordinates: "
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Crater"
+#~ msgstr "Каардынаты: "
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Nation"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "Coordinates: "
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Geographic Pole"
+#~ msgstr "Каардынаты: "
+
+#, fuzzy
+#~| msgid "Coordinates: "
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Coordinate"
+#~ msgstr "Каардынаты: "
+
+#, fuzzy
+#~| msgid "&Print"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Locality"
+#~ msgstr "&Друкаваць"
+
+#, fuzzy
+#~| msgid "Coordinates: "
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Water"
+#~ msgstr "Каардынаты: "
+
+#, fuzzy
+#~| msgid "Coordinates: "
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Heath"
+#~ msgstr "Каардынаты: "
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Elevator"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Unknown Road"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Track"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Tertiary Link Road"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Tertiary Road"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Trunk Link Road"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Trunk Road"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Bar"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "Coordinates: "
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Water Park"
+#~ msgstr "Каардынаты: "
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Fire Station"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Charging Station"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "Coordinates: "
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Car Wash"
+#~ msgstr "Каардынаты: "
+
+#, fuzzy
+#~| msgid "&Print"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Social Facility"
+#~ msgstr "&Друкаваць"
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Confectionery"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "Coordinates: "
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Car Dealer"
+#~ msgstr "Каардынаты: "
+
+#, fuzzy
+#~| msgid "Coordinates: "
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Car Repair Shop"
+#~ msgstr "Каардынаты: "
+
+#, fuzzy
+#~| msgid "Coordinates: "
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Car Parts"
+#~ msgstr "Каардынаты: "
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Stationery"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "Coordinates: "
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Tea Shop"
+#~ msgstr "Каардынаты: "
+
+#, fuzzy
+#~| msgid "Coordinates: "
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Water Tower"
+#~ msgstr "Каардынаты: "
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Communications Tower"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Tourist Attraction"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Information"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "Marble"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Theatre"
+#~ msgstr "Marble"
+
+#, fuzzy
+#~| msgid "&Print"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "View Point"
+#~ msgstr "&Друкаваць"
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Bus Station"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Bus Stop"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Gas Station"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "Coordinates: "
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Car Rental"
+#~ msgstr "Каардынаты: "
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Train Station"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "Marble"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Marina"
+#~ msgstr "Marble"
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Construction"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "Form"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Farmland"
+#~ msgstr "Форма"
+
+#, fuzzy
+#~| msgid "Form"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Farmyard"
+#~ msgstr "Форма"
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Railway Construction"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "Coordinates: "
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Power Tower"
+#~ msgstr "Каардынаты: "
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Aerialway Station"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "Coordinates: "
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Rope Tow"
+#~ msgstr "Каардынаты: "
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Railway Crossing"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "GeoLineStringGraphicsItem|"
+#~ msgid "Ferry Route"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "GeoLineStringGraphicsItem|"
+#~ msgid "Walking Route"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "GeoLineStringGraphicsItem|"
+#~ msgid "Hiking Route"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "&Print"
+#~ msgctxt "GeoLineStringGraphicsItem|"
+#~ msgid "Inline Skates Route"
+#~ msgstr "&Друкаваць"
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "Marble::TargetModel|"
+#~ msgid "Current Location: %1"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "Coordinates: "
+#~ msgctxt "Marble::MapViewWidget|"
+#~ msgid "Spherical view"
+#~ msgstr "Каардынаты: "
+
+#, fuzzy
+#~| msgid "Coordinates: "
+#~ msgctxt "Marble::MapViewWidget|"
+#~ msgid "Stereographic view"
+#~ msgstr "Каардынаты: "
+
+#, fuzzy
+#~| msgid "Marble"
+#~ msgctxt "Marble::MapViewWidget|"
+#~ msgid "Marble"
+#~ msgstr "Marble"
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "MapViewWidget|"
+#~ msgid "&Projection"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "Coordinates: "
+#~ msgctxt "MapViewWidget|"
+#~ msgid "Stereographic"
+#~ msgstr "Каардынаты: "
+
+#, fuzzy
+#~| msgid "&Print"
+#~ msgctxt "Marble::PreviewDialog|"
+#~ msgid "Preview Map"
+#~ msgstr "&Друкаваць"
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "Marble::MapWizard|"
+#~ msgid "Tile Projection:"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "&Print"
+#~ msgctxt "Marble::MapWizard|"
+#~ msgid "Preview Image"
+#~ msgstr "&Друкаваць"
+
+#, fuzzy
+#~| msgid "&Print"
+#~ msgctxt "Marble::MapWizard|"
+#~ msgid "Legend Image"
+#~ msgstr "&Друкаваць"
+
+#, fuzzy
+#~| msgid "&Print"
+#~ msgctxt "Marble::MapWizard|"
+#~ msgid "Source Image"
+#~ msgstr "&Друкаваць"
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "MapWizard|"
+#~ msgid "Tile Projection:"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "&Print"
+#~ msgctxt "MapWizard|"
+#~ msgid "Source Image:"
+#~ msgstr "&Друкаваць"
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "MapWizard|"
+#~ msgid "Description:"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "&Print"
+#~ msgctxt "MapWizard|"
+#~ msgid "Preview Image:"
+#~ msgstr "&Друкаваць"
+
+#, fuzzy
+#~| msgid "&Print"
+#~ msgctxt "MapWizard|"
+#~ msgid "preview image"
+#~ msgstr "&Друкаваць"
+
+#, fuzzy
+#~| msgid "&Print"
+#~ msgctxt "MapWizard|"
+#~ msgid "Legend Image:"
+#~ msgstr "&Друкаваць"
+
+#, fuzzy
+#~| msgid "&Print"
+#~ msgctxt "MapWizard|"
+#~ msgid "Preview Map"
+#~ msgstr "&Друкаваць"
+
+#, fuzzy
+#~| msgid "Marble"
+#~ msgctxt "MarbleAboutDialog|"
+#~ msgid "About Marble"
+#~ msgstr "Marble"
+
+#, fuzzy
+#~| msgid "Marble"
+#~ msgctxt "MarbleAboutDialog|"
+#~ msgid "&About"
+#~ msgstr "Marble"
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "MarbleCacheSettingsWidget|"
+#~ msgid "C&lear"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "QObject|"
+#~ msgid "Clear"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "MarbleNavigationSettingsWidget|"
+#~ msgid "&Drag location:"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "MarbleNavigationSettingsWidget|"
+#~ msgid "&Inertial globe rotation"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "MarbleNavigationSettingsWidget|"
+#~ msgid "Show Home Location"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "Coordinates: "
+#~ msgctxt "MarbleTimeSettingsWidget|"
+#~ msgid "Universal Time Coordinated"
+#~ msgstr "Каардынаты: "
+
+#, fuzzy
+#~| msgid "&Print"
+#~ msgctxt "MarbleViewSettingsWidget|"
+#~ msgid "Map &Quality"
+#~ msgstr "&Друкаваць"
+
+#, fuzzy
+#~| msgid "&Print"
+#~ msgctxt "MarbleViewSettingsWidget|"
+#~ msgid "Outline Quality"
+#~ msgstr "&Друкаваць"
+
+#, fuzzy
+#~| msgid "&Print"
+#~ msgctxt "MarbleViewSettingsWidget|"
+#~ msgid "Low Quality"
+#~ msgstr "&Друкаваць"
+
+#, fuzzy
+#~| msgid "Form"
+#~ msgctxt "MarbleViewSettingsWidget|"
+#~ msgid "Normal"
+#~ msgstr "Форма"
+
+#, fuzzy
+#~| msgid "&Print"
+#~ msgctxt "MarbleViewSettingsWidget|"
+#~ msgid "High Quality"
+#~ msgstr "&Друкаваць"
+
+#, fuzzy
+#~| msgid "&Print"
+#~ msgctxt "MarbleViewSettingsWidget|"
+#~ msgid "Print Quality"
+#~ msgstr "&Друкаваць"
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "MarbleViewSettingsWidget|"
+#~ msgid "During &animations:"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "Coordinates: "
+#~ msgctxt "Marble::MarbleWidgetPopupMenu|"
+#~ msgid "Copy Coordinates"
+#~ msgstr "Каардынаты: "
+
+#, fuzzy
+#~| msgid "Marble"
+#~ msgctxt "Marble::MarbleWidgetPopupMenu|"
+#~ msgid "&About"
+#~ msgstr "Marble"
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "Marble::MarbleWidgetPopupMenu|"
+#~ msgid "&Address Details"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "Marble"
+#~ msgctxt "Marble::MovieCaptureDialog|Start recording a movie"
+#~ msgid "&Start"
+#~ msgstr "Marble"
+
+#, fuzzy
+#~| msgid "&Print"
+#~ msgctxt "UiNewBookmarkFolderDialog|"
+#~ msgid "&Folder name:"
+#~ msgstr "&Друкаваць"
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "Marble::OsmRelationManagerWidget|"
+#~ msgid "New Relation"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "OsmRelationManagerWidgetPrivate|"
+#~ msgid "Current Relations"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "OsmRelationManagerWidgetPrivate|"
+#~ msgid "Add Relation"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "QObject|"
+#~ msgid "New Relation"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "Marble::PlacemarkPositionProviderPlugin|"
+#~ msgid "Placemark position provider Plugin"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "The Earth"
+#~ msgctxt "QObject|the planet"
+#~ msgid "Earth"
+#~ msgstr "Зямля"
+
+#, fuzzy
+#~| msgid "Marble"
+#~ msgctxt "QObject|the planet"
+#~ msgid "Mars"
+#~ msgstr "Marble"
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "QObject|a planet without data"
+#~ msgid "Unknown Planet"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "Marble"
+#~ msgctxt "Marble::PluginAboutDialog|"
+#~ msgid "About %1"
+#~ msgstr "Marble"
+
+#, fuzzy
+#~| msgid "Marble"
+#~ msgctxt "PrintOptions|"
+#~ msgid "Marble"
+#~ msgstr "Marble"
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "PrintOptions|"
+#~ msgid "Route"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "Coordinates: "
+#~ msgctxt "QObject|"
+#~ msgid "Stereographic"
+#~ msgstr "Каардынаты: "
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "Marble::QtMarbleConfigDialog|"
+#~ msgid "Navigation"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "Marble::QtMarbleConfigDialog|"
+#~ msgid "Routing"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "Marble::RouteSimulationPositionProviderPlugin|"
+#~ msgid "Current Route Position Provider Plugin"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "Marble::RouteSimulationPositionProviderPlugin|"
+#~ msgid "Current Route"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "QObject|"
+#~ msgid "Current &Location"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "Marble::RoutingInputWidget|"
+#~ msgid "Current Location"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "QObject|"
+#~ msgid "&Export Route..."
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "Marble::RoutingLayer|"
+#~ msgid "Export Route"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "Marble::RoutingManager|"
+#~ msgid "Show again"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "QObject|"
+#~ msgid "Open Route"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "&Print"
+#~ msgctxt "QObject|"
+#~ msgid "Save Route"
+#~ msgstr "&Друкаваць"
+
+#, fuzzy
+#~| msgid "&Print"
+#~ msgctxt "QObject|"
+#~ msgid "Preview Route"
+#~ msgstr "&Друкаваць"
+
+#, fuzzy
+#~| msgid "&Print"
+#~ msgctxt "QObject|"
+#~ msgid "Reverse Route"
+#~ msgstr "&Друкаваць"
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "QObject|"
+#~ msgid "Clear Route"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "Marble::RoutingWidget|"
+#~ msgid "Open Route"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "&Print"
+#~ msgctxt "Marble::RoutingWidget|"
+#~ msgid "Save Route"
+#~ msgstr "&Друкаваць"
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "RoutingWidget|"
+#~ msgid "Show Details"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "The Earth"
+#~ msgctxt "QObject|"
+#~ msgid "Search Results"
+#~ msgstr "Зямля"
+
+#, fuzzy
+#~| msgid "Coordinates: "
+#~ msgctxt "QObject|"
+#~ msgid "Search for '%1'"
+#~ msgstr "Каардынаты: "
+
+#, fuzzy
+#~| msgid "&Print"
+#~ msgctxt "TileCreatorDialog|"
+#~ msgid "Creating Map"
+#~ msgstr "&Друкаваць"
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "TimeControlWidget|"
+#~ msgid "Current &date and time:"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "Marble"
+#~ msgctxt "Marble::TourCaptureDialog|"
+#~ msgid "Start"
+#~ msgstr "Marble"
+
+#, fuzzy
+#~| msgid "Marble"
+#~ msgctxt "TourCaptureDialog|"
+#~ msgid "Start"
+#~ msgstr "Marble"
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "Marble::WaitEditWidget|"
+#~ msgid "Wait duration:"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "Marble::FlightGearPositionProviderPlugin|"
+#~ msgid "FlightGear position provider Plugin"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "Marble::GeoCluePositionProviderPlugin|"
+#~ msgid "GeoClue position provider Plugin"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "Marble::GpsdPositionProviderPlugin|"
+#~ msgid "Gpsd position provider Plugin"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "Marble::QtPositioningPositionProviderPlugin|"
+#~ msgid "Qt Positioning Position Provider Plugin"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "Marble::QtPositioningPositionProviderPlugin|"
+#~ msgid "Qt Positioning Location"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "Marble::WlocatePositionProviderPlugin|"
+#~ msgid "Wlocate Position Provider Plugin"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "Marble::AnnotatePlugin|"
+#~ msgid "Annotation"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "Marble::AnnotatePlugin|"
+#~ msgid "&Annotation"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "Marble::AnnotatePlugin|"
+#~ msgid "Annotations"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "Marble::AnnotatePlugin|"
+#~ msgid "Open Annotation File"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "Marble::DownloadOsmDialog|"
+#~ msgid "Download"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "UiEditGroundOverlayDialog|"
+#~ msgid "Description"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "Coordinates: "
+#~ msgctxt "UiEditGroundOverlayDialog|"
+#~ msgid "Coordinates"
+#~ msgstr "Каардынаты: "
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "UiEditGroundOverlayDialog|"
+#~ msgid "Rotation"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "Marble::EditPolygonDialog|"
+#~ msgid "Relations"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "UiEditPolygonDialog|"
+#~ msgid "Description"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "Marble::EditPolylineDialog|"
+#~ msgid "Relations"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "UiEditPolylineDialog|"
+#~ msgid "Description"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "Marble::NodeModel|"
+#~ msgid "Elevation"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "Marble::AtmospherePlugin|"
+#~ msgid "Atmosphere"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "Marble::AtmospherePlugin|"
+#~ msgid "&Atmosphere"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "The Earth"
+#~ msgctxt "EarthquakeConfigWidget|"
+#~ msgid "Configure Earthquakes Plugin"
+#~ msgstr "Зямля"
+
+#, fuzzy
+#~| msgid "The Earth"
+#~ msgctxt "Marble::EarthquakePlugin|"
+#~ msgid "Earthquakes"
+#~ msgstr "Зямля"
+
+#, fuzzy
+#~| msgid "The Earth"
+#~ msgctxt "Marble::EarthquakePlugin|"
+#~ msgid "&Earthquakes"
+#~ msgstr "Зямля"
+
+#, fuzzy
+#~| msgid "Marble"
+#~ msgctxt "Marble::EclipsesModel|"
+#~ msgid "Start"
+#~ msgstr "Marble"
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "ElevationProfileConfigWidget|"
+#~ msgid "Configure Elevation Profile Plugin"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "Marble::ElevationProfileContextMenu|"
+#~ msgid "Route"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "Marble::ElevationProfileFloatItem|"
+#~ msgid "Elevation Profile"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "Marble::ElevationProfileFloatItem|"
+#~ msgid "&Elevation Profile"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "Marble::FoursquarePlugin|"
+#~ msgid "&Places"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "GpsInfoPlugin|"
+#~ msgid "Direction"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "Coordinates: "
+#~ msgctxt "GraticuleConfigWidget|"
+#~ msgid "Coordinate Grid Plugin"
+#~ msgstr "Каардынаты: "
+
+#, fuzzy
+#~| msgid "Coordinates: "
+#~ msgctxt "GraticuleConfigWidget|"
+#~ msgid "Color of the coordinate grid."
+#~ msgstr "Каардынаты: "
+
+#, fuzzy
+#~| msgid "Coordinates: "
+#~ msgctxt "Marble::GraticulePlugin|"
+#~ msgid "Coordinate Grid"
+#~ msgstr "Каардынаты: "
+
+#, fuzzy
+#~| msgid "Coordinates: "
+#~ msgctxt "Marble::GraticulePlugin|"
+#~ msgid "Coordinate &Grid"
+#~ msgstr "Каардынаты: "
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "Marble::License|"
+#~ msgid "&Show Details"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "MapScaleConfigWidget|"
+#~ msgid "Show Ratio Scale"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "Marble::MapScaleFloatItem|"
+#~ msgid "Scale Bar"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "Marble::MapScaleFloatItem|"
+#~ msgid "&Scale Bar"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "Navigation|"
+#~ msgid "Navigation"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "Marble::NavigationFloatItem|"
+#~ msgid "Navigation"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "Marble::NavigationFloatItem|"
+#~ msgid "&Navigation"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "Marble::NavigationFloatItem|"
+#~ msgid "Current Location Button"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "OpenCachingCacheDialog|"
+#~ msgid "Status:"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "OpenCachingCacheDialog|"
+#~ msgid "Description"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "&Print"
+#~ msgctxt "OpenCachingCacheDialog|"
+#~ msgid "Previous"
+#~ msgstr "&Друкаваць"
+
+#, fuzzy
+#~| msgid "Marble"
+#~ msgctxt "OpenCachingConfigWidget|"
+#~ msgid "Start:"
+#~ msgstr "Marble"
+
+#, fuzzy
+#~| msgid "&Print"
+#~ msgctxt "Marble::OverviewMap|"
+#~ msgid "Overview Map"
+#~ msgstr "&Друкаваць"
+
+#, fuzzy
+#~| msgid "&Print"
+#~ msgctxt "Marble::OverviewMap|"
+#~ msgid "&Overview Map"
+#~ msgstr "&Друкаваць"
+
+#, fuzzy
+#~| msgid "&Print"
+#~ msgctxt "Marble::OverviewMap|"
+#~ msgid "Choose Overview Map"
+#~ msgstr "&Друкаваць"
+
+#, fuzzy
+#~| msgid "&Print"
+#~ msgctxt "OverviewMapConfigWidget|"
+#~ msgid "Configure Overview Map"
+#~ msgstr "&Друкаваць"
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "OverviewMapConfigWidget|"
+#~ msgid "&Planet:"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "&Print"
+#~ msgctxt "OverviewMapConfigWidget|"
+#~ msgid "Preview"
+#~ msgstr "&Друкаваць"
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "OverviewMapConfigWidget|"
+#~ msgid "Position I&ndicator:"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "PositionMarkerConfigWidget|"
+#~ msgid "Configure Position Marker Plugin"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "QObject|"
+#~ msgid "Route left."
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "Marble::RoutingPlugin|"
+#~ msgid "Routing"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "Marble::RoutingPlugin|"
+#~ msgid "&Routing"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "Coordinates: "
+#~ msgctxt "Marble::SatellitesConfigDialog|"
+#~ msgid "Other"
+#~ msgstr "Каардынаты: "
+
+#, fuzzy
+#~| msgid "The Earth"
+#~ msgctxt "Marble::SatellitesConfigDialog|"
+#~ msgid "Earth"
+#~ msgstr "Зямля"
+
+#, fuzzy
+#~| msgid "Marble"
+#~ msgctxt "Marble::SatellitesConfigDialog|"
+#~ msgid "Mars"
+#~ msgstr "Marble"
+
+#, fuzzy
+#~| msgid "The Earth"
+#~ msgctxt "Marble::SatellitesConfigDialog|"
+#~ msgid "&Data Sources"
+#~ msgstr "Зямля"
+
+#, fuzzy
+#~| msgid "The Earth"
+#~ msgctxt "SatellitesConfigDialog|"
+#~ msgid "&Data Sources"
+#~ msgstr "Зямля"
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
+#~ msgid "Space Stations"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "Coordinates: "
+#~ msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
+#~ msgid "Weather"
+#~ msgstr "Каардынаты: "
+
+#, fuzzy
+#~| msgid "The Earth"
+#~ msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
+#~ msgid "Earth Resources"
+#~ msgstr "Зямля"
+
+#, fuzzy
+#~| msgid "Coordinates: "
+#~ msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
+#~ msgid "Other"
+#~ msgstr "Каардынаты: "
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
+#~ msgid "Education"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "The Earth"
+#~ msgctxt "StarsConfigWidget|"
+#~ msgid "Earth"
+#~ msgstr "Зямля"
+
+#, fuzzy
+#~| msgid "Marble"
+#~ msgctxt "StarsConfigWidget|"
+#~ msgid "Mars"
+#~ msgstr "Marble"
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "StarsConfigWidget|"
+#~ msgid "Magnify Sun and Moon"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "Coordinates: "
+#~ msgctxt "StarsConfigWidget|"
+#~ msgid "Other"
+#~ msgstr "Каардынаты: "
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "StarsConfigWidget|"
+#~ msgid "Constellations"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "StarsConfigWidget|"
+#~ msgid "Abbreviation"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "Coordinates: "
+#~ msgctxt "StarsConfigWidget|"
+#~ msgid "Coordinate Grid"
+#~ msgstr "Каардынаты: "
+
+#, fuzzy
+#~| msgid "Marble"
+#~ msgctxt "Marble::StarsPlugin|"
+#~ msgid "Stars"
+#~ msgstr "Marble"
+
+#, fuzzy
+#~| msgid "Marble"
+#~ msgctxt "Marble::StarsPlugin|"
+#~ msgid "&Stars"
+#~ msgstr "Marble"
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "Marble::StarsPlugin|"
+#~ msgid "Show &Constellations"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "Marble::StarsPlugin|"
+#~ msgid "Show &Sun and Moon"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "Marble::StarsPlugin|"
+#~ msgid "Show &Planets"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "WeatherConfigWidget|"
+#~ msgid "Information"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "WeatherConfigWidget|"
+#~ msgid "Wind direction"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgctxt "NAME OF TRANSLATORS"
+#~| msgid "Your names"
+#~ msgctxt "WeatherConfigWidget|"
+#~ msgid " hours"
+#~ msgstr "Дарафей Праляскоўскі"
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "WeatherData|"
+#~ msgid "clear"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "Form"
+#~ msgctxt "WeatherData|"
+#~ msgid "overcast"
+#~ msgstr "Форма"
+
+#, fuzzy
+#~| msgid "Coordinates: "
+#~ msgctxt "WeatherItemPrivate|"
+#~ msgid "Weather"
+#~ msgstr "Каардынаты: "
+
+#, fuzzy
+#~| msgid "Coordinates: "
+#~ msgctxt "Marble::WeatherPlugin|"
+#~ msgid "Weather"
+#~ msgstr "Каардынаты: "
+
+#, fuzzy
+#~| msgid "Coordinates: "
+#~ msgctxt "Marble::WeatherPlugin|"
+#~ msgid "&Weather"
+#~ msgstr "Каардынаты: "
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "CycleStreetsConfigWidget|"
+#~ msgid "Route type:"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "Coordinates: "
+#~ msgctxt "Marble::GeoUriPlugin|"
+#~ msgid "Input of geographic coordinates by the geo URI scheme"
+#~ msgstr "Каардынаты: "
+
+#, fuzzy
+#~| msgid "Coordinates: "
+#~ msgctxt "Marble::LatLonPlugin|"
+#~ msgid "Geographic Coordinates Search"
+#~ msgstr "Каардынаты: "
+
+#, fuzzy
+#~| msgid "Coordinates: "
+#~ msgctxt "Marble::LatLonPlugin|"
+#~ msgid "Geographic Coordinates"
+#~ msgstr "Каардынаты: "
+
+#, fuzzy
+#~| msgid "Coordinates: "
+#~ msgctxt "Marble::LatLonPlugin|"
+#~ msgid "Direct input of geographic coordinates"
+#~ msgstr "Каардынаты: "
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "QObject|"
+#~ msgid "attraction"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "Marble"
+#~ msgctxt "QObject|"
+#~ msgid "theatre"
+#~ msgstr "Marble"
+
+#, fuzzy
+#~| msgid "&Print"
+#~ msgctxt "QObject|"
+#~ msgid "view point"
+#~ msgstr "&Друкаваць"
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "QObject|"
+#~ msgid "bus station"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "Form"
+#~ msgctxt "QObject|"
+#~ msgid "north"
+#~ msgstr "Форма"
+
+#, fuzzy
+#~| msgid "Form"
+#~ msgctxt "QObject|"
+#~ msgid "north-west"
+#~ msgstr "Форма"
+
+#, fuzzy
+#~| msgid "Form"
+#~ msgctxt "QObject|"
+#~ msgid "south-east"
+#~ msgstr "Форма"
+
+#, fuzzy
+#~| msgid "The Earth"
+#~ msgctxt "QObject|"
+#~ msgid "east"
+#~ msgstr "Зямля"
+
+#, fuzzy
+#~| msgid "Form"
+#~ msgctxt "QObject|"
+#~ msgid "north-east"
+#~ msgstr "Форма"
+
+#, fuzzy
+#~| msgid "&Print"
+#~ msgctxt "Marble::MonavConfigWidget|"
+#~ msgid "Remove Map"
+#~ msgstr "&Друкаваць"
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "Marble::OpenLocationCodeSearchPlugin|"
+#~ msgid "Open Location Code Search"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "Marble::OpenLocationCodeSearchPlugin|"
+#~ msgid "Open Location Code"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "Marble::RoutinoPlugin|"
+#~ msgid "Routino"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgctxt "NAME OF TRANSLATORS"
+#~| msgid "Your names"
+#~ msgctxt "Marble::YoursPlugin|"
+#~ msgid "Yours"
+#~ msgstr "Дарафей Праляскоўскі"
+
+#, fuzzy
+#~| msgid "&Print"
+#~ msgctxt "Bookmarks|"
+#~ msgid "Removed"
+#~ msgstr "&Друкаваць"
+
+#, fuzzy
+#~| msgid "Marble"
+#~ msgctxt "MainScreen|"
+#~ msgid "About"
+#~ msgstr "Marble"
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "MainScreen|"
+#~ msgid "Routing"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "Marble"
+#~ msgctxt "SidePanel|"
+#~ msgid "About Marble Maps…"
+#~ msgstr "Marble"
+
+#, fuzzy
+#~| msgid "Coordinates: "
+#~ msgctxt "Marble::MapWizard|"
+#~ msgid "Geographic Pole"
+#~ msgstr "Каардынаты: "
+
+#, fuzzy
+#~| msgid "Marble"
+#~ msgctxt "Marble::MapWizard|"
+#~ msgid "State"
+#~ msgstr "Marble"
+
+#, fuzzy
+#~| msgid "Coordinates: "
+#~ msgctxt "MapWizard|"
+#~ msgid "Coordinate Grid"
+#~ msgstr "Каардынаты: "
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "PlacemarkDialog|"
+#~ msgid "Routes"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "CacheDetailsDialog|"
+#~ msgid "Description"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "Marble::OpenCachingComItem|"
+#~ msgid "Verification:"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Bag"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Car"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "Coordinates: "
+#~ msgctxt "GeoDataFeature|"
+#~ msgid "Crater"
+#~ msgstr "Каардынаты: "
+
+#, fuzzy
+#~| msgid "Coordinates: "
+#~ msgctxt "GeoDataFeature|"
+#~ msgid "Geographic Pole"
+#~ msgstr "Каардынаты: "
+
+#, fuzzy
+#~| msgid "Coordinates: "
+#~ msgctxt "GeoDataFeature|"
+#~ msgid "Water"
+#~ msgstr "Каардынаты: "
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "GeoDataFeature|"
+#~ msgid "Car"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "Marble"
+#~ msgctxt "GeoDataFeature|"
+#~ msgid "Theatre"
+#~ msgstr "Marble"
+
+#, fuzzy
+#~| msgid "Coordinates: "
+#~ msgctxt "Marble::Placemark|"
+#~ msgid "Geographic Pole"
+#~ msgstr "Каардынаты: "
+
+#, fuzzy
+#~| msgid "Coordinates: "
+#~ msgctxt "Marble::Placemark|"
+#~ msgid "Water"
+#~ msgstr "Каардынаты: "
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "Marble::Placemark|"
+#~ msgid "Car"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "Marble::Placemark|"
+#~ msgid "Information"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "Marble"
+#~ msgctxt "Marble::Placemark|"
+#~ msgid "Theatre"
+#~ msgstr "Marble"
+
+#, fuzzy
+#~| msgid "Coordinates: "
+#~ msgctxt "Marble::Placemark|"
+#~ msgid "Crater"
+#~ msgstr "Каардынаты: "
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgctxt "Marble::MaemoPositionProviderPlugin|"
+#~ msgid "Maemo Position Provider Plugin"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "The Earth"
+#~ msgctxt "the planet"
+#~ msgid "Earth"
+#~ msgstr "Зямля"
+
+#, fuzzy
+#~| msgid "Marble"
+#~ msgctxt "the planet"
+#~ msgid "Mars"
+#~ msgstr "Marble"
+
+#, fuzzy
+#~| msgid "Coordinates: "
+#~ msgctxt "Name of a satellite group"
+#~ msgid "Weather"
+#~ msgstr "Каардынаты: "
+
+#, fuzzy
+#~| msgid "Coordinates: "
+#~ msgctxt "Name of a satellite group"
+#~ msgid "Other"
+#~ msgstr "Каардынаты: "
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgid "Show Atmosphere"
+#~ msgstr "Паказваць паласу маштабу"
+
+#, fuzzy
+#~| msgid "The Earth"
+#~ msgid "&Earth"
+#~ msgstr "Зямля"
+
+#, fuzzy
+#~| msgid "The Earth"
+#~ msgctxt "The compass direction"
+#~ msgid "East"
+#~ msgstr "Зямля"
+
+#, fuzzy
+#~| msgid "Coordinates: "
+#~ msgid "Meters"
+#~ msgstr "Каардынаты: "
+
+#, fuzzy
+#~| msgid "Marble"
+#~ msgctxt "Application name"
+#~ msgid "Marble"
+#~ msgstr "Marble"
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgid "Scale &Bar"
+#~ msgstr "Паказваць паласу маштабу"
+
+#~ msgid "A World Atlas."
+#~ msgstr "Атлас Сусвету."
+
+#, fuzzy
+#~| msgid "(c) 2007"
+#~ msgid "(c) 2007, 2008, 2009"
+#~ msgstr "(c) 2007"
+
+#, fuzzy
+#~| msgid "Show scale bar"
+#~ msgid "Show frame rate"
+#~ msgstr "Паказваць паласу маштабу"
+
+#~ msgid "Show relief"
+#~ msgstr "Паказваць рэльеф"
+
+#~ msgid "Coordinates: "
+#~ msgstr "Каардынаты: "
+
+#, fuzzy
+#~| msgid "Marble"
+#~ msgctxt "Appname"
+#~ msgid "Marble"
+#~ msgstr "Marble"

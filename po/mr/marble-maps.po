@@ -1,0 +1,4028 @@
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Chetan Khona <chetan@kompkin.com>, 2013.
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2024-09-23 00:36+0000\n"
+"PO-Revision-Date: 2013-03-06 13:32+0530\n"
+"Last-Translator: Chetan Khona <chetan@kompkin.com>\n"
+"Language-Team: Marathi <kde-i18n-doc@kde.org>\n"
+"Language: mr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\n"
+"X-Generator: Lokalize 1.5\n"
+"X-Qt-Contexts: true\n"
+
+#, fuzzy, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "वापरकर्ता"
+
+#, fuzzy, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "जागा"
+
+#: Bookmarks.qml:20
+#, fuzzy, kde-format
+msgctxt "@title:window"
+msgid "Bookmarks"
+msgstr "ओळखचिन्ह"
+
+#: Bookmarks.qml:69
+#, kde-format
+msgid "Your bookmarks will appear here."
+msgstr ""
+
+#: CurrentPosition.qml:54
+#, fuzzy, kde-format
+msgctxt "@option:check"
+msgid "Follow Current Position"
+msgstr "स्थान"
+
+#: main.cpp:37 MainScreen.qml:20 MainScreen.qml:177
+#, fuzzy, kde-format
+msgid "Marble Maps"
+msgstr "प्रतिष्ठापन करत आहे"
+
+#: main.cpp:39
+#, fuzzy, kde-format
+msgid "Maps"
+msgstr "संपादन (&E)"
+
+#: main.cpp:41
+#, kde-format
+msgid "© KDE Community"
+msgstr ""
+
+#: MainScreen.qml:86
+#, fuzzy, kde-format
+msgid "Public Transport"
+msgstr "वाहतूक (&T):"
+
+#: MainScreen.qml:101
+#, kde-format
+msgid "Outdoor Activities"
+msgstr ""
+
+#: MainScreen.qml:113
+#, kde-format
+msgctxt "@action:button"
+msgid "Accessibility"
+msgstr ""
+
+#: MainScreen.qml:122
+#, fuzzy, kde-format
+#| msgid "About"
+msgctxt "@action:button"
+msgid "About"
+msgstr "विषयी"
+
+#: MainScreen.qml:133
+#, fuzzy, kde-format
+msgctxt "@action:button"
+msgid "Bookmarks"
+msgstr "ओळखचिन्ह"
+
+#: MainScreen.qml:144
+#, fuzzy, kde-format
+#| msgid "New Profile"
+msgctxt "@action:button"
+msgid "Layer Options"
+msgstr "नवीन रूपरेषा"
+
+#: MainScreen.qml:455
+#, kde-format
+msgid "%1 km"
+msgstr ""
+
+#: NavigationInfoBar.qml:20
+#, kde-format
+msgctxt "distance in km"
+msgid "%1 km"
+msgstr ""
+
+#: NavigationInfoBar.qml:22
+#, fuzzy, kde-format
+msgctxt "distance in m"
+msgid "%1 m"
+msgstr "M"
+
+#: NavigationInfoBar.qml:24
+#, fuzzy, kde-format
+msgctxt "distance in m with decimals"
+msgid "%1 m"
+msgstr "M"
+
+#: Options.qml:20
+#, fuzzy, kde-format
+#| msgid "New Profile"
+msgctxt "@title:window"
+msgid "Layer Options"
+msgstr "नवीन रूपरेषा"
+
+#: Options.qml:23
+#, fuzzy, kde-format
+msgctxt "@title:group"
+msgid "Public Transport Layers"
+msgstr "वाहतूक (&T):"
+
+#: Options.qml:28
+#, kde-format
+msgctxt "@option:check"
+msgid "Train"
+msgstr ""
+
+#: Options.qml:35
+#, kde-format
+msgctxt "@option:check"
+msgid "Subway"
+msgstr ""
+
+#: Options.qml:42
+#, kde-format
+msgctxt "@option:check"
+msgid "Tram"
+msgstr ""
+
+#: Options.qml:49
+#, kde-format
+msgctxt "@option:check"
+msgid "Bus"
+msgstr ""
+
+#: Options.qml:56
+#, kde-format
+msgctxt "@option:check"
+msgid "Trolley Bus"
+msgstr ""
+
+#: Options.qml:64
+#, kde-format
+msgid "Outdoor Activities Layers"
+msgstr ""
+
+#: Options.qml:69
+#, kde-format
+msgctxt "@option:check"
+msgid "Walkways"
+msgstr ""
+
+#: Options.qml:76
+#, fuzzy, kde-format
+#| msgid "&Open..."
+msgctxt "@option:check"
+msgid "Hiking Routes"
+msgstr "उघडा (&O)..."
+
+#: Options.qml:83
+#, fuzzy, kde-format
+msgctxt "@option:check"
+msgid "Bicycle Routes"
+msgstr "पुसून टाका"
+
+#: Options.qml:90
+#, fuzzy, kde-format
+msgctxt "@option:check"
+msgid "Mountainbike Routes"
+msgstr "चालू ठेवा"
+
+#: Options.qml:97
+#, fuzzy, kde-format
+#| msgid "&Open..."
+msgctxt "@option:check"
+msgid "Inline Skating Routes"
+msgstr "उघडा (&O)..."
+
+#: Options.qml:104
+#, kde-format
+msgctxt "@option:check"
+msgid "Bridleways"
+msgstr ""
+
+#: PlacemarkDialog.qml:48
+#, fuzzy, kde-format
+#| msgid "Name"
+msgctxt "placeholder"
+msgid "No Name"
+msgstr "नाव"
+
+#: PlacemarkDialog.qml:168
+#, fuzzy, kde-format
+#| msgid "Tags:"
+msgctxt "@title:group"
+msgid "Tags:"
+msgstr "टॅग्स :"
+
+#: ProfileSelectorMenu.qml:29
+#, kde-format
+msgid "Car (fastest)"
+msgstr ""
+
+#: ProfileSelectorMenu.qml:40
+#, fuzzy, kde-format
+msgid "Bicycle"
+msgstr "पुसून टाका"
+
+#: ProfileSelectorMenu.qml:49
+#, kde-format
+msgid "Pedestrian"
+msgstr ""
+
+#: RouteEditor.qml:62
+#, kde-format
+msgid "Search for places to integrate them into a route."
+msgstr ""
+
+#: SettingsDialog.qml:48
+#, fuzzy, kde-format
+#| msgid "Settings"
+msgid "Network Settings"
+msgstr "संयोजना"
+
+#: SettingsDialog.qml:53
+#, fuzzy, kde-format
+#| msgid "Downloading %1"
+msgid "Download Maps via WLAN only"
+msgstr "डाउनलोड करत आहे %1"
+
+#, fuzzy
+#~| msgid "Weather"
+#~ msgctxt "DGML|"
+#~ msgid "Other"
+#~ msgstr "हवामान"
+
+#, fuzzy
+#~ msgctxt "DGML|"
+#~ msgid "Temperature (July)"
+#~ msgstr "तापमान"
+
+#, fuzzy
+#~ msgctxt "DGML|"
+#~ msgid "Temperature"
+#~ msgstr "तापमान"
+
+#, fuzzy
+#~ msgctxt "DGML|"
+#~ msgid "Airport"
+#~ msgstr "वाहतूक (&T):"
+
+#, fuzzy
+#~| msgid "Annotation"
+#~ msgctxt "DGML|"
+#~ msgid "International"
+#~ msgstr "टीप"
+
+#, fuzzy
+#~| msgid "State"
+#~ msgctxt "DGML|"
+#~ msgid "State"
+#~ msgstr "स्थिती"
+
+#, fuzzy
+#~ msgctxt "DGML|"
+#~ msgid "Elevation"
+#~ msgstr "स्थान"
+
+#, fuzzy
+#~ msgctxt "DGML|"
+#~ msgid "Transportation"
+#~ msgstr "वाहतूक (&T):"
+
+#, fuzzy
+#~ msgctxt "DGML|"
+#~ msgid "Education"
+#~ msgstr "स्थान"
+
+#, fuzzy
+#~| msgid "Annotation"
+#~ msgctxt "DGML|"
+#~ msgid "Accommodation"
+#~ msgstr "टीप"
+
+#, fuzzy
+#~ msgctxt "DGML|"
+#~ msgid "School, university"
+#~ msgstr "विद्यापीठ :"
+
+#, fuzzy
+#~ msgctxt "DGML|"
+#~ msgid "University"
+#~ msgstr "विद्यापीठ :"
+
+#, fuzzy
+#~| msgid "Annotation"
+#~ msgctxt "DGML|"
+#~ msgid "Veterinary"
+#~ msgstr "टीप"
+
+#, fuzzy
+#~| msgid "Annotation"
+#~ msgctxt "DGML|"
+#~ msgid "Fire station"
+#~ msgstr "टीप"
+
+#, fuzzy
+#~| msgid "Bar"
+#~ msgctxt "DGML|"
+#~ msgid "Bar"
+#~ msgstr "पट्टी"
+
+#, fuzzy
+#~ msgctxt "DGML|"
+#~ msgid "Books"
+#~ msgstr "ओळखचिन्ह"
+
+#, fuzzy
+#~ msgctxt "DGML|"
+#~ msgid "Car"
+#~ msgstr "पुसून टाका"
+
+#, fuzzy
+#~ msgctxt "DGML|"
+#~ msgid "Behaim Places"
+#~ msgstr "जागा"
+
+#, fuzzy
+#~| msgid "Description"
+#~ msgctxt "DGML|"
+#~ msgid "Precipitation"
+#~ msgstr "वर्णन"
+
+#, fuzzy
+#~ msgctxt "DGML|"
+#~ msgid "SRTM Data"
+#~ msgstr "डेटा"
+
+#, fuzzy
+#~ msgctxt "DGML|"
+#~ msgid "Rivers"
+#~ msgstr "विद्यापीठ :"
+
+#, fuzzy
+#~ msgctxt "DGML|"
+#~ msgid "Temperature (December)"
+#~ msgstr "तापमान"
+
+#, fuzzy
+#~ msgctxt "DGML|"
+#~ msgid "Vegetation"
+#~ msgstr "स्थान"
+
+#, fuzzy
+#~ msgctxt "Legends|"
+#~ msgid "Population:"
+#~ msgstr "स्थान"
+
+#, fuzzy
+#~| msgid "Cancel"
+#~ msgctxt "StarNames|"
+#~ msgid "Cancer"
+#~ msgstr "रद्द करा"
+
+#, fuzzy
+#~| msgid "&Open..."
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&Open..."
+#~ msgstr "उघडा (&O)..."
+
+#, fuzzy
+#~| msgid "Downloading %1"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Download &Region..."
+#~ msgstr "डाउनलोड करत आहे %1"
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&Print..."
+#~ msgstr "छापा (&P)..."
+
+#, fuzzy
+#~| msgid "Ctrl+O"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Ctrl+P"
+#~ msgstr "Ctrl+O"
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Print Previe&w ..."
+#~ msgstr "छपाई पूर्वावलोकन"
+
+#, fuzzy
+#~| msgid "&Quit"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&Quit"
+#~ msgstr "बाहेर पडा (&Q)"
+
+#, fuzzy
+#~| msgid "Ctrl+O"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Ctrl+Q"
+#~ msgstr "Ctrl+O"
+
+#, fuzzy
+#~| msgid "Copy"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&Copy Map"
+#~ msgstr "प्रत करा"
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&Edit Map..."
+#~ msgstr "संपादन (&E)"
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&Configure Marble"
+#~ msgstr "संयोजीत करा"
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&Full Screen Mode"
+#~ msgstr "पूर्ण स्क्रीन पद्धत"
+
+#, fuzzy
+#~| msgid "Full Screen Mode"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Full Screen Mode"
+#~ msgstr "पूर्ण स्क्रीन पद्धत"
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&Show Status Bar"
+#~ msgstr "स्थिती पट्टी दर्शवा"
+
+#, fuzzy
+#~| msgid "Show Status Bar"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Show Status Bar"
+#~ msgstr "स्थिती पट्टी दर्शवा"
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Lock Position"
+#~ msgstr "स्थान"
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Configure Sun Control"
+#~ msgstr "संयोजीत करा"
+
+#, fuzzy
+#~| msgid "&Redisplay"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&Redisplay"
+#~ msgstr "पुन्हा प्रदर्शन (&R)"
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "What's &This"
+#~ msgstr "हे काय आहे? (&T)"
+
+#, fuzzy
+#~| msgid "About"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "About &Qt"
+#~ msgstr "विषयी"
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Add &Bookmark..."
+#~ msgstr "ओळखचिन्ह जोडा"
+
+#, fuzzy
+#~| msgid "Add Bookmark"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Add Bookmark"
+#~ msgstr "ओळखचिन्ह जोडा"
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&Set Home Location"
+#~ msgstr "स्थान"
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Show &Bookmarks"
+#~ msgstr "ओळखचिन्ह (&B)"
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&Manage Bookmarks..."
+#~ msgstr "ओळखचिन्ह (&B)"
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Manage Bookmarks"
+#~ msgstr "ओळखचिन्ह"
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&File"
+#~ msgstr "फाईल (&F)"
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&Edit"
+#~ msgstr "संपादन (&E)"
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&View"
+#~ msgstr "दृश्य (&V)"
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&Bookmarks"
+#~ msgstr "ओळखचिन्ह (&B)"
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&Panels"
+#~ msgstr "जागा"
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&View Size"
+#~ msgstr "दृश्य (&V)"
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&Settings"
+#~ msgstr "संयोजना (&S)"
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&Help"
+#~ msgstr "मदत (&H)"
+
+#, fuzzy
+#~| msgid "&Home"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&Home"
+#~ msgstr "मुख्य (&H)"
+
+#, fuzzy
+#~| msgid "Default"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Default"
+#~ msgstr "मूलभूत"
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Ready"
+#~ msgstr "तयार"
+
+#, fuzzy
+#~| msgid "Description"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Position: %1"
+#~ msgstr "वर्णन"
+
+#, fuzzy
+#~| msgid "Zoom &In"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Zoom: %1"
+#~ msgstr "मोठे करा (&I)"
+
+#, fuzzy
+#~| msgid "All Supported Files"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "All Supported Files"
+#~ msgstr "सर्व समर्थीत फाईल्स"
+
+#, fuzzy
+#~| msgid "Open File"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Open File"
+#~ msgstr "फाईल उघडा"
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Unnamed"
+#~ msgstr "निनावी"
+
+#, fuzzy
+#~ msgctxt "Marble::ControlView|"
+#~ msgid "Location"
+#~ msgstr "स्थान"
+
+#, fuzzy
+#~ msgctxt "Marble::ControlView|"
+#~ msgid "Search"
+#~ msgstr "शोधा"
+
+#, fuzzy
+#~| msgid "View"
+#~ msgctxt "Marble::ControlView|"
+#~ msgid "Map View"
+#~ msgstr "दृश्य"
+
+#, fuzzy
+#~| msgid "Files"
+#~ msgctxt "Marble::ControlView|"
+#~ msgid "Files"
+#~ msgstr "फाईल्स"
+
+#, fuzzy
+#~| msgid "&Open..."
+#~ msgctxt "Marble::ControlView|"
+#~ msgid "Tour"
+#~ msgstr "उघडा (&O)..."
+
+#, fuzzy
+#~ msgctxt "Marble::ControlView|"
+#~ msgid "Show &All Panels"
+#~ msgstr "जागा"
+
+#, fuzzy
+#~ msgctxt "Marble::AbstractFloatItem|"
+#~ msgid "&Lock"
+#~ msgstr "कुलूपबंद करा"
+
+#, fuzzy
+#~| msgid "&Hide"
+#~ msgctxt "Marble::AbstractFloatItem|"
+#~ msgid "&Hide"
+#~ msgstr "लपवा (&H)"
+
+#, fuzzy
+#~| msgid "&Configure..."
+#~ msgctxt "Marble::AbstractFloatItem|"
+#~ msgid "&Configure..."
+#~ msgstr "संयोजीत करा (&C)..."
+
+#, fuzzy
+#~| msgid "Path"
+#~ msgctxt "UiAddLinkDialog|"
+#~ msgid "Add link"
+#~ msgstr "मार्ग"
+
+#, fuzzy
+#~| msgid "Name"
+#~ msgctxt "UiAddLinkDialog|"
+#~ msgid "Name:"
+#~ msgstr "नाव"
+
+#, fuzzy
+#~| msgid "Default"
+#~ msgctxt "QObject|"
+#~ msgid "Default"
+#~ msgstr "मूलभूत"
+
+#, fuzzy
+#~| msgid "Default"
+#~ msgctxt "Marble::BookmarkManager|"
+#~ msgid "Default"
+#~ msgstr "मूलभूत"
+
+#, fuzzy
+#~ msgctxt "BookmarkManagerDialogPrivate|"
+#~ msgid "Remove Folder"
+#~ msgstr "'पसंत' मधून काढून टाका"
+
+#, fuzzy
+#~ msgctxt "Marble::BookmarkManagerDialog|"
+#~ msgid "Export Bookmarks"
+#~ msgstr "ओळखचिन्ह"
+
+#, fuzzy
+#~ msgctxt "Marble::BookmarkManagerDialog|"
+#~ msgid "KML files (*.kml)"
+#~ msgstr "सर्व फाईल्स"
+
+#, fuzzy
+#~ msgctxt "Marble::BookmarkManagerDialog|"
+#~ msgid "Bookmark Export"
+#~ msgstr "ओळखचिन्ह"
+
+#, fuzzy
+#~ msgctxt "Marble::BookmarkManagerDialog|"
+#~ msgid "Import Bookmarks"
+#~ msgstr "ओळखचिन्ह"
+
+#, fuzzy
+#~ msgctxt "Marble::BookmarkManagerDialog|"
+#~ msgid "KML Files (*.kml)"
+#~ msgstr "सर्व फाईल्स"
+
+#, fuzzy
+#~ msgctxt "Marble::BookmarkManagerDialog|"
+#~ msgid "Bookmark Import"
+#~ msgstr "ओळखचिन्ह"
+
+#, fuzzy
+#~| msgid "Add Bookmark"
+#~ msgctxt "BookmarkManagerDialogPrivate|"
+#~ msgid "Imported bookmark"
+#~ msgstr "ओळखचिन्ह जोडा"
+
+#, fuzzy
+#~| msgid "Add Bookmark"
+#~ msgctxt "BookmarkManagerDialogPrivate|"
+#~ msgid "Existing bookmark"
+#~ msgstr "ओळखचिन्ह जोडा"
+
+#, fuzzy
+#~| msgid "Replace"
+#~ msgctxt "BookmarkManagerDialogPrivate|"
+#~ msgid "Replace"
+#~ msgstr "बदला"
+
+#, fuzzy
+#~| msgid "Replace All"
+#~ msgctxt "BookmarkManagerDialogPrivate|"
+#~ msgid "Replace All"
+#~ msgstr "सर्व बदला"
+
+#, fuzzy
+#~| msgid "Skip"
+#~ msgctxt "BookmarkManagerDialogPrivate|"
+#~ msgid "Skip"
+#~ msgstr "वगळा"
+
+#, fuzzy
+#~| msgid "Skip"
+#~ msgctxt "BookmarkManagerDialogPrivate|"
+#~ msgid "Skip All"
+#~ msgstr "वगळा"
+
+#, fuzzy
+#~ msgctxt "UiBookmarkManagerDialog|"
+#~ msgid "Bookmark Manager"
+#~ msgstr "ओळखचिन्ह"
+
+#, fuzzy
+#~ msgctxt "UiBookmarkManagerDialog|"
+#~ msgid "Import Bookmarks..."
+#~ msgstr "ओळखचिन्ह"
+
+#, fuzzy
+#~ msgctxt "UiBookmarkManagerDialog|"
+#~ msgid "Export Bookmarks..."
+#~ msgstr "ओळखचिन्ह"
+
+#, fuzzy
+#~ msgctxt "UiBookmarkManagerDialog|"
+#~ msgid "Rename..."
+#~ msgstr "निनावी"
+
+#, fuzzy
+#~ msgctxt "UiBookmarkManagerDialog|"
+#~ msgid "Delete"
+#~ msgstr "काढून टाका"
+
+#, fuzzy
+#~ msgctxt "UiBookmarkManagerDialog|"
+#~ msgid "Bookmarks"
+#~ msgstr "ओळखचिन्ह"
+
+#, fuzzy
+#~ msgctxt "UiBookmarkManagerDialog|"
+#~ msgid "Edit"
+#~ msgstr "संपादन (&E)"
+
+#, fuzzy
+#~ msgctxt "Marble::BookmarkSyncManager|"
+#~ msgid "Bookmarks"
+#~ msgstr "ओळखचिन्ह"
+
+#, fuzzy
+#~ msgctxt "CloudRoutesDialog|"
+#~ msgid "No route available."
+#~ msgstr "वर्णन उपलब्ध नाही."
+
+#, fuzzy
+#~ msgctxt "Marble::ConflictDialog|"
+#~ msgid "Local placemark"
+#~ msgstr "'पसंत' मधून काढून टाका"
+
+#, fuzzy
+#~ msgctxt "Marble::ConflictDialog|"
+#~ msgid "Deleted"
+#~ msgstr "काढून टाका"
+
+#, fuzzy
+#~ msgctxt "Marble::ConflictDialog|"
+#~ msgid "Cloud placemark"
+#~ msgstr "'पसंत' मधून काढून टाका"
+
+#, fuzzy
+#~| msgid "&Open..."
+#~ msgctxt "Marble::RouteItemDelegate|"
+#~ msgid "Open"
+#~ msgstr "उघडा (&O)..."
+
+#, fuzzy
+#~ msgctxt "Marble::RouteItemDelegate|"
+#~ msgid "Remove from device"
+#~ msgstr "'पसंत' मधून काढून टाका"
+
+#, fuzzy
+#~ msgctxt "Marble::RouteItemDelegate|"
+#~ msgid "Delete from cloud"
+#~ msgstr "काढून टाका"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "No position available."
+#~ msgstr "वर्णन उपलब्ध नाही."
+
+#, fuzzy
+#~| msgid "m"
+#~ msgctxt "QObject|"
+#~ msgid "m"
+#~ msgstr "m"
+
+#, fuzzy
+#~| msgid "m"
+#~ msgctxt "QObject|"
+#~ msgid "km"
+#~ msgstr "m"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "m/h"
+#~ msgstr "%1m %2s"
+
+#, fuzzy
+#~| msgid "m"
+#~ msgctxt "QObject|"
+#~ msgid "nm"
+#~ msgstr "m"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "Placemark"
+#~ msgstr "जागा"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "KML File (*.kml)"
+#~ msgstr "सर्व फाईल्स"
+
+#, fuzzy
+#~| msgid "&Open..."
+#~ msgctxt "QObject|"
+#~ msgid "Open Track"
+#~ msgstr "उघडा (&O)..."
+
+#, fuzzy
+#~ msgctxt "CurrentLocationWidget|"
+#~ msgid "Current Location"
+#~ msgstr "स्थान"
+
+#, fuzzy
+#~ msgctxt "CurrentLocationWidget|"
+#~ msgid "Disabled"
+#~ msgstr "अकार्यान्वित"
+
+#, fuzzy
+#~ msgctxt "CurrentLocationWidget|"
+#~ msgid "Clear Track"
+#~ msgstr "पुसून टाका"
+
+#, fuzzy
+#~ msgctxt "CurrentLocationWidget|"
+#~ msgid "No position available."
+#~ msgstr "वर्णन उपलब्ध नाही."
+
+#, fuzzy
+#~ msgctxt "CurrentLocationWidget|Disable Auto Recenter"
+#~ msgid "Disabled"
+#~ msgstr "अकार्यान्वित"
+
+#, fuzzy
+#~ msgctxt "DataMigrationWidget|"
+#~ msgid "Data Migration"
+#~ msgstr "संचारण"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "Current Location"
+#~ msgstr "स्थान"
+
+#, fuzzy
+#~ msgctxt "Marble::Placemark|A copy shop provides computers for customer use"
+#~ msgid "Computers available"
+#~ msgstr "वर्णन उपलब्ध नाही."
+
+#, fuzzy
+#~ msgctxt ""
+#~ "Marble::Placemark|A copy shop does not provide computers for customer use"
+#~ msgid "No computers available"
+#~ msgstr "वर्णन उपलब्ध नाही."
+
+#, fuzzy
+#~| msgid "Native"
+#~ msgctxt "Marble::Placemark|An active volcano"
+#~ msgid "Active"
+#~ msgstr "मूळ"
+
+#, fuzzy
+#~ msgctxt "Marble::Placemark|"
+#~ msgid "Rehabilitation"
+#~ msgstr "स्थान"
+
+#, fuzzy
+#~ msgctxt "Marble::Placemark|"
+#~ msgid "No reservation possible"
+#~ msgstr "वर्णन उपलब्ध नाही."
+
+#, fuzzy
+#~| msgid "Description"
+#~ msgctxt "Marble::Placemark|"
+#~ msgid "Inscription: %1"
+#~ msgstr "वर्णन"
+
+#, fuzzy
+#~ msgctxt "Marble::Placemark|Bicycles can be transported"
+#~ msgid "Bicycle transportation possible"
+#~ msgstr "वर्णन उपलब्ध नाही."
+
+#, fuzzy
+#~ msgctxt "Marble::Placemark|Bicyles cannot be transported"
+#~ msgid "Bicycle transportation impossible"
+#~ msgstr "वर्णन उपलब्ध नाही."
+
+#, fuzzy
+#~ msgctxt "Marble::Placemark|A ski piste with trees (gladed)"
+#~ msgid "Contains trees"
+#~ msgstr "चालू ठेवा"
+
+#, fuzzy
+#~ msgctxt "Marble::Placemark|"
+#~ msgid "Elevation: %1 m"
+#~ msgstr "स्थान"
+
+#, fuzzy
+#~ msgctxt ""
+#~ "Marble::Placemark|Public wireless Internet access is available here."
+#~ msgid "Public wifi available"
+#~ msgstr "वर्णन उपलब्ध नाही."
+
+#, fuzzy
+#~ msgctxt "Marble::Placemark|Public wireless Internet is available here."
+#~ msgid "Public wifi available"
+#~ msgstr "वर्णन उपलब्ध नाही."
+
+#, fuzzy
+#~ msgctxt ""
+#~ "Marble::Placemark|House number (first argument) and street name (second "
+#~ "argument) in an address"
+#~ msgid "%1 %2"
+#~ msgstr "पर्यंत :"
+
+#, fuzzy
+#~| msgid "Annotation"
+#~ msgctxt "Marble::RouteRelationModel|"
+#~ msgid "International walking route"
+#~ msgstr "टीप"
+
+#, fuzzy
+#~ msgctxt "Marble::RouteRelationModel|"
+#~ msgid "National walking route"
+#~ msgstr "शहर :"
+
+#, fuzzy
+#~| msgid "Annotation"
+#~ msgctxt "Marble::RouteRelationModel|"
+#~ msgid "International cycling route"
+#~ msgstr "टीप"
+
+#, fuzzy
+#~ msgctxt "Marble::RouteRelationModel|"
+#~ msgid "National route"
+#~ msgstr "शहर :"
+
+#, fuzzy
+#~ msgctxt "Marble::RouteRelationModel|"
+#~ msgid "Local route"
+#~ msgstr "स्थान"
+
+#, fuzzy
+#~| msgid "Downloading %1"
+#~ msgctxt "Marble::DownloadRegionDialog|"
+#~ msgid "Download Route"
+#~ msgstr "डाउनलोड करत आहे %1"
+
+#, fuzzy
+#~| msgid "Downloading %1"
+#~ msgctxt "Marble::DownloadRegionDialog|"
+#~ msgid "Download Region"
+#~ msgstr "डाउनलोड करत आहे %1"
+
+#, fuzzy
+#~| msgid "Add Bookmark"
+#~ msgctxt "UiEditBookmarkDialog|"
+#~ msgid "Edit Bookmark"
+#~ msgstr "ओळखचिन्ह जोडा"
+
+#, fuzzy
+#~| msgid "Description"
+#~ msgctxt "UiEditBookmarkDialog|"
+#~ msgid "&Description:"
+#~ msgstr "वर्णन"
+
+#, fuzzy
+#~ msgctxt "UiEditBookmarkDialog|"
+#~ msgid "&Folder:"
+#~ msgstr "काढून टाका"
+
+#, fuzzy
+#~ msgctxt "UiEditBookmarkDialog|"
+#~ msgid "&Add Folder..."
+#~ msgstr "काढून टाका"
+
+#, fuzzy
+#~| msgid "Tags:"
+#~ msgctxt "Marble::EditPlacemarkDialog|"
+#~ msgid "Tags"
+#~ msgstr "टॅग्स :"
+
+#, fuzzy
+#~ msgctxt "Marble::EditPlacemarkDialog|"
+#~ msgid "Relations"
+#~ msgstr "स्थान"
+
+#, fuzzy
+#~ msgctxt "Marble::EditPlacemarkDialog|"
+#~ msgid "Elevation"
+#~ msgstr "स्थान"
+
+#, fuzzy
+#~ msgctxt "UiEditPlacemarkDialog|"
+#~ msgid "Edit placemark"
+#~ msgstr "'पसंत' मधून काढून टाका"
+
+#, fuzzy
+#~| msgid "Description"
+#~ msgctxt "UiEditPlacemarkDialog|"
+#~ msgid "Description"
+#~ msgstr "वर्णन"
+
+#, fuzzy
+#~ msgctxt "UiEditPlacemarkDialog|"
+#~ msgid "Show placemark"
+#~ msgstr "'पसंत' मधून काढून टाका"
+
+#, fuzzy
+#~| msgid "Bold"
+#~ msgctxt "UiEditPlacemarkDialog|"
+#~ msgid "Bold"
+#~ msgstr "ठळक"
+
+#, fuzzy
+#~ msgctxt "UiEditPlacemarkDialog|"
+#~ msgid "Italics"
+#~ msgstr "तिरपे"
+
+#, fuzzy
+#~ msgctxt "UiEditPlacemarkDialog|"
+#~ msgid "Underlined"
+#~ msgstr "अधोरेखित"
+
+#, fuzzy
+#~| msgid "Path"
+#~ msgctxt "UiEditPlacemarkDialog|"
+#~ msgid "Add link"
+#~ msgstr "मार्ग"
+
+#, fuzzy
+#~ msgctxt "ElevationWidget|"
+#~ msgid "Elevation:"
+#~ msgstr "स्थान"
+
+#, fuzzy
+#~| msgid "m"
+#~ msgctxt "ElevationWidget|"
+#~ msgid " m"
+#~ msgstr "m"
+
+#, fuzzy
+#~ msgctxt "ExternalEditor|"
+#~ msgid "Editor Preview"
+#~ msgstr "छपाई पूर्वावलोकन"
+
+#, fuzzy
+#~| msgid "New Profile"
+#~ msgctxt "QObject|"
+#~ msgid "View Properties"
+#~ msgstr "नवीन रूपरेषा"
+
+#, fuzzy
+#~| msgid "View"
+#~ msgctxt "FileViewWidget|"
+#~ msgid "File View"
+#~ msgstr "दृश्य"
+
+#, fuzzy
+#~ msgctxt "Marble::FlyToEditWidget|"
+#~ msgid "Duration:"
+#~ msgstr "स्थान"
+
+#, fuzzy
+#~| msgid "All Supported Files"
+#~ msgctxt "Marble::FormattedTextWidget|"
+#~ msgid "All Supported Files (*.png *.jpg *.jpeg)"
+#~ msgstr "सर्व समर्थीत फाईल्स"
+
+#, fuzzy
+#~| msgid "Bold"
+#~ msgctxt "FormattedTextWidget|"
+#~ msgid "Bold"
+#~ msgstr "ठळक"
+
+#, fuzzy
+#~ msgctxt "FormattedTextWidget|"
+#~ msgid "Italics"
+#~ msgstr "तिरपे"
+
+#, fuzzy
+#~ msgctxt "FormattedTextWidget|"
+#~ msgid "Underlined"
+#~ msgstr "अधोरेखित"
+
+#, fuzzy
+#~| msgid "Path"
+#~ msgctxt "FormattedTextWidget|"
+#~ msgid "Add link"
+#~ msgstr "मार्ग"
+
+#, fuzzy
+#~ msgctxt "GeoDataCoordinates|"
+#~ msgid "W"
+#~ msgstr "W"
+
+#, fuzzy
+#~| msgid "E"
+#~ msgctxt "GeoDataCoordinates|"
+#~ msgid "E"
+#~ msgstr "E"
+
+#, fuzzy
+#~ msgctxt "GeoDataCoordinates|"
+#~ msgid "N"
+#~ msgstr "N"
+
+#, fuzzy
+#~ msgctxt "GeoDataCoordinates|"
+#~ msgid "S"
+#~ msgstr "S"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Sea"
+#~ msgstr "शोधा"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "City"
+#~ msgstr "शहर :"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "County Capital"
+#~ msgstr "शहर :"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "State Capital"
+#~ msgstr "शहर :"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Nation Capital"
+#~ msgstr "शहर :"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Nation"
+#~ msgstr "संचारण"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Continent"
+#~ msgstr "चालू ठेवा"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Bookmark"
+#~ msgstr "ओळखचिन्ह"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "City Capital"
+#~ msgstr "शहर :"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "National Capital"
+#~ msgstr "शहर :"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Locality"
+#~ msgstr "स्थान"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Town Capital"
+#~ msgstr "शहर :"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Village Capital"
+#~ msgstr "शहर :"
+
+#, fuzzy
+#~| msgid "Weather"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Heath"
+#~ msgstr "हवामान"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Elevator"
+#~ msgstr "स्थान"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Unknown Road"
+#~ msgstr "अपरिचीत"
+
+#, fuzzy
+#~| msgid "Path"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Path"
+#~ msgstr "मार्ग"
+
+#, fuzzy
+#~| msgid "&Open..."
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Track"
+#~ msgstr "उघडा (&O)..."
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Tertiary Link Road"
+#~ msgstr "अपरिचीत"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Tertiary Road"
+#~ msgstr "अपरिचीत"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Trunk Link Road"
+#~ msgstr "अपरिचीत"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Trunk Road"
+#~ msgstr "अपरिचीत"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "University"
+#~ msgstr "विद्यापीठ :"
+
+#, fuzzy
+#~| msgid "Bar"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Bar"
+#~ msgstr "पट्टी"
+
+#, fuzzy
+#~| msgid "Annotation"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Veterinary"
+#~ msgstr "टीप"
+
+#, fuzzy
+#~| msgid "Annotation"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Fire Station"
+#~ msgstr "टीप"
+
+#, fuzzy
+#~| msgid "Annotation"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Charging Station"
+#~ msgstr "टीप"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Social Facility"
+#~ msgstr "स्थान"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "City Wall"
+#~ msgstr "शहर :"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Lift Gate"
+#~ msgstr "वाहतूक (&T):"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Wall"
+#~ msgstr "शहर :"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Confectionery"
+#~ msgstr "स्थान"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Sports Shop"
+#~ msgstr "वाहतूक (&T):"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Bookshop"
+#~ msgstr "ओळखचिन्ह"
+
+#, fuzzy
+#~| msgid "Annotation"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Stationery"
+#~ msgstr "टीप"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Communications Tower"
+#~ msgstr "स्थान"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Tourist Attraction"
+#~ msgstr "स्थान"
+
+#, fuzzy
+#~| msgid "Annotation"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Information"
+#~ msgstr "टीप"
+
+#, fuzzy
+#~| msgid "New Profile"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "View Point"
+#~ msgstr "नवीन रूपरेषा"
+
+#, fuzzy
+#~| msgid "Zoom &In"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Zoo"
+#~ msgstr "मोठे करा (&I)"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Airport Gate"
+#~ msgstr "वाहतूक (&T):"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Airport Runway"
+#~ msgstr "वाहतूक (&T):"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Airport Apron"
+#~ msgstr "वाहतूक (&T):"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Airport Taxiway"
+#~ msgstr "वाहतूक (&T):"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Airport Terminal"
+#~ msgstr "वाहतूक (&T):"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Bus Station"
+#~ msgstr "स्थान"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Bus Stop"
+#~ msgstr "स्थान"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Gas Station"
+#~ msgstr "स्थान"
+
+#, fuzzy
+#~| msgid "Annotation"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Train Station"
+#~ msgstr "टीप"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Cemetery"
+#~ msgstr "तापमान"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Construction"
+#~ msgstr "स्थान"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Railway Construction"
+#~ msgstr "स्थान"
+
+#, fuzzy
+#~| msgid "Annotation"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Aerialway Station"
+#~ msgstr "टीप"
+
+#, fuzzy
+#~| msgid "Annotation"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "International Date Line"
+#~ msgstr "टीप"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "River"
+#~ msgstr "विद्यापीठ :"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Railway Crossing"
+#~ msgstr "स्थान"
+
+#, fuzzy
+#~ msgctxt "GeoLineStringGraphicsItem|"
+#~ msgid "Ferry Route"
+#~ msgstr "पुसून टाका"
+
+#, fuzzy
+#~| msgid "&Open..."
+#~ msgctxt "GeoLineStringGraphicsItem|"
+#~ msgid "Walking Route"
+#~ msgstr "उघडा (&O)..."
+
+#, fuzzy
+#~| msgid "&Open..."
+#~ msgctxt "GeoLineStringGraphicsItem|"
+#~ msgid "Hiking Route"
+#~ msgstr "उघडा (&O)..."
+
+#, fuzzy
+#~ msgctxt "Marble::GeoDataTreeModel|"
+#~ msgid "Type"
+#~ msgstr "प्रकार"
+
+#, fuzzy
+#~ msgctxt "Marble::TargetModel|"
+#~ msgid "Current Location: %1"
+#~ msgstr "स्थान"
+
+#, fuzzy
+#~ msgctxt "Marble::TargetModel|"
+#~ msgid "Home"
+#~ msgstr "मुख्य"
+
+#, fuzzy
+#~| msgid "&Go To..."
+#~ msgctxt "GoTo|"
+#~ msgid "Go To..."
+#~ msgstr "येथे जा (&G)..."
+
+#, fuzzy
+#~ msgctxt "GoTo|"
+#~ msgid "Search"
+#~ msgstr "शोधा"
+
+#, fuzzy
+#~ msgctxt "LatLonBoxWidget|"
+#~ msgid "&N"
+#~ msgstr "N"
+
+#, fuzzy
+#~ msgctxt "LatLonBoxWidget|"
+#~ msgid "&W"
+#~ msgstr "W"
+
+#, fuzzy
+#~| msgid "E"
+#~ msgctxt "LatLonBoxWidget|"
+#~ msgid "&E"
+#~ msgstr "E"
+
+#, fuzzy
+#~ msgctxt "LatLonBoxWidget|"
+#~ msgid "&S"
+#~ msgstr "S"
+
+#, fuzzy
+#~| msgid "E"
+#~ msgctxt "Marble::LatLonEdit|East, the direction"
+#~ msgid "E"
+#~ msgstr "E"
+
+#, fuzzy
+#~ msgctxt "Marble::LatLonEdit|West, the direction"
+#~ msgid "W"
+#~ msgstr "W"
+
+#, fuzzy
+#~ msgctxt "Marble::LatLonEdit|North, the direction"
+#~ msgid "N"
+#~ msgstr "N"
+
+#, fuzzy
+#~ msgctxt "Marble::LatLonEdit|South, the direction"
+#~ msgid "S"
+#~ msgstr "S"
+
+#, fuzzy
+#~ msgctxt "Marble::MapItemDelegate|"
+#~ msgid "Install"
+#~ msgstr "प्रतिष्ठापन करत आहे"
+
+#, fuzzy
+#~ msgctxt "Marble::MapItemDelegate|"
+#~ msgid "Remove"
+#~ msgstr "'पसंत' मधून काढून टाका"
+
+#, fuzzy
+#~| msgid "Cancel"
+#~ msgctxt "Marble::MapItemDelegate|"
+#~ msgid "Cancel"
+#~ msgstr "रद्द करा"
+
+#, fuzzy
+#~| msgid "Update"
+#~ msgctxt "Marble::MapItemDelegate|"
+#~ msgid "Update"
+#~ msgstr "अद्ययावत करा"
+
+#, fuzzy
+#~| msgid "&Open..."
+#~ msgctxt "Marble::MapItemDelegate|"
+#~ msgid "Open"
+#~ msgstr "उघडा (&O)..."
+
+#, fuzzy
+#~ msgctxt "MapThemeDownloadDialog|"
+#~ msgid "Install Maps"
+#~ msgstr "प्रतिष्ठापन करत आहे"
+
+#, fuzzy
+#~| msgid "Name"
+#~ msgctxt "QObject|"
+#~ msgid "Name"
+#~ msgstr "नाव"
+
+#, fuzzy
+#~| msgid "View"
+#~ msgctxt "Marble::MapViewWidget|"
+#~ msgid "Flat View"
+#~ msgstr "दृश्य"
+
+#, fuzzy
+#~| msgid "Add to Favorites"
+#~ msgctxt "Marble::MapViewWidget|"
+#~ msgid "&Favorite"
+#~ msgstr "'पसंत'  मध्ये जोडा"
+
+#, fuzzy
+#~| msgid "View"
+#~ msgctxt "MapViewWidget|"
+#~ msgid "Map View"
+#~ msgstr "दृश्य"
+
+#, fuzzy
+#~ msgctxt "MapViewWidget|"
+#~ msgid "&Projection"
+#~ msgstr "स्थान"
+
+#, fuzzy
+#~ msgctxt "Marble::MapWizard|"
+#~ msgid "Tile Projection:"
+#~ msgstr "स्थान"
+
+#, fuzzy
+#~ msgctxt "Marble::MapWizard|"
+#~ msgid "%1"
+#~ msgstr "M"
+
+#, fuzzy
+#~| msgid "Custom"
+#~ msgctxt "Marble::MapWizard|"
+#~ msgid "Custom"
+#~ msgstr "ऐच्छिक"
+
+#, fuzzy
+#~| msgid "Name"
+#~ msgctxt "Marble::MapWizard|"
+#~ msgid "Map Name"
+#~ msgstr "नाव"
+
+#, fuzzy
+#~| msgid "Custom"
+#~ msgctxt "MapWizard|"
+#~ msgid "Custom"
+#~ msgstr "ऐच्छिक"
+
+#, fuzzy
+#~| msgid "New Profile"
+#~ msgctxt "MapWizard|"
+#~ msgid "Layer Selection"
+#~ msgstr "नवीन रूपरेषा"
+
+#, fuzzy
+#~ msgctxt "MapWizard|"
+#~ msgid "Search:"
+#~ msgstr "शोधा"
+
+#, fuzzy
+#~ msgctxt "MapWizard|"
+#~ msgid "Tile Projection:"
+#~ msgstr "स्थान"
+
+#, fuzzy
+#~| msgid "New Profile"
+#~ msgctxt "MapWizard|"
+#~ msgid "Layer Info"
+#~ msgstr "नवीन रूपरेषा"
+
+#, fuzzy
+#~| msgid "Settings"
+#~ msgctxt "MapWizard|"
+#~ msgid "Service Info"
+#~ msgstr "संयोजना"
+
+#, fuzzy
+#~ msgctxt "MapWizard|"
+#~ msgid "Select Color"
+#~ msgstr "काढून टाका"
+
+#, fuzzy
+#~| msgid "Name"
+#~ msgctxt "MapWizard|"
+#~ msgid "Map Name:"
+#~ msgstr "नाव"
+
+#, fuzzy
+#~| msgid "Description"
+#~ msgctxt "MapWizard|"
+#~ msgid "Description:"
+#~ msgstr "वर्णन"
+
+#, fuzzy
+#~| msgid "&Configure..."
+#~ msgctxt "MapWizard|"
+#~ msgid "Change..."
+#~ msgstr "संयोजीत करा (&C)..."
+
+#, fuzzy
+#~| msgid "About %1"
+#~ msgctxt "MarbleAboutDialog|"
+#~ msgid "About Marble"
+#~ msgstr "%1 विषयी"
+
+#, fuzzy
+#~| msgid "Version %1"
+#~ msgctxt "MarbleAboutDialog|"
+#~ msgid "Version Unknown"
+#~ msgstr "आवृत्ती %1"
+
+#, fuzzy
+#~| msgid "&About"
+#~ msgctxt "MarbleAboutDialog|"
+#~ msgid "&About"
+#~ msgstr "विषयी (&A)"
+
+#, fuzzy
+#~ msgctxt "MarbleAboutDialog|"
+#~ msgid "&Data"
+#~ msgstr "डेटा"
+
+#, fuzzy
+#~ msgctxt "MarbleAboutDialog|"
+#~ msgid "&License Agreement"
+#~ msgstr "परवाना :"
+
+#, fuzzy
+#~ msgctxt "MarbleCacheSettingsWidget|"
+#~ msgid "C&lear"
+#~ msgstr "पुसून टाका"
+
+#, fuzzy
+#~ msgctxt "MarbleCloudSyncSettingsWidget|"
+#~ msgid "Username:"
+#~ msgstr "वापरकर्ता"
+
+#, fuzzy
+#~ msgctxt "Marble|"
+#~ msgid "not available"
+#~ msgstr "वर्णन उपलब्ध नाही."
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "Clear"
+#~ msgstr "पुसून टाका"
+
+#, fuzzy
+#~| msgid "m"
+#~ msgctxt "QObject|means meter"
+#~ msgid "m"
+#~ msgstr "m"
+
+#, fuzzy
+#~| msgid "m"
+#~ msgctxt "QObject|means milimeters"
+#~ msgid "mm"
+#~ msgstr "m"
+
+#, fuzzy
+#~| msgid "m"
+#~ msgctxt "QObject|means kilometers"
+#~ msgid "km"
+#~ msgstr "m"
+
+#, fuzzy
+#~| msgid "m"
+#~ msgctxt "QObject|means centimeters"
+#~ msgid "cm"
+#~ msgstr "m"
+
+#, fuzzy
+#~| msgid "m"
+#~ msgctxt "QObject|means miles"
+#~ msgid "mi"
+#~ msgstr "m"
+
+#, fuzzy
+#~| msgid "m"
+#~ msgctxt "QObject|means nautical miles"
+#~ msgid "nm"
+#~ msgstr "m"
+
+#, fuzzy
+#~ msgctxt "MarbleNavigationSettingsWidget|"
+#~ msgid "&Drag location:"
+#~ msgstr "स्थान"
+
+#, fuzzy
+#~ msgctxt "MarbleNavigationSettingsWidget|"
+#~ msgid "&Inertial globe rotation"
+#~ msgstr "स्थान"
+
+#, fuzzy
+#~ msgctxt "MarbleNavigationSettingsWidget|"
+#~ msgid "Show Home Location"
+#~ msgstr "स्थान"
+
+#, fuzzy
+#~ msgctxt "MarbleNavigator|"
+#~ msgid "Home"
+#~ msgstr "मुख्य"
+
+#, fuzzy
+#~| msgid "Zoom &In"
+#~ msgctxt "MarbleNavigator|"
+#~ msgid "Zoom In"
+#~ msgstr "मोठे करा (&I)"
+
+#, fuzzy
+#~| msgid "Zoom &Out"
+#~ msgctxt "MarbleNavigator|"
+#~ msgid "Zoom Out"
+#~ msgstr "लहान करा (&O)"
+
+#, fuzzy
+#~| msgid "Plugins"
+#~ msgctxt "MarblePluginSettingsWidget|"
+#~ msgid "P&lugins"
+#~ msgstr "प्लगइन्स"
+
+#, fuzzy
+#~| msgid "Date and Time"
+#~ msgctxt "MarbleTimeSettingsWidget|"
+#~ msgid "Eastern European Time"
+#~ msgstr "दिनांक व वेळ"
+
+#, fuzzy
+#~| msgid "Date and Time"
+#~ msgctxt "MarbleTimeSettingsWidget|"
+#~ msgid "Egypt Standard Time"
+#~ msgstr "दिनांक व वेळ"
+
+#, fuzzy
+#~| msgid "Date and Time"
+#~ msgctxt "MarbleTimeSettingsWidget|"
+#~ msgid "Eastern African Time"
+#~ msgstr "दिनांक व वेळ"
+
+#, fuzzy
+#~| msgid "Date and Time"
+#~ msgctxt "MarbleTimeSettingsWidget|"
+#~ msgid "India Standard Time"
+#~ msgstr "दिनांक व वेळ"
+
+#, fuzzy
+#~| msgid "Date and Time"
+#~ msgctxt "MarbleTimeSettingsWidget|"
+#~ msgid "China Taiwan Time"
+#~ msgstr "दिनांक व वेळ"
+
+#, fuzzy
+#~| msgid "Date and Time"
+#~ msgctxt "MarbleTimeSettingsWidget|"
+#~ msgid "Japan Standard Time"
+#~ msgstr "दिनांक व वेळ"
+
+#, fuzzy
+#~| msgid "Date and Time"
+#~ msgctxt "MarbleTimeSettingsWidget|"
+#~ msgid "Midway Islands Time"
+#~ msgstr "दिनांक व वेळ"
+
+#, fuzzy
+#~| msgid "Date and Time"
+#~ msgctxt "MarbleTimeSettingsWidget|"
+#~ msgid "Hawaii Standard Time"
+#~ msgstr "दिनांक व वेळ"
+
+#, fuzzy
+#~| msgid "Date and Time"
+#~ msgctxt "MarbleTimeSettingsWidget|"
+#~ msgid "Alaska Standard Time"
+#~ msgstr "दिनांक व वेळ"
+
+#, fuzzy
+#~| msgid "Date and Time"
+#~ msgctxt "MarbleTimeSettingsWidget|"
+#~ msgid "Eastern Standard Time"
+#~ msgstr "दिनांक व वेळ"
+
+#, fuzzy
+#~| msgid "Distance:"
+#~ msgctxt "MarbleViewSettingsWidget|"
+#~ msgid "&Distance:"
+#~ msgstr "अंतर :"
+
+#, fuzzy
+#~ msgctxt "MarbleViewSettingsWidget|"
+#~ msgid "During &animations:"
+#~ msgstr "स्थान"
+
+#, fuzzy
+#~ msgctxt "MarbleViewSettingsWidget|"
+#~ msgid "&Place names:"
+#~ msgstr "जागा"
+
+#, fuzzy
+#~| msgid "Copy"
+#~ msgctxt "MarbleWebView|"
+#~ msgid "Copy"
+#~ msgstr "प्रत करा"
+
+#, fuzzy
+#~ msgctxt "Marble::MarbleWidgetPopupMenu|"
+#~ msgid "Add &Bookmark"
+#~ msgstr "ओळखचिन्ह जोडा"
+
+#, fuzzy
+#~ msgctxt "Marble::MarbleWidgetPopupMenu|"
+#~ msgid "&Full Screen Mode"
+#~ msgstr "पूर्ण स्क्रीन पद्धत"
+
+#, fuzzy
+#~| msgid "&About"
+#~ msgctxt "Marble::MarbleWidgetPopupMenu|"
+#~ msgid "&About"
+#~ msgstr "विषयी (&A)"
+
+#, fuzzy
+#~ msgctxt "Marble::MarbleWidgetPopupMenu|"
+#~ msgid "No description available."
+#~ msgstr "वर्णन उपलब्ध नाही."
+
+#, fuzzy
+#~ msgctxt "Marble::MarbleWidgetPopupMenu|"
+#~ msgid "City"
+#~ msgstr "शहर :"
+
+#, fuzzy
+#~ msgctxt "Marble::MovieCaptureDialog|"
+#~ msgid "Codecs are unavailable"
+#~ msgstr "वर्णन उपलब्ध नाही."
+
+#, fuzzy
+#~| msgid "&Open..."
+#~ msgctxt "MovieCaptureDialog|"
+#~ msgid "Open..."
+#~ msgstr "उघडा (&O)..."
+
+#, fuzzy
+#~| msgid "Name"
+#~ msgctxt "Marble::OsmRelationEditorDialog|"
+#~ msgid "Name"
+#~ msgstr "नाव"
+
+#, fuzzy
+#~ msgctxt "Marble::OsmRelationManagerWidget|"
+#~ msgid "New Relation"
+#~ msgstr "स्थान"
+
+#, fuzzy
+#~ msgctxt "Marble::OsmRelationManagerWidget|"
+#~ msgid "Remove"
+#~ msgstr "'पसंत' मधून काढून टाका"
+
+#, fuzzy
+#~ msgctxt "Marble::OsmRelationManagerWidget|"
+#~ msgid "Edit"
+#~ msgstr "संपादन (&E)"
+
+#, fuzzy
+#~ msgctxt "OsmRelationManagerWidgetPrivate|"
+#~ msgid "Current Relations"
+#~ msgstr "स्थान"
+
+#, fuzzy
+#~| msgid "Name"
+#~ msgctxt "OsmRelationManagerWidgetPrivate|"
+#~ msgid "Name"
+#~ msgstr "नाव"
+
+#, fuzzy
+#~ msgctxt "OsmRelationManagerWidgetPrivate|"
+#~ msgid "Type"
+#~ msgstr "प्रकार"
+
+#, fuzzy
+#~ msgctxt "OsmRelationManagerWidgetPrivate|"
+#~ msgid "Add Relation"
+#~ msgstr "स्थान"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "New Relation"
+#~ msgstr "स्थान"
+
+#, fuzzy
+#~| msgid "Open File"
+#~ msgctxt "QObject|"
+#~ msgid "Open File"
+#~ msgstr "फाईल उघडा"
+
+#, fuzzy
+#~| msgid "All Supported Files"
+#~ msgctxt "QObject|"
+#~ msgid "All Supported Files (*.png)"
+#~ msgstr "सर्व समर्थीत फाईल्स"
+
+#, fuzzy
+#~| msgid "Name"
+#~ msgctxt "PlacemarkEditHeaderPrivate|"
+#~ msgid "Name:"
+#~ msgstr "नाव"
+
+#, fuzzy
+#~| msgid "Description"
+#~ msgctxt "PlacemarkEditHeaderPrivate|"
+#~ msgid "Position:"
+#~ msgstr "वर्णन"
+
+#, fuzzy
+#~ msgctxt "Marble::PlacemarkPositionProviderPlugin|"
+#~ msgid "Placemark"
+#~ msgstr "जागा"
+
+#, fuzzy
+#~| msgid "Sun"
+#~ msgctxt "QObject|the earth's star"
+#~ msgid "Sun"
+#~ msgstr "रवि"
+
+#, fuzzy
+#~| msgid "Unknown error"
+#~ msgctxt "QObject|a planet without data"
+#~ msgid "Unknown Planet"
+#~ msgstr "अपरिचीत त्रुटी"
+
+#, fuzzy
+#~| msgid "About %1"
+#~ msgctxt "Marble::PluginAboutDialog|"
+#~ msgid "About %1"
+#~ msgstr "%1 विषयी"
+
+#, fuzzy
+#~| msgid "Version %1"
+#~ msgctxt "Marble::PluginAboutDialog|"
+#~ msgid "Version %1"
+#~ msgstr "आवृत्ती %1"
+
+#, fuzzy
+#~ msgctxt "Marble::PluginAboutDialog|"
+#~ msgid "Data"
+#~ msgstr "डेटा"
+
+#, fuzzy
+#~ msgctxt "Marble::PluginItemDelegate|"
+#~ msgid "Configure"
+#~ msgstr "संयोजीत करा"
+
+#, fuzzy
+#~| msgid "Unknown error"
+#~ msgctxt "QObject|"
+#~ msgid "Unknown error"
+#~ msgstr "अपरिचीत त्रुटी"
+
+#, fuzzy
+#~| msgid "View"
+#~ msgctxt "Marble::QtMarbleConfigDialog|"
+#~ msgid "View"
+#~ msgstr "दृश्य"
+
+#, fuzzy
+#~ msgctxt "Marble::QtMarbleConfigDialog|"
+#~ msgid "Navigation"
+#~ msgstr "संचारण"
+
+#, fuzzy
+#~| msgid "Date and Time"
+#~ msgctxt "Marble::QtMarbleConfigDialog|"
+#~ msgid "Date and Time"
+#~ msgstr "दिनांक व वेळ"
+
+#, fuzzy
+#~| msgid "Plugins"
+#~ msgctxt "Marble::QtMarbleConfigDialog|"
+#~ msgid "Plugins"
+#~ msgstr "प्लगइन्स"
+
+#, fuzzy
+#~| msgid "Update"
+#~ msgctxt "Marble::RemoveItemEditWidget|"
+#~ msgid "Choose item:"
+#~ msgstr "अद्ययावत करा"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "Continue."
+#~ msgstr "चालू ठेवा"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "Continue onto %1."
+#~ msgstr "चालू ठेवा"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "Continue on %1."
+#~ msgstr "चालू ठेवा"
+
+#, fuzzy
+#~ msgctxt ""
+#~ "QObject|An address with parameters %1=house number, %2=road, %3=city"
+#~ msgid "%1 %2, %3"
+#~ msgstr "पर्यंत :"
+
+#, fuzzy
+#~ msgctxt "QObject|An address with parameters %1=road, %2=city"
+#~ msgid "%2, %3"
+#~ msgstr "पर्यंत :"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "Remove via point"
+#~ msgstr "'पसंत' मधून काढून टाका"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "Current &Location"
+#~ msgstr "स्थान"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "From &Bookmark"
+#~ msgstr "ओळखचिन्ह (&B)"
+
+#, fuzzy
+#~| msgid "&Home"
+#~ msgctxt "QObject|"
+#~ msgid "&Home"
+#~ msgstr "मुख्य (&H)"
+
+#, fuzzy
+#~ msgctxt "Marble::RoutingInputWidget|"
+#~ msgid "Current Location"
+#~ msgstr "स्थान"
+
+#, fuzzy
+#~ msgctxt "Marble::RoutingInputWidget|"
+#~ msgid "Choose Placemark"
+#~ msgstr "'पसंत' मधून काढून टाका"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "&Remove this Destination"
+#~ msgstr "'पसंत' मधून काढून टाका"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "&Export Route..."
+#~ msgstr "ओळखचिन्ह"
+
+#, fuzzy
+#~ msgctxt "Marble::RoutingManager|"
+#~ msgid "Show again"
+#~ msgstr "जागा"
+
+#, fuzzy
+#~| msgid "Name"
+#~ msgctxt "RoutingProfileSettingsDialog|"
+#~ msgid "Name:"
+#~ msgstr "नाव"
+
+#, fuzzy
+#~| msgid "Settings"
+#~ msgctxt "RoutingProfileSettingsDialog|"
+#~ msgid "Service Settings"
+#~ msgstr "संयोजना"
+
+#, fuzzy
+#~ msgctxt "RoutingProfileSettingsDialog|"
+#~ msgid "No configuration available"
+#~ msgstr "वर्णन उपलब्ध नाही."
+
+#, fuzzy
+#~ msgctxt "RoutingProfileSettingsDialog|"
+#~ msgid "Configure"
+#~ msgstr "संयोजीत करा"
+
+#, fuzzy
+#~ msgctxt "Marble::RoutingProfilesModel|"
+#~ msgid "Unknown"
+#~ msgstr "अपरिचीत"
+
+#, fuzzy
+#~| msgid "New Profile"
+#~ msgctxt "Marble::RoutingProfilesWidget|"
+#~ msgid "New Profile"
+#~ msgstr "नवीन रूपरेषा"
+
+#, fuzzy
+#~| msgid "&Configure..."
+#~ msgctxt "RoutingSettingsWidget|"
+#~ msgid "&Configure..."
+#~ msgstr "संयोजीत करा (&C)..."
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "Search"
+#~ msgstr "शोधा"
+
+#, fuzzy
+#~| msgid "&Open..."
+#~ msgctxt "QObject|"
+#~ msgid "Open Route"
+#~ msgstr "उघडा (&O)..."
+
+#, fuzzy
+#~| msgid "Path"
+#~ msgctxt "QObject|"
+#~ msgid "Add Via"
+#~ msgstr "मार्ग"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "Clear Route"
+#~ msgstr "पुसून टाका"
+
+#, fuzzy
+#~| msgid "Settings"
+#~ msgctxt "QObject|"
+#~ msgid "Settings"
+#~ msgstr "संयोजना"
+
+#, fuzzy
+#~ msgctxt "Marble::RoutingWidget|"
+#~ msgid "No placemark found"
+#~ msgstr "'पसंत' मधून काढून टाका"
+
+#, fuzzy
+#~| msgid "&Open..."
+#~ msgctxt "Marble::RoutingWidget|"
+#~ msgid "Open Route"
+#~ msgstr "उघडा (&O)..."
+
+#, fuzzy
+#~ msgctxt "Marble::RoutingWidget|"
+#~ msgid "KML Files (*.kml)"
+#~ msgstr "सर्व फाईल्स"
+
+#, fuzzy
+#~ msgctxt "Marble::RoutingWidget|"
+#~ msgid "KML files (*.kml)"
+#~ msgstr "सर्व फाईल्स"
+
+#, fuzzy
+#~ msgctxt "RoutingWidget|"
+#~ msgid "Search"
+#~ msgstr "शोधा"
+
+#, fuzzy
+#~| msgid "m"
+#~ msgctxt "Marble::RoutingRunner|"
+#~ msgid "m"
+#~ msgstr "m"
+
+#, fuzzy
+#~| msgid "m"
+#~ msgctxt "Marble::RoutingRunner|"
+#~ msgid "mi"
+#~ msgstr "m"
+
+#, fuzzy
+#~| msgid "m"
+#~ msgctxt "Marble::RoutingRunner|"
+#~ msgid "km"
+#~ msgstr "m"
+
+#, fuzzy
+#~| msgid "m"
+#~ msgctxt "Marble::RoutingRunner|"
+#~ msgid "nm"
+#~ msgstr "m"
+
+#, fuzzy
+#~ msgctxt "Marble::SearchInputWidget|"
+#~ msgid "Global Search"
+#~ msgstr "शोधा"
+
+#, fuzzy
+#~ msgctxt "Marble::SearchInputWidget|"
+#~ msgid "Area Search"
+#~ msgstr "शोधा"
+
+#, fuzzy
+#~| msgid "Search Results"
+#~ msgctxt "QObject|"
+#~ msgid "Search Results"
+#~ msgstr "शोध परिणाम"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "Search for '%1'"
+#~ msgstr "शोधा"
+
+#, fuzzy
+#~ msgctxt "Marble::SoundCueEditWidget|"
+#~ msgid "Select sound files..."
+#~ msgstr "फाईल उघडा"
+
+#, fuzzy
+#~| msgid "All Supported Files"
+#~ msgctxt "Marble::SoundCueEditWidget|"
+#~ msgid "Supported Sound Files (*.mp3 *.ogg *.wav)"
+#~ msgstr "सर्व समर्थीत फाईल्स"
+
+#, fuzzy
+#~ msgctxt "SunControlWidget|"
+#~ msgid "&Night Map"
+#~ msgstr "संपादन (&E)"
+
+#, fuzzy
+#~| msgid "Zoom &In"
+#~ msgctxt "TileLevelRangeWidget|"
+#~ msgid "Zoom"
+#~ msgstr "मोठे करा (&I)"
+
+#, fuzzy
+#~| msgid "Date and Time"
+#~ msgctxt "TimeControlWidget|"
+#~ msgid "&New date and time:"
+#~ msgstr "दिनांक व वेळ"
+
+#, fuzzy
+#~| msgid "Update"
+#~ msgctxt "TimeControlWidget|"
+#~ msgid "Current &date and time:"
+#~ msgstr "अद्ययावत करा"
+
+#, fuzzy
+#~ msgctxt "Marble::TourCaptureDialog|"
+#~ msgid "Codecs are unavailable"
+#~ msgstr "वर्णन उपलब्ध नाही."
+
+#, fuzzy
+#~| msgid "Cancel"
+#~ msgctxt "Marble::TourCaptureDialog|"
+#~ msgid "Cancel"
+#~ msgstr "रद्द करा"
+
+#, fuzzy
+#~| msgid "&Open..."
+#~ msgctxt "TourCaptureDialog|"
+#~ msgid "Open..."
+#~ msgstr "उघडा (&O)..."
+
+#, fuzzy
+#~| msgid "Update"
+#~ msgctxt "Marble::TourItemDelegate|"
+#~ msgid "Create item %1"
+#~ msgstr "अद्ययावत करा"
+
+#, fuzzy
+#~ msgctxt "Marble::TourItemDelegate|"
+#~ msgid "Remove item %1"
+#~ msgstr "'पसंत' मधून काढून टाका"
+
+#, fuzzy
+#~| msgid "Update"
+#~ msgctxt "Marble::TourItemDelegate|"
+#~ msgid "Change item %1"
+#~ msgstr "अद्ययावत करा"
+
+#, fuzzy
+#~| msgid "Update"
+#~ msgctxt "Marble::TourItemDelegate|"
+#~ msgid "Update items"
+#~ msgstr "अद्ययावत करा"
+
+#, fuzzy
+#~| msgid "Path"
+#~ msgctxt "QObject|"
+#~ msgid "Add Wait"
+#~ msgstr "मार्ग"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "Add SoundCue"
+#~ msgstr "काढून टाका"
+
+#, fuzzy
+#~| msgid "Add Bookmark"
+#~ msgctxt "QObject|"
+#~ msgid "Add Placemark"
+#~ msgstr "ओळखचिन्ह जोडा"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "Remove placemark"
+#~ msgstr "'पसंत' मधून काढून टाका"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "Change placemark"
+#~ msgstr "'पसंत' मधून काढून टाका"
+
+#, fuzzy
+#~| msgid "&Open..."
+#~ msgctxt "QObject|"
+#~ msgid "Open Tour"
+#~ msgstr "उघडा (&O)..."
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "Remove Selected Items"
+#~ msgstr "'पसंत' मधून काढून टाका"
+
+#, fuzzy
+#~| msgid "&Open..."
+#~ msgctxt "TourWidget|"
+#~ msgid "Tour"
+#~ msgstr "उघडा (&O)..."
+
+#, fuzzy
+#~ msgctxt "TourWidget|"
+#~ msgid "Delete"
+#~ msgstr "काढून टाका"
+
+#, fuzzy
+#~| msgid "&Open..."
+#~ msgctxt "TourWidget|"
+#~ msgid "New Tour"
+#~ msgstr "उघडा (&O)..."
+
+#, fuzzy
+#~| msgid "&Open..."
+#~ msgctxt "TourWidget|"
+#~ msgid "Save Tour"
+#~ msgstr "उघडा (&O)..."
+
+#, fuzzy
+#~| msgid "&Open..."
+#~ msgctxt "TourWidget|"
+#~ msgid "Open Tour"
+#~ msgstr "उघडा (&O)..."
+
+#, fuzzy
+#~ msgctxt "Marble::WaitEditWidget|"
+#~ msgid "Wait duration:"
+#~ msgstr "स्थान"
+
+#, fuzzy
+#~| msgid "Annotation"
+#~ msgctxt "Marble::AnnotatePlugin|"
+#~ msgid "Annotation"
+#~ msgstr "टीप"
+
+#, fuzzy
+#~ msgctxt "Marble::AnnotatePlugin|"
+#~ msgid "&Annotation"
+#~ msgstr "टीप :"
+
+#, fuzzy
+#~ msgctxt "Marble::AnnotatePlugin|"
+#~ msgid "Annotations"
+#~ msgstr "%1 टीपा"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "Remove current item"
+#~ msgstr "'पसंत' मधून काढून टाका"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "Clear all annotations"
+#~ msgstr "%1 टीपा"
+
+#, fuzzy
+#~| msgid "Annotation"
+#~ msgctxt "Marble::AnnotatePlugin|"
+#~ msgid "Save Annotation File"
+#~ msgstr "टीप"
+
+#, fuzzy
+#~ msgctxt "Marble::AnnotatePlugin|"
+#~ msgid "Open Annotation File"
+#~ msgstr "स्थान"
+
+#, fuzzy
+#~ msgctxt "Marble::AnnotatePlugin|"
+#~ msgid "Select Item"
+#~ msgstr "'पसंत' मधून काढून टाका"
+
+#, fuzzy
+#~ msgctxt "Marble::AnnotatePlugin|"
+#~ msgid "Add Nodes"
+#~ msgstr "काढून टाका"
+
+#, fuzzy
+#~| msgid "Add Bookmark"
+#~ msgctxt "Marble::AnnotatePlugin|"
+#~ msgid "Add Placemark"
+#~ msgstr "ओळखचिन्ह जोडा"
+
+#, fuzzy
+#~| msgid "Path"
+#~ msgctxt "Marble::AnnotatePlugin|"
+#~ msgid "Add Path"
+#~ msgstr "मार्ग"
+
+#, fuzzy
+#~ msgctxt "Marble::AnnotatePlugin|"
+#~ msgid "Add Ground Overlay"
+#~ msgstr "'पसंत' मधून काढून टाका"
+
+#, fuzzy
+#~ msgctxt "Marble::AnnotatePlugin|"
+#~ msgid "Remove Item"
+#~ msgstr "'पसंत' मधून काढून टाका"
+
+#, fuzzy
+#~| msgid "Annotation"
+#~ msgctxt "Marble::AnnotatePlugin|"
+#~ msgid "Load Annotation File"
+#~ msgstr "टीप"
+
+#, fuzzy
+#~ msgctxt "Marble::AnnotatePlugin|"
+#~ msgid "Clear all Annotations"
+#~ msgstr "%1 टीपा"
+
+#, fuzzy
+#~| msgid "Custom"
+#~ msgctxt "Marble::AnnotatePlugin|"
+#~ msgid "Cut"
+#~ msgstr "ऐच्छिक"
+
+#, fuzzy
+#~| msgid "Copy"
+#~ msgctxt "Marble::AnnotatePlugin|"
+#~ msgid "Copy"
+#~ msgstr "प्रत करा"
+
+#, fuzzy
+#~ msgctxt "Marble::AnnotatePlugin|"
+#~ msgid "Remove"
+#~ msgstr "'पसंत' मधून काढून टाका"
+
+#, fuzzy
+#~| msgid "New Profile"
+#~ msgctxt "Marble::AnnotatePlugin|"
+#~ msgid "Properties"
+#~ msgstr "नवीन रूपरेषा"
+
+#, fuzzy
+#~ msgctxt "Marble::AnnotatePlugin|"
+#~ msgid "Untitled Ground Overlay"
+#~ msgstr "'पसंत' मधून काढून टाका"
+
+#, fuzzy
+#~ msgctxt "Marble::AnnotatePlugin|"
+#~ msgid "Deselect All Nodes"
+#~ msgstr "'पसंत' मधून काढून टाका"
+
+#, fuzzy
+#~ msgctxt "Marble::AnnotatePlugin|"
+#~ msgid "Delete All Selected Nodes"
+#~ msgstr "'पसंत' मधून काढून टाका"
+
+#, fuzzy
+#~ msgctxt "Marble::AnnotatePlugin|"
+#~ msgid "Select Node"
+#~ msgstr "काढून टाका"
+
+#, fuzzy
+#~ msgctxt "Marble::AnnotatePlugin|"
+#~ msgid "Delete Node"
+#~ msgstr "काढून टाका"
+
+#, fuzzy
+#~ msgctxt "Marble::AnnotatePlugin|"
+#~ msgid "Deselect Node"
+#~ msgstr "काढून टाका"
+
+#, fuzzy
+#~| msgid "Downloading %1"
+#~ msgctxt "Marble::DownloadOsmDialog|"
+#~ msgid "Download"
+#~ msgstr "डाउनलोड करत आहे %1"
+
+#, fuzzy
+#~ msgctxt "UiEditGroundOverlayDialog|"
+#~ msgid "Edit ground overlay"
+#~ msgstr "'पसंत' मधून काढून टाका"
+
+#, fuzzy
+#~| msgid "Description"
+#~ msgctxt "UiEditGroundOverlayDialog|"
+#~ msgid "Description"
+#~ msgstr "वर्णन"
+
+#, fuzzy
+#~ msgctxt "UiEditGroundOverlayDialog|"
+#~ msgid "N"
+#~ msgstr "N"
+
+#, fuzzy
+#~ msgctxt "UiEditGroundOverlayDialog|"
+#~ msgid "W"
+#~ msgstr "W"
+
+#, fuzzy
+#~| msgid "E"
+#~ msgctxt "UiEditGroundOverlayDialog|"
+#~ msgid "E"
+#~ msgstr "E"
+
+#, fuzzy
+#~ msgctxt "UiEditGroundOverlayDialog|"
+#~ msgid "S"
+#~ msgstr "S"
+
+#, fuzzy
+#~| msgid "Annotation"
+#~ msgctxt "UiEditGroundOverlayDialog|"
+#~ msgid "Rotation"
+#~ msgstr "टीप"
+
+#, fuzzy
+#~| msgid "Tags:"
+#~ msgctxt "Marble::EditPolygonDialog|"
+#~ msgid "Tags"
+#~ msgstr "टॅग्स :"
+
+#, fuzzy
+#~ msgctxt "Marble::EditPolygonDialog|"
+#~ msgid "Relations"
+#~ msgstr "स्थान"
+
+#, fuzzy
+#~ msgctxt "Marble::EditPolygonDialog|"
+#~ msgid "Untitled Polygon"
+#~ msgstr "'पसंत' मधून काढून टाका"
+
+#, fuzzy
+#~| msgid "Name"
+#~ msgctxt "UiEditPolygonDialog|"
+#~ msgid "Name"
+#~ msgstr "नाव"
+
+#, fuzzy
+#~| msgid "Description"
+#~ msgctxt "UiEditPolygonDialog|"
+#~ msgid "Description"
+#~ msgstr "वर्णन"
+
+#, fuzzy
+#~ msgctxt "UiEditPolygonDialog|"
+#~ msgid "Nodes"
+#~ msgstr "काढून टाका"
+
+#, fuzzy
+#~| msgid "Tags:"
+#~ msgctxt "Marble::EditPolylineDialog|"
+#~ msgid "Tags"
+#~ msgstr "टॅग्स :"
+
+#, fuzzy
+#~ msgctxt "Marble::EditPolylineDialog|"
+#~ msgid "Relations"
+#~ msgstr "स्थान"
+
+#, fuzzy
+#~| msgid "Path"
+#~ msgctxt "UiEditPolylineDialog|"
+#~ msgid "Add path"
+#~ msgstr "मार्ग"
+
+#, fuzzy
+#~| msgid "Name"
+#~ msgctxt "UiEditPolylineDialog|"
+#~ msgid "Name"
+#~ msgstr "नाव"
+
+#, fuzzy
+#~| msgid "Description"
+#~ msgctxt "UiEditPolylineDialog|"
+#~ msgid "Description"
+#~ msgstr "वर्णन"
+
+#, fuzzy
+#~ msgctxt "UiEditPolylineDialog|"
+#~ msgid "Nodes"
+#~ msgstr "काढून टाका"
+
+#, fuzzy
+#~ msgctxt "Marble::NodeModel|"
+#~ msgid "Elevation"
+#~ msgstr "स्थान"
+
+#, fuzzy
+#~| msgid "Plugins"
+#~ msgctxt "AprsConfigWidget|"
+#~ msgid "APRS Plugin"
+#~ msgstr "प्लगइन्स"
+
+#, fuzzy
+#~| msgid "&Redisplay"
+#~ msgctxt "AprsConfigWidget|"
+#~ msgid "Display"
+#~ msgstr "पुन्हा प्रदर्शन (&R)"
+
+#, fuzzy
+#~ msgctxt "AprsConfigWidget|"
+#~ msgid "File"
+#~ msgstr "फाईल (&F)"
+
+#, fuzzy
+#~| msgid "Default"
+#~ msgctxt "CompassConfigWidget|"
+#~ msgid "Default"
+#~ msgstr "मूलभूत"
+
+#, fuzzy
+#~ msgctxt "Marble::CompassFloatItem|"
+#~ msgid "N"
+#~ msgstr "N"
+
+#, fuzzy
+#~ msgctxt "Marble::CompassFloatItem|"
+#~ msgid "S"
+#~ msgstr "S"
+
+#, fuzzy
+#~| msgid "Default"
+#~ msgctxt "CrosshairsConfigWidget|"
+#~ msgid "Default"
+#~ msgstr "मूलभूत"
+
+#, fuzzy
+#~| msgid "Search Results"
+#~ msgctxt "EarthquakeConfigWidget|"
+#~ msgid "Configure Earthquakes Plugin"
+#~ msgstr "शोध परिणाम"
+
+#, fuzzy
+#~ msgctxt "Marble::EarthquakeItem|"
+#~ msgid "Date:"
+#~ msgstr "दिनांक"
+
+#, fuzzy
+#~| msgid "Search Results"
+#~ msgctxt "Marble::EarthquakePlugin|"
+#~ msgid "Earthquakes"
+#~ msgstr "शोध परिणाम"
+
+#, fuzzy
+#~ msgctxt "EclipsesBrowserDialog|"
+#~ msgid "&Settings..."
+#~ msgstr "संयोजना (&S)"
+
+#, fuzzy
+#~ msgctxt "EclipsesConfigDialog|"
+#~ msgid "&View"
+#~ msgstr "दृश्य (&V)"
+
+#, fuzzy
+#~| msgid "New Profile"
+#~ msgctxt "EclipsesConfigDialog|"
+#~ msgid "View &Options"
+#~ msgstr "नवीन रूपरेषा"
+
+#, fuzzy
+#~ msgctxt "Marble::EclipsesModel|"
+#~ msgid "Type"
+#~ msgstr "प्रकार"
+
+#, fuzzy
+#~| msgid "&Configure..."
+#~ msgctxt "Marble::ElevationProfileContextMenu|"
+#~ msgid "&Configure..."
+#~ msgstr "संयोजीत करा (&C)..."
+
+#, fuzzy
+#~ msgctxt "Marble::ElevationProfileFloatItem|"
+#~ msgid "Elevation Profile"
+#~ msgstr "स्थान"
+
+#, fuzzy
+#~ msgctxt "Marble::ElevationProfileFloatItem|"
+#~ msgid "&Elevation Profile"
+#~ msgstr "स्थान"
+
+#, fuzzy
+#~| msgid "m"
+#~ msgctxt "Marble::ElevationProfilePlotAxis|"
+#~ msgid "km"
+#~ msgstr "m"
+
+#, fuzzy
+#~| msgid "m"
+#~ msgctxt "Marble::ElevationProfilePlotAxis|"
+#~ msgid "m"
+#~ msgstr "m"
+
+#, fuzzy
+#~| msgid "m"
+#~ msgctxt "Marble::ElevationProfilePlotAxis|"
+#~ msgid "mi"
+#~ msgstr "m"
+
+#, fuzzy
+#~| msgid "m"
+#~ msgctxt "Marble::ElevationProfilePlotAxis|"
+#~ msgid "nm"
+#~ msgstr "m"
+
+#, fuzzy
+#~| msgid "m"
+#~ msgctxt "Marble::ElevationProfileMarker|"
+#~ msgid "m"
+#~ msgstr "m"
+
+#, fuzzy
+#~| msgid "View"
+#~ msgctxt "Marble::FileViewFloatItem|"
+#~ msgid "File View"
+#~ msgstr "दृश्य"
+
+#, fuzzy
+#~ msgctxt "Marble::FileViewFloatItem|"
+#~ msgid "&File View"
+#~ msgstr "फाईल (&F)"
+
+#, fuzzy
+#~ msgctxt "Marble::FileViewFloatItem|"
+#~ msgid "Open file..."
+#~ msgstr "फाईल उघडा"
+
+#, fuzzy
+#~| msgid "Open File"
+#~ msgctxt "Marble::FileViewFloatItem|"
+#~ msgid "Open File"
+#~ msgstr "फाईल उघडा"
+
+#, fuzzy
+#~ msgctxt "Marble::FoursquarePlugin|"
+#~ msgid "Places"
+#~ msgstr "जागा"
+
+#, fuzzy
+#~ msgctxt "Marble::FoursquarePlugin|"
+#~ msgid "&Places"
+#~ msgstr "जागा"
+
+#, fuzzy
+#~| msgid "m"
+#~ msgctxt "Marble::GpsInfo|"
+#~ msgid "m"
+#~ msgstr "m"
+
+#, fuzzy
+#~| msgid "m"
+#~ msgctxt "Marble::GpsInfo|"
+#~ msgid "nm"
+#~ msgstr "m"
+
+#, fuzzy
+#~| msgid "Description"
+#~ msgctxt "GpsInfoPlugin|"
+#~ msgid "Direction"
+#~ msgstr "वर्णन"
+
+#, fuzzy
+#~ msgctxt "Marble::License|"
+#~ msgid "License"
+#~ msgstr "परवाना :"
+
+#, fuzzy
+#~ msgctxt "Marble::License|"
+#~ msgid "&License"
+#~ msgstr "परवाना :"
+
+#, fuzzy
+#~ msgctxt "Marble::License|"
+#~ msgid "&Full License"
+#~ msgstr "परवाना :"
+
+#, fuzzy
+#~ msgctxt "Marble::License|"
+#~ msgid "&Show Details"
+#~ msgstr "स्थिती पट्टी दर्शवा"
+
+#, fuzzy
+#~| msgid "Minimize"
+#~ msgctxt "MapScaleConfigWidget|"
+#~ msgid "Minimize"
+#~ msgstr "लहान करा"
+
+#, fuzzy
+#~| msgid "Minimize"
+#~ msgctxt "Marble::MapScaleFloatItem|"
+#~ msgid "Minimize"
+#~ msgstr "लहान करा"
+
+#, fuzzy
+#~| msgid "m"
+#~ msgctxt "Marble::MapScaleFloatItem|"
+#~ msgid "km"
+#~ msgstr "m"
+
+#, fuzzy
+#~| msgid "m"
+#~ msgctxt "Marble::MapScaleFloatItem|"
+#~ msgid "m"
+#~ msgstr "m"
+
+#, fuzzy
+#~| msgid "m"
+#~ msgctxt "Marble::MapScaleFloatItem|"
+#~ msgid "mi"
+#~ msgstr "m"
+
+#, fuzzy
+#~| msgid "m"
+#~ msgctxt "Marble::MapScaleFloatItem|"
+#~ msgid "nm"
+#~ msgstr "m"
+
+#, fuzzy
+#~| msgid "&Configure..."
+#~ msgctxt "Marble::MapScaleFloatItem|"
+#~ msgid "&Configure..."
+#~ msgstr "संयोजीत करा (&C)..."
+
+#, fuzzy
+#~ msgctxt "MeasureConfigDialog|"
+#~ msgid "Measure Tool Configuration"
+#~ msgstr "संचारण"
+
+#, fuzzy
+#~| msgid "Distance:"
+#~ msgctxt "MeasureConfigDialog|"
+#~ msgid "Distance "
+#~ msgstr "अंतर :"
+
+#, fuzzy
+#~ msgctxt "MeasureConfigDialog|"
+#~ msgid "Perimeter"
+#~ msgstr "तापमान"
+
+#, fuzzy
+#~ msgctxt "Marble::MeasureToolPlugin|"
+#~ msgid ""
+#~ "Area:\n"
+#~ "%1"
+#~ msgstr "तापमान"
+
+#, fuzzy
+#~ msgctxt "Marble::MeasureToolPlugin|"
+#~ msgid ""
+#~ "Perimeter:\n"
+#~ "%1"
+#~ msgstr "तापमान"
+
+#, fuzzy
+#~ msgctxt "Marble::MeasureToolPlugin|"
+#~ msgid "Total Distance: %1<br/>\n"
+#~ msgstr "तापमान"
+
+#, fuzzy
+#~ msgctxt "Marble::MeasureToolPlugin|"
+#~ msgid "Area: %1<br/>\n"
+#~ msgstr "तापमान"
+
+#, fuzzy
+#~ msgctxt "Marble::MeasureToolPlugin|"
+#~ msgid "Perimeter: %1<br/>\n"
+#~ msgstr "तापमान"
+
+#, fuzzy
+#~ msgctxt "Marble::MeasureToolPlugin|"
+#~ msgid "Radius: %1<br/>\n"
+#~ msgstr "तापमान"
+
+#, fuzzy
+#~ msgctxt "Marble::MeasureToolPlugin|"
+#~ msgid "Circumference: %1<br/>\n"
+#~ msgstr "तापमान"
+
+#, fuzzy
+#~ msgctxt "Marble::MeasureToolPlugin|"
+#~ msgid "&Remove Measure Points"
+#~ msgstr "'पसंत' मधून काढून टाका"
+
+#, fuzzy
+#~ msgctxt "Navigation|"
+#~ msgid "Navigation"
+#~ msgstr "संचारण"
+
+#, fuzzy
+#~ msgctxt "Marble::NavigationFloatItem|"
+#~ msgid "Navigation"
+#~ msgstr "संचारण"
+
+#, fuzzy
+#~ msgctxt "Marble::NavigationFloatItem|"
+#~ msgid "&Navigation"
+#~ msgstr "संचारण"
+
+#, fuzzy
+#~ msgctxt "Marble::NavigationFloatItem|"
+#~ msgid "Current Location Button"
+#~ msgstr "स्थान"
+
+#, fuzzy
+#~ msgctxt "OpenCachingCacheDialog|"
+#~ msgid "User name:"
+#~ msgstr "वापरकर्ता"
+
+#, fuzzy
+#~ msgctxt "OpenCachingCacheDialog|"
+#~ msgid "Type:"
+#~ msgstr "प्रकार"
+
+#, fuzzy
+#~| msgid "State"
+#~ msgctxt "OpenCachingCacheDialog|"
+#~ msgid "Status:"
+#~ msgstr "स्थिती"
+
+#, fuzzy
+#~ msgctxt "OpenCachingCacheDialog|"
+#~ msgid "Size:"
+#~ msgstr "आकार :"
+
+#, fuzzy
+#~ msgctxt "OpenCachingCacheDialog|"
+#~ msgid "Date hidden:"
+#~ msgstr "लपलेले"
+
+#, fuzzy
+#~| msgid "Description"
+#~ msgctxt "OpenCachingCacheDialog|"
+#~ msgid "Description"
+#~ msgstr "वर्णन"
+
+#, fuzzy
+#~| msgid "Distance:"
+#~ msgctxt "OpenCachingConfigWidget|"
+#~ msgid "Maximum Distance:"
+#~ msgstr "अंतर :"
+
+#, fuzzy
+#~ msgctxt "Marble::OpenCachingItem|"
+#~ msgid "<tr><td align=\"right\">Cache name</td>"
+#~ msgstr "वापरकर्ता नाव"
+
+#, fuzzy
+#~ msgctxt "Marble::OpenCachingItem|"
+#~ msgid "<tr><td align=\"right\">User name</td><td>"
+#~ msgstr "वापरकर्ता नाव"
+
+#, fuzzy
+#~ msgctxt "Marble::OpenCachingItem|"
+#~ msgid "<tr><td align=\"right\">Date hidden</td><td>"
+#~ msgstr "आकार"
+
+#, fuzzy
+#~ msgctxt "Marble::OpenCachingItem|"
+#~ msgid "<tr><td align=\"right\">Difficulty</td><td>"
+#~ msgstr "आकार"
+
+#, fuzzy
+#~ msgctxt "Marble::OpenCachingItem|"
+#~ msgid "<tr><td align=\"right\">Size</td><td>"
+#~ msgstr "आकार"
+
+#, fuzzy
+#~ msgctxt "OpenDesktopConfigWidget|"
+#~ msgid "OpenDesktop plugin configuration"
+#~ msgstr "संचारण"
+
+#, fuzzy
+#~ msgctxt "OverviewMapConfigWidget|"
+#~ msgid "Configure Overview Map"
+#~ msgstr "संयोजीत करा"
+
+#, fuzzy
+#~ msgctxt "OverviewMapConfigWidget|"
+#~ msgid "&Planet:"
+#~ msgstr "जागा"
+
+#, fuzzy
+#~ msgctxt "OverviewMapConfigWidget|"
+#~ msgid "&Size:"
+#~ msgstr "आकार :"
+
+#, fuzzy
+#~ msgctxt "OverviewMapConfigWidget|"
+#~ msgid "Filename"
+#~ msgstr "फाईल (&F)"
+
+#, fuzzy
+#~ msgctxt "PhotoConfigWidget|"
+#~ msgid "License"
+#~ msgstr "परवाना :"
+
+#, fuzzy
+#~| msgid "Custom"
+#~ msgctxt "PositionMarkerConfigWidget|"
+#~ msgid "&Custom:"
+#~ msgstr "ऐच्छिक"
+
+#, fuzzy
+#~ msgctxt "RoutingConfigDialog|"
+#~ msgid "Routing Configuration"
+#~ msgstr "संचारण"
+
+#, fuzzy
+#~| msgid "Zoom &Out"
+#~ msgctxt "RoutingPlugin|"
+#~ msgid "Zoom Out"
+#~ msgstr "लहान करा (&O)"
+
+#, fuzzy
+#~| msgid "Zoom &In"
+#~ msgctxt "RoutingPlugin|"
+#~ msgid "Zoom In"
+#~ msgstr "मोठे करा (&I)"
+
+#, fuzzy
+#~| msgid "Weather"
+#~ msgctxt "Marble::SatellitesConfigDialog|"
+#~ msgid "Other"
+#~ msgstr "हवामान"
+
+#, fuzzy
+#~| msgid "Sun"
+#~ msgctxt "Marble::SatellitesConfigDialog|"
+#~ msgid "Sun"
+#~ msgstr "रवि"
+
+#, fuzzy
+#~| msgid "Search Results"
+#~ msgctxt "Marble::SatellitesConfigDialog|"
+#~ msgid "&Data Sources"
+#~ msgstr "शोध परिणाम"
+
+#, fuzzy
+#~| msgid "All Supported Files"
+#~ msgctxt "Marble::SatellitesConfigDialog|"
+#~ msgid "All Supported Files (*.txt *.msc)"
+#~ msgstr "सर्व समर्थीत फाईल्स"
+
+#, fuzzy
+#~ msgctxt "Marble::SatellitesConfigDialog|"
+#~ msgid "All Files (*.*)"
+#~ msgstr "सर्व फाईल्स"
+
+#, fuzzy
+#~ msgctxt "Marble::SatellitesConfigDialog|"
+#~ msgid "Delete selected data source"
+#~ msgstr "'पसंत' मधून काढून टाका"
+
+#, fuzzy
+#~ msgctxt "SatellitesConfigDialog|"
+#~ msgid "Satellites Configuration"
+#~ msgstr "संचारण"
+
+#, fuzzy
+#~| msgid "Search Results"
+#~ msgctxt "SatellitesConfigDialog|"
+#~ msgid "&Data Sources"
+#~ msgstr "शोध परिणाम"
+
+#, fuzzy
+#~ msgctxt "SatellitesConfigDialog|"
+#~ msgid "Remove selected data source."
+#~ msgstr "'पसंत' मधून काढून टाका"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "No info available."
+#~ msgstr "वर्णन उपलब्ध नाही."
+
+#, fuzzy
+#~ msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
+#~ msgid "Space Stations"
+#~ msgstr "स्थान"
+
+#, fuzzy
+#~| msgid "Weather"
+#~ msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
+#~ msgid "Weather"
+#~ msgstr "हवामान"
+
+#, fuzzy
+#~| msgid "Search Results"
+#~ msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
+#~ msgid "Earth Resources"
+#~ msgstr "शोध परिणाम"
+
+#, fuzzy
+#~| msgid "Annotation"
+#~ msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
+#~ msgid "Geostationary"
+#~ msgstr "टीप"
+
+#, fuzzy
+#~| msgid "Weather"
+#~ msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
+#~ msgid "Other"
+#~ msgstr "हवामान"
+
+#, fuzzy
+#~ msgctxt "Marble::SatellitesPlugin|"
+#~ msgid "Navigation Satellites"
+#~ msgstr "संचारण"
+
+#, fuzzy
+#~ msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
+#~ msgid "Russian LEO Navigation"
+#~ msgstr "संचारण"
+
+#, fuzzy
+#~ msgctxt "Marble::SatellitesPlugin|Name of a satellite group"
+#~ msgid "Education"
+#~ msgstr "स्थान"
+
+#, fuzzy
+#~| msgid "Sun"
+#~ msgctxt "StarsConfigWidget|"
+#~ msgid "Sun"
+#~ msgstr "रवि"
+
+#, fuzzy
+#~| msgid "Weather"
+#~ msgctxt "StarsConfigWidget|"
+#~ msgid "Other"
+#~ msgstr "हवामान"
+
+#, fuzzy
+#~ msgctxt "StarsConfigWidget|"
+#~ msgid "Constellations"
+#~ msgstr "स्थान"
+
+#, fuzzy
+#~| msgid "Name"
+#~ msgctxt "StarsConfigWidget|"
+#~ msgid "Names"
+#~ msgstr "नाव"
+
+#, fuzzy
+#~ msgctxt "StarsConfigWidget|"
+#~ msgid "Abbreviation"
+#~ msgstr "स्थान"
+
+#, fuzzy
+#~| msgid "Sun"
+#~ msgctxt "Marble::StarsPlugin|"
+#~ msgid "Sun"
+#~ msgstr "रवि"
+
+#, fuzzy
+#~ msgctxt "Marble::StarsPlugin|"
+#~ msgid "Show &Constellations"
+#~ msgstr "जागा"
+
+#, fuzzy
+#~ msgctxt "Marble::StarsPlugin|"
+#~ msgid "Show &Planets"
+#~ msgstr "जागा"
+
+#, fuzzy
+#~| msgid "&Configure..."
+#~ msgctxt "Marble::StarsPlugin|"
+#~ msgid "&Configure..."
+#~ msgstr "संयोजीत करा (&C)..."
+
+#, fuzzy
+#~| msgid "Sun"
+#~ msgctxt "Marble::SunPlugin|"
+#~ msgid "Sun"
+#~ msgstr "रवि"
+
+#, fuzzy
+#~| msgid "Annotation"
+#~ msgctxt "WeatherConfigWidget|"
+#~ msgid "Information"
+#~ msgstr "टीप"
+
+#, fuzzy
+#~ msgctxt "WeatherConfigWidget|"
+#~ msgid "Temperature"
+#~ msgstr "तापमान"
+
+#, fuzzy
+#~ msgctxt "WeatherConfigWidget|"
+#~ msgid "Wind direction"
+#~ msgstr "स्थान"
+
+#, fuzzy
+#~ msgctxt "WeatherData|"
+#~ msgid "clear"
+#~ msgstr "पुसून टाका"
+
+#, fuzzy
+#~ msgctxt "WeatherData|"
+#~ msgid "N"
+#~ msgstr "N"
+
+#, fuzzy
+#~| msgid "E"
+#~ msgctxt "WeatherData|"
+#~ msgid "NE"
+#~ msgstr "E"
+
+#, fuzzy
+#~| msgid "E"
+#~ msgctxt "WeatherData|"
+#~ msgid "E"
+#~ msgstr "E"
+
+#, fuzzy
+#~| msgid "SE"
+#~ msgctxt "WeatherData|"
+#~ msgid "SSE"
+#~ msgstr "शके"
+
+#, fuzzy
+#~| msgid "SE"
+#~ msgctxt "WeatherData|"
+#~ msgid "SE"
+#~ msgstr "शके"
+
+#, fuzzy
+#~| msgid "SE"
+#~ msgctxt "WeatherData|"
+#~ msgid "ESE"
+#~ msgstr "शके"
+
+#, fuzzy
+#~ msgctxt "WeatherData|"
+#~ msgid "S"
+#~ msgstr "S"
+
+#, fuzzy
+#~ msgctxt "WeatherData|"
+#~ msgid "NW"
+#~ msgstr "W"
+
+#, fuzzy
+#~ msgctxt "WeatherData|"
+#~ msgid "W"
+#~ msgstr "W"
+
+#, fuzzy
+#~ msgctxt "WeatherData|"
+#~ msgid "SW"
+#~ msgstr "W"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "m/s"
+#~ msgstr "%1m %2s"
+
+#, fuzzy
+#~| msgid "Bar"
+#~ msgctxt "WeatherData|"
+#~ msgid "Bar"
+#~ msgstr "पट्टी"
+
+#, fuzzy
+#~ msgctxt "WeatherData|air pressure has no change"
+#~ msgid "steady"
+#~ msgstr "तयार"
+
+#, fuzzy
+#~ msgctxt "WeatherData|air pressure falls"
+#~ msgid "falling"
+#~ msgstr "प्रतिष्ठापन करत आहे"
+
+#, fuzzy
+#~ msgctxt "WeatherData|"
+#~ msgid "Temperature: %1<br>"
+#~ msgstr "तापमान"
+
+#, fuzzy
+#~ msgctxt "WeatherData|"
+#~ msgid "Max temperature: %1<br>"
+#~ msgstr "तापमान"
+
+#, fuzzy
+#~ msgctxt "WeatherData|"
+#~ msgid "Min temperature: %1<br>"
+#~ msgstr "तापमान"
+
+#, fuzzy
+#~ msgctxt "WeatherData|"
+#~ msgid "Pressure: %1<br>"
+#~ msgstr "तापमान"
+
+#, fuzzy
+#~| msgid "Weather"
+#~ msgctxt "WeatherItemPrivate|"
+#~ msgid "Weather"
+#~ msgstr "हवामान"
+
+#, fuzzy
+#~ msgctxt "WeatherItemPrivate|DayOfWeek: Condition, MinTemp to MaxTemp"
+#~ msgid "%1: %2, %3 to %4"
+#~ msgstr "पर्यंत :"
+
+#, fuzzy
+#~ msgctxt "WeatherItemPrivate|"
+#~ msgid "Remove from Favorites"
+#~ msgstr "'पसंत' मधून काढून टाका"
+
+#, fuzzy
+#~| msgid "Add to Favorites"
+#~ msgctxt "WeatherItemPrivate|"
+#~ msgid "Add to Favorites"
+#~ msgstr "'पसंत'  मध्ये जोडा"
+
+#, fuzzy
+#~| msgid "Weather"
+#~ msgctxt "Marble::WeatherPlugin|"
+#~ msgid "Weather"
+#~ msgstr "हवामान"
+
+#, fuzzy
+#~ msgctxt "Marble::WeatherPlugin|"
+#~ msgid "&Weather"
+#~ msgstr "हवामान"
+
+#, fuzzy
+#~ msgctxt "Marble::WikipediaPlugin|"
+#~ msgid "Wikipedia Articles"
+#~ msgstr "विकिपेडिया"
+
+#, fuzzy
+#~ msgctxt "Marble::WikipediaPlugin|"
+#~ msgid "&Wikipedia"
+#~ msgstr "विकिपेडिया"
+
+#, fuzzy
+#~ msgctxt "Marble::GeoUriPlugin|"
+#~ msgid "Geo URI Search"
+#~ msgstr "शोधा"
+
+#, fuzzy
+#~ msgctxt "Marble::GpxPlugin|"
+#~ msgid "GPS Data"
+#~ msgstr "डेटा"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "university"
+#~ msgstr "विद्यापीठ :"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "bar"
+#~ msgstr "पट्टी"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "attraction"
+#~ msgstr "स्थान"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "airport"
+#~ msgstr "वाहतूक (&T):"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "airport runway"
+#~ msgstr "वाहतूक (&T):"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "airport apron"
+#~ msgstr "वाहतूक (&T):"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "airport taxiway"
+#~ msgstr "वाहतूक (&T):"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "bus station"
+#~ msgstr "स्थान"
+
+#, fuzzy
+#~| msgid "Annotation"
+#~ msgctxt "QObject|"
+#~ msgid "train station"
+#~ msgstr "टीप"
+
+#, fuzzy
+#~| msgid "Downloading %1"
+#~ msgctxt "QObject|"
+#~ msgid "Downloading %1"
+#~ msgstr "डाउनलोड करत आहे %1"
+
+#, fuzzy
+#~ msgctxt "QObject|"
+#~ msgid "Installing %1"
+#~ msgstr "प्रतिष्ठापन करत आहे"
+
+#, fuzzy
+#~ msgctxt "Marble::MonavConfigWidget|"
+#~ msgid "Remove Map"
+#~ msgstr "'पसंत' मधून काढून टाका"
+
+#, fuzzy
+#~ msgctxt "MonavConfigWidget|"
+#~ msgid "Monav Configuration"
+#~ msgstr "संचारण"
+
+#, fuzzy
+#~ msgctxt "MonavConfigWidget|"
+#~ msgid "Configure"
+#~ msgstr "संयोजीत करा"
+
+#, fuzzy
+#~ msgctxt "MonavConfigWidget|"
+#~ msgid "Transport Type:"
+#~ msgstr "वाहतूक (&T):"
+
+#, fuzzy
+#~ msgctxt "MonavConfigWidget|"
+#~ msgid "Install New"
+#~ msgstr "प्रतिष्ठापन करत आहे"
+
+#, fuzzy
+#~ msgctxt "MonavConfigWidget|"
+#~ msgid "Continent"
+#~ msgstr "चालू ठेवा"
+
+#, fuzzy
+#~| msgid "Downloading %1"
+#~ msgctxt "MonavConfigWidget|"
+#~ msgid "Download Variant"
+#~ msgstr "डाउनलोड करत आहे %1"
+
+#, fuzzy
+#~ msgctxt "MonavConfigWidget|"
+#~ msgid "Install"
+#~ msgstr "प्रतिष्ठापन करत आहे"
+
+#, fuzzy
+#~| msgid "Name"
+#~ msgctxt "Marble::MonavMapsModel|"
+#~ msgid "Name"
+#~ msgstr "नाव"
+
+#, fuzzy
+#~ msgctxt "Marble::MonavMapsModel|"
+#~ msgid "Transport"
+#~ msgstr "वाहतूक (&T):"
+
+#, fuzzy
+#~| msgid "Size"
+#~ msgctxt "Marble::MonavMapsModel|"
+#~ msgid "Size"
+#~ msgstr "आकार"
+
+#, fuzzy
+#~| msgid "Update"
+#~ msgctxt "Marble::MonavMapsModel|"
+#~ msgid "Update"
+#~ msgstr "अद्ययावत करा"
+
+#, fuzzy
+#~ msgctxt "Marble::MonavMapsModel|"
+#~ msgid "Delete"
+#~ msgstr "काढून टाका"
+
+#, fuzzy
+#~ msgctxt "Marble::MonavMapsModel|"
+#~ msgid "Date"
+#~ msgstr "दिनांक"
+
+#, fuzzy
+#~ msgctxt "Marble::OpenLocationCodeSearchPlugin|"
+#~ msgid "Open Location Code Search"
+#~ msgstr "स्थान"
+
+#, fuzzy
+#~ msgctxt "Marble::OpenLocationCodeSearchPlugin|"
+#~ msgid "Open Location Code"
+#~ msgstr "स्थान"
+
+#, fuzzy
+#~ msgctxt "RoutinoConfigWidget|"
+#~ msgid "Transport:"
+#~ msgstr "वाहतूक (&T):"
+
+#, fuzzy
+#~ msgctxt "YoursConfigWidget|"
+#~ msgid "Transport:"
+#~ msgstr "वाहतूक (&T):"
+
+#, fuzzy
+#~ msgctxt "Bookmarks|"
+#~ msgid "Removed"
+#~ msgstr "'पसंत' मधून काढून टाका"
+
+#, fuzzy
+#~| msgid "Settings"
+#~ msgctxt "MainScreen|"
+#~ msgid "Settings"
+#~ msgstr "संयोजना"
+
+#, fuzzy
+#~| msgid "About"
+#~ msgctxt "MainScreen|"
+#~ msgid "About"
+#~ msgstr "विषयी"
+
+#, fuzzy
+#~ msgctxt "MainScreen|"
+#~ msgid "Bookmarks"
+#~ msgstr "ओळखचिन्ह"
+
+#, fuzzy
+#~| msgid "&Open..."
+#~ msgctxt "MainScreen|"
+#~ msgid "Routing"
+#~ msgstr "उघडा (&O)..."
+
+#, fuzzy
+#~ msgctxt "SearchField|"
+#~ msgid "Search"
+#~ msgstr "शोधा"
+
+#, fuzzy
+#~ msgctxt "SidePanel|"
+#~ msgid "Public Transport"
+#~ msgstr "वाहतूक (&T):"
+
+#, fuzzy
+#~| msgid "About %1"
+#~ msgctxt "SidePanel|"
+#~ msgid "About Marble Maps…"
+#~ msgstr "%1 विषयी"
+
+#, fuzzy
+#~| msgid "Ctrl+O"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Ctrl+O"
+#~ msgstr "Ctrl+O"
+
+#, fuzzy
+#~| msgid "Ctrl+O"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Ctrl+S"
+#~ msgstr "Ctrl+O"
+
+#, fuzzy
+#~| msgid "Ctrl+O"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Ctrl+C"
+#~ msgstr "Ctrl+O"
+
+#, fuzzy
+#~| msgid "Ctrl+O"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Ctrl+E"
+#~ msgstr "Ctrl+O"
+
+#, fuzzy
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "F5"
+#~ msgstr "F"
+
+#, fuzzy
+#~| msgid "F1"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "F1"
+#~ msgstr "F1"
+
+#, fuzzy
+#~| msgid "Ctrl+O"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "Ctrl+B"
+#~ msgstr "Ctrl+O"
+
+#, fuzzy
+#~ msgctxt "Marble::MapWizard|"
+#~ msgid "Airport"
+#~ msgstr "वाहतूक (&T):"
+
+#, fuzzy
+#~| msgid "Annotation"
+#~ msgctxt "Marble::MapWizard|"
+#~ msgid "International"
+#~ msgstr "टीप"
+
+#, fuzzy
+#~| msgid "State"
+#~ msgctxt "Marble::MapWizard|"
+#~ msgid "State"
+#~ msgstr "स्थिती"
+
+#, fuzzy
+#~| msgid "&Add Bookmark"
+#~ msgctxt "Marble::MainWindow|"
+#~ msgid "&Add Bookmark"
+#~ msgstr "ओळखचिन्ह जोडा (&A)"
+
+#, fuzzy
+#~ msgctxt "RoutingSettingsWidget|"
+#~ msgid "&Configure"
+#~ msgstr "संयोजीत करा"
+
+#, fuzzy
+#~| msgid "Update"
+#~ msgctxt "TimeControlWidget|"
+#~ msgid "&New Date Time      :"
+#~ msgstr "अद्ययावत करा"
+
+#, fuzzy
+#~| msgid "Cancel"
+#~ msgctxt "MovieCaptureDialog|"
+#~ msgid "Cancel"
+#~ msgstr "रद्द करा"
+
+#, fuzzy
+#~| msgid "Cancel"
+#~ msgctxt "SunControlWidget|"
+#~ msgid "Cancel"
+#~ msgstr "रद्द करा"
+
+#, fuzzy
+#~| msgid "Cancel"
+#~ msgctxt "TileCreatorDialog|"
+#~ msgid "&Cancel"
+#~ msgstr "रद्द करा"
+
+#, fuzzy
+#~| msgid "Cancel"
+#~ msgctxt "TimeControlWidget|"
+#~ msgid "Cancel"
+#~ msgstr "रद्द करा"
+
+#, fuzzy
+#~| msgid "Cancel"
+#~ msgctxt "Marble::DownloadOsmDialog|"
+#~ msgid "Cancel"
+#~ msgstr "रद्द करा"
+
+#, fuzzy
+#~| msgid "Description"
+#~ msgctxt "CacheDetailsDialog|"
+#~ msgid "Description"
+#~ msgstr "वर्णन"
+
+#, fuzzy
+#~ msgctxt "Marble::OpenCachingComItem|"
+#~ msgid "Size:"
+#~ msgstr "आकार :"
+
+#, fuzzy
+#~ msgctxt "Marble::OpenCachingComItem|"
+#~ msgid "Hidden by:"
+#~ msgstr "लपलेले"
+
+#, fuzzy
+#~ msgctxt "Marble::OpenCachingComItem|"
+#~ msgid "Hidden:"
+#~ msgstr "लपलेले"
+
+#, fuzzy
+#~ msgctxt "Marble::OpenCachingComItem|"
+#~ msgid "number"
+#~ msgstr "संख्या"
+
+#, fuzzy
+#~ msgctxt "Marble::OpenCachingComItem|"
+#~ msgid "Verification:"
+#~ msgstr "स्थान"
+
+#, fuzzy
+#~| msgid "Distance:"
+#~ msgctxt "Marble::OpenCachingComItem|"
+#~ msgid "Distance:"
+#~ msgstr "अंतर :"
+
+#, fuzzy
+#~| msgid "Distance:"
+#~ msgctxt "Marble::OpenCachingComItem|"
+#~ msgid "Distance from home:"
+#~ msgstr "अंतर :"
+
+#, fuzzy
+#~ msgctxt "Marble::OpenCachingComItem|"
+#~ msgid "by <em>"
+#~ msgstr ""
+#~ "<p style='margin: 0 0 0 0'><b>%1</b> by %2</p><p style='margin: 0 0 0 0'>"
+#~ "%3</p><p style='margin: 0 0 0 0'>%4</p>"
+
+#, fuzzy
+#~| msgid "Size"
+#~ msgctxt "Marble::OpenCachingComItem|"
+#~ msgid "Size"
+#~ msgstr "आकार"
+
+#, fuzzy
+#~ msgctxt "Marble::OpenCachingComItem|"
+#~ msgid "User: "
+#~ msgstr "वापरकर्ता"
+
+#, fuzzy
+#~ msgctxt "Marble::OpenCachingComItem|"
+#~ msgid "Type: "
+#~ msgstr "प्रकार"
+
+#, fuzzy
+#~ msgctxt "Marble::OpenCachingComItem|"
+#~ msgid "Date: "
+#~ msgstr "दिनांक"
+
+#, fuzzy
+#~ msgctxt "Marble::OpenCachingComModel|"
+#~ msgid "Unknown Cache"
+#~ msgstr "अपरिचीत"
+
+#, fuzzy
+#~| msgid "Cancel"
+#~ msgctxt "BookmarkManagerDialogPrivate|"
+#~ msgid "Cancel"
+#~ msgstr "रद्द करा"
+
+#, fuzzy
+#~| msgid "Plugins"
+#~ msgctxt "Marble::NotesPlugin|"
+#~ msgid "Notes Plugin"
+#~ msgstr "प्लगइन्स"
+
+#, fuzzy
+#~ msgctxt "Marble::Placemark|"
+#~ msgid "%1 m"
+#~ msgstr "M"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "City National Capital"
+#~ msgstr "शहर :"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Town National Capital"
+#~ msgstr "शहर :"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Village National Capital"
+#~ msgstr "शहर :"
+
+#, fuzzy
+#~| msgid "Bar"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Bag"
+#~ msgstr "पट्टी"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Car"
+#~ msgstr "पुसून टाका"
+
+#, fuzzy
+#~| msgid "Copy"
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Copy"
+#~ msgstr "प्रत करा"
+
+#, fuzzy
+#~ msgctxt "GeoDataPlacemark|"
+#~ msgid "Book"
+#~ msgstr "ओळखचिन्ह"
+
+#, fuzzy
+#~| msgid "Zoom &Out"
+#~ msgctxt "RoutingPlugin|"
+#~ msgid "zoom out"
+#~ msgstr "लहान करा (&O)"
+
+#, fuzzy
+#~| msgid "Zoom &In"
+#~ msgctxt "RoutingPlugin|"
+#~ msgid "zoom in"
+#~ msgstr "मोठे करा (&I)"
+
+#, fuzzy
+#~| msgid "New Profile"
+#~ msgctxt "RoutinoConfigWidget|"
+#~ msgid "Profile:"
+#~ msgstr "नवीन रूपरेषा"
+
+#, fuzzy
+#~ msgctxt "GeoDataFeature|"
+#~ msgid "University"
+#~ msgstr "विद्यापीठ :"
+
+#, fuzzy
+#~| msgid "Bar"
+#~ msgctxt "GeoDataFeature|"
+#~ msgid "Bar"
+#~ msgstr "पट्टी"
+
+#, fuzzy
+#~| msgid "Annotation"
+#~ msgctxt "GeoDataFeature|"
+#~ msgid "Veterinary"
+#~ msgstr "टीप"
+
+#, fuzzy
+#~ msgctxt "GeoDataFeature|"
+#~ msgid "Car"
+#~ msgstr "पुसून टाका"
+
+#, fuzzy
+#~ msgctxt "Marble::Placemark|"
+#~ msgid "City"
+#~ msgstr "शहर :"
+
+#, fuzzy
+#~ msgctxt "Marble::Placemark|"
+#~ msgid "Continent"
+#~ msgstr "चालू ठेवा"
+
+#, fuzzy
+#~ msgctxt "Marble::Placemark|"
+#~ msgid "University"
+#~ msgstr "विद्यापीठ :"
+
+#, fuzzy
+#~| msgid "Bar"
+#~ msgctxt "Marble::Placemark|"
+#~ msgid "Bar"
+#~ msgstr "पट्टी"
+
+#, fuzzy
+#~| msgid "Annotation"
+#~ msgctxt "Marble::Placemark|"
+#~ msgid "Veterinary"
+#~ msgstr "टीप"
+
+#, fuzzy
+#~ msgctxt "Marble::Placemark|"
+#~ msgid "Car"
+#~ msgstr "पुसून टाका"
+
+#, fuzzy
+#~| msgid "Annotation"
+#~ msgctxt "Marble::Placemark|"
+#~ msgid "Information"
+#~ msgstr "टीप"
+
+#, fuzzy
+#~ msgctxt "Marble::Placemark|"
+#~ msgid "Wikipedia"
+#~ msgstr "विकिपेडिया"
+
+#, fuzzy
+#~| msgid "&Open..."
+#~ msgctxt "MarbleViewSettingsWidget|"
+#~ msgid "OpenGL"
+#~ msgstr "उघडा (&O)..."
+
+#, fuzzy
+#~| msgid "Native"
+#~ msgctxt "Marble::QtMarbleConfigDialog|"
+#~ msgid "Native"
+#~ msgstr "मूळ"
+
+#, fuzzy
+#~| msgid "Native"
+#~ msgctxt "Marble::QtMarbleConfigDialog|"
+#~ msgid "Native (X11)"
+#~ msgstr "मूळ"
+
+#~ msgctxt "East, the direction"
+#~ msgid "E"
+#~ msgstr "E"
+
+#, fuzzy
+#~ msgctxt "West, the direction"
+#~ msgid "W"
+#~ msgstr "W"
+
+#, fuzzy
+#~ msgctxt "North, the direction"
+#~ msgid "N"
+#~ msgstr "N"
+
+#, fuzzy
+#~ msgctxt "South, the direction"
+#~ msgid "S"
+#~ msgstr "S"
+
+#, fuzzy
+#~| msgid "m"
+#~ msgctxt "means meter"
+#~ msgid "m"
+#~ msgstr "m"
+
+#, fuzzy
+#~| msgid "m"
+#~ msgctxt "means nautical miles"
+#~ msgid "nm"
+#~ msgstr "m"
+
+#~ msgctxt "the earth's star"
+#~ msgid "Sun"
+#~ msgstr "रवि"
+
+#~ msgid "type"
+#~ msgstr "प्रकार"
+
+#, fuzzy
+#~| msgid "Weather"
+#~ msgctxt "Name of a satellite group"
+#~ msgid "Weather"
+#~ msgstr "हवामान"
+
+#, fuzzy
+#~| msgid "Weather"
+#~ msgctxt "Name of a satellite group"
+#~ msgid "Other"
+#~ msgstr "हवामान"
+
+#, fuzzy
+#~ msgid "Merge Nodes"
+#~ msgstr "काढून टाका"
