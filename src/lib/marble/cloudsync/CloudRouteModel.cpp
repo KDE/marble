@@ -7,7 +7,6 @@
 
 #include "RouteItem.h"
 
-#include "MarbleDebug.h"
 #include "MarbleDirs.h"
 
 #include <QIcon>
@@ -35,8 +34,6 @@ public:
     QNetworkAccessManager m_network;
     QMap<QNetworkReply *, int> m_previewQueue;
     QSet<QString> m_requestedPreviews;
-
-    QHash<int, QByteArray> m_roleNames;
 };
 
 CloudRouteModel::Private::Private()
@@ -50,51 +47,36 @@ CloudRouteModel::CloudRouteModel(QObject *parent)
     : QAbstractListModel(parent)
     , d(new Private())
 {
-    connect(&(d->m_network), SIGNAL(finished(QNetworkReply *)), this, SLOT(setPreview(QNetworkReply *)));
-
-    QHash<int, QByteArray> roles = roleNames();
-    roles[Name] = "name";
-    roles[Timestamp] = "identifier";
-    roles[PreviewUrl] = "previewUrl";
-    roles[Distance] = "distance";
-    roles[Duration] = "duration";
-    roles[IsCached] = "isCached";
-    roles[IsDownloading] = "isDownloading";
-    roles[IsOnCloud] = "isOnCloud";
-    d->m_roleNames = roles;
+    connect(&(d->m_network), &QNetworkAccessManager::finished, this, &CloudRouteModel::setPreview);
 }
 
-CloudRouteModel::~CloudRouteModel()
-{
-    delete d;
-}
+CloudRouteModel::~CloudRouteModel() = default;
 
 QVariant CloudRouteModel::data(const QModelIndex &index, int role) const
 {
-    if (index.isValid() && index.row() >= 0 && index.row() < d->m_items.size()) {
-        switch (role) {
-        case Qt::DecorationRole:
-            return preview(index);
-        case Timestamp:
-            return d->m_items.at(index.row()).identifier();
-        case Name:
-            return d->m_items.at(index.row()).name();
-        case PreviewUrl:
-            return d->m_items.at(index.row()).previewUrl();
-        case Distance:
-            return d->m_items.at(index.row()).distance();
-        case Duration:
-            return d->m_items.at(index.row()).duration();
-        case IsCached:
-            return isCached(index);
-        case IsDownloading:
-            return isDownloading(index);
-        case IsOnCloud:
-            return d->m_items.at(index.row()).onCloud();
-        }
+    Q_ASSERT(checkIndex(index, QAbstractItemModel::CheckIndexOption::IndexIsValid));
+    switch (role) {
+    case Qt::DecorationRole:
+        return preview(index);
+    case Timestamp:
+        return d->m_items.at(index.row()).identifier();
+    case Name:
+        return d->m_items.at(index.row()).name();
+    case PreviewUrl:
+        return d->m_items.at(index.row()).previewUrl();
+    case Distance:
+        return d->m_items.at(index.row()).distance();
+    case Duration:
+        return d->m_items.at(index.row()).duration();
+    case IsCached:
+        return isCached(index);
+    case IsDownloading:
+        return isDownloading(index);
+    case IsOnCloud:
+        return d->m_items.at(index.row()).onCloud();
+    default:
+        return {};
     }
-
-    return QVariant();
 }
 
 int CloudRouteModel::rowCount(const QModelIndex &parent) const
@@ -104,7 +86,16 @@ int CloudRouteModel::rowCount(const QModelIndex &parent) const
 
 QHash<int, QByteArray> CloudRouteModel::roleNames() const
 {
-    return d->m_roleNames;
+    QHash<int, QByteArray> roles = QAbstractListModel::roleNames();
+    roles[Name] = "name";
+    roles[Timestamp] = "identifier";
+    roles[PreviewUrl] = "previewUrl";
+    roles[Distance] = "distance";
+    roles[Duration] = "duration";
+    roles[IsCached] = "isCached";
+    roles[IsDownloading] = "isDownloading";
+    roles[IsOnCloud] = "isOnCloud";
+    return roles;
 }
 
 void CloudRouteModel::setItems(const QVector<RouteItem> &items)
@@ -118,8 +109,7 @@ void CloudRouteModel::setItems(const QVector<RouteItem> &items)
 
 bool CloudRouteModel::isCached(const QModelIndex &index) const
 {
-    QFileInfo cacheDir(d->m_cacheDir + index.data(Timestamp).toString() + QLatin1String(".kml"));
-    return cacheDir.exists();
+    return QFileInfo::exists(d->m_cacheDir + index.data(Timestamp).toString() + QLatin1String(".kml"));
 }
 
 QPersistentModelIndex CloudRouteModel::downloadingItem() const

@@ -23,7 +23,16 @@ class MARBLE_EXPORT CloudRouteModel : public QAbstractListModel
     Q_OBJECT
 
 public:
-    enum RouteRoles { Timestamp = Qt::UserRole + 1, Name, PreviewUrl, Distance, Duration, IsCached, IsDownloading, IsOnCloud };
+    enum RouteRoles {
+        Timestamp = Qt::UserRole + 1,
+        Name,
+        PreviewUrl,
+        Distance,
+        Duration,
+        IsCached,
+        IsDownloading,
+        IsOnCloud,
+    };
 
     explicit CloudRouteModel(QObject *parent = nullptr);
     ~CloudRouteModel() override;
@@ -92,7 +101,7 @@ public Q_SLOTS:
 
 private:
     class Private;
-    Private *d;
+    std::unique_ptr<Private> d;
 };
 }
 
