@@ -247,6 +247,7 @@ MarbleQuickItem::MarbleQuickItem(QQuickItem *parent)
     , d(new MarbleQuickItemPrivate(this))
 {
     setOpaquePainting(true);
+    setFillColor(Qt::black);
     qRegisterMetaType<Placemark *>("Placemark*");
     d->m_map.setMapQualityForViewContext(NormalQuality, Animation);
 
