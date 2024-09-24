@@ -114,5 +114,5 @@ Comment[uk]=Знайдіть ваш шлях
 Comment[x-test]=xxFind your wayxx
 Comment[zh_CN]=查找路线
 Comment[zh_TW]=找到您的路
-Icon=marble
-Categories=Qt;KDE;Education;Geography;Maps;
+Icon=org.kde.marble.map
+Categories=Qt;KDE;Education;Geoscience;Geography;Science;Maps;

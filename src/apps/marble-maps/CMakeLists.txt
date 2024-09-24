@@ -64,5 +64,6 @@ qt_add_qml_module(marble-maps
 )
 
 install(TARGETS marble-maps RUNTIME DESTINATION bin)
-install(PROGRAMS org.kde.marble.maps.desktop DESTINATION ${KDE_INSTALL_APPDIR})
-install(PROGRAMS org.kde.marble.maps.appdata.xml DESTINATION ${KDE_INSTALL_METAINFODIR})
+install(FILES org.kde.marble.maps.desktop DESTINATION ${KDE_INSTALL_APPDIR})
+install(FILES org.kde.marble.maps.appdata.xml DESTINATION ${KDE_INSTALL_METAINFODIR})
+install(FILES org.kde.marble.maps.svg DESTINATION ${KDE_INSTALL_FULL_ICONDIR}/hicolor/scalable/apps)
