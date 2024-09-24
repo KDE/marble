@@ -109,9 +109,9 @@ protected:
     void initialize();
 
 private:
-    const MarbleModel *m_marbleModel;
-    Ui::EclipsesBrowserDialog *m_browserWidget;
-    EclipsesModel *m_eclModel;
+    const MarbleModel *const m_marbleModel;
+    std::unique_ptr<Ui::EclipsesBrowserDialog> m_browserWidget;
+    EclipsesModel *m_eclModel = nullptr;
 };
 
 } // namespace Marble

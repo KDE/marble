@@ -20,16 +20,11 @@ namespace Marble
 EclipsesBrowserDialog::EclipsesBrowserDialog(const MarbleModel *model, QWidget *parent)
     : QDialog(parent)
     , m_marbleModel(model)
-    , m_browserWidget(nullptr)
 {
     initialize();
 }
 
-EclipsesBrowserDialog::~EclipsesBrowserDialog()
-{
-    delete m_eclModel;
-    delete m_browserWidget;
-}
+EclipsesBrowserDialog::~EclipsesBrowserDialog() = default;
 
 void EclipsesBrowserDialog::setYear(int year)
 {
@@ -81,13 +76,14 @@ void EclipsesBrowserDialog::updateButtonStates()
 
 void EclipsesBrowserDialog::initialize()
 {
-    delete m_browserWidget;
-    m_browserWidget = new Ui::EclipsesBrowserDialog();
+    m_browserWidget = std::make_unique<Ui::EclipsesBrowserDialog>();
     m_browserWidget->setupUi(this);
 
     m_browserWidget->treeView->setExpandsOnDoubleClick(false);
 
-    m_eclModel = new EclipsesModel(m_marbleModel);
+    if (!m_eclModel) {
+        m_eclModel = new EclipsesModel(m_marbleModel);
+    }
     m_browserWidget->treeView->setModel(m_eclModel);
 
     connect(m_browserWidget->buttonShow, SIGNAL(clicked()), this, SLOT(accept()));
