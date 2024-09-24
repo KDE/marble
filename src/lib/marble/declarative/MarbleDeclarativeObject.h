@@ -7,6 +7,7 @@
 #define MARBLE_DECLARATIVE_OBJECT_H
 
 #include <QObject>
+#include <qqmlintegration.h>
 
 class MarbleDeclarativeObjectPrivate;
 
@@ -17,6 +18,8 @@ class MarbleDeclarativeObjectPrivate;
 class MarbleDeclarativeObject : public QObject
 {
     Q_OBJECT
+    QML_NAMED_ELEMENT(Marble)
+    QML_SINGLETON
 
     Q_PROPERTY(QString version READ version CONSTANT)
 

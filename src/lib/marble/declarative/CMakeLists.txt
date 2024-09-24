@@ -1,10 +1,34 @@
 # SPDX-FileCopyrightText: 2024 Carl Schwan <carl@carlschwan.eu>
 # SPDX-License-Identifier: BSD-3-Clause
 
+# Image Provider
+
+ecm_add_qml_module(marbleimageprovider
+    URI "org.kde.marble.imageprovider"
+)
+target_sources(marbleimageprovider PRIVATE
+    DeclarativeMapThemeManager.cpp
+    DeclarativeMapThemeManager.h
+    MapThemeModel.cpp
+    MapThemeModel.h
+    imageproviderplugin.cpp
+    imageproviderplugin.h
+)
+
+target_link_libraries(marbleimageprovider PUBLIC
+    marblewidget
+    Qt6::Quick
+)
+
+ecm_finalize_qml_module(marbleimageprovider DESTINATION ${KDE_INSTALL_QMLDIR})
+
+# QML plugin
+
 ecm_add_qml_module(marbledeclarative
     URI "org.kde.marble"
-    VERSION 1.0
     GENERATE_PLUGIN_SOURCE
+    IMPORTS
+        org.kde.marble.imageprovider
 )
 
 find_package(Qt6 ${REQUIRED_QT_VERSION} OPTIONAL_COMPONENTS Positioning)
@@ -17,9 +41,7 @@ target_sources(marbledeclarative PRIVATE
     Coordinate.cpp
     GeoItem.cpp
     GeoPolyline.cpp
-    DeclarativeMapThemeManager.cpp
     MapTheme.cpp
-    MapThemeModel.cpp
     MarbleDeclarativeObject.cpp
     MarbleQuickItem.cpp
     Placemark.cpp
@@ -37,9 +59,7 @@ target_sources(marbledeclarative PRIVATE
     Coordinate.h
     GeoItem.h
     GeoPolyline.h
-    DeclarativeMapThemeManager.h
     MapTheme.h
-    MapThemeModel.h
     MarbleDeclarativeObject.h
     MarbleQuickItem.h
     Placemark.h
