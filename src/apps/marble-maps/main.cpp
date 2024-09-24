@@ -43,6 +43,17 @@ int main(int argc, char **argv)
                      KAboutLicense::GPL_V3,
                      i18n("© KDE Community"));
 
+    about.setOrganizationDomain("kde.org");
+    about.setBugAddress("https://bugs.kde.org/describecomponents.cgi?product=marble");
+
+    about.addAuthor(i18n("Carl Schwan"),
+                    i18n("Developer"),
+                    QStringLiteral("carl@carlschwan.eu"),
+                    QStringLiteral("https://carlschwan.eu"),
+                    QUrl(QStringLiteral("https://carlschwan.eu/avatar.png")));
+
+    about.setTranslator(i18nc("NAME OF TRANSLATORS", "Your names"), i18nc("EMAIL OF TRANSLATORS", "Your emails"));
+
     KAboutData::setApplicationData(about);
 
     QApplication::setWindowIcon(QIcon::fromTheme(QStringLiteral("org.kde.marble.maps")));
