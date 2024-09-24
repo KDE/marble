@@ -9,6 +9,7 @@
 #include <GeoDataExtendedData.h>
 #include <QGeoAddress>
 #endif // HAVE_QT6_POSITIONING
+#include <QRegularExpression>
 
 #include "GeoDataDocument.h"
 #include "GeoDataIconStyle.h"

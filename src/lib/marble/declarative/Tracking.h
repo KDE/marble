@@ -9,6 +9,7 @@
 #include "PositionSource.h"
 
 #include <QObject>
+#include <qqmlintegration.h>
 
 namespace Marble
 {
@@ -18,7 +19,7 @@ class MarbleQuickItem;
 class Tracking : public QObject
 {
     Q_OBJECT
-    Q_ENUMS(PositionMarkerType)
+    QML_ELEMENT
 
     Q_PROPERTY(MarbleQuickItem *map READ map WRITE setMap NOTIFY mapChanged)
     Q_PROPERTY(bool showTrack READ showTrack WRITE setShowTrack NOTIFY showTrackChanged)
@@ -32,7 +33,12 @@ class Tracking : public QObject
     Q_PROPERTY(double distance READ distance NOTIFY distanceChanged)
 
 public:
-    enum PositionMarkerType { None, Circle, Arrow };
+    enum PositionMarkerType {
+        None,
+        Circle,
+        Arrow,
+    };
+    Q_ENUM(PositionMarkerType)
 
     explicit Tracking(QObject *parent = nullptr);
 

@@ -8,10 +8,12 @@
 
 #include <QObject>
 #include <QVariant>
+#include <qqmlregistration.h>
 
 class Settings : public QObject
 {
     Q_OBJECT
+    QML_ELEMENT
 
     Q_PROPERTY(QString organizationName READ organizationName WRITE setOrganizationName)
     Q_PROPERTY(QString applicationName READ applicationName WRITE setApplicationName)
@@ -30,14 +32,13 @@ public:
 
     bool debugOutputEnabled() const;
 
-public Q_SLOTS:
-    QVariant value(const QString &group, const QString &key, const QVariant &value = QVariant()) const;
+    Q_INVOKABLE QVariant value(const QString &group, const QString &key, const QVariant &value = QVariant()) const;
 
-    void setValue(const QString &group, const QString &key, const QVariant &value);
+    Q_INVOKABLE void setValue(const QString &group, const QString &key, const QVariant &value);
 
-    void remove(const QString &group, const QString &value);
+    Q_INVOKABLE void remove(const QString &group, const QString &value);
 
-    void setDebugOutputEnabled(bool debugOutputEnabled);
+    Q_INVOKABLE void setDebugOutputEnabled(bool debugOutputEnabled);
 
 Q_SIGNALS:
     void debugOutputEnabledChanged(bool debugOutputEnabled);

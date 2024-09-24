@@ -1,31 +1,16 @@
-SET (TARGET marbleQuick2)
-PROJECT (${TARGET})
+# SPDX-FileCopyrightText: 2024 Carl Schwan <carl@carlschwan.eu>
+# SPDX-License-Identifier: BSD-3-Clause
 
-include_directories(
- ${CMAKE_CURRENT_SOURCE_DIR}
- ${CMAKE_CURRENT_BINARY_DIR}
+add_executable(marbleQuick2 main.cpp)
+
+target_link_libraries(marbleQuick2 PUBLIC Qt::Quick Qt::Widgets)
+
+qt_add_qml_module(marbleQuick2
+    URI org.kde.marble.quick
+    QML_FILES
+        Main.qml
+    DEPENDENCIES
+        org.kde.marble
 )
 
-set( ${TARGET}_SRC main.cpp)
-
-qt6_add_resources(marble_QRCS marbleQuick2.qrc)
-add_executable( ${TARGET} ${${TARGET}_SRC} ${marble_QRCS} )
-
-target_link_libraries( ${TARGET}
-    marblewidget
-    marbledeclarative
-)
-
-# TODO: marbledeclarative is a private lib currently, not a plugin, and headers are not installed
-# so do not install this example for now
-return()
-
-
-add_custom_command(TARGET ${TARGET} POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy_if_different
-                       ${CMAKE_CURRENT_SOURCE_DIR}/main.qml
-                       ${CMAKE_CURRENT_BINARY_DIR}
-                   )
-
-install( TARGETS ${TARGET} RUNTIME DESTINATION ${MARBLE_EXAMPLES_INSTALL_DIR}/${TARGET} )
-install( FILES ${${TARGET}_SRC} main.qml Readme.txt DESTINATION ${MARBLE_EXAMPLES_INSTALL_DIR}/${TARGET} )
-install( FILES CMakeLists.txt.external DESTINATION ${MARBLE_EXAMPLES_INSTALL_DIR}/${TARGET} RENAME CMakeLists.txt )
+install(TARGETS marbleQuick2 RUNTIME DESTINATION ${MARBLE_EXAMPLES_INSTALL_DIR}/marbleQuick2)

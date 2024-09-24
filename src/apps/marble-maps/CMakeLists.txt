@@ -4,11 +4,17 @@
 add_executable(marble-maps main.cpp MarbleMaps.cpp TextToSpeechClient.cpp MarbleMaps.h TextToSpeechClient.h)
 
 target_link_libraries(marble-maps PUBLIC
-    marbledeclarative
+    Qt::Quick
+    Qt::Widgets
     KF6::CoreAddons
     KF6::I18n
     KF6::Crash
 )
+
+if(NOT MARBLE_NO_WEBKITWIDGETS)
+    target_link_libraries(marble-maps PUBLIC Qt::WebEngineQuick)
+    add_definitions(-DMARBLE_WEBKITWIDGETS=1)
+endif()
 
 qt_add_qml_module(marble-maps
     URI org.kde.marble.maps
@@ -49,6 +55,12 @@ qt_add_qml_module(marble-maps
         images/gps_fixed.png
         images/gps_not_fixed.png
         images/backdrop.png
+    DEPENDENCIES
+        org.kde.marble
+        org.kde.kirigami
+        org.kde.kirigamiaddons.formcard
+        org.kde.kirigamiaddons.delegates
+        org.kde.kirigamiaddons.components
 )
 
 install(TARGETS marble-maps RUNTIME DESTINATION bin)

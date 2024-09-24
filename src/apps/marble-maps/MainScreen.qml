@@ -268,7 +268,12 @@ Kirigami.ApplicationWindow {
                 onPinchFinished: marbleMaps.handlePinchFinished(pinch.center)
                 onPinchUpdated: marbleMaps.handlePinchUpdated(pinch.center, pinch.scale);
 
-                MarbleMaps {
+                MarbleMapsApplication {
+                    id: marbleMapsApplication
+                    keepScreenOn: !suspended && navigationManager.guidanceModeEnabled
+                }
+
+                MarbleItem {
                     id: marbleMaps
 
                     property string currentPositionProvider: "QtPositioning"
@@ -294,8 +299,7 @@ Kirigami.ApplicationWindow {
                     showScaleBar: false
                     showBackground: smallZoom
                     showPublicTransport: settings.value("MarbleMaps", "showPublicTransport", "false") === "true"
-                    positionProvider: suspended ? "" : currentPositionProvider
-                    keepScreenOn: !suspended && navigationManager.guidanceModeEnabled
+                    positionProvider: marbleMapsApplication.suspended ? "" : currentPositionProvider
                     showPositionMarker: false
                     animationViewContext: dialogAnimation.running
 

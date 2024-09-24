@@ -6,7 +6,6 @@
 #include "MarbleMaps.h"
 #include <FileManager.h>
 
-#include <MarbleModel.h>
 #include <QGuiApplication>
 
 #ifdef Q_OS_ANDROID
@@ -18,8 +17,8 @@
 namespace Marble
 {
 
-MarbleMaps::MarbleMaps(QQuickItem *parent)
-    : MarbleQuickItem(parent)
+MarbleMapsApplication::MarbleMapsApplication(QObject *parent)
+    : QObject(parent)
     , m_suspended(false)
     , m_keepScreenOn(false)
 {
@@ -51,17 +50,17 @@ MarbleMaps::MarbleMaps(QQuickItem *parent)
 #endif
 }
 
-bool MarbleMaps::isSuspended() const
+bool MarbleMapsApplication::isSuspended() const
 {
     return m_suspended;
 }
 
-bool MarbleMaps::keepScreenOn() const
+bool MarbleMapsApplication::keepScreenOn() const
 {
     return m_keepScreenOn;
 }
 
-void MarbleMaps::setKeepScreenOn(bool screenOn)
+void MarbleMapsApplication::setKeepScreenOn(bool screenOn)
 {
     if (m_keepScreenOn == screenOn) {
         return;
@@ -85,7 +84,7 @@ void MarbleMaps::setKeepScreenOn(bool screenOn)
     emit keepScreenOnChanged(screenOn);
 }
 
-void MarbleMaps::handleApplicationStateChange(Qt::ApplicationState state)
+void MarbleMapsApplication::handleApplicationStateChange(Qt::ApplicationState state)
 {
     if (state == Qt::ApplicationSuspended) {
         m_suspended = true;

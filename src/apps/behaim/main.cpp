@@ -7,30 +7,19 @@
 #include <QQmlApplicationEngine>
 #include <QtQuick>
 
-#include "declarative/MarbleDeclarativePlugin.h"
-#include <MarbleGlobal.h>
-
-using namespace Marble;
+#if !MARBLE_WEBKITWIDGETS
+#include <QtWebEngineQuick>
+#endif
 
 #ifdef Q_OS_ANDROID
-// Declare symbol of main method as exported as needed by Qt-on-Android,
-// where the Dalvik-native QtActivity class needs to find and invoke it
-// on loading the "app" module
-extern "C" Q_DECL_EXPORT
+Q_DECL_EXPORT
 #endif
-    int
-    main(int argc, char **argv)
+int main(int argc, char **argv)
 {
-    QApplication app(argc, argv);
-
-#ifdef Q_OS_ANDROID
-    MarbleGlobal::Profiles profiles = MarbleGlobal::SmallScreen | MarbleGlobal::HighResolution;
-    MarbleGlobal::getInstance()->setProfiles(profiles);
+#if !MARBLE_WEBKITWIDGETS
+    QtWebEngineQuick::initialize();
 #endif
-
-    MarbleDeclarativePlugin declarativePlugin;
-    const char uri[] = "org.kde.marble";
-    declarativePlugin.registerTypes(uri);
+    QApplication app(argc, argv);
 
     QQmlApplicationEngine engine;
     engine.loadFromModule("org.kde.marble.behaim", "MainScreen");

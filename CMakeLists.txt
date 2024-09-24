@@ -39,6 +39,7 @@ include(ECMInstallIcons)
 include(ECMEnableSanitizers)
 include(ECMCoverageOption)
 include(ECMQtDeclareLoggingCategory)
+include(ECMQmlModule)
 
 include(MarbleMacros)
 
@@ -102,6 +103,7 @@ if(ANDROID)
 else()
     find_package(Qt6WebChannel ${REQUIRED_QT_VERSION})
     find_package(Qt6WebEngineWidgets ${REQUIRED_QT_VERSION})
+    find_package(Qt6WebEngineQuick ${REQUIRED_QT_VERSION})
 
    if ( NOT Qt6WebEngineWidgets_FOUND )
      set ( MARBLE_NO_WEBKITWIDGETS TRUE )

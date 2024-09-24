@@ -8,7 +8,7 @@
 
 #include "GeoDataCoordinates.h"
 #include <QObject>
-#include <QtQml>
+#include <qqmlregistration.h>
 
 /**
  * Represents a coordinate with the properties of a name and coordinates
@@ -18,6 +18,7 @@
 class Coordinate : public QObject
 {
     Q_OBJECT
+    QML_ELEMENT
 
     Q_PROPERTY(qreal longitude READ longitude WRITE setLongitude NOTIFY longitudeChanged)
     Q_PROPERTY(qreal latitude READ latitude WRITE setLatitude NOTIFY latitudeChanged)
@@ -89,7 +90,5 @@ private:
     Marble::GeoDataCoordinates m_coordinate;
     Notation m_defaultNotation;
 };
-
-QML_DECLARE_TYPE(Coordinate)
 
 #endif // MARBLE_DECLARATIVE_COORDINATE_H

@@ -3,7 +3,7 @@
 // SPDX-FileCopyrightText: 2015 Dennis Nienhüser <nienhueser@kde.org>
 //
 
-#include <declarative/MarbleQuickItem.h>
+#include <QObject>
 #include <qqmlregistration.h>
 
 #ifndef MARBLE_MAPS_H
@@ -12,7 +12,7 @@
 namespace Marble
 {
 
-class MarbleMaps : public MarbleQuickItem
+class MarbleMapsApplication : public QObject
 {
     Q_OBJECT
     QML_ELEMENT
@@ -21,7 +21,7 @@ class MarbleMaps : public MarbleQuickItem
     Q_PROPERTY(bool keepScreenOn READ keepScreenOn WRITE setKeepScreenOn NOTIFY keepScreenOnChanged)
 
 public:
-    explicit MarbleMaps(QQuickItem *parent = nullptr);
+    explicit MarbleMapsApplication(QObject *parent = nullptr);
 
     bool isSuspended() const;
 

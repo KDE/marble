@@ -7,8 +7,10 @@
 #define MARBLE_DECLARATIVE_POSITIONSOURCE_H
 
 #include "Coordinate.h"
+#include "MarbleQuickItem.h"
 
 #include <QObject>
+#include <qqmlintegration.h>
 
 namespace Marble
 {
@@ -18,6 +20,7 @@ class MarbleQuickItem;
 class PositionSource : public QObject
 {
     Q_OBJECT
+    QML_ELEMENT
 
     Q_PROPERTY(MarbleQuickItem *map READ map WRITE setMap NOTIFY mapChanged)
     Q_PROPERTY(bool active READ active WRITE setActive NOTIFY activeChanged)
@@ -28,6 +31,7 @@ class PositionSource : public QObject
 
 public:
     explicit PositionSource(QObject *parent = nullptr);
+    ~PositionSource();
 
     bool active() const;
 

@@ -21,6 +21,8 @@ class RoutingPrivate;
 class Routing : public QQuickItem
 {
     Q_OBJECT
+    QML_ELEMENT
+
     Q_PROPERTY(MarbleMap *marbleMap READ marbleMap WRITE setMarbleMap NOTIFY marbleMapChanged)
     Q_PROPERTY(RoutingProfile routingProfile READ routingProfile WRITE setRoutingProfile NOTIFY routingProfileChanged)
     Q_PROPERTY(bool hasRoute READ hasRoute NOTIFY hasRouteChanged)

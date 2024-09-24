@@ -11,7 +11,8 @@
 
 #include <QObject>
 #include <QStringListModel>
-#include <QtQml>
+#include <QUrl>
+#include <qqmlregistration.h>
 
 namespace Marble
 {
@@ -22,6 +23,7 @@ namespace Marble
 class Placemark : public QObject
 {
     Q_OBJECT
+    QML_ELEMENT
 
     Q_PROPERTY(QString name WRITE setName READ name NOTIFY nameChanged)
     Q_PROPERTY(QString description READ description NOTIFY descriptionChanged)
@@ -107,7 +109,5 @@ private:
 };
 
 }
-
-QML_DECLARE_TYPE(Marble::Placemark)
 
 #endif // MARBLE_DECLARATIVE_PLACEMARK_H

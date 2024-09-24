@@ -12,7 +12,6 @@
 #include <KLocalizedString>
 
 #include "MarbleMaps.h"
-#include "declarative/MarbleDeclarativePlugin.h"
 #include <MarbleGlobal.h>
 #include <marble_version.h>
 
@@ -20,17 +19,21 @@
 #include <KCrash>
 #endif
 
+#if !MARBLE_WEBKITWIDGETS
+#include <QtWebEngineQuick>
+#endif
+
 using namespace Marble;
 
 #ifdef Q_OS_ANDROID
-// Declare symbol of main method as exported as needed by Qt-on-Android,
-// where the Dalvik-native QtActivity class needs to find and invoke it
-// on loading the "app" module
-extern "C" Q_DECL_EXPORT
+Q_DECL_EXPORT
 #endif
-    int
-    main(int argc, char **argv)
+int main(int argc, char **argv)
 {
+#if !MARBLE_WEBKITWIDGETS
+    QtWebEngineQuick::initialize();
+#endif
+
     QApplication app(argc, argv);
 
     KAboutData about(QStringLiteral("marble-maps"),
@@ -42,6 +45,8 @@ extern "C" Q_DECL_EXPORT
 
     KAboutData::setApplicationData(about);
 
+    QApplication::setWindowIcon(QIcon::fromTheme(QStringLiteral("org.kde.marble.maps")));
+
 #ifndef Q_OS_ANDROID
     KCrash::initialize();
 #endif
@@ -50,12 +55,6 @@ extern "C" Q_DECL_EXPORT
     about.setupCommandLine(&parser);
     parser.process(app);
     about.processCommandLine(&parser);
-
-    QApplication::setWindowIcon(QIcon::fromTheme(QStringLiteral("org.kde.marble.maps")));
-
-    MarbleDeclarativePlugin declarativePlugin;
-    const char uri[] = "org.kde.marble";
-    declarativePlugin.registerTypes(uri);
 
     QQmlApplicationEngine engine;
     engine.rootContext()->setContextObject(new KLocalizedContext(&engine));

@@ -3,9 +3,9 @@
 // SPDX-FileCopyrightText: 2015 Gábor Péterffy <peterffy95@gmail.com>
 //
 
-import QtQuick 2.3
+import QtQuick
 
-import org.kde.marble 0.20
+import org.kde.marble
 
 Routing {
     id: root

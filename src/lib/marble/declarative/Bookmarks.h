@@ -10,6 +10,7 @@
 #include <GeoDataTreeModel.h>
 #include <QObject>
 #include <QSortFilterProxyModel>
+#include <qqmlintegration.h>
 
 namespace Marble
 {
@@ -40,6 +41,7 @@ Q_SIGNALS:
 class Bookmarks : public QObject
 {
     Q_OBJECT
+    QML_ELEMENT
 
     Q_PROPERTY(Marble::MarbleQuickItem *map READ map WRITE setMap NOTIFY mapChanged)
     Q_PROPERTY(BookmarksModel *model READ model NOTIFY modelChanged)

@@ -8,6 +8,7 @@
 
 #include <QObject>
 #include <QSortFilterProxyModel>
+#include <qqmlregistration.h>
 
 #include "MarblePlacemarkModel.h"
 #include "MarbleQuickItem.h"
@@ -22,6 +23,7 @@ class SearchRunnerManager;
 class SearchBackend : public QObject
 {
     Q_OBJECT
+    QML_ELEMENT
 
     Q_PROPERTY(QObject *marbleQuickItem READ marbleQuickItem WRITE setMarbleQuickItem NOTIFY marbleQuickItemChanged)
     Q_PROPERTY(MarblePlacemarkModel *completionModel READ completionModel NOTIFY completionModelChanged)

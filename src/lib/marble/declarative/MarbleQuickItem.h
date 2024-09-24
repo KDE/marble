@@ -8,15 +8,18 @@
 
 #include "Coordinate.h"
 #include "GeoDataAccuracy.h"
+#include "GeoDataCoordinates.h"
 #include "GeoDataLineString.h"
 #include "MapTheme.h"
 #include "MarbleGlobal.h"
 #include "MarbleMap.h"
 #include "Placemark.h"
 #include "PositionProviderPluginInterface.h"
-#include "marble_declarative_export.h"
+
+#include <QPolygonF>
 #include <QQuickPaintedItem>
 #include <QSharedPointer>
+#include <qqmlregistration.h>
 
 namespace Marble
 {
@@ -27,11 +30,12 @@ class MarbleInputHandler;
 class MarbleQuickItemPrivate;
 
 // Class is still being developed
-class MARBLE_DECLARATIVE_EXPORT MarbleQuickItem : public QQuickPaintedItem
+class MarbleQuickItem : public QQuickPaintedItem
 {
     Q_OBJECT
+    QML_NAMED_ELEMENT(MarbleItem)
 
-    Q_ENUMS(Projection)
+    Q_ENUM(Projection)
 
     Q_PROPERTY(int mapWidth READ mapWidth WRITE setMapWidth NOTIFY mapWidthChanged)
     Q_PROPERTY(int mapHeight READ mapHeight WRITE setMapHeight NOTIFY mapHeightChanged)
@@ -202,9 +206,9 @@ public:
     Placemark *currentPosition() const;
     Q_INVOKABLE QPointF screenCoordinatesFromCoordinate(Coordinate *coordinate) const;
     Q_INVOKABLE QPointF screenCoordinatesFromGeoDataCoordinates(const GeoDataCoordinates &coordinates) const;
-    Q_INVOKABLE bool screenCoordinatesFromGeoDataLineString(const GeoDataLineString &lineString, QVector<QPolygonF *> &polygons) const;
+    bool screenCoordinatesFromGeoDataLineString(const GeoDataLineString &lineString, QVector<QPolygonF *> &polygons) const;
 
-    Q_INVOKABLE bool screenCoordinatesToGeoDataCoordinates(const QPoint &point, GeoDataCoordinates &coordinates);
+    bool screenCoordinatesToGeoDataCoordinates(const QPoint &point, GeoDataCoordinates &coordinates);
     Q_INVOKABLE bool screenCoordinatesToCoordinate(const QPoint &point, Coordinate *coordinate);
     qreal speed() const;
     qreal angle() const;

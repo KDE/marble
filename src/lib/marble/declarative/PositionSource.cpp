@@ -26,6 +26,8 @@ PositionSource::PositionSource(QObject *parent)
     // nothing to do
 }
 
+PositionSource::~PositionSource() = default;
+
 bool PositionSource::active() const
 {
     return m_active;

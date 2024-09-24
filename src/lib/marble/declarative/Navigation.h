@@ -18,6 +18,8 @@ class NavigationPrivate;
 class Navigation : public QObject
 {
     Q_OBJECT
+    QML_ELEMENT
+
     Q_PROPERTY(Marble::MarbleQuickItem *marbleQuickItem READ marbleQuickItem WRITE setMarbleQuickItem NOTIFY marbleQuickItemChanged)
     Q_PROPERTY(bool guidanceModeEnabled READ guidanceModeEnabled WRITE setGuidanceModeEnabled NOTIFY guidanceModeEnabledChanged)
     Q_PROPERTY(bool muted READ muted WRITE setMuted NOTIFY mutedChanged)

@@ -487,7 +487,6 @@ endif()
 install( FILES
     ${CMAKE_CURRENT_BINARY_DIR}/marble_version.h
     ${CMAKE_CURRENT_BINARY_DIR}/marble_export.h
-    ${CMAKE_CURRENT_BINARY_DIR}/declarative/marble_declarative_export.h
     ${graphicsview_HDRS}
     ${marble_WebKit}
     AutoNavigation.h

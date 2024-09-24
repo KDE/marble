@@ -12,7 +12,7 @@ import QtQml.Models
 import org.kde.kirigami as Kirigami
 import org.kde.kirigamiaddons.delegates as Delegates
 
-import org.kde.marble
+import org.kde.marble as Marble
 
 Kirigami.ScrollablePage {
     id: root
@@ -21,7 +21,7 @@ Kirigami.ScrollablePage {
 
     property var marbleMaps
 
-    Bookmarks {
+    Marble.Bookmarks {
         id: bookmarks
         map: marbleMaps
     }

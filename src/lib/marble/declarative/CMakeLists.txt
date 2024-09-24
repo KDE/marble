@@ -1,16 +1,18 @@
-PROJECT( MarbleDeclarativePlugin )
+# SPDX-FileCopyrightText: 2024 Carl Schwan <carl@carlschwan.eu>
+# SPDX-License-Identifier: BSD-3-Clause
+
+ecm_add_qml_module(marbledeclarative
+    URI "org.kde.marble"
+    VERSION 1.0
+    GENERATE_PLUGIN_SOURCE
+)
 
 find_package(Qt6 ${REQUIRED_QT_VERSION} OPTIONAL_COMPONENTS Positioning)
 if(Qt6Positioning_FOUND)
     add_definitions(-DHAVE_QT6_POSITIONING)     # PORT_QT6
 endif(Qt6Positioning_FOUND)
 
-INCLUDE_DIRECTORIES(
-    ${CMAKE_CURRENT_SOURCE_DIR}
-    ${CMAKE_CURRENT_BINARY_DIR}
-)
-
-add_library( marbledeclarative SHARED
+target_sources(marbledeclarative PRIVATE
     Bookmarks.cpp
     Coordinate.cpp
     GeoItem.cpp
@@ -19,7 +21,6 @@ add_library( marbledeclarative SHARED
     MapTheme.cpp
     MapThemeModel.cpp
     MarbleDeclarativeObject.cpp
-    MarbleDeclarativePlugin.cpp
     MarbleQuickItem.cpp
     Placemark.cpp
     PositionSource.cpp
@@ -40,7 +41,6 @@ add_library( marbledeclarative SHARED
     MapTheme.h
     MapThemeModel.h
     MarbleDeclarativeObject.h
-    MarbleDeclarativePlugin.h
     MarbleQuickItem.h
     Placemark.h
     PositionSource.h
@@ -54,25 +54,13 @@ add_library( marbledeclarative SHARED
     RouteRelationModel.h
 )
 
-generate_export_header(marbledeclarative BASE_NAME marble_declarative)
-target_include_directories(marbledeclarative PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}>)
-
-marble_add_project_resources(qmldir)
-
-target_link_libraries( marbledeclarative
-    PUBLIC
-        marblewidget
-        Qt6::Quick
+target_link_libraries(marbledeclarative PUBLIC
+    marblewidget
+    Qt6::Quick
 )
+
 if(Qt6Positioning_FOUND)
-    target_link_libraries( marbledeclarative
-        PRIVATE
-            Qt6::Positioning
-    )
+    target_link_libraries(marbledeclarative PRIVATE Qt6::Positioning)
 endif()
 
-if(WIN32)
-  install(TARGETS marbledeclarative RUNTIME DESTINATION . ARCHIVE DESTINATION lib)
-else()
-  install(TARGETS marbledeclarative LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR})
-endif()
+ecm_finalize_qml_module(marbledeclarative DESTINATION ${KDE_INSTALL_QMLDIR})

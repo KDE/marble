@@ -7,6 +7,7 @@
 #include <QPaintDevice>
 #include <QPainter>
 #include <QQmlContext>
+#include <QQmlEngine>
 #include <QQuickWindow>
 #include <QScreen>
 #include <QSettings>
@@ -172,8 +173,7 @@ class MarbleQuickItemPrivate
 {
 public:
     explicit MarbleQuickItemPrivate(MarbleQuickItem *marble)
-        : m_marble(marble)
-        , m_model()
+        : m_model()
         , m_map(&m_model)
         , m_presenter(&m_map)
         , m_positionVisible(false)
@@ -218,7 +218,6 @@ public:
     void changeStyleBuilder(bool invert);
 
 private:
-    MarbleQuickItem *m_marble;
     friend class MarbleQuickItem;
     MarbleModel m_model;
     MarbleMap m_map;

@@ -7,6 +7,7 @@
 #define MARBLE_ROUTEREQUESTMODEL_H
 
 #include <QAbstractListModel>
+#include <qqmlregistration.h>
 
 namespace Marble
 {
@@ -17,6 +18,7 @@ class Routing;
 class RouteRequestModel : public QAbstractListModel
 {
     Q_OBJECT
+    QML_ELEMENT
 
     Q_PROPERTY(Marble::Routing *routing READ routing WRITE setRouting NOTIFY routingChanged)
     Q_PROPERTY(int count READ rowCount NOTIFY rowCountChanged)
