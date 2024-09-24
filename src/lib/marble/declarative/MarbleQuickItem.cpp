@@ -241,6 +241,7 @@ namespace Marble
       ,d(new MarbleQuickItemPrivate(this))
     {
         setRenderTarget(QQuickPaintedItem::FramebufferObject);
+        setFillColor(Qt::black);
         setOpaquePainting(true);
         qRegisterMetaType<Placemark*>("Placemark*");
         d->m_map.setMapQualityForViewContext(NormalQuality, Animation);
