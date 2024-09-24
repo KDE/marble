@@ -60,5 +60,9 @@ int main(int argc, char **argv)
     engine.rootContext()->setContextObject(new KLocalizedContext(&engine));
     engine.loadFromModule("org.kde.marble.maps", "MainScreen");
 
-    return app.exec();
+    if (engine.rootObjects().isEmpty()) {
+        return -1;
+    }
+
+    return QCoreApplication::exec();
 }
