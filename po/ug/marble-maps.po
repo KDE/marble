@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: marble_qt\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-23 00:36+0000\n"
+"POT-Creation-Date: 2024-09-25 00:36+0000\n"
 "PO-Revision-Date: 2013-09-08 07:05+0900\n"
 "Last-Translator: Gheyret Kenji <gheyret@gmail.com>\n"
 "Language-Team: Uyghur Computer Science Association <UKIJ@yahoogroups.com>\n"
@@ -17,18 +17,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Qt-Contexts: true\n"
-
-#, fuzzy, kde-format
-#| msgid "User: "
-msgctxt "NAME OF TRANSLATORS"
-msgid "Your names"
-msgstr "ئىشلەتكۈچى: "
-
-#, fuzzy, kde-format
-#| msgid "&Show Details"
-msgctxt "EMAIL OF TRANSLATORS"
-msgid "Your emails"
-msgstr "تەپسىلاتلارنى كۆرسەت(&S)"
 
 #: Bookmarks.qml:20
 #, fuzzy, kde-format
@@ -49,22 +37,47 @@ msgctxt "@option:check"
 msgid "Follow Current Position"
 msgstr "نۆۋەتتىكى ئورۇن"
 
-#: main.cpp:37 MainScreen.qml:20 MainScreen.qml:177
+#: main.cpp:40 MainScreen.qml:20 MainScreen.qml:177
 #, fuzzy, kde-format
 #| msgid "&Manage Bookmarks"
 msgid "Marble Maps"
 msgstr "خەتكۈچلەرنى باشقۇر(&M)"
 
-#: main.cpp:39
+#: main.cpp:42
 #, fuzzy, kde-format
 #| msgid "&Edit Map"
 msgid "Maps"
 msgstr "خەرىتە تەھرىرى(&E)"
 
-#: main.cpp:41
+#: main.cpp:44
 #, kde-format
 msgid "© KDE Community"
 msgstr ""
+
+#: main.cpp:49
+#, kde-format
+msgid "Carl Schwan"
+msgstr ""
+
+#: main.cpp:50
+#, fuzzy, kde-format
+#| msgid "Developer"
+msgid "Developer"
+msgstr "ئىجادىيەتچى"
+
+#: main.cpp:55
+#, fuzzy, kde-format
+#| msgid "User: "
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "ئىشلەتكۈچى: "
+
+#: main.cpp:55
+#, fuzzy, kde-format
+#| msgid "&Show Details"
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "تەپسىلاتلارنى كۆرسەت(&S)"
 
 #: MainScreen.qml:86
 #, fuzzy, kde-format
@@ -104,7 +117,7 @@ msgctxt "@action:button"
 msgid "Layer Options"
 msgstr "يېڭى سەپلىمە ھۆججەت"
 
-#: MainScreen.qml:455
+#: MainScreen.qml:459
 #, fuzzy, kde-format
 #| msgid "%1 km"
 msgid "%1 km"
@@ -3268,12 +3281,6 @@ msgstr "%1 نى چۈشۈرۈۋاتىدۇ"
 #~ msgctxt "Marble::PluginAboutDialog|"
 #~ msgid "Data"
 #~ msgstr "سانلىق-مەلۇمات"
-
-#, fuzzy
-#~| msgid "Developer"
-#~ msgctxt "PluginAuthor|"
-#~ msgid "Developer"
-#~ msgstr "ئىجادىيەتچى"
 
 #, fuzzy
 #~| msgid "Configure"

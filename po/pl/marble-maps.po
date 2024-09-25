@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: marble_qt\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-23 00:36+0000\n"
+"POT-Creation-Date: 2024-09-25 00:36+0000\n"
 "PO-Revision-Date: 2024-01-27 11:08+0100\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
@@ -26,18 +26,6 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
 "X-Qt-Contexts: true\n"
-
-#, fuzzy, kde-format
-#| msgctxt "EMAIL OF TRANSLATORS"
-#| msgid "Your emails"
-msgctxt "NAME OF TRANSLATORS"
-msgid "Your names"
-msgstr "tazdzioch@o2.pl, maciej.wiklo@wp.pl "
-
-#, kde-format
-msgctxt "EMAIL OF TRANSLATORS"
-msgid "Your emails"
-msgstr "tazdzioch@o2.pl, maciej.wiklo@wp.pl "
 
 #: Bookmarks.qml:20
 #, fuzzy, kde-format
@@ -62,24 +50,50 @@ msgctxt "@option:check"
 msgid "Follow Current Position"
 msgstr "Śledź obecne położenie"
 
-#: main.cpp:37 MainScreen.qml:20 MainScreen.qml:177
+#: main.cpp:40 MainScreen.qml:20 MainScreen.qml:177
 #, fuzzy, kde-format
 #| msgctxt "MainScreen|"
 #| msgid "Marble Maps"
 msgid "Marble Maps"
 msgstr "Mapy Marble"
 
-#: main.cpp:39
+#: main.cpp:42
 #, fuzzy, kde-format
 #| msgctxt "QObject|"
 #| msgid "Edit Maps"
 msgid "Maps"
 msgstr "Edytuj mapy"
 
-#: main.cpp:41
+#: main.cpp:44
 #, kde-format
 msgid "© KDE Community"
 msgstr ""
+
+#: main.cpp:49
+#, kde-format
+msgid "Carl Schwan"
+msgstr ""
+
+#: main.cpp:50
+#, fuzzy, kde-format
+#| msgctxt "PluginAuthor|"
+#| msgid "Developer"
+msgid "Developer"
+msgstr "Programista"
+
+#: main.cpp:55
+#, fuzzy, kde-format
+#| msgctxt "EMAIL OF TRANSLATORS"
+#| msgid "Your emails"
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "tazdzioch@o2.pl, maciej.wiklo@wp.pl "
+
+#: main.cpp:55
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "tazdzioch@o2.pl, maciej.wiklo@wp.pl "
 
 #: MainScreen.qml:86
 #, fuzzy, kde-format
@@ -127,7 +141,7 @@ msgctxt "@action:button"
 msgid "Layer Options"
 msgstr "Opcje warstwy"
 
-#: MainScreen.qml:455
+#: MainScreen.qml:459
 #, fuzzy, kde-format
 #| msgctxt "MainScreen|"
 #| msgid "%1 km"
@@ -9030,10 +9044,6 @@ msgstr "Pobieraj mapy tylko przez sieć bezprzewodową"
 #~ msgctxt "Marble::PluginAboutDialog|"
 #~ msgid "Data"
 #~ msgstr "Dane"
-
-#~ msgctxt "PluginAuthor|"
-#~ msgid "Developer"
-#~ msgstr "Programista"
 
 #~ msgctxt "Marble::PluginItemDelegate|"
 #~ msgid "Configure"

@@ -3516,7 +3516,7 @@ msgctxt "QObject|"
 msgid "Current Location"
 msgstr "الحالي الموقع"
 
-#: src/lib/marble/declarative/Placemark.cpp:96
+#: src/lib/marble/declarative/Placemark.cpp:97
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "%n rooms"
@@ -3528,7 +3528,7 @@ msgstr[3] ""
 msgstr[4] ""
 msgstr[5] ""
 
-#: src/lib/marble/declarative/Placemark.cpp:102
+#: src/lib/marble/declarative/Placemark.cpp:103
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "%n beds"
@@ -3540,466 +3540,466 @@ msgstr[3] ""
 msgstr[4] ""
 msgstr[5] ""
 
-#: src/lib/marble/declarative/Placemark.cpp:108
+#: src/lib/marble/declarative/Placemark.cpp:109
 #, fuzzy, qt-format
 msgctxt "Marble::Placemark|"
 msgid "%1 parking spaces"
 msgstr "المقطوعة"
 
-#: src/lib/marble/declarative/Placemark.cpp:109
+#: src/lib/marble/declarative/Placemark.cpp:110
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "Maximum parking time %1"
 msgstr ""
 
-#: src/lib/marble/declarative/Placemark.cpp:147
+#: src/lib/marble/declarative/Placemark.cpp:148
 msgctxt "Marble::Placemark|A copy shop provides computers for customer use"
 msgid "Computers available"
 msgstr "حواسيب متوفرة"
 
-#: src/lib/marble/declarative/Placemark.cpp:151
+#: src/lib/marble/declarative/Placemark.cpp:152
 msgctxt ""
 "Marble::Placemark|A copy shop does not provide computers for customer use"
 msgid "No computers available"
 msgstr "لا يوجد حواسيب متوفرة"
 
-#: src/lib/marble/declarative/Placemark.cpp:155
+#: src/lib/marble/declarative/Placemark.cpp:156
 msgctxt "Marble::Placemark|A copy shop provides photocopying service"
 msgid "Photocopying service"
 msgstr "خدمة نسخ"
 
-#: src/lib/marble/declarative/Placemark.cpp:159
+#: src/lib/marble/declarative/Placemark.cpp:160
 msgctxt "Marble::Placemark|A copy shop does not provide photocopying service"
 msgid "No photocopying service"
 msgstr "لا يوجد خدمة نسخ"
 
-#: src/lib/marble/declarative/Placemark.cpp:163
+#: src/lib/marble/declarative/Placemark.cpp:164
 msgctxt ""
 "Marble::Placemark|A copy shop provides a service for scanning documents into "
 "digital files"
 msgid "Digital scanning"
 msgstr "مسح ضوئي"
 
-#: src/lib/marble/declarative/Placemark.cpp:167
+#: src/lib/marble/declarative/Placemark.cpp:168
 msgctxt ""
 "Marble::Placemark|A copy shop does not provide a service for scanning "
 "documents into digital files"
 msgid "No digital scanning"
 msgstr "لا يوجد مسح ضوئي"
 
-#: src/lib/marble/declarative/Placemark.cpp:171
+#: src/lib/marble/declarative/Placemark.cpp:172
 msgctxt ""
 "Marble::Placemark|A copy shop provides a service to send documents through "
 "fax"
 msgid "Fax service"
 msgstr "خدمة فاكس"
 
-#: src/lib/marble/declarative/Placemark.cpp:175
+#: src/lib/marble/declarative/Placemark.cpp:176
 msgctxt ""
 "Marble::Placemark|A copy shop does not provide a service to send documents "
 "through fax"
 msgid "No fax service"
 msgstr "لا يوجد خدمة فاكس"
 
-#: src/lib/marble/declarative/Placemark.cpp:179
+#: src/lib/marble/declarative/Placemark.cpp:180
 msgctxt ""
 "Marble::Placemark|A copy shop provides a paid service to make phone calls"
 msgid "Phone service"
 msgstr "خدمة هاتف"
 
-#: src/lib/marble/declarative/Placemark.cpp:183
+#: src/lib/marble/declarative/Placemark.cpp:184
 msgctxt ""
 "Marble::Placemark|A copy shop does not provide a paid service to make phone "
 "calls"
 msgid "No phone service"
 msgstr "لا يوجد خدمة هاتف"
 
-#: src/lib/marble/declarative/Placemark.cpp:187
+#: src/lib/marble/declarative/Placemark.cpp:188
 msgctxt ""
 "Marble::Placemark|A copy shop provides services to print paper documents "
 "from digital files"
 msgid "Digital printing"
 msgstr "طباعة رقمية"
 
-#: src/lib/marble/declarative/Placemark.cpp:191
+#: src/lib/marble/declarative/Placemark.cpp:192
 msgctxt ""
 "Marble::Placemark|A copy shop does not provide services to print paper "
 "documents from digital files"
 msgid "No digital printing"
 msgstr "لا يوجد طباعة رقمية"
 
-#: src/lib/marble/declarative/Placemark.cpp:195
+#: src/lib/marble/declarative/Placemark.cpp:196
 msgctxt ""
 "Marble::Placemark|A copy shop provides a professional service to print a "
 "large number of copies of a document"
 msgid "Press printing service"
 msgstr "خدمة مطبعة"
 
-#: src/lib/marble/declarative/Placemark.cpp:200
+#: src/lib/marble/declarative/Placemark.cpp:201
 msgctxt ""
 "Marble::Placemark|A copy shop does not provide a professional service to "
 "print a large number of copies of a document"
 msgid "No press printing service"
 msgstr "لا يوجد خدمة مطبعة"
 
-#: src/lib/marble/declarative/Placemark.cpp:204
+#: src/lib/marble/declarative/Placemark.cpp:205
 msgctxt ""
 "Marble::Placemark|A copy shop provides help with preparing special printing "
 "techniques"
 msgid "Press printing assistance"
 msgstr "مساعدة مطبعة"
 
-#: src/lib/marble/declarative/Placemark.cpp:208
+#: src/lib/marble/declarative/Placemark.cpp:209
 msgctxt ""
 "Marble::Placemark|A copy shop does not provide help with preparing special "
 "printing techniques"
 msgid "No press printing assistance"
 msgstr "لا يوجد مساعدة مطبعة"
 
-#: src/lib/marble/declarative/Placemark.cpp:212
+#: src/lib/marble/declarative/Placemark.cpp:213
 msgctxt ""
 "Marble::Placemark|A copy shop provides individual copy machines for self-"
 "service"
 msgid "Self service"
 msgstr "خدمة ذاتية"
 
-#: src/lib/marble/declarative/Placemark.cpp:216
+#: src/lib/marble/declarative/Placemark.cpp:217
 msgctxt ""
 "Marble::Placemark|A copy shop does not provide individual machines for self-"
 "service"
 msgid " No self service"
 msgstr "لا يوجد خدمة ذاتية"
 
-#: src/lib/marble/declarative/Placemark.cpp:218
+#: src/lib/marble/declarative/Placemark.cpp:219
 msgctxt "Marble::Placemark|A deli that sells organic food"
 msgid "Sells organic food"
 msgstr "يبيع طعام عضوي"
 
-#: src/lib/marble/declarative/Placemark.cpp:222
+#: src/lib/marble/declarative/Placemark.cpp:223
 msgctxt "Marble::Placemark|A deli that does not sell organic food"
 msgid "Does not sell organic food"
 msgstr "لا يبيع طعام عضوي"
 
-#: src/lib/marble/declarative/Placemark.cpp:226
+#: src/lib/marble/declarative/Placemark.cpp:227
 msgctxt "Marble::Placemark|A deli that only sells organic food"
 msgid "Only sells organic food"
 msgstr "يبيع طعام عضوي فقط"
 
-#: src/lib/marble/declarative/Placemark.cpp:231
+#: src/lib/marble/declarative/Placemark.cpp:232
 msgctxt "Marble::Placemark|A deli that sells gluten free food"
 msgid "Sells gluten free food"
 msgstr "يبيع طعام خالي من الغلوتين"
 
-#: src/lib/marble/declarative/Placemark.cpp:235
+#: src/lib/marble/declarative/Placemark.cpp:236
 msgctxt "Marble::Placemark|A deli that does not sell gluten free food"
 msgid "Does not sell gluten free food"
 msgstr "لا يبيع طعام خالي من الغلوتين"
 
-#: src/lib/marble/declarative/Placemark.cpp:239
+#: src/lib/marble/declarative/Placemark.cpp:240
 msgctxt "Marble::Placemark|A deli that only sells gluten free food"
 msgid "Only sells gluten free food"
 msgstr "يبيع طعام خالي من الغلوتين فقط"
 
-#: src/lib/marble/declarative/Placemark.cpp:244
+#: src/lib/marble/declarative/Placemark.cpp:245
 msgctxt "Marble::Placemark|A deli that sells lactose free food"
 msgid "Sells lactose free food"
 msgstr "يبيع أغذية خالية من اللاكتوز"
 
-#: src/lib/marble/declarative/Placemark.cpp:248
+#: src/lib/marble/declarative/Placemark.cpp:249
 msgctxt "Marble::Placemark|A deli that does not sell lactose free food"
 msgid "Does not sell lactose free food"
 msgstr "لا يبيع أغذية خالية من اللاكتوز"
 
-#: src/lib/marble/declarative/Placemark.cpp:252
+#: src/lib/marble/declarative/Placemark.cpp:253
 msgctxt "Marble::Placemark|A deli that only sells lactose free food"
 msgid "Only sells lactose free food"
 msgstr "يبيع أغذية خالية من اللاكتوز فقط"
 
-#: src/lib/marble/declarative/Placemark.cpp:257
+#: src/lib/marble/declarative/Placemark.cpp:258
 msgctxt "Marble::Placemark|A tobacco shop that also sells lottery tickets"
 msgid "Sells lottery tickets"
 msgstr "يبيع تذاكر يانصيب"
 
-#: src/lib/marble/declarative/Placemark.cpp:261
+#: src/lib/marble/declarative/Placemark.cpp:262
 msgctxt "Marble::Placemark|A tobacco shop that also sells revenue stamps"
 msgid "Sells revenue stamps"
 msgstr "يبيع طوابع الإيرادات"
 
-#: src/lib/marble/declarative/Placemark.cpp:262
+#: src/lib/marble/declarative/Placemark.cpp:263
 msgctxt "Marble::Placemark|A tobacco shop that also sells salt"
 msgid "Sells salt"
 msgstr "يبيع ملح طعام"
 
-#: src/lib/marble/declarative/Placemark.cpp:281
+#: src/lib/marble/declarative/Placemark.cpp:282
 msgctxt "Marble::Placemark|"
 msgid "Diesel"
 msgstr "ديزل"
 
-#: src/lib/marble/declarative/Placemark.cpp:282
+#: src/lib/marble/declarative/Placemark.cpp:283
 msgctxt "Marble::Placemark|"
 msgid "Biodiesel"
 msgstr "ديزل حيوي"
 
-#: src/lib/marble/declarative/Placemark.cpp:283
+#: src/lib/marble/declarative/Placemark.cpp:284
 msgctxt "Marble::Placemark|"
 msgid "Octane 91"
 msgstr "أوكتان 91"
 
-#: src/lib/marble/declarative/Placemark.cpp:284
+#: src/lib/marble/declarative/Placemark.cpp:285
 msgctxt "Marble::Placemark|"
 msgid "Octane 95"
 msgstr "أوكتان 95"
 
-#: src/lib/marble/declarative/Placemark.cpp:285
+#: src/lib/marble/declarative/Placemark.cpp:286
 msgctxt "Marble::Placemark|"
 msgid "Octane 98"
 msgstr "أوكتان 98"
 
-#: src/lib/marble/declarative/Placemark.cpp:286
+#: src/lib/marble/declarative/Placemark.cpp:287
 msgctxt "Marble::Placemark|"
 msgid "Octane 100"
 msgstr "أوكتان 100"
 
-#: src/lib/marble/declarative/Placemark.cpp:287
+#: src/lib/marble/declarative/Placemark.cpp:288
 msgctxt "Marble::Placemark|"
 msgid "E10"
 msgstr "إي 10"
 
-#: src/lib/marble/declarative/Placemark.cpp:288
+#: src/lib/marble/declarative/Placemark.cpp:289
 msgctxt "Marble::Placemark|"
 msgid "LPG"
 msgstr "غاز البترول المسال"
 
-#: src/lib/marble/declarative/Placemark.cpp:296
+#: src/lib/marble/declarative/Placemark.cpp:297
 msgctxt "Marble::Placemark|"
 msgid "Batteries"
 msgstr "بطاريات"
 
-#: src/lib/marble/declarative/Placemark.cpp:297
+#: src/lib/marble/declarative/Placemark.cpp:298
 msgctxt "Marble::Placemark|"
 msgid "Clothes"
 msgstr "ملابس"
 
-#: src/lib/marble/declarative/Placemark.cpp:298
+#: src/lib/marble/declarative/Placemark.cpp:299
 msgctxt "Marble::Placemark|"
 msgid "Glass"
 msgstr "كأس"
 
-#: src/lib/marble/declarative/Placemark.cpp:299
+#: src/lib/marble/declarative/Placemark.cpp:300
 msgctxt "Marble::Placemark|"
 msgid "Glass bottles"
 msgstr "قوارير زجاجية"
 
-#: src/lib/marble/declarative/Placemark.cpp:300
+#: src/lib/marble/declarative/Placemark.cpp:301
 msgctxt "Marble::Placemark|"
 msgid "Green waste"
 msgstr "النفايات الخضراء"
 
-#: src/lib/marble/declarative/Placemark.cpp:301
+#: src/lib/marble/declarative/Placemark.cpp:302
 msgctxt "Marble::Placemark|"
 msgid "Garden waste"
 msgstr "نفايات الحدائق"
 
-#: src/lib/marble/declarative/Placemark.cpp:302
+#: src/lib/marble/declarative/Placemark.cpp:303
 msgctxt "Marble::Placemark|"
 msgid "Electrical items"
 msgstr "أغراض الكترونية"
 
-#: src/lib/marble/declarative/Placemark.cpp:303
+#: src/lib/marble/declarative/Placemark.cpp:304
 msgctxt "Marble::Placemark|"
 msgid "Metal"
 msgstr "معدن"
 
-#: src/lib/marble/declarative/Placemark.cpp:304
+#: src/lib/marble/declarative/Placemark.cpp:305
 msgctxt "Marble::Placemark|"
 msgid "Mobile phones"
 msgstr "هواتف نقالة"
 
-#: src/lib/marble/declarative/Placemark.cpp:305
+#: src/lib/marble/declarative/Placemark.cpp:306
 msgctxt "Marble::Placemark|"
 msgid "Newspaper"
 msgstr "جرائد"
 
-#: src/lib/marble/declarative/Placemark.cpp:306
+#: src/lib/marble/declarative/Placemark.cpp:307
 msgctxt "Marble::Placemark|"
 msgid "Paint"
 msgstr "لوّن"
 
-#: src/lib/marble/declarative/Placemark.cpp:307
+#: src/lib/marble/declarative/Placemark.cpp:308
 msgctxt "Marble::Placemark|"
 msgid "Paper"
 msgstr "ورق"
 
-#: src/lib/marble/declarative/Placemark.cpp:308
+#: src/lib/marble/declarative/Placemark.cpp:309
 msgctxt "Marble::Placemark|"
 msgid "Paper packaging"
 msgstr "تغليف ورقي"
 
-#: src/lib/marble/declarative/Placemark.cpp:309
+#: src/lib/marble/declarative/Placemark.cpp:310
 msgctxt "Marble::Placemark|"
 msgid "PET"
 msgstr "PET"
 
-#: src/lib/marble/declarative/Placemark.cpp:310
+#: src/lib/marble/declarative/Placemark.cpp:311
 msgctxt "Marble::Placemark|"
 msgid "Plastic"
 msgstr "بلاستيك"
 
-#: src/lib/marble/declarative/Placemark.cpp:311
+#: src/lib/marble/declarative/Placemark.cpp:312
 msgctxt "Marble::Placemark|"
 msgid "Plastic bags"
 msgstr "أكياس بلاستيكية"
 
-#: src/lib/marble/declarative/Placemark.cpp:312
+#: src/lib/marble/declarative/Placemark.cpp:313
 msgctxt "Marble::Placemark|"
 msgid "Plastic bottles"
 msgstr "زجاجات البلاستيكية"
 
-#: src/lib/marble/declarative/Placemark.cpp:313
+#: src/lib/marble/declarative/Placemark.cpp:314
 msgctxt "Marble::Placemark|"
 msgid "Plastic packaging"
 msgstr "تعبئة وتغليف البلاستيكي"
 
-#: src/lib/marble/declarative/Placemark.cpp:314
+#: src/lib/marble/declarative/Placemark.cpp:315
 msgctxt "Marble::Placemark|"
 msgid "Polyester"
 msgstr "بوليستر"
 
-#: src/lib/marble/declarative/Placemark.cpp:315
+#: src/lib/marble/declarative/Placemark.cpp:316
 msgctxt "Marble::Placemark|"
 msgid "Tyres"
 msgstr "إطارات"
 
-#: src/lib/marble/declarative/Placemark.cpp:316
+#: src/lib/marble/declarative/Placemark.cpp:317
 msgctxt "Marble::Placemark|"
 msgid "Waste"
 msgstr "نفاية"
 
-#: src/lib/marble/declarative/Placemark.cpp:317
+#: src/lib/marble/declarative/Placemark.cpp:318
 msgctxt "Marble::Placemark|"
 msgid "White goods"
 msgstr "سلع بيضاء"
 
-#: src/lib/marble/declarative/Placemark.cpp:318
+#: src/lib/marble/declarative/Placemark.cpp:319
 msgctxt "Marble::Placemark|"
 msgid "Wood"
 msgstr "خشب"
 
-#: src/lib/marble/declarative/Placemark.cpp:320
+#: src/lib/marble/declarative/Placemark.cpp:321
 msgctxt "Marble::Placemark|An active volcano"
 msgid "Active"
 msgstr "نشط"
 
-#: src/lib/marble/declarative/Placemark.cpp:324
+#: src/lib/marble/declarative/Placemark.cpp:325
 msgctxt ""
 "Marble::Placemark|A dormant volcano that will erupt at some point in the "
 "future."
 msgid "Dormant"
 msgstr "خامل"
 
-#: src/lib/marble/declarative/Placemark.cpp:328
+#: src/lib/marble/declarative/Placemark.cpp:329
 msgctxt ""
 "Marble::Placemark|A volcano considered extinct, it has not erupted within "
 "the last 10000 years and likely never will again."
 msgid "Extinct"
 msgstr "منقرض"
 
-#: src/lib/marble/declarative/Placemark.cpp:329
+#: src/lib/marble/declarative/Placemark.cpp:330
 msgctxt "Marble::Placemark|"
 msgid "Stratovolcano"
 msgstr "بركان طبقي"
 
-#: src/lib/marble/declarative/Placemark.cpp:330
+#: src/lib/marble/declarative/Placemark.cpp:331
 msgctxt "Marble::Placemark|"
 msgid "Shield volcano"
 msgstr "بركان درعي"
 
-#: src/lib/marble/declarative/Placemark.cpp:331
+#: src/lib/marble/declarative/Placemark.cpp:332
 msgctxt "Marble::Placemark|A scoria cone volcano."
 msgid "Scoria cone"
 msgstr "بركان مخروط رماد"
 
-#: src/lib/marble/declarative/Placemark.cpp:333
+#: src/lib/marble/declarative/Placemark.cpp:334
 msgctxt "Marble::Placemark|"
 msgid "Alternative medicine"
 msgstr "طب بديل"
 
-#: src/lib/marble/declarative/Placemark.cpp:334
+#: src/lib/marble/declarative/Placemark.cpp:335
 msgctxt "Marble::Placemark|"
 msgid "Audiologist"
 msgstr "أخصائي سمع"
 
-#: src/lib/marble/declarative/Placemark.cpp:335
+#: src/lib/marble/declarative/Placemark.cpp:336
 msgctxt "Marble::Placemark|"
 msgid "Blood bank"
 msgstr "بنك دم"
 
-#: src/lib/marble/declarative/Placemark.cpp:336
+#: src/lib/marble/declarative/Placemark.cpp:337
 msgctxt "Marble::Placemark|"
 msgid "Blood donation"
 msgstr "التبرع بالدم"
 
-#: src/lib/marble/declarative/Placemark.cpp:337
+#: src/lib/marble/declarative/Placemark.cpp:338
 msgctxt "Marble::Placemark|"
 msgid "Medical center"
 msgstr "مركز صحي"
 
-#: src/lib/marble/declarative/Placemark.cpp:338
+#: src/lib/marble/declarative/Placemark.cpp:339
 msgctxt "Marble::Placemark|"
 msgid "Clinic"
 msgstr "عيادة"
 
-#: src/lib/marble/declarative/Placemark.cpp:339
+#: src/lib/marble/declarative/Placemark.cpp:340
 msgctxt "Marble::Placemark|"
 msgid "Dentist"
 msgstr "طبيب أسنان"
 
-#: src/lib/marble/declarative/Placemark.cpp:340
+#: src/lib/marble/declarative/Placemark.cpp:341
 msgctxt "Marble::Placemark|"
 msgid "Medical practitioner"
 msgstr "ممارس صحي"
 
-#: src/lib/marble/declarative/Placemark.cpp:341
+#: src/lib/marble/declarative/Placemark.cpp:342
 msgctxt "Marble::Placemark|"
 msgid "Hospital"
 msgstr "مستشفى"
 
-#: src/lib/marble/declarative/Placemark.cpp:342
+#: src/lib/marble/declarative/Placemark.cpp:343
 msgctxt "Marble::Placemark|"
 msgid "Midwife"
 msgstr "قابلة"
 
-#: src/lib/marble/declarative/Placemark.cpp:343
+#: src/lib/marble/declarative/Placemark.cpp:344
 msgctxt "Marble::Placemark|"
 msgid "Optometrist"
 msgstr "طبيب العيون"
 
-#: src/lib/marble/declarative/Placemark.cpp:344
+#: src/lib/marble/declarative/Placemark.cpp:345
 msgctxt "Marble::Placemark|"
 msgid "Physiotherapist"
 msgstr "أخصائي علاج طبيعي"
 
-#: src/lib/marble/declarative/Placemark.cpp:345
+#: src/lib/marble/declarative/Placemark.cpp:346
 msgctxt "Marble::Placemark|"
 msgid "Podiatrist"
 msgstr "طبيب الأرجل"
 
-#: src/lib/marble/declarative/Placemark.cpp:346
+#: src/lib/marble/declarative/Placemark.cpp:347
 msgctxt "Marble::Placemark|"
 msgid "Psychotherapist"
 msgstr "معالج نفسي"
 
-#: src/lib/marble/declarative/Placemark.cpp:347
+#: src/lib/marble/declarative/Placemark.cpp:348
 msgctxt "Marble::Placemark|"
 msgid "Rehabilitation"
 msgstr "إعادة التأهيل"
 
-#: src/lib/marble/declarative/Placemark.cpp:348
+#: src/lib/marble/declarative/Placemark.cpp:349
 msgctxt "Marble::Placemark|"
 msgid "Speech therapist"
 msgstr "معالج النطق"
 
-#: src/lib/marble/declarative/Placemark.cpp:355
+#: src/lib/marble/declarative/Placemark.cpp:356
 #, qt-format
 msgctxt "Marble::Placemark|number of seats a bench provides"
 msgid "%n seats"
@@ -4011,774 +4011,774 @@ msgstr[3] "%n مقاعد"
 msgstr[4] "%n مقعداً"
 msgstr[5] "%n مقعد"
 
-#: src/lib/marble/declarative/Placemark.cpp:361
+#: src/lib/marble/declarative/Placemark.cpp:362
 msgctxt "Marble::Placemark|A bench provides a backrest to lean against"
 msgid "Has backrest"
 msgstr "لديه مسند ظهر"
 
-#: src/lib/marble/declarative/Placemark.cpp:365
+#: src/lib/marble/declarative/Placemark.cpp:366
 msgctxt "Marble::Placemark|A bench provides no backrest to lean against"
 msgid "No backrest"
 msgstr "بدون مسند ظهر"
 
-#: src/lib/marble/declarative/Placemark.cpp:369
+#: src/lib/marble/declarative/Placemark.cpp:370
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "%1 km/h"
 msgstr "%1 كم/س"
 
-#: src/lib/marble/declarative/Placemark.cpp:375
+#: src/lib/marble/declarative/Placemark.cpp:376
 msgctxt "Marble::Placemark|Parking spaces are supervised by guards"
 msgid "Is supervised"
 msgstr "فيها إشراف"
 
-#: src/lib/marble/declarative/Placemark.cpp:379
+#: src/lib/marble/declarative/Placemark.cpp:380
 msgctxt "Marble::Placemark|Parking spaces are not supervised by guards"
 msgid "Not supervised"
 msgstr "بدون إشراف"
 
-#: src/lib/marble/declarative/Placemark.cpp:383
+#: src/lib/marble/declarative/Placemark.cpp:384
 #, fuzzy, qt-format
 msgctxt "Marble::Placemark|Parking spaces"
 msgid "%1 disabled spaces"
 msgstr "المقطوعة"
 
-#: src/lib/marble/declarative/Placemark.cpp:387
+#: src/lib/marble/declarative/Placemark.cpp:388
 #, fuzzy, qt-format
 msgctxt "Marble::Placemark|Parking spaces"
 msgid "%1 women spaces"
 msgstr "المقطوعة"
 
-#: src/lib/marble/declarative/Placemark.cpp:391
+#: src/lib/marble/declarative/Placemark.cpp:392
 #, fuzzy, qt-format
 msgctxt "Marble::Placemark|Parking spaces"
 msgid "%1 parent and child spaces"
 msgstr "المقطوعة"
 
-#: src/lib/marble/declarative/Placemark.cpp:395
+#: src/lib/marble/declarative/Placemark.cpp:396
 #, qt-format
 msgctxt "Marble::Placemark|Parking spaces"
 msgid "%1 spaces with electric chargers"
 msgstr ""
 
-#: src/lib/marble/declarative/Placemark.cpp:401
+#: src/lib/marble/declarative/Placemark.cpp:402
 msgctxt "Marble::Placemark|A parking space has outdoor surveillance"
 msgid "Has outdoor surveillance"
 msgstr ""
 
-#: src/lib/marble/declarative/Placemark.cpp:405
+#: src/lib/marble/declarative/Placemark.cpp:406
 msgctxt "Marble::Placemark|A parking space has indoor surveillance"
 msgid "Has indoor surveillance"
 msgstr ""
 
-#: src/lib/marble/declarative/Placemark.cpp:409
+#: src/lib/marble/declarative/Placemark.cpp:410
 msgctxt "Marble::Placemark|A parking space has public surveillance"
 msgid "Has public surveillance"
 msgstr ""
 
-#: src/lib/marble/declarative/Placemark.cpp:411
+#: src/lib/marble/declarative/Placemark.cpp:412
 msgctxt "Marble::Placemark|A hut provides showers inside or aside"
 msgid "Has shower"
 msgstr "فيه دش"
 
-#: src/lib/marble/declarative/Placemark.cpp:415
+#: src/lib/marble/declarative/Placemark.cpp:416
 msgctxt "Marble::Placemark|A hut does not provide showers inside or aside"
 msgid "Has no shower"
 msgstr "بدون دش"
 
-#: src/lib/marble/declarative/Placemark.cpp:416
+#: src/lib/marble/declarative/Placemark.cpp:417
 msgctxt "Marble::Placemark|A hut provides mattress"
 msgid "Has mattress"
 msgstr "فيه مرتبة"
 
-#: src/lib/marble/declarative/Placemark.cpp:417
+#: src/lib/marble/declarative/Placemark.cpp:418
 msgctxt "Marble::Placemark|A hut does not provide mattress"
 msgid "Has no mattress"
 msgstr "بدون مرتبة"
 
-#: src/lib/marble/declarative/Placemark.cpp:418
+#: src/lib/marble/declarative/Placemark.cpp:419
 msgctxt "Marble::Placemark|Water is available inside or aside"
 msgid "Has water"
 msgstr "فيه ماء"
 
-#: src/lib/marble/declarative/Placemark.cpp:422
+#: src/lib/marble/declarative/Placemark.cpp:423
 msgctxt "Marble::Placemark|Water is not available inside nor aside"
 msgid "Has no water"
 msgstr "بدون ماء"
 
-#: src/lib/marble/declarative/Placemark.cpp:423
+#: src/lib/marble/declarative/Placemark.cpp:424
 msgctxt "Marble::Placemark|A hut provides toilets"
 msgid "Has toilets"
 msgstr "فيه مرحاض"
 
-#: src/lib/marble/declarative/Placemark.cpp:424
+#: src/lib/marble/declarative/Placemark.cpp:425
 msgctxt "Marble::Placemark|A hut does not provide toilets"
 msgid "Has no toilets"
 msgstr "بدون مرحاض"
 
-#: src/lib/marble/declarative/Placemark.cpp:425
+#: src/lib/marble/declarative/Placemark.cpp:426
 msgctxt "Marble::Placemark|"
 msgid "Reservation is possible"
 msgstr "الحجز ممكن"
 
-#: src/lib/marble/declarative/Placemark.cpp:426
+#: src/lib/marble/declarative/Placemark.cpp:427
 msgctxt "Marble::Placemark|"
 msgid "No reservation possible"
 msgstr "بدون حجز"
 
-#: src/lib/marble/declarative/Placemark.cpp:427
+#: src/lib/marble/declarative/Placemark.cpp:428
 msgctxt "Marble::Placemark|"
 msgid "Reservation is required"
 msgstr "الحجز مطلوب"
 
-#: src/lib/marble/declarative/Placemark.cpp:431
+#: src/lib/marble/declarative/Placemark.cpp:432
 msgctxt "Marble::Placemark|You should make reservation"
 msgid "Reservation is recommended"
 msgstr "الحجز مفضل"
 
-#: src/lib/marble/declarative/Placemark.cpp:435
+#: src/lib/marble/declarative/Placemark.cpp:436
 msgctxt ""
 "Marble::Placemark|Reservation is only possible for members of the "
 "organisation running the hut"
 msgid "Only for members"
 msgstr "للأعضاء فقط"
 
-#: src/lib/marble/declarative/Placemark.cpp:437
+#: src/lib/marble/declarative/Placemark.cpp:438
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "By %1"
 msgstr "بواسطة %1"
 
-#: src/lib/marble/declarative/Placemark.cpp:439
+#: src/lib/marble/declarative/Placemark.cpp:440
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "%1 vehicles"
 msgstr "%1 مركبة"
 
-#: src/lib/marble/declarative/Placemark.cpp:440
+#: src/lib/marble/declarative/Placemark.cpp:441
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "%1 ampere"
 msgstr "%1 أمبير"
 
-#: src/lib/marble/declarative/Placemark.cpp:441
+#: src/lib/marble/declarative/Placemark.cpp:442
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "%1 volt"
 msgstr "%1 فولت"
 
-#: src/lib/marble/declarative/Placemark.cpp:443
+#: src/lib/marble/declarative/Placemark.cpp:444
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "%1 blue CEE sockets"
 msgstr ""
 
-#: src/lib/marble/declarative/Placemark.cpp:444
+#: src/lib/marble/declarative/Placemark.cpp:445
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "%1 red CEE sockets (16 A)"
 msgstr ""
 
-#: src/lib/marble/declarative/Placemark.cpp:445
+#: src/lib/marble/declarative/Placemark.cpp:446
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "%1 red CEE sockets (32 A)"
 msgstr ""
 
-#: src/lib/marble/declarative/Placemark.cpp:446
+#: src/lib/marble/declarative/Placemark.cpp:447
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "%1 red CEE sockets (64 A)"
 msgstr ""
 
-#: src/lib/marble/declarative/Placemark.cpp:447
+#: src/lib/marble/declarative/Placemark.cpp:448
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "%1 red CEE sockets (125 A)"
 msgstr ""
 
-#: src/lib/marble/declarative/Placemark.cpp:448
 #: src/lib/marble/declarative/Placemark.cpp:449
+#: src/lib/marble/declarative/Placemark.cpp:450
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "%1 NEMA-5-15P plugs"
 msgstr ""
 
-#: src/lib/marble/declarative/Placemark.cpp:450
+#: src/lib/marble/declarative/Placemark.cpp:451
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "%1 NEMA-5-20P plugs"
 msgstr ""
 
-#: src/lib/marble/declarative/Placemark.cpp:451
+#: src/lib/marble/declarative/Placemark.cpp:452
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "%1 NEMA 14-30 sockets"
 msgstr ""
 
-#: src/lib/marble/declarative/Placemark.cpp:452
+#: src/lib/marble/declarative/Placemark.cpp:453
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "%1 NEMA 14-50 sockets"
 msgstr ""
 
-#: src/lib/marble/declarative/Placemark.cpp:453
+#: src/lib/marble/declarative/Placemark.cpp:454
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "%1 Schuko sockets"
 msgstr ""
 
-#: src/lib/marble/declarative/Placemark.cpp:454
+#: src/lib/marble/declarative/Placemark.cpp:455
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "%1 BS 1363 sockets"
 msgstr ""
 
-#: src/lib/marble/declarative/Placemark.cpp:455
+#: src/lib/marble/declarative/Placemark.cpp:456
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "%1 Type 1 plugs"
 msgstr ""
 
-#: src/lib/marble/declarative/Placemark.cpp:456
+#: src/lib/marble/declarative/Placemark.cpp:457
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "%1 Type 1 combo plugs"
 msgstr ""
 
-#: src/lib/marble/declarative/Placemark.cpp:457
+#: src/lib/marble/declarative/Placemark.cpp:458
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "%1 Type 2 sockets"
 msgstr ""
 
-#: src/lib/marble/declarative/Placemark.cpp:458
+#: src/lib/marble/declarative/Placemark.cpp:459
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "%1 Type 2 combo sockets"
 msgstr ""
 
-#: src/lib/marble/declarative/Placemark.cpp:459
+#: src/lib/marble/declarative/Placemark.cpp:460
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "%1 Type 3 sockets"
 msgstr ""
 
-#: src/lib/marble/declarative/Placemark.cpp:460
+#: src/lib/marble/declarative/Placemark.cpp:461
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "%1 CHAdeMO plugs"
 msgstr ""
 
-#: src/lib/marble/declarative/Placemark.cpp:461
+#: src/lib/marble/declarative/Placemark.cpp:462
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "%1 Magne Charge plugs"
 msgstr ""
 
-#: src/lib/marble/declarative/Placemark.cpp:462
+#: src/lib/marble/declarative/Placemark.cpp:463
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "%1 Tesla standard plugs"
 msgstr ""
 
-#: src/lib/marble/declarative/Placemark.cpp:463
+#: src/lib/marble/declarative/Placemark.cpp:464
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "%1 Tesla standard plugs (Supercharger)"
 msgstr ""
 
-#: src/lib/marble/declarative/Placemark.cpp:464
+#: src/lib/marble/declarative/Placemark.cpp:465
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "%1 Tesla roadster plugs"
 msgstr ""
 
-#: src/lib/marble/declarative/Placemark.cpp:466
+#: src/lib/marble/declarative/Placemark.cpp:467
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "Maximum vehicle width: %1"
 msgstr ""
 
-#: src/lib/marble/declarative/Placemark.cpp:467
+#: src/lib/marble/declarative/Placemark.cpp:468
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "Maximum vehicle height: %1"
 msgstr ""
 
-#: src/lib/marble/declarative/Placemark.cpp:469
+#: src/lib/marble/declarative/Placemark.cpp:470
 msgctxt "Marble::Placemark|"
 msgid "Self-service"
 msgstr "خدمة ذاتية"
 
-#: src/lib/marble/declarative/Placemark.cpp:470
+#: src/lib/marble/declarative/Placemark.cpp:471
 msgctxt "Marble::Placemark|"
 msgid "No self-service"
 msgstr "لا يوجد خدمة ذاتية"
 
-#: src/lib/marble/declarative/Placemark.cpp:471
+#: src/lib/marble/declarative/Placemark.cpp:472
 msgctxt "Marble::Placemark|"
 msgid "Automated"
 msgstr "آلي"
 
-#: src/lib/marble/declarative/Placemark.cpp:472
+#: src/lib/marble/declarative/Placemark.cpp:473
 msgctxt "Marble::Placemark|"
 msgid "Manual"
 msgstr "يدويّ"
 
-#: src/lib/marble/declarative/Placemark.cpp:474
+#: src/lib/marble/declarative/Placemark.cpp:475
 msgctxt "Marble::Placemark|"
 msgid "Group home"
 msgstr "دار جماعية"
 
-#: src/lib/marble/declarative/Placemark.cpp:475
+#: src/lib/marble/declarative/Placemark.cpp:476
 msgctxt "Marble::Placemark|"
 msgid "Nursing home"
 msgstr "دار تمريض"
 
-#: src/lib/marble/declarative/Placemark.cpp:479
+#: src/lib/marble/declarative/Placemark.cpp:480
 msgctxt ""
 "Marble::Placemark|Like group home but for more independent people, e.g. who "
 "have flats"
 msgid "Assisted living"
 msgstr "مساعدة معيشية"
 
-#: src/lib/marble/declarative/Placemark.cpp:480
+#: src/lib/marble/declarative/Placemark.cpp:481
 msgctxt "Marble::Placemark|"
 msgid "Nursing services on a daily basis"
 msgstr ""
 
-#: src/lib/marble/declarative/Placemark.cpp:481
+#: src/lib/marble/declarative/Placemark.cpp:482
 msgctxt "Marble::Placemark|"
 msgid "Shelter"
 msgstr "مأوى"
 
-#: src/lib/marble/declarative/Placemark.cpp:482
+#: src/lib/marble/declarative/Placemark.cpp:483
 msgctxt "Marble::Placemark|"
 msgid "Ambulatory care"
 msgstr "رعاية إسعافية"
 
-#: src/lib/marble/declarative/Placemark.cpp:483
+#: src/lib/marble/declarative/Placemark.cpp:484
 msgctxt "Marble::Placemark|"
 msgid "Social welfare services"
 msgstr ""
 
-#: src/lib/marble/declarative/Placemark.cpp:487
+#: src/lib/marble/declarative/Placemark.cpp:488
 msgctxt "Marble::Placemark|"
 msgid "Employment and workshops for offenders and people with disabilities"
 msgstr ""
 
-#: src/lib/marble/declarative/Placemark.cpp:491
+#: src/lib/marble/declarative/Placemark.cpp:492
 msgctxt "Marble::Placemark|"
 msgid "Pre-packaged food for free or below market price"
 msgstr ""
 
-#: src/lib/marble/declarative/Placemark.cpp:495
+#: src/lib/marble/declarative/Placemark.cpp:496
 msgctxt "Marble::Placemark|"
 msgid "Prepared meals for free or below market price"
 msgstr ""
 
-#: src/lib/marble/declarative/Placemark.cpp:499
+#: src/lib/marble/declarative/Placemark.cpp:500
 msgctxt "Marble::Placemark|"
 msgid "Free dairy food (subject to local regulations)"
 msgstr ""
 
-#: src/lib/marble/declarative/Placemark.cpp:501
+#: src/lib/marble/declarative/Placemark.cpp:502
 msgctxt "Marble::Placemark|"
 msgid "For abused"
 msgstr ""
 
-#: src/lib/marble/declarative/Placemark.cpp:502
+#: src/lib/marble/declarative/Placemark.cpp:503
 msgctxt "Marble::Placemark|"
 msgid "For children"
 msgstr ""
 
-#: src/lib/marble/declarative/Placemark.cpp:503
+#: src/lib/marble/declarative/Placemark.cpp:504
 msgctxt "Marble::Placemark|"
 msgid "For people with physical disabilities"
 msgstr ""
 
-#: src/lib/marble/declarative/Placemark.cpp:504
+#: src/lib/marble/declarative/Placemark.cpp:505
 msgctxt "Marble::Placemark|"
 msgid "For those who suffer of a disease"
 msgstr ""
 
-#: src/lib/marble/declarative/Placemark.cpp:505
+#: src/lib/marble/declarative/Placemark.cpp:506
 msgctxt "Marble::Placemark|"
 msgid "For drug-addicted"
 msgstr ""
 
-#: src/lib/marble/declarative/Placemark.cpp:506
+#: src/lib/marble/declarative/Placemark.cpp:507
 msgctxt "Marble::Placemark|"
 msgid "For homeless"
 msgstr ""
 
-#: src/lib/marble/declarative/Placemark.cpp:507
+#: src/lib/marble/declarative/Placemark.cpp:508
 msgctxt "Marble::Placemark|"
 msgid "For juvenile"
 msgstr ""
 
-#: src/lib/marble/declarative/Placemark.cpp:511
+#: src/lib/marble/declarative/Placemark.cpp:512
 msgctxt "Marble::Placemark|"
 msgid "For those with mental/psychological problems"
 msgstr ""
 
-#: src/lib/marble/declarative/Placemark.cpp:512
+#: src/lib/marble/declarative/Placemark.cpp:513
 msgctxt "Marble::Placemark|"
 msgid "For migrants"
 msgstr ""
 
-#: src/lib/marble/declarative/Placemark.cpp:513
+#: src/lib/marble/declarative/Placemark.cpp:514
 msgctxt "Marble::Placemark|"
 msgid "For orphans"
 msgstr ""
 
-#: src/lib/marble/declarative/Placemark.cpp:514
+#: src/lib/marble/declarative/Placemark.cpp:515
 msgctxt "Marble::Placemark|"
 msgid "For elder people"
 msgstr ""
 
-#: src/lib/marble/declarative/Placemark.cpp:515
+#: src/lib/marble/declarative/Placemark.cpp:516
 msgctxt "Marble::Placemark|"
 msgid "For poor or disadvantaged people"
 msgstr ""
 
-#: src/lib/marble/declarative/Placemark.cpp:516
+#: src/lib/marble/declarative/Placemark.cpp:517
 msgctxt "Marble::Placemark|"
 msgid "For unemployed"
 msgstr ""
 
-#: src/lib/marble/declarative/Placemark.cpp:517
+#: src/lib/marble/declarative/Placemark.cpp:518
 msgctxt "Marble::Placemark|"
 msgid "For victims of crimes"
 msgstr ""
 
-#: src/lib/marble/declarative/Placemark.cpp:519
+#: src/lib/marble/declarative/Placemark.cpp:520
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "Inscription: %1"
 msgstr "الهيئة: %1"
 
-#: src/lib/marble/declarative/Placemark.cpp:521
+#: src/lib/marble/declarative/Placemark.cpp:522
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "%1 places per carriage"
 msgstr ""
 
-#: src/lib/marble/declarative/Placemark.cpp:522
+#: src/lib/marble/declarative/Placemark.cpp:523
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "%1 people per hour"
 msgstr ""
 
-#: src/lib/marble/declarative/Placemark.cpp:523
+#: src/lib/marble/declarative/Placemark.cpp:524
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "%1 minutes"
 msgstr "%1 دقيقة"
 
-#: src/lib/marble/declarative/Placemark.cpp:528
+#: src/lib/marble/declarative/Placemark.cpp:529
 msgctxt "Marble::Placemark|A carriage is protected from the weather"
 msgid "Has weather protection"
 msgstr ""
 
-#: src/lib/marble/declarative/Placemark.cpp:532
+#: src/lib/marble/declarative/Placemark.cpp:533
 #, fuzzy
 msgctxt "Marble::Placemark|A carriage is not protected from the weather"
 msgid "No weather protection"
 msgstr "الاسم من موقع"
 
-#: src/lib/marble/declarative/Placemark.cpp:533
+#: src/lib/marble/declarative/Placemark.cpp:534
 #, fuzzy
 msgctxt "Marble::Placemark|A carriage is heated"
 msgid "Is heated"
 msgstr "الحالة"
 
-#: src/lib/marble/declarative/Placemark.cpp:534
+#: src/lib/marble/declarative/Placemark.cpp:535
 #, fuzzy
 msgctxt "Marble::Placemark|A carriage is not heated"
 msgid "Not heated"
 msgstr "الحالة"
 
-#: src/lib/marble/declarative/Placemark.cpp:538
+#: src/lib/marble/declarative/Placemark.cpp:539
 msgctxt "Marble::Placemark|Bicycles can be transported"
 msgid "Bicycle transportation possible"
 msgstr ""
 
-#: src/lib/marble/declarative/Placemark.cpp:542
+#: src/lib/marble/declarative/Placemark.cpp:543
 msgctxt "Marble::Placemark|Bicycles can only be transported in summer"
 msgid "Bicycle transportation only in summer"
 msgstr ""
 
-#: src/lib/marble/declarative/Placemark.cpp:546
+#: src/lib/marble/declarative/Placemark.cpp:547
 msgctxt "Marble::Placemark|Bicyles cannot be transported"
 msgid "Bicycle transportation impossible"
 msgstr ""
 
-#: src/lib/marble/declarative/Placemark.cpp:548
+#: src/lib/marble/declarative/Placemark.cpp:549
 #, fuzzy
 msgctxt "Marble::Placemark|"
 msgid "Lit at night"
 msgstr "الأرض عند ليلاً"
 
-#: src/lib/marble/declarative/Placemark.cpp:549
+#: src/lib/marble/declarative/Placemark.cpp:550
 msgctxt "Marble::Placemark|"
 msgid "Lit in winter"
 msgstr ""
 
-#: src/lib/marble/declarative/Placemark.cpp:550
+#: src/lib/marble/declarative/Placemark.cpp:551
 #, fuzzy
 msgctxt "Marble::Placemark|A ski piste with trees (gladed)"
 msgid "Contains trees"
 msgstr "الجبل"
 
-#: src/lib/marble/declarative/Placemark.cpp:551
+#: src/lib/marble/declarative/Placemark.cpp:552
 #, fuzzy
 msgctxt "Marble::Placemark|"
 msgid "Not patrolled"
 msgstr "الحالة"
 
-#: src/lib/marble/declarative/Placemark.cpp:556
+#: src/lib/marble/declarative/Placemark.cpp:557
 msgctxt "Marble::Placemark|"
 msgid "Groomed for classic style nordic or downhill skiing"
 msgstr ""
 
-#: src/lib/marble/declarative/Placemark.cpp:557
+#: src/lib/marble/declarative/Placemark.cpp:558
 msgctxt "Marble::Placemark|"
 msgid "Mogul piste"
 msgstr ""
 
-#: src/lib/marble/declarative/Placemark.cpp:558
+#: src/lib/marble/declarative/Placemark.cpp:559
 msgctxt "Marble::Placemark|"
 msgid "Groomed for free style or skating"
 msgstr ""
 
-#: src/lib/marble/declarative/Placemark.cpp:562
-#: src/lib/marble/declarative/Placemark.cpp:566
+#: src/lib/marble/declarative/Placemark.cpp:563
+#: src/lib/marble/declarative/Placemark.cpp:567
 msgctxt "Marble::Placemark|"
 msgid "Groomed for classic and free style skiing"
 msgstr ""
 
-#: src/lib/marble/declarative/Placemark.cpp:567
+#: src/lib/marble/declarative/Placemark.cpp:568
 msgctxt "Marble::Placemark|"
 msgid "Groomed by a smaller snowmobile"
 msgstr ""
 
-#: src/lib/marble/declarative/Placemark.cpp:568
+#: src/lib/marble/declarative/Placemark.cpp:569
 msgctxt "Marble::Placemark|"
 msgid "Unmarked piste (backcountry touring)"
 msgstr ""
 
-#: src/lib/marble/declarative/Placemark.cpp:572
+#: src/lib/marble/declarative/Placemark.cpp:573
 msgctxt "Marble::Placemark|A parking space is covered"
 msgid "Is covered"
 msgstr ""
 
-#: src/lib/marble/declarative/Placemark.cpp:573
+#: src/lib/marble/declarative/Placemark.cpp:574
 msgctxt "Marble::Placemark|A parking space is not covered"
 msgid "Not covered"
 msgstr "غير مغطاة"
 
-#: src/lib/marble/declarative/Placemark.cpp:577
+#: src/lib/marble/declarative/Placemark.cpp:578
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "Collection times %1"
 msgstr "أوقات الجمع %1"
 
-#: src/lib/marble/declarative/Placemark.cpp:581
+#: src/lib/marble/declarative/Placemark.cpp:582
 msgctxt "Marble::Placemark|Entry station of an aerialway"
 msgid "Entry"
 msgstr "المدخلة"
 
-#: src/lib/marble/declarative/Placemark.cpp:582
+#: src/lib/marble/declarative/Placemark.cpp:583
 msgctxt "Marble::Placemark|Exit station of an aerialway"
 msgid "Exit"
 msgstr "اخرج"
 
-#: src/lib/marble/declarative/Placemark.cpp:583
+#: src/lib/marble/declarative/Placemark.cpp:584
 msgctxt "Marble::Placemark|Entry and exit station of an aerialway"
 msgid "Entry and exit"
 msgstr "الدخول والخروج"
 
-#: src/lib/marble/declarative/Placemark.cpp:584
+#: src/lib/marble/declarative/Placemark.cpp:585
 msgctxt "Marble::Placemark|Transit only station of an aerialway"
 msgid "No entry or exit"
 msgstr ""
 
-#: src/lib/marble/declarative/Placemark.cpp:585
+#: src/lib/marble/declarative/Placemark.cpp:586
 msgctxt "Marble::Placemark|Entry station of an aerialway during summer"
 msgid "Entry during summer"
 msgstr ""
 
-#: src/lib/marble/declarative/Placemark.cpp:586
+#: src/lib/marble/declarative/Placemark.cpp:587
 msgctxt "Marble::Placemark|Exit station of an aerialway during summer"
 msgid "Exit during summer"
 msgstr ""
 
-#: src/lib/marble/declarative/Placemark.cpp:590
+#: src/lib/marble/declarative/Placemark.cpp:591
 msgctxt ""
 "Marble::Placemark|Entry and exit station of an aerialway during summer"
 msgid "Entry and exit during summer"
 msgstr ""
 
-#: src/lib/marble/declarative/Placemark.cpp:594
+#: src/lib/marble/declarative/Placemark.cpp:595
 msgctxt "Marble::Placemark|Transit only station of an aerialway during summer"
 msgid "No entry or exit during summer"
 msgstr ""
 
-#: src/lib/marble/declarative/Placemark.cpp:598
+#: src/lib/marble/declarative/Placemark.cpp:599
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "Elevation: %1 m"
 msgstr "الارتفاع: %1 م"
 
-#: src/lib/marble/declarative/Placemark.cpp:601
+#: src/lib/marble/declarative/Placemark.cpp:602
 msgctxt "Marble::Placemark|"
 msgid "Customers only"
 msgstr ""
 
-#: src/lib/marble/declarative/Placemark.cpp:605
+#: src/lib/marble/declarative/Placemark.cpp:606
 msgctxt ""
 "Marble::Placemark|The public has an official, legally-enshrined right of "
 "access; i.e., it's a right of way"
 msgid "Accessible by anyone"
 msgstr ""
 
-#: src/lib/marble/declarative/Placemark.cpp:609
+#: src/lib/marble/declarative/Placemark.cpp:610
 msgctxt ""
 "Marble::Placemark|Only with permission of the owner on an individual basis."
 msgid "Private"
 msgstr "خاص"
 
-#: src/lib/marble/declarative/Placemark.cpp:613
+#: src/lib/marble/declarative/Placemark.cpp:614
 msgctxt ""
 "Marble::Placemark|Open to general traffic but permission can be revoked by "
 "the owner"
 msgid "Open to general traffic"
 msgstr ""
 
-#: src/lib/marble/declarative/Placemark.cpp:614
+#: src/lib/marble/declarative/Placemark.cpp:615
 msgctxt "Marble::Placemark|No access for the general public"
 msgid "No access"
 msgstr "ممنوع الوصول"
 
-#: src/lib/marble/declarative/Placemark.cpp:616
+#: src/lib/marble/declarative/Placemark.cpp:617
 msgctxt "Marble::Placemark|"
 msgid "no fee"
 msgstr "بدون رسوم"
 
-#: src/lib/marble/declarative/Placemark.cpp:618
+#: src/lib/marble/declarative/Placemark.cpp:619
 #, qt-format
 msgctxt "Marble::Placemark|"
 msgid "formerly <i>%1</i>"
 msgstr ""
 
-#: src/lib/marble/declarative/Placemark.cpp:622
+#: src/lib/marble/declarative/Placemark.cpp:623
 #, qt-format
 msgctxt "Marble::Placemark|Positive floor level"
 msgid "Floor %1"
 msgstr "الطابق %1"
 
-#: src/lib/marble/declarative/Placemark.cpp:624
+#: src/lib/marble/declarative/Placemark.cpp:625
 #, qt-format
 msgctxt "Marble::Placemark|Negative floor level"
 msgid "Basement %1"
 msgstr "سرداب %1"
 
-#: src/lib/marble/declarative/Placemark.cpp:626
+#: src/lib/marble/declarative/Placemark.cpp:627
 msgctxt "Marble::Placemark|Floor level 2, two levels above ground level"
 msgid "Floor 2"
 msgstr "الطابق 2"
 
-#: src/lib/marble/declarative/Placemark.cpp:627
+#: src/lib/marble/declarative/Placemark.cpp:628
 msgctxt "Marble::Placemark|Floor level 1, one level above ground level"
 msgid "Floor 1"
 msgstr "الطابق 1"
 
-#: src/lib/marble/declarative/Placemark.cpp:628
+#: src/lib/marble/declarative/Placemark.cpp:629
 msgctxt "Marble::Placemark|Floor level 0"
 msgid "Ground floor"
 msgstr "الطابق الأرضي"
 
-#: src/lib/marble/declarative/Placemark.cpp:629
+#: src/lib/marble/declarative/Placemark.cpp:630
 msgctxt "Marble::Placemark|Floor level -1, one level below ground level"
 msgid "Basement 1"
 msgstr "سرداب 1"
 
-#: src/lib/marble/declarative/Placemark.cpp:630
+#: src/lib/marble/declarative/Placemark.cpp:631
 msgctxt "Marble::Placemark|Floor level -2, two levels below ground level"
 msgid "Basement 2"
 msgstr "سرداب 2"
 
-#: src/lib/marble/declarative/Placemark.cpp:724
+#: src/lib/marble/declarative/Placemark.cpp:725
 msgctxt "Marble::Placemark|"
 msgid "Wheelchair accessible"
 msgstr ""
 
-#: src/lib/marble/declarative/Placemark.cpp:725
+#: src/lib/marble/declarative/Placemark.cpp:726
 msgctxt "Marble::Placemark|"
 msgid "Wheelchair inaccessible"
 msgstr ""
 
-#: src/lib/marble/declarative/Placemark.cpp:726
+#: src/lib/marble/declarative/Placemark.cpp:727
 msgctxt "Marble::Placemark|"
 msgid "Limited wheelchair accessibility"
 msgstr ""
 
-#: src/lib/marble/declarative/Placemark.cpp:727
+#: src/lib/marble/declarative/Placemark.cpp:728
 msgctxt "Marble::Placemark|"
 msgid "Designated wheelchair access"
 msgstr ""
 
-#: src/lib/marble/declarative/Placemark.cpp:760
+#: src/lib/marble/declarative/Placemark.cpp:761
 msgctxt ""
 "Marble::Placemark|This location does not provide public Internet access"
 msgid "No public Internet access"
 msgstr ""
 
-#: src/lib/marble/declarative/Placemark.cpp:764
+#: src/lib/marble/declarative/Placemark.cpp:765
 msgctxt ""
 "Marble::Placemark|This location provides an unknown type of public Internet "
 "access."
 msgid "Public Internet access available"
 msgstr ""
 
-#: src/lib/marble/declarative/Placemark.cpp:770
+#: src/lib/marble/declarative/Placemark.cpp:771
 msgctxt ""
 "Marble::Placemark|Public wireless Internet access is available here for a "
 "fee."
 msgid "Charged public wifi available"
 msgstr ""
 
-#: src/lib/marble/declarative/Placemark.cpp:775
+#: src/lib/marble/declarative/Placemark.cpp:776
 msgctxt ""
 "Marble::Placemark|Public wireless Internet access is available here for no "
 "cost."
 msgid "Free public wifi available"
 msgstr ""
 
-#: src/lib/marble/declarative/Placemark.cpp:780
+#: src/lib/marble/declarative/Placemark.cpp:781
 msgctxt "Marble::Placemark|Public wireless Internet access is available here."
 msgid "Public wifi available"
 msgstr ""
 
-#: src/lib/marble/declarative/Placemark.cpp:784
+#: src/lib/marble/declarative/Placemark.cpp:785
 msgctxt "Marble::Placemark|Public wifi is not available here."
 msgid "No public wifi"
 msgstr ""
 
-#: src/lib/marble/declarative/Placemark.cpp:788
+#: src/lib/marble/declarative/Placemark.cpp:789
 msgctxt "Marble::Placemark|Public wireless Internet is available here."
 msgid "Public wifi available"
 msgstr ""
 
-#: src/lib/marble/declarative/Placemark.cpp:792
+#: src/lib/marble/declarative/Placemark.cpp:793
 msgctxt ""
 "Marble::Placemark|Public wireless Internet is available here for no cost."
 msgid "Free public wifi available"
 msgstr ""
 
-#: src/lib/marble/declarative/Placemark.cpp:899
+#: src/lib/marble/declarative/Placemark.cpp:900
 #, qt-format
 msgctxt ""
 "Marble::Placemark|House number (first argument) and street name (second "

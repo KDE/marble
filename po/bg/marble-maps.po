@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: marble_qt\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-23 00:36+0000\n"
-"PO-Revision-Date: 2024-01-11 22:05+0100\n"
+"POT-Creation-Date: 2024-09-25 00:36+0000\n"
+"PO-Revision-Date: 2024-09-24 23:29+0200\n"
 "Last-Translator: Mincho Kondarev <mkondarev@yahoo.de>\n"
 "Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
 "Language: bg\n"
@@ -17,308 +17,244 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Poedit-SourceCharset: utf-8\n"
-"X-Generator: Lokalize 23.08.4\n"
+"X-Generator: Lokalize 24.07.70\n"
 "X-Qt-Contexts: true\n"
 
-#, fuzzy, kde-format
-#| msgctxt "Marble::YoursPlugin|"
-#| msgid "Yours"
-msgctxt "NAME OF TRANSLATORS"
-msgid "Your names"
-msgstr "Yours"
-
-#, fuzzy, kde-format
-#| msgctxt "ExternalEditor|"
-#| msgid "Editor Details"
-msgctxt "EMAIL OF TRANSLATORS"
-msgid "Your emails"
-msgstr "Данни за редактора"
-
 #: Bookmarks.qml:20
-#, fuzzy, kde-format
-#| msgctxt "QObject|"
-#| msgid "Bookmarks"
+#, kde-format
 msgctxt "@title:window"
 msgid "Bookmarks"
 msgstr "Отметки"
 
 #: Bookmarks.qml:69
-#, fuzzy, kde-format
-#| msgctxt "Bookmarks|"
-#| msgid "Your bookmarks will appear here."
+#, kde-format
 msgid "Your bookmarks will appear here."
 msgstr "Вашите отметки ще се появят тук."
 
 #: CurrentPosition.qml:54
-#, fuzzy, kde-format
-#| msgctxt "CurrentPosition|"
-#| msgid "Follow Current Position"
+#, kde-format
 msgctxt "@option:check"
 msgid "Follow Current Position"
 msgstr "Следване на текущо местоположение"
 
-#: main.cpp:37 MainScreen.qml:20 MainScreen.qml:177
-#, fuzzy, kde-format
-#| msgctxt "MainScreen|"
-#| msgid "Marble Maps"
+#: main.cpp:40 MainScreen.qml:20 MainScreen.qml:177
+#, kde-format
 msgid "Marble Maps"
 msgstr "Карти Marble"
 
-#: main.cpp:39
-#, fuzzy, kde-format
-#| msgctxt "QObject|"
-#| msgid "Edit Maps"
+#: main.cpp:42
+#, kde-format
 msgid "Maps"
-msgstr "Редактиране на картата"
+msgstr "Карти"
 
-#: main.cpp:41
+#: main.cpp:44
 #, kde-format
 msgid "© KDE Community"
+msgstr "© Общността на KDE"
+
+#: main.cpp:49
+#, kde-format
+msgid "Carl Schwan"
 msgstr ""
 
-#: MainScreen.qml:86
+#: main.cpp:50
 #, fuzzy, kde-format
-#| msgctxt "MainScreen|"
-#| msgid "Public Transport"
+#| msgctxt "PluginAuthor|"
+#| msgid "Developer"
+msgid "Developer"
+msgstr "Разработчик"
+
+#: main.cpp:55
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "Минчо Кондарев"
+
+#: main.cpp:55
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "mkondarev@yahoo.de"
+
+#: MainScreen.qml:86
+#, kde-format
 msgid "Public Transport"
 msgstr "Обществен транспорт"
 
 #: MainScreen.qml:101
-#, fuzzy, kde-format
-#| msgctxt "MainScreen|"
-#| msgid "Outdoor Activities"
+#, kde-format
 msgid "Outdoor Activities"
 msgstr "Занимания на открито"
 
 #: MainScreen.qml:113
-#, fuzzy, kde-format
-#| msgctxt "MainScreen|"
-#| msgid "Accessibility"
+#, kde-format
 msgctxt "@action:button"
 msgid "Accessibility"
 msgstr "Достъпност"
 
 #: MainScreen.qml:122
-#, fuzzy, kde-format
-#| msgctxt "Marble::PluginItemDelegate|"
-#| msgid "About"
+#, kde-format
 msgctxt "@action:button"
 msgid "About"
 msgstr "Относно"
 
 #: MainScreen.qml:133
-#, fuzzy, kde-format
-#| msgctxt "QObject|"
-#| msgid "Bookmarks"
+#, kde-format
 msgctxt "@action:button"
 msgid "Bookmarks"
 msgstr "Отметки"
 
 #: MainScreen.qml:144
-#, fuzzy, kde-format
-#| msgctxt "MainScreen|"
-#| msgid "Layer Options"
+#, kde-format
 msgctxt "@action:button"
 msgid "Layer Options"
 msgstr "Параметри на слоя"
 
-#: MainScreen.qml:455
-#, fuzzy, kde-format
-#| msgctxt "MainScreen|"
-#| msgid "%1 km"
+#: MainScreen.qml:459
+#, kde-format
 msgid "%1 km"
 msgstr "%1 км"
 
 #: NavigationInfoBar.qml:20
-#, fuzzy, kde-format
-#| msgctxt "MainScreen|"
-#| msgid "%1 km"
+#, kde-format
 msgctxt "distance in km"
 msgid "%1 km"
 msgstr "%1 км"
 
 #: NavigationInfoBar.qml:22
-#, fuzzy, kde-format
-#| msgctxt "NavigationInfoBar|"
-#| msgid "%1 m"
+#, kde-format
 msgctxt "distance in m"
 msgid "%1 m"
 msgstr "%1 м"
 
 #: NavigationInfoBar.qml:24
-#, fuzzy, kde-format
-#| msgctxt "NavigationInfoBar|"
-#| msgid "%1 m"
+#, kde-format
 msgctxt "distance in m with decimals"
 msgid "%1 m"
 msgstr "%1 м"
 
 #: Options.qml:20
-#, fuzzy, kde-format
-#| msgctxt "MainScreen|"
-#| msgid "Layer Options"
+#, kde-format
 msgctxt "@title:window"
 msgid "Layer Options"
 msgstr "Параметри на слоя"
 
 #: Options.qml:23
-#, fuzzy, kde-format
-#| msgctxt "Options|"
-#| msgid "<h4>Public Transport Layers</h4>"
+#, kde-format
 msgctxt "@title:group"
 msgid "Public Transport Layers"
-msgstr "<h4>Слоеве Обществен транспорт</h4>"
+msgstr "Слоеве Обществен транспорт"
 
 #: Options.qml:28
-#, fuzzy, kde-format
-#| msgctxt "GeoLineStringGraphicsItem|"
-#| msgid "Train"
+#, kde-format
 msgctxt "@option:check"
 msgid "Train"
 msgstr "Влак"
 
 #: Options.qml:35
-#, fuzzy, kde-format
-#| msgctxt "DGML|"
-#| msgid "Subway"
+#, kde-format
 msgctxt "@option:check"
 msgid "Subway"
 msgstr "Метро"
 
 #: Options.qml:42
-#, fuzzy, kde-format
-#| msgctxt "GeoDataPlacemark|"
-#| msgid "Tram"
+#, kde-format
 msgctxt "@option:check"
 msgid "Tram"
 msgstr "Трамвай"
 
 #: Options.qml:49
-#, fuzzy, kde-format
-#| msgctxt "GeoLineStringGraphicsItem|"
-#| msgid "Bus"
+#, kde-format
 msgctxt "@option:check"
 msgid "Bus"
 msgstr "Автобус"
 
 #: Options.qml:56
-#, fuzzy, kde-format
-#| msgctxt "GeoLineStringGraphicsItem|"
-#| msgid "Trolley Bus"
+#, kde-format
 msgctxt "@option:check"
 msgid "Trolley Bus"
 msgstr "Тролейбус"
 
 #: Options.qml:64
-#, fuzzy, kde-format
-#| msgctxt "Options|"
-#| msgid "<h4>Outdoor Activities Layers</h4>"
+#, kde-format
 msgid "Outdoor Activities Layers"
-msgstr "<h4>Слоеве Занимания на открито</h4>"
+msgstr "Слоеве Занимания на открито"
 
 #: Options.qml:69
-#, fuzzy, kde-format
-#| msgctxt "OutdoorActivities|"
-#| msgid "Walkways"
+#, kde-format
 msgctxt "@option:check"
 msgid "Walkways"
 msgstr "Пешеходен път"
 
 #: Options.qml:76
-#, fuzzy, kde-format
-#| msgctxt "OutdoorActivities|"
-#| msgid "Hiking Routes"
+#, kde-format
 msgctxt "@option:check"
 msgid "Hiking Routes"
 msgstr "Туристически маршрути"
 
 #: Options.qml:83
-#, fuzzy, kde-format
-#| msgctxt "OutdoorActivities|"
-#| msgid "Bicycle Routes"
+#, kde-format
 msgctxt "@option:check"
 msgid "Bicycle Routes"
 msgstr "Велосипедни маршрути"
 
 #: Options.qml:90
-#, fuzzy, kde-format
-#| msgctxt "OutdoorActivities|"
-#| msgid "Mountainbike Routes"
+#, kde-format
 msgctxt "@option:check"
 msgid "Mountainbike Routes"
 msgstr "Маршрути за планински велосипеди"
 
 #: Options.qml:97
-#, fuzzy, kde-format
-#| msgctxt "OutdoorActivities|"
-#| msgid "Inline Skating Routes"
+#, kde-format
 msgctxt "@option:check"
 msgid "Inline Skating Routes"
 msgstr "Маршрути за ролкови кънки"
 
 #: Options.qml:104
-#, fuzzy, kde-format
-#| msgctxt "OutdoorActivities|"
-#| msgid "Bridleways"
+#, kde-format
 msgctxt "@option:check"
 msgid "Bridleways"
 msgstr "Алеи за езда"
 
 #: PlacemarkDialog.qml:48
-#, fuzzy, kde-format
-#| msgctxt "Marble::GeoDataTreeModel|"
-#| msgid "Name"
+#, kde-format
 msgctxt "placeholder"
 msgid "No Name"
-msgstr "Име"
+msgstr "Без име"
 
 #: PlacemarkDialog.qml:168
-#, fuzzy, kde-format
-#| msgctxt "Marble::EditPlacemarkDialog|"
-#| msgid "Tags"
+#, kde-format
 msgctxt "@title:group"
 msgid "Tags:"
-msgstr "Тагове"
+msgstr "Етикети:"
 
 #: ProfileSelectorMenu.qml:29
-#, fuzzy, kde-format
-#| msgctxt "Marble::RoutingProfilesModel|"
-#| msgid "Car (fastest)"
+#, kde-format
 msgid "Car (fastest)"
 msgstr "Автомобил (най-бърз)"
 
 #: ProfileSelectorMenu.qml:40
-#, fuzzy, kde-format
-#| msgctxt "Marble::RoutingProfilesModel|"
-#| msgid "Bicycle"
+#, kde-format
 msgid "Bicycle"
 msgstr "Велосипед"
 
 #: ProfileSelectorMenu.qml:49
-#, fuzzy, kde-format
-#| msgctxt "Marble::RoutingProfilesModel|"
-#| msgid "Pedestrian"
+#, kde-format
 msgid "Pedestrian"
 msgstr "Пешеходец"
 
 #: RouteEditor.qml:62
-#, fuzzy, kde-format
-#| msgctxt "RouteEditor|"
-#| msgid "Search for places to integrate them into a route."
+#, kde-format
 msgid "Search for places to integrate them into a route."
 msgstr "Търсене за места, които да бъдат интегрирани в маршрута."
 
 #: SettingsDialog.qml:48
-#, fuzzy, kde-format
-#| msgctxt "SettingsDialog|"
-#| msgid "Network Settings"
+#, kde-format
 msgid "Network Settings"
 msgstr "Настройки на мрежата"
 
 #: SettingsDialog.qml:53
-#, fuzzy, kde-format
-#| msgctxt "SettingsDialog|"
-#| msgid "Download Maps via WLAN only"
+#, kde-format
 msgid "Download Maps via WLAN only"
 msgstr "Изтегляне на карти само през WLAN"
 
@@ -9053,10 +8989,6 @@ msgstr "Изтегляне на карти само през WLAN"
 #~ msgctxt "Marble::PluginAboutDialog|"
 #~ msgid "Data"
 #~ msgstr "Данни"
-
-#~ msgctxt "PluginAuthor|"
-#~ msgid "Developer"
-#~ msgstr "Разработчик"
 
 #~ msgctxt "Marble::PluginItemDelegate|"
 #~ msgid "Configure"

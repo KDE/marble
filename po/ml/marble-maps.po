@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-23 00:36+0000\n"
+"POT-Creation-Date: 2024-09-25 00:36+0000\n"
 "PO-Revision-Date: 2019-12-01 18:32+0000\n"
 "Last-Translator: Subin Siby <subins2000@gmail.com>\n"
 "Language-Team: Swathanthra|സ്വതന്ത്ര Malayalam|മലയാളം Computing|കമ്പ്യൂട്ടിങ്ങ് <smc-"
@@ -18,18 +18,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Qt-Contexts: true\n"
-
-#, fuzzy, kde-format
-#| msgctxt "EMAIL OF TRANSLATORS"
-#| msgid "Your emails"
-msgctxt "NAME OF TRANSLATORS"
-msgid "Your names"
-msgstr "apeter@redhat.com"
-
-#, kde-format
-msgctxt "EMAIL OF TRANSLATORS"
-msgid "Your emails"
-msgstr "apeter@redhat.com"
 
 #: Bookmarks.qml:20
 #, fuzzy, kde-format
@@ -48,20 +36,44 @@ msgctxt "@option:check"
 msgid "Follow Current Position"
 msgstr "ഇപ്പോളെവിടെ"
 
-#: main.cpp:37 MainScreen.qml:20 MainScreen.qml:177
+#: main.cpp:40 MainScreen.qml:20 MainScreen.qml:177
 #, fuzzy, kde-format
 msgid "Marble Maps"
 msgstr "സ്ഥലം &ചേര്‍ക്കുക"
 
-#: main.cpp:39
+#: main.cpp:42
 #, fuzzy, kde-format
 msgid "Maps"
 msgstr "&ചിട്ടപ്പെടുത്തുക"
 
-#: main.cpp:41
+#: main.cpp:44
 #, kde-format
 msgid "© KDE Community"
 msgstr ""
+
+#: main.cpp:49
+#, kde-format
+msgid "Carl Schwan"
+msgstr ""
+
+#: main.cpp:50
+#, fuzzy, kde-format
+msgid "Developer"
+msgstr "യഥാര്‍ത്ഥ രചയിതാവു്, ഡവലപ്പര്‍, പാലകന്‍"
+
+#: main.cpp:55
+#, fuzzy, kde-format
+#| msgctxt "EMAIL OF TRANSLATORS"
+#| msgid "Your emails"
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "apeter@redhat.com"
+
+#: main.cpp:55
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "apeter@redhat.com"
 
 #: MainScreen.qml:86
 #, fuzzy, kde-format
@@ -97,7 +109,7 @@ msgctxt "@action:button"
 msgid "Layer Options"
 msgstr ""
 
-#: MainScreen.qml:455
+#: MainScreen.qml:459
 #, fuzzy, kde-format
 msgid "%1 km"
 msgstr "%1 മി"
@@ -4127,11 +4139,6 @@ msgstr "ഡൌണ്‍ലോട് പൂര്‍ത്തിയായിര�
 #~ msgctxt "Marble::PluginAboutDialog|"
 #~ msgid "Data"
 #~ msgstr "&ഡേറ്റാ"
-
-#, fuzzy
-#~ msgctxt "PluginAuthor|"
-#~ msgid "Developer"
-#~ msgstr "യഥാര്‍ത്ഥ രചയിതാവു്, ഡവലപ്പര്‍, പാലകന്‍"
 
 #, fuzzy
 #~ msgctxt "Marble::PluginItemDelegate|"

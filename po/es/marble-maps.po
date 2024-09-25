@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: marble-maps\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-23 00:36+0000\n"
+"POT-Creation-Date: 2024-09-25 00:36+0000\n"
 "PO-Revision-Date: 2024-09-23 05:22+0200\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
@@ -15,16 +15,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Lokalize 24.08.1\n"
-
-#, kde-format
-msgctxt "NAME OF TRANSLATORS"
-msgid "Your names"
-msgstr "Eloy Cuadra"
-
-#, kde-format
-msgctxt "EMAIL OF TRANSLATORS"
-msgid "Your emails"
-msgstr "ecuadra@eloihr.net"
 
 #: Bookmarks.qml:20
 #, kde-format
@@ -43,20 +33,42 @@ msgctxt "@option:check"
 msgid "Follow Current Position"
 msgstr "Seguir la posición actual"
 
-#: main.cpp:37 MainScreen.qml:20 MainScreen.qml:177
+#: main.cpp:40 MainScreen.qml:20 MainScreen.qml:177
 #, kde-format
 msgid "Marble Maps"
 msgstr "Mapas de Marble"
 
-#: main.cpp:39
+#: main.cpp:42
 #, kde-format
 msgid "Maps"
 msgstr "Mapas"
 
-#: main.cpp:41
+#: main.cpp:44
 #, kde-format
 msgid "© KDE Community"
 msgstr "© La comunidad KDE"
+
+#: main.cpp:49
+#, kde-format
+msgid "Carl Schwan"
+msgstr ""
+
+#: main.cpp:50
+#, kde-format
+msgid "Developer"
+msgstr ""
+
+#: main.cpp:55
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "Eloy Cuadra"
+
+#: main.cpp:55
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "ecuadra@eloihr.net"
 
 #: MainScreen.qml:86
 #, kde-format
@@ -92,7 +104,7 @@ msgctxt "@action:button"
 msgid "Layer Options"
 msgstr "Opciones de capas"
 
-#: MainScreen.qml:455
+#: MainScreen.qml:459
 #, kde-format
 msgid "%1 km"
 msgstr "%1 km"

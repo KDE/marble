@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: marble_qt\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-23 00:36+0000\n"
+"POT-Creation-Date: 2024-09-25 00:36+0000\n"
 "PO-Revision-Date: 2021-01-02 16:08-0800\n"
 "Last-Translator: A S Alam <aalam.yellow@gmail.com>\n"
 "Language-Team: Punjabi <punjabi-users@lists.sf.net>\n"
@@ -19,19 +19,6 @@ msgstr ""
 "X-Generator: Lokalize 20.08.1\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Qt-Contexts: true\n"
-
-#, fuzzy, kde-format
-#| msgid "Yours"
-msgctxt "NAME OF TRANSLATORS"
-msgid "Your names"
-msgstr "Yours"
-
-#, fuzzy, kde-format
-#| msgctxt "ExternalEditor|"
-#| msgid "Editor Details"
-msgctxt "EMAIL OF TRANSLATORS"
-msgid "Your emails"
-msgstr "ਐਡੀਟਰ ਵੇਰਵੇ"
 
 #: Bookmarks.qml:20
 #, fuzzy, kde-format
@@ -53,24 +40,50 @@ msgctxt "@option:check"
 msgid "Follow Current Position"
 msgstr "ਮੌਜੂਦਾ ਟਿਕਾਣਾ"
 
-#: main.cpp:37 MainScreen.qml:20 MainScreen.qml:177
+#: main.cpp:40 MainScreen.qml:20 MainScreen.qml:177
 #, fuzzy, kde-format
 #| msgctxt "MainScreen|"
 #| msgid "Marble Maps"
 msgid "Marble Maps"
 msgstr "ਮਾਰਬਲ ਨਕਸ਼ੇ"
 
-#: main.cpp:39
+#: main.cpp:42
 #, fuzzy, kde-format
 #| msgctxt "QObject|"
 #| msgid "Edit Maps"
 msgid "Maps"
 msgstr "ਨਕਸ਼ੇ ਸੋਧੋ"
 
-#: main.cpp:41
+#: main.cpp:44
 #, kde-format
 msgid "© KDE Community"
 msgstr ""
+
+#: main.cpp:49
+#, kde-format
+msgid "Carl Schwan"
+msgstr ""
+
+#: main.cpp:50
+#, fuzzy, kde-format
+#| msgid "Developer"
+msgid "Developer"
+msgstr "ਡਿਵੈਲਪਰ"
+
+#: main.cpp:55
+#, fuzzy, kde-format
+#| msgid "Yours"
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "Yours"
+
+#: main.cpp:55
+#, fuzzy, kde-format
+#| msgctxt "ExternalEditor|"
+#| msgid "Editor Details"
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "ਐਡੀਟਰ ਵੇਰਵੇ"
 
 #: MainScreen.qml:86
 #, fuzzy, kde-format
@@ -117,7 +130,7 @@ msgctxt "@action:button"
 msgid "Layer Options"
 msgstr "ਪਰਤ ਚੋਣਾਂ"
 
-#: MainScreen.qml:455
+#: MainScreen.qml:459
 #, fuzzy, kde-format
 #| msgctxt "MainScreen|"
 #| msgid "%1 km"
@@ -5388,12 +5401,6 @@ msgstr "ਸਿਰਫ਼ WLAN ਰਾਹੀਂ ਨਕਸ਼ੇ ਡਾਊਨਲੋਡ 
 #~ msgctxt "Marble::PluginAboutDialog|"
 #~ msgid "Data"
 #~ msgstr "ਡਾਟਾ"
-
-#, fuzzy
-#~| msgid "Developer"
-#~ msgctxt "PluginAuthor|"
-#~ msgid "Developer"
-#~ msgstr "ਡਿਵੈਲਪਰ"
 
 #, fuzzy
 #~| msgid "Configure"

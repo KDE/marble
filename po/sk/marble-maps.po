@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: marble_qt\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-23 00:36+0000\n"
+"POT-Creation-Date: 2024-09-25 00:36+0000\n"
 "PO-Revision-Date: 2023-12-06 19:04+0100\n"
 "Last-Translator: Roman Paholik <wizzardsk@gmail.com>\n"
 "Language-Team: Slovak <kde-sk@linux.sk>\n"
@@ -19,20 +19,6 @@ msgstr ""
 "X-Generator: Lokalize 23.08.3\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 "X-Qt-Contexts: true\n"
-
-#, fuzzy, kde-format
-#| msgctxt "Marble::YoursPlugin|"
-#| msgid "Yours"
-msgctxt "NAME OF TRANSLATORS"
-msgid "Your names"
-msgstr "Yours"
-
-#, fuzzy, kde-format
-#| msgctxt "ExternalEditor|"
-#| msgid "Editor Details"
-msgctxt "EMAIL OF TRANSLATORS"
-msgid "Your emails"
-msgstr "Podrobnosti o editore"
 
 #: Bookmarks.qml:20
 #, fuzzy, kde-format
@@ -57,24 +43,52 @@ msgctxt "@option:check"
 msgid "Follow Current Position"
 msgstr "Sledovať aktuálnu polohu"
 
-#: main.cpp:37 MainScreen.qml:20 MainScreen.qml:177
+#: main.cpp:40 MainScreen.qml:20 MainScreen.qml:177
 #, fuzzy, kde-format
 #| msgctxt "MainScreen|"
 #| msgid "Marble Maps"
 msgid "Marble Maps"
 msgstr "Marble mapy"
 
-#: main.cpp:39
+#: main.cpp:42
 #, fuzzy, kde-format
 #| msgctxt "QObject|"
 #| msgid "Edit Maps"
 msgid "Maps"
 msgstr "Upraviť mapy"
 
-#: main.cpp:41
+#: main.cpp:44
 #, kde-format
 msgid "© KDE Community"
 msgstr ""
+
+#: main.cpp:49
+#, kde-format
+msgid "Carl Schwan"
+msgstr ""
+
+#: main.cpp:50
+#, fuzzy, kde-format
+#| msgctxt "PluginAuthor|"
+#| msgid "Developer"
+msgid "Developer"
+msgstr "Vývojár"
+
+#: main.cpp:55
+#, fuzzy, kde-format
+#| msgctxt "Marble::YoursPlugin|"
+#| msgid "Yours"
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "Yours"
+
+#: main.cpp:55
+#, fuzzy, kde-format
+#| msgctxt "ExternalEditor|"
+#| msgid "Editor Details"
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "Podrobnosti o editore"
 
 #: MainScreen.qml:86
 #, fuzzy, kde-format
@@ -122,7 +136,7 @@ msgctxt "@action:button"
 msgid "Layer Options"
 msgstr "Možnosti vrstiev"
 
-#: MainScreen.qml:455
+#: MainScreen.qml:459
 #, fuzzy, kde-format
 #| msgctxt "MainScreen|"
 #| msgid "%1 km"
@@ -8961,10 +8975,6 @@ msgstr "Prevziať mapy iba cez WLAN"
 #~ msgctxt "Marble::PluginAboutDialog|"
 #~ msgid "Data"
 #~ msgstr "Údaje"
-
-#~ msgctxt "PluginAuthor|"
-#~ msgid "Developer"
-#~ msgstr "Vývojár"
 
 #~ msgctxt "Marble::PluginItemDelegate|"
 #~ msgid "Configure"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-23 00:36+0000\n"
+"POT-Creation-Date: 2024-09-25 00:36+0000\n"
 "PO-Revision-Date: 2014-01-22 22:32+0100\n"
 "Last-Translator: Balázs Úr <urbalazs@gmail.com>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -18,18 +18,6 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Lokalize 1.5\n"
 "X-Qt-Contexts: true\n"
-
-#, fuzzy, kde-format
-#| msgid "Yours"
-msgctxt "NAME OF TRANSLATORS"
-msgid "Your names"
-msgstr "Yours"
-
-#, fuzzy, kde-format
-#| msgid "Address Details"
-msgctxt "EMAIL OF TRANSLATORS"
-msgid "Your emails"
-msgstr "Cím részletek"
 
 #: Bookmarks.qml:20
 #, fuzzy, kde-format
@@ -50,22 +38,47 @@ msgctxt "@option:check"
 msgid "Follow Current Position"
 msgstr "Jelenlegi hely"
 
-#: main.cpp:37 MainScreen.qml:20 MainScreen.qml:177
+#: main.cpp:40 MainScreen.qml:20 MainScreen.qml:177
 #, fuzzy, kde-format
 #| msgid "Manage Bookmarks"
 msgid "Marble Maps"
 msgstr "Könyvjelzők kezelése"
 
-#: main.cpp:39
+#: main.cpp:42
 #, fuzzy, kde-format
 #| msgid "&Edit Map"
 msgid "Maps"
 msgstr "Térkép sz&erkesztése"
 
-#: main.cpp:41
+#: main.cpp:44
 #, kde-format
 msgid "© KDE Community"
 msgstr ""
+
+#: main.cpp:49
+#, kde-format
+msgid "Carl Schwan"
+msgstr ""
+
+#: main.cpp:50
+#, fuzzy, kde-format
+#| msgid "<b>Developers</b>"
+msgid "Developer"
+msgstr "<b>Fejlesztők</b>"
+
+#: main.cpp:55
+#, fuzzy, kde-format
+#| msgid "Yours"
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "Yours"
+
+#: main.cpp:55
+#, fuzzy, kde-format
+#| msgid "Address Details"
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "Cím részletek"
 
 #: MainScreen.qml:86
 #, fuzzy, kde-format
@@ -105,7 +118,7 @@ msgctxt "@action:button"
 msgid "Layer Options"
 msgstr "Új profil"
 
-#: MainScreen.qml:455
+#: MainScreen.qml:459
 #, fuzzy, kde-format
 #| msgid "%1 km"
 msgid "%1 km"
@@ -6628,12 +6641,6 @@ msgstr "Régió letöltése"
 #~ msgctxt "Marble::PluginAboutDialog|"
 #~ msgid "Data"
 #~ msgstr "Adat"
-
-#, fuzzy
-#~| msgid "<b>Developers</b>"
-#~ msgctxt "PluginAuthor|"
-#~ msgid "Developer"
-#~ msgstr "<b>Fejlesztők</b>"
 
 #, fuzzy
 #~| msgid "Configure"

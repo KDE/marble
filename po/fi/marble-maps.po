@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: marble_qt\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-23 00:36+0000\n"
+"POT-Creation-Date: 2024-09-25 00:36+0000\n"
 "PO-Revision-Date: 2024-04-18 18:09+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -26,18 +26,6 @@ msgstr ""
 "X-POT-Import-Date: 2012-12-01 22:23:50+0000\n"
 "X-Generator: Lokalize 22.12.3\n"
 "X-Qt-Contexts: true\n"
-
-#, fuzzy, kde-format
-#| msgctxt "EMAIL OF TRANSLATORS"
-#| msgid "Your emails"
-msgctxt "NAME OF TRANSLATORS"
-msgid "Your names"
-msgstr "niklas.laxstrom+kdetrans@gmail.com"
-
-#, kde-format
-msgctxt "EMAIL OF TRANSLATORS"
-msgid "Your emails"
-msgstr "niklas.laxstrom+kdetrans@gmail.com"
 
 #: Bookmarks.qml:20
 #, fuzzy, kde-format
@@ -62,24 +50,50 @@ msgctxt "@option:check"
 msgid "Follow Current Position"
 msgstr "Seuraa nykyistä sijaintia"
 
-#: main.cpp:37 MainScreen.qml:20 MainScreen.qml:177
+#: main.cpp:40 MainScreen.qml:20 MainScreen.qml:177
 #, fuzzy, kde-format
 #| msgctxt "MainScreen|"
 #| msgid "Marble Maps"
 msgid "Marble Maps"
 msgstr "Marble-kartat"
 
-#: main.cpp:39
+#: main.cpp:42
 #, fuzzy, kde-format
 #| msgctxt "QObject|"
 #| msgid "Edit Maps"
 msgid "Maps"
 msgstr "Karttojen muokkaus"
 
-#: main.cpp:41
+#: main.cpp:44
 #, kde-format
 msgid "© KDE Community"
 msgstr ""
+
+#: main.cpp:49
+#, kde-format
+msgid "Carl Schwan"
+msgstr ""
+
+#: main.cpp:50
+#, fuzzy, kde-format
+#| msgctxt "PluginAuthor|"
+#| msgid "Developer"
+msgid "Developer"
+msgstr "Kehittäjä"
+
+#: main.cpp:55
+#, fuzzy, kde-format
+#| msgctxt "EMAIL OF TRANSLATORS"
+#| msgid "Your emails"
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "niklas.laxstrom+kdetrans@gmail.com"
+
+#: main.cpp:55
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "niklas.laxstrom+kdetrans@gmail.com"
 
 #: MainScreen.qml:86
 #, fuzzy, kde-format
@@ -127,7 +141,7 @@ msgctxt "@action:button"
 msgid "Layer Options"
 msgstr "Tasovalinnat"
 
-#: MainScreen.qml:455
+#: MainScreen.qml:459
 #, fuzzy, kde-format
 #| msgctxt "MainScreen|"
 #| msgid "%1 km"
@@ -8962,10 +8976,6 @@ msgstr "Lataa kartat vain langattomassa verkossa"
 #~ msgctxt "Marble::PluginAboutDialog|"
 #~ msgid "Data"
 #~ msgstr "Tiedot"
-
-#~ msgctxt "PluginAuthor|"
-#~ msgid "Developer"
-#~ msgstr "Kehittäjä"
 
 #~ msgctxt "Marble::PluginItemDelegate|"
 #~ msgid "Configure"

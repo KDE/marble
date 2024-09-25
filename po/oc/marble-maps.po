@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-23 00:36+0000\n"
+"POT-Creation-Date: 2024-09-25 00:36+0000\n"
 "PO-Revision-Date: 2008-08-05 22:27+0200\n"
 "Last-Translator: Yannig Marchegay (Kokoyaya) <yannig@marchegay.org>\n"
 "Language-Team: Occitan (lengadocian) <ubuntu-l10n-oci@lists.ubuntu.com>\n"
@@ -18,18 +18,6 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: KBabel 1.11.4\n"
 "X-Qt-Contexts: true\n"
-
-#, fuzzy, kde-format
-#| msgctxt "EMAIL OF TRANSLATORS"
-#| msgid "Your emails"
-msgctxt "NAME OF TRANSLATORS"
-msgid "Your names"
-msgstr "yannig@marchegay.org"
-
-#, kde-format
-msgctxt "EMAIL OF TRANSLATORS"
-msgid "Your emails"
-msgstr "yannig@marchegay.org"
 
 #: Bookmarks.qml:20
 #, kde-format
@@ -49,22 +37,46 @@ msgctxt "@option:check"
 msgid "Follow Current Position"
 msgstr "Emplaçament"
 
-#: main.cpp:37 MainScreen.qml:20 MainScreen.qml:177
+#: main.cpp:40 MainScreen.qml:20 MainScreen.qml:177
 #, fuzzy, kde-format
 #| msgid "&About"
 msgid "Marble Maps"
 msgstr "&A prepaus de"
 
-#: main.cpp:39
+#: main.cpp:42
 #, fuzzy, kde-format
 #| msgid "&Edit"
 msgid "Maps"
 msgstr "&Edicion"
 
-#: main.cpp:41
+#: main.cpp:44
 #, kde-format
 msgid "© KDE Community"
 msgstr ""
+
+#: main.cpp:49
+#, kde-format
+msgid "Carl Schwan"
+msgstr ""
+
+#: main.cpp:50
+#, kde-format
+msgid "Developer"
+msgstr ""
+
+#: main.cpp:55
+#, fuzzy, kde-format
+#| msgctxt "EMAIL OF TRANSLATORS"
+#| msgid "Your emails"
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "yannig@marchegay.org"
+
+#: main.cpp:55
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "yannig@marchegay.org"
 
 #: MainScreen.qml:86
 #, fuzzy, kde-format
@@ -102,7 +114,7 @@ msgctxt "@action:button"
 msgid "Layer Options"
 msgstr ""
 
-#: MainScreen.qml:455
+#: MainScreen.qml:459
 #, fuzzy, kde-format
 #| msgid "10 mm"
 msgid "%1 km"

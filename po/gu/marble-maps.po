@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: marble-gu\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-23 00:36+0000\n"
+"POT-Creation-Date: 2024-09-25 00:36+0000\n"
 "PO-Revision-Date: 2009-05-15 11:57+0530\n"
 "Last-Translator: Kartik Mistry <kartik.mistry@gmail.com>\n"
 "Language-Team: Gujarati <kde-i18n-doc@kde.org>\n"
@@ -17,18 +17,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n!=1);\n"
 "X-Qt-Contexts: true\n"
-
-#, fuzzy, kde-format
-#| msgid "Placemarks Plugin"
-msgctxt "NAME OF TRANSLATORS"
-msgid "Your names"
-msgstr "પ્લેસમાર્ક્સ પ્લગઇન"
-
-#, fuzzy, kde-format
-#| msgid "Show Navigation Panel"
-msgctxt "EMAIL OF TRANSLATORS"
-msgid "Your emails"
-msgstr "દિશા પટ્ટી બતાવો"
 
 #: Bookmarks.qml:20
 #, fuzzy, kde-format
@@ -49,22 +37,46 @@ msgctxt "@option:check"
 msgid "Follow Current Position"
 msgstr "હાલની જગ્યા"
 
-#: main.cpp:37 MainScreen.qml:20 MainScreen.qml:177
+#: main.cpp:40 MainScreen.qml:20 MainScreen.qml:177
 #, fuzzy, kde-format
 #| msgid "Placemarks Plugin"
 msgid "Marble Maps"
 msgstr "પ્લેસમાર્ક્સ પ્લગઇન"
 
-#: main.cpp:39
+#: main.cpp:42
 #, fuzzy, kde-format
 #| msgid "&Edit"
 msgid "Maps"
 msgstr "ફેરફાર (&E)"
 
-#: main.cpp:41
+#: main.cpp:44
 #, kde-format
 msgid "© KDE Community"
 msgstr ""
+
+#: main.cpp:49
+#, kde-format
+msgid "Carl Schwan"
+msgstr ""
+
+#: main.cpp:50
+#, kde-format
+msgid "Developer"
+msgstr ""
+
+#: main.cpp:55
+#, fuzzy, kde-format
+#| msgid "Placemarks Plugin"
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "પ્લેસમાર્ક્સ પ્લગઇન"
+
+#: main.cpp:55
+#, fuzzy, kde-format
+#| msgid "Show Navigation Panel"
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "દિશા પટ્ટી બતાવો"
 
 #: MainScreen.qml:86
 #, fuzzy, kde-format
@@ -103,7 +115,7 @@ msgctxt "@action:button"
 msgid "Layer Options"
 msgstr ""
 
-#: MainScreen.qml:455
+#: MainScreen.qml:459
 #, fuzzy, kde-format
 #| msgid "%1 km"
 msgid "%1 km"

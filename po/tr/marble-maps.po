@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-23 00:36+0000\n"
-"PO-Revision-Date: 2024-09-23 15:20+0300\n"
+"POT-Creation-Date: 2024-09-25 00:36+0000\n"
+"PO-Revision-Date: 2024-09-24 10:24+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -24,307 +24,243 @@ msgstr ""
 "X-Generator: Lokalize 24.11.70\n"
 "X-Qt-Contexts: true\n"
 
-#, fuzzy, kde-format
-#| msgctxt "Marble::YoursPlugin|"
-#| msgid "Yours"
-msgctxt "NAME OF TRANSLATORS"
-msgid "Your names"
-msgstr "Yours"
-
-#, fuzzy, kde-format
-#| msgctxt "ExternalEditor|"
-#| msgid "Editor Details"
-msgctxt "EMAIL OF TRANSLATORS"
-msgid "Your emails"
-msgstr "Düzenleyici Ayrıntıları"
-
 #: Bookmarks.qml:20
-#, fuzzy, kde-format
-#| msgctxt "QObject|"
-#| msgid "Bookmarks"
+#, kde-format
 msgctxt "@title:window"
 msgid "Bookmarks"
 msgstr "Yer İmleri"
 
 #: Bookmarks.qml:69
-#, fuzzy, kde-format
-#| msgctxt "Bookmarks|"
-#| msgid "Your bookmarks will appear here."
+#, kde-format
 msgid "Your bookmarks will appear here."
 msgstr "Yer imleriniz burada görünecektir."
 
 #: CurrentPosition.qml:54
-#, fuzzy, kde-format
-#| msgctxt "CurrentPosition|"
-#| msgid "Follow Current Position"
+#, kde-format
 msgctxt "@option:check"
 msgid "Follow Current Position"
-msgstr "Geçerli Konumu İzle"
+msgstr "Geçerli konumu izle"
 
-#: main.cpp:37 MainScreen.qml:20 MainScreen.qml:177
-#, fuzzy, kde-format
-#| msgctxt "MainScreen|"
-#| msgid "Marble Maps"
+#: main.cpp:40 MainScreen.qml:20 MainScreen.qml:177
+#, kde-format
 msgid "Marble Maps"
 msgstr "Bilye Haritaları"
 
-#: main.cpp:39
-#, fuzzy, kde-format
-#| msgctxt "QObject|"
-#| msgid "Edit Maps"
+#: main.cpp:42
+#, kde-format
 msgid "Maps"
-msgstr "Haritaları Düzenle"
+msgstr "Haritalar"
 
-#: main.cpp:41
+#: main.cpp:44
 #, kde-format
 msgid "© KDE Community"
+msgstr "© KDE Topluluğu"
+
+#: main.cpp:49
+#, kde-format
+msgid "Carl Schwan"
 msgstr ""
 
-#: MainScreen.qml:86
+#: main.cpp:50
 #, fuzzy, kde-format
-#| msgctxt "MainScreen|"
-#| msgid "Public Transport"
+#| msgctxt "PluginAuthor|"
+#| msgid "Developer"
+msgid "Developer"
+msgstr "Geliştirici"
+
+#: main.cpp:55
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "Emir SARI"
+
+#: main.cpp:55
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "emir_sari@îcloud.com"
+
+#: MainScreen.qml:86
+#, kde-format
 msgid "Public Transport"
 msgstr "Toplu Taşıma"
 
 #: MainScreen.qml:101
-#, fuzzy, kde-format
-#| msgctxt "MainScreen|"
-#| msgid "Outdoor Activities"
+#, kde-format
 msgid "Outdoor Activities"
 msgstr "Açık Hava Etklinlikleri"
 
 #: MainScreen.qml:113
-#, fuzzy, kde-format
-#| msgctxt "MainScreen|"
-#| msgid "Accessibility"
+#, kde-format
 msgctxt "@action:button"
 msgid "Accessibility"
 msgstr "Erişilebilirlik"
 
 #: MainScreen.qml:122
-#, fuzzy, kde-format
-#| msgctxt "Marble::PluginItemDelegate|"
-#| msgid "About"
+#, kde-format
 msgctxt "@action:button"
 msgid "About"
 msgstr "Hakkında"
 
 #: MainScreen.qml:133
-#, fuzzy, kde-format
-#| msgctxt "QObject|"
-#| msgid "Bookmarks"
+#, kde-format
 msgctxt "@action:button"
 msgid "Bookmarks"
 msgstr "Yer İmleri"
 
 #: MainScreen.qml:144
-#, fuzzy, kde-format
-#| msgctxt "MainScreen|"
-#| msgid "Layer Options"
+#, kde-format
 msgctxt "@action:button"
 msgid "Layer Options"
 msgstr "Katman Seçenekleri"
 
-#: MainScreen.qml:455
-#, fuzzy, kde-format
-#| msgctxt "MainScreen|"
-#| msgid "%1 km"
+#: MainScreen.qml:459
+#, kde-format
 msgid "%1 km"
 msgstr "%1 km"
 
 #: NavigationInfoBar.qml:20
-#, fuzzy, kde-format
-#| msgctxt "MainScreen|"
-#| msgid "%1 km"
+#, kde-format
 msgctxt "distance in km"
 msgid "%1 km"
 msgstr "%1 km"
 
 #: NavigationInfoBar.qml:22
-#, fuzzy, kde-format
-#| msgctxt "NavigationInfoBar|"
-#| msgid "%1 m"
+#, kde-format
 msgctxt "distance in m"
 msgid "%1 m"
 msgstr "%1 m"
 
 #: NavigationInfoBar.qml:24
-#, fuzzy, kde-format
-#| msgctxt "NavigationInfoBar|"
-#| msgid "%1 m"
+#, kde-format
 msgctxt "distance in m with decimals"
 msgid "%1 m"
 msgstr "%1 m"
 
 #: Options.qml:20
-#, fuzzy, kde-format
-#| msgctxt "MainScreen|"
-#| msgid "Layer Options"
+#, kde-format
 msgctxt "@title:window"
 msgid "Layer Options"
 msgstr "Katman Seçenekleri"
 
 #: Options.qml:23
-#, fuzzy, kde-format
-#| msgctxt "Options|"
-#| msgid "<h4>Public Transport Layers</h4>"
+#, kde-format
 msgctxt "@title:group"
 msgid "Public Transport Layers"
-msgstr "<h4>Toplu Taşıma Katmanları</h4>"
+msgstr "Toplu Taşıma Katmanları"
 
 #: Options.qml:28
-#, fuzzy, kde-format
-#| msgctxt "GeoLineStringGraphicsItem|"
-#| msgid "Train"
+#, kde-format
 msgctxt "@option:check"
 msgid "Train"
 msgstr "Tren"
 
 #: Options.qml:35
-#, fuzzy, kde-format
-#| msgctxt "DGML|"
-#| msgid "Subway"
+#, kde-format
 msgctxt "@option:check"
 msgid "Subway"
 msgstr "Metro"
 
 #: Options.qml:42
-#, fuzzy, kde-format
-#| msgctxt "GeoDataPlacemark|"
-#| msgid "Tram"
+#, kde-format
 msgctxt "@option:check"
 msgid "Tram"
 msgstr "Tramvay"
 
 #: Options.qml:49
-#, fuzzy, kde-format
-#| msgctxt "GeoLineStringGraphicsItem|"
-#| msgid "Bus"
+#, kde-format
 msgctxt "@option:check"
 msgid "Bus"
 msgstr "Otobüs"
 
 #: Options.qml:56
-#, fuzzy, kde-format
-#| msgctxt "GeoLineStringGraphicsItem|"
-#| msgid "Trolley Bus"
+#, kde-format
 msgctxt "@option:check"
 msgid "Trolley Bus"
 msgstr "Troleybüs"
 
 #: Options.qml:64
-#, fuzzy, kde-format
-#| msgctxt "Options|"
-#| msgid "<h4>Outdoor Activities Layers</h4>"
+#, kde-format
 msgid "Outdoor Activities Layers"
-msgstr "<h4>Açık Hava Etkinliği Katmanları</h4>"
+msgstr "Açık Hava Etkinlikleri Katmanları"
 
 #: Options.qml:69
-#, fuzzy, kde-format
-#| msgctxt "OutdoorActivities|"
-#| msgid "Walkways"
+#, kde-format
 msgctxt "@option:check"
 msgid "Walkways"
 msgstr "Yürüme Yolları"
 
 #: Options.qml:76
-#, fuzzy, kde-format
-#| msgctxt "OutdoorActivities|"
-#| msgid "Hiking Routes"
+#, kde-format
 msgctxt "@option:check"
 msgid "Hiking Routes"
 msgstr "Yürüyüş Rotaları"
 
 #: Options.qml:83
-#, fuzzy, kde-format
-#| msgctxt "OutdoorActivities|"
-#| msgid "Bicycle Routes"
+#, kde-format
 msgctxt "@option:check"
 msgid "Bicycle Routes"
 msgstr "Bisiklet Rotaları"
 
 #: Options.qml:90
-#, fuzzy, kde-format
-#| msgctxt "OutdoorActivities|"
-#| msgid "Mountainbike Routes"
+#, kde-format
 msgctxt "@option:check"
 msgid "Mountainbike Routes"
 msgstr "Dağ Bisikleti Rotaları"
 
 #: Options.qml:97
-#, fuzzy, kde-format
-#| msgctxt "OutdoorActivities|"
-#| msgid "Inline Skating Routes"
+#, kde-format
 msgctxt "@option:check"
 msgid "Inline Skating Routes"
 msgstr "Tekerlekli Paten Rotaları"
 
 #: Options.qml:104
-#, fuzzy, kde-format
-#| msgctxt "OutdoorActivities|"
-#| msgid "Bridleways"
+#, kde-format
 msgctxt "@option:check"
 msgid "Bridleways"
 msgstr "At Binme Yolları"
 
 #: PlacemarkDialog.qml:48
-#, fuzzy, kde-format
-#| msgctxt "Marble::GeoDataTreeModel|"
-#| msgid "Name"
+#, kde-format
 msgctxt "placeholder"
 msgid "No Name"
-msgstr "Ad"
+msgstr "Adsız"
 
 #: PlacemarkDialog.qml:168
-#, fuzzy, kde-format
-#| msgctxt "Marble::EditPlacemarkDialog|"
-#| msgid "Tags"
+#, kde-format
 msgctxt "@title:group"
 msgid "Tags:"
-msgstr "Etiketler"
+msgstr "Künyeler:"
 
 #: ProfileSelectorMenu.qml:29
-#, fuzzy, kde-format
-#| msgctxt "Marble::RoutingProfilesModel|"
-#| msgid "Car (fastest)"
+#, kde-format
 msgid "Car (fastest)"
 msgstr "Araba (en hızlı)"
 
 #: ProfileSelectorMenu.qml:40
-#, fuzzy, kde-format
-#| msgctxt "Marble::RoutingProfilesModel|"
-#| msgid "Bicycle"
+#, kde-format
 msgid "Bicycle"
 msgstr "Bisiklet"
 
 #: ProfileSelectorMenu.qml:49
-#, fuzzy, kde-format
-#| msgctxt "Marble::RoutingProfilesModel|"
-#| msgid "Pedestrian"
+#, kde-format
 msgid "Pedestrian"
 msgstr "Yaya"
 
 #: RouteEditor.qml:62
-#, fuzzy, kde-format
-#| msgctxt "RouteEditor|"
-#| msgid "Search for places to integrate them into a route."
+#, kde-format
 msgid "Search for places to integrate them into a route."
 msgstr "Bir rota ile bütünleştirmek için konumları arayın."
 
 #: SettingsDialog.qml:48
-#, fuzzy, kde-format
-#| msgctxt "SettingsDialog|"
-#| msgid "Network Settings"
+#, kde-format
 msgid "Network Settings"
 msgstr "Ağ Ayarları"
 
 #: SettingsDialog.qml:53
-#, fuzzy, kde-format
-#| msgctxt "SettingsDialog|"
-#| msgid "Download Maps via WLAN only"
+#, kde-format
 msgid "Download Maps via WLAN only"
-msgstr "Haritaları Yalnızca Kablosuz ile İndir"
+msgstr "Haritaları yalnızca Wi-Fi ile indir"
 
 #~ msgctxt "DGML|"
 #~ msgid "Moon"
@@ -9009,10 +8945,6 @@ msgstr "Haritaları Yalnızca Kablosuz ile İndir"
 #~ msgctxt "Marble::PluginAboutDialog|"
 #~ msgid "Data"
 #~ msgstr "Veri"
-
-#~ msgctxt "PluginAuthor|"
-#~ msgid "Developer"
-#~ msgstr "Geliştirici"
 
 #~ msgctxt "Marble::PluginItemDelegate|"
 #~ msgid "Configure"

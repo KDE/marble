@@ -3,30 +3,21 @@
 # This file is distributed under the same license as the marble package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-23 00:36+0000\n"
+"POT-Creation-Date: 2024-09-25 00:36+0000\n"
 "PO-Revision-Date: 2024-09-23 06:12+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
-"Language-Team: LANGUAGE <kde-i18n-doc@kde.org>\n"
+"Language-Team: Slovenian <kde-i18n-doc@kde.org>\n"
 "Language: sl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.5\n"
-
-#, kde-format
-msgctxt "NAME OF TRANSLATORS"
-msgid "Your names"
-msgstr "Matjaž Jeran"
-
-#, kde-format
-msgctxt "EMAIL OF TRANSLATORS"
-msgid "Your emails"
-msgstr "matjaz.jeran@amis.net"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n"
+"%100==4 ? 3 : 0);\n"
 
 #: Bookmarks.qml:20
 #, kde-format
@@ -45,20 +36,42 @@ msgctxt "@option:check"
 msgid "Follow Current Position"
 msgstr "Sledi trenutnemu položaju"
 
-#: main.cpp:37 MainScreen.qml:20 MainScreen.qml:177
+#: main.cpp:40 MainScreen.qml:20 MainScreen.qml:177
 #, kde-format
 msgid "Marble Maps"
 msgstr "Zemljevidi Marble"
 
-#: main.cpp:39
+#: main.cpp:42
 #, kde-format
 msgid "Maps"
 msgstr "Zemljevidi"
 
-#: main.cpp:41
+#: main.cpp:44
 #, kde-format
 msgid "© KDE Community"
 msgstr "© Skupnost KDE"
+
+#: main.cpp:49
+#, kde-format
+msgid "Carl Schwan"
+msgstr ""
+
+#: main.cpp:50
+#, kde-format
+msgid "Developer"
+msgstr ""
+
+#: main.cpp:55
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "Matjaž Jeran"
+
+#: main.cpp:55
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "matjaz.jeran@amis.net"
 
 #: MainScreen.qml:86
 #, kde-format
@@ -94,7 +107,7 @@ msgctxt "@action:button"
 msgid "Layer Options"
 msgstr "Možnosti plasti"
 
-#: MainScreen.qml:455
+#: MainScreen.qml:459
 #, kde-format
 msgid "%1 km"
 msgstr "%1 km"

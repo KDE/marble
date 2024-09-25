@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-23 00:36+0000\n"
+"POT-Creation-Date: 2024-09-25 00:36+0000\n"
 "PO-Revision-Date: 2020-08-01 10:42+0200\n"
 "Last-Translator: Martin Schlander <mschlander@opensuse.org>\n"
 "Language-Team: Danish <kde-i18n-doc@kde.org>\n"
@@ -21,20 +21,6 @@ msgstr ""
 "X-Generator: Lokalize 20.04.2\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Qt-Contexts: true\n"
-
-#, fuzzy, kde-format
-#| msgctxt "Marble::YoursPlugin|"
-#| msgid "Yours"
-msgctxt "NAME OF TRANSLATORS"
-msgid "Your names"
-msgstr "Yours"
-
-#, fuzzy, kde-format
-#| msgctxt "ExternalEditor|"
-#| msgid "Editor Details"
-msgctxt "EMAIL OF TRANSLATORS"
-msgid "Your emails"
-msgstr "Editor-detaljer"
 
 #: Bookmarks.qml:20
 #, fuzzy, kde-format
@@ -57,24 +43,52 @@ msgctxt "@option:check"
 msgid "Follow Current Position"
 msgstr "Nuværende sted"
 
-#: main.cpp:37 MainScreen.qml:20 MainScreen.qml:177
+#: main.cpp:40 MainScreen.qml:20 MainScreen.qml:177
 #, fuzzy, kde-format
 #| msgctxt "MainScreen|"
 #| msgid "Marble Maps"
 msgid "Marble Maps"
 msgstr "Marble Maps"
 
-#: main.cpp:39
+#: main.cpp:42
 #, fuzzy, kde-format
 #| msgctxt "QObject|"
 #| msgid "Edit Maps"
 msgid "Maps"
 msgstr "Redigér kort"
 
-#: main.cpp:41
+#: main.cpp:44
 #, kde-format
 msgid "© KDE Community"
 msgstr ""
+
+#: main.cpp:49
+#, kde-format
+msgid "Carl Schwan"
+msgstr ""
+
+#: main.cpp:50
+#, fuzzy, kde-format
+#| msgctxt "PluginAuthor|"
+#| msgid "Developer"
+msgid "Developer"
+msgstr "Udvikler"
+
+#: main.cpp:55
+#, fuzzy, kde-format
+#| msgctxt "Marble::YoursPlugin|"
+#| msgid "Yours"
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "Yours"
+
+#: main.cpp:55
+#, fuzzy, kde-format
+#| msgctxt "ExternalEditor|"
+#| msgid "Editor Details"
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "Editor-detaljer"
 
 #: MainScreen.qml:86
 #, fuzzy, kde-format
@@ -122,7 +136,7 @@ msgctxt "@action:button"
 msgid "Layer Options"
 msgstr "Visningsin&dstillinger"
 
-#: MainScreen.qml:455
+#: MainScreen.qml:459
 #, fuzzy, kde-format
 #| msgctxt "MainScreen|"
 #| msgid "%1 km"
@@ -8345,10 +8359,6 @@ msgstr "Download variant"
 #~ msgctxt "Marble::PluginAboutDialog|"
 #~ msgid "Data"
 #~ msgstr "Data"
-
-#~ msgctxt "PluginAuthor|"
-#~ msgid "Developer"
-#~ msgstr "Udvikler"
 
 #~ msgctxt "Marble::PluginItemDelegate|"
 #~ msgid "Configure"

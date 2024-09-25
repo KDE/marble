@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-23 00:36+0000\n"
+"POT-Creation-Date: 2024-09-25 00:36+0000\n"
 "PO-Revision-Date: 2024-09-21 10:37+0300\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
@@ -23,18 +23,6 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=(n == 1) ? 0 : ((n == 2) ? 1 : ((n > 10 && "
 "n % 10 == 0) ? 2 : 3));\n"
 "X-Qt-Contexts: true\n"
-
-#, fuzzy, kde-format
-#| msgctxt "Marble::YoursPlugin|"
-#| msgid "Yours"
-msgctxt "NAME OF TRANSLATORS"
-msgid "Your names"
-msgstr "שלך"
-
-#, fuzzy, kde-format
-msgctxt "EMAIL OF TRANSLATORS"
-msgid "Your emails"
-msgstr "הצג רשת"
 
 #: Bookmarks.qml:20
 #, fuzzy, kde-format
@@ -53,20 +41,44 @@ msgctxt "@option:check"
 msgid "Follow Current Position"
 msgstr "מיקום נוכחי"
 
-#: main.cpp:37 MainScreen.qml:20 MainScreen.qml:177
+#: main.cpp:40 MainScreen.qml:20 MainScreen.qml:177
 #, fuzzy, kde-format
 msgid "Marble Maps"
 msgstr "יוצר מפה"
 
-#: main.cpp:39
+#: main.cpp:42
 #, fuzzy, kde-format
 msgid "Maps"
 msgstr "&עריכה"
 
-#: main.cpp:41
+#: main.cpp:44
 #, kde-format
 msgid "© KDE Community"
 msgstr ""
+
+#: main.cpp:49
+#, kde-format
+msgid "Carl Schwan"
+msgstr ""
+
+#: main.cpp:50
+#, fuzzy, kde-format
+msgid "Developer"
+msgstr "כותב מקורי, מפתח ומתחזק"
+
+#: main.cpp:55
+#, fuzzy, kde-format
+#| msgctxt "Marble::YoursPlugin|"
+#| msgid "Yours"
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "שלך"
+
+#: main.cpp:55
+#, fuzzy, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "הצג רשת"
 
 #: MainScreen.qml:86
 #, fuzzy, kde-format
@@ -102,7 +114,7 @@ msgctxt "@action:button"
 msgid "Layer Options"
 msgstr ""
 
-#: MainScreen.qml:455
+#: MainScreen.qml:459
 #, fuzzy, kde-format
 msgid "%1 km"
 msgstr "%1 מ'"
@@ -3934,11 +3946,6 @@ msgstr "ההורדה הסתיימה."
 #~ msgctxt "Marble::PluginAboutDialog|"
 #~ msgid "Data"
 #~ msgstr "&נתונים"
-
-#, fuzzy
-#~ msgctxt "PluginAuthor|"
-#~ msgid "Developer"
-#~ msgstr "כותב מקורי, מפתח ומתחזק"
 
 #, fuzzy
 #~ msgctxt "Marble::PluginItemDelegate|"

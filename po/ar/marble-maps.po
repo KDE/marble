@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-23 00:36+0000\n"
+"POT-Creation-Date: 2024-09-25 00:36+0000\n"
 "PO-Revision-Date: 2024-09-19 09:48+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
@@ -16,19 +16,9 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
-"&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
+"&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
 "X-Generator: Lokalize 23.08.5\n"
 "X-Qt-Contexts: true\n"
-
-#, fuzzy, kde-format
-msgctxt "NAME OF TRANSLATORS"
-msgid "Your names"
-msgstr "metehyi@free.fr"
-
-#, fuzzy, kde-format
-msgctxt "EMAIL OF TRANSLATORS"
-msgid "Your emails"
-msgstr "metehyi@free.fr"
 
 #: Bookmarks.qml:20
 #, fuzzy, kde-format
@@ -53,24 +43,48 @@ msgctxt "@option:check"
 msgid "Follow Current Position"
 msgstr "اتبع الموقع الحالي"
 
-#: main.cpp:37 MainScreen.qml:20 MainScreen.qml:177
+#: main.cpp:40 MainScreen.qml:20 MainScreen.qml:177
 #, fuzzy, kde-format
 #| msgctxt "MainScreen|"
 #| msgid "Marble Maps"
 msgid "Marble Maps"
 msgstr "خرائط ماربل"
 
-#: main.cpp:39
+#: main.cpp:42
 #, fuzzy, kde-format
 #| msgctxt "QObject|"
 #| msgid "Edit Maps"
 msgid "Maps"
 msgstr "&حرّر الخرائط"
 
-#: main.cpp:41
+#: main.cpp:44
 #, kde-format
 msgid "© KDE Community"
 msgstr ""
+
+#: main.cpp:49
+#, kde-format
+msgid "Carl Schwan"
+msgstr ""
+
+#: main.cpp:50
+#, fuzzy, kde-format
+#| msgctxt "PluginAuthor|"
+#| msgid "Developer"
+msgid "Developer"
+msgstr "مطوّر"
+
+#: main.cpp:55
+#, fuzzy, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "metehyi@free.fr"
+
+#: main.cpp:55
+#, fuzzy, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "metehyi@free.fr"
 
 #: MainScreen.qml:86
 #, fuzzy, kde-format
@@ -118,7 +132,7 @@ msgctxt "@action:button"
 msgid "Layer Options"
 msgstr "خيارات الطبقات"
 
-#: MainScreen.qml:455
+#: MainScreen.qml:459
 #, fuzzy, kde-format
 #| msgctxt "MainScreen|"
 #| msgid "%1 km"
@@ -6283,10 +6297,6 @@ msgstr "قم بتنزيل الخرائط عبر WLAN فقط"
 #~ msgctxt "Marble::PluginAboutDialog|"
 #~ msgid "Data"
 #~ msgstr "البيانات"
-
-#~ msgctxt "PluginAuthor|"
-#~ msgid "Developer"
-#~ msgstr "مطوّر"
 
 #~ msgctxt "Marble::PluginItemDelegate|"
 #~ msgid "Configure"

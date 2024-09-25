@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-23 00:36+0000\n"
+"POT-Creation-Date: 2024-09-25 00:36+0000\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: \n"
@@ -14,305 +14,241 @@ msgstr ""
 "X-Qt-Contexts: true\n"
 "X-Generator: Poedit 3.5\n"
 
-#, fuzzy, kde-format
-#| msgctxt "Marble::YoursPlugin|"
-#| msgid "Yours"
-msgctxt "NAME OF TRANSLATORS"
-msgid "Your names"
-msgstr "თქვენი"
-
-#, fuzzy, kde-format
-#| msgctxt "ExternalEditor|"
-#| msgid "Editor Details"
-msgctxt "EMAIL OF TRANSLATORS"
-msgid "Your emails"
-msgstr "რედაქტორის დეტალები"
-
 #: Bookmarks.qml:20
-#, fuzzy, kde-format
-#| msgctxt "QObject|"
-#| msgid "Bookmarks"
+#, kde-format
 msgctxt "@title:window"
 msgid "Bookmarks"
-msgstr "სანიშნები"
+msgstr "სანიშნეები"
 
 #: Bookmarks.qml:69
-#, fuzzy, kde-format
-#| msgctxt "Bookmarks|"
-#| msgid "Your bookmarks will appear here."
+#, kde-format
 msgid "Your bookmarks will appear here."
 msgstr "თქვენი სანიშნები აქ გამოჩნდება."
 
 #: CurrentPosition.qml:54
-#, fuzzy, kde-format
-#| msgctxt "CurrentPosition|"
-#| msgid "Follow Current Position"
+#, kde-format
 msgctxt "@option:check"
 msgid "Follow Current Position"
 msgstr "მიმდინარე მდებარეობის მიყოლა"
 
-#: main.cpp:37 MainScreen.qml:20 MainScreen.qml:177
-#, fuzzy, kde-format
-#| msgctxt "MainScreen|"
-#| msgid "Marble Maps"
+#: main.cpp:40 MainScreen.qml:20 MainScreen.qml:177
+#, kde-format
 msgid "Marble Maps"
 msgstr "Marble რუკები"
 
-#: main.cpp:39
-#, fuzzy, kde-format
-#| msgctxt "QObject|"
-#| msgid "Edit Maps"
+#: main.cpp:42
+#, kde-format
 msgid "Maps"
-msgstr "რუკების ჩასწორება"
+msgstr "რუკები"
 
-#: main.cpp:41
+#: main.cpp:44
 #, kde-format
 msgid "© KDE Community"
+msgstr "© KDE-ის საზოგადოება"
+
+#: main.cpp:49
+#, kde-format
+msgid "Carl Schwan"
 msgstr ""
 
-#: MainScreen.qml:86
+#: main.cpp:50
 #, fuzzy, kde-format
-#| msgctxt "MainScreen|"
-#| msgid "Public Transport"
+#| msgctxt "PluginAuthor|"
+#| msgid "Developer"
+msgid "Developer"
+msgstr "პროგრამისტი"
+
+#: main.cpp:55
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "Temuri Doghonadze"
+
+#: main.cpp:55
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "temuri.doghonadze@gmail.com"
+
+#: MainScreen.qml:86
+#, kde-format
 msgid "Public Transport"
 msgstr "საჯარო ტრანსპორტი"
 
 #: MainScreen.qml:101
-#, fuzzy, kde-format
-#| msgctxt "MainScreen|"
-#| msgid "Outdoor Activities"
+#, kde-format
 msgid "Outdoor Activities"
-msgstr "აქტიური დასვენება"
+msgstr "გარე აქტივობები"
 
 #: MainScreen.qml:113
-#, fuzzy, kde-format
-#| msgctxt "MainScreen|"
-#| msgid "Accessibility"
+#, kde-format
 msgctxt "@action:button"
 msgid "Accessibility"
 msgstr "წვდომადობა"
 
 #: MainScreen.qml:122
-#, fuzzy, kde-format
-#| msgctxt "Marble::PluginItemDelegate|"
-#| msgid "About"
+#, kde-format
 msgctxt "@action:button"
 msgid "About"
 msgstr "შესახებ"
 
 #: MainScreen.qml:133
-#, fuzzy, kde-format
-#| msgctxt "QObject|"
-#| msgid "Bookmarks"
+#, kde-format
 msgctxt "@action:button"
 msgid "Bookmarks"
-msgstr "სანიშნები"
+msgstr "სანიშნეები"
 
 #: MainScreen.qml:144
-#, fuzzy, kde-format
-#| msgctxt "MainScreen|"
-#| msgid "Layer Options"
+#, kde-format
 msgctxt "@action:button"
 msgid "Layer Options"
 msgstr "ფენის პარამეტრები"
 
-#: MainScreen.qml:455
-#, fuzzy, kde-format
-#| msgctxt "MainScreen|"
-#| msgid "%1 km"
+#: MainScreen.qml:459
+#, kde-format
 msgid "%1 km"
 msgstr "%1 კმ"
 
 #: NavigationInfoBar.qml:20
-#, fuzzy, kde-format
-#| msgctxt "MainScreen|"
-#| msgid "%1 km"
+#, kde-format
 msgctxt "distance in km"
 msgid "%1 km"
 msgstr "%1 კმ"
 
 #: NavigationInfoBar.qml:22
-#, fuzzy, kde-format
-#| msgctxt "NavigationInfoBar|"
-#| msgid "%1 m"
+#, kde-format
 msgctxt "distance in m"
 msgid "%1 m"
 msgstr "%1 მ"
 
 #: NavigationInfoBar.qml:24
-#, fuzzy, kde-format
-#| msgctxt "NavigationInfoBar|"
-#| msgid "%1 m"
+#, kde-format
 msgctxt "distance in m with decimals"
 msgid "%1 m"
 msgstr "%1 მ"
 
 #: Options.qml:20
-#, fuzzy, kde-format
-#| msgctxt "MainScreen|"
-#| msgid "Layer Options"
+#, kde-format
 msgctxt "@title:window"
 msgid "Layer Options"
 msgstr "ფენის პარამეტრები"
 
 #: Options.qml:23
-#, fuzzy, kde-format
-#| msgctxt "Options|"
-#| msgid "<h4>Public Transport Layers</h4>"
+#, kde-format
 msgctxt "@title:group"
 msgid "Public Transport Layers"
-msgstr "<h4>საჯარო ტრანსპორტის ფენები</h4>"
+msgstr "საჯარო ტრანსპორტის ფენები"
 
 #: Options.qml:28
-#, fuzzy, kde-format
-#| msgctxt "GeoLineStringGraphicsItem|"
-#| msgid "Train"
+#, kde-format
 msgctxt "@option:check"
 msgid "Train"
 msgstr "მატარებელი"
 
 #: Options.qml:35
-#, fuzzy, kde-format
-#| msgctxt "DGML|"
-#| msgid "Subway"
+#, kde-format
 msgctxt "@option:check"
 msgid "Subway"
-msgstr "მეტრო"
+msgstr "მიწისქვეშა გადასასვლელი"
 
 #: Options.qml:42
-#, fuzzy, kde-format
-#| msgctxt "GeoDataPlacemark|"
-#| msgid "Tram"
+#, kde-format
 msgctxt "@option:check"
 msgid "Tram"
 msgstr "ტრამვაი"
 
 #: Options.qml:49
-#, fuzzy, kde-format
-#| msgctxt "GeoLineStringGraphicsItem|"
-#| msgid "Bus"
+#, kde-format
 msgctxt "@option:check"
 msgid "Bus"
 msgstr "მატარებელი"
 
 #: Options.qml:56
-#, fuzzy, kde-format
-#| msgctxt "GeoLineStringGraphicsItem|"
-#| msgid "Trolley Bus"
+#, kde-format
 msgctxt "@option:check"
 msgid "Trolley Bus"
 msgstr "ტროლებუსი"
 
 #: Options.qml:64
-#, fuzzy, kde-format
-#| msgctxt "Options|"
-#| msgid "<h4>Outdoor Activities Layers</h4>"
+#, kde-format
 msgid "Outdoor Activities Layers"
-msgstr "<h4>აქტიური დასვენების დონეები</h4>"
+msgstr "გარე აქტივობების ფენები"
 
 #: Options.qml:69
-#, fuzzy, kde-format
-#| msgctxt "OutdoorActivities|"
-#| msgid "Walkways"
+#, kde-format
 msgctxt "@option:check"
 msgid "Walkways"
 msgstr "ხეივანი"
 
 #: Options.qml:76
-#, fuzzy, kde-format
-#| msgctxt "OutdoorActivities|"
-#| msgid "Hiking Routes"
+#, kde-format
 msgctxt "@option:check"
 msgid "Hiking Routes"
 msgstr "სალაშქრო ტრასები"
 
 #: Options.qml:83
-#, fuzzy, kde-format
-#| msgctxt "OutdoorActivities|"
-#| msgid "Bicycle Routes"
+#, kde-format
 msgctxt "@option:check"
 msgid "Bicycle Routes"
 msgstr "ველოტრასები"
 
 #: Options.qml:90
-#, fuzzy, kde-format
-#| msgctxt "OutdoorActivities|"
-#| msgid "Mountainbike Routes"
+#, kde-format
 msgctxt "@option:check"
 msgid "Mountainbike Routes"
 msgstr "სამთო ველოტრასები"
 
 #: Options.qml:97
-#, fuzzy, kde-format
-#| msgctxt "OutdoorActivities|"
-#| msgid "Inline Skating Routes"
+#, kde-format
 msgctxt "@option:check"
 msgid "Inline Skating Routes"
 msgstr "როლერბლეიდინგის მარშრუტები"
 
 #: Options.qml:104
-#, fuzzy, kde-format
-#| msgctxt "OutdoorActivities|"
-#| msgid "Bridleways"
+#, kde-format
 msgctxt "@option:check"
 msgid "Bridleways"
 msgstr "საჯირითო ტრასები"
 
 #: PlacemarkDialog.qml:48
-#, fuzzy, kde-format
-#| msgctxt "Marble::GeoDataTreeModel|"
-#| msgid "Name"
+#, kde-format
 msgctxt "placeholder"
 msgid "No Name"
-msgstr "სახელი"
+msgstr "უსახელო"
 
 #: PlacemarkDialog.qml:168
-#, fuzzy, kde-format
-#| msgctxt "Marble::EditPlacemarkDialog|"
-#| msgid "Tags"
+#, kde-format
 msgctxt "@title:group"
 msgid "Tags:"
-msgstr "ჭდეები"
+msgstr "ჭდე:"
 
 #: ProfileSelectorMenu.qml:29
-#, fuzzy, kde-format
-#| msgctxt "Marble::RoutingProfilesModel|"
-#| msgid "Car (fastest)"
+#, kde-format
 msgid "Car (fastest)"
 msgstr "მანქანა (უსწრაფესი)"
 
 #: ProfileSelectorMenu.qml:40
-#, fuzzy, kde-format
-#| msgctxt "Marble::RoutingProfilesModel|"
-#| msgid "Bicycle"
+#, kde-format
 msgid "Bicycle"
 msgstr "ველოსიპედი"
 
 #: ProfileSelectorMenu.qml:49
-#, fuzzy, kde-format
-#| msgctxt "Marble::RoutingProfilesModel|"
-#| msgid "Pedestrian"
+#, kde-format
 msgid "Pedestrian"
-msgstr "საფეხმავლო"
+msgstr "ფეხით მოსიარულე"
 
 #: RouteEditor.qml:62
-#, fuzzy, kde-format
-#| msgctxt "RouteEditor|"
-#| msgid "Search for places to integrate them into a route."
+#, kde-format
 msgid "Search for places to integrate them into a route."
 msgstr "ადგილების ძებნა მათი გზაში ინტეგრაციისთვის."
 
 #: SettingsDialog.qml:48
-#, fuzzy, kde-format
-#| msgctxt "SettingsDialog|"
-#| msgid "Network Settings"
+#, kde-format
 msgid "Network Settings"
 msgstr "ქსელის მორგება"
 
 #: SettingsDialog.qml:53
-#, fuzzy, kde-format
-#| msgctxt "SettingsDialog|"
-#| msgid "Download Maps via WLAN only"
+#, kde-format
 msgid "Download Maps via WLAN only"
 msgstr "რუკების, მხოლოდ, WLAN-ით გადმოწერა"
 
@@ -9015,10 +8951,6 @@ msgstr "რუკების, მხოლოდ, WLAN-ით გადმო�
 #~ msgctxt "Marble::PluginAboutDialog|"
 #~ msgid "Data"
 #~ msgstr "მონაცემები"
-
-#~ msgctxt "PluginAuthor|"
-#~ msgid "Developer"
-#~ msgstr "პროგრამისტი"
 
 #~ msgctxt "Marble::PluginItemDelegate|"
 #~ msgid "Configure"
