@@ -8,16 +8,16 @@ msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-09-25 00:36+0000\n"
-"PO-Revision-Date: 2024-09-23 06:12+0200\n"
+"PO-Revision-Date: 2024-09-25 07:36+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <kde-i18n-doc@kde.org>\n"
 "Language: sl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.5\n"
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n"
 "%100==4 ? 3 : 0);\n"
+"X-Generator: Poedit 3.5\n"
 
 #: Bookmarks.qml:20
 #, kde-format
@@ -54,12 +54,12 @@ msgstr "© Skupnost KDE"
 #: main.cpp:49
 #, kde-format
 msgid "Carl Schwan"
-msgstr ""
+msgstr "Carl Schwan"
 
 #: main.cpp:50
 #, kde-format
 msgid "Developer"
-msgstr ""
+msgstr "Razvijalec"
 
 #: main.cpp:55
 #, kde-format

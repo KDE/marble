@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-09-25 00:36+0000\n"
-"PO-Revision-Date: 2024-09-23 10:25+0200\n"
+"PO-Revision-Date: 2024-09-25 09:12+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 24.08.0\n"
+"X-Generator: Lokalize 24.08.1\n"
 
 #: Bookmarks.qml:20
 #, kde-format
@@ -54,12 +54,12 @@ msgstr "© KDE Community"
 #: main.cpp:49
 #, kde-format
 msgid "Carl Schwan"
-msgstr ""
+msgstr "Carl Schwan"
 
 #: main.cpp:50
 #, kde-format
 msgid "Developer"
-msgstr ""
+msgstr "Desenvolupador"
 
 #: main.cpp:55
 #, kde-format

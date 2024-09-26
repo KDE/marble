@@ -49,12 +49,10 @@ msgstr "© KDE-ის საზოგადოება"
 #: main.cpp:49
 #, kde-format
 msgid "Carl Schwan"
-msgstr ""
+msgstr "Carl Schwan"
 
 #: main.cpp:50
-#, fuzzy, kde-format
-#| msgctxt "PluginAuthor|"
-#| msgid "Developer"
+#, kde-format
 msgid "Developer"
 msgstr "პროგრამისტი"
 
