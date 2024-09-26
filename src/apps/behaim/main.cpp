@@ -45,15 +45,16 @@ int main(int argc, char **argv)
                      QStringLiteral("https://marble.kde.org/"),
                      QStringLiteral("https://bugs.kde.org/describecomponents.cgi?product=marble"));
 
+    about.setDesktopFileName(QStringLiteral("org.kde.marble.behaim"));
     about.setOrganizationDomain("kde.org");
 
     about.addAuthor(i18nc("@info:credit", "Dennis Nienhüser"), i18nc("@info:credit", "Author"), QStringLiteral("nienhueser@kde.org"));
 
     about.setTranslator(i18nc("NAME OF TRANSLATORS", "Your names"), i18nc("EMAIL OF TRANSLATORS", "Your emails"));
 
-    QApplication::setWindowIcon(QIcon::fromTheme(QStringLiteral("org.kde.marble.behaim")));
-
     KAboutData::setApplicationData(about);
+
+    QApplication::setWindowIcon(QIcon::fromTheme(QStringLiteral("org.kde.marble.behaim")));
 
 #ifndef Q_OS_ANDROID
     KCrash::initialize();

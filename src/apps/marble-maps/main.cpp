@@ -43,6 +43,7 @@ int main(int argc, char **argv)
                      KAboutLicense::GPL_V3,
                      i18n("© KDE Community"));
 
+    about.setDesktopFileName(QStringLiteral("org.kde.marble.maps"));
     about.setOrganizationDomain("kde.org");
     about.setBugAddress("https://bugs.kde.org/describecomponents.cgi?product=marble");
 
