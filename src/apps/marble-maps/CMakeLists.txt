@@ -8,12 +8,15 @@ target_link_libraries(marble-maps PUBLIC
     Qt::Widgets
     KF6::CoreAddons
     KF6::I18n
-    KF6::Crash
 )
 
 if(NOT MARBLE_NO_WEBKITWIDGETS)
     target_link_libraries(marble-maps PUBLIC Qt::WebEngineQuick)
     add_definitions(-DMARBLE_WEBKITWIDGETS=1)
+endif()
+
+if (NOT ANDROID)
+    target_link_libraries(marble-maps PUBLIC KF6::Crash)
 endif()
 
 qt_add_qml_module(marble-maps

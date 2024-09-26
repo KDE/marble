@@ -8,8 +8,11 @@ target_link_libraries(marble-behaim PUBLIC
     Qt::Widgets
     KF6::I18n
     KF6::CoreAddons
-    KF6::Crash
 )
+
+if (NOT ANDROID)
+    target_link_libraries(marble-behaim PUBLIC KF6::Crash)
+endif()
 
 if(NOT MARBLE_NO_WEBKITWIDGETS)
     target_link_libraries(marble-behaim PUBLIC Qt::WebEngineQuick)

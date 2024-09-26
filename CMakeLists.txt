@@ -88,7 +88,15 @@ find_package(Qt6 ${QT_MIN_VERSION} REQUIRED
         Core5Compat
 )
 
-find_package(KF6 ${KF_MIN_VERSION} REQUIRED CoreAddons I18n Crash)
+find_package(KF6 ${KF_MIN_VERSION} COMPONENTS CoreAddons I18n)
+if (NOT ANDROID)
+    find_package(KF6 ${KF_MIN_VERSION} COMPONENTS Crash)
+endif()
+
+set_package_properties(KF6 PROPERTIES
+    PURPOSE "Required for building the applications"
+    TYPE RECOMMENDED
+)
 
 qt_policy(SET QTP0001 NEW)
 
