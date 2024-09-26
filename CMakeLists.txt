@@ -71,6 +71,9 @@ else()
     option(BUILD_WITH_DBUS "Build the D-Bus interface for the Marble widget" ON)
 endif()
 
+option(BUILD_MARBLE_APPS "Build the main Marble applications" ON)
+add_feature_info(MarbleApps BUILD_MARBLE_APPS "Build the main Marble applications")
+
 
 find_package(Qt6 ${QT_MIN_VERSION} REQUIRED
     COMPONENTS

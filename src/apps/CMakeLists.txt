@@ -1,4 +1,3 @@
-option(BUILD_MARBLE_APPS "Build the main Marble applications" ON)
 if(BUILD_MARBLE_APPS)
     if (NOT ANDROID)
         add_subdirectory(marble-ui)
