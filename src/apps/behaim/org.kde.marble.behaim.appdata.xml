@@ -105,9 +105,17 @@
   <url type="faq">https://techbase.kde.org/Projects/Marble/FAQ</url>
   <url type="help">https://marble.kde.org/support.php</url>
   <url type="donation">https://www.kde.org/community/donations/?app=marble&amp;source=appdata</url>
-  <project_group>KDE</project_group>
+  <launchable type="desktop-id">org.kde.marble.behaim.desktop</launchable>
+  <keywords>
+    <keyword>Maps</keyword>
+    <keyword>Kirigami</keyword>
+  </keywords>
+  <developer id="kde.org">
+    <name>The KDE Community</name>
+    <url>https://kde.org</url>
+  </developer>
   <provides>
-    <binary>MarbleBehaim</binary>
+    <binary>marble-behaim</binary>
   </provides>
   <content_rating type="oars-1.1"/>
   <releases>
@@ -121,4 +129,20 @@
     <release version="24.02.0" date="2024-02-28"/>
     <release version="23.08.5" date="2024-02-15"/>
   </releases>
+  <screenshots>
+    <screenshot type="default">
+      <image>https://cdn.kde.org/screenshots/marble/marble-behaim.png</image>
+      <caption>Digital imagery taken directly from the original Behaim globe.</caption>
+    </screenshot>
+    <screenshot>
+      <image>https://cdn.kde.org/screenshots/marble/marble-behaim1.png</image>
+      <caption>A (rough) facsimile created by Friedrich Wilhelm Ghillany in 1853.</caption>
+    </screenshot>
+    </screenshot>
+    <screenshot>
+      <image>https://cdn.kde.org/screenshots/marble/marble-behaim2.png</image>
+      <caption>A (rough) facsimile created by Ernest George Ravenstein in 1908.</caption>
+    </screenshot>
+    </screenshot>
+  </screenshots>
 </component>
