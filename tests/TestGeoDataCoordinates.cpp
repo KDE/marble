@@ -68,9 +68,6 @@ private Q_SLOTS:
 void TestGeoDataCoordinates::initTestCase()
 {
     QLocale::setDefault(QLocale::c()); // needed for testing toString* conversions
-
-    QTime time = QTime::currentTime();
-    QRandomGenerator::global()->seed((uint)time.msec());
 }
 
 /*

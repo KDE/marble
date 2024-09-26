@@ -278,7 +278,7 @@ void GeoDataDocument::unpack(QDataStream &stream)
 
     stream >> size;
     for (int i = 0; i < size; i++) {
-        GeoDataStyle::Ptr style;
+        GeoDataStyle::Ptr style(new GeoDataStyle);
         style->unpack(stream);
         d->m_styleHash.insert(style->id(), style);
     }

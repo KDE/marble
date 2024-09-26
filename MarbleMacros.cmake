@@ -73,22 +73,15 @@ else( WIN32 )
 endif( WIN32 )
 
 macro( marble_add_test TEST_NAME )
-    if( BUILD_MARBLE_TESTS )
-        set( ${TEST_NAME}_SRCS ${TEST_NAME}.cpp ${ARGN} )
-        qt_generate_moc( ${TEST_NAME}.cpp ${CMAKE_CURRENT_BINARY_DIR}/${TEST_NAME}.moc )
-        include_directories( ${CMAKE_CURRENT_BINARY_DIR} )
-        set( ${TEST_NAME}_SRCS ${CMAKE_CURRENT_BINARY_DIR}/${TEST_NAME}.moc ${${TEST_NAME}_SRCS} )
-
-        add_executable( ${TEST_NAME} ${${TEST_NAME}_SRCS} )
-        target_link_libraries(${TEST_NAME}
+    ecm_add_test(${TEST_NAME}.cpp ${ARGN}
+        LINK_LIBRARIES
             marblewidget
             Qt6::Test
-        )
-
-        set_target_properties( ${TEST_NAME} PROPERTIES
-                               COMPILE_FLAGS "-DDATA_PATH=\"\\\"${DATA_PATH}\\\"\" -DPLUGIN_PATH=\"\\\"${PLUGIN_PATH}\\\"\"" )
-        add_test( ${TEST_NAME} ${TEST_NAME} )
-    endif( BUILD_MARBLE_TESTS )
+        TEST_NAME
+            ${TEST_NAME}
+    )
+    set_target_properties(${TEST_NAME} PROPERTIES
+       COMPILE_FLAGS "-DDATA_PATH=\"\\\"${DATA_PATH}\\\"\" -DPLUGIN_PATH=\"\\\"${PLUGIN_PATH}\\\"\"" )
 endmacro( marble_add_test TEST_NAME )
 
 macro( marble_add_project_resources resources )

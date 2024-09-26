@@ -60,7 +60,7 @@ GeoDataStyleMap &GeoDataStyleMap::operator=(const GeoDataStyleMap &other)
 
 bool GeoDataStyleMap::operator==(const GeoDataStyleMap &other) const
 {
-    if (GeoDataStyleSelector::operator!=(other) || *this != other) {
+    if (GeoDataStyleSelector::operator!=(other)) {
         return false;
     }
 

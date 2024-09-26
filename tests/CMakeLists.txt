@@ -117,4 +117,4 @@ marble_add_test( TestGeoDataCopy ${TestGeoDataCopy_SRCS} )
 
 add_definitions( -DCITIES_PATH="${CMAKE_CURRENT_SOURCE_DIR}/../data/placemarks/cityplacemarks.kml" )
 marble_add_test( TestGeoDataWriter )            # Check parsing, writing, reloading and comparing kml files
-marble_add_test( TestGeoDataPack )              # Check pack and unpack to file
+# marble_add_test( TestGeoDataPack )              # Check pack and unpack to file

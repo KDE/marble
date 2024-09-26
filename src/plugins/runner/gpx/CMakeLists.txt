@@ -55,7 +55,7 @@ set( gpx_SRCS GpxParser.cpp GpxPlugin.cpp GpxRunner.cpp GpxPlugin.h GpxRunner.h)
 
 marble_add_plugin( GpxPlugin ${gpx_SRCS}  ${gpx_handlers_SRCS} )
 
-if( BUILD_MARBLE_TESTS )
+if(BUILD_TESTING)
     include_directories( ${CMAKE_CURRENT_SOURCE_DIR}/tests )
     set( TestTrack_SRCS tests/TestTrack.cpp GpxParser.cpp ${gpx_handlers_SRCS} )
     qt_generate_moc( tests/TestTrack.cpp ${CMAKE_CURRENT_BINARY_DIR}/TestTrack.moc )
@@ -67,7 +67,7 @@ if( BUILD_MARBLE_TESTS )
     set_target_properties( TestTrack PROPERTIES
                             COMPILE_FLAGS "-DDATA_PATH=\"\\\"${DATA_PATH}\\\"\" -DPLUGIN_PATH=\"\\\"${PLUGIN_PATH}\\\"\"" )
 		    add_test( NAME TestTrack COMMAND TestTrack )
-endif( BUILD_MARBLE_TESTS )
+endif(BUILD_TESTING)
 
 macro_optional_find_package(KF6 ${REQUIRED_KF6_MIN_VERSION} QUIET COMPONENTS KIO)
 if(NOT KF6_FOUND)
