@@ -3,7 +3,13 @@
 
 add_executable(marble-behaim main.cpp)
 
-target_link_libraries(marble-behaim PUBLIC Qt::Quick Qt::Widgets)
+target_link_libraries(marble-behaim PUBLIC
+    Qt::Quick
+    Qt::Widgets
+    KF6::I18n
+    KF6::CoreAddons
+    KF6::Crash
+)
 
 if(NOT MARBLE_NO_WEBKITWIDGETS)
     target_link_libraries(marble-behaim PUBLIC Qt::WebEngineQuick)
@@ -14,9 +20,13 @@ qt_add_qml_module(marble-behaim
     URI org.kde.marble.behaim
     QML_FILES
         MainScreen.qml
-        Legend.qml
+        About.qml
     DEPENDENCIES
         org.kde.marble
 )
 
 install(TARGETS marble-behaim ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
+
+install(FILES org.kde.marble.behaim.desktop DESTINATION ${KDE_INSTALL_APPDIR})
+install(FILES org.kde.marble.behaim.appdata.xml DESTINATION ${KDE_INSTALL_METAINFODIR})
+install(FILES org.kde.marble.behaim.svg DESTINATION ${KDE_INSTALL_FULL_ICONDIR}/hicolor/scalable/apps)

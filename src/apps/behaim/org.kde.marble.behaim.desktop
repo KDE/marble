@@ -31,4 +31,4 @@ Name[x-test]=xxMarble Behaimxx
 Name[zh_CN]=Marble 贝海姆地球仪
 Name[zh_TW]=Marble 倍海姆
 Exec=marble-Behaim
-Icon=marble
+Icon=org.kde.marble.behaim
