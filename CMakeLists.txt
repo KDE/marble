@@ -97,7 +97,7 @@ endif()
 
 find_package(KF6 ${KF_MIN_VERSION} COMPONENTS CoreAddons I18n)
 if (NOT ANDROID)
-    find_package(KF6 ${KF_MIN_VERSION} COMPONENTS Crash)
+    find_package(KF6 ${KF_MIN_VERSION} COMPONENTS Crash Parts)
 endif()
 
 set_package_properties(KF6 PROPERTIES

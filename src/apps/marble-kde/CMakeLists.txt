@@ -1,9 +1,3 @@
-macro_optional_find_package(KF6 ${REQUIRED_KF6_MIN_VERSION} QUIET COMPONENTS Crash Parts CoreAddons I18n)
-
-if(NOT KF6_FOUND)
-    return()
-endif()
-
 set(marble_kde_SRCS 
   kdemain.cpp 
   KdeMainWindow.cpp 

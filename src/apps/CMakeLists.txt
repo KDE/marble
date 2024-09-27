@@ -1,8 +1,11 @@
 if(BUILD_MARBLE_APPS)
     if (NOT ANDROID)
         add_subdirectory(marble-ui)
-        add_subdirectory(marble-qt)
-        add_subdirectory(marble-kde)
+        if (TARGET KF6::Parts)
+            add_subdirectory(marble-kde)
+        else()
+            add_subdirectory(marble-qt)
+        endif()
     endif()
 
     add_subdirectory(behaim)
