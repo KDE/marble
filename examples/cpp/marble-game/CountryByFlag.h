@@ -16,7 +16,7 @@ class MarbleWidget;
 
 class CountryByFlag : public QObject
 {
-    Q_OBJECT;
+    Q_OBJECT
 
 public:
     explicit CountryByFlag(MarbleWidget *marbleWidget);
