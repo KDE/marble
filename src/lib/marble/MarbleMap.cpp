@@ -765,12 +765,14 @@ void MarbleMapPrivate::setDocument(const QString &key)
 
     GeoDataDocument *doc = m_model->fileManager()->at(key);
 
-    for (const GeoSceneLayer *layer : m_model->mapTheme()->map()->layers()) {
+    const auto layers = m_model->mapTheme()->map()->layers();
+    for (const GeoSceneLayer *layer : layers) {
         if (layer->backend() != dgml::dgmlValue_geodata && layer->backend() != dgml::dgmlValue_vector)
             continue;
 
         // look for documents
-        for (const GeoSceneAbstractDataset *dataset : layer->datasets()) {
+        const auto datasets = layer->datasets();
+        for (const GeoSceneAbstractDataset *dataset : datasets) {
             const GeoSceneGeodata *data = static_cast<const GeoSceneGeodata *>(dataset);
             QString containername = data->sourceFile();
             QString colorize = data->colorize();
@@ -892,7 +894,8 @@ void MarbleMapPrivate::updateMapTheme()
 
         for (GeoSceneLayer *layer : m_model->mapTheme()->map()->layers()) {
             if (layer->backend() == dgml::dgmlValue_texture) {
-                for (const GeoSceneAbstractDataset *pos : layer->datasets()) {
+                const auto datasets = layer->datasets();
+                for (const GeoSceneAbstractDataset *pos : datasets) {
                     const GeoSceneTextureTileDataset *const texture = dynamic_cast<GeoSceneTextureTileDataset const *>(pos);
                     if (!texture)
                         continue;
@@ -930,7 +933,8 @@ void MarbleMapPrivate::updateMapTheme()
                     }
                 }
             } else if (layer->backend() == dgml::dgmlValue_vectortile) {
-                for (const GeoSceneAbstractDataset *pos : layer->datasets()) {
+                const auto datasets = layer->datasets();
+                for (const GeoSceneAbstractDataset *pos : datasets) {
                     const GeoSceneVectorTileDataset *const vectorTile = dynamic_cast<GeoSceneVectorTileDataset const *>(pos);
                     if (!vectorTile)
                         continue;
@@ -1073,7 +1077,8 @@ void MarbleMap::setShowCompass(bool visible)
 
 void MarbleMap::setShowAtmosphere(bool visible)
 {
-    for (RenderPlugin *plugin : renderPlugins()) {
+    const auto plugins = renderPlugins();
+    for (RenderPlugin *plugin : plugins) {
         if (plugin->nameId() == QLatin1String("atmosphere")) {
             plugin->setVisible(visible);
         }
@@ -1360,7 +1365,8 @@ QList<AbstractFloatItem *> MarbleMap::floatItems() const
 
 AbstractFloatItem *MarbleMap::floatItem(const QString &nameId) const
 {
-    for (AbstractFloatItem *floatItem : floatItems()) {
+    const auto items = floatItems();
+    for (AbstractFloatItem *floatItem : items) {
         if (floatItem && floatItem->nameId() == nameId) {
             return floatItem;
         }
