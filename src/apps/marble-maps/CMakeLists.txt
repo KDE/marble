@@ -3,11 +3,14 @@
 
 add_executable(marble-maps main.cpp MarbleMaps.cpp TextToSpeechClient.cpp MarbleMaps.h TextToSpeechClient.h)
 
+kconfig_add_kcfg_files(marble-maps GENERATE_MOC config.kcfgc)
+
 target_link_libraries(marble-maps PUBLIC
     Qt::Quick
     Qt::Widgets
     KF6::CoreAddons
     KF6::I18n
+    KF6::ConfigGui
 )
 
 if(NOT MARBLE_NO_WEBKITWIDGETS)
@@ -44,6 +47,7 @@ qt_add_qml_module(marble-maps
         Options.qml
         Bookmarks.qml
         MarbleScrollBar.qml
+        ThemeConfigPage.qml
     RESOURCES
         images/directions.svg
         images/transport-mode-bus.svg

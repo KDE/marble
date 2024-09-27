@@ -21,23 +21,17 @@ MapThemeModel::MapThemeModel(QObject *parent)
 {
     setSourceModel(m_themeManager->mapThemeModel());
     handleChangedThemes();
-    connect(m_themeManager, SIGNAL(themesChanged()), this, SLOT(handleChangedThemes()));
-
-    QHash<int, QByteArray> roleNames;
-    roleNames[Qt::DisplayRole] = "display";
-    roleNames[Qt::DecorationRole] = "icon";
-    roleNames[Qt::UserRole + 1] = "mapThemeId";
-    m_roleNames = roleNames;
-}
-
-int MapThemeModel::count() const
-{
-    return rowCount();
+    connect(m_themeManager, &Marble::MapThemeManager::themesChanged, this, &MapThemeModel::handleChangedThemes);
 }
 
 QHash<int, QByteArray> MapThemeModel::roleNames() const
 {
-    return m_roleNames;
+    return {
+        {Qt::DisplayRole, "themeName"},
+        {Qt::DecorationRole, "iconName"},
+        {Qt::UserRole + 1, "mapThemeId"},
+        {Qt::UserRole + 2, "description"},
+    };
 }
 
 QString MapThemeModel::name(const QString &id) const

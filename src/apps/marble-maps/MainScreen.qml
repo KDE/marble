@@ -10,7 +10,8 @@ import QtQuick.Controls
 import QtQuick.Window
 import QtQuick.Layouts
 
-import org.kde.marble
+import org.kde.marble as Marble
+import org.kde.marble.maps
 import org.kde.kirigami as Kirigami
 import org.kde.kirigamiaddons.delegates as Delegates
 import org.kde.kirigamiaddons.components as Components
@@ -34,7 +35,7 @@ Kirigami.ApplicationWindow {
         }
     }
 
-    Settings {
+    Marble.Settings {
         id: settings
     }
 
@@ -72,7 +73,7 @@ Kirigami.ApplicationWindow {
 
         isMenu: true
 
-        Settings {
+        Marble.Settings {
             id: sidePanelSettings
             property bool showUpdateInfo: Number(value("MarbleMaps", "updateInfoVersion", "0")) < 1
             Component.onDestruction: {
@@ -150,6 +151,17 @@ Kirigami.ApplicationWindow {
                         marbleMaps: marbleMaps
                     })
                 }
+            },
+            Kirigami.Action {
+                text: i18nc("@action:button", "Theme Options")
+                icon.name: 'settings-configure-symbolic'
+                onTriggered: {
+                    app.state = "options"
+                    sidePanel.close()
+                    app.pageStack.layers.push(Qt.createComponent("org.kde.marble.maps", "ThemeConfigPage"), {
+                        marbleMaps: marbleMaps
+                    })
+                }
             }/*,
             Kirigami.Action {
                 text: i18n("Routing")
@@ -202,7 +214,7 @@ Kirigami.ApplicationWindow {
             }
         }
 
-        SearchBackend {
+        Marble.SearchBackend {
             id: backend
 
             marbleQuickItem: marbleMaps
@@ -273,7 +285,7 @@ Kirigami.ApplicationWindow {
                     keepScreenOn: !suspended && navigationManager.guidanceModeEnabled
                 }
 
-                MarbleItem {
+                Marble.MarbleItem {
                     id: marbleMaps
 
                     property string currentPositionProvider: "QtPositioning"
@@ -284,8 +296,8 @@ Kirigami.ApplicationWindow {
                     visible: true
 
                     // Theme settings.
-                    projection: smallZoom ? MarbleItem.Spherical : MarbleItem.Mercator
-                    mapThemeId: settings.value("MarbleMaps", "mapThemeId", "earth/vectorosm/vectorosm.dgml")
+                    projection: smallZoom ? Marble.MarbleItem.Spherical : Marble.MarbleItem.Mercator
+                    mapThemeId: Config.mapThemeId
 
                     // Visibility of layers/plugins.
                     showFrameRate: false
@@ -637,7 +649,7 @@ Kirigami.ApplicationWindow {
         }*/
     }
 
-    Bookmarks {
+    Marble.Bookmarks {
         id: bookmarks
         map: marbleMaps
     }

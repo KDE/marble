@@ -23,6 +23,8 @@
 #include <QtWebEngineQuick>
 #endif
 
+#include "config.h"
+
 using namespace Marble;
 
 #ifdef Q_OS_ANDROID
