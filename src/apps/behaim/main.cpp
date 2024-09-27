@@ -14,7 +14,7 @@
 
 #include <marble_version.h>
 
-#if !MARBLE_WEBKITWIDGETS
+#ifdef MARBLE_WEBKITWIDGETS
 #include <QtWebEngineQuick>
 #endif
 
@@ -23,7 +23,7 @@ Q_DECL_EXPORT
 #endif
 int main(int argc, char **argv)
 {
-#if !MARBLE_WEBKITWIDGETS
+#ifdef MARBLE_WEBKITWIDGETS
     QtWebEngineQuick::initialize();
 #endif
     QApplication app(argc, argv);
