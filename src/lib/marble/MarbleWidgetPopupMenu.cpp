@@ -573,8 +573,9 @@ void MarbleWidgetPopupMenu::showLmbMenu(int xpos, int ypos)
         d->m_infoDialogAction->setIcon(icon);
         // Insert as first action in the menu
         QAction *firstAction = nullptr;
-        if (!d->m_lmbMenu.actions().isEmpty()) {
-            firstAction = d->m_lmbMenu.actions().first();
+        const auto actions = d->m_lmbMenu.actions();
+        if (!actions.isEmpty()) {
+            firstAction = actions.first();
         }
         d->m_lmbMenu.insertAction(firstAction, d->m_infoDialogAction);
         actionidx++;
@@ -593,10 +594,12 @@ void MarbleWidgetPopupMenu::showLmbMenu(int xpos, int ypos)
     case 0: // nothing to do, ignore
         break;
 
-    case 1: // one action? perform immediately
-        d->m_lmbMenu.actions().first()->activate(QAction::Trigger);
+    case 1: { // one action? perform immediately
+        const auto actions = d->m_lmbMenu.actions();
+        actions.first()->activate(QAction::Trigger);
         d->m_lmbMenu.clear();
         break;
+    }
 
     default:
         d->m_lmbMenu.popup(d->m_widget->mapToGlobal(curpos));
