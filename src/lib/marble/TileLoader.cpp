@@ -35,7 +35,7 @@ TileLoader::TileLoader(HttpDownloadManager *const downloadManager, const PluginM
     : m_pluginManager(pluginManager)
 {
     qRegisterMetaType<DownloadUsage>("DownloadUsage");
-    connect(this, SIGNAL(downloadTile(QUrl, QString, QString, DownloadUsage)), downloadManager, SLOT(addJob(QUrl, QString, QString, DownloadUsage)));
+    connect(this, &TileLoader::tileRequested, downloadManager, &HttpDownloadManager::addJob);
     connect(downloadManager, SIGNAL(downloadComplete(QString, QString)), SLOT(updateTile(QString, QString)));
     connect(downloadManager, SIGNAL(downloadComplete(QByteArray, QString)), SLOT(updateTile(QByteArray, QString)));
 }
@@ -255,7 +255,7 @@ void TileLoader::triggerDownload(GeoSceneTileDataset const *tileData, TileId con
     QUrl const sourceUrl = tileData->downloadUrl(id);
     QString const destFileName = tileData->relativeTileFileName(id);
     QString const idStr = QStringLiteral("%1:%2:%3:%4:%5").arg(tileData->nodeType(), tileData->sourceDir()).arg(id.zoomLevel()).arg(id.x()).arg(id.y());
-    emit downloadTile(sourceUrl, destFileName, idStr, usage);
+    Q_EMIT tileRequested(sourceUrl, destFileName, idStr, usage);
 }
 
 QImage TileLoader::scaledLowerLevelTile(const GeoSceneTextureTileDataset *textureData, TileId const &id)

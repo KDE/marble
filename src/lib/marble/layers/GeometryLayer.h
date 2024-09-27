@@ -89,7 +89,7 @@ Q_SIGNALS:
     void highlightedPlacemarksChanged(const QVector<GeoDataPlacemark *> &clickedPlacemarks);
 
 private:
-    GeometryLayerPrivate *d;
+    std::unique_ptr<GeometryLayerPrivate> d;
 };
 
 } // namespace Marble

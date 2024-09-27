@@ -60,7 +60,7 @@ private Q_SLOTS:
     void updateTile(QString const &fileName, QString const &idStr);
 
 Q_SIGNALS:
-    void downloadTile(QUrl const &sourceUrl, QString const &destinationFileName, QString const &id, DownloadUsage);
+    void tileRequested(QUrl const &sourceUrl, QString const &destinationFileName, QString const &id, DownloadUsage);
 
     void tileCompleted(TileId const &tileId, QImage const &tileImage);
 

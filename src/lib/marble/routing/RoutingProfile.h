@@ -18,11 +18,17 @@ namespace Marble
 
 class MARBLE_EXPORT RoutingProfile
 {
+    Q_GADGET
     Q_PROPERTY(QString name READ name WRITE setName)
     Q_PROPERTY(TransportType transportType READ transportType WRITE setTransportType)
 
 public:
-    enum TransportType { Motorcar, Bicycle, Pedestrian };
+    enum TransportType {
+        Motorcar,
+        Bicycle,
+        Pedestrian,
+    };
+    Q_ENUM(TransportType);
 
     explicit RoutingProfile(const QString &name = QString());
 

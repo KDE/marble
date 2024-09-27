@@ -129,7 +129,8 @@ QList<GeoGraphicsItem *> GeoGraphicsScene::items(const GeoDataLatLonBox &box, in
             for (int y = y1; y <= y2; ++y) {
                 bool const isBorder = isBorderX || y == y1 || y == y2;
                 const TileId tileId = TileId(0, level, x, y);
-                for (GeoGraphicsItem *object : d->m_tiledItems.value(tileId)) {
+                const auto objects = d->m_tiledItems.value(tileId);
+                for (GeoGraphicsItem *object : objects) {
                     if (object->minZoomLevel() <= zoomLevel && object->visible()) {
                         if (!isBorder || object->latLonAltBox().intersects(box)) {
                             result.push_back(object);
@@ -204,7 +205,8 @@ void GeoGraphicsScene::applyHighlight(const QVector<GeoDataPlacemark *> &selecte
                                  * highlight styleId
                                  */
                                 else {
-                                    for (const GeoDataStyleMap &styleMap : doc->styleMaps()) {
+                                    const auto styleMaps = doc->styleMaps();
+                                    for (const GeoDataStyleMap &styleMap : styleMaps) {
                                         GeoDataStyle::Ptr style = d->highlightStyle(doc, styleMap);
                                         if (style) {
                                             d->selectItem(item);
@@ -241,7 +243,8 @@ void GeoGraphicsScene::removeItem(const GeoDataFeature *feature)
 
 void GeoGraphicsScene::clear()
 {
-    for (auto const &list : d->m_tiledItems.values()) {
+    const auto lists = d->m_tiledItems.values();
+    for (auto const &list : lists) {
         qDeleteAll(list.values());
     }
     d->m_tiledItems.clear();

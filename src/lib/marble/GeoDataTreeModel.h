@@ -77,23 +77,23 @@ public Q_SLOTS:
      */
     void setRootDocument(GeoDataDocument *document);
 
-    int addFeature(GeoDataContainer *parent, GeoDataFeature *feature, int row = -1);
+    Q_INVOKABLE int addFeature(GeoDataContainer *parent, GeoDataFeature *feature, int row = -1);
 
-    bool removeFeature(GeoDataContainer *parent, int index);
+    Q_INVOKABLE bool removeFeature(Marble::GeoDataContainer *parent, int index);
 
-    int removeFeature(GeoDataFeature *feature);
+    Q_INVOKABLE int removeFeature(GeoDataFeature *feature);
 
     void updateFeature(GeoDataFeature *feature);
 
-    int addDocument(GeoDataDocument *document);
+    Q_INVOKABLE int addDocument(GeoDataDocument *document);
 
     void removeDocument(int index);
 
     void removeDocument(GeoDataDocument *document);
 
-    int addTourPrimitive(const QModelIndex &parent, GeoDataTourPrimitive *primitive, int row = -1);
-    bool removeTourPrimitive(const QModelIndex &parent, int index);
-    bool swapTourPrimitives(const QModelIndex &parent, int indexA, int indexB);
+    Q_INVOKABLE int addTourPrimitive(const QModelIndex &parent, GeoDataTourPrimitive *primitive, int row = -1);
+    Q_INVOKABLE bool removeTourPrimitive(const QModelIndex &parent, int index);
+    Q_INVOKABLE bool swapTourPrimitives(const QModelIndex &parent, int indexA, int indexB);
 
 Q_SIGNALS:
     /// insert and remove row don't trigger any signal that proxies forward
