@@ -1,11 +1,8 @@
-macro_optional_find_package(KF6 ${REQUIRED_KF6_MIN_VERSION} QUIET COMPONENTS Plasma)
+macro_optional_find_package(Plasma "6.0.0" QUIET)
 
-if (NOT KF6_FOUND)
+if (NOT Plasma_FOUND)
   return()
 endif()
-
-
-add_subdirectory(qmlplugin)
 
 add_subdirectory(applets)
 add_subdirectory(wallpapers)

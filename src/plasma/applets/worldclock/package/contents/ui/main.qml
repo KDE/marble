@@ -3,42 +3,44 @@
     SPDX-License-Identifier: LGPL-2.1-or-later
 */
 
-import QtQuick 2.1
-import QtQuick.Layouts 1.1
+import QtQuick
+import QtQuick.Layouts
 
-import org.kde.plasma.plasmoid 2.0
-import org.kde.plasma.core 2.0 as PlasmaCore
-import org.kde.plasma.components 2.0 as PlasmaComponents
-import org.kde.plasma.extras 2.0 as PlasmaExtras
+import org.kde.plasma.plasmoid
+import org.kde.plasma.core as PlasmaCore
+import org.kde.plasma.components as PlasmaComponents
+import org.kde.plasma.extras as PlasmaExtras
+import org.kde.plasma.plasma5support as P5Support
 
-import org.kde.marble.private.plasma 0.20
+import org.kde.marble
 
-Item {
+PlasmoidItem {
     id: root
 
     readonly property date currentDateTime: timeDataSource.data.Local ? timeDataSource.data.Local.DateTime : new Date()
 
-    PlasmaCore.DataSource {
+    P5Support.DataSource {
         id: timeDataSource
         engine: "time"
         connectedSources: ["Local"]
         interval: 60000
         intervalAlignment: PlasmaCore.Types.AlignToMinute
     }
-    PlasmaCore.DataSource {
+
+    P5Support.DataSource {
         id: geolocationDataSource
         engine: "geolocation"
         connectedSources: (marbleItem.centerMode === 2) ? ["location"] : []
         interval: 10 * 60 * 1000 // every 30 minutes, might be still too large for users on the ISS :P
     }
 
-    Plasmoid.preferredRepresentation: Plasmoid.fullRepresentation
+    preferredRepresentation: fullRepresentation
 
-    Plasmoid.fullRepresentation: MarbleItem {
+    fullRepresentation: MarbleItem {
         id: marbleItem
 
-        readonly property int centerMode: plasmoid.configuration.centerMode
-        readonly property double fixedLongitude: plasmoid.configuration.fixedLongitude
+        readonly property int centerMode: Plasmoid.configuration.centerMode
+        readonly property double fixedLongitude: Plasmoid.configuration.fixedLongitude
         readonly property double locationLongitude: geolocationDataSource.data.longitude || 0
 
         enabled: false // do not handle input
@@ -61,7 +63,7 @@ Item {
         }
 
         // Theme settings.
-        projection: (plasmoid.configuration.projection === 0) ? MarbleItem.Equirectangular : MarbleItem.Mercator
+        projection: (Plasmoid.configuration.projection === 0) ? MarbleItem.Equirectangular : MarbleItem.Mercator
         mapThemeId: "earth/bluemarble/bluemarble.dgml"
 
         // Visibility of layers/plugins.
@@ -122,7 +124,7 @@ Item {
                 Layout.alignment: Qt.AlignHCenter
 
                 level: 1
-                text: plasmoid.configuration.showDate ? Qt.formatDateTime(currentDateTime) : Qt.formatTime(currentDateTime)
+                text: Plasmoid.configuration.showDate ? Qt.formatDateTime(currentDateTime) : Qt.formatTime(currentDateTime)
 
                 verticalAlignment: Text.AlignVCenter
                 horizontalAlignment: Text.AlignHCenter

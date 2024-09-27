@@ -3,35 +3,27 @@
     SPDX-License-Identifier: LGPL-2.1-or-later
 */
 
-import QtQuick 2.1
-import QtQuick.Controls 1.0 as QtControls
-import QtQuick.Layouts 1.0
+import QtQuick
+import QtQuick.Controls as Controls
+import QtQuick.Layouts
+import org.kde.kirigami as Kirigami
+import org.kde.kcmutils as KCM
+import org.kde.kirigamiaddons.formcard as FormCard
+import org.kde.plasma.plasmoid
 
-ColumnLayout {
+KCM.SimpleKCM {
     id: mapDisplayPage
 
-    property int cfg_projection: plasmoid.configuration.projection // Enum needs manual set/get for now
-    property int cfg_centerMode: plasmoid.configuration.centerMode // Enum needs manual set/get for now
-    property alias cfg_fixedLongitude: longitudeSpinBox.value
+    property int cfg_projection: Plasmoid.configuration.projection // Enum needs manual set/get for now
+    property int cfg_centerMode: Plasmoid.configuration.centerMode // Enum needs manual set/get for now
+    property alias cfg_fixedLongitude: longitudeSpinBox.realValue
     property alias cfg_showDate: showDateCheckBox.checked
 
-    GridLayout {
-        columns: 2
+    FormCard.FormCard {
+        Layout.topMargin: Kirigami.Units.largeSpacing
 
-        QtControls.Label {
-            Layout.row: 0
-            Layout.column: 0
-            Layout.alignment: Qt.AlignRight
-            anchors {
-                verticalCenter: projectionComboBox.verticalCenter
-            }
+        FormCard.FormComboBoxDelegate {
             text: i18n("Projection:")
-        }
-
-        QtControls.ComboBox {
-            id: projectionComboBox
-            Layout.row: 0
-            Layout.column: 1
             model: [
                 i18n("Equirectangular"),
                 i18n("Mercator")
@@ -40,24 +32,14 @@ ColumnLayout {
                 cfg_projection = currentIndex;
             }
             Component.onCompleted: {
-                currentIndex = plasmoid.configuration.projection;
+                currentIndex = Plasmoid.configuration.projection;
             }
         }
 
-        QtControls.Label {
-            Layout.row: 1
-            Layout.column: 0
-            Layout.alignment: Qt.AlignRight
-            anchors {
-                verticalCenter: centerModeComboBox.verticalCenter
-            }
+        FormCard.FormDelegateSeparator {}
+
+        FormCard.FormComboBoxDelegate {
             text: i18n("Center on:")
-        }
-
-        QtControls.ComboBox {
-            id: centerModeComboBox
-            Layout.row: 1
-            Layout.column: 1
             model: [
                 i18n("Daylight"),
                 i18n("Longitude"),
@@ -67,46 +49,50 @@ ColumnLayout {
                 cfg_centerMode = currentIndex;
             }
             Component.onCompleted: {
-                currentIndex = plasmoid.configuration.centerMode;
+                currentIndex = Plasmoid.configuration.centerMode;
             }
         }
 
-        QtControls.Label {
-            Layout.row: 3
-            Layout.column: 0
-            Layout.alignment: Qt.AlignRight
-            anchors {
-                verticalCenter: longitudeSpinBox.verticalCenter
-            }
-            enabled: (cfg_centerMode === 1)
-            text: i18n("Longitude:")
-        }
+        FormCard.FormDelegateSeparator {}
 
-        QtControls.SpinBox {
-            Layout.row: 3
-            Layout.column: 1
-            enabled: (cfg_centerMode === 1)
+        FormCard.FormSpinBoxDelegate {
             id: longitudeSpinBox
-            maximumValue: 180.0
-            minimumValue: -180.0
-            decimals: 5
+
+            enabled: (cfg_centerMode === 1)
+            label: i18n("Longitude:")
+            to: decimalToInt(180.0)
+            from: decimalToInt(-180.0)
+            stepSize: decimalFactor
+
+            validator: DoubleValidator {
+                bottom: Math.min(longitudeSpinBox.from, longitudeSpinBox.to)
+                top:  Math.max(longitudeSpinBox.from, longitudeSpinBox.to)
+                decimals: longitudeSpinBox.decimals
+                notation: DoubleValidator.StandardNotation
+            }
+
+            textFromValue: function(value, locale) {
+                return Number(value / decimalFactor).toLocaleString(locale, 'f', longitudeSpinBox.decimals)
+            }
+
+            valueFromText: function(text, locale) {
+                return Math.round(Number.fromLocaleString(locale, text) * decimalFactor)
+            }
+
+            property real realValue: value / decimalFactor
+            property int decimals: 5
+            readonly property int decimalFactor: Math.pow(10, decimals)
+
+            function decimalToInt(decimal) {
+                return decimal * decimalFactor
+            }
         }
 
-        QtControls.Label {
-            Layout.row: 4
-            Layout.column: 0
-            Layout.alignment: Qt.AlignRight
+        FormCard.FormDelegateSeparator {}
+
+        FormCard.FormCheckDelegate {
+            id: showDateCheckBox
             text: i18n("Show date:")
         }
-
-        QtControls.CheckBox {
-            Layout.row: 4
-            Layout.column: 1
-            id: showDateCheckBox
-        }
-    }
-
-    Item { // tighten layout
-        Layout.fillHeight: true
     }
 }

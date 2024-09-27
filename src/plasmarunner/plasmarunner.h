@@ -12,23 +12,19 @@ namespace Marble
 {
 class GeoDataFolder;
 
-class PlasmaRunner : public Plasma::AbstractRunner
+class PlasmaRunner : public KRunner::AbstractRunner
 {
     Q_OBJECT
 
 public:
-#if KRUNNER_VERSION >= QT_VERSION_CHECK(5, 77, 0)
-    PlasmaRunner(QObject *parent, const KPluginMetaData &pluginMetaData, const QVariantList &args);
-#else
-    PlasmaRunner(QObject *parent, const QVariantList &args);
-#endif
+    PlasmaRunner(QObject *parent, const KPluginMetaData &pluginMetaData);
 
 public: // Plasma::AbstractRunner API
-    void match(Plasma::RunnerContext &context) override;
-    void run(const Plasma::RunnerContext &context, const Plasma::QueryMatch &match) override;
+    void match(KRunner::RunnerContext &context) override;
+    void run(const KRunner::RunnerContext &context, const KRunner::QueryMatch &match) override;
 
 private:
-    void collectMatches(QList<Plasma::QueryMatch> &matches, const QString &query, const GeoDataFolder *folder);
+    void collectMatches(QList<KRunner::QueryMatch> &matches, const QString &query, const GeoDataFolder *folder);
 };
 
 }
