@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: marble_qt\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-25 00:36+0000\n"
+"POT-Creation-Date: 2024-09-27 00:37+0000\n"
 "PO-Revision-Date: 2023-11-10 16:31+0100\n"
 "Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
@@ -59,19 +59,19 @@ msgstr "Upravit mapy"
 msgid "© KDE Community"
 msgstr ""
 
-#: main.cpp:49
+#: main.cpp:50
 #, kde-format
 msgid "Carl Schwan"
 msgstr ""
 
-#: main.cpp:50
+#: main.cpp:51
 #, fuzzy, kde-format
 #| msgctxt "PluginAuthor|"
 #| msgid "Developer"
 msgid "Developer"
 msgstr "Vývojář"
 
-#: main.cpp:55
+#: main.cpp:56
 #, fuzzy, kde-format
 #| msgctxt "Marble::YoursPlugin|"
 #| msgid "Yours"
@@ -79,7 +79,7 @@ msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
 msgstr "Vaše"
 
-#: main.cpp:55
+#: main.cpp:56
 #, fuzzy, kde-format
 #| msgctxt "ExternalEditor|"
 #| msgid "Editor Details"

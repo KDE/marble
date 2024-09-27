@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-25 00:36+0000\n"
+"POT-Creation-Date: 2024-09-27 00:37+0000\n"
 "PO-Revision-Date: 2020-09-29 22:35+0100\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian\n"
@@ -58,25 +58,25 @@ msgstr "&Editare"
 msgid "© KDE Community"
 msgstr ""
 
-#: main.cpp:49
+#: main.cpp:50
 #, kde-format
 msgid "Carl Schwan"
 msgstr ""
 
-#: main.cpp:50
+#: main.cpp:51
 #, fuzzy, kde-format
 #| msgid "Original Author, Developer and Maintainer"
 msgid "Developer"
 msgstr "Creator, dezvoltator și întreținător"
 
-#: main.cpp:55
+#: main.cpp:56
 #, fuzzy, kde-format
 #| msgid "Search line"
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
 msgstr "Linie de căutare"
 
-#: main.cpp:55
+#: main.cpp:56
 #, fuzzy, kde-format
 #| msgid "Show grid"
 msgctxt "EMAIL OF TRANSLATORS"

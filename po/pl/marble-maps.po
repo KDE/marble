@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: marble_qt\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-25 00:36+0000\n"
+"POT-Creation-Date: 2024-09-27 00:37+0000\n"
 "PO-Revision-Date: 2024-01-27 11:08+0100\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
@@ -69,19 +69,19 @@ msgstr "Edytuj mapy"
 msgid "© KDE Community"
 msgstr ""
 
-#: main.cpp:49
+#: main.cpp:50
 #, kde-format
 msgid "Carl Schwan"
 msgstr ""
 
-#: main.cpp:50
+#: main.cpp:51
 #, fuzzy, kde-format
 #| msgctxt "PluginAuthor|"
 #| msgid "Developer"
 msgid "Developer"
 msgstr "Programista"
 
-#: main.cpp:55
+#: main.cpp:56
 #, fuzzy, kde-format
 #| msgctxt "EMAIL OF TRANSLATORS"
 #| msgid "Your emails"
@@ -89,7 +89,7 @@ msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
 msgstr "tazdzioch@o2.pl, maciej.wiklo@wp.pl "
 
-#: main.cpp:55
+#: main.cpp:56
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"

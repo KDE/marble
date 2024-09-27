@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-25 00:36+0000\n"
+"POT-Creation-Date: 2024-09-27 00:37+0000\n"
 "PO-Revision-Date: 2019-12-01 18:32+0000\n"
 "Last-Translator: Subin Siby <subins2000@gmail.com>\n"
 "Language-Team: Swathanthra|സ്വതന്ത്ര Malayalam|മലയാളം Computing|കമ്പ്യൂട്ടിങ്ങ് <smc-"
@@ -51,17 +51,17 @@ msgstr "&ചിട്ടപ്പെടുത്തുക"
 msgid "© KDE Community"
 msgstr ""
 
-#: main.cpp:49
+#: main.cpp:50
 #, kde-format
 msgid "Carl Schwan"
 msgstr ""
 
-#: main.cpp:50
+#: main.cpp:51
 #, fuzzy, kde-format
 msgid "Developer"
 msgstr "യഥാര്‍ത്ഥ രചയിതാവു്, ഡവലപ്പര്‍, പാലകന്‍"
 
-#: main.cpp:55
+#: main.cpp:56
 #, fuzzy, kde-format
 #| msgctxt "EMAIL OF TRANSLATORS"
 #| msgid "Your emails"
@@ -69,7 +69,7 @@ msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
 msgstr "apeter@redhat.com"
 
-#: main.cpp:55
+#: main.cpp:56
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"

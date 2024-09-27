@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-25 00:36+0000\n"
+"POT-Creation-Date: 2024-09-27 00:37+0000\n"
 "PO-Revision-Date: 2013-11-01 04:04+0600\n"
 "Last-Translator: Sairan Kikkarin <sairan@computer.org>\n"
 "Language-Team: Kazakh <kde-i18n-doc@kde.org>\n"
@@ -54,25 +54,25 @@ msgstr "Картаны &өңдеу"
 msgid "© KDE Community"
 msgstr ""
 
-#: main.cpp:49
+#: main.cpp:50
 #, kde-format
 msgid "Carl Schwan"
 msgstr ""
 
-#: main.cpp:50
+#: main.cpp:51
 #, fuzzy, kde-format
 #| msgid "Developer"
 msgid "Developer"
 msgstr "Құрастырушысы"
 
-#: main.cpp:55
+#: main.cpp:56
 #, fuzzy, kde-format
 #| msgid "Yours"
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
 msgstr "YOURS"
 
-#: main.cpp:55
+#: main.cpp:56
 #, fuzzy, kde-format
 #| msgid "Address Details"
 msgctxt "EMAIL OF TRANSLATORS"

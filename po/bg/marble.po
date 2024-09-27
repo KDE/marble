@@ -1246,6 +1246,3 @@ msgstr "Основна лента с инструменти"
 #, kde-format
 msgid "Edit Toolbar"
 msgstr "Редактиране на лентата с инструменти"
-
-#~ msgid "marble_part"
-#~ msgstr "marble_part"
