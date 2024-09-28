@@ -11,6 +11,7 @@ Dependencies:
     'frameworks/ki18n': '@stable-kf6'
     'frameworks/kcoreaddons': '@stable-kf6'
     'frameworks/knewstuff': '@stable-kf6'
+    'frameworks/kconfig': '@stable-kf6'
 
 Options:
  cmake-options: "-DBUILD_MARBLE_TOOLS=ON"

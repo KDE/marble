@@ -95,7 +95,7 @@ if (BUILD_TESTING)
     find_package(Qt6 ${QT_MIN_VERSION} REQUIRED COMPONENTS Test)
 endif()
 
-find_package(KF6 ${KF_MIN_VERSION} COMPONENTS CoreAddons I18n)
+find_package(KF6 ${KF_MIN_VERSION} COMPONENTS CoreAddons I18n Config)
 if (NOT ANDROID)
     find_package(KF6 ${KF_MIN_VERSION} COMPONENTS Crash Parts)
 endif()
