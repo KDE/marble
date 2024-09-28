@@ -63,6 +63,8 @@ option(MOBILE "Create a Marble version optimized for handheld devices" OFF)
 # Provide opt-in switch for mobile variant, which is not only useful for Android.
 option(BUILD_TOUCH "Build touch-friendly Marble version (on Android this option is bypassed)" OFF)
 
+option(BUILD_QT_AND_KDE "Build pure Qt version and KDE version. Only useful for distributions who split the marble in two packages. Otherwise just provide the KDE version to your users.")
+
 ####################################################
 # Build a D-Bus interface for the Marble widget
 # This is disabled by default for all win32, apple and Android
