@@ -11136,7 +11136,7 @@ msgctxt "Marble::MarbleWidgetPopupMenu|"
 msgid "&Info Boxes"
 msgstr "ئۇچۇر كۆزنەكچىسى(&I)"
 
-#: src/lib/marble/MarbleWidgetPopupMenu.cpp:897
+#: src/lib/marble/MarbleWidgetPopupMenu.cpp:900
 msgctxt "Marble::MarbleWidgetPopupMenu|"
 msgid "Address Details"
 msgstr ""

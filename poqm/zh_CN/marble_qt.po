@@ -10770,7 +10770,7 @@ msgctxt "Marble::MarbleWidgetPopupMenu|"
 msgid "&Info Boxes"
 msgstr "信息框(&I)"
 
-#: src/lib/marble/MarbleWidgetPopupMenu.cpp:897
+#: src/lib/marble/MarbleWidgetPopupMenu.cpp:900
 msgctxt "Marble::MarbleWidgetPopupMenu|"
 msgid "Address Details"
 msgstr "地址详情"

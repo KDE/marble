@@ -10846,7 +10846,7 @@ msgctxt "Marble::MarbleWidgetPopupMenu|"
 msgid "&Info Boxes"
 msgstr "ਜਾਣਕਾਰੀ ਬਾਕਸ(&I)"
 
-#: src/lib/marble/MarbleWidgetPopupMenu.cpp:897
+#: src/lib/marble/MarbleWidgetPopupMenu.cpp:900
 #, fuzzy
 #| msgid "Address Details"
 msgctxt "Marble::MarbleWidgetPopupMenu|"

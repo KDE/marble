@@ -1,0 +1,201 @@
+# Translation of marble-behaim to Spanish
+#
+# SPDX-FileCopyrightText: 2024 Eloy Cuadra <ecuadra@eloihr.net>
+msgid ""
+msgstr ""
+"Project-Id-Version: marble-behaim\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2024-09-27 00:37+0000\n"
+"PO-Revision-Date: 2024-09-28 00:59+0200\n"
+"Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
+"Language-Team: Spanish <kde-l10n-es@kde.org>\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 24.08.1\n"
+
+#: About.qml:9
+#, kde-format
+msgctxt "@title:group"
+msgid "Germanisches Nationalmuseum"
+msgstr "Germanisches Nationalmuseum"
+
+#: About.qml:14
+#, kde-format
+msgid ""
+"The original Behaim globe can be visited in the <a href=\"https://www.gnm.de/"
+"\">Germanisches Nationalmuseum</a> in Nuremberg, Germany."
+msgstr ""
+"El globo de Behaim original se puede visitar en el <a href=\"https://www.gnm."
+"de/\">Germanisches Nationalmuseum</a> de Nuremberg, Alemania."
+
+#: About.qml:20
+#, kde-format
+msgctxt "@title:group"
+msgid "Map Content"
+msgstr "Contenido del mapa"
+
+#: About.qml:25
+#, kde-format
+msgid ""
+"Digitized map based on orthophotographic gores by TU Vienna, 1990. "
+"Germanisches Nationalmuseum and Friedrich-Alexander-Universität Erlangen-"
+"Nürnberg, CC BY-SA 3.0. Ghillany map based on two planiglobes which are "
+"provided as a map supplement to F.W. Ghillany's \"Geschichte des Seefahrers "
+"Ritter Martin Behaim nach den ältesten vorhandenen Urkunden\", Nuremberg "
+"1853. CC BY-SA 3.0."
+msgstr ""
+"Mapa digitalizado basado en imágenes ortofotográficas de la Universidad "
+"Técnica de Viena, 1990. Germanisches Nationalmuseum y Friedrich-Alexander-"
+"Universität Erlangen-Nürnberg, CC BY-SA 3.0. Mapa de Ghillany basado en dos "
+"mapamundis proporcionados como suplementos de mapas para el «Geschichte des "
+"Seefahrers Ritter Martin Behaim nach den ältesten vorhandenen Urkunden» de "
+"F. W. Ghillany, Nuremberg, 1853. CC BY-SA 3.0."
+
+#: main.cpp:32
+#, kde-format
+msgid "Marble Behaim"
+msgstr "Marble Behaim"
+
+#: main.cpp:34
+#, kde-format
+msgid ""
+"Digital reproduction of a globe crafted at the time of Columbus' first sea "
+"travel to the west."
+msgstr ""
+"Reproducción digital de un mapamundi creado en los tiempos del primer viaje "
+"marino de Colón al oeste."
+
+#: main.cpp:36
+#, kde-format
+msgid "© KDE Community"
+msgstr "© La comunidad KDE"
+
+#: main.cpp:37
+#, kde-format
+msgid ""
+"<p>Martin Behaim's Erdapfel</p><p>The oldest existent globe of the Earth. "
+"Martin Behaim and collaborators created the globe around 1492 at the time of "
+"<a href=\"https://en.wikipedia.org/wiki/Voyages_of_Christopher_Columbus"
+"\">Columbus'</a> first sea travel to the west.Hence the American continent "
+"is missing on this globe.Also note the detailed inscriptions in early modern "
+"German.</p><p>Please see <a href=\"https://en.wikipedia.org/wiki/Erdapfel"
+"\">Wikipedia: Erdapfel</a> for further information about the Behaim globe."
+msgstr ""
+"<p>Erdapfel de Martin Behaim</p><p>El mapamundi terráqueo más antiguo que "
+"existe. Martin Behaim y sus colaboradores crearon el mapamundi alrededor de "
+"1492, en los tiempos del primer viaje de <a href=\"https://es.wikipedia.org/"
+"wiki/Crist%C3%B3bal_Col%C3%B3n\">Colón</a> al oeste. De ahí que el "
+"continente americano esté ausente en este mapa. Note también las detalladas "
+"inscripciones en alemán moderno temprano.</p><p>Consulte <a href=\"https://"
+"es.wikipedia.org/wiki/Erdapfel\">Erdapfel en la Wikipedia</a> para más "
+"información sobre el globo terráqueo de Behaim."
+
+#: main.cpp:51
+#, kde-format
+msgctxt "@info:credit"
+msgid "Dennis Nienhüser"
+msgstr "Dennis Nienhüser"
+
+#: main.cpp:51
+#, kde-format
+msgctxt "@info:credit"
+msgid "Author"
+msgstr "Autor"
+
+#: main.cpp:53
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "Eloy Cuadra"
+
+#: main.cpp:53
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "ecuadra@eloihr.net"
+
+#: MainScreen.qml:62
+#, kde-format
+msgctxt "@title"
+msgid "Marble"
+msgstr "Marble"
+
+#: MainScreen.qml:83
+#, kde-format
+msgctxt "@title:group"
+msgid "Globe Settings"
+msgstr "Preferencias del globo"
+
+#: MainScreen.qml:88
+#, kde-format
+msgctxt "@option:check"
+msgid "Show Behaim places"
+msgstr "Mostrar lugares de Behaim"
+
+#: MainScreen.qml:95
+#, kde-format
+msgctxt "@option:check"
+msgid "Show texts and illustrations"
+msgstr "Mostrar textos e ilustraciones"
+
+#: MainScreen.qml:102
+#, kde-format
+msgctxt "@option:check"
+msgid "Show the accurate coastline"
+msgstr "Mostrar la línea de costa precisa"
+
+#: MainScreen.qml:107
+#, kde-format
+msgctxt "@title:group"
+msgid "Globe Variant"
+msgstr "Variante del globo"
+
+#: MainScreen.qml:114
+#, kde-format
+msgctxt "@option:radio"
+msgid "Original (1492)"
+msgstr "Original (1492)"
+
+#: MainScreen.qml:116
+#, kde-format
+msgid "Digital imagery taken directly from the original Behaim globe."
+msgstr ""
+"Imágenes digitales obtenidas directamente del globo de Behaim original."
+
+#: MainScreen.qml:127
+#, kde-format
+msgctxt "@option:radio"
+msgid "Ghillany (1853)"
+msgstr "Ghillany (1853)"
+
+#: MainScreen.qml:128
+#, kde-format
+msgid "A (rough) facsimile created by Friedrich Wilhelm Ghillany in 1853."
+msgstr ""
+"Un facsímil (aproximado) creado por Friedrich Wilhelm Ghillany en 1853."
+
+#: MainScreen.qml:139
+#, kde-format
+msgctxt "@option:radio"
+msgid "Ravenstein (1908)"
+msgstr "Ravenstein (1908)"
+
+#: MainScreen.qml:140
+#, kde-format
+msgid "A (rough) facsimile created by Ernest George Ravenstein in 1908."
+msgstr "Un facsímil (aproximado) creado por Ernest George Ravenstein en 1908."
+
+#: MainScreen.qml:155
+#, kde-format
+msgctxt "@title:window"
+msgid "Behaim Globe"
+msgstr "Globo de Behaim"
+
+#: MainScreen.qml:163
+#, kde-format
+msgctxt "@action:button"
+msgid "Information"
+msgstr "Información"

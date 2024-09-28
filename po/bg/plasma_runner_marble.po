@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-20 00:37+0000\n"
+"POT-Creation-Date: 2024-09-28 00:36+0000\n"
 "PO-Revision-Date: 2023-12-21 18:24+0100\n"
 "Last-Translator: Mincho Kondarev <mkondarev@yahoo.de>\n"
 "Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
@@ -19,22 +19,22 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Lokalize 23.08.4\n"
 
-#: plasmarunner.cpp:35
+#: plasmarunner.cpp:33
 #, kde-format
 msgid "Shows the coordinates :q: in OpenStreetMap with Marble."
 msgstr "Показва координатите :q: в OpenStreetMap с Marble."
 
-#: plasmarunner.cpp:36
+#: plasmarunner.cpp:34
 #, kde-format
 msgid "Shows the geo bookmark containing :q: in OpenStreetMap with Marble."
 msgstr "Показва географската отметка, съдържаща :q:, в OpenStreetMap с Marble."
 
-#: plasmarunner.cpp:56
+#: plasmarunner.cpp:54
 #, kde-format
 msgid "Show the coordinates %1 in OpenStreetMap with Marble"
 msgstr "Показване на координатите на %1 в OpenStreetMap с Marble"
 
-#: plasmarunner.cpp:118
+#: plasmarunner.cpp:115
 #, kde-format
 msgid "Show in OpenStreetMap with Marble"
 msgstr "Показване в  OpenStreetMap с Marble"

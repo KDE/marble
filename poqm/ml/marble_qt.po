@@ -11050,7 +11050,7 @@ msgctxt "Marble::MarbleWidgetPopupMenu|"
 msgid "&Info Boxes"
 msgstr "&വിവര പെട്ടികള്‍"
 
-#: src/lib/marble/MarbleWidgetPopupMenu.cpp:897
+#: src/lib/marble/MarbleWidgetPopupMenu.cpp:900
 msgctxt "Marble::MarbleWidgetPopupMenu|"
 msgid "Address Details"
 msgstr ""

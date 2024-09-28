@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-20 00:37+0000\n"
+"POT-Creation-Date: 2024-09-28 00:36+0000\n"
 "PO-Revision-Date: 2012-06-06 22:39+0200\n"
 "Last-Translator: Balázs Úr <urbalazs@gmail.com>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -17,27 +17,27 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Lokalize 1.4\n"
 
-#: plasmarunner.cpp:35
+#: plasmarunner.cpp:33
 #, kde-format
 msgid "Shows the coordinates :q: in OpenStreetMap with Marble."
 msgstr ""
 "A(z) :q: koordináta megjelenítése az OpenStreetMap térképen Marble "
 "használatával."
 
-#: plasmarunner.cpp:36
+#: plasmarunner.cpp:34
 #, kde-format
 msgid "Shows the geo bookmark containing :q: in OpenStreetMap with Marble."
 msgstr ""
 "A(z) :q: értéket tartalmazó geo könyvjelző megjelenítése az OpenStreetMap "
 "térképen Marble használatával."
 
-#: plasmarunner.cpp:56
+#: plasmarunner.cpp:54
 #, kde-format
 msgid "Show the coordinates %1 in OpenStreetMap with Marble"
 msgstr ""
 "%1 koordináták megjelenítése az OpenStreetMap térképen Marble használatával"
 
-#: plasmarunner.cpp:118
+#: plasmarunner.cpp:115
 #, kde-format
 msgid "Show in OpenStreetMap with Marble"
 msgstr "Megjelenítés az OpenStreetMap térképen Marble használatával"

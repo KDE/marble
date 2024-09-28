@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-20 00:37+0000\n"
+"POT-Creation-Date: 2024-09-28 00:36+0000\n"
 "PO-Revision-Date: 2013-03-15 15:09+0100\n"
 "Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
@@ -17,22 +17,22 @@ msgstr ""
 "X-Generator: Lokalize 1.5\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 
-#: plasmarunner.cpp:35
+#: plasmarunner.cpp:33
 #, kde-format
 msgid "Shows the coordinates :q: in OpenStreetMap with Marble."
 msgstr "Zobrazuje pomocí Marble souřadnice :q: v OpenStreetMap."
 
-#: plasmarunner.cpp:36
+#: plasmarunner.cpp:34
 #, kde-format
 msgid "Shows the geo bookmark containing :q: in OpenStreetMap with Marble."
 msgstr "Zobrazuje geo záložky obsahující :q: pomocí Marble v OpenStreetMap."
 
-#: plasmarunner.cpp:56
+#: plasmarunner.cpp:54
 #, kde-format
 msgid "Show the coordinates %1 in OpenStreetMap with Marble"
 msgstr "Zobrazit souřadnice %1 pomocí Marble souřadnice v OpenStreetMap."
 
-#: plasmarunner.cpp:118
+#: plasmarunner.cpp:115
 #, kde-format
 msgid "Show in OpenStreetMap with Marble"
 msgstr "Zobrazit pomocí Marble v OpenStreetMap"

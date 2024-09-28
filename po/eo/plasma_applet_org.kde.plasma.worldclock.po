@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-05 12:24+0000\n"
+"POT-Creation-Date: 2024-09-28 00:36+0000\n"
 "PO-Revision-Date: 2023-02-14 21:40+0100\n"
 "Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: esperanto <kde-i18n-eo@kde.org>\n"
@@ -23,47 +23,47 @@ msgstr ""
 msgid "Map Display"
 msgstr "Mapo-ekrano"
 
-#: package/contents/ui/configMapDisplay.qml:28
+#: package/contents/ui/configMapDisplay.qml:26
 #, kde-format
 msgid "Projection:"
 msgstr "Projekcio:"
 
-#: package/contents/ui/configMapDisplay.qml:36
+#: package/contents/ui/configMapDisplay.qml:28
 #, kde-format
 msgid "Equirectangular"
 msgstr "Ekvirektangula"
 
-#: package/contents/ui/configMapDisplay.qml:37
+#: package/contents/ui/configMapDisplay.qml:29
 #, kde-format
 msgid "Mercator"
 msgstr "Mercator"
 
-#: package/contents/ui/configMapDisplay.qml:54
+#: package/contents/ui/configMapDisplay.qml:42
 #, kde-format
 msgid "Center on:"
 msgstr "Centri sur:"
 
-#: package/contents/ui/configMapDisplay.qml:62
+#: package/contents/ui/configMapDisplay.qml:44
 #, kde-format
 msgid "Daylight"
 msgstr "Taglumo"
 
-#: package/contents/ui/configMapDisplay.qml:63
+#: package/contents/ui/configMapDisplay.qml:45
 #, kde-format
 msgid "Longitude"
 msgstr "Longitudo"
 
-#: package/contents/ui/configMapDisplay.qml:64
+#: package/contents/ui/configMapDisplay.qml:46
 #, kde-format
 msgid "Location"
 msgstr "Loko"
 
-#: package/contents/ui/configMapDisplay.qml:82
+#: package/contents/ui/configMapDisplay.qml:62
 #, kde-format
 msgid "Longitude:"
 msgstr "Longitudo:"
 
-#: package/contents/ui/configMapDisplay.qml:99
+#: package/contents/ui/configMapDisplay.qml:95
 #, kde-format
 msgid "Show date:"
 msgstr "Montri daton:"

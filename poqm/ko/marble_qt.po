@@ -10336,7 +10336,7 @@ msgctxt "Marble::MarbleWidgetPopupMenu|"
 msgid "&Info Boxes"
 msgstr "정보 상자(&I)"
 
-#: src/lib/marble/MarbleWidgetPopupMenu.cpp:897
+#: src/lib/marble/MarbleWidgetPopupMenu.cpp:900
 msgctxt "Marble::MarbleWidgetPopupMenu|"
 msgid "Address Details"
 msgstr "주소 정보"

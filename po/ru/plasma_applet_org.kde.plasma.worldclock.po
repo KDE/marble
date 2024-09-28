@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-05 12:24+0000\n"
+"POT-Creation-Date: 2024-09-28 00:36+0000\n"
 "PO-Revision-Date: 2020-10-04 12:53+0300\n"
 "Last-Translator: Alexander Yavorsky <kekcuha@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
@@ -24,47 +24,47 @@ msgstr ""
 msgid "Map Display"
 msgstr "Отображение карты"
 
-#: package/contents/ui/configMapDisplay.qml:28
+#: package/contents/ui/configMapDisplay.qml:26
 #, kde-format
 msgid "Projection:"
 msgstr "Проекция:"
 
-#: package/contents/ui/configMapDisplay.qml:36
+#: package/contents/ui/configMapDisplay.qml:28
 #, kde-format
 msgid "Equirectangular"
 msgstr "Равнопромежуточная"
 
-#: package/contents/ui/configMapDisplay.qml:37
+#: package/contents/ui/configMapDisplay.qml:29
 #, kde-format
 msgid "Mercator"
 msgstr "Проекция Меркатора"
 
-#: package/contents/ui/configMapDisplay.qml:54
+#: package/contents/ui/configMapDisplay.qml:42
 #, kde-format
 msgid "Center on:"
 msgstr "Центрировать по:"
 
-#: package/contents/ui/configMapDisplay.qml:62
+#: package/contents/ui/configMapDisplay.qml:44
 #, kde-format
 msgid "Daylight"
 msgstr "Положению солнца"
 
-#: package/contents/ui/configMapDisplay.qml:63
+#: package/contents/ui/configMapDisplay.qml:45
 #, kde-format
 msgid "Longitude"
 msgstr "Долготе"
 
-#: package/contents/ui/configMapDisplay.qml:64
+#: package/contents/ui/configMapDisplay.qml:46
 #, kde-format
 msgid "Location"
 msgstr "Местоположению"
 
-#: package/contents/ui/configMapDisplay.qml:82
+#: package/contents/ui/configMapDisplay.qml:62
 #, kde-format
 msgid "Longitude:"
 msgstr "Долгота:"
 
-#: package/contents/ui/configMapDisplay.qml:99
+#: package/contents/ui/configMapDisplay.qml:95
 #, kde-format
 msgid "Show date:"
 msgstr "Показывать дату:"

@@ -10,7 +10,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"PO-Revision-Date: 2024-09-24 08:03+0300\n"
+"PO-Revision-Date: 2024-09-25 22:04+0300\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -11054,7 +11054,7 @@ msgctxt "Marble::MarbleWidgetPopupMenu|"
 msgid "&Info Boxes"
 msgstr ""
 
-#: src/lib/marble/MarbleWidgetPopupMenu.cpp:897
+#: src/lib/marble/MarbleWidgetPopupMenu.cpp:900
 msgctxt "Marble::MarbleWidgetPopupMenu|"
 msgid "Address Details"
 msgstr ""
@@ -12548,12 +12548,12 @@ msgstr ""
 #: src/lib/marble/TimeControlWidget.ui:46
 msgctxt "TimeControlWidget|"
 msgid " seconds"
-msgstr ""
+msgstr " שניות"
 
 #: src/lib/marble/TimeControlWidget.ui:65
 msgctxt "TimeControlWidget|"
 msgid "Now"
-msgstr ""
+msgstr "עכשיו"
 
 #: src/lib/marble/TimeControlWidget.ui:123
 #, fuzzy
@@ -12569,7 +12569,7 @@ msgstr ""
 #: src/lib/marble/TourCaptureDialog.cpp:58
 msgctxt "Marble::TourCaptureDialog|"
 msgid "Codecs are unavailable"
-msgstr ""
+msgstr "מפענחים לא זמינים"
 
 #: src/lib/marble/TourCaptureDialog.cpp:58
 msgctxt "Marble::TourCaptureDialog|"
@@ -12577,6 +12577,8 @@ msgid ""
 "Supported codecs are not found. (ffmpeg/avconv needs to be installed and in "
 "PATH.)"
 msgstr ""
+"המפענחים הנתמכים לא נמצאו. (ffmpeg/avconv אמורים להיות מותקנים ומוגדרים ב־"
+"PATH.)"
 
 #: src/lib/marble/TourCaptureDialog.cpp:67
 #, fuzzy
@@ -12613,7 +12615,7 @@ msgstr "&ביטול"
 #: src/lib/marble/TourCaptureDialog.cpp:107
 msgctxt "Marble::TourCaptureDialog|"
 msgid "Missing filename"
-msgstr ""
+msgstr "שם הקובץ חסר"
 
 #: src/lib/marble/TourCaptureDialog.cpp:108
 msgctxt "Marble::TourCaptureDialog|"
@@ -12625,12 +12627,12 @@ msgstr ""
 #: src/lib/marble/TourCaptureDialog.cpp:138
 msgctxt "Marble::TourCaptureDialog|"
 msgid "Video writing failed."
-msgstr ""
+msgstr "כתיבת הסרטון נכשלה."
 
 #: src/lib/marble/TourCaptureDialog.cpp:156
 msgctxt "Marble::TourCaptureDialog|"
 msgid "Video export completed."
-msgstr ""
+msgstr "ייצוא הסרטון הושלם."
 
 #: src/lib/marble/TourCaptureDialog.ui:20
 #, fuzzy
@@ -12653,7 +12655,7 @@ msgstr "&פתח..."
 #: src/lib/marble/TourCaptureDialog.ui:97
 msgctxt "TourCaptureDialog|"
 msgid "FPS (frames per second)"
-msgstr ""
+msgstr "FPS (תמוניות לשנייה)"
 
 #: src/lib/marble/TourCaptureDialog.ui:189
 #, fuzzy
@@ -12670,12 +12672,12 @@ msgstr "&סגור"
 #: src/lib/marble/TourControlEditWidget.cpp:36
 msgctxt "Marble::TourControlEditWidget|"
 msgid "Play"
-msgstr ""
+msgstr "נגינה"
 
 #: src/lib/marble/TourControlEditWidget.cpp:39
 msgctxt "Marble::TourControlEditWidget|"
 msgid "Pause"
-msgstr ""
+msgstr "השהיה"
 
 #: src/lib/marble/TourItemDelegate.cpp:93
 #, fuzzy
@@ -12693,7 +12695,7 @@ msgstr "עקוב אחר GPS"
 #, qt-format
 msgctxt "Marble::TourItemDelegate|"
 msgid "Wait for %1 seconds"
-msgstr ""
+msgstr "להמשיך למשך %1 שניות"
 
 #: src/lib/marble/TourItemDelegate.cpp:171
 #, fuzzy, qt-format
@@ -12716,7 +12718,7 @@ msgstr "מפה רגילה"
 #: src/lib/marble/TourItemDelegate.cpp:185
 msgctxt "Marble::TourItemDelegate|"
 msgid "Update items"
-msgstr ""
+msgstr "עדכון פריטים"
 
 #: src/lib/marble/TourItemDelegate.cpp:403
 msgctxt "QObject|"
@@ -12767,7 +12769,7 @@ msgstr "מפה רגילה"
 #: src/lib/marble/TourWidget.cpp:154
 msgctxt "QObject|"
 msgid "Loop"
-msgstr ""
+msgstr "לולאה"
 
 #: src/lib/marble/TourWidget.cpp:329
 #, fuzzy
@@ -12839,17 +12841,17 @@ msgstr ""
 #: src/lib/marble/TourWidget.ui:87 src/lib/marble/TourWidget.ui:90
 msgctxt "TourWidget|"
 msgid "Move up"
-msgstr ""
+msgstr "העלאה למעלה"
 
 #: src/lib/marble/TourWidget.ui:102
 msgctxt "TourWidget|"
 msgid "Move down"
-msgstr ""
+msgstr "הורדה למטה"
 
 #: src/lib/marble/TourWidget.ui:114
 msgctxt "TourWidget|"
 msgid "Delete"
-msgstr ""
+msgstr "מחיקה"
 
 #: src/lib/marble/TourWidget.ui:123
 #, fuzzy
@@ -12878,7 +12880,7 @@ msgstr "עקוב אחר GPS"
 #: src/lib/marble/TourWidget.ui:168
 msgctxt "TourWidget|"
 msgid "Play"
-msgstr ""
+msgstr "נגינה"
 
 #: src/lib/marble/TourWidget.ui:171
 msgctxt "TourWidget|"
@@ -12888,7 +12890,7 @@ msgstr ""
 #: src/lib/marble/TourWidget.ui:180
 msgctxt "TourWidget|"
 msgid "Stop"
-msgstr ""
+msgstr "עצירה"
 
 #: src/lib/marble/TourWidget.ui:183
 msgctxt "TourWidget|"
@@ -12915,7 +12917,7 @@ msgstr "מדינה"
 #: src/lib/marble/WaitEditWidget.cpp:41
 msgctxt "Marble::WaitEditWidget|seconds"
 msgid " s"
-msgstr ""
+msgstr " שנ׳"
 
 #: src/plugins/positionprovider/flightgear/FlightGearPositionProviderPlugin.cpp:33
 #, fuzzy
@@ -12943,47 +12945,47 @@ msgstr "תוסף GeoData"
 #: src/plugins/positionprovider/geoclue/GeoCluePositionProviderPlugin.cpp:24
 msgctxt "Marble::GeoCluePositionProviderPlugin|"
 msgid "GeoClue"
-msgstr ""
+msgstr "GeoClue"
 
 #: src/plugins/positionprovider/geoclue/GeoCluePositionProviderPlugin.cpp:29
 msgctxt "Marble::GeoCluePositionProviderPlugin|"
 msgid "Reports the position via the GeoClue Location Framework."
-msgstr ""
+msgstr "דיווח על המיקום דרך תשתית מיקום של GeoClue."
 
 #: src/plugins/positionprovider/gpsd/GpsdConnection.cpp:66
 msgctxt "Marble::GpsdConnection|"
 msgid "Internal gpsd error (cannot get service entry)"
-msgstr ""
+msgstr "שגיאת gpsd פנימית (לא ניתן לקבל רשומת שירות)"
 
 #: src/plugins/positionprovider/gpsd/GpsdConnection.cpp:69
 msgctxt "Marble::GpsdConnection|"
 msgid "Internal gpsd error (cannot get host entry)"
-msgstr ""
+msgstr "שגיאת gpsd פנימית (לא ניתן לקבל רשומת מארח)"
 
 #: src/plugins/positionprovider/gpsd/GpsdConnection.cpp:72
 msgctxt "Marble::GpsdConnection|"
 msgid "Internal gpsd error (cannot get protocol entry)"
-msgstr ""
+msgstr "שגיאת gpsd פנימית (לא ניתן לקבל רשומת פרוטוקול)"
 
 #: src/plugins/positionprovider/gpsd/GpsdConnection.cpp:75
 msgctxt "Marble::GpsdConnection|"
 msgid "Internal gpsd error (unable to create socket)"
-msgstr ""
+msgstr "שגיאת gpsd פנימית (לא ניתן ליצור שקע)"
 
 #: src/plugins/positionprovider/gpsd/GpsdConnection.cpp:78
 msgctxt "Marble::GpsdConnection|"
 msgid "Internal gpsd error (unable to set socket option)"
-msgstr ""
+msgstr "שגיאת gpsd פנימית (לא ניתן להגדיר אפשרות שקע)"
 
 #: src/plugins/positionprovider/gpsd/GpsdConnection.cpp:81
 msgctxt "Marble::GpsdConnection|"
 msgid "No GPS device found by gpsd."
-msgstr ""
+msgstr "לא נמצא התקן נווטן/GPS על ידי gpsd."
 
 #: src/plugins/positionprovider/gpsd/GpsdConnection.cpp:84
 msgctxt "Marble::GpsdConnection|"
 msgid "Unknown error when opening gpsd connection"
-msgstr ""
+msgstr "שגיאה לא ידוע בפתיחת חיבור gpsd"
 
 #: src/plugins/positionprovider/gpsd/GpsdPositionProviderPlugin.cpp:20
 #, fuzzy
@@ -12994,12 +12996,12 @@ msgstr "תוסף GeoData"
 #: src/plugins/positionprovider/gpsd/GpsdPositionProviderPlugin.cpp:30
 msgctxt "Marble::GpsdPositionProviderPlugin|"
 msgid "gpsd"
-msgstr ""
+msgstr "gpsd"
 
 #: src/plugins/positionprovider/gpsd/GpsdPositionProviderPlugin.cpp:40
 msgctxt "Marble::GpsdPositionProviderPlugin|"
 msgid "Reports the position of a GPS device."
-msgstr ""
+msgstr "דיווח המקום של נווטן/GPS."
 
 #: src/plugins/positionprovider/qtpositioning/QtPositioningPositionProviderPlugin.cpp:47
 #, fuzzy
@@ -13156,7 +13158,7 @@ msgstr "מפה רגילה"
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:870
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Add Polygon Hole"
-msgstr ""
+msgstr "הוספת חור מצולע"
 
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:875
 #, fuzzy
@@ -13214,7 +13216,7 @@ msgstr ""
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:981
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Paste"
-msgstr ""
+msgstr "הדבקה"
 
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:1000
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:1239
@@ -13247,7 +13249,7 @@ msgstr "מפה רגילה"
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:1495
 msgctxt "Marble::AnnotatePlugin|"
 msgid "Properties"
-msgstr ""
+msgstr "מאפיינים"
 
 #: src/plugins/render/annotate/AnnotatePlugin.cpp:1139
 #, fuzzy

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_runner_marblerunner\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-20 00:37+0000\n"
+"POT-Creation-Date: 2024-09-28 00:36+0000\n"
 "PO-Revision-Date: 2012-01-03 16:01+0200\n"
 "Last-Translator: Antonis Geralis <capoiosct@gmail.com>\n"
 "Language-Team: Greek <i18ngr@lists.hellug.gr>\n"
@@ -17,23 +17,23 @@ msgstr ""
 "X-Generator: Lokalize 1.2\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
-#: plasmarunner.cpp:35
+#: plasmarunner.cpp:33
 #, kde-format
 msgid "Shows the coordinates :q: in OpenStreetMap with Marble."
 msgstr "Εμφάνιση των συντεταγμένων :q: στο OpenStreetMap με το Marble."
 
-#: plasmarunner.cpp:36
+#: plasmarunner.cpp:34
 #, kde-format
 msgid "Shows the geo bookmark containing :q: in OpenStreetMap with Marble."
 msgstr ""
 "Εμφάνιση του σελιδοδείκτη που περιέχει :q: στο OpenStreetMap με το Marble."
 
-#: plasmarunner.cpp:56
+#: plasmarunner.cpp:54
 #, kde-format
 msgid "Show the coordinates %1 in OpenStreetMap with Marble"
 msgstr "Εμφάνιση συντεταγμένων %1 στο OpenStreetMap με το Marble"
 
-#: plasmarunner.cpp:118
+#: plasmarunner.cpp:115
 #, kde-format
 msgid "Show in OpenStreetMap with Marble"
 msgstr "Εμφάνιση στο OpenStreetMap με το Marble"
