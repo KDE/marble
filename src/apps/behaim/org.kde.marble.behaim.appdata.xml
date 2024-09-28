@@ -23,7 +23,7 @@
   <name xml:lang="id">Globe Behaim</name>
   <name xml:lang="is">Behaim-hnöttur</name>
   <name xml:lang="it">Globo di Behaim</name>
-  <name xml:lang="ka">Behaim -ის გლობუსი</name>
+  <name xml:lang="ka">ბეჰაიმის გლობუსი</name>
   <name xml:lang="ko">Behaim 지구본</name>
   <name xml:lang="nl">Globe van Behaim</name>
   <name xml:lang="pl">Globus Behaim</name>
@@ -32,7 +32,7 @@
   <name xml:lang="ru">Глобус Бехайма</name>
   <name xml:lang="sk">Behaim Globe</name>
   <name xml:lang="sl">Behaim Globe</name>
-  <name xml:lang="sv">Behaim Globe</name>
+  <name xml:lang="sv">Behaim-jordgloben</name>
   <name xml:lang="tr">Behaim Küresi</name>
   <name xml:lang="uk">Глобус Бегайма</name>
   <name xml:lang="x-test">xxBehaim Globexx</name>
@@ -53,7 +53,7 @@
   <summary xml:lang="id">Erdapfel Martin Behaim</summary>
   <summary xml:lang="is">Erdapfel frá Martin Behaim</summary>
   <summary xml:lang="it">Erdapfel di Martin Behaim</summary>
-  <summary xml:lang="ka">Martin Behaim-ის ერდაპფელი</summary>
+  <summary xml:lang="ka">მარტინ ბეჰაიმის ერდაპფელი</summary>
   <summary xml:lang="ko">마르틴 베하임의 Erdapfel</summary>
   <summary xml:lang="nl">De "Erdapfel" van Martin Behaim</summary>
   <summary xml:lang="pl">Ziemniak Martina Behaima</summary>
@@ -62,8 +62,8 @@
   <summary xml:lang="ru">«Земное яблоко» Мартина Бехайма</summary>
   <summary xml:lang="sk">Martin Behaim Erdapfel</summary>
   <summary xml:lang="sl">Martin Behaim's Erdapfel</summary>
-  <summary xml:lang="sv">Martin Behaim's Erdapfel</summary>
-  <summary xml:lang="tr">Martin Behaim'in Erdapfel'i</summary>
+  <summary xml:lang="sv">Martin Behaims Erdapfel</summary>
+  <summary xml:lang="tr">Martin Behaim’in Erdapfel’i</summary>
   <summary xml:lang="uk">Ердапфель Мартіна Бегайма</summary>
   <summary xml:lang="x-test">xxMartin Behaim's Erdapfelxx</summary>
   <summary xml:lang="zh-CN">马丁·贝海姆地球仪</summary>
@@ -93,8 +93,8 @@
     <p xml:lang="ru">Самый старый существующий глобус Земли, был создан под руководством Мартина Бехайма примерно в 1492 году во время первого морского путешествия Колумба на запад.</p>
     <p xml:lang="sk">Najstarší existujúci glóbus Zeme. Martin Behaim a spolupracovníci vytvorili glóbus okolo roku 1492 v čase Kolumbovej plavby na západ.</p>
     <p xml:lang="sl">Najstarejši obstoječi globus sveta. Martin Behaim in sodelavci so ustvarili globus okoli leta 1492 ob času Kolumbovega prvega potovanja na zahod.</p>
-    <p xml:lang="sv">Den äldsta kända jordgloben. Martin Behaim och hans medarbetare skapade globen omkring 1492 vid tiden för Columbus första sjöresa västerut.</p>
-    <p xml:lang="tr">Dünya'nın bilinen en eski küresi. Martin Behaim ve arkadaşları 1492 yılında, Kolomb'un batıya olan ilk deniz yolculuğu ile aynı zamanda bu ilk küreyi oluşturdular.</p>
+    <p xml:lang="sv">Den äldsta kända jordgloben. Martin Behaim och hans medarbetare skapade jordgloben cirka 1492 vid tiden för Columbus första sjöresa västerut.</p>
+    <p xml:lang="tr">Dünya’nın var olan en eski küresi. Martin Behaim ve arkadaşları küreyi, Kolomb’un batıya olan ilk deniz yolculuğu sırasında, 1492 civarında yarattılar.</p>
     <p xml:lang="uk">Найдавніший глобус Землі, який зберігся до наших часів. Мартін Бегайм та його помічники створили глобус близько 1492 року, у часи першої подорожі Колумба на захід.</p>
     <p xml:lang="x-test">xxThe oldest existent globe of the Earth. Martin Behaim and collaborators created the globe around 1492 at the time of Columbus' first sea travel to the west.xx</p>
     <p xml:lang="zh-CN">已知最早的地球仪，由马丁·贝海姆以及他的同事制作，时间为 1492 年前后——这是哥伦布首次西向航海的时代。</p>
@@ -133,14 +133,41 @@
     <screenshot type="default">
       <image>https://cdn.kde.org/screenshots/marble/marble-behaim.png</image>
       <caption>Digital imagery taken directly from the original Behaim globe.</caption>
+      <caption xml:lang="ca">Imatges digitals preses directament del globus terraqüi original de Behaim.</caption>
+      <caption xml:lang="es">Imágenes digitales obtenidas directamente del globo de Behaim original.</caption>
+      <caption xml:lang="ka">ციფრული გამოსახულებები აღებულია პირდაპირ ორიგინალური ბეჰაიმის გლობუსიდან.</caption>
+      <caption xml:lang="nl">Digitaal beeldmateriaal direct genomen van de originele globe van Behaim.</caption>
+      <caption xml:lang="sl">Digitalni posnetki, posneti neposredno iz originalnega Behaimovega globusa.</caption>
+      <caption xml:lang="sv">Digitala bilder tagna direkt från den ursprungliga Behaim-jordgloben.</caption>
+      <caption xml:lang="tr">Doğrudan özgün Behaim küresinden alınan sayısal görüntüleme.</caption>
+      <caption xml:lang="uk">Цифрові знімки зроблено безпосередньо з оригінального глобуса Бегайма.</caption>
+      <caption xml:lang="x-test">xxDigital imagery taken directly from the original Behaim globe.xx</caption>
     </screenshot>
     <screenshot>
       <image>https://cdn.kde.org/screenshots/marble/marble-behaim1.png</image>
       <caption>A (rough) facsimile created by Friedrich Wilhelm Ghillany in 1853.</caption>
+      <caption xml:lang="ca">Un facsímil (aproximat) creat per Friedrich Wilhelm Ghillany el 1853.</caption>
+      <caption xml:lang="es">Un facsímil (aproximado) creado por Friedrich Wilhelm Ghillany en 1853.</caption>
+      <caption xml:lang="ka">(უხეში) ფაქსიმილი, რომელიც შეიქმნა ფრიდრიხ ვილჰელმ გილანის მიერ 1853 წელს.</caption>
+      <caption xml:lang="nl">Een (ruwe) facsimile gemaakt door Friedrich Wilhelm Ghillany in 1853.</caption>
+      <caption xml:lang="sl">(Grobi) faksimile, ki ga je ustvaril Friedrich Wilhelm Ghillany leta 1853.</caption>
+      <caption xml:lang="sv">En (grov) faksimil skapad av Friedrich Wilhelm Ghillany 1853.</caption>
+      <caption xml:lang="tr">1853 yılında Friedrich Wilhelm Ghillany tarafından oluşturulmuş (kaba) bir faksimile.</caption>
+      <caption xml:lang="uk">(Грубе) факсиміле, яке було створено Фрідріхом Вільгельмом Гіланьї у 1853 році.</caption>
+      <caption xml:lang="x-test">xxA (rough) facsimile created by Friedrich Wilhelm Ghillany in 1853.xx</caption>
     </screenshot>
     <screenshot>
       <image>https://cdn.kde.org/screenshots/marble/marble-behaim2.png</image>
       <caption>A (rough) facsimile created by Ernest George Ravenstein in 1908.</caption>
+      <caption xml:lang="ca">Un facsímil (aproximat) creat per Ernest George Ravenstein el 1908.</caption>
+      <caption xml:lang="es">Un facsímil (aproximado) creado por Ernest George Ravenstein en 1908.</caption>
+      <caption xml:lang="ka">(უხეში) ფაქსიმილი, რომელიც შეიქმნა ერნესტ ჯორჯ რავენშტეინის მიერ 1908 წელს.</caption>
+      <caption xml:lang="nl">Een (ruwe) facsimile gemaakt door Ernest George Ravenstein in 1908.</caption>
+      <caption xml:lang="sl">(Grobi) faksimile, ki ga je ustvaril Ernest George Ravenstein leta 1908.</caption>
+      <caption xml:lang="sv">En (grov) faksimil skapad av Ernest George Ravenstein 1908.</caption>
+      <caption xml:lang="tr">1908 yılında Ernest George Ravenstein tarafından oluşturulmuş (kaba) bir faksimile.</caption>
+      <caption xml:lang="uk">(Грубе) факсиміле, яке було створено Ернестом Георгом Равенштайном у 1908 році.</caption>
+      <caption xml:lang="x-test">xxA (rough) facsimile created by Ernest George Ravenstein in 1908.xx</caption>
     </screenshot>
   </screenshots>
 </component>
