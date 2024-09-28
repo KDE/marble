@@ -16,3 +16,5 @@ Dependencies:
 Options:
  cmake-options: "-DBUILD_MARBLE_TOOLS=ON"
  require-passing-tests-on: [ 'Linux' ]
+  gcovr-arguments: '--gcov-ignore-parse-errors=negative_hits.warn'
+ 
