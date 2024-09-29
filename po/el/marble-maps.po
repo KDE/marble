@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-27 00:37+0000\n"
+"POT-Creation-Date: 2024-09-29 00:37+0000\n"
 "PO-Revision-Date: 2017-09-22 19:28+0200\n"
 "Last-Translator: Stelios <sstavra@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-el@kde.org>\n"
@@ -37,41 +37,49 @@ msgstr "Σελιδοδείκτες"
 msgid "Your bookmarks will appear here."
 msgstr "Οι σελιδοδείκτες σας θα εμφανιστούν εδώ."
 
+#. i18n: ectx: label, entry (MapThemeId), group (General)
+#: config.kcfg:14
+#, fuzzy, kde-format
+#| msgctxt "MapWizard|"
+#| msgid "The lowercase map theme id."
+msgid "The marble theme id"
+msgstr "Η ταυτότητα του θέματος χάρτη με πεζά."
+
 #: CurrentPosition.qml:54
 #, kde-format
 msgctxt "@option:check"
 msgid "Follow Current Position"
 msgstr "Ακολουθήστε την τρέχουσα θέση"
 
-#: main.cpp:40 MainScreen.qml:20 MainScreen.qml:177
+#: main.cpp:42 MainScreen.qml:21 MainScreen.qml:189
 #, kde-format
 msgid "Marble Maps"
 msgstr "Marble Maps"
 
-#: main.cpp:42
+#: main.cpp:44
 #, fuzzy, kde-format
 #| msgctxt "QObject|"
 #| msgid "Edit Maps"
 msgid "Maps"
 msgstr "Επεξεργασία χαρτών"
 
-#: main.cpp:44
+#: main.cpp:46
 #, kde-format
 msgid "© KDE Community"
 msgstr ""
 
-#: main.cpp:50
+#: main.cpp:52
 #, kde-format
 msgid "Carl Schwan"
 msgstr ""
 
-#: main.cpp:51
+#: main.cpp:53
 #, fuzzy, kde-format
 #| msgid "<b>Developers</b>"
 msgid "Developer"
 msgstr "<b>Προγραμματιστές</b>"
 
-#: main.cpp:56
+#: main.cpp:58
 #, fuzzy, kde-format
 #| msgctxt "Marble::YoursPlugin|"
 #| msgid "Yours"
@@ -79,7 +87,7 @@ msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
 msgstr "Yours"
 
-#: main.cpp:56
+#: main.cpp:58
 #, fuzzy, kde-format
 #| msgctxt "ExternalEditor|"
 #| msgid "Editor Details"
@@ -87,35 +95,35 @@ msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "Λεπτομέρειες επεξεργαστή"
 
-#: MainScreen.qml:86
+#: MainScreen.qml:87
 #, kde-format
 msgid "Public Transport"
 msgstr "Δημόσια συγκοινωνία"
 
-#: MainScreen.qml:101
+#: MainScreen.qml:102
 #, kde-format
 msgid "Outdoor Activities"
 msgstr "Εξωτερικές δραστηριότητες"
 
-#: MainScreen.qml:113
+#: MainScreen.qml:114
 #, kde-format
 msgctxt "@action:button"
 msgid "Accessibility"
 msgstr "Προσβασιμότητα"
 
-#: MainScreen.qml:122
+#: MainScreen.qml:123
 #, kde-format
 msgctxt "@action:button"
 msgid "About"
 msgstr "Σχετικά"
 
-#: MainScreen.qml:133
+#: MainScreen.qml:134
 #, kde-format
 msgctxt "@action:button"
 msgid "Bookmarks"
 msgstr "Σελιδοδείκτες"
 
-#: MainScreen.qml:144
+#: MainScreen.qml:145
 #, fuzzy, kde-format
 #| msgctxt "Options|"
 #| msgid "<h3>Layer Options</h3>"
@@ -123,7 +131,15 @@ msgctxt "@action:button"
 msgid "Layer Options"
 msgstr "<h3>Επιλογές επιπέδων</h3>"
 
-#: MainScreen.qml:459
+#: MainScreen.qml:156
+#, fuzzy, kde-format
+#| msgctxt "Options|"
+#| msgid "<h3>Layer Options</h3>"
+msgctxt "@action:button"
+msgid "Theme Options"
+msgstr "<h3>Επιλογές επιπέδων</h3>"
+
+#: MainScreen.qml:471
 #, kde-format
 msgid "%1 km"
 msgstr "%1 km"
@@ -280,6 +296,14 @@ msgstr "Ρυθμίσεις"
 #| msgid "Download Region"
 msgid "Download Maps via WLAN only"
 msgstr "Λήψη περιοχής"
+
+#: ThemeConfigPage.qml:19
+#, fuzzy, kde-format
+#| msgctxt "CompassConfigWidget|"
+#| msgid "Theme"
+msgctxt "@title:window"
+msgid "Themes"
+msgstr "Θέμα"
 
 #~ msgctxt "DGML|"
 #~ msgid "Moon"
@@ -6482,10 +6506,6 @@ msgstr "Λήψη περιοχής"
 #~ msgstr "Όνομα χάρτη:"
 
 #~ msgctxt "MapWizard|"
-#~ msgid "The lowercase map theme id."
-#~ msgstr "Η ταυτότητα του θέματος χάρτη με πεζά."
-
-#~ msgctxt "MapWizard|"
 #~ msgid "The folder name of your new theme."
 #~ msgstr "Το όνομα φακέλου του νέου θέματος."
 
@@ -10561,10 +10581,6 @@ msgstr "Λήψη περιοχής"
 #~ msgctxt "CompassConfigWidget|"
 #~ msgid "Configure Compass Plugin"
 #~ msgstr "Πρόσθετο αστέρων"
-
-#~ msgctxt "CompassConfigWidget|"
-#~ msgid "Theme"
-#~ msgstr "Θέμα"
 
 #~ msgctxt "CompassConfigWidget|"
 #~ msgid "Default"

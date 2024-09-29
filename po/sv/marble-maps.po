@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: marble_qt\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-27 00:37+0000\n"
+"POT-Creation-Date: 2024-09-29 00:37+0000\n"
 "PO-Revision-Date: 2024-09-25 17:31+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@gmail.com>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
@@ -32,84 +32,100 @@ msgstr "Bokmärken"
 msgid "Your bookmarks will appear here."
 msgstr "Dina bokmärken visas här."
 
+#. i18n: ectx: label, entry (MapThemeId), group (General)
+#: config.kcfg:14
+#, fuzzy, kde-format
+#| msgctxt "MapWizard|"
+#| msgid "The lowercase map theme id."
+msgid "The marble theme id"
+msgstr "Identifieraren för kartans tema med små bokstäver."
+
 #: CurrentPosition.qml:54
 #, kde-format
 msgctxt "@option:check"
 msgid "Follow Current Position"
 msgstr "Följ nuvarande position"
 
-#: main.cpp:40 MainScreen.qml:20 MainScreen.qml:177
+#: main.cpp:42 MainScreen.qml:21 MainScreen.qml:189
 #, kde-format
 msgid "Marble Maps"
 msgstr "Marble-kartor"
 
-#: main.cpp:42
+#: main.cpp:44
 #, kde-format
 msgid "Maps"
 msgstr "Mappningar"
 
-#: main.cpp:44
+#: main.cpp:46
 #, kde-format
 msgid "© KDE Community"
 msgstr "© KDE-gemenskapen"
 
-#: main.cpp:50
+#: main.cpp:52
 #, kde-format
 msgid "Carl Schwan"
 msgstr "Carl Schwan"
 
-#: main.cpp:51
+#: main.cpp:53
 #, kde-format
 msgid "Developer"
 msgstr "Utvecklare"
 
-#: main.cpp:56
+#: main.cpp:58
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
 msgstr "Stefan Asserhäll"
 
-#: main.cpp:56
+#: main.cpp:58
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "stefan.asserhall@gmail.com"
 
-#: MainScreen.qml:86
+#: MainScreen.qml:87
 #, kde-format
 msgid "Public Transport"
 msgstr "Kollektivtrafik"
 
-#: MainScreen.qml:101
+#: MainScreen.qml:102
 #, kde-format
 msgid "Outdoor Activities"
 msgstr "Utomhusaktiviteter"
 
-#: MainScreen.qml:113
+#: MainScreen.qml:114
 #, kde-format
 msgctxt "@action:button"
 msgid "Accessibility"
 msgstr "Handikappanpassning"
 
-#: MainScreen.qml:122
+#: MainScreen.qml:123
 #, kde-format
 msgctxt "@action:button"
 msgid "About"
 msgstr "Om"
 
-#: MainScreen.qml:133
+#: MainScreen.qml:134
 #, kde-format
 msgctxt "@action:button"
 msgid "Bookmarks"
 msgstr "Bokmärken"
 
-#: MainScreen.qml:144
+#: MainScreen.qml:145
 #, kde-format
 msgctxt "@action:button"
 msgid "Layer Options"
 msgstr "Lagerinställningar"
 
-#: MainScreen.qml:459
+#: MainScreen.qml:156
+#, fuzzy, kde-format
+#| msgctxt "@action:button"
+#| msgid "Layer Options"
+msgctxt "@action:button"
+msgid "Theme Options"
+msgstr "Lagerinställningar"
+
+#: MainScreen.qml:471
 #, kde-format
 msgid "%1 km"
 msgstr "%1 km"
@@ -256,6 +272,14 @@ msgstr "Nätverksinställningar"
 #, kde-format
 msgid "Download Maps via WLAN only"
 msgstr "Ladda bara ner kartor via WLAN"
+
+#: ThemeConfigPage.qml:19
+#, fuzzy, kde-format
+#| msgctxt "CompassConfigWidget|"
+#| msgid "Theme"
+msgctxt "@title:window"
+msgid "Themes"
+msgstr "Tema"
 
 #~ msgctxt "DGML|"
 #~ msgid "Moon"
@@ -6417,10 +6441,6 @@ msgstr "Ladda bara ner kartor via WLAN"
 #~ msgstr "Kartnamn:"
 
 #~ msgctxt "MapWizard|"
-#~ msgid "The lowercase map theme id."
-#~ msgstr "Identifieraren för kartans tema med små bokstäver."
-
-#~ msgctxt "MapWizard|"
 #~ msgid "The folder name of your new theme."
 #~ msgstr "Det nya temats katalognamn."
 
@@ -10671,10 +10691,6 @@ msgstr "Ladda bara ner kartor via WLAN"
 #~ msgctxt "CompassConfigWidget|"
 #~ msgid "Configure Compass Plugin"
 #~ msgstr "Anpassa insticksprogram för kompass"
-
-#~ msgctxt "CompassConfigWidget|"
-#~ msgid "Theme"
-#~ msgstr "Tema"
 
 #~ msgctxt "CompassConfigWidget|"
 #~ msgid "Default"

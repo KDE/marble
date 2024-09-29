@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeedu\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-27 00:37+0000\n"
+"POT-Creation-Date: 2024-09-29 00:37+0000\n"
 "PO-Revision-Date: 2015-02-25 23:33+0100\n"
 "Last-Translator: Samir Ribić <megaribi@epn.ba>\n"
 "Language-Team: Bosnian <bs@li.org>\n"
@@ -33,6 +33,12 @@ msgstr "Obilježivači"
 msgid "Your bookmarks will appear here."
 msgstr ""
 
+#. i18n: ectx: label, entry (MapThemeId), group (General)
+#: config.kcfg:14
+#, kde-format
+msgid "The marble theme id"
+msgstr ""
+
 #: CurrentPosition.qml:54
 #, fuzzy, kde-format
 #| msgid "Current Location"
@@ -40,87 +46,94 @@ msgctxt "@option:check"
 msgid "Follow Current Position"
 msgstr "Trenutna lokacija"
 
-#: main.cpp:40 MainScreen.qml:20 MainScreen.qml:177
+#: main.cpp:42 MainScreen.qml:21 MainScreen.qml:189
 #, fuzzy, kde-format
 #| msgid "Manage Bookmarks"
 msgid "Marble Maps"
 msgstr "Upravljanje zabilješkama"
 
-#: main.cpp:42
+#: main.cpp:44
 #, fuzzy, kde-format
 #| msgid "Edit Maps"
 msgid "Maps"
 msgstr "Izmijeni mapu"
 
-#: main.cpp:44
+#: main.cpp:46
 #, kde-format
 msgid "© KDE Community"
 msgstr ""
 
-#: main.cpp:50
+#: main.cpp:52
 #, kde-format
 msgid "Carl Schwan"
 msgstr ""
 
-#: main.cpp:51
+#: main.cpp:53
 #, fuzzy, kde-format
 #| msgid "<b>Developers</b>"
 msgid "Developer"
 msgstr "<b>Programeri</b>"
 
-#: main.cpp:56
+#: main.cpp:58
 #, fuzzy, kde-format
 #| msgid "Yours"
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
 msgstr "Vaš"
 
-#: main.cpp:56
+#: main.cpp:58
 #, fuzzy, kde-format
 #| msgid "Address Details"
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "Adresni detalji"
 
-#: MainScreen.qml:86
+#: MainScreen.qml:87
 #, fuzzy, kde-format
 #| msgid "Transit (Public Transport)"
 msgid "Public Transport"
 msgstr "Tranzit (javni prijevoz)"
 
-#: MainScreen.qml:101
+#: MainScreen.qml:102
 #, kde-format
 msgid "Outdoor Activities"
 msgstr ""
 
-#: MainScreen.qml:113
+#: MainScreen.qml:114
 #, kde-format
 msgctxt "@action:button"
 msgid "Accessibility"
 msgstr ""
 
-#: MainScreen.qml:122
+#: MainScreen.qml:123
 #, fuzzy, kde-format
 #| msgid "About"
 msgctxt "@action:button"
 msgid "About"
 msgstr "O programu"
 
-#: MainScreen.qml:133
+#: MainScreen.qml:134
 #, fuzzy, kde-format
 #| msgid "Bookmarks"
 msgctxt "@action:button"
 msgid "Bookmarks"
 msgstr "Obilježivači"
 
-#: MainScreen.qml:144
+#: MainScreen.qml:145
 #, fuzzy, kde-format
 #| msgid "View Properties"
 msgctxt "@action:button"
 msgid "Layer Options"
 msgstr "Pregled svojstva"
 
-#: MainScreen.qml:459
+#: MainScreen.qml:156
+#, fuzzy, kde-format
+#| msgid "View Properties"
+msgctxt "@action:button"
+msgid "Theme Options"
+msgstr "Pregled svojstva"
+
+#: MainScreen.qml:471
 #, fuzzy, kde-format
 #| msgid "%1 km"
 msgid "%1 km"
@@ -286,6 +299,13 @@ msgstr "Postavke"
 #| msgid "Download Region"
 msgid "Download Maps via WLAN only"
 msgstr "Preuzmi region"
+
+#: ThemeConfigPage.qml:19
+#, fuzzy, kde-format
+#| msgid "theme park"
+msgctxt "@title:window"
+msgid "Themes"
+msgstr "zabavni park"
 
 #, fuzzy
 #~| msgid "Moon"
@@ -3820,12 +3840,6 @@ msgstr "Preuzmi region"
 #~ msgctxt "GeoDataPlacemark|"
 #~ msgid "Theatre"
 #~ msgstr "pozorište"
-
-#, fuzzy
-#~| msgid "theme park"
-#~ msgctxt "GeoDataPlacemark|"
-#~ msgid "Theme Park"
-#~ msgstr "zabavni park"
 
 #, fuzzy
 #~| msgid "view point"

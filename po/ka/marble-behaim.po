@@ -1,0 +1,204 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR This file is copyright:
+# This file is distributed under the same license as the marble package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: marble\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2024-09-27 00:37+0000\n"
+"PO-Revision-Date: 2024-09-28 07:03+0200\n"
+"Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
+"Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
+"Language: ka\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.5\n"
+
+#: About.qml:9
+#, kde-format
+msgctxt "@title:group"
+msgid "Germanisches Nationalmuseum"
+msgstr "გერმანული ნაციონალური მუზეუმი"
+
+#: About.qml:14
+#, kde-format
+msgid ""
+"The original Behaim globe can be visited in the <a href=\"https://www.gnm.de/"
+"\">Germanisches Nationalmuseum</a> in Nuremberg, Germany."
+msgstr ""
+"ორიგინალური ბეჰამის გლობუსი შეგიძლიათ იხილოთ <a href=\"https://www.gnm.de/"
+"\">გერმანულ ნაციონალურ მუზეუმში</a>, ნიურნბერგი, გერმანია."
+
+#: About.qml:20
+#, kde-format
+msgctxt "@title:group"
+msgid "Map Content"
+msgstr "რუკის შინაარსი"
+
+#: About.qml:25
+#, kde-format
+msgid ""
+"Digitized map based on orthophotographic gores by TU Vienna, 1990. "
+"Germanisches Nationalmuseum and Friedrich-Alexander-Universität Erlangen-"
+"Nürnberg, CC BY-SA 3.0. Ghillany map based on two planiglobes which are "
+"provided as a map supplement to F.W. Ghillany's \"Geschichte des Seefahrers "
+"Ritter Martin Behaim nach den ältesten vorhandenen Urkunden\", Nuremberg "
+"1853. CC BY-SA 3.0."
+msgstr ""
+"ციფრული რუკა, რომელიც დაფუძნებულია ორთოფოტოგრაფიული გორებზე TU Vienna, 1990. "
+"Germanisches Nationalmuseum და Friedrich-Alexander-Universität Erlangen-"
+"Nürnberg, CC BY-SA 3.0. Ghillany რუკა დაფუძნებულია ორ planiglobes, რომლებიც "
+"მოწოდებულია როგორც რუკა დანამატი F.W. Ghillany's \"Geschichte des Seefahrers "
+"Ritter Martin Behaim nach den ältesten vorhandenen Urkunden\", Nuremberg "
+"1853. CC BY-SA 3.0."
+
+#: main.cpp:32
+#, kde-format
+msgid "Marble Behaim"
+msgstr "Marble Behaim"
+
+#: main.cpp:34
+#, kde-format
+msgid ""
+"Digital reproduction of a globe crafted at the time of Columbus' first sea "
+"travel to the west."
+msgstr ""
+"კოლუმბის პირველი ზღვის მოგზაურობის დროს შექმნილი გლობუსის ციფრული "
+"რეპროდუქცია დასავლეთში."
+
+#: main.cpp:36
+#, kde-format
+msgid "© KDE Community"
+msgstr "© KDE-ის საზოგადოება"
+
+#: main.cpp:37
+#, kde-format
+msgid ""
+"<p>Martin Behaim's Erdapfel</p><p>The oldest existent globe of the Earth. "
+"Martin Behaim and collaborators created the globe around 1492 at the time of "
+"<a href=\"https://en.wikipedia.org/wiki/Voyages_of_Christopher_Columbus"
+"\">Columbus'</a> first sea travel to the west.Hence the American continent "
+"is missing on this globe.Also note the detailed inscriptions in early modern "
+"German.</p><p>Please see <a href=\"https://en.wikipedia.org/wiki/Erdapfel"
+"\">Wikipedia: Erdapfel</a> for further information about the Behaim globe."
+msgstr ""
+"<p>მარტინ ბეჰაიმის ერდაფელი</p><p>დედამიწის უძველესი არსებული გლობუსი. "
+"მარტინ ბეჰაიმმა და თანამშრომლებმა შექმნეს დედამიწა დაახლოებით 1492 წელს <a "
+"href=\"https://en.wikipedia.org/wiki/Voyages_of_Christopher_Columbus"
+"\">კოლუმბის</a> პირველი საზღვაო მოგზაურობის დროს დასავლეთში. აქედან "
+"გამომდინარე, ამერიკის კონტინენტი აკლია ამ მსოფლიოში. ასევე გაითვალისწინეთ "
+"დეტალური წარწერები ადრეულ თანამედროვე გერმანულ ენაზე.</p><p>გთხოვთ იხილოთ <a "
+"href=\"https://en.wikipedia.org/wiki/Erdapfel\">ვიკიპედია: Erdapfel</a> "
+"დამატებითი ინფორმაციისთვის ბეჰაიმის გლობუსის შესახებ."
+
+#: main.cpp:51
+#, kde-format
+msgctxt "@info:credit"
+msgid "Dennis Nienhüser"
+msgstr "Dennis Nienhüser"
+
+#: main.cpp:51
+#, kde-format
+msgctxt "@info:credit"
+msgid "Author"
+msgstr "ავტორი"
+
+#: main.cpp:53
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "Temuri Doghonadze"
+
+#: main.cpp:53
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "temuri.doghonadze@gmail.com"
+
+#: MainScreen.qml:62
+#, kde-format
+msgctxt "@title"
+msgid "Marble"
+msgstr "მარმარილო"
+
+#: MainScreen.qml:83
+#, kde-format
+msgctxt "@title:group"
+msgid "Globe Settings"
+msgstr "გლობუსის მორგება"
+
+#: MainScreen.qml:88
+#, kde-format
+msgctxt "@option:check"
+msgid "Show Behaim places"
+msgstr "ბეჰაიმის ადგილების ჩვენება"
+
+#: MainScreen.qml:95
+#, kde-format
+msgctxt "@option:check"
+msgid "Show texts and illustrations"
+msgstr "ტექსტების და ილუსტრაციების ჩვენება"
+
+#: MainScreen.qml:102
+#, kde-format
+msgctxt "@option:check"
+msgid "Show the accurate coastline"
+msgstr "ზუსტი სანაპირო ზოლის ჩვენება"
+
+#: MainScreen.qml:107
+#, kde-format
+msgctxt "@title:group"
+msgid "Globe Variant"
+msgstr "გლობუსის ვარიანტი"
+
+#: MainScreen.qml:114
+#, kde-format
+msgctxt "@option:radio"
+msgid "Original (1492)"
+msgstr "ორიგინალი (1492)"
+
+#: MainScreen.qml:116
+#, kde-format
+msgid "Digital imagery taken directly from the original Behaim globe."
+msgstr ""
+"ციფრული გამოსახულებები აღებულია პირდაპირ ორიგინალური ბეჰაიმის გლობუსიდან."
+
+#: MainScreen.qml:127
+#, kde-format
+msgctxt "@option:radio"
+msgid "Ghillany (1853)"
+msgstr "გილანი (1853)"
+
+#: MainScreen.qml:128
+#, kde-format
+msgid "A (rough) facsimile created by Friedrich Wilhelm Ghillany in 1853."
+msgstr ""
+"(უხეში) ფაქსიმილი, რომელიც შეიქმნა ფრიდრიხ ვილჰელმ გილანის მიერ 1853 წელს."
+
+#: MainScreen.qml:139
+#, kde-format
+msgctxt "@option:radio"
+msgid "Ravenstein (1908)"
+msgstr "რავენშტეინი (1908)"
+
+#: MainScreen.qml:140
+#, kde-format
+msgid "A (rough) facsimile created by Ernest George Ravenstein in 1908."
+msgstr ""
+"(უხეში) ფაქსიმილი, რომელიც შეიქმნა ერნესტ ჯორჯ რავენშტეინის მიერ 1908 წელს."
+
+#: MainScreen.qml:155
+#, kde-format
+msgctxt "@title:window"
+msgid "Behaim Globe"
+msgstr "Behaim -ის გლობუსი"
+
+#: MainScreen.qml:163
+#, kde-format
+msgctxt "@action:button"
+msgid "Information"
+msgstr "ინფორმაცია"

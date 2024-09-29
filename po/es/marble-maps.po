@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: marble-maps\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-27 00:37+0000\n"
+"POT-Creation-Date: 2024-09-29 00:37+0000\n"
 "PO-Revision-Date: 2024-09-26 18:55+0200\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
@@ -27,84 +27,98 @@ msgstr "Marcadores"
 msgid "Your bookmarks will appear here."
 msgstr "Aquí aparecerán sus marcadores."
 
+#. i18n: ectx: label, entry (MapThemeId), group (General)
+#: config.kcfg:14
+#, kde-format
+msgid "The marble theme id"
+msgstr ""
+
 #: CurrentPosition.qml:54
 #, kde-format
 msgctxt "@option:check"
 msgid "Follow Current Position"
 msgstr "Seguir la posición actual"
 
-#: main.cpp:40 MainScreen.qml:20 MainScreen.qml:177
+#: main.cpp:42 MainScreen.qml:21 MainScreen.qml:189
 #, kde-format
 msgid "Marble Maps"
 msgstr "Mapas de Marble"
 
-#: main.cpp:42
+#: main.cpp:44
 #, kde-format
 msgid "Maps"
 msgstr "Mapas"
 
-#: main.cpp:44
+#: main.cpp:46
 #, kde-format
 msgid "© KDE Community"
 msgstr "© La comunidad KDE"
 
-#: main.cpp:50
+#: main.cpp:52
 #, kde-format
 msgid "Carl Schwan"
 msgstr "Carl Schwan"
 
-#: main.cpp:51
+#: main.cpp:53
 #, kde-format
 msgid "Developer"
 msgstr "Desarrollador"
 
-#: main.cpp:56
+#: main.cpp:58
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
 msgstr "Eloy Cuadra"
 
-#: main.cpp:56
+#: main.cpp:58
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "ecuadra@eloihr.net"
 
-#: MainScreen.qml:86
+#: MainScreen.qml:87
 #, kde-format
 msgid "Public Transport"
 msgstr "Transporte público"
 
-#: MainScreen.qml:101
+#: MainScreen.qml:102
 #, kde-format
 msgid "Outdoor Activities"
 msgstr "Actividades al aire libre"
 
-#: MainScreen.qml:113
+#: MainScreen.qml:114
 #, kde-format
 msgctxt "@action:button"
 msgid "Accessibility"
 msgstr "Accesibilidad"
 
-#: MainScreen.qml:122
+#: MainScreen.qml:123
 #, kde-format
 msgctxt "@action:button"
 msgid "About"
 msgstr "Acerca de"
 
-#: MainScreen.qml:133
+#: MainScreen.qml:134
 #, kde-format
 msgctxt "@action:button"
 msgid "Bookmarks"
 msgstr "Marcadores"
 
-#: MainScreen.qml:144
+#: MainScreen.qml:145
 #, kde-format
 msgctxt "@action:button"
 msgid "Layer Options"
 msgstr "Opciones de capas"
 
-#: MainScreen.qml:459
+#: MainScreen.qml:156
+#, fuzzy, kde-format
+#| msgctxt "@action:button"
+#| msgid "Layer Options"
+msgctxt "@action:button"
+msgid "Theme Options"
+msgstr "Opciones de capas"
+
+#: MainScreen.qml:471
 #, kde-format
 msgid "%1 km"
 msgstr "%1 km"
@@ -251,3 +265,9 @@ msgstr "Preferencias de red"
 #, kde-format
 msgid "Download Maps via WLAN only"
 msgstr "Descargar mapas solo mediante WLAN"
+
+#: ThemeConfigPage.qml:19
+#, kde-format
+msgctxt "@title:window"
+msgid "Themes"
+msgstr ""

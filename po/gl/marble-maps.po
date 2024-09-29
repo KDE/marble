@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: marble_qt\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-27 00:37+0000\n"
+"POT-Creation-Date: 2024-09-29 00:37+0000\n"
 "PO-Revision-Date: 2024-09-25 21:20+0200\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Proxecto Trasno (proxecto@trasno.gal)\n"
@@ -34,84 +34,100 @@ msgstr "Marcadores"
 msgid "Your bookmarks will appear here."
 msgstr "Os seus marcadores aparecerán aquí."
 
+#. i18n: ectx: label, entry (MapThemeId), group (General)
+#: config.kcfg:14
+#, fuzzy, kde-format
+#| msgctxt "MapWizard|"
+#| msgid "The lowercase map theme id."
+msgid "The marble theme id"
+msgstr "O identificador do tema do mapa en minúsculas."
+
 #: CurrentPosition.qml:54
 #, kde-format
 msgctxt "@option:check"
 msgid "Follow Current Position"
 msgstr "Seguir a posición actual."
 
-#: main.cpp:40 MainScreen.qml:20 MainScreen.qml:177
+#: main.cpp:42 MainScreen.qml:21 MainScreen.qml:189
 #, kde-format
 msgid "Marble Maps"
 msgstr "Mapas de Marble"
 
-#: main.cpp:42
+#: main.cpp:44
 #, kde-format
 msgid "Maps"
 msgstr "Mapas"
 
-#: main.cpp:44
+#: main.cpp:46
 #, kde-format
 msgid "© KDE Community"
 msgstr "© Comunidade KDE"
 
-#: main.cpp:50
+#: main.cpp:52
 #, kde-format
 msgid "Carl Schwan"
 msgstr "Carl Schwan"
 
-#: main.cpp:51
+#: main.cpp:53
 #, kde-format
 msgid "Developer"
 msgstr "Desenvolvemento."
 
-#: main.cpp:56
+#: main.cpp:58
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
 msgstr "Adrián Chaves (Gallaecio)"
 
-#: main.cpp:56
+#: main.cpp:58
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "adrian@chaves.io"
 
-#: MainScreen.qml:86
+#: MainScreen.qml:87
 #, kde-format
 msgid "Public Transport"
 msgstr "Transporte público"
 
-#: MainScreen.qml:101
+#: MainScreen.qml:102
 #, kde-format
 msgid "Outdoor Activities"
 msgstr "Actividades de exterior"
 
-#: MainScreen.qml:113
+#: MainScreen.qml:114
 #, kde-format
 msgctxt "@action:button"
 msgid "Accessibility"
 msgstr "Accesibilidade"
 
-#: MainScreen.qml:122
+#: MainScreen.qml:123
 #, kde-format
 msgctxt "@action:button"
 msgid "About"
 msgstr "Sobre"
 
-#: MainScreen.qml:133
+#: MainScreen.qml:134
 #, kde-format
 msgctxt "@action:button"
 msgid "Bookmarks"
 msgstr "Marcadores"
 
-#: MainScreen.qml:144
+#: MainScreen.qml:145
 #, kde-format
 msgctxt "@action:button"
 msgid "Layer Options"
 msgstr "Opcións da capa"
 
-#: MainScreen.qml:459
+#: MainScreen.qml:156
+#, fuzzy, kde-format
+#| msgctxt "@action:button"
+#| msgid "Layer Options"
+msgctxt "@action:button"
+msgid "Theme Options"
+msgstr "Opcións da capa"
+
+#: MainScreen.qml:471
 #, kde-format
 msgid "%1 km"
 msgstr "%1 km"
@@ -258,6 +274,14 @@ msgstr "Configuración da rede"
 #, kde-format
 msgid "Download Maps via WLAN only"
 msgstr "Descargar mapas só desde puntos de acceso"
+
+#: ThemeConfigPage.qml:19
+#, fuzzy, kde-format
+#| msgctxt "CompassConfigWidget|"
+#| msgid "Theme"
+msgctxt "@title:window"
+msgid "Themes"
+msgstr "Tema"
 
 #~ msgctxt "DGML|"
 #~ msgid "Moon"
@@ -6425,10 +6449,6 @@ msgstr "Descargar mapas só desde puntos de acceso"
 #~ msgstr "Nome do mapa:"
 
 #~ msgctxt "MapWizard|"
-#~ msgid "The lowercase map theme id."
-#~ msgstr "O identificador do tema do mapa en minúsculas."
-
-#~ msgctxt "MapWizard|"
 #~ msgid "The folder name of your new theme."
 #~ msgstr "O nome do cartafol do novo tema."
 
@@ -10704,10 +10724,6 @@ msgstr "Descargar mapas só desde puntos de acceso"
 #~ msgctxt "CompassConfigWidget|"
 #~ msgid "Configure Compass Plugin"
 #~ msgstr "Configurar o complemento de compás"
-
-#~ msgctxt "CompassConfigWidget|"
-#~ msgid "Theme"
-#~ msgstr "Tema"
 
 #~ msgctxt "CompassConfigWidget|"
 #~ msgid "Default"

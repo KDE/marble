@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-27 00:37+0000\n"
+"POT-Creation-Date: 2024-09-29 00:37+0000\n"
 "PO-Revision-Date: 2014-09-18 16:28+0200\n"
 "Last-Translator: Sönke Dibbern <s_dibbern@web.de>\n"
 "Language-Team: Low Saxon <kde-i18n-nds@kde.org>\n"
@@ -33,6 +33,12 @@ msgstr "Leestekens"
 msgid "Your bookmarks will appear here."
 msgstr ""
 
+#. i18n: ectx: label, entry (MapThemeId), group (General)
+#: config.kcfg:14
+#, kde-format
+msgid "The marble theme id"
+msgstr ""
+
 #: CurrentPosition.qml:54
 #, fuzzy, kde-format
 #| msgid "Current Location"
@@ -40,35 +46,35 @@ msgctxt "@option:check"
 msgid "Follow Current Position"
 msgstr "Aktuell Oort"
 
-#: main.cpp:40 MainScreen.qml:20 MainScreen.qml:177
+#: main.cpp:42 MainScreen.qml:21 MainScreen.qml:189
 #, fuzzy, kde-format
 #| msgid "Manage Bookmarks"
 msgid "Marble Maps"
 msgstr "Leestekens plegen"
 
-#: main.cpp:42
+#: main.cpp:44
 #, fuzzy, kde-format
 #| msgid "&Edit Map"
 msgid "Maps"
 msgstr "Koort b&ewerken"
 
-#: main.cpp:44
+#: main.cpp:46
 #, kde-format
 msgid "© KDE Community"
 msgstr ""
 
-#: main.cpp:50
+#: main.cpp:52
 #, kde-format
 msgid "Carl Schwan"
 msgstr ""
 
-#: main.cpp:51
+#: main.cpp:53
 #, fuzzy, kde-format
 #| msgid "Developer"
 msgid "Developer"
 msgstr "Programmschriever"
 
-#: main.cpp:56
+#: main.cpp:58
 #, fuzzy, kde-format
 #| msgctxt "EMAIL OF TRANSLATORS"
 #| msgid "Your emails"
@@ -76,51 +82,58 @@ msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
 msgstr "heiko.evermann@gmx.de, m.j.wiese@web.de"
 
-#: main.cpp:56
+#: main.cpp:58
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "heiko.evermann@gmx.de, m.j.wiese@web.de"
 
-#: MainScreen.qml:86
+#: MainScreen.qml:87
 #, fuzzy, kde-format
 #| msgid "Transit (Public Transport)"
 msgid "Public Transport"
 msgstr "Transit (Apen Personenverkehr)"
 
-#: MainScreen.qml:101
+#: MainScreen.qml:102
 #, kde-format
 msgid "Outdoor Activities"
 msgstr ""
 
-#: MainScreen.qml:113
+#: MainScreen.qml:114
 #, kde-format
 msgctxt "@action:button"
 msgid "Accessibility"
 msgstr ""
 
-#: MainScreen.qml:122
+#: MainScreen.qml:123
 #, fuzzy, kde-format
 #| msgid "About"
 msgctxt "@action:button"
 msgid "About"
 msgstr "Vertell wat över"
 
-#: MainScreen.qml:133
+#: MainScreen.qml:134
 #, fuzzy, kde-format
 #| msgid "Bookmarks"
 msgctxt "@action:button"
 msgid "Bookmarks"
 msgstr "Leestekens"
 
-#: MainScreen.qml:144
+#: MainScreen.qml:145
 #, fuzzy, kde-format
 #| msgid "Properties"
 msgctxt "@action:button"
 msgid "Layer Options"
 msgstr "Egenschappen"
 
-#: MainScreen.qml:459
+#: MainScreen.qml:156
+#, fuzzy, kde-format
+#| msgid "Properties"
+msgctxt "@action:button"
+msgid "Theme Options"
+msgstr "Egenschappen"
+
+#: MainScreen.qml:471
 #, fuzzy, kde-format
 #| msgid "%1 km"
 msgid "%1 km"
@@ -288,6 +301,13 @@ msgstr "Instellen"
 #| msgid "Download Region"
 msgid "Download Maps via WLAN only"
 msgstr "Rebeet daalladen"
+
+#: ThemeConfigPage.qml:19
+#, fuzzy, kde-format
+#| msgid "&Theme"
+msgctxt "@title:window"
+msgid "Themes"
+msgstr "&Muster"
 
 #, fuzzy
 #~| msgid "Moon"
@@ -11687,12 +11707,6 @@ msgstr "Rebeet daalladen"
 #~ msgctxt "CompassConfigWidget|"
 #~ msgid "Configure Compass Plugin"
 #~ msgstr "Instellenmoduul"
-
-#, fuzzy
-#~| msgid "&Theme"
-#~ msgctxt "CompassConfigWidget|"
-#~ msgid "Theme"
-#~ msgstr "&Muster"
 
 #, fuzzy
 #~| msgid "Default"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: marble_qt\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-27 00:37+0000\n"
+"POT-Creation-Date: 2024-09-29 00:37+0000\n"
 "PO-Revision-Date: 2020-01-03 20:31+0200\n"
 "Last-Translator: Marek Laane <qiilaq69@gmail.com>\n"
 "Language-Team: Estonian <kde-et@lists.linux.ee>\n"
@@ -34,6 +34,14 @@ msgstr "Järjehoidjad"
 msgid "Your bookmarks will appear here."
 msgstr "Siin näed oma järjehoidjaid."
 
+#. i18n: ectx: label, entry (MapThemeId), group (General)
+#: config.kcfg:14
+#, fuzzy, kde-format
+#| msgctxt "MapWizard|"
+#| msgid "The lowercase map theme id."
+msgid "The marble theme id"
+msgstr "Väiketähtedega kaarditeema ID."
+
 #: CurrentPosition.qml:54
 #, fuzzy, kde-format
 #| msgctxt "CurrentPosition|"
@@ -42,38 +50,38 @@ msgctxt "@option:check"
 msgid "Follow Current Position"
 msgstr "Praeguse asukoha järgimine"
 
-#: main.cpp:40 MainScreen.qml:20 MainScreen.qml:177
+#: main.cpp:42 MainScreen.qml:21 MainScreen.qml:189
 #, fuzzy, kde-format
 #| msgctxt "MainScreen|"
 #| msgid "Marble Maps"
 msgid "Marble Maps"
 msgstr "Marble kaardid"
 
-#: main.cpp:42
+#: main.cpp:44
 #, fuzzy, kde-format
 #| msgctxt "QObject|"
 #| msgid "Edit Maps"
 msgid "Maps"
 msgstr "Kaartide muutmine"
 
-#: main.cpp:44
+#: main.cpp:46
 #, kde-format
 msgid "© KDE Community"
 msgstr ""
 
-#: main.cpp:50
+#: main.cpp:52
 #, kde-format
 msgid "Carl Schwan"
 msgstr ""
 
-#: main.cpp:51
+#: main.cpp:53
 #, fuzzy, kde-format
 #| msgctxt "PluginAuthor|"
 #| msgid "Developer"
 msgid "Developer"
 msgstr "Arendaja"
 
-#: main.cpp:56
+#: main.cpp:58
 #, fuzzy, kde-format
 #| msgctxt "Marble::YoursPlugin|"
 #| msgid "Yours"
@@ -81,7 +89,7 @@ msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
 msgstr "Yours"
 
-#: main.cpp:56
+#: main.cpp:58
 #, fuzzy, kde-format
 #| msgctxt "ExternalEditor|"
 #| msgid "Editor Details"
@@ -89,21 +97,21 @@ msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "Redaktori üksikasjad"
 
-#: MainScreen.qml:86
+#: MainScreen.qml:87
 #, fuzzy, kde-format
 #| msgctxt "MainScreen|"
 #| msgid "Public Transport"
 msgid "Public Transport"
 msgstr "Ühiskondlik transport"
 
-#: MainScreen.qml:101
+#: MainScreen.qml:102
 #, fuzzy, kde-format
 #| msgctxt "MainScreen|"
 #| msgid "Outdoor Activities"
 msgid "Outdoor Activities"
 msgstr "Vabaõhutegevused"
 
-#: MainScreen.qml:113
+#: MainScreen.qml:114
 #, fuzzy, kde-format
 #| msgctxt "MainScreen|"
 #| msgid "Accessibility"
@@ -111,7 +119,7 @@ msgctxt "@action:button"
 msgid "Accessibility"
 msgstr "Hõlbustus"
 
-#: MainScreen.qml:122
+#: MainScreen.qml:123
 #, fuzzy, kde-format
 #| msgctxt "Marble::PluginItemDelegate|"
 #| msgid "About"
@@ -119,7 +127,7 @@ msgctxt "@action:button"
 msgid "About"
 msgstr "Teave"
 
-#: MainScreen.qml:133
+#: MainScreen.qml:134
 #, fuzzy, kde-format
 #| msgctxt "QObject|"
 #| msgid "Bookmarks"
@@ -127,7 +135,7 @@ msgctxt "@action:button"
 msgid "Bookmarks"
 msgstr "Järjehoidjad"
 
-#: MainScreen.qml:144
+#: MainScreen.qml:145
 #, fuzzy, kde-format
 #| msgctxt "MainScreen|"
 #| msgid "Layer Options"
@@ -135,7 +143,15 @@ msgctxt "@action:button"
 msgid "Layer Options"
 msgstr "Kihivalikud"
 
-#: MainScreen.qml:459
+#: MainScreen.qml:156
+#, fuzzy, kde-format
+#| msgctxt "MainScreen|"
+#| msgid "Layer Options"
+msgctxt "@action:button"
+msgid "Theme Options"
+msgstr "Kihivalikud"
+
+#: MainScreen.qml:471
 #, fuzzy, kde-format
 #| msgctxt "MainScreen|"
 #| msgid "%1 km"
@@ -334,6 +350,14 @@ msgstr "Võrguseadistused"
 #| msgid "Download Maps via WLAN only"
 msgid "Download Maps via WLAN only"
 msgstr "Kaartide allalaadimine ainult WLAN-i vahendusel"
+
+#: ThemeConfigPage.qml:19
+#, fuzzy, kde-format
+#| msgctxt "CompassConfigWidget|"
+#| msgid "Theme"
+msgctxt "@title:window"
+msgid "Themes"
+msgstr "Teema"
 
 #~ msgctxt "DGML|"
 #~ msgid "Moon"
@@ -6359,10 +6383,6 @@ msgstr "Kaartide allalaadimine ainult WLAN-i vahendusel"
 #~ msgstr "Kaardi nimi:"
 
 #~ msgctxt "MapWizard|"
-#~ msgid "The lowercase map theme id."
-#~ msgstr "Väiketähtedega kaarditeema ID."
-
-#~ msgctxt "MapWizard|"
 #~ msgid "The folder name of your new theme."
 #~ msgstr "Uue teema kataloogi nimi."
 
@@ -10630,10 +10650,6 @@ msgstr "Kaartide allalaadimine ainult WLAN-i vahendusel"
 #~ msgctxt "CompassConfigWidget|"
 #~ msgid "Configure Compass Plugin"
 #~ msgstr "Kompassiplugina seadistamine"
-
-#~ msgctxt "CompassConfigWidget|"
-#~ msgid "Theme"
-#~ msgstr "Teema"
 
 #~ msgctxt "CompassConfigWidget|"
 #~ msgid "Default"

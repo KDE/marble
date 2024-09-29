@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: marble_qt\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-27 00:37+0000\n"
+"POT-Creation-Date: 2024-09-29 00:37+0000\n"
 "PO-Revision-Date: 2017-06-28 16:53+0200\n"
 "Last-Translator: Mindaugas Baranauskas <opensuse.lietuviu.kalba@gmail.com>\n"
 "Language-Team: Lithuanian <kde-i18n-lt@kde.org>\n"
@@ -35,6 +35,12 @@ msgstr "Žymelės"
 msgid "Your bookmarks will appear here."
 msgstr ""
 
+#. i18n: ectx: label, entry (MapThemeId), group (General)
+#: config.kcfg:14
+#, kde-format
+msgid "The marble theme id"
+msgstr ""
+
 #: CurrentPosition.qml:54
 #, fuzzy, kde-format
 #| msgctxt "CurrentLocationWidget|"
@@ -43,45 +49,45 @@ msgctxt "@option:check"
 msgid "Follow Current Position"
 msgstr "Dabartinė vieta"
 
-#: main.cpp:40 MainScreen.qml:20 MainScreen.qml:177
+#: main.cpp:42 MainScreen.qml:21 MainScreen.qml:189
 #, fuzzy, kde-format
 #| msgctxt "MainScreen|"
 #| msgid "Marble Maps"
 msgid "Marble Maps"
 msgstr "Marble žemėlapiai"
 
-#: main.cpp:42
+#: main.cpp:44
 #, fuzzy, kde-format
 #| msgctxt "QObject|"
 #| msgid "Edit Maps"
 msgid "Maps"
 msgstr "Redaguoti žemėlapius"
 
-#: main.cpp:44
+#: main.cpp:46
 #, kde-format
 msgid "© KDE Community"
 msgstr ""
 
-#: main.cpp:50
+#: main.cpp:52
 #, kde-format
 msgid "Carl Schwan"
 msgstr ""
 
-#: main.cpp:51
+#: main.cpp:53
 #, fuzzy, kde-format
 #| msgctxt "PluginAuthor|"
 #| msgid "Developer"
 msgid "Developer"
 msgstr "Programuotojas"
 
-#: main.cpp:56
+#: main.cpp:58
 #, fuzzy, kde-format
 #| msgid "Yours"
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
 msgstr "Yours"
 
-#: main.cpp:56
+#: main.cpp:58
 #, fuzzy, kde-format
 #| msgctxt "ExternalEditor|"
 #| msgid "Editor Details"
@@ -89,19 +95,19 @@ msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "Išsamiau apie rengyklę"
 
-#: MainScreen.qml:86
+#: MainScreen.qml:87
 #, fuzzy, kde-format
 #| msgctxt "SidePanel|"
 #| msgid "Public Transport"
 msgid "Public Transport"
 msgstr "Viešasis transportas"
 
-#: MainScreen.qml:101
+#: MainScreen.qml:102
 #, kde-format
 msgid "Outdoor Activities"
 msgstr ""
 
-#: MainScreen.qml:113
+#: MainScreen.qml:114
 #, fuzzy, kde-format
 #| msgctxt "SidePanel|"
 #| msgid "Accessibility"
@@ -109,7 +115,7 @@ msgctxt "@action:button"
 msgid "Accessibility"
 msgstr "Prieinamumas"
 
-#: MainScreen.qml:122
+#: MainScreen.qml:123
 #, fuzzy, kde-format
 #| msgctxt "Marble::PluginItemDelegate|"
 #| msgid "About"
@@ -117,7 +123,7 @@ msgctxt "@action:button"
 msgid "About"
 msgstr "Apie"
 
-#: MainScreen.qml:133
+#: MainScreen.qml:134
 #, fuzzy, kde-format
 #| msgctxt "QObject|"
 #| msgid "Bookmarks"
@@ -125,7 +131,7 @@ msgctxt "@action:button"
 msgid "Bookmarks"
 msgstr "Žymelės"
 
-#: MainScreen.qml:144
+#: MainScreen.qml:145
 #, fuzzy, kde-format
 #| msgctxt "EclipsesConfigDialog|"
 #| msgid "View &Options"
@@ -133,7 +139,15 @@ msgctxt "@action:button"
 msgid "Layer Options"
 msgstr "&Rodymo parinktys"
 
-#: MainScreen.qml:459
+#: MainScreen.qml:156
+#, fuzzy, kde-format
+#| msgctxt "EclipsesConfigDialog|"
+#| msgid "View &Options"
+msgctxt "@action:button"
+msgid "Theme Options"
+msgstr "&Rodymo parinktys"
+
+#: MainScreen.qml:471
 #, fuzzy, kde-format
 #| msgctxt "MainScreen|"
 #| msgid "%1 km"
@@ -320,6 +334,14 @@ msgstr "Paslaugos nuostatos"
 #| msgid "Download Region"
 msgid "Download Maps via WLAN only"
 msgstr "Atsiųsti sritį"
+
+#: ThemeConfigPage.qml:19
+#, fuzzy, kde-format
+#| msgctxt "CompassConfigWidget|"
+#| msgid "Theme"
+msgctxt "@title:window"
+msgid "Themes"
+msgstr "Apipavidalinimas"
 
 #~ msgctxt "DGML|"
 #~ msgid "Moon"
@@ -8345,10 +8367,6 @@ msgstr "Atsiųsti sritį"
 #~ msgctxt "CompassConfigWidget|"
 #~ msgid "Configure Compass Plugin"
 #~ msgstr "Konfigūruoti kompaso papildinį"
-
-#~ msgctxt "CompassConfigWidget|"
-#~ msgid "Theme"
-#~ msgstr "Apipavidalinimas"
 
 #~ msgctxt "CompassConfigWidget|"
 #~ msgid "Default"

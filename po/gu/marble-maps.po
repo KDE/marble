@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: marble-gu\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-27 00:37+0000\n"
+"POT-Creation-Date: 2024-09-29 00:37+0000\n"
 "PO-Revision-Date: 2009-05-15 11:57+0530\n"
 "Last-Translator: Kartik Mistry <kartik.mistry@gmail.com>\n"
 "Language-Team: Gujarati <kde-i18n-doc@kde.org>\n"
@@ -30,6 +30,12 @@ msgstr "પ્લેસમાર્ક્સ પ્લગઇન"
 msgid "Your bookmarks will appear here."
 msgstr ""
 
+#. i18n: ectx: label, entry (MapThemeId), group (General)
+#: config.kcfg:14
+#, kde-format
+msgid "The marble theme id"
+msgstr ""
+
 #: CurrentPosition.qml:54
 #, fuzzy, kde-format
 #| msgid "Current Location"
@@ -37,85 +43,91 @@ msgctxt "@option:check"
 msgid "Follow Current Position"
 msgstr "હાલની જગ્યા"
 
-#: main.cpp:40 MainScreen.qml:20 MainScreen.qml:177
+#: main.cpp:42 MainScreen.qml:21 MainScreen.qml:189
 #, fuzzy, kde-format
 #| msgid "Placemarks Plugin"
 msgid "Marble Maps"
 msgstr "પ્લેસમાર્ક્સ પ્લગઇન"
 
-#: main.cpp:42
+#: main.cpp:44
 #, fuzzy, kde-format
 #| msgid "&Edit"
 msgid "Maps"
 msgstr "ફેરફાર (&E)"
 
-#: main.cpp:44
+#: main.cpp:46
 #, kde-format
 msgid "© KDE Community"
 msgstr ""
 
-#: main.cpp:50
+#: main.cpp:52
 #, kde-format
 msgid "Carl Schwan"
 msgstr ""
 
-#: main.cpp:51
+#: main.cpp:53
 #, kde-format
 msgid "Developer"
 msgstr ""
 
-#: main.cpp:56
+#: main.cpp:58
 #, fuzzy, kde-format
 #| msgid "Placemarks Plugin"
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
 msgstr "પ્લેસમાર્ક્સ પ્લગઇન"
 
-#: main.cpp:56
+#: main.cpp:58
 #, fuzzy, kde-format
 #| msgid "Show Navigation Panel"
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "દિશા પટ્ટી બતાવો"
 
-#: MainScreen.qml:86
+#: MainScreen.qml:87
 #, fuzzy, kde-format
 #| msgid "Navigation"
 msgid "Public Transport"
 msgstr "શોધખોળ"
 
-#: MainScreen.qml:101
+#: MainScreen.qml:102
 #, kde-format
 msgid "Outdoor Activities"
 msgstr ""
 
-#: MainScreen.qml:113
+#: MainScreen.qml:114
 #, kde-format
 msgctxt "@action:button"
 msgid "Accessibility"
 msgstr ""
 
-#: MainScreen.qml:122
+#: MainScreen.qml:123
 #, fuzzy, kde-format
 #| msgid "&About"
 msgctxt "@action:button"
 msgid "About"
 msgstr "વિશે (&A)"
 
-#: MainScreen.qml:133
+#: MainScreen.qml:134
 #, fuzzy, kde-format
 #| msgid "Placemarks Plugin"
 msgctxt "@action:button"
 msgid "Bookmarks"
 msgstr "પ્લેસમાર્ક્સ પ્લગઇન"
 
-#: MainScreen.qml:144
+#: MainScreen.qml:145
 #, kde-format
 msgctxt "@action:button"
 msgid "Layer Options"
 msgstr ""
 
-#: MainScreen.qml:459
+#: MainScreen.qml:156
+#, kde-format
+msgctxt "@action:button"
+msgid "Theme Options"
+msgstr ""
+
+#: MainScreen.qml:471
 #, fuzzy, kde-format
 #| msgid "%1 km"
 msgid "%1 km"
@@ -277,6 +289,13 @@ msgstr "ગોઠવણીઓ (&S)"
 #| msgid "Save File"
 msgid "Download Maps via WLAN only"
 msgstr "ફાઇલ સંગ્રહ કરો"
+
+#: ThemeConfigPage.qml:19
+#, fuzzy, kde-format
+#| msgid "Name"
+msgctxt "@title:window"
+msgid "Themes"
+msgstr "નામ"
 
 #, fuzzy
 #~| msgctxt "the earth's moon"
@@ -2636,12 +2655,6 @@ msgstr "ફાઇલ સંગ્રહ કરો"
 #~ msgctxt "MapWizard|"
 #~ msgid "Legend Image:"
 #~ msgstr "લિજેન્ડ"
-
-#, fuzzy
-#~| msgid "Name"
-#~ msgctxt "MapWizard|"
-#~ msgid "Map Theme:"
-#~ msgstr "નામ"
 
 #, fuzzy
 #~| msgid "&Copy Map"

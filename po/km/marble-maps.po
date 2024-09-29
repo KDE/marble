@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-27 00:37+0000\n"
+"POT-Creation-Date: 2024-09-29 00:37+0000\n"
 "PO-Revision-Date: 2008-12-02 15:23+0700\n"
 "Last-Translator: Eng Vannak <evannak@khmeros.info>\n"
 "Language-Team: km <support@khmeros.info>\n"
@@ -33,6 +33,12 @@ msgstr "ចំណាំ"
 msgid "Your bookmarks will appear here."
 msgstr ""
 
+#. i18n: ectx: label, entry (MapThemeId), group (General)
+#: config.kcfg:14
+#, kde-format
+msgid "The marble theme id"
+msgstr ""
+
 #: CurrentPosition.qml:54
 #, fuzzy, kde-format
 #| msgid "Current Location"
@@ -40,35 +46,35 @@ msgctxt "@option:check"
 msgid "Follow Current Position"
 msgstr "ទីតាំង​បច្ចុប្បន្ន"
 
-#: main.cpp:40 MainScreen.qml:20 MainScreen.qml:177
+#: main.cpp:42 MainScreen.qml:21 MainScreen.qml:189
 #, fuzzy, kde-format
 #| msgid "Manage Bookmarks"
 msgid "Marble Maps"
 msgstr "គ្រប់គ្រង​ចំណាំ"
 
-#: main.cpp:42
+#: main.cpp:44
 #, fuzzy, kde-format
 #| msgid "&Edit Map"
 msgid "Maps"
 msgstr "កែសម្រួល​ផែនទី"
 
-#: main.cpp:44
+#: main.cpp:46
 #, kde-format
 msgid "© KDE Community"
 msgstr ""
 
-#: main.cpp:50
+#: main.cpp:52
 #, kde-format
 msgid "Carl Schwan"
 msgstr ""
 
-#: main.cpp:51
+#: main.cpp:53
 #, fuzzy, kde-format
 #| msgid "<b>Developers</b>"
 msgid "Developer"
 msgstr "<b>អ្នក​ធភិវឌ្ឍន៍</b>"
 
-#: main.cpp:56
+#: main.cpp:58
 #, fuzzy, kde-format
 #| msgctxt "EMAIL OF TRANSLATORS"
 #| msgid "Your emails"
@@ -78,7 +84,7 @@ msgstr ""
 "khoemsokhem@khmeros.info,soursdey@khmeros.info,​​evannak@khmeros.info,"
 "piseth_dv@khmeros.info"
 
-#: main.cpp:56
+#: main.cpp:58
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
@@ -86,45 +92,52 @@ msgstr ""
 "khoemsokhem@khmeros.info,soursdey@khmeros.info,​​evannak@khmeros.info,"
 "piseth_dv@khmeros.info"
 
-#: MainScreen.qml:86
+#: MainScreen.qml:87
 #, fuzzy, kde-format
 #| msgid "Transit (Public Transport)"
 msgid "Public Transport"
 msgstr "ឆ្លងកាត់ (ការ​ដឹកជញ្ជូន​សាធារណៈ)"
 
-#: MainScreen.qml:101
+#: MainScreen.qml:102
 #, kde-format
 msgid "Outdoor Activities"
 msgstr ""
 
-#: MainScreen.qml:113
+#: MainScreen.qml:114
 #, kde-format
 msgctxt "@action:button"
 msgid "Accessibility"
 msgstr ""
 
-#: MainScreen.qml:122
+#: MainScreen.qml:123
 #, fuzzy, kde-format
 #| msgid "About"
 msgctxt "@action:button"
 msgid "About"
 msgstr "អំពី"
 
-#: MainScreen.qml:133
+#: MainScreen.qml:134
 #, fuzzy, kde-format
 #| msgid "Bookmarks"
 msgctxt "@action:button"
 msgid "Bookmarks"
 msgstr "ចំណាំ"
 
-#: MainScreen.qml:144
+#: MainScreen.qml:145
 #, fuzzy, kde-format
 #| msgid "New Profile"
 msgctxt "@action:button"
 msgid "Layer Options"
 msgstr "ទម្រង់​ថ្មី"
 
-#: MainScreen.qml:459
+#: MainScreen.qml:156
+#, fuzzy, kde-format
+#| msgid "New Profile"
+msgctxt "@action:button"
+msgid "Theme Options"
+msgstr "ទម្រង់​ថ្មី"
+
+#: MainScreen.qml:471
 #, fuzzy, kde-format
 #| msgid "%1 km"
 msgid "%1 km"
@@ -289,6 +302,12 @@ msgstr "ការ​កំណត់"
 #| msgid "Download Region"
 msgid "Download Maps via WLAN only"
 msgstr "ទាញ​យក​តំបន់"
+
+#: ThemeConfigPage.qml:19
+#, fuzzy, kde-format
+msgctxt "@title:window"
+msgid "Themes"
+msgstr "ស្បែក"
 
 #, fuzzy
 #~| msgctxt "the earth's moon"
@@ -7847,11 +7866,6 @@ msgstr "ទាញ​យក​តំបន់"
 #~ msgctxt "Marble::AtmospherePlugin|"
 #~ msgid "Shows the atmosphere around the earth."
 #~ msgstr "បង្ហាញ​ការ​រញ្ជួយ​ដី​នៅ​លើ​ផែនទី ។"
-
-#, fuzzy
-#~ msgctxt "CompassConfigWidget|"
-#~ msgid "Theme"
-#~ msgstr "ស្បែក"
 
 #, fuzzy
 #~| msgid "Default"

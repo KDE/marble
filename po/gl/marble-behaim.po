@@ -1,27 +1,27 @@
 # Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the marble package.
 #
-# SPDX-FileCopyrightText: 2024 Freek de Kruijf <freekdekruijf@kde.nl>
+# SPDX-FileCopyrightText: 2024 Adrián Chaves (Gallaecio)
 msgid ""
 msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-09-27 00:37+0000\n"
-"PO-Revision-Date: 2024-09-27 13:52+0200\n"
-"Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
-"Language-Team: \n"
-"Language: nl\n"
+"PO-Revision-Date: 2024-09-28 13:33+0200\n"
+"Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
+"Language-Team: Proxecto Trasno (proxecto@trasno.gal)\n"
+"Language: gl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 24.08.1\n"
+"X-Generator: Lokalize 24.05.2\n"
 
 #: About.qml:9
 #, kde-format
 msgctxt "@title:group"
 msgid "Germanisches Nationalmuseum"
-msgstr "Germanisches Nationalmuseum"
+msgstr "Museo Nacional Xermánico"
 
 #: About.qml:14
 #, kde-format
@@ -29,14 +29,14 @@ msgid ""
 "The original Behaim globe can be visited in the <a href=\"https://www.gnm.de/"
 "\">Germanisches Nationalmuseum</a> in Nuremberg, Germany."
 msgstr ""
-"De originele Behaim globe kan bezocht worden in hey <a href=\"https://www."
-"gnm.de/\">Germanisches Nationalmuseum</a> in Nuremberg, Duitsland."
+"O globo terráqueo orixinal de Behaim pode visitarse no <a href=\"https://www."
+"gnm.de/\">Museo Nacional Xermánico</a>, en Nuremberg, Alemaña."
 
 #: About.qml:20
 #, kde-format
 msgctxt "@title:group"
 msgid "Map Content"
-msgstr "Inhoud van kaart"
+msgstr "Contido do mapa"
 
 #: About.qml:25
 #, kde-format
@@ -48,17 +48,11 @@ msgid ""
 "Ritter Martin Behaim nach den ältesten vorhandenen Urkunden\", Nuremberg "
 "1853. CC BY-SA 3.0."
 msgstr ""
-"Gedigitaliseerde kaart gebaseerd op orthofotografische wonden door TU "
-"Vienna, 1990. Germanisches Nationalmuseum en Friedrich-Alexander-Universität "
-"Erlangen-Nürnberg, CC BY-SA 3.0. Ghillany kaart gebaseerd op twee  "
-"planigloben die geleverd worden als een kaarttoevoeging aan F.W. Ghillany's "
-"\"Geschichte des Seefahrers Ritter Martin Behaim volgens de oudste "
-"beschikbare oorkonden\", Nuremberg 1853. CC BY-SA 3.0."
 
 #: main.cpp:32
 #, kde-format
 msgid "Marble Behaim"
-msgstr "Marble Behaim"
+msgstr ""
 
 #: main.cpp:34
 #, kde-format
@@ -66,13 +60,11 @@ msgid ""
 "Digital reproduction of a globe crafted at the time of Columbus' first sea "
 "travel to the west."
 msgstr ""
-"Digitale reproductie van een globe gemaakt in de tijd van de eerste zeereis "
-"van Columbus naar het Westen."
 
 #: main.cpp:36
 #, kde-format
 msgid "© KDE Community"
-msgstr "© KDE-gemeenschap"
+msgstr ""
 
 #: main.cpp:37
 #, kde-format
@@ -85,117 +77,108 @@ msgid ""
 "German.</p><p>Please see <a href=\"https://en.wikipedia.org/wiki/Erdapfel"
 "\">Wikipedia: Erdapfel</a> for further information about the Behaim globe."
 msgstr ""
-"<p>Martin Behaim's Erdapfel</p><p>De oudste bestaande globe van de Aarde. "
-"Martin Behaim en medewerkers maakten de globe rond 1492 in de tijd van de "
-"eerste zeereis van <a href=\"https://en.wikipedia.org/wiki/"
-"Voyages_of_Christopher_Columbus\">Columbus'</a> naar het Westen. Daarom "
-"ontbreekt het Amerikaanse continent op deze globe. Let ook op de "
-"gedetailleerde inscripties in vroeg modern Duits.</p><p>Bekijk <a href="
-"\"https://en.wikipedia.org/wiki/Erdapfel\">Wikipedia: Erdapfel</a> voor "
-"verdere informatie over de Behaim globe."
 
 #: main.cpp:51
 #, kde-format
 msgctxt "@info:credit"
 msgid "Dennis Nienhüser"
-msgstr "Dennis Nienhüser"
+msgstr ""
 
 #: main.cpp:51
 #, kde-format
 msgctxt "@info:credit"
 msgid "Author"
-msgstr "Auteur"
+msgstr ""
 
 #: main.cpp:53
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr "Freek de Kruijf - 2024"
+msgstr ""
 
 #: main.cpp:53
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr "freekdekruijf@kde.nl"
+msgstr ""
 
 #: MainScreen.qml:62
 #, kde-format
 msgctxt "@title"
 msgid "Marble"
-msgstr "Marble"
+msgstr ""
 
 #: MainScreen.qml:83
 #, kde-format
 msgctxt "@title:group"
 msgid "Globe Settings"
-msgstr "Instellingen voor globe"
+msgstr ""
 
 #: MainScreen.qml:88
 #, kde-format
 msgctxt "@option:check"
 msgid "Show Behaim places"
-msgstr "Behaim plaatsen tonen"
+msgstr ""
 
 #: MainScreen.qml:95
 #, kde-format
 msgctxt "@option:check"
 msgid "Show texts and illustrations"
-msgstr "Teksten en illustraties tonen"
+msgstr ""
 
 #: MainScreen.qml:102
 #, kde-format
 msgctxt "@option:check"
 msgid "Show the accurate coastline"
-msgstr "De nauwkeurige kustlijn tonen"
+msgstr ""
 
 #: MainScreen.qml:107
 #, kde-format
 msgctxt "@title:group"
 msgid "Globe Variant"
-msgstr "Variant van globe"
+msgstr ""
 
 #: MainScreen.qml:114
 #, kde-format
 msgctxt "@option:radio"
 msgid "Original (1492)"
-msgstr "Origineel (1492)"
+msgstr ""
 
 #: MainScreen.qml:116
 #, kde-format
 msgid "Digital imagery taken directly from the original Behaim globe."
 msgstr ""
-"Digitaal beeldmateriaal direct genomen van de originele globe van Behaim."
 
 #: MainScreen.qml:127
 #, kde-format
 msgctxt "@option:radio"
 msgid "Ghillany (1853)"
-msgstr "Ghillany (1853)"
+msgstr ""
 
 #: MainScreen.qml:128
 #, kde-format
 msgid "A (rough) facsimile created by Friedrich Wilhelm Ghillany in 1853."
-msgstr "Een (ruwe) facsimile gemaakt door Friedrich Wilhelm Ghillany in 1853."
+msgstr ""
 
 #: MainScreen.qml:139
 #, kde-format
 msgctxt "@option:radio"
 msgid "Ravenstein (1908)"
-msgstr "Ravenstein (1908)"
+msgstr ""
 
 #: MainScreen.qml:140
 #, kde-format
 msgid "A (rough) facsimile created by Ernest George Ravenstein in 1908."
-msgstr "Een (ruwe) facsimile gemaakt door Ernest George Ravenstein in 1908."
+msgstr ""
 
 #: MainScreen.qml:155
 #, kde-format
 msgctxt "@title:window"
 msgid "Behaim Globe"
-msgstr "Globe van Behaim"
+msgstr ""
 
 #: MainScreen.qml:163
 #, kde-format
 msgctxt "@action:button"
 msgid "Information"
-msgstr "Informatie"
+msgstr ""

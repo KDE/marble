@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-27 00:37+0000\n"
+"POT-Creation-Date: 2024-09-29 00:37+0000\n"
 "PO-Revision-Date: 2008-08-05 22:27+0200\n"
 "Last-Translator: Yannig Marchegay (Kokoyaya) <yannig@marchegay.org>\n"
 "Language-Team: Occitan (lengadocian) <ubuntu-l10n-oci@lists.ubuntu.com>\n"
@@ -30,6 +30,12 @@ msgstr ""
 msgid "Your bookmarks will appear here."
 msgstr ""
 
+#. i18n: ectx: label, entry (MapThemeId), group (General)
+#: config.kcfg:14
+#, kde-format
+msgid "The marble theme id"
+msgstr ""
+
 #: CurrentPosition.qml:54
 #, fuzzy, kde-format
 #| msgid "Location"
@@ -37,34 +43,34 @@ msgctxt "@option:check"
 msgid "Follow Current Position"
 msgstr "Emplaçament"
 
-#: main.cpp:40 MainScreen.qml:20 MainScreen.qml:177
+#: main.cpp:42 MainScreen.qml:21 MainScreen.qml:189
 #, fuzzy, kde-format
 #| msgid "&About"
 msgid "Marble Maps"
 msgstr "&A prepaus de"
 
-#: main.cpp:42
+#: main.cpp:44
 #, fuzzy, kde-format
 #| msgid "&Edit"
 msgid "Maps"
 msgstr "&Edicion"
 
-#: main.cpp:44
+#: main.cpp:46
 #, kde-format
 msgid "© KDE Community"
 msgstr ""
 
-#: main.cpp:50
+#: main.cpp:52
 #, kde-format
 msgid "Carl Schwan"
 msgstr ""
 
-#: main.cpp:51
+#: main.cpp:53
 #, kde-format
 msgid "Developer"
 msgstr ""
 
-#: main.cpp:56
+#: main.cpp:58
 #, fuzzy, kde-format
 #| msgctxt "EMAIL OF TRANSLATORS"
 #| msgid "Your emails"
@@ -72,49 +78,55 @@ msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
 msgstr "yannig@marchegay.org"
 
-#: main.cpp:56
+#: main.cpp:58
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "yannig@marchegay.org"
 
-#: MainScreen.qml:86
+#: MainScreen.qml:87
 #, fuzzy, kde-format
 #| msgid "Transportation"
 msgid "Public Transport"
 msgstr "Los transpòrts"
 
-#: MainScreen.qml:101
+#: MainScreen.qml:102
 #, kde-format
 msgid "Outdoor Activities"
 msgstr ""
 
-#: MainScreen.qml:113
+#: MainScreen.qml:114
 #, kde-format
 msgctxt "@action:button"
 msgid "Accessibility"
 msgstr ""
 
-#: MainScreen.qml:122
+#: MainScreen.qml:123
 #, fuzzy, kde-format
 #| msgid "&About"
 msgctxt "@action:button"
 msgid "About"
 msgstr "&A prepaus de"
 
-#: MainScreen.qml:133
+#: MainScreen.qml:134
 #, kde-format
 msgctxt "@action:button"
 msgid "Bookmarks"
 msgstr ""
 
-#: MainScreen.qml:144
+#: MainScreen.qml:145
 #, kde-format
 msgctxt "@action:button"
 msgid "Layer Options"
 msgstr ""
 
-#: MainScreen.qml:459
+#: MainScreen.qml:156
+#, kde-format
+msgctxt "@action:button"
+msgid "Theme Options"
+msgstr ""
+
+#: MainScreen.qml:471
 #, fuzzy, kde-format
 #| msgid "10 mm"
 msgid "%1 km"
@@ -272,6 +284,13 @@ msgstr "&Paramètres"
 #| msgid "Save File"
 msgid "Download Maps via WLAN only"
 msgstr "Enregistrar lo fichièr"
+
+#: ThemeConfigPage.qml:19
+#, fuzzy, kde-format
+#| msgid "Name"
+msgctxt "@title:window"
+msgid "Themes"
+msgstr "Nom"
 
 #, fuzzy
 #~| msgid "State"
@@ -2149,12 +2168,6 @@ msgstr "Enregistrar lo fichièr"
 #~ msgctxt "MapWizard|"
 #~ msgid "Legend Image:"
 #~ msgstr "Legenda"
-
-#, fuzzy
-#~| msgid "Name"
-#~ msgctxt "MapWizard|"
-#~ msgid "Map Theme:"
-#~ msgstr "Nom"
 
 #, fuzzy
 #~| msgid "Open File"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: marble_qt\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-27 00:37+0000\n"
+"POT-Creation-Date: 2024-09-29 00:37+0000\n"
 "PO-Revision-Date: 2023-12-06 19:04+0100\n"
 "Last-Translator: Roman Paholik <wizzardsk@gmail.com>\n"
 "Language-Team: Slovak <kde-sk@linux.sk>\n"
@@ -35,6 +35,14 @@ msgstr "Záložky"
 msgid "Your bookmarks will appear here."
 msgstr "Tu sa zobrazia vaše záložky."
 
+#. i18n: ectx: label, entry (MapThemeId), group (General)
+#: config.kcfg:14
+#, fuzzy, kde-format
+#| msgctxt "MapWizard|"
+#| msgid "The lowercase map theme id."
+msgid "The marble theme id"
+msgstr "Názov id mapovej témy (malými písmenami)"
+
 #: CurrentPosition.qml:54
 #, fuzzy, kde-format
 #| msgctxt "CurrentPosition|"
@@ -43,38 +51,38 @@ msgctxt "@option:check"
 msgid "Follow Current Position"
 msgstr "Sledovať aktuálnu polohu"
 
-#: main.cpp:40 MainScreen.qml:20 MainScreen.qml:177
+#: main.cpp:42 MainScreen.qml:21 MainScreen.qml:189
 #, fuzzy, kde-format
 #| msgctxt "MainScreen|"
 #| msgid "Marble Maps"
 msgid "Marble Maps"
 msgstr "Marble mapy"
 
-#: main.cpp:42
+#: main.cpp:44
 #, fuzzy, kde-format
 #| msgctxt "QObject|"
 #| msgid "Edit Maps"
 msgid "Maps"
 msgstr "Upraviť mapy"
 
-#: main.cpp:44
+#: main.cpp:46
 #, kde-format
 msgid "© KDE Community"
 msgstr ""
 
-#: main.cpp:50
+#: main.cpp:52
 #, kde-format
 msgid "Carl Schwan"
 msgstr ""
 
-#: main.cpp:51
+#: main.cpp:53
 #, fuzzy, kde-format
 #| msgctxt "PluginAuthor|"
 #| msgid "Developer"
 msgid "Developer"
 msgstr "Vývojár"
 
-#: main.cpp:56
+#: main.cpp:58
 #, fuzzy, kde-format
 #| msgctxt "Marble::YoursPlugin|"
 #| msgid "Yours"
@@ -82,7 +90,7 @@ msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
 msgstr "Yours"
 
-#: main.cpp:56
+#: main.cpp:58
 #, fuzzy, kde-format
 #| msgctxt "ExternalEditor|"
 #| msgid "Editor Details"
@@ -90,21 +98,21 @@ msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "Podrobnosti o editore"
 
-#: MainScreen.qml:86
+#: MainScreen.qml:87
 #, fuzzy, kde-format
 #| msgctxt "MainScreen|"
 #| msgid "Public Transport"
 msgid "Public Transport"
 msgstr "Verejná doprava"
 
-#: MainScreen.qml:101
+#: MainScreen.qml:102
 #, fuzzy, kde-format
 #| msgctxt "MainScreen|"
 #| msgid "Outdoor Activities"
 msgid "Outdoor Activities"
 msgstr "Vonkajšie aktivity"
 
-#: MainScreen.qml:113
+#: MainScreen.qml:114
 #, fuzzy, kde-format
 #| msgctxt "MainScreen|"
 #| msgid "Accessibility"
@@ -112,7 +120,7 @@ msgctxt "@action:button"
 msgid "Accessibility"
 msgstr "Prístupnosť"
 
-#: MainScreen.qml:122
+#: MainScreen.qml:123
 #, fuzzy, kde-format
 #| msgctxt "Marble::PluginItemDelegate|"
 #| msgid "About"
@@ -120,7 +128,7 @@ msgctxt "@action:button"
 msgid "About"
 msgstr "O programe"
 
-#: MainScreen.qml:133
+#: MainScreen.qml:134
 #, fuzzy, kde-format
 #| msgctxt "QObject|"
 #| msgid "Bookmarks"
@@ -128,7 +136,7 @@ msgctxt "@action:button"
 msgid "Bookmarks"
 msgstr "Záložky"
 
-#: MainScreen.qml:144
+#: MainScreen.qml:145
 #, fuzzy, kde-format
 #| msgctxt "MainScreen|"
 #| msgid "Layer Options"
@@ -136,7 +144,15 @@ msgctxt "@action:button"
 msgid "Layer Options"
 msgstr "Možnosti vrstiev"
 
-#: MainScreen.qml:459
+#: MainScreen.qml:156
+#, fuzzy, kde-format
+#| msgctxt "MainScreen|"
+#| msgid "Layer Options"
+msgctxt "@action:button"
+msgid "Theme Options"
+msgstr "Možnosti vrstiev"
+
+#: MainScreen.qml:471
 #, fuzzy, kde-format
 #| msgctxt "MainScreen|"
 #| msgid "%1 km"
@@ -335,6 +351,14 @@ msgstr "Nastavenia siete"
 #| msgid "Download Maps via WLAN only"
 msgid "Download Maps via WLAN only"
 msgstr "Prevziať mapy iba cez WLAN"
+
+#: ThemeConfigPage.qml:19
+#, fuzzy, kde-format
+#| msgctxt "CompassConfigWidget|"
+#| msgid "Theme"
+msgctxt "@title:window"
+msgid "Themes"
+msgstr "Téma"
 
 #~ msgctxt "DGML|"
 #~ msgid "Moon"
@@ -6432,10 +6456,6 @@ msgstr "Prevziať mapy iba cez WLAN"
 #~ msgstr "Názov mapy:"
 
 #~ msgctxt "MapWizard|"
-#~ msgid "The lowercase map theme id."
-#~ msgstr "Názov id mapovej témy (malými písmenami)"
-
-#~ msgctxt "MapWizard|"
 #~ msgid "The folder name of your new theme."
 #~ msgstr "Názov priečinka vašej novej témy"
 
@@ -10687,10 +10707,6 @@ msgstr "Prevziať mapy iba cez WLAN"
 #~ msgctxt "CompassConfigWidget|"
 #~ msgid "Configure Compass Plugin"
 #~ msgstr "Nastaviť modul Kompas"
-
-#~ msgctxt "CompassConfigWidget|"
-#~ msgid "Theme"
-#~ msgstr "Téma"
 
 #~ msgctxt "CompassConfigWidget|"
 #~ msgid "Default"

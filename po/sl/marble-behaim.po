@@ -1,27 +1,28 @@
 # Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the marble package.
 #
-# SPDX-FileCopyrightText: 2024 Freek de Kruijf <freekdekruijf@kde.nl>
+# SPDX-FileCopyrightText: 2024 Matjaž Jeran <matjaz.jeran@amis.net>
 msgid ""
 msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-09-27 00:37+0000\n"
-"PO-Revision-Date: 2024-09-27 13:52+0200\n"
-"Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
-"Language-Team: \n"
-"Language: nl\n"
+"PO-Revision-Date: 2024-09-28 11:16+0200\n"
+"Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
+"Language-Team: Slovenian <lugos-slo@lugos.si>\n"
+"Language: sl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 24.08.1\n"
+"X-Generator: Lokalize 24.08.0\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n"
+"%100==4 ? 3 : 0);\n"
 
 #: About.qml:9
 #, kde-format
 msgctxt "@title:group"
 msgid "Germanisches Nationalmuseum"
-msgstr "Germanisches Nationalmuseum"
+msgstr "Germanisches Nationalmuseum (Nemški narodni muzej)"
 
 #: About.qml:14
 #, kde-format
@@ -29,14 +30,14 @@ msgid ""
 "The original Behaim globe can be visited in the <a href=\"https://www.gnm.de/"
 "\">Germanisches Nationalmuseum</a> in Nuremberg, Germany."
 msgstr ""
-"De originele Behaim globe kan bezocht worden in hey <a href=\"https://www."
-"gnm.de/\">Germanisches Nationalmuseum</a> in Nuremberg, Duitsland."
+"Izvirni Behaimov globus lahko obiščete v <a href=\"https://www.gnm.de/"
+"\">Germanisches Nationalmuseum</a> v Nurembergu, Nemčija."
 
 #: About.qml:20
 #, kde-format
 msgctxt "@title:group"
 msgid "Map Content"
-msgstr "Inhoud van kaart"
+msgstr "Vsebina zemljevida"
 
 #: About.qml:25
 #, kde-format
@@ -48,12 +49,13 @@ msgid ""
 "Ritter Martin Behaim nach den ältesten vorhandenen Urkunden\", Nuremberg "
 "1853. CC BY-SA 3.0."
 msgstr ""
-"Gedigitaliseerde kaart gebaseerd op orthofotografische wonden door TU "
-"Vienna, 1990. Germanisches Nationalmuseum en Friedrich-Alexander-Universität "
-"Erlangen-Nürnberg, CC BY-SA 3.0. Ghillany kaart gebaseerd op twee  "
-"planigloben die geleverd worden als een kaarttoevoeging aan F.W. Ghillany's "
-"\"Geschichte des Seefahrers Ritter Martin Behaim volgens de oudste "
-"beschikbare oorkonden\", Nuremberg 1853. CC BY-SA 3.0."
+"Digitalizirani zemljevid, ki temelji na ortofotografskih gredah TU Dunaj, "
+"1990.Germanisches Nationalmuseum in Friedrich-Alexander-University Erlangen-"
+"Nürnberg, CC BY-SA 3.0. Ghillanyjev zemljevid, ki temelji na dveh "
+"planiglobusih, ki stana voljo kot dodatek zemljevidu F.W. Ghillanyjeva "
+"\"Geschichte des Seefahrers Ritter Martin Behaim nach den ältesten "
+"vorhandenen Urkunden - Zgodovina mornarjev Viteza Martina Behaima po "
+"najstarejših obstoječih dokumentih\", Nürnberg 1853. CC BY-SA 3.0."
 
 #: main.cpp:32
 #, kde-format
@@ -66,13 +68,13 @@ msgid ""
 "Digital reproduction of a globe crafted at the time of Columbus' first sea "
 "travel to the west."
 msgstr ""
-"Digitale reproductie van een globe gemaakt in de tijd van de eerste zeereis "
-"van Columbus naar het Westen."
+"Digitalna reprodukcija globusa, izdelanega v času Kolumbovega prvega "
+"morskega potovanja na zahod."
 
 #: main.cpp:36
 #, kde-format
 msgid "© KDE Community"
-msgstr "© KDE-gemeenschap"
+msgstr "© Skupnost KDE"
 
 #: main.cpp:37
 #, kde-format
@@ -85,14 +87,14 @@ msgid ""
 "German.</p><p>Please see <a href=\"https://en.wikipedia.org/wiki/Erdapfel"
 "\">Wikipedia: Erdapfel</a> for further information about the Behaim globe."
 msgstr ""
-"<p>Martin Behaim's Erdapfel</p><p>De oudste bestaande globe van de Aarde. "
-"Martin Behaim en medewerkers maakten de globe rond 1492 in de tijd van de "
-"eerste zeereis van <a href=\"https://en.wikipedia.org/wiki/"
-"Voyages_of_Christopher_Columbus\">Columbus'</a> naar het Westen. Daarom "
-"ontbreekt het Amerikaanse continent op deze globe. Let ook op de "
-"gedetailleerde inscripties in vroeg modern Duits.</p><p>Bekijk <a href="
-"\"https://en.wikipedia.org/wiki/Erdapfel\">Wikipedia: Erdapfel</a> voor "
-"verdere informatie over de Behaim globe."
+"<p>Zemeljsko jabolko Martina Behaima</p><p>Najstarejši obstoječi globus "
+"Zemlje. Martin Behaim in sodelavci so ustvarili globus okoli leta 1492 v "
+"času <a href=\"https://en.wikipedia.org/wiki/Voyages_of_Christopher_Columbus"
+"\">Kolumbovega</a> prvega pomorskega potovanja na zahod.Zato na tem globusu "
+"manjka ameriška celina. Upoštevajte tudi podrobnosti napisov v zgodnji "
+"moderni nemščini.</p><p>Oglejte si <a href=\"https://en.wikipedia.org/wiki/"
+"Erdapfel\">Wikipedia: Erdapfel</a> za nadaljnje informacije o Behaimovem "
+"globusu."
 
 #: main.cpp:51
 #, kde-format
@@ -104,19 +106,19 @@ msgstr "Dennis Nienhüser"
 #, kde-format
 msgctxt "@info:credit"
 msgid "Author"
-msgstr "Auteur"
+msgstr "Avtor"
 
 #: main.cpp:53
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr "Freek de Kruijf - 2024"
+msgstr "Matjaž Jeran"
 
 #: main.cpp:53
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr "freekdekruijf@kde.nl"
+msgstr "matjaz.jeran@amis.net"
 
 #: MainScreen.qml:62
 #, kde-format
@@ -128,43 +130,43 @@ msgstr "Marble"
 #, kde-format
 msgctxt "@title:group"
 msgid "Globe Settings"
-msgstr "Instellingen voor globe"
+msgstr "Nastavitve globusa"
 
 #: MainScreen.qml:88
 #, kde-format
 msgctxt "@option:check"
 msgid "Show Behaim places"
-msgstr "Behaim plaatsen tonen"
+msgstr "Prikaži Behaimove kraje"
 
 #: MainScreen.qml:95
 #, kde-format
 msgctxt "@option:check"
 msgid "Show texts and illustrations"
-msgstr "Teksten en illustraties tonen"
+msgstr "Prikaži besedila in ilustracije"
 
 #: MainScreen.qml:102
 #, kde-format
 msgctxt "@option:check"
 msgid "Show the accurate coastline"
-msgstr "De nauwkeurige kustlijn tonen"
+msgstr "Prikaži natančno črto obale"
 
 #: MainScreen.qml:107
 #, kde-format
 msgctxt "@title:group"
 msgid "Globe Variant"
-msgstr "Variant van globe"
+msgstr "Varianta globusa"
 
 #: MainScreen.qml:114
 #, kde-format
 msgctxt "@option:radio"
 msgid "Original (1492)"
-msgstr "Origineel (1492)"
+msgstr "Original (1492)"
 
 #: MainScreen.qml:116
 #, kde-format
 msgid "Digital imagery taken directly from the original Behaim globe."
 msgstr ""
-"Digitaal beeldmateriaal direct genomen van de originele globe van Behaim."
+"Digitalne slike narejene neposredno iz originalnega Behaimovega globusa."
 
 #: MainScreen.qml:127
 #, kde-format
@@ -175,7 +177,8 @@ msgstr "Ghillany (1853)"
 #: MainScreen.qml:128
 #, kde-format
 msgid "A (rough) facsimile created by Friedrich Wilhelm Ghillany in 1853."
-msgstr "Een (ruwe) facsimile gemaakt door Friedrich Wilhelm Ghillany in 1853."
+msgstr ""
+"(Grobi) faksimile, ki ga je ustvaril Friedrich Wilhelm Ghillany leta 1853."
 
 #: MainScreen.qml:139
 #, kde-format
@@ -186,16 +189,17 @@ msgstr "Ravenstein (1908)"
 #: MainScreen.qml:140
 #, kde-format
 msgid "A (rough) facsimile created by Ernest George Ravenstein in 1908."
-msgstr "Een (ruwe) facsimile gemaakt door Ernest George Ravenstein in 1908."
+msgstr ""
+"(Grobi) faksimile, ki ga je ustvaril Ernest George Ravenstein leta 1908."
 
 #: MainScreen.qml:155
 #, kde-format
 msgctxt "@title:window"
 msgid "Behaim Globe"
-msgstr "Globe van Behaim"
+msgstr "Behaimov globus"
 
 #: MainScreen.qml:163
 #, kde-format
 msgctxt "@action:button"
 msgid "Information"
-msgstr "Informatie"
+msgstr "Informacije"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-27 00:37+0000\n"
+"POT-Creation-Date: 2024-09-29 00:37+0000\n"
 "PO-Revision-Date: 2009-07-14 22:38+0900\n"
 "Last-Translator: Yukiko Bando <ybando@k6.dion.ne.jp>\n"
 "Language-Team: Japanese <kde-jp@kde.org>\n"
@@ -31,6 +31,12 @@ msgstr "プレースマークプラグイン"
 msgid "Your bookmarks will appear here."
 msgstr ""
 
+#. i18n: ectx: label, entry (MapThemeId), group (General)
+#: config.kcfg:14
+#, kde-format
+msgid "The marble theme id"
+msgstr ""
+
 #: CurrentPosition.qml:54
 #, fuzzy, kde-format
 #| msgid "Current Location"
@@ -38,86 +44,92 @@ msgctxt "@option:check"
 msgid "Follow Current Position"
 msgstr "現在位置"
 
-#: main.cpp:40 MainScreen.qml:20 MainScreen.qml:177
+#: main.cpp:42 MainScreen.qml:21 MainScreen.qml:189
 #, fuzzy, kde-format
 #| msgid "Placemarks Plugin"
 msgid "Marble Maps"
 msgstr "プレースマークプラグイン"
 
-#: main.cpp:42
+#: main.cpp:44
 #, fuzzy, kde-format
 #| msgid "&Edit"
 msgid "Maps"
 msgstr "編集(&E)"
 
-#: main.cpp:44
+#: main.cpp:46
 #, kde-format
 msgid "© KDE Community"
 msgstr ""
 
-#: main.cpp:50
+#: main.cpp:52
 #, kde-format
 msgid "Carl Schwan"
 msgstr ""
 
-#: main.cpp:51
+#: main.cpp:53
 #, fuzzy, kde-format
 #| msgid "Developer"
 msgid "Developer"
 msgstr "開発者"
 
-#: main.cpp:56
+#: main.cpp:58
 #, fuzzy, kde-format
 #| msgid "Placemarks Plugin"
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
 msgstr "プレースマークプラグイン"
 
-#: main.cpp:56
+#: main.cpp:58
 #, fuzzy, kde-format
 #| msgid "Show Navigation Panel"
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "ナビゲーションパネルを表示します"
 
-#: MainScreen.qml:86
+#: MainScreen.qml:87
 #, fuzzy, kde-format
 #| msgid "Navigation"
 msgid "Public Transport"
 msgstr "ナビゲーション"
 
-#: MainScreen.qml:101
+#: MainScreen.qml:102
 #, kde-format
 msgid "Outdoor Activities"
 msgstr ""
 
-#: MainScreen.qml:113
+#: MainScreen.qml:114
 #, kde-format
 msgctxt "@action:button"
 msgid "Accessibility"
 msgstr ""
 
-#: MainScreen.qml:122
+#: MainScreen.qml:123
 #, fuzzy, kde-format
 #| msgid "About"
 msgctxt "@action:button"
 msgid "About"
 msgstr "情報"
 
-#: MainScreen.qml:133
+#: MainScreen.qml:134
 #, fuzzy, kde-format
 #| msgid "Placemarks Plugin"
 msgctxt "@action:button"
 msgid "Bookmarks"
 msgstr "プレースマークプラグイン"
 
-#: MainScreen.qml:144
+#: MainScreen.qml:145
 #, kde-format
 msgctxt "@action:button"
 msgid "Layer Options"
 msgstr ""
 
-#: MainScreen.qml:459
+#: MainScreen.qml:156
+#, kde-format
+msgctxt "@action:button"
+msgid "Theme Options"
+msgstr ""
+
+#: MainScreen.qml:471
 #, fuzzy, kde-format
 #| msgid "km"
 msgid "%1 km"
@@ -277,6 +289,13 @@ msgstr "設定(&S)"
 #| msgid "Save File"
 msgid "Download Maps via WLAN only"
 msgstr "ファイルを保存"
+
+#: ThemeConfigPage.qml:19
+#, fuzzy, kde-format
+#| msgid "Name"
+msgctxt "@title:window"
+msgid "Themes"
+msgstr "名前"
 
 #, fuzzy
 #~| msgctxt "the earth's moon"
@@ -2517,12 +2536,6 @@ msgstr "ファイルを保存"
 #~ msgctxt "MapWizard|"
 #~ msgid "Legend Image:"
 #~ msgstr "凡例"
-
-#, fuzzy
-#~| msgid "Name"
-#~ msgctxt "MapWizard|"
-#~ msgid "Map Theme:"
-#~ msgstr "名前"
 
 #, fuzzy
 #~| msgid "Overview Map"
