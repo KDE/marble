@@ -89,14 +89,10 @@ Kirigami.ApplicationWindow {
                         onCheckedChanged: marbleMaps.setPropertyEnabled("cities", checked)
                     }
 
-                    FormCard.FormDelegateSeparator {}
-
                     FormCard.FormCheckDelegate {
                         text: i18nc("@option:check", "Show texts and illustrations")
                         onCheckedChanged: marbleMaps.setPropertyEnabled("otherplaces", checked)
                     }
-
-                    FormCard.FormDelegateSeparator {}
 
                     FormCard.FormCheckDelegate {
                         text: i18nc("@option:check", "Show the accurate coastline")
