@@ -43,7 +43,7 @@ bool KmlFeatureTagWriter::write(const Marble::GeoNode *node, GeoWriter &writer) 
         // the document tag is excused
         if ((document->id().isEmpty()) && (document->name().isEmpty()) && (document->targetId().isEmpty()) && (document->styles().count() == 0)
             && (document->styleMaps().count() == 0) && (document->extendedData().isEmpty()) && (document->featureList().count() == 1)) {
-            writeElement(document->featureList()[0], writer);
+            writeElement(document->featureList().constFirst(), writer);
             return true;
         }
     }
