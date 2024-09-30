@@ -73,7 +73,7 @@ class MARBLE_EXPORT OsmPlacemarkData : public GeoNode
 {
 public:
     OsmPlacemarkData();
-    virtual ~OsmPlacemarkData();
+    ~OsmPlacemarkData() override;
 
     qint64 id() const;
     qint64 oid() const;

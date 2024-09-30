@@ -41,7 +41,7 @@ public:
 
     void addLandDocument(const GeoDataDocument *landDocument);
 
-    int layerCount() const;
+    int layerCount() const override;
 
     /**
      * @brief Adds texture sublayer, taking ownership of the object's memory
@@ -67,12 +67,12 @@ public:
      */
     int tileZoomLevel() const;
 
-    QSize tileSize() const;
+    QSize tileSize() const override;
 
-    const GeoSceneAbstractTileProjection *tileProjection() const;
+    const GeoSceneAbstractTileProjection *tileProjection() const override;
 
-    int tileColumnCount(int level) const;
-    int tileRowCount(int level) const;
+    int tileColumnCount(int level) const override;
+    int tileRowCount(int level) const override;
 
     quint64 volatileCacheLimit() const;
 
