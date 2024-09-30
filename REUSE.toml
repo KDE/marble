@@ -1,0 +1,43 @@
+# SPDX-FileCopyrightText: none
+# SPDX-License-Identifier: CC0-1.0
+
+version = 1
+SPDX-PackageName = "Marble"
+SPDX-PackageSupplier = "Torsten Rahn <rahn@kde.org>"
+SPDX-PackageDownloadLocation = "https://invent.kde.org/education/marble/"
+
+[[annotations]]
+path = "data/flags/**"
+precedence = "aggregate"
+SPDX-FileCopyrightText = "none"
+SPDX-License-Identifier = "CC0-1.0"
+
+[[annotations]]
+path = "data/bitmaps/osmcarto/**/**"
+precedence = "aggregate"
+SPDX-FileCopyrightText = "Andy Allan <andy@gravitystorm.co.uk> and contributors, based on original cartography by Steve Chilton and others."
+SPDX-License-Identifier = "CC0-1.0"
+
+[[annotations]]
+path = "data/svg/osmc-symbols/3rdparty/**"
+precedence = "aggregate"
+SPDX-FileCopyrightText = "See COPYRIGHT file"
+SPDX-License-Identifier = "CC0-1.0"
+
+[[annotations]]
+path = "data/svg/osmc-symbols/**"
+precedence = "aggregate"
+SPDX-FileCopyrightText = "OpenStreetMap contributors <data@osmfoundation.org>"
+SPDX-License-Identifier = "CC0-1.0"
+
+[[annotations]]
+path = "tools/vectorosm-tilecreator/clipper2/**"
+precedence = "aggregate"
+SPDX-FileCopyrightText = "Angus Johnson"
+SPDX-License-Identifier = "BSL-1.0"
+
+[[annotations]]
+path = "tools/vectorosm-tilecreator/autotests/data/**.osm"
+precedence = "aggregate"
+SPDX-FileCopyrightText = "© OpenStreetMap contributors"
+SPDX-License-Identifier = "ODbL-1.0"
