@@ -51,9 +51,9 @@ public:
     {
         return QStringLiteral("2013");
     }
-    QVector<PluginAuthor> pluginAuthors() const override
+    QList<PluginAuthor> pluginAuthors() const override
     {
-        return QVector<PluginAuthor>() << PluginAuthor(QStringLiteral("Bernhard Beschow"), QStringLiteral("bbeschow@cs.tu-berlin.de"));
+        return QList<PluginAuthor>() << PluginAuthor(QStringLiteral("Bernhard Beschow"), QStringLiteral("bbeschow@cs.tu-berlin.de"));
     }
     void initialize() override
     {

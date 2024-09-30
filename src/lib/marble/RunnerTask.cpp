@@ -30,7 +30,7 @@ SearchTask::SearchTask(SearchRunner *runner,
     , m_searchTerm(searchTerm)
     , m_preferredBbox(preferred)
 {
-    connect(m_runner, SIGNAL(searchFinished(QVector<GeoDataPlacemark *>)), manager, SLOT(addSearchResult(QVector<GeoDataPlacemark *>)));
+    connect(m_runner, SIGNAL(searchFinished(QList<GeoDataPlacemark *>)), manager, SLOT(addSearchResult(QList<GeoDataPlacemark *>)));
     m_runner->setModel(model);
 }
 

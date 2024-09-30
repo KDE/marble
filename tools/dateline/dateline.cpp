@@ -59,7 +59,7 @@ int main(int argc, char *argv[])
     targetfilename = QString(argv[2]);
     sourcefilename = QString(argv[3]);
 
-    QVector<float> idlPosList;
+    QList<float> idlPosList;
 
     QFile sourcefile(sourcefilename);
     sourcefile.open(QIODevice::ReadOnly);
@@ -110,7 +110,7 @@ int main(int argc, char *argv[])
     int count = 0;
     bool firstheader = true;
 
-    QVector<float>::iterator i = idlPosList.begin();
+    QList<float>::iterator i = idlPosList.begin();
 
     float lastlon = 99999.0f;
     float lastlat = 99999.0f;

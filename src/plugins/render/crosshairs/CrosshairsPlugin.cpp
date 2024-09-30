@@ -95,10 +95,10 @@ QString CrosshairsPlugin::copyrightYears() const
     return QStringLiteral("2009, 2010");
 }
 
-QVector<PluginAuthor> CrosshairsPlugin::pluginAuthors() const
+QList<PluginAuthor> CrosshairsPlugin::pluginAuthors() const
 {
-    return QVector<PluginAuthor>() << PluginAuthor(QStringLiteral("Cezar Mocan"), QStringLiteral("cezarmocan@gmail.com"))
-                                   << PluginAuthor(QStringLiteral("Torsten Rahn"), QStringLiteral("tackat@kde.org"));
+    return QList<PluginAuthor>() << PluginAuthor(QStringLiteral("Cezar Mocan"), QStringLiteral("cezarmocan@gmail.com"))
+                                 << PluginAuthor(QStringLiteral("Torsten Rahn"), QStringLiteral("tackat@kde.org"));
 }
 
 QIcon CrosshairsPlugin::icon() const

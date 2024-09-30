@@ -57,18 +57,18 @@ namespace Marble
 class GeometryLayerPrivate
 {
 public:
-    using OsmLineStringItems = QVector<GeoLineStringGraphicsItem *>;
+    using OsmLineStringItems = QList<GeoLineStringGraphicsItem *>;
     using Relations = QSet<const GeoDataRelation *>;
     typedef QHash<const GeoDataFeature *, Relations> FeatureRelationHash;
-    using GeoGraphicItems = QVector<GeoGraphicsItem *>;
+    using GeoGraphicItems = QList<GeoGraphicsItem *>;
 
     struct PaintFragments {
         // Three lists for different z values
         // A z value of 0 is default and used by the majority of items, so sorting
         // can be avoided for it
-        QVector<GeoGraphicsItem *> negative; // subways
-        QVector<GeoGraphicsItem *> null; // areas and roads
-        QVector<GeoGraphicsItem *> positive; // buildings
+        QList<GeoGraphicsItem *> negative; // subways
+        QList<GeoGraphicsItem *> null; // areas and roads
+        QList<GeoGraphicsItem *> positive; // buildings
     };
 
     explicit GeometryLayerPrivate(const QAbstractItemModel *model, const StyleBuilder *styleBuilder);
@@ -345,7 +345,7 @@ void GeometryLayerPrivate::updateTiledLineStrings(OsmLineStringItems &lineString
 {
     GeoDataLineString merged;
     if (lineStringItems.size() > 1) {
-        QVector<const GeoDataLineString *> lineStrings;
+        QList<const GeoDataLineString *> lineStrings;
         for (auto item : lineStringItems) {
             lineStrings << item->lineString();
         }
@@ -549,9 +549,9 @@ void GeometryLayer::setTileLevel(int tileLevel)
     d->m_tileLevel = tileLevel;
 }
 
-QVector<const GeoDataFeature *> GeometryLayer::whichFeatureAt(const QPoint &curpos, const ViewportParams *viewport)
+QList<const GeoDataFeature *> GeometryLayer::whichFeatureAt(const QPoint &curpos, const ViewportParams *viewport)
 {
-    QVector<const GeoDataFeature *> result;
+    QList<const GeoDataFeature *> result;
     auto const renderOrder = d->m_styleBuilder->renderOrder();
     QString const label = QStringLiteral("/label");
     QSet<GeoGraphicsItem *> checked;
@@ -595,7 +595,7 @@ void GeometryLayer::setVisibleRelationTypes(GeoDataRelation::RelationTypes relat
 void GeometryLayer::handleHighlight(qreal lon, qreal lat, GeoDataCoordinates::Unit unit)
 {
     GeoDataCoordinates clickedPoint(lon, lat, 0, unit);
-    QVector<GeoDataPlacemark *> selectedPlacemarks;
+    QList<GeoDataPlacemark *> selectedPlacemarks;
 
     for (int i = 0; i < d->m_model->rowCount(); ++i) {
         QVariant const data = d->m_model->data(d->m_model->index(i, 0), MarblePlacemarkModel::ObjectPointerRole);
@@ -620,8 +620,8 @@ void GeometryLayer::handleHighlight(qreal lon, qreal lat, GeoDataCoordinates::Un
              * highlight them.
              */
             if (isHighlight) {
-                QVector<GeoDataFeature *>::Iterator iter = doc->begin();
-                QVector<GeoDataFeature *>::Iterator const end = doc->end();
+                QList<GeoDataFeature *>::Iterator iter = doc->begin();
+                QList<GeoDataFeature *>::Iterator const end = doc->end();
 
                 for (; iter != end; ++iter) {
                     if (auto placemark = geodata_cast<GeoDataPlacemark>(*iter)) {
@@ -637,8 +637,8 @@ void GeometryLayer::handleHighlight(qreal lon, qreal lat, GeoDataCoordinates::Un
                         }
 
                         if (auto multiGeometry = geodata_cast<GeoDataMultiGeometry>(placemark->geometry())) {
-                            QVector<GeoDataGeometry *>::Iterator multiIter = multiGeometry->begin();
-                            QVector<GeoDataGeometry *>::Iterator const multiEnd = multiGeometry->end();
+                            QList<GeoDataGeometry *>::Iterator multiIter = multiGeometry->begin();
+                            QList<GeoDataGeometry *>::Iterator const multiEnd = multiGeometry->end();
 
                             for (; multiIter != multiEnd; ++multiIter) {
                                 GeoDataPolygon *poly = dynamic_cast<GeoDataPolygon *>(*multiIter);

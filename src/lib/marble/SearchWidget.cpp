@@ -38,7 +38,7 @@ public:
     QString m_planetId;
 
     SearchWidgetPrivate();
-    void setSearchResult(const QVector<GeoDataPlacemark *> &);
+    void setSearchResult(const QList<GeoDataPlacemark *> &);
     void search(const QString &searchTerm, SearchMode searchMode);
     void clearSearch();
     void centerMapOn(const QModelIndex &index);
@@ -57,7 +57,7 @@ SearchWidgetPrivate::SearchWidgetPrivate()
     m_document->setName(QObject::tr("Search Results"));
 }
 
-void SearchWidgetPrivate::setSearchResult(const QVector<GeoDataPlacemark *> &locations)
+void SearchWidgetPrivate::setSearchResult(const QList<GeoDataPlacemark *> &locations)
 {
     if (locations.isEmpty()) {
         return;
@@ -127,7 +127,7 @@ void SearchWidget::setMarbleWidget(MarbleWidget *widget)
     connect(d->m_searchField, SIGNAL(centerOn(GeoDataCoordinates)), widget, SLOT(centerOn(GeoDataCoordinates)));
 
     d->m_runnerManager = new SearchRunnerManager(widget->model(), this);
-    connect(d->m_runnerManager, SIGNAL(searchResultChanged(QVector<GeoDataPlacemark *>)), this, SLOT(setSearchResult(QVector<GeoDataPlacemark *>)));
+    connect(d->m_runnerManager, SIGNAL(searchResultChanged(QList<GeoDataPlacemark *>)), this, SLOT(setSearchResult(QList<GeoDataPlacemark *>)));
     connect(d->m_runnerManager, SIGNAL(searchFinished(QString)), d->m_searchField, SLOT(disableSearchAnimation()));
 
     GeoDataTreeModel *treeModel = d->m_widget->model()->treeModel();

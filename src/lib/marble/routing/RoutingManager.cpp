@@ -98,7 +98,7 @@ public:
 
     void recalculateRoute(bool deviated);
 
-    static void importPlacemark(RouteSegment &outline, QVector<RouteSegment> &segments, const GeoDataPlacemark *placemark);
+    static void importPlacemark(RouteSegment &outline, QList<RouteSegment> &segments, const GeoDataPlacemark *placemark);
 };
 
 RoutingManagerPrivate::RoutingManagerPrivate(MarbleModel *model, RoutingManager *manager)
@@ -210,7 +210,7 @@ void RoutingManagerPrivate::loadRoute(const QString &filename)
         GeoDataFolder *viaPoints = dynamic_cast<GeoDataFolder *>(&container->first());
         if (viaPoints) {
             loaded = true;
-            QVector<GeoDataPlacemark *> placemarks = viaPoints->placemarkList();
+            QList<GeoDataPlacemark *> placemarks = viaPoints->placemarkList();
             for (int i = 0; i < placemarks.size(); ++i) {
                 if (i < m_routeRequest.size()) {
                     m_routeRequest[i] = *placemarks[i];
@@ -338,7 +338,7 @@ void RoutingManagerPrivate::routingFinished()
 
 void RoutingManagerPrivate::setCurrentRoute(const GeoDataDocument *document)
 {
-    QVector<RouteSegment> segments;
+    QList<RouteSegment> segments;
     RouteSegment outline;
 
     if (document != nullptr) {
@@ -395,7 +395,7 @@ void RoutingManagerPrivate::setCurrentRoute(const GeoDataDocument *document)
     m_routingModel.setRoute(route);
 }
 
-void RoutingManagerPrivate::importPlacemark(RouteSegment &outline, QVector<RouteSegment> &segments, const GeoDataPlacemark *placemark)
+void RoutingManagerPrivate::importPlacemark(RouteSegment &outline, QList<RouteSegment> &segments, const GeoDataPlacemark *placemark)
 {
     const GeoDataGeometry *geometry = placemark->geometry();
     const GeoDataLineString *lineString = dynamic_cast<const GeoDataLineString *>(geometry);

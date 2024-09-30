@@ -70,7 +70,7 @@ public:
     int m_tileZoomLevel;
     TextureMapperInterface *m_texmapper;
     TextureColorizer *m_texcolorizer;
-    QVector<const GeoSceneTextureTileDataset *> m_textures;
+    QList<const GeoSceneTextureTileDataset *> m_textures;
     const GeoSceneGroup *m_textureLayerSettings;
     QString m_runtimeTrace;
     QSortFilterProxyModel m_groundOverlayModel;
@@ -127,7 +127,7 @@ void TextureLayer::Private::requestDelayedRepaint()
 
 void TextureLayer::Private::updateTextureLayers()
 {
-    QVector<GeoSceneTextureTileDataset const *> result;
+    QList<GeoSceneTextureTileDataset const *> result;
 
     for (const GeoSceneTextureTileDataset *candidate : std::as_const(m_textures)) {
         bool enabled = true;
@@ -452,7 +452,7 @@ void TextureLayer::downloadStackedTile(const TileId &stackedTileId)
     d->m_layerDecorator.downloadStackedTile(stackedTileId, DownloadBulk);
 }
 
-void TextureLayer::setMapTheme(const QVector<const GeoSceneTextureTileDataset *> &textures,
+void TextureLayer::setMapTheme(const QList<const GeoSceneTextureTileDataset *> &textures,
                                const GeoSceneGroup *textureLayerSettings,
                                const QString &seaFile,
                                const QString &landFile)

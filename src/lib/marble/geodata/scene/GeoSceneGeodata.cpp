@@ -104,12 +104,12 @@ void GeoSceneGeodata::setRenderOrder(int renderOrder)
     m_renderOrder = renderOrder;
 }
 
-QVector<QColor> GeoSceneGeodata::colors() const
+QList<QColor> GeoSceneGeodata::colors() const
 {
     return m_colors;
 }
 
-void GeoSceneGeodata::setColors(const QVector<QColor> &colors)
+void GeoSceneGeodata::setColors(const QList<QColor> &colors)
 {
     m_colors = colors;
 }

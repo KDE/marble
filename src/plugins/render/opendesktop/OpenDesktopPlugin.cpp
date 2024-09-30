@@ -66,9 +66,9 @@ QString OpenDesktopPlugin::copyrightYears() const
     return QStringLiteral("2010");
 }
 
-QVector<PluginAuthor> OpenDesktopPlugin::pluginAuthors() const
+QList<PluginAuthor> OpenDesktopPlugin::pluginAuthors() const
 {
-    return QVector<PluginAuthor>() << PluginAuthor(QStringLiteral("Utku Aydin"), QStringLiteral("utkuaydin34@gmail.com"));
+    return QList<PluginAuthor>() << PluginAuthor(QStringLiteral("Utku Aydin"), QStringLiteral("utkuaydin34@gmail.com"));
 }
 
 QIcon OpenDesktopPlugin::icon() const

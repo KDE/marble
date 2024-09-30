@@ -35,13 +35,13 @@ public:
 
     QByteArray retrieveWaypoints(const QString &query) const;
 
-    static GeoDataDocument *createDocument(GeoDataLineString *routeWaypoints, const QVector<GeoDataPlacemark *> instructions);
+    static GeoDataDocument *createDocument(GeoDataLineString *routeWaypoints, const QList<GeoDataPlacemark *> instructions);
 
     static GeoDataLineString parseGosmoreOutput(const QByteArray &content);
 
     static void merge(GeoDataLineString *one, const GeoDataLineString &two);
 
-    QVector<GeoDataPlacemark *> parseGosmoreInstructions(const QByteArray &content);
+    QList<GeoDataPlacemark *> parseGosmoreInstructions(const QByteArray &content);
 
     GosmoreRunnerPrivate();
 };
@@ -60,7 +60,7 @@ void GosmoreRunnerPrivate::merge(GeoDataLineString *one, const GeoDataLineString
 {
     Q_ASSERT(one);
 
-    QVector<GeoDataCoordinates>::const_iterator iter = two.constBegin();
+    QList<GeoDataCoordinates>::const_iterator iter = two.constBegin();
     for (; iter != two.constEnd(); ++iter) {
         /** @todo: It might be needed to cut off some points at the start or end */
         one->append(*iter);
@@ -108,7 +108,7 @@ GeoDataLineString GosmoreRunnerPrivate::parseGosmoreOutput(const QByteArray &con
     return routeWaypoints;
 }
 
-QVector<GeoDataPlacemark *> GosmoreRunnerPrivate::parseGosmoreInstructions(const QByteArray &content)
+QList<GeoDataPlacemark *> GosmoreRunnerPrivate::parseGosmoreInstructions(const QByteArray &content)
 {
     // Determine gosmore version
     QStringList lines = QString::fromUtf8(content).split(QLatin1Char('\r'));
@@ -122,7 +122,7 @@ QVector<GeoDataPlacemark *> GosmoreRunnerPrivate::parseGosmoreInstructions(const
         }
     }
 
-    QVector<GeoDataPlacemark *> result;
+    QList<GeoDataPlacemark *> result;
     QTextStream stream(content);
     stream.setAutoDetectUnicode(true);
 
@@ -141,7 +141,7 @@ QVector<GeoDataPlacemark *> GosmoreRunnerPrivate::parseGosmoreInstructions(const
         placemark->setExtendedData(extendedData);
         Q_ASSERT(!directions[i].points().isEmpty());
         GeoDataLineString *geometry = new GeoDataLineString;
-        QVector<RoutingWaypoint> items = directions[i].points();
+        QList<RoutingWaypoint> items = directions[i].points();
         for (int j = 0; j < items.size(); ++j) {
             RoutingPoint point = items[j].point();
             GeoDataCoordinates coordinates(point.lon(), point.lat(), 0.0, GeoDataCoordinates::Degree);
@@ -154,7 +154,7 @@ QVector<GeoDataPlacemark *> GosmoreRunnerPrivate::parseGosmoreInstructions(const
     return result;
 }
 
-GeoDataDocument *GosmoreRunnerPrivate::createDocument(GeoDataLineString *routeWaypoints, const QVector<GeoDataPlacemark *> instructions)
+GeoDataDocument *GosmoreRunnerPrivate::createDocument(GeoDataLineString *routeWaypoints, const QList<GeoDataPlacemark *> instructions)
 {
     if (!routeWaypoints || routeWaypoints->isEmpty()) {
         return nullptr;
@@ -229,7 +229,7 @@ void GosmoreRunner::retrieveRoute(const RouteRequest *route)
         completeOutput.append(output);
     }
 
-    QVector<GeoDataPlacemark *> instructions = d->parseGosmoreInstructions(completeOutput);
+    QList<GeoDataPlacemark *> instructions = d->parseGosmoreInstructions(completeOutput);
 
     GeoDataDocument *result = d->createDocument(wayPoints, instructions);
     emit routeCalculated(result);

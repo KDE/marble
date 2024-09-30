@@ -151,11 +151,11 @@ QString AnnotatePlugin::copyrightYears() const
     return QStringLiteral("2009, 2013");
 }
 
-QVector<PluginAuthor> AnnotatePlugin::pluginAuthors() const
+QList<PluginAuthor> AnnotatePlugin::pluginAuthors() const
 {
-    return QVector<PluginAuthor>() << PluginAuthor(QStringLiteral("Andrew Manson"), QStringLiteral("g.real.ate@gmail.com"))
-                                   << PluginAuthor(QStringLiteral("Thibaut Gridel"), QStringLiteral("tgridel@free.fr"))
-                                   << PluginAuthor(QStringLiteral("Calin Cruceru"), QStringLiteral("crucerucalincristian@gmail.com"));
+    return QList<PluginAuthor>() << PluginAuthor(QStringLiteral("Andrew Manson"), QStringLiteral("g.real.ate@gmail.com"))
+                                 << PluginAuthor(QStringLiteral("Thibaut Gridel"), QStringLiteral("tgridel@free.fr"))
+                                 << PluginAuthor(QStringLiteral("Calin Cruceru"), QStringLiteral("crucerucalincristian@gmail.com"));
 }
 
 QIcon AnnotatePlugin::icon() const

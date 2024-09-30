@@ -59,7 +59,7 @@ void GeoPolyline::updateScreenPositions()
         displayPolygon << QPointF(-10, -10) << QPointF(m_map->mapWidth() + 10, -10) << QPointF(m_map->mapWidth() + 10, m_map->mapHeight() + 10)
                        << QPointF(-10, m_map->mapHeight() + 10);
         m_screenPolygons.clear();
-        QVector<QPolygonF *> fullScreenPolygons;
+        QList<QPolygonF *> fullScreenPolygons;
         bool success = m_map->screenCoordinatesFromGeoDataLineString(lineString, fullScreenPolygons);
         if (m_clipScreenCoordinates) {
             for (auto reducedPolygon : std::as_const(fullScreenPolygons)) {
@@ -234,7 +234,7 @@ QSGNode *GeoPolyline::updatePaintNode(QSGNode *oldNode, QQuickItem::UpdatePaintN
 
     for (int i = 0; i < m_screenPolygons.length(); ++i) {
         QPolygonF polygon = m_screenPolygons[i];
-        QVector<QVector2D> normals;
+        QList<QVector2D> normals;
         int segmentCount = polygon.size() - 1;
         normals.reserve(segmentCount);
         for (int i = 0; i < segmentCount; ++i) {

@@ -21,7 +21,7 @@
 using namespace Marble;
 
 QHash<QString, WeatherData::WeatherCondition> GeoNamesWeatherService::dayConditions = QHash<QString, WeatherData::WeatherCondition>();
-QVector<WeatherData::WindDirection> GeoNamesWeatherService::windDirections = QVector<WeatherData::WindDirection>(16);
+QList<WeatherData::WindDirection> GeoNamesWeatherService::windDirections = QList<WeatherData::WindDirection>(16);
 
 GeoNamesWeatherService::GeoNamesWeatherService(const MarbleModel *model, QObject *parent)
     : AbstractWeatherService(model, parent)

@@ -297,8 +297,8 @@ QWidget *PopupItem::transform(QPoint &point) const
         }
     }
 
-    const QVector<QPointF> widgetPositions = positions();
-    QVector<QPointF>::const_iterator it = widgetPositions.constBegin();
+    const QList<QPointF> widgetPositions = positions();
+    QList<QPointF>::const_iterator it = widgetPositions.constBegin();
     for (; it != widgetPositions.constEnd(); ++it) {
         if (QRectF(*it, size()).contains(point)) {
             point -= it->toPoint();

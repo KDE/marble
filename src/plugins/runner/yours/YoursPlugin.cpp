@@ -50,10 +50,10 @@ QString YoursPlugin::copyrightYears() const
     return QStringLiteral("2010, 2016");
 }
 
-QVector<PluginAuthor> YoursPlugin::pluginAuthors() const
+QList<PluginAuthor> YoursPlugin::pluginAuthors() const
 {
-    return QVector<PluginAuthor>() << PluginAuthor(QStringLiteral("Dennis Nienhüser"), QStringLiteral("nienhueser@kde.org"))
-                                   << PluginAuthor(QStringLiteral("Piotr Wójcik"), QStringLiteral("chocimier@tlen.pl"));
+    return QList<PluginAuthor>() << PluginAuthor(QStringLiteral("Dennis Nienhüser"), QStringLiteral("nienhueser@kde.org"))
+                                 << PluginAuthor(QStringLiteral("Piotr Wójcik"), QStringLiteral("chocimier@tlen.pl"));
 }
 
 RoutingRunner *YoursPlugin::newRunner() const

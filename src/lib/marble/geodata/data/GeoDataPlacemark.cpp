@@ -215,8 +215,8 @@ GeoDataCoordinates GeoDataPlacemark::coordinate(const QDateTime &dateTime, bool 
             hasIcon = true;
             coord = d->m_geometry->latLonAltBox().center();
         } else if (const auto multiGeometry = geodata_cast<GeoDataMultiGeometry>(d->m_geometry)) {
-            QVector<GeoDataGeometry *>::ConstIterator it = multiGeometry->constBegin();
-            QVector<GeoDataGeometry *>::ConstIterator end = multiGeometry->constEnd();
+            QList<GeoDataGeometry *>::ConstIterator it = multiGeometry->constBegin();
+            QList<GeoDataGeometry *>::ConstIterator end = multiGeometry->constEnd();
             for (; it != end; ++it) {
                 if (geodata_cast<GeoDataPoint>(*it) || geodata_cast<GeoDataPolygon>(*it) || geodata_cast<GeoDataLinearRing>(*it)) {
                     hasIcon = true;

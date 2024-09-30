@@ -161,7 +161,7 @@ int main(int argc, char *argv[])
     int clusterSize = 0; // cluster size 0 makes no sense
     bool onlySimulate = false;
 
-    QVector<ReadOnlyMapDefinition> mapSources;
+    QList<ReadOnlyMapDefinition> mapSources;
 
     // input: type, tile-level, base-dir|file
     // --input,type=NasaWW,tile-level=8,base-directory=<dir>,interpolation-method=Bilinear
@@ -234,11 +234,11 @@ int main(int argc, char *argv[])
 
     QObject::connect(&converter, SIGNAL(finished()), &app, SLOT(quit()));
 
-    QVector<QPair<Thread *, OsmTileClusterRenderer *>> renderThreads = converter.start();
+    QList<QPair<Thread *, OsmTileClusterRenderer *>> renderThreads = converter.start();
     app.exec();
 
-    QVector<QPair<Thread *, OsmTileClusterRenderer *>>::iterator pos = renderThreads.begin();
-    QVector<QPair<Thread *, OsmTileClusterRenderer *>>::iterator const end = renderThreads.end();
+    QList<QPair<Thread *, OsmTileClusterRenderer *>>::iterator pos = renderThreads.begin();
+    QList<QPair<Thread *, OsmTileClusterRenderer *>>::iterator const end = renderThreads.end();
     for (; pos != end; ++pos) {
         (*pos).first->stop();
         (*pos).first->wait();

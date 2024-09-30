@@ -32,8 +32,8 @@ void OsmObjectManager::initializeOsmData(GeoDataPlacemark *placemark)
 
     // Assigning osmData to each of the line's nodes ( if they don't already have data )
     if (const auto lineString = geodata_cast<GeoDataLineString>(placemark->geometry())) {
-        QVector<GeoDataCoordinates>::const_iterator it = lineString->constBegin();
-        QVector<GeoDataCoordinates>::ConstIterator const end = lineString->constEnd();
+        QList<GeoDataCoordinates>::const_iterator it = lineString->constBegin();
+        QList<GeoDataCoordinates>::ConstIterator const end = lineString->constEnd();
 
         for (; it != end; ++it) {
             if (osmData.nodeReference(*it).isNull()) {
@@ -81,8 +81,8 @@ void OsmObjectManager::initializeOsmData(GeoDataPlacemark *placemark)
         }
 
         // Outer boundary nodes
-        QVector<GeoDataCoordinates>::const_iterator it = outerBoundary.constBegin();
-        QVector<GeoDataCoordinates>::ConstIterator const end = outerBoundary.constEnd();
+        QList<GeoDataCoordinates>::const_iterator it = outerBoundary.constBegin();
+        QList<GeoDataCoordinates>::ConstIterator const end = outerBoundary.constEnd();
 
         for (; it != end; ++it) {
             if (outerBoundaryData.nodeReference(*it).isNull()) {
@@ -99,8 +99,8 @@ void OsmObjectManager::initializeOsmData(GeoDataPlacemark *placemark)
             }
 
             // Inner boundary nodes
-            QVector<GeoDataCoordinates>::const_iterator it = innerRing.constBegin();
-            QVector<GeoDataCoordinates>::ConstIterator const end = innerRing.constEnd();
+            QList<GeoDataCoordinates>::const_iterator it = innerRing.constBegin();
+            QList<GeoDataCoordinates>::ConstIterator const end = innerRing.constEnd();
 
             for (; it != end; ++it) {
                 if (innerRingData.nodeReference(*it).isNull()) {

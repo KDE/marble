@@ -72,9 +72,9 @@ QString QtPositioningPositionProviderPlugin::copyrightYears() const
     return QStringLiteral("2011-2016");
 }
 
-QVector<PluginAuthor> QtPositioningPositionProviderPlugin::pluginAuthors() const
+QList<PluginAuthor> QtPositioningPositionProviderPlugin::pluginAuthors() const
 {
-    return QVector<PluginAuthor>() << PluginAuthor(QStringLiteral("Daniel Marth"), QStringLiteral("danielmarth@gmx.at"));
+    return QList<PluginAuthor>() << PluginAuthor(QStringLiteral("Daniel Marth"), QStringLiteral("danielmarth@gmx.at"));
 }
 
 QIcon QtPositioningPositionProviderPlugin::icon() const

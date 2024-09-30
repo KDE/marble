@@ -94,7 +94,7 @@ GeoDataDocument *VectorClipper::clipTo(const GeoDataLatLonBox &tileBoundary, int
     return tile;
 }
 
-QVector<GeoDataPlacemark *> VectorClipper::potentialIntersections(const GeoDataLatLonBox &box) const
+QList<GeoDataPlacemark *> VectorClipper::potentialIntersections(const GeoDataLatLonBox &box) const
 {
     qreal north, south, east, west;
     box.boundaries(north, south, east, west);
@@ -105,7 +105,7 @@ QVector<GeoDataPlacemark *> VectorClipper::potentialIntersections(const GeoDataL
 
     TileCoordsPyramid pyramid(0, m_maxZoomLevel);
     pyramid.setBottomLevelCoords(rect);
-    QVector<GeoDataPlacemark *> result;
+    QList<GeoDataPlacemark *> result;
     for (int level = pyramid.topLevel(), maxLevel = pyramid.bottomLevel(); level <= maxLevel; ++level) {
         int x1, y1, x2, y2;
         pyramid.coords(level).getCoords(&x1, &y1, &x2, &y2);

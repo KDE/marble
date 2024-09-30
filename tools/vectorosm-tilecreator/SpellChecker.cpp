@@ -27,7 +27,7 @@ SpellChecker::SpellChecker(const QString &citiesFile)
     // nothing to do
 }
 
-void SpellChecker::correctPlaceLabels(const QVector<GeoDataPlacemark *> &placemarks)
+void SpellChecker::correctPlaceLabels(const QList<GeoDataPlacemark *> &placemarks)
 {
     auto places = cityPlaces(placemarks);
     double const maxDistance = 5000.0 / EARTH_RADIUS;
@@ -82,7 +82,7 @@ void SpellChecker::setVerbose(bool verbose)
     m_verbose = verbose;
 }
 
-QVector<GeoDataPlacemark *> SpellChecker::cityPlaces(const QVector<GeoDataPlacemark *> &placemarks) const
+QList<GeoDataPlacemark *> SpellChecker::cityPlaces(const QList<GeoDataPlacemark *> &placemarks) const
 {
     QSet<GeoDataPlacemark::GeoDataVisualCategory> categories;
     categories << GeoDataPlacemark::PlaceCity;
@@ -98,16 +98,16 @@ QVector<GeoDataPlacemark *> SpellChecker::cityPlaces(const QVector<GeoDataPlacem
     categories << GeoDataPlacemark::PlaceVillageCapital;
     categories << GeoDataPlacemark::PlaceVillageNationalCapital;
 
-    QVector<GeoDataPlacemark *> places;
+    QList<GeoDataPlacemark *> places;
     std::copy_if(placemarks.begin(), placemarks.end(), std::back_inserter(places), [categories](GeoDataPlacemark *placemark) {
         return categories.contains(placemark->visualCategory());
     });
     return places;
 }
 
-QHash<TileId, QVector<GeoDataPlacemark *>> SpellChecker::parseCities(const QString &filename) const
+QHash<TileId, QList<GeoDataPlacemark *>> SpellChecker::parseCities(const QString &filename) const
 {
-    QHash<TileId, QVector<GeoDataPlacemark *>> placeLabels;
+    QHash<TileId, QList<GeoDataPlacemark *>> placeLabels;
     QFile file(filename);
     if (!file.open(QIODevice::ReadOnly)) {
         qDebug() << "Cannot open " << filename << ":" << file.errorString();
@@ -164,11 +164,11 @@ int SpellChecker::levenshteinDistance(const QString &a, const QString &b)
     return distance[len1][len2];
 }
 
-QVector<GeoDataPlacemark *> SpellChecker::candidatesFor(GeoDataPlacemark *placemark) const
+QList<GeoDataPlacemark *> SpellChecker::candidatesFor(GeoDataPlacemark *placemark) const
 {
     int const N = pow(2, m_tileLevel);
     auto const tile = TileId::fromCoordinates(placemark->coordinate(), m_tileLevel);
-    QVector<GeoDataPlacemark *> places;
+    QList<GeoDataPlacemark *> places;
     for (int x = qMax(0, tile.x() - 1); x < qMin(N - 1, tile.x() + 1); ++x) {
         for (int y = qMax(0, tile.y() - 1); y < qMin(N - 1, tile.y() + 1); ++y) {
             places << m_tileHash[TileId(0, m_tileLevel, x, y)];

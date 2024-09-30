@@ -164,12 +164,12 @@ void RoutingInstruction::calculateTurnType()
     }
 }
 
-QVector<RoutingWaypoint> RoutingInstruction::points() const
+QList<RoutingWaypoint> RoutingInstruction::points() const
 {
     return m_points;
 }
 
-QVector<RoutingPoint> RoutingInstruction::intersectionPoints() const
+QList<RoutingPoint> RoutingInstruction::intersectionPoints() const
 {
     return m_intersectionPoints;
 }
@@ -464,7 +464,7 @@ QTextStream &operator<<(QTextStream &stream, const RoutingInstruction &i)
     }
 
     if (QCoreApplication::instance()->arguments().contains(QStringLiteral("--dense"))) {
-        QVector<RoutingWaypoint> points = i.points();
+        QList<RoutingWaypoint> points = i.points();
         int maxElement = points.size() - (i.successor() ? 1 : 0);
         for (int j = 0; j < maxElement; ++j) {
             stream << points[j].point().lat() << ',';

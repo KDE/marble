@@ -92,10 +92,10 @@ QString ElevationProfileMarker::copyrightYears() const
     return QStringLiteral("2011, 2012");
 }
 
-QVector<PluginAuthor> ElevationProfileMarker::pluginAuthors() const
+QList<PluginAuthor> ElevationProfileMarker::pluginAuthors() const
 {
-    return QVector<PluginAuthor>() << PluginAuthor(QStringLiteral("Bernhard Beschow"), QStringLiteral("bbeschow@cs.tu-berlin.de"))
-                                   << PluginAuthor(QStringLiteral("Florian Eßer"), QStringLiteral("f.esser@rwth-aachen.de"));
+    return QList<PluginAuthor>() << PluginAuthor(QStringLiteral("Bernhard Beschow"), QStringLiteral("bbeschow@cs.tu-berlin.de"))
+                                 << PluginAuthor(QStringLiteral("Florian Eßer"), QStringLiteral("f.esser@rwth-aachen.de"));
 }
 
 QIcon ElevationProfileMarker::icon() const

@@ -245,8 +245,8 @@ void FileLoaderPrivate::createFilterProperties(GeoDataContainer *container)
 {
     const QString styleUrl = QLatin1Char('#') + m_styleMap->id();
 
-    QVector<GeoDataFeature *>::Iterator i = container->begin();
-    QVector<GeoDataFeature *>::Iterator const end = container->end();
+    QList<GeoDataFeature *>::Iterator i = container->begin();
+    QList<GeoDataFeature *>::Iterator const end = container->end();
     for (; i != end; ++i) {
         if (auto child = dynamic_cast<GeoDataContainer *>(*i)) {
             createFilterProperties(child);

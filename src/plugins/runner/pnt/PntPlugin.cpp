@@ -38,9 +38,9 @@ QString PntPlugin::copyrightYears() const
     return QStringLiteral("2011");
 }
 
-QVector<PluginAuthor> PntPlugin::pluginAuthors() const
+QList<PluginAuthor> PntPlugin::pluginAuthors() const
 {
-    return QVector<PluginAuthor>() << PluginAuthor(QStringLiteral("Thibaut Gridel"), QStringLiteral("tgridel@free.fr"));
+    return QList<PluginAuthor>() << PluginAuthor(QStringLiteral("Thibaut Gridel"), QStringLiteral("tgridel@free.fr"));
 }
 
 QString PntPlugin::fileFormatDescription() const

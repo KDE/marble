@@ -61,7 +61,7 @@ const GeoDataLineString *GeoLineStringGraphicsItem::lineString() const
     return m_lineString;
 }
 
-GeoDataLineString GeoLineStringGraphicsItem::merge(const QVector<const GeoDataLineString *> &lineStrings_)
+GeoDataLineString GeoLineStringGraphicsItem::merge(const QList<const GeoDataLineString *> &lineStrings_)
 {
     if (lineStrings_.isEmpty()) {
         return GeoDataLineString();
@@ -188,7 +188,7 @@ bool GeoLineStringGraphicsItem::contains(const QPoint &screenPosition, const Vie
     return m_cachedRegion.contains(screenPosition);
 }
 
-void GeoLineStringGraphicsItem::handleRelationUpdate(const QVector<const GeoDataRelation *> &relations)
+void GeoLineStringGraphicsItem::handleRelationUpdate(const QList<const GeoDataRelation *> &relations)
 {
     QHash<GeoDataRelation::RelationType, QStringList> names;
     for (auto relation : relations) {

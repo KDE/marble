@@ -113,7 +113,7 @@ void CountryByFlag::postQuestion(QObject *gameObject)
      * Find a random placemark
      */
     Q_ASSERT_X(d->m_countryNames, "CountryByFlag::postQuestion", "CountryByFlagPrivate::m_countryNames is NULL");
-    QVector<GeoDataPlacemark *> countryPlacemarks = d->m_countryNames->placemarkList();
+    QList<GeoDataPlacemark *> countryPlacemarks = d->m_countryNames->placemarkList();
 
     uint randomSeed = uint(QTime::currentTime().msec());
     QRandomGenerator::global()->seed(randomSeed);

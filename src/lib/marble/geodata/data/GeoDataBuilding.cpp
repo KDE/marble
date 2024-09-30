@@ -85,12 +85,12 @@ void GeoDataBuilding::setMaxLevel(int maxLevel)
     d->m_maxLevel = maxLevel;
 }
 
-QVector<int> GeoDataBuilding::nonExistentLevels() const
+QList<int> GeoDataBuilding::nonExistentLevels() const
 {
     return d->m_nonExistentLevels;
 }
 
-void GeoDataBuilding::setNonExistentLevels(const QVector<int> &nonExistentLevels)
+void GeoDataBuilding::setNonExistentLevels(const QList<int> &nonExistentLevels)
 {
     d->m_nonExistentLevels = nonExistentLevels;
 }
@@ -117,12 +117,12 @@ void GeoDataBuilding::setName(const QString &name)
     d->m_name = name;
 }
 
-QVector<GeoDataBuilding::NamedEntry> GeoDataBuilding::entries() const
+QList<GeoDataBuilding::NamedEntry> GeoDataBuilding::entries() const
 {
     return d->m_entries;
 }
 
-void GeoDataBuilding::setEntries(const QVector<GeoDataBuilding::NamedEntry> &entries)
+void GeoDataBuilding::setEntries(const QList<GeoDataBuilding::NamedEntry> &entries)
 {
     d->m_entries = entries;
 }

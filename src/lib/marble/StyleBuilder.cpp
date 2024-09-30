@@ -50,7 +50,7 @@ public:
                                          Qt::PenStyle penStyle,
                                          Qt::PenCapStyle capStyle,
                                          bool lineBackground,
-                                         const QVector<qreal> &dashPattern,
+                                         const QList<qreal> &dashPattern,
                                          const QFont &font,
                                          const QColor &fontColor = Qt::black,
                                          const QString &texturePath = QString());
@@ -193,7 +193,7 @@ GeoDataStyle::Ptr StyleBuilder::Private::createPOIStyle(const QFont &font,
                                           Qt::SolidLine,
                                           Qt::RoundCap,
                                           false,
-                                          QVector<qreal>(),
+                                          QList<qreal>(),
                                           font);
     style->setIconStyle(GeoDataIconStyle(path));
     auto const screen = QApplication::screens().first();
@@ -252,7 +252,7 @@ GeoDataStyle::Ptr StyleBuilder::Private::createHighwayStyle(const QColor &color,
                        penStyle,
                        capStyle,
                        lineBackground,
-                       QVector<qreal>(),
+                       QList<qreal>(),
                        font,
                        fontColor);
 }
@@ -274,7 +274,7 @@ GeoDataStyle::Ptr StyleBuilder::Private::createWayStyle(const QColor &color,
                        Qt::SolidLine,
                        Qt::RoundCap,
                        false,
-                       QVector<qreal>(),
+                       QList<qreal>(),
                        m_defaultFont,
                        Qt::black,
                        texturePath);
@@ -726,7 +726,7 @@ GeoDataStyle::Ptr StyleBuilder::Private::createStyle(qreal width,
                                                      Qt::PenStyle penStyle,
                                                      Qt::PenCapStyle capStyle,
                                                      bool lineBackground,
-                                                     const QVector<qreal> &dashPattern,
+                                                     const QList<qreal> &dashPattern,
                                                      const QFont &font,
                                                      const QColor &fontColor,
                                                      const QString &texturePath)
@@ -1071,7 +1071,7 @@ void StyleBuilder::Private::initializeDefaultStyles()
     m_defaultStyle[GeoDataPlacemark::ManmadeLighthouse] =
         createOsmPOIStyle(osmFont, "transportation/lighthouse.16", transportationColor, 0xf2efe9, QColor(0xf2efe9).darker());
     m_defaultStyle[GeoDataPlacemark::ManmadePier] =
-        createStyle(0.0, 3.0, 0xf2efe9, 0xf2efe9, true, false, Qt::SolidPattern, Qt::SolidLine, Qt::FlatCap, false, QVector<qreal>(), osmFont);
+        createStyle(0.0, 3.0, 0xf2efe9, 0xf2efe9, true, false, Qt::SolidPattern, Qt::SolidLine, Qt::FlatCap, false, QList<qreal>(), osmFont);
     m_defaultStyle[GeoDataPlacemark::ManmadeWaterTower] = createOsmPOIStyle(osmFont, "amenity/water_tower.16", amenityColor);
     m_defaultStyle[GeoDataPlacemark::ManmadeWindMill] = createOsmPOIStyle(osmFont, "amenity/windmill.16", amenityColor);
     m_defaultStyle[GeoDataPlacemark::ManmadeCommunicationsTower] = createOsmPOIStyle(osmFont, "manmade/communications.16", amenityColor);
@@ -1154,7 +1154,7 @@ void StyleBuilder::Private::initializeDefaultStyles()
                                                                     Qt::SolidLine,
                                                                     Qt::FlatCap,
                                                                     false,
-                                                                    QVector<qreal>(),
+                                                                    QList<qreal>(),
                                                                     osmFont,
                                                                     Qt::transparent);
     m_defaultStyle[GeoDataPlacemark::BarrierGate] = createOsmPOIStyle(osmFont, "individual/gate");
@@ -1171,7 +1171,7 @@ void StyleBuilder::Private::initializeDefaultStyles()
                                                                 Qt::SolidLine,
                                                                 Qt::FlatCap,
                                                                 false,
-                                                                QVector<qreal>(),
+                                                                QList<qreal>(),
                                                                 osmFont,
                                                                 Qt::transparent);
 
@@ -1185,7 +1185,7 @@ void StyleBuilder::Private::initializeDefaultStyles()
                                                                  Qt::CustomDashLine,
                                                                  Qt::FlatCap,
                                                                  false,
-                                                                 QVector<qreal>() << 0.3 << 0.3,
+                                                                 QList<qreal>() << 0.3 << 0.3,
                                                                  osmFont);
     m_defaultStyle[GeoDataPlacemark::HighwayUnknown] = createHighwayStyle(0xdddddd, 0xbbbbbb, osmFont, "000000", 0, 1);
     m_defaultStyle[GeoDataPlacemark::HighwayPath] = createHighwayStyle(0xdddde8, 0x999999, osmFont, "000000", 0, 1, Qt::DotLine, Qt::SquareCap, true);
@@ -1229,7 +1229,7 @@ void StyleBuilder::Private::initializeDefaultStyles()
                                                                  Qt::SolidLine,
                                                                  Qt::RoundCap,
                                                                  false,
-                                                                 QVector<qreal>(),
+                                                                 QList<qreal>(),
                                                                  osmFont,
                                                                  waterColor.darker(150));
     m_defaultStyle[GeoDataPlacemark::WaterwayRiver] = createStyle(4,
@@ -1242,26 +1242,15 @@ void StyleBuilder::Private::initializeDefaultStyles()
                                                                   Qt::SolidLine,
                                                                   Qt::RoundCap,
                                                                   false,
-                                                                  QVector<qreal>(),
+                                                                  QList<qreal>(),
                                                                   osmFont,
                                                                   waterColor.darker(150));
     m_defaultStyle[GeoDataPlacemark::WaterwayCanal] = m_defaultStyle[GeoDataPlacemark::WaterwayRiver];
     m_defaultStyle[GeoDataPlacemark::WaterwayDitch] = m_defaultStyle[GeoDataPlacemark::WaterwayRiver];
     m_defaultStyle[GeoDataPlacemark::WaterwayDrain] = m_defaultStyle[GeoDataPlacemark::WaterwayRiver];
     m_defaultStyle[GeoDataPlacemark::WaterwayStream] = m_defaultStyle[GeoDataPlacemark::WaterwayRiver];
-    m_defaultStyle[GeoDataPlacemark::WaterwayWeir] = createStyle(4,
-                                                                 0,
-                                                                 0xffffff,
-                                                                 0x87939b,
-                                                                 true,
-                                                                 false,
-                                                                 Qt::SolidPattern,
-                                                                 Qt::DotLine,
-                                                                 Qt::RoundCap,
-                                                                 true,
-                                                                 QVector<qreal>(),
-                                                                 osmFont,
-                                                                 waterColor.darker(150));
+    m_defaultStyle[GeoDataPlacemark::WaterwayWeir] =
+        createStyle(4, 0, 0xffffff, 0x87939b, true, false, Qt::SolidPattern, Qt::DotLine, Qt::RoundCap, true, QList<qreal>(), osmFont, waterColor.darker(150));
 
     m_defaultStyle[GeoDataPlacemark::CrossingIsland] = createOsmPOIStyle(osmFont, "transportation/zebra_crossing", transportationColor);
     m_defaultStyle[GeoDataPlacemark::CrossingIsland]->iconStyle().setScale(0.75);
@@ -1282,7 +1271,7 @@ void StyleBuilder::Private::initializeDefaultStyles()
                                                                 Qt::DotLine,
                                                                 Qt::RoundCap,
                                                                 false,
-                                                                QVector<qreal>(),
+                                                                QList<qreal>(),
                                                                 osmFont,
                                                                 waterColor.darker(150));
 
@@ -1358,7 +1347,7 @@ void StyleBuilder::Private::initializeDefaultStyles()
                                                                 Qt::CustomDashLine,
                                                                 Qt::FlatCap,
                                                                 true,
-                                                                QVector<qreal>() << 2 << 3,
+                                                                QList<qreal>() << 2 << 3,
                                                                 osmFont,
                                                                 QColor(Qt::transparent));
     m_defaultStyle[GeoDataPlacemark::RailwayNarrowGauge] = createStyle(2.0,
@@ -1371,7 +1360,7 @@ void StyleBuilder::Private::initializeDefaultStyles()
                                                                        Qt::CustomDashLine,
                                                                        Qt::FlatCap,
                                                                        true,
-                                                                       QVector<qreal>() << 2 << 3,
+                                                                       QList<qreal>() << 2 << 3,
                                                                        osmFont,
                                                                        QColor(Qt::transparent));
     // FIXME: the tram is currently being rendered as a polygon.
@@ -1385,7 +1374,7 @@ void StyleBuilder::Private::initializeDefaultStyles()
                                                                 Qt::SolidLine,
                                                                 Qt::FlatCap,
                                                                 false,
-                                                                QVector<qreal>(),
+                                                                QList<qreal>(),
                                                                 osmFont,
                                                                 QColor(Qt::transparent));
     m_defaultStyle[GeoDataPlacemark::RailwayLightRail] = createStyle(2.0,
@@ -1398,7 +1387,7 @@ void StyleBuilder::Private::initializeDefaultStyles()
                                                                      Qt::SolidLine,
                                                                      Qt::FlatCap,
                                                                      false,
-                                                                     QVector<qreal>(),
+                                                                     QList<qreal>(),
                                                                      osmFont,
                                                                      QColor(Qt::transparent));
     m_defaultStyle[GeoDataPlacemark::RailwayAbandoned] = createStyle(2.0,
@@ -1411,7 +1400,7 @@ void StyleBuilder::Private::initializeDefaultStyles()
                                                                      Qt::DotLine,
                                                                      Qt::FlatCap,
                                                                      false,
-                                                                     QVector<qreal>(),
+                                                                     QList<qreal>(),
                                                                      osmFont,
                                                                      QColor(Qt::transparent));
     m_defaultStyle[GeoDataPlacemark::RailwaySubway] = createStyle(2.0,
@@ -1424,7 +1413,7 @@ void StyleBuilder::Private::initializeDefaultStyles()
                                                                   Qt::SolidLine,
                                                                   Qt::FlatCap,
                                                                   false,
-                                                                  QVector<qreal>(),
+                                                                  QList<qreal>(),
                                                                   osmFont,
                                                                   QColor(Qt::transparent));
     m_defaultStyle[GeoDataPlacemark::RailwayPreserved] = createStyle(2.0,
@@ -1437,7 +1426,7 @@ void StyleBuilder::Private::initializeDefaultStyles()
                                                                      Qt::DotLine,
                                                                      Qt::FlatCap,
                                                                      true,
-                                                                     QVector<qreal>(),
+                                                                     QList<qreal>(),
                                                                      osmFont,
                                                                      QColor(Qt::transparent));
     m_defaultStyle[GeoDataPlacemark::RailwayMiniature] = createStyle(2.0,
@@ -1450,7 +1439,7 @@ void StyleBuilder::Private::initializeDefaultStyles()
                                                                      Qt::SolidLine,
                                                                      Qt::FlatCap,
                                                                      false,
-                                                                     QVector<qreal>(),
+                                                                     QList<qreal>(),
                                                                      osmFont,
                                                                      QColor(Qt::transparent));
     m_defaultStyle[GeoDataPlacemark::RailwayConstruction] = createStyle(2.0,
@@ -1463,7 +1452,7 @@ void StyleBuilder::Private::initializeDefaultStyles()
                                                                         Qt::DotLine,
                                                                         Qt::FlatCap,
                                                                         true,
-                                                                        QVector<qreal>(),
+                                                                        QList<qreal>(),
                                                                         osmFont,
                                                                         QColor(Qt::transparent));
     m_defaultStyle[GeoDataPlacemark::RailwayMonorail] = createStyle(2.0,
@@ -1476,7 +1465,7 @@ void StyleBuilder::Private::initializeDefaultStyles()
                                                                     Qt::SolidLine,
                                                                     Qt::FlatCap,
                                                                     false,
-                                                                    QVector<qreal>(),
+                                                                    QList<qreal>(),
                                                                     osmFont,
                                                                     QColor(Qt::transparent));
     m_defaultStyle[GeoDataPlacemark::RailwayFunicular] = createStyle(2.0,
@@ -1489,14 +1478,14 @@ void StyleBuilder::Private::initializeDefaultStyles()
                                                                      Qt::SolidLine,
                                                                      Qt::FlatCap,
                                                                      false,
-                                                                     QVector<qreal>(),
+                                                                     QList<qreal>(),
                                                                      osmFont,
                                                                      QColor(Qt::transparent));
 
     m_defaultStyle[GeoDataPlacemark::Landmass] = createWayStyle(0xF1EEE8, 0xF1EEE8, true, false);
     m_defaultStyle[GeoDataPlacemark::UrbanArea] = createWayStyle(0xE6E3DD, 0xE6E3DD, true, false);
     m_defaultStyle[GeoDataPlacemark::InternationalDateLine] =
-        createStyle(1.0, 0.0, Qt::black, Qt::black, false, true, Qt::SolidPattern, Qt::SolidLine, Qt::FlatCap, false, QVector<qreal>(), osmFont);
+        createStyle(1.0, 0.0, Qt::black, Qt::black, false, true, Qt::SolidPattern, Qt::SolidLine, Qt::FlatCap, false, QList<qreal>(), osmFont);
     m_defaultStyle[GeoDataPlacemark::Bathymetry] = createWayStyle(0xa5c9c9, 0xa5c9c9, true, false);
 
     m_defaultStyle[GeoDataPlacemark::AerialwayStation] = createOsmPOIStyle(osmFont, "individual/railway_station", transportationColor);
@@ -1533,7 +1522,7 @@ void StyleBuilder::Private::initializeDefaultStyles()
                                                                   Qt::SolidLine,
                                                                   Qt::RoundCap,
                                                                   false,
-                                                                  QVector<qreal>(),
+                                                                  QList<qreal>(),
                                                                   osmFont,
                                                                   Qt::transparent);
     m_defaultStyle[GeoDataPlacemark::PisteNordic] = createStyle(3,
@@ -1546,7 +1535,7 @@ void StyleBuilder::Private::initializeDefaultStyles()
                                                                 Qt::SolidLine,
                                                                 Qt::RoundCap,
                                                                 false,
-                                                                QVector<qreal>(),
+                                                                QList<qreal>(),
                                                                 osmFont,
                                                                 Qt::transparent,
                                                                 MarbleDirs::path("bitmaps/osmcarto/patterns/ice.png"));
@@ -1560,24 +1549,14 @@ void StyleBuilder::Private::initializeDefaultStyles()
     m_defaultStyle[GeoDataPlacemark::PisteSkiJump] =
         createIconWayStyle(0xbbbbbb, osmFont, transportationColor, 1.0, QStringLiteral("svg/thenounproject/sports-245-ski-jump.svg"));
 
-    m_defaultStyle[GeoDataPlacemark::AdminLevel1] = createStyle(0.0,
-                                                                0.0,
-                                                                0xDF9CCF,
-                                                                0xDF9CCF,
-                                                                false,
-                                                                true,
-                                                                Qt::SolidPattern,
-                                                                Qt::CustomDashLine,
-                                                                Qt::FlatCap,
-                                                                false,
-                                                                QVector<qreal>() << 0.3 << 0.3,
-                                                                osmFont);
+    m_defaultStyle[GeoDataPlacemark::AdminLevel1] =
+        createStyle(0.0, 0.0, 0xDF9CCF, 0xDF9CCF, false, true, Qt::SolidPattern, Qt::CustomDashLine, Qt::FlatCap, false, QList<qreal>() << 0.3 << 0.3, osmFont);
     m_defaultStyle[GeoDataPlacemark::AdminLevel2] =
-        createStyle(2.0, 0.0, 0xDF9CCF, 0xDF9CCF, false, true, Qt::SolidPattern, Qt::SolidLine, Qt::FlatCap, false, QVector<qreal>() << 0.3 << 0.3, osmFont);
+        createStyle(2.0, 0.0, 0xDF9CCF, 0xDF9CCF, false, true, Qt::SolidPattern, Qt::SolidLine, Qt::FlatCap, false, QList<qreal>() << 0.3 << 0.3, osmFont);
     m_defaultStyle[GeoDataPlacemark::AdminLevel3] =
-        createStyle(1.8, 0.0, 0xDF9CCF, 0xDF9CCF, false, true, Qt::SolidPattern, Qt::DashLine, Qt::FlatCap, false, QVector<qreal>() << 0.3 << 0.3, osmFont);
+        createStyle(1.8, 0.0, 0xDF9CCF, 0xDF9CCF, false, true, Qt::SolidPattern, Qt::DashLine, Qt::FlatCap, false, QList<qreal>() << 0.3 << 0.3, osmFont);
     m_defaultStyle[GeoDataPlacemark::AdminLevel4] =
-        createStyle(1.5, 0.0, 0xDF9CCF, 0xDF9CCF, false, true, Qt::SolidPattern, Qt::DotLine, Qt::FlatCap, false, QVector<qreal>() << 0.3 << 0.3, osmFont);
+        createStyle(1.5, 0.0, 0xDF9CCF, 0xDF9CCF, false, true, Qt::SolidPattern, Qt::DotLine, Qt::FlatCap, false, QList<qreal>() << 0.3 << 0.3, osmFont);
     m_defaultStyle[GeoDataPlacemark::AdminLevel5] = createStyle(1.25,
                                                                 0.0,
                                                                 0xDF9CCF,
@@ -1588,23 +1567,23 @@ void StyleBuilder::Private::initializeDefaultStyles()
                                                                 Qt::DashDotDotLine,
                                                                 Qt::FlatCap,
                                                                 false,
-                                                                QVector<qreal>() << 0.3 << 0.3,
+                                                                QList<qreal>() << 0.3 << 0.3,
                                                                 osmFont);
     m_defaultStyle[GeoDataPlacemark::AdminLevel6] =
-        createStyle(1, 0.0, 0xDF9CCF, 0xDF9CCF, false, true, Qt::SolidPattern, Qt::DashDotLine, Qt::FlatCap, false, QVector<qreal>() << 0.3 << 0.3, osmFont);
+        createStyle(1, 0.0, 0xDF9CCF, 0xDF9CCF, false, true, Qt::SolidPattern, Qt::DashDotLine, Qt::FlatCap, false, QList<qreal>() << 0.3 << 0.3, osmFont);
     m_defaultStyle[GeoDataPlacemark::AdminLevel7] =
-        createStyle(1, 0.0, 0xDF9CCF, 0xDF9CCF, false, true, Qt::SolidPattern, Qt::DashLine, Qt::FlatCap, false, QVector<qreal>() << 0.3 << 0.3, osmFont);
+        createStyle(1, 0.0, 0xDF9CCF, 0xDF9CCF, false, true, Qt::SolidPattern, Qt::DashLine, Qt::FlatCap, false, QList<qreal>() << 0.3 << 0.3, osmFont);
     m_defaultStyle[GeoDataPlacemark::AdminLevel8] =
-        createStyle(1, 0.0, 0xDF9CCF, 0xDF9CCF, false, true, Qt::SolidPattern, Qt::DashLine, Qt::FlatCap, false, QVector<qreal>() << 0.3 << 0.3, osmFont);
+        createStyle(1, 0.0, 0xDF9CCF, 0xDF9CCF, false, true, Qt::SolidPattern, Qt::DashLine, Qt::FlatCap, false, QList<qreal>() << 0.3 << 0.3, osmFont);
     m_defaultStyle[GeoDataPlacemark::AdminLevel9] =
-        createStyle(1.5, 0.0, 0xDF9CCF, 0xDF9CCF, false, true, Qt::SolidPattern, Qt::DotLine, Qt::FlatCap, false, QVector<qreal>() << 0.3 << 0.3, osmFont);
+        createStyle(1.5, 0.0, 0xDF9CCF, 0xDF9CCF, false, true, Qt::SolidPattern, Qt::DotLine, Qt::FlatCap, false, QList<qreal>() << 0.3 << 0.3, osmFont);
     m_defaultStyle[GeoDataPlacemark::AdminLevel10] =
-        createStyle(1.5, 0.0, 0xDF9CCF, 0xDF9CCF, false, true, Qt::SolidPattern, Qt::DotLine, Qt::FlatCap, false, QVector<qreal>() << 0.3 << 0.3, osmFont);
+        createStyle(1.5, 0.0, 0xDF9CCF, 0xDF9CCF, false, true, Qt::SolidPattern, Qt::DotLine, Qt::FlatCap, false, QList<qreal>() << 0.3 << 0.3, osmFont);
     m_defaultStyle[GeoDataPlacemark::AdminLevel11] =
-        createStyle(1.5, 0.0, 0xDF9CCF, 0xDF9CCF, false, true, Qt::SolidPattern, Qt::DotLine, Qt::FlatCap, false, QVector<qreal>() << 0.3 << 0.3, osmFont);
+        createStyle(1.5, 0.0, 0xDF9CCF, 0xDF9CCF, false, true, Qt::SolidPattern, Qt::DotLine, Qt::FlatCap, false, QList<qreal>() << 0.3 << 0.3, osmFont);
 
     m_defaultStyle[GeoDataPlacemark::BoundaryMaritime] =
-        createStyle(2.0, 0.0, 0x88b3bf, 0x88b3bf, false, true, Qt::SolidPattern, Qt::SolidLine, Qt::FlatCap, false, QVector<qreal>(), osmFont);
+        createStyle(2.0, 0.0, 0x88b3bf, 0x88b3bf, false, true, Qt::SolidPattern, Qt::SolidLine, Qt::FlatCap, false, QList<qreal>(), osmFont);
 
     m_defaultStyle[GeoDataPlacemark::Satellite] =
         GeoDataStyle::Ptr(new GeoDataStyle(MarbleDirs::path("bitmaps/satellite.png"), QFont(defaultFamily, defaultSize, 50, false), defaultLabelColor));
@@ -1645,7 +1624,7 @@ void StyleBuilder::Private::initializeDefaultStyles()
 
     // Buildings
     m_defaultStyle[GeoDataPlacemark::Building] =
-        createStyle(1, 0, buildingColor, buildingColor.darker(), true, true, Qt::SolidPattern, Qt::SolidLine, Qt::RoundCap, false, QVector<qreal>(), osmFont);
+        createStyle(1, 0, buildingColor, buildingColor.darker(), true, true, Qt::SolidPattern, Qt::SolidLine, Qt::RoundCap, false, QList<qreal>(), osmFont);
     for (int i = 0; i < GeoDataPlacemark::LastIndex; ++i) {
         if (m_defaultStyle[i] && !m_defaultStyle[i]->iconStyle().iconPath().isEmpty()) {
             auto const category = GeoDataPlacemark::GeoDataVisualCategory(i);
@@ -2612,7 +2591,7 @@ qint64 StyleBuilder::popularity(const GeoDataPlacemark *placemark)
     qint64 const defaultValue = 100;
     int const offset = 10;
     if (StyleBuilder::Private::s_popularities.isEmpty()) {
-        QVector<GeoDataPlacemark::GeoDataVisualCategory> popularities;
+        QList<GeoDataPlacemark::GeoDataVisualCategory> popularities;
         popularities << GeoDataPlacemark::PlaceCityNationalCapital;
         popularities << GeoDataPlacemark::PlaceTownNationalCapital;
         popularities << GeoDataPlacemark::PlaceCityCapital;

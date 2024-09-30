@@ -98,9 +98,9 @@ QString OverviewMap::copyrightYears() const
     return QStringLiteral("2008");
 }
 
-QVector<PluginAuthor> OverviewMap::pluginAuthors() const
+QList<PluginAuthor> OverviewMap::pluginAuthors() const
 {
-    return QVector<PluginAuthor>() << PluginAuthor(QStringLiteral("Torsten Rahn"), QStringLiteral("tackat@kde.org"));
+    return QList<PluginAuthor>() << PluginAuthor(QStringLiteral("Torsten Rahn"), QStringLiteral("tackat@kde.org"));
 }
 
 QIcon OverviewMap::icon() const

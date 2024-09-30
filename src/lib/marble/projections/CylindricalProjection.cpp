@@ -71,7 +71,7 @@ QPainterPath CylindricalProjection::mapShape(const ViewportParams *viewport) con
     return mapShape;
 }
 
-bool CylindricalProjection::screenCoordinates(const GeoDataLineString &lineString, const ViewportParams *viewport, QVector<QPolygonF *> &polygons) const
+bool CylindricalProjection::screenCoordinates(const GeoDataLineString &lineString, const ViewportParams *viewport, QList<QPolygonF *> &polygons) const
 {
     Q_D(const CylindricalProjection);
     // Compare bounding box size of the line string with the angularResolution
@@ -81,7 +81,7 @@ bool CylindricalProjection::screenCoordinates(const GeoDataLineString &lineStrin
         return false;
     }
 
-    QVector<QPolygonF *> subPolygons;
+    QList<QPolygonF *> subPolygons;
     d->lineStringToPolygon(lineString, viewport, subPolygons);
 
     polygons << subPolygons;
@@ -93,7 +93,7 @@ int CylindricalProjectionPrivate::tessellateLineSegment(const GeoDataCoordinates
                                                         const GeoDataCoordinates &bCoords,
                                                         qreal bx,
                                                         qreal by,
-                                                        QVector<QPolygonF *> &polygons,
+                                                        QList<QPolygonF *> &polygons,
                                                         const ViewportParams *viewport,
                                                         TessellationFlags f,
                                                         int mirrorCount,
@@ -135,7 +135,7 @@ int CylindricalProjectionPrivate::tessellateLineSegment(const GeoDataCoordinates
 int CylindricalProjectionPrivate::processTessellation(const GeoDataCoordinates &previousCoords,
                                                       const GeoDataCoordinates &currentCoords,
                                                       int tessellatedNodes,
-                                                      QVector<QPolygonF *> &polygons,
+                                                      QList<QPolygonF *> &polygons,
                                                       const ViewportParams *viewport,
                                                       TessellationFlags f,
                                                       int mirrorCount,
@@ -215,7 +215,7 @@ int CylindricalProjectionPrivate::crossDateLine(const GeoDataCoordinates &aCoord
                                                 const GeoDataCoordinates &bCoord,
                                                 qreal bx,
                                                 qreal by,
-                                                QVector<QPolygonF *> &polygons,
+                                                QList<QPolygonF *> &polygons,
                                                 int mirrorCount,
                                                 qreal repeatDistance)
 {
@@ -236,9 +236,7 @@ int CylindricalProjectionPrivate::crossDateLine(const GeoDataCoordinates &aCoord
     return mirrorCount;
 }
 
-bool CylindricalProjectionPrivate::lineStringToPolygon(const GeoDataLineString &lineString,
-                                                       const ViewportParams *viewport,
-                                                       QVector<QPolygonF *> &polygons) const
+bool CylindricalProjectionPrivate::lineStringToPolygon(const GeoDataLineString &lineString, const ViewportParams *viewport, QList<QPolygonF *> &polygons) const
 {
     const TessellationFlags f = lineString.tessellationFlags();
     bool const tessellate = lineString.tessellate();
@@ -357,13 +355,13 @@ bool CylindricalProjectionPrivate::lineStringToPolygon(const GeoDataLineString &
     return polygons.isEmpty();
 }
 
-void CylindricalProjectionPrivate::translatePolygons(const QVector<QPolygonF *> &polygons, QVector<QPolygonF *> &translatedPolygons, qreal xOffset)
+void CylindricalProjectionPrivate::translatePolygons(const QList<QPolygonF *> &polygons, QList<QPolygonF *> &translatedPolygons, qreal xOffset)
 {
     // mDebug() << "Translation: " << xOffset;
     translatedPolygons.reserve(polygons.size());
 
-    QVector<QPolygonF *>::const_iterator itPolygon = polygons.constBegin();
-    QVector<QPolygonF *>::const_iterator itEnd = polygons.constEnd();
+    QList<QPolygonF *>::const_iterator itPolygon = polygons.constBegin();
+    QList<QPolygonF *>::const_iterator itEnd = polygons.constEnd();
 
     for (; itPolygon != itEnd; ++itPolygon) {
         QPolygonF *polygon = new QPolygonF;
@@ -373,7 +371,7 @@ void CylindricalProjectionPrivate::translatePolygons(const QVector<QPolygonF *> 
     }
 }
 
-void CylindricalProjectionPrivate::repeatPolygons(const ViewportParams *viewport, QVector<QPolygonF *> &polygons) const
+void CylindricalProjectionPrivate::repeatPolygons(const ViewportParams *viewport, QList<QPolygonF *> &polygons) const
 {
     Q_Q(const CylindricalProjection);
 
@@ -400,11 +398,11 @@ void CylindricalProjectionPrivate::repeatPolygons(const ViewportParams *viewport
     const int repeatsLeft = (xWest > 0) ? (int)(xWest / repeatXInterval) + 1 : 0;
     const int repeatsRight = (xEast < viewport->width()) ? (int)((viewport->width() - xEast) / repeatXInterval) + 1 : 0;
 
-    QVector<QPolygonF *> repeatedPolygons;
+    QList<QPolygonF *> repeatedPolygons;
 
     for (int it = repeatsLeft; it > 0; --it) {
         const qreal xOffset = -it * repeatXInterval;
-        QVector<QPolygonF *> translatedPolygons;
+        QList<QPolygonF *> translatedPolygons;
         translatePolygons(polygons, translatedPolygons, xOffset);
         repeatedPolygons << translatedPolygons;
     }
@@ -413,7 +411,7 @@ void CylindricalProjectionPrivate::repeatPolygons(const ViewportParams *viewport
 
     for (int it = 1; it <= repeatsRight; ++it) {
         const qreal xOffset = +it * repeatXInterval;
-        QVector<QPolygonF *> translatedPolygons;
+        QList<QPolygonF *> translatedPolygons;
         translatePolygons(polygons, translatedPolygons, xOffset);
         repeatedPolygons << translatedPolygons;
     }

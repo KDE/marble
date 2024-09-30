@@ -165,8 +165,8 @@ void TextureColorizer::setShowRelief(bool show)
 
 void TextureColorizer::drawIndividualDocument(GeoPainter *painter, const GeoDataDocument *document)
 {
-    QVector<GeoDataFeature *>::ConstIterator i = document->constBegin();
-    QVector<GeoDataFeature *>::ConstIterator end = document->constEnd();
+    QList<GeoDataFeature *>::ConstIterator i = document->constBegin();
+    QList<GeoDataFeature *>::ConstIterator end = document->constEnd();
 
     for (; i != end; ++i) {
         if (const GeoDataPlacemark *placemark = geodata_cast<GeoDataPlacemark>(*i)) {

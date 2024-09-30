@@ -32,7 +32,7 @@ LocalDatabaseRunner::~LocalDatabaseRunner()
 
 void LocalDatabaseRunner::search(const QString &searchTerm, const GeoDataLatLonBox &preferred)
 {
-    QVector<GeoDataPlacemark *> vector;
+    QList<GeoDataPlacemark *> vector;
 
     if (model()) {
         const QAbstractItemModel *placemarkModel = model()->placemarkModel();

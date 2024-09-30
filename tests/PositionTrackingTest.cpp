@@ -52,9 +52,9 @@ public:
     {
         return "2012";
     }
-    QVector<Marble::PluginAuthor> pluginAuthors() const override
+    QList<Marble::PluginAuthor> pluginAuthors() const override
     {
-        return QVector<Marble::PluginAuthor>();
+        return QList<Marble::PluginAuthor>();
     }
     void initialize() override
     {

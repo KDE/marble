@@ -387,8 +387,8 @@ GeoDataTour *TourWidgetPrivate::findTour(GeoDataFeature *feature) const
 
     GeoDataContainer *container = dynamic_cast<GeoDataContainer *>(feature);
     if (container) {
-        QVector<GeoDataFeature *>::Iterator end = container->end();
-        QVector<GeoDataFeature *>::Iterator iter = container->begin();
+        QList<GeoDataFeature *>::Iterator end = container->end();
+        QList<GeoDataFeature *>::Iterator iter = container->begin();
         for (; iter != end; ++iter) {
             GeoDataTour *tour = findTour(*iter);
             if (tour) {

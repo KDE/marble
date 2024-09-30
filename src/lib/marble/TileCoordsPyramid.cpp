@@ -19,7 +19,7 @@ public:
     int m_topLevel;
     int m_bottomLevel;
     QRect m_bottomLevelCoords;
-    QVector<int> m_validLevels;
+    QList<int> m_validLevels;
 };
 
 TileCoordsPyramid::Private::Private(int const topLevel, int const bottomLevel)
@@ -86,12 +86,12 @@ QRect TileCoordsPyramid::coords(int const level) const
     return result;
 }
 
-void TileCoordsPyramid::setValidTileLevels(const QVector<int> validLevels)
+void TileCoordsPyramid::setValidTileLevels(const QList<int> validLevels)
 {
     d->m_validLevels = validLevels;
 }
 
-QVector<int> TileCoordsPyramid::validTileLevels()
+QList<int> TileCoordsPyramid::validTileLevels()
 {
     return d->m_validLevels;
 }

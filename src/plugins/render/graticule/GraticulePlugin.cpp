@@ -94,9 +94,9 @@ QString GraticulePlugin::copyrightYears() const
     return QStringLiteral("2009");
 }
 
-QVector<PluginAuthor> GraticulePlugin::pluginAuthors() const
+QList<PluginAuthor> GraticulePlugin::pluginAuthors() const
 {
-    return QVector<PluginAuthor>() << PluginAuthor(QStringLiteral("Torsten Rahn"), QStringLiteral("tackat@kde.org"));
+    return QList<PluginAuthor>() << PluginAuthor(QStringLiteral("Torsten Rahn"), QStringLiteral("tackat@kde.org"));
 }
 
 QIcon GraticulePlugin::icon() const

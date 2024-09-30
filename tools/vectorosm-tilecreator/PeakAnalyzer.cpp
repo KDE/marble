@@ -89,9 +89,9 @@ void PeakAnalyzer::dbScan(const Peaks &peaks, double maxDistance, int minPoints)
     }
 }
 
-void PeakAnalyzer::determineZoomLevel(const QVector<GeoDataPlacemark *> &placemarks)
+void PeakAnalyzer::determineZoomLevel(const QList<GeoDataPlacemark *> &placemarks)
 {
-    QVector<GeoDataPlacemark *> peaks;
+    QList<GeoDataPlacemark *> peaks;
     std::copy_if(placemarks.begin(), placemarks.end(), std::back_inserter(peaks), [](GeoDataPlacemark *placemark) {
         return placemark->visualCategory() == GeoDataPlacemark::NaturalPeak;
     });

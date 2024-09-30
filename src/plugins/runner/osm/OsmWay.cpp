@@ -91,7 +91,7 @@ GeoDataPlacemark *OsmWay::create(const OsmNodes &nodes, QSet<qint64> &usedNodes)
     return placemark;
 }
 
-const QVector<qint64> &OsmWay::references() const
+const QList<qint64> &OsmWay::references() const
 {
     return m_references;
 }
@@ -249,9 +249,9 @@ double OsmWay::extractBuildingHeight() const
     return qBound(1.0, height, 1000.0);
 }
 
-QVector<GeoDataBuilding::NamedEntry> OsmWay::extractNamedEntries() const
+QList<GeoDataBuilding::NamedEntry> OsmWay::extractNamedEntries() const
 {
-    QVector<GeoDataBuilding::NamedEntry> entries;
+    QList<GeoDataBuilding::NamedEntry> entries;
 
     const auto end = m_osmData.hRef()->nodeReferencesEnd();
     for (auto iter = m_osmData.hRef()->nodeReferencesBegin(); iter != end; ++iter) {

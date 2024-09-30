@@ -38,7 +38,7 @@ OsmNominatimRunner::~OsmNominatimRunner()
 
 void OsmNominatimRunner::returnNoResults()
 {
-    emit searchFinished(QVector<GeoDataPlacemark *>());
+    emit searchFinished(QList<GeoDataPlacemark *>());
 }
 
 void OsmNominatimRunner::search(const QString &searchTerm, const GeoDataLatLonBox &preferred)
@@ -61,7 +61,7 @@ void OsmNominatimRunner::search(const QString &searchTerm, const GeoDataLatLonBo
     timer.setInterval(15000);
 
     connect(&timer, SIGNAL(timeout()), &eventLoop, SLOT(quit()));
-    connect(this, SIGNAL(searchFinished(QVector<GeoDataPlacemark *>)), &eventLoop, SLOT(quit()));
+    connect(this, SIGNAL(searchFinished(QList<GeoDataPlacemark *>)), &eventLoop, SLOT(quit()));
 
     // @todo FIXME Must currently be done in the main thread, see bug 257376
     QTimer::singleShot(0, this, SLOT(startSearch()));
@@ -97,7 +97,7 @@ void OsmNominatimRunner::handleResult(QNetworkReply *reply)
         return;
     }
 
-    QVector<GeoDataPlacemark *> placemarks;
+    QList<GeoDataPlacemark *> placemarks;
     QDomElement root = xml.documentElement();
     QDomNodeList places = root.elementsByTagName(QStringLiteral("place"));
     for (int i = 0; i < places.size(); ++i) {

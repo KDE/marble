@@ -53,9 +53,9 @@ QString PostalCodePlugin::copyrightYears() const
     return QStringLiteral("2011");
 }
 
-QVector<PluginAuthor> PostalCodePlugin::pluginAuthors() const
+QList<PluginAuthor> PostalCodePlugin::pluginAuthors() const
 {
-    return QVector<PluginAuthor>() << PluginAuthor(QStringLiteral("Valery Kharitonov"), QStringLiteral("kharvd@gmail.com"));
+    return QList<PluginAuthor>() << PluginAuthor(QStringLiteral("Valery Kharitonov"), QStringLiteral("kharvd@gmail.com"));
 }
 
 QString PostalCodePlugin::description() const

@@ -120,10 +120,10 @@ QString EclipsesPlugin::copyrightYears() const
     return QStringLiteral("2013");
 }
 
-QVector<PluginAuthor> EclipsesPlugin::pluginAuthors() const
+QList<PluginAuthor> EclipsesPlugin::pluginAuthors() const
 {
-    return QVector<PluginAuthor>() << PluginAuthor(QStringLiteral("Rene Kuettner"), QStringLiteral("rene@bitkanal.net"))
-                                   << PluginAuthor(QStringLiteral("Gerhard Holtkamp"), QString());
+    return QList<PluginAuthor>() << PluginAuthor(QStringLiteral("Rene Kuettner"), QStringLiteral("rene@bitkanal.net"))
+                                 << PluginAuthor(QStringLiteral("Gerhard Holtkamp"), QString());
 }
 
 QIcon EclipsesPlugin::icon() const

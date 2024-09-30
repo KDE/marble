@@ -98,10 +98,10 @@ QString WeatherPlugin::copyrightYears() const
     return QStringLiteral("2009, 2011");
 }
 
-QVector<PluginAuthor> WeatherPlugin::pluginAuthors() const
+QList<PluginAuthor> WeatherPlugin::pluginAuthors() const
 {
-    return QVector<PluginAuthor>() << PluginAuthor(QStringLiteral("Bastian Holst"), QStringLiteral("bastianholst@gmx.de"))
-                                   << PluginAuthor(QStringLiteral("Valery Kharitonov"), QStringLiteral("kharvd@gmail.com"));
+    return QList<PluginAuthor>() << PluginAuthor(QStringLiteral("Bastian Holst"), QStringLiteral("bastianholst@gmx.de"))
+                                 << PluginAuthor(QStringLiteral("Valery Kharitonov"), QStringLiteral("kharvd@gmail.com"));
 }
 
 QString WeatherPlugin::aboutDataText() const

@@ -56,10 +56,10 @@ bool GeoDataMultiTrack::operator==(const GeoDataMultiTrack &other) const
     Q_D(const GeoDataMultiTrack);
     const GeoDataMultiTrackPrivate *other_d = other.d_func();
 
-    QVector<GeoDataTrack *>::const_iterator d_it = d->m_vector.constBegin();
-    QVector<GeoDataTrack *>::const_iterator d_end = d->m_vector.constEnd();
-    QVector<GeoDataTrack *>::const_iterator other_it = other_d->m_vector.constBegin();
-    QVector<GeoDataTrack *>::const_iterator other_end = other_d->m_vector.constEnd();
+    QList<GeoDataTrack *>::const_iterator d_it = d->m_vector.constBegin();
+    QList<GeoDataTrack *>::const_iterator d_end = d->m_vector.constEnd();
+    QList<GeoDataTrack *>::const_iterator other_it = other_d->m_vector.constBegin();
+    QList<GeoDataTrack *>::const_iterator other_end = other_d->m_vector.constEnd();
 
     for (; d_it != d_end && other_it != other_end; ++d_it, ++other_it) {
         if (**d_it != **other_it)
@@ -78,8 +78,8 @@ const GeoDataLatLonAltBox &GeoDataMultiTrack::latLonAltBox() const
 {
     Q_D(const GeoDataMultiTrack);
 
-    QVector<GeoDataTrack *>::const_iterator it = d->m_vector.constBegin();
-    QVector<GeoDataTrack *>::const_iterator end = d->m_vector.constEnd();
+    QList<GeoDataTrack *>::const_iterator it = d->m_vector.constBegin();
+    QList<GeoDataTrack *>::const_iterator end = d->m_vector.constEnd();
 
     d->m_latLonAltBox.clear();
     for (; it != end; ++it) {
@@ -100,15 +100,15 @@ int GeoDataMultiTrack::size() const
     return d->m_vector.size();
 }
 
-QVector<GeoDataTrack> GeoDataMultiTrack::vector() const
+QList<GeoDataTrack> GeoDataMultiTrack::vector() const
 {
     Q_D(const GeoDataMultiTrack);
 
-    QVector<GeoDataTrack> results;
+    QList<GeoDataTrack> results;
     results.reserve(d->m_vector.size());
 
-    QVector<GeoDataTrack *>::const_iterator it = d->m_vector.constBegin();
-    QVector<GeoDataTrack *>::const_iterator end = d->m_vector.constEnd();
+    QList<GeoDataTrack *>::const_iterator it = d->m_vector.constBegin();
+    QList<GeoDataTrack *>::const_iterator end = d->m_vector.constEnd();
 
     for (; it != end; ++it) {
         const GeoDataTrack f(**it);
@@ -175,7 +175,7 @@ const GeoDataTrack &GeoDataMultiTrack::first() const
     return *(d->m_vector.first());
 }
 
-QVector<GeoDataTrack *>::Iterator GeoDataMultiTrack::begin()
+QList<GeoDataTrack *>::Iterator GeoDataMultiTrack::begin()
 {
     detach();
 
@@ -183,7 +183,7 @@ QVector<GeoDataTrack *>::Iterator GeoDataMultiTrack::begin()
     return d->m_vector.begin();
 }
 
-QVector<GeoDataTrack *>::Iterator GeoDataMultiTrack::end()
+QList<GeoDataTrack *>::Iterator GeoDataMultiTrack::end()
 {
     detach();
 
@@ -191,13 +191,13 @@ QVector<GeoDataTrack *>::Iterator GeoDataMultiTrack::end()
     return d->m_vector.end();
 }
 
-QVector<GeoDataTrack *>::ConstIterator GeoDataMultiTrack::constBegin() const
+QList<GeoDataTrack *>::ConstIterator GeoDataMultiTrack::constBegin() const
 {
     Q_D(const GeoDataMultiTrack);
     return d->m_vector.constBegin();
 }
 
-QVector<GeoDataTrack *>::ConstIterator GeoDataMultiTrack::constEnd() const
+QList<GeoDataTrack *>::ConstIterator GeoDataMultiTrack::constEnd() const
 {
     Q_D(const GeoDataMultiTrack);
     return d->m_vector.constEnd();
@@ -274,7 +274,7 @@ void GeoDataMultiTrack::pack(QDataStream &stream) const
 
     stream << d->m_vector.size();
 
-    for (QVector<GeoDataTrack *>::const_iterator iterator = d->m_vector.constBegin(); iterator != d->m_vector.constEnd(); ++iterator) {
+    for (QList<GeoDataTrack *>::const_iterator iterator = d->m_vector.constBegin(); iterator != d->m_vector.constEnd(); ++iterator) {
         const GeoDataTrack *geometry = *iterator;
         stream << geometry->geometryId();
         geometry->pack(stream);

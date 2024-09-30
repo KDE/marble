@@ -58,9 +58,9 @@ QString FlightGearPositionProviderPlugin::copyrightYears() const
     return QStringLiteral("2012");
 }
 
-QVector<PluginAuthor> FlightGearPositionProviderPlugin::pluginAuthors() const
+QList<PluginAuthor> FlightGearPositionProviderPlugin::pluginAuthors() const
 {
-    return QVector<PluginAuthor>() << PluginAuthor(QStringLiteral("Ralf Habacker"), QStringLiteral("ralf.habacker@freenet.de"));
+    return QList<PluginAuthor>() << PluginAuthor(QStringLiteral("Ralf Habacker"), QStringLiteral("ralf.habacker@freenet.de"));
 }
 
 QIcon FlightGearPositionProviderPlugin::icon() const

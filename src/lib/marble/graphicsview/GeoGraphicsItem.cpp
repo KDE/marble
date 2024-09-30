@@ -164,7 +164,7 @@ void GeoGraphicsItem::setRelations(const QSet<const GeoDataRelation *> &relation
     handleRelationUpdate(d->m_relations);
 }
 
-void GeoGraphicsItem::handleRelationUpdate(const QVector<const GeoDataRelation *> &)
+void GeoGraphicsItem::handleRelationUpdate(const QList<const GeoDataRelation *> &)
 {
     // does nothing
 }

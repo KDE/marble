@@ -32,9 +32,9 @@ void savePlacemarks(QDataStream &out, const GeoDataContainer *container, MarbleC
     qreal lat;
     qreal alt;
 
-    const QVector<GeoDataPlacemark *> placemarks = container->placemarkList();
-    QVector<GeoDataPlacemark *>::const_iterator it = placemarks.constBegin();
-    QVector<GeoDataPlacemark *>::const_iterator const end = placemarks.constEnd();
+    const QList<GeoDataPlacemark *> placemarks = container->placemarkList();
+    QList<GeoDataPlacemark *>::const_iterator it = placemarks.constBegin();
+    QList<GeoDataPlacemark *>::const_iterator const end = placemarks.constEnd();
     for (; it != end; ++it) {
         out << (*it)->name();
         (*it)->coordinate().geoCoordinates(lon, lat, alt);
@@ -51,9 +51,9 @@ void savePlacemarks(QDataStream &out, const GeoDataContainer *container, MarbleC
         out << (qint8)((*it)->extendedData().value("dst").value().toInt());
     }
 
-    const QVector<GeoDataFolder *> folders = container->folderList();
-    QVector<GeoDataFolder *>::const_iterator cont = folders.constBegin();
-    QVector<GeoDataFolder *>::const_iterator endcont = folders.constEnd();
+    const QList<GeoDataFolder *> folders = container->folderList();
+    QList<GeoDataFolder *>::const_iterator cont = folders.constBegin();
+    QList<GeoDataFolder *>::const_iterator endcont = folders.constEnd();
     for (; cont != endcont; ++cont) {
         savePlacemarks(out, *cont, clock);
     }

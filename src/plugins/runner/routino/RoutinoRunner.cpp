@@ -36,11 +36,11 @@ public:
 
     QByteArray retrieveWaypoints(const QStringList &params) const;
 
-    static GeoDataDocument *createDocument(GeoDataLineString *routeWaypoints, const QVector<GeoDataPlacemark *> instructions);
+    static GeoDataDocument *createDocument(GeoDataLineString *routeWaypoints, const QList<GeoDataPlacemark *> instructions);
 
     static GeoDataLineString *parseRoutinoOutput(const QByteArray &content);
 
-    QVector<GeoDataPlacemark *> parseRoutinoInstructions(const QByteArray &content) const;
+    QList<GeoDataPlacemark *> parseRoutinoInstructions(const QByteArray &content) const;
 
     RoutinoRunnerPrivate();
 };
@@ -144,9 +144,9 @@ GeoDataLineString *RoutinoRunnerPrivate::parseRoutinoOutput(const QByteArray &co
     return routeWaypoints;
 }
 
-QVector<GeoDataPlacemark *> RoutinoRunnerPrivate::parseRoutinoInstructions(const QByteArray &content) const
+QList<GeoDataPlacemark *> RoutinoRunnerPrivate::parseRoutinoInstructions(const QByteArray &content) const
 {
-    QVector<GeoDataPlacemark *> result;
+    QList<GeoDataPlacemark *> result;
     QTextStream stream(content);
     stream.setAutoDetectUnicode(true);
 
@@ -165,7 +165,7 @@ QVector<GeoDataPlacemark *> RoutinoRunnerPrivate::parseRoutinoInstructions(const
         placemark->setExtendedData(extendedData);
         Q_ASSERT(!directions[i].points().isEmpty());
         GeoDataLineString *geometry = new GeoDataLineString;
-        QVector<RoutingWaypoint> items = directions[i].points();
+        QList<RoutingWaypoint> items = directions[i].points();
         for (int j = 0; j < items.size(); ++j) {
             RoutingPoint point = items[j].point();
             GeoDataCoordinates coordinates(point.lon(), point.lat(), 0.0, GeoDataCoordinates::Degree);
@@ -178,7 +178,7 @@ QVector<GeoDataPlacemark *> RoutinoRunnerPrivate::parseRoutinoInstructions(const
     return result;
 }
 
-GeoDataDocument *RoutinoRunnerPrivate::createDocument(GeoDataLineString *routeWaypoints, const QVector<GeoDataPlacemark *> instructions)
+GeoDataDocument *RoutinoRunnerPrivate::createDocument(GeoDataLineString *routeWaypoints, const QList<GeoDataPlacemark *> instructions)
 {
     if (!routeWaypoints || routeWaypoints->isEmpty()) {
         return nullptr;
@@ -253,7 +253,7 @@ void RoutinoRunner::retrieveRoute(const RouteRequest *route)
 
     QByteArray output = d->retrieveWaypoints(params);
     GeoDataLineString *wayPoints = d->parseRoutinoOutput(output);
-    QVector<GeoDataPlacemark *> instructions = d->parseRoutinoInstructions(output);
+    QList<GeoDataPlacemark *> instructions = d->parseRoutinoInstructions(output);
 
     GeoDataDocument *result = d->createDocument(wayPoints, instructions);
     mDebug() << this << "routeCalculated";

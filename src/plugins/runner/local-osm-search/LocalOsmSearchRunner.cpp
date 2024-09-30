@@ -97,9 +97,9 @@ void LocalOsmSearchRunner::search(const QString &searchTerm, const GeoDataLatLon
 {
     const DatabaseQuery userQuery(model(), searchTerm, preferred);
 
-    QVector<OsmPlacemark> placemarks = m_database.find(userQuery);
+    QList<OsmPlacemark> placemarks = m_database.find(userQuery);
 
-    QVector<GeoDataPlacemark *> result;
+    QList<GeoDataPlacemark *> result;
     for (const OsmPlacemark &placemark : std::as_const(placemarks)) {
         GeoDataPlacemark *hit = new GeoDataPlacemark;
         hit->setName(placemark.name());

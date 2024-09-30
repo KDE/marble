@@ -41,10 +41,10 @@ QString JsonPlugin::copyrightYears() const
     return QStringLiteral("2012, 2019");
 }
 
-QVector<PluginAuthor> JsonPlugin::pluginAuthors() const
+QList<PluginAuthor> JsonPlugin::pluginAuthors() const
 {
-    return QVector<PluginAuthor>() << PluginAuthor(QStringLiteral("Ander Pijoan"), QStringLiteral("ander.pijoan@deusto.es"))
-                                   << PluginAuthor(QStringLiteral("John Zaitseff"), QStringLiteral("J.Zaitseff@zap.org.au"));
+    return QList<PluginAuthor>() << PluginAuthor(QStringLiteral("Ander Pijoan"), QStringLiteral("ander.pijoan@deusto.es"))
+                                 << PluginAuthor(QStringLiteral("John Zaitseff"), QStringLiteral("J.Zaitseff@zap.org.au"));
 }
 
 QString JsonPlugin::fileFormatDescription() const

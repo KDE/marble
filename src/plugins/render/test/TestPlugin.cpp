@@ -77,9 +77,9 @@ QString TestPlugin::copyrightYears() const
     return QStringLiteral("2008");
 }
 
-QVector<PluginAuthor> TestPlugin::pluginAuthors() const
+QList<PluginAuthor> TestPlugin::pluginAuthors() const
 {
-    return QVector<PluginAuthor>() << PluginAuthor(QStringLiteral("Torsten Rahn"), QStringLiteral("tackat@kde.org"));
+    return QList<PluginAuthor>() << PluginAuthor(QStringLiteral("Torsten Rahn"), QStringLiteral("tackat@kde.org"));
 }
 
 QIcon TestPlugin::icon() const

@@ -454,8 +454,8 @@ void OsmParser::importMultipolygon(const Relation &relation)
 {
     /** @todo: import nodes? What are they used for? */
     typedef QPair<int, RelationRole> RelationPair;
-    QVector<GeoDataLineString> outer;
-    QVector<GeoDataLineString> inner;
+    QList<GeoDataLineString> outer;
+    QList<GeoDataLineString> inner;
     for (const RelationPair &pair : relation.ways) {
         if (pair.second == Outer) {
             importWay(outer, pair.first);
@@ -491,7 +491,7 @@ void OsmParser::importMultipolygon(const Relation &relation)
     }
 }
 
-void OsmParser::importWay(QVector<GeoDataLineString> &ways, int id)
+void OsmParser::importWay(QList<GeoDataLineString> &ways, int id)
 {
     if (!m_ways.contains(id)) {
         qDebug() << "Skipping unknown way " << id << ". Check data.";
@@ -630,7 +630,7 @@ GeoDataLinearRing *OsmParser::convexHull() const
     Q_ASSERT(m_coordinates.size() > 2);
     QList<Coordinate> coordinates = m_coordinates.values();
 
-    QVector<GrahamScanHelper> points;
+    QList<GrahamScanHelper> points;
     points.reserve(coordinates.size() + 1);
     Coordinate start = coordinates.first();
     int startPos = 0;
@@ -687,7 +687,7 @@ GeoDataLinearRing *OsmParser::convexHull() const
 
 QColor OsmParser::randomColor() const
 {
-    QVector<QColor> colors = QVector<QColor>() << aluminumGray4 << brickRed4;
+    QList<QColor> colors = QList<QColor>() << aluminumGray4 << brickRed4;
     colors << woodBrown4 << forestGreen4 << hotOrange4;
     colors << seaBlue2 << skyBlue4 << sunYellow6;
     return colors.at(QRandomGenerator::global()->generate() % colors.size());

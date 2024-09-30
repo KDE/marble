@@ -47,9 +47,9 @@ QString HostipPlugin::copyrightYears() const
     return QStringLiteral("2010");
 }
 
-QVector<PluginAuthor> HostipPlugin::pluginAuthors() const
+QList<PluginAuthor> HostipPlugin::pluginAuthors() const
 {
-    return QVector<PluginAuthor>() << PluginAuthor(QStringLiteral("Dennis Nienhüser"), QStringLiteral("nienhueser@kde.org"));
+    return QList<PluginAuthor>() << PluginAuthor(QStringLiteral("Dennis Nienhüser"), QStringLiteral("nienhueser@kde.org"));
 }
 
 SearchRunner *HostipPlugin::newRunner() const

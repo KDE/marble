@@ -372,7 +372,7 @@ void TileDirectory::createOsmTiles() const
     pyramid.setBottomLevelCoords(rect);
 
     qint64 const maxCount = pyramid.tilesCount();
-    QMap<int, QVector<TileId>> tileLevels;
+    QMap<int, QList<TileId>> tileLevels;
     for (int zoomLevel = 0; zoomLevel <= m_zoomLevel; ++zoomLevel) {
         QRect const rect = pyramid.coords(zoomLevel);
         if (zoomLevel < m_zoomLevel && rect.width() * rect.height() < 2) {
@@ -455,7 +455,7 @@ int TileDirectory::innerNodes(const TileId &tile) const
     double const east = tileBoundary.east();
     double const north = tileBoundary.north();
     double const south = tileBoundary.south();
-    QVector<GeoDataCoordinates> bounds;
+    QList<GeoDataCoordinates> bounds;
     bounds << GeoDataCoordinates(west, north);
     bounds << GeoDataCoordinates(east, north);
     bounds << GeoDataCoordinates(east, south);

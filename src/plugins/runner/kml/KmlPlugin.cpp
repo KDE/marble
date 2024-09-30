@@ -39,10 +39,10 @@ QString KmlPlugin::copyrightYears() const
     return QStringLiteral("2011, 2013, 2015");
 }
 
-QVector<PluginAuthor> KmlPlugin::pluginAuthors() const
+QList<PluginAuthor> KmlPlugin::pluginAuthors() const
 {
-    return QVector<PluginAuthor>() << PluginAuthor(QStringLiteral("Thibaut Gridel"), QStringLiteral("tgridel@free.fr"))
-                                   << PluginAuthor(QStringLiteral("Dennis Nienhüser"), QStringLiteral("nienhueser@kde.org"));
+    return QList<PluginAuthor>() << PluginAuthor(QStringLiteral("Thibaut Gridel"), QStringLiteral("tgridel@free.fr"))
+                                 << PluginAuthor(QStringLiteral("Dennis Nienhüser"), QStringLiteral("nienhueser@kde.org"));
 }
 
 QString KmlPlugin::fileFormatDescription() const

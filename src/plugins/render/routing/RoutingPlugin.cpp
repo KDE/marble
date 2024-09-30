@@ -465,10 +465,10 @@ QString RoutingPlugin::copyrightYears() const
     return QStringLiteral("2010");
 }
 
-QVector<PluginAuthor> RoutingPlugin::pluginAuthors() const
+QList<PluginAuthor> RoutingPlugin::pluginAuthors() const
 {
-    return QVector<PluginAuthor>() << PluginAuthor(QStringLiteral("Siddharth Srivastava"), QStringLiteral("akssps011@gmail.com"))
-                                   << PluginAuthor(QStringLiteral("Dennis Nienhüser"), QStringLiteral("nienhueser@kde.org"));
+    return QList<PluginAuthor>() << PluginAuthor(QStringLiteral("Siddharth Srivastava"), QStringLiteral("akssps011@gmail.com"))
+                                 << PluginAuthor(QStringLiteral("Dennis Nienhüser"), QStringLiteral("nienhueser@kde.org"));
 }
 
 QIcon RoutingPlugin::icon() const

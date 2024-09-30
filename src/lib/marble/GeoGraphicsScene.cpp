@@ -159,7 +159,7 @@ void GeoGraphicsScene::resetStyle()
     emit repaintNeeded();
 }
 
-void GeoGraphicsScene::applyHighlight(const QVector<GeoDataPlacemark *> &selectedPlacemarks)
+void GeoGraphicsScene::applyHighlight(const QList<GeoDataPlacemark *> &selectedPlacemarks)
 {
     /**
      * First set the items, which were selected previously, to

@@ -39,7 +39,7 @@ public:
     template<typename T>
     QList<T *> plugins(const QList<T *> &plugins) const;
 
-    void addSearchResult(const QVector<GeoDataPlacemark *> &result);
+    void addSearchResult(const QList<GeoDataPlacemark *> &result);
     void cleanupSearchTask(SearchTask *task);
     void notifySearchResultChange();
     void notifySearchFinished();
@@ -52,7 +52,7 @@ public:
     QMutex m_modelMutex;
     MarblePlacemarkModel m_model;
     QList<SearchTask *> m_searchTasks;
-    QVector<GeoDataPlacemark *> m_placemarkContainer;
+    QList<GeoDataPlacemark *> m_placemarkContainer;
 };
 
 SearchRunnerManager::Private::Private(SearchRunnerManager *parent, const MarbleModel *marbleModel)
@@ -62,7 +62,7 @@ SearchRunnerManager::Private::Private(SearchRunnerManager *parent, const MarbleM
     , m_model(new MarblePlacemarkModel(parent))
 {
     m_model.setPlacemarkContainer(&m_placemarkContainer);
-    qRegisterMetaType<QVector<GeoDataPlacemark *>>("QVector<GeoDataPlacemark*>");
+    qRegisterMetaType<QList<GeoDataPlacemark *>>("QList<GeoDataPlacemark*>");
 }
 
 template<typename T>
@@ -88,7 +88,7 @@ QList<T *> SearchRunnerManager::Private::plugins(const QList<T *> &plugins) cons
     return result;
 }
 
-void SearchRunnerManager::Private::addSearchResult(const QVector<GeoDataPlacemark *> &result)
+void SearchRunnerManager::Private::addSearchResult(const QList<GeoDataPlacemark *> &result)
 {
     mDebug() << "Runner reports" << result.size() << " search results";
     if (result.isEmpty())
@@ -202,7 +202,7 @@ void SearchRunnerManager::findPlacemarks(const QString &searchTerm, const GeoDat
     }
 }
 
-QVector<GeoDataPlacemark *> SearchRunnerManager::searchPlacemarks(const QString &searchTerm, const GeoDataLatLonBox &preferred, int timeout)
+QList<GeoDataPlacemark *> SearchRunnerManager::searchPlacemarks(const QString &searchTerm, const GeoDataLatLonBox &preferred, int timeout)
 {
     QEventLoop localEventLoop;
     QTimer watchdog;

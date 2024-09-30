@@ -516,7 +516,7 @@ QRegion GeoPainter::regionFromPixmapRect(const GeoDataCoordinates &centerCoordin
     return regions;
 }
 
-void GeoPainter::polygonsFromLineString(const GeoDataLineString &lineString, QVector<QPolygonF *> &polygons) const
+void GeoPainter::polygonsFromLineString(const GeoDataLineString &lineString, QList<QPolygonF *> &polygons) const
 {
     // Immediately leave this method now if:
     // - the object is not visible in the viewport or if
@@ -539,7 +539,7 @@ void GeoPainter::drawPolyline(const GeoDataLineString &lineString, const QString
         return;
     }
 
-    QVector<QPolygonF *> polygons;
+    QList<QPolygonF *> polygons;
     polygonsFromLineString(lineString, polygons);
     if (polygons.empty())
         return;
@@ -553,7 +553,7 @@ void GeoPainter::drawPolyline(const GeoDataLineString &lineString, const QString
     qDeleteAll(polygons);
 }
 
-void GeoPainter::drawLabelsForPolygons(const QVector<QPolygonF *> &polygons,
+void GeoPainter::drawLabelsForPolygons(const QList<QPolygonF *> &polygons,
                                        const QString &labelText,
                                        LabelPositionFlags labelPositionFlags,
                                        const QColor &labelColor)
@@ -580,7 +580,7 @@ void GeoPainter::drawLabelsForPolygons(const QVector<QPolygonF *> &polygons,
         }
         setPen(labelColor);
 
-        QVector<QPointF> labelNodes;
+        QList<QPointF> labelNodes;
         QRectF viewportRect = QRectF(QPointF(0, 0), d->m_viewport->size());
         for (QPolygonF *itPolygon : polygons) {
             if (!itPolygon->boundingRect().intersects(viewportRect)) {
@@ -649,7 +649,7 @@ void GeoPainter::drawLabelsForPolygons(const QVector<QPolygonF *> &polygons,
         int labelWidth = fontMetrics().horizontalAdvance(labelText);
         int labelAscent = fontMetrics().ascent();
 
-        QVector<QPointF> labelNodes;
+        QList<QPointF> labelNodes;
         for (QPolygonF *itPolygon : polygons) {
             labelNodes.clear();
             ClipPainter::labelPosition(*itPolygon, labelNodes, labelPositionFlags);
@@ -678,7 +678,7 @@ void GeoPainter::drawLabelsForPolygons(const QVector<QPolygonF *> &polygons,
 
 void GeoPainter::drawPolyline(const GeoDataLineString &lineString)
 {
-    QVector<QPolygonF *> polygons;
+    QList<QPolygonF *> polygons;
     polygonsFromLineString(lineString, polygons);
     if (polygons.empty())
         return;
@@ -702,7 +702,7 @@ QRegion GeoPainter::regionFromPolyline(const GeoDataLineString &lineString, qrea
 
     QPainterPath painterPath;
 
-    QVector<QPolygonF *> polygons;
+    QList<QPolygonF *> polygons;
     d->m_viewport->screenCoordinates(lineString, polygons);
 
     for (QPolygonF *itPolygon : std::as_const(polygons)) {
@@ -728,7 +728,7 @@ void GeoPainter::drawPolygon(const GeoDataLinearRing &linearRing, Qt::FillRule f
         return;
     }
 
-    QVector<QPolygonF *> polygons;
+    QList<QPolygonF *> polygons;
     d->m_viewport->screenCoordinates(linearRing, polygons);
 
     for (QPolygonF *itPolygon : std::as_const(polygons)) {
@@ -749,7 +749,7 @@ QRegion GeoPainter::regionFromPolygon(const GeoDataLinearRing &linearRing, Qt::F
 
     QRegion regions;
 
-    QVector<QPolygonF *> polygons;
+    QList<QPolygonF *> polygons;
     d->m_viewport->screenCoordinates(linearRing, polygons);
 
     if (strokeWidth == 0) {
@@ -786,8 +786,8 @@ void GeoPainter::drawPolygon(const GeoDataPolygon &polygon, Qt::FillRule fillRul
     }
     // mDebug() << "Drawing Polygon";
 
-    QVector<QPolygonF *> outerPolygons;
-    QVector<QPolygonF *> innerPolygons;
+    QList<QPolygonF *> outerPolygons;
+    QList<QPolygonF *> innerPolygons;
     d->m_viewport->screenCoordinates(polygon.outerBoundary(), outerPolygons);
 
     QPen const currentPen = pen();
@@ -796,7 +796,7 @@ void GeoPainter::drawPolygon(const GeoDataPolygon &polygon, Qt::FillRule fillRul
     bool innerBoundariesOnScreen = false;
 
     if (hasInnerBoundaries) {
-        QVector<GeoDataLinearRing> const &innerBoundaries = polygon.innerBoundaries();
+        QList<GeoDataLinearRing> const &innerBoundaries = polygon.innerBoundaries();
 
         const GeoDataLatLonAltBox &viewLatLonAltBox = d->m_viewport->viewLatLonAltBox();
         for (const GeoDataLinearRing &itInnerBoundary : innerBoundaries) {
@@ -809,7 +809,7 @@ void GeoPainter::drawPolygon(const GeoDataPolygon &polygon, Qt::FillRule fillRul
         if (innerBoundariesOnScreen) {
             // Create the inner screen polygons
             for (const GeoDataLinearRing &itInnerBoundary : innerBoundaries) {
-                QVector<QPolygonF *> innerPolygonsPerBoundary;
+                QList<QPolygonF *> innerPolygonsPerBoundary;
 
                 d->m_viewport->screenCoordinates(itInnerBoundary, innerPolygonsPerBoundary);
 
@@ -819,7 +819,7 @@ void GeoPainter::drawPolygon(const GeoDataPolygon &polygon, Qt::FillRule fillRul
             }
 
             setPen(Qt::NoPen);
-            QVector<QPolygonF *> fillPolygons = createFillPolygons(outerPolygons, innerPolygons);
+            QList<QPolygonF *> fillPolygons = createFillPolygons(outerPolygons, innerPolygons);
 
             for (const QPolygonF *fillPolygon : std::as_const(fillPolygons)) {
                 ClipPainter::drawPolygon(*fillPolygon, fillRule);
@@ -846,9 +846,9 @@ void GeoPainter::drawPolygon(const GeoDataPolygon &polygon, Qt::FillRule fillRul
     qDeleteAll(innerPolygons);
 }
 
-QVector<QPolygonF *> GeoPainter::createFillPolygons(const QVector<QPolygonF *> &outerPolygons, const QVector<QPolygonF *> &innerPolygons) const
+QList<QPolygonF *> GeoPainter::createFillPolygons(const QList<QPolygonF *> &outerPolygons, const QList<QPolygonF *> &innerPolygons) const
 {
-    QVector<QPolygonF *> fillPolygons;
+    QList<QPolygonF *> fillPolygons;
     fillPolygons.reserve(outerPolygons.size());
 
     for (const QPolygonF *outerPolygon : outerPolygons) {

@@ -40,7 +40,7 @@ void TestGeoDataBuilding::defaultConstructor()
 
     QVERIFY(building.nonExistentLevels().isEmpty());
 
-    QVector<int> nonExistentLevels;
+    QList<int> nonExistentLevels;
     nonExistentLevels << 4 << 13;
     building.setNonExistentLevels(nonExistentLevels);
 

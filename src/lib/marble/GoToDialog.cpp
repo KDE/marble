@@ -43,17 +43,17 @@ public:
 private:
     QVariant currentLocationData(int role) const;
 
-    QVariant routeData(const QVector<GeoDataPlacemark> &via, int index, int role) const;
+    QVariant routeData(const QList<GeoDataPlacemark> &via, int index, int role) const;
 
     QVariant homeData(int role) const;
 
     QVariant bookmarkData(int index, int role) const;
 
-    QVector<GeoDataPlacemark> viaPoints() const;
+    QList<GeoDataPlacemark> viaPoints() const;
 
     MarbleModel *const m_marbleModel;
 
-    QVector<GeoDataPlacemark *> m_bookmarks;
+    QList<GeoDataPlacemark *> m_bookmarks;
 
     bool m_hasCurrentLocation;
 
@@ -81,7 +81,7 @@ public:
 
     int m_currentFrame;
 
-    QVector<QIcon> m_progressAnimation;
+    QList<QIcon> m_progressAnimation;
 
     GoToDialogPrivate(GoToDialog *parent, MarbleModel *marbleModel);
 
@@ -91,7 +91,7 @@ public:
 
     void startSearch();
 
-    void updateSearchResult(const QVector<GeoDataPlacemark *> &placemarks);
+    void updateSearchResult(const QList<GeoDataPlacemark *> &placemarks);
 
     void updateSearchMode();
 
@@ -110,9 +110,9 @@ TargetModel::TargetModel(MarbleModel *marbleModel, QObject *parent)
 {
     BookmarkManager *manager = m_marbleModel->bookmarkManager();
     for (GeoDataFolder *folder : manager->folders()) {
-        QVector<GeoDataPlacemark *> bookmarks = folder->placemarkList();
-        QVector<GeoDataPlacemark *>::const_iterator iter = bookmarks.constBegin();
-        QVector<GeoDataPlacemark *>::const_iterator end = bookmarks.constEnd();
+        QList<GeoDataPlacemark *> bookmarks = folder->placemarkList();
+        QList<GeoDataPlacemark *>::const_iterator iter = bookmarks.constBegin();
+        QList<GeoDataPlacemark *>::const_iterator end = bookmarks.constEnd();
 
         for (; iter != end; ++iter) {
             m_bookmarks.push_back(*iter);
@@ -123,14 +123,14 @@ TargetModel::TargetModel(MarbleModel *marbleModel, QObject *parent)
     m_hasCurrentLocation = tracking && tracking->status() == PositionProviderStatusAvailable;
 }
 
-QVector<GeoDataPlacemark> TargetModel::viaPoints() const
+QList<GeoDataPlacemark> TargetModel::viaPoints() const
 {
     if (!m_showRoutingItems) {
-        return QVector<GeoDataPlacemark>();
+        return QList<GeoDataPlacemark>();
     }
 
     RouteRequest *request = m_marbleModel->routingManager()->routeRequest();
-    QVector<GeoDataPlacemark> result;
+    QList<GeoDataPlacemark> result;
     for (int i = 0; i < request->size(); ++i) {
         if (request->at(i).isValid()) {
             GeoDataPlacemark placemark;
@@ -175,7 +175,7 @@ QVariant TargetModel::currentLocationData(int role) const
     return QVariant();
 }
 
-QVariant TargetModel::routeData(const QVector<GeoDataPlacemark> &via, int index, int role) const
+QVariant TargetModel::routeData(const QList<GeoDataPlacemark> &via, int index, int role) const
 {
     RouteRequest *request = m_marbleModel->routingManager()->routeRequest();
     switch (role) {
@@ -237,7 +237,7 @@ QVariant TargetModel::data(const QModelIndex &index, int role) const
         int row = index.row();
         bool const isCurrentLocation = row == 0 && m_hasCurrentLocation;
         int homeOffset = m_hasCurrentLocation ? 1 : 0;
-        QVector<GeoDataPlacemark> via = viaPoints();
+        QList<GeoDataPlacemark> via = viaPoints();
         bool const isRoute = row >= homeOffset && row < homeOffset + via.size();
 
         if (isCurrentLocation) {
@@ -339,7 +339,7 @@ void GoToDialogPrivate::startSearch()
     updateResultMessage(0);
 }
 
-void GoToDialogPrivate::updateSearchResult(const QVector<GeoDataPlacemark *> &placemarks)
+void GoToDialogPrivate::updateSearchResult(const QList<GeoDataPlacemark *> &placemarks)
 {
     m_searchResultModel.setRootDocument(nullptr);
     m_searchResult->clear();
@@ -369,7 +369,7 @@ GoToDialog::GoToDialog(MarbleModel *marbleModel, QWidget *parent, Qt::WindowFlag
     d->updateSearchMode();
     d->progressButton->setVisible(false);
 
-    connect(&d->m_runnerManager, SIGNAL(searchResultChanged(QVector<GeoDataPlacemark *>)), this, SLOT(updateSearchResult(QVector<GeoDataPlacemark *>)));
+    connect(&d->m_runnerManager, SIGNAL(searchResultChanged(QList<GeoDataPlacemark *>)), this, SLOT(updateSearchResult(QList<GeoDataPlacemark *>)));
     connect(&d->m_runnerManager, SIGNAL(searchFinished(QString)), this, SLOT(stopProgressAnimation()));
 }
 

@@ -86,12 +86,12 @@ qint8 printFormat8(qreal X)
     return ((qint8)(X * 120));
 }
 
-quint32 getParentNodes(const QVector<GeoDataCoordinates>::Iterator &begin, const QVector<GeoDataCoordinates>::Iterator &end)
+quint32 getParentNodes(const QList<GeoDataCoordinates>::Iterator &begin, const QList<GeoDataCoordinates>::Iterator &end)
 {
     quint32 parentNodes = 0;
 
-    QVector<GeoDataCoordinates>::Iterator it = begin;
-    QVector<GeoDataCoordinates>::Iterator itAux = begin;
+    QList<GeoDataCoordinates>::Iterator it = begin;
+    QList<GeoDataCoordinates>::Iterator itAux = begin;
 
     for (; it != end && itAux != end; ++itAux) {
         if ((nodeDistance((*it), (*itAux)) > epsilon) || (itAux == begin)) { // absolute nodes
@@ -103,18 +103,18 @@ quint32 getParentNodes(const QVector<GeoDataCoordinates>::Iterator &begin, const
     return parentNodes;
 }
 
-void printAllNodes(const QVector<GeoDataCoordinates>::Iterator &begin, const QVector<GeoDataCoordinates>::Iterator &end, QDataStream &stream)
+void printAllNodes(const QList<GeoDataCoordinates>::Iterator &begin, const QList<GeoDataCoordinates>::Iterator &end, QDataStream &stream)
 {
     qint16 nrChildNodes;
 
-    QVector<GeoDataCoordinates>::Iterator it = begin;
-    QVector<GeoDataCoordinates>::Iterator itAux = begin;
+    QList<GeoDataCoordinates>::Iterator it = begin;
+    QList<GeoDataCoordinates>::Iterator itAux = begin;
 
     for (; it != end && itAux != end; ++itAux) {
         if ((nodeDistance((*it), (*itAux)) > epsilon) || (itAux == begin)) { // absolute nodes
             it = itAux;
             nrChildNodes = 0;
-            QVector<GeoDataCoordinates>::Iterator itAux2 = it + 1;
+            QList<GeoDataCoordinates>::Iterator itAux2 = it + 1;
             for (; itAux2 != end && nodeDistance((*it), (*itAux2)) <= epsilon; ++itAux2)
                 ++nrChildNodes;
 
@@ -171,8 +171,8 @@ int main(int argc, char **argv)
     fileHeaderPolygons = 0; // This variable counts the number of polygons inside the document
     isMapColorField = false; // Whether the file contains mapcolor field or not.
 
-    QVector<GeoDataFeature *>::Iterator i = document->begin();
-    QVector<GeoDataFeature *>::Iterator const end = document->end();
+    QList<GeoDataFeature *>::Iterator i = document->begin();
+    QList<GeoDataFeature *>::Iterator const end = document->end();
 
     for (; i != end; ++i) {
         GeoDataPlacemark *placemark = static_cast<GeoDataPlacemark *>(*i);
@@ -191,8 +191,8 @@ int main(int argc, char **argv)
         }
 
         if (multigeom) {
-            QVector<GeoDataGeometry *>::Iterator multi = multigeom->begin();
-            QVector<GeoDataGeometry *>::Iterator multiEnd = multigeom->end();
+            QList<GeoDataGeometry *>::Iterator multi = multigeom->begin();
+            QList<GeoDataGeometry *>::Iterator multiEnd = multigeom->end();
             for (; multi != multiEnd; ++multi) {
                 /**
                  * Handle the no. of polygons in multigeom according to whether
@@ -244,8 +244,8 @@ int main(int argc, char **argv)
 
         if (polygon) {
             // Outer boundary
-            QVector<GeoDataCoordinates>::Iterator jBegin = polygon->outerBoundary().begin();
-            QVector<GeoDataCoordinates>::Iterator jEnd = polygon->outerBoundary().end();
+            QList<GeoDataCoordinates>::Iterator jBegin = polygon->outerBoundary().begin();
+            QList<GeoDataCoordinates>::Iterator jEnd = polygon->outerBoundary().end();
             polyParentNodes = getParentNodes(jBegin, jEnd);
             polyFlag = OUTERBOUNDARY;
 
@@ -261,8 +261,8 @@ int main(int argc, char **argv)
             printAllNodes(jBegin, jEnd, stream);
 
             // Inner boundaries
-            QVector<GeoDataLinearRing>::Iterator inner = polygon->innerBoundaries().begin();
-            QVector<GeoDataLinearRing>::Iterator innerEnd = polygon->innerBoundaries().end();
+            QList<GeoDataLinearRing>::Iterator inner = polygon->innerBoundaries().begin();
+            QList<GeoDataLinearRing>::Iterator innerEnd = polygon->innerBoundaries().end();
 
             for (; inner != innerEnd; ++inner) {
                 GeoDataLinearRing linearring = static_cast<GeoDataLinearRing>(*inner);
@@ -279,8 +279,8 @@ int main(int argc, char **argv)
         }
 
         if (linestring) {
-            QVector<GeoDataCoordinates>::Iterator jBegin = linestring->begin();
-            QVector<GeoDataCoordinates>::Iterator jEnd = linestring->end();
+            QList<GeoDataCoordinates>::Iterator jBegin = linestring->begin();
+            QList<GeoDataCoordinates>::Iterator jEnd = linestring->end();
             polyParentNodes = getParentNodes(jBegin, jEnd);
             if (linestring->isClosed())
                 polyFlag = LINEARRING;
@@ -300,8 +300,8 @@ int main(int argc, char **argv)
         }
 
         if (multigeom) {
-            QVector<GeoDataGeometry *>::Iterator multi = multigeom->begin();
-            QVector<GeoDataGeometry *>::Iterator const multiEnd = multigeom->end();
+            QList<GeoDataGeometry *>::Iterator multi = multigeom->begin();
+            QList<GeoDataGeometry *>::Iterator const multiEnd = multigeom->end();
 
             quint8 multiGeomSize = 0;
 
@@ -340,8 +340,8 @@ int main(int argc, char **argv)
                 GeoDataPolygon *currPolygon = dynamic_cast<GeoDataPolygon *>(*multi);
 
                 if (currLineString) {
-                    QVector<GeoDataCoordinates>::Iterator jBegin = currLineString->begin();
-                    QVector<GeoDataCoordinates>::Iterator jEnd = currLineString->end();
+                    QList<GeoDataCoordinates>::Iterator jBegin = currLineString->begin();
+                    QList<GeoDataCoordinates>::Iterator jEnd = currLineString->end();
                     polyParentNodes = getParentNodes(jBegin, jEnd);
                     if (currLineString->isClosed())
                         polyFlag = LINEARRING;
@@ -355,8 +355,8 @@ int main(int argc, char **argv)
 
                 else if (currPolygon) {
                     // Outer boundary
-                    QVector<GeoDataCoordinates>::Iterator jBegin = currPolygon->outerBoundary().begin();
-                    QVector<GeoDataCoordinates>::Iterator jEnd = currPolygon->outerBoundary().end();
+                    QList<GeoDataCoordinates>::Iterator jBegin = currPolygon->outerBoundary().begin();
+                    QList<GeoDataCoordinates>::Iterator jEnd = currPolygon->outerBoundary().end();
                     polyParentNodes = getParentNodes(jBegin, jEnd);
                     polyFlag = OUTERBOUNDARY;
 
@@ -365,8 +365,8 @@ int main(int argc, char **argv)
                     printAllNodes(jBegin, jEnd, stream);
 
                     // Inner boundaries
-                    QVector<GeoDataLinearRing>::Iterator inner = currPolygon->innerBoundaries().begin();
-                    QVector<GeoDataLinearRing>::Iterator innerEnd = currPolygon->innerBoundaries().end();
+                    QList<GeoDataLinearRing>::Iterator inner = currPolygon->innerBoundaries().begin();
+                    QList<GeoDataLinearRing>::Iterator innerEnd = currPolygon->innerBoundaries().end();
 
                     for (; inner != innerEnd; ++inner) {
                         GeoDataLinearRing linearring = static_cast<GeoDataLinearRing>(*inner);

@@ -20,7 +20,7 @@ SearchBackend::SearchBackend(QObject *parent)
     , m_placemarkModel(nullptr)
     , m_completer(nullptr)
     , m_completionModel(new MarblePlacemarkModel)
-    , m_completionContainer(new QVector<GeoDataPlacemark *>())
+    , m_completionContainer(new QList<GeoDataPlacemark *>())
     , m_selectedPlacemark()
 {
     m_model.setSortRole(MarblePlacemarkModel::PopularityIndexRole);
@@ -51,7 +51,7 @@ void SearchBackend::setCompletionPrefix(const QString &prefix)
             emit completionModelChanged(m_completionModel);
             return;
         }
-        QVector<GeoDataPlacemark *> *container = new QVector<GeoDataPlacemark *>();
+        QList<GeoDataPlacemark *> *container = new QList<GeoDataPlacemark *>();
         QAbstractProxyModel *model = qobject_cast<QAbstractProxyModel *>(m_completer->completionModel());
         for (int i = 0; i < m_completer->completionModel()->rowCount(); ++i) {
             QModelIndex index = model->mapToSource(model->index(i, 0));

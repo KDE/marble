@@ -106,12 +106,12 @@ QString PositionMarker::copyrightYears() const
     return QStringLiteral("2009, 2010");
 }
 
-QVector<PluginAuthor> PositionMarker::pluginAuthors() const
+QList<PluginAuthor> PositionMarker::pluginAuthors() const
 {
-    return QVector<PluginAuthor>() << PluginAuthor(QStringLiteral("Andrew Manson"), QStringLiteral("g.real.ate@gmail.com"))
-                                   << PluginAuthor(QStringLiteral("Eckhart Woerner"), QStringLiteral("ewoerner@kde.org"))
-                                   << PluginAuthor(QStringLiteral("Thibaut Gridel"), QStringLiteral("tgridel@free.fr"))
-                                   << PluginAuthor(QStringLiteral("Daniel Marth"), QStringLiteral("danielmarth@gmx.at"));
+    return QList<PluginAuthor>() << PluginAuthor(QStringLiteral("Andrew Manson"), QStringLiteral("g.real.ate@gmail.com"))
+                                 << PluginAuthor(QStringLiteral("Eckhart Woerner"), QStringLiteral("ewoerner@kde.org"))
+                                 << PluginAuthor(QStringLiteral("Thibaut Gridel"), QStringLiteral("tgridel@free.fr"))
+                                 << PluginAuthor(QStringLiteral("Daniel Marth"), QStringLiteral("danielmarth@gmx.at"));
 }
 
 QIcon PositionMarker::icon() const

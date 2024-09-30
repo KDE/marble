@@ -79,10 +79,10 @@ QString EarthquakePlugin::copyrightYears() const
     return QStringLiteral("2010, 2011");
 }
 
-QVector<PluginAuthor> EarthquakePlugin::pluginAuthors() const
+QList<PluginAuthor> EarthquakePlugin::pluginAuthors() const
 {
-    return QVector<PluginAuthor>() << PluginAuthor(QStringLiteral("Utku Aydın"), QStringLiteral("utkuaydin34@gmail.com"))
-                                   << PluginAuthor(QStringLiteral("Daniel Marth"), QStringLiteral("danielmarth@gmx.at"));
+    return QList<PluginAuthor>() << PluginAuthor(QStringLiteral("Utku Aydın"), QStringLiteral("utkuaydin34@gmail.com"))
+                                 << PluginAuthor(QStringLiteral("Daniel Marth"), QStringLiteral("danielmarth@gmx.at"));
 }
 
 QIcon EarthquakePlugin::icon() const

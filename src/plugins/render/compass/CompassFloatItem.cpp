@@ -83,10 +83,10 @@ QString CompassFloatItem::copyrightYears() const
     return QStringLiteral("2009, 2010");
 }
 
-QVector<PluginAuthor> CompassFloatItem::pluginAuthors() const
+QList<PluginAuthor> CompassFloatItem::pluginAuthors() const
 {
-    return QVector<PluginAuthor>() << PluginAuthor(QStringLiteral("Dennis Nienhüser"), QStringLiteral("nienhueser@kde.org"))
-                                   << PluginAuthor(QStringLiteral("Torsten Rahn"), QStringLiteral("tackat@kde.org"));
+    return QList<PluginAuthor>() << PluginAuthor(QStringLiteral("Dennis Nienhüser"), QStringLiteral("nienhueser@kde.org"))
+                                 << PluginAuthor(QStringLiteral("Torsten Rahn"), QStringLiteral("tackat@kde.org"));
 }
 
 QIcon CompassFloatItem::icon() const

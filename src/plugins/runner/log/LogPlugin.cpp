@@ -38,9 +38,9 @@ QString LogfilePlugin::copyrightYears() const
     return QStringLiteral("2012");
 }
 
-QVector<PluginAuthor> LogfilePlugin::pluginAuthors() const
+QList<PluginAuthor> LogfilePlugin::pluginAuthors() const
 {
-    return QVector<PluginAuthor>() << PluginAuthor(QStringLiteral("Bernhard Beschow"), QStringLiteral("bbeschow@cs.tu-berlin.de"));
+    return QList<PluginAuthor>() << PluginAuthor(QStringLiteral("Bernhard Beschow"), QStringLiteral("bbeschow@cs.tu-berlin.de"));
 }
 
 QString LogfilePlugin::fileFormatDescription() const

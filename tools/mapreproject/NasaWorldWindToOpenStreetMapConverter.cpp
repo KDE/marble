@@ -21,7 +21,7 @@ NasaWorldWindToOpenStreetMapConverter::NasaWorldWindToOpenStreetMapConverter(QOb
 {
 }
 
-void NasaWorldWindToOpenStreetMapConverter::setMapSources(QVector<ReadOnlyMapDefinition> const &mapSources)
+void NasaWorldWindToOpenStreetMapConverter::setMapSources(QList<ReadOnlyMapDefinition> const &mapSources)
 {
     m_mapSources = mapSources;
 }
@@ -50,7 +50,7 @@ void NasaWorldWindToOpenStreetMapConverter::setThreadCount(const int threadCount
     m_threadCount = threadCount;
 }
 
-QVector<QPair<Thread *, OsmTileClusterRenderer *>> NasaWorldWindToOpenStreetMapConverter::start()
+QList<QPair<Thread *, OsmTileClusterRenderer *>> NasaWorldWindToOpenStreetMapConverter::start()
 {
     // create directory for osm tile level if necessary
 
@@ -61,7 +61,7 @@ QVector<QPair<Thread *, OsmTileClusterRenderer *>> NasaWorldWindToOpenStreetMapC
     if (osmMapEdgeLengthTiles % m_osmTileClusterEdgeLengthTiles != 0)
         qFatal("Bad tile cluster size");
 
-    QVector<QPair<Thread *, OsmTileClusterRenderer *>> renderThreads;
+    QList<QPair<Thread *, OsmTileClusterRenderer *>> renderThreads;
 
     for (int i = 0; i < m_threadCount; ++i) {
         OsmTileClusterRenderer *const renderer = new OsmTileClusterRenderer;

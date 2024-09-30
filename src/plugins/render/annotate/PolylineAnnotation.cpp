@@ -78,8 +78,8 @@ void PolylineAnnotation::setupRegionsLists(GeoPainter *painter)
     const GeoDataLineString line = static_cast<const GeoDataLineString>(*placemark()->geometry());
 
     // Add polyline nodes.
-    QVector<GeoDataCoordinates>::ConstIterator itBegin = line.constBegin();
-    QVector<GeoDataCoordinates>::ConstIterator itEnd = line.constEnd();
+    QList<GeoDataCoordinates>::ConstIterator itBegin = line.constBegin();
+    QList<GeoDataCoordinates>::ConstIterator itEnd = line.constEnd();
 
     m_nodesList.clear();
     m_nodesList.reserve(line.size());

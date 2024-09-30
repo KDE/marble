@@ -26,7 +26,7 @@ GeoUriRunner::~GeoUriRunner()
 
 void GeoUriRunner::search(const QString &searchTerm, const GeoDataLatLonBox &)
 {
-    QVector<GeoDataPlacemark *> vector;
+    QList<GeoDataPlacemark *> vector;
 
     GeoUriParser uriParser(searchTerm);
     const bool success = uriParser.parse();

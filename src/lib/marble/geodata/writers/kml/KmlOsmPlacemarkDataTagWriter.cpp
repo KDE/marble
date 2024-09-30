@@ -71,8 +71,8 @@ bool KmlOsmPlacemarkDataTagWriter::writeOsmData(const GeoDataGeometry *geometry,
             int ndIndex = 0;
 
             // Writing the component nodes
-            QVector<GeoDataCoordinates>::const_iterator nodeIt = lineString->begin();
-            QVector<GeoDataCoordinates>::const_iterator nodeEnd = lineString->end();
+            QList<GeoDataCoordinates>::const_iterator nodeIt = lineString->begin();
+            QList<GeoDataCoordinates>::const_iterator nodeEnd = lineString->end();
             for (; nodeIt != nodeEnd; ++nodeIt) {
                 const OsmPlacemarkData &nodeOsmData = osmData.nodeReference(*nodeIt);
                 writer.writeStartElement(QString::fromUtf8(kml::kmlTag_nameSpaceMx), "nd");

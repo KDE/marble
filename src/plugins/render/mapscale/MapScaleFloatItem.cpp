@@ -93,11 +93,11 @@ QString MapScaleFloatItem::copyrightYears() const
     return QStringLiteral("2008, 2010, 2012");
 }
 
-QVector<PluginAuthor> MapScaleFloatItem::pluginAuthors() const
+QList<PluginAuthor> MapScaleFloatItem::pluginAuthors() const
 {
-    return QVector<PluginAuthor>() << PluginAuthor(QStringLiteral("Torsten Rahn"), QStringLiteral("tackat@kde.org"), tr("Original Developer"))
-                                   << PluginAuthor(QStringLiteral("Khanh-Nhan Nguyen"), QStringLiteral("khanh.nhan@wpi.edu"))
-                                   << PluginAuthor(QStringLiteral("Illya Kovalevskyy"), QStringLiteral("illya.kovalevskyy@gmail.com"));
+    return QList<PluginAuthor>() << PluginAuthor(QStringLiteral("Torsten Rahn"), QStringLiteral("tackat@kde.org"), tr("Original Developer"))
+                                 << PluginAuthor(QStringLiteral("Khanh-Nhan Nguyen"), QStringLiteral("khanh.nhan@wpi.edu"))
+                                 << PluginAuthor(QStringLiteral("Illya Kovalevskyy"), QStringLiteral("illya.kovalevskyy@gmail.com"));
 }
 
 QIcon MapScaleFloatItem::icon() const

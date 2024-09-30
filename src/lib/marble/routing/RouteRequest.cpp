@@ -32,7 +32,7 @@ struct PixmapElement {
 class RouteRequestPrivate
 {
 public:
-    QVector<GeoDataPlacemark> m_route;
+    QList<GeoDataPlacemark> m_route;
 
     QMap<PixmapElement, QPixmap> m_pixmapCache;
 

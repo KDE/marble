@@ -39,7 +39,7 @@ public:
     const MarbleModel *const m_marbleModel;
     const PluginManager *m_pluginManager;
     QList<ReverseGeocodingTask *> m_reverseTasks;
-    QVector<GeoDataCoordinates> m_reverseGeocodingResults;
+    QList<GeoDataCoordinates> m_reverseGeocodingResults;
     QString m_reverseGeocodingResult;
 };
 

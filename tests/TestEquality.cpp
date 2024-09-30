@@ -572,7 +572,7 @@ void TestEquality::tourTest()
     labelStyle.setFont(QFont(QStringLiteral("Helvetica"), 10));
 
     GeoDataLineStyle lineStyle;
-    QVector<qreal> pattern(5, 6.2);
+    QList<qreal> pattern(5, 6.2);
     lineStyle.setWidth(1.2);
     lineStyle.setPhysicalWidth(1.0);
     lineStyle.setCapStyle(Qt::RoundCap);
@@ -1185,7 +1185,7 @@ void TestEquality::iconStyleTest()
 void TestEquality::lineStyleTest()
 {
     GeoDataLineStyle lineStyle1, lineStyle2;
-    QVector<qreal> pattern(7, 7.8);
+    QList<qreal> pattern(7, 7.8);
 
     lineStyle1.setWidth(1.3);
     lineStyle1.setPhysicalWidth(1.0);
@@ -1334,7 +1334,7 @@ void TestEquality::styleTest()
     labelStyle.setFont(QFont(QStringLiteral("Helvetica"), 10));
 
     GeoDataLineStyle lineStyle;
-    QVector<qreal> pattern(5, 6.2);
+    QList<qreal> pattern(5, 6.2);
     lineStyle.setWidth(1.2);
     lineStyle.setPhysicalWidth(1.0);
     lineStyle.setCapStyle(Qt::RoundCap);

@@ -40,7 +40,7 @@ int usage()
 
 QColor randomColor()
 {
-    QVector<QColor> colors = QVector<QColor>() << Oxygen::aluminumGray4 << Oxygen::brickRed4;
+    QList<QColor> colors = QList<QColor>() << Oxygen::aluminumGray4 << Oxygen::brickRed4;
     colors << Oxygen::hotOrange4 << Oxygen::forestGreen4 << Oxygen::hotOrange4;
     colors << Oxygen::seaBlue2 << Oxygen::skyBlue4 << Oxygen::sunYellow6;
     return colors.at(QRandomGenerator::global()->generate() % colors.size());

@@ -96,7 +96,7 @@ int main(int argc, char *argv[])
     QString const extension = parser.value("extension");
     QString inputFileName = args.at(0);
     auto const levels = parser.value("zoom-level").split(',');
-    QVector<unsigned int> zoomLevels;
+    QList<unsigned int> zoomLevels;
     int maxZoomLevel = 0;
     for (auto const &level : levels) {
         int const zoomLevel = level.toInt();

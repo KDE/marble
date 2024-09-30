@@ -35,7 +35,7 @@ public:
 
     QTimer m_progressTimer;
 
-    QVector<QPixmap> m_progressAnimation;
+    QList<QPixmap> m_progressAnimation;
 
     int m_currentFrame;
 

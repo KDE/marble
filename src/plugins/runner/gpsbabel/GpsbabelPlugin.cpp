@@ -38,9 +38,9 @@ QString GpsbabelPlugin::copyrightYears() const
     return QStringLiteral("2013");
 }
 
-QVector<PluginAuthor> GpsbabelPlugin::pluginAuthors() const
+QList<PluginAuthor> GpsbabelPlugin::pluginAuthors() const
 {
-    return QVector<PluginAuthor>() << PluginAuthor(QStringLiteral("Mohammed Nafees"), QStringLiteral("nafees.technocool@gmail.com"));
+    return QList<PluginAuthor>() << PluginAuthor(QStringLiteral("Mohammed Nafees"), QStringLiteral("nafees.technocool@gmail.com"));
 }
 
 QString GpsbabelPlugin::fileFormatDescription() const

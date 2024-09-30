@@ -21,7 +21,7 @@ public:
     GeoDataListStyle::ListItemType m_listItemType;
     QColor m_bgColor;
 
-    QVector<GeoDataItemIcon *> m_vector;
+    QList<GeoDataItemIcon *> m_vector;
 };
 
 GeoDataListStylePrivate::GeoDataListStylePrivate()
@@ -55,9 +55,9 @@ bool GeoDataListStyle::operator==(const GeoDataListStyle &other) const
         return false;
     }
 
-    QVector<GeoDataItemIcon *>::const_iterator begin = d->m_vector.constBegin();
-    QVector<GeoDataItemIcon *>::const_iterator end = d->m_vector.constEnd();
-    QVector<GeoDataItemIcon *>::const_iterator otherBegin = other.d->m_vector.constBegin();
+    QList<GeoDataItemIcon *>::const_iterator begin = d->m_vector.constBegin();
+    QList<GeoDataItemIcon *>::const_iterator end = d->m_vector.constEnd();
+    QList<GeoDataItemIcon *>::const_iterator otherBegin = other.d->m_vector.constBegin();
 
     for (; begin != end; ++begin, ++otherBegin) {
         if (**begin != **otherBegin) {
@@ -103,7 +103,7 @@ void GeoDataListStyle::setBackgroundColor(const QColor &color)
     d->m_bgColor = color;
 }
 
-QVector<GeoDataItemIcon *> GeoDataListStyle::itemIconList() const
+QList<GeoDataItemIcon *> GeoDataListStyle::itemIconList() const
 {
     return d->m_vector;
 }
@@ -175,22 +175,22 @@ void GeoDataListStyle::clear()
     d->m_vector.clear();
 }
 
-QVector<GeoDataItemIcon *>::Iterator GeoDataListStyle::begin()
+QList<GeoDataItemIcon *>::Iterator GeoDataListStyle::begin()
 {
     return d->m_vector.begin();
 }
 
-QVector<GeoDataItemIcon *>::Iterator GeoDataListStyle::end()
+QList<GeoDataItemIcon *>::Iterator GeoDataListStyle::end()
 {
     return d->m_vector.end();
 }
 
-QVector<GeoDataItemIcon *>::ConstIterator GeoDataListStyle::constBegin() const
+QList<GeoDataItemIcon *>::ConstIterator GeoDataListStyle::constBegin() const
 {
     return d->m_vector.constBegin();
 }
 
-QVector<GeoDataItemIcon *>::ConstIterator GeoDataListStyle::constEnd() const
+QList<GeoDataItemIcon *>::ConstIterator GeoDataListStyle::constEnd() const
 {
     return d->m_vector.constEnd();
 }
@@ -200,7 +200,7 @@ void GeoDataListStyle::pack(QDataStream &stream) const
     GeoDataObject::pack(stream);
     stream << d->m_vector.count();
 
-    for (QVector<GeoDataItemIcon *>::const_iterator iterator = d->m_vector.constBegin(); iterator != d->m_vector.constEnd(); ++iterator) {
+    for (QList<GeoDataItemIcon *>::const_iterator iterator = d->m_vector.constBegin(); iterator != d->m_vector.constEnd(); ++iterator) {
         const GeoDataItemIcon *itemIcon = *iterator;
         itemIcon->pack(stream);
     }

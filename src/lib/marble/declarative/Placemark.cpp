@@ -912,7 +912,7 @@ void Placemark::updateTags()
 void Placemark::updateRelations(const Marble::GeoDataPlacemark &placemark)
 {
     if (const auto document = (placemark.parent() ? geodata_cast<GeoDataDocument>(placemark.parent()) : nullptr)) {
-        QVector<const GeoDataRelation *> allRelations;
+        QList<const GeoDataRelation *> allRelations;
         QSet<const GeoDataRelation *> relevantRelations;
         QSet<qint64> placemarkIds;
         auto const &osmData = placemark.osmData();

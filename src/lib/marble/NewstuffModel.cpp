@@ -67,7 +67,7 @@ public:
 
     NewstuffModel *m_parent;
 
-    QVector<NewstuffItem> m_items;
+    QList<NewstuffItem> m_items;
 
     QNetworkAccessManager m_networkAccessManager;
 

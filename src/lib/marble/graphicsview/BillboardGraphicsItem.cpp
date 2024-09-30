@@ -23,12 +23,12 @@ public:
     {
     }
 
-    QVector<QPointF> positions() const override
+    QList<QPointF> positions() const override
     {
         return m_positions;
     }
 
-    QVector<QPointF> absolutePositions() const override
+    QList<QPointF> absolutePositions() const override
     {
         return m_positions;
     }
@@ -76,7 +76,7 @@ public:
     }
 
     GeoDataCoordinates m_coordinates;
-    QVector<QPointF> m_positions;
+    QList<QPointF> m_positions;
 };
 
 BillboardGraphicsItem::BillboardGraphicsItem()
@@ -96,17 +96,17 @@ void BillboardGraphicsItem::setCoordinate(const GeoDataCoordinates &coordinates)
     d->m_coordinates = coordinates;
 }
 
-QVector<QPointF> BillboardGraphicsItem::positions() const
+QList<QPointF> BillboardGraphicsItem::positions() const
 {
     Q_D(const BillboardGraphicsItem);
     return d->positions();
 }
 
-QVector<QRectF> BillboardGraphicsItem::boundingRects() const
+QList<QRectF> BillboardGraphicsItem::boundingRects() const
 {
     Q_D(const BillboardGraphicsItem);
 
-    QVector<QRectF> rects;
+    QList<QRectF> rects;
     rects.reserve(d->m_positions.size());
 
     QSizeF const size = d->m_size;

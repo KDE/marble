@@ -356,7 +356,7 @@ void EclipsesItem::calculate()
         }
 
         GeoDataLinearRing invertedUpperUmbra(Tessellate);
-        QVector<GeoDataCoordinates>::const_iterator iter = upperUmbra.constEnd() - 1;
+        QList<GeoDataCoordinates>::const_iterator iter = upperUmbra.constEnd() - 1;
         for (; iter != upperUmbra.constBegin(); --iter) {
             invertedUpperUmbra << *iter;
         }
@@ -553,7 +553,7 @@ void EclipsesItem::calculate()
                     // TODO: replace this with a GeoDataLinearRing::invert()
                     // method that needs to be added to Marble ...
                     GeoDataLinearRing *invertedBoundary = new GeoDataLinearRing(Tessellate);
-                    QVector<GeoDataCoordinates>::const_iterator iter = sunBoundaries.at(closestSection)->constEnd();
+                    QList<GeoDataCoordinates>::const_iterator iter = sunBoundaries.at(closestSection)->constEnd();
                     --iter;
                     for (; iter != sunBoundaries.at(closestSection)->constBegin(); --iter) {
                         *invertedBoundary << *iter;

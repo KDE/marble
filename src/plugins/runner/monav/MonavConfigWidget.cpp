@@ -83,7 +83,7 @@ public:
 
     QSignalMapper m_upgradeMapSignalMapper;
 
-    QVector<MonavStuffEntry> m_remoteMaps;
+    QList<MonavStuffEntry> m_remoteMaps;
 
     QMap<QString, QString> m_remoteVersions;
 

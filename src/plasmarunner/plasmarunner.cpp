@@ -77,8 +77,8 @@ void PlasmaRunner::collectMatches(QList<KRunner::QueryMatch> &matches, const QSt
 {
     const QString queryLower = query.toLower();
 
-    QVector<GeoDataFeature *>::const_iterator it = folder->constBegin();
-    QVector<GeoDataFeature *>::const_iterator end = folder->constEnd();
+    QList<GeoDataFeature *>::const_iterator it = folder->constBegin();
+    QList<GeoDataFeature *>::const_iterator end = folder->constEnd();
 
     for (; it != end; ++it) {
         GeoDataFolder *folder = dynamic_cast<GeoDataFolder *>(*it);

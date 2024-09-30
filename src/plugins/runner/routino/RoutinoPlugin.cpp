@@ -49,9 +49,9 @@ QString RoutinoPlugin::copyrightYears() const
     return QStringLiteral("2010");
 }
 
-QVector<PluginAuthor> RoutinoPlugin::pluginAuthors() const
+QList<PluginAuthor> RoutinoPlugin::pluginAuthors() const
 {
-    return QVector<PluginAuthor>() << PluginAuthor(QStringLiteral("Dennis Nienhüser"), QStringLiteral("nienhueser@kde.org"));
+    return QList<PluginAuthor>() << PluginAuthor(QStringLiteral("Dennis Nienhüser"), QStringLiteral("nienhueser@kde.org"));
 }
 
 RoutingRunner *RoutinoPlugin::newRunner() const

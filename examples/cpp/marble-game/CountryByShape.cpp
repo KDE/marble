@@ -140,7 +140,7 @@ void CountryByShape::postQuestion(QObject *gameObject)
 
     Q_ASSERT_X(d->m_countryNames, "CountryByShape::postQuestion", "CountryByShapePrivate::m_countryNames is NULL");
 
-    QVector<GeoDataPlacemark *> countryPlacemarks = d->m_countryNames->placemarkList();
+    QList<GeoDataPlacemark *> countryPlacemarks = d->m_countryNames->placemarkList();
 
     uint randomSeed = uint(QTime::currentTime().msec());
     QRandomGenerator::global()->seed(randomSeed);
@@ -166,8 +166,8 @@ void CountryByShape::postQuestion(QObject *gameObject)
 
             Q_ASSERT_X(d->m_countryBoundaries, "CountryByShape::postQuestion", "CountryByShapePrivate::m_countryBoundaries is NULL");
 
-            QVector<GeoDataFeature *>::Iterator i = d->m_countryBoundaries->begin();
-            QVector<GeoDataFeature *>::Iterator const end = d->m_countryBoundaries->end();
+            QList<GeoDataFeature *>::Iterator i = d->m_countryBoundaries->begin();
+            QList<GeoDataFeature *>::Iterator const end = d->m_countryBoundaries->end();
             for (; i != end; ++i) {
                 GeoDataPlacemark *country = static_cast<GeoDataPlacemark *>(*i);
 
@@ -186,8 +186,8 @@ void CountryByShape::postQuestion(QObject *gameObject)
                     break;
                 }
                 if (multigeom) {
-                    QVector<GeoDataGeometry *>::Iterator iter = multigeom->begin();
-                    QVector<GeoDataGeometry *>::Iterator const end = multigeom->end();
+                    QList<GeoDataGeometry *>::Iterator iter = multigeom->begin();
+                    QList<GeoDataGeometry *>::Iterator const end = multigeom->end();
 
                     for (; iter != end; ++iter) {
                         GeoDataPolygon *poly = dynamic_cast<GeoDataPolygon *>(*iter);

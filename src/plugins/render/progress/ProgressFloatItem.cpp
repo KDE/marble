@@ -97,10 +97,10 @@ QString ProgressFloatItem::copyrightYears() const
     return QStringLiteral("2010, 2011");
 }
 
-QVector<PluginAuthor> ProgressFloatItem::pluginAuthors() const
+QList<PluginAuthor> ProgressFloatItem::pluginAuthors() const
 {
-    return QVector<PluginAuthor>() << PluginAuthor(QStringLiteral("Dennis Nienhüser"), QStringLiteral("nienhueser@kde.org"))
-                                   << PluginAuthor(QStringLiteral("Bernhard Beschow"), QStringLiteral("bbeschow@cs.tu-berlin.de"));
+    return QList<PluginAuthor>() << PluginAuthor(QStringLiteral("Dennis Nienhüser"), QStringLiteral("nienhueser@kde.org"))
+                                 << PluginAuthor(QStringLiteral("Bernhard Beschow"), QStringLiteral("bbeschow@cs.tu-berlin.de"));
 }
 
 QIcon ProgressFloatItem::icon() const

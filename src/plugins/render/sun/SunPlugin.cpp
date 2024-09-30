@@ -73,11 +73,11 @@ QString SunPlugin::copyrightYears() const
     return QStringLiteral("2011");
 }
 
-QVector<PluginAuthor> SunPlugin::pluginAuthors() const
+QList<PluginAuthor> SunPlugin::pluginAuthors() const
 {
-    return QVector<PluginAuthor>() << PluginAuthor(QStringLiteral("Torsten Rahn"), QStringLiteral("tackat@kde.org"))
-                                   << PluginAuthor(QStringLiteral("Bernhard Beschow"), QStringLiteral("bbeschow@cs.tu-berlin.de"))
-                                   << PluginAuthor(QStringLiteral("Harshit Jain"), QStringLiteral("hjain.itbhu@gmail.com"));
+    return QList<PluginAuthor>() << PluginAuthor(QStringLiteral("Torsten Rahn"), QStringLiteral("tackat@kde.org"))
+                                 << PluginAuthor(QStringLiteral("Bernhard Beschow"), QStringLiteral("bbeschow@cs.tu-berlin.de"))
+                                 << PluginAuthor(QStringLiteral("Harshit Jain"), QStringLiteral("hjain.itbhu@gmail.com"));
 }
 
 QIcon SunPlugin::icon() const

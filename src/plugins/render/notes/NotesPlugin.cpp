@@ -54,9 +54,9 @@ QString NotesPlugin::copyrightYears() const
     return QStringLiteral("2017");
 }
 
-QVector<PluginAuthor> NotesPlugin::pluginAuthors() const
+QList<PluginAuthor> NotesPlugin::pluginAuthors() const
 {
-    return QVector<PluginAuthor>() << PluginAuthor(QStringLiteral("Spencer Brown"), QStringLiteral("spencerbrown991@gmail.com"));
+    return QList<PluginAuthor>() << PluginAuthor(QStringLiteral("Spencer Brown"), QStringLiteral("spencerbrown991@gmail.com"));
 }
 
 QString NotesPlugin::description() const

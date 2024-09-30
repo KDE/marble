@@ -83,10 +83,10 @@ public:
     static QPolygonF polygon(const GeoDataLineString &lineString, qreal x, qreal y, qreal sx, qreal sy);
 
     /** The currently shown alternative routes (model data) */
-    QVector<GeoDataDocument *> m_routes;
+    QList<GeoDataDocument *> m_routes;
 
     /** Pending route data (waiting for other results to come in) */
-    QVector<GeoDataDocument *> m_restrainedRoutes;
+    QList<GeoDataDocument *> m_restrainedRoutes;
 
     /** Counts the time between route request and first result */
     QElapsedTimer m_responseTime;
@@ -241,7 +241,7 @@ qreal AlternativeRoutesModel::Private::instructionScore(const GeoDataDocument *d
     QStringList blacklist = QStringList() << ""
                                           << "Route"
                                           << "Tessellated";
-    QVector<GeoDataFolder *> folders = document->folderList();
+    QList<GeoDataFolder *> folders = document->folderList();
     for (const GeoDataFolder *folder : std::as_const(folders)) {
         for (const GeoDataPlacemark *placemark : folder->placemarkList()) {
             if (!blacklist.contains(placemark->name())) {
@@ -266,7 +266,7 @@ qreal AlternativeRoutesModel::Private::instructionScore(const GeoDataDocument *d
 
 const GeoDataLineString *AlternativeRoutesModel::Private::waypoints(const GeoDataDocument *document)
 {
-    QVector<GeoDataFolder *> folders = document->folderList();
+    QList<GeoDataFolder *> folders = document->folderList();
     for (const GeoDataFolder *folder : std::as_const(folders)) {
         for (const GeoDataPlacemark *placemark : folder->placemarkList()) {
             const GeoDataGeometry *geometry = placemark->geometry();
@@ -421,7 +421,7 @@ const GeoDataDocument *AlternativeRoutesModel::currentRoute() const
 void AlternativeRoutesModel::clear()
 {
     beginResetModel();
-    QVector<GeoDataDocument *> routes = d->m_routes;
+    QList<GeoDataDocument *> routes = d->m_routes;
     d->m_currentIndex = -1;
     d->m_routes.clear();
     qDeleteAll(routes);

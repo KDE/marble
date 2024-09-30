@@ -57,10 +57,10 @@ bool PlacemarkLayer::render(GeoPainter *geoPainter, ViewportParams *viewport, co
     Q_UNUSED(renderPos)
     Q_UNUSED(layer)
 
-    QVector<VisiblePlacemark *> visiblePlacemarks = m_layout.generateLayout(viewport, m_tileLevel);
+    QList<VisiblePlacemark *> visiblePlacemarks = m_layout.generateLayout(viewport, m_tileLevel);
     // draw placemarks less important first
-    QVector<VisiblePlacemark *>::const_iterator visit = visiblePlacemarks.constEnd();
-    QVector<VisiblePlacemark *>::const_iterator itEnd = visiblePlacemarks.constBegin();
+    QList<VisiblePlacemark *>::const_iterator visit = visiblePlacemarks.constEnd();
+    QList<VisiblePlacemark *>::const_iterator itEnd = visiblePlacemarks.constBegin();
 
     QPainter *const painter = geoPainter;
 
@@ -193,7 +193,7 @@ QString PlacemarkLayer::runtimeTrace() const
     return m_layout.runtimeTrace();
 }
 
-QVector<const GeoDataFeature *> PlacemarkLayer::whichPlacemarkAt(const QPoint &pos)
+QList<const GeoDataFeature *> PlacemarkLayer::whichPlacemarkAt(const QPoint &pos)
 {
     return m_layout.whichPlacemarkAt(pos);
 }
@@ -258,7 +258,7 @@ void PlacemarkLayer::setTileLevel(int tileLevel)
     m_tileLevel = tileLevel;
 }
 
-void PlacemarkLayer::renderDebug(GeoPainter *painter, ViewportParams *viewport, const QVector<VisiblePlacemark *> &placemarks) const
+void PlacemarkLayer::renderDebug(GeoPainter *painter, ViewportParams *viewport, const QList<VisiblePlacemark *> &placemarks) const
 {
     painter->save();
     painter->setFont(QFont(QStringLiteral("Sans Serif"), 7));

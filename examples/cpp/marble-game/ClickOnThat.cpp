@@ -211,7 +211,7 @@ void ClickOnThat::postQuestion(QObject *gameObject)
      * Find a random placemark
      */
     Q_ASSERT_X(d->m_countryNames, "ClickOnThat::postQuestion", "CountryByShapePrivate::m_countryNames is NULL");
-    QVector<GeoDataPlacemark *> countryPlacemarks = d->m_countryNames->placemarkList();
+    QList<GeoDataPlacemark *> countryPlacemarks = d->m_countryNames->placemarkList();
 
     uint randomSeed = uint(QTime::currentTime().msec());
     QRandomGenerator::global()->seed(randomSeed);
@@ -250,7 +250,7 @@ void ClickOnThat::updateSelectPin(bool result, const GeoDataCoordinates &clicked
     style->iconStyle().setIconPath(iconPath);
     d->m_selectPinDocument->addStyle(style);
 
-    QVector<GeoDataPlacemark *> placemarkList = d->m_selectPinDocument->placemarkList();
+    QList<GeoDataPlacemark *> placemarkList = d->m_selectPinDocument->placemarkList();
     if (placemarkList.size() > 0) {
         placemarkList[0]->setCoordinate(clickedPoint);
     }
@@ -266,8 +266,8 @@ void ClickOnThat::determineResult(qreal lon, qreal lat, GeoDataCoordinates::Unit
     GeoDataCoordinates coord(lon, lat, 0, unit);
 
     Q_ASSERT_X(d->m_countryNames, "ClickOnThat::determineResult", "CountryByShapePrivate::m_countryBoundaries is NULL");
-    QVector<GeoDataFeature *>::Iterator i = d->m_countryBoundaries->begin();
-    QVector<GeoDataFeature *>::Iterator const end = d->m_countryBoundaries->end();
+    QList<GeoDataFeature *>::Iterator i = d->m_countryBoundaries->begin();
+    QList<GeoDataFeature *>::Iterator const end = d->m_countryBoundaries->end();
 
     bool foundStandardPoint = false;
     bool foundClickedPoint = false;
@@ -293,8 +293,8 @@ void ClickOnThat::determineResult(qreal lon, qreal lat, GeoDataCoordinates::Unit
             break;
         }
         if (multigeom) {
-            QVector<GeoDataGeometry *>::Iterator iter = multigeom->begin();
-            QVector<GeoDataGeometry *>::Iterator const end = multigeom->end();
+            QList<GeoDataGeometry *>::Iterator iter = multigeom->begin();
+            QList<GeoDataGeometry *>::Iterator const end = multigeom->end();
 
             for (; iter != end; ++iter) {
                 GeoDataPolygon *poly = dynamic_cast<GeoDataPolygon *>(*iter);

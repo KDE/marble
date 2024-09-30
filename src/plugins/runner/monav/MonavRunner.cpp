@@ -36,10 +36,10 @@ public:
 
     bool retrieveData(const RouteRequest *route, const QString &mapDir, RoutingResult *result) const;
 
-    int retrieveRoute(const RouteRequest *route, QVector<GeoDataPlacemark *> *instructions, GeoDataLineString *geometry) const;
+    int retrieveRoute(const RouteRequest *route, QList<GeoDataPlacemark *> *instructions, GeoDataLineString *geometry) const;
 
     static GeoDataDocument *
-    createDocument(GeoDataLineString *geometry, const QVector<GeoDataPlacemark *> &instructions, const QString &name, const GeoDataExtendedData &data);
+    createDocument(GeoDataLineString *geometry, const QList<GeoDataPlacemark *> &instructions, const QString &name, const GeoDataExtendedData &data);
 };
 
 MonavRunnerPrivate::MonavRunnerPrivate(const MonavPlugin *plugin)
@@ -85,7 +85,7 @@ bool MonavRunnerPrivate::retrieveData(const RouteRequest *route, const QString &
         }
 
         RoutingCommand command;
-        QVector<Node> waypoints;
+        QList<Node> waypoints;
 
         for (int i = 0; i < route->size(); ++i) {
             Node coordinate;
@@ -130,7 +130,7 @@ bool MonavRunnerPrivate::retrieveData(const RouteRequest *route, const QString &
 }
 
 int MonavRunnerPrivate::retrieveRoute(const Marble::RouteRequest *route,
-                                      QVector<Marble::GeoDataPlacemark *> *instructions,
+                                      QList<Marble::GeoDataPlacemark *> *instructions,
                                       Marble::GeoDataLineString *geometry) const
 {
     RoutingResult reply;
@@ -179,7 +179,7 @@ int MonavRunnerPrivate::retrieveRoute(const Marble::RouteRequest *route,
             placemark->setExtendedData(extendedData);
             Q_ASSERT(!directions[i].points().isEmpty());
             GeoDataLineString *geometry = new GeoDataLineString;
-            QVector<RoutingWaypoint> items = directions[i].points();
+            QList<RoutingWaypoint> items = directions[i].points();
             for (int j = 0; j < items.size(); ++j) {
                 RoutingPoint point = items[j].point();
                 GeoDataCoordinates coordinates(point.lon(), point.lat(), 0.0, GeoDataCoordinates::Degree);
@@ -195,7 +195,7 @@ int MonavRunnerPrivate::retrieveRoute(const Marble::RouteRequest *route,
 }
 
 GeoDataDocument *MonavRunnerPrivate::createDocument(Marble::GeoDataLineString *geometry,
-                                                    const QVector<Marble::GeoDataPlacemark *> &instructions,
+                                                    const QList<Marble::GeoDataPlacemark *> &instructions,
                                                     const QString &name,
                                                     const Marble::GeoDataExtendedData &data)
 {
@@ -232,7 +232,7 @@ MonavRunner::~MonavRunner()
 
 void MonavRunner::retrieveRoute(const RouteRequest *route)
 {
-    QVector<GeoDataPlacemark *> instructions;
+    QList<GeoDataPlacemark *> instructions;
     QTime time;
     GeoDataLineString *waypoints = new GeoDataLineString();
     int duration = d->retrieveRoute(route, &instructions, waypoints);

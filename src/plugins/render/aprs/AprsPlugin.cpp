@@ -142,9 +142,9 @@ QString AprsPlugin::copyrightYears() const
     return QStringLiteral("2009, 2010");
 }
 
-QVector<PluginAuthor> AprsPlugin::pluginAuthors() const
+QList<PluginAuthor> AprsPlugin::pluginAuthors() const
 {
-    return QVector<PluginAuthor>() << PluginAuthor(QStringLiteral("Wes Hardaker"), QStringLiteral("hardaker@users.sourceforge.net"));
+    return QList<PluginAuthor>() << PluginAuthor(QStringLiteral("Wes Hardaker"), QStringLiteral("hardaker@users.sourceforge.net"));
 }
 
 QIcon AprsPlugin::icon() const

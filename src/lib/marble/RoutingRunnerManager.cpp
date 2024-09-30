@@ -43,7 +43,7 @@ public:
     const MarbleModel *const m_marbleModel;
     const PluginManager *const m_pluginManager;
     QList<RoutingTask *> m_routingTasks;
-    QVector<GeoDataDocument *> m_routingResult;
+    QList<GeoDataDocument *> m_routingResult;
 };
 
 RoutingRunnerManager::Private::Private(RoutingRunnerManager *parent, const MarbleModel *marbleModel)
@@ -147,7 +147,7 @@ void RoutingRunnerManager::retrieveRoute(const RouteRequest *request)
     }
 }
 
-QVector<GeoDataDocument *> RoutingRunnerManager::searchRoute(const RouteRequest *request, int timeout)
+QList<GeoDataDocument *> RoutingRunnerManager::searchRoute(const RouteRequest *request, int timeout)
 {
     QEventLoop localEventLoop;
     QTimer watchdog;

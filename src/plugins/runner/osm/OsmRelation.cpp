@@ -258,7 +258,7 @@ OsmRelation::rings(const QStringList &roles, const OsmWays &ways, const OsmNodes
                     const OsmWay &nextWay = unclosedWays.at(i);
                     if (nextWay.references().first() == lastReference || nextWay.references().last() == lastReference) {
                         bool isReversed = nextWay.references().last() == lastReference;
-                        QVector<qint64> v = nextWay.references();
+                        QList<qint64> v = nextWay.references();
                         while (!v.isEmpty()) {
                             qint64 id = isReversed ? v.takeLast() : v.takeFirst();
                             if (!nodes.contains(id)) {

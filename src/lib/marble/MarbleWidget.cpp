@@ -343,7 +343,7 @@ int MarbleWidget::maximumZoom() const
     return d->m_map.maximumZoom();
 }
 
-QVector<const GeoDataFeature *> MarbleWidget::whichFeatureAt(const QPoint &curpos) const
+QList<const GeoDataFeature *> MarbleWidget::whichFeatureAt(const QPoint &curpos) const
 {
     return d->m_map.whichFeatureAt(curpos);
 }
@@ -1160,7 +1160,7 @@ void MarbleWidget::reloadMap()
     d->m_map.reload();
 }
 
-void MarbleWidget::downloadRegion(QVector<TileCoordsPyramid> const &pyramid)
+void MarbleWidget::downloadRegion(QList<TileCoordsPyramid> const &pyramid)
 {
     d->m_map.downloadRegion(pyramid);
 }

@@ -40,7 +40,7 @@ public:
     QMap<int, QQuickItem *> m_waypointItems;
     RouteRequestModel *m_routeRequestModel;
     QObject *m_parent;
-    QVector<Placemark *> m_searchResultPlacemarks;
+    QList<Placemark *> m_searchResultPlacemarks;
     QMap<int, QQuickItem *> m_searchResultItems;
 };
 
@@ -93,7 +93,7 @@ QSGNode *Routing::updatePaintNode(QSGNode *oldNode, UpdatePaintNodeData *)
     QColor standardRouteColor =
         routingManager->state() == RoutingManager::Downloading ? routingManager->routeColorStandard() : routingManager->routeColorStandard().darker(200);
 
-    QVector<QPolygonF *> polygons;
+    QList<QPolygonF *> polygons;
     geoPainter.polygonsFromLineString(waypoints, polygons);
 
     if (!polygons.isEmpty()) {
@@ -101,7 +101,7 @@ QSGNode *Routing::updatePaintNode(QSGNode *oldNode, UpdatePaintNodeData *)
         oldNode = new QSGNode;
         for (const QPolygonF *itPolygon : std::as_const(polygons)) {
             QPolygonF const &polygon = *itPolygon;
-            QVector<QVector2D> normals;
+            QList<QVector2D> normals;
             int segmentCount = itPolygon->size() - 1;
             normals.reserve(segmentCount);
             for (int i = 0; i < segmentCount; ++i) {

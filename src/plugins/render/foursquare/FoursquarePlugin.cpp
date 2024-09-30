@@ -61,10 +61,10 @@ QString FoursquarePlugin::copyrightYears() const
     return QStringLiteral("2012");
 }
 
-QVector<PluginAuthor> FoursquarePlugin::pluginAuthors() const
+QList<PluginAuthor> FoursquarePlugin::pluginAuthors() const
 {
-    return QVector<PluginAuthor>() << PluginAuthor(QStringLiteral("Dennis Nienhüser"), QStringLiteral("nienhueser@kde.org"))
-                                   << PluginAuthor(QStringLiteral("Utku Aydın"), QStringLiteral("utkuaydin34@gmail.com"));
+    return QList<PluginAuthor>() << PluginAuthor(QStringLiteral("Dennis Nienhüser"), QStringLiteral("nienhueser@kde.org"))
+                                 << PluginAuthor(QStringLiteral("Utku Aydın"), QStringLiteral("utkuaydin34@gmail.com"));
 }
 
 QIcon FoursquarePlugin::icon() const

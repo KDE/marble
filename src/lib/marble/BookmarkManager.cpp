@@ -192,7 +192,7 @@ void BookmarkManager::setShowBookmarks(bool visible)
     d->m_treeModel->updateFeature(d->m_bookmarkDocument);
 }
 
-QVector<GeoDataFolder *> BookmarkManager::folders() const
+QList<GeoDataFolder *> BookmarkManager::folders() const
 {
     return d->m_bookmarkDocument->folderList();
 }
@@ -206,10 +206,10 @@ GeoDataFolder *BookmarkManager::addNewBookmarkFolder(GeoDataContainer *container
     }
 
     // If folder with same name already exist
-    QVector<GeoDataFolder *> folderList = container->folderList();
+    QList<GeoDataFolder *> folderList = container->folderList();
 
-    QVector<GeoDataFolder *>::const_iterator i = folderList.constBegin();
-    QVector<GeoDataFolder *>::const_iterator end = folderList.constEnd();
+    QList<GeoDataFolder *>::const_iterator i = folderList.constBegin();
+    QList<GeoDataFolder *>::const_iterator end = folderList.constEnd();
     for (; i != end; ++i) {
         if (name == (*i)->name()) {
             mDebug() << "Folder with same name already exist, please give it another name";

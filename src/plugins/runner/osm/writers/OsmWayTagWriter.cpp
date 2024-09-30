@@ -27,8 +27,8 @@ void OsmWayTagWriter::writeWay(const GeoDataLineString &lineString, const OsmPla
     OsmTagTagWriter::writeTags(osmData, writer);
 
     // Writing all the component nodes ( Nd tags )
-    QVector<GeoDataCoordinates>::const_iterator it = lineString.constBegin();
-    QVector<GeoDataCoordinates>::ConstIterator const end = lineString.constEnd();
+    QList<GeoDataCoordinates>::const_iterator it = lineString.constBegin();
+    QList<GeoDataCoordinates>::ConstIterator const end = lineString.constEnd();
 
     for (; it != end; ++it) {
         QString ndId = QString::number(osmData.nodeReference(*it).id());

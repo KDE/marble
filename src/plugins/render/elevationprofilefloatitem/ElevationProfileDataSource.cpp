@@ -31,10 +31,10 @@ ElevationProfileDataSource::ElevationProfileDataSource(QObject *parent)
     // nothing to do
 }
 
-QVector<QPointF> ElevationProfileDataSource::calculateElevationData(const GeoDataLineString &lineString) const
+QList<QPointF> ElevationProfileDataSource::calculateElevationData(const GeoDataLineString &lineString) const
 {
     // TODO: Don't re-calculate the whole route if only a small part of it was changed
-    QVector<QPointF> result;
+    QList<QPointF> result;
     qreal distance = 0;
 
     // GeoDataLineString path;
@@ -221,7 +221,7 @@ void ElevationProfileRouteDataSource::requestUpdate()
     }
 
     const GeoDataLineString routePoints = m_routingModel->route().path();
-    const QVector<QPointF> elevationData = calculateElevationData(routePoints);
+    const QList<QPointF> elevationData = calculateElevationData(routePoints);
     emit dataUpdated(routePoints, elevationData);
 }
 

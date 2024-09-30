@@ -223,7 +223,7 @@ void ViewportParamsTest::screenCoordinates_GeoDataLineString()
     viewport.centerOn(185 * DEG2RAD, 0);
 
     line.setTessellationFlags(tessellation);
-    QVector<QPolygonF *> polys;
+    QList<QPolygonF *> polys;
     viewport.screenCoordinates(line, polys);
 
     for (QPolygonF *poly : std::as_const(polys)) {
@@ -261,7 +261,7 @@ void ViewportParamsTest::screenCoordinates_GeoDataLineString2()
     line << GeoDataCoordinates(-180, 23.4400, 0.0, GeoDataCoordinates::Degree);
     line << GeoDataCoordinates(0, 23.4400, 0.0, GeoDataCoordinates::Degree);
 
-    QVector<QPolygonF *> polys;
+    QList<QPolygonF *> polys;
     viewport.screenCoordinates(line, polys);
 
     QCOMPARE(polys.size(), 2);
@@ -295,7 +295,7 @@ void ViewportParamsTest::screenCoordinates_GeoDataLinearRing()
 
     line << coord1 << coord2 << coord3 << coord4;
 
-    QVector<QPolygonF *> polys;
+    QList<QPolygonF *> polys;
     viewport.screenCoordinates(line, polys);
 
     QCOMPARE(polys.size(), 1);
@@ -416,7 +416,7 @@ void ViewportParamsTest::geoDataLinearRing()
     viewport.centerOn(175 * DEG2RAD, 0);
 
     ring.setTessellationFlags(tessellation);
-    QVector<QPolygonF *> polys;
+    QList<QPolygonF *> polys;
     viewport.screenCoordinates(ring, polys);
 
     for (QPolygonF *poly : std::as_const(polys)) {

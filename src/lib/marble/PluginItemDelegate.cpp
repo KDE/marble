@@ -106,7 +106,7 @@ QSize PluginItemDelegate::sizeHint(const QStyleOptionViewItem &option, const QMo
 
     QStyleOptionViewItem opt = option;
     opt.rect = QRect(0, 0, 0, 0);
-    QVector<QSize> elementSize;
+    QList<QSize> elementSize;
     elementSize.reserve(4);
     QStyleOptionButton checkBox = checkboxOption(opt, index);
     elementSize.append(checkBox.rect.size());

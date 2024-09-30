@@ -47,10 +47,10 @@ QString NominatimPlugin::copyrightYears() const
     return QStringLiteral("2010, 2012");
 }
 
-QVector<PluginAuthor> NominatimPlugin::pluginAuthors() const
+QList<PluginAuthor> NominatimPlugin::pluginAuthors() const
 {
-    return QVector<PluginAuthor>() << PluginAuthor(QStringLiteral("Dennis Nienhüser"), QStringLiteral("nienhueser@kde.org"))
-                                   << PluginAuthor(QStringLiteral("Bernhard Beschow"), QStringLiteral("bbeschow@cs.tu-berlin.de"));
+    return QList<PluginAuthor>() << PluginAuthor(QStringLiteral("Dennis Nienhüser"), QStringLiteral("nienhueser@kde.org"))
+                                 << PluginAuthor(QStringLiteral("Bernhard Beschow"), QStringLiteral("bbeschow@cs.tu-berlin.de"));
 }
 
 SearchRunner *NominatimPlugin::newRunner() const

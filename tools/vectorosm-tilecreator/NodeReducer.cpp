@@ -132,7 +132,7 @@ NodeReducer::reducedPolygon(const GeoDataPolygon &prevPolygon, GeoDataPlacemark 
     GeoDataLinearRing reducedRing;
     reduce(*prevRing, placemark->osmData().memberReference(-1), visualCategory, &reducedRing);
     reducedPolygon->setOuterBoundary(reducedRing);
-    QVector<GeoDataLinearRing> const &innerBoundaries = prevPolygon.innerBoundaries();
+    QList<GeoDataLinearRing> const &innerBoundaries = prevPolygon.innerBoundaries();
     for (int i = 0; i < innerBoundaries.size(); i++) {
         prevRing = &innerBoundaries[i];
         GeoDataLinearRing reducedInnerRing;

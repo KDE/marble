@@ -22,7 +22,7 @@ public:
     /// The vector holding all the data in the layer.
     /// (We want to preserve the order and don't care
     /// much about speed here), so we don't use a hash
-    QVector<GeoSceneAbstractDataset *> m_datasets;
+    QList<GeoSceneAbstractDataset *> m_datasets;
 
     GeoSceneFilter *m_filter;
 
@@ -65,7 +65,7 @@ const char *GeoSceneLayer::nodeType() const
 void GeoSceneLayer::addDataset(GeoSceneAbstractDataset *dataset)
 {
     // Remove any dataset that has the same name
-    QVector<GeoSceneAbstractDataset *>::iterator it = d->m_datasets.begin();
+    QList<GeoSceneAbstractDataset *>::iterator it = d->m_datasets.begin();
     while (it != d->m_datasets.end()) {
         GeoSceneAbstractDataset *currentAbstractDataset = *it;
         if (currentAbstractDataset->name() == dataset->name()) {
@@ -86,8 +86,8 @@ const GeoSceneAbstractDataset *GeoSceneLayer::dataset(const QString &name) const
 {
     GeoSceneAbstractDataset *dataset = nullptr;
 
-    QVector<GeoSceneAbstractDataset *>::const_iterator it = d->m_datasets.constBegin();
-    QVector<GeoSceneAbstractDataset *>::const_iterator end = d->m_datasets.constEnd();
+    QList<GeoSceneAbstractDataset *>::const_iterator it = d->m_datasets.constBegin();
+    QList<GeoSceneAbstractDataset *>::const_iterator end = d->m_datasets.constEnd();
     for (; it != end; ++it) {
         if ((*it)->name() == name) {
             dataset = *it;
@@ -119,7 +119,7 @@ GeoSceneAbstractDataset *GeoSceneLayer::groundDataset()
     return const_cast<GeoSceneAbstractDataset *>(static_cast<GeoSceneLayer const *>(this)->groundDataset());
 }
 
-QVector<GeoSceneAbstractDataset *> GeoSceneLayer::datasets() const
+QList<GeoSceneAbstractDataset *> GeoSceneLayer::datasets() const
 {
     return d->m_datasets;
 }

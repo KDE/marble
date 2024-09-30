@@ -26,7 +26,7 @@ LatLonRunner::~LatLonRunner()
 
 void LatLonRunner::search(const QString &searchTerm, const GeoDataLatLonBox &)
 {
-    QVector<GeoDataPlacemark *> vector;
+    QList<GeoDataPlacemark *> vector;
 
     bool successful = false;
     const GeoDataCoordinates coord = GeoDataCoordinates::fromString(searchTerm, successful);

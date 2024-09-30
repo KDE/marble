@@ -201,13 +201,13 @@ QMenu *RoutingInputWidgetPrivate::createBookmarkMenu(RoutingInputWidget *parent)
     QMenu *result = new QMenu(parent);
     result->addAction(QIcon(QStringLiteral(":/icons/go-home.png")), QObject::tr("&Home"), parent, SLOT(setHomePosition()));
 
-    QVector<GeoDataFolder *> folders = m_marbleModel->bookmarkManager()->folders();
+    QList<GeoDataFolder *> folders = m_marbleModel->bookmarkManager()->folders();
 
     if (folders.size() == 1) {
         createBookmarkActions(result, folders.first(), parent);
     } else {
-        QVector<GeoDataFolder *>::const_iterator i = folders.constBegin();
-        QVector<GeoDataFolder *>::const_iterator end = folders.constEnd();
+        QList<GeoDataFolder *>::const_iterator i = folders.constBegin();
+        QList<GeoDataFolder *>::const_iterator end = folders.constEnd();
 
         for (; i != end; ++i) {
             QMenu *menu = result->addMenu(QIcon(QStringLiteral(":/icons/folder-bookmark.png")), (*i)->name());
@@ -220,9 +220,9 @@ QMenu *RoutingInputWidgetPrivate::createBookmarkMenu(RoutingInputWidget *parent)
 
 void RoutingInputWidgetPrivate::createBookmarkActions(QMenu *menu, GeoDataFolder *bookmarksFolder, QObject *parent)
 {
-    QVector<GeoDataPlacemark *> bookmarks = bookmarksFolder->placemarkList();
-    QVector<GeoDataPlacemark *>::const_iterator i = bookmarks.constBegin();
-    QVector<GeoDataPlacemark *>::const_iterator end = bookmarks.constEnd();
+    QList<GeoDataPlacemark *> bookmarks = bookmarksFolder->placemarkList();
+    QList<GeoDataPlacemark *>::const_iterator i = bookmarks.constBegin();
+    QList<GeoDataPlacemark *>::const_iterator end = bookmarks.constEnd();
 
     for (; i != end; ++i) {
         QAction *bookmarkAction = new QAction((*i)->name(), parent);

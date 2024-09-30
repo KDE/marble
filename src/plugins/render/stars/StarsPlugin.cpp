@@ -133,11 +133,11 @@ QString StarsPlugin::copyrightYears() const
     return QStringLiteral("2008-2012");
 }
 
-QVector<PluginAuthor> StarsPlugin::pluginAuthors() const
+QList<PluginAuthor> StarsPlugin::pluginAuthors() const
 {
-    return QVector<PluginAuthor>() << PluginAuthor(QStringLiteral("Torsten Rahn"), QStringLiteral("tackat@kde.org"))
-                                   << PluginAuthor(QStringLiteral("Rene Kuettner"), QStringLiteral("rene@bitkanal.net"))
-                                   << PluginAuthor(QStringLiteral("Timothy Lanzi"), QStringLiteral("trlanzi@gmail.com"));
+    return QList<PluginAuthor>() << PluginAuthor(QStringLiteral("Torsten Rahn"), QStringLiteral("tackat@kde.org"))
+                                 << PluginAuthor(QStringLiteral("Rene Kuettner"), QStringLiteral("rene@bitkanal.net"))
+                                 << PluginAuthor(QStringLiteral("Timothy Lanzi"), QStringLiteral("trlanzi@gmail.com"));
 }
 
 QIcon StarsPlugin::icon() const
@@ -583,7 +583,7 @@ void StarsPlugin::loadStars()
 void StarsPlugin::createStarPixmaps()
 {
     // Load star pixmaps
-    QVector<QPixmap> pixBigStars;
+    QList<QPixmap> pixBigStars;
     pixBigStars.clear();
     pixBigStars.append(QPixmap(MarbleDirs::path(QStringLiteral("bitmaps/stars/star_0_blue.png"))));
     pixBigStars.append(QPixmap(MarbleDirs::path(QStringLiteral("bitmaps/stars/star_0_bluewhite.png"))));
@@ -593,7 +593,7 @@ void StarsPlugin::createStarPixmaps()
     pixBigStars.append(QPixmap(MarbleDirs::path(QStringLiteral("bitmaps/stars/star_0_red.png"))));
     pixBigStars.append(QPixmap(MarbleDirs::path(QStringLiteral("bitmaps/stars/star_0_garnetred.png"))));
 
-    QVector<QPixmap> pixSmallStars;
+    QList<QPixmap> pixSmallStars;
     pixSmallStars.clear();
     pixSmallStars.append(QPixmap(MarbleDirs::path(QStringLiteral("bitmaps/stars/star_3_blue.png"))));
     pixSmallStars.append(QPixmap(MarbleDirs::path(QStringLiteral("bitmaps/stars/star_3_bluewhite.png"))));

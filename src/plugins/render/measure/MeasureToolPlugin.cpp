@@ -112,16 +112,16 @@ QString MeasureToolPlugin::copyrightYears() const
     return QStringLiteral("2006-2008, 2011");
 }
 
-QVector<PluginAuthor> MeasureToolPlugin::pluginAuthors() const
+QList<PluginAuthor> MeasureToolPlugin::pluginAuthors() const
 {
-    return QVector<PluginAuthor>() << PluginAuthor(QStringLiteral("Dennis Nienhüser"), QStringLiteral("nienhueser@kde.org"))
-                                   << PluginAuthor(QStringLiteral("Torsten Rahn"), QStringLiteral("tackat@kde.org"))
-                                   << PluginAuthor(QStringLiteral("Inge Wallin"), QStringLiteral("ingwa@kde.org"))
-                                   << PluginAuthor(QStringLiteral("Carlos Licea"), QStringLiteral("carlos.licea@kdemail.net"))
-                                   << PluginAuthor(QStringLiteral("Michael Henning"), QStringLiteral("mikehenning@eclipse.net"))
-                                   << PluginAuthor(QStringLiteral("Valery Kharitonov"), QStringLiteral("kharvd@gmail.com"))
-                                   << PluginAuthor(QStringLiteral("Mohammed Nafees"), QStringLiteral("nafees.technocool@gmail.com"))
-                                   << PluginAuthor(QStringLiteral("Illya Kovalevskyy"), QStringLiteral("illya.kovalevskyy@gmail.com"));
+    return QList<PluginAuthor>() << PluginAuthor(QStringLiteral("Dennis Nienhüser"), QStringLiteral("nienhueser@kde.org"))
+                                 << PluginAuthor(QStringLiteral("Torsten Rahn"), QStringLiteral("tackat@kde.org"))
+                                 << PluginAuthor(QStringLiteral("Inge Wallin"), QStringLiteral("ingwa@kde.org"))
+                                 << PluginAuthor(QStringLiteral("Carlos Licea"), QStringLiteral("carlos.licea@kdemail.net"))
+                                 << PluginAuthor(QStringLiteral("Michael Henning"), QStringLiteral("mikehenning@eclipse.net"))
+                                 << PluginAuthor(QStringLiteral("Valery Kharitonov"), QStringLiteral("kharvd@gmail.com"))
+                                 << PluginAuthor(QStringLiteral("Mohammed Nafees"), QStringLiteral("nafees.technocool@gmail.com"))
+                                 << PluginAuthor(QStringLiteral("Illya Kovalevskyy"), QStringLiteral("illya.kovalevskyy@gmail.com"));
 }
 
 QIcon MeasureToolPlugin::icon() const

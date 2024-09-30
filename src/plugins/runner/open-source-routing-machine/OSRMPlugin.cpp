@@ -47,9 +47,9 @@ QString OSRMPlugin::copyrightYears() const
     return QStringLiteral("2012");
 }
 
-QVector<PluginAuthor> OSRMPlugin::pluginAuthors() const
+QList<PluginAuthor> OSRMPlugin::pluginAuthors() const
 {
-    return QVector<PluginAuthor>() << PluginAuthor(QStringLiteral("Dennis Nienhüser"), QStringLiteral("nienhueser@kde.org"));
+    return QList<PluginAuthor>() << PluginAuthor(QStringLiteral("Dennis Nienhüser"), QStringLiteral("nienhueser@kde.org"));
 }
 
 RoutingRunner *OSRMPlugin::newRunner() const

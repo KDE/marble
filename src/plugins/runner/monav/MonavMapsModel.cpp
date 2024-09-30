@@ -28,7 +28,7 @@ void MonavMapsModel::setInstallableVersions(const QMap<QString, QString> &remote
     endResetModel();
 }
 
-MonavMapsModel::MonavMapsModel(const QVector<MonavMap> &data, QObject *parent)
+MonavMapsModel::MonavMapsModel(const QList<MonavMap> &data, QObject *parent)
     : QAbstractTableModel(parent)
     , m_data(data)
 {

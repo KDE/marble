@@ -46,7 +46,7 @@ void OsmRelationTagWriter::writeMultipolygon(const GeoDataPolygon &polygon, cons
     writer.writeEndElement();
 }
 
-void OsmRelationTagWriter::writeRelation(const QVector<GeoDataPlacemark *> &members, const QString &id, const QMap<QString, QString> &tags, GeoWriter &writer)
+void OsmRelationTagWriter::writeRelation(const QList<GeoDataPlacemark *> &members, const QString &id, const QMap<QString, QString> &tags, GeoWriter &writer)
 {
     Q_UNUSED(members);
     Q_UNUSED(id);

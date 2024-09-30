@@ -73,7 +73,7 @@ public:
     GeoDataDocument *m_document;
     CacheStoragePolicy m_storagePolicy;
     HttpDownloadManager *m_downloadManager;
-    QVector<TrackerPluginItem *> m_itemVector;
+    QList<TrackerPluginItem *> m_itemVector;
 };
 
 TrackerPluginModel::TrackerPluginModel(GeoDataTreeModel *treeModel)
@@ -116,7 +116,7 @@ void TrackerPluginModel::addItem(TrackerPluginItem *mark)
     d->m_itemVector.append(mark);
 }
 
-QVector<TrackerPluginItem *> TrackerPluginModel::items() const
+QList<TrackerPluginItem *> TrackerPluginModel::items() const
 {
     return d->m_itemVector;
 }

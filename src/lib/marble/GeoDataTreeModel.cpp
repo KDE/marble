@@ -262,7 +262,7 @@ QVariant GeoDataTreeModel::data(const QModelIndex &index, int role) const
             if (auto folder = geodata_cast<GeoDataFolder>(object)) {
                 if (folder->style()->listStyle().listItemType() == GeoDataListStyle::RadioFolder) {
                     bool anyVisible = false;
-                    QVector<GeoDataFeature *>::Iterator i = folder->begin();
+                    QList<GeoDataFeature *>::Iterator i = folder->begin();
                     for (; i < folder->end(); ++i) {
                         if ((*i)->isVisible()) {
                             anyVisible = true;
@@ -275,7 +275,7 @@ QVariant GeoDataTreeModel::data(const QModelIndex &index, int role) const
                         return QVariant(Qt::Unchecked);
                     }
                 } else if (folder->style()->listStyle().listItemType() == GeoDataListStyle::CheckOffOnly) {
-                    QVector<GeoDataFeature *>::Iterator i = folder->begin();
+                    QList<GeoDataFeature *>::Iterator i = folder->begin();
                     bool anyVisible = false;
                     bool allVisible = true;
                     for (; i < folder->end(); ++i) {
@@ -474,7 +474,7 @@ bool GeoDataTreeModel::setData(const QModelIndex &index, const QVariant &value, 
             if (auto pfolder = geodata_cast<GeoDataFolder>(feature->parent())) {
                 if (pfolder->style()->listStyle().listItemType() == GeoDataListStyle::RadioFolder) {
                     if (bValue) {
-                        QVector<GeoDataFeature *>::Iterator i = pfolder->begin();
+                        QList<GeoDataFeature *>::Iterator i = pfolder->begin();
                         for (; i < pfolder->end(); ++i) {
                             (*i)->setVisible(false);
                         }
@@ -486,7 +486,7 @@ bool GeoDataTreeModel::setData(const QModelIndex &index, const QVariant &value, 
                 } else {
                     if (folder->style()->listStyle().listItemType() == GeoDataListStyle::RadioFolder
                         || folder->style()->listStyle().listItemType() == GeoDataListStyle::CheckOffOnly) {
-                        QVector<GeoDataFeature *>::Iterator i = folder->begin();
+                        QList<GeoDataFeature *>::Iterator i = folder->begin();
                         for (; i < folder->end(); ++i) {
                             (*i)->setVisible(false);
                         }
@@ -534,7 +534,7 @@ Qt::ItemFlags GeoDataTreeModel::flags(const QModelIndex &index) const
         if (folder->style()->listStyle().listItemType() == GeoDataListStyle::RadioFolder) {
             return Qt::ItemIsEnabled | Qt::ItemIsSelectable | Qt::ItemIsUserCheckable | Qt::ItemIsEditable;
         } else if (folder->style()->listStyle().listItemType() == GeoDataListStyle::CheckOffOnly) {
-            QVector<GeoDataFeature *>::ConstIterator i = folder->constBegin();
+            QList<GeoDataFeature *>::ConstIterator i = folder->constBegin();
             bool allVisible = true;
             for (; i < folder->constEnd(); ++i) {
                 if (!(*i)->isVisible()) {

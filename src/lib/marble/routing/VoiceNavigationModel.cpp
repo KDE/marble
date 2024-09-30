@@ -55,7 +55,7 @@ public:
 
     bool m_deviated;
 
-    QVector<Announcement> m_announcementList;
+    QList<Announcement> m_announcementList;
 
     explicit VoiceNavigationModelPrivate(VoiceNavigationModel *parent);
 
@@ -130,7 +130,7 @@ QString VoiceNavigationModelPrivate::distanceAudioFile(qreal dest) const
     if (dest > 0.0 && dest < 900.0) {
         qreal minDistance = 0.0;
         int targetDistance = 0;
-        QVector<int> distances;
+        QList<int> distances;
         distances << 50 << 80 << 100 << 200 << 300 << 400 << 500 << 600 << 700 << 800;
         for (int distance : std::as_const(distances)) {
             QString file = audioFile(QString::number(distance));

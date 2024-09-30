@@ -79,14 +79,14 @@ public:
     RoutingManager *const m_routingManager;
     RoutingLayer *const m_routingLayer;
     RoutingInputWidget *m_activeInput;
-    QVector<RoutingInputWidget *> m_inputWidgets;
+    QList<RoutingInputWidget *> m_inputWidgets;
     RoutingInputWidget *m_inputRequest;
     QAbstractItemModel *const m_routingModel;
     RouteRequest *const m_routeRequest;
     RouteSyncManager *m_routeSyncManager;
     bool m_zoomRouteAfterDownload;
     QTimer m_progressTimer;
-    QVector<QIcon> m_progressAnimation;
+    QList<QIcon> m_progressAnimation;
     GeoDataDocument *m_document;
     GeoDataTour *m_tour;
     TourPlayback *m_playback;

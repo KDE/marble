@@ -87,7 +87,7 @@ void ElevationProfilePlotAxis::updateTicks()
         return;
     }
 
-    static QVector<int> niceIntervals = QVector<int>() << 10 << 20 << 25 << 30 << 50;
+    static QList<int> niceIntervals = QList<int>() << 10 << 20 << 25 << 30 << 50;
 
     const int exponent = qRound(log10(range()));
     const qreal factor = qPow(10, 2 - exponent);

@@ -27,7 +27,7 @@ void OsmTileClusterRenderer::setClusterEdgeLengthTiles(int const clusterEdgeLeng
     m_clusterEdgeLengthTiles = clusterEdgeLengthTiles;
 }
 
-void OsmTileClusterRenderer::setMapSources(QVector<ReadOnlyMapDefinition> const &mapSourceDefinitions)
+void OsmTileClusterRenderer::setMapSources(QList<ReadOnlyMapDefinition> const &mapSourceDefinitions)
 {
     m_mapSourceDefinitions = mapSourceDefinitions;
 }
@@ -62,8 +62,8 @@ QDir OsmTileClusterRenderer::checkAndCreateDirectory(int const tileX) const
 
 void OsmTileClusterRenderer::initMapSources()
 {
-    QVector<ReadOnlyMapDefinition>::const_iterator pos = m_mapSourceDefinitions.constBegin();
-    QVector<ReadOnlyMapDefinition>::const_iterator const end = m_mapSourceDefinitions.constEnd();
+    QList<ReadOnlyMapDefinition>::const_iterator pos = m_mapSourceDefinitions.constBegin();
+    QList<ReadOnlyMapDefinition>::const_iterator const end = m_mapSourceDefinitions.constEnd();
     for (; pos != end; ++pos) {
         ReadOnlyMapImage *const mapImage = (*pos).createReadOnlyMap();
         if (!mapImage)

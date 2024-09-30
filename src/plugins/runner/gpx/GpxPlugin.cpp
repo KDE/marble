@@ -38,9 +38,9 @@ QString GpxPlugin::copyrightYears() const
     return QStringLiteral("2011");
 }
 
-QVector<PluginAuthor> GpxPlugin::pluginAuthors() const
+QList<PluginAuthor> GpxPlugin::pluginAuthors() const
 {
-    return QVector<PluginAuthor>() << PluginAuthor(QStringLiteral("Thibaut Gridel"), QStringLiteral("tgridel@free.fr"));
+    return QList<PluginAuthor>() << PluginAuthor(QStringLiteral("Thibaut Gridel"), QStringLiteral("tgridel@free.fr"));
 }
 
 QString GpxPlugin::fileFormatDescription() const

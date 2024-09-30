@@ -38,10 +38,10 @@ QString OsmPlugin::copyrightYears() const
     return QStringLiteral("2011, 2016");
 }
 
-QVector<PluginAuthor> OsmPlugin::pluginAuthors() const
+QList<PluginAuthor> OsmPlugin::pluginAuthors() const
 {
-    return QVector<PluginAuthor>() << PluginAuthor(QStringLiteral("Thibaut Gridel"), QStringLiteral("tgridel@free.fr"))
-                                   << PluginAuthor(QStringLiteral("Dennis Nienhüser"), QStringLiteral("nienhueser@kde.org"));
+    return QList<PluginAuthor>() << PluginAuthor(QStringLiteral("Thibaut Gridel"), QStringLiteral("tgridel@free.fr"))
+                                 << PluginAuthor(QStringLiteral("Dennis Nienhüser"), QStringLiteral("nienhueser@kde.org"));
 }
 
 QString OsmPlugin::fileFormatDescription() const

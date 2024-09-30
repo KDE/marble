@@ -40,7 +40,7 @@ void TravelingSalesmanRunnerPrivate::merge(GeoDataLineString *one, const GeoData
 {
     Q_ASSERT(one);
 
-    QVector<GeoDataCoordinates>::const_iterator iter = two.constBegin();
+    QList<GeoDataCoordinates>::const_iterator iter = two.constBegin();
     for (; iter != two.constEnd(); ++iter) {
         /** @todo: It might be needed to cut off some points at the start or end */
         one->append(*iter);

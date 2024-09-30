@@ -38,9 +38,9 @@ QString ShpPlugin::copyrightYears() const
     return QStringLiteral("2011");
 }
 
-QVector<PluginAuthor> ShpPlugin::pluginAuthors() const
+QList<PluginAuthor> ShpPlugin::pluginAuthors() const
 {
-    return QVector<PluginAuthor>() << PluginAuthor(QStringLiteral("Thibaut Gridel"), QStringLiteral("tgridel@free.fr"));
+    return QList<PluginAuthor>() << PluginAuthor(QStringLiteral("Thibaut Gridel"), QStringLiteral("tgridel@free.fr"));
 }
 
 QString ShpPlugin::fileFormatDescription() const

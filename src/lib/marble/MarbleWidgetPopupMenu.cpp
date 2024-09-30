@@ -63,7 +63,7 @@ public:
     const MarbleModel *const m_model;
     MarbleWidget *const m_widget;
 
-    QVector<const GeoDataFeature *> m_featurelist;
+    QList<const GeoDataFeature *> m_featurelist;
     QList<AbstractDataPluginItem *> m_itemList;
 
     QMenu m_lmbMenu;
@@ -563,8 +563,8 @@ void MarbleWidgetPopupMenu::showLmbMenu(int xpos, int ypos)
 
     int actionidx = 1;
 
-    QVector<const GeoDataFeature *>::const_iterator it = d->m_featurelist.constBegin();
-    QVector<const GeoDataFeature *>::const_iterator const itEnd = d->m_featurelist.constEnd();
+    QList<const GeoDataFeature *>::const_iterator it = d->m_featurelist.constBegin();
+    QList<const GeoDataFeature *>::const_iterator const itEnd = d->m_featurelist.constEnd();
     for (; it != itEnd; ++it) {
         QString name = (*it)->name();
         QPixmap icon = QPixmap::fromImage((*it)->style()->iconStyle().icon());

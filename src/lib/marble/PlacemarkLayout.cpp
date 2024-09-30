@@ -38,11 +38,11 @@
 
 namespace
 { // Helper function that checks for available room for the label
-bool hasRoomFor(const QVector<Marble::VisiblePlacemark *> &placemarks, const QRectF &boundingBox)
+bool hasRoomFor(const QList<Marble::VisiblePlacemark *> &placemarks, const QRectF &boundingBox)
 {
     // Check if there is another label or symbol that overlaps.
-    QVector<Marble::VisiblePlacemark *>::const_iterator beforeItEnd = placemarks.constEnd();
-    for (QVector<Marble::VisiblePlacemark *>::ConstIterator beforeIt = placemarks.constBegin(); beforeIt != beforeItEnd; ++beforeIt) {
+    QList<Marble::VisiblePlacemark *>::const_iterator beforeItEnd = placemarks.constEnd();
+    for (QList<Marble::VisiblePlacemark *>::ConstIterator beforeIt = placemarks.constBegin(); beforeIt != beforeItEnd; ++beforeIt) {
         if (boundingBox.intersects((*beforeIt)->boundingBox())) {
             return false;
         }
@@ -168,13 +168,13 @@ void PlacemarkLayout::clearCache()
     m_visiblePlacemarks.clear();
 }
 
-QVector<const GeoDataFeature *> PlacemarkLayout::whichPlacemarkAt(const QPoint &curpos)
+QList<const GeoDataFeature *> PlacemarkLayout::whichPlacemarkAt(const QPoint &curpos)
 {
     if (m_styleResetRequested) {
         styleReset();
     }
 
-    QVector<const GeoDataFeature *> ret;
+    QList<const GeoDataFeature *> ret;
 
     for (VisiblePlacemark *mark : std::as_const(m_paintOrder)) {
         if (mark->labelRect().contains(curpos) || mark->symbolRect().contains(curpos)) {
@@ -278,7 +278,7 @@ QSet<TileId> PlacemarkLayout::visibleTiles(const ViewportParams &viewport, int z
     qreal north, south, east, west;
     viewport.viewLatLonAltBox().boundaries(north, south, east, west);
     QSet<TileId> tileIdSet;
-    QVector<GeoDataLatLonBox> geoRects;
+    QList<GeoDataLatLonBox> geoRects;
     if (west <= east) {
         geoRects << GeoDataLatLonBox(north, south, east, west);
     } else {
@@ -317,12 +317,12 @@ QSet<TileId> PlacemarkLayout::visibleTiles(const ViewportParams &viewport, int z
     return tileIdSet;
 }
 
-QVector<VisiblePlacemark *> PlacemarkLayout::generateLayout(const ViewportParams *viewport, int tileLevel)
+QList<VisiblePlacemark *> PlacemarkLayout::generateLayout(const ViewportParams *viewport, int tileLevel)
 {
     m_runtimeTrace.clear();
     if (m_placemarkModel->rowCount() <= 0) {
         clearCache();
-        return QVector<VisiblePlacemark *>();
+        return QList<VisiblePlacemark *>();
     }
 
     if (m_styleResetRequested) {
@@ -331,7 +331,7 @@ QVector<VisiblePlacemark *> PlacemarkLayout::generateLayout(const ViewportParams
 
     if (m_maxLabelHeight == 0) {
         clearCache();
-        return QVector<VisiblePlacemark *>();
+        return QList<VisiblePlacemark *>();
     }
 
     QList<const GeoDataPlacemark *> placemarkList;
@@ -464,7 +464,7 @@ QVector<VisiblePlacemark *> PlacemarkLayout::generateLayout(const ViewportParams
 
         if (m_visiblePlacemarks.size() > qMax(100, 4 * m_paintOrder.size())) {
             auto const extendedBox = viewLatLonAltBox.scaled(2.0, 2.0);
-            QVector<VisiblePlacemark *> outdated;
+            QList<VisiblePlacemark *> outdated;
             for (auto placemark : std::as_const(m_visiblePlacemarks)) {
                 if (!extendedBox.contains(placemark->coordinates())) {
                     outdated << placemark;
@@ -604,7 +604,7 @@ QRectF PlacemarkLayout::roomForLabel(const GeoDataStyle::ConstPtr &style,
         textWidth = (QFontMetrics(labelFont).horizontalAdvance(labelText));
     }
 
-    const QVector<VisiblePlacemark *> currentsec = m_rowsection.at(y / m_maxLabelHeight);
+    const QList<VisiblePlacemark *> currentsec = m_rowsection.at(y / m_maxLabelHeight);
     QRectF const symbolRect = placemark->symbolRect();
 
     if (style->labelStyle().alignment() == GeoDataLabelStyle::Corner) {
@@ -654,7 +654,7 @@ QRectF PlacemarkLayout::roomForLabel(const GeoDataStyle::ConstPtr &style,
 
 bool PlacemarkLayout::hasRoomForPixmap(const qreal y, const VisiblePlacemark *placemark) const
 {
-    const QVector<VisiblePlacemark *> currentsec = m_rowsection.at(y / m_maxLabelHeight);
+    const QList<VisiblePlacemark *> currentsec = m_rowsection.at(y / m_maxLabelHeight);
     return hasRoomFor(currentsec, placemark->symbolRect());
 }
 

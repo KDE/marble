@@ -878,9 +878,9 @@ void MarblePart::createFolderList()
 {
     QList<QAction *> actionList;
 
-    QVector<GeoDataFolder *> folders = m_controlView->marbleModel()->bookmarkManager()->folders();
-    QVector<GeoDataFolder *>::const_iterator i = folders.constBegin();
-    QVector<GeoDataFolder *>::const_iterator end = folders.constEnd();
+    QList<GeoDataFolder *> folders = m_controlView->marbleModel()->bookmarkManager()->folders();
+    QList<GeoDataFolder *>::const_iterator i = folders.constBegin();
+    QList<GeoDataFolder *>::const_iterator end = folders.constEnd();
 
     for (; i != end; ++i) {
         QMenu *m_bookmarksListMenu = new QMenu((*i)->name());
@@ -897,10 +897,10 @@ void MarblePart::createFolderList()
 void MarblePart::createBookmarksListMenu(QMenu *m_bookmarksListMenu, const GeoDataFolder &folder)
 {
     m_bookmarksListMenu->clear();
-    QVector<GeoDataPlacemark *> bookmarks = folder.placemarkList();
+    QList<GeoDataPlacemark *> bookmarks = folder.placemarkList();
 
-    QVector<GeoDataPlacemark *>::const_iterator i = bookmarks.constBegin();
-    QVector<GeoDataPlacemark *>::const_iterator end = bookmarks.constEnd();
+    QList<GeoDataPlacemark *>::const_iterator i = bookmarks.constBegin();
+    QList<GeoDataPlacemark *>::const_iterator end = bookmarks.constEnd();
 
     for (; i != end; ++i) {
         QAction *bookmarkAct = new QAction((*i)->name(), this);
@@ -1249,7 +1249,7 @@ void MarblePart::showDownloadRegionDialog()
 void MarblePart::downloadRegion()
 {
     Q_ASSERT(m_downloadRegionDialog);
-    QVector<TileCoordsPyramid> const pyramid = m_downloadRegionDialog->region();
+    QList<TileCoordsPyramid> const pyramid = m_downloadRegionDialog->region();
     if (!pyramid.isEmpty()) {
         m_controlView->marbleWidget()->downloadRegion(pyramid);
     }

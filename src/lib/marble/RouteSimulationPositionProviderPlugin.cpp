@@ -54,11 +54,11 @@ QString RouteSimulationPositionProviderPlugin::copyrightYears() const
     return QStringLiteral("2011, 2012");
 }
 
-QVector<PluginAuthor> RouteSimulationPositionProviderPlugin::pluginAuthors() const
+QList<PluginAuthor> RouteSimulationPositionProviderPlugin::pluginAuthors() const
 {
-    return QVector<PluginAuthor>() << PluginAuthor(QStringLiteral("Konrad Enzensberger"), QStringLiteral("e.konrad@mpegcode.com"))
-                                   << PluginAuthor(QStringLiteral("Dennis Nienhüser"), QStringLiteral("nienhueser@kde.org"))
-                                   << PluginAuthor(QStringLiteral("Bernhard Beschow"), QStringLiteral("bbeschow@cs.tu-berlin.de"));
+    return QList<PluginAuthor>() << PluginAuthor(QStringLiteral("Konrad Enzensberger"), QStringLiteral("e.konrad@mpegcode.com"))
+                                 << PluginAuthor(QStringLiteral("Dennis Nienhüser"), QStringLiteral("nienhueser@kde.org"))
+                                 << PluginAuthor(QStringLiteral("Bernhard Beschow"), QStringLiteral("bbeschow@cs.tu-berlin.de"));
 }
 
 QIcon RouteSimulationPositionProviderPlugin::icon() const

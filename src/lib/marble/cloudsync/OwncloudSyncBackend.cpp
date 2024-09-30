@@ -49,7 +49,7 @@ public:
     QNetworkReply *m_routeDeleteReply;
     QNetworkReply *m_authReply;
 
-    QVector<RouteItem> m_routeList;
+    QList<RouteItem> m_routeList;
 
     QString m_routeUploadEndpoint;
     QString m_routeListEndpoint;

@@ -51,7 +51,7 @@ void PlaybackAnimatedUpdateItem::play()
 
     // Apply updates of elements
     if (m_animatedUpdate->update()->change()) {
-        QVector<GeoDataPlacemark *> placemarkList = m_animatedUpdate->update()->change()->placemarkList();
+        QList<GeoDataPlacemark *> placemarkList = m_animatedUpdate->update()->change()->placemarkList();
         for (int i = 0; i < placemarkList.size(); i++) {
             GeoDataPlacemark *placemark = placemarkList.at(i);
             QString targetId = placemark->targetId();
@@ -122,8 +122,8 @@ GeoDataFeature *PlaybackAnimatedUpdateItem::findFeature(GeoDataFeature *feature,
 
     GeoDataContainer *container = dynamic_cast<GeoDataContainer *>(feature);
     if (container) {
-        QVector<GeoDataFeature *>::Iterator end = container->end();
-        QVector<GeoDataFeature *>::Iterator iter = container->begin();
+        QList<GeoDataFeature *>::Iterator end = container->end();
+        QList<GeoDataFeature *>::Iterator iter = container->begin();
         for (; iter != end; ++iter) {
             GeoDataFeature *foundFeature = findFeature(*iter, id);
             if (foundFeature) {
@@ -164,7 +164,7 @@ void PlaybackAnimatedUpdateItem::stop()
     m_playing = false;
 
     if (m_animatedUpdate->update()->change()) {
-        QVector<GeoDataPlacemark *> placemarkList = m_animatedUpdate->update()->change()->placemarkList();
+        QList<GeoDataPlacemark *> placemarkList = m_animatedUpdate->update()->change()->placemarkList();
         for (int i = 0; i < placemarkList.size(); i++) {
             GeoDataPlacemark *placemark = placemarkList.at(i);
             QString targetId = placemark->targetId();

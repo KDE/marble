@@ -46,7 +46,7 @@ class MonavPluginPrivate
 public:
     QDir m_mapDir;
 
-    QVector<MonavMap> m_maps;
+    QList<MonavMap> m_maps;
 
     bool m_ownsServer;
 
@@ -261,9 +261,9 @@ QString MonavPlugin::copyrightYears() const
     return QStringLiteral("2010");
 }
 
-QVector<PluginAuthor> MonavPlugin::pluginAuthors() const
+QList<PluginAuthor> MonavPlugin::pluginAuthors() const
 {
-    return QVector<PluginAuthor>() << PluginAuthor(QStringLiteral("Dennis Nienhüser"), QStringLiteral("nienhueser@kde.org"));
+    return QList<PluginAuthor>() << PluginAuthor(QStringLiteral("Dennis Nienhüser"), QStringLiteral("nienhueser@kde.org"));
 }
 
 RoutingRunner *MonavPlugin::newRunner() const

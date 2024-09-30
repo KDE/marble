@@ -44,9 +44,9 @@ QString OpenLocationCodeSearchPlugin::copyrightYears() const
     return QStringLiteral("2015");
 }
 
-QVector<PluginAuthor> OpenLocationCodeSearchPlugin::pluginAuthors() const
+QList<PluginAuthor> OpenLocationCodeSearchPlugin::pluginAuthors() const
 {
-    return QVector<PluginAuthor>() << PluginAuthor(QStringLiteral("Constantin Mihalache"), QStringLiteral("mihalache.c94@gmail.com"));
+    return QList<PluginAuthor>() << PluginAuthor(QStringLiteral("Constantin Mihalache"), QStringLiteral("mihalache.c94@gmail.com"));
 }
 
 SearchRunner *OpenLocationCodeSearchPlugin::newRunner() const

@@ -40,13 +40,13 @@ public:
     void updateTile(const TileId &tileId, GeoDataDocument *document);
     void updateLayerSettings();
 
-    QVector<const GeoSceneVectorTileDataset *> findRelevantVectorLayers(const TileId &stackedTileId) const;
+    QList<const GeoSceneVectorTileDataset *> findRelevantVectorLayers(const TileId &stackedTileId) const;
 
 public:
     VectorTileLayer *const m_parent;
     TileLoader m_loader;
-    QVector<VectorTileModel *> m_tileModels;
-    QVector<VectorTileModel *> m_activeTileModels;
+    QList<VectorTileModel *> m_tileModels;
+    QList<VectorTileModel *> m_activeTileModels;
     const GeoSceneGroup *m_layerSettings;
 
     // TreeModel for displaying GeoDataDocuments
@@ -198,7 +198,7 @@ int VectorTileLayer::layerCount() const
 
 void VectorTileLayer::downloadTile(const TileId &id)
 {
-    const QVector<const GeoSceneVectorTileDataset *> vectorLayers = d->findRelevantVectorLayers(id);
+    const QList<const GeoSceneVectorTileDataset *> vectorLayers = d->findRelevantVectorLayers(id);
 
     for (const GeoSceneVectorTileDataset *vectorLayer : vectorLayers) {
         if (vectorLayer->tileLevels().isEmpty() || vectorLayer->tileLevels().contains(id.zoomLevel())) {
@@ -216,7 +216,7 @@ void VectorTileLayer::reset()
     }
 }
 
-void VectorTileLayer::setMapTheme(const QVector<const GeoSceneVectorTileDataset *> &textures, const GeoSceneGroup *textureLayerSettings)
+void VectorTileLayer::setMapTheme(const QList<const GeoSceneVectorTileDataset *> &textures, const GeoSceneGroup *textureLayerSettings)
 {
     qDeleteAll(d->m_tileModels);
     d->m_tileModels.clear();
@@ -239,9 +239,9 @@ void VectorTileLayer::setMapTheme(const QVector<const GeoSceneVectorTileDataset 
     }
 }
 
-QVector<const GeoSceneVectorTileDataset *> VectorTileLayer::Private::findRelevantVectorLayers(const TileId &tileId) const
+QList<const GeoSceneVectorTileDataset *> VectorTileLayer::Private::findRelevantVectorLayers(const TileId &tileId) const
 {
-    QVector<const GeoSceneVectorTileDataset *> result;
+    QList<const GeoSceneVectorTileDataset *> result;
 
     for (VectorTileModel *candidate : m_activeTileModels) {
         Q_ASSERT(candidate);

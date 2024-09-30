@@ -162,7 +162,7 @@ bool JsonParser::parseGeoJsonTopLevel(const QJsonObject &jsonObject)
         // Handle the Feature object, which contains a single geometry object and possibly
         // associated properties.  Note that only Feature objects can have recognised properties.
 
-        QVector<GeoDataGeometry *> geometryList; // Populated by parseGeoJsonSubLevel()
+        QList<GeoDataGeometry *> geometryList; // Populated by parseGeoJsonSubLevel()
         bool hasPoints = false; // Populated by parseGeoJsonSubLevel()
 
         if (!parseGeoJsonSubLevel(jsonObject.value(QStringLiteral("geometry")).toObject(), geometryList, hasPoints)) {
@@ -339,7 +339,7 @@ bool JsonParser::parseGeoJsonTopLevel(const QJsonObject &jsonObject)
     }
 }
 
-bool JsonParser::parseGeoJsonSubLevel(const QJsonObject &jsonObject, QVector<GeoDataGeometry *> &geometryList, bool &hasPoints)
+bool JsonParser::parseGeoJsonSubLevel(const QJsonObject &jsonObject, QList<GeoDataGeometry *> &geometryList, bool &hasPoints)
 {
     // The GeoJSON object type
     const QString jsonObjectType = jsonObject.value(QStringLiteral("type")).toString();

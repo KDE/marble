@@ -57,10 +57,10 @@ QString PlacemarkPositionProviderPlugin::copyrightYears() const
     return QStringLiteral("2011, 2012");
 }
 
-QVector<PluginAuthor> PlacemarkPositionProviderPlugin::pluginAuthors() const
+QList<PluginAuthor> PlacemarkPositionProviderPlugin::pluginAuthors() const
 {
-    return QVector<PluginAuthor>() << PluginAuthor(QStringLiteral("Guillaume Martres"), QStringLiteral("smarter@ubuntu.com"))
-                                   << PluginAuthor(QStringLiteral("Bernhard Beschow"), QStringLiteral("bbeschow@cs.tu-berlin.de"));
+    return QList<PluginAuthor>() << PluginAuthor(QStringLiteral("Guillaume Martres"), QStringLiteral("smarter@ubuntu.com"))
+                                 << PluginAuthor(QStringLiteral("Bernhard Beschow"), QStringLiteral("bbeschow@cs.tu-berlin.de"));
 }
 
 QIcon PlacemarkPositionProviderPlugin::icon() const

@@ -397,7 +397,7 @@ bool ViewportParams::screenCoordinates(const GeoDataCoordinates &coordinates,
     return d->m_currentProjection->screenCoordinates(coordinates, this, x, y, pointRepeatNum, size, globeHidesPoint);
 }
 
-bool ViewportParams::screenCoordinates(const GeoDataLineString &lineString, QVector<QPolygonF *> &polygons) const
+bool ViewportParams::screenCoordinates(const GeoDataLineString &lineString, QList<QPolygonF *> &polygons) const
 {
     return d->m_currentProjection->screenCoordinates(lineString, this, polygons);
 }

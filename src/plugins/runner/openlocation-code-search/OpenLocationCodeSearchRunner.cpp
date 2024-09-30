@@ -35,7 +35,7 @@ void OpenLocationCodeSearchRunner::search(const QString &searchTerm, const GeoDa
 {
     Q_UNUSED(preferred);
 
-    QVector<GeoDataPlacemark *> result;
+    QList<GeoDataPlacemark *> result;
 
     if (isValidOLC(searchTerm.toUpper())) {
         GeoDataLatLonBox boundingBox = decodeOLC(searchTerm.toUpper());

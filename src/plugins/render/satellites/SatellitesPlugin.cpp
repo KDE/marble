@@ -104,11 +104,11 @@ QString SatellitesPlugin::copyrightYears() const
     return QStringLiteral("2012");
 }
 
-QVector<PluginAuthor> SatellitesPlugin::pluginAuthors() const
+QList<PluginAuthor> SatellitesPlugin::pluginAuthors() const
 {
-    return QVector<PluginAuthor>() << PluginAuthor(QStringLiteral("Guillaume Martres"), QStringLiteral("smarter@ubuntu.com"))
-                                   << PluginAuthor(QStringLiteral("Rene Kuettner"), QStringLiteral("rene@bitkanal.net"))
-                                   << PluginAuthor(QStringLiteral("Gerhard Holtkamp"), QString());
+    return QList<PluginAuthor>() << PluginAuthor(QStringLiteral("Guillaume Martres"), QStringLiteral("smarter@ubuntu.com"))
+                                 << PluginAuthor(QStringLiteral("Rene Kuettner"), QStringLiteral("rene@bitkanal.net"))
+                                 << PluginAuthor(QStringLiteral("Gerhard Holtkamp"), QString());
 }
 
 QString SatellitesPlugin::aboutDataText() const
@@ -198,7 +198,7 @@ bool SatellitesPlugin::eventFilter(QObject *object, QEvent *event)
 
     if (mouseEvent->button() == Qt::LeftButton) {
         m_trackerList.clear();
-        QVector<const GeoDataFeature *> vector = widget->whichFeatureAt(mouseEvent->pos());
+        QList<const GeoDataFeature *> vector = widget->whichFeatureAt(mouseEvent->pos());
         for (const GeoDataFeature *feature : std::as_const(vector)) {
             const GeoDataPlacemark *placemark = dynamic_cast<const GeoDataPlacemark *>(feature);
             if (placemark) {

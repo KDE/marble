@@ -319,10 +319,10 @@ void DownloadRegionDialog::setSelectionMethod(SelectionMethod const selectionMet
     updateTileCount();
 }
 
-QVector<TileCoordsPyramid> DownloadRegionDialog::region() const
+QList<TileCoordsPyramid> DownloadRegionDialog::region() const
 {
     if (!d->hasTextureLayers() && !d->hasVectorLayers()) {
-        return QVector<TileCoordsPyramid>();
+        return QList<TileCoordsPyramid>();
     }
 
     d->m_visibleTileLevel = (tileType() == TextureTileType && d->m_textureLayer->tileZoomLevel() != -1) ? d->m_textureLayer->tileZoomLevel()
@@ -460,7 +460,7 @@ void DownloadRegionDialog::updateTileCount()
 
     qint64 tilesCount = 0;
     QString themeId(d->m_model->mapThemeId());
-    QVector<TileCoordsPyramid> const pyramid = region();
+    QList<TileCoordsPyramid> const pyramid = region();
     Q_ASSERT(!pyramid.isEmpty());
     if (pyramid.size() == 1) {
         tilesCount = pyramid[0].tilesCount();

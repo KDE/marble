@@ -91,10 +91,10 @@ QString PhotoPlugin::copyrightYears() const
     return QStringLiteral("2009, 2012");
 }
 
-QVector<PluginAuthor> PhotoPlugin::pluginAuthors() const
+QList<PluginAuthor> PhotoPlugin::pluginAuthors() const
 {
-    return QVector<PluginAuthor>() << PluginAuthor(QStringLiteral("Bastian Holst"), QStringLiteral("bastianholst@gmx.de"))
-                                   << PluginAuthor(QStringLiteral("Mohammed Nafees"), QStringLiteral("nafees.technocool@gmail.com"));
+    return QList<PluginAuthor>() << PluginAuthor(QStringLiteral("Bastian Holst"), QStringLiteral("bastianholst@gmx.de"))
+                                 << PluginAuthor(QStringLiteral("Mohammed Nafees"), QStringLiteral("nafees.technocool@gmail.com"));
 }
 
 QIcon PhotoPlugin::icon() const

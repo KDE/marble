@@ -34,7 +34,7 @@ const char *GeoSceneSection::nodeType() const
 void GeoSceneSection::addItem(GeoSceneItem *item)
 {
     // Remove any item that has the same name
-    QVector<GeoSceneItem *>::iterator it = m_items.begin();
+    QList<GeoSceneItem *>::iterator it = m_items.begin();
     while (it != m_items.end()) {
         GeoSceneItem *currentItem = *it;
         if (currentItem->name() == item->name()) {
@@ -55,8 +55,8 @@ GeoSceneItem *GeoSceneSection::item(const QString &name)
 {
     GeoSceneItem *item = nullptr;
 
-    QVector<GeoSceneItem *>::const_iterator it = m_items.constBegin();
-    QVector<GeoSceneItem *>::const_iterator end = m_items.constEnd();
+    QList<GeoSceneItem *>::const_iterator it = m_items.constBegin();
+    QList<GeoSceneItem *>::const_iterator end = m_items.constEnd();
     for (; it != end; ++it) {
         if ((*it)->name() == name) {
             item = *it;
@@ -72,7 +72,7 @@ GeoSceneItem *GeoSceneSection::item(const QString &name)
     return item;
 }
 
-QVector<GeoSceneItem *> GeoSceneSection::items() const
+QList<GeoSceneItem *> GeoSceneSection::items() const
 {
     return m_items;
 }

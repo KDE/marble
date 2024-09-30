@@ -30,7 +30,7 @@ qreal AzimuthalProjection::clippingRadius() const
     return 1;
 }
 
-bool AzimuthalProjection::screenCoordinates(const GeoDataLineString &lineString, const ViewportParams *viewport, QVector<QPolygonF *> &polygons) const
+bool AzimuthalProjection::screenCoordinates(const GeoDataLineString &lineString, const ViewportParams *viewport, QList<QPolygonF *> &polygons) const
 {
     Q_D(const AzimuthalProjection);
     // Compare bounding box size of the line string with the angularResolution
@@ -160,7 +160,7 @@ void AzimuthalProjectionPrivate::tessellateLineSegment(const GeoDataCoordinates 
                                                        const GeoDataCoordinates &bCoords,
                                                        qreal bx,
                                                        qreal by,
-                                                       QVector<QPolygonF *> &polygons,
+                                                       QList<QPolygonF *> &polygons,
                                                        const ViewportParams *viewport,
                                                        TessellationFlags f,
                                                        bool allowLatePolygonCut) const
@@ -201,7 +201,7 @@ void AzimuthalProjectionPrivate::tessellateLineSegment(const GeoDataCoordinates 
 void AzimuthalProjectionPrivate::processTessellation(const GeoDataCoordinates &previousCoords,
                                                      const GeoDataCoordinates &currentCoords,
                                                      int tessellatedNodes,
-                                                     QVector<QPolygonF *> &polygons,
+                                                     QList<QPolygonF *> &polygons,
                                                      const ViewportParams *viewport,
                                                      TessellationFlags f,
                                                      bool allowLatePolygonCut) const
@@ -266,7 +266,7 @@ void AzimuthalProjectionPrivate::processTessellation(const GeoDataCoordinates &p
 }
 
 void AzimuthalProjectionPrivate::crossHorizon(const GeoDataCoordinates &bCoord,
-                                              QVector<QPolygonF *> &polygons,
+                                              QList<QPolygonF *> &polygons,
                                               const ViewportParams *viewport,
                                               bool allowLatePolygonCut) const
 {
@@ -287,7 +287,7 @@ void AzimuthalProjectionPrivate::crossHorizon(const GeoDataCoordinates &bCoord,
     }
 }
 
-bool AzimuthalProjectionPrivate::lineStringToPolygon(const GeoDataLineString &lineString, const ViewportParams *viewport, QVector<QPolygonF *> &polygons) const
+bool AzimuthalProjectionPrivate::lineStringToPolygon(const GeoDataLineString &lineString, const ViewportParams *viewport, QList<QPolygonF *> &polygons) const
 {
     Q_Q(const AzimuthalProjection);
 

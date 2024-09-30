@@ -670,7 +670,7 @@ QPointF MarbleQuickItem::screenCoordinatesFromGeoDataCoordinates(const GeoDataCo
     return !globeHidesPoint ? QPointF(x, y) : QPointF();
 }
 
-bool MarbleQuickItem::screenCoordinatesFromGeoDataLineString(const GeoDataLineString &lineString, QVector<QPolygonF *> &polygons) const
+bool MarbleQuickItem::screenCoordinatesFromGeoDataLineString(const GeoDataLineString &lineString, QList<QPolygonF *> &polygons) const
 {
     return d->m_map.viewport()->screenCoordinates(lineString, polygons);
 }
@@ -783,7 +783,7 @@ void MarbleQuickItem::centerOnCurrentPosition()
 void MarbleQuickItem::selectPlacemarkAt(int x, int y)
 {
     auto features = d->m_map.whichFeatureAt(QPoint(x, y));
-    QVector<GeoDataPlacemark const *> placemarks;
+    QList<GeoDataPlacemark const *> placemarks;
     for (auto feature : std::as_const(features)) {
         if (const auto placemark = geodata_cast<GeoDataPlacemark>(feature)) {
             placemarks << placemark;

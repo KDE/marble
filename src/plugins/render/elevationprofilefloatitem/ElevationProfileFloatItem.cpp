@@ -122,11 +122,11 @@ QString ElevationProfileFloatItem::copyrightYears() const
     return QStringLiteral("2011, 2012, 2013");
 }
 
-QVector<PluginAuthor> ElevationProfileFloatItem::pluginAuthors() const
+QList<PluginAuthor> ElevationProfileFloatItem::pluginAuthors() const
 {
-    return QVector<PluginAuthor>() << PluginAuthor(QStringLiteral("Florian Eßer"), QStringLiteral("f.esser@rwth-aachen.de"))
-                                   << PluginAuthor(QStringLiteral("Bernhard Beschow"), QStringLiteral("bbeschow@cs.tu-berlin.de"))
-                                   << PluginAuthor(QStringLiteral("Roman Karlstetter"), QStringLiteral("roman.karlstetter@googlemail.com"));
+    return QList<PluginAuthor>() << PluginAuthor(QStringLiteral("Florian Eßer"), QStringLiteral("f.esser@rwth-aachen.de"))
+                                 << PluginAuthor(QStringLiteral("Bernhard Beschow"), QStringLiteral("bbeschow@cs.tu-berlin.de"))
+                                 << PluginAuthor(QStringLiteral("Roman Karlstetter"), QStringLiteral("roman.karlstetter@googlemail.com"));
 }
 
 QIcon ElevationProfileFloatItem::icon() const
@@ -482,7 +482,7 @@ bool ElevationProfileFloatItem::eventFilter(QObject *object, QEvent *e)
     return AbstractFloatItem::eventFilter(object, e);
 }
 
-void ElevationProfileFloatItem::handleDataUpdate(const GeoDataLineString &points, const QVector<QPointF> &eleData)
+void ElevationProfileFloatItem::handleDataUpdate(const GeoDataLineString &points, const QList<QPointF> &eleData)
 {
     m_eleData = eleData;
     m_points = points;
@@ -548,7 +548,7 @@ void ElevationProfileFloatItem::updateVisiblePoints()
     return;
 }
 
-void ElevationProfileFloatItem::calculateStatistics(const QVector<QPointF> &eleData)
+void ElevationProfileFloatItem::calculateStatistics(const QList<QPointF> &eleData)
 {
     // This basically calculates the important peaks of the moving average filtered elevation and
     // calculates the elevation data based on this points.
@@ -693,10 +693,10 @@ void ElevationProfileFloatItem::switchToTrackDataSource(int index)
 void ElevationProfileFloatItem::switchDataSource(ElevationProfileDataSource *source)
 {
     if (m_activeDataSource) {
-        disconnect(m_activeDataSource, SIGNAL(dataUpdated(GeoDataLineString, QVector<QPointF>)), nullptr, nullptr);
+        disconnect(m_activeDataSource, SIGNAL(dataUpdated(GeoDataLineString, QList<QPointF>)), nullptr, nullptr);
     }
     m_activeDataSource = source;
-    connect(m_activeDataSource, SIGNAL(dataUpdated(GeoDataLineString, QVector<QPointF>)), this, SLOT(handleDataUpdate(GeoDataLineString, QVector<QPointF>)));
+    connect(m_activeDataSource, SIGNAL(dataUpdated(GeoDataLineString, QList<QPointF>)), this, SLOT(handleDataUpdate(GeoDataLineString, QList<QPointF>)));
     m_activeDataSource->requestUpdate();
 }
 

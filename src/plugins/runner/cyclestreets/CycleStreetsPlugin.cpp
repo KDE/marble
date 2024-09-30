@@ -108,9 +108,9 @@ QString CycleStreetsPlugin::copyrightYears() const
     return QStringLiteral("2013");
 }
 
-QVector<PluginAuthor> CycleStreetsPlugin::pluginAuthors() const
+QList<PluginAuthor> CycleStreetsPlugin::pluginAuthors() const
 {
-    return QVector<PluginAuthor>() << PluginAuthor(QStringLiteral("Mihail Ivchenko"), QStringLiteral("ematirov@gmail.com"));
+    return QList<PluginAuthor>() << PluginAuthor(QStringLiteral("Mihail Ivchenko"), QStringLiteral("ematirov@gmail.com"));
 }
 
 RoutingRunner *CycleStreetsPlugin::newRunner() const

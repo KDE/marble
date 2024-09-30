@@ -65,9 +65,9 @@ QString LocalOsmSearchPlugin::copyrightYears() const
     return QStringLiteral("2011");
 }
 
-QVector<PluginAuthor> LocalOsmSearchPlugin::pluginAuthors() const
+QList<PluginAuthor> LocalOsmSearchPlugin::pluginAuthors() const
 {
-    return QVector<PluginAuthor>() << PluginAuthor(QStringLiteral("Dennis Nienhüser"), QStringLiteral("nienhueser@kde.org"));
+    return QList<PluginAuthor>() << PluginAuthor(QStringLiteral("Dennis Nienhüser"), QStringLiteral("nienhueser@kde.org"));
 }
 
 SearchRunner *LocalOsmSearchPlugin::newRunner() const

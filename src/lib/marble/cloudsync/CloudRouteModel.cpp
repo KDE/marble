@@ -25,7 +25,7 @@ class Q_DECL_HIDDEN CloudRouteModel::Private
 public:
     Private();
 
-    QVector<RouteItem> m_items;
+    QList<RouteItem> m_items;
     QString m_cacheDir;
     QPersistentModelIndex m_downloading;
     qint64 m_totalSize;
@@ -98,7 +98,7 @@ QHash<int, QByteArray> CloudRouteModel::roleNames() const
     return roles;
 }
 
-void CloudRouteModel::setItems(const QVector<RouteItem> &items)
+void CloudRouteModel::setItems(const QList<RouteItem> &items)
 {
     beginResetModel();
     d->m_items = items;

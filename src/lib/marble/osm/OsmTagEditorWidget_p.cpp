@@ -107,7 +107,7 @@ QTreeWidgetItem *OsmTagEditorWidgetPrivate::tagWidgetItem(const OsmTag &tag)
 
 QList<OsmTagEditorWidgetPrivate::OsmTag> OsmTagEditorWidgetPrivate::recommendedTags() const
 {
-    static const QVector<OsmTag> additionalOsmTags = createAdditionalOsmTags();
+    static const QList<OsmTag> additionalOsmTags = createAdditionalOsmTags();
 
     QList<OsmTag> recommendedTags;
 
@@ -326,9 +326,9 @@ void OsmTagEditorWidgetPrivate::addPattern(QStringList &filter, const OsmPlacema
     }
 }
 
-QVector<OsmTagEditorWidgetPrivate::OsmTag> OsmTagEditorWidgetPrivate::createAdditionalOsmTags()
+QList<OsmTagEditorWidgetPrivate::OsmTag> OsmTagEditorWidgetPrivate::createAdditionalOsmTags()
 {
-    const QVector<OsmTag> additionalOsmTags = QVector<OsmTag>()
+    const QList<OsmTag> additionalOsmTags = QList<OsmTag>()
 
         // Recommended for nodes
         << OsmTag("power", "pole") << OsmTag("power", "generator") << OsmTag("barrier", "fence") << OsmTag("barrier", "wall")

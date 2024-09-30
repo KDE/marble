@@ -35,19 +35,19 @@ public:
 
     static int maxDivisor(int maximum, int fullLength);
 
-    StackedTile *createTile(const QVector<QSharedPointer<TextureTile>> &tiles) const;
+    StackedTile *createTile(const QList<QSharedPointer<TextureTile>> &tiles) const;
 
-    void renderGroundOverlays(QImage *tileImage, const QVector<QSharedPointer<TextureTile>> &tiles) const;
+    void renderGroundOverlays(QImage *tileImage, const QList<QSharedPointer<TextureTile>> &tiles) const;
     void paintSunShading(QImage *tileImage, const TileId &id) const;
     void paintTileId(QImage *tileImage, const TileId &id) const;
 
     void detectMaxTileLevel();
-    QVector<const GeoSceneTextureTileDataset *> findRelevantTextureLayers(const TileId &stackedTileId) const;
+    QList<const GeoSceneTextureTileDataset *> findRelevantTextureLayers(const TileId &stackedTileId) const;
 
     TileLoader *const m_tileLoader;
     const SunLocator *const m_sunLocator;
     BlendingFactory m_blendingFactory;
-    QVector<const GeoSceneTextureTileDataset *> m_textureLayers;
+    QList<const GeoSceneTextureTileDataset *> m_textureLayers;
     QList<const GeoDataGroundOverlay *> m_groundOverlays;
     int m_maxTileLevel;
     QString m_themeId;
@@ -83,7 +83,7 @@ MergedLayerDecorator::~MergedLayerDecorator()
     delete d;
 }
 
-void MergedLayerDecorator::setTextureLayers(const QVector<const GeoSceneTextureTileDataset *> &textureLayers)
+void MergedLayerDecorator::setTextureLayers(const QList<const GeoSceneTextureTileDataset *> &textureLayers)
 {
     if (textureLayers.count() > 0) {
         const GeoSceneTileDataset *const firstTexture = textureLayers.at(0);
@@ -145,7 +145,7 @@ QSize MergedLayerDecorator::tileSize() const
     return d->m_textureLayers.at(0)->tileSize();
 }
 
-StackedTile *MergedLayerDecorator::Private::createTile(const QVector<QSharedPointer<TextureTile>> &tiles) const
+StackedTile *MergedLayerDecorator::Private::createTile(const QList<QSharedPointer<TextureTile>> &tiles) const
 {
     Q_ASSERT(!tiles.isEmpty());
 
@@ -194,7 +194,7 @@ StackedTile *MergedLayerDecorator::Private::createTile(const QVector<QSharedPoin
     return new StackedTile(id, resultImage, tiles);
 }
 
-void MergedLayerDecorator::Private::renderGroundOverlays(QImage *tileImage, const QVector<QSharedPointer<TextureTile>> &tiles) const
+void MergedLayerDecorator::Private::renderGroundOverlays(QImage *tileImage, const QList<QSharedPointer<TextureTile>> &tiles) const
 {
     /* All tiles are covering the same area. Pick one. */
     const TileId tileId = tiles.first()->id();
@@ -273,8 +273,8 @@ void MergedLayerDecorator::Private::renderGroundOverlays(QImage *tileImage, cons
 
 StackedTile *MergedLayerDecorator::loadTile(const TileId &stackedTileId)
 {
-    const QVector<const GeoSceneTextureTileDataset *> textureLayers = d->findRelevantTextureLayers(stackedTileId);
-    QVector<QSharedPointer<TextureTile>> tiles;
+    const QList<const GeoSceneTextureTileDataset *> textureLayers = d->findRelevantTextureLayers(stackedTileId);
+    QList<QSharedPointer<TextureTile>> tiles;
     tiles.reserve(textureLayers.size());
 
     for (const GeoSceneTextureTileDataset *layer : textureLayers) {
@@ -304,7 +304,7 @@ RenderState MergedLayerDecorator::renderState(const TileId &stackedTileId) const
 {
     QString const nameTemplate = "Tile %1/%2/%3";
     RenderState state(nameTemplate.arg(stackedTileId.zoomLevel()).arg(stackedTileId.x()).arg(stackedTileId.y()));
-    const QVector<const GeoSceneTextureTileDataset *> textureLayers = d->findRelevantTextureLayers(stackedTileId);
+    const QList<const GeoSceneTextureTileDataset *> textureLayers = d->findRelevantTextureLayers(stackedTileId);
     for (const GeoSceneTextureTileDataset *layer : textureLayers) {
         const TileId tileId(layer->sourceDir(), stackedTileId.zoomLevel(), stackedTileId.x(), stackedTileId.y());
         RenderStatus tileStatus = Complete;
@@ -337,7 +337,7 @@ StackedTile *MergedLayerDecorator::updateTile(const StackedTile &stackedTile, co
 
     d->detectMaxTileLevel();
 
-    QVector<QSharedPointer<TextureTile>> tiles = stackedTile.tiles();
+    QList<QSharedPointer<TextureTile>> tiles = stackedTile.tiles();
 
     for (int i = 0; i < tiles.count(); ++i) {
         if (tiles[i]->id() == tileId) {
@@ -352,7 +352,7 @@ StackedTile *MergedLayerDecorator::updateTile(const StackedTile &stackedTile, co
 
 void MergedLayerDecorator::downloadStackedTile(const TileId &id, DownloadUsage usage)
 {
-    const QVector<const GeoSceneTextureTileDataset *> textureLayers = d->findRelevantTextureLayers(id);
+    const QList<const GeoSceneTextureTileDataset *> textureLayers = d->findRelevantTextureLayers(id);
 
     for (const GeoSceneTextureTileDataset *textureLayer : textureLayers) {
         if (textureLayer->tileLevels().isEmpty() || textureLayer->tileLevels().contains(id.zoomLevel())) {
@@ -527,9 +527,9 @@ void MergedLayerDecorator::Private::detectMaxTileLevel()
     m_maxTileLevel = TileLoader::maximumTileLevel(*m_textureLayers.at(0));
 }
 
-QVector<const GeoSceneTextureTileDataset *> MergedLayerDecorator::Private::findRelevantTextureLayers(const TileId &stackedTileId) const
+QList<const GeoSceneTextureTileDataset *> MergedLayerDecorator::Private::findRelevantTextureLayers(const TileId &stackedTileId) const
 {
-    QVector<const GeoSceneTextureTileDataset *> result;
+    QList<const GeoSceneTextureTileDataset *> result;
 
     for (const GeoSceneTextureTileDataset *candidate : m_textureLayers) {
         Q_ASSERT(candidate);

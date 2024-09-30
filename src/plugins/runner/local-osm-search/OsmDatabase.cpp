@@ -69,15 +69,15 @@ OsmDatabase::OsmDatabase(const QStringList &databaseFiles)
 {
 }
 
-QVector<OsmPlacemark> OsmDatabase::find(const DatabaseQuery &userQuery)
+QList<OsmPlacemark> OsmDatabase::find(const DatabaseQuery &userQuery)
 {
     if (m_databaseFiles.isEmpty()) {
-        return QVector<OsmPlacemark>();
+        return QList<OsmPlacemark>();
     }
 
     QSqlDatabase database = QSqlDatabase::addDatabase("QSQLITE", QStringLiteral("marble/local-osm-search-%1").arg(reinterpret_cast<size_t>(this)));
 
-    QVector<OsmPlacemark> result;
+    QList<OsmPlacemark> result;
     QElapsedTimer timer;
     timer.start();
     for (const QString &databaseFile : std::as_const(m_databaseFiles)) {
@@ -217,7 +217,7 @@ QVector<OsmPlacemark> OsmDatabase::find(const DatabaseQuery &userQuery)
     return result;
 }
 
-void OsmDatabase::makeUnique(QVector<OsmPlacemark> &placemarks)
+void OsmDatabase::makeUnique(QList<OsmPlacemark> &placemarks)
 {
     for (int i = 1; i < placemarks.size(); ++i) {
         if (placemarks[i - 1] == placemarks[i]) {

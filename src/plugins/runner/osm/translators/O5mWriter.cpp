@@ -251,8 +251,8 @@ void O5mWriter::writeRelationMembers(const GeoDataRelation *relation,
 
 void O5mWriter::writeReferences(const GeoDataLineString &lineString, qint64 &lastId, const OsmPlacemarkData &osmData, QDataStream &stream) const
 {
-    QVector<GeoDataCoordinates>::const_iterator it = lineString.constBegin();
-    QVector<GeoDataCoordinates>::ConstIterator const end = lineString.constEnd();
+    QList<GeoDataCoordinates>::const_iterator it = lineString.constBegin();
+    QList<GeoDataCoordinates>::ConstIterator const end = lineString.constEnd();
 
     for (; it != end; ++it) {
         qint64 id = osmData.nodeReference(*it).id();

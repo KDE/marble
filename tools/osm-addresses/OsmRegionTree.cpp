@@ -19,12 +19,12 @@ const OsmRegion &OsmRegionTree::node() const
     return m_node;
 }
 
-void OsmRegionTree::setChildren(const QVector<OsmRegionTree> &children)
+void OsmRegionTree::setChildren(const QList<OsmRegionTree> &children)
 {
     m_children = children;
 }
 
-const QVector<OsmRegionTree> &OsmRegionTree::children() const
+const QList<OsmRegionTree> &OsmRegionTree::children() const
 {
     return m_children;
 }

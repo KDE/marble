@@ -73,9 +73,9 @@ QString GpsInfo::copyrightYears() const
     return QStringLiteral("2011");
 }
 
-QVector<PluginAuthor> GpsInfo::pluginAuthors() const
+QList<PluginAuthor> GpsInfo::pluginAuthors() const
 {
-    return QVector<PluginAuthor>() << PluginAuthor(QStringLiteral("Thibaut Gridel"), QStringLiteral("tgridel@free.fr"));
+    return QList<PluginAuthor>() << PluginAuthor(QStringLiteral("Thibaut Gridel"), QStringLiteral("tgridel@free.fr"));
 }
 
 QIcon GpsInfo::icon() const

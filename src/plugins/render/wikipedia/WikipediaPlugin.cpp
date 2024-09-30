@@ -90,9 +90,9 @@ QString WikipediaPlugin::copyrightYears() const
     return QStringLiteral("2009");
 }
 
-QVector<PluginAuthor> WikipediaPlugin::pluginAuthors() const
+QList<PluginAuthor> WikipediaPlugin::pluginAuthors() const
 {
-    return QVector<PluginAuthor>() << PluginAuthor(QStringLiteral("Bastian Holst"), QStringLiteral("bastianholst@gmx.de"));
+    return QList<PluginAuthor>() << PluginAuthor(QStringLiteral("Bastian Holst"), QStringLiteral("bastianholst@gmx.de"));
 }
 
 QString WikipediaPlugin::aboutDataText() const

@@ -38,10 +38,10 @@ public:
     /// The vector holding all the sections in the legend.
     /// (We want to preserve the order and don't care
     /// much about speed here), so we don't use a hash
-    QVector<GeoSceneLayer *> m_layers;
+    QList<GeoSceneLayer *> m_layers;
 
     /// The vector holding all the filters in the map.
-    QVector<GeoSceneFilter *> m_filters;
+    QList<GeoSceneFilter *> m_filters;
 
     QColor m_backgroundColor;
     QColor m_labelColor;
@@ -70,7 +70,7 @@ const char *GeoSceneMap::nodeType() const
 void GeoSceneMap::addLayer(GeoSceneLayer *layer)
 {
     // Remove any layer that has the same name
-    QVector<GeoSceneLayer *>::iterator it = d->m_layers.begin();
+    QList<GeoSceneLayer *>::iterator it = d->m_layers.begin();
     while (it != d->m_layers.end()) {
         GeoSceneLayer *currentLayer = *it;
         if (currentLayer->name() == layer->name()) {
@@ -91,8 +91,8 @@ GeoSceneLayer *GeoSceneMap::layer(const QString &name)
 {
     GeoSceneLayer *layer = nullptr;
 
-    QVector<GeoSceneLayer *>::const_iterator it = d->m_layers.constBegin();
-    QVector<GeoSceneLayer *>::const_iterator end = d->m_layers.constEnd();
+    QList<GeoSceneLayer *>::const_iterator it = d->m_layers.constBegin();
+    QList<GeoSceneLayer *>::const_iterator end = d->m_layers.constEnd();
     for (; it != end; ++it) {
         if ((*it)->name() == name) {
             layer = *it;
@@ -112,8 +112,8 @@ const GeoSceneLayer *GeoSceneMap::layer(const QString &name) const
 {
     const GeoSceneLayer *layer = nullptr;
 
-    QVector<GeoSceneLayer *>::const_iterator it = d->m_layers.constBegin();
-    QVector<GeoSceneLayer *>::const_iterator end = d->m_layers.constEnd();
+    QList<GeoSceneLayer *>::const_iterator it = d->m_layers.constBegin();
+    QList<GeoSceneLayer *>::const_iterator end = d->m_layers.constEnd();
     for (; it != end; ++it) {
         if ((*it)->name() == name) {
             layer = *it;
@@ -123,7 +123,7 @@ const GeoSceneLayer *GeoSceneMap::layer(const QString &name) const
     return layer;
 }
 
-QVector<GeoSceneLayer *> GeoSceneMap::layers() const
+QList<GeoSceneLayer *> GeoSceneMap::layers() const
 {
     return d->m_layers;
 }
@@ -131,7 +131,7 @@ QVector<GeoSceneLayer *> GeoSceneMap::layers() const
 void GeoSceneMap::addFilter(GeoSceneFilter *filter)
 {
     // Remove any filter that has the same name
-    QVector<GeoSceneFilter *>::iterator it = d->m_filters.begin();
+    QList<GeoSceneFilter *>::iterator it = d->m_filters.begin();
     while (it != d->m_filters.end()) {
         GeoSceneFilter *currentFilter = *it;
         if (currentFilter->name() == filter->name()) {
@@ -177,8 +177,8 @@ GeoSceneFilter *GeoSceneMap::filter(const QString &name)
 {
     GeoSceneFilter *filter = nullptr;
 
-    QVector<GeoSceneFilter *>::const_iterator it = d->m_filters.constBegin();
-    QVector<GeoSceneFilter *>::const_iterator end = d->m_filters.constEnd();
+    QList<GeoSceneFilter *>::const_iterator it = d->m_filters.constBegin();
+    QList<GeoSceneFilter *>::const_iterator end = d->m_filters.constEnd();
     for (; it != end; ++it) {
         if ((*it)->name() == name) {
             filter = *it;
@@ -194,15 +194,15 @@ GeoSceneFilter *GeoSceneMap::filter(const QString &name)
     return filter;
 }
 
-QVector<GeoSceneFilter *> GeoSceneMap::filters() const
+QList<GeoSceneFilter *> GeoSceneMap::filters() const
 {
     return d->m_filters;
 }
 
 bool GeoSceneMap::hasTextureLayers() const
 {
-    QVector<GeoSceneLayer *>::const_iterator it = d->m_layers.constBegin();
-    QVector<GeoSceneLayer *>::const_iterator end = d->m_layers.constEnd();
+    QList<GeoSceneLayer *>::const_iterator it = d->m_layers.constBegin();
+    QList<GeoSceneLayer *>::const_iterator end = d->m_layers.constEnd();
     for (; it != end; ++it) {
         if (((*it)->backend() == QLatin1StringView(dgml::dgmlValue_texture) || (*it)->backend() == QLatin1StringView(dgml::dgmlValue_vectortile))
             && (*it)->datasets().count() > 0)
@@ -214,8 +214,8 @@ bool GeoSceneMap::hasTextureLayers() const
 
 bool GeoSceneMap::hasVectorLayers() const
 {
-    QVector<GeoSceneLayer *>::const_iterator it = d->m_layers.constBegin();
-    QVector<GeoSceneLayer *>::const_iterator end = d->m_layers.constEnd();
+    QList<GeoSceneLayer *>::const_iterator it = d->m_layers.constBegin();
+    QList<GeoSceneLayer *>::const_iterator end = d->m_layers.constEnd();
     for (; it != end; ++it) {
         if (((*it)->backend() == QLatin1StringView(dgml::dgmlValue_vectortile) || (*it)->backend() == QLatin1StringView(dgml::dgmlValue_vector))
             && (*it)->datasets().count() > 0)

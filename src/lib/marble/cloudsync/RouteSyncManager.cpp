@@ -43,7 +43,7 @@ public:
 
     QDir m_cacheDir;
     OwncloudSyncBackend m_owncloudBackend;
-    QVector<RouteItem> m_routeList;
+    QList<RouteItem> m_routeList;
 };
 
 RouteSyncManager::Private::Private(CloudSyncManager *cloudSyncManager)
@@ -65,7 +65,7 @@ RouteSyncManager::RouteSyncManager(CloudSyncManager *cloudSyncManager)
     : d(new Private(cloudSyncManager))
 {
     connect(&d->m_owncloudBackend, SIGNAL(routeUploadProgress(qint64, qint64)), this, SLOT(updateUploadProgressbar(qint64, qint64)));
-    connect(&d->m_owncloudBackend, SIGNAL(routeListDownloaded(QVector<RouteItem>)), this, SLOT(setRouteModelItems(QVector<RouteItem>)));
+    connect(&d->m_owncloudBackend, SIGNAL(routeListDownloaded(QList<RouteItem>)), this, SLOT(setRouteModelItems(QList<RouteItem>)));
     connect(&d->m_owncloudBackend, SIGNAL(routeListDownloadProgress(qint64, qint64)), this, SIGNAL(routeListDownloadProgress(qint64, qint64)));
     connect(&d->m_owncloudBackend, SIGNAL(routeDownloadProgress(qint64, qint64)), d->m_model, SLOT(updateProgress(qint64, qint64)));
     connect(&d->m_owncloudBackend, SIGNAL(routeDownloaded()), this, SLOT(prepareRouteList()));
@@ -129,9 +129,9 @@ void RouteSyncManager::uploadRoute()
     }
 }
 
-QVector<RouteItem> RouteSyncManager::cachedRouteList() const
+QList<RouteItem> RouteSyncManager::cachedRouteList() const
 {
-    QVector<RouteItem> routeList;
+    QList<RouteItem> routeList;
     QStringList cachedRoutes = d->m_cacheDir.entryList(QStringList() << "*.kml", QDir::Files);
     for (const QString &routeFilename : std::as_const(cachedRoutes)) {
         QFile file(d->m_cacheDir.absolutePath() + QLatin1Char('/') + routeFilename);
@@ -194,7 +194,7 @@ void RouteSyncManager::prepareRouteList()
 {
     d->m_routeList.clear();
 
-    QVector<RouteItem> cachedRoutes = cachedRouteList();
+    QList<RouteItem> cachedRoutes = cachedRouteList();
     for (const RouteItem &item : std::as_const(cachedRoutes)) {
         d->m_routeList.append(item);
     }
@@ -241,7 +241,7 @@ void RouteSyncManager::updateUploadProgressbar(qint64 sent, qint64 total)
     }
 }
 
-void RouteSyncManager::setRouteModelItems(const QVector<RouteItem> &routeList)
+void RouteSyncManager::setRouteModelItems(const QList<RouteItem> &routeList)
 {
     if (d->m_routeList.count() > 0) {
         QStringList cloudRoutes;

@@ -200,7 +200,7 @@ void TileCreator::run()
 
     mDebug() << "Installing tiles to: " << d->m_targetDir;
 
-    QVector<QRgb> grayScalePalette;
+    QList<QRgb> grayScalePalette;
     for (int cnt = 0; cnt <= 255; ++cnt) {
         grayScalePalette.insert(cnt, qRgb(cnt, cnt, cnt));
     }

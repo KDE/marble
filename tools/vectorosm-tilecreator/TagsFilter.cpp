@@ -56,12 +56,12 @@ TagsFilter::~TagsFilter()
     qDeleteAll(m_rejectedObjects);
 }
 
-QVector<GeoDataFeature *>::const_iterator TagsFilter::rejectedObjectsBegin() const
+QList<GeoDataFeature *>::const_iterator TagsFilter::rejectedObjectsBegin() const
 {
     return m_rejectedObjects.begin();
 }
 
-QVector<GeoDataFeature *>::const_iterator TagsFilter::rejectedObjectsEnd() const
+QList<GeoDataFeature *>::const_iterator TagsFilter::rejectedObjectsEnd() const
 {
     return m_rejectedObjects.end();
 }

@@ -17,7 +17,7 @@
 #define ENABLEGUI
 
 // Set up Color Table Per B-V Color indices from some Reference Stars
-QVector<double> colorTable(0);
+QList<double> colorTable(0);
 
 void exportToDat()
 {

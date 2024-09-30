@@ -608,15 +608,15 @@ void TestGeoDataCoordinates::testFromStringDMS_data()
     QTest::addColumn<qreal>("lon");
     QTest::addColumn<qreal>("lat");
 
-    const QVector<SignType> signTypes = QVector<SignType>() << NoSign << PositiveSign << NegativeSign;
-    const QVector<SphereType> sphereTypes = QVector<SphereType>() << PosSphere << NegSphere;
-    const QVector<UnitsType> unitsTypes = QVector<UnitsType>() << NoUnits << WithUnits;
-    const QVector<SpacesType> spacesTypes = QVector<SpacesType>() << NoSpaces << WithSpaces;
-    const QVector<LocaleType> localeTypes = QVector<LocaleType>() << CLocale << SystemLocale;
+    const QList<SignType> signTypes = QList<SignType>() << NoSign << PositiveSign << NegativeSign;
+    const QList<SphereType> sphereTypes = QList<SphereType>() << PosSphere << NegSphere;
+    const QList<UnitsType> unitsTypes = QList<UnitsType>() << NoUnits << WithUnits;
+    const QList<SpacesType> spacesTypes = QList<SpacesType>() << NoSpaces << WithSpaces;
+    const QList<LocaleType> localeTypes = QList<LocaleType>() << CLocale << SystemLocale;
 
-    const QVector<uint> degreeSamples = QVector<uint>() << 0 << 140 << 180;
-    const QVector<uint> minutesSamples = QVector<uint>() << 0 << 23 << 59;
-    const QVector<qreal> secondsSamples = QVector<qreal>() << 0.0 << 3.14159 << 59.9999999;
+    const QList<uint> degreeSamples = QList<uint>() << 0 << 140 << 180;
+    const QList<uint> minutesSamples = QList<uint>() << 0 << 23 << 59;
+    const QList<qreal> secondsSamples = QList<qreal>() << 0.0 << 3.14159 << 59.9999999;
 
     for (const UnitsType unitsType : unitsTypes) {
         for (const SpacesType spacesType : spacesTypes) {
@@ -740,14 +740,14 @@ void TestGeoDataCoordinates::testFromStringDM_data()
     QTest::addColumn<qreal>("lon");
     QTest::addColumn<qreal>("lat");
 
-    const QVector<SignType> signTypes = QVector<SignType>() << NoSign << PositiveSign << NegativeSign;
-    const QVector<SphereType> sphereTypes = QVector<SphereType>() << PosSphere << NegSphere;
-    const QVector<UnitsType> unitsTypes = QVector<UnitsType>() << NoUnits << WithUnits;
-    const QVector<SpacesType> spacesTypes = QVector<SpacesType>() << NoSpaces << WithSpaces;
-    const QVector<LocaleType> localeTypes = QVector<LocaleType>() << CLocale << SystemLocale;
+    const QList<SignType> signTypes = QList<SignType>() << NoSign << PositiveSign << NegativeSign;
+    const QList<SphereType> sphereTypes = QList<SphereType>() << PosSphere << NegSphere;
+    const QList<UnitsType> unitsTypes = QList<UnitsType>() << NoUnits << WithUnits;
+    const QList<SpacesType> spacesTypes = QList<SpacesType>() << NoSpaces << WithSpaces;
+    const QList<LocaleType> localeTypes = QList<LocaleType>() << CLocale << SystemLocale;
 
-    const QVector<uint> degreeSamples = QVector<uint>() << 0 << 140 << 180;
-    const QVector<qreal> minutesSamples = QVector<qreal>() << 0.0 << 3.14159 << 59.9999999;
+    const QList<uint> degreeSamples = QList<uint>() << 0 << 140 << 180;
+    const QList<qreal> minutesSamples = QList<qreal>() << 0.0 << 3.14159 << 59.9999999;
 
     for (const UnitsType unitsType : unitsTypes) {
         for (const SpacesType spacesType : spacesTypes) {
@@ -855,13 +855,13 @@ void TestGeoDataCoordinates::testFromStringD_data()
     QTest::addColumn<qreal>("lon");
     QTest::addColumn<qreal>("lat");
 
-    const QVector<SignType> signTypes = QVector<SignType>() << NoSign << PositiveSign << NegativeSign;
-    const QVector<SphereType> sphereTypes = QVector<SphereType>() << PosSphere << NegSphere;
-    const QVector<UnitsType> unitsTypes = QVector<UnitsType>() << NoUnits << WithUnits;
-    const QVector<SpacesType> spacesTypes = QVector<SpacesType>() << NoSpaces << WithSpaces;
-    const QVector<LocaleType> localeTypes = QVector<LocaleType>() << CLocale << SystemLocale;
+    const QList<SignType> signTypes = QList<SignType>() << NoSign << PositiveSign << NegativeSign;
+    const QList<SphereType> sphereTypes = QList<SphereType>() << PosSphere << NegSphere;
+    const QList<UnitsType> unitsTypes = QList<UnitsType>() << NoUnits << WithUnits;
+    const QList<SpacesType> spacesTypes = QList<SpacesType>() << NoSpaces << WithSpaces;
+    const QList<LocaleType> localeTypes = QList<LocaleType>() << CLocale << SystemLocale;
 
-    const QVector<qreal> degreeSamples = QVector<qreal>() << qreal(0.0) << qreal(3.14159) << qreal(180.0);
+    const QList<qreal> degreeSamples = QList<qreal>() << qreal(0.0) << qreal(3.14159) << qreal(180.0);
 
     for (const UnitsType unitsType : unitsTypes) {
         for (const SpacesType spacesType : spacesTypes) {
@@ -1047,7 +1047,7 @@ public:
              const char *_south,
              const char *_east,
              const char *_west,
-             const QVector<Sample> &_samples)
+             const QList<Sample> &_samples)
         : name(QString::fromUtf8(_name))
         , degree(QString::fromUtf8(_degree))
         , minutes(QString::fromUtf8(_minutes))
@@ -1067,7 +1067,7 @@ public:
     QString south;
     QString east;
     QString west;
-    QVector<Sample> samples;
+    QList<Sample> samples;
 };
 
 void TestGeoDataCoordinates::testFromLocaleString_data()
@@ -1084,7 +1084,7 @@ void TestGeoDataCoordinates::testFromLocaleString_data()
     QTest::addColumn<qreal>("lon");
     QTest::addColumn<qreal>("lat");
 
-    const QVector<Language> languages = QVector<Language>()
+    const QList<Language> languages = QList<Language>()
         << Language("English",
                     "*", // degree
                     "*", // minutes
@@ -1093,8 +1093,8 @@ void TestGeoDataCoordinates::testFromLocaleString_data()
                     "*", // south
                     "*", // east
                     "*", // west
-                    QVector<Sample>() << Sample("London", "N051 30.150′ W000 07.234′", -0.12056666666666666921, 51.50249999999999772626)
-                                      << Sample("Ålgård", "N58.764828 E5.855483", 5.85548300000000043752, 58.76482800000000139562))
+                    QList<Sample>() << Sample("London", "N051 30.150′ W000 07.234′", -0.12056666666666666921, 51.50249999999999772626)
+                                    << Sample("Ålgård", "N58.764828 E5.855483", 5.85548300000000043752, 58.76482800000000139562))
 
         << Language("Japanese",
                     "度", // degree
@@ -1104,8 +1104,8 @@ void TestGeoDataCoordinates::testFromLocaleString_data()
                     "南緯", // south
                     "東経", // east
                     "西経", // west
-                    QVector<Sample>() << Sample("London", "北緯51度30分28秒 西経0度07分41秒", -0.12805555555555556135, 51.50777777777777544088)
-                                      << Sample("Sydney", "南緯33度52分06秒 東経151度12分31秒", 151.20861111111111085847, -33.86833333333333229120))
+                    QList<Sample>() << Sample("London", "北緯51度30分28秒 西経0度07分41秒", -0.12805555555555556135, 51.50777777777777544088)
+                                    << Sample("Sydney", "南緯33度52分06秒 東経151度12分31秒", 151.20861111111111085847, -33.86833333333333229120))
         << Language("Korean",
                     "도", // degree
                     "분", // minutes
@@ -1114,8 +1114,8 @@ void TestGeoDataCoordinates::testFromLocaleString_data()
                     "남위", // south
                     "동경", // east
                     "서경", // west
-                    QVector<Sample>() << Sample("London", "북위 51도 30분 26초, 서경 0도 7분 39초", -0.12750000000000000222, 51.50722222222222512755)
-                                      << Sample("Sydney", "남위 33도 31분 56초, 동경 151도 12분 40초", 151.21111111111110858474, -33.53222222222222370647))
+                    QList<Sample>() << Sample("London", "북위 51도 30분 26초, 서경 0도 7분 39초", -0.12750000000000000222, 51.50722222222222512755)
+                                    << Sample("Sydney", "남위 33도 31분 56초, 동경 151도 12분 40초", 151.21111111111110858474, -33.53222222222222370647))
 
 // TODO: allow test control for parsing float in given locale
 #if 0
@@ -1128,7 +1128,7 @@ void TestGeoDataCoordinates::testFromLocaleString_data()
             "S", // south
             "L|E", // east
             "O|W", // west
-            QVector<Sample>()
+            QList<Sample>()
                 << Sample(
                     "Campamento",
                     "36º10,67´N 5º24,29´W",
@@ -1143,7 +1143,7 @@ void TestGeoDataCoordinates::testFromLocaleString_data()
                     "S", // south
                     "O", // east
                     "W", // west
-                    QVector<Sample>() << Sample("London", "51° 31′ N, 0° 7′ W", -0.11666666666666666852, 51.51666666666666571928))
+                    QList<Sample>() << Sample("London", "51° 31′ N, 0° 7′ W", -0.11666666666666666852, 51.51666666666666571928))
 
         << Language("Greek",
                     "", // degree
@@ -1153,7 +1153,7 @@ void TestGeoDataCoordinates::testFromLocaleString_data()
                     "Ν", // south
                     "Α", // east
                     "Δ", // west
-                    QVector<Sample>() << Sample("Χαλκίδα", "38° 28′ Β 23° 36′ Α", 23.6, 38.46666666666666856))
+                    QList<Sample>() << Sample("Χαλκίδα", "38° 28′ Β 23° 36′ Α", 23.6, 38.46666666666666856))
 
         << Language("Dutch",
                     "", // degree
@@ -1163,7 +1163,7 @@ void TestGeoDataCoordinates::testFromLocaleString_data()
                     "Z|ZB", // south
                     "O|OL", // east
                     "W|WL", // west
-                    QVector<Sample>() << Sample("Amersfoort", "N 52° 8′ 32.14″ , E 5° 24′ 56.09″", 5.41558055555555561966, 52.14226111111111094942)
+                    QList<Sample>() << Sample("Amersfoort", "N 52° 8′ 32.14″ , E 5° 24′ 56.09″", 5.41558055555555561966, 52.14226111111111094942)
 // TODO: allow test control for parsing float in given locale
 #if 0
                 << Sample(
@@ -1189,7 +1189,7 @@ void TestGeoDataCoordinates::testFromLocaleString_data()
                     "Płd.|Płd", // south
                     "Wschod.|Wschod|Wsch.|Wsch|Ws.|Ws", // east
                     "Zach.|Zach|Z", // west
-                    QVector<Sample>() << Sample("Warsaw", "52°13′56″Pn. 21°00′30″Ws.", 21.00833333333333285964, 52.23222222222221944321))
+                    QList<Sample>() << Sample("Warsaw", "52°13′56″Pn. 21°00′30″Ws.", 21.00833333333333285964, 52.23222222222221944321))
 
 // TODO: allow test control for parsing float in given locale
 #if 0
@@ -1202,7 +1202,7 @@ void TestGeoDataCoordinates::testFromLocaleString_data()
             "S", // south
             "Or", // east
             "Ok", // west
-            QVector<Sample>()
+            QList<Sample>()
                 << Sample(
                     "London",
                     "52° 8′ 32,14″ N; 5° 24′ 56,09″ Or",
@@ -1217,8 +1217,8 @@ void TestGeoDataCoordinates::testFromLocaleString_data()
                     "S", // south
                     "Ø", // east
                     "V", // west
-                    QVector<Sample>() << Sample("London", "51° 30′ 25” N 0° 7′ 39” V", -0.12750000000000000222, 51.50694444444444286546)
-                                      << Sample("Ålgård", "58° 45′ 53.38″ N 5° 51′ 19.74″ Ø", 5.85548333333333292927, 58.76482777777777499750))
+                    QList<Sample>() << Sample("London", "51° 30′ 25” N 0° 7′ 39” V", -0.12750000000000000222, 51.50694444444444286546)
+                                    << Sample("Ålgård", "58° 45′ 53.38″ N 5° 51′ 19.74″ Ø", 5.85548333333333292927, 58.76482777777777499750))
 
         << Language("Swedish",
                     "", // degree
@@ -1228,8 +1228,8 @@ void TestGeoDataCoordinates::testFromLocaleString_data()
                     "S", // south
                     "O", // east
                     "V", // west
-                    QVector<Sample>() << Sample("London", "51°30′29″N 0°7′29″V", -0.12472222222222222043, 51.50805555555555770297)
-                                      << Sample("Sydney", "33°31′56″S 151°12′40″O", 151.21111111111110858474, -33.53222222222222370647))
+                    QList<Sample>() << Sample("London", "51°30′29″N 0°7′29″V", -0.12472222222222222043, 51.50805555555555770297)
+                                    << Sample("Sydney", "33°31′56″S 151°12′40″O", 151.21111111111110858474, -33.53222222222222370647))
 
         << Language("Icelandic",
                     "", // degree
@@ -1240,7 +1240,7 @@ void TestGeoDataCoordinates::testFromLocaleString_data()
                     "A", // east
                     "V", // west
                     // TODO:     "breidd 51°30'26\" N, lengd 0°7'39\" V" // London
-                    QVector<Sample>() << Sample("Sydney", "33°31'56\" S, 151°12'40\" A", 151.21111111111110858474, -33.53222222222222370647))
+                    QList<Sample>() << Sample("Sydney", "33°31'56\" S, 151°12'40\" A", 151.21111111111110858474, -33.53222222222222370647))
 
         << Language("Turkish",
                     "", // degree
@@ -1250,7 +1250,7 @@ void TestGeoDataCoordinates::testFromLocaleString_data()
                     "G", // south
                     "D", // east
                     "B", // west
-                    QVector<Sample>() << Sample("London", "51° 30′ 28″ K, 0° 7′ 41″ B", -0.12805555555555556135, 51.50777777777777544088))
+                    QList<Sample>() << Sample("London", "51° 30′ 28″ K, 0° 7′ 41″ B", -0.12805555555555556135, 51.50777777777777544088))
 
         << Language("Spanish", // (incl. Latin America)
                     "", // degree
@@ -1260,9 +1260,9 @@ void TestGeoDataCoordinates::testFromLocaleString_data()
                     "S", // south
                     "E", // east
                     "O|W", // west
-                    QVector<Sample>() << Sample("London", "51°30′25″N 00°07′39″O", -0.12750000000000000222, 51.50694444444444286546)
-                                      << Sample("Else", "52° 8′ 32.14″ N, 5° 24′ 56.09″ W", -5.41558055555555561966, 52.14226111111111094942)
-                                      << Sample("Bogotá", "4°35’53″N 74°4’33″O", -74.07583333333333541759, 4.59805555555555667269))
+                    QList<Sample>() << Sample("London", "51°30′25″N 00°07′39″O", -0.12750000000000000222, 51.50694444444444286546)
+                                    << Sample("Else", "52° 8′ 32.14″ N, 5° 24′ 56.09″ W", -5.41558055555555561966, 52.14226111111111094942)
+                                    << Sample("Bogotá", "4°35’53″N 74°4’33″O", -74.07583333333333541759, 4.59805555555555667269))
 
         << Language("French",
                     "", // degree
@@ -1272,7 +1272,7 @@ void TestGeoDataCoordinates::testFromLocaleString_data()
                     "S", // south
                     "E", // east
                     "O", // west
-                    QVector<Sample>() << Sample("London", "51° 30′ 18″ N 0° 04′ 43″ O", -0.07861111111111110383, 51.50500000000000255795))
+                    QList<Sample>() << Sample("London", "51° 30′ 18″ N 0° 04′ 43″ O", -0.07861111111111110383, 51.50500000000000255795))
 
         << Language("Portuguese", // incl. Brazilian Portuguese
                     "", // degree
@@ -1282,7 +1282,7 @@ void TestGeoDataCoordinates::testFromLocaleString_data()
                     "S", // south
                     "E|L", // east
                     "O", // west
-                    QVector<Sample>() << Sample("London", "52° 8′ 32.14″ N, 5° 24′ 56.09″ E", 5.41558055555555561966, 52.14226111111111094942))
+                    QList<Sample>() << Sample("London", "52° 8′ 32.14″ N, 5° 24′ 56.09″ E", 5.41558055555555561966, 52.14226111111111094942))
 
         << Language("Arabic",
                     "", // degree
@@ -1292,7 +1292,7 @@ void TestGeoDataCoordinates::testFromLocaleString_data()
                     "جنوب", // south
                     "شرق", // east
                     "غرب", // west
-                    QVector<Sample>() << Sample("Warsaw", "52°13′56″ شمال 21°00′30″ شرق", 21.00833333333333285964, 52.23222222222221944321))
+                    QList<Sample>() << Sample("Warsaw", "52°13′56″ شمال 21°00′30″ شرق", 21.00833333333333285964, 52.23222222222221944321))
 
         << Language("Russian",
                     "", //"град", "градусов" // degree
@@ -1302,7 +1302,7 @@ void TestGeoDataCoordinates::testFromLocaleString_data()
                     "ю. ш.", // south
                     "в. д.", // east
                     "з. д.", // west
-                    QVector<Sample>() << Sample("London", "51°30′26″ с. ш. 0°07′39″ з. д.", -0.12750000000000000222, 51.50722222222222512755))
+                    QList<Sample>() << Sample("London", "51°30′26″ с. ш. 0°07′39″ з. д.", -0.12750000000000000222, 51.50722222222222512755))
 
         << Language("Ukrainian",
                     "", // degree
@@ -1312,9 +1312,9 @@ void TestGeoDataCoordinates::testFromLocaleString_data()
                     "пд. ш.", // south
                     "сх. д.", // east
                     "зх. д.", // west
-                    QVector<Sample>() << Sample("London", "51°30' пн. ш. 0°07' сх. д.", 0.11666666666666666852, 51.50000000000000000000)
-                                      << Sample("Sydney", "33°52'10'' пд. ш. 151°12'30'' сх. д.", 151.20833333333334280724, -33.86944444444444712872)
-                                      << Sample("Rio de Janeiro", "22°54'30'' пд. ш. 43°11'47'' зх. д.", -43.19638888888889027839, -22.90833333333333499127))
+                    QList<Sample>() << Sample("London", "51°30' пн. ш. 0°07' сх. д.", 0.11666666666666666852, 51.50000000000000000000)
+                                    << Sample("Sydney", "33°52'10'' пд. ш. 151°12'30'' сх. д.", 151.20833333333334280724, -33.86944444444444712872)
+                                    << Sample("Rio de Janeiro", "22°54'30'' пд. ш. 43°11'47'' зх. д.", -43.19638888888889027839, -22.90833333333333499127))
 
         << Language("Bulgarian",
                     "", // degree
@@ -1324,7 +1324,7 @@ void TestGeoDataCoordinates::testFromLocaleString_data()
                     "ю. ш.", // south
                     "и. д.", // east
                     "и. д.", // west
-                    QVector<Sample>() << Sample("London", "51°30′26″ с. ш. 0°07′39″ и. д.", 0.12750000000000000222, 51.50722222222222512755))
+                    QList<Sample>() << Sample("London", "51°30′26″ с. ш. 0°07′39″ и. д.", 0.12750000000000000222, 51.50722222222222512755))
 
         << Language("Czech",
                     "", // degree
@@ -1334,8 +1334,8 @@ void TestGeoDataCoordinates::testFromLocaleString_data()
                     "j. š.", // south
                     "z. d.", // east
                     "v. d.", // west
-                    QVector<Sample>() << Sample("London", "51°30′42″ s. š., 0°02′56″ z. d.", 0.04888888888888889145, 51.51166666666666316132)
-                                      << Sample("Sydney", "33° 52′ j. š., 151° 13′ v. d.", -151.21666666666669698316, -33.86666666666666714036))
+                    QList<Sample>() << Sample("London", "51°30′42″ s. š., 0°02′56″ z. d.", 0.04888888888888889145, 51.51166666666666316132)
+                                    << Sample("Sydney", "33° 52′ j. š., 151° 13′ v. d.", -151.21666666666669698316, -33.86666666666666714036))
 
         << Language("Hindi",
                     "", // degree
@@ -1345,7 +1345,7 @@ void TestGeoDataCoordinates::testFromLocaleString_data()
                     "द", // south
                     "पू", // east
                     "प", // west
-                    QVector<Sample>() << Sample("London", "51°30′25″उ 00°07′39″पू", 0.12750000000000000222, 51.50694444444444286546))
+                    QList<Sample>() << Sample("London", "51°30′25″उ 00°07′39″पू", 0.12750000000000000222, 51.50694444444444286546))
 
         << Language("Tamil",
                     "", // degree
@@ -1355,7 +1355,7 @@ void TestGeoDataCoordinates::testFromLocaleString_data()
                     "தெ", // south
                     "கி", // east
                     "மே", // west
-                    QVector<Sample>() << Sample("London", "51°30′25″ வ 00°07′39″ கி", 0.12750000000000000222, 51.50694444444444286546));
+                    QList<Sample>() << Sample("London", "51°30′25″ வ 00°07′39″ கி", 0.12750000000000000222, 51.50694444444444286546));
 
     for (const Language &language : languages) {
         for (const Sample &sample : language.samples) {

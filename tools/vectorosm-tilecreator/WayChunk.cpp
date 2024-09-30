@@ -62,8 +62,8 @@ WayChunk::PlacemarkPtr WayChunk::merge()
 
     PlacemarkPtr placemark = PlacemarkPtr(new GeoDataPlacemark(*(m_wayList.first())));
     GeoDataLineString *line = static_cast<GeoDataLineString *>(placemark->geometry());
-    QVector<PlacemarkPtr>::iterator itr = m_wayList.begin();
-    QVector<PlacemarkPtr>::iterator itrEnd = m_wayList.end();
+    QList<PlacemarkPtr>::iterator itr = m_wayList.begin();
+    QList<PlacemarkPtr>::iterator itrEnd = m_wayList.end();
     ++itr;
     for (; itr != itrEnd; ++itr) {
         GeoDataLineString *currentLine = static_cast<GeoDataLineString *>((*itr)->geometry());
@@ -76,7 +76,7 @@ WayChunk::PlacemarkPtr WayChunk::merge()
 void WayChunk::reverse()
 {
     std::reverse(m_wayList.begin(), m_wayList.end());
-    QVector<PlacemarkPtr>::iterator itr = m_wayList.begin();
+    QList<PlacemarkPtr>::iterator itr = m_wayList.begin();
     for (; itr != m_wayList.end(); ++itr) {
         GeoDataLineString *line = static_cast<GeoDataLineString *>((*itr)->geometry());
         line->reverse();

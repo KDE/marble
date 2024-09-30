@@ -53,7 +53,7 @@ TourCaptureDialog::~TourCaptureDialog()
 
 void TourCaptureDialog::loadDestinationFile()
 {
-    const QVector<MovieFormat> formats = m_recorder->availableFormats();
+    const QList<MovieFormat> formats = m_recorder->availableFormats();
     if (formats.isEmpty()) {
         QMessageBox::warning(this, tr("Codecs are unavailable"), tr("Supported codecs are not found. (ffmpeg/avconv needs to be installed and in PATH.)"));
         return;

@@ -65,7 +65,7 @@ static inline uint colorMix25(uint c1, uint c2)
     return colorMix50(colorMix50(c1, c2), c2); // 25% c1
 }
 
-StackedTile::StackedTile(const TileId &id, const QImage &resultImage, QVector<QSharedPointer<TextureTile>> const &tiles)
+StackedTile::StackedTile(const TileId &id, const QImage &resultImage, QList<QSharedPointer<TextureTile>> const &tiles)
     : Tile(id)
     , m_resultImage(resultImage)
     , m_depth(resultImage.depth())
@@ -263,12 +263,12 @@ uint StackedTile::pixelF(qreal x, qreal y, const QRgb &topLeftValue) const
 
 #endif
 
-int StackedTile::calcByteCount(const QImage &resultImage, const QVector<QSharedPointer<TextureTile>> &tiles)
+int StackedTile::calcByteCount(const QImage &resultImage, const QList<QSharedPointer<TextureTile>> &tiles)
 {
     int byteCount = resultImage.sizeInBytes();
 
-    QVector<QSharedPointer<TextureTile>>::const_iterator pos = tiles.constBegin();
-    QVector<QSharedPointer<TextureTile>>::const_iterator const end = tiles.constEnd();
+    QList<QSharedPointer<TextureTile>>::const_iterator pos = tiles.constBegin();
+    QList<QSharedPointer<TextureTile>>::const_iterator const end = tiles.constEnd();
     for (; pos != end; ++pos)
         byteCount += (*pos)->byteCount();
 
@@ -305,7 +305,7 @@ int StackedTile::byteCount() const
     return m_byteCount;
 }
 
-QVector<QSharedPointer<TextureTile>> StackedTile::tiles() const
+QList<QSharedPointer<TextureTile>> StackedTile::tiles() const
 {
     return m_tiles;
 }

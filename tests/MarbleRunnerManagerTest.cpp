@@ -81,7 +81,7 @@ void MarbleRunnerManagerTest::initTestCase()
     m_time = 30000;
     m_name = "Berlin";
 
-    qRegisterMetaType<QVector<GeoDataCoordinates>>("QVector<GeoDataCoordinates>");
+    qRegisterMetaType<QList<GeoDataCoordinates>>("QList<GeoDataCoordinates>");
 
     m_coords.setLatitude(52.50160, GeoDataCoordinates::Degree);
     m_coords.setLongitude(13.40233, GeoDataCoordinates::Degree);
@@ -104,14 +104,14 @@ void MarbleRunnerManagerTest::testSyncPlacemarks()
     SearchRunnerManager m_runnerManager(&model, this);
 
     QSignalSpy finishSpy(&m_runnerManager, SIGNAL(placemarkSearchFinished()));
-    QSignalSpy resultSpy(&m_runnerManager, SIGNAL(searchResultChanged(QVector<GeoDataPlacemark *>)));
+    QSignalSpy resultSpy(&m_runnerManager, SIGNAL(searchResultChanged(QList<GeoDataPlacemark *>)));
 
     QCOMPARE(finishSpy.count(), 0);
     QCOMPARE(resultSpy.count(), 0);
 
     QElapsedTimer timer;
     timer.start();
-    QVector<GeoDataPlacemark *> placemarks = m_runnerManager.searchPlacemarks(m_name);
+    QList<GeoDataPlacemark *> placemarks = m_runnerManager.searchPlacemarks(m_name);
 
     QVERIFY(timer.elapsed() < m_time);
     QCOMPARE(resultSpy.count(), 1);
@@ -145,7 +145,7 @@ void MarbleRunnerManagerTest::testAsyncPlacemarks()
     SearchRunnerManager m_runnerManager(&model, this);
 
     QSignalSpy finishSpy(&m_runnerManager, SIGNAL(searchFinished(QString)));
-    QSignalSpy resultSpy(&m_runnerManager, SIGNAL(searchResultChanged(QVector<GeoDataPlacemark *>)));
+    QSignalSpy resultSpy(&m_runnerManager, SIGNAL(searchResultChanged(QList<GeoDataPlacemark *>)));
 
     QEventLoop loop;
     connect(&m_runnerManager, SIGNAL(searchFinished(QString)), &loop, SLOT(quit()), Qt::QueuedConnection);
@@ -235,7 +235,7 @@ void MarbleRunnerManagerTest::testSyncRouting()
 
     QElapsedTimer timer;
     timer.start();
-    QVector<GeoDataDocument *> routes = m_runnerManager.searchRoute(&m_request);
+    QList<GeoDataDocument *> routes = m_runnerManager.searchRoute(&m_request);
 
     QVERIFY(timer.elapsed() < m_time);
     QVERIFY(resultSpy.count() > 0);
@@ -245,9 +245,9 @@ void MarbleRunnerManagerTest::testSyncRouting()
 
 void MarbleRunnerManagerTest::testAsyncRouting_data()
 {
-    QTest::addColumn<QVector<GeoDataCoordinates>>("coordinatesList");
+    QTest::addColumn<QList<GeoDataCoordinates>>("coordinatesList");
 
-    addRow() << (QVector<GeoDataCoordinates>() << m_coords << m_coords2);
+    addRow() << (QList<GeoDataCoordinates>() << m_coords << m_coords2);
 }
 
 void MarbleRunnerManagerTest::testAsyncRouting()
@@ -261,7 +261,7 @@ void MarbleRunnerManagerTest::testAsyncRouting()
     QEventLoop loop;
     connect(&m_runnerManager, SIGNAL(routingFinished()), &loop, SLOT(quit()), Qt::QueuedConnection);
 
-    QFETCH(QVector<GeoDataCoordinates>, coordinatesList);
+    QFETCH(QList<GeoDataCoordinates>, coordinatesList);
     RouteRequest request;
     for (const GeoDataCoordinates &coordinates : std::as_const(coordinatesList)) {
         request.append(coordinates);

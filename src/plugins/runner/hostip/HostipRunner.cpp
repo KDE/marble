@@ -28,7 +28,7 @@ HostipRunner::~HostipRunner()
 
 void HostipRunner::slotNoResults()
 {
-    emit searchFinished(QVector<GeoDataPlacemark *>());
+    emit searchFinished(QList<GeoDataPlacemark *>());
 }
 
 void HostipRunner::search(const QString &searchTerm, const GeoDataLatLonBox &)
@@ -45,7 +45,7 @@ void HostipRunner::search(const QString &searchTerm, const GeoDataLatLonBox &)
         timer.setInterval(15000);
 
         connect(&timer, SIGNAL(timeout()), &eventLoop, SLOT(quit()));
-        connect(this, SIGNAL(searchFinished(QVector<GeoDataPlacemark *>)), &eventLoop, SLOT(quit()));
+        connect(this, SIGNAL(searchFinished(QList<GeoDataPlacemark *>)), &eventLoop, SLOT(quit()));
 
         // Lookup the IP address for a hostname, or the hostname if an IP address was given
         QHostInfo ::lookupHost(searchTerm, this, SLOT(slotLookupFinished(QHostInfo)));
@@ -90,7 +90,7 @@ void HostipRunner::slotRequestFinished(QNetworkReply *reply)
         }
     }
 
-    QVector<GeoDataPlacemark *> placemarks;
+    QList<GeoDataPlacemark *> placemarks;
 
     if (lon != 0.0 && lat != 0.0) {
         GeoDataPlacemark *placemark = new GeoDataPlacemark;

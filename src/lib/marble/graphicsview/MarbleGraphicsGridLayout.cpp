@@ -76,8 +76,8 @@ void MarbleGraphicsGridLayout::addItem(ScreenGraphicsItem *item, int row, int co
 void MarbleGraphicsGridLayout::updatePositions(MarbleGraphicsItem *parent)
 {
     // Initialize with 0.0
-    QVector<double> maxWidth(d->m_columns, 0.0);
-    QVector<double> maxHeight(d->m_rows, 0.0);
+    QList<double> maxWidth(d->m_columns, 0.0);
+    QList<double> maxHeight(d->m_rows, 0.0);
 
     // Determining the cell sizes
     for (int row = 0; row < d->m_rows; row++) {
@@ -99,10 +99,10 @@ void MarbleGraphicsGridLayout::updatePositions(MarbleGraphicsItem *parent)
         }
     }
 
-    QVector<double> startX(d->m_columns);
-    QVector<double> endX(d->m_columns);
-    QVector<double> startY(d->m_rows);
-    QVector<double> endY(d->m_rows);
+    QList<double> startX(d->m_columns);
+    QList<double> endX(d->m_columns);
+    QList<double> startY(d->m_rows);
+    QList<double> endY(d->m_rows);
     QRectF contentRect = parent->contentRect();
 
     for (int i = 0; i < d->m_columns; i++) {

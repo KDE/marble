@@ -47,8 +47,8 @@ public:
 
     bool m_interpolate;
 
-    QVector<QDateTime> m_when;
-    QVector<GeoDataCoordinates> m_coordinates;
+    QList<QDateTime> m_when;
+    QList<GeoDataCoordinates> m_coordinates;
 
     GeoDataExtendedData m_extendedData;
 };
@@ -141,13 +141,13 @@ QDateTime GeoDataTrack::lastWhen() const
     return d->m_when.last();
 }
 
-QVector<GeoDataCoordinates> GeoDataTrack::coordinatesList() const
+QList<GeoDataCoordinates> GeoDataTrack::coordinatesList() const
 {
     Q_D(const GeoDataTrack);
     return d->m_coordinates;
 }
 
-QVector<QDateTime> GeoDataTrack::whenList() const
+QList<QDateTime> GeoDataTrack::whenList() const
 {
     Q_D(const GeoDataTrack);
     return d->m_when;

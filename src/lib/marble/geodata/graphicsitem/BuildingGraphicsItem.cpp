@@ -77,8 +77,8 @@ static void normalizeWindingOrder(QPolygonF *polygon)
 }
 
 void BuildingGraphicsItem::updatePolygons(const ViewportParams &viewport,
-                                          QVector<QPolygonF *> &outerPolygons,
-                                          QVector<QPolygonF *> &innerPolygons,
+                                          QList<QPolygonF *> &outerPolygons,
+                                          QList<QPolygonF *> &innerPolygons,
                                           bool &hasInnerBoundaries) const
 {
     // Since subtracting one fully contained polygon from another results in a single
@@ -222,7 +222,7 @@ void BuildingGraphicsItem::paintRoof(GeoPainter *painter, const ViewportParams *
             QPen const currentPen = painter->pen();
 
             painter->setPen(Qt::NoPen);
-            QVector<QPolygonF *> fillPolygons = painter->createFillPolygons(m_cachedOuterRoofPolygons, m_cachedInnerRoofPolygons);
+            QList<QPolygonF *> fillPolygons = painter->createFillPolygons(m_cachedOuterRoofPolygons, m_cachedInnerRoofPolygons);
 
             for (const QPolygonF *fillPolygon : std::as_const(fillPolygons)) {
                 painter->drawPolygon(*fillPolygon);
@@ -250,7 +250,7 @@ void BuildingGraphicsItem::paintRoof(GeoPainter *painter, const ViewportParams *
             QPen const currentPen = painter->pen();
 
             painter->setPen(Qt::NoPen);
-            QVector<QPolygonF *> fillPolygons = painter->createFillPolygons(m_cachedOuterPolygons, m_cachedInnerPolygons);
+            QList<QPolygonF *> fillPolygons = painter->createFillPolygons(m_cachedOuterPolygons, m_cachedInnerPolygons);
 
             for (const QPolygonF *fillPolygon : std::as_const(fillPolygons)) {
                 painter->drawPolygon(*fillPolygon);
@@ -404,7 +404,7 @@ void BuildingGraphicsItem::paintFrame(GeoPainter *painter, const ViewportParams 
         }
     } else {
         // don't draw the building sides - just draw the base frame instead
-        QVector<QPolygonF *> fillPolygons = painter->createFillPolygons(m_cachedOuterPolygons, m_cachedInnerPolygons);
+        QList<QPolygonF *> fillPolygons = painter->createFillPolygons(m_cachedOuterPolygons, m_cachedInnerPolygons);
 
         for (QPolygonF *fillPolygon : std::as_const(fillPolygons)) {
             painter->drawPolygon(*fillPolygon);
@@ -415,16 +415,16 @@ void BuildingGraphicsItem::paintFrame(GeoPainter *painter, const ViewportParams 
 
 void BuildingGraphicsItem::screenPolygons(const ViewportParams &viewport,
                                           const GeoDataPolygon *polygon,
-                                          QVector<QPolygonF *> &innerPolygons,
-                                          QVector<QPolygonF *> &outerPolygons)
+                                          QList<QPolygonF *> &innerPolygons,
+                                          QList<QPolygonF *> &outerPolygons)
 {
     Q_ASSERT(polygon);
 
     viewport.screenCoordinates(polygon->outerBoundary(), outerPolygons);
 
-    QVector<GeoDataLinearRing> const &innerBoundaries = polygon->innerBoundaries();
+    QList<GeoDataLinearRing> const &innerBoundaries = polygon->innerBoundaries();
     for (const GeoDataLinearRing &innerBoundary : innerBoundaries) {
-        QVector<QPolygonF *> innerPolygonsPerBoundary;
+        QList<QPolygonF *> innerPolygonsPerBoundary;
         viewport.screenCoordinates(innerBoundary, innerPolygonsPerBoundary);
 
         innerPolygons.reserve(innerPolygons.size() + innerPolygonsPerBoundary.size());

@@ -760,7 +760,7 @@ void MarbleModelPrivate::assignFillColors(GeoDataDocument *doc, const GeoSceneGe
 
     const QPen pen = data.pen();
     const QBrush brush = data.brush();
-    const QVector<QColor> colors = data.colors();
+    const QList<QColor> colors = data.colors();
     GeoDataLineStyle lineStyle(pen.color());
     lineStyle.setPenStyle(pen.style());
     lineStyle.setWidth(pen.width());

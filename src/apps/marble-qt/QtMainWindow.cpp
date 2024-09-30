@@ -561,7 +561,7 @@ void MainWindow::createBookmarksListMenu(QMenu *bookmarksListMenu, const GeoData
 {
     // m_bookmarksListMenu->clear();
 
-    QVector<GeoDataPlacemark *> bookmarks = container->placemarkList();
+    QList<GeoDataPlacemark *> bookmarks = container->placemarkList();
 
     for (const GeoDataPlacemark *placemark : std::as_const(bookmarks)) {
         QAction *bookmarkAction = new QAction(placemark->name(), this);
@@ -598,7 +598,7 @@ void MainWindow::createBookmarkMenu()
 
 void MainWindow::createFolderList(QMenu *bookmarksListMenu, const GeoDataContainer *container)
 {
-    QVector<GeoDataFolder *> folders = container->folderList();
+    QList<GeoDataFolder *> folders = container->folderList();
 
     if (folders.size() == 1 && folders.first()->name() == tr("Default")) {
         createBookmarksListMenu(bookmarksListMenu, folders.first());
@@ -1497,7 +1497,7 @@ void MainWindow::showDownloadRegionDialog()
 void MainWindow::downloadRegion()
 {
     Q_ASSERT(m_downloadRegionDialog);
-    QVector<TileCoordsPyramid> const pyramid = m_downloadRegionDialog->region();
+    QList<TileCoordsPyramid> const pyramid = m_downloadRegionDialog->region();
     if (!pyramid.isEmpty()) {
         m_controlView->marbleWidget()->downloadRegion(pyramid);
     }
