@@ -16,7 +16,7 @@ using namespace Marble;
 
 static QString indexFileName(const QString &cacheDirectory)
 {
-    return cacheDirectory + QLatin1String("/cache_index.idx");
+    return cacheDirectory + QLatin1StringView("/cache_index.idx");
 }
 
 DiscCache::DiscCache(const QString &cacheDirectory)

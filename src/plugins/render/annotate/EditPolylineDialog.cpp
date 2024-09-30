@@ -192,7 +192,7 @@ void EditPolylineDialog::handleChangingStyle()
     GeoDataStyle::Ptr newStyle(new GeoDataStyle(*d->m_placemark->style()));
     newStyle->lineStyle().setColor(d->m_linesDialog->currentColor());
     newStyle->lineStyle().setWidth(d->m_linesWidth->value());
-    newStyle->setId(d->m_placemark->id() + QLatin1String("Style"));
+    newStyle->setId(d->m_placemark->id() + QLatin1StringView("Style"));
     d->m_placemark->setStyle(newStyle);
 
     updatePolyline();
@@ -207,7 +207,7 @@ void EditPolylineDialog::updatePolyline()
     // available, set it
     const OsmPlacemarkData osmData = d->m_osmTagEditorWidget->placemarkData();
     const GeoDataPlacemark::GeoDataVisualCategory category = StyleBuilder::determineVisualCategory(osmData);
-    if (d->m_placemark->styleUrl() == QLatin1String("#polyline") && category != GeoDataPlacemark::None) {
+    if (d->m_placemark->styleUrl() == QLatin1StringView("#polyline") && category != GeoDataPlacemark::None) {
         d->m_placemark->setStyle(GeoDataStyle::Ptr()); // first clear style so style gets set by setVisualCategory()
         d->m_placemark->setVisualCategory(category);
     }

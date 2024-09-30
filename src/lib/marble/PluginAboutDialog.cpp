@@ -74,7 +74,7 @@ void PluginAboutDialog::setAuthors(const QVector<PluginAuthor> &authors)
 {
     QString string;
     for (const PluginAuthor &author : authors) {
-        string += author.name + QLatin1String("\n    ") + author.email + QLatin1String("\n    ") + author.task + QLatin1String("\n\n");
+        string += author.name + QLatin1StringView("\n    ") + author.email + QLatin1StringView("\n    ") + author.task + QLatin1StringView("\n\n");
     }
 
     setAuthorsText(string);
@@ -106,7 +106,7 @@ void PluginAboutDialog::setLicense(PluginAboutDialog::LicenseKey license)
         filename = "lgpl2.txt";
     }
 
-    const QString path = MarbleDirs::path(QLatin1String("licenses/") + filename);
+    const QString path = MarbleDirs::path(QLatin1StringView("licenses/") + filename);
     QTextBrowser *browser = d->u_dialog.m_pMarbleLicenseBrowser;
     browser->setText(QString());
     if (!path.isEmpty()) {

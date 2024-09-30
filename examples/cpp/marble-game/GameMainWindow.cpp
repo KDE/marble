@@ -85,9 +85,9 @@ void Private::setupMarbleWidget()
 
     const auto plugins = m_marbleWidget->renderPlugins();
     for (RenderPlugin *renderPlugin : plugins) {
-        if (renderPlugin->nameId() == QLatin1String("stars") || renderPlugin->nameId() == QLatin1String("overviewmap")
-            || renderPlugin->nameId() == QLatin1String("compass") || renderPlugin->nameId() == QLatin1String("scalebar")
-            || renderPlugin->nameId() == QLatin1String("navigation")) {
+        if (renderPlugin->nameId() == QLatin1StringView("stars") || renderPlugin->nameId() == QLatin1StringView("overviewmap")
+            || renderPlugin->nameId() == QLatin1StringView("compass") || renderPlugin->nameId() == QLatin1StringView("scalebar")
+            || renderPlugin->nameId() == QLatin1StringView("navigation")) {
             renderPlugin->setVisible(false);
         }
     }
@@ -183,7 +183,7 @@ void MainWindow::browseMapButtonClicked()
         if (auto doc = geodata_cast<GeoDataDocument>(object)) {
             QFileInfo fileInfo(doc->fileName());
             QString fileName = fileInfo.fileName();
-            if (fileName == QLatin1String("boundaryplacemarks.cache")) {
+            if (fileName == QLatin1StringView("boundaryplacemarks.cache")) {
                 doc->setVisible(true);
                 d->m_marbleWidget->model()->treeModel()->updateFeature(doc);
                 d->m_marbleWidget->setHighlightEnabled(true);

@@ -80,7 +80,7 @@ int main(int argc, char *argv[])
         while (!sourcestream.atEnd()) {
             rawline = sourcestream.readLine();
             //            if ( !rawline.startsWith("\"E\"|\"m\"|\"" ) ) {
-            if (!rawline.startsWith(QLatin1String("\"V\"|\"V\"|\""))) {
+            if (!rawline.startsWith(QLatin1StringView("\"V\"|\"V\"|\""))) {
                 continue;
             }
             rawline.replace(QStringLiteral("\"|"), QStringLiteral("|"));
@@ -99,18 +99,18 @@ int main(int argc, char *argv[])
             roleString = splitline[18];
             description = splitline[19];
 
-            // if (roleString == QLatin1String("SF")) continue;
+            // if (roleString == QLatin1StringView("SF")) continue;
 
-            QString marbleRoleString = QLatin1String("o");
+            QString marbleRoleString = QLatin1StringView("o");
 
-            if (roleString == QLatin1String("AA") || roleString == QLatin1String("SF"))
+            if (roleString == QLatin1StringView("AA") || roleString == QLatin1StringView("SF"))
                 marbleRoleString = "c";
-            if (roleString == QLatin1String("ME") || roleString == QLatin1String("OC") || roleString == QLatin1String("LC")
-                || roleString == QLatin1String("SI"))
+            if (roleString == QLatin1StringView("ME") || roleString == QLatin1StringView("OC") || roleString == QLatin1StringView("LC")
+                || roleString == QLatin1StringView("SI"))
                 marbleRoleString = "a";
-            if (roleString == QLatin1String("MO"))
+            if (roleString == QLatin1StringView("MO"))
                 marbleRoleString = "m";
-            if (roleString == QLatin1String("VA"))
+            if (roleString == QLatin1StringView("VA"))
                 marbleRoleString = "v";
 
             population = (int)(1000.0 * popString.toFloat());
@@ -120,7 +120,7 @@ int main(int argc, char *argv[])
             if (lon > 180.0)
                 lon = lon - 360.0;
 
-            if (rawline.startsWith(QLatin1String("\"M\"|\"M\"|\"")) || rawline.startsWith("\"V\"|\"V\"|\"")) {
+            if (rawline.startsWith(QLatin1StringView("\"M\"|\"M\"|\"")) || rawline.startsWith("\"V\"|\"V\"|\"")) {
                 lon = -lon;
             }
 

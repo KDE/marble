@@ -22,7 +22,7 @@ KML_DEFINE_TAG_HANDLER(LabelStyle)
 
 GeoNode *KmlLabelStyleTagHandler::parse(GeoParser &parser) const
 {
-    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1String(kmlTag_LabelStyle)));
+    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1StringView(kmlTag_LabelStyle)));
 
     GeoStackItem parentItem = parser.parentElement();
 

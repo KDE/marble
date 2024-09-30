@@ -25,7 +25,7 @@ KML_DEFINE_TAG_HANDLER(scale)
 
 GeoNode *KmlscaleTagHandler::parse(GeoParser &parser) const
 {
-    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1String(kmlTag_scale)));
+    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1StringView(kmlTag_scale)));
 
     GeoStackItem parentItem = parser.parentElement();
 

@@ -128,10 +128,10 @@ void FlightGearPositionProviderPlugin::parseNmeaSentence(const QString &sentence
     PositionProviderStatus oldStatus = m_status;
     GeoDataCoordinates oldPosition = m_position;
 
-    if (sentence.startsWith(QLatin1String("$GPRMC"))) {
+    if (sentence.startsWith(QLatin1StringView("$GPRMC"))) {
         QStringList const values = sentence.split(QLatin1Char(','));
         if (values.size() > 9) {
-            if (values[2] == QLatin1String("A")) {
+            if (values[2] == QLatin1StringView("A")) {
                 m_speed = values[7].toDouble() * 0.514444; // knots => m/s
                 m_track = values[8].toDouble();
                 QString const date = values[9] + QLatin1Char(' ') + values[1];
@@ -143,15 +143,15 @@ void FlightGearPositionProviderPlugin::parseNmeaSentence(const QString &sentence
             // Flightgear submits geoposition twice in one datagram, once
             // in GPRMC and once in GPGGA. Parsing one is sufficient
         }
-    } else if (sentence.startsWith(QLatin1String("$GPGGA"))) {
+    } else if (sentence.startsWith(QLatin1StringView("$GPGGA"))) {
         QStringList const values = sentence.split(QLatin1Char(','));
         if (values.size() > 10) {
             if (values[6] == nullptr) {
                 m_status = PositionProviderStatusAcquiring; // no fix
             } else {
-                double const lat = parsePosition(values[2], values[3] == QLatin1String("S"));
-                double const lon = parsePosition(values[4], values[5] == QLatin1String("W"));
-                double const unitFactor = values[10] == QLatin1String("F") ? FT2M : 1.0;
+                double const lat = parsePosition(values[2], values[3] == QLatin1StringView("S"));
+                double const lon = parsePosition(values[4], values[5] == QLatin1StringView("W"));
+                double const unitFactor = values[10] == QLatin1StringView("F") ? FT2M : 1.0;
                 double const alt = unitFactor * values[9].toDouble();
                 m_position.set(lon, lat, alt, GeoDataCoordinates::Degree);
                 m_accuracy.level = GeoDataAccuracy::Detailed;

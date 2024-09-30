@@ -21,7 +21,7 @@ KML_DEFINE_TAG_HANDLER(Document)
 
 GeoNode *KmlDocumentTagHandler::parse(GeoParser &parser) const
 {
-    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1String(kmlTag_Document)));
+    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1StringView(kmlTag_Document)));
 
     GeoStackItem parentItem = parser.parentElement();
     if (!(parentItem.qualifiedName().first.isNull() && parentItem.qualifiedName().second.isNull())) {
@@ -33,7 +33,7 @@ GeoNode *KmlDocumentTagHandler::parse(GeoParser &parser) const
             parentItem.nodeAs<GeoDataContainer>()->append(document);
 
             return document;
-        } else if (parentItem.qualifiedName().first == QLatin1String(kmlTag_kml)) {
+        } else if (parentItem.qualifiedName().first == QLatin1StringView(kmlTag_kml)) {
             GeoDataDocument *doc = geoDataDoc(parser);
             KmlObjectTagHandler::parseIdentifiers(parser, doc);
             return doc;

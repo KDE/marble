@@ -131,25 +131,25 @@ GeoDataLineString *OSRMRunner::decodePolyline(const QString &geometry)
 
 RoutingInstruction::TurnType OSRMRunner::parseTurnType(const QString &instruction)
 {
-    if (instruction == QLatin1String("1")) {
+    if (instruction == QLatin1StringView("1")) {
         return RoutingInstruction::Straight;
-    } else if (instruction == QLatin1String("2")) {
+    } else if (instruction == QLatin1StringView("2")) {
         return RoutingInstruction::SlightRight;
-    } else if (instruction == QLatin1String("3")) {
+    } else if (instruction == QLatin1StringView("3")) {
         return RoutingInstruction::Right;
-    } else if (instruction == QLatin1String("4")) {
+    } else if (instruction == QLatin1StringView("4")) {
         return RoutingInstruction::SharpRight;
-    } else if (instruction == QLatin1String("5")) {
+    } else if (instruction == QLatin1StringView("5")) {
         return RoutingInstruction::TurnAround;
-    } else if (instruction == QLatin1String("6")) {
+    } else if (instruction == QLatin1StringView("6")) {
         return RoutingInstruction::SharpLeft;
-    } else if (instruction == QLatin1String("7")) {
+    } else if (instruction == QLatin1StringView("7")) {
         return RoutingInstruction::Left;
-    } else if (instruction == QLatin1String("8")) {
+    } else if (instruction == QLatin1StringView("8")) {
         return RoutingInstruction::SlightLeft;
-    } else if (instruction == QLatin1String("10")) {
+    } else if (instruction == QLatin1StringView("10")) {
         return RoutingInstruction::Continue;
-    } else if (instruction.startsWith(QLatin1String("11-"))) {
+    } else if (instruction.startsWith(QLatin1StringView("11-"))) {
         int const exit = QStringView{instruction}.mid(3).toInt();
         switch (exit) {
         case 1:
@@ -161,7 +161,7 @@ RoutingInstruction::TurnType OSRMRunner::parseTurnType(const QString &instructio
         default:
             return RoutingInstruction::RoundaboutExit;
         }
-    } else if (instruction == QLatin1String("12")) {
+    } else if (instruction == QLatin1StringView("12")) {
         return RoutingInstruction::RoundaboutExit;
     }
 

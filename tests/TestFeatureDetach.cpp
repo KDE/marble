@@ -86,10 +86,10 @@ void TestFeatureDetach::testDocument()
 
     GeoDataDocument cont2 = cont1;
     cont2.child(0)->setName("Feat2");
-    QCOMPARE(cont1.child(0)->name(), QLatin1String("Feat1"));
+    QCOMPARE(cont1.child(0)->name(), QLatin1StringView("Feat1"));
 
     const GeoDataDocument cont3 = cont1;
-    QCOMPARE(cont3.child(0)->name(), QLatin1String("Feat1"));
+    QCOMPARE(cont3.child(0)->name(), QLatin1StringView("Feat1"));
 }
 
 void TestFeatureDetach::testPlacemark()
@@ -118,10 +118,10 @@ void TestFeatureDetach::testTour()
 
     GeoDataTour tour2 = tour1;
     tour2.playlist()->setId("Playlist2");
-    QCOMPARE(tour1.playlist()->id(), QLatin1String("Playlist1"));
+    QCOMPARE(tour1.playlist()->id(), QLatin1StringView("Playlist1"));
 
     const GeoDataTour tour3 = tour1;
-    QCOMPARE(tour3.playlist()->id(), QLatin1String("Playlist1"));
+    QCOMPARE(tour3.playlist()->id(), QLatin1StringView("Playlist1"));
 }
 
 void TestFeatureDetach::testGeometryParentInPlacemark()

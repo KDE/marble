@@ -13,7 +13,7 @@ OfflineDataModel::OfflineDataModel(QObject *parent)
     : QSortFilterProxyModel(parent)
     , m_vehicleTypeFilter(Any)
 {
-    m_newstuffModel.setTargetDirectory(Marble::MarbleDirs::localPath() + QLatin1String("/maps"));
+    m_newstuffModel.setTargetDirectory(Marble::MarbleDirs::localPath() + QLatin1StringView("/maps"));
     m_newstuffModel.setRegistryFile(QDir::homePath() + "/.kde/share/apps/knewstuff3/marble-offline-data.knsregistry", Marble::NewstuffModel::NameTag);
     m_newstuffModel.setProvider("http://files.kde.org/marble/newstuff/maps-monav.xml");
 
@@ -48,11 +48,11 @@ QVariant OfflineDataModel::data(const QModelIndex &index, int role) const
         if (data.size() > 1) {
             QString result = data.at(1);
             for (int i = 2; i < data.size(); ++i) {
-                result += QLatin1String(" / ") + data.at(i);
+                result += QLatin1StringView(" / ") + data.at(i);
             }
-            result.remove(QLatin1String(" (Motorcar)"));
-            result.remove(QLatin1String(" (Pedestrian)"));
-            result.remove(QLatin1String(" (Bicycle)"));
+            result.remove(QLatin1StringView(" (Motorcar)"));
+            result.remove(QLatin1StringView(" (Pedestrian)"));
+            result.remove(QLatin1StringView(" (Bicycle)"));
             return result.trimmed();
         }
     }
@@ -124,11 +124,11 @@ bool OfflineDataModel::filterAcceptsRow(int source_row, const QModelIndex &sourc
     if (QSortFilterProxyModel::filterAcceptsRow(source_row, source_parent)) {
         QModelIndex const index = sourceModel()->index(source_row, 0, source_parent);
         QString const data = sourceModel()->data(index, Qt::DisplayRole).toString();
-        if ((m_vehicleTypeFilter & Motorcar) && data.contains(QLatin1String("(Motorcar)"))) {
+        if ((m_vehicleTypeFilter & Motorcar) && data.contains(QLatin1StringView("(Motorcar)"))) {
             return true;
-        } else if ((m_vehicleTypeFilter & Bicycle) && data.contains(QLatin1String("(Bicycle)"))) {
+        } else if ((m_vehicleTypeFilter & Bicycle) && data.contains(QLatin1StringView("(Bicycle)"))) {
             return true;
-        } else if ((m_vehicleTypeFilter & Pedestrian) && data.contains(QLatin1String("(Pedestrian)"))) {
+        } else if ((m_vehicleTypeFilter & Pedestrian) && data.contains(QLatin1StringView("(Pedestrian)"))) {
             return true;
         }
     }

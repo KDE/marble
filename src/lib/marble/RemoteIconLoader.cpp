@@ -29,7 +29,7 @@ class RemoteIconLoaderPrivate
 {
 public:
     RemoteIconLoaderPrivate()
-        : m_storagePolicy(MarbleDirs::localPath() + QLatin1String("/cache/icons/"))
+        : m_storagePolicy(MarbleDirs::localPath() + QLatin1StringView("/cache/icons/"))
         , m_downloadManager(&m_storagePolicy)
     {
     }
@@ -76,7 +76,7 @@ QImage RemoteIconLoaderPrivate::cachedIcon(const QUrl &url) const
 
 bool RemoteIconLoaderPrivate::loadFromDiskCache(const QUrl &url)
 {
-    QString path = MarbleDirs::localPath() + QLatin1String("/cache/icons/") + cacheFileName(url);
+    QString path = MarbleDirs::localPath() + QLatin1StringView("/cache/icons/") + cacheFileName(url);
     QImage icon = QFile::exists(path) ? QImage(path) : QImage();
     if (!icon.isNull()) {
         m_iconCache.insert(url, icon);

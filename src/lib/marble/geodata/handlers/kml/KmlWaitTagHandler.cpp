@@ -20,7 +20,7 @@ KML_DEFINE_TAG_HANDLER_GX22(Wait)
 
 GeoNode *KmlWaitTagHandler::parse(GeoParser &parser) const
 {
-    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1String(kmlTag_Wait)));
+    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1StringView(kmlTag_Wait)));
 
     GeoStackItem parentItem = parser.parentElement();
 

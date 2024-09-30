@@ -367,7 +367,7 @@ void OwsServiceManager::queryWmsMap(const QUrl &url,
     // or empty if default styling is required. Style names may be empty in the list,
     // to use default layer styling. However some servers do not accept empty style names.
     downloadQuery.addQueryItem("styles", style);
-    m_imageRequestResult.setResultFormat((format == QLatin1String("jpeg")) ? "jpg" : format); // Is this needed here?
+    m_imageRequestResult.setResultFormat((format == QLatin1StringView("jpeg")) ? "jpg" : format); // Is this needed here?
 
     QUrl finalDownloadUrl(url);
     finalDownloadUrl.setQuery(downloadQuery);
@@ -446,13 +446,13 @@ void OwsServiceManager::queryWmtsTile(const QString &url,
 
     QUrl downloadUrl;
     QString baseUrl = url;
-    baseUrl.replace(baseUrl.indexOf(QLatin1String("{Time}")), 6, "current");
-    baseUrl.replace(baseUrl.indexOf(QLatin1String("{style}")), 7, style);
-    baseUrl.replace(baseUrl.indexOf(QLatin1String("{Style}")), 7, style);
-    baseUrl.replace(baseUrl.indexOf(QLatin1String("{TileMatrixSet}")), 15, tileMatrixSet);
-    baseUrl.replace(baseUrl.indexOf(QLatin1String("{TileMatrix}")), 12, tileMatrix);
-    baseUrl.replace(baseUrl.indexOf(QLatin1String("{TileRow}")), 9, tileRow);
-    baseUrl.replace(baseUrl.indexOf(QLatin1String("{TileCol}")), 9, tileCol);
+    baseUrl.replace(baseUrl.indexOf(QLatin1StringView("{Time}")), 6, "current");
+    baseUrl.replace(baseUrl.indexOf(QLatin1StringView("{style}")), 7, style);
+    baseUrl.replace(baseUrl.indexOf(QLatin1StringView("{Style}")), 7, style);
+    baseUrl.replace(baseUrl.indexOf(QLatin1StringView("{TileMatrixSet}")), 15, tileMatrixSet);
+    baseUrl.replace(baseUrl.indexOf(QLatin1StringView("{TileMatrix}")), 12, tileMatrix);
+    baseUrl.replace(baseUrl.indexOf(QLatin1StringView("{TileRow}")), 9, tileRow);
+    baseUrl.replace(baseUrl.indexOf(QLatin1StringView("{TileCol}")), 9, tileCol);
     downloadUrl.setUrl(baseUrl);
 
     QNetworkRequest request(downloadUrl);
@@ -476,10 +476,10 @@ void OwsServiceManager::queryXYZImage(const QString urlString)
 {
     QUrl downloadUrl;
     QString baseUrl = urlString;
-    baseUrl.replace(baseUrl.indexOf(QLatin1String("{x}")), 3, QString::number(0));
-    baseUrl.replace(baseUrl.indexOf(QLatin1String("{y}")), 3, QString::number(0));
-    baseUrl.replace(baseUrl.indexOf(QLatin1String("{zoomLevel}")), 11, QString::number(0));
-    baseUrl.replace(baseUrl.indexOf(QLatin1String("{z}")), 3, QString::number(0));
+    baseUrl.replace(baseUrl.indexOf(QLatin1StringView("{x}")), 3, QString::number(0));
+    baseUrl.replace(baseUrl.indexOf(QLatin1StringView("{y}")), 3, QString::number(0));
+    baseUrl.replace(baseUrl.indexOf(QLatin1StringView("{zoomLevel}")), 11, QString::number(0));
+    baseUrl.replace(baseUrl.indexOf(QLatin1StringView("{z}")), 3, QString::number(0));
     downloadUrl.setUrl(baseUrl);
 
     QNetworkRequest request(downloadUrl);

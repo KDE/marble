@@ -59,7 +59,7 @@ RoutingWaypoints WaypointParser::parse(QTextStream &stream) const
     QString input = stream.readAll();
     const QStringList lines = input.split(m_lineSeparator);
     for (const QString &line : lines) {
-        if (!line.trimmed().isEmpty() && !line.trimmed().startsWith(QLatin1Char('#')) && !line.startsWith(QLatin1String("Content-Type: text/plain"))) {
+        if (!line.trimmed().isEmpty() && !line.trimmed().startsWith(QLatin1Char('#')) && !line.startsWith(QLatin1StringView("Content-Type: text/plain"))) {
             QStringList entries = line.split(m_fieldSeparator);
             if (entries.size() >= 1 + m_fieldIndices[RoadName]) {
                 qreal lon = readField<qreal>(Longitude, entries);

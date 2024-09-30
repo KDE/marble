@@ -24,8 +24,8 @@ bool CoordinatesParser::read(QIODevice *device)
         readNext();
 
         if (isStartElement()) {
-            if (name() == QLatin1String("rsp")) {
-                if (attributes().value(QLatin1String("stat")) == QLatin1String("ok")) {
+            if (name() == QLatin1StringView("rsp")) {
+                if (attributes().value(QLatin1StringView("stat")) == QLatin1StringView("ok")) {
                     readRsp();
                 } else {
                     raiseError(QObject::tr("Query failed"));
@@ -65,7 +65,7 @@ void CoordinatesParser::readRsp()
             break;
 
         if (isStartElement()) {
-            if (name() == QLatin1String("photo"))
+            if (name() == QLatin1StringView("photo"))
                 readPhoto();
             else
                 readUnknownElement();
@@ -75,7 +75,7 @@ void CoordinatesParser::readRsp()
 
 void CoordinatesParser::readPhoto()
 {
-    Q_ASSERT(isStartElement() && name() == QLatin1String("photo"));
+    Q_ASSERT(isStartElement() && name() == QLatin1StringView("photo"));
 
     while (!atEnd()) {
         readNext();
@@ -84,7 +84,7 @@ void CoordinatesParser::readPhoto()
             break;
 
         if (isStartElement()) {
-            if (name() == QLatin1String("location"))
+            if (name() == QLatin1StringView("location"))
                 readLocation();
             else
                 readUnknownElement();
@@ -94,10 +94,10 @@ void CoordinatesParser::readPhoto()
 
 void CoordinatesParser::readLocation()
 {
-    Q_ASSERT(isStartElement() && name() == QLatin1String("location"));
+    Q_ASSERT(isStartElement() && name() == QLatin1StringView("location"));
 
-    m_coordinates->setLatitude(attributes().value(QLatin1String("latitude")).toString().toDouble() * DEG2RAD);
-    m_coordinates->setLongitude(attributes().value(QLatin1String("longitude")).toString().toDouble() * DEG2RAD);
+    m_coordinates->setLatitude(attributes().value(QLatin1StringView("latitude")).toString().toDouble() * DEG2RAD);
+    m_coordinates->setLongitude(attributes().value(QLatin1StringView("longitude")).toString().toDouble() * DEG2RAD);
 
     while (!atEnd()) {
         readNext();

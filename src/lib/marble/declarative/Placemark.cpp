@@ -683,7 +683,7 @@ QString Placemark::wikipedia() const
     const QString wikipedia = m_placemark.osmData().tagValue("wikipedia");
     if (!wikipedia.isEmpty()) {
         // full URL?
-        if (wikipedia.startsWith(QLatin1String("http://")) || wikipedia.startsWith(QLatin1String("https://"))) {
+        if (wikipedia.startsWith(QLatin1StringView("http://")) || wikipedia.startsWith(QLatin1StringView("https://"))) {
             m_wikipedia = wikipedia;
         } else {
             // match "(lang:)human readable title"
@@ -695,7 +695,7 @@ QString Placemark::wikipedia() const
             }
             const QString title = QString::fromLatin1(QUrl::toPercentEncoding(match.captured(2)));
 
-            m_wikipedia = QLatin1String("https://") + lang + QLatin1String(".wikipedia.org/wiki/") + title;
+            m_wikipedia = QLatin1StringView("https://") + lang + QLatin1StringView(".wikipedia.org/wiki/") + title;
         }
     }
 
@@ -730,7 +730,7 @@ QString Placemark::wheelchairInfo() const
     // Check if there is localized description
     auto const &osmData = m_placemark.osmData();
     QStringList const uiLanguages = QLocale::system().uiLanguages();
-    const QString tag = QLatin1String("wheelchair:description:");
+    const QString tag = QLatin1StringView("wheelchair:description:");
     for (const QString &uiLanguage : uiLanguages) {
         for (auto tagIter = osmData.tagsBegin(), end = osmData.tagsEnd(); tagIter != end; ++tagIter) {
             if (tagIter.key().startsWith(tag)) {

@@ -20,7 +20,7 @@ PanoramioParser::~PanoramioParser()
 
 panoramioDataStructure PanoramioParser::parseObjectOnPosition(const QString &content, int requiredObjectPosition)
 {
-    QString temp = QLatin1String("var myJSONObject =") + content;
+    QString temp = QLatin1StringView("var myJSONObject =") + content;
     myEngine.evaluate(temp);
     myEngine.evaluate(QString("function count(){ return myJSONObject.count };"));
     myEngine.evaluate(QString("function height(x){return myJSONObject.photos[x].height};"));
@@ -48,29 +48,29 @@ panoramioDataStructure PanoramioParser::parseObjectOnPosition(const QString &con
         unsigned int day = date.at(0).toUInt();
         const QString &monthString = date.at(1);
         unsigned int month = 1;
-        if (monthString.contains(QLatin1String("January"))) {
+        if (monthString.contains(QLatin1StringView("January"))) {
             month = 1;
-        } else if (monthString.contains(QLatin1String("February"))) {
+        } else if (monthString.contains(QLatin1StringView("February"))) {
             month = 2;
-        } else if (monthString.contains(QLatin1String("March"))) {
+        } else if (monthString.contains(QLatin1StringView("March"))) {
             month = 3;
-        } else if (monthString.contains(QLatin1String("April"))) {
+        } else if (monthString.contains(QLatin1StringView("April"))) {
             month = 4;
-        } else if (monthString.contains(QLatin1String("May"))) {
+        } else if (monthString.contains(QLatin1StringView("May"))) {
             month = 5;
-        } else if (monthString.contains(QLatin1String("June"))) {
+        } else if (monthString.contains(QLatin1StringView("June"))) {
             month = 6;
-        } else if (monthString.contains(QLatin1String("July"))) {
+        } else if (monthString.contains(QLatin1StringView("July"))) {
             month = 7;
-        } else if (monthString.contains(QLatin1String("August"))) {
+        } else if (monthString.contains(QLatin1StringView("August"))) {
             month = 8;
-        } else if (monthString.contains(QLatin1String("September"))) {
+        } else if (monthString.contains(QLatin1StringView("September"))) {
             month = 9;
-        } else if (monthString.contains(QLatin1String("October"))) {
+        } else if (monthString.contains(QLatin1StringView("October"))) {
             month = 10;
-        } else if (monthString.contains(QLatin1String("November"))) {
+        } else if (monthString.contains(QLatin1StringView("November"))) {
             month = 11;
-        } else if (monthString.contains(QLatin1String("December"))) {
+        } else if (monthString.contains(QLatin1StringView("December"))) {
             month = 12;
         }
 

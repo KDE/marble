@@ -21,7 +21,7 @@ KML_DEFINE_TAG_HANDLER(BalloonStyle)
 
 GeoNode *KmlBalloonStyleTagHandler::parse(GeoParser &parser) const
 {
-    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1String(kmlTag_BalloonStyle)));
+    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1StringView(kmlTag_BalloonStyle)));
 
     GeoStackItem parentItem = parser.parentElement();
 

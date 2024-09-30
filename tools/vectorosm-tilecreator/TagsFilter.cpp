@@ -27,7 +27,7 @@ TagsFilter::TagsFilter(GeoDataDocument *document, const Tags &tagsList, FilterFl
             } else {
                 for (auto const &tag : tagsList) {
                     bool contains;
-                    if (tag.second == QLatin1String("*")) {
+                    if (tag.second == QLatin1StringView("*")) {
                         contains = osmData.containsTagKey(tag.first);
                     } else {
                         contains = osmData.containsTag(tag.first, tag.second);

@@ -23,7 +23,7 @@ KML_DEFINE_TAG_HANDLER(styleUrl)
 
 GeoNode *KmlstyleUrlTagHandler::parse(GeoParser &parser) const
 {
-    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1String(kmlTag_styleUrl)));
+    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1StringView(kmlTag_styleUrl)));
 
     GeoStackItem parentItem = parser.parentElement();
     GeoStackItem grandParentItem = parser.parentElement();

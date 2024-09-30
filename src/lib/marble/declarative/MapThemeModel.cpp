@@ -79,11 +79,11 @@ bool MapThemeModel::filterAcceptsRow(int sourceRow, const QModelIndex &sourcePar
         return false;
     }
 
-    if (m_mapThemeFilters & MapThemeModel::Terrestrial && themeId.startsWith(QLatin1String("earth/"))) {
+    if (m_mapThemeFilters & MapThemeModel::Terrestrial && themeId.startsWith(QLatin1StringView("earth/"))) {
         return false;
     }
 
-    if (m_mapThemeFilters & MapThemeModel::Extraterrestrial && !themeId.startsWith(QLatin1String("earth/"))) {
+    if (m_mapThemeFilters & MapThemeModel::Extraterrestrial && !themeId.startsWith(QLatin1StringView("earth/"))) {
         return false;
     }
 

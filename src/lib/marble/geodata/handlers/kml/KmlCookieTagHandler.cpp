@@ -17,7 +17,7 @@ KML_DEFINE_TAG_HANDLER(cookie)
 
 GeoNode *KmlcookieTagHandler::parse(GeoParser &parser) const
 {
-    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1String(kmlTag_cookie)));
+    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1StringView(kmlTag_cookie)));
 
     GeoStackItem parentItem = parser.parentElement();
 

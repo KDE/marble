@@ -235,17 +235,17 @@ bool MarblePart::openFile()
     QStringList allFileExtensions;
     QStringList filters;
     for (const ParseRunnerPlugin *plugin : pluginManager->parsingRunnerPlugins()) {
-        if (plugin->nameId() == QLatin1String("Cache"))
+        if (plugin->nameId() == QLatin1StringView("Cache"))
             continue;
 
         const QStringList fileExtensions = plugin->fileExtensions().replaceInStrings(QRegularExpression("^"), "*.");
-        const QString filter = plugin->fileFormatDescription() + QLatin1String(" (") + fileExtensions.join(QLatin1Char(' ')) + QLatin1Char(')');
+        const QString filter = plugin->fileFormatDescription() + QLatin1StringView(" (") + fileExtensions.join(QLatin1Char(' ')) + QLatin1Char(')');
         filters << filter;
         allFileExtensions << fileExtensions;
     }
 
     allFileExtensions.sort(); // sort since file extensions are visible under Windows
-    const QString allFileTypes = i18n("All Supported Files") + QLatin1String(" (") + allFileExtensions.join(QLatin1Char(' ')) + QLatin1Char(')');
+    const QString allFileTypes = i18n("All Supported Files") + QLatin1StringView(" (") + allFileExtensions.join(QLatin1Char(' ')) + QLatin1Char(')');
 
     filters.sort();
     filters.prepend(allFileTypes);
@@ -272,7 +272,7 @@ void MarblePart::exportMapScreenShot()
     if (!fileName.isEmpty()) {
         // Take the case into account where no file format is indicated
         const char *format = nullptr;
-        if (!fileName.endsWith(QLatin1String("png"), Qt::CaseInsensitive) && !fileName.endsWith(QLatin1String("jpg"), Qt::CaseInsensitive)) {
+        if (!fileName.endsWith(QLatin1StringView("png"), Qt::CaseInsensitive) && !fileName.endsWith(QLatin1StringView("jpg"), Qt::CaseInsensitive)) {
             format = "JPG";
         }
 
@@ -467,7 +467,7 @@ void MarblePart::readSettings()
                 KConfigGroup pluginGroup = profileGroup.group(pluginName);
                 profile.pluginSettings().insert(pluginName, QHash<QString, QVariant>());
                 for (const QString &key : pluginGroup.keyList()) {
-                    if (key != QLatin1String("Enabled")) {
+                    if (key != QLatin1StringView("Enabled")) {
                         profile.pluginSettings()[pluginName].insert(key, pluginGroup.readEntry(key));
                     }
                 }
@@ -750,7 +750,7 @@ void MarblePart::setupActions()
     QList<RenderPlugin *>::const_iterator i = pluginList.constBegin();
     QList<RenderPlugin *>::const_iterator const end = pluginList.constEnd();
     for (; i != end; ++i) {
-        if ((*i)->nameId() == QLatin1String("crosshairs")) {
+        if ((*i)->nameId() == QLatin1StringView("crosshairs")) {
             actionCollection()->addAction("show_crosshairs", (*i)->action());
         }
     }
@@ -816,7 +816,7 @@ void MarblePart::setupActions()
     QList<RenderPlugin *>::const_iterator it = pluginList.constBegin();
     QList<RenderPlugin *>::const_iterator const itEnd = pluginList.constEnd();
     for (; it != itEnd; ++it) {
-        if ((*it)->nameId() != QLatin1String("annotation")) {
+        if ((*it)->nameId() != QLatin1StringView("annotation")) {
             connect((*it), SIGNAL(actionGroupsChanged()), this, SLOT(createPluginMenus()));
         }
     }
@@ -1045,7 +1045,7 @@ void MarblePart::migrateNewstuffConfigFiles()
     // shared between Marble KDE and Marble Qt in Marble's data path of the user.
     // This method moves an old KDE newstuff config file to the new location if the former
     // exists and the latter not.
-    QFileInfo const target(MarbleDirs::localPath() + QLatin1String("/newstuff/marble-map-themes.knsregistry"));
+    QFileInfo const target(MarbleDirs::localPath() + QLatin1StringView("/newstuff/marble-map-themes.knsregistry"));
     if (!target.exists()) {
         QString const source = QStandardPaths::locate(QStandardPaths::GenericDataLocation, "knewstuff3/marble.knsregistry");
         if (!source.isEmpty()) {
@@ -1390,7 +1390,7 @@ void MarblePart::applyPluginState()
             KConfigGroup pluginGroup = profileGroup.group(key);
             pluginGroup.writeEntry("Enabled", true);
             for (const QString &settingKey : profile.pluginSettings()[key].keys()) {
-                Q_ASSERT(settingKey != QLatin1String("Enabled"));
+                Q_ASSERT(settingKey != QLatin1StringView("Enabled"));
                 pluginGroup.writeEntry(settingKey, profile.pluginSettings()[key][settingKey]);
             }
         }
@@ -1422,7 +1422,7 @@ void MarblePart::updateSettings()
     QNetworkProxy proxy;
 
     // Make sure that no proxy is used for an empty string or the default value:
-    if (MarbleSettings::proxyUrl().isEmpty() || MarbleSettings::proxyUrl() == QLatin1String("http://")) {
+    if (MarbleSettings::proxyUrl().isEmpty() || MarbleSettings::proxyUrl() == QLatin1StringView("http://")) {
         proxy.setType(QNetworkProxy::NoProxy);
     } else {
         if (MarbleSettings::proxyType() == Marble::Socks5Proxy) {
@@ -1654,7 +1654,7 @@ void MarblePart::printMapScreenShot()
 void MarblePart::updateMapEditButtonVisibility(const QString &mapTheme)
 {
     Q_ASSERT(m_externalMapEditorAction);
-    m_externalMapEditorAction->setVisible(mapTheme == QLatin1String("earth/openstreetmap/openstreetmap.dgml"));
+    m_externalMapEditorAction->setVisible(mapTheme == QLatin1StringView("earth/openstreetmap/openstreetmap.dgml"));
 }
 
 void MarblePart::fallBackToDefaultTheme()

@@ -32,7 +32,7 @@ void JobQueue::addJob(Job *newJob)
         startJob(newJob);
     } else {
         Logger::instance().setStatus(newJob->region().id() + QLatin1Char('_') + newJob->transport(),
-                                     newJob->region().name() + QLatin1String(" (") + newJob->transport() + QLatin1Char(')'),
+                                     newJob->region().name() + QLatin1StringView(" (") + newJob->transport() + QLatin1Char(')'),
                                      "waiting",
                                      "Queued.");
         m_jobs << newJob;

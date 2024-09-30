@@ -220,7 +220,7 @@ void EditPolygonDialog::handleChangingStyle()
     style->lineStyle().setWidth(d->m_linesWidth->value());
     // 0 corresponds to "Filled" and 1 corresponds to "Not Filled".
     style->polyStyle().setFill(!d->m_filledColor->currentIndex());
-    style->setId(d->m_placemark->id() + QLatin1String("Style"));
+    style->setId(d->m_placemark->id() + QLatin1StringView("Style"));
 
     // Adjust the lines/polygon colors.
     // QColorDialog::currentColor() also works even if the color dialog
@@ -242,7 +242,7 @@ void EditPolygonDialog::updatePolygon()
     // available, set it
     const OsmPlacemarkData osmData = d->m_osmTagEditorWidget->placemarkData();
     const GeoDataPlacemark::GeoDataVisualCategory category = StyleBuilder::determineVisualCategory(osmData);
-    if (d->m_placemark->styleUrl() == QLatin1String("#polygon") && category != GeoDataPlacemark::None) {
+    if (d->m_placemark->styleUrl() == QLatin1StringView("#polygon") && category != GeoDataPlacemark::None) {
         d->m_placemark->setStyle(GeoDataStyle::Ptr()); // first clear style so style gets set by setVisualCategory()
         d->m_placemark->setVisualCategory(category);
     }

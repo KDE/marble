@@ -58,9 +58,9 @@ void TourCaptureDialog::loadDestinationFile()
         QMessageBox::warning(this, tr("Codecs are unavailable"), tr("Supported codecs are not found. (ffmpeg/avconv needs to be installed and in PATH.)"));
         return;
     }
-    QString filter = formats.first().name() + QLatin1String(" (*.") + formats.first().extension() + QLatin1Char(')');
+    QString filter = formats.first().name() + QLatin1StringView(" (*.") + formats.first().extension() + QLatin1Char(')');
     for (int i = 1; i < formats.size(); i++) {
-        filter += QLatin1String(";;") + formats.at(i).name() + QLatin1String(" (*.") + formats.at(i).extension() + QLatin1Char(')');
+        filter += QLatin1StringView(";;") + formats.at(i).name() + QLatin1StringView(" (*.") + formats.at(i).extension() + QLatin1Char(')');
     }
     const QString defaultFileName = ui->destinationEdit->text().isEmpty() ? m_defaultFileName : ui->destinationEdit->text();
 
@@ -81,7 +81,7 @@ void TourCaptureDialog::loadDestinationFile()
     if (!supported) {
         QString formatsExtensions = QLatin1Char('.') + formats.at(0).extension();
         for (int i = 1; i < formats.size(); ++i) {
-            formatsExtensions += QLatin1String(", .") + formats.at(i).extension();
+            formatsExtensions += QLatin1StringView(", .") + formats.at(i).extension();
         }
         QMessageBox::warning(this,
                              tr("Filename is not valid"),
@@ -139,7 +139,7 @@ void TourCaptureDialog::recordNextFrame()
         return;
     }
 
-    if (ui->startButton->text() == QLatin1String("Start")) {
+    if (ui->startButton->text() == QLatin1StringView("Start")) {
         return;
     }
 

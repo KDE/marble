@@ -226,7 +226,7 @@ bool EclipsesPlugin::render(GeoPainter *painter, ViewportParams *viewport, const
     Q_UNUSED(renderPos);
     Q_UNUSED(layer);
 
-    if (marbleModel()->planetId() == QLatin1String("earth")) {
+    if (marbleModel()->planetId() == QLatin1StringView("earth")) {
         for (EclipsesItem *item : m_model->items()) {
             if (item->takesPlaceAt(marbleModel()->clock()->dateTime())) {
                 return renderItem(painter, item);
@@ -430,7 +430,7 @@ void EclipsesPlugin::updateMenuItemState()
     // eclipses are only supported for earth based observers at the moment
     // so we disable the menu items for other celestial bodies
 
-    const bool active = (marbleModel()->planetId() == QLatin1String("earth"));
+    const bool active = (marbleModel()->planetId() == QLatin1StringView("earth"));
 
     m_eclipsesListMenu->setEnabled(active);
     m_eclipsesMenuAction->setEnabled(active);

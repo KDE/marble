@@ -35,7 +35,7 @@ GeoNamesWeatherService::~GeoNamesWeatherService()
 
 void GeoNamesWeatherService::getAdditionalItems(const GeoDataLatLonAltBox &box, qint32 number)
 {
-    if (marbleModel()->planetId() != QLatin1String("earth")) {
+    if (marbleModel()->planetId() != QLatin1StringView("earth")) {
         return;
     }
 
@@ -54,11 +54,11 @@ void GeoNamesWeatherService::getAdditionalItems(const GeoDataLatLonAltBox &box, 
 
 void GeoNamesWeatherService::getItem(const QString &id)
 {
-    if (marbleModel()->planetId() != QLatin1String("earth")) {
+    if (marbleModel()->planetId() != QLatin1StringView("earth")) {
         return;
     }
 
-    if (id.startsWith(QLatin1String("geonames_"))) {
+    if (id.startsWith(QLatin1StringView("geonames_"))) {
         QUrl geonamesUrl("http://api.geonames.org/weatherIcaoJSON");
         QUrlQuery urlQuery;
         urlQuery.addQueryItem("ICAO", id.mid(9));
@@ -117,7 +117,7 @@ AbstractDataPluginItem *GeoNamesWeatherService::parse(const QJsonObject &weather
         WeatherData data;
 
         // Weather condition
-        if (clouds != QLatin1String("n/a") && condition != QLatin1String("n/a")) {
+        if (clouds != QLatin1StringView("n/a") && condition != QLatin1StringView("n/a")) {
             if (dayConditions.contains(condition)) {
                 data.setCondition(dayConditions[condition]);
             } else {
@@ -158,7 +158,7 @@ AbstractDataPluginItem *GeoNamesWeatherService::parse(const QJsonObject &weather
         data.setPublishingTime(date);
 
         // ID
-        id = QLatin1String("geonames_") + id;
+        id = QLatin1StringView("geonames_") + id;
 
         GeoDataCoordinates coordinates(longitude, latitude, 0.0, GeoDataCoordinates::Degree);
         GeoNamesWeatherItem *item = new GeoNamesWeatherItem(this);

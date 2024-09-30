@@ -24,7 +24,7 @@ Upload::Upload(QObject *parent)
 void Upload::changeStatus(const Package &package, const QString &status, const QString &message)
 {
     Logger::instance().setStatus(package.region.id() + QLatin1Char('_') + package.transport,
-                                 package.region.name() + QLatin1String(" (") + package.transport + QLatin1Char(')'),
+                                 package.region.name() + QLatin1StringView(" (") + package.transport + QLatin1Char(')'),
                                  status,
                                  message);
 }
@@ -62,7 +62,7 @@ bool Upload::upload(const Package &package)
     ssh.waitForFinished(1000 * 60 * 10); // wait up to 10 minutes for mkdir to complete
     if (ssh.exitStatus() != QProcess::NormalExit || ssh.exitCode() != 0) {
         qDebug() << "Failed to create remote directory " << remoteDir;
-        changeStatus(package, "error", QLatin1String("Failed to create remote directory: ") + ssh.readAllStandardError());
+        changeStatus(package, "error", QLatin1StringView("Failed to create remote directory: ") + ssh.readAllStandardError());
         return false;
     }
 
@@ -75,7 +75,7 @@ bool Upload::upload(const Package &package)
     scp.waitForFinished(1000 * 60 * 60 * 12); // wait up to 12 hours for upload to complete
     if (scp.exitStatus() != QProcess::NormalExit || scp.exitCode() != 0) {
         qDebug() << "Failed to upload " << target;
-        changeStatus(package, "error", QLatin1String("Failed to upload file: ") + scp.readAllStandardError());
+        changeStatus(package, "error", QLatin1StringView("Failed to upload file: ") + scp.readAllStandardError());
         return false;
     }
 
@@ -92,7 +92,7 @@ void Upload::deleteFile(const QFileInfo &file)
 bool Upload::adjustNewstuffFile(const Package &package)
 {
     if (m_xml.isNull()) {
-        QTemporaryFile tempFile(QDir::tempPath() + QLatin1String("/monav-maps-XXXXXX.xml"));
+        QTemporaryFile tempFile(QDir::tempPath() + QLatin1StringView("/monav-maps-XXXXXX.xml"));
         tempFile.setAutoRemove(false);
         tempFile.open();
         QString monavFilename = tempFile.fileName();
@@ -103,7 +103,7 @@ bool Upload::adjustNewstuffFile(const Package &package)
         wget.waitForFinished(1000 * 60 * 60 * 12); // wait up to 12 hours for download to complete
         if (wget.exitStatus() != QProcess::NormalExit || wget.exitCode() != 0) {
             qDebug() << "Failed to download newstuff file from filesmaster.kde.org";
-            changeStatus(package, "error", QLatin1String("Failed to sync newstuff file: ") + wget.readAllStandardError());
+            changeStatus(package, "error", QLatin1StringView("Failed to sync newstuff file: ") + wget.readAllStandardError());
             return false;
         }
 
@@ -205,7 +205,7 @@ bool Upload::adjustNewstuffFile(const Package &package)
 
 bool Upload::uploadNewstuff()
 {
-    QTemporaryFile outFile(QDir::tempPath() + QLatin1String("/monav-maps-out-XXXXXX.xml"));
+    QTemporaryFile outFile(QDir::tempPath() + QLatin1StringView("/monav-maps-out-XXXXXX.xml"));
     outFile.open();
     QTextStream outStream(&outFile);
     outStream << m_xml.toString(2);
@@ -231,7 +231,7 @@ bool Upload::deleteRemoteFile(const QString &filename)
         return true;
     }
 
-    if (!filename.startsWith(QLatin1String("/home/marble/"))) {
+    if (!filename.startsWith(QLatin1StringView("/home/marble/"))) {
         return false;
     }
 

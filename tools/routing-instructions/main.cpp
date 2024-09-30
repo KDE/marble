@@ -39,7 +39,7 @@ void loadTranslations(QCoreApplication &app, QTranslator &translator)
     QString code;
 
     int index = lang.indexOf(QLatin1Char('_'));
-    if (lang == QLatin1String("C")) {
+    if (lang == QLatin1StringView("C")) {
         code = "en";
     } else if (index != -1) {
         code = lang.left(index);
@@ -52,11 +52,11 @@ void loadTranslations(QCoreApplication &app, QTranslator &translator)
     }
 
     QString const i18nDir = "/usr/share/marble/translations";
-    QString const relativeDir = app.applicationDirPath() + QLatin1String("/translations");
+    QString const relativeDir = app.applicationDirPath() + QLatin1StringView("/translations");
     auto const paths = QStringList() << i18nDir << relativeDir << QDir::currentPath();
     for (const QString &path : paths) {
         for (const QString &lang : QStringList() << lang << code) {
-            QFileInfo translations = QFileInfo(path + QLatin1String("/routing-instructions_") + lang + QLatin1String(".qm"));
+            QFileInfo translations = QFileInfo(path + QLatin1StringView("/routing-instructions_") + lang + QLatin1StringView(".qm"));
             if (translations.exists() && translator.load(translations.absoluteFilePath())) {
                 app.installTranslator(&translator);
                 return;

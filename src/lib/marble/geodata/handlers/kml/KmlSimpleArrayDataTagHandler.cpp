@@ -25,7 +25,7 @@ KML_DEFINE_TAG_HANDLER_GX22(SimpleArrayData)
 
 GeoNode *KmlSimpleArrayDataTagHandler::parse(GeoParser &parser) const
 {
-    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1String(kmlTag_SimpleArrayData)));
+    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1StringView(kmlTag_SimpleArrayData)));
 
     GeoStackItem parentItem = parser.parentElement();
 

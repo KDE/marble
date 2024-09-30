@@ -276,26 +276,26 @@ bool OsmPlacemarkData::isEmpty() const
 OsmPlacemarkData OsmPlacemarkData::fromParserAttributes(const QXmlStreamAttributes &attributes)
 {
     OsmPlacemarkData osmData;
-    osmData.setId(attributes.value(QLatin1String("id")).toLongLong());
-    if (const auto s = attributes.value(QLatin1String("version")); !s.isEmpty()) {
+    osmData.setId(attributes.value(QLatin1StringView("id")).toLongLong());
+    if (const auto s = attributes.value(QLatin1StringView("version")); !s.isEmpty()) {
         osmData.setVersion(s.toString());
     }
-    if (const auto s = attributes.value(QLatin1String("changeset")); !s.isEmpty()) {
+    if (const auto s = attributes.value(QLatin1StringView("changeset")); !s.isEmpty()) {
         osmData.setChangeset(s.toString());
     }
-    if (const auto s = attributes.value(QLatin1String("user")); !s.isEmpty()) {
+    if (const auto s = attributes.value(QLatin1StringView("user")); !s.isEmpty()) {
         osmData.setUser(s.toString());
     }
-    if (const auto s = attributes.value(QLatin1String("uid")); !s.isEmpty()) {
+    if (const auto s = attributes.value(QLatin1StringView("uid")); !s.isEmpty()) {
         osmData.setUid(s.toString());
     }
-    if (const auto s = attributes.value(QLatin1String("visible")); !s.isEmpty()) {
+    if (const auto s = attributes.value(QLatin1StringView("visible")); !s.isEmpty()) {
         osmData.setVisible(s.toString());
     }
-    if (const auto s = attributes.value(QLatin1String("timestamp")); !s.isEmpty()) {
+    if (const auto s = attributes.value(QLatin1StringView("timestamp")); !s.isEmpty()) {
         osmData.setTimestamp(s.toString());
     }
-    if (const auto s = attributes.value(QLatin1String("action")); !s.isEmpty()) {
+    if (const auto s = attributes.value(QLatin1StringView("action")); !s.isEmpty()) {
         osmData.setAction(s.toString());
     }
     return osmData;

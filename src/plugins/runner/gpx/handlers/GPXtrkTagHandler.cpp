@@ -22,7 +22,7 @@ GPX_DEFINE_TAG_HANDLER(trk)
 
 GeoNode *GPXtrkTagHandler::parse(GeoParser &parser) const
 {
-    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1String(gpxTag_trk)));
+    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1StringView(gpxTag_trk)));
 
     GeoStackItem parentItem = parser.parentElement();
     if (parentItem.represents(gpxTag_gpx)) {

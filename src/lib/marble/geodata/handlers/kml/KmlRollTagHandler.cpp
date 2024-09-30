@@ -19,7 +19,7 @@ KML_DEFINE_TAG_HANDLER(roll)
 
 GeoNode *KmlrollTagHandler::parse(GeoParser &parser) const
 {
-    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1String(kmlTag_roll)));
+    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1StringView(kmlTag_roll)));
 
     GeoStackItem parentItem = parser.parentElement();
 

@@ -123,14 +123,14 @@ void EarthquakeItem::setDepth(double depth)
 void EarthquakeItem::updateTooltip()
 {
     QLocale locale = QLocale::system();
-    QString html = QLatin1String("<table cellpadding=\"2\">");
+    QString html = QLatin1StringView("<table cellpadding=\"2\">");
     if (m_dateTime.isValid()) {
-        html += QLatin1String("<tr><td align=\"right\">") + tr("Date:") + QLatin1String("</td><td>") + locale.toString(m_dateTime, QLocale::ShortFormat)
-            + QLatin1String("</td></tr>");
+        html += QLatin1StringView("<tr><td align=\"right\">") + tr("Date:") + QLatin1StringView("</td><td>") + locale.toString(m_dateTime, QLocale::ShortFormat)
+            + QLatin1StringView("</td></tr>");
     }
-    html += QLatin1String("<tr><td align=\"right\">") + tr("Magnitude:") + QLatin1String("</td><td>") + locale.toString(m_magnitude)
-        + QLatin1String("</td></tr><tr><td align=\"right\">") + tr("Depth:") + QLatin1String("</td><td>") + locale.toString(m_depth)
-        + QLatin1String(" km</td></tr></table>");
+    html += QLatin1StringView("<tr><td align=\"right\">") + tr("Magnitude:") + QLatin1StringView("</td><td>") + locale.toString(m_magnitude)
+        + QLatin1StringView("</td></tr><tr><td align=\"right\">") + tr("Depth:") + QLatin1StringView("</td><td>") + locale.toString(m_depth)
+        + QLatin1StringView(" km</td></tr></table>");
     setToolTip(html);
 }
 

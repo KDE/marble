@@ -88,8 +88,8 @@ void ExternalEditorDialog::updateDefaultEditor(int index)
         d->m_defaultEditor = merkaartor;
         description = tr("Merkaartor is an OpenStreetMap editor that is powerful and easy to use. It integrates well into the used workspace.");
         if (!d->m_installedEditors[d->m_defaultEditor]) {
-            description += QLatin1String(" <b>") + tr("Please ask your system administrator to install %1 on your system.").arg(QStringLiteral("Merkaartor"))
-                + QLatin1String("</b>");
+            description += QLatin1StringView(" <b>")
+                + tr("Please ask your system administrator to install %1 on your system.").arg(QStringLiteral("Merkaartor")) + QLatin1StringView("</b>");
         }
         break;
     case 2:
@@ -98,8 +98,8 @@ void ExternalEditorDialog::updateDefaultEditor(int index)
             tr("JOSM is a powerful OpenStreetMap editor which is more complex to use than other editors. It is built on the Java platform and therefor runs on "
                "all systems for which Java is available but does not integrate well into the workspace. A Java SE-compatible runtime is required.");
         if (!d->m_installedEditors[d->m_defaultEditor]) {
-            description += QLatin1String(" <b>") + tr("Please ask your system administrator to install %1 on your system.").arg(QStringLiteral("JOSM"))
-                + QLatin1String("</b>");
+            description += QLatin1StringView(" <b>") + tr("Please ask your system administrator to install %1 on your system.").arg(QStringLiteral("JOSM"))
+                + QLatin1StringView("</b>");
         }
         break;
     default:
@@ -109,7 +109,7 @@ void ExternalEditorDialog::updateDefaultEditor(int index)
         break;
     }
 
-    screenshotLabel->setPixmap(QPixmap(QLatin1String(":/data/editors/") + d->m_defaultEditor + QLatin1String(".png")));
+    screenshotLabel->setPixmap(QPixmap(QLatin1StringView(":/data/editors/") + d->m_defaultEditor + QLatin1StringView(".png")));
     descriptionLabel->setText(description);
 }
 

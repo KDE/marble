@@ -22,7 +22,7 @@ KML_DEFINE_TAG_HANDLER(IconStyle)
 
 GeoNode *KmlIconStyleTagHandler::parse(GeoParser &parser) const
 {
-    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1String(kmlTag_IconStyle)));
+    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1StringView(kmlTag_IconStyle)));
 
     GeoStackItem parentItem = parser.parentElement();
 

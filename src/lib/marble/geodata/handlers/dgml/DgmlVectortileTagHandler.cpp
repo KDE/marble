@@ -28,7 +28,7 @@ DGML_DEFINE_TAG_HANDLER(Vectortile)
 GeoNode *DgmlVectortileTagHandler::parse(GeoParser &parser) const
 {
     // Check whether the tag is valid
-    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1String(dgmlTag_Vectortile)));
+    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1StringView(dgmlTag_Vectortile)));
 
     const QString name = parser.attribute(dgmlAttr_name).trimmed();
 

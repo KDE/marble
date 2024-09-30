@@ -39,7 +39,7 @@ PostalCodeModel::~PostalCodeModel()
 
 void PostalCodeModel::getAdditionalItems(const GeoDataLatLonAltBox &box, qint32 number)
 {
-    if (marbleModel()->planetId() != QLatin1String("earth")) {
+    if (marbleModel()->planetId() != QLatin1StringView("earth")) {
         return;
     }
 
@@ -82,7 +82,7 @@ void PostalCodeModel::parseFile(const QByteArray &file)
             double const longitude = postalCodeObject.value(QStringLiteral("lng")).toDouble();
             double const latitude = postalCodeObject.value(QStringLiteral("lat")).toDouble();
 
-            QString const id = QLatin1String("postalCode_") + countryCode + postalCode;
+            QString const id = QLatin1StringView("postalCode_") + countryCode + postalCode;
 
             if (!id.isEmpty()) {
                 QString tooltip;

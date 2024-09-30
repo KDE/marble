@@ -38,12 +38,12 @@ QUrl PhotoPluginModel::generateUrl(const QString &service, const QString &method
 {
     QString url;
 
-    if (service == QLatin1String("flickr"))
-        url += QLatin1String("https://www.flickr.com/services/rest/");
+    if (service == QLatin1StringView("flickr"))
+        url += QLatin1StringView("https://www.flickr.com/services/rest/");
     else
         return QUrl();
 
-    url += QLatin1String("?method=") + method + QLatin1String("&format=rest") + QLatin1String("&api_key=") + flickrApiKey;
+    url += QLatin1StringView("?method=") + method + QLatin1StringView("&format=rest") + QLatin1StringView("&api_key=") + flickrApiKey;
 
     QHash<QString, QString>::const_iterator it = options.constBegin();
     QHash<QString, QString>::const_iterator const end = options.constEnd();
@@ -57,7 +57,7 @@ QUrl PhotoPluginModel::generateUrl(const QString &service, const QString &method
 void PhotoPluginModel::getAdditionalItems(const GeoDataLatLonAltBox &box, qint32 number)
 {
     // Flickr only supports images for earth
-    if (marbleModel()->planetId() != QLatin1String("earth")) {
+    if (marbleModel()->planetId() != QLatin1StringView("earth")) {
         return;
     }
 

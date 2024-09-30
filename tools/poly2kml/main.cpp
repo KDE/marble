@@ -68,15 +68,15 @@ void parseBoundingBox(const QFileInfo &file,
             QString line = stream.readLine().trimmed();
             QStringList entries = line.split(QLatin1Char(' '), Qt::SkipEmptyParts);
             if (entries.size() == 1) {
-                if (entries.first() == QLatin1String("END") && inside) {
+                if (entries.first() == QLatin1StringView("END") && inside) {
                     inside = false;
                     if (!box->isEmpty()) {
                         geometry->append(box);
                         box = new GeoDataLinearRing;
                     }
-                } else if (entries.first() == QLatin1String("END") && !inside) {
+                } else if (entries.first() == QLatin1StringView("END") && !inside) {
                     qDebug() << "END not expected here";
-                } else if (entries.first().startsWith(QLatin1String("!"))) {
+                } else if (entries.first().startsWith(QLatin1StringView("!"))) {
                     qDebug() << "Warning: Negative polygons not supported, skipping";
                 } else {
                     // int number = entries.first().toInt();
@@ -162,15 +162,15 @@ int main(int argc, char *argv[])
     QString payload;
     for (int i = 1; i < argc - 2; ++i) {
         QString arg(argv[i]);
-        if (arg == QLatin1String("--name")) {
+        if (arg == QLatin1StringView("--name")) {
             name = argv[++i];
-        } else if (arg == QLatin1String("--version")) {
+        } else if (arg == QLatin1StringView("--version")) {
             version = argv[++i];
-        } else if (arg == QLatin1String("--date")) {
+        } else if (arg == QLatin1StringView("--date")) {
             date = argv[++i];
-        } else if (arg == QLatin1String("--transport")) {
+        } else if (arg == QLatin1StringView("--transport")) {
             transport = argv[++i];
-        } else if (arg == QLatin1String("--payload")) {
+        } else if (arg == QLatin1StringView("--payload")) {
             payload = argv[++i];
         } else {
             usage();

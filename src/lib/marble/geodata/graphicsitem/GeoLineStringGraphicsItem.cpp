@@ -37,10 +37,10 @@ GeoLineStringGraphicsItem::GeoLineStringGraphicsItem(const GeoDataPlacemark *pla
 {
     QString const category = StyleBuilder::visualCategoryName(placemark->visualCategory());
     QStringList paintLayers;
-    paintLayers << QLatin1String("LineString/") + category + QLatin1String("/outline");
-    paintLayers << QLatin1String("LineString/") + category + QLatin1String("/inline");
+    paintLayers << QLatin1StringView("LineString/") + category + QLatin1StringView("/outline");
+    paintLayers << QLatin1StringView("LineString/") + category + QLatin1StringView("/inline");
     if (!m_name.isEmpty()) {
-        paintLayers << QLatin1String("LineString/") + category + QLatin1String("/label");
+        paintLayers << QLatin1StringView("LineString/") + category + QLatin1StringView("/label");
     }
     setPaintLayers(paintLayers);
 }
@@ -128,7 +128,7 @@ void GeoLineStringGraphicsItem::paint(GeoPainter *painter, const ViewportParams 
 {
     setRenderContext(RenderContext(tileLevel));
 
-    if (layer.endsWith(QLatin1String("/outline"))) {
+    if (layer.endsWith(QLatin1StringView("/outline"))) {
         qDeleteAll(m_cachedPolygons);
         m_cachedPolygons.clear();
         m_cachedRegion = QRegion();
@@ -139,12 +139,12 @@ void GeoLineStringGraphicsItem::paint(GeoPainter *painter, const ViewportParams 
         if (painter->mapQuality() == HighQuality || painter->mapQuality() == PrintQuality) {
             paintOutline(painter, viewport);
         }
-    } else if (layer.endsWith(QLatin1String("/inline"))) {
+    } else if (layer.endsWith(QLatin1StringView("/inline"))) {
         if (m_cachedPolygons.empty()) {
             return;
         }
         paintInline(painter, viewport);
-    } else if (layer.endsWith(QLatin1String("/label"))) {
+    } else if (layer.endsWith(QLatin1StringView("/label"))) {
         if (!m_cachedPolygons.empty()) {
             if (m_renderLabel) {
                 paintLabel(painter, viewport);

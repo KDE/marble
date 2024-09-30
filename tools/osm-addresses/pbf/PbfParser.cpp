@@ -260,15 +260,15 @@ void PbfParser::parseNode()
             QString key = QString::fromUtf8(m_primitiveBlock.stringtable().s(inputNode.keys(tag)).data());
             QString value = QString::fromUtf8(m_primitiveBlock.stringtable().s(inputNode.vals(tag)).data());
 
-            if (key == QLatin1String("name")) {
+            if (key == QLatin1StringView("name")) {
                 node.name = value.trimmed();
-            } else if (key == QLatin1String("addr:street")) {
+            } else if (key == QLatin1StringView("addr:street")) {
                 node.street = value.trimmed();
                 node.save = true;
-            } else if (key == QLatin1String("addr:housenumber")) {
+            } else if (key == QLatin1StringView("addr:housenumber")) {
                 node.houseNumber = value;
                 node.save = true;
-            } else if (key == QLatin1String("addr:city")) {
+            } else if (key == QLatin1StringView("addr:city")) {
                 node.city = value;
                 node.save = true;
             } else {
@@ -310,22 +310,22 @@ void PbfParser::parseWay()
             QString key = QString::fromUtf8(m_primitiveBlock.stringtable().s(inputWay.keys(tag)).data());
             QString value = QString::fromUtf8(m_primitiveBlock.stringtable().s(inputWay.vals(tag)).data());
 
-            if (key == QLatin1String("name")) {
+            if (key == QLatin1StringView("name")) {
                 way.name = value.trimmed();
-            } else if (key == QLatin1String("addr:street")) {
+            } else if (key == QLatin1StringView("addr:street")) {
                 way.street = value.trimmed();
                 way.save = true;
-            } else if (key == QLatin1String("addr:housenumber")) {
+            } else if (key == QLatin1StringView("addr:housenumber")) {
                 way.houseNumber = value;
                 way.save = true;
-            } else if (key == QLatin1String("addr:city")) {
+            } else if (key == QLatin1StringView("addr:city")) {
                 way.city = value;
                 way.save = true;
-            } else if (key == QLatin1String("building") && value == QLatin1String("yes")) {
+            } else if (key == QLatin1StringView("building") && value == QLatin1StringView("yes")) {
                 way.isBuilding = true;
-            } else if (key == QLatin1String("boundary") && value == QLatin1String("administrative")) {
+            } else if (key == QLatin1StringView("boundary") && value == QLatin1StringView("administrative")) {
                 relation.isAdministrativeBoundary = true;
-            } else if (key == QLatin1String("admin_level")) {
+            } else if (key == QLatin1StringView("admin_level")) {
                 relation.adminLevel = value.toInt();
             } else {
                 if (shouldSave(Marble::WayType, key, value)) {
@@ -387,13 +387,13 @@ void PbfParser::parseRelation()
             QString key = QString::fromUtf8(m_primitiveBlock.stringtable().s(inputRelation.keys(tag)).data());
             QString value = QString::fromUtf8(m_primitiveBlock.stringtable().s(inputRelation.vals(tag)).data());
 
-            if (key == QLatin1String("boundary") && value == QLatin1String("administrative")) {
+            if (key == QLatin1StringView("boundary") && value == QLatin1StringView("administrative")) {
                 relation.isAdministrativeBoundary = true;
-            } else if (key == QLatin1String("admin_level")) {
+            } else if (key == QLatin1StringView("admin_level")) {
                 relation.adminLevel = value.toInt();
-            } else if (key == QLatin1String("name")) {
+            } else if (key == QLatin1StringView("name")) {
                 relation.name = value.trimmed();
-            } else if (key == QLatin1String("type") && value == QLatin1String("multipolygon")) {
+            } else if (key == QLatin1StringView("type") && value == QLatin1StringView("multipolygon")) {
                 relation.isMultipolygon = true;
             }
         }
@@ -461,15 +461,15 @@ void PbfParser::parseDense()
             QString key = QString::fromUtf8(m_primitiveBlock.stringtable().s(dense.keys_vals(m_lastDenseTag)).data());
             QString value = QString::fromUtf8(m_primitiveBlock.stringtable().s(dense.keys_vals(m_lastDenseTag + 1)).data());
 
-            if (key == QLatin1String("name")) {
+            if (key == QLatin1StringView("name")) {
                 node.name = value.trimmed();
-            } else if (key == QLatin1String("addr:street")) {
+            } else if (key == QLatin1StringView("addr:street")) {
                 node.street = value.trimmed();
                 node.save = true;
-            } else if (key == QLatin1String("addr:housenumber")) {
+            } else if (key == QLatin1StringView("addr:housenumber")) {
                 node.houseNumber = value;
                 node.save = true;
-            } else if (key == QLatin1String("addr:city")) {
+            } else if (key == QLatin1StringView("addr:city")) {
                 node.city = value;
                 node.save = true;
             } else {

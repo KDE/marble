@@ -159,7 +159,7 @@ QString TirexBackend::metatileFileName(const TirexMetatileRequest &req)
     QString path = m_tileDir + QLatin1Char('/') + QString::number(req.tile.z) + QLatin1Char('/') + QString::number(hash[4]) + QLatin1Char('/')
         + QString::number(hash[3]) + QLatin1Char('/') + QString::number(hash[2]) + QLatin1Char('/') + QString::number(hash[1]) + QLatin1Char('/');
     QDir().mkpath(path);
-    path += QString::number(hash[0]) + QLatin1String(".meta");
+    path += QString::number(hash[0]) + QLatin1StringView(".meta");
     return path;
 }
 

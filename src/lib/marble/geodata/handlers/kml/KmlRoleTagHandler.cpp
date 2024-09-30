@@ -23,7 +23,7 @@ KML_DEFINE_TAG_HANDLER(role)
 
 GeoNode *KmlroleTagHandler::parse(GeoParser &parser) const
 {
-    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1String(kmlTag_role)));
+    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1StringView(kmlTag_role)));
 
     GeoStackItem parentItem = parser.parentElement();
     if (parentItem.is<GeoDataPlacemark>()) {

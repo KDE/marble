@@ -389,7 +389,7 @@ bool AprsPlugin::render(GeoPainter *painter, ViewportParams *viewport, const QSt
 
     if (!(viewport->viewLatLonAltBox() == m_lastBox)) {
         m_lastBox = viewport->viewLatLonAltBox();
-        QString towrite = QLatin1String("#filter a/") + QString::number(m_lastBox.north(GeoDataCoordinates::Degree)) + QLatin1Char('/')
+        QString towrite = QLatin1StringView("#filter a/") + QString::number(m_lastBox.north(GeoDataCoordinates::Degree)) + QLatin1Char('/')
             + QString::number(m_lastBox.west(GeoDataCoordinates::Degree)) + QLatin1Char('/') + QString::number(m_lastBox.south(GeoDataCoordinates::Degree))
             + QLatin1Char('/') + QString::number(m_lastBox.east(GeoDataCoordinates::Degree)) + QLatin1Char('\n');
         mDebug() << "upating filter: " << towrite.toLocal8Bit().data();

@@ -23,7 +23,7 @@ GPX_DEFINE_TAG_HANDLER(trkpt)
 
 GeoNode *GPXtrkptTagHandler::parse(GeoParser &parser) const
 {
-    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1String(gpxTag_trkpt)));
+    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1StringView(gpxTag_trkpt)));
 
     GeoStackItem parentItem = parser.parentElement();
     if (parentItem.represents(gpxTag_trkseg)) {
@@ -34,11 +34,11 @@ GeoNode *GPXtrkptTagHandler::parse(GeoParser &parser) const
         QStringView tmp;
         qreal lat = 0;
         qreal lon = 0;
-        tmp = attributes.value(QLatin1String(gpxTag_lat));
+        tmp = attributes.value(QLatin1StringView(gpxTag_lat));
         if (!tmp.isEmpty()) {
             lat = tmp.toString().toDouble();
         }
-        tmp = attributes.value(QLatin1String(gpxTag_lon));
+        tmp = attributes.value(QLatin1StringView(gpxTag_lon));
         if (!tmp.isEmpty()) {
             lon = tmp.toString().toDouble();
         }

@@ -138,8 +138,8 @@ double GeoDataBuilding::parseBuildingHeight(const QString &buildingHeight)
         return extractedHeight;
     }
 
-    if (buildingHeight.endsWith(QLatin1Char('m')) || buildingHeight.endsWith(QLatin1String("meter")) || buildingHeight.endsWith(QLatin1String("meters"))
-        || buildingHeight.endsWith(QLatin1String("metre")) || buildingHeight.endsWith(QLatin1String("metres"))) {
+    if (buildingHeight.endsWith(QLatin1Char('m')) || buildingHeight.endsWith(QLatin1StringView("meter")) || buildingHeight.endsWith(QLatin1StringView("meters"))
+        || buildingHeight.endsWith(QLatin1StringView("metre")) || buildingHeight.endsWith(QLatin1StringView("metres"))) {
         QString const heightValue = QString(buildingHeight)
                                         .remove(QStringLiteral("meters"))
                                         .remove(QStringLiteral("meter"))
@@ -170,7 +170,7 @@ double GeoDataBuilding::parseBuildingHeight(const QString &buildingHeight)
                 }
             }
             extractedHeight = heightInches;
-        } else if (buildingHeight.endsWith(QLatin1String("feet"))) {
+        } else if (buildingHeight.endsWith(QLatin1StringView("feet"))) {
             bool ok;
             double feet = QString(buildingHeight).remove(QStringLiteral("feet")).trimmed().toDouble(&ok);
             if (ok) {

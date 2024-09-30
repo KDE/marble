@@ -20,7 +20,7 @@ KML_DEFINE_TAG_HANDLER(width)
 
 GeoNode *KmlwidthTagHandler::parse(GeoParser &parser) const
 {
-    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1String(kmlTag_width)));
+    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1StringView(kmlTag_width)));
 
     GeoStackItem parentItem = parser.parentElement();
 

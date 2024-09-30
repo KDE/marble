@@ -20,7 +20,7 @@ DGML_DEFINE_TAG_HANDLER(SourceDir)
 GeoNode *DgmlSourceDirTagHandler::parse(GeoParser &parser) const
 {
     // Check whether the tag is valid
-    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1String(dgmlTag_SourceDir)));
+    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1StringView(dgmlTag_SourceDir)));
 
     QString format = parser.attribute(dgmlAttr_format).trimmed();
 

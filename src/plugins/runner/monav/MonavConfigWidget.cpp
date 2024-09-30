@@ -187,7 +187,7 @@ QString MonavStuffEntry::transport() const
 
 bool MonavStuffEntry::isValid() const
 {
-    return !m_continent.isEmpty() && !m_state.isEmpty() && m_payload.startsWith(QLatin1String("http://"));
+    return !m_continent.isEmpty() && !m_state.isEmpty() && m_payload.startsWith(QLatin1StringView("http://"));
 }
 
 MonavConfigWidgetPrivate::MonavConfigWidgetPrivate(MonavConfigWidget *parent, MonavPlugin *plugin)
@@ -478,7 +478,7 @@ void MonavConfigWidgetPrivate::install()
 {
     if (!m_currentDownload.isEmpty()) {
         int const index = m_currentDownload.lastIndexOf(QLatin1Char('/'));
-        const QString localFile = MarbleDirs::localPath() + QLatin1String("/maps") + m_currentDownload.mid(index);
+        const QString localFile = MarbleDirs::localPath() + QLatin1StringView("/maps") + m_currentDownload.mid(index);
         m_currentFile.setFileName(localFile);
         if (m_currentFile.open(QFile::WriteOnly)) {
             QFileInfo file(m_currentFile);
@@ -501,7 +501,7 @@ void MonavConfigWidgetPrivate::installMap()
         delete m_unpackProcess;
         m_unpackProcess = nullptr;
         m_parent->m_installButton->setEnabled(true);
-    } else if (m_currentFile.fileName().endsWith(QLatin1String("tar.gz")) && canExecute("tar")) {
+    } else if (m_currentFile.fileName().endsWith(QLatin1StringView("tar.gz")) && canExecute("tar")) {
         QFileInfo file(m_currentFile);
         QString message = QObject::tr("Installing %1").arg(file.fileName());
         setBusy(true, message);
@@ -516,7 +516,7 @@ void MonavConfigWidgetPrivate::installMap()
             m_unpackProcess->start("tar", arguments);
         }
     } else {
-        if (!m_currentFile.fileName().endsWith(QLatin1String("tar.gz"))) {
+        if (!m_currentFile.fileName().endsWith(QLatin1StringView("tar.gz"))) {
             mDebug() << "Can only handle tar.gz files";
         } else {
             mDebug() << "Cannot extract archive: tar executable not found in PATH.";

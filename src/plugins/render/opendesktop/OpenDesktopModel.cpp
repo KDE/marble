@@ -38,15 +38,15 @@ void OpenDesktopModel::getAdditionalItems(const GeoDataLatLonAltBox &box, qint32
 {
     Q_UNUSED(number)
 
-    if (marbleModel()->planetId() != QLatin1String("earth")) {
+    if (marbleModel()->planetId() != QLatin1StringView("earth")) {
         return;
     }
 
     GeoDataCoordinates coords = box.center();
 
-    const QString openDesktopUrl(QLatin1String("http://api.opendesktop.org/v1/person/data") + QLatin1String("?latitude=")
-                                 + QString::number(coords.latitude() * RAD2DEG) + QLatin1String("&longitude=") + QString::number(coords.longitude() * RAD2DEG)
-                                 + QLatin1String("&format=json"));
+    const QString openDesktopUrl(QLatin1StringView("http://api.opendesktop.org/v1/person/data") + QLatin1StringView("?latitude=")
+                                 + QString::number(coords.latitude() * RAD2DEG) + QLatin1StringView("&longitude=")
+                                 + QString::number(coords.longitude() * RAD2DEG) + QLatin1StringView("&format=json"));
 
     downloadDescriptionFile(QUrl(openDesktopUrl));
 }
@@ -84,7 +84,7 @@ void OpenDesktopModel::parseFile(const QByteArray &file)
                 item->setId(personid);
                 item->setCoordinate(coor);
                 item->setFullName(firstName + QLatin1Char(' ') + lastName);
-                item->setLocation(city + QLatin1String(", ") + country);
+                item->setLocation(city + QLatin1StringView(", ") + country);
                 item->setRole(!role.isEmpty() ? role : QStringLiteral("nothing"));
                 downloadItem(avatarUrl, "avatar", item);
                 items << item;

@@ -141,7 +141,7 @@ void ClickOnThat::initiateGame()
             Q_ASSERT_X(object, "CountryByShape::initiateGame", "failed to get valid data from treeModel for GeoDataObject");
             if (auto doc = geodata_cast<GeoDataDocument>(object)) {
                 QFileInfo fileInfo(doc->fileName());
-                if (fileInfo.fileName() == QLatin1String("boundaryplacemarks.cache")) {
+                if (fileInfo.fileName() == QLatin1StringView("boundaryplacemarks.cache")) {
                     d->m_countryNames = doc;
                     break;
                 }
@@ -157,7 +157,7 @@ void ClickOnThat::initiateGame()
             Q_ASSERT_X(object, "MainWindow::initiateGame", "failed to get valid data from treeModel for GeoDataObject");
             if (auto doc = geodata_cast<GeoDataDocument>(object)) {
                 QFileInfo fileInfo(doc->fileName());
-                if (fileInfo.fileName() == QLatin1String("ne_50m_admin_0_countries.pn2")) {
+                if (fileInfo.fileName() == QLatin1StringView("ne_50m_admin_0_countries.pn2")) {
                     d->m_countryBoundaries = doc;
                     break;
                 }
@@ -241,9 +241,9 @@ void ClickOnThat::updateSelectPin(bool result, const GeoDataCoordinates &clicked
     QString iconPath = dir.absolutePath();
     if (result) {
         // iconPath = MarbleDirs::path("bitmaps/MapTackRoundHeadGreen.png");
-        iconPath += QLatin1String("/MapTackRoundHeadGreen.png");
+        iconPath += QLatin1StringView("/MapTackRoundHeadGreen.png");
     } else {
-        iconPath += QLatin1String("/MapTackRoundHeadRed.png");
+        iconPath += QLatin1StringView("/MapTackRoundHeadRed.png");
     }
 
     GeoDataStyle::Ptr style = d->m_selectPinDocument->style(QStringLiteral("answer"));

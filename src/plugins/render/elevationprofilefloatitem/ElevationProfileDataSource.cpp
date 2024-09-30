@@ -157,7 +157,7 @@ void ElevationProfileTrackDataSource::handleObjectAdded(GeoDataObject *object)
         QList<const GeoDataTrack *> list = i.value();
         for (int i = 0; i < list.size(); ++i) {
             m_trackList << list[i];
-            m_trackChooserList << QString(filename + QLatin1String(": ") + QString::number(i));
+            m_trackChooserList << QString(filename + QLatin1StringView(": ") + QString::number(i));
         }
     }
     if (selectedTrack) {

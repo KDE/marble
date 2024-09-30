@@ -371,13 +371,13 @@ void TestGeoDataCoordinates::testIsPole()
 
     GeoDataCoordinates coordinates1;
 
-    if (pole == QLatin1String("false_pole")) {
+    if (pole == QLatin1StringView("false_pole")) {
         coordinates1.set(lon, lat, alt, GeoDataCoordinates::Degree);
         QVERIFY(coordinates1.isPole() == false);
-    } else if (pole == QLatin1String("south_pole")) {
+    } else if (pole == QLatin1StringView("south_pole")) {
         coordinates1.set(lon, lat, alt, GeoDataCoordinates::Degree);
         QVERIFY(coordinates1.isPole(SouthPole));
-    } else if (pole == QLatin1String("north_pole")) {
+    } else if (pole == QLatin1StringView("north_pole")) {
         coordinates1.set(lon, lat, alt, GeoDataCoordinates::Degree);
         QVERIFY(coordinates1.isPole(NorthPole));
     }
@@ -671,15 +671,15 @@ void TestGeoDataCoordinates::testFromStringDMS_data()
 
                                                         // Create row title
                                                         QString rowTitle;
-                                                        rowTitle.append(QLatin1String(spacesType == WithSpaces ? "spaced dir" : "unspaced dir"))
-                                                            .append(QLatin1String(unitsType == WithUnits ? "|units" : "|no units"))
-                                                            .append(QLatin1String("|lon:"))
+                                                        rowTitle.append(QLatin1StringView(spacesType == WithSpaces ? "spaced dir" : "unspaced dir"))
+                                                            .append(QLatin1StringView(unitsType == WithUnits ? "|units" : "|no units"))
+                                                            .append(QLatin1StringView("|lon:"))
                                                             .append(QLatin1Char(lonIsPositive ? '+' : '-'))
                                                             .append(QString::number(lonDegree) + QChar(0xb0))
                                                             .append(QString::number(lonMinutes) + QLatin1Char('\''))
                                                             .append(QString::number(lonSeconds, 'f', 10) + QLatin1Char('"'))
                                                             .append(QLatin1Char(lonSphere == PosSphere ? 'P' : 'N'))
-                                                            .append(QLatin1String("|lat:"))
+                                                            .append(QLatin1StringView("|lat:"))
                                                             .append(QLatin1Char(latIsPositive ? '+' : '-'))
                                                             .append(QString::number(latDegree) + QChar(0xb0))
                                                             .append(QString::number(latMinutes) + QLatin1Char('\''))
@@ -790,14 +790,14 @@ void TestGeoDataCoordinates::testFromStringDM_data()
 
                                                 // Create row title
                                                 QString rowTitle;
-                                                rowTitle.append(QLatin1String(spacesType == WithSpaces ? "spaced dir" : "unspaced dir"))
-                                                    .append(QLatin1String(unitsType == WithUnits ? "|units" : "|no units"))
-                                                    .append(QLatin1String("|lon:"))
+                                                rowTitle.append(QLatin1StringView(spacesType == WithSpaces ? "spaced dir" : "unspaced dir"))
+                                                    .append(QLatin1StringView(unitsType == WithUnits ? "|units" : "|no units"))
+                                                    .append(QLatin1StringView("|lon:"))
                                                     .append(QLatin1Char(lonIsPositive ? '+' : '-'))
                                                     .append(QString::number(lonDegree) + QChar(0xb0))
                                                     .append(QString::number(lonMinutes, 'f', 10) + QLatin1Char('\''))
                                                     .append(QLatin1Char(lonSphere == PosSphere ? 'P' : 'N'))
-                                                    .append(QLatin1String("|lat:"))
+                                                    .append(QLatin1StringView("|lat:"))
                                                     .append(QLatin1Char(latIsPositive ? '+' : '-'))
                                                     .append(QString::number(latDegree) + QChar(0xb0))
                                                     .append(QString::number(latMinutes, 'f', 10) + QLatin1Char('\''))
@@ -898,13 +898,13 @@ void TestGeoDataCoordinates::testFromStringD_data()
 
                                         // Create row title
                                         QString rowTitle;
-                                        rowTitle.append(QLatin1String(spacesType == WithSpaces ? "spaced dir" : "unspaced dir"))
-                                            .append(QLatin1String(unitsType == WithUnits ? "|units" : "|no units"))
-                                            .append(QLatin1String("|lon:"))
+                                        rowTitle.append(QLatin1StringView(spacesType == WithSpaces ? "spaced dir" : "unspaced dir"))
+                                            .append(QLatin1StringView(unitsType == WithUnits ? "|units" : "|no units"))
+                                            .append(QLatin1StringView("|lon:"))
                                             .append(QLatin1Char(lonIsPositive ? '+' : '-'))
                                             .append(QString::number(lonDegree, 'f', 10) + QChar(0xb0))
                                             .append(QLatin1Char(lonSphere == PosSphere ? 'P' : 'N'))
-                                            .append(QLatin1String("|lat:"))
+                                            .append(QLatin1StringView("|lat:"))
                                             .append(QLatin1Char(latIsPositive ? '+' : '-'))
                                             .append(QString::number(latDegree, 'f', 10) + QChar(0xb0))
                                             .append(QLatin1Char(latSphere == PosSphere ? 'P' : 'N'))
@@ -1359,8 +1359,8 @@ void TestGeoDataCoordinates::testFromLocaleString_data()
 
     for (const Language &language : languages) {
         for (const Sample &sample : language.samples) {
-            const QString rowTitle = language.name + QLatin1String("|") + sample.name + QLatin1String("|lon:") + QString::number(sample.lon, 'f', 10)
-                + QLatin1String("|lat:") + QString::number(sample.lat, 'f', 10);
+            const QString rowTitle = language.name + QLatin1StringView("|") + sample.name + QLatin1StringView("|lon:") + QString::number(sample.lon, 'f', 10)
+                + QLatin1StringView("|lat:") + QString::number(sample.lat, 'f', 10);
 
             QTest::newRow(rowTitle.toLatin1().constData()) << language.degree << language.minutes << language.seconds << language.north << language.south
                                                            << language.east << language.west << sample.string << sample.lon << sample.lat;

@@ -36,7 +36,7 @@ public:
         , m_verify(false)
         , m_source(source)
     {
-        if (m_dem == QLatin1String("true")) {
+        if (m_dem == QLatin1StringView("true")) {
             m_tileQuality = 70;
         } else {
             m_tileQuality = 85;
@@ -157,8 +157,8 @@ TileCreator::TileCreator(const QString &sourceDir, const QString &installMap, co
         sourcePath = sourceDir + QLatin1Char('/') + installMap;
         mDebug() << "Trying absolute path*:" << sourcePath;
     } else {
-        sourcePath = MarbleDirs::path(QLatin1String("maps/") + sourceDir + QLatin1Char('/') + installMap);
-        mDebug() << "Trying relative path*:" << QLatin1String("maps/") + sourceDir + QLatin1Char('/') + installMap;
+        sourcePath = MarbleDirs::path(QLatin1StringView("maps/") + sourceDir + QLatin1Char('/') + installMap);
+        mDebug() << "Trying relative path*:" << QLatin1StringView("maps/") + sourceDir + QLatin1Char('/') + installMap;
     }
 
     mDebug() << "Creating tiles from*: " << sourcePath;
@@ -166,7 +166,7 @@ TileCreator::TileCreator(const QString &sourceDir, const QString &installMap, co
     d->m_source = new TileCreatorSourceImage(sourcePath);
 
     if (d->m_targetDir.isNull())
-        d->m_targetDir = MarbleDirs::localPath() + QLatin1String("/maps/") + sourcePath.section(QLatin1Char('/'), -3, -2) + QLatin1Char('/');
+        d->m_targetDir = MarbleDirs::localPath() + QLatin1StringView("/maps/") + sourcePath.section(QLatin1Char('/'), -3, -2) + QLatin1Char('/');
 
     setTerminationEnabled(true);
 }
@@ -190,7 +190,7 @@ void TileCreator::cancelTileCreation()
 
 void TileCreator::run()
 {
-    if (d->m_resume && d->m_tileFormat == QLatin1String("jpg") && d->m_tileQuality != 100) {
+    if (d->m_resume && d->m_tileFormat == QLatin1StringView("jpg") && d->m_tileQuality != 100) {
         qWarning() << "Resuming jpegs is only supported with tileQuality 100";
         return;
     }
@@ -290,11 +290,11 @@ void TileCreator::run()
                     return;
                 }
 
-                if (d->m_dem == QLatin1String("true")) {
+                if (d->m_dem == QLatin1StringView("true")) {
                     tile = tile.convertToFormat(QImage::Format_Indexed8, grayScalePalette, Qt::ThresholdDither);
                 }
 
-                bool ok = tile.save(tileName, d->m_tileFormat.toLatin1().data(), d->m_tileFormat == QLatin1String("jpg") ? 100 : d->m_tileQuality);
+                bool ok = tile.save(tileName, d->m_tileFormat.toLatin1().data(), d->m_tileFormat == QLatin1StringView("jpg") ? 100 : d->m_tileQuality);
                 if (!ok)
                     mDebug() << "Error while writing Tile: " << tileName;
 
@@ -404,7 +404,7 @@ void TileCreator::run()
                     }
                     QImage tile = img_topleft;
 
-                    if (d->m_dem == QLatin1String("true")) {
+                    if (d->m_dem == QLatin1StringView("true")) {
                         tile.setColorTable(grayScalePalette);
                         uchar *destLine;
 
@@ -473,7 +473,7 @@ void TileCreator::run()
 
                     // Saving at 100% JPEG quality to have a high-quality
                     // version to create the remaining needed tiles from.
-                    bool ok = tile.save(newTileName, d->m_tileFormat.toLatin1().data(), d->m_tileFormat == QLatin1String("jpg") ? 100 : d->m_tileQuality);
+                    bool ok = tile.save(newTileName, d->m_tileFormat.toLatin1().data(), d->m_tileFormat == QLatin1StringView("jpg") ? 100 : d->m_tileQuality);
                     if (!ok)
                         mDebug() << "Error while writing Tile: " << newTileName;
                 }
@@ -489,7 +489,7 @@ void TileCreator::run()
     }
     mDebug() << "Tile creation completed.";
 
-    if (d->m_tileFormat == QLatin1String("jpg") && d->m_tileQuality != 100) {
+    if (d->m_tileFormat == QLatin1StringView("jpg") && d->m_tileQuality != 100) {
         // Applying correct lower JPEG compression now that we created all tiles
         int savedTilesCount = 0;
 

@@ -23,7 +23,7 @@ KML_DEFINE_TAG_HANDLER_GX22(duration)
 
 GeoNode *KmldurationTagHandler::parse(GeoParser &parser) const
 {
-    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1String(kmlTag_duration)));
+    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1StringView(kmlTag_duration)));
 
     GeoStackItem parentItem = parser.parentElement();
 

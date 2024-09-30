@@ -398,7 +398,7 @@ QString GeoDataCoordinates::toString(GeoDataCoordinates::Notation notation, int 
 
         return QStringLiteral("%1%2 %3 m E, %4 m N").arg(zoneString, bandString, eastingString, northingString);
     } else {
-        coordString = lonToString(d->m_lon, notation, Radian, precision) + QLatin1String(", ") + latToString(d->m_lat, notation, Radian, precision);
+        coordString = lonToString(d->m_lon, notation, Radian, precision) + QLatin1StringView(", ") + latToString(d->m_lat, notation, Radian, precision);
     }
 
     return coordString;

@@ -39,7 +39,7 @@ void LonLatParser::initAll()
         return;
     }
 
-    const QLatin1String placeholder = QLatin1String("*");
+    const QLatin1String placeholder = QLatin1StringView("*");
     const QString separator = QStringLiteral("|");
 
     //: See https://community.kde.org/Marble/GeoDataCoordinatesTranslation#Direction_terms
@@ -73,7 +73,7 @@ void LonLatParser::initAll()
     }
 
     // Sets "(north|east|south|west|[nesw])" in en, as translated names match untranslated ones
-    m_dirCapExp = QLatin1Char('(') + fullNamesExp + QLatin1Char('[') + simpleLetters + QLatin1String("])");
+    m_dirCapExp = QLatin1Char('(') + fullNamesExp + QLatin1Char('[') + simpleLetters + QLatin1StringView("])");
 
     // expressions for symbols of degree, minutes and seconds
     //: See https://community.kde.org/Marble/GeoDataCoordinatesTranslation#Coordinate_symbols
@@ -286,7 +286,7 @@ QString LonLatParser::createDecimalPointExp()
 {
     const QString decimalPoint = QLocale::system().decimalPoint();
 
-    return (decimalPoint == QLatin1String(".")) ? QStringLiteral("\\.") : QLatin1String("[.") + decimalPoint + QLatin1Char(']');
+    return (decimalPoint == QLatin1StringView(".")) ? QStringLiteral("\\.") : QLatin1StringView("[.") + decimalPoint + QLatin1Char(']');
 }
 
 void LonLatParser::getLocaleList(QStringList &localeList, const QString &localeListString, const QLatin1String &placeholder, const QString &separator)
@@ -341,7 +341,7 @@ bool LonLatParser::isLatDirection(const QString &input, bool &isDirPosHemisphere
 
 qreal LonLatParser::degreeValueFromDMS(const QRegularExpressionMatch &regexMatch, int c, bool isPosHemisphere)
 {
-    const bool isNegativeValue = (regexMatch.captured(c++) == QLatin1String("-"));
+    const bool isNegativeValue = (regexMatch.captured(c++) == QLatin1StringView("-"));
     const uint degree = regexMatch.captured(c++).toUInt();
     const uint minutes = regexMatch.captured(c++).toUInt();
     const qreal seconds = parseDouble(regexMatch.captured(c));
@@ -360,7 +360,7 @@ qreal LonLatParser::degreeValueFromDMS(const QRegularExpressionMatch &regexMatch
 
 qreal LonLatParser::degreeValueFromDM(const QRegularExpressionMatch &regexMatch, int c, bool isPosHemisphere)
 {
-    const bool isNegativeValue = (regexMatch.captured(c++) == QLatin1String("-"));
+    const bool isNegativeValue = (regexMatch.captured(c++) == QLatin1StringView("-"));
     const uint degree = regexMatch.captured(c++).toUInt();
     const qreal minutes = parseDouble(regexMatch.captured(c));
 

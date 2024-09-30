@@ -236,26 +236,26 @@ MarbleMapPrivate::MarbleMapPrivate(MarbleMap *parent, MarbleModel *model)
 void MarbleMapPrivate::updateProperty(const QString &name, bool show)
 {
     // earth
-    if (name == QLatin1String("places")) {
+    if (name == QLatin1StringView("places")) {
         m_placemarkLayer.setShowPlaces(show);
-    } else if (name == QLatin1String("cities")) {
+    } else if (name == QLatin1StringView("cities")) {
         m_placemarkLayer.setShowCities(show);
-    } else if (name == QLatin1String("terrain")) {
+    } else if (name == QLatin1StringView("terrain")) {
         m_placemarkLayer.setShowTerrain(show);
-    } else if (name == QLatin1String("otherplaces")) {
+    } else if (name == QLatin1StringView("otherplaces")) {
         m_placemarkLayer.setShowOtherPlaces(show);
     }
 
     // other planets
-    else if (name == QLatin1String("landingsites")) {
+    else if (name == QLatin1StringView("landingsites")) {
         m_placemarkLayer.setShowLandingSites(show);
-    } else if (name == QLatin1String("craters")) {
+    } else if (name == QLatin1StringView("craters")) {
         m_placemarkLayer.setShowCraters(show);
-    } else if (name == QLatin1String("maria")) {
+    } else if (name == QLatin1StringView("maria")) {
         m_placemarkLayer.setShowMaria(show);
     }
 
-    else if (name == QLatin1String("relief")) {
+    else if (name == QLatin1StringView("relief")) {
         m_textureLayer.setShowRelief(show);
     }
 
@@ -626,7 +626,7 @@ bool MarbleMap::showCrosshairs() const
     QList<RenderPlugin *>::const_iterator i = pluginList.constBegin();
     QList<RenderPlugin *>::const_iterator const end = pluginList.constEnd();
     for (; i != end; ++i) {
-        if ((*i)->nameId() == QLatin1String("crosshairs")) {
+        if ((*i)->nameId() == QLatin1StringView("crosshairs")) {
             visible = (*i)->visible();
         }
     }
@@ -777,10 +777,10 @@ void MarbleMapPrivate::setDocument(const QString &key)
             QString containername = data->sourceFile();
             QString colorize = data->colorize();
             if (key == containername) {
-                if (colorize == QLatin1String("land")) {
+                if (colorize == QLatin1StringView("land")) {
                     m_textureLayer.addLandDocument(doc);
                 }
-                if (colorize == QLatin1String("sea")) {
+                if (colorize == QLatin1StringView("sea")) {
                     m_textureLayer.addSeaDocument(doc);
                 }
 
@@ -910,7 +910,7 @@ void MarbleMapPrivate::updateMapTheme()
                         mDebug() << "Base tiles not available. Creating Tiles ... \n"
                                  << "SourceDir: " << sourceDir << "InstallMap:" << installMap;
 
-                        TileCreator *tileCreator = new TileCreator(sourceDir, installMap, (role == QLatin1String("dem")) ? "true" : "false");
+                        TileCreator *tileCreator = new TileCreator(sourceDir, installMap, (role == QLatin1StringView("dem")) ? "true" : "false");
                         tileCreator->setTileFormat(texture->fileFormat().toLower());
 
                         QPointer<TileCreatorDialog> tileCreatorDlg = new TileCreatorDialog(tileCreator, nullptr);
@@ -949,7 +949,7 @@ void MarbleMapPrivate::updateMapTheme()
                         mDebug() << "Base tiles not available. Creating Tiles ... \n"
                                  << "SourceDir: " << sourceDir << "InstallMap:" << installMap;
 
-                        TileCreator *tileCreator = new TileCreator(sourceDir, installMap, (role == QLatin1String("dem")) ? "true" : "false");
+                        TileCreator *tileCreator = new TileCreator(sourceDir, installMap, (role == QLatin1StringView("dem")) ? "true" : "false");
                         tileCreator->setTileFormat(vectorTile->fileFormat().toLower());
 
                         QPointer<TileCreatorDialog> tileCreatorDlg = new TileCreatorDialog(tileCreator, nullptr);
@@ -978,13 +978,13 @@ void MarbleMapPrivate::updateMapTheme()
         if (!m_model->mapTheme()->map()->filters().isEmpty()) {
             const GeoSceneFilter *filter = m_model->mapTheme()->map()->filters().first();
 
-            if (filter->type() == QLatin1String("colorize")) {
+            if (filter->type() == QLatin1StringView("colorize")) {
                 // no need to look up with MarbleDirs twice so they are left null for now
                 QList<const GeoScenePalette *> palette = filter->palette();
                 for (const GeoScenePalette *curPalette : std::as_const(palette)) {
-                    if (curPalette->type() == QLatin1String("sea")) {
+                    if (curPalette->type() == QLatin1StringView("sea")) {
                         seafile = MarbleDirs::path(curPalette->file());
-                    } else if (curPalette->type() == QLatin1String("land")) {
+                    } else if (curPalette->type() == QLatin1StringView("land")) {
                         landfile = MarbleDirs::path(curPalette->file());
                     }
                 }
@@ -1079,7 +1079,7 @@ void MarbleMap::setShowAtmosphere(bool visible)
 {
     const auto plugins = renderPlugins();
     for (RenderPlugin *plugin : plugins) {
-        if (plugin->nameId() == QLatin1String("atmosphere")) {
+        if (plugin->nameId() == QLatin1StringView("atmosphere")) {
             plugin->setVisible(visible);
         }
     }
@@ -1093,7 +1093,7 @@ void MarbleMap::setShowCrosshairs(bool visible)
     QList<RenderPlugin *>::const_iterator i = pluginList.constBegin();
     QList<RenderPlugin *>::const_iterator const end = pluginList.constEnd();
     for (; i != end; ++i) {
-        if ((*i)->nameId() == QLatin1String("crosshairs")) {
+        if ((*i)->nameId() == QLatin1StringView("crosshairs")) {
             (*i)->setVisible(visible);
         }
     }

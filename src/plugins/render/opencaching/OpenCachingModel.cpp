@@ -33,13 +33,13 @@ QHash<QString, QVariant> OpenCachingModelPrivate::parseCache(QXmlStreamReader &r
 {
     QHash<QString, QVariant> cache;
     while (!reader.atEnd()) {
-        if (reader.isStartElement() && reader.name() != QLatin1String("cache")) {
-            if (reader.name() == QLatin1String("id")) {
+        if (reader.isStartElement() && reader.name() != QLatin1StringView("cache")) {
+            if (reader.name() == QLatin1StringView("id")) {
                 cache["id"] = reader.attributes().value("id").toString();
-            } else if (reader.name() != QLatin1String("attributes") && reader.name() != QLatin1String("attribute")) {
+            } else if (reader.name() != QLatin1StringView("attributes") && reader.name() != QLatin1StringView("attribute")) {
                 cache[reader.name().toString()] = reader.readElementText();
             }
-        } else if (reader.isEndElement() && reader.name() == QLatin1String("cache")) {
+        } else if (reader.isEndElement() && reader.name() == QLatin1StringView("cache")) {
             return cache;
         }
         reader.readNext();
@@ -51,13 +51,13 @@ QHash<QString, QVariant> OpenCachingModelPrivate::parseLogEntry(QXmlStreamReader
 {
     QHash<QString, QVariant> cacheLogEntry;
     while (!reader.atEnd()) {
-        if (reader.isStartElement() && reader.name() != QLatin1String("cachelog")) {
-            if (reader.name() == QLatin1String("cacheid")) {
+        if (reader.isStartElement() && reader.name() != QLatin1StringView("cachelog")) {
+            if (reader.name() == QLatin1StringView("cacheid")) {
                 cacheLogEntry["cacheid"] = reader.attributes().value("id").toString();
             } else {
                 cacheLogEntry[reader.name().toString()] = reader.readElementText();
             }
-        } else if (reader.isEndElement() && reader.name() == QLatin1String("cachelog")) {
+        } else if (reader.isEndElement() && reader.name() == QLatin1StringView("cachelog")) {
             return cacheLogEntry;
         }
         reader.readNext();
@@ -69,13 +69,13 @@ QHash<QString, QVariant> OpenCachingModelPrivate::parseDescription(QXmlStreamRea
 {
     QHash<QString, QVariant> cacheDesc;
     while (!reader.atEnd()) {
-        if (reader.isStartElement() && reader.name() != QLatin1String("cachedesc")) {
-            if (reader.name() == QLatin1String("cacheid")) {
+        if (reader.isStartElement() && reader.name() != QLatin1StringView("cachedesc")) {
+            if (reader.name() == QLatin1StringView("cacheid")) {
                 cacheDesc["cacheid"] = reader.attributes().value("id").toString();
             } else {
                 cacheDesc[reader.name().toString()] = reader.readElementText();
             }
-        } else if (reader.isEndElement() && reader.name() == QLatin1String("cachedesc")) {
+        } else if (reader.isEndElement() && reader.name() == QLatin1StringView("cachedesc")) {
             return cacheDesc;
         }
         reader.readNext();
@@ -133,16 +133,16 @@ void OpenCachingModel::getAdditionalItems(const GeoDataLatLonAltBox &box, const 
 {
     Q_UNUSED(number);
 
-    if (model->planetId() != QLatin1String("earth")) {
+    if (model->planetId() != QLatin1StringView("earth")) {
         return;
     }
 
     // https://www.opencaching.de/doc/xml/xml11.htm
-    const QString openCachingUrl(QLatin1String("http://www.opencaching.de/xml/ocxml11.php") + QLatin1String("?modifiedsince=")
-                                 + m_startDate.toString("yyyyMMddhhmmss") + QLatin1String("&cache=1&cachedesc=1&picture=0&cachelog=1&removedobject=0")
-                                 + QLatin1String("&lat=") + QString::number(box.center().latitude() * RAD2DEG) + QLatin1String("&lon=")
-                                 + QString::number(box.center().longitude() * RAD2DEG) + QLatin1String("&distance=") + QString::number(m_maxDistance)
-                                 + QLatin1String("&charset=utf-8&cdata=0&session=0&zip=0"));
+    const QString openCachingUrl(QLatin1StringView("http://www.opencaching.de/xml/ocxml11.php") + QLatin1StringView("?modifiedsince=")
+                                 + m_startDate.toString("yyyyMMddhhmmss") + QLatin1StringView("&cache=1&cachedesc=1&picture=0&cachelog=1&removedobject=0")
+                                 + QLatin1StringView("&lat=") + QString::number(box.center().latitude() * RAD2DEG) + QLatin1StringView("&lon=")
+                                 + QString::number(box.center().longitude() * RAD2DEG) + QLatin1StringView("&distance=") + QString::number(m_maxDistance)
+                                 + QLatin1StringView("&charset=utf-8&cdata=0&session=0&zip=0"));
     downloadDescriptionFile(QUrl(openCachingUrl));
 }
 
@@ -160,13 +160,13 @@ void OpenCachingModel::parseFile(const QByteArray &file)
             continue;
         }
         if (token == QXmlStreamReader::StartElement) {
-            if (reader.name() == QLatin1String("cache")) {
+            if (reader.name() == QLatin1StringView("cache")) {
                 OpenCachingCache cache = d->parseCache(reader);
                 caches[cache.id()] = cache;
-            } else if (reader.name() == QLatin1String("cachedesc")) {
+            } else if (reader.name() == QLatin1StringView("cachedesc")) {
                 OpenCachingCacheDescription description = d->parseDescription(reader);
                 descriptions[description.cacheId()][description.language()] = description;
-            } else if (reader.name() == QLatin1String("cachelog")) {
+            } else if (reader.name() == QLatin1StringView("cachelog")) {
                 OpenCachingCacheLogEntry logEntry = d->parseLogEntry(reader);
                 logs[logEntry.cacheId()].addLogEntry(logEntry);
             }

@@ -21,7 +21,7 @@ KML_DEFINE_TAG_HANDLER(hotSpot)
 
 GeoNode *KmlhotSpotTagHandler::parse(GeoParser &parser) const
 {
-    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1String(kmlTag_hotSpot)));
+    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1StringView(kmlTag_hotSpot)));
 
     GeoStackItem parentItem = parser.parentElement();
 
@@ -33,17 +33,17 @@ GeoNode *KmlhotSpotTagHandler::parse(GeoParser &parser) const
         GeoDataHotSpot::Units xunits;
         GeoDataHotSpot::Units yunits;
 
-        if (xu == QLatin1String("pixels")) {
+        if (xu == QLatin1StringView("pixels")) {
             xunits = GeoDataHotSpot::Pixels;
-        } else if (xu == QLatin1String("insetPixels")) {
+        } else if (xu == QLatin1StringView("insetPixels")) {
             xunits = GeoDataHotSpot::InsetPixels;
         } else {
             xunits = GeoDataHotSpot::Fraction;
         }
 
-        if (yu == QLatin1String("pixels")) {
+        if (yu == QLatin1StringView("pixels")) {
             yunits = GeoDataHotSpot::Pixels;
-        } else if (yu == QLatin1String("insetPixels")) {
+        } else if (yu == QLatin1StringView("insetPixels")) {
             yunits = GeoDataHotSpot::InsetPixels;
         } else {
             yunits = GeoDataHotSpot::Fraction;

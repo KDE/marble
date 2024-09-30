@@ -681,7 +681,7 @@ void MainWindow::createPluginMenus()
     for (; i != end; ++i) {
         // menus
         const QList<QActionGroup *> *tmp_actionGroups = (*i)->actionGroups();
-        if ((*i)->enabled() && tmp_actionGroups && (*i)->nameId() != QLatin1String("annotation")) {
+        if ((*i)->enabled() && tmp_actionGroups && (*i)->nameId() != QLatin1StringView("annotation")) {
             for (QActionGroup *ag : *tmp_actionGroups) {
                 if (!ag->actions().isEmpty()) {
                     m_pluginMenus.append(m_viewMenu->addSeparator());
@@ -697,7 +697,7 @@ void MainWindow::createPluginMenus()
         const QList<QActionGroup *> *tmp_toolbarActionGroups = (*i)->toolbarActionGroups();
         if ((*i)->enabled() && tmp_toolbarActionGroups) {
             QToolBar *toolbar = new QToolBar(this);
-            toolbar->setObjectName(QLatin1String("plugin-toolbar-") + (*i)->nameId());
+            toolbar->setObjectName(QLatin1StringView("plugin-toolbar-") + (*i)->nameId());
 
             for (QActionGroup *ag : *tmp_toolbarActionGroups) {
                 toolbar->addActions(ag->actions());
@@ -737,7 +737,7 @@ void MainWindow::exportMapScreenShot()
     if (!fileName.isEmpty()) {
         // Take the case into account where no file format is indicated
         const char *format = nullptr;
-        if (!fileName.endsWith(QLatin1String("png"), Qt::CaseInsensitive) && !fileName.endsWith(QLatin1String("jpg"), Qt::CaseInsensitive)) {
+        if (!fileName.endsWith(QLatin1StringView("png"), Qt::CaseInsensitive) && !fileName.endsWith(QLatin1StringView("jpg"), Qt::CaseInsensitive)) {
             format = "JPG";
         }
 
@@ -878,7 +878,7 @@ void MainWindow::handbook()
 
     // docs.kde.org falls back to the English manual if no translated
     // documentation is available for the requested language.
-    QUrl handbookLocation(QLatin1String("https://docs.kde.org/?application=marble&branch=stable5&language=") + code);
+    QUrl handbookLocation(QLatin1StringView("https://docs.kde.org/?application=marble&branch=stable5&language=") + code);
 
     if (!QDesktopServices::openUrl(handbookLocation))
         qDebug() << "URL not opened";
@@ -950,17 +950,17 @@ void MainWindow::openFile()
     QStringList allFileExtensions;
     QStringList filters;
     for (const ParseRunnerPlugin *plugin : pluginManager->parsingRunnerPlugins()) {
-        if (plugin->nameId() == QLatin1String("Cache"))
+        if (plugin->nameId() == QLatin1StringView("Cache"))
             continue;
 
         const QStringList fileExtensions = plugin->fileExtensions().replaceInStrings(QRegularExpression("^"), "*.");
-        const QString filter = plugin->fileFormatDescription() + QLatin1String(" (") + fileExtensions.join(QLatin1Char(' ')) + QLatin1Char(')');
+        const QString filter = plugin->fileFormatDescription() + QLatin1StringView(" (") + fileExtensions.join(QLatin1Char(' ')) + QLatin1Char(')');
         filters << filter;
         allFileExtensions << fileExtensions;
     }
 
     allFileExtensions.sort(); // sort since file extensions are visible under Windows
-    const QString allFileTypes = tr("All Supported Files") + QLatin1String(" (") + allFileExtensions.join(QLatin1Char(' ')) + QLatin1Char(')');
+    const QString allFileTypes = tr("All Supported Files") + QLatin1StringView(" (") + allFileExtensions.join(QLatin1Char(' ')) + QLatin1Char(')');
 
     filters.sort();
     filters.prepend(allFileTypes);
@@ -996,21 +996,21 @@ void MainWindow::setupStatusBar()
     m_positionLabel = new QLabel();
     m_positionLabel->setIndent(5);
     // UTM syntax is used in the template string, as it is longer than the lon/lat one
-    QString templatePositionString = tr("Position: %1").arg(QLatin1String(" 00Z 000000.00 m E, 00000000.00 m N_"));
+    QString templatePositionString = tr("Position: %1").arg(QLatin1StringView(" 00Z 000000.00 m E, 00000000.00 m N_"));
     int maxPositionWidth = fontMetrics().boundingRect(templatePositionString).width() + 2 * m_positionLabel->margin() + 2 * m_positionLabel->indent();
     m_positionLabel->setFixedWidth(maxPositionWidth);
     statusBar()->addPermanentWidget(m_positionLabel);
 
     m_distanceLabel = new QLabel();
     m_distanceLabel->setIndent(5);
-    QString templateDistanceString = tr("Altitude: %1").arg(QLatin1String(" 00.000,0 mu"));
+    QString templateDistanceString = tr("Altitude: %1").arg(QLatin1StringView(" 00.000,0 mu"));
     int maxDistanceWidth = fontMetrics().boundingRect(templateDistanceString).width() + 2 * m_distanceLabel->margin() + 2 * m_distanceLabel->indent();
     m_distanceLabel->setFixedWidth(maxDistanceWidth);
     statusBar()->addPermanentWidget(m_distanceLabel);
 
     m_zoomLabel = new QLabel();
     m_zoomLabel->setIndent(5);
-    QString templateZoomString = tr("Zoom: %1").arg(QLatin1String(" 00"));
+    QString templateZoomString = tr("Zoom: %1").arg(QLatin1StringView(" 00"));
     int maxZoomWidth = fontMetrics().boundingRect(templateZoomString).width() + 2 * m_zoomLabel->margin() + 2 * m_zoomLabel->indent();
     m_zoomLabel->setFixedWidth(maxZoomWidth);
     // Not added here, but activated by the user with the context menu
@@ -1116,7 +1116,7 @@ void MainWindow::readSettings(const QVariantMap &overrideSettings)
 
     settings.beginGroup("MarbleWidget");
     QString mapThemeId;
-    const QVariantMap::ConstIterator mapThemeIdIt = overrideSettings.find(QLatin1String("mapTheme"));
+    const QVariantMap::ConstIterator mapThemeIdIt = overrideSettings.find(QLatin1StringView("mapTheme"));
     if (mapThemeIdIt != overrideSettings.constEnd()) {
         mapThemeId = mapThemeIdIt.value().toString();
     } else {
@@ -1132,10 +1132,10 @@ void MainWindow::readSettings(const QVariantMap &overrideSettings)
                                           settings.value("homeZoom", 1050).toInt());
 
     // Center on/Distance
-    const QVariantMap::ConstIterator distanceIt = overrideSettings.find(QLatin1String("distance"));
+    const QVariantMap::ConstIterator distanceIt = overrideSettings.find(QLatin1StringView("distance"));
     const bool isDistanceOverwritten = (distanceIt != overrideSettings.constEnd());
 
-    const QVariantMap::ConstIterator lonLatIt = overrideSettings.find(QLatin1String("lonlat"));
+    const QVariantMap::ConstIterator lonLatIt = overrideSettings.find(QLatin1StringView("lonlat"));
     if (lonLatIt != overrideSettings.constEnd()) {
         const QVariantList lonLat = lonLatIt.value().toList();
         m_controlView->marbleWidget()->centerOn(lonLat.at(0).toDouble(), lonLat.at(1).toDouble());
@@ -1225,7 +1225,7 @@ void MainWindow::readSettings(const QVariantMap &overrideSettings)
                 settings.beginGroup(pluginName);
                 profile.pluginSettings().insert(pluginName, QHash<QString, QVariant>());
                 for (const QString &key : settings.childKeys()) {
-                    if (key != QLatin1String("Enabled")) {
+                    if (key != QLatin1StringView("Enabled")) {
                         profile.pluginSettings()[pluginName].insert(key, settings.value(key));
                     }
                 }
@@ -1366,7 +1366,7 @@ void MainWindow::writeSettings()
             settings.beginGroup(key);
             settings.setValue("Enabled", true);
             for (const QString &settingKey : profile.pluginSettings()[key].keys()) {
-                Q_ASSERT(settingKey != QLatin1String("Enabled"));
+                Q_ASSERT(settingKey != QLatin1StringView("Enabled"));
                 settings.setValue(settingKey, profile.pluginSettings()[key][settingKey]);
             }
             settings.endGroup();

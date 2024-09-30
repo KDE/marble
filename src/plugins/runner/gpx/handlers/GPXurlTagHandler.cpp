@@ -26,7 +26,7 @@ GPX_DEFINE_TAG_HANDLER_10(url)
 // The insertion is done in the urlname element, which is the link text.
 GeoNode *GPXurlTagHandler::parse(GeoParser &parser) const
 {
-    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1String(gpxTag_url)));
+    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1StringView(gpxTag_url)));
 
     GeoStackItem parentItem = parser.parentElement();
     if (parentItem.represents(gpxTag_wpt)) {

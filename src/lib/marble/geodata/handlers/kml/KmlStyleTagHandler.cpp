@@ -23,7 +23,7 @@ KML_DEFINE_TAG_HANDLER(Style)
 
 GeoNode *KmlStyleTagHandler::parse(GeoParser &parser) const
 {
-    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1String(kmlTag_Style)));
+    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1StringView(kmlTag_Style)));
 
     GeoStackItem parentItem = parser.parentElement();
     /// for documents several styles are allowed: document wide styles are saved different!!!!!

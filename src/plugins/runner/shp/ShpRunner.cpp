@@ -37,7 +37,7 @@ ShpRunner::~ShpRunner()
 GeoDataDocument *ShpRunner::parseFile(const QString &fileName, DocumentRole role, QString &error)
 {
     QFileInfo fileinfo(fileName);
-    if (fileinfo.suffix().compare(QLatin1String("shp"), Qt::CaseInsensitive) != 0) {
+    if (fileinfo.suffix().compare(QLatin1StringView("shp"), Qt::CaseInsensitive) != 0) {
         error = QStringLiteral("File %1 does not have a shp suffix").arg(fileName);
         mDebug() << error;
         return nullptr;

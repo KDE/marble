@@ -77,19 +77,19 @@ int main(int argc, char *argv[])
     QString payload;
     for (int i = 1; i < argc - 3; ++i) {
         QString arg(argv[i]);
-        if (arg == QLatin1String("-v")) {
+        if (arg == QLatin1StringView("-v")) {
             debugLevel = Debug;
-        } else if (arg == QLatin1String("-q")) {
+        } else if (arg == QLatin1StringView("-q")) {
             debugLevel = Mute;
-        } else if (arg == QLatin1String("--name")) {
+        } else if (arg == QLatin1StringView("--name")) {
             name = argv[++i];
-        } else if (arg == QLatin1String("--version")) {
+        } else if (arg == QLatin1StringView("--version")) {
             version = argv[++i];
-        } else if (arg == QLatin1String("--date")) {
+        } else if (arg == QLatin1StringView("--date")) {
             date = argv[++i];
-        } else if (arg == QLatin1String("--transport")) {
+        } else if (arg == QLatin1StringView("--transport")) {
             transport = argv[++i];
-        } else if (arg == QLatin1String("--payload")) {
+        } else if (arg == QLatin1StringView("--payload")) {
             payload = argv[++i];
         } else {
             usage();
@@ -106,9 +106,9 @@ int main(int argc, char *argv[])
     }
 
     OsmParser *parser = nullptr;
-    if (file.fileName().endsWith(QLatin1String(".osm"))) {
+    if (file.fileName().endsWith(QLatin1StringView(".osm"))) {
         parser = new XmlParser;
-    } else if (file.fileName().endsWith(QLatin1String(".pbf"))) {
+    } else if (file.fileName().endsWith(QLatin1StringView(".pbf"))) {
         parser = new PbfParser;
     } else {
         qDebug() << "Unsupported file format: " << file.fileName();

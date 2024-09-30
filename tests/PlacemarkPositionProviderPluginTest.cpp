@@ -65,7 +65,7 @@ PositionProviderPlugin *PlacemarkPositionProviderPluginTest::createUninitialized
 {
     const auto plugins = pluginManager->positionProviderPlugins();
     for (const PositionProviderPlugin *plugin : plugins) {
-        if (plugin->nameId() == QLatin1String("Placemark")) {
+        if (plugin->nameId() == QLatin1StringView("Placemark")) {
             PositionProviderPlugin *instance = plugin->newInstance();
             return instance;
         }

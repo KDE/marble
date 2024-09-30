@@ -32,12 +32,14 @@ static const bool kmlStrictSpecs = false;
 
 // We can't use KML_DEFINE_TAG_HANDLER_GX22 because the name of the tag ("coord")
 // and the TagHandler ("KmlcoordinatesTagHandler") don't match
-static GeoTagHandlerRegistrar s_handlercoordkmlTag_nameSpaceGx22(GeoParser::QualifiedName(QLatin1String(kmlTag_coord), QLatin1String(kmlTag_nameSpaceGx22)),
+static GeoTagHandlerRegistrar s_handlercoordkmlTag_nameSpaceGx22(GeoParser::QualifiedName(QLatin1StringView(kmlTag_coord),
+                                                                                          QLatin1StringView(kmlTag_nameSpaceGx22)),
                                                                  new KmlcoordinatesTagHandler());
 
 GeoNode *KmlcoordinatesTagHandler::parse(GeoParser &parser) const
 {
-    Q_ASSERT(parser.isStartElement() && (parser.isValidElement(QLatin1String(kmlTag_coordinates)) || parser.isValidElement(QLatin1String(kmlTag_coord))));
+    Q_ASSERT(parser.isStartElement()
+             && (parser.isValidElement(QLatin1StringView(kmlTag_coordinates)) || parser.isValidElement(QLatin1StringView(kmlTag_coord))));
 
     GeoStackItem parentItem = parser.parentElement();
 

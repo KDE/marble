@@ -17,7 +17,7 @@ KML_DEFINE_TAG_HANDLER(bottomFov)
 
 GeoNode *KmlbottomFovTagHandler::parse(GeoParser &parser) const
 {
-    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1String(kmlTag_bottomFov)));
+    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1StringView(kmlTag_bottomFov)));
 
     GeoStackItem parentItem = parser.parentElement();
 

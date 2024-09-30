@@ -17,14 +17,14 @@ KML_DEFINE_TAG_HANDLER_GX22(flyToMode)
 
 GeoNode *KmlflyToModeTagHandler::parse(GeoParser &parser) const
 {
-    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1String(kmlTag_flyToMode)));
+    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1StringView(kmlTag_flyToMode)));
 
     QString content = parser.readElementText().trimmed();
 
     GeoDataFlyTo::FlyToMode mode;
-    if (content == QLatin1String("smooth")) {
+    if (content == QLatin1StringView("smooth")) {
         mode = GeoDataFlyTo::Smooth;
-    } else if (content == QLatin1String("bounce")) {
+    } else if (content == QLatin1StringView("bounce")) {
         mode = GeoDataFlyTo::Bounce;
     } else {
         mDebug() << "Unknown mode " << content << ", using 'bounce' instead.";

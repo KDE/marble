@@ -37,12 +37,12 @@ GeoDataDocument *KmlRunner::parseFile(const QString &fileName, DocumentRole role
     QBuffer buffer;
     QIODevice *device = nullptr;
 
-    if (fileName.toLower().endsWith(QLatin1String(".kmz"))) {
+    if (fileName.toLower().endsWith(QLatin1StringView(".kmz"))) {
         MarbleZipReader zipReader(&file);
 
         QStringList kmlFiles;
         for (const MarbleZipReader::FileInfo &zipFileInfo : zipReader.fileInfoList()) {
-            if (zipFileInfo.filePath.toLower().endsWith(QLatin1String(".kml"))) {
+            if (zipFileInfo.filePath.toLower().endsWith(QLatin1StringView(".kml"))) {
                 kmlFiles.append(zipFileInfo.filePath);
             }
         }

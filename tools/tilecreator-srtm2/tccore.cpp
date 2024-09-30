@@ -129,10 +129,10 @@ private:
                             .arg(lng < 0 ? lng * -1 : lng, 3, 10, QLatin1Char('0'));
             // qDebug() << fileName;
 
-            if (!QFile::exists(fileName) && QFile::exists(fileName + QLatin1String(".zip"))) {
+            if (!QFile::exists(fileName) && QFile::exists(fileName + QLatin1StringView(".zip"))) {
                 qDebug() << "zip found, unzipping";
                 QProcess p;
-                p.execute("unzip", QStringList() << fileName + QLatin1String(".zip"));
+                p.execute("unzip", QStringList() << fileName + QLatin1StringView(".zip"));
                 p.waitForFinished();
                 QFile(QDir::currentPath() + QLatin1Char('/') + QFileInfo(fileName).fileName()).rename(fileName);
             }

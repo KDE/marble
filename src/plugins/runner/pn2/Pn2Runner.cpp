@@ -106,7 +106,7 @@ bool Pn2Runner::importPolygon(QDataStream &stream, GeoDataLineString *linestring
 GeoDataDocument *Pn2Runner::parseFile(const QString &fileName, DocumentRole role, QString &error)
 {
     QFileInfo fileinfo(fileName);
-    if (fileinfo.suffix().compare(QLatin1String("pn2"), Qt::CaseInsensitive) != 0) {
+    if (fileinfo.suffix().compare(QLatin1StringView("pn2"), Qt::CaseInsensitive) != 0) {
         error = QStringLiteral("File %1 does not have a pn2 suffix").arg(fileName);
         mDebug() << error;
         return nullptr;

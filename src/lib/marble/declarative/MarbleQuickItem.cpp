@@ -252,7 +252,7 @@ MarbleQuickItem::MarbleQuickItem(QQuickItem *parent)
     d->m_map.setMapQualityForViewContext(NormalQuality, Animation);
 
     for (AbstractFloatItem *item : d->m_map.floatItems()) {
-        if (item->nameId() == QLatin1String("license")) {
+        if (item->nameId() == QLatin1StringView("license")) {
             item->setPosition(QPointF(5.0, -10.0));
         } else {
             item->hide();
@@ -490,7 +490,7 @@ bool MarbleQuickItem::showPositionMarker() const
 {
     QList<RenderPlugin *> plugins = d->m_map.renderPlugins();
     for (const RenderPlugin *plugin : std::as_const(plugins)) {
-        if (plugin->nameId() == QLatin1String("positionMarker")) {
+        if (plugin->nameId() == QLatin1StringView("positionMarker")) {
             return plugin->visible();
         }
     }
@@ -1014,7 +1014,7 @@ void MarbleQuickItem::setShowPositionMarker(bool showPositionMarker)
 
     QList<RenderPlugin *> plugins = d->m_map.renderPlugins();
     for (RenderPlugin *plugin : std::as_const(plugins)) {
-        if (plugin->nameId() == QLatin1String("positionMarker")) {
+        if (plugin->nameId() == QLatin1StringView("positionMarker")) {
             plugin->setVisible(showPositionMarker);
             break;
         }

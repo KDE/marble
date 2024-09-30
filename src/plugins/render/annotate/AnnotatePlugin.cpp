@@ -368,9 +368,9 @@ void AnnotatePlugin::saveAnnotationFile()
     if (!filename.isNull()) {
         GeoWriter writer;
         // FIXME: This should be consistent with the way the loading is done.
-        if (filename.endsWith(QLatin1String(".kml"), Qt::CaseInsensitive)) {
+        if (filename.endsWith(QLatin1StringView(".kml"), Qt::CaseInsensitive)) {
             writer.setDocumentType(kml::kmlTag_nameSpaceOgc22);
-        } else if (filename.endsWith(QLatin1String(".osm"), Qt::CaseInsensitive)) {
+        } else if (filename.endsWith(QLatin1StringView(".osm"), Qt::CaseInsensitive)) {
             // "0.6" is the current version of osm, it is used to identify the osm writer
             // The reference value is kept in plugins/runner/osm/OsmElementDictionary.hz
             writer.setDocumentType("0.6");

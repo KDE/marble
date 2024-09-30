@@ -19,7 +19,7 @@ KML_DEFINE_TAG_HANDLER_GX22(FlyTo)
 
 GeoNode *KmlFlyToTagHandler::parse(GeoParser &parser) const
 {
-    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1String(kmlTag_FlyTo)));
+    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1StringView(kmlTag_FlyTo)));
 
     GeoStackItem parentItem = parser.parentElement();
 

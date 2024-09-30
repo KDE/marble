@@ -26,7 +26,7 @@ DGML_DEFINE_TAG_HANDLER(Palette)
 GeoNode *DgmlPaletteTagHandler::parse(GeoParser &parser) const
 {
     // Check whether the tag is valid
-    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1String(dgmlTag_Palette)));
+    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1StringView(dgmlTag_Palette)));
 
     QString type = parser.attribute(dgmlAttr_type).toLower().trimmed();
     QString file = parser.readElementText().trimmed();

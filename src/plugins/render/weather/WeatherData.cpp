@@ -170,7 +170,7 @@ public:
         QString string = locale.toString(floor(fromKelvin(temp, format) + 0.5));
         switch (format) {
         case WeatherData::Kelvin:
-            string += QLatin1String(" K");
+            string += QLatin1StringView(" K");
             break;
         case WeatherData::Celsius:
             string += QString::fromUtf8("°C");

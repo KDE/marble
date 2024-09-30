@@ -271,7 +271,7 @@ GeoDataPlacemark EditBookmarkDialog::bookmark() const
 
     if (d->m_widget != nullptr) {
         const QString celestialName = d->m_widget->model()->planetId();
-        if (celestialName != QLatin1String("earth")) {
+        if (celestialName != QLatin1StringView("earth")) {
             bookmark.extendedData().addValue(GeoDataData(QStringLiteral("celestialBody"), celestialName));
         }
     }

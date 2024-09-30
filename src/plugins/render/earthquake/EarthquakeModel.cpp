@@ -52,15 +52,15 @@ void EarthquakeModel::setEndDate(const QDateTime &endDate)
 
 void EarthquakeModel::getAdditionalItems(const GeoDataLatLonAltBox &box, qint32 number)
 {
-    if (marbleModel()->planetId() != QLatin1String("earth")) {
+    if (marbleModel()->planetId() != QLatin1StringView("earth")) {
         return;
     }
 
-    const QString geonamesUrl(QLatin1String("http://api.geonames.org/earthquakesJSON") + QLatin1String("?north=") + QString::number(box.north() * RAD2DEG)
-                              + QLatin1String("&south=") + QString::number(box.south() * RAD2DEG) + QLatin1String("&east=")
-                              + QString::number(box.east() * RAD2DEG) + QLatin1String("&west=") + QString::number(box.west() * RAD2DEG)
-                              + QLatin1String("&date=") + m_endDate.toString("yyyy-MM-dd") + QLatin1String("&maxRows=") + QString::number(number)
-                              + QLatin1String("&username=marble") + QLatin1String("&formatted=true"));
+    const QString geonamesUrl(
+        QLatin1StringView("http://api.geonames.org/earthquakesJSON") + QLatin1StringView("?north=") + QString::number(box.north() * RAD2DEG)
+        + QLatin1StringView("&south=") + QString::number(box.south() * RAD2DEG) + QLatin1StringView("&east=") + QString::number(box.east() * RAD2DEG)
+        + QLatin1StringView("&west=") + QString::number(box.west() * RAD2DEG) + QLatin1StringView("&date=") + m_endDate.toString("yyyy-MM-dd")
+        + QLatin1StringView("&maxRows=") + QString::number(number) + QLatin1StringView("&username=marble") + QLatin1StringView("&formatted=true"));
     downloadDescriptionFile(QUrl(geonamesUrl));
 }
 

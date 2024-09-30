@@ -65,7 +65,7 @@ void exportToDat()
             int colorIdx = 2; // Default White
 
             // Find Index of Table Entry with Closest B-V value (Smallest Difference)
-            if (bvString != QLatin1String("      ")) {
+            if (bvString != QLatin1StringView("      ")) {
                 double bvValue = bvString.toDouble();
                 double bvMinDifference = fabs(colorTable.at(0) - bvValue);
                 for (int i = 1; i < colorTable.size(); ++i) {
@@ -577,7 +577,7 @@ void exportToKml()
             int colorIdx = 2; // Default White
 
             // Find Index of Table Entry with Closest B-V value (Smallest Difference)
-            if (bvString != QLatin1String("      ")) {
+            if (bvString != QLatin1StringView("      ")) {
                 double bvValue = bvString.toDouble();
                 double bvMinDifference = fabs(colorTable.at(0) - bvValue);
                 for (int i = 1; i < colorTable.size(); ++i) {
@@ -611,34 +611,34 @@ void exportToKml()
             }
 
             if (colorIdx == 0) {
-                styleId += QLatin1String(" blue");
+                styleId += QLatin1StringView(" blue");
             } else if (colorIdx == 1) {
-                styleId += QLatin1String(" bluewhite");
+                styleId += QLatin1StringView(" bluewhite");
             } else if (colorIdx == 3) {
-                styleId += QLatin1String(" yellow");
+                styleId += QLatin1StringView(" yellow");
             } else if (colorIdx == 4) {
-                styleId += QLatin1String(" orange");
+                styleId += QLatin1StringView(" orange");
             } else if (colorIdx == 5) {
-                styleId += QLatin1String(" red");
+                styleId += QLatin1StringView(" red");
             } else if (colorIdx == 6) {
-                styleId += QLatin1String(" garnetred");
+                styleId += QLatin1StringView(" garnetred");
             } else {
                 // white and no color ID
-                styleId += QLatin1String(" white");
+                styleId += QLatin1StringView(" white");
             }
 
             out << "   <Placemark> \n";
 
             QString name = line.mid(7, 3);
-            if (name == QLatin1String("Alp")) {
+            if (name == QLatin1StringView("Alp")) {
                 out << "        <name>" << QString::fromUtf8("α") << "</name> \n";
-            } else if (name == QLatin1String("Bet")) {
+            } else if (name == QLatin1StringView("Bet")) {
                 out << "        <name>" << QString::fromUtf8("β") << "</name> \n";
-            } else if (name == QLatin1String("Gam")) {
+            } else if (name == QLatin1StringView("Gam")) {
                 out << "        <name>" << QString::fromUtf8("γ") << "</name> \n";
-            } else if (name == QLatin1String("Del")) {
+            } else if (name == QLatin1StringView("Del")) {
                 out << "        <name>" << QString::fromUtf8("δ") << "</name> \n";
-            } else if (name == QLatin1String("Eps")) {
+            } else if (name == QLatin1StringView("Eps")) {
                 out << "        <name>" << QString::fromUtf8("ε") << "</name> \n";
             }
 

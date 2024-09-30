@@ -26,7 +26,7 @@ DGML_DEFINE_TAG_HANDLER(Texture)
 GeoNode *DgmlTextureTagHandler::parse(GeoParser &parser) const
 {
     // Check whether the tag is valid
-    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1String(dgmlTag_Texture)));
+    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1StringView(dgmlTag_Texture)));
 
     const QString name = parser.attribute(dgmlAttr_name).trimmed();
 

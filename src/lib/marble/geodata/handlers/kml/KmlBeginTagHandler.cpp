@@ -20,7 +20,7 @@ KML_DEFINE_TAG_HANDLER(begin)
 
 GeoNode *KmlbeginTagHandler::parse(GeoParser &parser) const
 {
-    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1String(kmlTag_begin)));
+    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1StringView(kmlTag_begin)));
 
     GeoStackItem parentItem = parser.parentElement();
 

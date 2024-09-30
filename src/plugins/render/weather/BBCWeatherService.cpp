@@ -67,7 +67,7 @@ void BBCWeatherService::getAdditionalItems(const GeoDataLatLonAltBox &box, qint3
 
 void BBCWeatherService::getItem(const QString &id)
 {
-    if (id.startsWith(QLatin1String("bbc"))) {
+    if (id.startsWith(QLatin1StringView("bbc"))) {
         BBCStation const station = m_itemGetter->station(id);
         if (station.bbcId() > 0) {
             createItem(station);

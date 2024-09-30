@@ -24,7 +24,7 @@ FileStoragePolicy::FileStoragePolicy(const QString &dataDirectory, QObject *pare
     , m_dataDirectory(dataDirectory)
 {
     if (m_dataDirectory.isEmpty())
-        m_dataDirectory = MarbleDirs::localPath() + QLatin1String("/cache/");
+        m_dataDirectory = MarbleDirs::localPath() + QLatin1StringView("/cache/");
 
     if (!QDir(m_dataDirectory).exists())
         QDir::root().mkpath(m_dataDirectory);
@@ -57,7 +57,7 @@ bool FileStoragePolicy::updateFile(const QString &fileName, const QByteArray &da
     // ... and save the file content
     QFile file(fullName);
     if (!file.open(QIODevice::WriteOnly)) {
-        m_errorMsg = fullName + QLatin1String(": ") + file.errorString();
+        m_errorMsg = fullName + QLatin1StringView(": ") + file.errorString();
         qCritical() << "file.open" << m_errorMsg;
         return false;
     }
@@ -65,7 +65,7 @@ bool FileStoragePolicy::updateFile(const QString &fileName, const QByteArray &da
     quint64 oldSize = file.size();
 
     if (!file.write(data)) {
-        m_errorMsg = fullName + QLatin1String(": ") + file.errorString();
+        m_errorMsg = fullName + QLatin1StringView(": ") + file.errorString();
         qCritical() << "file.write" << m_errorMsg;
         emit sizeChanged(file.size() - oldSize);
         return false;
@@ -81,15 +81,15 @@ void FileStoragePolicy::clearCache()
 {
     mDebug();
     if (m_dataDirectory.isEmpty()
-        || !(m_dataDirectory.endsWith(QLatin1String("data")) // on Windows
-             || m_dataDirectory.endsWith(QLatin1String("marble")) // on all other OSes
+        || !(m_dataDirectory.endsWith(QLatin1StringView("data")) // on Windows
+             || m_dataDirectory.endsWith(QLatin1StringView("marble")) // on all other OSes
              )) {
         mDebug() << "Data Directory:" << m_dataDirectory;
         mDebug() << "Error: Refusing to erase files under unknown conditions for safety reasons!";
         return;
     }
 
-    const QString cachedMapsDirectory = m_dataDirectory + QLatin1String("/maps");
+    const QString cachedMapsDirectory = m_dataDirectory + QLatin1StringView("/maps");
 
     QDirIterator it(cachedMapsDirectory, QDir::NoDotAndDotDot | QDir::Dirs);
     mDebug() << cachedMapsDirectory;
@@ -118,8 +118,9 @@ void FileStoragePolicy::clearCache()
                     // We try to be very careful and just delete images
                     // FIXME, when vectortiling I suppose also vector tiles will have
                     // to be deleted
-                    if (lowerCase.endsWith(QLatin1String(".jpg")) || lowerCase.endsWith(QLatin1String(".png")) || lowerCase.endsWith(QLatin1String(".gif"))
-                        || lowerCase.endsWith(QLatin1String(".svg")) || lowerCase.endsWith(QLatin1String(".o5m"))) {
+                    if (lowerCase.endsWith(QLatin1StringView(".jpg")) || lowerCase.endsWith(QLatin1StringView(".png"))
+                        || lowerCase.endsWith(QLatin1StringView(".gif")) || lowerCase.endsWith(QLatin1StringView(".svg"))
+                        || lowerCase.endsWith(QLatin1StringView(".o5m"))) {
                         // We cannot emit clear, because we don't make a full clear
                         QFile file(filePath);
                         emit sizeChanged(-file.size());

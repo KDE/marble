@@ -134,7 +134,7 @@ QList<QFileInfo> MonavMap::files() const
                                           << "paths"
                                           << "types";
     for (const QString &file : std::as_const(fileNames)) {
-        files << QFileInfo(m_directory, QLatin1String("Contraction Hierarchies_") + file);
+        files << QFileInfo(m_directory, QLatin1StringView("Contraction Hierarchies_") + file);
     }
 
     fileNames = QStringList() << "config"
@@ -143,7 +143,7 @@ QList<QFileInfo> MonavMap::files() const
                               << "index_2"
                               << "index_3";
     for (const QString &file : std::as_const(fileNames)) {
-        files << QFileInfo(m_directory, QLatin1String("GPSGrid_") + file);
+        files << QFileInfo(m_directory, QLatin1StringView("GPSGrid_") + file);
     }
 
     files << QFileInfo(m_directory, "plugins.ini");

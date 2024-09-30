@@ -19,8 +19,8 @@ namespace Marble
 
 void OsmNode::parseCoordinates(const QXmlStreamAttributes &attributes)
 {
-    qreal const lon = attributes.value(QLatin1String("lon")).toDouble();
-    qreal const lat = attributes.value(QLatin1String("lat")).toDouble();
+    qreal const lon = attributes.value(QLatin1StringView("lon")).toDouble();
+    qreal const lat = attributes.value(QLatin1StringView("lat")).toDouble();
     setCoordinates(GeoDataCoordinates(lon, lat, 0, GeoDataCoordinates::Degree));
 }
 
@@ -73,8 +73,8 @@ GeoDataPlacemark *OsmNode::create() const
         }
     }
 
-    if (m_osmData.containsTagKey(QLatin1String("marbleZoomLevel"))) {
-        int const zoomLevel = m_osmData.tagValue(QLatin1String("marbleZoomLevel")).toInt();
+    if (m_osmData.containsTagKey(QLatin1StringView("marbleZoomLevel"))) {
+        int const zoomLevel = m_osmData.tagValue(QLatin1StringView("marbleZoomLevel")).toInt();
         placemark->setZoomLevel(zoomLevel);
     }
 

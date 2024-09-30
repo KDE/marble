@@ -82,19 +82,19 @@ void MapQuestRunner::retrieveRoute(const RouteRequest *route)
     const QString ascendingSetting = settings[QStringLiteral("ascending")].toString();
     const QString descendingSetting = settings[QStringLiteral("descending")].toString();
     if (!ascendingSetting.isEmpty() && !descendingSetting.isEmpty()) {
-        if (ascendingSetting == QLatin1String("AVOID_UP_HILL") && descendingSetting == QLatin1String("AVOID_DOWN_HILL")) {
+        if (ascendingSetting == QLatin1StringView("AVOID_UP_HILL") && descendingSetting == QLatin1StringView("AVOID_DOWN_HILL")) {
             append(&url, QStringLiteral("roadGradeStrategy"), QStringLiteral("AVOID_ALL_HILLS"));
-        } else if (ascendingSetting == QLatin1String("FAVOR_UP_HILL") && descendingSetting == QLatin1String("FAVOR_DOWN_HILL")) {
+        } else if (ascendingSetting == QLatin1StringView("FAVOR_UP_HILL") && descendingSetting == QLatin1StringView("FAVOR_DOWN_HILL")) {
             append(&url, QStringLiteral("roadGradeStrategy"), QStringLiteral("FAVOR_ALL_HILLS"));
-        } else if (ascendingSetting == QLatin1String("DEFAULT_STRATEGY") && descendingSetting == QLatin1String("DEFAULT_STRATEGY")) {
+        } else if (ascendingSetting == QLatin1StringView("DEFAULT_STRATEGY") && descendingSetting == QLatin1StringView("DEFAULT_STRATEGY")) {
             append(&url, QStringLiteral("roadGradeStrategy"), QStringLiteral("DEFAULT_STRATEGY"));
-        } else if (ascendingSetting == QLatin1String("DEFAULT_STRATEGY")) {
+        } else if (ascendingSetting == QLatin1StringView("DEFAULT_STRATEGY")) {
             append(&url, QStringLiteral("roadGradeStrategy"), descendingSetting);
-        } else if (descendingSetting == QLatin1String("DEFAULT_STRATEGY")) {
+        } else if (descendingSetting == QLatin1StringView("DEFAULT_STRATEGY")) {
             append(&url, QStringLiteral("roadGradeStrategy"), ascendingSetting);
-        } else if (descendingSetting == QLatin1String("AVOID_DOWN_HILL")) {
+        } else if (descendingSetting == QLatin1StringView("AVOID_DOWN_HILL")) {
             append(&url, QStringLiteral("roadGradeStrategy"), descendingSetting);
-        } else if (ascendingSetting == QLatin1String("AVOID_UP_HILL")) {
+        } else if (ascendingSetting == QLatin1StringView("AVOID_UP_HILL")) {
             append(&url, QStringLiteral("roadGradeStrategy"), ascendingSetting);
         }
     }

@@ -37,7 +37,7 @@ using namespace Marble;
 
 static bool loadTranslation(const QString &localeDirName, QApplication &app)
 {
-    const QString subPath = QLatin1String("locale/") + localeDirName + QLatin1String("/LC_MESSAGES/marble_qt.qm");
+    const QString subPath = QLatin1StringView("locale/") + localeDirName + QLatin1StringView("/LC_MESSAGES/marble_qt.qm");
     const QString fullPath = QStandardPaths::locate(QStandardPaths::GenericDataLocation, subPath);
     if (fullPath.isEmpty()) {
         return false;
@@ -87,7 +87,7 @@ int main(int argc, char *argv[])
                          ControlView::applicationVersion(),
                          i18n("A World Atlas."),
                          KAboutLicense::LGPL_V2,
-                         i18n("(c) 2007-%1", QLatin1String("2016")),
+                         i18n("(c) 2007-%1", QLatin1StringView("2016")),
                          QString(),
                          "https://marble.kde.org/");
 

@@ -77,7 +77,7 @@ bool GeoUriParser::parse()
         if (geoUriRegexp.captureCount() > 3) {
             // this is not a bug! The '<=' was intended, otherwise we would skip that last Cgroups's data!
             for (int i = 4; i <= geoUriRegexp.captureCount(); ++i) {
-                if (geoUriRegexp.capturedTexts()[i] == QLatin1String("crs")) {
+                if (geoUriRegexp.capturedTexts()[i] == QLatin1StringView("crs")) {
                     for (const QString &str : PlanetFactory::planetList()) {
                         if (geoUriRegexp.captureCount() < i + 1) {
                             i = geoUriRegexp.captureCount() + 1;
@@ -89,7 +89,7 @@ bool GeoUriParser::parse()
                         }
                     }
                     ++i;
-                } else if (geoUriRegexp.capturedTexts()[i] == QLatin1String("u")) {
+                } else if (geoUriRegexp.capturedTexts()[i] == QLatin1StringView("u")) {
                     mDebug() << "Captured uncertainty parameter, but this is not supported by Marble (yet).";
                     ++i;
                 }
@@ -101,7 +101,7 @@ bool GeoUriParser::parse()
             return true;
         }
     }
-    if (m_geoUri.startsWith(QLatin1String("worldwind://goto/"))) {
+    if (m_geoUri.startsWith(QLatin1StringView("worldwind://goto/"))) {
         m_geoUri.replace(QStringLiteral("goto/"), QStringLiteral("goto/?"));
         QUrl worldwindUrl(m_geoUri);
 

@@ -208,7 +208,7 @@ GeoDataStyle::Ptr StyleBuilder::Private::createPOIStyle(const QFont &font,
 GeoDataStyle::Ptr
 StyleBuilder::Private::createOsmPOIStyle(const QFont &font, const QString &imagePath, const QColor &textColor, const QColor &color, const QColor &outlineColor)
 {
-    QString const path = MarbleDirs::path(QLatin1String("svg/osmcarto/svg/") + imagePath + QLatin1String(".svg"));
+    QString const path = MarbleDirs::path(QLatin1StringView("svg/osmcarto/svg/") + imagePath + QLatin1StringView(".svg"));
     return createPOIStyle(font, path, textColor, color, outlineColor, false, false);
 }
 
@@ -218,7 +218,7 @@ GeoDataStyle::Ptr StyleBuilder::Private::createOsmPOIRingStyle(const QFont &font
                                                                const QColor &color,
                                                                const QColor &outlineColor)
 {
-    QString const path = MarbleDirs::path(QLatin1String("svg/osmcarto/svg/") + imagePath + QLatin1String(".svg"));
+    QString const path = MarbleDirs::path(QLatin1StringView("svg/osmcarto/svg/") + imagePath + QLatin1StringView(".svg"));
     return createPOIStyle(font, path, textColor, color, outlineColor, false, true);
 }
 
@@ -228,7 +228,7 @@ GeoDataStyle::Ptr StyleBuilder::Private::createOsmPOIAreaStyle(const QFont &font
                                                                const QColor &color,
                                                                const QColor &outlineColor)
 {
-    QString const path = MarbleDirs::path(QLatin1String("svg/osmcarto/svg/") + imagePath + QLatin1String(".svg"));
+    QString const path = MarbleDirs::path(QLatin1StringView("svg/osmcarto/svg/") + imagePath + QLatin1StringView(".svg"));
     return createPOIStyle(font, path, textColor, color, outlineColor, true, false);
 }
 
@@ -448,7 +448,7 @@ GeoDataStyle::ConstPtr StyleBuilder::Private::createPlacemarkStyle(const StylePa
             auto tagIter = osmData.findTag(QStringLiteral("ele"));
             if (tagIter != osmData.tagsEnd()) {
                 const QString &elevation = tagIter.value();
-                if (elevation == QLatin1String("4000")) {
+                if (elevation == QLatin1StringView("4000")) {
                     polyStyle.setColor(effectColor(0x94c2c2));
                     lineStyle.setColor(effectColor(0x94c2c2));
                     adjustStyle = true;
@@ -458,13 +458,13 @@ GeoDataStyle::ConstPtr StyleBuilder::Private::createPlacemarkStyle(const StylePa
             auto tagIter = osmData.findTag(QStringLiteral("religion"));
             if (tagIter != osmData.tagsEnd()) {
                 const QString &religion = tagIter.value();
-                if (religion == QLatin1String("jewish")) {
+                if (religion == QLatin1StringView("jewish")) {
                     polyStyle.setTexturePath(MarbleDirs::path("bitmaps/osmcarto/patterns/grave_yard_jewish.png"));
                     adjustStyle = true;
-                } else if (religion == QLatin1String("christian")) {
+                } else if (religion == QLatin1StringView("christian")) {
                     polyStyle.setTexturePath(MarbleDirs::path("bitmaps/osmcarto/patterns/grave_yard_christian.png"));
                     adjustStyle = true;
-                } else if (religion == QLatin1String("INT-generic")) {
+                } else if (religion == QLatin1StringView("INT-generic")) {
                     polyStyle.setTexturePath(MarbleDirs::path("bitmaps/osmcarto/patterns/grave_yard_generic.png"));
                     adjustStyle = true;
                 }
@@ -521,8 +521,8 @@ GeoDataStyle::ConstPtr StyleBuilder::Private::createPlacemarkStyle(const StylePa
             adjustWayWidth(parameters, lineStyle);
 
             QString const accessValue = osmData.tagValue(QStringLiteral("access"));
-            if (accessValue == QLatin1String("private") || accessValue == QLatin1String("no") || accessValue == QLatin1String("agricultural")
-                || accessValue == QLatin1String("delivery") || accessValue == QLatin1String("forestry")) {
+            if (accessValue == QLatin1StringView("private") || accessValue == QLatin1StringView("no") || accessValue == QLatin1StringView("agricultural")
+                || accessValue == QLatin1StringView("delivery") || accessValue == QLatin1StringView("forestry")) {
                 QColor polyColor = polyStyle.color();
                 float hue, sat, val;
                 polyColor.getHsvF(&hue, &sat, &val);
@@ -588,7 +588,7 @@ GeoDataStyle::ConstPtr StyleBuilder::Private::createPlacemarkStyle(const StylePa
             auto tagIter = osmData.findTag(QStringLiteral("ele"));
             if (tagIter != osmData.tagsEnd()) {
                 const QString &elevation = tagIter.value();
-                if (elevation == QLatin1String("4000")) {
+                if (elevation == QLatin1StringView("4000")) {
                     polyStyle.setColor(effectColor(0xa5c9c9));
                     lineStyle.setColor(effectColor(0xa5c9c9));
                     adjustStyle = true;

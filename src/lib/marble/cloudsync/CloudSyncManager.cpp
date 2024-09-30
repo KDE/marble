@@ -121,10 +121,10 @@ void CloudSyncManager::setOwncloudServer(const QString &server)
     QString const oldProtocol = d->m_owncloudProtocol;
     QString const oldServer = d->m_ownloudServer;
 
-    if (server.startsWith(QLatin1String("http://"))) {
+    if (server.startsWith(QLatin1StringView("http://"))) {
         d->m_owncloudProtocol = "http://";
         d->m_ownloudServer = server.mid(7);
-    } else if (server.startsWith(QLatin1String("https://"))) {
+    } else if (server.startsWith(QLatin1StringView("https://"))) {
         d->m_owncloudProtocol = "https://";
         d->m_ownloudServer = server.mid(8);
     } else {

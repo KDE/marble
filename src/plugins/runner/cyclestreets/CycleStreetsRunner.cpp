@@ -214,8 +214,8 @@ GeoDataDocument *CycleStreetsRunner::parse(const QByteArray &content) const
         } else {
             instructionName = "Straight";
         }
-        if (name != QLatin1String("Short un-named link") && name != QLatin1String("Un-named link")) {
-            instructionName.append(QLatin1String(" into ") + name);
+        if (name != QLatin1StringView("Short un-named link") && name != QLatin1StringView("Un-named link")) {
+            instructionName.append(QLatin1StringView(" into ") + name);
         }
         instructions->setName(instructionName);
 

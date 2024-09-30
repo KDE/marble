@@ -758,7 +758,7 @@ void MarbleWidgetPrivate::updateMapTheme()
 
     m_widget->setRadius(m_widget->radius()); // Corrects zoom range, if needed
 
-    if (m_model.planetId() == QLatin1String("earth")) {
+    if (m_model.planetId() == QLatin1StringView("earth")) {
         m_map.addLayer(m_routingLayer);
     }
 
@@ -829,7 +829,7 @@ void MarbleWidget::setSubSolarPointIconVisible(bool visible)
     QList<RenderPlugin *>::const_iterator i = pluginList.constBegin();
     QList<RenderPlugin *>::const_iterator const end = pluginList.constEnd();
     for (; i != end; ++i) {
-        if ((*i)->nameId() == QLatin1String("sun")) {
+        if ((*i)->nameId() == QLatin1StringView("sun")) {
             (*i)->setVisible(visible);
         }
     }
@@ -1099,7 +1099,7 @@ QList<RenderPlugin *> MarbleWidget::renderPlugins() const
 void MarbleWidget::readPluginSettings(QSettings &settings)
 {
     for (RenderPlugin *plugin : renderPlugins()) {
-        settings.beginGroup(QLatin1String("plugin_") + plugin->nameId());
+        settings.beginGroup(QLatin1StringView("plugin_") + plugin->nameId());
 
         QHash<QString, QVariant> hash;
 
@@ -1116,7 +1116,7 @@ void MarbleWidget::readPluginSettings(QSettings &settings)
 void MarbleWidget::writePluginSettings(QSettings &settings) const
 {
     for (RenderPlugin *plugin : renderPlugins()) {
-        settings.beginGroup(QLatin1String("plugin_") + plugin->nameId());
+        settings.beginGroup(QLatin1StringView("plugin_") + plugin->nameId());
 
         QHash<QString, QVariant> hash = plugin->settings();
 

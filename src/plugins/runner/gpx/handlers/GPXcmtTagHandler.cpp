@@ -22,7 +22,7 @@ GPX_DEFINE_TAG_HANDLER(cmt)
 
 GeoNode *GPXcmtTagHandler::parse(GeoParser &parser) const
 {
-    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1String(gpxTag_cmt)));
+    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1StringView(gpxTag_cmt)));
 
     GeoStackItem parentItem = parser.parentElement();
     if (parentItem.represents(gpxTag_wpt)) {
@@ -32,9 +32,9 @@ GeoNode *GPXcmtTagHandler::parse(GeoParser &parser) const
         if (!cmt.isEmpty()) {
             QString desc = placemark->description();
             if (!desc.isEmpty()) {
-                desc += QLatin1String("<br/>");
+                desc += QLatin1StringView("<br/>");
             }
-            placemark->setDescription(desc.append(cmt.replace(QLatin1Char('\n'), QLatin1String("\n<br/>"))));
+            placemark->setDescription(desc.append(cmt.replace(QLatin1Char('\n'), QLatin1StringView("\n<br/>"))));
             placemark->setDescriptionCDATA(true);
         }
     }

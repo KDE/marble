@@ -271,15 +271,15 @@ void TileDirectory::setBoundingPolygon(const QString &file)
             QString line = stream.readLine().trimmed();
             QStringList entries = line.split(QLatin1Char(' '), Qt::SkipEmptyParts);
             if (entries.size() == 1) {
-                if (entries.first() == QLatin1String("END") && inside) {
+                if (entries.first() == QLatin1StringView("END") && inside) {
                     inside = false;
                     if (!box.isEmpty()) {
                         m_boundingPolygon << box;
                         box = GeoDataLinearRing();
                     }
-                } else if (entries.first() == QLatin1String("END") && !inside) {
+                } else if (entries.first() == QLatin1StringView("END") && !inside) {
                     qDebug() << "END not expected here";
-                } else if (entries.first().startsWith(QLatin1String("!"))) {
+                } else if (entries.first().startsWith(QLatin1StringView("!"))) {
                     qDebug() << "Warning: Negative polygons not supported, skipping";
                 } else {
                     // int number = entries.first().toInt();

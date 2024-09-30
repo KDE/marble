@@ -333,9 +333,9 @@ void NewstuffModelPrivate::installMap()
         m_unpackProcess->close();
         delete m_unpackProcess;
         m_unpackProcess = nullptr;
-    } else if (m_currentFile->fileName().endsWith(QLatin1String("zip"))) {
+    } else if (m_currentFile->fileName().endsWith(QLatin1StringView("zip"))) {
         unzip();
-    } else if (m_currentFile->fileName().endsWith(QLatin1String("tar.gz")) && canExecute("tar")) {
+    } else if (m_currentFile->fileName().endsWith(QLatin1StringView("tar.gz")) && canExecute("tar")) {
         m_unpackProcess = new QProcess;
         QObject::connect(m_unpackProcess, SIGNAL(finished(int)), m_parent, SLOT(contentsListed(int)));
         QStringList arguments = QStringList() << "-t"
@@ -344,7 +344,7 @@ void NewstuffModelPrivate::installMap()
         m_unpackProcess->setWorkingDirectory(m_targetDirectory);
         m_unpackProcess->start("tar", arguments);
     } else {
-        if (!m_currentFile->fileName().endsWith(QLatin1String("tar.gz"))) {
+        if (!m_currentFile->fileName().endsWith(QLatin1StringView("tar.gz"))) {
             mDebug() << "Can only handle tar.gz files";
         } else {
             mDebug() << "Cannot extract archive: tar executable not found in PATH.";
@@ -462,7 +462,7 @@ void NewstuffModelPrivate::readValue(const QDomNode &node, const QString &key, T
     } else {
         for (int i = 0; i < matches.size(); ++i) {
             if (matches.at(i).attributes().contains(QStringLiteral("lang"))
-                && matches.at(i).attributes().namedItem(QStringLiteral("lang")).toAttr().value() == QLatin1String("en")) {
+                && matches.at(i).attributes().namedItem(QStringLiteral("lang")).toAttr().value() == QLatin1StringView("en")) {
                 *target = T(matches.at(i).toElement().text());
                 return;
             }
@@ -474,7 +474,7 @@ NewstuffModel::NewstuffModel(QObject *parent)
     : QAbstractListModel(parent)
     , d(new NewstuffModelPrivate(this))
 {
-    setTargetDirectory(MarbleDirs::localPath() + QLatin1String("/maps"));
+    setTargetDirectory(MarbleDirs::localPath() + QLatin1StringView("/maps"));
     // no default registry file
 
     connect(&d->m_networkAccessManager, SIGNAL(finished(QNetworkReply *)), this, SLOT(handleProviderData(QNetworkReply *)));
@@ -915,7 +915,7 @@ void NewstuffModelPrivate::processQueue()
     if (m_currentAction.second == Install) {
         if (!m_currentFile) {
             QFileInfo const file = QFileInfo(m_items.at(m_currentAction.first).m_payloadUrl.path());
-            m_currentFile = new QTemporaryFile(QDir::tempPath() + QLatin1String("/marble-XXXXXX-") + file.fileName());
+            m_currentFile = new QTemporaryFile(QDir::tempPath() + QLatin1StringView("/marble-XXXXXX-") + file.fileName());
         }
 
         if (m_currentFile->open()) {

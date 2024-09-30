@@ -50,7 +50,7 @@ bool OpenDesktopItem::operator<(const AbstractDataPluginItem *other) const
 
 void OpenDesktopItem::addDownloadedFile(const QString &url, const QString &type)
 {
-    if (type == QLatin1String("avatar")) {
+    if (type == QLatin1StringView("avatar")) {
         m_pixmap.load(url);
         setSize(m_pixmap.size());
         emit updated();
@@ -64,7 +64,7 @@ void OpenDesktopItem::paint(QPainter *painter)
 
 void OpenDesktopItem::updateToolTip()
 {
-    const QString toolTip = QLatin1String(
+    const QString toolTip = QLatin1StringView(
         "<html><head><meta name='qrichtext' content='1' />"
         "<style type='text/css'>"
         "body { font-family:'Sans Serif'; font-size:9pt; font-weight:400; }"

@@ -345,7 +345,7 @@ QVector<TileCoordsPyramid> DownloadRegionDialog::region() const
         break;
     case RouteDownloadMethod:
         qreal offset = d->m_routeOffsetSpinBox->value();
-        if (d->m_routeOffsetSpinBox->suffix() == QLatin1String(" km")) {
+        if (d->m_routeOffsetSpinBox->suffix() == QLatin1StringView(" km")) {
             offset *= KM2METER;
         }
         const GeoDataLineString waypoints = d->m_model->routingManager()->routingModel()->route().path();
@@ -490,8 +490,8 @@ void DownloadRegionDialog::updateTileCount()
         //~ plural There is a limit of %n tiles to download.
         d->m_tileSizeInfo->setText(tr("There is a limit of %n tile(s) to download.", "", maxTilesCount));
     } else {
-        if (themeId == QLatin1String("earth/openstreetmap/openstreetmap.dgml") || themeId == QLatin1String("earth/openstreetmap/openseamap.dgml")
-            || themeId == QLatin1String("earth/vectorosm/vectorosm.dgml")) {
+        if (themeId == QLatin1StringView("earth/openstreetmap/openstreetmap.dgml") || themeId == QLatin1StringView("earth/openstreetmap/openseamap.dgml")
+            || themeId == QLatin1StringView("earth/vectorosm/vectorosm.dgml")) {
             tileDownloadSize = tileType() == TextureTileType ? tilesCount * averageTextureTileSize : tilesCount * averageVectorTileSize;
 
             d->m_tileSizeInfo->setToolTip(tr("Approximate size of the tiles to be downloaded"));
@@ -533,7 +533,7 @@ void DownloadRegionDialog::setOffsetUnit()
         d->m_routeOffsetSpinBox->setDecimals(1);
         d->m_routeOffsetSpinBox->setValue(offset * METER2KM);
         d->m_routeOffsetSpinBox->setSingleStep(0.1);
-    } else if (offset <= 1 && d->m_routeOffsetSpinBox->suffix() == QLatin1String(" km")) {
+    } else if (offset <= 1 && d->m_routeOffsetSpinBox->suffix() == QLatin1StringView(" km")) {
         d->m_routeOffsetSpinBox->setSuffix(" m");
         d->m_routeOffsetSpinBox->setRange(minimumRouteOffset, maximumRouteOffset);
         d->m_routeOffsetSpinBox->setDecimals(0);

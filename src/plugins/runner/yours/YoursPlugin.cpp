@@ -88,7 +88,7 @@ public:
             settings.insert(QStringLiteral("transport"), QStringLiteral("motorcar"));
         }
         ui_configWidget->transport->setCurrentIndex(ui_configWidget->transport->findData(settings.value(QStringLiteral("transport")).toString()));
-        if (settings.value(QStringLiteral("method")).toString() == QLatin1String("shortest")) {
+        if (settings.value(QStringLiteral("method")).toString() == QLatin1StringView("shortest")) {
             ui_configWidget->shortest->setChecked(true);
         } else {
             ui_configWidget->fastest->setChecked(true);

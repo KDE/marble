@@ -279,7 +279,7 @@ QString GeoDataPlacemark::displayName() const
         QStringList const uiLanguages = QLocale::system().uiLanguages();
         for (const QString &uiLanguage : uiLanguages) {
             for (auto tagIter = data.tagsBegin(), end = data.tagsEnd(); tagIter != end; ++tagIter) {
-                if (tagIter.key().startsWith(QLatin1String("name:"))) {
+                if (tagIter.key().startsWith(QLatin1StringView("name:"))) {
                     QString const tagLanguage = tagIter.key().mid(5);
                     if (tagLanguage == uiLanguage) {
                         return tagIter.value();

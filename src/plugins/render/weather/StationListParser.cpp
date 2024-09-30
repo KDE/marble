@@ -37,7 +37,7 @@ void StationListParser::read()
         readNext();
 
         if (isStartElement()) {
-            if (name() == QLatin1String("StationList"))
+            if (name() == QLatin1StringView("StationList"))
                 readStationList();
             else
                 raiseError(QObject::tr("The file is not a valid file."));
@@ -84,7 +84,7 @@ void StationListParser::readUnknownElement()
 
 void StationListParser::readStationList()
 {
-    Q_ASSERT(isStartElement() && name() == QLatin1String("StationList"));
+    Q_ASSERT(isStartElement() && name() == QLatin1StringView("StationList"));
 
     while (!atEnd()) {
         readNext();
@@ -93,7 +93,7 @@ void StationListParser::readStationList()
             break;
 
         if (isStartElement()) {
-            if (name() == QLatin1String("Station"))
+            if (name() == QLatin1StringView("Station"))
                 readStation();
             else
                 readUnknownElement();
@@ -103,7 +103,7 @@ void StationListParser::readStationList()
 
 void StationListParser::readStation()
 {
-    Q_ASSERT(isStartElement() && name() == QLatin1String("Station"));
+    Q_ASSERT(isStartElement() && name() == QLatin1StringView("Station"));
 
     BBCStation station;
 
@@ -114,13 +114,13 @@ void StationListParser::readStation()
             break;
 
         if (isStartElement()) {
-            if (name() == QLatin1String("name"))
+            if (name() == QLatin1StringView("name"))
                 station.setName(readCharacters());
-            else if (name() == QLatin1String("id"))
+            else if (name() == QLatin1StringView("id"))
                 station.setBbcId(readCharacters().toLong());
-            else if (name() == QLatin1String("priority"))
+            else if (name() == QLatin1StringView("priority"))
                 station.setPriority(readCharacters().toInt());
-            else if (name() == QLatin1String("Point"))
+            else if (name() == QLatin1StringView("Point"))
                 readPoint(&station);
             else
                 readUnknownElement();
@@ -159,7 +159,7 @@ QString StationListParser::readCharacters()
 
 void StationListParser::readPoint(BBCStation *station)
 {
-    Q_ASSERT(isStartElement() && name() == QLatin1String("Point"));
+    Q_ASSERT(isStartElement() && name() == QLatin1StringView("Point"));
 
     while (!atEnd()) {
         readNext();
@@ -168,7 +168,7 @@ void StationListParser::readPoint(BBCStation *station)
             break;
 
         if (isStartElement()) {
-            if (name() == QLatin1String("coordinates")) {
+            if (name() == QLatin1StringView("coordinates")) {
                 QString coorString = readCharacters();
                 QStringList coorList = coorString.split(QLatin1Char(','));
 

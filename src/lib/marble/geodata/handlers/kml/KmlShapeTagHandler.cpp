@@ -19,7 +19,7 @@ KML_DEFINE_TAG_HANDLER(shape)
 
 GeoNode *KmlshapeTagHandler::parse(GeoParser &parser) const
 {
-    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1String(kmlTag_shape)));
+    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1StringView(kmlTag_shape)));
 
     GeoStackItem parentItem = parser.parentElement();
 
@@ -27,11 +27,11 @@ GeoNode *KmlshapeTagHandler::parse(GeoParser &parser) const
         GeoDataPhotoOverlay::Shape shape;
         QString shapeText = parser.readElementText();
 
-        if (shapeText == QLatin1String("rectangle")) {
+        if (shapeText == QLatin1StringView("rectangle")) {
             shape = GeoDataPhotoOverlay::Rectangle;
-        } else if (shapeText == QLatin1String("cylinder")) {
+        } else if (shapeText == QLatin1StringView("cylinder")) {
             shape = GeoDataPhotoOverlay::Cylinder;
-        } else if (shapeText == QLatin1String("sphere")) {
+        } else if (shapeText == QLatin1StringView("sphere")) {
             shape = GeoDataPhotoOverlay::Sphere;
         } else {
             mDebug() << "Unknown shape attribute" << shapeText << ", falling back to default value 'rectangle'";

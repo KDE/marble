@@ -374,8 +374,8 @@ QPixmap PopupItem::pixmap(const QString &imageId) const
 {
     QPixmap result;
     if (!QPixmapCache::find(imageId, &result)) {
-        QImage bottom = QImage(QLatin1String(":/") + imageId + QLatin1String("_shadow.png"));
-        QImage top = QImage(QLatin1String(":/") + imageId + QLatin1String(".png"));
+        QImage bottom = QImage(QLatin1StringView(":/") + imageId + QLatin1StringView("_shadow.png"));
+        QImage top = QImage(QLatin1StringView(":/") + imageId + QLatin1StringView(".png"));
         colorize(top, m_backColor);
         QPainter painter(&bottom);
         painter.drawImage(QPoint(0, 0), top);

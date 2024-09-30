@@ -31,20 +31,20 @@ KML_DEFINE_TAG_HANDLER_GX22(altitudeMode)
 
 GeoNode *KmlaltitudeModeTagHandler::parse(GeoParser &parser) const
 {
-    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1String(kmlTag_altitudeMode)));
+    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1StringView(kmlTag_altitudeMode)));
 
     QString content = parser.readElementText().trimmed();
 
     AltitudeMode mode;
-    if (content == QLatin1String("relativeToGround")) {
+    if (content == QLatin1StringView("relativeToGround")) {
         mode = RelativeToGround;
-    } else if (content == QLatin1String("absolute")) {
+    } else if (content == QLatin1StringView("absolute")) {
         mode = Absolute;
-    } else if (content == QLatin1String("relativeToSeaFloor")) {
+    } else if (content == QLatin1StringView("relativeToSeaFloor")) {
         mode = RelativeToSeaFloor;
-    } else if (content == QLatin1String("clampToSeaFloor")) {
+    } else if (content == QLatin1StringView("clampToSeaFloor")) {
         mode = ClampToSeaFloor;
-    } else if (content == QLatin1String("clampToGround")) {
+    } else if (content == QLatin1StringView("clampToGround")) {
         mode = ClampToGround;
     } else {
         mDebug() << "Unknown altitude mode " << content << ", falling back to 'clampToGround'";

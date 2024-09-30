@@ -231,7 +231,7 @@ void ControlView::printMapScreenShot(const QPointer<QPrintDialog> &printDialog)
             printDrivingInstructionsAdvice(document, text);
         }
 
-        text += QLatin1String("</body></html>");
+        text += QLatin1StringView("</body></html>");
         document.setHtml(text);
         document.print(printDialog->printer());
 
@@ -405,18 +405,18 @@ void ControlView::printRouteSummary(QTextDocument &document, QString &text)
         summary = summary.arg(destination).arg(distance, 0, 'f', precision).arg(unit);
         text += summary;
 
-        text += QLatin1String("<table cellpadding=\"2\">");
+        text += QLatin1StringView("<table cellpadding=\"2\">");
         QString pixmapTemplate = "marble://viaPoint-%1.png";
         for (int i = 0; i < routeRequest->size(); ++i) {
-            text += QLatin1String("<tr><td>");
+            text += QLatin1StringView("<tr><td>");
             QPixmap pixmap = routeRequest->pixmap(i);
             QString pixmapResource = pixmapTemplate.arg(i);
             document.addResource(QTextDocument::ImageResource, QUrl(pixmapResource), QVariant(pixmap));
             QString myimg = "<img src=\"%1\">";
-            text += myimg.arg(pixmapResource) + QLatin1String("</td><td>");
-            routeRequest->name(i) + QLatin1String("</td></tr>");
+            text += myimg.arg(pixmapResource) + QLatin1StringView("</td><td>");
+            routeRequest->name(i) + QLatin1StringView("</td></tr>");
         }
-        text += QLatin1String("</table>");
+        text += QLatin1StringView("</table>");
     }
 #endif
 }
@@ -432,7 +432,7 @@ void ControlView::printDrivingInstructions(QTextDocument &document, QString &tex
 
     GeoDataLineString total = routingModel->route().path();
 
-    text += QLatin1String(
+    text += QLatin1StringView(
         "<table cellpadding=\"4\">"
         "<tr><th>No.</th><th>Distance</th><th>Instruction</th></tr>");
     for (int i = 0; i < routingModel->rowCount(); ++i) {
@@ -447,16 +447,16 @@ void ControlView::printDrivingInstructions(QTextDocument &document, QString &tex
         }
 
         if (i % 2 == 0) {
-            text += QLatin1String("<tr bgcolor=\"lightGray\"><td align=\"right\" valign=\"middle\">");
+            text += QLatin1StringView("<tr bgcolor=\"lightGray\"><td align=\"right\" valign=\"middle\">");
         } else {
-            text += QLatin1String("<tr><td align=\"right\" valign=\"middle\">");
+            text += QLatin1StringView("<tr><td align=\"right\" valign=\"middle\">");
         }
-        text += QString::number(i + 1) + QLatin1String("</td><td align=\"right\" valign=\"middle\">");
+        text += QString::number(i + 1) + QLatin1StringView("</td><td align=\"right\" valign=\"middle\">");
 
         qreal planetRadius = marbleModel()->planet()->radius();
         text += QString::number(accumulator.length(planetRadius) * METER2KM, 'f', 1) +
             /** @todo: support localization */
-            QLatin1String(" km</td><td valign=\"middle\">");
+            QLatin1StringView(" km</td><td valign=\"middle\">");
 
         QPixmap instructionIcon = index.data(Qt::DecorationRole).value<QPixmap>();
         if (!instructionIcon.isNull()) {
@@ -465,20 +465,20 @@ void ControlView::printDrivingInstructions(QTextDocument &document, QString &tex
             text += QStringLiteral("<img src=\"%1\">").arg(uri);
         }
 
-        text += routingModel->data(index).toString() + QLatin1String("</td></tr>");
+        text += routingModel->data(index).toString() + QLatin1StringView("</td></tr>");
     }
-    text += QLatin1String("</table>");
+    text += QLatin1StringView("</table>");
 #endif
 }
 
 void ControlView::printDrivingInstructionsAdvice(QTextDocument &, QString &text)
 {
 #ifndef QT_NO_PRINTER
-    text += QLatin1String("<p>") + tr("The Marble development team wishes you a pleasant and safe journey.") + QLatin1String("</p>") + QLatin1String("<p>")
-        + tr("Caution: Driving instructions may be incomplete or inaccurate.") + QLatin1Char(' ')
+    text += QLatin1StringView("<p>") + tr("The Marble development team wishes you a pleasant and safe journey.") + QLatin1StringView("</p>")
+        + QLatin1StringView("<p>") + tr("Caution: Driving instructions may be incomplete or inaccurate.") + QLatin1Char(' ')
         + tr("Road construction, weather and other unforeseen variables can result in this suggested route not to be the most expedient or safest route to "
              "your destination.")
-        + QLatin1Char(' ') + tr("Please use common sense while navigating.") + QLatin1String("</p>");
+        + QLatin1Char(' ') + tr("Please use common sense while navigating.") + QLatin1StringView("</p>");
 #endif
 }
 
@@ -506,10 +506,10 @@ void ControlView::launchExternalMapEditor()
         }
     }
 
-    if (editor == QLatin1String("josm")) {
+    if (editor == QLatin1StringView("josm")) {
         // JOSM, the java based editor
         synchronizeWithExternalMapEditor(editor, "--download=%1,%4,%3,%2");
-    } else if (editor == QLatin1String("merkaartor")) {
+    } else if (editor == QLatin1StringView("merkaartor")) {
         // Merkaartor, a Qt based editor
         QString argument = "osm://download/load_and_zoom?top=%1&right=%2&bottom=%3&left=%4";
         synchronizeWithExternalMapEditor(editor, argument);
@@ -672,7 +672,7 @@ QList<QAction *> ControlView::setupDockWidgets(QMainWindow *mainWindow)
     QList<RenderPlugin *>::const_iterator const end = renderPluginList.constEnd();
 
     for (; i != end; ++i) {
-        if ((*i)->nameId() == QLatin1String("annotation")) {
+        if ((*i)->nameId() == QLatin1StringView("annotation")) {
             m_annotationPlugin = *i;
             QObject::connect(m_annotationPlugin, SIGNAL(enabledChanged(bool)), this, SLOT(updateAnnotationDockVisibility()));
             QObject::connect(m_annotationPlugin, SIGNAL(visibilityChanged(bool, QString)), this, SLOT(updateAnnotationDockVisibility()));
@@ -805,7 +805,7 @@ void ControlView::updateAnnotationDock()
     if (!tmp_actionGroups->isEmpty()) {
         bool firstToolbarFilled = false;
         for (QAction *action : tmp_actionGroups->first()->actions()) {
-            if (action->objectName() == QLatin1String("toolbarSeparator")) {
+            if (action->objectName() == QLatin1StringView("toolbarSeparator")) {
                 firstToolbarFilled = true;
             } else {
                 if (!firstToolbarFilled) {

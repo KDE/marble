@@ -46,7 +46,7 @@ bool MapThemeSortFilterProxyModel::isFavorite(const QModelIndex &index)
 {
     const QAbstractItemModel *model = index.model();
     QModelIndex columnIndex = model->index(index.row(), 0, QModelIndex());
-    QString const key = QLatin1String("Favorites/") + model->data(columnIndex).toString();
+    QString const key = QLatin1StringView("Favorites/") + model->data(columnIndex).toString();
     return QSettings().contains(key);
 }
 
@@ -54,7 +54,7 @@ QDateTime MapThemeSortFilterProxyModel::favoriteDateTime(const QModelIndex &inde
 {
     const QAbstractItemModel *model = index.model();
     QModelIndex columnIndex = model->index(index.row(), 0, QModelIndex());
-    QString const key = QLatin1String("Favorites/") + model->data(columnIndex).toString();
+    QString const key = QLatin1StringView("Favorites/") + model->data(columnIndex).toString();
     return QSettings().value(key).toDateTime();
 }
 

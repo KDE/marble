@@ -148,7 +148,7 @@ void OsmNominatimRunner::handleResult(QNetworkReply *reply)
             QDomElement item = place.childNodes().at(i).toElement();
             description += item.nodeName() + QLatin1Char(':') + item.text() + QLatin1Char('\n');
         }
-        description += QLatin1String("Category: ") + key + QLatin1Char('/') + value;
+        description += QLatin1StringView("Category: ") + key + QLatin1Char('/') + value;
 
         if (!lon.isEmpty() && !lat.isEmpty() && !desc.isEmpty()) {
             QString placemarkName;
@@ -159,27 +159,27 @@ void OsmNominatimRunner::handleResult(QNetworkReply *reply)
             }
             if (!road.isEmpty() && road != placemarkName) {
                 if (!placemarkName.isEmpty()) {
-                    placemarkName += QLatin1String(", ");
+                    placemarkName += QLatin1StringView(", ");
                 }
                 placemarkName += road;
                 data.addTag(QStringLiteral("addr:street"), road);
             }
             if (!city.isEmpty() && !placemarkName.contains(QLatin1Char(',')) && city != placemarkName) {
                 if (!placemarkName.isEmpty()) {
-                    placemarkName += QLatin1String(", ");
+                    placemarkName += QLatin1StringView(", ");
                 }
                 placemarkName += city;
                 data.addTag(QStringLiteral("addr:city"), city);
             }
             if (!administrative.isEmpty() && !placemarkName.contains(QLatin1Char(',')) && administrative != placemarkName) {
                 if (!placemarkName.isEmpty()) {
-                    placemarkName += QLatin1String(", ");
+                    placemarkName += QLatin1StringView(", ");
                 }
                 placemarkName += administrative;
             }
             if (!country.isEmpty() && !placemarkName.contains(QLatin1Char(',')) && country != placemarkName) {
                 if (!placemarkName.isEmpty()) {
-                    placemarkName += QLatin1String(", ");
+                    placemarkName += QLatin1StringView(", ");
                 }
                 placemarkName += country;
                 data.addTag(QStringLiteral("addr:country"), country);

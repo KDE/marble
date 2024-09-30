@@ -30,7 +30,7 @@ int main(int argc, char *argv[])
 
     QString lang = QLocale::system().name().section(QLatin1Char('_'), 0, 0);
     QTranslator translator;
-    translator.load(QLatin1String("marble-") + lang, MarbleDirs::path(QStringLiteral("lang")));
+    translator.load(QLatin1StringView("marble-") + lang, MarbleDirs::path(QStringLiteral("lang")));
     app.installTranslator(&translator);
 
     // For non static builds on mac and win
@@ -39,7 +39,7 @@ int main(int argc, char *argv[])
     // application bundle...
 
 #ifdef Q_WS_WIN
-    QApplication::addLibraryPath(QApplication::applicationDirPath() + QDir::separator() + QLatin1String("plugins"));
+    QApplication::addLibraryPath(QApplication::applicationDirPath() + QDir::separator() + QLatin1StringView("plugins"));
 #endif
 
     QString marbleDataPath;
@@ -62,11 +62,11 @@ int main(int argc, char *argv[])
     for (int i = 1; i < args.count(); ++i) {
         const QString arg = args.at(i);
 
-        if (arg == QLatin1String("--debug-info")) {
+        if (arg == QLatin1StringView("--debug-info")) {
             MarbleDebug::setEnabled(true);
-        } else if (arg.startsWith(QLatin1String("--marbledatapath="), Qt::CaseInsensitive)) {
+        } else if (arg.startsWith(QLatin1StringView("--marbledatapath="), Qt::CaseInsensitive)) {
             marbleDataPath = args.at(i).mid(17);
-        } else if (arg.compare(QLatin1String("--marbledatapath"), Qt::CaseInsensitive) == 0 && i + 1 < args.size()) {
+        } else if (arg.compare(QLatin1StringView("--marbledatapath"), Qt::CaseInsensitive) == 0 && i + 1 < args.size()) {
             dataPathIndex = i + 1;
             marbleDataPath = args.value(dataPathIndex);
             ++i;

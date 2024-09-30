@@ -17,7 +17,7 @@ KML_DEFINE_TAG_HANDLER(drawOrder)
 
 GeoNode *KmldrawOrderTagHandler::parse(GeoParser &parser) const
 {
-    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1String(kmlTag_drawOrder)));
+    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1StringView(kmlTag_drawOrder)));
 
     GeoStackItem parentItem = parser.parentElement();
     if (parentItem.is<GeoDataOverlay>()) {

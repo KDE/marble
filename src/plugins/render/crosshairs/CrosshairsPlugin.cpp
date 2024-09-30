@@ -173,7 +173,7 @@ void CrosshairsPlugin::readSettings()
         break;
     }
 
-    if (QImageReader::imageFormat(m_theme) == QLatin1String("svg")) {
+    if (QImageReader::imageFormat(m_theme) == QLatin1StringView("svg")) {
         delete m_svgobj;
         m_svgobj = new QSvgRenderer(m_theme, this);
     }
@@ -195,7 +195,7 @@ bool CrosshairsPlugin::render(GeoPainter *painter, ViewportParams *viewport, con
     Q_UNUSED(layer)
 
     if (m_crosshairs.isNull()) {
-        if (QImageReader::imageFormat(m_theme) == QLatin1String("svg")) {
+        if (QImageReader::imageFormat(m_theme) == QLatin1StringView("svg")) {
             painter->setRenderHint(QPainter::Antialiasing, true);
             m_crosshairs = QPixmap(QSize(21, 21));
             m_crosshairs.fill(Qt::transparent);

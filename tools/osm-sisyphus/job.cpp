@@ -101,7 +101,7 @@ void Job::changeStatus(Job::Status status, const QString &message)
     }
 
     Logger::instance().setStatus(m_region.id() + QLatin1Char('_') + m_transport,
-                                 m_region.name() + QLatin1String(" (") + m_transport + QLatin1Char(')'),
+                                 m_region.name() + QLatin1StringView(" (") + m_transport + QLatin1Char(')'),
                                  statusType,
                                  message);
     m_statusMessage = message;
@@ -135,7 +135,7 @@ bool Job::download()
     } else {
         qDebug() << "Failed to download " << url;
         QFile::remove(osmFile().absoluteFilePath());
-        changeStatus(Error, QLatin1String("Error downloading .osm.pbf file: ") + wget.readAllStandardError());
+        changeStatus(Error, QLatin1StringView("Error downloading .osm.pbf file: ") + wget.readAllStandardError());
         return false;
     }
 }
@@ -150,7 +150,7 @@ bool Job::download()
 //     arguments << "--transport" << m_transport;
 //     arguments << "--payload" << targetFile().fileName();
 //     arguments << m_parameters.base().absoluteFilePath("poly/" + m_region.polyFile());
-//     arguments << monavDir().absoluteFilePath() + QLatin1String("/marble.kml");
+//     arguments << monavDir().absoluteFilePath() + QLatin1StringView("/marble.kml");
 //     QProcess poly2kml;
 //     poly2kml.start("poly2kml", arguments);
 //     poly2kml.waitForFinished(1000 * 60 * 30); // wait up to half an hour for poly2kml to convert the data
@@ -169,13 +169,13 @@ bool Job::monav()
     QString const status = QString("Generating offline routing map from %1 (%2).").arg(osmFile().fileName()).arg(Region::fileSize(osmFile()));
     changeStatus(Routing, status);
     QStringList arguments;
-    arguments << QLatin1String("-s=") + m_monavSettings;
-    arguments << QLatin1String("-i=") + osmFile().absoluteFilePath();
-    arguments << QLatin1String("-o=") + monavDir().absoluteFilePath();
+    arguments << QLatin1StringView("-s=") + m_monavSettings;
+    arguments << QLatin1StringView("-i=") + osmFile().absoluteFilePath();
+    arguments << QLatin1StringView("-o=") + monavDir().absoluteFilePath();
     arguments << "-pi=OpenStreetMap Importer" << "-pro=Contraction Hierarchies";
     arguments << "-pg=GPS Grid" << "-di";
-    arguments << QLatin1String("-dro=") + m_transport;
-    arguments << QLatin1String("--profile=") + m_profile;
+    arguments << QLatin1StringView("-dro=") + m_transport;
+    arguments << QLatin1StringView("--profile=") + m_profile;
     arguments << "-dd" /*<< "-dc"*/;
     QProcess monav;
     monav.start("monav-preprocessor", arguments);
@@ -184,17 +184,17 @@ bool Job::monav()
         qDebug() << "Processed osm file for monav";
     } else {
         qDebug() << "monav exiting with status " << monav.exitCode();
-        changeStatus(Error, QLatin1String("Routing map conversion failed: ") + monav.readAllStandardError());
+        changeStatus(Error, QLatin1StringView("Routing map conversion failed: ") + monav.readAllStandardError());
         return false;
     }
 
-    QFile pluginsFile(monavDir().absoluteFilePath() + QLatin1String("/plugins.ini"));
+    QFile pluginsFile(monavDir().absoluteFilePath() + QLatin1StringView("/plugins.ini"));
     pluginsFile.open(QFile::WriteOnly | QFile::Truncate);
     QTextStream pluginsStream(&pluginsFile);
     pluginsStream << "[General]\nrouter=Contraction Hierarchies\nrenderer=Mapnik Renderer\ngpsLookup=GPS Grid\naddressLookup=Unicode Tournament Trie\n";
     pluginsFile.close();
 
-    QFileInfo subdir = QFileInfo(monavDir().absoluteFilePath() + QLatin1String("/routing_") + m_transport.toLower());
+    QFileInfo subdir = QFileInfo(monavDir().absoluteFilePath() + QLatin1StringView("/routing_") + m_transport.toLower());
     if (subdir.exists() && subdir.isDir()) {
         QFileInfoList files = QDir(subdir.absoluteFilePath()).entryInfoList(QDir::Files);
         for (const QFileInfo &file : files) {
@@ -224,7 +224,7 @@ bool Job::search()
     arguments << "--payload" << targetFile().fileName();
     arguments << osmFile().absoluteFilePath();
     arguments << searchFile().absoluteFilePath();
-    QFileInfo kmlFile(monavDir().absoluteFilePath() + QLatin1String("/marble.kml"));
+    QFileInfo kmlFile(monavDir().absoluteFilePath() + QLatin1StringView("/marble.kml"));
     arguments << kmlFile.absoluteFilePath();
     QProcess osmAddresses;
     osmAddresses.start("osm-addresses", arguments);
@@ -251,7 +251,7 @@ bool Job::search()
         return true;
     } else {
         qDebug() << "osm-addresses exiting with status " << osmAddresses.exitCode();
-        changeStatus(Error, QLatin1String("Error creating search database: ") + osmAddresses.readAllStandardError());
+        changeStatus(Error, QLatin1StringView("Error creating search database: ") + osmAddresses.readAllStandardError());
         return false;
     }
 }
@@ -262,14 +262,14 @@ bool Job::package()
     QStringList arguments;
     arguments << "czf" << targetFile().absoluteFilePath() << "earth/monav/" << "earth/placemarks";
     QProcess tar;
-    tar.setWorkingDirectory(m_parameters.base().absolutePath() + QLatin1String("/data/") + m_region.id());
+    tar.setWorkingDirectory(m_parameters.base().absolutePath() + QLatin1StringView("/data/") + m_region.id());
     tar.start("tar", arguments);
     tar.waitForFinished(1000 * 60 * 60); // wait up to 1 hour for tar to package things
     if (tar.exitStatus() == QProcess::NormalExit && tar.exitCode() == 0) {
         qDebug() << "Packaged tar file";
         return true;
     } else {
-        changeStatus(Error, QLatin1String("Packaging failed: ") + tar.readAllStandardError());
+        changeStatus(Error, QLatin1StringView("Packaging failed: ") + tar.readAllStandardError());
         return false;
     }
 }
@@ -307,13 +307,14 @@ bool Job::cleanup()
 QFileInfo Job::osmFile()
 {
     m_parameters.base().mkdir("download");
-    QFileInfo result(m_parameters.base(), QLatin1String("download/") + m_region.id() + QLatin1String(".osm.pbf"));
+    QFileInfo result(m_parameters.base(), QLatin1StringView("download/") + m_region.id() + QLatin1StringView(".osm.pbf"));
     return result;
 }
 
 QFileInfo Job::monavDir()
 {
-    QString const subdir = QLatin1String("data/") + m_region.id() + QLatin1String("/earth/monav/") + m_transport.toLower() + QLatin1Char('/') + m_region.path();
+    QString const subdir =
+        QLatin1StringView("data/") + m_region.id() + QLatin1StringView("/earth/monav/") + m_transport.toLower() + QLatin1Char('/') + m_region.path();
     m_parameters.base().mkpath(subdir);
     QFileInfo result(m_parameters.base(), subdir);
     return result;
@@ -322,15 +323,16 @@ QFileInfo Job::monavDir()
 QFileInfo Job::targetFile()
 {
     m_parameters.base().mkdir("finished");
-    QFileInfo result(m_parameters.base(), QLatin1String("finished/") + m_region.id() + QLatin1Char('_') + m_transport.toLower() + QLatin1String(".tar.gz"));
+    QFileInfo result(m_parameters.base(),
+                     QLatin1StringView("finished/") + m_region.id() + QLatin1Char('_') + m_transport.toLower() + QLatin1StringView(".tar.gz"));
     return result;
 }
 
 QFileInfo Job::searchFile()
 {
-    QString const subdir = QLatin1String("data/") + m_region.id() + QLatin1String("/earth/placemarks/") + QFileInfo(m_region.path()).path();
+    QString const subdir = QLatin1StringView("data/") + m_region.id() + QLatin1StringView("/earth/placemarks/") + QFileInfo(m_region.path()).path();
     m_parameters.base().mkpath(subdir);
-    QFileInfo result(m_parameters.base(), subdir + QLatin1Char('/') + m_region.id() + QLatin1String(".sqlite"));
+    QFileInfo result(m_parameters.base(), subdir + QLatin1Char('/') + m_region.id() + QLatin1StringView(".sqlite"));
     return result;
 }
 

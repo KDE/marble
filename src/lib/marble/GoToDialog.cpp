@@ -218,7 +218,7 @@ QVariant TargetModel::bookmarkData(int index, int role) const
         const GeoDataFolder *folder = geodata_cast<GeoDataFolder>(m_bookmarks[index]->parent());
         Q_ASSERT(folder && "Internal bookmark representation has changed. Please report this as a bug at https://bugs.kde.org.");
         if (folder) {
-            return QString(folder->name() + QLatin1String(" / ") + m_bookmarks[index]->name());
+            return QString(folder->name() + QLatin1StringView(" / ") + m_bookmarks[index]->name());
         }
         return QVariant();
     }

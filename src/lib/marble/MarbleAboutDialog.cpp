@@ -361,14 +361,14 @@ void MarbleAboutDialogPrivate::loadPageContents(int idx)
 
 void MarbleAboutDialog::setApplicationTitle(const QString &title)
 {
-    QString const titleHtml = QLatin1String("<b>") + title + QLatin1String("</b>");
+    QString const titleHtml = QLatin1StringView("<b>") + title + QLatin1StringView("</b>");
     d->uiWidget.m_pMarbleTitleLabel->setText(titleHtml);
     QString const applicationVersion = tr("Using Marble Library version %1").arg(QLatin1StringView(MARBLE_VERSION_STRING));
     d->uiWidget.m_pMarbleVersionLabel->setText(applicationVersion);
     QTextBrowser *browser = d->uiWidget.m_pMarbleAboutBrowser;
     QString text;
     if (MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen) {
-        text = titleHtml + QLatin1String("<br />") + applicationVersion + QLatin1String("<br />");
+        text = titleHtml + QLatin1StringView("<br />") + applicationVersion + QLatin1StringView("<br />");
     }
     browser->setHtml(
         text

@@ -111,7 +111,7 @@ int main(int argc, char *argv[])
             const int gmtoffset = (int)(gmt.toFloat() * 100);
             const int dstoffset = (int)(dst.toFloat() * 100) - gmtoffset;
 
-            if (role != QLatin1String("PPLX")) {
+            if (role != QLatin1StringView("PPLX")) {
                 targetstream << "    <Placemark> \n";
                 targetstream << "        <name>" << escapeXml(name) << "</name> \n";
                 targetstream << "        <state>" << escapeXml(state) << "</state> \n";

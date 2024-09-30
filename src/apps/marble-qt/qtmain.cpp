@@ -37,7 +37,7 @@ using namespace Marble;
 // load translation file from normal "KDE Applications" packaging installation
 static bool loadTranslation(const QString &localeDirName, QApplication &app)
 {
-    const QString subPath = QLatin1String("locale/") + localeDirName + QLatin1String("/LC_MESSAGES/marble_qt.qm");
+    const QString subPath = QLatin1StringView("locale/") + localeDirName + QLatin1StringView("/LC_MESSAGES/marble_qt.qm");
     const QString fullPath = QStandardPaths::locate(QStandardPaths::GenericDataLocation, subPath);
     if (fullPath.isEmpty()) {
         return false;
@@ -94,7 +94,7 @@ int main(int argc, char *argv[])
     // application bundle...
 
 #ifdef Q_WS_WIN
-    QApplication::addLibraryPath(QApplication::applicationDirPath() + QDir::separator() + QLatin1String("plugins"));
+    QApplication::addLibraryPath(QApplication::applicationDirPath() + QDir::separator() + QLatin1StringView("plugins"));
 #endif
 #ifdef Q_OS_MACX
     QApplication::instance()->setAttribute(Qt::AA_DontShowIconsInMenus);
@@ -110,7 +110,7 @@ int main(int argc, char *argv[])
     // in system Qt frameworks. If the app is a bundle
     // lets try to set the qt plugin search path...
     if (myPath.contains(".app")) {
-        myPath += QLatin1String("/Contents/plugins");
+        myPath += QLatin1StringView("/Contents/plugins");
         QApplication::addLibraryPath(myPath);
         qDebug("Added %s to plugin search path", qPrintable(myPath));
     }
@@ -159,41 +159,41 @@ int main(int argc, char *argv[])
     for (int i = 1; i < args.count(); ++i) {
         const QString arg = args.at(i);
 
-        if (arg == QLatin1String("--debug-info")) {
+        if (arg == QLatin1StringView("--debug-info")) {
             MarbleDebug::setEnabled(true);
-        } else if (arg.startsWith(QLatin1String("--marbledatapath="), Qt::CaseInsensitive)) {
+        } else if (arg.startsWith(QLatin1StringView("--marbledatapath="), Qt::CaseInsensitive)) {
             marbleDataPath = args.at(i).mid(17);
-        } else if (arg.compare(QLatin1String("--marbledatapath"), Qt::CaseInsensitive) == 0 && i + 1 < args.size()) {
+        } else if (arg.compare(QLatin1StringView("--marbledatapath"), Qt::CaseInsensitive) == 0 && i + 1 < args.size()) {
             dataPathIndex = i + 1;
             marbleDataPath = args.value(dataPathIndex);
             ++i;
-        } else if (arg == QLatin1String("--highresolution")) {
+        } else if (arg == QLatin1StringView("--highresolution")) {
             profiles |= MarbleGlobal::HighResolution;
-        } else if (arg == QLatin1String("--nohighresolution")) {
+        } else if (arg == QLatin1StringView("--nohighresolution")) {
             profiles &= ~MarbleGlobal::HighResolution;
-        } else if (arg.startsWith(QLatin1String("--latlon="), Qt::CaseInsensitive)) {
+        } else if (arg.startsWith(QLatin1StringView("--latlon="), Qt::CaseInsensitive)) {
             coordinatesString = arg.mid(9);
-        } else if (arg.compare(QLatin1String("--latlon"), Qt::CaseInsensitive) == 0 && i + 1 < args.size()) {
+        } else if (arg.compare(QLatin1StringView("--latlon"), Qt::CaseInsensitive) == 0 && i + 1 < args.size()) {
             ++i;
             coordinatesString = args.value(i);
-        } else if (arg.compare(QLatin1String("--geo-uri="), Qt::CaseInsensitive) == 0) {
+        } else if (arg.compare(QLatin1StringView("--geo-uri="), Qt::CaseInsensitive) == 0) {
             geoUriString = arg.mid(10);
-        } else if (arg.compare(QLatin1String("--geo-uri"), Qt::CaseInsensitive) == 0 && i + 1 < args.size()) {
+        } else if (arg.compare(QLatin1StringView("--geo-uri"), Qt::CaseInsensitive) == 0 && i + 1 < args.size()) {
             ++i;
             geoUriString = args.value(i);
-        } else if (arg.startsWith(QLatin1String("--distance="), Qt::CaseInsensitive)) {
+        } else if (arg.startsWith(QLatin1StringView("--distance="), Qt::CaseInsensitive)) {
             distanceString = arg.mid(11);
-        } else if (arg.compare(QLatin1String("--distance"), Qt::CaseInsensitive) == 0 && i + 1 < args.size()) {
+        } else if (arg.compare(QLatin1StringView("--distance"), Qt::CaseInsensitive) == 0 && i + 1 < args.size()) {
             ++i;
             distanceString = args.value(i);
-        } else if (arg.startsWith(QLatin1String("--map="), Qt::CaseInsensitive)) {
+        } else if (arg.startsWith(QLatin1StringView("--map="), Qt::CaseInsensitive)) {
             mapThemeId = arg.mid(6);
-        } else if (arg.compare(QLatin1String("--map"), Qt::CaseInsensitive) == 0 && i + 1 < args.size()) {
+        } else if (arg.compare(QLatin1StringView("--map"), Qt::CaseInsensitive) == 0 && i + 1 < args.size()) {
             ++i;
             mapThemeId = args.value(i);
-        } else if (arg.startsWith(QLatin1String("--tour="), Qt::CaseInsensitive)) {
+        } else if (arg.startsWith(QLatin1StringView("--tour="), Qt::CaseInsensitive)) {
             tour = arg.mid(7);
-        } else if (arg.compare(QLatin1String("--tour"), Qt::CaseInsensitive) == 0 && i + 1 < args.size()) {
+        } else if (arg.compare(QLatin1StringView("--tour"), Qt::CaseInsensitive) == 0 && i + 1 < args.size()) {
             ++i;
             tour = args.value(i);
         }
@@ -205,7 +205,7 @@ int main(int argc, char *argv[])
 
     QVariantMap cmdLineSettings;
     if (!mapThemeId.isEmpty()) {
-        cmdLineSettings.insert(QLatin1String("mapTheme"), QVariant(mapThemeId));
+        cmdLineSettings.insert(QLatin1StringView("mapTheme"), QVariant(mapThemeId));
     }
 
     if (!coordinatesString.isEmpty()) {
@@ -214,21 +214,21 @@ int main(int argc, char *argv[])
         if (success) {
             QVariantList lonLat;
             lonLat << QVariant(coordinates.longitude(GeoDataCoordinates::Degree)) << QVariant(coordinates.latitude(GeoDataCoordinates::Degree));
-            cmdLineSettings.insert(QLatin1String("lonlat"), QVariant(lonLat));
+            cmdLineSettings.insert(QLatin1StringView("lonlat"), QVariant(lonLat));
         }
     }
     if (!distanceString.isEmpty()) {
         bool success = false;
         const qreal distance = distanceString.toDouble(&success);
         if (success) {
-            cmdLineSettings.insert(QLatin1String("distance"), QVariant(distance));
+            cmdLineSettings.insert(QLatin1StringView("distance"), QVariant(distance));
         }
     }
     if (!tour.isEmpty()) {
-        cmdLineSettings.insert(QLatin1String("tour"), QVariant(tour));
+        cmdLineSettings.insert(QLatin1StringView("tour"), QVariant(tour));
     }
 
-    cmdLineSettings.insert(QLatin1String("geo-uri"), QVariant(geoUriString));
+    cmdLineSettings.insert(QLatin1StringView("geo-uri"), QVariant(geoUriString));
 
     MainWindow window(marbleDataPath, cmdLineSettings);
 
@@ -237,24 +237,24 @@ int main(int argc, char *argv[])
 
     for (int i = 1; i < args.count(); ++i) {
         const QString arg = args.at(i);
-        if (arg == QLatin1String("--timedemo")) {
+        if (arg == QLatin1StringView("--timedemo")) {
             window.resize(900, 640);
             MarbleTest marbleTest(window.marbleWidget());
             marbleTest.timeDemo();
             return 0;
         }
 
-        if (arg == QLatin1String("--fps")) {
+        if (arg == QLatin1StringView("--fps")) {
             window.marbleControl()->marbleWidget()->setShowFrameRate(true);
-        } else if (arg == QLatin1String("--tile-id")) {
+        } else if (arg == QLatin1StringView("--tile-id")) {
             window.marbleControl()->marbleWidget()->setShowTileId(true);
-        } else if (arg == QLatin1String("--runtimeTrace")) {
+        } else if (arg == QLatin1StringView("--runtimeTrace")) {
             window.marbleControl()->marbleWidget()->setShowRuntimeTrace(true);
-        } else if (arg == QLatin1String("--debug-polygons")) {
+        } else if (arg == QLatin1StringView("--debug-polygons")) {
             window.marbleControl()->marbleWidget()->setShowDebugPolygons(true);
         } else if (i != dataPathIndex && QFile::exists(arg)) {
             window.addGeoDataFile(arg);
-        } else if (arg == QLatin1String("--debug-levels")) {
+        } else if (arg == QLatin1StringView("--debug-levels")) {
             window.marbleWidget()->setDebugLevelTags(true);
         }
     }

@@ -149,7 +149,7 @@ int MonavRunnerPrivate::retrieveRoute(const Marble::RouteRequest *route,
             QString road = reply.nameStrings[reply.pathEdges[i].name];
             QString type = reply.typeStrings[reply.pathEdges[i].type];
             RoutingWaypoint::JunctionType junction = RoutingWaypoint::Other;
-            if (type == QLatin1String("roundabout") && reply.pathEdges[i].branchingPossible) {
+            if (type == QLatin1StringView("roundabout") && reply.pathEdges[i].branchingPossible) {
                 junction = RoutingWaypoint::Roundabout;
             }
             for (unsigned int l = 0; l < reply.pathEdges[i].length; ++k, ++l) {

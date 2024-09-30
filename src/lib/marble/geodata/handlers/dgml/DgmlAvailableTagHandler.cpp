@@ -22,7 +22,7 @@ DGML_DEFINE_TAG_HANDLER(Available)
 GeoNode *DgmlAvailableTagHandler::parse(GeoParser &parser) const
 {
     // Check whether the tag is valid
-    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1String(dgmlTag_Available)));
+    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1StringView(dgmlTag_Available)));
 
     // Checking for parent item
     GeoStackItem parentItem = parser.parentElement();

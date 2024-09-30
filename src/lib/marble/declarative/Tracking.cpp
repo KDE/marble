@@ -105,7 +105,7 @@ void Tracking::updatePositionMarker()
 {
     if (m_marbleQuickItem && m_positionMarker && m_positionMarkerType == Circle) {
         Coordinate *position = nullptr;
-        bool visible = (m_marbleQuickItem->model()->planetId() == QLatin1String("earth"));
+        bool visible = (m_marbleQuickItem->model()->planetId() == QLatin1StringView("earth"));
         if (m_positionSource && m_positionSource->hasPosition()) {
             position = m_positionSource->position();
         } else if (hasLastKnownPosition()) {
@@ -156,7 +156,7 @@ void Tracking::setShowPositionMarkerPlugin(bool visible)
         QList<RenderPlugin *> const renderPlugins = m_marbleQuickItem->map()->renderPlugins();
         for (RenderPlugin *renderPlugin : renderPlugins) {
             Q_ASSERT(renderPlugin);
-            if (renderPlugin->nameId() == QLatin1String("positionMarker")) {
+            if (renderPlugin->nameId() == QLatin1StringView("positionMarker")) {
                 renderPlugin->setEnabled(true);
                 renderPlugin->setVisible(visible);
             }
@@ -263,7 +263,7 @@ void Tracking::saveTrack(const QString &fileName)
 {
     if (m_marbleQuickItem) {
         /** @todo FIXME: replace the file:// prefix on QML side */
-        QString target = fileName.startsWith(QLatin1String("file://")) ? fileName.mid(7) : fileName;
+        QString target = fileName.startsWith(QLatin1StringView("file://")) ? fileName.mid(7) : fileName;
         m_marbleQuickItem->model()->positionTracking()->saveTrack(target);
     }
 }
@@ -272,7 +272,7 @@ void Tracking::openTrack(const QString &fileName)
 {
     if (m_marbleQuickItem) {
         /** @todo FIXME: replace the file:// prefix on QML side */
-        QString target = fileName.startsWith(QLatin1String("file://")) ? fileName.mid(7) : fileName;
+        QString target = fileName.startsWith(QLatin1StringView("file://")) ? fileName.mid(7) : fileName;
         m_marbleQuickItem->model()->addGeoDataFile(target);
     }
 }

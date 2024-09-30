@@ -60,7 +60,7 @@ void YoursRunner::retrieveRoute(const RouteRequest *route)
     QString transport = settings[QStringLiteral("transport")].toString();
     QString fast;
 
-    if (settings[QStringLiteral("method")] == QLatin1String("shortest")) {
+    if (settings[QStringLiteral("method")] == QLatin1StringView("shortest")) {
         fast = "0";
     } else {
         fast = "1";
@@ -105,7 +105,7 @@ void YoursRunner::retrieveData(QNetworkReply *reply)
         GeoDataDocument *result = parse(data);
         if (result) {
             QString name = "%1 %2 (Yours)";
-            QString unit = QLatin1String("m");
+            QString unit = QLatin1StringView("m");
             qreal length = distance(result);
             if (length == 0.0) {
                 delete result;

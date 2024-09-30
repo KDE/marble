@@ -30,12 +30,12 @@ BBCWeatherItem::~BBCWeatherItem()
 
 bool BBCWeatherItem::request(const QString &type)
 {
-    if (type == QLatin1String("bbcobservation")) {
+    if (type == QLatin1StringView("bbcobservation")) {
         if (!m_observationRequested) {
             m_observationRequested = true;
             return true;
         }
-    } else if (type == QLatin1String("bbcforecast")) {
+    } else if (type == QLatin1StringView("bbcforecast")) {
         if (!m_forecastRequested) {
             m_forecastRequested = true;
             return true;
@@ -51,7 +51,7 @@ QString BBCWeatherItem::service() const
 
 void BBCWeatherItem::addDownloadedFile(const QString &url, const QString &type)
 {
-    if (type == QLatin1String("bbcobservation") || type == QLatin1String("bbcforecast")) {
+    if (type == QLatin1StringView("bbcobservation") || type == QLatin1StringView("bbcforecast")) {
         BBCParser::instance()->scheduleRead(url, this, type);
     }
 }
@@ -64,7 +64,7 @@ quint32 BBCWeatherItem::bbcId() const
 void BBCWeatherItem::setBbcId(quint32 id)
 {
     m_bbcId = id;
-    setId(QLatin1String("bbc") + QString::number(id));
+    setId(QLatin1StringView("bbc") + QString::number(id));
 }
 
 QUrl BBCWeatherItem::observationUrl() const

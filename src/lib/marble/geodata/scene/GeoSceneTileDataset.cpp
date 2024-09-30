@@ -252,7 +252,7 @@ QUrl GeoSceneTileDataset::downloadUrl(const TileId &id) const
 {
     // default download url
     if (m_downloadUrls.empty()) {
-        QUrl const defaultUrl = QUrl(QLatin1String("https://maps.kde.org/") + m_serverLayout->sourceDir());
+        QUrl const defaultUrl = QUrl(QLatin1StringView("https://maps.kde.org/") + m_serverLayout->sourceDir());
         mDebug() << "No download URL specified for tiles stored in " << m_sourceDir << ", falling back to " << defaultUrl.toString();
         return m_serverLayout->downloadUrl(defaultUrl, id);
     } else if (m_downloadUrls.size() == 1) {
@@ -308,7 +308,7 @@ QString GeoSceneTileDataset::relativeTileFileName(const TileId &id) const
 QString GeoSceneTileDataset::themeStr() const
 {
     QFileInfo const dirInfo(sourceDir());
-    return dirInfo.isAbsolute() ? sourceDir() : QLatin1String("maps/") + sourceDir();
+    return dirInfo.isAbsolute() ? sourceDir() : QLatin1StringView("maps/") + sourceDir();
 }
 
 QList<const DownloadPolicy *> GeoSceneTileDataset::downloadPolicies() const

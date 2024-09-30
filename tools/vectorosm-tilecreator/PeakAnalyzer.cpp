@@ -80,12 +80,12 @@ void PeakAnalyzer::dbScan(const Peaks &peaks, double maxDistance, int minPoints)
         });
         bool first = true;
         for (auto peak : cluster) {
-            peak->osmData().addTag(QLatin1String("marbleZoomLevel"), first ? QLatin1String("11") : QLatin1String("13"));
+            peak->osmData().addTag(QLatin1StringView("marbleZoomLevel"), first ? QLatin1StringView("11") : QLatin1StringView("13"));
             first = false;
         }
     }
     for (auto peak : std::as_const(noise)) {
-        peak->osmData().addTag(QLatin1String("marbleZoomLevel"), QLatin1String("11"));
+        peak->osmData().addTag(QLatin1StringView("marbleZoomLevel"), QLatin1StringView("11"));
     }
 }
 

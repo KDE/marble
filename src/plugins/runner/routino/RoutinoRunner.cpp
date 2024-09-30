@@ -93,7 +93,7 @@ QByteArray RoutinoRunnerPrivate::retrieveWaypoints(const QStringList &params) co
 
     QStringList routinoParams;
     routinoParams << params;
-    routinoParams << QLatin1String("--dir=") + m_mapDir.absolutePath();
+    routinoParams << QLatin1StringView("--dir=") + m_mapDir.absolutePath();
     routinoParams << "--output-text-all";
     mDebug() << routinoParams;
     routinoProcess.start("routino-router", routinoParams);
@@ -105,9 +105,9 @@ QByteArray RoutinoRunnerPrivate::retrieveWaypoints(const QStringList &params) co
     if (routinoProcess.waitForFinished(60 * 1000)) {
         mDebug() << routinoProcess.readAll();
         mDebug() << "routino finished";
-        QFile file(routinoProcess.workingDirectory() + QLatin1String("/shortest-all.txt"));
+        QFile file(routinoProcess.workingDirectory() + QLatin1StringView("/shortest-all.txt"));
         if (!file.exists()) {
-            file.setFileName(routinoProcess.workingDirectory() + QLatin1String("/quickest-all.txt"));
+            file.setFileName(routinoProcess.workingDirectory() + QLatin1StringView("/quickest-all.txt"));
         }
         if (!file.exists()) {
             mDebug() << "Can't get results";
@@ -191,7 +191,7 @@ GeoDataDocument *RoutinoRunnerPrivate::createDocument(GeoDataLineString *routeWa
     result->append(routePlacemark);
 
     QString name = "%1 %2 (Routino)";
-    QString unit = QLatin1String("m");
+    QString unit = QLatin1StringView("m");
     qreal length = routeWaypoints->length(EARTH_RADIUS);
     if (length >= 1000) {
         length /= 1000.0;
@@ -211,7 +211,7 @@ RoutinoRunner::RoutinoRunner(QObject *parent)
     , d(new RoutinoRunnerPrivate)
 {
     // Check installation
-    d->m_mapDir = QDir(MarbleDirs::localPath() + QLatin1String("/maps/earth/routino/"));
+    d->m_mapDir = QDir(MarbleDirs::localPath() + QLatin1StringView("/maps/earth/routino/"));
 }
 
 RoutinoRunner::~RoutinoRunner()
@@ -240,7 +240,7 @@ void RoutinoRunner::retrieveRoute(const RouteRequest *route)
     QString transport = settings[QStringLiteral("transport")].toString();
     params << QStringLiteral("--transport=%0").arg(transport);
 
-    if (settings[QStringLiteral("method")] == QLatin1String("shortest")) {
+    if (settings[QStringLiteral("method")] == QLatin1StringView("shortest")) {
         params << "--shortest";
     } else {
         params << "--quickest";

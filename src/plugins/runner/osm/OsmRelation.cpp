@@ -34,9 +34,9 @@ const OsmPlacemarkData &OsmRelation::osmData() const
 
 void OsmRelation::parseMember(const QXmlStreamAttributes &attributes)
 {
-    addMember(attributes.value(QLatin1String("ref")).toLongLong(),
-              attributes.value(QLatin1String("role")).toString(),
-              attributes.value(QLatin1String("type")).toString());
+    addMember(attributes.value(QLatin1StringView("ref")).toLongLong(),
+              attributes.value(QLatin1StringView("role")).toString(),
+              attributes.value(QLatin1StringView("type")).toString());
 }
 
 void OsmRelation::addMember(qint64 reference, const QString &role, const QString &type)

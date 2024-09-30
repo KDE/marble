@@ -93,7 +93,7 @@ void SunControlWidget::showEvent(QShowEvent *event)
             m_uiWidget->showNightMap->setChecked(m_marbleWidget->showCityLights());
         } else {
             m_uiWidget->showShadow->setChecked(false);
-            if (m_shadow == QLatin1String("shadow")) {
+            if (m_shadow == QLatin1StringView("shadow")) {
                 m_uiWidget->showShadow->setChecked(true);
             } else {
                 m_uiWidget->showNightMap->setChecked(true);

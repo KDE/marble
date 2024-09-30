@@ -156,7 +156,7 @@ PreviewDialog::PreviewDialog(QWidget *parent, const QString &mapThemeId)
 
 void PreviewDialog::closeEvent(QCloseEvent *e)
 {
-    const QString dgmlPath = MarbleDirs::localPath() + QLatin1String("/maps/") + m_mapThemeId;
+    const QString dgmlPath = MarbleDirs::localPath() + QLatin1StringView("/maps/") + m_mapThemeId;
     const QString directory = dgmlPath.left(dgmlPath.lastIndexOf(QLatin1Char('/')));
     this->deleteTheme(directory);
     QDialog::closeEvent(e);
@@ -494,12 +494,12 @@ void MapWizard::processImageResults()
 
 void MapWizard::createWmsLegend()
 {
-    QDir map(MarbleDirs::localPath() + QLatin1String("/maps/earth/") + d->mapTheme);
+    QDir map(MarbleDirs::localPath() + QLatin1StringView("/maps/earth/") + d->mapTheme);
     if (!map.exists("legend")) {
         map.mkdir("legend");
     }
 
-    QFile image(map.absolutePath() + QLatin1String("/legend/legend.png"));
+    QFile image(map.absolutePath() + QLatin1StringView("/legend/legend.png"));
     image.open(QIODevice::ReadWrite);
     image.write(d->legend);
     image.close();
@@ -569,7 +569,7 @@ void MapWizard::setSearchFieldVisible(bool visible)
 bool MapWizard::createFiles(const GeoSceneDocument *document)
 {
     // Create directories
-    QDir maps(MarbleDirs::localPath() + QLatin1String("/maps/earth/"));
+    QDir maps(MarbleDirs::localPath() + QLatin1StringView("/maps/earth/"));
     if (!maps.exists(document->head()->theme())) {
         maps.mkdir(document->head()->theme());
 
@@ -645,9 +645,9 @@ QString MapWizard::createLegendHtml(const QString &image)
 
 void MapWizard::createLegendFile(const QString &legendHtml)
 {
-    QDir map(MarbleDirs::localPath() + QLatin1String("/maps/earth/") + d->mapTheme);
+    QDir map(MarbleDirs::localPath() + QLatin1StringView("/maps/earth/") + d->mapTheme);
 
-    QFile html(map.absolutePath() + QLatin1String("/legend.html"));
+    QFile html(map.absolutePath() + QLatin1StringView("/legend.html"));
     html.open(QIODevice::ReadWrite);
     html.write(legendHtml.toLatin1().data());
     html.close();
@@ -655,14 +655,14 @@ void MapWizard::createLegendFile(const QString &legendHtml)
 
 void MapWizard::createLegend()
 {
-    QDir map(MarbleDirs::localPath() + QLatin1String("/maps/earth/") + d->mapTheme);
+    QDir map(MarbleDirs::localPath() + QLatin1StringView("/maps/earth/") + d->mapTheme);
     if (!map.exists("legend")) {
         map.mkdir("legend");
     }
 
     QFile image;
     image.setFileName(d->uiWidget.lineEditLegend_2->text());
-    image.copy(map.absolutePath() + QLatin1String("/legend/legend.png"));
+    image.copy(map.absolutePath() + QLatin1StringView("/legend/legend.png"));
 
     const QString legendHtml = createLegendHtml();
     createLegendFile(legendHtml);
@@ -740,7 +740,7 @@ QString MapWizard::createArchive(QWidget *parent, const QString &mapId)
     }
 
     QStringList sourceImgFilters;
-    sourceImgFilters << theme + QLatin1String(".jpg") << theme + QLatin1String(".png") << theme + QLatin1String(".jpeg");
+    sourceImgFilters << theme + QLatin1StringView(".jpg") << theme + QLatin1StringView(".png") << theme + QLatin1StringView(".jpeg");
     QStringList sourceImg = themeDir.entryList(sourceImgFilters);
     if (!sourceImg.isEmpty()) {
         tarArgs.append(QStringLiteral("%1/%2/%3").arg(body).arg(theme, sourceImg[0]));
@@ -1028,7 +1028,7 @@ GeoSceneDocument *MapWizard::createDocument()
         if (d->uiWidget.radioButtonXYZServer) {
             backdropTexture = new GeoSceneTileDataset("backdrop");
             backdropTexture->setExpire(31536000);
-            backdropTexture->setSourceDir(QLatin1String("earth/openstreetmap"));
+            backdropTexture->setSourceDir(QLatin1StringView("earth/openstreetmap"));
             backdropTexture->setFileFormat("PNG");
             backdropTexture->addDownloadPolicy(DownloadBrowse, 20);
             backdropTexture->addDownloadPolicy(DownloadBulk, 2);
@@ -1044,7 +1044,7 @@ GeoSceneDocument *MapWizard::createDocument()
 
     GeoSceneTileDataset *texture = new GeoSceneTileDataset("map");
     texture->setExpire(31536000);
-    texture->setSourceDir(QLatin1String("earth/") + document->head()->theme());
+    texture->setSourceDir(QLatin1StringView("earth/") + document->head()->theme());
     if (d->mapProviderType == MapWizardPrivate::WmsMap) {
         texture->setFileFormat(d->owsManager.resultFormat());
         QStringList styles = d->owsManager.wmsCapabilities().styles(d->selectedLayers);
@@ -1082,10 +1082,10 @@ GeoSceneDocument *MapWizard::createDocument()
         texture->setFileFormat(format);
         QString selectedLayer = d->selectedLayers.first();
         QString urlString = d->owsManager.wmtsCapabilities().wmtsTileResource()[selectedLayer][format];
-        urlString.replace(urlString.indexOf(QLatin1String("{Time}")), 6, "current");
-        urlString.replace(urlString.indexOf(QLatin1String("{style}")), 7, d->owsManager.wmtsCapabilities().style(selectedLayer));
-        urlString.replace(urlString.indexOf(QLatin1String("{Style}")), 7, d->owsManager.wmtsCapabilities().style(selectedLayer));
-        urlString.replace(urlString.indexOf(QLatin1String("{TileMatrixSet}")), 15, d->uiWidget.comboBoxWmsMaps->currentText());
+        urlString.replace(urlString.indexOf(QLatin1StringView("{Time}")), 6, "current");
+        urlString.replace(urlString.indexOf(QLatin1StringView("{style}")), 7, d->owsManager.wmtsCapabilities().style(selectedLayer));
+        urlString.replace(urlString.indexOf(QLatin1StringView("{Style}")), 7, d->owsManager.wmtsCapabilities().style(selectedLayer));
+        urlString.replace(urlString.indexOf(QLatin1StringView("{TileMatrixSet}")), 15, d->uiWidget.comboBoxWmsMaps->currentText());
         QUrl downloadUrl = QUrl(urlString);
         texture->addDownloadPolicy(DownloadBrowse, 20);
         texture->addDownloadPolicy(DownloadBulk, 2);

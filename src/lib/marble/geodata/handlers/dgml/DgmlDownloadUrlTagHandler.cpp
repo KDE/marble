@@ -26,7 +26,7 @@ DGML_DEFINE_TAG_HANDLER(DownloadUrl)
 GeoNode *DgmlDownloadUrlTagHandler::parse(GeoParser &parser) const
 {
     // Check whether the tag is valid
-    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1String(dgmlTag_DownloadUrl)));
+    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1StringView(dgmlTag_DownloadUrl)));
 
     // Checking for parent item
     GeoStackItem parentItem = parser.parentElement();

@@ -31,11 +31,11 @@ QVariant CelestialSortFilterProxyModel::data(const QModelIndex &index, int role)
     if (role == Qt::DisplayRole && index.column() == 0) {
         QString newOne = var.toString();
         if (newOne == tr("Moon")) {
-            return QString(QLatin1String("  ") + tr("Moon"));
+            return QString(QLatin1StringView("  ") + tr("Moon"));
         } else if (m_moons.contains(newOne.toLower())) {
-            return QString(QLatin1String("  ") + newOne + QLatin1String(" (") + tr("moon") + QLatin1Char(')'));
+            return QString(QLatin1StringView("  ") + newOne + QLatin1StringView(" (") + tr("moon") + QLatin1Char(')'));
         } else if (m_dwarfs.contains(newOne.toLower())) {
-            return QString(newOne + QLatin1String(" (") + tr("dwarf planet") + QLatin1Char(')'));
+            return QString(newOne + QLatin1StringView(" (") + tr("dwarf planet") + QLatin1Char(')'));
         }
         return newOne;
     } else {

@@ -56,7 +56,7 @@ void MapViewItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem &o
 
     int const padding = 5;
     QString const name = index.data().toString();
-    const bool isFavorite = QSettings().contains(QLatin1String("Favorites/") + name);
+    const bool isFavorite = QSettings().contains(QLatin1StringView("Favorites/") + name);
     QSize const bookmarkSize(16, 16);
     QRect bookmarkRect(iconRect.bottomRight(), bookmarkSize);
     bookmarkRect.translate(QPoint(-bookmarkSize.width() - padding, -bookmarkSize.height() - padding));

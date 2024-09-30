@@ -63,9 +63,9 @@ MapThemeDownloadDialog::MapThemeDownloadDialog(MarbleWidget *marbleWidget)
 {
     d->setupUi(this);
 
-    d->m_model.setTargetDirectory(MarbleDirs::localPath() + QLatin1String("/maps"));
+    d->m_model.setTargetDirectory(MarbleDirs::localPath() + QLatin1StringView("/maps"));
     d->m_model.setProvider("https://marble.kde.org/maps-v3.xml");
-    d->m_model.setRegistryFile(MarbleDirs::localPath() + QLatin1String("/newstuff/marble-map-themes.knsregistry"), Marble::NewstuffModel::NameTag);
+    d->m_model.setRegistryFile(MarbleDirs::localPath() + QLatin1StringView("/newstuff/marble-map-themes.knsregistry"), Marble::NewstuffModel::NameTag);
 
     d->listView->setIconSize(QSize(130, 130));
     d->listView->setAlternatingRowColors(true);
@@ -209,7 +209,7 @@ bool MapItemDelegate::editorEvent(QEvent *event, QAbstractItemModel *, const QSt
                 if (openRect.contains(mouseEvent->pos())) {
                     QStringList const files = index.data(NewstuffModel::InstalledFiles).toStringList();
                     for (const QString &file : files) {
-                        if (file.endsWith(QLatin1String(".dgml"))) {
+                        if (file.endsWith(QLatin1StringView(".dgml"))) {
                             QFileInfo dgmlFile(file);
                             QDir baseDir = dgmlFile.dir();
                             baseDir.cdUp();

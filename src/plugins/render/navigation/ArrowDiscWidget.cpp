@@ -51,7 +51,7 @@ QPixmap ArrowDiscWidget::pixmap(const QString &id)
 {
     QPixmap result;
     if (!QPixmapCache::find(id, &result)) {
-        result = QPixmap(QLatin1String(":/") + id + QLatin1String(".png"));
+        result = QPixmap(QLatin1StringView(":/") + id + QLatin1StringView(".png"));
         QPixmapCache::insert(id, result);
     }
     return result;
@@ -101,7 +101,7 @@ void ArrowDiscWidget::mouseReleaseEvent(QMouseEvent *mouseEvent)
 
 void ArrowDiscWidget::leaveEvent(QEvent *)
 {
-    if (m_imagePath != QLatin1String("marble/navigation/navigational_arrows")) {
+    if (m_imagePath != QLatin1StringView("marble/navigation/navigational_arrows")) {
         m_imagePath = "marble/navigation/navigational_arrows";
         repaint();
     }

@@ -23,7 +23,7 @@ KML_DEFINE_TAG_HANDLER(Folder)
 
 GeoNode *KmlFolderTagHandler::parse(GeoParser &parser) const
 {
-    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1String(kmlTag_Folder)));
+    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1StringView(kmlTag_Folder)));
 
     GeoStackItem parentItem = parser.parentElement();
     GeoDataFolder *folder = new GeoDataFolder;
@@ -33,7 +33,7 @@ GeoNode *KmlFolderTagHandler::parse(GeoParser &parser) const
         parentPtr->append(folder);
 
         return folder;
-    } else if (parentItem.qualifiedName().first == QLatin1String(kmlTag_kml)) {
+    } else if (parentItem.qualifiedName().first == QLatin1StringView(kmlTag_kml)) {
         GeoDataDocument *doc = geoDataDoc(parser);
         doc->append(folder);
         return folder;

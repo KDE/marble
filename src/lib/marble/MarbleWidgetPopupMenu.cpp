@@ -207,10 +207,10 @@ void MarbleWidgetPopupMenu::Private::setupDialogOsm(PopupLayer *popup, const Geo
     QString natural = data.tagValue(QStringLiteral("natural"));
     if (!natural.isEmpty()) {
         natural[0] = natural[0].toUpper();
-        if (natural == QLatin1String("Peak")) {
+        if (natural == QLatin1StringView("Peak")) {
             QString elevation = data.tagValue(QStringLiteral("ele"));
             if (!elevation.isEmpty()) {
-                natural = natural + QLatin1String(" - ") + elevation + QLatin1String(" m");
+                natural = natural + QLatin1StringView(" - ") + elevation + QLatin1StringView(" m");
             }
         }
         doc[QStringLiteral("details")] = natural;
@@ -223,18 +223,18 @@ void MarbleWidgetPopupMenu::Private::setupDialogOsm(PopupLayer *popup, const Geo
     if (!shop.isEmpty()) {
         shop[0] = shop[0].toUpper();
 
-        if (shop == QLatin1String("Clothes")) {
+        if (shop == QLatin1StringView("Clothes")) {
             QString type = data.tagValue(QStringLiteral("clothes"));
             if (type.isEmpty()) {
                 type = data.tagValue(QStringLiteral("designation"));
             }
             if (!type.isEmpty()) {
                 type[0] = type[0].toUpper();
-                amenity = QLatin1String("Shop - ") + shop + QLatin1String(" (") + type + QLatin1Char(')');
+                amenity = QLatin1StringView("Shop - ") + shop + QLatin1StringView(" (") + type + QLatin1Char(')');
             }
         }
         if (amenity.isEmpty()) {
-            amenity = QLatin1String("Shop - ") + shop;
+            amenity = QLatin1StringView("Shop - ") + shop;
         }
     } else {
         amenity = data.tagValue(QStringLiteral("amenity"));
@@ -270,7 +270,7 @@ void MarbleWidgetPopupMenu::Private::setupDialogOsm(PopupLayer *popup, const Geo
     bool hasAddressItem = false;
     QStringList addressItems;
     for (const QString &key : addressItemKeys) {
-        const QString item = data.tagValue(QLatin1String("addr:") + key);
+        const QString item = data.tagValue(QLatin1StringView("addr:") + key);
         if (!item.isEmpty()) {
             hasAddressItem = true;
         }
@@ -381,18 +381,18 @@ void MarbleWidgetPopupMenu::Private::setupDialogCity(PopupLayer *popup, const Ge
     doc["name"] = placemark->name();
     QString roleString;
     const QString role = placemark->role();
-    if (role == QLatin1String("PPLC")) {
+    if (role == QLatin1StringView("PPLC")) {
         roleString = tr("National Capital");
-    } else if (role == QLatin1String("PPL")) {
+    } else if (role == QLatin1StringView("PPL")) {
         roleString = tr("City");
-    } else if (role == QLatin1String("PPLA")) {
+    } else if (role == QLatin1StringView("PPLA")) {
         roleString = tr("State Capital");
-    } else if (role == QLatin1String("PPLA2")) {
+    } else if (role == QLatin1StringView("PPLA2")) {
         roleString = tr("County Capital");
-    } else if (role == QLatin1String("PPLA3") || role == QLatin1String("PPLA4")) {
+    } else if (role == QLatin1StringView("PPLA3") || role == QLatin1StringView("PPLA4")) {
         roleString = tr("Capital");
-    } else if (role == QLatin1String("PPLF") || role == QLatin1String("PPLG") || role == QLatin1String("PPLL") || role == QLatin1String("PPLQ")
-               || role == QLatin1String("PPLR") || role == QLatin1String("PPLS") || role == QLatin1String("PPLW")) {
+    } else if (role == QLatin1StringView("PPLF") || role == QLatin1StringView("PPLG") || role == QLatin1StringView("PPLL") || role == QLatin1StringView("PPLQ")
+               || role == QLatin1StringView("PPLR") || role == QLatin1StringView("PPLS") || role == QLatin1StringView("PPLW")) {
         roleString = tr("Village");
     }
 
@@ -420,7 +420,7 @@ void MarbleWidgetPopupMenu::Private::setupDialogCity(PopupLayer *popup, const Ge
         doc["timezone"] = QLatin1Char('+') + dst;
     }
 
-    const QString flagPath = MarbleDirs::path(QLatin1String("flags/flag_") + placemark->countryCode().toLower() + QLatin1String(".svg"));
+    const QString flagPath = MarbleDirs::path(QLatin1StringView("flags/flag_") + placemark->countryCode().toLower() + QLatin1StringView(".svg"));
     doc["flag"] = flagPath;
 
     popup->setContent(doc.finalText());
@@ -518,7 +518,7 @@ void MarbleWidgetPopupMenu::Private::setupDialogPhotoOverlay(PopupLayer *popup, 
     doc["width"] = QString::number(200);
     doc["height"] = QString::number(100);
     QString const basePath = index->resolvePath(".");
-    QUrl const baseUrl = (basePath != QLatin1String(".")) ? QUrl::fromLocalFile(basePath + QLatin1Char('/')) : QUrl();
+    QUrl const baseUrl = (basePath != QLatin1StringView(".")) ? QUrl::fromLocalFile(basePath + QLatin1Char('/')) : QUrl();
     popup->setContent(doc.finalText(), baseUrl);
 }
 
@@ -694,7 +694,7 @@ void MarbleWidgetPopupMenu::slotInfoDialog()
         bool isSky = false;
 
         if (d->m_widget->model()->mapTheme()) {
-            isSky = d->m_widget->model()->mapTheme()->head()->target() == QLatin1String("sky");
+            isSky = d->m_widget->model()->mapTheme()->head()->target() == QLatin1StringView("sky");
         }
 
         popup->setSize(QSizeF(420, 420));
@@ -737,7 +737,7 @@ void MarbleWidgetPopupMenu::slotInfoDialog()
                 content.replace(QStringLiteral("$[snippet]"), placemark->snippet().text(), Qt::CaseInsensitive);
                 content.replace(QStringLiteral("$[id]"), placemark->id(), Qt::CaseInsensitive);
                 QString const basePath = placemark->resolvePath(".");
-                QUrl const baseUrl = (basePath != QLatin1String(".")) ? QUrl::fromLocalFile(basePath + QLatin1Char('/')) : QUrl();
+                QUrl const baseUrl = (basePath != QLatin1StringView(".")) ? QUrl::fromLocalFile(basePath + QLatin1Char('/')) : QUrl();
                 popup->setContent(content, baseUrl);
             }
 
@@ -792,8 +792,8 @@ void MarbleWidgetPopupMenu::slotCopyCoordinates()
 
         QMimeData *const myMimeData = new QMimeData();
         myMimeData->setText(positionString);
-        myMimeData->setData(QLatin1String("application/vnd.google-earth.kml+xml"), kmlRepresentation.toUtf8());
-        myMimeData->setData(QLatin1String("application/gpx+xml"), gpxRepresentation.toUtf8());
+        myMimeData->setData(QLatin1StringView("application/vnd.google-earth.kml+xml"), kmlRepresentation.toUtf8());
+        myMimeData->setData(QLatin1StringView("application/gpx+xml"), gpxRepresentation.toUtf8());
 
         QClipboard *const clipboard = QApplication::clipboard();
         clipboard->setMimeData(myMimeData);

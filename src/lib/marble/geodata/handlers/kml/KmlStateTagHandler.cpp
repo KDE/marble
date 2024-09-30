@@ -19,7 +19,7 @@ KML_DEFINE_TAG_HANDLER(state)
 
 GeoNode *KmlstateTagHandler::parse(GeoParser &parser) const
 {
-    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1String(kmlTag_state)));
+    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1StringView(kmlTag_state)));
 
     GeoStackItem parentItem = parser.parentElement();
 
@@ -30,17 +30,17 @@ GeoNode *KmlstateTagHandler::parse(GeoParser &parser) const
         QStringList iconStateTextList = value.split(QLatin1Char(' '));
 
         for (const QString &value : iconStateTextList) {
-            if (value == QLatin1String("open")) {
+            if (value == QLatin1StringView("open")) {
                 itemIconState |= GeoDataItemIcon::Open;
-            } else if (value == QLatin1String("closed")) {
+            } else if (value == QLatin1StringView("closed")) {
                 itemIconState |= GeoDataItemIcon::Closed;
-            } else if (value == QLatin1String("error")) {
+            } else if (value == QLatin1StringView("error")) {
                 itemIconState |= GeoDataItemIcon::Error;
-            } else if (value == QLatin1String("fetching0")) {
+            } else if (value == QLatin1StringView("fetching0")) {
                 itemIconState |= GeoDataItemIcon::Fetching0;
-            } else if (value == QLatin1String("fetching1")) {
+            } else if (value == QLatin1StringView("fetching1")) {
                 itemIconState |= GeoDataItemIcon::Fetching1;
-            } else if (value == QLatin1String("fetching2")) {
+            } else if (value == QLatin1StringView("fetching2")) {
                 itemIconState |= GeoDataItemIcon::Fetching2;
             } else {
                 mDebug() << "Cannot parse state value" << value;

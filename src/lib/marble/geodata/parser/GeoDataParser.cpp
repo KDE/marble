@@ -64,9 +64,9 @@ bool GeoDataParser::isValidElement(const QString &tagName) const
     // TODO: case GeoData_GeoRSS:
     case GeoData_KML: {
         const QStringView namespaceUri = this->namespaceUri();
-        return (namespaceUri == QLatin1String(kml::kmlTag_nameSpace20) || namespaceUri == QLatin1String(kml::kmlTag_nameSpace21)
-                || namespaceUri == QLatin1String(kml::kmlTag_nameSpace22) || namespaceUri == QLatin1String(kml::kmlTag_nameSpaceOgc22)
-                || namespaceUri == QLatin1String(kml::kmlTag_nameSpaceGx22) || namespaceUri == QLatin1String(kml::kmlTag_nameSpaceMx));
+        return (namespaceUri == QLatin1StringView(kml::kmlTag_nameSpace20) || namespaceUri == QLatin1StringView(kml::kmlTag_nameSpace21)
+                || namespaceUri == QLatin1StringView(kml::kmlTag_nameSpace22) || namespaceUri == QLatin1StringView(kml::kmlTag_nameSpaceOgc22)
+                || namespaceUri == QLatin1StringView(kml::kmlTag_nameSpaceGx22) || namespaceUri == QLatin1StringView(kml::kmlTag_nameSpaceMx));
     }
     default:
         break;

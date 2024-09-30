@@ -27,7 +27,7 @@ static GeoTagHandlerRegistrar handler(GeoParser::QualifiedName(dgmlTag_DownloadP
 GeoNode *DgmlDownloadPolicyTagHandler::parse(GeoParser &parser) const
 {
     // Check whether the tag is valid
-    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1String(dgmlTag_DownloadPolicy)));
+    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1StringView(dgmlTag_DownloadPolicy)));
 
     // Checking for parent item
     GeoStackItem parentItem = parser.parentElement();
@@ -39,9 +39,9 @@ GeoNode *DgmlDownloadPolicyTagHandler::parse(GeoParser &parser) const
     // Attribute usage
     DownloadUsage usage;
     const QString usageStr = parser.attribute(dgmlAttr_usage).trimmed();
-    if (usageStr == QLatin1String("Browse"))
+    if (usageStr == QLatin1StringView("Browse"))
         usage = DownloadBrowse;
-    else if (usageStr == QLatin1String("Bulk"))
+    else if (usageStr == QLatin1StringView("Bulk"))
         usage = DownloadBulk;
     else {
         qCritical("Parse error: invalid attribute downloadPolicy/@usage");

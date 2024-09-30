@@ -22,7 +22,7 @@ KML_DEFINE_TAG_HANDLER(Model)
 
 GeoNode *KmlModelTagHandler::parse(GeoParser &parser) const
 {
-    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1String(kmlTag_Model)));
+    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1StringView(kmlTag_Model)));
 
     GeoDataModel *model = new GeoDataModel;
     KmlObjectTagHandler::parseIdentifiers(parser, model);

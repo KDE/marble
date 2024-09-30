@@ -507,11 +507,11 @@ void RoutingManager::setGuidanceModeEnabled(bool enabled)
         d->saveRoute(d->stateFile("guidance.kml"));
 
         if (d->m_guidanceModeWarning) {
-            QString text = QLatin1String("<p>") + tr("Caution: Driving instructions may be incomplete or wrong.") + QLatin1Char(' ')
+            QString text = QLatin1StringView("<p>") + tr("Caution: Driving instructions may be incomplete or wrong.") + QLatin1Char(' ')
                 + tr("Road construction, weather and other unforeseen variables can result in the suggested route not to be the most expedient or safest route "
                      "to your destination.")
-                + QLatin1Char(' ') + tr("Please use common sense while navigating.") + QLatin1String("</p>") + QLatin1String("<p>")
-                + tr("The Marble development team wishes you a pleasant and safe journey.") + QLatin1String("</p>");
+                + QLatin1Char(' ') + tr("Please use common sense while navigating.") + QLatin1StringView("</p>") + QLatin1StringView("<p>")
+                + tr("The Marble development team wishes you a pleasant and safe journey.") + QLatin1StringView("</p>");
             QPointer<QMessageBox> messageBox = new QMessageBox(QMessageBox::Information, tr("Guidance Mode"), text, QMessageBox::Ok);
             QCheckBox *showAgain = new QCheckBox(tr("Show again"));
             showAgain->setChecked(true);

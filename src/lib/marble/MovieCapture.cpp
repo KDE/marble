@@ -116,11 +116,11 @@ QVector<MovieFormat> MovieCapture::availableFormats()
         for (const MovieFormat &format : std::as_const(m_supportedFormats)) {
             QString type = format.type();
             QStringList args;
-            args << "-h" << QLatin1String("muxer=") + type;
+            args << "-h" << QLatin1StringView("muxer=") + type;
             encoder.start(d->encoderExec, args);
             encoder.waitForFinished();
             QString output = encoder.readAll();
-            bool isFormatAvailable = !output.contains(QLatin1String("Unknown format"));
+            bool isFormatAvailable = !output.contains(QLatin1StringView("Unknown format"));
             if (isFormatAvailable) {
                 availableFormats << format;
             }

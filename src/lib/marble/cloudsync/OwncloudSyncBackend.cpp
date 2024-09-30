@@ -62,7 +62,7 @@ public:
 };
 
 OwncloudSyncBackend::Private::Private(CloudSyncManager *cloudSyncManager)
-    : m_cacheDir(MarbleDirs::localPath() + QLatin1String("/cloudsync/cache/routes/"))
+    : m_cacheDir(MarbleDirs::localPath() + QLatin1StringView("/cloudsync/cache/routes/"))
     , m_network()
     , m_routeUploadReply()
     , m_routeListReply()
@@ -242,7 +242,7 @@ QPixmap OwncloudSyncBackend::createPreview(const QString &timestamp) const
 
     QPixmap pixmap = mapWidget.grab();
     QDir(d->m_cacheDir.absolutePath()).mkpath("preview");
-    pixmap.save(d->m_cacheDir.absolutePath() + QLatin1String("/preview/") + timestamp + QLatin1String(".jpg"));
+    pixmap.save(d->m_cacheDir.absolutePath() + QLatin1StringView("/preview/") + timestamp + QLatin1StringView(".jpg"));
 
     return pixmap;
 }
@@ -307,13 +307,13 @@ void OwncloudSyncBackend::checkAuthReply()
 
     if (!result.startsWith(QLatin1Char('{'))) {
         // not a JSON result
-        if (result.contains(QLatin1String("http://owncloud.org"))) {
+        if (result.contains(QLatin1StringView("http://owncloud.org"))) {
             // an owncloud login page was returned, marble app is not installed
             d->m_cloudSyncManager->setStatus(tr("The Marble app is not installed on the ownCloud server"), CloudSyncManager::Error);
         } else {
             d->m_cloudSyncManager->setStatus(tr("The server is not an ownCloud server"), CloudSyncManager::Error);
         }
-    } else if (result == QLatin1String("{\"message\":\"Current user is not logged in\"}") && statusCode == 401) {
+    } else if (result == QLatin1StringView("{\"message\":\"Current user is not logged in\"}") && statusCode == 401) {
         // credentials were incorrect
         d->m_cloudSyncManager->setStatus(tr("Username or password are incorrect"), CloudSyncManager::Error);
     } else if (result.contains("\"status\":\"success\"") && statusCode == 200) {

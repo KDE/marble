@@ -19,13 +19,13 @@ KML_DEFINE_TAG_HANDLER(refreshVisibility)
 
 GeoNode *KmlrefreshVisibilityTagHandler::parse(GeoParser &parser) const
 {
-    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1String(kmlTag_refreshVisibility)));
+    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1StringView(kmlTag_refreshVisibility)));
 
     GeoStackItem parentItem = parser.parentElement();
     if (parentItem.is<GeoDataNetworkLink>()) {
         QString content = parser.readElementText().trimmed();
         GeoDataNetworkLink *networkLink = parentItem.nodeAs<GeoDataNetworkLink>();
-        networkLink->setRefreshVisibility(content == QLatin1String("1"));
+        networkLink->setRefreshVisibility(content == QLatin1StringView("1"));
     }
 
     return nullptr;

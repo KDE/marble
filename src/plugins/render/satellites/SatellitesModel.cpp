@@ -102,7 +102,7 @@ void SatellitesModel::updateVisibility()
         SatellitesTLEItem *eItem = dynamic_cast<SatellitesTLEItem *>(obj);
         if (eItem != nullptr) {
             // TLE satellites are always earth satellites
-            bool enabled = (m_lcPlanet == QLatin1String("earth"));
+            bool enabled = (m_lcPlanet == QLatin1StringView("earth"));
             eItem->setEnabled(enabled);
 
             if (enabled) {
@@ -191,7 +191,7 @@ void SatellitesModel::parseCatalog(const QString &id, const QByteArray &data)
         style->labelStyle().setGlow(true);
 
         // use special icon for moons
-        if (category == QLatin1String("Moons")) {
+        if (category == QLatin1StringView("Moons")) {
             style->iconStyle().setIconPath(QStringLiteral(":/icons/moon.png"));
         } else {
             style->iconStyle().setIconPath(MarbleDirs::path(QStringLiteral("bitmaps/satellite.png")));

@@ -444,7 +444,7 @@ void RoutingWidget::handleSearchResult(RoutingInputWidget *widget)
         activatePlacemark(model->index(0, 0));
     } else {
         QString const results = tr("No placemark found");
-        d->m_ui.resultLabel->setText(QLatin1String("<font color=\"red\">") + results + QLatin1String("</font>"));
+        d->m_ui.resultLabel->setText(QLatin1StringView("<font color=\"red\">") + results + QLatin1StringView("</font>"));
         d->m_ui.resultLabel->setVisible(true);
     }
 
@@ -556,7 +556,7 @@ void RoutingWidget::updateRouteState(RoutingManager::State state)
         d->m_ui.searchButton->setIcon(QIcon());
         if (d->m_routingManager->routingModel()->rowCount() == 0) {
             const QString results = tr("No route found");
-            d->m_ui.resultLabel->setText(QLatin1String("<font color=\"red\">") + results + QLatin1String("</font>"));
+            d->m_ui.resultLabel->setText(QLatin1StringView("<font color=\"red\">") + results + QLatin1StringView("</font>"));
             d->m_ui.resultLabel->setVisible(true);
         }
     } break;
@@ -695,8 +695,8 @@ void RoutingWidget::saveRoute()
 
     if (!fileName.isEmpty()) {
         // maemo 5 file dialog does not append the file extension
-        if (!fileName.endsWith(QLatin1String(".kml"), Qt::CaseInsensitive)) {
-            fileName += QLatin1String(".kml");
+        if (!fileName.endsWith(QLatin1StringView(".kml"), Qt::CaseInsensitive)) {
+            fileName += QLatin1StringView(".kml");
         }
         d->m_routingManager->setLastSavePath(QFileInfo(fileName).absolutePath());
         d->m_routingManager->saveRoute(fileName);
@@ -860,7 +860,7 @@ void RoutingWidget::initializeTour()
     double totalDistance = 0.0;
     for (int i = 0; i < route.size(); ++i) {
         // TODO: QString( i )?
-        waypoints << WaypointInfo(i, totalDistance, route.at(i).path().first(), route.at(i).maneuver(), QLatin1String("start ") + QString::number(i));
+        waypoints << WaypointInfo(i, totalDistance, route.at(i).path().first(), route.at(i).maneuver(), QLatin1StringView("start ") + QString::number(i));
         totalDistance += route.at(i).distance();
     }
 

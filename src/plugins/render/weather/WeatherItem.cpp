@@ -461,7 +461,7 @@ QString WeatherItem::createFromTemplate(const QString &templateHtml)
     html.replace("%city_name%", stationName());
 
     if (!d->m_currentWeather.iconSource().isEmpty()) {
-        html.replace("%weather_situation%", QLatin1String("<img src=\"file://") + d->m_currentWeather.iconSource() + QLatin1String("\" />"));
+        html.replace("%weather_situation%", QLatin1StringView("<img src=\"file://") + d->m_currentWeather.iconSource() + QLatin1StringView("\" />"));
     } else {
         html.remove("%weather_situation%");
     }
@@ -485,14 +485,14 @@ QString WeatherItem::createFromTemplate(const QString &templateHtml)
         forecastNumber++;
         const QString suffix = QString::number(forecastNumber);
         QDate date = forecast.dataDate();
-        html.replace(QLatin1String("%day_f") + suffix + QLatin1Char('%'), locale.standaloneDayName(date.dayOfWeek()));
-        html.replace(QLatin1String("%weather_situation_f") + suffix + QLatin1Char('%'), QLatin1String("file://") + forecast.iconSource());
-        html.replace(QLatin1String("%max_temp_f") + suffix + QLatin1Char('%'), forecast.maxTemperatureString(WeatherData::Celsius));
-        html.replace(QLatin1String("%min_temp_f") + suffix + QLatin1Char('%'), forecast.minTemperatureString(WeatherData::Celsius));
-        html.replace(QLatin1String("%condition_f") + suffix + QLatin1Char('%'), forecast.conditionString());
-        html.replace(QLatin1String("%wind_direction_f") + suffix + QLatin1Char('%'), forecast.windDirectionString());
-        html.replace(QLatin1String("%wind_speed_f") + suffix + QLatin1Char('%'), forecast.windSpeedString());
-        html.replace(QLatin1String("%publish_time_f") + suffix + QLatin1Char('%'), forecast.publishingTime().toString());
+        html.replace(QLatin1StringView("%day_f") + suffix + QLatin1Char('%'), locale.standaloneDayName(date.dayOfWeek()));
+        html.replace(QLatin1StringView("%weather_situation_f") + suffix + QLatin1Char('%'), QLatin1StringView("file://") + forecast.iconSource());
+        html.replace(QLatin1StringView("%max_temp_f") + suffix + QLatin1Char('%'), forecast.maxTemperatureString(WeatherData::Celsius));
+        html.replace(QLatin1StringView("%min_temp_f") + suffix + QLatin1Char('%'), forecast.minTemperatureString(WeatherData::Celsius));
+        html.replace(QLatin1StringView("%condition_f") + suffix + QLatin1Char('%'), forecast.conditionString());
+        html.replace(QLatin1StringView("%wind_direction_f") + suffix + QLatin1Char('%'), forecast.windDirectionString());
+        html.replace(QLatin1StringView("%wind_speed_f") + suffix + QLatin1Char('%'), forecast.windSpeedString());
+        html.replace(QLatin1StringView("%publish_time_f") + suffix + QLatin1Char('%'), forecast.publishingTime().toString());
     }
 
     return html;

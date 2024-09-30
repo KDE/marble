@@ -49,7 +49,7 @@ void OpenRouteServiceRunner::retrieveRoute(const RouteRequest *route)
     if (settings.contains(QStringLiteral("preference"))) {
         preference = settings[QStringLiteral("preference")].toString();
     }
-    if (preference == QLatin1String("Pedestrian")) {
+    if (preference == QLatin1StringView("Pedestrian")) {
         unit = QStringLiteral("M");
     }
 
@@ -304,28 +304,28 @@ RoutingInstruction::TurnType OpenRouteServiceRunner::parseTurnType(const QString
         if (syntax.captureCount() > 1) {
             instruction = syntax.cap(2);
             if (syntax.captureCount() == 4) {
-                *road = syntax.cap(4).remove(QLatin1String(" - Arrived at destination!"));
+                *road = syntax.cap(4).remove(QLatin1StringView(" - Arrived at destination!"));
             }
         }
     }
 
-    if (instruction == QLatin1String("Continue")) {
+    if (instruction == QLatin1StringView("Continue")) {
         return RoutingInstruction::Straight;
-    } else if (instruction == QLatin1String("half right")) {
+    } else if (instruction == QLatin1StringView("half right")) {
         return RoutingInstruction::SlightRight;
-    } else if (instruction == QLatin1String("right")) {
+    } else if (instruction == QLatin1StringView("right")) {
         return RoutingInstruction::Right;
-    } else if (instruction == QLatin1String("sharp right")) {
+    } else if (instruction == QLatin1StringView("sharp right")) {
         return RoutingInstruction::SharpRight;
-    } else if (instruction == QLatin1String("straight forward")) {
+    } else if (instruction == QLatin1StringView("straight forward")) {
         return RoutingInstruction::Straight;
-    } else if (instruction == QLatin1String("turn")) {
+    } else if (instruction == QLatin1StringView("turn")) {
         return RoutingInstruction::TurnAround;
-    } else if (instruction == QLatin1String("sharp left")) {
+    } else if (instruction == QLatin1StringView("sharp left")) {
         return RoutingInstruction::SharpLeft;
-    } else if (instruction == QLatin1String("left")) {
+    } else if (instruction == QLatin1StringView("left")) {
         return RoutingInstruction::Left;
-    } else if (instruction == QLatin1String("half left")) {
+    } else if (instruction == QLatin1StringView("half left")) {
         return RoutingInstruction::SlightLeft;
     }
 

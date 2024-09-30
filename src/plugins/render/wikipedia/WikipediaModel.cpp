@@ -49,7 +49,7 @@ void WikipediaModel::setShowThumbnail(bool show)
 void WikipediaModel::getAdditionalItems(const GeoDataLatLonAltBox &box, qint32 number)
 {
     // Geonames only supports wikipedia articles for earth
-    if (marbleModel()->planetId() != QLatin1String("earth")) {
+    if (marbleModel()->planetId() != QLatin1StringView("earth")) {
         return;
     }
 

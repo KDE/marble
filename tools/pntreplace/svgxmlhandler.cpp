@@ -16,7 +16,7 @@ SVGXmlHandler::SVGXmlHandler(QDataStream *out, const QString &path, int header)
 
 bool SVGXmlHandler::startElement(const QString & /*nspace*/, const QString & /*localName*/, const QString &qName, const QXmlAttributes &atts)
 {
-    if (qName == QLatin1String("path") && atts.value("id") == m_path) {
+    if (qName == QLatin1StringView("path") && atts.value("id") == m_path) {
         QString coordinates = atts.value("d");
 
         QStringList stringlist;

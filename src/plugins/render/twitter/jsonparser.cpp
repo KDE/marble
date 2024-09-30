@@ -21,9 +21,9 @@ twitterDataStructure jsonParser::parseObjectOnPosition(const QString &content, i
 
 QList<twitterDataStructure> jsonParser::parseAllObjects(const QString &content, int numberOfObjects)
 {
-    QString temp = QLatin1String("var myJSONObject =  { \"twitter\":") + content + QLatin1Char('}');
+    QString temp = QLatin1StringView("var myJSONObject =  { \"twitter\":") + content + QLatin1Char('}');
     int iterator = 0; // the count starts fom one
-    if (temp != QLatin1String("Twitter is down for database maintenance. It will return in about 30 minutes")) {
+    if (temp != QLatin1StringView("Twitter is down for database maintenance. It will return in about 30 minutes")) {
         myEngine.evaluate(QString("function userName(k){return myJSONObject.twitter[k].user.name};"));
         myEngine.evaluate(QString("function userLocation(k){return myJSONObject.twitter[k].user.location};"));
         myEngine.evaluate(QString("function userText(k){return myJSONObject.twitter[k].text};"));
@@ -52,7 +52,7 @@ QList<twitterDataStructure> jsonParser::parseAllObjects(const QString &content, 
 googleMapDataStructure jsonParser::geoCodingAPIparseObject(QString content)
 {
     mDebug() << "in geoCodingAPIparseObject";
-    QString temp = QLatin1String("var myJSONObject = ") + content;
+    QString temp = QLatin1StringView("var myJSONObject = ") + content;
 
     googleMapDataStructure returnStructure;
     myEngine.evaluate("function lat(){return myJSONObject.Placemark[0].Point.coordinates[0]}");

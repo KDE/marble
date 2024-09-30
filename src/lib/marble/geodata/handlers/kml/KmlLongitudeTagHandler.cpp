@@ -25,7 +25,7 @@ KML_DEFINE_TAG_HANDLER(longitude)
 
 GeoNode *KmllongitudeTagHandler::parse(GeoParser &parser) const
 {
-    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1String(kmlTag_longitude)));
+    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1StringView(kmlTag_longitude)));
 
     GeoStackItem parentItem = parser.parentElement();
     if (parentItem.is<GeoDataLookAt>()) {

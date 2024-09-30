@@ -552,9 +552,9 @@ void MeasureToolPlugin::drawInfobox(GeoPainter *painter) const
     QString boxContent;
 
     if (m_paintMode == Polygon) {
-        boxContent += QLatin1String("<strong>") + tr("Polygon Ruler") + QLatin1String(":</strong><br/>\n");
+        boxContent += QLatin1StringView("<strong>") + tr("Polygon Ruler") + QLatin1StringView(":</strong><br/>\n");
     } else /* Circular */ {
-        boxContent += QLatin1String("<strong>") + tr("Circle Ruler") + QLatin1String(":</strong><br/>\n");
+        boxContent += QLatin1StringView("<strong>") + tr("Circle Ruler") + QLatin1StringView(":</strong><br/>\n");
     }
     if (m_paintMode == Polygon) {
         boxContent += tr("Total Distance: %1<br/>\n").arg(meterToPreferredUnit(m_totalDistance));

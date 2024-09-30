@@ -34,7 +34,7 @@ FoursquareModel::~FoursquareModel()
 
 void FoursquareModel::getAdditionalItems(const GeoDataLatLonAltBox &box, qint32 number)
 {
-    if (marbleModel()->planetId() != QLatin1String("earth")) {
+    if (marbleModel()->planetId() != QLatin1StringView("earth")) {
         return;
     }
 
@@ -47,16 +47,16 @@ void FoursquareModel::getAdditionalItems(const GeoDataLatLonAltBox &box, qint32 
     qreal const area = distanceLon * distanceLat;
     if (area > 10 * 1000 * KM2METER * KM2METER) {
         // Large area (> 10.000 km^2) => too large for bbox queries
-        apiUrl += QLatin1String("?ll=") + QString::number(box.center().latitude(Marble::GeoDataCoordinates::Degree)) + QLatin1Char(',')
-            + QString::number(box.center().longitude(Marble::GeoDataCoordinates::Degree)) + QLatin1String("&intent=checkin");
+        apiUrl += QLatin1StringView("?ll=") + QString::number(box.center().latitude(Marble::GeoDataCoordinates::Degree)) + QLatin1Char(',')
+            + QString::number(box.center().longitude(Marble::GeoDataCoordinates::Degree)) + QLatin1StringView("&intent=checkin");
     } else {
-        apiUrl += QLatin1String("?ne=") + QString::number(box.north(Marble::GeoDataCoordinates::Degree)) + QLatin1Char(',')
-            + QString::number(box.east(Marble::GeoDataCoordinates::Degree)) + QLatin1String("&sw=")
+        apiUrl += QLatin1StringView("?ne=") + QString::number(box.north(Marble::GeoDataCoordinates::Degree)) + QLatin1Char(',')
+            + QString::number(box.east(Marble::GeoDataCoordinates::Degree)) + QLatin1StringView("&sw=")
             + QString::number(box.south(Marble::GeoDataCoordinates::Degree)) + QLatin1Char(',') + QString::number(box.west(Marble::GeoDataCoordinates::Degree))
-            + QLatin1String("&intent=browse");
+            + QLatin1StringView("&intent=browse");
     }
-    apiUrl += QLatin1String("&limit=") + QString::number(number) + QLatin1String("&client_id=") + clientId + QLatin1String("&client_secret=") + clientSecret
-        + QLatin1String("&v=20120601");
+    apiUrl += QLatin1StringView("&limit=") + QString::number(number) + QLatin1StringView("&client_id=") + clientId + QLatin1StringView("&client_secret=")
+        + clientSecret + QLatin1StringView("&v=20120601");
     downloadDescriptionFile(QUrl(apiUrl));
 }
 
@@ -95,10 +95,10 @@ void FoursquareModel::parseFile(const QByteArray &file)
                 const QJsonObject categoryIconObject = categoryIconValue.toObject();
                 const QString iconPrefix = categoryIconObject.value(QStringLiteral("prefix")).toString();
                 const QString iconName = categoryIconObject.value(QStringLiteral("name")).toString();
-                iconUrl = iconPrefix + QLatin1String("32") // That's the icon size hardcoded
+                iconUrl = iconPrefix + QLatin1StringView("32") // That's the icon size hardcoded
                     + iconName;
 
-                largeIconUrl = iconPrefix + QLatin1String("64") // Larger icon
+                largeIconUrl = iconPrefix + QLatin1StringView("64") // Larger icon
                     + iconName;
             }
 

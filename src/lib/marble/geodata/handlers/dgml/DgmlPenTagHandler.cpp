@@ -24,7 +24,7 @@ DGML_DEFINE_TAG_HANDLER(Pen)
 GeoNode *DgmlPenTagHandler::parse(GeoParser &parser) const
 {
     // Check whether the tag is valid
-    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1String(dgmlTag_Pen)));
+    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1StringView(dgmlTag_Pen)));
 
     QString color = parser.attribute(dgmlAttr_color).trimmed();
     QString style = parser.attribute(dgmlAttr_style).toLower().trimmed();
@@ -38,17 +38,17 @@ GeoNode *DgmlPenTagHandler::parse(GeoParser &parser) const
     }
 
     if (!style.isEmpty()) {
-        if (style == QLatin1String("nopen")) {
+        if (style == QLatin1StringView("nopen")) {
             pen.setStyle(Qt::NoPen);
-        } else if (style == QLatin1String("solidline")) {
+        } else if (style == QLatin1StringView("solidline")) {
             pen.setStyle(Qt::SolidLine);
-        } else if (style == QLatin1String("dashline")) {
+        } else if (style == QLatin1StringView("dashline")) {
             pen.setStyle(Qt::DashLine);
-        } else if (style == QLatin1String("dotline")) {
+        } else if (style == QLatin1StringView("dotline")) {
             pen.setStyle(Qt::DotLine);
-        } else if (style == QLatin1String("dashdotline")) {
+        } else if (style == QLatin1StringView("dashdotline")) {
             pen.setStyle(Qt::DashDotLine);
-        } else if (style == QLatin1String("dashdotdotline")) {
+        } else if (style == QLatin1StringView("dashdotdotline")) {
             pen.setStyle(Qt::DashDotDotLine);
         }
     }

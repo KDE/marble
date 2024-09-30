@@ -30,14 +30,14 @@ KML_DEFINE_TAG_HANDLER(altitudeMode)
 
 GeoNode *KmlaltitudeModeTagHandler::parse(GeoParser &parser) const
 {
-    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1String(kmlTag_altitudeMode)));
+    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1StringView(kmlTag_altitudeMode)));
 
     QString content = parser.readElementText().trimmed();
 
     AltitudeMode mode;
-    if (content == QLatin1String("relativeToGround")) {
+    if (content == QLatin1StringView("relativeToGround")) {
         mode = RelativeToGround;
-    } else if (content == QLatin1String("absolute")) {
+    } else if (content == QLatin1StringView("absolute")) {
         mode = Absolute;
     } else { // clampToGround is Standard
         mode = ClampToGround;

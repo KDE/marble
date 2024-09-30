@@ -29,13 +29,13 @@ RoutingInstruction::RoutingInstruction(const RoutingWaypoint &item)
 
 bool RoutingInstruction::append(const RoutingWaypoint &item, int angle)
 {
-    if (m_points.size() && m_points.last().roadType() != QLatin1String("roundabout") && item.roadType() == QLatin1String("roundabout")) {
+    if (m_points.size() && m_points.last().roadType() != QLatin1StringView("roundabout") && item.roadType() == QLatin1StringView("roundabout")) {
         // Entering a roundabout. Merge with previous segment to avoid 'Enter the roundabout' instructions
         m_points.push_back(item);
         return true;
     }
 
-    if (m_points.size() && m_points.last().roadType() == QLatin1String("roundabout") && item.roadType() != QLatin1String("roundabout")) {
+    if (m_points.size() && m_points.last().roadType() == QLatin1StringView("roundabout") && item.roadType() != QLatin1StringView("roundabout")) {
         // Exiting a roundabout
         m_points.push_back(item);
         return false;
@@ -56,7 +56,7 @@ bool RoutingInstruction::append(const RoutingWaypoint &item, int angle)
 
         return angle >= 150 && angle <= 210;
     } else {
-        return item.roadType() == QLatin1String("roundabout") || item.roadName() == roadName();
+        return item.roadType() == QLatin1StringView("roundabout") || item.roadName() == roadName();
     }
 }
 
@@ -245,11 +245,11 @@ qreal RoutingInstruction::distanceToEnd() const
 
 QString RoutingInstruction::nextRoadInstruction() const
 {
-    if (roadType() == QLatin1String("roundabout")) {
+    if (roadType() == QLatin1StringView("roundabout")) {
         return QObject::tr("Enter the roundabout.");
     }
 
-    if (roadType() == QLatin1String("motorway_link")) {
+    if (roadType() == QLatin1StringView("motorway_link")) {
         QStringList motorways = QStringList() << "motorway"
                                               << "motorway_link";
         bool const leaving = predecessor() && motorways.contains(predecessor()->roadType());
@@ -290,7 +290,7 @@ QString RoutingInstruction::nextDistanceInstruction() const
     QLocale::MeasurementSystem const measurement = QLocale::system().measurementSystem();
     int precision = 0;
     qreal length = distance();
-    QString distanceUnit = QLatin1String("m");
+    QString distanceUnit = QLatin1StringView("m");
 
     if (measurement != QLocale::MetricSystem) {
         precision = 1;

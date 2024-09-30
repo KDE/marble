@@ -150,7 +150,7 @@ void RoutingModel::setRoute(const Route &route)
 
 void RoutingModel::exportGpx(QIODevice *device) const
 {
-    QString content = QLatin1String(
+    QString content = QLatin1StringView(
         "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\" ?>\n"
         "<gpx xmlns=\"http://www.topografix.com/GPX/1/1\" creator=\"Marble\" version=\"1.1\" "
         "xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" "
@@ -175,7 +175,7 @@ void RoutingModel::exportGpx(QIODevice *device) const
         }
         content += QStringLiteral("    </rtept>\n");
     }
-    content += QLatin1String(
+    content += QLatin1StringView(
         "  </rte>\n"
         "<trk>\n  <name>Route</name>\n    <trkseg>\n");
     GeoDataLineString points = d->m_route.path();
@@ -193,7 +193,7 @@ void RoutingModel::exportGpx(QIODevice *device) const
         }
         content += QStringLiteral("      </trkpt>\n");
     }
-    content += QLatin1String(
+    content += QLatin1StringView(
         "    </trkseg>\n  </trk>\n"
         "</gpx>\n");
 

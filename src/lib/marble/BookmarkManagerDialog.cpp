@@ -333,7 +333,7 @@ GeoDataContainer *BookmarkManagerDialogPrivate::selectedFolder()
 void BookmarkManagerDialogPrivate::initializeFoldersView(GeoDataTreeModel *treeModel)
 {
     m_folderFilterModel.setFilterKeyColumn(1);
-    const QString regexp = QLatin1String(GeoDataTypes::GeoDataFolderType) + QLatin1Char('|') + QLatin1String(GeoDataTypes::GeoDataDocumentType);
+    const QString regexp = QLatin1StringView(GeoDataTypes::GeoDataFolderType) + QLatin1Char('|') + QLatin1StringView(GeoDataTypes::GeoDataDocumentType);
     m_folderFilterModel.setFilterRegularExpression(regexp);
     m_folderFilterModel.setSourceModel(treeModel);
 
@@ -466,7 +466,7 @@ void BookmarkManagerDialogPrivate::importBookmarksRecursively(GeoDataContainer *
                 QString const newBookmark = tr("Imported bookmark");
                 QString const existingBookmark = tr("Existing bookmark");
                 QString const question = tr("Do you want to replace the existing bookmark with the imported one?");
-                QString html = QLatin1String(
+                QString html = QLatin1StringView(
                     "<p>%1</p><table><tr><td>%2</td><td><b>%3 / %4</b></td></tr>"
                     "<tr><td>%5</td><td><b>%6 / %7</b></td></tr></table><p>%8</p>");
                 html = html.arg(intro,

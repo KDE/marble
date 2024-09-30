@@ -64,7 +64,7 @@ bool WikipediaItem::initialized() const
 
 void WikipediaItem::addDownloadedFile(const QString &url, const QString &type)
 {
-    if (type == QLatin1String("thumbnail")) {
+    if (type == QLatin1StringView("thumbnail")) {
         m_thumbnail.load(url);
         updateSize();
         emit updated();
@@ -214,17 +214,17 @@ void WikipediaItem::updateSize()
 
 void WikipediaItem::updateToolTip()
 {
-    QString toolTip = QLatin1String(
+    QString toolTip = QLatin1StringView(
         "<html><head><meta name=\"qrichtext\" content=\"1\" />"
         "<style type=\"text/css\">\\np, li { white-space: pre-wrap; }\\n</style></head>"
         "<body style=\" font-family:'Sans Serif'; font-size:9pt; font-weight:400; "
         "font-style:normal;\"><p style=\" margin-top:0px; margin-bottom:0px; "
         "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">");
     if (summary().isEmpty()) {
-        toolTip += name() + QLatin1String("</p></body></html>\n");
+        toolTip += name() + QLatin1StringView("</p></body></html>\n");
         setToolTip(toolTip);
     } else {
-        toolTip += tr("<b>%1</b><br>%2", "Title:\nSummary") + QLatin1String("</p></body></html>\n");
+        toolTip += tr("<b>%1</b><br>%2", "Title:\nSummary") + QLatin1StringView("</p></body></html>\n");
         setToolTip(toolTip.arg(name()).arg(summary()));
     }
 }

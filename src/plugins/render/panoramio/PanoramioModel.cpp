@@ -32,19 +32,19 @@ void PanoramioModel::setMarbleWidget(MarbleWidget *widget)
 
 void PanoramioModel::getAdditionalItems(const GeoDataLatLonAltBox &box, qint32 number)
 {
-    if (marbleModel()->planetId() != QLatin1String("earth")) {
+    if (marbleModel()->planetId() != QLatin1StringView("earth")) {
         return;
     }
 
     // FIXME: Download a list of constant number, because the parser doesn't support
     // loading a file of an unknown length.
-    const QUrl jsonUrl(QLatin1String("http://www.panoramio.com/map/get_panoramas.php?from=") + QString::number(0) + QLatin1String("&order=upload_date")
-                       + QLatin1String("&set=public") + QLatin1String("&to=")
+    const QUrl jsonUrl(QLatin1StringView("http://www.panoramio.com/map/get_panoramas.php?from=") + QString::number(0) + QLatin1StringView("&order=upload_date")
+                       + QLatin1StringView("&set=public") + QLatin1StringView("&to=")
                        + QString::number(number)
-                       //                        + QLatin1String("&to=") + QString::number( number )
-                       + QLatin1String("&minx=") + QString::number(box.west() * RAD2DEG) + QLatin1String("&miny=") + QString::number(box.south() * RAD2DEG)
-                       + QLatin1String("&maxx=") + QString::number(box.east() * RAD2DEG) + QLatin1String("&maxy=") + QString::number(box.north() * RAD2DEG)
-                       + QLatin1String("&size=small"));
+                       //                        + QLatin1StringView("&to=") + QString::number( number )
+                       + QLatin1StringView("&minx=") + QString::number(box.west() * RAD2DEG) + QLatin1StringView("&miny=")
+                       + QString::number(box.south() * RAD2DEG) + QLatin1StringView("&maxx=") + QString::number(box.east() * RAD2DEG)
+                       + QLatin1StringView("&maxy=") + QString::number(box.north() * RAD2DEG) + QLatin1StringView("&size=small"));
 
     downloadDescriptionFile(jsonUrl);
 }

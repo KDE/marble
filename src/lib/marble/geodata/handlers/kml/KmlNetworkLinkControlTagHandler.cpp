@@ -18,7 +18,7 @@ KML_DEFINE_TAG_HANDLER(NetworkLinkControl)
 
 GeoNode *KmlNetworkLinkControlTagHandler::parse(GeoParser &parser) const
 {
-    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1String(kmlTag_NetworkLinkControl)));
+    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1StringView(kmlTag_NetworkLinkControl)));
 
     GeoStackItem parentItem = parser.parentElement();
     GeoDataNetworkLinkControl *networkLinkControl = new GeoDataNetworkLinkControl;

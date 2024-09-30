@@ -487,7 +487,7 @@ void Routing::openRoute(const QString &fileName)
         Marble::RoutingManager *const routingManager = d->m_marbleMap->model()->routingManager();
         /** @todo FIXME: replace the file:// prefix on QML side */
         routingManager->clearRoute();
-        QString target = fileName.startsWith(QLatin1String("file://")) ? fileName.mid(7) : fileName;
+        QString target = fileName.startsWith(QLatin1StringView("file://")) ? fileName.mid(7) : fileName;
         routingManager->loadRoute(target);
         const Marble::GeoDataDocument *route = routingManager->alternativeRoutesModel()->currentRoute();
         if (route) {
@@ -505,7 +505,7 @@ void Routing::saveRoute(const QString &fileName)
 {
     if (d->m_marbleMap) {
         /** @todo FIXME: replace the file:// prefix on QML side */
-        QString target = fileName.startsWith(QLatin1String("file://")) ? fileName.mid(7) : fileName;
+        QString target = fileName.startsWith(QLatin1StringView("file://")) ? fileName.mid(7) : fileName;
         d->m_marbleMap->model()->routingManager()->saveRoute(target);
     }
 }

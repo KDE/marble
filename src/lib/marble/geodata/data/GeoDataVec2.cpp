@@ -43,13 +43,13 @@ GeoDataVec2::GeoDataVec2(qreal x, qreal y, const QString &xunits, const QString 
 
 GeoDataVec2::Unit GeoDataVec2Private::parseUnits(const QString &value)
 {
-    if (value == QLatin1String("fraction")) {
+    if (value == QLatin1StringView("fraction")) {
         return GeoDataVec2::Fraction;
     }
-    if (value == QLatin1String("pixels")) {
+    if (value == QLatin1StringView("pixels")) {
         return GeoDataVec2::Pixels;
     }
-    if (value == QLatin1String("insetPixels")) {
+    if (value == QLatin1StringView("insetPixels")) {
         return GeoDataVec2::InsetPixels;
     }
 

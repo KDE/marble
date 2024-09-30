@@ -122,8 +122,8 @@ void MarbleLegendBrowser::loadLegend()
     if (d->m_marbleModel->mapTheme() != nullptr) {
         const GeoSceneDocument *currentMapTheme = d->m_marbleModel->mapTheme();
 
-        legendPath = MarbleDirs::path(QLatin1String("maps/") + currentMapTheme->head()->target() + QLatin1Char('/') + currentMapTheme->head()->theme()
-                                      + QLatin1String("/legend.html"));
+        legendPath = MarbleDirs::path(QLatin1StringView("maps/") + currentMapTheme->head()->target() + QLatin1Char('/') + currentMapTheme->head()->theme()
+                                      + QLatin1StringView("/legend.html"));
     }
     if (legendPath.isEmpty()) {
         legendPath = MarbleDirs::path(QStringLiteral("legend.html"));
@@ -167,8 +167,8 @@ void MarbleLegendBrowser::loadLegend()
 
 void MarbleLegendBrowser::openLinkExternally(const QUrl &url)
 {
-    if (url.scheme() == QLatin1String("tour")) {
-        emit tourLinkClicked(QLatin1String("maps/") + url.host() + url.path());
+    if (url.scheme() == QLatin1StringView("tour")) {
+        emit tourLinkClicked(QLatin1StringView("maps/") + url.host() + url.path());
     } else {
         QDesktopServices::openUrl(url);
     }
@@ -208,7 +208,7 @@ void MarbleLegendBrowser::translateHtml(QString &html)
         QRegExp rx( "</?\\w+((\\s+\\w+(\\s*=\\s*(?:\".*\"|'.*'|[^'\">\\s]+))?)+\\s*|\\s*)/?>");
         rx.setMinimal( true );
     */
-    s.replace(rx, QLatin1String("\n"));
+    s.replace(rx, QLatin1StringView("\n"));
     s.replace(QRegularExpression("\\s*\n\\s*"), "\n");
     const QStringList words = s.split(QLatin1Char('\n'), Qt::SkipEmptyParts);
 
@@ -239,10 +239,10 @@ void MarbleLegendBrowser::reverseSupportCheckboxes(QString &html)
     if (d->m_checkBoxMap["cities"])
         checked = "checked";
 
-    const QString repair = QLatin1String(
+    const QString repair = QLatin1StringView(
                                "<input style=\"position: relative; top: -4px;\" type=\"checkbox\" "
                                "onchange=\"Marble.setCheckedProperty(this.name, this.checked);\" ")
-        + checked + QLatin1String(" name=\"cities\"/>");
+        + checked + QLatin1StringView(" name=\"cities\"/>");
 
     html.replace(old, repair);
 }
@@ -268,7 +268,7 @@ QString MarbleLegendBrowser::generateSectionsHtml()
     for (const GeoSceneSection *section : currentMapTheme->legend()->sections()) {
         // Each section is divided into the "well"
         // Well is like a block of data with rounded corners
-        customLegendString += QLatin1String("<div class=\"well well-small well-legend\">");
+        customLegendString += QLatin1StringView("<div class=\"well well-small well-legend\">");
 
         const QString heading = QCoreApplication::translate("DGML", section->heading().toUtf8().constData());
         QString checkBoxString;
@@ -281,24 +281,25 @@ QString MarbleLegendBrowser::generateSectionsHtml()
              * Marble.setCheckedProperty is a function that does it
              */
             if (!section->radio().isEmpty()) {
-                checkBoxString = QLatin1String(
+                checkBoxString = QLatin1StringView(
                                      "<label class=\"section-head\">"
                                      "<input style=\"position: relative; top: -4px;\" type=\"radio\" "
                                      "onchange=\"Marble.setRadioCheckedProperty(this.value, this.name ,this.checked);\" ")
-                    + checked + QLatin1String(" value=\"") + section->connectTo() + QLatin1String("\" name=\"") + section->radio()
-                    + QLatin1String("\" /><span>") + heading + QLatin1String("</span></label>");
+                    + checked + QLatin1StringView(" value=\"") + section->connectTo() + QLatin1StringView("\" name=\"") + section->radio()
+                    + QLatin1StringView("\" /><span>") + heading + QLatin1StringView("</span></label>");
 
             } else {
-                checkBoxString = QLatin1String(
+                checkBoxString = QLatin1StringView(
                                      "<label class=\"section-head\">"
                                      "<input style=\"position: relative; top: -4px;\" type=\"checkbox\" "
                                      "onchange=\"Marble.setCheckedProperty(this.name, this.checked);\" ")
-                    + checked + QLatin1String(" name=\"") + section->connectTo() + QLatin1String("\" /><span>") + heading + QLatin1String("</span></label>");
+                    + checked + QLatin1StringView(" name=\"") + section->connectTo() + QLatin1StringView("\" /><span>") + heading
+                    + QLatin1StringView("</span></label>");
             }
             customLegendString += checkBoxString;
 
         } else {
-            customLegendString += QLatin1String("<h4 class=\"section-head\">") + heading + QLatin1String("</h4>");
+            customLegendString += QLatin1StringView("<h4 class=\"section-head\">") + heading + QLatin1StringView("</h4>");
         }
 
         for (const GeoSceneItem *item : section->items()) {
@@ -306,10 +307,10 @@ QString MarbleLegendBrowser::generateSectionsHtml()
             QString checkBoxString;
             if (item->checkable()) {
                 QString const checked = d->m_checkBoxMap[item->connectTo()] ? "checked" : "";
-                checkBoxString = QLatin1String(
+                checkBoxString = QLatin1StringView(
                                      "<input type=\"checkbox\" "
                                      "onchange=\"Marble.setCheckedProperty(this.name, this.checked);\" ")
-                    + checked + QLatin1String(" name=\"") + item->connectTo() + QLatin1String("\" />");
+                    + checked + QLatin1StringView(" name=\"") + item->connectTo() + QLatin1StringView("\" />");
             }
 
             // pixmap and text
@@ -323,8 +324,8 @@ QString MarbleLegendBrowser::generateSectionsHtml()
                 pixmapWidth = oncePixmap.width();
                 pixmapHeight = oncePixmap.height();
                 src = QUrl::fromLocalFile(path).toString();
-                styleDiv = QLatin1String("width: ") + QString::number(pixmapWidth) + QLatin1String("px; height: ") + QString::number(pixmapHeight)
-                    + QLatin1String("px;");
+                styleDiv = QLatin1StringView("width: ") + QString::number(pixmapWidth) + QLatin1StringView("px; height: ") + QString::number(pixmapHeight)
+                    + QLatin1StringView("px;");
             } else {
                 // Workaround for rendered border around empty images in webkit
                 src = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7";
@@ -333,26 +334,26 @@ QString MarbleLegendBrowser::generateSectionsHtml()
             //         create just a plain rectangle with set color
             if (QColor(item->icon()->color()).isValid()) {
                 const QColor color = item->icon()->color();
-                styleDiv = QLatin1String("width: ") + QString::number(pixmapWidth) + QLatin1String("px; height: ") + QString::number(pixmapHeight)
-                    + QLatin1String("px; background-color: ") + color.name() + QLatin1Char(';');
+                styleDiv = QLatin1StringView("width: ") + QString::number(pixmapWidth) + QLatin1StringView("px; height: ") + QString::number(pixmapHeight)
+                    + QLatin1StringView("px; background-color: ") + color.name() + QLatin1Char(';');
             }
             styleDiv += " position: relative; top: -3px;";
             const QString text = QCoreApplication::translate("DGML", item->text().toUtf8().constData());
-            QString html = QLatin1String(
+            QString html = QLatin1StringView(
                                "<div class=\"legend-entry\">"
                                "  <label>")
-                + checkBoxString + QLatin1String("    <img class=\"image-pic\" src=\"") + src + QLatin1String("\" style=\"") + styleDiv
-                + QLatin1String(
+                + checkBoxString + QLatin1StringView("    <img class=\"image-pic\" src=\"") + src + QLatin1StringView("\" style=\"") + styleDiv
+                + QLatin1StringView(
                                "\"/>"
                                "    <span class=\"kotation\" >")
                 + text
-                + QLatin1String(
+                + QLatin1StringView(
                                "</span>"
                                "  </label>"
                                "</div>");
             customLegendString += html;
         }
-        customLegendString += QLatin1String("</div>"); // <div class="well">
+        customLegendString += QLatin1StringView("</div>"); // <div class="well">
     }
 
     return customLegendString;

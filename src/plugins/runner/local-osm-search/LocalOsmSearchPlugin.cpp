@@ -20,7 +20,7 @@ LocalOsmSearchPlugin::LocalOsmSearchPlugin(QObject *parent)
     setSupportedCelestialBodies(QStringList(QStringLiteral("earth")));
     setCanWorkOffline(true);
 
-    QString const path = MarbleDirs::localPath() + QLatin1String("/maps/earth/placemarks/");
+    QString const path = MarbleDirs::localPath() + QLatin1StringView("/maps/earth/placemarks/");
     QFileInfo pathInfo(path);
     if (!pathInfo.exists()) {
         QDir("/").mkpath(pathInfo.absolutePath());
@@ -92,7 +92,7 @@ void LocalOsmSearchPlugin::updateDirectory(const QString &)
 
 void LocalOsmSearchPlugin::updateFile(const QString &file)
 {
-    if (file.endsWith(QLatin1String(".sqlite"))) {
+    if (file.endsWith(QLatin1StringView(".sqlite"))) {
         updateDatabase();
     }
 }
@@ -102,7 +102,7 @@ void LocalOsmSearchPlugin::updateDatabase()
     m_databaseFiles.clear();
     QStringList const baseDirs = QStringList() << MarbleDirs::systemPath() << MarbleDirs::localPath();
     for (const QString &baseDir : baseDirs) {
-        const QString base = baseDir + QLatin1String("/maps/earth/placemarks/");
+        const QString base = baseDir + QLatin1StringView("/maps/earth/placemarks/");
         addDatabaseDirectory(base);
         QDir::Filters filters = QDir::AllDirs | QDir::Readable | QDir::NoDotAndDotDot;
         QDirIterator::IteratorFlags flags = QDirIterator::Subdirectories | QDirIterator::FollowSymlinks;

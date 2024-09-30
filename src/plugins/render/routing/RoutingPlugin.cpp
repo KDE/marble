@@ -110,13 +110,13 @@ RoutingPluginPrivate::RoutingPluginPrivate(RoutingPlugin *parent)
 
 QString RoutingPluginPrivate::richText(const QString &source)
 {
-    return QLatin1String("<font size=\"+1\" color=\"black\">") + source + QLatin1String("</font>");
+    return QLatin1StringView("<font size=\"+1\" color=\"black\">") + source + QLatin1StringView("</font>");
 }
 
 QString RoutingPluginPrivate::fuzzyDistance(qreal length)
 {
     int precision = 0;
-    QString distanceUnit = QLatin1String("m");
+    QString distanceUnit = QLatin1StringView("m");
 
     if (MarbleGlobal::getInstance()->locale()->measurementSystem() != MarbleLocale::MetricSystem) {
         precision = 1;

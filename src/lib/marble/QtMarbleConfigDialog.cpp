@@ -182,7 +182,7 @@ void QtMarbleConfigDialog::syncSettings()
     QNetworkProxy proxy;
 
     // Make sure that no proxy is used for an empty string or the default value:
-    if (proxyUrl().isEmpty() || proxyUrl() == QLatin1String("http://")) {
+    if (proxyUrl().isEmpty() || proxyUrl() == QLatin1StringView("http://")) {
         proxy.setType(QNetworkProxy::NoProxy);
     } else {
         if (proxyType() == Marble::Socks5Proxy) {
@@ -279,11 +279,11 @@ void QtMarbleConfigDialog::readSettings()
     d->ui_navigationSettings.kcfg_mouseViewRotation->setChecked(mouseViewRotation());
     d->ui_navigationSettings.kcfg_animateTargetVoyage->setChecked(animateTargetVoyage());
     int editorIndex = 0;
-    if (externalMapEditor() == QLatin1String("potlatch")) {
+    if (externalMapEditor() == QLatin1StringView("potlatch")) {
         editorIndex = 1;
-    } else if (externalMapEditor() == QLatin1String("josm")) {
+    } else if (externalMapEditor() == QLatin1StringView("josm")) {
         editorIndex = 2;
-    } else if (externalMapEditor() == QLatin1String("merkaartor")) {
+    } else if (externalMapEditor() == QLatin1StringView("merkaartor")) {
         editorIndex = 3;
     }
     d->ui_navigationSettings.kcfg_externalMapEditor->setCurrentIndex(editorIndex);

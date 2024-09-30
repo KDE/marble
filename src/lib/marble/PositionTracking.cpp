@@ -263,7 +263,7 @@ bool PositionTracking::saveTrack(const QString &fileName)
         document->addStyleMap(map);
     }
     GeoDataPlacemark *track = new GeoDataPlacemark(*d->m_currentTrackPlacemark);
-    track->setName(QLatin1String("Track ") + name);
+    track->setName(QLatin1StringView("Track ") + name);
     document->append(track);
 
     bool const result = GeoDataDocumentWriter::write(fileName, *document);

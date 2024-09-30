@@ -81,7 +81,7 @@ void FileStorageWatcherThread::getCurrentCacheSize()
 {
     mDebug() << "FileStorageWatcher: Creating cache size";
     quint64 dataSize = 0;
-    const QString basePath = m_dataDirectory + QLatin1String("/maps");
+    const QString basePath = m_dataDirectory + QLatin1StringView("/maps");
     QDirIterator it(basePath, QDir::Files | QDir::Writable, QDirIterator::Subdirectories);
 
     const int basePathDepth = basePath.split(QLatin1Char('/')).size();
@@ -101,8 +101,8 @@ void FileStorageWatcherThread::getCurrentCacheSize()
             if (!ok)
                 tileLevel = path[basePathDepth + 3].toInt(&ok);
             if ((ok && tileLevel >= maxBaseTileLevel)
-                && (suffix == QLatin1String("jpg") || suffix == QLatin1String("png") || suffix == QLatin1String("gif") || suffix == QLatin1String("svg")
-                    || suffix == QLatin1String("o5m"))) {
+                && (suffix == QLatin1StringView("jpg") || suffix == QLatin1StringView("png") || suffix == QLatin1StringView("gif")
+                    || suffix == QLatin1StringView("svg") || suffix == QLatin1StringView("o5m"))) {
                 dataSize += file.size();
                 m_filesCache.insert(file.lastModified(), file.absoluteFilePath());
             }
@@ -175,7 +175,7 @@ FileStorageWatcher::FileStorageWatcher(const QString &dataDirectory, QObject *pa
     , m_dataDirectory(dataDirectory)
 {
     if (m_dataDirectory.isEmpty())
-        m_dataDirectory = MarbleDirs::localPath() + QLatin1String("/cache/");
+        m_dataDirectory = MarbleDirs::localPath() + QLatin1StringView("/cache/");
 
     if (!QDir(m_dataDirectory).exists())
         QDir::root().mkpath(m_dataDirectory);

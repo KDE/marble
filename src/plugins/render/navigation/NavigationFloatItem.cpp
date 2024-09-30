@@ -213,7 +213,7 @@ QPixmap NavigationFloatItem::pixmap(const QString &id)
 {
     QPixmap result;
     if (!QPixmapCache::find(id, &result)) {
-        result = QPixmap(QLatin1String(":/") + id + QLatin1String(".png"));
+        result = QPixmap(QLatin1StringView(":/") + id + QLatin1StringView(".png"));
         QPixmapCache::insert(id, result);
     }
     return result;

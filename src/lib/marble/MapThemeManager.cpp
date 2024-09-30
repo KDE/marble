@@ -163,7 +163,7 @@ GeoSceneDocument *MapThemeManager::loadMapTheme(const QString &mapThemeStringID)
 
 void MapThemeManager::deleteMapTheme(const QString &mapThemeId)
 {
-    const QString dgmlPath = MarbleDirs::localPath() + QLatin1String("/maps/") + mapThemeId;
+    const QString dgmlPath = MarbleDirs::localPath() + QLatin1StringView("/maps/") + mapThemeId;
     QFileInfo dgmlFile(dgmlPath);
 
     QString themeDir = dgmlFile.dir().absolutePath();
@@ -356,7 +356,7 @@ QList<QStandardItem *> MapThemeManager::Private::createMapThemeRow(QString const
 
     QString name = mapTheme->head()->name();
     const QString translatedDescription = QCoreApplication::translate("DGML", mapTheme->head()->description().toUtf8().constData());
-    const QString toolTip = QLatin1String("<span style=\" max-width: 150 px;\"> ") + translatedDescription + QLatin1String(" </span>");
+    const QString toolTip = QLatin1StringView("<span style=\" max-width: 150 px;\"> ") + translatedDescription + QLatin1StringView(" </span>");
 
     QStandardItem *item = new QStandardItem(name);
     item->setData(QCoreApplication::translate("DGML", name.toUtf8().constData()), Qt::DisplayRole);

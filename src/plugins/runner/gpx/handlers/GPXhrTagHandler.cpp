@@ -23,7 +23,7 @@ GPX_DEFINE_TAG_HANDLER_GARMIN_TRACKPOINTEXT1(hr)
 
 GeoNode *GPXhrTagHandler::parse(GeoParser &parser) const
 {
-    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1String(gpxTag_hr)));
+    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1StringView(gpxTag_hr)));
 
     GeoStackItem parentItem = parser.parentElement();
 

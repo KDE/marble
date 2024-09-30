@@ -75,13 +75,13 @@ void JobManager::setRegionsFile(const QString &filename)
                     PendingJob job;
                     job.m_region = region;
                     job.m_transport = value.trimmed();
-                    if (job.m_transport == QLatin1String("Motorcar")) {
+                    if (job.m_transport == QLatin1StringView("Motorcar")) {
                         job.m_profile = "motorcar";
                         m_pendingJobs << job;
-                    } else if (job.m_transport == QLatin1String("Bicycle")) {
+                    } else if (job.m_transport == QLatin1StringView("Bicycle")) {
                         job.m_profile = "bicycle";
                         m_pendingJobs << job;
-                    } else if (job.m_transport == QLatin1String("Pedestrian")) {
+                    } else if (job.m_transport == QLatin1StringView("Pedestrian")) {
                         job.m_profile = "foot";
                         m_pendingJobs << job;
                     } else {

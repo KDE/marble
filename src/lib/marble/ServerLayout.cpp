@@ -122,7 +122,7 @@ QUrl WmsServerLayout::downloadUrl(const QUrl &prototypeUrl, const Marble::TileId
     if (!url.hasQueryItem("styles"))
         url.addQueryItem("styles", "");
     if (!url.hasQueryItem("format")) {
-        url.addQueryItem("format", QLatin1String("image/") + m_textureLayer->fileFormat().toLower());
+        url.addQueryItem("format", QLatin1StringView("image/") + m_textureLayer->fileFormat().toLower());
     }
     if (!url.hasQueryItem("srs")) {
         url.addQueryItem("srs", epsgCode());
@@ -183,9 +183,9 @@ QUrl WmtsServerLayout::downloadUrl(const QUrl &prototypeUrl, const Marble::TileI
 
     QString urlStr = prototypeUrl.toString(QUrl::DecodeReserved);
 
-    urlStr.replace(urlStr.indexOf(QLatin1String("{TileMatrix}")), QLatin1String("{TileMatrix}").size(), QString::number(id.zoomLevel()));
-    urlStr.replace(urlStr.indexOf(QLatin1String("{TileRow}")), QLatin1String("{TileRow}").size(), QString::number(id.y()));
-    urlStr.replace(urlStr.indexOf(QLatin1String("{TileCol}")), QLatin1String("{TileCol}").size(), QString::number(id.x()));
+    urlStr.replace(urlStr.indexOf(QLatin1StringView("{TileMatrix}")), QLatin1StringView("{TileMatrix}").size(), QString::number(id.zoomLevel()));
+    urlStr.replace(urlStr.indexOf(QLatin1StringView("{TileRow}")), QLatin1StringView("{TileRow}").size(), QString::number(id.y()));
+    urlStr.replace(urlStr.indexOf(QLatin1StringView("{TileCol}")), QLatin1StringView("{TileCol}").size(), QString::number(id.x()));
     return QUrl(urlStr);
 }
 

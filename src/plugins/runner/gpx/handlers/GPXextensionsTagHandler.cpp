@@ -21,7 +21,7 @@ GPX_DEFINE_TAG_HANDLER(extensions)
 
 GeoNode *GPXextensionsTagHandler::parse(GeoParser &parser) const
 {
-    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1String(gpxTag_extensions)));
+    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1StringView(gpxTag_extensions)));
 
     GeoStackItem parentItem = parser.parentElement();
 

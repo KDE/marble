@@ -57,7 +57,7 @@ bool SpeakersModelItem::lessThan(const SpeakersModelItem &one, const SpeakersMod
 SpeakersModelPrivate::SpeakersModelPrivate(SpeakersModel *parent)
     : m_parent(parent)
 {
-    m_newstuffModel.setTargetDirectory(MarbleDirs::localPath() + QLatin1String("/audio/speakers"));
+    m_newstuffModel.setTargetDirectory(MarbleDirs::localPath() + QLatin1StringView("/audio/speakers"));
     m_newstuffModel.setProvider("http://edu.kde.org/marble/newstuff/speakers.xml");
     QObject::connect(&m_newstuffModel, SIGNAL(modelReset()), m_parent, SLOT(fillModel()));
     QObject::connect(&m_newstuffModel, SIGNAL(installationProgressed(int, qreal)), m_parent, SLOT(handleInstallationProgress(int, qreal)));
@@ -70,7 +70,7 @@ void SpeakersModelPrivate::fillModel()
 
     QStringList const baseDirs = QStringList() << MarbleDirs::systemPath() << MarbleDirs::localPath();
     for (const QString &baseDir : baseDirs) {
-        const QString base = baseDir + QLatin1String("/audio/speakers/");
+        const QString base = baseDir + QLatin1StringView("/audio/speakers/");
 
         QDir::Filters filter = QDir::Readable | QDir::Dirs | QDir::NoDotAndDotDot;
         QFileInfoList subdirs = QDir(base).entryInfoList(filter, QDir::Name);

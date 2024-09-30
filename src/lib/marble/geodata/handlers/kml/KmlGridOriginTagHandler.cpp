@@ -17,7 +17,7 @@ KML_DEFINE_TAG_HANDLER(gridOrigin)
 
 GeoNode *KmlgridOriginTagHandler::parse(GeoParser &parser) const
 {
-    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1String(kmlTag_gridOrigin)));
+    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1StringView(kmlTag_gridOrigin)));
 
     GeoStackItem parentItem = parser.parentElement();
 
@@ -25,9 +25,9 @@ GeoNode *KmlgridOriginTagHandler::parse(GeoParser &parser) const
         GeoDataImagePyramid::GridOrigin gridOrigin = GeoDataImagePyramid::UpperLeft;
         QString gridOriginText = parser.readElementText();
 
-        if (gridOriginText == QLatin1String("lowerLeft")) {
+        if (gridOriginText == QLatin1StringView("lowerLeft")) {
             gridOrigin = GeoDataImagePyramid::LowerLeft;
-        } else if (gridOriginText == QLatin1String("upperLeft")) {
+        } else if (gridOriginText == QLatin1StringView("upperLeft")) {
             gridOrigin = GeoDataImagePyramid::UpperLeft;
         }
 

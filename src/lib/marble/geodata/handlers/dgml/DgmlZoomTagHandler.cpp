@@ -21,7 +21,7 @@ DGML_DEFINE_TAG_HANDLER(Zoom)
 
 GeoNode *DgmlZoomTagHandler::parse(GeoParser &parser) const
 {
-    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1String(dgmlTag_Zoom)));
+    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1StringView(dgmlTag_Zoom)));
 
     // Checking for parent item
     GeoStackItem parentItem = parser.parentElement();

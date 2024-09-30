@@ -23,7 +23,7 @@ DGML_DEFINE_TAG_HANDLER(StorageLayout)
 GeoNode *DgmlStorageLayoutTagHandler::parse(GeoParser &parser) const
 {
     // Check whether the tag is valid
-    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1String(dgmlTag_StorageLayout)));
+    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1StringView(dgmlTag_StorageLayout)));
 
     // Attribute levelZeroColumns, default to value of the oldest tile themes
     int levelZeroColumns = 2;
@@ -65,17 +65,17 @@ GeoNode *DgmlStorageLayoutTagHandler::parse(GeoParser &parser) const
         GeoSceneTileDataset::StorageLayout storageLayout = GeoSceneTileDataset::OpenStreetMap;
         ServerLayout *serverLayout = nullptr;
         const QString modeStr = parser.attribute(dgmlAttr_mode).trimmed();
-        if (modeStr == QLatin1String("OpenStreetMap"))
+        if (modeStr == QLatin1StringView("OpenStreetMap"))
             serverLayout = new OsmServerLayout(texture);
-        else if (modeStr == QLatin1String("Custom"))
+        else if (modeStr == QLatin1StringView("Custom"))
             serverLayout = new CustomServerLayout(texture);
-        else if (modeStr == QLatin1String("WebMapService"))
+        else if (modeStr == QLatin1StringView("WebMapService"))
             serverLayout = new WmsServerLayout(texture);
-        else if (modeStr == QLatin1String("WebMapTileService"))
+        else if (modeStr == QLatin1StringView("WebMapTileService"))
             serverLayout = new WmtsServerLayout(texture);
-        else if (modeStr == QLatin1String("QuadTree"))
+        else if (modeStr == QLatin1StringView("QuadTree"))
             serverLayout = new QuadTreeServerLayout(texture);
-        else if (modeStr == QLatin1String("TileMapService")) {
+        else if (modeStr == QLatin1StringView("TileMapService")) {
             storageLayout = GeoSceneTileDataset::TileMapService;
             serverLayout = new TmsServerLayout(texture);
         } else {

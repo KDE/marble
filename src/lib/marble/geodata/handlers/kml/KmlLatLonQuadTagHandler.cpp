@@ -19,7 +19,7 @@ KML_DEFINE_TAG_HANDLER_GX22(LatLonQuad)
 
 GeoNode *KmlLatLonQuadTagHandler::parse(GeoParser &parser) const
 {
-    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1String(kmlTag_LatLonQuad)));
+    Q_ASSERT(parser.isStartElement() && parser.isValidElement(QLatin1StringView(kmlTag_LatLonQuad)));
     GeoStackItem parentItem = parser.parentElement();
     if (parentItem.represents(kmlTag_GroundOverlay)) {
         GeoDataLatLonQuad *quad = &parentItem.nodeAs<GeoDataGroundOverlay>()->latLonQuad();

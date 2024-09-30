@@ -89,7 +89,7 @@ void CountryByFlag::initiateGame()
             Q_ASSERT_X(object, "CountryByFlag::initiateGame", "failed to get valid data from treeModel for GeoDataObject");
             if (auto doc = geodata_cast<GeoDataDocument>(object)) {
                 QFileInfo fileInfo(doc->fileName());
-                if (fileInfo.fileName() == QLatin1String("boundaryplacemarks.cache")) {
+                if (fileInfo.fileName() == QLatin1StringView("boundaryplacemarks.cache")) {
                     d->m_countryNames = doc;
                     break;
                 }
@@ -129,10 +129,10 @@ void CountryByFlag::postQuestion(QObject *gameObject)
 
         if (!d->m_continentsAndOceans.contains(placemark->name(), Qt::CaseSensitive)) {
             const QString countryCode = placemark->countryCode().toLower();
-            flagPath = MarbleDirs::path(QLatin1String("flags/flag_") + countryCode + QLatin1String(".svg"));
+            flagPath = MarbleDirs::path(QLatin1StringView("flags/flag_") + countryCode + QLatin1StringView(".svg"));
             QImage flag = QFile::exists(flagPath) ? QImage(flagPath) : QImage();
             if (!flag.isNull()) {
-                flagPath = QLatin1String("../../../data/flags/flag_") + countryCode + QLatin1String(".svg");
+                flagPath = QLatin1StringView("../../../data/flags/flag_") + countryCode + QLatin1StringView(".svg");
                 found = true;
             }
         }

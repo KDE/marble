@@ -159,7 +159,7 @@ void BuildingGraphicsItem::paint(GeoPainter *painter, const ViewportParams *view
     // Just display flat buildings for tile level 17
     if (tileZoomLevel == 17) {
         setZValue(0.0);
-        if (layer.endsWith(QLatin1String("/roof"))) {
+        if (layer.endsWith(QLatin1StringView("/roof"))) {
             AbstractGeoPolygonGraphicsItem::paint(painter, viewport, layer, tileZoomLevel);
         }
         return;
@@ -167,7 +167,7 @@ void BuildingGraphicsItem::paint(GeoPainter *painter, const ViewportParams *view
     setZValue(building()->height());
 
     // For level 18, 19 .. render 3D buildings in perspective
-    if (layer.endsWith(QLatin1String("/frame"))) {
+    if (layer.endsWith(QLatin1StringView("/frame"))) {
         qDeleteAll(m_cachedOuterPolygons);
         qDeleteAll(m_cachedInnerPolygons);
         qDeleteAll(m_cachedOuterRoofPolygons);
@@ -181,7 +181,7 @@ void BuildingGraphicsItem::paint(GeoPainter *painter, const ViewportParams *view
             return;
         }
         paintFrame(painter, viewport);
-    } else if (layer.endsWith(QLatin1String("/roof"))) {
+    } else if (layer.endsWith(QLatin1StringView("/roof"))) {
         if (m_cachedOuterPolygons.isEmpty()) {
             return;
         }

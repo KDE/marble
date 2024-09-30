@@ -70,10 +70,10 @@ bool PhotoPluginItem::initialized() const
 
 void PhotoPluginItem::addDownloadedFile(const QString &url, const QString &type)
 {
-    if (type == QLatin1String("thumbnail")) {
+    if (type == QLatin1StringView("thumbnail")) {
         m_smallImage.load(url);
         m_image.setImage(m_smallImage.scaled(QSize(50, 50)));
-    } else if (type == QLatin1String("info")) {
+    } else if (type == QLatin1StringView("info")) {
         QFile file(url);
         if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
             return;
@@ -178,7 +178,7 @@ void PhotoPluginItem::openBrowser()
         PopupLayer *popup = m_marbleWidget->popupLayer();
         popup->setCoordinates(coordinate(), Qt::AlignRight | Qt::AlignVCenter);
         popup->setSize(QSizeF(720, 470));
-        popup->setUrl(QUrl(QLatin1String("http://m.flickr.com/photos/") + owner() + QLatin1Char('/') + id() + QLatin1Char('/')));
+        popup->setUrl(QUrl(QLatin1StringView("http://m.flickr.com/photos/") + owner() + QLatin1Char('/') + id() + QLatin1Char('/')));
         popup->popup();
     } else {
         if (!m_browser) {

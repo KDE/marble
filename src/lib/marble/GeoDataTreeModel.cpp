@@ -202,7 +202,7 @@ QVariant GeoDataTreeModel::data(const QModelIndex &index, int role) const
                 if (placemark->countryCode().isEmpty()) {
                     return QVariant(placemark->name());
                 } else {
-                    return QVariant(placemark->name() + QLatin1String(" (") + placemark->countryCode() + QLatin1Char(')'));
+                    return QVariant(placemark->name() + QLatin1StringView(" (") + placemark->countryCode() + QLatin1Char(')'));
                 }
 
             } else if (index.column() == 1) {

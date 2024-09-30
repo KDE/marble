@@ -33,7 +33,7 @@ int main(int argc, char **argv)
 
     const auto floatItems = mapWidget->floatItems();
     for (AbstractFloatItem *floatItem : floatItems) {
-        if (floatItem && floatItem->nameId() == QLatin1String("compass")) {
+        if (floatItem && floatItem->nameId() == QLatin1StringView("compass")) {
             // Put the compass onto the left hand side
             floatItem->setPosition(QPoint(10, 10));
             // Make the content size of the compass smaller
