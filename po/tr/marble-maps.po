@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-09-29 00:37+0000\n"
-"PO-Revision-Date: 2024-09-25 19:54+0300\n"
+"PO-Revision-Date: 2024-09-29 22:00+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -37,11 +37,9 @@ msgstr "Yer imleriniz burada görünecektir."
 
 #. i18n: ectx: label, entry (MapThemeId), group (General)
 #: config.kcfg:14
-#, fuzzy, kde-format
-#| msgctxt "MapWizard|"
-#| msgid "The lowercase map theme id."
+#, kde-format
 msgid "The marble theme id"
-msgstr "Küçük harfle harita tema kimliği."
+msgstr "Bilye teması kimliği"
 
 #: CurrentPosition.qml:54
 #, kde-format
@@ -121,12 +119,10 @@ msgid "Layer Options"
 msgstr "Katman Seçenekleri"
 
 #: MainScreen.qml:156
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "Layer Options"
+#, kde-format
 msgctxt "@action:button"
 msgid "Theme Options"
-msgstr "Katman Seçenekleri"
+msgstr "Tema Seçenekleri"
 
 #: MainScreen.qml:471
 #, kde-format
@@ -277,12 +273,10 @@ msgid "Download Maps via WLAN only"
 msgstr "Haritaları yalnızca Wi-Fi ile indir"
 
 #: ThemeConfigPage.qml:19
-#, fuzzy, kde-format
-#| msgctxt "CompassConfigWidget|"
-#| msgid "Theme"
+#, kde-format
 msgctxt "@title:window"
 msgid "Themes"
-msgstr "Tema"
+msgstr "Temalar"
 
 #~ msgctxt "DGML|"
 #~ msgid "Moon"

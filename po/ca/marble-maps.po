@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-09-29 00:37+0000\n"
-"PO-Revision-Date: 2024-09-25 09:12+0200\n"
+"PO-Revision-Date: 2024-09-29 08:54+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
@@ -34,7 +34,7 @@ msgstr "Aquí apareixeran les vostres adreces d'interès."
 #: config.kcfg:14
 #, kde-format
 msgid "The marble theme id"
-msgstr ""
+msgstr "L'ID del tema del Marble"
 
 #: CurrentPosition.qml:54
 #, kde-format
@@ -114,12 +114,10 @@ msgid "Layer Options"
 msgstr "Opcions de la capa"
 
 #: MainScreen.qml:156
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "Layer Options"
+#, kde-format
 msgctxt "@action:button"
 msgid "Theme Options"
-msgstr "Opcions de la capa"
+msgstr "Opcions del tema"
 
 #: MainScreen.qml:471
 #, kde-format
@@ -273,4 +271,4 @@ msgstr "Descarrega mapes només via WLAN"
 #, kde-format
 msgctxt "@title:window"
 msgid "Themes"
-msgstr ""
+msgstr "Temes"

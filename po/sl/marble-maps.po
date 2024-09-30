@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-09-29 00:37+0000\n"
-"PO-Revision-Date: 2024-09-25 07:36+0200\n"
+"PO-Revision-Date: 2024-09-29 08:13+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <kde-i18n-doc@kde.org>\n"
 "Language: sl\n"
@@ -34,7 +34,7 @@ msgstr "Vaši zaznamki se bodo pojavili tukaj."
 #: config.kcfg:14
 #, kde-format
 msgid "The marble theme id"
-msgstr ""
+msgstr "Določilnik teme marble"
 
 #: CurrentPosition.qml:54
 #, kde-format
@@ -114,12 +114,10 @@ msgid "Layer Options"
 msgstr "Možnosti plasti"
 
 #: MainScreen.qml:156
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "Layer Options"
+#, kde-format
 msgctxt "@action:button"
 msgid "Theme Options"
-msgstr "Možnosti plasti"
+msgstr "Možnosti teme"
 
 #: MainScreen.qml:471
 #, kde-format
@@ -273,4 +271,4 @@ msgstr "Prenesi zemljevide samo prek omrežja WLAN"
 #, kde-format
 msgctxt "@title:window"
 msgid "Themes"
-msgstr ""
+msgstr "Teme"

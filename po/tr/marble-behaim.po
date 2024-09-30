@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-27 00:37+0000\n"
+"POT-Creation-Date: 2024-09-30 00:36+0000\n"
 "PO-Revision-Date: 2024-09-27 18:00+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -136,68 +136,68 @@ msgctxt "@option:check"
 msgid "Show Behaim places"
 msgstr "Behaim yerlerini göster"
 
-#: MainScreen.qml:95
+#: MainScreen.qml:93
 #, kde-format
 msgctxt "@option:check"
 msgid "Show texts and illustrations"
 msgstr "Metinleri ve illüstrasyonları göster"
 
-#: MainScreen.qml:102
+#: MainScreen.qml:98
 #, kde-format
 msgctxt "@option:check"
 msgid "Show the accurate coastline"
 msgstr "Doğru kıyı şeridini göster"
 
-#: MainScreen.qml:107
+#: MainScreen.qml:103
 #, kde-format
 msgctxt "@title:group"
 msgid "Globe Variant"
 msgstr "Küre Varyantı"
 
-#: MainScreen.qml:114
+#: MainScreen.qml:110
 #, kde-format
 msgctxt "@option:radio"
 msgid "Original (1492)"
 msgstr "Özgün (1492)"
 
-#: MainScreen.qml:116
+#: MainScreen.qml:112
 #, kde-format
 msgid "Digital imagery taken directly from the original Behaim globe."
 msgstr "Doğrudan özgün Behaim küresinden alınan sayısal görüntüleme."
 
-#: MainScreen.qml:127
+#: MainScreen.qml:123
 #, kde-format
 msgctxt "@option:radio"
 msgid "Ghillany (1853)"
 msgstr "Ghillany (1853)"
 
-#: MainScreen.qml:128
+#: MainScreen.qml:124
 #, kde-format
 msgid "A (rough) facsimile created by Friedrich Wilhelm Ghillany in 1853."
 msgstr ""
 "1853 yılında Friedrich Wilhelm Ghillany tarafından oluşturulmuş (kaba) bir "
 "faksimile."
 
-#: MainScreen.qml:139
+#: MainScreen.qml:135
 #, kde-format
 msgctxt "@option:radio"
 msgid "Ravenstein (1908)"
 msgstr "Ravenstein (1908)"
 
-#: MainScreen.qml:140
+#: MainScreen.qml:136
 #, kde-format
 msgid "A (rough) facsimile created by Ernest George Ravenstein in 1908."
 msgstr ""
 "1908 yılında Ernest George Ravenstein tarafından oluşturulmuş (kaba) bir "
 "faksimile."
 
-#: MainScreen.qml:155
+#: MainScreen.qml:151
 #, kde-format
 msgctxt "@title:window"
 msgid "Behaim Globe"
 msgstr "Behaim Küresi"
 
-#: MainScreen.qml:163
+#: MainScreen.qml:159
 #, kde-format
 msgctxt "@action:button"
 msgid "Information"

@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: marble_qt\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-09-29 00:37+0000\n"
-"PO-Revision-Date: 2024-09-26 09:17+0200\n"
+"PO-Revision-Date: 2024-09-29 14:44+0200\n"
 "Last-Translator: Mincho Kondarev <mkondarev@yahoo.de>\n"
 "Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
 "Language: bg\n"
@@ -35,7 +35,7 @@ msgstr "Вашите отметки ще се появят тук."
 #: config.kcfg:14
 #, kde-format
 msgid "The marble theme id"
-msgstr ""
+msgstr "Идент. номер на тема на marble"
 
 #: CurrentPosition.qml:54
 #, kde-format
@@ -115,12 +115,10 @@ msgid "Layer Options"
 msgstr "Параметри на слоя"
 
 #: MainScreen.qml:156
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "Layer Options"
+#, kde-format
 msgctxt "@action:button"
 msgid "Theme Options"
-msgstr "Параметри на слоя"
+msgstr "Параметри на темата"
 
 #: MainScreen.qml:471
 #, kde-format
@@ -274,4 +272,4 @@ msgstr "Изтегляне на карти само през WLAN"
 #, kde-format
 msgctxt "@title:window"
 msgid "Themes"
-msgstr ""
+msgstr "Теми"

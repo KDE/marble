@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: marble\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-09-29 00:37+0000\n"
-"PO-Revision-Date: 2024-09-26 19:47+0300\n"
+"PO-Revision-Date: 2024-09-29 09:10+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -33,7 +33,7 @@ msgstr "Тут буде показано ваші закладки."
 #: config.kcfg:14
 #, kde-format
 msgid "The marble theme id"
-msgstr ""
+msgstr "Ідентифікатор теми Marble"
 
 #: CurrentPosition.qml:54
 #, kde-format
@@ -113,12 +113,10 @@ msgid "Layer Options"
 msgstr "Параметри шарів"
 
 #: MainScreen.qml:156
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "Layer Options"
+#, kde-format
 msgctxt "@action:button"
 msgid "Theme Options"
-msgstr "Параметри шарів"
+msgstr "Параметри теми"
 
 #: MainScreen.qml:471
 #, kde-format
@@ -272,4 +270,4 @@ msgstr "Отримувати карти лише за допомогою WLAN"
 #, kde-format
 msgctxt "@title:window"
 msgid "Themes"
-msgstr ""
+msgstr "Теми"

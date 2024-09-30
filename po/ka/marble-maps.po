@@ -27,11 +27,9 @@ msgstr "თქვენი სანიშნები აქ გამოჩნ
 
 #. i18n: ectx: label, entry (MapThemeId), group (General)
 #: config.kcfg:14
-#, fuzzy, kde-format
-#| msgctxt "MapWizard|"
-#| msgid "The lowercase map theme id."
+#, kde-format
 msgid "The marble theme id"
-msgstr "რუკის თემის id პატარა ასოებით."
+msgstr "Marble-ის თემის id"
 
 #: CurrentPosition.qml:54
 #, kde-format
@@ -111,12 +109,10 @@ msgid "Layer Options"
 msgstr "ფენის პარამეტრები"
 
 #: MainScreen.qml:156
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "Layer Options"
+#, kde-format
 msgctxt "@action:button"
 msgid "Theme Options"
-msgstr "ფენის პარამეტრები"
+msgstr "თემის მორგება"
 
 #: MainScreen.qml:471
 #, kde-format
@@ -267,12 +263,10 @@ msgid "Download Maps via WLAN only"
 msgstr "რუკების, მხოლოდ, WLAN-ით გადმოწერა"
 
 #: ThemeConfigPage.qml:19
-#, fuzzy, kde-format
-#| msgctxt "CompassConfigWidget|"
-#| msgid "Theme"
+#, kde-format
 msgctxt "@title:window"
 msgid "Themes"
-msgstr "თემა"
+msgstr "თემები"
 
 #~ msgctxt "DGML|"
 #~ msgid "Moon"

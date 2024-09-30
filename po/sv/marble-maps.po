@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: marble_qt\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-09-29 00:37+0000\n"
-"PO-Revision-Date: 2024-09-25 17:31+0200\n"
+"PO-Revision-Date: 2024-09-29 08:18+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@gmail.com>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
 "Language: sv\n"
@@ -34,11 +34,9 @@ msgstr "Dina bokmärken visas här."
 
 #. i18n: ectx: label, entry (MapThemeId), group (General)
 #: config.kcfg:14
-#, fuzzy, kde-format
-#| msgctxt "MapWizard|"
-#| msgid "The lowercase map theme id."
+#, kde-format
 msgid "The marble theme id"
-msgstr "Identifieraren för kartans tema med små bokstäver."
+msgstr "Marbles temaidentifikation"
 
 #: CurrentPosition.qml:54
 #, kde-format
@@ -118,12 +116,10 @@ msgid "Layer Options"
 msgstr "Lagerinställningar"
 
 #: MainScreen.qml:156
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "Layer Options"
+#, kde-format
 msgctxt "@action:button"
 msgid "Theme Options"
-msgstr "Lagerinställningar"
+msgstr "Temainställningar"
 
 #: MainScreen.qml:471
 #, kde-format
@@ -274,12 +270,10 @@ msgid "Download Maps via WLAN only"
 msgstr "Ladda bara ner kartor via WLAN"
 
 #: ThemeConfigPage.qml:19
-#, fuzzy, kde-format
-#| msgctxt "CompassConfigWidget|"
-#| msgid "Theme"
+#, kde-format
 msgctxt "@title:window"
 msgid "Themes"
-msgstr "Tema"
+msgstr "Teman"
 
 #~ msgctxt "DGML|"
 #~ msgid "Moon"
