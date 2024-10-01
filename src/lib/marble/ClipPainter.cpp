@@ -317,13 +317,13 @@ void ClipPainterPrivate::labelPosition(const QPolygonF &polygon, QList<QPointF> 
 {
     if (labelPositionFlags.testFlag(LineCenter)) {
         // The Label at the center of the polyline:
-        if (polygon.size() > 0) {
+        if (!polygon.isEmpty()) {
             const int labelPosition = polygon.size() / 2; // implied: 0 <= labelPosition < polygon.size()
             labelNodes << polygon.at(labelPosition);
         }
     }
 
-    if (polygon.size() > 0 && labelPositionFlags.testFlag(LineStart)) {
+    if (!polygon.isEmpty() && labelPositionFlags.testFlag(LineStart)) {
         if (pointAllowsLabel(polygon.first())) {
             labelNodes << polygon.first();
         }

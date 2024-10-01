@@ -531,8 +531,8 @@ void RoutingManager::setGuidanceModeEnabled(bool enabled)
 
     PositionProviderPlugin *positionProvider = d->m_positionTracking->positionProviderPlugin();
     if (!positionProvider && enabled) {
-        QList<const PositionProviderPlugin *> plugins = d->m_pluginManager->positionProviderPlugins();
-        if (plugins.size() > 0) {
+        const QList<const PositionProviderPlugin *> plugins = d->m_pluginManager->positionProviderPlugins();
+        if (!plugins.isEmpty()) {
             positionProvider = plugins.first()->newInstance();
         }
         d->m_positionTracking->setPositionProviderPlugin(positionProvider);

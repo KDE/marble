@@ -95,7 +95,7 @@ public:
 
     static void initializeIcons()
     {
-        if (s_iconPath.size() == 0) {
+        if (s_iconPath.isEmpty()) {
             // Clouds
             s_iconPath.insert(WeatherData::ConditionNotAvailable, MarbleDirs::path(QStringLiteral("weather/weather-none-available.png")));
             s_iconPath.insert(WeatherData::ClearDay, MarbleDirs::path(QStringLiteral("weather/weather-clear.png")));

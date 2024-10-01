@@ -176,8 +176,8 @@ QString ControlView::defaultMapThemeId() const
         }
     }
 
-    if (installedThemes.size()) {
-        return installedThemes.first();
+    if (!installedThemes.isEmpty()) {
+        return installedThemes.constFirst();
     }
 
     return QString();

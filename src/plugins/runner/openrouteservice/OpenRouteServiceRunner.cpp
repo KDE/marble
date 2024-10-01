@@ -218,7 +218,7 @@ GeoDataDocument *OpenRouteServiceRunner::parse(const QByteArray &content) const
 
     GeoDataLineString *routeWaypoints = new GeoDataLineString;
     QDomNodeList geometry = root.elementsByTagName(QStringLiteral("xls:RouteGeometry"));
-    if (geometry.size() > 0) {
+    if (!geometry.isEmpty()) {
         QDomNodeList waypoints = geometry.item(0).toElement().elementsByTagName("gml:pos");
         for (int i = 0; i < waypoints.length(); ++i) {
             QDomNode node = waypoints.item(i);
@@ -242,7 +242,7 @@ GeoDataDocument *OpenRouteServiceRunner::parse(const QByteArray &content) const
     result->append(routePlacemark);
 
     QDomNodeList instructionList = root.elementsByTagName(QStringLiteral("xls:RouteInstructionsList"));
-    if (instructionList.size() > 0) {
+    if (!instructionList.isEmpty()) {
         QDomNodeList instructions = instructionList.item(0).toElement().elementsByTagName(QStringLiteral("xls:RouteInstruction"));
         for (int i = 0; i < instructions.length(); ++i) {
             QDomElement node = instructions.item(i).toElement();
@@ -250,7 +250,7 @@ GeoDataDocument *OpenRouteServiceRunner::parse(const QByteArray &content) const
             QDomNodeList textNodes = node.elementsByTagName(QStringLiteral("xls:Instruction"));
             QDomNodeList positions = node.elementsByTagName(QStringLiteral("gml:pos"));
 
-            if (textNodes.size() > 0 && positions.size() > 0) {
+            if (!textNodes.isEmpty() && !positions.isEmpty()) {
                 const QStringList content = positions.at(0).toElement().text().split(QLatin1Char(' '));
                 if (content.length() == 2) {
                     GeoDataLineString *lineString = new GeoDataLineString;
