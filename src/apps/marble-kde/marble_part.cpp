@@ -126,7 +126,7 @@ MarblePart::MarblePart(QWidget *parentWidget, QObject *parent, const KPluginMeta
     , m_distanceLabel(nullptr)
 {
     // only set marble data path when a path was given
-    if (arguments.count() != 0 && !arguments.first().toString().isEmpty())
+    if (!arguments.isEmpty() && !arguments.first().toString().isEmpty())
         MarbleDirs::setMarbleDataPath(arguments.first().toString());
 
     // Setting measure system to provide nice standards for all unit questions.
@@ -1606,7 +1606,7 @@ void MarblePart::lookAtBookmark(QAction *action)
 
 void MarblePart::initializeCustomTimezone()
 {
-    if (m_timezone.count() == 0) {
+    if (m_timezone.isEmpty()) {
         m_timezone.insert(0, 0);
         m_timezone.insert(1, 3600);
         m_timezone.insert(2, 7200);

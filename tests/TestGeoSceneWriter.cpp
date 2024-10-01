@@ -67,7 +67,7 @@ void TestGeoSceneWriter::initTestCase()
         dataDir.setNameFilters(dgmlFilters);
 
         // check there are dgml files in the data dir
-        if (dataDir.count() == 0) {
+        if (dataDir.isEmpty()) {
             continue;
         }
 

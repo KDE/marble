@@ -614,7 +614,7 @@ GeoDataFolder *BookmarkSyncManager::Private::createFolders(GeoDataContainer *con
             container->append(folder);
         }
 
-        if (pathList.count() == 0) {
+        if (pathList.isEmpty()) {
             return folder;
         }
     }

@@ -557,7 +557,7 @@ int QtMarbleConfigDialog::chosenTimezone() const
 
 void QtMarbleConfigDialog::initializeCustomTimezone()
 {
-    if (d->m_timezone.count() == 0) {
+    if (d->m_timezone.isEmpty()) {
         d->m_timezone.insert(0, 0);
         d->m_timezone.insert(1, 3600);
         d->m_timezone.insert(2, 7200);
