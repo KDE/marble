@@ -41,7 +41,7 @@ GeoNode *DgmlCenterTagHandler::parse(GeoParser &parser) const
     if (parentItem.represents(dgmlTag_Map))
         parentItem.nodeAs<GeoSceneMap>()->setCenter(parser.readElementText().trimmed());
 
-    return 0;
+    return nullptr;
 }
 
 }
