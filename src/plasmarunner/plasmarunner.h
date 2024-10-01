@@ -17,7 +17,7 @@ class PlasmaRunner : public KRunner::AbstractRunner
     Q_OBJECT
 
 public:
-    PlasmaRunner(QObject *parent, const KPluginMetaData &pluginMetaData);
+    explicit PlasmaRunner(QObject *parent, const KPluginMetaData &pluginMetaData);
 
 public: // Plasma::AbstractRunner API
     void match(KRunner::RunnerContext &context) override;

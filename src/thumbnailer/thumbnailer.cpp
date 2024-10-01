@@ -32,7 +32,7 @@ GeoDataThumbnailer::GeoDataThumbnailer()
 
     m_outtimer.setInterval(timeoutTime);
     m_outtimer.setSingleShot(true);
-    connect(&m_outtimer, SIGNAL(timeout()), &m_eventLoop, SLOT(quit()));
+    connect(&m_outtimer, &QTimer::timeout, &m_eventLoop, &QEventLoop::quit);
 
     MarbleModel *const model = m_marbleMap.model();
     connect(model->treeModel(), &GeoDataTreeModel::added, this, &GeoDataThumbnailer::onGeoDataObjectAdded);

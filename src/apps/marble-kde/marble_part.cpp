@@ -251,7 +251,7 @@ bool MarblePart::openFile()
     filters.prepend(allFileTypes);
     const QString filter = filters.join(";;");
 
-    QStringList fileNames = QFileDialog::getOpenFileNames(widget(), i18nc("@title:window", "Open File"), m_lastFileOpenPath, filter);
+    const QStringList fileNames = QFileDialog::getOpenFileNames(widget(), i18nc("@title:window", "Open File"), m_lastFileOpenPath, filter);
 
     if (!fileNames.isEmpty()) {
         const QString firstFile = fileNames.first();
@@ -267,7 +267,7 @@ bool MarblePart::openFile()
 
 void MarblePart::exportMapScreenShot()
 {
-    QString fileName = QFileDialog::getSaveFileName(widget(), i18nc("@title:window", "Export Map"), QDir::homePath(), i18n("Images *.jpg *.png"));
+    const QString fileName = QFileDialog::getSaveFileName(widget(), i18nc("@title:window", "Export Map"), QDir::homePath(), i18n("Images *.jpg *.png"));
 
     if (!fileName.isEmpty()) {
         // Take the case into account where no file format is indicated
@@ -345,10 +345,10 @@ void MarblePart::controlSun()
 {
     if (!m_sunControlDialog) {
         m_sunControlDialog = new SunControlWidget(m_controlView->marbleWidget(), m_controlView);
-        connect(m_sunControlDialog, SIGNAL(showSun(bool)), this, SLOT(showSun(bool)));
-        connect(m_sunControlDialog, SIGNAL(showSun(bool)), m_showShadow, SLOT(setChecked(bool)));
-        connect(m_sunControlDialog, SIGNAL(isLockedToSubSolarPoint(bool)), m_lockToSubSolarPoint, SLOT(setChecked(bool)));
-        connect(m_sunControlDialog, SIGNAL(isSubSolarPointIconVisible(bool)), m_setSubSolarPointIconVisible, SLOT(setChecked(bool)));
+        connect(m_sunControlDialog, &SunControlWidget::showSun, this, &MarblePart::showSun);
+        connect(m_sunControlDialog, &SunControlWidget::showSun, m_showShadow, &QAction::setChecked);
+        connect(m_sunControlDialog, &SunControlWidget::isLockedToSubSolarPoint, m_lockToSubSolarPoint, &QAction::setChecked);
+        connect(m_sunControlDialog, &SunControlWidget::isSubSolarPointIconVisible, m_setSubSolarPointIconVisible, &QAction::setChecked);
     }
 
     m_sunControlDialog->show();
@@ -705,7 +705,7 @@ void MarblePart::setupActions()
     m_workOfflineAction->setIcon(QIcon::fromTheme("user-offline"));
     m_workOfflineAction->setCheckable(true);
     m_workOfflineAction->setChecked(false);
-    connect(m_workOfflineAction, SIGNAL(triggered(bool)), this, SLOT(workOffline(bool)));
+    connect(m_workOfflineAction, &QAction::triggered, this, &MarblePart::workOffline);
 
     // Action: Copy Map to the Clipboard
     m_copyMapAction = KStandardAction::copy(this, SLOT(copyMap()), actionCollection());
@@ -716,7 +716,7 @@ void MarblePart::setupActions()
     actionCollection()->addAction("edit_copy_coordinates", m_copyCoordinatesAction);
     m_copyCoordinatesAction->setText(i18nc("Action for copying the coordinates to the clipboard", "C&opy Coordinates"));
     m_copyCoordinatesAction->setIcon(QIcon(QStringLiteral(":/icons/copy-coordinates.png")));
-    connect(m_copyCoordinatesAction, SIGNAL(triggered(bool)), this, SLOT(copyCoordinates()));
+    connect(m_copyCoordinatesAction, &QAction::triggered, this, &MarblePart::copyCoordinates);
 
     // Action: Open a Gpx or a Kml File
     m_openAct = KStandardAction::open(this, SLOT(openFile()), actionCollection());
@@ -762,13 +762,13 @@ void MarblePart::setupActions()
     m_showCloudsAction->setChecked(true);
     m_showCloudsAction->setIcon(QIcon(QStringLiteral(":/icons/clouds.png")));
     m_showCloudsAction->setText(i18nc("Action for toggling clouds", "&Clouds"));
-    connect(m_showCloudsAction, SIGNAL(triggered(bool)), this, SLOT(setShowClouds(bool)));
+    connect(m_showCloudsAction, &QAction::triggered, this, &MarblePart::setShowClouds);
 
     // Action: Show Sunshade options
     m_controlSunAction = new QAction(this);
     actionCollection()->addAction("control_sun", m_controlSunAction);
     m_controlSunAction->setText(i18nc("Action for sun control dialog", "S&un Control..."));
-    connect(m_controlSunAction, SIGNAL(triggered(bool)), this, SLOT(controlSun()));
+    connect(m_controlSunAction, &QAction::triggered, this, &MarblePart::controlSun);
 
     KStandardAction::redisplay(m_controlView->marbleWidget(), SLOT(reloadMap()), actionCollection());
 
@@ -777,7 +777,7 @@ void MarblePart::setupActions()
     actionCollection()->addAction("control_time", m_controlTimeAction);
     m_controlTimeAction->setIcon(QIcon(QStringLiteral(":/icons/clock.png")));
     m_controlTimeAction->setText(i18nc("Action for time control dialog", "&Time Control..."));
-    connect(m_controlTimeAction, SIGNAL(triggered(bool)), this, SLOT(controlTime()));
+    connect(m_controlTimeAction, &QAction::triggered, this, &MarblePart::controlTime);
 
     // Action: Lock float items
     m_lockFloatItemsAct = new QAction(this);
@@ -786,7 +786,7 @@ void MarblePart::setupActions()
     m_lockFloatItemsAct->setIcon(QIcon(QStringLiteral(":/icons/unlock.png")));
     m_lockFloatItemsAct->setCheckable(true);
     m_lockFloatItemsAct->setChecked(false);
-    connect(m_lockFloatItemsAct, SIGNAL(triggered(bool)), this, SLOT(lockFloatItemPosition(bool)));
+    connect(m_lockFloatItemsAct, &QAction::triggered, this, &MarblePart::lockFloatItemPosition);
 
     KStandardAction::preferences(this, SLOT(editSettings()), actionCollection());
 
@@ -826,7 +826,7 @@ void MarblePart::setupActions()
     m_addBookmarkAction->setText(i18nc("Add Bookmark", "Add &Bookmark..."));
     m_addBookmarkAction->setIcon(QIcon(QStringLiteral(":/icons/bookmark-new.png")));
     actionCollection()->setDefaultShortcut(m_addBookmarkAction, Qt::CTRL | Qt::Key_B);
-    connect(m_addBookmarkAction, SIGNAL(triggered()), this, SLOT(openEditBookmarkDialog()));
+    connect(m_addBookmarkAction, &QAction::triggered, this, &MarblePart::openEditBookmarkDialog);
 
     m_toggleBookmarkDisplayAction = new QAction(this);
     actionCollection()->addAction("show_bookmarks", m_toggleBookmarkDisplayAction);
@@ -857,21 +857,21 @@ void MarblePart::setupActions()
     m_externalMapEditorAction->setIcon(QIcon(QStringLiteral(":/icons/edit-map.png")));
     actionCollection()->setDefaultShortcut(m_externalMapEditorAction, Qt::CTRL | Qt::Key_E);
     connect(m_externalMapEditorAction, SIGNAL(triggered()), m_controlView, SLOT(launchExternalMapEditor()));
-    connect(m_controlView->marbleWidget(), SIGNAL(themeChanged(QString)), this, SLOT(updateMapEditButtonVisibility(QString)));
+    connect(m_controlView->marbleWidget(), &MarbleWidget::themeChanged, this, &MarblePart::updateMapEditButtonVisibility);
 
     m_recordMovieAction = new QAction(i18n("&Record Movie"), this);
     actionCollection()->addAction("record_movie", m_recordMovieAction);
     m_recordMovieAction->setStatusTip(i18n("Records a movie of the globe"));
     actionCollection()->setDefaultShortcut(m_recordMovieAction, Qt::CTRL | Qt::SHIFT | Qt::Key_R);
     m_recordMovieAction->setIcon(QIcon(QStringLiteral(":/icons/animator.png")));
-    connect(m_recordMovieAction, SIGNAL(triggered()), this, SLOT(showMovieCaptureDialog()));
+    connect(m_recordMovieAction, &QAction::triggered, this, &MarblePart::showMovieCaptureDialog);
 
     m_stopRecordingAction = new QAction(i18n("&Stop Recording"), this);
     actionCollection()->addAction("stop_recording", m_stopRecordingAction);
     m_stopRecordingAction->setStatusTip(i18n("Stop recording a movie of the globe"));
     actionCollection()->setDefaultShortcut(m_recordMovieAction, Qt::CTRL | Qt::SHIFT | Qt::Key_S);
     m_stopRecordingAction->setEnabled(false);
-    connect(m_stopRecordingAction, SIGNAL(triggered()), this, SLOT(stopRecording()));
+    connect(m_stopRecordingAction, &QAction::triggered, this, &MarblePart::stopRecording);
 }
 
 void MarblePart::createFolderList()
