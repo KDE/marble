@@ -41,7 +41,7 @@ include(ECMEnableSanitizers)
 include(ECMCoverageOption)
 include(ECMQtDeclareLoggingCategory)
 include(ECMQmlModule)
-
+include(ECMDeprecationSettings)
 include(MarbleMacros)
 
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
@@ -77,6 +77,9 @@ endif()
 option(BUILD_MARBLE_APPS "Build the main Marble applications" ON)
 add_feature_info(MarbleApps BUILD_MARBLE_APPS "Build the main Marble applications")
 
+ecm_set_disabled_deprecation_versions(QT 5.15
+    KF 6.7.0
+)
 
 find_package(Qt6 ${QT_MIN_VERSION} REQUIRED
     COMPONENTS
@@ -231,7 +234,6 @@ add_definitions(
     -DQT_NO_URL_CAST_FROM_STRING
     -DQT_NO_CAST_TO_ASCII
     -DQT_NO_CAST_FROM_BYTEARRAY
-    -DQT_DISABLE_DEPRECATED_BEFORE=0x050700
 )
 
 if (NOT WIN32)
