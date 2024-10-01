@@ -76,7 +76,7 @@ endif()
 
 option(BUILD_MARBLE_APPS "Build the main Marble applications" ON)
 add_feature_info(MarbleApps BUILD_MARBLE_APPS "Build the main Marble applications")
-
+add_definitions(-DQT_NO_CONTEXTLESS_CONNECT)
 ecm_set_disabled_deprecation_versions(QT 5.15
     KF 6.7.0
 )
