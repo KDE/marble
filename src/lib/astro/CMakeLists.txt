@@ -15,6 +15,13 @@ SET(astrolib_SRCS
   eclsolar.cpp
   planetarySats.cpp
   solarsystem.cpp
+
+  astrolib.h
+  astr2lib.h
+  attlib.h
+  eclsolar.h
+  planetarySats.h
+  solarsystem.h
 )
 
 ecm_setup_version(${RELEASE_SERVICE_VERSION}
