@@ -133,7 +133,7 @@ O5mreaderRet o5mreader_open(O5mreader **ppReader,FILE* f) {
 	o5mreader_reset(*ppReader);
 	
         (*ppReader)->strPairTable = (char**) malloc(STR_PAIR_TABLE_SIZE*sizeof(char*));
-	if ( (*ppReader)->strPairTable == 0 ) {
+    if ( (*ppReader)->strPairTable == nullptr ) {
 		o5mreader_setError(*ppReader,
 			O5MREADER_ERR_CODE_MEMORY_ERROR,
 			NULL
@@ -142,7 +142,7 @@ O5mreaderRet o5mreader_open(O5mreader **ppReader,FILE* f) {
 	}
 	for ( i = 0; i < STR_PAIR_TABLE_SIZE; ++i ) {
                 (*ppReader)->strPairTable[i] = (char*) malloc(sizeof(char)*STR_PAIR_STRING_SIZE);
-		if ( (*ppReader)->strPairTable[i] == 0 ) {
+        if ( (*ppReader)->strPairTable[i] == nullptr ) {
 			o5mreader_setError(*ppReader,
 				O5MREADER_ERR_CODE_MEMORY_ERROR,
 				NULL
