@@ -50,7 +50,7 @@ private:
     NodesBoundary m_boundary;
 
     GeoDataLinearRing &outerRing;
-    QVector<GeoDataLinearRing> &innerRings;
+    QList<GeoDataLinearRing> &innerRings;
 
     GeoDataCoordinates m_firstInitialCoords;
     GeoDataCoordinates m_secondInitialCoords;

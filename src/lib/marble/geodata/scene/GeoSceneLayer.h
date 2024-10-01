@@ -7,8 +7,8 @@
 #ifndef MARBLE_GEOSCENELAYER_H
 #define MARBLE_GEOSCENELAYER_H
 
+#include <QList>
 #include <QString>
-#include <QVector>
 
 #include <geodata_export.h>
 
@@ -45,7 +45,7 @@ public:
     const GeoSceneAbstractDataset *groundDataset() const;
     GeoSceneAbstractDataset *groundDataset();
 
-    QVector<GeoSceneAbstractDataset *> datasets() const;
+    QList<GeoSceneAbstractDataset *> datasets() const;
 
     QString name() const;
 

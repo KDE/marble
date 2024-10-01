@@ -14,7 +14,7 @@
  * @author Torsten Rahn <rahn@kde.org>
  */
 
-#include <QVector>
+#include <QList>
 
 #include "GeoDataCoordinates.h"
 #include "marble_export.h"
@@ -200,7 +200,7 @@ public:
                                    const QSizeF &size,
                                    bool &globeHidesPoint) const = 0;
 
-    virtual bool screenCoordinates(const GeoDataLineString &lineString, const ViewportParams *viewport, QVector<QPolygonF *> &polygons) const = 0;
+    virtual bool screenCoordinates(const GeoDataLineString &lineString, const ViewportParams *viewport, QList<QPolygonF *> &polygons) const = 0;
 
     /**
      * @brief Get the earth coordinates corresponding to a pixel in the map.

@@ -7,10 +7,10 @@
 #include "GeoDataPlacemark.h"
 #include "MarbleDebug.h"
 
+#include <QList>
 #include <QNetworkReply>
 #include <QTimer>
 #include <QUrl>
-#include <QVector>
 
 namespace Marble
 {

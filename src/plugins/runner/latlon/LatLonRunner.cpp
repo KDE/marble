@@ -8,7 +8,7 @@
 #include "GeoDataPlacemark.h"
 
 #include "MarbleDebug.h"
-#include <QVector>
+#include <QList>
 
 #include <QtDebug>
 

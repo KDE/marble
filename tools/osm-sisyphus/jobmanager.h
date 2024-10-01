@@ -9,8 +9,8 @@
 #include "jobqueue.h"
 #include "region.h"
 
+#include <QList>
 #include <QObject>
-#include <QVector>
 
 struct PendingJob {
     Region m_region;
@@ -44,7 +44,7 @@ private:
 
     QFileInfo m_monavSettings;
 
-    QVector<PendingJob> m_pendingJobs;
+    QList<PendingJob> m_pendingJobs;
 
     QString m_resumeId;
 };

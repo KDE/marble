@@ -50,7 +50,7 @@ public:
                                const GeoDataCoordinates &bCoords,
                                qreal bx,
                                qreal by,
-                               QVector<QPolygonF *> &polygons,
+                               QList<QPolygonF *> &polygons,
                                const ViewportParams *viewport,
                                TessellationFlags f = TessellationFlags(),
                                bool allowLatePolygonCut = false) const;
@@ -58,14 +58,14 @@ public:
     void processTessellation(const GeoDataCoordinates &previousCoords,
                              const GeoDataCoordinates &currentCoords,
                              int count,
-                             QVector<QPolygonF *> &polygons,
+                             QList<QPolygonF *> &polygons,
                              const ViewportParams *viewport,
                              TessellationFlags f = TessellationFlags(),
                              bool allowLatePolygonCut = false) const;
 
-    void crossHorizon(const GeoDataCoordinates &bCoord, QVector<QPolygonF *> &polygons, const ViewportParams *viewport, bool allowLatePolygonCut = false) const;
+    void crossHorizon(const GeoDataCoordinates &bCoord, QList<QPolygonF *> &polygons, const ViewportParams *viewport, bool allowLatePolygonCut = false) const;
 
-    virtual bool lineStringToPolygon(const GeoDataLineString &lineString, const ViewportParams *viewport, QVector<QPolygonF *> &polygons) const;
+    virtual bool lineStringToPolygon(const GeoDataLineString &lineString, const ViewportParams *viewport, QList<QPolygonF *> &polygons) const;
 
     void
     horizonToPolygon(const ViewportParams *viewport, const GeoDataCoordinates &disappearCoords, const GeoDataCoordinates &reappearCoords, QPolygonF *) const;

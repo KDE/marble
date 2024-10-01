@@ -3,8 +3,8 @@
 #include "TileCoordsPyramid.h"
 
 #include <MarbleDebug.h>
+#include <QList>
 #include <QRect>
-#include <QVector>
 
 #include <algorithm>
 

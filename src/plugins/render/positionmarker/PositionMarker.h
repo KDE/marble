@@ -10,9 +10,9 @@
 
 #include <QColor>
 #include <QHash>
+#include <QList>
 #include <QPixmap>
 #include <QPolygon>
-#include <QVector>
 
 #include "DialogConfigurationInterface.h"
 #include "GeoDataCoordinates.h"
@@ -56,7 +56,7 @@ public:
 
     QString copyrightYears() const override;
 
-    QVector<PluginAuthor> pluginAuthors() const override;
+    QList<PluginAuthor> pluginAuthors() const override;
 
     QIcon icon() const override;
 
@@ -120,7 +120,7 @@ private:
     QColor m_accuracyColor;
     QColor m_trailColor;
     qreal m_heading;
-    QVector<GeoDataCoordinates> m_trail;
+    QList<GeoDataCoordinates> m_trail;
     static const int sm_numTrailPoints = 6;
     bool m_showTrail;
 

@@ -45,7 +45,7 @@ public:
 private:
     bool isTunnel(const OsmPlacemarkData &osmData) const;
 
-    QVector<PlacemarkPtr> m_wayList;
+    QList<PlacemarkPtr> m_wayList;
     qint64 m_first;
     qint64 m_last;
     GeoDataPlacemark::GeoDataVisualCategory m_visualCategory;

@@ -12,8 +12,8 @@
 
 #include "marble_export.h"
 
+#include <QList>
 #include <QObject>
-#include <QVector>
 
 class QAbstractItemModel;
 class QString;
@@ -47,7 +47,7 @@ public:
      * @see searchFinished signal indicates all runners are finished.
      */
     void findPlacemarks(const QString &searchTerm, const GeoDataLatLonBox &preferred = GeoDataLatLonBox());
-    QVector<GeoDataPlacemark *> searchPlacemarks(const QString &searchTerm, const GeoDataLatLonBox &preferred = GeoDataLatLonBox(), int timeout = 30000);
+    QList<GeoDataPlacemark *> searchPlacemarks(const QString &searchTerm, const GeoDataLatLonBox &preferred = GeoDataLatLonBox(), int timeout = 30000);
 
 Q_SIGNALS:
     /**
@@ -55,7 +55,7 @@ Q_SIGNALS:
      * @todo FIXME: this sounds like a duplication of QAbstractItemModel signals
      */
     void searchResultChanged(QAbstractItemModel *model);
-    void searchResultChanged(const QVector<GeoDataPlacemark *> &result);
+    void searchResultChanged(const QList<GeoDataPlacemark *> &result);
 
     /**
      * The search request for the given search term has finished, i.e. all
@@ -70,7 +70,7 @@ Q_SIGNALS:
     void placemarkSearchFinished();
 
 private:
-    Q_PRIVATE_SLOT(d, void addSearchResult(const QVector<GeoDataPlacemark *> &result))
+    Q_PRIVATE_SLOT(d, void addSearchResult(const QList<GeoDataPlacemark *> &result))
     Q_PRIVATE_SLOT(d, void cleanupSearchTask(SearchTask *task))
 
     class Private;

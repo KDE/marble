@@ -27,7 +27,7 @@ public Q_SLOTS:
     int addNode(const GeoDataCoordinates &node);
 
 private:
-    QVector<GeoDataCoordinates> m_nodes;
+    QList<GeoDataCoordinates> m_nodes;
 };
 
 }

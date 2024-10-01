@@ -41,7 +41,7 @@ public:
 
 private:
     GeoDataDocument *clipTo(const GeoDataLatLonBox &box, int zoomLevel);
-    QVector<GeoDataPlacemark *> potentialIntersections(const GeoDataLatLonBox &box) const;
+    QList<GeoDataPlacemark *> potentialIntersections(const GeoDataLatLonBox &box) const;
     static Clipper2Lib::Rect64 clipRect(const GeoDataLatLonBox &box);
     qreal area(const GeoDataLinearRing &ring);
 
@@ -143,7 +143,7 @@ private:
     void copyTags(const GeoDataPlacemark &source, GeoDataPlacemark &target) const;
     void copyTags(const OsmPlacemarkData &originalPlacemarkData, OsmPlacemarkData &targetOsmData) const;
 
-    QMap<TileId, QVector<GeoDataPlacemark *>> m_items;
+    QMap<TileId, QList<GeoDataPlacemark *>> m_items;
     int m_maxZoomLevel;
     GeoSceneMercatorTileProjection m_tileProjection;
     QSet<GeoDataRelation *> m_relations;

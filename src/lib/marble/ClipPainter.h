@@ -56,9 +56,9 @@ public:
     void drawPolygon(const QPolygonF &, Qt::FillRule fillRule = Qt::OddEvenFill);
 
     void drawPolyline(const QPolygonF &);
-    void drawPolyline(const QPolygonF &, QVector<QPointF> &labelNodes, LabelPositionFlags labelPositionFlag = LineCenter);
+    void drawPolyline(const QPolygonF &, QList<QPointF> &labelNodes, LabelPositionFlags labelPositionFlag = LineCenter);
 
-    void labelPosition(const QPolygonF &polygon, QVector<QPointF> &labelNodes, LabelPositionFlags labelPositionFlags) const;
+    void labelPosition(const QPolygonF &polygon, QList<QPointF> &labelNodes, LabelPositionFlags labelPositionFlags) const;
 
     void setPen(const QColor &);
     void setPen(const QPen &pen);

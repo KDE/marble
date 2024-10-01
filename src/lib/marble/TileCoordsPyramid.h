@@ -25,8 +25,8 @@ public:
     void setBottomLevelCoords(QRect const &coords);
     QRect coords(int const level) const;
 
-    void setValidTileLevels(const QVector<int> validLevels);
-    QVector<int> validTileLevels();
+    void setValidTileLevels(const QList<int> validLevels);
+    QList<int> validTileLevels();
 
     /**
      * @brief returns the number of tiles covered by one pyramid

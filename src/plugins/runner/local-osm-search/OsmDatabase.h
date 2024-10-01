@@ -26,12 +26,12 @@ public:
     // Methods for read access
 
     /** Search the database for matching regions and placemarks */
-    QVector<OsmPlacemark> find(const DatabaseQuery &userQuery);
+    QList<OsmPlacemark> find(const DatabaseQuery &userQuery);
 
 private:
     static QString wildcardQuery(const QString &term);
 
-    static void makeUnique(QVector<OsmPlacemark> &placemarks);
+    static void makeUnique(QList<OsmPlacemark> &placemarks);
 
     QStringList m_databaseFiles;
 

@@ -29,7 +29,7 @@ public:
 
     void setLineString(const GeoDataLineString *lineString);
     const GeoDataLineString *lineString() const;
-    static GeoDataLineString merge(const QVector<const GeoDataLineString *> &lineStrings);
+    static GeoDataLineString merge(const QList<const GeoDataLineString *> &lineStrings);
     void setMergedLineString(const GeoDataLineString &sharedLineString);
 
     const GeoDataLatLonAltBox &latLonAltBox() const override;
@@ -42,7 +42,7 @@ public:
     static bool s_paintOutline;
 
 protected:
-    void handleRelationUpdate(const QVector<const GeoDataRelation *> &relations) override;
+    void handleRelationUpdate(const QList<const GeoDataRelation *> &relations) override;
 
 private:
     void paintOutline(GeoPainter *painter, const ViewportParams *viewport) const;
@@ -57,7 +57,7 @@ private:
     const GeoDataLineString *m_lineString;
     const GeoDataLineString *m_renderLineString;
     GeoDataLineString m_mergedLineString;
-    QVector<QPolygonF *> m_cachedPolygons;
+    QList<QPolygonF *> m_cachedPolygons;
     bool m_renderLabel;
     qreal m_penWidth;
     mutable QRegion m_cachedRegion;

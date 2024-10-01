@@ -58,7 +58,7 @@ private:
     MarblePlacemarkModel *m_placemarkModel;
     QCompleter *m_completer;
     MarblePlacemarkModel *m_completionModel;
-    QVector<GeoDataPlacemark *> *m_completionContainer;
+    QList<GeoDataPlacemark *> *m_completionContainer;
     Placemark m_selectedPlacemark;
     QString m_lastSuccessfulCompletion;
 };

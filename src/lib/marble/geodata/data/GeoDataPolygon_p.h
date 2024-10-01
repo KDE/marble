@@ -36,7 +36,7 @@ public:
     }
 
     GeoDataLinearRing outer;
-    QVector<GeoDataLinearRing> inner;
+    QList<GeoDataLinearRing> inner;
     bool m_dirtyBox; // tells whether there have been changes to the
                      // GeoDataPoints since the LatLonAltBox has
                      // been calculated. Saves performance.

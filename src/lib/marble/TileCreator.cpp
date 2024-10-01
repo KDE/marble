@@ -11,10 +11,10 @@
 #include <QApplication>
 #include <QDir>
 #include <QImage>
+#include <QList>
 #include <QPainter>
 #include <QRect>
 #include <QSize>
-#include <QVector>
 
 #include "MarbleDebug.h"
 #include "MarbleDirs.h"

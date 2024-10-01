@@ -6,7 +6,7 @@
 #include "WayChunk.h"
 
 #include <QDebug>
-#include <QVector>
+#include <QList>
 
 #include "GeoDataCoordinates.h"
 #include "GeoDataLineString.h"

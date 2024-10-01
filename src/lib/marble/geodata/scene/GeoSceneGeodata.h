@@ -46,8 +46,8 @@ public:
     int renderOrder() const;
     void setRenderOrder(int renderOrder);
 
-    QVector<QColor> colors() const;
-    void setColors(const QVector<QColor> &colors);
+    QList<QColor> colors() const;
+    void setColors(const QList<QColor> &colors);
 
 private:
     QString m_property;
@@ -57,7 +57,7 @@ private:
     QPen m_pen;
     QBrush m_brush;
     int m_renderOrder;
-    QVector<QColor> m_colors;
+    QList<QColor> m_colors;
 };
 
 }

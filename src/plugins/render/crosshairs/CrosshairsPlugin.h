@@ -66,7 +66,7 @@ public:
 
     QString copyrightYears() const override;
 
-    QVector<PluginAuthor> pluginAuthors() const override;
+    QList<PluginAuthor> pluginAuthors() const override;
 
     QIcon icon() const override;
 

@@ -8,8 +8,8 @@
 #define MARBLE_BOOKMARKMANAGER_H
 
 #include "MarbleGlobal.h"
+#include <QList>
 #include <QObject>
-#include <QVector>
 
 class QString;
 
@@ -76,7 +76,7 @@ public:
     /**
      * @brief return Vector of folders
      */
-    QVector<GeoDataFolder *> folders() const;
+    QList<GeoDataFolder *> folders() const;
 
     /**
      * @brief add a folder

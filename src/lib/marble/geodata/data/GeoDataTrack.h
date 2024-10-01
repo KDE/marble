@@ -104,14 +104,14 @@ public:
      * Returns the coordinates of all the points in the map, sorted by their
      * time value
      */
-    QVector<GeoDataCoordinates> coordinatesList() const;
+    QList<GeoDataCoordinates> coordinatesList() const;
 
     /**
      * Returns the time value of all the points in the map, in chronological
      * order.
      * @since 0.26.0
      */
-    QVector<QDateTime> whenList() const;
+    QList<QDateTime> whenList() const;
 
     /**
      * If interpolate() is true, return the coordinates interpolated from the

@@ -291,7 +291,7 @@ public:
 
         \see GeoDataLineString
     */
-    void polygonsFromLineString(const GeoDataLineString &lineString, QVector<QPolygonF *> &polygons) const;
+    void polygonsFromLineString(const GeoDataLineString &lineString, QList<QPolygonF *> &polygons) const;
 
     /*!
         \brief Draws a given line string (a "polyline") with a label.
@@ -317,7 +317,7 @@ public:
         might be helpful for further optimization.
     */
 
-    void drawLabelsForPolygons(const QVector<QPolygonF *> &polygons, const QString &labelText, LabelPositionFlags labelPositionFlags, const QColor &labelColor);
+    void drawLabelsForPolygons(const QList<QPolygonF *> &polygons, const QString &labelText, LabelPositionFlags labelPositionFlags, const QColor &labelColor);
 
     /*!
         \brief Draws a given line string (a "polyline").
@@ -390,7 +390,7 @@ public:
     */
     void drawPolygon(const GeoDataPolygon &polygon, Qt::FillRule fillRule = Qt::OddEvenFill);
 
-    QVector<QPolygonF *> createFillPolygons(const QVector<QPolygonF *> &outerPolygons, const QVector<QPolygonF *> &innerPolygons) const;
+    QList<QPolygonF *> createFillPolygons(const QList<QPolygonF *> &outerPolygons, const QList<QPolygonF *> &innerPolygons) const;
 
     /*!
         \brief Draws a rectangle at the given position.

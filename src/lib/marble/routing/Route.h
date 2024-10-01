@@ -54,7 +54,7 @@ private:
 
     qreal m_distance;
 
-    QVector<RouteSegment> m_segments;
+    QList<RouteSegment> m_segments;
 
     GeoDataLineString m_path;
 

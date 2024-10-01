@@ -33,7 +33,6 @@
 #include <QToolBar>
 #include <QUrl>
 #include <QVariant>
-#include <QVector>
 #include <QWhatsThis>
 
 #include "AbstractFloatItem.h"

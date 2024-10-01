@@ -9,7 +9,7 @@
 #include "geodata_export.h"
 
 #include "GeoDataGeometry.h"
-#include <QVector>
+#include <QList>
 
 namespace Marble
 {
@@ -78,15 +78,15 @@ public:
 
     GeoDataMultiGeometry &operator<<(const GeoDataGeometry &value);
 
-    QVector<GeoDataGeometry *>::Iterator begin();
-    QVector<GeoDataGeometry *>::Iterator end();
-    QVector<GeoDataGeometry *>::ConstIterator constBegin() const;
-    QVector<GeoDataGeometry *>::ConstIterator constEnd() const;
+    QList<GeoDataGeometry *>::Iterator begin();
+    QList<GeoDataGeometry *>::Iterator end();
+    QList<GeoDataGeometry *>::ConstIterator constBegin() const;
+    QList<GeoDataGeometry *>::ConstIterator constEnd() const;
     void clear();
-    QVector<GeoDataGeometry *> vector();
+    QList<GeoDataGeometry *> vector();
 
-    QVector<GeoDataGeometry *>::Iterator erase(QVector<GeoDataGeometry *>::Iterator pos);
-    QVector<GeoDataGeometry *>::Iterator erase(QVector<GeoDataGeometry *>::Iterator begin, QVector<GeoDataGeometry *>::Iterator end);
+    QList<GeoDataGeometry *>::Iterator erase(QList<GeoDataGeometry *>::Iterator pos);
+    QList<GeoDataGeometry *>::Iterator erase(QList<GeoDataGeometry *>::Iterator begin, QList<GeoDataGeometry *>::Iterator end);
 
     // Serialize the Placemark to @p stream
     void pack(QDataStream &stream) const override;

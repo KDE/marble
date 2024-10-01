@@ -50,7 +50,7 @@ public:
 
     Q_PRIVATE_SLOT(d, void startSearch())
 
-    Q_PRIVATE_SLOT(d, void updateSearchResult(const QVector<GeoDataPlacemark *> &placemarks))
+    Q_PRIVATE_SLOT(d, void updateSearchResult(const QList<GeoDataPlacemark *> &placemarks))
 
     Q_PRIVATE_SLOT(d, void updateSearchMode())
 

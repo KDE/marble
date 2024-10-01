@@ -183,7 +183,7 @@ Quaternion      A simple implementation of the mathematical concept
 GeoDataPoint    A point on the earth, (lon, lat)
 GeoPolygon      A path or polygon on the earth, consisting of a vector
                 of GeoDataPoints
-PntMap          A collection of GeoPolygons ( QVector<GeoPolygon *> )
+PntMap          A collection of GeoPolygons ( QList<GeoPolygon *> )
                 FIXME: Rename and move from GeoPolygon.h into own file.
 
 ScreenPolygon   A path or polygon on the screen. Uses screen
@@ -206,7 +206,7 @@ Placemark       A point on the earth with some additional data. Can be
                  - Countrycode (QString)
                  - View stuff (selected, labelstring, boundingbox, etc)
 
-PlaceContainer  A list of Placemarks ( QVector<Placemark *> )
+PlaceContainer  A list of Placemarks ( QList<Placemark *> )
 
 
 Model / View
@@ -253,7 +253,7 @@ class KAtlasWindRose : public QObject {
 class KAtlasXmlHandler : public QXmlDefaultHandler {
 class MapTheme : public QObject
 class MeasureTool;
-class PlaceFolder : public QVector<Placemark*> {
+class PlaceFolder : public QList<Placemark*> {
 class PlacemarkInfoDialog: public Ui_PlacemarkInfoDialog {};
 class PlacemarkManager;
 class PlacemarkModel : public QAbstractListModel {

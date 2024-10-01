@@ -27,10 +27,10 @@ public:
     typedef QPair<const GeoDataLineString *, OsmPlacemarkData> Way;
     typedef QPair<const GeoDataFeature *, OsmPlacemarkData> Relation;
 
-    using Nodes = QVector<Node>;
-    using Tags = QVector<Tag>;
-    using Ways = QVector<Way>;
-    using Relations = QVector<Relation>;
+    using Nodes = QList<Node>;
+    using Tags = QList<Tag>;
+    using Ways = QList<Way>;
+    using Relations = QList<Relation>;
 
     void read(const GeoDataDocument *document);
 

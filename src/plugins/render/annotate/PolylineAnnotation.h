@@ -202,8 +202,8 @@ private:
     bool m_regionsInitialized;
     bool m_busy;
 
-    QVector<PolylineNode> m_nodesList;
-    QVector<PolylineNode> m_virtualNodesList;
+    QList<PolylineNode> m_nodesList;
+    QList<PolylineNode> m_virtualNodesList;
     QRegion m_polylineRegion;
 
     // Used in Editing state

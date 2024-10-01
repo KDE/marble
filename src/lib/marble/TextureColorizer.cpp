@@ -10,9 +10,9 @@
 
 #include <QElapsedTimer>
 #include <QFile>
+#include <QList>
 #include <QPainter>
 #include <QSharedPointer>
-#include <QVector>
 #include <qmath.h>
 
 #include "AbstractProjection.h"

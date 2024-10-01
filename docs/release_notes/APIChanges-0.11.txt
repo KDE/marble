@@ -84,7 +84,7 @@
   - backgroundVisible()
   - setBackgroundVisible( bool )
   - whichFeatureAt( const QPoint& )
-  - downloadRegion( QString const &, QVector<TileCoordsPyramid> const & )
+  - downloadRegion( QString const &, QList<TileCoordsPyramid> const & )
 
 * Remove the following slots from MarbleModel (use the same slots from MarbleMap or MarbleWidget):
   - clearVolatileTileCache()

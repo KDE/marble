@@ -44,7 +44,7 @@ public:
     QString version() const override;
     QString description() const override;
     QString copyrightYears() const override;
-    QVector<PluginAuthor> pluginAuthors() const override;
+    QList<PluginAuthor> pluginAuthors() const override;
     QString aboutDataText() const override;
     QIcon icon() const override;
     RenderType renderType() const override;
@@ -90,7 +90,7 @@ private:
 
     QAction *m_showOrbitAction;
     QAction *m_trackPlacemarkAction;
-    QVector<TrackerPluginItem *> m_trackerList;
+    QList<TrackerPluginItem *> m_trackerList;
 };
 
 } // namespace Marble

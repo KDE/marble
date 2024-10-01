@@ -50,7 +50,7 @@ public:
 
     QString copyrightYears() const override;
 
-    QVector<PluginAuthor> pluginAuthors() const override;
+    QList<PluginAuthor> pluginAuthors() const override;
 
     QString aboutDataText() const override;
 

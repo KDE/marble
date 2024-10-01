@@ -10,8 +10,8 @@
 #define MARBLE_STACKEDTILE_H
 
 #include <QImage>
+#include <QList>
 #include <QSharedPointer>
-#include <QVector>
 
 #include "Tile.h"
 
@@ -50,7 +50,7 @@ class TextureTile;
 class StackedTile : public Tile
 {
 public:
-    explicit StackedTile(TileId const &id, QImage const &resultImage, QVector<QSharedPointer<TextureTile>> const &tiles);
+    explicit StackedTile(TileId const &id, QImage const &resultImage, QList<QSharedPointer<TextureTile>> const &tiles);
     ~StackedTile() override;
 
     void setUsed(bool used);
@@ -63,7 +63,7 @@ public:
         \brief Returns the stack of Tiles
         \return A container of Tile objects.
     */
-    QVector<QSharedPointer<TextureTile>> tiles() const;
+    QList<QSharedPointer<TextureTile>> tiles() const;
 
     /*!
         \brief Returns the QImage that describes the merged stack of Tiles
@@ -99,13 +99,13 @@ private:
     const QImage m_resultImage;
     const int m_depth;
     const bool m_isGrayscale;
-    const QVector<QSharedPointer<TextureTile>> m_tiles;
+    const QList<QSharedPointer<TextureTile>> m_tiles;
     const uchar **const jumpTable8;
     const uint **const jumpTable32;
     const int m_byteCount;
     bool m_isUsed;
 
-    static int calcByteCount(const QImage &resultImage, const QVector<QSharedPointer<TextureTile>> &tiles);
+    static int calcByteCount(const QImage &resultImage, const QList<QSharedPointer<TextureTile>> &tiles);
 };
 
 }

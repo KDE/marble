@@ -6,8 +6,8 @@
 #ifndef MARBLE_SATELLITESMODEL_H
 #define MARBLE_SATELLITESMODEL_H
 
+#include <QList>
 #include <QStringList>
-#include <QVector>
 
 #include "TrackerPluginModel.h"
 
@@ -53,7 +53,7 @@ private:
     const MarbleClock *m_clock;
     QStringList m_enabledIds;
     QString m_lcPlanet;
-    QVector<QColor> m_colorList;
+    QList<QColor> m_colorList;
     int m_currentColorIndex;
 };
 

@@ -32,9 +32,9 @@ public:
     {
     }
 
-    QVector<QPointF> positions() const override
+    QList<QPointF> positions() const override
     {
-        QVector<QPointF> list;
+        QList<QPointF> list;
 
         list.append(positivePosition());
         return list;
@@ -57,13 +57,13 @@ public:
         return position;
     }
 
-    QVector<QPointF> absolutePositions() const override
+    QList<QPointF> absolutePositions() const override
     {
         if (m_parent == nullptr) {
             return positions();
         }
 
-        QVector<QPointF> parentPositions;
+        QList<QPointF> parentPositions;
 
         if (ScreenGraphicsItem *screenItem = dynamic_cast<ScreenGraphicsItem *>(m_parent)) {
             parentPositions = screenItem->absolutePositions();
@@ -73,7 +73,7 @@ public:
 
         QPointF relativePosition = positivePosition();
 
-        QVector<QPointF> absolutePositions;
+        QList<QPointF> absolutePositions;
         absolutePositions.reserve(parentPositions.size());
         for (const QPointF &point : std::as_const(parentPositions)) {
             absolutePositions.append(point + relativePosition);

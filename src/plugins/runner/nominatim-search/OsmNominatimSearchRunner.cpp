@@ -16,10 +16,10 @@
 #include "osm/OsmPlacemarkData.h"
 
 #include <QDomDocument>
+#include <QList>
 #include <QNetworkReply>
 #include <QTimer>
 #include <QUrl>
-#include <QVector>
 
 namespace Marble
 {

@@ -10,8 +10,8 @@
 #include "RoutingWaypoint.h"
 #include "marble_export.h"
 
+#include <QList>
 #include <QMetaType>
-#include <QVector>
 
 class QTextStream;
 
@@ -64,14 +64,14 @@ public:
     int secondsLeft() const;
 
     /** Waypoints from the last instruction to this instruction */
-    QVector<RoutingWaypoint> points() const;
+    QList<RoutingWaypoint> points() const;
 
     /**
      * Contains the intersection point and points near it on the previous and current road.
      * Near is taken as that waypoint with the largest different to the intersection point
      * that does not exceed 50 meter.
      */
-    QVector<RoutingPoint> intersectionPoints() const;
+    QList<RoutingPoint> intersectionPoints() const;
 
     /** The angle between the two turn roads, in radians */
     qreal angleToPredecssor() const;
@@ -127,9 +127,9 @@ private:
 
     void calculateTurnType();
 
-    QVector<RoutingWaypoint> m_points;
+    QList<RoutingWaypoint> m_points;
 
-    QVector<RoutingPoint> m_intersectionPoints;
+    QList<RoutingPoint> m_intersectionPoints;
 
     QString m_roadName;
 
@@ -150,7 +150,7 @@ private:
 
 QTextStream &operator<<(QTextStream &stream, const RoutingInstruction &i);
 
-using RoutingInstructions = QVector<RoutingInstruction>;
+using RoutingInstructions = QList<RoutingInstruction>;
 
 } // namespace Marble
 

@@ -179,7 +179,7 @@ private:
 
     void importMultipolygon(const Relation &relation);
 
-    void importWay(QVector<Marble::GeoDataLineString> &ways, int id);
+    void importWay(QList<Marble::GeoDataLineString> &ways, int id);
 
     QList<QList<Way>> merge(const QList<Way> &ways) const;
 

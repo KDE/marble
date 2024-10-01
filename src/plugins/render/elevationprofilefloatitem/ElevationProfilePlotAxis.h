@@ -6,9 +6,9 @@
 #ifndef ELEVATIONPROFILEPLOTAXIS_H
 #define ELEVATIONPROFILEPLOTAXIS_H
 
+#include <QList>
 #include <QObject>
 #include <QString>
-#include <QVector>
 
 namespace Marble
 {
@@ -28,7 +28,7 @@ struct AxisTick {
         // nothing to do
     }
 };
-using AxisTickList = QVector<AxisTick>;
+using AxisTickList = QList<AxisTick>;
 
 /**
  * @short A helper class handling a plot axis for the Elevation Profile

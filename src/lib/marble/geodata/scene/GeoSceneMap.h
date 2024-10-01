@@ -7,8 +7,8 @@
 #ifndef MARBLE_GEOSCENEMAP_H
 #define MARBLE_GEOSCENEMAP_H
 
+#include <QList>
 #include <QVariant>
-#include <QVector>
 
 #include <geodata_export.h>
 
@@ -74,7 +74,7 @@ public:
      * @brief  Return all layers
      * @return A vector that contains pointers to all available layers
      */
-    QVector<GeoSceneLayer *> layers() const;
+    QList<GeoSceneLayer *> layers() const;
 
     /**
      * @brief  Add a new filter to the map
@@ -93,7 +93,7 @@ public:
      * @brief  Return all filters
      * @return A vector that contains pointers to all available filters
      */
-    QVector<GeoSceneFilter *> filters() const;
+    QList<GeoSceneFilter *> filters() const;
 
     /**
      * @brief  Checks for valid layers that contain texture data

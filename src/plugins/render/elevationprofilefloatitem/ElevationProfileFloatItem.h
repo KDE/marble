@@ -67,7 +67,7 @@ public:
 
     QString copyrightYears() const override;
 
-    QVector<PluginAuthor> pluginAuthors() const override;
+    QList<PluginAuthor> pluginAuthors() const override;
 
     QIcon icon() const override;
 
@@ -86,7 +86,7 @@ protected:
     void contextMenuEvent(QWidget *w, QContextMenuEvent *e) override;
 
 private Q_SLOTS:
-    void handleDataUpdate(const GeoDataLineString &points, const QVector<QPointF> &eleData);
+    void handleDataUpdate(const GeoDataLineString &points, const QList<QPointF> &eleData);
     void updateVisiblePoints();
     void forceRepaint();
     void readSettings();
@@ -134,15 +134,15 @@ private:
     int m_firstVisiblePoint;
     int m_lastVisiblePoint;
     bool m_zoomToViewport;
-    QVector<QPointF> m_eleData;
+    QList<QPointF> m_eleData;
     GeoDataLineString m_points;
     qreal m_minElevation;
     qreal m_maxElevation;
     qreal m_gain;
     qreal m_loss;
 
-    QVector<QPointF> calculateElevationData(const GeoDataLineString &lineString) const;
-    void calculateStatistics(const QVector<QPointF> &eleData);
+    QList<QPointF> calculateElevationData(const GeoDataLineString &lineString) const;
+    void calculateStatistics(const QList<QPointF> &eleData);
 };
 
 }

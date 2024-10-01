@@ -7,9 +7,9 @@
 #ifndef MARBLE_GEOSCENEGROUP_H
 #define MARBLE_GEOSCENEGROUP_H
 
+#include <QList>
 #include <QObject>
 #include <QString>
-#include <QVector>
 
 #include "GeoDocument.h"
 
@@ -64,8 +64,8 @@ public:
     void addProperty(GeoSceneProperty *);
     const GeoSceneProperty *property(const QString &name) const;
     GeoSceneProperty *property(const QString &name);
-    QVector<GeoSceneProperty *> properties();
-    QVector<const GeoSceneProperty *> properties() const;
+    QList<GeoSceneProperty *> properties();
+    QList<const GeoSceneProperty *> properties() const;
 
     QString name() const;
 
@@ -78,7 +78,7 @@ private:
     Q_DISABLE_COPY(GeoSceneGroup)
 
     /// The vector holding all the properties in this settings group.
-    QVector<GeoSceneProperty *> m_properties;
+    QList<GeoSceneProperty *> m_properties;
 
     QString m_name;
 };

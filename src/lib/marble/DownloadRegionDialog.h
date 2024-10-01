@@ -4,7 +4,7 @@
 #define MARBLE_DOWNLOADREGIONDIALOG_H
 
 #include <QDialog>
-#include <QVector>
+#include <QList>
 
 #include <MarbleGlobal.h>
 
@@ -29,7 +29,7 @@ public:
     void setVisibleTileLevel(int const tileLevel);
     void setSelectionMethod(SelectionMethod const);
 
-    QVector<TileCoordsPyramid> region() const;
+    QList<TileCoordsPyramid> region() const;
 
     TileType tileType() const;
 

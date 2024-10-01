@@ -10,8 +10,8 @@
 #define MARBLE_PLUGININTERFACE_H
 
 #include <QCoreApplication> // for Q_DECLARE_TR_FUNCTIONS
+#include <QList>
 #include <QString>
-#include <QVector>
 #include <QtPlugin>
 
 #include "marble_export.h"
@@ -84,7 +84,7 @@ public:
     /**
      * @since 0.26.0
      */
-    virtual QVector<PluginAuthor> pluginAuthors() const = 0;
+    virtual QList<PluginAuthor> pluginAuthors() const = 0;
 
     /**
      * @brief Returns about text (credits) for external data the plugin uses.

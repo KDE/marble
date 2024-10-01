@@ -32,7 +32,7 @@ private:
     static void setupHashes();
 
     static QHash<QString, WeatherData::WeatherCondition> dayConditions;
-    static QVector<WeatherData::WindDirection> windDirections;
+    static QList<WeatherData::WindDirection> windDirections;
 };
 
 } // namespace Marble

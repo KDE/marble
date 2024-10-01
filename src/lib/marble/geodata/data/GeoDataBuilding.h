@@ -6,7 +6,7 @@
 #ifndef MARBLE_GEODATABUILDING_H
 #define MARBLE_GEODATABUILDING_H
 
-#include <QVector>
+#include <QList>
 
 #include "GeoDataCoordinates.h"
 #include "GeoDataGeometry.h"
@@ -89,13 +89,13 @@ public:
     /*!
         @return the non existent levels in the building
      */
-    QVector<int> nonExistentLevels() const;
+    QList<int> nonExistentLevels() const;
 
     /*!
         Sets the non existent levels of the building
         @param nonExistentLevels
      */
-    void setNonExistentLevels(const QVector<int> &nonExistentLevels);
+    void setNonExistentLevels(const QList<int> &nonExistentLevels);
 
     /*!
         @return the multigeometry associated with the building
@@ -118,9 +118,9 @@ public:
      */
     void setName(const QString &name);
 
-    QVector<NamedEntry> entries() const;
+    QList<NamedEntry> entries() const;
 
-    void setEntries(const QVector<NamedEntry> &entries);
+    void setEntries(const QList<NamedEntry> &entries);
 
 private:
     GeoDataBuildingPrivate *const d;

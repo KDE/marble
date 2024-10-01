@@ -18,7 +18,7 @@ class MonavMapsModel : public QAbstractTableModel
     Q_OBJECT
 
 public:
-    explicit MonavMapsModel(const QVector<MonavMap> &data, QObject *parent = nullptr);
+    explicit MonavMapsModel(const QList<MonavMap> &data, QObject *parent = nullptr);
 
     QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const override;
 
@@ -37,7 +37,7 @@ public:
     void setInstallableVersions(const QMap<QString, QString> &remoteMaps);
 
 private:
-    QVector<MonavMap> m_data;
+    QList<MonavMap> m_data;
 
     QMap<QString, QString> m_remoteMaps;
 };

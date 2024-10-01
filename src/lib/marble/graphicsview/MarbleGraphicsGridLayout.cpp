@@ -12,9 +12,9 @@
 
 // Qt
 #include <QHash>
+#include <QList>
 #include <QRectF>
 #include <QSizeF>
-#include <QVector>
 
 namespace Marble
 {

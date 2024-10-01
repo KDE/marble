@@ -23,7 +23,7 @@ common to any instance of a layer, which are:
 lot
        of Layer Data objects. An idea for this memory management
        would be to have a binary file that represented all of the
-       data and a QVector for visible data, hence significantly
+       data and a QList for visible data, hence significantly
        reducing the memory footprint.
 
 Each Data Object must contain any information necessary to draw itself

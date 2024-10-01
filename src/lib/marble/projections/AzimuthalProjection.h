@@ -60,7 +60,7 @@ public:
 
     bool mapCoversViewport(const ViewportParams *viewport) const override;
 
-    bool screenCoordinates(const GeoDataLineString &lineString, const ViewportParams *viewport, QVector<QPolygonF *> &polygons) const override;
+    bool screenCoordinates(const GeoDataLineString &lineString, const ViewportParams *viewport, QList<QPolygonF *> &polygons) const override;
 
     using AbstractProjection::screenCoordinates;
 

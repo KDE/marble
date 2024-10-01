@@ -59,7 +59,7 @@ public:
 private:
     QPixmap m_pixmap_open;
     QPixmap m_pixmap_closed;
-    QVector<Comment> m_commentsList;
+    QList<Comment> m_commentsList;
     QDateTime m_dateCreated;
     QString m_noteStatus;
     QDateTime m_dateClosed;

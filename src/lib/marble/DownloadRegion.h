@@ -6,8 +6,8 @@
 #ifndef MARBLE_DOWNLOADREGION_H
 #define MARBLE_DOWNLOADREGION_H
 
+#include <QList>
 #include <QObject>
-#include <QVector>
 
 #include <MarbleGlobal.h>
 
@@ -36,16 +36,16 @@ public:
 
     void setTileLevelRange(int const minimumTileLevel, int const maximumTileLevel);
 
-    QVector<TileCoordsPyramid> region(const TileLayer *tileLayer, const GeoDataLatLonAltBox &region) const;
+    QList<TileCoordsPyramid> region(const TileLayer *tileLayer, const GeoDataLatLonAltBox &region) const;
 
     void setVisibleTileLevel(int const tileLevel);
 
     /**
      * @brief calculates the region to be downloaded around a path
      */
-    QVector<TileCoordsPyramid> fromPath(const TileLayer *tileLayer, qreal offset, const GeoDataLineString &path) const;
+    QList<TileCoordsPyramid> fromPath(const TileLayer *tileLayer, qreal offset, const GeoDataLineString &path) const;
 
-    QVector<int> validTileLevels(const TileType tileType) const;
+    QList<int> validTileLevels(const TileType tileType) const;
 
 private:
     DownloadRegionPrivate *const d;

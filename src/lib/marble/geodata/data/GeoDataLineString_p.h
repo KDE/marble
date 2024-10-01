@@ -58,7 +58,7 @@ public:
 
     void toPoleCorrected(const GeoDataLineString &q, GeoDataLineString &poleCorrected) const;
 
-    void toDateLineCorrected(const GeoDataLineString &q, QVector<GeoDataLineString *> &lineStrings) const;
+    void toDateLineCorrected(const GeoDataLineString &q, QList<GeoDataLineString *> &lineStrings) const;
 
     void interpolateDateLine(const GeoDataCoordinates &previousCoords,
                              const GeoDataCoordinates &currentCoords,
@@ -72,7 +72,7 @@ public:
     static qreal resolutionForLevel(int level);
     void optimize(GeoDataLineString &lineString) const;
 
-    QVector<GeoDataCoordinates> m_vector;
+    QList<GeoDataCoordinates> m_vector;
 
     mutable GeoDataLineString *m_rangeCorrected;
     mutable bool m_dirtyRange;

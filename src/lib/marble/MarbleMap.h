@@ -218,7 +218,7 @@ public:
      */
     bool hasFeatureAt(const QPoint &) const;
 
-    QVector<const GeoDataFeature *> whichFeatureAt(const QPoint &) const;
+    QList<const GeoDataFeature *> whichFeatureAt(const QPoint &) const;
 
     /**
      * @brief  Return the property value by name.
@@ -707,7 +707,7 @@ public Q_SLOTS:
      */
     void reload();
 
-    void downloadRegion(QVector<TileCoordsPyramid> const &);
+    void downloadRegion(QList<TileCoordsPyramid> const &);
 
     void highlightRouteRelation(qint64 osmId, bool enabled);
 

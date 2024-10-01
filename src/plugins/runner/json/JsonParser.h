@@ -11,7 +11,7 @@
 class QIODevice;
 class QJsonObject;
 
-#include <QVector>
+#include <QList>
 
 namespace Marble
 {
@@ -65,7 +65,7 @@ private:
      * @param hasPoints     a boolean passed back to the caller: true if Points exist in geometry
      * @return true if parsing of the object was successful
      */
-    bool parseGeoJsonSubLevel(const QJsonObject &, QVector<GeoDataGeometry *> &, bool &);
+    bool parseGeoJsonSubLevel(const QJsonObject &, QList<GeoDataGeometry *> &, bool &);
 };
 
 }

@@ -408,7 +408,7 @@ public:
     /// @name Placemark management
     //@{
 
-    QVector<const GeoDataFeature *> whichFeatureAt(const QPoint &) const;
+    QList<const GeoDataFeature *> whichFeatureAt(const QPoint &) const;
 
     //@}
 
@@ -1040,7 +1040,7 @@ public Q_SLOTS:
      */
     void reloadMap();
 
-    void downloadRegion(QVector<TileCoordsPyramid> const &);
+    void downloadRegion(QList<TileCoordsPyramid> const &);
 
     //@}
 

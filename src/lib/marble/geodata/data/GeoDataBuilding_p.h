@@ -32,10 +32,10 @@ public:
     double m_height;
     int m_minLevel;
     int m_maxLevel;
-    QVector<int> m_nonExistentLevels;
+    QList<int> m_nonExistentLevels;
     GeoDataMultiGeometry m_multiGeometry;
     QString m_name;
-    QVector<GeoDataBuilding::NamedEntry> m_entries;
+    QList<GeoDataBuilding::NamedEntry> m_entries;
 };
 
 }

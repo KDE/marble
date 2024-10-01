@@ -75,7 +75,7 @@ GeoNode *KmlOsmPlacemarkDataTagHandler::parse(GeoParser &parser) const
             return nullptr;
         }
 
-        /* The QVector's indexOf function is perfect: returns the index of the ring
+        /* The QList's indexOf function is perfect: returns the index of the ring
          * within the vector if the ring is an innerBoundary;
          * Else it returns -1, meaning it's an outerBoundary
          */

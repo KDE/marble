@@ -100,7 +100,7 @@ private:
     bool m_observable;
     GeoDataLineString m_lineString;
     QVariantList m_geoCoordinates;
-    QVector<QPolygonF> m_screenPolygons;
+    QList<QPolygonF> m_screenPolygons;
     QVariantList m_screenCoordinates;
     QColor m_lineColor;
     qreal m_lineWidth;

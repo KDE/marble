@@ -15,8 +15,8 @@
 
 // Qt
 #include <QColor>
+#include <QList>
 #include <QRegularExpression>
-#include <QVector>
 
 namespace Marble
 {

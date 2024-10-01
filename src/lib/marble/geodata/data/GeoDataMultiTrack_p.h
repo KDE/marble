@@ -45,7 +45,7 @@ public:
         return copy;
     }
 
-    QVector<GeoDataTrack *> m_vector;
+    QList<GeoDataTrack *> m_vector;
 };
 
 } // namespace Marble

@@ -60,7 +60,7 @@ private:
 
     GeoDataLatLonBox m_boundingBox;
 
-    QVector<GeoDataLinearRing> m_tiles;
+    QList<GeoDataLinearRing> m_tiles;
 };
 
 }

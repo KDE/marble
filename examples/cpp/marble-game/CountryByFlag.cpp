@@ -8,12 +8,12 @@
 
 // Qt
 #include <QImage>
+#include <QList>
 #include <QRandomGenerator>
 #include <QString>
 #include <QTime>
 #include <QVariant>
 #include <QVariantList>
-#include <QVector>
 
 // Marble
 #include <marble/GeoDataTreeModel.h>

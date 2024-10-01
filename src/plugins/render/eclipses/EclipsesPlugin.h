@@ -60,7 +60,7 @@ public:
     QString version() const override;
     QString description() const override;
     QString copyrightYears() const override;
-    QVector<PluginAuthor> pluginAuthors() const override;
+    QList<PluginAuthor> pluginAuthors() const override;
     QIcon icon() const override;
     RenderPlugin::RenderType renderType() const override;
     QList<QActionGroup *> *actionGroups() const override;

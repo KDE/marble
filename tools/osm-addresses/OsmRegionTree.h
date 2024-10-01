@@ -8,7 +8,7 @@
 
 #include "OsmRegion.h"
 
-#include <QVector>
+#include <QList>
 
 namespace Marble
 {
@@ -20,9 +20,9 @@ public:
 
     const OsmRegion &node() const;
 
-    void setChildren(const QVector<OsmRegionTree> &children);
+    void setChildren(const QList<OsmRegionTree> &children);
 
-    const QVector<OsmRegionTree> &children() const;
+    const QList<OsmRegionTree> &children() const;
 
     void append(QList<OsmRegion> &regions);
 
@@ -39,7 +39,7 @@ private:
 
     OsmRegion m_node;
 
-    QVector<OsmRegionTree> m_children;
+    QList<OsmRegionTree> m_children;
 };
 
 }

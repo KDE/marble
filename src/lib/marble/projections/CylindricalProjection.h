@@ -52,7 +52,7 @@ public:
         return Cylindrical;
     }
 
-    bool screenCoordinates(const GeoDataLineString &lineString, const ViewportParams *viewport, QVector<QPolygonF *> &polygons) const override;
+    bool screenCoordinates(const GeoDataLineString &lineString, const ViewportParams *viewport, QList<QPolygonF *> &polygons) const override;
 
     using AbstractProjection::screenCoordinates;
 

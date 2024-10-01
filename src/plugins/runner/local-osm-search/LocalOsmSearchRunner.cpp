@@ -10,9 +10,9 @@
 #include "GeoDataPoint.h"
 #include "MarbleDebug.h"
 
+#include <QList>
 #include <QString>
 #include <QUrl>
-#include <QVector>
 
 namespace Marble
 {

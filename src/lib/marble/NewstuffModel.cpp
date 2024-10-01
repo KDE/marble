@@ -14,6 +14,7 @@
 #include <QFuture>
 #include <QFutureWatcher>
 #include <QIcon>
+#include <QList>
 #include <QMutexLocker>
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
@@ -21,7 +22,6 @@
 #include <QProcessEnvironment>
 #include <QTemporaryFile>
 #include <QUrl>
-#include <QVector>
 #include <QtConcurrentRun>
 
 namespace Marble

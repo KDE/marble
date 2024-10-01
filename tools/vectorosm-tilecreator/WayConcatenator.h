@@ -32,9 +32,9 @@ private:
     void addWayChunks(GeoDataDocument *document);
 
     QMultiHash<qint64, WayChunk::Ptr> m_hash;
-    QVector<WayChunk::Ptr> m_chunks;
-    QVector<PlacemarkPtr> m_wayPlacemarks;
-    QVector<GeoDataFeature *> m_otherPlacemarks;
+    QList<WayChunk::Ptr> m_chunks;
+    QList<PlacemarkPtr> m_wayPlacemarks;
+    QList<GeoDataFeature *> m_otherPlacemarks;
 
     int m_originalWays;
     int m_mergedWays;

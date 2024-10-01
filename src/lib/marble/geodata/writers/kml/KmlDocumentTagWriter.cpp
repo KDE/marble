@@ -19,7 +19,7 @@
 
 #include "GeoDataTypes.h"
 
-#include <QVector>
+#include <QList>
 
 namespace Marble
 {

@@ -6,7 +6,7 @@
 #ifndef MARBLE_GEODATALINESTYLE_H
 #define MARBLE_GEODATALINESTYLE_H
 
-#include <QVector>
+#include <QList>
 
 #include "GeoDataColorStyle.h"
 
@@ -121,13 +121,13 @@ public:
      * @brief Sets the dash pattern
      * @param pattern dash pattern
      */
-    void setDashPattern(const QVector<qreal> &pattern);
+    void setDashPattern(const QList<qreal> &pattern);
 
     /**
      * @brief Return the current dash pattern
      * @return the current dash pattern
      */
-    QVector<qreal> dashPattern() const;
+    QList<qreal> dashPattern() const;
 
     /**
      * @brief  Serialize the style to a stream.

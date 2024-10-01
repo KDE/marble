@@ -60,7 +60,7 @@ Q_SIGNALS:
     void tileLevelChanged(int tileLevel);
 
 public Q_SLOTS:
-    void setMapTheme(const QVector<const GeoSceneVectorTileDataset *> &textures, const GeoSceneGroup *textureLayerSettings);
+    void setMapTheme(const QList<const GeoSceneVectorTileDataset *> &textures, const GeoSceneGroup *textureLayerSettings);
 
     void reset();
 

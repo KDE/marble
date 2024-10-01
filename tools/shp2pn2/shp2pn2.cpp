@@ -30,7 +30,7 @@
 #include <QDataStream>
 #include <QDebug>
 #include <QFile>
-#include <QVector>
+#include <QList>
 
 #include <GeoDataDocument.h>
 #include <GeoDataFeature.h>

@@ -6,8 +6,8 @@
 #ifndef MOVIECAPTURE_H
 #define MOVIECAPTURE_H
 
+#include <QList>
 #include <QObject>
-#include <QVector>
 
 #include "marble_export.h"
 
@@ -60,7 +60,7 @@ public:
 
     int fps() const;
     QString destination() const;
-    QVector<MovieFormat> availableFormats();
+    QList<MovieFormat> availableFormats();
     MovieCapture::SnapshotMethod snapshotMethod() const;
     bool checkToolsAvailability();
 
@@ -85,7 +85,7 @@ protected:
 
 private:
     Q_DECLARE_PRIVATE(MovieCapture)
-    QVector<MovieFormat> m_supportedFormats;
+    QList<MovieFormat> m_supportedFormats;
 };
 
 } // namespace Marble

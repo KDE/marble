@@ -15,8 +15,8 @@
 #include "LayerInterface.h"
 #include <QObject>
 
+#include <QList>
 #include <QPainter>
-#include <QVector>
 
 #include "PlacemarkLayout.h"
 
@@ -72,7 +72,7 @@ public:
     /**
      * Returns a list of model indexes that are at position @p pos.
      */
-    QVector<const GeoDataFeature *> whichPlacemarkAt(const QPoint &pos);
+    QList<const GeoDataFeature *> whichPlacemarkAt(const QPoint &pos);
 
     bool hasPlacemarkAt(const QPoint &pos);
 
@@ -102,7 +102,7 @@ Q_SIGNALS:
     void repaintNeeded();
 
 private:
-    void renderDebug(GeoPainter *painter, ViewportParams *viewport, const QVector<VisiblePlacemark *> &placemarks) const;
+    void renderDebug(GeoPainter *painter, ViewportParams *viewport, const QList<VisiblePlacemark *> &placemarks) const;
 
     PlacemarkLayout m_layout;
     bool m_debugModeEnabled;

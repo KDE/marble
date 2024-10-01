@@ -9,10 +9,10 @@
 #define SIGNALS_H
 
 #include <QDataStream>
+#include <QList>
 #include <QLocalSocket>
 #include <QString>
 #include <QStringList>
-#include <QVector>
 
 namespace MoNav
 {
@@ -106,7 +106,7 @@ public:
     // a valid  routing module directory
     QString dataDirectory;
     // waypoints of the route
-    QVector<Node> waypoints;
+    QList<Node> waypoints;
 
     void post(QIODevice *out)
     {
@@ -155,8 +155,8 @@ public:
     enum ResultType { LoadFailed = 1, RouteFailed = 2, NameLookupFailed = 3, TypeLookupFailed = 4, Success = 5 } type;
 
     double seconds;
-    QVector<Node> pathNodes;
-    QVector<Edge> pathEdges;
+    QList<Node> pathNodes;
+    QList<Edge> pathEdges;
     QStringList nameStrings;
     QStringList typeStrings;
 

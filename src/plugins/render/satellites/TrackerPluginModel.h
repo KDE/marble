@@ -47,7 +47,7 @@ public:
     /**
      * Return all available items.
      */
-    QVector<TrackerPluginItem *> items() const;
+    QList<TrackerPluginItem *> items() const;
 
     /**
      * Remove all items from the model.

@@ -26,7 +26,7 @@ public:
     void addReference(qint64 id);
 
     const OsmPlacemarkData &osmData() const;
-    const QVector<qint64> &references() const;
+    const QList<qint64> &references() const;
 
     GeoDataPlacemark *create(const OsmNodes &nodes, QSet<qint64> &usedNodes) const;
 
@@ -40,14 +40,14 @@ private:
     static bool isBuildingTag(const StyleBuilder::OsmTag &keyValue);
 
     OsmPlacemarkData m_osmData;
-    QVector<qint64> m_references;
+    QList<qint64> m_references;
 
     static QSet<StyleBuilder::OsmTag> s_areaTags;
     static QSet<StyleBuilder::OsmTag> s_buildingTags;
 
     QString extractBuildingName() const;
     double extractBuildingHeight() const;
-    QVector<GeoDataBuilding::NamedEntry> extractNamedEntries() const;
+    QList<GeoDataBuilding::NamedEntry> extractNamedEntries() const;
 };
 
 typedef QHash<qint64, OsmWay> OsmWays;

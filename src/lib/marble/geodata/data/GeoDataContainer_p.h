@@ -58,7 +58,7 @@ public:
         }
     }
 
-    QVector<GeoDataFeature *> m_vector;
+    QList<GeoDataFeature *> m_vector;
 };
 
 } // namespace Marble

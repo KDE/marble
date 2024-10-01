@@ -102,7 +102,7 @@ public Q_SLOTS:
 
     void setNeedsUpdate();
 
-    void setMapTheme(const QVector<const GeoSceneTextureTileDataset *> &textures,
+    void setMapTheme(const QList<const GeoSceneTextureTileDataset *> &textures,
                      const GeoSceneGroup *textureLayerSettings,
                      const QString &seaFile,
                      const QString &landFile);

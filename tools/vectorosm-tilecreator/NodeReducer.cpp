@@ -13,7 +13,7 @@
 #include "MarbleMath.h"
 
 #include <QDebug>
-#include <QVector>
+#include <QList>
 
 namespace Marble
 {

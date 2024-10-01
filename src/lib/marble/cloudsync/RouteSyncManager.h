@@ -72,7 +72,7 @@ public:
      * Gathers data from local cache directory and returns a route list.
      * @return Routes stored in local cache
      */
-    QVector<RouteItem> cachedRouteList() const;
+    QList<RouteItem> cachedRouteList() const;
 
 public Q_SLOTS:
     /**
@@ -126,7 +126,7 @@ private Q_SLOTS:
      * and then forwards the list to CloudRouteModel
      * @param routeList Downloaded route list
      */
-    void setRouteModelItems(const QVector<RouteItem> &routeList);
+    void setRouteModelItems(const QList<RouteItem> &routeList);
 
 Q_SIGNALS:
     void routeSyncEnabledChanged(bool enabled);

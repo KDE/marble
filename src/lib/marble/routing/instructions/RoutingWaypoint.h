@@ -9,8 +9,8 @@
 #include "RoutingPoint.h"
 #include "marble_export.h"
 
+#include <QList>
 #include <QString>
-#include <QVector>
 
 namespace Marble
 {
@@ -67,7 +67,7 @@ private:
     QString m_roadName;
 };
 
-using RoutingWaypoints = QVector<RoutingWaypoint>;
+using RoutingWaypoints = QList<RoutingWaypoint>;
 
 } // namespace Marble
 

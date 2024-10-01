@@ -16,10 +16,10 @@
 #include "routing/RouteRequest.h"
 
 #include <QBuffer>
+#include <QList>
 #include <QString>
 #include <QTimer>
 #include <QUrl>
-#include <QVector>
 
 namespace Marble
 {

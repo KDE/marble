@@ -18,10 +18,10 @@
 #include <QJsonArray>
 #include <QJsonDocument>
 #include <QJsonObject>
+#include <QList>
 #include <QTime>
 #include <QTimer>
 #include <QUrl>
-#include <QVector>
 
 namespace Marble
 {

@@ -8,7 +8,7 @@
 #define MARBLE_GEOSCENELEGEND_H
 
 #include "GeoDocument.h"
-#include <QVector>
+#include <QList>
 
 #include <geodata_export.h>
 
@@ -36,7 +36,7 @@ public:
      * @param  section  the new section
      */
     void addSection(const GeoSceneSection *);
-    QVector<const GeoSceneSection *> sections() const;
+    QList<const GeoSceneSection *> sections() const;
 
 private:
     Q_DISABLE_COPY(GeoSceneLegend)

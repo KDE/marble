@@ -47,7 +47,7 @@ public:
      * Sets the list of routes that will show up in CloudRoutesDialog.
      * @param items List of routes.
      */
-    void setItems(const QVector<RouteItem> &items);
+    void setItems(const QList<RouteItem> &items);
 
     /**
      * Checks if specified route exists in the local cache.

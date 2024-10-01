@@ -154,7 +154,7 @@ public:
     void setRelations(const QSet<const GeoDataRelation *> &relations);
 
 protected:
-    virtual void handleRelationUpdate(const QVector<const GeoDataRelation *> &relations);
+    virtual void handleRelationUpdate(const QList<const GeoDataRelation *> &relations);
 
     GeoGraphicsItemPrivate *const d;
 };

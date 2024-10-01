@@ -7,7 +7,7 @@
 #define MARBLE_SATELLITESCONFIGNODEITEM_H
 
 #include "SatellitesConfigAbstractItem.h"
-#include <QVector>
+#include <QList>
 
 namespace Marble
 {
@@ -32,7 +32,7 @@ public:
     void clear() override;
 
 private:
-    QVector<SatellitesConfigAbstractItem *> m_children;
+    QList<SatellitesConfigAbstractItem *> m_children;
 };
 
 } // namespace Marble

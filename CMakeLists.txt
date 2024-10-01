@@ -236,7 +236,7 @@ add_definitions(
 
 if (NOT WIN32)
     # Strict iterators can't be used on Windows, they lead to a link error
-    # when application code iterates over a QVector<QPoint> for instance
+    # when application code iterates over a QList<QPoint> for instance
     # See example at https://bugreports.qt.io/browse/QTBUG-78112
     add_definitions(-DQT_STRICT_ITERATORS)
 endif()

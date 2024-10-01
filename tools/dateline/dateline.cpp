@@ -11,8 +11,8 @@
 #include <QDataStream>
 #include <QDebug>
 #include <QFile>
+#include <QList>
 #include <QStringList>
-#include <QVector>
 
 using namespace Marble;
 

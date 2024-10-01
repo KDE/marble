@@ -63,14 +63,14 @@ public:
         m_children.remove(child);
     }
 
-    virtual QVector<QPointF> positions() const = 0;
+    virtual QList<QPointF> positions() const = 0;
 
-    virtual QVector<QPointF> absolutePositions() const = 0;
+    virtual QList<QPointF> absolutePositions() const = 0;
 
     /**
      * @brief Used to get the set of screen bounding rects
      */
-    QVector<QRectF> boundingRects() const;
+    QList<QRectF> boundingRects() const;
 
     virtual void setProjection(const ViewportParams *viewport) = 0;
 

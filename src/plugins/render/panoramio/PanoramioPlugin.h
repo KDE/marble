@@ -27,7 +27,7 @@ public:
 
     QString copyrightYears() const;
 
-    QVector<PluginAuthor> pluginAuthors() const override;
+    QList<PluginAuthor> pluginAuthors() const override;
 
     void initialize();
 

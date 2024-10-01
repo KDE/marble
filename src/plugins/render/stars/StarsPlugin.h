@@ -12,9 +12,9 @@
 
 #include <QBrush>
 #include <QHash>
+#include <QList>
 #include <QMap>
 #include <QVariant>
-#include <QVector>
 
 #include "DialogConfigurationInterface.h"
 #include "Quaternion.h"
@@ -158,7 +158,7 @@ public:
 
     QString copyrightYears() const override;
 
-    QVector<PluginAuthor> pluginAuthors() const override;
+    QList<PluginAuthor> pluginAuthors() const override;
 
     QIcon icon() const override;
 
@@ -239,11 +239,11 @@ private:
     bool m_dsosLoaded;
     bool m_zoomSunMoon;
     bool m_viewSolarSystemLabel;
-    QVector<StarPoint> m_stars;
+    QList<StarPoint> m_stars;
     QPixmap m_pixmapSun;
     QPixmap m_pixmapMoon;
-    QVector<Constellation> m_constellations;
-    QVector<DsoPoint> m_dsos;
+    QList<Constellation> m_constellations;
+    QList<DsoPoint> m_dsos;
     QHash<int, int> m_idHash;
     QImage m_dsoImage;
     int m_magnitudeLimit;
@@ -254,15 +254,15 @@ private:
     QBrush m_eclipticBrush;
     QBrush m_celestialEquatorBrush;
     QBrush m_celestialPoleBrush;
-    QVector<QPixmap> m_pixN1Stars;
-    QVector<QPixmap> m_pixP0Stars;
-    QVector<QPixmap> m_pixP1Stars;
-    QVector<QPixmap> m_pixP2Stars;
-    QVector<QPixmap> m_pixP3Stars;
-    QVector<QPixmap> m_pixP4Stars;
-    QVector<QPixmap> m_pixP5Stars;
-    QVector<QPixmap> m_pixP6Stars;
-    QVector<QPixmap> m_pixP7Stars;
+    QList<QPixmap> m_pixN1Stars;
+    QList<QPixmap> m_pixP0Stars;
+    QList<QPixmap> m_pixP1Stars;
+    QList<QPixmap> m_pixP2Stars;
+    QList<QPixmap> m_pixP3Stars;
+    QList<QPixmap> m_pixP4Stars;
+    QList<QPixmap> m_pixP5Stars;
+    QList<QPixmap> m_pixP6Stars;
+    QList<QPixmap> m_pixP7Stars;
 
     /* Context menu */
     QPointer<QMenu> m_contextMenu;
@@ -314,7 +314,7 @@ public:
 private:
     StarsPlugin *m_plugin;
     QString m_name;
-    QVector<int> m_stars;
+    QList<int> m_stars;
 };
 
 }

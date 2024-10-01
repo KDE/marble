@@ -13,8 +13,8 @@
 #include "MarblePlacemarkModel.h"
 
 #include "MarbleDebug.h"
+#include <QList>
 #include <QString>
-#include <QVector>
 
 #include <QtDebug>
 

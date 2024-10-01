@@ -45,13 +45,13 @@ public:
      * the projection and zoom level.
      * @since 0.26.0
      */
-    QVector<QPointF> positions() const;
+    QList<QPointF> positions() const;
 
     /**
      * @brief Returns the absolute screen bounding boxes of the item.
      * @since 0.26.0
      */
-    QVector<QRectF> boundingRects() const;
+    QList<QRectF> boundingRects() const;
 
     /**
      * Returns the rect of one representation of the object that is at the given position.

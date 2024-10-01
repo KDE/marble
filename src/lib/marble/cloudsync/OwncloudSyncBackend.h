@@ -6,9 +6,9 @@
 #ifndef OWNCLOUDSYNCBACKEND_H
 #define OWNCLOUDSYNCBACKEND_H
 
+#include <QList>
 #include <QNetworkReply>
 #include <QObject>
-#include <QVector>
 
 class QUrl;
 class QDir;
@@ -67,7 +67,7 @@ private Q_SLOTS:
     void validateSettings();
 
 Q_SIGNALS:
-    void routeListDownloaded(const QVector<RouteItem> &routeList);
+    void routeListDownloaded(const QList<RouteItem> &routeList);
     void routeDownloaded();
     void routeDeleted();
     void routeUploadProgress(qint64 sent, qint64 total);

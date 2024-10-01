@@ -36,7 +36,7 @@ class GeoDataLinearRingPrivate;
     objects.
 
     The API which provides access to the nodes is similar to the API of
-    QVector.
+    QList.
 
     GeoDataLinearRing allows LinearRings to be tessellated in order to make them
     follow the terrain and the curvature of the earth. The tessellation options

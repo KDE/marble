@@ -13,11 +13,11 @@
 #define MARBLE_PLACEMARKLAYOUT_H
 
 #include <QHash>
+#include <QList>
 #include <QMap>
 #include <QPointer>
 #include <QRect>
 #include <QSet>
-#include <QVector>
 
 #include "GeoDataPlacemark.h"
 #include <GeoDataStyle.h>
@@ -65,12 +65,12 @@ public:
     /**
      * @reimp
      */
-    QVector<VisiblePlacemark *> generateLayout(const ViewportParams *viewport, int tileLevel);
+    QList<VisiblePlacemark *> generateLayout(const ViewportParams *viewport, int tileLevel);
 
     /**
      * Returns a list of model indexes that are at position @p pos.
      */
-    QVector<const GeoDataFeature *> whichPlacemarkAt(const QPoint &pos);
+    QList<const GeoDataFeature *> whichPlacemarkAt(const QPoint &pos);
 
     QString runtimeTrace() const;
 
@@ -132,11 +132,11 @@ private:
     QItemSelectionModel *const m_selectionModel;
     MarbleClock *const m_clock;
 
-    QVector<VisiblePlacemark *> m_paintOrder;
+    QList<VisiblePlacemark *> m_paintOrder;
     QString m_runtimeTrace;
     int m_labelArea;
     QHash<const GeoDataPlacemark *, VisiblePlacemark *> m_visiblePlacemarks;
-    QVector<QVector<VisiblePlacemark *>> m_rowsection;
+    QList<QList<VisiblePlacemark *>> m_rowsection;
 
     /// map providing the list of placemark belonging in TileId as key
     QMap<TileId, QList<const GeoDataPlacemark *>> m_placemarkCache;

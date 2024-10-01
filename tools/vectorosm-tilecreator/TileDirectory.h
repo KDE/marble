@@ -104,7 +104,7 @@ private:
     InputType m_inputType = OsmxInput;
     QString m_inputFile;
     GeoDataLatLonBox m_boundingBox;
-    QVector<GeoDataLinearRing> m_boundingPolygon;
+    QList<GeoDataLinearRing> m_boundingPolygon;
     QNetworkAccessManager m_downloadManager;
     GeoSceneMercatorTileProjection m_tileProjection;
     QString m_landmassFile;

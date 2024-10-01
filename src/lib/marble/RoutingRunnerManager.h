@@ -8,8 +8,8 @@
 #ifndef MARBLE_ROUTINGRUNNERMANAGER_H
 #define MARBLE_ROUTINGRUNNERMANAGER_H
 
+#include <QList>
 #include <QObject>
-#include <QVector>
 
 #include "marble_export.h"
 
@@ -43,7 +43,7 @@ public:
      * @see routingFinished signal indicates all runners are finished.
      */
     void retrieveRoute(const RouteRequest *request);
-    QVector<GeoDataDocument *> searchRoute(const RouteRequest *request, int timeout = 30000);
+    QList<GeoDataDocument *> searchRoute(const RouteRequest *request, int timeout = 30000);
 
 Q_SIGNALS:
     /**

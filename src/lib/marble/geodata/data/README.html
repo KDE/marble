@@ -31,12 +31,12 @@ GeoDataPlacemark other = placemarkAsFeature;
 
 return (placemark == other); // should return true
 </code></pre>
-This feature is useful so that you can easily store classes which inherit GeoDataFeature in a QVector&lt;GeoDataFeature&gt;
+This feature is useful so that you can easily store classes which inherit GeoDataFeature in a QList&lt;GeoDataFeature&gt;
 which would only be possible with Vectors normally. This is roughly the same as storing a QString in a QVariant (there are no 
 GeoDataFeatures though that can be added at runtime). As an example:
 <pre><code>
 GeoDataPlacemark placemark;
-QVector&lt;GeoDataFeature&gt; m_vector;
+QList&lt;GeoDataFeature&gt; m_vector;
 
 m_vector.append( placemark );
 GeoDataFeature placeMarkAsFeature = m_vector.last();
@@ -71,9 +71,9 @@ This is mostly hidden by <code>QSharedData</code>/<code>QSharedDataPointer</code
 so that you don't have to worry about that.<p/>
 <p>The problems arise, when you try to derive from an implicitly shared 
 class. The <code>detach()</code> function is not virtual in the current implementation of 
-QVector and thus will not call the function from the derived class if 
+QList and thus will not call the function from the derived class if 
 changes occur through the interface of the base class. This leads to both GeoDataContainer
-and GeoDataMultiGeometry not inheriting QVector but rather rebuilding the interface.</p>
+and GeoDataMultiGeometry not inheriting QList but rather rebuilding the interface.</p>
 
 <a name="How implicit sharing and derivation can work together"><h2>How "implicit sharing" and derivation can work together</h2></a>
 <p>As described above, we can't use <code>QSharedData</code> directly if we want 

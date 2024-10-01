@@ -11,7 +11,7 @@
 #include "marble_export.h"
 
 // Qt
-#include <QVector>
+#include <QList>
 
 namespace Marble
 {
@@ -70,7 +70,7 @@ public:
      * Positive y-coordinates are counted top-aligned from the top border of the map.
      * @since 0.26.0
      */
-    QVector<QPointF> absolutePositions() const;
+    QList<QPointF> absolutePositions() const;
 
     /**
      * Returns the flags of the item.

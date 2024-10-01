@@ -154,7 +154,7 @@ public:
      */
     bool screenCoordinates(const GeoDataCoordinates &coordinates, qreal *x, qreal &y, int &pointRepeatNum, const QSizeF &size, bool &globeHidesPoint) const;
 
-    bool screenCoordinates(const GeoDataLineString &lineString, QVector<QPolygonF *> &polygons) const;
+    bool screenCoordinates(const GeoDataLineString &lineString, QList<QPolygonF *> &polygons) const;
 
     /**
      * @brief Get the earth coordinates corresponding to a pixel in the map.

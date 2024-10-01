@@ -45,7 +45,7 @@ public:
 
     bool hasFeatureAt(const QPoint &curpos, const ViewportParams *viewport);
 
-    QVector<const GeoDataFeature *> whichFeatureAt(const QPoint &curpos, const ViewportParams *viewport);
+    QList<const GeoDataFeature *> whichFeatureAt(const QPoint &curpos, const ViewportParams *viewport);
 
     void highlightRouteRelation(qint64 osmId, bool enabled);
 
@@ -86,7 +86,7 @@ Q_SIGNALS:
      * in GeoGraphicsScene which will query for placemark->styleUrl()
      * to decide whether the placemark should be highlighted ot not.
      */
-    void highlightedPlacemarksChanged(const QVector<GeoDataPlacemark *> &clickedPlacemarks);
+    void highlightedPlacemarksChanged(const QList<GeoDataPlacemark *> &clickedPlacemarks);
 
 private:
     std::unique_ptr<GeometryLayerPrivate> d;

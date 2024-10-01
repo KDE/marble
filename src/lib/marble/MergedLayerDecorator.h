@@ -6,7 +6,6 @@
 #define MARBLE_MERGEDLAYERDECORATOR_H
 
 #include <QList>
-#include <QVector>
 
 #include "MarbleGlobal.h"
 
@@ -33,7 +32,7 @@ public:
     MergedLayerDecorator(TileLoader *const tileLoader, const SunLocator *sunLocator);
     virtual ~MergedLayerDecorator();
 
-    void setTextureLayers(const QVector<const GeoSceneTextureTileDataset *> &textureLayers);
+    void setTextureLayers(const QList<const GeoSceneTextureTileDataset *> &textureLayers);
     void updateGroundOverlays(const QList<const GeoDataGroundOverlay *> &groundOverlays);
 
     int textureLayersSize() const;

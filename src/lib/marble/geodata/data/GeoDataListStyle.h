@@ -11,7 +11,7 @@
 #include "geodata_export.h"
 
 #include <QColor>
-#include <QVector>
+#include <QList>
 
 namespace Marble
 {
@@ -46,7 +46,7 @@ public:
     QColor backgroundColor() const;
     void setBackgroundColor(const QColor &color);
 
-    QVector<GeoDataItemIcon *> itemIconList() const;
+    QList<GeoDataItemIcon *> itemIconList() const;
 
     GeoDataItemIcon *child(int);
 
@@ -69,10 +69,10 @@ public:
     GeoDataItemIcon &first();
     const GeoDataItemIcon &first() const;
 
-    QVector<GeoDataItemIcon *>::Iterator begin();
-    QVector<GeoDataItemIcon *>::Iterator end();
-    QVector<GeoDataItemIcon *>::ConstIterator constBegin() const;
-    QVector<GeoDataItemIcon *>::ConstIterator constEnd() const;
+    QList<GeoDataItemIcon *>::Iterator begin();
+    QList<GeoDataItemIcon *>::Iterator end();
+    QList<GeoDataItemIcon *>::ConstIterator constBegin() const;
+    QList<GeoDataItemIcon *>::ConstIterator constEnd() const;
     void clear();
 
     void pack(QDataStream &stream) const override;

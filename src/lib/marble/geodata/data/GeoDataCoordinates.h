@@ -10,8 +10,8 @@
 #define MARBLE_GEODATACOORDINATES_H
 
 #include <QCoreApplication>
+#include <QList>
 #include <QMetaType>
-#include <QVector>
 
 #include "MarbleGlobal.h"
 #include "geodata_export.h"
@@ -84,8 +84,8 @@ public:
     enum BearingType { InitialBearing, FinalBearing };
 
     // Type definitions
-    using Vector = QVector<GeoDataCoordinates>;
-    using PtrVector = QVector<GeoDataCoordinates *>;
+    using Vector = QList<GeoDataCoordinates>;
+    using PtrVector = QList<GeoDataCoordinates *>;
 
     GeoDataCoordinates(const GeoDataCoordinates &other);
 

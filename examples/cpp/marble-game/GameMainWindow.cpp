@@ -15,6 +15,7 @@
 // Qt
 #include <QDebug>
 #include <QFileInfo>
+#include <QList>
 #include <QQuickItem>
 #include <QQuickView>
 #include <QResizeEvent>
@@ -23,7 +24,6 @@
 #include <QString>
 #include <QUrl>
 #include <QVBoxLayout>
-#include <QVector>
 
 // Marble
 #include <marble/GeoDataTreeModel.h>

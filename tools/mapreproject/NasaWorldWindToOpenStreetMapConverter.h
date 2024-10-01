@@ -5,9 +5,9 @@
 #include "mapreproject.h"
 
 #include <QDir>
+#include <QList>
 #include <QObject>
 #include <QPair>
-#include <QVector>
 
 class OsmTileClusterRenderer;
 class Thread;
@@ -26,13 +26,13 @@ class NasaWorldWindToOpenStreetMapConverter : public QObject
 public:
     explicit NasaWorldWindToOpenStreetMapConverter(QObject *const parent = nullptr);
 
-    void setMapSources(QVector<ReadOnlyMapDefinition> const &mapSources);
+    void setMapSources(QList<ReadOnlyMapDefinition> const &mapSources);
     void setOsmBaseDirectory(QDir const &nwwBaseDirectory);
     void setOsmTileClusterEdgeLengthTiles(int const clusterEdgeLengthTiles);
     void setOsmTileLevel(int const level);
     void setThreadCount(int const threadCount);
 
-    QVector<QPair<Thread *, OsmTileClusterRenderer *>> start();
+    QList<QPair<Thread *, OsmTileClusterRenderer *>> start();
 
     void testReprojection();
 
@@ -47,7 +47,7 @@ private:
     void incNextCluster();
 
     int m_threadCount;
-    QVector<ReadOnlyMapDefinition> m_mapSources;
+    QList<ReadOnlyMapDefinition> m_mapSources;
     QDir m_osmBaseDirectory;
     int m_osmTileLevel;
 

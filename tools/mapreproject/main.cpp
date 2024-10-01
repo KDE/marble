@@ -9,9 +9,9 @@
 #include <QCoreApplication>
 #include <QDebug>
 #include <QDir>
+#include <QList>
 #include <QPair>
 #include <QThread>
-#include <QVector>
 
 #include <getopt.h>
 

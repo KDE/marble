@@ -10,7 +10,7 @@
 #include "MarbleModel.h"
 
 #include "MarbleDebug.h"
-#include <QVector>
+#include <QList>
 
 namespace Marble
 {

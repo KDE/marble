@@ -8,8 +8,8 @@
 #ifndef MARBLE_GEODATAPOINT_H
 #define MARBLE_GEODATAPOINT_H
 
+#include <QList>
 #include <QMetaType>
-#include <QVector>
 
 #include <cmath>
 
@@ -75,7 +75,7 @@ public:
     const char *nodeType() const override;
 
     // Type definitions
-    using Vector = QVector<GeoDataPoint>;
+    using Vector = QList<GeoDataPoint>;
 
     // Serialize the Placemark to @p stream
     void pack(QDataStream &stream) const override;

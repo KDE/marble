@@ -206,7 +206,7 @@ public:
     Placemark *currentPosition() const;
     Q_INVOKABLE QPointF screenCoordinatesFromCoordinate(Coordinate *coordinate) const;
     Q_INVOKABLE QPointF screenCoordinatesFromGeoDataCoordinates(const GeoDataCoordinates &coordinates) const;
-    bool screenCoordinatesFromGeoDataLineString(const GeoDataLineString &lineString, QVector<QPolygonF *> &polygons) const;
+    bool screenCoordinatesFromGeoDataLineString(const GeoDataLineString &lineString, QList<QPolygonF *> &polygons) const;
 
     bool screenCoordinatesToGeoDataCoordinates(const QPoint &point, GeoDataCoordinates &coordinates);
     Q_INVOKABLE bool screenCoordinatesToCoordinate(const QPoint &point, Coordinate *coordinate);

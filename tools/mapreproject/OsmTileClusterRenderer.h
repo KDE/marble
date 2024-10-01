@@ -6,8 +6,8 @@
 
 #include <QDir>
 #include <QImage>
+#include <QList>
 #include <QObject>
-#include <QVector>
 
 class ReadOnlyMapImage;
 
@@ -19,7 +19,7 @@ public:
     explicit OsmTileClusterRenderer(QObject *const parent = nullptr);
 
     void setClusterEdgeLengthTiles(int const clusterEdgeLengthTiles);
-    void setMapSources(QVector<ReadOnlyMapDefinition> const &mapSources);
+    void setMapSources(QList<ReadOnlyMapDefinition> const &mapSources);
     void setOsmBaseDirectory(QDir const &osmBaseDirectory);
     void setOsmTileLevel(int const level);
 
@@ -44,8 +44,8 @@ private:
     int m_osmMapEdgeLengthPixel;
     int m_clusterEdgeLengthTiles;
 
-    QVector<ReadOnlyMapDefinition> m_mapSourceDefinitions;
-    QVector<ReadOnlyMapImage *> m_mapSources;
+    QList<ReadOnlyMapDefinition> m_mapSourceDefinitions;
+    QList<ReadOnlyMapImage *> m_mapSources;
     int m_mapSourceCount;
 };
 

@@ -41,7 +41,7 @@ public:
     RenderContext m_renderContext;
     GeoDataStyle::ConstPtr m_style;
     const StyleBuilder *m_styleBuilder;
-    QVector<const GeoDataRelation *> m_relations;
+    QList<const GeoDataRelation *> m_relations;
 
     QStringList m_paintLayers;
 

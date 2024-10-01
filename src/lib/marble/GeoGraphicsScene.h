@@ -73,7 +73,7 @@ public:
     void resetStyle();
 
 public Q_SLOTS:
-    void applyHighlight(const QVector<GeoDataPlacemark *> &);
+    void applyHighlight(const QList<GeoDataPlacemark *> &);
 
 Q_SIGNALS:
     void repaintNeeded();

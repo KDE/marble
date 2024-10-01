@@ -10,12 +10,12 @@
 #include "MarbleDirs.h"
 
 #include <QIcon>
+#include <QList>
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
 #include <QNetworkRequest>
 #include <QSet>
 #include <QUrl>
-#include <QVector>
 
 namespace Marble
 {
