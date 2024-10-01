@@ -177,7 +177,7 @@ QString WmsCapabilities::boundingBox(const QString &layer, const QString &projec
     QString result;
     result = m_wmsLayerCoordinateSystems.value(layer).value(projection);
     if (result.isEmpty()) {
-        result = m_wmsLayerCoordinateSystems.value(0).value(projection);
+        result = m_wmsLayerCoordinateSystems.value(nullptr).value(projection);
     }
     return result;
 }

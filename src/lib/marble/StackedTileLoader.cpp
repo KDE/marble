@@ -103,7 +103,7 @@ const StackedTile *StackedTileLoader::loadTile(TileId const &stackedTileId)
 {
     // check if the tile is in the hash
     d->m_cacheLock.lockForRead();
-    StackedTile *stackedTile = d->m_tilesOnDisplay.value(stackedTileId, 0);
+    StackedTile *stackedTile = d->m_tilesOnDisplay.value(stackedTileId, nullptr);
     d->m_cacheLock.unlock();
     if (stackedTile) {
         stackedTile->setUsed(true);
@@ -114,7 +114,7 @@ const StackedTile *StackedTileLoader::loadTile(TileId const &stackedTileId)
     d->m_cacheLock.lockForWrite();
 
     // has another thread loaded our tile due to a race condition?
-    stackedTile = d->m_tilesOnDisplay.value(stackedTileId, 0);
+    stackedTile = d->m_tilesOnDisplay.value(stackedTileId, nullptr);
     if (stackedTile) {
         Q_ASSERT(stackedTile->used() && "other thread should have marked tile as used");
         d->m_cacheLock.unlock();
