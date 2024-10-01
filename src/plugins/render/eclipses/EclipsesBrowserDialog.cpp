@@ -56,7 +56,7 @@ void EclipsesBrowserDialog::accept()
 
     if (selected.isValid()) {
         EclipsesItem *item = static_cast<EclipsesItem *>(selected.internalPointer());
-        emit buttonShowClicked(m_eclModel->year(), item->index());
+        Q_EMIT buttonShowClicked(m_eclModel->year(), item->index());
     }
 
     QDialog::accept();

@@ -71,7 +71,7 @@ void Settings::setDebugOutputEnabled(bool debugOutputEnabled)
     }
 
     Marble::MarbleDebug::setEnabled(debugOutputEnabled);
-    emit debugOutputEnabledChanged(Marble::MarbleDebug::isEnabled());
+    Q_EMIT debugOutputEnabledChanged(Marble::MarbleDebug::isEnabled());
 }
 
 #include "moc_Settings.cpp"

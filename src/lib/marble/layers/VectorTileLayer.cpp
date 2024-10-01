@@ -153,7 +153,7 @@ bool VectorTileLayer::render(GeoPainter *painter, ViewportParams *viewport, cons
         level = qMax(level, mapper->tileZoomLevel());
     }
     if (oldLevel != level && level >= 0) {
-        emit tileLevelChanged(level);
+        Q_EMIT tileLevelChanged(level);
     }
 
     return true;
@@ -235,7 +235,7 @@ void VectorTileLayer::setMapTheme(const QList<const GeoSceneVectorTileDataset *>
     d->updateLayerSettings();
     auto const level = tileZoomLevel();
     if (level >= 0) {
-        emit tileLevelChanged(level);
+        Q_EMIT tileLevelChanged(level);
     }
 }
 

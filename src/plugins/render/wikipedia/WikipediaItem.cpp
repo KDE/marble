@@ -67,7 +67,7 @@ void WikipediaItem::addDownloadedFile(const QString &url, const QString &type)
     if (type == QLatin1StringView("thumbnail")) {
         m_thumbnail.load(url);
         updateSize();
-        emit updated();
+        Q_EMIT updated();
     }
 }
 

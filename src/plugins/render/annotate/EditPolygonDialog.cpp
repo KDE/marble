@@ -247,7 +247,7 @@ void EditPolygonDialog::updatePolygon()
         d->m_placemark->setVisualCategory(category);
     }
 
-    emit polygonUpdated(d->m_placemark);
+    Q_EMIT polygonUpdated(d->m_placemark);
 }
 
 void EditPolygonDialog::updateLinesDialog(const QColor &color)
@@ -312,7 +312,7 @@ void EditPolygonDialog::restoreInitial(int result)
         d->m_placemark->setOsmData(d->m_initialOsmData);
     }
 
-    emit polygonUpdated(d->m_placemark);
+    Q_EMIT polygonUpdated(d->m_placemark);
 }
 
 }

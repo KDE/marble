@@ -212,7 +212,7 @@ void EditPolylineDialog::updatePolyline()
         d->m_placemark->setVisualCategory(category);
     }
 
-    emit polylineUpdated(d->m_placemark);
+    Q_EMIT polylineUpdated(d->m_placemark);
 }
 
 void EditPolylineDialog::updateLinesDialog(const QColor &color)
@@ -252,7 +252,7 @@ void EditPolylineDialog::restoreInitial(int result)
         d->m_placemark->setOsmData(d->m_initialOsmData);
     }
 
-    emit polylineUpdated(d->m_placemark);
+    Q_EMIT polylineUpdated(d->m_placemark);
 }
 
 void EditPolylineDialog::checkFields()

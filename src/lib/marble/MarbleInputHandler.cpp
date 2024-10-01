@@ -270,14 +270,14 @@ void MarbleDefaultInputHandler::lmbTimeout()
                                                                                               clickedLon,
                                                                                               clickedLat,
                                                                                               GeoDataCoordinates::Degree);
-        emit lmbRequest(d->m_leftPressedX, d->m_leftPressedY);
+        Q_EMIT lmbRequest(d->m_leftPressedX, d->m_leftPressedY);
 
         /**
-         * emit mouse click only when the clicked
+         * Q_EMIT mouse click only when the clicked
          * position is within the globe.
          */
         if (isPointOnGlobe) {
-            emit mouseClickGeoPosition(clickedLon, clickedLat, GeoDataCoordinates::Degree);
+            Q_EMIT mouseClickGeoPosition(clickedLon, clickedLat, GeoDataCoordinates::Degree);
         }
     }
 }
@@ -524,9 +524,9 @@ void MarbleDefaultInputHandler::handleMouseButtonRelease(QMouseEvent *event)
 {
     if (event->button() == Qt::LeftButton) {
         d->m_pressAndHoldTimer.stop();
-        // emit current coordinates to be interpreted
+        // Q_EMIT current coordinates to be interpreted
         // as requested
-        emit mouseClickScreenPosition(d->m_leftPressedX, d->m_leftPressedY);
+        Q_EMIT mouseClickScreenPosition(d->m_leftPressedX, d->m_leftPressedY);
 
         d->m_leftPressed = false;
         if (MarbleInputHandler::d->m_inertialEarthRotation) {
@@ -544,7 +544,7 @@ void MarbleDefaultInputHandler::handleMouseButtonRelease(QMouseEvent *event)
 
     if (event->type() == QEvent::MouseButtonRelease && event->button() == Qt::RightButton) {
         if (d->m_rightOrigin == event->pos()) {
-            emit rmbRequest(event->x(), event->y());
+            Q_EMIT rmbRequest(event->x(), event->y());
         }
         d->m_rightPressed = false;
 
@@ -564,13 +564,13 @@ void MarbleDefaultInputHandler::handleMouseButtonRelease(QMouseEvent *event)
 
 void MarbleDefaultInputHandler::notifyPosition(bool isMouseAboveMap, qreal mouseLon, qreal mouseLat)
 {
-    // emit the position string only if the signal got attached
+    // Q_EMIT the position string only if the signal got attached
     if (MarbleInputHandler::d->m_positionSignalConnected) {
         if (!isMouseAboveMap) {
-            emit mouseMoveGeoPosition(QCoreApplication::translate("Marble", NOT_AVAILABLE));
+            Q_EMIT mouseMoveGeoPosition(QCoreApplication::translate("Marble", NOT_AVAILABLE));
         } else {
             QString position = GeoDataCoordinates(mouseLon, mouseLat).toString();
-            emit mouseMoveGeoPosition(position);
+            Q_EMIT mouseMoveGeoPosition(position);
         }
     }
 }

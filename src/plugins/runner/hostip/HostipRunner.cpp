@@ -28,7 +28,7 @@ HostipRunner::~HostipRunner()
 
 void HostipRunner::slotNoResults()
 {
-    emit searchFinished(QList<GeoDataPlacemark *>());
+    Q_EMIT searchFinished(QList<GeoDataPlacemark *>());
 }
 
 void HostipRunner::search(const QString &searchTerm, const GeoDataLatLonBox &)
@@ -105,7 +105,7 @@ void HostipRunner::slotRequestFinished(QNetworkReply *reply)
         placemarks << placemark;
     }
 
-    emit searchFinished(placemarks);
+    Q_EMIT searchFinished(placemarks);
 }
 
 } // namespace Marble

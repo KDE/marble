@@ -90,7 +90,7 @@ void EditGroundOverlayDialog::updateGroundOverlay()
 
 void EditGroundOverlayDialog::setGroundOverlayUpdated()
 {
-    emit groundOverlayUpdated(d->m_overlay);
+    Q_EMIT groundOverlayUpdated(d->m_overlay);
 }
 
 void EditGroundOverlayDialog::checkFields()

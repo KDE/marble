@@ -108,7 +108,7 @@ bool RoutingProfilesModel::setProfileName(int row, const QString &name)
         return false;
     }
     m_profiles[row].setName(name);
-    emit dataChanged(index(row, 0), index(row, 0));
+    Q_EMIT dataChanged(index(row, 0), index(row, 0));
     return true;
 }
 

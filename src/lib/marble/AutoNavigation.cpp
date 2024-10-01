@@ -268,9 +268,9 @@ void AutoNavigation::Private::adjustZoom(const GeoDataCoordinates &currentPositi
 
         m_selfInteraction = true;
         if (remainingTime < thresholdLow) {
-            emit m_parent->zoomOut(Instant);
+            Q_EMIT m_parent->zoomOut(Instant);
         } else if (remainingTime > thresholdHigh) {
-            emit m_parent->zoomIn(Instant);
+            Q_EMIT m_parent->zoomIn(Instant);
         }
         m_selfInteraction = false;
     }
@@ -282,10 +282,10 @@ void AutoNavigation::Private::centerOn(const GeoDataCoordinates &position)
     RoutingManager const *routingManager = m_model->routingManager();
     RoutingModel const *routingModel = routingManager->routingModel();
     if (!routingManager->guidanceModeEnabled() || routingModel->deviatedFromRoute()) {
-        emit m_parent->centerOn(position, false);
+        Q_EMIT m_parent->centerOn(position, false);
     } else {
         GeoDataCoordinates positionOnRoute = routingModel->route().positionOnRoute();
-        emit m_parent->centerOn(positionOnRoute, false);
+        Q_EMIT m_parent->centerOn(positionOnRoute, false);
     }
     m_selfInteraction = false;
 }
@@ -336,13 +336,13 @@ void AutoNavigation::adjust(const GeoDataCoordinates &position, qreal speed)
 void AutoNavigation::setAutoZoom(bool autoZoom)
 {
     d->m_adjustZoom = autoZoom;
-    emit autoZoomToggled(autoZoom);
+    Q_EMIT autoZoomToggled(autoZoom);
 }
 
 void AutoNavigation::setRecenter(CenterMode recenterMode)
 {
     d->m_recenterMode = recenterMode;
-    emit recenterModeChanged(recenterMode);
+    Q_EMIT recenterModeChanged(recenterMode);
 }
 
 void AutoNavigation::inhibitAutoAdjustments()

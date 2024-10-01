@@ -346,7 +346,7 @@ void PositionMarker::writeSettings()
     m_trailColor = m_trailColor;
     m_showTrail = ui_configWidget->m_trailCheckBox->isChecked();
 
-    emit settingsChanged(nameId());
+    Q_EMIT settingsChanged(nameId());
 }
 
 void PositionMarker::setPosition(const GeoDataCoordinates &position)
@@ -360,7 +360,7 @@ void PositionMarker::setPosition(const GeoDataCoordinates &position)
         m_trail.pop_back();
     }
     if (m_lastBoundingBox.contains(m_currentPosition)) {
-        emit repaintNeeded(m_dirtyRegion);
+        Q_EMIT repaintNeeded(m_dirtyRegion);
     }
 }
 

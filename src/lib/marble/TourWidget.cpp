@@ -712,7 +712,7 @@ void TourWidget::deleteSelected()
     d->deleteSelected();
     GeoDataFeature *feature = d->getPlaylistFeature();
     if (feature) {
-        emit featureUpdated(feature);
+        Q_EMIT featureUpdated(feature);
         d->updateRootIndex();
     }
 }
@@ -732,7 +732,7 @@ void TourWidget::finishAddingItem()
 {
     GeoDataFeature *feature = d->getPlaylistFeature();
     if (feature) {
-        emit featureUpdated(feature);
+        Q_EMIT featureUpdated(feature);
         d->updateRootIndex();
     }
 }
@@ -742,7 +742,7 @@ void TourWidget::moveDown()
     d->moveDown();
     GeoDataFeature *feature = d->getPlaylistFeature();
     if (feature) {
-        emit featureUpdated(feature);
+        Q_EMIT featureUpdated(feature);
         d->updateRootIndex();
     }
 }
@@ -752,7 +752,7 @@ void TourWidget::moveUp()
     d->moveUp();
     GeoDataFeature *feature = d->getPlaylistFeature();
     if (feature) {
-        emit featureUpdated(feature);
+        Q_EMIT featureUpdated(feature);
         d->updateRootIndex();
     }
 }

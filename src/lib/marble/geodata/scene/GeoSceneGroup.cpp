@@ -47,7 +47,7 @@ bool GeoSceneGroup::setPropertyValue(const QString &name, bool value)
     for (; it != end; ++it) {
         if ((*it)->name() == name) {
             (*it)->setValue(value);
-            emit valueChanged(name, value);
+            Q_EMIT valueChanged(name, value);
             return true;
         }
     }
@@ -95,7 +95,7 @@ void GeoSceneGroup::addProperty(GeoSceneProperty *property)
 
     // Establish connection to the outside, e.g. the LegendBrowser
     connect(property, SIGNAL(valueChanged(QString, bool)), SIGNAL(valueChanged(QString, bool)));
-    emit valueChanged(property->name(), property->value());
+    Q_EMIT valueChanged(property->name(), property->value());
 }
 
 const GeoSceneProperty *GeoSceneGroup::property(const QString &name) const

@@ -101,22 +101,22 @@ int OfflineDataModel::toSource(int idx) const
 
 void OfflineDataModel::handleInstallationProgress(int index, qreal progress)
 {
-    emit installationProgressed(fromSource(index), progress);
+    Q_EMIT installationProgressed(fromSource(index), progress);
 }
 
 void OfflineDataModel::handleInstallationFinished(int index)
 {
-    emit installationFinished(fromSource(index));
+    Q_EMIT installationFinished(fromSource(index));
 }
 
 void OfflineDataModel::handleInstallationFailed(int index, const QString &error)
 {
-    emit installationFailed(fromSource(index), error);
+    Q_EMIT installationFailed(fromSource(index), error);
 }
 
 void OfflineDataModel::handleUninstallationFinished(int index)
 {
-    emit uninstallationFinished(fromSource(index));
+    Q_EMIT uninstallationFinished(fromSource(index));
 }
 
 bool OfflineDataModel::filterAcceptsRow(int source_row, const QModelIndex &source_parent) const

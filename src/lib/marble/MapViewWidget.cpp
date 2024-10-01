@@ -491,42 +491,42 @@ void MapViewWidget::setProjection(Projection projection)
 
 void MapViewWidget::globeViewRequested()
 {
-    emit projectionChanged(Marble::Spherical);
+    Q_EMIT projectionChanged(Marble::Spherical);
 }
 
 void MapViewWidget::flatViewRequested()
 {
-    emit projectionChanged(Marble::Equirectangular);
+    Q_EMIT projectionChanged(Marble::Equirectangular);
 }
 
 void MapViewWidget::mercatorViewRequested()
 {
-    emit projectionChanged(Marble::Mercator);
+    Q_EMIT projectionChanged(Marble::Mercator);
 }
 
 void MapViewWidget::gnomonicViewRequested()
 {
-    emit projectionChanged(Marble::Gnomonic);
+    Q_EMIT projectionChanged(Marble::Gnomonic);
 }
 
 void MapViewWidget::stereographicViewRequested()
 {
-    emit projectionChanged(Marble::Stereographic);
+    Q_EMIT projectionChanged(Marble::Stereographic);
 }
 
 void MapViewWidget::lambertAzimuthalViewRequested()
 {
-    emit projectionChanged(Marble::LambertAzimuthal);
+    Q_EMIT projectionChanged(Marble::LambertAzimuthal);
 }
 
 void MapViewWidget::azimuthalEquidistantViewRequested()
 {
-    emit projectionChanged(Marble::AzimuthalEquidistant);
+    Q_EMIT projectionChanged(Marble::AzimuthalEquidistant);
 }
 
 void MapViewWidget::verticalPerspectiveViewRequested()
 {
-    emit projectionChanged(Marble::VerticalPerspective);
+    Q_EMIT projectionChanged(Marble::VerticalPerspective);
 }
 
 void MapViewWidget::Private::celestialBodySelected(int comboIndex)
@@ -552,18 +552,18 @@ void MapViewWidget::Private::celestialBodySelected(int comboIndex)
     }
     if (!foundMapTheme) {
         QModelIndex index = m_mapSortProxy.index(0, 0);
-        emit q->mapThemeIdChanged(m_mapSortProxy.data(index, Qt::UserRole + 1).toString());
+        Q_EMIT q->mapThemeIdChanged(m_mapSortProxy.data(index, Qt::UserRole + 1).toString());
     }
 
     if (oldPlanetId != m_marbleModel->planetId()) {
-        emit q->celestialBodyChanged(m_marbleModel->planetId());
+        Q_EMIT q->celestialBodyChanged(m_marbleModel->planetId());
     }
 }
 
 // Relay a signal and convert the parameter from an int to a Projection.
 void MapViewWidget::Private::projectionSelected(int projectionIndex)
 {
-    emit q->projectionChanged((Projection)projectionIndex);
+    Q_EMIT q->projectionChanged((Projection)projectionIndex);
 }
 
 void MapViewWidget::Private::mapThemeSelected(QModelIndex index)
@@ -578,7 +578,7 @@ void MapViewWidget::Private::mapThemeSelected(int index)
 
     mDebug() << currentmaptheme;
 
-    emit q->mapThemeIdChanged(currentmaptheme);
+    Q_EMIT q->mapThemeIdChanged(currentmaptheme);
 }
 
 QString MapViewWidget::Private::currentThemeName() const
@@ -628,7 +628,7 @@ void MapViewWidget::Private::deleteMap()
     if (QMessageBox::warning(q, tr("Marble"), tr("Are you sure that you want to delete \"%1\"?").arg(currentThemeName()), QMessageBox::Yes | QMessageBox::No)
         == QMessageBox::Yes) {
         MapThemeManager::deleteMapTheme(currentThemePath());
-        emit q->mapThemeDeleted();
+        Q_EMIT q->mapThemeDeleted();
     }
 }
 
@@ -642,7 +642,7 @@ void MapViewWidget::Private::toggleFavorite()
     }
     QStandardItemModel *sourceModel = qobject_cast<QStandardItemModel *>(m_mapSortProxy.sourceModel());
     const QModelIndex sourceIndex = m_mapSortProxy.mapToSource(index);
-    emit sourceModel->dataChanged(sourceIndex, sourceIndex);
+    Q_EMIT sourceModel->dataChanged(sourceIndex, sourceIndex);
     index = m_mapViewUi.marbleThemeSelectView->currentIndex();
     m_mapViewUi.marbleThemeSelectView->scrollTo(index);
 }

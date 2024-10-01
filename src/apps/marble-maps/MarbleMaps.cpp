@@ -81,17 +81,17 @@ void MarbleMapsApplication::setKeepScreenOn(bool screenOn)
 #else
     Q_UNUSED(action);
 #endif
-    emit keepScreenOnChanged(screenOn);
+    Q_EMIT keepScreenOnChanged(screenOn);
 }
 
 void MarbleMapsApplication::handleApplicationStateChange(Qt::ApplicationState state)
 {
     if (state == Qt::ApplicationSuspended) {
         m_suspended = true;
-        emit isSuspendedChanged(m_suspended);
+        Q_EMIT isSuspendedChanged(m_suspended);
     } else if (state == Qt::ApplicationActive) {
         m_suspended = false;
-        emit isSuspendedChanged(m_suspended);
+        Q_EMIT isSuspendedChanged(m_suspended);
     }
 }
 

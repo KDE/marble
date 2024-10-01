@@ -132,7 +132,7 @@ void RenderPlugin::setEnabled(bool enabled)
 
     d->m_item.setCheckState(enabled ? Qt::Checked : Qt::Unchecked);
 
-    emit enabledChanged(enabled);
+    Q_EMIT enabledChanged(enabled);
 }
 
 void RenderPlugin::setVisible(bool visible)
@@ -142,7 +142,7 @@ void RenderPlugin::setVisible(bool visible)
 
     d->m_visible = visible;
 
-    emit visibilityChanged(visible, nameId());
+    Q_EMIT visibilityChanged(visible, nameId());
 }
 
 void RenderPlugin::setUserCheckable(bool checkable)
@@ -150,7 +150,7 @@ void RenderPlugin::setUserCheckable(bool checkable)
     if (checkable != d->m_userCheckable) {
         d->m_action.setEnabled(checkable);
         d->m_userCheckable = checkable;
-        emit userCheckableChanged(checkable);
+        Q_EMIT userCheckableChanged(checkable);
     }
 }
 

@@ -38,7 +38,7 @@ OsmNominatimRunner::~OsmNominatimRunner()
 
 void OsmNominatimRunner::returnNoResults()
 {
-    emit searchFinished(QList<GeoDataPlacemark *>());
+    Q_EMIT searchFinished(QList<GeoDataPlacemark *>());
 }
 
 void OsmNominatimRunner::search(const QString &searchTerm, const GeoDataLatLonBox &preferred)
@@ -199,7 +199,7 @@ void OsmNominatimRunner::handleResult(QNetworkReply *reply)
         }
     }
 
-    emit searchFinished(placemarks);
+    Q_EMIT searchFinished(placemarks);
 }
 
 } // namespace Marble

@@ -196,7 +196,7 @@ bool PluginItemDelegate::editorEvent(QEvent *event, QAbstractItemModel *model, c
                 if (event->type() == QEvent::MouseButtonRelease) {
                     m_aboutPressedIndex = QModelIndex();
                     m_configPressedIndex = QModelIndex();
-                    emit aboutPluginClicked(index);
+                    Q_EMIT aboutPluginClicked(index);
                     return true;
                 }
                 if (event->type() == QEvent::MouseMove) {
@@ -234,7 +234,7 @@ bool PluginItemDelegate::editorEvent(QEvent *event, QAbstractItemModel *model, c
                 if (event->type() == QEvent::MouseButtonRelease) {
                     m_aboutPressedIndex = QModelIndex();
                     m_configPressedIndex = QModelIndex();
-                    emit configPluginClicked(index);
+                    Q_EMIT configPluginClicked(index);
                     return true;
                 }
                 if (event->type() == QEvent::MouseMove) {

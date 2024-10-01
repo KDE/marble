@@ -152,7 +152,7 @@ void GpsInfo::updateLocation(const GeoDataCoordinates &coordinates, qreal)
     }
 
     update();
-    emit repaintNeeded();
+    Q_EMIT repaintNeeded();
 }
 
 }

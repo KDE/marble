@@ -229,7 +229,7 @@ void VoiceNavigationModelPrivate::updateInstruction(const RouteSegment &segment,
             m_announcementText += QLatin1StringView(", then ") + nextSegmentAnnouncementText;
         }
     }
-    emit m_parent->instructionChanged();
+    Q_EMIT m_parent->instructionChanged();
 }
 
 void VoiceNavigationModelPrivate::updateInstruction(const QString &name)
@@ -237,7 +237,7 @@ void VoiceNavigationModelPrivate::updateInstruction(const QString &name)
     m_queue.clear();
     m_queue << audioFile(name);
     m_announcementText = name;
-    emit m_parent->instructionChanged();
+    Q_EMIT m_parent->instructionChanged();
 }
 
 void VoiceNavigationModelPrivate::initializeMaps()
@@ -307,8 +307,8 @@ void VoiceNavigationModel::setSpeaker(const QString &speaker)
             d->m_speaker = speaker;
         }
 
-        emit speakerChanged();
-        emit previewChanged();
+        Q_EMIT speakerChanged();
+        Q_EMIT previewChanged();
     }
 }
 
@@ -321,8 +321,8 @@ void VoiceNavigationModel::setSpeakerEnabled(bool enabled)
 {
     if (enabled != d->m_speakerEnabled) {
         d->m_speakerEnabled = enabled;
-        emit isSpeakerEnabledChanged();
-        emit previewChanged();
+        Q_EMIT isSpeakerEnabledChanged();
+        Q_EMIT previewChanged();
     }
 }
 

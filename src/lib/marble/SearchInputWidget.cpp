@@ -51,7 +51,7 @@ void SearchInputWidget::search()
     if (!searchTerm.isEmpty()) {
         setBusy(true);
     }
-    emit search(searchTerm, m_areaSearch ? AreaSearch : GlobalSearch);
+    Q_EMIT search(searchTerm, m_areaSearch ? AreaSearch : GlobalSearch);
 }
 
 void SearchInputWidget::disableSearchAnimation()
@@ -64,7 +64,7 @@ void SearchInputWidget::centerOnSearchSuggestion(const QModelIndex &index)
     QAbstractItemModel const *model = completer()->completionModel();
     QVariant const value = model->data(index, MarblePlacemarkModel::CoordinateRole);
     GeoDataCoordinates const coordinates = value.value<GeoDataCoordinates>();
-    emit centerOn(coordinates);
+    Q_EMIT centerOn(coordinates);
 }
 
 void SearchInputWidget::showDropDownMenu()

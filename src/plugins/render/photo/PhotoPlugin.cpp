@@ -230,7 +230,7 @@ void PhotoPlugin::writeSettings()
     }
     m_checkStateList = licenseCheckStateList;
 
-    emit settingsChanged(nameId());
+    Q_EMIT settingsChanged(nameId());
 }
 
 void PhotoPlugin::updateSettings()

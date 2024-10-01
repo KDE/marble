@@ -49,11 +49,11 @@ void ConflictDialog::open()
         break;
     case ConflictDialog::PreferLocal:
         m_mergeItem->setResolution(MergeItem::A);
-        emit resolveConflict(m_mergeItem);
+        Q_EMIT resolveConflict(m_mergeItem);
         break;
     case ConflictDialog::PreferCloud:
         m_mergeItem->setResolution(MergeItem::B);
-        emit resolveConflict(m_mergeItem);
+        Q_EMIT resolveConflict(m_mergeItem);
         break;
     }
 }
@@ -69,21 +69,21 @@ void ConflictDialog::resolveConflict(QAbstractButton *button)
         switch (actionRole) {
         case ConflictDialog::Local:
             m_mergeItem->setResolution(MergeItem::A);
-            emit resolveConflict(m_mergeItem);
+            Q_EMIT resolveConflict(m_mergeItem);
             break;
         case ConflictDialog::Cloud:
             m_mergeItem->setResolution(MergeItem::B);
-            emit resolveConflict(m_mergeItem);
+            Q_EMIT resolveConflict(m_mergeItem);
             break;
         case ConflictDialog::AllLocal:
             m_mergeItem->setResolution(MergeItem::A);
             m_resolveAction = ConflictDialog::PreferLocal;
-            emit resolveConflict(m_mergeItem);
+            Q_EMIT resolveConflict(m_mergeItem);
             break;
         case ConflictDialog::AllCloud:
             m_mergeItem->setResolution(MergeItem::B);
             m_resolveAction = ConflictDialog::PreferCloud;
-            emit resolveConflict(m_mergeItem);
+            Q_EMIT resolveConflict(m_mergeItem);
             break;
         default:
             break;

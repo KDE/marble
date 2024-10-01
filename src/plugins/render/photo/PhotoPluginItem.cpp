@@ -88,7 +88,7 @@ void PhotoPluginItem::addDownloadedFile(const QString &url, const QString &type)
     }
 
     if (initialized()) {
-        emit updated();
+        Q_EMIT updated();
     }
 }
 

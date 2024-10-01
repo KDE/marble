@@ -310,7 +310,7 @@ void OverviewMap::setSettings(const QHash<QString, QVariant> &settings)
     m_target.clear(); // FIXME: forces execution of changeBackground() in changeViewport()
 
     readSettings();
-    emit settingsChanged(nameId());
+    Q_EMIT settingsChanged(nameId());
 }
 
 void OverviewMap::readSettings()
@@ -342,7 +342,7 @@ void OverviewMap::writeSettings()
 
     m_settings.insert(QStringLiteral("posColor"), m_posColor.name());
 
-    emit settingsChanged(nameId());
+    Q_EMIT settingsChanged(nameId());
 }
 
 void OverviewMap::updateSettings()

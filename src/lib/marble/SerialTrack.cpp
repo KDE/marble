@@ -62,7 +62,7 @@ void SerialTrack::stop()
         m_items[m_currentIndex]->stop();
     }
     m_finishedPosition = 0;
-    emit progressChanged(m_finishedPosition);
+    Q_EMIT progressChanged(m_finishedPosition);
     m_currentIndex = 0;
 }
 
@@ -140,17 +140,17 @@ void SerialTrack::handleFinishedItem()
         m_finishedPosition += m_items[m_currentIndex]->duration();
         m_currentIndex++;
         m_items[m_currentIndex]->play();
-        emit itemFinished(m_currentIndex + 1);
+        Q_EMIT itemFinished(m_currentIndex + 1);
 
     } else {
-        emit finished();
+        Q_EMIT finished();
     }
 }
 
 void SerialTrack::changeProgress(double progress)
 {
     m_currentPosition = m_finishedPosition + progress;
-    emit progressChanged(m_currentPosition);
+    Q_EMIT progressChanged(m_currentPosition);
 }
 
 int SerialTrack::size() const

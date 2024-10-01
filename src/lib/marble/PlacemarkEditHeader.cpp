@@ -467,7 +467,7 @@ void PlacemarkEditHeader::updateValues()
     disconnect(d->m_id, SIGNAL(textChanged(QString)), this, SLOT(updateValues()));
     d->updateValues();
     connect(d->m_id, SIGNAL(textChanged(QString)), this, SLOT(updateValues()));
-    emit valueChanged();
+    Q_EMIT valueChanged();
 }
 
 #include "moc_PlacemarkEditHeader.cpp"

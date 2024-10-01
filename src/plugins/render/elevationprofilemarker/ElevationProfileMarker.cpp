@@ -210,7 +210,7 @@ void ElevationProfileMarker::onGeoObjectRemoved(GeoDataObject *object)
 
     m_markerPlacemark = nullptr;
 
-    emit repaintNeeded();
+    Q_EMIT repaintNeeded();
 }
 
 }

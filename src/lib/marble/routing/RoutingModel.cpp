@@ -145,7 +145,7 @@ void RoutingModel::setRoute(const Route &route)
 
     beginResetModel();
     endResetModel();
-    emit currentRouteChanged();
+    Q_EMIT currentRouteChanged();
 }
 
 void RoutingModel::exportGpx(QIODevice *device) const
@@ -205,7 +205,7 @@ void RoutingModel::clear()
     d->m_route = Route();
     beginResetModel();
     endResetModel();
-    emit currentRouteChanged();
+    Q_EMIT currentRouteChanged();
 }
 
 int RoutingModel::rightNeighbor(const GeoDataCoordinates &position, RouteRequest const *const route) const
@@ -271,7 +271,7 @@ void RoutingModel::updatePosition(const GeoDataCoordinates &location, qreal spee
     d->updateViaPoints(location);
     const qreal planetRadius = PlanetFactory::construct("earth").radius();
     const qreal distance = planetRadius * location.sphericalDistanceTo(d->m_route.positionOnRoute());
-    emit positionChanged();
+    Q_EMIT positionChanged();
 
     qreal deviation = 0.0;
     if (d->m_positionTracking && d->m_positionTracking->accuracy().vertical > 0.0) {
@@ -282,7 +282,7 @@ void RoutingModel::updatePosition(const GeoDataCoordinates &location, qreal spee
     RoutingModelPrivate::RouteDeviation const deviated = distance < threshold ? RoutingModelPrivate::OnRoute : RoutingModelPrivate::OffRoute;
     if (d->m_deviation != deviated) {
         d->m_deviation = deviated;
-        emit deviatedFromRoute(deviated == RoutingModelPrivate::OffRoute);
+        Q_EMIT deviatedFromRoute(deviated == RoutingModelPrivate::OffRoute);
     }
 }
 

@@ -105,7 +105,7 @@ void SpeakersModelPrivate::fillModel()
     std::sort(m_speakers.begin(), m_speakers.end(), SpeakersModelItem::lessThan);
     m_parent->beginResetModel();
     m_parent->endResetModel();
-    emit m_parent->countChanged();
+    Q_EMIT m_parent->countChanged();
 }
 
 void SpeakersModelPrivate::handleInstallation(int row)
@@ -114,8 +114,8 @@ void SpeakersModelPrivate::handleInstallation(int row)
         if (m_speakers[j].m_newstuffIndex == row) {
             m_speakers[j].m_file.refresh();
             QModelIndex const affected = m_parent->index(j);
-            emit m_parent->dataChanged(affected, affected);
-            emit m_parent->installationFinished(j);
+            Q_EMIT m_parent->dataChanged(affected, affected);
+            Q_EMIT m_parent->installationFinished(j);
         }
     }
 }
@@ -124,7 +124,7 @@ void SpeakersModelPrivate::handleInstallationProgress(int row, qreal progress)
 {
     for (int j = 0; j < m_speakers.size(); ++j) {
         if (m_speakers[j].m_newstuffIndex == row) {
-            emit m_parent->installationProgressed(j, progress);
+            Q_EMIT m_parent->installationProgressed(j, progress);
         }
     }
 }

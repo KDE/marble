@@ -151,12 +151,12 @@ void HttpDownloadManager::addJob(const QUrl &sourceUrl, const QString &destFileN
 void HttpDownloadManager::Private::finishJob(const QByteArray &data, const QString &destinationFileName, const QString &id)
 {
     mDebug() << "emitting downloadComplete( QByteArray, " << id << ")";
-    emit m_downloadManager->downloadComplete(data, id);
+    Q_EMIT m_downloadManager->downloadComplete(data, id);
     if (m_storagePolicy) {
         const bool saved = m_storagePolicy->updateFile(destinationFileName, data);
         if (saved) {
             mDebug() << "emitting downloadComplete( " << destinationFileName << ", " << id << ")";
-            emit m_downloadManager->downloadComplete(destinationFileName, id);
+            Q_EMIT m_downloadManager->downloadComplete(destinationFileName, id);
         } else {
             qWarning() << "Could not save:" << destinationFileName;
         }

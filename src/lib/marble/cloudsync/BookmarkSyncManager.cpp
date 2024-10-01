@@ -239,7 +239,7 @@ void BookmarkSyncManager::setBookmarkSyncEnabled(bool enabled)
     bool const old_state = isBookmarkSyncEnabled();
     d->m_bookmarkSyncEnabled = enabled;
     if (old_state != isBookmarkSyncEnabled()) {
-        emit bookmarkSyncEnabledChanged(d->m_bookmarkSyncEnabled);
+        Q_EMIT bookmarkSyncEnabledChanged(d->m_bookmarkSyncEnabled);
         if (isBookmarkSyncEnabled()) {
             startBookmarkSync();
         }
@@ -577,7 +577,7 @@ void BookmarkSyncManager::Private::merge()
                     break;
                 }
 
-                emit m_q->mergeConflict(mergeItem);
+                Q_EMIT m_q->mergeConflict(mergeItem);
                 return;
             }
         }
@@ -774,7 +774,7 @@ void BookmarkSyncManager::Private::completeUpload()
     m_cloudTimestamp = dataValue.toString();
     mDebug() << "Uploaded bookmarks to remote server. Timestamp is " << m_cloudTimestamp;
     copyLocalToCache();
-    emit m_q->syncComplete();
+    Q_EMIT m_q->syncComplete();
 }
 
 }

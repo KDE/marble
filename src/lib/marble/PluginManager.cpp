@@ -89,7 +89,7 @@ void PluginManager::addRenderPlugin(const RenderPlugin *plugin)
 {
     d->loadPlugins();
     d->m_renderPluginTemplates << plugin;
-    emit renderPluginsChanged();
+    Q_EMIT renderPluginsChanged();
 }
 
 QList<const PositionProviderPlugin *> PluginManager::positionProviderPlugins() const
@@ -102,7 +102,7 @@ void PluginManager::addPositionProviderPlugin(const PositionProviderPlugin *plug
 {
     d->loadPlugins();
     d->m_positionProviderPluginTemplates << plugin;
-    emit positionProviderPluginsChanged();
+    Q_EMIT positionProviderPluginsChanged();
 }
 
 QList<const SearchRunnerPlugin *> PluginManager::searchRunnerPlugins() const
@@ -115,7 +115,7 @@ void PluginManager::addSearchRunnerPlugin(const SearchRunnerPlugin *plugin)
 {
     d->loadPlugins();
     d->m_searchRunnerPlugins << plugin;
-    emit searchRunnerPluginsChanged();
+    Q_EMIT searchRunnerPluginsChanged();
 }
 
 QList<const ReverseGeocodingRunnerPlugin *> PluginManager::reverseGeocodingRunnerPlugins() const
@@ -128,7 +128,7 @@ void PluginManager::addReverseGeocodingRunnerPlugin(const ReverseGeocodingRunner
 {
     d->loadPlugins();
     d->m_reverseGeocodingRunnerPlugins << plugin;
-    emit reverseGeocodingRunnerPluginsChanged();
+    Q_EMIT reverseGeocodingRunnerPluginsChanged();
 }
 
 QList<RoutingRunnerPlugin *> PluginManager::routingRunnerPlugins() const
@@ -141,7 +141,7 @@ void PluginManager::addRoutingRunnerPlugin(RoutingRunnerPlugin *plugin)
 {
     d->loadPlugins();
     d->m_routingRunnerPlugins << plugin;
-    emit routingRunnerPluginsChanged();
+    Q_EMIT routingRunnerPluginsChanged();
 }
 
 QList<const ParseRunnerPlugin *> PluginManager::parsingRunnerPlugins() const
@@ -154,7 +154,7 @@ void PluginManager::addParseRunnerPlugin(const ParseRunnerPlugin *plugin)
 {
     d->loadPlugins();
     d->m_parsingRunnerPlugins << plugin;
-    emit parseRunnerPluginsChanged();
+    Q_EMIT parseRunnerPluginsChanged();
 }
 
 void PluginManager::blacklistPlugin(const QString &filename)

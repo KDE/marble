@@ -121,7 +121,7 @@ bool BookmarkManager::loadFile(const QString &relativeFilePath)
     }
     ensureDefaultFolder();
 
-    emit bookmarksChanged();
+    Q_EMIT bookmarksChanged();
     return true;
 }
 
@@ -277,7 +277,7 @@ bool BookmarkManager::updateBookmarkFile()
             file.close();
             return false;
         }
-        emit bookmarksChanged();
+        Q_EMIT bookmarksChanged();
         file.close();
         return true;
     }

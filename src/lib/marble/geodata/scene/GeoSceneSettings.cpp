@@ -218,7 +218,7 @@ void GeoSceneSettings::addProperty(GeoSceneProperty *property)
 
         // Establish connection to the outside, e.g. the LegendBrowser
         connect(property, SIGNAL(valueChanged(QString, bool)), SIGNAL(valueChanged(QString, bool)));
-        emit valueChanged(property->name(), property->value());
+        Q_EMIT valueChanged(property->name(), property->value());
     }
 }
 

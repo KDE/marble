@@ -186,7 +186,7 @@ void CrosshairsPlugin::writeSettings()
         m_themeIndex = m_uiConfigWidget->m_themeList->currentRow();
     }
     readSettings();
-    emit settingsChanged(nameId());
+    Q_EMIT settingsChanged(nameId());
 }
 
 bool CrosshairsPlugin::render(GeoPainter *painter, ViewportParams *viewport, const QString &renderPos, GeoSceneLayer *layer)

@@ -268,9 +268,9 @@ void NavigationFloatItem::activateCurrentPositionButton()
         disconnect(m_navigationWidget->homeButton, SIGNAL(clicked()), m_marbleWidget, SLOT(goHome()));
     }
     connect(m_navigationWidget->homeButton, SIGNAL(clicked()), SLOT(centerOnCurrentLocation()));
-    emit repaintNeeded();
+    Q_EMIT repaintNeeded();
     m_showHomeButton = false;
-    emit settingsChanged(nameId());
+    Q_EMIT settingsChanged(nameId());
 }
 
 void NavigationFloatItem::activateHomeButton()
@@ -294,9 +294,9 @@ void NavigationFloatItem::activateHomeButton()
     if (m_marbleWidget) {
         connect(m_navigationWidget->homeButton, SIGNAL(clicked()), m_marbleWidget, SLOT(goHome()));
     }
-    emit repaintNeeded();
+    Q_EMIT repaintNeeded();
     m_showHomeButton = true;
-    emit settingsChanged(nameId());
+    Q_EMIT settingsChanged(nameId());
 }
 
 void NavigationFloatItem::centerOnCurrentLocation()

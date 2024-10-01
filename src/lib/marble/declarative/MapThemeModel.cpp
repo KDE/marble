@@ -63,7 +63,7 @@ void MapThemeModel::setMapThemeFilter(MapThemeFilters filters)
 {
     if (filters != m_mapThemeFilters) {
         m_mapThemeFilters = filters;
-        emit mapThemeFilterChanged();
+        Q_EMIT mapThemeFilterChanged();
     }
 }
 

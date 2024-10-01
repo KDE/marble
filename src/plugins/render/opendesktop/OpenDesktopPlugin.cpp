@@ -122,7 +122,7 @@ void OpenDesktopPlugin::setSettings(const QHash<QString, QVariant> &settings)
 
     setNumberOfItems(settings.value(QStringLiteral("itemsOnScreen"), defaultItemsOnScreen).toInt());
 
-    emit settingsChanged(nameId());
+    Q_EMIT settingsChanged(nameId());
 }
 
 void OpenDesktopPlugin::readSettings()
@@ -138,7 +138,7 @@ void OpenDesktopPlugin::writeSettings()
         setNumberOfItems(m_uiConfigWidget->m_itemsOnScreenSpin->value());
     }
 
-    emit settingsChanged(nameId());
+    Q_EMIT settingsChanged(nameId());
 }
 
 #include "moc_OpenDesktopPlugin.cpp"

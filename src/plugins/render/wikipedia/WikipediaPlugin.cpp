@@ -140,7 +140,7 @@ void WikipediaPlugin::setSettings(const QHash<QString, QVariant> &settings)
     m_showThumbnails = settings.value(QStringLiteral("showThumbnails"), true).toBool();
 
     readSettings();
-    emit settingsChanged(nameId());
+    Q_EMIT settingsChanged(nameId());
 }
 
 bool WikipediaPlugin::eventFilter(QObject *object, QEvent *event)
@@ -171,7 +171,7 @@ void WikipediaPlugin::writeSettings()
     setNumberOfItems(ui_configWidget->m_itemNumberSpinBox->value());
     m_showThumbnails = ui_configWidget->m_showThumbnailCheckBox->isChecked();
 
-    emit settingsChanged(nameId());
+    Q_EMIT settingsChanged(nameId());
 }
 
 void WikipediaPlugin::updateSettings()

@@ -61,10 +61,10 @@ void PlaybackAnimatedUpdateItem::play()
             if (placemark->isBalloonVisible()) {
                 GeoDataFeature *feature = findFeature(m_rootDocument, targetId);
                 if (auto placemark = geodata_cast<GeoDataPlacemark>(feature)) {
-                    emit balloonShown(placemark);
+                    Q_EMIT balloonShown(placemark);
                 }
             } else {
-                emit balloonHidden();
+                Q_EMIT balloonHidden();
             }
         }
     }
@@ -80,10 +80,10 @@ void PlaybackAnimatedUpdateItem::play()
                 if (feature && (geodata_cast<GeoDataDocument>(feature) || geodata_cast<GeoDataFolder>(feature))) {
                     GeoDataContainer *container = static_cast<GeoDataContainer *>(feature);
                     for (int i = 0; i < addContainer->size(); ++i) {
-                        emit added(container, addContainer->child(i), -1);
+                        Q_EMIT added(container, addContainer->child(i), -1);
                         if (auto placemark = geodata_cast<GeoDataPlacemark>(addContainer->child(i))) {
                             if (placemark->isBalloonVisible()) {
-                                emit balloonShown(placemark);
+                                Q_EMIT balloonShown(placemark);
                             }
                         }
                     }
@@ -103,10 +103,10 @@ void PlaybackAnimatedUpdateItem::play()
             GeoDataFeature *feature = findFeature(m_rootDocument, targetId);
             if (feature && canDelete(*feature)) {
                 m_deletedObjects.append(feature);
-                emit removed(feature);
+                Q_EMIT removed(feature);
                 if (auto placemark = geodata_cast<GeoDataPlacemark>(feature)) {
                     if (placemark->isBalloonVisible()) {
-                        emit balloonHidden();
+                        Q_EMIT balloonHidden();
                     }
                 }
             }
@@ -174,10 +174,10 @@ void PlaybackAnimatedUpdateItem::stop()
             GeoDataFeature *feature = findFeature(m_rootDocument, targetId);
             if (placemark->isBalloonVisible()) {
                 if (geodata_cast<GeoDataPlacemark>(feature)) {
-                    emit balloonHidden();
+                    Q_EMIT balloonHidden();
                 }
             } else {
-                emit balloonShown(static_cast<GeoDataPlacemark *>(feature));
+                Q_EMIT balloonShown(static_cast<GeoDataPlacemark *>(feature));
             }
         }
     }
@@ -188,10 +188,10 @@ void PlaybackAnimatedUpdateItem::stop()
             if (feature && (geodata_cast<GeoDataDocument>(feature) || geodata_cast<GeoDataFolder>(feature))) {
                 GeoDataContainer *container = static_cast<GeoDataContainer *>(feature);
                 for (int i = 0; i < container->size(); ++i) {
-                    emit removed(container->child(i));
+                    Q_EMIT removed(container->child(i));
                     if (auto placemark = geodata_cast<GeoDataPlacemark>(container->child(i))) {
                         if (placemark->isBalloonVisible()) {
-                            emit balloonHidden();
+                            Q_EMIT balloonHidden();
                         }
                     }
                 }
@@ -207,10 +207,10 @@ void PlaybackAnimatedUpdateItem::stop()
         if (target) {
             /** @todo Do we have to note the original row position and restore it? */
             Q_ASSERT(dynamic_cast<GeoDataContainer *>(target));
-            emit added(static_cast<GeoDataContainer *>(target), feature, -1);
+            Q_EMIT added(static_cast<GeoDataContainer *>(target), feature, -1);
             if (auto placemark = geodata_cast<GeoDataPlacemark>(feature)) {
                 if (placemark->isBalloonVisible()) {
-                    emit balloonShown(placemark);
+                    Q_EMIT balloonShown(placemark);
                 }
             }
         } // else the root document was modified in an unfortunate way and we cannot restore it at this point

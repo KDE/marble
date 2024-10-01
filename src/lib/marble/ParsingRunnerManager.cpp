@@ -59,7 +59,7 @@ void ParsingRunnerManager::Private::cleanupParsingTask()
     QMutexLocker locker(&m_parsingTasksMutex);
     m_parsingTasks = qMax(0, m_parsingTasks - 1);
     if (m_parsingTasks == 0) {
-        emit q->parsingFinished();
+        Q_EMIT q->parsingFinished();
     }
 }
 
@@ -97,7 +97,7 @@ void ParsingRunnerManager::parseFile(const QString &fileName, DocumentRole role)
     }
 
     if (d->m_parsingTasks == 0) {
-        emit parsingFinished();
+        Q_EMIT parsingFinished();
     }
 }
 
@@ -122,7 +122,7 @@ void ParsingRunnerManager::Private::addParsingResult(GeoDataDocument *document, 
         if (document) {
             m_fileResult = document;
         }
-        emit q->parsingFinished(document, error);
+        Q_EMIT q->parsingFinished(document, error);
     }
 }
 

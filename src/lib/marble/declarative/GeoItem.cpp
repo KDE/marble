@@ -31,8 +31,8 @@ bool GeoItem::moveToScreenCoordinates(qreal x, qreal y)
     bool valid = m_map->screenCoordinatesToGeoDataCoordinates(QPoint(x, y), m_coordinate);
     if (valid) {
         updateScreenPosition();
-        emit longitudeChanged();
-        emit latitudeChanged();
+        Q_EMIT longitudeChanged();
+        Q_EMIT latitudeChanged();
     }
     return valid;
 }
@@ -47,7 +47,7 @@ void GeoItem::setLongitude(qreal lon)
     if (m_coordinate.longitude(GeoDataCoordinates::Degree) != lon) {
         m_coordinate.setLongitude(lon, GeoDataCoordinates::Degree);
         updateScreenPosition();
-        emit longitudeChanged();
+        Q_EMIT longitudeChanged();
     }
 }
 
@@ -61,7 +61,7 @@ void GeoItem::setLatitude(qreal lat)
     if (m_coordinate.latitude(GeoDataCoordinates::Degree) != lat) {
         m_coordinate.setLatitude(lat, GeoDataCoordinates::Degree);
         updateScreenPosition();
-        emit latitudeChanged();
+        Q_EMIT latitudeChanged();
     }
 }
 
@@ -75,7 +75,7 @@ void GeoItem::setAltitude(qreal alt)
     if (m_coordinate.altitude() != alt) {
         m_coordinate.setAltitude(alt);
         updateScreenPosition();
-        emit altitudeChanged();
+        Q_EMIT altitudeChanged();
     }
 }
 
@@ -105,7 +105,7 @@ void GeoItem::setMap(MarbleQuickItem *map)
     m_map = map;
 
     connect(m_map, &MarbleQuickItem::geoItemUpdateRequested, this, &GeoItem::updateScreenPosition);
-    emit mapChanged(m_map);
+    Q_EMIT mapChanged(m_map);
 }
 
 void GeoItem::updateScreenPosition()
@@ -115,7 +115,7 @@ void GeoItem::updateScreenPosition()
         bool observable = !relativePoint.isNull();
         if (observable != m_observable) {
             m_observable = observable;
-            emit observableChanged(m_observable);
+            Q_EMIT observableChanged(m_observable);
         }
         if (!m_coordinate.isValid()) {
             setPosition(QPointF(-childrenRect().width(), -childrenRect().height()));
@@ -124,8 +124,8 @@ void GeoItem::updateScreenPosition()
             QPointF screenPoint = mapFromItem(m_map, relativePoint);
             screenPoint -= QPointF(width() / 2.0, height() / 2.0);
             setPosition(screenPoint);
-            emit readonlyXChanged(readonlyX());
-            emit readonlyYChanged(readonlyY());
+            Q_EMIT readonlyXChanged(readonlyX());
+            Q_EMIT readonlyYChanged(readonlyY());
         }
         QQuickItem::setVisible(m_visible && m_observable);
     }
@@ -157,7 +157,7 @@ void GeoItem::setVisObservable(bool visible)
 
     m_visible = visible;
     QQuickItem::setVisible(m_visible && m_observable);
-    emit visObservableChanged(m_visible);
+    Q_EMIT visObservableChanged(m_visible);
 }
 }
 

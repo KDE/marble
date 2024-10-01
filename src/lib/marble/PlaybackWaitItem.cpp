@@ -52,12 +52,12 @@ void PlaybackWaitItem::playNext()
     double const t = progress / m_wait->duration();
     if (t <= 1) {
         if (m_isPlaying) {
-            emit progressChanged(progress);
+            Q_EMIT progressChanged(progress);
             QTimer::singleShot(20, this, SLOT(playNext()));
         }
     } else {
         stop();
-        emit finished();
+        Q_EMIT finished();
     }
 }
 

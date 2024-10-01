@@ -146,7 +146,7 @@ void RemoteIconLoader::storeIcon(const QByteArray &data, const QString &fileName
 {
     QImage icon = QImage::fromData(data);
     d->m_iconCache.insert(QUrl(fileName), icon);
-    emit iconReady();
+    Q_EMIT iconReady();
 }
 
 }

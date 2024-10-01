@@ -116,7 +116,7 @@ void LocalOsmSearchRunner::search(const QString &searchTerm, const GeoDataLatLon
         result << hit;
     }
 
-    emit searchFinished(result);
+    Q_EMIT searchFinished(result);
 }
 
 } // namespace Marble

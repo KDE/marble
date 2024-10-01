@@ -215,7 +215,7 @@ void RouteRequest::insert(int index, const GeoDataCoordinates &coordinates, cons
 void RouteRequest::insert(int index, const GeoDataPlacemark &placemark)
 {
     d->m_route.insert(index, placemark);
-    emit positionAdded(index);
+    Q_EMIT positionAdded(index);
 }
 
 void RouteRequest::swap(int index1, int index2)
@@ -226,8 +226,8 @@ void RouteRequest::swap(int index1, int index2)
 
     qSwap(d->m_route[index1], d->m_route[index2]);
 
-    emit positionChanged(index1, d->m_route[index1].coordinate());
-    emit positionChanged(index2, d->m_route[index2].coordinate());
+    Q_EMIT positionChanged(index1, d->m_route[index1].coordinate());
+    Q_EMIT positionChanged(index2, d->m_route[index2].coordinate());
 }
 
 void RouteRequest::append(const GeoDataCoordinates &coordinates, const QString &name)
@@ -241,14 +241,14 @@ void RouteRequest::append(const GeoDataCoordinates &coordinates, const QString &
 void RouteRequest::append(const GeoDataPlacemark &placemark)
 {
     d->m_route.append(placemark);
-    emit positionAdded(d->m_route.size() - 1);
+    Q_EMIT positionAdded(d->m_route.size() - 1);
 }
 
 void RouteRequest::remove(int index)
 {
     if (index >= 0 && index < d->m_route.size()) {
         d->m_route.remove(index);
-        emit positionRemoved(index);
+        Q_EMIT positionRemoved(index);
     }
 }
 
@@ -263,7 +263,7 @@ void RouteRequest::addVia(const GeoDataPlacemark &placemark)
 {
     int index = d->viaIndex(placemark.coordinate());
     d->m_route.insert(index, placemark);
-    emit positionAdded(index);
+    Q_EMIT positionAdded(index);
 }
 
 void RouteRequest::setPosition(int index, const GeoDataCoordinates &position, const QString &name)
@@ -273,7 +273,7 @@ void RouteRequest::setPosition(int index, const GeoDataCoordinates &position, co
         if (d->m_route[index].coordinate() != position) {
             d->m_route[index].setCoordinate(position);
             setVisited(index, false);
-            emit positionChanged(index, position);
+            Q_EMIT positionChanged(index, position);
         }
     }
 }
@@ -306,7 +306,7 @@ void RouteRequest::setVisited(int index, bool visited)
                 ++iter;
             }
         }
-        emit positionChanged(index, d->m_route[index].coordinate());
+        Q_EMIT positionChanged(index, d->m_route[index].coordinate());
     }
 }
 
@@ -333,7 +333,7 @@ void RouteRequest::reverse()
 void RouteRequest::setRoutingProfile(const RoutingProfile &profile)
 {
     d->m_routingProfile = profile;
-    emit routingProfileChanged();
+    Q_EMIT routingProfileChanged();
 }
 
 RoutingProfile RouteRequest::routingProfile() const

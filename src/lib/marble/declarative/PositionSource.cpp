@@ -45,11 +45,11 @@ void PositionSource::setActive(bool active)
 
         if (m_hasPosition) {
             m_hasPosition = false;
-            emit hasPositionChanged();
+            Q_EMIT hasPositionChanged();
         }
 
         m_active = active;
-        emit activeChanged();
+        Q_EMIT activeChanged();
     }
 }
 
@@ -64,13 +64,13 @@ void PositionSource::setSource(const QString &source)
         m_source = source;
         if (m_hasPosition) {
             m_hasPosition = false;
-            emit hasPositionChanged();
+            Q_EMIT hasPositionChanged();
         }
 
         if (active()) {
             start();
         }
-        emit sourceChanged();
+        Q_EMIT sourceChanged();
     }
 }
 
@@ -115,7 +115,7 @@ void PositionSource::setMap(MarbleQuickItem *map)
             connect(m_marbleQuickItem->model()->positionTracking(), SIGNAL(gpsLocation(GeoDataCoordinates, qreal)), this, SLOT(updatePosition()));
             connect(m_marbleQuickItem->model()->positionTracking(), SIGNAL(statusChanged(PositionProviderStatus)), this, SLOT(updatePosition()));
 
-            emit mapChanged();
+            Q_EMIT mapChanged();
         }
 
         if (active()) {
@@ -142,15 +142,15 @@ void PositionSource::updatePosition()
         }
 
         m_speed = m_marbleQuickItem->model()->positionTracking()->speed() * Marble::METER2KM / Marble::SEC2HOUR;
-        emit speedChanged();
+        Q_EMIT speedChanged();
 
         if (hasPosition != m_hasPosition) {
             m_hasPosition = hasPosition;
-            emit hasPositionChanged();
+            Q_EMIT hasPositionChanged();
         }
 
         if (hasPosition) {
-            emit positionChanged();
+            Q_EMIT positionChanged();
         }
     }
 }

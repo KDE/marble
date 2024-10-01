@@ -132,7 +132,7 @@ void CycleStreetsRunner::retrieveData(QNetworkReply *reply)
             mDebug() << "Failed to parse the downloaded route data" << data;
         }
 
-        emit routeCalculated(document);
+        Q_EMIT routeCalculated(document);
     }
 }
 

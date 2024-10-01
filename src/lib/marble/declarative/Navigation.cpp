@@ -309,7 +309,7 @@ void Navigation::setMarbleQuickItem(MarbleQuickItem *marbleQuickItem)
         connect(d->model()->positionTracking(), SIGNAL(gpsLocation(GeoDataCoordinates, qreal)), this, SLOT(updateScreenPosition()));
         connect(d->model()->positionTracking(), SIGNAL(statusChanged(PositionProviderStatus)), this, SLOT(updateScreenPosition()));
     }
-    emit marbleQuickItemChanged(marbleQuickItem);
+    Q_EMIT marbleQuickItemChanged(marbleQuickItem);
 }
 
 void Navigation::update()
@@ -320,8 +320,8 @@ void Navigation::update()
 
     RoutingModel const *routingModel = d->model()->routingManager()->routingModel();
     d->updateNextInstructionDistance(routingModel->route());
-    emit nextInstructionDistanceChanged();
-    emit destinationDistanceChanged();
+    Q_EMIT nextInstructionDistanceChanged();
+    Q_EMIT destinationDistanceChanged();
     RouteSegment segment = routingModel->route().currentSegment();
 
     if (!d->m_muted) {
@@ -329,9 +329,9 @@ void Navigation::update()
     }
     if (segment != d->m_currentSegment) {
         d->m_currentSegment = segment;
-        emit nextInstructionTextChanged();
-        emit nextInstructionImageChanged();
-        emit nextRoadChanged();
+        Q_EMIT nextInstructionTextChanged();
+        Q_EMIT nextInstructionImageChanged();
+        Q_EMIT nextRoadChanged();
     }
 
     updateScreenPosition();
@@ -342,10 +342,10 @@ void Navigation::updateScreenPosition()
     if (d->m_marbleQuickItem) {
         double distanceMeter = d->model()->positionTracking()->accuracy().horizontal;
         d->m_screenAccuracy = distanceMeter * d->m_marbleQuickItem->map()->radius() / d->model()->planetRadius();
-        emit screenAccuracyChanged();
+        Q_EMIT screenAccuracyChanged();
 
         d->m_screenPosition = deviated() ? d->currentPosition() : d->positionOnRoute();
-        emit screenPositionChanged();
+        Q_EMIT screenPositionChanged();
     }
 }
 

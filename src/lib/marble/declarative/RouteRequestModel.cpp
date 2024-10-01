@@ -89,7 +89,7 @@ void RouteRequestModel::setRouting(Marble::Routing *routing)
         m_routing = routing;
         updateMap();
         connect(m_routing, SIGNAL(marbleMapChanged()), this, SLOT(updateMap()));
-        emit routingChanged();
+        Q_EMIT routingChanged();
     }
 }
 
@@ -102,14 +102,14 @@ void RouteRequestModel::updateMap()
         connect(m_request, SIGNAL(positionAdded(int)), this, SLOT(updateAfterAddition(int)), Qt::UniqueConnection);
         connect(m_request, SIGNAL(positionRemoved(int)), this, SLOT(updateAfterRemoval(int)), Qt::UniqueConnection);
 
-        emit layoutChanged();
+        Q_EMIT layoutChanged();
     }
 }
 
 void RouteRequestModel::updateData(int idx)
 {
     QModelIndex affected = index(idx);
-    emit dataChanged(affected, affected);
+    Q_EMIT dataChanged(affected, affected);
 }
 
 void RouteRequestModel::updateAfterRemoval(int idx)
@@ -117,7 +117,7 @@ void RouteRequestModel::updateAfterRemoval(int idx)
     beginRemoveRows(QModelIndex(), idx, idx);
     removeRow(idx);
     endRemoveRows();
-    emit rowCountChanged();
+    Q_EMIT rowCountChanged();
 }
 
 void RouteRequestModel::updateAfterAddition(int idx)
@@ -125,7 +125,7 @@ void RouteRequestModel::updateAfterAddition(int idx)
     beginInsertRows(QModelIndex(), idx, idx);
     insertRow(idx);
     endInsertRows();
-    emit rowCountChanged();
+    Q_EMIT rowCountChanged();
 }
 
 void RouteRequestModel::setPosition(int index, qreal longitude, qreal latitude)

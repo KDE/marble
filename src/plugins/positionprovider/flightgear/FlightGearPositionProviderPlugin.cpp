@@ -71,7 +71,7 @@ QIcon FlightGearPositionProviderPlugin::icon() const
 void FlightGearPositionProviderPlugin::initialize()
 {
     m_status = PositionProviderStatusAcquiring;
-    emit statusChanged(m_status);
+    Q_EMIT statusChanged(m_status);
 
     m_socket = new QUdpSocket(this);
     m_socket->bind(QHostAddress::Any, 5500);
@@ -163,10 +163,10 @@ void FlightGearPositionProviderPlugin::parseNmeaSentence(const QString &sentence
     }
 
     if (m_status != oldStatus) {
-        emit statusChanged(m_status);
+        Q_EMIT statusChanged(m_status);
     }
     if (m_position != oldPosition && m_status == PositionProviderStatusAvailable) {
-        emit positionChanged(m_position, m_accuracy);
+        Q_EMIT positionChanged(m_position, m_accuracy);
     }
 }
 

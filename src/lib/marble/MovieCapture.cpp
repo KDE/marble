@@ -185,7 +185,7 @@ void MovieCapture::recordFrame()
         int now = d->process.bytesToWrite();
         int bytesWritten = then - now;
         double rate = (bytesWritten * 1000.0) / (qMax(1, span) * 1024);
-        emit rateCalculated(rate);
+        Q_EMIT rateCalculated(rate);
     }
 }
 
@@ -226,7 +226,7 @@ void MovieCapture::processWrittenMovie(int exitCode)
 {
     if (exitCode != 0) {
         mDebug() << "[*] avconv finished with" << exitCode;
-        emit errorOccured();
+        Q_EMIT errorOccured();
     }
 }
 

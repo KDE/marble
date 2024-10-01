@@ -185,13 +185,13 @@ void MarbleLineEdit::mouseReleaseEvent(QMouseEvent *e)
         } else {
             setSelection(0, text().size());
             del();
-            emit clearButtonClicked();
+            Q_EMIT clearButtonClicked();
         }
-        emit textChanged(newText);
+        Q_EMIT textChanged(newText);
     }
 
     if (d->m_decoratorButton == childAt(e->pos())) {
-        emit decoratorButtonClicked();
+        Q_EMIT decoratorButtonClicked();
     }
 
     QLineEdit::mouseReleaseEvent(e);

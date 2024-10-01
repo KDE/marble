@@ -163,7 +163,7 @@ void KineticModel::start()
     const int elapsed = d->timestamp.elapsed();
     if (elapsed > 2 * d->ticker.interval()) {
         d->ticker.stop();
-        emit finished();
+        Q_EMIT finished();
         return;
     }
 
@@ -213,7 +213,7 @@ void KineticModel::update()
 
         stop = d->velocity.isNull();
 
-        emit positionChanged(d->position.x(), d->position.y());
+        Q_EMIT positionChanged(d->position.x(), d->position.y());
     } else {
         d->heading += d->velocityHeading * delta;
         qreal vstep = d->deaccelerationHeading * delta; // Always positive.
@@ -225,11 +225,11 @@ void KineticModel::update()
 
         stop = !d->velocityHeading;
 
-        emit headingChanged(d->heading);
+        Q_EMIT headingChanged(d->heading);
     }
 
     if (stop) {
-        emit finished();
+        Q_EMIT finished();
         d->ticker.stop();
     }
 

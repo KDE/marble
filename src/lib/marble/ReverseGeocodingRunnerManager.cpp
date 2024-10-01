@@ -80,11 +80,11 @@ void ReverseGeocodingRunnerManager::Private::addReverseGeocodingResult(const Geo
     if (!m_reverseGeocodingResults.contains(coordinates) && !placemark.address().isEmpty()) {
         m_reverseGeocodingResults.push_back(coordinates);
         m_reverseGeocodingResult = placemark.address();
-        emit q->reverseGeocodingFinished(coordinates, placemark);
+        Q_EMIT q->reverseGeocodingFinished(coordinates, placemark);
     }
 
     if (m_reverseTasks.isEmpty()) {
-        emit q->reverseGeocodingFinished();
+        Q_EMIT q->reverseGeocodingFinished();
     }
 }
 
@@ -93,7 +93,7 @@ void ReverseGeocodingRunnerManager::Private::cleanupReverseGeocodingTask(Reverse
     m_reverseTasks.removeAll(task);
     mDebug() << "removing task " << m_reverseTasks.size() << " " << (quintptr)task;
     if (m_reverseTasks.isEmpty()) {
-        emit q->reverseGeocodingFinished();
+        Q_EMIT q->reverseGeocodingFinished();
     }
 }
 
@@ -132,7 +132,7 @@ void ReverseGeocodingRunnerManager::reverseGeocoding(const GeoDataCoordinates &c
     if (plugins.isEmpty()) {
         GeoDataPlacemark anonymous;
         anonymous.setCoordinate(coordinates);
-        emit reverseGeocodingFinished(coordinates, anonymous);
+        Q_EMIT reverseGeocodingFinished(coordinates, anonymous);
         d->cleanupReverseGeocodingTask(nullptr);
     }
 }

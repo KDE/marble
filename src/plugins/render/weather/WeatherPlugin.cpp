@@ -182,7 +182,7 @@ void WeatherPlugin::setSettings(const QHash<QString, QVariant> &settings)
 
     readSettings();
 
-    emit settingsChanged(nameId());
+    Q_EMIT settingsChanged(nameId());
     updateSettings();
 }
 
@@ -263,7 +263,7 @@ void WeatherPlugin::writeSettings()
     m_updateInterval = ui_configWidget->m_updateIntervalBox->value();
     m_settings.insert(QStringLiteral("updateInterval"), m_updateInterval);
 
-    emit settingsChanged(nameId());
+    Q_EMIT settingsChanged(nameId());
     updateSettings();
 }
 
@@ -290,7 +290,7 @@ void WeatherPlugin::updateItemSettings()
 void WeatherPlugin::favoriteItemsChanged(const QStringList &favoriteItems)
 {
     m_settings[QStringLiteral("favoriteItems")] = favoriteItems.join(QLatin1Char(','));
-    emit settingsChanged(nameId());
+    Q_EMIT settingsChanged(nameId());
     updateSettings();
 }
 

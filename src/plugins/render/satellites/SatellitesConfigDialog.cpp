@@ -220,7 +220,7 @@ SatellitesConfigNodeItem *SatellitesConfigDialog::getSatellitesBodyItem(const QS
 
 void SatellitesConfigDialog::reloadDataSources()
 {
-    emit dataSourcesReloadRequested();
+    Q_EMIT dataSourcesReloadRequested();
 }
 
 void SatellitesConfigDialog::addDataSource()
@@ -246,8 +246,8 @@ void SatellitesConfigDialog::addDataSource()
         mDebug() << "Added satellite data source:" << item->text();
         m_userDataSources << item->text();
 
-        emit userDataSourceAdded(item->text());
-        emit userDataSourcesChanged();
+        Q_EMIT userDataSourceAdded(item->text());
+        Q_EMIT userDataSourcesChanged();
     }
 }
 
@@ -276,8 +276,8 @@ void SatellitesConfigDialog::openDataSource()
         mDebug() << "Added satellite data source:" << url;
         m_userDataSources << url;
 
-        emit userDataSourceAdded(url);
-        emit userDataSourcesChanged();
+        Q_EMIT userDataSourceAdded(url);
+        Q_EMIT userDataSourcesChanged();
     }
 }
 
@@ -297,11 +297,11 @@ void SatellitesConfigDialog::removeSelectedDataSource()
 
         mDebug() << "Removing satellite data source:" << source;
         m_userDataSources.removeAll(source);
-        emit userDataSourceRemoved(source);
+        Q_EMIT userDataSourceRemoved(source);
 
         delete item;
 
-        emit userDataSourcesChanged();
+        Q_EMIT userDataSourcesChanged();
     }
 }
 

@@ -60,7 +60,7 @@ void WaitEditWidget::setEditable(bool editable)
 void WaitEditWidget::save()
 {
     waitElement()->setDuration(m_spinBox->value());
-    emit editingDone(m_index);
+    Q_EMIT editingDone(m_index);
 }
 
 GeoDataWait *WaitEditWidget::waitElement()

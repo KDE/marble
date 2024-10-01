@@ -57,7 +57,7 @@ void LocalDatabaseRunner::search(const QString &searchTerm, const GeoDataLatLonB
         }
     }
 
-    emit searchFinished(vector);
+    Q_EMIT searchFinished(vector);
 }
 
 }

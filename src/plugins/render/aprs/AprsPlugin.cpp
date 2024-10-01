@@ -325,7 +325,7 @@ void AprsPlugin::writeSettings()
     m_hideTime = ui_configWidget->m_hidetime->text().toInt();
 
     restartGatherers();
-    emit settingsChanged(nameId());
+    Q_EMIT settingsChanged(nameId());
 }
 
 QHash<QString, QVariant> AprsPlugin::settings() const
@@ -369,7 +369,7 @@ void AprsPlugin::setSettings(const QHash<QString, QVariant> &settings)
     m_hideTime = settings.value(QStringLiteral("hideTime"), 45).toInt();
 
     readSettings();
-    emit settingsChanged(nameId());
+    Q_EMIT settingsChanged(nameId());
 }
 
 bool AprsPlugin::isInitialized() const

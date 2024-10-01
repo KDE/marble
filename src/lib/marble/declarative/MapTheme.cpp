@@ -42,8 +42,8 @@ void MapTheme::setMap(MarbleQuickItem *map)
 
     m_map = map;
 
-    emit mapChanged(m_map);
-    emit licenseChanged();
+    Q_EMIT mapChanged(m_map);
+    Q_EMIT licenseChanged();
 }
 }
 

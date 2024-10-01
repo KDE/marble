@@ -42,7 +42,7 @@ void Bookmarks::setMap(MarbleQuickItem *item)
         connect(item->model()->bookmarkManager(), SIGNAL(bookmarksChanged()), this, SLOT(updateBookmarkDocument()));
     }
     updateBookmarkDocument();
-    emit modelChanged();
+    Q_EMIT modelChanged();
 }
 
 bool Bookmarks::isBookmark(qreal longitude, qreal latitude) const

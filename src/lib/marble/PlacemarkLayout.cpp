@@ -221,7 +221,7 @@ void PlacemarkLayout::addPlacemarks(const QModelIndex &parent, int first, int la
             m_placemarkCache[key].append(placemark);
         }
     }
-    emit repaintNeeded();
+    Q_EMIT repaintNeeded();
 }
 
 void PlacemarkLayout::removePlacemarks(const QModelIndex &parent, int first, int last)
@@ -250,7 +250,7 @@ void PlacemarkLayout::removePlacemarks(const QModelIndex &parent, int first, int
             }
         }
     }
-    emit repaintNeeded();
+    Q_EMIT repaintNeeded();
 }
 
 void PlacemarkLayout::resetCacheData()
@@ -263,7 +263,7 @@ void PlacemarkLayout::resetCacheData()
     m_visiblePlacemarks.clear();
     requestStyleReset();
     addPlacemarks(m_placemarkModel->index(0, 0), 0, rowCount);
-    emit repaintNeeded();
+    Q_EMIT repaintNeeded();
 }
 
 QSet<TileId> PlacemarkLayout::visibleTiles(const ViewportParams &viewport, int zoomLevel)

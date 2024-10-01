@@ -246,7 +246,7 @@ void NewstuffModelPrivate::setPreview(int index, const QIcon &previewIcon)
     NewstuffItem &item = m_items[index];
     item.m_preview = previewIcon;
     const QModelIndex affected = m_parent->index(index);
-    emit m_parent->dataChanged(affected, affected);
+    Q_EMIT m_parent->dataChanged(affected, affected);
 }
 
 void NewstuffModelPrivate::handleProviderData(QNetworkReply *reply)
@@ -272,7 +272,7 @@ void NewstuffModelPrivate::handleProviderData(QNetworkReply *reply)
                 if (item.m_payloadUrl == reply->url()) {
                     item.m_payloadSize = length;
                     QModelIndex const affected = m_parent->index(i);
-                    emit m_parent->dataChanged(affected, affected);
+                    Q_EMIT m_parent->dataChanged(affected, affected);
                 }
             }
         }
@@ -588,7 +588,7 @@ void NewstuffModel::setProvider(const QString &downloadUrl)
     }
 
     d->m_provider = downloadUrl;
-    emit providerChanged();
+    Q_EMIT providerChanged();
     d->m_networkAccessManager.get(QNetworkRequest(QUrl(downloadUrl)));
 }
 
@@ -608,7 +608,7 @@ void NewstuffModel::setTargetDirectory(const QString &targetDirectory)
         }
 
         d->m_targetDirectory = targetDirectory;
-        emit targetDirectoryChanged();
+        Q_EMIT targetDirectoryChanged();
     }
 }
 
@@ -627,7 +627,7 @@ void NewstuffModel::setRegistryFile(const QString &filename, IdTag idTag)
     if (d->m_registryFile != registryFile) {
         d->m_registryFile = registryFile;
         d->m_idTag = idTag;
-        emit registryFileChanged();
+        Q_EMIT registryFileChanged();
 
         QFileInfo inputFile(registryFile);
         if (!inputFile.exists()) {
@@ -686,7 +686,7 @@ void NewstuffModel::uninstall(int idx)
     }
 
     if (d->m_items[idx].m_registryNode.isNull()) {
-        emit uninstallationFinished(idx);
+        Q_EMIT uninstallationFinished(idx);
     }
 
     NewstuffModelPrivate::Action action(idx, NewstuffModelPrivate::Uninstall);
@@ -730,7 +730,7 @@ void NewstuffModel::cancel(int index)
 
                 d->m_items[d->m_currentAction.first].m_downloadedSize = 0;
 
-                emit installationFailed(d->m_currentAction.first, tr("Installation aborted by user."));
+                Q_EMIT installationFailed(d->m_currentAction.first, tr("Installation aborted by user."));
                 d->m_currentAction = NewstuffModelPrivate::Action(-1, NewstuffModelPrivate::Install);
             } else {
                 // Shall we interrupt this?
@@ -739,11 +739,11 @@ void NewstuffModel::cancel(int index)
             if (d->m_currentAction.second == NewstuffModelPrivate::Install) {
                 NewstuffModelPrivate::Action install(index, NewstuffModelPrivate::Install);
                 d->m_actionQueue.removeAll(install);
-                emit installationFailed(index, tr("Installation aborted by user."));
+                Q_EMIT installationFailed(index, tr("Installation aborted by user."));
             } else {
                 NewstuffModelPrivate::Action uninstall(index, NewstuffModelPrivate::Uninstall);
                 d->m_actionQueue.removeAll(uninstall);
-                emit uninstallationFinished(index); // do we need failed here?
+                Q_EMIT uninstallationFinished(index); // do we need failed here?
             }
         }
     }
@@ -754,14 +754,14 @@ void NewstuffModel::cancel(int index)
 void NewstuffModel::updateProgress(qint64 bytesReceived, qint64 bytesTotal)
 {
     qreal const progress = qBound<qreal>(0.0, 0.9 * bytesReceived / qreal(bytesTotal), 1.0);
-    emit installationProgressed(d->m_currentAction.first, progress);
+    Q_EMIT installationProgressed(d->m_currentAction.first, progress);
     NewstuffItem &item = d->m_items[d->m_currentAction.first];
     item.m_payloadSize = bytesTotal;
     if (qreal(bytesReceived - item.m_downloadedSize) / bytesTotal >= 0.01 || progress >= 0.9) {
         // Only consider download progress of 1% and more as a data change
         item.m_downloadedSize = bytesReceived;
         QModelIndex const affected = index(d->m_currentAction.first);
-        emit dataChanged(affected, affected);
+        Q_EMIT dataChanged(affected, affected);
     }
 }
 
@@ -799,13 +799,13 @@ void NewstuffModel::mapInstalled(int exitStatus)
         d->m_currentFile = nullptr;
     }
 
-    emit installationProgressed(d->m_currentAction.first, 1.0);
+    Q_EMIT installationProgressed(d->m_currentAction.first, 1.0);
     d->m_items[d->m_currentAction.first].m_downloadedSize = 0;
     if (exitStatus == 0) {
-        emit installationFinished(d->m_currentAction.first);
+        Q_EMIT installationFinished(d->m_currentAction.first);
     } else {
         mDebug() << "Process exit status " << exitStatus << " indicates an error.";
-        emit installationFailed(d->m_currentAction.first, QStringLiteral("Unable to unpack file. Process exited with status code %1.").arg(exitStatus));
+        Q_EMIT installationFailed(d->m_currentAction.first, QStringLiteral("Unable to unpack file. Process exited with status code %1.").arg(exitStatus));
     }
     QModelIndex const affected = index(d->m_currentAction.first);
 
@@ -813,20 +813,20 @@ void NewstuffModel::mapInstalled(int exitStatus)
         QMutexLocker locker(&d->m_mutex);
         d->m_currentAction = NewstuffModelPrivate::Action(-1, NewstuffModelPrivate::Install);
     }
-    emit dataChanged(affected, affected);
+    Q_EMIT dataChanged(affected, affected);
     d->processQueue();
 }
 
 void NewstuffModel::mapUninstalled()
 {
     QModelIndex const affected = index(d->m_currentAction.first);
-    emit uninstallationFinished(d->m_currentAction.first);
+    Q_EMIT uninstallationFinished(d->m_currentAction.first);
 
     { // <-- do not remove, mutex locker scope
         QMutexLocker locker(&d->m_mutex);
         d->m_currentAction = NewstuffModelPrivate::Action(-1, NewstuffModelPrivate::Install);
     }
-    emit dataChanged(affected, affected);
+    Q_EMIT dataChanged(affected, affected);
     d->processQueue();
 }
 
@@ -844,7 +844,8 @@ void NewstuffModel::contentsListed(int exitStatus)
         d->m_unpackProcess->start("tar", arguments);
     } else {
         mDebug() << "Process exit status " << exitStatus << " indicates an error.";
-        emit installationFailed(d->m_currentAction.first, QStringLiteral("Unable to list file contents. Process exited with status code %1.").arg(exitStatus));
+        Q_EMIT installationFailed(d->m_currentAction.first,
+                                  QStringLiteral("Unable to list file contents. Process exited with status code %1.").arg(exitStatus));
 
         { // <-- do not remove, mutex locker scope
             QMutexLocker locker(&d->m_mutex);
@@ -856,7 +857,7 @@ void NewstuffModel::contentsListed(int exitStatus)
 
 void NewstuffModelPrivate::updateRegistry(const QStringList &files)
 {
-    emit m_parent->installationProgressed(m_currentAction.first, 0.92);
+    Q_EMIT m_parent->installationProgressed(m_currentAction.first, 0.92);
     if (!m_registryFile.isEmpty()) {
         NewstuffItem &item = m_items[m_currentAction.first];
         QDomNode node = item.m_registryNode;

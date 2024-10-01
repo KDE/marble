@@ -48,33 +48,33 @@ void SunControlWidget::apply()
 {
     if (m_uiWidget->sunShading->isChecked()) {
         if (m_uiWidget->showShadow->isChecked()) {
-            emit showSun(true);
+            Q_EMIT showSun(true);
             m_marbleWidget->setShowCityLights(false);
             m_shadow = "shadow";
         } else if (m_uiWidget->showNightMap->isChecked()) {
-            emit showSun(true);
+            Q_EMIT showSun(true);
             m_marbleWidget->setShowCityLights(true);
             m_shadow = "nightmap";
         }
     } else {
-        emit showSun(false);
+        Q_EMIT showSun(false);
         m_marbleWidget->setShowCityLights(false);
     }
 
     if (m_uiWidget->lockToSubSolarPointCheckBox->isChecked()) {
         m_marbleWidget->setLockToSubSolarPoint(true);
-        emit isLockedToSubSolarPoint(true);
+        Q_EMIT isLockedToSubSolarPoint(true);
     } else {
         m_marbleWidget->setLockToSubSolarPoint(false);
-        emit isLockedToSubSolarPoint(false);
+        Q_EMIT isLockedToSubSolarPoint(false);
     }
 
     if (m_uiWidget->subSolarIconCheckBox->isChecked()) {
         m_marbleWidget->setSubSolarPointIconVisible(true);
-        emit isSubSolarPointIconVisible(true);
+        Q_EMIT isSubSolarPointIconVisible(true);
     } else {
         m_marbleWidget->setSubSolarPointIconVisible(false);
-        emit isSubSolarPointIconVisible(false);
+        Q_EMIT isSubSolarPointIconVisible(false);
     }
 }
 

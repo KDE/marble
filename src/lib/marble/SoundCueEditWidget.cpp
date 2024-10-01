@@ -62,7 +62,7 @@ void SoundCueEditWidget::setEditable(bool editable)
 void SoundCueEditWidget::save()
 {
     soundCueElement()->setHref(m_lineEdit->text());
-    emit editingDone(m_index);
+    Q_EMIT editingDone(m_index);
 }
 void SoundCueEditWidget::open()
 {

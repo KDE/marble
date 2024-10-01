@@ -71,7 +71,7 @@ void CloudSyncManager::setWorkOffline(bool offline)
 {
     if (offline != d->m_workOffline) {
         d->m_workOffline = offline;
-        emit workOfflineChanged(d->m_workOffline);
+        Q_EMIT workOfflineChanged(d->m_workOffline);
     }
 }
 
@@ -99,7 +99,7 @@ void CloudSyncManager::setSyncEnabled(bool enabled)
 {
     if (d->m_syncEnabled != enabled) {
         d->m_syncEnabled = enabled;
-        emit syncEnabledChanged(d->m_syncEnabled);
+        Q_EMIT syncEnabledChanged(d->m_syncEnabled);
     }
 }
 
@@ -112,7 +112,7 @@ void CloudSyncManager::setOwncloudCredentials(const QString &server, const QStri
     setOwncloudPassword(password);
     blockSignals(false);
     if (oldApiUrl != apiUrl()) {
-        emit apiUrlChanged(apiUrl());
+        Q_EMIT apiUrlChanged(apiUrl());
     }
 }
 
@@ -133,10 +133,10 @@ void CloudSyncManager::setOwncloudServer(const QString &server)
     }
 
     if (oldServer != d->m_ownloudServer) {
-        emit owncloudServerChanged(owncloudServer());
-        emit apiUrlChanged(apiUrl());
+        Q_EMIT owncloudServerChanged(owncloudServer());
+        Q_EMIT apiUrlChanged(apiUrl());
     } else if (oldProtocol != d->m_owncloudProtocol) {
-        emit apiUrlChanged(apiUrl());
+        Q_EMIT apiUrlChanged(apiUrl());
     }
 }
 
@@ -144,8 +144,8 @@ void CloudSyncManager::setOwncloudUsername(const QString &username)
 {
     if (d->m_owncloudUsername != username) {
         d->m_owncloudUsername = username;
-        emit owncloudUsernameChanged(d->m_owncloudUsername);
-        emit apiUrlChanged(apiUrl());
+        Q_EMIT owncloudUsernameChanged(d->m_owncloudUsername);
+        Q_EMIT apiUrlChanged(apiUrl());
     }
 }
 
@@ -153,8 +153,8 @@ void CloudSyncManager::setOwncloudPassword(const QString &password)
 {
     if (d->m_owncloudPassword != password) {
         d->m_owncloudPassword = password;
-        emit owncloudPasswordChanged(d->m_owncloudPassword);
-        emit apiUrlChanged(apiUrl());
+        Q_EMIT owncloudPasswordChanged(d->m_owncloudPassword);
+        Q_EMIT apiUrlChanged(apiUrl());
     }
 }
 
@@ -163,7 +163,7 @@ void CloudSyncManager::setStatus(const QString &status, CloudSyncManager::Status
     if (d->m_status != status && d->m_status_type != status_type) {
         d->m_status = status;
         d->m_status_type = status_type;
-        emit statusChanged(d->m_status);
+        Q_EMIT statusChanged(d->m_status);
     }
 }
 

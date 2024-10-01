@@ -109,7 +109,7 @@ void YoursRunner::retrieveData(QNetworkReply *reply)
             qreal length = distance(result);
             if (length == 0.0) {
                 delete result;
-                emit routeCalculated(nullptr);
+                Q_EMIT routeCalculated(nullptr);
                 return;
             } else if (length >= 1000) {
                 length /= 1000.0;
@@ -117,14 +117,14 @@ void YoursRunner::retrieveData(QNetworkReply *reply)
             }
             result->setName(name.arg(length, 0, 'f', 1).arg(unit));
         }
-        emit routeCalculated(result);
+        Q_EMIT routeCalculated(result);
     }
 }
 
 void YoursRunner::handleError(QNetworkReply::NetworkError error)
 {
     mDebug() << " Error when retrieving yournavigation.org route: " << error;
-    emit routeCalculated(nullptr);
+    Q_EMIT routeCalculated(nullptr);
 }
 
 GeoDataDocument *YoursRunner::parse(const QByteArray &content)

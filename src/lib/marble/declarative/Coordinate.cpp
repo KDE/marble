@@ -33,7 +33,7 @@ qreal Coordinate::longitude() const
 void Coordinate::setLongitude(qreal lon)
 {
     m_coordinate.setLongitude(lon, GeoDataCoordinates::Degree);
-    emit longitudeChanged();
+    Q_EMIT longitudeChanged();
 }
 
 qreal Coordinate::latitude() const
@@ -44,7 +44,7 @@ qreal Coordinate::latitude() const
 void Coordinate::setLatitude(qreal lat)
 {
     m_coordinate.setLatitude(lat, GeoDataCoordinates::Degree);
-    emit latitudeChanged();
+    Q_EMIT latitudeChanged();
 }
 
 qreal Coordinate::altitude() const
@@ -55,7 +55,7 @@ qreal Coordinate::altitude() const
 void Coordinate::setAltitude(qreal alt)
 {
     m_coordinate.setAltitude(alt);
-    emit altitudeChanged();
+    Q_EMIT altitudeChanged();
 }
 
 GeoDataCoordinates Coordinate::coordinates() const
@@ -108,7 +108,7 @@ void Coordinate::setDefaultNotation(Coordinate::Notation defaultNotation)
     if (GeoDataCoordinates::defaultNotation() == static_cast<GeoDataCoordinates::Notation>(defaultNotation))
         return;
     GeoDataCoordinates::setDefaultNotation(static_cast<GeoDataCoordinates::Notation>(defaultNotation));
-    emit defaultNotationChanged(defaultNotation);
+    Q_EMIT defaultNotationChanged(defaultNotation);
 }
 
 #include "moc_Coordinate.cpp"

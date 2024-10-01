@@ -380,7 +380,7 @@ void AlternativeRoutesModel::addRoute(GeoDataDocument *document, WritePolicy pol
                 if (Private::higherScore(document, d->m_routes.at(i))) {
                     d->m_routes[i] = document;
                     QModelIndex changed = index(i);
-                    emit dataChanged(changed, changed);
+                    Q_EMIT dataChanged(changed, changed);
                 }
 
                 return;
@@ -403,8 +403,8 @@ void AlternativeRoutesModel::setCurrentRoute(int index)
 {
     if (index >= 0 && index < rowCount() && d->m_currentIndex != index) {
         d->m_currentIndex = index;
-        emit currentRouteChanged(currentRoute());
-        emit currentRouteChanged(d->m_currentIndex);
+        Q_EMIT currentRouteChanged(currentRoute());
+        Q_EMIT currentRouteChanged(d->m_currentIndex);
     }
 }
 

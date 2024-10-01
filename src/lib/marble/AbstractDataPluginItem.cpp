@@ -81,7 +81,7 @@ void AbstractDataPluginItem::setFavorite(bool favorite)
 {
     if (isFavorite() != favorite) {
         d->m_favorite = favorite;
-        emit favoriteChanged(id(), favorite);
+        Q_EMIT favoriteChanged(id(), favorite);
     }
 }
 
@@ -94,7 +94,7 @@ void AbstractDataPluginItem::setSticky(bool sticky)
 {
     if (d->m_sticky != sticky) {
         d->m_sticky = sticky;
-        emit stickyChanged();
+        Q_EMIT stickyChanged();
     }
 }
 

@@ -63,7 +63,7 @@ Routing::Routing(QQuickItem *parent)
     connect(d->m_routeRequestModel, SIGNAL(rowsMoved(QModelIndex, int, int, QModelIndex, int)), this, SLOT(updateWaypointItems()));
     connect(d->m_routeRequestModel, SIGNAL(rowsRemoved(QModelIndex, int, int)), this, SLOT(updateWaypointItems()));
 
-    emit routeRequestModelChanged(d->m_routeRequestModel);
+    Q_EMIT routeRequestModelChanged(d->m_routeRequestModel);
 }
 
 Routing::~Routing()
@@ -158,7 +158,7 @@ void Routing::setWaypointDelegate(QQmlComponent *waypointDelegate)
     }
 
     d->m_waypointDelegate = waypointDelegate;
-    emit waypointDelegateChanged(waypointDelegate);
+    Q_EMIT waypointDelegateChanged(waypointDelegate);
 }
 
 void Routing::updateWaypointItems()
@@ -308,7 +308,7 @@ void Routing::setMarbleMap(MarbleMap *marbleMap)
         connect(d->m_marbleMap, SIGNAL(visibleLatLonAltBoxChanged(GeoDataLatLonAltBox)), this, SLOT(updateWaypointItems()));
         connect(d->m_marbleMap, SIGNAL(visibleLatLonAltBoxChanged(GeoDataLatLonAltBox)), this, SLOT(updateSearchResultPlacemarks()));
 
-        emit routingModelChanged();
+        Q_EMIT routingModelChanged();
 
         QList<Marble::RoutingProfile> profiles = routingManager->profilesModel()->profiles();
         if (profiles.size() == 4) {
@@ -321,10 +321,10 @@ void Routing::setMarbleMap(MarbleMap *marbleMap)
         }
     }
 
-    emit marbleMapChanged();
-    emit routingProfileChanged();
-    emit hasRouteChanged();
-    emit hasWaypointsChanged();
+    Q_EMIT marbleMapChanged();
+    Q_EMIT routingProfileChanged();
+    Q_EMIT hasRouteChanged();
+    Q_EMIT hasWaypointsChanged();
 }
 
 MarbleMap *Routing::marbleMap()
@@ -344,7 +344,7 @@ void Routing::setRoutingProfile(Routing::RoutingProfile profile)
         if (d->m_marbleMap) {
             d->m_marbleMap->model()->routingManager()->routeRequest()->setRoutingProfile(d->m_profiles[profile]);
         }
-        emit routingProfileChanged();
+        Q_EMIT routingProfileChanged();
     }
 }
 

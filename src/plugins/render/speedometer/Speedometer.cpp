@@ -141,7 +141,7 @@ void Speedometer::updateLocation(const GeoDataCoordinates &coordinates, qreal sp
     m_widget.speedUnit->setText(speedUnit);
 
     update();
-    emit repaintNeeded();
+    Q_EMIT repaintNeeded();
 }
 
 }

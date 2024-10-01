@@ -77,7 +77,7 @@ void BBCItemGetter::work()
 
     while (fetched < number && it != end) {
         if (box.contains(it->coordinate())) {
-            emit foundStation((*it));
+            Q_EMIT foundStation((*it));
             fetched++;
         }
         ++it;

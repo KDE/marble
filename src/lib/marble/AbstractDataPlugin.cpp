@@ -114,7 +114,7 @@ void AbstractDataPlugin::setModel(AbstractDataPluginModel *model)
     connect(d->m_model, SIGNAL(favoriteItemsChanged(QStringList)), this, SLOT(favoriteItemsChanged(QStringList)));
     connect(d->m_model, SIGNAL(favoriteItemsOnlyChanged()), this, SIGNAL(favoriteItemsOnlyChanged()));
 
-    emit favoritesModelChanged();
+    Q_EMIT favoritesModelChanged();
 }
 
 quint32 AbstractDataPlugin::numberOfItems() const
@@ -128,7 +128,7 @@ void AbstractDataPlugin::setNumberOfItems(quint32 number)
     d->m_numberOfItems = number;
 
     if (changed)
-        emit changedNumberOfItems(number);
+        Q_EMIT changedNumberOfItems(number);
 }
 
 QList<AbstractDataPluginItem *> AbstractDataPlugin::whichItemAt(const QPoint &curpos)

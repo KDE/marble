@@ -336,7 +336,7 @@ void EditPlacemarkDialog::updateTextAnnotation()
         }
     }
 
-    emit textAnnotationUpdated(d->m_placemark);
+    Q_EMIT textAnnotationUpdated(d->m_placemark);
 }
 
 void EditPlacemarkDialog::checkFields()
@@ -475,7 +475,7 @@ void EditPlacemarkDialog::restoreInitial(int result)
         d->m_placemark->setVisible(d->m_initialIsBaloonVisible);
     }
 
-    emit textAnnotationUpdated(d->m_placemark);
+    Q_EMIT textAnnotationUpdated(d->m_placemark);
 }
 
 }

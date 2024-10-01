@@ -93,7 +93,7 @@ void NavigationSlider::leaveEvent(QEvent *)
 
 void NavigationSlider::repaint()
 {
-    emit repaintNeeded();
+    Q_EMIT repaintNeeded();
 }
 
 void NavigationSlider::paintEvent(QPaintEvent *)

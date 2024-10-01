@@ -53,7 +53,7 @@ void OpenDesktopItem::addDownloadedFile(const QString &url, const QString &type)
     if (type == QLatin1StringView("avatar")) {
         m_pixmap.load(url);
         setSize(m_pixmap.size());
-        emit updated();
+        Q_EMIT updated();
     }
 }
 

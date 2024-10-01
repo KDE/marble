@@ -237,8 +237,8 @@ void RoutingManagerPrivate::loadRoute(const QString &filename)
             m_alternativeRoutesModel.addRoute(new GeoDataDocument(*route), AlternativeRoutesModel::Instant);
             m_alternativeRoutesModel.setCurrentRoute(0);
             m_state = RoutingManager::Retrieved;
-            emit q->stateChanged(m_state);
-            emit q->routeRetrieved(route);
+            Q_EMIT q->stateChanged(m_state);
+            Q_EMIT q->routeRetrieved(route);
         } else {
             mDebug() << "Expected a GeoDataDocument child, didn't get one though";
         }
@@ -314,7 +314,7 @@ void RoutingManager::retrieveRoute()
         d->m_routingModel.clear();
         d->m_state = RoutingManager::Retrieved;
     }
-    emit stateChanged(d->m_state);
+    Q_EMIT stateChanged(d->m_state);
 }
 
 void RoutingManagerPrivate::addRoute(GeoDataDocument *route)
@@ -327,13 +327,13 @@ void RoutingManagerPrivate::addRoute(GeoDataDocument *route)
         m_haveRoute = route != nullptr;
     }
 
-    emit q->routeRetrieved(route);
+    Q_EMIT q->routeRetrieved(route);
 }
 
 void RoutingManagerPrivate::routingFinished()
 {
     m_state = RoutingManager::Retrieved;
-    emit q->stateChanged(m_state);
+    Q_EMIT q->stateChanged(m_state);
 }
 
 void RoutingManagerPrivate::setCurrentRoute(const GeoDataDocument *document)
@@ -542,7 +542,7 @@ void RoutingManager::setGuidanceModeEnabled(bool enabled)
         d->m_positionTracking->setPositionProviderPlugin(nullptr);
     }
 
-    emit guidanceModeEnabledChanged(d->m_guidanceModeEnabled);
+    Q_EMIT guidanceModeEnabledChanged(d->m_guidanceModeEnabled);
 }
 
 void RoutingManagerPrivate::recalculateRoute(bool deviated)

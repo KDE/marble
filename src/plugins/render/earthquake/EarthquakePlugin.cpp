@@ -138,7 +138,7 @@ void EarthquakePlugin::setSettings(const QHash<QString, QVariant> &settings)
     m_timeRangeNPastDays = settings.value(QStringLiteral("timeRangeNPastDays"), true).toBool();
     m_maximumNumberOfItems = settings.value(QStringLiteral("maximumNumberOfItems"), m_maximumNumberOfItems).toInt();
 
-    emit settingsChanged(nameId());
+    Q_EMIT settingsChanged(nameId());
 }
 
 void EarthquakePlugin::readSettings()
@@ -170,7 +170,7 @@ void EarthquakePlugin::writeSettings()
     m_pastDays = m_ui->m_pastDays->value();
     m_timeRangeNPastDays = m_ui->m_timeRangeNPastDaysRadioButton->isChecked();
 
-    emit settingsChanged(nameId());
+    Q_EMIT settingsChanged(nameId());
 }
 
 void EarthquakePlugin::updateModel()

@@ -221,7 +221,7 @@ void BBCParser::work()
             entry.item->addForecastWeather(data);
         }
 
-        emit parsedFile();
+        Q_EMIT parsedFile();
     }
 }
 

@@ -329,7 +329,7 @@ void QtMarbleConfigDialog::readSettings()
     d->m_marbleWidget->readPluginSettings(d->m_settings);
 
     // The settings loaded in the config dialog have been changed.
-    emit settingsChanged();
+    Q_EMIT settingsChanged();
 }
 
 void QtMarbleConfigDialog::updateCloudSyncStatus(const QString &status)
@@ -416,7 +416,7 @@ void QtMarbleConfigDialog::writeSettings()
     // Plugins
     d->m_marbleWidget->writePluginSettings(d->m_settings);
 
-    emit settingsChanged();
+    Q_EMIT settingsChanged();
 }
 
 MarbleLocale::MeasurementSystem QtMarbleConfigDialog::measurementSystem() const
@@ -438,7 +438,7 @@ void QtMarbleConfigDialog::setAngleUnit(Marble::AngleUnit unit)
 {
     d->m_settings.setValue("View/angleUnit", (int)unit);
     d->ui_viewSettings.kcfg_angleUnit->setCurrentIndex(angleUnit());
-    emit settingsChanged();
+    Q_EMIT settingsChanged();
 }
 
 Marble::MapQuality QtMarbleConfigDialog::stillQuality() const

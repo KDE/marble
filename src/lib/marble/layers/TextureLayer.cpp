@@ -333,7 +333,7 @@ bool TextureLayer::render(GeoPainter *painter, ViewportParams *viewport, const Q
 
     if (tileLevel != d->m_tileZoomLevel) {
         d->m_tileZoomLevel = tileLevel;
-        emit tileLevelChanged(d->m_tileZoomLevel);
+        Q_EMIT tileLevelChanged(d->m_tileZoomLevel);
     }
 
     const QRect dirtyRect = QRect(QPoint(0, 0), viewport->size());
@@ -423,7 +423,7 @@ void TextureLayer::setNeedsUpdate()
         d->m_texmapper->setRepaintNeeded();
     }
 
-    emit repaintNeeded();
+    Q_EMIT repaintNeeded();
 }
 
 void TextureLayer::setVolatileCacheLimit(quint64 kilobytes)

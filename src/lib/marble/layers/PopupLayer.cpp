@@ -115,7 +115,7 @@ void PopupLayer::setVisible(bool visible)
     if (!visible) {
         disconnect(d->m_popupItem, SIGNAL(repaintNeeded()), this, SIGNAL(repaintNeeded()));
         d->m_popupItem->clearHistory();
-        emit repaintNeeded();
+        Q_EMIT repaintNeeded();
     } else {
         connect(d->m_popupItem, SIGNAL(repaintNeeded()), this, SIGNAL(repaintNeeded()));
     }

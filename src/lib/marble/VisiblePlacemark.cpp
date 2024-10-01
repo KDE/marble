@@ -132,7 +132,7 @@ void VisiblePlacemark::setSymbolPixmap()
             m_symbolId.clear();
             m_symbolPixmap = QPixmap::fromImage(m_style->iconStyle().scaledIcon());
         }
-        emit updateNeeded();
+        Q_EMIT updateNeeded();
     } else {
         mDebug() << "Style pointer is Null";
     }

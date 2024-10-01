@@ -342,7 +342,7 @@ void EclipsesPlugin::setSettings(const QHash<QString, QVariant> &settings)
 {
     RenderPlugin::setSettings(settings);
     m_settings = settings;
-    emit settingsChanged(nameId());
+    Q_EMIT settingsChanged(nameId());
 }
 
 void EclipsesPlugin::readSettings()
@@ -370,7 +370,7 @@ void EclipsesPlugin::writeSettings()
     m_settings.insert(QStringLiteral("show60MagPenumbra"), m_configWidget->checkBoxShow60MagPenumbra->isChecked());
     m_settings.insert(QStringLiteral("showSunBoundaries"), m_configWidget->checkBoxShowSunBoundaries->isChecked());
 
-    emit settingsChanged(nameId());
+    Q_EMIT settingsChanged(nameId());
 }
 
 void EclipsesPlugin::updateSettings()
@@ -417,7 +417,7 @@ void EclipsesPlugin::updateEclipses()
             action->setIcon(item->icon());
         }
 
-        emit actionGroupsChanged();
+        Q_EMIT actionGroupsChanged();
     }
 }
 

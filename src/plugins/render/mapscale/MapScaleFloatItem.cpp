@@ -397,14 +397,14 @@ void MapScaleFloatItem::writeSettings()
         toggleMinimized();
     }
 
-    emit settingsChanged(nameId());
+    Q_EMIT settingsChanged(nameId());
 }
 
 void MapScaleFloatItem::toggleRatioScaleVisibility()
 {
     m_showRatioScale = !m_showRatioScale;
     readSettings();
-    emit settingsChanged(nameId());
+    Q_EMIT settingsChanged(nameId());
 }
 
 void MapScaleFloatItem::toggleMinimized()
@@ -413,7 +413,7 @@ void MapScaleFloatItem::toggleMinimized()
     ui_configWidget->m_minimizeCheckBox->setChecked(m_minimized);
     m_minimizeAction->setChecked(m_minimized);
     readSettings();
-    emit settingsChanged(nameId());
+    Q_EMIT settingsChanged(nameId());
 
     if (m_minimized == true) {
         m_widthScaleFactor = 4;

@@ -59,7 +59,7 @@ void OpenLocationCodeSearchRunner::search(const QString &searchTerm, const GeoDa
         }
     }
 
-    emit searchFinished(result);
+    Q_EMIT searchFinished(result);
 }
 
 GeoDataPolygon OpenLocationCodeSearchRunner::polygonFromLatLonBox(const GeoDataLatLonBox &boundingBox) const

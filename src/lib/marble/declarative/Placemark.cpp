@@ -38,17 +38,17 @@ void Placemark::setGeoDataPlacemark(const Marble::GeoDataPlacemark &placemark)
     m_phone = QString();
     updateTags();
     updateRelations(placemark);
-    emit coordinatesChanged();
-    emit nameChanged();
-    emit descriptionChanged();
-    emit addressChanged();
-    emit websiteChanged();
-    emit wikipediaChanged();
-    emit openingHoursChanged();
-    emit wheelchairInfoChanged();
-    emit wifiAvailabilityChanged();
-    emit phoneChanged();
-    emit tagsChanged();
+    Q_EMIT coordinatesChanged();
+    Q_EMIT nameChanged();
+    Q_EMIT descriptionChanged();
+    Q_EMIT addressChanged();
+    Q_EMIT websiteChanged();
+    Q_EMIT wikipediaChanged();
+    Q_EMIT openingHoursChanged();
+    Q_EMIT wheelchairInfoChanged();
+    Q_EMIT wifiAvailabilityChanged();
+    Q_EMIT phoneChanged();
+    Q_EMIT tagsChanged();
 }
 
 Marble::GeoDataPlacemark &Placemark::placemark()
@@ -813,7 +813,7 @@ void Placemark::setName(const QString &name)
     }
 
     m_placemark.setName(name);
-    emit nameChanged();
+    Q_EMIT nameChanged();
 }
 
 RouteRelationModel *Placemark::routeRelationModel()

@@ -156,7 +156,7 @@ void RouteSimulationPositionProviderPlugin::update()
     if (m_lineString.isEmpty() && m_currentPosition.isValid()) {
         m_currentPositionWithNoise = addNoise(m_currentPosition, accuracy());
         changeStatus(PositionProviderStatusAvailable);
-        emit positionChanged(position(), accuracy());
+        Q_EMIT positionChanged(position(), accuracy());
         return;
     }
 
@@ -245,7 +245,7 @@ void RouteSimulationPositionProviderPlugin::update()
         m_currentPosition = newPosition;
         m_currentPositionWithNoise = addNoise(m_currentPosition, accuracy());
         m_currentDateTime = newDateTime;
-        emit positionChanged(position(), accuracy());
+        Q_EMIT positionChanged(position(), accuracy());
     } else {
         // Repeat from start
         m_currentIndex = 0;
@@ -276,7 +276,7 @@ void RouteSimulationPositionProviderPlugin::changeStatus(PositionProviderStatus 
 {
     if (m_status != status) {
         m_status = status;
-        emit statusChanged(m_status);
+        Q_EMIT statusChanged(m_status);
     }
 }
 

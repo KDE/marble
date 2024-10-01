@@ -234,7 +234,7 @@ void GraticulePlugin::writeSettings()
     m_showPrimaryLabels = ui_configWidget->primaryCheckBox->isChecked();
     m_showSecondaryLabels = ui_configWidget->secondaryCheckBox->isChecked();
 
-    emit settingsChanged(nameId());
+    Q_EMIT settingsChanged(nameId());
 }
 
 bool GraticulePlugin::render(GeoPainter *painter, ViewportParams *viewport, const QString &renderPos, GeoSceneLayer *layer)

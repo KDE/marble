@@ -156,7 +156,7 @@ void GeoGraphicsScene::resetStyle()
             item->resetStyle();
         }
     }
-    emit repaintNeeded();
+    Q_EMIT repaintNeeded();
 }
 
 void GeoGraphicsScene::applyHighlight(const QList<GeoDataPlacemark *> &selectedPlacemarks)
@@ -222,7 +222,7 @@ void GeoGraphicsScene::applyHighlight(const QList<GeoDataPlacemark *> &selectedP
             }
         }
     }
-    emit repaintNeeded();
+    Q_EMIT repaintNeeded();
 }
 
 void GeoGraphicsScene::removeItem(const GeoDataFeature *feature)

@@ -62,8 +62,8 @@ void DownloadQueueSet::addJob(HttpJob *const job)
 {
     m_jobs.push(job);
     mDebug() << "addJob: new job queue size:" << m_jobs.count();
-    emit jobAdded();
-    emit progressChanged(m_activeJobs.size(), m_jobs.count());
+    Q_EMIT jobAdded();
+    Q_EMIT progressChanged(m_activeJobs.size(), m_jobs.count());
     activateJobs();
 }
 
@@ -102,7 +102,7 @@ void DownloadQueueSet::purgeJobs()
         deactivateJob(m_activeJobs.first());
     }
 
-    emit progressChanged(m_activeJobs.size(), m_jobs.count());
+    Q_EMIT progressChanged(m_activeJobs.size(), m_jobs.count());
 }
 
 void DownloadQueueSet::finishJob(HttpJob *job, const QByteArray &data)
@@ -110,8 +110,8 @@ void DownloadQueueSet::finishJob(HttpJob *job, const QByteArray &data)
     mDebug() << job->sourceUrl() << job->destinationFileName();
 
     deactivateJob(job);
-    emit jobRemoved();
-    emit jobFinished(data, job->destinationFileName(), job->initiatorId());
+    Q_EMIT jobRemoved();
+    Q_EMIT jobFinished(data, job->destinationFileName(), job->initiatorId());
     job->deleteLater();
     activateJobs();
 }
@@ -121,8 +121,8 @@ void DownloadQueueSet::redirectJob(HttpJob *job, const QUrl &newSourceUrl)
     mDebug() << job->sourceUrl() << " -> " << newSourceUrl;
 
     deactivateJob(job);
-    emit jobRemoved();
-    emit jobRedirected(newSourceUrl, job->destinationFileName(), job->initiatorId(), job->downloadUsage());
+    Q_EMIT jobRemoved();
+    Q_EMIT jobRedirected(newSourceUrl, job->destinationFileName(), job->initiatorId(), job->downloadUsage());
     job->deleteLater();
 }
 
@@ -132,12 +132,12 @@ void DownloadQueueSet::retryOrBlacklistJob(HttpJob *job, const int errorCode)
     Q_ASSERT(!m_retryQueue.contains(job));
 
     deactivateJob(job);
-    emit jobRemoved();
+    Q_EMIT jobRemoved();
 
     if (job->tryAgain()) {
         mDebug() << QStringLiteral("Download of %1 to %2 failed, but trying again soon").arg(job->sourceUrl().toString(), job->destinationFileName());
         m_retryQueue.enqueue(job);
-        emit jobRetry();
+        Q_EMIT jobRetry();
     } else {
         mDebug() << "JOB-address: " << job << "Blacklist-size:" << m_jobBlackList.size() << "err:" << errorCode;
         m_jobBlackList.insert(job->sourceUrl().toString());
@@ -155,7 +155,7 @@ void DownloadQueueSet::retryOrBlacklistJob(HttpJob *job, const int errorCode)
 void DownloadQueueSet::activateJob(HttpJob *const job)
 {
     m_activeJobs.push_back(job);
-    emit progressChanged(m_activeJobs.size(), m_jobs.count());
+    Q_EMIT progressChanged(m_activeJobs.size(), m_jobs.count());
 
     connect(job, SIGNAL(jobDone(HttpJob *, int)), SLOT(retryOrBlacklistJob(HttpJob *, int)));
     connect(job, SIGNAL(redirected(HttpJob *, QUrl)), SLOT(redirectJob(HttpJob *, QUrl)));
@@ -179,7 +179,7 @@ void DownloadQueueSet::deactivateJob(HttpJob *const job)
     const bool removed = m_activeJobs.removeOne(job);
     Q_ASSERT(removed);
     Q_UNUSED(removed); // for Q_ASSERT in release mode
-    emit progressChanged(m_activeJobs.size(), m_jobs.count());
+    Q_EMIT progressChanged(m_activeJobs.size(), m_jobs.count());
 }
 
 bool DownloadQueueSet::jobIsActive(QString const &destinationFileName) const

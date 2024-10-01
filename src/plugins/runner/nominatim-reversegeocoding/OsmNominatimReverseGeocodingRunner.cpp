@@ -35,7 +35,7 @@ OsmNominatimRunner::~OsmNominatimRunner()
 
 void OsmNominatimRunner::returnNoReverseGeocodingResult()
 {
-    emit reverseGeocodingFinished(m_coordinates, GeoDataPlacemark());
+    Q_EMIT reverseGeocodingFinished(m_coordinates, GeoDataPlacemark());
 }
 
 void OsmNominatimRunner::reverseGeocoding(const GeoDataCoordinates &coordinates)
@@ -99,7 +99,7 @@ void OsmNominatimRunner::handleResult(QNetworkReply *reply)
         QDomNode details = root.firstChildElement(QStringLiteral("addressparts"));
         extractChildren(details, placemark);
 
-        emit reverseGeocodingFinished(m_coordinates, placemark);
+        Q_EMIT reverseGeocodingFinished(m_coordinates, placemark);
     } else {
         returnNoReverseGeocodingResult();
     }

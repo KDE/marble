@@ -224,7 +224,7 @@ void RoutinoRunner::retrieveRoute(const RouteRequest *route)
     mDebug();
 
     if (!QFileInfo(d->m_mapDir, "nodes.mem").exists()) {
-        emit routeCalculated(nullptr);
+        Q_EMIT routeCalculated(nullptr);
         return;
     }
 
@@ -257,7 +257,7 @@ void RoutinoRunner::retrieveRoute(const RouteRequest *route)
 
     GeoDataDocument *result = d->createDocument(wayPoints, instructions);
     mDebug() << this << "routeCalculated";
-    emit routeCalculated(result);
+    Q_EMIT routeCalculated(result);
 }
 
 } // namespace Marble

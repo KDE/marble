@@ -130,14 +130,14 @@ void SearchRunnerManager::Private::cleanupSearchTask(SearchTask *task)
 
 void SearchRunnerManager::Private::notifySearchResultChange()
 {
-    emit q->searchResultChanged(&m_model);
-    emit q->searchResultChanged(m_placemarkContainer);
+    Q_EMIT q->searchResultChanged(&m_model);
+    Q_EMIT q->searchResultChanged(m_placemarkContainer);
 }
 
 void SearchRunnerManager::Private::notifySearchFinished()
 {
-    emit q->searchFinished(m_lastSearchTerm);
-    emit q->placemarkSearchFinished();
+    Q_EMIT q->searchFinished(m_lastSearchTerm);
+    Q_EMIT q->placemarkSearchFinished();
 }
 
 SearchRunnerManager::SearchRunnerManager(const MarbleModel *marbleModel, QObject *parent)

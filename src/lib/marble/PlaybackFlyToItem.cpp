@@ -62,12 +62,12 @@ void PlaybackFlyToItem::playNext()
     if (t <= 1) {
         if (m_isPlaying) {
             center(t);
-            emit progressChanged(progress);
+            Q_EMIT progressChanged(progress);
             QTimer::singleShot(5, this, SLOT(playNext()));
         }
     } else {
         center(1.0);
-        emit finished();
+        Q_EMIT finished();
         stop();
     }
 }
@@ -99,14 +99,14 @@ void PlaybackFlyToItem::center(double t)
     if (m_flyTo->flyToMode() == GeoDataFlyTo::Bounce || !m_before->m_before || !m_next) {
         GeoDataCoordinates const a = m_before->m_flyTo->view()->coordinates();
         GeoDataCoordinates const b = m_flyTo->view()->coordinates();
-        emit centerOn(a.interpolate(b, t));
+        Q_EMIT centerOn(a.interpolate(b, t));
     } else {
         Q_ASSERT(m_flyTo->flyToMode() == GeoDataFlyTo::Smooth);
         GeoDataCoordinates const a = m_before->m_before->m_flyTo->view()->coordinates();
         GeoDataCoordinates const b = m_before->m_flyTo->view()->coordinates();
         GeoDataCoordinates const c = m_flyTo->view()->coordinates();
         GeoDataCoordinates const d = m_next->m_flyTo->view()->coordinates();
-        emit centerOn(b.interpolate(a, c, d, t));
+        Q_EMIT centerOn(b.interpolate(a, c, d, t));
     }
 }
 

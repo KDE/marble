@@ -464,7 +464,7 @@ bool ElevationProfileFloatItem::eventFilter(QObject *object, QEvent *e)
                     if (m_documentIndex < 0) {
                         m_documentIndex = treeModel->addDocument(&m_markerDocument);
                     }
-                    emit repaintNeeded();
+                    Q_EMIT repaintNeeded();
                 }
 
                 return true;
@@ -474,7 +474,7 @@ bool ElevationProfileFloatItem::eventFilter(QObject *object, QEvent *e)
                 m_markerPlacemark->setCoordinate(GeoDataCoordinates()); // set to invalid
                 treeModel->removeDocument(&m_markerDocument);
                 m_documentIndex = -1;
-                emit repaintNeeded();
+                Q_EMIT repaintNeeded();
             }
         }
     }
@@ -492,7 +492,7 @@ void ElevationProfileFloatItem::handleDataUpdate(const GeoDataLineString &points
         m_axisY.setRange(qMin(m_minElevation, qreal(0.0)), m_maxElevation);
     }
 
-    emit dataUpdated();
+    Q_EMIT dataUpdated();
 }
 
 void ElevationProfileFloatItem::updateVisiblePoints()
@@ -641,7 +641,7 @@ void ElevationProfileFloatItem::forceRepaint()
     // We add one pixel as antialiasing could result into painting on these pixels to.
     QRectF floatItemRect = QRectF(positivePosition() - QPoint(1, 1), size() + QSize(2, 2));
     update();
-    emit repaintNeeded(floatItemRect.toRect());
+    Q_EMIT repaintNeeded(floatItemRect.toRect());
 }
 
 void ElevationProfileFloatItem::readSettings()
@@ -664,7 +664,7 @@ void ElevationProfileFloatItem::writeSettings()
         m_zoomToViewport = false;
     }
 
-    emit settingsChanged(nameId());
+    Q_EMIT settingsChanged(nameId());
 }
 
 void ElevationProfileFloatItem::toggleZoomToViewport()
@@ -676,7 +676,7 @@ void ElevationProfileFloatItem::toggleZoomToViewport()
         m_axisY.setRange(qMin(m_minElevation, qreal(0.0)), m_maxElevation);
     }
     readSettings();
-    emit settingsChanged(nameId());
+    Q_EMIT settingsChanged(nameId());
 }
 
 void ElevationProfileFloatItem::switchToRouteDataSource()

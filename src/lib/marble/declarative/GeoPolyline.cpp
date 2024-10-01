@@ -47,7 +47,7 @@ void GeoPolyline::setMap(MarbleQuickItem *map)
     m_map = map;
 
     connect(m_map, &MarbleQuickItem::visibleLatLonAltBoxChanged, this, &GeoPolyline::updateScreenPositions);
-    emit mapChanged(m_map);
+    Q_EMIT mapChanged(m_map);
 }
 
 void GeoPolyline::updateScreenPositions()
@@ -107,12 +107,12 @@ void GeoPolyline::updateScreenPositions()
         setHeight(polygonBoundingRect.height());
 
         if (m_screenCoordinates != previousScreenCoordinates) {
-            emit screenCoordinatesChanged();
+            Q_EMIT screenCoordinatesChanged();
         }
-        emit readonlyXChanged();
-        emit readonlyYChanged();
-        emit readonlyWidthChanged();
-        emit readonlyHeightChanged();
+        Q_EMIT readonlyXChanged();
+        Q_EMIT readonlyYChanged();
+        Q_EMIT readonlyWidthChanged();
+        Q_EMIT readonlyHeightChanged();
         update();
     }
 }
@@ -137,7 +137,7 @@ void GeoPolyline::setGeoCoordinates(const QVariantList &coordinates)
     }
 
     m_geoCoordinates = coordinates;
-    emit geoCoordinatesChanged();
+    Q_EMIT geoCoordinatesChanged();
     updateScreenPositions();
 }
 
@@ -162,7 +162,7 @@ void GeoPolyline::setLineColor(const QColor &lineColor)
         return;
 
     m_lineColor = lineColor;
-    emit lineColorChanged(m_lineColor);
+    Q_EMIT lineColorChanged(m_lineColor);
 }
 
 void GeoPolyline::setLineWidth(const qreal lineWidth)
@@ -171,7 +171,7 @@ void GeoPolyline::setLineWidth(const qreal lineWidth)
         return;
 
     m_lineWidth = lineWidth;
-    emit lineWidthChanged(m_lineWidth);
+    Q_EMIT lineWidthChanged(m_lineWidth);
 }
 
 bool GeoPolyline::tessellate() const
@@ -190,7 +190,7 @@ void GeoPolyline::setTessellate(bool tessellate)
         return;
 
     m_tessellate = tessellate;
-    emit tessellateChanged(m_tessellate);
+    Q_EMIT tessellateChanged(m_tessellate);
 }
 
 void GeoPolyline::setClipScreenCoordinates(bool clipped)
@@ -199,7 +199,7 @@ void GeoPolyline::setClipScreenCoordinates(bool clipped)
         return;
 
     m_clipScreenCoordinates = clipped;
-    emit clipScreenCoordinatesChanged(m_clipScreenCoordinates);
+    Q_EMIT clipScreenCoordinatesChanged(m_clipScreenCoordinates);
 }
 
 qreal GeoPolyline::readonlyX() const

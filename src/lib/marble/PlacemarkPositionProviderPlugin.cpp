@@ -124,7 +124,7 @@ void PlacemarkPositionProviderPlugin::setPlacemark(const GeoDataPlacemark *place
     const GeoDataPlacemark *const oldPlacemark = m_placemark;
 
     if (oldPlacemark != nullptr) {
-        emit statusChanged(PositionProviderStatusUnavailable);
+        Q_EMIT statusChanged(PositionProviderStatusUnavailable);
     }
 
     m_placemark = placemark;
@@ -143,11 +143,11 @@ void PlacemarkPositionProviderPlugin::setPlacemark(const GeoDataPlacemark *place
     }
 
     if (oldPlacemark != m_placemark && m_placemark != nullptr) {
-        emit statusChanged(m_status);
+        Q_EMIT statusChanged(m_status);
     }
 
     if (m_status == PositionProviderStatusAvailable) {
-        emit positionChanged(m_coordinates, m_accuracy);
+        Q_EMIT positionChanged(m_coordinates, m_accuracy);
     }
 }
 
@@ -174,7 +174,7 @@ void PlacemarkPositionProviderPlugin::updatePosition()
 
     m_timestamp = m_marbleModel->clockDateTime();
 
-    emit positionChanged(m_coordinates, m_accuracy);
+    Q_EMIT positionChanged(m_coordinates, m_accuracy);
 }
 
 #include "moc_PlacemarkPositionProviderPlugin.cpp"

@@ -201,7 +201,7 @@ void MarblePlacemarkModel::addPlacemarks(int start, int length)
     //    endInsertRows();
     beginResetModel();
     endResetModel();
-    emit countChanged();
+    Q_EMIT countChanged();
     mDebug() << "addPlacemarks: Time elapsed:" << t.elapsed() << "ms for" << length << "Placemarks.";
 }
 
@@ -213,8 +213,8 @@ void MarblePlacemarkModel::removePlacemarks(const QString &containerName, int st
         beginRemoveRows(QModelIndex(), start, start + length);
         d->m_size -= length;
         endRemoveRows();
-        emit layoutChanged();
-        emit countChanged();
+        Q_EMIT layoutChanged();
+        Q_EMIT countChanged();
         mDebug() << "removePlacemarks(" << containerName << "): Time elapsed:" << t.elapsed() << "ms for" << length << "Placemarks.";
     }
 }

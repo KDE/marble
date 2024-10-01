@@ -241,7 +241,7 @@ void MonavRunner::retrieveRoute(const RouteRequest *route)
     const QString name = nameString("Monav", length, time);
     const GeoDataExtendedData data = routeData(length, time);
     GeoDataDocument *result = d->createDocument(waypoints, instructions, name, data);
-    emit routeCalculated(result);
+    Q_EMIT routeCalculated(result);
 }
 
 #if 0
@@ -263,7 +263,7 @@ void MonavRunner::reverseGeocoding( const GeoDataCoordinates &coordinates )
         placemark.setExtendedData( extendedData );
     }
 
-    emit reverseGeocodingFinished( coordinates, placemark );
+    Q_EMIT reverseGeocodingFinished( coordinates, placemark );
 }
 #endif
 

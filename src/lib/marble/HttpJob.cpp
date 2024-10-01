@@ -162,16 +162,16 @@ void HttpJob::finished()
         // check if we are redirected
         const QVariant redirectionAttribute = d->m_networkReply->attribute(QNetworkRequest::RedirectionTargetAttribute);
         if (!redirectionAttribute.isNull()) {
-            emit redirected(this, redirectionAttribute.toUrl());
+            Q_EMIT redirected(this, redirectionAttribute.toUrl());
         } else {
             // no redirection occurred
             const QByteArray data = d->m_networkReply->readAll();
-            emit dataReceived(this, data);
+            Q_EMIT dataReceived(this, data);
         }
     } break;
 
     default:
-        emit jobDone(this, 1);
+        Q_EMIT jobDone(this, 1);
     }
 
     d->m_networkReply->disconnect(this);

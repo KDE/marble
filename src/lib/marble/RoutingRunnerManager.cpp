@@ -87,7 +87,7 @@ void RoutingRunnerManager::Private::addRoutingResult(GeoDataDocument *route)
     if (route) {
         mDebug() << "route retrieved";
         m_routingResult.push_back(route);
-        emit q->routeRetrieved(route);
+        Q_EMIT q->routeRetrieved(route);
     }
 }
 
@@ -97,10 +97,10 @@ void RoutingRunnerManager::Private::cleanupRoutingTask(RoutingTask *task)
     mDebug() << "removing task" << m_routingTasks.size() << " " << (quintptr)task;
     if (m_routingTasks.isEmpty()) {
         if (m_routingResult.isEmpty()) {
-            emit q->routeRetrieved(nullptr);
+            Q_EMIT q->routeRetrieved(nullptr);
         }
 
-        emit q->routingFinished();
+        Q_EMIT q->routingFinished();
     }
 }
 

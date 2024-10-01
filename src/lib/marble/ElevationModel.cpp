@@ -67,7 +67,7 @@ public:
     void tileCompleted(const TileId &tileId, const QImage &image)
     {
         m_cache.insert(tileId, new QImage(image));
-        emit q->updateAvailable();
+        Q_EMIT q->updateAvailable();
     }
 
 public:

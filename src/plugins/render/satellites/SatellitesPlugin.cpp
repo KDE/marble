@@ -294,7 +294,7 @@ void SatellitesPlugin::setSettings(const QHash<QString, QVariant> &settings)
         m_settings.insert(QStringLiteral("userDataSources"), settings.value(QStringLiteral("userDataSources")).toString().split(QLatin1Char(',')));
     }
 
-    emit settingsChanged(nameId());
+    Q_EMIT settingsChanged(nameId());
 }
 
 void SatellitesPlugin::readSettings()
@@ -310,7 +310,7 @@ void SatellitesPlugin::writeSettings()
     m_settings.insert(QStringLiteral("dataSources"), m_configModel->urlList());
     m_settings.insert(QStringLiteral("idList"), m_configModel->idList());
 
-    emit settingsChanged(nameId());
+    Q_EMIT settingsChanged(nameId());
 }
 
 void SatellitesPlugin::updateSettings()

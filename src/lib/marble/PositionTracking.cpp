@@ -91,7 +91,7 @@ void PositionTrackingPrivate::updatePosition()
             m_currentPositionPlacemark->setCoordinate(position);
 
             qreal speed = m_positionProvider->speed();
-            emit q->gpsLocation(position, speed);
+            Q_EMIT q->gpsLocation(position, speed);
         }
     }
 }
@@ -109,7 +109,7 @@ void PositionTrackingPrivate::updateStatus()
         m_treeModel->addFeature(&m_document, m_currentTrackPlacemark);
     }
 
-    emit q->statusChanged(status);
+    Q_EMIT q->statusChanged(status);
 }
 
 QString PositionTrackingPrivate::statusFile()
@@ -195,14 +195,14 @@ void PositionTracking::setPositionProviderPlugin(PositionProviderPlugin *plugin)
         d->m_positionProvider->initialize();
     }
 
-    emit positionProviderPluginChanged(plugin);
+    Q_EMIT positionProviderPluginChanged(plugin);
 
     if (oldStatus != status()) {
-        emit statusChanged(status());
+        Q_EMIT statusChanged(status());
     }
 
     if (status() == PositionProviderStatusAvailable) {
-        emit gpsLocation(d->m_positionProvider->position(), d->m_positionProvider->speed());
+        Q_EMIT gpsLocation(d->m_positionProvider->position(), d->m_positionProvider->speed());
     }
 }
 

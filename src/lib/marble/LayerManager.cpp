@@ -56,7 +56,7 @@ LayerManager::Private::~Private()
 
 void LayerManager::Private::updateVisibility(bool visible, const QString &nameId)
 {
-    emit q->visibilityChanged(nameId, visible);
+    Q_EMIT q->visibilityChanged(nameId, visible);
 }
 
 LayerManager::LayerManager(QObject *parent)
@@ -136,7 +136,7 @@ void LayerManager::renderLayers(GeoPainter *painter, ViewportParams *viewport)
                 if (renderPlugin->enabled() && renderPlugin->visible()) {
                     if (!renderPlugin->isInitialized()) {
                         renderPlugin->initialize();
-                        emit renderPluginInitialized(renderPlugin);
+                        Q_EMIT renderPluginInitialized(renderPlugin);
                     }
                     layers.push_back(renderPlugin);
                 }

@@ -325,7 +325,7 @@ void TileCreator::run()
             createdTilesCount++;
 
             mDebug() << "percentCompleted" << percentCompleted;
-            emit progress(percentCompleted);
+            Q_EMIT progress(percentCompleted);
         }
     }
 
@@ -399,7 +399,7 @@ void TileCreator::run()
                     if (img_topleft.size() != expectedSize || img_topright.size() != expectedSize || img_bottomleft.size() != expectedSize
                         || img_bottomright.size() != expectedSize) {
                         mDebug() << "Tile write failure. Missing write permissions?";
-                        emit progress(100);
+                        Q_EMIT progress(100);
                         return;
                     }
                     QImage tile = img_topleft;
@@ -481,7 +481,7 @@ void TileCreator::run()
                 percentCompleted = (int)(90 * (qreal)(createdTilesCount) / (qreal)(totalTileCount));
                 createdTilesCount++;
 
-                emit progress(percentCompleted);
+                Q_EMIT progress(percentCompleted);
                 mDebug() << "percentCompleted" << percentCompleted;
             }
         }
@@ -520,7 +520,7 @@ void TileCreator::run()
                         mDebug() << "Error while writing Tile: " << tileName;
                     // Don't exceed 99% as this would cancel the thread unexpectedly
                     percentCompleted = 90 + (int)(9 * (qreal)(savedTilesCount) / (qreal)(totalTileCount));
-                    emit progress(percentCompleted);
+                    Q_EMIT progress(percentCompleted);
                     mDebug() << "percentCompleted" << percentCompleted;
                     // mDebug() << "Saving Tile #" << savedTilesCount
                     //          << " of " << totalTileCount
@@ -532,7 +532,7 @@ void TileCreator::run()
     }
 
     percentCompleted = 100;
-    emit progress(percentCompleted);
+    Q_EMIT progress(percentCompleted);
 
     mDebug() << "percentCompleted: " << percentCompleted;
 }

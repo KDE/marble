@@ -49,7 +49,7 @@ void GeoNamesWeatherService::getAdditionalItems(const GeoDataLatLonAltBox &box, 
     urlQuery.addQueryItem("username", "marble");
     geonamesUrl.setQuery(urlQuery);
 
-    emit downloadDescriptionFileRequested(geonamesUrl);
+    Q_EMIT downloadDescriptionFileRequested(geonamesUrl);
 }
 
 void GeoNamesWeatherService::getItem(const QString &id)
@@ -64,7 +64,7 @@ void GeoNamesWeatherService::getItem(const QString &id)
         urlQuery.addQueryItem("ICAO", id.mid(9));
         urlQuery.addQueryItem("username", "marble");
         geonamesUrl.setQuery(urlQuery);
-        emit downloadDescriptionFileRequested(geonamesUrl);
+        Q_EMIT downloadDescriptionFileRequested(geonamesUrl);
     }
 }
 
@@ -95,7 +95,7 @@ void GeoNamesWeatherService::parseFile(const QByteArray &file)
         }
     }
 
-    emit createdItems(items);
+    Q_EMIT createdItems(items);
 }
 
 AbstractDataPluginItem *GeoNamesWeatherService::parse(const QJsonObject &weatherObservationObject)

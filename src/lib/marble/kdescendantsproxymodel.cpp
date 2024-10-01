@@ -927,13 +927,13 @@ void KDescendantsProxyModelPrivate::sourceDataChanged(const QModelIndex &topLeft
         const QModelIndex sourceTopLeft = q->sourceModel()->index(i, topLeft.column(), topLeft.parent());
         Q_ASSERT(sourceTopLeft.isValid());
         const QModelIndex proxyTopLeft = q->mapFromSource(sourceTopLeft);
-        // TODO. If an index does not have any descendants, then we can emit in blocks of rows.
-        // As it is we emit once for each row.
+        // TODO. If an index does not have any descendants, then we can Q_EMIT in blocks of rows.
+        // As it is we Q_EMIT once for each row.
         const QModelIndex sourceBottomRight = q->sourceModel()->index(i, bottomRight.column(), bottomRight.parent());
         const QModelIndex proxyBottomRight = q->mapFromSource(sourceBottomRight);
         Q_ASSERT(proxyTopLeft.isValid());
         Q_ASSERT(proxyBottomRight.isValid());
-        emit q->dataChanged(proxyTopLeft, proxyBottomRight);
+        Q_EMIT q->dataChanged(proxyTopLeft, proxyBottomRight);
     }
 }
 

@@ -99,8 +99,8 @@ void BBCWeatherService::createItem(const BBCStation &station)
     item->setPriority(station.priority());
     item->setStationName(station.name());
 
-    emit requestedDownload(item->observationUrl(), "bbcobservation", item);
-    emit requestedDownload(item->forecastUrl(), "bbcforecast", item);
+    Q_EMIT requestedDownload(item->observationUrl(), "bbcobservation", item);
+    Q_EMIT requestedDownload(item->forecastUrl(), "bbcforecast", item);
 }
 
 #include "moc_BBCWeatherService.cpp"

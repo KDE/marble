@@ -211,7 +211,7 @@ void TileLoader::updateTile(QByteArray const &data, QString const &idStr)
         if (tileImage.isNull())
             return;
 
-        emit tileCompleted(id, tileImage);
+        Q_EMIT tileCompleted(id, tileImage);
     }
 }
 
@@ -230,7 +230,7 @@ void TileLoader::updateTile(const QString &fileName, const QString &idStr)
     if (origin == GeoSceneTypes::GeoSceneVectorTileType) {
         GeoDataDocument *document = openVectorFile(MarbleDirs::path(fileName));
         if (document) {
-            emit tileCompleted(id, document);
+            Q_EMIT tileCompleted(id, document);
         }
     }
 }

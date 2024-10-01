@@ -40,7 +40,7 @@ void FakeWeatherService::getAdditionalItems(const GeoDataLatLonAltBox &box, qint
     data.setTemperature(14.0, WeatherData::Celsius);
     item->setCurrentWeather(data);
 
-    emit createdItems(QList<AbstractDataPluginItem *>() << item);
+    Q_EMIT createdItems(QList<AbstractDataPluginItem *>() << item);
 }
 
 void FakeWeatherService::getItem(const QString &)

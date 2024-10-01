@@ -400,7 +400,7 @@ void DownloadRegionDialog::hideEvent(QHideEvent *event)
     disconnect(d->m_widget, SIGNAL(themeChanged(QString)), this, SLOT(delayUpdateTileLayer()));
     disconnect(d->m_widget, SIGNAL(propertyValueChanged(QString, bool)), this, SLOT(delayUpdateTileLayer()));
 
-    emit hidden();
+    Q_EMIT hidden();
     event->accept();
 }
 
@@ -414,7 +414,7 @@ void DownloadRegionDialog::showEvent(QShowEvent *event)
 
     updateTileCount();
 
-    emit shown();
+    Q_EMIT shown();
     event->accept();
 }
 

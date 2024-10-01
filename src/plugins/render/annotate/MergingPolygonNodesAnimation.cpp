@@ -68,7 +68,7 @@ void MergingPolygonNodesAnimation::updateNodes()
             innerRings[second_i].remove(first_j);
         }
 
-        emit animationFinished();
+        Q_EMIT animationFinished();
     } else {
         if (m_boundary == OuterBoundary) {
             outerRing[first_i] = outerRing.at(first_i).interpolate(m_secondInitialCoords, ratio);
@@ -78,7 +78,7 @@ void MergingPolygonNodesAnimation::updateNodes()
             innerRings[second_i][second_j] = innerRings.at(second_i).at(second_j).interpolate(m_firstInitialCoords, ratio);
         }
 
-        emit nodesMoved();
+        Q_EMIT nodesMoved();
     }
 }
 

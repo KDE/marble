@@ -77,7 +77,7 @@ void OsmRelationManagerWidget::addRelation(QAction *relationAction)
         d->m_currentRelations->editItem(newRelationItem, Column::Role);
 
         // This tells the annotate plugin to add the new relation to its list
-        emit relationCreated(relationData);
+        Q_EMIT relationCreated(relationData);
     } else {
         qint64 id = relationAction->data().toLongLong();
         OsmPlacemarkData relationData = d->m_allRelations->value(id);
@@ -149,7 +149,7 @@ void OsmRelationManagerWidget::handleRelationContextMenuRequest(const QPoint &po
                 return;
             }
 
-            emit relationCreated(relationData);
+            Q_EMIT relationCreated(relationData);
             update();
         }
     }

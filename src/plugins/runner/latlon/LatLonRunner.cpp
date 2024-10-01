@@ -43,7 +43,7 @@ void LatLonRunner::search(const QString &searchTerm, const GeoDataLatLonBox &)
         vector.append(placemark);
     }
 
-    emit searchFinished(vector);
+    Q_EMIT searchFinished(vector);
 }
 
 }

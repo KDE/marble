@@ -92,7 +92,7 @@ void RouteSyncManager::setRouteSyncEnabled(bool enabled)
 {
     if (d->m_routeSyncEnabled != enabled) {
         d->m_routeSyncEnabled = enabled;
-        emit routeSyncEnabledChanged(d->m_routeSyncEnabled);
+        Q_EMIT routeSyncEnabledChanged(d->m_routeSyncEnabled);
     }
 }
 
@@ -235,7 +235,7 @@ void RouteSyncManager::removeRouteFromCache(const QString &timestamp)
 
 void RouteSyncManager::updateUploadProgressbar(qint64 sent, qint64 total)
 {
-    emit routeUploadProgress(sent, total);
+    Q_EMIT routeUploadProgress(sent, total);
     if (sent == total) {
         prepareRouteList();
     }

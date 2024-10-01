@@ -672,7 +672,7 @@ int GeoDataTreeModel::addFeature(GeoDataContainer *parent, GeoDataFeature *featu
             parent->insert(row, feature);
             d->checkParenting(parent);
             endInsertRows();
-            emit added(feature);
+            Q_EMIT added(feature);
         } else
             qWarning() << "GeoDataTreeModel::addFeature (parent " << parent << " - feature" << feature << ") : parent not found on the TreeModel";
     } else
@@ -691,7 +691,7 @@ bool GeoDataTreeModel::removeFeature(GeoDataContainer *parent, int row)
         beginRemoveRows(index(parent), row, row);
         GeoDataFeature *feature = parent->child(row);
         parent->remove(row);
-        emit removed(feature);
+        Q_EMIT removed(feature);
         endRemoveRows();
         return true;
     }

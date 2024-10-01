@@ -135,7 +135,7 @@ void QtPositioningPositionProviderPlugin::initialize()
     d->m_source = QGeoPositionInfoSource::createDefaultSource(this);
     if (d->m_source) {
         d->m_status = PositionProviderStatusAcquiring;
-        emit statusChanged(d->m_status);
+        Q_EMIT statusChanged(d->m_status);
         connect(d->m_updateChecker, SIGNAL(timeout()), this, SLOT(update()));
         connect(d->m_source, SIGNAL(positionUpdated(QGeoPositionInfo)), this, SLOT(update(QGeoPositionInfo)));
         d->m_source->setUpdateInterval(1000);
@@ -200,11 +200,11 @@ void QtPositioningPositionProviderPlugin::update(const QGeoPositionInfo &geoPosi
 
     if (newStatus != d->m_status) {
         d->m_status = newStatus;
-        emit statusChanged(d->m_status);
+        Q_EMIT statusChanged(d->m_status);
     }
 
     if (newStatus == PositionProviderStatusAvailable) {
-        emit positionChanged(position(), accuracy());
+        Q_EMIT positionChanged(position(), accuracy());
     }
 }
 

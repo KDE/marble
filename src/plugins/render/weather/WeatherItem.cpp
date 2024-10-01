@@ -345,7 +345,7 @@ void WeatherItem::setStationName(const QString &name)
         d->m_stationName = name;
         d->updateToolTip();
         d->updateLabels();
-        emit stationNameChanged();
+        Q_EMIT stationNameChanged();
     }
 }
 
@@ -359,10 +359,10 @@ void WeatherItem::setCurrentWeather(const WeatherData &weather)
     d->m_currentWeather = weather;
     d->updateToolTip();
     d->updateLabels();
-    emit updated();
-    emit descriptionChanged();
-    emit imageChanged();
-    emit temperatureChanged();
+    Q_EMIT updated();
+    Q_EMIT descriptionChanged();
+    Q_EMIT imageChanged();
+    Q_EMIT temperatureChanged();
 }
 
 QMap<QDate, WeatherData> WeatherItem::forecastWeather() const
@@ -375,7 +375,7 @@ void WeatherItem::setForecastWeather(const QMap<QDate, WeatherData> &forecasts)
     d->m_forecastWeather = forecasts;
 
     d->updateToolTip();
-    emit updated();
+    Q_EMIT updated();
 }
 
 void WeatherItem::addForecastWeather(const QList<WeatherData> &forecasts)
@@ -405,7 +405,7 @@ void WeatherItem::addForecastWeather(const QList<WeatherData> &forecasts)
     }
 
     d->updateToolTip();
-    emit updated();
+    Q_EMIT updated();
 }
 
 quint8 WeatherItem::priority() const

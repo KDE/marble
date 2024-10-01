@@ -137,7 +137,7 @@ void TrackerPluginModel::beginUpdateItems()
         d->m_treeModel->removeDocument(d->m_document);
     }
 
-    emit itemUpdateStarted();
+    Q_EMIT itemUpdateStarted();
 }
 
 void TrackerPluginModel::endUpdateItems()
@@ -147,7 +147,7 @@ void TrackerPluginModel::endUpdateItems()
         d->m_treeModel->addDocument(d->m_document);
     }
 
-    emit itemUpdateEnded();
+    Q_EMIT itemUpdateEnded();
 }
 
 void TrackerPluginModel::downloadFile(const QUrl &url, const QString &id)

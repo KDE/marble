@@ -137,7 +137,7 @@ bool RouteItemDelegate::editorEvent(QEvent *event, QAbstractItemModel *model, co
 
             if (uploadRect.contains(pos)) {
                 QString timestamp = index.data(CloudRouteModel::Timestamp).toString();
-                emit uploadToCloudButtonClicked(timestamp);
+                Q_EMIT uploadToCloudButtonClicked(timestamp);
                 return true;
             }
         }
@@ -148,11 +148,11 @@ bool RouteItemDelegate::editorEvent(QEvent *event, QAbstractItemModel *model, co
 
             if (openRect.contains(pos)) {
                 QString timestamp = index.data(CloudRouteModel::Timestamp).toString();
-                emit openButtonClicked(timestamp);
+                Q_EMIT openButtonClicked(timestamp);
                 return true;
             } else if (cacheRemoveRect.contains(pos)) {
                 QString timestamp = index.data(CloudRouteModel::Timestamp).toString();
-                emit removeFromCacheButtonClicked(timestamp);
+                Q_EMIT removeFromCacheButtonClicked(timestamp);
                 return true;
             }
         } else {
@@ -162,13 +162,13 @@ bool RouteItemDelegate::editorEvent(QEvent *event, QAbstractItemModel *model, co
             if (downloadRect.contains(pos)) {
                 QString timestamp = index.data(CloudRouteModel::Timestamp).toString();
                 m_model->setDownloadingItem(index);
-                emit downloadButtonClicked(timestamp);
+                Q_EMIT downloadButtonClicked(timestamp);
                 return true;
             }
 
             if (cloudRemoveRect.contains(pos)) {
                 QString timestamp = index.data(CloudRouteModel::Timestamp).toString();
-                emit deleteButtonClicked(timestamp);
+                Q_EMIT deleteButtonClicked(timestamp);
                 return true;
             }
         }

@@ -67,11 +67,11 @@ bool FileStoragePolicy::updateFile(const QString &fileName, const QByteArray &da
     if (!file.write(data)) {
         m_errorMsg = fullName + QLatin1StringView(": ") + file.errorString();
         qCritical() << "file.write" << m_errorMsg;
-        emit sizeChanged(file.size() - oldSize);
+        Q_EMIT sizeChanged(file.size() - oldSize);
         return false;
     }
 
-    emit sizeChanged(file.size() - oldSize);
+    Q_EMIT sizeChanged(file.size() - oldSize);
     file.close();
 
     return true;
@@ -121,9 +121,9 @@ void FileStoragePolicy::clearCache()
                     if (lowerCase.endsWith(QLatin1StringView(".jpg")) || lowerCase.endsWith(QLatin1StringView(".png"))
                         || lowerCase.endsWith(QLatin1StringView(".gif")) || lowerCase.endsWith(QLatin1StringView(".svg"))
                         || lowerCase.endsWith(QLatin1StringView(".o5m"))) {
-                        // We cannot emit clear, because we don't make a full clear
+                        // We cannot Q_EMIT clear, because we don't make a full clear
                         QFile file(filePath);
-                        emit sizeChanged(-file.size());
+                        Q_EMIT sizeChanged(-file.size());
                         file.remove();
                     }
                 }

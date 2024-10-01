@@ -48,7 +48,7 @@ void SearchBackend::setCompletionPrefix(const QString &prefix)
         QString const lastPrefix = m_completer->completionPrefix();
         m_completer->setCompletionPrefix(prefix);
         if (prefix.isEmpty()) {
-            emit completionModelChanged(m_completionModel);
+            Q_EMIT completionModelChanged(m_completionModel);
             return;
         }
         QList<GeoDataPlacemark *> *container = new QList<GeoDataPlacemark *>();
@@ -70,7 +70,7 @@ void SearchBackend::setCompletionPrefix(const QString &prefix)
         m_completionModel->addPlacemarks(0, container->size());
         delete m_completionContainer;
         m_completionContainer = container;
-        emit completionModelChanged(m_completionModel);
+        Q_EMIT completionModelChanged(m_completionModel);
     }
 }
 
@@ -104,7 +104,7 @@ void SearchBackend::setSelectedPlacemark(int placemarkIndex)
 
     m_selectedPlacemark.setGeoDataPlacemark(*placemark);
     m_marbleQuickItem->centerOn(*placemark, true);
-    emit selectedPlacemarkChanged(&m_selectedPlacemark);
+    Q_EMIT selectedPlacemarkChanged(&m_selectedPlacemark);
 }
 
 void SearchBackend::setMarbleQuickItem(QObject *marbleQuickItem)
@@ -128,14 +128,14 @@ void SearchBackend::setMarbleQuickItem(QObject *marbleQuickItem)
         m_completer->setCompletionRole(Qt::DisplayRole);
         m_completer->setCaseSensitivity(Qt::CaseInsensitive);
 
-        emit marbleQuickItemChanged(marbleQuickItem);
+        Q_EMIT marbleQuickItemChanged(marbleQuickItem);
     }
 }
 
 void SearchBackend::updateSearchResult(QAbstractItemModel *result)
 {
     m_placemarkModel = qobject_cast<MarblePlacemarkModel *>(result);
-    emit searchResultChanged(m_placemarkModel);
+    Q_EMIT searchResultChanged(m_placemarkModel);
 }
 
 GeoDataPlacemark *SearchBackend::placemarkFromQVariant(const QVariant &data)

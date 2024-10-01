@@ -168,7 +168,7 @@ void MarbleLegendBrowser::loadLegend()
 void MarbleLegendBrowser::openLinkExternally(const QUrl &url)
 {
     if (url.scheme() == QLatin1StringView("tour")) {
-        emit tourLinkClicked(QLatin1StringView("maps/") + url.host() + url.path());
+        Q_EMIT tourLinkClicked(QLatin1StringView("maps/") + url.host() + url.path());
     } else {
         QDesktopServices::openUrl(url);
     }
@@ -363,7 +363,7 @@ void MarbleLegendBrowser::setCheckedProperty(const QString &name, bool checked)
 {
     if (checked != d->m_checkBoxMap[name]) {
         d->m_checkBoxMap[name] = checked;
-        emit toggledShowProperty(name, checked);
+        Q_EMIT toggledShowProperty(name, checked);
     }
 }
 
@@ -372,7 +372,7 @@ void MarbleLegendBrowser::setRadioCheckedProperty(const QString &value, const QS
     Q_UNUSED(value)
     if (checked != d->m_checkBoxMap[name]) {
         d->m_checkBoxMap[name] = checked;
-        emit toggledShowProperty(name, checked);
+        Q_EMIT toggledShowProperty(name, checked);
     }
 }
 

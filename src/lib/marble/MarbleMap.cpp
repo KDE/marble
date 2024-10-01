@@ -371,13 +371,13 @@ void MarbleMap::setViewContext(ViewContext viewContext)
 
     const MapQuality oldQuality = d->m_viewParams.mapQuality();
     d->m_viewParams.setViewContext(viewContext);
-    emit viewContextChanged(viewContext);
+    Q_EMIT viewContextChanged(viewContext);
 
     if (d->m_viewParams.mapQuality() != oldQuality) {
         // Update texture map during the repaint that follows:
         d->m_textureLayer.setNeedsUpdate();
 
-        emit repaintNeeded();
+        Q_EMIT repaintNeeded();
     }
 }
 
@@ -395,7 +395,7 @@ void MarbleMap::setSize(const QSize &size)
 {
     d->m_viewport.setSize(size);
 
-    emit visibleLatLonAltBoxChanged(d->m_viewport.viewLatLonAltBox());
+    Q_EMIT visibleLatLonAltBoxChanged(d->m_viewport.viewLatLonAltBox());
 }
 
 QSize MarbleMap::size() const
@@ -425,8 +425,8 @@ void MarbleMap::setRadius(int radius)
     d->m_viewport.setRadius(radius);
 
     if (oldRadius != d->m_viewport.radius()) {
-        emit radiusChanged(radius);
-        emit visibleLatLonAltBoxChanged(d->m_viewport.viewLatLonAltBox());
+        Q_EMIT radiusChanged(radius);
+        Q_EMIT visibleLatLonAltBoxChanged(d->m_viewport.viewLatLonAltBox());
     }
 }
 
@@ -708,7 +708,7 @@ void MarbleMap::centerOn(const qreal lon, const qreal lat)
 {
     d->m_viewport.centerOn(lon * DEG2RAD, lat * DEG2RAD);
 
-    emit visibleLatLonAltBoxChanged(d->m_viewport.viewLatLonAltBox());
+    Q_EMIT visibleLatLonAltBoxChanged(d->m_viewport.viewLatLonAltBox());
 }
 
 void MarbleMap::setCenterLatitude(qreal lat)
@@ -731,13 +731,13 @@ void MarbleMap::setProjection(Projection projection)
     if (d->m_viewport.projection() == projection)
         return;
 
-    emit projectionChanged(projection);
+    Q_EMIT projectionChanged(projection);
 
     d->m_viewport.setProjection(projection);
 
     d->m_textureLayer.setProjection(projection);
 
-    emit visibleLatLonAltBoxChanged(d->m_viewport.viewLatLonAltBox());
+    Q_EMIT visibleLatLonAltBoxChanged(d->m_viewport.viewLatLonAltBox());
 }
 
 bool MarbleMap::screenCoordinates(qreal lon, qreal lat, qreal &x, qreal &y) const
@@ -801,7 +801,7 @@ void MarbleMapPrivate::updateTileLevel()
     auto const tileZoomLevel = q->tileZoomLevel();
     m_geometryLayer.setTileLevel(tileZoomLevel);
     m_placemarkLayer.setTileLevel(tileZoomLevel);
-    emit q->tileLevelChanged(tileZoomLevel);
+    Q_EMIT q->tileLevelChanged(tileZoomLevel);
 }
 
 // Used to be paintEvent()
@@ -834,9 +834,9 @@ void MarbleMap::paint(GeoPainter &painter, const QRect &dirtyRect)
     d->m_renderState.addChild(RenderState(QStringLiteral("Files"), parsing ? WaitingForData : Complete));
     RenderStatus const newRenderStatus = d->m_renderState.status();
     if (oldRenderStatus != newRenderStatus) {
-        emit renderStatusChanged(newRenderStatus);
+        Q_EMIT renderStatusChanged(newRenderStatus);
     }
-    emit renderStateChanged(d->m_renderState);
+    Q_EMIT renderStateChanged(d->m_renderState);
 
     if (d->m_showFrameRate) {
         FpsLayer fpsPainter(&t);
@@ -844,7 +844,7 @@ void MarbleMap::paint(GeoPainter &painter, const QRect &dirtyRect)
     }
 
     const qreal fps = 1000.0 / (qreal)(t.elapsed());
-    emit framesPerSecond(fps);
+    Q_EMIT framesPerSecond(fps);
 }
 
 void MarbleMap::customPaint(GeoPainter *painter)
@@ -1040,7 +1040,7 @@ void MarbleMapPrivate::updateMapTheme()
         }
     }
 
-    emit q->themeChanged(m_model->mapTheme()->head()->mapThemeId());
+    Q_EMIT q->themeChanged(m_model->mapTheme()->head()->mapThemeId());
 }
 
 void MarbleMap::setPropertyValue(const QString &name, bool value)
@@ -1049,7 +1049,7 @@ void MarbleMap::setPropertyValue(const QString &name, bool value)
     if (d->m_model->mapTheme()) {
         d->m_model->mapTheme()->settings()->setPropertyValue(name, value);
         d->m_textureLayer.setNeedsUpdate();
-        emit propertyValueChanged(name, value);
+        Q_EMIT propertyValueChanged(name, value);
     } else {
         mDebug() << "WARNING: Failed to access a map theme! Property: " << name;
     }
@@ -1205,7 +1205,7 @@ void MarbleMap::setShowRuntimeTrace(bool visible)
 {
     if (visible != d->m_layerManager.showRuntimeTrace()) {
         d->m_layerManager.setShowRuntimeTrace(visible);
-        emit repaintNeeded();
+        Q_EMIT repaintNeeded();
     }
 }
 
@@ -1218,7 +1218,7 @@ void MarbleMap::setShowDebugPolygons(bool visible)
 {
     if (visible != d->m_showDebugPolygons) {
         d->m_showDebugPolygons = visible;
-        emit repaintNeeded();
+        Q_EMIT repaintNeeded();
     }
 }
 
@@ -1232,7 +1232,7 @@ void MarbleMap::setShowDebugBatchRender(bool visible)
     qDebug() << visible;
     if (visible != d->m_showDebugBatchRender) {
         d->m_showDebugBatchRender = visible;
-        emit repaintNeeded();
+        Q_EMIT repaintNeeded();
     }
 }
 
@@ -1245,7 +1245,7 @@ void MarbleMap::setShowDebugPlacemarks(bool visible)
 {
     if (visible != d->m_placemarkLayer.isDebugModeEnabled()) {
         d->m_placemarkLayer.setDebugModeEnabled(visible);
-        emit repaintNeeded();
+        Q_EMIT repaintNeeded();
     }
 }
 
@@ -1259,7 +1259,7 @@ void MarbleMap::setLevelTagDebugModeEnabled(bool visible)
     if (visible != d->m_geometryLayer.levelTagDebugModeEnabled()) {
         d->m_geometryLayer.setLevelTagDebugModeEnabled(visible);
         d->m_placemarkLayer.setLevelTagDebugModeEnabled(visible);
-        emit repaintNeeded();
+        Q_EMIT repaintNeeded();
     }
 }
 
@@ -1289,7 +1289,7 @@ void MarbleMap::setVisibleRelationTypes(GeoDataRelation::RelationTypes relationT
     if (d->m_visibleRelationTypes != relationTypes) {
         d->m_visibleRelationTypes = relationTypes;
         d->m_geometryLayer.setVisibleRelationTypes(relationTypes);
-        emit visibleRelationTypesChanged(d->m_visibleRelationTypes);
+        Q_EMIT visibleRelationTypesChanged(d->m_visibleRelationTypes);
     }
 }
 
@@ -1301,7 +1301,7 @@ void MarbleMap::notifyMouseClick(int x, int y)
     const bool valid = geoCoordinates(x, y, lon, lat, GeoDataCoordinates::Radian);
 
     if (valid) {
-        emit mouseClickGeoPosition(lon, lat, GeoDataCoordinates::Radian);
+        Q_EMIT mouseClickGeoPosition(lon, lat, GeoDataCoordinates::Radian);
     }
 }
 
@@ -1441,7 +1441,7 @@ void MarbleMap::setHeading(qreal heading)
     d->m_viewport.setHeading(heading * DEG2RAD);
     d->m_textureLayer.setNeedsUpdate();
 
-    emit visibleLatLonAltBoxChanged(d->m_viewport.viewLatLonAltBox());
+    Q_EMIT visibleLatLonAltBoxChanged(d->m_viewport.viewLatLonAltBox());
 }
 
 }

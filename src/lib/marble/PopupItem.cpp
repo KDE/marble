@@ -248,7 +248,7 @@ bool PopupItem::eventFilter(QObject *object, QEvent *e)
             QMouseEvent shiftedEvent = QMouseEvent(e->type(), shiftedPos, event->globalPos(), event->button(), event->buttons(), event->modifiers());
             if (QApplication::sendEvent(child, &shiftedEvent)) {
                 widget->setCursor(child->cursor());
-                emit repaintNeeded();
+                Q_EMIT repaintNeeded();
                 return true;
             }
         }
@@ -268,7 +268,7 @@ bool PopupItem::eventFilter(QObject *object, QEvent *e)
                                                    false);
             if (QApplication::sendEvent(child, &shiftedEvent)) {
                 widget->setCursor(child->cursor());
-                emit repaintNeeded();
+                Q_EMIT repaintNeeded();
                 return true;
             }
         }
@@ -324,7 +324,7 @@ void PopupItem::clearHistory()
 void PopupItem::requestUpdate()
 {
     update();
-    emit repaintNeeded();
+    Q_EMIT repaintNeeded();
 }
 
 void PopupItem::printContent() const

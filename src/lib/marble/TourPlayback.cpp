@@ -85,7 +85,7 @@ TourPlayback::~TourPlayback()
 
 void TourPlayback::handleFinishedItem(int index)
 {
-    emit itemFinished(index);
+    Q_EMIT itemFinished(index);
 }
 
 void TourPlayback::stopTour()
@@ -98,7 +98,7 @@ void TourPlayback::stopTour()
         d->m_animatedUpdateTracks[i]->stop();
         d->m_animatedUpdateTracks[i]->setPaused(false);
     }
-    emit finished();
+    Q_EMIT finished();
 }
 
 void TourPlayback::showBalloon(GeoDataPlacemark *placemark)

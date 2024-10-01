@@ -241,7 +241,7 @@ void CompassFloatItem::writeSettings()
     }
     readSettings();
     update();
-    emit settingsChanged(nameId());
+    Q_EMIT settingsChanged(nameId());
 }
 
 }

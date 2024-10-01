@@ -32,7 +32,7 @@ void TileRunner::run()
 {
     GeoDataDocument *const document = m_loader->loadTileVectorData(m_tileDataset, m_id, DownloadBrowse);
 
-    emit documentLoaded(m_id, document);
+    Q_EMIT documentLoaded(m_id, document);
 }
 
 VectorTileModel::CacheDocument::CacheDocument(GeoDataDocument *doc, VectorTileModel *vectorTileModel, const GeoDataLatLonBox &boundingBox)
@@ -145,7 +145,7 @@ const GeoSceneVectorTileDataset *VectorTileModel::layer() const
 
 void VectorTileModel::removeTile(GeoDataDocument *document)
 {
-    emit tileRemoved(document);
+    Q_EMIT tileRemoved(document);
 }
 
 int VectorTileModel::tileZoomLevel() const
@@ -190,7 +190,7 @@ void VectorTileModel::updateTile(const TileId &idWithMapThemeHash, GeoDataDocume
     }
     const GeoDataLatLonBox boundingBox = m_layer->tileProjection()->geoCoordinates(id);
     m_documents[id] = QSharedPointer<CacheDocument>(new CacheDocument(document, this, boundingBox));
-    emit tileAdded(document);
+    Q_EMIT tileAdded(document);
 }
 
 void VectorTileModel::clear()

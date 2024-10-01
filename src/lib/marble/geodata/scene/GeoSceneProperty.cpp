@@ -63,7 +63,7 @@ void GeoSceneProperty::setValue(bool value)
 
     m_value = value;
     //    mDebug() << "GeoSceneProperty: Setting " << m_name << "to" << m_value;
-    emit valueChanged(m_name, m_value);
+    Q_EMIT valueChanged(m_name, m_value);
 }
 
 }

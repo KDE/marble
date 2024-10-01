@@ -143,7 +143,7 @@ const StackedTile *StackedTileLoader::loadTile(TileId const &stackedTileId)
     d->m_tilesOnDisplay[stackedTileId] = stackedTile;
     d->m_cacheLock.unlock();
 
-    emit tileLoaded(stackedTileId);
+    Q_EMIT tileLoaded(stackedTileId);
 
     return stackedTile;
 }
@@ -184,7 +184,7 @@ void StackedTileLoader::updateTile(TileId const &tileId, QImage const &tileImage
         delete displayedTile;
         displayedTile = nullptr;
 
-        emit tileLoaded(stackedTileId);
+        Q_EMIT tileLoaded(stackedTileId);
     } else {
         d->m_tileCache.remove(stackedTileId);
     }
@@ -207,7 +207,7 @@ void StackedTileLoader::clear()
     d->m_tilesOnDisplay.clear();
     d->m_tileCache.clear(); // clear the tile cache in physical memory
 
-    emit cleared();
+    Q_EMIT cleared();
 }
 
 }

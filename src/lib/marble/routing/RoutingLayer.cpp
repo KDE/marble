@@ -141,7 +141,7 @@ public:
     /** Paint icons for trip points etc */
     inline void renderRequest(GeoPainter *painter);
 
-    /** Insert via points or emit position signal, if appropriate */
+    /** Insert via points or Q_EMIT position signal, if appropriate */
     inline bool handleMouseButtonRelease(QMouseEvent *e);
 
     /** Select route instructions points, start dragging trip points */
@@ -460,7 +460,7 @@ bool RoutingLayerPrivate::handleMouseButtonPress(QMouseEvent *e)
                 m_dropStopOver = e->pos();
                 storeDragPosition(e->pos());
                 // annotation and old annotation are dirty, large region
-                emit q->repaintNeeded();
+                Q_EMIT q->repaintNeeded();
                 return true;
             } else if (e->button() == Qt::RightButton) {
                 m_removeViaPointAction->setEnabled(false);
@@ -498,7 +498,7 @@ bool RoutingLayerPrivate::handleMouseButtonPress(QMouseEvent *e)
 
     for (const ModelRegion &region : std::as_const(m_placemarks)) {
         if (region.region.contains(e->pos())) {
-            emit q->placemarkSelected(region.index);
+            Q_EMIT q->placemarkSelected(region.index);
             return true;
         }
     }
@@ -560,7 +560,7 @@ bool RoutingLayerPrivate::handleMouseMove(QMouseEvent *e)
                 m_dragStopOver = QPoint();
                 m_dropStopOver = QPoint();
             }
-            emit q->repaintNeeded(dirty);
+            Q_EMIT q->repaintNeeded(dirty);
             m_marbleWidget->setCursor(Qt::ArrowCursor);
         } else if (isInfoPoint(e->pos())) {
             clearStopOver();
@@ -614,11 +614,11 @@ bool RoutingLayerPrivate::isAlternativeRoutePoint(const QPoint &point)
 
 void RoutingLayerPrivate::paintStopOver(QRect dirty)
 {
-    emit q->repaintNeeded(m_dirtyRect);
+    Q_EMIT q->repaintNeeded(m_dirtyRect);
     int dx = 1 + m_pixmapSize.width() / 2;
     int dy = 1 + m_pixmapSize.height() / 2;
     dirty.adjust(-dx, -dy, -dx, -dy);
-    emit q->repaintNeeded(dirty);
+    Q_EMIT q->repaintNeeded(dirty);
     m_dirtyRect = dirty;
 }
 
@@ -626,7 +626,7 @@ void RoutingLayerPrivate::clearStopOver()
 {
     m_dropStopOver = QPoint();
     m_dragStopOver = QPoint();
-    emit q->repaintNeeded(m_dirtyRect);
+    Q_EMIT q->repaintNeeded(m_dirtyRect);
 }
 
 RoutingLayer::RoutingLayer(MarbleWidget *widget, QWidget *parent)
@@ -737,7 +737,7 @@ void RoutingLayer::removeViaPoint()
     if (d->m_activeMenuIndex >= 0) {
         d->m_routeRequest->remove(d->m_activeMenuIndex);
         d->m_activeMenuIndex = -1;
-        emit repaintNeeded();
+        Q_EMIT repaintNeeded();
         d->m_marbleWidget->model()->routingManager()->retrieveRoute();
     }
 }
@@ -745,7 +745,7 @@ void RoutingLayer::removeViaPoint()
 void RoutingLayer::showAlternativeRoutes()
 {
     setViewportChanged();
-    emit repaintNeeded();
+    Q_EMIT repaintNeeded();
 }
 
 void RoutingLayer::exportRoute()
@@ -771,7 +771,7 @@ void RoutingLayer::exportRoute()
 void RoutingLayer::updateRouteState()
 {
     setViewportChanged();
-    emit repaintNeeded();
+    Q_EMIT repaintNeeded();
 }
 
 void RoutingLayer::setViewportChanged()

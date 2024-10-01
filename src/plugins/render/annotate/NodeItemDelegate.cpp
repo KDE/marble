@@ -82,7 +82,7 @@ void NodeItemDelegate::setModelData(QWidget *editor, QAbstractItemModel *model, 
     Q_UNUSED(index);
 
     // The dialogs already have a function that updates the NodeModel
-    emit modelChanged(m_placemark);
+    Q_EMIT modelChanged(m_placemark);
 }
 
 void NodeItemDelegate::previewNodeMove(qreal value)
@@ -113,7 +113,7 @@ void NodeItemDelegate::previewNodeMove(qreal value)
     }
 
     // Updating changes ( repainting graphics )
-    emit geometryChanged();
+    Q_EMIT geometryChanged();
 }
 
 void NodeItemDelegate::updateEditorGeometry(QWidget *editor, const QStyleOptionViewItem &option, const QModelIndex &index) const

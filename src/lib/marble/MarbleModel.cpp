@@ -392,7 +392,7 @@ void MarbleModel::setMapTheme(GeoSceneDocument *document)
     }
 
     mDebug() << "THEME CHANGED: ***" << mapTheme->head()->mapThemeId();
-    emit themeChanged(mapTheme->head()->mapThemeId());
+    Q_EMIT themeChanged(mapTheme->head()->mapThemeId());
 }
 
 void MarbleModelPrivate::addHighlightStyle(GeoDataDocument *doc) const
@@ -437,14 +437,14 @@ void MarbleModel::setHome(qreal lon, qreal lat, int zoom)
 {
     d->m_homePoint = GeoDataCoordinates(lon, lat, 0, GeoDataCoordinates::Degree);
     d->m_homeZoom = zoom;
-    emit homeChanged(d->m_homePoint);
+    Q_EMIT homeChanged(d->m_homePoint);
 }
 
 void MarbleModel::setHome(const GeoDataCoordinates &homePoint, int zoom)
 {
     d->m_homePoint = homePoint;
     d->m_homeZoom = zoom;
-    emit homeChanged(d->m_homePoint);
+    Q_EMIT homeChanged(d->m_homePoint);
 }
 
 HttpDownloadManager *MarbleModel::downloadManager()
@@ -595,7 +595,7 @@ void MarbleModel::setPersistentTileCacheLimit(quint64 kiloBytes)
 void MarbleModel::setTrackedPlacemark(const GeoDataPlacemark *placemark)
 {
     d->m_trackedPlacemark = placemark;
-    emit trackedPlacemarkChanged(placemark);
+    Q_EMIT trackedPlacemarkChanged(placemark);
 }
 
 const GeoDataPlacemark *MarbleModel::trackedPlacemark() const
@@ -835,7 +835,7 @@ void MarbleModel::setWorkOffline(bool workOffline)
         downloadManager()->setDownloadEnabled(!workOffline);
 
         d->m_workOffline = workOffline;
-        emit workOfflineChanged();
+        Q_EMIT workOfflineChanged();
     }
 }
 

@@ -191,7 +191,7 @@ void FileLoader::run()
 
         if (!parser.read(&buffer)) {
             qWarning("Could not import kml buffer!");
-            emit loaderFinished(this);
+            Q_EMIT loaderFinished(this);
             return;
         }
 
@@ -206,8 +206,8 @@ void FileLoader::run()
 
         mDebug() << "newGeoDataDocumentAdded" << d->m_filepath;
 
-        emit newGeoDataDocumentAdded(d->m_document);
-        emit loaderFinished(this);
+        Q_EMIT newGeoDataDocumentAdded(d->m_document);
+        Q_EMIT loaderFinished(this);
     }
 }
 
@@ -236,9 +236,9 @@ void FileLoaderPrivate::documentParsed(GeoDataDocument *doc, const QString &erro
         }
 
         createFilterProperties(doc);
-        emit q->newGeoDataDocumentAdded(m_document);
+        Q_EMIT q->newGeoDataDocumentAdded(m_document);
     }
-    emit q->loaderFinished(q);
+    Q_EMIT q->loaderFinished(q);
 }
 
 void FileLoaderPrivate::createFilterProperties(GeoDataContainer *container)

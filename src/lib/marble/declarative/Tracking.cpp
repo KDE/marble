@@ -43,7 +43,7 @@ void Tracking::setShowTrack(bool show)
         }
 
         m_showTrack = show;
-        emit showTrackChanged();
+        Q_EMIT showTrackChanged();
     }
 }
 
@@ -62,7 +62,7 @@ void Tracking::setPositionSource(PositionSource *source)
             connect(source, SIGNAL(hasPositionChanged()), this, SLOT(updatePositionMarker()));
             connect(source, SIGNAL(positionChanged()), this, SIGNAL(distanceChanged()));
         }
-        emit positionSourceChanged();
+        Q_EMIT positionSourceChanged();
     }
 }
 
@@ -84,7 +84,7 @@ void Tracking::setMap(MarbleQuickItem *item)
             connect(m_marbleQuickItem, SIGNAL(mapThemeChanged()), this, SLOT(updatePositionMarker()));
         }
 
-        emit mapChanged();
+        Q_EMIT mapChanged();
     }
 }
 
@@ -92,7 +92,7 @@ void Tracking::setPositionMarker(QObject *marker)
 {
     if (marker != m_positionMarker) {
         m_positionMarker = marker;
-        emit positionMarkerChanged();
+        Q_EMIT positionMarkerChanged();
     }
 }
 
@@ -146,7 +146,7 @@ void Tracking::setHasLastKnownPosition()
 {
     if (!m_hasLastKnownPosition) {
         m_hasLastKnownPosition = true;
-        emit hasLastKnownPositionChanged();
+        Q_EMIT hasLastKnownPositionChanged();
     }
 }
 
@@ -178,7 +178,7 @@ void Tracking::setLastKnownPosition(Coordinate *lastKnownPosition)
 {
     if (lastKnownPosition && *lastKnownPosition != m_lastKnownPosition) {
         m_lastKnownPosition.setCoordinates(lastKnownPosition->coordinates());
-        emit lastKnownPositionChanged();
+        Q_EMIT lastKnownPositionChanged();
     }
 }
 
@@ -207,7 +207,7 @@ void Tracking::setAutoCenter(bool enabled)
             m_autoNavigation->setRecenter(Marble::AutoNavigation::RecenterOnBorder);
         }
 
-        emit autoCenterChanged();
+        Q_EMIT autoCenterChanged();
     }
 }
 
@@ -236,7 +236,7 @@ void Tracking::setAutoZoom(bool enabled)
             m_autoNavigation->setAutoZoom(enabled);
         }
 
-        emit autoZoomChanged();
+        Q_EMIT autoZoomChanged();
     }
 }
 
@@ -250,7 +250,7 @@ void Tracking::setPositionMarkerType(Tracking::PositionMarkerType type)
     setShowPositionMarkerPlugin(type == Arrow);
     if (type != m_positionMarkerType) {
         m_positionMarkerType = type;
-        emit positionMarkerTypeChanged();
+        Q_EMIT positionMarkerTypeChanged();
     }
 }
 

@@ -94,7 +94,7 @@ void ElevationProfileTrackDataSource::requestUpdate()
 
     const GeoDataLineString *routePoints = m_trackList[m_currentSourceIndex]->lineString();
 
-    emit dataUpdated(*routePoints, calculateElevationData(*routePoints));
+    Q_EMIT dataUpdated(*routePoints, calculateElevationData(*routePoints));
 }
 
 bool ElevationProfileTrackDataSource::isDataAvailable() const
@@ -164,7 +164,7 @@ void ElevationProfileTrackDataSource::handleObjectAdded(GeoDataObject *object)
         m_currentSourceIndex = m_trackList.indexOf(selectedTrack);
     }
 
-    emit sourceCountChanged();
+    Q_EMIT sourceCountChanged();
 }
 
 void ElevationProfileTrackDataSource::handleObjectRemoved(GeoDataObject *object)
@@ -198,7 +198,7 @@ void ElevationProfileTrackDataSource::handleObjectRemoved(GeoDataObject *object)
         m_currentSourceIndex = 0;
     }
 
-    emit sourceCountChanged();
+    Q_EMIT sourceCountChanged();
     requestUpdate();
 }
 
@@ -216,13 +216,13 @@ void ElevationProfileRouteDataSource::requestUpdate()
 {
     if (m_routeAvailable != isDataAvailable()) {
         // availability of route changed
-        emit sourceCountChanged();
+        Q_EMIT sourceCountChanged();
         m_routeAvailable = isDataAvailable();
     }
 
     const GeoDataLineString routePoints = m_routingModel->route().path();
     const QList<QPointF> elevationData = calculateElevationData(routePoints);
-    emit dataUpdated(routePoints, elevationData);
+    Q_EMIT dataUpdated(routePoints, elevationData);
 }
 
 bool ElevationProfileRouteDataSource::isDataAvailable() const

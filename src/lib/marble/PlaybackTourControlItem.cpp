@@ -23,7 +23,7 @@ const GeoDataTourControl *PlaybackTourControlItem::tourControl() const
 void PlaybackTourControlItem::play()
 {
     if (m_tourControl->playMode() == GeoDataTourControl::Pause) {
-        emit paused();
+        Q_EMIT paused();
     }
 }
 

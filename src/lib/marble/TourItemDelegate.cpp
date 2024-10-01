@@ -350,7 +350,7 @@ void TourItemDelegate::setEditable(bool editable)
 {
     if (m_editable != editable) {
         m_editable = editable;
-        emit editableChanged(m_editable);
+        Q_EMIT editableChanged(m_editable);
     }
 }
 
@@ -470,15 +470,15 @@ GeoDataFeature *TourItemDelegate::findFeature(const QString &id) const
 void TourItemDelegate::setFirstFlyTo(const QPersistentModelIndex &index)
 {
     m_firstFlyTo = index;
-    emit firstFlyToChanged(m_firstFlyTo);
+    Q_EMIT firstFlyToChanged(m_firstFlyTo);
 }
 
 void TourItemDelegate::setDefaultFeatureId(const QString &id)
 {
     m_defaultFeatureId = id;
     const QStringList ids = playlist() ? findIds(*playlist()) : QStringList();
-    emit featureIdsChanged(ids);
-    emit defaultFeatureIdChanged(id);
+    Q_EMIT featureIdsChanged(ids);
+    Q_EMIT defaultFeatureIdChanged(id);
 }
 
 bool TourItemDelegate::editorEvent(QEvent *event, QAbstractItemModel *model, const QStyleOptionViewItem &option, const QModelIndex &index)
@@ -490,7 +490,7 @@ bool TourItemDelegate::editorEvent(QEvent *event, QAbstractItemModel *model, con
         if (editRect.contains(mouseEvent->pos())) {
             if (m_editingIndices.contains(index)) {
                 m_editingIndices.removeOne(index);
-                emit editingChanged(index);
+                Q_EMIT editingChanged(index);
                 return true;
             } else {
                 GeoDataObject *object = qvariant_cast<GeoDataObject *>(index.data(MarblePlacemarkModel::ObjectPointerRole));
@@ -510,7 +510,7 @@ bool TourItemDelegate::editorEvent(QEvent *event, QAbstractItemModel *model, con
                     m_listView->openPersistentEditor(index);
                 }
             }
-            emit editingChanged(index);
+            Q_EMIT editingChanged(index);
             return true;
         }
     }
@@ -519,7 +519,7 @@ bool TourItemDelegate::editorEvent(QEvent *event, QAbstractItemModel *model, con
 
 void TourItemDelegate::closeEditor(const QModelIndex &index)
 {
-    emit edited(index);
+    Q_EMIT edited(index);
     m_listView->closePersistentEditor(index);
     m_editingIndices.removeOne(index);
 }

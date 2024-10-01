@@ -176,7 +176,7 @@ void ArrowDiscWidget::mouseMoveEvent(QMouseEvent *mouseEvent)
 
 void ArrowDiscWidget::repaint()
 {
-    emit repaintNeeded();
+    Q_EMIT repaintNeeded();
 }
 
 Qt::ArrowType ArrowDiscWidget::arrowUnderMouse(const QPoint &position) const

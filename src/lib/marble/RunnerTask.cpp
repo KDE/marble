@@ -39,7 +39,7 @@ void SearchTask::run()
     m_runner->search(m_searchTerm, m_preferredBbox);
     m_runner->deleteLater();
 
-    emit finished(this);
+    Q_EMIT finished(this);
 }
 
 ReverseGeocodingTask::ReverseGeocodingTask(ReverseGeocodingRunner *runner,
@@ -62,7 +62,7 @@ void ReverseGeocodingTask::run()
     m_runner->reverseGeocoding(m_coordinates);
     m_runner->deleteLater();
 
-    emit finished(this);
+    Q_EMIT finished(this);
 }
 
 RoutingTask::RoutingTask(RoutingRunner *runner, RoutingRunnerManager *manager, const RouteRequest *routeRequest)
@@ -78,7 +78,7 @@ void RoutingTask::run()
     m_runner->retrieveRoute(m_routeRequest);
     m_runner->deleteLater();
 
-    emit finished(this);
+    Q_EMIT finished(this);
 }
 
 ParsingTask::ParsingTask(ParsingRunner *runner, ParsingRunnerManager *manager, const QString &fileName, DocumentRole role)
@@ -95,9 +95,9 @@ void ParsingTask::run()
 {
     QString error;
     GeoDataDocument *document = m_runner->parseFile(m_fileName, m_role, error);
-    emit parsed(document, error);
+    Q_EMIT parsed(document, error);
     m_runner->deleteLater();
-    emit finished();
+    Q_EMIT finished();
 }
 
 }

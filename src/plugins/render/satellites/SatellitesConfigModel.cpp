@@ -70,7 +70,7 @@ bool SatellitesConfigModel::setData(const QModelIndex &index, const QVariant &va
 
     if (success) {
         QModelIndex parentCellIndex = this->index(index.parent().row(), index.column(), index.parent().parent());
-        emit dataChanged(parentCellIndex, parentCellIndex);
+        Q_EMIT dataChanged(parentCellIndex, parentCellIndex);
     }
 
     return success;

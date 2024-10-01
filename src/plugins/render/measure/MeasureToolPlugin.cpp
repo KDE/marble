@@ -216,8 +216,8 @@ void MeasureToolPlugin::writeSettings()
         m_addMeasurePointAction->setEnabled(true);
     }
 
-    emit settingsChanged(nameId());
-    emit repaintNeeded();
+    Q_EMIT settingsChanged(nameId());
+    Q_EMIT repaintNeeded();
 }
 
 bool MeasureToolPlugin::render(GeoPainter *painter, ViewportParams *viewport, const QString &renderPos, GeoSceneLayer *layer)
@@ -592,7 +592,7 @@ void MeasureToolPlugin::addMeasurePoint(qreal lon, qreal lat)
 {
     m_measureLineString << GeoDataCoordinates(lon, lat);
 
-    emit numberOfMeasurePointsChanged(m_measureLineString.size());
+    Q_EMIT numberOfMeasurePointsChanged(m_measureLineString.size());
 }
 
 void MeasureToolPlugin::removeLastMeasurePoint()
@@ -600,14 +600,14 @@ void MeasureToolPlugin::removeLastMeasurePoint()
     if (!m_measureLineString.isEmpty())
         m_measureLineString.remove(m_measureLineString.size() - 1);
 
-    emit numberOfMeasurePointsChanged(m_measureLineString.size());
+    Q_EMIT numberOfMeasurePointsChanged(m_measureLineString.size());
 }
 
 void MeasureToolPlugin::removeMeasurePoints()
 {
     m_measureLineString.clear();
 
-    emit numberOfMeasurePointsChanged(m_measureLineString.size());
+    Q_EMIT numberOfMeasurePointsChanged(m_measureLineString.size());
 }
 
 void MeasureToolPlugin::addContextItems()

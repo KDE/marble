@@ -199,7 +199,7 @@ GosmoreRunner::~GosmoreRunner()
 void GosmoreRunner::retrieveRoute(const RouteRequest *route)
 {
     if (!d->m_gosmoreMapFile.exists()) {
-        emit routeCalculated(nullptr);
+        Q_EMIT routeCalculated(nullptr);
         return;
     }
 
@@ -232,7 +232,7 @@ void GosmoreRunner::retrieveRoute(const RouteRequest *route)
     QList<GeoDataPlacemark *> instructions = d->parseGosmoreInstructions(completeOutput);
 
     GeoDataDocument *result = d->createDocument(wayPoints, instructions);
-    emit routeCalculated(result);
+    Q_EMIT routeCalculated(result);
 }
 
 } // namespace Marble

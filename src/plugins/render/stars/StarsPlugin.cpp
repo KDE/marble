@@ -438,7 +438,7 @@ void StarsPlugin::writeSettings()
     m_eclipticBrush = QBrush(ui_configWidget->m_eclipticColorButton->palette().color(QPalette::Button));
     m_celestialEquatorBrush = QBrush(ui_configWidget->m_celestialEquatorColorButton->palette().color(QPalette::Button));
     m_celestialPoleBrush = QBrush(ui_configWidget->m_celestialPoleColorButton->palette().color(QPalette::Button));
-    emit settingsChanged(nameId());
+    Q_EMIT settingsChanged(nameId());
 }
 
 void StarsPlugin::constellationGetColor()
@@ -1275,7 +1275,7 @@ void StarsPlugin::renderPlanet(const QString &planetId, GeoPainter *painter, Sol
 
 void StarsPlugin::requestRepaint()
 {
-    emit repaintNeeded(QRegion());
+    Q_EMIT repaintNeeded(QRegion());
 }
 
 void StarsPlugin::toggleSunMoon(bool on)
@@ -1292,7 +1292,7 @@ void StarsPlugin::toggleSunMoon(bool on)
         ui_configWidget->m_solarSystemListWidget->item(1)->setCheckState(state);
         ui_configWidget->m_viewSolarSystemLabelCheckbox->setChecked(m_viewSolarSystemLabel);
     }
-    emit settingsChanged(nameId());
+    Q_EMIT settingsChanged(nameId());
     requestRepaint();
 }
 
@@ -1309,7 +1309,7 @@ void StarsPlugin::toggleDsos(bool on)
         ui_configWidget->m_viewDsosCheckbox->setChecked(state);
         ui_configWidget->m_viewDsoLabelCheckbox->setChecked(state);
     }
-    emit settingsChanged(nameId());
+    Q_EMIT settingsChanged(nameId());
     requestRepaint();
 }
 
@@ -1323,7 +1323,7 @@ void StarsPlugin::toggleConstellations(bool on)
         ui_configWidget->m_viewConstellationLinesCheckbox->setChecked(state);
         ui_configWidget->m_viewConstellationLabelsCheckbox->setChecked(state);
     }
-    emit settingsChanged(nameId());
+    Q_EMIT settingsChanged(nameId());
     requestRepaint();
 }
 
@@ -1349,7 +1349,7 @@ void StarsPlugin::togglePlanets(bool on)
         ui_configWidget->m_solarSystemListWidget->item(9)->setCheckState(state);
     }
 
-    emit settingsChanged(nameId());
+    Q_EMIT settingsChanged(nameId());
     requestRepaint();
 }
 

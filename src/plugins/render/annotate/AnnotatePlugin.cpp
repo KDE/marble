@@ -286,7 +286,7 @@ void AnnotatePlugin::setAreaAvailable()
     enableAllActions(m_actions.first());
     disableFocusActions();
     enableActionsOnItemType(SceneGraphicsTypes::SceneGraphicAreaAnnotation);
-    emit repaintNeeded();
+    Q_EMIT repaintNeeded();
 }
 
 void AnnotatePlugin::setPolylineAvailable()
@@ -297,7 +297,7 @@ void AnnotatePlugin::setPolylineAvailable()
     enableAllActions(m_actions.first());
     disableFocusActions();
     enableActionsOnItemType(SceneGraphicsTypes::SceneGraphicPolylineAnnotation);
-    emit repaintNeeded();
+    Q_EMIT repaintNeeded();
 }
 
 void AnnotatePlugin::askToRemoveFocusItem()
@@ -450,7 +450,7 @@ void AnnotatePlugin::openAnnotationFile(const QString &filename)
     m_marbleWidget->centerOn(document->latLonAltBox());
 
     delete document;
-    emit repaintNeeded(QRegion());
+    Q_EMIT repaintNeeded(QRegion());
 }
 
 bool AnnotatePlugin::eventFilter(QObject *watched, QEvent *event)
@@ -620,7 +620,7 @@ bool AnnotatePlugin::handleDrawingPolygon(QMouseEvent *mouseEvent)
     if (mouseEvent->type() == QEvent::MouseMove) {
         setupCursor(nullptr);
 
-        emit mouseMoveGeoPosition(coords.toString());
+        Q_EMIT mouseMoveGeoPosition(coords.toString());
 
         return true;
     } else if (mouseEvent->button() == Qt::LeftButton && mouseEvent->type() == QEvent::MouseButtonPress) {
@@ -628,7 +628,7 @@ bool AnnotatePlugin::handleDrawingPolygon(QMouseEvent *mouseEvent)
         GeoDataPolygon *poly = dynamic_cast<GeoDataPolygon *>(m_polygonPlacemark->geometry());
         poly->outerBoundary().append(coords);
         m_marbleWidget->model()->treeModel()->addFeature(m_annotationDocument, m_polygonPlacemark);
-        emit nodeAdded(coords);
+        Q_EMIT nodeAdded(coords);
 
         return true;
     }
@@ -643,7 +643,7 @@ bool AnnotatePlugin::handleDrawingPolyline(QMouseEvent *mouseEvent)
     if (mouseEvent->type() == QEvent::MouseMove) {
         setupCursor(nullptr);
 
-        emit mouseMoveGeoPosition(coords.toString());
+        Q_EMIT mouseMoveGeoPosition(coords.toString());
 
         return true;
     } else if (mouseEvent->button() == Qt::LeftButton && mouseEvent->type() == QEvent::MouseButtonPress) {
@@ -651,7 +651,7 @@ bool AnnotatePlugin::handleDrawingPolyline(QMouseEvent *mouseEvent)
         GeoDataLineString *line = dynamic_cast<GeoDataLineString *>(m_polylinePlacemark->geometry());
         line->append(coords);
         m_marbleWidget->model()->treeModel()->addFeature(m_annotationDocument, m_polylinePlacemark);
-        emit nodeAdded(coords);
+        Q_EMIT nodeAdded(coords);
 
         return true;
     }
@@ -684,13 +684,13 @@ bool AnnotatePlugin::handleMovingSelectedItem(QMouseEvent *mouseEvent)
     // handler and updating their feature.
     if (m_movedItem->sceneEvent(mouseEvent)) {
         m_marbleWidget->model()->treeModel()->updateFeature(m_movedItem->placemark());
-        emit itemMoved(m_movedItem->placemark());
+        Q_EMIT itemMoved(m_movedItem->placemark());
         if (m_movedItem->graphicType() == SceneGraphicsTypes::SceneGraphicTextAnnotation) {
-            emit placemarkMoved();
+            Q_EMIT placemarkMoved();
         }
 
         const GeoDataCoordinates coords = mouseGeoDataCoordinates(mouseEvent);
-        emit mouseMoveGeoPosition(coords.toString());
+        Q_EMIT mouseMoveGeoPosition(coords.toString());
 
         return true;
     }
@@ -932,7 +932,7 @@ void AnnotatePlugin::setupActions(MarbleWidget *widget)
 
     m_actions.append(group);
 
-    emit actionGroupsChanged();
+    Q_EMIT actionGroupsChanged();
 }
 
 void AnnotatePlugin::disableActions(QActionGroup *group)

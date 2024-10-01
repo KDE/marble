@@ -356,7 +356,7 @@ void OwncloudSyncBackend::prepareRouteList()
         d->m_routeList.remove(d->m_routeList.count() - 1);
     }
 
-    emit routeListDownloaded(d->m_routeList);
+    Q_EMIT routeListDownloaded(d->m_routeList);
 }
 
 void OwncloudSyncBackend::saveDownloadedRoute()
@@ -401,7 +401,7 @@ void OwncloudSyncBackend::saveDownloadedRoute()
     preview.save(&previewFile, "JPG");
     previewFile.close();
 
-    emit routeDownloaded();
+    Q_EMIT routeDownloaded();
 }
 
 QUrl OwncloudSyncBackend::endpointUrl(const QString &endpoint) const
@@ -426,7 +426,7 @@ void OwncloudSyncBackend::removeFromCache(const QDir &cacheDir, const QString &t
                     "have been removed already, or its directory is missing / not writable.";
     }
 
-    emit removedFromCache(timestamp);
+    Q_EMIT removedFromCache(timestamp);
 }
 
 }

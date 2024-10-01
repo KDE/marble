@@ -182,7 +182,7 @@ void License::updateLicenseText()
     m_widgetItem->setSize(m_label->sizeHint() + magic);
     setSize(m_label->sizeHint() + magic);
     update();
-    emit repaintNeeded();
+    Q_EMIT repaintNeeded();
 }
 
 void License::toggleLicenseSize()

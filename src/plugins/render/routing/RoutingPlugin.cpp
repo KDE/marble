@@ -170,7 +170,7 @@ void RoutingPluginPrivate::updateGuidanceModeButton()
 void RoutingPluginPrivate::forceRepaint()
 {
     m_parent->update();
-    emit m_parent->repaintNeeded();
+    Q_EMIT m_parent->repaintNeeded();
 }
 
 void RoutingPluginPrivate::updateButtonVisibility()
@@ -404,7 +404,7 @@ void RoutingPlugin::writeSettings()
     d->m_audio->setMuted(!d->m_configUi.voiceNavigationCheckBox->isChecked());
     d->m_audio->setSoundEnabled(d->m_configUi.soundRadioButton->isChecked());
     d->readSettings();
-    emit settingsChanged(nameId());
+    Q_EMIT settingsChanged(nameId());
 }
 
 RoutingPlugin::RoutingPlugin()

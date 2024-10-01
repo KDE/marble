@@ -554,13 +554,13 @@ void OwsServiceManager::parseOwsCapabilities(QNetworkReply *reply)
 
     if (!m_xml.setContent(result)) {
         setCapabilitiesStatus(OwsCapabilitiesReplyUnreadable); // Wizard cannot parse server's response
-        emit wmsCapabilitiesReady();
+        Q_EMIT wmsCapabilitiesReady();
         return;
     }
 
     if (m_xml.documentElement().firstChildElement().tagName().isNull() || !m_xml.documentElement().tagName().contains("Capabilities")) {
         setCapabilitiesStatus(OwsCapabilitiesNoOwsServer); // Server is not a Ows Server.
-        emit wmsCapabilitiesReady();
+        Q_EMIT wmsCapabilitiesReady();
         return;
     }
 
@@ -723,7 +723,7 @@ void OwsServiceManager::parseWmsCapabilities(QNetworkReply *reply)
     m_wmsCapabilities.setFormats(formats);
 
     setCapabilitiesStatus(OwsCapabilitiesSuccess);
-    emit wmsCapabilitiesReady();
+    Q_EMIT wmsCapabilitiesReady();
 }
 
 void OwsServiceManager::parseWmtsCapabilities(QNetworkReply *reply)
@@ -784,7 +784,7 @@ void OwsServiceManager::parseWmtsCapabilities(QNetworkReply *reply)
 
     m_wmtsCapabilities.setOwsLayerMetaInfo(wmtsLayerMetaInfo);
     setCapabilitiesStatus(OwsCapabilitiesSuccess);
-    emit wmtsCapabilitiesReady();
+    Q_EMIT wmtsCapabilitiesReady();
 }
 
 void OwsServiceManager::parseImageResult(QNetworkReply *reply)
@@ -811,7 +811,7 @@ void OwsServiceManager::parseImageResult(QNetworkReply *reply)
     QBuffer testBuffer(&resultRaw);
     m_imageRequestResult.setResultFormat(QImageReader(&testBuffer).format());
 
-    emit imageRequestResultReady();
+    Q_EMIT imageRequestResultReady();
 }
 
 }

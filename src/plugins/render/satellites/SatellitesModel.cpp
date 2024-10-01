@@ -125,7 +125,7 @@ void SatellitesModel::parseFile(const QString &id, const QByteArray &data)
         parseTLE(id, data);
     }
 
-    emit fileParsed(id);
+    Q_EMIT fileParsed(id);
 }
 
 void SatellitesModel::parseCatalog(const QString &id, const QByteArray &data)

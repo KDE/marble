@@ -55,7 +55,7 @@ void OsmTagEditorWidget::update()
     d->populatePresetTagsList();
     d->populateCurrentTagsList();
 
-    emit placemarkChanged(d->m_placemark);
+    Q_EMIT placemarkChanged(d->m_placemark);
 }
 
 OsmPlacemarkData OsmTagEditorWidget::placemarkData() const

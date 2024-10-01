@@ -114,7 +114,7 @@ void FakeProvider::setStatus(Marble::PositionProviderStatus status)
     m_status = status;
 
     if (oldStatus != m_status) {
-        emit statusChanged(m_status);
+        Q_EMIT statusChanged(m_status);
     }
 }
 
@@ -130,7 +130,7 @@ void FakeProvider::setPosition(const Marble::GeoDataCoordinates &position,
     m_direction = direction;
     m_timestamp = timestamp;
 
-    emit positionChanged(m_position, m_accuracy);
+    Q_EMIT positionChanged(m_position, m_accuracy);
 }
 
 namespace Marble

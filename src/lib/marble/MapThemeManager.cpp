@@ -421,7 +421,7 @@ void MapThemeManager::Private::directoryChanged(const QString &path)
 
     mDebug() << "Emitting themesChanged()";
     updateMapThemeModel();
-    emit q->themesChanged();
+    Q_EMIT q->themesChanged();
 }
 
 void MapThemeManager::Private::fileChanged(const QString &path)
@@ -457,7 +457,7 @@ void MapThemeManager::Private::fileChanged(const QString &path)
         }
     }
 
-    emit q->themesChanged();
+    Q_EMIT q->themesChanged();
 }
 
 //

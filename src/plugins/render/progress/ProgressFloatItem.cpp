@@ -257,7 +257,7 @@ void ProgressFloatItem::hideProgress()
         setActive(false);
 
         update();
-        emit repaintNeeded(QRegion());
+        Q_EMIT repaintNeeded(QRegion());
     }
 }
 
@@ -277,7 +277,7 @@ void ProgressFloatItem::show()
     setActive(true);
 
     update();
-    emit repaintNeeded(QRegion());
+    Q_EMIT repaintNeeded(QRegion());
 }
 
 void ProgressFloatItem::scheduleRepaint()

@@ -325,7 +325,7 @@ void RoutingInputWidget::setTargetPosition(const GeoDataCoordinates &position, c
     if (!name.isEmpty()) {
         d->updateDescription();
     }
-    emit targetValidityChanged(true);
+    Q_EMIT targetValidityChanged(true);
 }
 
 bool RoutingInputWidget::hasTargetPosition() const
@@ -361,13 +361,13 @@ MarblePlacemarkModel *RoutingInputWidget::searchResultModel()
 void RoutingInputWidget::requestActivity()
 {
     if (hasTargetPosition()) {
-        emit activityRequest(this);
+        Q_EMIT activityRequest(this);
     }
 }
 
 void RoutingInputWidget::requestRemoval()
 {
-    emit removalRequest(this);
+    Q_EMIT removalRequest(this);
 }
 
 bool RoutingInputWidget::hasInput() const
@@ -377,19 +377,19 @@ bool RoutingInputWidget::hasInput() const
 
 void RoutingInputWidget::setMapInputModeEnabled(bool enabled)
 {
-    emit mapInputModeEnabled(this, enabled);
+    Q_EMIT mapInputModeEnabled(this, enabled);
 }
 
 void RoutingInputWidget::finishSearch()
 {
     d->m_lineEdit->setBusy(false);
-    emit searchFinished(this);
+    Q_EMIT searchFinished(this);
 }
 
 void RoutingInputWidget::setInvalid()
 {
     d->m_route->setPosition(d->m_index, GeoDataCoordinates());
-    emit targetValidityChanged(false);
+    Q_EMIT targetValidityChanged(false);
 }
 
 void RoutingInputWidget::abortMapInputRequest()
@@ -410,7 +410,7 @@ void RoutingInputWidget::updatePosition(int index, const GeoDataCoordinates &)
 {
     if (index == d->m_index) {
         d->m_lineEdit->setBusy(false);
-        emit targetValidityChanged(hasTargetPosition());
+        Q_EMIT targetValidityChanged(hasTargetPosition());
         d->adjustText();
     }
 }
@@ -421,7 +421,7 @@ void RoutingInputWidget::clear()
     d->m_lineEdit->setBusy(false);
     d->m_route->setPosition(d->m_index, GeoDataCoordinates());
     d->m_lineEdit->clear();
-    emit targetValidityChanged(false);
+    Q_EMIT targetValidityChanged(false);
 }
 
 void RoutingInputWidget::retrieveReverseGeocodingResult(const GeoDataCoordinates &, const GeoDataPlacemark &placemark)

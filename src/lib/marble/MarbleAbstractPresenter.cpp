@@ -76,8 +76,8 @@ void MarbleAbstractPresenter::flyTo(const GeoDataLookAt &newLookAt, FlyToMode mo
             GeoDataCoordinates::Unit deg = GeoDataCoordinates::Degree;
             map()->centerOn(newLookAt.longitude(deg), newLookAt.latitude(deg));
 
-            emit zoomChanged(m_logzoom);
-            emit distanceChanged(distanceString());
+            Q_EMIT zoomChanged(m_logzoom);
+            Q_EMIT distanceChanged(distanceString());
         }
     } else {
         m_physics.flyTo(newLookAt, mode);
@@ -171,8 +171,8 @@ void MarbleAbstractPresenter::setZoom(int newZoom, FlyToMode mode)
         map()->setRadius(radius(newZoom));
         m_logzoom = newZoom;
 
-        emit zoomChanged(m_logzoom);
-        emit distanceChanged(distanceString());
+        Q_EMIT zoomChanged(m_logzoom);
+        Q_EMIT distanceChanged(distanceString());
     } else {
         GeoDataLookAt target = lookAt();
         target.setRange(KM2METER * distanceFromZoom(newZoom));
@@ -302,8 +302,8 @@ void MarbleAbstractPresenter::setRadius(int radiusVal)
         map()->setRadius(radiusVal);
         m_logzoom = qRound(zoomVal);
 
-        emit zoomChanged(m_logzoom);
-        emit distanceChanged(distanceString());
+        Q_EMIT zoomChanged(m_logzoom);
+        Q_EMIT distanceChanged(distanceString());
     }
 }
 
@@ -537,7 +537,7 @@ void MarbleAbstractPresenter::setSelection(const QRect &region)
 
     const GeoDataLatLonAltBox box = viewport()->latLonAltBox(region);
 
-    emit regionSelected(box);
+    Q_EMIT regionSelected(box);
 }
 
 }

@@ -305,7 +305,7 @@ void PlacemarkLayer::setLevelTagDebugModeEnabled(bool enabled)
 {
     if (m_levelTagDebugModeEnabled != enabled) {
         m_levelTagDebugModeEnabled = enabled;
-        emit repaintNeeded();
+        Q_EMIT repaintNeeded();
     }
 }
 
@@ -318,7 +318,7 @@ void PlacemarkLayer::setDebugLevelTag(int level)
 {
     if (m_debugLevelTag != level) {
         m_debugLevelTag = level;
-        emit repaintNeeded();
+        Q_EMIT repaintNeeded();
     }
 }
 

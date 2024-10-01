@@ -520,7 +520,7 @@ void LatLonEdit::onSignChanged()
         }
     }
 
-    emit valueChanged(d->m_value);
+    Q_EMIT valueChanged(d->m_value);
 }
 
 void LatLonEdit::setDimension(Dimension dimension)
@@ -669,7 +669,7 @@ void LatLonEdit::recalculate()
 {
     d->m_value = d->m_inputHandler->calculateValue();
 
-    emit valueChanged(d->m_value);
+    Q_EMIT valueChanged(d->m_value);
 }
 
 #include "moc_LatLonEdit.cpp"

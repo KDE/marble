@@ -50,11 +50,11 @@ void MergingPolylineNodesAnimation::updateNodes()
         m_lineString->at(m_secondNodeIndex) = newCoords();
         m_lineString->remove(m_firstNodeIndex);
 
-        emit animationFinished();
+        Q_EMIT animationFinished();
     } else {
         m_lineString->at(m_firstNodeIndex) = m_lineString->at(m_firstNodeIndex).interpolate(m_secondInitialCoords, ratio);
         m_lineString->at(m_secondNodeIndex) = m_lineString->at(m_secondNodeIndex).interpolate(m_firstInitialCoords, ratio);
-        emit nodesMoved();
+        Q_EMIT nodesMoved();
     }
 }
 

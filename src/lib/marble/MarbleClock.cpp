@@ -51,7 +51,7 @@ void MarbleClockPrivate::timerTimeout()
     m_datetime = m_datetime.addMSecs(msecdelta * m_speed);
 
     // trigger round minute update (at m_speed pace)
-    emit q->timeChanged();
+    Q_EMIT q->timeChanged();
 
     // sleeptime is the time to sleep until next round minute, at m_speed pace
     int sleeptime = (m_updateInterval * 1000 - (qreal)(m_datetime.time().msec() + m_datetime.time().second() * 1000)) / m_speed;
@@ -101,7 +101,7 @@ QDateTime MarbleClock::dateTime() const
 void MarbleClock::setUpdateInterval(int seconds)
 {
     d->m_updateInterval = seconds;
-    emit updateIntervalChanged(seconds);
+    Q_EMIT updateIntervalChanged(seconds);
 }
 
 int MarbleClock::updateInterval() const

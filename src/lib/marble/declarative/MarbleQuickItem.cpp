@@ -106,12 +106,12 @@ private Q_SLOTS:
     void showLmbMenu(int x, int y) override
     {
         m_marbleQuick->selectPlacemarkAt(x, y);
-        emit m_marbleQuick->lmbMenuRequested(QPoint(x, y));
+        Q_EMIT m_marbleQuick->lmbMenuRequested(QPoint(x, y));
     }
 
     void showRmbMenu(int x, int y) override
     {
-        emit m_marbleQuick->rmbMenuRequested(QPoint(x, y));
+        Q_EMIT m_marbleQuick->rmbMenuRequested(QPoint(x, y));
     }
     void openItemToolTip() override
     {
@@ -289,7 +289,7 @@ void MarbleQuickItem::resizeMap()
 void MarbleQuickItem::positionDataStatusChanged(PositionProviderStatus status)
 {
     bool const positionAvailable = status == PositionProviderStatusAvailable;
-    emit positionAvailableChanged(positionAvailable);
+    Q_EMIT positionAvailableChanged(positionAvailable);
     updatePositionVisibility();
 }
 
@@ -311,14 +311,14 @@ void MarbleQuickItem::updatePositionVisibility()
 
     if (isVisible != d->m_positionVisible) {
         d->m_positionVisible = isVisible;
-        emit positionVisibleChanged(isVisible);
+        Q_EMIT positionVisibleChanged(isVisible);
     }
 }
 
 void MarbleQuickItem::updateCurrentPosition(const GeoDataCoordinates &coordinates)
 {
     d->m_currentPosition.placemark().setCoordinate(coordinates);
-    emit currentPositionChanged(&d->m_currentPosition);
+    Q_EMIT currentPositionChanged(&d->m_currentPosition);
 }
 
 void MarbleQuickItem::updatePlacemarks()
@@ -364,10 +364,10 @@ void MarbleQuickItem::handleVisibleLatLonAltBoxChanged(const GeoDataLatLonAltBox
 
     if (d->m_heading != d->m_map.heading()) {
         d->m_heading = d->m_map.heading();
-        emit headingChanged(d->m_heading);
+        Q_EMIT headingChanged(d->m_heading);
     }
-    emit visibleLatLonAltBoxChanged();
-    emit geoItemUpdateRequested();
+    Q_EMIT visibleLatLonAltBoxChanged();
+    Q_EMIT geoItemUpdateRequested();
 }
 
 void MarbleQuickItem::paint(QPainter *painter)
@@ -406,7 +406,7 @@ void MarbleQuickItem::componentComplete()
 void Marble::MarbleQuickItem::MarbleQuickItem::hoverMoveEvent(QHoverEvent *event)
 {
     if (d->m_hoverEnabled) {
-        emit hoverPositionChanged(event->pos());
+        Q_EMIT hoverPositionChanged(event->pos());
     }
     QQuickItem::hoverMoveEvent(event);
 }
@@ -714,7 +714,7 @@ void MarbleQuickItem::setHeading(qreal heading)
     d->m_map.setHeading(heading);
     d->m_heading = heading;
 
-    emit headingChanged(d->m_heading);
+    Q_EMIT headingChanged(d->m_heading);
 }
 
 void MarbleQuickItem::setHoverEnabled(bool hoverEnabled)
@@ -727,7 +727,7 @@ void MarbleQuickItem::setHoverEnabled(bool hoverEnabled)
     setAcceptHoverEvents(hoverEnabled);
     setFlag(ItemAcceptsInputMethod, hoverEnabled);
 
-    emit hoverEnabledChanged(d->m_hoverEnabled);
+    Q_EMIT hoverEnabledChanged(d->m_hoverEnabled);
 }
 
 void MarbleQuickItem::setZoom(int newZoom, FlyToMode mode)
@@ -855,7 +855,7 @@ void MarbleQuickItem::setMapWidth(int mapWidth)
     }
 
     d->m_map.setSize(mapWidth, mapHeight());
-    emit mapWidthChanged(mapWidth);
+    Q_EMIT mapWidthChanged(mapWidth);
 }
 
 void MarbleQuickItem::setMapHeight(int mapHeight)
@@ -865,7 +865,7 @@ void MarbleQuickItem::setMapHeight(int mapHeight)
     }
 
     d->m_map.setSize(mapWidth(), mapHeight);
-    emit mapHeightChanged(mapHeight);
+    Q_EMIT mapHeightChanged(mapHeight);
 }
 
 void MarbleQuickItem::setShowFrameRate(bool showFrameRate)
@@ -875,7 +875,7 @@ void MarbleQuickItem::setShowFrameRate(bool showFrameRate)
     }
 
     d->m_map.setShowFrameRate(showFrameRate);
-    emit showFrameRateChanged(showFrameRate);
+    Q_EMIT showFrameRateChanged(showFrameRate);
 }
 
 void MarbleQuickItem::setProjection(Projection projection)
@@ -885,7 +885,7 @@ void MarbleQuickItem::setProjection(Projection projection)
     }
 
     d->m_map.setProjection(Marble::Projection(projection));
-    emit projectionChanged(projection);
+    Q_EMIT projectionChanged(projection);
 }
 
 void MarbleQuickItem::setMapThemeId(const QString &mapThemeId)
@@ -910,7 +910,7 @@ void MarbleQuickItem::setMapThemeId(const QString &mapThemeId)
     d->m_map.setShowGrid(showGrid);
     d->m_map.setShowScaleBar(d->m_showScaleBar);
 
-    emit mapThemeIdChanged(mapThemeId);
+    Q_EMIT mapThemeIdChanged(mapThemeId);
 
     setInvertColorEnabled(invertColor);
 }
@@ -922,7 +922,7 @@ void MarbleQuickItem::setShowAtmosphere(bool showAtmosphere)
     }
 
     d->m_map.setShowAtmosphere(showAtmosphere);
-    emit showAtmosphereChanged(showAtmosphere);
+    Q_EMIT showAtmosphereChanged(showAtmosphere);
 }
 
 void MarbleQuickItem::setShowCompass(bool showCompass)
@@ -932,7 +932,7 @@ void MarbleQuickItem::setShowCompass(bool showCompass)
     }
 
     d->m_map.setShowCompass(showCompass);
-    emit showCompassChanged(showCompass);
+    Q_EMIT showCompassChanged(showCompass);
 }
 
 void MarbleQuickItem::setShowClouds(bool showClouds)
@@ -942,7 +942,7 @@ void MarbleQuickItem::setShowClouds(bool showClouds)
     }
 
     d->m_map.setShowClouds(showClouds);
-    emit showCloudsChanged(showClouds);
+    Q_EMIT showCloudsChanged(showClouds);
 }
 
 void MarbleQuickItem::setShowCrosshairs(bool showCrosshairs)
@@ -952,7 +952,7 @@ void MarbleQuickItem::setShowCrosshairs(bool showCrosshairs)
     }
 
     d->m_map.setShowCrosshairs(showCrosshairs);
-    emit showCrosshairsChanged(showCrosshairs);
+    Q_EMIT showCrosshairsChanged(showCrosshairs);
 }
 
 void MarbleQuickItem::setShowGrid(bool showGrid)
@@ -962,7 +962,7 @@ void MarbleQuickItem::setShowGrid(bool showGrid)
     }
 
     d->m_map.setShowGrid(showGrid);
-    emit showGridChanged(showGrid);
+    Q_EMIT showGridChanged(showGrid);
 }
 
 void MarbleQuickItem::setShowOverviewMap(bool showOverviewMap)
@@ -972,7 +972,7 @@ void MarbleQuickItem::setShowOverviewMap(bool showOverviewMap)
     }
 
     d->m_map.setShowOverviewMap(showOverviewMap);
-    emit showOverviewMapChanged(showOverviewMap);
+    Q_EMIT showOverviewMapChanged(showOverviewMap);
 }
 
 void MarbleQuickItem::setShowOtherPlaces(bool showOtherPlaces)
@@ -982,7 +982,7 @@ void MarbleQuickItem::setShowOtherPlaces(bool showOtherPlaces)
     }
 
     d->m_map.setShowOtherPlaces(showOtherPlaces);
-    emit showOtherPlacesChanged(showOtherPlaces);
+    Q_EMIT showOtherPlacesChanged(showOtherPlaces);
 }
 
 void MarbleQuickItem::setShowScaleBar(bool showScaleBar)
@@ -993,7 +993,7 @@ void MarbleQuickItem::setShowScaleBar(bool showScaleBar)
 
     d->m_showScaleBar = showScaleBar;
     d->m_map.setShowScaleBar(d->m_showScaleBar);
-    emit showScaleBarChanged(showScaleBar);
+    Q_EMIT showScaleBarChanged(showScaleBar);
 }
 
 void MarbleQuickItem::setShowBackground(bool showBackground)
@@ -1003,7 +1003,7 @@ void MarbleQuickItem::setShowBackground(bool showBackground)
     }
 
     d->m_map.setShowBackground(showBackground);
-    emit showBackgroundChanged(showBackground);
+    Q_EMIT showBackgroundChanged(showBackground);
 }
 
 void MarbleQuickItem::setShowPositionMarker(bool showPositionMarker)
@@ -1020,7 +1020,7 @@ void MarbleQuickItem::setShowPositionMarker(bool showPositionMarker)
         }
     }
 
-    emit showPositionMarkerChanged(showPositionMarker);
+    Q_EMIT showPositionMarkerChanged(showPositionMarker);
 }
 
 void MarbleQuickItem::setShowPublicTransport(bool enabled)
@@ -1028,7 +1028,7 @@ void MarbleQuickItem::setShowPublicTransport(bool enabled)
     if (d->m_showPublicTransport != enabled) {
         d->m_showPublicTransport = enabled;
         d->updateVisibleRoutes();
-        emit showPublicTransportChanged(enabled);
+        Q_EMIT showPublicTransportChanged(enabled);
     }
 }
 
@@ -1037,7 +1037,7 @@ void MarbleQuickItem::setShowOutdoorActivities(bool showOutdoorActivities)
     if (d->m_showOutdoorActivities != showOutdoorActivities) {
         d->m_showOutdoorActivities = showOutdoorActivities;
         d->updateVisibleRoutes();
-        emit showOutdoorActivitiesChanged(showOutdoorActivities);
+        Q_EMIT showOutdoorActivitiesChanged(showOutdoorActivities);
     }
 }
 
@@ -1065,7 +1065,7 @@ void MarbleQuickItem::setPositionProvider(const QString &positionProvider)
             connect(newPlugin, SIGNAL(positionChanged(GeoDataCoordinates, GeoDataAccuracy)), this, SLOT(updateCurrentPosition(GeoDataCoordinates)));
             connect(newPlugin, SIGNAL(positionChanged(GeoDataCoordinates, GeoDataAccuracy)), this, SIGNAL(speedChanged()));
             connect(newPlugin, SIGNAL(positionChanged(GeoDataCoordinates, GeoDataAccuracy)), this, SIGNAL(angleChanged()));
-            emit positionProviderChanged(positionProvider);
+            Q_EMIT positionProviderChanged(positionProvider);
             break;
         }
     }
@@ -1078,14 +1078,14 @@ void MarbleQuickItem::setInertialGlobeRotation(bool inertialGlobeRotation)
     }
 
     d->m_inputHandler.setInertialEarthRotationEnabled(inertialGlobeRotation);
-    emit inertialGlobeRotationChanged(inertialGlobeRotation);
+    Q_EMIT inertialGlobeRotationChanged(inertialGlobeRotation);
 }
 
 void MarbleQuickItem::setAnimationViewContext(bool animationViewContext)
 {
     d->m_map.setViewContext(animationViewContext ? Animation : Still);
 
-    emit inertialGlobeRotationChanged(animationViewContext);
+    Q_EMIT inertialGlobeRotationChanged(animationViewContext);
 }
 
 void MarbleQuickItem::setAnimationsEnabled(bool animationsEnabled)
@@ -1094,7 +1094,7 @@ void MarbleQuickItem::setAnimationsEnabled(bool animationsEnabled)
         return;
 
     d->m_presenter.setAnimationsEnabled(animationsEnabled);
-    emit animationsEnabledChanged(d->m_presenter.animationsEnabled());
+    Q_EMIT animationsEnabledChanged(d->m_presenter.animationsEnabled());
 }
 
 void MarbleQuickItem::setPluginSetting(const QString &pluginId, const QString &key, const QString &value)
@@ -1137,7 +1137,7 @@ void MarbleQuickItem::setInvertColorEnabled(bool enabled, const QString &blendin
 
     d->m_invertColorEnabled = enabled;
 
-    emit invertColorEnabledChanged(d->m_invertColorEnabled);
+    Q_EMIT invertColorEnabledChanged(d->m_invertColorEnabled);
 }
 
 bool MarbleQuickItem::invertColorEnabled()
@@ -1183,7 +1183,7 @@ void MarbleQuickItem::setPlacemarkDelegate(QQmlComponent *placemarkDelegate)
     delete d->m_placemarkItem;
     d->m_placemarkItem = nullptr;
     d->m_placemarkDelegate = placemarkDelegate;
-    emit placemarkDelegateChanged(placemarkDelegate);
+    Q_EMIT placemarkDelegateChanged(placemarkDelegate);
 }
 
 void MarbleQuickItem::loadSettings()
@@ -1402,7 +1402,7 @@ void MarbleQuickItemPrivate::changeStyleBuilder(bool invert)
         }
         styleBuilder->reset();
         // trigger groundlayer update
-        emit m_map.model()->themeChanged(QString());
+        Q_EMIT m_map.model()->themeChanged(QString());
     }
 }
 }

@@ -432,7 +432,7 @@ void AbstractDataPluginModel::addItemsToList(const QList<AbstractDataPluginItem 
     }
 
     if (needsUpdate) {
-        emit itemsUpdated();
+        Q_EMIT itemsUpdated();
     }
 }
 
@@ -449,7 +449,7 @@ void AbstractDataPluginModel::setFavoriteItems(const QStringList &list)
         if (d->m_favoritesModel) {
             d->m_favoritesModel->reset();
         }
-        emit favoriteItemsChanged(d->m_favoriteItems);
+        Q_EMIT favoriteItemsChanged(d->m_favoriteItems);
     }
 }
 
@@ -463,7 +463,7 @@ void AbstractDataPluginModel::setFavoriteItemsOnly(bool favoriteOnly)
     if (isFavoriteItemsOnly() != favoriteOnly) {
         d->m_favoriteItemsOnly = favoriteOnly;
         d->updateFavoriteItems();
-        emit favoriteItemsOnlyChanged();
+        Q_EMIT favoriteItemsOnlyChanged();
     }
 }
 
@@ -628,7 +628,7 @@ void AbstractDataPluginModel::clear()
     d->m_lastBox = GeoDataLatLonAltBox();
     d->m_downloadedBox = GeoDataLatLonAltBox();
     d->m_downloadedNumber = 0;
-    emit itemsUpdated();
+    Q_EMIT itemsUpdated();
 }
 
 void AbstractDataPluginModel::registerItemProperties(const QMetaObject &item)

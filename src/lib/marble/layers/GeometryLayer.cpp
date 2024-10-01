@@ -507,7 +507,7 @@ void GeometryLayer::addPlacemarks(const QModelIndex &parent, int first, int last
         Q_ASSERT(object);
         d->createGraphicsItems(object);
     }
-    emit repaintNeeded();
+    Q_EMIT repaintNeeded();
 }
 
 void GeometryLayer::removePlacemarks(const QModelIndex &parent, int first, int last)
@@ -525,7 +525,7 @@ void GeometryLayer::removePlacemarks(const QModelIndex &parent, int first, int l
         }
     }
     if (isRepaintNeeded) {
-        emit repaintNeeded();
+        Q_EMIT repaintNeeded();
     }
 }
 
@@ -541,7 +541,7 @@ void GeometryLayer::resetCacheData()
     if (object && object->parent()) {
         d->createGraphicsItems(object->parent());
     }
-    emit repaintNeeded();
+    Q_EMIT repaintNeeded();
 }
 
 void GeometryLayer::setTileLevel(int tileLevel)
@@ -662,14 +662,14 @@ void GeometryLayer::handleHighlight(qreal lon, qreal lat, GeoDataCoordinates::Un
         }
     }
 
-    emit highlightedPlacemarksChanged(selectedPlacemarks);
+    Q_EMIT highlightedPlacemarksChanged(selectedPlacemarks);
 }
 
 void GeometryLayer::setLevelTagDebugModeEnabled(bool enabled)
 {
     if (d->m_levelTagDebugModeEnabled != enabled) {
         d->m_levelTagDebugModeEnabled = enabled;
-        emit repaintNeeded();
+        Q_EMIT repaintNeeded();
     }
 }
 
@@ -682,7 +682,7 @@ void GeometryLayer::setDebugLevelTag(int level)
 {
     if (d->m_debugLevelTag != level) {
         d->m_debugLevelTag = level;
-        emit repaintNeeded();
+        Q_EMIT repaintNeeded();
     }
 }
 

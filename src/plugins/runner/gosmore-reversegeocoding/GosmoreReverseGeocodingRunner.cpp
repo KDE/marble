@@ -80,7 +80,7 @@ GosmoreRunner::~GosmoreRunner()
 void GosmoreRunner::reverseGeocoding(const GeoDataCoordinates &coordinates)
 {
     if (!d->m_gosmoreMapFile.exists()) {
-        emit reverseGeocodingFinished(coordinates, GeoDataPlacemark());
+        Q_EMIT reverseGeocodingFinished(coordinates, GeoDataPlacemark());
         return;
     }
 
@@ -105,7 +105,7 @@ void GosmoreRunner::reverseGeocoding(const GeoDataCoordinates &coordinates)
         }
     }
 
-    emit reverseGeocodingFinished(coordinates, placemark);
+    Q_EMIT reverseGeocodingFinished(coordinates, placemark);
 }
 
 } // namespace Marble

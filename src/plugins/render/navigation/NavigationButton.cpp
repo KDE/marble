@@ -25,16 +25,16 @@ void NavigationButton::mousePressEvent(QMouseEvent *mouseEvent)
             m_iconMode = QIcon::Selected;
         }
     }
-    emit repaintNeeded();
+    Q_EMIT repaintNeeded();
 }
 
 void NavigationButton::mouseReleaseEvent(QMouseEvent *)
 {
     if (isEnabled()) {
         m_iconMode = QIcon::Active;
-        emit clicked();
+        Q_EMIT clicked();
     }
-    emit repaintNeeded();
+    Q_EMIT repaintNeeded();
 }
 
 void NavigationButton::enterEvent(QEnterEvent *)
@@ -42,7 +42,7 @@ void NavigationButton::enterEvent(QEnterEvent *)
     if (isEnabled()) {
         m_iconMode = QIcon::Active;
     }
-    emit repaintNeeded();
+    Q_EMIT repaintNeeded();
 }
 
 void NavigationButton::leaveEvent(QEvent *)
@@ -50,7 +50,7 @@ void NavigationButton::leaveEvent(QEvent *)
     if (isEnabled()) {
         m_iconMode = QIcon::Normal;
     }
-    emit repaintNeeded();
+    Q_EMIT repaintNeeded();
 }
 
 void NavigationButton::changeEvent(QEvent *e)
@@ -58,7 +58,7 @@ void NavigationButton::changeEvent(QEvent *e)
     if (e->type() == QEvent::EnabledChange) {
         m_iconMode = isEnabled() ? QIcon::Normal : QIcon::Disabled;
     }
-    emit repaintNeeded();
+    Q_EMIT repaintNeeded();
 }
 
 void NavigationButton::paintEvent(QPaintEvent *)

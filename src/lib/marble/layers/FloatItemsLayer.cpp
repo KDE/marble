@@ -35,7 +35,7 @@ bool FloatItemsLayer::render(GeoPainter *painter, ViewportParams *viewport, cons
 
         if (!item->isInitialized()) {
             item->initialize();
-            emit renderPluginInitialized(item);
+            Q_EMIT renderPluginInitialized(item);
         }
 
         if (item->visible()) {
@@ -69,7 +69,7 @@ QString FloatItemsLayer::runtimeTrace() const
 
 void FloatItemsLayer::updateVisibility(bool visible, const QString &nameId)
 {
-    emit visibilityChanged(nameId, visible);
+    Q_EMIT visibilityChanged(nameId, visible);
 }
 
 }

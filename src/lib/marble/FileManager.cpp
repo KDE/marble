@@ -123,7 +123,7 @@ void FileManagerPrivate::closeFile(const QString &key)
     if (m_fileItemHash.contains(key)) {
         GeoDataDocument *doc = m_fileItemHash.value(key);
         m_treeModel->removeDocument(doc);
-        emit q->fileRemoved(key);
+        Q_EMIT q->fileRemoved(key);
         delete doc;
         m_fileItemHash.remove(key);
     }
@@ -171,14 +171,14 @@ void FileManagerPrivate::cleanupLoader(FileLoader *loader)
             }
             m_treeModel->addDocument(doc);
             m_fileItemHash.insert(loader->path(), doc);
-            emit q->fileAdded(loader->path());
+            Q_EMIT q->fileAdded(loader->path());
             if (loader->recenter()) {
                 m_latLonBox |= doc->latLonAltBox();
             }
         }
         if (!loader->error().isEmpty()) {
             qWarning() << "Failed to parse" << loader->path() << loader->error();
-            emit q->fileError(loader->path(), loader->error());
+            Q_EMIT q->fileError(loader->path(), loader->error());
         }
         delete loader;
     }
@@ -186,7 +186,7 @@ void FileManagerPrivate::cleanupLoader(FileLoader *loader)
         mDebug() << "Finished loading all placemarks " << m_timer.elapsed();
 
         if (!m_latLonBox.isEmpty()) {
-            emit q->centeredDocument(m_latLonBox);
+            Q_EMIT q->centeredDocument(m_latLonBox);
         }
         m_latLonBox.clear();
     }

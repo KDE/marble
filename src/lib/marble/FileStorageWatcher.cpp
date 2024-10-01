@@ -52,7 +52,7 @@ void FileStorageWatcherThread::setCacheLimit(quint64 bytes)
     m_cacheLimit = bytes;
     m_cacheSoftLimit = bytes * (100 - softLimitPercent) / 100;
     m_limitMutex.unlock();
-    emit variableChanged();
+    Q_EMIT variableChanged();
 }
 
 void FileStorageWatcherThread::addToCurrentSize(qint64 bytes)
@@ -63,13 +63,13 @@ void FileStorageWatcherThread::addToCurrentSize(qint64 bytes)
         m_currentCacheSize = changedSize;
     else
         m_currentCacheSize = 0;
-    emit variableChanged();
+    Q_EMIT variableChanged();
 }
 
 void FileStorageWatcherThread::resetCurrentSize()
 {
     m_currentCacheSize = 0;
-    emit variableChanged();
+    Q_EMIT variableChanged();
 }
 
 void FileStorageWatcherThread::prepareQuit()
@@ -228,12 +228,12 @@ quint64 FileStorageWatcher::cacheLimit()
 
 void FileStorageWatcher::addToCurrentSize(qint64 bytes)
 {
-    emit sizeChanged(bytes);
+    Q_EMIT sizeChanged(bytes);
 }
 
 void FileStorageWatcher::resetCurrentSize()
 {
-    emit cleared();
+    Q_EMIT cleared();
 }
 
 void FileStorageWatcher::run()

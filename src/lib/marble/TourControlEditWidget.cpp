@@ -68,7 +68,7 @@ void TourControlEditWidget::save()
     } else {
         tourControlElement()->setPlayMode(GeoDataTourControl::Pause);
     }
-    emit editingDone(m_index);
+    Q_EMIT editingDone(m_index);
 }
 
 GeoDataTourControl *TourControlEditWidget::tourControlElement()

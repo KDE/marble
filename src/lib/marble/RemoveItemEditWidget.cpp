@@ -72,7 +72,7 @@ void RemoveItemEditWidget::setEditable(bool editable)
 void RemoveItemEditWidget::save()
 {
     animatedUpdateElement()->update()->getDelete()->child(0)->setTargetId(m_comboBox->currentText());
-    emit editingDone(m_index);
+    Q_EMIT editingDone(m_index);
 }
 
 GeoDataAnimatedUpdate *RemoveItemEditWidget::animatedUpdateElement()

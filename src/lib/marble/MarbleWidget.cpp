@@ -632,7 +632,7 @@ void MarbleWidget::moveDown(FlyToMode mode)
 
 void MarbleWidget::leaveEvent(QEvent *)
 {
-    emit mouseMoveGeoPosition(QCoreApplication::translate("Marble", NOT_AVAILABLE));
+    Q_EMIT mouseMoveGeoPosition(QCoreApplication::translate("Marble", NOT_AVAILABLE));
 }
 
 void MarbleWidget::resizeEvent(QResizeEvent *event)
@@ -726,7 +726,7 @@ void MarbleWidget::paintEvent(QPaintEvent *evt)
         fpsPainter.paint(&painter);
 
         const qreal fps = 1000.0 / (qreal)(t.elapsed() + 1);
-        emit framesPerSecond(fps);
+        Q_EMIT framesPerSecond(fps);
     }
 }
 
@@ -762,7 +762,7 @@ void MarbleWidgetPrivate::updateMapTheme()
         m_map.addLayer(m_routingLayer);
     }
 
-    emit m_widget->themeChanged(m_map.mapThemeId());
+    Q_EMIT m_widget->themeChanged(m_map.mapThemeId());
 
     // Now we want a full repaint as the atmosphere might differ
     m_widget->setAttribute(Qt::WA_NoSystemBackground, false);
@@ -970,7 +970,7 @@ void MarbleWidget::notifyMouseClick(int x, int y)
     bool const valid = geoCoordinates(x, y, lon, lat, GeoDataCoordinates::Radian);
 
     if (valid) {
-        emit mouseClickGeoPosition(lon, lat, GeoDataCoordinates::Radian);
+        Q_EMIT mouseClickGeoPosition(lon, lat, GeoDataCoordinates::Radian);
     }
 }
 
