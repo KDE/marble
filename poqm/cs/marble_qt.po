@@ -5209,7 +5209,7 @@ msgid ""
 "integrates well into the used workspace."
 msgstr ""
 
-#: src/lib/marble/ExternalEditorDialog.cpp:91
+#: src/lib/marble/ExternalEditorDialog.cpp:92
 #: src/lib/marble/ExternalEditorDialog.cpp:101
 #, qt-format
 msgctxt "Marble::ExternalEditorDialog|"
@@ -14294,17 +14294,17 @@ msgctxt "Marble::OpenCachingItem|"
 msgid "<tr><td align=\"right\">User name</td><td>"
 msgstr "<tr><td align=\"right\">Uživatelské jméno</td><td>"
 
-#: src/plugins/render/opencaching/OpenCachingItem.cpp:176
+#: src/plugins/render/opencaching/OpenCachingItem.cpp:177
 msgctxt "Marble::OpenCachingItem|"
 msgid "<tr><td align=\"right\">Date hidden</td><td>"
 msgstr ""
 
-#: src/plugins/render/opencaching/OpenCachingItem.cpp:178
+#: src/plugins/render/opencaching/OpenCachingItem.cpp:179
 msgctxt "Marble::OpenCachingItem|"
 msgid "<tr><td align=\"right\">Difficulty</td><td>"
 msgstr "<tr><td align=\"right\">Obtížnost</td><td>"
 
-#: src/plugins/render/opencaching/OpenCachingItem.cpp:179
+#: src/plugins/render/opencaching/OpenCachingItem.cpp:180
 msgctxt "Marble::OpenCachingItem|"
 msgid "<tr><td align=\"right\">Size</td><td>"
 msgstr "<tr><td align=\"right\">Velikost</td><td>"
@@ -16740,43 +16740,43 @@ msgctxt "Marble::LocalOsmSearchPlugin|"
 msgid "Searches for addresses and points of interest in offline maps."
 msgstr ""
 
-#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:264
-#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:266
+#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:265
+#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:267
 msgctxt "QObject|"
 msgid "north"
 msgstr "sever"
 
-#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:268
+#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:269
 msgctxt "QObject|"
 msgid "north-west"
 msgstr "severozápad"
 
-#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:270
+#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:271
 msgctxt "QObject|"
 msgid "west"
 msgstr "západ"
 
-#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:272
+#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:273
 msgctxt "QObject|"
 msgid "south-west"
 msgstr ""
 
-#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:274
+#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:275
 msgctxt "QObject|"
 msgid "south"
 msgstr "jih"
 
-#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:276
+#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:277
 msgctxt "QObject|"
 msgid "south-east"
 msgstr "jihovýchod"
 
-#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:278
+#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:279
 msgctxt "QObject|"
 msgid "east"
 msgstr "východ"
 
-#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:280
+#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:281
 msgctxt "QObject|"
 msgid "north-east"
 msgstr "severovýchod"
@@ -17451,143 +17451,3 @@ msgstr "Šablona &plovoucího nástroje"
 msgctxt "Marble::FITemplateFloatItem|"
 msgid "This is a template class for float items."
 msgstr "Toto je třída šablony pro plovoucí nástroje."
-
-#~ msgctxt "Bookmarks|"
-#~ msgid "Removed"
-#~ msgstr "Odstraněno"
-
-#~ msgctxt "MainScreen|"
-#~ msgid "Marble Maps"
-#~ msgstr "Mapy Marble"
-
-#~ msgctxt "MainScreen|"
-#~ msgid "Settings"
-#~ msgstr "Nastavení"
-
-#~ msgctxt "MainScreen|"
-#~ msgid "Public Transport"
-#~ msgstr "Veřejná doprava"
-
-#~ msgctxt "MainScreen|"
-#~ msgid "Outdoor Activities"
-#~ msgstr "Venkovní aktivity"
-
-#~ msgctxt "MainScreen|"
-#~ msgid "Accessibility"
-#~ msgstr "Zpřístupnění"
-
-#~ msgctxt "MainScreen|"
-#~ msgid "About"
-#~ msgstr "O aplikaci"
-
-#~ msgctxt "MainScreen|"
-#~ msgid "Bookmarks"
-#~ msgstr "Záložky"
-
-#~ msgctxt "MainScreen|"
-#~ msgid "Layer Options"
-#~ msgstr "Možnosti vrstev"
-
-#~ msgctxt "MainScreen|"
-#~ msgid "Routing"
-#~ msgstr "Směrování"
-
-#~ msgctxt "MainScreen|"
-#~ msgid "%1 km"
-#~ msgstr "%1 km"
-
-#~ msgctxt "NavigationInfoBar|"
-#~ msgid "%1 km"
-#~ msgstr "%1 km"
-
-#~ msgctxt "NavigationInfoBar|"
-#~ msgid "%1 m"
-#~ msgstr "%1 m"
-
-#~ msgctxt "Options|"
-#~ msgid "<h3>Layer Options</h3>"
-#~ msgstr "<b>Možnosti vrstev</b>"
-
-#~ msgctxt "Options|"
-#~ msgid "<h4>Public Transport Layers</h4>"
-#~ msgstr "<h4>Vrstvy veřejné dopravy</h4>"
-
-#~ msgctxt "Options|"
-#~ msgid "<h4>Outdoor Activities Layers</h4>"
-#~ msgstr "<h4>Vrstvy pro venkovní aktivity</h4>"
-
-#~ msgctxt "OutdoorActivities|"
-#~ msgid "Hiking Routes"
-#~ msgstr "Trasy pro výlety"
-
-#~ msgctxt "OutdoorActivities|"
-#~ msgid "Bicycle Routes"
-#~ msgstr "Trasy pro kolo"
-
-#~ msgctxt "OutdoorActivities|"
-#~ msgid "Mountainbike Routes"
-#~ msgstr "Trasy pro horské kolo"
-
-#~ msgctxt "OutdoorActivities|"
-#~ msgid "Inline Skating Routes"
-#~ msgstr "Trasy pro inline bruslení"
-
-#~ msgctxt "PlacemarkDialog|"
-#~ msgid "<h2>Routes</h2>"
-#~ msgstr "<h2>Cesty</h2>"
-
-#~ msgctxt "ProfileSelectorMenu|"
-#~ msgid "Car (fastest)"
-#~ msgstr "Auto (nejrychlejší)"
-
-#~ msgctxt "ProfileSelectorMenu|"
-#~ msgid "Bicycle"
-#~ msgstr "Kolo"
-
-#~ msgctxt "ProfileSelectorMenu|"
-#~ msgid "Pedestrian"
-#~ msgstr "Chodec"
-
-#~ msgctxt "PublicTransport|"
-#~ msgid "Train"
-#~ msgstr "Vlak"
-
-#~ msgctxt "PublicTransport|"
-#~ msgid "Subway"
-#~ msgstr "Metro"
-
-#~ msgctxt "PublicTransport|"
-#~ msgid "Tram"
-#~ msgstr "Tramvaj"
-
-#~ msgctxt "PublicTransport|"
-#~ msgid "Bus"
-#~ msgstr "Autobus"
-
-#~ msgctxt "PublicTransport|"
-#~ msgid "Trolley Bus"
-#~ msgstr "Trolejbus"
-
-#~ msgctxt "SearchField|"
-#~ msgid "Search"
-#~ msgstr "Hledat"
-
-#~ msgctxt "SettingsDialog|"
-#~ msgid "Network Settings"
-#~ msgstr "Nastavení sítě"
-
-#~ msgctxt "SettingsDialog|"
-#~ msgid "Download Maps via WLAN only"
-#~ msgstr "Stáhnout mapy pouze přes WLAN"
-
-#~ msgctxt "SidePanel|"
-#~ msgid "Public Transport"
-#~ msgstr "Veřejná doprava"
-
-#~ msgctxt "SidePanel|"
-#~ msgid "Outdoor Activities"
-#~ msgstr "Venkovní aktivity"
-
-#~ msgctxt "SidePanel|"
-#~ msgid "Accessibility"
-#~ msgstr "Zpřístupnění"

@@ -5273,7 +5273,7 @@ msgid ""
 "integrates well into the used workspace."
 msgstr ""
 
-#: src/lib/marble/ExternalEditorDialog.cpp:91
+#: src/lib/marble/ExternalEditorDialog.cpp:92
 #: src/lib/marble/ExternalEditorDialog.cpp:101
 #, qt-format
 msgctxt "Marble::ExternalEditorDialog|"
@@ -14477,17 +14477,17 @@ msgctxt "Marble::OpenCachingItem|"
 msgid "<tr><td align=\"right\">User name</td><td>"
 msgstr ""
 
-#: src/plugins/render/opencaching/OpenCachingItem.cpp:176
+#: src/plugins/render/opencaching/OpenCachingItem.cpp:177
 msgctxt "Marble::OpenCachingItem|"
 msgid "<tr><td align=\"right\">Date hidden</td><td>"
 msgstr ""
 
-#: src/plugins/render/opencaching/OpenCachingItem.cpp:178
+#: src/plugins/render/opencaching/OpenCachingItem.cpp:179
 msgctxt "Marble::OpenCachingItem|"
 msgid "<tr><td align=\"right\">Difficulty</td><td>"
 msgstr ""
 
-#: src/plugins/render/opencaching/OpenCachingItem.cpp:179
+#: src/plugins/render/opencaching/OpenCachingItem.cpp:180
 msgctxt "Marble::OpenCachingItem|"
 msgid "<tr><td align=\"right\">Size</td><td>"
 msgstr ""
@@ -17006,8 +17006,8 @@ msgctxt "Marble::LocalOsmSearchPlugin|"
 msgid "Searches for addresses and points of interest in offline maps."
 msgstr ""
 
-#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:264
-#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:266
+#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:265
+#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:267
 #, fuzzy
 #| msgctxt "The compass direction"
 #| msgid "North"
@@ -17015,7 +17015,7 @@ msgctxt "QObject|"
 msgid "north"
 msgstr "Sjever"
 
-#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:268
+#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:269
 #, fuzzy
 #| msgctxt "The compass direction"
 #| msgid "North"
@@ -17023,7 +17023,7 @@ msgctxt "QObject|"
 msgid "north-west"
 msgstr "Sjever"
 
-#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:270
+#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:271
 #, fuzzy
 #| msgctxt "The compass direction"
 #| msgid "West"
@@ -17031,7 +17031,7 @@ msgctxt "QObject|"
 msgid "west"
 msgstr "Zapad"
 
-#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:272
+#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:273
 #, fuzzy
 #| msgctxt "The compass direction"
 #| msgid "South"
@@ -17039,7 +17039,7 @@ msgctxt "QObject|"
 msgid "south-west"
 msgstr "Jug"
 
-#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:274
+#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:275
 #, fuzzy
 #| msgctxt "The compass direction"
 #| msgid "South"
@@ -17047,7 +17047,7 @@ msgctxt "QObject|"
 msgid "south"
 msgstr "Jug"
 
-#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:276
+#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:277
 #, fuzzy
 #| msgctxt "The compass direction"
 #| msgid "South"
@@ -17055,7 +17055,7 @@ msgctxt "QObject|"
 msgid "south-east"
 msgstr "Jug"
 
-#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:278
+#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:279
 #, fuzzy
 #| msgctxt "The compass direction"
 #| msgid "East"
@@ -17063,7 +17063,7 @@ msgctxt "QObject|"
 msgid "east"
 msgstr "Istok"
 
-#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:280
+#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:281
 #, fuzzy
 #| msgctxt "The compass direction"
 #| msgid "North"

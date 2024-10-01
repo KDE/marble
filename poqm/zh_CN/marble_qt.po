@@ -5199,7 +5199,7 @@ msgstr ""
 "Merkaartor 是一款功能强大又容易上手的 OpenStreetMap 编辑器，它能够良好地集成"
 "到现有工作区。"
 
-#: src/lib/marble/ExternalEditorDialog.cpp:91
+#: src/lib/marble/ExternalEditorDialog.cpp:92
 #: src/lib/marble/ExternalEditorDialog.cpp:101
 #, qt-format
 msgctxt "Marble::ExternalEditorDialog|"
@@ -14552,17 +14552,17 @@ msgctxt "Marble::OpenCachingItem|"
 msgid "<tr><td align=\"right\">User name</td><td>"
 msgstr "<tr><td align=\"right\">用户名</td><td>"
 
-#: src/plugins/render/opencaching/OpenCachingItem.cpp:176
+#: src/plugins/render/opencaching/OpenCachingItem.cpp:177
 msgctxt "Marble::OpenCachingItem|"
 msgid "<tr><td align=\"right\">Date hidden</td><td>"
 msgstr "<tr><td align=\"right\">隐藏日期</td><td>"
 
-#: src/plugins/render/opencaching/OpenCachingItem.cpp:178
+#: src/plugins/render/opencaching/OpenCachingItem.cpp:179
 msgctxt "Marble::OpenCachingItem|"
 msgid "<tr><td align=\"right\">Difficulty</td><td>"
 msgstr "<tr><td align=\"right\">难度</td><td>"
 
-#: src/plugins/render/opencaching/OpenCachingItem.cpp:179
+#: src/plugins/render/opencaching/OpenCachingItem.cpp:180
 msgctxt "Marble::OpenCachingItem|"
 msgid "<tr><td align=\"right\">Size</td><td>"
 msgstr "<tr><td align=\"right\">大小</td><td>"
@@ -17006,43 +17006,43 @@ msgctxt "Marble::LocalOsmSearchPlugin|"
 msgid "Searches for addresses and points of interest in offline maps."
 msgstr "搜索离线地图中的地址和名胜。"
 
-#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:264
-#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:266
+#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:265
+#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:267
 msgctxt "QObject|"
 msgid "north"
 msgstr "北"
 
-#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:268
+#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:269
 msgctxt "QObject|"
 msgid "north-west"
 msgstr "西北"
 
-#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:270
+#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:271
 msgctxt "QObject|"
 msgid "west"
 msgstr "西"
 
-#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:272
+#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:273
 msgctxt "QObject|"
 msgid "south-west"
 msgstr "西南"
 
-#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:274
+#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:275
 msgctxt "QObject|"
 msgid "south"
 msgstr "南"
 
-#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:276
+#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:277
 msgctxt "QObject|"
 msgid "south-east"
 msgstr "东南"
 
-#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:278
+#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:279
 msgctxt "QObject|"
 msgid "east"
 msgstr "西"
 
-#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:280
+#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:281
 msgctxt "QObject|"
 msgid "north-east"
 msgstr "东北"

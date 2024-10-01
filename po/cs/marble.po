@@ -1234,6 +1234,3 @@ msgstr "Hlavní panel nástrojů"
 #, kde-format
 msgid "Edit Toolbar"
 msgstr "Upravit panel nástrojů"
-
-#~ msgid "marble_part"
-#~ msgstr "marble_part"

@@ -5157,7 +5157,7 @@ msgid ""
 "integrates well into the used workspace."
 msgstr ""
 
-#: src/lib/marble/ExternalEditorDialog.cpp:91
+#: src/lib/marble/ExternalEditorDialog.cpp:92
 #: src/lib/marble/ExternalEditorDialog.cpp:101
 #, qt-format
 msgctxt "Marble::ExternalEditorDialog|"
@@ -13921,17 +13921,17 @@ msgctxt "Marble::OpenCachingItem|"
 msgid "<tr><td align=\"right\">User name</td><td>"
 msgstr ""
 
-#: src/plugins/render/opencaching/OpenCachingItem.cpp:176
+#: src/plugins/render/opencaching/OpenCachingItem.cpp:177
 msgctxt "Marble::OpenCachingItem|"
 msgid "<tr><td align=\"right\">Date hidden</td><td>"
 msgstr ""
 
-#: src/plugins/render/opencaching/OpenCachingItem.cpp:178
+#: src/plugins/render/opencaching/OpenCachingItem.cpp:179
 msgctxt "Marble::OpenCachingItem|"
 msgid "<tr><td align=\"right\">Difficulty</td><td>"
 msgstr ""
 
-#: src/plugins/render/opencaching/OpenCachingItem.cpp:179
+#: src/plugins/render/opencaching/OpenCachingItem.cpp:180
 msgctxt "Marble::OpenCachingItem|"
 msgid "<tr><td align=\"right\">Size</td><td>"
 msgstr ""
@@ -16313,43 +16313,43 @@ msgctxt "Marble::LocalOsmSearchPlugin|"
 msgid "Searches for addresses and points of interest in offline maps."
 msgstr ""
 
-#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:264
-#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:266
+#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:265
+#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:267
 msgctxt "QObject|"
 msgid "north"
 msgstr ""
 
-#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:268
+#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:269
 msgctxt "QObject|"
 msgid "north-west"
 msgstr ""
 
-#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:270
+#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:271
 msgctxt "QObject|"
 msgid "west"
 msgstr ""
 
-#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:272
+#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:273
 msgctxt "QObject|"
 msgid "south-west"
 msgstr ""
 
-#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:274
+#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:275
 msgctxt "QObject|"
 msgid "south"
 msgstr ""
 
-#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:276
+#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:277
 msgctxt "QObject|"
 msgid "south-east"
 msgstr ""
 
-#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:278
+#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:279
 msgctxt "QObject|"
 msgid "east"
 msgstr ""
 
-#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:280
+#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:281
 msgctxt "QObject|"
 msgid "north-east"
 msgstr ""

@@ -6030,7 +6030,7 @@ msgstr ""
 "Merkaartor ir OpenStreetMap redaktors, kas vienlaikus ir spēcīgs un viegli "
 "izmantojams. Tas labi integrējams izmantojamajā darba vidē."
 
-#: src/lib/marble/ExternalEditorDialog.cpp:91
+#: src/lib/marble/ExternalEditorDialog.cpp:92
 #: src/lib/marble/ExternalEditorDialog.cpp:101
 #, fuzzy, qt-format
 #| msgid "Please ask your system administrator to install %1 on your system."
@@ -17203,21 +17203,21 @@ msgctxt "Marble::OpenCachingItem|"
 msgid "<tr><td align=\"right\">User name</td><td>"
 msgstr "<tr><td align=\"right\">Lietotājvārds</td><td>"
 
-#: src/plugins/render/opencaching/OpenCachingItem.cpp:176
+#: src/plugins/render/opencaching/OpenCachingItem.cpp:177
 #, fuzzy
 #| msgid "<tr><td align=\"right\">Date hidden</td><td>"
 msgctxt "Marble::OpenCachingItem|"
 msgid "<tr><td align=\"right\">Date hidden</td><td>"
 msgstr "<tr><td align=\"right\">Datums paslēpts</td><td>"
 
-#: src/plugins/render/opencaching/OpenCachingItem.cpp:178
+#: src/plugins/render/opencaching/OpenCachingItem.cpp:179
 #, fuzzy
 #| msgid "<tr><td align=\"right\">Difficulty</td><td>"
 msgctxt "Marble::OpenCachingItem|"
 msgid "<tr><td align=\"right\">Difficulty</td><td>"
 msgstr "<tr><td align=\"right\">Grūtības pakāpe</td><td>"
 
-#: src/plugins/render/opencaching/OpenCachingItem.cpp:179
+#: src/plugins/render/opencaching/OpenCachingItem.cpp:180
 #, fuzzy
 #| msgid "<tr><td align=\"right\">Size</td><td>"
 msgctxt "Marble::OpenCachingItem|"
@@ -20385,57 +20385,57 @@ msgctxt "Marble::LocalOsmSearchPlugin|"
 msgid "Searches for addresses and points of interest in offline maps."
 msgstr "Adrešu un interešu punktu meklēšana kartēs nesaistē."
 
-#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:264
-#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:266
+#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:265
+#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:267
 #, fuzzy
 #| msgid "north"
 msgctxt "QObject|"
 msgid "north"
 msgstr "ziemeļi"
 
-#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:268
+#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:269
 #, fuzzy
 #| msgid "north-west"
 msgctxt "QObject|"
 msgid "north-west"
 msgstr "ziemeļrietumi"
 
-#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:270
+#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:271
 #, fuzzy
 #| msgid "west"
 msgctxt "QObject|"
 msgid "west"
 msgstr "rietumi"
 
-#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:272
+#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:273
 #, fuzzy
 #| msgid "south-west"
 msgctxt "QObject|"
 msgid "south-west"
 msgstr "dienvidrietumi"
 
-#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:274
+#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:275
 #, fuzzy
 #| msgid "south"
 msgctxt "QObject|"
 msgid "south"
 msgstr "dienvidi"
 
-#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:276
+#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:277
 #, fuzzy
 #| msgid "south-east"
 msgctxt "QObject|"
 msgid "south-east"
 msgstr "dienvidaustrumi"
 
-#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:278
+#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:279
 #, fuzzy
 #| msgid "east"
 msgctxt "QObject|"
 msgid "east"
 msgstr "austrumi"
 
-#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:280
+#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:281
 #, fuzzy
 #| msgid "north-east"
 msgctxt "QObject|"

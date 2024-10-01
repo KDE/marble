@@ -5230,7 +5230,7 @@ msgstr ""
 "Merkaartor on helppo ja monipuolinen OpenStreetMap-muokkain, joka toimii "
 "hyvin yhdessä käytetyn työtilan kanssa."
 
-#: src/lib/marble/ExternalEditorDialog.cpp:91
+#: src/lib/marble/ExternalEditorDialog.cpp:92
 #: src/lib/marble/ExternalEditorDialog.cpp:101
 #, qt-format
 msgctxt "Marble::ExternalEditorDialog|"
@@ -14820,17 +14820,17 @@ msgctxt "Marble::OpenCachingItem|"
 msgid "<tr><td align=\"right\">User name</td><td>"
 msgstr "<tr><td align=\"right\">Käyttäjätunnus</td><td>"
 
-#: src/plugins/render/opencaching/OpenCachingItem.cpp:176
+#: src/plugins/render/opencaching/OpenCachingItem.cpp:177
 msgctxt "Marble::OpenCachingItem|"
 msgid "<tr><td align=\"right\">Date hidden</td><td>"
 msgstr "<tr><td align=\"right\">Piilotuspäivä</td><td>"
 
-#: src/plugins/render/opencaching/OpenCachingItem.cpp:178
+#: src/plugins/render/opencaching/OpenCachingItem.cpp:179
 msgctxt "Marble::OpenCachingItem|"
 msgid "<tr><td align=\"right\">Difficulty</td><td>"
 msgstr "<tr><td align=\"right\">Vaikeustaso</td><td>"
 
-#: src/plugins/render/opencaching/OpenCachingItem.cpp:179
+#: src/plugins/render/opencaching/OpenCachingItem.cpp:180
 msgctxt "Marble::OpenCachingItem|"
 msgid "<tr><td align=\"right\">Size</td><td>"
 msgstr "<tr><td align=\"right\">Koko</td><td>"
@@ -17278,43 +17278,43 @@ msgstr ""
 "Etsii osoitteita ja kiinnostuksen kohteita verkkoyhteydettömän tilan "
 "kartoista."
 
-#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:264
-#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:266
+#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:265
+#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:267
 msgctxt "QObject|"
 msgid "north"
 msgstr "pohjoinen"
 
-#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:268
+#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:269
 msgctxt "QObject|"
 msgid "north-west"
 msgstr "luode"
 
-#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:270
+#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:271
 msgctxt "QObject|"
 msgid "west"
 msgstr "länsi"
 
-#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:272
+#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:273
 msgctxt "QObject|"
 msgid "south-west"
 msgstr "lounas"
 
-#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:274
+#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:275
 msgctxt "QObject|"
 msgid "south"
 msgstr "etelä"
 
-#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:276
+#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:277
 msgctxt "QObject|"
 msgid "south-east"
 msgstr "kaakko"
 
-#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:278
+#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:279
 msgctxt "QObject|"
 msgid "east"
 msgstr "itä"
 
-#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:280
+#: src/plugins/runner/local-osm-search/OsmDatabase.cpp:281
 msgctxt "QObject|"
 msgid "north-east"
 msgstr "koillinen"
