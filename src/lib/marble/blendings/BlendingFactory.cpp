@@ -22,7 +22,7 @@ Blending const *BlendingFactory::findBlending(QString const &name) const
     if (name.isEmpty())
         return nullptr;
 
-    Blending const *const result = m_blendings.value(name, 0);
+    Blending const *const result = m_blendings.value(name, nullptr);
     if (!result)
         qWarning() << "Unknown blending" << name << "specified in .dgml file. Please fix the .dgml file.";
     return result;
