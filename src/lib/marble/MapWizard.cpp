@@ -225,7 +225,7 @@ MapWizard::MapWizard(QWidget *parent)
     connect(d->uiWidget.pushButtonPreview, &QAbstractButton::clicked, this, &MapWizard::queryPreviewImage);
     connect(d->uiWidget.pushButtonLegend_2, &QAbstractButton::clicked, this, &MapWizard::queryLegendImage);
 
-    connect(d->uiWidget.comboBoxWmsServer, SIGNAL(activated(QString)), this, SLOT(setLineEditWms(QString)));
+    connect(d->uiWidget.comboBoxWmsServer, SIGNAL(textActivated(QString)), this, SLOT(setLineEditWms(QString)));
     connect(d->uiWidget.listViewWmsLayers, &QListView::pressed, this, &MapWizard::processSelectedLayerInformation);
 
     connect(d->uiWidget.lineEditTitle, &QLineEdit::textChanged, d->uiWidget.labelSumMName, &QLabel::setText);
