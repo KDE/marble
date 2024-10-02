@@ -19,7 +19,7 @@ HostipRunner::HostipRunner(QObject *parent)
     : SearchRunner(parent)
     , m_networkAccessManager()
 {
-    connect(&m_networkAccessManager, SIGNAL(finished(QNetworkReply *)), this, SLOT(slotRequestFinished(QNetworkReply *)), Qt::DirectConnection);
+    connect(&m_networkAccessManager, &QNetworkAccessManager::finished, this, &HostipRunner::slotRequestFinished, Qt::DirectConnection);
 }
 
 HostipRunner::~HostipRunner() = default;
@@ -42,8 +42,8 @@ void HostipRunner::search(const QString &searchTerm, const GeoDataLatLonBox &)
         timer.setSingleShot(true);
         timer.setInterval(15000);
 
-        connect(&timer, SIGNAL(timeout()), &eventLoop, SLOT(quit()));
-        connect(this, SIGNAL(searchFinished(QList<GeoDataPlacemark *>)), &eventLoop, SLOT(quit()));
+        connect(&timer, &QTimer::timeout, &eventLoop, &QEventLoop::quit);
+        connect(this, &SearchRunner::searchFinished, &eventLoop, &QEventLoop::quit);
 
         // Lookup the IP address for a hostname, or the hostname if an IP address was given
         QHostInfo ::lookupHost(searchTerm, this, SLOT(slotLookupFinished(QHostInfo)));
