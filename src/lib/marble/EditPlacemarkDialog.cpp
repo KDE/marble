@@ -203,29 +203,29 @@ EditPlacemarkDialog::EditPlacemarkDialog(GeoDataPlacemark *placemark, const QHas
     d->m_labelColorDialog->setOption(QColorDialog::ShowAlphaChannel);
     d->m_labelColorDialog->setCurrentColor(labelStyle.color());
     connect(d->m_labelButton, SIGNAL(clicked()), d->m_labelColorDialog, SLOT(exec()));
-    connect(d->m_labelColorDialog, SIGNAL(colorSelected(QColor)), this, SLOT(updateLabelDialog(QColor)));
-    connect(d->m_labelColorDialog, SIGNAL(colorSelected(QColor)), this, SLOT(updateTextAnnotation()));
+    connect(d->m_labelColorDialog, &QColorDialog::colorSelected, this, &EditPlacemarkDialog::updateLabelDialog);
+    connect(d->m_labelColorDialog, &QColorDialog::colorSelected, this, &EditPlacemarkDialog::updateTextAnnotation);
 
     d->m_iconColorDialog = new QColorDialog(this);
     d->m_iconColorDialog->setOption(QColorDialog::ShowAlphaChannel);
     d->m_iconColorDialog->setCurrentColor(iconStyle.color());
     connect(d->m_iconButton, SIGNAL(clicked()), d->m_iconColorDialog, SLOT(exec()));
-    connect(d->m_iconColorDialog, SIGNAL(colorSelected(QColor)), this, SLOT(updateIconDialog(QColor)));
-    connect(d->m_iconColorDialog, SIGNAL(colorSelected(QColor)), this, SLOT(updateTextAnnotation()));
+    connect(d->m_iconColorDialog, &QColorDialog::colorSelected, this, &EditPlacemarkDialog::updateIconDialog);
+    connect(d->m_iconColorDialog, &QColorDialog::colorSelected, this, &EditPlacemarkDialog::updateTextAnnotation);
 
-    connect(d->m_isBalloonVisible, SIGNAL(toggled(bool)), this, SLOT(updateTextAnnotation()));
+    connect(d->m_isBalloonVisible, &QAbstractButton::toggled, this, &EditPlacemarkDialog::updateTextAnnotation);
 
     // Promote "Ok" button to default button.
     d->buttonBox->button(QDialogButtonBox::Ok)->setDefault(true);
 
-    connect(d->buttonBox->button(QDialogButtonBox::Ok), SIGNAL(pressed()), this, SLOT(checkFields()));
-    connect(this, SIGNAL(accepted()), SLOT(updateTextAnnotation()));
-    connect(this, SIGNAL(accepted()), SLOT(updatePlacemarkAltitude()));
-    connect(this, SIGNAL(finished(int)), SLOT(restoreInitial(int)));
+    connect(d->buttonBox->button(QDialogButtonBox::Ok), &QAbstractButton::pressed, this, &EditPlacemarkDialog::checkFields);
+    connect(this, &QDialog::accepted, this, &EditPlacemarkDialog::updateTextAnnotation);
+    connect(this, &QDialog::accepted, this, &EditPlacemarkDialog::updatePlacemarkAltitude);
+    connect(this, &QDialog::finished, this, &EditPlacemarkDialog::restoreInitial);
 
     // Ensure that the dialog gets deleted when closing it (either when clicking OK or
     // Close).
-    connect(this, SIGNAL(finished(int)), SLOT(deleteLater()));
+    connect(this, &QDialog::finished, this, &QObject::deleteLater);
 }
 
 EditPlacemarkDialog::~EditPlacemarkDialog()

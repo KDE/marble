@@ -37,7 +37,7 @@ RemoveItemEditWidget::RemoveItemEditWidget(const QModelIndex &index, QWidget *pa
     layout->addWidget(m_comboBox);
 
     m_button->setIcon(QIcon(QStringLiteral(":/marble/document-save.png")));
-    connect(m_button, SIGNAL(clicked()), this, SLOT(save()));
+    connect(m_button, &QAbstractButton::clicked, this, &RemoveItemEditWidget::save);
     layout->addWidget(m_button);
 
     setLayout(layout);

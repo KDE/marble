@@ -63,16 +63,16 @@ FormattedTextWidget::FormattedTextWidget(QWidget *parent)
     } else {
         d->m_fontSize->lineEdit()->setText(QString::number(d->m_description->textCursor().charFormat().font().pointSize()));
     }
-    connect(d->m_actionColor, SIGNAL(triggered()), d->m_textColorDialog, SLOT(exec()));
-    connect(d->m_textColorDialog, SIGNAL(colorSelected(QColor)), this, SLOT(setTextCursorColor(QColor)));
-    connect(d->m_isFormattedTextMode, SIGNAL(toggled(bool)), this, SLOT(toggleDescriptionEditMode(bool)));
-    connect(d->m_fontFamily, SIGNAL(currentFontChanged(QFont)), this, SLOT(setTextCursorFont(QFont)));
-    connect(d->m_fontSize, SIGNAL(editTextChanged(QString)), this, SLOT(setTextCursorFontSize(QString)));
-    connect(d->m_actionBold, SIGNAL(toggled(bool)), this, SLOT(setTextCursorBold(bool)));
-    connect(d->m_actionItalics, SIGNAL(toggled(bool)), this, SLOT(setTextCursorItalic(bool)));
-    connect(d->m_actionUnderlined, SIGNAL(toggled(bool)), this, SLOT(setTextCursorUnderlined(bool)));
-    connect(d->m_actionAddImage, SIGNAL(triggered()), this, SLOT(addImageToDescription()));
-    connect(d->m_actionAddLink, SIGNAL(triggered()), this, SLOT(addLinkToDescription()));
+    connect(d->m_actionColor, &QAction::triggered, d->m_textColorDialog, &QDialog::exec);
+    connect(d->m_textColorDialog, &QColorDialog::colorSelected, this, &FormattedTextWidget::setTextCursorColor);
+    connect(d->m_isFormattedTextMode, &QAbstractButton::toggled, this, &FormattedTextWidget::toggleDescriptionEditMode);
+    connect(d->m_fontFamily, &QFontComboBox::currentFontChanged, this, &FormattedTextWidget::setTextCursorFont);
+    connect(d->m_fontSize, &QComboBox::editTextChanged, this, &FormattedTextWidget::setTextCursorFontSize);
+    connect(d->m_actionBold, &QAction::toggled, this, &FormattedTextWidget::setTextCursorBold);
+    connect(d->m_actionItalics, &QAction::toggled, this, &FormattedTextWidget::setTextCursorItalic);
+    connect(d->m_actionUnderlined, &QAction::toggled, this, &FormattedTextWidget::setTextCursorUnderlined);
+    connect(d->m_actionAddImage, &QAction::triggered, this, &FormattedTextWidget::addImageToDescription);
+    connect(d->m_actionAddLink, &QAction::triggered, this, &FormattedTextWidget::addLinkToDescription);
     connect(d->m_description, &QTextEdit::cursorPositionChanged, this, &FormattedTextWidget::updateDescriptionEditButtons);
 }
 

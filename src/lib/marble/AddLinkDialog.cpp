@@ -39,8 +39,8 @@ AddLinkDialog::AddLinkDialog(QWidget *parent)
     d->setupUi(this);
 
     d->buttonBox->button(QDialogButtonBox::Ok)->setDefault(true);
-    connect(d->buttonBox->button(QDialogButtonBox::Ok), SIGNAL(pressed()), this, SLOT(checkFields()));
-    connect(this, SIGNAL(finished(int)), SLOT(deleteLater()));
+    connect(d->buttonBox->button(QDialogButtonBox::Ok), &QAbstractButton::pressed, this, &AddLinkDialog::checkFields);
+    connect(this, &QDialog::finished, this, &QObject::deleteLater);
 }
 
 AddLinkDialog::~AddLinkDialog()

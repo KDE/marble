@@ -17,11 +17,11 @@ AnimatedUpdateTrack::AnimatedUpdateTrack(PlaybackAnimatedUpdateItem *item)
     m_delayBeforeTrackStarts = 0;
     m_paused = true;
     connect(&m_timer, &QTimer::timeout, this, &AnimatedUpdateTrack::playSlot);
-    connect(m_item, SIGNAL(balloonHidden()), this, SIGNAL(balloonHidden()));
-    connect(m_item, SIGNAL(balloonShown(GeoDataPlacemark *)), this, SIGNAL(balloonShown(GeoDataPlacemark *)));
-    connect(m_item, SIGNAL(updated(GeoDataFeature *)), this, SIGNAL(updated(GeoDataFeature *)));
-    connect(m_item, SIGNAL(added(GeoDataContainer *, GeoDataFeature *, int)), this, SIGNAL(added(GeoDataContainer *, GeoDataFeature *, int)));
-    connect(m_item, SIGNAL(removed(const GeoDataFeature *)), this, SIGNAL(removed(const GeoDataFeature *)));
+    connect(m_item, &PlaybackItem::balloonHidden, this, &AnimatedUpdateTrack::balloonHidden);
+    connect(m_item, &PlaybackItem::balloonShown, this, &AnimatedUpdateTrack::balloonShown);
+    connect(m_item, &PlaybackItem::updated, this, &AnimatedUpdateTrack::updated);
+    connect(m_item, &PlaybackItem::added, this, &AnimatedUpdateTrack::added);
+    connect(m_item, &PlaybackItem::removed, this, &AnimatedUpdateTrack::removed);
 }
 
 void AnimatedUpdateTrack::setDelayBeforeTrackStarts(double delay)

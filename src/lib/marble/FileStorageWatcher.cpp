@@ -34,7 +34,7 @@ FileStorageWatcherThread::FileStorageWatcherThread(const QString &dataDirectory,
     // For now setting cache limit to 0. This won't delete anything
     setCacheLimit(0);
 
-    connect(this, SIGNAL(variableChanged()), this, SLOT(ensureCacheSize()), Qt::QueuedConnection);
+    connect(this, &FileStorageWatcherThread::variableChanged, this, &FileStorageWatcherThread::ensureCacheSize, Qt::QueuedConnection);
 }
 
 FileStorageWatcherThread::~FileStorageWatcherThread()

@@ -57,7 +57,7 @@ VectorTileModel::VectorTileModel(TileLoader *loader, const GeoSceneVectorTileDat
     , m_tileZoomLevel(-1)
     , m_deleteDocumentsLater(false)
 {
-    connect(this, SIGNAL(tileAdded(GeoDataDocument *)), treeModel, SLOT(addDocument(GeoDataDocument *)));
+    connect(this, &VectorTileModel::tileAdded, treeModel, &GeoDataTreeModel::addDocument);
     connect(this, SIGNAL(tileRemoved(GeoDataDocument *)), treeModel, SLOT(removeDocument(GeoDataDocument *)));
     connect(treeModel, SIGNAL(removed(GeoDataObject *)), this, SLOT(cleanupTile(GeoDataObject *)));
 }

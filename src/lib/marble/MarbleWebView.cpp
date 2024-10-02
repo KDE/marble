@@ -19,7 +19,7 @@ MarbleWebView::MarbleWebView(QWidget *parent)
     m_copyAction->setIcon(QIcon(QStringLiteral(":/icons/edit-copy.png")));
     m_copyAction->setIconVisibleInMenu(true);
     m_copyAction->setToolTip(tr("Copy selected content"));
-    connect(m_copyAction, SIGNAL(triggered()), this, SLOT(copySelectedText()));
+    connect(m_copyAction, &QAction::triggered, this, &MarbleWebView::copySelectedText);
     m_contextMenu->addAction(m_copyAction);
     setContextMenuPolicy(Qt::DefaultContextMenu);
 }

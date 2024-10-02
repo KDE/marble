@@ -63,7 +63,7 @@ void CloudRoutesDialog::updateListDownloadProgressbar(qint64 received, qint64 to
     d->progressBar->setHidden(false);
     d->progressBar->setValue(qRound(100.0 * qreal(received) / total));
     if (received == total) {
-        QTimer::singleShot(1000, d->progressBar, SLOT(hide()));
+        QTimer::singleShot(1000, d->progressBar, &CloudRoutesDialog::hide);
     }
 }
 

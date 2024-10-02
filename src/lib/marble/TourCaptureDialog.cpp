@@ -29,21 +29,21 @@ TourCaptureDialog::TourCaptureDialog(MarbleWidget *widget, QWidget *parent)
     m_recorder->setSnapshotMethod(MovieCapture::DataDriven);
     ui->progressBar->setValue(0);
 
-    connect(ui->fpsSlider, SIGNAL(valueChanged(int)), ui->fpsSpin, SLOT(setValue(int)));
+    connect(ui->fpsSlider, &QAbstractSlider::valueChanged, ui->fpsSpin, &QSpinBox::setValue);
 
-    connect(ui->fpsSpin, SIGNAL(valueChanged(int)), ui->fpsSlider, SLOT(setValue(int)));
+    connect(ui->fpsSpin, &QSpinBox::valueChanged, ui->fpsSlider, &QAbstractSlider::setValue);
 
-    connect(ui->fpsSlider, SIGNAL(valueChanged(int)), m_recorder, SLOT(setFps(int)));
+    connect(ui->fpsSlider, &QAbstractSlider::valueChanged, m_recorder, &MovieCapture::setFps);
 
-    connect(ui->closeButton, SIGNAL(clicked()), this, SLOT(close()));
+    connect(ui->closeButton, &QAbstractButton::clicked, this, &QWidget::close);
 
-    connect(ui->startButton, SIGNAL(clicked()), this, SLOT(startRecording()));
+    connect(ui->startButton, &QAbstractButton::clicked, this, &TourCaptureDialog::startRecording);
 
-    connect(ui->openButton, SIGNAL(clicked()), this, SLOT(loadDestinationFile()));
+    connect(ui->openButton, &QAbstractButton::clicked, this, &TourCaptureDialog::loadDestinationFile);
 
-    connect(m_recorder, SIGNAL(rateCalculated(double)), this, SLOT(setRate(double)));
+    connect(m_recorder, &MovieCapture::rateCalculated, this, &TourCaptureDialog::setRate);
 
-    connect(m_recorder, SIGNAL(errorOccured()), this, SLOT(handleError()));
+    connect(m_recorder, &MovieCapture::errorOccured, this, &TourCaptureDialog::handleError);
 }
 
 TourCaptureDialog::~TourCaptureDialog()

@@ -64,13 +64,13 @@ RouteSyncManager::Private::~Private()
 RouteSyncManager::RouteSyncManager(CloudSyncManager *cloudSyncManager)
     : d(new Private(cloudSyncManager))
 {
-    connect(&d->m_owncloudBackend, SIGNAL(routeUploadProgress(qint64, qint64)), this, SLOT(updateUploadProgressbar(qint64, qint64)));
-    connect(&d->m_owncloudBackend, SIGNAL(routeListDownloaded(QList<RouteItem>)), this, SLOT(setRouteModelItems(QList<RouteItem>)));
-    connect(&d->m_owncloudBackend, SIGNAL(routeListDownloadProgress(qint64, qint64)), this, SIGNAL(routeListDownloadProgress(qint64, qint64)));
-    connect(&d->m_owncloudBackend, SIGNAL(routeDownloadProgress(qint64, qint64)), d->m_model, SLOT(updateProgress(qint64, qint64)));
-    connect(&d->m_owncloudBackend, SIGNAL(routeDownloaded()), this, SLOT(prepareRouteList()));
-    connect(&d->m_owncloudBackend, SIGNAL(routeDeleted()), this, SLOT(prepareRouteList()));
-    connect(&d->m_owncloudBackend, SIGNAL(removedFromCache(QString)), this, SLOT(prepareRouteList()));
+    connect(&d->m_owncloudBackend, &OwncloudSyncBackend::routeUploadProgress, this, &RouteSyncManager::updateUploadProgressbar);
+    connect(&d->m_owncloudBackend, &OwncloudSyncBackend::routeListDownloaded, this, &RouteSyncManager::setRouteModelItems);
+    connect(&d->m_owncloudBackend, &OwncloudSyncBackend::routeListDownloadProgress, this, &RouteSyncManager::routeListDownloadProgress);
+    connect(&d->m_owncloudBackend, &OwncloudSyncBackend::routeDownloadProgress, d->m_model, &CloudRouteModel::updateProgress);
+    connect(&d->m_owncloudBackend, &OwncloudSyncBackend::routeDownloaded, this, &RouteSyncManager::prepareRouteList);
+    connect(&d->m_owncloudBackend, &OwncloudSyncBackend::routeDeleted, this, &RouteSyncManager::prepareRouteList);
+    connect(&d->m_owncloudBackend, &OwncloudSyncBackend::removedFromCache, this, &RouteSyncManager::prepareRouteList);
 }
 
 RouteSyncManager::~RouteSyncManager()

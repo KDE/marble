@@ -280,7 +280,7 @@ void OwncloudSyncBackend::validateSettings()
         && d->m_cloudSyncManager->owncloudPassword().size() > 0) {
         QNetworkRequest request(endpointUrl(d->m_routeListEndpoint));
         d->m_authReply = d->m_network.get(request);
-        connect(d->m_authReply, SIGNAL(finished()), this, SLOT(checkAuthReply()));
+        connect(d->m_authReply, &QNetworkReply::finished, this, &OwncloudSyncBackend::checkAuthReply);
         connect(d->m_authReply, &QNetworkReply::errorOccurred, this, &OwncloudSyncBackend::checkAuthError);
     } else {
         // no server, make the error field blank

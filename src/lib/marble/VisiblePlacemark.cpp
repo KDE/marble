@@ -31,7 +31,7 @@ VisiblePlacemark::VisiblePlacemark(const GeoDataPlacemark *placemark, const GeoD
     , m_coordinates(coordinates)
 {
     const RemoteIconLoader *remoteLoader = style->iconStyle().remoteIconLoader();
-    QObject::connect(remoteLoader, SIGNAL(iconReady()), this, SLOT(setSymbolPixmap()));
+    QObject::connect(remoteLoader, &RemoteIconLoader::iconReady, this, &VisiblePlacemark::setSymbolPixmap);
 
     setSymbolPixmap();
 }
