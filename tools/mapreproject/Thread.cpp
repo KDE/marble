@@ -18,7 +18,7 @@ Thread::Thread(QObject *const parent)
     m_shutDownHelper = new QSignalMapper;
     m_shutDownHelper->setMapping(this, 0);
     connect(this, &Thread::started, this, &Thread::setReadyStatus, Qt::DirectConnection);
-    connect(this, &Thread::aboutToStop, m_shutDownHelper, &QSignalMapper::map);
+    connect(this, SIGNAL(aboutToStop()), m_shutDownHelper, SLOT(map()));
 }
 
 Thread::~Thread()
@@ -33,7 +33,7 @@ void Thread::launchWorker(QObject *const worker)
     start();
     m_worker->moveToThread(this);
     m_shutDownHelper->moveToThread(this);
-    connect(m_shutDownHelper, static_cast<void (QSignalMapper::*)(int)>(&QSignalMapper::mapped), this, &Thread::stopExecutor, Qt::DirectConnection);
+    connect(m_shutDownHelper, &QSignalMapper::mappedInt, this, &Thread::stopExecutor, Qt::DirectConnection);
     m_mutex.lock();
     m_waitCondition.wait(&m_mutex);
 }
