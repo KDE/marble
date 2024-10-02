@@ -19,6 +19,7 @@ class CycleStreetsConfigWidget : public RoutingRunnerPlugin::ConfigWidget
 
 public:
     CycleStreetsConfigWidget();
+    ~CycleStreetsConfigWidget();
     void loadSettings(const QHash<QString, QVariant> &settings) override;
     QHash<QString, QVariant> settings() const override;
 
@@ -45,6 +46,11 @@ CycleStreetsConfigWidget::CycleStreetsConfigWidget()
         ui_configWidget->speed->addItem(tr("normal (12 mph)"), "20");
         ui_configWidget->speed->addItem(tr("fast (15 mph)"), "24");
     }
+}
+
+CycleStreetsConfigWidget::~CycleStreetsConfigWidget()
+{
+    delete ui_configWidget;
 }
 
 void CycleStreetsConfigWidget::loadSettings(const QHash<QString, QVariant> &settings_)
