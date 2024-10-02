@@ -70,7 +70,7 @@ QList<QPair<Thread *, OsmTileClusterRenderer *>> NasaWorldWindToOpenStreetMapCon
         renderer->setMapSources(m_mapSources);
         renderer->setOsmBaseDirectory(m_osmBaseDirectory);
         renderer->setOsmTileLevel(m_osmTileLevel);
-        QObject::connect(renderer, SIGNAL(clusterRendered(OsmTileClusterRenderer *)), this, SLOT(assignNextCluster(OsmTileClusterRenderer *)));
+        QObject::connect(renderer, &OsmTileClusterRenderer::clusterRendered, this, &NasaWorldWindToOpenStreetMapConverter::assignNextCluster);
 
         Thread *const thread = new Thread;
         thread->launchWorker(renderer);

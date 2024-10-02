@@ -232,7 +232,7 @@ int main(int argc, char *argv[])
     converter.setOsmTileClusterEdgeLengthTiles(clusterSize);
     converter.setThreadCount(threadCount);
 
-    QObject::connect(&converter, SIGNAL(finished()), &app, SLOT(quit()));
+    QObject::connect(&converter, &NasaWorldWindToOpenStreetMapConverter::finished, &app, &QCoreApplication::quit);
 
     QList<QPair<Thread *, OsmTileClusterRenderer *>> renderThreads = converter.start();
     app.exec();

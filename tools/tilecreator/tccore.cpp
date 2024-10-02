@@ -12,7 +12,7 @@ TCCoreApplication::TCCoreApplication(int &argc, char **argv)
 {
     if (!(argc < 5)) {
         m_tilecreator = new TileCreator(argv[1], argv[2], argv[3], argv[4]);
-        connect(m_tilecreator, SIGNAL(finished()), this, SLOT(quit()));
+        connect(m_tilecreator, &TileCreator::finished, this, &TCCoreApplication::quit);
         m_tilecreator->start();
     }
 }

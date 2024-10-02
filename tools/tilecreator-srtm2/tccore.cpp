@@ -207,7 +207,7 @@ TCCoreApplication::TCCoreApplication(int argc, char **argv)
         m_tilecreator->setTileQuality(25);
         m_tilecreator->setResume(true);
         m_tilecreator->setVerifyExactResult(true);
-        connect(m_tilecreator, SIGNAL(finished()), this, SLOT(quit()));
+        connect(m_tilecreator, &TileCreator::finished, this, &TCCoreApplication::quit);
         m_tilecreator->start();
     }
 }

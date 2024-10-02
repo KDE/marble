@@ -17,8 +17,8 @@ Thread::Thread(QObject *const parent)
     // we need a class that receives signals from other threads and emits a signal in response
     m_shutDownHelper = new QSignalMapper;
     m_shutDownHelper->setMapping(this, 0);
-    connect(this, SIGNAL(started()), this, SLOT(setReadyStatus()), Qt::DirectConnection);
-    connect(this, SIGNAL(aboutToStop()), m_shutDownHelper, SLOT(map()));
+    connect(this, &Thread::started, this, &Thread::setReadyStatus, Qt::DirectConnection);
+    connect(this, &Thread::aboutToStop, m_shutDownHelper, &QSignalMapper::map);
 }
 
 Thread::~Thread()
@@ -33,7 +33,7 @@ void Thread::launchWorker(QObject *const worker)
     start();
     m_worker->moveToThread(this);
     m_shutDownHelper->moveToThread(this);
-    connect(m_shutDownHelper, SIGNAL(mapped(int)), this, SLOT(stopExecutor()), Qt::DirectConnection);
+    connect(m_shutDownHelper, static_cast<void (QSignalMapper::*)(int)>(&QSignalMapper::mapped), this, &Thread::stopExecutor, Qt::DirectConnection);
     m_mutex.lock();
     m_waitCondition.wait(&m_mutex);
 }
